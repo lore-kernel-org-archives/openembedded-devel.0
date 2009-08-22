@@ -1,28 +1,31 @@
-Received: from [212.247.155.193] (helo=swip.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <xerxes@zafena.se>) id 1MeuFe-0007YT-HY
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Aug 2009 19:19:38 +0200
-X-Cloudmark-Score: 0.000000 []
-X-Cloudmark-Analysis: v=1.0 c=1 a=zQW8Q5c5pHoA:10
-	a=m/URrrJNvkWYscLe+FKnaw==:17 a=OqRtbYkmAAAA:8 a=Q4-j1AaZAAAA:8
-	a=22pK5S-mAAAA:8 a=0NyP_6CSM2c8dHSAvKcA:9
-	a=ymVpC977UZ0SrUaULwkA:7 a=6jGBaZwuC8Gk2MCMjoBhFfw5RhcA:4
-Received: from [83.188.242.120] ([83.188.242.120] verified)
-	by mailfe15.swip.net (CommuniGate Pro SMTP 5.2.13)
-	with ESMTP id 554187803 for openembedded-devel@lists.openembedded.org;
-	Sat, 22 Aug 2009 19:02:03 +0200
-Message-ID: <4A902489.3020806@zafena.se>
-Date: Sat, 22 Aug 2009 19:02:01 +0200
-From: =?ISO-8859-1?Q?Xerxes_R=E5nby?= <xerxes@zafena.se>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1b3pre) Gecko/20090513 Fedora/3.0-2.3.beta2.fc11
-	Thunderbird/3.0b2
+Received: from [69.89.17.211] (helo=outbound-mail-29.bluehost.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <chow.ming@linuxbj.com>) id 1MeupP-00065v-OT
+	for openembedded-devel@openembedded.org; Sat, 22 Aug 2009 19:56:36 +0200
+Received: (qmail 10141 invoked by uid 0); 22 Aug 2009 17:39:03 -0000
+Received: from unknown (HELO host285.hostmonster.com) (74.220.215.85)
+	by outboundproxy2.bluehost.com with SMTP; 22 Aug 2009 17:39:03 -0000
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=default; d=linuxbj.com;
+	h=Received:Message-ID:Date:From:User-Agent:MIME-Version:To:Subject:References:In-Reply-To:Content-Type:X-Identified-User;
+	b=blzNO8FfUp2UNbpX5lbNic1qBF59V/65Y9nZGuMQzCui73QbfcPdTN460iFCTvYLW9t2j2GmIJVDn4rpYVzQJpk5dxyzYzOuP0Qr7OHkUqNIYjkPiw72w9vAB6PObPcF;
+Received: from [125.33.189.198] (helo=[192.168.200.199])
+	by host285.hostmonster.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <chow.ming@linuxbj.com>)
+	id 1MeuYP-0006G8-Rd for openembedded-devel@lists.openembedded.org;
+	Sat, 22 Aug 2009 11:39:03 -0600
+Message-ID: <4A902D29.2020100@linuxbj.com>
+Date: Sun, 23 Aug 2009 01:38:49 +0800
+From: =?UTF-8?B?TWluZyBDaG93IOWRqOaYjg==?= <chow.ming@linuxbj.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4A8FF9A1.8050800@arcor.de>
-In-Reply-To: <4A8FF9A1.8050800@arcor.de>
-Subject: Re: bitbake error "The type package-info is already defined" :(
+References: <4A8FA9A8.5070106@linuxbj.com>
+	<200908220913.35169.holger+oe@freyther.de>
+In-Reply-To: <200908220913.35169.holger+oe@freyther.de>
+X-Identified-User: {2055:host285.hostmonster.com:linuxbjc:linuxbj.com}
+	{sentby:smtp auth 125.33.189.198 authed with
+	chow.ming@linuxbj.com}
+Subject: Re: [PATCH] added compcache-0.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,178 +39,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Aug 2009 17:19:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 22 Aug 2009 17:56:36 -0000
+Content-Type: multipart/mixed; boundary="------------090909050702040303010308"
+
+--------------090909050702040303010308
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Hi Martin
+Hi Holger,
 
-What you are experiencing are probably the Icedtea6 problem report 375
-http://icedtea.classpath.org/bugzilla/show_bug.cgi?id=375
+Great thanks for your kind advices. I am sorry for mis-squash these 
+patches. I reseted my git to original status and applied these patches 
+back to form a single commit.
 
-Your distribution (ångstrom) have upgraded the eclipse compiler to 
-ecj-3.5.x in the org.openembedded.dev tree during the summer and this
-causes your problems.
-
-Only the next release and yet unreleased released icedtea6-1.6 supports
-building with such a recent eclipse javac compiler.
-
-possible solutions for you are:
-
-1. help the jalimo project create a new icedtea6-native package using the icedtea 1.6
-release branch.
-2. use an older version of the org.openembedded.dev tree that still uses
-ECJ 3.4 for ångstrom
-3. backport the patch from icedtea6 1.6 to icedtea6 1.3.1
-
-Cheers and have a great day!
-Xerxes
-
-
-Den 2009-08-22 15:58, Martin Wegner skrev:
-> Hi,
+Holger Hans Peter Freyther wrote:
+> On Saturday 22 August 2009 10:17:44 Ming Chow å‘¨æ˜Ž wrote:
 >
-> I try to cross compile jalimo/icedtea but I get an "The type
-> package-info is already defined" error and google is not my friend :(
+> Hey Ming,
 >
-> Who can help me please? Here is the log:
+> I love the patch there are quite some problems with it though. Please do not 
+> send two patches in one mail. Patchwork does not like it[1], second you have 
+> line wrapping in your mail program, which breaks the formatting of the patch, 
+> third you seem to add version 0.6 but the checksums.ini is old, and 5th you 
+> should look here[2] to try to write a better commit message. I'm sorry for the 
+> complication.
 >
-> martin@martin-desktop:/stuff/sources$ bitbake openjdk-6
-> /var/lib/python-support/python2.6/bb/COW.py:29: DeprecationWarning: the
-> sets module is deprecated
-> import types, sets
-> WARNING: No matches in filesystem for /stuff/jalimo-trunk/oe-overlay in
-> COLLECTIONS
-> /var/lib/python-support/python2.6/bb/COW.py:29: DeprecationWarning: the
-> sets module is deprecated
-> import types, sets
-> NOTE: Handling BitBake files: \ (7184/7184) [100 %]
-> NOTE: Parsing finished. 6899 cached, 0 parsed, 285 skipped, 2 masked.
-> NOTE: Cache is clean, not saving.
-> NOTE: Resolving any missing task queue dependencies
-> NOTE: Preparing runqueue
-> ERROR: Multiple .bb files are due to be built which each provide
-> virtual/javac-native
-> (/stuff/openembedded/recipes/ecj/ecj-bootstrap-native.bb
-> /stuff/openembedded/recipes/openjdk-langtools/openjdk-javac-native_0.0+jdk7-b31.bb).
-> This usually means one provides something the other doesn't and should.
-> NOTE: Executing runqueue
-> NOTE: Running task 1481 of 2097 (ID: 259,
-> /stuff/jalimo/trunk/oe-overlay/packages/icedtea/icedtea6-native_1.3.1.bb,
-> do_compile)
-> ERROR: function do_compile failed
-> ERROR: log data follows
-> (/stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/temp/log.do_compile.28821)
-> | 1/2 Building Hotspot
-> | NOTE: make hotspot
-> OE_PATH=/stuff/tmp/staging/i686-linux/usr/bin:/stuff/tmp/staging/i686-linux/usr/bin/i686-linux:/stuff/tmp/staging/i686-linux/usr/sbin:/stuff/tmp/staging/i686-linux/usr/bin:/stuff/tmp/cross/i686/bin:/stuff/tmp/staging/i686-linux/sbin:/stuff/tmp/staging/i686-linux/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
-> | rm -f stamps/bootstrap-directory-symlink-ecj.stamp
-> | rm -f stamps/icedtea-ecj.stamp
-> | rm -f stamps/icedtea-against-ecj.stamp
-> | /usr/bin/make hotspot-helper
-> | make[1]: Entering directory
-> `/stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/icedtea6-1.3.1'
-> | rm -f bootstrap/jdk1.6.0
-> | ln -sf ecj bootstrap/jdk1.6.0
-> | mkdir -p stamps
-> | touch stamps/bootstrap-directory-symlink-ecj.stamp
-> | if ! test -d
-> /stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/icedtea6-1.3.1/bootstrap/jdk1.6.0
-> ; \
-> | then \
-> | /stuff/tmp/staging/i686-linux/usr/bin/ecj-bootstrap -g -d
-> lib/hotspot-tools \
-> | -source 1.5 \
-> | -sourcepath \
-> |
-> 'hotspot-tools:openjdk/jdk/src/share/classes:openjdk/jdk/src/solaris/classes:openjdk/langtools/src/share/classes:openjdk/jaxp/src/share/classes:openjdk/corba/src/share/classes:openjdk/jaxws/src/share/classes:/stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/icedtea6-1.3.1/generated:/stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/icedtea6-1.3.1/rt'
-> \
-> | -bootclasspath '' @hotspot-tools-source-files.txt ; \
-> | else \
-> |
-> /stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/icedtea6-1.3.1/bootstrap/jdk1.6.0/bin/javac
+> love
+> 	z.
 >
-> -g \
-> | -d lib/hotspot-tools \
-> | -source 1.5 \
-> | -sourcepath \
-> |
-> 'hotspot-tools:openjdk/jdk/src/share/classes:openjdk/jdk/src/solaris/classes:openjdk/langtools/src/share/classes:openjdk/jaxp/src/share/classes:openjdk/corba/src/share/classes:openjdk/jaxws/src/share/classes:/stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/icedtea6-1.3.1/generated:/stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/icedtea6-1.3.1/rt'
-> \
-> | -bootclasspath '' @hotspot-tools-source-files.txt ; \
-> | fi
-> | incorrect classpath:
-> hotspot-tools/com/sun/codemodel/internal/ClassType.java
-> | ----------
-> | 1. ERROR in hotspot-tools/com/sun/codemodel/internal/package-info.java
-> (at line 1)
-> | /*
-> | ^
-> | The type package-info is already defined
-> | ----------
-> | ----------
-> | 2. ERROR in hotspot-tools/com/sun/source/tree/package-info.java (at
-> line 1)
-> | /*
-> | ^
-> | The type package-info is already defined
-> | ----------
-> | ----------
-> | 3. ERROR in hotspot-tools/com/sun/source/util/package-info.java (at
-> line 1)
-> | /*
-> | ^
-> | The type package-info is already defined
-> | ----------
-> | ----------
-> | 4. ERROR in
-> hotspot-tools/com/sun/tools/internal/xjc/model/package-info.java (at line 1)
-> | /*
-> | ^
-> | The type package-info is already defined
-> | ----------
-> | ----------
-> | 5. ERROR in hotspot-tools/com/sun/tools/internal/xjc/package-info.java
-> (at line 1)
-> | /*
-> | ^
-> | The type package-info is already defined
-> | ----------
-> | ----------
-> | 6. ERROR in
-> hotspot-tools/com/sun/tools/internal/xjc/reader/xmlschema/bindinfo/package-info.java
-> (at line 1)
-> | /*
-> | ^
-> | The type package-info is already defined
-> | ----------
-> | 6 problems (6 errors)make[1]: ***
-> [stamps/hotspot-tools-class-files.stamp] Error 255
-> | make[1]: Leaving directory
-> `/stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/icedtea6-1.3.1'
-> | make: *** [hotspot] Error 2
-> | FATAL: oe_runmake failed
-> NOTE: Task failed:
-> /stuff/tmp/work/i686-linux/icedtea6-native-1.3.1-r2/temp/log.do_compile.28821
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of
-> /stuff/jalimo/trunk/oe-overlay/packages/icedtea/icedtea6-native_1.3.1.bb
-> do_compile failed
-> ERROR: Task 259
-> (/stuff/jalimo/trunk/oe-overlay/packages/icedtea/icedtea6-native_1.3.1.bb,
-> do_compile) failed
-> NOTE: Tasks Summary: Attempted 1480 tasks of which 1480 didn't need to
-> be rerun and 1 failed.
-> ERROR:
-> '/stuff/jalimo/trunk/oe-overlay/packages/icedtea/icedtea6-native_1.3.1.bb'
-> failed
-> martin@martin-desktop:/stuff/sources$
 >
-> Thank you so much!
->
-> Greetings!
->
-> Martin
+> [1] http://patchwork.openembedded.org/patch/980/mbox/
+> [2] http://wiki.openembedded.net/index.php/Commit_Policy
 >
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -216,4 +78,237 @@ Den 2009-08-22 15:58, Martin Wegner skrev:
 >   
 
 
+--------------090909050702040303010308
+Content-Type: text/x-patch;
+ name="0001-compcache-Add-version-0.5-0.6pre3-and-version-0.6.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename="0001-compcache-Add-version-0.5-0.6pre3-and-version-0.6.patch"
 
+From b09195ba2faa7bbb6becc6314bd7a946187530f8 Mon Sep 17 00:00:00 2001
+From: Ming Zhou <chow.ming@linuxbj.com>
+Date: Sun, 23 Aug 2009 01:14:39 +0800
+Subject: [PATCH] compcache: Add version 0.5+0.6pre3 and version 0.6
+
+* compcache creates RAM based block device (named ramzswap) which acts as swap disk. Pages swapped to this disk are compressed and stored in memory itself.
+* Compressing pages and keeping them in RAM virtually increases its capacity. This allows more applications to fit in given amount of memory.
+* added modules_install target in top Makefile to fit the automatically modules build process
+* added KERNELDIR variable to make 2.6 style KBUILD system work
+* modified the Makefile for rzscontrol tool to use cross toolchain instead of local gcc
+
+Signed-off-by: Ming Zhou <chow.ming@linuxbj.com>
+---
+ conf/checksums.ini                                 |    7 ++++
+ .../compcache/000-compcache-KERNELDIR.patch        |   34 ++++++++++++++++++++
+ .../001-compcache-rzscontrol-cross-compile.patch   |    9 +++++
+ .../compcache/002-compcache-modules-install.patch  |   13 +++++++
+ .../compcache/003-compcache-0.6-KERNELDIR.patch    |   31 ++++++++++++++++++
+ recipes/compcache/compcache_0.5+0.6pre3.bb         |   29 +++++++++++++++++
+ recipes/compcache/compcache_0.6.bb                 |   27 +++++++++++++++
+ 7 files changed, 150 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/compcache/compcache/000-compcache-KERNELDIR.patch
+ create mode 100644 recipes/compcache/compcache/001-compcache-rzscontrol-cross-compile.patch
+ create mode 100644 recipes/compcache/compcache/002-compcache-modules-install.patch
+ create mode 100644 recipes/compcache/compcache/003-compcache-0.6-KERNELDIR.patch
+ create mode 100644 recipes/compcache/compcache_0.5+0.6pre3.bb
+ create mode 100644 recipes/compcache/compcache_0.6.bb
+
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index 85de9c2..3e9915e 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -28650,3 +28650,10 @@ sha256=f57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af
+ md5=5f7b88ebb2bcd7e8044328482d079661
+ sha256=f57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af
+ 
++[http://compcache.googlecode.com/files/compcache-0.6pre3.tar.gz]
++md5=532fbc4e6a8ae0670ec15a49484f313f
++sha256=3e54f26665bd1b7ece4e4621a15f82da66a95bafd04286d447be5a596790a7db
++
++[http://compcache.googlecode.com/files/compcache-0.6.tar.gz]
++md5=0a574643c0eb857b946adcd5d5a22eb0
++sha256=e5f697be6c1b7bfb9ac9ba5b8d836ff20f880c161f998c482caba83caf443c0c
+diff --git a/recipes/compcache/compcache/000-compcache-KERNELDIR.patch b/recipes/compcache/compcache/000-compcache-KERNELDIR.patch
+new file mode 100644
+index 0000000..e80f75b
+--- /dev/null
++++ b/recipes/compcache/compcache/000-compcache-KERNELDIR.patch
+@@ -0,0 +1,34 @@
++--- compcache-0.6pre3/Makefile.orig	2009-08-14 00:25:45.904934007 +0800
+++++ compcache-0.6pre3/Makefile	2009-08-14 00:25:58.404938574 +0800
++@@ -1,17 +1,17 @@
++ EXTRA_CFLAGS	:=	-DCONFIG_BLK_DEV_RAMZSWAP_STATS \
++ 			-g -Wall
++ 
++-ifndef $(KERNEL_BUILD_PATH)
++-	KERNEL_BUILD_PATH="/lib/modules/$(shell uname -r)/build"
+++ifndef $(KERNELDIR)
+++	KERNELDIR="/lib/modules/$(shell uname -r)/build"
++ endif
++ 
++ obj-m	+=	sub-projects/allocators/xvmalloc-kmod/xvmalloc.o \
++ 		ramzswap.o
++ 
++ all:
++-	make -C $(KERNEL_BUILD_PATH) \
+++	make -C $(KERNELDIR) \
++ 		M=$(PWD)/sub-projects/allocators/xvmalloc-kmod modules
++-	make -C $(KERNEL_BUILD_PATH) M=$(PWD) modules
+++	make -C $(KERNELDIR) M=$(PWD) modules
++ 	make -C sub-projects/rzscontrol
++ 	@ln -sf sub-projects/allocators/xvmalloc-kmod/xvmalloc.ko
++ 
++@@ -19,7 +19,7 @@
++ 	make -C sub-projects/rzscontrol doc
++ 
++ clean:
++-	make -C $(KERNEL_BUILD_PATH) M=$(PWD) clean
++-	make -C $(KERNEL_BUILD_PATH) M=$(PWD)/sub-projects/allocators/xvmalloc-kmod clean
+++	make -C $(KERNELDIR) M=$(PWD) clean
+++	make -C $(KERNELDIR) M=$(PWD)/sub-projects/allocators/xvmalloc-kmod clean
++ 	make -C sub-projects/rzscontrol clean
++ 	@rm -rf *.ko
+diff --git a/recipes/compcache/compcache/001-compcache-rzscontrol-cross-compile.patch b/recipes/compcache/compcache/001-compcache-rzscontrol-cross-compile.patch
+new file mode 100644
+index 0000000..8dbb590
+--- /dev/null
++++ b/recipes/compcache/compcache/001-compcache-rzscontrol-cross-compile.patch
+@@ -0,0 +1,9 @@
++--- compcache-0.6pre3.orig/sub-projects/rzscontrol/Makefile	2009-08-06 23:27:40.000000000 +0800
+++++ compcache-0.6pre3/sub-projects/rzscontrol/Makefile	2009-08-14 00:19:38.374938229 +0800
++@@ -1,5 +1,5 @@
++ all:
++-	@gcc -g -Wall -D_GNU_SOURCE rzscontrol.c -o rzscontrol -I ../include -I../..
+++	${CCLD} -g -Wall -D_GNU_SOURCE rzscontrol.c -o rzscontrol -I ../include -I../..
++ 
++ doc:
++ 	@xmllint --noout --valid man/rzscontrol.xml
+diff --git a/recipes/compcache/compcache/002-compcache-modules-install.patch b/recipes/compcache/compcache/002-compcache-modules-install.patch
+new file mode 100644
+index 0000000..cf9b9b1
+--- /dev/null
++++ b/recipes/compcache/compcache/002-compcache-modules-install.patch
+@@ -0,0 +1,13 @@
++--- compcache-0.6pre3/Makefile.orig	2009-08-14 02:33:45.169249060 +0800
+++++ compcache-0.6pre3/Makefile	2009-08-14 02:34:15.594938335 +0800
++@@ -13,7 +13,9 @@
++ 		M=$(PWD)/sub-projects/allocators/xvmalloc-kmod modules
++ 	make -C $(KERNELDIR) M=$(PWD) modules
++ 	make -C sub-projects/rzscontrol
++-	@ln -sf sub-projects/allocators/xvmalloc-kmod/xvmalloc.ko
+++
+++modules_install:
+++	make -C $(KERNELDIR) M=$(PWD) modules_install
++ 
++ doc:
++ 	make -C sub-projects/rzscontrol doc
+diff --git a/recipes/compcache/compcache/003-compcache-0.6-KERNELDIR.patch b/recipes/compcache/compcache/003-compcache-0.6-KERNELDIR.patch
+new file mode 100644
+index 0000000..98d7e68
+--- /dev/null
++++ b/recipes/compcache/compcache/003-compcache-0.6-KERNELDIR.patch
+@@ -0,0 +1,31 @@
++--- compcache-0.6/Makefile.orig	2009-08-21 03:15:29.775353453 +0800
+++++ compcache-0.6/Makefile	2009-08-21 03:15:49.965346252 +0800
++@@ -1,15 +1,15 @@
++ EXTRA_CFLAGS	:=	-DCONFIG_BLK_DEV_RAMZSWAP_STATS \
++ 			-g -Wall
++ 
++-KERNEL_BUILD_PATH ?= "/lib/modules/$(shell uname -r)/build"
+++KERNELDIR ?= "/lib/modules/$(shell uname -r)/build"
++ 
++ obj-m	+=	sub-projects/allocators/xvmalloc-kmod/xvmalloc.o \
++ 		ramzswap.o
++ 
++ all:
++-	make -C $(KERNEL_BUILD_PATH) \
+++	make -C $(KERNELDIR) \
++ 		M=$(PWD)/sub-projects/allocators/xvmalloc-kmod modules
++-	make -C $(KERNEL_BUILD_PATH) M=$(PWD) modules
+++	make -C $(KERNELDIR) M=$(PWD) modules
++ 	make -C sub-projects/rzscontrol
++ 	@ln -sf sub-projects/allocators/xvmalloc-kmod/xvmalloc.ko
++ 
++@@ -17,7 +17,7 @@
++ 	make -C sub-projects/rzscontrol doc
++ 
++ clean:
++-	make -C $(KERNEL_BUILD_PATH) M=$(PWD) clean
++-	make -C $(KERNEL_BUILD_PATH) M=$(PWD)/sub-projects/allocators/xvmalloc-kmod clean
+++	make -C $(KERNELDIR) M=$(PWD) clean
+++	make -C $(KERNELDIR) M=$(PWD)/sub-projects/allocators/xvmalloc-kmod clean
++ 	make -C sub-projects/rzscontrol clean
++ 	@rm -rf *.ko
+diff --git a/recipes/compcache/compcache_0.5+0.6pre3.bb b/recipes/compcache/compcache_0.5+0.6pre3.bb
+new file mode 100644
+index 0000000..7cd2997
+--- /dev/null
++++ b/recipes/compcache/compcache_0.5+0.6pre3.bb
+@@ -0,0 +1,29 @@
++HOMEPAGE = "http://code.google.com/p/compcache"
++DESCRIPTION = "Kernel drivers version 0.6x and related tool for the compcache (compressed in-memory swap device for linux)"
++LICENSE = "GPLv2"
++
++inherit module
++
++SRC_URI = "http://compcache.googlecode.com/files/${PN}-0.6pre3.tar.gz \
++	file://000-compcache-KERNELDIR.patch;patch=1 \
++	file://001-compcache-rzscontrol-cross-compile.patch;patch=1 \
++	file://002-compcache-modules-install.patch;patch=1 \
++	   "
++S = "${WORKDIR}/${PN}-0.6pre3"
++
++TARGET_CC_ARCH += "${LDFLAGS}"
++
++PACKAGES = "kernel-module-compcache compcache-utils compcache-utils-dbg compcache-utils-doc"
++
++FILES_kernel-module-compcache = ${FILES_compcache}
++FILES_compcache-utils = "${bindir}/rzscontrol"
++FILES_compcache-utils-dbg = "${bindir}/.debug/rzscontrol"
++FILES_compcache-utils-doc = "${mandir}/man1/rzscontrol.1"
++
++do_install_prepend() {
++	mkdir -p ${D}${bindir}
++	mkdir -p ${D}${mandir}/man1
++	install -m 0755 ${S}/sub-projects/rzscontrol/rzscontrol ${D}${bindir}
++	install -m 0644 ${S}/sub-projects/rzscontrol/man/rzscontrol.1 ${D}${mandir}/man1
++}
++
+diff --git a/recipes/compcache/compcache_0.6.bb b/recipes/compcache/compcache_0.6.bb
+new file mode 100644
+index 0000000..a24574c
+--- /dev/null
++++ b/recipes/compcache/compcache_0.6.bb
+@@ -0,0 +1,27 @@
++HOMEPAGE = "http://code.google.com/p/compcache"
++DESCRIPTION = "Kernel drivers version 0.6x and related tool for the compcache (compressed in-memory swap device for linux)"
++LICENSE = "GPLv2"
++
++inherit module
++
++SRC_URI = "http://compcache.googlecode.com/files/${PN}-${PV}.tar.gz \
++	file://003-compcache-0.6-KERNELDIR.patch;patch=1 \
++	file://001-compcache-rzscontrol-cross-compile.patch;patch=1 \
++	file://002-compcache-modules-install.patch;patch=1 \
++	   "
++TARGET_CC_ARCH += "${LDFLAGS}"
++
++PACKAGES = "kernel-module-compcache compcache-utils compcache-utils-dbg compcache-utils-doc"
++
++FILES_kernel-module-compcache = ${FILES_compcache}
++FILES_compcache-utils = "${bindir}/rzscontrol"
++FILES_compcache-utils-dbg = "${bindir}/.debug/rzscontrol"
++FILES_compcache-utils-doc = "${mandir}/man1/rzscontrol.1"
++
++do_install_prepend() {
++	mkdir -p ${D}${bindir}
++	mkdir -p ${D}${mandir}/man1
++	install -m 0755 ${S}/sub-projects/rzscontrol/rzscontrol ${D}${bindir}
++	install -m 0644 ${S}/sub-projects/rzscontrol/man/rzscontrol.1 ${D}${mandir}/man1
++}
++
+-- 
+1.5.4.3
+
+
+--------------090909050702040303010308--
