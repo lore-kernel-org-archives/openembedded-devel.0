@@ -1,23 +1,23 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [81.228.8.164] (helo=pne-smtpout2-sn2.hy.skanova.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MfB0G-0003jy-Or
-	for openembedded-devel@openembedded.org; Sun, 23 Aug 2009 13:12:52 +0200
-Received: (qmail 18394 invoked by uid 813007); 23 Aug 2009 10:55:16 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 23 Aug 2009 10:55:16 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Aug 2009 12:55:14 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc6-00243-g53bc5c0; KDE/4.3.0; x86_64; ;
-	)
-References: <4A81BE84.6010607@atmel.com>
-	<200908211353.59344.marcin@juszkiewicz.com.pl>
-	<4A8FA13A.8050006@atmel.com>
-In-Reply-To: <4A8FA13A.8050006@atmel.com>
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1MfBZO-0002VW-Bn
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 23 Aug 2009 13:49:10 +0200
+Received: from [10.175.196.247] (213.66.88.44) by
+	pne-smtpout2-sn2.hy.skanova.net (7.3.140.3) (authenticated as
+	u82406562)
+	id 4A5BC8BE0036047B for openembedded-devel@lists.openembedded.org;
+	Sun, 23 Aug 2009 13:31:32 +0200
+Message-ID: <4A912893.7010708@atmel.com>
+Date: Sun, 23 Aug 2009 13:31:31 +0200
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
-Message-Id: <200908231255.15341.marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+References: <4A81BE84.6010607@atmel.com>	<200908211353.59344.marcin@juszkiewicz.com.pl>	<4A902ECF.3090909@atmel.com>
+	<200908231241.51880.marcin@juszkiewicz.com.pl>
+In-Reply-To: <200908231241.51880.marcin@juszkiewicz.com.pl>
 Subject: Re: Contents of the "origin/ulf/linux-2.6.30.2" branch. Help with testing wanted.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -32,34 +32,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Aug 2009 11:12:53 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 23 Aug 2009 11:49:10 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: Quoted-Printable
 
-Dnia sobota, 22 sierpnia 2009 o 09:41:46 Ulf Samuelsson napisa=C5=82(a):
+Marcin Juszkiewicz skrev:
+> Dnia sobota, 22 sierpnia 2009 o 19:45:51 Ulf Samuelsson napisa=C5=82(a)=
+:
+>> Marcin Juszkiewicz skrev:
+>=20
+>>> Any ideas? I have same problem when 2.12 is used. 1.14 works still.
+>> This is the code that will block your progress.
+>> Can you provide the first 8 dwords of the image you ae trying to load?
+>=20
+> http://marcin.juszkiewicz.com.pl/download/at91/ contains at91bootstrap =
+files=20
+> which I checked on board. I tried with at91sam9263ek files before and t=
+oday=20
+> with at91sam9263dfc one.
+>=20
+> During week I plan to change at91bootstrap recipe to build all variants=
+ for=20
+> board (so for MACHINE=3Dat91sam9263ek it will build at91sam9263ek,=20
+> at91sam9263dfc and at91sam9263nf) as ek/dfc/nf are just variants of one=
+ board=20
+> which differ only at at91bootstrap (kernel and userspace is the same). =
+When=20
+> this will work all machine configs other then *ek can be dropped.
+>=20
 
-> What is the file name of your at9bootstrap?
+OK, you can run the  MAKEALL script to build everything
+and pick from the binaries, I guess, it is quick to build.
+Maybe MAKEALL should be
 
-at91sam9263dfc-dataflashcardboot-2.12-r0.bin
-at91sam9263dfc-dataflashcardboot-2.13-rc1-r2.bin
-at91sam9263dfc-dataflashcardboot-2.13-rc4-r0.bin
-at91sam9263ek-dataflashcardboot-2.13-rc1-r2.bin
+U-boot needs to be built differently as well.
+You need to be able to save the environment in:
 
-> Where are you loading your u-boot?
+Long term we need environment in:
+nandflash
+dataflash_cs0
+dataflash_cs1
+flash
+eeprom
+SD-card (maybe this can use EEPROM)
 
-dataflashcard 0x8400
 
-> Which board are you building?
 
-at91sam9263ek and at91sam9263dfc
+>> Maybe you have not initialized all the trap vectors
+>> or you are doing something valid, but unexpected.
+>>
+>> Are you loading something else than U-Boot?
+>=20
+> U-Boot 2009.08-rc built from your recipe.
+>=20
+Funny, I dont see that.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+>> Have now checked the source:
+>>
+>> The 2.13 is based on the 1.13 sources.
+>>
+>> The 1,14 source code is not available on the Atmel.
+>=20
+> ftp://www.linux4sam.org/pub/at91bootstrap/AT91Bootstrap1.14.zip
+I noticed later, and in fact I have those patches already in 1.13-rc#.
+Its been a long summer.
 
+>=20
+>=20
+> Regards,=20
+
+
+--=20
+Best Regards
+Ulf Samuelsson
 
 
 
