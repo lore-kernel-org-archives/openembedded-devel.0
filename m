@@ -1,24 +1,42 @@
-Received: from [81.228.11.98] (helo=pne-smtpout1-sn1.fre.skanova.net)
+Received: from [209.85.219.221] (helo=mail-ew0-f221.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1MfCXb-0001lK-Fd
+	(envelope-from <d.vinokuroff@gmail.com>) id 1MfDLC-0000U0-Jn
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Aug 2009 14:51:23 +0200
-Received: from [10.175.196.247] (213.66.88.44) by
-	pne-smtpout1-sn1.fre.skanova.net (7.3.140.3) (authenticated as
-	u82406562)
-	id 4A683C78002C16E3 for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Aug 2009 14:33:45 +0200
-Message-ID: <4A913728.9000609@atmel.com>
-Date: Sun, 23 Aug 2009 14:33:44 +0200
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Organization: Atmel Nordic AB
-User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
+	Sun, 23 Aug 2009 15:42:38 +0200
+Received: by ewy21 with SMTP id 21so1914350ewy.21
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 23 Aug 2009 06:24:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:references:in-reply-to
+	:content-type:content-transfer-encoding;
+	bh=qlzf9/BC6TjsnCegqm6Cb2e6PobPp3O5m9MBiyg66qE=;
+	b=ks+85HbVx/ELEtP7+2qi9JVllbKC3uJSq1uOcv8lrOCHF0w9VylK50tg2fLwGYFWyA
+	NFcrPq1Z6ihboVhMPFq04gp1XhILmCEoVHP62rp2e1ORQTQS5c4htKuvHhvPOCC+XLhk
+	iGhL7Fgw9OdI+Rcq7mx1G+yufWjEMRVD3DuvA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=A1t5V5lY7Yg1oZKfV5XIJwI5c7Q+8ApVW3Bf4MNgh7VkBYoFxHnERJscA96htzoXk2
+	qqeooMO8EPEbN+i4q5Xf/ASo2iwBST7vyBTVrmGT0GPDxEGqh9O0r3bfvwRanGfpuOfi
+	TPNy5QIBO4uzdZ/NJgMlciuFZeAP7OPLa4uO0=
+Received: by 10.211.199.19 with SMTP id b19mr3804668ebq.92.1251033899449;
+	Sun, 23 Aug 2009 06:24:59 -0700 (PDT)
+Received: from ?192.168.0.7? ([92.255.143.155])
+	by mx.google.com with ESMTPS id 5sm8277251eyf.18.2009.08.23.06.24.58
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 23 Aug 2009 06:24:59 -0700 (PDT)
+Message-ID: <4A91434D.6070203@gmail.com>
+Date: Sun, 23 Aug 2009 19:25:33 +0600
+From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4A8FBCA1.9050601@atmel.com>
-	<200908231235.39555.marcin@juszkiewicz.com.pl>
-In-Reply-To: <200908231235.39555.marcin@juszkiewicz.com.pl>
-Subject: Re: Cleaning up the "linux" directory
+References: <4A8D4947.5030108@gmail.com>	<200908201526.46349.holger+oe@freyther.de>	<4A8D98FB.5000400@gmail.com>	<200908210343.48652.holger+oe@freyther.de>	<4A8F9BE3.1020606@gmail.com>
+	<4A8FA20F.5050401@gmail.com>	<20090822231735.GA12848@gmail.com>
+	<4A90C2F4.1010300@gmail.com> <20090823065305.GA6361@gmail.com>
+In-Reply-To: <20090823065305.GA6361@gmail.com>
+Subject: Re: LPC3250, helloworld-image, configure: error: cannot run C compiled programs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,139 +50,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Aug 2009 12:51:23 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Sun, 23 Aug 2009 13:42:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Marcin Juszkiewicz skrev:
-> Dnia sobota, 22 sierpnia 2009 o 11:38:41 Ulf Samuelsson napisa=C5=82(a)=
-:
->> As everyone knows, the kernel directory is a mess:
->> I have been thinking about what to do about this,
->> and with the ability to include files in subdirectories,
->> I think I have found a nice solution.
->=20
-> I had a look at this and for me it adds lot of things to care when kern=
-el=20
-> needs to be updated/changed.
->=20
-> With current linux_X.Y.Z(.A).bb recipes it is easy to add new device - =
-just=20
-> one file needs to be edited and thats all. If new patch has to be added=
- then=20
-> still one file to edit. New board to be added - same amount of work. If=
-=20
-> patches common for few targets needs to be added then you can create ne=
-w=20
-> variable for them:
->=20
+Khem Raj wrote:
+> On (23/08/09 10:17), Dmitry Vinokurov wrote:
+>   
+>>>>> ERROR: '/home/raydan/work/oe/openembedded/recipes/module-init-tools/module-init-tools-cross_3.2.2.bb'
+>>>>> failed
+>>>>> --------
+>>>>>
+>>>>> I.e. bitbake again confused cross-gcc and x86-gcc. Updated my OE
+>>>>> with git pull, removed tmp/ and made rebuild -- same result.
+>>>>>           
+>>>> Looks like error is in wrong ./configure parameter:
+>>>> --host=i686-linux instead of --host=arm-oe-linux-gnueabi .
+>>>> Now I'm trying to find, why --host was set to i686 and where it can
+>>>> be changed.
+>>>>         
+>>> its a cross package so host being i686-linux (I suppose you are building
+>>> on i686 box) is ok. Look into the config.log error message should be in
+>>> there
+>>>
+>>> -Khem
+>>>       
+>> Hm, "configure --help" says "--host=HOST cross-compile to build
+>> programs to run on HOST [BUILD]" and as I understand, I will run
+>> programs on ARM, so it should be 'arm-oe-linux-gnueabi'.
+>>
+>> Anyway, even if host should be x86, instead of i686-linux-gcc it
+>> finds arm-vfp-linux-gcc and fails.
+>>     
+>
+> dont confuse pure cross with canadian cross. You are doing a normal
+> cross build here which means build machine is same as host machine.
+>
+> Your problem is probably because you are overriding CC and friends
+> which could be confusing (already confused) configure even more.
+>
+> Try setting CC_FOR_BUILD=<your native compiler on the build machine>
+>
+> Thanks
+>
+> -Khem
+>   
+Thank you for your help. I'm newbie in OE and crosscompiling at all and 
+may confuse some things.
 
-The SRC_URI_appends should only contain automatically
-generated things and there is warning against editing inserted.
+Just now I've tried to build some not so simple as helloworld but not so 
+complicated as kernel -- bc calculator. And I'd like to say that during 
+configure stage it sets:
+--build=i686-linux --host=arm-oe-linux-gnueabi --target=arm-oe-linux-gnueabi
 
-When you say you only  have to edit one file to add a patch,
-I think that is wrong. You have to enter the directory
-and place the patch there.
-It is defintely faster to select all the patches, and
-run the script than to edit the toplevel file.
+Builded bc works fine on my board and this is normal, not canadian, 
+cross build.
 
-You also do not have to know the variable names.
-
-If you want to add a board, you create the directory,
-and possibly add a defconfig.
-Rerun the script and again no editing of any files.
-
-If you want to create a new CPU family, you probably are going
-to create a file in conf/machine, and  you have to add the cpu  family
-directory.
-Easiest way to do this, is to copy another directory
-and clean out the files.
-Then you fill them with new board patches and defconfigs.
-
-Personally, I see very little reasons for doing any editing
-but if you want to do something for the at91, it is basically
-the linux-2.6.3/at91/at91.inc that will the single file to edit.
-
-It is different, but I think you should give it a try.
-
-
-
-> AT91_PATCHES =3D "\
->         file://linux-2.6.30/at91/2.6.30.2/patch-sets/linux-2.6.30.2-at9=
-1-001-
-> andrew-victor.patch;patch=3D1 \
->         file://linux-2.6.30/at91/2.6.30.2/patch-sets/linux-2.6.30.2-at9=
-1-002-
-> experimental.patch;patch=3D1 \
->         file://linux-2.6.30/at91/2.6.30.2/patch-sets/linux-2.6.30.2-at9=
-1-003-
-> ac97-0001-sam9g45-r1.patch;patch=3D1 \
->         file://linux-2.6.30/at91/2.6.30.2/patch-sets/linux-2.6.30.2-at9=
-1-003-
-> ac97-0002-ac97-sam9rlek-r1.patch;patch=3D1 \
->         file://linux-2.6.30/at91/2.6.30.2/patch-sets/linux-2.6.30.2-at9=
-1-004-
-> NAND-001-configurable-partition-size.patch;patch=3D1 \
->         file://linux-2.6.30/at91/2.6.30.2/patch-sets/linux-2.6.30.2-at9=
-1-005-
-> touchscreen-001-sam9g45ek.patch;patch=3D1 \
->         file://linux-2.6.30/at91/2.6.30.2/patch-sets/linux-2.6.30.2-at9=
-1-006-
-> EHCI-001.sam9g45ek.patch;patch=3D1 \
->         file://linux-2.6.30/at91/2.6.30.2/patch-sets/linux-2.6.30.2-at9=
-1-007-
-> CLK-001-debug-clocks.patch;patch=3D1 \
->         "
->=20
-> And use it in SRC_URI for all boards. If patches do not touch files use=
-d by=20
-> other devices then adding them directly to default SRC_URI should also =
-be=20
-> possible (thats how at91 patch was added in linux_2.6.30.bb recipe).
->=20
-> With your solution I have to check about 10 files in many directories o=
-r=20
-> regenerate all of them by some script (what about caring of manual chan=
-ges in=20
-> those files?).
-
-
-Running the scripts manually will be bad, you need to run them
-=66rom gnome (as of today).
-What would be good to have is a bitbake command.
-
-append	linux-${KERNEL_MAJOR}/${CPU_FAMILY}/${KERNEL_VERSION}/patch-sets/*
-which would add all the *.patch files in the selected directories
-in order.
-
-Then there would be no need to run a script and no files to edit.
-If you add a patch to the right directory,
-then it will be added to the build.
-
-
-> Maybe Buildroot uses such way (I do not know because last time I used i=
-t=20
-> before OE) but for me as long time OE developer it just adds lot of pos=
-sible=20
-> errors to do.
-
-No, this is brand new and it also >reduces< the number of errors.
-Spelling errors in file names in particular.
-I believe the whole systen will have less errors,
-and the top level can be cleaned out.
-
-The only real error is if you forget to run the script,
-but once you are in the patch directory, it takes less than
-5 seconds to select the patches, and run the script.
-Much faster and less error prone than editing.
-
-
-> Regards,=20
-
-
---=20
-Best Regards
-Ulf Samuelsson
-
+--
+Best Regards,
+Dmitry Vinokurov
 
 
