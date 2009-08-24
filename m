@@ -1,30 +1,30 @@
 Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <edoiron@edoiron.ott.cti.com>) id 1Mfg6P-0005ir-Cy
+	(envelope-from <edoiron@edoiron.ott.cti.com>) id 1Mfg6P-0005it-Fv
 	for openembedded-devel@lists.openembedded.org;
 	Mon, 24 Aug 2009 22:25:17 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 9424F54921A
+	by smtp.cbnco.com (Postfix) with ESMTP id E3BB65476B2
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 24 Aug 2009 16:07:31 -0400 (EDT)
 Received: from smtp.cbnco.com ([127.0.0.1])
 	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 16501-02 for <openembedded-devel@lists.openembedded.org>; 
+	with ESMTP id 16499-03 for <openembedded-devel@lists.openembedded.org>; 
 	Mon, 24 Aug 2009 16:07:31 -0400 (EDT)
 Received: from edoiron.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPS id 577065490CA
+	by smtp.cbnco.com (Postfix) with ESMTPS id 5341F548F63
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 24 Aug 2009 16:07:31 -0400 (EDT)
 Received: by edoiron.ott.cti.com (Postfix, from userid 1000)
-	id C158B7CE243; Mon, 24 Aug 2009 14:56:26 -0400 (EDT)
+	id BBF4C7CE239; Mon, 24 Aug 2009 11:00:24 -0400 (EDT)
 From: Evan Doiron <edoiron@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Aug 2009 14:56:26 -0400
-Message-Id: <1251140186-26944-1-git-send-email-edoiron@cbnco.com>
+Date: Mon, 24 Aug 2009 11:00:24 -0400
+Message-Id: <1251126024-5516-1-git-send-email-edoiron@cbnco.com>
 X-Mailer: git-send-email 1.6.0.2
 X-Virus-Scanned: amavisd-new at cbnco.com
 Cc: Evan Doiron <edoiron@cbnco.com>
-Subject: [PATCH] rsync: add v3.0.6
+Subject: [PATCH] dmidecode: add v2.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,48 +42,49 @@ X-List-Received-Date: Mon, 24 Aug 2009 20:25:20 -0000
 
 Signed-off-by: Evan Doiron <edoiron@cbnco.com>
 ---
- conf/checksums.ini           |    4 ++++
- recipes/rsync/rsync_3.0.6.bb |   16 ++++++++++++++++
- 2 files changed, 20 insertions(+), 0 deletions(-)
- create mode 100644 recipes/rsync/rsync_3.0.6.bb
+ conf/checksums.ini                                 |    4 ++++
+ .../{dmidecode_2.9.bb => dmidecode_2.10.bb}        |    9 +--------
+ 2 files changed, 5 insertions(+), 8 deletions(-)
+ copy recipes/dmidecode/{dmidecode_2.9.bb => dmidecode_2.10.bb} (61%)
 
 diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 3ee124d..ba06d5d 100644
+index 85de9c2..2c85594 100644
 --- a/conf/checksums.ini
 +++ b/conf/checksums.ini
-@@ -21714,6 +21714,10 @@ sha256=17697db5bb9de399b71f7927070f60b3554b70b0ecc0419b50455d56560ea169
- md5=2122d460b4119749c6e5993938a9b501
- sha256=17697db5bb9de399b71f7927070f60b3554b70b0ecc0419b50455d56560ea169
+@@ -4982,6 +4982,10 @@ sha256=f1a6dea51be9798903a0543fb50f463b0594b1f11b897bc50e40825fb7527c61
+ md5=f92e5606c23a8092f3d5694e8d1c932e
+ sha256=d3be5c6eec24950cb3bd67dbfbcdf036f1278fae5fd78655ef8cdf9e911e428a
  
-+[http://rsync.samba.org/ftp/rsync/src/rsync-3.0.6.tar.gz]
-+md5=e9865d093a18e4668b9d31b635dc8e99
-+sha256=33cc969364cb66b3e345fa7db2c651a8e07de0e58743ec03899c4ba86953e1b3
++[http://savannah.nongnu.org/download/dmidecode/dmidecode-2.10.tar.bz2]
++md5=3c9c4d55a40b78600f3b43bfa64616f9
++sha256=4d74a3e93353320317a424816f9a045df06d9ed4b5b80881e16fdfcc74c9e2c0
 +
- [http://downloads.sourceforge.net/nogravity/rt-nogravity-data.zip]
- md5=c7536e907363ea1da63430b49e42931d
- sha256=d7d5a3d17f492049fceb2b9ea22c4c2af7243506219d83f7005b77ae410add29
-diff --git a/recipes/rsync/rsync_3.0.6.bb b/recipes/rsync/rsync_3.0.6.bb
-new file mode 100644
-index 0000000..bdb2ba1
---- /dev/null
-+++ b/recipes/rsync/rsync_3.0.6.bb
-@@ -0,0 +1,16 @@
-+require rsync.inc
-+
-+PR = "r0"
-+
-+SRC_URI += "\
-+  file://m4.patch;patch=1 \
-+  file://rsyncd.conf \
-+"
-+# The source tarball from 3.0.6 seems to need this
-+do_configure_append(){
-+  oe_runmake reconfigure
-+}
-+
-+do_compile_prepend() {
-+        sed -i "s/conf_stop make_stop//" Makefile
-+}
+ [http://savannah.nongnu.org/download/dmidecode/dmidecode-2.9.tar.bz2]
+ md5=3dac4b1817012ffebd78671473d8f56c
+ sha256=888eb2c25bdcef5ee34c38cd5cb0f491d7dd82029dc0f4ae96183a0088a5e015
+diff --git a/recipes/dmidecode/dmidecode_2.9.bb b/recipes/dmidecode/dmidecode_2.10.bb
+similarity index 61%
+copy from recipes/dmidecode/dmidecode_2.9.bb
+copy to recipes/dmidecode/dmidecode_2.10.bb
+index 2186120..d3a646d 100644
+--- a/recipes/dmidecode/dmidecode_2.9.bb
++++ b/recipes/dmidecode/dmidecode_2.10.bb
+@@ -5,14 +5,7 @@ PR = "r0"
+ 
+ SRC_URI = "http://savannah.nongnu.org/download/dmidecode/${P}.tar.bz2"
+ 
+-COMPATIBLE_HOST = "i.86.*-linux"
+-
+-do_unpack_extra() {
+-	sed -i \
+-	    -e '/^prefix/s:/usr/local:/usr:' \
+-	    Makefile
+-}
+-addtask unpack_extra after do_unpack before do_patch
++COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
+ 
+ do_install() {
+ 	oe_runmake DESTDIR="${D}" install
 -- 
 1.6.0.2
 
