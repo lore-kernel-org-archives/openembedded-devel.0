@@ -1,37 +1,36 @@
-Received: from [209.85.218.221] (helo=mail-bw0-f221.google.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stuart68@gmail.com>) id 1MfWc0-0007Gl-Iv
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MfZCC-0004ao-EA for openembedded-devel@lists.openembedded.org;
+	Mon, 24 Aug 2009 15:02:49 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1MfYv1-0006u7-Av
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Aug 2009 12:17:16 +0200
-Received: by bwz21 with SMTP id 21so1234434bwz.12
+	Mon, 24 Aug 2009 14:45:03 +0200
+Received: from 195.145.229.154 ([195.145.229.154])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Aug 2009 14:45:03 +0200
+Received: from rolf.offermanns by 195.145.229.154 with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Aug 2009 02:59:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=ycKdTUdepdFk4wDWCmCTrqBGyTFcuDvztQjkl60QqFk=;
-	b=w5B29OJhLAfTYKNcPcg+fU3JslS0JsONHblsg2gkyuV9XRWLJbm7B4JswJrdDyLDmn
-	DM/wja4Df600WWeUVqNXxGzpdj745+s9QlrSlNwcYTNrUYBSh/uCvrFtTOEB5bN5rVKl
-	Zb/M4nG0e5IohCKQHaGJyhYkJ2g62iPFmDge4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=GPb9mkQwI+VJCE1hd3UpDLzbOzx1wL6Wf+UqFQfmrTSsbQC0cUSH3NXGDbGhA75gIU
-	wEPlwrksJ/lr31lQ5j6Oc/Fo73gJ5MG5bHT4s8GEO/kGsgQuMD8TU33TmhhFboOGo7Es
-	XoE+AwP6f3wDt7XgbwwF46d1pb0rEkV7j9Wlw=
-MIME-Version: 1.0
-Received: by 10.103.84.12 with SMTP id m12mr1783024mul.79.1251107971538; Mon, 
-	24 Aug 2009 02:59:31 -0700 (PDT)
-In-Reply-To: <91283b620908240250i3e35959bn26a29d99047b455d@mail.gmail.com>
-References: <91283b620908220300u6770aaebo7aa89b1b1b91e2fd@mail.gmail.com>
-	<200908230453.13119.holger+oe@freyther.de>
-	<91283b620908240250i3e35959bn26a29d99047b455d@mail.gmail.com>
-Date: Mon, 24 Aug 2009 10:59:31 +0100
-Message-ID: <91283b620908240259s66c46b9bm3302978c59f7b3cd@mail.gmail.com>
-From: Stuart Gray <stuart68@gmail.com>
+	Mon, 24 Aug 2009 14:45:03 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Musicbrainz
+From: Rolf Offermanns <rolf.offermanns@gmx.net>
+Date: Mon, 24 Aug 2009 12:34:13 +0000 (UTC)
+Message-ID: <loom.20090824T142939-794@post.gmane.org>
+References: <4A8D4947.5030108@gmail.com>
+	<200908201526.46349.holger+oe@freyther.de>
+	<4A8D98FB.5000400@gmail.com>
+	<200908210343.48652.holger+oe@freyther.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 195.145.229.154 (Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.2) Gecko/20090803 Fedora/3.5.2-2.fc11 Firefox/3.5.2)
+Sender: news <news@ger.gmane.org>
+Subject: Re: LPC3250, helloworld-image,	configure: error: cannot run C compiled programs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,64 +44,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Aug 2009 10:17:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 24 Aug 2009 13:02:50 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-I've fixed it.
+Holger Hans Peter Freyther <holger+oe <at> freyther.de> writes:
 
-I added oe_soinstall and pulled the so file in for compilation.
+> 
+> On Thursday 20 August 2009 20:42:03 Dmitry Vinokurov wrote:
+> 
+> I will update the documentation with these bits:
+> 
+> ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}gcc "
+> ASSUME_PROVIDED += " virtual/libc "
+> ASSUME_PROVIDED += "linux-libc-headers "
+> ASSUME_PROVIDED += "virtual/${TARGET_PREFIX}gcc "
+> ASSUME_PROVIDED += "virtual/${TARGET_PREFIX}gcc-initial "
+> ASSUME_PROVIDED += "virtual/${TARGET_PREFIX}gcc-intermediate "
+> ASSUME_PROVIDED += "virtual/${TARGET_PREFIX}binutils "
+> ASSUME_PROVIDED += "virtual/${TARGET_PREFIX}libc-for-gcc "
+> ASSUME_PROVIDED += "virtual/libintl "
+> ASSUME_PROVIDED += "virtual/libiconv "
+> 
+> TARGET_PREFIX = "arm-linux-gnueabi-"
+> ASSUME_SHLIBS = "libc.so.6:libc"
+> 
+> The main difference are. Assume provided more binaries/libraries, use the 
+> TARGET_PREFIX instead of CC, CXX, NM....
+> 
+> does this work any better?
 
-Cheers,
-Stuart
+I recently stumbled upon the same problems and in addition to the things above
+(which I can all confirm) I had to add:
 
-2009/8/24 Stuart Gray <stuart68@gmail.com>
+ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}libc-initial "
+ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}gcc-initial " 
+ASSUME_PROVIDED += " gcc-cross " 
 
-> I have included the full log files for the compilation with my bb file.
->
-> I am fairly new to Linux and OE, but from the run_compile log file I
-> thought I should be adding an include which points to the libstdc++.so.6.
->
-> I have the OE User Manual and I am continually reading through the sections
-> to find a solution. I tried to append the TARGET_LDFLAGS, but it was not
-> very successful, it looked like it could not find the compiler.
->
-> Thanks for any further guidance you can give.
-> Stuart
->
-> 2009/8/23 Holger Hans Peter Freyther <holger+oe@freyther.de<holger%2Boe@freyther.de>
-> >
->
-> On Saturday 22 August 2009 12:00:54 Stuart Gray wrote:
->> > hi,
->> >
->> > Has any one successfully compiled libmusicbrainz_3.0.2.
->> >
->> > I have this compiling but it fails at the linking stage as it cannot
->> find
->> > the library libstdc++.so.6.
->> >
->> > I have tried various EXTRA_OEMAKE, OECONF, OECMAKE, but none will add
->> the
->> > option to the linking stage. Can anyone give me some pointers.
->>
->> Hey Stuart,
->>
->> please stop cross-posting. My emails bounce from the gumstix mailinglist
->> and
->> this is not fun...
->>
->> With the limited information I have I would propose to:
->>        - Link with g++ instead of gcc
->>        - Or link to -lsupc++ (e.g. you change ammend the TARGET_LDFLAGS)
->>
->> z.
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
->
+to keep bitbake from including glibc / gcc from the build queue.
+
+-Rolf
+
+
 
