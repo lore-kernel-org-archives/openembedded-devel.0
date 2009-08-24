@@ -1,47 +1,36 @@
-Received: from [209.85.146.182] (helo=wa-out-1112.google.com)
+Received: from [209.85.216.177] (helo=mail-px0-f177.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MfFUs-0008Dp-FR
+	(envelope-from <raj.khem@gmail.com>) id 1MfPcp-0004lg-GK
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 Aug 2009 18:00:46 +0200
-Received: by wa-out-1112.google.com with SMTP id m34so324578wag.12
+	Mon, 24 Aug 2009 04:49:39 +0200
+Received: by pxi7 with SMTP id 7so5325918pxi.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Aug 2009 08:43:08 -0700 (PDT)
+	Sun, 23 Aug 2009 19:31:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=vkkleBnth9hkEoWcxE3XNS7nGvMDTYWeHAWASXN/nuw=;
-	b=Rh7ZQjUgzJ9guUXl1UrC5lkVHMRSNpteKtG00wPSuY81SQZq67ARTpqNiEWLhGMmNp
-	SewIfsJsHBI5uOA9kKCNofMbhetqv8TXmmdmHLxbYCcPBXf0gunX28r8/bsQ7bDk2+N0
-	XqLRDy8NUfkKi3woGRU329KIRluHEmkp/M/SE=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=R+gcDT7Z5hIMWTkR9Rt9ckcfdmbkR6WfrStxh0vQDlQ=;
+	b=Oc4Y/j8oHmASnUrHptVWTea5TCwXQCDEC17xcxwsMFVp3Ei4UUTq/wvRjpb8c66pYB
+	JoI95K7W4ulESS76q4ag6PLCPz47YNYwJdVUQ0f/Fk1oCCAdu9lFFhle2DRjXiaWKUg5
+	spp9rRTxUK1JigGd9OmWROwXHtpjSwzHED4nE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=BL62BaCoQuFvfVqlMygQEFWZVm7j7z8ZefCgo/ArrD2tLdQmVjMub/2O+gBWjpXSIt
-	pojo0nc4UM0Ib4d0OTbfInRVvoLSfxQYEdMsQ95llQNkR+tk+tCyqpCzZPghJRlDGi76
-	66nh6lvX7Do6Rygein0RTaupyYHmXOysQK5to=
-Received: by 10.114.54.15 with SMTP id c15mr4255339waa.193.1251042188238;
-	Sun, 23 Aug 2009 08:43:08 -0700 (PDT)
-Received: from gmail.com (adsl-71-146-29-169.dsl.pltn13.sbcglobal.net
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=ppHpF/24nh8oI/ij4uZF5jReQoIDiguBrTgyEnmp2zN+ts/D+xQmAOYXqJm2aFMwYl
+	IqXB0WEUDEFzLh28gajE9AuWHA+Rn+Vmt0/+TCEupMOVeSx+DiSg4nlBAiqYGfz8/s9Z
+	zi0YXN0Z/y4G3GVG11dpq24y08/hYExG6/Mz4=
+Received: by 10.114.9.16 with SMTP id 16mr6224264wai.114.1251081116323;
+	Sun, 23 Aug 2009 19:31:56 -0700 (PDT)
+Received: from localhost (adsl-71-146-29-169.dsl.pltn13.sbcglobal.net
 	[71.146.29.169])
-	by mx.google.com with ESMTPS id m28sm6836905waf.37.2009.08.23.08.43.06
+	by mx.google.com with ESMTPS id j34sm8128630waf.26.2009.08.23.19.31.55
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 23 Aug 2009 08:43:07 -0700 (PDT)
-Date: Sun, 23 Aug 2009 08:43:00 -0700
+	Sun, 23 Aug 2009 19:31:55 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090823154300.GA9250@gmail.com>
-References: <4A8D4947.5030108@gmail.com>
-	<200908201526.46349.holger+oe@freyther.de>
-	<4A8D98FB.5000400@gmail.com>
-	<200908210343.48652.holger+oe@freyther.de>
-	<4A8F9BE3.1020606@gmail.com> <4A8FA20F.5050401@gmail.com>
-	<20090822231735.GA12848@gmail.com> <4A90C2F4.1010300@gmail.com>
-	<20090823065305.GA6361@gmail.com> <4A91434D.6070203@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <4A91434D.6070203@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: LPC3250, helloworld-image, configure: error: cannot run C compiled programs
+Date: Sun, 23 Aug 2009 19:31:41 -0700
+Message-Id: <1251081101-18925-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.6.3.3
+Subject: [PATCH] base.bbclass: Replace os.system with subprocess call.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,71 +44,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Aug 2009 16:00:46 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 24 Aug 2009 02:49:39 -0000
 
-On (23/08/09 19:25), Dmitry Vinokurov wrote:
-> Khem Raj wrote:
-> >On (23/08/09 10:17), Dmitry Vinokurov wrote:
-> >>>>>ERROR: '/home/raydan/work/oe/openembedded/recipes/module-init-tools/module-init-tools-cross_3.2.2.bb'
-> >>>>>failed
-> >>>>>--------
-> >>>>>
-> >>>>>I.e. bitbake again confused cross-gcc and x86-gcc. Updated my OE
-> >>>>>with git pull, removed tmp/ and made rebuild -- same result.
-> >>>>Looks like error is in wrong ./configure parameter:
-> >>>>--host=i686-linux instead of --host=arm-oe-linux-gnueabi .
-> >>>>Now I'm trying to find, why --host was set to i686 and where it can
-> >>>>be changed.
-> >>>its a cross package so host being i686-linux (I suppose you are building
-> >>>on i686 box) is ok. Look into the config.log error message should be in
-> >>>there
-> >>>
-> >>>-Khem
-> >>Hm, "configure --help" says "--host=HOST cross-compile to build
-> >>programs to run on HOST [BUILD]" and as I understand, I will run
-> >>programs on ARM, so it should be 'arm-oe-linux-gnueabi'.
-> >>
-> >>Anyway, even if host should be x86, instead of i686-linux-gcc it
-> >>finds arm-vfp-linux-gcc and fails.
-> >
-> >dont confuse pure cross with canadian cross. You are doing a normal
-> >cross build here which means build machine is same as host machine.
-> >
-> >Your problem is probably because you are overriding CC and friends
-> >which could be confusing (already confused) configure even more.
-> >
-> >Try setting CC_FOR_BUILD=<your native compiler on the build machine>
-> >
-> >Thanks
-> >
-> >-Khem
-> Thank you for your help. I'm newbie in OE and crosscompiling at all
-> and may confuse some things.
-> 
-> Just now I've tried to build some not so simple as helloworld but
-> not so complicated as kernel -- bc calculator. And I'd like to say
-> that during configure stage it sets:
-> --build=i686-linux --host=arm-oe-linux-gnueabi --target=arm-oe-linux-gnueabi
-> 
-> Builded bc works fine on my board and this is normal, not canadian,
-> cross build.
+Often gzip is reporting broken pipe errors with do_unpack of
+tar.gz files.
 
-its a target package being built on build machine. Your build was failing to compile a package which
-will run on your host (similar to cross compilers) they are not same
-cases. module-init-tools would be analogically similar to bc but not
-module-init-tools-cross which is the package you reported failing.
+If you use the commands described above to extract a tar.gz file, gzip
+sometimes emits a Broken pipe error message. This can safely be ignored
+if tar extracted all files without any other error message.
 
+We do not let python install its SIGPIPE handler and use subprocess call
+to invoke the command.
 
-> 
-> --
-> Best Regards,
-> Dmitry Vinokurov
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+This is based on the following python bug report.
+http://bugs.python.org/issue1652
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ classes/base.bbclass |    9 +++++++--
+ 1 files changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/classes/base.bbclass b/classes/base.bbclass
+index 598a7bb..4e9b65c 100644
+--- a/classes/base.bbclass
++++ b/classes/base.bbclass
+@@ -728,9 +728,14 @@ base_do_buildall() {
+ 	:
+ }
+ 
++def subprocess_setup():
++	import signal, subprocess
++	# Python installs a SIGPIPE handler by default. This is usually not what
++	# non-Python subprocesses expect.
++	signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+ 
+ def oe_unpack_file(file, data, url = None):
+-	import bb, os
++	import bb, os, signal, subprocess
+ 	if not url:
+ 		url = "file://%s" % file
+ 	dots = file.split(".")
+@@ -799,7 +804,7 @@ def oe_unpack_file(file, data, url = None):
+ 
+ 	cmd = "PATH=\"%s\" %s" % (bb.data.getVar('PATH', data, 1), cmd)
+ 	bb.note("Unpacking %s to %s/" % (base_path_out(file, data), base_path_out(os.getcwd(), data)))
+-	ret = os.system(cmd)
++	ret = subprocess.call(cmd, preexec_fn=subprocess_setup, shell=True)
+ 
+ 	os.chdir(save_cwd)
+ 
+-- 
+1.6.3.3
+
 
 
