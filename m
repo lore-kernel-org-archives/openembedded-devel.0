@@ -1,32 +1,22 @@
-Received: from [93.97.175.187] (helo=dan.rpsys.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1MfyRV-00081y-PG
-	for openembedded-devel@openembedded.org; Tue, 25 Aug 2009 18:00:20 +0200
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	n7PFejK2009094 for <openembedded-devel@openembedded.org>;
-	Tue, 25 Aug 2009 16:40:46 +0100
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id GwFsExDu8X2S for <openembedded-devel@openembedded.org>;
-	Tue, 25 Aug 2009 16:40:45 +0100 (BST)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	n7PFegWh009088
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
-	for <openembedded-devel@openembedded.org>;
-	Tue, 25 Aug 2009 16:40:44 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <200908240549.09079.holger+oe@freyther.de>
-References: <1251081101-18925-1-git-send-email-raj.khem@gmail.com>
-	<200908240549.09079.holger+oe@freyther.de>
-Date: Tue, 25 Aug 2009 16:42:14 +0100
-Message-Id: <1251214934.14367.39.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [PATCH] base.bbclass: Replace os.system with subprocess	call.
+Received: from [128.178.224.219] (helo=smtp0.epfl.ch)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <valentin.longchamp@epfl.ch>) id 1MfyXc-0008Rx-P9
+	for openembedded-devel@openembedded.org; Tue, 25 Aug 2009 18:06:36 +0200
+Received: (qmail 8936 invoked by uid 107); 25 Aug 2009 15:48:29 -0000
+X-Virus-Scanned: ClamAV
+Received: from lsa1pc7.epfl.ch (128.178.145.53) (authenticated)
+	by smtp0.epfl.ch (AngelmatoPhylax SMTP proxy);
+	Tue, 25 Aug 2009 17:48:29 +0200
+Message-ID: <4A9407CD.9020708@epfl.ch>
+Date: Tue, 25 Aug 2009 17:48:29 +0200
+From: Valentin Longchamp <valentin.longchamp@epfl.ch>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <4A937831.2000304@4d-electronics.co.nz> <4A93A9E3.7090605@epfl.ch>
+	<200908251303.12718.holger+oe@freyther.de>
+In-Reply-To: <200908251303.12718.holger+oe@freyther.de>
+Subject: Re: [PATCH] Add toolchain file generation to cmake bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,35 +30,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2009 16:00:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 25 Aug 2009 16:06:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2009-08-24 at 05:49 +0200, Holger Hans Peter Freyther wrote:
-> On Monday 24 August 2009 04:31:41 Khem Raj wrote:
-> > Often gzip is reporting broken pipe errors with do_unpack of
-> > tar.gz files.
-> >
-> > If you use the commands described above to extract a tar.gz file, gzip
-> > sometimes emits a Broken pipe error message. This can safely be ignored
-> > if tar extracted all files without any other error message.
-> >
-> > We do not let python install its SIGPIPE handler and use subprocess call
-> > to invoke the command.
-> >
-> > This is based on the following python bug report.
-> > http://bugs.python.org/issue1652
-> >
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Holger Hans Peter Freyther wrote:
+> On Tuesday 25 August 2009 11:07:47 Valentin Longchamp wrote:
+>> Matthew Dombroski wrote:
+>>> It is possible to make cmake use a toolchain file that defines flags,
+>>> search
+>>> paths and any other cmake options.
+>>>
+>>> The main reason for making openembedded generate a toolchain file is
+>>> to enable the building of complex packages. Without it a package
+>>> requiring Qt4 or boost (or one of many other packages) probably wont find
+>>> the right libs and won't build properly.
+>> I have had no problem with boost and with Qt4, I have been able to
+>> achieve similar results without the toolchain file, only by using a
+>> qt.conf file as Zecke had suggested to me.
 > 
-> Acked-by: Holger Freyther <zecke@selfish.org>
+> Hey,
+> 
+> could you come up with a patch or help me to work on a patch?
 
-Thanks, I've been seeing reports of this and have just merged into
-Poky! :)
+With great pleasure.
 
-Cheers,
+I have already posted the recipe I use for qt4/cmake build, the 
+FindQt4.cmake module patch is the same Matthew posted earlier today, and 
+here is my cmake patch.
 
-Richard
+Don't hesitate to ask if you need more info (I'll try to be on IRC, 
+Longfield)
+
+Val
+
+ From 290226efcab3375808924efb03d264534ab97984 Mon Sep 17 00:00:00 2001
+From: Valentin Longchamp <valentin.longchamp@epfl.ch>
+Date: Thu, 18 Jun 2009 18:49:04 +0200
+Subject: [PATCH 1/1] render cmake search path stricter
+
+The search is only done in the STAGING directy: all the needed tools
+should be there (already built) and all the libs and header are there
+too. With this, we are sure that we do not mix with the host libs,
+headers or tools.
+
+Signed-off-by: Valentin Longchamp <valentin.longchamp@epfl.ch>
+---
+  classes/cmake.bbclass |    5 ++++-
+  1 files changed, 4 insertions(+), 1 deletions(-)
+
+diff --git a/classes/cmake.bbclass b/classes/cmake.bbclass
+index b5b7b86..08a4ab5 100644
+--- a/classes/cmake.bbclass
++++ b/classes/cmake.bbclass
+@@ -20,7 +20,10 @@ cmake_do_configure() {
+
+    cmake ${OECMAKE_SOURCEPATH} \
+      -DCMAKE_INSTALL_PREFIX:PATH=${prefix} \
+-    -DCMAKE_FIND_ROOT_PATH=${STAGING_DIR_HOST} \
++    -DCMAKE_FIND_ROOT_PATH="${STAGING_DIR_HOST};${STAGING_DIR_NATIVE}" \
++    -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=BOTH \
++    -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
++    -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=ONLY \
+      ${EXTRA_OECMAKE} \
+      -Wno-dev
+  }
+-- 
+1.6.0.4
+
 
 
 
