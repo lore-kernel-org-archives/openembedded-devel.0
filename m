@@ -1,20 +1,32 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [209.85.211.181] (helo=mail-yw0-f181.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1Mg1Uc-0003U5-Tb
-	for openembedded-devel@openembedded.org; Tue, 25 Aug 2009 21:15:58 +0200
-Received: (qmail 7229 invoked by uid 1003); 25 Aug 2009 18:57:48 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 25 Aug 2009 18:57:48 -0000
-Message-ID: <4A943429.3070902@balister.org>
-Date: Tue, 25 Aug 2009 14:57:45 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <cliff.brake@gmail.com>) id 1Mg1pE-0001Jp-2Z
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 25 Aug 2009 21:37:00 +0200
+Received: by ywh11 with SMTP id 11so4842380ywh.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 25 Aug 2009 12:19:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=qg6oee94m7+wVKa/uTJpkp1NvkL6sofxQv+0ZpKgCEI=;
+	b=sIb2iLqH/J4ZI+C/9ZxygghfpIyYj10fCBZp1BmWGkUODH8NsNBJL01V1wKr5/71UZ
+	BuLkMnHMdb09oT2X7NXoFfB1XVf5BkijcenXxODQYh5fYN4yOo0Z5T081QdJQ4SMJxPj
+	e3o5dB7u5UHc5I6R5p3t9UtDHn7eVFUiajMms=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=AGPmUHIDDPlEy/nCSQsG1pu4PbN4BcLLKf2LaeLwNa08t2KBQcI9AiGW/l0NwiunR8
+	gzrgiPM9w3M6+cYbb407JpNiVKybsIuSPB/tNVUFpH5mNzxuDkw+/GeX969u8wbGdgFS
+	RqF/rAg0CT6m/cywpBcuv6xlrJR40TItmrV6w=
 MIME-Version: 1.0
+Received: by 10.150.59.4 with SMTP id h4mr8203024yba.235.1251227945954; Tue, 
+	25 Aug 2009 12:19:05 -0700 (PDT)
+Date: Tue, 25 Aug 2009 15:19:05 -0400
+Message-ID: <f96d234e0908251219o985e3dawb038f4da309a382@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1251210375.4215.525.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1251210375.4215.525.camel@lenovo.internal.reciva.com>
-Subject: Re: OEDEM November 2009
+Subject: OE weekly changelog 2009-08-17 to 2009-08-24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -28,106 +40,134 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2009 19:16:41 -0000
-X-Groupsio-MsgNum: 12755
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms050800020801070100040805"
-
---------------ms050800020801070100040805
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 25 Aug 2009 19:37:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Count me in, pending sane airfares.
+OE weekly changelog 2009-08-17 to 2009-08-24
 
-Philip
+Chris Larson (13):
+  Let the distro control whether we include hostap or madwifi.
+  base.bbclass: catch bb.MalformedUrl in do_fetch.
+  collections.inc: sync with MVL6.
+  distro-version: new general recipe, based on angstrom-version.
+  package_rpm: don't run against native/cross recipes, explicitly
+  devshell.bbclass: set a default for XAUTHORITY and export DBUS_SESSION_BUS_A
+  ncurses: don't use libtool.
+  src_distribute*.bbclass: cleanup, revamp parts, distribute all sources.
+  src_distribute: force do_fetch execution in do_distribute_sources.
+  opkg: use INC_PR.
+  opkg: explicitly clean up the opkg-intercept dirs rather than rm -rf.
+  Revert "ncurses: don't use libtool."
+  tar: inherit gettext & use a .inc to avoid duplicated metadata.
 
-Phil Blundell wrote:
-> Further to the previous discussion on this topic, we now propose to hold
-> a developers' meeting in Cambridge, UK on the weekend of November 7/8.
-> All developers and other interested parties are welcome.  
-> 
-> To make the logistics easier, it would be useful to have an early
-> indication of the number of people who plan to attend.  So, if you
-> intend to come to the meeting, please let me know by email within the
-> next two weeks (i.e. no later than September 8).  This is not a formal
-> registration and doesn't commit you to anything, it is purely to make
-> sure that we have a large enough venue for the number of attendees.
-> 
-> Thanks
-> 
-> p.
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+Denys Dmytriyenko (4):
+  dm6467t-evm: add "new" 1GHz DaVinci DM6467 machine
+  da830-omapl137-evm: add DA830/OMAPL137 machine
+  linux-davinci: update defconfigs for dm355, dm365, dm6446 and dm6467
+  rt-tests: fix GNU_HASH QA error
 
---------------ms050800020801070100040805
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+Evan Doiron (1):
+  net-snmp.inc: Fix typo in staging paths
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
-OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
-Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
-MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
-EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
-V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
-ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
-ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
-SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
-n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
-R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
-/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
-kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
-Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
-urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDgyNTE4
-NTc0NVowIwYJKoZIhvcNAQkEMRYEFJ9AKmPzI4YPeAYLPxoCXsBzqKvIMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQAOXEKQlojId01nUbivehoz7Eb8ysEEKPhkA2ITU5X8Dlgu2mrY
-j/ngVSnDYYqQwKr2pG4+3RMuVDNsmuoGx4lLYb4XYNlxZNozXWXQ7Py8AtI/HL3IUHZBaIaf8u4u
-RkFtS8Iow249f9FF64JyTmbDta/0U7pY3QGeRt0b9dXnBTFMxAdYpzrHbyP3UOb6G+6Z6jI0oees
-t4sSwmXWwLaLO3NJYKrKVJstHEa+p4CtlcgmqDTeiZRN8szaqGddcsdx2yI8+FCimq/VcCVZV61J
-HaAZpo8u0teDPvC/t4E1UAxH5Dg33bLupI3kKa3EVVP8cFeW+itfbDUd4F17AAheAAAAAAAA
+Florian Boor (1):
+  krb5: Disable tcl in configuration in order to avoid pulling in host include
 
---------------ms050800020801070100040805--
+Graeme Gregory (2):
+  firefox_3.5.2.bb : add newest version of firefox
+
+Holger Hans Peter Freyther (2):
+  site: Add ac value for mipsel-linux and mipsel-linux-uclibc
+  package_tar.bbclass: Do not set IMAGE_PKGTYPE to unbreak parsing
+
+Jeremy Puhlman (3):
+  src_distribute_local: Change cp -f to cp -fr to account for directories.
+  gettext: Correct autoconf-lib-link code to defer to the compiler's library s
+  wireless-tools.inc: Change first use of SRC_URI from += to =
+
+John Willis (1):
+  gamin-0.1.8: Fix build issue with recent GCC/GLibC combos.
+
+Jonathan Cameron (1):
+  glibc 2.7 and 2.9 (arm): Remove unnecessary asm/page.h include
+
+Khem Raj (6):
+  python-sip_4.8.2.bb: set DEFAULT_PREFERENCE = -1
+  opkg: Add opkg to FILESPATHPKG.
+  u-boot_git.bb: Dont reset machine SRC_URIs by using common SRC_URI.
+  minimal, sane-toolchain: Use eglibc if LIBC is not selected.
+  micro: Use eglibc as default lib if LIBC is not set.
+  sane-toolchain: Define eglibc PREFERRED_VERSIONS
+
+Koen Kooi (1):
+  linux-omap* 2.6.29: add patch that should solve the memhole problem
+
+Leon Woestenberg (3):
+  angstrom-eglibc: TARGET_OS = linux-gnuspe for specific powerpc machines.
+  openssl: Add linux-gnuspe-powerpc to openssl.inc target list.
+  linux-2.6.30: calamari/defconfig CONFIG_WIRELESS_EXT=y for madwifi.
+
+Michael 'Mickey' Lauer (1):
+  fso-abyss | libgsm0710 | libgsm0710mux: catch up PV with upstream
+
+Michael Smith (13):
+  nasm: fix COMPATIBLE_HOST to match any vendor
+  mtools: don't install-info; fixes build on non-Debian hosts
+  source-checker: usability tweaks
+  oe-checksums-sorter.py: speed up about 4X using a hash
+  openssh.inc: cleanup
+  openssh 5.2p1: remove DEFAULT_PREFERENCE = "-1"
+  site/x86_64-linux: Add some vars from ix86-common
+  site/common-linux: centralize bash configure vars
+  syslinux: upgrade to 3.82 and split into a few packages
+  hicolor-icon-theme: don't inherit gnome
+  glibc: fix hardcoded /sbin/ldconfig path
+  gcc: fix libstdc/libgcc packaging on x86_64
+  kernel.bbclass: stage more include files for x86 in 2.6.27+
+
+Rolf Leggewie (2):
+  minimal.conf: build opie 1.2.4
+  base.bbclass: introduce OE source mirror network as last resort for do_fetch
+
+Roman I Khimov (2):
+  site/ix86-common: fix grave bug in ac_cv_sizeof_unsigned_char
+  quagga: add version 0.99.14
+
+Stanislav Brabec (11):
+  libxcalibrate: Use increment-able PV format as other git version recipes do.
+  calibrateproto: Use increment-able PV format as other git version recipes do
+  calibrateproto: Added symlink to provide old package pkgconfig name.
+  task-mamona.bb, xtscal.inc: DEPEND on libxcalibrate instead of xcalibrate.
+  xcalibrateext: Removed old recipe replaced by calibrateproto.
+  xcalibrate: Removed old recipe replaced by libxcalibrate.
+  gpsd: Disabled parallel build as it sometimes fail.
+  util-linux-ng: Fixed empty packages. Provide util-linux.
+  angstrom-2008.1.conf: Prefer util-linux-ng over util-linux.
+  swfdec: Fixed dependencies and package splitting. Disabled static. Packaged
+
+Steffen Sledz (1):
+  linux-2.6.24: use kernel module for SATA disks at hipox machine
+
+Steve Sakoman (8):
+  iozone3: fix GNU_HASH related build failure
+  gnome-desktop: fix path to python binary in the gnome-about script
+  atk: add 1.27.90
+  liboobs: add 2.22.0
+  gthumb: add 2.10.11
+  gnome-keyring: add missing dependency on libpam
+  checksums.ini: add missing entry for libcanberra 0.14
+  system-tools-backends: add 2.6.1
+
+Bugs fixed:
+
+bug_id resolution        short_desc
+4578 FIXED       uicmoc4-native_4.4.0 does not compile
+5009 DUPLICATE   audioplayer-1.0.tar.bz2: do_fetch failed - wrong checksum
+5296 FIXED       libfsobasics_git.bb fails to configure
+5298 FIXED       Update resolvconf recipe to 1.45
+
+Bugs opened:
+
+bug_id resolution        short_desc
+
+
