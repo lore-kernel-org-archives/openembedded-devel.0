@@ -1,31 +1,24 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Mfpnk-0007Wi-2R
+	(envelope-from <holger+oe@freyther.de>) id 1Mfptd-0007gG-NA
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Aug 2009 08:46:42 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id CBD8316DFDD
+	Tue, 25 Aug 2009 08:52:45 +0200
+Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
+	[123.192.185.227])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 9AD1A1B10C0A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2009 08:28:51 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 897412A424D
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2009 08:28:51 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Tue, 25 Aug 2009 08:28:43 +0200
-Message-ID: <4A938478.9010105@dresearch.de>
-Date: Tue, 25 Aug 2009 08:28:08 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
-MIME-Version: 1.0
+	Tue, 25 Aug 2009 06:39:14 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4A92AECA.6070309@dresearch.de>
-	<d1b08f940908240835o462431b5j13a983016675a0dc@mail.gmail.com>
-In-Reply-To: <d1b08f940908240835o462431b5j13a983016675a0dc@mail.gmail.com>
-X-OriginalArrivalTime: 25 Aug 2009 06:28:43.0812 (UTC)
-	FILETIME=[4B378640:01CA254D]
-Subject: Re: IMAGE_FSTYPES for u-boot initrd images?
+Date: Tue, 25 Aug 2009 08:34:45 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
+References: <4A936CC0.70409@4d-electronics.co.nz>
+	<200908250709.57101.holger+oe@freyther.de>
+	<4A937532.1070503@4d-electronics.co.nz>
+In-Reply-To: <4A937532.1070503@4d-electronics.co.nz>
+MIME-Version: 1.0
+Message-Id: <200908250834.45415.holger+oe@freyther.de>
+Subject: Re: CMake and Qt4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,22 +32,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2009 06:46:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 25 Aug 2009 06:52:46 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-Andrea Adami schrieb:
-> for something similar, check in recipes/images, specifically the
-> initramfs-* and the bootcd images.
-> Another image using a cpio.gz and a custom init is initramfs-kexecboot-image.
+On Tuesday 25 August 2009 07:22:58 Matthew Dombroski wrote:
+> > This will not work when both qt4x11 and qt4e is built and staged. I have
+> > no specific knowledge of the current FindQt4 cmake module but there
+> > should be a way to tell it that we want the QtE, QtX11 or QtMac built...
+> >
+> > Do you have any idea?
+>
+> Do you know the naming convention of qt4x11?
+> qt4e names libs with a big E like this: libQtCoreE.so.4.5
 
-Good examples for initrd/initramfs. But that's not the point.
+There is no convention. In Qt2 times an 'e' was appended to libqt. For Qt4 we 
+(in OpenEmbedded) are using the library infix to append the E as we are 
+supporting both QtX11 and QtEmbedded.
 
-These recipes create cpio.gz images but not images ready for u-boot. Such images need to be wrapped with [uboot-]mkimage similar to kernel uImages. Would be great to have support for this in a central place, to be able to choose e.g. cpio.gz.uimage in IMAGE_FSTYPES.
+>
+> It shouldnt be hard to add another variable in FindQt4.cmake that
+> controls what names we search for.
 
-Steffen
+
+Qt4x11 should be already in that list. So the basic problem with "appending" 
+'E' to the list is that it will not be used when Qt4X11 was already staged.
+
+To summarize. I'm not aware of any other distro that allows to install Qt4/X11 
+and Qt4/Embedded Linux. We are doing something that the KDE/CMake developers 
+have not seen as it doesn't exist on the desktop.
+
+The fix should include externally forcing FindQt4 to use X11 or EmbeddedLinux 
+depending on the config.
 
 
-
+z.
 
 
