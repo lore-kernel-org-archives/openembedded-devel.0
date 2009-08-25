@@ -1,24 +1,34 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1MfvGK-0001VJ-5R
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Mfvq6-0002mV-4D for openembedded-devel@lists.openembedded.org;
+	Tue, 25 Aug 2009 15:13:34 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1MfvYp-00051o-GL
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Aug 2009 14:36:38 +0200
-Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
-	[123.192.185.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id C6CF01B10C0E
+	Tue, 25 Aug 2009 14:55:39 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 25 Aug 2009 14:55:39 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2009 12:23:01 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Tue, 25 Aug 2009 14:55:39 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Aug 2009 14:18:23 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
-References: <4A8E3AA6.10609@dresearch.de>
-	<200908250403.12093.holger+oe@freyther.de>
-	<4A93C0BB.50206@dresearch.de>
-In-Reply-To: <4A93C0BB.50206@dresearch.de>
-MIME-Version: 1.0
-Message-Id: <200908251418.23224.holger+oe@freyther.de>
-Subject: Re: Variable reference (was: Documentation update about	machine conf files)
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 25 Aug 2009 14:55:13 +0200
+Message-ID: <h70mvh$899$1@ger.gmane.org>
+References: <91283b620908220300u6770aaebo7aa89b1b1b91e2fd@mail.gmail.com>	<91283b620908240250i3e35959bn26a29d99047b455d@mail.gmail.com>	<91283b620908240259s66c46b9bm3302978c59f7b3cd@mail.gmail.com>
+	<200908251307.58166.holger+oe@freyther.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <200908251307.58166.holger+oe@freyther.de>
+Sender: news <news@ger.gmane.org>
+Subject: Re: Musicbrainz
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,25 +42,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2009 12:36:55 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 25 Aug 2009 13:14:28 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Tuesday 25 August 2009 12:45:15 Steffen Sledz wrote:
-> Holger Hans Peter Freyther wrote:
-> >> It's a good starting point. But it has one drawback: It allows a short
-> >> one liner docu only. Often it would be great to have some more info,
-> >> e.g. a list of supported image file system types for IMAGE_FSTYPES.
-> >
-> > Why do you think so?
+On 25-08-09 13:07, Holger Hans Peter Freyther wrote:
+> On Monday 24 August 2009 11:59:31 Stuart Gray wrote:
+>> I've fixed it.
+>>
+>> I added oe_soinstall and pulled the so file in for compilation.
 >
-> When i had a look into conf/documentation.conf it occurred to me that the
-> documentation field may only be a simple string. It seems not to be
-> possible to use e.g. tables or lists there. Sorry, if i'm wrong here.
+> Yes, and it is a messy fix. I have pushed musicbrainz_3.0.2 to OE and use
+> another -rpath-link to point it to the libstdc++.
+>
+>
+> One more detail... gcc 4.3/binutils are "leaking" c++ symbols and when
+> building the C application, gcc is used for the linking and it is not able to
+> find the c++ library. I'm manually pointing gcc to the path of this library
+> now.
 
-Ah okay, it certainly is possible to embed HTML, it might not be so pleasant.
+Use AC_PROG_CXX or set LD to g++, that usually fixes it.
 
-z.
+regards,
+
+Koen
+
 
 
