@@ -1,22 +1,24 @@
 Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Mfu5S-00050c-4b
+	(envelope-from <holger+oe@freyther.de>) id 1MfuA0-0002UV-PU
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Aug 2009 13:21:17 +0200
+	Tue, 25 Aug 2009 13:25:59 +0200
 Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
 	[123.192.185.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 1F3451B10C0A
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id B59EC1B10C0A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2009 11:07:44 +0000 (UTC)
+	Tue, 25 Aug 2009 11:12:26 +0000 (UTC)
 From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Aug 2009 13:03:12 +0200
+Date: Tue, 25 Aug 2009 13:07:58 +0200
 User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
-References: <4A937831.2000304@4d-electronics.co.nz> <4A93A9E3.7090605@epfl.ch>
-In-Reply-To: <4A93A9E3.7090605@epfl.ch>
+References: <91283b620908220300u6770aaebo7aa89b1b1b91e2fd@mail.gmail.com>
+	<91283b620908240250i3e35959bn26a29d99047b455d@mail.gmail.com>
+	<91283b620908240259s66c46b9bm3302978c59f7b3cd@mail.gmail.com>
+In-Reply-To: <91283b620908240259s66c46b9bm3302978c59f7b3cd@mail.gmail.com>
 MIME-Version: 1.0
-Message-Id: <200908251303.12718.holger+oe@freyther.de>
-Subject: Re: [PATCH] Add toolchain file generation to cmake bbclass
+Message-Id: <200908251307.58166.holger+oe@freyther.de>
+Subject: Re: Musicbrainz
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,31 +32,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2009 11:21:23 -0000
+X-List-Received-Date: Tue, 25 Aug 2009 11:26:11 -0000
 Content-Type: Text/Plain;
   charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On Tuesday 25 August 2009 11:07:47 Valentin Longchamp wrote:
-> Matthew Dombroski wrote:
-> > It is possible to make cmake use a toolchain file that defines flags,
-> > search
-> > paths and any other cmake options.
-> >
-> > The main reason for making openembedded generate a toolchain file is
-> > to enable the building of complex packages. Without it a package
-> > requiring Qt4 or boost (or one of many other packages) probably wont find
-> > the right libs and won't build properly.
+On Monday 24 August 2009 11:59:31 Stuart Gray wrote:
+> I've fixed it.
 >
-> I have had no problem with boost and with Qt4, I have been able to
-> achieve similar results without the toolchain file, only by using a
-> qt.conf file as Zecke had suggested to me.
+> I added oe_soinstall and pulled the so file in for compilation.
 
-Hey,
+Yes, and it is a messy fix. I have pushed musicbrainz_3.0.2 to OE and use 
+another -rpath-link to point it to the libstdc++.
 
-could you come up with a patch or help me to work on a patch?
+
+One more detail... gcc 4.3/binutils are "leaking" c++ symbols and when 
+building the C application, gcc is used for the linking and it is not able to 
+find the c++ library. I'm manually pointing gcc to the path of this library 
+now.
 
 z.
-
 
 
