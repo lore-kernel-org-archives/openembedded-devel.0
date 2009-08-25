@@ -1,22 +1,28 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MfyzD-0006dn-5o
-	for openembedded-devel@openembedded.org; Tue, 25 Aug 2009 18:35:07 +0200
-Received: (qmail 14958 invoked by uid 813007); 25 Aug 2009 16:17:15 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 25 Aug 2009 16:17:15 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <edoiron@edoiron.ott.cti.com>) id 1Mfz74-00075b-94
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 25 Aug 2009 18:43:15 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id DC88D38F039;
+	Tue, 25 Aug 2009 12:25:22 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 04243-09; Tue, 25 Aug 2009 12:25:22 -0400 (EDT)
+Received: from edoiron.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPS id 8DD235035B8;
+	Tue, 25 Aug 2009 12:25:22 -0400 (EDT)
+Received: by edoiron.ott.cti.com (Postfix, from userid 1000)
+	id 5667B7CE23B; Tue, 25 Aug 2009 12:24:08 -0400 (EDT)
+From: Evan Doiron <edoiron@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Aug 2009 18:17:15 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc6-00243-g53bc5c0; KDE/4.3.0; x86_64; ;
-	)
-References: <1251210375.4215.525.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1251210375.4215.525.camel@lenovo.internal.reciva.com>
-MIME-Version: 1.0
-Message-Id: <200908251817.15687.marcin@juszkiewicz.com.pl>
-Subject: Re: OEDEM November 2009
+Date: Tue, 25 Aug 2009 12:24:08 -0400
+Message-Id: <1251217448-8279-1-git-send-email-edoiron@cbnco.com>
+X-Mailer: git-send-email 1.6.0.2
+In-Reply-To: <4A93F7F2.7030207@cbnco.com>
+References: <4A93F7F2.7030207@cbnco.com>
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: [PATCH v2] rsync: add v3.0.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,28 +36,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2009 16:35:08 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 25 Aug 2009 16:43:18 -0000
 
-Dnia wtorek, 25 sierpnia 2009 o 16:26:15 Phil Blundell napisa=C5=82(a):
-> Further to the previous discussion on this topic, we now propose to hold
-> a developers' meeting in Cambridge, UK on the weekend of November 7/8.
-> All developers and other interested parties are welcome.
->
-> To make the logistics easier, it would be useful to have an early
-> indication of the number of people who plan to attend.  So, if you
-> intend to come to the meeting, please let me know by email
+Signed-off-by: Evan Doiron <edoiron@cbnco.com>
+---
+ conf/checksums.ini           |    4 ++++
+ recipes/rsync/rsync_3.0.6.bb |   12 ++++++++++++
+ 2 files changed, 16 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/rsync/rsync_3.0.6.bb
 
-Count me in.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index 3ee124d..ba06d5d 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -21714,6 +21714,10 @@ sha256=17697db5bb9de399b71f7927070f60b3554b70b0ecc0419b50455d56560ea169
+ md5=2122d460b4119749c6e5993938a9b501
+ sha256=17697db5bb9de399b71f7927070f60b3554b70b0ecc0419b50455d56560ea169
+ 
++[http://rsync.samba.org/ftp/rsync/src/rsync-3.0.6.tar.gz]
++md5=e9865d093a18e4668b9d31b635dc8e99
++sha256=33cc969364cb66b3e345fa7db2c651a8e07de0e58743ec03899c4ba86953e1b3
++
+ [http://downloads.sourceforge.net/nogravity/rt-nogravity-data.zip]
+ md5=c7536e907363ea1da63430b49e42931d
+ sha256=d7d5a3d17f492049fceb2b9ea22c4c2af7243506219d83f7005b77ae410add29
+diff --git a/recipes/rsync/rsync_3.0.6.bb b/recipes/rsync/rsync_3.0.6.bb
+new file mode 100644
+index 0000000..614b051
+--- /dev/null
++++ b/recipes/rsync/rsync_3.0.6.bb
+@@ -0,0 +1,12 @@
++require rsync.inc
++
++PR = "r0"
++
++SRC_URI += "\
++  file://m4.patch;patch=1 \
++  file://rsyncd.conf \
++"
++# The source tarball from 3.0.6 seems to need this
++do_configure_append(){
++  oe_runmake reconfigure
++}
+-- 
+1.6.0.2
 
 
 
