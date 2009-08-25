@@ -1,31 +1,22 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1MftoZ-0004Fm-BZ
+	(envelope-from <holger+oe@freyther.de>) id 1Mfu5S-00050c-4b
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Aug 2009 13:03:48 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 122C916DFDD
+	Tue, 25 Aug 2009 13:21:17 +0200
+Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
+	[123.192.185.227])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 1F3451B10C0A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2009 12:45:58 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id C68D82A419E
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2009 12:45:57 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Tue, 25 Aug 2009 12:45:50 +0200
-Message-ID: <4A93C0BB.50206@dresearch.de>
-Date: Tue, 25 Aug 2009 12:45:15 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
-MIME-Version: 1.0
+	Tue, 25 Aug 2009 11:07:44 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4A8E3AA6.10609@dresearch.de>	<200908211344.53306.holger+oe@freyther.de>	<4A92AB1F.3060404@dresearch.de>
-	<200908250403.12093.holger+oe@freyther.de>
-In-Reply-To: <200908250403.12093.holger+oe@freyther.de>
-X-OriginalArrivalTime: 25 Aug 2009 10:45:50.0406 (UTC)
-	FILETIME=[362EF660:01CA2571]
-Subject: Re: Variable reference (was: Documentation update about	machine conf files)
+Date: Tue, 25 Aug 2009 13:03:12 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
+References: <4A937831.2000304@4d-electronics.co.nz> <4A93A9E3.7090605@epfl.ch>
+In-Reply-To: <4A93A9E3.7090605@epfl.ch>
+MIME-Version: 1.0
+Message-Id: <200908251303.12718.holger+oe@freyther.de>
+Subject: Re: [PATCH] Add toolchain file generation to cmake bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,21 +30,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2009 11:03:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 25 Aug 2009 11:21:23 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-Holger Hans Peter Freyther wrote:
->> It's a good starting point. But it has one drawback: It allows a short one
->> liner docu only. Often it would be great to have some more info, e.g. a
->> list of supported image file system types for IMAGE_FSTYPES.
-> 
-> Why do you think so?
+On Tuesday 25 August 2009 11:07:47 Valentin Longchamp wrote:
+> Matthew Dombroski wrote:
+> > It is possible to make cmake use a toolchain file that defines flags,
+> > search
+> > paths and any other cmake options.
+> >
+> > The main reason for making openembedded generate a toolchain file is
+> > to enable the building of complex packages. Without it a package
+> > requiring Qt4 or boost (or one of many other packages) probably wont find
+> > the right libs and won't build properly.
+>
+> I have had no problem with boost and with Qt4, I have been able to
+> achieve similar results without the toolchain file, only by using a
+> qt.conf file as Zecke had suggested to me.
 
-When i had a look into conf/documentation.conf it occurred to me that the documentation field may only be a simple string. It seems not to be possible to use e.g. tables or lists there. Sorry, if i'm wrong here.
+Hey,
 
-Steffen
+could you come up with a patch or help me to work on a patch?
 
+z.
 
 
 
