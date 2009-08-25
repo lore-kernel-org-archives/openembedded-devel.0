@@ -1,32 +1,26 @@
-Received: from [209.85.211.181] (helo=mail-yw0-f181.google.com)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1Mg1pE-0001Jp-2Z
+	(envelope-from <edoiron@edoiron.ott.cti.com>) id 1Mg2K8-0002BV-S9
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 Aug 2009 21:37:00 +0200
-Received: by ywh11 with SMTP id 11so4842380ywh.16
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Aug 2009 12:19:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=qg6oee94m7+wVKa/uTJpkp1NvkL6sofxQv+0ZpKgCEI=;
-	b=sIb2iLqH/J4ZI+C/9ZxygghfpIyYj10fCBZp1BmWGkUODH8NsNBJL01V1wKr5/71UZ
-	BuLkMnHMdb09oT2X7NXoFfB1XVf5BkijcenXxODQYh5fYN4yOo0Z5T081QdJQ4SMJxPj
-	e3o5dB7u5UHc5I6R5p3t9UtDHn7eVFUiajMms=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=AGPmUHIDDPlEy/nCSQsG1pu4PbN4BcLLKf2LaeLwNa08t2KBQcI9AiGW/l0NwiunR8
-	gzrgiPM9w3M6+cYbb407JpNiVKybsIuSPB/tNVUFpH5mNzxuDkw+/GeX969u8wbGdgFS
-	RqF/rAg0CT6m/cywpBcuv6xlrJR40TItmrV6w=
-MIME-Version: 1.0
-Received: by 10.150.59.4 with SMTP id h4mr8203024yba.235.1251227945954; Tue, 
-	25 Aug 2009 12:19:05 -0700 (PDT)
-Date: Tue, 25 Aug 2009 15:19:05 -0400
-Message-ID: <f96d234e0908251219o985e3dawb038f4da309a382@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	Tue, 25 Aug 2009 22:08:57 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 47DA254916B;
+	Tue, 25 Aug 2009 15:51:04 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 08808-10; Tue, 25 Aug 2009 15:51:04 -0400 (EDT)
+Received: from edoiron.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPS id 2E813111822;
+	Tue, 25 Aug 2009 15:50:58 -0400 (EDT)
+Received: by edoiron.ott.cti.com (Postfix, from userid 1000)
+	id 80AE77CE23B; Tue, 25 Aug 2009 15:49:43 -0400 (EDT)
+From: Evan Doiron <edoiron@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: OE weekly changelog 2009-08-17 to 2009-08-24
+Date: Tue, 25 Aug 2009 15:49:43 -0400
+Message-Id: <1251229783-6077-1-git-send-email-edoiron@cbnco.com>
+X-Mailer: git-send-email 1.6.0.2
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: [PATCH] net-snmp: add v5.4.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,134 +34,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Aug 2009 19:37:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 25 Aug 2009 20:09:01 -0000
 
-OE weekly changelog 2009-08-17 to 2009-08-24
+Signed-off-by: Evan Doiron <edoiron@cbnco.com>
+---
+ conf/checksums.ini                                 |    4 +++
+ .../configure-tail.patch                           |    0
+ recipes/net-snmp/net-snmp_5.4.2.1.bb               |   26 ++++++++++++++++++++
+ 3 files changed, 30 insertions(+), 0 deletions(-)
+ copy recipes/net-snmp/{net-snmp-5.4.1 => net-snmp-5.4.2.1}/configure-tail.patch (100%)
+ create mode 100644 recipes/net-snmp/net-snmp_5.4.2.1.bb
 
-Chris Larson (13):
-  Let the distro control whether we include hostap or madwifi.
-  base.bbclass: catch bb.MalformedUrl in do_fetch.
-  collections.inc: sync with MVL6.
-  distro-version: new general recipe, based on angstrom-version.
-  package_rpm: don't run against native/cross recipes, explicitly
-  devshell.bbclass: set a default for XAUTHORITY and export DBUS_SESSION_BUS_A
-  ncurses: don't use libtool.
-  src_distribute*.bbclass: cleanup, revamp parts, distribute all sources.
-  src_distribute: force do_fetch execution in do_distribute_sources.
-  opkg: use INC_PR.
-  opkg: explicitly clean up the opkg-intercept dirs rather than rm -rf.
-  Revert "ncurses: don't use libtool."
-  tar: inherit gettext & use a .inc to avoid duplicated metadata.
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index ba06d5d..290fd7a 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -17898,6 +17898,10 @@ sha256=0ea976722c993c87dede8eb6348e6feb059e3851bbef2de824bf18ac97cdb565
+ md5=6c974df7a5a5b1579f72115e6b045bda
+ sha256=0ea976722c993c87dede8eb6348e6feb059e3851bbef2de824bf18ac97cdb565
+ 
++[http://downloads.sourceforge.net/net-snmp/net-snmp-5.4.2.1.tar.gz]
++md5=984932520143f0c8bf7b7ce1fc9e1da1
++sha256=11a8baf167f7bfff60d2590e050991400a3a082923dbcdbf85e0e0ce46eb247c
++
+ [http://download.berlios.de/net-tools/net-tools-1.60.tar.bz2]
+ md5=888774accab40217dde927e21979c165
+ sha256=7ae4dd6d44d6715f18e10559ffd270511b6e55a8900ca54fbebafe0ae6cf7d7b
+diff --git a/recipes/net-snmp/net-snmp-5.4.1/configure-tail.patch b/recipes/net-snmp/net-snmp-5.4.2.1/configure-tail.patch
+similarity index 100%
+copy from recipes/net-snmp/net-snmp-5.4.1/configure-tail.patch
+copy to recipes/net-snmp/net-snmp-5.4.2.1/configure-tail.patch
+diff --git a/recipes/net-snmp/net-snmp_5.4.2.1.bb b/recipes/net-snmp/net-snmp_5.4.2.1.bb
+new file mode 100644
+index 0000000..3c51a5f
+--- /dev/null
++++ b/recipes/net-snmp/net-snmp_5.4.2.1.bb
+@@ -0,0 +1,26 @@
++require net-snmp.inc
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
++        file://configure-tail.patch;patch=1 \
++        file://init \
++        file://snmpd.conf \
++        file://snmptrapd.conf"
++
++EXTRA_OECONF = "--enable-shared --disable-manuals --with-defaults \
++                --disable-embedded-perl --with-perl-modules=no"
++EXTRA_OEMAKE = "INSTALL_PREFIX=${D}"
++
++do_configure_prepend() {
++        gnu-configize -f
++        # We better change sources and re-autoconf here, but
++        # required autoconf is too new for us.
++        sed -e '/echo.*\".*\\\\.*\"/s/echo/echo -e/g' \
++            -e 's/tail -1/tail -n 1/g'                \
++            -i configure
++
++        #The tarball for v5.4.2.1 is missing config.sub
++        cp ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}
++}
++
++PARALLEL_MAKE = ""
++CCACHE = ""
+-- 
+1.6.0.2
 
-Denys Dmytriyenko (4):
-  dm6467t-evm: add "new" 1GHz DaVinci DM6467 machine
-  da830-omapl137-evm: add DA830/OMAPL137 machine
-  linux-davinci: update defconfigs for dm355, dm365, dm6446 and dm6467
-  rt-tests: fix GNU_HASH QA error
-
-Evan Doiron (1):
-  net-snmp.inc: Fix typo in staging paths
-
-Florian Boor (1):
-  krb5: Disable tcl in configuration in order to avoid pulling in host include
-
-Graeme Gregory (2):
-  firefox_3.5.2.bb : add newest version of firefox
-
-Holger Hans Peter Freyther (2):
-  site: Add ac value for mipsel-linux and mipsel-linux-uclibc
-  package_tar.bbclass: Do not set IMAGE_PKGTYPE to unbreak parsing
-
-Jeremy Puhlman (3):
-  src_distribute_local: Change cp -f to cp -fr to account for directories.
-  gettext: Correct autoconf-lib-link code to defer to the compiler's library s
-  wireless-tools.inc: Change first use of SRC_URI from += to =
-
-John Willis (1):
-  gamin-0.1.8: Fix build issue with recent GCC/GLibC combos.
-
-Jonathan Cameron (1):
-  glibc 2.7 and 2.9 (arm): Remove unnecessary asm/page.h include
-
-Khem Raj (6):
-  python-sip_4.8.2.bb: set DEFAULT_PREFERENCE = -1
-  opkg: Add opkg to FILESPATHPKG.
-  u-boot_git.bb: Dont reset machine SRC_URIs by using common SRC_URI.
-  minimal, sane-toolchain: Use eglibc if LIBC is not selected.
-  micro: Use eglibc as default lib if LIBC is not set.
-  sane-toolchain: Define eglibc PREFERRED_VERSIONS
-
-Koen Kooi (1):
-  linux-omap* 2.6.29: add patch that should solve the memhole problem
-
-Leon Woestenberg (3):
-  angstrom-eglibc: TARGET_OS = linux-gnuspe for specific powerpc machines.
-  openssl: Add linux-gnuspe-powerpc to openssl.inc target list.
-  linux-2.6.30: calamari/defconfig CONFIG_WIRELESS_EXT=y for madwifi.
-
-Michael 'Mickey' Lauer (1):
-  fso-abyss | libgsm0710 | libgsm0710mux: catch up PV with upstream
-
-Michael Smith (13):
-  nasm: fix COMPATIBLE_HOST to match any vendor
-  mtools: don't install-info; fixes build on non-Debian hosts
-  source-checker: usability tweaks
-  oe-checksums-sorter.py: speed up about 4X using a hash
-  openssh.inc: cleanup
-  openssh 5.2p1: remove DEFAULT_PREFERENCE = "-1"
-  site/x86_64-linux: Add some vars from ix86-common
-  site/common-linux: centralize bash configure vars
-  syslinux: upgrade to 3.82 and split into a few packages
-  hicolor-icon-theme: don't inherit gnome
-  glibc: fix hardcoded /sbin/ldconfig path
-  gcc: fix libstdc/libgcc packaging on x86_64
-  kernel.bbclass: stage more include files for x86 in 2.6.27+
-
-Rolf Leggewie (2):
-  minimal.conf: build opie 1.2.4
-  base.bbclass: introduce OE source mirror network as last resort for do_fetch
-
-Roman I Khimov (2):
-  site/ix86-common: fix grave bug in ac_cv_sizeof_unsigned_char
-  quagga: add version 0.99.14
-
-Stanislav Brabec (11):
-  libxcalibrate: Use increment-able PV format as other git version recipes do.
-  calibrateproto: Use increment-able PV format as other git version recipes do
-  calibrateproto: Added symlink to provide old package pkgconfig name.
-  task-mamona.bb, xtscal.inc: DEPEND on libxcalibrate instead of xcalibrate.
-  xcalibrateext: Removed old recipe replaced by calibrateproto.
-  xcalibrate: Removed old recipe replaced by libxcalibrate.
-  gpsd: Disabled parallel build as it sometimes fail.
-  util-linux-ng: Fixed empty packages. Provide util-linux.
-  angstrom-2008.1.conf: Prefer util-linux-ng over util-linux.
-  swfdec: Fixed dependencies and package splitting. Disabled static. Packaged
-
-Steffen Sledz (1):
-  linux-2.6.24: use kernel module for SATA disks at hipox machine
-
-Steve Sakoman (8):
-  iozone3: fix GNU_HASH related build failure
-  gnome-desktop: fix path to python binary in the gnome-about script
-  atk: add 1.27.90
-  liboobs: add 2.22.0
-  gthumb: add 2.10.11
-  gnome-keyring: add missing dependency on libpam
-  checksums.ini: add missing entry for libcanberra 0.14
-  system-tools-backends: add 2.6.1
-
-Bugs fixed:
-
-bug_id resolution        short_desc
-4578 FIXED       uicmoc4-native_4.4.0 does not compile
-5009 DUPLICATE   audioplayer-1.0.tar.bz2: do_fetch failed - wrong checksum
-5296 FIXED       libfsobasics_git.bb fails to configure
-5298 FIXED       Update resolvconf recipe to 1.45
-
-Bugs opened:
-
-bug_id resolution        short_desc
 
 
