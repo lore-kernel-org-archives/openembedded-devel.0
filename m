@@ -1,26 +1,41 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [209.85.216.197] (helo=mail-px0-f197.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <edoiron@edoiron.ott.cti.com>) id 1MgLmS-0003LC-22
+	(envelope-from <raj.khem@gmail.com>) id 1MgM0y-0003zr-Bz
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Aug 2009 18:55:28 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 1706D54DAF3;
-	Wed, 26 Aug 2009 12:37:30 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 03628-10; Wed, 26 Aug 2009 12:37:30 -0400 (EDT)
-Received: from edoiron.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPS id E24C454D76C;
-	Wed, 26 Aug 2009 12:37:29 -0400 (EDT)
-Received: by edoiron.ott.cti.com (Postfix, from userid 1000)
-	id 0B26B7CE208; Wed, 26 Aug 2009 12:36:12 -0400 (EDT)
-From: Evan Doiron <edoiron@cbnco.com>
+	Wed, 26 Aug 2009 19:10:28 +0200
+Received: by pxi35 with SMTP id 35so254276pxi.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Aug 2009 09:52:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=OJsfONLrCdBPWm6L4By/yFEbK+EgX5PG3B7O+a4UZRo=;
+	b=OGARuEDvIjryo0fAIgd8gPbD6E8vGcHoJoXerhYQflMdo/Wchx1ZlgRgiCiLBckx3Z
+	I17yi3pxVT7nImnjENPl8DS+BPUXo6voPeCEf61cjKTE3bnsJ/mpGe5Zg0o+rTh8k9XX
+	UgHnJYzsfZIqfWOY8QvtQv/XI3IrTlLpXLq+s=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=S/egeXcMSJbk0MmEiRY83B5lQOBAvuXBRhMA3pDHSRuX9ua+6FB+plHZGCL2Zp3ohc
+	fa2Pln/a7bla/rDMhvmfWkr3aPYlLCMNhY0AIAlUI+xnkIX66bwoTGDipE0k4KEZbQB/
+	4k59Dqy+qKHkewA1CuF82z8xK3qt4doUGfd8E=
+Received: by 10.114.50.17 with SMTP id x17mr9208740wax.168.1251305546259;
+	Wed, 26 Aug 2009 09:52:26 -0700 (PDT)
+Received: from gmail.com (adsl-71-146-29-169.dsl.pltn13.sbcglobal.net
+	[71.146.29.169])
+	by mx.google.com with ESMTPS id c26sm1231289waa.15.2009.08.26.09.52.24
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 26 Aug 2009 09:52:24 -0700 (PDT)
+Date: Wed, 26 Aug 2009 09:52:20 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Aug 2009 12:36:12 -0400
-Message-Id: <1251304572-9983-1-git-send-email-edoiron@cbnco.com>
-X-Mailer: git-send-email 1.6.0.2
-X-Virus-Scanned: amavisd-new at cbnco.com
-Subject: [PATCH] usb-modeswitch: add v1.0.2
+Message-ID: <20090826165220.GB31371@gmail.com>
+References: <4A94E1CC.2090404@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <4A94E1CC.2090404@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH] enca_1.9.bb: remove unused configure test which is bound to fail.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,61 +49,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2009 16:55:32 -0000
+X-List-Received-Date: Wed, 26 Aug 2009 17:10:28 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Evan Doiron <edoiron@cbnco.com>
----
- conf/checksums.ini                             |    4 ++++
- recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb |   23 +++++++++++++++++++++++
- 2 files changed, 27 insertions(+), 0 deletions(-)
- create mode 100644 recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb
+On (26/08/09 16:48), Graham Gower wrote:
+> Enca's configure will fail on everything not arm or ix86.
+> 
+> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+> ---
+> recipes/enca/enca_1.9.bb |    7 ++++++-
+> site/arm-linux           |    3 ---
+> site/ix86-common         |    3 ---
+> 3 files changed, 6 insertions(+), 7 deletions(-)
+> 
+> diff --git a/recipes/enca/enca_1.9.bb b/recipes/enca/enca_1.9.bb
+> index 548a824..dbffe1e 100644
+> --- a/recipes/enca/enca_1.9.bb
+> +++ b/recipes/enca/enca_1.9.bb
+> @@ -3,7 +3,7 @@ SECTION = "libs"
+> PRIORITY = "optional"
+> LICENSE = "GPLv2"
+> HOMEPAGE = "http://trific.ath.cx/software/enca/"
+> -PR = "r3"
+> +PR = "r4"
+> 
+> SRC_URI = "http://www.sourcefiles.org/Networking/Tools/Miscellanenous/enca-${PV}.tar.bz2 \
+> 	file://configure-hack.patch;patch=1 \
+> @@ -15,6 +15,11 @@ inherit autotools
+> 
+> EXTRA_OECONF="--with-libiconv-prefix=${STAGING_DIR_HOST}${layout_exec_prefix}"
+> 
+> +do_configure_prepend() {
+> +	# remove failing test which checks for something that isn't even used
+> +	sed -i -e '/ye_FUNC_SCANF_MODIF_SIZE_T/d' configure.ac
+> +}
 
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 2d9e843..29238ff 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -24526,6 +24526,10 @@ sha256=dbc5d6921136711f08c197284ec67dc77232559e2e31429f8a30a1a102bd07f7
- md5=042c5243ce0253341fe920a8a863e37b
- sha256=6d2ae5d70609df7d2c2b518eca0624c4a59328b277ed114b9e5b57dd030e6e94
- 
-+[http://www.draisberghof.de/usb_modeswitch/usb_modeswitch-1.0.2.tar.bz2]
-+md5=4f896ed631f9be0338df9c5a2145ef82
-+sha256=f1b9388f4507185a4ac30bae3383d9e9bbb95075a14dd188c904cacdd8cf4e66
-+
- [http://www.rpsys.net/openzaurus/patches/archive/usb_pxa27x_udc-r0.patch]
- md5=c8193bc27642fa446d702cfdb9464c2a
- sha256=2101f292449cbacc277aecc5c649de895d501057f299e8e48a7ec50cfb0a200d
-diff --git a/recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb b/recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb
-new file mode 100644
-index 0000000..8debf86
---- /dev/null
-+++ b/recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "A mode switching tool for controlling 'flip flop' (multiple device) USB gear"
-+SECTION = "base"
-+PRIORITY = "required"
-+LICENSE = "GPLv2"
-+DEPENDS = "libusb"
-+
-+SRC_URI = "http://www.draisberghof.de/usb_modeswitch/usb_modeswitch-${PV}.tar.bz2"
-+
-+S = "${WORKDIR}/usb_modeswitch-${PV}"
-+
-+PACKAGES = "${PN}"
-+FILES_${PN} = "${bindir} ${sysconfdir}"
-+
-+do_compile() {
-+	oe_runmake
-+}
-+
-+do_install() {
-+	install -d ${D}${bindir}
-+	install -d ${D}${sysconfdir}
-+	install -m 0755 ${S}/usb_modeswitch ${D}${bindir}/usb_modeswitch
-+	install -m 0644 ${S}/usb_modeswitch.conf ${D}${sysconfdir}/usb_modeswitch.conf
-+}
--- 
-1.6.0.2
+you may not require this hunk. see below
 
+> +
+> do_configure_append() {
+> 	sed -i s:-I/usr/include::g Makefile
+> 	sed -i s:-I/usr/include::g */Makefile
+> diff --git a/site/arm-linux b/site/arm-linux
+> index 4212728..18dfb38 100644
+> --- a/site/arm-linux
+> +++ b/site/arm-linux
+> @@ -148,9 +148,6 @@ samba_cv_USE_SETREUID=${samba_cv_USE_SETREUID=yes}
+> samba_cv_USE_SETUIDX=${samba_cv_USE_SETUIDX=yes}
+> samba_cv_LINUX_LFS_SUPPORT=${samba_cv_LINUX_LFS_SUPPORT=yes}
+> 
+> -# enca
+> -yeti_cv_func_scanf_modif_size_t=yes
+> -
+
+set this to 'no'
+
+> # clamav
+> clamav_av_func_working_snprintf_long=${clamav_av_func_working_snprintf_long=yes}
+> clamav_av_have_in_port_t=${clamav_av_have_in_port_t=yes}
+> diff --git a/site/ix86-common b/site/ix86-common
+> index a5c4b60..b7a503f 100644
+> --- a/site/ix86-common
+> +++ b/site/ix86-common
+> @@ -104,9 +104,6 @@ ac_cv_func_posix_getpwnam_r=${ac_cv_func_posix_getpwnam_r=yes}
+> dpkg_cv_va_copy=${ac_cv_va_copy=no}
+> dpkg_cv___va_copy=${ac_cv___va_copy=yes}
+> 
+> -# enca
+> -yeti_cv_func_scanf_modif_size_t=yes
+> -
+
+same here.
+
+> # ettercap
+> ettercap_cv_type_socklen_t=${ettercap_cv_type_socklen_t=yes}
+> 
+> -- 
+> 1.6.0.3
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
