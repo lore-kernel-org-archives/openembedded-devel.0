@@ -1,32 +1,29 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MgK0G-0004Jj-Ds for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Aug 2009 17:01:36 +0200
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1MgJin-0005ey-9D
+	(envelope-from <sledz@DResearch.DE>) id 1MgKBp-0004pV-MV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Aug 2009 16:43:33 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2009 16:43:33 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Wed, 26 Aug 2009 17:13:34 +0200
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id B61EA16E23B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2009 16:43:33 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 26 Aug 2009 16:55:36 +0200 (CEST)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 7419F2A4227
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Aug 2009 16:55:36 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Wed, 26 Aug 2009 16:55:31 +0200
+Message-ID: <4A954CC0.1020401@dresearch.de>
+Date: Wed, 26 Aug 2009 16:54:56 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 26 Aug 2009 16:43:10 +0200
-Message-ID: <h73hlu$fls$1@ger.gmane.org>
-References: <4A95468A.9080109@dresearch.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <4A95468A.9080109@dresearch.de>
-Sender: news <news@ger.gmane.org>
+References: <4A95468A.9080109@dresearch.de> <h73hlu$fls$1@ger.gmane.org>
+In-Reply-To: <h73hlu$fls$1@ger.gmane.org>
+X-OriginalArrivalTime: 26 Aug 2009 14:55:31.0171 (UTC)
+	FILETIME=[41D40B30:01CA265D]
 Subject: Re: Parsing errors in current dev branch :(
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,27 +38,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2009 15:01:36 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 26 Aug 2009 15:13:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 26-08-09 16:28, Steffen Sledz wrote:
->> git branch
-> * org.openembedded.dev
->> git log | head -n 1
-> commit 73b0cf99f965eeb5a08daf614b98fa6e23c1c848
->
-> NOTE: Handling BitBake files: - (1265/7083) [17 %]ERROR: Could not include required file ../dvsdk/ti-dspbios.inc while parsing /home/DRESEARCH/sledz/work/openembedded/recipes/powervr-drivers/libgles-omap3_3.00.00.08.bb
-> NOTE: Handling BitBake files: \ (1267/7083) [17 %]ERROR: Could not include required file ../dvsdk/ti-dspbios.inc while parsing /home/DRESEARCH/sledz/work/openembedded/recipes/powervr-drivers/libgles-omap3_3.00.00.06.bb
-> ERROR: Could not include required file ../dvsdk/ti-dspbios.inc while parsing /home/DRESEARCH/sledz/work/openembedded/recipes/powervr-drivers/libgles-omap3_3.00.00.01.bb
-> ERROR: Could not include required file ../dvsdk/ti-dspbios.inc while parsing /home/DRESEARCH/sledz/work/openembedded/recipes/powervr-drivers/libgles-omap3_3.00.00.05.bb
-> NOTE: Handling BitBake files: \ (1271/7083) [17 %]ERROR: Could not include required file ../dvsdk/ti-dspbios.inc while parsing /home/DRESEARCH/sledz/work/openembedded/recipes/powervr-drivers/libgles-omap3_3.00.00.09.bb
-> NOTE: Handling BitBake files: \ (7083/7083) [100 %]
-> NOTE: Parsing finished. 6789 cached, 1 parsed, 288 skipped, 0 masked.
-> ERROR: Parsing errors found, exiting...
+Koen Kooi  wrote:
+> That should be fixed now, sorry for the breakage. Note to self: to not
+> try to merge branches that move files around before drinking coffee.
 
-That should be fixed now, sorry for the breakage. Note to self: to not 
-try to merge branches that move files around before drinking coffee.
+Forgiven  ;-)
+
 
 
 
