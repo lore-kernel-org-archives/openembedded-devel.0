@@ -1,41 +1,23 @@
-Received: from [209.85.146.177] (helo=wa-out-1112.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MgMFJ-0001zC-2C
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Aug 2009 19:25:17 +0200
-Received: by wa-out-1112.google.com with SMTP id m34so70663wag.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2009 10:07:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=/UMvyOLDwh13d7QTSMuOzE35cB/1gM1QEeDs+DmhALU=;
-	b=O/XQk6JnttddtCa9W+UNRjz9Q89djA9GiEjbMAhT3pY+pg6pl5xYrqKOL0fa67gT6o
-	SGNyosBR5GSs3fqSdLa+B3li6b7aDWanuYQm6sASNmVEAiwlBR0LsY43hNxwY0VNyU14
-	L5omdz7T+Q4tRboFsRBTY+DPzyTshdCOqic5Y=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=rSxY1fst8OeY2GgePlyzPhYwtekF7+Gav/VEqihurqTGTtDKTCBVtxJHpX/5jgoeke
-	q1BV8w8gNtaK6lpYgpS7q+fQjjjZDdcp6PxCHZ0aPFbcUvGcYuC5Jb/QaI1pYhYjYE1B
-	NRnEWZzmTiMrya07rs7T/q6nIHhzvJTdAYsUI=
-Received: by 10.114.6.14 with SMTP id 14mr10091149waf.158.1251306438343;
-	Wed, 26 Aug 2009 10:07:18 -0700 (PDT)
-Received: from gmail.com (adsl-71-146-29-169.dsl.pltn13.sbcglobal.net
-	[71.146.29.169])
-	by mx.google.com with ESMTPS id j15sm1250509waf.51.2009.08.26.10.07.16
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 26 Aug 2009 10:07:17 -0700 (PDT)
-Date: Wed, 26 Aug 2009 10:07:12 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090826170712.GH31371@gmail.com>
-References: <1251304572-9983-1-git-send-email-edoiron@cbnco.com>
+Received: from [128.178.224.219] (helo=smtp0.epfl.ch)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <valentin.longchamp@epfl.ch>) id 1MgMTX-0002dv-UY
+	for openembedded-devel@openembedded.org; Wed, 26 Aug 2009 19:40:00 +0200
+Received: (qmail 29534 invoked by uid 107); 26 Aug 2009 17:21:48 -0000
+X-Virus-Scanned: ClamAV
+Received: from lsa1pc7.epfl.ch (128.178.145.53) (authenticated)
+	by smtp0.epfl.ch (AngelmatoPhylax SMTP proxy);
+	Wed, 26 Aug 2009 19:21:48 +0200
+Message-ID: <4A956F2C.70301@epfl.ch>
+Date: Wed, 26 Aug 2009 19:21:48 +0200
+From: Valentin Longchamp <valentin.longchamp@epfl.ch>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-In-Reply-To: <1251304572-9983-1-git-send-email-edoiron@cbnco.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH] usb-modeswitch: add v1.0.2
+To: openembedded-devel@lists.openembedded.org
+References: <4A937831.2000304@4d-electronics.co.nz>
+	<4A93A9E3.7090605@epfl.ch>	<4A9461C3.2000406@4d-electronics.co.nz>
+	<4A94DA90.8090306@epfl.ch>
+In-Reply-To: <4A94DA90.8090306@epfl.ch>
+Subject: Re: [PATCH] Add toolchain file generation to cmake bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,72 +31,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2009 17:25:18 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 26 Aug 2009 17:40:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On (26/08/09 12:36), Evan Doiron wrote:
-> Signed-off-by: Evan Doiron <edoiron@cbnco.com>
-> ---
->  conf/checksums.ini                             |    4 ++++
->  recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb |   23 +++++++++++++++++++++++
->  2 files changed, 27 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb
+Valentin Longchamp wrote:
+> Matthew Dombroski wrote:
+>>
+>>> Although the toolchain file is the preferred value according to the
+>>> cmake documentation, it has not been necessary to me.
+>>
+>> The effect of a toolchain file is the same as that of defining lots of 
+>> options in EXTRA_OECMAKE.
+>> personally, I think it is cleaner. The ability to use it outside of 
+>> openembedded is really useful to me also.
 > 
-> diff --git a/conf/checksums.ini b/conf/checksums.ini
-> index 2d9e843..29238ff 100644
-> --- a/conf/checksums.ini
-> +++ b/conf/checksums.ini
-> @@ -24526,6 +24526,10 @@ sha256=dbc5d6921136711f08c197284ec67dc77232559e2e31429f8a30a1a102bd07f7
->  md5=042c5243ce0253341fe920a8a863e37b
->  sha256=6d2ae5d70609df7d2c2b518eca0624c4a59328b277ed114b9e5b57dd030e6e94
->  
-> +[http://www.draisberghof.de/usb_modeswitch/usb_modeswitch-1.0.2.tar.bz2]
-> +md5=4f896ed631f9be0338df9c5a2145ef82
-> +sha256=f1b9388f4507185a4ac30bae3383d9e9bbb95075a14dd188c904cacdd8cf4e66
-> +
->  [http://www.rpsys.net/openzaurus/patches/archive/usb_pxa27x_udc-r0.patch]
->  md5=c8193bc27642fa446d702cfdb9464c2a
->  sha256=2101f292449cbacc277aecc5c649de895d501057f299e8e48a7ec50cfb0a200d
-> diff --git a/recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb b/recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb
-> new file mode 100644
-> index 0000000..8debf86
-> --- /dev/null
-> +++ b/recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb
-> @@ -0,0 +1,23 @@
-> +DESCRIPTION = "A mode switching tool for controlling 'flip flop' (multiple device) USB gear"
-> +SECTION = "base"
-> +PRIORITY = "required"
-> +LICENSE = "GPLv2"
-> +DEPENDS = "libusb"
+> I agree that it is the same. It's just that it was done until now like 
+> that in OE, so I chose that way. However one advantage that I see of 
+> defining things directly in the recipes and not in a toolchain file, is 
+> that you can easily add definitions using EXTRA_OECMAKE in every recipe. 
+> Is cmake able to take two toolchain files (one from cmake.bbclass and 
+> one from the recipes with the needed libraries) without having to 
+> rewrite the do_configure in the recipe ?
+> 
+> This comes back to the point above: do we need to define all the 
+> libraries that could come with cmake-based programs in cmake.bbclass ? 
+>  From my point of view, this is definitely something related to the 
+> recipes.
+> 
 
-may be you should depend on virtual/libusb0 
+I have been thinking about this today I here is a proposition that takes 
+the better of both our approaches. I agree that having the toolchain 
+file is much cleaner, however it should be possible to add things to 
+this toolchain file in the recipes according to what libraries are needed.
 
-> +
-> +SRC_URI = "http://www.draisberghof.de/usb_modeswitch/usb_modeswitch-${PV}.tar.bz2"
-> +
-> +S = "${WORKDIR}/usb_modeswitch-${PV}"
-> +
-> +PACKAGES = "${PN}"
-> +FILES_${PN} = "${bindir} ${sysconfdir}"
-> +
-> +do_compile() {
-> +	oe_runmake
-> +}
-> +
-> +do_install() {
-> +	install -d ${D}${bindir}
-> +	install -d ${D}${sysconfdir}
-> +	install -m 0755 ${S}/usb_modeswitch ${D}${bindir}/usb_modeswitch
-> +	install -m 0644 ${S}/usb_modeswitch.conf ${D}${sysconfdir}/usb_modeswitch.conf
-> +}
-> -- 
-> 1.6.0.2
+So I have added a task that generates a generic toolchain file, and the 
+idea is to add all the needed defines for additionnal libraries in the 
+recipe, in a do_generate_toolchain_file_append() function.
+
+Here is my example recipe, sending the patch with git.
+
+Val
+
+> DESCRIPTION = "aseba is an event-based architecture for distributed robots control"
+> HOMEPAGE = "http://mobots.epfl.ch/aseba.html"
+> LICENCE = "GPL"
+> PR = "r1"
 > 
+> PV = "svn${SRCDATE}"
+> DEPENDS = "dashel qt4-embedded"
+> LEAD_SONAME = "libasebacore.so"
 > 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> SRC_URI = "svn://svn.gna.org/svn/aseba;module=trunk"
+> 
+> S = "${WORKDIR}/trunk"
+> 
+> inherit qt4e cmake 
+> 
+> EXTRA_OECMAKE += "-DSHARED_LIBS:BOOL=ON -DCMD_LINE:BOOL=ON"
+> 
+> do_generate_toolchain_file_append() {
+> 	echo "set( QT_HEADERS_DIR ${OE_QMAKE_INCDIR_QT} CACHE STRING \"Qt4 include dir\" )" >> ${WORKDIR}/toolchain.cmake
+> 	echo "set( QT_LIBRARY_DIR ${OE_QMAKE_LIBDIR_QT} CACHE STRING \"Qt4 library dir\" )" >> ${WORKDIR}/toolchain.cmake
+> 	echo "set( QT_QMAKE_EXECUTABLE ${OE_QMAKE_QMAKE} CACHE STRING \"qmake2 binary\" )" >> ${WORKDIR}/toolchain.cmake
+> 	echo "set( QT_MOC_EXECUTABLE ${OE_QMAKE_MOC} CACHE STRING \"Qt4 moc binary\" )" >> ${WORKDIR}/toolchain.cmake
+> 	echo "set( QT_UIC_EXECUTABLE ${OE_QMAKE_UIC} CACHE STRING \"Qt4 uic binary\" )" >> ${WORKDIR}/toolchain.cmake
+> 	echo "set( QT_UIC3_EXECUTABLE ${OE_QMAKE_UIC3} CACHE STRING \"Qt4 uic3 binary\" )" >> ${WORKDIR}/toolchain.cmake
+> 	echo "set( QT_RCC_EXECUTABLE ${OE_QMAKE_RCC} CACHE STRING \"Qt4 rcc binary\" )" >> ${WORKDIR}/toolchain.cmake
+> 	echo "set( QT_DBUSXML2CPP_EXECUTABLE ${OE_QMAKE_QDBUSXML2CPP} CACHE STRING \"Qt4 dbus xml2cpp binary\" )" >> ${WORKDIR}/toolchain.cmake
+> 	echo "set( QT_DBUSCPP2XML_EXECUTABLE ${OE_QMAKE_QDBUSCPP2XML} CACHE STRING \"Qt4 dbus cpp2xml binary\" )" >> ${WORKDIR}/toolchain.cmake
+> 	echo "set( QT_LRELEASE_EXECUTABLE ${OE_QMAKE_LRELEASE} CACHE STRING \"Qt4 lrelease binary\" )" >> ${WORKDIR}/toolchain.cmake
+> 	echo "set( QT_LUPDATE_EXECUTABLE ${OE_QMAKE_LUPDATE} CACHE STRING \"Qt4 lupdate binary\" )" >> ${WORKDIR}/toolchain.cmake 
+> }
+> 
+> do_stage() {
+> 	oe_libinstall -so libasebacore ${STAGING_LIBDIR}
+> 	oe_libinstall -so libasebacompiler ${STAGING_LIBDIR}
+> 	oe_libinstall -so libasebavm ${STAGING_LIBDIR}
+> 
+> 	install -d ${STAGING_INCDIR}/aseba
+> 	install -d ${STAGING_INCDIR}/aseba/common
+> 	install -m 0644 common/consts.h ${STAGING_INCDIR}/aseba/common
+> 	install -m 0644 common/types.h ${STAGING_INCDIR}/aseba/common
+> 	install -d ${STAGING_INCDIR}/aseba/msg
+> 	install -m 0644 msg/descriptions-manager.h ${STAGING_INCDIR}/aseba/msg
+> 	install -m 0644 msg/msg.h ${STAGING_INCDIR}/aseba/msg
+> 	install -d ${STAGING_INCDIR}/aseba/utils
+> 	install -m 0644 utils/FormatableString.h ${STAGING_INCDIR}/aseba/utils
+> 	install -m 0644 utils/utils.h ${STAGING_INCDIR}/aseba/utils
+> }
+> 
+> FILES_${PN} += "${libdir}/libasebacore.so"
+> FILES_${PN} += "${libdir}/libasebacompiler.so"
+> FILES_${PN} += "${libdir}/libasebavm.so"
+
+
 
 
