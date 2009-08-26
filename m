@@ -1,21 +1,28 @@
-Received: from [128.178.224.226] (helo=smtp3.epfl.ch)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <valentin.longchamp@epfl.ch>) id 1MgMaH-0002zv-SX
-	for openembedded-devel@openembedded.org; Wed, 26 Aug 2009 19:46:57 +0200
-Received: (qmail 6622 invoked by uid 107); 26 Aug 2009 17:28:55 -0000
-X-Virus-Scanned: ClamAV
-Received: from lsa1pc7.epfl.ch (128.178.145.53) (authenticated)
-	by smtp3.epfl.ch (AngelmatoPhylax SMTP proxy);
-	Wed, 26 Aug 2009 19:28:55 +0200
-From: Valentin Longchamp <valentin.longchamp@epfl.ch>
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <edoiron@edoiron.ott.cti.com>) id 1MgNJX-00020B-QN
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 26 Aug 2009 20:33:44 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 788A1531D70;
+	Wed, 26 Aug 2009 14:15:45 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 21229-10; Wed, 26 Aug 2009 14:15:45 -0400 (EDT)
+Received: from edoiron.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPS id 448DB52F42D;
+	Wed, 26 Aug 2009 14:15:45 -0400 (EDT)
+Received: by edoiron.ott.cti.com (Postfix, from userid 1000)
+	id 193527CE208; Wed, 26 Aug 2009 14:14:27 -0400 (EDT)
+From: Evan Doiron <edoiron@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Aug 2009 19:28:50 +0200
-Message-Id: <1251307730-5802-1-git-send-email-valentin.longchamp@epfl.ch>
-X-Mailer: git-send-email 1.6.0.4
-In-Reply-To: <4A956F2C.70301@epfl.ch>
-References: <4A956F2C.70301@epfl.ch>
-Cc: Valentin Longchamp <valentin.longchamp@epfl.ch>
-Subject: [PATCH 1/1] add toolchain file for cmake compilations
+Date: Wed, 26 Aug 2009 14:14:27 -0400
+Message-Id: <1251310467-24825-1-git-send-email-edoiron@cbnco.com>
+X-Mailer: git-send-email 1.6.0.2
+In-Reply-To: <20090826170712.GH31371@gmail.com>
+References: <20090826170712.GH31371@gmail.com>
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: [PATCH] usb-modeswitch: add v1.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,71 +36,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2009 17:46:58 -0000
+X-List-Received-Date: Wed, 26 Aug 2009 18:33:44 -0000
 
-Based on work done by Matthew Dombroski.
-We want to generate a toolchain file for cmake compilations. This
-adds a task that is performed before the configure task.
-
-Additional defines can be made in the toolchain file directly in
-the recipe file by using a do_generate_toolchain_file_append().
-This is especially interesting for recipes that need to define
-values for additionnal libraries.
-
-Signed-off-by: Valentin Longchamp <valentin.longchamp@epfl.ch>
+Signed-off-by: Evan Doiron <edoiron@cbnco.com>
 ---
- classes/cmake.bbclass |   28 ++++++++++++++++++++++++++--
- 1 files changed, 26 insertions(+), 2 deletions(-)
+ conf/checksums.ini                             |    4 ++++
+ recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb |   23 +++++++++++++++++++++++
+ 2 files changed, 27 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb
 
-diff --git a/classes/cmake.bbclass b/classes/cmake.bbclass
-index b5b7b86..36ed709 100644
---- a/classes/cmake.bbclass
-+++ b/classes/cmake.bbclass
-@@ -11,6 +11,29 @@ OECMAKE_SOURCEPATH ?= "."
- # "-C ${OECMAKE_BUILDPATH}". So it will run the right makefiles.
- OECMAKE_BUILDPATH ?= ""
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index 2d9e843..29238ff 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -24526,6 +24526,10 @@ sha256=dbc5d6921136711f08c197284ec67dc77232559e2e31429f8a30a1a102bd07f7
+ md5=042c5243ce0253341fe920a8a863e37b
+ sha256=6d2ae5d70609df7d2c2b518eca0624c4a59328b277ed114b9e5b57dd030e6e94
  
-+cmake_do_generate_toolchain_file() {
-+# CMake system name must be something like "Linux".
-+# This is important for cross-compiling.
-+  echo "set( CMAKE_SYSTEM_NAME" `echo ${SDK_OS} | sed 's/^./\u&/'` ")" > ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_C_COMPILER ${OECMAKE_C_COMPILER} )" >> ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_CXX_COMPILER ${OECMAKE_CXX_COMPILER} )" >> ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_C_FLAGS \"${OECMAKE_C_FLAGS}\" CACHE STRING \"OpenEmbedded CFLAGS\" )" >> ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_CXX_FLAGS \"${OECMAKE_CXX_FLAGS}\" CACHE STRING \"OpenEmbedded CXXFLAGS\" )" >> ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_C_FLAGS_RELEASE \"${OECMAKE_C_FLAGS_RELEASE}\" CACHE STRING \"CFLAGS for release\" )" >> ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_CXX_FLAGS_RELEASE \"${OECMAKE_CXX_FLAGS_RELEASE}\" CACHE STRING \"CXXFLAGS for release\" )" >> ${WORKDIR}/toolchain.cmake
++[http://www.draisberghof.de/usb_modeswitch/usb_modeswitch-1.0.2.tar.bz2]
++md5=4f896ed631f9be0338df9c5a2145ef82
++sha256=f1b9388f4507185a4ac30bae3383d9e9bbb95075a14dd188c904cacdd8cf4e66
 +
-+# only search in the paths provided (from openembedded) so cmake doesnt pick
-+# up libraries and tools from the native build machine
-+  echo "set( CMAKE_FIND_ROOT_PATH ${STAGING_DIR_HOST} ${STAGING_DIR_NATIVE} ${CROSS_DIR} )" >> ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_FIND_ROOT_PATH_MODE_PROGRAM ONLY )" >> ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY )" >> ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY )" >> ${WORKDIR}/toolchain.cmake
-+# Use native cmake modules
-+  echo "set( CMAKE_MODULE_PATH ${STAGING_DIR_NATIVE}/usr/share/cmake-2.6/Modules/ )" >> ${WORKDIR}/toolchain.cmake 
+ [http://www.rpsys.net/openzaurus/patches/archive/usb_pxa27x_udc-r0.patch]
+ md5=c8193bc27642fa446d702cfdb9464c2a
+ sha256=2101f292449cbacc277aecc5c649de895d501057f299e8e48a7ec50cfb0a200d
+diff --git a/recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb b/recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb
+new file mode 100644
+index 0000000..3919106
+--- /dev/null
++++ b/recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION = "A mode switching tool for controlling 'flip flop' (multiple device) USB gear"
++SECTION = "base"
++PRIORITY = "required"
++LICENSE = "GPLv2"
++DEPENDS = "virtual/libusb0"
++
++SRC_URI = "http://www.draisberghof.de/usb_modeswitch/usb_modeswitch-${PV}.tar.bz2"
++
++S = "${WORKDIR}/usb_modeswitch-${PV}"
++
++PACKAGES = "${PN}"
++FILES_${PN} = "${bindir} ${sysconfdir}"
++
++do_compile() {
++	oe_runmake
 +}
 +
-+addtask generate_toolchain_file after do_patch before do_configure
-+
- cmake_do_configure() {
-   if [ ${OECMAKE_BUILDPATH} ]
-   then
-@@ -20,9 +43,10 @@ cmake_do_configure() {
- 
-   cmake ${OECMAKE_SOURCEPATH} \
-     -DCMAKE_INSTALL_PREFIX:PATH=${prefix} \
--    -DCMAKE_FIND_ROOT_PATH=${STAGING_DIR_HOST} \
-+    -DCMAKE_TOOLCHAIN_FILE=${WORKDIR}/toolchain.cmake \
-+    -DCMAKE_VERBOSE_MAKEFILE=1 \
-     ${EXTRA_OECMAKE} \
-     -Wno-dev
- }
- 
--EXPORT_FUNCTIONS do_configure
-+EXPORT_FUNCTIONS do_configure do_generate_toolchain_file
++do_install() {
++	install -d ${D}${bindir}
++	install -d ${D}${sysconfdir}
++	install -m 0755 ${S}/usb_modeswitch ${D}${bindir}/usb_modeswitch
++	install -m 0644 ${S}/usb_modeswitch.conf ${D}${sysconfdir}/usb_modeswitch.conf
++}
 -- 
-1.6.0.4
+1.6.0.2
 
 
 
