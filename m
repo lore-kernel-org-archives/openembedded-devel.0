@@ -1,41 +1,41 @@
 Received: from [209.85.216.197] (helo=mail-px0-f197.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MgM0y-0003zr-Bz
+	(envelope-from <raj.khem@gmail.com>) id 1MgM3P-00046q-PM
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Aug 2009 19:10:28 +0200
-Received: by pxi35 with SMTP id 35so254276pxi.12
+	Wed, 26 Aug 2009 19:13:00 +0200
+Received: by pxi35 with SMTP id 35so256800pxi.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2009 09:52:28 -0700 (PDT)
+	Wed, 26 Aug 2009 09:54:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=OJsfONLrCdBPWm6L4By/yFEbK+EgX5PG3B7O+a4UZRo=;
-	b=OGARuEDvIjryo0fAIgd8gPbD6E8vGcHoJoXerhYQflMdo/Wchx1ZlgRgiCiLBckx3Z
-	I17yi3pxVT7nImnjENPl8DS+BPUXo6voPeCEf61cjKTE3bnsJ/mpGe5Zg0o+rTh8k9XX
-	UgHnJYzsfZIqfWOY8QvtQv/XI3IrTlLpXLq+s=
+	bh=bfRF/7HB5YJS1GAfxeX4hIVzaWdFfWjCGnul6TEz8Rg=;
+	b=VFGt5kydd9/YHu1v7aMiLcwihltDIy2PCqjze1Dm5cIlsJpc6CYu7o5IKVbifd8Cr3
+	KXmy51QpyzeDlhPH5yqQF+eDNDd719nNyq0LiNz5WSHwPpCKUsWm9bTfh4CW0x2BlCWn
+	C03oGlcbzNfYESXEmeQBwLXtiPS1uH9wjTuPk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=S/egeXcMSJbk0MmEiRY83B5lQOBAvuXBRhMA3pDHSRuX9ua+6FB+plHZGCL2Zp3ohc
-	fa2Pln/a7bla/rDMhvmfWkr3aPYlLCMNhY0AIAlUI+xnkIX66bwoTGDipE0k4KEZbQB/
-	4k59Dqy+qKHkewA1CuF82z8xK3qt4doUGfd8E=
-Received: by 10.114.50.17 with SMTP id x17mr9208740wax.168.1251305546259;
-	Wed, 26 Aug 2009 09:52:26 -0700 (PDT)
+	b=Sls6R2XZ7pDoQris+H7+FtJjs9byGLpDaKBO/Rag0mm380tVoCvYNzxQzhLupZmgv9
+	fqhfnINmlo/hEXrsQ8lBdtxW5pH5XtkjGjS284ZxtRBj9PeMTi6pB5P9L199UUrI4vs9
+	531oe6MIh4ByzKP0QT0Y4gGMz9l6wKeD/j8Z8=
+Received: by 10.115.67.10 with SMTP id u10mr10101691wak.203.1251305699251;
+	Wed, 26 Aug 2009 09:54:59 -0700 (PDT)
 Received: from gmail.com (adsl-71-146-29-169.dsl.pltn13.sbcglobal.net
 	[71.146.29.169])
-	by mx.google.com with ESMTPS id c26sm1231289waa.15.2009.08.26.09.52.24
+	by mx.google.com with ESMTPS id n30sm1237689wag.41.2009.08.26.09.54.56
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 26 Aug 2009 09:52:24 -0700 (PDT)
-Date: Wed, 26 Aug 2009 09:52:20 -0700
+	Wed, 26 Aug 2009 09:54:57 -0700 (PDT)
+Date: Wed, 26 Aug 2009 09:54:52 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090826165220.GB31371@gmail.com>
-References: <4A94E1CC.2090404@gmail.com>
+Message-ID: <20090826165452.GC31371@gmail.com>
+References: <4A94E45F.7030303@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <4A94E1CC.2090404@gmail.com>
+In-Reply-To: <4A94E45F.7030303@gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH] enca_1.9.bb: remove unused configure test which is bound to fail.
+Subject: Re: [PATCH] netsurf fixes for GCC-4.4, from netsurf svn.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,81 +49,199 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2009 17:10:28 -0000
+X-List-Received-Date: Wed, 26 Aug 2009 17:13:00 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (26/08/09 16:48), Graham Gower wrote:
-> Enca's configure will fail on everything not arm or ix86.
+On (26/08/09 16:59), Graham Gower wrote:
+> Netsurf appears to be statically linked with these libraries, so I
+> bumped its PR too.
 > 
 > Signed-off-by: Graham Gower <graham.gower@gmail.com>
 > ---
-> recipes/enca/enca_1.9.bb |    7 ++++++-
-> site/arm-linux           |    3 ---
-> site/ix86-common         |    3 ---
-> 3 files changed, 6 insertions(+), 7 deletions(-)
-> 
-> diff --git a/recipes/enca/enca_1.9.bb b/recipes/enca/enca_1.9.bb
-> index 548a824..dbffe1e 100644
-> --- a/recipes/enca/enca_1.9.bb
-> +++ b/recipes/enca/enca_1.9.bb
-> @@ -3,7 +3,7 @@ SECTION = "libs"
-> PRIORITY = "optional"
-> LICENSE = "GPLv2"
-> HOMEPAGE = "http://trific.ath.cx/software/enca/"
-> -PR = "r3"
-> +PR = "r4"
-> 
-> SRC_URI = "http://www.sourcefiles.org/Networking/Tools/Miscellanenous/enca-${PV}.tar.bz2 \
-> 	file://configure-hack.patch;patch=1 \
-> @@ -15,6 +15,11 @@ inherit autotools
-> 
-> EXTRA_OECONF="--with-libiconv-prefix=${STAGING_DIR_HOST}${layout_exec_prefix}"
-> 
-> +do_configure_prepend() {
-> +	# remove failing test which checks for something that isn't even used
-> +	sed -i -e '/ye_FUNC_SCANF_MODIF_SIZE_T/d' configure.ac
-> +}
+looks ok. 
 
-you may not require this hunk. see below
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
+> recipes/netsurf/files/hubbub-uninitialised.patch   |   35 ++++++++
+> .../netsurf/files/libnsgif-strict-aliasing.patch   |   82 ++++++++++++++++++++
+> recipes/netsurf/hubbub_0.0.1.bb                    |    5 +-
+> recipes/netsurf/libnsgif_0.0.1.bb                  |    5 +-
+> recipes/netsurf/netsurf_2.1.bb                     |    2 +
+> 5 files changed, 127 insertions(+), 2 deletions(-)
+> create mode 100644 recipes/netsurf/files/hubbub-uninitialised.patch
+> create mode 100644 recipes/netsurf/files/libnsgif-strict-aliasing.patch
+> 
+> diff --git a/recipes/netsurf/files/hubbub-uninitialised.patch b/recipes/netsurf/files/hubbub-uninitialised.patch
+> new file mode 100644
+> index 0000000..4f87120
+> --- /dev/null
+> +++ b/recipes/netsurf/files/hubbub-uninitialised.patch
+> @@ -0,0 +1,35 @@
+> +http://source.netsurf-browser.org/?view=rev&revision=7398
+> +Initialise variables to stop GCC 4.4 complaining (credit: Jeroen Habraken)
 > +
-> do_configure_append() {
-> 	sed -i s:-I/usr/include::g Makefile
-> 	sed -i s:-I/usr/include::g */Makefile
-> diff --git a/site/arm-linux b/site/arm-linux
-> index 4212728..18dfb38 100644
-> --- a/site/arm-linux
-> +++ b/site/arm-linux
-> @@ -148,9 +148,6 @@ samba_cv_USE_SETREUID=${samba_cv_USE_SETREUID=yes}
-> samba_cv_USE_SETUIDX=${samba_cv_USE_SETUIDX=yes}
-> samba_cv_LINUX_LFS_SUPPORT=${samba_cv_LINUX_LFS_SUPPORT=yes}
+> +--- hubbub/src/tokeniser/tokeniser.c	2009/04/06 15:22:16	7052
+> ++++ hubbub/src/tokeniser/tokeniser.c	2009/05/05 17:18:41	7398
+> +@@ -787,7 +787,7 @@
+> + 							+ 1);
+> + 		} else {
+> + 			parserutils_error error;
+> +-			const uint8_t *cptr;
+> ++			const uint8_t *cptr = NULL;
+> + 			error = parserutils_inputstream_peek(
+> + 					tokeniser->input,
+> + 					tokeniser->context.pending,
+> +@@ -1590,8 +1590,8 @@
+> + 					tokeniser->context.match_entity.length
+> + 					+ 1;
+> + 		} else {
+> +-			size_t len;
+> +-			const uint8_t *cptr;
+> ++			size_t len = 0;
+> ++			const uint8_t *cptr = NULL;
+> + 			parserutils_error error;
+> + + 			error = parserutils_inputstream_peek(
+> +@@ -3137,7 +3137,7 @@
+> + {
+> + 	hubbub_token token;
+> + 	size_t len;
+> +-	const uint8_t *cptr;
+> ++	const uint8_t *cptr = NULL;
+> + 	parserutils_error error;
+> + + 	/* Calling this with nothing to output is a probable bug */
+> +
+> diff --git a/recipes/netsurf/files/libnsgif-strict-aliasing.patch b/recipes/netsurf/files/libnsgif-strict-aliasing.patch
+> new file mode 100644
+> index 0000000..4fe913c
+> --- /dev/null
+> +++ b/recipes/netsurf/files/libnsgif-strict-aliasing.patch
+> @@ -0,0 +1,82 @@
+> +http://source.netsurf-browser.org/?view=rev&revision=9027
+> +Stop utterly insane palette entry population.
+> +Palette entries are always ABGR, regardless of platform endianness.
+> +This change probably breaks big-endian platforms which, under the old approach,
+> +had palette entries of the form RGBA (assuming I understood the code correctly).
+> +
+> +http://source.netsurf-browser.org/?view=rev&revision=9138
+> +Fix palette entry population some more. Hopefully, it's completely endian
+> +agnostic now and still builds with GCC 4.4
+> +
+> +--- libnsgif/src/libnsgif.c	2009/03/29 01:43:27	6984
+> ++++ libnsgif/src/libnsgif.c	2009/08/09 22:24:14	9138
+> +@@ -319,19 +319,34 @@
+> + 				return GIF_INSUFFICIENT_DATA;
+> + 			}
+> + 			for (index = 0; index < gif->colour_table_size; index++) {
+> +-				char colour[] = {0, 0, 0, (char)0xff};
+> +-				colour[0] = gif_data[0];
+> +-				colour[1] = gif_data[1];
+> +-				colour[2] = gif_data[2];
+> +-				gif->global_colour_table[index] = *((int *) (void *) colour);
+> ++				/* Gif colour map contents are r,g,b.
+> ++				 *
+> ++				 * We want to pack them bytewise into the ++				 * colour
+> table, such that the red component
+> ++				 * is in byte 0 and the alpha component is in
+> ++				 * byte 3.
+> ++				 */
+> ++				unsigned char *entry = (unsigned char *) &gif->
+> ++						global_colour_table[index];
+> ++
+> ++				entry[0] = gif_data[0];	/* r */
+> ++				entry[1] = gif_data[1];	/* g */
+> ++				entry[2] = gif_data[2];	/* b */
+> ++				entry[3] = 0xff;	/* a */
+> ++
+> + 				gif_data += 3;
+> + 			}
+> + 			gif->buffer_position = (gif_data - gif->gif_data);
+> + 		} else {
+> + 			/*	Create a default colour table with the first two colours as black and white
+> + 			*/
+> +-			gif->global_colour_table[0] = 0xff000000;
+> +-			gif->global_colour_table[1] = 0xffffffff;
+> ++			unsigned int *entry = gif->global_colour_table;
+> ++
+> ++			entry[0] = 0x00000000;
+> ++			/* Force Alpha channel to opaque */
+> ++			((unsigned char *) entry)[3] = 0xff;
+> ++
+> ++			entry[1] = 0xffffffff;
+> + 		}
+> + 	}
+> + +@@ -844,11 +859,21 @@
+> + 		colour_table = gif->local_colour_table;
+> + 		if (!clear_image) {
+> + 			for (index = 0; index < colour_table_size; index++) {
+> +-				char colour[] = {0, 0, 0, (char)0xff};
+> +-				colour[0] = gif_data[0];
+> +-				colour[1] = gif_data[1];
+> +-				colour[2] = gif_data[2];
+> +-				colour_table[index] = *((int *) (void *) colour);
+> ++				/* Gif colour map contents are r,g,b.
+> ++				 *
+> ++				 * We want to pack them bytewise into the ++				 * colour
+> table, such that the red component
+> ++				 * is in byte 0 and the alpha component is in
+> ++				 * byte 3.
+> ++				 */
+> ++				unsigned char *entry = ++					(unsigned char *)
+> &colour_table[index];
+> ++
+> ++				entry[0] = gif_data[0];	/* r */
+> ++				entry[1] = gif_data[1];	/* g */
+> ++				entry[2] = gif_data[2];	/* b */
+> ++				entry[3] = 0xff;	/* a */
+> ++
+> + 				gif_data += 3;
+> + 			}
+> + 		} else {
+> +
+> diff --git a/recipes/netsurf/hubbub_0.0.1.bb b/recipes/netsurf/hubbub_0.0.1.bb
+> index 0d70b41..bfbe71f 100644
+> --- a/recipes/netsurf/hubbub_0.0.1.bb
+> +++ b/recipes/netsurf/hubbub_0.0.1.bb
+> @@ -5,7 +5,10 @@ PRIORITY = "optional"
+> LICENSE = "MIT"
+> DEPENDS = "libparserutils"
 > 
-> -# enca
-> -yeti_cv_func_scanf_modif_size_t=yes
-> -
-
-set this to 'no'
-
-> # clamav
-> clamav_av_func_working_snprintf_long=${clamav_av_func_working_snprintf_long=yes}
-> clamav_av_have_in_port_t=${clamav_av_have_in_port_t=yes}
-> diff --git a/site/ix86-common b/site/ix86-common
-> index a5c4b60..b7a503f 100644
-> --- a/site/ix86-common
-> +++ b/site/ix86-common
-> @@ -104,9 +104,6 @@ ac_cv_func_posix_getpwnam_r=${ac_cv_func_posix_getpwnam_r=yes}
-> dpkg_cv_va_copy=${ac_cv_va_copy=no}
-> dpkg_cv___va_copy=${ac_cv___va_copy=yes}
+> -SRC_URI = "http://www.netsurf-browser.org/projects/releases/hubbub-${PV}-src.tar.gz"
+> +SRC_URI = "http://www.netsurf-browser.org/projects/releases/hubbub-${PV}-src.tar.gz \
+> +           file://hubbub-uninitialised.patch;patch=1"
+> +
+> +PR = "r1"
 > 
-> -# enca
-> -yeti_cv_func_scanf_modif_size_t=yes
-> -
-
-same here.
-
-> # ettercap
-> ettercap_cv_type_socklen_t=${ettercap_cv_type_socklen_t=yes}
+> inherit pkgconfig
+> 
+> diff --git a/recipes/netsurf/libnsgif_0.0.1.bb b/recipes/netsurf/libnsgif_0.0.1.bb
+> index 3b9cfc2..f2b1138 100644
+> --- a/recipes/netsurf/libnsgif_0.0.1.bb
+> +++ b/recipes/netsurf/libnsgif_0.0.1.bb
+> @@ -4,7 +4,10 @@ SECTION = "libs"
+> PRIORITY = "optional"
+> LICENSE = "MIT"
+> 
+> -SRC_URI = "http://www.netsurf-browser.org/projects/releases/libnsgif-${PV}-src.tar.gz"
+> +SRC_URI = "http://www.netsurf-browser.org/projects/releases/libnsgif-${PV}-src.tar.gz \
+> +           file://libnsgif-strict-aliasing.patch;patch=1"
+> +
+> +PR = "r1"
+> 
+> inherit pkgconfig
+> 
+> diff --git a/recipes/netsurf/netsurf_2.1.bb b/recipes/netsurf/netsurf_2.1.bb
+> index 073f17f..849a8e5 100644
+> --- a/recipes/netsurf/netsurf_2.1.bb
+> +++ b/recipes/netsurf/netsurf_2.1.bb
+> @@ -11,6 +11,8 @@ SRC_URI = "http://www.netsurf-browser.org/downloads/releases/netsurf-${PV}-src.t
+> 	   file://netsurf.desktop \
+> 	   file://Makefile.config"
+> 
+> +PR = "r1"
+> +
+> # Workaround for 2.1 tarball (unpacks into netsurf/, not netsurf-2.1/ )
+> S = "${WORKDIR}/netsurf"
 > 
 > -- 
 > 1.6.0.3
