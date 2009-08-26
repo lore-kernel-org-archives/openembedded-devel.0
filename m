@@ -1,41 +1,41 @@
-Received: from [209.85.222.171] (helo=mail-pz0-f171.google.com)
+Received: from [209.85.146.177] (helo=wa-out-1112.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MgMBb-00017d-NJ
+	(envelope-from <raj.khem@gmail.com>) id 1MgMFJ-0001zC-2C
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Aug 2009 19:21:27 +0200
-Received: by pzk1 with SMTP id 1so382656pzk.3
+	Wed, 26 Aug 2009 19:25:17 +0200
+Received: by wa-out-1112.google.com with SMTP id m34so70663wag.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2009 10:03:27 -0700 (PDT)
+	Wed, 26 Aug 2009 10:07:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=T1/FnXCVu141xNe56dkAVIODlLQlqsmOcnyHLMZmWoY=;
-	b=CjzdpOqn6F6MyHRGH3/v02+VNEdQhWpRtX9ztXwhhgHLS8TpKHSEXAWgIQizswtMOH
-	IEaarOCXcIxRjl908j0038ILnBa29mqJ4KXYa9tEm/Mq60FQYbDRVWwuor3sxhIfCra2
-	xhJubhM5rSG7YaSoR+ikrRtzQWRFM04KR2Ntw=
+	bh=/UMvyOLDwh13d7QTSMuOzE35cB/1gM1QEeDs+DmhALU=;
+	b=O/XQk6JnttddtCa9W+UNRjz9Q89djA9GiEjbMAhT3pY+pg6pl5xYrqKOL0fa67gT6o
+	SGNyosBR5GSs3fqSdLa+B3li6b7aDWanuYQm6sASNmVEAiwlBR0LsY43hNxwY0VNyU14
+	L5omdz7T+Q4tRboFsRBTY+DPzyTshdCOqic5Y=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=bs1fzx5P/LqhJjhfWeGtTa9nZ33KlzVDdswYpfcK6P+Svf0e4ao3qzebBcuudPfOb4
-	sdQiv10FO+nBEle+d0nLxze74kudh3jliSG5WkPlwkirCfuD7HrtPRW/mmD5xUEftMU6
-	EpJfVSAu5S4ouiHw54ROWFDzuVHl8b6unFRGc=
-Received: by 10.141.34.20 with SMTP id m20mr2950179rvj.120.1251306207168;
-	Wed, 26 Aug 2009 10:03:27 -0700 (PDT)
+	b=rSxY1fst8OeY2GgePlyzPhYwtekF7+Gav/VEqihurqTGTtDKTCBVtxJHpX/5jgoeke
+	q1BV8w8gNtaK6lpYgpS7q+fQjjjZDdcp6PxCHZ0aPFbcUvGcYuC5Jb/QaI1pYhYjYE1B
+	NRnEWZzmTiMrya07rs7T/q6nIHhzvJTdAYsUI=
+Received: by 10.114.6.14 with SMTP id 14mr10091149waf.158.1251306438343;
+	Wed, 26 Aug 2009 10:07:18 -0700 (PDT)
 Received: from gmail.com (adsl-71-146-29-169.dsl.pltn13.sbcglobal.net
 	[71.146.29.169])
-	by mx.google.com with ESMTPS id 23sm1880753pzk.12.2009.08.26.10.03.24
+	by mx.google.com with ESMTPS id j15sm1250509waf.51.2009.08.26.10.07.16
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 26 Aug 2009 10:03:25 -0700 (PDT)
-Date: Wed, 26 Aug 2009 10:03:21 -0700
+	Wed, 26 Aug 2009 10:07:17 -0700 (PDT)
+Date: Wed, 26 Aug 2009 10:07:12 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090826170321.GG31371@gmail.com>
-References: <1251299795-28168-1-git-send-email-edoiron@cbnco.com>
+Message-ID: <20090826170712.GH31371@gmail.com>
+References: <1251304572-9983-1-git-send-email-edoiron@cbnco.com>
 MIME-Version: 1.0
-In-Reply-To: <1251299795-28168-1-git-send-email-edoiron@cbnco.com>
+In-Reply-To: <1251304572-9983-1-git-send-email-edoiron@cbnco.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH v2] openvpn: add v2.0.9+2.1rc19
+Subject: Re: [PATCH] usb-modeswitch: add v1.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,54 +49,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2009 17:21:28 -0000
+X-List-Received-Date: Wed, 26 Aug 2009 17:25:18 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (26/08/09 11:16), Evan Doiron wrote:
+On (26/08/09 12:36), Evan Doiron wrote:
 > Signed-off-by: Evan Doiron <edoiron@cbnco.com>
 > ---
-> 
-> Previous Version I forgot to sort checksums, please ignore the first one.
-
-I acked the wrong one.
-
-Acked-by: Khem Raj <raj.khem@gmail.com>
-
-> 
-> 
->  conf/checksums.ini                       |    4 ++++
->  recipes/openvpn/openvpn_2.0.9+2.1rc19.bb |    6 ++++++
->  2 files changed, 10 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/openvpn/openvpn_2.0.9+2.1rc19.bb
+>  conf/checksums.ini                             |    4 ++++
+>  recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb |   23 +++++++++++++++++++++++
+>  2 files changed, 27 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb
 > 
 > diff --git a/conf/checksums.ini b/conf/checksums.ini
-> index 1b3e5db..7718e1c 100644
+> index 2d9e843..29238ff 100644
 > --- a/conf/checksums.ini
 > +++ b/conf/checksums.ini
-> @@ -18690,6 +18690,10 @@ sha256=347c551e7c88affc1f4b7a4b715080253c9298dcc512ed29fe8ca5cd26d015d9
->  md5=7401faebc6baee9add32608709c54eec
->  sha256=063f00d5b889beee910eb113c8cfbb4fc85cd404693494bcaaf79dd09a98335c
+> @@ -24526,6 +24526,10 @@ sha256=dbc5d6921136711f08c197284ec67dc77232559e2e31429f8a30a1a102bd07f7
+>  md5=042c5243ce0253341fe920a8a863e37b
+>  sha256=6d2ae5d70609df7d2c2b518eca0624c4a59328b277ed114b9e5b57dd030e6e94
 >  
-> +[http://openvpn.net/release/openvpn-2.1_rc19.tar.gz]
-> +md5=ba2ee667a8b7606b125b7d32f47ca578
-> +sha256=d7f52e2217ed1cf367ca93257b27c8acb29fcae4fcaa31b4a94146a3c7a7de33
+> +[http://www.draisberghof.de/usb_modeswitch/usb_modeswitch-1.0.2.tar.bz2]
+> +md5=4f896ed631f9be0338df9c5a2145ef82
+> +sha256=f1b9388f4507185a4ac30bae3383d9e9bbb95075a14dd188c904cacdd8cf4e66
 > +
->  [http://downloads.sourceforge.net/gakusei/openwrt-imagetools-svn-rev7641.tar.bz2]
->  md5=7f35543286911b827dcbf8d07a7d72be
->  sha256=bad49b59646dbea380cc88be13a77d17c70488b8e11e85f7dd474930fa9cf36a
-> diff --git a/recipes/openvpn/openvpn_2.0.9+2.1rc19.bb b/recipes/openvpn/openvpn_2.0.9+2.1rc19.bb
+>  [http://www.rpsys.net/openzaurus/patches/archive/usb_pxa27x_udc-r0.patch]
+>  md5=c8193bc27642fa446d702cfdb9464c2a
+>  sha256=2101f292449cbacc277aecc5c649de895d501057f299e8e48a7ec50cfb0a200d
+> diff --git a/recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb b/recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb
 > new file mode 100644
-> index 0000000..9375cd6
+> index 0000000..8debf86
 > --- /dev/null
-> +++ b/recipes/openvpn/openvpn_2.0.9+2.1rc19.bb
-> @@ -0,0 +1,6 @@
-> +require openvpn.inc
+> +++ b/recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb
+> @@ -0,0 +1,23 @@
+> +DESCRIPTION = "A mode switching tool for controlling 'flip flop' (multiple device) USB gear"
+> +SECTION = "base"
+> +PRIORITY = "required"
+> +LICENSE = "GPLv2"
+> +DEPENDS = "libusb"
+
+may be you should depend on virtual/libusb0 
+
 > +
-> +SRC_URI = "http://openvpn.net/release/openvpn-2.1_rc19.tar.gz \
-> +	   file://openvpn"
+> +SRC_URI = "http://www.draisberghof.de/usb_modeswitch/usb_modeswitch-${PV}.tar.bz2"
 > +
-> +S = "${WORKDIR}/openvpn-2.1_rc19"
+> +S = "${WORKDIR}/usb_modeswitch-${PV}"
+> +
+> +PACKAGES = "${PN}"
+> +FILES_${PN} = "${bindir} ${sysconfdir}"
+> +
+> +do_compile() {
+> +	oe_runmake
+> +}
+> +
+> +do_install() {
+> +	install -d ${D}${bindir}
+> +	install -d ${D}${sysconfdir}
+> +	install -m 0755 ${S}/usb_modeswitch ${D}${bindir}/usb_modeswitch
+> +	install -m 0644 ${S}/usb_modeswitch.conf ${D}${sysconfdir}/usb_modeswitch.conf
+> +}
 > -- 
 > 1.6.0.2
 > 
