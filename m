@@ -1,38 +1,31 @@
-Received: from [74.125.78.148] (helo=ey-out-1920.google.com)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <d.vinokuroff@gmail.com>) id 1MgI35-0003ns-Jw
+	(envelope-from <edoiron@cbnco.com>) id 1MgIVw-0002Gh-Eo
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Aug 2009 14:56:23 +0200
-Received: by ey-out-1920.google.com with SMTP id 5so25515eyb.4
+	Wed, 26 Aug 2009 15:26:13 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 3D12C54BCAE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2009 05:38:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=Rp/8NaXeE4dDv+IgyfHwUDOJpYIFgvwTFU7eOcD7PNo=;
-	b=Q+uqKq+QbTE4QvGqMbAN7Va+Pe7wBSqLfLeOpD/2s6Esy+UgPNAO6D83vllgak67qy
-	da4oYh8BffjrEcXsZIDpRclzqFD8XY9dLMDByiErl2uWtSWHgTZ7TNtJlLbPHfthMqKR
-	b2Ok5D+VHDTpfD0GhBvxUh2tmHGDV2O26NQ30=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=lZI9VBfr2dyD1MGPKkL/Kw3yxdHoe5zyhI+LmrqSBLuw0W/pcFn6euivFiXX/+zDfq
-	qlATNVKyxsj/kG1tGLnGJ284eSQnODIVWedvYsdF/yMBc7jv1xheJYo4dazxx5T7IuhH
-	RFUsg3QVlrmhSS9jzfU0X+SKOxW6rlQRzsXY4=
-Received: by 10.210.71.12 with SMTP id t12mr8217992eba.60.1251290306988;
-	Wed, 26 Aug 2009 05:38:26 -0700 (PDT)
-Received: from ?192.168.0.7? ([94.180.47.99])
-	by mx.google.com with ESMTPS id 28sm244493eye.6.2009.08.26.05.38.25
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 26 Aug 2009 05:38:25 -0700 (PDT)
-Message-ID: <4A952CEB.2020006@gmail.com>
-Date: Wed, 26 Aug 2009 18:39:07 +0600
-From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
+	Wed, 26 Aug 2009 09:08:15 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 28833-04 for <openembedded-devel@lists.openembedded.org>; 
+	Wed, 26 Aug 2009 09:08:15 -0400 (EDT)
+Received: from [172.20.22.61] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id C913941F939
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Aug 2009 09:08:14 -0400 (EDT)
+Message-ID: <4A953372.8060000@cbnco.com>
+Date: Wed, 26 Aug 2009 09:06:58 -0400
+From: Evan Doiron <edoiron@cbnco.com>
+User-Agent: Thunderbird 2.0.0.22 (X11/20090605)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Subject: Use '?=' instead of '=' for KERNEL_CC and KERNEL_LD
+References: <1251229783-6077-1-git-send-email-edoiron@cbnco.com>
+	<20090826015850.GA5705@gmail.com>
+In-Reply-To: <20090826015850.GA5705@gmail.com>
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: [PATCH] net-snmp: add v5.4.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,43 +39,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2009 12:56:23 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 26 Aug 2009 13:26:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hello,
+Khem Raj wrote:
+> On (25/08/09 15:49), Evan Doiron wrote:
+>> +
+>> +PARALLEL_MAKE = ""
+>> +CCACHE = ""
+>>     
+> just curious on why CCACHE is disabled.
+>   
+It seems the Parallel_Make and CCache were introduced in the commit below:
 
-Recently I've builded kernel using foreign toolchain and thought that 
-possibility to set KERNEL_CC (and maybe KERNEL_LD too) in local.conf 
-will be more convenient for developers than if it will be hard-coded in 
-kernel.bbclass. Setting HOST_PREFIX is another way of course, but it may 
-have influence on another things. I suggest it because in my case ?= was 
-more convenient and I thought that it may be good thing in general case too.
+        commit 8b12893071b868cd76e88155fcdc2ae2acc3ff1d
+        Author: Sergey Lapin <slapin@ossfans.org>
+        Date:   Thu Jan 29 16:12:06 2009 +0300
 
-What community think about it?
+            net-snmp_svn, net-snmp_5.1.2, net-snmp_5.4.1: extracted
+common parts
 
-diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-index c5192d5..e457bf9 100644
---- a/classes/kernel.bbclass
-+++ b/classes/kernel.bbclass
-@@ -54,8 +54,8 @@ HOST_CC_KERNEL_ARCH ?= "${TARGET_CC_KERNEL_ARCH}"
- TARGET_LD_KERNEL_ARCH ?= ""
- HOST_LD_KERNEL_ARCH ?= "${TARGET_LD_KERNEL_ARCH}"
- 
--KERNEL_CC = "${CCACHE}${HOST_PREFIX}gcc${KERNEL_CCSUFFIX} 
-${HOST_CC_KERNEL_ARCH}"
--KERNEL_LD = "${LD}${KERNEL_LDSUFFIX} ${HOST_LD_KERNEL_ARCH}"
-+KERNEL_CC ?= "${CCACHE}${HOST_PREFIX}gcc${KERNEL_CCSUFFIX} 
-${HOST_CC_KERNEL_ARCH}"
-+KERNEL_LD ?= "${LD}${KERNEL_LDSUFFIX} ${HOST_LD_KERNEL_ARCH}"
- 
- # Where built kernel lies in the kernel tree
- KERNEL_OUTPUT ?= "arch/${ARCH}/boot/${KERNEL_IMAGETYPE}"
+As I do not utilize either Parallel_Make or CCache in my build
+environment, I do not know if it will build properly with caching
+enabled. It seems that since CCache is not disabled in the net-snmp.inc
+that the original author could have intended to allow certain recipes to
+support caching, but as I don't have the facilities to test it I am
+unable to report which (if any) will build with caching enabled.
 
 -- 
-Best Regards, 
-Dmitry Vinokurov 
-<d.vinokuroff@gmail.com>
+Evan Doiron
+Software Developer
+Canadian Bank Note Company Limited
+edoiron@cbnco.com
 
 
 
