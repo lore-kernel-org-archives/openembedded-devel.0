@@ -1,19 +1,40 @@
-Received: from [12.173.51.132] (helo=emailgateway.hillcrestlabs.com)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Chris.Conroy@hillcrestlabs.com>) id 1MgKs6-0003pR-4f
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1MgKw2-000449-Dm
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Aug 2009 17:57:14 +0200
-X-AuditID: 0a1e000a-b7ba8ae000000dd5-25-4a955721daeb
-From: Chris Conroy <Chris.Conroy@hillcrestlabs.com>
+	Wed, 26 Aug 2009 18:01:18 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id C56BA2200126
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Aug 2009 17:43:20 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id C748C22000FA
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Aug 2009 17:43:19 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from rhein.familie-heinold.de (g225147168.adsl.alicedsl.de
+	[92.225.147.168]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Aug 2009 17:43:19 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 0462F3C327; Wed, 26 Aug 2009 17:43:18 +0200 (CEST)
+Date: Wed, 26 Aug 2009 17:43:18 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4A9539AA.3070306@gmail.com>
-References: <4A9539AA.3070306@gmail.com>
-Date: Wed, 26 Aug 2009 11:39:10 -0400
-Message-Id: <1251301150.4493.12.camel@conroy-linux>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-Brightmail-Tracker: AAAAAA==
-Subject: Re: Strange do_patch behaviour
+Message-ID: <20090826154318.GA6402@rhein.zuhause.netz>
+References: <1251210375.4215.525.camel@lenovo.internal.reciva.com>
+	<4A943429.3070902@balister.org>
+MIME-Version: 1.0
+In-Reply-To: <4A943429.3070902@balister.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: OEDEM November 2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,38 +48,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2009 15:57:14 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 26 Aug 2009 16:01:18 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, 2009-08-26 at 19:33 +0600, Dmitry Vinokurov wrote:
-> ------------
-> And looks like bitbake did nothing except patching, but actually it does 
-> (diff between manually and bitbake patched dirs is ~30000 strings, and I 
-> decided not to attach it:)) and as a result builded kernel fails with 
-> kernel panic. Diff shows, that '.pc' dir is created (and some files in 
-> it are forbidden for any access (0000 rights)) and not only it -- some 
-> other files like in arch/arm or sound/soc/lpc3xxx/ differs too. Tried to 
-> remove tmp/ and rebuild -- same result.
-> 
-> Could anybody explain this strange behaviour? I thought that patch task 
-> should only execute 'patch' command.
-> 
+Hi,
 
-Bitbake uses a tool called 'quilt' in order to do the patching, and
-quilt creates the .pc directory. Basically, quilt lets you deal with
-patches as a stack. If you go into the linux work directory, you should
-be able to run quilt commands to manually figure out what OE is patching
-here.
+I think I will come too.
 
-'quilt applied' to see what patches are applied
-'quilt pop' to pop a patch off the stack
-'quilt push' to push a patch onto the stack.
-
-Some Quilt Links:
-Very helpful presentation: http://www.coffeebreaks.org/blogs/wp-content/archives/talks/2005/quilt/quiltintro-s5.html
-Overview PDF: http://www.suse.de/~agruen/quilt.pdf
-Savannah page: http://savannah.nongnu.org/projects/quilt
-
+Bye Henning
 
 
