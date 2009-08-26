@@ -1,25 +1,35 @@
-Received: from [66.46.182.56] (helo=relay.ihostexchange.net)
+Received: from [74.125.92.150] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rlisagor@wurldtech.com>) id 1MgQb4-000876-0q
+	(envelope-from <graham.gower@gmail.com>) id 1MgQg3-0008Ia-Rh
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Aug 2009 00:04:06 +0200
-Received: from VMBX115.ihostexchange.net ([192.168.30.15]) by
-	hub106.ihostexchange.net ([66.46.182.56]) with mapi; Wed, 26 Aug 2009
-	17:45:58 -0400
-From: Roman Lisagor <rlisagor@wurldtech.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 26 Aug 2009 17:45:57 -0400
-Thread-Topic: Contract work
-Thread-Index: AcomlpghLN6SL8R8S0u8JzlxWQfm2w==
-Message-ID: <578E0D7769137447A5A8468024190AE718B73FAEE8@VMBX115.ihostexchange.net>
-Accept-Language: en-US
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Thu, 27 Aug 2009 00:09:16 +0200
+Received: by qw-out-1920.google.com with SMTP id 4so74162qwk.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Aug 2009 14:51:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=kapMgU/pe3eeCczu55615BV4FaHwCYl9ikp0glqJ2Js=;
+	b=DqeaGlCnQb24MFzWirVMyPnC2mEse+I8zk4SKAhaBine/9lbbaB+pvMNDHLEFC3otV
+	ePB85EGcNKU8H5KKMTOB3dhAMTjL9PiZWNFQlN74oHDAgbRY8P9gcRS5c8T3DbWTSrg+
+	uiFWDvjN3WN5TzJ/npjpWe6qZNs2mQzibapdI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=LhGUTjq0ULK1vT2pYUF7ImZtQQ1DvXhi3EOobjAIrNUW8H5pYUivK/SZ5zBZGzUc8p
+	E5jitWc/X6sLaIQvL0Z0zapm7t9otVFr9w3ijfvV0QImjZl8o608Y7B549FIkQU/XI3W
+	RRB5DbKrqvW8kDSwWc+/BDfYXfDr/JqBgCo8c=
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Contract work
+Received: by 10.229.28.8 with SMTP id k8mr2533360qcc.78.1251323472229; Wed, 26 
+	Aug 2009 14:51:12 -0700 (PDT)
+In-Reply-To: <20090826165220.GB31371@gmail.com>
+References: <4A94E1CC.2090404@gmail.com> <20090826165220.GB31371@gmail.com>
+Date: Thu, 27 Aug 2009 07:21:12 +0930
+Message-ID: <6ec4247d0908261451r658d237bkcb0b374a0eed62e9@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] enca_1.9.bb: remove unused configure test which is bound to fail.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,96 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2009 22:04:29 -0000
-X-Groupsio-MsgNum: 12795
-Content-Language: en-US
-Content-Type: multipart/related;
-	boundary="_004_578E0D7769137447A5A8468024190AE718B73FAEE8VMBX115ihoste_";
-	type="multipart/alternative"
-
---_004_578E0D7769137447A5A8468024190AE718B73FAEE8VMBX115ihoste_
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 26 Aug 2009 22:09:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Dear OE developers,
+2009/8/27 Khem Raj <raj.khem@gmail.com>:
+>> +do_configure_prepend() {
+>> + =A0 =A0 # remove failing test which checks for something that isn't ev=
+en used
+>> + =A0 =A0 sed -i -e '/ye_FUNC_SCANF_MODIF_SIZE_T/d' configure.ac
+>> +}
+>
+> you may not require this hunk. see below
+>
 
-I work for Wurldtech Security Technologies in Vancouver, Canada. We are cur=
-rently creating a network appliance (a firewall) and would like to use Open=
-Embedded for the project. I've been fairly successful in trying to get the =
-system to build; however, there have been some breakages and not all the pa=
-ckages we need are currently available as recipes.
+>> -# enca
+>> -yeti_cv_func_scanf_modif_size_t=3Dyes
+>> -
+>
+> set this to 'no'
+>
 
-Unfortunately we don't have the manpower to perform all the customizations =
-ourselves, so we're looking for outside help! If any of you are interested =
-in doing some contract-based work, please send me an email and let me know.=
- I can then send you a more detailed description of what we need. We are cu=
-rrently collecting estimates and would like to get started soon.
-
-Thanks in advance!
-
-Roman
-
-[cid:image001.png@01CA265B.EBC312F0]
-Roman Lisagor
-Senior Software Developer
-Wurldtech Security Technologies Inc.
-Suite 1680 - 401 West Georgia St.
-Vancouver, B.C.  V6B 5A1
-Canada
-Phone:       + 1.604.669.6674
-Toll Free:   + 1.877.369.6674
-Fax:           + 1.604.669.2902
-Website:    http://www.wurldtech.com/
+>> -# enca
+>> -yeti_cv_func_scanf_modif_size_t=3Dyes
+>> -
+>
+> same here.
 
 
-"ARE YOU ACHILLES CERTIFIED?"
+The two site files that specify yeti_cv_func_scanf_modif_size_t=3Dyes
+probably make things work on those two systems. But every other system
+will fail to configure. Hence, a fix which is independent of the
+architecture. And with that fix, I figured the arch dependent fixes
+should be removed.
+
+-Graham
 
 
-This message is intended only for the named recipients.  This message may c=
-ontain information that is privileged, confidential or exempt from disclosu=
-re under applicable law.  Any dissemination or copying of this message by a=
-nyone other than a named recipient is strictly prohibited.  If you are not =
-a named recipient or an employee or agent responsible for delivering this m=
-essage to a named recipient, please notify us immediately by telephone at 6=
-04-669-6674, and permanently destroy this message and any copies you may ha=
-ve. Email may not be secure unless properly encrypted.
-
-
---_004_578E0D7769137447A5A8468024190AE718B73FAEE8VMBX115ihoste_
-Content-Type: image/png; name="image001.png"
-Content-Description: image001.png
-Content-Disposition: inline; filename="image001.png"; size=1533;
-	creation-date="Wed, 26 Aug 2009 17:45:58 GMT";
-	modification-date="Wed, 26 Aug 2009 17:45:58 GMT"
-Content-ID: <image001.png@01CA265B.EBC312F0>
-Content-Transfer-Encoding: base64
-
-iVBORw0KGgoAAAANSUhEUgAAAEsAAAAYCAYAAACyVACzAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
-jwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0
-U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAVWSURBVFhHzZl7bBRVFMbvbmmhRWzT0IKU
-SBMlNEaRYJCkqYSy3VIUQyFNSngYlcTUlILVanx0u1VJgG0BlSBCmtZaRMJDKelL/UMTjY+g8RnB
-RHloai3loYhVUmD9vnXHjMO5M9NlV2zyJbvn3jM75zfnnnPv1KOKg+1KqVsg48+DD8egEui8yS59
-LICxFaKP+a8CX95y8E3CeAeUB4VNc79TFy/efV1m+vmFt+Upr9erwuFwLsaLoXzoJigLShV+1+En
-Yx5mfAO4hWAQCgsqhI3jdtqi8W1z4TtD9PXXNaaUPK2W1+9Tqxu6JlSu79gK/QKFr7JOE8Rk6E/h
-xgnCDtRojB/XwOqHPcPBf53gO6R8tbfOqmpWD2/ongE4R68yIPMD6jdgvC3cOEEQiA7YPA0oI0vL
-bHxTMHb4Mn9f4IPsspBaFeqcuHJ9R+//CBShDRog7tMETiA6WM0OsHbb+M4SfefUVs1e3cKsarEB
-xSX5DrQT2gG1DUP9wnX/gG0X9DLUqtErsG82QGTj5k8JAbRoAk6H/ScHWKcxnqXx33yZr7/ut7T5
-z45fsWZ/ZlWoU1ejmnDTuZCKUe8KsE7ANsrN9cxZ86oQ/M+a2lPqAMpYissEWGmwHRWWYPuNy55X
-1Y3dxZqsetNNQA5z3hOuPQDbWDfXNsO6SwNgkRCwBFbqqO2C71zNEiy/vWI7l+ASDSx2xVgzyvCL
-Gyz5iRcHd1kCzsT3E0LAB2C7YLGfxfcJFv8mwbdP+QIZ82rakFld8zWwzsC+HBp9BdDiBotZtlEI
-hLXMXHvKhTmENwWSthIrTLCu1dS6baoooEqfeE091Ng1ETB+tynwRzC2D6qBfNC4YcCLKyxuFC8J
-MMy1Z68wThthsyFYl2OPCdYCzVKfTVgL/4bFJbPdBpZ1c3oKcz9kt4KWQpNs4MUVlhfBfCoEZNQe
-ds0zwjizjbCkuncO9knRcanWHcJYMjajqqi6VVVv6CasDIjbg1h27b/Cbw+UL0CLKywG/KgAg7Vn
-DLRYGBuAjXWMvtdAPwpzHoBtJMS51sx7JuLrC6jcJZuMzCKwVKge6osR2hD8nrQAizusG3Dzg5ql
-uEOwM1vMXXWbMGc/bOyqVlBDsN0c8ffXqRHRM+Gqhk5z18tGwOyQL0EfQyeHCY++ce+G5oBZZ6yB
-fa3JDO65zL5+wZcb1M8F+/v/+CKzkkvqVXlgNw/QdluELARfAD0INUOHHOB9hvGkKLC4ZxYDv0cI
-TNpH9WEed/NmWKn4fsSlf6Xyw7fwKZW1aJ1aHNjjBEqCmAIQhVCPBtog7NcnEtZYBHvSRcC649AL
-LnzPAlSOB8tv6v1bVMXaA6hXkeIeq7zwZRZJTWFaImExU1pdBHynJauMDJMPyv9e2q+zAxZUNqma
-jT0K58FYIZn9WNOssC7AlpdoWCUOsH7AOLuf9FaCne9bW39foCynvDGy7FaGIjWFmRGL0uA3FdLt
-zY5jjJ2VUBNSswhgFPS9TcBbNaAMeA02vr2eoroxCx7fyYPzvQjiS+iLGEQ/viBk9uj2ZJtMSzth
-sBh0yCZgnwOsmRiXTgNh7NZfzChdyyftxUu+Txy6WSwbU8PnGK49/r+CNR0BWw/H7IrMOGae3Wvn
-ERj/SoQ9p/aO6BuGmQjkUoJg8Qw53dIwEppZHgR7UAj4OQdQBsQ1gu83SXPrk5cG97JeDecM6DbD
-eAjnS8IcobMeFB7MOdi4d3NsMHaZYYxVImAeU/hPCIp7q3yXsKZhXq/JdwDHmsfGlTWw+6VHaxVf
-9V6JeBw6DL0BPQJNtgmcD4cd86Oo+JkvFXkWdYT1F4+ZBksAyvn1AAAAAElFTkSuQmCC
-
---_004_578E0D7769137447A5A8468024190AE718B73FAEE8VMBX115ihoste_--
