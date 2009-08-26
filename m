@@ -1,45 +1,25 @@
-Received: from [203.97.37.64] (helo=smtp4.clear.net.nz)
+Received: from [66.46.182.56] (helo=relay.ihostexchange.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <matthew@4d-electronics.co.nz>) id 1MgQST-0007un-GE
+	(envelope-from <rlisagor@wurldtech.com>) id 1MgQb4-000876-0q
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Aug 2009 23:55:10 +0200
-Received: from tardis.4d-electronics.co.nz
-	(202-0-56-223.cable.telstraclear.net [202.0.56.223])
-	by smtp4.clear.net.nz (CLEAR Net Mail)
-	with ESMTP id <0KP000EJG6OIQP10@smtp4.clear.net.nz> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	27 Aug 2009 09:36:19 +1200 (NZST)
-Received: from localhost (localhost [127.0.0.1])	by tardis.4d-electronics.co.nz
-	(Postfix) with ESMTP id 5086B5CE258	for
-	<openembedded-devel@lists.openembedded.org>; Thu,
-	27 Aug 2009 09:36:18 +1200 (NZST)
-Received: from tardis.4d-electronics.co.nz ([127.0.0.1])
-	by localhost (tardis.4d-electronics.co.nz [127.0.0.1])
-	(amavisd-new, port 10024)	with ESMTP id 0-USQg6hGa1d	for
-	<openembedded-devel@lists.openembedded.org>; Thu,
-	27 Aug 2009 09:36:17 +1200 (NZST)
-Received: from [192.168.1.129] (unknown [192.168.1.129])
-	by tardis.4d-electronics.co.nz (Postfix) with ESMTPS id E3AD65CE222	for
-	<openembedded-devel@lists.openembedded.org>; Thu,
-	27 Aug 2009 09:36:17 +1200 (NZST)
-Date: Thu, 27 Aug 2009 09:36:17 +1200
-From: Matthew Dombroski <matthew@4d-electronics.co.nz>
-In-reply-to: <4A9516B5.9000602@epfl.ch>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <4A95AAD1.4040703@4d-electronics.co.nz>
-MIME-version: 1.0
-X-Virus-Scanned: by Amavis+SpamAssassin+ClamAV and more at	4d-electronics.co.nz
-X-Spam-Flag: NO
-X-Spam-Score: -1.44
-References: <4A937831.2000304@4d-electronics.co.nz> <4A93A9E3.7090605@epfl.ch>
-	<4A9461C3.2000406@4d-electronics.co.nz> <4A94DA90.8090306@epfl.ch>
-	<4A9516B5.9000602@epfl.ch>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-GB; rv:1.9.1.1) Gecko/20090715
-	Thunderbird/3.0b3
-X-Spam-Status: No, score=-1.44 tagged_above=-99 required=5
-	tests=[ALL_TRUSTED=-1.44]
-X-Spam-Level: 
-Subject: Re: [PATCH] Add toolchain file generation to cmake bbclass
+	Thu, 27 Aug 2009 00:04:06 +0200
+Received: from VMBX115.ihostexchange.net ([192.168.30.15]) by
+	hub106.ihostexchange.net ([66.46.182.56]) with mapi; Wed, 26 Aug 2009
+	17:45:58 -0400
+From: Roman Lisagor <rlisagor@wurldtech.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 26 Aug 2009 17:45:57 -0400
+Thread-Topic: Contract work
+Thread-Index: AcomlpghLN6SL8R8S0u8JzlxWQfm2w==
+Message-ID: <578E0D7769137447A5A8468024190AE718B73FAEE8@VMBX115.ihostexchange.net>
+Accept-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Contract work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,42 +33,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2009 21:55:22 -0000
-Content-type: text/plain; charset=ISO-8859-1; format=flowed
-Content-transfer-encoding: 7bit
+X-List-Received-Date: Wed, 26 Aug 2009 22:04:29 -0000
+X-Groupsio-MsgNum: 12795
+Content-Language: en-US
+Content-Type: multipart/related;
+	boundary="_004_578E0D7769137447A5A8468024190AE718B73FAEE8VMBX115ihoste_";
+	type="multipart/alternative"
 
-> I have tried it, and the only thing I now have in the EXTRA_OECMAKE is 
-> QT_QMAKE_EXECUTABLE to be sure that it takes the one from staging and 
-> not the one from my system.
->
->> inherit qt4e cmake
->> EXTRA_OECMAKE += "-DSHARED_LIBS:BOOL=ON -DCMD_LINE:BOOL=ON \
->>         -DQT_QMAKE_EXECUTABLE=${OE_QMAKE_QMAKE} \
->>         "
->>
->> export QT_CONF_PATH="${WORKDIR}/trunk/qt.conf"
->>
->> do_configure_prepend() {
->>     echo "[Paths]" > $QT_CONF_PATH
->>     echo "Prefix=${STAGING_DIR}/${HOST_SYS}/usr" >> $QT_CONF_PATH
->>     echo "Documentation=${docdir}/${QT_DIR_NAME}" >> $QT_CONF_PATH
->>     echo "Headers=${STAGING_INCDIR}/${QT_DIR_NAME}" >> $QT_CONF_PATH
->>     echo "Libraries=${STAGING_LIBDIR}" >> $QT_CONF_PATH
->>     echo "Binaries=${STAGING_BINDIR_NATIVE}" >> $QT_CONF_PATH
->>     echo "Plugins=${libdir}/${QT_DIR_NAME}/plugins" >> $QT_CONF_PATH
->>     echo "Data=${datadir}/${QT_DIR_NAME}" >> $QT_CONF_PATH
->>     echo "Translations=${datadir}/${QT_DIR_NAME}/translations" >> 
->> $QT_CONF_PATH
->>     echo "Settings=${sysconfdir}/${QT_DIR_NAME}" >> $QT_CONF_PATH
->>     echo "Examples=${bindir}/${QT_DIR_NAME}/examples" >> $QT_CONF_PATH
->>     echo "Demos=${bindir}/${QT_DIR_NAME}/demos" >> $QT_CONF_PATH
->> }
->>
-That looks quite good now, maybe it's a good idea to add a 
-generate_qt_conf() to qmake2.bbclass.
-That way it's independent of what build system we're using.
+--_004_578E0D7769137447A5A8468024190AE718B73FAEE8VMBX115ihoste_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-~Matt
+Dear OE developers,
+
+I work for Wurldtech Security Technologies in Vancouver, Canada. We are cur=
+rently creating a network appliance (a firewall) and would like to use Open=
+Embedded for the project. I've been fairly successful in trying to get the =
+system to build; however, there have been some breakages and not all the pa=
+ckages we need are currently available as recipes.
+
+Unfortunately we don't have the manpower to perform all the customizations =
+ourselves, so we're looking for outside help! If any of you are interested =
+in doing some contract-based work, please send me an email and let me know.=
+ I can then send you a more detailed description of what we need. We are cu=
+rrently collecting estimates and would like to get started soon.
+
+Thanks in advance!
+
+Roman
+
+[cid:image001.png@01CA265B.EBC312F0]
+Roman Lisagor
+Senior Software Developer
+Wurldtech Security Technologies Inc.
+Suite 1680 - 401 West Georgia St.
+Vancouver, B.C.  V6B 5A1
+Canada
+Phone:       + 1.604.669.6674
+Toll Free:   + 1.877.369.6674
+Fax:           + 1.604.669.2902
+Website:    http://www.wurldtech.com/
 
 
+"ARE YOU ACHILLES CERTIFIED?"
 
+
+This message is intended only for the named recipients.  This message may c=
+ontain information that is privileged, confidential or exempt from disclosu=
+re under applicable law.  Any dissemination or copying of this message by a=
+nyone other than a named recipient is strictly prohibited.  If you are not =
+a named recipient or an employee or agent responsible for delivering this m=
+essage to a named recipient, please notify us immediately by telephone at 6=
+04-669-6674, and permanently destroy this message and any copies you may ha=
+ve. Email may not be secure unless properly encrypted.
+
+
+--_004_578E0D7769137447A5A8468024190AE718B73FAEE8VMBX115ihoste_
+Content-Type: image/png; name="image001.png"
+Content-Description: image001.png
+Content-Disposition: inline; filename="image001.png"; size=1533;
+	creation-date="Wed, 26 Aug 2009 17:45:58 GMT";
+	modification-date="Wed, 26 Aug 2009 17:45:58 GMT"
+Content-ID: <image001.png@01CA265B.EBC312F0>
+Content-Transfer-Encoding: base64
+
+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
+
+--_004_578E0D7769137447A5A8468024190AE718B73FAEE8VMBX115ihoste_--
