@@ -1,36 +1,43 @@
-Received: from [74.125.78.150] (helo=ey-out-1920.google.com)
+Received: from [209.85.218.221] (helo=mail-bw0-f221.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MgOpq-00028i-82
+	(envelope-from <martin.jansa@gmail.com>) id 1MgOsG-0002Dq-Op
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 Aug 2009 22:11:10 +0200
-Received: by ey-out-1920.google.com with SMTP id 5so107778eyb.4
+	Wed, 26 Aug 2009 22:13:41 +0200
+Received: by bwz21 with SMTP id 21so385070bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2009 12:53:11 -0700 (PDT)
+	Wed, 26 Aug 2009 12:55:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=C2at0NxKnnDJGf/Tw/2AlxyvB2rCeRHBacCocpkJWM8=;
-	b=f+iF9QFy7Pvoj2y3VVUdimBz7U8wGT+Olt4A1ODLs8w71fcHDztyuA7BPjSABTcO80
-	QPelgUadAwF4REfhWbJdZs3QrXXIl1jFTIug2TG5Av1sI51qoRhiQjBuASR41jcVb6k6
-	3LLHcPDWRZJhlxP60f0xo+sNXVQNhqdjBtoz4=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=fdKXtpVl5XK5fQL8InpvLcoXUHBZg5JN17CFwMROgkY=;
+	b=mqpyv4eRy2ybpnK3TuSLMttH1/BDQf/v6xJeUGY5l2yuqvHDO6YfFimXvvEQyWta3G
+	PmsNtW9DUzcjey8PT853paBntDHZRYasy+voM/pOZPv/Oqpvpdx2d7meQ3+7s+J3IFDJ
+	5O52RccVkJMpELJ0S62JQXea9IhJfUr4Dg7nA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=KFpFRXZn6iDzNuErXDpC0EPTIL5lXZTjP57MpR5hLs+ttOeViBx+r+QTwDRXajSuLe
-	rEy6lJBQq77Zk+tCxKDDQyICUzQb2DAX4yZzPnIWuP//MHRpjCmxMidzQpT6iPY9yH30
-	7/Ld9KDx+XAYiGc6ApRIAY30oCkcn6UwP5oXs=
-MIME-Version: 1.0
-Received: by 10.210.138.16 with SMTP id l16mr8373032ebd.72.1251316391697; Wed, 
-	26 Aug 2009 12:53:11 -0700 (PDT)
-In-Reply-To: <1251310467-24825-1-git-send-email-edoiron@cbnco.com>
-References: <20090826170712.GH31371@gmail.com>
-	<1251310467-24825-1-git-send-email-edoiron@cbnco.com>
-Date: Wed, 26 Aug 2009 12:53:11 -0700
-Message-ID: <19c1b8a90908261253w5af5a234o133b624d7f292739@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=gz22cgluSQuoU0pufYCLdzW4xNWBlSP0ks1XZXj5c1OineXkw2WWRkdsFvvlqsg+Nv
+	MyCriCLYGYCfEil21RYDv4rPZwGgdOzyx6SfUR4mYbNd6ly6UCjLJTqCbxX4X/G7CUKR
+	KL77MbkAohaNpoInYguynxpFQbT+5cjiTJ1Lg=
+Received: by 10.103.126.27 with SMTP id d27mr3847403mun.56.1251316539877;
+	Wed, 26 Aug 2009 12:55:39 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 14sm8764157muo.3.2009.08.26.12.55.38
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 26 Aug 2009 12:55:38 -0700 (PDT)
+Date: Wed, 26 Aug 2009 21:55:16 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] usb-modeswitch: add v1.0.2
+Message-ID: <20090826195516.GB31617@jama>
+References: <20090820032802.GA32010@denix.org>
+	<200908200752.58210.holger+oe@freyther.de>
+	<20090820071052.GA459@denix.org> <h6j1rj$nvf$1@ger.gmane.org>
+	<20090820090136.GD459@denix.org> <20090820094642.GA16618@jama>
+MIME-Version: 1.0
+In-Reply-To: <20090820094642.GA16618@jama>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: Use AUTOREV and have revision/commit number in package name?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,85 +51,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2009 20:11:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 26 Aug 2009 20:13:43 -0000
+X-Groupsio-MsgNum: 12793
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="+nBD6E3TurpgldQp"
+Content-Disposition: inline
+
+--+nBD6E3TurpgldQp
+Content-Type: multipart/mixed; boundary="GID0FwUMdk1T2AWN"
+Content-Disposition: inline
+
+--GID0FwUMdk1T2AWN
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 26, 2009 at 11:14 AM, Evan Doiron<edoiron@cbnco.com> wrote:
-> Signed-off-by: Evan Doiron <edoiron@cbnco.com>
+On Thu, Aug 20, 2009 at 11:46:42AM +0200, Martin Jansa wrote:
+> Just out of my curiosity:
+>=20
+> How are PREFERRED_VERSION_pkg supposed to work when I prefer pkg with
+> autoreved revision.
+>=20
+> bbfile will be named like pkg_git.bb
+> inside will be PV=3D"1.0.0+gitr${SRCPV}" and DEFAULT_PREFERENCE=3D-1
+>=20
+> I would like to force using this _git version even when there will be
+> pkg_1.1.0.bb with PV=3D"1.1.0"
+>=20
+> For fixed revision ie from sane-srcrevs i can bump PREFERRED_VERSION_pkg
+> with every revision bump in sane-srcrevs, but it also suboptimal :/.
+>=20
+> With autorev I cannot set PREFERRED_VERSION_pkg at all, if I understand
+> it right, because I never know which string will be in ${SRCPV} and
+> using just PREFERRED_VERSION_pkg=3D"1.0.0+git" or "git" ends with
+> "preferred version is not available". Setting PREFERRED_VERSION_pkg to
+> "1.0.0+gitr${SRCPV}" is not expanded and ends with a bit confusing=20
+> bitbake exception about SRC_URI not referencing some SCM.
+>=20
+> I've asked on IRC and they said that its common practise to remove
+> PREFERRED_VERSION_pkg and adjust DEFAULT_PREFERENCE or blacklist all
+> other versions (like that with PV=3D"1.1.0").
+>=20
+> Now I solved my problem with updating PV in recipies which weren't
+> preferred by bitbake to latest version from all available (moved to
+> PV=3D"1.1.0+gitr${SRCPV}" when pkg_1.1.0.bb is commited and removed
+> DEFAULT_PREFERENCE=3D-1.
+>=20
+> Could it be solved better? Something like:
+> 1) use .bb file with exact the same PV
+> 2) use .bb file where PV starts with the same string as is in
+> PREFERRED_VERSION_pkg if exact is not found and print warning.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+What about this small patch in attachment?
 
-> ---
-> =C2=A0conf/checksums.ini =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A04 ++++
-> =C2=A0recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb | =C2=A0 23 ++++++++=
-+++++++++++++++
-> =C2=A02 files changed, 27 insertions(+), 0 deletions(-)
-> =C2=A0create mode 100644 recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb
->
-> diff --git a/conf/checksums.ini b/conf/checksums.ini
-> index 2d9e843..29238ff 100644
-> --- a/conf/checksums.ini
-> +++ b/conf/checksums.ini
-> @@ -24526,6 +24526,10 @@ sha256=3Ddbc5d6921136711f08c197284ec67dc77232559=
-e2e31429f8a30a1a102bd07f7
-> =C2=A0md5=3D042c5243ce0253341fe920a8a863e37b
-> =C2=A0sha256=3D6d2ae5d70609df7d2c2b518eca0624c4a59328b277ed114b9e5b57dd03=
-0e6e94
->
-> +[http://www.draisberghof.de/usb_modeswitch/usb_modeswitch-1.0.2.tar.bz2]
-> +md5=3D4f896ed631f9be0338df9c5a2145ef82
-> +sha256=3Df1b9388f4507185a4ac30bae3383d9e9bbb95075a14dd188c904cacdd8cf4e6=
-6
-> +
-> =C2=A0[http://www.rpsys.net/openzaurus/patches/archive/usb_pxa27x_udc-r0.=
-patch]
-> =C2=A0md5=3Dc8193bc27642fa446d702cfdb9464c2a
-> =C2=A0sha256=3D2101f292449cbacc277aecc5c649de895d501057f299e8e48a7ec50cfb=
-0a200d
-> diff --git a/recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb b/recipes/usb=
--modeswitch/usb-modeswitch_1.0.2.bb
-> new file mode 100644
-> index 0000000..3919106
-> --- /dev/null
-> +++ b/recipes/usb-modeswitch/usb-modeswitch_1.0.2.bb
-> @@ -0,0 +1,23 @@
-> +DESCRIPTION =3D "A mode switching tool for controlling 'flip flop' (mult=
-iple device) USB gear"
-> +SECTION =3D "base"
-> +PRIORITY =3D "required"
-> +LICENSE =3D "GPLv2"
-> +DEPENDS =3D "virtual/libusb0"
-> +
-> +SRC_URI =3D "http://www.draisberghof.de/usb_modeswitch/usb_modeswitch-${=
-PV}.tar.bz2"
-> +
-> +S =3D "${WORKDIR}/usb_modeswitch-${PV}"
-> +
-> +PACKAGES =3D "${PN}"
-> +FILES_${PN} =3D "${bindir} ${sysconfdir}"
-> +
-> +do_compile() {
-> + =C2=A0 =C2=A0 =C2=A0 oe_runmake
-> +}
-> +
-> +do_install() {
-> + =C2=A0 =C2=A0 =C2=A0 install -d ${D}${bindir}
-> + =C2=A0 =C2=A0 =C2=A0 install -d ${D}${sysconfdir}
-> + =C2=A0 =C2=A0 =C2=A0 install -m 0755 ${S}/usb_modeswitch ${D}${bindir}/=
-usb_modeswitch
-> + =C2=A0 =C2=A0 =C2=A0 install -m 0644 ${S}/usb_modeswitch.conf ${D}${sys=
-confdir}/usb_modeswitch.conf
-> +}
-> --
-> 1.6.0.2
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Is there better character for wildchar ('*')?
+
+For this type of PVs is wildchar usefull only in the end of
+PREFERRED_VERSION_pkg, would someone need it somewhere else?
+
+Testing regexp match seems like too much for me, at least because
+preferred versions contain '.' now and it would be confusing to use
+regexp without escaping them.
+
+Regards,
+
+--=20
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr=20
+JaMa                        =20
+
+--GID0FwUMdk1T2AWN
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename="0001-Allow-as-wildcard-in-the-end-of-PREFERRED_VERSION_pk.patch"
+Content-Transfer-Encoding: quoted-printable
+
+From b65bb3e5bf29c59f2f1da297a89af6c02a1a2a4f Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 26 Aug 2009 21:49:33 +0200
+Subject: [PATCH] Allow % as wildcard in the end of PREFERRED_VERSION_pkg
+
+---
+ lib/bb/providers.py |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/lib/bb/providers.py b/lib/bb/providers.py
+index 8970fb3..b2a9fea 100644
+--- a/lib/bb/providers.py
++++ b/lib/bb/providers.py
+@@ -96,7 +96,7 @@ def findPreferredProvider(pn, cfgData, dataCache, pkg_pn =
+=3D None, item =3D None):
+         for file_set in pkg_pn:
+             for f in file_set:
+                 pe,pv,pr =3D dataCache.pkg_pepvpr[f]
+-                if preferred_v =3D=3D pv and (preferred_r =3D=3D pr or pre=
+ferred_r =3D=3D None) and (preferred_e =3D=3D pe or preferred_e =3D=3D None=
+):
++                if (pv =3D=3D preferred_v or (preferred_v !=3D None and pr=
+eferred_v.endswith('%') and pv.startswith(preferred_v[:len(preferred_v)-1])=
+)) and (pr =3D=3D preferred_r or preferred_r =3D=3D None) and (pe =3D=3D pr=
+eferred_e or preferred_e =3D=3D None):
+                     preferred_file =3D f
+                     preferred_ver =3D (pe, pv, pr)
+                     break
+--=20
+1.6.4
 
 
+--GID0FwUMdk1T2AWN--
+
+--+nBD6E3TurpgldQp
+Content-Type: application/pgp-signature
+Content-Disposition: inline
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.11 (GNU/Linux)
+
+iEYEARECAAYFAkqVkyQACgkQN1Ujt2V2gBy97wCfYlu1HB4LDNfZLBJG6HGBvwSF
+QBUAnA7BiAjRNBPG6W4WzV9/WKhD8r8R
+=Sk5N
+-----END PGP SIGNATURE-----
+
+--+nBD6E3TurpgldQp--
