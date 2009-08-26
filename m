@@ -1,23 +1,21 @@
-Received: from [128.178.224.219] (helo=smtp0.epfl.ch)
+Received: from [128.178.224.226] (helo=smtp3.epfl.ch)
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <valentin.longchamp@epfl.ch>) id 1MgMTX-0002dv-UY
-	for openembedded-devel@openembedded.org; Wed, 26 Aug 2009 19:40:00 +0200
-Received: (qmail 29534 invoked by uid 107); 26 Aug 2009 17:21:48 -0000
+	(envelope-from <valentin.longchamp@epfl.ch>) id 1MgMaH-0002zv-SX
+	for openembedded-devel@openembedded.org; Wed, 26 Aug 2009 19:46:57 +0200
+Received: (qmail 6622 invoked by uid 107); 26 Aug 2009 17:28:55 -0000
 X-Virus-Scanned: ClamAV
 Received: from lsa1pc7.epfl.ch (128.178.145.53) (authenticated)
-	by smtp0.epfl.ch (AngelmatoPhylax SMTP proxy);
-	Wed, 26 Aug 2009 19:21:48 +0200
-Message-ID: <4A956F2C.70301@epfl.ch>
-Date: Wed, 26 Aug 2009 19:21:48 +0200
+	by smtp3.epfl.ch (AngelmatoPhylax SMTP proxy);
+	Wed, 26 Aug 2009 19:28:55 +0200
 From: Valentin Longchamp <valentin.longchamp@epfl.ch>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4A937831.2000304@4d-electronics.co.nz>
-	<4A93A9E3.7090605@epfl.ch>	<4A9461C3.2000406@4d-electronics.co.nz>
-	<4A94DA90.8090306@epfl.ch>
-In-Reply-To: <4A94DA90.8090306@epfl.ch>
-Subject: Re: [PATCH] Add toolchain file generation to cmake bbclass
+Date: Wed, 26 Aug 2009 19:28:50 +0200
+Message-Id: <1251307730-5802-1-git-send-email-valentin.longchamp@epfl.ch>
+X-Mailer: git-send-email 1.6.0.4
+In-Reply-To: <4A956F2C.70301@epfl.ch>
+References: <4A956F2C.70301@epfl.ch>
+Cc: Valentin Longchamp <valentin.longchamp@epfl.ch>
+Subject: [PATCH 1/1] add toolchain file for cmake compilations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,100 +29,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2009 17:40:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 26 Aug 2009 17:46:58 -0000
 
-Valentin Longchamp wrote:
-> Matthew Dombroski wrote:
->>
->>> Although the toolchain file is the preferred value according to the
->>> cmake documentation, it has not been necessary to me.
->>
->> The effect of a toolchain file is the same as that of defining lots of 
->> options in EXTRA_OECMAKE.
->> personally, I think it is cleaner. The ability to use it outside of 
->> openembedded is really useful to me also.
-> 
-> I agree that it is the same. It's just that it was done until now like 
-> that in OE, so I chose that way. However one advantage that I see of 
-> defining things directly in the recipes and not in a toolchain file, is 
-> that you can easily add definitions using EXTRA_OECMAKE in every recipe. 
-> Is cmake able to take two toolchain files (one from cmake.bbclass and 
-> one from the recipes with the needed libraries) without having to 
-> rewrite the do_configure in the recipe ?
-> 
-> This comes back to the point above: do we need to define all the 
-> libraries that could come with cmake-based programs in cmake.bbclass ? 
->  From my point of view, this is definitely something related to the 
-> recipes.
-> 
+Based on work done by Matthew Dombroski.
+We want to generate a toolchain file for cmake compilations. This
+adds a task that is performed before the configure task.
 
-I have been thinking about this today I here is a proposition that takes 
-the better of both our approaches. I agree that having the toolchain 
-file is much cleaner, however it should be possible to add things to 
-this toolchain file in the recipes according to what libraries are needed.
+Additional defines can be made in the toolchain file directly in
+the recipe file by using a do_generate_toolchain_file_append().
+This is especially interesting for recipes that need to define
+values for additionnal libraries.
 
-So I have added a task that generates a generic toolchain file, and the 
-idea is to add all the needed defines for additionnal libraries in the 
-recipe, in a do_generate_toolchain_file_append() function.
+Signed-off-by: Valentin Longchamp <valentin.longchamp@epfl.ch>
+---
+ classes/cmake.bbclass |   28 ++++++++++++++++++++++++++--
+ 1 files changed, 26 insertions(+), 2 deletions(-)
 
-Here is my example recipe, sending the patch with git.
-
-Val
-
-> DESCRIPTION = "aseba is an event-based architecture for distributed robots control"
-> HOMEPAGE = "http://mobots.epfl.ch/aseba.html"
-> LICENCE = "GPL"
-> PR = "r1"
-> 
-> PV = "svn${SRCDATE}"
-> DEPENDS = "dashel qt4-embedded"
-> LEAD_SONAME = "libasebacore.so"
-> 
-> SRC_URI = "svn://svn.gna.org/svn/aseba;module=trunk"
-> 
-> S = "${WORKDIR}/trunk"
-> 
-> inherit qt4e cmake 
-> 
-> EXTRA_OECMAKE += "-DSHARED_LIBS:BOOL=ON -DCMD_LINE:BOOL=ON"
-> 
-> do_generate_toolchain_file_append() {
-> 	echo "set( QT_HEADERS_DIR ${OE_QMAKE_INCDIR_QT} CACHE STRING \"Qt4 include dir\" )" >> ${WORKDIR}/toolchain.cmake
-> 	echo "set( QT_LIBRARY_DIR ${OE_QMAKE_LIBDIR_QT} CACHE STRING \"Qt4 library dir\" )" >> ${WORKDIR}/toolchain.cmake
-> 	echo "set( QT_QMAKE_EXECUTABLE ${OE_QMAKE_QMAKE} CACHE STRING \"qmake2 binary\" )" >> ${WORKDIR}/toolchain.cmake
-> 	echo "set( QT_MOC_EXECUTABLE ${OE_QMAKE_MOC} CACHE STRING \"Qt4 moc binary\" )" >> ${WORKDIR}/toolchain.cmake
-> 	echo "set( QT_UIC_EXECUTABLE ${OE_QMAKE_UIC} CACHE STRING \"Qt4 uic binary\" )" >> ${WORKDIR}/toolchain.cmake
-> 	echo "set( QT_UIC3_EXECUTABLE ${OE_QMAKE_UIC3} CACHE STRING \"Qt4 uic3 binary\" )" >> ${WORKDIR}/toolchain.cmake
-> 	echo "set( QT_RCC_EXECUTABLE ${OE_QMAKE_RCC} CACHE STRING \"Qt4 rcc binary\" )" >> ${WORKDIR}/toolchain.cmake
-> 	echo "set( QT_DBUSXML2CPP_EXECUTABLE ${OE_QMAKE_QDBUSXML2CPP} CACHE STRING \"Qt4 dbus xml2cpp binary\" )" >> ${WORKDIR}/toolchain.cmake
-> 	echo "set( QT_DBUSCPP2XML_EXECUTABLE ${OE_QMAKE_QDBUSCPP2XML} CACHE STRING \"Qt4 dbus cpp2xml binary\" )" >> ${WORKDIR}/toolchain.cmake
-> 	echo "set( QT_LRELEASE_EXECUTABLE ${OE_QMAKE_LRELEASE} CACHE STRING \"Qt4 lrelease binary\" )" >> ${WORKDIR}/toolchain.cmake
-> 	echo "set( QT_LUPDATE_EXECUTABLE ${OE_QMAKE_LUPDATE} CACHE STRING \"Qt4 lupdate binary\" )" >> ${WORKDIR}/toolchain.cmake 
-> }
-> 
-> do_stage() {
-> 	oe_libinstall -so libasebacore ${STAGING_LIBDIR}
-> 	oe_libinstall -so libasebacompiler ${STAGING_LIBDIR}
-> 	oe_libinstall -so libasebavm ${STAGING_LIBDIR}
-> 
-> 	install -d ${STAGING_INCDIR}/aseba
-> 	install -d ${STAGING_INCDIR}/aseba/common
-> 	install -m 0644 common/consts.h ${STAGING_INCDIR}/aseba/common
-> 	install -m 0644 common/types.h ${STAGING_INCDIR}/aseba/common
-> 	install -d ${STAGING_INCDIR}/aseba/msg
-> 	install -m 0644 msg/descriptions-manager.h ${STAGING_INCDIR}/aseba/msg
-> 	install -m 0644 msg/msg.h ${STAGING_INCDIR}/aseba/msg
-> 	install -d ${STAGING_INCDIR}/aseba/utils
-> 	install -m 0644 utils/FormatableString.h ${STAGING_INCDIR}/aseba/utils
-> 	install -m 0644 utils/utils.h ${STAGING_INCDIR}/aseba/utils
-> }
-> 
-> FILES_${PN} += "${libdir}/libasebacore.so"
-> FILES_${PN} += "${libdir}/libasebacompiler.so"
-> FILES_${PN} += "${libdir}/libasebavm.so"
-
+diff --git a/classes/cmake.bbclass b/classes/cmake.bbclass
+index b5b7b86..36ed709 100644
+--- a/classes/cmake.bbclass
++++ b/classes/cmake.bbclass
+@@ -11,6 +11,29 @@ OECMAKE_SOURCEPATH ?= "."
+ # "-C ${OECMAKE_BUILDPATH}". So it will run the right makefiles.
+ OECMAKE_BUILDPATH ?= ""
+ 
++cmake_do_generate_toolchain_file() {
++# CMake system name must be something like "Linux".
++# This is important for cross-compiling.
++  echo "set( CMAKE_SYSTEM_NAME" `echo ${SDK_OS} | sed 's/^./\u&/'` ")" > ${WORKDIR}/toolchain.cmake
++  echo "set( CMAKE_C_COMPILER ${OECMAKE_C_COMPILER} )" >> ${WORKDIR}/toolchain.cmake
++  echo "set( CMAKE_CXX_COMPILER ${OECMAKE_CXX_COMPILER} )" >> ${WORKDIR}/toolchain.cmake
++  echo "set( CMAKE_C_FLAGS \"${OECMAKE_C_FLAGS}\" CACHE STRING \"OpenEmbedded CFLAGS\" )" >> ${WORKDIR}/toolchain.cmake
++  echo "set( CMAKE_CXX_FLAGS \"${OECMAKE_CXX_FLAGS}\" CACHE STRING \"OpenEmbedded CXXFLAGS\" )" >> ${WORKDIR}/toolchain.cmake
++  echo "set( CMAKE_C_FLAGS_RELEASE \"${OECMAKE_C_FLAGS_RELEASE}\" CACHE STRING \"CFLAGS for release\" )" >> ${WORKDIR}/toolchain.cmake
++  echo "set( CMAKE_CXX_FLAGS_RELEASE \"${OECMAKE_CXX_FLAGS_RELEASE}\" CACHE STRING \"CXXFLAGS for release\" )" >> ${WORKDIR}/toolchain.cmake
++
++# only search in the paths provided (from openembedded) so cmake doesnt pick
++# up libraries and tools from the native build machine
++  echo "set( CMAKE_FIND_ROOT_PATH ${STAGING_DIR_HOST} ${STAGING_DIR_NATIVE} ${CROSS_DIR} )" >> ${WORKDIR}/toolchain.cmake
++  echo "set( CMAKE_FIND_ROOT_PATH_MODE_PROGRAM ONLY )" >> ${WORKDIR}/toolchain.cmake
++  echo "set( CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY )" >> ${WORKDIR}/toolchain.cmake
++  echo "set( CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY )" >> ${WORKDIR}/toolchain.cmake
++# Use native cmake modules
++  echo "set( CMAKE_MODULE_PATH ${STAGING_DIR_NATIVE}/usr/share/cmake-2.6/Modules/ )" >> ${WORKDIR}/toolchain.cmake 
++}
++
++addtask generate_toolchain_file after do_patch before do_configure
++
+ cmake_do_configure() {
+   if [ ${OECMAKE_BUILDPATH} ]
+   then
+@@ -20,9 +43,10 @@ cmake_do_configure() {
+ 
+   cmake ${OECMAKE_SOURCEPATH} \
+     -DCMAKE_INSTALL_PREFIX:PATH=${prefix} \
+-    -DCMAKE_FIND_ROOT_PATH=${STAGING_DIR_HOST} \
++    -DCMAKE_TOOLCHAIN_FILE=${WORKDIR}/toolchain.cmake \
++    -DCMAKE_VERBOSE_MAKEFILE=1 \
+     ${EXTRA_OECMAKE} \
+     -Wno-dev
+ }
+ 
+-EXPORT_FUNCTIONS do_configure
++EXPORT_FUNCTIONS do_configure do_generate_toolchain_file
+-- 
+1.6.0.4
 
 
 
