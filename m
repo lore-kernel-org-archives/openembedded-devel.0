@@ -1,22 +1,28 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1MgbVC-0005sK-B9
+	(envelope-from <pb@reciva.com>) id 1MgcqK-0006Lg-GY
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Aug 2009 11:42:42 +0200
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1MgbHn-0003Ga-JW; Thu, 27 Aug 2009 11:28:51 +0200
-Message-ID: <4A9650D3.2080201@kernelconcepts.de>
-Date: Thu, 27 Aug 2009 11:24:35 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, rlisagor@wurldtech.com
-References: <578E0D7769137447A5A8468024190AE718B73FAEE8@VMBX115.ihostexchange.net>
-In-Reply-To: <578E0D7769137447A5A8468024190AE718B73FAEE8@VMBX115.ihostexchange.net>
-X-Enigmail-Version: 0.95.7
-Subject: Re: Contract work
+	Thu, 27 Aug 2009 13:08:36 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MgcVP-0006kN-Eo
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 Aug 2009 11:46:59 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1MgcVO-0006dd-1h
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 Aug 2009 11:46:58 +0100
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4A94E1CC.2090404@gmail.com>
+References: <4A94E1CC.2090404@gmail.com>
+Date: Thu, 27 Aug 2009 11:46:54 +0100
+Message-Id: <1251370014.27780.13.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+Subject: Re: [PATCH] enca_1.9.bb: remove unused configure test which is bound to fail.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,34 +36,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2009 09:42:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 27 Aug 2009 11:08:36 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello Roman,
+On Wed, 2009-08-26 at 16:48 +0930, Graham Gower wrote:
+> Enca's configure will fail on everything not arm or ix86.
+> 
+> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+> ---
+>  recipes/enca/enca_1.9.bb |    7 ++++++-
+>  site/arm-linux           |    3 ---
+>  site/ix86-common         |    3 ---
+>  3 files changed, 6 insertions(+), 7 deletions(-)
 
-Roman Lisagor schrieb:
-> Unfortunately we don't have the manpower to perform all the customizations
-> ourselves, so we're looking for outside help! If any of you are interested in
-> doing some contract-based work, please send me an email and let me know. I
-> can then send you a more detailed description of what we need. We are
-> currently collecting estimates and would like to get started soon.
+Looks fine to me.  It does seem a bit weird that enca tests this scanf
+thing and then doesn't use the information but, sure enough, I couldn't
+find any reference to the result anywhere in the source code.
 
-we have a short list of people and companies providing commercial support here:
-http://wiki.openembedded.net/index.php/CommercialSupport
+Do you have commit access or do you want me to check it in for you?
 
-The page is quite new and likely to lack lot of entries but it might be a good
-start.
+p.
 
-Greetings
 
-Florian
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
 
 
