@@ -1,35 +1,26 @@
-Received: from [209.85.221.196] (helo=mail-qy0-f196.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1MgUeZ-0003AD-Vh
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Aug 2009 04:23:56 +0200
-Received: by qyk34 with SMTP id 34so344820qyk.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2009 19:05:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=hMDKBJTFSP5eKBiekYRK+EZLJrU3MeDh4h8G4pN4858=;
-	b=VjSRCnzn/Df+aQft4Qy9zMRSlFfiWRs608iAA9r489P9GlwDgvr8WbSpX7a7iN4n5B
-	WzeDefjgJahxUAqVRCfZzLrANTFVZBIcsSTF7TC+lYLtHIA28O7Un+ZA0Nkew7gm/oOY
-	WtIKim+pOaOdxzp37iIyJEHY1D/YkQiKapuiQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type:content-transfer-encoding;
-	b=x3l1M7vX2bY/vuUIUfs9uQYjT6hqCV+u8gul3JjiNSzvA0Nwir9fukfUA09g76mffu
-	OuTjclNpDiR75ytoUvJKE5ryTWfrD3PKGVSRmOcT1Gza51h66gEVyNhkfFnSqxvSZeL1
-	QUbgkr5/Ju4MzniZOOHDlpw5jal7rxIsLb8ck=
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.39.201 with SMTP id h9mr2694462qce.4.1251338753171; Wed, 
-	26 Aug 2009 19:05:53 -0700 (PDT)
-From: Chris Larson <clarson@kergoth.com>
-Date: Wed, 26 Aug 2009 19:05:33 -0700
-X-Google-Sender-Auth: ee3ee16f18bc888f
-Message-ID: <b6ebd0a50908261905r7d839647k6fc53460301efca0@mail.gmail.com>
+Received: from [68.142.207.138] (helo=web32207.mail.mud.yahoo.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <frannk_m1@yahoo.com>) id 1MgVUC-0004ec-QD
+	for openembedded-devel@openembedded.org; Thu, 27 Aug 2009 05:17:17 +0200
+Received: (qmail 13679 invoked by uid 60001); 27 Aug 2009 02:59:13 -0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024;
+	t=1251341953; bh=zSQ5IAnkBpu0CEJHGmaHqKYe8vl1Uho1pOimn5VlZJI=;
+	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:In-Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding;
+	b=MRZpWH/7MbFFr8/rmrI8xGOJc3UpXDEUVxA1SyqYiUYrUQgyImMJU8djT21/ZN2AngEX3mWFALixvWsK3haSvsKdqlj88RHl1DJzwgMYIZ7rWGskwAtUcm0u2Dt+UjPOlbaC5C7se79DZdbP8ial57utKMZv0yPHHVuX7XoVNUE=
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=yahoo.com;
+	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:In-Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding;
+	b=YEdarFR5cbeq4yM2DFdK/aijclFDYHA0SHVegnhlxL7PdKMtE5dTpeLwIJlFD0F5kxj5eCdujO33rajLblObPt6ONErnCTTxKv4Z5BgQC6Ii+xB1J71fQYWCgEV7ST5D2NGg1n7bBpiyAdu3P/SIiOrME4a/W+mMWAnwX5ffsXw=;
+Message-ID: <570367.11793.qm@web32207.mail.mud.yahoo.com>
+X-YMail-OSG: x2nX7MkVM1njmmmWr44ZBGDoobzdjQHESSf2Ee7Cl9OQCXyKWQd__z7v8eUYQKmT1tI99ZA97InDxbzsnocqbCwCPLCnaVlq6jK73gg8SFqysZMPccHM7ebYYfQ2BeOkqK4SibgieCjTOwVK3y0DkqTF1o.GECsbotodEpSGNEMBfPvy.7iYbhDitCtyCdWzF2kvJwQfuoIDu5qd06BeC7gzwEsxSvg8VyEPQm724VSKkKMlWoS9MLzdNbRRO3zr7Jrm4E8fPNj003RtynhpxOz6Jr7Pu4ylMpHxqQQb1.A8P076olJlWmRZjln3NDggM_hcPd1temk5kaarOu5J5YtHmWqMYnEGvDB8BVZOPmBicJQeYLJ61OvaHOGN6uiHm3865PQxGg--
+Received: from [24.23.223.133] by web32207.mail.mud.yahoo.com via HTTP;
+	Wed, 26 Aug 2009 19:59:13 PDT
+X-Mailer: YahooMailClassic/6.1.2 YahooMailWebService/0.7.338.2
+Date: Wed, 26 Aug 2009 19:59:13 -0700 (PDT)
+From: Frank <frannk_m1@yahoo.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: srctree & gitver
+In-Reply-To: <578E0D7769137447A5A8468024190AE718B73FAEE8@VMBX115.ihostexchange.net>
+MIME-Version: 1.0
+Subject: Re: Contract work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,174 +34,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2009 02:23:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 27 Aug 2009 03:17:19 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-I'm going to summarize the features of the two classes I've created
-over the past couple days.  I believe that they will make the lives of
-app & kernel developers much easier when dealing with bitbake/OE/MVL6.
-
-srctree facilitates bitbake builds in existing source trees, bypassing
-the fetch/unpack/patch idiom.  It's easy to allow the user to put the
-recipe in their source tree, if they want to store it in their scm
-repository with their app/kernel code, or you can point the recipe at
-external trees.  This works for app and kernel development.
-
-gitver facilitates extraction of version information from git.  By
-default, it runs 'git describe' to get the version.  If that fails, it
-will set the version to 0.0-<sha1 hash>.  This version is stored in
-the ${GITVER} variable, and can be used in the recipe's PV variable.
-When using this, it will automatically detect changes to .git/HEAD
-(i.e. commit your local changes, check out a different branch, ..) and
-invalidate the bitbake cache, pick up the new PV, and know that it
-needs to re-run the build steps.
-
-Examples:
-Common steps:
-
-$ cd myproject
-~/oe/projects/myproject
-$ . ./setup.sh
-
-
-Example of a user who wants bitbake to build their existing source
-tree outside the project:
-Userland:
-
-$ cd myproject
-~/oe/projects/myproject
-$ . ./setup.sh
-$ cat <<END >collections/custom/hello.bb
-inherit srctree
-
-# Pointing to the external source tree
-S = "${HOME}/code/hello"
-DESCRIPTION = "Hello, World"
-
-do_install () {
-   install -D -m 0755 hello ${D}${bindir}/hello
-}
-END
-$ bitbake hello
-
-Kernel:
-
-$ cat <<END >collections/custom/linux.bb
-inherit kernel srctree gitver
-
-# Strip off the leading 'v' from the Linux kernel git tags
-PV = "${@'${GITVER}'[1:]}"
-
-# Point to my existing kernel development tree
-S = "${HOME}/code/linux-2.6"
-END
-$ bitbake linux
-
-
-Example of a user who wants their source tree to live in their project:
-Userland:
-
-$ mkdir collections/hello
-$ cd collections/hello
-~/oe/projects/myproject/collections/hello
-$ cat <<END >hello.c
-heredoc> #include <stdio.h>
-heredoc>
-heredoc> int main(int argc, char **argv)
-heredoc> {
-heredoc>     printf("Hello, World!\n");
-heredoc> }
-heredoc> END
-$ cat <<END >Makefile
-heredoc> all: hello
-heredoc> hello: hello.c
-heredoc>        \$(CC) \$(CFLAGS) \$(LDFLAGS) hello.c -o hello
-heredoc> clean:
-heredoc>        rm -f hello
-heredoc> END
-$ cat <<END >hello.bb
-heredoc> inherit srctree
-heredoc>
-heredoc> DESCRIPTION = "Hello, World."
-heredoc>
-heredoc> do_install () {
-heredoc>     install -D -m 0755 hello \${D}\${bindir}/hello
-heredoc> }
-heredoc> END
-$ bitbake hello
-NOTE: Handling BitBake files: \ (0010/0010) [100%%]
-NOTE: Parsing finished. 0 cached, 10 parsed, 0 skipped, 0 masked.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 1 of 2 (ID: 1,
-/home/clarson/oe/projects/myproject/collections/hello/hello.bb,
-do_populate_staging)
-NOTE: Running task 2 of 2 (ID: 0,
-/home/clarson/oe/projects/myproject/collections/hello/hello.bb,
-do_build)
-NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be
-rerun and 0 failed.
-$ ls
-hello  hello.bb  hello.c  Makefile
-$ ./hello
-Hello, World!
-$ bitbake -c clean hello
-NOTE: Handling BitBake files: \ (0010/0010) [100%%]
-NOTE: Parsing finished. 10 cached, 0 parsed, 0 skipped, 0 masked.
-NOTE: Cache is clean, not saving.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 1 of 1 (ID: 0,
-/home/clarson/oe/projects/myproject/collections/hello/hello.bb,
-do_clean)
-NOTE: Removing stamps
-NOTE: Removing /home/clarson/oe/projects/myproject/tmp/work/i486-linux/hello-1.0-r0
-NOTE: Running make clean
-NOTE: Tasks Summary: Attempted 1 tasks of which 0 didn't need to be
-rerun and 0 failed.
-$ ls
-hello.bb  hello.c  Makefile
-$ sed -i -e 's,World,Country,' hello.c
-$ bitbake hello
-NOTE: Handling BitBake files: \ (0010/0010) [100%%]
-NOTE: Parsing finished. 10 cached, 0 parsed, 0 skipped, 0 masked.
-NOTE: Cache is clean, not saving.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 1 of 2 (ID: 1,
-/home/clarson/oe/projects/myproject/collections/hello/hello.bb,
-do_populate_staging)
-NOTE: Running task 2 of 2 (ID: 0,
-/home/clarson/oe/projects/myproject/collections/hello/hello.bb,
-do_build)
-NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be
-rerun and 0 failed.
-$ ./hello
-Hello, Country!
-$
-
-Kernel:
-$ git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git
-collections/linux-2.6
-[... git output ...]
-$ cat <<END >collections/linux-2.6/linux.bb
-inherit kernel srctree gitver
-
-# Strip off the leading 'v' from the Linux kernel git tags
-PV = "${@'${GITVER}'[1:]}"
-END
-$ bitbake linux
--- 
-Chris Larson
-clarson at kergoth dot com
-clarson at mvista dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Software Engineer
-MontaVista Software, Inc.
+What's the hourly rate?=0A=0A--- On Wed, 8/26/09, Roman Lisagor <rlisagor@w=
+urldtech.com> wrote:=0A=0A> From: Roman Lisagor <rlisagor@wurldtech.com>=0A=
+> Subject: [oe] Contract work=0A> To: "openembedded-devel@lists.openembedde=
+d.org" <openembedded-devel@lists.openembedded.org>=0A> Date: Wednesday, Aug=
+ust 26, 2009, 2:45 PM=0A> Dear OE developers,=0A> =0A> I work for Wurldtech=
+ Security Technologies in Vancouver,=0A> Canada. We are currently creating =
+a network appliance (a=0A> firewall) and would like to use OpenEmbedded for=
+ the=0A> project. I've been fairly successful in trying to get the=0A> syst=
+em to build; however, there have been some breakages and=0A> not all the pa=
+ckages we need are currently available as=0A> recipes.=0A> =0A> Unfortunate=
+ly we don't have the manpower to perform all the=0A> customizations ourselv=
+es, so we're looking for outside help!=0A> If any of you are interested in =
+doing some contract-based=0A> work, please send me an email and let me know=
+. I can then=0A> send you a more detailed description of what we need. We a=
+re=0A> currently collecting estimates and would like to get started=0A> soo=
+n.=0A> =0A> Thanks in advance!=0A> =0A> Roman=0A> =0A> [cid:image001.png@01=
+CA265B.EBC312F0]=0A> Roman Lisagor=0A> Senior Software Developer=0A> Wurldt=
+ech Security Technologies Inc.=0A> Suite 1680 - 401 West Georgia St.=0A> Va=
+ncouver, B.C.=A0 V6B 5A1=0A> Canada=0A> Phone:=A0 =A0 =A0=A0=A0+ 1.604.669.=
+6674=0A> Toll Free:=A0=A0=A0+ 1.877.369.6674=0A> Fax:=A0 =A0 =A0 =A0 =A0=A0=
+=A0+=0A> 1.604.669.2902=0A> Website:=A0 =A0 http://www.wurldtech.com/=0A> =
+=0A> =0A> "ARE YOU ACHILLES CERTIFIED?"=0A> =0A> =0A> This message is inten=
+ded only for the named=0A> recipients.=A0 This message may contain informat=
+ion that=0A> is privileged, confidential or exempt from disclosure under=0A=
+> applicable law.=A0 Any dissemination or copying of this=0A> message by an=
+yone other than a named recipient is strictly=0A> prohibited.=A0 If you are=
+ not a named recipient or an=0A> employee or agent responsible for deliveri=
+ng this message to=0A> a named recipient, please notify us immediately by t=
+elephone=0A> at 604-669-6674, and permanently destroy this message and=0A> =
+any copies you may have. Email may not be secure unless=0A> properly encryp=
+ted.=0A> =0A> =0A> -----Inline Attachment Follows-----=0A> =0A> ___________=
+____________________________________=0A> Openembedded-devel mailing list=0A=
+> Openembedded-devel@lists.openembedded.org=0A> http://lists.linuxtogo.org/=
+cgi-bin/mailman/listinfo/openembedded-devel=0A> =0A=0A=0A      
 
 
