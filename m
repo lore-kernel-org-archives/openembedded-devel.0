@@ -1,45 +1,44 @@
-Received: from [203.97.37.64] (helo=smtp4.clear.net.nz)
+Received: from [209.85.211.175] (helo=mail-yw0-f175.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <matthew@4d-electronics.co.nz>) id 1MgRQC-0007Pe-9J
+	(envelope-from <perezmeyer@gmail.com>) id 1MgTgO-0004N8-NV
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Aug 2009 00:56:52 +0200
-Received: from tardis.4d-electronics.co.nz
-	(202-0-56-223.cable.telstraclear.net [202.0.56.223])
-	by smtp4.clear.net.nz (CLEAR Net Mail)
-	with ESMTP id <0KP000EQ79KOQM20@smtp4.clear.net.nz> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	27 Aug 2009 10:38:49 +1200 (NZST)
-Received: from localhost (localhost [127.0.0.1])	by tardis.4d-electronics.co.nz
-	(Postfix) with ESMTP id 8375F5CE258	for
-	<openembedded-devel@lists.openembedded.org>; Thu,
-	27 Aug 2009 10:38:48 +1200 (NZST)
-Received: from tardis.4d-electronics.co.nz ([127.0.0.1])
-	by localhost (tardis.4d-electronics.co.nz [127.0.0.1])
-	(amavisd-new, port 10024)	with ESMTP id aSxbx-w1ceFF	for
-	<openembedded-devel@lists.openembedded.org>; Thu,
-	27 Aug 2009 10:38:48 +1200 (NZST)
-Received: from [192.168.1.129] (unknown [192.168.1.129])
-	by tardis.4d-electronics.co.nz (Postfix) with ESMTPS id 1ACA65CE14F	for
-	<openembedded-devel@lists.openembedded.org>; Thu,
-	27 Aug 2009 10:38:48 +1200 (NZST)
-Date: Thu, 27 Aug 2009 10:38:47 +1200
-From: Matthew Dombroski <matthew@4d-electronics.co.nz>
-In-reply-to: <4A95AAD1.4040703@4d-electronics.co.nz>
+	Thu, 27 Aug 2009 03:21:45 +0200
+Received: by ywh5 with SMTP id 5so807462ywh.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Aug 2009 18:03:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:mime-version:received:date
+	:delivered-to:message-id:subject:from:to:x-uid:x-length:x-face
+	:content-type:content-transfer-encoding;
+	bh=Dyk4MDAjxxsgkuNfHlMPRFHxfhb9yASzyPmSkZohPGQ=;
+	b=G4hiqwnBppWwZ1X+q7znxI23agg/hVptOt4bBbNdej9Nh5yRI6gdo7IfpbQkhJC4Mt
+	SaR7p3vIJ/3s2gZNwQ0NENQOSA98KkkHkQWK1mCtSKahEViHJHQb4GqUDKwNbUrAkM8K
+	ZR4tLXAQPC/IbxiwlbeBf8jHip1qBfLuVcuI4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:delivered-to:message-id:subject:from:to:x-uid
+	:x-length:x-face:content-type:content-transfer-encoding;
+	b=UAnFrErTBpI2T3V9Nq6cqHD80tPA6cim0PwK3DdlMZqMT3CoY1eBlrTOl4KuZS5n42
+	+upbuZaRiEtLC8S7t9w/OdVXX5jE+KHdThLKILY2jepCPRO63pCwK3G3UolhUOu9qiaD
+	Dw/a9nEw4Rpx2Ums4i2A7CogRHUiLimNVNtrY=
+Received: by 10.90.226.13 with SMTP id y13mr6529683agg.107.1251335021307;
+	Wed, 26 Aug 2009 18:03:41 -0700 (PDT)
+Received: from luna.localnet ([190.1.23.136])
+	by mx.google.com with ESMTPS id 4sm3787364agc.40.2009.08.26.18.03.40
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 26 Aug 2009 18:03:40 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.100.108.7 with HTTP; Wed, 26 Aug 2009 12:50:36 -0700 (PDT)
+Date: Wed, 26 Aug 2009 22:03:00 -0300
+Message-Id: <200908262203.01153.perezmeyer@gmail.com>
+From: Lisandro =?utf-8?q?Dami=C3=A1n_Nicanor_P=C3=A9rez_Meyer?=
+	<perezmeyer@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <4A95B977.2040408@4d-electronics.co.nz>
-MIME-version: 1.0
-X-Virus-Scanned: by Amavis+SpamAssassin+ClamAV and more at	4d-electronics.co.nz
-X-Spam-Flag: NO
-X-Spam-Score: -1.44
-References: <4A937831.2000304@4d-electronics.co.nz> <4A93A9E3.7090605@epfl.ch>
-	<4A9461C3.2000406@4d-electronics.co.nz> <4A94DA90.8090306@epfl.ch>
-	<4A9516B5.9000602@epfl.ch> <4A95AAD1.4040703@4d-electronics.co.nz>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-GB; rv:1.9.1.1) Gecko/20090715
-	Thunderbird/3.0b3
-X-Spam-Status: No, score=-1.44 tagged_above=-99 required=5
-	tests=[ALL_TRUSTED=-1.44]
-X-Spam-Level: 
-Subject: Re: [PATCH] Add toolchain file generation to cmake bbclass
+X-UID: 85
+X-Length: 1879
+X-Face: &O7POA^t$8Gq0El|^zM9V:*jgn,ETU\1A73; Zdeojd,G(a"; /Y0Fu|/*_jQF+@3';
+	#.O@ =?UTF-8?q?=26=0A=09=2ET?="FaLh+5o_F,\lrKg~{JYYVM20<P[J.ve7:7m;
+	51A=i@"XBI].=`ZFX4h@tGL> =?UTF-8?q?Q1I=26fUN=0A=094?=<\TGcR5=
+Subject: Message error when mounting for the first time, missing files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,47 +52,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Aug 2009 22:56:52 -0000
-Content-type: text/plain; charset=ISO-8859-1; format=flowed
-Content-transfer-encoding: 7bit
+X-List-Received-Date: Thu, 27 Aug 2009 01:21:46 -0000
+Content-Type: text/plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
->
->> I have tried it, and the only thing I now have in the EXTRA_OECMAKE 
->> is QT_QMAKE_EXECUTABLE to be sure that it takes the one from staging 
->> and not the one from my system.
->>
->>> inherit qt4e cmake
->>> EXTRA_OECMAKE += "-DSHARED_LIBS:BOOL=ON -DCMD_LINE:BOOL=ON \
->>>         -DQT_QMAKE_EXECUTABLE=${OE_QMAKE_QMAKE} \
->>>         "
->>>
->>> export QT_CONF_PATH="${WORKDIR}/trunk/qt.conf"
->>>
->>> do_configure_prepend() {
->>>     echo "[Paths]" > $QT_CONF_PATH
->>>     echo "Prefix=${STAGING_DIR}/${HOST_SYS}/usr" >> $QT_CONF_PATH
->>>     echo "Documentation=${docdir}/${QT_DIR_NAME}" >> $QT_CONF_PATH
->>>     echo "Headers=${STAGING_INCDIR}/${QT_DIR_NAME}" >> $QT_CONF_PATH
->>>     echo "Libraries=${STAGING_LIBDIR}" >> $QT_CONF_PATH
->>>     echo "Binaries=${STAGING_BINDIR_NATIVE}" >> $QT_CONF_PATH
->>>     echo "Plugins=${libdir}/${QT_DIR_NAME}/plugins" >> $QT_CONF_PATH
->>>     echo "Data=${datadir}/${QT_DIR_NAME}" >> $QT_CONF_PATH
->>>     echo "Translations=${datadir}/${QT_DIR_NAME}/translations" >> 
->>> $QT_CONF_PATH
->>>     echo "Settings=${sysconfdir}/${QT_DIR_NAME}" >> $QT_CONF_PATH
->>>     echo "Examples=${bindir}/${QT_DIR_NAME}/examples" >> $QT_CONF_PATH
->>>     echo "Demos=${bindir}/${QT_DIR_NAME}/demos" >> $QT_CONF_PATH
->>> }
->>>
-> That looks quite good now, maybe it's a good idea to add a 
-> generate_qt_conf() to qmake2.bbclass.
-> That way it's independent of what build system we're using.
+Hello everyone! I am using angstrom/stable2009 with "few" modifications
+(mainly a proper kernel for my board, an Econ's eSOM270, kernel 2.6.25). Wh=
+en
+I mount the first time the jffs2 image, I get this error:
 
-Have tried it, didn't work.
-cmake is able to find libs, headers and some executables but a lot of 
-stuff is unfound.
+INFO: task mount:1823 blocked for more than 120 seconds.
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+mount         D c02d4150     0  1823   1816
+[<c02d3f00>] (schedule+0x0/0x298) from [<c02d5240>]
+(__down_write_nested+0xc8/0x
+dc)
+[<c02d5178>] (__down_write_nested+0x0/0xdc) from [<c02d5268>]
+(__down_write+0x14
+/0x18)
+ r5:c7ebdef0 r4:c7d5a400
+[<c02d5254>] (__down_write+0x0/0x18) from [<c02d4b74>] (down_write+0x10/0x1=
+4)
+[<c02d4b64>] (down_write+0x0/0x14) from [<c008d938>] (do_remount+0x78/0xb0)
+[<c008d8c0>] (do_remount+0x0/0xb0) from [<c008e388>] (do_mount+0x104/0x190)
+[<c008e284>] (do_mount+0x0/0x190) from [<c008e4a0>] (sys_mount+0x8c/0xd4)
+[<c008e414>] (sys_mount+0x0/0xd4) from [<c0020a40>]
+(ret_fast_syscall+0x0/0x2c)
+ r7:00000015 r6:bec00b38 r5:bec00b04 r4:00000000
 
-~Matt
+This happens just the first time. Also I cannot find /usr/lib/libdbus* nor
+/usr/lib/libdaemon*, which are in the jffs2 image before flashing :-/
 
+Any hints?
+
+Regards, Lisandro.
+
+=2D-=20
+
+Lisandro Dami=C3=A1n Nicanor P=C3=A9rez Meyer
+http://perezmeyer.com.ar/
+http://perezmeyer.blogspot.com/
 
 
