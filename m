@@ -1,33 +1,41 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz ident=postfix)
+Received: from [209.85.219.219] (helo=mail-ew0-f219.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1MgdUx-0005DM-NM
+	(envelope-from <d.vinokuroff@gmail.com>) id 1Mgdz7-00038D-4M
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Aug 2009 13:50:35 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id AB89D1416BC5
+	Thu, 27 Aug 2009 14:21:45 +0200
+Received: by ewy19 with SMTP id 19so1299896ewy.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2009 13:24:52 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id gAgIiZZe0JMt
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2009 13:24:52 +0200 (CEST)
-Received: from [10.20.1.86] (nat.scz.novell.com [213.151.88.252])
-	by ns.penguin.cz (Postfix) with ESMTP id 8BDD51416BAC
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2009 13:24:52 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	Thu, 27 Aug 2009 05:03:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:references:in-reply-to
+	:content-type:content-transfer-encoding;
+	bh=/zNU/tsmEWF+zUotiH3BFU6hqy57BS4dhfMfzTmlZH0=;
+	b=UcKcMdd96d12N9/5DOrIwEoqJ3zgvSdj4rRA+jaMRN9hjV8w7xF+YafavGiXjPXQQx
+	nf1eXHl5wLPxDomJRTfoGELncpTdBJaclQTd60esjnp68WYMAb8PKD0pPgP4SGFWGWLN
+	GRLrE/cCfFOchw2YQcqkcBp53KJuRG9v4RFio=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=F0AI4jncs5W9EWVb17ivUa4FOwtA+iwZeRLercGNeUnqkuPozRuXqEYEAzaGbBRLFD
+	qBnE4dV6fb7V+4KmrmqNKQN+oxB69KVcaIrsnN4li/QsmnWOl2ev2TxdFgkzdOzdehrd
+	9TE0BJtU/ouajm6BFHLyI3woPgqikMCg0HmR0=
+Received: by 10.210.7.16 with SMTP id 16mr245610ebg.14.1251374616970;
+	Thu, 27 Aug 2009 05:03:36 -0700 (PDT)
+Received: from ?192.168.0.7? ([92.255.143.120])
+	by mx.google.com with ESMTPS id 7sm348774eyg.32.2009.08.27.05.03.35
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 27 Aug 2009 05:03:36 -0700 (PDT)
+Message-ID: <4A967643.7050503@gmail.com>
+Date: Thu, 27 Aug 2009 18:04:19 +0600
+From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
+User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1251357326.4215.577.camel@lenovo.internal.reciva.com>
-References: <E1MgPr6-0006GQ-GT@melo.openembedded.org>
-	<4A962EA9.8010908@xora.org.uk>
-	<1251357326.4215.577.camel@lenovo.internal.reciva.com>
-Date: Thu, 27 Aug 2009 13:32:31 +0200
-Message-Id: <1251372751.3420.30.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.27.90 
-Subject: Re: [oe-commits] Stanislav Brabec : glibc: Install	ld.so.conf, so ldconfig does not complain .
+References: <4A9539AA.3070306@gmail.com>
+	<1251301150.4493.12.camel@conroy-linux>
+In-Reply-To: <1251301150.4493.12.camel@conroy-linux>
+Subject: Re: Strange do_patch behaviour
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,39 +49,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2009 11:50:36 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 27 Aug 2009 12:21:46 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Phil Blundell wrote:
-   
-> > I have the feeling this is the reversal of a previous decision to remove 
-> > ld.so.conf from rootfs.
-> > 
-> > Also its a core change and I don't see any Acked-By:
-> 
-> Agreed, that change seems wrong.  If a particular DISTRO wants to ship
-> ld.so.conf in glibc then that's fine,
+Chris Conroy wrote:
+> On Wed, 2009-08-26 at 19:33 +0600, Dmitry Vinokurov wrote:
+>   
+>> ------------
+>> And looks like bitbake did nothing except patching, but actually it does 
+>> (diff between manually and bitbake patched dirs is ~30000 strings, and I 
+>> decided not to attach it:)) and as a result builded kernel fails with 
+>> kernel panic. Diff shows, that '.pc' dir is created (and some files in 
+>> it are forbidden for any access (0000 rights)) and not only it -- some 
+>> other files like in arch/arm or sound/soc/lpc3xxx/ differs too. Tried to 
+>> remove tmp/ and rebuild -- same result.
+>>
+>> Could anybody explain this strange behaviour? I thought that patch task 
+>> should only execute 'patch' command.
+>>
+>>     
+>
+> Bitbake uses a tool called 'quilt' in order to do the patching, and
+> quilt creates the .pc directory. Basically, quilt lets you deal with
+> patches as a stack. If you go into the linux work directory, you should
+> be able to run quilt commands to manually figure out what OE is patching
+> here.
+>
+> 'quilt applied' to see what patches are applied
+> 'quilt pop' to pop a patch off the stack
+> 'quilt push' to push a patch onto the stack.
+>
+> Some Quilt Links:
+> Very helpful presentation: http://www.coffeebreaks.org/blogs/wp-content/archives/talks/2005/quilt/quiltintro-s5.html
+> Overview PDF: http://www.suse.de/~agruen/quilt.pdf
+> Savannah page: http://savannah.nongnu.org/projects/quilt
+>   
+Thanks, refs and information was really helpful. Actually the only 
+differences were in .pc and patches/, the only one applied patch was my 
+phy3250. I just was inattentive and confused strings with differences in 
+files and strings with file names.
 
-I just reverted this change. Sorry for that. It looked just like a typo:
-ld.so.conf was copied to source tree and the patch suppressing the
-warning on missing ld.so.conf (ldconfig.patch) was commented out...
-
-If missing ld.so.conf is intended, ld.co.sonf could be removed from
-recipes and ldconfig.patch (or at least its last chunk) should be
-applied.
-
-> but it shouldn't be standard and
-> definitely not without a USE_LDCONFIG conditional.
-
-It was inside USE_LDCONFIG, if ldconfig is installed.
-
-By the way, what is the benefit of not using ldconfig? Strace shows 15
-extra failing library lookups for each library.
-
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+--
+Best Regards, 
+Dmitry Vinokurov 
+<d.vinokuroff@gmail.com>
 
 
 
