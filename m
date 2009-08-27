@@ -1,36 +1,26 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [209.85.219.228] (helo=mail-ew0-f228.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1MgWt5-0001jU-Ss
+	(envelope-from <dp@xora.org.uk>) id 1MgZE9-00015q-3u
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Aug 2009 06:47:04 +0200
-Received: from [UNAVAILABLE] ([84.17.11.114] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1MgWbc-000Ma3-9B
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Aug 2009 08:29:00 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Aug 2009 08:28:56 +0400
-User-Agent: KMail/1.12.0 (Linux/2.6.30-1-amd64; KDE/4.3.0; x86_64; ; )
-References: <4A937831.2000304@4d-electronics.co.nz>
-	<4A95AAD1.4040703@4d-electronics.co.nz>
-	<4A95B977.2040408@4d-electronics.co.nz>
-In-Reply-To: <4A95B977.2040408@4d-electronics.co.nz>
+	Thu, 27 Aug 2009 09:16:58 +0200
+Received: by ewy28 with SMTP id 28so944497ewy.39
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Aug 2009 23:58:53 -0700 (PDT)
+Received: by 10.210.135.9 with SMTP id i9mr9125925ebd.65.1251356332771;
+	Wed, 26 Aug 2009 23:58:52 -0700 (PDT)
+Received: from ?192.168.1.10? (94-193-242-65.zone7.bethere.co.uk
+	[94.193.242.65])
+	by mx.google.com with ESMTPS id 7sm328142eyb.30.2009.08.26.23.58.51
+	(version=SSLv3 cipher=RC4-MD5); Wed, 26 Aug 2009 23:58:52 -0700 (PDT)
+Message-ID: <4A962EA9.8010908@xora.org.uk>
+Date: Thu, 27 Aug 2009 07:58:49 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
 MIME-Version: 1.0
-Message-Id: <200908270828.56892.khimov@altell.ru>
-X-SpamTest-Envelope-From: khimov@altell.ru
-X-SpamTest-Group-ID: 00000000
-X-SpamTest-Info: Profiles 9468 [Aug 27 2009]
-X-SpamTest-Info: {UDS BL}
-X-SpamTest-Info: {DNSBL Rate: medium}
-X-SpamTest-Method: none
-X-SpamTest-Rate: 50
-X-SpamTest-Status: Not detected
-X-SpamTest-Status-Extended: not_detected
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
-Subject: Re: [PATCH] Add toolchain file generation to cmake bbclass
+To: openembedded-devel@lists.openembedded.org
+References: <E1MgPr6-0006GQ-GT@melo.openembedded.org>
+In-Reply-To: <E1MgPr6-0006GQ-GT@melo.openembedded.org>
+Subject: Re: [oe-commits] Stanislav Brabec : glibc: Install ld.so.conf, so ldconfig does not complain .
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,13 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2009 04:47:06 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 27 Aug 2009 07:17:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-BTW, while you're on cmake, please consider acking this one:
+git version control wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: 056a67f6070c5ea561acb65049b551e24f3b7eb6
+> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=056a67f6070c5ea561acb65049b551e24f3b7eb6
+>
+> Author: Stanislav Brabec <utx@penguin.cz>
+> Date:   Wed Aug 26 21:05:59 2009 +0000
+>
+> glibc: Install ld.so.conf, so ldconfig does not complain.
+>
+>   
+I have the feeling this is the reversal of a previous decision to remove 
+ld.so.conf from rootfs.
 
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2009-April/009958.html
+Also its a core change and I don't see any Acked-By:
+
+Graeme
+
 
 
