@@ -1,41 +1,24 @@
-Received: from [209.85.219.219] (helo=mail-ew0-f219.google.com)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <d.vinokuroff@gmail.com>) id 1Mgdz7-00038D-4M
+	(envelope-from <holger+oe@freyther.de>) id 1MgeQi-00054M-2K
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Aug 2009 14:21:45 +0200
-Received: by ewy19 with SMTP id 19so1299896ewy.20
+	Thu, 27 Aug 2009 14:50:16 +0200
+Received: from tamarin.localnet (123-192-185-227.dynamic.kbronet.com.tw
+	[123.192.185.227])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 9121D1B10C06
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2009 05:03:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=/zNU/tsmEWF+zUotiH3BFU6hqy57BS4dhfMfzTmlZH0=;
-	b=UcKcMdd96d12N9/5DOrIwEoqJ3zgvSdj4rRA+jaMRN9hjV8w7xF+YafavGiXjPXQQx
-	nf1eXHl5wLPxDomJRTfoGELncpTdBJaclQTd60esjnp68WYMAb8PKD0pPgP4SGFWGWLN
-	GRLrE/cCfFOchw2YQcqkcBp53KJuRG9v4RFio=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=F0AI4jncs5W9EWVb17ivUa4FOwtA+iwZeRLercGNeUnqkuPozRuXqEYEAzaGbBRLFD
-	qBnE4dV6fb7V+4KmrmqNKQN+oxB69KVcaIrsnN4li/QsmnWOl2ev2TxdFgkzdOzdehrd
-	9TE0BJtU/ouajm6BFHLyI3woPgqikMCg0HmR0=
-Received: by 10.210.7.16 with SMTP id 16mr245610ebg.14.1251374616970;
-	Thu, 27 Aug 2009 05:03:36 -0700 (PDT)
-Received: from ?192.168.0.7? ([92.255.143.120])
-	by mx.google.com with ESMTPS id 7sm348774eyg.32.2009.08.27.05.03.35
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 27 Aug 2009 05:03:36 -0700 (PDT)
-Message-ID: <4A967643.7050503@gmail.com>
-Date: Thu, 27 Aug 2009 18:04:19 +0600
-From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
-MIME-Version: 1.0
+	Thu, 27 Aug 2009 12:36:34 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4A9539AA.3070306@gmail.com>
-	<1251301150.4493.12.camel@conroy-linux>
-In-Reply-To: <1251301150.4493.12.camel@conroy-linux>
-Subject: Re: Strange do_patch behaviour
+Date: Thu, 27 Aug 2009 14:31:56 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.0; i686; ; )
+References: <E1MgPr6-0006GQ-GT@melo.openembedded.org>
+	<1251357326.4215.577.camel@lenovo.internal.reciva.com>
+	<1251372751.3420.30.camel@hammer.suse.cz>
+In-Reply-To: <1251372751.3420.30.camel@hammer.suse.cz>
+MIME-Version: 1.0
+Message-Id: <200908271431.56785.holger+oe@freyther.de>
+Subject: Re: [oe-commits] Stanislav Brabec : glibc: Install	ld.so.conf , so ldconfig does not complain .
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,51 +32,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2009 12:21:46 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 27 Aug 2009 12:50:16 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-Chris Conroy wrote:
-> On Wed, 2009-08-26 at 19:33 +0600, Dmitry Vinokurov wrote:
->   
->> ------------
->> And looks like bitbake did nothing except patching, but actually it does 
->> (diff between manually and bitbake patched dirs is ~30000 strings, and I 
->> decided not to attach it:)) and as a result builded kernel fails with 
->> kernel panic. Diff shows, that '.pc' dir is created (and some files in 
->> it are forbidden for any access (0000 rights)) and not only it -- some 
->> other files like in arch/arm or sound/soc/lpc3xxx/ differs too. Tried to 
->> remove tmp/ and rebuild -- same result.
->>
->> Could anybody explain this strange behaviour? I thought that patch task 
->> should only execute 'patch' command.
->>
->>     
+On Thursday 27 August 2009 13:32:31 Stanislav Brabec wrote:
+> Phil Blundell wrote:
+> > > I have the feeling this is the reversal of a previous decision to
+> > > remove ld.so.conf from rootfs.
+> > >
+> > > Also its a core change and I don't see any Acked-By:
+> >
+> > Agreed, that change seems wrong.  If a particular DISTRO wants to ship
+> > ld.so.conf in glibc then that's fine,
 >
-> Bitbake uses a tool called 'quilt' in order to do the patching, and
-> quilt creates the .pc directory. Basically, quilt lets you deal with
-> patches as a stack. If you go into the linux work directory, you should
-> be able to run quilt commands to manually figure out what OE is patching
-> here.
+> I just reverted this change. Sorry for that. It looked just like a typo:
+> ld.so.conf was copied to source tree and the patch suppressing the
+> warning on missing ld.so.conf (ldconfig.patch) was commented out...
 >
-> 'quilt applied' to see what patches are applied
-> 'quilt pop' to pop a patch off the stack
-> 'quilt push' to push a patch onto the stack.
+> If missing ld.so.conf is intended, ld.co.sonf could be removed from
+> recipes and ldconfig.patch (or at least its last chunk) should be
+> applied.
 >
-> Some Quilt Links:
-> Very helpful presentation: http://www.coffeebreaks.org/blogs/wp-content/archives/talks/2005/quilt/quiltintro-s5.html
-> Overview PDF: http://www.suse.de/~agruen/quilt.pdf
-> Savannah page: http://savannah.nongnu.org/projects/quilt
->   
-Thanks, refs and information was really helpful. Actually the only 
-differences were in .pc and patches/, the only one applied patch was my 
-phy3250. I just was inattentive and confused strings with differences in 
-files and strings with file names.
+> > but it shouldn't be standard and
+> > definitely not without a USE_LDCONFIG conditional.
+>
+> It was inside USE_LDCONFIG, if ldconfig is installed.
+>
+> By the way, what is the benefit of not using ldconfig? Strace shows 15
+> extra failing library lookups for each library.
 
---
-Best Regards, 
-Dmitry Vinokurov 
-<d.vinokuroff@gmail.com>
+did we disable the hwcaps patch once again?
 
+z.
 
 
