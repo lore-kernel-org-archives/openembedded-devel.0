@@ -1,32 +1,30 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz ident=postfix)
+Received: from [93.186.196.80] (helo=mis07.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1Mgklf-0008Ek-VR
+	(envelope-from <mailings@hardware-datenbank.de>) id 1MgmFy-0000MR-KW
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Aug 2009 21:36:20 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 21CED1416BAC
+	Thu, 27 Aug 2009 23:11:42 +0200
+Received: by mis07.de (Postfix, from userid 65534)
+	id 39CFC144E027; Thu, 27 Aug 2009 22:53:37 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on mis07.de
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.5 required=5.0 tests=ALL_TRUSTED,AWL
+	autolearn=disabled version=3.2.5
+Received: from pcvirus (p5DC8F70E.dip.t-dialin.net [93.200.247.14])
+	by mis07.de (Postfix) with ESMTPA id 537A2144E01C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2009 21:10:36 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vr9HgtWFwZow
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2009 21:10:36 +0200 (CEST)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id E90C71416BA5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2009 21:10:35 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1251370014.27780.13.camel@mill.internal.reciva.com>
-References: <4A94E1CC.2090404@gmail.com>
-	<1251370014.27780.13.camel@mill.internal.reciva.com>
-Date: Thu, 27 Aug 2009 21:18:13 +0200
-Message-Id: <1251400693.5879.3.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-Subject: Re: [PATCH] enca_1.9.bb: remove unused configure test which	is bound to fail.
+	Thu, 27 Aug 2009 22:53:35 +0200 (CEST)
+Message-ID: <9DACC7DD08D24732B789F4CCFC1145EC@pcvirus>
+From: "rath" <mailings@hardware-datenbank.de>
+To: <openembedded-devel@lists.openembedded.org>
+References: <17EB92EC37534805AA9639B72BDB7947@pcvirus>
+	<h71i51$7na$1@ger.gmane.org>
+Date: Thu, 27 Aug 2009 22:53:24 +0200
+MIME-Version: 1.0
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2900.5843
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
+Subject: Re: Recipe for libv4l
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,34 +38,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2009 19:36:20 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 27 Aug 2009 21:11:42 -0000
+Content-Type: text/plain; format=flowed; charset="iso-8859-1";
+	reply-type=response
 Content-Transfer-Encoding: 7bit
 
-Phil Blundell wrote:
-> On Wed, 2009-08-26 at 16:48 +0930, Graham Gower wrote:
-> > Enca's configure will fail on everything not arm or ix86.
-> > 
-> > Signed-off-by: Graham Gower <graham.gower@gmail.com>
-> > ---
-> >  recipes/enca/enca_1.9.bb |    7 ++++++-
-> >  site/arm-linux           |    3 ---
-> >  site/ix86-common         |    3 ---
-> >  3 files changed, 6 insertions(+), 7 deletions(-)
+
+The existing recipe only includes the V4L Api. But I also want the different 
+drivers, which are included in this archiv:
+http://linuxtv.org/hg/~hgoede/libv4l/archive/a1d79882b7eb.tar.bz2
+
+> On 25-08-09 19:40, Rath wrote:
+>> Hi,
+>>
+>> I've tried to write a recipe for libv4l, but I get a file not found
+>> error and the kernel version is identified as 2.6.29 but I have
+>> 2.6.29-omap1.
+>> Here is the recipe: http://pastie.org/592125 and the compile log:
+>> http://pastie.org/592124
+>>
+>> What's wrong with the recipe?
+>
+> Slightly different question: what's wrong the the existing recipe[1]?
+>
+> regards,
+>
+> Koen
+>
+> [1] 
+> http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/v4l2apps/libv4l_0.5.8.bb
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 > 
-> Looks fine to me.  It does seem a bit weird that enca tests this scanf
-> thing and then doesn't use the information but, sure enough, I couldn't
-> find any reference to the result anywhere in the source code.
-
-It seems to be a relict from old versions.
-
-Here is a new upstream, and the commit that fixes your problem:
-http://gitorious.org/enca/enca/commit/163589d468dee45ab5495a8f4f8058d27da91a91
-
-
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
 
 
 
