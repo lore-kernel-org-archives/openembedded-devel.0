@@ -1,30 +1,17 @@
-Received: from [93.186.196.80] (helo=mis07.de)
+Received: from [63.81.120.158] (helo=gateway-1237.mvista.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mailings@hardware-datenbank.de>) id 1MgmFy-0000MR-KW
+	(envelope-from <clarson@mvista.com>) id 1MgmZT-0006py-7S
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Aug 2009 23:11:42 +0200
-Received: by mis07.de (Postfix, from userid 65534)
-	id 39CFC144E027; Thu, 27 Aug 2009 22:53:37 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on mis07.de
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=ALL_TRUSTED,AWL
-	autolearn=disabled version=3.2.5
-Received: from pcvirus (p5DC8F70E.dip.t-dialin.net [93.200.247.14])
-	by mis07.de (Postfix) with ESMTPA id 537A2144E01C
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2009 22:53:35 +0200 (CEST)
-Message-ID: <9DACC7DD08D24732B789F4CCFC1145EC@pcvirus>
-From: "rath" <mailings@hardware-datenbank.de>
-To: <openembedded-devel@lists.openembedded.org>
-References: <17EB92EC37534805AA9639B72BDB7947@pcvirus>
-	<h71i51$7na$1@ger.gmane.org>
-Date: Thu, 27 Aug 2009 22:53:24 +0200
-MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2900.5843
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
-Subject: Re: Recipe for libv4l
+	Thu, 27 Aug 2009 23:31:51 +0200
+Received: from localhost.localdomain (foul.az.mvista.com [10.50.1.75])
+	by hermes.mvista.com (Postfix) with ESMTP
+	id 4DBE21B24F; Thu, 27 Aug 2009 14:13:42 -0700 (PDT)
+From: Chris Larson <clarson@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 27 Aug 2009 14:11:13 -0700
+Message-Id: <1251407473-1847-1-git-send-email-clarson@mvista.com>
+X-Mailer: git-send-email 1.6.1.rc3.354.g332d31
+Subject: [PATCH] insane.bbclass: catch a specific gettext failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,42 +25,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2009 21:11:42 -0000
-Content-Type: text/plain; format=flowed; charset="iso-8859-1";
-	reply-type=response
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 27 Aug 2009 21:31:51 -0000
 
+You can run into issues with old po/* with our more recent build tools.  For
+the recipes that hit this, you likely need to stop doing the autoreconf, or
+run a gettextize on the tree with our more recent gettext.
 
-The existing recipe only includes the V4L Api. But I also want the different 
-drivers, which are included in this archiv:
-http://linuxtv.org/hg/~hgoede/libv4l/archive/a1d79882b7eb.tar.bz2
+Signed-off-by: Chris Larson <clarson@mvista.com>
+---
+ classes/insane.bbclass |   13 ++++++++++---
+ 1 files changed, 10 insertions(+), 3 deletions(-)
 
-> On 25-08-09 19:40, Rath wrote:
->> Hi,
->>
->> I've tried to write a recipe for libv4l, but I get a file not found
->> error and the kernel version is identified as 2.6.29 but I have
->> 2.6.29-omap1.
->> Here is the recipe: http://pastie.org/592125 and the compile log:
->> http://pastie.org/592124
->>
->> What's wrong with the recipe?
->
-> Slightly different question: what's wrong the the existing recipe[1]?
->
-> regards,
->
-> Koen
->
-> [1] 
-> http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/v4l2apps/libv4l_0.5.8.bb
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+diff --git a/classes/insane.bbclass b/classes/insane.bbclass
+index 606270d..b811ad0 100644
+--- a/classes/insane.bbclass
++++ b/classes/insane.bbclass
+@@ -546,10 +546,17 @@ python do_qa_configure() {
+     bb.debug(1, "Checking sanity of the config.log file")
+     import os
+     for root, dirs, files in os.walk(bb.data.getVar('WORKDIR', d, True)):
+-        statement = "grep 'CROSS COMPILE Badness:' %s > /dev/null" % \
+-                    os.path.join(root,"config.log")
++        logfile = os.path.join(root, "config.log")
++        crosscheck = "grep 'CROSS COMPILE Badness:' %s > /dev/null" % logfile
++        gettextcheck = "grep -E 'WARNING:  (po|intl)/Makefile.*\.in seems to ignore the .*dir setting$' %s > /dev/null" % logfile
+         if "config.log" in files:
+-            if os.system(statement) == 0:
++            if os.system(crosscheck) == 0:
+                 bb.fatal("""This autoconf log indicates errors, it looked at host includes.
+ Rerun configure task after fixing this. The path was '%s'""" % root)
++            if os.system(gettextcheck) == 0:
++                bb.fatal("""The configure script reports that the gettext Makefiles aren't obeying
++all of its variables.  This can indicate the use of old gettext files that may not work with the
++current build tools used by OpenEmbedded.  We advise either avoiding autoreconf execution, or, the
++preferred method, patching the source tree with the results of a gettextize run from current gettext.
++The path is %s.""" % root)
+ }
+-- 
+1.6.0
 
 
 
