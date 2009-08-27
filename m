@@ -1,38 +1,32 @@
-Received: from [209.85.221.191] (helo=mail-qy0-f191.google.com)
+Received: from [84.21.108.25] (helo=ns.penguin.cz ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1Mgh2C-00034p-9q
+	(envelope-from <utx@penguin.cz>) id 1Mgklf-0008Ek-VR
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Aug 2009 17:37:08 +0200
-Received: by qyk29 with SMTP id 29so639852qyk.16
+	Thu, 27 Aug 2009 21:36:20 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 21CED1416BAC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Aug 2009 08:19:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=Nig/B/iVFv8SCN++OMZaq2PAASPiT5u1Lqpdcp+huTs=;
-	b=vZGTGXWSye/idPVPpKkeRgmTTPlVSdzICPvlm1Nmux5MoIeJroN9G5YPMcNSIrPy2B
-	pYnKuBirnl7+gBchSBEtZsiSDUy8J+G57zn/sqATBH3tzfCLS9JrNcYCCzEbym65WE/3
-	srZkS8DuGmUz+wAt+b1edh988z28Ist++GbNg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	b=wyBvcAZ4fGdbowSVjdICWIL1nouccnegr+Tq51RlYN1xhTlMikLnPExYztwPji27qg
-	/jgsxCnq9GP+lpP3f6GXkjysZI0LIHgCFlbJe4EowjJGsDRrI3lu65Lo6435OZ636/QD
-	4AXiKea5OMyfV4nkcvU0LtxrMQjLsdtXoJ8Qk=
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.33.15 with SMTP id f15mr2911228qcd.59.1251386342092; Thu, 
-	27 Aug 2009 08:19:02 -0700 (PDT)
-In-Reply-To: <4A965026.3020701@dresearch.de>
-References: <4A965026.3020701@dresearch.de>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 27 Aug 2009 08:18:42 -0700
-X-Google-Sender-Auth: 259129056e5a73ae
-Message-ID: <b6ebd0a50908270818o57a5119q9a72ba7552bbd0e0@mail.gmail.com>
+	Thu, 27 Aug 2009 21:10:36 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id vr9HgtWFwZow
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Aug 2009 21:10:36 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id E90C71416BA5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Aug 2009 21:10:35 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: nfs-utils-1.1.2 problem
+In-Reply-To: <1251370014.27780.13.camel@mill.internal.reciva.com>
+References: <4A94E1CC.2090404@gmail.com>
+	<1251370014.27780.13.camel@mill.internal.reciva.com>
+Date: Thu, 27 Aug 2009 21:18:13 +0200
+Message-Id: <1251400693.5879.3.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
+Subject: Re: [PATCH] enca_1.9.bb: remove unused configure test which	is bound to fail.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,67 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2009 15:37:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 27 Aug 2009 19:36:20 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-That sounds like a case of someone installing the libtool wrapper
-script into the rootfs instead of the real binary.  The do_install may
-be directly using 'install' to install it.  It should be changed to
-use a normal make install, or call out ${S}/${HOST_SYS}-libtool
---mode=3Dinstall install <rest of install command>.  NOTE: This is
-conjecture, I haven't read the recipe, or tested, but it's similar to
-an issue I hit last week.
+Phil Blundell wrote:
+> On Wed, 2009-08-26 at 16:48 +0930, Graham Gower wrote:
+> > Enca's configure will fail on everything not arm or ix86.
+> > 
+> > Signed-off-by: Graham Gower <graham.gower@gmail.com>
+> > ---
+> >  recipes/enca/enca_1.9.bb |    7 ++++++-
+> >  site/arm-linux           |    3 ---
+> >  site/ix86-common         |    3 ---
+> >  3 files changed, 6 insertions(+), 7 deletions(-)
+> 
+> Looks fine to me.  It does seem a bit weird that enca tests this scanf
+> thing and then doesn't use the information but, sure enough, I couldn't
+> find any reference to the result anywhere in the source code.
 
-On Thu, Aug 27, 2009 at 2:21 AM, Steffen Sledz<sledz@dresearch.de> wrote:
-> I see a problem with mountd from nfs-utils-1.1.2 (Angstrom, current OE de=
-v branch):
->
-> starting mountd: /usr/sbin/mountd: line 148: /usr/bin/sed: not found
-> /usr/sbin/mountd: line 148: /usr/bin/sed: not found
-> /usr/sbin/mountd: cd: line 1: can't cd to /home/DRESEARCH/production/META=
-BUILD/20090826190001-hydraip-build-1978/OE/tmp.3/wor
-> k/armv5te-angstrom-linux-gnueabi/nfs-utils-1.1.2-r4/nfs-utils-1.1.2/utils=
-/mountd
-> arm-angstrom-linux-gnueabi-gcc: mountd-mountd.o: No such file or director=
-y
-> arm-angstrom-linux-gnueabi-gcc: mountd-mount_dispatch.o: No such file or =
-directory
-> arm-angstrom-linux-gnueabi-gcc: mountd-auth.o: No such file or directory
-> ...
->
-> The first problem is that /usr/sbin/mountd uses /usr/bin/sed but sed is i=
-nstalled under /bin/sed.
->
-> The second one is that /usr/sbin/mountd contains a relink_command which u=
-ses pathes from the build host:
->
-> relink_command=3D"(cd /home/DRESEARCH/sledz/work/HydraIP/OE/tmp.3/work/ar=
-mv5te-angstrom-linux-gnueabi/nfs-utils-1.1.2-r4/nfs-utils-1.1.2/utils/mount=
-d; =C2=A0...
->
-> Could someone please have a look at this.
->
-> Thx,
-> Steffen
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+It seems to be a relict from old versions.
+
+Here is a new upstream, and the commit that fixes your problem:
+http://gitorious.org/enca/enca/commit/163589d468dee45ab5495a8f4f8058d27da91a91
 
 
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
---=20
-Chris Larson
-clarson at kergoth dot com
-clarson at mvista dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Software Engineer
-MontaVista Software, Inc.
 
 
