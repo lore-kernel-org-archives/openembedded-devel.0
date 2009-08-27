@@ -1,44 +1,35 @@
-Received: from [209.85.211.175] (helo=mail-yw0-f175.google.com)
+Received: from [209.85.221.196] (helo=mail-qy0-f196.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <perezmeyer@gmail.com>) id 1MgTgO-0004N8-NV
+	(envelope-from <kergoth@gmail.com>) id 1MgUeZ-0003AD-Vh
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 Aug 2009 03:21:45 +0200
-Received: by ywh5 with SMTP id 5so807462ywh.13
+	Thu, 27 Aug 2009 04:23:56 +0200
+Received: by qyk34 with SMTP id 34so344820qyk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Aug 2009 18:03:42 -0700 (PDT)
+	Wed, 26 Aug 2009 19:05:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:mime-version:received:date
-	:delivered-to:message-id:subject:from:to:x-uid:x-length:x-face
-	:content-type:content-transfer-encoding;
-	bh=Dyk4MDAjxxsgkuNfHlMPRFHxfhb9yASzyPmSkZohPGQ=;
-	b=G4hiqwnBppWwZ1X+q7znxI23agg/hVptOt4bBbNdej9Nh5yRI6gdo7IfpbQkhJC4Mt
-	SaR7p3vIJ/3s2gZNwQ0NENQOSA98KkkHkQWK1mCtSKahEViHJHQb4GqUDKwNbUrAkM8K
-	ZR4tLXAQPC/IbxiwlbeBf8jHip1qBfLuVcuI4=
+	h=domainkey-signature:mime-version:sender:received:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=hMDKBJTFSP5eKBiekYRK+EZLJrU3MeDh4h8G4pN4858=;
+	b=VjSRCnzn/Df+aQft4Qy9zMRSlFfiWRs608iAA9r489P9GlwDgvr8WbSpX7a7iN4n5B
+	WzeDefjgJahxUAqVRCfZzLrANTFVZBIcsSTF7TC+lYLtHIA28O7Un+ZA0Nkew7gm/oOY
+	WtIKim+pOaOdxzp37iIyJEHY1D/YkQiKapuiQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:delivered-to:message-id:subject:from:to:x-uid
-	:x-length:x-face:content-type:content-transfer-encoding;
-	b=UAnFrErTBpI2T3V9Nq6cqHD80tPA6cim0PwK3DdlMZqMT3CoY1eBlrTOl4KuZS5n42
-	+upbuZaRiEtLC8S7t9w/OdVXX5jE+KHdThLKILY2jepCPRO63pCwK3G3UolhUOu9qiaD
-	Dw/a9nEw4Rpx2Ums4i2A7CogRHUiLimNVNtrY=
-Received: by 10.90.226.13 with SMTP id y13mr6529683agg.107.1251335021307;
-	Wed, 26 Aug 2009 18:03:41 -0700 (PDT)
-Received: from luna.localnet ([190.1.23.136])
-	by mx.google.com with ESMTPS id 4sm3787364agc.40.2009.08.26.18.03.40
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 26 Aug 2009 18:03:40 -0700 (PDT)
+	h=mime-version:sender:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type:content-transfer-encoding;
+	b=x3l1M7vX2bY/vuUIUfs9uQYjT6hqCV+u8gul3JjiNSzvA0Nwir9fukfUA09g76mffu
+	OuTjclNpDiR75ytoUvJKE5ryTWfrD3PKGVSRmOcT1Gza51h66gEVyNhkfFnSqxvSZeL1
+	QUbgkr5/Ju4MzniZOOHDlpw5jal7rxIsLb8ck=
 MIME-Version: 1.0
-Received: by 10.100.108.7 with HTTP; Wed, 26 Aug 2009 12:50:36 -0700 (PDT)
-Date: Wed, 26 Aug 2009 22:03:00 -0300
-Message-Id: <200908262203.01153.perezmeyer@gmail.com>
-From: Lisandro =?utf-8?q?Dami=C3=A1n_Nicanor_P=C3=A9rez_Meyer?=
-	<perezmeyer@gmail.com>
+Sender: kergoth@gmail.com
+Received: by 10.229.39.201 with SMTP id h9mr2694462qce.4.1251338753171; Wed, 
+	26 Aug 2009 19:05:53 -0700 (PDT)
+From: Chris Larson <clarson@kergoth.com>
+Date: Wed, 26 Aug 2009 19:05:33 -0700
+X-Google-Sender-Auth: ee3ee16f18bc888f
+Message-ID: <b6ebd0a50908261905r7d839647k6fc53460301efca0@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-UID: 85
-X-Length: 1879
-X-Face: &O7POA^t$8Gq0El|^zM9V:*jgn,ETU\1A73; Zdeojd,G(a"; /Y0Fu|/*_jQF+@3';
-	#.O@ =?UTF-8?q?=26=0A=09=2ET?="FaLh+5o_F,\lrKg~{JYYVM20<P[J.ve7:7m;
-	51A=i@"XBI].=`ZFX4h@tGL> =?UTF-8?q?Q1I=26fUN=0A=094?=<\TGcR5=
-Subject: Message error when mounting for the first time, missing files
+Subject: srctree & gitver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,46 +43,174 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Aug 2009 01:21:46 -0000
-Content-Type: text/plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 27 Aug 2009 02:23:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello everyone! I am using angstrom/stable2009 with "few" modifications
-(mainly a proper kernel for my board, an Econ's eSOM270, kernel 2.6.25). Wh=
-en
-I mount the first time the jffs2 image, I get this error:
+I'm going to summarize the features of the two classes I've created
+over the past couple days.  I believe that they will make the lives of
+app & kernel developers much easier when dealing with bitbake/OE/MVL6.
 
-INFO: task mount:1823 blocked for more than 120 seconds.
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-mount         D c02d4150     0  1823   1816
-[<c02d3f00>] (schedule+0x0/0x298) from [<c02d5240>]
-(__down_write_nested+0xc8/0x
-dc)
-[<c02d5178>] (__down_write_nested+0x0/0xdc) from [<c02d5268>]
-(__down_write+0x14
-/0x18)
- r5:c7ebdef0 r4:c7d5a400
-[<c02d5254>] (__down_write+0x0/0x18) from [<c02d4b74>] (down_write+0x10/0x1=
-4)
-[<c02d4b64>] (down_write+0x0/0x14) from [<c008d938>] (do_remount+0x78/0xb0)
-[<c008d8c0>] (do_remount+0x0/0xb0) from [<c008e388>] (do_mount+0x104/0x190)
-[<c008e284>] (do_mount+0x0/0x190) from [<c008e4a0>] (sys_mount+0x8c/0xd4)
-[<c008e414>] (sys_mount+0x0/0xd4) from [<c0020a40>]
-(ret_fast_syscall+0x0/0x2c)
- r7:00000015 r6:bec00b38 r5:bec00b04 r4:00000000
+srctree facilitates bitbake builds in existing source trees, bypassing
+the fetch/unpack/patch idiom.  It's easy to allow the user to put the
+recipe in their source tree, if they want to store it in their scm
+repository with their app/kernel code, or you can point the recipe at
+external trees.  This works for app and kernel development.
 
-This happens just the first time. Also I cannot find /usr/lib/libdbus* nor
-/usr/lib/libdaemon*, which are in the jffs2 image before flashing :-/
+gitver facilitates extraction of version information from git.  By
+default, it runs 'git describe' to get the version.  If that fails, it
+will set the version to 0.0-<sha1 hash>.  This version is stored in
+the ${GITVER} variable, and can be used in the recipe's PV variable.
+When using this, it will automatically detect changes to .git/HEAD
+(i.e. commit your local changes, check out a different branch, ..) and
+invalidate the bitbake cache, pick up the new PV, and know that it
+needs to re-run the build steps.
 
-Any hints?
+Examples:
+Common steps:
 
-Regards, Lisandro.
+$ cd myproject
+~/oe/projects/myproject
+$ . ./setup.sh
 
-=2D-=20
 
-Lisandro Dami=C3=A1n Nicanor P=C3=A9rez Meyer
-http://perezmeyer.com.ar/
-http://perezmeyer.blogspot.com/
+Example of a user who wants bitbake to build their existing source
+tree outside the project:
+Userland:
+
+$ cd myproject
+~/oe/projects/myproject
+$ . ./setup.sh
+$ cat <<END >collections/custom/hello.bb
+inherit srctree
+
+# Pointing to the external source tree
+S = "${HOME}/code/hello"
+DESCRIPTION = "Hello, World"
+
+do_install () {
+   install -D -m 0755 hello ${D}${bindir}/hello
+}
+END
+$ bitbake hello
+
+Kernel:
+
+$ cat <<END >collections/custom/linux.bb
+inherit kernel srctree gitver
+
+# Strip off the leading 'v' from the Linux kernel git tags
+PV = "${@'${GITVER}'[1:]}"
+
+# Point to my existing kernel development tree
+S = "${HOME}/code/linux-2.6"
+END
+$ bitbake linux
+
+
+Example of a user who wants their source tree to live in their project:
+Userland:
+
+$ mkdir collections/hello
+$ cd collections/hello
+~/oe/projects/myproject/collections/hello
+$ cat <<END >hello.c
+heredoc> #include <stdio.h>
+heredoc>
+heredoc> int main(int argc, char **argv)
+heredoc> {
+heredoc>     printf("Hello, World!\n");
+heredoc> }
+heredoc> END
+$ cat <<END >Makefile
+heredoc> all: hello
+heredoc> hello: hello.c
+heredoc>        \$(CC) \$(CFLAGS) \$(LDFLAGS) hello.c -o hello
+heredoc> clean:
+heredoc>        rm -f hello
+heredoc> END
+$ cat <<END >hello.bb
+heredoc> inherit srctree
+heredoc>
+heredoc> DESCRIPTION = "Hello, World."
+heredoc>
+heredoc> do_install () {
+heredoc>     install -D -m 0755 hello \${D}\${bindir}/hello
+heredoc> }
+heredoc> END
+$ bitbake hello
+NOTE: Handling BitBake files: \ (0010/0010) [100%%]
+NOTE: Parsing finished. 0 cached, 10 parsed, 0 skipped, 0 masked.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 1 of 2 (ID: 1,
+/home/clarson/oe/projects/myproject/collections/hello/hello.bb,
+do_populate_staging)
+NOTE: Running task 2 of 2 (ID: 0,
+/home/clarson/oe/projects/myproject/collections/hello/hello.bb,
+do_build)
+NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be
+rerun and 0 failed.
+$ ls
+hello  hello.bb  hello.c  Makefile
+$ ./hello
+Hello, World!
+$ bitbake -c clean hello
+NOTE: Handling BitBake files: \ (0010/0010) [100%%]
+NOTE: Parsing finished. 10 cached, 0 parsed, 0 skipped, 0 masked.
+NOTE: Cache is clean, not saving.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 1 of 1 (ID: 0,
+/home/clarson/oe/projects/myproject/collections/hello/hello.bb,
+do_clean)
+NOTE: Removing stamps
+NOTE: Removing /home/clarson/oe/projects/myproject/tmp/work/i486-linux/hello-1.0-r0
+NOTE: Running make clean
+NOTE: Tasks Summary: Attempted 1 tasks of which 0 didn't need to be
+rerun and 0 failed.
+$ ls
+hello.bb  hello.c  Makefile
+$ sed -i -e 's,World,Country,' hello.c
+$ bitbake hello
+NOTE: Handling BitBake files: \ (0010/0010) [100%%]
+NOTE: Parsing finished. 10 cached, 0 parsed, 0 skipped, 0 masked.
+NOTE: Cache is clean, not saving.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 1 of 2 (ID: 1,
+/home/clarson/oe/projects/myproject/collections/hello/hello.bb,
+do_populate_staging)
+NOTE: Running task 2 of 2 (ID: 0,
+/home/clarson/oe/projects/myproject/collections/hello/hello.bb,
+do_build)
+NOTE: Tasks Summary: Attempted 2 tasks of which 0 didn't need to be
+rerun and 0 failed.
+$ ./hello
+Hello, Country!
+$
+
+Kernel:
+$ git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux-2.6.git
+collections/linux-2.6
+[... git output ...]
+$ cat <<END >collections/linux-2.6/linux.bb
+inherit kernel srctree gitver
+
+# Strip off the leading 'v' from the Linux kernel git tags
+PV = "${@'${GITVER}'[1:]}"
+END
+$ bitbake linux
+-- 
+Chris Larson
+clarson at kergoth dot com
+clarson at mvista dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Software Engineer
+MontaVista Software, Inc.
 
 
