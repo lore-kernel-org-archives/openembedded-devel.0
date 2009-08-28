@@ -1,31 +1,36 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [209.85.218.210] (helo=mail-bw0-f210.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Mh2OB-0005uC-5V
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1Mh2rd-0006ni-8q
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Aug 2009 16:25:15 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 447F816E23B
+	Fri, 28 Aug 2009 16:55:41 +0200
+Received: by bwz6 with SMTP id 6so687530bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Aug 2009 16:07:05 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 0180D2A4259
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Aug 2009 16:07:04 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Fri, 28 Aug 2009 16:07:04 +0200
-Message-ID: <4A97E464.8060703@dresearch.de>
-Date: Fri, 28 Aug 2009 16:06:28 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+	Fri, 28 Aug 2009 07:37:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=qLH4KpBMXl+HZzDVg7MuO2nZaCMflIuMvKwy1SJz6TI=;
+	b=mw0eo0duFEfOaozRMMR4MsxWNOuiLLdbAJtKu0D68luVQTmQeZrbSNxOQdHp7wx9Yu
+	W3igzFr5eWZMfeifm40hoHiSUCnAjhx9ov9M8rNQK3KPzBF1NdTE66MVseg+1m/8Zwlo
+	UTpci8cbufE5sdjzjo+g3R751GdVggQDWMtwU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=eKycbn48cVtHrtnDby3vuPuicFjP+v6dHwXe4h7AMDfxvjyht250EdZawh6k8yoQYj
+	kiwlsuuWiuStmGHtitqx6FtBZahEzHYTUjSXLqXCV9UFyPzOPsTmWHOtXtY/4+gJxzA+
+	+MOVNsbP8NX0ynay1bP5Sx5Txa6ne/u4nkq98=
 MIME-Version: 1.0
+Received: by 10.103.84.10 with SMTP id m10mr325764mul.60.1251470248568; Fri, 
+	28 Aug 2009 07:37:28 -0700 (PDT)
+In-Reply-To: <1246474461-16671-9-git-send-email-marcin@juszkiewicz.com.pl>
+References: <200907011817.02564.marcin@juszkiewicz.com.pl>
+	<1246474461-16671-9-git-send-email-marcin@juszkiewicz.com.pl>
+Date: Fri, 28 Aug 2009 17:37:28 +0300
+Message-ID: <fce2a370908280737n25668cdi7cacd82a8a141499@mail.gmail.com>
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4A965026.3020701@dresearch.de>
-	<b6ebd0a50908270818o57a5119q9a72ba7552bbd0e0@mail.gmail.com>
-In-Reply-To: <b6ebd0a50908270818o57a5119q9a72ba7552bbd0e0@mail.gmail.com>
-X-OriginalArrivalTime: 28 Aug 2009 14:07:04.0328 (UTC)
-	FILETIME=[D20A8080:01CA27E8]
-Subject: Re: nfs-utils-1.1.2 problem
+Subject: Re: [STABLE][PATCH 014/125] qemu-native.inc : force qemu native to use our C/LDFLAGS so that you don't need the required dev packages installed on host. Use our OE versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,23 +44,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Aug 2009 14:25:15 -0000
+X-List-Received-Date: Fri, 28 Aug 2009 14:55:41 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-Chris Larson wrote:
-> That sounds like a case of someone installing the libtool wrapper
-> script into the rootfs instead of the real binary.  The do_install may
-> be directly using 'install' to install it.  It should be changed to
-> use a normal make install, or call out ${S}/${HOST_SYS}-libtool
-> --mode=install install <rest of install command>.  NOTE: This is
-> conjecture, I haven't read the recipe, or tested, but it's similar to
-> an issue I hit last week.
+Any chance our stable maintainers will check the patch? :-\
 
-Would be nice, if you can take a look at the recipe. I'm not that familiar with this libtool stuff.
-
-Steffen
-
-
+On Wed, Jul 1, 2009 at 9:54 PM, Marcin
+Juszkiewicz<marcin@juszkiewicz.com.pl> wrote:
+> From: Graeme Gregory <dp@xora.org.uk>
+>
+>
+> Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+> ---
+> =C2=A0recipes/qemu/qemu-native.inc | =C2=A0 =C2=A03 +++
+> =C2=A01 files changed, 3 insertions(+), 0 deletions(-)
+>
+> diff --git a/recipes/qemu/qemu-native.inc b/recipes/qemu/qemu-native.inc
+> index e4064a2..9edad66 100644
+> --- a/recipes/qemu/qemu-native.inc
+> +++ b/recipes/qemu/qemu-native.inc
+> @@ -1,3 +1,6 @@
+> =C2=A0inherit native
+>
+> =C2=A0DEPENDS =3D "libsdl-native zlib-native"
+> +
+> +export OS_CFLAGS=3D"${CFLAGS} ${LDFLAGS}"
+> +
+> --
+> 1.6.3.1
+>
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
