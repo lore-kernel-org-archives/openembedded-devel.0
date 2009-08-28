@@ -1,36 +1,32 @@
-Received: from [209.85.218.210] (helo=mail-bw0-f210.google.com)
+Received: from [209.85.219.228] (helo=mail-ew0-f228.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1Mh2rd-0006ni-8q
+	(envelope-from <sinestado@gmail.com>) id 1Mh9el-0001Wx-Vl
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 Aug 2009 16:55:41 +0200
-Received: by bwz6 with SMTP id 6so687530bwz.12
+	Sat, 29 Aug 2009 00:11:15 +0200
+Received: by ewy28 with SMTP id 28so2540962ewy.39
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Aug 2009 07:37:28 -0700 (PDT)
+	Fri, 28 Aug 2009 14:52:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=qLH4KpBMXl+HZzDVg7MuO2nZaCMflIuMvKwy1SJz6TI=;
-	b=mw0eo0duFEfOaozRMMR4MsxWNOuiLLdbAJtKu0D68luVQTmQeZrbSNxOQdHp7wx9Yu
-	W3igzFr5eWZMfeifm40hoHiSUCnAjhx9ov9M8rNQK3KPzBF1NdTE66MVseg+1m/8Zwlo
-	UTpci8cbufE5sdjzjo+g3R751GdVggQDWMtwU=
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=65Y8b469lvCXqko9zr9VfAQUXN+pCbSfv0NCJR5Vq6M=;
+	b=KWx2+qd5PDyUf2EGcM3lcYZ7qQgRRbo3TYKH7rE+LsmSXC/I8ny10nc05yewsgnf3P
+	UHLBczHMLnMLryU92kzWZIzrNg3X4ohynZiQhCv7Yb23BCDapAztoG7mNdhFE2bktTWZ
+	Wf3kUi72KW6SapwzZHBEnRxtfWDdDO9+ci0+c=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=eKycbn48cVtHrtnDby3vuPuicFjP+v6dHwXe4h7AMDfxvjyht250EdZawh6k8yoQYj
-	kiwlsuuWiuStmGHtitqx6FtBZahEzHYTUjSXLqXCV9UFyPzOPsTmWHOtXtY/4+gJxzA+
-	+MOVNsbP8NX0ynay1bP5Sx5Txa6ne/u4nkq98=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=YUqBPUEuFroY/OLuHmhdlTtd24aouvF/n+t4QxT7MpIUuhD7ShJ75raFADshRfp5ci
+	eGjCaSYpgcHS1m8Bl8DIZKOwbagUccW2t2Tj0xqobtHpLauo0SPEgXGkii00aiqphbKw
+	JWVlhuZeg5WLztC25SPSLrfaIla9o5bOukDsE=
 MIME-Version: 1.0
-Received: by 10.103.84.10 with SMTP id m10mr325764mul.60.1251470248568; Fri, 
-	28 Aug 2009 07:37:28 -0700 (PDT)
-In-Reply-To: <1246474461-16671-9-git-send-email-marcin@juszkiewicz.com.pl>
-References: <200907011817.02564.marcin@juszkiewicz.com.pl>
-	<1246474461-16671-9-git-send-email-marcin@juszkiewicz.com.pl>
-Date: Fri, 28 Aug 2009 17:37:28 +0300
-Message-ID: <fce2a370908280737n25668cdi7cacd82a8a141499@mail.gmail.com>
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+Received: by 10.216.73.85 with SMTP id u63mr346941wed.37.1251496356724; Fri, 
+	28 Aug 2009 14:52:36 -0700 (PDT)
+Date: Fri, 28 Aug 2009 18:52:36 -0300
+Message-ID: <a63ecaf0908281452x12ab1a84w9df0b4a9e0f98163@mail.gmail.com>
+From: Sushi Sensei <sinestado@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [STABLE][PATCH 014/125] qemu-native.inc : force qemu native to use our C/LDFLAGS so that you don't need the required dev packages installed on host. Use our OE versions
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Error with xterm_207.bb in Fedora
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,43 +40,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Aug 2009 14:55:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 28 Aug 2009 22:11:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Any chance our stable maintainers will check the patch? :-\
+There are an error when try to select the mode for install:
+A patch for sinstall.sh will be added
+For example, changing line 120:
 
-On Wed, Jul 1, 2009 at 9:54 PM, Marcin
-Juszkiewicz<marcin@juszkiewicz.com.pl> wrote:
-> From: Graeme Gregory <dp@xora.org.uk>
->
->
-> Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-> ---
-> =C2=A0recipes/qemu/qemu-native.inc | =C2=A0 =C2=A03 +++
-> =C2=A01 files changed, 3 insertions(+), 0 deletions(-)
->
-> diff --git a/recipes/qemu/qemu-native.inc b/recipes/qemu/qemu-native.inc
-> index e4064a2..9edad66 100644
-> --- a/recipes/qemu/qemu-native.inc
-> +++ b/recipes/qemu/qemu-native.inc
-> @@ -1,3 +1,6 @@
-> =C2=A0inherit native
->
-> =C2=A0DEPENDS =3D "libsdl-native zlib-native"
-> +
-> +export OS_CFLAGS=3D"${CFLAGS} ${LDFLAGS}"
-> +
-> --
-> 1.6.3.1
->
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+PROG_MODE=`echo ".$cf_mode" | sed -e 's/^..//' -e 's/rw./7/g' -e 's/r-./5/g'
+-e 's/--[sxt]/1/g'`
 
+for:
+
+PROG_MODE=`echo ".$cf_mode" | sed -e 's/^..//' -e 's/rw./7/g' -e 's/r-./5/g'
+-e 's/--[sxt]/1/g'|tr -d '.'`
+
+
+I don't know to who send this "patch"
+------------------------------------------------------
+
+NOTE: Running task 8 of 8 (ID: 7,
+/home/koan/devel/openembedded/recipes/xorg-app/xterm_207.bb, do_install)
+ERROR: function do_install failed
+ERROR: log data follows
+(/home/koan/devel/build/kaeilos/tmp/work/i586-kaeilos-linux/xterm-207-r0/temp/log.do_install.16329)
+| NOTE: make
+DESTDIR=/home/koan/devel/build/kaeilos/tmp/work/i586-kaeilos-linux/xterm-207-r0/image
+install
+| /bin/sh
+/home/koan/devel/build/kaeilos/tmp/work/i586-kaeilos-linux/xterm-207-r0/xterm-207/mkdirs.sh
+/home/koan/devel/build/kaeilos/tmp/work/i586-kaeilos-linux/xterm-207-r0/image/usr/bin
+| mkdir
+/home/koan/devel/build/kaeilos/tmp/work/i586-kaeilos-linux/xterm-207-r0/image/usr
+| mkdir
+/home/koan/devel/build/kaeilos/tmp/work/i586-kaeilos-linux/xterm-207-r0/image/usr/bin
+| /bin/sh
+/home/koan/devel/build/kaeilos/tmp/work/i586-kaeilos-linux/xterm-207-r0/xterm-207/sinstall.sh
+"/home/koan/devel/build/kaeilos/tmp/staging/x86_64-linux/usr/bin/install -c"
+xterm  /usr/bin/xterm
+/home/koan/devel/build/kaeilos/tmp/work/i586-kaeilos-linux/xterm-207-r0/image/usr/bin/`echo
+xterm|  sed 's/$//'|sed 's,x,x,'|sed 's/$//'`
+| checking for presumed installation-mode
+| ... if "/usr/bin/xterm" is null, try the ls -g option
+| ... if "/usr/bin/xterm" is null, we do not look for group
+| ... if we have date in proper columns (Mar 2 10:57), "" is null
+| ... derived user "root", group "root" of previously-installed xterm
+| ... see if mode "-rwxr-xr-x." has s-bit set
+| ... installing xterm as user "emiliano", group "emiliano"
+| /home/koan/devel/build/kaeilos/tmp/staging/x86_64-linux/usr/bin/install -c
+-m 755.   xterm
+/home/koan/devel/build/kaeilos/tmp/work/i586-kaeilos-linux/xterm-207-r0/image/usr/bin/xterm
+| /home/koan/devel/build/kaeilos/tmp/staging/x86_64-linux/usr/bin/install:
+invalid mode `755.'
+| make: *** [install] Error 1
+| FATAL: oe_runmake failed
+
+
+
+
+-- 
+------------------------------------------------------
+--- Timeo Danaos et dona ferentes ---
+------------------------------------------------------
 
