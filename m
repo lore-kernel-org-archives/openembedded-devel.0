@@ -1,31 +1,32 @@
 Received: from [209.85.220.224] (helo=mail-fx0-f224.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1MhXSH-0007w2-Vx
+	(envelope-from <leon.woestenberg@gmail.com>) id 1MhXYS-00088c-AC
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Aug 2009 01:35:34 +0200
-Received: by fxm24 with SMTP id 24so1188030fxm.12
+	Sun, 30 Aug 2009 01:41:56 +0200
+Received: by fxm24 with SMTP id 24so1189165fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Aug 2009 16:17:12 -0700 (PDT)
+	Sat, 29 Aug 2009 16:23:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=nwbGZEyBT87pLXTc/gkQdoMvI9qYDe8tmbmhIp9dd10=;
-	b=XWygRXg3eyvhXaYlEdHpWQniU3U4OGgBsvhOAz5x4K7upPnixxtHr+yyR8bf40PgYp
-	MFCLy7XQoungDyt/2/Fgv834PdlBkvtZKFtBLjjZeEPsZS0GpmaGrZ+BwuGZjkTuVL5B
-	H8hOxTnHiw2rfGTum6p+DwEB52swdTR7MVa6E=
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=4w6zdH+WKrVuOjaqqiLu9y0k6rIE3/TsUAePMconShw=;
+	b=qjH2syhd8tlOb5qA1qZXP628e9Z9QCo6pvueVeDAZoarsoK5KsuYyn0p240H+aT4Wn
+	xLjQaKNrINWCgZdNEZU0rli499tcoJk3GBlzNb+8jkzqIHLiwDUwhoBCEOpWRwqZDSBM
+	XBxS8J+LWMgNHqvHWKMa1Mzel1EyBImN+OSjg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=fMKhTfCi1DPR3lq/ZsqSyjTFU2EiN0TVQCi19RTmxdXfgJfOiF7ivvwOhR4phU2MGK
-	z/3dPgmUDIbOmjrFbMd8xr59rnwMrsg99ptcnQulnYCFwWdWK2dXzIVEyBsy5iRFikVJ
-	zp7/CQ0nZOOw8f/fTsGljLrX5SuvZw6y/9srU=
+	:content-type:content-transfer-encoding;
+	b=DUA4lmXRKCZRMLBi0WW5xQs2CEB+SJd2nIAu60zItdDwVEN8GoNfWLAJn9RnMg5wXi
+	Ua0IDnKxBS5/JVodiX3owdT66U+pjX437bQKhR3+UQ0rAxjQoynxfTaGk4AwBALrr3PW
+	CtlV1xxp51/S6Ho8E+wADMhONdHgHpLRJv/gA=
 MIME-Version: 1.0
-Received: by 10.239.139.132 with SMTP id t4mr272203hbt.88.1251587832442; Sat, 
-	29 Aug 2009 16:17:12 -0700 (PDT)
+Received: by 10.239.130.150 with SMTP id 22mr258709hbj.59.1251588214687; Sat, 
+	29 Aug 2009 16:23:34 -0700 (PDT)
 In-Reply-To: <f96d234e0908291351p1843c1ddw4d5e7f8523f21dd0@mail.gmail.com>
 References: <f96d234e0908291351p1843c1ddw4d5e7f8523f21dd0@mail.gmail.com>
-Date: Sun, 30 Aug 2009 01:17:12 +0200
-Message-ID: <c384c5ea0908291617k3e6f3de0j6bfbc0392f1c1737@mail.gmail.com>
+Date: Sun, 30 Aug 2009 01:23:34 +0200
+Message-ID: <c384c5ea0908291623t1db9868du460184f390306d1c@mail.gmail.com>
 From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Subject: Re: getting back to < 2MB rootfs with mtd-utils
@@ -42,39 +43,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Aug 2009 23:35:34 -0000
+X-List-Received-Date: Sat, 29 Aug 2009 23:41:56 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hello Cliff,
+Hello,
 
 On Sat, Aug 29, 2009 at 10:51 PM, Cliff Brake<cliff.brake@gmail.com> wrote:
-> - minimal-image is not all that minimal any more
-> - micro-image is better
->
-Better how?
-
+> So I need to figure out why mtd-utils is pulling in so much stuff.
+> Also, it would be nice to remove opkg. =A0These are mostly just notes as
 > I work through this, but if anyone has good ideas, they are welcome
 >
 
-We suffer from feature creep. A good idea would be to define what goes
-in the images, so that we have a few base images people can use as a
-basis, and that don't suffer from the developer expansion drifts. :-)
+Uhm, and I wish someone could fix the bitbake "-g" option (generate
+dependency graphs).
 
-For example:
+I'm offering a $20 code bounty for fixing it and getting that upstream.
 
-minimal-uclibc-image:
+I'm offering another $30 code bounty for adding regex ignore support
+for the dependency graph and getting that upstream.
 
-- Tries to be < 4MB total for boot loader, kernel and rootfs.
-- Uses uclibc.
-- Uses static device nodes.
-- Typically read-only rootfs.
-- Should be able to run a few applications.
 
-etc etc.
 
+My earlier work on this has grown out-of-date and my python code foo
+has grown worse while I am writing device drivers again:
+
+http://cgit.openembedded.org/cgit.cgi/openembedded/tree/contrib/dependsgrap=
+h/dependsgraph.sh
+http://bugs.openembedded.org/show_bug.cgi?id=3D1488
 
 Regards,
--- 
+--=20
 Leon
 
 
