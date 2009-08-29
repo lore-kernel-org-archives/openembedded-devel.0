@@ -1,44 +1,37 @@
-Received: from [209.85.219.219] (helo=mail-ew0-f219.google.com)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <d.vinokuroff@gmail.com>) id 1MhKCd-0000Qs-V6
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1MhKlK-0001fk-28
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Aug 2009 11:26:32 +0200
-Received: by ewy19 with SMTP id 19so3518375ewy.20
+	Sat, 29 Aug 2009 12:02:28 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 573D822001D8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Aug 2009 02:08:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=PQUYI/iv+HQA++47Whexp7Q13QxuH8fnnWmTLfXLm3g=;
-	b=bxxS5L+P52fOhIGQTJ8tWdaubtHQW9SUp0D5pdplXqdPsz+e3YCHi4vLeRrjqN1ehu
-	3qrq+minN2e+UIQvpTkteCaE0fK1DbQrEA0939a/la/3I8FO4Q04c2iaOCIQSZ5kY5wx
-	9BOp7d9SWdZ/uF3FDkY+XcZ/qAvwcfNLMn9Ys=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=KHSANSkHK+m/2LocLi5BmlEshow57XmP/BN7gscKjIE3BrgOh42N/jdj/V4zMcbY6f
-	azh+3dcsRq2ieBHlz405LygFt2s3/Bl/lRaQep7yeFi1g59QiRxgTUbXYWO0+zVQ4ObX
-	VZwJjcJ/6rY3iaxaXwq6YsJBH/S4ovUJ2H8CQ=
-Received: by 10.210.20.10 with SMTP id 10mr1452558ebt.72.1251536894484;
-	Sat, 29 Aug 2009 02:08:14 -0700 (PDT)
-Received: from ?192.168.0.7? ([94.180.58.182])
-	by mx.google.com with ESMTPS id 10sm790049eyz.33.2009.08.29.02.08.13
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 29 Aug 2009 02:08:14 -0700 (PDT)
-Message-ID: <4A98F02C.6020104@gmail.com>
-Date: Sat, 29 Aug 2009 15:09:00 +0600
-From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
-User-Agent: Mozilla-Thunderbird 2.0.0.19 (X11/20090103)
-MIME-Version: 1.0
+	Sat, 29 Aug 2009 11:44:06 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id E82312200126
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 29 Aug 2009 11:44:04 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from rhein.familie-heinold.de (g225144089.adsl.alicedsl.de
+	[92.225.144.89]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 29 Aug 2009 11:44:04 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id E99B33C327; Sat, 29 Aug 2009 11:44:03 +0200 (CEST)
+Date: Sat, 29 Aug 2009 11:44:03 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4A8D4947.5030108@gmail.com>	<200908201526.46349.holger+oe@freyther.de>	<4A8D98FB.5000400@gmail.com>	<200908210343.48652.holger+oe@freyther.de>	<4A8F9BE3.1020606@gmail.com>
-	<4A8FA20F.5050401@gmail.com>	<20090822231735.GA12848@gmail.com>
-	<4A90C2F4.1010300@gmail.com>	<20090823065305.GA6361@gmail.com>
-	<4A91434D.6070203@gmail.com> <20090823154300.GA9250@gmail.com>
-	<4A942399.2020106@gmail.com>
-In-Reply-To: <4A942399.2020106@gmail.com>
-Subject: Re: LPC3250, helloworld-image, configure: error: cannot run C compiled programs
+Message-ID: <20090829094403.GA27158@rhein.zuhause.netz>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: [PATCH] ffmpeg: fix installations of x264-presets files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,91 +45,144 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Aug 2009 09:26:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 29 Aug 2009 10:02:37 -0000
+X-Groupsio-MsgNum: 12840
+Content-Type: multipart/mixed; boundary="BXVAT5kNtrzKuDFl"
+Content-Disposition: inline
 
-Dmitry Vinokurov wrote:
-> Khem Raj wrote:
->> On (23/08/09 19:25), Dmitry Vinokurov wrote:
->>  
->>> Khem Raj wrote:
->>>    
->>>> On (23/08/09 10:17), Dmitry Vinokurov wrote:
->>>>      
->>>>>>>> ERROR: 
->>>>>>>> '/home/raydan/work/oe/openembedded/recipes/module-init-tools/module-init-tools-cross_3.2.2.bb' 
->>>>>>>>
->>>>>>>> failed
->>>>>>>> --------
->>>>>>>>
->>>>>>>> I.e. bitbake again confused cross-gcc and x86-gcc. Updated my OE
->>>>>>>> with git pull, removed tmp/ and made rebuild -- same result.
->>>>>>>>               
->>>>>>> Looks like error is in wrong ./configure parameter:
->>>>>>> --host=i686-linux instead of --host=arm-oe-linux-gnueabi .
->>>>>>> Now I'm trying to find, why --host was set to i686 and where it can
->>>>>>> be changed.
->>>>>>>             
->>>>>> its a cross package so host being i686-linux (I suppose you are 
->>>>>> building
->>>>>> on i686 box) is ok. Look into the config.log error message should 
->>>>>> be in
->>>>>> there
->>>>>>
->>>>>> -Khem
->>>>>>           
->>>>> Hm, "configure --help" says "--host=HOST cross-compile to build
->>>>> programs to run on HOST [BUILD]" and as I understand, I will run
->>>>> programs on ARM, so it should be 'arm-oe-linux-gnueabi'.
->>>>>
->>>>> Anyway, even if host should be x86, instead of i686-linux-gcc it
->>>>> finds arm-vfp-linux-gcc and fails.
->>>>>         
->>>> dont confuse pure cross with canadian cross. You are doing a normal
->>>> cross build here which means build machine is same as host machine.
->>>>
->>>> Your problem is probably because you are overriding CC and friends
->>>> which could be confusing (already confused) configure even more.
->>>>
->>>> Try setting CC_FOR_BUILD=<your native compiler on the build machine>
->>>>
->>>> Thanks
->>>>
->>>> -Khem
->>>>       
->>> Thank you for your help. I'm newbie in OE and crosscompiling at all
->>> and may confuse some things.
->>>
->>> Just now I've tried to build some not so simple as helloworld but
->>> not so complicated as kernel -- bc calculator. And I'd like to say
->>> that during configure stage it sets:
->>> --build=i686-linux --host=arm-oe-linux-gnueabi 
->>> --target=arm-oe-linux-gnueabi
->>>
->>> Builded bc works fine on my board and this is normal, not canadian,
->>> cross build.
->>>     
->>
->> its a target package being built on build machine. Your build was 
->> failing to compile a package which
->> will run on your host (similar to cross compilers) they are not same
->> cases. module-init-tools would be analogically similar to bc but not
->> module-init-tools-cross which is the package you reported failing.
->>   
-> Yes, you're right. Recently read documentation more attentively 
-> (http://docs.openembedded.org/usermanual/usermanual.html#recipes_variables) 
-> and understood that I was wrong.
-> Now appearing errors are more familiar to me and I hope soon image for 
-> LPC3250 will be built successfully and I'll report about it.
-Successfully builded kernel for LPC3250, it works on the board. But 
-trouble with module-init-tools (configure try to use CC (set to arm 
-compiler) as x86 compiler and fails due to "cannot run C compiled 
-programs") still remains -- I temporarily solved it by explicitly 
-setting CC=gcc in module-init-tools-cross_3.2.2.bb, though I don't think 
-that it is good solution.
+--BXVAT5kNtrzKuDFl
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Maybe somebody more experienced could advise, how this trouble can be 
-solved in the right way? I'm ready to give any needed logs.
+I would like to get an ack for the
+attached patch.
+
+Bye Henning
+
+--BXVAT5kNtrzKuDFl
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment; filename="0001-ffmpeg-fix-installations-of-x264-presets-files.patch"
+
+From 717332f424ba55673d76d5d881916752ab1b54f5 Mon Sep 17 00:00:00 2001
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+Date: Sun, 23 Aug 2009 22:54:11 +0200
+Subject: [PATCH] ffmpeg: fix installations of x264-presets files
+ * now x264-presets files are only installed when libx264 is available
+ * bump PR
 
 
+Signed-off-by: Henning Heinold <heinold@inf.fu-berlin.de>
+---
+ recipes/ffmpeg/ffmpeg.inc               |    5 +----
+ recipes/ffmpeg/ffmpeg_0.5.bb            |    5 +++--
+ recipes/ffmpeg/ffmpeg_git.bb            |    5 +++--
+ recipes/ffmpeg/files/x264-presets.patch |   28 ++++++++++++++++++++++++++++
+ 4 files changed, 35 insertions(+), 8 deletions(-)
+ create mode 100644 recipes/ffmpeg/files/x264-presets.patch
+
+diff --git a/recipes/ffmpeg/ffmpeg.inc b/recipes/ffmpeg/ffmpeg.inc
+index cdb3f7e..7d7d957 100644
+--- a/recipes/ffmpeg/ffmpeg.inc
++++ b/recipes/ffmpeg/ffmpeg.inc
+@@ -80,16 +80,13 @@ FILES_${PN}-vhook = "${libdir}/vhook"
+ FILES_${PN}-vhook-dbg += "${libdir}/vhook/.debug"
+ 
+ 
+-PACKAGES += "ffmpeg-x264-presets \
+-             libavcodec  libavcodec-dev  libavcodec-dbg \
++PACKAGES += "libavcodec  libavcodec-dev  libavcodec-dbg \
+              libavdevice libavdevice-dev libavdevice-dbg \
+              libavformat libavformat-dev libavformat-dbg \
+              libavutil   libavutil-dev   libavutil-dbg \
+              libpostproc libpostproc-dev libpostproc-dbg \
+              libswscale  libswscale-dev  libswscale-dbg"
+ 
+-FILES_ffmpeg-x264-presets = "${datadir}/*.ffpreset"
+-
+ FILES_${PN}-dev = "${includedir}"
+ FILES_libavcodec = "${libdir}/libavcodec*.so.*"
+ FILES_libavcodec-dev = "${libdir}/libavcodec*.so ${libdir}/pkgconfig/libavcodec.pc ${libdir}/libavcodec*.a"
+diff --git a/recipes/ffmpeg/ffmpeg_0.5.bb b/recipes/ffmpeg/ffmpeg_0.5.bb
+index b80fa88..1347bdf 100644
+--- a/recipes/ffmpeg/ffmpeg_0.5.bb
++++ b/recipes/ffmpeg/ffmpeg_0.5.bb
+@@ -3,14 +3,15 @@ require ffmpeg.inc
+ DEPENDS += "schroedinger libgsm"
+ 
+ PE = "1"
+-PR = "r5"
++PR = "r6"
+ 
+ DEFAULT_PREFERENCE = "1"
+ 
+ SRCREV_libswscale = "b2e1c8222eeef74b0ca8053b400957dd69e18e4d"
+ SRC_URI = "http://ffmpeg.org/releases/ffmpeg-${PV}.tar.bz2 \
+ 	   file://armv4.patch;patch=1 \
+-       file://ffmpeg-arm-update.diff;patch=1 \
++           file://ffmpeg-arm-update.diff;patch=1 \
++	   file://x264-presets.patch;patch=1 \
+ 	  "
+ 
+ #S = "${WORKDIR}/git"
+diff --git a/recipes/ffmpeg/ffmpeg_git.bb b/recipes/ffmpeg/ffmpeg_git.bb
+index bc17596..2d34b0c 100644
+--- a/recipes/ffmpeg/ffmpeg_git.bb
++++ b/recipes/ffmpeg/ffmpeg_git.bb
+@@ -4,7 +4,7 @@ DEPENDS += "schroedinger libgsm"
+ 
+ PE = "1"
+ PV = "0.5.0+${PR}+gitr${SRCREV}" 
+-PR = "r0"
++PR = "r1"
+ 
+ DEFAULT_PREFERENCE = "-1"
+ DEFAULT_PREFERENCE_armv7a = "1"
+@@ -17,7 +17,8 @@ SRCREV = "d886804643d7427debfa70d824de7e53ae8e3e83"
+ SRCREV_arm = "d886804643d7427debfa70d824de7e53ae8e3e83"
+ SRCREV_libswscale = "b2e1c8222eeef74b0ca8053b400957dd69e18e4d"
+ SRC_URI = "git://git.mansr.com/ffmpeg.mru;protocol=git;branch=${FFBRANCH} \
+-"
++           file://x264-presets.patch;patch=1 \
++          "
+ 
+ S = "${WORKDIR}/git"
+ B = "${S}/build.${HOST_SYS}.${TARGET_SYS}"
+diff --git a/recipes/ffmpeg/files/x264-presets.patch b/recipes/ffmpeg/files/x264-presets.patch
+new file mode 100644
+index 0000000..55bad63
+--- /dev/null
++++ b/recipes/ffmpeg/files/x264-presets.patch
+@@ -0,0 +1,28 @@
++Index: ffmpeg-0.5/Makefile
++===================================================================
++--- ffmpeg-0.5.orig/Makefile	2009-02-21 19:41:52.000000000 +0100
+++++ ffmpeg-0.5/Makefile	2009-08-23 22:45:29.417512541 +0200
++@@ -24,7 +24,9 @@
++ 
++ FFLIBS := avdevice avformat avcodec avutil
++ 
++-DATA_FILES := $(wildcard $(SRC_DIR)/ffpresets/*.ffpreset)
+++ifeq ($(CONFIG_LIBX264),yes)
+++DATA_FILES := $(wildcard $(SRC_DIR)/ffpresets/libx264-*.ffpreset)
+++endif
++ 
++ include common.mak
++ 
++@@ -133,9 +135,12 @@
++ 	install -d "$(BINDIR)"
++ 	install -c -m 755 $(PROGS) "$(BINDIR)"
++ 
+++
++ install-data: $(DATA_FILES)
+++ifneq ($(DATA_FILES),)
++ 	install -d "$(DATADIR)"
++ 	install -m 644 $(DATA_FILES) "$(DATADIR)"
+++endif
++ 
++ install-man: $(MANPAGES)
++ 	install -d "$(MANDIR)/man1"
+-- 
+1.6.3.3
+
+
+--BXVAT5kNtrzKuDFl--
