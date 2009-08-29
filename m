@@ -1,36 +1,23 @@
-Received: from [209.85.221.196] (helo=mail-qy0-f196.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MhIzT-0003H9-JK
+	(envelope-from <philb@gnu.org>) id 1MhJNT-0001NX-GI
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 29 Aug 2009 10:08:52 +0200
-Received: by qyk34 with SMTP id 34so1606218qyk.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Aug 2009 00:50:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=oEc4DtHh/Ki6X6g5eVF6KV1plNUbhP982uGDRkR7jzU=;
-	b=oxqyeUO0p+khRl1mT98pVXgYvlSKCYDxalRCwDjzV1q0+Bazj7TWDe4qtoTf/Yy4Vk
-	tS33DVpQw5pJsclA1D5v0BjLrq8uCe4fkC6NSN/SGAyzuYStogtX6ZIUyPsozddUUCtQ
-	N/A9e3xtn3vzGbkim7HBAs4VGXJAEPT0JV5do=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=oJB71J9jYzxXOH6zYR+NSzqq9ZMgZamBdYkZzhcRxd0t4Q04cfQxZQdtpUPHGj2Iu3
-	YWUOXV5stftE2LYpUwo0z9Z4EtatZYax15Ir0DUwn5FCh7vxWDrrG1e+4qDKTPqnSH3i
-	+9nt1YXYG2n4k/m9mUKolW4QL/6TNK+Vs8uDo=
-MIME-Version: 1.0
-Received: by 10.229.11.147 with SMTP id t19mr1077471qct.28.1251532234078; Sat, 
-	29 Aug 2009 00:50:34 -0700 (PDT)
-In-Reply-To: <20090829020254.GC6785@smtp.west.cox.net>
-References: <1251504044-2315-1-git-send-email-raj.khem@gmail.com>
-	<20090829020254.GC6785@smtp.west.cox.net>
-Date: Sat, 29 Aug 2009 00:50:34 -0700
-Message-ID: <19c1b8a90908290050q60b6d47dw7b559087e343dc41@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Sat, 29 Aug 2009 10:33:40 +0200
+Received: from 212-139-92-236.dynamic.dsl.as9105.com ([212.139.92.236]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MhJ5d-0006Mt-Nq
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 29 Aug 2009 09:15:15 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] sane-toolchain-eglibc.inc: Set TARGET_OS = linux-gnuspe for e500
+In-Reply-To: <1251504044-2315-1-git-send-email-raj.khem@gmail.com>
+References: <1251504044-2315-1-git-send-email-raj.khem@gmail.com>
+Date: Sat, 29 Aug 2009 09:14:56 +0100
+Message-Id: <1251533696.4215.623.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+Subject: Re: [PATCH] sane-toolchain-eglibc.inc: Set TARGET_OS =	linux-gnuspe for e500
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,42 +31,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Aug 2009 08:08:53 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 29 Aug 2009 08:33:40 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Fri, Aug 28, 2009 at 7:02 PM, Tom Rini<trini@embeddedalley.com> wrote:
-> On Fri, Aug 28, 2009 at 05:00:44PM -0700, Khem Raj wrote:
->
->> Target triplet powerpc-*-linux-gnuspe is chosen for machines with SPE
->> which is e500 cores.
->
-> Two things. =C2=A0First, doesn't that override the previous TARGET_OS? =
-=C2=A0Or
-> did I miss some magic in there to use the previous result?
+On Fri, 2009-08-28 at 17:00 -0700, Khem Raj wrote:
+> Target triplet powerpc-*-linux-gnuspe is chosen for machines with SPE
+> which is e500 cores.
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  conf/distro/include/sane-toolchain-eglibc.inc |    2 ++
+>  1 files changed, 2 insertions(+), 0 deletions(-)
+> 
+> diff --git a/conf/distro/include/sane-toolchain-eglibc.inc b/conf/distro/include/sane-toolchain-eglibc.inc
+> index 88719f5..6b66679 100644
+> --- a/conf/distro/include/sane-toolchain-eglibc.inc
+> +++ b/conf/distro/include/sane-toolchain-eglibc.inc
+> @@ -5,6 +5,8 @@
+>  
+>  TARGET_OS = "linux${@['','-gnueabi'][bb.data.getVar('TARGET_ARCH',d,1) in ['arm', 'armeb'] and bb.data.getVar('MACHINE',d) not in ['collie','h3600', 'h3800', 'simpad', 'htcwallaby']]}"
+>  
+> +TARGET_OS = "linux${@['','-gnuspe'][bb.data.getVar('TARGET_ARCH',d,1) in ['ppc', 'powerpc'] and bb.data.getVar('MACHINE',d) in ['calamari', 'tqm8540']]}"
+> +
 
-hmm yes it wil if it is linux-gnueabi then the second assignment will
-reset it to linux
+This change looks like it will break the -gnueabi thing on ARM, which
+presumably isn't intended.
 
-Discard it.  I think we need something better
+Also, is this really specific to eglibc?  Per our conversation on IRC
+the other day, I kind of feel that this sort of logic belongs somewhere
+else; it seems somewhat inappropriate for sane-toolchain-xx.inc to be
+frobbing fundamental variables like TARGET_OS in this way.
 
-Second, can
-> we trigger this on something other than the machine list? =C2=A0This will=
- get
-> larger, not smaller. =C2=A0BASE_PACKAGE_ARCH perhaps? =C2=A0Or would that=
- not be
-> allowed?
+p.
 
-yeah sounds a better idea let me look into it a bit.
-
->
-> --
-> Tom Rini
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
