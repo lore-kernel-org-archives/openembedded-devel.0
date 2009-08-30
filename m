@@ -1,38 +1,33 @@
-Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
+Received: from [209.85.218.210] (helo=mail-bw0-f210.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1Mhq83-0007PG-1o
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Mhqfj-0008T6-2C
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Aug 2009 21:31:55 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id EA8E62200142
+	Sun, 30 Aug 2009 22:06:43 +0200
+Received: by bwz6 with SMTP id 6so1417168bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Aug 2009 21:13:29 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 0B1E0220011C
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Aug 2009 21:13:29 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from rhein.familie-heinold.de (unknown [78.52.227.219])
-	by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Aug 2009 21:13:29 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 0988B3C327; Sun, 30 Aug 2009 21:13:27 +0200 (CEST)
-Date: Sun, 30 Aug 2009 21:13:27 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090830191327.GA6349@rhein.zuhause.netz>
-References: <1251594936-4909-1-git-send-email-raj.khem@gmail.com>
+	Sun, 30 Aug 2009 12:48:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=ll65C8BzHnEZtE/wI4VtInsOV4wec3GhSM4zPKtf18Q=;
+	b=ijVE5Tjj67LIsArBSi0wVqBQKc/U5fXmD00UITRSFNOhXsroY2QFWwGDDXNuubFvMg
+	U/KRQ4HWfGKxlsuYNWf/MTE1AGgQWeWSuYk20K394ZCGnqfESj12SLSmHFg6582ISl3V
+	OPYclW0U/tJNOXp0sj/WrL3SzIaG1F2D3cUY8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=b2crqoEbZ+XoPC+6gdjpDGbzN0DFfllaqcq6eCEXX4xzXaHlVueLRA2id/b97/6tUV
+	hzM8ADhJlYvlvDIw6dpWjNImSYFke0gAd+/9TROyA1dt19HfoT+vZL8iEJDRfjagrTAA
+	tRcxONC3ro3U7W3sXouPHSdNSiZpP1KDAu6nM=
 MIME-Version: 1.0
+Received: by 10.239.163.199 with SMTP id q7mr361426hbd.29.1251661695541; Sun, 
+	30 Aug 2009 12:48:15 -0700 (PDT)
 In-Reply-To: <1251594936-4909-1-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
+References: <1251594936-4909-1-git-send-email-raj.khem@gmail.com>
+Date: Sun, 30 Aug 2009 21:48:15 +0200
+Message-ID: <c384c5ea0908301248j9299b3co899d86b475d61fac@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH] micro.conf: Remove PREFERRED_PROVIDER_virtual/libintl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,46 +42,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Aug 2009 19:31:55 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 30 Aug 2009 20:06:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Sat, Aug 29, 2009 at 06:15:36PM -0700, Khem Raj wrote:
+On Sun, Aug 30, 2009 at 3:15 AM, Khem Raj<raj.khem@gmail.com> wrote:
 > This is set appropriately in toolchain configuration.
 > It gives a possibility to cleanly override LIBC
 > say to eglibc or glibc.
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  conf/distro/micro.conf |    3 +--
->  1 files changed, 1 insertions(+), 2 deletions(-)
-> 
-> diff --git a/conf/distro/micro.conf b/conf/distro/micro.conf
-> index 861f7ef..2d45425 100644
-> --- a/conf/distro/micro.conf
-> +++ b/conf/distro/micro.conf
-> @@ -1,7 +1,7 @@
->  #############################################################################
->  #@TYPE: Distribution
->  #@NAME: Micro
-> -#@DESCRIPTION: Micro Linux Distribution (glibc based)
-> +#@DESCRIPTION: Micro Linux Distribution (eglibc based)
->  #@MAINTAINER: Martin Lund <mgl@doredevelopment.dk>
->  #@COMMENT: This distribution configuration defines a truely tiny OE Linux  
->  #@COMMENT: distribution. The matching buildable image target (micro-image)
-> @@ -79,7 +79,6 @@ ${TARGET_ARCH}:build-${BUILD_OS}:fail-fast:pn-${PN}"
->  # PREFERRED PROVIDERS
->  #############################################################################
->  PREFERRED_PROVIDER_task-bootstrap	= "task-bootstrap"
-> -PREFERRED_PROVIDER_virtual/libintl	= "glibc"
->  
->  #############################################################################
->  # PREFERRED VERSIONS
-> -- 
-> 1.6.3.3
- 
-*ACK*
+>
+Acked-by: Leon Woestenberg <leon@sidebranch.com>
 
-Bye Henning
+-- 
+Leon
 
 
