@@ -1,29 +1,33 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1MhhOx-0007O8-Pe
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MhhWd-0007pi-5Z for openembedded-devel@lists.openembedded.org;
+	Sun, 30 Aug 2009 12:20:43 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1MhhEq-000566-Np
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Aug 2009 12:12:49 +0200
-Received: from 212-139-92-236.dynamic.dsl.as9105.com ([212.139.92.236]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1Mhh7B-0004UY-Aj
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Aug 2009 10:54:25 +0100
-From: Phil Blundell <philb@gnu.org>
+	Sun, 30 Aug 2009 12:02:20 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 Aug 2009 12:02:20 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 Aug 2009 12:02:20 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20090830092250.GA16275@gmail.com>
-References: <1251504044-2315-1-git-send-email-raj.khem@gmail.com>
-	<20090829020254.GC6785@smtp.west.cox.net>
-	<19c1b8a90908290050q60b6d47dw7b559087e343dc41@mail.gmail.com>
-	<20090830012244.GA5033@gmail.com>
-	<1251619852.4215.666.camel@lenovo.internal.reciva.com>
-	<1251620948.4215.673.camel@lenovo.internal.reciva.com>
-	<20090830092250.GA16275@gmail.com>
-Date: Sun, 30 Aug 2009 10:54:22 +0100
-Message-Id: <1251626062.4215.687.camel@lenovo.internal.reciva.com>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 30 Aug 2009 12:01:56 +0200
+Message-ID: <h7dimk$86n$1@ger.gmane.org>
+References: <1251582336-3324-1-git-send-email-raj.khem@gmail.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: [PATCH] sane-toolchain-eglibc.inc: Set TARGET_OS	=	linux-gnuspe for e500
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <1251582336-3324-1-git-send-email-raj.khem@gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: [PATCH] base.bbclass: Pass in PATH to popen.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,56 +41,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Aug 2009 10:12:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 30 Aug 2009 10:20:43 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2009-08-30 at 02:22 -0700, Khem Raj wrote:
-> based upon your idea in last email. Here is something I put together
-> seems to work. It will need testing ofcourse
-> 
-> What do you think about this one ?
+On 29-08-09 23:45, Khem Raj wrote:
+> On Mac OSX its not able to find md5sum if
+> path is not passed to os.popen shell.
+>
+> Signed-off-by: Khem Raj<raj.khem@gmail.com>
 
-Thanks for the update.  This looks like generally the right idea, except
-that I still feel it is undesirable for an innocuous-looking change of
-MACHINE to result in far-reaching abi consequences.  So we need to
-figure out a way to deal with that.
+This fixes a host of other bugs as well
 
-A few other specific comments about the patch:
+Acked-by: Koen Kooi <koen@openembedded.org>
 
-> +python detect_arm_abi () {
 
-This doesn't really need to be an OE function.  You can declare it
-directly as Python:
 
-def detect_arm_abi():
-
-> +       if bb.data.getVar("TARGET_ARCH", d, 1) in [ 'arm', 'armeb' ]:          
-> +               if bb.data.getVar('MACHINE',d) in ['collie','h3600', 'h3800', 'simpad', 'htcwallaby']:
-> +                       return "oabi"
-> +               return "eabi"
-> +       else
-> +               return ""
-
-Notwithstanding the thing about MACHINE that I mentioned above, this
-logic doesn't really look like it can be correct.  There are only two
-valid ARM ABIs: eabi and oabi, and I would have thought this function
-should always pick one or the other.  In other words, I don't think that
-returning "" should be a valid result.
-
-> +       if bb.data.getVar('TARGET_ARCH',d,1) in ['bfin']:
-> +               os_suffix = "uclinux"
-> +       else
-> +               os_suffix = "linux"
-
-I'm not terribly convinced that this is desirable; TARGET_OS itself has
-always been a primary user configuration variable and I'm not entirely
-comfortable with making it be an auto-guessed thing.  I'm also not very
-keen on doing anything to cement the perception that OE is, somehow,
-only for Linux targets.  But I guess I am open to persuasion on this
-one.
-
-p.
+> ---
+>   classes/base.bbclass |    2 +-
+>   1 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/classes/base.bbclass b/classes/base.bbclass
+> index 97ccf5d..d29ba4b 100644
+> --- a/classes/base.bbclass
+> +++ b/classes/base.bbclass
+> @@ -84,7 +84,7 @@ def base_chk_file(parser, pn, pv, src_uri, localpath, data):
+>
+>       # call md5(sum) and shasum
+>       try:
+> -        md5pipe = os.popen('md5sum ' + localpath)
+> +	md5pipe = os.popen('PATH=%s md5sum %s' % (bb.data.getVar('PATH', data, True), localpath))
+>           md5data = (md5pipe.readline().split() or [ "" ])[0]
+>           md5pipe.close()
+>       except OSError:
 
 
 
