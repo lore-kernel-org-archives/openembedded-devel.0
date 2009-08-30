@@ -1,25 +1,36 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [209.85.210.172] (helo=mail-yx0-f172.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1MhmBo-0004E7-5J
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Mhp1J-0001xU-8T
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Aug 2009 17:19:32 +0200
-Received: from 212-139-92-236.dynamic.dsl.as9105.com ([212.139.92.236]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1Mhlty-0003qK-IV
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Aug 2009 16:01:06 +0100
-From: Phil Blundell <philb@gnu.org>
+	Sun, 30 Aug 2009 20:20:53 +0200
+Received: by yxe2 with SMTP id 2so607933yxe.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 Aug 2009 11:02:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=u9bkAoERoaIsQ1ECV6yCw5I0v47KTdq/9zfTeD7Bm4k=;
+	b=vXo/t0tBd68UZ3tN9l5d2HP+eZ4xhDG7NvdCrp7NynP0qCfUtm4JNKM10qi7BLyJKL
+	z62/jp1BDnWnnapswRNDYMH6YDjN9IqwkCl5s5hCSh46yitEgxa7NWYjlxamyO+m8X1s
+	58BqVQRuvqqHgllMc/DFBUYvtPTMFsQ2NvEoI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=kGKdJPyAI8gn0LXoyA8iqgQxHy0izswIw7ETrsFGMmovcpuW1zW3XPyclU5t5y+W7K
+	ERcQ9pQuoCEaHMSe+gQrqck3s2EklFouVyC8D8s1srFC71Mms3FLdjogrxOzqDaHPtDO
+	A7xlNB9DReY0DPZOh1qsMfnh7qPm5c50tPxpQ=
+MIME-Version: 1.0
+Received: by 10.100.74.14 with SMTP id w14mr4211650ana.50.1251655345697; Sun, 
+	30 Aug 2009 11:02:25 -0700 (PDT)
+In-Reply-To: <1251382003.27780.45.camel@mill.internal.reciva.com>
+References: <1251210375.4215.525.camel@lenovo.internal.reciva.com>
+	<4A968DCD.8020003@gmail.com>
+	<1251382003.27780.45.camel@mill.internal.reciva.com>
+Date: Sun, 30 Aug 2009 20:02:25 +0200
+Message-ID: <ac9c93b10908301102s5af2a3cbl957c5908050fab80@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <f96d234e0908291338i2fe06f6fkfc52b57cccd28fe6@mail.gmail.com>
-References: <f96d234e0908251411s5ac89a67v223cb2240b81fe39@mail.gmail.com>
-	<20090826020342.GB5705@gmail.com>
-	<f96d234e0908291338i2fe06f6fkfc52b57cccd28fe6@mail.gmail.com>
-Date: Sun, 30 Aug 2009 16:01:03 +0100
-Message-Id: <1251644463.4215.695.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-Subject: Re: problem building uclibc + udev
+Subject: Re: OEDEM November 2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,35 +44,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Aug 2009 15:19:32 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 30 Aug 2009 18:20:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Sat, 2009-08-29 at 16:38 -0400, Cliff Brake wrote:
-> There are several solutions to this problem:
-> 
-> 1) patch the kernel and linux-libc-headers with the attached patch
-> files (2.6.29 kernel, and 2.6.23 headers)
-> 2) use the micro-base-image which uses mdev instead of udev.
-> 
-> Unfortunately, the linux-libc-headers patch is probably not distro
-> friendly as it modifies a non-machine specific package.  So there does
-> not seem to be a clear path forward.
+Don't know yet.
 
-I think the only real way ahead with the ppoll thing is to get that
-patch landed in the upstream kernel (if it isn't there already) and then
-rev all the appropriate packages to include the fix.
-
-Or, given that the syscall numbers were already reserved anyway and
-hence unlikely to collide with anything else, it should be safe enough
-to just apply those patches in OE.  It doesn't matter that the
-linux-libc-headers package is used on multiple machines: if somebody
-builds against the patched linux-libc-headers and then tries to run on
-an unpatched kernel, ppoll() will just return -ENOSYS which is the same
-thing it would have done anyway.
-
-p.
-
-
+airfare is ok for me, Ryanair offers EHV -> STN return for about eur
+85 (incl tax etc)
+Then again I really hate those ryan-critters who have additional
+charges for virtually everything.
 
 
