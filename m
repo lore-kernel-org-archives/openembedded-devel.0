@@ -1,36 +1,44 @@
-Received: from [209.85.211.193] (helo=mail-yw0-f193.google.com)
+Received: from [209.85.217.223] (helo=mail-gx0-f223.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MhZIw-0005sn-UK
+	(envelope-from <raj.khem@gmail.com>) id 1MhZPs-0006Ez-UK
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Aug 2009 03:34:03 +0200
-Received: by ywh31 with SMTP id 31so4259494ywh.4
+	Sun, 30 Aug 2009 03:41:13 +0200
+Received: by gxk23 with SMTP id 23so4037821gxk.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Aug 2009 18:15:40 -0700 (PDT)
+	Sat, 29 Aug 2009 18:22:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=AyeKlF4Wg90HjTXmq/fYJrZhsK0Q1csleT2Dcgkne2Y=;
-	b=OKY9a1qS9Hdr7NlpygIaFhMX5HCmsn//oTAhQd9Xww0J1ANH9+m9Zn3dMtdUHTnNMP
-	SShc8SJID4/WR+f5xZJLejx8c+Hmmqzf4eh1R3g+bd7aZvWbWPShO6rRY/jxYOKKrHzR
-	hBNVO5TqUoJZ/l5Fph5JuFmSOye4N2m+Smoag=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=jK6GEcpa5T1hwbE2PYJN5HpouV0SvVEDg9wgq92GemQ=;
+	b=t3swzkM/wGDykxn8oGPLiwksCqeBXv/LTM3vtO8t+6yR4sQ/2ky6mW1+w7qj295In4
+	/Qf8CsvMD9lqk7LCJ3EplASyBWfSZip+31p8RZz77d7G6MW59hIJHLuChV+gJiIFXF4c
+	YQJpdMgbLDq4lNvBrtX9fpHwySVzggc2u8oKk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=JGn0ZB9u3x5DF5rIs5jHY4zS+xBRKTmO7tHYzFgIQKbkS3jtWX70uzFq0XKzeGxXx6
-	rbpvPYymOcPw+g7W4HHh4s2x79dIKqvUd7+zbpAvRhx3JkSmib97cO3C7daAGuUj3dLf
-	rNaSsmFaxaawHvMrxWc5gu8sMOS+2aZ97Zd2U=
-Received: by 10.150.243.13 with SMTP id q13mr2732699ybh.167.1251594940555;
-	Sat, 29 Aug 2009 18:15:40 -0700 (PDT)
-Received: from localhost (adsl-71-146-29-169.dsl.pltn13.sbcglobal.net
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=GVOhlZou8piiactZFiRUFybmTtB/gip8NaCPjCfpw0HxehE6R8mT/nLQJ01mmh/c1P
+	LP34dPBnKdehB/2hak7JBLmykv3qb/s8bm4+1y/KiBQmrH600Nyspnss8HdRlXMr7aPN
+	orMYI17R0b37nuZ8RiiiuYsPjyWtBIZZyMSc8=
+Received: by 10.151.25.2 with SMTP id c2mr4237079ybj.130.1251595370589;
+	Sat, 29 Aug 2009 18:22:50 -0700 (PDT)
+Received: from gmail.com (adsl-71-146-29-169.dsl.pltn13.sbcglobal.net
 	[71.146.29.169])
-	by mx.google.com with ESMTPS id 21sm345042pzk.3.2009.08.29.18.15.39
+	by mx.google.com with ESMTPS id 23sm201434pzk.0.2009.08.29.18.22.49
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 29 Aug 2009 18:15:39 -0700 (PDT)
+	Sat, 29 Aug 2009 18:22:49 -0700 (PDT)
+Date: Sat, 29 Aug 2009 18:22:44 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 29 Aug 2009 18:15:36 -0700
-Message-Id: <1251594936-4909-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.6.3.3
-Subject: [PATCH] micro.conf: Remove PREFERRED_PROVIDER_virtual/libintl
+Message-ID: <20090830012244.GA5033@gmail.com>
+References: <1251504044-2315-1-git-send-email-raj.khem@gmail.com>
+	<20090829020254.GC6785@smtp.west.cox.net>
+	<19c1b8a90908290050q60b6d47dw7b559087e343dc41@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <19c1b8a90908290050q60b6d47dw7b559087e343dc41@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: Re: [PATCH] sane-toolchain-eglibc.inc: Set TARGET_OS = linux-gnuspe for e500
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,40 +52,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Aug 2009 01:34:03 -0000
+X-List-Received-Date: Sun, 30 Aug 2009 01:41:13 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-This is set appropriately in toolchain configuration.
-It gives a possibility to cleanly override LIBC
-say to eglibc or glibc.
+On (29/08/09 00:50), Khem Raj wrote:
+> On Fri, Aug 28, 2009 at 7:02 PM, Tom Rini<trini@embeddedalley.com> wrote:
+> > On Fri, Aug 28, 2009 at 05:00:44PM -0700, Khem Raj wrote:
+> >
+> >> Target triplet powerpc-*-linux-gnuspe is chosen for machines with SPE
+> >> which is e500 cores.
+> >
+> > Two things.  First, doesn't that override the previous TARGET_OS?  Or
+> > did I miss some magic in there to use the previous result?
+> 
+> hmm yes it wil if it is linux-gnueabi then the second assignment will
+> reset it to linux
+> 
+> Discard it.  I think we need something better
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- conf/distro/micro.conf |    3 +--
- 1 files changed, 1 insertions(+), 2 deletions(-)
+We can override only for powerpc second time around. So changing it to 
 
-diff --git a/conf/distro/micro.conf b/conf/distro/micro.conf
-index 861f7ef..2d45425 100644
---- a/conf/distro/micro.conf
-+++ b/conf/distro/micro.conf
-@@ -1,7 +1,7 @@
- #############################################################################
- #@TYPE: Distribution
- #@NAME: Micro
--#@DESCRIPTION: Micro Linux Distribution (glibc based)
-+#@DESCRIPTION: Micro Linux Distribution (eglibc based)
- #@MAINTAINER: Martin Lund <mgl@doredevelopment.dk>
- #@COMMENT: This distribution configuration defines a truely tiny OE Linux  
- #@COMMENT: distribution. The matching buildable image target (micro-image)
-@@ -79,7 +79,6 @@ ${TARGET_ARCH}:build-${BUILD_OS}:fail-fast:pn-${PN}"
- # PREFERRED PROVIDERS
- #############################################################################
- PREFERRED_PROVIDER_task-bootstrap	= "task-bootstrap"
--PREFERRED_PROVIDER_virtual/libintl	= "glibc"
- 
- #############################################################################
- # PREFERRED VERSIONS
--- 
-1.6.3.3
+TARGET_OS_powerpc =
+"linux${@['','-gnuspe'][bb.data.getVar('TARGET_ARCH',d,1) in ['ppc',
+'powerpc'] and bb.data.getVar('MACHINE',d) in ['calamari', 'tqm8540']]}"
 
+will that be ok ?
+
+Thanks
+
+-Khem
 
 
