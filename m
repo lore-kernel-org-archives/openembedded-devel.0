@@ -1,35 +1,35 @@
 Received: from [209.85.220.224] (helo=mail-fx0-f224.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1MhXYS-00088c-AC
+	(envelope-from <leon.woestenberg@gmail.com>) id 1MhYiq-0007Rz-Nz
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 Aug 2009 01:41:56 +0200
-Received: by fxm24 with SMTP id 24so1189165fxm.12
+	Sun, 30 Aug 2009 02:56:44 +0200
+Received: by fxm24 with SMTP id 24so1201051fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Aug 2009 16:23:34 -0700 (PDT)
+	Sat, 29 Aug 2009 17:38:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=4w6zdH+WKrVuOjaqqiLu9y0k6rIE3/TsUAePMconShw=;
-	b=qjH2syhd8tlOb5qA1qZXP628e9Z9QCo6pvueVeDAZoarsoK5KsuYyn0p240H+aT4Wn
-	xLjQaKNrINWCgZdNEZU0rli499tcoJk3GBlzNb+8jkzqIHLiwDUwhoBCEOpWRwqZDSBM
-	XBxS8J+LWMgNHqvHWKMa1Mzel1EyBImN+OSjg=
+	bh=AIbJNCJkGM5CyCsZJGrSXEERirBkpPr9Gl1uIBu2mSc=;
+	b=KamQv2tyvwZBCtq7bfVopBjjCyzOY1QrgSdyovka++PlQpqYE+kpmqJ15knHrWxzsR
+	C6aKDmOci4TL6lVenMzX3Nc07q/ZE7HNc1ze7NA5wz7uk/HLdSoAXTahQGUxgE31vIS0
+	iwS/XTPOS2sLN7HzTRURNdDitNDqzHxbBWJ4w=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=DUA4lmXRKCZRMLBi0WW5xQs2CEB+SJd2nIAu60zItdDwVEN8GoNfWLAJn9RnMg5wXi
-	Ua0IDnKxBS5/JVodiX3owdT66U+pjX437bQKhR3+UQ0rAxjQoynxfTaGk4AwBALrr3PW
-	CtlV1xxp51/S6Ho8E+wADMhONdHgHpLRJv/gA=
+	b=J/ccXJ5iLgyXnu44Le3PP10SR89TdiQnomnXTPPojfJkFGSvjSQqjH8NgmaHlRRP59
+	xSsRYyVoFdScEsYBJVRpWSHLmA02qkKRPDqamJi3gsSv/bQ/XC+KNP3+NPtMLChkrMY3
+	LaNzA9acY1Q+ocG1psCv7LpjCBwSuF2lumISs=
 MIME-Version: 1.0
-Received: by 10.239.130.150 with SMTP id 22mr258709hbj.59.1251588214687; Sat, 
-	29 Aug 2009 16:23:34 -0700 (PDT)
-In-Reply-To: <f96d234e0908291351p1843c1ddw4d5e7f8523f21dd0@mail.gmail.com>
-References: <f96d234e0908291351p1843c1ddw4d5e7f8523f21dd0@mail.gmail.com>
-Date: Sun, 30 Aug 2009 01:23:34 +0200
-Message-ID: <c384c5ea0908291623t1db9868du460184f390306d1c@mail.gmail.com>
+Received: by 10.239.163.199 with SMTP id q7mr282126hbd.29.1251592702741; Sat, 
+	29 Aug 2009 17:38:22 -0700 (PDT)
+In-Reply-To: <b6ebd0a50908261905r7d839647k6fc53460301efca0@mail.gmail.com>
+References: <b6ebd0a50908261905r7d839647k6fc53460301efca0@mail.gmail.com>
+Date: Sun, 30 Aug 2009 02:38:22 +0200
+Message-ID: <c384c5ea0908291738h4cbae2e3y12ad5956a77cbfcd@mail.gmail.com>
 From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: getting back to < 2MB rootfs with mtd-utils
+Subject: Re: srctree & gitver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,34 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Aug 2009 23:41:56 -0000
+X-List-Received-Date: Sun, 30 Aug 2009 00:56:44 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hello,
+Hello Chris,
 
-On Sat, Aug 29, 2009 at 10:51 PM, Cliff Brake<cliff.brake@gmail.com> wrote:
-> So I need to figure out why mtd-utils is pulling in so much stuff.
-> Also, it would be nice to remove opkg. =A0These are mostly just notes as
-> I work through this, but if anyone has good ideas, they are welcome
+On Thu, Aug 27, 2009 at 4:05 AM, Chris Larson<clarson@kergoth.com> wrote:
+> I'm going to summarize the features of the two classes I've created
+> over the past couple days. =A0I believe that they will make the lives of
+> app & kernel developers much easier when dealing with bitbake/OE/MVL6.
 >
+Thanks for the extensive description and examples.
 
-Uhm, and I wish someone could fix the bitbake "-g" option (generate
-dependency graphs).
-
-I'm offering a $20 code bounty for fixing it and getting that upstream.
-
-I'm offering another $30 code bounty for adding regex ignore support
-for the dependency graph and getting that upstream.
-
-
-
-My earlier work on this has grown out-of-date and my python code foo
-has grown worse while I am writing device drivers again:
-
-http://cgit.openembedded.org/cgit.cgi/openembedded/tree/contrib/dependsgrap=
-h/dependsgraph.sh
-http://bugs.openembedded.org/show_bug.cgi?id=3D1488
+Indeeds this looks like a time saver for many.
 
 Regards,
 --=20
