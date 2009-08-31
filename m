@@ -1,30 +1,33 @@
-Received: from [64.71.164.66] (helo=madrid.hostgo.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <javiroman@kernel-labs.org>) id 1Mi7yU-0005M4-Vz
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Mi8x2-0005L2-J6 for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Aug 2009 17:37:48 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1Mi8f8-0007ZJ-6A
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Aug 2009 16:35:31 +0200
-Received: from mail-ew0-f219.google.com ([209.85.219.219])
-	by madrid.hostgo.com with esmtpsa (TLSv1:RC4-MD5:128) (Exim 4.69)
-	(envelope-from <javiroman@kernel-labs.org>) id 1Mi7gU-00045p-SH
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Aug 2009 10:16:39 -0400
-Received: by ewy19 with SMTP id 19so4891535ewy.20
+	Mon, 31 Aug 2009 17:19:18 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 Aug 2009 17:19:18 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Aug 2009 07:16:30 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.216.19.198 with SMTP id n48mr1285902wen.41.1251728190363; Mon, 
-	31 Aug 2009 07:16:30 -0700 (PDT)
-From: Javi Roman <javiroman@kernel-labs.org>
-Date: Mon, 31 Aug 2009 16:16:10 +0200
-Message-ID: <12c2e32e0908310716r696a7dadrdc330ad9d4b1eb65@mail.gmail.com>
+	Mon, 31 Aug 2009 17:19:18 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - madrid.hostgo.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - kernel-labs.org
-Subject: DISTRO minimal.conf for ARM architectures
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 31 Aug 2009 17:19:03 +0200
+Message-ID: <h7gpl7$b0e$1@ger.gmane.org>
+References: <12c2e32e0908310716r696a7dadrdc330ad9d4b1eb65@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <12c2e32e0908310716r696a7dadrdc330ad9d4b1eb65@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: DISTRO minimal.conf for ARM architectures
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,22 +41,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2009 14:35:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 31 Aug 2009 15:37:48 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello,
+On 31-08-09 16:16, Javi Roman wrote:
+> Hello,
+>
+> I've been unable to build minimal.conf distro for an ARM architecture
+> (more precisely for Beagleboard platform), at this point I would like
+> ask two questions:
 
-I've been unable to build minimal.conf distro for an ARM architecture
-(more precisely for Beagleboard platform), at this point I would like
-ask two questions:
+If you're targeting beagleboard then angstrom is your best bet.
 
-1. Is it minimal.conf distro ready to build on ARM architectures right now?
-2. If ARM is not a target for the minimal distribution, do you think
-is a huge task to study in depth? Otherwise is it not worthwhile?
+regards,
 
-Thanks.
+Koen
 
--- 
-Javi Roman
 
 
