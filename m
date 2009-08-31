@@ -1,31 +1,24 @@
-Received: from [209.85.218.210] (helo=mail-bw0-f210.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1Mi4NJ-0000Qq-SP
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Aug 2009 12:44:40 +0200
-Received: by bwz6 with SMTP id 6so1639467bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Aug 2009 03:26:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=J/e56IqLLGKujCbU1doBmmT9IOa4zWE/lH/OXXXBfN8=;
-	b=BcSqmO4JrTTTGBVBQz6ZqWgBOnKKuOA3B6AJ2CIp2bGE5zk/unv0cNXLw5vzVTPx1z
-	TgJhuxrcvJuPYZ4b1y9HJjolRnbaN0TNW57GyLuxoyqFVMG6Sa+v8SjWTT/DsZ97IKxG
-	l+7TzuJV6a6edCFxTIa8z2eqbSlHsBrf3qGzI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=OlJSHwvaz7D1BZP4rnmf2n7tLUKq3P3v2C6JG9GCCK980iGjHXDNKPCAg7O0n0zT0Z
-	kIZkz381ZYh2wGVQ95G/CwObXG+xTP0fIliJOrZk0qrxkMLjW2jbt11TCkQ4gdQ3OiRP
-	XDRHvNnSf2ZhS9F2hK6SrLXdrrAzmNyOKtbgY=
-MIME-Version: 1.0
-Received: by 10.103.86.22 with SMTP id o22mr2053004mul.102.1251714366326; Mon, 
-	31 Aug 2009 03:26:06 -0700 (PDT)
-Date: Mon, 31 Aug 2009 13:26:06 +0300
-Message-ID: <fce2a370908310326i1f784f25qd4ed91d7864ef38a@mail.gmail.com>
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Mi5QP-0008Q0-A8
+	for openembedded-devel@openembedded.org; Mon, 31 Aug 2009 13:51:58 +0200
+Received: (qmail 7779 invoked by uid 813007); 31 Aug 2009 11:33:23 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 31 Aug 2009 11:33:23 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Subject: Unzip missing
+Date: Mon, 31 Aug 2009 13:33:19 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc6-00243-g53bc5c0; KDE/4.3.0; x86_64; ;
+	)
+References: <1251504044-2315-1-git-send-email-raj.khem@gmail.com>
+	<1251620948.4215.673.camel@lenovo.internal.reciva.com>
+	<20090830094809.GB26823@gmail.com>
+In-Reply-To: <20090830094809.GB26823@gmail.com>
+MIME-Version: 1.0
+Message-Id: <200908311333.20189.marcin@juszkiewicz.com.pl>
+Subject: Re: [PATCH] sane-toolchain-eglibc.inc: Set TARGET_OS	= linux-gnuspe for e500
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,18 +32,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2009 10:44:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 31 Aug 2009 11:52:03 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: 7bit
 
-Hello!
-I encountered the following error when unpacking faad2 recipe on bare
-debian lenny system (stable/2009 tree):
-sh: unzip: command not found
-The problem is that there is no 'unzip' utility on the host. I tried
-to specify DEPENDS = "unzip-native" for faad2 recipe but it somehow
-doesn't wait for unzip-native to be built. Any suggestions on how to
-make faad2 unpack task wait for unzip-native staging? Or should we
-just put unzip into list of required host software in sanity.bbclass?
-Thanks for help.
+What about using MACHINE_FEATURES (or CPU_FEATURES) for things like eabi/spe?
+
+TARGET_OS = "linux-"
+if ARCH in [ppc,powerpc] and MACHINE_FEATURES.find('spe') then
+
+  if LIBC=uclibc then
+    TARGET_OS += "uclibc"
+  fi
+
+  TARGET_OS += "gnuspe"
+fi
+
+Same for adding eabi:
+
+TARGET_OS = "linux-"
+if ARCH in [arm,armeb] and MACHINE_FEATURES.find('eabi') then
+
+  if LIBC=uclibc then
+    TARGET_OS += "uclibc"
+  fi
+
+  TARGET_OS += "gnueabi"
+fi
+
+spe/eabi can be added to MACHINE_FEATURES in conf/machine/include/tune-* files 
+and distros can choose do they support it or not by DISTRO_FEATURES (examples 
+needs to be changed then to use COMBINED_FEATURES variable). This way no one 
+has to change XY files just because he has new board with ppc500v2 core, we do 
+not have to remember about armv4 devices which are not capable of EABI with 
+gcc 4.3.x and older (but if they will support EABI in future we just change 
+tune-strongarm.inc file).
+
+Regards, 
+-- 
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
