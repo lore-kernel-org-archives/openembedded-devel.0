@@ -1,24 +1,34 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [64.71.164.66] (helo=madrid.hostgo.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1MiCPy-0006BR-EB
+	(envelope-from <javiroman@kernel-labs.org>) id 1MiCaj-0003jt-Fh
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Aug 2009 21:19:54 +0200
-Received: from andromeda.vanille.de (e180153210.adsl.alicedsl.de
-	[85.180.153.210])
-	by drlauer-research.com (Postfix) with ESMTP id BF7C75847D6
+	Mon, 31 Aug 2009 21:31:03 +0200
+Received: from mail-fx0-f224.google.com ([209.85.220.224])
+	by madrid.hostgo.com with esmtpsa (TLSv1:RC4-MD5:128) (Exim 4.69)
+	(envelope-from <javiroman@kernel-labs.org>) id 1MiCIj-0004Fq-Uu
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Aug 2009 15:12:26 -0400
+Received: by fxm24 with SMTP id 24so1947716fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Aug 2009 21:41:13 +0200 (CEST)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Aug 2009 21:01:29 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.28-15-generic; KDE/4.2.2; x86_64; ; )
-References: <12c2e32e0908310716r696a7dadrdc330ad9d4b1eb65@mail.gmail.com>
-	<12c2e32e0908311041g71b15fd7j102c162d440a7776@mail.gmail.com>
-	<19c1b8a90908311152p4db05d71x73ef49de512792b9@mail.gmail.com>
-In-Reply-To: <19c1b8a90908311152p4db05d71x73ef49de512792b9@mail.gmail.com>
+	Mon, 31 Aug 2009 12:12:23 -0700 (PDT)
 MIME-Version: 1.0
-Message-Id: <200908312101.29265.mickey@vanille-media.de>
+Received: by 10.223.15.11 with SMTP id i11mr1873432faa.105.1251745943063; Mon, 
+	31 Aug 2009 12:12:23 -0700 (PDT)
+In-Reply-To: <4A9C0CA3.7050906@balister.org>
+References: <12c2e32e0908310716r696a7dadrdc330ad9d4b1eb65@mail.gmail.com> 
+	<200908311722.45126.mickey@vanille-media.de>
+	<12c2e32e0908311041g71b15fd7j102c162d440a7776@mail.gmail.com> 
+	<4A9C0CA3.7050906@balister.org>
+From: Javi Roman <javiroman@kernel-labs.org>
+Date: Mon, 31 Aug 2009 21:12:03 +0200
+Message-ID: <12c2e32e0908311212m6a4a04fcpda63d338c455e426@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - madrid.hostgo.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - kernel-labs.org
 Subject: Re: DISTRO minimal.conf for ARM architectures
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,113 +43,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2009 19:19:55 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Mon, 31 Aug 2009 19:31:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Monday 31 August 2009 20:52:03 Khem Raj wrote:
-> On Mon, Aug 31, 2009 at 10:41 AM, Javi Roman<javiroman@kernel-labs.org> 
-wrote:
-> > On Mon, Aug 31, 2009 at 5:22 PM, Michael 'Mickey'
-> >
-> > Lauer<mickey@vanille-media.de> wrote:
-> >> On Monday 31 August 2009 16:16:10 Javi Roman wrote:
-> >>> I've been unable to build minimal.conf distro for an ARM architecture
-> >>> (more precisely for Beagleboard platform), at this point I would like
-> >>> ask two questions:
-> >>>
-> >>> 1. Is it minimal.conf distro ready to build on ARM architectures right
-> >>> now?
-> >>
-> >> Yes. How exactly does it fail for you?
-> >
-> > /builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc
-> >-cross-initial-4.2.4-r8.1/gcc-4.2.4/build.i686-linux.arm-oe-linux-gnueabi/
-> >./gcc/xgcc
-> > -B/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/g
-> >cc-cross-initial-4.2.4-r8.1/gcc-4.2.4/build.i686-linux.arm-oe-linux-gnueab
-> >i/./gcc/ -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
-> > -isystem/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/staging/armv7a-oe-linux-
-> >gnueabi/usr/include
-> > -B/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/cross/armv7a/arm-oe-linux-gnue
-> >abi/bin/
-> > -B/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/cross/armv7a/arm-oe-linux-gnue
-> >abi/lib/ -isystem
-> > /builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/cross/armv7a/arm-oe-linux-gnueab
-> >i/include -isystem
-> > /builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/cross/armv7a/arm-oe-linux-gnueab
-> >i/sys-include -O2 -g -Os -DIN_GCC -DCROSS_COMPILE   -W -Wall
-> > -Wwrite-strings
-> > -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition
-> > -isystem ./include  -I. -I.
-> > -I/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/g
-> >cc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc
-> > -I/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/g
-> >cc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/.
-> > -I/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/g
-> >cc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/../include
-> > -I/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/g
-> >cc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/../libcpp/include
-> > -I/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/g
-> >cc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/../libdecnumber
-> > -I../libdecnumber  -g0 -finhibit-size-directive -fno-inline-functions
-> > -fno-exceptions -fno-zero-initialized-in-bss -fno-toplevel-reorder
-> > -Dinhibit_libc  -fPIC \
-> >          -c
-> > /builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc
-> >-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/crtstuff.c -DCRT_END -DCRTSTUFFS_O
-> > \
-> >          -o crtendS.o
-> > /builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc
-> >-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/crtstuff.c:1: error: bad value
-> > (cortex-a8) for -mtune= switch
-> > /builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc
-> >-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/crtstuff.c:1: error: bad value
-> > (armv7-a) for -march= switch
-> > /builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc
-> >-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/crtstuff.c:1: error: invalid
-> > floating point option:
-> > -mfpu=neon/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-g
-> >nueabi/gcc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/crtstuff.c:1: error: bad
-> > value (cortex-a8) for -mtune= switch
-> > /builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc
-> >-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/crtstuff.c:1: error: bad value
-> > (armv7-a) for -march= switch
-> > /builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc
-> >-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/crtstuff.c:1: error: invalid
-> > floating point option: -mfpu=neon
-> > make[2]: *** [crtbeginT.o] Error 1
-> > make[2]: *** [crtendS.o] Error 1
-> > make[2]: *** [crtbeginS.o] Error 1
-> > make[2]: Leaving directory
-> > `/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gc
-> >c-cross-initial-4.2.4-r8.1/gcc-4.2.4/build.i686-linux.arm-oe-linux-gnueabi
-> >/gcc' make[1]: *** [all-gcc] Error 2
-> > make[1]: Leaving directory
-> > `/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gc
-> >c-cross-initial-4.2.4-r8.1/gcc-4.2.4/build.i686-linux.arm-oe-linux-gnueabi
-> >' make: *** [all] Error 2
-> > FATAL: oe_runmake failed
-> >
-> >
-> > I've thought, before to try to find out the problem, if the tuning of
-> > minimal distro for ARM architecutes would be the Angstrom
-> > distribution.
+On Mon, Aug 31, 2009 at 7:47 PM, Philip Balister<philip@balister.org> wrote:
+> Javi Roman wrote:
+>>
+>> On Mon, Aug 31, 2009 at 5:22 PM, Michael 'Mickey'
+>> Lauer<mickey@vanille-media.de> wrote:
+>> By the way, I'm trying to use the minimal distro for Beagleboard,
+>> instead of Angstron, because of I have thought minimal distro is a
+>> good point of start a fresh (o vanilla) basic distribution, and
+>> Angstron is a more complete and cutting edge distribution for
+>> Beagleboard platform (as Koen has told me).
 >
-> the problem is that the compiler being used it old for armv7 support.
-> Try using gcc 4.4.1
-> something like
+> I think you are confusing choice of DISTRO and choice of image.You can
+> create vanilla images with Angstrom.
 >
-> PREFERRED_GCC_VERSION_local                     = "4.4.1"
+> We really need to put something on the wiki explaining what DISTRO means in
+> the OE context.
+>
 
-Ah, cool. If it's just that, then we should bump a couple of toolchain 
-versions.
+Oh, no, I understand the meaning of a DISTRO (I guess). The point here
+is I was looking for a DISTRO, a base DISTRO (or generic distro,
+better than "minimal") for a set of different boards that I have (ARM,
+PPC, MIPS, x86) .
 
-Thanks,
+I have built a minimal.conf distro for ALIX board, and I would like to
+build the same distro (I'm not talking about the final image) for a
+Beagle board (for example), with the same eglibc, gcc, ... and so
+forth. I'm talking about a base line distro.
 
-:M:
+It is possible that minimal.conf distro is not for I am using, I mean
+is not a generic distro at all. I'm a little bit confused about it.
 
+
+-- 
+Javi Roman
+Sent from Madrid, Spain
 
 
