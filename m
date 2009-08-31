@@ -1,32 +1,22 @@
-Received: from [209.85.219.219] (helo=mail-ew0-f219.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sinestado@gmail.com>) id 1Mi69E-00079C-MI
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Aug 2009 14:38:15 +0200
-Received: by ewy19 with SMTP id 19so4782062ewy.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Aug 2009 05:19:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=swxzGjwndna7vBrjGjL2JkNAUnSQtOyrR6vW+9YiCE8=;
-	b=V9w/D5PAUVRyFzGdYkPX28WgWbUuNegoWHr4Qvm/b7eSiB5CwhujHcm6zPNXI2Yq4A
-	ERFdnl2oHyUA2llXQkMvRDlOKGbAfuN6I3jqJ/IVL/0Vl4KXnr9N/KiZwF9l1/HBgkyi
-	ku9JC1y/hGpzknnF7ljrfkRWfTaOYg5XIQ6sU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=xGCTPkGBFlnealqdUyNowpVxhsODXEubnnkckxuLfNby8Gp1pUaV9k/19SP2zQ0d1u
-	iaRHpF0dvs9kARBWDQMNK9BuQakd10MoEtxuPTwAA7h3fL9Sgz4T/dFBgqGISGDZW8H6
-	KdIES6yDXw9hgTzr+7Myvk29EkTzp5LxJEf28=
-MIME-Version: 1.0
-Received: by 10.216.89.135 with SMTP id c7mr1144589wef.62.1251721180825; Mon, 
-	31 Aug 2009 05:19:40 -0700 (PDT)
-Date: Mon, 31 Aug 2009 09:19:40 -0300
-Message-ID: <a63ecaf0908310519p3bc80147q6ad2d89e4c587d@mail.gmail.com>
-From: Sushi Sensei <sinestado@gmail.com>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Mi7c2-0007S4-BS
+	for openembedded-devel@openembedded.org; Mon, 31 Aug 2009 16:12:03 +0200
+Received: (qmail 12469 invoked by uid 813007); 31 Aug 2009 13:53:31 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 31 Aug 2009 13:53:31 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Xorg int10 module missing?
+Date: Mon, 31 Aug 2009 15:53:25 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc6-00243-g53bc5c0; KDE/4.3.0; x86_64; ;
+	)
+References: <a63ecaf0908310519p3bc80147q6ad2d89e4c587d@mail.gmail.com>
+In-Reply-To: <a63ecaf0908310519p3bc80147q6ad2d89e4c587d@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200908311553.26539.marcin@juszkiewicz.com.pl>
+Subject: Re: Xorg int10 module missing?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,16 +30,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2009 12:38:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 31 Aug 2009 14:12:10 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-I'm trying to use cirrus driver but I can't load int10 and xaa
-driver vesa also depends of xserver-xorg-module-libint10 but I can' find
-this!!
+Dnia poniedzia=C5=82ek, 31 sierpnia 2009 o 14:19:40 Sushi Sensei napisa=C5=
+=82(a):
+> I'm trying to use cirrus driver but I can't load int10 and xaa
+> driver vesa also depends of xserver-xorg-module-libint10 but I can' find
+> this!!
+
+They are build as part of xserver-xorg recipe.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
 
--- 
-------------------------------------------------------
---- Timeo Danaos et dona ferentes ---
-------------------------------------------------------
+
 
