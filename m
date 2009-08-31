@@ -1,23 +1,26 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1MiCyF-0004gL-Fa
+	(envelope-from <denis@denix.org>) id 1MiEbU-0002a1-LJ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Aug 2009 21:55:19 +0200
-Received: from andromeda.vanille.de (e180153210.adsl.alicedsl.de
-	[85.180.153.210])
-	by drlauer-research.com (Postfix) with ESMTP id E07C6584712
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Aug 2009 22:16:38 +0200 (CEST)
-From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Organization: Vanille-Media
+	Mon, 31 Aug 2009 23:39:56 +0200
+Received: from gandalf.denix.org ([71.255.235.240]) by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KP9000TZFAR8PQ1@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	31 Aug 2009 16:20:52 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 480F914AF5F; Mon,
+	31 Aug 2009 17:20:51 -0400 (EDT)
+Date: Mon, 31 Aug 2009 17:20:51 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Aug 2009 21:36:53 +0200
-User-Agent: KMail/1.11.2 (Linux/2.6.28-15-generic; KDE/4.2.2; x86_64; ; )
-References: <1251594596-4738-1-git-send-email-raj.khem@gmail.com>
-In-Reply-To: <1251594596-4738-1-git-send-email-raj.khem@gmail.com>
-MIME-Version: 1.0
-Message-Id: <200908312136.53824.mickey@vanille-media.de>
-Subject: Re: [PATCH] micro-uclibc, minimal-uclibc: Reorder including the base distro config.
+Message-id: <20090831212051.GC6707@denix.org>
+References: <1251210375.4215.525.camel@lenovo.internal.reciva.com>
+	<4A968DCD.8020003@gmail.com>
+	<1251382003.27780.45.camel@mill.internal.reciva.com>
+MIME-version: 1.0
+In-reply-to: <1251382003.27780.45.camel@mill.internal.reciva.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+Subject: Re: OEDEM November 2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,24 +34,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2009 19:55:19 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Mon, 31 Aug 2009 21:39:56 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Sunday 30 August 2009 03:09:56 Khem Raj wrote:
-> A lot of stuff in these conf's are already set and
-> is duplicated. This is removed. The base conf file
-> should be included at the end after assigning LIBC
-> so that correct toolchain configuration is picked.
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Acked-by: Michael 'Mickey' Lauer <mlauer@vanille-media.de>
+On Thu, Aug 27, 2009 at 03:06:43PM +0100, Phil Blundell wrote:
+> On Thu, 2009-08-27 at 15:44 +0200, Marco Cavallini wrote:
+> > I'll try to come...
+> > Looks like Stansted airport is nearby Cambridge.
+> > Could you provide any travel information?
+> 
+> Yes, Stansted airport is the nearest with regular service.  (There is a
+> small airport in Cambridge itself but I don't think any scheduled
+> airlines operate from there anymore.)
+> 
+> For those travelling from Europe, Stansted is about a 30-minute train
+> ride from Cambridge city centre and is served by Air Berlin, Ryanair and
+> Germanwings among others.  Luton airport is about 1 hour away by bus and
+> is served by Easyjet.
+> 
+> For those travelling from further away, most long-haul flights arrive at
+> Heathrow or Gatwick airports (although there is some transatlantic
+> service into Stansted).  Both Heathrow and Gatwick are about 2 hours
+> from Cambridge by train or bus: the train is quicker but involves
+> several changes in London, whereas the bus is slow but cheaper and less
+> complicated.
+> 
+> Alternatively you can take the Eurostar to London St Pancras, which is
+> 50 minutes from Cambridge by train.
 
-Thanks,
+Phil,
 
-:M:
+Thank you for organizing it! I was planning on coming, pending the final 
+logistics for the travel.
 
+What is the venue for this event? Do you plan to reserve a place for it in 
+advance, like a meeting room in a hotel or such?
+
+-- 
+Denys
 
 
