@@ -1,32 +1,22 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Mi8x2-0005L2-J6 for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Aug 2009 17:37:48 +0200
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1Mi8f8-0007ZJ-6A
+	(envelope-from <mickey@vanille-media.de>) id 1Mi90H-0005cR-3O
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Aug 2009 17:19:18 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Aug 2009 17:19:18 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Mon, 31 Aug 2009 17:41:09 +0200
+Received: from andromeda.vanille.de (e180153210.adsl.alicedsl.de
+	[85.180.153.210])
+	by drlauer-research.com (Postfix) with ESMTP id D8A69584B48
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Aug 2009 17:19:18 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 31 Aug 2009 18:02:28 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 31 Aug 2009 17:19:03 +0200
-Message-ID: <h7gpl7$b0e$1@ger.gmane.org>
+Date: Mon, 31 Aug 2009 17:22:45 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.28-15-generic; KDE/4.2.2; x86_64; ; )
 References: <12c2e32e0908310716r696a7dadrdc330ad9d4b1eb65@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
 In-Reply-To: <12c2e32e0908310716r696a7dadrdc330ad9d4b1eb65@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200908311722.45126.mickey@vanille-media.de>
 Subject: Re: DISTRO minimal.conf for ARM architectures
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -41,22 +31,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2009 15:37:48 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 31 Aug 2009 15:41:09 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 31-08-09 16:16, Javi Roman wrote:
-> Hello,
->
+On Monday 31 August 2009 16:16:10 Javi Roman wrote:
 > I've been unable to build minimal.conf distro for an ARM architecture
 > (more precisely for Beagleboard platform), at this point I would like
 > ask two questions:
+>
+> 1. Is it minimal.conf distro ready to build on ARM architectures right now?
 
-If you're targeting beagleboard then angstrom is your best bet.
+Yes. How exactly does it fail for you?
 
-regards,
-
-Koen
+:M:
 
 
 
