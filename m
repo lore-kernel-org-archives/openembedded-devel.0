@@ -1,39 +1,33 @@
-Received: from [209.85.221.196] (helo=mail-qy0-f196.google.com)
+Received: from [64.71.164.66] (helo=madrid.hostgo.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1MiAXo-0007RB-IM
+	(envelope-from <javiroman@kernel-labs.org>) id 1MiBB5-000670-Sy
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Aug 2009 19:19:52 +0200
-Received: by qyk34 with SMTP id 34so2585324qyk.12
+	Mon, 31 Aug 2009 20:00:28 +0200
+Received: from mail-fx0-f224.google.com ([209.85.220.224])
+	by madrid.hostgo.com with esmtpsa (TLSv1:RC4-MD5:128) (Exim 4.69)
+	(envelope-from <javiroman@kernel-labs.org>) id 1MiAt6-0002F5-M4
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Aug 2009 13:41:53 -0400
+Received: by fxm24 with SMTP id 24so1887271fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Aug 2009 10:01:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=an/gxXm61waXfa7bgYNzCffODR9qkXTqNlXqa7dSquQ=;
-	b=DM/jWB/DlU7PqAZNhHbVxsYBPqDGGyi9KWtP4gZiPW9Jl3Z0vgq+n0qRKvp+sSJoL3
-	/QA5EchC9foTcWMhb8Sb/mxEiqnx6UJUrngydn4KH3TkjQImJ5EQCbrBRxac+6r6GbFL
-	ZzWRescl1+hSqGjY6VVZdGw5PD4rNcgCAfwF4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	b=lFCn5MzFAVU22SYSTh8sXXlDGBfnz+hm+WReoMldrAKAa/CWyK9kTkliBN+9HIJvhB
-	15R87+lVRgvikBWFQ2/PtonSlDNcqGEt2HAYrsMaB1hSxTLtYTGJs/dE6a55kzTin3p3
-	Ay/s1Cgq3+gx8Mt9QdUmjSAJrCsp4/nEkjJt8=
+	Mon, 31 Aug 2009 10:41:47 -0700 (PDT)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.116.140 with SMTP id m12mr1710598qcq.54.1251738079126; 
-	Mon, 31 Aug 2009 10:01:19 -0700 (PDT)
-In-Reply-To: <4A9BFC7E.6040401@cbnco.com>
-References: <1250536860-9140-1-git-send-email-msmith@cbnco.com> 
-	<4A9BFC7E.6040401@cbnco.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 31 Aug 2009 10:00:59 -0700
-X-Google-Sender-Auth: cb22e8ca7c58bad3
-Message-ID: <b6ebd0a50908311000r5e588fc1h2f1e7fc0da88c43b@mail.gmail.com>
+Received: by 10.223.75.133 with SMTP id y5mr1904845faj.18.1251740507099; Mon, 
+	31 Aug 2009 10:41:47 -0700 (PDT)
+In-Reply-To: <200908311722.45126.mickey@vanille-media.de>
+References: <12c2e32e0908310716r696a7dadrdc330ad9d4b1eb65@mail.gmail.com> 
+	<200908311722.45126.mickey@vanille-media.de>
+From: Javi Roman <javiroman@kernel-labs.org>
+Date: Mon, 31 Aug 2009 19:41:27 +0200
+Message-ID: <12c2e32e0908311041g71b15fd7j102c162d440a7776@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] package_deb: create md5sums control files
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - madrid.hostgo.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - kernel-labs.org
+Subject: Re: DISTRO minimal.conf for ARM architectures
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,138 +41,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2009 17:19:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 31 Aug 2009 18:00:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Looks okay to me.  Not tested, but looks sane. :)
-
-Acked-by: Chris Larson <clarson@kergoth.com>
-
-On Mon, Aug 31, 2009 at 9:38 AM, Michael Smith<msmith@cbnco.com> wrote:
-> OK to commit?
->
-> Mike
->
-> Michael Smith wrote:
+On Mon, Aug 31, 2009 at 5:22 PM, Michael 'Mickey'
+Lauer<mickey@vanille-media.de> wrote:
+> On Monday 31 August 2009 16:16:10 Javi Roman wrote:
+>> I've been unable to build minimal.conf distro for an ARM architecture
+>> (more precisely for Beagleboard platform), at this point I would like
+>> ask two questions:
 >>
->> These are created with the package and get installed in
->> /var/dpkg/info. Afterward it's a great way to find modified files
->> for backup with a little shell script magic.
->>
->> It feels a bit weird to still use MD5, but that seems to be the
->> convention in the Debian world.
->>
->> Signed-off-by: Michael Smith <msmith at cbnco.com>
->> ---
->> =C2=A0classes/package.bbclass =C2=A0 =C2=A0 | =C2=A0 45
->> +++++++++++++++++++++++++++++++++++++++++++
->> =C2=A0classes/package_deb.bbclass | =C2=A0 =C2=A07 ++++++
->> =C2=A02 files changed, 52 insertions(+), 0 deletions(-)
->>
->> diff --git a/classes/package.bbclass b/classes/package.bbclass
->> index f6bd7c5..e3f55b5 100644
->> --- a/classes/package.bbclass
->> +++ b/classes/package.bbclass
->> @@ -202,6 +202,51 @@ def runstrip(file, d):
->> =C2=A0 =C2=A0 =C2=A0 return 1
->> =C2=A0+def write_package_md5sums (root, outfile, ignorepaths):
->> + =C2=A0 =C2=A0# For each regular file under root, writes an md5sum to o=
-utfile.
->> + =C2=A0 =C2=A0# With thanks to patch.bbclass.
->> + =C2=A0 =C2=A0import bb, os
->> +
->> + =C2=A0 =C2=A0try:
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0# Python 2.5+
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0import hashlib
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0ctor =3D hashlib.md5
->> + =C2=A0 =C2=A0except ImportError:
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0import md5
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0ctor =3D md5.new
->> +
->> + =C2=A0 =C2=A0outf =3D file(outfile, 'w')
->> +
->> + =C2=A0 =C2=A0# Each output line looks like: "<hex...> =C2=A0<filename =
-without leading
->> slash>"
->> + =C2=A0 =C2=A0striplen =3D len(root)
->> + =C2=A0 =C2=A0if not root.endswith('/'):
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0striplen +=3D 1
->> +
->> + =C2=A0 =C2=A0for walkroot, dirs, files in os.walk(root):
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0# Skip e.g. the DEBIAN directory
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0if walkroot[striplen:] in ignorepaths:
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0dirs[:] =3D []
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0continue
->> +
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0for name in files:
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fullpath =3D os.path.join(wal=
-kroot, name)
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if os.path.islink(fullpath) o=
-r (not
->> os.path.isfile(fullpath)):
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0continue
->> +
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0m =3D ctor()
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0f =3D file(fullpath, 'rb')
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0while True:
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0d =3D f.read(81=
-92)
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if not d:
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0b=
-reak
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0m.update(d)
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0f.close()
->> +
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0print >> outf, "%s =C2=A0%s" =
-% (m.hexdigest(),
->> fullpath[striplen:])
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0+ =C2=A0 =C2=A0outf.close()
->> +
->> +
->> =C2=A0#
->> =C2=A0# Package data handling routines
->> =C2=A0#
->> diff --git a/classes/package_deb.bbclass b/classes/package_deb.bbclass
->> index e5339a9..4a17010 100644
->> --- a/classes/package_deb.bbclass
->> +++ b/classes/package_deb.bbclass
->> @@ -243,6 +243,13 @@ python do_package_deb () {
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 conffiles.write(=
-'%s\n' % f)
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 conffiles.close()
->> =C2=A0+ =C2=A0 =C2=A0 =C2=A0 =C2=A0try:
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0write_package_md5sums(root, o=
-s.path.join(controldir,
->> 'md5sums'),
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0['DEBIAN'])
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0except:
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bb.utils.unlockfile(lf)
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0raise
->> +
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 os.chdir(basedir)
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D os.system("PATH=3D\"%s\" fakeroot dp=
-kg-deb -b %s %s" %
->> (bb.data.getVar("PATH", localdata, 1), root, pkgoutdir))
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 if ret !=3D 0:
+>> 1. Is it minimal.conf distro ready to build on ARM architectures right now?
 >
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> Yes. How exactly does it fail for you?
+
+/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc-cross-initial-4.2.4-r8.1/gcc-4.2.4/build.i686-linux.arm-oe-linux-gnueabi/./gcc/xgcc
+-B/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc-cross-initial-4.2.4-r8.1/gcc-4.2.4/build.i686-linux.arm-oe-linux-gnueabi/./gcc/
+-march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
+-isystem/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/staging/armv7a-oe-linux-gnueabi/usr/include
+-B/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/cross/armv7a/arm-oe-linux-gnueabi/bin/
+-B/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/cross/armv7a/arm-oe-linux-gnueabi/lib/
+-isystem /builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/cross/armv7a/arm-oe-linux-gnueabi/include
+-isystem /builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/cross/armv7a/arm-oe-linux-gnueabi/sys-include
+-O2 -g -Os -DIN_GCC -DCROSS_COMPILE   -W -Wall -Wwrite-strings
+-Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition
+-isystem ./include  -I. -I.
+-I/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc
+-I/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/.
+-I/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/../include
+-I/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/../libcpp/include
+ -I/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/../libdecnumber
+-I../libdecnumber  -g0 -finhibit-size-directive -fno-inline-functions
+-fno-exceptions -fno-zero-initialized-in-bss -fno-toplevel-reorder
+-Dinhibit_libc  -fPIC \
+          -c /builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/crtstuff.c
+-DCRT_END -DCRTSTUFFS_O \
+          -o crtendS.o
+/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/crtstuff.c:1:
+error: bad value (cortex-a8) for -mtune= switch
+/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/crtstuff.c:1:
+error: bad value (armv7-a) for -march= switch
+/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/crtstuff.c:1:
+error: invalid floating point option:
+-mfpu=neon/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/crtstuff.c:1:
+error: bad value (cortex-a8) for -mtune= switch
+/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/crtstuff.c:1:
+error: bad value (armv7-a) for -march= switch
+/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc-cross-initial-4.2.4-r8.1/gcc-4.2.4/gcc/crtstuff.c:1:
+error: invalid floating point option: -mfpu=neon
+make[2]: *** [crtbeginT.o] Error 1
+make[2]: *** [crtendS.o] Error 1
+make[2]: *** [crtbeginS.o] Error 1
+make[2]: Leaving directory
+`/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc-cross-initial-4.2.4-r8.1/gcc-4.2.4/build.i686-linux.arm-oe-linux-gnueabi/gcc'
+make[1]: *** [all-gcc] Error 2
+make[1]: Leaving directory
+`/builds/ASV1-BEAGLEBOARD.REVB6/build/tmp/work/armv7a-oe-linux-gnueabi/gcc-cross-initial-4.2.4-r8.1/gcc-4.2.4/build.i686-linux.arm-oe-linux-gnueabi'
+make: *** [all] Error 2
+FATAL: oe_runmake failed
 
 
+I've thought, before to try to find out the problem, if the tuning of
+minimal distro for ARM architecutes would be the Angstrom
+distribution.
 
---=20
-Chris Larson
-clarson at kergoth dot com
-clarson at mvista dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Software Engineer
-MontaVista Software, Inc.
+By the way, I'm trying to use the minimal distro for Beagleboard,
+instead of Angstron, because of I have thought minimal distro is a
+good point of start a fresh (o vanilla) basic distribution, and
+Angstron is a more complete and cutting edge distribution for
+Beagleboard platform (as Koen has told me).
+
+Thanks.
+
+-- 
+Javi Roman
 
 
