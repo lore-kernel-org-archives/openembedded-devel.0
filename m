@@ -1,24 +1,32 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.219.219] (helo=mail-ew0-f219.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Mi5QP-0008Q0-A8
-	for openembedded-devel@openembedded.org; Mon, 31 Aug 2009 13:51:58 +0200
-Received: (qmail 7779 invoked by uid 813007); 31 Aug 2009 11:33:23 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 31 Aug 2009 11:33:23 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Aug 2009 13:33:19 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc6-00243-g53bc5c0; KDE/4.3.0; x86_64; ;
-	)
-References: <1251504044-2315-1-git-send-email-raj.khem@gmail.com>
-	<1251620948.4215.673.camel@lenovo.internal.reciva.com>
-	<20090830094809.GB26823@gmail.com>
-In-Reply-To: <20090830094809.GB26823@gmail.com>
+	(envelope-from <sinestado@gmail.com>) id 1Mi69E-00079C-MI
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 31 Aug 2009 14:38:15 +0200
+Received: by ewy19 with SMTP id 19so4782062ewy.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 Aug 2009 05:19:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=swxzGjwndna7vBrjGjL2JkNAUnSQtOyrR6vW+9YiCE8=;
+	b=V9w/D5PAUVRyFzGdYkPX28WgWbUuNegoWHr4Qvm/b7eSiB5CwhujHcm6zPNXI2Yq4A
+	ERFdnl2oHyUA2llXQkMvRDlOKGbAfuN6I3jqJ/IVL/0Vl4KXnr9N/KiZwF9l1/HBgkyi
+	ku9JC1y/hGpzknnF7ljrfkRWfTaOYg5XIQ6sU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=xGCTPkGBFlnealqdUyNowpVxhsODXEubnnkckxuLfNby8Gp1pUaV9k/19SP2zQ0d1u
+	iaRHpF0dvs9kARBWDQMNK9BuQakd10MoEtxuPTwAA7h3fL9Sgz4T/dFBgqGISGDZW8H6
+	KdIES6yDXw9hgTzr+7Myvk29EkTzp5LxJEf28=
 MIME-Version: 1.0
-Message-Id: <200908311333.20189.marcin@juszkiewicz.com.pl>
-Subject: Re: [PATCH] sane-toolchain-eglibc.inc: Set TARGET_OS	= linux-gnuspe for e500
+Received: by 10.216.89.135 with SMTP id c7mr1144589wef.62.1251721180825; Mon, 
+	31 Aug 2009 05:19:40 -0700 (PDT)
+Date: Mon, 31 Aug 2009 09:19:40 -0300
+Message-ID: <a63ecaf0908310519p3bc80147q6ad2d89e4c587d@mail.gmail.com>
+From: Sushi Sensei <sinestado@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Xorg int10 module missing?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,49 +40,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2009 11:52:03 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 31 Aug 2009 12:38:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-What about using MACHINE_FEATURES (or CPU_FEATURES) for things like eabi/spe?
+I'm trying to use cirrus driver but I can't load int10 and xaa
+driver vesa also depends of xserver-xorg-module-libint10 but I can' find
+this!!
 
-TARGET_OS = "linux-"
-if ARCH in [ppc,powerpc] and MACHINE_FEATURES.find('spe') then
 
-  if LIBC=uclibc then
-    TARGET_OS += "uclibc"
-  fi
-
-  TARGET_OS += "gnuspe"
-fi
-
-Same for adding eabi:
-
-TARGET_OS = "linux-"
-if ARCH in [arm,armeb] and MACHINE_FEATURES.find('eabi') then
-
-  if LIBC=uclibc then
-    TARGET_OS += "uclibc"
-  fi
-
-  TARGET_OS += "gnueabi"
-fi
-
-spe/eabi can be added to MACHINE_FEATURES in conf/machine/include/tune-* files 
-and distros can choose do they support it or not by DISTRO_FEATURES (examples 
-needs to be changed then to use COMBINED_FEATURES variable). This way no one 
-has to change XY files just because he has new board with ppc500v2 core, we do 
-not have to remember about armv4 devices which are not capable of EABI with 
-gcc 4.3.x and older (but if they will support EABI in future we just change 
-tune-strongarm.inc file).
-
-Regards, 
 -- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
-
+------------------------------------------------------
+--- Timeo Danaos et dona ferentes ---
+------------------------------------------------------
 
