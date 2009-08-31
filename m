@@ -1,35 +1,23 @@
-Received: from [64.71.164.66] (helo=madrid.hostgo.com)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <javiroman@kernel-labs.org>) id 1MiCaj-0003jt-Fh
+	(envelope-from <mickey@vanille-media.de>) id 1MiCyF-0004gL-Fa
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Aug 2009 21:31:03 +0200
-Received: from mail-fx0-f224.google.com ([209.85.220.224])
-	by madrid.hostgo.com with esmtpsa (TLSv1:RC4-MD5:128) (Exim 4.69)
-	(envelope-from <javiroman@kernel-labs.org>) id 1MiCIj-0004Fq-Uu
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Aug 2009 15:12:26 -0400
-Received: by fxm24 with SMTP id 24so1947716fxm.12
+	Mon, 31 Aug 2009 21:55:19 +0200
+Received: from andromeda.vanille.de (e180153210.adsl.alicedsl.de
+	[85.180.153.210])
+	by drlauer-research.com (Postfix) with ESMTP id E07C6584712
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Aug 2009 12:12:23 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.223.15.11 with SMTP id i11mr1873432faa.105.1251745943063; Mon, 
-	31 Aug 2009 12:12:23 -0700 (PDT)
-In-Reply-To: <4A9C0CA3.7050906@balister.org>
-References: <12c2e32e0908310716r696a7dadrdc330ad9d4b1eb65@mail.gmail.com> 
-	<200908311722.45126.mickey@vanille-media.de>
-	<12c2e32e0908311041g71b15fd7j102c162d440a7776@mail.gmail.com> 
-	<4A9C0CA3.7050906@balister.org>
-From: Javi Roman <javiroman@kernel-labs.org>
-Date: Mon, 31 Aug 2009 21:12:03 +0200
-Message-ID: <12c2e32e0908311212m6a4a04fcpda63d338c455e426@mail.gmail.com>
+	Mon, 31 Aug 2009 22:16:38 +0200 (CEST)
+From: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
+Organization: Vanille-Media
 To: openembedded-devel@lists.openembedded.org
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - madrid.hostgo.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - kernel-labs.org
-Subject: Re: DISTRO minimal.conf for ARM architectures
+Date: Mon, 31 Aug 2009 21:36:53 +0200
+User-Agent: KMail/1.11.2 (Linux/2.6.28-15-generic; KDE/4.2.2; x86_64; ; )
+References: <1251594596-4738-1-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1251594596-4738-1-git-send-email-raj.khem@gmail.com>
+MIME-Version: 1.0
+Message-Id: <200908312136.53824.mickey@vanille-media.de>
+Subject: Re: [PATCH] micro-uclibc, minimal-uclibc: Reorder including the base distro config.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,43 +31,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2009 19:31:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 31 Aug 2009 19:55:19 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Mon, Aug 31, 2009 at 7:47 PM, Philip Balister<philip@balister.org> wrote:
-> Javi Roman wrote:
->>
->> On Mon, Aug 31, 2009 at 5:22 PM, Michael 'Mickey'
->> Lauer<mickey@vanille-media.de> wrote:
->> By the way, I'm trying to use the minimal distro for Beagleboard,
->> instead of Angstron, because of I have thought minimal distro is a
->> good point of start a fresh (o vanilla) basic distribution, and
->> Angstron is a more complete and cutting edge distribution for
->> Beagleboard platform (as Koen has told me).
+On Sunday 30 August 2009 03:09:56 Khem Raj wrote:
+> A lot of stuff in these conf's are already set and
+> is duplicated. This is removed. The base conf file
+> should be included at the end after assigning LIBC
+> so that correct toolchain configuration is picked.
 >
-> I think you are confusing choice of DISTRO and choice of image.You can
-> create vanilla images with Angstrom.
->
-> We really need to put something on the wiki explaining what DISTRO means in
-> the OE context.
->
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Acked-by: Michael 'Mickey' Lauer <mlauer@vanille-media.de>
 
-Oh, no, I understand the meaning of a DISTRO (I guess). The point here
-is I was looking for a DISTRO, a base DISTRO (or generic distro,
-better than "minimal") for a set of different boards that I have (ARM,
-PPC, MIPS, x86) .
+Thanks,
 
-I have built a minimal.conf distro for ALIX board, and I would like to
-build the same distro (I'm not talking about the final image) for a
-Beagle board (for example), with the same eglibc, gcc, ... and so
-forth. I'm talking about a base line distro.
+:M:
 
-It is possible that minimal.conf distro is not for I am using, I mean
-is not a generic distro at all. I'm a little bit confused about it.
-
-
--- 
-Javi Roman
-Sent from Madrid, Spain
 
 
