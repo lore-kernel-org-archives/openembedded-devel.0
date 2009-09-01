@@ -1,26 +1,36 @@
-Received: from [209.85.219.219] (helo=mail-ew0-f219.google.com)
+Received: from [209.85.220.224] (helo=mail-fx0-f224.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1MiSAb-0003Iy-1t
+	(envelope-from <sinestado@gmail.com>) id 1MiTQS-0000Qc-Ko
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Sep 2009 14:09:06 +0200
-Received: by ewy19 with SMTP id 19so5599278ewy.20
+	Tue, 01 Sep 2009 15:29:32 +0200
+Received: by fxm24 with SMTP id 24so2446867fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Sep 2009 04:50:26 -0700 (PDT)
-Received: by 10.210.101.7 with SMTP id y7mr6928246ebb.99.1251805825306;
-	Tue, 01 Sep 2009 04:50:25 -0700 (PDT)
-Received: from ?10.8.0.6? (www.xora.org.uk [80.68.91.202])
-	by mx.google.com with ESMTPS id 28sm160987eyg.41.2009.09.01.04.50.23
-	(version=SSLv3 cipher=RC4-MD5); Tue, 01 Sep 2009 04:50:24 -0700 (PDT)
-Message-ID: <4A9D0A80.8050303@xora.org.uk>
-Date: Tue, 01 Sep 2009 12:50:24 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+	Tue, 01 Sep 2009 06:10:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=HgorfTqhNjsoBZu2C8R/yOlMIobOxz0PKZlUB4Mi4jM=;
+	b=r+QtO1BKZ1u0rMr9Q1idW59xGOrQ1MQBt5v4z07rX6Ei9lsuqp1M38Qe5y9SJd+ttF
+	Rl0wHlojtbX988Xkl1GshpxKJe1oECfcoG86XC3A6P0beS9eGLSsti5Fj4Tqh/hbp2WB
+	NoFQs8ds3NjwxhSOQkAZAMSeg3Pa3wAw8JGuY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=wWKWO1tQbVXNf9TRBt0x2kWZmkOl6tNEjUq+rG9duviOSSMy9lH7YWjITIg0P9zxK4
+	0sFz9009TZ1hyjWoEHe6K1mTCrK08aTe4oOhdhEVzd6nMKTpmibvUEbH0evNHfdx/gfp
+	wqWYevFwQ6yHr9ey00MzHHXKr3hokZY8OsgkU=
 MIME-Version: 1.0
+Received: by 10.204.153.22 with SMTP id i22mr5425616bkw.165.1251810653288; 
+	Tue, 01 Sep 2009 06:10:53 -0700 (PDT)
+In-Reply-To: <200908311553.26539.marcin@juszkiewicz.com.pl>
+References: <a63ecaf0908310519p3bc80147q6ad2d89e4c587d@mail.gmail.com>
+	<200908311553.26539.marcin@juszkiewicz.com.pl>
+Date: Tue, 1 Sep 2009 10:10:53 -0300
+Message-ID: <a63ecaf0909010610hb7a1a50h2c4588a421fdb534@mail.gmail.com>
+From: Sushi Sensei <sinestado@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1251210375.4215.525.camel@lenovo.internal.reciva.com>	<4A968DCD.8020003@gmail.com>	<1251382003.27780.45.camel@mill.internal.reciva.com>	<20090831212051.GC6707@denix.org>
-	<1251799101.27780.87.camel@mill.internal.reciva.com>
-In-Reply-To: <1251799101.27780.87.camel@mill.internal.reciva.com>
-Subject: Re: OEDEM November 2009
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Xorg int10 module missing?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,19 +44,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Sep 2009 12:09:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 01 Sep 2009 13:29:32 -0000
+Content-Type: text/plain; charset=ISO-8859-2
+Content-Transfer-Encoding: quoted-printable
 
-Phil Blundell wrote:
-> On which subject, just a quick reminder for anybody who plans to attend
-> but hasn't yet informed me of their intentions: please send me an email
-> within the next 7 days to ensure that you are included in the headcount.
+No, I can't find any reference to int10 in any recipe!!  Nor in xserver-xor=
+g
+neither in ALL recipes of OE
+
+2009/8/31 Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+
+> Dnia poniedzia=B3ek, 31 sierpnia 2009 o 14:19:40 Sushi Sensei napisa=B3(a=
+):
+> > I'm trying to use cirrus driver but I can't load int10 and xaa
+> > driver vesa also depends of xserver-xorg-module-libint10 but I can' fin=
+d
+> > this!!
 >
->   
-I plan to attend.
+> They are build as part of xserver-xorg recipe.
+>
+> Regards,
+> --
+> JID:      hrw@jabber.org
+> Website:  http://marcin.juszkiewicz.com.pl/
+> LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-Graeme
 
 
+--=20
+------------------------------------------------------
+--- Timeo Danaos et dona ferentes ---
+------------------------------------------------------
 
