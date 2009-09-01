@@ -1,38 +1,31 @@
-Received: from [209.85.218.210] (helo=mail-bw0-f210.google.com)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sinestado@gmail.com>) id 1MiXET-0006Tc-Ah
+	(envelope-from <msmith@cbnco.com>) id 1Mibh9-00072V-Ki
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Sep 2009 19:33:25 +0200
-Received: by bwz6 with SMTP id 6so144088bwz.12
+	Wed, 02 Sep 2009 00:19:24 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 6733E5560BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Sep 2009 10:14:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=jEKpyX/rooW2cK5+CeHDkgKXFyB15wKck1OycIydUqY=;
-	b=kMlZU1ShX3r5GwT9oW01zIFqdJnIx7YHimGqald64CAQdhei567XWL39ci3AV4VTB0
-	p6wqoJ9F/TbyiuKs1eytjErsZM+gPIsmh+CiDKH3wDpf1uanGAHVuUm5YWzbm/f9Sxub
-	L6msQOvEGMW6LEMFOSGRUhVCXyRmfROqZ0zYQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=pKZmguyJ9h+kmBwyNKWOcGfxk33zxUrsOG0/C95nH+X3ldU9zxQgClBq93XHUqrdsH
-	NPV6iMv+1jiWbr37cWaxRDmMQ5gF71py45dAMETB3eihrt/m4jlcIGP3UDq7FWlJ4zTQ
-	UrJe//MseFaG3GLUhknjKBwCxK6kMuNwZS8CM=
+	Tue,  1 Sep 2009 18:00:35 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 02896-01 for <openembedded-devel@lists.openembedded.org>; 
+	Tue,  1 Sep 2009 18:00:35 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 172E3507F91
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  1 Sep 2009 18:00:35 -0400 (EDT)
+Message-ID: <4A9D9982.4080902@cbnco.com>
+Date: Tue, 01 Sep 2009 18:00:34 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090812)
 MIME-Version: 1.0
-Received: by 10.204.24.145 with SMTP id v17mr5778004bkb.3.1251825284892; Tue, 
-	01 Sep 2009 10:14:44 -0700 (PDT)
-In-Reply-To: <200909011541.35665.marcin@juszkiewicz.com.pl>
-References: <a63ecaf0908310519p3bc80147q6ad2d89e4c587d@mail.gmail.com>
-	<200908311553.26539.marcin@juszkiewicz.com.pl>
-	<a63ecaf0909010610hb7a1a50h2c4588a421fdb534@mail.gmail.com>
-	<200909011541.35665.marcin@juszkiewicz.com.pl>
-Date: Tue, 1 Sep 2009 14:14:44 -0300
-Message-ID: <a63ecaf0909011014x4a1b9414rf369c03e2a05463a@mail.gmail.com>
-From: Sushi Sensei <sinestado@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Xorg int10 module missing?
+References: <1250175641-4869-1-git-send-email-msmith@cbnco.com>	<1250175641-4869-2-git-send-email-msmith@cbnco.com>
+	<1250175641-4869-3-git-send-email-msmith@cbnco.com>
+In-Reply-To: <1250175641-4869-3-git-send-email-msmith@cbnco.com>
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: [PATCH 3/4] udev 141: fix packaging on x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,17 +39,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Sep 2009 17:33:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 01 Sep 2009 22:19:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Txs!
+Hi,
 
-I'm really new in OE
+Could someone with prefix = /usr give this a quick build test before I 
+check it in?
+
+http://patchwork.openembedded.org/patch/940/
+
+Thanks,
+Mike
+
+Michael Smith wrote:
+> udev installs binaries under $(udev_prefix)/lib/udev, even if ${libdir}
+> is ${prefix}/lib64. This means some paths need to be hardcoded to "/lib"
+> instead of "${base_libdir}".
+> 
+> Signed-off-by: Michael Smith <msmith@cbnco.com>
+> ---
+>  recipes/udev/udev_141.bb |   15 ++++++++++-----
+>  1 files changed, 10 insertions(+), 5 deletions(-)
+> 
+> diff --git a/recipes/udev/udev_141.bb b/recipes/udev/udev_141.bb
+> index 3f42564..13b3808 100644
+> --- a/recipes/udev/udev_141.bb
+> +++ b/recipes/udev/udev_141.bb
+> @@ -6,7 +6,7 @@ LICENSE = "GPL"
+>  # Untested
+>  DEFAULT_PREFERENCE = "-1"
+>  
+> -PR = "r11"
+> +PR = "r12"
+>  
+>  # needed for init.d script
+>  RDEPENDS_${PN} += "udev-utils"
+> @@ -51,8 +51,10 @@ RPROVIDES_${PN} = "hotplug"
+>  FILES_${PN} += "${usrbindir}/* ${usrsbindir}/udevd"
+>  FILES_${PN}-dbg += "${usrbindir}/.debug ${usrsbindir}/.debug"
+>  
+> -FILES_${PN} += "${libdir}/udev/* ${base_libdir}/udev/*"
+> -FILES_${PN}-dbg += "${base_libdir}/udev/.debug"
+> +# udev installs binaries under $(udev_prefix)/lib/udev, even if ${libdir}
+> +# is ${prefix}/lib64
+> +FILES_${PN} += "/lib/udev/* /lib/udev/*"
+> +FILES_${PN}-dbg += "/lib/udev/.debug"
+>  
+>  do_install () {
+>  	install -d ${D}${usrsbindir} \
+> @@ -64,8 +66,11 @@ do_install () {
+>  	install -d ${D}${sysconfdir}/default
+>  	install -m 0755 ${WORKDIR}/default ${D}${sysconfdir}/default/udev
+>  
+> -	mv ${D}${base_libdir}/udev/rules.d ${D}${sysconfdir}/udev/
+> -	ln -sf ${sysconfdir}/udev/rules.d ${D}${base_libdir}/udev/
+> +	# Move udev rules from $(udev_prefix)/lib to /etc.
+> +	# This is hardcoded to $(udev_prefix)/lib/udev/rules.d in the
+> +	# Makefile, even if libdir is lib64.
+> +	mv ${D}/lib/udev/rules.d ${D}${sysconfdir}/udev/
+> +	ln -sf ${sysconfdir}/udev/rules.d ${D}/lib/udev/
+>  
+>   	cp ${S}/rules/rules.d/* ${D}${sysconfdir}/udev/rules.d/
+>  	cp ${S}/rules/packages/* ${D}${sysconfdir}/udev/rules.d/
 
 
-
-
-------------------------------------------------------
---- Timeo Danaos et dona ferentes ---
-------------------------------------------------------
 
