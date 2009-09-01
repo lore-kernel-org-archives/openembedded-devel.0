@@ -1,39 +1,31 @@
-Received: from [212.227.126.177] (helo=moutng.kundenserver.de)
+Received: from [209.85.216.196] (helo=mail-px0-f196.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dirk@do13.de>) id 1MiOup-0004Xq-F8
+	(envelope-from <fred.arneto@gmail.com>) id 1MiPyc-00046b-PZ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Sep 2009 10:40:35 +0200
-Received: from mail.opfer.lan (do13.in-dsl.de [217.197.85.204])
-	by mrelayeu.kundenserver.de (node=mreu1) with ESMTP (Nemesis)
-	id 0MKv1o-1MiOcl3Wuc-000GSy; Tue, 01 Sep 2009 10:21:58 +0200
-Received: from localhost ([127.0.0.1] helo=home.opfer.tk)
-	by mail.opfer.lan with esmtpa (Exim 4.69)
-	(envelope-from <dirk@do13.de>) id 1MiOcY-0007MH-Ro
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Sep 2009 10:21:54 +0200
-Received: from p578b18b1.dip0.t-ipconnect.de ([87.139.24.177])
-	(SquirrelMail authenticated user dirk) by home.opfer.tk with HTTP;
-	Tue, 1 Sep 2009 10:21:42 +0200 (CEST)
-Message-ID: <57768.87.139.24.177.1251793302.squirrel@home.opfer.tk>
-In-Reply-To: <20090901055731.GA22534@gmail.com>
-References: <1251504044-2315-1-git-send-email-raj.khem@gmail.com>
-	<1251620948.4215.673.camel@lenovo.internal.reciva.com>
-	<20090830094809.GB26823@gmail.com>
-	<200908311333.20189.marcin@juszkiewicz.com.pl>
-	<20090901055731.GA22534@gmail.com>
-Date: Tue, 1 Sep 2009 10:21:42 +0200 (CEST)
-From: "Dirk Opfer" <dirk@do13.de>
-To: openembedded-devel@lists.openembedded.org
-User-Agent: SquirrelMail/1.4.10a
+	Tue, 01 Sep 2009 11:48:34 +0200
+Received: by pxi34 with SMTP id 34so527404pxi.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Sep 2009 02:29:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=tH9uf2daJXmhQ2pOwGUlAFELGd79wAog0HM9hepSGKk=;
+	b=sX1vBiYARhKif+bRWIhoRuJ/v65Xq5HPZzQnQ9mLotMDluPbKJn5vEglVixrLVR1vt
+	Gt9Qrs5jAnh5pxUZBFe7iwZYdKR0e4APrFAf2DU1fvvyhU8UwUg28iwzgQxqptYdeLuo
+	PIFHfJJCAgNw8kyKMH7uC3kI/1mUcl949dtlw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=nlwh9hytq7T17jLwwlW/WpM85+rhzclwhe/S/oTzNzCDqz82FE22jx7gHIdJN97S6G
+	zan0/eIsPZsKufsw3in7G1Wb3OKmBe7XHEQjhRSzyF6HRVdqFLev02H8wc5Fcsb+c1H0
+	rnF04Zaj/m+hPIbjvbv2xZjfyioiWxyKKY+Sc=
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-Importance: Normal
-X-Scan-Signature: a308e19b64648530e53d4ab040f58cc2
-X-Spam-Score: -4.4 (----)
-X-Provags-ID: V01U2FsdGVkX1+c+EqNE28TyV9Fsh66bkloQEWX+ZKsMW233MS
-	JDcgc09QSphAGesGE5JssjQi8UE4NoRPgF42UuIkQUm0jKK45c
-	8/pyXD/mVf11J/wRJ7qpiWfaPih1SAG
-Subject: Re: [PATCH] sane-toolchain-eglibc.inc: Set TARGET_OS?= linux-gnuspe for e500
+Received: by 10.115.134.18 with SMTP id l18mr4186593wan.128.1251797395653; 
+	Tue, 01 Sep 2009 02:29:55 -0700 (PDT)
+Date: Tue, 1 Sep 2009 05:29:55 -0400
+Message-ID: <fe95c5770909010229m62ad22dfse6172b801fc655@mail.gmail.com>
+From: Fred Arneto <fred.arneto@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Fennec update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,42 +39,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Sep 2009 08:40:35 -0000
-Content-Type: text/plain;charset=iso-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 01 Sep 2009 09:48:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
->
-> Attached implementation is based on this suggestion. I have not done
-> wholesale change to distro confs only for micro and minimal.
->
-> I tested this patch with
->
->
-> for targ in `ls openembedded/conf/machine/*.conf|cut -d '/' -f 4|cut -d
-> '.' -f 1`; do echo -n "$targ "; MACHINE=$targ DISTRO=minimal bitbake -e
-> |grep TARGET_OS=\"; done
->
-> and all machine confs were giving correct values for TARGET_OS
-> also I repeated same test with DISTRO=minimal-uclibc
->
-> Comments ?
+Hello OE,
 
-e300 doesn't implement the signal processing engine (SPE).
-Only e500v1 and e500v2 supports these instructions.
+Tinderbox shows Fennec build failing.
+http://tinderbox.openembedded.net/packages/fennec/
 
-Dirk
+cd /home/fso/fso-milestone5.5/tmp/work/armv5te-angstrom-linux-gnueabi/fennec-1_0.9+1.0b2pre-r3/mozilla-central;
+autoconf2.13
 
+/bin/sh: autoconf2.13: command not found
 
-> Thanks
->
-> -Khem
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Just need to fix host to autoconf2.13. Any plans to update also the
+tree to latest Fennec?
 
-
+\Fred
 
 
