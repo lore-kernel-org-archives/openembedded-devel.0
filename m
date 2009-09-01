@@ -1,30 +1,25 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [209.85.219.219] (helo=mail-ew0-f219.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1MiQQB-0005Ve-Hl
+	(envelope-from <dp@xora.org.uk>) id 1MiSAb-0003Iy-1t
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Sep 2009 12:17:03 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MiQ8A-0006ru-3H
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Sep 2009 10:58:26 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1MiQ89-0006Zv-4O
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Sep 2009 10:58:25 +0100
-From: Phil Blundell <philb@gnu.org>
+	Tue, 01 Sep 2009 14:09:06 +0200
+Received: by ewy19 with SMTP id 19so5599278ewy.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Sep 2009 04:50:26 -0700 (PDT)
+Received: by 10.210.101.7 with SMTP id y7mr6928246ebb.99.1251805825306;
+	Tue, 01 Sep 2009 04:50:25 -0700 (PDT)
+Received: from ?10.8.0.6? (www.xora.org.uk [80.68.91.202])
+	by mx.google.com with ESMTPS id 28sm160987eyg.41.2009.09.01.04.50.23
+	(version=SSLv3 cipher=RC4-MD5); Tue, 01 Sep 2009 04:50:24 -0700 (PDT)
+Message-ID: <4A9D0A80.8050303@xora.org.uk>
+Date: Tue, 01 Sep 2009 12:50:24 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20090831212051.GC6707@denix.org>
-References: <1251210375.4215.525.camel@lenovo.internal.reciva.com>
-	<4A968DCD.8020003@gmail.com>
-	<1251382003.27780.45.camel@mill.internal.reciva.com>
-	<20090831212051.GC6707@denix.org>
-Date: Tue, 01 Sep 2009 10:58:21 +0100
-Message-Id: <1251799101.27780.87.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
+References: <1251210375.4215.525.camel@lenovo.internal.reciva.com>	<4A968DCD.8020003@gmail.com>	<1251382003.27780.45.camel@mill.internal.reciva.com>	<20090831212051.GC6707@denix.org>
+	<1251799101.27780.87.camel@mill.internal.reciva.com>
+In-Reply-To: <1251799101.27780.87.camel@mill.internal.reciva.com>
 Subject: Re: OEDEM November 2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -39,28 +34,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Sep 2009 10:17:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 01 Sep 2009 12:09:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2009-08-31 at 17:20 -0400, Denys Dmytriyenko wrote:
-> Thank you for organizing it! I was planning on coming, pending the final 
-> logistics for the travel.
-> 
-> What is the venue for this event? Do you plan to reserve a place for it in 
-> advance, like a meeting room in a hotel or such?
+Phil Blundell wrote:
+> On which subject, just a quick reminder for anybody who plans to attend
+> but hasn't yet informed me of their intentions: please send me an email
+> within the next 7 days to ensure that you are included in the headcount.
+>
+>   
+I plan to attend.
 
-We haven't yet identified the exact venue since the number of expected
-attendees will have quite a large influence on the kind of space that we
-need.  I would hope we can arrange something within the next couple of
-weeks though.
-
-On which subject, just a quick reminder for anybody who plans to attend
-but hasn't yet informed me of their intentions: please send me an email
-within the next 7 days to ensure that you are included in the headcount.
-
-p.
-
+Graeme
 
 
 
