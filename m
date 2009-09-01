@@ -1,46 +1,39 @@
-Received: from [209.85.218.210] (helo=mail-bw0-f210.google.com)
+Received: from [74.125.92.149] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MiVcG-0008Jo-9I
+	(envelope-from <kergoth@gmail.com>) id 1MiWSN-00073l-1v
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Sep 2009 17:49:52 +0200
-Received: by bwz6 with SMTP id 6so54567bwz.12
+	Tue, 01 Sep 2009 18:43:43 +0200
+Received: by qw-out-1920.google.com with SMTP id 4so62580qwk.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Sep 2009 08:31:12 -0700 (PDT)
+	Tue, 01 Sep 2009 09:25:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=C3f1buaNvhtiheJqNY1sZDoPvibK/5T4vf4RZK4DAnM=;
-	b=UF7oEjEk8B03pPrnp5Wxk+37NoQglFwQDBFt7eVe/ft0hGq0XC1TU9fepjaEIEMCdx
-	u2z32sOIyzhVaa+3r2xkaIzmvb0UHc0tloCinJ7qV37hFTgaZJybW7kdVUIWJfEHnPaF
-	lQb+VQCJioYoU4yR30OzgqDe6fBeg1W5IqZDs=
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:from:date:x-google-sender-auth:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	bh=xTcR5p7TvIX2jEtU3VFkH6gRmtAIOMI6TuY2h/uZzxI=;
+	b=RdhkY/vvw0ihTjdAfk355I8VkvXgfNd79cIBGjGhXtr5y5O0iT2ReFy7zGv6n5H0M/
+	8YLBlLxGeQkEIp6xetmv9PzXwOuqGRbGd3m+WEi1E7/e20CLYuljF65l7ASDqoaFwrSz
+	9SK94uloUmzOSI5MwU9/bxwUFysYiyyhTmmas=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=aKsb6F7+CwErlU+XMozb/wgoNx32M8+5iMFMpH6nIYpLf3YNtw/WXZKZDysdd0qYzK
-	WEtkBVPBbLOkYuytwRoLSeoM/InDpkgXhu4DzmRmjyDl+E8PaqfIWM9MEYxhwmWBH78n
-	aTfDSiPgiJa5tuO0hRMX/H+Pbb0V1K2JyuU2A=
-Received: by 10.103.84.32 with SMTP id m32mr2987125mul.33.1251819072041;
-	Tue, 01 Sep 2009 08:31:12 -0700 (PDT)
-Received: from gmail.com (adsl-71-146-29-169.dsl.pltn13.sbcglobal.net
-	[71.146.29.169])
-	by mx.google.com with ESMTPS id j10sm4380864muh.56.2009.09.01.08.31.09
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 01 Sep 2009 08:31:11 -0700 (PDT)
-Date: Tue, 1 Sep 2009 08:31:02 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090901153102.GA12420@gmail.com>
-References: <1251504044-2315-1-git-send-email-raj.khem@gmail.com>
-	<1251620948.4215.673.camel@lenovo.internal.reciva.com>
-	<20090830094809.GB26823@gmail.com>
-	<200908311333.20189.marcin@juszkiewicz.com.pl>
-	<20090901055731.GA22534@gmail.com>
-	<57768.87.139.24.177.1251793302.squirrel@home.opfer.tk>
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	b=UbsO9YG5CEEYJPr5eP8Yw9jVZMHDhFT3aBDych9IqAigKwEOSt8BzMC8nLqiaaECkq
+	b6Jo6KZ1EODKi/B6gTPT4qEJOIU2xsz6m95NOq86SZvSQaP9cuwh6bGcs+pI4cUKLDdT
+	spalIS08nkFAG3RkZyHPzhAUQthbeTUL7hZ58=
 MIME-Version: 1.0
-In-Reply-To: <57768.87.139.24.177.1251793302.squirrel@home.opfer.tk>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH] sane-toolchain-eglibc.inc: Set TARGET_OS?= linux-gnuspe for e500
+Sender: kergoth@gmail.com
+Received: by 10.229.2.23 with SMTP id 23mr2069743qch.87.1251822305111; Tue, 01 
+	Sep 2009 09:25:05 -0700 (PDT)
+In-Reply-To: <be7a9f3d0909010638h75451d65la4a599a1583c3208@mail.gmail.com>
+References: <b6ebd0a50908261905r7d839647k6fc53460301efca0@mail.gmail.com> 
+	<be7a9f3d0909010638h75451d65la4a599a1583c3208@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Tue, 1 Sep 2009 09:24:45 -0700
+X-Google-Sender-Auth: 43447db84edb481d
+Message-ID: <b6ebd0a50909010924u4f9a1ee5jebfae98afb2462e6@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: srctree & gitver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,31 +47,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Sep 2009 15:49:53 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 01 Sep 2009 16:43:44 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On (01/09/09 10:21), Dirk Opfer wrote:
-> >
-> > Attached implementation is based on this suggestion. I have not done
-> > wholesale change to distro confs only for micro and minimal.
-> >
-> > I tested this patch with
-> >
-> >
-> > for targ in `ls openembedded/conf/machine/*.conf|cut -d '/' -f 4|cut -d
-> > '.' -f 1`; do echo -n "$targ "; MACHINE=$targ DISTRO=minimal bitbake -e
-> > |grep TARGET_OS=\"; done
-> >
-> > and all machine confs were giving correct values for TARGET_OS
-> > also I repeated same test with DISTRO=minimal-uclibc
-> >
-> > Comments ?
-> 
-> e300 doesn't implement the signal processing engine (SPE).
-> Only e500v1 and e500v2 supports these instructions.
+Seems interesting, but how are you making use of it?  It wouldn't be
+particularly useful for recipes that have to fetch, since you can't
+change PV before and after fetch without things exploding.
 
-yes thats right. Thanks for pointing it out.
--Khem
+On Tue, Sep 1, 2009 at 6:38 AM, Otavio Salvador<otavio@ossystems.com.br> wr=
+ote:
+> Hello Chris,
+>
+> On Wed, Aug 26, 2009 at 11:05 PM, Chris Larson<clarson@kergoth.com> wrote=
+:
+> [...]
+>> gitver facilitates extraction of version information from git. =C2=A0By
+>> default, it runs 'git describe' to get the version. =C2=A0If that fails,=
+ it
+>> will set the version to 0.0-<sha1 hash>. =C2=A0This version is stored in
+>> the ${GITVER} variable, and can be used in the recipe's PV variable.
+>> When using this, it will automatically detect changes to .git/HEAD
+>> (i.e. commit your local changes, check out a different branch, ..) and
+>> invalidate the bitbake cache, pick up the new PV, and know that it
+>> needs to re-run the build steps.
+> [...]
+>
+> In the line of your gitver class we've been using a bitbake change for
+> it already for some time.
+>
+> What we did is to add a AUTOPV (as we have AUTOREV) to bitbake and use it=
+ in OE.
+>
+> I'm attaching the diff for it here.
+>
+> --
+> Otavio Salvador =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0O.S. Systems
+> E-mail: otavio@ossystems.com.br =C2=A0http://www.ossystems.com.br
+> Mobile: +55 53 9981-7854 =C2=A0 =C2=A0 =C2=A0 =C2=A0 http://projetos.ossy=
+stems.com.br
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
+
+
+
+--=20
+Chris Larson
+clarson at kergoth dot com
+clarson at mvista dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Software Engineer
+MontaVista Software, Inc.
 
 
