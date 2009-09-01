@@ -1,26 +1,22 @@
-Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MiEbU-0002a1-LJ
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 Aug 2009 23:39:56 +0200
-Received: from gandalf.denix.org ([71.255.235.240]) by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KP9000TZFAR8PQ1@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	31 Aug 2009 16:20:52 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 480F914AF5F; Mon,
-	31 Aug 2009 17:20:51 -0400 (EDT)
-Date: Mon, 31 Aug 2009 17:20:51 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MiLzd-0005ZC-Km
+	for openembedded-devel@openembedded.org; Tue, 01 Sep 2009 07:33:21 +0200
+Received: (qmail 21155 invoked by uid 813007); 1 Sep 2009 05:14:46 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 1 Sep 2009 05:14:46 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090831212051.GC6707@denix.org>
-References: <1251210375.4215.525.camel@lenovo.internal.reciva.com>
-	<4A968DCD.8020003@gmail.com>
-	<1251382003.27780.45.camel@mill.internal.reciva.com>
-MIME-version: 1.0
-In-reply-to: <1251382003.27780.45.camel@mill.internal.reciva.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-Subject: Re: OEDEM November 2009
+Date: Tue, 1 Sep 2009 07:14:18 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc6-00243-g53bc5c0; KDE/4.3.0; x86_64; ;
+	)
+References: <E1MiFtX-0004bk-4A@melo.openembedded.org>
+In-Reply-To: <E1MiFtX-0004bk-4A@melo.openembedded.org>
+MIME-Version: 1.0
+Message-Id: <200909010714.39790.marcin@juszkiewicz.com.pl>
+Subject: Re: [oe-commits] Florian Boor : xserver-common: add 1.31
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,44 +30,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Aug 2009 21:39:56 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 01 Sep 2009 05:33:22 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 27, 2009 at 03:06:43PM +0100, Phil Blundell wrote:
-> On Thu, 2009-08-27 at 15:44 +0200, Marco Cavallini wrote:
-> > I'll try to come...
-> > Looks like Stansted airport is nearby Cambridge.
-> > Could you provide any travel information?
-> 
-> Yes, Stansted airport is the nearest with regular service.  (There is a
-> small airport in Cambridge itself but I don't think any scheduled
-> airlines operate from there anymore.)
-> 
-> For those travelling from Europe, Stansted is about a 30-minute train
-> ride from Cambridge city centre and is served by Air Berlin, Ryanair and
-> Germanwings among others.  Luton airport is about 1 hour away by bus and
-> is served by Easyjet.
-> 
-> For those travelling from further away, most long-haul flights arrive at
-> Heathrow or Gatwick airports (although there is some transatlantic
-> service into Stansted).  Both Heathrow and Gatwick are about 2 hours
-> from Cambridge by train or bus: the train is quicker but involves
-> several changes in London, whereas the bus is slow but cheaper and less
-> complicated.
-> 
-> Alternatively you can take the Eurostar to London St Pancras, which is
-> 50 minutes from Cambridge by train.
+Dnia wtorek, 1 wrze=C5=9Bnia 2009 o 01:02:39 git version control napisa=C5=
+=82(a):
+> Branch: org.openembedded.dev
+> Commit: a8b95ab31b0fddb90ef9279c5436cc568d58b6e7
+> URL: =20
+>  http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcommit;h=3Da8b9=
+5ab31b0f
+>ddb90ef9279c5436cc568d58b6e7
+>
+> Author: Florian Boor <florian.boor@kernelconcepts.de>
+> Date:   Wed Aug 26 12:23:57 2009 +0200
+>
+> xserver-common: add 1.31
 
-Phil,
+Please use 1.30 recipe instead of 1.31. Why?
 
-Thank you for organizing it! I was planning on coming, pending the final 
-logistics for the travel.
+I started changing xserver-common some time ago to merge xserver-kdrive-com=
+mon=20
+into it (so we will be able to drop it). First set of my patches landed in =
+GPE=20
+repository and 1.30 was released. It does not work without one patch anyway=
+ so=20
+I added that patch into 1.30 recipe. Then I continued hacking xserver-commo=
+n.=20
+Next batch of patches landed in GPE and 1.31 was released. But as there was=
+ no=20
+recipe for it in OE (for me 1.30 recipe was enough) I used 1.30 as base sti=
+ll.=20
+Now 1.30 recipe is more advanced then 1.31 one but I hope that those patche=
+s=20
+will also land in GPE so 1.32 will be released and we will then drop 1.30 a=
+nd=20
+1.31 recipes.
 
-What is the venue for this event? Do you plan to reserve a place for it in 
-advance, like a meeting room in a hotel or such?
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
--- 
-Denys
+
 
 
