@@ -1,43 +1,31 @@
-Received: from [209.85.221.186] (helo=mail-qy0-f186.google.com)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MixLm-0003js-N0
+	(envelope-from <msmith@cbnco.com>) id 1MixoG-0004T2-8X
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Sep 2009 23:26:42 +0200
-Received: by qyk16 with SMTP id 16so605718qyk.20
+	Wed, 02 Sep 2009 23:56:08 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 4A7AB5566BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Sep 2009 14:07:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=MnmACZT6xZIa5kwwW+EQL8BFyPLawFNbkf73XsZcueE=;
-	b=jPGYQqY2FzN0AWzJNNm10Uu/zQ16C4ljUSkHoykCnPaxmXVX4q9xZ08/q9clZ8wlqn
-	zmamdjx4UzfNgF47efLbVmjsxtD+T/JSFVG0bPsE8sTjCaYjll7oFXMlAGp3E5tu6Vgc
-	JRoMLpxwXGJ7pbmW47bZ956ljR6f/Rtq5Xaiw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=enLOODrbriLEBaVK31Q3yOaviFkuUZHVxjqTsc/WQ8rF3EIY13zGqo5X3XAz1AHmlM
-	yUgA/tjhemnm6/yfFX+1uX7Fg9Sg7xsHa62ikghrDWlwYOyXfULOkUe/jBohGdJ/XWIV
-	AUDilZRIkqI/6EmfFN7HeBgsK/NoYRd7YSBJI=
+	Wed,  2 Sep 2009 17:37:22 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 12056-10 for <openembedded-devel@lists.openembedded.org>; 
+	Wed,  2 Sep 2009 17:37:22 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 20358555FCF
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  2 Sep 2009 17:37:22 -0400 (EDT)
+Message-ID: <4A9EE591.4080104@cbnco.com>
+Date: Wed, 02 Sep 2009 17:37:21 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090812)
 MIME-Version: 1.0
-Received: by 10.229.39.201 with SMTP id h9mr2609104qce.4.1251925674791; Wed, 
-	02 Sep 2009 14:07:54 -0700 (PDT)
-In-Reply-To: <1251923389.4490.20.camel@lenovo.internal.reciva.com>
-References: <1251504044-2315-1-git-send-email-raj.khem@gmail.com>
-	<1251620948.4215.673.camel@lenovo.internal.reciva.com>
-	<20090830094809.GB26823@gmail.com>
-	<200908311333.20189.marcin@juszkiewicz.com.pl>
-	<20090901055731.GA22534@gmail.com>
-	<57768.87.139.24.177.1251793302.squirrel@home.opfer.tk>
-	<20090901153102.GA12420@gmail.com> <20090901230722.GA25864@gmail.com>
-	<20090902192044.GA18621@gmail.com>
-	<1251923389.4490.20.camel@lenovo.internal.reciva.com>
-Date: Wed, 2 Sep 2009 14:07:54 -0700
-Message-ID: <19c1b8a90909021407k5610f615q41c7d13bc3b38ff0@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] sane-toolchain-eglibc.inc: Set TARGET_OS?= linux-gnuspe for e500
+References: <1251210375.4215.525.camel@lenovo.internal.reciva.com>	<4A968DCD.8020003@gmail.com>	<1251382003.27780.45.camel@mill.internal.reciva.com>	<20090831212051.GC6707@denix.org>
+	<1251799101.27780.87.camel@mill.internal.reciva.com>
+In-Reply-To: <1251799101.27780.87.camel@mill.internal.reciva.com>
+X-Virus-Scanned: amavisd-new at cbnco.com
+Subject: Re: OEDEM November 2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,31 +39,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Sep 2009 21:26:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 02 Sep 2009 21:56:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Sep 2, 2009 at 1:29 PM, Phil Blundell<philb@gnu.org> wrote:
-> On Wed, 2009-09-02 at 12:20 -0700, Khem Raj wrote:
->> This also changes the target triplet for linux-uclibgnueabi to
->> uclibc-uclibcebi. So I have also bumped up the OELAYOUT_ABI
->
-> Ah, that doesn't sound so good. =C2=A0Changing OELAYOUT_ABI will be a
-> nuisance for everyone, even if they aren't using either uclibc or the
-> TARGET_OS auto-generator. =C2=A0Is there a way to avoid that?
+Phil Blundell wrote:
+> On which subject, just a quick reminder for anybody who plans to attend
+> but hasn't yet informed me of their intentions: please send me an email
+> within the next 7 days to ensure that you are included in the headcount.
 
-It changes from linux to linux-gnu for non uclibc systems too which I
-forgot to mention
+Hi Phil,
 
->
-> p.
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+I'd like to attend, if you've got room for one more.
+
+Thanks,
+Mike
 
 
