@@ -1,31 +1,30 @@
-Received: from [209.85.218.210] (helo=mail-bw0-f210.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <arteqw@gmail.com>) id 1Miw7C-0006wR-M6
+	(envelope-from <philb@gnu.org>) id 1MiwlT-0005CF-8e
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Sep 2009 22:07:37 +0200
-Received: by bwz6 with SMTP id 6so973271bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Sep 2009 12:48:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=Cog6d1JaJ2bmlSY723YU3wDRIhs6kar458LsInONnPw=;
-	b=qHmBVPqn5Pq9miBdPFbm/z2M03gb0GALjMuV2XcKYncFsg2llW6QWpBYuuPtYBO0E6
-	rOOlyFfgsqxv9Zd7wbOjYy+d7CmHiamaf6xXqeyNLdb/izBRV8O3cLYwAtQ9kb+w5ImI
-	4Ja9fuHhHbXBfs3RGdsS0aF/29TIwivJdRoro=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=SS8sMyc7Q+nn6AHk6UkpjbpawTWpBL6wYCRwztZdHzThtk8tUAtg6YOPXCmX92oC6f
-	FskLqqayLRFTmQpAREZ0F+0Xs27JK4Nk848pG1MY6lEvU7OUdAnnaGILhnxkesQLlwt3
-	kAuAtyVWn5VY4Eh7zh54Zv5j3Iw25NhadYf7c=
-MIME-Version: 1.0
-Received: by 10.204.13.198 with SMTP id d6mr7061011bka.188.1251920926363; Wed, 
-	02 Sep 2009 12:48:46 -0700 (PDT)
-Date: Wed, 2 Sep 2009 21:48:46 +0200
-Message-ID: <431b13f90909021248y7e0cc019pfb388fe9b3d2fc8e@mail.gmail.com>
-From: Artur Wronowski <arteqw@gmail.com>
+	Wed, 02 Sep 2009 22:49:14 +0200
+Received: from 212-139-92-236.dynamic.dsl.as9105.com ([212.139.92.236]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MiwT5-0008BB-Cq
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 02 Sep 2009 21:30:15 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] add nzbget and libpar2
+In-Reply-To: <20090902192044.GA18621@gmail.com>
+References: <1251504044-2315-1-git-send-email-raj.khem@gmail.com>
+	<1251620948.4215.673.camel@lenovo.internal.reciva.com>
+	<20090830094809.GB26823@gmail.com>
+	<200908311333.20189.marcin@juszkiewicz.com.pl>
+	<20090901055731.GA22534@gmail.com>
+	<57768.87.139.24.177.1251793302.squirrel@home.opfer.tk>
+	<20090901153102.GA12420@gmail.com> <20090901230722.GA25864@gmail.com>
+	<20090902192044.GA18621@gmail.com>
+Date: Wed, 02 Sep 2009 21:29:49 +0100
+Message-Id: <1251923389.4490.20.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+Subject: Re: [PATCH] sane-toolchain-eglibc.inc: Set TARGET_OS?= linux-gnuspe for e500
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,85 +38,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Sep 2009 20:07:44 -0000
-X-Groupsio-MsgNum: 12919
-Content-Type: multipart/mixed; boundary=00032555777e1a50d904729d8ef2
+X-List-Received-Date: Wed, 02 Sep 2009 20:49:22 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
---00032555777e1a50d904729d8ef2
-Content-Type: text/plain; charset=UTF-8
+On Wed, 2009-09-02 at 12:20 -0700, Khem Raj wrote:
+> This also changes the target triplet for linux-uclibgnueabi to
+> uclibc-uclibcebi. So I have also bumped up the OELAYOUT_ABI
 
-Hello!
+Ah, that doesn't sound so good.  Changing OELAYOUT_ABI will be a
+nuisance for everyone, even if they aren't using either uclibc or the
+TARGET_OS auto-generator.  Is there a way to avoid that?
 
-This is my first patch to openembedded. I woud like add nzbget and libpar2.
+p.
 
--- 
-Pozdrawiam, Artur
-http://artekw.net / GG: 151817 / JID: artekw@jabberpl.org
 
---00032555777e1a50d904729d8ef2
-Content-Type: text/x-patch; charset=US-ASCII; name="nzbget_and_deps.patch"
-Content-Disposition: attachment; filename="nzbget_and_deps.patch"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_fz4hbxkb0
 
-ZGlmZiAtLWdpdCBhL2NvbmYvY2hlY2tzdW1zLmluaSBiL2NvbmYvY2hlY2tzdW1zLmluaQppbmRl
-eCBlNmY1Y2JmLi43MWU5MDEyIDEwMDY0NAotLS0gYS9jb25mL2NoZWNrc3Vtcy5pbmkKKysrIGIv
-Y29uZi9jaGVja3N1bXMuaW5pCkBAIC0yODg5MCwzICsyODg5MCwxNCBAQCBzaGEyNTY9ZjU3YzRl
-MzNlYjJjZGQ4N2E2YzJmMDFiZmE0Nzk0MzQwZmJlNjFlYTFhMWNmYzdkYWMzYjY2NzFlMWRkMjJh
-ZgogbWQ1PTVmN2I4OGViYjJiY2Q3ZTgwNDQzMjg0ODJkMDc5NjYxCiBzaGEyNTY9ZjU3YzRlMzNl
-YjJjZGQ4N2E2YzJmMDFiZmE0Nzk0MzQwZmJlNjFlYTFhMWNmYzdkYWMzYjY2NzFlMWRkMjJhZgog
-CitbaHR0cDovL2Rvd25sb2Fkcy5zb3VyY2Vmb3JnZS5uZXQvcGFyY2hpdmUvbGlicGFyMi9saWJw
-YXIyLTAuMi50YXIuZ3pdCittZDU9OTRjNmRmNGUzOGVmZTA4MDU2ZWNkZTJhMDRlMGJlOTEKK3No
-YTI1Nj0wNzRmYmY4NDBmNzNiMWUxM2UwNDA1ZmNlMjYxMDc4YzgxYzhjMGE0ODU5ZTMwYTdiYmEx
-MDUxMGY5MTk5OTA4CisKK1todHRwOi8vZG93bmxvYWRzLnNvdXJjZWZvcmdlLm5ldC9uemJnZXQv
-bnpiZ2V0LXN0YWJsZS9uemJnZXQtMC42LjAudGFyLmd6XQorbWQ1PWViOTViMzkzMGFiZmZiNTcw
-ZTM3YWY4ZDI4NGMxZjlkCitzaGEyNTY9YjBiYzg3NDBkYjdlZDllYTI2OWIyOWU5YTkzNmNiMmM0
-ZGQ2MWE5MTFiODBiNjIzZmUxODcyOWI5NGRlMzAzMAorCitbaHR0cDovL2Rvd25sb2Fkcy5zb3Vy
-Y2Vmb3JnZS5uZXQvbnpiZ2V0L256YmdldC1zdGFibGUvbnpiZ2V0LTAuNy4wLXRlc3RpbmctcjM0
-Mi50YXIuZ3pdCittZDU9NDI1MGQ4MTY2OTY5MzY3YjRmZWZmNDIwNGI0MmVjYjkKK3NoYTI1Nj0z
-N2M1OTVlNzhjNGE1Yzg2ZmExYzM5ZDRkYmEzOTc4NmQ5NTQ2YWUwYTA3OGI5MzY4MzJkZjlkMTdi
-YWZiYTEwCmRpZmYgLS1naXQgYS9yZWNpcGVzL2xpYnBhcjIvbGlicGFyMl8wLjIuYmIgYi9yZWNp
-cGVzL2xpYnBhcjIvbGlicGFyMl8wLjIuYmIKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAw
-MDAwMC4uYjMzN2M1ZgotLS0gL2Rldi9udWxsCisrKyBiL3JlY2lwZXMvbGlicGFyMi9saWJwYXIy
-XzAuMi5iYgpAQCAtMCwwICsxLDE0IEBACitERVNDUklQVElPTiA9ICJQcm92aWRpbmcgYSB0b29s
-IHRvIGFwcGx5IHRoZSBkYXRhLXJlY292ZXJ5IGNhcGFiaWxpdHkgY29uY2VwdHMgb2YgUkFJRC1s
-aWtlIHN5c3RlbXMgdG8gdGhlIHBvc3RpbmcgJiByZWNvdmVyeSBvZiBtdWx0aS1wYXJ0IGFyY2hp
-dmVzIG9uIFVzZW5ldC4iCitTRUNUSU9OID0gImxpYnMiCitMSUNFTlNFID0gIkdQTCIKK0hPTUVQ
-QUdFID0gImh0dHA6Ly9wYXJjaGl2ZS5zb3VyY2Vmb3JnZS5uZXQvIgorREVQRU5EUyA9ICJsaWJz
-aWdjKystMi4wIgorCitTUkNfVVJJID0gIiR7U09VUkNFRk9SR0VfTUlSUk9SfS9wYXJjaGl2ZS9s
-aWJwYXIyL2xpYnBhcjItJHtQVn0udGFyLmd6IgorCitpbmhlcml0IGF1dG90b29scyBwa2djb25m
-aWcKKworZG9fc3RhZ2UoKSB7CisJYXV0b3Rvb2xzX3N0YWdlX2FsbAorfQorCmRpZmYgLS1naXQg
-YS9yZWNpcGVzL256YmdldC9uemJnZXRfMC42LjAuYmIgYi9yZWNpcGVzL256YmdldC9uemJnZXRf
-MC42LjAuYmIKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMC4uMWY3NTEyNAotLS0g
-L2Rldi9udWxsCisrKyBiL3JlY2lwZXMvbnpiZ2V0L256YmdldF8wLjYuMC5iYgpAQCAtMCwwICsx
-LDIyIEBACitERVNDUklQVElPTiA9ICJOWkJHZXQgaXMgYSBjb21tYW5kLWxpbmUgYmFzZWQgYmlu
-YXJ5IG5ld3NncmFiYmVyIGZvciBuemIgZmlsZXMsIHdyaXR0ZW4gaW4gQysrIgorU0VDVElPTiA9
-ICJuZXQiCitMSUNFTlNFID0gIkdQTCIKK0hPTUVQQUdFID0gImh0dHA6Ly9uemJnZXQuc291cmNl
-Zm9yZ2UubmV0L01haW5fUGFnZSIKK0RFUEVORFMgPSAibGlic2lnYysrLTIuMCBsaWJwYXIyIG5j
-dXJzZXMgbGlieG1sMiIKKworU1JDX1VSSSA9ICIke1NPVVJDRUZPUkdFX01JUlJPUn0vbnpiZ2V0
-L256YmdldC1zdGFibGUvbnpiZ2V0LSR7UFZ9LnRhci5neiIKKyMgaHR0cDovL3NvdXJjZWZvcmdl
-Lm5ldC9wcm9qZWN0cy9uemJnZXQvZmlsZXMvbnpiZ2V0LXN0YWJsZS9uemJnZXQtMC42LjAudGFy
-Lmd6CisKK2luaGVyaXQgYXV0b3Rvb2xzIHBrZ2NvbmZpZworCitFWFRSQV9PRUNPTkYgPSAiLS1k
-aXNhYmxlLXRscyBcCisJCS0td2l0aC1saWJjdXJzZXMtbGlicmFyaWVzPSR7U1RBR0lOR19MSUJE
-SVJ9IFwKKwkJLS13aXRoLWxpYmN1cnNlcy1pbmNsdWRlcz0ke1NUQUdJTkdfSU5DRElSfSBcCisJ
-CS0td2l0aC1saWJwYXIyLWluY2x1ZGVzPXtTVEFHSU5HX0lOQ0RJUn0gXAorCQktLXdpdGgtbGli
-cGFyMi1saWJyYXJpZXM9e1NUQUdJTkdfSU5DRElSfSIKKworZG9fc3RhZ2UoKSB7CisJYXV0b3Rv
-b2xzX3N0YWdlX2FsbAorfQorCisKZGlmZiAtLWdpdCBhL3JlY2lwZXMvbnpiZ2V0L256YmdldF8w
-LjcuMC10ZXN0aW5nLmJiIGIvcmVjaXBlcy9uemJnZXQvbnpiZ2V0XzAuNy4wLXRlc3RpbmcuYmIK
-bmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMC4uZTBmOWI1YwotLS0gL2Rldi9udWxs
-CisrKyBiL3JlY2lwZXMvbnpiZ2V0L256YmdldF8wLjcuMC10ZXN0aW5nLmJiCkBAIC0wLDAgKzEs
-MjMgQEAKK0RFU0NSSVBUSU9OID0gIk5aQkdldCBpcyBhIGNvbW1hbmQtbGluZSBiYXNlZCBiaW5h
-cnkgbmV3c2dyYWJiZXIgZm9yIG56YiBmaWxlcywgd3JpdHRlbiBpbiBDKysiCitTRUNUSU9OID0g
-Im5ldCIKK0xJQ0VOU0UgPSAiR1BMIgorSE9NRVBBR0UgPSAiaHR0cDovL256YmdldC5zb3VyY2Vm
-b3JnZS5uZXQvTWFpbl9QYWdlIgorREVQRU5EUyA9ICJsaWJzaWdjKystMi4wIGxpYnBhcjIgbmN1
-cnNlcyBsaWJ4bWwyIgorCitTUkNfVVJJID0gIiR7U09VUkNFRk9SR0VfTUlSUk9SfS9uemJnZXQv
-bnpiZ2V0LXN0YWJsZS9uemJnZXQtJHtQVn0tcjM0Mi50YXIuZ3oiCisKKyMgaHR0cDovL3NvdXJj
-ZWZvcmdlLm5ldC9wcm9qZWN0cy9uemJnZXQvZmlsZXMvbnpiZ2V0LXRlc3RpbmcvbnpiZ2V0LTAu
-Ny4wLXRlc3RpbmctcjM0Mi50YXIuZ3oKKworaW5oZXJpdCBhdXRvdG9vbHMgcGtnY29uZmlnCisK
-K0VYVFJBX09FQ09ORiA9ICItLWRpc2FibGUtdGxzIFwKKwkJLS13aXRoLWxpYmN1cnNlcy1saWJy
-YXJpZXM9JHtTVEFHSU5HX0xJQkRJUn0gXAorCQktLXdpdGgtbGliY3Vyc2VzLWluY2x1ZGVzPSR7
-U1RBR0lOR19JTkNESVJ9IFwKKwkJLS13aXRoLWxpYnBhcjItaW5jbHVkZXM9e1NUQUdJTkdfSU5D
-RElSfSBcCisJCS0td2l0aC1saWJwYXIyLWxpYnJhcmllcz17U1RBR0lOR19JTkNESVJ9IgorCitk
-b19zdGFnZSgpIHsKKwlhdXRvdG9vbHNfc3RhZ2VfYWxsCit9CisKKwo=
 
---00032555777e1a50d904729d8ef2--
