@@ -1,30 +1,34 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [209.85.220.224] (helo=mail-fx0-f224.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1MixoG-0004T2-8X
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Miy38-0004sg-9A
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Sep 2009 23:56:08 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 4A7AB5566BB
+	Thu, 03 Sep 2009 00:11:30 +0200
+Received: by fxm24 with SMTP id 24so1098256fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Sep 2009 17:37:22 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 12056-10 for <openembedded-devel@lists.openembedded.org>; 
-	Wed,  2 Sep 2009 17:37:22 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 20358555FCF
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Sep 2009 17:37:22 -0400 (EDT)
-Message-ID: <4A9EE591.4080104@cbnco.com>
-Date: Wed, 02 Sep 2009 17:37:21 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090812)
+	Wed, 02 Sep 2009 14:52:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=XnQEiMMeMR0hU2TuK4ljphBC5QFkfAT477IxveDy3MY=;
+	b=LdGEgU5CDnZ8wQA6pScSp7FLD6vil1y4ZRi/TCeElRfsWItVyZiNbqZAti+mVefq0f
+	8IlWFxPa5YXMFSv/+kMXkaQzyfyDAo2ayZ7YfKkS49SNShePwC2f837RkYgmhmUUYU2t
+	/yHiqPgFZW0wSnaGTctLCMPoNCxsVmw/JfznE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=THEUy9qczuEBCvvjJN/Bh1bhMRgwFOCkJG9AG67tapvDVAA2X5aZwqt3unnX18Pohs
+	RH07hFbn/n2WdDUUqagkfgLJ7/GHFTuWHSvrlJXEyC/BuxAG3XaywRuBM4FVusgaI8r2
+	33P3aNyHGQQb9i/XsRGP+rOuY8ctdf5ATjz+8=
 MIME-Version: 1.0
+Received: by 10.239.168.150 with SMTP id k22mr813782hbe.10.1251928362472; Wed, 
+	02 Sep 2009 14:52:42 -0700 (PDT)
+In-Reply-To: <1251210375.4215.525.camel@lenovo.internal.reciva.com>
+References: <1251210375.4215.525.camel@lenovo.internal.reciva.com>
+Date: Wed, 2 Sep 2009 23:52:42 +0200
+Message-ID: <c384c5ea0909021452m7395d2b1n9e19f9ba7f13574@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1251210375.4215.525.camel@lenovo.internal.reciva.com>	<4A968DCD.8020003@gmail.com>	<1251382003.27780.45.camel@mill.internal.reciva.com>	<20090831212051.GC6707@denix.org>
-	<1251799101.27780.87.camel@mill.internal.reciva.com>
-In-Reply-To: <1251799101.27780.87.camel@mill.internal.reciva.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
 Subject: Re: OEDEM November 2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -39,20 +43,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Sep 2009 21:56:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 02 Sep 2009 22:11:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Phil Blundell wrote:
-> On which subject, just a quick reminder for anybody who plans to attend
-> but hasn't yet informed me of their intentions: please send me an email
-> within the next 7 days to ensure that you are included in the headcount.
+Hello Phil,
 
-Hi Phil,
+On Tue, Aug 25, 2009 at 4:26 PM, Phil Blundell<philb@gnu.org> wrote:
+> next two weeks (i.e. no later than September 8). =A0This is not a formal
+> registration and doesn't commit you to anything, it is purely to make
+> sure that we have a large enough venue for the number of attendees.
+>
 
-I'd like to attend, if you've got room for one more.
+Count me in.
 
 Thanks,
-Mike
+--=20
+Leon
 
 
