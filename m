@@ -1,42 +1,32 @@
-Received: from [209.85.218.210] (helo=mail-bw0-f210.google.com)
+Received: from [209.85.219.219] (helo=mail-ew0-f219.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1MieTM-0004yy-OA
+	(envelope-from <sinestado@gmail.com>) id 1MipSv-0005oi-G4
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Sep 2009 03:17:16 +0200
-Received: by bwz6 with SMTP id 6so397117bwz.12
+	Wed, 02 Sep 2009 15:01:34 +0200
+Received: by ewy19 with SMTP id 19so812668ewy.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Sep 2009 17:58:34 -0700 (PDT)
+	Wed, 02 Sep 2009 05:42:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=L44K+RaOjNPiDwNDhEjKkkFN6hCPLZrWmMQa0lJS5Ok=;
-	b=t2e85Qjyd9DCc4kLHlX/c/VFwU71Hxw8NkZv+ULv4ShL9yfyLav9Zxsh5GASdiYTcu
-	2QN1sJdHWm/0pZrTrjd5xSNex9I7G5+rwuC31fxi8lBVliapl6LwftWT/7T9Wende/EM
-	tfK1RiraeJNvAl64HL8Q8aycuwFhTw/NM4W78=
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=Kgv0qTMyEj7O7XY68yt72h6Xc4DkIdCEz7cQol/e/+Y=;
+	b=rySmGMlPu2Jz0A1Vd/7h7PG/rTQRlFEpix/u2T9AZRdwwFSSr+gEYh0ovl+tOAUvu1
+	iD/Uf6XIcB01Ax4znCFwSkX0N7kUMLPP+WOOsTRyQaPXDK/zlxlA/U/pM9aVEKcRMGZv
+	g+GAq1Ash7TzoJGUhsCFYNmHwY1AbMxgAoYxo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=nQzA6XWJUPGdiGb1qlV1n+PdEajSqUqX9y0m4BwyeYZCEAAWtw/LaBhPBwC76jiQNM
-	hh5cg7GbjV7vpEz+0cwIyRivAcA52u9rXE7sdF+XbPthQGHrkVK2QN2hK4tzp/q/Bzd9
-	MlCgY4jWNHQghZxpqKBm/MUunfghwU5jAISjc=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=b5WXstiJp4qbSUobKPmWn2HO2xLwuhNFIGvVU51RWCnrGWFx23hF8pIj7fzj8MQUDJ
+	bA4ekOcJmfYCA2jTKK4tej1GlYQWO972ljoipi8KPlJy/uXJZz46LjLkJ80d7MFZ2sFr
+	cAyO3FhozO+vzcvBZCPmrG/ReEY70OUmroOyE=
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.182.137 with SMTP id q9mr678790hbg.72.1251853114284; Tue, 
-	01 Sep 2009 17:58:34 -0700 (PDT)
-In-Reply-To: <b6ebd0a50909011618m2bf76503jb1d83f800034d076@mail.gmail.com>
-References: <b6ebd0a50908261905r7d839647k6fc53460301efca0@mail.gmail.com>
-	<be7a9f3d0909010638h75451d65la4a599a1583c3208@mail.gmail.com>
-	<b6ebd0a50909010924u4f9a1ee5jebfae98afb2462e6@mail.gmail.com>
-	<be7a9f3d0909011529g61920aav8c9308207ae51d3e@mail.gmail.com>
-	<b6ebd0a50909011618m2bf76503jb1d83f800034d076@mail.gmail.com>
-Date: Tue, 1 Sep 2009 21:58:34 -0300
-X-Google-Sender-Auth: 868b41786acda05e
-Message-ID: <be7a9f3d0909011758u75c45fdfg43e243804c5971cc@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by 10.216.11.211 with SMTP id 61mr170340wex.68.1251895368042; Wed, 
+	02 Sep 2009 05:42:48 -0700 (PDT)
+Date: Wed, 2 Sep 2009 09:42:47 -0300
+Message-ID: <a63ecaf0909020542u62f8b8d7i5a0419d99424c2a0@mail.gmail.com>
+From: Sushi Sensei <sinestado@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: srctree & gitver
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: xf86Version.h and others in xserver-xorg 1.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,26 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Sep 2009 01:17:16 -0000
+X-List-Received-Date: Wed, 02 Sep 2009 13:01:35 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-Hello,
+I'm compiled xserver-xorg 1.6.1 and some drivers compiles
+(xf86-video-cirrus, xf86-video-fbdev, xf86-video-sis, xf86-video-vmware) but
+some other no.
 
-On Tue, Sep 1, 2009 at 8:18 PM, Chris Larson<clarson@kergoth.com> wrote:
-> This doesn't answer my question, however. =A0You wouldn't be able to
-> safely use AUTOPV in PV unless you're pointing S to an existing
-> non-fetched git repository, since PV would change before and after the
-> fetch, so I was attempting to clarify this. Since you can't use it
-> safely for fetched sources, it doesn't really belong in bb.fetch.
+xf86-video-s3 breaks with:
+| s3_driver.c:46:25: error: xf86Version.h: No such file or directory
 
-Sorry but you're wrong. When evaluating the cache it checks if remote
-has been change. So it works quite well and we're using it since April
-;-)
+xf86-video-intel breaks with:
+vi830.h:73:20: error: xf86mm.h: No such file or directory
 
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+xf86-video-trident breaks with:
+| trident_driver.c:177: error: expected '=', ',', ';', 'asm' or
+'__attribute__' before 'TRIDENTISAchipsets'
+| trident_driver.c: In function 'TRIDENTProbe':
+| trident_driver.c:980: error: 'TRIDENTISAchipsets' undeclared (first use in
+this function)
+| trident_driver.c:980: error: (Each undeclared identifier is reported only
+once
+| trident_driver.c:980: error: for each function it appears in.)
+| trident_driver.c:990: warning: assignment makes pointer from integer
+without a cast
 
+
+I have this files in:
+
+tmp/work/i586-kaeilos-linux/xserver-xorg-2_1.5.3-r12.0/xorg-server-1.5.3/hw/xfree86/common/xf86Version.h
+
+but in:
+
+tmp/work/i586-kaeilos-linux/xserver-xorg-2_1.6.1-r12.0/
+
+I don't have any directory called common (and any xf86Version.h inside!)
+
+For the others errors I don't have notice
+-- 
+------------------------------------------------------
+--- Timeo Danaos et dona ferentes ---
+------------------------------------------------------
 
