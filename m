@@ -1,39 +1,38 @@
-Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
+Received: from [74.125.92.148] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1MjApt-0000PX-QN
+	(envelope-from <bjorn.forsman@gmail.com>) id 1MjC5k-0003Su-VH
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Sep 2009 13:50:42 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 1486C110023A
+	Thu, 03 Sep 2009 15:11:13 +0200
+Received: by qw-out-1920.google.com with SMTP id 4so513825qwk.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Sep 2009 13:31:52 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 7507511000AB
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Sep 2009 13:31:51 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.9 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from rhein.familie-heinold.de (g225145095.adsl.alicedsl.de
-	[92.225.145.95]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Sep 2009 13:31:51 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id B83563C323; Thu,  3 Sep 2009 13:31:50 +0200 (CEST)
-Date: Thu, 3 Sep 2009 13:31:50 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090903113150.GA22344@rhein.zuhause.netz>
-References: <431b13f90909021248y7e0cc019pfb388fe9b3d2fc8e@mail.gmail.com>
+	Thu, 03 Sep 2009 05:52:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=x6XMmUFhpGx478wu8nDtWJb1m0esfLPzAkIx+sUWK5w=;
+	b=Wa6jr1PiQauyk+JXnxakcftfni7sBMhufaqesDNlliI+TEMKg2Bm9VeZxeP3W+zgI4
+	Th4YMtROFWoCFo9qOeQT8OWowFXxH9BN9+jDCQs2nUFcC8IhxjjL2WGZzpwoVvRWFcB3
+	T++/z1EFb709Co+O7z3syRVirl/SF+YPGF574=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=p10QUv1JYyWCOeJlWokVDgpA0jO3BU4LXr/yvOUfEpOj/O2HSEftI/B82IkTi4IZz5
+	EE2Khcdft2vjmX9mbnmN6tuhxx9syqHLhpbskLZtSDENUiWKM9XVsfU7f3BXjG5zS4WV
+	2i2mt1Z8nLqPQYLG3ztawAKeSskpbj+sMtD0Q=
 MIME-Version: 1.0
-In-Reply-To: <431b13f90909021248y7e0cc019pfb388fe9b3d2fc8e@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [PATCH] add nzbget and libpar2
+Received: by 10.229.1.65 with SMTP id 1mr2757254qce.20.1251982338723; Thu, 03 
+	Sep 2009 05:52:18 -0700 (PDT)
+In-Reply-To: <h7o6gu$fii$1@ger.gmane.org>
+References: <5f2b60908120549u70fe6e00yf1df3e0e8d9bc059@mail.gmail.com>
+	<h5um2o$ioq$1@ger.gmane.org>
+	<5f2b60909030316q43cc1b60ic8350e68bcdb2a5c@mail.gmail.com>
+	<h7o6gu$fii$1@ger.gmane.org>
+Date: Thu, 3 Sep 2009 14:52:18 +0200
+Message-ID: <5f2b60909030552q10d3c75eq4430bf504a8578c9@mail.gmail.com>
+From: =?UTF-8?Q?Bj=C3=B8rn_Forsman?= <bjorn.forsman@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: gstreamer-ti fails for target dm6446-evm (TI davinci)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,86 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Sep 2009 11:50:45 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 03 Sep 2009 13:12:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 02, 2009 at 09:48:46PM +0200, Artur Wronowski wrote:
-> Hello!
-> 
-> This is my first patch to openembedded. I woud like add nzbget and libpar2.
-> 
-> +inherit autotools pkgconfig
-> +
-> +do_stage() {
-> +	autotools_stage_all
-> +}
-> +
+2009/9/3 Koen Kooi <k.kooi@student.utwente.nl>:
+> On 03-09-09 12:16, Bj=C3=B8rn Forsman wrote:
+>>
+>> 2009/8/12 Koen Kooi<k.kooi@student.utwente.nl>
+>>
+>>> On 12-08-09 14:49, Bj=C3=B8rn Forsman wrote:
+>>>
+>>> =C2=A0Any suggestions for a fix?
+>>>>
+>>>
+>>> I'm cleaning up the arago updates and plan to push them into OE this
+>>> week:
+>>> http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=3Dkoen/dv=
+sdk
+>>>
+>>> When that's in it should give you something that at least builds for
+>>> dm6446-evm.
+>>
+>>
+>> What is the status of the dvsdk branch? Any new ETA on the OE push?
+>
+> 8 days ago :)
+>
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dbac5eef9c=
+8a73672ee114926011addabb36610eb
+>
 
-You can use autotools_stage here, do avoid the extrad do_stage
+Oh, silly me, forgetting to do proper research. Well, thanks!
 
-
-> diff --git a/recipes/nzbget/nzbget_0.6.0.bb b/recipes/nzbget/nzbget_0.6.0.bb
-> new file mode 100644
-> index 0000000..1f75124
-> --- /dev/null
-> +++ b/recipes/nzbget/nzbget_0.6.0.bb
-> @@ -0,0 +1,22 @@
-> +DESCRIPTION = "NZBGet is a command-line based binary newsgrabber for nzb files, written in C++"
-> +SECTION = "net"
-> +LICENSE = "GPL"
-> +HOMEPAGE = "http://nzbget.sourceforge.net/Main_Page"
-> +DEPENDS = "libsigc++-2.0 libpar2 ncurses libxml2"
-> +
-> +SRC_URI = "${SOURCEFORGE_MIRROR}/nzbget/nzbget-stable/nzbget-${PV}.tar.gz"
-> +# http://sourceforge.net/projects/nzbget/files/nzbget-stable/nzbget-0.6.0.tar.gz
-> +
-> +inherit autotools pkgconfig
-> +
-> +EXTRA_OECONF = "--disable-tls \
-
-Why is tls disabled here?
-
-> +		--with-libcurses-libraries=${STAGING_LIBDIR} \
-> +		--with-libcurses-includes=${STAGING_INCDIR} \
-> +		--with-libpar2-includes={STAGING_INCDIR} \
-> +		--with-libpar2-libraries={STAGING_INCDIR}"
-> +
-> +do_stage() {
-> +	autotools_stage_all
-> +}
-
-autotools_stage again
-
-> diff --git a/recipes/nzbget/nzbget_0.7.0-testing.bb b/recipes/nzbget/nzbget_0.7.0-testing.bb
-> new file mode 100644
-> index 0000000..e0f9b5c
-> --- /dev/null
-> +++ b/recipes/nzbget/nzbget_0.7.0-testing.bb
-> @@ -0,0 +1,23 @@
-> +DESCRIPTION = "NZBGet is a command-line based binary newsgrabber for nzb files, written in C++"
-> +SECTION = "net"
-> +LICENSE = "GPL"
-> +HOMEPAGE = "http://nzbget.sourceforge.net/Main_Page"
-> +DEPENDS = "libsigc++-2.0 libpar2 ncurses libxml2"
-> +
-> +SRC_URI = "${SOURCEFORGE_MIRROR}/nzbget/nzbget-stable/nzbget-${PV}-r342.tar.gz"
-> +
-> +# http://sourceforge.net/projects/nzbget/files/nzbget-testing/nzbget-0.7.0-testing-r342.tar.gz
-> +
-> +inherit autotools pkgconfig
-> +
-> +EXTRA_OECONF = "--disable-tls \
-> +		--with-libcurses-libraries=${STAGING_LIBDIR} \
-> +		--with-libcurses-includes=${STAGING_INCDIR} \
-> +		--with-libpar2-includes={STAGING_INCDIR} \
-> +		--with-libpar2-libraries={STAGING_INCDIR}"
-> +
-> +do_stage() {
-> +	autotools_stage_all
-> +}
-> +
-
-Bye Henning
+Best regards,
+Bj=C3=B8rn Forsman
 
 
