@@ -1,43 +1,33 @@
-Received: from [74.125.92.144] (helo=qw-out-1920.google.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Mj4xv-0002LA-PO
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Mj7Xp-00023O-5Z for openembedded-devel@lists.openembedded.org;
+	Thu, 03 Sep 2009 10:19:49 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1Mj7Fc-00037W-2K
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Sep 2009 07:34:35 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so473574qwk.36
+	Thu, 03 Sep 2009 10:01:00 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 03 Sep 2009 10:01:00 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Sep 2009 22:15:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=mrFqpKlwv+HNzQpiSfcuSZKmwXcdbz6vpsg72A2SkVo=;
-	b=wsWastUKvixZs47R9srcRR6b7Ufigwo/ntPGqhXdfk9T5rur0Q8p42i4oyZ6Jtnzex
-	+Dh2g0fs7J0yD6z979TvjF0A4Fz/NCa6hZhSfys4MESeb2YN5C+4H+cpymZ02B4ju11S
-	jnOJ+iVUW8MHP87A8NlCIB/PahwkkvGIsvOLY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=kgJxXdIw5iDHMdHrVzFqQ/zmUoXNTDDxg7C4fxNfEikIaLCTEHAYb9BLPCNQ+x/TNn
-	ZqJ/Y66A/dpmuFMmuZKnlsIzZmfK94p5MO6xeT+8dOHFGAB6vCBnvgHHk/tf+5MYhhx0
-	qGNd6XOAT7ZcQgUBmVKULlXs5ZdMaSdrOJF8A=
-MIME-Version: 1.0
-Received: by 10.229.53.76 with SMTP id l12mr2591355qcg.105.1251954947635; Wed, 
-	02 Sep 2009 22:15:47 -0700 (PDT)
-In-Reply-To: <20090903043630.GQ23034@smtp.west.cox.net>
-References: <1251620948.4215.673.camel@lenovo.internal.reciva.com>
-	<200908311333.20189.marcin@juszkiewicz.com.pl>
-	<20090901055731.GA22534@gmail.com>
-	<57768.87.139.24.177.1251793302.squirrel@home.opfer.tk>
-	<20090901153102.GA12420@gmail.com> <20090901230722.GA25864@gmail.com>
-	<20090902192044.GA18621@gmail.com>
-	<1251923389.4490.20.camel@lenovo.internal.reciva.com>
-	<19c1b8a90909021407k5610f615q41c7d13bc3b38ff0@mail.gmail.com>
-	<20090903043630.GQ23034@smtp.west.cox.net>
-Date: Wed, 2 Sep 2009 22:15:47 -0700
-Message-ID: <19c1b8a90909022215i19d3c06bq536e87e13dfc984c@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 03 Sep 2009 10:01:00 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] sane-toolchain-eglibc.inc: Set TARGET_OS?= linux-gnuspe for e500
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 03 Sep 2009 10:00:37 +0200
+Message-ID: <h7nt36$jk9$1@ger.gmane.org>
+References: <4A9F2725.4070208@symas.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <4A9F2725.4070208@symas.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: TI DSP updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,50 +41,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Sep 2009 05:34:36 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 03 Sep 2009 08:19:49 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Sep 2, 2009 at 9:36 PM, Tom Rini<trini@embeddedalley.com> wrote:
-> On Wed, Sep 02, 2009 at 02:07:54PM -0700, Khem Raj wrote:
->> On Wed, Sep 2, 2009 at 1:29 PM, Phil Blundell<philb@gnu.org> wrote:
->> > On Wed, 2009-09-02 at 12:20 -0700, Khem Raj wrote:
->> >> This also changes the target triplet for linux-uclibgnueabi to
->> >> uclibc-uclibcebi. So I have also bumped up the OELAYOUT_ABI
->> >
->> > Ah, that doesn't sound so good. =C2=A0Changing OELAYOUT_ABI will be a
->> > nuisance for everyone, even if they aren't using either uclibc or the
->> > TARGET_OS auto-generator. =C2=A0Is there a way to avoid that?
->>
->> It changes from linux to linux-gnu for non uclibc systems too which I
->> forgot to mention
->
-> Can we get away with that? =C2=A0'linux-gnu' over 'linux' should be fine =
-I
-> think but I'm worried about 'linux-uclibceabi', is that really a normal
-> standard and known host? =C2=A0Also, there's some overrides that depend o=
-n
-> 'uclibcgnueabi' iirc, which need to be updated for libc-uclibc override
-> instead.
+On 03-09-09 04:17, Howard Chu wrote:
+> These are the changes I made to use the latest Codec engine, DSP
+> modules, etc. for OMAP3530 to build. Tested and working with
+> gstreamer-ti on an Always Innovating Touch Book with linux-omap_2.6.29
+> kernel / Angstrom...
 
-linux-uclibcgnueabi is also madeup one. I think logically many tests
-just check for uclibc* or
-*eabi. There is no difference between both of them. I plan to fix any
-fallout that come out of renaming
-mostly it will be in toolchain parts only.
+Thank you for your work on this! Your work does seem to be based on an 
+outdated OE checkout, could you try to rebase it on the current 
+org.openembedded.dev branch?
 
-I have fixed all the overrides and also build and booted uclibc
-arm/thumb images.
+> To get a working codec server on the Touch Book, which has 256MB of RAM,
+> I had to modify the default server config:
 
+To move the memorymap more stuff has to get changed, but there's an 
+easier way that also works with 512MiB and 1024MiB RAM:
 
->
-> --
-> Tom Rini
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+put 'mem=80M@0x80000000 mem=128M@0x88000000' in your bootargs and make 
+sure your kernel has the arch-has-holes.diff applied to make that 
+memoryhole work.
+
+regards,
+
+Koen
+
 
 
