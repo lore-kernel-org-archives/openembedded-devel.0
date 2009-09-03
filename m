@@ -1,43 +1,35 @@
 Received: from [209.85.221.175] (helo=mail-qy0-f175.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MjEGN-0008KI-OQ
+	(envelope-from <raj.khem@gmail.com>) id 1MjEHW-0008Kl-PI
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Sep 2009 17:30:16 +0200
-Received: by qyk5 with SMTP id 5so627405qyk.24
+	Thu, 03 Sep 2009 17:31:27 +0200
+Received: by qyk5 with SMTP id 5so628537qyk.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Sep 2009 08:11:22 -0700 (PDT)
+	Thu, 03 Sep 2009 08:12:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=x7b2G0bsLe7Fube1rFC87+zy3HZzi3Zm7xw5dx71vSw=;
-	b=rRZov7p4fH8OaMg4R86sRRCxDcl3Gdq5MhqoA3xbRO0JoQRt8Ii0a82CvkOxb/csa+
-	o1goohOoqfc79Q52qQCuETkfXA7IZxpk/fkEbkJJMa3OhNtDaSlsYkbEXoJyWX3eBn3O
-	oQALjGUqCqX9tLzt7J6L/E1G73heTgyY+YJpw=
+	bh=snNnkk3/oyxrF17VH62Qto4pG+X5u8q0XoiMi6l31O4=;
+	b=WTcHpRthleF4anTT5BxD8gRbuSGXYAZ1oEEsIFOOOolKiRMfpj23kiHSJU9tFNTwBe
+	SyV5c4A9xZhWek12Tt55W2qhEk4NiU+NGukKoimbOH8ODueI21zU53J3RfGkWcMiwvPv
+	x37/CCzKTOAnvhjv/WtP2m3x45r3wtdVcBRSk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=vKe3BfhXO/8s/K03C++4tG0c3occnuAMma7esCYDTU4i+iGgCHrhdG3YBY10C5H08g
-	+ogwrUXx0DrBSTIYusPrL4CBgVJEQQP5hBaUiRfytlqjwNMb+BF9oH4zOCDDZpVRHJqQ
-	JTF83bV1y6NyVlsmPbbmBQO2nBkXfXN60c1d4=
+	b=mfrCS8VImb5fNog8Hw9t7sEh8KJdLahAYZSFVyxq9ZRG8aTsbxfmTNmJaJ2cL1vRBK
+	0II6PXYA5KEI6t+PBP/PKy9YAoFGRB+Y9XwwMV6dkJ7yQMOpt9tNYNroNjV+etpWMcBh
+	7bZaDdGuptS3/WEm3ZXysQov6lU7Hi/rfbWtg=
 MIME-Version: 1.0
-Received: by 10.229.10.13 with SMTP id n13mr2814483qcn.103.1251990682141; Thu, 
-	03 Sep 2009 08:11:22 -0700 (PDT)
-In-Reply-To: <1251970342.27780.192.camel@mill.internal.reciva.com>
-References: <1251620948.4215.673.camel@lenovo.internal.reciva.com>
-	<20090901055731.GA22534@gmail.com>
-	<57768.87.139.24.177.1251793302.squirrel@home.opfer.tk>
-	<20090901153102.GA12420@gmail.com> <20090901230722.GA25864@gmail.com>
-	<20090902192044.GA18621@gmail.com>
-	<1251923389.4490.20.camel@lenovo.internal.reciva.com>
-	<19c1b8a90909021407k5610f615q41c7d13bc3b38ff0@mail.gmail.com>
-	<20090903043630.GQ23034@smtp.west.cox.net>
-	<1251970342.27780.192.camel@mill.internal.reciva.com>
-Date: Thu, 3 Sep 2009 08:11:22 -0700
-Message-ID: <19c1b8a90909030811k7f6932e0r93c94fccc43e9b1c@mail.gmail.com>
+Received: by 10.229.129.133 with SMTP id o5mr2882496qcs.45.1251990751976; Thu, 
+	03 Sep 2009 08:12:31 -0700 (PDT)
+In-Reply-To: <1251813967-16058-1-git-send-email-k.kooi@student.utwente.nl>
+References: <1251813967-16058-1-git-send-email-k.kooi@student.utwente.nl>
+Date: Thu, 3 Sep 2009 08:12:31 -0700
+Message-ID: <19c1b8a90909030812p53103786l3c2a8c8f4c2192c9@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] sane-toolchain-eglibc.inc: Set TARGET_OS?= linux-gnuspe for e500
+Subject: Re: [STABLE][PATCH] xscreensaver: fix packaging and QA
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,42 +43,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Sep 2009 15:30:19 -0000
+X-List-Received-Date: Thu, 03 Sep 2009 15:31:28 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 3, 2009 at 2:32 AM, Phil Blundell<philb@gnu.org> wrote:
-> On Wed, 2009-09-02 at 21:36 -0700, Tom Rini wrote:
->> Can we get away with that? =C2=A0'linux-gnu' over 'linux' should be fine=
- I
->> think but I'm worried about 'linux-uclibceabi', is that really a normal
->> standard and known host? =C2=A0Also, there's some overrides that depend =
-on
->> 'uclibcgnueabi' iirc, which need to be updated for libc-uclibc override
->> instead.
+On Tue, Sep 1, 2009 at 7:06 AM, Koen Kooi<koen.kooi@gmail.com> wrote:
+> From: Koen Kooi <koen@openembedded.org>
 >
-> I think Khem's patch does update most/all of the overrides in question,
-> but if this requires an OELAYOUT_ABI change then it seems like a lot of
-> disruption to fix what is (if I understand correctly) only a cosmetic
-> problem in the first place.
-
-The documentation around OELAYOUT_ABI says that it should be bumped
-whenever there
-is a change in tmp layout structure and this change will do rename few
-directories and
-binaries in the tmp folder thats why the bump
-
-and incremental builds wont work anyway because cross compiler names
-will be different.
-thats why I was bumping it up.
-
-Thanks
-
--Khem
-
 >
-> p.
+> Signed-off-by: Koen Kooi <koen@openembedded.org>
+
+Acked-by: Khem Raj <raj.khem@gmail.com>
+> ---
+> =C2=A0recipes/xscreensaver/xscreensaver.inc =C2=A0 =C2=A0 | =C2=A0 =C2=A0=
+3 ++-
+> =C2=A0recipes/xscreensaver/xscreensaver_5.07.bb | =C2=A0 =C2=A02 +-
+> =C2=A02 files changed, 3 insertions(+), 2 deletions(-)
 >
+> diff --git a/recipes/xscreensaver/xscreensaver.inc b/recipes/xscreensaver=
+/xscreensaver.inc
+> index a4925ac..5f8cdc0 100644
+> --- a/recipes/xscreensaver/xscreensaver.inc
+> +++ b/recipes/xscreensaver/xscreensaver.inc
+> @@ -10,6 +10,7 @@ DEPENDS =3D "intltool mesa freeglut virtual/libx11 gtk+=
+ libxml2 libglade"
+>
+> =C2=A0# xscreensaver-demo is a glade app
+> =C2=A0LDFLAGS_append =3D " -Wl,--export-dynamic"
+> +TARGET_CC_ARCH +=3D "${LDFLAGS}"
+>
+> =C2=A0inherit autotools
+>
+> @@ -30,7 +31,7 @@ EXTRA_OECONF=3D" --with-xml \
+>
+> =C2=A0PACKAGES =3D+ =C2=A0" xscreensaver-demo xscreensaver-extra"
+>
+> -FILES_${PN}=3D "${bindir}/xscreensaver ${bindir}/xscreensaver-command ${=
+datadir}/applications \
+> +FILES_${PN}=3D "${bindir}/xscreensaver ${bindir}/xscreensaver-text ${bin=
+dir}/xscreensaver-command ${datadir}/applications \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0${libdir}/X11/"
+>
+> =C2=A0FILES_${PN}-dbg +=3D "${libexecdir}/xscreensaver/.debug"
+> diff --git a/recipes/xscreensaver/xscreensaver_5.07.bb b/recipes/xscreens=
+aver/xscreensaver_5.07.bb
+> index 8932b6f..cfe5ccc 100644
+> --- a/recipes/xscreensaver/xscreensaver_5.07.bb
+> +++ b/recipes/xscreensaver/xscreensaver_5.07.bb
+> @@ -1,5 +1,5 @@
+> =C2=A0require xscreensaver.inc
+> -PR =3D "r2"
+> +PR =3D "r3"
+>
+> =C2=A0SRC_URI =3D "http://www.jwz.org/xscreensaver/xscreensaver-${PV}.tar=
+.gz \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://configure.in.patch;patch=
+=3D1 \
+> --
+> 1.6.1
 >
 >
 > _______________________________________________
