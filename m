@@ -1,23 +1,34 @@
-Received: from [64.71.152.235] (helo=lirone.symas.net)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hyc@symas.com>) id 1Mj9mj-0007fI-3o
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MjA3c-0000gk-U7 for openembedded-devel@lists.openembedded.org;
+	Thu, 03 Sep 2009 13:00:48 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1Mj9lO-0006a8-Ri
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Sep 2009 12:43:21 +0200
-Received: from [76.91.220.157] (helo=[192.168.1.29])
-	by lirone.symas.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <hyc@symas.com>) id 1Mj9UV-0007Ss-7k
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Sep 2009 03:24:31 -0700
-Message-ID: <4A9F9959.5010408@symas.com>
-Date: Thu, 03 Sep 2009 03:24:25 -0700
-From: Howard Chu <hyc@symas.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64;
-	rv:1.9.1b5pre) Gecko/20090819 SeaMonkey/2.0a1pre Firefox/3.0.3
-MIME-Version: 1.0
+	Thu, 03 Sep 2009 12:41:58 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 03 Sep 2009 12:41:58 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 03 Sep 2009 12:41:58 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <mailman.7.1251972002.477.openembedded-devel@lists.openembedded.org>
-In-Reply-To: <mailman.7.1251972002.477.openembedded-devel@lists.openembedded.org>
-Subject: Re: TI DSP updates
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 03 Sep 2009 12:41:34 +0200
+Message-ID: <h7o6gu$fii$1@ger.gmane.org>
+References: <5f2b60908120549u70fe6e00yf1df3e0e8d9bc059@mail.gmail.com>	<h5um2o$ioq$1@ger.gmane.org>
+	<5f2b60909030316q43cc1b60ic8350e68bcdb2a5c@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <5f2b60909030316q43cc1b60ic8350e68bcdb2a5c@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+Subject: Re: gstreamer-ti fails for target dm6446-evm (TI davinci)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,55 +42,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Sep 2009 10:43:21 -0000
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 03 Sep 2009 11:00:49 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-> Date: Thu, 03 Sep 2009 10:00:37 +0200
-> From: Koen Kooi <k.kooi@student.utwente.nl>
-
-> On 03-09-09 04:17, Howard Chu wrote:
->> > These are the changes I made to use the latest Codec engine, DSP
->> > modules, etc. for OMAP3530 to build. Tested and working with
->> > gstreamer-ti on an Always Innovating Touch Book with linux-omap_2.6.29
->> > kernel / Angstrom...
-> Thank you for your work on this! Your work does seem to be based on an
-> outdated OE checkout, could you try to rebase it on the current
-> org.openembedded.dev branch?
-
-Ah, I thought I had rebased with HEAD just before I posted. But sure, I'll try 
-updating again.
-
->> > To get a working codec server on the Touch Book, which has 256MB of RAM,
->> > I had to modify the default server config:
-> To move the memorymap more stuff has to get changed, but there's an
-> easier way that also works with 512MiB and 1024MiB RAM:
+On 03-09-09 12:16, Bjørn Forsman wrote:
+> 2009/8/12 Koen Kooi<k.kooi@student.utwente.nl>
 >
-> put 'mem=80M@0x80000000 mem=128M@0x88000000' in your bootargs and make
-> sure your kernel has the arch-has-holes.diff applied to make that
-> memoryhole work.
+>> On 12-08-09 14:49, Bjørn Forsman wrote:
+>>
+>>   Any suggestions for a fix?
+>>>
+>>
+>> I'm cleaning up the arago updates and plan to push them into OE this week:
+>> http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=koen/dvsdk
+>>
+>> When that's in it should give you something that at least builds for
+>> dm6446-evm.
+>
+>
+> What is the status of the dvsdk branch? Any new ETA on the OE push?
 
-Interesting. I guess that's more future-proof but currently no OMAP3530 can 
-have more than 256MB of RAM... Also, not sure what else you're referring to 
-that needs to be changed. The dsplink driver doesn't care. The codec server 
-only needs to know where the end of memory is, and it arranges the rest of the 
-map itself. It chose to use only 29M of memory, and I can't complain about 
-that, better than eating up 40M. Here's the datasheet it generated for this 
-codec server:
+8 days ago :)
 
-http://highlandsun.com/hyc/cs.x64P.DataSheet.html
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=bac5eef9c8a73672ee114926011addabb36610eb
 
-The gstreamer ticodecplugin just needs to be pointed at that server.tcf file 
-to use the same config. If I'm missing the point you're making, please explain 
-again, thanks.
+regards,
 
-If I had known about that memory hole trick I would probably not have bothered 
-rebuilding any of this, could've just downloaded a new codec combo and run 
-with it. Live and learn...
--- 
-   -- Howard Chu
-   CTO, Symas Corp.           http://www.symas.com
-   Director, Highland Sun     http://highlandsun.com/hyc/
-   Chief Architect, OpenLDAP  http://www.openldap.org/project/
+Koen
+
 
 
