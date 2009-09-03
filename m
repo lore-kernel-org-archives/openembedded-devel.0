@@ -1,37 +1,43 @@
-Received: from [209.85.221.176] (helo=mail-qy0-f176.google.com)
+Received: from [209.85.221.175] (helo=mail-qy0-f175.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MjE5i-0002Cn-Se
+	(envelope-from <raj.khem@gmail.com>) id 1MjEGN-0008KI-OQ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Sep 2009 17:19:18 +0200
-Received: by qyk6 with SMTP id 6so1037414qyk.26
+	Thu, 03 Sep 2009 17:30:16 +0200
+Received: by qyk5 with SMTP id 5so627405qyk.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Sep 2009 08:00:22 -0700 (PDT)
+	Thu, 03 Sep 2009 08:11:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=o+HeYaVQumurPFhhWiW+96Lbe+UH65CupK1YOCh5IBg=;
-	b=Xx2XJCwwuv0IkkrSzgVb1Su4djWvehtF45gf+xFPctZuf98qvzlnZk9oNRiWZh1mTi
-	0vAliHu6h6ixtae8+LGRIBI+EuWC/rM9nKFbVv2Wq4bifD5OAggR7evHNFsWYmyN+fdi
-	u1jDRWJWxY75b8Gklv0uQwApNlMrbMxogx0w0=
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=x7b2G0bsLe7Fube1rFC87+zy3HZzi3Zm7xw5dx71vSw=;
+	b=rRZov7p4fH8OaMg4R86sRRCxDcl3Gdq5MhqoA3xbRO0JoQRt8Ii0a82CvkOxb/csa+
+	o1goohOoqfc79Q52qQCuETkfXA7IZxpk/fkEbkJJMa3OhNtDaSlsYkbEXoJyWX3eBn3O
+	oQALjGUqCqX9tLzt7J6L/E1G73heTgyY+YJpw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=VplmRfCiRCCz6dGGDFzxq8zG+FbkAlBONp/SKZNE65rpOrL9DTcylgJGIgxk29gIAQ
-	eml/OJWJEIHbO7Fa/tkTcpADyh3WKWvsjFOU79Gl01cy73KitIw1eeLoedT/9rWg3zHs
-	UUz+jmOuvTdINGaT/eEFqBuJG1dJzXgkdZVk0=
+	:content-type:content-transfer-encoding;
+	b=vKe3BfhXO/8s/K03C++4tG0c3occnuAMma7esCYDTU4i+iGgCHrhdG3YBY10C5H08g
+	+ogwrUXx0DrBSTIYusPrL4CBgVJEQQP5hBaUiRfytlqjwNMb+BF9oH4zOCDDZpVRHJqQ
+	JTF83bV1y6NyVlsmPbbmBQO2nBkXfXN60c1d4=
 MIME-Version: 1.0
-Received: by 10.229.10.13 with SMTP id n13mr2798538qcn.103.1251990021932; Thu, 
-	03 Sep 2009 08:00:21 -0700 (PDT)
-In-Reply-To: <200909031316.32986.holger+oe@freyther.de>
-References: <4A826FF3.9030501@gmail.com>
-	<200908121450.59048.holger+oe@freyther.de>
-	<200908121725.57128.holger+oe@freyther.de>
-	<200909031316.32986.holger+oe@freyther.de>
-Date: Thu, 3 Sep 2009 08:00:21 -0700
-Message-ID: <19c1b8a90909030800l3ab45b48scd4db26f417e9c27@mail.gmail.com>
+Received: by 10.229.10.13 with SMTP id n13mr2814483qcn.103.1251990682141; Thu, 
+	03 Sep 2009 08:11:22 -0700 (PDT)
+In-Reply-To: <1251970342.27780.192.camel@mill.internal.reciva.com>
+References: <1251620948.4215.673.camel@lenovo.internal.reciva.com>
+	<20090901055731.GA22534@gmail.com>
+	<57768.87.139.24.177.1251793302.squirrel@home.opfer.tk>
+	<20090901153102.GA12420@gmail.com> <20090901230722.GA25864@gmail.com>
+	<20090902192044.GA18621@gmail.com>
+	<1251923389.4490.20.camel@lenovo.internal.reciva.com>
+	<19c1b8a90909021407k5610f615q41c7d13bc3b38ff0@mail.gmail.com>
+	<20090903043630.GQ23034@smtp.west.cox.net>
+	<1251970342.27780.192.camel@mill.internal.reciva.com>
+Date: Thu, 3 Sep 2009 08:11:22 -0700
+Message-ID: <19c1b8a90909030811k7f6932e0r93c94fccc43e9b1c@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: why does glibc_2.9.bb use glibc-ports-2.7?
+Subject: Re: [PATCH] sane-toolchain-eglibc.inc: Set TARGET_OS?= linux-gnuspe for e500
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,28 +51,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Sep 2009 15:19:24 -0000
+X-List-Received-Date: Thu, 03 Sep 2009 15:30:19 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 3, 2009 at 4:16 AM, Holger Hans Peter
-Freyther<holger+oe@freyther.de> wrote:
-> On Wednesday 12 August 2009 17:25:56 Holger Hans Peter Freyther wrote:
->> On Wednesday 12 August 2009 14:50:58 Holger Hans Peter Freyther wrote:
->> > On Wednesday 12 August 2009 12:16:33 Graham Gower wrote:
->> > > I currently don't have resources to test arm builds (or other
->> > > architectures...). mipsel builds take 16hrs on my workstation as it
->> > > is.
->> >
->> > I'm doing an arm build now.
->>
->> Here we go. Compile tested on ARM (mostly) and MIPS.
->>
->> z.
+On Thu, Sep 3, 2009 at 2:32 AM, Phil Blundell<philb@gnu.org> wrote:
+> On Wed, 2009-09-02 at 21:36 -0700, Tom Rini wrote:
+>> Can we get away with that? =C2=A0'linux-gnu' over 'linux' should be fine=
+ I
+>> think but I'm worried about 'linux-uclibceabi', is that really a normal
+>> standard and known host? =C2=A0Also, there's some overrides that depend =
+on
+>> 'uclibcgnueabi' iirc, which need to be updated for libc-uclibc override
+>> instead.
 >
-> ping???
+> I think Khem's patch does update most/all of the overrides in question,
+> but if this requires an OELAYOUT_ABI change then it seems like a lot of
+> disruption to fix what is (if I understand correctly) only a cosmetic
+> problem in the first place.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+The documentation around OELAYOUT_ABI says that it should be bumped
+whenever there
+is a change in tmp layout structure and this change will do rename few
+directories and
+binaries in the tmp folder thats why the bump
 
+and incremental builds wont work anyway because cross compiler names
+will be different.
+thats why I was bumping it up.
+
+Thanks
+
+-Khem
+
+>
+> p.
+>
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
