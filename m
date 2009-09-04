@@ -1,28 +1,33 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1MjV3T-0004k4-Oh
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MjVbj-00063o-0x for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Sep 2009 12:01:27 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1MjVJM-000578-95
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Sep 2009 11:26:04 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 34E9A234AC9
+	Fri, 04 Sep 2009 11:42:28 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Sep 2009 11:42:28 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Sep 2009 11:07:08 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id E5F192A423E
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Sep 2009 11:07:07 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Fri, 4 Sep 2009 11:07:21 +0200
-Message-ID: <4AA0D896.3030607@dresearch.de>
-Date: Fri, 04 Sep 2009 11:06:30 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
-MIME-Version: 1.0
+	Fri, 04 Sep 2009 11:42:28 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 04 Sep 2009 09:07:21.0671 (UTC)
-	FILETIME=[1C6F0D70:01CA2D3F]
-Subject: dropbear-0.51-r3 allow-nopw.patch: No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 04 Sep 2009 11:42:06 +0200
+Message-ID: <h7qnde$o9a$1@ger.gmane.org>
+References: <4AA0D896.3030607@dresearch.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <4AA0D896.3030607@dresearch.de>
+Sender: news <news@ger.gmane.org>
+Subject: Re: dropbear-0.51-r3 allow-nopw.patch: No such file or directory -> reverted
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,12 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Sep 2009 09:26:05 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 04 Sep 2009 10:01:27 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-It seems that commit c26fc5db90702b035bd545cff3ee7575a0f9b70f was incomplete.
+On 04-09-09 11:06, Steffen Sledz wrote:
+> It seems that commit c26fc5db90702b035bd545cff3ee7575a0f9b70f was incomplete.
 
+No, that commit is just plain wrong, from dropbear.inc:
+
+do_configure_prepend() {
+	if [ "x${DISTRO_TYPE}" = "xdebug" ]; then
+		oenote "WARNING: applying allow-nopw.patch which allows password-less 
+logins!"
+		patch -p1 < ${WORKDIR}/allow-nopw.patch
+	fi
+}
+
+The faulty commit in question breaks that by applying it it 
+unconditionally and not fixing do_configure_prepend.
+
+I've reverted that commit in the meant time.
+
+regards,
+
+Koen
 
 
 
