@@ -1,36 +1,35 @@
-Received: from [72.14.220.152] (helo=fg-out-1718.google.com)
+Received: from [74.125.92.150] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MjaS9-0003NK-7j
+	(envelope-from <raj.khem@gmail.com>) id 1MjaaA-0003cF-5f
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Sep 2009 17:11:53 +0200
-Received: by fg-out-1718.google.com with SMTP id d23so1012572fga.6
+	Fri, 04 Sep 2009 17:20:10 +0200
+Received: by qw-out-1920.google.com with SMTP id 4so226370qwk.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Sep 2009 07:52:56 -0700 (PDT)
+	Fri, 04 Sep 2009 08:01:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=rzJBaPn58rSrWyVjyCToa4aIaQiR3JMwMG33QAudJ2g=;
-	b=ey4eSZTgzHBTqEAbNdjmh1W7XUPK8jVGE3g1d3TDndt+QJolGdhDI9BgxPPw30MArr
-	jyLCHmQss7WMm7c8AKnoijvqnApG6HbWjCBfaA8P9Belioa6U2m5vwO4+xoXfHchvFGm
-	qNC2Uvsri6y28Lfatrn2orN/NiUrjXk9k1NsA=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=YMQJeLn0uNcq9zIC8ioqo2Cn5enOQ6mpWKtjV4HLiH4=;
+	b=cJiK5uAVKHbLe6n5dBtQabXAarBEzZXAzfNAaREpN1KJv5MqZ7Ap3IOHB3HEJ7XFRE
+	tpl18h5WS+Ms0td2fnMfp6mOXibTSOopzlSg46tN2sPRH1fpyg6tjehuhzJ6nuFx1vcZ
+	14BbqKfpMEywpVDubvpfu97i+R1e4hjrpR26M=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=HwvytMpthlF75CKSpigizye582BadwF11VvMqmnyrOAksbj0w72C4z7SC8Tjf8qgwh
-	8FjDMJTp5I2CKffYsrXkaKnXogmY4gQiDQ0XmQig4SWZIJNIzdt4rDIsMQmAmV1CXH5f
-	fXSiG1odHbNcjrXRhnisXt9CK92RZKueBuVgI=
-Received: by 10.86.243.15 with SMTP id q15mr5048747fgh.21.1252075975978;
-	Fri, 04 Sep 2009 07:52:55 -0700 (PDT)
-Received: from localhost (adsl-71-146-28-171.dsl.pltn13.sbcglobal.net
-	[71.146.28.171])
-	by mx.google.com with ESMTPS id 4sm2348318fgg.6.2009.09.04.07.52.53
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 04 Sep 2009 07:52:55 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=F3NgVmBnTYGbrOcSHV6rxn54SIKeuZCuw4WS4B0usWD1RqQpjOsLt1KitJg28c4fY3
+	Z4/+mWOGRkplRETsooAfhYBUtPALTRyt1UDKT9VwG6x2hvACrrF/472ONLUDOgiMm4Pm
+	NFXYMxIf60Q9Q4+23AqwG6ouViWne9hzhQbqY=
+MIME-Version: 1.0
+Received: by 10.229.44.2 with SMTP id y2mr3281290qce.76.1252076472075; Fri, 04 
+	Sep 2009 08:01:12 -0700 (PDT)
+In-Reply-To: <h7qnde$o9a$1@ger.gmane.org>
+References: <4AA0D896.3030607@dresearch.de> <h7qnde$o9a$1@ger.gmane.org>
+Date: Fri, 4 Sep 2009 08:01:12 -0700
+Message-ID: <19c1b8a90909040801i74d1f55at80ef6636365a1a26@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 Sep 2009 07:52:48 -0700
-Message-Id: <1252075968-14536-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.6.3.3
-Subject: [PATCH] angstrom: Use linux-uclibceabi instead of linux-uclibcgnueabi
+Subject: Re: dropbear-0.51-r3 allow-nopw.patch: No such file or directory -> reverted
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,75 +43,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Sep 2009 15:11:53 -0000
+X-List-Received-Date: Fri, 04 Sep 2009 15:20:11 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-* For uclibc based ARM EABI systems switch to using linux-uclibceabi
-  as TARGET_OS
+On Fri, Sep 4, 2009 at 2:42 AM, Koen Kooi<k.kooi@student.utwente.nl> wrote:
+> On 04-09-09 11:06, Steffen Sledz wrote:
+>>
+>> It seems that commit c26fc5db90702b035bd545cff3ee7575a0f9b70f was
+>> incomplete.
+>
+> No, that commit is just plain wrong, from dropbear.inc:
+>
+> do_configure_prepend() {
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0if [ "x${DISTRO_TYPE}" =3D "xdebug" ]; then
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0oenote "WARNING: a=
+pplying allow-nopw.patch which allows
+> password-less logins!"
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0patch -p1 < ${WORK=
+DIR}/allow-nopw.patch
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
+> }
+>
+> The faulty commit in question breaks that by applying it it unconditional=
+ly
+> and not fixing do_configure_prepend.
+>
+> I've reverted that commit in the meant time.
+>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- conf/distro/include/angstrom-2007-for-openmoko.inc |    4 ++--
- conf/distro/include/angstrom-uclibc.inc            |    2 +-
- conf/distro/include/angstrom-uclinux-uclibc.inc    |    2 +-
- .../include/sane-toolchain-uclinux-uclibc.inc      |    2 --
- 4 files changed, 4 insertions(+), 6 deletions(-)
+Thanks for taking care of it thats was an oversight from me
 
-diff --git a/conf/distro/include/angstrom-2007-for-openmoko.inc b/conf/distro/include/angstrom-2007-for-openmoko.inc
-index 1deb85d..6741bae 100644
---- a/conf/distro/include/angstrom-2007-for-openmoko.inc
-+++ b/conf/distro/include/angstrom-2007-for-openmoko.inc
-@@ -143,8 +143,8 @@ PREFERRED_PROVIDER_virtual/powerpc-angstrom-linux-libc-for-gcc        = "glibc"
- PREFERRED_PROVIDER_virtual/mipsel-angstrom-linux-libc-for-gcc         = "glibc"
- PREFERRED_PROVIDER_virtual/sparc-angstrom-linux-libc-for-gcc          = "glibc"
- 
--PREFERRED_PROVIDER_virtual/arm-angstrom-linux-uclibcgnueabi-libc-for-gcc    = "uclibc-initial"
--PREFERRED_PROVIDER_virtual/armeb-angstrom-linux-uclibcgnueabi-libc-for-gcc  = "uclibc-initial"
-+PREFERRED_PROVIDER_virtual/arm-angstrom-linux-uclibceabi-libc-for-gcc    = "uclibc-initial"
-+PREFERRED_PROVIDER_virtual/armeb-angstrom-linux-uclibceabi-libc-for-gcc  = "uclibc-initial"
- 
- # hostap stuff, we prefer the in-kernel modules, but those don't work for all machines
- PREFERRED_PROVIDER_hostap-conf                      ?= "hostap-conf"
-diff --git a/conf/distro/include/angstrom-uclibc.inc b/conf/distro/include/angstrom-uclibc.inc
-index a60952f..004d904 100644
---- a/conf/distro/include/angstrom-uclibc.inc
-+++ b/conf/distro/include/angstrom-uclibc.inc
-@@ -9,7 +9,7 @@ USE_NLS_glib-2.0 = "yes"
- USE_NLS_glib-2.0-native = "yes"
- USE_NLS_gcc-cross = "no"
- 
--TARGET_OS_UC = "linux${@['-uclibc','-uclibcgnueabi'][bb.data.getVar('TARGET_ARCH',d,1) in ['arm', 'armeb'] and bb.data.getVar('MACHINE',d) not in ['collie','h3600', 'h3800', 'simpad', 'htcwallaby']]}"
-+TARGET_OS_UC = "linux${@['-uclibc','-uclibceabi'][bb.data.getVar('TARGET_ARCH',d,1) in ['arm', 'armeb'] and bb.data.getVar('MACHINE',d) not in ['collie','h3600', 'h3800', 'simpad', 'htcwallaby']]}"
- TARGET_OS = "${@['${TARGET_OS_UC}', 'uclinux-uclibc'][bb.data.getVar('TARGET_ARCH',d)  in ['bfin']]}"
- 
- #mess with compiler flags to use -Os instead of -O2
-diff --git a/conf/distro/include/angstrom-uclinux-uclibc.inc b/conf/distro/include/angstrom-uclinux-uclibc.inc
-index 019f814..ad499f7 100644
---- a/conf/distro/include/angstrom-uclinux-uclibc.inc
-+++ b/conf/distro/include/angstrom-uclinux-uclibc.inc
-@@ -6,7 +6,7 @@ USE_NLS_glib-2.0 = "yes"
- USE_NLS_glib-2.0-native = "yes"
- USE_NLS_gcc-cross = "no"
- 
--TARGET_OS_UC = "uclinux${@['-uclibc','-uclibcgnueabi'][bb.data.getVar('TARGET_ARCH',d,1) in ['arm', 'armeb'] and bb.data.getVar('MACHINE',d) not in ['collie','h3600', 'h3800', 'simpad', 'htcwallaby']]}"
-+TARGET_OS_UC = "uclinux${@['-uclibc','-uclibceabi'][bb.data.getVar('TARGET_ARCH',d,1) in ['arm', 'armeb'] and bb.data.getVar('MACHINE',d) not in ['collie','h3600', 'h3800', 'simpad', 'htcwallaby']]}"
- 
- #mess with compiler flags to use -Os instead of -O2
- #Please see http://free-electrons.com/doc/embedded_linux_optimizations/img47.html for some more info
-diff --git a/conf/distro/include/sane-toolchain-uclinux-uclibc.inc b/conf/distro/include/sane-toolchain-uclinux-uclibc.inc
-index b757efb..fbb239a 100644
---- a/conf/distro/include/sane-toolchain-uclinux-uclibc.inc
-+++ b/conf/distro/include/sane-toolchain-uclinux-uclibc.inc
-@@ -7,8 +7,6 @@ USE_NLS_glib-2.0 = "yes"
- USE_NLS_glib-2.0-native = "yes"
- USE_NLS_gcc-cross = "no"
- 
--TARGET_OS_UC = "uclinux${@['-uclibc','-uclibcgnueabi'][bb.data.getVar('TARGET_ARCH',d,1) in ['arm', 'armeb'] and bb.data.getVar('MACHINE',d) not in ['collie','h3600', 'h3800', 'simpad', 'htcwallaby']]}"
--
- #mess with compiler flags to use -Os instead of -O2
- #Please see http://free-electrons.com/doc/embedded_linux_optimizations/img47.html for some more info
- FULL_OPTIMIZATION = "-fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os"
--- 
-1.6.3.3
-
+> regards,
+>
+> Koen
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
