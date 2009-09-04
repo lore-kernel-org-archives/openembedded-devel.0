@@ -1,44 +1,36 @@
-Received: from [74.125.92.147] (helo=qw-out-1920.google.com)
+Received: from [72.14.220.158] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Mjcz0-0001E3-SA
+	(envelope-from <raj.khem@gmail.com>) id 1Mjdme-0000D4-Rg
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Sep 2009 19:53:59 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so263329qwk.36
+	Fri, 04 Sep 2009 20:45:17 +0200
+Received: by fg-out-1718.google.com with SMTP id e21so190711fga.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Sep 2009 10:35:00 -0700 (PDT)
+	Fri, 04 Sep 2009 11:26:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=61cjkye5tt1kzDGIzBn/blo046EP/RJuKEEkwXA0F1s=;
-	b=ArjE/qff9TVz4hDodEY5pI5Kdz0SrxPLWNFVs842LNmjxDxSxqd/JdEN5Nbon+1jad
-	32SF9hdkOzehOb5Bgu5PQ9y8OveVaJ6syrF8D5jeRCcprb1hv+UbJVWFliXq4AdBLTYY
-	dUQ+j7JNwGM5zsm41d/FO+uNLlB9dqJzBwDtk=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=wBLax9tSMZV5w/RqbkFi9t7A3sAGFwwNE7V14RQxics=;
+	b=L6IJGGJ3/YpNaNCHKSOK+Bvf50gG3O02ZfhQal8rS6ZKIdN/SENS1GJ0dBX//FeYXw
+	gpSIDFJW9qv7wRqUl+tAxvWADHFdwuP898RQVygZ8EZ4zE5FK8leOrt7tzGxBbBeHWom
+	Y9pJXtm6ssIJ/lJ1YxU2ni+oxnAs0Cp9hApvw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=ZEbtcwMgT+5qT4nXwY1bCiuOcS7121xWInSZFvSyu1k21yXe3+O8qrfSu2LtNsBN+j
-	vLfuB4bbpTeEHGiph2Ix4FvtnexexbtdB9YO3rI/meN+/M6hr6pRfrks6xZVi/KOUt5U
-	d+1Sc3q1e8NoT5UB1mDcgROBzhbHq38Nh1slc=
-MIME-Version: 1.0
-Received: by 10.229.10.229 with SMTP id q37mr3295677qcq.106.1252085699404; 
-	Fri, 04 Sep 2009 10:34:59 -0700 (PDT)
-In-Reply-To: <1252078620.27780.515.camel@mill.internal.reciva.com>
-References: <1251620948.4215.673.camel@lenovo.internal.reciva.com>
-	<20090902192044.GA18621@gmail.com>
-	<1251923389.4490.20.camel@lenovo.internal.reciva.com>
-	<19c1b8a90909021407k5610f615q41c7d13bc3b38ff0@mail.gmail.com>
-	<20090903043630.GQ23034@smtp.west.cox.net>
-	<1251970342.27780.192.camel@mill.internal.reciva.com>
-	<19c1b8a90909030811k7f6932e0r93c94fccc43e9b1c@mail.gmail.com>
-	<1252061507.27780.507.camel@mill.internal.reciva.com>
-	<19c1b8a90909040827w70b4dd95mc700ca1ebb01b0f4@mail.gmail.com>
-	<1252078620.27780.515.camel@mill.internal.reciva.com>
-Date: Fri, 4 Sep 2009 10:34:59 -0700
-Message-ID: <19c1b8a90909041034w2648fa24pbc0f5899ca229fa2@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=W4nYpIZfVDgfSOLXW7c/q7JCbh6k7fSnfL38hK85L6MM5/kuMvIipkrsAIrFj4/nFD
+	DQjsZ5cgNtwKNKThR8RSb+yYHX0pYs4jaREb5wVQbt66CfJWia1nzd/51MKJeeEOpYpT
+	y06dBahQhaEHCLDju/xkdn5r961m+CvYmewVs=
+Received: by 10.86.220.11 with SMTP id s11mr5253584fgg.47.1252088778444;
+	Fri, 04 Sep 2009 11:26:18 -0700 (PDT)
+Received: from localhost (adsl-71-146-28-171.dsl.pltn13.sbcglobal.net
+	[71.146.28.171])
+	by mx.google.com with ESMTPS id l19sm2162227fgb.6.2009.09.04.11.26.16
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 04 Sep 2009 11:26:17 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] sane-toolchain-eglibc.inc: Set TARGET_OS?= linux-gnuspe for e500
+Date: Fri,  4 Sep 2009 11:26:11 -0700
+Message-Id: <1252088771-17175-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.6.3.3
+Subject: [PATCH] procps_3.2.7.bb: Fix compilation when usr/bin is same as /bin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,37 +44,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Sep 2009 17:53:59 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 04 Sep 2009 18:45:19 -0000
 
-On Fri, Sep 4, 2009 at 8:37 AM, Phil Blundell<philb@gnu.org> wrote:
-> On Fri, 2009-09-04 at 08:27 -0700, Khem Raj wrote:
->> Other distros also need this change. IMO it will be better
->> that we enforce a rebuild otherwise users might have issues that
->> are hard to debug.
->
-> Why do other DISTROs need this change? =C2=A0Surely if they aren't using
-> sane-toolchain.inc to set TARGET_OS then they oughtn't to be affected.
+* On DISTROs like micro where bindir and base_bindir are
+  same, procps does not compile because it wants to install
+  binaries in both places. We have to pass the variable to
+  make file since it does not use autotools.
 
-because of the TARGET_OS OVERRIDES now depend upon the new target triplet.
-Probably one way would be to leave the old overrides in there but that woul=
-d
-have been more confusing.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes/procps/procps_3.2.7.bb |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
 
-Thx
+diff --git a/recipes/procps/procps_3.2.7.bb b/recipes/procps/procps_3.2.7.bb
+index 6da975a..b31b683 100644
+--- a/recipes/procps/procps_3.2.7.bb
++++ b/recipes/procps/procps_3.2.7.bb
+@@ -1,6 +1,6 @@
+ require procps.inc
+ 
+-PR = "r8"
++PR = "r9"
+ 
+ inherit update-rc.d
+ 
+@@ -23,6 +23,9 @@ CONFFILES_${PN} = "${sysconfdir}/sysctl.conf"
+ 
+ EXTRA_OEMAKE = "CFLAGS=-I${STAGING_INCDIR} \
+                 CPPFLAGS=-I${STAGING_INCDIR} \
++		usr/bin=${D}${bindir}/ \
++		bin=${D}${base_bindir}/ \
++		usr/proc/bin=${D}${bindir}/ \
+                 LDFLAGS="${LDFLAGS}" \
+                 CURSES=-lncurses \
+                 install='install -D' \
+-- 
+1.6.3.3
 
--Khem
-
->
-> p.
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
