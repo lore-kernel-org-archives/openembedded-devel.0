@@ -1,36 +1,23 @@
-Received: from [209.85.211.187] (helo=mail-yw0-f187.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Mji6k-0002zA-L3
+	(envelope-from <philb@gnu.org>) id 1Mjr5a-0000jJ-Tn
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Sep 2009 01:22:18 +0200
-Received: by ywh17 with SMTP id 17so2088267ywh.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Sep 2009 16:03:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=NjLOVIw67INUEYALN1ff1SGJ30Tjyu8ApvzgigtQVdM=;
-	b=VYJ94IaB6asOum42sQjYUV6QOxe1yxbJZx6BEIotvfr4mnaRTZ7g9P48VeNmCnPkdP
-	go/UM+be5R1NzYHadvcCEd4KNGHWsaK7ivtJjey56CQQ7Jv+gjsfAx6YzshRNq+In7fW
-	Cbq4fOQV/gZ7Vn9OZZLyB3+2LsoO5jGO6bY3M=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=dEOIggky5bouDcNx9z7bdtte3oLWIYEuPUQywAkJQCRLBF/61h7rhfJ0pzk+wQ5NAa
-	Arhx4UUlbbUz0T85Utwi9EHEu5eFLvYW8tlEcKi3HodVit9cuaaBoLMd6GejaoP6OgTd
-	FmoE1/4rrl8+x3fOf8i154MWVOUJCJ4KhvTI0=
-Received: by 10.91.191.17 with SMTP id t17mr8599582agp.51.1252105396836;
-	Fri, 04 Sep 2009 16:03:16 -0700 (PDT)
-Received: from localhost (adsl-71-146-28-171.dsl.pltn13.sbcglobal.net
-	[71.146.28.171])
-	by mx.google.com with ESMTPS id 39sm752169agd.46.2009.09.04.16.03.15
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 04 Sep 2009 16:03:16 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Sat, 05 Sep 2009 10:57:43 +0200
+Received: from 212-139-92-236.dynamic.dsl.as9105.com ([212.139.92.236]
+	helo=[192.168.2.175])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1Mjqn6-0000FI-PY
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 05 Sep 2009 09:38:37 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 Sep 2009 16:03:10 -0700
-Message-Id: <1252105390-3800-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.6.3.3
-Subject: [PATCH] perl_5.8.8.bb: Fix compilation when bindir is not /usr/bin
+In-Reply-To: <1252105390-3800-1-git-send-email-raj.khem@gmail.com>
+References: <1252105390-3800-1-git-send-email-raj.khem@gmail.com>
+Date: Sat, 05 Sep 2009 09:38:30 +0100
+Message-Id: <1252139910.22587.317.camel@kc.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.2 
+Subject: Re: [PATCH] perl_5.8.8.bb: Fix compilation when bindir is not /usr/bin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,54 +31,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Sep 2009 23:22:18 -0000
+X-List-Received-Date: Sat, 05 Sep 2009 08:57:43 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-* Right now default perl installation happens in /usr prefix
-  This patch tries to depend upong layout_prefix to decide on
-  where to install. This is required for distros like micro
-  who flatten the install tree and do not use /usr prefix
+On Fri, 2009-09-04 at 16:03 -0700, Khem Raj wrote:
+> +	       -e 's,/usr/,${layout_exec_prefix}/,g' \
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes/perl/perl_5.8.8.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+Why not ${prefix}?
 
-diff --git a/recipes/perl/perl_5.8.8.bb b/recipes/perl/perl_5.8.8.bb
-index 8d97199..8f6b72b 100644
---- a/recipes/perl/perl_5.8.8.bb
-+++ b/recipes/perl/perl_5.8.8.bb
-@@ -5,7 +5,7 @@ LICENSE = "Artistic|GPL"
- PRIORITY = "optional"
- # We need gnugrep (for -I)
- DEPENDS = "virtual/db perl-native grep-native"
--PR = "r27"
-+PR = "r28"
- 
- # Major part of version
- PVM = "5.8"
-@@ -81,6 +81,7 @@ do_configure() {
-         sed -i -e 's,@DESTDIR@,${D},g' \
-                -e 's,@ARCH@,${TARGET_ARCH}-${TARGET_OS},g' \
-                -e "s%/usr/include/%${STAGING_INCDIR}/%g" \
-+	       -e 's,/usr/,${layout_exec_prefix}/,g' \
-             config.sh-${TARGET_ARCH}-${TARGET_OS}
- 
-         if test "${MACHINE}" != "native"; then
-@@ -103,10 +104,9 @@ do_compile() {
-         oe_runmake perl LD="${TARGET_SYS}-gcc"
- }
- do_install() {
--        oe_runmake install
--
-+	oe_runmake install
-         # Add perl pointing at current version
--        ln -sf perl${PV} ${D}/usr/bin/perl
-+        ln -sf perl${PV} ${D}${bindir}/perl
- 
-         # Fix up versioned directories
-         mv ${D}/${libdir}/perl/${PVM} ${D}/${libdir}/perl/${PV}
--- 
-1.6.3.3
+p.
+
 
 
 
