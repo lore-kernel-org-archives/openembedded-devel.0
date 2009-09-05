@@ -1,37 +1,44 @@
-Received: from [74.125.92.147] (helo=qw-out-1920.google.com)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Mk2N0-0006DM-NR
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1Mk2RM-0006NR-6c
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Sep 2009 23:00:27 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so407058qwk.36
+	Sat, 05 Sep 2009 23:04:56 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 3D19111000B9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Sep 2009 13:41:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=4T8Di8KTkMVfMPb71QR6O4oPnIDMhNjUhaILa0bSimk=;
-	b=ixdRHLAuPZXLWZWWuAXI5bk26FCA/KSVfy9iNXDh3s33YiJd2UblIlmMniNXbO3PfP
-	vT9e8lx7EPb3vzwyd5blR4ydaDqqRvFSXLR8RG0+aIUfb04jyrm0/dA2cWBhbxEAye6+
-	fjYiiNIDyndymPkJG/SqsQhRh4txPkJycGPNg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=nt+9bqgbC0XxDyKzbknXmnriFdNOYharVEP+hOLz8Y51I3IA3XLQUIWU1FYahkdn7W
-	ubPB9NFnaOmTR7XbVnBuUYN1TmO3Bv5aruPFC0wwWPWP3dz/riqvPPxn0OYPCXWBEvnI
-	zh1KF5/MJKye9olXQIK6XKSS90M76ZZTDeQug=
-MIME-Version: 1.0
-Received: by 10.229.39.201 with SMTP id h9mr3515132qce.4.1252183280907; Sat, 
-	05 Sep 2009 13:41:20 -0700 (PDT)
-In-Reply-To: <1252181231.4490.148.camel@lenovo.internal.reciva.com>
-References: <27c25bc40909050924o3632ba7dp8dd84e950a689617@mail.gmail.com>
-	<19c1b8a90909051050s382dcbf1of5aed8482cfd25aa@mail.gmail.com>
-	<1252181231.4490.148.camel@lenovo.internal.reciva.com>
-Date: Sat, 5 Sep 2009 13:41:16 -0700
-Message-ID: <19c1b8a90909051341w882f41aj9ed35a381eb3377a@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Sat,  5 Sep 2009 22:45:49 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 6B5931100084
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  5 Sep 2009 22:45:48 +0200 (CEST)
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
+	h873313.serverkompetenz.net
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.8 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
+	autolearn=ham version=3.2.5
+Received: from rhein.familie-heinold.de (unknown [78.52.226.193])
+	by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  5 Sep 2009 22:45:48 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 7D7953C323; Sat,  5 Sep 2009 22:45:44 +0200 (CEST)
+Date: Sat, 5 Sep 2009 22:45:44 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: unable to bitbake ortp
+Message-ID: <20090905204542.GA6341@rhein.zuhause.netz>
+References: <5f2b60908120549u70fe6e00yf1df3e0e8d9bc059@mail.gmail.com>
+	<h5um2o$ioq$1@ger.gmane.org>
+	<5f2b60909030316q43cc1b60ic8350e68bcdb2a5c@mail.gmail.com>
+	<h7o6gu$fii$1@ger.gmane.org>
+	<5f2b60909030552q10d3c75eq4430bf504a8578c9@mail.gmail.com>
+	<5f2b60909050958s6a7ce069l748516267e5f3059@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <5f2b60909050958s6a7ce069l748516267e5f3059@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Subject: Re: gstreamer-ti fails for target dm6446-evm (TI davinci)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,52 +52,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Sep 2009 21:00:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 05 Sep 2009 21:04:56 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Sep 5, 2009 at 1:07 PM, Phil Blundell<philb@gnu.org> wrote:
-> On Sat, 2009-09-05 at 10:50 -0700, Khem Raj wrote:
->> If you are using .dev then there is ortp-0.13 which I built here
->> without any problem
->> on a sidenote it says DEPENDS =3D "glibc " which I think should be
->> changed to virtual/libc
->> but as long as you are using glibc/eglibc based system it should not
->> be a problem.
->
-> Specifying virtual/libc in a recipe's DEPENDS would usually be a bit
-> silly since base.bbclass adds it automatically. =C2=A0Specifying glibc th=
-ere
-> would perhaps be legitimate for packages that actually require features
-> of glibc itself, but I doubt that is the case here.
->
+On Sat, Sep 05, 2009 at 06:58:32PM +0200, Bj=F8rn Forsman wrote:
+> I updated to the latest and greatest dev branch and still gstreamer-ti
+> fails to build for machine dm6446-evm. It cannot find esd.h:
 
-> I suspect that the line in question is probably a slightly mangled
-> attempt to depend on either glib-1.2 or glib-2.0, which would be
-> consistent with the original poster's complaint that glib.h was missing.
->
+Yeah,
 
-Seems right. Looking at ortp 0.13 sources glib dependency is removed
-but if you look at changelog
+gstreamer needs a esound in the DEPENDS line.
 
-Wednesday March 8 2006  : ortp-0.9.0
-        - a lot of cleanups, glib dropped, win32 port reactivated
-
-so it seems prior to 0.9 one needs to depend on glib.
-
-And I was building 0.13 and I was not getting this error.
-
-So I think right fix is to add glib dependency in 0.7 recipe.
-and remove it from 0.13
-
-> p.
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Bye Henning
 
 
