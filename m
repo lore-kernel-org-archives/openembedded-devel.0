@@ -1,44 +1,19 @@
-Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
+Received: from [62.2.86.239] (helo=a.mx.bitcloner.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1Mk2RM-0006NR-6c
+	(envelope-from <betheg@bitcloner.org>) id 1Mk2XD-0006gQ-OK
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Sep 2009 23:04:56 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 3D19111000B9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Sep 2009 22:45:49 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 6B5931100084
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Sep 2009 22:45:48 +0200 (CEST)
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on
-	h873313.serverkompetenz.net
-X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=5.0 tests=ALL_TRUSTED,AWL,BAYES_00
-	autolearn=ham version=3.2.5
-Received: from rhein.familie-heinold.de (unknown [78.52.226.193])
-	by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Sep 2009 22:45:48 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 7D7953C323; Sat,  5 Sep 2009 22:45:44 +0200 (CEST)
-Date: Sat, 5 Sep 2009 22:45:44 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Sat, 05 Sep 2009 23:10:59 +0200
+Received: from p5b2ce5db.dip.t-dialin.net ([91.44.229.219] helo=127.0.0.1)
+	by a.mx.bitcloner.org with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <betheg@bitcloner.org>)
+	id 1Mk2Ej-0001ki-W3 for openembedded-devel@lists.openembedded.org;
+	Sat, 05 Sep 2009 22:51:54 +0200
+From: Michael Kurz <betheg@bitcloner.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090905204542.GA6341@rhein.zuhause.netz>
-References: <5f2b60908120549u70fe6e00yf1df3e0e8d9bc059@mail.gmail.com>
-	<h5um2o$ioq$1@ger.gmane.org>
-	<5f2b60909030316q43cc1b60ic8350e68bcdb2a5c@mail.gmail.com>
-	<h7o6gu$fii$1@ger.gmane.org>
-	<5f2b60909030552q10d3c75eq4430bf504a8578c9@mail.gmail.com>
-	<5f2b60909050958s6a7ce069l748516267e5f3059@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <5f2b60909050958s6a7ce069l748516267e5f3059@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: gstreamer-ti fails for target dm6446-evm (TI davinci)
+Date: Sat,  5 Sep 2009 22:50:10 +0200
+Message-Id: <1252183810-18263-1-git-send-email-betheg@bitcloner.org>
+X-Mailer: git-send-email 1.6.3.3
+Subject: [PATCH] libconfig: updated to version 1.3.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,19 +27,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Sep 2009 21:04:56 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 05 Sep 2009 21:11:00 -0000
 
-On Sat, Sep 05, 2009 at 06:58:32PM +0200, Bj=F8rn Forsman wrote:
-> I updated to the latest and greatest dev branch and still gstreamer-ti
-> fails to build for machine dm6446-evm. It cannot find esd.h:
+---
+ conf/checksums.ini                   |    6 +++---
+ recipes/libconfig/libconfig_1.3.1.bb |   19 -------------------
+ recipes/libconfig/libconfig_1.3.2.bb |   19 +++++++++++++++++++
+ 3 files changed, 22 insertions(+), 22 deletions(-)
+ delete mode 100644 recipes/libconfig/libconfig_1.3.1.bb
+ create mode 100644 recipes/libconfig/libconfig_1.3.2.bb
 
-Yeah,
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index 053a2ad..61d7732 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -13294,9 +13294,9 @@ sha256=74def55ba6a61e966e0873a4081fd3dd65089b94b837810d3bc056221d7e41c7
+ md5=68ac3177685c577aadf8d2e9f47b1878
+ sha256=c3540df46bd9716c6a6f521806c70ae548822a5e62d245900cc28b5fa9fc3eb3
+ 
+-[http://www.hyperrealm.com/libconfig/libconfig-1.3.1.tar.gz]
+-md5=f02bfa27a21b3040089026975b9dc0b8
+-sha256=5677f32eff184883d7ca402234f92142f35bea7d04d503becdd104ae8343cb1c
++[http://www.hyperrealm.com/libconfig/libconfig-1.3.2.tar.gz]
++md5=094a82afd382aa2305c6cc3c06025c2d
++sha256=2a680bb33e290c3c799e3a90cf2c0fb9f5482dd930ad93d9f83ce39923258c0a
+ 
+ [http://repository.maemo.org/pool/maemo4.0/free/source/libc/libconic/libconic_0.13-0.8.tar.gz]
+ md5=b4078390c459ae4df3acdabca36f53da
+diff --git a/recipes/libconfig/libconfig_1.3.1.bb b/recipes/libconfig/libconfig_1.3.1.bb
+deleted file mode 100644
+index 0856afb..0000000
+--- a/recipes/libconfig/libconfig_1.3.1.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-DESCRIPTION = "Library for manipulating structured configuration files"
+-AUTHOR = "Mark Lindner"
+-HOMEPAGE = "http://www.hyperrealm.com/libconfig/"
+-SECTION = "libs"
+-PRIORITY = "optional"
+-LICENSE = "LGPLv2"
+-DEPENDS = ""
+-PV = "1.3.1"
+-PR = "r0"
+-
+-SRC_URI = "http://www.hyperrealm.com/libconfig/libconfig-${PV}.tar.gz"
+-
+-S = "${WORKDIR}/libconfig-${PV}"
+-
+-inherit autotools
+-
+-do_stage() {
+-	autotools_stage_all
+-}
+diff --git a/recipes/libconfig/libconfig_1.3.2.bb b/recipes/libconfig/libconfig_1.3.2.bb
+new file mode 100644
+index 0000000..263aafc
+--- /dev/null
++++ b/recipes/libconfig/libconfig_1.3.2.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "Library for manipulating structured configuration files"
++AUTHOR = "Mark Lindner"
++HOMEPAGE = "http://www.hyperrealm.com/libconfig/"
++SECTION = "libs"
++PRIORITY = "optional"
++LICENSE = "LGPLv2"
++DEPENDS = ""
++PV = "1.3.2"
++PR = "r0"
++
++SRC_URI = "http://www.hyperrealm.com/libconfig/libconfig-${PV}.tar.gz"
++
++S = "${WORKDIR}/libconfig-${PV}"
++
++inherit autotools
++
++do_stage() {
++	autotools_stage_all
++}
+-- 
+1.6.3.3
 
-gstreamer needs a esound in the DEPENDS line.
-
-Bye Henning
 
 
