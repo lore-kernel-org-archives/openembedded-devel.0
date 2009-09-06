@@ -1,26 +1,24 @@
-Received: from [91.121.26.226] (helo=2.mail-out.ovh.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1MkHCp-0000zM-64
-	for openembedded-devel@openembedded.org; Sun, 06 Sep 2009 14:50:55 +0200
-Received: (qmail 28162 invoked by uid 503); 6 Sep 2009 14:46:04 -0000
-Received: from b9.ovh.net (HELO mail175.ha.ovh.net) (213.186.33.59)
-	by 2.mail-out.ovh.net with SMTP; 6 Sep 2009 14:46:04 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 6 Sep 2009 12:35:37 -0000
-Received: from tal33-2-82-228-175-43.fbx.proxad.net (HELO ?192.168.1.13?)
-	(ebenard%eukrea.com@82.228.175.43)
-	by ns0.ovh.net with SMTP; 6 Sep 2009 12:35:36 -0000
-Message-ID: <4AA3ABA8.304@eukrea.com>
-Date: Sun, 06 Sep 2009 14:31:36 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+Received: from [82.71.203.194] (helo=crown.reciva.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <pb@reciva.com>) id 1MkHEt-000151-47
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 06 Sep 2009 14:53:03 +0200
+Received: from 212-139-92-236.dynamic.dsl.as9105.com ([212.139.92.236]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MkGwK-0000c6-RA
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 06 Sep 2009 13:33:53 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-X-Ovh-Tracer-Id: 12436690371293654345
-X-Ovh-Remote: 82.228.175.43 (tal33-2-82-228-175-43.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-Spam-Check: DONE|U 0.5/N
-Subject: qt4-embedded & tslib
+In-Reply-To: <1252240297.4490.158.camel@lenovo.internal.reciva.com>
+References: <1252239576.4136.10.camel@utx.utx.cz>
+	<1252240297.4490.158.camel@lenovo.internal.reciva.com>
+Date: Sun, 06 Sep 2009 13:33:50 +0100
+Message-Id: <1252240430.4490.160.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+Subject: Re: very obscure race: access to a just-populated binary
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,43 +32,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Sep 2009 12:50:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 06 Sep 2009 12:53:03 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Sun, 2009-09-06 at 13:31 +0100, Phil Blundell wrote:
+> On Sun, 2009-09-06 at 14:19 +0200, Stanislav Brabec wrote:
+> > Hallo.
+> >=20
+> > I just encountered a very obscure race during the build: do_configure
+> > called grep exactly in the moment, when another process populated it:
+> >=20
+> > =EF=BB=BF/OE/build/tmp/staging/x86_64-linux/usr/bin/intltoolize: line 2=
+31: /OE/build/tmp/staging/x86_64-linux/usr/bin/grep: Text file busy
+> > /OE/build/tmp/staging/x86_64-linux/usr/bin/intltoolize: line 246: /OE/b=
+uild/tmp/staging/x86_64-linux/usr/bin/grep: Text file busy
+> >=20
+> > ls -al --full-time
+> > work/armv5te-angstrom-linux-gnueabi/libgnomecups-0.2.3-r0/temp/log.do_c=
+onfigure.412=20
+> > -rw-r--r-- 1 sbrabec users  1234 2009-09-06 03:23:45.000000000 +0200 wo=
+rk/armv5te-angstrom-linux-gnueabi/libgnomecups-0.2.3-r0/temp/log.do_configu=
+re.412
+> > ls -al --full-time work/x86_64-linux/grep-native-2.5.1-r2/temp/log.popu=
+late_staging_preamble.21860=20
+> > -rw-r--r-- 1 sbrabec users 12079 2009-09-06 03:23:44.000000000 +0200 wo=
+rk/x86_64-linux/grep-native-2.5.1-r2/temp/log.populate_staging_preamble.218=
+60
+>=20
+> A similar issue with coreutils-native was discussed here recently:
 
-in order to get gt4-embedded working with tslib, I had to do the 
-following change.
-Without this, tslib loads properly the module_raw (input in my case) but 
-none of the module (pthres, linear & co) defined in ts.conf (despite the 
-fact ts_test & co are running fine).
+... that is to say, here:
 
-Eric
+http://thread.gmane.org/gmane.comp.handhelds.openembedded
 
-diff --git a/recipes/qt4/qt4-embedded.inc b/recipes/qt4/qt4-embedded.inc
-index 95b770a..91b2a6b 100644
---- a/recipes/qt4/qt4-embedded.inc
-+++ b/recipes/qt4/qt4-embedded.inc
-@@ -4,7 +4,7 @@ LICENSE = "GPL QPL"
-  PRIORITY = "optional"
-  HOMEPAGE = "http://www.trolltech.com"
-  DEPENDS += "directfb tslib"
--INC_PR = "r14"
-+INC_PR = "r15"
+> > I guess it may be fixable by:
+> > - do not populate binaries by installation in place
 
-  QT_BASE_NAME ?= "qt4-embedded"
-  QT_BASE_LIB  ?= "libqt-embedded"
-@@ -30,7 +30,7 @@ QT_CONFIG_FLAGS += " \
-      -qtlibinfix ${QT_LIBINFIX} \
-      -qt-decoration-styled -plugin-decoration-default 
--plugin-decoration-windows \
-      -plugin-gfx-transformed -plugin-gfx-qvfb -plugin-gfx-vnc 
--plugin-gfx-directfb \
--    -plugin-mouse-tslib -qt-mouse-pc -qt-mouse-qvfb \
-+    -qt-mouse-tslib -qt-mouse-pc -qt-mouse-qvfb \
-      -qt-kbd-tty -qt-kbd-usb -qt-kbd-qvfb \
-      -DQT_KEYPAD_NAVIGATION \
-      "
+This sounds like the right answer.  In a future, packaged-staging-only
+utopia, this would probably happen automatically.
+
+> > =EF=BB=BF- extending of DEPENDS/RDEPENDS of native packages
+
+I'm not quite sure how this would help, but possibly I don't understand
+exactly what you're suggesting.
+
+> > - do_unpack should respect dependencies, otherwise it can happen with
+> >   unzip-native
+
+As far as I know, do_unpack should already respect dependencies (i.e.
+"do_unpack[depends] +=3D ...".  Is that not working for you?
+
+p.
+
+
 
 
