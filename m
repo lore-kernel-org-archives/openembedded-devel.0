@@ -1,26 +1,26 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [85.33.3.5] (helo=smtp-OUT05A.alice.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1MkN3e-00061S-QF
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Sep 2009 21:05:51 +0200
-Received: from [81.170.68.179] (helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MkMl4-0001SJ-C4
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Sep 2009 19:46:38 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1252259364.4021.12.camel@utx.utx.cz>
-References: <1252239576.4136.10.camel@utx.utx.cz>
-	<1252240297.4490.158.camel@lenovo.internal.reciva.com>
-	<1252240430.4490.160.camel@lenovo.internal.reciva.com>
-	<1252259364.4021.12.camel@utx.utx.cz>
-Date: Sun, 06 Sep 2009 19:46:36 +0100
-Message-Id: <1252262796.4490.180.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-X-Broken-Reverse-DNS: no host name found for IP address 81.170.68.179
-Subject: Re: very obscure race: access to a just-populated binary
+	(envelope-from <gremlin@gremlin.it>) id 1MkNZU-0004GZ-DF
+	for openembedded-devel@openembedded.org; Sun, 06 Sep 2009 21:38:44 +0200
+Received: from FBCMMO03.fbc.local ([192.168.68.197]) by smtp-OUT05A.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sun, 6 Sep 2009 21:19:30 +0200
+Received: from FBCMCL01B05.fbc.local ([192.168.69.86]) by FBCMMO03.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sun, 6 Sep 2009 21:19:30 +0200
+Received: from deunan.loc ([95.232.191.101]) by FBCMCL01B05.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Sun, 6 Sep 2009 21:19:30 +0200
+Message-ID: <4AA409A2.6040308@gremlin.it>
+Date: Sun, 06 Sep 2009 21:12:34 +0200
+From: Alessandro GARDICH <gremlin@gremlin.it>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090825)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <1251210375.4215.525.camel@lenovo.internal.reciva.com>
+In-Reply-To: <1251210375.4215.525.camel@lenovo.internal.reciva.com>
+X-OriginalArrivalTime: 06 Sep 2009 19:19:30.0265 (UTC)
+	FILETIME=[F5353C90:01CA2F26]
+Subject: Re: OEDEM November 2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,20 +34,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Sep 2009 19:05:52 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 06 Sep 2009 19:38:44 -0000
+Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2009-09-06 at 19:49 +0200, Stanislav Brabec wrote:
-> i did not know it. recipes/jpeg/jasper_1.900.1.bb and other recipes
-> contain DEPENDS = "unzip-native", and it does not work.
+Phil Blundell wrote:
+> Further to the previous discussion on this topic, we now propose to hold
+> a developers' meeting in Cambridge, UK on the weekend of November 7/8.
+> All developers and other interested parties are welcome.  
+> 
+> To make the logistics easier, it would be useful to have an early
+> indication of the number of people who plan to attend.  So, if you
+> intend to come to the meeting, please let me know by email within the
+> next two weeks (i.e. no later than September 8).  This is not a formal
+> registration and doesn't commit you to anything, it is purely to make
+> sure that we have a large enough venue for the number of attendees.
+> 
+> Thanks
+> 
+> p.
 
-Try:
 
-do_unpack[depends] += "unzip-native:do_populate_staging"
+Not completely sure but I'll plan to attend.
 
-p.
 
+-- 
+  /------------------------------------------------\
+|     Alessandro Gardich : gremlin#gremlin!it      |
+  >------------------------------------------------<
+|  I never saw a wild thing sorry for itself.      |
+|  A small bird will drop frozen dead from a bough |
+|  without ever having felt sorry for itself.      |
+  \------------------------------------------------/
 
 
 
