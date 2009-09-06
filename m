@@ -1,31 +1,29 @@
-Received: from [64.22.125.45] (helo=wiki.koala.it)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1MkFyf-0001Gf-Dc
+	(envelope-from <utx@penguin.cz>) id 1MkH18-0000Vn-Kg
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Sep 2009 13:32:15 +0200
+	Sun, 06 Sep 2009 14:38:51 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id AE2132C81C
+	by ns.penguin.cz (Postfix) with ESMTP id B8BC61417182
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  6 Sep 2009 11:10:27 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Idict2tYcdcA
+	Sun,  6 Sep 2009 14:12:41 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id xFT6Yo1nRUxC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  6 Sep 2009 11:10:23 +0000 (UTC)
-Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
-	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTPSA id 301A02C80B
+	Sun,  6 Sep 2009 14:12:41 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 0EDCF1416BA5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  6 Sep 2009 11:10:23 +0000 (UTC)
-Message-ID: <4AA39953.1020607@gmail.com>
-Date: Sun, 06 Sep 2009 13:13:23 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Sun,  6 Sep 2009 14:12:40 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-References: <c384c5ea0909051630hb5a9c24jbf10e1854218b1d5@mail.gmail.com>
-In-Reply-To: <c384c5ea0909051630hb5a9c24jbf10e1854218b1d5@mail.gmail.com>
-Subject: Re: Request for NEWS item: bitbake in GIT
+Date: Sun, 06 Sep 2009 14:19:36 +0200
+Message-Id: <1252239576.4136.10.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
+Subject: very obscure race: access to a just-populated binary
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,35 +37,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Sep 2009 11:32:21 -0000
+X-List-Received-Date: Sun, 06 Sep 2009 12:38:53 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Leon Woestenberg ha scritto, Il 06/09/2009 01:30:
-> For users not reading the mailing list, it is mostly unknown that
-> bitbake is now maintained in GIT.
->=20
-> I just modified the "Getting Started -> Bitbake
-> (http://wiki.openembedded.net/index.php/BitBake)" to reflect this to
-> some extend.
->=20
-> However, all other references to BitBake link to the bitbake project
-> page on berlios which mentions the SVN repo.
->=20
-> Maybe adding a News item in the wiki helps; I vaguely remember News is
-> moderated (cbrake?)
->=20
-> Thanks,
+Hallo.
 
-Would you also suggest to replace the old
-svn co svn://svn.berlios.de/bitbake/branches/bitbake-1.8/ bitbake
-with a newer git clone command in OE related documentation?
+I just encountered a very obscure race during the build: do_configure
+called grep exactly in the moment, when another process populated it:
 
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
+=EF=BB=BF/OE/build/tmp/staging/x86_64-linux/usr/bin/intltoolize: line 231=
+: /OE/build/tmp/staging/x86_64-linux/usr/bin/grep: Text file busy
+/OE/build/tmp/staging/x86_64-linux/usr/bin/intltoolize: line 246: /OE/bui=
+ld/tmp/staging/x86_64-linux/usr/bin/grep: Text file busy
+
+ls -al --full-time
+work/armv5te-angstrom-linux-gnueabi/libgnomecups-0.2.3-r0/temp/log.do_con=
+figure.412=20
+-rw-r--r-- 1 sbrabec users  1234 2009-09-06 03:23:45.000000000 +0200 work=
+/armv5te-angstrom-linux-gnueabi/libgnomecups-0.2.3-r0/temp/log.do_configu=
+re.412
+ls -al --full-time work/x86_64-linux/grep-native-2.5.1-r2/temp/log.popula=
+te_staging_preamble.21860=20
+-rw-r--r-- 1 sbrabec users 12079 2009-09-06 03:23:44.000000000 +0200 work=
+/x86_64-linux/grep-native-2.5.1-r2/temp/log.populate_staging_preamble.218=
+60
+=EF=BB=BF
+I guess it may be fixable by:
+- do not populate binaries by installation in place
+=EF=BB=BF- extending of DEPENDS/RDEPENDS of native packages
+- do_unpack should respect dependencies, otherwise it can happen with
+  unzip-native
+
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
