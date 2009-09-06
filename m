@@ -1,41 +1,30 @@
-Received: from [74.125.92.147] (helo=qw-out-1920.google.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MkKTE-0000RQ-70
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Sep 2009 18:20:09 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so473889qwk.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Sep 2009 09:00:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=EUx29m2b85wRM6cmd/3366+dmUrMCLlrKdQ7t1mcXiY=;
-	b=ZtPrPRQLpGrw7THynkbPng6emdG+pClXGELAusKJOK8DiGMPU7DlQXodITRLlnCPdc
-	Nso4+dZv4ZHSFTB8Yxy2aj6l7GzFHy6HGA1tuYPzMMSIc+9HqSh/pYpZFVOQ8Ws7mr86
-	DdndlkbIqZ63QdQK5flC4atIaUxasDBoOtSVQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=jSa0GMpHA59l4+Y7i4PgCyt4Ep6cd0z0iFkiHo+mHV15GSrl5y+ESJkc5CtSx/LLNy
-	5bglVS3RrkiQT/JvGV0Afz53qpIrW0W9lR0YBSzR7UWp55Q9mfsHKRjaT/VZrCK3DfVi
-	suiohQGkKYFaO9kZHorOPYGWJAbHuM71NbAnI=
+Received: from [91.121.26.226] (helo=2.mail-out.ovh.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1MkLeC-0005u8-GW
+	for openembedded-devel@openembedded.org; Sun, 06 Sep 2009 19:35:28 +0200
+Received: (qmail 24366 invoked by uid 503); 6 Sep 2009 19:30:48 -0000
+Received: from b6.ovh.net (HELO mail408.ha.ovh.net) (213.186.33.56)
+	by 2.mail-out.ovh.net with SMTP; 6 Sep 2009 19:30:48 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 6 Sep 2009 17:16:28 -0000
+Received: from tal33-2-82-228-175-43.fbx.proxad.net (HELO ?192.168.1.13?)
+	(ebenard%eukrea.com@82.228.175.43)
+	by ns0.ovh.net with SMTP; 6 Sep 2009 17:16:26 -0000
+Message-ID: <4AA3EE5E.70409@eukrea.com>
+Date: Sun, 06 Sep 2009 19:16:14 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-Received: by 10.229.16.73 with SMTP id n9mr400761qca.70.1252252852794; Sun, 06 
-	Sep 2009 09:00:52 -0700 (PDT)
-In-Reply-To: <27c25bc40909060241v5be9aca0xb2d6c647b03179ba@mail.gmail.com>
-References: <27c25bc40909050924o3632ba7dp8dd84e950a689617@mail.gmail.com>
-	<19c1b8a90909051050s382dcbf1of5aed8482cfd25aa@mail.gmail.com>
-	<1252181231.4490.148.camel@lenovo.internal.reciva.com>
-	<19c1b8a90909051341w882f41aj9ed35a381eb3377a@mail.gmail.com>
-	<27c25bc40909060001w4e236953v4503216cac29a12f@mail.gmail.com>
-	<19c1b8a90909060117p70dbda1fk4df80fb3dcb55aed@mail.gmail.com>
-	<27c25bc40909060241v5be9aca0xb2d6c647b03179ba@mail.gmail.com>
-Date: Sun, 6 Sep 2009 09:00:52 -0700
-Message-ID: <19c1b8a90909060900j42372a1dl75a07e300efb8f11@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: unable to bitbake ortp
+To: holger+oe@freyther.de
+References: <4AA3ABA8.304@eukrea.com>
+	<200909061703.48206.holger+oe@freyther.de>
+In-Reply-To: <200909061703.48206.holger+oe@freyther.de>
+X-Ovh-Tracer-Id: 17179543728671599969
+X-Ovh-Remote: 82.228.175.43 (tal33-2-82-228-175-43.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-Spam-Check: DONE|U 0.5/N
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: qt4-embedded & tslib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,78 +38,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Sep 2009 16:20:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 06 Sep 2009 17:35:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Sun, Sep 6, 2009 at 2:41 AM, Juan Backson<juanbackson@gmail.com> wrote:
-> Hi,
->
-> This may be a pretty dumb question.
->
-> I tried to git pull, but I am getting:
->
-> OE:beagleboard [juan@localhost openembedded]$ git pull
-> Already up-to-date.
->
-> Is it something to do with my config or I should remove something for it =
-to
-> recognize that it is not the latest build?
+Holger Hans Peter Freyther a écrit :
+> On Sunday 06 September 2009 14:31:36 Eric Bénard wrote:
+>> Without this, tslib loads properly the module_raw (input in my case) but
+>> none of the module (pthres, linear & co) defined in ts.conf (despite the
+>> fact ts_test & co are running fine).
+> 
+> Please google for the QWS_MOUSE_PROTO environement variable... tslib support 
+> is built as a plugin and Qt needs to be instructed to load it.
+> 
+of course, without this variable it's not loaded at all.
+But even with this variable, it doesn't work for me with 
+-plugin-mouse-tslib but works with -qt-mouse-tslib.
+I tried :
+tslib:/dev/input/event0 & tslib:/dev/input/touchscreen0
 
-what branch are you on?
-Try to see git log and see if you have latest commits.
+In fact, the module_raw (input) is properly loaded (which means QT was 
+instructed by QWS_MOUSE_PROTO to use tslib and TSLIB_PLUGINDIR is 
+properly set) but the other modules (pthres, linear & co) are not 
+properly loaded (from what I saw with strace they are found, opened, and 
+closed). If I comment out all the modules (not module_raw) from ts.conf 
+everything is properly loaded but of course tslib gives raw values to QT 
+so touchscreen is unusable.
 
-and finally stop top posting. Its hard to follow threads with top posting.
+Eric
 
->
-> Thanks,
-> jb
-> On Sun, Sep 6, 2009 at 4:17 PM, Khem Raj <raj.khem@gmail.com> wrote:
->
->> On Sun, Sep 6, 2009 at 12:01 AM, Juan Backson<juanbackson@gmail.com>
->> wrote:
->> > Hi
->> >
->> > I have the following in my ortp0.7 recipe. =C2=A0How should I change i=
-t to get
->> > bitbake to work?
->>
->> I have committed a fix for it on .dev if you are using .dev branch
->> just update your copy.
->>
->>
->> >
->> > DESCRIPTION =3D "An LGPL implementation of RTP - RFC3550"
->> > LICENSE =3D "LGPL"
->> > DEPENDS =3D "glibc"
->> >
->> > PR =3D "r1"
->> >
->> > inherit autotools pkgconfig
->> >
->> > SRC_URI =3D "
->> >
->> http://download.savannah.nongnu.org/releases/linphone/${PN}/sources/${P}=
-.tar.gz
->> > "
->> >
->> > do_compile_append() {
->> > =C2=A0 =C2=A0 =C2=A0 =C2=A0sed -i -e s:${STAGING_DIR_TARGET}::g \
->> > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 -e s:/${TARGET_SYS}::=
-g \
->> > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ortp.pc
->> >
->> > }
->>
->> =C2=A0_______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
 
 
