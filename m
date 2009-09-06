@@ -1,40 +1,31 @@
-Received: from [209.85.222.181] (helo=mail-pz0-f181.google.com)
+Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <juanbackson@gmail.com>) id 1MkEY8-0003z1-L2
+	(envelope-from <koansoftware@gmail.com>) id 1MkFyf-0001Gf-Dc
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Sep 2009 12:00:46 +0200
-Received: by pzk11 with SMTP id 11so443490pzk.3
+	Sun, 06 Sep 2009 13:32:15 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id AE2132C81C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Sep 2009 02:41:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=TPzBBB7YLV80T8aJ74dRjsplQ+7ov/UQWa6qWYih7A0=;
-	b=kpXqVNwJ02yUGugnieVklRDTVmN/zGQgUJEvj+tVXN1jlaUF10EQ7qjxy85VHTttMh
-	7A6Ie/uIOLlwDF1CiwFE4VhNssRElueQ78KuRQHb4Rhj/4QYxzoGogCDWD/pOHAKYA01
-	QRwcss74EXexWEx7U/njr83VgyYPwijAby+jQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=tEXBkKtRs/UqbGELyEW+eEg7edG0TpTP8OO/ehQFm/UTYPT0cL/c9BbIGIjdX9mKF6
-	gx6MlYRa3ssdtdyzD63wPNQppEIvdt2UsnqQ6mJjTgG41aPf6OhmmkJFrI/x8tOgp94c
-	pAwbO/fHK/PnkvIiEBpJH8PbHASc/8/u40KhU=
+	Sun,  6 Sep 2009 11:10:27 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Idict2tYcdcA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  6 Sep 2009 11:10:23 +0000 (UTC)
+Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
+	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTPSA id 301A02C80B
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  6 Sep 2009 11:10:23 +0000 (UTC)
+Message-ID: <4AA39953.1020607@gmail.com>
+Date: Sun, 06 Sep 2009 13:13:23 +0200
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: KOAN sas - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-Received: by 10.142.8.40 with SMTP id 40mr440022wfh.60.1252230092942; Sun, 06 
-	Sep 2009 02:41:32 -0700 (PDT)
-In-Reply-To: <19c1b8a90909060117p70dbda1fk4df80fb3dcb55aed@mail.gmail.com>
-References: <27c25bc40909050924o3632ba7dp8dd84e950a689617@mail.gmail.com>
-	<19c1b8a90909051050s382dcbf1of5aed8482cfd25aa@mail.gmail.com>
-	<1252181231.4490.148.camel@lenovo.internal.reciva.com>
-	<19c1b8a90909051341w882f41aj9ed35a381eb3377a@mail.gmail.com>
-	<27c25bc40909060001w4e236953v4503216cac29a12f@mail.gmail.com>
-	<19c1b8a90909060117p70dbda1fk4df80fb3dcb55aed@mail.gmail.com>
-Date: Sun, 6 Sep 2009 17:41:32 +0800
-Message-ID: <27c25bc40909060241v5be9aca0xb2d6c647b03179ba@mail.gmail.com>
-From: Juan Backson <juanbackson@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: unable to bitbake ortp
+References: <c384c5ea0909051630hb5a9c24jbf10e1854218b1d5@mail.gmail.com>
+In-Reply-To: <c384c5ea0909051630hb5a9c24jbf10e1854218b1d5@mail.gmail.com>
+Subject: Re: Request for NEWS item: bitbake in GIT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,60 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Sep 2009 10:00:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 06 Sep 2009 11:32:21 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Leon Woestenberg ha scritto, Il 06/09/2009 01:30:
+> For users not reading the mailing list, it is mostly unknown that
+> bitbake is now maintained in GIT.
+>=20
+> I just modified the "Getting Started -> Bitbake
+> (http://wiki.openembedded.net/index.php/BitBake)" to reflect this to
+> some extend.
+>=20
+> However, all other references to BitBake link to the bitbake project
+> page on berlios which mentions the SVN repo.
+>=20
+> Maybe adding a News item in the wiki helps; I vaguely remember News is
+> moderated (cbrake?)
+>=20
+> Thanks,
 
-This may be a pretty dumb question.
+Would you also suggest to replace the old
+svn co svn://svn.berlios.de/bitbake/branches/bitbake-1.8/ bitbake
+with a newer git clone command in OE related documentation?
 
-I tried to git pull, but I am getting:
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
 
-OE:beagleboard [juan@localhost openembedded]$ git pull
-Already up-to-date.
-
-Is it something to do with my config or I should remove something for it to
-recognize that it is not the latest build?
-
-Thanks,
-jb
-On Sun, Sep 6, 2009 at 4:17 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> On Sun, Sep 6, 2009 at 12:01 AM, Juan Backson<juanbackson@gmail.com>
-> wrote:
-> > Hi
-> >
-> > I have the following in my ortp0.7 recipe.  How should I change it to get
-> > bitbake to work?
->
-> I have committed a fix for it on .dev if you are using .dev branch
-> just update your copy.
->
->
-> >
-> > DESCRIPTION = "An LGPL implementation of RTP - RFC3550"
-> > LICENSE = "LGPL"
-> > DEPENDS = "glibc"
-> >
-> > PR = "r1"
-> >
-> > inherit autotools pkgconfig
-> >
-> > SRC_URI = "
-> >
-> http://download.savannah.nongnu.org/releases/linphone/${PN}/sources/${P}.tar.gz
-> > "
-> >
-> > do_compile_append() {
-> >        sed -i -e s:${STAGING_DIR_TARGET}::g \
-> >               -e s:/${TARGET_SYS}::g \
-> >                  ortp.pc
-> >
-> > }
->
->  _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
