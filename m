@@ -1,22 +1,44 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [203.97.37.64] (helo=smtp4.clear.net.nz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1MlCe0-0004lc-Cw
-	for openembedded-devel@openembedded.org; Wed, 09 Sep 2009 04:10:51 +0200
-Received: (qmail 23731 invoked by uid 1003); 9 Sep 2009 02:10:21 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 9 Sep 2009 02:10:20 -0000
-Message-ID: <4AA70E78.10109@balister.org>
-Date: Tue, 08 Sep 2009 22:10:00 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
-MIME-Version: 1.0
+	(envelope-from <matthew@4d-electronics.co.nz>) id 1MlDMj-0006j0-PH
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Sep 2009 04:57:05 +0200
+Received: from tardis.4d-electronics.co.nz
+	(202-0-56-223.cable.telstraclear.net [202.0.56.223])
+	by smtp4.clear.net.nz (CLEAR Net Mail)
+	with ESMTP id <0KPK00FJ9M538710@smtp4.clear.net.nz> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	07 Sep 2009 10:22:17 +1200 (NZST)
+Received: from localhost (localhost [127.0.0.1])	by tardis.4d-electronics.co.nz
+	(Postfix) with ESMTP id 5912A5CE25B	for
+	<openembedded-devel@lists.openembedded.org>; Mon,
+	07 Sep 2009 10:22:15 +1200 (NZST)
+Received: from tardis.4d-electronics.co.nz ([127.0.0.1])
+	by localhost (tardis.4d-electronics.co.nz [127.0.0.1])
+	(amavisd-new, port 10024)	with ESMTP id CN5eIYz6V-yo	for
+	<openembedded-devel@lists.openembedded.org>; Mon,
+	07 Sep 2009 10:22:10 +1200 (NZST)
+Received: from [192.168.1.130] (unknown [192.168.1.130])
+	by tardis.4d-electronics.co.nz (Postfix) with ESMTPS id 8996C5CE220	for
+	<openembedded-devel@lists.openembedded.org>; Mon,
+	07 Sep 2009 10:22:10 +1200 (NZST)
+Date: Mon, 07 Sep 2009 10:22:10 +1200
+From: Matthew Dombroski <matthew@4d-electronics.co.nz>
+In-reply-to: <4AA3EE5E.70409@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+Message-id: <4AA43612.8070808@4d-electronics.co.nz>
+MIME-version: 1.0
+X-Virus-Scanned: by Amavis+SpamAssassin+ClamAV and more at	4d-electronics.co.nz
+References: <4AA3ABA8.304@eukrea.com>
+	<200909061703.48206.holger+oe@freyther.de> <4AA3EE5E.70409@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-GB; rv:1.9.1.1) Gecko/20090715
+	Thunderbird/3.0b3
+X-SA-Exim-Connect-IP: 203.97.37.64
+X-SA-Exim-Mail-From: matthew@4d-electronics.co.nz
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: List outage
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: qt4-embedded & tslib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,83 +52,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Sep 2009 02:10:51 -0000
-X-Groupsio-MsgNum: 13013
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms060407080806030303040808"
-
---------------ms060407080806030303040808
+X-List-Received-Date: Wed, 09 Sep 2009 02:57:05 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: QUOTED-PRINTABLE
 
-Sorry about the list outage. The linuxtogo server moved and I forgot 
-that machine handles the oe list email. Things should be back to normal now.
+On 07/09/09 05:16, Eric B=E9nard wrote:
+> Holger Hans Peter Freyther a =E9crit :
+>> On Sunday 06 September 2009 14:31:36 Eric B=E9nard wrote:
+>>> Without this, tslib loads properly the module_raw (input in my ca=
+se)=20
+>>> but
+>>> none of the module (pthres, linear & co) defined in ts.conf (desp=
+ite=20
+>>> the
+>>> fact ts_test & co are running fine).
+>>
+>> Please google for the QWS_MOUSE_PROTO environement variable... tsl=
+ib=20
+>> support is built as a plugin and Qt needs to be instructed to load=
+ it.
+>>
+> of course, without this variable it's not loaded at all.
+> But even with this variable, it doesn't work for me with=20
+> -plugin-mouse-tslib but works with -qt-mouse-tslib.
+> I tried :
+> tslib:/dev/input/event0 & tslib:/dev/input/touchscreen0
+>
+> In fact, the module_raw (input) is properly loaded (which means QT =
+was=20
+> instructed by QWS_MOUSE_PROTO to use tslib and TSLIB_PLUGINDIR is=
+=20
+> properly set) but the other modules (pthres, linear & co) are not=
+=20
+> properly loaded (from what I saw with strace they are found, opened=
+,=20
+> and closed). If I comment out all the modules (not module_raw) from=
+=20
+> ts.conf everything is properly loaded but of course tslib gives raw=
+=20
+> values to QT so touchscreen is unusable.
+>
+> Eric
 
-Philip
+Actually, the problem is that tslib is linked incorrectly.
+The pthres, linear, etc. modules are not linked to libts so theyre=
+=20
+missing symbols when an attempt is made to load them.
+To confirm, do
 
---------------ms060407080806030303040808
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+LD_PRELOAD=3D/usr/lib/libts-1.0.so.0 <args>
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
-OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
-Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
-MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
-EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
-V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
-ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
-ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
-SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
-n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
-R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
-/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
-kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
-Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
-urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDkwOTAy
-MTAwMFowIwYJKoZIhvcNAQkEMRYEFNZoxyrpYcGjmbE67cdhz3co7twWMFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQCDh8Btw7CZqhbWpOLANSwCqud0Iq3UYRX5rkTCk5ClhWwV7Aw9
-a3Osh8HmGMA9zoxuwle5EU0X7IDqTh6ycbkpG5G88gwo+0QChBOgpOMd9lCiZrZ1Ckfp9HG74+IA
-vEBr59Qr6u/GCigvjgkCrGIZ6fMdAH/jJIb9KXkwGuseEkFuTz1/dswu7oYdDDwdj0kKDkyrvwt0
-DCnOQO39Jr+Lz6u6g4dnYMmmWiCZxajjf6q52xrL+JdefvY44W8wfNiyLwhLMgVOJao9gFCYskFF
-rP0omI/hUftQfMLiO+tub0oMmuI75IXtAkamgxxXjHkcZ9J4t42hcM0JdGy5VdurAAAAAAAA
+tslib modules will resolve symbols properly so tslib will work.
 
---------------ms060407080806030303040808--
+A quick patch to tslib to link those modules against libts is below.
+A little dirty linking against the static libs, but it works!
+
+Add to tslib_1.0.bb SRC_URI.
+
+~Matt
+
+
+--- tslib.orig/plugins/Makefile.am
++++ tslib/plugins/Makefile.am
+@@ -107,15 +107,19 @@ pluginexec_LTLIBRARIES =3D \
+
+  variance_la_SOURCES    =3D variance.c
+  variance_la_LDFLAGS    =3D -module $(LTVSN)
++variance_la_LIBADD     =3D $(top_builddir)/src/libts.la
+
+  dejitter_la_SOURCES    =3D dejitter.c
+  dejitter_la_LDFLAGS    =3D -module $(LTVSN)
++dejitter_la_LIBADD     =3D $(top_builddir)/src/libts.la
+
+  linear_la_SOURCES      =3D linear.c
+  linear_la_LDFLAGS      =3D -module $(LTVSN)
++linear_la_LIBADD       =3D $(top_builddir)/src/libts.la
+
+  pthres_la_SOURCES      =3D pthres.c
+  pthres_la_LDFLAGS      =3D -module $(LTVSN)
++pthres_la_LIBADD       =3D $(top_builddir)/src/libts.la
+
+  # hw access
+  corgi_la_SOURCES       =3D corgi-raw.c
+
+
+
