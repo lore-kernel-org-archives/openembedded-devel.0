@@ -1,40 +1,42 @@
-Received: from [74.125.92.150] (helo=qw-out-1920.google.com)
+Received: from [209.85.210.180] (helo=mail-yx0-f180.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MlHye-0003ae-5h
+	(envelope-from <raj.khem@gmail.com>) id 1MlKEf-0006wG-Oi
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Sep 2009 09:52:31 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so1039160qwk.36
+	Wed, 09 Sep 2009 12:17:12 +0200
+Received: by yxe10 with SMTP id 10so7146579yxe.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Sep 2009 00:52:03 -0700 (PDT)
+	Wed, 09 Sep 2009 03:16:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=UwrlLl2JswHdrxCGX0jxihUmW4z47ykkg0C0a7SrIrE=;
-	b=qPGy67QkhxDfQj4wnAF6Wf5At/qusRaWA1r+dEDtNZUPjiFbNIAZRPuLY7qj1FhXoe
-	fvkQj9RaJzw8wj0fnQMVaKjDp1AUy20pnVp9hmA4JiRKH7ZF9e0vMdrT9usGLXiQwmXi
-	zstvWuoEqKmpaMNrTNcg/KkqP1NedtDQyDMyY=
+	:message-id:x-mailer:in-reply-to:references;
+	bh=EMaKePj5yNWFys4Wug1OaBPSHAhIDv5Jb2M9mNxLGeI=;
+	b=Gh0EIuXM4rP8DM0FGHv3evtqhSejdb29e3rg5Jgj+6LGl8g1YjJU+ypYJEk5gop9Wc
+	QaqOrzq5J0GFHgQElfaRN5C3LVoKnDPkm6Bnzgpvs6tba0p/QxTKU0lTbJub3sZ1fWSM
+	PPNoqnxXKGItf+1+ltK36JUC32W7wFqxdHu/k=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=X0owebG8HUSj/PQ0P3f4G+3ZM2Sykq+mlbxgAyR65u484jR4zKr6AIcVoDlWQKZ91M
-	BRODo+1kkNtyfGEddY4DyzcYolKS+1TPBliUgQc8w37OYyy/a1zXMx0jn4SOTHYeI87H
-	b/qfZ3gAVEl0iNHONepDUFyL3dLOOZ25INGQY=
-Received: by 10.224.113.212 with SMTP id b20mr7238123qaq.295.1252350725349;
-	Mon, 07 Sep 2009 12:12:05 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=PyEmjffohlt5Ggpgrkyx5DJ5vDW9qllHsJqHTJezMGXehSmMkhbpza3vdgEX30JKNF
+	8yywnyEn6FD47VsnoLrufUw6yLrl1v8Rp/Rngj4pDYzY89uQrpS3v0jBRdYJ6RSCV6za
+	dqQoWt9SDCJuPfkkhSiIAEiwux2V8GdgnffJ0=
+Received: by 10.90.11.30 with SMTP id 30mr11472689agk.42.1252350747313;
+	Mon, 07 Sep 2009 12:12:27 -0700 (PDT)
 Received: from localhost (adsl-71-146-28-171.dsl.pltn13.sbcglobal.net
 	[71.146.28.171])
-	by mx.google.com with ESMTPS id 6sm1590008qwd.13.2009.09.07.12.12.03
+	by mx.google.com with ESMTPS id 6sm3378349agd.49.2009.09.07.12.12.25
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 07 Sep 2009 12:12:04 -0700 (PDT)
+	Mon, 07 Sep 2009 12:12:26 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  7 Sep 2009 12:11:43 -0700
-Message-Id: <1252350704-9530-1-git-send-email-raj.khem@gmail.com>
+Date: Mon,  7 Sep 2009 12:11:44 -0700
+Message-Id: <1252350704-9530-2-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 74.125.92.150
+In-Reply-To: <1252350704-9530-1-git-send-email-raj.khem@gmail.com>
+References: <1252350704-9530-1-git-send-email-raj.khem@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.210.180
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 1/2] tar_1.22.bb: Add recipe for 1.22 release.
+Subject: [PATCH 2/2] tune-xscale.inc: Use TARGET_ARCH to find endianness
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,37 +50,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Sep 2009 07:52:31 -0000
+X-List-Received-Date: Wed, 09 Sep 2009 10:17:13 -0000
+
+* Use TARGET_ARCH to find endianness instead of
+  SITEINFO_ENDIANNESS which is not yet evaluated.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- conf/checksums.ini      |    4 ++++
- recipes/tar/tar_1.22.bb |    1 +
- 2 files changed, 5 insertions(+), 0 deletions(-)
- create mode 100644 recipes/tar/tar_1.22.bb
+ conf/machine/include/tune-xscale.inc |    9 ++++++---
+ 1 files changed, 6 insertions(+), 3 deletions(-)
 
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 053a2ad..e720a28 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -23734,6 +23734,10 @@ sha256=44944ee0427c8e0d8dbaa0b8f900073a7456819610cc521c53630c3eb117cf5e
- md5=1a7e17f27abf583b3b0bc059a827e68b
- sha256=be8bf33afb5adc2377e45d94693ffd46b75f267f9b808df0c7006e51211f9deb
- 
-+[ftp://ftp.gnu.org/gnu/tar/tar-1.22.tar.bz2]
-+md5=07fa517027f426bb80f5f5ff91b63585
-+sha256=3cefb67f197a3f8f5235999fe749ced0889466a71ddcbc96fddca84e5d53aa4d
+diff --git a/conf/machine/include/tune-xscale.inc b/conf/machine/include/tune-xscale.inc
+index 7fa6447..3a6bd0e 100644
+--- a/conf/machine/include/tune-xscale.inc
++++ b/conf/machine/include/tune-xscale.inc
+@@ -1,9 +1,12 @@
+-FEED_ARCH =  "${@['armv5teb', 'armv5te'][bb.data.getVar('SITEINFO_ENDIANESS', d, 1) == 'le']}"
++# this depends on fact that for ARM the TARGET_ARCH is 'arm' for little endian and 'armeb' for bigendian
++# this is the case as of now for all arm machines in OE.
 +
- [http://downloads.sourceforge.net/subapplet/tasklist-105.tar.gz]
- md5=dc62a061d83cf72d1eca7e8ae2c8e1a6
- sha256=4078c44beebfd298995983b9e2ea189167a1ab081d96a7c485a67b65a974e878
-diff --git a/recipes/tar/tar_1.22.bb b/recipes/tar/tar_1.22.bb
-new file mode 100644
-index 0000000..25163ac
---- /dev/null
-+++ b/recipes/tar/tar_1.22.bb
-@@ -0,0 +1 @@
-+require tar.inc
++FEED_ARCH =  "${@['armv5teb', 'armv5te'][bb.data.getVar('TARGET_ARCH', d, 1) == 'arm']}"
+ 
+ TARGET_CC_ARCH = "-march=armv5te -mtune=xscale"
+ TARGET_CC_KERNEL_ARCH = "-march=armv5te -mtune=xscale"
+-PACKAGE_EXTRA_ARCHS += "${@['armv4b armv4tb armv5teb', 'armv4 armv4t armv5te'][bb.data.getVar('SITEINFO_ENDIANESS', d, 1) == 'le']}"
+-BASE_PACKAGE_ARCH := "${@['armv5teb', 'armv5te'][bb.data.getVar('SITEINFO_ENDIANESS', d, 1) == 'le']}"
++PACKAGE_EXTRA_ARCHS += "${@['armv4b armv4tb armv5teb', 'armv4 armv4t armv5te'][ bb.data.getVar('TARGET_ARCH', d, 1) == 'arm']}"
++BASE_PACKAGE_ARCH = "${@['armv5teb', 'armv5te'][bb.data.getVar('TARGET_ARCH', d, 1) == 'arm']}"
+ 
+ # Include tune file for thumb support, it defaults to off so DISTROs can turn it on if they wish
+ require conf/machine/include/tune-thumb.inc
 -- 
 1.6.3.3
 
