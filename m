@@ -1,40 +1,38 @@
-Received: from [209.85.221.190] (helo=mail-qy0-f190.google.com)
+Received: from [209.85.220.222] (helo=mail-fx0-f222.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MlBjM-0001hl-9L
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Sep 2009 03:12:19 +0200
-Received: by qyk28 with SMTP id 28so3292361qyk.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Sep 2009 18:11:49 -0700 (PDT)
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1MlBwW-0002L8-RP
+	for openembedded-devel@openembedded.org; Wed, 09 Sep 2009 03:25:55 +0200
+Received: by fxm22 with SMTP id 22so435543fxm.12
+	for <openembedded-devel@openembedded.org>;
+	Tue, 08 Sep 2009 18:25:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer;
-	bh=UwrlLl2JswHdrxCGX0jxihUmW4z47ykkg0C0a7SrIrE=;
-	b=eqlSHnQYO8wwRGJmBa/as2KseuZX2RomxY4Pb8oGK8jEn3A9P1q3Y6bEVXEMuLn/uu
-	9gY8jEDEe8/YG4FABEObt/8huRTrNS9R9Xgs9afUNxL+2w8TPJhBft9WU3ve/4xMl6zA
-	36z7hdElYP/D48XVDB9JvTfqEIfdclXtLLN4U=
+	bh=vr8DNDmHqaJlndxflx+HgI2vCp8rvC3NBU9SY2VRM8Q=;
+	b=uNftUAz1R1O0KFlyffUgdp8sj0NvIyMUfPxRBNAgkwKzl8bbiLLiGD0u6XiAYZVYa+
+	gGILHOxvzaZ+NlfMxQg0WI0L0UMcxoems4fonVLEX6GfLqRYRMbvVOZLAZcJwE4P+9do
+	1eNmrNAOmxDi+K5tq6Ak3AUpNoRHxf8fqzkxg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=mWSPjz8HmficiVaWTJzYZaNRDPAmNeDQOc00aS+m8tJiPEnEMJ/AcPnggPA3JdFn1D
-	49LvINEowc3HzDimMSWbZ0ZwHz2xVJke8Ujy6dCKu3AKzUhc1cuywj9E4b3aVyN7RZMt
-	zep/pSEUJr44nWMdkGfBppHx3pOrVm3ZZXm7M=
-Received: by 10.224.121.66 with SMTP id g2mr10467879qar.47.1252447078932;
-	Tue, 08 Sep 2009 14:57:58 -0700 (PDT)
-Received: from localhost (adsl-71-146-28-171.dsl.pltn13.sbcglobal.net
-	[71.146.28.171])
-	by mx.google.com with ESMTPS id 5sm27257qwh.10.2009.09.08.14.57.57
+	b=jNlHcQiT4R0/UL6GCZ0o6Azs8pNOwao23/qf+RkVMpDLI0530oG+MMZBOPzCvXh/JC
+	ajITNFzatDvng9Zqj8hlNF7FoUzeOt3wL9S+yCHk87M5EZFh1kSrWaJSZErZ5RmvekhH
+	H2WG41stNXGyEOXcNJ/umOLuSwgipgpSeiGw8=
+Received: by 10.103.48.19 with SMTP id a19mr6159003muk.136.1252329014142;
+	Mon, 07 Sep 2009 06:10:14 -0700 (PDT)
+Received: from localhost (cpmsq.epam.com [217.21.56.2])
+	by mx.google.com with ESMTPS id n7sm11509271mue.6.2009.09.07.06.10.12
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 08 Sep 2009 14:57:58 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Sep 2009 14:57:42 -0700
-Message-Id: <1252447062-12948-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 209.85.221.190
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+	Mon, 07 Sep 2009 06:10:12 -0700 (PDT)
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+To: openembedded-devel@openembedded.org
+Date: Mon,  7 Sep 2009 16:10:13 +0300
+Message-Id: <1252329016-10848-1-git-send-email-ihar.hrachyshka@gmail.com>
+X-Mailer: git-send-email 1.6.4.2
+X-SA-Exim-Connect-IP: 209.85.220.222
+X-SA-Exim-Mail-From: ihar.hrachyshka@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 1/2] tar_1.22.bb: Add recipe for 1.22 release.
+Subject: [PATCH] Fixed concurrency problem for ZIP packed recipes.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,39 +46,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Sep 2009 01:12:19 -0000
+X-List-Received-Date: Wed, 09 Sep 2009 01:25:56 -0000
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+The problem occured when unzip-native is not yet staged, and ZIP
+archive unpacking already started resulting in failed do_unpack task.
+Added NEED_UNZIP_FOR_UNPACK variable to use in recipes which do_unpack
+with unzip utility but doesn't have '.zip' in SRC_URI (f.e. .EXE
+windows self-extraction binaries).
+
+Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
 ---
- conf/checksums.ini      |    4 ++++
- recipes/tar/tar_1.22.bb |    1 +
- 2 files changed, 5 insertions(+), 0 deletions(-)
- create mode 100644 recipes/tar/tar_1.22.bb
+ classes/base.bbclass |    9 +++++++++
+ 1 files changed, 9 insertions(+), 0 deletions(-)
 
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 053a2ad..e720a28 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -23734,6 +23734,10 @@ sha256=44944ee0427c8e0d8dbaa0b8f900073a7456819610cc521c53630c3eb117cf5e
- md5=1a7e17f27abf583b3b0bc059a827e68b
- sha256=be8bf33afb5adc2377e45d94693ffd46b75f267f9b808df0c7006e51211f9deb
+diff --git a/classes/base.bbclass b/classes/base.bbclass
+index d29ba4b..bdee5b2 100644
+--- a/classes/base.bbclass
++++ b/classes/base.bbclass
+@@ -1187,6 +1187,15 @@ def base_after_parse(d):
+         depends = depends + " git-native:do_populate_staging"
+         bb.data.setVarFlag('do_fetch', 'depends', depends, d)
  
-+[ftp://ftp.gnu.org/gnu/tar/tar-1.22.tar.bz2]
-+md5=07fa517027f426bb80f5f5ff91b63585
-+sha256=3cefb67f197a3f8f5235999fe749ced0889466a71ddcbc96fddca84e5d53aa4d
++    # unzip-native should already be staged before unpacking ZIP recipes
++    need_unzip = bb.data.getVar('NEED_UNZIP_FOR_UNPACK', d, 1)
++    src_uri = bb.data.getVar('SRC_URI', d, 1)
 +
- [http://downloads.sourceforge.net/subapplet/tasklist-105.tar.gz]
- md5=dc62a061d83cf72d1eca7e8ae2c8e1a6
- sha256=4078c44beebfd298995983b9e2ea189167a1ab081d96a7c485a67b65a974e878
-diff --git a/recipes/tar/tar_1.22.bb b/recipes/tar/tar_1.22.bb
-new file mode 100644
-index 0000000..25163ac
---- /dev/null
-+++ b/recipes/tar/tar_1.22.bb
-@@ -0,0 +1 @@
-+require tar.inc
++    if ".zip" in src_uri or need_unzip == "1":
++        depends = bb.data.getVarFlag('do_unpack', 'depends', d) or ""
++        depends = depends + " unzip-native:do_populate_staging"
++        bb.data.setVarFlag('do_unpack', 'depends', depends, d)
++
+     # 'multimachine' handling
+     mach_arch = bb.data.getVar('MACHINE_ARCH', d, 1)
+     pkg_arch = bb.data.getVar('PACKAGE_ARCH', d, 1)
 -- 
-1.6.3.3
+1.5.6.5
 
 
 
