@@ -1,40 +1,39 @@
-Received: from [209.85.221.190] (helo=mail-qy0-f190.google.com)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MlAmM-0007LS-45
+	(envelope-from <utx@penguin.cz>) id 1MlAuy-0007mM-36
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Sep 2009 02:11:21 +0200
-Received: by qyk28 with SMTP id 28so3252335qyk.28
+	Wed, 09 Sep 2009 02:20:15 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 68C901409713
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Sep 2009 17:10:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=EMaKePj5yNWFys4Wug1OaBPSHAhIDv5Jb2M9mNxLGeI=;
-	b=ZnnVQkNw/lyyeKCX6EmZ7HPGv4eWhl/6u7+0QAxvnxP16IcaAKv4MZgBoAiOkZ5pBJ
-	upInZ7J9kuMIDPRz3/b3ZNOQzocPKqCwWzuIr0Jvf0wDnQvQ1gHRq+4Oali7I7KneW1U
-	bnShkW5V9T6wPLCJgBVQjbhry/RmaX8K+VdvY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=Jft56ljwpW4FR5IgLDJ4S9/dXttaEv7QkhDKlCkfaOw45AMPkBxECbWigTd3ab2zBH
-	tZaFouxVSp/n3CQXci0ZYKy81RbnDiuwvCgedurpUc/pDxGbcyRPUMTg6V7JvdYwU42m
-	P+uyAaCMfv8nK1ilAZKGt9vjpzWgEOOjxevh4=
-Received: by 10.224.112.72 with SMTP id v8mr10516906qap.106.1252447089777;
-	Tue, 08 Sep 2009 14:58:09 -0700 (PDT)
-Received: from localhost (adsl-71-146-28-171.dsl.pltn13.sbcglobal.net
-	[71.146.28.171])
-	by mx.google.com with ESMTPS id 26sm13553qwa.2.2009.09.08.14.58.08
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 08 Sep 2009 14:58:09 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Tue,  8 Sep 2009 21:47:05 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id kuG54+sg7bpn
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  8 Sep 2009 21:47:05 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 322381416BA8
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  8 Sep 2009 21:47:05 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Sep 2009 14:58:05 -0700
-Message-Id: <1252447085-13013-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 209.85.221.190
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+In-Reply-To: <1252262796.4490.180.camel@lenovo.internal.reciva.com>
+References: <1252239576.4136.10.camel@utx.utx.cz>
+	<1252240297.4490.158.camel@lenovo.internal.reciva.com>
+	<1252240430.4490.160.camel@lenovo.internal.reciva.com>
+	<1252259364.4021.12.camel@utx.utx.cz>
+	<1252262796.4490.180.camel@lenovo.internal.reciva.com>
+Date: Tue, 08 Sep 2009 21:53:52 +0200
+Message-Id: <1252439632.8256.4.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 2/2] tune-xscale.inc: Use TARGET_ARCH to find endianness
+Subject: Re: very obscure race: access to a just-populated binary
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,38 +47,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Sep 2009 00:11:21 -0000
+X-List-Received-Date: Wed, 09 Sep 2009 00:20:15 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-* Use TARGET_ARCH to find endianness instead of
-  SITEINFO_ENDIANNESS which is not yet evaluated.
+Phil Blundell wrote: 
+> On Sun, 2009-09-06 at 19:49 +0200, Stanislav Brabec wrote:
+> > i did not know it. recipes/jpeg/jasper_1.900.1.bb and other recipes
+> > contain DEPENDS = "unzip-native", and it does not work.
+> 
+> Try:
+> 
+> do_unpack[depends] += "unzip-native:do_populate_staging"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- conf/machine/include/tune-xscale.inc |    9 ++++++---
- 1 files changed, 6 insertions(+), 3 deletions(-)
+Works:
+NOTE: Running task 3984 of 4299 (ID: 3650, /OE/openembedded/recipes/jpeg/jasper_1.900.1.bb, do_fetch)
+NOTE: Running task 4023 of 4299 (ID: 1693, /OE/openembedded/recipes/unzip/unzip-native_552.bb, do_populate_staging)
+NOTE: Running task 4027 of 4299 (ID: 3651, /OE/openembedded/recipes/jpeg/jasper_1.900.1.bb, do_unpack)
 
-diff --git a/conf/machine/include/tune-xscale.inc b/conf/machine/include/tune-xscale.inc
-index 7fa6447..3a6bd0e 100644
---- a/conf/machine/include/tune-xscale.inc
-+++ b/conf/machine/include/tune-xscale.inc
-@@ -1,9 +1,12 @@
--FEED_ARCH =  "${@['armv5teb', 'armv5te'][bb.data.getVar('SITEINFO_ENDIANESS', d, 1) == 'le']}"
-+# this depends on fact that for ARM the TARGET_ARCH is 'arm' for little endian and 'armeb' for bigendian
-+# this is the case as of now for all arm machines in OE.
-+
-+FEED_ARCH =  "${@['armv5teb', 'armv5te'][bb.data.getVar('TARGET_ARCH', d, 1) == 'arm']}"
- 
- TARGET_CC_ARCH = "-march=armv5te -mtune=xscale"
- TARGET_CC_KERNEL_ARCH = "-march=armv5te -mtune=xscale"
--PACKAGE_EXTRA_ARCHS += "${@['armv4b armv4tb armv5teb', 'armv4 armv4t armv5te'][bb.data.getVar('SITEINFO_ENDIANESS', d, 1) == 'le']}"
--BASE_PACKAGE_ARCH := "${@['armv5teb', 'armv5te'][bb.data.getVar('SITEINFO_ENDIANESS', d, 1) == 'le']}"
-+PACKAGE_EXTRA_ARCHS += "${@['armv4b armv4tb armv5teb', 'armv4 armv4t armv5te'][ bb.data.getVar('TARGET_ARCH', d, 1) == 'arm']}"
-+BASE_PACKAGE_ARCH = "${@['armv5teb', 'armv5te'][bb.data.getVar('TARGET_ARCH', d, 1) == 'arm']}"
- 
- # Include tune file for thumb support, it defaults to off so DISTROs can turn it on if they wish
- require conf/machine/include/tune-thumb.inc
--- 
-1.6.3.3
+Before the change, bitbake was trying to unpack jasper before populating
+of unzip-native. 
+
+Pushed as
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=d5345f88b5ffdca098e0281f42f51e42ef43e79d
+
+Thanks for your hint.
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
 
