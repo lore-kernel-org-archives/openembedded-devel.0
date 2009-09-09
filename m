@@ -1,42 +1,33 @@
-Received: from [209.85.210.180] (helo=mail-yx0-f180.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MlKEf-0006wG-Oi
+	(envelope-from <philb@gnu.org>) id 1MlKSF-0007qv-LM
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Sep 2009 12:17:12 +0200
-Received: by yxe10 with SMTP id 10so7146579yxe.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Sep 2009 03:16:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=EMaKePj5yNWFys4Wug1OaBPSHAhIDv5Jb2M9mNxLGeI=;
-	b=Gh0EIuXM4rP8DM0FGHv3evtqhSejdb29e3rg5Jgj+6LGl8g1YjJU+ypYJEk5gop9Wc
-	QaqOrzq5J0GFHgQElfaRN5C3LVoKnDPkm6Bnzgpvs6tba0p/QxTKU0lTbJub3sZ1fWSM
-	PPNoqnxXKGItf+1+ltK36JUC32W7wFqxdHu/k=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=PyEmjffohlt5Ggpgrkyx5DJ5vDW9qllHsJqHTJezMGXehSmMkhbpza3vdgEX30JKNF
-	8yywnyEn6FD47VsnoLrufUw6yLrl1v8Rp/Rngj4pDYzY89uQrpS3v0jBRdYJ6RSCV6za
-	dqQoWt9SDCJuPfkkhSiIAEiwux2V8GdgnffJ0=
-Received: by 10.90.11.30 with SMTP id 30mr11472689agk.42.1252350747313;
-	Mon, 07 Sep 2009 12:12:27 -0700 (PDT)
-Received: from localhost (adsl-71-146-28-171.dsl.pltn13.sbcglobal.net
-	[71.146.28.171])
-	by mx.google.com with ESMTPS id 6sm3378349agd.49.2009.09.07.12.12.25
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 07 Sep 2009 12:12:26 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 09 Sep 2009 12:31:14 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MlKRp-0006f2-UP
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Sep 2009 11:30:46 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1MlKRp-0006Ix-Lh
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Sep 2009 11:30:45 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  7 Sep 2009 12:11:44 -0700
-Message-Id: <1252350704-9530-2-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1252350704-9530-1-git-send-email-raj.khem@gmail.com>
-References: <1252350704-9530-1-git-send-email-raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.210.180
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+In-Reply-To: <200909090932.52053.holger+oe@freyther.de>
+References: <4AA60682.1020309@symas.com>
+	<200909090932.52053.holger+oe@freyther.de>
+Date: Wed, 09 Sep 2009 11:30:41 +0100
+Message-Id: <1252492241.27780.738.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 2/2] tune-xscale.inc: Use TARGET_ARCH to find endianness
+Subject: Re: wpa_supplicant and GnuTLS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,38 +41,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Sep 2009 10:17:13 -0000
+X-List-Received-Date: Wed, 09 Sep 2009 10:31:14 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-* Use TARGET_ARCH to find endianness instead of
-  SITEINFO_ENDIANNESS which is not yet evaluated.
+On Wed, 2009-09-09 at 09:32 +0200, Holger Hans Peter Freyther wrote:
+> On Tuesday 08 September 2009 09:23:46 Howard Chu wrote:
+> > On the Always Innovating TouchBook I've found that the wpa_supplicant
+> > always fails on WPA-EAP authentication in its default package, built with
+> > GnuTLS. It works fine when I rebuild it using OpenSSL. It's surprising the
+> > number of packages in the distro that depend on GnuTLS. I think you should
+> > seriously reconsider relying on such a volatile library in your builds.
+> 
+> Thanks, do you note that there are at least two things to consider? OpenSSL is  
+> considered to not be GPL compatible. So people that want to distribute 
+> binaries or don't want to advertize Eric Young can use GnuTLS or no SSL at 
+> all..
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- conf/machine/include/tune-xscale.inc |    9 ++++++---
- 1 files changed, 6 insertions(+), 3 deletions(-)
+Or yassl, I guess.  I haven't tried it myself, but in theory yassl is
+meant to be approximately API-compatible with openssl so it might not be
+too much of an upheaval to make wpa-supplicant work with it.
 
-diff --git a/conf/machine/include/tune-xscale.inc b/conf/machine/include/tune-xscale.inc
-index 7fa6447..3a6bd0e 100644
---- a/conf/machine/include/tune-xscale.inc
-+++ b/conf/machine/include/tune-xscale.inc
-@@ -1,9 +1,12 @@
--FEED_ARCH =  "${@['armv5teb', 'armv5te'][bb.data.getVar('SITEINFO_ENDIANESS', d, 1) == 'le']}"
-+# this depends on fact that for ARM the TARGET_ARCH is 'arm' for little endian and 'armeb' for bigendian
-+# this is the case as of now for all arm machines in OE.
-+
-+FEED_ARCH =  "${@['armv5teb', 'armv5te'][bb.data.getVar('TARGET_ARCH', d, 1) == 'arm']}"
- 
- TARGET_CC_ARCH = "-march=armv5te -mtune=xscale"
- TARGET_CC_KERNEL_ARCH = "-march=armv5te -mtune=xscale"
--PACKAGE_EXTRA_ARCHS += "${@['armv4b armv4tb armv5teb', 'armv4 armv4t armv5te'][bb.data.getVar('SITEINFO_ENDIANESS', d, 1) == 'le']}"
--BASE_PACKAGE_ARCH := "${@['armv5teb', 'armv5te'][bb.data.getVar('SITEINFO_ENDIANESS', d, 1) == 'le']}"
-+PACKAGE_EXTRA_ARCHS += "${@['armv4b armv4tb armv5teb', 'armv4 armv4t armv5te'][ bb.data.getVar('TARGET_ARCH', d, 1) == 'arm']}"
-+BASE_PACKAGE_ARCH = "${@['armv5teb', 'armv5te'][bb.data.getVar('TARGET_ARCH', d, 1) == 'arm']}"
- 
- # Include tune file for thumb support, it defaults to off so DISTROs can turn it on if they wish
- require conf/machine/include/tune-thumb.inc
--- 
-1.6.3.3
+That aside, though, which SSL library to use is probably something that
+ought to be a DISTRO choice rather than hard-wired.  Both OpenSSL and
+GnuTLS clearly have their downsides and neither of them is going to be
+suitable in all situations.
+
+p.
+
 
 
 
