@@ -1,31 +1,37 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jluebbe@lasnet.de>) id 1MlLh4-0005He-2a
+	(envelope-from <utx@penguin.cz>) id 1MlMDw-0006FZ-ML
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Sep 2009 13:50:37 +0200
-Received: from f053154035.adsl.alicedsl.de ([78.53.154.35]
-	helo=[192.168.178.36]) by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1MlLgE-0004E4-Lr by authid <jluebbe@lasnet.de> with cram_md5
+	Wed, 09 Sep 2009 14:24:35 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 0B3191409721
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Sep 2009 13:50:09 +0200
-From: Jan =?ISO-8859-1?Q?L=FCbbe?= <jluebbe@lasnet.de>
+	Wed,  9 Sep 2009 14:17:22 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id tfTA6q2czYdo
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  9 Sep 2009 14:17:21 +0200 (CEST)
+Received: from [10.20.1.86] (nat.scz.novell.com [213.151.88.252])
+	by ns.penguin.cz (Postfix) with ESMTP id D71BE1416BA8
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  9 Sep 2009 14:17:21 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <431b13f90909032334u268006d1t88fa437d76883be8@mail.gmail.com>
-References: <431b13f90909021248y7e0cc019pfb388fe9b3d2fc8e@mail.gmail.com>
-	<20090903113150.GA22344@rhein.zuhause.netz>
-	<431b13f90909031309l2cf9bea0rae96d4b015776682@mail.gmail.com>
-	<20090903231617.GA27116@rhein.zuhause.netz>
-	<431b13f90909032334u268006d1t88fa437d76883be8@mail.gmail.com>
-Date: Wed, 09 Sep 2009 13:49:41 +0200
-Message-Id: <1252496981.5429.15.camel@localhost>
+In-Reply-To: <1252329016-10848-3-git-send-email-ihar.hrachyshka@gmail.com>
+References: <1252329016-10848-1-git-send-email-ihar.hrachyshka@gmail.com>
+	<1252329016-10848-2-git-send-email-ihar.hrachyshka@gmail.com>
+	<1252329016-10848-3-git-send-email-ihar.hrachyshka@gmail.com>
+Date: Wed, 09 Sep 2009 14:24:05 +0200
+Message-Id: <1252499045.5887.11.camel@hammer.suse.cz>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.26.2 
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: jluebbe@lasnet.de
+X-Mailer: Evolution 2.27.90 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] add nzbget and libpar2
+Subject: Re: [PATCH] Fixed checksum for tda1004x-firmware.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,38 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Sep 2009 11:50:37 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 09 Sep 2009 12:24:35 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi!
+Ihar Hrachyshka wrote:
+> Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
+> ---
+>  conf/checksums.ini |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/conf/checksums.ini b/conf/checksums.ini
+> index 053a2ad..bb075cc 100644
+> --- a/conf/checksums.ini
+> +++ b/conf/checksums.ini
+> @@ -18299,8 +18299,8 @@ md5=7fa369bff1031acbe4ca41f03bee7d02
+>  sha256=53d2f92c3d14423b49c2ff077855cf3987d38def963c82fd26fba5de379ca540
 
-On Fri, 2009-09-04 at 08:34 +0200, Artur Wronowski wrote:
-> +EXTRA_OECONF =3D "--with-tlslib=3DOpenSSL \
-> +               --with-libcurses-libraries=3D${STAGING_LIBDIR} \
-> +               --with-libcurses-includes=3D${STAGING_INCDIR} \
-> +               --with-libpar2-libraries=3D{STAGING_INCDIR} \
-> +               --with-libpar2-includes=3D{STAGING_INCDIR} \
-> +               --with-openssl-libraries=3D{STAGING_INCDIR} \
-> +               --with-openssl-includes=3D{STAGING_INCDIR}"
+If your patch will be applied, you would probably have to review
+d5345f88b5ffdca098e0281f42f51e42ef43e79d and nearly completely revert
+plus remove unzip-native from DEPENDS.
 
-missing $ in some lines
+Warning: You cannot do it completely. There are recipes that call unzip
+on auto-extract .exe file, and you have to keep my change there.
 
-> +EXTRA_OECONF =3D "--with-tlslib=3DOpenSSL \
-> +               --with-libcurses-libraries=3D${STAGING_LIBDIR} \
-> +               --with-libcurses-includes=3D${STAGING_INCDIR} \
-> +               --with-libpar2-libraries=3D{STAGING_INCDIR} \
-> +               --with-libpar2-includes=3D{STAGING_INCDIR} \
-> +               --with-openssl-libraries=3D{STAGING_INCDIR} \
-> +               --with-openssl-includes=3D{STAGING_INCDIR}"
-
-same
-
---=20
-Jan L=C3=BCbbe <jluebbe@lasnet.de>            http://sicherheitsschwankung.=
-de
- gpg-key      1024D/D8480F2E 2002-03-20
- fingerprint  1B25 F91F 9E7B 5D4F 1282  02D6 8A83 8BE4 D848 0F2E
+-- 
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
 
