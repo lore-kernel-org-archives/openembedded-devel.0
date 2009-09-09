@@ -1,33 +1,44 @@
-Received: from [208.51.207.131] (helo=mail.2mi.com.br)
+Received: from [203.97.33.68] (helo=smtp5.clear.net.nz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jader@2mi.com.br>) id 1MlRXw-0007kp-2o
+	(envelope-from <matthew@4d-electronics.co.nz>) id 1MlVFz-0006tk-K4
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Sep 2009 20:05:35 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.2mi.com.br (Postfix) with ESMTP id 4A6BB502306F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Sep 2009 15:05:09 -0300 (BRT)
-X-Virus-Scanned: amavisd-new at 2mi.com.br
-Received: from mail.2mi.com.br ([127.0.0.1])
-	by localhost (mail.2mi.com.br [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id D66pdb14FLGl
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Sep 2009 15:05:05 -0300 (BRT)
-Received: from [192.168.15.91] (bd21096b.virtua.com.br [189.33.9.107])
-	by mail.2mi.com.br (Postfix) with ESMTPA id 8FC36502306E
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Sep 2009 15:05:05 -0300 (BRT)
-Message-ID: <4AA7EE3B.1060107@2mi.com.br>
-Date: Wed, 09 Sep 2009 15:04:43 -0300
-From: "Jader H. Silva" <jader@2mi.com.br>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Thu, 10 Sep 2009 00:03:18 +0200
+Received: from tardis.4d-electronics.co.nz
+	(202-0-56-223.cable.telstraclear.net [202.0.56.223])
+	by smtp5.clear.net.nz (CLEAR Net Mail)
+	with ESMTP id <0KPQ001TC57KC8D0@smtp5.clear.net.nz> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	10 Sep 2009 10:02:10 +1200 (NZST)
+Received: from localhost (localhost [127.0.0.1])	by tardis.4d-electronics.co.nz
+	(Postfix) with ESMTP id C70355CE258	for
+	<openembedded-devel@lists.openembedded.org>; Thu,
+	10 Sep 2009 10:02:08 +1200 (NZST)
+Received: from tardis.4d-electronics.co.nz ([127.0.0.1])
+	by localhost (tardis.4d-electronics.co.nz [127.0.0.1])
+	(amavisd-new, port 10024)	with ESMTP id N2suH5o+1+Xt	for
+	<openembedded-devel@lists.openembedded.org>; Thu,
+	10 Sep 2009 10:02:08 +1200 (NZST)
+Received: from [192.168.1.130] (unknown [192.168.1.130])
+	by tardis.4d-electronics.co.nz (Postfix) with ESMTPS id 14F8F5CE123	for
+	<openembedded-devel@lists.openembedded.org>; Thu,
+	10 Sep 2009 10:02:08 +1200 (NZST)
+Date: Thu, 10 Sep 2009 10:02:07 +1200
+From: Matthew Dombroski <matthew@4d-electronics.co.nz>
+In-reply-to: <4AA74FEE.8060809@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 208.51.207.131
-X-SA-Exim-Mail-From: jader@2mi.com.br
+Message-id: <4AA825DF.70003@4d-electronics.co.nz>
+MIME-version: 1.0
+X-Virus-Scanned: by Amavis+SpamAssassin+ClamAV and more at	4d-electronics.co.nz
+References: <4AA3ABA8.304@eukrea.com>
+	<200909061703.48206.holger+oe@freyther.de> <4AA3EE5E.70409@eukrea.com>
+	<4AA43612.8070808@4d-electronics.co.nz> <4AA74FEE.8060809@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-GB; rv:1.9.1.1) Gecko/20090715
+	Thunderbird/3.0b3
+X-SA-Exim-Connect-IP: 203.97.33.68
+X-SA-Exim-Mail-From: matthew@4d-electronics.co.nz
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: DirectFB URL has changed on stable
+Subject: Re: qt4-embedded & tslib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,69 +52,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Sep 2009 18:05:35 -0000
-Content-Type: multipart/mixed; boundary="------------000901010404000002020805"
+X-List-Received-Date: Wed, 09 Sep 2009 22:03:19 -0000
+Content-type: text/plain; charset=ISO-8859-1; format=flowed
+Content-transfer-encoding: QUOTED-PRINTABLE
 
---------------000901010404000002020805
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+On 09/09/09 18:49, Eric B=E9nard wrote:
+> Hi Matthew,
+>
+> Matthew Dombroski a =E9crit :
+>> Actually, the problem is that tslib is linked incorrectly.
+>> The pthres, linear, etc. modules are not linked to libts so theyre=
+=20
+>> missing symbols when an attempt is made to load them.
+>
+> ts_calibrate & ts_test are working fine : doesn't is mean the modul=
+es=20
+> are properly linked ?
 
-DirectFB recipe in stable branch points to the following URL: 
-http://directfb.org/downloads/Core/DirectFB-1.2.7.tar.gz
-But DirectFB URL has changed to: 
-http://directfb.org/downloads/Core/DirectFB-1.2/DirectFB-1.2.7.tar.gz
+ldd says not:
 
-There's a patch attached that fix this issue.
+$ ldd dejitter.so
+libc.so.6 =3D> /lib/libc.so.6 (0x4000a000)
+/lib/ld-linux.so.3 (0x2a000000)
 
-Att.
-Jader H. Silva
-2MI Tecnologia
+With my patch:
 
---------------000901010404000002020805
-Content-Type: text/x-patch;
- name="0001-Fix-directfb-url.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
- filename="0001-Fix-directfb-url.patch"
+$ ldd dejitter.so
+libts-1.0.so.0 =3D> /usr/lib/libts-1.0.so.0 (0x4000a000)
+libdl.so.2 =3D> /lib/libdl.so.2 (0x40014000)
+libc.so.6 =3D> /lib/libc.so.6 (0x4001f000)
+/lib/ld-linux.so.3
 
-From 29974323c7a8d7fb9d151b024d5ba8014c0d1dad Mon Sep 17 00:00:00 2001
-From: Jader Henrique da Silva <jader@2mi.com.br>
-Date: Wed, 9 Sep 2009 14:59:28 -0300
-Subject: [PATCH] Fix directfb url
+I'm not sure why Qt is the only place it fails (unlinked).
+My opinion is that linking properly is technically better.
 
----
- conf/checksums.ini                 |    2 +-
- recipes/directfb/directfb_1.2.7.bb |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 74bb1cb..99fdc88 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -214,7 +214,7 @@ sha256=f12ec5f0864d85268a8d67e4919cb7f3d7f0e06ed6cc278c952f6c342673d931
- md5=caea8bcfc9c1d391e56d85e437005a5d
- sha256=0875e553a17fe65e920ad810a67aa6faca582c53476d8dc75880a6b3da625d0b
- 
--[http://directfb.org/downloads/Core/DirectFB-1.2.7.tar.gz]
-+[http://directfb.org/downloads/Core/DirectFB-1.2/DirectFB-1.2.7.tar.gz]
- md5=59ca16f600e96c8c104a485ff7c322c6
- sha256=80ab8e34246a280bc380020cf331bcc0014cf816380cee3935ad455c108e661e
- 
-diff --git a/recipes/directfb/directfb_1.2.7.bb b/recipes/directfb/directfb_1.2.7.bb
-index be6a6da..8e5d5cf 100644
---- a/recipes/directfb/directfb_1.2.7.bb
-+++ b/recipes/directfb/directfb_1.2.7.bb
-@@ -6,7 +6,7 @@ PR = "r0"
- DEPENDS += "sysfsutils"
- 
- SRC_URI = " \
--    http://directfb.org/downloads/Core/DirectFB-${PV}.tar.gz \
-+    http://directfb.org/downloads/Core/DirectFB-1.2/DirectFB-${PV}.tar.gz \
-     file://directfb-1.2.x-fix-pkgconfig-cflags.patch;patch=1 \
-     file://mkdfiff.patch;patch=1 \
-     file://dont-use-linux-config.patch;patch=1 \
--- 
-1.6.0.4
+~Matt
 
 
---------------000901010404000002020805--
+
+
