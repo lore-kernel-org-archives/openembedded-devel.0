@@ -1,42 +1,45 @@
-Received: from [209.85.221.190] (helo=mail-qy0-f190.google.com)
+Received: from [209.85.211.182] (helo=mail-yw0-f182.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1MlHak-0002Gz-8F
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1MlHbz-0002Kb-Ma
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Sep 2009 09:27:49 +0200
-Received: by qyk28 with SMTP id 28so3482255qyk.28
+	Wed, 09 Sep 2009 09:29:06 +0200
+Received: by ywh12 with SMTP id 12so5756314ywh.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Sep 2009 00:27:19 -0700 (PDT)
+	Wed, 09 Sep 2009 00:28:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=YBMl02/ZX+pT4SWiUElKQ9NGJxC0QkSuPgyGcJvlitQ=;
-	b=RwlXnoIg96wsWuPW9y/EyQ99mp+YfSGrjEXey1brdhQH13YDP/EM74dhWaIszNF9h8
-	Ok60UmQyuq7K70mzVcmPIiULkPQYSOD5C0Gpf87XVPa4BWp8Wzb0rXU9I0sbmL40DtcB
-	9wZEFMULIzcQuQKYaj40YenFp5gvgRYmIWTHE=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=FOZe6RCK+WC+1cdZTEd3PnC1xWesNno+x2lEmOfSlxE=;
+	b=w0RFAtdefJLX7NT5/lBrAEvqTAE5w5NJcyxXnvkZ24JhWEImp9B031B7S8fMb/MCxS
+	05EJrn+Rrtm5OmaHYhBDePXFhXFo9TZsix2//CytZsJbMKG2BH1I5mJ2zBrY2CbMtEjy
+	7+v14aNFIxh6Nllox8Xrp3V/eE6ubGjM4Blqs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=i0R2P3gSkrmfwgJ4iovuVh07oB8zz8MMl3zfges2Vn8M11pdw+F5TUZpH3DZPwuKon
-	rDzv+VfNEduBgmYa7PTebvhlyIZgq/4f1uxVu3vMZf4H7fUrPMnu+nk+FeuPi3QVs39b
-	UB+7m8kIBsVpC2Z0hqHZjzSzzXjLVNGOGRQ5Q=
-Received: by 10.224.117.13 with SMTP id o13mr10820038qaq.129.1252481237624;
-	Wed, 09 Sep 2009 00:27:17 -0700 (PDT)
-Received: from ?10.0.0.19? (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id 6sm345014qwd.3.2009.09.09.00.27.15
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=MzSBa57zTprTQQGQxJGCHVXnsBJ6gzoWspUj1JpBJlNOYfsf4YSUn/xZEFiuY4Jm7j
+	379PvUZrqypxdaUpTetJu6Xt5GxBRwImjxCDvd+MFZIDxqPKa2zyi6Aq54quWoUMjnE5
+	nucauBFY4d6Cevz6F+HATyug7MC9Hl2sNnKv4=
+Received: by 10.150.236.10 with SMTP id j10mr4957623ybh.313.1252481316643;
+	Wed, 09 Sep 2009 00:28:36 -0700 (PDT)
+Received: from localhost.minsk.epam.com (cpmsq.epam.com [217.21.56.2])
+	by mx.google.com with ESMTPS id 20sm458054ywh.2.2009.09.09.00.28.34
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 09 Sep 2009 00:27:16 -0700 (PDT)
-Message-ID: <4AA758CC.7030505@gmail.com>
-Date: Wed, 09 Sep 2009 16:57:08 +0930
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090812)
-MIME-Version: 1.0
+	Wed, 09 Sep 2009 00:28:35 -0700 (PDT)
+Date: Wed, 9 Sep 2009 10:28:05 +0300
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.221.190
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+Message-ID: <20090909072805.GB19070@localhost.minsk.epam.com>
+References: <fce2a370908310326i1f784f25qd4ed91d7864ef38a@mail.gmail.com>
+	<1252439456.8256.2.camel@utx.utx.cz>
+MIME-Version: 1.0
+In-Reply-To: <1252439456.8256.2.camel@utx.utx.cz>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.211.182
+X-SA-Exim-Mail-From: ihar.hrachyshka@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] Fix netsurf touchscreen behaviour.
+Subject: Re: Unzip missing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,66 +53,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Sep 2009 07:27:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 09 Sep 2009 07:29:07 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-As per http://vlists.pepperfish.net/pipermail/netsurf-dev-netsurf-browser.org/2009-September/001588.html
+On Tue, Sep 08, 2009 at 09:50:56PM +0200, Stanislav Brabec wrote:
+> Ihar Hrachyshka wrote:
+> > Hello!
+> > I encountered the following error when unpacking faad2 recipe on bare
+> > debian lenny system (stable/2009 tree):
+> > sh: unzip: command not found
+> > The problem is that there is no 'unzip' utility on the host. I tried
+> > to specify DEPENDS = "unzip-native" for faad2 recipe but it somehow
+> > doesn't wait for unzip-native to be built. Any suggestions on how to
+> > make faad2 unpack task wait for unzip-native staging? Or should we
+> > just put unzip into list of required host software in sanity.bbclass?
+> > Thanks for help.
+> 
+> Here is a fix per-package:
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=d5345f88b5ffdca098e0281f42f51e42ef43e79d
+> 
+> There can be even more affected packages.
+> 
 
-Signed-off-by: Graham Gower <graham.gower@gmail.com>
----
- recipes/netsurf/netsurf-2.1/touchscreen.patch |   21 +++++++++++++++++++++
- recipes/netsurf/netsurf_2.1.bb                |    3 ++-
- 2 files changed, 23 insertions(+), 1 deletions(-)
- create mode 100644 recipes/netsurf/netsurf-2.1/touchscreen.patch
-
-diff --git a/recipes/netsurf/netsurf-2.1/touchscreen.patch b/recipes/netsurf/netsurf-2.1/touchscreen.patch
-new file mode 100644
-index 0000000..a6c25dc
---- /dev/null
-+++ b/recipes/netsurf/netsurf-2.1/touchscreen.patch
-@@ -0,0 +1,21 @@
-+--- netsurf.orig/gtk/gtk_window.c
-++++ netsurf/gtk/gtk_window.c
-+@@ -220,6 +220,7 @@
-+ 				GDK_BUTTON_PRESS_MASK |
-+ 				GDK_BUTTON_RELEASE_MASK |
-+ 				GDK_POINTER_MOTION_MASK |
-++				GDK_POINTER_MOTION_HINT_MASK |
-+ 				GDK_KEY_PRESS_MASK |
-+ 				GDK_KEY_RELEASE_MASK);
-+ 	GTK_WIDGET_SET_FLAGS(GTK_WIDGET(g->drawing_area), GTK_CAN_FOCUS);
-+@@ -344,6 +345,10 @@
-+ 	bool shift = event->state & GDK_SHIFT_MASK;
-+ 	bool ctrl = event->state & GDK_CONTROL_MASK;
-+ 
-++	if ((abs(event->x - g->last_x) < 5) && (abs(event->y - g->last_y) < 5))
-++		/* necessary for touch screens */
-++		return FALSE;
-++
-+    	if (g->mouse->state & BROWSER_MOUSE_PRESS_1){
-+ 		/* Start button 1 drag */
-+ 		browser_window_mouse_click(g->bw, BROWSER_MOUSE_DRAG_1,
-diff --git a/recipes/netsurf/netsurf_2.1.bb b/recipes/netsurf/netsurf_2.1.bb
-index 849a8e5..68da708 100644
---- a/recipes/netsurf/netsurf_2.1.bb
-+++ b/recipes/netsurf/netsurf_2.1.bb
-@@ -7,11 +7,12 @@ LICENSE = "GPLv2"
- SRC_URI = "http://www.netsurf-browser.org/downloads/releases/netsurf-${PV}-src.tar.gz \
- 	   file://fix_makefile.patch;patch=1 \
- 	   file://debugxml_fix.patch;patch=1 \
-+	   file://touchscreen.patch;patch=1 \
- 	   file://netsurf.png \
- 	   file://netsurf.desktop \
- 	   file://Makefile.config"
- 
--PR = "r1"
-+PR = "r2"
- 
- # Workaround for 2.1 tarball (unpacks into netsurf/, not netsurf-2.1/ )
- S = "${WORKDIR}/netsurf"
--- 
-1.6.0.3
-
+I send unzip autodetection fix two days ago but list was in outage.
+Gmail should resend it in a while I think.
 
 
