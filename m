@@ -1,38 +1,22 @@
-Received: from [209.85.220.222] (helo=mail-fx0-f222.google.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1MlBwW-0002L8-RP
-	for openembedded-devel@openembedded.org; Wed, 09 Sep 2009 03:25:55 +0200
-Received: by fxm22 with SMTP id 22so435543fxm.12
-	for <openembedded-devel@openembedded.org>;
-	Tue, 08 Sep 2009 18:25:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=vr8DNDmHqaJlndxflx+HgI2vCp8rvC3NBU9SY2VRM8Q=;
-	b=uNftUAz1R1O0KFlyffUgdp8sj0NvIyMUfPxRBNAgkwKzl8bbiLLiGD0u6XiAYZVYa+
-	gGILHOxvzaZ+NlfMxQg0WI0L0UMcxoems4fonVLEX6GfLqRYRMbvVOZLAZcJwE4P+9do
-	1eNmrNAOmxDi+K5tq6Ak3AUpNoRHxf8fqzkxg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=jNlHcQiT4R0/UL6GCZ0o6Azs8pNOwao23/qf+RkVMpDLI0530oG+MMZBOPzCvXh/JC
-	ajITNFzatDvng9Zqj8hlNF7FoUzeOt3wL9S+yCHk87M5EZFh1kSrWaJSZErZ5RmvekhH
-	H2WG41stNXGyEOXcNJ/umOLuSwgipgpSeiGw8=
-Received: by 10.103.48.19 with SMTP id a19mr6159003muk.136.1252329014142;
-	Mon, 07 Sep 2009 06:10:14 -0700 (PDT)
-Received: from localhost (cpmsq.epam.com [217.21.56.2])
-	by mx.google.com with ESMTPS id n7sm11509271mue.6.2009.09.07.06.10.12
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 07 Sep 2009 06:10:12 -0700 (PDT)
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
-To: openembedded-devel@openembedded.org
-Date: Mon,  7 Sep 2009 16:10:13 +0300
-Message-Id: <1252329016-10848-1-git-send-email-ihar.hrachyshka@gmail.com>
-X-Mailer: git-send-email 1.6.4.2
-X-SA-Exim-Connect-IP: 209.85.220.222
-X-SA-Exim-Mail-From: ihar.hrachyshka@gmail.com
+	(envelope-from <philip@balister.org>) id 1MlCe0-0004lc-Cw
+	for openembedded-devel@openembedded.org; Wed, 09 Sep 2009 04:10:51 +0200
+Received: (qmail 23731 invoked by uid 1003); 9 Sep 2009 02:10:21 -0000
+Received: from localhost (HELO localhost.localdomain)
+	(philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 9 Sep 2009 02:10:20 -0000
+Message-ID: <4AA70E78.10109@balister.org>
+Date: Tue, 08 Sep 2009 22:10:00 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] Fixed concurrency problem for ZIP packed recipes.
+Subject: List outage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,41 +30,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Sep 2009 01:25:56 -0000
+X-List-Received-Date: Wed, 09 Sep 2009 02:10:51 -0000
+X-Groupsio-MsgNum: 13013
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=sha1; boundary="------------ms060407080806030303040808"
 
-The problem occured when unzip-native is not yet staged, and ZIP
-archive unpacking already started resulting in failed do_unpack task.
-Added NEED_UNZIP_FOR_UNPACK variable to use in recipes which do_unpack
-with unzip utility but doesn't have '.zip' in SRC_URI (f.e. .EXE
-windows self-extraction binaries).
+--------------ms060407080806030303040808
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
----
- classes/base.bbclass |    9 +++++++++
- 1 files changed, 9 insertions(+), 0 deletions(-)
+Sorry about the list outage. The linuxtogo server moved and I forgot 
+that machine handles the oe list email. Things should be back to normal now.
 
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index d29ba4b..bdee5b2 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -1187,6 +1187,15 @@ def base_after_parse(d):
-         depends = depends + " git-native:do_populate_staging"
-         bb.data.setVarFlag('do_fetch', 'depends', depends, d)
- 
-+    # unzip-native should already be staged before unpacking ZIP recipes
-+    need_unzip = bb.data.getVar('NEED_UNZIP_FOR_UNPACK', d, 1)
-+    src_uri = bb.data.getVar('SRC_URI', d, 1)
-+
-+    if ".zip" in src_uri or need_unzip == "1":
-+        depends = bb.data.getVarFlag('do_unpack', 'depends', d) or ""
-+        depends = depends + " unzip-native:do_populate_staging"
-+        bb.data.setVarFlag('do_unpack', 'depends', depends, d)
-+
-     # 'multimachine' handling
-     mach_arch = bb.data.getVar('MACHINE_ARCH', d, 1)
-     pkg_arch = bb.data.getVar('PACKAGE_ARCH', d, 1)
--- 
-1.5.6.5
+Philip
 
+--------------ms060407080806030303040808
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
 
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
+ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
+OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
+IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
+9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
+Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
+MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
+EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
+V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
+LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
+AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
+ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
+ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
+CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
+UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
+Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
+VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
+bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
+SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
+n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
+R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
+/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
+kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
+Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
+Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
+urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
+AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
+cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
+MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
+IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
+aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
+JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
+ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
+pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
+8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
+ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
+oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
+CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
+BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
+HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
+rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
+WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
+ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
+BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDkwOTAy
+MTAwMFowIwYJKoZIhvcNAQkEMRYEFNZoxyrpYcGjmbE67cdhz3co7twWMFIGCSqGSIb3DQEJDzFF
+MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
+CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
+aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
+ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
+CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
+VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
+/DANBgkqhkiG9w0BAQEFAASCAQCDh8Btw7CZqhbWpOLANSwCqud0Iq3UYRX5rkTCk5ClhWwV7Aw9
+a3Osh8HmGMA9zoxuwle5EU0X7IDqTh6ycbkpG5G88gwo+0QChBOgpOMd9lCiZrZ1Ckfp9HG74+IA
+vEBr59Qr6u/GCigvjgkCrGIZ6fMdAH/jJIb9KXkwGuseEkFuTz1/dswu7oYdDDwdj0kKDkyrvwt0
+DCnOQO39Jr+Lz6u6g4dnYMmmWiCZxajjf6q52xrL+JdefvY44W8wfNiyLwhLMgVOJao9gFCYskFF
+rP0omI/hUftQfMLiO+tub0oMmuI75IXtAkamgxxXjHkcZ9J4t42hcM0JdGy5VdurAAAAAAAA
 
+--------------ms060407080806030303040808--
