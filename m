@@ -1,27 +1,33 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Mlctm-0003B0-00
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Sep 2009 08:12:53 +0200
-Received: from tamarin.localnet (123-192-182-244.dynamic.kbronet.com.tw
-	[123.192.182.244])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 7320A1B10C05
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Sep 2009 06:18:02 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Sep 2009 08:12:14 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.1; i686; ; )
-References: <1252350704-9530-1-git-send-email-raj.khem@gmail.com>
-	<1252350704-9530-2-git-send-email-raj.khem@gmail.com>
-In-Reply-To: <1252350704-9530-2-git-send-email-raj.khem@gmail.com>
+Received: from [213.186.62.213] (helo=30.mail-out.ovh.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1Mld9c-0003hs-7j
+	for openembedded-devel@openembedded.org; Thu, 10 Sep 2009 08:29:15 +0200
+Received: (qmail 31136 invoked by uid 503); 10 Sep 2009 06:28:56 -0000
+Received: from b6.ovh.net (HELO mail30.ha.ovh.net) (213.186.33.56)
+	by 30.mail-out.ovh.net with SMTP; 10 Sep 2009 06:28:56 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 10 Sep 2009 06:26:37 -0000
+Received: from tal33-2-82-228-175-43.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.228.175.43)
+	by ns0.ovh.net with SMTP; 10 Sep 2009 06:26:36 -0000
+Message-ID: <4AA89C9C.5080207@eukrea.com>
+Date: Thu, 10 Sep 2009 08:28:44 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-Message-Id: <200909100812.14300.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+To: openembedded-devel@lists.openembedded.org
+References: <4AA3ABA8.304@eukrea.com>
+	<4AA74FEE.8060809@eukrea.com>	<4AA825DF.70003@4d-electronics.co.nz>	<200909100412.56615.holger+oe@freyther.de>
+	<4AA87037.3030708@4d-electronics.co.nz>
+In-Reply-To: <4AA87037.3030708@4d-electronics.co.nz>
+X-Ovh-Tracer-Id: 11248865969866779977
+X-Ovh-Remote: 82.228.175.43 (tal33-2-82-228-175-43.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 213.186.62.213
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 2/2] tune-xscale.inc: Use TARGET_ARCH to find endianness
+Subject: Re: qt4-embedded & tslib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,48 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Sep 2009 06:12:53 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Sep 2009 06:29:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Monday 07 September 2009 21:11:44 Khem Raj wrote:
-> * Use TARGET_ARCH to find endianness instead of
->   SITEINFO_ENDIANNESS which is not yet evaluated.
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Acked-by: Holger Hans Peter Freyther <zecke@selfish.org>
+Matthew Dombroski a écrit :
+> On 10/09/09 14:12, Holger Hans Peter Freyther wrote:
+>> Can you provide us with the output of the failure?
+>>    
+> 
+> runtime failure:
+> 
+> # app  -qws
+> Couldnt load module pthres
+> QWSTslibMouseHandlerPrivate: ts_config() failed with error: 'No such 
+> file or directory'
+> Please check your tslib installation!
+> 
+same thing here. I'll send you the strace later.
 
-> ---
->  conf/machine/include/tune-xscale.inc |    9 ++++++---
->  1 files changed, 6 insertions(+), 3 deletions(-)
->
-> diff --git a/conf/machine/include/tune-xscale.inc
-> b/conf/machine/include/tune-xscale.inc index 7fa6447..3a6bd0e 100644
-> --- a/conf/machine/include/tune-xscale.inc
-> +++ b/conf/machine/include/tune-xscale.inc
-> @@ -1,9 +1,12 @@
-> -FEED_ARCH =  "${@['armv5teb',
-> 'armv5te'][bb.data.getVar('SITEINFO_ENDIANESS', d, 1) == 'le']}" +# this
-> depends on fact that for ARM the TARGET_ARCH is 'arm' for little endian and
-> 'armeb' for bigendian +# this is the case as of now for all arm machines in
-> OE.
-> +
-> +FEED_ARCH =  "${@['armv5teb', 'armv5te'][bb.data.getVar('TARGET_ARCH', d,
-> 1) == 'arm']}"
->
->  TARGET_CC_ARCH = "-march=armv5te -mtune=xscale"
->  TARGET_CC_KERNEL_ARCH = "-march=armv5te -mtune=xscale"
-> -PACKAGE_EXTRA_ARCHS += "${@['armv4b armv4tb armv5teb', 'armv4 armv4t
-> armv5te'][bb.data.getVar('SITEINFO_ENDIANESS', d, 1) == 'le']}"
-> -BASE_PACKAGE_ARCH := "${@['armv5teb',
-> 'armv5te'][bb.data.getVar('SITEINFO_ENDIANESS', d, 1) == 'le']}"
-> +PACKAGE_EXTRA_ARCHS += "${@['armv4b armv4tb armv5teb', 'armv4 armv4t
-> armv5te'][ bb.data.getVar('TARGET_ARCH', d, 1) == 'arm']}"
-> +BASE_PACKAGE_ARCH = "${@['armv5teb',
-> 'armv5te'][bb.data.getVar('TARGET_ARCH', d, 1) == 'arm']}"
->
->  # Include tune file for thumb support, it defaults to off so DISTROs can
-> turn it on if they wish require conf/machine/include/tune-thumb.inc
+Eric
 
 
