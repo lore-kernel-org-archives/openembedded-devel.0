@@ -1,28 +1,48 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [209.85.211.187] (helo=mail-yw0-f187.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Mlder-0005LJ-Nf
+	(envelope-from <ihar.hrachyshka@gmail.com>) id 1MlePZ-0007Z5-It
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Sep 2009 09:01:32 +0200
-Received: from tamarin.localnet (123-192-182-244.dynamic.kbronet.com.tw
-	[123.192.182.244])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 0C9251B10C04
+	Thu, 10 Sep 2009 09:49:48 +0200
+Received: by ywh17 with SMTP id 17so978911ywh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Sep 2009 07:06:40 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Thu, 10 Sep 2009 00:49:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=bKsKV8msjVhuEgbAJBrmXqM260vstrNtPqgSkZENuVQ=;
+	b=T4ta+JxtmqJY1/g/HI5H7OsM1Un79KN7nF4akNkoALPMk3omFCvSpQUz3xjq3w4sc+
+	4KrABqQS7e8q7SZdXOa4ebjPZkAU8ePP5PEfhrwiPS90QiPNUKV6qcFXOfff1KJImsZ6
+	cch77ALQRXrZO1k9aEJDlUKJYSJs/8+GJBaVI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=qtlU8761pXtF002+iSWichFdw8ZbhVxw/tCTWIn0LzXQAaANPWuqhv1oivu28R0ObX
+	sc0aPuLIQ0sBD8oTKU7gQLSCnS6T6H3MFSM89Sii77CqMFXVbQNi8hp/8Fysl1BtmGmx
+	NEngIr++vSPgFTYNxljRhrXFNXL7VeWjogUUo=
+Received: by 10.150.183.11 with SMTP id g11mr2197614ybf.50.1252568957640;
+	Thu, 10 Sep 2009 00:49:17 -0700 (PDT)
+Received: from localhost.minsk.epam.com (cpmsq.epam.com [217.21.56.2])
+	by mx.google.com with ESMTPS id 23sm401043ywh.7.2009.09.10.00.49.15
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 10 Sep 2009 00:49:16 -0700 (PDT)
+Date: Thu, 10 Sep 2009 10:48:45 +0300
+From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Sep 2009 09:00:44 +0200
-User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.1; i686; ; )
-References: <1244836535.4151.140.camel@lenovo.internal.reciva.com>
-	<19c1b8a90906231030i3e810672j13ca95b56c647022@mail.gmail.com>
-	<1245779214.29153.376.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1245779214.29153.376.camel@lenovo.internal.reciva.com>
+Message-ID: <20090910074845.GB25839@localhost.minsk.epam.com>
+References: <1252329016-10848-1-git-send-email-ihar.hrachyshka@gmail.com>
+	<1252329016-10848-2-git-send-email-ihar.hrachyshka@gmail.com>
+	<1252329016-10848-3-git-send-email-ihar.hrachyshka@gmail.com>
+	<1252329016-10848-4-git-send-email-ihar.hrachyshka@gmail.com>
+	<1252501527.27780.755.camel@mill.internal.reciva.com>
 MIME-Version: 1.0
-Message-Id: <200909100900.44916.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+In-Reply-To: <1252501527.27780.755.camel@mill.internal.reciva.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.211.187
+X-SA-Exim-Mail-From: ihar.hrachyshka@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [rfc] change default for BUILD_OPTIMIZATION, remove	spurious 	assignments
+Subject: Re: [PATCH] Use NEED_UNZIP_FOR_UNPACK variable for some recipes.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,29 +56,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Sep 2009 07:01:32 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 10 Sep 2009 07:49:48 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tuesday 23 June 2009 19:46:54 Phil Blundell wrote:
-> On Tue, 2009-06-23 at 10:30 -0700, Khem Raj wrote:
-> >  -frename-registers was a workaround to get past a ARM GCC ICE in 4.2
-> > IIRC we should get rid of it.
->
-> No, -frename-registers is an optimisation in its own right.  I think we
-> probably want to keep that.  You might be thinking of the
-> -fno-rename-registers that we do use for some packages to avoid an ice
-> on arm with gcc 3.4.
->
-> > -fexpensive-optimizations and -fomit-frame-pointer are passed by
-> > default at O2 so we should get rid of them too.
->
-> Is that true on all targets?  I didn't think that -O2 implied
-> -fomit-frame-pointer on arm.
+On Wed, Sep 09, 2009 at 02:05:27PM +0100, Phil Blundell wrote:
+> On Mon, 2009-09-07 at 16:10 +0300, Ihar Hrachyshka wrote:
+> > +NEED_UNZIP_FOR_UNPACK=1
+> 
+> Why is this better than just declaring an explicit dependency of
+> do_unpack on unzip-native?  It's not obvious to me that the extra level
+> of abstraction buys much in this situation.
+> 
+> p.
+> 
 
-=46rom my  testing on recent gcc... it is turned on by default.
-
-z.
+We can drob the variable then. What about .zip extension auto detection?
 
 
