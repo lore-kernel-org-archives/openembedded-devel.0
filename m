@@ -1,48 +1,38 @@
-Received: from [209.85.211.187] (helo=mail-yw0-f187.google.com)
+Received: from [72.14.220.155] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ihar.hrachyshka@gmail.com>) id 1MlePZ-0007Z5-It
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Mlg0q-0006YT-HC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Sep 2009 09:49:48 +0200
-Received: by ywh17 with SMTP id 17so978911ywh.3
+	Thu, 10 Sep 2009 11:32:23 +0200
+Received: by fg-out-1718.google.com with SMTP id e21so1373984fga.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Sep 2009 00:49:17 -0700 (PDT)
+	Thu, 10 Sep 2009 02:31:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=bKsKV8msjVhuEgbAJBrmXqM260vstrNtPqgSkZENuVQ=;
-	b=T4ta+JxtmqJY1/g/HI5H7OsM1Un79KN7nF4akNkoALPMk3omFCvSpQUz3xjq3w4sc+
-	4KrABqQS7e8q7SZdXOa4ebjPZkAU8ePP5PEfhrwiPS90QiPNUKV6qcFXOfff1KJImsZ6
-	cch77ALQRXrZO1k9aEJDlUKJYSJs/8+GJBaVI=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=lmqrENwpCfxOevy1OgXfOoRRpRAI8i2II/5dasjOOXo=;
+	b=Yv/xj2TBDIicnrdl0xmcPlX96+3gbkeZhdtqNdMsGTem89yd5vosMA/T4dFqE0K1sB
+	CeLaN1z3aF6rTZ6oka71DD+qkNuEiIPv2gVT9+OKEZ6TyvOBNZZ+6rd5uUIZQvaqme9K
+	D7nLAh3WJuiLCbzkPlJ6I4Wc8t/8JX49spywA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=qtlU8761pXtF002+iSWichFdw8ZbhVxw/tCTWIn0LzXQAaANPWuqhv1oivu28R0ObX
-	sc0aPuLIQ0sBD8oTKU7gQLSCnS6T6H3MFSM89Sii77CqMFXVbQNi8hp/8Fysl1BtmGmx
-	NEngIr++vSPgFTYNxljRhrXFNXL7VeWjogUUo=
-Received: by 10.150.183.11 with SMTP id g11mr2197614ybf.50.1252568957640;
-	Thu, 10 Sep 2009 00:49:17 -0700 (PDT)
-Received: from localhost.minsk.epam.com (cpmsq.epam.com [217.21.56.2])
-	by mx.google.com with ESMTPS id 23sm401043ywh.7.2009.09.10.00.49.15
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 10 Sep 2009 00:49:16 -0700 (PDT)
-Date: Thu, 10 Sep 2009 10:48:45 +0300
-From: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090910074845.GB25839@localhost.minsk.epam.com>
-References: <1252329016-10848-1-git-send-email-ihar.hrachyshka@gmail.com>
-	<1252329016-10848-2-git-send-email-ihar.hrachyshka@gmail.com>
-	<1252329016-10848-3-git-send-email-ihar.hrachyshka@gmail.com>
-	<1252329016-10848-4-git-send-email-ihar.hrachyshka@gmail.com>
-	<1252501527.27780.755.camel@mill.internal.reciva.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=vs2sniDkHR1LxBnULtSb5/2iX2S7BWBaGa22GkPtdaZhb91anlmb0jmSEpXqMs2LLI
+	IPyCOq0W4OKPktWpQPO/FR7fXr4MWaRJ1cCt8E60IPlvWcGlb5LYX2gH4/sgzP5PsGQF
+	49qXut6bapc/l+vv71IZuZBXCn6dxdTLw2zpI=
 MIME-Version: 1.0
-In-Reply-To: <1252501527.27780.755.camel@mill.internal.reciva.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.211.187
-X-SA-Exim-Mail-From: ihar.hrachyshka@gmail.com
+Received: by 10.239.145.11 with SMTP id q11mr140314hba.98.1252575114923; Thu, 
+	10 Sep 2009 02:31:54 -0700 (PDT)
+In-Reply-To: <1252350704-9530-1-git-send-email-raj.khem@gmail.com>
+References: <1252350704-9530-1-git-send-email-raj.khem@gmail.com>
+Date: Thu, 10 Sep 2009 11:31:54 +0200
+Message-ID: <c384c5ea0909100231q56d54c1dmabd0b229485e218b@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 72.14.220.155
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Use NEED_UNZIP_FOR_UNPACK variable for some recipes.
+Subject: Re: [PATCH 1/2] tar_1.22.bb: Add recipe for 1.22 release.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,21 +46,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Sep 2009 07:49:48 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 10 Sep 2009 09:32:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Sep 09, 2009 at 02:05:27PM +0100, Phil Blundell wrote:
-> On Mon, 2009-09-07 at 16:10 +0300, Ihar Hrachyshka wrote:
-> > +NEED_UNZIP_FOR_UNPACK=1
-> 
-> Why is this better than just declaring an explicit dependency of
-> do_unpack on unzip-native?  It's not obvious to me that the extra level
-> of abstraction buys much in this situation.
-> 
-> p.
-> 
+On Mon, Sep 7, 2009 at 9:11 PM, Khem Raj<raj.khem@gmail.com> wrote:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-We can drob the variable then. What about .zip extension auto detection?
+Acked-by: Leon Woestenberg <leon@sidebranch.com>
+-- 
+Leon
 
 
