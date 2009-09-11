@@ -1,38 +1,38 @@
-Received: from [74.125.92.144] (helo=qw-out-1920.google.com)
+Received: from [74.125.92.149] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MmDY8-0007kV-Hz
+	(envelope-from <raj.khem@gmail.com>) id 1MmDf1-00049O-ML
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Sep 2009 23:20:59 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so490090qwk.36
+	Fri, 11 Sep 2009 23:28:06 +0200
+Received: by qw-out-1920.google.com with SMTP id 4so491534qwk.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Sep 2009 14:20:29 -0700 (PDT)
+	Fri, 11 Sep 2009 14:27:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type;
-	bh=xmjA0nMXUTNTzOSyLY3bevmOWK8tCbVNawUddrCN/Tw=;
-	b=jxXCN0YOYqZTFhHRKd479x44iV6UiFkNiifEpvJ6iblyyDJiRlDcRyN63rTDfPowFA
-	rUz4+zzj4XtHJbLqx9xThUXitxBKCpwTFun0HQDSfzBkKK0eXANAoOD2hsaIp5uB+tgH
-	wWTHc/1xuM8aLB8YMB8pZp86iZiAvpTTCB7jQ=
+	bh=G314Ztm1ObvSIO1ZM+A4QUPsF5nIrim5OgICyk/G+uc=;
+	b=drI2s7QeKoGlV4A+wTBxhwciGvEtxCKSr0IHNKm2tR0m3sg7nXoOH7TrjKD3mh83UT
+	lBY8sEicFvZnhfuie+drARqDVXrU7mer2/xVHerPOr4LHq+smAEZxm41zV1/L+2N1cIU
+	nG3corYhyYa31WiqmEWk9fHEdqg13QUBL9ocA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=ixMUlaAzOcUkrZ7CJGy9S86nWwY1a+YW3aZxgKOKojuRmC3uZFUoRflvSCO1VJNzkp
-	NdYp2SSnO4DpoATbTDTmhMf1pySLfCEJQbXzp94DS96818YE7hkTzUsA2A5mT3emrvAP
-	5x6stk6NjKb8WD6lt+ycq7dRHsplGtw0l28RQ=
+	b=mCZen7c079Q+fE0i7KQ8zRABBbhzAEPLj30whxL0/i8WnRkndi6UJzngPtzVSnkn0d
+	y6sctlzPzmEdOIlSox9INgv37Z9V2JpyxnduQCQfFn+NpYjVMuKOTo2FxDUg6iRYE+yT
+	jq6R/FrBpaTP6F5C704junuDREMfvJpGKk7xw=
 MIME-Version: 1.0
-Received: by 10.229.34.143 with SMTP id l15mr1497789qcd.80.1252704029553; Fri, 
-	11 Sep 2009 14:20:29 -0700 (PDT)
-In-Reply-To: <4AA9C51E.3030906@gmail.com>
-References: <4AA9C51E.3030906@gmail.com>
-Date: Fri, 11 Sep 2009 14:20:29 -0700
-Message-ID: <19c1b8a90909111420u756a3a9bxe919f84be8f301e6@mail.gmail.com>
+Received: by 10.229.39.201 with SMTP id h9mr1505265qce.4.1252704456201; Fri, 
+	11 Sep 2009 14:27:36 -0700 (PDT)
+In-Reply-To: <4AA9C54B.5050707@gmail.com>
+References: <4AA9C54B.5050707@gmail.com>
+Date: Fri, 11 Sep 2009 14:27:36 -0700
+Message-ID: <19c1b8a90909111427w476f1e78xcf4f553889d22f65@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.92.144
+X-SA-Exim-Connect-IP: 74.125.92.149
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Fix t1lib dependency.
+Subject: Re: [PATCH] Fix lesstif compilation.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,56 +46,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Sep 2009 21:20:59 -0000
+X-List-Received-Date: Fri, 11 Sep 2009 21:28:06 -0000
 Content-Type: text/plain; charset=UTF-8
 
 On 9/10/09, Graham Gower <graham.gower@gmail.com> wrote:
-> Failed with:
+> Failed like this:
 >
-> | mipsel-angstrom-linux-libtool: compile:  mipsel-angstrom-linux-gcc -c
-> -isystem/home/grg/oe/tmp/staging/mipsel-angstrom-linux/usr/include
+> | /bin/sh ../mipsel-angstrom-linux-libtool --tag=CC   --mode=link
+> mipsel-angstrom-linux-gcc
 > -isystem/home/grg/oe/tmp/staging/mipsel-angstrom-linux/usr/include
 > -fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2 -ggdb3
-> -fno-strength-reduce -DT1LIB_IDENT=\"5.0.2\"
-> -DGLOBAL_CONFIG_DIR=\"/usr/share/t1lib\" xglyph.c  -fPIC -DPIC -o
-> .libs/xglyph.o
-> | xglyph.c:47:27: error: X11/Xaw/Label.h: No such file or directory
-> | xglyph.c:48:29: error: X11/Xaw/Command.h: No such file or directory
-> | xglyph.c:49:26: error: X11/Xaw/Form.h: No such file or directory
-> | xglyph.c:50:28: error: X11/Xaw/Dialog.h: No such file or directory
-> | xglyph.c:51:25: error: X11/Xaw/Box.h: No such file or directory
-> | xglyph.c:52:28: error: X11/Xaw/Toggle.h: No such file or directory
-> | xglyph.c:54:31: error: X11/Xaw/AsciiText.h: No such file or directory
-> | xglyph.c:55:32: error: X11/Xaw/SimpleMenu.h: No such file or directory
-> | xglyph.c:56:28: error: X11/Xaw/SmeBSB.h: No such file or directory
-> | xglyph.c:57:26: error: X11/Xaw/List.h: No such file or directory
-> ...
-> <snip>
+>  -L/home/grg/oe/tmp/staging/mipsel-angstrom-linux/usr/lib
+> -Wl,-rpath-link,/home/grg/oe/tmp/staging/mipsel-angstrom-linux/usr/lib
+> -Wl,-O1 -o man2html man2html.o
+> -L/home/grg/oe/tmp/staging/mipsel-angstrom-linux/usr/lib -lfreetype -L -lXft
+> -lXrender
+> | mipsel-angstrom-linux-libtool: link: require no space between `-L' and
+> `-lXft'
+> | make[2]: *** [man2html] Error 1
+> | make[2]: Leaving directory
+> `/home/grg/oe/tmp/work/mipsel-angstrom-linux/lesstif-0.95.0-r1/lesstif-0.95.0/scripts'
+> | make[1]: *** [all-recursive] Error 1
+> | make[1]: Leaving directory
+> `/home/grg/oe/tmp/work/mipsel-angstrom-linux/lesstif-0.95.0-r1/lesstif-0.95.0/scripts'
+> | make: *** [all-recursive] Error 1
+> | FATAL: oe_runmake failed
 >
 >
 > Signed-off-by: Graham Gower <graham.gower@gmail.com>
 
 Acked-by: Khem Raj <raj.khem@gmail.com>
-
 > ---
->  recipes/t1lib/t1lib_5.0.2.bb |    4 ++--
+>  recipes/lesstif/lesstif_0.95.0.bb |    4 ++--
 >  1 files changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/recipes/t1lib/t1lib_5.0.2.bb b/recipes/t1lib/t1lib_5.0.2.bb
-> index 5da31f7..36acb77 100644
-> --- a/recipes/t1lib/t1lib_5.0.2.bb
-> +++ b/recipes/t1lib/t1lib_5.0.2.bb
-> @@ -1,8 +1,8 @@
->  DESCRIPTION = "A Type1 Font Rastering Library"
+> diff --git a/recipes/lesstif/lesstif_0.95.0.bb
+> b/recipes/lesstif/lesstif_0.95.0.bb
+> index cb348e7..5af87e3 100644
+> --- a/recipes/lesstif/lesstif_0.95.0.bb
+> +++ b/recipes/lesstif/lesstif_0.95.0.bb
+> @@ -1,7 +1,7 @@
 >  SECTION = "libs"
->  PRIORITY = "optional"
-> -DEPENDS = "virtual/libx11"
-> -PR = "r4"
-> +DEPENDS = "virtual/libx11 libxaw"
-> +PR = "r5"
->  LICENSE = "LGPL GPL"
->  SRC_URI = "${DEBIAN_MIRROR}/main/t/t1lib/t1lib_${PV}.orig.tar.gz \
->             file://configure.patch;patch=1 \
+>  DESCRIPTION = "Free OSM/Motif implementation."
+>  LICENSE = "LGPL"
+> -PR = "r1"
+> +PR = "r2"
+>
+>  SRC_URI = "\
+>  	${SOURCEFORGE_MIRROR}/lesstif/${BP}.tar.bz2 \
+> @@ -40,7 +40,7 @@ addtask preconfigure after do_patch before do_configure
+>  EXTRA_OECONF = "\
+>  	--with-gnu-ld --disable-verbose --disable-build-12 --disable-build-20 \
+>  	--enable-build-21 --enable-xrender --enable-production --without-motif \
+> -	--x-includes=. \
+> +	--x-includes=. --x-libraries=. \
+>  "
+>
+>  PACKAGES += "${PN}-bin"
 > --
 > 1.6.0.3
 >
