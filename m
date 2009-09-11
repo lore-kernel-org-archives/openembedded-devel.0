@@ -1,33 +1,46 @@
-Received: from [78.47.116.19] (helo=sirius.lasnet.de)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Mm5FJ-00020p-0h
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1Mm5aK-00052I-0o
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Sep 2009 14:29:00 +0200
-Received: from p5b035cdd.dip.t-dialin.net ([91.3.92.221] helo=dodger)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1Mm5Ec-0000n4-U7 by authid <stefan@sostec.de> with cram_md5;
-	Fri, 11 Sep 2009 14:28:29 +0200
-Received: from stefan by dodger with local (Exim 4.69)
-	(envelope-from <stefan@dodger.lab.datenfreihafen.org>)
-	id 1Mm5F0-0002kt-Pz; Fri, 11 Sep 2009 14:28:38 +0200
-Date: Fri, 11 Sep 2009 14:28:38 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Fri, 11 Sep 2009 14:50:43 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 73F8611000AE
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Sep 2009 14:50:11 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 807831100088
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Sep 2009 14:50:08 +0200 (CEST)
+Received: from rhein.familie-heinold.de (unknown [78.52.226.29])
+	by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Sep 2009 14:50:08 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id DEFD73C08B; Fri, 11 Sep 2009 14:50:05 +0200 (CEST)
+Date: Fri, 11 Sep 2009 14:50:05 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090911122838.GA9995@dodger.lab.datenfreihafen.org>
-References: <E1MZgdH-00057X-Lh@melo.openembedded.org>
-	<20090908182012.GA4674@dodger.lab.datenfreihafen.org>
+Message-ID: <20090911125005.GC8711@rhein.zuhause.netz>
+References: <91283b620908241055p6b67a7edy44a3dee2f88e2b40@mail.gmail.com>
+	<4A93BC84.7070106@gmail.com>
+	<91283b620908250454n428bdc4ek2cd4df45690e47c0@mail.gmail.com>
+	<200908251609.25008.holger+oe@freyther.de>
+	<91283b620909102232me9db8dck490abb53a8ba8fff@mail.gmail.com>
+	<20090911081303.GA18964@localhost.minsk.epam.com>
+	<91283b620909110351r2d9758b4n20f0f02dfed4b058@mail.gmail.com>
+	<20090911112612.GB19399@localhost.minsk.epam.com>
+	<91283b620909110506p5768a960o6bf4abab421cb1b3@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20090908182012.GA4674@dodger.lab.datenfreihafen.org>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
+In-Reply-To: <91283b620909110506p5768a960o6bf4abab421cb1b3@mail.gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [oe-commits] Christopher Friedt : emotion_svn.bb: Make it look for edje_cc in STAGING_DIR.
+Subject: Re: Qt problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,69 +54,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Sep 2009 12:29:00 -0000
+X-List-Received-Date: Fri, 11 Sep 2009 12:50:43 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hello.
+On Fri, Sep 11, 2009 at 01:06:13PM +0100, Stuart Gray wrote:
+> How do I do this?
+> 
+> Do I use the names as below and add them to my image file under SIMPLE_AUDIO
+> or are they RDEPENDS????
+> 
+> Thanks,
+> Stuart
 
-[Adding Christoper explicit in CC]
+If oe cant figure out if the plugins are needed make them RDEPENDS in your recipe.
+Now the error occurs at installing the package rather than execution.
 
-If nobody gives me a good reson against it I will remove the configure hunk at
-the weekend as it brekas my build and should not be needed.
+If you want something in an image look at the many images recipes. Probably you will
+set up a task too.
 
-regards
-Stefan Schmidt
-
-On Tue, 2009-09-08 at 20:20, Stefan Schmidt wrote:
-> 
-> On Sat, 2009-08-08 at 07:46, git version control wrote:
-> > 
-> > diff --git a/recipes/efl1/emotion_svn.bb b/recipes/efl1/emotion_svn.bb
-> > index 0f31e66..79b35d9 100644
-> > --- a/recipes/efl1/emotion_svn.bb
-> > +++ b/recipes/efl1/emotion_svn.bb
-> > @@ -3,7 +3,7 @@ LICENSE = "MIT BSD"
-> >  # we no longer build the libxine backend, since the gstreamer backend seems more promising
-> >  DEPENDS = "eet evas ecore edje gstreamer gst-plugins-base"
-> >  PV = "0.1.0.042+svnr${SRCREV}"
-> > -PR = "r2"
-> > +PR = "r3"
-> >  
-> >  inherit efl
-> >  
-> > @@ -12,3 +12,11 @@ EXTRA_OECONF = "--disable-xine --enable-gstreamer --with-edje-cc=${STAGING_BINDI
-> >  PACKAGES =+ "emotion-backend-gstreamer"
-> >  FILES_emotion-backend-gstreamer = "${libdir}/emotion/*.so"
-> >  RRECOMMENDS_${PN} = "emotion-backend-gstreamer"
-> > +
-> > +
-> > +do_configure_append() {
-> > +	for i in $(find ${WORKDIR}/emotion -name 'Makefile'); do 
-> > +		sed -i -e s:/usr/bin/edje_cc:${STAGING_DIR}/${BUILD_SYS}/usr/bin/edje_cc: \
-> > +			${i}
-> > +	done
-> > +}
-> 
-> Christopher, can you verify that the configure_append is really needed? I added
-> --with-edje-cc in EXTRA_OECONF, you can see a part of it above, to fix the
-> edje_cc native detection.
-> 
-> Starting a build from scratch today emotion fails for me as the sed entry messes
-> around with the path as follows:
-> 
-> | make[2]:
-> /home/sschmidt/oe/build/dev/tmp/staging/x86_64-linux/home/sschmidt/oe/build/dev/tmp/staging/x86_64-linux/usr/bin/edje_cc:
-> Command not found
-> 
-> Removing the do_configure_append again makes it work again over here.
-> 
-> regards
-> Stefan Schmidt
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Bye Henning
 
 
