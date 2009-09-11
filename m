@@ -1,25 +1,39 @@
-Received: from [67.19.73.58] (helo=pug.o-hand.com ident=postfix)
+Received: from [74.125.92.148] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <richard@openedhand.com>) id 1Mm8Wr-0006Yw-T5
-	for openembedded-devel@openembedded.org; Fri, 11 Sep 2009 17:59:21 +0200
-Received: from [192.168.1.3] (93-97-173-237.zone5.bethere.co.uk
-	[93.97.173.237])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by pug.o-hand.com (Postfix) with ESMTP id 6159612EC118;
-	Fri, 11 Sep 2009 11:11:38 -0500 (CDT)
-From: Richard Purdie <richard@openedhand.com>
-To: openembedded-devel <openembedded-devel@openembedded.org>
-Date: Fri, 11 Sep 2009 16:59:50 +0100
-Message-Id: <1252684790.17396.29.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-SA-Exim-Connect-IP: 67.19.73.58
-X-SA-Exim-Mail-From: richard@openedhand.com
+	(envelope-from <raj.khem@gmail.com>) id 1MmCbn-0004n7-7B
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Sep 2009 22:20:42 +0200
+Received: by qw-out-1920.google.com with SMTP id 4so476431qwk.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Sep 2009 13:20:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=qzWEOPjrsmBoL8ItBEKlKqoGuqqsHOWqVk07LDh6TXI=;
+	b=oimppZ+LEIaz6wjEXhSn+L8DBWOUcVf/Pkkr/BM+Gx3WctagufR99QSWQJ1l/hzDSz
+	5xq+6y/6cI3ami5qlSjIRnZVDFsvRJyi75ElalFR3SPh7jPl3X8DAJM2fdYssf43Dzqe
+	NmSftw5uhfFO1XtBOeJqg1emUhmElb60TqHWk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=iR6oY2xqX4l2OuUoR5msFx5m9A1MFml29gDhP1Sq6HQzmnwswGNlWzYq/FvRHPcn3c
+	CySPYjOzypxXiNMH6+w98EF4na/O3jwumJPtVR0alkHdxap0PpipZMn52Uk2xNsp8QSB
+	+T2mIBaJAfPShrNedZLPsqJBLnrJbi33E1+Bg=
+MIME-Version: 1.0
+Received: by 10.229.92.199 with SMTP id s7mr1418962qcm.23.1252700411615; Fri, 
+	11 Sep 2009 13:20:11 -0700 (PDT)
+In-Reply-To: <20090911083758.GA6676@rhein.zuhause.netz>
+References: <E1Mlvq3-0005kd-19@melo.openembedded.org>
+	<20090911083758.GA6676@rhein.zuhause.netz>
+Date: Fri, 11 Sep 2009 13:20:11 -0700
+Message-ID: <19c1b8a90909111320x5fc77de2jf51945afa3e53437@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.92.148
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: poky <poky@o-hand.com>
-Subject: $prefix and the $layout_* variables
+Subject: Re: [oe-commits] Khem Raj : console-image.bb: Require console-base-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,83 +47,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Sep 2009 15:59:21 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 11 Sep 2009 20:20:42 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Going back a while I tried to fix a number of path issues in OE at a
-time when we changed the layout of staging. This was when the layout_*
-variables came into being, they seemed a good idea at the time and
-cleaned up a lot of cruft. They are now however effectively useless.
+yes probably
 
-I think it unlikely OE will ever switch to having a different layout of
-staging to that of the target system again due to sysroot so lets
-discount that.
-
-These groups of variables define a filesystem layout. We have at least
-four areas in OE which may or may not have different layouts:
-
-* native staging
-* target staging
-* cross staging
-* sdk staging
-
-At the moment native == target. sdk is special, not used by many
-packages and does insane workarounds and is basically broken (hence a
-number of my current problems trying to extend sdk). cross is special
-and just hardcoded.
-
-To illustrate the problem consider an SDK installing into SDKPATH which
-should be $layout_prefix. When we change $layout_prefix we totally break
-PATH since PATH uses $layout_bindir to find native binaries. We
-therefore leak path layout information between the different
-filesystems.
-
-Very little cross filesystem knowledge is actually needed and I'm
-thinking something semi hardcoded but simpler and working would be
-better.
-
-The way I'm thinking things could go is:
-
-bitbake.conf:
-
-Set all layout_* variables to * (layout_bindir = "{bindir}")
-Remove all layout_ variables ultimately
-Change $prefix and friends to the values in $layout_*
-Add:
-
-base_bindir_native = "/bin"
-base_sbindir_native = "/bin"
-bindir_native = "/usr/bin"
-sbindir_native = "/usr/sbin"
-libdir_native = "/usr/lib"
-bindir_cross = "/bin"
-includedir_native = "/usr/include"
-sysconfdir_native = "/etc"
-datadir_native = "/usr/share"
-
-(which are used to remove certain references to layout_* in things like
-PATH)
-
-native.bbclass can then become:
-
-# Path prefixes
-export base_prefix = "${STAGING_DIR_NATIVE}"
-export prefix = "${STAGING_DIR_NATIVE}/usr"
-export exec_prefix = "${STAGING_DIR_NATIVE}/usr"
-
-cross and sdk classes similarly.
-
-I'm still experimenting with this but does anyone have any comments?
-
-Yes, it hardcodes some information and native.bbclass needs to match the
-*_native definitions but I think we can live with that for the benefits
-it brings?
-
-Cheers,
-
-Richard
-
-
+On 9/11/09, Henning Heinold <heinold@inf.fu-berlin.de> wrote:
+> On Fri, Sep 11, 2009 at 02:26:15AM +0000, git version control wrote:
+>> Module: openembedded.git
+>> Branch: org.openembedded.dev
+>> Commit: d3fc551eb32ff334fcea7cfe20a6f76b20c65c21
+>> URL:
+>> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=d3fc551eb32ff334fcea7cfe20a6f76b20c65c21
+>>
+>> Author: Khem Raj <raj.khem@gmail.com>
+>> Date:   Tue Sep  8 20:43:46 2009 -0700
+>>
+>> console-image.bb: Require console-base-image
+>>
+>> * Get rid of code duplication.
+>>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>
+>> ---
+>>
+>>  recipes/images/console-image.bb |   20 +++-----------------
+>>  1 files changed, 3 insertions(+), 17 deletions(-)
+>>
+>> diff --git a/recipes/images/console-image.bb
+>> b/recipes/images/console-image.bb
+>> index 9707881..c3d3f17 100644
+>> --- a/recipes/images/console-image.bb
+>> +++ b/recipes/images/console-image.bb
+>> @@ -1,24 +1,10 @@
+>>  #Angstrom bootstrap image
+> ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>
+> shouldnt we fix the comment as it has nothing to do with distribution?
+>
+> Bye Henning
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
