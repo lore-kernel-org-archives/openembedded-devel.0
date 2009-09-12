@@ -1,24 +1,36 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [209.85.219.219] (helo=mail-ew0-f219.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1MmQtL-0000j5-C4
-	for openembedded-devel@openembedded.org; Sat, 12 Sep 2009 13:35:46 +0200
-Received: (qmail 13813 invoked by uid 1003); 12 Sep 2009 11:35:13 -0000
-Received: from localhost (HELO localhost.localdomain)
-	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 12 Sep 2009 11:35:12 -0000
-Message-ID: <4AAB8770.9040607@balister.org>
-Date: Sat, 12 Sep 2009 07:35:12 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
+	(envelope-from <sinestado@gmail.com>) id 1MmUgV-0005i8-5r
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Sep 2009 17:38:46 +0200
+Received: by ewy19 with SMTP id 19so1903618ewy.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 12 Sep 2009 08:38:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=0kEYkwVOm4jS0Rgw4UmAiu2Rc8FWs70U43GOoc44r4Q=;
+	b=w5wnHJAAJyysUe3UdQ0PTlLxhbSNuAAlQgyA7b41KCwQSbouFQvDuRt+c90gm1C9uL
+	vlj4hy/oXb01E+FoPavfSm+q19B8A6W1Y5yc1kyj5gaTQaTT9GL6b8J8HerXQ75vad20
+	bX+87CeB9gx4N2gvm7h75dVjTXvx4WxxorQQo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=VbOYxh4keaFXz4mX1MQP6fJqwSxoLxaVlVz96oboCUrHetG1ClylX71V2eYKplSIvS
+	Y+fYHyVkPZeLZ6efLlUC0nDPZ9jD0X0vriMuPTwXCS/v7ijXBCSKqALFvjGdPMXybQvR
+	tvFV71lYcql+O0wxuunYdNTK09bvgbTdgM3rM=
 MIME-Version: 1.0
+Received: by 10.216.51.143 with SMTP id b15mr386434wec.89.1252769893352; Sat, 
+	12 Sep 2009 08:38:13 -0700 (PDT)
+Date: Sat, 12 Sep 2009 12:38:13 -0300
+Message-ID: <a63ecaf0909120838m51a6fbd1w333d902441bcab5f@mail.gmail.com>
+From: Sushi Sensei <sinestado@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1252749707-1115-1-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1252749707-1115-1-git-send-email-k.kooi@student.utwente.nl>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+X-SA-Exim-Connect-IP: 209.85.219.219
+X-SA-Exim-Mail-From: sinestado@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [STABLE][PATCH] freeimage: fix QA errors
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Slow bitbake, maybe can be compiled some part!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,108 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Sep 2009 11:35:46 -0000
-X-Groupsio-MsgNum: 13075
-Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms060408000705090408070305"
+X-List-Received-Date: Sat, 12 Sep 2009 15:38:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---------------ms060408000705090408070305
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+When I try to rebuild a distro bitbake rebuild the cache and then try to
+resolve any missing task queue dependencies.
 
-Acked-by: Philip Balister <philip@balister.org>
+This moment is the big bottleneck in the process.
 
-Koen Kooi wrote:
-> From: Koen Kooi <koen@openembedded.org>
-> 
-> 
-> Signed-off-by: Koen Kooi <koen@openembedded.org>
-> ---
->  recipes/ogre/freeimage_3.11.0.bb |    4 ++++
->  1 files changed, 4 insertions(+), 0 deletions(-)
-> 
-> diff --git a/recipes/ogre/freeimage_3.11.0.bb b/recipes/ogre/freeimage_3.11.0.bb
-> index 8281aaf..7df573e 100644
-> --- a/recipes/ogre/freeimage_3.11.0.bb
-> +++ b/recipes/ogre/freeimage_3.11.0.bb
-> @@ -1,9 +1,13 @@
->  LICENSE = "MIT"
->  
-> +PR = "r1"
-> +
->  SRC_URI = "${SOURCEFORGE_MIRROR}/freeimage/FreeImage3110.zip"
->  
->  S = "${WORKDIR}/FreeImage/"
->  
-> +TARGET_CC_ARCH += "${LDFLAGS}"
-> +
->  do_configure() {
->      sed -i -e /^CC/d \
->             -e /^CXX\ /d \
+I've founded this project :
+http://shed-skin.blogspot.com/2009/07/shed-skin-02.html
 
---------------ms060408000705090408070305
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+Is a C++ traducer for python to compile native a program.
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
-OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
-Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
-MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
-EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
-V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
-ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
-ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
-SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
-n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
-R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
-/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
-kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
-Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
-urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDkxMjEx
-MzUxMlowIwYJKoZIhvcNAQkEMRYEFDy5d91rBZWDagUba/XPB0UD4sH5MFIGCSqGSIb3DQEJDzFF
-MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
-CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
-aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
-ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
-CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
-VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQBkEIRS4MHv5k5/90IR2I1LnFBfSdQhL26yMNyiBMNF0d+EykQT
-TO/r21tCPLDwfjklscnMxhItlvwF4MBu6wtFkDW5/wvSF4OJjy5bC+qn5Ga+hKBUe2KwBffXxU0d
-0RySH4HHRwHHEUufNfcUNQancq8L/F2ChxDCCkC3ZKUAi4q57AG31j68/54tvyvRZMo+8GKHJpsU
-BQ5MXXI2p0GFPgKeqY3cXiceZKp0iNKv8gco7WbfheGMXXFPaJ7IWLZHdGFxDki97I4K3k2+6e/3
-xbrcfnsTRSFcuX0FxrLRoSwSUCk9WG6c57IWAumrDmmTpCOVA6D4vNp2fLraCqMkAAAAAAAA
+I've consulted to the programmer about the posibility of "traduce" bitbake
+with this program. This is his answer:
 
---------------ms060408000705090408070305--
+"I'm afraid it's way too big and dynamic (as described in the tutorial). it
+might be possible to compile some time-critical part as an extension module,
+but I wouldn't know which part.. :)"
+
+Sombody can help to the shed-skin developer to accelerate some critical
+modules in Bitbake?
+
+(I'm not a python programmer!)
+
+
+------------------------------------------------------
+--- Timeo Danaos et dona ferentes ---
+------------------------------------------------------
+
