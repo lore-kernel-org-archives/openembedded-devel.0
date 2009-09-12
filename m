@@ -1,36 +1,40 @@
-Received: from [209.85.219.219] (helo=mail-ew0-f219.google.com)
+Received: from [72.14.220.155] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sinestado@gmail.com>) id 1MmUgV-0005i8-5r
+	(envelope-from <koen.kooi@gmail.com>) id 1MmUnt-0006Db-HC
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Sep 2009 17:38:46 +0200
-Received: by ewy19 with SMTP id 19so1903618ewy.20
+	Sat, 12 Sep 2009 17:46:24 +0200
+Received: by fg-out-1718.google.com with SMTP id d23so544568fga.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Sep 2009 08:38:13 -0700 (PDT)
+	Sat, 12 Sep 2009 08:45:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=0kEYkwVOm4jS0Rgw4UmAiu2Rc8FWs70U43GOoc44r4Q=;
-	b=w5wnHJAAJyysUe3UdQ0PTlLxhbSNuAAlQgyA7b41KCwQSbouFQvDuRt+c90gm1C9uL
-	vlj4hy/oXb01E+FoPavfSm+q19B8A6W1Y5yc1kyj5gaTQaTT9GL6b8J8HerXQ75vad20
-	bX+87CeB9gx4N2gvm7h75dVjTXvx4WxxorQQo=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=DzyoX/LCEng8TV6P1rbaG0ZpVexhx2t2dO5X0kgjccI=;
+	b=M9qhquBakK5FyHfIkmC+w3OK5StIfn3A0j9mvGNddsXF1lZ+NikUDOZkz/t2iKPRBG
+	d8ANmVZBM/s6k+M5wOmEr4gBCi+4pZ6PZtLA/yN0p0b44dG6wZLDLbrX0g4fkBMxfg5R
+	nc/SvEk1OEZjK4nwuJl5YMSSKQmN9x/4V0ogg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=VbOYxh4keaFXz4mX1MQP6fJqwSxoLxaVlVz96oboCUrHetG1ClylX71V2eYKplSIvS
-	Y+fYHyVkPZeLZ6efLlUC0nDPZ9jD0X0vriMuPTwXCS/v7ijXBCSKqALFvjGdPMXybQvR
-	tvFV71lYcql+O0wxuunYdNTK09bvgbTdgM3rM=
-MIME-Version: 1.0
-Received: by 10.216.51.143 with SMTP id b15mr386434wec.89.1252769893352; Sat, 
-	12 Sep 2009 08:38:13 -0700 (PDT)
-Date: Sat, 12 Sep 2009 12:38:13 -0300
-Message-ID: <a63ecaf0909120838m51a6fbd1w333d902441bcab5f@mail.gmail.com>
-From: Sushi Sensei <sinestado@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=XPC5zOdMJ7H9js0qW7ro0dWslMkgxRAVHlh1cOzDIJia2HlYh6MZTcQ0Z30+17iDuM
+	ObOMQvGtTaTpboofaDvsyQrQufuIGhgMZZO5IU3+9Vo7JayHSndwU6Ut13VJv1uS9HUV
+	TdBtYeI6sp2y/MJ+gkB60aZLTTCz+7ipgixOU=
+Received: by 10.86.251.6 with SMTP id y6mr3286413fgh.24.1252770353333;
+	Sat, 12 Sep 2009 08:45:53 -0700 (PDT)
+Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
+	by mx.google.com with ESMTPS id d4sm1698937fga.5.2009.09.12.08.45.50
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 12 Sep 2009 08:45:51 -0700 (PDT)
+From: Koen Kooi <koen.kooi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.219
-X-SA-Exim-Mail-From: sinestado@gmail.com
+Date: Sat, 12 Sep 2009 17:45:47 +0200
+Message-Id: <1252770347-2632-1-git-send-email-k.kooi@student.utwente.nl>
+X-Mailer: git-send-email 1.6.1
+X-SA-Exim-Connect-IP: 72.14.220.155
+X-SA-Exim-Mail-From: koen.kooi@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Slow bitbake, maybe can be compiled some part!
+Cc: Koen Kooi <koen@openembedded.org>, Steve Sakoman <steve@sakoman.com>
+Subject: [STABLE][PATCH] ebtables: fix GNU_HASH error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,33 +48,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Sep 2009 15:38:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 12 Sep 2009 15:46:24 -0000
 
-When I try to rebuild a distro bitbake rebuild the cache and then try to
-resolve any missing task queue dependencies.
-
-This moment is the big bottleneck in the process.
-
-I've founded this project :
-http://shed-skin.blogspot.com/2009/07/shed-skin-02.html
-
-Is a C++ traducer for python to compile native a program.
-
-I've consulted to the programmer about the posibility of "traduce" bitbake
-with this program. This is his answer:
-
-"I'm afraid it's way too big and dynamic (as described in the tutorial). it
-might be possible to compile some time-critical part as an extension module,
-but I wouldn't know which part.. :)"
-
-Sombody can help to the shed-skin developer to accelerate some critical
-modules in Bitbake?
-
-(I'm not a python programmer!)
+From: Steve Sakoman <steve@sakoman.com>
 
 
-------------------------------------------------------
---- Timeo Danaos et dona ferentes ---
-------------------------------------------------------
+Signed-off-by: Koen Kooi <koen@openembedded.org>
+---
+ recipes/ebtables/ebtables_2.0.6.bb |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/recipes/ebtables/ebtables_2.0.6.bb b/recipes/ebtables/ebtables_2.0.6.bb
+index 33ad2b9..c4fc1c3 100644
+--- a/recipes/ebtables/ebtables_2.0.6.bb
++++ b/recipes/ebtables/ebtables_2.0.6.bb
+@@ -4,6 +4,8 @@ LICENSE = "GPL"
+ SECTION = "console/network"
+ PR = "r2"
+ 
++TARGET_CC_ARCH += "${LDFLAGS}"
++
+ SRC_URI = "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
+            file://gcc34.patch;patch=1 \
+            file://gcc4.patch;patch=1 \
+-- 
+1.6.1
+
+
 
