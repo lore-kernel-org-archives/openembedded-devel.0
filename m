@@ -1,38 +1,40 @@
-Received: from [74.125.92.149] (helo=qw-out-1920.google.com)
+Received: from [209.85.220.222] (helo=mail-fx0-f222.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MmDf1-00049O-ML
+	(envelope-from <koen.kooi@gmail.com>) id 1MmPQJ-0003Th-Rn
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Sep 2009 23:28:06 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so491534qwk.36
+	Sat, 12 Sep 2009 12:01:42 +0200
+Received: by fxm22 with SMTP id 22so1272269fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Sep 2009 14:27:36 -0700 (PDT)
+	Sat, 12 Sep 2009 03:01:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=G314Ztm1ObvSIO1ZM+A4QUPsF5nIrim5OgICyk/G+uc=;
-	b=drI2s7QeKoGlV4A+wTBxhwciGvEtxCKSr0IHNKm2tR0m3sg7nXoOH7TrjKD3mh83UT
-	lBY8sEicFvZnhfuie+drARqDVXrU7mer2/xVHerPOr4LHq+smAEZxm41zV1/L+2N1cIU
-	nG3corYhyYa31WiqmEWk9fHEdqg13QUBL9ocA=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=OBswwcUauOJEm4wAXyQTzrUTwdGxmNX33OoRzKOeTjU=;
+	b=M9knDKxhHEBAvKqcJA63lbmAOOhquJuXoqsFK/KLVSz13okpdCX33bLBebwFsj8ukB
+	yEjuBi1Gcjr//k39yWIRS5a62gJ6u6CONmd4dW6+44WUg507meWm2wygLZ41qD7KNMfy
+	FN1F5okOUcnIlqhWn/KgbFcIabgOPq/DCDUXw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=mCZen7c079Q+fE0i7KQ8zRABBbhzAEPLj30whxL0/i8WnRkndi6UJzngPtzVSnkn0d
-	y6sctlzPzmEdOIlSox9INgv37Z9V2JpyxnduQCQfFn+NpYjVMuKOTo2FxDUg6iRYE+yT
-	jq6R/FrBpaTP6F5C704junuDREMfvJpGKk7xw=
-MIME-Version: 1.0
-Received: by 10.229.39.201 with SMTP id h9mr1505265qce.4.1252704456201; Fri, 
-	11 Sep 2009 14:27:36 -0700 (PDT)
-In-Reply-To: <4AA9C54B.5050707@gmail.com>
-References: <4AA9C54B.5050707@gmail.com>
-Date: Fri, 11 Sep 2009 14:27:36 -0700
-Message-ID: <19c1b8a90909111427w476f1e78xcf4f553889d22f65@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=Cnp1aaHxATqHNVYySNSkdi3E1V+5iw2kCd12iBu/GcXtS6DAil9mUJ4wnc9nRzAxkt
+	ZMpPo6DWRmYhkRvwaYMs90jKpKMMTPUgOH3gCNCfJ0tNygx/Jx2CXbmxHKueXUyKGTSm
+	zoV9rvR1oQy1m0WWe54+gvoelMfbSLWRQpLJk=
+Received: by 10.86.227.1 with SMTP id z1mr3088134fgg.56.1252749670407;
+	Sat, 12 Sep 2009 03:01:10 -0700 (PDT)
+Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
+	by mx.google.com with ESMTPS id e11sm1217586fga.21.2009.09.12.03.01.06
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 12 Sep 2009 03:01:07 -0700 (PDT)
+From: Koen Kooi <koen.kooi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.92.149
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Sat, 12 Sep 2009 12:01:04 +0200
+Message-Id: <1252749664-1074-1-git-send-email-k.kooi@student.utwente.nl>
+X-Mailer: git-send-email 1.6.1
+X-SA-Exim-Connect-IP: 209.85.220.222
+X-SA-Exim-Mail-From: koen.kooi@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Fix lesstif compilation.
+Cc: Koen Kooi <koen@openembedded.org>
+Subject: [STABLE][PATCH] quake2: fix QA errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,71 +48,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Sep 2009 21:28:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 12 Sep 2009 10:01:43 -0000
 
-On 9/10/09, Graham Gower <graham.gower@gmail.com> wrote:
-> Failed like this:
->
-> | /bin/sh ../mipsel-angstrom-linux-libtool --tag=CC   --mode=link
-> mipsel-angstrom-linux-gcc
-> -isystem/home/grg/oe/tmp/staging/mipsel-angstrom-linux/usr/include
-> -fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2 -ggdb3
->  -L/home/grg/oe/tmp/staging/mipsel-angstrom-linux/usr/lib
-> -Wl,-rpath-link,/home/grg/oe/tmp/staging/mipsel-angstrom-linux/usr/lib
-> -Wl,-O1 -o man2html man2html.o
-> -L/home/grg/oe/tmp/staging/mipsel-angstrom-linux/usr/lib -lfreetype -L -lXft
-> -lXrender
-> | mipsel-angstrom-linux-libtool: link: require no space between `-L' and
-> `-lXft'
-> | make[2]: *** [man2html] Error 1
-> | make[2]: Leaving directory
-> `/home/grg/oe/tmp/work/mipsel-angstrom-linux/lesstif-0.95.0-r1/lesstif-0.95.0/scripts'
-> | make[1]: *** [all-recursive] Error 1
-> | make[1]: Leaving directory
-> `/home/grg/oe/tmp/work/mipsel-angstrom-linux/lesstif-0.95.0-r1/lesstif-0.95.0/scripts'
-> | make: *** [all-recursive] Error 1
-> | FATAL: oe_runmake failed
->
->
-> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+From: Koen Kooi <koen@openembedded.org>
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  recipes/lesstif/lesstif_0.95.0.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/recipes/lesstif/lesstif_0.95.0.bb
-> b/recipes/lesstif/lesstif_0.95.0.bb
-> index cb348e7..5af87e3 100644
-> --- a/recipes/lesstif/lesstif_0.95.0.bb
-> +++ b/recipes/lesstif/lesstif_0.95.0.bb
-> @@ -1,7 +1,7 @@
->  SECTION = "libs"
->  DESCRIPTION = "Free OSM/Motif implementation."
->  LICENSE = "LGPL"
-> -PR = "r1"
-> +PR = "r2"
->
->  SRC_URI = "\
->  	${SOURCEFORGE_MIRROR}/lesstif/${BP}.tar.bz2 \
-> @@ -40,7 +40,7 @@ addtask preconfigure after do_patch before do_configure
->  EXTRA_OECONF = "\
->  	--with-gnu-ld --disable-verbose --disable-build-12 --disable-build-20 \
->  	--enable-build-21 --enable-xrender --enable-production --without-motif \
-> -	--x-includes=. \
-> +	--x-includes=. --x-libraries=. \
->  "
->
->  PACKAGES += "${PN}-bin"
-> --
-> 1.6.0.3
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
+Signed-off-by: Koen Kooi <koen@openembedded.org>
+---
+ recipes/quake/quake2_svn.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
+
+diff --git a/recipes/quake/quake2_svn.bb b/recipes/quake/quake2_svn.bb
+index 31491ad..a01def8 100644
+--- a/recipes/quake/quake2_svn.bb
++++ b/recipes/quake/quake2_svn.bb
+@@ -5,6 +5,7 @@ DEPENDS = "libsdl-x11 libxxf86dga"
+ 
+ SRCREV = "205"
+ PV = "0.16.1+svnr${SRCREV}"
++PR = "r1"
+ 
+ SRC_URI = "svn://svn.icculus.org/quake2/;module=trunk \
+            file://quake2-arm.patch;patch=1"
+@@ -14,7 +15,7 @@ S = "${WORKDIR}/trunk"
+ export BUILD_SDLQUAKE2=YES
+ export OSTYPE=Linux
+ export ARCH=${TARGET_ARCH}
+-export BASE_CFLAGS="${TARGET_CC_ARCH} -Wall -pipe -Dstricmp=strcasecmp"
++export BASE_CFLAGS="${TARGET_CC_ARCH} ${LDFLAGS} -Wall -pipe -Dstricmp=strcasecmp"
+ export OPT_CFLAGS="-O3 -ffast-math -funroll-loops -fomit-frame-pointer -fexpensive-optimizations"
+ 
+ do_compile() {
+-- 
+1.6.1
+
 
 
