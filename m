@@ -1,40 +1,42 @@
-Received: from [72.14.220.155] (helo=fg-out-1718.google.com)
+Received: from [209.85.210.185] (helo=mail-yx0-f185.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen.kooi@gmail.com>) id 1MmUnt-0006Db-HC
+	(envelope-from <raj.khem@gmail.com>) id 1MmYoy-0008AC-M9
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Sep 2009 17:46:24 +0200
-Received: by fg-out-1718.google.com with SMTP id d23so544568fga.6
+	Sat, 12 Sep 2009 22:03:47 +0200
+Received: by yxe15 with SMTP id 15so2519689yxe.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Sep 2009 08:45:54 -0700 (PDT)
+	Sat, 12 Sep 2009 13:03:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=DzyoX/LCEng8TV6P1rbaG0ZpVexhx2t2dO5X0kgjccI=;
-	b=M9qhquBakK5FyHfIkmC+w3OK5StIfn3A0j9mvGNddsXF1lZ+NikUDOZkz/t2iKPRBG
-	d8ANmVZBM/s6k+M5wOmEr4gBCi+4pZ6PZtLA/yN0p0b44dG6wZLDLbrX0g4fkBMxfg5R
-	nc/SvEk1OEZjK4nwuJl5YMSSKQmN9x/4V0ogg=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:user-agent;
+	bh=unM+YTju0MGHJjyKZGK3coW4uy9oy4AYly/tVNvsNoY=;
+	b=DqJ1HgS4lejtqvXvAQI27SImBCUCdtqItqIwHA4lwVuT2ipQ1fety0xNtqzOIh1/zQ
+	t4EPhs8lZuyPHnjvJlL+DcGQ9CyDUGauf4WmYDPPyLgiZTA29B5TJM877XYMQ/uO9d0F
+	L5uMC38R2RVAymDHN/2z0hg/sRuMzBii8F9gU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=XPC5zOdMJ7H9js0qW7ro0dWslMkgxRAVHlh1cOzDIJia2HlYh6MZTcQ0Z30+17iDuM
-	ObOMQvGtTaTpboofaDvsyQrQufuIGhgMZZO5IU3+9Vo7JayHSndwU6Ut13VJv1uS9HUV
-	TdBtYeI6sp2y/MJ+gkB60aZLTTCz+7ipgixOU=
-Received: by 10.86.251.6 with SMTP id y6mr3286413fgh.24.1252770353333;
-	Sat, 12 Sep 2009 08:45:53 -0700 (PDT)
-Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
-	by mx.google.com with ESMTPS id d4sm1698937fga.5.2009.09.12.08.45.50
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=gDTzcPz1z/BL3znWyikBSfNy3JYz4DpXJUWrSBM8+cMIK+GIGpLy6p4WCWNwu83z3E
+	xUigLCo38lB86BNEkcObqzm7x50Q0oHQ0tr8uQkh/TzFXVDs/gsdzoviqJG0ltSc7UwC
+	SFS9UHHuq+iNQ5SNMke1U92FqXoPAyonQWD5M=
+Received: by 10.90.220.4 with SMTP id s4mr2633096agg.3.1252785794676;
+	Sat, 12 Sep 2009 13:03:14 -0700 (PDT)
+Received: from gmail.com (adsl-71-146-28-171.dsl.pltn13.sbcglobal.net
+	[71.146.28.171])
+	by mx.google.com with ESMTPS id 26sm5982471aga.12.2009.09.12.13.03.13
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 12 Sep 2009 08:45:51 -0700 (PDT)
-From: Koen Kooi <koen.kooi@gmail.com>
+	Sat, 12 Sep 2009 13:03:14 -0700 (PDT)
+Date: Sat, 12 Sep 2009 13:03:08 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 12 Sep 2009 17:45:47 +0200
-Message-Id: <1252770347-2632-1-git-send-email-k.kooi@student.utwente.nl>
-X-Mailer: git-send-email 1.6.1
-X-SA-Exim-Connect-IP: 72.14.220.155
-X-SA-Exim-Mail-From: koen.kooi@gmail.com
+Message-ID: <20090912200308.GA10819@gmail.com>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.210.185
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Koen Kooi <koen@openembedded.org>, Steve Sakoman <steve@sakoman.com>
-Subject: [STABLE][PATCH] ebtables: fix GNU_HASH error
+Subject: [RFC] mysterious armv5te-linux dir under staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,31 +50,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Sep 2009 15:46:24 -0000
+X-List-Received-Date: Sat, 12 Sep 2009 20:03:47 -0000
+X-Groupsio-MsgNum: 13078
+Content-Type: multipart/mixed; boundary="pf9I7BMVVzbSWLtt"
+Content-Disposition: inline
 
-From: Steve Sakoman <steve@sakoman.com>
+--pf9I7BMVVzbSWLtt
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+Hi
+
+On hrw's suggestion I looked into the mysterious directory armv5te-linux
+creation on my omap5912osk build.
+
+This directory is created by staging tasks for cross packages like
+gcc-cross, binutils-cross gdb-cross etc. 
+
+This is because in bitbake.conf we set 
+
+BASEPKG_HOST_SYS = "${BASE_PACKAGE_ARCH}${HOST_VENDOR}-${HOST_OS}"
+
+which is ok for target recipes but its not ok for native or cross
+recipes.
+
+It works for native because native.bbclass redefines it. I decided
+to change it to 
 
 
-Signed-off-by: Koen Kooi <koen@openembedded.org>
----
- recipes/ebtables/ebtables_2.0.6.bb |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+BASEPKG_HOST_SYS = "${HOST_ARCH}${HOST_VENDOR}-${HOST_OS}"
 
-diff --git a/recipes/ebtables/ebtables_2.0.6.bb b/recipes/ebtables/ebtables_2.0.6.bb
-index 33ad2b9..c4fc1c3 100644
---- a/recipes/ebtables/ebtables_2.0.6.bb
-+++ b/recipes/ebtables/ebtables_2.0.6.bb
-@@ -4,6 +4,8 @@ LICENSE = "GPL"
- SECTION = "console/network"
- PR = "r2"
+HOST_ARCH is defined based on -native -target or -cross package
+so it works in all cases. Overriding in native.bbclass would not
+be needed but I left it in there
+
+Does anyone sees problem with this little patchlet ?
+
+Thanks
+
+-Khem
+
+
+--pf9I7BMVVzbSWLtt
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename=diff
+
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index c2f7666..24684e5 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -114,7 +114,7 @@ PACKAGE_ARCHS = "all any noarch ${TARGET_ARCH} ${PACKAGE_EXTRA_ARCHS} ${MACHINE}
+ MULTIMACH_ARCH = "${PACKAGE_ARCH}"
+ MULTIMACH_TARGET_SYS = "${MULTIMACH_ARCH}${TARGET_VENDOR}-${TARGET_OS}"
+ MULTIMACH_HOST_SYS = "${MULTIMACH_ARCH}${HOST_VENDOR}-${HOST_OS}"
+-BASEPKG_HOST_SYS = "${BASE_PACKAGE_ARCH}${HOST_VENDOR}-${HOST_OS}"
++BASEPKG_HOST_SYS = "${HOST_ARCH}${HOST_VENDOR}-${HOST_OS}"
+ BASEPKG_TARGET_SYS = "${BASE_PACKAGE_ARCH}${TARGET_VENDOR}-${TARGET_OS}"
  
-+TARGET_CC_ARCH += "${LDFLAGS}"
-+
- SRC_URI = "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
-            file://gcc34.patch;patch=1 \
-            file://gcc4.patch;patch=1 \
--- 
-1.6.1
+ # select proper CPU to get binary locales generated
 
-
-
+--pf9I7BMVVzbSWLtt--
