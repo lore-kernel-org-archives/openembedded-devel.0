@@ -1,24 +1,24 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1MmQry-0000g7-Ow
-	for openembedded-devel@openembedded.org; Sat, 12 Sep 2009 13:34:22 +0200
-Received: (qmail 19540 invoked by uid 1003); 12 Sep 2009 11:33:49 -0000
+	(envelope-from <philip@balister.org>) id 1MmQtL-0000j5-C4
+	for openembedded-devel@openembedded.org; Sat, 12 Sep 2009 13:35:46 +0200
+Received: (qmail 13813 invoked by uid 1003); 12 Sep 2009 11:35:13 -0000
 Received: from localhost (HELO localhost.localdomain)
 	(philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 12 Sep 2009 11:33:49 -0000
-Message-ID: <4AAB8712.7090405@balister.org>
-Date: Sat, 12 Sep 2009 07:33:38 -0400
+	by mail.geekisp.com with SMTP; 12 Sep 2009 11:35:12 -0000
+Message-ID: <4AAB8770.9040607@balister.org>
+Date: Sat, 12 Sep 2009 07:35:12 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Thunderbird 2.0.0.14 (X11/20080501)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1252749664-1074-1-git-send-email-k.kooi@student.utwente.nl>
-In-Reply-To: <1252749664-1074-1-git-send-email-k.kooi@student.utwente.nl>
+References: <1252749707-1115-1-git-send-email-k.kooi@student.utwente.nl>
+In-Reply-To: <1252749707-1115-1-git-send-email-k.kooi@student.utwente.nl>
 X-SA-Exim-Connect-IP: 216.168.135.169
 X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [STABLE][PATCH] quake2: fix QA errors
+Subject: Re: [STABLE][PATCH] freeimage: fix QA errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,18 +32,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Sep 2009 11:34:22 -0000
-X-Groupsio-MsgNum: 13074
+X-List-Received-Date: Sat, 12 Sep 2009 11:35:46 -0000
+X-Groupsio-MsgNum: 13075
 Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
-	micalg=sha1; boundary="------------ms060303050507040308070005"
+	micalg=sha1; boundary="------------ms060408000705090408070305"
 
---------------ms060303050507040308070005
+--------------ms060408000705090408070305
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
 Acked-by: Philip Balister <philip@balister.org>
-
-Quake is the most important recipe we have ...
 
 Koen Kooi wrote:
 > From: Koen Kooi <koen@openembedded.org>
@@ -51,32 +49,29 @@ Koen Kooi wrote:
 > 
 > Signed-off-by: Koen Kooi <koen@openembedded.org>
 > ---
->  recipes/quake/quake2_svn.bb |    3 ++-
->  1 files changed, 2 insertions(+), 1 deletions(-)
+>  recipes/ogre/freeimage_3.11.0.bb |    4 ++++
+>  1 files changed, 4 insertions(+), 0 deletions(-)
 > 
-> diff --git a/recipes/quake/quake2_svn.bb b/recipes/quake/quake2_svn.bb
-> index 31491ad..a01def8 100644
-> --- a/recipes/quake/quake2_svn.bb
-> +++ b/recipes/quake/quake2_svn.bb
-> @@ -5,6 +5,7 @@ DEPENDS = "libsdl-x11 libxxf86dga"
+> diff --git a/recipes/ogre/freeimage_3.11.0.bb b/recipes/ogre/freeimage_3.11.0.bb
+> index 8281aaf..7df573e 100644
+> --- a/recipes/ogre/freeimage_3.11.0.bb
+> +++ b/recipes/ogre/freeimage_3.11.0.bb
+> @@ -1,9 +1,13 @@
+>  LICENSE = "MIT"
 >  
->  SRCREV = "205"
->  PV = "0.16.1+svnr${SRCREV}"
 > +PR = "r1"
+> +
+>  SRC_URI = "${SOURCEFORGE_MIRROR}/freeimage/FreeImage3110.zip"
 >  
->  SRC_URI = "svn://svn.icculus.org/quake2/;module=trunk \
->             file://quake2-arm.patch;patch=1"
-> @@ -14,7 +15,7 @@ S = "${WORKDIR}/trunk"
->  export BUILD_SDLQUAKE2=YES
->  export OSTYPE=Linux
->  export ARCH=${TARGET_ARCH}
-> -export BASE_CFLAGS="${TARGET_CC_ARCH} -Wall -pipe -Dstricmp=strcasecmp"
-> +export BASE_CFLAGS="${TARGET_CC_ARCH} ${LDFLAGS} -Wall -pipe -Dstricmp=strcasecmp"
->  export OPT_CFLAGS="-O3 -ffast-math -funroll-loops -fomit-frame-pointer -fexpensive-optimizations"
+>  S = "${WORKDIR}/FreeImage/"
 >  
->  do_compile() {
+> +TARGET_CC_ARCH += "${LDFLAGS}"
+> +
+>  do_configure() {
+>      sed -i -e /^CC/d \
+>             -e /^CXX\ /d \
 
---------------ms060303050507040308070005
+--------------ms060408000705090408070305
 Content-Type: application/x-pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -128,17 +123,17 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA2QwggNgAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHDMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDkxMjEx
-MzMzOFowIwYJKoZIhvcNAQkEMRYEFB+UmoRuHbjUPD9a59YHp88dMGfDMFIGCSqGSIb3DQEJDzFF
+MzUxMlowIwYJKoZIhvcNAQkEMRYEFDy5d91rBZWDagUba/XPB0UD4sH5MFIGCSqGSIb3DQEJDzFF
 MEMwCgYIKoZIhvcNAwcwDgYIKoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0G
 CCqGSIb3DQMCAgEoMIGFBgkrBgEEAYI3EAQxeDB2MGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxU
 aGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJl
 ZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9/DCBhwYLKoZIhvcNAQkQAgsxeKB2MGIx
 CzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAoUHR5KSBMdGQuMSwwKgYD
 VQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQQIQLCV6f+hRygN3VWs2oqn9
-/DANBgkqhkiG9w0BAQEFAASCAQC5PsrZPl/K+KZP7JiDKEf8pGYCHMnVU9d4CIOBDRkKL9gfYDVi
-sRtSNQrrnkZHvOimQEbKdPA4hcNKGjvJrzS7cRXGpn17NI0kAr0DdtvoW3PtNlTtp8F+ILpPJifz
-BczBSGOaJuUwrzjSY9XxbdUuHSIc1N5BXNfBriKVNpylcCievRjtyAejulktGLHJQPmO13PwBe0u
-h8JKdF0kZMW7eHV1iFiDv8hLoNSNTps9HjGhMQawcFZiZk28K/mYd3bMN+lXLCtVIBJzPM9qna2x
-zHBAX24sfORqjLXTOTUb0V3bQoBua4yvu1MvK5gdLye4nbGC+Jai8G0jUq+3rsvhAAAAAAAA
+/DANBgkqhkiG9w0BAQEFAASCAQBkEIRS4MHv5k5/90IR2I1LnFBfSdQhL26yMNyiBMNF0d+EykQT
+TO/r21tCPLDwfjklscnMxhItlvwF4MBu6wtFkDW5/wvSF4OJjy5bC+qn5Ga+hKBUe2KwBffXxU0d
+0RySH4HHRwHHEUufNfcUNQancq8L/F2ChxDCCkC3ZKUAi4q57AG31j68/54tvyvRZMo+8GKHJpsU
+BQ5MXXI2p0GFPgKeqY3cXiceZKp0iNKv8gco7WbfheGMXXFPaJ7IWLZHdGFxDki97I4K3k2+6e/3
+xbrcfnsTRSFcuX0FxrLRoSwSUCk9WG6c57IWAumrDmmTpCOVA6D4vNp2fLraCqMkAAAAAAAA
 
---------------ms060303050507040308070005--
+--------------ms060408000705090408070305--
