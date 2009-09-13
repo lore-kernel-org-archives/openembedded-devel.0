@@ -1,30 +1,39 @@
-Received: from [68.180.197.99] (helo=web45606.mail.sp1.yahoo.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <yildiz.abdullah@yahoo.com>) id 1MmnJJ-0004Mm-55
-	for openembedded-devel@openembedded.org; Sun, 13 Sep 2009 13:32:04 +0200
-Received: (qmail 79615 invoked by uid 60001); 13 Sep 2009 11:31:30 -0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024;
-	t=1252841490; bh=H4NJkjxKploDiiRJ3oXFoBl+dv3647dVo3cTjDep3eo=;
-	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type;
-	b=2YtkEiw2YX8kjjSO7HEDjTBzjMUMXaO4QIW4EdeRlepkVNW4+rzijGXBAnjFWQE3kfjx9YVbcQ8cjNup59GulH79h3FJbMkeazjiz9Y5zgyUP05C99HvNJQatcU9MYCadN4KYOwcIN3lUEzoEJVmxRyG4hkSoOU4I/ItHSN9vwY=
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=yahoo.com;
-	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type;
-	b=YL1NhygJtnA0G3cP1qDaQXQzrZcvEGXpQQjy21PlE01RTo5CLjmWy/2V8wgrEJBOumm1GThuepfYVzbtusYY4ziiGgCjXyEiE+MZ5R8Ce+bZ87TfFP/DDQkmt7hFmw0VrVAlLDtauaznPFq+LHTT9/5Q2jvEcD3rmkV7cY9Z1VY=;
-Message-ID: <440980.75636.qm@web45606.mail.sp1.yahoo.com>
-X-YMail-OSG: 5l6cHDMVM1mCD1AIhd2UsYZj0dxG3eUk46udjaZu5_G.VSldQkc8mSymPqwbdW.6ErAndl62n4yMeG.3ftI_erqgmzcz.aXVDLq_N3OoGtiMpZgWfNuLh_6hwzDP542ujV.EWGo1SC1Z59xBpkVR1CeN2rJ4ryV7NOjAw60SO6Rbg.sRJkhzAaclQ5xLoUAxfgkWi.dfh4CA3ldJizhYaw--
-Received: from [94.120.240.239] by web45606.mail.sp1.yahoo.com via HTTP;
-	Sun, 13 Sep 2009 04:31:30 PDT
-X-Mailer: YahooMailRC/157.18 YahooMailWebService/0.7.338.2
-Date: Sun, 13 Sep 2009 04:31:30 -0700 (PDT)
-From: Abdullah YILDIZ <yildiz.abdullah@yahoo.com>
-To: openembedded-devel@lists.openembedded.org
+Received: from [209.85.219.219] (helo=mail-ew0-f219.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <andrea.adami@gmail.com>) id 1Mmvhc-00069F-GY
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 13 Sep 2009 22:29:43 +0200
+Received: by ewy19 with SMTP id 19so2503736ewy.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 13 Sep 2009 13:29:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=W1JaxXUnxwJeem+86EImyaGab/6vd5h0+HkcWmM6yCI=;
+	b=n4ybijNSzoN6hqGd5ZK6Cn6+nKzrg+7xCBUmLQdRLRI2uJAhxzskArxJVFMxobQdk2
+	SVokSTXXFRr0t/9IsMK3m8pITzUatqL0L+FUc70jz0788hpHKXvko+c2WdC1zQYdmDmO
+	AqDaT9PGhJqxGvwm19I1bD0nFPtH7ysP8XX0o=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=emi2jY4sHqnASsl1bBhN/Nogcv0fUd03UYjI2LsmeO0wUMVGrWmopUDU3KwBox16dD
+	EnKi/PNmDNBrjPU9oVYZUZwvNsiXUGcdgVwBK0DVuRRkFxIt33jqMWWIycPxD9GUQsvV
+	ZEp/yy+dau0C1q2vMrDk7t4+jt2V9XSqJW5KA=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 68.180.197.99
-X-SA-Exim-Mail-From: yildiz.abdullah@yahoo.com
+Received: by 10.216.54.143 with SMTP id i15mr1110154wec.222.1252873750093; 
+	Sun, 13 Sep 2009 13:29:10 -0700 (PDT)
+In-Reply-To: <20090913000405.GA29370@gmail.com>
+References: <20090912200308.GA10819@gmail.com>
+	<20090913000405.GA29370@gmail.com>
+Date: Sun, 13 Sep 2009 22:29:09 +0200
+Message-ID: <d1b08f940909131329i3905cd32me65854fff3efb4e8@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.219.219
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: x86 support
+Subject: Re: [RFC] mysterious armv5te-linux dir under staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,22 +47,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Sep 2009 11:32:04 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 13 Sep 2009 20:29:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+After rebuild from scratch the bogus dir has disappeared!
+Tested on angstrom/dev/glibc/c7x0
 
-I wonder that&#65533;whether&#65533;openembedded supports this configurati=
-on:
+Acked-by: Andrea Adami <andrea.adami@gmail.com>
 
-VIA ESP10K
-VIA CN333&#65533;North Bridge&#65533;
-VIA VT8237R&#65533;South Bridge
-&#65533;
-Thanks..
+Thx
+
+Andrea
 
 
-
-From ospite@studenti.unina.it Sun Sep 13 16:02:19 2009
-Received: from [85.37.17.114] (helo
