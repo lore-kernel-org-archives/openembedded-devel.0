@@ -1,33 +1,26 @@
-Received: from [213.4.138.2] (helo=IMPaqm2.telefonica.net)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enric.balletbo@telefonica.net>) id 1Mn6kt-0003bn-NF
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1Mn7MP-0007gv-QP
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Sep 2009 10:17:50 +0200
-Received: from IMPmailhost5.adm.correo ([10.20.102.126])
-	by IMPaqm2.telefonica.net with bizsmtp
-	id gXY41c00F2jdgqJ3MYHKvw; Mon, 14 Sep 2009 10:17:19 +0200
-Received: from mail-fx0-f222.google.com ([209.85.220.222])
-	by IMPmailhost5.adm.correo with BIZ IMP
-	id gYHG1c00G4oW6411lYHG8B; Mon, 14 Sep 2009 10:17:16 +0200
-X-TE-authinfo: authemail="enric.balletbo$telefonica.net"
-	|auth_email="enric.balletbo@telefonica.net"
-X-TE-AcuTerraCos: auth_cuTerraCos="cosuitnetc01"
-Received: by fxm22 with SMTP id 22so1932359fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Sep 2009 01:17:18 -0700 (PDT)
+	Mon, 14 Sep 2009 10:56:36 +0200
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1Mn7SQ-0007fR-Sa; Mon, 14 Sep 2009 11:02:46 +0200
+Message-ID: <4AAE051F.8000201@kernelconcepts.de>
+Date: Mon, 14 Sep 2009 10:55:59 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-Received: by 10.223.59.148 with SMTP id l20mr1938193fah.75.1252916238305; Mon, 
-	14 Sep 2009 01:17:18 -0700 (PDT)
-Date: Mon, 14 Sep 2009 10:17:18 +0200
-Message-ID: <70c9a9110909140117gd4aac34r912642ce20404d2e@mail.gmail.com>
-From: =?UTF-8?Q?Enric_Balletb=C3=B2_i_Serra?= <enric.balletbo@telefonica.net>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 213.4.138.2
-X-SA-Exim-Mail-From: enric.balletbo@telefonica.net
+To: openembedded-devel@lists.openembedded.org, enric.balletbo@telefonica.net
+References: <70c9a9110909140117gd4aac34r912642ce20404d2e@mail.gmail.com>
+In-Reply-To: <70c9a9110909140117gd4aac34r912642ce20404d2e@mail.gmail.com>
+X-Enigmail-Version: 0.95.7
+X-SA-Exim-Connect-IP: 212.60.202.196
+X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: New support for IGEP v2 board
+Subject: Re: New support for IGEP v2 board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,15 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Sep 2009 08:17:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 14 Sep 2009 08:56:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
 
-Hi all,
+Hello Enric,
 
-   We are interested to publish our patches to add support for our IGEP v2
-board in development and stable branch. What is the correct way to do this ?
+Enric Balletbò i Serra schrieb:
+>    We are interested to publish our patches to add support for our IGEP v2
+> board in development and stable branch. What is the correct way to do this ?
 
-   Thanks in advance,
+just submit a patch to this list. For the development branch you someone just
+needs to apply the patch.
+For a patch against the stable branch you need to ack of some core developers.
 
-        Enric Balletbo
+Greetings
+
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
+
 
