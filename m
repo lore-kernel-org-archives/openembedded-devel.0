@@ -1,25 +1,42 @@
-Received: from [64.71.152.235] (helo=lirone.symas.net)
+Received: from [160.45.40.10] (helo=mail.math.fu-berlin.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hyc@symas.com>) id 1Mn0rC-0007ZW-Lo
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Sep 2009 03:59:57 +0200
-Received: from [76.91.220.157] (helo=[192.168.1.21])
-	by lirone.symas.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <hyc@symas.com>) id 1Mn0qj-0006Bd-Bv
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Sep 2009 18:59:25 -0700
-Message-ID: <4AADA377.6010005@symas.com>
-Date: Sun, 13 Sep 2009 18:59:19 -0700
-From: Howard Chu <hyc@symas.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64;
-	rv:1.9.1b5pre) Gecko/20090909 SeaMonkey/2.0a1pre Firefox/3.0.3
-MIME-Version: 1.0
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1Mn67f-0001n6-Ku
+	for openembedded-devel@openembedded.org; Mon, 14 Sep 2009 09:37:18 +0200
+Received: (qmail 28173 invoked from network); 14 Sep 2009 09:36:46 +0200
+Received: from luzin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.148)
+	by leibniz.math.fu-berlin.de with SMTP; 14 Sep 2009 09:36:46 +0200
+Received: (qmail 19918 invoked by uid 9804); 14 Sep 2009 09:36:46 +0200
+Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
+	by localhost with SMTP; 14 Sep 2009 09:36:39 +0200
+Received: (qmail 19910 invoked by uid 9804); 14 Sep 2009 09:36:39 +0200
+Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
+	(160.45.40.10)
+	by luzin.mi.fu-berlin.de with SMTP; 14 Sep 2009 09:36:39 +0200
+Received: (qmail 28150 invoked from network); 14 Sep 2009 09:36:39 +0200
+Received: from omsk.mi.fu-berlin.de (160.45.45.210)
+	by leibniz.math.fu-berlin.de with SMTP; 14 Sep 2009 07:36:39 -0000
+Received: from heinold by omsk.mi.fu-berlin.de with local (Exim 4.69 #1
+	(Debian)) id 1Mn675-0007fy-6X
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Sep 2009 09:36:39 +0200
+Date: Mon, 14 Sep 2009 09:36:39 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 64.71.152.235
-X-SA-Exim-Mail-From: hyc@symas.com
+Message-ID: <20090914073639.GA29461@mi.fu-berlin.de>
+References: <440980.75636.qm@web45606.mail.sp1.yahoo.com>
+X-Envelope-Sender: heinold@mi.fu-berlin.de
+X-Virus-Scanned: by AMaViS
+	0.3.12pre7-L41+ClamAV[19913](NAI-uvscan@mi.fu-berlin.de)
+X-Remote-IP: 160.45.45.210
+MIME-Version: 1.0
+In-Reply-To: <440980.75636.qm@web45606.mail.sp1.yahoo.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-SA-Exim-Connect-IP: 160.45.40.10
+X-SA-Exim-Mail-From: heinold@mi.fu-berlin.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: python-wpactrl
+Subject: Re: x86 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,40 +50,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Sep 2009 01:59:58 -0000
-X-Groupsio-MsgNum: 13084
-Content-Type: multipart/mixed; boundary="------------090506020600020503080201"
+X-List-Received-Date: Mon, 14 Sep 2009 07:37:19 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
---------------090506020600020503080201
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+On Sun, Sep 13, 2009 at 04:31:30AM -0700, Abdullah YILDIZ wrote:
+> Hi,
+> 
+> I wonder that whether openembedded supports this configuration:
+> 
+> VIA ESP10K
+> VIA CN333 North Bridge 
+> VIA VT8237R South Bridge
+>  
+> Thanks..
 
-Here's a recipe file for the python-wpactrl module, which connects to 
-wpa_supplicant's control interface. It works for me...
+Depends only on the kernel. So maybee you need some patches.
 
--- 
-   -- Howard Chu
-   CTO, Symas Corp.           http://www.symas.com
-   Director, Highland Sun     http://highlandsun.com/hyc/
-   Chief Architect, OpenLDAP  http://www.openldap.org/project/
+Bye Henning
 
---------------090506020600020503080201
-Content-Type: text/plain;
- name="python-wpactrl_1.0.bb"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="python-wpactrl_1.0.bb"
 
-DESCRIPTION = "A Python extension for wpa_supplicant/hostapd control interface access"
-HOMEPAGE = "http://projects.otaku42.de/wiki/PythonWpaCtrl"
-SECTION = "devel/python"
-LICENSE = "GPLv2"
-PR = "r0"
-
-SRC_URI = "svn://svn.otaku42.de;module=python-wpactrl;proto=http;rev=383"
-
-S = "${WORKDIR}/python-wpactrl/trunk"
-
-inherit distutils
-
---------------090506020600020503080201--
