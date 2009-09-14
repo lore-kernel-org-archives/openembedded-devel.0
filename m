@@ -1,39 +1,56 @@
-Received: from [74.125.92.147] (helo=qw-out-1920.google.com)
+Received: from [72.14.220.155] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MnFrA-0003SA-Km
+	(envelope-from <piernik@gmail.com>) id 1MnGpp-0000vU-Su
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Sep 2009 20:00:55 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so945352qwk.36
+	Mon, 14 Sep 2009 21:03:36 +0200
+Received: by fg-out-1718.google.com with SMTP id d23so946630fga.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Sep 2009 11:00:23 -0700 (PDT)
+	Mon, 14 Sep 2009 12:03:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=xHPDPhctE7M4Mqf7KlXwCNzjrV7W77Q8UxoqmhHmdsQ=;
-	b=KPp8dJuBSHKLQlWpCDRiEICEejExeaLcpz912DSqDjspx965fKnCpDmz4GVU6Ltzy7
-	7y1RNvmqaLG1a1mrKNGc2FktiOsETdDTSHuXnqX93mgxPqNE7+fzBu6vHiQo91BslHXS
-	NKtLLhIcaugqWjiJJcLtPmUKz4UqoZjCHgkkg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=domainkey-signature:received:received:sender:date:from:to:subject
+	:message-id:in-reply-to:references:x-mailer:mime-version
 	:content-type:content-transfer-encoding;
-	b=HYK1ncecuGewMYV6NtTDMPARJxS96K98FEEzCWEa5LBdTpAWW2cUlAFtHfz1hg6cM/
-	wa1cwV0MohUaTOQE5CPgU4RUJgnQY/cmUfsFeFm1fkpboVQbX4Tt6Q2bkD70zbpNYvPW
-	XC04cZDnXLc/00rtP26eliiV/pnrs/hYJKu1U=
-MIME-Version: 1.0
-Received: by 10.229.31.147 with SMTP id y19mr2107453qcc.5.1252950781412; Mon, 
-	14 Sep 2009 10:53:01 -0700 (PDT)
-In-Reply-To: <1252941903-6186-1-git-send-email-enric.balletbo@telefonica.net>
-References: <1252941903-6186-1-git-send-email-enric.balletbo@telefonica.net>
-Date: Mon, 14 Sep 2009 10:53:01 -0700
-Message-ID: <19c1b8a90909141053u2c37f466t815c1120b896899a@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	bh=i1j1Jh2vVUlADxTFZeXPZgNrhGONpm2ZN/3crI2UILQ=;
+	b=DGy4Jowd1GHRHNDDLXhemQiMQY251bLiP1v/1HUkZOaU2kMbkRc5HC9BBckZSpCqmV
+	LzOO1k8yzM0p7dqjLqf5CNSADuTDIOTuR5BRQTTFIPBA8siyNv2QpjFnndONxqcaQtyR
+	8dWO5bfbCdgoJCnzysPaLbGFeVApfE2J8ezjM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:date:from:to:subject:message-id:in-reply-to:references
+	:x-mailer:mime-version:content-type:content-transfer-encoding;
+	b=ib8nhJwqKwoqjRW5tFtCAVP7KSB/bZqE0DFyKDUbPqhl56r1BiLRUPAsFXQ7GxkzlX
+	HjI+cc5vyHxSwLwveHf0hVChURlfshQZZk0lfxZViXdX8EtmIlgntahA0mrTqkNxGxkS
+	O9SKMgIo0Po48eehpOffzcIXNi9dA0HJSJKVw=
+Received: by 10.86.184.35 with SMTP id h35mr5319851fgf.18.1252954984636;
+	Mon, 14 Sep 2009 12:03:04 -0700 (PDT)
+Received: from localhost.localdomain (87-205-78-57.adsl.inetia.pl
+	[87.205.78.57])
+	by mx.google.com with ESMTPS id d4sm147852fga.21.2009.09.14.12.03.03
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 14 Sep 2009 12:03:04 -0700 (PDT)
+Sender: Krzysztof Kotlenga <piernik@gmail.com>
+Date: Mon, 14 Sep 2009 21:02:58 +0200
+From: Krzysztof Kotlenga <pocek@users.sf.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.92.147
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Message-ID: <20090914210258.6067b9e5@users.sf.net>
+In-Reply-To: <91283b620909140431x1f91ec27o39a83f9921047920@mail.gmail.com>
+References: <91283b620908241055p6b67a7edy44a3dee2f88e2b40@mail.gmail.com>
+	<91283b620908250454n428bdc4ek2cd4df45690e47c0@mail.gmail.com>
+	<200908251609.25008.holger+oe@freyther.de>
+	<91283b620909102232me9db8dck490abb53a8ba8fff@mail.gmail.com>
+	<20090911081303.GA18964@localhost.minsk.epam.com>
+	<91283b620909110351r2d9758b4n20f0f02dfed4b058@mail.gmail.com>
+	<20090911112612.GB19399@localhost.minsk.epam.com>
+	<91283b620909110506p5768a960o6bf4abab421cb1b3@mail.gmail.com>
+	<91283b620909110523je5eb85atc7c421ac0e64df61@mail.gmail.com>
+	<20090911130127.GC19399@localhost.minsk.epam.com>
+	<91283b620909140431x1f91ec27o39a83f9921047920@mail.gmail.com>
+X-Mailer: Claws Mail 3.7.2 (GTK+ 2.17.11; i686-pc-linux-gnu)
+Mime-Version: 1.0
+X-SA-Exim-Connect-IP: 72.14.220.155
+X-SA-Exim-Mail-From: piernik@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Add new IGEP v2 support
+Subject: Re: Qt problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,31 +64,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Sep 2009 18:00:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 14 Sep 2009 19:03:37 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Mon, Sep 14, 2009 at 8:25 AM,  <enric.balletbo@telefonica.net> wrote:
-> Hi all,
->
-> =C2=A0Please consider to add these patches to add support for new IGEP v2=
- board.
+Stuart Gray wrote:
 
-nothing is attached.
+> [OMG]
 
->
-> =C2=A0Regards,
->
-> =C2=A0 =C2=A0 =C2=A0Enric Balletb=C3=B2 i Serra
->
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+PLEASE read this:
+http://www.anta.net/misc/nnq/nquote.shtml
+
+-- 
+A: Because it breaks the logical sequence of discussion
+Q: Why is top posting bad?
 
 
