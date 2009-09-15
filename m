@@ -1,43 +1,36 @@
-Received: from [209.85.211.183] (helo=mail-yw0-f183.google.com)
+Received: from [213.4.138.1] (helo=IMPaqm1.telefonica.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MnRjn-0006KK-Sl
+	(envelope-from <enric.balletbo@telefonica.net>) id 1MnSWr-0005sn-2M
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Sep 2009 08:42:07 +0200
-Received: by ywh13 with SMTP id 13so5735549ywh.20
+	Tue, 15 Sep 2009 09:32:48 +0200
+Received: from IMPmailhost3.adm.correo ([10.20.102.124])
+	by IMPaqm1.telefonica.net with bizsmtp
+	id guiv1c0072h2L9m01vYFQ1; Tue, 15 Sep 2009 09:32:15 +0200
+Received: from mail-bw0-f210.google.com ([209.85.218.210])
+	by IMPmailhost3.adm.correo with BIZ IMP
+	id gvYF1c0024YxRcH1jvYFlK; Tue, 15 Sep 2009 09:32:15 +0200
+X-TE-authinfo: authemail="enric.balletbo$telefonica.net"
+	|auth_email="enric.balletbo@telefonica.net"
+X-TE-AcuTerraCos: auth_cuTerraCos="cosuitnetc01"
+Received: by bwz6 with SMTP id 6so2528258bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Sep 2009 23:41:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=qZTzrl0h2FtokyCmsQGQrcLzdW8qRm0PQIZ7NvGP994=;
-	b=pSzKyccmICLDDNtls+yoio5iyK5BqL8VrkOjc/o77e+6BuWZUlu0+3HSQaalk8Mtoc
-	VXp9aCElg6+7I/CXi1ltTvHCPBUbZCgtuKk2ksf1+73f5hYNvIoadM4Zvn9StJXjTEuw
-	jYZybeH+XbhNYVhCn/9WxCe8XRcTwwUHX0+KI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=EceejgHxn3UP+EGpk0hvmadGcl+OnsnhGFC2FHh+6bAqyI4WYEhjArcFFkGCNgtrBs
-	FBxvUP4FuwVY5vsGmtrB+DiFg1BWJdX1+1GXwIE2fGTi6CV00bABGQimB/gCMcpaXn/7
-	+Exq7DwoWnl4y0Ck/yyjnH/CMyOQzQsEZQMOw=
-Received: by 10.101.141.12 with SMTP id t12mr7142343ann.14.1252996892167;
-	Mon, 14 Sep 2009 23:41:32 -0700 (PDT)
-Received: from localhost (adsl-71-146-28-171.dsl.pltn13.sbcglobal.net
-	[71.146.28.171])
-	by mx.google.com with ESMTPS id d24sm420075and.8.2009.09.14.23.41.30
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 14 Sep 2009 23:41:31 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Tue, 15 Sep 2009 00:32:14 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.223.58.139 with SMTP id g11mr2517487fah.43.1252999934779; Tue, 
+	15 Sep 2009 00:32:14 -0700 (PDT)
+In-Reply-To: <19c1b8a90909141053u2c37f466t815c1120b896899a@mail.gmail.com>
+References: <1252941903-6186-1-git-send-email-enric.balletbo@telefonica.net>
+	<19c1b8a90909141053u2c37f466t815c1120b896899a@mail.gmail.com>
+Date: Tue, 15 Sep 2009 09:32:14 +0200
+Message-ID: <70c9a9110909150032o51ed1ff7o829cdb73e37d2355@mail.gmail.com>
+From: =?UTF-8?Q?Enric_Balletb=C3=B2_i_Serra?= <enric.balletbo@telefonica.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Sep 2009 23:41:16 -0700
-Message-Id: <1252996876-782-3-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1252996876-782-2-git-send-email-raj.khem@gmail.com>
-References: <1252996876-782-1-git-send-email-raj.khem@gmail.com>
-	<1252996876-782-2-git-send-email-raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.211.183
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 213.4.138.1
+X-SA-Exim-Mail-From: enric.balletbo@telefonica.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 3/3] minimal.conf: Set PREFERRED_VERSION of glib to 2.21.4
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Add new IGEP v2 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,29 +44,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Sep 2009 06:42:07 -0000
+X-List-Received-Date: Tue, 15 Sep 2009 07:32:48 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- conf/distro/minimal.conf |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+Sorry the patches are attached in other mails I sent
 
-diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
-index ecf6649..4bb2738 100644
---- a/conf/distro/minimal.conf
-+++ b/conf/distro/minimal.conf
-@@ -106,7 +106,8 @@ require conf/distro/include/preferred-e-versions.inc
- require conf/distro/include/preferred-opie-versions-1.2.4.inc
- require conf/distro/include/preferred-xorg-versions-X11R7.4-updates.inc
- require conf/distro/include/preferred-xorg-versions-X11R7.4.inc
--
-+PREFERRED_VERSION_glib-2.0-native ?= "2.21.4"
-+PREFERRED_VERSION_glib-2.0 ?= "2.21.4"
- #############################################################################
- # CONTENTS
- #############################################################################
--- 
-1.6.3.3
+    Regards,
 
+            Enric Balletb=C3=B2 i Serra
 
+2009/9/14 Khem Raj <raj.khem@gmail.com>
+
+> On Mon, Sep 14, 2009 at 8:25 AM,  <enric.balletbo@telefonica.net> wrote:
+> > Hi all,
+> >
+> >  Please consider to add these patches to add support for new IGEP v2
+> board.
+>
+> nothing is attached.
+>
+> >
+> >  Regards,
+> >
+> >      Enric Balletb=C3=B2 i Serra
+> >
+> >
+> >
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+> >
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
