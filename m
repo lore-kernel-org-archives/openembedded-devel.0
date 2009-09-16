@@ -1,43 +1,26 @@
-Received: from [209.85.220.222] (helo=mail-fx0-f222.google.com)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1Mo0vu-0002dB-RJ
+	(envelope-from <holger+oe@freyther.de>) id 1Mo1nM-00079B-Lv
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Sep 2009 22:16:57 +0200
-Received: by fxm22 with SMTP id 22so3747152fxm.12
+	Wed, 16 Sep 2009 23:12:11 +0200
+Received: from tamarin.localnet (static.233.147.46.78.clients.your-server.de
+	[78.46.147.233])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 53EDC1B10C05
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Sep 2009 13:16:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=GJBeeka85zV/e5H0NO3QytGVU0fF8QO45enbO14nEWc=;
-	b=FSkvDcl254hHVNOHD4oc2gTEHRrYxBLL0PYk1OXCOA9p9y2nDQo/S+KiSWt+6Q/5Ze
-	45uzco4r+JfL0XiGxfrMOsSpq4064RSE7ihnKOuGsX5tXzZj2mOYYcytGE2aghIIFYZa
-	s61FXYIC/t6rhHxUqCroDINPTzHXh6r8g0NKc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=l2oQrksswrhL8LuSXBDhamurlVRdHW/GojQcPD/FuFsVIikapcUGUAubQMr0Ijcmo0
-	ZA9xB3NaJ1zHCtaKnIGG9Qfk3COo72tLHCeN8vbcAWQFBtlCjbYZfd6JLiEI3EUQMf2W
-	eYMpD1ePQrFq9WOPHNoGAWkS7ZJhGHu/8AOXA=
-MIME-Version: 1.0
-Received: by 10.239.163.202 with SMTP id q10mr858393hbd.129.1253132181993; 
-	Wed, 16 Sep 2009 13:16:21 -0700 (PDT)
-In-Reply-To: <70c9a9110909150058k34419c27n8bcc80abb2cda147@mail.gmail.com>
-References: <1252941903-6186-1-git-send-email-enric.balletbo@telefonica.net>
-	<1252941903-6186-2-git-send-email-enric.balletbo@telefonica.net>
-	<1252941903-6186-3-git-send-email-enric.balletbo@telefonica.net>
-	<h8lu4h$jte$1@ger.gmane.org>
-	<70c9a9110909150058k34419c27n8bcc80abb2cda147@mail.gmail.com>
-Date: Wed, 16 Sep 2009 22:16:21 +0200
-Message-ID: <c384c5ea0909161316l74594a96seed94b7a144472ee@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
+	Wed, 16 Sep 2009 21:17:47 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.222
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+Date: Wed, 16 Sep 2009 19:51:44 +0200
+User-Agent: KMail/1.12.0 (Linux/2.6.31-rc4; KDE/4.3.1; i686; ; )
+References: <20090910184949.GA31155@gmail.com>
+In-Reply-To: <20090910184949.GA31155@gmail.com>
+MIME-Version: 1.0
+Message-Id: <200909161951.44617.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] linux-igep2: Add 2.6.28.10 for IGEP v2 machine
+Subject: Re: GCC 4.4.1 test results on minimal-uclibc/ARM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,47 +34,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Sep 2009 20:16:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 16 Sep 2009 21:12:11 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-15"
+Content-Transfer-Encoding: 7bit
 
-Hello Enric, all,
-
-On Tue, Sep 15, 2009 at 9:58 AM, Enric Balletb=F2 i Serra
-<enric.balletbo@telefonica.net> wrote:
+On Thursday 10 September 2009 20:49:49 Khem Raj wrote:
+> Hi
 >
-> =A0 At this time our board it's not included in mach-types file (beacause=
- is
-> too old), we're waiting for an update of mach-types file to publish the
-> patches to the linux-omap tree and then switch to the linux-omap recipe i=
-n
-> OE like others OMAP3 based boards. For this reason, we prefer to use the
-> linux-igep2 recipe for now.
+> Attached are the results of gcc 4.4.1 on thumb/uclibc/minimal
+> combination.
 >
-
-I had the same problem for an other ARM board.
-
-This solves it, if you submitted the machine number upstream to
-http://www.arm.linux.org.uk:
-
-#do_patch_append() {
-#        curl -o mach-types
-"http://www.arm.linux.org.uk/developer/machines/download.php"
-#}
-
-do_configure_prepend() {
-        # update machine types list for ARM architecture
-        curl -o mach-types
-"http://www.arm.linux.org.uk/developer/machines/download.php" && \
-        cp mach-types arch/arm/tools/mach-types
+> One common fail is due to fvisibility. I havent looked at finding
+> the cause but otherwise the results are ok.
+>
+> Should we start using gcc 4.4.1 as default compiler for minimal distro ?
 
 
-However, can someone see why the do_patch_append() approach does not work?
+awesome, could you share your dejagnu setup?
 
-It clearly belongs in the patch area, not the configure area.
-
-Regards,
---=20
-Leon
+z.
 
 
