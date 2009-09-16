@@ -1,24 +1,38 @@
-Received: from [209.85.221.190] (helo=mail-qy0-f190.google.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msundius@sundius.com>) id 1MnyGO-0007aP-EG
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Mnz5W-0005y3-Ry for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Sep 2009 20:18:45 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1Mnz51-0003ap-0w
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Sep 2009 19:25:55 +0200
-Received: by qyk28 with SMTP id 28so5190806qyk.28
+	Wed, 16 Sep 2009 20:18:11 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Sep 2009 20:18:11 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Sep 2009 10:25:19 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.229.19.149 with SMTP id a21mr2308000qcb.29.1253121917797; Wed, 
-	16 Sep 2009 10:25:17 -0700 (PDT)
-Date: Wed, 16 Sep 2009 10:25:17 -0700
-Message-ID: <18e217240909161025p279a35f4ma8a714bddb63ec0@mail.gmail.com>
-From: C Michael Sundius <msundius@sundius.com>
+	Wed, 16 Sep 2009 20:18:11 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.221.190
-X-SA-Exim-Mail-From: msundius@sundius.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 16 Sep 2009 20:17:48 +0200
+Message-ID: <h8ra4c$o1k$1@ger.gmane.org>
+References: <4AB0BBA2.8030607@iki.fi>
+	<f96d234e0909160548r3ec9a8c8r2c27c29910203401@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <f96d234e0909160548r3ec9a8c8r2c27c29910203401@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: slight different confirurations for a package
+Subject: Re: [PATCH] armv5te mentioned twice on eabi-capable list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,44 +46,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Sep 2009 17:25:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 16 Sep 2009 18:18:46 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I'd like to be able to build several different configurations of the same
-package and I'm wondering if the community might have some good input on the
-best way to organize this. My project has several images that are built for
-various products and customers and hardware. Generally all of the software
-is the same save a few key packages. (really even the kernel is constant
-across all platforms). and right now I have a different disto.conf file that
-corresponds to an image recipe for each platform.
+On 16-09-09 14:48, Cliff Brake wrote:
+> On Wed, Sep 16, 2009 at 6:19 AM, Aleksandr Koltsoff<czr@iki.fi>  wrote:
+>> (My first patch generated with git, please be gentle :-).
+>>
+>> armv5te is mentioned twice in the arm_eabi_supporting_arches list of
+>> sane-toolchain.inc. Remove the latter occurance.
+>
+> Looks good.  I'll let Khem or some who is more familiar with toolchains apply.
+>
+> One suggestion, we have a commit policy
+> (http://wiki.openembedded.net/index.php/Commit_Policy), so if you
+> follow that on future patches, we can directly git-am your patches and
+> push them with no extra work.
+>
+> So the commit message for this might be:
+>
+> sane-toolchain.inc: remove extra armv5te in eabi-capable list
+>
+> This allows people to very quickly get an idea what this patch applies
+> to, and makes for nice formatting in the weekly change logs.
 
-I want to be able to build all of the platforms together within the same out
-dir. (so I don't have to rebuild the bulk of the software wasting disk space
-and time).
+Note that in general we don't like putting the filename in the commit 
+message.
 
-I've thought about defining separate recipes:
-     (foo-config1.bb, foo-config2.bb)
-or simply using a variable to define ${PN} from within the recipe:
+regards,
 
-    PN = ${DISTRO_CONFIG}
+Koen
 
- I suppose these could work, but I'm wondering if I can create a whole new
-directory under work and staging like when I set PACKAGE_ARCH =
-${MACHINE_ARCH} for the kernel and drivers.
 
-as I said, right now I have a separate distro/*.conf file for each image
-(and thus configuration) I build, really the difference between these is the
-configuration of just a few packages all other software is built w/ the same
-recipe and configs. Is there a way anyone can think of to consolidate these
-so I can build everything without
-changing the local.conf (DISTRO variable).
-
-I realize this is a nebulous question, but if anyone has an experience
-similar where they have had to organize various builds and found a clean or
-better way to build them all for both development and production or you have
-some opinions about how you made your decisions to do things one way or
-another , I'd love to hear your comments.
-
-Thank you
-Mike
 
