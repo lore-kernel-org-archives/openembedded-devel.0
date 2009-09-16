@@ -1,27 +1,24 @@
-Received: from [64.71.152.235] (helo=lirone.symas.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hyc@symas.com>) id 1MnZ3x-0005K9-4R
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Sep 2009 16:31:24 +0200
-Received: from m440536d0.tmodns.net ([208.54.5.68] helo=[192.168.2.1])
-	by lirone.symas.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <hyc@symas.com>) id 1MnZ3R-0002G9-Eh
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Sep 2009 07:30:50 -0700
-Message-ID: <4AAFA50B.7000007@symas.com>
-Date: Tue, 15 Sep 2009 07:30:35 -0700
-From: Howard Chu <hyc@symas.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64;
-	rv:1.9.1b5pre) Gecko/20090909 SeaMonkey/2.0a1pre Firefox/3.0.3
-MIME-Version: 1.0
+Received: from [194.187.214.26] (helo=iohazard.net)
+	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <czr@iki.fi>)
+	id 1Mnrc6-00013P-BM for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Sep 2009 12:19:53 +0200
+Received: from chehov.intranet (a88-114-240-122.elisa-laajakaista.fi
+	[::ffff:88.114.240.122])
+	(AUTH: PLAIN czr, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
+	by iohazard.net with esmtp; Wed, 16 Sep 2009 13:19:17 +0300
+	id 00065940.4AB0BBA5.00006BFB
+Message-ID: <4AB0BBA2.8030607@iki.fi>
+Date: Wed, 16 Sep 2009 13:19:14 +0300
+From: Aleksandr Koltsoff <czr@iki.fi>
+User-Agent: Thunderbird 2.0.0.18 (X11/20081125)
+Mime-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <mailman.15.1253008803.14572.openembedded-devel@lists.openembedded.org>
-In-Reply-To: <mailman.15.1253008803.14572.openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 64.71.152.235
-X-SA-Exim-Mail-From: hyc@symas.com
+X-Enigmail-Version: 0.95.0
+X-SA-Exim-Connect-IP: 194.187.214.26
+X-SA-Exim-Mail-From: czr@iki.fi
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: python-wpactrl
+Subject: [PATCH] armv5te mentioned twice on eabi-capable list
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,38 +32,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Sep 2009 14:31:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 16 Sep 2009 10:19:53 -0000
+Content-Type: multipart/mixed;
+	boundary="=_iohazard.net-27643-1253096357-0001-2"
+
+--=_iohazard.net-27643-1253096357-0001-2
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: 7bit
 
-openembedded-devel-request@lists.openembedded.org wrote:
+(My first patch generated with git, please be gentle :-).
 
-> Date: Tue, 15 Sep 2009 09:13:22 +0100
-> From: Phil Blundell<philb@gnu.org>
+armv5te is mentioned twice in the arm_eabi_supporting_arches list of
+sane-toolchain.inc. Remove the latter occurance.
 
-> On Sun, 2009-09-13 at 18:59 -0700, Howard Chu wrote:
->> Here's a recipe file for the python-wpactrl module, which connects to
->> wpa_supplicant's control interface. It works for me...
->
-> Thanks for the patch.
->
-> Your bb file is named "python-wpactrl_1.0", which would suggest that
-> this is for version 1.0 of the package.  But the SRC_URI seems to point
-> to some random-looking svn revision.  Can you clarify what the
-> versioning situation is with that?
+ak.
 
-I'll use the svn revision number. I used 1.0 because that's the version number 
-present in the various files of the repository. It may take a while before I 
-get to reposting this, have a lot of other things on my plate.
+--=_iohazard.net-27643-1253096357-0001-2
+Content-Type: text/x-diff; name="0001-fix-armv5te-mentioned-twice-in-the-eabi-capable-list.patch"; charset=iso-8859-1
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename*0="0001-fix-armv5te-mentioned-twice-in-the-eabi-capable-list.pa";
+ filename*1="tch"
 
-> The patch looks fine to me otherwise.
+From 0776995c4668d744ff96397639ac646fc4b5133c Mon Sep 17 00:00:00 2001
+From: Aleksandr Koltsoff <czr@iki.fi>
+Date: Wed, 16 Sep 2009 13:12:05 +0300
+Subject: [PATCH] fix armv5te mentioned twice in the eabi-capable list
 
-Thanks for the review.
+---
+ conf/distro/include/sane-toolchain.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
+diff --git a/conf/distro/include/sane-toolchain.inc b/conf/distro/include/sane-toolchain.inc
+index e2c6740..d0bb8bc 100644
+--- a/conf/distro/include/sane-toolchain.inc
++++ b/conf/distro/include/sane-toolchain.inc
+@@ -157,7 +157,7 @@ def detect_arm_abi (d):
+ def compute_os_portion_of_target_triplet (d):
+ 	import bb
+ 	arm_eabi_supporting_arches = "armv6 armv6-novfp \
+-	armv5te iwmmxt armv7a armv7 armv6 armv5teb armv5te armv4t"
++	armv5te iwmmxt armv7a armv7 armv6 armv5teb armv4t"
+ 	ppc_spe_supporting_arches = "ppce500v2 ppce500"
+ 
+   	if bb.data.getVar("LIBC", d, 1) == "uclibc":
 -- 
-   -- Howard Chu
-   CTO, Symas Corp.           http://www.symas.com
-   Director, Highland Sun     http://highlandsun.com/hyc/
-   Chief Architect, OpenLDAP  http://www.openldap.org/project/
+1.6.4
 
 
+--=_iohazard.net-27643-1253096357-0001-2--
