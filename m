@@ -1,24 +1,30 @@
-Received: from [194.187.214.26] (helo=iohazard.net)
-	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <czr@iki.fi>)
-	id 1Mnrc6-00013P-BM for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Sep 2009 12:19:53 +0200
-Received: from chehov.intranet (a88-114-240-122.elisa-laajakaista.fi
-	[::ffff:88.114.240.122])
-	(AUTH: PLAIN czr, SSL: TLSv1/SSLv3,256bits,AES256-SHA)
-	by iohazard.net with esmtp; Wed, 16 Sep 2009 13:19:17 +0300
-	id 00065940.4AB0BBA5.00006BFB
-Message-ID: <4AB0BBA2.8030607@iki.fi>
-Date: Wed, 16 Sep 2009 13:19:14 +0300
-From: Aleksandr Koltsoff <czr@iki.fi>
-User-Agent: Thunderbird 2.0.0.18 (X11/20081125)
-Mime-Version: 1.0
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <sledz@DResearch.DE>) id 1MntRJ-0005h5-Ai
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Sep 2009 14:16:52 +0200
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 3354316E244;
+	Wed, 16 Sep 2009 12:17:55 +0200 (CEST)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id DA9ED2A4285;
+	Wed, 16 Sep 2009 12:17:54 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Wed, 16 Sep 2009 12:18:34 +0200
+Message-ID: <4AB0BB33.7050304@dresearch.de>
+Date: Wed, 16 Sep 2009 12:17:23 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-SA-Exim-Connect-IP: 194.187.214.26
-X-SA-Exim-Mail-From: czr@iki.fi
+X-OriginalArrivalTime: 16 Sep 2009 10:18:34.0843 (UTC)
+	FILETIME=[0C665AB0:01CA36B7]
+X-SA-Exim-Connect-IP: 87.193.137.78
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] armv5te mentioned twice on eabi-capable list
+Subject: automake/aclocal or env problem?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,52 +38,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Sep 2009 10:19:53 -0000
-Content-Type: multipart/mixed;
-	boundary="=_iohazard.net-27643-1253096357-0001-2"
-
---=_iohazard.net-27643-1253096357-0001-2
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Wed, 16 Sep 2009 12:16:52 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-(My first patch generated with git, please be gentle :-).
+We're using automake (1.10.2) on our target machine for rapid prototyping.
 
-armv5te is mentioned twice in the arm_eabi_supporting_arches list of
-sane-toolchain.inc. Remove the latter occurance.
+Calling "autoreconf --install" results in this error:
 
-ak.
+ /usr/bin/env: perl -w: No such file or directory
+ autoreconf: aclocal failed with exit status: 127
 
---=_iohazard.net-27643-1253096357-0001-2
-Content-Type: text/x-diff; name="0001-fix-armv5te-mentioned-twice-in-the-eabi-capable-list.patch"; charset=iso-8859-1
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
- filename*0="0001-fix-armv5te-mentioned-twice-in-the-eabi-capable-list.pa";
- filename*1="tch"
+An strace shows this:
 
-From 0776995c4668d744ff96397639ac646fc4b5133c Mon Sep 17 00:00:00 2001
-From: Aleksandr Koltsoff <czr@iki.fi>
-Date: Wed, 16 Sep 2009 13:12:05 +0300
-Subject: [PATCH] fix armv5te mentioned twice in the eabi-capable list
+[pid  1258] execve("/usr/local/bin/perl -w", ["perl -w", "/usr/bin/aclocal", "--output=aclocal.m4t"], [/* 15 vars */]) = -1 ENOENT (No such file or directory)
+[pid  1258] execve("/usr/bin/perl -w", ["perl -w", "/usr/bin/aclocal", "--output=aclocal.m4t"], [/* 15 vars */]) = -1 ENOENT (No such file or directory)
+[pid  1258] execve("/bin/perl -w", ["perl -w", "/usr/bin/aclocal", "--output=aclocal.m4t"], [/* 15 vars */]) = -1 ENOENT (No such file or directory)
+[pid  1258] execve("/usr/local/sbin/perl -w", ["perl -w", "/usr/bin/aclocal", "--output=aclocal.m4t"], [/* 15 vars */]) = -1 ENOENT (No such file or directory)
+[pid  1258] execve("/usr/sbin/perl -w", ["perl -w", "/usr/bin/aclocal", "--output=aclocal.m4t"], [/* 15 vars */]) = -1 ENOENT (No such file or directory)
+[pid  1258] execve("/sbin/perl -w", ["perl -w", "/usr/bin/aclocal", "--output=aclocal.m4t"], [/* 15 vars */]) = -1 ENOENT (No such file or directory)
+[pid  1258] execve("/opt/bin/perl -w", ["perl -w", "/usr/bin/aclocal", "--output=aclocal.m4t"], [/* 15 vars */]) = -1 ENOENT (No such file or directory)
+[pid  1258] execve("/opt/avr/bin/perl -w", ["perl -w", "/usr/bin/aclocal", "--output=aclocal.m4t"], [/* 15 vars */]) = -1 ENOENT (No such file or directory)
+[pid  1258] write(2, "/usr/bin/env: ", 14/usr/bin/env: ) = 14
+[pid  1258] write(2, "perl -w", 7perl -w)      = 7
+[pid  1258] write(2, ": No such file or directory", 27: No such file or directory) = 27
+[pid  1258] write(2, "\n", 1
 
----
- conf/distro/include/sane-toolchain.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+My interpretation is that execve looks e.g. for an executable named "/usr/bin/perl -w" and not for "/usr/bin/perl" with option "-w". A look into /usr/bin/aclocal shows this shebang line:
 
-diff --git a/conf/distro/include/sane-toolchain.inc b/conf/distro/include/sane-toolchain.inc
-index e2c6740..d0bb8bc 100644
---- a/conf/distro/include/sane-toolchain.inc
-+++ b/conf/distro/include/sane-toolchain.inc
-@@ -157,7 +157,7 @@ def detect_arm_abi (d):
- def compute_os_portion_of_target_triplet (d):
- 	import bb
- 	arm_eabi_supporting_arches = "armv6 armv6-novfp \
--	armv5te iwmmxt armv7a armv7 armv6 armv5teb armv5te armv4t"
-+	armv5te iwmmxt armv7a armv7 armv6 armv5teb armv4t"
- 	ppc_spe_supporting_arches = "ppce500v2 ppce500"
- 
-   	if bb.data.getVar("LIBC", d, 1) == "uclibc":
--- 
-1.6.4
+ #!/usr/bin/env perl -w                                                                                                           
+ # -*- perl -*-                                                                                                                   
+ # Generated from aclocal.in; do not edit by hand.
+
+I'm not sure if this is wrong or /usr/bin/env is buggy.
+
+Steffen
+
+PS: A few lines later /usr/bin/aclocal contains pathes into the staging area. This should be fixed too.
 
 
---=_iohazard.net-27643-1253096357-0001-2--
+
+
