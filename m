@@ -1,37 +1,42 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [209.85.219.222] (helo=mail-ew0-f222.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MoPY1-0006Xq-Dq for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Sep 2009 00:34:00 +0200
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1MoPXT-0007ms-Pk
+	(envelope-from <leon.woestenberg@gmail.com>) id 1MoPyb-0004dX-CQ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Sep 2009 00:33:19 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Sep 2009 00:33:19 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Fri, 18 Sep 2009 01:01:24 +0200
+Received: by ewy22 with SMTP id 22so484905ewy.38
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Sep 2009 00:33:19 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 17 Sep 2009 16:00:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=FkcVnaoCAf6CKHkld5gtB6gZ8xkFcnQL3tTpK5J3mn0=;
+	b=hwhJZLFyGDIdvkzeGy/pKLg26sYVOMz6yp7/rHPipsv/SOSjmSK9L5IpJIhEzBhEvV
+	vZY05htvyKQ6UlyREV9UUdsWHZCa+gIFCg8flPqeCbXhgOdBGMEBheYpFsHI4H1Uj2LF
+	pExxvAGSk2TrEZsx8jdIV/PeCBLaCIYVLuXTM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=fjgHWPONbT0wPTTNaFyby6P8oF8S2LltcZeJBZPUloDaF2R+J0GtpQHOs6qvHf6QZW
+	0ymhHFanYVnByCKqVvxEFAZ23BG+qxPQcN7OPsO2T2+IBsLK6qXviosRdyh5rVxGwF2E
+	EUap/Hlam5k+jhiH7lo6h13EwgWZ0BzsncQME=
+MIME-Version: 1.0
+Received: by 10.210.206.12 with SMTP id d12mr1291018ebg.32.1253228447598; Thu, 
+	17 Sep 2009 16:00:47 -0700 (PDT)
+In-Reply-To: <70c9a9110909170220i1306a412o90b87055f49073e2@mail.gmail.com>
+References: <1252941903-6186-1-git-send-email-enric.balletbo@telefonica.net>
+	<1252941903-6186-2-git-send-email-enric.balletbo@telefonica.net>
+	<20090914161124.GA5843@mi.fu-berlin.de>
+	<70c9a9110909170220i1306a412o90b87055f49073e2@mail.gmail.com>
+Date: Fri, 18 Sep 2009 01:00:47 +0200
+Message-ID: <c384c5ea0909171600g63db2af1u1d94bcc77d6d0829@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 18 Sep 2009 00:32:13 +0200
-Message-ID: <h8uddd$2qs$1@ger.gmane.org>
-References: <1253207934.12689.603.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <1253207934.12689.603.camel@mill.internal.reciva.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.219.222
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: TSC: call for volunteers
+Subject: Re: [PATCH] igep0020: Add IGEP v2 support to OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,23 +50,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Sep 2009 22:34:00 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 17 Sep 2009 23:01:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 17-09-09 19:18, Phil Blundell wrote:
+Enric,
 
-> If you wish to nominate yourself (or anybody else!) as a candidate for
-> the TSC, please send me an email containing a one-paragraph summary of
-> why you think you are well suited to the job.  I will collate the
-> nominations and present them to the members for consideration.
+On Thu, Sep 17, 2009 at 11:20 AM, Enric Balletb=F2 i Serra
+<enric.balletbo@telefonica.net> wrote:
+>
+> =A0 I have passed your request to the sales department, I hope to contact
+> you.
+>
 
-That looks like a great single point of failure to me, wouldn't it be 
-better to cc the oe-devel and/or oe-members list?
+More general, could you have them consider selling boards to
+open-source project developers (for friendly prices*) so that early
+board software support becomes more widely available for your
+customers?
 
-regards,
+This looks like a first good industrial OMAP3 board. Nice feature set there=
+.
 
-Koen
+Regards, thanks,
+--=20
+Leon
 
+* with give-away options :-)
 
 
