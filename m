@@ -1,25 +1,36 @@
-Received: from [67.19.73.58] (helo=pug.o-hand.com ident=postfix)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <richard@openedhand.com>) id 1MoMG9-0005qR-RV
-	for openembedded-devel@openembedded.org; Thu, 17 Sep 2009 21:03:17 +0200
-Received: from [192.168.1.3] (93-97-173-237.zone5.bethere.co.uk
-	[93.97.173.237])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by pug.o-hand.com (Postfix) with ESMTP id 8D6AF12EC1F5;
-	Thu, 17 Sep 2009 14:15:50 -0500 (CDT)
-From: Richard Purdie <richard@openedhand.com>
-To: poky <poky@o-hand.com>
-Date: Thu, 17 Sep 2009 19:59:37 +0100
-Message-Id: <1253213978.30165.188.camel@dax.rpnet.com>
+	(envelope-from <utx@penguin.cz>) id 1MoP11-0006lK-TD
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Sep 2009 23:59:51 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id EB3DA1409731
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Sep 2009 23:53:05 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 1ciZ9bqxtDPN
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Sep 2009 23:53:05 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id BEDC81416BA5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Sep 2009 23:53:05 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1253118217.5902.58.camel@hammer.suse.cz>
+References: <4AB0BB33.7050304@dresearch.de>
+	<1253118217.5902.58.camel@hammer.suse.cz>
+Date: Thu, 17 Sep 2009 23:59:15 +0200
+Message-Id: <1253224755.9453.2.camel@utx.utx.cz>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-SA-Exim-Connect-IP: 67.19.73.58
-X-SA-Exim-Mail-From: richard@openedhand.com
+X-Mailer: Evolution 2.22.1.1 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-devel <openembedded-devel@openembedded.org>
-Subject: Poky SDK generation changes
+Subject: Re: automake/aclocal or env problem?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,66 +44,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Sep 2009 19:03:17 -0000
+X-List-Received-Date: Thu, 17 Sep 2009 21:59:51 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-As people who've used it probably know, SDK generation is a bit of a
-hack at the moment since the SDK is compiled against the system its
-built on. This means its not possible to produce a i586 SDK on a x86_64
-build machine for example.
+Stanislav Brabec wrotr:
+>Steffen Sledz wrote:
+> > I'm not sure if this is wrong or /usr/bin/env is buggy.
+> 
+> Well. I was thinking so as well. But if you call /usr/bin/env perl -w
+> from the command line, then it works as expected. In #! line it does not
+> work. Neither in busybox env nor in coreutils env. It's probably
+> expected behavior and the problem is introduced by
+> recipes/autoconf/autoconf-2.63/path_prog_fixes.patch.
+> 
+> We would probably need ac_cv_path_ magic, exactly as it is done in
+> recipes/libtool. It seems to work properly for both native and target.
 
-The current sdk.bbclass also has an identity crisis powering both cross
-toolchain recipes (like gcc, binutils and gdb) along with non-cross sdk
-tools like qemu and pkgconfig.
+I hope that this is a fix that does not break anything:
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=33cee0586991e235d0fe3d984f822ef2f310e7c3
 
-I've wanted to see "proper" SDK generation with Poky for a while and
-I've now created a series of patches which enable this which includes
-the layout variable changes I previously mentioned:
+The construction
+if ${@['true', 'false'][bb.data.inherits_class('native', d)]}
+seems to be cleaner than tricks used in libtool. I am just testing the
+same approach for libtool recipes.
 
-http://git.pokylinux.org/cgit.cgi/poky/log/?h=canadian
 
-The idea is similar to some of the canadian* classes in OE.dev but I
-ended up rewriting them entirely as I believed something simpler was
-possible and desirable. The idea is the same in that you set
-SDK_ARCH="i586" in local.conf and then the SDK will be one that runs on
-that ARCH.
-
-The end result is three classes:
-
-cross-canadian.bbclass
-crosssdk.bbclass
-nativesdk.bbclass
-
-nativesdk - These recipes provide "SDK" versions of the recipe for
-things like pkgconfig, qemu, the xlibs qemu needs and so on. The class
-is BBCLASSEXTEND capable so its usually just a case of adding
-BBCLASSEXTEND = "nativesdk" to the recipe.
-
-crosssdk - These build a cross compiler toolchain which runs on your
-build machine and cross compiles to SDK_ARCH. Its pretty much
-cross.bbclass but with TARGET_ARCH = SDK_ARCH.
-
-canadian-cross - These are the strangest packages as they're built on
-BUILD_ARCH to run on SDK_ARCH to generate output to run on TARGET_ARCH.
-
-As a nice benefit we end up with a libc in the SDK tarball which the SDK
-uses instead of linking against the one on the build machine. Poky also
-contains some code to link qemu against a dummy libGL as I didn't
-believe adding a libGL to the SDK tarball was sensible.
-
-I've cc'd the OE list since I think the changes in here are desirable
-for OE too. I haven't had much time to run OE builds of late for many
-reasons. I don't really want to make changes there without testing the
-result so any help in merging this into OE would be really appreciated.
-
-Cheers,
-
-Richard
-
--- 
-Richard Purdie
-Intel Open Source Technology Centre
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
 
