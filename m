@@ -1,32 +1,37 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [213.4.138.4] (helo=IMPaqm4.telefonica.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MoCho-00048x-5k
+	(envelope-from <enric.balletbo@telefonica.net>) id 1MoDB2-0004pz-ID
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Sep 2009 10:51:11 +0200
-Received: from [81.170.68.179] (helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MoChH-0006B5-3u
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Sep 2009 09:50:35 +0100
-From: Phil Blundell <pb@reciva.com>
+	Thu, 17 Sep 2009 11:21:23 +0200
+Received: from IMPmailhost2.adm.correo ([10.20.102.39])
+	by IMPaqm4.telefonica.net with bizsmtp
+	id hkSZ1c0080r0BT63QlLpPN; Thu, 17 Sep 2009 11:20:49 +0200
+Received: from mail-fx0-f222.google.com ([209.85.220.222])
+	by IMPmailhost2.adm.correo with BIZ IMP
+	id hlLo1c00p4oW6411ilLp1N; Thu, 17 Sep 2009 11:20:49 +0200
+X-TE-authinfo: authemail="enric.balletbo$telefonica.net"
+	|auth_email="enric.balletbo@telefonica.net"
+X-TE-AcuTerraCos: auth_cuTerraCos="cosuitnetc01"
+Received: by fxm22 with SMTP id 22so4013324fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Sep 2009 02:20:48 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.223.14.140 with SMTP id g12mr3466605faa.50.1253179248843; Thu, 
+	17 Sep 2009 02:20:48 -0700 (PDT)
+In-Reply-To: <20090914161124.GA5843@mi.fu-berlin.de>
+References: <1252941903-6186-1-git-send-email-enric.balletbo@telefonica.net>
+	<1252941903-6186-2-git-send-email-enric.balletbo@telefonica.net>
+	<20090914161124.GA5843@mi.fu-berlin.de>
+Date: Thu, 17 Sep 2009 11:20:48 +0200
+Message-ID: <70c9a9110909170220i1306a412o90b87055f49073e2@mail.gmail.com>
+From: =?UTF-8?Q?Enric_Balletb=C3=B2_i_Serra?= <enric.balletbo@telefonica.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20090917012609.GD3599@denix.org>
-References: <1251210375.4215.525.camel@lenovo.internal.reciva.com>
-	<4A968DCD.8020003@gmail.com>
-	<1251382003.27780.45.camel@mill.internal.reciva.com>
-	<20090831212051.GC6707@denix.org>
-	<1251799101.27780.87.camel@mill.internal.reciva.com>
-	<20090917012609.GD3599@denix.org>
-Date: Thu, 17 Sep 2009 09:50:33 +0100
-Message-Id: <1253177433.4490.1395.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-X-Broken-Reverse-DNS: no host name found for IP address 81.170.68.179
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: pb@reciva.com
+X-SA-Exim-Connect-IP: 213.4.138.4
+X-SA-Exim-Mail-From: enric.balletbo@telefonica.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: OEDEM November 2009
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] igep0020: Add IGEP v2 support to OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,77 +45,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Sep 2009 08:51:11 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 17 Sep 2009 09:21:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, 2009-09-16 at 21:26 -0400, Denys Dmytriyenko wrote:
-> On Tue, Sep 01, 2009 at 10:58:21AM +0100, Phil Blundell wrote:
-> > On which subject, just a quick reminder for anybody who plans to attend
-> > but hasn't yet informed me of their intentions: please send me an email
-> > within the next 7 days to ensure that you are included in the headcount.
-> 
-> So, what's the tally?
+Hi Henning,
 
-I think the list of would-be attendees currently stands at:
+   I have passed your request to the sales department, I hope to contact
+you.
 
-Balister
-Philip
+Regards,
 
-Blundell
-Phil
+    Enric Balletb=C3=B2 i Serra
 
-Boor
-Florian
+2009/9/14 Henning Heinold <heinold@inf.fu-berlin.de>
 
-Cameron
-Jonathan
-Cavallini
-Marco
-
-Dmytriyenko
-Denys
-
-Gardich
-Alessandro
-Gilmer
-Ken
-
-Gregory
-Graeme
-Heinold
-Henning
-
-Horsten
-Thomas
-
-Juszkiewicz
-Marcin
-
-Lauer
-Mickey
-
-Meulenbroeks
-Frans
-
-Purdie
-Richard
-
-Smith
-Michael
-
-Woestenberg
-Leon
-
-
-giving a total of 17 which should be easy to accomodate in either of our
-first-choice venues.  If anybody has been missed off that list, please
-let me know asap.
-
-thanks
-
-p.
-
-
-
+> Hi,
+>
+> thanks for the patches. Is there now a release date for hardware, because=
+ I
+> like to buy the board.
+> Or maybee its possible to donate a board to oe.
+>
+> Bye Henning
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
