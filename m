@@ -1,37 +1,37 @@
-Received: from [213.4.138.4] (helo=IMPaqm4.telefonica.net)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enric.balletbo@telefonica.net>) id 1MoDB2-0004pz-ID
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MoDbV-0000sS-Gr for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Sep 2009 11:48:44 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1MoDaq-0005OR-5X
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Sep 2009 11:21:23 +0200
-Received: from IMPmailhost2.adm.correo ([10.20.102.39])
-	by IMPaqm4.telefonica.net with bizsmtp
-	id hkSZ1c0080r0BT63QlLpPN; Thu, 17 Sep 2009 11:20:49 +0200
-Received: from mail-fx0-f222.google.com ([209.85.220.222])
-	by IMPmailhost2.adm.correo with BIZ IMP
-	id hlLo1c00p4oW6411ilLp1N; Thu, 17 Sep 2009 11:20:49 +0200
-X-TE-authinfo: authemail="enric.balletbo$telefonica.net"
-	|auth_email="enric.balletbo@telefonica.net"
-X-TE-AcuTerraCos: auth_cuTerraCos="cosuitnetc01"
-Received: by fxm22 with SMTP id 22so4013324fxm.12
+	Thu, 17 Sep 2009 11:48:00 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Sep 2009 11:48:00 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Sep 2009 02:20:48 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.223.14.140 with SMTP id g12mr3466605faa.50.1253179248843; Thu, 
-	17 Sep 2009 02:20:48 -0700 (PDT)
-In-Reply-To: <20090914161124.GA5843@mi.fu-berlin.de>
-References: <1252941903-6186-1-git-send-email-enric.balletbo@telefonica.net>
-	<1252941903-6186-2-git-send-email-enric.balletbo@telefonica.net>
-	<20090914161124.GA5843@mi.fu-berlin.de>
-Date: Thu, 17 Sep 2009 11:20:48 +0200
-Message-ID: <70c9a9110909170220i1306a412o90b87055f49073e2@mail.gmail.com>
-From: =?UTF-8?Q?Enric_Balletb=C3=B2_i_Serra?= <enric.balletbo@telefonica.net>
+	Thu, 17 Sep 2009 11:48:00 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 213.4.138.4
-X-SA-Exim-Mail-From: enric.balletbo@telefonica.net
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 17 Sep 2009 11:46:50 +0200
+Message-ID: <h8t0ia$9d9$1@ger.gmane.org>
+References: <20090917054034.GB5465@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <20090917054034.GB5465@denix.org>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] igep0020: Add IGEP v2 support to OE
+Subject: Re: [RFC] -dbg for static libraries?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,34 +45,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Sep 2009 09:21:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 Sep 2009 09:48:44 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Henning,
-
-   I have passed your request to the sales department, I hope to contact
-you.
-
-Regards,
-
-    Enric Balletb=C3=B2 i Serra
-
-2009/9/14 Henning Heinold <heinold@inf.fu-berlin.de>
-
-> Hi,
+On 17-09-09 07:40, Denys Dmytriyenko wrote:
+> As target binaries and libraries are now built with extra debugging symbols,
+> some of the -dbg packages are very large. Unfortunately, -dbg packages only
+> contain debug versions of executable binaries and shared libraries, but not
+> static libraries, which go directly into -dev packages. That increases the
+> size of sdk/toolchain tarballs, which include -dev packages, depending on the
+> main packages, and end up with stripped shared libs, but bloated static libs.
 >
-> thanks for the patches. Is there now a release date for hardware, because=
- I
-> like to buy the board.
-> Or maybee its possible to donate a board to oe.
+> I understand, that -dev packages are specifically for development and having
+> full debugging symbols in a library might be helpful for that, but -dev
+> packages don't usually depend on -dbg, and most toolchain-target tasks don't
+> include them either, hence not providing debugging versions of shared libs in
+> the sdk/toolchain.
 >
-> Bye Henning
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> Would it make sense to package stripped version of a static lib into -dev and
+> the full version into corresponding -dbg?
+
+What about the stripped version in -dev and the corresponding symbols in 
+-dbg?
+
+regards,
+
+Koen
+
+
+
 
