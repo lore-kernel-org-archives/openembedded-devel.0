@@ -1,30 +1,25 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [67.19.73.58] (helo=pug.o-hand.com ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1MoKdl-0002aT-Kl
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Sep 2009 19:19:33 +0200
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MoKdG-0003oY-0X
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Sep 2009 18:18:58 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1MoKdF-0007xN-Rb
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Sep 2009 18:18:57 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Sep 2009 18:18:54 +0100
-Message-Id: <1253207934.12689.603.camel@mill.internal.reciva.com>
+	(envelope-from <richard@openedhand.com>) id 1MoMG9-0005qR-RV
+	for openembedded-devel@openembedded.org; Thu, 17 Sep 2009 21:03:17 +0200
+Received: from [192.168.1.3] (93-97-173-237.zone5.bethere.co.uk
+	[93.97.173.237])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by pug.o-hand.com (Postfix) with ESMTP id 8D6AF12EC1F5;
+	Thu, 17 Sep 2009 14:15:50 -0500 (CDT)
+From: Richard Purdie <richard@openedhand.com>
+To: poky <poky@o-hand.com>
+Date: Thu, 17 Sep 2009 19:59:37 +0100
+Message-Id: <1253213978.30165.188.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 67.19.73.58
+X-SA-Exim-Mail-From: richard@openedhand.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: TSC: call for volunteers
+Cc: openembedded-devel <openembedded-devel@openembedded.org>
+Subject: Poky SDK generation changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,29 +33,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Sep 2009 17:19:33 -0000
+X-List-Received-Date: Thu, 17 Sep 2009 19:03:17 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-One item on the agenda for the forthcoming OEDEM is the appointment of a
-technical steering committee to provide engineering direction to the
-project.
+As people who've used it probably know, SDK generation is a bit of a
+hack at the moment since the SDK is compiled against the system its
+built on. This means its not possible to produce a i586 SDK on a x86_64
+build machine for example.
 
-The TSC will be elected by, and ultimately answerable to, the members of
-OE e.V.  On a day-to-day basis the TSC will be responsible for making
-tactical policy decisions, resolving disputes between contributors,
-administering access control to the git tree, and generally promoting
-good development practice.
+The current sdk.bbclass also has an identity crisis powering both cross
+toolchain recipes (like gcc, binutils and gdb) along with non-cross sdk
+tools like qemu and pkgconfig.
 
-If you wish to nominate yourself (or anybody else!) as a candidate for
-the TSC, please send me an email containing a one-paragraph summary of
-why you think you are well suited to the job.  I will collate the
-nominations and present them to the members for consideration.
+I've wanted to see "proper" SDK generation with Poky for a while and
+I've now created a series of patches which enable this which includes
+the layout variable changes I previously mentioned:
 
-thanks
+http://git.pokylinux.org/cgit.cgi/poky/log/?h=canadian
 
-p.
+The idea is similar to some of the canadian* classes in OE.dev but I
+ended up rewriting them entirely as I believed something simpler was
+possible and desirable. The idea is the same in that you set
+SDK_ARCH="i586" in local.conf and then the SDK will be one that runs on
+that ARCH.
 
+The end result is three classes:
+
+cross-canadian.bbclass
+crosssdk.bbclass
+nativesdk.bbclass
+
+nativesdk - These recipes provide "SDK" versions of the recipe for
+things like pkgconfig, qemu, the xlibs qemu needs and so on. The class
+is BBCLASSEXTEND capable so its usually just a case of adding
+BBCLASSEXTEND = "nativesdk" to the recipe.
+
+crosssdk - These build a cross compiler toolchain which runs on your
+build machine and cross compiles to SDK_ARCH. Its pretty much
+cross.bbclass but with TARGET_ARCH = SDK_ARCH.
+
+canadian-cross - These are the strangest packages as they're built on
+BUILD_ARCH to run on SDK_ARCH to generate output to run on TARGET_ARCH.
+
+As a nice benefit we end up with a libc in the SDK tarball which the SDK
+uses instead of linking against the one on the build machine. Poky also
+contains some code to link qemu against a dummy libGL as I didn't
+believe adding a libGL to the SDK tarball was sensible.
+
+I've cc'd the OE list since I think the changes in here are desirable
+for OE too. I haven't had much time to run OE builds of late for many
+reasons. I don't really want to make changes there without testing the
+result so any help in merging this into OE would be really appreciated.
+
+Cheers,
+
+Richard
+
+-- 
+Richard Purdie
+Intel Open Source Technology Centre
 
 
 
