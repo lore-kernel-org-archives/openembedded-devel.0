@@ -1,24 +1,34 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MoBUw-00041a-BN
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MoBYN-0004LL-Rl for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Sep 2009 09:37:22 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1MoBXs-0005e1-6p
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Sep 2009 09:33:49 +0200
-Received: from [81.170.68.179] (helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MoBUO-0003yL-Bj
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Sep 2009 08:33:12 +0100
-From: Phil Blundell <pb@reciva.com>
+	Thu, 17 Sep 2009 09:36:48 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Sep 2009 09:36:48 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Sep 2009 09:36:48 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c384c5ea0909161456r48c25a89n5d3e902e2f98b089@mail.gmail.com>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 17 Sep 2009 09:36:25 +0200
+Message-ID: <h8sotp$hld$1@ger.gmane.org>
 References: <c384c5ea0909161456r48c25a89n5d3e902e2f98b089@mail.gmail.com>
-Date: Thu, 17 Sep 2009 08:33:10 +0100
-Message-Id: <1253172790.4490.1392.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-X-Broken-Reverse-DNS: no host name found for IP address 81.170.68.179
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: pb@reciva.com
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <c384c5ea0909161456r48c25a89n5d3e902e2f98b089@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [RFC] Fetch machine type list for ARM architectures
@@ -35,23 +45,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Sep 2009 07:33:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 17 Sep 2009 07:37:23 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2009-09-16 at 23:56 +0200, Leon Woestenberg wrote:
+On 16-09-09 23:56, Leon Woestenberg wrote:
 > Hello,
-> 
+>
 > two (known) ARM machines currently have kernel support but their
 > "mach-types" file in arch/arm/tools/ is not up-to-date.
+>
+> I had this change in my local tree. It works, but is quite intrusive
+> as it is mixing a well-known version of the kernel sources (as per the
+> recipe) against an upstream, constantly changing file.
+> This is unwanted.
+>
+> I rather think we should fetch the mach-types file only for those
+> machine that require it.
 
-How did this situation come about?  The mach-types file is normally one
-of the first things to be updated in the upstream kernel; I can't think
-of any obvious reason why that should not have happened if the patches
-to add the actual machine support have already landed in the tree.
+And not do this for machines that have a different machine number than 
+Russel think (the joy of nonstandard bootloaders).
 
-p.
+regards,
 
+Koen
 
 
 
