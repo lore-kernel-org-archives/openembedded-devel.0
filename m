@@ -1,37 +1,32 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MoBYN-0004LL-Rl for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Sep 2009 09:37:22 +0200
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1MoBXs-0005e1-6p
+	(envelope-from <pb@reciva.com>) id 1MoCho-00048x-5k
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Sep 2009 09:36:48 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Sep 2009 09:36:48 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Sep 2009 09:36:48 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 17 Sep 2009 10:51:11 +0200
+Received: from [81.170.68.179] (helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MoChH-0006B5-3u
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Sep 2009 09:50:35 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 17 Sep 2009 09:36:25 +0200
-Message-ID: <h8sotp$hld$1@ger.gmane.org>
-References: <c384c5ea0909161456r48c25a89n5d3e902e2f98b089@mail.gmail.com>
+In-Reply-To: <20090917012609.GD3599@denix.org>
+References: <1251210375.4215.525.camel@lenovo.internal.reciva.com>
+	<4A968DCD.8020003@gmail.com>
+	<1251382003.27780.45.camel@mill.internal.reciva.com>
+	<20090831212051.GC6707@denix.org>
+	<1251799101.27780.87.camel@mill.internal.reciva.com>
+	<20090917012609.GD3599@denix.org>
+Date: Thu, 17 Sep 2009 09:50:33 +0100
+Message-Id: <1253177433.4490.1395.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <c384c5ea0909161456r48c25a89n5d3e902e2f98b089@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.26.3 
+X-Broken-Reverse-DNS: no host name found for IP address 81.170.68.179
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: pb@reciva.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] Fetch machine type list for ARM architectures
+Subject: Re: OEDEM November 2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,30 +40,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Sep 2009 07:37:23 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Thu, 17 Sep 2009 08:51:11 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 16-09-09 23:56, Leon Woestenberg wrote:
-> Hello,
->
-> two (known) ARM machines currently have kernel support but their
-> "mach-types" file in arch/arm/tools/ is not up-to-date.
->
-> I had this change in my local tree. It works, but is quite intrusive
-> as it is mixing a well-known version of the kernel sources (as per the
-> recipe) against an upstream, constantly changing file.
-> This is unwanted.
->
-> I rather think we should fetch the mach-types file only for those
-> machine that require it.
+On Wed, 2009-09-16 at 21:26 -0400, Denys Dmytriyenko wrote:
+> On Tue, Sep 01, 2009 at 10:58:21AM +0100, Phil Blundell wrote:
+> > On which subject, just a quick reminder for anybody who plans to attend
+> > but hasn't yet informed me of their intentions: please send me an email
+> > within the next 7 days to ensure that you are included in the headcount.
+> 
+> So, what's the tally?
 
-And not do this for machines that have a different machine number than 
-Russel think (the joy of nonstandard bootloaders).
+I think the list of would-be attendees currently stands at:
 
-regards,
+Balister
+Philip
 
-Koen
+Blundell
+Phil
+
+Boor
+Florian
+
+Cameron
+Jonathan
+Cavallini
+Marco
+
+Dmytriyenko
+Denys
+
+Gardich
+Alessandro
+Gilmer
+Ken
+
+Gregory
+Graeme
+Heinold
+Henning
+
+Horsten
+Thomas
+
+Juszkiewicz
+Marcin
+
+Lauer
+Mickey
+
+Meulenbroeks
+Frans
+
+Purdie
+Richard
+
+Smith
+Michael
+
+Woestenberg
+Leon
+
+
+giving a total of 17 which should be easy to accomodate in either of our
+first-choice venues.  If anybody has been missed off that list, please
+let me know asap.
+
+thanks
+
+p.
+
 
 
 
