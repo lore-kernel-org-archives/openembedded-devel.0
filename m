@@ -1,29 +1,32 @@
-Received: from [206.46.173.15] (helo=vms173015pub.verizon.net)
+Received: from [206.46.173.17] (helo=vms173017pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Mo5Ys-0007YT-Ip
+	(envelope-from <denis@denix.org>) id 1Mo5mI-00086Q-Eu
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Sep 2009 03:13:29 +0200
-Received: from gandalf.denix.org ([71.255.235.240]) by vms173015.mailsrvcs.net
+	Thu, 17 Sep 2009 03:27:21 +0200
+Received: from gandalf.denix.org ([71.255.235.240]) by vms173017.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KQ300F6WCOSV4Q0@vms173015.mailsrvcs.net> for
+	32bit)) with ESMTPA id <0KQ300GY0DBLXYK5@vms173017.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Wed,
-	16 Sep 2009 20:12:41 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 4CE0A14AF5F; Wed,
-	16 Sep 2009 21:12:28 -0400 (EDT)
-Date: Wed, 16 Sep 2009 21:12:28 -0400
+	16 Sep 2009 20:26:15 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 64B7514AF5F; Wed,
+	16 Sep 2009 21:26:09 -0400 (EDT)
+Date: Wed, 16 Sep 2009 21:26:09 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090917011228.GC3599@denix.org>
-References: <1252770347-2632-1-git-send-email-k.kooi@student.utwente.nl>
+Message-id: <20090917012609.GD3599@denix.org>
+References: <1251210375.4215.525.camel@lenovo.internal.reciva.com>
+	<4A968DCD.8020003@gmail.com>
+	<1251382003.27780.45.camel@mill.internal.reciva.com>
+	<20090831212051.GC6707@denix.org>
+	<1251799101.27780.87.camel@mill.internal.reciva.com>
 MIME-version: 1.0
-In-reply-to: <1252770347-2632-1-git-send-email-k.kooi@student.utwente.nl>
+In-reply-to: <1251799101.27780.87.camel@mill.internal.reciva.com>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.15
+X-SA-Exim-Connect-IP: 206.46.173.17
 X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Koen Kooi <koen@openembedded.org>, Steve Sakoman <steve@sakoman.com>
-Subject: Re: [STABLE][PATCH] ebtables: fix GNU_HASH error
+Subject: Re: OEDEM November 2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,42 +40,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Sep 2009 01:13:29 -0000
+X-List-Received-Date: Thu, 17 Sep 2009 01:27:21 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Sat, Sep 12, 2009 at 05:45:47PM +0200, Koen Kooi wrote:
-> From: Steve Sakoman <steve@sakoman.com>
-> 
-> 
-> Signed-off-by: Koen Kooi <koen@openembedded.org>
+On Tue, Sep 01, 2009 at 10:58:21AM +0100, Phil Blundell wrote:
+> On which subject, just a quick reminder for anybody who plans to attend
+> but hasn't yet informed me of their intentions: please send me an email
+> within the next 7 days to ensure that you are included in the headcount.
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+So, what's the tally?
 
-> ---
->  recipes/ebtables/ebtables_2.0.6.bb |    2 ++
->  1 files changed, 2 insertions(+), 0 deletions(-)
-> 
-> diff --git a/recipes/ebtables/ebtables_2.0.6.bb b/recipes/ebtables/ebtables_2.0.6.bb
-> index 33ad2b9..c4fc1c3 100644
-> --- a/recipes/ebtables/ebtables_2.0.6.bb
-> +++ b/recipes/ebtables/ebtables_2.0.6.bb
-> @@ -4,6 +4,8 @@ LICENSE = "GPL"
->  SECTION = "console/network"
->  PR = "r2"
->  
-> +TARGET_CC_ARCH += "${LDFLAGS}"
-> +
->  SRC_URI = "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
->             file://gcc34.patch;patch=1 \
->             file://gcc4.patch;patch=1 \
-> -- 
-> 1.6.1
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- 
+Denys
 
 
