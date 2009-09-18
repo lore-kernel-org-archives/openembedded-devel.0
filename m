@@ -1,32 +1,37 @@
-Received: from [206.46.173.13] (helo=vms173013pub.verizon.net)
+Received: from [212.79.178.249] (helo=ugs.tarent.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MoRhR-0006Mf-TZ
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Sep 2009 02:51:49 +0200
-Received: from gandalf.denix.org ([71.255.235.240]) by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KQ500ALI6DBXRZZ@vms173013.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	17 Sep 2009 19:51:11 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 6292F14AF5F; Thu,
-	17 Sep 2009 20:51:11 -0400 (EDT)
-Date: Thu, 17 Sep 2009 20:51:11 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20090918005111.GC5465@denix.org>
-References: <1252941903-6186-1-git-send-email-enric.balletbo@telefonica.net>
-	<1252941903-6186-2-git-send-email-enric.balletbo@telefonica.net>
-	<20090914161124.GA5843@mi.fu-berlin.de>
-	<70c9a9110909170220i1306a412o90b87055f49073e2@mail.gmail.com>
-	<c384c5ea0909171600g63db2af1u1d94bcc77d6d0829@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <c384c5ea0909171600g63db2af1u1d94bcc77d6d0829@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.13
-X-SA-Exim-Mail-From: denis@denix.org
+	(envelope-from <thebohemian@gmx.net>) id 1Moa2L-0004Zc-PZ
+	for openembedded-devel@openembedded.org; Fri, 18 Sep 2009 11:45:56 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id 0CDAF40020B42;
+	Fri, 18 Sep 2009 11:45:20 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id ED9EB40025961;
+	Fri, 18 Sep 2009 11:45:19 +0200 (CEST)
+X-Virus-Scanned: by amavisd-new-2.4.2 (20060627) (Debian) at tarent.de
+Received: from ugs.tarent.de ([127.0.0.1])
+	by localhost (ugs.tarent.de [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id xUKVzSItLfU3; Fri, 18 Sep 2009 11:45:19 +0200 (CEST)
+Received: from [192.168.4.51] (entw2.tarent.buero [192.168.4.51])
+	by ugs.tarent.de (Postfix) with ESMTP id E29A540020B42;
+	Fri, 18 Sep 2009 11:45:18 +0200 (CEST)
+Message-ID: <4AB356B5.4020404@gmx.net>
+Date: Fri, 18 Sep 2009 11:45:25 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
+To: openembedded-devel@openembedded.org
+References: <1251210375.4215.525.camel@lenovo.internal.reciva.com>	<4A968DCD.8020003@gmail.com>	<1251382003.27780.45.camel@mill.internal.reciva.com>	<20090831212051.GC6707@denix.org>	<1251799101.27780.87.camel@mill.internal.reciva.com>	<20090917012609.GD3599@denix.org>
+	<1253177433.4490.1395.camel@lenovo.internal.reciva.com>
+In-Reply-To: <1253177433.4490.1395.camel@lenovo.internal.reciva.com>
+X-Enigmail-Version: 0.95.7
+X-SA-Exim-Connect-IP: 212.79.178.249
+X-SA-Exim-Mail-From: thebohemian@gmx.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] igep0020: Add IGEP v2 support to OE
+Cc: Holger Hans Peter Freyther <holger@freyther.de>,
+	Holger Freyther <zecke@selfish.org>
+Subject: Re: OEDEM November 2009
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,18 +45,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Sep 2009 00:51:49 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 18 Sep 2009 09:45:56 -0000
+X-Groupsio-MsgNum: 13152
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enigEAE4C92C962D0078441088D9"
 
-On Fri, Sep 18, 2009 at 01:00:47AM +0200, Leon Woestenberg wrote:
+--------------enigEAE4C92C962D0078441088D9
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-> This looks like a first good industrial OMAP3 board. Nice feature set there.
+Hi Phil,
+I totally missed this thread.
 
-The board is nice, true. But can you please specify what makes it the first 
-good industrial one? :) Thanks.
+I also would like to attend OEDEM.
 
--- 
-Denys
+Furthermore I am really missing Holger in the list of attendees.
+
+@Holger: What's up?
+
+Regards
+Robert
+
+Phil Blundell schrieb:
+> On Wed, 2009-09-16 at 21:26 -0400, Denys Dmytriyenko wrote:
+>  =20
+>> On Tue, Sep 01, 2009 at 10:58:21AM +0100, Phil Blundell wrote:
+>>    =20
+>>> On which subject, just a quick reminder for anybody who plans to atte=
+nd
+>>> but hasn't yet informed me of their intentions: please send me an ema=
+il
+>>> within the next 7 days to ensure that you are included in the headcou=
+nt.
+>>>      =20
+>> So, what's the tally?
+>>    =20
+>
+> I think the list of would-be attendees currently stands at:
+>
+> Balister
+> Philip
+>
+> Blundell
+> Phil
+>
+> Boor
+> Florian
+>
+> Cameron
+> Jonathan
+> Cavallini
+> Marco
+>
+> Dmytriyenko
+> Denys
+>
+> Gardich
+> Alessandro
+> Gilmer
+> Ken
+>
+> Gregory
+> Graeme
+> Heinold
+> Henning
+>
+> Horsten
+> Thomas
+>
+> Juszkiewicz
+> Marcin
+>
+> Lauer
+> Mickey
+>
+> Meulenbroeks
+> Frans
+>
+> Purdie
+> Richard
+>
+> Smith
+> Michael
+>
+> Woestenberg
+> Leon
+>
+>
+> giving a total of 17 which should be easy to accomodate in either of ou=
+r
+> first-choice venues.  If anybody has been missed off that list, please
+> let me know asap.
+>
+> thanks
+>
+> p.
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>  =20
 
 
+
+
+
+--------------enigEAE4C92C962D0078441088D9
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEARECAAYFAkqzVrUACgkQG9cfwmwwEtoDQACePjflN5D3BnpVTCUpY9cyLjbu
+TAoAn0unGXQJaexQrGioL55gOtgdLM87
+=6hH7
+-----END PGP SIGNATURE-----
+
+--------------enigEAE4C92C962D0078441088D9--
