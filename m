@@ -1,37 +1,43 @@
-Received: from [85.33.2.25] (helo=smtp-out25.alice.it)
+Received: from [209.85.218.226] (helo=mail-bw0-f226.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1MovY2-0002X9-KQ
-	for openembedded-devel@openembedded.org; Sat, 19 Sep 2009 10:44:05 +0200
-Received: from FBCMMO04.fbc.local ([192.168.184.135]) by smtp-out25.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 19 Sep 2009 10:43:27 +0200
-Received: from FBCMCL01B06.fbc.local ([192.168.69.87]) by FBCMMO04.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 19 Sep 2009 10:42:54 +0200
-Received: from badebec ([80.116.251.60]) by FBCMCL01B06.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Sat, 19 Sep 2009 10:42:11 +0200
-Date: Sat, 19 Sep 2009 10:41:54 +0200
-From: Antonio Ospite <ospite@studenti.unina.it>
-To: "Michael 'Mickey' Lauer" <mickey@vanille-media.de>
-Message-Id: <20090919104154.b6458f69.ospite@studenti.unina.it>
-In-Reply-To: <200909190121.20611.mickey@vanille-media.de>
-References: <200909182050.32308.mickey@vanille-media.de>
-	<1253314493-21330-1-git-send-email-ospite@studenti.unina.it>
-	<200909190121.20611.mickey@vanille-media.de>
-X-Mailer: Sylpheed 2.7.1 (GTK+ 2.16.6; i686-pc-linux-gnu)
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-Mime-Version: 1.0
-X-OriginalArrivalTime: 19 Sep 2009 08:42:12.0169 (UTC)
-	FILETIME=[14E59390:01CA3905]
-X-SA-Exim-Connect-IP: 85.33.2.25
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Mow6k-00044X-4O
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 19 Sep 2009 11:19:57 +0200
+Received: by bwz26 with SMTP id 26so1071406bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 19 Sep 2009 02:19:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=ZihQQWR6jnFz67EolfSrI/eBkhXhp82EFHE89XUKp7c=;
+	b=XBfXcqWO758aTcbwO9UbD3URufGsyobmS6GXQLeyljXBhtPAiby0V/almmGmYX9fuc
+	nWxA3B82sx5gRPNJFY0PU9DCpMg0ydo+K5Y+ng4ZfXTYuxgftNXQmPyC1CbwnbqUrQ8t
+	f+iGLyZibYTITP93FIb+xYSFkld8v6dgs6JbY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Jy3Wu1Rc94LKSTb9q4LQ9o1EC1CqYpKImLTHdyScmOBXcvG8lAfmXRJMg8KbAPmQpE
+	9UWd2UOKYWmeiSWmThTZucSqLC1DGkPWO7gl4YVniW+oCze3jOvijyozqfjfTglRJ7bo
+	BrQxIHkt6jmeEXfZ0OgzJ1G7T1CLeoMC9EzxM=
+MIME-Version: 1.0
+Received: by 10.239.182.207 with SMTP id r15mr171768hbg.204.1253351959089; 
+	Sat, 19 Sep 2009 02:19:19 -0700 (PDT)
+In-Reply-To: <20090918005111.GC5465@denix.org>
+References: <1252941903-6186-1-git-send-email-enric.balletbo@telefonica.net>
+	<1252941903-6186-2-git-send-email-enric.balletbo@telefonica.net>
+	<20090914161124.GA5843@mi.fu-berlin.de>
+	<70c9a9110909170220i1306a412o90b87055f49073e2@mail.gmail.com>
+	<c384c5ea0909171600g63db2af1u1d94bcc77d6d0829@mail.gmail.com>
+	<20090918005111.GC5465@denix.org>
+Date: Sat, 19 Sep 2009 11:19:19 +0200
+Message-ID: <c384c5ea0909190219x55e9dafo558ef061ea41548f@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.218.226
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [PATCH] Fix files/device_table-ezx.txt
+Subject: Re: [PATCH] igep0020: Add IGEP v2 support to OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,69 +51,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Sep 2009 08:44:05 -0000
-X-Groupsio-MsgNum: 13161
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg="PGP-SHA1";
-	boundary="Signature=_Sat__19_Sep_2009_10_41_55_+0200_N5=V5/5Z0U2CIEzT"
+X-List-Received-Date: Sat, 19 Sep 2009 09:19:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---Signature=_Sat__19_Sep_2009_10_41_55_+0200_N5=V5/5Z0U2CIEzT
-Content-Type: text/plain; charset=US-ASCII
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hello,
 
-On Sat, 19 Sep 2009 01:21:20 +0200
-"Michael 'Mickey' Lauer" <mickey@vanille-media.de> wrote:
-
-> Thanks!
->=20
-> Someone on IRC alarmed that due to the now changed semantics we would nee=
-d to=20
-> change the present device tables as well. Can you confirm that?
->=20
-> :M:
+On Fri, Sep 18, 2009 at 2:51 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+> On Fri, Sep 18, 2009 at 01:00:47AM +0200, Leon Woestenberg wrote:
 >
+>> This looks like a first good industrial OMAP3 board. Nice feature set there.
+>
+> The board is nice, true. But can you please specify what makes it the first
+> good industrial one? :) Thanks.
+>
+Disregard that remark (I probably thought "commercial" or didn't think at all.)
 
-Entries with the 'start' field > 0 should be checked, as now exactly
-'start' more device nodes are created in this case, this shouldn't be a
-great problem, tho. It is sufficient to set the 'count' field to
-(count-start) to retain the current behavior if we really want to.
-
-The affected entries are:
-
-awk '{if (($0 !~ /^#/) && ($8 > 0)) print FILENAME ":\n" $0}' \
-files/device_table*
-
-And while we are at it, it could be worth documenting in device_table
-header that the 'start' field is used for device node names, not for
-minor numbers, and that the 'increment' field only applies to the
-'minor' field, not to device node names; just to fade away any
-ambiguity. Is this info available anywhere else?
+One shouldn't post messages after 01:00 AM ;-)
 
 Regards,
-   Antonio
+-- 
+Leon
 
---=20
-Antonio Ospite
-http://ao2.it
 
-PGP public key ID: 0x4553B001
-
-A: Because it messes up the order in which people normally read text.
-   See http://en.wikipedia.org/wiki/Posting_style
-Q: Why is top-posting such a bad thing?
-A: Top-posting.
-Q: What is the most annoying thing in e-mail?
-
---Signature=_Sat__19_Sep_2009_10_41_55_+0200_N5=V5/5Z0U2CIEzT
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEARECAAYFAkq0mVMACgkQ5xr2akVTsAGSvQCfVzhwg4x0pHKf+sntSWXAM0Ok
-giAAn0bDqIcl74aAVrI2ui0WwT0K7csI
-=cWzb
------END PGP SIGNATURE-----
-
---Signature=_Sat__19_Sep_2009_10_41_55_+0200_N5=V5/5Z0U2CIEzT--
