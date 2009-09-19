@@ -1,41 +1,32 @@
-Received: from [209.85.219.219] (helo=mail-ew0-f219.google.com)
+Received: from [85.37.17.114] (helo=smtp-out114.alice.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1Mp6vA-0005iP-Ea
+	(envelope-from <GNUtoo@no-log.org>) id 1Mp7o4-0007Ih-W0
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Sep 2009 22:52:43 +0200
-Received: by ewy19 with SMTP id 19so5537291ewy.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Sep 2009 13:52:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=RAoqXGEfsU+zLGwtzaoMQJuam1BfnDwudXRQ0h4Xb00=;
-	b=u8mJj9GjzeupINHbw9KrVX9EaL/tTON57giCx3FhP7JI/w2HmQR0sCClTdJ2PKO/Qw
-	OOGHCxYZFLHmGFYuinKrVkrHlcs//EZ28StBnC0ymkubv3OMRhsFoHPq+VvsUhf4koo1
-	hpmLVjTjJkM3BWy/+vHdn5qio1rs3F/QOzATQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=dOLoVK67H8OPVMPr2sKTuzl7qSKuvW1npzPQQp864q0uUw+cGLcA0PpIUrLyCobo8Q
-	Bzy8I7q0heJLJ7eNIUeduwzFb786LMa1EUiZZkSNBnFKdUTplNzC1NTQntinukPtO1Ra
-	oYBVaLbGiAZgZaU2PuEPTVVKvAE/g+IrbaKvU=
-MIME-Version: 1.0
-Received: by 10.216.87.83 with SMTP id x61mr839238wee.7.1253393524988; Sat, 19 
-	Sep 2009 13:52:04 -0700 (PDT)
-In-Reply-To: <20090919104154.b6458f69.ospite@studenti.unina.it>
-References: <200909182050.32308.mickey@vanille-media.de>
-	<1253314493-21330-1-git-send-email-ospite@studenti.unina.it>
-	<200909190121.20611.mickey@vanille-media.de>
-	<20090919104154.b6458f69.ospite@studenti.unina.it>
-Date: Sat, 19 Sep 2009 22:52:04 +0200
-Message-ID: <d1b08f940909191352l2b361edex79ab6a9385641a5e@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Sat, 19 Sep 2009 23:49:28 +0200
+Received: from FBCMMO03.fbc.local ([192.168.68.197]) by smtp-out114.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 19 Sep 2009 23:48:49 +0200
+Received: from FBCMCL01B08.fbc.local ([192.168.171.46]) by FBCMMO03.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 19 Sep 2009 23:48:49 +0200
+Received: from [192.168.1.107] ([80.117.40.142]) by FBCMCL01B08.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Sat, 19 Sep 2009 23:48:47 +0200
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.219
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+In-Reply-To: <1253188893.12689.556.camel@mill.internal.reciva.com>
+References: <20090917054034.GB5465@denix.org>
+	<1253188893.12689.556.camel@mill.internal.reciva.com>
+Date: Sat, 19 Sep 2009 23:48:46 +0200
+Message-Id: <1253396926.1456.14.camel@localhost>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.4 
+X-OriginalArrivalTime: 19 Sep 2009 21:48:48.0049 (UTC)
+	FILETIME=[F7D55A10:01CA3972]
+X-SA-Exim-Connect-IP: 85.37.17.114
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Fix files/device_table-ezx.txt
+Subject: Re: [RFC] -dbg for static libraries?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,15 +40,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Sep 2009 20:52:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 19 Sep 2009 21:49:28 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-I was suggesting to mickey that some edits are needed.
-I pointed specifically to dev/mmcblk0 which is supposed to populate
-from p1 to p7 per specification.
+On Thu, 2009-09-17 at 13:01 +0100, Phil Blundell wrote:
+> On Thu, 2009-09-17 at 01:40 -0400, Denys Dmytriyenko wrote:
+> > Would it make sense to package stripped version of a static lib into -dev and 
+> > the full version into corresponding -dbg?
+> 
+> I'm not sure that you'd want the debugging .a file in -dbg itself, since
+> the -dbg packages are for installation on the target device and the .a
+> libraries would be useless there. 
+> 
+> Punting the debug versions of the .a libraries into a new package
+> (-static-dbg or some such) wouldn't be a bad idea.  Or, for SDK
+> purposes, you could even consider ditching the .a libraries altogether
+> for packages that have a .so since virtually nobody is going to be doing
+> static linking in this day and age.
+I often do static linking for different reasons:
+*different libc on the target(like with android for instance)
+*debugging(like in the case where all shared libs segfaulted on mips
++uclibc,I needed a static gdb,a static strace etc...)
+Denis
 
-Regards
-
-Andrea
 
 
