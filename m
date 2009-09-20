@@ -1,32 +1,26 @@
-Received: from [85.37.17.114] (helo=smtp-out114.alice.it)
+Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1Mp7o4-0007Ih-W0
+	(envelope-from <denis@denix.org>) id 1MpFzY-0003rQ-PZ
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Sep 2009 23:49:28 +0200
-Received: from FBCMMO03.fbc.local ([192.168.68.197]) by smtp-out114.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 19 Sep 2009 23:48:49 +0200
-Received: from FBCMCL01B08.fbc.local ([192.168.171.46]) by FBCMMO03.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 19 Sep 2009 23:48:49 +0200
-Received: from [192.168.1.107] ([80.117.40.142]) by FBCMCL01B08.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Sat, 19 Sep 2009 23:48:47 +0200
-From: GNUtoo <GNUtoo@no-log.org>
+	Sun, 20 Sep 2009 08:33:52 +0200
+Received: from gandalf.denix.org ([71.255.235.240]) by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KQ900EVSBJCUQX1@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	20 Sep 2009 01:33:13 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 7134014AF4F; Sun,
+	20 Sep 2009 02:33:11 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1253188893.12689.556.camel@mill.internal.reciva.com>
-References: <20090917054034.GB5465@denix.org>
-	<1253188893.12689.556.camel@mill.internal.reciva.com>
-Date: Sat, 19 Sep 2009 23:48:46 +0200
-Message-Id: <1253396926.1456.14.camel@localhost>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.4 
-X-OriginalArrivalTime: 19 Sep 2009 21:48:48.0049 (UTC)
-	FILETIME=[F7D55A10:01CA3972]
-X-SA-Exim-Connect-IP: 85.37.17.114
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+Date: Sun, 20 Sep 2009 02:33:00 -0400
+Message-id: <1253428380-27587-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 206.46.173.19
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] -dbg for static libraries?
+Subject: [RFC][PATCH] package.bbclass: export subpackage individual version, if different from main
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,29 +34,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Sep 2009 21:49:28 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 20 Sep 2009 06:33:52 -0000
 
-On Thu, 2009-09-17 at 13:01 +0100, Phil Blundell wrote:
-> On Thu, 2009-09-17 at 01:40 -0400, Denys Dmytriyenko wrote:
-> > Would it make sense to package stripped version of a static lib into -dev and 
-> > the full version into corresponding -dbg?
-> 
-> I'm not sure that you'd want the debugging .a file in -dbg itself, since
-> the -dbg packages are for installation on the target device and the .a
-> libraries would be useless there. 
-> 
-> Punting the debug versions of the .a libraries into a new package
-> (-static-dbg or some such) wouldn't be a bad idea.  Or, for SDK
-> purposes, you could even consider ditching the .a libraries altogether
-> for packages that have a .so since virtually nobody is going to be doing
-> static linking in this day and age.
-I often do static linking for different reasons:
-*different libc on the target(like with android for instance)
-*debugging(like in the case where all shared libs segfaulted on mips
-+uclibc,I needed a static gdb,a static strace etc...)
-Denis
+Fixes the wrong versioned runtime dependency for shlib subpackages with
+own versions. Consider this:
+
+PACKAGES = "libfoo libbar"
+PV_libfoo = "1"
+PV_libbar = "2"
+PV = "3"
+
+That will generate libfoo_1 and libbar_2 packages, but version 3 will be
+exported in shlibs database, leading to the following versioned runtime
+dependencies:
+
+RDEPENDS: libfoo (>=3) libbar (>=3)
+
+This fixes the problem.
+
+Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+
+---
+ classes/package.bbclass |    6 +++++-
+ 1 files changed, 5 insertions(+), 1 deletions(-)
+
+diff --git a/classes/package.bbclass b/classes/package.bbclass
+index 5a9fa50..7a0ba80 100644
+--- a/classes/package.bbclass
++++ b/classes/package.bbclass
+@@ -652,6 +652,10 @@ python package_do_shlibs() {
+ 		needs_ldconfig = False
+ 		bb.debug(2, "calculating shlib provides for %s" % pkg)
+ 
++		pkgver = bb.data.getVar('PV_' + pkg, d, 1)
++		if not pkgver:
++			pkgver = ver
++
+ 		needed[pkg] = []
+ 		sonames = list()
+ 		top = os.path.join(pkgdest, pkg)
+@@ -696,7 +700,7 @@ python package_do_shlibs() {
+ 			fd.close()
+ 			package_stagefile(shlibs_file, d)
+ 			fd = open(shver_file, 'w')
+-			fd.write(ver + '\n')
++			fd.write(pkgver + '\n')
+ 			fd.close()
+ 			package_stagefile(shver_file, d)
+ 		if needs_ldconfig and use_ldconfig:
+-- 
+1.6.3.3
 
 
 
