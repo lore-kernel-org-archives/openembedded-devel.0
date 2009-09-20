@@ -1,34 +1,37 @@
-Received: from [85.37.17.112] (helo=smtp-out112.alice.it)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1MpKrL-00005v-Hn
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1MpLU0-0008Ds-5R for openembedded-devel@lists.openembedded.org;
+	Sun, 20 Sep 2009 14:25:39 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1MpLTN-00041o-CP
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Sep 2009 13:45:43 +0200
-Received: from FBCMMO01.fbc.local ([192.168.68.195]) by smtp-out112.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sun, 20 Sep 2009 13:45:03 +0200
-Received: from FBCMCL01B09.fbc.local ([192.168.171.26]) by FBCMMO01.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sun, 20 Sep 2009 13:45:03 +0200
-Received: from [192.168.1.107] ([80.117.40.142]) by FBCMCL01B09.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Sun, 20 Sep 2009 13:45:03 +0200
-From: GNUtoo <GNUtoo@no-log.org>
+	Sun, 20 Sep 2009 14:24:57 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 Sep 2009 14:24:57 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 Sep 2009 14:24:57 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1253430822.4490.1515.camel@lenovo.internal.reciva.com>
-References: <20090917054034.GB5465@denix.org>
-	<1253188893.12689.556.camel@mill.internal.reciva.com>
-	<1253396926.1456.14.camel@localhost>
-	<1253430822.4490.1515.camel@lenovo.internal.reciva.com>
-Date: Sun, 20 Sep 2009 13:45:02 +0200
-Message-Id: <1253447102.8671.2.camel@localhost>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 20 Sep 2009 14:23:55 +0200
+Message-ID: <h956sr$bl$1@ger.gmane.org>
+References: <1253437328.4ab5ef902b12f@imp.free.fr>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.24.4 
-X-OriginalArrivalTime: 20 Sep 2009 11:45:03.0539 (UTC)
-	FILETIME=[CAC18830:01CA39E7]
-X-SA-Exim-Connect-IP: 85.37.17.112
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <1253437328.4ab5ef902b12f@imp.free.fr>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] -dbg for static libraries?
+Subject: Re: minimo not building
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,37 +45,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Sep 2009 11:45:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 20 Sep 2009 12:25:39 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2009-09-20 at 08:13 +0100, Phil Blundell wrote:
-> On Sat, 2009-09-19 at 23:48 +0200, GNUtoo wrote:
-> > Phil Blundell wrote:
-> > > Or, for SDK purposes, you could even consider ditching the .a
-> > > libraries altogether for packages that have a .so since virtually
-> > > nobody is going to be doing static linking in this day and age.
-> >
-> > I often do static linking for different reasons:
-> > *different libc on the target(like with android for instance)
-> > *debugging(like in the case where all shared libs segfaulted on mips
-> > +uclibc,I needed a static gdb,a static strace etc...)
-> 
-> Neither of those are really the kind of use-cases that the SDK is
-> targeting.  If you are doing initial bringup/debug on a particular
-> target system then you would probably want to use an in-tree build just
-> as you do today.  
-> 
-> The SDK exists to support casual software development on relatively
-> stable target platforms, by people who don't wish to build the entire
-> system from scratch for themselves, and in almost all cases you don't
-> want to encourage static linking there.
-> 
-> p.
-ok thanks for the explanations...I think I have read too fast(lots of
-mails) (I was thinking that the static libraries were to be removed in
-the normal in-tree build)
-Denis.
+On 20-09-09 11:02, Alain2210 wrote:
+> Hello,
+>
+> I'm using the shr/import branch, and Angstrom distribution, and I want to build
+> minimo for a h2200 ipaq.
+
+If you want to build angstrom, use org.openembedded.dev or stable/2009 
+anything else is unsupported.
+
+regards,
+
+Koen
 
 
 
