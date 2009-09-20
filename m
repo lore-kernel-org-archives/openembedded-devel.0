@@ -1,35 +1,29 @@
-Received: from [212.27.42.91] (helo=wmproxy1-g27.free.fr)
+Received: from [206.46.173.11] (helo=vms173011pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <alain2210@free.fr>) id 1MpRQD-00040G-FH
+	(envelope-from <denis@denix.org>) id 1MpRUC-0004IS-8l
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Sep 2009 20:46:08 +0200
-Received: from wmproxy1-g27.free.fr (localhost [127.0.0.1])
-	by wmproxy1-g27.free.fr (Postfix) with ESMTP id A27603450;
-	Sun, 20 Sep 2009 20:45:31 +0200 (CEST)
-Received: from UNKNOWN (imp6-g19.priv.proxad.net [172.20.243.136])
-	by wmproxy1-g27.free.fr (Postfix) with ESMTP id 9786E334C;
-	Sun, 20 Sep 2009 20:45:30 +0200 (CEST)
-Received: by UNKNOWN (Postfix, from userid 0)
-	id 95AA0C2E48B27; Sun, 20 Sep 2009 20:45:30 +0200 (CEST)
-Received: from  ([82.123.18.65]) by imp.free.fr (IMP) with HTTP 
-	for <alain2210@172.20.243.55>; Sun, 20 Sep 2009 20:45:30 +0200
-Message-ID: <1253472330.4ab6784a8f36c@imp.free.fr>
-Date: Sun, 20 Sep 2009 20:45:30 +0200
-From: Alain2210 <alain2210@free.fr>
-To: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
-References: <1253437328.4ab5ef902b12f@imp.free.fr>
-	<19c1b8a90909200807u66d5d12bh345139ce4c4302ad@mail.gmail.com>
-In-Reply-To: <19c1b8a90909200807u66d5d12bh345139ce4c4302ad@mail.gmail.com>
-MIME-Version: 1.0
-User-Agent: Internet Messaging Program (IMP) 3.2.8
-X-Originating-IP: 82.123.18.65
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 212.27.42.91
-X-SA-Exim-Mail-From: alain2210@free.fr
+	Sun, 20 Sep 2009 20:50:15 +0200
+Received: from gandalf.denix.org ([71.255.235.240]) by vms173011.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KQA00CDL9MFWVK2@vms173011.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	20 Sep 2009 13:49:27 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id E867E14AF5F; Sun,
+	20 Sep 2009 14:49:26 -0400 (EDT)
+Date: Sun, 20 Sep 2009 14:49:26 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20090920184926.GA1288@denix.org>
+References: <1253428380-27587-1-git-send-email-denis@denix.org>
+	<1253436022.4490.1517.camel@lenovo.internal.reciva.com>
+MIME-version: 1.0
+In-reply-to: <1253436022.4490.1517.camel@lenovo.internal.reciva.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.11
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: minimo not building
+Subject: Re: [RFC][PATCH] package.bbclass: export subpackage	individual version, if different from main
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,48 +37,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Sep 2009 18:46:08 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 20 Sep 2009 18:50:15 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hello,
+On Sun, Sep 20, 2009 at 09:40:22AM +0100, Phil Blundell wrote:
+> On Sun, 2009-09-20 at 02:33 -0400, Denys Dmytriyenko wrote:
+> > Fixes the wrong versioned runtime dependency for shlib subpackages with
+> > own versions. Consider this:
+> > 
+> > PACKAGES = "libfoo libbar"
+> > PV_libfoo = "1"
+> > PV_libbar = "2"
+> > PV = "3"
+> 
+> Is this even legitimate usage?  I had always thought that PV applied to
+> the recipe, not to the output subpackages.
 
-Thanks for the answer.
+PV_<pkg> works as is, because it is handled by the same code that does 
+FILES_<pkg>, DESCRIPTION_<pkg>, RDEPENDS_<pkg>, RPROVIDES_<pkg>, PKG_<pkg> 
+etc. And generated subpackages receive own versions just fine.
+But for shared libraries in subpackages it has this small issue of exporting 
+the main PV in shlibs/pkgdata/runtime...
 
-Selon Khem Raj <raj.khem@gmail.com>:
-> > | {standard input}: Assembler messages:
-> > | {standard input}:28: Error: lo register required -- `ldr ip,[r5,#16=
-]'
-> > | {standard input}:33: Error: lo register required -- `sub sp,sp,r4'
-> > | {standard input}:37: Error: lo register required -- `ldr ip,[r5,#20=
-]'
-> > | {standard input}:44: Error: lo register required -- `ldr ip,[r1,r2]=
-'
-> > | {standard input}:46: Error: Thumb does not support conditional exec=
-ution
-> > | {standard input}:47: Error: Thumb does not support conditional exec=
-ution
-> > | {standard input}:48: Error: Thumb does not support conditional exec=
-ution
-> > | {standard input}:49: Error: Thumb does not support conditional exec=
-ution
-> > | {standard input}:50: Error: Thumb does not support conditional exec=
-ution
-> > | make[8]: *** [xptcinvoke_arm.o] Error 1
->
->
-> The error messages are clear that there is mixed arm
-> and thumb code in a file but is not properly guarded with
-> .arm and .thumb (.code16 or .code32) directives.
->
-> It could be inline assembly.
+> What's the typical use-case for this kind of thing?
 
-Thanks for the explanation. How can I make minimo build again ? (and do y=
-ou have
-an idea why fennec with the same code can be built ?)
+As Koen said, helpful for large meta-packages. In the case of external 
+toolchain, the main package may have version like "2009q1", while different 
+subpackages can get their own versions, like "2.8" for libc, "4.3.3" for 
+libstdc++ etc. Slightly convoluted example at [1]
+W/o this fix I was getting runtime dependencies for libc >= 2009q1, instead
+of 2.8
 
-Sincerely,
+[1] http://arago-project.org/git/?p=arago.git;a=commitdiff;h=a6b686d9a5a81b55e17ef241f8c50a428639c048
 
-Alain
+-- 
+Denys
 
 
