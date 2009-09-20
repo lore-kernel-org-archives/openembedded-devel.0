@@ -1,25 +1,25 @@
-Received: from [206.46.173.11] (helo=vms173011pub.verizon.net)
+Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MpRUC-0004IS-8l
+	(envelope-from <denis@denix.org>) id 1MpRVg-0004K2-IZ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Sep 2009 20:50:15 +0200
-Received: from gandalf.denix.org ([71.255.235.240]) by vms173011.mailsrvcs.net
+	Sun, 20 Sep 2009 20:51:47 +0200
+Received: from gandalf.denix.org ([71.255.235.240]) by vms173005.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KQA00CDL9MFWVK2@vms173011.mailsrvcs.net> for
+	32bit)) with ESMTPA id <0KQA00NEV9OS21RG@vms173005.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Sun,
-	20 Sep 2009 13:49:27 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id E867E14AF5F; Sun,
-	20 Sep 2009 14:49:26 -0400 (EDT)
-Date: Sun, 20 Sep 2009 14:49:26 -0400
+	20 Sep 2009 13:50:57 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 9CA9714AF5F; Sun,
+	20 Sep 2009 14:50:51 -0400 (EDT)
+Date: Sun, 20 Sep 2009 14:50:51 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090920184926.GA1288@denix.org>
+Message-id: <20090920185051.GB1288@denix.org>
 References: <1253428380-27587-1-git-send-email-denis@denix.org>
-	<1253436022.4490.1517.camel@lenovo.internal.reciva.com>
+	<19c1b8a90909200813u30642a87g38fc83cfb2b59d36@mail.gmail.com>
 MIME-version: 1.0
-In-reply-to: <1253436022.4490.1517.camel@lenovo.internal.reciva.com>
+In-reply-to: <19c1b8a90909200813u30642a87g38fc83cfb2b59d36@mail.gmail.com>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.11
+X-SA-Exim-Connect-IP: 206.46.173.5
 X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
@@ -37,39 +37,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Sep 2009 18:50:15 -0000
+X-List-Received-Date: Sun, 20 Sep 2009 18:51:47 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Sun, Sep 20, 2009 at 09:40:22AM +0100, Phil Blundell wrote:
-> On Sun, 2009-09-20 at 02:33 -0400, Denys Dmytriyenko wrote:
+On Sun, Sep 20, 2009 at 08:13:52AM -0700, Khem Raj wrote:
+> On Sat, Sep 19, 2009 at 11:33 PM, Denys Dmytriyenko <denis@denix.org> wrote:
 > > Fixes the wrong versioned runtime dependency for shlib subpackages with
 > > own versions. Consider this:
-> > 
+> >
 > > PACKAGES = "libfoo libbar"
 > > PV_libfoo = "1"
 > > PV_libbar = "2"
 > > PV = "3"
+> >
+> > That will generate libfoo_1 and libbar_2 packages, but version 3 will be
+> > exported in shlibs database, leading to the following versioned runtime
+> > dependencies:
+> >
+> > RDEPENDS: libfoo (>=3) libbar (>=3)
 > 
-> Is this even legitimate usage?  I had always thought that PV applied to
-> the recipe, not to the output subpackages.
+> Can RPROVIDES fill in this void somehow.
 
-PV_<pkg> works as is, because it is handled by the same code that does 
-FILES_<pkg>, DESCRIPTION_<pkg>, RDEPENDS_<pkg>, RPROVIDES_<pkg>, PKG_<pkg> 
-etc. And generated subpackages receive own versions just fine.
-But for shared libraries in subpackages it has this small issue of exporting 
-the main PV in shlibs/pkgdata/runtime...
-
-> What's the typical use-case for this kind of thing?
-
-As Koen said, helpful for large meta-packages. In the case of external 
-toolchain, the main package may have version like "2009q1", while different 
-subpackages can get their own versions, like "2.8" for libc, "4.3.3" for 
-libstdc++ etc. Slightly convoluted example at [1]
-W/o this fix I was getting runtime dependencies for libc >= 2009q1, instead
-of 2.8
-
-[1] http://arago-project.org/git/?p=arago.git;a=commitdiff;h=a6b686d9a5a81b55e17ef241f8c50a428639c048
+Does RPROVIDES specify versions?
 
 -- 
 Denys
