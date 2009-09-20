@@ -1,37 +1,34 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [85.37.17.112] (helo=smtp-out112.alice.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MpK4x-0008L3-Sp for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Sep 2009 12:55:42 +0200
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1MpK4N-0007Y4-1G
+	(envelope-from <GNUtoo@no-log.org>) id 1MpKrL-00005v-Hn
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Sep 2009 12:55:03 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Sep 2009 12:55:03 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Sep 2009 12:55:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 20 Sep 2009 13:45:43 +0200
+Received: from FBCMMO01.fbc.local ([192.168.68.195]) by smtp-out112.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sun, 20 Sep 2009 13:45:03 +0200
+Received: from FBCMCL01B09.fbc.local ([192.168.171.26]) by FBCMMO01.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sun, 20 Sep 2009 13:45:03 +0200
+Received: from [192.168.1.107] ([80.117.40.142]) by FBCMCL01B09.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Sun, 20 Sep 2009 13:45:03 +0200
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 20 Sep 2009 12:52:35 +0200
-Message-ID: <h951hj$in8$2@ger.gmane.org>
-References: <1253432757-27944-1-git-send-email-denis@denix.org>
+In-Reply-To: <1253430822.4490.1515.camel@lenovo.internal.reciva.com>
+References: <20090917054034.GB5465@denix.org>
+	<1253188893.12689.556.camel@mill.internal.reciva.com>
+	<1253396926.1456.14.camel@localhost>
+	<1253430822.4490.1515.camel@lenovo.internal.reciva.com>
+Date: Sun, 20 Sep 2009 13:45:02 +0200
+Message-Id: <1253447102.8671.2.camel@localhost>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <1253432757-27944-1-git-send-email-denis@denix.org>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.24.4 
+X-OriginalArrivalTime: 20 Sep 2009 11:45:03.0539 (UTC)
+	FILETIME=[CAC18830:01CA39E7]
+X-SA-Exim-Connect-IP: 85.37.17.112
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] kernel.bbclass: fix ownership inside the modules tarball
+Subject: Re: [RFC] -dbg for static libraries?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,41 +42,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Sep 2009 10:55:43 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Sun, 20 Sep 2009 11:45:43 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 20-09-09 09:45, Denys Dmytriyenko wrote:
-> Signed-off-by: Denys Dmytriyenko<denis@denix.org>
-
-Acked-by: Koen Kooi <koen@openembedded.org>
-
-
-> ---
->   classes/kernel.bbclass |    3 ++-
->   1 files changed, 2 insertions(+), 1 deletions(-)
->
-> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-> index c5192d5..9c1f637 100644
-> --- a/classes/kernel.bbclass
-> +++ b/classes/kernel.bbclass
-> @@ -530,7 +530,7 @@ do_deploy() {
->   	package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
->
->   	if [ -d "${D}/lib" ]; then
-> -	tar -cvzf ${DEPLOY_DIR_IMAGE}/${MODULES_IMAGE_BASE_NAME}.tgz -C ${D} lib
-> +		fakeroot tar -cvzf ${DEPLOY_DIR_IMAGE}/${MODULES_IMAGE_BASE_NAME}.tgz -C ${D} lib
->   	fi
->
->   	cd ${DEPLOY_DIR_IMAGE}
-> @@ -540,5 +540,6 @@ do_deploy() {
->   }
->
->   do_deploy[dirs] = "${S}"
-> +do_deploy[depends] += "fakeroot-native:do_populate_staging"
->
->   addtask deploy before do_package after do_install
-
+On Sun, 2009-09-20 at 08:13 +0100, Phil Blundell wrote:
+> On Sat, 2009-09-19 at 23:48 +0200, GNUtoo wrote:
+> > Phil Blundell wrote:
+> > > Or, for SDK purposes, you could even consider ditching the .a
+> > > libraries altogether for packages that have a .so since virtually
+> > > nobody is going to be doing static linking in this day and age.
+> >
+> > I often do static linking for different reasons:
+> > *different libc on the target(like with android for instance)
+> > *debugging(like in the case where all shared libs segfaulted on mips
+> > +uclibc,I needed a static gdb,a static strace etc...)
+> 
+> Neither of those are really the kind of use-cases that the SDK is
+> targeting.  If you are doing initial bringup/debug on a particular
+> target system then you would probably want to use an in-tree build just
+> as you do today.  
+> 
+> The SDK exists to support casual software development on relatively
+> stable target platforms, by people who don't wish to build the entire
+> system from scratch for themselves, and in almost all cases you don't
+> want to encourage static linking there.
+> 
+> p.
+ok thanks for the explanations...I think I have read too fast(lots of
+mails) (I was thinking that the static libraries were to be removed in
+the normal in-tree build)
+Denis.
 
 
 
