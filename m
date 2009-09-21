@@ -1,26 +1,41 @@
-Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
+Received: from [209.85.219.220] (helo=mail-ew0-f220.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MplR6-0004DO-QA
+	(envelope-from <nicola.mfb@gmail.com>) id 1MpmJD-0000xT-B5
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Sep 2009 18:08:24 +0200
-Received: from gandalf.denix.org ([71.255.235.240]) by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KQB007PCWS2FLB6@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	21 Sep 2009 11:07:15 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id BD7DC14AF1F; Mon,
-	21 Sep 2009 12:07:13 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	Mon, 21 Sep 2009 19:04:18 +0200
+Received: by ewy20 with SMTP id 20so431810ewy.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Sep 2009 10:03:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type;
+	bh=ohTYza6d/9A2Zl1ZPg8Kq2dA4JtCPUKKE3xZ/KaYz2M=;
+	b=E3U6cyGbSWNnih9+9TRKktSsmihNZTZhlEvO374/Km8/HvrB7D7tH3ZbU4CUtN+FSj
+	725ANRNrMtKyau9BCdsP1cFmS+nNEg9KZLj6RIpvj9pYtXqrK4zC9+tqdUxrJfscI556
+	lb5VDRWveCSRsP4KDz66LDCqFEN7zx575Zm3A=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	b=UsxAFWGkTDehF97PJt3PtRgiZ9/M2ahSR8KAuFgVBmdqsekzsTgHaxz4igGdr8xoLa
+	O3mR8iEmJKA8bh/n5MGmV0loxLgDEhmFW2N2e8q+YkBimp2FWHFTETrZZsgw7lsyElTT
+	envk1gPNZUWxSZH0ZRzdMGiCGleUHyBgK7+5o=
+MIME-Version: 1.0
+Received: by 10.216.72.208 with SMTP id t58mr1404690wed.173.1253552618613; 
+	Mon, 21 Sep 2009 10:03:38 -0700 (PDT)
+In-Reply-To: <359c5480908040048t54ac4adbsa6a4e4fa88b7557f@mail.gmail.com>
+References: <200908021211.14793.mok@mnet-online.de> <4A756F8F.30405@gmx.de>
+	<200908021304.43335.mok@mnet-online.de>
+	<359c5480908040048t54ac4adbsa6a4e4fa88b7557f@mail.gmail.com>
+Date: Mon, 21 Sep 2009 19:03:38 +0200
+Message-ID: <359c5480909211003p49f636e9p38889c4967b2acc4@mail.gmail.com>
+From: Nicola Mfb <nicola.mfb@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Sep 2009 12:07:06 -0400
-Message-id: <1253549226-16186-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 206.46.173.19
-X-SA-Exim-Mail-From: denis@denix.org
+X-SA-Exim-Connect-IP: 209.85.219.220
+X-SA-Exim-Mail-From: nicola.mfb@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [RFC][PATCH] netbase: don't start udhcpc if kernel assigned IP statically
+Cc: shr-devel@lists.shr-project.org
+Subject: Re: some RRECOMMENDed packages do not get included into the image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,29 +49,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Sep 2009 16:08:24 -0000
+X-List-Received-Date: Mon, 21 Sep 2009 17:04:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
+On Tue, Aug 4, 2009 at 9:48 AM, Nicola Mfb<nicola.mfb@gmail.com> wrote:
+[...]
+> Some news about that?
+> I just reverted bb thread numbers to 1, now kernel is installed and
+> rcS too, so I'm experiencing the same of you, no X startup, etc.. I
+> tryed 1.8, 1.8-parser-rework and old bitbake from svn, same result.
 
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
----
- recipes/netbase/netbase/interfaces |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+Hi Klaus,
+I just tryed again in the latest days and got the same result.
+Was it fixed? is there a workaround? building from milestone5.5 branch is ok.
 
-diff --git a/recipes/netbase/netbase/interfaces b/recipes/netbase/netbase/interfaces
-index c615642..bae03dd 100644
---- a/recipes/netbase/netbase/interfaces
-+++ b/recipes/netbase/netbase/interfaces
-@@ -52,6 +52,8 @@ iface atml0 inet dhcp
- # Wired or wireless interfaces
- auto eth0
- iface eth0 inet dhcp
-+        pre-up /bin/grep -v -e "ip=[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+" /proc/cmdline > /dev/null
-+
- iface eth1 inet dhcp
- 
- # Ethernet/RNDIS gadget (g_ether)
--- 
-1.6.3.3
+Best Regards
 
+     Nicola
 
 
