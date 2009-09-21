@@ -1,29 +1,26 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [206.46.173.19] (helo=vms173019pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MpkXv-0005pQ-Us
+	(envelope-from <denis@denix.org>) id 1MplR6-0004DO-QA
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Sep 2009 17:11:23 +0200
-Received: from nrcc-l3-gateway.nrcc.noklab.com ([4.53.58.22]
-	helo=[10.200.200.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MpkXL-00071I-8M
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Sep 2009 16:10:44 +0100
-From: Phil Blundell <pb@reciva.com>
+	Mon, 21 Sep 2009 18:08:24 +0200
+Received: from gandalf.denix.org ([71.255.235.240]) by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KQB007PCWS2FLB6@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	21 Sep 2009 11:07:15 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id BD7DC14AF1F; Mon,
+	21 Sep 2009 12:07:13 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20090920185051.GB1288@denix.org>
-References: <1253428380-27587-1-git-send-email-denis@denix.org>
-	<19c1b8a90909200813u30642a87g38fc83cfb2b59d36@mail.gmail.com>
-	<20090920185051.GB1288@denix.org>
-Date: Mon, 21 Sep 2009 16:10:31 +0100
-Message-Id: <1253545831.16477.0.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: pb@reciva.com
+Date: Mon, 21 Sep 2009 12:07:06 -0400
+Message-id: <1253549226-16186-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 206.46.173.19
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC][PATCH] package.bbclass: export subpackage	individual version, if different from main
+Subject: [RFC][PATCH] netbase: don't start udhcpc if kernel assigned IP statically
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,18 +34,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Sep 2009 15:11:23 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 21 Sep 2009 16:08:24 -0000
 
-On Sun, 2009-09-20 at 14:50 -0400, Denys Dmytriyenko wrote:
-> Does RPROVIDES specify versions?
 
-No.  Versions are fairly meaningless for virtuals since the different
-providers aren't guaranteed to have synchronised versioning schemes.
+Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+---
+ recipes/netbase/netbase/interfaces |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-p.
-
+diff --git a/recipes/netbase/netbase/interfaces b/recipes/netbase/netbase/interfaces
+index c615642..bae03dd 100644
+--- a/recipes/netbase/netbase/interfaces
++++ b/recipes/netbase/netbase/interfaces
+@@ -52,6 +52,8 @@ iface atml0 inet dhcp
+ # Wired or wireless interfaces
+ auto eth0
+ iface eth0 inet dhcp
++        pre-up /bin/grep -v -e "ip=[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+" /proc/cmdline > /dev/null
++
+ iface eth1 inet dhcp
+ 
+ # Ethernet/RNDIS gadget (g_ether)
+-- 
+1.6.3.3
 
 
 
