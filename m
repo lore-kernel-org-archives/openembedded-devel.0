@@ -1,41 +1,27 @@
-Received: from [212.18.0.9] (helo=mail-out.m-online.net)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mok@mnet-online.de>) id 1MpnGy-0006gM-1j
+	(envelope-from <philb@gnu.org>) id 1MpopU-0007MS-Lq
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Sep 2009 20:06:03 +0200
-Received: from mail01.m-online.net (mail.m-online.net [192.168.3.149])
-	by mail-out.m-online.net (Postfix) with ESMTP id 510491C15307;
-	Mon, 21 Sep 2009 20:05:23 +0200 (CEST)
-Received: from localhost (dynscan2.mnet-online.de [192.168.1.215])
-	by mail.m-online.net (Postfix) with ESMTP id 49F99901DF;
-	Mon, 21 Sep 2009 20:05:23 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.3.149])
-	by localhost (dynscan2.mnet-online.de [192.168.1.215]) (amavisd-new,
-	port 10024)
-	with ESMTP id c172sldT8Brv; Mon, 21 Sep 2009 20:05:21 +0200 (CEST)
-Received: from mrdenker.localdomain (ppp-88-217-0-214.dynamic.mnet-online.de
-	[88.217.0.214])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.mnet-online.de (Postfix) with ESMTP;
-	Mon, 21 Sep 2009 20:05:20 +0200 (CEST)
-From: "Klaus 'mrmoku' Kurzmann" <mok@mnet-online.de>
-To: shr-devel@lists.shr-project.org
-Date: Mon, 21 Sep 2009 20:05:30 +0200
-User-Agent: KMail/1.12.1 (Linux/2.6.30.5-43.fc11.x86_64; KDE/4.3.1; x86_64; ; )
-References: <200908021211.14793.mok@mnet-online.de>
-	<359c5480908040048t54ac4adbsa6a4e4fa88b7557f@mail.gmail.com>
-	<359c5480909211003p49f636e9p38889c4967b2acc4@mail.gmail.com>
-In-Reply-To: <359c5480909211003p49f636e9p38889c4967b2acc4@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200909212005.31498.mok@mnet-online.de>
-X-SA-Exim-Connect-IP: 212.18.0.9
-X-SA-Exim-Mail-From: mok@mnet-online.de
+	Mon, 21 Sep 2009 21:45:47 +0200
+Received: from guest-wireless.nrcc.noklab.com ([4.53.58.19]
+	helo=[192.168.0.199])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1Mpoov-0006UL-2r
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Sep 2009 20:45:09 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1253549226-16186-1-git-send-email-denis@denix.org>
+References: <1253549226-16186-1-git-send-email-denis@denix.org>
+Date: Mon, 21 Sep 2009 20:45:06 +0100
+Message-Id: <1253562306.16477.38.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [Shr-Devel] some RRECOMMENDed packages do not get included into the image
+Subject: Re: [RFC][PATCH] netbase: don't start udhcpc if kernel assigned IP statically
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,44 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Sep 2009 18:06:03 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 21 Sep 2009 19:45:47 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Am Montag 21 September 2009 19:03:38 schrieb Nicola Mfb:
-> On Tue, Aug 4, 2009 at 9:48 AM, Nicola Mfb<nicola.mfb@gmail.com> wrote:
-> [...]
-> 
-> > Some news about that?
-> > I just reverted bb thread numbers to 1, now kernel is installed and
-> > rcS too, so I'm experiencing the same of you, no X startup, etc.. I
-> > tryed 1.8, 1.8-parser-rework and old bitbake from svn, same result.
-> 
-> Hi Klaus,
-> I just tryed again in the latest days and got the same result.
-> Was it fixed? is there a workaround? building from milestone5.5 branch is
->  ok.
-The reason is that some package that is needed by one of the tasks did not get 
-built. As a consequence that task does not get included into the image. I 
-don't remember which package it was for me, but manually building the package, 
-properly cleaning the tasks and rebuilding fixed it. What annoys me is that OE 
-continues to build the image instead of bailing out...
+On Mon, 2009-09-21 at 12:07 -0400, Denys Dmytriyenko wrote:
+>  iface eth0 inet dhcp
+> +        pre-up /bin/grep -v -e "ip=[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+" /proc/cmdline > /dev/null
+> +
 
-If this is the reason you will have some ERROR somewhere in the rootfs log. 
-Probably only on the first build though (at least that was my impression).
+This is pretty gruesome.  It will introduce an extra two fork+exec's
+worth of overhead to every "ifup eth0" for everybody, and it also fails
+to check that the ip= parameter actually corresponded to eth0 (i.e. it
+would stop eth0 coming up even if the parameter was specifying an
+address for eth1).  
 
-Right now building from scratch should work though (just did that today).
+It seems like there must be a better way of solving this problem.  How
+about just teaching "ifup -a" to spot interfaces that are already up and
+leave them alone?
 
-Hope that helps :-)
+p.
 
-> 
-> Best Regards
-> 
->      Nicola
 
--- 
-
-Klaus 'mrmoku' Kurzmann
 
 
