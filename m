@@ -1,29 +1,30 @@
-Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
+Received: from [206.46.173.17] (helo=vms173017pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MqAGi-0000dc-Q0
+	(envelope-from <denis@denix.org>) id 1MqATC-0001V7-Dr
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Sep 2009 20:39:19 +0200
-Received: from gandalf.denix.org ([71.255.235.240]) by vms173005.mailsrvcs.net
+	Tue, 22 Sep 2009 20:52:13 +0200
+Received: from gandalf.denix.org ([71.255.235.240]) by vms173017.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KQD00FTCYFU2WC9@vms173005.mailsrvcs.net> for
+	32bit)) with ESMTPA id <0KQD00HKQZ1PRVSC@vms173017.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Tue,
-	22 Sep 2009 13:38:23 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id EB9B214AF5F; Tue,
-	22 Sep 2009 14:38:17 -0400 (EDT)
-Date: Tue, 22 Sep 2009 14:38:17 -0400
+	22 Sep 2009 13:51:32 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 67A0014AF5F; Tue,
+	22 Sep 2009 14:51:24 -0400 (EDT)
+Date: Tue, 22 Sep 2009 14:51:24 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090922183817.GC18271@denix.org>
-References: <4AB8CF91.1070907@dresearch.de>
-	<f96d234e0909221128v65e7f834wc1687fe5fdf5136b@mail.gmail.com>
+Message-id: <20090922185124.GD18271@denix.org>
+References: <1253428380-27587-1-git-send-email-denis@denix.org>
+	<1253436022.4490.1517.camel@lenovo.internal.reciva.com>
+	<20090920184926.GA1288@denix.org>
 MIME-version: 1.0
-In-reply-to: <f96d234e0909221128v65e7f834wc1687fe5fdf5136b@mail.gmail.com>
+In-reply-to: <20090920184926.GA1288@denix.org>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.5
+X-SA-Exim-Connect-IP: 206.46.173.17
 X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: bitbake freeze :(
+Subject: Re: [RFC][PATCH] package.bbclass: export subpackage	individual version, if different from main
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,26 +38,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Sep 2009 18:39:20 -0000
+X-List-Received-Date: Tue, 22 Sep 2009 18:52:13 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Tue, Sep 22, 2009 at 02:28:22PM -0400, Cliff Brake wrote:
-> On Tue, Sep 22, 2009 at 9:22 AM, Steffen Sledz <sledz@dresearch.de> wrote:
-> > Since a few days i see this crazy behavior. Sometimes bitbake freezes (everytime at the same stages if it freezes) when building a target (e.g. with "bitbake drapptempl"). top tells me that a "make all" process is running and consuming all resources of one cpu.
+On Sun, Sep 20, 2009 at 02:49:26PM -0400, Denys Dmytriyenko wrote:
+> On Sun, Sep 20, 2009 at 09:40:22AM +0100, Phil Blundell wrote:
+> > On Sun, 2009-09-20 at 02:33 -0400, Denys Dmytriyenko wrote:
+> > > Fixes the wrong versioned runtime dependency for shlib subpackages with
+> > > own versions. Consider this:
+> > > 
+> > > PACKAGES = "libfoo libbar"
+> > > PV_libfoo = "1"
+> > > PV_libbar = "2"
+> > > PV = "3"
+> > 
+> > Is this even legitimate usage?  I had always thought that PV applied to
+> > the recipe, not to the output subpackages.
 > 
-> I had an issue recently where opkg was prompting the user to overwrite
-> a file in the rootfs phase.  I would ctrl-C bitbake when it appeared
-> to be hung, but soon learned there were additional bitbake processes
-> still running.  When I ran killall bitbake, the error message showed
-> up.  You might find something by running bitbake with -DDDD.
+> PV_<pkg> works as is, because it is handled by the same code that does 
+> FILES_<pkg>, DESCRIPTION_<pkg>, RDEPENDS_<pkg>, RPROVIDES_<pkg>, PKG_<pkg> 
+> etc. And generated subpackages receive own versions just fine.
+> But for shared libraries in subpackages it has this small issue of exporting 
+> the main PV in shlibs/pkgdata/runtime...
+> 
+> > What's the typical use-case for this kind of thing?
+> 
+> As Koen said, helpful for large meta-packages. In the case of external 
+> toolchain, the main package may have version like "2009q1", while different 
+> subpackages can get their own versions, like "2.8" for libc, "4.3.3" for 
+> libstdc++ etc. Slightly convoluted example at [1]
+> W/o this fix I was getting runtime dependencies for libc >= 2009q1, instead
+> of 2.8
 
-Now, that you mentioned it, I have also seen it before! There was a file clash 
-between 2 recipes providing the same file, so opkg was waiting for the user 
-input asking to overwrite the file during the rootfs step. But opkg I/O is 
-being redirected, so it appears that bitbake is hung. I found out about the 
-problem from the rootfs log file in the tmp/work directory, where the 
-output is being redirected to... :)
+Would there be more comments, ACKs or NACKs from anyone? Is it Ok to push?
 
 -- 
 Denys
