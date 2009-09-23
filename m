@@ -1,37 +1,27 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [85.10.209.111] (helo=mail.road.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1MqQNN-0002G4-Qj for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Sep 2009 13:51:16 +0200
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1MqQLC-0006gG-30
+	(envelope-from <u.luckas@road.de>) id 1MqVbO-0007pd-Ds
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Sep 2009 13:48:58 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2009 13:48:58 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2009 13:48:58 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 23 Sep 2009 19:26:05 +0200
+Received: from slimfast.dyndns.org (unknown [192.168.254.1])
+	by mail.road.de (Postfix) with ESMTP id C40918F0007;
+	Wed, 23 Sep 2009 19:25:25 +0200 (CEST)
+Received: from ulitu.localnet (ulitu.handy-pc.constin.de [192.168.116.44])
+	by slimfast.dyndns.org (Postfix) with ESMTP id 8AF8B45400E;
+	Wed, 23 Sep 2009 19:25:25 +0200 (CEST)
+From: Uli Luckas <u.luckas@road.de>
+Organization: Road GmbH
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 23 Sep 2009 13:46:35 +0200
-Message-ID: <h9d1qs$564$1@ger.gmane.org>
-References: <1253697229-6181-1-git-send-email-Martin.Jansa@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <1253697229-6181-1-git-send-email-Martin.Jansa@gmail.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Wed, 23 Sep 2009 19:25:23 +0200
+User-Agent: KMail/1.12.1 (Linux/2.6.30-1-686-bigmem; KDE/4.3.1; i686; ; )
+MIME-Version: 1.0
+Message-Id: <200909231925.24005.u.luckas@road.de>
+X-SA-Exim-Connect-IP: 85.10.209.111
+X-SA-Exim-Mail-From: u.luckas@road.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] findutils: fix update-alternatives and native packages
+Cc: Leon Woestenberg <leon@sidebranch.com>
+Subject: "libvorbis: In configure.in, remove cpu= for powerpc tripplets." missing patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,24 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Sep 2009 11:51:17 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 23 Sep 2009 17:26:05 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 23-09-09 11:13, Martin.Jansa wrote:
-> Move update-alternatives logic to findutils-alternatives.inc which is not included in -native packages.
-> Patch mkinstalldirs.patch is needed also for findutils-native_4.2.29.
-> Remove version 4.4 as there is no tarball upstream (it's 4.4.0 actually).
-> Add latest version 4.4.2, probably not compatible with old glibc 2.6.1 (staging/armv4t-angstrom-linux-gnueabi/usr/include/stdio.h:654: error: conflicting types for 'rpl_fseeko'), findutils-native-4.4.2 is ok
+As far as I can see, commit 9731492940074aa14105d979ca6f8c2ccee910c8 
+"libvorbis: In configure.in, remove cpu= for powerpc tripplets." is missing 
+the patch.
 
-Anything with rpl_* is usually a replacement function for the real 
-thing. I suspect the autoconf site files need updating to cope with 
-seeko. The iperf recipe has a tweak to avoid using rpl_malloc, maybe 
-something analogous can be done with findutils.
+Regards,
+Uli
 
-regards,
+-- 
 
-Koen
+------- ROAD ...the handyPC Company - - -  ) ) )
 
+Uli Luckas
+Head of Software Development
+
+ROAD GmbH
+Bennigsenstr. 14 | 12159 Berlin | Germany
+fon: +49 (30) 230069 - 62 | fax: +49 (30) 230069 - 69
+url: www.road.de
+
+Amtsgericht Charlottenburg: HRB 96688 B
+Managing director: Hans-Peter Constien
 
 
