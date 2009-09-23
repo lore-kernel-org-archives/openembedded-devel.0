@@ -1,33 +1,41 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [209.85.221.178] (helo=mail-qy0-f178.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1MqZJw-0002Bo-5s
+	(envelope-from <raj.khem@gmail.com>) id 1MqbVv-0004mZ-0Y
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Sep 2009 23:24:19 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 5D673140972C
+	Thu, 24 Sep 2009 01:44:50 +0200
+Received: by qyk8 with SMTP id 8so1062318qyk.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2009 23:17:54 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id V2ZVKTqRuSVQ
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2009 23:17:54 +0200 (CEST)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 34AAA1416BA8
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2009 23:17:53 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	Wed, 23 Sep 2009 16:44:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=3wlShAdZqwIWsMZrf+apMwcWAMrvBK4lTGQiNYKmPdY=;
+	b=UyfrfT8AndW6c5AUdDCxDZEKfz2LO4oOJeD2fuidJIga+a/RftHdjmAlKpj/arAh1L
+	dv69j19t3yN9LpRJi2b9CfXxols8CUD2NpyYLAhe2qR4pP0om2qofJFeT2Gs9CK/G7Vr
+	kl3arXxdOsOM5bAGcYjvxgRL4SMUeBgyT7M8M=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=sHkzC+BMayTm3CYJ4omvHimygC+jfTv6f6xMN8ewNB6Dm874SAd0OueQLOPW6tU8GG
+	kcKcOYWT/dpCJE5qEVUo8woPd++4U0+/EIBQWLlfGhiPuZ+4vypRA9nqcQ1n2r3P+9Ml
+	H8/fYTxOwNBLB30ZipDAodTjB9PXk7jbDG+VY=
+MIME-Version: 1.0
+Received: by 10.229.69.83 with SMTP id y19mr1330736qci.50.1253749447906; Wed, 
+	23 Sep 2009 16:44:07 -0700 (PDT)
+In-Reply-To: <4AB9CF00.1070505@dresearch.de>
+References: <4AB8CF91.1070907@dresearch.de>
+	<19c1b8a90909221051x775eb576qb0813e26bdca7c09@mail.gmail.com>
+	<4AB9CF00.1070505@dresearch.de>
+Date: Wed, 23 Sep 2009 16:44:07 -0700
+Message-ID: <19c1b8a90909231644r2c4be842pa6c128b16294c86b@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Sep 2009 23:23:38 +0200
-Message-Id: <1253741018.5229.23.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-X-SA-Exim-Connect-IP: 84.21.108.25
-X-SA-Exim-Mail-From: utx@penguin.cz
+X-SA-Exim-Connect-IP: 209.85.221.178
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: functional Matchbox2 in oe.dev
+Subject: Re: bitbake freeze :(
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,46 +49,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Sep 2009 21:24:19 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 23 Sep 2009 23:44:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hallo.
+On Wed, Sep 23, 2009 at 12:32 AM, Steffen Sledz <sledz@dresearch.de> wrote:
+> Khem Raj wrote:
+>> you could try couple of things. Firstly try to isolate if its a
+>> bitbake problem or not
+>> likely its not but still make sure. You can go into the workdir and
+>> run the task script
+>> run.do_<task> whatever it is stuck at. If it succeeeds then you know
+>> its a problem with
+>> bitbake if not then the build mechanism for this particular package
+>> has problem. You might
+>> try to disable parallel build i.e. use -j 1 to make sure that its not
+>> some parallel build
+>> issue.
+>
+> I made some tests on this.
+>
+> First result was that if calling
+>
+> =C2=A0> bitbake drapptempl -c clean
+> =C2=A0> bitbake drapptempl
+> =C2=A0Ctrl-C
+> =C2=A0> bitbake drapptempl
+>
+> the first build request freezes in do_compile stage, the second one
+> succeeds (seen in 5 of 5 test runs). Also calling run.do_compile
+> succeeds everytime if tried after the first freeze.
+>
+> After that i checked the parallel build options in my local.conf.
+> The tests above were made with
+>
+> =C2=A0PARALLEL_MAKE =3D "-j 4"
+> =C2=A0BB_NUMBER_THREADS =3D "4"
+>
+> I tried to set the BB_NUMBER_THREADS to 1 but the problem was still
+> existing.
+>
+> After that i tried to set the PARALLEL_MAKE to "-j 1" and no the
+> recipe was build fine. =C2=A0:)
+>
+> So it seems that there is a problem with parallel make. But it only
+> occurs in a few of our recipes. Therefor i believe that there must be
+> something special in there makefiles/recipes.
+>
+> After a detailed inspection i noted that they all depend on a library
+> which uses glib (incl. some tools like gob2). The library itself does
+> not have the build problems. But could the problem result from this?
+>
 
-I just spent some time to make Matchbox2 working, as I considered is as
-possible optimal solution for minimalistic GTK+/GPE based environment.
+disable parallel build for this recipe.
 
-Resipes are now available in oe.dev. Just call bitbake matchbox2,
-install and and enjoy. Read /etc/matchbox2/defaults and customize the
-session script. And feel free to improve recipes.
-
-There were several crashes, that made it unusable, and problems with the
-icon theme. There is still a lot of things to do, but the code base is
-now usable for the daily work.
-
-The Matchbox2 code is almost minimalistic and easy to understand. But it
-seems that upstream is recently almost dead (no response for submitted
-patches, no activity in SVN for several months), so all fixes are now
-added to OE as patches.
-
-Benefits over Matchbox1:
-- The whole panel is just one process.
-- Application launcher should not generate 10 wake-ups per second.
-- Based on standard GTK+ widgets, shares look and feel with GPE.
-- Capable to share the same area for window title and panel (however the
-  way, where window is border-less and the panel contains window
-  operations applet {as some eee distros have} looks more smart).
-- Panel and window manager handles XRandR well (not yet the desktop).
-- Better handles new .desktop icon specification.
-
-Window switching keys are now hardcoded: Alt+d, Alt+n, Alt+p. I guess
-that Fn+something may be better. (I have been even using the Calendar
-key on Zaurus, as I don't use PIM.)
-
-
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
+> Steffen
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
