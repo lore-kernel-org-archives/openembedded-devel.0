@@ -1,36 +1,36 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [212.27.42.91] (helo=wmproxy1-g27.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1Mqurg-00014k-5y
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Sep 2009 22:24:35 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 8A5081416BA8
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Sep 2009 22:18:13 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LNHnJ5ZCE13M
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Sep 2009 22:18:13 +0200 (CEST)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 5918C1416BA5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Sep 2009 22:18:12 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4ABB7523.3050409@kernelconcepts.de>
-References: <1253741018.5229.23.camel@utx.utx.cz>
-	<4ABB7523.3050409@kernelconcepts.de>
-Date: Thu, 24 Sep 2009 22:23:53 +0200
-Message-Id: <1253823833.3909.14.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-X-SA-Exim-Connect-IP: 84.21.108.25
-X-SA-Exim-Mail-From: utx@penguin.cz
+	(envelope-from <alain2210@free.fr>) id 1MqvWr-0007y1-F3
+	for openembedded-devel@openembedded.org; Thu, 24 Sep 2009 23:07:08 +0200
+Received: from wmproxy1-g27.free.fr (localhost [127.0.0.1])
+	by wmproxy1-g27.free.fr (Postfix) with ESMTP id 0D47234A1;
+	Thu, 24 Sep 2009 23:06:23 +0200 (CEST)
+Received: from UNKNOWN (imp2-g19.priv.proxad.net [172.20.243.132])
+	by wmproxy1-g27.free.fr (Postfix) with ESMTP id 83B64341C;
+	Thu, 24 Sep 2009 23:06:22 +0200 (CEST)
+Received: by UNKNOWN (Postfix, from userid 0)
+	id 83122449084FF; Thu, 24 Sep 2009 23:06:22 +0200 (CEST)
+Received: from  ([82.123.18.65]) by imp.free.fr (IMP) with HTTP 
+	for <alain2210@172.20.243.55>; Thu, 24 Sep 2009 23:06:22 +0200
+Message-ID: <1253826382.4abbdf4e7a566@imp.free.fr>
+Date: Thu, 24 Sep 2009 23:06:22 +0200
+From: Alain2210 <alain2210@free.fr>
+To: openembedded-devel@lists.openembedded.org, Phil Blundell <philb@gnu.org>
+References: <1253437328.4ab5ef902b12f@imp.free.fr>
+	<19c1b8a90909200807u66d5d12bh345139ce4c4302ad@mail.gmail.com>
+	<1253472330.4ab6784a8f36c@imp.free.fr>
+	<1253535870.4942.11.camel@lenovo.internal.reciva.com>
+In-Reply-To: <1253535870.4942.11.camel@lenovo.internal.reciva.com>
+MIME-Version: 1.0
+User-Agent: Internet Messaging Program (IMP) 3.2.8
+X-Originating-IP: 82.123.18.65
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 212.27.42.91
+X-SA-Exim-Mail-From: alain2210@free.fr
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: functional Matchbox2 in oe.dev
+Cc: openembedded-devel@openembedded.org
+Subject: Re: minimo not building
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,35 +44,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Sep 2009 20:24:35 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 24 Sep 2009 21:07:08 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
 
-Florian Boor wrote:
+Hello,
 
-> Stanislav Brabec schrieb:
+Selon Phil Blundell <philb@gnu.org>:
 
-> > Resipes are now available in oe.dev. Just call bitbake matchbox2,
-> > install and and enjoy. Read /etc/matchbox2/defaults and customize the
-> > session script. And feel free to improve recipes.
-> 
-> Very good - we should update all related recipes to make use of it. If we need
-> to do any changes in GPE in order to make it compatible with the Matchbox2 stuff
->  please let me know.
+> On Sun, 2009-09-20 at 20:45 +0200, Alain2210 wrote:
+> > Thanks for the explanation. How can I make minimo build again ? (and =
+do you
+> have
+> > an idea why fennec with the same code can be built ?)
+>
+> Fennec uses mozilla.inc, which sets ARM_INSTRUCTION_SET =3D "arm".  Thi=
+s
+> is a somewhat sucky workaround since it will force the entire program t=
+o
+> be built as ARM, but it would at least avoid the problem you're seeing.
 
-Well, GPE is nearly independent on the panel and WM. Old Matchbox
-applets can still be hosted in Matchbox2, but conversion to the
-Matchbox2 panel module would make them less memory-hungry.
+Sorry, for the late answer. I can confirm that with this instruction mini=
+mo
+builds on my laptop and works on my ipaq. Perhaps could it be put in oe.d=
+ev.
 
-Just matchbox-panel-manager will not work due to Matchbox2. Matchbox2
-does not support layout change without restart. But there are things
-that become outdated over the time by a change of low level technology -
-for example gpe-bluetooth.
+> A better fix would be to identify the source of the offending
+> instructions and either convert them to Thumb or put them out of line.
 
+Sure, but it is far beyond my knowledges.
 
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+Thanks for the explanation.
 
+Sincerely,
+
+Alain
 
 
