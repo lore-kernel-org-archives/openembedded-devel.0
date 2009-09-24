@@ -1,41 +1,29 @@
-Received: from [209.85.221.178] (helo=mail-qy0-f178.google.com)
+Received: from [85.33.2.12] (helo=smtp-out01.alice.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MqbVv-0004mZ-0Y
+	(envelope-from <GNUtoo@no-log.org>) id 1Mqo6x-0005dC-NU
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Sep 2009 01:44:50 +0200
-Received: by qyk8 with SMTP id 8so1062318qyk.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Sep 2009 16:44:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=3wlShAdZqwIWsMZrf+apMwcWAMrvBK4lTGQiNYKmPdY=;
-	b=UyfrfT8AndW6c5AUdDCxDZEKfz2LO4oOJeD2fuidJIga+a/RftHdjmAlKpj/arAh1L
-	dv69j19t3yN9LpRJi2b9CfXxols8CUD2NpyYLAhe2qR4pP0om2qofJFeT2Gs9CK/G7Vr
-	kl3arXxdOsOM5bAGcYjvxgRL4SMUeBgyT7M8M=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=sHkzC+BMayTm3CYJ4omvHimygC+jfTv6f6xMN8ewNB6Dm874SAd0OueQLOPW6tU8GG
-	kcKcOYWT/dpCJE5qEVUo8woPd++4U0+/EIBQWLlfGhiPuZ+4vypRA9nqcQ1n2r3P+9Ml
-	H8/fYTxOwNBLB30ZipDAodTjB9PXk7jbDG+VY=
-MIME-Version: 1.0
-Received: by 10.229.69.83 with SMTP id y19mr1330736qci.50.1253749447906; Wed, 
-	23 Sep 2009 16:44:07 -0700 (PDT)
-In-Reply-To: <4AB9CF00.1070505@dresearch.de>
-References: <4AB8CF91.1070907@dresearch.de>
-	<19c1b8a90909221051x775eb576qb0813e26bdca7c09@mail.gmail.com>
-	<4AB9CF00.1070505@dresearch.de>
-Date: Wed, 23 Sep 2009 16:44:07 -0700
-Message-ID: <19c1b8a90909231644r2c4be842pa6c128b16294c86b@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 24 Sep 2009 15:11:54 +0200
+Received: from FBCMMO05.fbc.local ([192.168.184.136]) by smtp-out01.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 24 Sep 2009 15:11:11 +0200
+Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO05.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 24 Sep 2009 15:11:08 +0200
+Received: from [192.168.1.107] ([79.51.162.213]) by FBCMCL01B07.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Thu, 24 Sep 2009 15:11:07 +0200
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.221.178
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Thu, 24 Sep 2009 15:11:05 +0200
+Message-Id: <1253797865.5877.110.camel@localhost>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.4 
+X-OriginalArrivalTime: 24 Sep 2009 13:11:07.0574 (UTC)
+	FILETIME=[7A69BD60:01CA3D18]
+X-SA-Exim-Connect-IP: 85.33.2.12
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: bitbake freeze :(
+Subject: [RFC] remove mdev recipe(already in busybox)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,68 +37,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Sep 2009 23:44:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 24 Sep 2009 13:11:54 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Wed, Sep 23, 2009 at 12:32 AM, Steffen Sledz <sledz@dresearch.de> wrote:
-> Khem Raj wrote:
->> you could try couple of things. Firstly try to isolate if its a
->> bitbake problem or not
->> likely its not but still make sure. You can go into the workdir and
->> run the task script
->> run.do_<task> whatever it is stuck at. If it succeeeds then you know
->> its a problem with
->> bitbake if not then the build mechanism for this particular package
->> has problem. You might
->> try to disable parallel build i.e. use -j 1 to make sure that its not
->> some parallel build
->> issue.
->
-> I made some tests on this.
->
-> First result was that if calling
->
-> =C2=A0> bitbake drapptempl -c clean
-> =C2=A0> bitbake drapptempl
-> =C2=A0Ctrl-C
-> =C2=A0> bitbake drapptempl
->
-> the first build request freezes in do_compile stage, the second one
-> succeeds (seen in 5 of 5 test runs). Also calling run.do_compile
-> succeeds everytime if tried after the first freeze.
->
-> After that i checked the parallel build options in my local.conf.
-> The tests above were made with
->
-> =C2=A0PARALLEL_MAKE =3D "-j 4"
-> =C2=A0BB_NUMBER_THREADS =3D "4"
->
-> I tried to set the BB_NUMBER_THREADS to 1 but the problem was still
-> existing.
->
-> After that i tried to set the PARALLEL_MAKE to "-j 1" and no the
-> recipe was build fine. =C2=A0:)
->
-> So it seems that there is a problem with parallel make. But it only
-> occurs in a few of our recipes. Therefor i believe that there must be
-> something special in there makefiles/recipes.
->
-> After a detailed inspection i noted that they all depend on a library
-> which uses glib (incl. some tools like gob2). The library itself does
-> not have the build problems. But could the problem result from this?
->
+hi, Tom Rin said:
+"To follow up to myself, the 'mdev' package should just go away really.
+This particular bug is because 'mdev' has an empty mdev.conf while
+busybox's mdev does not, and it contains console/null/etc entries."
+in "Re: [oe] [PATCH] mdev: mdev.sh: permit serial console login and
+correct init runlevel" 
+( http://article.gmane.org/gmane.comp.handhelds.openembedded/25296 )
+So should we remove mdev recipe and use busybox's mdev instead...if so
+all the recipe/distro that were using it must be updated.
+for intance the micro-base-image use it:
+IMAGE_DEV_MANAGER = "mdev"
+that should be replaced by:
+IMAGE_DEV_MANAGER = "busybox-mdev"
+A quick grep for IMAGE_DEV_MANAGER in the dev branch shows that only the
+micro-base-image use it...
 
-disable parallel build for this recipe.
+Does someone have an objection(for the mdev recipe removal)?
 
-> Steffen
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+By the way i sent that mail because there could have things that I
+didn't thought,people that could depend on .dev but use external
+recipes(I was thinking of thing like MokoMakefiles),or issues with other
+branches,But also because I was told to do so.
+
+Denis.
+
+
+
 
 
