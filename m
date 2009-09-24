@@ -1,32 +1,26 @@
-Received: from [91.121.30.210] (helo=27.mail-out.ovh.net)
+Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1Mqtai-0004Ud-NO
-	for openembedded-devel@openembedded.org; Thu, 24 Sep 2009 21:03:01 +0200
-Received: (qmail 21687 invoked by uid 503); 24 Sep 2009 21:17:43 -0000
-Received: from b9.ovh.net (HELO mail620.ha.ovh.net) (213.186.33.59)
-	by 27.mail-out.ovh.net with SMTP; 24 Sep 2009 21:17:43 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 24 Sep 2009 19:02:14 -0000
-Received: from tal33-2-82-228-175-43.fbx.proxad.net (HELO ?192.168.1.13?)
-	(ebenard%eukrea.com@82.228.175.43)
-	by ns0.ovh.net with SMTP; 24 Sep 2009 19:02:12 -0000
-Message-ID: <4ABBC232.7010901@eukrea.com>
-Date: Thu, 24 Sep 2009 21:02:10 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	(envelope-from <trini@embeddedalley.com>) id 1MquKL-0006I0-KO
+	for openembedded-devel@openembedded.org; Thu, 24 Sep 2009 21:50:08 +0200
+Received: (qmail 25533 invoked from network); 24 Sep 2009 19:49:27 -0000
+Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
+	by easi.embeddedalley.com with SMTP; 24 Sep 2009 12:49:27 -0700
+Date: Thu, 24 Sep 2009 12:49:26 -0700
+From: Tom Rini <trini@embeddedalley.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4AA3ABA8.304@eukrea.com>	<200909061703.48206.holger+oe@freyther.de>
-	<4AA3EE5E.70409@eukrea.com> <4AA43612.8070808@4d-electronics.co.nz>
-In-Reply-To: <4AA43612.8070808@4d-electronics.co.nz>
-X-Ovh-Tracer-Id: 13993809943490243913
-X-Ovh-Remote: 82.228.175.43 (tal33-2-82-228-175-43.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.30.210
-X-SA-Exim-Mail-From: eric@eukrea.com
+Message-ID: <20090924194926.GG9726@smtp.west.cox.net>
+References: <1253213978.30165.188.camel@dax.rpnet.com>
+MIME-Version: 1.0
+In-Reply-To: <1253213978.30165.188.camel@dax.rpnet.com>
+Organization: Embedded Alley Solutions, Inc
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 71.6.201.124
+X-SA-Exim-Mail-From: trini@embeddedalley.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] qt4-embedded & tslib
+Cc: openembedded-devel <openembedded-devel@openembedded.org>,
+	poky <poky@o-hand.com>
+Subject: Re: Poky SDK generation changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,99 +34,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Sep 2009 19:03:01 -0000
-Content-Type: multipart/mixed; boundary="------------040704070404080105040102"
+X-List-Received-Date: Thu, 24 Sep 2009 19:50:09 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---------------040704070404080105040102
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
-
-Hi,
-
-Matthew Dombroski wrote :
-> Actually, the problem is that tslib is linked incorrectly.
-> The pthres, linear, etc. modules are not linked to libts so theyre 
-> missing symbols when an attempt is made to load them.
-> To confirm, do
+On Thu, Sep 17, 2009 at 07:59:37PM +0100, Richard Purdie wrote:
+> As people who've used it probably know, SDK generation is a bit of a
+> hack at the moment since the SDK is compiled against the system its
+> built on. This means its not possible to produce a i586 SDK on a x86_64
+> build machine for example.
 > 
-> LD_PRELOAD=/usr/lib/libts-1.0.so.0 <args>
+> The current sdk.bbclass also has an identity crisis powering both cross
+> toolchain recipes (like gcc, binutils and gdb) along with non-cross sdk
+> tools like qemu and pkgconfig.
 > 
-> tslib modules will resolve symbols properly so tslib will work.
+> I've wanted to see "proper" SDK generation with Poky for a while and
+> I've now created a series of patches which enable this which includes
+> the layout variable changes I previously mentioned:
 > 
-> A quick patch to tslib to link those modules against libts is below.
-> A little dirty linking against the static libs, but it works!
+> http://git.pokylinux.org/cgit.cgi/poky/log/?h=canadian
 > 
-in fact, the patch you sent on the list was integrated into tslib in 
-november 2008 :
-http://svn.berlios.de/viewcvs/tslib/trunk/tslib/plugins/Makefile.am?r1=51&r2=56
+> The idea is similar to some of the canadian* classes in OE.dev but I
+> ended up rewriting them entirely as I believed something simpler was
+> possible and desirable. The idea is the same in that you set
+> SDK_ARCH="i586" in local.conf and then the SDK will be one that runs on
+> that ARCH.
+> 
+> The end result is three classes:
+> 
+> cross-canadian.bbclass
+> crosssdk.bbclass
+> nativesdk.bbclass
+> 
+> nativesdk - These recipes provide "SDK" versions of the recipe for
+> things like pkgconfig, qemu, the xlibs qemu needs and so on. The class
+> is BBCLASSEXTEND capable so its usually just a case of adding
+> BBCLASSEXTEND = "nativesdk" to the recipe.
+> 
+> crosssdk - These build a cross compiler toolchain which runs on your
+> build machine and cross compiles to SDK_ARCH. Its pretty much
+> cross.bbclass but with TARGET_ARCH = SDK_ARCH.
+> 
+> canadian-cross - These are the strangest packages as they're built on
+> BUILD_ARCH to run on SDK_ARCH to generate output to run on TARGET_ARCH.
+> 
+> As a nice benefit we end up with a libc in the SDK tarball which the SDK
+> uses instead of linking against the one on the build machine. Poky also
+> contains some code to link qemu against a dummy libGL as I didn't
+> believe adding a libGL to the SDK tarball was sensible.
+> 
+> I've cc'd the OE list since I think the changes in here are desirable
+> for OE too. I haven't had much time to run OE builds of late for many
+> reasons. I don't really want to make changes there without testing the
+> result so any help in merging this into OE would be really appreciated.
 
-Please find attached a patch to add this patch to the tslib's recipe.
+This all sounds pretty good.  My first concern is where does MACHINE
+fit into this stuff?  My second is, is it possible to do something like:
+$ SDK_ARCH="i586-linux" MACHINE=machine1 bitbake my-sdk-target
+$ SDK_ARCH="i586-mingw" MACHINE=machine1 bitbake my-sdk-target
+I assume so.  Then after those two, how about:
+$ SDK_ARCH="i586-linux" MACHINE=machine2 bitbake my-sdk-target
+$ SDK_ARCH="i586-mingw" MACHINE=machine2 bitbake my-sdk-target
 
-Best regards
-Eric
+And still get sensible results (assuming my-sdk-target takes MACHINE
+into account in naming the output)?
 
---------------040704070404080105040102
-Content-Type: text/x-patch;
- name="tslib.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
- filename="tslib.patch"
+-- 
+Tom Rini
 
-diff --git a/recipes/tslib/tslib/tslib-pluginsld.patch b/recipes/tslib/tslib/tslib-pluginsld.patch
-new file mode 100644
-index 0000000..37ef808
---- /dev/null
-+++ b/recipes/tslib/tslib/tslib-pluginsld.patch
-@@ -0,0 +1,36 @@
-+ plugins/Makefile.am |    5 +++++
-+ 1 files changed, 5 insertions(+), 0 deletions(-)
-+
-+diff --git a/plugins/Makefile.am b/plugins/Makefile.am
-+index 3b902c2..4c4ef8b 100644
-+--- a/plugins/Makefile.am
-++++ b/plugins/Makefile.am
-+@@ -114,15 +114,19 @@ pluginexec_LTLIBRARIES = \
-+   
-+ variance_la_SOURCES	= variance.c
-+ variance_la_LDFLAGS	= -module $(LTVSN)
-++variance_la_LIBADD	= $(top_builddir)/src/libts.la
-+   
-+ dejitter_la_SOURCES	= dejitter.c
-+ dejitter_la_LDFLAGS	= -module $(LTVSN)
-++dejitter_la_LIBADD	= $(top_builddir)/src/libts.la
-+   
-+ linear_la_SOURCES	= linear.c
-+ linear_la_LDFLAGS	= -module $(LTVSN)
-++linear_la_LIBADD	= $(top_builddir)/src/libts.la
-+ 
-+ pthres_la_SOURCES	= pthres.c
-+ pthres_la_LDFLAGS	= -module $(LTVSN)
-++pthres_la_LIBADD	= $(top_builddir)/src/libts.la
-+ 
-+ # hw access
-+ corgi_la_SOURCES	= corgi-raw.c
-+@@ -148,6 +152,7 @@ tatung_la_LDFLAGS	= -module $(LTVSN)
-+ 
-+ input_la_SOURCES	= input-raw.c
-+ input_la_LDFLAGS	= -module $(LTVSN)
-++input_la_LIBADD	  = $(top_builddir)/src/libts.la
-+ 
-+ linear_h2200_la_SOURCES	= linear-h2200.c
-+ linear_h2200_la_LDFLAGS	= -module $(LTVSN)
-+
-diff --git a/recipes/tslib/tslib_1.0.bb b/recipes/tslib/tslib_1.0.bb
-index 1929ee0..bbd4793 100644
---- a/recipes/tslib/tslib_1.0.bb
-+++ b/recipes/tslib/tslib_1.0.bb
-@@ -1,6 +1,7 @@
- SRC_URI = "http://download.berlios.de/tslib/${BP}.tar.bz2 \
-            file://fix_version.patch;patch=1 \
--           file://tslib-nopressure.patch;patch=1"
--PR = "${INC_PR}.2"
-+           file://tslib-nopressure.patch;patch=1 \
-+	   file://tslib-pluginsld.patch;patch=1"
-+PR = "${INC_PR}.3"
- 
- include tslib.inc
 
---------------040704070404080105040102--
