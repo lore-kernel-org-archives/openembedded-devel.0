@@ -1,24 +1,36 @@
-Received: from [71.6.201.124] (helo=easi.embeddedalley.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <trini@embeddedalley.com>) id 1MquMs-0006Rs-Ah
-	for openembedded-devel@openembedded.org; Thu, 24 Sep 2009 21:52:45 +0200
-Received: (qmail 25554 invoked from network); 24 Sep 2009 19:52:04 -0000
-Received: from easi.embeddedalley.com (HELO localhost) (easi@71.6.201.124)
-	by easi.embeddedalley.com with SMTP; 24 Sep 2009 12:52:04 -0700
-Date: Thu, 24 Sep 2009 12:52:03 -0700
-From: Tom Rini <trini@embeddedalley.com>
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <utx@penguin.cz>) id 1Mqurg-00014k-5y
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Sep 2009 22:24:35 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 8A5081416BA8
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Sep 2009 22:18:13 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id LNHnJ5ZCE13M
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Sep 2009 22:18:13 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 5918C1416BA5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Sep 2009 22:18:12 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20090924195203.GH9726@smtp.west.cox.net>
-References: <1253226007.1495.264.camel@conroy-linux>
-MIME-Version: 1.0
-In-Reply-To: <1253226007.1495.264.camel@conroy-linux>
-Organization: Embedded Alley Solutions, Inc
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 71.6.201.124
-X-SA-Exim-Mail-From: trini@embeddedalley.com
+In-Reply-To: <4ABB7523.3050409@kernelconcepts.de>
+References: <1253741018.5229.23.camel@utx.utx.cz>
+	<4ABB7523.3050409@kernelconcepts.de>
+Date: Thu, 24 Sep 2009 22:23:53 +0200
+Message-Id: <1253823833.3909.14.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: interest in binary packaging?
+Subject: Re: functional Matchbox2 in oe.dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,25 +44,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Sep 2009 19:52:45 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 24 Sep 2009 20:24:35 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Thu, Sep 17, 2009 at 06:20:07PM -0400, Chris Conroy wrote:
+Florian Boor wrote:
 
-> I've developed a rather simplistic method for managing "binary" packages
-> within OE in order to satisfy certain licensing requirements. I am not
-> sure whether other users would have an interest in such a system, but
-> I'll go ahead and pitch what I have working so far to see if there is
-> any interest in improving it further or merging upstream.
+> Stanislav Brabec schrieb:
 
-Yes, there is interest.  The only issue I see off the top of my head is
-that this doesn't work for deb / rpm / tar, when it could.  The way I've
-solved this before is to have the binary version just be a tarball of
-the do_install() from the source version,  Then -dbg/-dev/whatever gets
-split up normally and other output formats work fine too.
+> > Resipes are now available in oe.dev. Just call bitbake matchbox2,
+> > install and and enjoy. Read /etc/matchbox2/defaults and customize the
+> > session script. And feel free to improve recipes.
+> 
+> Very good - we should update all related recipes to make use of it. If we need
+> to do any changes in GPE in order to make it compatible with the Matchbox2 stuff
+>  please let me know.
 
--- 
-Tom Rini
+Well, GPE is nearly independent on the panel and WM. Old Matchbox
+applets can still be hosted in Matchbox2, but conversion to the
+Matchbox2 panel module would make them less memory-hungry.
+
+Just matchbox-panel-manager will not work due to Matchbox2. Matchbox2
+does not support layout change without restart. But there are things
+that become outdated over the time by a change of low level technology -
+for example gpe-bluetooth.
+
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
