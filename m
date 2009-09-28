@@ -1,27 +1,33 @@
-Received: from [64.71.152.235] (helo=lirone.symas.net)
+Received: from [212.27.42.91] (helo=wmproxy1-g27.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hyc@symas.com>) id 1Mrzll-0005Qw-Uv
+	(envelope-from <alain2210@free.fr>) id 1Ms3v5-0004Uf-Jx
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Sep 2009 21:50:57 +0200
-Received: from [76.91.220.157] (helo=[192.168.1.25])
-	by lirone.symas.net with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <hyc@symas.com>) id 1Mrzl7-0001pd-IT
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Sep 2009 12:50:13 -0700
-Message-ID: <4ABFC1F0.2080601@symas.com>
-Date: Sun, 27 Sep 2009 12:50:08 -0700
-From: Howard Chu <hyc@symas.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64;
-	rv:1.9.1b5pre) Gecko/20090909 SeaMonkey/2.0a1pre Firefox/3.0.3
+	Mon, 28 Sep 2009 02:16:50 +0200
+Received: from wmproxy1-g27.free.fr (localhost [127.0.0.1])
+	by wmproxy1-g27.free.fr (Postfix) with ESMTP id CE06F334F
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Sep 2009 02:16:07 +0200 (CEST)
+Received: from UNKNOWN (imp6-g19.priv.proxad.net [172.20.243.136])
+	by wmproxy1-g27.free.fr (Postfix) with ESMTP id BD2F6334D
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Sep 2009 02:16:07 +0200 (CEST)
+Received: by UNKNOWN (Postfix, from userid 0)
+	id BD780C89512C5; Mon, 28 Sep 2009 02:16:07 +0200 (CEST)
+Received: from  ([82.123.20.116]) by imp.free.fr (IMP) with HTTP 
+	for <alain2210@172.20.243.55>; Mon, 28 Sep 2009 02:16:07 +0200
+Message-ID: <1254096967.4ac00047b8abb@imp.free.fr>
+Date: Mon, 28 Sep 2009 02:16:07 +0200
+From: Alain2210 <alain2210@free.fr>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <mailman.37215.1252941941.21824.openembedded-devel@lists.openembedded.org>
-In-Reply-To: <mailman.37215.1252941941.21824.openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 64.71.152.235
-X-SA-Exim-Mail-From: hyc@symas.com
+User-Agent: Internet Messaging Program (IMP) 3.2.8
+X-Originating-IP: 82.123.20.116
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 212.27.42.91
+X-SA-Exim-Mail-From: alain2210@free.fr
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: python-wpactrl
+Subject: xmonobut
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,69 +41,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Sep 2009 19:50:57 -0000
-X-Groupsio-MsgNum: 13236
-Content-Type: multipart/mixed; boundary="------------010007060604060200020208"
+X-List-Received-Date: Mon, 28 Sep 2009 00:16:50 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
 
---------------010007060604060200020208
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+Hello,
 
-> Date: Mon, 14 Sep 2009 13:46:35 +0200
-> From: Koen Kooi<k.kooi@student.utwente.nl>
+xmonobut segfault. I need this patch to get it works again.
 
-> Please use SRCREV to point to the revision and put it in PV as well so
-> people can see which version they are installing.
->
-> And please send it as a git-am'able patch so we can track author metadata.
+Sincerely,
 
-I think this addresses your comments.
+Alain
+----------------------------------------------
+--- main.c.orig	2006-02-05 12:49:21.000000000 +0100
++++ main.c	2009-09-28 02:11:06.000000000 +0200
+@@ -137,7 +137,7 @@
+ {
+   Display *dpy;
+   Window root;
+-  unsigned char map[6];
++  unsigned char map[31];
 
--- 
-   -- Howard Chu
-   CTO, Symas Corp.           http://www.symas.com
-   Director, Highland Sun     http://highlandsun.com/hyc/
-   Chief Architect, OpenLDAP  http://www.openldap.org/project/
+   int buts, rst;
 
---------------010007060604060200020208
-Content-Type: text/x-diff;
- name="0001-Add-wpactrl-module.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="0001-Add-wpactrl-module.patch"
+@@ -190,7 +190,7 @@
 
-From 89b27aff8cb95def72927604492bbf77990da403 Mon Sep 17 00:00:00 2001
-From: Howard Chu <hyc@symas.com>
-Date: Sun, 27 Sep 2009 12:43:40 -0700
-Subject: [PATCH] Add wpactrl module
+   if (active_button_num !=3D last_button_num)
+     {
+-      buts =3D XGetPointerMapping(dpy, map, 5);
++      buts =3D XGetPointerMapping(dpy, map, 32);
 
-
-Signed-off-by: Howard Chu <hyc@symas.com>
----
- recipes/python/python-wpactrl_svn.bb |   12 ++++++++++++
- 1 files changed, 12 insertions(+), 0 deletions(-)
- create mode 100644 recipes/python/python-wpactrl_svn.bb
-
-diff --git a/recipes/python/python-wpactrl_svn.bb b/recipes/python/python-wpactrl_svn.bb
-new file mode 100644
-index 0000000..e0e8a05
---- /dev/null
-+++ b/recipes/python/python-wpactrl_svn.bb
-@@ -0,0 +1,12 @@
-+DESCRIPTION = "A Python extension for wpa_supplicant/hostapd control interface access"
-+SECTION = "devel/python"
-+LICENSE = "GPLv2"
-+HOMEPAGE = "http://projects.otaku42.de/wiki/PythonWpaCtrl"
-+
-+inherit distutils
-+
-+SRCREV = "383"
-+SRC_URI = "svn://svn.otaku42.de;module=python-wpactrl;proto=http"
-+S = "${WORKDIR}/python-wpactrl/trunk"
-+PV = "1.0.1+svnr${SRCREV}"
-+
--- 
-1.6.0.4
+       switch (active_button_num)
+ 	{
+@@ -217,7 +217,7 @@
+ 	  break;
+ 	}
+       mb_tray_app_repaint(app);
+-      while((rst =3D XSetPointerMapping(dpy, map, buts)) =3D=3D MappingB=
+usy);
++      while((rst =3D XSetPointerMapping(dpy, map, 32)) =3D=3D MappingBus=
+y);
+       last_button_num =3D active_button_num;
+     }
+ }
 
 
---------------010007060604060200020208--
