@@ -1,29 +1,28 @@
-Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
+Received: from [206.46.173.1] (helo=vms173001pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1MshAJ-0006V5-GN
+	(envelope-from <denis@denix.org>) id 1MshFV-0006eI-Tn
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Sep 2009 20:11:10 +0200
-Received: from gandalf.denix.org ([71.127.57.136]) by vms173005.mailsrvcs.net
+	Tue, 29 Sep 2009 20:16:33 +0200
+Received: from gandalf.denix.org ([71.127.57.136]) by vms173001.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KQQ008VBVSRGYBI@vms173005.mailsrvcs.net> for
+	32bit)) with ESMTPA id <0KQQ006FSW1IM1T1@vms173001.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Tue,
-	29 Sep 2009 13:10:08 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id C6F1714AF60; Tue,
-	29 Sep 2009 14:10:02 -0400 (EDT)
-Date: Tue, 29 Sep 2009 14:10:02 -0400
+	29 Sep 2009 13:15:23 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 238CF14AF60; Tue,
+	29 Sep 2009 14:15:18 -0400 (EDT)
+Date: Tue, 29 Sep 2009 14:15:18 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20090929181002.GA12138@denix.org>
-References: <200909281752.11487.anarsoul@gmail.com>
-	<1254215340.12689.643.camel@mill.internal.reciva.com>
+Message-id: <20090929181518.GB12138@denix.org>
+References: <5f2b60909290445h117f28f0s807430bcec2176e1@mail.gmail.com>
 MIME-version: 1.0
-In-reply-to: <1254215340.12689.643.camel@mill.internal.reciva.com>
+In-reply-to: <5f2b60909290445h117f28f0s807430bcec2176e1@mail.gmail.com>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.5
+X-SA-Exim-Connect-IP: 206.46.173.1
 X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: udev problems on angstrom-2008.1
+Subject: Re: dm6446-evm kernel broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,29 +36,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Sep 2009 18:11:10 -0000
+X-List-Received-Date: Tue, 29 Sep 2009 18:16:33 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Tue, Sep 29, 2009 at 10:09:00AM +0100, Phil Blundell wrote:
-> On Mon, 2009-09-28 at 17:52 +0300, Vasily Khoruzhick wrote:
-> > udevd-event[1918]: mknod(/dev/vcS, 020660, (7,0) failed: No space left on 
-> > device
+On Tue, Sep 29, 2009 at 01:45:58PM +0200, Bj??rn Forsman wrote:
+> Hi all,
 > 
-> You probably need to increase the inode allocation for tmpfs.  See the
-> mount(8) manpage where it talks about the nr_inodes option.
+> It seems like commit "linux-davinci: add DA850/OMAPL138, update other
+> DaVinci machines",
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=a96730454f6f8d86519317ad0798b2f96dfcdd45,
+> broke the kernel for the dm6446-evm.
+> 
+> After this commit, my kernel will not boot. This is what I get:
+> 
+> [console printout begin]
+> ## Booting image at 80700000 ...
+>    Image Name:   Angstrom/2.6.30-r10+gitr5212151f
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-From the tmpfs documentation it kind of implies inodes take half the RAM 
-pages:
-
-nr_inodes: The maximum number of inodes for this instance. The default
-           is half of the number of your physical RAM pages, or (on a
-           machine with highmem) the number of lowmem RAM pages,
-           whichever is the lower.
-
-Now while reading it again, I think I may have misread it previously...
-Looks like half the RAM pages is used as a default number of inodes, but 
-inodes don't consume that much. It's good to know udev is not a pig... :)
+From the commit you referred above, none of the SRCREVs use 5212151f commit 
+number/hash. Please check what kernel you are building/booting.
 
 -- 
 Denys
