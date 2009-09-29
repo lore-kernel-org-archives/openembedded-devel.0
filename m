@@ -1,35 +1,29 @@
-Received: from [93.97.173.237] (helo=tim.rpsys.net)
+Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <richard@openedhand.com>) id 1MseAV-0000Ut-Qf
-	for openembedded-devel@openembedded.org; Tue, 29 Sep 2009 16:59:11 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n8TEwPfx019497
-	for <openembedded-devel@openembedded.org>;
-	Tue, 29 Sep 2009 15:58:25 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 18946-10 for <openembedded-devel@openembedded.org>;
-	Tue, 29 Sep 2009 15:58:21 +0100 (BST)
-Received: from [192.168.3.6] ([192.168.3.6]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id n8TEwHG2019491
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@openembedded.org>;
-	Tue, 29 Sep 2009 15:58:20 +0100
-From: Richard Purdie <richard@openedhand.com>
-To: openembedded-devel@openembedded.org
-In-Reply-To: <4AC12E48.3010801@techworks.ie>
-References: <4AC12E48.3010801@techworks.ie>
-Date: Tue, 29 Sep 2009 15:58:15 +0100
-Message-Id: <1254236295.1654.10.camel@ted>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: richard@openedhand.com
+	(envelope-from <denis@denix.org>) id 1MshAJ-0006V5-GN
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Sep 2009 20:11:10 +0200
+Received: from gandalf.denix.org ([71.127.57.136]) by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KQQ008VBVSRGYBI@vms173005.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	29 Sep 2009 13:10:08 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id C6F1714AF60; Tue,
+	29 Sep 2009 14:10:02 -0400 (EDT)
+Date: Tue, 29 Sep 2009 14:10:02 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20090929181002.GA12138@denix.org>
+References: <200909281752.11487.anarsoul@gmail.com>
+	<1254215340.12689.643.camel@mill.internal.reciva.com>
+MIME-version: 1.0
+In-reply-to: <1254215340.12689.643.camel@mill.internal.reciva.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.5
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: meta-native?
+Subject: Re: udev problems on angstrom-2008.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,41 +37,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Sep 2009 14:59:11 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 29 Sep 2009 18:11:10 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Mon, 2009-09-28 at 22:44 +0100, Christian Gagneraud wrote:
-
-> I expected then that a "rm -Rf $TMPDIR; MACHINE=whatever bitbake 
-> meta-native" would have build only the native recipes but it looks 
-> like some cross/target recipes are being build too, for now (the build 
-> is still ongoing) it has pulled the following "non-native" 
-> dependencies (found in stamps/armv4t-angstrom-linux-gnueabi):
-> binutils-cross
-> expat
-> gcc-cross
-> gcc-cross-initial
-> gcc-cross-intermediate
-> glibc
-> glibc-initial
-> libtool-cross
-> linux-libc-headers
+On Tue, Sep 29, 2009 at 10:09:00AM +0100, Phil Blundell wrote:
+> On Mon, 2009-09-28 at 17:52 +0300, Vasily Khoruzhick wrote:
+> > udevd-event[1918]: mknod(/dev/vcS, 020660, (7,0) failed: No space left on 
+> > device
 > 
-> Is it really a native package that pulls these dependencies, or is it 
-> because the cross-toolchain is a kind of default dependency?
+> You probably need to increase the inode allocation for tmpfs.  See the
+> mount(8) manpage where it talks about the nr_inodes option.
 
-I think its your meta-native recipe itself which is pulling in the cross
-compiler. Try adding INHIBIT_DEFAULT_DEPS = "1" to it and see if that
-helps. As a hint, "bitbake -g meta-native" will tell you what it will
-build (and what pulls what in).
+From the tmpfs documentation it kind of implies inodes take half the RAM 
+pages:
 
-Cheers,
+nr_inodes: The maximum number of inodes for this instance. The default
+           is half of the number of your physical RAM pages, or (on a
+           machine with highmem) the number of lowmem RAM pages,
+           whichever is the lower.
 
-Richard
+Now while reading it again, I think I may have misread it previously...
+Looks like half the RAM pages is used as a default number of inodes, but 
+inodes don't consume that much. It's good to know udev is not a pig... :)
+
 -- 
-Richard Purdie
-Intel Open Source Technology Centre
-
+Denys
 
 
