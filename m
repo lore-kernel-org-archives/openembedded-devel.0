@@ -1,26 +1,32 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1MsYC3-00005N-9G
+	(envelope-from <philb@gnu.org>) id 1MsYiP-0007zQ-Uk
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Sep 2009 10:36:22 +0200
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 858611B10C04
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Sep 2009 08:42:49 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Tue, 29 Sep 2009 11:09:49 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MsYhl-0002Sr-5K
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Sep 2009 10:09:05 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1MsYhk-0002CA-UM
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Sep 2009 10:09:05 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Sep 2009 10:35:09 +0200
-User-Agent: KMail/1.12.1 (Linux/2.6.31; KDE/4.3.1; i686; ; )
-References: <4AA7EE3B.1060107@2mi.com.br>
-In-Reply-To: <4AA7EE3B.1060107@2mi.com.br>
-MIME-Version: 1.0
-Message-Id: <200909291035.09568.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+In-Reply-To: <200909281752.11487.anarsoul@gmail.com>
+References: <200909281752.11487.anarsoul@gmail.com>
+Date: Tue, 29 Sep 2009 10:09:00 +0100
+Message-Id: <1254215340.12689.643.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: DirectFB URL has changed on stable
+Subject: Re: udev problems on angstrom-2008.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,26 +40,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Sep 2009 08:36:22 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-15"
+X-List-Received-Date: Tue, 29 Sep 2009 09:09:49 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Wednesday 09 September 2009 20:04:43 Jader H. Silva wrote:
-> DirectFB recipe in stable branch points to the following URL:
-> http://directfb.org/downloads/Core/DirectFB-1.2.7.tar.gz
-> But DirectFB URL has changed to:
-> http://directfb.org/downloads/Core/DirectFB-1.2/DirectFB-1.2.7.tar.gz
+On Mon, 2009-09-28 at 17:52 +0300, Vasily Khoruzhick wrote:
+> udevd-event[1918]: mknod(/dev/vcS, 020660, (7,0) failed: No space left on 
+> device
 
-Signed-Off-By:Holger Hans Peter Freyther <zecke@selfish.org>
+You probably need to increase the inode allocation for tmpfs.  See the
+mount(8) manpage where it talks about the nr_inodes option.
+
+p.
 
 
-> 
-> There's a patch attached that fix this issue.
-> 
-> Att.
-> Jader H. Silva
-> 2MI Tecnologia
-> 
 
 
