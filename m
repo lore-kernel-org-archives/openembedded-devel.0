@@ -1,25 +1,24 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1Mswut-0007ya-4P
-	for openembedded-devel@openembedded.org; Wed, 30 Sep 2009 13:00:18 +0200
-Received: (qmail 8852 invoked by uid 1003); 30 Sep 2009 10:59:30 -0000
+	(envelope-from <philip@balister.org>) id 1MswwV-00086P-KA
+	for openembedded-devel@openembedded.org; Wed, 30 Sep 2009 13:01:59 +0200
+Received: (qmail 10444 invoked by uid 1003); 30 Sep 2009 11:01:11 -0000
 Received: from localhost (HELO ?192.168.1.194?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 30 Sep 2009 10:59:30 -0000
-Message-ID: <4AC33A10.2040707@balister.org>
-Date: Wed, 30 Sep 2009 06:59:28 -0400
+	by mail.geekisp.com with SMTP; 30 Sep 2009 11:01:11 -0000
+Message-ID: <4AC33A76.1050800@balister.org>
+Date: Wed, 30 Sep 2009 07:01:10 -0400
 From: Philip Balister <philip@balister.org>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
 	rv:1.9.1.1) Gecko/20090814 Fedora/3.0-2.6.b3.fc11 Thunderbird/3.0b3
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1254297499-3508-1-git-send-email-dp@xora.org.uk>
-	<1254297499-3508-2-git-send-email-dp@xora.org.uk>
-In-Reply-To: <1254297499-3508-2-git-send-email-dp@xora.org.uk>
+References: <1254234301-11957-1-git-send-email-marcin@juszkiewicz.com.pl>
+In-Reply-To: <1254234301-11957-1-git-send-email-marcin@juszkiewicz.com.pl>
 X-SA-Exim-Connect-IP: 216.168.135.169
 X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] glibc_2.9.bb : add already existing OE patch	arm-lowlevellock-include-tls.patch
+Subject: Re: [STABLE][PATCH] netbase: on BUG eth0 is always built-in Ethernet not wifi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,42 +32,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Sep 2009 11:00:18 -0000
-X-Groupsio-MsgNum: 13277
+X-List-Received-Date: Wed, 30 Sep 2009 11:01:59 -0000
+X-Groupsio-MsgNum: 13278
 Content-Type: multipart/signed; protocol="application/pkcs7-signature";
-	micalg=sha1; boundary="------------ms030202090200090403090305"
+	micalg=sha1; boundary="------------ms000306000703050805020900"
 
---------------ms030202090200090403090305
+--------------ms000306000703050805020900
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
 Acked-by: Philip Balister <philip@balister.org>
 
-On 09/30/2009 03:58 AM, Graeme Gregory wrote:
-> This is required to get glibc 2.9 to build on arm oabi. eglibc already
-> includes this patch and the patch is already in OE
+On 09/29/2009 10:25 AM, Marcin Juszkiewicz wrote:
+> From: Marcin Juszkiewicz<marcin@buglabs.net>
 >
-> Signed-off-by: Graeme Gregory<dp@xora.org.uk>
 > ---
->   recipes/glibc/glibc_2.9.bb |    1 +
->   1 files changed, 1 insertions(+), 0 deletions(-)
+>   recipes/netbase/netbase/bug/interfaces |   11 ++++-------
+>   recipes/netbase/netbase_4.21.bb        |    2 +-
+>   2 files changed, 5 insertions(+), 8 deletions(-)
 >
-> diff --git a/recipes/glibc/glibc_2.9.bb b/recipes/glibc/glibc_2.9.bb
-> index c3ebc16..56a6ff8 100644
-> --- a/recipes/glibc/glibc_2.9.bb
-> +++ b/recipes/glibc/glibc_2.9.bb
-> @@ -64,6 +64,7 @@ SRC_URI =3D "ftp://ftp.gnu.org/pub/gnu/glibc/glibc-${=
-PV}.tar.bz2 \
->              file://march-i686.patch;patch=3D1;pnum=3D0 \
->   	   file://tls_i486.patch;patch=3D1 \
->   	   file://glibc-2.9-use-_begin.patch;patch=3D1 \
-> +           file://arm-lowlevellock-include-tls.patch;patch=3D1 \
->              "
+> diff --git a/recipes/netbase/netbase/bug/interfaces b/recipes/netbase/n=
+etbase/bug/interfaces
+> index c410484..30e2404 100644
+> --- a/recipes/netbase/netbase/bug/interfaces
+> +++ b/recipes/netbase/netbase/bug/interfaces
+> @@ -20,17 +20,14 @@ iface wlan0 inet dhcp
+>   	wpa-driver wext
+>   	wpa-conf /etc/wpa_supplicant.conf
 >
->   # Build fails on sh3 and sh4 without additional patches
+> -# Wired or wireless interfaces
+> -# Handylink Ethernet or Wifi bugmodule or USB Ethernet
+> +# Wired interface
+> +# BUGbase Ethernet which is built into kernel
+>   auto eth0
+>   iface eth0 inet dhcp
+> -	wireless_mode managed
+> -	wireless_essid any
+> -	wpa-driver wext
+> -	wpa-conf /etc/wpa_supplicant.conf
+> +
+>   #
+>   # Wired or wireless interfaces
+> -# Wifi bugmodule or USB Ethernet
+> +# BUGbase or BUGWifi module or USB Ethernet
+>   auto eth1
+>   iface eth1 inet dhcp
+>   	wireless_mode managed
+> diff --git a/recipes/netbase/netbase_4.21.bb b/recipes/netbase/netbase_=
+4.21.bb
+> index c0c97b7..adde2f0 100644
+> --- a/recipes/netbase/netbase_4.21.bb
+> +++ b/recipes/netbase/netbase_4.21.bb
+> @@ -2,7 +2,7 @@ DESCRIPTION =3D "This package provides the necessary \
+>   infrastructure for basic TCP/IP based networking."
+>   SECTION =3D "base"
+>   LICENSE =3D "GPL"
+> -PR =3D "r35"
+> +PR =3D "r37"
+>
+>   inherit update-rc.d
+>
 
 
---------------ms030202090200090403090305
+--------------ms000306000703050805020900
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -119,19 +145,19 @@ HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
 rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA3EwggNtAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHQMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDkzMDEw
-NTkyOFowIwYJKoZIhvcNAQkEMRYEFGanOudZqo31qqsTgP4dC6LYHEyVMF8GCSqGSIb3DQEJDzFS
+BQCgggHQMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDkzMDEx
+MDExMFowIwYJKoZIhvcNAQkEMRYEFMx52pzq68o0p/4egp/cWHfZdbgPMF8GCSqGSIb3DQEJDzFS
 MFAwCwYJYIZIAWUDBAECMAoGCCqGSIb3DQMHMA4GCCqGSIb3DQMCAgIAgDANBggqhkiG9w0DAgIB
 QDAHBgUrDgMCBzANBggqhkiG9w0DAgIBKDCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJa
 QTElMCMGA1UEChMcVGhhd3RlIENvbnN1bHRpbmcgKFB0eSkgTHRkLjEsMCoGA1UEAxMjVGhhd3Rl
 IFBlcnNvbmFsIEZyZWVtYWlsIElzc3VpbmcgQ0ECECwlen/oUcoDd1VrNqKp/fwwgYcGCyqGSIb3
 DQEJEAILMXigdjBiMQswCQYDVQQGEwJaQTElMCMGA1UEChMcVGhhd3RlIENvbnN1bHRpbmcgKFB0
 eSkgTHRkLjEsMCoGA1UEAxMjVGhhd3RlIFBlcnNvbmFsIEZyZWVtYWlsIElzc3VpbmcgQ0ECECwl
-en/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEBBQAEggEAvZab1uES1XLuRF1/20xrcglVhBdTRaZ2
-SDg7bFeUVCAkTQ9qE54LxmIO7YrpkKWFJ9mdpssx8OWT8PEzJP2drCub6eEzoP+MAshb7fBeHyS5
-1kJ9pyuf1HylhHZ5ZsdNIyDZPXMixJ3bHjozVeV69fNYpV1Xdfb1VIliR0W/CMuPMUjbYgHNbPrB
-Tl4KcYksxMGKh9CGtKdvOXipWjjSZ7OOEDRkTr6WsrRUStBe3NJ3jCIipFYlMHqGDrzfK0qfe+qN
-LjJXqKYbmN5tB32wdHywgBv7B2Ma9VozhqRaA8mQCsgOcJFmOuo1WUKk53UZ4xC0jtJ92Zfss+fx
-s+iITgAAAAAAAA==
+en/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEBBQAEggEAwSFJKvOUTYhcWaE/Bm8P4MPgq969GFWm
+s8JKZXxjosBnFkBIKKSlyIbQoOF65tyEjJxaPgpQCt7F/GilbOKI/pGRBGijzW+QE3fkuCsfadMI
+EIMXysFMjEwvzrc+KPX4MsW1Gwkgto22D9VAsHR1mXe4vyiL/Tj6AYtJVdd6uxrOHhwtoohqZ1n3
+2u7bpAhu+xZXFM7nhmTGAzDhkCbmpBkXlFrMqNfKUd4VSu+cC4urGrGctJYL3uCDjv1XwRX78Efn
+Fobdff0ikB+cOD0Kb28wux9VJLAcIvkXpHeTfKtOKtmmLWRe6Pbhjs+Lyg++sDgxFLYOrLtxWT1W
+n4KqNAAAAAAAAA==
 
---------------ms030202090200090403090305--
+--------------ms000306000703050805020900--
