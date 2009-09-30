@@ -1,29 +1,40 @@
-Received: from [72.14.220.155] (helo=fg-out-1718.google.com)
+Received: from [74.125.92.145] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1Msu5c-0004dR-Nv
+	(envelope-from <bjorn.forsman@gmail.com>) id 1Msuja-0007VS-Gi
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Sep 2009 09:59:13 +0200
-Received: by fg-out-1718.google.com with SMTP id e21so1160918fga.6
+	Wed, 30 Sep 2009 10:40:29 +0200
+Received: by qw-out-1920.google.com with SMTP id 4so2220201qwk.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Sep 2009 00:58:27 -0700 (PDT)
-Received: by 10.86.232.33 with SMTP id e33mr4926278fgh.71.1254297507215;
-	Wed, 30 Sep 2009 00:58:27 -0700 (PDT)
-Received: from localhost.localdomain (94-193-242-65.zone7.bethere.co.uk
-	[94.193.242.65])
-	by mx.google.com with ESMTPS id l19sm856246fgb.12.2009.09.30.00.58.26
-	(version=SSLv3 cipher=RC4-MD5); Wed, 30 Sep 2009 00:58:26 -0700 (PDT)
-From: Graeme Gregory <dp@xora.org.uk>
+	Wed, 30 Sep 2009 01:39:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=QvbN1ilynFtrL/BoPS0wnu4nsA3vq/Od2cDNdVtYtN4=;
+	b=JIZe+7URCXw8EvnXB6QUA0bzoYdcwACJh1GQy7V4hMMgm3WE7bvDSo0bTJR8iwsRlH
+	ki/Yw2NlxuMxhH3Z0XmLZSbARtEXlkd+DFvpl9GF7PRP+PqK3b563B08nhIsbZRkZBnT
+	k/5FRUby3h4Ivc/ErMZhu8KQJ12WUTu0kF/nA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=pT872eFOicwDfGYuo0J42C4DBH0YsUkYhxYfKD4SgHUYqw7yRa8MnMx7IKq4d+MS3F
+	Tl0yCRRgUBL6lHzln7Tm7tdpxArZ6jXfMBMogcHy8XIHYtjxRL4EyMZp80atAhAQ9mmk
+	xRT5tWnge53YOBQTQC+k4bJFxNne1ZGvaxblo=
+MIME-Version: 1.0
+Received: by 10.229.23.4 with SMTP id p4mr2767965qcb.84.1254299984327; Wed, 30 
+	Sep 2009 01:39:44 -0700 (PDT)
+In-Reply-To: <20090929181518.GB12138@denix.org>
+References: <5f2b60909290445h117f28f0s807430bcec2176e1@mail.gmail.com>
+	<20090929181518.GB12138@denix.org>
+Date: Wed, 30 Sep 2009 10:39:44 +0200
+Message-ID: <5f2b60909300139o6222d53do81e90af139d326da@mail.gmail.com>
+From: =?UTF-8?Q?Bj=C3=B8rn_Forsman?= <bjorn.forsman@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Sep 2009 08:58:19 +0100
-Message-Id: <1254297499-3508-2-git-send-email-dp@xora.org.uk>
-X-Mailer: git-send-email 1.6.2.5
-In-Reply-To: <1254297499-3508-1-git-send-email-dp@xora.org.uk>
-References: <1254297499-3508-1-git-send-email-dp@xora.org.uk>
-X-SA-Exim-Connect-IP: 72.14.220.155
-X-SA-Exim-Mail-From: dp@xora.org.uk
+X-SA-Exim-Connect-IP: 74.125.92.145
+X-SA-Exim-Mail-From: bjorn.forsman@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] glibc_2.9.bb : add already existing OE patch arm-lowlevellock-include-tls.patch
+Subject: Re: dm6446-evm kernel broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,30 +48,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Sep 2009 07:59:19 -0000
+X-List-Received-Date: Wed, 30 Sep 2009 08:40:29 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-This is required to get glibc 2.9 to build on arm oabi. eglibc already
-includes this patch and the patch is already in OE
+Hi Denys,
 
-Signed-off-by: Graeme Gregory <dp@xora.org.uk>
----
- recipes/glibc/glibc_2.9.bb |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+2009/9/29 Denys Dmytriyenko <denis@denix.org>:
+> On Tue, Sep 29, 2009 at 01:45:58PM +0200, Bj??rn Forsman wrote:
+>> Hi all,
+>>
+>> It seems like commit "linux-davinci: add DA850/OMAPL138, update other
+>> DaVinci machines",
+>> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Da9673045=
+4f6f8d86519317ad0798b2f96dfcdd45,
+>> broke the kernel for the dm6446-evm.
+>>
+>> After this commit, my kernel will not boot. This is what I get:
+>>
+>> [console printout begin]
+>> ## Booting image at 80700000 ...
+>> =C2=A0 =C2=A0Image Name: =C2=A0 Angstrom/2.6.30-r10+gitr5212151f
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ^^^^^^^^^^=
+^^^^^^^^^^^^^^^^^^^^^^
+>
+> From the commit you referred above, none of the SRCREVs use 5212151f comm=
+it
+> number/hash. Please check what kernel you are building/booting.
 
-diff --git a/recipes/glibc/glibc_2.9.bb b/recipes/glibc/glibc_2.9.bb
-index c3ebc16..56a6ff8 100644
---- a/recipes/glibc/glibc_2.9.bb
-+++ b/recipes/glibc/glibc_2.9.bb
-@@ -64,6 +64,7 @@ SRC_URI = "ftp://ftp.gnu.org/pub/gnu/glibc/glibc-${PV}.tar.bz2 \
-            file://march-i686.patch;patch=1;pnum=0 \
- 	   file://tls_i486.patch;patch=1 \
- 	   file://glibc-2.9-use-_begin.patch;patch=1 \
-+           file://arm-lowlevellock-include-tls.patch;patch=1 \
-            "
- 
- # Build fails on sh3 and sh4 without additional patches
--- 
-1.6.2.5
+The OE .dev branch from yesterday seems to build
+recipes/linux/linux-davinci_2.6.30.bb by default.
+It has the following SRCREV:
+    SRCREV =3D "5212151f26e688416faac9f6f33ddd958f7de96c"
+(And my local.conf does not specify any preferred kernel
+version/provider stuff.)
 
+So maybe the question is what kernel *you* are using? :-)
+Are you building linux-davinci_git.bb? That would explain why you don't see=
+ the
+SRCREV I do.
+
+BTW, how do you specify that bitbake should use linux-davinci_git.bb?
+I tried this in my local.conf:
+    PREFERRED_VERSION_linux-davinci =3D "git"
+but it did not work.
+
+Regards,
+Bj=C3=B8rn Forsman
 
 
