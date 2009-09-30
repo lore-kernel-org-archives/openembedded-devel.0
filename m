@@ -1,24 +1,41 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [209.85.219.220] (helo=mail-ew0-f220.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1MswwV-00086P-KA
-	for openembedded-devel@openembedded.org; Wed, 30 Sep 2009 13:01:59 +0200
-Received: (qmail 10444 invoked by uid 1003); 30 Sep 2009 11:01:11 -0000
-Received: from localhost (HELO ?192.168.1.194?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 30 Sep 2009 11:01:11 -0000
-Message-ID: <4AC33A76.1050800@balister.org>
-Date: Wed, 30 Sep 2009 07:01:10 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.1) Gecko/20090814 Fedora/3.0-2.6.b3.fc11 Thunderbird/3.0b3
-MIME-Version: 1.0
+	(envelope-from <anarsoul@gmail.com>) id 1Mt0EX-000202-7i
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Sep 2009 16:32:48 +0200
+Received: by ewy20 with SMTP id 20so60300ewy.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Sep 2009 07:32:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:user-agent:mime-version:content-type:content-transfer-encoding
+	:message-id; bh=DsP6xk3Dx/NyuthlmH9F9avpxb810OKh+ZhnJ0L997g=;
+	b=DPqmFoRnN+wbvrfOoanqhrAVeKCgtnuUO6UuAZvIqF9vzJjZlM9qRn588sw0shtp5C
+	+8jS/Ui3ZEsKERj9ZdD0b4pP9nd+i7zyA7MW58PMQsNIexkSqU+1poJT9lkSSamlt5oN
+	XM0YTB0g9zloPtXfWLY+dHVF4NJ03pSOLbwbQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:user-agent:mime-version:content-type
+	:content-transfer-encoding:message-id;
+	b=FbQ1GJnJp+zuy6md+2bHd4ohv8BToczFBqAz6m7D9/MiiRNY72sI0BuVOU9k0O6exX
+	yafhaCwVm5lnmZoKPSE0rhSELi82hKJZQrxETsRhYMez2YTuqAfhjkpF7l98iJl+6vNV
+	653Y/r0Z+Sw/S3B+7uckie6eYb9/Txlbhx43I=
+Received: by 10.211.128.9 with SMTP id f9mr6964270ebn.93.1254321121270;
+	Wed, 30 Sep 2009 07:32:01 -0700 (PDT)
+Received: from anarsoul-laptop.localnet ([212.98.167.157])
+	by mx.google.com with ESMTPS id 7sm353429eyb.44.2009.09.30.07.31.56
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 30 Sep 2009 07:31:59 -0700 (PDT)
+From: Vasily Khoruzhick <anarsoul@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1254234301-11957-1-git-send-email-marcin@juszkiewicz.com.pl>
-In-Reply-To: <1254234301-11957-1-git-send-email-marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+Date: Wed, 30 Sep 2009 17:31:16 +0300
+User-Agent: KMail/1.12.1 (Linux/2.6.31-gentoo-anarsoul; KDE/4.3.1; i686; ; )
+MIME-Version: 1.0
+Message-Id: <200909301731.27447.anarsoul@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.219.220
+X-SA-Exim-Mail-From: anarsoul@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [STABLE][PATCH] netbase: on BUG eth0 is always built-in Ethernet not wifi
+Subject: [PATCH] Fix RX1950 config file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,132 +49,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Sep 2009 11:01:59 -0000
-X-Groupsio-MsgNum: 13278
-Content-Type: multipart/signed; protocol="application/pkcs7-signature";
-	micalg=sha1; boundary="------------ms000306000703050805020900"
+X-List-Received-Date: Wed, 30 Sep 2009 14:32:49 -0000
+X-Groupsio-MsgNum: 13279
+Content-Type: multipart/signed; boundary="nextPart1946759.zVUXs1o3U4";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
---------------ms000306000703050805020900
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+--nextPart1946759.zVUXs1o3U4
+Content-Type: multipart/mixed;
+  boundary="Boundary-01=_1u2wKWbktr0UCsx"
+Content-Transfer-Encoding: 7bit
+
+--Boundary-01=_1u2wKWbktr0UCsx
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+
+
+--Boundary-01=_1u2wKWbktr0UCsx
+Content-Type: text/x-patch;
+  charset="us-ascii";
+  name="0001-Fix-RX1950-config-file.patch"
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline;
+	filename="0001-Fix-RX1950-config-file.patch"
 
-Acked-by: Philip Balister <philip@balister.org>
+=46rom d8d033a579d19579d30b651f1def324fa8633315 Mon Sep 17 00:00:00 2001
+=46rom: Vasily Khoruzhick <anarsoul@gmail.com>
+Date: Wed, 30 Sep 2009 17:29:24 +0300
+Subject: [PATCH] Fix RX1950 config file
 
-On 09/29/2009 10:25 AM, Marcin Juszkiewicz wrote:
-> From: Marcin Juszkiewicz<marcin@buglabs.net>
->
-> ---
->   recipes/netbase/netbase/bug/interfaces |   11 ++++-------
->   recipes/netbase/netbase_4.21.bb        |    2 +-
->   2 files changed, 5 insertions(+), 8 deletions(-)
->
-> diff --git a/recipes/netbase/netbase/bug/interfaces b/recipes/netbase/n=
-etbase/bug/interfaces
-> index c410484..30e2404 100644
-> --- a/recipes/netbase/netbase/bug/interfaces
-> +++ b/recipes/netbase/netbase/bug/interfaces
-> @@ -20,17 +20,14 @@ iface wlan0 inet dhcp
->   	wpa-driver wext
->   	wpa-conf /etc/wpa_supplicant.conf
->
-> -# Wired or wireless interfaces
-> -# Handylink Ethernet or Wifi bugmodule or USB Ethernet
-> +# Wired interface
-> +# BUGbase Ethernet which is built into kernel
->   auto eth0
->   iface eth0 inet dhcp
-> -	wireless_mode managed
-> -	wireless_essid any
-> -	wpa-driver wext
-> -	wpa-conf /etc/wpa_supplicant.conf
-> +
->   #
->   # Wired or wireless interfaces
-> -# Wifi bugmodule or USB Ethernet
-> +# BUGbase or BUGWifi module or USB Ethernet
->   auto eth1
->   iface eth1 inet dhcp
->   	wireless_mode managed
-> diff --git a/recipes/netbase/netbase_4.21.bb b/recipes/netbase/netbase_=
-4.21.bb
-> index c0c97b7..adde2f0 100644
-> --- a/recipes/netbase/netbase_4.21.bb
-> +++ b/recipes/netbase/netbase_4.21.bb
-> @@ -2,7 +2,7 @@ DESCRIPTION =3D "This package provides the necessary \
->   infrastructure for basic TCP/IP based networking."
->   SECTION =3D "base"
->   LICENSE =3D "GPL"
-> -PR =3D "r35"
-> +PR =3D "r37"
->
->   inherit update-rc.d
->
+HP iPAQ RX1950 has no bluetooth, and its flash size is 64M
+
+Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+=2D--
+ conf/machine/rx1950.conf |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/conf/machine/rx1950.conf b/conf/machine/rx1950.conf
+index 1495e86..fb70437 100644
+=2D-- a/conf/machine/rx1950.conf
++++ b/conf/machine/rx1950.conf
+@@ -10,12 +10,12 @@ TARGET_ARCH =3D "arm"
+ # Samsung S3C2xxx CPU
+ require conf/machine/include/tune-arm920t.inc
+=20
+=2DROOT_FLASH_SIZE =3D "32"
++ROOT_FLASH_SIZE =3D "64"
+ VOLATILE_STORAGE_SIZE =3D "64"
+ MACHINE_GUI_CLASS =3D "smallscreen"
+ MACHINE_DISPLAY_WIDTH_PIXELS =3D "240"
+ MACHINE_DISPLAY_HEIGHT_PIXELS =3D "320"
+=2DMACHINE_FEATURES =3D "kernel26 touchscreen apm alsa irda bluetooth wifi =
+usbgadget screen vfat"
++MACHINE_FEATURES =3D "kernel26 touchscreen apm alsa irda wifi usbgadget sc=
+reen vfat"
+=20
+ #
+ # Software/packages selection
+=2D-=20
+1.6.5.rc1
 
 
---------------ms000306000703050805020900
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+--Boundary-01=_1u2wKWbktr0UCsx--
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIJRTCCAv0w
-ggJmoAMCAQICECwlen/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEFBQAwYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMB4XDTA5MDQxNTAwNDQ1OFoXDTEwMDQxNTAwNDQ1
-OFowYjERMA8GA1UEBBMIQmFsaXN0ZXIxDzANBgNVBCoTBlBoaWxpcDEYMBYGA1UEAxMPUGhpbGlw
-IEJhbGlzdGVyMSIwIAYJKoZIhvcNAQkBFhNwaGlsaXBAYmFsaXN0ZXIub3JnMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx5Xoie8CV9dJeiaiKRdylvicHE9Aha6f9/CLlVs+Ezob7fIu
-Ra4P9ugzZZ2VCtPMQU3Qsjw35mVmYaKXB1U+fZeffbyad6OJEIK1jhqBIz5jtJMc/YWXn/bRmqCl
-MfTCgilUMOcsfiHAbmLVhYiNbEhOuy6vWdxSSolHqVa/IHE72qqjhoYWHd+5XVfx1c4jW+CePNMQ
-EHxjCzuD+wq6Mzle72dXw+bnyIpG99hB26uNmV//h5iz1VmJU63FZWynSjG79NcY9+mTWXeX213V
-V6kJ2wce2rETbYvKQ7err6NnZnG/tiwGI1M7fQqQAti+CkDciLJ129LO+APVYZQgEwIDAQABozAw
-LjAeBgNVHREEFzAVgRNwaGlsaXBAYmFsaXN0ZXIub3JnMAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN
-AQEFBQADgYEAIUyDAPIEniN6SUdbDiBqi2dtITdnkoUItm/tX9TRn66P0VtWug7k7xjo6piWRE7B
-ZwhihotNY0ZnjlK+h0VorxfY63B5tarRB6qJ7f26ukmpltwWWLDB2hWFoKUCn6PE2NTdj+1xNinh
-ZNQHy4GyygXjlVfVSn/ZnaGJ31z4PK0wggL9MIICZqADAgECAhAsJXp/6FHKA3dVazaiqf38MA0G
-CSqGSIb3DQEBBQUAMGIxCzAJBgNVBAYTAlpBMSUwIwYDVQQKExxUaGF3dGUgQ29uc3VsdGluZyAo
-UHR5KSBMdGQuMSwwKgYDVQQDEyNUaGF3dGUgUGVyc29uYWwgRnJlZW1haWwgSXNzdWluZyBDQTAe
-Fw0wOTA0MTUwMDQ0NThaFw0xMDA0MTUwMDQ0NThaMGIxETAPBgNVBAQTCEJhbGlzdGVyMQ8wDQYD
-VQQqEwZQaGlsaXAxGDAWBgNVBAMTD1BoaWxpcCBCYWxpc3RlcjEiMCAGCSqGSIb3DQEJARYTcGhp
-bGlwQGJhbGlzdGVyLm9yZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMeV6InvAlfX
-SXomoikXcpb4nBxPQIWun/fwi5VbPhM6G+3yLkWuD/boM2WdlQrTzEFN0LI8N+ZlZmGilwdVPn2X
-n328mnejiRCCtY4agSM+Y7STHP2Fl5/20ZqgpTH0woIpVDDnLH4hwG5i1YWIjWxITrsur1ncUkqJ
-R6lWvyBxO9qqo4aGFh3fuV1X8dXOI1vgnjzTEBB8Yws7g/sKujM5Xu9nV8Pm58iKRvfYQdurjZlf
-/4eYs9VZiVOtxWVsp0oxu/TXGPfpk1l3l9td1VepCdsHHtqxE22LykO3q6+jZ2Zxv7YsBiNTO30K
-kALYvgpA3IiyddvSzvgD1WGUIBMCAwEAAaMwMC4wHgYDVR0RBBcwFYETcGhpbGlwQGJhbGlzdGVy
-Lm9yZzAMBgNVHRMBAf8EAjAAMA0GCSqGSIb3DQEBBQUAA4GBACFMgwDyBJ4jeklHWw4gaotnbSE3
-Z5KFCLZv7V/U0Z+uj9FbVroO5O8Y6OqYlkROwWcIYoaLTWNGZ45SvodFaK8X2OtwebWq0Qeqie39
-urpJqZbcFliwwdoVhaClAp+jxNjU3Y/tcTYp4WTUB8uBssoF45VX1Up/2Z2hid9c+DytMIIDPzCC
-AqigAwIBAgIBDTANBgkqhkiG9w0BAQUFADCB0TELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rl
-cm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMRowGAYDVQQKExFUaGF3dGUgQ29uc3VsdGluZzEo
-MCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lvbjEkMCIGA1UEAxMbVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIENBMSswKQYJKoZIhvcNAQkBFhxwZXJzb25hbC1mcmVlbWFpbEB0
-aGF3dGUuY29tMB4XDTAzMDcxNzAwMDAwMFoXDTEzMDcxNjIzNTk1OVowYjELMAkGA1UEBhMCWkEx
-JTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0ZSBQ
-ZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDE
-pjxVc1X7TrnKmVoeaMB1BHCd3+n/ox7svc31W/Iadr1/DDph8r9RzgHU5VAKMNcCY1osiRVwjt3J
-8CuFWqo/cVbLrzwLB+fxH5E2JCoTzyvV84J3PQO+K/67GD4Hv0CAAmTXp6a7n2XRxSpUhQ9IBH+n
-ttE8YQRAHmQZcmC3+wIDAQABo4GUMIGRMBIGA1UdEwEB/wQIMAYBAf8CAQAwQwYDVR0fBDwwOjA4
-oDagNIYyaHR0cDovL2NybC50aGF3dGUuY29tL1RoYXd0ZVBlcnNvbmFsRnJlZW1haWxDQS5jcmww
-CwYDVR0PBAQDAgEGMCkGA1UdEQQiMCCkHjAcMRowGAYDVQQDExFQcml2YXRlTGFiZWwyLTEzODAN
-BgkqhkiG9w0BAQUFAAOBgQBIjNFQg+oLLswNo2asZw9/r6y+whehQ5aUnX9MIbj4Nh+qLZ82L8D0
-HFAgk3A8/a3hYWLD2ToZfoSxmRsAxRoLgnSeJVCUYsfbJ3FXJY3dqZw5jowgT2Vfldr394fWxghO
-rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA3EwggNtAgEBMHYwYjELMAkGA1UEBhMC
-WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
-ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
-BQCgggHQMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MDkzMDEx
-MDExMFowIwYJKoZIhvcNAQkEMRYEFMx52pzq68o0p/4egp/cWHfZdbgPMF8GCSqGSIb3DQEJDzFS
-MFAwCwYJYIZIAWUDBAECMAoGCCqGSIb3DQMHMA4GCCqGSIb3DQMCAgIAgDANBggqhkiG9w0DAgIB
-QDAHBgUrDgMCBzANBggqhkiG9w0DAgIBKDCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJa
-QTElMCMGA1UEChMcVGhhd3RlIENvbnN1bHRpbmcgKFB0eSkgTHRkLjEsMCoGA1UEAxMjVGhhd3Rl
-IFBlcnNvbmFsIEZyZWVtYWlsIElzc3VpbmcgQ0ECECwlen/oUcoDd1VrNqKp/fwwgYcGCyqGSIb3
-DQEJEAILMXigdjBiMQswCQYDVQQGEwJaQTElMCMGA1UEChMcVGhhd3RlIENvbnN1bHRpbmcgKFB0
-eSkgTHRkLjEsMCoGA1UEAxMjVGhhd3RlIFBlcnNvbmFsIEZyZWVtYWlsIElzc3VpbmcgQ0ECECwl
-en/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEBBQAEggEAwSFJKvOUTYhcWaE/Bm8P4MPgq969GFWm
-s8JKZXxjosBnFkBIKKSlyIbQoOF65tyEjJxaPgpQCt7F/GilbOKI/pGRBGijzW+QE3fkuCsfadMI
-EIMXysFMjEwvzrc+KPX4MsW1Gwkgto22D9VAsHR1mXe4vyiL/Tj6AYtJVdd6uxrOHhwtoohqZ1n3
-2u7bpAhu+xZXFM7nhmTGAzDhkCbmpBkXlFrMqNfKUd4VSu+cC4urGrGctJYL3uCDjv1XwRX78Efn
-Fobdff0ikB+cOD0Kb28wux9VJLAcIvkXpHeTfKtOKtmmLWRe6Pbhjs+Lyg++sDgxFLYOrLtxWT1W
-n4KqNAAAAAAAAA==
+--nextPart1946759.zVUXs1o3U4
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
---------------ms000306000703050805020900--
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.11 (GNU/Linux)
+
+iEYEABECAAYFAkrDa78ACgkQRM6pQpltKE7NvwCfbEEmLTzpRA7ntcSBHbrNTmmP
+IosAmgOTKs1P76/YMqk7thGNxxJODUjN
+=IvDt
+-----END PGP SIGNATURE-----
+
+--nextPart1946759.zVUXs1o3U4--
