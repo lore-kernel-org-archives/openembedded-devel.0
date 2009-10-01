@@ -1,38 +1,25 @@
-Received: from [74.125.92.148] (helo=qw-out-1920.google.com)
+Received: from [76.96.30.48] (helo=QMTA05.emeryville.ca.mail.comcast.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Mt6mz-0007Fh-Od
+	(envelope-from <enelson1000@comcast.net>) id 1MtDaM-0000Om-8f
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Sep 2009 23:32:49 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so2458555qwk.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Sep 2009 14:32:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=qNLomULziXUgaNVQKZi1qd88j5wkSG52xanwk0Y8/eE=;
-	b=qqNZXaEObRf7o5Nl/Ge1aKsceOwDMipWjYAtCc9Z+JCPTG6oli80EcVi0Dqe1ubXHv
-	sdofGvG7MtM6svgKVj8DFSVEFg4QsqkGlANyXA7tW6/lEFU/i4CmqmVjAANSyGXmKXI9
-	4nfoymkTs9rER1oWCI4SvXp1/D/SDGi2rB6bo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=eClSGyZF472t99oOhHpTVZ371S5HlLayVqkknwwYPaixe5s+G7DdykaNbjT+bhwZY1
-	rOPFCSl9mFwbl7HCbmRLy2uMkOqQFUByeeWZzI52uNf9axFBXb1Pad+ciw6VW0izTnVM
-	X8sMMhO2G6SE8RXRUVg+h3lWyKDG7gqkv3oR0=
-MIME-Version: 1.0
-Received: by 10.229.1.65 with SMTP id 1mr254320qce.20.1254346323333; Wed, 30 
-	Sep 2009 14:32:03 -0700 (PDT)
-In-Reply-To: <1254173087.29003.54.camel@orest.ift.cs.uni-potsdam.de>
-References: <1254173087.29003.54.camel@orest.ift.cs.uni-potsdam.de>
-Date: Wed, 30 Sep 2009 14:32:03 -0700
-Message-ID: <19c1b8a90909301432i1569af2ane74faec944c17b27@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 01 Oct 2009 06:48:13 +0200
+Received: from OMTA10.emeryville.ca.mail.comcast.net ([76.96.30.28])
+	by QMTA05.emeryville.ca.mail.comcast.net with comcast
+	id nGgk1c0020cQ2SLA5GnS5D; Thu, 01 Oct 2009 04:47:26 +0000
+Received: from [192.168.1.101] ([67.188.141.116])
+	by OMTA10.emeryville.ca.mail.comcast.net with comcast
+	id nGnR1c0022WszPn8WGnRRt; Thu, 01 Oct 2009 04:47:26 +0000
+From: ed <enelson1000@comcast.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.92.148
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Wed, 30 Sep 2009 21:47:23 -0700
+Message-Id: <1254372443.6756.1.camel@ed-hp-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-SA-Exim-Connect-IP: 76.96.30.48
+X-SA-Exim-Mail-From: enelson1000@comcast.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: How do I build OE for PPC-405 inside Virtex 4?
+Subject: Creating the CheckSum parser failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,27 +33,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Sep 2009 21:32:49 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 01 Oct 2009 04:48:13 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Mon, Sep 28, 2009 at 2:24 PM, Ali Akbar Zarezadeh
-<akzare@cs.uni-potsdam.de> wrote:
+What am I missing that keeps causing this message to be printed out in
+the log.
+
+NOTE: Running task 10 of 2678 (ID:
+815, /home/ed/mini2440/OE/mini2440/recipes/stage-manager/stagemanager-native_0.0.1.bb, do_setscene)
+NOTE: Running task 11 of 2678 (ID:
+816, /home/ed/mini2440/OE/mini2440/recipes/stage-manager/stagemanager-native_0.0.1.bb, do_fetch)
+NOTE: Creating the CheckSum parser failed
 
 
+Thanks
 
-> INIT: Id "S" respawning too fast: disabled for 5 minutes
-> .
-
-this means something mentioned in /etc/inittab failed. You can comment out
-the line starting with 'S' and see if that helps
-
-the inittab entries looks like
-1:2345:respawn:/sbin/mingetty tty1
-
-It could be that the device is not used correctly or something like that
-
-Thx
-
--Khem
 
 
