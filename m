@@ -1,55 +1,24 @@
-Received: from [193.170.110.60] (helo=beta.fh-salzburg.ac.at)
+Received: from [209.85.222.124] (helo=mail-pz0-f124.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.lippautz@gmail.com>) id 1MtiMD-0003PZ-5L
+	(envelope-from <mail@april1985.com>) id 1MtiNr-0004iA-1g
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Oct 2009 15:39:40 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by beta.fh-salzburg.ac.at (Postfix) with ESMTP id A328B950678
+	Fri, 02 Oct 2009 15:41:22 +0200
+Received: by pzk30 with SMTP id 30so55902pzk.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Oct 2009 15:38:53 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at fh-salzburg.ac.at
-Received: from beta.fh-salzburg.ac.at ([127.0.0.1])
-	by localhost (beta.fh-salzburg.ac.at [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id 7hQK0Fl1cKTS
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Oct 2009 15:38:45 +0200 (CEST)
-Received: from mail-relay.core.fh-salzburg.ac.at (pinky.fh-salzburg.ac.at
-	[193.170.110.5])
-	by beta.fh-salzburg.ac.at (Postfix) with ESMTP id 5F7B99505B1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Oct 2009 15:38:45 +0200 (CEST)
-Received: from vanessa.fh-salzburg.ac.at (vanessa.fh-salzburg.ac.at
-	[193.170.110.166])
-	by mail-relay.core.fh-salzburg.ac.at (Postfix) with ESMTP id
-	49A2B5EE8C9 for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Oct 2009 15:37:06 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by vanessa.fh-salzburg.ac.at (Postfix) with ESMTP id 6099E7A84A2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Oct 2009 15:38:45 +0200 (CEST)
-Received: from vanessa.fh-salzburg.ac.at ([127.0.0.1])
-	by localhost (vanessa.fh-salzburg.ac.at [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id 17019-08 for <openembedded-devel@lists.openembedded.org>; 
-	Fri,  2 Oct 2009 15:38:45 +0200 (CEST)
-Received: from [192.168.1.2] (d86-32-77-106.cust.tele2.at [86.32.77.106])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by vanessa.fh-salzburg.ac.at (Postfix) with ESMTP id 241AE7A80DD
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Oct 2009 15:38:45 +0200 (CEST)
-Message-ID: <4AC60263.7000908@gmail.com>
-Date: Fri, 02 Oct 2009 15:38:43 +0200
-From: Michael Lippautz <michael.lippautz@gmail.com>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+	Fri, 02 Oct 2009 06:40:33 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.142.74.8 with SMTP id w8mr334258wfa.192.1254490832897; Fri, 02 
+	Oct 2009 06:40:32 -0700 (PDT)
+Date: Fri, 2 Oct 2009 21:40:32 +0800
+Message-ID: <fd72b8f50910020640i431e0b2cpae3b9816dd7e6184@mail.gmail.com>
+From: mail mail <mail@april1985.com>
 To: openembedded-devel@lists.openembedded.org
-X-Virus-Scanned: amavisd-new at fh-salzburg.ac.at
-X-SA-Exim-Connect-IP: 193.170.110.60
-X-SA-Exim-Mail-From: michael.lippautz@gmail.com
+X-SA-Exim-Connect-IP: 209.85.222.124
+X-SA-Exim-Mail-From: mail@april1985.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: wpa-supplicant 0.6.7 interface functions broken
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: 2.7.2 libxml2, libxml2-native not available
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -63,51 +32,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Oct 2009 13:39:40 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 02 Oct 2009 13:41:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hej all,
+Hi,
+I'm new to OE and I'm building console-image of openmoko from the latest git
+source. There are some NOTEs here:
 
-Just posting here because someone on irc told me it would be faster than
-using the bugtracker.
+NOTE: Handling BitBake files: / (7315/7315) [100 %]
+NOTE: Parsing finished. 0 cached, 7027 parsed, 288 skipped, 0 masked.
+NOTE: Resolving any missing task queue dependencies
+NOTE: multiple providers are available for virtual/libusb0 (libusb,
+libusb-compat);
+NOTE: consider defining PREFERRED_PROVIDER_virtual/libusb0
+NOTE: preferred version 2.7.2 of libxml2 not available (for item libxml2)
+NOTE: preferred version 2.7.2 of libxml2 not available (for item libxml2)
+NOTE: preferred version 2.7.2 of libxml2-native not available (for item
+libxml2-native)
+NOTE: preferred version 2.7.2 of libxml2-native not available (for item
+libxml2-native)
+NOTE: Preparing runqueue
 
-wpa-supplicant 0.6.7 (as currently prefered by angstrom) is quite
-unusable when used in an automatic startup sequence
-(/etc/network/interfaces and its up/down scripts). It works when used as
-standalone program though.
-
-The problem(s):
-wpa-supplicant-0.6.7/functions.sh:
-* The variables WPA_SUP_BIN and WPA_CLI_BIN are pointing nowhere.
-* WPA_SUP_LOGFILE="syslog" doesn't work because the -s flag is not
-understood.
-* Generally the -f flag (used for logging)  is not understood by
-wpa_supplicant. Although --help shows that it should be.
-
-Solution(?):
-Version 0.6.9 looks fine concerning the scripts. Although i don't know
-whether the syslog/file-logging flag are supported.
-
-The script 'files/ifupdown.sh' also looks a bit weird using something
-like (line 95 cont.):
-
-|PHASE="pre-up"
-echo "WPA: Configuring Interface"
-case "$PHASE" in
-...
-|
-Has this package been restructured? It looks like that the commit
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=6aea479c251050e0d13ae01b98c7a35da393b41f
-did screw things up because the partially wrong config files were set up
-for this recipe.
-
-Couldn't test 0.6.9 so far but maybe it should be set as prefered
-version in the configs.
-Bug is online at: http://bugs.openembedded.org/show_bug.cgi?id=5323
-
-Regards,
-Michael
-
-
+The building process goes smoothly, but are there any problems about these
+unavailable packages?
+Thanks!
 
