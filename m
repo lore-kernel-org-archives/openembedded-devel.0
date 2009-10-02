@@ -1,39 +1,55 @@
-Received: from [209.85.210.175] (helo=mail-yx0-f175.google.com)
+Received: from [193.170.110.60] (helo=beta.fh-salzburg.ac.at)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1MtfNu-0007Ep-51
+	(envelope-from <michael.lippautz@gmail.com>) id 1MtiMD-0003PZ-5L
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Oct 2009 12:29:13 +0200
-Received: by yxe5 with SMTP id 5so1074657yxe.24
+	Fri, 02 Oct 2009 15:39:40 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by beta.fh-salzburg.ac.at (Postfix) with ESMTP id A328B950678
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Oct 2009 03:28:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=gSeLidjlnauC/fIWXaOdoGKEAno00rCgI52tfiye4R8=;
-	b=GWj7k3xlrOuFaRZSFXaFpeTlDatNGD0cqo3QYvDPlBQme4IU2r3q8n+zQLkn0nX33Y
-	F0xnbtsLeXHUQrb1XQmhoNOb8H7jd+MdLvJQ23Hw/F+P9MxTVfDboHDg+KcQRvGugPV5
-	F6sHfuDAKGyGFcxvw5zdNe43TLAWlJdLRMf1w=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=o2I9+rpCAlt29sq+qPZkPffC6dDuL2+I9YtUJkM65r86mqQdTR6YkC4XfOoU5Jic01
-	223AsEvyy6BaDnSjUnTpjG20WCAMJVY/5nmby4jazQoL5xI3jqQrvb+LBMuw0SOAK9PG
-	tCEIvi2n2fKN877EDp/ErfAYybi1544dIkaMw=
+	Fri,  2 Oct 2009 15:38:53 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at fh-salzburg.ac.at
+Received: from beta.fh-salzburg.ac.at ([127.0.0.1])
+	by localhost (beta.fh-salzburg.ac.at [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id 7hQK0Fl1cKTS
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Oct 2009 15:38:45 +0200 (CEST)
+Received: from mail-relay.core.fh-salzburg.ac.at (pinky.fh-salzburg.ac.at
+	[193.170.110.5])
+	by beta.fh-salzburg.ac.at (Postfix) with ESMTP id 5F7B99505B1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Oct 2009 15:38:45 +0200 (CEST)
+Received: from vanessa.fh-salzburg.ac.at (vanessa.fh-salzburg.ac.at
+	[193.170.110.166])
+	by mail-relay.core.fh-salzburg.ac.at (Postfix) with ESMTP id
+	49A2B5EE8C9 for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Oct 2009 15:37:06 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by vanessa.fh-salzburg.ac.at (Postfix) with ESMTP id 6099E7A84A2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Oct 2009 15:38:45 +0200 (CEST)
+Received: from vanessa.fh-salzburg.ac.at ([127.0.0.1])
+	by localhost (vanessa.fh-salzburg.ac.at [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id 17019-08 for <openembedded-devel@lists.openembedded.org>; 
+	Fri,  2 Oct 2009 15:38:45 +0200 (CEST)
+Received: from [192.168.1.2] (d86-32-77-106.cust.tele2.at [86.32.77.106])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by vanessa.fh-salzburg.ac.at (Postfix) with ESMTP id 241AE7A80DD
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Oct 2009 15:38:45 +0200 (CEST)
+Message-ID: <4AC60263.7000908@gmail.com>
+Date: Fri, 02 Oct 2009 15:38:43 +0200
+From: Michael Lippautz <michael.lippautz@gmail.com>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
 MIME-Version: 1.0
-Received: by 10.101.81.10 with SMTP id i10mr2536299anl.123.1254479304229; Fri, 
-	02 Oct 2009 03:28:24 -0700 (PDT)
-In-Reply-To: <ha4c1o$s05$1@ger.gmane.org>
-References: <ac9c93b10910020010s10fc04fdy6da8c2696d412844@mail.gmail.com>
-	<ha4c1o$s05$1@ger.gmane.org>
-Date: Fri, 2 Oct 2009 12:28:24 +0200
-Message-ID: <ac9c93b10910020328u79f48783of8f64a048484ee5a@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-Virus-Scanned: amavisd-new at fh-salzburg.ac.at
+X-SA-Exim-Connect-IP: 193.170.110.60
+X-SA-Exim-Mail-From: michael.lippautz@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: build inconsistency (strip)
+Subject: wpa-supplicant 0.6.7 interface functions broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,47 +63,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Oct 2009 10:29:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 02 Oct 2009 13:39:40 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: 7bit
 
-Koen, all, did some research on this.
+Hej all,
 
-On my system proftpd wanted to use an INSTALL macro and added the -s flag..
-This macro evaluated to
-/home/frans/oe/tmp_angstrom/staging/i686-linux/usr/bin/install -c
-So it did strip on my system.
-What I understood from Koen was that he got an error message on strip.
-Either I misunderstood or there is an incompatibility here.
-(and if there is an inconsistency I'd like my system to have the error
-message too).
+Just posting here because someone on irc told me it would be faster than
+using the bugtracker.
 
-Still the following is strange to me:
-I would expect
-/home/frans/oe/tmp_angstrom/staging/i686-linux/usr/bin/install -s to
-call the target strip (or maybe ignore the strip command).
+wpa-supplicant 0.6.7 (as currently prefered by angstrom) is quite
+unusable when used in an automatic startup sequence
+(/etc/network/interfaces and its up/down scripts). It works when used as
+standalone program though.
 
-Frans.
+The problem(s):
+wpa-supplicant-0.6.7/functions.sh:
+* The variables WPA_SUP_BIN and WPA_CLI_BIN are pointing nowhere.
+* WPA_SUP_LOGFILE="syslog" doesn't work because the -s flag is not
+understood.
+* Generally the -f flag (used for logging)  is not understood by
+wpa_supplicant. Although --help shows that it should be.
 
-2009/10/2 Koen Kooi <k.kooi@student.utwente.nl>:
-> On 02-10-09 09:10, Frans Meulenbroeks wrote:
->
->> At that point things became confusing. For Koen the build failed duke
->> to install wanting to strip and indeed there was something in
->> Make.Rules that eventually resulted in an install -s.
->
-> To clarify: it wanted to run 'strip', not '${TARGET_PREFIX}-strip', which
-> caused it to fail. Running '${TARGET_PREFIX}-strip' would have only
-> inconvinienced people trying to do runtime debugging.
->
-> regards,
->
-> Koen
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Solution(?):
+Version 0.6.9 looks fine concerning the scripts. Although i don't know
+whether the syslog/file-logging flag are supported.
+
+The script 'files/ifupdown.sh' also looks a bit weird using something
+like (line 95 cont.):
+
+|PHASE="pre-up"
+echo "WPA: Configuring Interface"
+case "$PHASE" in
+...
+|
+Has this package been restructured? It looks like that the commit
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=6aea479c251050e0d13ae01b98c7a35da393b41f
+did screw things up because the partially wrong config files were set up
+for this recipe.
+
+Couldn't test 0.6.9 so far but maybe it should be set as prefered
+version in the configs.
+Bug is online at: http://bugs.openembedded.org/show_bug.cgi?id=5323
+
+Regards,
+Michael
+
 
 
