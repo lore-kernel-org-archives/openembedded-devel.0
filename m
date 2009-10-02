@@ -1,40 +1,40 @@
-Received: from [209.85.220.207] (helo=mail-fx0-f207.google.com)
+Received: from [141.89.48.7] (helo=mail.cs.uni-potsdam.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stuart68@gmail.com>) id 1Mtly1-0003WI-Bu
+	(envelope-from <akzare@cs.uni-potsdam.de>) id 1Mtoif-0001n4-9O
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Oct 2009 19:30:56 +0200
-Received: by fxm3 with SMTP id 3so1349566fxm.20
+	Fri, 02 Oct 2009 22:27:16 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by mail.cs.uni-potsdam.de (Postfix) with ESMTP id F06DF10DCC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Oct 2009 10:30:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=nFkujeIlV19KBhTv+Rhxn4x72sXmBMUv7eyCMQHdMsM=;
-	b=WCJZnb3maQYZvZG3ghcCqjuvbSKdwqONYzzz927l1ZG98MtqP1xsYbO4/1ZF/g3zjs
-	Vm3WKPNSKHkGFQwR1ecQgeeCvG4Zd6Od/w5HuDW+AFVklV9YrKtHnfFuwps+7jPMfFAd
-	1IsuGSxwMbhClRU4Ick+1X4djpz6qJ7tAzOm0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=DyQob1EyVDq3fSi0HlHHRmh3z4eXO6oOSXUJp1g5By8QFXXDNYlMVnMTr6i130ZTNf
-	IME2tkpdcj8Ha4X1FutviVAAxSkVKqfqypeypTCpicvu6nzaEb2gkOF/b03OJdmqId4S
-	xkwQ0wMKdYq4u9WrwX0FURR8fcaT2jdLhXRss=
-MIME-Version: 1.0
-Received: by 10.204.151.210 with SMTP id d18mr1381395bkw.203.1254504607526; 
-	Fri, 02 Oct 2009 10:30:07 -0700 (PDT)
-In-Reply-To: <f96d234e0910020715ne75ab7dwf3add069038e0608@mail.gmail.com>
-References: <91283b620910011337m7c24ace5v8f263e4dcabe06a@mail.gmail.com>
-	<f96d234e0910020715ne75ab7dwf3add069038e0608@mail.gmail.com>
-Date: Fri, 2 Oct 2009 18:30:07 +0100
-Message-ID: <91283b620910021030r5bb8368fo1167d2d5ba592c3d@mail.gmail.com>
-From: Stuart Gray <stuart68@gmail.com>
+	Fri,  2 Oct 2009 22:27:16 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at cs.uni-potsdam.de
+Received: from mail.cs.uni-potsdam.de ([127.0.0.1])
+	by localhost (mail.cs.uni-potsdam.de [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id 7O8Y2zLOFySR
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Oct 2009 22:27:11 +0200 (CEST)
+Received: from [141.89.52.43] (orest.ift.cs.uni-potsdam.de [141.89.52.43])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.cs.uni-potsdam.de (Postfix) with ESMTPSA id 6B81F10D96
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Oct 2009 22:27:11 +0200 (CEST)
+From: Ali Akbar Zarezadeh <akzare@cs.uni-potsdam.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.207
-X-SA-Exim-Mail-From: stuart68@gmail.com
+In-Reply-To: <1254431796.21355.94.camel@orest.ift.cs.uni-potsdam.de>
+References: <1254397289.21355.57.camel@orest.ift.cs.uni-potsdam.de>
+	<ha2a3n$s6q$1@ger.gmane.org>
+	<19c1b8a90910010936y644282b1xe943f99e49cf5f38@mail.gmail.com>
+	<1254431796.21355.94.camel@orest.ift.cs.uni-potsdam.de>
+Date: Fri, 02 Oct 2009 22:26:23 +0200
+Message-Id: <1254515183.6700.7.camel@orest.ift.cs.uni-potsdam.de>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 141.89.48.7
+X-SA-Exim-Mail-From: akzare@cs.uni-potsdam.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Kernel Configuration - what affect the way ethernet port functions
+Subject: Re: How to put generated shared lib into the final output	image of OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,65 +48,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Oct 2009 17:30:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 02 Oct 2009 20:27:16 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi Cliff,
+Hi,
 
-I have done this using the standard set up, but when I get my IP, netmask,
-network, gateway and broadcast addresses.
+To solve the problem, I have inserted some new lines to the
+picsy-image.bb file as follows:
 
-So my interfaces file simply sets eth0 to be set up to use DHCP.
+--------------------------------------------------------------------------------------------------------
 
-When I check how it is configured using ifconfig eth0 I get
+picsy_rootfs_postprocess() {
+    oe_libinstall -so libACE ${IMAGE_ROOTFS}/usr/lib
+    oe_libinstall -so libcv ${IMAGE_ROOTFS}/usr/lib
+    oe_libinstall -so libcvaux ${IMAGE_ROOTFS}/usr/lib
+    oe_libinstall -so libcxcore ${IMAGE_ROOTFS}/usr/lib
+    oe_libinstall -so libhighgui ${IMAGE_ROOTFS}/usr/lib
+    oe_libinstall -so libml ${IMAGE_ROOTFS}/usr/lib
+    oe_libinstall -so libjpeg ${IMAGE_ROOTFS}/usr/lib
+    oe_libinstall -so libtiff ${IMAGE_ROOTFS}/usr/lib
+    oe_libinstall -so libpng12 ${IMAGE_ROOTFS}/usr/lib
+    oe_libinstall -so libstdc++ ${IMAGE_ROOTFS}/usr/lib
+    rm -f ${IMAGE_ROOTFS}/usr/lib/*.la
+    rm -f ${IMAGE_ROOTFS}/usr/lib/*.a
+}
 
-IP 192.168.0.11
-NetMask 255.255.255.0
-Gateway 192.168.0.1
-Broadcast 0.0.0.0
+ROOTFS_POSTPROCESS_COMMAND += "picsy_rootfs_postprocess"
 
-I am expecting broadcast to be 192.168.0.255. If I set broadcast using
-ifconfig eth0 broadcast 192.168.0.255 it gets set correctly, but mt ethernet
-access does not work.
+--------------------------------------------------------------------------------------------------------
 
-Only when I configure the eth0 interface using static and set all network
-configuration manually within the interfaces file does it work, btu I should
-not and do not want to do this for my application I need it to use DHCP.
+Maybe this way is not nice, but now everything is cool and openCV is
+functioning. Is there any other method to force OE to approach this
+goal?
 
-My thinking after trying various settings was that there may be some
-hardware configuration of the LAN91C11 device that I am not aware of. I have
-no datasheet for this part.
-
-If there is another area that can set the broadcast to 0.0.0.0 please let me
-know or if you know of some other setting that I can try.
-
-Thanks,
-Stuart
+Regards
+Ali
 
 
-2009/10/2 Cliff Brake <cliff.brake@gmail.com>
 
-> On Thu, Oct 1, 2009 at 4:37 PM, Stuart Gray <stuart68@gmail.com> wrote:
-> > Hi,
-> >
-> > Is there anything in the kernel set up apart from including the smsc911
-> > module by default that would affect the way that the port is set up when
-> it
-> > is a DHCP Client i.e. it receives its IP Address from a router.
-> >
-> > I am getting the broadcast address set to 0.0.0.0.
-> >
-> > If this is not kernel related then are there any flags that require to be
-> > set that control hos the smsc91C11 part functions?
->
-> I don't know for sure I understand your question, but perhaps you need
-> to set up /etc/network/interfaces to configure the ethernet port?
->
-> Cliff
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
 
