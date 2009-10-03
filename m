@@ -1,40 +1,35 @@
-Received: from [141.89.48.7] (helo=mail.cs.uni-potsdam.de)
+Received: from [209.85.210.175] (helo=mail-yx0-f175.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <akzare@cs.uni-potsdam.de>) id 1Mtoif-0001n4-9O
+	(envelope-from <sashang@gmail.com>) id 1MttUc-000269-Do
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Oct 2009 22:27:16 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by mail.cs.uni-potsdam.de (Postfix) with ESMTP id F06DF10DCC
+	Sat, 03 Oct 2009 03:33:05 +0200
+Received: by yxe5 with SMTP id 5so1742934yxe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Oct 2009 22:27:16 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at cs.uni-potsdam.de
-Received: from mail.cs.uni-potsdam.de ([127.0.0.1])
-	by localhost (mail.cs.uni-potsdam.de [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id 7O8Y2zLOFySR
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Oct 2009 22:27:11 +0200 (CEST)
-Received: from [141.89.52.43] (orest.ift.cs.uni-potsdam.de [141.89.52.43])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.cs.uni-potsdam.de (Postfix) with ESMTPSA id 6B81F10D96
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Oct 2009 22:27:11 +0200 (CEST)
-From: Ali Akbar Zarezadeh <akzare@cs.uni-potsdam.de>
+	Fri, 02 Oct 2009 18:32:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=t6LpCAHVSAUeQB7zYSFz+/CFGNLDGCxcgl7Kzg0Ed/Y=;
+	b=fTFR3UKj/uaEFTLC6/c4IPHyN9QbFErVfShO3zrnOpUFfdJmgSxXjwQrgptLugWENO
+	OCn4DtP62md3YdLsJHfo3AJckp4qgpq8p5xq8UeBCLpYrMVaQROYK6C4vjgxSmfSs2GW
+	9tU2tgPsed2tZ6R8OR5EEHdWyDLXQMIEaPQ1k=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=lyNxkmHVoZcEfOjBADWcAvVxuLfeeyYfWuL7APW43BeBnv1dloIa81Y5dOMoWyV2ip
+	klIm2xzLxW3RTHyLksgBuYH/upcqzozVhYwq7YwVCw4jGtJzFaKXFamRMGC3sNnGDZvW
+	cA6UmN4sN5aVgJWti7PXCTFRUHgkasQT2QKX4=
+MIME-Version: 1.0
+Received: by 10.101.5.34 with SMTP id h34mr3539682ani.150.1254533536132; Fri, 
+	02 Oct 2009 18:32:16 -0700 (PDT)
+Date: Sat, 3 Oct 2009 11:32:16 +1000
+Message-ID: <23738f080910021832k712d31dcra5e2fda045a892e6@mail.gmail.com>
+From: Sashan Govender <sashang@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1254431796.21355.94.camel@orest.ift.cs.uni-potsdam.de>
-References: <1254397289.21355.57.camel@orest.ift.cs.uni-potsdam.de>
-	<ha2a3n$s6q$1@ger.gmane.org>
-	<19c1b8a90910010936y644282b1xe943f99e49cf5f38@mail.gmail.com>
-	<1254431796.21355.94.camel@orest.ift.cs.uni-potsdam.de>
-Date: Fri, 02 Oct 2009 22:26:23 +0200
-Message-Id: <1254515183.6700.7.camel@orest.ift.cs.uni-potsdam.de>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-SA-Exim-Connect-IP: 141.89.48.7
-X-SA-Exim-Mail-From: akzare@cs.uni-potsdam.de
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: sashang@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: How to put generated shared lib into the final output	image of OE
+Subject: building module-init-tools-cross fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,44 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Oct 2009 20:27:16 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 03 Oct 2009 01:33:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+I'm trying out openembedded but get this error:
 
-To solve the problem, I have inserted some new lines to the
-picsy-image.bb file as follows:
+ERROR: function do_compile failed
+ERROR: log data follows
+(/home/sashan/code/openembedded/build/tmp/work/i486-oe-linux-gnu/module-init-tools-cross-3.2.2-r5/temp/log.do_compile.12217)
+| NOTE: make
+| gcc  -isystem/home/sashan/code/openembedded/build/tmp/staging/x86_64-linux/usr/include
+-O2 -g -Wunused -Wall -static
+-L/home/sashan/code/openembedded/build/tmp/staging/x86_64-linux/usr/lib
+-Wl,-rpath-link,/home/sashan/code/openembedded/build/tmp/staging/x86_64-linux/usr/lib
+-Wl,-rpath,/home/sashan/code/openembedded/build/tmp/staging/x86_64-linux/usr/lib
+-Wl,-O1 -o insmod.static insmod.o
+| /usr/bin/ld: cannot find -lc
+| collect2: ld returned 1 exit status
+| make: *** [insmod.static] Error 1
+| FATAL: oe_runmake failed
 
---------------------------------------------------------------------------------------------------------
+This is my local.conf file:
 
-picsy_rootfs_postprocess() {
-    oe_libinstall -so libACE ${IMAGE_ROOTFS}/usr/lib
-    oe_libinstall -so libcv ${IMAGE_ROOTFS}/usr/lib
-    oe_libinstall -so libcvaux ${IMAGE_ROOTFS}/usr/lib
-    oe_libinstall -so libcxcore ${IMAGE_ROOTFS}/usr/lib
-    oe_libinstall -so libhighgui ${IMAGE_ROOTFS}/usr/lib
-    oe_libinstall -so libml ${IMAGE_ROOTFS}/usr/lib
-    oe_libinstall -so libjpeg ${IMAGE_ROOTFS}/usr/lib
-    oe_libinstall -so libtiff ${IMAGE_ROOTFS}/usr/lib
-    oe_libinstall -so libpng12 ${IMAGE_ROOTFS}/usr/lib
-    oe_libinstall -so libstdc++ ${IMAGE_ROOTFS}/usr/lib
-    rm -f ${IMAGE_ROOTFS}/usr/lib/*.la
-    rm -f ${IMAGE_ROOTFS}/usr/lib/*.a
-}
+DL_DIR = "${HOME}/archives"
+BBFILES = ${OEBASE}/openembedded/recipes/*/*.bb
+BBMASK = ""
+PREFERRED_PROVIDERS = "virtual/qte:qte virtual/libqpe:libqpe-opie"
+PREFERRED_PROVIDERS += " virtual/libsdl:libsdl-x11"
+PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}gcc-initial:gcc-cross-initial"
+PREFERRED_PROVIDERS += "
+virtual/${TARGET_PREFIX}gcc-intermediate:gcc-cross-intermediate"
+PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}gcc:gcc-cross"
+PREFERRED_PROVIDERS += " virtual/${TARGET_PREFIX}g++:gcc-cross"
+MACHINE = "x86"
+TARGET_OS = "linux"
+DISTRO = "minimal"
+IMAGE_FSTYPES = "jffs2 tar"
+BINCLUDELOGS = "yes"
 
-ROOTFS_POSTPROCESS_COMMAND += "picsy_rootfs_postprocess"
-
---------------------------------------------------------------------------------------------------------
-
-Maybe this way is not nice, but now everything is cool and openCV is
-functioning. Is there any other method to force OE to approach this
-goal?
-
-Regards
-Ali
-
-
-
+What am I missing?
 
 
