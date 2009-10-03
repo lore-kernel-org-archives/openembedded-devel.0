@@ -1,35 +1,25 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [76.96.30.40] (helo=QMTA04.emeryville.ca.mail.comcast.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1Mu1x4-0000ZH-Ga
+	(envelope-from <enelson1000@comcast.net>) id 1Mu9wJ-00086N-Jh
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Oct 2009 12:35:01 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 14D581417194
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Oct 2009 12:29:09 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 2CNlT2OvPbVr
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Oct 2009 12:29:09 +0200 (CEST)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id DEC771416BA5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Oct 2009 12:29:08 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <fd72b8f50910020831u16227c45wdca6fc9ed4bf8cb4@mail.gmail.com>
-References: <fd72b8f50910020831u16227c45wdca6fc9ed4bf8cb4@mail.gmail.com>
-Date: Sat, 03 Oct 2009 12:34:12 +0200
-Message-Id: <1254566052.3849.5.camel@utx.utx.cz>
+	Sat, 03 Oct 2009 21:06:46 +0200
+Received: from OMTA15.emeryville.ca.mail.comcast.net ([76.96.30.71])
+	by QMTA04.emeryville.ca.mail.comcast.net with comcast
+	id oJh31c0011Y3wxoA4K5zkH; Sat, 03 Oct 2009 19:05:59 +0000
+Received: from [192.168.1.101] ([67.188.141.116])
+	by OMTA15.emeryville.ca.mail.comcast.net with comcast
+	id oK0y1c00A2WszPn8bK0yms; Sat, 03 Oct 2009 19:00:59 +0000
+From: ed <enelson1000@comcast.net>
+To: Openembedded-devel@lists.openembedded.org
+Date: Sat, 03 Oct 2009 12:00:56 -0700
+Message-Id: <1254596456.4074.5.camel@ed-hp-laptop>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-X-SA-Exim-Connect-IP: 84.21.108.25
-X-SA-Exim-Mail-From: utx@penguin.cz
+X-Mailer: Evolution 2.26.1 
+X-SA-Exim-Connect-IP: 76.96.30.40
+X-SA-Exim-Mail-From: enelson1000@comcast.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Multiple .bb files are due to be built which each provide	bluez-libs
+Subject: DirectFB problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,28 +33,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Oct 2009 10:35:01 -0000
+X-List-Received-Date: Sat, 03 Oct 2009 19:06:47 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-mail mail wrote:
-> Hi,
-> I got "Multiple .bb files" problms, but it seems not affects building. Could
-> some one give me some information about this multiple .bb files problems?
-> This is the log:
+I am building mini2440 using OE from Buserror
+http://bliterness.blogspot.com/
 
-You are trying to build recipes dependent on both bluez3 and bluez4. It
-cannot work. You must remove one or another from the recipes list or use
-version compatible with selected version of bluez.
+I am building the mini2440-image and the build completes without any
+errors.
 
-Log does not show, which recipes caused this clash. bluez4 is not
-preferred technology (but it requires dbus). gpe-bluetooth is an example
-of application incompatible with bluez4.
+When I run the command #dbinfo it crashes almost immediately.
 
 
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+root@mini2440:~# dfbinfo
+
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~| DirectFB 1.2.7 |
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+        (c) 2001-2008  The world wide DirectFB Open Source Community
+        (c) 2000-2004  Convergence (integrated media) GmbH
+      ----------------------------------------------------------------
+
+(*) DirectFB/Core: Single Application Core. (2009-10-03 18:31) [ DEBUG ]
+(*) Direct/Thread: Started 'VT Switcher' (2128) [CRITICAL OTHER/OTHER
+0/0] <8388608>...
+(!) [ 2125:    0.000] --> Caught signal 11 (at 0x4187f3a4, invalid
+address) <--
+Aborted
+root@mini2440:~# 
+
+
+Does anyone have any ideas on were I should begin to troubleshooting the
+problem.
+
+Thanks
+
 
 
 
