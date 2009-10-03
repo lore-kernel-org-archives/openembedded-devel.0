@@ -1,26 +1,35 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Mu1eH-00081t-5W
+	(envelope-from <utx@penguin.cz>) id 1Mu1x4-0000ZH-Ga
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Oct 2009 12:15:36 +0200
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 058A21B10C04
+	Sat, 03 Oct 2009 12:35:01 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 14D581417194
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Oct 2009 10:22:19 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Sat,  3 Oct 2009 12:29:09 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 2CNlT2OvPbVr
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  3 Oct 2009 12:29:09 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id DEC771416BA5
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  3 Oct 2009 12:29:08 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 3 Oct 2009 12:14:21 +0200
-User-Agent: KMail/1.12.1 (Linux/2.6.31; KDE/4.3.1; i686; ; )
-References: <fd72b8f50910020840r55927655h94deabff2e4da7cb@mail.gmail.com>
-In-Reply-To: <fd72b8f50910020840r55927655h94deabff2e4da7cb@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200910031214.22067.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+In-Reply-To: <fd72b8f50910020831u16227c45wdca6fc9ed4bf8cb4@mail.gmail.com>
+References: <fd72b8f50910020831u16227c45wdca6fc9ed4bf8cb4@mail.gmail.com>
+Date: Sat, 03 Oct 2009 12:34:12 +0200
+Message-Id: <1254566052.3849.5.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.1.1 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: libmikmod_3.2.0-beta2, build error
+Subject: Re: Multiple .bb files are due to be built which each provide	bluez-libs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,25 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Oct 2009 10:15:36 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Sat, 03 Oct 2009 10:35:01 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Friday 02 October 2009 17:40:53 mail mail wrote:
-> Log file here:
-> NOTE: Running task 1371 of 2265 (ID: 1561,
-> /home/derek/mini2440/oe/openembedded/recipes/libmikmod/
-> libmikmod_3.2.0-beta2.bb, do_package)
-> ERROR: QA Issue with libmikmod: No GNU_HASH in the elf binary:
-> '/home/derek/mini2440/oe/tmp/work/armv4t-angstrom-linux-gnueabi/libmikmod-3
-> .2.0-beta2-r0/install/libmikmod/usr/lib/libmikmod.so.3.0.0' ERROR: QA run
->  found fatal errors. Please consider fixing them.
+mail mail wrote:
+> Hi,
+> I got "Multiple .bb files" problms, but it seems not affects building. Could
+> some one give me some information about this multiple .bb files problems?
+> This is the log:
+
+You are trying to build recipes dependent on both bluez3 and bluez4. It
+cannot work. You must remove one or another from the recipes list or use
+version compatible with selected version of bluez.
+
+Log does not show, which recipes caused this clash. bluez4 is not
+preferred technology (but it requires dbus). gpe-bluetooth is an example
+of application incompatible with bluez4.
 
 
-Did you consider doing the above? The libmikmod buildsystem is ignoring the OE 
-LDFLAGS...
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
-z.
 
 
