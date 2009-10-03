@@ -1,24 +1,35 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1MuAj2-0005TB-7C
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1MuB78-0000Mf-Bx
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Oct 2009 21:57:07 +0200
-Received: from [85.210.191.75] (helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1MuAiI-00034m-E7
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Oct 2009 20:56:18 +0100
-From: Phil Blundell <pb@reciva.com>
+	Sat, 03 Oct 2009 22:22:01 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id B92CC11001ED
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  3 Oct 2009 22:21:13 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id E774311000D5
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  3 Oct 2009 22:21:12 +0200 (CEST)
+Received: from rhein.familie-heinold.de (unknown [78.52.231.24])
+	by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  3 Oct 2009 22:21:12 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 33B833C0FF; Sat,  3 Oct 2009 22:21:12 +0200 (CEST)
+Date: Sat, 3 Oct 2009 22:21:12 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1254596456.4074.5.camel@ed-hp-laptop>
+Message-ID: <20091003202111.GA4799@rhein.zuhause.netz>
 References: <1254596456.4074.5.camel@ed-hp-laptop>
-Date: Sat, 03 Oct 2009 20:56:16 +0100
-Message-Id: <1254599776.9214.76.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-X-Broken-Reverse-DNS: no host name found for IP address 85.210.191.75
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: pb@reciva.com
+MIME-Version: 1.0
+In-Reply-To: <1254596456.4074.5.camel@ed-hp-laptop>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: DirectFB problem
@@ -35,31 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Oct 2009 19:57:07 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 03 Oct 2009 20:22:01 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sat, 2009-10-03 at 12:00 -0700, ed wrote:
+On Sat, Oct 03, 2009 at 12:00:56PM -0700, ed wrote:
 > I am building mini2440 using OE from Buserror
-
-Heh, how ironic.
-
-> (!) [ 2125:    0.000] --> Caught signal 11 (at 0x4187f3a4, invalid
-> address) <--
-> Aborted
-> root@mini2440:~# 
+> http://bliterness.blogspot.com/
+> 
+> I am building the mini2440-image and the build completes without any
+> errors.
+> 
+> When I run the command #dbinfo it crashes almost immediately.
 > 
 > 
-> Does anyone have any ideas on were I should begin to troubleshooting the
-> problem.
+> root@mini2440:~# dfbinfo
+> 
+>    ~~~~~~~~~~~~~~~~~~~~~~~~~~| DirectFB 1.2.7 |
+> ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-I guess the first place to start is to run it under the debugger and
-understand where exactly it's crashing.  From the message above it isn't
-entirely clear to me whether 0x4187f3a4 is the address of the faulting
-instruction, or the invalid address of a faulting load/store.
+please notice we have 1.4.2 in the -dev trunk.
 
-p.
-
-
+Bye Henning
 
 
