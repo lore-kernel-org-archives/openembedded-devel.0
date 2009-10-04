@@ -1,40 +1,31 @@
-Received: from [209.85.220.207] (helo=mail-fx0-f207.google.com)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.lippautz@gmail.com>) id 1MuSWS-0006P5-5y
+	(envelope-from <utx@penguin.cz>) id 1MuSlm-0007Mh-4C
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Oct 2009 16:57:19 +0200
-Received: by fxm3 with SMTP id 3so2226214fxm.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 04 Oct 2009 07:56:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:subject:from:to:content-type
-	:date:message-id:mime-version:x-mailer;
-	bh=8WvwTIGuaqGVx7wj44ULNTWfgzZs9ywb5aNzV/NsULQ=;
-	b=twwDNR7Co+SHOdyCB2ZZJfrhGYd5hJx2cn2xXeBt7tG5/fWSG7jzGgA031oHYH6hM6
-	bI758e0szmoVIhYvJAwE8HbUMYXyOCOcYFBvZtx/ea/rMucBJkjcD4jtdBfyrUkfsVOy
-	dGOnIyvJIzRWfbo/fNVqgYfXRV/4eGO8Ej04A=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=subject:from:to:content-type:date:message-id:mime-version:x-mailer;
-	b=UxjpjPb33I7pHKjPNFGvWKlm1YPxz5LbOsy03+afAcqefVCL+dh/M1nAESX984L7Cd
-	u5P3AaPCGZruMY1EH+jxKPliKNU9llt7t7CqWq/1NhOsXegc98e483Ey0/P/Oc+mkeEc
-	SuB8mdaA1hr47Q3MM2fuUrJnb4waKPpZguXPQ=
-Received: by 10.204.23.203 with SMTP id s11mr3140706bkb.17.1254668188894;
-	Sun, 04 Oct 2009 07:56:28 -0700 (PDT)
-Received: from ?192.168.1.2? (d86-32-77-106.cust.tele2.at [86.32.77.106])
-	by mx.google.com with ESMTPS id 28sm5046643fkx.1.2009.10.04.07.56.27
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 04 Oct 2009 07:56:28 -0700 (PDT)
-From: Michael Lippautz <michael.lippautz@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 04 Oct 2009 16:56:33 +0200
-Message-Id: <1254668193.18167.4.camel@leeloo.somedomain>
+	Sun, 04 Oct 2009 17:13:09 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 166C51416BA9;
+	Sun,  4 Oct 2009 17:07:20 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id c8fnCd9pOWr0; Sun,  4 Oct 2009 17:07:19 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7])
+	by ns.penguin.cz (Postfix) with ESMTP id 0051C1416BA8;
+	Sun,  4 Oct 2009 17:07:17 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
+To: Michael 'Mickey' Lauer <mlauer@vanille-media.de>
+Date: Sun, 04 Oct 2009 17:12:15 +0200
+Message-Id: <1254669135.4755.13.camel@utx.utx.cz>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-X-SA-Exim-Connect-IP: 209.85.220.207
-X-SA-Exim-Mail-From: michael.lippautz@gmail.com
+X-Mailer: Evolution 2.22.1.1 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: ralink/rt3070 driver patch
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: [PATCH] python: fix -dbg QA error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,62 +39,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Oct 2009 14:57:19 -0000
-X-Groupsio-MsgNum: 13319
-Content-Type: multipart/mixed; boundary="=-NmlzVlMhwujVn7NCddlJ"
-
---=-NmlzVlMhwujVn7NCddlJ
+X-List-Received-Date: Sun, 04 Oct 2009 15:13:09 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hej all,
+Attached patch should fix the -dbg QA error in Angstrom with
+python-2.6.1 (the default). If the -dbg package is listed first in the
+list, then it wins all files listed without need of complicated
+expressions excluding config/.debug.
 
-In order to get my Ralink usb/wifi stick running I needed the
-ralink/rt3070 kernel-module recipe.
+ERROR: QA Issue with python-distutils: non debug package contains .debug directory: python-distutils path /work/armv5te-angstrom-linux-gnueabi/python-2.6.1-ml7.0/install/python-distutils/usr/lib/python2.6/config/.debug/libpython2.6.a
+ERROR: QA run found fatal errors. Please consider fixing them.
 
-This recipce was missing a statement to copy the required driver file
-(needed by the kernel module). Wifi stick works fine now.
-
-git diff is attached (+ some minor tweaks to the recipce)
-
-Regards,
-Michael
-
---=-NmlzVlMhwujVn7NCddlJ
-Content-Disposition: attachment; filename="rt3070-driver.patch"
-Content-Type: text/x-patch; name="rt3070-driver.patch"; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-
-diff --git a/recipes/ralink/rt3070_2.1.1.0.bb b/recipes/ralink/rt3070_2.1.1.0.bb
-index d7709fa..07c453f 100644
---- a/recipes/ralink/rt3070_2.1.1.0.bb
-+++ b/recipes/ralink/rt3070_2.1.1.0.bb
-@@ -1,18 +1,21 @@
- DESCRIPTION = "Ralink 3070"
-+SECTION = "kernel/modules"
- LICENSE = "GPLv2"
+diff --git a/contrib/python/generate-manifest-2.6.py b/contrib/python/generate-manifest-2.6.py
+index 8d9272e..fe0e385 100755
+--- a/contrib/python/generate-manifest-2.6.py
++++ b/contrib/python/generate-manifest-2.6.py
+@@ -12,7 +12,7 @@ import time
+ VERSION = "2.6.2"
  
- inherit module
+ __author__ = "Michael 'Mickey' Lauer <mlauer@vanille-media.de>"
+-__version__ = "20090812"
++__version__ = "20091004"
  
- SRC_URI = "http://www.ralinktech.com.tw/data/drivers/2009_0525_RT3070_Linux_STA_v${PV}.tar.bz2 \
--           file://makefile.patch;patch=1 \
--		   file://config.patch;patch=1 \
--"
-+		file://makefile.patch;patch=1 \
-+		file://config.patch;patch=1"
+ class MakefileMaker:
  
- EXTRA_OEMAKE = "LINUX_SRC=${STAGING_KERNEL_DIR}"
+@@ -70,16 +70,17 @@ class MakefileMaker:
+         provideLine += '"'
  
- S = "${WORKDIR}/2009_0525_RT3070_Linux_STA_v${PV}"
+         self.out( provideLine )
+-        self.out( "" )       
++        self.out( "" )
  
- do_install() {
--	mkdir -p ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
--	cp ${S}/os/linux/rt3070sta.ko ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
-+	install -d ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
-+	install -m 0644 ${S}/os/linux/rt3070sta.ko ${D}${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/net/wireless
-+
-+	install -d ${D}/etc/Wireless/RT2870STA
-+	install -m 0644 ${S}/RT2870STA.dat ${D}/etc/Wireless/RT2870STA
- }
+         #
+         # generate package line
+         #
+ 
+-        packageLine = 'PACKAGES="'
++        packageLine = 'PACKAGES="python-core-dbg '
+         for name in self.packages:
+-            packageLine += "%s " % name
+-        packageLine += ' python-modules"'
++            if name != 'python-core-dbg':
++                packageLine += "%s " % name
++        packageLine += 'python-modules"'
+ 
+         self.out( packageLine )
+         self.out( "" )
+@@ -161,7 +162,7 @@ if __name__ == "__main__":
+     "lib-dynload/xreadlines.so types.* ${bindir}/python*" )
+ 
+     m.addPackage( "python-core-dbg", "Python core module debug information", "python-core",
+-    "lib-dynload/.debug ${bindir}/.debug ${libdir}/.debug" )
++    "config/.debug lib-dynload/.debug ${bindir}/.debug ${libdir}/.debug" )
+ 
+     m.addPackage( "python-devel", "Python Development Package", "python-core",
+     "${includedir} ${libdir}/libpython2.6.so config" ) # package
+diff --git a/recipes/python/python-2.6-manifest.inc b/recipes/python/python-2.6-manifest.inc
+index 00eda6b..cee12c8 100644
+--- a/recipes/python/python-2.6-manifest.inc
++++ b/recipes/python/python-2.6-manifest.inc
+@@ -1,13 +1,13 @@
+ 
+ # WARNING: This file is AUTO GENERATED: Manual edits will be lost next time I regenerate the file.
+-# Generator: '../../contrib/python/generate-manifest-2.6.py' Version 20090812 (C) 2002-2009 Michael 'Mickey' Lauer <mlauer@vanille-media.de>
++# Generator: '../../contrib/python/generate-manifest-2.6.py' Version 20091004 (C) 2002-2009 Michael 'Mickey' Lauer <mlauer@vanille-media.de>
+ # Visit the Python for Embedded Systems Site => http://www.Vanille.de/projects/python.spy
+ 
+  
+ 
+ PROVIDES+="python-profile python-threading python-distutils python-doctest python-stringold python-codecs python-ctypes python-pickle python-datetime python-core python-io python-compiler python-compression python-re python-xmlrpc python-terminal python-email python-image python-tests python-core-dbg python-resource python-json python-devel python-difflib python-math python-syslog python-hotshot python-unixadmin python-textutils python-tkinter python-gdbm python-elementtree python-fcntl python-netclient python-pprint python-netserver python-curses python-smtpd python-html python-readline python-subprocess python-pydoc python-logging python-mailbox python-xml python-mime python-sqlite3 python-sqlite3-tests python-unittest python-multiprocessing python-robotparser python-compile python-debugger python-pkgutil python-shell python-bsddb python-mmap python-zlib python-db python-crypt python-idle python-lang python-audio "
+ 
+-PACKAGES="python-profile python-threading python-distutils python-doctest python-stringold python-codecs python-ctypes python-pickle python-datetime python-core python-io python-compiler python-compression python-re python-xmlrpc python-terminal python-email python-image python-tests python-core-dbg python-resource python-json python-devel python-difflib python-math python-syslog python-hotshot python-unixadmin python-textutils python-tkinter python-gdbm python-elementtree python-fcntl python-netclient python-pprint python-netserver python-curses python-smtpd python-html python-readline python-subprocess python-pydoc python-logging python-mailbox python-xml python-mime python-sqlite3 python-sqlite3-tests python-unittest python-multiprocessing python-robotparser python-compile python-debugger python-pkgutil python-shell python-bsddb python-mmap python-zlib python-db python-crypt python-idle python-lang python-audio  python-modules"
++PACKAGES="python-core-dbg python-profile python-threading python-distutils python-doctest python-stringold python-codecs python-ctypes python-pickle python-datetime python-core python-io python-compiler python-compression python-re python-xmlrpc python-terminal python-email python-image python-tests python-resource python-json python-devel python-difflib python-math python-syslog python-hotshot python-unixadmin python-textutils python-tkinter python-gdbm python-elementtree python-fcntl python-netclient python-pprint python-netserver python-curses python-smtpd python-html python-readline python-subprocess python-pydoc python-logging python-mailbox python-xml python-mime python-sqlite3 python-sqlite3-tests python-unittest python-multiprocessing python-robotparser python-compile python-debugger python-pkgutil python-shell python-bsddb python-mmap python-zlib python-db python-crypt python-idle python-lang python-audio python-modules"
+ 
+ DESCRIPTION_python-profile="Python Basic Profiling Support"
+ RDEPENDS_python-profile="python-core python-textutils"
+@@ -87,7 +87,7 @@ FILES_python-tests="${libdir}/python2.6/test "
+ 
+ DESCRIPTION_python-core-dbg="Python core module debug information"
+ RDEPENDS_python-core-dbg="python-core"
+-FILES_python-core-dbg="${libdir}/python2.6/lib-dynload/.debug ${bindir}/.debug ${libdir}/.debug "
++FILES_python-core-dbg="${libdir}/python2.6/config/.debug ${libdir}/python2.6/lib-dynload/.debug ${bindir}/.debug ${libdir}/.debug "
+ 
+ DESCRIPTION_python-resource="Python Resource Control Interface"
+ RDEPENDS_python-resource="python-core"
+diff --git a/recipes/python/python.inc b/recipes/python/python.inc
+index 5791297..7e61f79 100644
+--- a/recipes/python/python.inc
++++ b/recipes/python/python.inc
+@@ -4,7 +4,7 @@ LICENSE = "PSF"
+ SECTION = "devel/python"
+ PRIORITY = "optional"
+ # bump this on every change in contrib/python/generate-manifest-2.6.py
+-INC_PR = "ml7"
++INC_PR = "ml8"
+ 
+ DEFAULT_PREFERENCE = "-26"
+ 
 
---=-NmlzVlMhwujVn7NCddlJ--
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
+
+
