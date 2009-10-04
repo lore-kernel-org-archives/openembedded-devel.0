@@ -1,31 +1,45 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [209.85.220.207] (helo=mail-fx0-f207.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1MuSlm-0007Mh-4C
+	(envelope-from <michael.lippautz@gmail.com>) id 1MuUo2-00017Y-K5
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Oct 2009 17:13:09 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 166C51416BA9;
-	Sun,  4 Oct 2009 17:07:20 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id c8fnCd9pOWr0; Sun,  4 Oct 2009 17:07:19 +0200 (CEST)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7])
-	by ns.penguin.cz (Postfix) with ESMTP id 0051C1416BA8;
-	Sun,  4 Oct 2009 17:07:17 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: Michael 'Mickey' Lauer <mlauer@vanille-media.de>
-Date: Sun, 04 Oct 2009 17:12:15 +0200
-Message-Id: <1254669135.4755.13.camel@utx.utx.cz>
+	Sun, 04 Oct 2009 19:23:37 +0200
+Received: by fxm3 with SMTP id 3so2279322fxm.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 04 Oct 2009 10:22:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:subject:from:to:in-reply-to
+	:references:content-type:date:message-id:mime-version:x-mailer
+	:content-transfer-encoding;
+	bh=kk9Zxnnbg4oSDQ79sS4DaCkLefER0WP8ylDe+giBJJQ=;
+	b=GOJu6ZOXQOdMQakEL4nEDstm0nWGrHjL8za3oGg53w0lIYb63iOCA84aaPoka8tCwS
+	Lzz0MzvfN9uaQ+HwpegK/BCQW+NLusUjJTXXbNPGSvM65HoSA2sqcO+7TfsKE3O/qlR7
+	rRtVoT8yyrbdzKIsjcP1TOjcm2H1J/6BQ5Eb4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=subject:from:to:in-reply-to:references:content-type:date:message-id
+	:mime-version:x-mailer:content-transfer-encoding;
+	b=mJ6iNhLMBUsWSCTcRAVnr4iO4A2H3kHZRKLoJZNdd3nrJbdiGvzTR+ti6fyxDlKdQv
+	CDs8Lf7uAPDJ3HjdIDWRE3+5giqjaxX6SJQcqbV7cAV39dCD/n6YlifHCKs7sxnPcHNf
+	IUYBafP7j2TtFfFpGsjQix+iGW/AfSB1paM3I=
+Received: by 10.204.24.81 with SMTP id u17mr3160882bkb.202.1254676966161;
+	Sun, 04 Oct 2009 10:22:46 -0700 (PDT)
+Received: from ?192.168.1.2? (d86-32-77-106.cust.tele2.at [86.32.77.106])
+	by mx.google.com with ESMTPS id g28sm2674443fkg.15.2009.10.04.10.22.44
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 04 Oct 2009 10:22:45 -0700 (PDT)
+From: Michael Lippautz <michael.lippautz@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200910031214.22067.holger+oe@freyther.de>
+References: <fd72b8f50910020840r55927655h94deabff2e4da7cb@mail.gmail.com>
+	<200910031214.22067.holger+oe@freyther.de>
+Date: Sun, 04 Oct 2009 19:22:51 +0200
+Message-Id: <1254676971.16851.0.camel@leeloo.somedomain>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-X-SA-Exim-Connect-IP: 84.21.108.25
-X-SA-Exim-Mail-From: utx@penguin.cz
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 209.85.220.207
+X-SA-Exim-Mail-From: michael.lippautz@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: [PATCH] python: fix -dbg QA error
+Subject: Re: libmikmod_3.2.0-beta2, build error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,109 +53,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Oct 2009 15:13:09 -0000
+X-List-Received-Date: Sun, 04 Oct 2009 17:23:37 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Attached patch should fix the -dbg QA error in Angstrom with
-python-2.6.1 (the default). If the -dbg package is listed first in the
-list, then it wins all files listed without need of complicated
-expressions excluding config/.debug.
+Should be as easy as the following git diff. Correct me if I am wrong.
 
-ERROR: QA Issue with python-distutils: non debug package contains .debug directory: python-distutils path /work/armv5te-angstrom-linux-gnueabi/python-2.6.1-ml7.0/install/python-distutils/usr/lib/python2.6/config/.debug/libpython2.6.a
-ERROR: QA run found fatal errors. Please consider fixing them.
+Regards,
+Michael
 
-diff --git a/contrib/python/generate-manifest-2.6.py b/contrib/python/generate-manifest-2.6.py
-index 8d9272e..fe0e385 100755
---- a/contrib/python/generate-manifest-2.6.py
-+++ b/contrib/python/generate-manifest-2.6.py
-@@ -12,7 +12,7 @@ import time
- VERSION = "2.6.2"
- 
- __author__ = "Michael 'Mickey' Lauer <mlauer@vanille-media.de>"
--__version__ = "20090812"
-+__version__ = "20091004"
- 
- class MakefileMaker:
- 
-@@ -70,16 +70,17 @@ class MakefileMaker:
-         provideLine += '"'
- 
-         self.out( provideLine )
--        self.out( "" )       
-+        self.out( "" )
- 
-         #
-         # generate package line
-         #
- 
--        packageLine = 'PACKAGES="'
-+        packageLine = 'PACKAGES="python-core-dbg '
-         for name in self.packages:
--            packageLine += "%s " % name
--        packageLine += ' python-modules"'
-+            if name != 'python-core-dbg':
-+                packageLine += "%s " % name
-+        packageLine += 'python-modules"'
- 
-         self.out( packageLine )
-         self.out( "" )
-@@ -161,7 +162,7 @@ if __name__ == "__main__":
-     "lib-dynload/xreadlines.so types.* ${bindir}/python*" )
- 
-     m.addPackage( "python-core-dbg", "Python core module debug information", "python-core",
--    "lib-dynload/.debug ${bindir}/.debug ${libdir}/.debug" )
-+    "config/.debug lib-dynload/.debug ${bindir}/.debug ${libdir}/.debug" )
- 
-     m.addPackage( "python-devel", "Python Development Package", "python-core",
-     "${includedir} ${libdir}/libpython2.6.so config" ) # package
-diff --git a/recipes/python/python-2.6-manifest.inc b/recipes/python/python-2.6-manifest.inc
-index 00eda6b..cee12c8 100644
---- a/recipes/python/python-2.6-manifest.inc
-+++ b/recipes/python/python-2.6-manifest.inc
-@@ -1,13 +1,13 @@
- 
- # WARNING: This file is AUTO GENERATED: Manual edits will be lost next time I regenerate the file.
--# Generator: '../../contrib/python/generate-manifest-2.6.py' Version 20090812 (C) 2002-2009 Michael 'Mickey' Lauer <mlauer@vanille-media.de>
-+# Generator: '../../contrib/python/generate-manifest-2.6.py' Version 20091004 (C) 2002-2009 Michael 'Mickey' Lauer <mlauer@vanille-media.de>
- # Visit the Python for Embedded Systems Site => http://www.Vanille.de/projects/python.spy
- 
-  
- 
- PROVIDES+="python-profile python-threading python-distutils python-doctest python-stringold python-codecs python-ctypes python-pickle python-datetime python-core python-io python-compiler python-compression python-re python-xmlrpc python-terminal python-email python-image python-tests python-core-dbg python-resource python-json python-devel python-difflib python-math python-syslog python-hotshot python-unixadmin python-textutils python-tkinter python-gdbm python-elementtree python-fcntl python-netclient python-pprint python-netserver python-curses python-smtpd python-html python-readline python-subprocess python-pydoc python-logging python-mailbox python-xml python-mime python-sqlite3 python-sqlite3-tests python-unittest python-multiprocessing python-robotparser python-compile python-debugger python-pkgutil python-shell python-bsddb python-mmap python-zlib python-db python-crypt python-idle python-lang python-audio "
- 
--PACKAGES="python-profile python-threading python-distutils python-doctest python-stringold python-codecs python-ctypes python-pickle python-datetime python-core python-io python-compiler python-compression python-re python-xmlrpc python-terminal python-email python-image python-tests python-core-dbg python-resource python-json python-devel python-difflib python-math python-syslog python-hotshot python-unixadmin python-textutils python-tkinter python-gdbm python-elementtree python-fcntl python-netclient python-pprint python-netserver python-curses python-smtpd python-html python-readline python-subprocess python-pydoc python-logging python-mailbox python-xml python-mime python-sqlite3 python-sqlite3-tests python-unittest python-multiprocessing python-robotparser python-compile python-debugger python-pkgutil python-shell python-bsddb python-mmap python-zlib python-db python-crypt python-idle python-lang python-audio  python-modules"
-+PACKAGES="python-core-dbg python-profile python-threading python-distutils python-doctest python-stringold python-codecs python-ctypes python-pickle python-datetime python-core python-io python-compiler python-compression python-re python-xmlrpc python-terminal python-email python-image python-tests python-resource python-json python-devel python-difflib python-math python-syslog python-hotshot python-unixadmin python-textutils python-tkinter python-gdbm python-elementtree python-fcntl python-netclient python-pprint python-netserver python-curses python-smtpd python-html python-readline python-subprocess python-pydoc python-logging python-mailbox python-xml python-mime python-sqlite3 python-sqlite3-tests python-unittest python-multiprocessing python-robotparser python-compile python-debugger python-pkgutil python-shell python-bsddb python-mmap python-zlib python-db python-crypt python-idle python-lang python-audio python-modules"
- 
- DESCRIPTION_python-profile="Python Basic Profiling Support"
- RDEPENDS_python-profile="python-core python-textutils"
-@@ -87,7 +87,7 @@ FILES_python-tests="${libdir}/python2.6/test "
- 
- DESCRIPTION_python-core-dbg="Python core module debug information"
- RDEPENDS_python-core-dbg="python-core"
--FILES_python-core-dbg="${libdir}/python2.6/lib-dynload/.debug ${bindir}/.debug ${libdir}/.debug "
-+FILES_python-core-dbg="${libdir}/python2.6/config/.debug ${libdir}/python2.6/lib-dynload/.debug ${bindir}/.debug ${libdir}/.debug "
- 
- DESCRIPTION_python-resource="Python Resource Control Interface"
- RDEPENDS_python-resource="python-core"
-diff --git a/recipes/python/python.inc b/recipes/python/python.inc
-index 5791297..7e61f79 100644
---- a/recipes/python/python.inc
-+++ b/recipes/python/python.inc
-@@ -4,7 +4,7 @@ LICENSE = "PSF"
- SECTION = "devel/python"
+diff --git a/recipes/libmikmod/libmikmod_3.2.0-beta2.bb
+b/recipes/libmikmod/libmikmod_3.2.0-beta2.bb
+index 07e3af9..fd23568 100644
+--- a/recipes/libmikmod/libmikmod_3.2.0-beta2.bb
++++ b/recipes/libmikmod/libmikmod_3.2.0-beta2.bb
+@@ -3,8 +3,12 @@ SECTION = "libs"
  PRIORITY = "optional"
- # bump this on every change in contrib/python/generate-manifest-2.6.py
--INC_PR = "ml7"
-+INC_PR = "ml8"
- 
- DEFAULT_PREFERENCE = "-26"
- 
+ LICENSE = "LGPL"
+
++PR="r1"
++
+ DEFAULT_PREFERENCE = "-1"
+
++TARGET_CC_ARCH += "${LDFLAGS}"
++
+ SRC_URI = "\
+   http://mikmod.raphnet.net/files/libmikmod-${PV}.tar.gz \
+   file://m4.patch;patch=1 \
 
 
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+Am Samstag, den 03.10.2009, 12:14 +0200 schrieb Holger Hans Peter
+Freyther:
+> On Friday 02 October 2009 17:40:53 mail mail wrote:
+> > Log file here:
+> > NOTE: Running task 1371 of 2265 (ID: 1561,
+> > /home/derek/mini2440/oe/openembedded/recipes/libmikmod/
+> > libmikmod_3.2.0-beta2.bb, do_package)
+> > ERROR: QA Issue with libmikmod: No GNU_HASH in the elf binary:
+> > '/home/derek/mini2440/oe/tmp/work/armv4t-angstrom-linux-gnueabi/libmikmod-3
+> > .2.0-beta2-r0/install/libmikmod/usr/lib/libmikmod.so.3.0.0' ERROR: QA run
+> >  found fatal errors. Please consider fixing them.
+> 
+> 
+> Did you consider doing the above? The libmikmod buildsystem is ignoring the OE 
+> LDFLAGS...
+> 
+> z.
+
 
 
 
