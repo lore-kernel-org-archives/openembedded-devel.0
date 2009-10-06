@@ -1,35 +1,24 @@
-Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1Mv5Ai-0000Qi-6L
+	(envelope-from <pb@reciva.com>) id 1Mv5bQ-00040N-KE
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Oct 2009 10:13:27 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id EC18E11001B7
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Oct 2009 10:04:57 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 366E211000B1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Oct 2009 10:04:57 +0200 (CEST)
-Received: from rhein.familie-heinold.de (g225074180.adsl.alicedsl.de
-	[92.225.74.180]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Oct 2009 10:04:57 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 536A43C100; Tue,  6 Oct 2009 10:04:56 +0200 (CEST)
-Date: Tue, 6 Oct 2009 10:04:56 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Tue, 06 Oct 2009 10:41:03 +0200
+Received: from [85.210.191.75] (helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1Mv5af-0007jG-SP
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 06 Oct 2009 09:40:14 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091006080456.GA20066@rhein.zuhause.netz>
-References: <1254776922-10892-1-git-send-email-marcin@juszkiewicz.com.pl>
-MIME-Version: 1.0
 In-Reply-To: <1254776922-10892-1-git-send-email-marcin@juszkiewicz.com.pl>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+References: <1254776922-10892-1-git-send-email-marcin@juszkiewicz.com.pl>
+Date: Tue, 06 Oct 2009 09:40:12 +0100
+Message-Id: <1254818412.9214.107.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-Broken-Reverse-DNS: no host name found for IP address 85.210.191.75
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: pb@reciva.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [STABLE][PATCH] java.bbclass: Use force (-f) for ln (suggested by Marcin).
@@ -46,23 +35,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Oct 2009 08:13:28 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 06 Oct 2009 08:41:03 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Mon, Oct 05, 2009 at 11:08:42PM +0200, Marcin Juszkiewicz wrote:
-> From: Robert Schuster <rschus@entw2.(none)>
-> 
-> Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-> 
-> ---
->  classes/java.bbclass |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
-> 
-> diff --git a/classes/java.bbclass b/classes/java.bbclass
-> index 38256d7..cacd2ce 100644
-> --- a/classes/java.bbclass
-> +++ b/classes/java.bbclass
+On Mon, 2009-10-05 at 23:08 +0200, Marcin Juszkiewicz wrote:
 > @@ -72,7 +72,7 @@ oe_jarinstall() {
 >        oewarn "file was in the way. removing:" $dir/$1
 >        rm $dir/$1
@@ -72,10 +49,12 @@ On Mon, Oct 05, 2009 at 11:08:42PM +0200, Marcin Juszkiewicz wrote:
 >      shift
 >    done
 >  }
-> -- 
 
-ACK
+What's the reason for the -f argument?  If the target file already
+exists then it seems like that "rm" should already take care of it.
 
-Bye Henning
+p.
+
+
 
 
