@@ -1,28 +1,40 @@
-Received: from [206.46.173.13] (helo=vms173013pub.verizon.net)
+Received: from [74.125.92.148] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Mv1Fj-0003ee-2L
+	(envelope-from <raj.khem@gmail.com>) id 1Mv2Ed-0003BZ-SS
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Oct 2009 06:02:22 +0200
-Received: from gandalf.denix.org ([71.127.57.136]) by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KR200I2WR68MLOI@vms173013.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	05 Oct 2009 23:01:20 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id C4FE414AF4F; Tue,
-	06 Oct 2009 00:01:19 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	Tue, 06 Oct 2009 07:05:19 +0200
+Received: by qw-out-1920.google.com with SMTP id 4so1283251qwk.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 05 Oct 2009 22:04:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=eNW/RisRzepOJCeMDLW1NfA+CugKnHIZ5gq6REV0BDQ=;
+	b=cBXcUY5fd9Bse44X+qkjmwv9zRmu9tRKQQRJ5HtWMhz53L/LiP/YaAd2uAeO4tXtZl
+	QAANeZgUVy1gC1eQ9Np0rBd7uTWwNE/tKvp+AKtSLwso0zVqOCTO/PW7VW4GfqoyD/++
+	t26Gu892RYU5la+0lDR8yu3ZqGv132njhnVV8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=KkTvIFrr2PhKHj8DXRhHk/KrVkQDBlZFUP76qpqKxMLr8DGlnzUBZgL38uz4N7LOKS
+	gPEn7lbtqRKI553oxNRWW+QINaEApPBMt+M9lIvL2q9/voZ1F+G9wXrxPLknzaRGVhHm
+	Wn7OW/mpgAosSagrxXxeytmC+tclI8iJMJDns=
+Received: by 10.224.87.6 with SMTP id u6mr897452qal.135.1254805468929;
+	Mon, 05 Oct 2009 22:04:28 -0700 (PDT)
+Received: from localhost (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 6sm213049qwd.27.2009.10.05.22.04.26
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 05 Oct 2009 22:04:28 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 06 Oct 2009 00:00:47 -0400
-Message-id: <1254801647-27989-1-git-send-email-denis@denix.org>
+Date: Mon,  5 Oct 2009 22:04:21 -0700
+Message-Id: <1254805462-5879-1-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.6.3.3
-In-reply-to: <20091006034646.GA22854@denix.org>
-References: <20091006034646.GA22854@denix.org>
-X-SA-Exim-Connect-IP: 206.46.173.13
-X-SA-Exim-Mail-From: denis@denix.org
+X-SA-Exim-Connect-IP: 74.125.92.148
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] utils.py: add special handling for version delimiters
+Subject: [PATCH 1/2] siteinfo: Add common-mips site file.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,67 +48,1451 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Oct 2009 04:02:22 -0000
+X-List-Received-Date: Tue, 06 Oct 2009 05:05:19 -0000
 
-Make version comparison work properly for pre-releases and release-candidates,
-when there is an extra suffix in the field, such as:
-PV = "2.6.29+2.6.30-rc5-${PR}+gitr${SRCREV}"
+* After renaming the target triplet the file names
+  needs to be renamed because they are used in get_siteinfo_list
 
-More details: http://thread.gmane.org/gmane.comp.handhelds.openembedded/26691
-
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- lib/bb/utils.py |   16 +++++++++++++++-
- 1 files changed, 15 insertions(+), 1 deletions(-)
+ classes/siteinfo.bbclass |   25 ++++---
+ site/arm-linux           |  180 ----------------------------------------------
+ site/arm-linux-gnu       |  180 ++++++++++++++++++++++++++++++++++++++++++++++
+ site/armeb-linux         |   51 -------------
+ site/armeb-linux-gnu     |   51 +++++++++++++
+ site/mips-common         |   14 ++++
+ site/mips-linux          |  115 -----------------------------
+ site/mips-linux-gnu      |  115 +++++++++++++++++++++++++++++
+ site/mipsel-linux        |  119 ------------------------------
+ site/mipsel-linux-gnu    |  119 ++++++++++++++++++++++++++++++
+ site/powerpc-linux       |    5 --
+ site/powerpc-linux-gnu   |    5 ++
+ site/sparc-linux         |   55 --------------
+ site/sparc-linux-gnu     |   55 ++++++++++++++
+ site/x86_64-linux        |   97 -------------------------
+ site/x86_64-linux-gnu    |   97 +++++++++++++++++++++++++
+ 16 files changed, 649 insertions(+), 634 deletions(-)
+ delete mode 100644 site/arm-linux
+ create mode 100644 site/arm-linux-gnu
+ delete mode 100644 site/armeb-linux
+ create mode 100644 site/armeb-linux-gnu
+ create mode 100644 site/mips-common
+ delete mode 100644 site/mips-linux
+ create mode 100644 site/mips-linux-gnu
+ delete mode 100644 site/mipsel-linux
+ create mode 100644 site/mipsel-linux-gnu
+ delete mode 100644 site/powerpc-linux
+ create mode 100644 site/powerpc-linux-gnu
+ delete mode 100644 site/sparc-linux
+ create mode 100644 site/sparc-linux-gnu
+ delete mode 100644 site/x86_64-linux
+ create mode 100644 site/x86_64-linux-gnu
 
-diff --git a/lib/bb/utils.py b/lib/bb/utils.py
-index 2469bd7..e6664e2 100644
---- a/lib/bb/utils.py
-+++ b/lib/bb/utils.py
-@@ -21,8 +21,9 @@ BitBake Utility Functions
- 
- digits = "0123456789"
- ascii_letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-+separators = ".-"
- 
--import re, fcntl, os
-+import re, fcntl, os, types
- 
- def explode_version(s):
-     r = []
-@@ -39,12 +40,15 @@ def explode_version(s):
-             r.append(m.group(1))
-             s = m.group(2)
-             continue
-+        r.append(s[0])
-         s = s[1:]
-     return r
- 
- def vercmp_part(a, b):
-     va = explode_version(a)
-     vb = explode_version(b)
-+    sa = False
-+    sb = False
-     while True:
-         if va == []:
-             ca = None
-@@ -56,6 +60,16 @@ def vercmp_part(a, b):
-             cb = vb.pop(0)
-         if ca == None and cb == None:
-             return 0
+diff --git a/classes/siteinfo.bbclass b/classes/siteinfo.bbclass
+index 2bacd69..d28093d 100644
+--- a/classes/siteinfo.bbclass
++++ b/classes/siteinfo.bbclass
+@@ -23,14 +23,14 @@ def get_siteinfo_list(d):
+        targetinfo = {\
+                "armeb-linux":             "endian-big bit-32 common-linux common-glibc arm-common",\
+                "armeb-linux-gnu":         "endian-big bit-32 common-linux common-glibc arm-common",\
+-               "armeb-linux-gnueabi":     "endian-big bit-32 common-linux common-glibc arm-common armeb-linux",\
++               "armeb-linux-gnueabi":     "endian-big bit-32 common-linux common-glibc arm-common armeb-linux-gnu",\
+                "armeb-linux-uclibc":      "endian-big bit-32 common-linux common-uclibc arm-common",\
+                "armeb-linux-uclibceabi":  "endian-big bit-32 common-linux common-uclibc arm-common armeb-linux-uclibc",\
+                "arm-darwin":              "endian-little bit-32 common-darwin",\
+                "arm-darwin9":             "endian-little bit-32 common-darwin",\
+                "arm-linux":               "endian-little bit-32 common-linux common-glibc arm-common",\
+                "arm-linux-gnu":           "endian-little bit-32 common-linux common-glibc arm-common",\
+-               "arm-linux-gnueabi":       "endian-little bit-32 common-linux common-glibc arm-common arm-linux",\
++               "arm-linux-gnueabi":       "endian-little bit-32 common-linux common-glibc arm-common arm-linux-gnu",\
+                "arm-linux-uclibc":        "endian-little bit-32 common-linux common-uclibc arm-common",\
+                "arm-linux-uclibceabi":    "endian-little bit-32 common-linux common-uclibc arm-common arm-linux-uclibc",\
+                "avr32-linux-uclibc":      "endian-big bit-32 common-linux common-uclibc avr32-common",\
+@@ -57,17 +57,17 @@ def get_siteinfo_list(d):
+                "i686-mingw32":            "endian-little bit-32 common-mingw ix86-common",\
+ 	       "ia64-linux":		  "endian-little bit-64 common-linux common-glibc",\
+ 	       "ia64-linux-gnu":	  "endian-little bit-64 common-linux common-glibc",\
+-               "mipsel-linux":            "endian-little bit-32 common-linux common-glibc",\
+-               "mipsel-linux-gnu":        "endian-little bit-32 common-linux common-glibc",\
+-               "mipsel-linux-uclibc":     "endian-little bit-32 common-linux common-uclibc",\
+-               "mips-linux":              "endian-big bit-32 common-linux common-glibc",\
+-               "mips-linux-gnu":          "endian-big bit-32 common-linux common-glibc",\
+-               "mips-linux-uclibc":       "endian-big bit-32 common-linux common-uclibc",\
++               "mipsel-linux":            "endian-little bit-32 common-linux common-glibc mips-common",\
++               "mipsel-linux-gnu":        "endian-little bit-32 common-linux common-glibc mips-common",\
++               "mipsel-linux-uclibc":     "endian-little bit-32 common-linux common-uclibc mips-common",\
++               "mips-linux":              "endian-big bit-32 common-linux common-glibc mips-common",\
++               "mips-linux-gnu":          "endian-big bit-32 common-linux common-glibc mips-common",\
++               "mips-linux-uclibc":       "endian-big bit-32 common-linux common-uclibc mips-common",\
+                "powerpc-darwin":          "endian-big bit-32 common-darwin",\
+-               "ppc-linux":               "endian-big bit-32 common-linux common-glibc powerpc-common",\ 
+-               "ppc-linux-gnu":           "endian-big bit-32 common-linux common-glibc powerpc-common",\ 
+-               "ppc64-linux":             "endian-big bit-64 common-linux common-glibc powerpc-common",\ 
+-               "ppc64-linux-gnu":         "endian-big bit-64 common-linux common-glibc powerpc-common",\ 
++               "ppc-linux":               "endian-big bit-32 common-linux common-glibc powerpc-common",\
++               "ppc-linux-gnu":           "endian-big bit-32 common-linux common-glibc powerpc-common",\
++               "ppc64-linux":             "endian-big bit-64 common-linux common-glibc powerpc-common",\
++               "ppc64-linux-gnu":         "endian-big bit-64 common-linux common-glibc powerpc-common",\
+ 	       "powerpc-linux":           "endian-big bit-32 common-linux common-glibc powerpc-common",\
+ 	       "powerpc-linux-gnu":       "endian-big bit-32 common-linux common-glibc powerpc-common",\
+ 	       "powerpc-linux-gnuspe":    "endian-big bit-32 common-linux common-glibc powerpc-common",\
+@@ -89,6 +89,7 @@ def get_siteinfo_list(d):
+                info = targetinfo[target].split()
+                info.append(target)
+                info.append("common")
++	       print info
+                return info
+        else:
+                bb.error("Information not available for target '%s'" % target)
+diff --git a/site/arm-linux b/site/arm-linux
+deleted file mode 100644
+index 18dfb38..0000000
+--- a/site/arm-linux
++++ /dev/null
+@@ -1,180 +0,0 @@
+-ac_cv_func_getpgrp_void=yes
+-ac_cv_func_setpgrp_void=yes
+-ac_cv_func_setgrent_void=yes
+-ac_cv_func_malloc_0_nonnull=yes
+-ac_cv_func_malloc_works=yes
+-ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
+-ac_cv_func_posix_getgrgid_r=${ac_cv_func_posix_getgrgid_r=yes}
+-ac_cv_func_setvbuf_reversed=no
+-ac_cv_sizeof___int64=${ac_cv_sizeof___int64=0}
+-ac_cv_sizeof_char=${ac_cv_sizeof_char=1}
+-ac_cv_sizeof_wchar_t=${ac_cv_sizeof_wchar_t=1}
+-ac_cv_sizeof_unsigned_char=${ac_cv_sizeof_unsigned_char=1}
+-ac_cv_sizeof_bool=${ac_cv_sizeof_bool=1}
+-ac_cv_sizeof_char_p=${ac_cv_sizeof_int_p=4}
+-ac_cv_sizeof_int=${ac_cv_sizeof_int=4}
+-ac_cv_sizeof_int_p=${ac_cv_sizeof_int_p=4}
+-ac_cv_sizeof_long=${ac_cv_sizeof_long=4}
+-ac_cv_sizeof_long_int=${ac_cv_sizeof_long_int=4}
+-ac_cv_sizeof_long_long=${ac_cv_sizeof_long_long=8}
+-ac_cv_sizeof_off_t=${ac_cv_sizeof_off_t=4}
+-ac_cv_sizeof_short=${ac_cv_sizeof_short=2}
+-ac_cv_sizeof_short_int=${ac_cv_sizeof_short_int=2}
+-ac_cv_sizeof_size_t=${ac_cv_sizeof_size_t=4}
+-ac_cv_sizeof_void_p=${ac_cv_sizeof_void_p=4}
+-ac_cv_sizeof_long_p=${ac_cv_sizeof_long_p=4}
+-ac_cv_sizeof_float=${ac_cv_sizeof_float=4}
+-ac_cv_sizeof_double=${ac_cv_sizeof_double=8}
+-ac_cv_sizeof_long_double=${ac_cv_sizeof_long_double=8}
+-ac_cv_sizeof_ptrdiff_t=${glib_cv_sizeof_ptrdiff_t=4}
+-ac_cv_sizeof_unsigned_short=${ac_cv_sizeof_unsigned_short=2}
+-ac_cv_sizeof_unsigned=${ac_cv_sizeof_unsigned=4}
+-ac_cv_sizeof_unsigned_int=${ac_cv_sizeof_unsigned_int=4}
+-ac_cv_sizeof_unsigned_long=${ac_cv_sizeof_unsigned_long=4}
+-ac_cv_sizeof_unsigned_long_long=${ac_cv_sizeof_unsigned_long_long=8}
+-ac_cv_sizeof_signed_char=${ac_cv_sizeof_signed_char=1}
+-
+-ac_cv_sys_restartable_syscalls=yes
+-ac_cv_uchar=${ac_cv_uchar=no}
+-ac_cv_uint=${ac_cv_uint=yes}
+-ac_cv_ulong=${ac_cv_ulong=yes}
+-ac_cv_ushort=${ac_cv_ushort=yes}
+-ac_cv_time_r_type=${ac_cv_time_r_type=POSIX}
+-
+-# samba
+-samba_cv_BROKEN_NISPLUS_INCLUDE_FILES=${samba_cv_BROKEN_NISPLUS_INCLUDE_FILES=yes}
+-samba_cv_BROKEN_REDHAT_7_SYSTEM_HEADERS=${samba_cv_BROKEN_REDHAT_7_SYSTEM_HEADERS=no}
+-samba_cv_HAVE_BROKEN_FCNTL64_LOCKS=${samba_cv_HAVE_BROKEN_FCNTL64_LOCKS=no}
+-samba_cv_HAVE_BROKEN_GETGROUPS=${samba_cv_HAVE_BROKEN_GETGROUPS=no}
+-samba_cv_HAVE_BROKEN_LINUX_SENDFILE=${samba_cv_HAVE_BROKEN_LINUX_SENDFILE=yes}
+-samba_cv_HAVE_BROKEN_READDIR=${samba_cv_HAVE_BROKEN_READDIR=yes}
+-samba_cv_HAVE_BROKEN_READDIR_NAME=${samba_cv_HAVE_BROKEN_READDIR_NAME=no}
+-samba_cv_HAVE_C99_VSNPRINTF=${samba_cv_HAVE_C99_VSNPRINTF=yes}
+-samba_cv_HAVE_DEV64_T=${samba_cv_HAVE_DEV64_T=no}
+-samba_cv_HAVE_DEVICE_MAJOR_FN=${samba_cv_HAVE_DEVICE_MAJOR_FN=yes}
+-samba_cv_HAVE_DEVICE_MINOR_FN=${samba_cv_HAVE_DEVICE_MINOR_FN=yes}
+-samba_cv_HAVE_DQB_FSOFTLIMIT=${samba_cv_HAVE_DQB_FSOFTLIMIT=no}
+-samba_cv_HAVE_EXPLICIT_LARGEFILE_SUPPORT=${samba_cv_HAVE_EXPLICIT_LARGEFILE_SUPPORT=yes}
+-samba_cv_HAVE_FAM_H=${samba_cv_HAVE_FAM_H=no}
+-samba_cv_HAVE_FCNTL_LOCK=${samba_cv_HAVE_FCNTL_LOCK=yes}
+-samba_cv_HAVE_FTRUNCATE_EXTEND=${samba_cv_HAVE_FTRUNCATE_EXTEND=yes}
+-samba_cv_HAVE_FUNCTION_MACRO=${samba_cv_HAVE_FUNCTION_MACRO=yes}
+-samba_cv_HAVE_GETTIMEOFDAY_TZ=${samba_cv_HAVE_GETTIMEOFDAY_TZ=yes}
+-samba_cv_HAVE_INO64_T=${samba_cv_HAVE_INO64_T=no}
+-samba_cv_HAVE_INT16_FROM_RPC_RPC_H=${samba_cv_HAVE_INT16_FROM_RPC_RPC_H=no}
+-samba_cv_HAVE_INT32_FROM_RPC_RPC_H=${samba_cv_HAVE_INT32_FROM_RPC_RPC_H=no}
+-samba_cv_HAVE_KERNEL_CHANGE_NOTIFY=${samba_cv_HAVE_KERNEL_CHANGE_NOTIFY=yes}
+-samba_cv_HAVE_KERNEL_OPLOCKS_IRIX=${samba_cv_HAVE_KERNEL_OPLOCKS_IRIX=no}
+-samba_cv_HAVE_KERNEL_OPLOCKS_LINUX=${samba_cv_HAVE_KERNEL_OPLOCKS_LINUX=yes}
+-samba_cv_HAVE_KERNEL_SHARE_MODES=${samba_cv_HAVE_KERNEL_SHARE_MODES=yes}
+-samba_cv_HAVE_MAKEDEV=${samba_cv_HAVE_MAKEDEV=yes}
+-samba_cv_HAVE_MMAP=${samba_cv_HAVE_MMAP=yes}
+-samba_cv_HAVE_NATIVE_ICONV=${samba_cv_HAVE_NATIVE_ICONV=yes}
+-samba_cv_HAVE_OFF64_T=${samba_cv_HAVE_OFF64_T=no}
+-samba_cv_HAVE_ROOT=${samba_cv_HAVE_ROOT=yes}
+-samba_cv_HAVE_RPC_AUTH_ERROR_CONFLICT=${samba_cv_HAVE_RPC_AUTH_ERROR_CONFLICT=no}
+-samba_cv_HAVE_SECURE_MKSTEMP=${samba_cv_HAVE_SECURE_MKSTEMP=yes}
+-samba_cv_HAVE_SENDFILE=${samba_cv_HAVE_SENDFILE=yes}
+-samba_cv_HAVE_SENDFILE64=${samba_cv_HAVE_SENDFILE64=yes}
+-samba_cv_HAVE_SOCK_SIN_LEN=${samba_cv_HAVE_SOCK_SIN_LEN=no}
+-samba_cv_HAVE_STAT_ST_BLKSIZE=${samba_cv_HAVE_STAT_ST_BLKSIZE=yes}
+-samba_cv_HAVE_STAT_ST_BLOCKS=${samba_cv_HAVE_STAT_ST_BLOCKS=yes}
+-samba_cv_HAVE_STRUCT_DIR64=${samba_cv_HAVE_STRUCT_DIR64=no}
+-samba_cv_HAVE_STRUCT_DIRENT64=${samba_cv_HAVE_STRUCT_DIRENT64=yes}
+-samba_cv_HAVE_STRUCT_FLOCK64=${samba_cv_HAVE_STRUCT_FLOCK64=yes}
+-samba_cv_HAVE_TRUNCATED_SALT=${samba_cv_HAVE_TRUNCATED_SALT=no}
+-samba_cv_HAVE_UINT16_FROM_RPC_RPC_H=${samba_cv_HAVE_UINT16_FROM_RPC_RPC_H=no}
+-samba_cv_HAVE_UINT32_FROM_RPC_RPC_H=${samba_cv_HAVE_UINT32_FROM_RPC_RPC_H=no}
+-samba_cv_HAVE_UNSIGNED_CHAR=${samba_cv_HAVE_UNSIGNED_CHAR=yes}
+-samba_cv_HAVE_UTIMBUF=${samba_cv_HAVE_UTIMBUF=yes}
+-samba_cv_HAVE_UT_UT_ADDR=${samba_cv_HAVE_UT_UT_ADDR=yes}
+-samba_cv_HAVE_UT_UT_EXIT=${samba_cv_HAVE_UT_UT_EXIT=yes}
+-samba_cv_HAVE_UT_UT_HOST=${samba_cv_HAVE_UT_UT_HOST=yes}
+-samba_cv_HAVE_UT_UT_ID=${samba_cv_HAVE_UT_UT_ID=yes}
+-samba_cv_HAVE_UT_UT_NAME=${samba_cv_HAVE_UT_UT_NAME=yes}
+-samba_cv_HAVE_UT_UT_PID=${samba_cv_HAVE_UT_UT_PID=yes}
+-samba_cv_HAVE_UT_UT_TIME=${samba_cv_HAVE_UT_UT_TIME=yes}
+-samba_cv_HAVE_UT_UT_TV=${samba_cv_HAVE_UT_UT_TV=yes}
+-samba_cv_HAVE_UT_UT_TYPE=${samba_cv_HAVE_UT_UT_TYPE=yes}
+-samba_cv_HAVE_UT_UT_USER=${samba_cv_HAVE_UT_UT_USER=yes}
+-samba_cv_HAVE_UX_UT_SYSLEN=${samba_cv_HAVE_UX_UT_SYSLEN=no}
+-samba_cv_HAVE_VA_COPY=${samba_cv_HAVE_VA_COPY=yes}
+-samba_cv_HAVE_WORKING_AF_LOCAL=${samba_cv_HAVE_WORKING_AF_LOCAL=yes}
+-samba_cv_HAVE_Werror=${samba_cv_HAVE_Werror=yes}
+-samba_cv_PUTUTLINE_RETURNS_UTMP=${samba_cv_PUTUTLINE_RETURNS_UTMP=yes}
+-samba_cv_QUOTA_WORKS=${samba_cv_QUOTA_WORKS=yes}
+-samba_cv_REALPATH_TAKES_NULL=${samba_cv_REALPATH_TAKES_NULL=yes}
+-samba_cv_REPLACE_GETPASS=${samba_cv_REPLACE_GETPASS=yes}
+-samba_cv_REPLACE_INET_NTOA=${samba_cv_REPLACE_INET_NTOA=no}
+-samba_cv_REPLACE_READDIR=${samba_cv_REPLACE_READDIR=no}
+-samba_cv_RUN_QUOTA_TESTS=${samba_cv_RUN_QUOTA_TESTS=yes}
+-samba_cv_SEEKDIR_RETURNS_VOID=${samba_cv_SEEKDIR_RETURNS_VOID=yes}
+-samba_cv_SIZEOF_DEV_T=${samba_cv_SIZEOF_DEV_T=yes}
+-samba_cv_SIZEOF_INO_T=${samba_cv_SIZEOF_INO_T=yes}
+-samba_cv_SIZEOF_OFF_T=${samba_cv_SIZEOF_OFF_T=yes}
+-samba_cv_SYSCONF_SC_NGROUPS_MAX=${samba_cv_SYSCONF_SC_NGROUPS_MAX=yes}
+-samba_cv_SYSCONF_SC_NPROCESSORS_ONLN=${samba_cv_SYSCONF_SC_NPROCESSORS_ONLN=yes}
+-samba_cv_SYSCONF_SC_NPROC_ONLN=${samba_cv_SYSCONF_SC_NPROC_ONLN=no}
+-samba_cv_SYSCONF_SC_PAGESIZE=${samba_cv_SYSCONF_SC_PAGESIZE=yes}
+-samba_cv_SYSQUOTA_FOUND=${samba_cv_SYSQUOTA_FOUND=yes}
+-samba_cv_SYSQUOTA_WORKS=${samba_cv_SYSQUOTA_WORKS=yes}
+-samba_cv_SYSQUOTA_WORKS_XFS=${samba_cv_SYSQUOTA_WORKS_XFS=yes}
+-samba_cv_TRY_QUOTAS=${samba_cv_TRY_QUOTAS=no}
+-samba_cv_TRY_SYS_QUOTAS=${samba_cv_TRY_SYS_QUOTAS=yes}
+-samba_cv_USE_SETRESUID=${samba_cv_USE_SETRESUID=yes}
+-samba_cv_WE_USE_SYS_QUOTAS=${samba_cv_WE_USE_SYS_QUOTAS=yes}
+-samba_cv_WITH_AFS=${samba_cv_WITH_AFS=no}
+-samba_cv_WITH_FAKE_KASERVER=${samba_cv_WITH_FAKE_KASERVER=no}
+-samba_cv_WITH_QUOTAS=${samba_cv_WITH_QUOTAS=auto}
+-samba_cv_WITH_SYS_QUOTAS=${samba_cv_WITH_SYS_QUOTAS=auto}
+-samba_cv_WITH_VFS_AFSACL=${samba_cv_WITH_VFS_AFSACL=no}
+-samba_cv_compiler_supports_ll=${samba_cv_compiler_supports_ll=yes}
+-samba_cv_found_xfs_header=${samba_cv_found_xfs_header=yes}
+-samba_cv_have_longlong=${samba_cv_have_longlong=yes}
+-samba_cv_have_setresgid=${samba_cv_have_setresgid=yes}
+-samba_cv_have_setresuid=${samba_cv_have_setresuid=yes}
+-samba_cv_immediate_structures=${samba_cv_immediate_structures=yes}
+-samba_cv_optimize_out_funcation_calls=${samba_cv_optimize_out_funcation_calls=yes}
+-samba_cv_sig_atomic_t=${samba_cv_sig_atomic_t=yes}
+-samba_cv_socklen_t=${samba_cv_socklen_t=yes}
+-samba_cv_struct_timespec=${samba_cv_struct_timespec=yes}
+-samba_cv_sysquotas_file=${samba_cv_sysquotas_file=lib/sysquotas_linux.c}
+-samba_cv_unixsocket=${samba_cv_unixsocket=yes}
+-samba_cv_volatile=${samba_cv_volatile=yes}
+-
+-#older sambe defines
+-samba_cv_USE_SETEUID=${samba_cv_USE_SETEUID=yes}
+-samba_cv_USE_SETREUID=${samba_cv_USE_SETREUID=yes}
+-samba_cv_USE_SETUIDX=${samba_cv_USE_SETUIDX=yes}
+-samba_cv_LINUX_LFS_SUPPORT=${samba_cv_LINUX_LFS_SUPPORT=yes}
+-
+-# clamav
+-clamav_av_func_working_snprintf_long=${clamav_av_func_working_snprintf_long=yes}
+-clamav_av_have_in_port_t=${clamav_av_have_in_port_t=yes}
+-clamav_av_have_in_addr_t=${clamav_av_have_in_addr_t=yes}
+-ac_cv_func_mmap_fixed_mapped=${ac_cv_func_mmap_fixed_mapped=yes}
+-
+-#dbus
+-ac_cv_have_abstract_sockets=${ac_cv_have_abstract_sockets=yes}
+-
+-# lftp
+-ac_cv_file___dev_ptc_=yes
+-
+-#mono
+-mono_cv_uscore=${mono_cv_uscore=no}
+-mono_cv_sizeof_sunpath=${mono_cv_sizeof_sunpath=108}
+-
+-# guile
+-ac_cv_func_pthread_attr_getstack=${ac_cv_func_pthread_attr_getstack=yes}
+-
+-# gnet
+-ac_cv_member_struct_sockaddr_sa_len=${ac_cv_member_struct_sockaddr_sa_len=no}
+-ac_cv_gnet_have_abstract_sockets=${ac_cv_gnet_have_abstract_sockets=no}
+-gnet_sockaddr_family_field_name=${gnet_sockaddr_family_field_name=ss_family}
+-
+-# rp-pppoe
+-rpppoe_cv_pack_bitfields=${rpppoe_cv_pack_bitfields=rev}
+-
+-# squeak (forbid unaliged access)
+-ac_cv_double_align=${ac_cv_double_align=no}                           
+-ac_cv_double_order=${ac_cv_double_order=no}
+diff --git a/site/arm-linux-gnu b/site/arm-linux-gnu
+new file mode 100644
+index 0000000..18dfb38
+--- /dev/null
++++ b/site/arm-linux-gnu
+@@ -0,0 +1,180 @@
++ac_cv_func_getpgrp_void=yes
++ac_cv_func_setpgrp_void=yes
++ac_cv_func_setgrent_void=yes
++ac_cv_func_malloc_0_nonnull=yes
++ac_cv_func_malloc_works=yes
++ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
++ac_cv_func_posix_getgrgid_r=${ac_cv_func_posix_getgrgid_r=yes}
++ac_cv_func_setvbuf_reversed=no
++ac_cv_sizeof___int64=${ac_cv_sizeof___int64=0}
++ac_cv_sizeof_char=${ac_cv_sizeof_char=1}
++ac_cv_sizeof_wchar_t=${ac_cv_sizeof_wchar_t=1}
++ac_cv_sizeof_unsigned_char=${ac_cv_sizeof_unsigned_char=1}
++ac_cv_sizeof_bool=${ac_cv_sizeof_bool=1}
++ac_cv_sizeof_char_p=${ac_cv_sizeof_int_p=4}
++ac_cv_sizeof_int=${ac_cv_sizeof_int=4}
++ac_cv_sizeof_int_p=${ac_cv_sizeof_int_p=4}
++ac_cv_sizeof_long=${ac_cv_sizeof_long=4}
++ac_cv_sizeof_long_int=${ac_cv_sizeof_long_int=4}
++ac_cv_sizeof_long_long=${ac_cv_sizeof_long_long=8}
++ac_cv_sizeof_off_t=${ac_cv_sizeof_off_t=4}
++ac_cv_sizeof_short=${ac_cv_sizeof_short=2}
++ac_cv_sizeof_short_int=${ac_cv_sizeof_short_int=2}
++ac_cv_sizeof_size_t=${ac_cv_sizeof_size_t=4}
++ac_cv_sizeof_void_p=${ac_cv_sizeof_void_p=4}
++ac_cv_sizeof_long_p=${ac_cv_sizeof_long_p=4}
++ac_cv_sizeof_float=${ac_cv_sizeof_float=4}
++ac_cv_sizeof_double=${ac_cv_sizeof_double=8}
++ac_cv_sizeof_long_double=${ac_cv_sizeof_long_double=8}
++ac_cv_sizeof_ptrdiff_t=${glib_cv_sizeof_ptrdiff_t=4}
++ac_cv_sizeof_unsigned_short=${ac_cv_sizeof_unsigned_short=2}
++ac_cv_sizeof_unsigned=${ac_cv_sizeof_unsigned=4}
++ac_cv_sizeof_unsigned_int=${ac_cv_sizeof_unsigned_int=4}
++ac_cv_sizeof_unsigned_long=${ac_cv_sizeof_unsigned_long=4}
++ac_cv_sizeof_unsigned_long_long=${ac_cv_sizeof_unsigned_long_long=8}
++ac_cv_sizeof_signed_char=${ac_cv_sizeof_signed_char=1}
 +
-+        if type(ca) is types.StringType:
-+            sa = ca in separators
-+        if type(cb) is types.StringType:
-+            sb = cb in separators
-+        if sa and not sb:
-+            return -1
-+        if not sa and sb:
-+            return 1
++ac_cv_sys_restartable_syscalls=yes
++ac_cv_uchar=${ac_cv_uchar=no}
++ac_cv_uint=${ac_cv_uint=yes}
++ac_cv_ulong=${ac_cv_ulong=yes}
++ac_cv_ushort=${ac_cv_ushort=yes}
++ac_cv_time_r_type=${ac_cv_time_r_type=POSIX}
 +
-         if ca > cb:
-             return 1
-         if ca < cb:
++# samba
++samba_cv_BROKEN_NISPLUS_INCLUDE_FILES=${samba_cv_BROKEN_NISPLUS_INCLUDE_FILES=yes}
++samba_cv_BROKEN_REDHAT_7_SYSTEM_HEADERS=${samba_cv_BROKEN_REDHAT_7_SYSTEM_HEADERS=no}
++samba_cv_HAVE_BROKEN_FCNTL64_LOCKS=${samba_cv_HAVE_BROKEN_FCNTL64_LOCKS=no}
++samba_cv_HAVE_BROKEN_GETGROUPS=${samba_cv_HAVE_BROKEN_GETGROUPS=no}
++samba_cv_HAVE_BROKEN_LINUX_SENDFILE=${samba_cv_HAVE_BROKEN_LINUX_SENDFILE=yes}
++samba_cv_HAVE_BROKEN_READDIR=${samba_cv_HAVE_BROKEN_READDIR=yes}
++samba_cv_HAVE_BROKEN_READDIR_NAME=${samba_cv_HAVE_BROKEN_READDIR_NAME=no}
++samba_cv_HAVE_C99_VSNPRINTF=${samba_cv_HAVE_C99_VSNPRINTF=yes}
++samba_cv_HAVE_DEV64_T=${samba_cv_HAVE_DEV64_T=no}
++samba_cv_HAVE_DEVICE_MAJOR_FN=${samba_cv_HAVE_DEVICE_MAJOR_FN=yes}
++samba_cv_HAVE_DEVICE_MINOR_FN=${samba_cv_HAVE_DEVICE_MINOR_FN=yes}
++samba_cv_HAVE_DQB_FSOFTLIMIT=${samba_cv_HAVE_DQB_FSOFTLIMIT=no}
++samba_cv_HAVE_EXPLICIT_LARGEFILE_SUPPORT=${samba_cv_HAVE_EXPLICIT_LARGEFILE_SUPPORT=yes}
++samba_cv_HAVE_FAM_H=${samba_cv_HAVE_FAM_H=no}
++samba_cv_HAVE_FCNTL_LOCK=${samba_cv_HAVE_FCNTL_LOCK=yes}
++samba_cv_HAVE_FTRUNCATE_EXTEND=${samba_cv_HAVE_FTRUNCATE_EXTEND=yes}
++samba_cv_HAVE_FUNCTION_MACRO=${samba_cv_HAVE_FUNCTION_MACRO=yes}
++samba_cv_HAVE_GETTIMEOFDAY_TZ=${samba_cv_HAVE_GETTIMEOFDAY_TZ=yes}
++samba_cv_HAVE_INO64_T=${samba_cv_HAVE_INO64_T=no}
++samba_cv_HAVE_INT16_FROM_RPC_RPC_H=${samba_cv_HAVE_INT16_FROM_RPC_RPC_H=no}
++samba_cv_HAVE_INT32_FROM_RPC_RPC_H=${samba_cv_HAVE_INT32_FROM_RPC_RPC_H=no}
++samba_cv_HAVE_KERNEL_CHANGE_NOTIFY=${samba_cv_HAVE_KERNEL_CHANGE_NOTIFY=yes}
++samba_cv_HAVE_KERNEL_OPLOCKS_IRIX=${samba_cv_HAVE_KERNEL_OPLOCKS_IRIX=no}
++samba_cv_HAVE_KERNEL_OPLOCKS_LINUX=${samba_cv_HAVE_KERNEL_OPLOCKS_LINUX=yes}
++samba_cv_HAVE_KERNEL_SHARE_MODES=${samba_cv_HAVE_KERNEL_SHARE_MODES=yes}
++samba_cv_HAVE_MAKEDEV=${samba_cv_HAVE_MAKEDEV=yes}
++samba_cv_HAVE_MMAP=${samba_cv_HAVE_MMAP=yes}
++samba_cv_HAVE_NATIVE_ICONV=${samba_cv_HAVE_NATIVE_ICONV=yes}
++samba_cv_HAVE_OFF64_T=${samba_cv_HAVE_OFF64_T=no}
++samba_cv_HAVE_ROOT=${samba_cv_HAVE_ROOT=yes}
++samba_cv_HAVE_RPC_AUTH_ERROR_CONFLICT=${samba_cv_HAVE_RPC_AUTH_ERROR_CONFLICT=no}
++samba_cv_HAVE_SECURE_MKSTEMP=${samba_cv_HAVE_SECURE_MKSTEMP=yes}
++samba_cv_HAVE_SENDFILE=${samba_cv_HAVE_SENDFILE=yes}
++samba_cv_HAVE_SENDFILE64=${samba_cv_HAVE_SENDFILE64=yes}
++samba_cv_HAVE_SOCK_SIN_LEN=${samba_cv_HAVE_SOCK_SIN_LEN=no}
++samba_cv_HAVE_STAT_ST_BLKSIZE=${samba_cv_HAVE_STAT_ST_BLKSIZE=yes}
++samba_cv_HAVE_STAT_ST_BLOCKS=${samba_cv_HAVE_STAT_ST_BLOCKS=yes}
++samba_cv_HAVE_STRUCT_DIR64=${samba_cv_HAVE_STRUCT_DIR64=no}
++samba_cv_HAVE_STRUCT_DIRENT64=${samba_cv_HAVE_STRUCT_DIRENT64=yes}
++samba_cv_HAVE_STRUCT_FLOCK64=${samba_cv_HAVE_STRUCT_FLOCK64=yes}
++samba_cv_HAVE_TRUNCATED_SALT=${samba_cv_HAVE_TRUNCATED_SALT=no}
++samba_cv_HAVE_UINT16_FROM_RPC_RPC_H=${samba_cv_HAVE_UINT16_FROM_RPC_RPC_H=no}
++samba_cv_HAVE_UINT32_FROM_RPC_RPC_H=${samba_cv_HAVE_UINT32_FROM_RPC_RPC_H=no}
++samba_cv_HAVE_UNSIGNED_CHAR=${samba_cv_HAVE_UNSIGNED_CHAR=yes}
++samba_cv_HAVE_UTIMBUF=${samba_cv_HAVE_UTIMBUF=yes}
++samba_cv_HAVE_UT_UT_ADDR=${samba_cv_HAVE_UT_UT_ADDR=yes}
++samba_cv_HAVE_UT_UT_EXIT=${samba_cv_HAVE_UT_UT_EXIT=yes}
++samba_cv_HAVE_UT_UT_HOST=${samba_cv_HAVE_UT_UT_HOST=yes}
++samba_cv_HAVE_UT_UT_ID=${samba_cv_HAVE_UT_UT_ID=yes}
++samba_cv_HAVE_UT_UT_NAME=${samba_cv_HAVE_UT_UT_NAME=yes}
++samba_cv_HAVE_UT_UT_PID=${samba_cv_HAVE_UT_UT_PID=yes}
++samba_cv_HAVE_UT_UT_TIME=${samba_cv_HAVE_UT_UT_TIME=yes}
++samba_cv_HAVE_UT_UT_TV=${samba_cv_HAVE_UT_UT_TV=yes}
++samba_cv_HAVE_UT_UT_TYPE=${samba_cv_HAVE_UT_UT_TYPE=yes}
++samba_cv_HAVE_UT_UT_USER=${samba_cv_HAVE_UT_UT_USER=yes}
++samba_cv_HAVE_UX_UT_SYSLEN=${samba_cv_HAVE_UX_UT_SYSLEN=no}
++samba_cv_HAVE_VA_COPY=${samba_cv_HAVE_VA_COPY=yes}
++samba_cv_HAVE_WORKING_AF_LOCAL=${samba_cv_HAVE_WORKING_AF_LOCAL=yes}
++samba_cv_HAVE_Werror=${samba_cv_HAVE_Werror=yes}
++samba_cv_PUTUTLINE_RETURNS_UTMP=${samba_cv_PUTUTLINE_RETURNS_UTMP=yes}
++samba_cv_QUOTA_WORKS=${samba_cv_QUOTA_WORKS=yes}
++samba_cv_REALPATH_TAKES_NULL=${samba_cv_REALPATH_TAKES_NULL=yes}
++samba_cv_REPLACE_GETPASS=${samba_cv_REPLACE_GETPASS=yes}
++samba_cv_REPLACE_INET_NTOA=${samba_cv_REPLACE_INET_NTOA=no}
++samba_cv_REPLACE_READDIR=${samba_cv_REPLACE_READDIR=no}
++samba_cv_RUN_QUOTA_TESTS=${samba_cv_RUN_QUOTA_TESTS=yes}
++samba_cv_SEEKDIR_RETURNS_VOID=${samba_cv_SEEKDIR_RETURNS_VOID=yes}
++samba_cv_SIZEOF_DEV_T=${samba_cv_SIZEOF_DEV_T=yes}
++samba_cv_SIZEOF_INO_T=${samba_cv_SIZEOF_INO_T=yes}
++samba_cv_SIZEOF_OFF_T=${samba_cv_SIZEOF_OFF_T=yes}
++samba_cv_SYSCONF_SC_NGROUPS_MAX=${samba_cv_SYSCONF_SC_NGROUPS_MAX=yes}
++samba_cv_SYSCONF_SC_NPROCESSORS_ONLN=${samba_cv_SYSCONF_SC_NPROCESSORS_ONLN=yes}
++samba_cv_SYSCONF_SC_NPROC_ONLN=${samba_cv_SYSCONF_SC_NPROC_ONLN=no}
++samba_cv_SYSCONF_SC_PAGESIZE=${samba_cv_SYSCONF_SC_PAGESIZE=yes}
++samba_cv_SYSQUOTA_FOUND=${samba_cv_SYSQUOTA_FOUND=yes}
++samba_cv_SYSQUOTA_WORKS=${samba_cv_SYSQUOTA_WORKS=yes}
++samba_cv_SYSQUOTA_WORKS_XFS=${samba_cv_SYSQUOTA_WORKS_XFS=yes}
++samba_cv_TRY_QUOTAS=${samba_cv_TRY_QUOTAS=no}
++samba_cv_TRY_SYS_QUOTAS=${samba_cv_TRY_SYS_QUOTAS=yes}
++samba_cv_USE_SETRESUID=${samba_cv_USE_SETRESUID=yes}
++samba_cv_WE_USE_SYS_QUOTAS=${samba_cv_WE_USE_SYS_QUOTAS=yes}
++samba_cv_WITH_AFS=${samba_cv_WITH_AFS=no}
++samba_cv_WITH_FAKE_KASERVER=${samba_cv_WITH_FAKE_KASERVER=no}
++samba_cv_WITH_QUOTAS=${samba_cv_WITH_QUOTAS=auto}
++samba_cv_WITH_SYS_QUOTAS=${samba_cv_WITH_SYS_QUOTAS=auto}
++samba_cv_WITH_VFS_AFSACL=${samba_cv_WITH_VFS_AFSACL=no}
++samba_cv_compiler_supports_ll=${samba_cv_compiler_supports_ll=yes}
++samba_cv_found_xfs_header=${samba_cv_found_xfs_header=yes}
++samba_cv_have_longlong=${samba_cv_have_longlong=yes}
++samba_cv_have_setresgid=${samba_cv_have_setresgid=yes}
++samba_cv_have_setresuid=${samba_cv_have_setresuid=yes}
++samba_cv_immediate_structures=${samba_cv_immediate_structures=yes}
++samba_cv_optimize_out_funcation_calls=${samba_cv_optimize_out_funcation_calls=yes}
++samba_cv_sig_atomic_t=${samba_cv_sig_atomic_t=yes}
++samba_cv_socklen_t=${samba_cv_socklen_t=yes}
++samba_cv_struct_timespec=${samba_cv_struct_timespec=yes}
++samba_cv_sysquotas_file=${samba_cv_sysquotas_file=lib/sysquotas_linux.c}
++samba_cv_unixsocket=${samba_cv_unixsocket=yes}
++samba_cv_volatile=${samba_cv_volatile=yes}
++
++#older sambe defines
++samba_cv_USE_SETEUID=${samba_cv_USE_SETEUID=yes}
++samba_cv_USE_SETREUID=${samba_cv_USE_SETREUID=yes}
++samba_cv_USE_SETUIDX=${samba_cv_USE_SETUIDX=yes}
++samba_cv_LINUX_LFS_SUPPORT=${samba_cv_LINUX_LFS_SUPPORT=yes}
++
++# clamav
++clamav_av_func_working_snprintf_long=${clamav_av_func_working_snprintf_long=yes}
++clamav_av_have_in_port_t=${clamav_av_have_in_port_t=yes}
++clamav_av_have_in_addr_t=${clamav_av_have_in_addr_t=yes}
++ac_cv_func_mmap_fixed_mapped=${ac_cv_func_mmap_fixed_mapped=yes}
++
++#dbus
++ac_cv_have_abstract_sockets=${ac_cv_have_abstract_sockets=yes}
++
++# lftp
++ac_cv_file___dev_ptc_=yes
++
++#mono
++mono_cv_uscore=${mono_cv_uscore=no}
++mono_cv_sizeof_sunpath=${mono_cv_sizeof_sunpath=108}
++
++# guile
++ac_cv_func_pthread_attr_getstack=${ac_cv_func_pthread_attr_getstack=yes}
++
++# gnet
++ac_cv_member_struct_sockaddr_sa_len=${ac_cv_member_struct_sockaddr_sa_len=no}
++ac_cv_gnet_have_abstract_sockets=${ac_cv_gnet_have_abstract_sockets=no}
++gnet_sockaddr_family_field_name=${gnet_sockaddr_family_field_name=ss_family}
++
++# rp-pppoe
++rpppoe_cv_pack_bitfields=${rpppoe_cv_pack_bitfields=rev}
++
++# squeak (forbid unaliged access)
++ac_cv_double_align=${ac_cv_double_align=no}                           
++ac_cv_double_order=${ac_cv_double_order=no}
+diff --git a/site/armeb-linux b/site/armeb-linux
+deleted file mode 100644
+index d8da123..0000000
+--- a/site/armeb-linux
++++ /dev/null
+@@ -1,51 +0,0 @@
+-ac_cv_func_getpgrp_void=yes
+-ac_cv_func_setpgrp_void=yes
+-ac_cv_func_setgrent_void=yes
+-ac_cv_func_malloc_0_nonnull=yes
+-ac_cv_func_malloc_works=yes
+-ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
+-ac_cv_func_posix_getgrgid_r=${ac_cv_func_posix_getgrgid_r=yes}
+-ac_cv_func_setvbuf_reversed=no
+-ac_cv_sizeof___int64=${ac_cv_sizeof___int64=0}
+-ac_cv_sizeof_char=${ac_cv_sizeof_char=1}
+-ac_cv_sizeof_int=${ac_cv_sizeof_int=4}
+-ac_cv_sizeof_long=${ac_cv_sizeof_long=4}
+-ac_cv_sizeof_long_int=${ac_cv_sizeof_long_int=4}
+-ac_cv_sizeof_long_long=${ac_cv_sizeof_long_long=8}
+-ac_cv_sizeof_short=${ac_cv_sizeof_short=2}
+-ac_cv_sizeof_short_int=${ac_cv_sizeof_short_int=2}
+-ac_cv_sizeof_size_t=${ac_cv_sizeof_size_t=4}
+-ac_cv_sizeof_void_p=${ac_cv_sizeof_void_p=4}
+-ac_cv_sizeof_long_double=${ac_cv_sizeof_long_double=8}
+-ac_cv_sizeof_char_p=${ac_cv_sizeof_char_p=4}
+-ac_cv_sizeof_unsigned=${ac_cv_sizeof_unsigned=4}
+-ac_cv_sizeof_ptrdiff_t=${glib_cv_sizeof_ptrdiff_t=4}
+-
+-ac_cv_sys_restartable_syscalls=yes
+-ac_cv_uchar=${ac_cv_uchar=no}
+-ac_cv_uint=${ac_cv_uint=yes}
+-ac_cv_ulong=${ac_cv_ulong=yes}
+-ac_cv_ushort=${ac_cv_ushort=yes}
+-
+-ac_cv_time_r_type=${ac_cv_time_r_type=POSIX}
+-
+-# samba
+-samba_cv_HAVE_GETTIMEOFDAY_TZ=${samba_cv_HAVE_GETTIMEOFDAY_TZ=yes}
+-samba_cv_USE_SETEUID=${samba_cv_USE_SETEUID=yes}
+-samba_cv_USE_SETRESUID=${samba_cv_USE_SETRESUID=yes}
+-samba_cv_USE_SETREUID=${samba_cv_USE_SETREUID=yes}
+-samba_cv_USE_SETUIDX=${samba_cv_USE_SETUIDX=yes}
+-samba_cv_have_setresgid=${samba_cv_have_setresgid=yes}
+-samba_cv_have_setresuid=${samba_cv_have_setresuid=yes}
+-samba_cv_HAVE_SENDFILE=${samba_cv_HAVE_SENDFILE=yes}
+-samba_cv_HAVE_SENDFILE64=${samba_cv_HAVE_SENDFILE64=yes}
+-samba_cv_HAVE_SECURE_MKSTEMP=${samba_cv_HAVE_SECURE_MKSTEMP=yes}
+-samba_cv_HAVE_MMAP=${samba_cv_HAVE_MMAP=yes}
+-samba_cv_HAVE_KERNEL_OPLOCKS_LINUX=${samba_cv_HAVE_KERNEL_OPLOCKS_LINUX=yes}
+-samba_cv_HAVE_KERNEL_CHANGE_NOTIFY=${samba_cv_HAVE_KERNEL_CHANGE_NOTIFY=yes}
+-samba_cv_HAVE_KERNEL_SHARE_MODES=${samba_cv_HAVE_KERNEL_SHARE_MODES=yes}
+-samba_cv_LINUX_LFS_SUPPORT=${samba_cv_LINUX_LFS_SUPPORT=yes}
+-samba_cv_STAT_STATVFS64=${samba_cv_STAT_STATVFS64=yes}
+-samba_cv_SIZEOF_OFF_T=${samba_cv_SIZEOF_OFF_T=yes}
+-samba_cv_SIZEOF_INO_T=${samba_cv_SIZEOF_INO_T=yes}
+-samba_cv_HAVE_STRUCT_FLOCK64=${samba_cv_HAVE_STRUCT_FLOCK64=yes}
+diff --git a/site/armeb-linux-gnu b/site/armeb-linux-gnu
+new file mode 100644
+index 0000000..d8da123
+--- /dev/null
++++ b/site/armeb-linux-gnu
+@@ -0,0 +1,51 @@
++ac_cv_func_getpgrp_void=yes
++ac_cv_func_setpgrp_void=yes
++ac_cv_func_setgrent_void=yes
++ac_cv_func_malloc_0_nonnull=yes
++ac_cv_func_malloc_works=yes
++ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
++ac_cv_func_posix_getgrgid_r=${ac_cv_func_posix_getgrgid_r=yes}
++ac_cv_func_setvbuf_reversed=no
++ac_cv_sizeof___int64=${ac_cv_sizeof___int64=0}
++ac_cv_sizeof_char=${ac_cv_sizeof_char=1}
++ac_cv_sizeof_int=${ac_cv_sizeof_int=4}
++ac_cv_sizeof_long=${ac_cv_sizeof_long=4}
++ac_cv_sizeof_long_int=${ac_cv_sizeof_long_int=4}
++ac_cv_sizeof_long_long=${ac_cv_sizeof_long_long=8}
++ac_cv_sizeof_short=${ac_cv_sizeof_short=2}
++ac_cv_sizeof_short_int=${ac_cv_sizeof_short_int=2}
++ac_cv_sizeof_size_t=${ac_cv_sizeof_size_t=4}
++ac_cv_sizeof_void_p=${ac_cv_sizeof_void_p=4}
++ac_cv_sizeof_long_double=${ac_cv_sizeof_long_double=8}
++ac_cv_sizeof_char_p=${ac_cv_sizeof_char_p=4}
++ac_cv_sizeof_unsigned=${ac_cv_sizeof_unsigned=4}
++ac_cv_sizeof_ptrdiff_t=${glib_cv_sizeof_ptrdiff_t=4}
++
++ac_cv_sys_restartable_syscalls=yes
++ac_cv_uchar=${ac_cv_uchar=no}
++ac_cv_uint=${ac_cv_uint=yes}
++ac_cv_ulong=${ac_cv_ulong=yes}
++ac_cv_ushort=${ac_cv_ushort=yes}
++
++ac_cv_time_r_type=${ac_cv_time_r_type=POSIX}
++
++# samba
++samba_cv_HAVE_GETTIMEOFDAY_TZ=${samba_cv_HAVE_GETTIMEOFDAY_TZ=yes}
++samba_cv_USE_SETEUID=${samba_cv_USE_SETEUID=yes}
++samba_cv_USE_SETRESUID=${samba_cv_USE_SETRESUID=yes}
++samba_cv_USE_SETREUID=${samba_cv_USE_SETREUID=yes}
++samba_cv_USE_SETUIDX=${samba_cv_USE_SETUIDX=yes}
++samba_cv_have_setresgid=${samba_cv_have_setresgid=yes}
++samba_cv_have_setresuid=${samba_cv_have_setresuid=yes}
++samba_cv_HAVE_SENDFILE=${samba_cv_HAVE_SENDFILE=yes}
++samba_cv_HAVE_SENDFILE64=${samba_cv_HAVE_SENDFILE64=yes}
++samba_cv_HAVE_SECURE_MKSTEMP=${samba_cv_HAVE_SECURE_MKSTEMP=yes}
++samba_cv_HAVE_MMAP=${samba_cv_HAVE_MMAP=yes}
++samba_cv_HAVE_KERNEL_OPLOCKS_LINUX=${samba_cv_HAVE_KERNEL_OPLOCKS_LINUX=yes}
++samba_cv_HAVE_KERNEL_CHANGE_NOTIFY=${samba_cv_HAVE_KERNEL_CHANGE_NOTIFY=yes}
++samba_cv_HAVE_KERNEL_SHARE_MODES=${samba_cv_HAVE_KERNEL_SHARE_MODES=yes}
++samba_cv_LINUX_LFS_SUPPORT=${samba_cv_LINUX_LFS_SUPPORT=yes}
++samba_cv_STAT_STATVFS64=${samba_cv_STAT_STATVFS64=yes}
++samba_cv_SIZEOF_OFF_T=${samba_cv_SIZEOF_OFF_T=yes}
++samba_cv_SIZEOF_INO_T=${samba_cv_SIZEOF_INO_T=yes}
++samba_cv_HAVE_STRUCT_FLOCK64=${samba_cv_HAVE_STRUCT_FLOCK64=yes}
+diff --git a/site/mips-common b/site/mips-common
+new file mode 100644
+index 0000000..baffaab
+--- /dev/null
++++ b/site/mips-common
+@@ -0,0 +1,14 @@
++ac_cv_func_realloc_0_nonnull=${ac_cv_func_realloc_0_nonnull=yes}
++ac_cv_func_malloc_0_nonnull=${ac_cv_func_malloc_0_nonnull=yes}
++
++# screen
++screen_cv_sys_bcopy_overlap=${screen_cv_sys_bcopy_overlap=no}
++screen_cv_sys_memcpy_overlap=${screen_cv_sys_memcpy_overlap=no}
++screen_cv_sys_memmove_overlap=${screen_cv_sys_memmove_overlap=no}
++screen_cv_sys_fifo_broken_impl=${screen_cv_sys_fifo_broken_impl=yes}
++screen_cv_sys_fifo_usable=${screen_cv_sys_fifo_usable=yes}
++screen_cv_sys_select_broken_retval=${screen_cv_sys_select_broken_retval=no}
++screen_cv_sys_sockets_nofs=${screen_cv_sys_sockets_nofs=no}
++screen_cv_sys_sockets_usable=${screen_cv_sys_sockets_usable=yes}
++screen_cv_sys_terminfo_used=${screen_cv_sys_terminfo_used=yes}
++
+diff --git a/site/mips-linux b/site/mips-linux
+deleted file mode 100644
+index 43f4aef..0000000
+--- a/site/mips-linux
++++ /dev/null
+@@ -1,115 +0,0 @@
+-
+-ac_cv_func_getpgrp_void=${ac_cv_func_getpgrp_void=yes}
+-ac_cv_func_setvbuf_reversed=${ac_cv_func_setvbuf_reversed=no}
+-ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
+-
+-# tslib, others
+-ac_cv_func_malloc_0_nonnull=${ac_cv_func_malloc_0_nonnull=yes}
+-
+-# bash
+-ac_cv_c_long_double=${ac_cv_c_long_double=no}
+-bash_cv_func_sigsetjmp=${bash_cv_func_sigsetjmp=present}
+-
+-# openssh
+-ac_cv_have_accrights_in_msghdr=${ac_cv_have_accrights_in_msghdr=no}
+-ac_cv_have_broken_snprintf=${ac_cv_have_broken_snprintf=no}
+-ac_cv_have_control_in_msghdr=${ac_cv_have_control_in_msghdr=yes}
+-ac_cv_have_openpty_ctty_bug=${ac_cv_have_openpty_ctty_bug=no}
+-ac_cv_have_space_d_name_in_struct_dirent=${ac_cv_have_space_d_name_in_struct_dirent=yes}
+-
+-# fget
+-compat_cv_func_snprintf_works=${compat_cv_func_snprintf_works=yes}
+-
+-# glib
+-glib_cv___va_copy=${glib_cv___va_copy=yes}
+-glib_cv_has__inline=${glib_cv_has__inline=yes}
+-glib_cv_has__inline__=${glib_cv_has__inline__=yes}
+-glib_cv_hasinline=${glib_cv_hasinline=yes}
+-glib_cv_long_long_format=${glib_cv_long_long_format=ll}
+-glib_cv_rtldglobal_broken=${glib_cv_rtldglobal_broken=no}
+-glib_cv_sane_realloc=${glib_cv_sane_realloc=yes}
+-glib_cv_sizeof_gmutex=${glib_cv_sizeof_gmutex=24}
+-glib_cv_sizeof_system_thread=${glib_cv_sizeof_system_thread=4}
+-glib_cv_stack_grows=${glib_cv_stack_grows=no}
+-glib_cv_uscore=${glib_cv_uscore=no}
+-glib_cv_va_copy=${glib_cv_va_copy=yes}
+-glib_cv_va_val_copy=${glib_cv_va_val_copy=yes}
+-
+-# glib-2.0
+-glib_cv_stack_grows=${glib_cv_stack_grows=no}
+-utils_cv_sys_open_max=${utils_cv_sys_open_max=1015}
+-ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
+-glib_cv_use_pid_surrogate=${glib_cv_use_pid_surrogate=yes}
+-ac_cv_func_posix_getgrgid_r=${ac_cv_func_posix_getgrgid_r=yes}
+-
+-# libpcap
+-ac_cv_linux_vers=${ac_cv_linux_vers=2}
+-ac_cv_func_getaddrinfo=${ac_cv_func_getaddrinfo=yes}
+-
+-# slrn
+-slrn_cv___va_copy=${slrn_cv___va_copy=yes}
+-slrn_cv_va_copy=${slrn_cv_va_copy=yes}
+-slrn_cv_va_val_copy=${slrn_cv_va_val_copy=yes}
+-
+-# startup-notification
+-lf_cv_sane_realloc=${lf_cv_sane_realloc=yes}
+-
+-# libidl
+-libIDL_cv_long_long_format=${libIDL_cv_long_long_format=ll}
+-
+-# ncftp
+-ac_cv_func_setpgrp_void=${ac_cv_func_setpgrp_void=yes}
+-wi_cv_struct_timeval_tv_sec=${wi_cv_struct_timeval_tv_sec=long}
+-wi_cv_struct_timeval_tv_usec=${wi_cv_struct_timeval_tv_usec=long}
+-wi_cv_unix_domain_sockets=${wi_cv_unix_domain_sockets=yes}
+-
+-# rp-pppoe
+-rpppoe_cv_pack_bitfields=${rpppoe_cv_pack_bitfields=rev}
+-
+-# db3
+-db_cv_align_t=${db_cv_align_t='unsigned long long'}
+-db_cv_alignp_t=${db_cv_alignp_t='unsigned long'}
+-db_cv_mutex=${db_cv_mutex=no}
+-db_cv_posixmutexes=${db_cv_posixmutexes=no}
+-db_cv_uimutexes=${db_cv_uimutexes=no}
+-db_cv_fcntl_f_setfd=${db_cv_fcntl_f_setfd=yes}
+-db_cv_sprintf_count=${db_cv_sprintf_count=yes}
+-db_cv_path_ar=${db_cv_path_ar=/usr/bin/ar}
+-db_cv_path_chmod=${db_cv_path_chmod=/bin/chmod}
+-db_cv_path_cp=${db_cv_path_cp=/bin/cp}
+-db_cv_path_ln=${db_cv_path_ln=/bin/ln}
+-db_cv_path_mkdir=${db_cv_path_mkdir=/bin/mkdir}
+-db_cv_path_ranlib=${db_cv_path_ranlib=/usr/bin/ranlib}
+-db_cv_path_rm=${db_cv_path_rm=/bin/rm}
+-db_cv_path_sh=${db_cv_path_sh=/bin/sh}
+-db_cv_path_strip=${db_cv_path_strip=/usr/bin/strip}
+-
+-# rrdtool
+-rd_cv_ieee_works=${rd_cv_ieee_works=yes}
+-# ac_cv_path_PERL=${ac_cv_path_PERL=no}
+-
+-# gettext
+-am_cv_func_working_getline=${am_cv_func_working_getline=yes}
+-
+-# samba
+-samba_cv_HAVE_GETTIMEOFDAY_TZ=${samba_cv_HAVE_GETTIMEOFDAY_TZ=yes}
+-
+-# vim
+-ac_cv_sizeof_int=${ac_cv_sizeof_int=4}
+-
+-# sudo
+-sudo_cv_uid_t_len=${sudo_cv_uid_t_len=10}
+-
+-# intercom
+-ac_cv_func_fnmatch_works=${ac_cv_func_fnmatch_works=yes}
+-
+-# lmbench
+-ac_cv_uint=${ac_cv_unit=yes}
+-
+-# D-BUS
+-ac_cv_func_posix_getpwnam_r=${ac_cv_func_posix_getpwnam_r=yes}
+-
+-# mono
+-cv_mono_sizeof_sunpath=108
+-mono_cv_uscore=${mono_cv_uscore=no}
+-
+diff --git a/site/mips-linux-gnu b/site/mips-linux-gnu
+new file mode 100644
+index 0000000..43f4aef
+--- /dev/null
++++ b/site/mips-linux-gnu
+@@ -0,0 +1,115 @@
++
++ac_cv_func_getpgrp_void=${ac_cv_func_getpgrp_void=yes}
++ac_cv_func_setvbuf_reversed=${ac_cv_func_setvbuf_reversed=no}
++ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
++
++# tslib, others
++ac_cv_func_malloc_0_nonnull=${ac_cv_func_malloc_0_nonnull=yes}
++
++# bash
++ac_cv_c_long_double=${ac_cv_c_long_double=no}
++bash_cv_func_sigsetjmp=${bash_cv_func_sigsetjmp=present}
++
++# openssh
++ac_cv_have_accrights_in_msghdr=${ac_cv_have_accrights_in_msghdr=no}
++ac_cv_have_broken_snprintf=${ac_cv_have_broken_snprintf=no}
++ac_cv_have_control_in_msghdr=${ac_cv_have_control_in_msghdr=yes}
++ac_cv_have_openpty_ctty_bug=${ac_cv_have_openpty_ctty_bug=no}
++ac_cv_have_space_d_name_in_struct_dirent=${ac_cv_have_space_d_name_in_struct_dirent=yes}
++
++# fget
++compat_cv_func_snprintf_works=${compat_cv_func_snprintf_works=yes}
++
++# glib
++glib_cv___va_copy=${glib_cv___va_copy=yes}
++glib_cv_has__inline=${glib_cv_has__inline=yes}
++glib_cv_has__inline__=${glib_cv_has__inline__=yes}
++glib_cv_hasinline=${glib_cv_hasinline=yes}
++glib_cv_long_long_format=${glib_cv_long_long_format=ll}
++glib_cv_rtldglobal_broken=${glib_cv_rtldglobal_broken=no}
++glib_cv_sane_realloc=${glib_cv_sane_realloc=yes}
++glib_cv_sizeof_gmutex=${glib_cv_sizeof_gmutex=24}
++glib_cv_sizeof_system_thread=${glib_cv_sizeof_system_thread=4}
++glib_cv_stack_grows=${glib_cv_stack_grows=no}
++glib_cv_uscore=${glib_cv_uscore=no}
++glib_cv_va_copy=${glib_cv_va_copy=yes}
++glib_cv_va_val_copy=${glib_cv_va_val_copy=yes}
++
++# glib-2.0
++glib_cv_stack_grows=${glib_cv_stack_grows=no}
++utils_cv_sys_open_max=${utils_cv_sys_open_max=1015}
++ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
++glib_cv_use_pid_surrogate=${glib_cv_use_pid_surrogate=yes}
++ac_cv_func_posix_getgrgid_r=${ac_cv_func_posix_getgrgid_r=yes}
++
++# libpcap
++ac_cv_linux_vers=${ac_cv_linux_vers=2}
++ac_cv_func_getaddrinfo=${ac_cv_func_getaddrinfo=yes}
++
++# slrn
++slrn_cv___va_copy=${slrn_cv___va_copy=yes}
++slrn_cv_va_copy=${slrn_cv_va_copy=yes}
++slrn_cv_va_val_copy=${slrn_cv_va_val_copy=yes}
++
++# startup-notification
++lf_cv_sane_realloc=${lf_cv_sane_realloc=yes}
++
++# libidl
++libIDL_cv_long_long_format=${libIDL_cv_long_long_format=ll}
++
++# ncftp
++ac_cv_func_setpgrp_void=${ac_cv_func_setpgrp_void=yes}
++wi_cv_struct_timeval_tv_sec=${wi_cv_struct_timeval_tv_sec=long}
++wi_cv_struct_timeval_tv_usec=${wi_cv_struct_timeval_tv_usec=long}
++wi_cv_unix_domain_sockets=${wi_cv_unix_domain_sockets=yes}
++
++# rp-pppoe
++rpppoe_cv_pack_bitfields=${rpppoe_cv_pack_bitfields=rev}
++
++# db3
++db_cv_align_t=${db_cv_align_t='unsigned long long'}
++db_cv_alignp_t=${db_cv_alignp_t='unsigned long'}
++db_cv_mutex=${db_cv_mutex=no}
++db_cv_posixmutexes=${db_cv_posixmutexes=no}
++db_cv_uimutexes=${db_cv_uimutexes=no}
++db_cv_fcntl_f_setfd=${db_cv_fcntl_f_setfd=yes}
++db_cv_sprintf_count=${db_cv_sprintf_count=yes}
++db_cv_path_ar=${db_cv_path_ar=/usr/bin/ar}
++db_cv_path_chmod=${db_cv_path_chmod=/bin/chmod}
++db_cv_path_cp=${db_cv_path_cp=/bin/cp}
++db_cv_path_ln=${db_cv_path_ln=/bin/ln}
++db_cv_path_mkdir=${db_cv_path_mkdir=/bin/mkdir}
++db_cv_path_ranlib=${db_cv_path_ranlib=/usr/bin/ranlib}
++db_cv_path_rm=${db_cv_path_rm=/bin/rm}
++db_cv_path_sh=${db_cv_path_sh=/bin/sh}
++db_cv_path_strip=${db_cv_path_strip=/usr/bin/strip}
++
++# rrdtool
++rd_cv_ieee_works=${rd_cv_ieee_works=yes}
++# ac_cv_path_PERL=${ac_cv_path_PERL=no}
++
++# gettext
++am_cv_func_working_getline=${am_cv_func_working_getline=yes}
++
++# samba
++samba_cv_HAVE_GETTIMEOFDAY_TZ=${samba_cv_HAVE_GETTIMEOFDAY_TZ=yes}
++
++# vim
++ac_cv_sizeof_int=${ac_cv_sizeof_int=4}
++
++# sudo
++sudo_cv_uid_t_len=${sudo_cv_uid_t_len=10}
++
++# intercom
++ac_cv_func_fnmatch_works=${ac_cv_func_fnmatch_works=yes}
++
++# lmbench
++ac_cv_uint=${ac_cv_unit=yes}
++
++# D-BUS
++ac_cv_func_posix_getpwnam_r=${ac_cv_func_posix_getpwnam_r=yes}
++
++# mono
++cv_mono_sizeof_sunpath=108
++mono_cv_uscore=${mono_cv_uscore=no}
++
+diff --git a/site/mipsel-linux b/site/mipsel-linux
+deleted file mode 100644
+index bf82d4e..0000000
+--- a/site/mipsel-linux
++++ /dev/null
+@@ -1,119 +0,0 @@
+-
+-ac_cv_func_getpgrp_void=${ac_cv_func_getpgrp_void=yes}
+-ac_cv_func_setvbuf_reversed=${ac_cv_func_setvbuf_reversed=no}
+-ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
+-
+-# tslib, others
+-ac_cv_func_malloc_0_nonnull=${ac_cv_func_malloc_0_nonnull=yes}
+-
+-# mysql
+-ac_cv_sys_restartable_syscalls=${ac_cv_sys_restartable_syscalls=yes}
+-ac_cv_conv_longlong_to_float=${ac_cv_conv_longlong_to_float=yes}
+-
+-# bash
+-ac_cv_c_long_double=${ac_cv_c_long_double=no}
+-bash_cv_func_sigsetjmp=${bash_cv_func_sigsetjmp=present}
+-
+-# openssh
+-ac_cv_have_accrights_in_msghdr=${ac_cv_have_accrights_in_msghdr=no}
+-ac_cv_have_broken_snprintf=${ac_cv_have_broken_snprintf=no}
+-ac_cv_have_control_in_msghdr=${ac_cv_have_control_in_msghdr=yes}
+-ac_cv_have_openpty_ctty_bug=${ac_cv_have_openpty_ctty_bug=no}
+-ac_cv_have_space_d_name_in_struct_dirent=${ac_cv_have_space_d_name_in_struct_dirent=yes}
+-
+-# fget
+-compat_cv_func_snprintf_works=${compat_cv_func_snprintf_works=yes}
+-
+-# glib
+-glib_cv___va_copy=${glib_cv___va_copy=yes}
+-glib_cv_has__inline=${glib_cv_has__inline=yes}
+-glib_cv_has__inline__=${glib_cv_has__inline__=yes}
+-glib_cv_hasinline=${glib_cv_hasinline=yes}
+-glib_cv_long_long_format=${glib_cv_long_long_format=ll}
+-glib_cv_rtldglobal_broken=${glib_cv_rtldglobal_broken=no}
+-glib_cv_sane_realloc=${glib_cv_sane_realloc=yes}
+-glib_cv_sizeof_gmutex=${glib_cv_sizeof_gmutex=24}
+-glib_cv_sizeof_system_thread=${glib_cv_sizeof_system_thread=4}
+-glib_cv_stack_grows=${glib_cv_stack_grows=no}
+-glib_cv_uscore=${glib_cv_uscore=no}
+-glib_cv_va_copy=${glib_cv_va_copy=yes}
+-glib_cv_va_val_copy=${glib_cv_va_val_copy=yes}
+-
+-# glib-2.0
+-glib_cv_stack_grows=${glib_cv_stack_grows=no}
+-utils_cv_sys_open_max=${utils_cv_sys_open_max=1015}
+-ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
+-glib_cv_use_pid_surrogate=${glib_cv_use_pid_surrogate=yes}
+-ac_cv_func_posix_getgrgid_r=${ac_cv_func_posix_getgrgid_r=yes}
+-
+-# libpcap
+-ac_cv_linux_vers=${ac_cv_linux_vers=2}
+-ac_cv_func_getaddrinfo=${ac_cv_func_getaddrinfo=yes}
+-
+-# slrn
+-slrn_cv___va_copy=${slrn_cv___va_copy=yes}
+-slrn_cv_va_copy=${slrn_cv_va_copy=yes}
+-slrn_cv_va_val_copy=${slrn_cv_va_val_copy=yes}
+-
+-# startup-notification
+-lf_cv_sane_realloc=${lf_cv_sane_realloc=yes}
+-
+-# libidl
+-libIDL_cv_long_long_format=${libIDL_cv_long_long_format=ll}
+-
+-# ncftp
+-ac_cv_func_setpgrp_void=${ac_cv_func_setpgrp_void=yes}
+-wi_cv_struct_timeval_tv_sec=${wi_cv_struct_timeval_tv_sec=long}
+-wi_cv_struct_timeval_tv_usec=${wi_cv_struct_timeval_tv_usec=long}
+-wi_cv_unix_domain_sockets=${wi_cv_unix_domain_sockets=yes}
+-
+-# rp-pppoe
+-rpppoe_cv_pack_bitfields=${rpppoe_cv_pack_bitfields=rev}
+-
+-# db3
+-db_cv_align_t=${db_cv_align_t='unsigned long long'}
+-db_cv_alignp_t=${db_cv_alignp_t='unsigned long'}
+-db_cv_mutex=${db_cv_mutex=no}
+-db_cv_posixmutexes=${db_cv_posixmutexes=no}
+-db_cv_uimutexes=${db_cv_uimutexes=no}
+-db_cv_fcntl_f_setfd=${db_cv_fcntl_f_setfd=yes}
+-db_cv_sprintf_count=${db_cv_sprintf_count=yes}
+-db_cv_path_ar=${db_cv_path_ar=/usr/bin/ar}
+-db_cv_path_chmod=${db_cv_path_chmod=/bin/chmod}
+-db_cv_path_cp=${db_cv_path_cp=/bin/cp}
+-db_cv_path_ln=${db_cv_path_ln=/bin/ln}
+-db_cv_path_mkdir=${db_cv_path_mkdir=/bin/mkdir}
+-db_cv_path_ranlib=${db_cv_path_ranlib=/usr/bin/ranlib}
+-db_cv_path_rm=${db_cv_path_rm=/bin/rm}
+-db_cv_path_sh=${db_cv_path_sh=/bin/sh}
+-db_cv_path_strip=${db_cv_path_strip=/usr/bin/strip}
+-
+-# rrdtool
+-rd_cv_ieee_works=${rd_cv_ieee_works=yes}
+-# ac_cv_path_PERL=${ac_cv_path_PERL=no}
+-
+-# gettext
+-am_cv_func_working_getline=${am_cv_func_working_getline=yes}
+-
+-# samba
+-samba_cv_HAVE_GETTIMEOFDAY_TZ=${samba_cv_HAVE_GETTIMEOFDAY_TZ=yes}
+-
+-# vim
+-ac_cv_sizeof_int=${ac_cv_sizeof_int=4}
+-
+-# sudo
+-sudo_cv_uid_t_len=${sudo_cv_uid_t_len=10}
+-
+-# intercom
+-ac_cv_func_fnmatch_works=${ac_cv_func_fnmatch_works=yes}
+-
+-#lmbench
+-ac_cv_uint=${ac_cv_unit=yes}
+-
+-# D-BUS
+-ac_cv_func_posix_getpwnam_r=${ac_cv_func_posix_getpwnam_r=yes}
+-
+-# mono
+-cv_mono_sizeof_sunpath=108
+-mono_cv_uscore=${mono_cv_uscore=no}
+-
+diff --git a/site/mipsel-linux-gnu b/site/mipsel-linux-gnu
+new file mode 100644
+index 0000000..bf82d4e
+--- /dev/null
++++ b/site/mipsel-linux-gnu
+@@ -0,0 +1,119 @@
++
++ac_cv_func_getpgrp_void=${ac_cv_func_getpgrp_void=yes}
++ac_cv_func_setvbuf_reversed=${ac_cv_func_setvbuf_reversed=no}
++ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
++
++# tslib, others
++ac_cv_func_malloc_0_nonnull=${ac_cv_func_malloc_0_nonnull=yes}
++
++# mysql
++ac_cv_sys_restartable_syscalls=${ac_cv_sys_restartable_syscalls=yes}
++ac_cv_conv_longlong_to_float=${ac_cv_conv_longlong_to_float=yes}
++
++# bash
++ac_cv_c_long_double=${ac_cv_c_long_double=no}
++bash_cv_func_sigsetjmp=${bash_cv_func_sigsetjmp=present}
++
++# openssh
++ac_cv_have_accrights_in_msghdr=${ac_cv_have_accrights_in_msghdr=no}
++ac_cv_have_broken_snprintf=${ac_cv_have_broken_snprintf=no}
++ac_cv_have_control_in_msghdr=${ac_cv_have_control_in_msghdr=yes}
++ac_cv_have_openpty_ctty_bug=${ac_cv_have_openpty_ctty_bug=no}
++ac_cv_have_space_d_name_in_struct_dirent=${ac_cv_have_space_d_name_in_struct_dirent=yes}
++
++# fget
++compat_cv_func_snprintf_works=${compat_cv_func_snprintf_works=yes}
++
++# glib
++glib_cv___va_copy=${glib_cv___va_copy=yes}
++glib_cv_has__inline=${glib_cv_has__inline=yes}
++glib_cv_has__inline__=${glib_cv_has__inline__=yes}
++glib_cv_hasinline=${glib_cv_hasinline=yes}
++glib_cv_long_long_format=${glib_cv_long_long_format=ll}
++glib_cv_rtldglobal_broken=${glib_cv_rtldglobal_broken=no}
++glib_cv_sane_realloc=${glib_cv_sane_realloc=yes}
++glib_cv_sizeof_gmutex=${glib_cv_sizeof_gmutex=24}
++glib_cv_sizeof_system_thread=${glib_cv_sizeof_system_thread=4}
++glib_cv_stack_grows=${glib_cv_stack_grows=no}
++glib_cv_uscore=${glib_cv_uscore=no}
++glib_cv_va_copy=${glib_cv_va_copy=yes}
++glib_cv_va_val_copy=${glib_cv_va_val_copy=yes}
++
++# glib-2.0
++glib_cv_stack_grows=${glib_cv_stack_grows=no}
++utils_cv_sys_open_max=${utils_cv_sys_open_max=1015}
++ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
++glib_cv_use_pid_surrogate=${glib_cv_use_pid_surrogate=yes}
++ac_cv_func_posix_getgrgid_r=${ac_cv_func_posix_getgrgid_r=yes}
++
++# libpcap
++ac_cv_linux_vers=${ac_cv_linux_vers=2}
++ac_cv_func_getaddrinfo=${ac_cv_func_getaddrinfo=yes}
++
++# slrn
++slrn_cv___va_copy=${slrn_cv___va_copy=yes}
++slrn_cv_va_copy=${slrn_cv_va_copy=yes}
++slrn_cv_va_val_copy=${slrn_cv_va_val_copy=yes}
++
++# startup-notification
++lf_cv_sane_realloc=${lf_cv_sane_realloc=yes}
++
++# libidl
++libIDL_cv_long_long_format=${libIDL_cv_long_long_format=ll}
++
++# ncftp
++ac_cv_func_setpgrp_void=${ac_cv_func_setpgrp_void=yes}
++wi_cv_struct_timeval_tv_sec=${wi_cv_struct_timeval_tv_sec=long}
++wi_cv_struct_timeval_tv_usec=${wi_cv_struct_timeval_tv_usec=long}
++wi_cv_unix_domain_sockets=${wi_cv_unix_domain_sockets=yes}
++
++# rp-pppoe
++rpppoe_cv_pack_bitfields=${rpppoe_cv_pack_bitfields=rev}
++
++# db3
++db_cv_align_t=${db_cv_align_t='unsigned long long'}
++db_cv_alignp_t=${db_cv_alignp_t='unsigned long'}
++db_cv_mutex=${db_cv_mutex=no}
++db_cv_posixmutexes=${db_cv_posixmutexes=no}
++db_cv_uimutexes=${db_cv_uimutexes=no}
++db_cv_fcntl_f_setfd=${db_cv_fcntl_f_setfd=yes}
++db_cv_sprintf_count=${db_cv_sprintf_count=yes}
++db_cv_path_ar=${db_cv_path_ar=/usr/bin/ar}
++db_cv_path_chmod=${db_cv_path_chmod=/bin/chmod}
++db_cv_path_cp=${db_cv_path_cp=/bin/cp}
++db_cv_path_ln=${db_cv_path_ln=/bin/ln}
++db_cv_path_mkdir=${db_cv_path_mkdir=/bin/mkdir}
++db_cv_path_ranlib=${db_cv_path_ranlib=/usr/bin/ranlib}
++db_cv_path_rm=${db_cv_path_rm=/bin/rm}
++db_cv_path_sh=${db_cv_path_sh=/bin/sh}
++db_cv_path_strip=${db_cv_path_strip=/usr/bin/strip}
++
++# rrdtool
++rd_cv_ieee_works=${rd_cv_ieee_works=yes}
++# ac_cv_path_PERL=${ac_cv_path_PERL=no}
++
++# gettext
++am_cv_func_working_getline=${am_cv_func_working_getline=yes}
++
++# samba
++samba_cv_HAVE_GETTIMEOFDAY_TZ=${samba_cv_HAVE_GETTIMEOFDAY_TZ=yes}
++
++# vim
++ac_cv_sizeof_int=${ac_cv_sizeof_int=4}
++
++# sudo
++sudo_cv_uid_t_len=${sudo_cv_uid_t_len=10}
++
++# intercom
++ac_cv_func_fnmatch_works=${ac_cv_func_fnmatch_works=yes}
++
++#lmbench
++ac_cv_uint=${ac_cv_unit=yes}
++
++# D-BUS
++ac_cv_func_posix_getpwnam_r=${ac_cv_func_posix_getpwnam_r=yes}
++
++# mono
++cv_mono_sizeof_sunpath=108
++mono_cv_uscore=${mono_cv_uscore=no}
++
+diff --git a/site/powerpc-linux b/site/powerpc-linux
+deleted file mode 100644
+index bea14d5..0000000
+--- a/site/powerpc-linux
++++ /dev/null
+@@ -1,5 +0,0 @@
+-# libc
+-libc_cv_ppc_machine=${libc_cv_ppc_machine=yes}
+-libc_cv_mlong_double_128ibm=${libc_cv_mlong_double_128ibm=yes}
+-libc_cv_mabi_ibmlongdouble=${libc_cv_mabi_ibmlongdouble=yes}
+-libc_cv_mlong_double_128=${libc_cv_mlong_double_128=yes}
+diff --git a/site/powerpc-linux-gnu b/site/powerpc-linux-gnu
+new file mode 100644
+index 0000000..bea14d5
+--- /dev/null
++++ b/site/powerpc-linux-gnu
+@@ -0,0 +1,5 @@
++# libc
++libc_cv_ppc_machine=${libc_cv_ppc_machine=yes}
++libc_cv_mlong_double_128ibm=${libc_cv_mlong_double_128ibm=yes}
++libc_cv_mabi_ibmlongdouble=${libc_cv_mabi_ibmlongdouble=yes}
++libc_cv_mlong_double_128=${libc_cv_mlong_double_128=yes}
+diff --git a/site/sparc-linux b/site/sparc-linux
+deleted file mode 100644
+index ea6386b..0000000
+--- a/site/sparc-linux
++++ /dev/null
+@@ -1,55 +0,0 @@
+-ac_cv_func_getpgrp_void=yes
+-ac_cv_func_setpgrp_void=yes
+-ac_cv_func_setgrent_void=yes
+-ac_cv_func_malloc_0_nonnull=yes
+-ac_cv_func_malloc_works=yes
+-ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
+-ac_cv_func_setvbuf_reversed=no
+-ac_cv_sizeof___int64=${ac_cv_sizeof___int64=0}
+-ac_cv_sizeof_char=${ac_cv_sizeof_char=1}
+-ac_cv_sizeof_int=${ac_cv_sizeof_int=4}
+-ac_cv_sizeof_long=${ac_cv_sizeof_long=4}
+-ac_cv_sizeof_long_int=${ac_cv_sizeof_long_int=4}
+-ac_cv_sizeof_long_long=${ac_cv_sizeof_long_long=8}
+-ac_cv_sizeof_short=${ac_cv_sizeof_short=2}
+-ac_cv_sizeof_short_int=${ac_cv_sizeof_short_int=2}
+-ac_cv_sizeof_size_t=${ac_cv_sizeof_size_t=4}
+-ac_cv_sizeof_void_p=${ac_cv_sizeof_void_p=4}
+-ac_cv_sizeof_long_double=${ac_cv_sizeof_long_double=8}
+-ac_cv_sizeof_unsigned_short=${ac_cv_sizeof_unsigned_short=2}
+-ac_cv_sizeof_unsigned_int=${ac_cv_sizeof_unsigned_int=4}
+-ac_cv_sizeof_unsigned_long=${ac_cv_sizeof_unsigned_long=4}
+-ac_cv_sizeof_unsigned_long_long=${ac_cv_sizeof_unsigned_long_long=8}
+-ac_cv_sizeof_signed_char=${ac_cv_sizeof_signed_char=1}
+-
+-ac_cv_sizeof_long_double=${ac_cv_sizeof_long_double=8}
+-libc_cv_mlong_double_128ibm=${libc_cv_mlong_double_128ibm=yes}
+-libc_cv_mlong_double_128=${libc_cv_mlong_double_128=yes}
+-ac_cv_alignof_CORBA_long_double=4
+-ac_cv_c_long_double=${ac_cv_c_long_double=yes}
+-
+-
+-ac_cv_sys_restartable_syscalls=yes
+-ac_cv_uchar=${ac_cv_uchar=no}
+-ac_cv_uint=${ac_cv_uint=yes}
+-ac_cv_ulong=${ac_cv_ulong=yes}
+-ac_cv_ushort=${ac_cv_ushort=yes}
+-
+-ac_cv_time_r_type=${ac_cv_time_r_type=POSIX}
+-cookie_io_functions_use_off64_t=${cookie_io_functions_use_off64_t=yes}
+-
+-# minicom
+-am_cv_sys_posix_termios=${am_cv_sys_posix_termios=yes}
+-
+-
+-# gettext
+-am_cv_func_working_getline=${am_cv_func_working_getline=yes}
+-
+-#glib
+-glib_cv_sizeof_system_thread=${glib_cv_sizeof_system_thread=4}
+-glib_cv_sizeof_gmutex=${glib_cv_sizeof_gmutex=24} 
+-glib_cv_uscore=${glib_cv_uscore=no}
+-glib_cv_stack_grows=${glib_cv_stack_grows=no}
+-
+-#linux
+-ac_cv_linux_vers=${ac_cv_linux_vers=2}
+diff --git a/site/sparc-linux-gnu b/site/sparc-linux-gnu
+new file mode 100644
+index 0000000..ea6386b
+--- /dev/null
++++ b/site/sparc-linux-gnu
+@@ -0,0 +1,55 @@
++ac_cv_func_getpgrp_void=yes
++ac_cv_func_setpgrp_void=yes
++ac_cv_func_setgrent_void=yes
++ac_cv_func_malloc_0_nonnull=yes
++ac_cv_func_malloc_works=yes
++ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
++ac_cv_func_setvbuf_reversed=no
++ac_cv_sizeof___int64=${ac_cv_sizeof___int64=0}
++ac_cv_sizeof_char=${ac_cv_sizeof_char=1}
++ac_cv_sizeof_int=${ac_cv_sizeof_int=4}
++ac_cv_sizeof_long=${ac_cv_sizeof_long=4}
++ac_cv_sizeof_long_int=${ac_cv_sizeof_long_int=4}
++ac_cv_sizeof_long_long=${ac_cv_sizeof_long_long=8}
++ac_cv_sizeof_short=${ac_cv_sizeof_short=2}
++ac_cv_sizeof_short_int=${ac_cv_sizeof_short_int=2}
++ac_cv_sizeof_size_t=${ac_cv_sizeof_size_t=4}
++ac_cv_sizeof_void_p=${ac_cv_sizeof_void_p=4}
++ac_cv_sizeof_long_double=${ac_cv_sizeof_long_double=8}
++ac_cv_sizeof_unsigned_short=${ac_cv_sizeof_unsigned_short=2}
++ac_cv_sizeof_unsigned_int=${ac_cv_sizeof_unsigned_int=4}
++ac_cv_sizeof_unsigned_long=${ac_cv_sizeof_unsigned_long=4}
++ac_cv_sizeof_unsigned_long_long=${ac_cv_sizeof_unsigned_long_long=8}
++ac_cv_sizeof_signed_char=${ac_cv_sizeof_signed_char=1}
++
++ac_cv_sizeof_long_double=${ac_cv_sizeof_long_double=8}
++libc_cv_mlong_double_128ibm=${libc_cv_mlong_double_128ibm=yes}
++libc_cv_mlong_double_128=${libc_cv_mlong_double_128=yes}
++ac_cv_alignof_CORBA_long_double=4
++ac_cv_c_long_double=${ac_cv_c_long_double=yes}
++
++
++ac_cv_sys_restartable_syscalls=yes
++ac_cv_uchar=${ac_cv_uchar=no}
++ac_cv_uint=${ac_cv_uint=yes}
++ac_cv_ulong=${ac_cv_ulong=yes}
++ac_cv_ushort=${ac_cv_ushort=yes}
++
++ac_cv_time_r_type=${ac_cv_time_r_type=POSIX}
++cookie_io_functions_use_off64_t=${cookie_io_functions_use_off64_t=yes}
++
++# minicom
++am_cv_sys_posix_termios=${am_cv_sys_posix_termios=yes}
++
++
++# gettext
++am_cv_func_working_getline=${am_cv_func_working_getline=yes}
++
++#glib
++glib_cv_sizeof_system_thread=${glib_cv_sizeof_system_thread=4}
++glib_cv_sizeof_gmutex=${glib_cv_sizeof_gmutex=24} 
++glib_cv_uscore=${glib_cv_uscore=no}
++glib_cv_stack_grows=${glib_cv_stack_grows=no}
++
++#linux
++ac_cv_linux_vers=${ac_cv_linux_vers=2}
+diff --git a/site/x86_64-linux b/site/x86_64-linux
+deleted file mode 100644
+index 9180cd6..0000000
+--- a/site/x86_64-linux
++++ /dev/null
+@@ -1,97 +0,0 @@
+-ac_cv_func_getpgrp_void=${ac_cv_func_getpgrp_void=yes}
+-ac_cv_func_getpwuid_r=${ac_cv_func_getpwuid_r=yes}
+-ac_cv_func_lstat_dereferences_slashed_symlink=${ac_cv_func_lstat_dereferences_slashed_symlink=yes}
+-ac_cv_func_lstat_empty_string_bug=${ac_cv_func_lstat_empty_string_bug=no}
+-ac_cv_func_malloc_0_nonnull=${ac_cv_func_malloc_0_nonnull=yes}
+-ac_cv_func_posix_getpwnam_r=${ac_cv_func_posix_getpwnam_r=yes}
+-ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
+-ac_cv_func_setpgrp_void=${ac_cv_func_setpgrp_void=yes}
+-ac_cv_func_setvbuf_reversed=${ac_cv_func_setvbuf_reversed=no}
+-ac_cv_func_stat_empty_string_bug=${ac_cv_func_stat_empty_string_bug=no}
+-ac_cv_func_stat_ignores_trailing_slash=${ac_cv_func_stat_ignores_trailing_slash=no}
+-ac_libnet_have_packet_socket=${ac_libnet_have_packet_socket=yes}
+-ac_cv_linux_vers=${ac_cv_linux_vers=2}
+-ac_cv_need_trio=${ac_cv_need_trio=no}
+-ac_cv_sizeof_char=${ac_cv_sizeof_char=1}
+-ac_cv_sizeof_int=${ac_cv_sizeof_int=4}
+-ac_cv_sizeof___int64=${ac_cv_sizeof___int64=0}
+-ac_cv_sizeof_long=${ac_cv_sizeof_long=8}
+-ac_cv_sizeof_long_double=${ac_cv_sizeof_long_double=16}
+-ac_cv_sizeof_long_int=${ac_cv_sizeof_long_int=8}
+-ac_cv_sizeof_long_long=${ac_cv_sizeof_long_long=8}
+-ac_cv_sizeof_off_t=${ac_cv_sizeof_off_t=8}
+-ac_cv_sizeof_short=${ac_cv_sizeof_short=2}
+-ac_cv_sizeof_short_int=${ac_cv_sizeof_short_int=2}
+-ac_cv_sizeof_size_t=${ac_cv_sizeof_size_t=8}
+-ac_cv_sizeof_void_p=${ac_cv_sizeof_void_p=8}
+-ac_cv_strerror_r_SUSv3=${ac_cv_strerror_r_SUSv3=no}
+-db_cv_alignp_t=${db_cv_alignp_t='unsigned long long'}
+-db_cv_align_t=${db_cv_align_t='unsigned long long'}
+-db_cv_fcntl_f_setfd=${db_cv_fcntl_f_setfd=yes}
+-db_cv_mutex=${db_cv_mutex=POSIX/pthreads/library}
+-db_cv_path_ar=${db_cv_path_ar=/usr/bin/ar}
+-db_cv_path_chmod=${db_cv_path_chmod=/bin/chmod}
+-db_cv_path_cp=${db_cv_path_cp=/bin/cp}
+-db_cv_path_ln=${db_cv_path_ln=/bin/ln}
+-db_cv_path_mkdir=${db_cv_path_mkdir=/bin/mkdir}
+-db_cv_path_ranlib=${db_cv_path_ranlib=/usr/bin/ranlib}
+-db_cv_path_rm=${db_cv_path_rm=/bin/rm}
+-db_cv_path_sh=${db_cv_path_sh=/bin/sh}
+-db_cv_path_strip=${db_cv_path_strip=/usr/bin/strip}
+-db_cv_posixmutexes=${db_cv_posixmutexes=no}
+-db_cv_sprintf_count=${db_cv_sprintf_count=yes}
+-db_cv_uimutexes=${db_cv_uimutexes=no}
+-
+-# glib
+-glib_cv_hasinline=${glib_cv_hasinline=yes}
+-glib_cv_has__inline=${glib_cv_has__inline=yes}
+-glib_cv_has__inline__=${glib_cv_has__inline__=yes}
+-glib_cv_long_long_format=${glib_cv_long_long_format=ll}
+-glib_cv_rtldglobal_broken=${glib_cv_rtldglobal_broken=yes}
+-glib_cv_sane_realloc=${glib_cv_sane_realloc=yes}
+-glib_cv_sizeof_gmutex=${glib_cv_sizeof_gmutex=40}
+-glib_cv_sizeof_intmax_t=${glib_cv_sizeof_intmax_t=8}
+-glib_cv_sizeof_ptrdiff_t=${glib_cv_sizeof_ptrdiff_t=8}
+-glib_cv_sizeof_size_t=${glib_cv_sizeof_size_t=8}
+-glib_cv_sizeof_system_thread=${glib_cv_sizeof_system_thread=8}
+-glib_cv_stack_grows=${glib_cv_stack_grows=no}
+-glib_cv_sys_pthread_cond_timedwait_posix=${glib_cv_sys_pthread_cond_timedwait_posix=yes}
+-glib_cv_sys_pthread_getspecific_posix=${glib_cv_sys_pthread_getspecific_posix=yes}
+-glib_cv_sys_pthread_mutex_trylock_posix=${glib_cv_sys_pthread_mutex_trylock_posix=yes}
+-glib_cv_uscore=${glib_cv_uscore=no}
+-glib_cv___va_copy=${glib_cv___va_copy=yes}
+-glib_cv_va_copy=${glib_cv_va_copy=yes}
+-glib_cv_va_val_copy=${glib_cv_va_val_copy=no}
+-ac_cv_func_posix_getgrgid_r=${ac_cv_func_posix_getgrgid_r=yes}
+-
+-lftp_cv_va_copy=${lftp_cv_va_copy=yes}
+-nano_cv_func_regexec_segv_emptystr=${nano_cv_func_regexec_segv_emptystr=no}
+-samba_cv_HAVE_VA_COPY=${samba_cv_HAVE_VA_COPY=yes}
+-screen_cv_sys_bcopy_overlap=${screen_cv_sys_bcopy_overlap=no}
+-screen_cv_sys_fifo_broken_impl=${screen_cv_sys_fifo_broken_impl=yes}
+-screen_cv_sys_fifo_usable=${screen_cv_sys_fifo_usable=yes}
+-screen_cv_sys_memcpy_overlap=${screen_cv_sys_memcpy_overlap=no}
+-screen_cv_sys_memmove_overlap=${screen_cv_sys_memmove_overlap=no}
+-screen_cv_sys_select_broken_retval=${screen_cv_sys_select_broken_retval=no}
+-screen_cv_sys_sockets_nofs=${screen_cv_sys_sockets_nofs=no}
+-screen_cv_sys_sockets_usable=${screen_cv_sys_sockets_usable=yes}
+-screen_cv_sys_terminfo_used=${screen_cv_sys_terminfo_used=yes}
+-utils_cv_sys_open_max=${utils_cv_sys_open_max=1015}
+-
+-# gettext
+-am_cv_func_working_getline=${am_cv_func_working_getline=yes}
+-
+-#gcc
+-ac_cv_lib_m_sin=${ac_cv_lib_m_sin=yes}
+-
+-# eds-dbus
+-ac_cv_libiconv_utf8=${ac_cv_libiconv_utf8=yes}
+-
+-#dbus
+-ac_cv_have_abstract_sockets=${ac_cv_have_abstract_sockets=yes}
+-
+-# p3scan / quagga
+-ac_cv_func_realloc_0_nonnull=${ac_cv_func_realloc_0_nonnull=yes}
+-
+-# bash
+-bash_cv_func_sigsetjmp=${bash_cv_func_sigsetjmp=present}
+diff --git a/site/x86_64-linux-gnu b/site/x86_64-linux-gnu
+new file mode 100644
+index 0000000..9180cd6
+--- /dev/null
++++ b/site/x86_64-linux-gnu
+@@ -0,0 +1,97 @@
++ac_cv_func_getpgrp_void=${ac_cv_func_getpgrp_void=yes}
++ac_cv_func_getpwuid_r=${ac_cv_func_getpwuid_r=yes}
++ac_cv_func_lstat_dereferences_slashed_symlink=${ac_cv_func_lstat_dereferences_slashed_symlink=yes}
++ac_cv_func_lstat_empty_string_bug=${ac_cv_func_lstat_empty_string_bug=no}
++ac_cv_func_malloc_0_nonnull=${ac_cv_func_malloc_0_nonnull=yes}
++ac_cv_func_posix_getpwnam_r=${ac_cv_func_posix_getpwnam_r=yes}
++ac_cv_func_posix_getpwuid_r=${ac_cv_func_posix_getpwuid_r=yes}
++ac_cv_func_setpgrp_void=${ac_cv_func_setpgrp_void=yes}
++ac_cv_func_setvbuf_reversed=${ac_cv_func_setvbuf_reversed=no}
++ac_cv_func_stat_empty_string_bug=${ac_cv_func_stat_empty_string_bug=no}
++ac_cv_func_stat_ignores_trailing_slash=${ac_cv_func_stat_ignores_trailing_slash=no}
++ac_libnet_have_packet_socket=${ac_libnet_have_packet_socket=yes}
++ac_cv_linux_vers=${ac_cv_linux_vers=2}
++ac_cv_need_trio=${ac_cv_need_trio=no}
++ac_cv_sizeof_char=${ac_cv_sizeof_char=1}
++ac_cv_sizeof_int=${ac_cv_sizeof_int=4}
++ac_cv_sizeof___int64=${ac_cv_sizeof___int64=0}
++ac_cv_sizeof_long=${ac_cv_sizeof_long=8}
++ac_cv_sizeof_long_double=${ac_cv_sizeof_long_double=16}
++ac_cv_sizeof_long_int=${ac_cv_sizeof_long_int=8}
++ac_cv_sizeof_long_long=${ac_cv_sizeof_long_long=8}
++ac_cv_sizeof_off_t=${ac_cv_sizeof_off_t=8}
++ac_cv_sizeof_short=${ac_cv_sizeof_short=2}
++ac_cv_sizeof_short_int=${ac_cv_sizeof_short_int=2}
++ac_cv_sizeof_size_t=${ac_cv_sizeof_size_t=8}
++ac_cv_sizeof_void_p=${ac_cv_sizeof_void_p=8}
++ac_cv_strerror_r_SUSv3=${ac_cv_strerror_r_SUSv3=no}
++db_cv_alignp_t=${db_cv_alignp_t='unsigned long long'}
++db_cv_align_t=${db_cv_align_t='unsigned long long'}
++db_cv_fcntl_f_setfd=${db_cv_fcntl_f_setfd=yes}
++db_cv_mutex=${db_cv_mutex=POSIX/pthreads/library}
++db_cv_path_ar=${db_cv_path_ar=/usr/bin/ar}
++db_cv_path_chmod=${db_cv_path_chmod=/bin/chmod}
++db_cv_path_cp=${db_cv_path_cp=/bin/cp}
++db_cv_path_ln=${db_cv_path_ln=/bin/ln}
++db_cv_path_mkdir=${db_cv_path_mkdir=/bin/mkdir}
++db_cv_path_ranlib=${db_cv_path_ranlib=/usr/bin/ranlib}
++db_cv_path_rm=${db_cv_path_rm=/bin/rm}
++db_cv_path_sh=${db_cv_path_sh=/bin/sh}
++db_cv_path_strip=${db_cv_path_strip=/usr/bin/strip}
++db_cv_posixmutexes=${db_cv_posixmutexes=no}
++db_cv_sprintf_count=${db_cv_sprintf_count=yes}
++db_cv_uimutexes=${db_cv_uimutexes=no}
++
++# glib
++glib_cv_hasinline=${glib_cv_hasinline=yes}
++glib_cv_has__inline=${glib_cv_has__inline=yes}
++glib_cv_has__inline__=${glib_cv_has__inline__=yes}
++glib_cv_long_long_format=${glib_cv_long_long_format=ll}
++glib_cv_rtldglobal_broken=${glib_cv_rtldglobal_broken=yes}
++glib_cv_sane_realloc=${glib_cv_sane_realloc=yes}
++glib_cv_sizeof_gmutex=${glib_cv_sizeof_gmutex=40}
++glib_cv_sizeof_intmax_t=${glib_cv_sizeof_intmax_t=8}
++glib_cv_sizeof_ptrdiff_t=${glib_cv_sizeof_ptrdiff_t=8}
++glib_cv_sizeof_size_t=${glib_cv_sizeof_size_t=8}
++glib_cv_sizeof_system_thread=${glib_cv_sizeof_system_thread=8}
++glib_cv_stack_grows=${glib_cv_stack_grows=no}
++glib_cv_sys_pthread_cond_timedwait_posix=${glib_cv_sys_pthread_cond_timedwait_posix=yes}
++glib_cv_sys_pthread_getspecific_posix=${glib_cv_sys_pthread_getspecific_posix=yes}
++glib_cv_sys_pthread_mutex_trylock_posix=${glib_cv_sys_pthread_mutex_trylock_posix=yes}
++glib_cv_uscore=${glib_cv_uscore=no}
++glib_cv___va_copy=${glib_cv___va_copy=yes}
++glib_cv_va_copy=${glib_cv_va_copy=yes}
++glib_cv_va_val_copy=${glib_cv_va_val_copy=no}
++ac_cv_func_posix_getgrgid_r=${ac_cv_func_posix_getgrgid_r=yes}
++
++lftp_cv_va_copy=${lftp_cv_va_copy=yes}
++nano_cv_func_regexec_segv_emptystr=${nano_cv_func_regexec_segv_emptystr=no}
++samba_cv_HAVE_VA_COPY=${samba_cv_HAVE_VA_COPY=yes}
++screen_cv_sys_bcopy_overlap=${screen_cv_sys_bcopy_overlap=no}
++screen_cv_sys_fifo_broken_impl=${screen_cv_sys_fifo_broken_impl=yes}
++screen_cv_sys_fifo_usable=${screen_cv_sys_fifo_usable=yes}
++screen_cv_sys_memcpy_overlap=${screen_cv_sys_memcpy_overlap=no}
++screen_cv_sys_memmove_overlap=${screen_cv_sys_memmove_overlap=no}
++screen_cv_sys_select_broken_retval=${screen_cv_sys_select_broken_retval=no}
++screen_cv_sys_sockets_nofs=${screen_cv_sys_sockets_nofs=no}
++screen_cv_sys_sockets_usable=${screen_cv_sys_sockets_usable=yes}
++screen_cv_sys_terminfo_used=${screen_cv_sys_terminfo_used=yes}
++utils_cv_sys_open_max=${utils_cv_sys_open_max=1015}
++
++# gettext
++am_cv_func_working_getline=${am_cv_func_working_getline=yes}
++
++#gcc
++ac_cv_lib_m_sin=${ac_cv_lib_m_sin=yes}
++
++# eds-dbus
++ac_cv_libiconv_utf8=${ac_cv_libiconv_utf8=yes}
++
++#dbus
++ac_cv_have_abstract_sockets=${ac_cv_have_abstract_sockets=yes}
++
++# p3scan / quagga
++ac_cv_func_realloc_0_nonnull=${ac_cv_func_realloc_0_nonnull=yes}
++
++# bash
++bash_cv_func_sigsetjmp=${bash_cv_func_sigsetjmp=present}
 -- 
 1.6.3.3
 
