@@ -1,42 +1,26 @@
-Received: from [209.85.220.207] (helo=mail-fx0-f207.google.com)
+Received: from [206.46.173.13] (helo=vms173013pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1MuwXF-000239-EU
+	(envelope-from <denis@denix.org>) id 1Mv11n-0006Ke-MG
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Oct 2009 01:00:08 +0200
-Received: by fxm3 with SMTP id 3so3293724fxm.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Oct 2009 15:59:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type; bh=Eg7OUuIeF7AOXbe++WgJihWtxb5zHDz3f2BLeozs/do=;
-	b=C5Y1TMA5g079xA7kp1X0uCcLDpZuyWywwzdGRhnDTn1+xuh8RwqJf2WQkMoR3075TD
-	ekux+HICK3fLhNOXvC2roX3vYtLON/zAdnyNEP9LmO6JM0YzlWx0II52Ogh192gfjfoC
-	Y00vSeDkqQ3oFFSJiqNeRVBdzf99FuKE4RH/4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	b=t674odXXJReQSauZBFX3UrnEkyw3hnMdqzUprxvn7krPL/TpXTVfaeqNOMnR3Hr87X
-	sg5ddEDRhvAEUvOotXfL0VGmiNeKfjX+38kCa6Y5YubkkM2YcHqY8Ee31UV/uE3ouLyO
-	pKpz9zN0TDSV9TRDT2YhTv7RZrnq/Wc4RTraY=
-MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.189.81 with SMTP id s17mr61766hbh.213.1254783557100; Mon, 
-	05 Oct 2009 15:59:17 -0700 (PDT)
-In-Reply-To: <1254774335.3947.12.camel@leeloo.somedomain>
-References: <1254768733.10712.3.camel@leeloo.somedomain>
-	<1254770821.9214.105.camel@lenovo.internal.reciva.com>
-	<1254774335.3947.12.camel@leeloo.somedomain>
-Date: Mon, 5 Oct 2009 19:59:17 -0300
-X-Google-Sender-Auth: d2786947d1f479d4
-Message-ID: <be7a9f3d0910051559v21ab3a2et766095a124dfb537@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Tue, 06 Oct 2009 05:47:58 +0200
+Received: from gandalf.denix.org ([71.127.57.136]) by vms173013.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KR200I46QHZMLLI@vms173013.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	05 Oct 2009 22:46:47 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 9690714AF60; Mon,
+	05 Oct 2009 23:46:46 -0400 (EDT)
+Date: Mon, 05 Oct 2009 23:46:46 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.207
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+Message-id: <20091006034646.GA22854@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.13
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: lighttpd 1.4.18 runtime issue
+Subject: [RFC] Version sorting in BitBake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,22 +34,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Oct 2009 23:00:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 06 Oct 2009 03:47:58 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hello Michael,
+Hi,
 
-On Mon, Oct 5, 2009 at 5:25 PM, Michael Lippautz
-<michael.lippautz@gmail.com> wrote:
-> After further investigation, I found a document
-> (${S}/doc/configuration.txt) that states:
+While debugging the problem with the wrong kernel recipe being picked up by 
+BitBake, based on a complex PV value (there were several instances, once of 
+them recently mentioned at [1]), I found a small flaw in BitBake's version 
+comparison algorithm, as it relates to -preX and -rcX versions.
 
-The best way to provide the patch is to commit it locally and use git
-format-patch to export it. Then send it attached to the mail.
+For the above cases we use this format: PV = "2.6.29+2.6.30-rc5"
+
+At this point both BitBake and opkg (I haven't tried other package managers) 
+sort those PVs properly, as EOL sorts lower than any other character:
+
+2.6.29 < 2.6.29+2.6.30-rc5 < 2.6.30
+
+Since the introduction of MACHINE_KERNEL_PR, we moved modifiers such as 
+"+gitr${SRCREV}" (or any distro/local suffixes) from PR to PV, but still 
+placing them after PR for proper sorting:
+
+PV1 = "2.6.29-${PR}+gitr${SRCREV}"
+PV2 = "2.6.29+2.6.30-rc5-${PR}+gitr${SRCREV}"
+PV3 = "2.6.30-${PR}+gitr${SRCREV}"
+
+That still works with opkg, as ipkg-compare-versions sorts above PVs as 
+expected - PV1 < PV2 < PV3
+
+But BitBake now has this flaw and sorts like this: PV2 < PV1 < PV3
+
+Looks like ipkg-compare-versions/opkg algorithm has a special handling for '-' 
+and '.' characters, making them sort lower than '+', thus producing expected 
+results.
+
+I understand that this behavior can be controlled by PREFERRED_VERSION and 
+DEFAULT_PREFERENCE variables. But would it make sense to also fix it in 
+BitBake? I do have a patch, which I'll send next. Please provide comments.
+
+[1] http://thread.gmane.org/gmane.comp.handhelds.openembedded/26622/focus=26634
 
 -- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+Denys
 
 
