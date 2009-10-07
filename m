@@ -1,24 +1,31 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [82.192.226.27] (helo=mail.o2s.ch)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MvZCf-0003wB-Bm
-	for openembedded-devel@openembedded.org; Wed, 07 Oct 2009 18:17:28 +0200
-Received: (qmail 26014 invoked by uid 813007); 7 Oct 2009 16:16:37 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO localhost.localdomain)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 7 Oct 2009 16:16:37 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <david.lanzendoerfer@o2s.ch>) id 1MvgJv-000593-Ui
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 08 Oct 2009 01:53:27 +0200
+Received: from dizzy-6.localnet ([::ffff:192.168.2.122])
+	(TLS: TLSv1/SSLv3,256bits,AES256-SHA)
+	by koffein with esmtp; Thu, 08 Oct 2009 00:41:25 +0200
+	id 0000000000013E05.000000004ACD1915.0000040E
+From: David =?iso-8859-1?q?Lanzend=F6rfer?= <david.lanzendoerfer@o2s.ch>
+Organization: OpenSourceSupport GmbH
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Oct 2009 18:10:19 +0200
-Message-Id: <1254931819-14007-2-git-send-email-marcin@juszkiewicz.com.pl>
-X-Mailer: git-send-email 1.6.4.3
-In-Reply-To: <1254931819-14007-1-git-send-email-marcin@juszkiewicz.com.pl>
-References: <1254931819-14007-1-git-send-email-marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Date: Thu, 8 Oct 2009 01:53:12 +0200
+User-Agent: KMail/1.12.1 (Linux/2.6.31.1; KDE/4.3.1; x86_64; ; )
+X-Face: a023Y#Om+E(<|Tkz7Ae>YeJ\rvY,eXDn^g66`NiaNQ"#xRJ=gr'!V}V#{MN6!YO{s{{)
+	=?utf-8?q?=3Bh=0A=09=3Ds?=@Vv%T)fi>gJrAHvijw^ZG9{b1rtf~mn$V^b`:3m>yH=o$Eo')
+	=?utf-8?q?Ul8f=7DF=251vdg9=7C52W=3DXs=0A=09rR=5E/E/SPo=5E=7B-R22=5Ba?=
+	=?utf-8?q?=7Dc=3F?=@tgfp<I#oOW7r}0We&3g5"2>N5r/Vu|>kWs"|J'XppA;*0A,6>
+	=?utf-8?q?=0A=09*GY?=(0=H@>@^vEy]!m\)I42Lu@k~_=:U@/kf8{AO4'F7:Hy_*"5Xf9Vvkqr4E(
+	=?utf-8?q?32pVlT=3A=3D=26=0A=09i4l=5B3=25=3FZ?=<zzP~wGSke?1VJj\cd~Z(,Upc;
+	nOR|pqK@<j(`EYFSn,jN)A(~`YwM2nIv,
+Mime-Version: 1.0
+Message-Id: <200910080153.12683.david.lanzendoerfer@o2s.ch>
+X-SA-Exim-Connect-IP: 82.192.226.27
+X-SA-Exim-Mail-From: david.lanzendoerfer@o2s.ch
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [STABLE][PATCH 2/2] glibc-initial.inc: remove FILESPATHPKG setting to fix glibc-initial_2.3.2
+Subject: Patches and commitment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,37 +39,1814 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Oct 2009 16:17:28 -0000
+X-List-Received-Date: Wed, 07 Oct 2009 23:53:27 -0000
+X-Groupsio-MsgNum: 13356
+Content-Type: multipart/mixed; boundary="=_koffein-1040-1254955285-0001-2"
 
-From: Michael Smith <msmith@cbnco.com>
+--=_koffein-1040-1254955285-0001-2
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-All v2.5+ recipes add glibc-2.4 as a FILESDIR or FILESPATHPKG if they
-need it, so it's not required in the inc anymore.
+Hi folks
+I started the project OpenMoko4HTC-Dream[1] and I'd like to have access to 
+push and commit, because I'm developing on a new image for OpenMoko, called
+fso-hildon-image.
+Until I get access, it would be nice, if someone could merge the following 
+patches into org.openembedded.dev
+They are fixing building issues and add htcdream to the list of supported 
+devices.
 
-Ref:
-http://projects.linuxtogo.org/pipermail/openembedded-devel/2009-June/011692.html
+nice greatings
+	leviathan
 
-Signed-off-by: Michael Smith <msmith@cbnco.com>
----
- recipes/glibc/glibc-initial.inc |    1 -
- 1 files changed, 0 insertions(+), 1 deletions(-)
+[1] http://wiki.openmoko.org/wiki/OpenMoko_on_HTC-Dream
 
-diff --git a/recipes/glibc/glibc-initial.inc b/recipes/glibc/glibc-initial.inc
-index cd65924..6468f0d 100644
---- a/recipes/glibc/glibc-initial.inc
-+++ b/recipes/glibc/glibc-initial.inc
-@@ -1,7 +1,6 @@
- SECTION = "libs"
- DEPENDS = "virtual/${TARGET_PREFIX}gcc-initial linux-libc-headers"
- PROVIDES = "virtual/${TARGET_PREFIX}libc-initial"
--FILESPATHPKG =. "glibc-2.4:"
- 
- PACKAGES = ""
- PACKAGES_DYNAMIC = ""
--- 
-1.6.4.3
+--=_koffein-1040-1254955285-0001-2
+Content-Type: text/x-patch; charset=iso-8859-1; name="patch_add_openmoko4htcdream.patch"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="patch_add_openmoko4htcdream.patch"
 
+commit a697aab7ff7366a9507983a0af479a52f163a0cf
+Author: David Lanzend=F6rfer <david.lanzendoerfer@o2s.ch>
+Date:   Wed Oct 7 18:34:00 2009 +0200
 
+    added htcdream support and fixed broke OpenMoko depencies
 
+diff --git a/conf/distro/openmoko.conf b/conf/distro/openmoko.conf
+index 81d7075..687cac3 100644
+--- a/conf/distro/openmoko.conf
++++ b/conf/distro/openmoko.conf
+@@ -4,7 +4,7 @@
+ #@DESCRIPTION: Linux Distribution Configuration for the Openmoko Platform
+ #-------------------------------------------------------------------------=
+----
+=20
+-require conf/distro/include/preferred-om-2008-versions.inc
++require conf/distro/include/preferred-om-2009-versions.inc
+ require conf/distro/include/angstrom-2007-for-openmoko.inc
+=20
+ #
+diff --git a/conf/machine/htcdream.conf b/conf/machine/htcdream.conf
+new file mode 100644
+index 0000000..c977ba2
+--- /dev/null
++++ b/conf/machine/htcdream.conf
+@@ -0,0 +1,15 @@
++#@TYPE: Machine
++#@NAME: HTC Kaiser phone
++#@DESCRIPTION: Machine configuration for HTC Kaiser phone (aka HTC TyTN II=
+)
++require conf/machine/include/tune-arm1136-novfp.inc
++
++PREFERRED_PROVIDER_virtual/kernel =3D "linux-msm7xxxx"
++
++PREFERRED_PROVIDER_virtual/xserver =3D "xserver-kdrive"
++XSERVER =3D "xserver-kdrive-fbdev"
++MACHINE_DISPLAY_WIDTH_PIXELS =3D "240"
++MACHINE_DISPLAY_HEIGHT_PIXELS =3D "320"
++
++MACHINE_FEATURES =3D "kernel26 touchscreen screen keyboard phone gps"
++
++IMAGE_FSTYPES +=3D "tar.gz cpio.gz"
+diff --git a/recipes/linux/linux-msm7xxxx/htcdream/defconfig b/recipes/linu=
+x/linux-msm7xxxx/htcdream/defconfig
+new file mode 100644
+index 0000000..51d4318
+--- /dev/null
++++ b/recipes/linux/linux-msm7xxxx/htcdream/defconfig
+@@ -0,0 +1,1671 @@
++#
++# Automatically generated make config: don't edit
++# Linux kernel version: 2.6.29
++# Wed Oct  7 18:25:08 2009
++#
++CONFIG_ARM=3Dy
++CONFIG_SYS_SUPPORTS_APM_EMULATION=3Dy
++CONFIG_GENERIC_GPIO=3Dy
++CONFIG_GENERIC_TIME=3Dy
++CONFIG_GENERIC_CLOCKEVENTS=3Dy
++CONFIG_MMU=3Dy
++# CONFIG_NO_IOPORT is not set
++CONFIG_GENERIC_HARDIRQS=3Dy
++CONFIG_STACKTRACE_SUPPORT=3Dy
++CONFIG_HAVE_LATENCYTOP_SUPPORT=3Dy
++CONFIG_LOCKDEP_SUPPORT=3Dy
++CONFIG_TRACE_IRQFLAGS_SUPPORT=3Dy
++CONFIG_HARDIRQS_SW_RESEND=3Dy
++CONFIG_GENERIC_IRQ_PROBE=3Dy
++CONFIG_RWSEM_GENERIC_SPINLOCK=3Dy
++# CONFIG_ARCH_HAS_ILOG2_U32 is not set
++# CONFIG_ARCH_HAS_ILOG2_U64 is not set
++CONFIG_GENERIC_HWEIGHT=3Dy
++CONFIG_GENERIC_CALIBRATE_DELAY=3Dy
++CONFIG_GENERIC_HARDIRQS_NO__DO_IRQ=3Dy
++CONFIG_VECTORS_BASE=3D0xffff0000
++CONFIG_DEFCONFIG_LIST=3D"/lib/modules/$UNAME_RELEASE/.config"
++
++#
++# General setup
++#
++CONFIG_EXPERIMENTAL=3Dy
++CONFIG_BROKEN_ON_SMP=3Dy
++CONFIG_LOCK_KERNEL=3Dy
++CONFIG_INIT_ENV_ARG_LIMIT=3D32
++CONFIG_LOCALVERSION=3D"-openmoko-msm"
++# CONFIG_LOCALVERSION_AUTO is not set
++CONFIG_SWAP=3Dy
++# CONFIG_SYSVIPC is not set
++# CONFIG_POSIX_MQUEUE is not set
++# CONFIG_BSD_PROCESS_ACCT is not set
++# CONFIG_TASKSTATS is not set
++# CONFIG_AUDIT is not set
++
++#
++# RCU Subsystem
++#
++CONFIG_CLASSIC_RCU=3Dy
++# CONFIG_TREE_RCU is not set
++# CONFIG_PREEMPT_RCU is not set
++# CONFIG_TREE_RCU_TRACE is not set
++# CONFIG_PREEMPT_RCU_TRACE is not set
++CONFIG_IKCONFIG=3Dy
++CONFIG_IKCONFIG_PROC=3Dy
++CONFIG_LOG_BUF_SHIFT=3D17
++CONFIG_GROUP_SCHED=3Dy
++CONFIG_FAIR_GROUP_SCHED=3Dy
++CONFIG_RT_GROUP_SCHED=3Dy
++# CONFIG_USER_SCHED is not set
++CONFIG_CGROUP_SCHED=3Dy
++CONFIG_CGROUPS=3Dy
++CONFIG_CGROUP_DEBUG=3Dy
++# CONFIG_CGROUP_NS is not set
++CONFIG_CGROUP_FREEZER=3Dy
++# CONFIG_CGROUP_DEVICE is not set
++CONFIG_CGROUP_CPUACCT=3Dy
++CONFIG_RESOURCE_COUNTERS=3Dy
++# CONFIG_CGROUP_MEM_RES_CTLR is not set
++# CONFIG_SYSFS_DEPRECATED_V2 is not set
++# CONFIG_RELAY is not set
++CONFIG_NAMESPACES=3Dy
++CONFIG_UTS_NS=3Dy
++CONFIG_USER_NS=3Dy
++CONFIG_PID_NS=3Dy
++CONFIG_NET_NS=3Dy
++# CONFIG_BLK_DEV_INITRD is not set
++CONFIG_CC_OPTIMIZE_FOR_SIZE=3Dy
++CONFIG_SYSCTL=3Dy
++CONFIG_ANON_INODES=3Dy
++CONFIG_PANIC_TIMEOUT=3D5
++CONFIG_EMBEDDED=3Dy
++CONFIG_UID16=3Dy
++# CONFIG_SYSCTL_SYSCALL is not set
++CONFIG_KALLSYMS=3Dy
++# CONFIG_KALLSYMS_EXTRA_PASS is not set
++CONFIG_HOTPLUG=3Dy
++CONFIG_PRINTK=3Dy
++CONFIG_BUG=3Dy
++# CONFIG_ELF_CORE is not set
++CONFIG_BASE_FULL=3Dy
++CONFIG_FUTEX=3Dy
++CONFIG_EPOLL=3Dy
++CONFIG_SIGNALFD=3Dy
++CONFIG_TIMERFD=3Dy
++CONFIG_EVENTFD=3Dy
++CONFIG_SHMEM=3Dy
++CONFIG_AIO=3Dy
++CONFIG_ASHMEM=3Dy
++CONFIG_VM_EVENT_COUNTERS=3Dy
++CONFIG_COMPAT_BRK=3Dy
++CONFIG_SLAB=3Dy
++# CONFIG_SLUB is not set
++# CONFIG_SLOB is not set
++# CONFIG_PROFILING is not set
++CONFIG_HAVE_OPROFILE=3Dy
++# CONFIG_KPROBES is not set
++CONFIG_HAVE_KPROBES=3Dy
++CONFIG_HAVE_KRETPROBES=3Dy
++CONFIG_HAVE_GENERIC_DMA_COHERENT=3Dy
++CONFIG_SLABINFO=3Dy
++CONFIG_RT_MUTEXES=3Dy
++CONFIG_BASE_SMALL=3D0
++CONFIG_MODULES=3Dy
++CONFIG_MODULE_FORCE_LOAD=3Dy
++CONFIG_MODULE_UNLOAD=3Dy
++CONFIG_MODULE_FORCE_UNLOAD=3Dy
++CONFIG_MODVERSIONS=3Dy
++# CONFIG_MODULE_SRCVERSION_ALL is not set
++CONFIG_BLOCK=3Dy
++# CONFIG_LBD is not set
++# CONFIG_BLK_DEV_IO_TRACE is not set
++# CONFIG_BLK_DEV_BSG is not set
++# CONFIG_BLK_DEV_INTEGRITY is not set
++
++#
++# IO Schedulers
++#
++CONFIG_IOSCHED_NOOP=3Dy
++CONFIG_IOSCHED_AS=3Dy
++# CONFIG_IOSCHED_DEADLINE is not set
++# CONFIG_IOSCHED_CFQ is not set
++CONFIG_DEFAULT_AS=3Dy
++# CONFIG_DEFAULT_DEADLINE is not set
++# CONFIG_DEFAULT_CFQ is not set
++# CONFIG_DEFAULT_NOOP is not set
++CONFIG_DEFAULT_IOSCHED=3D"anticipatory"
++CONFIG_FREEZER=3Dy
++
++#
++# System Type
++#
++# CONFIG_ARCH_AAEC2000 is not set
++# CONFIG_ARCH_INTEGRATOR is not set
++# CONFIG_ARCH_REALVIEW is not set
++# CONFIG_ARCH_VERSATILE is not set
++# CONFIG_ARCH_AT91 is not set
++# CONFIG_ARCH_CLPS711X is not set
++# CONFIG_ARCH_EBSA110 is not set
++# CONFIG_ARCH_EP93XX is not set
++# CONFIG_ARCH_FOOTBRIDGE is not set
++# CONFIG_ARCH_NETX is not set
++# CONFIG_ARCH_H720X is not set
++# CONFIG_ARCH_IMX is not set
++# CONFIG_ARCH_IOP13XX is not set
++# CONFIG_ARCH_IOP32X is not set
++# CONFIG_ARCH_IOP33X is not set
++# CONFIG_ARCH_IXP23XX is not set
++# CONFIG_ARCH_IXP2000 is not set
++# CONFIG_ARCH_IXP4XX is not set
++# CONFIG_ARCH_L7200 is not set
++# CONFIG_ARCH_KIRKWOOD is not set
++# CONFIG_ARCH_KS8695 is not set
++# CONFIG_ARCH_NS9XXX is not set
++# CONFIG_ARCH_LOKI is not set
++# CONFIG_ARCH_MV78XX0 is not set
++# CONFIG_ARCH_MXC is not set
++# CONFIG_ARCH_ORION5X is not set
++# CONFIG_ARCH_PNX4008 is not set
++# CONFIG_ARCH_PXA is not set
++# CONFIG_ARCH_RPC is not set
++# CONFIG_ARCH_SA1100 is not set
++# CONFIG_ARCH_S3C2410 is not set
++# CONFIG_ARCH_S3C64XX is not set
++# CONFIG_ARCH_SHARK is not set
++# CONFIG_ARCH_LH7A40X is not set
++# CONFIG_ARCH_DAVINCI is not set
++# CONFIG_ARCH_OMAP is not set
++CONFIG_ARCH_MSM=3Dy
++# CONFIG_ARCH_W90X900 is not set
++CONFIG_MSM_AMSS_VERSION=3D6225
++# CONFIG_MSM_AMSS_VERSION_6210 is not set
++# CONFIG_MSM_AMSS_VERSION_6220 is not set
++CONFIG_MSM_AMSS_VERSION_6225=3Dy
++# CONFIG_MSM_AMSS_VERSION_6350 is not set
++CONFIG_MSM_DEBUG_UART_NONE=3Dy
++# CONFIG_MSM_DEBUG_UART1 is not set
++# CONFIG_MSM_DEBUG_UART2 is not set
++# CONFIG_MSM_DEBUG_UART3 is not set
++
++#
++# MSM Board Type
++#
++CONFIG_MACH_HALIBUT=3Dy
++CONFIG_MACH_TROUT=3Dy
++CONFIG_MACH_SAPPHIRE=3Dy
++CONFIG_HTC_HEADSET=3Dy
++CONFIG_TROUT_BATTCHG=3Dy
++CONFIG_TROUT_WIFI=3Dy
++CONFIG_HTC_PWRSINK=3Dy
++CONFIG_CACHE_FLUSH_RANGE_LIMIT=3D0x40000
++CONFIG_MSM7X00A_USE_GP_TIMER=3Dy
++# CONFIG_MSM7X00A_USE_DG_TIMER is not set
++CONFIG_MSM7X00A_SLEEP_MODE_POWER_COLLAPSE_SUSPEND=3Dy
++# CONFIG_MSM7X00A_SLEEP_MODE_POWER_COLLAPSE is not set
++# CONFIG_MSM7X00A_SLEEP_MODE_APPS_SLEEP is not set
++# CONFIG_MSM7X00A_SLEEP_MODE_RAMP_DOWN_AND_WAIT_FOR_INTERRUPT is not set
++# CONFIG_MSM7X00A_SLEEP_WAIT_FOR_INTERRUPT is not set
++CONFIG_MSM7X00A_SLEEP_MODE=3D0
++# CONFIG_MSM7X00A_IDLE_SLEEP_MODE_POWER_COLLAPSE_SUSPEND is not set
++CONFIG_MSM7X00A_IDLE_SLEEP_MODE_POWER_COLLAPSE=3Dy
++# CONFIG_MSM7X00A_IDLE_SLEEP_MODE_APPS_SLEEP is not set
++# CONFIG_MSM7X00A_IDLE_SLEEP_MODE_RAMP_DOWN_AND_WAIT_FOR_INTERRUPT is not =
+set
++# CONFIG_MSM7X00A_IDLE_SLEEP_WAIT_FOR_INTERRUPT is not set
++CONFIG_MSM7X00A_IDLE_SLEEP_MODE=3D1
++CONFIG_MSM7X00A_IDLE_SLEEP_MIN_TIME=3D20000000
++CONFIG_MSM7X00A_IDLE_SPIN_TIME=3D80000
++CONFIG_MSM_IDLE_STATS=3Dy
++CONFIG_MSM_IDLE_STATS_FIRST_BUCKET=3D62500
++CONFIG_MSM_IDLE_STATS_BUCKET_SHIFT=3D2
++CONFIG_MSM_IDLE_STATS_BUCKET_COUNT=3D10
++CONFIG_MSM_FIQ_SUPPORT=3Dy
++CONFIG_MSM_SERIAL_DEBUGGER=3Dy
++# CONFIG_MSM_SERIAL_DEBUGGER_CONSOLE is not set
++CONFIG_MSM_SMD=3Dy
++CONFIG_MSM_ONCRPCROUTER=3Dy
++CONFIG_MSM_RPCSERVERS=3Dy
++CONFIG_MSM_CPU_FREQ=3Dy
++CONFIG_MSM_CPU_FREQ_ONDEMAND=3Dy
++# CONFIG_MSM_CPU_FREQ_SCREEN is not set
++CONFIG_MSM_CPU_FREQ_ONDEMAND_MAX=3D384000
++CONFIG_MSM_CPU_FREQ_ONDEMAND_MIN=3D245760
++# CONFIG_MSM_HW3D is not set
++CONFIG_MSM_ADSP=3Dy
++# CONFIG_MSM_ADSP_REPORT_EVENTS is not set
++CONFIG_WIFI_CONTROL_FUNC=3Dy
++CONFIG_WIFI_MEM_PREALLOC=3Dy
++# CONFIG_VIRTUAL_KPANIC_PARTITION is not set
++
++#
++# Processor Type
++#
++CONFIG_CPU_32=3Dy
++CONFIG_CPU_V6=3Dy
++CONFIG_CPU_32v6K=3Dy
++CONFIG_CPU_32v6=3Dy
++CONFIG_CPU_ABRT_EV6=3Dy
++CONFIG_CPU_PABRT_NOIFAR=3Dy
++CONFIG_CPU_CACHE_V6=3Dy
++CONFIG_CPU_CACHE_VIPT=3Dy
++CONFIG_CPU_COPY_V6=3Dy
++CONFIG_CPU_TLB_V6=3Dy
++CONFIG_CPU_HAS_ASID=3Dy
++CONFIG_CPU_CP15=3Dy
++CONFIG_CPU_CP15_MMU=3Dy
++
++#
++# Processor Features
++#
++CONFIG_ARM_THUMB=3Dy
++# CONFIG_CPU_ICACHE_DISABLE is not set
++# CONFIG_CPU_DCACHE_DISABLE is not set
++# CONFIG_CPU_BPREDICT_DISABLE is not set
++# CONFIG_OUTER_CACHE is not set
++
++#
++# Bus support
++#
++# CONFIG_PCI_SYSCALL is not set
++# CONFIG_ARCH_SUPPORTS_MSI is not set
++# CONFIG_PCCARD is not set
++
++#
++# Kernel Features
++#
++CONFIG_TICK_ONESHOT=3Dy
++CONFIG_NO_HZ=3Dy
++CONFIG_HIGH_RES_TIMERS=3Dy
++CONFIG_GENERIC_CLOCKEVENTS_BUILD=3Dy
++CONFIG_VMSPLIT_3G=3Dy
++# CONFIG_VMSPLIT_2G is not set
++# CONFIG_VMSPLIT_1G is not set
++CONFIG_PAGE_OFFSET=3D0xC0000000
++CONFIG_PREEMPT=3Dy
++CONFIG_HZ=3D100
++CONFIG_AEABI=3Dy
++# CONFIG_OABI_COMPAT is not set
++CONFIG_ARCH_FLATMEM_HAS_HOLES=3Dy
++# CONFIG_ARCH_SPARSEMEM_DEFAULT is not set
++# CONFIG_ARCH_SELECT_MEMORY_MODEL is not set
++CONFIG_SELECT_MEMORY_MODEL=3Dy
++CONFIG_FLATMEM_MANUAL=3Dy
++# CONFIG_DISCONTIGMEM_MANUAL is not set
++# CONFIG_SPARSEMEM_MANUAL is not set
++CONFIG_FLATMEM=3Dy
++CONFIG_FLAT_NODE_MEM_MAP=3Dy
++CONFIG_PAGEFLAGS_EXTENDED=3Dy
++CONFIG_SPLIT_PTLOCK_CPUS=3D4
++# CONFIG_PHYS_ADDR_T_64BIT is not set
++CONFIG_ZONE_DMA_FLAG=3D0
++CONFIG_VIRT_TO_BUS=3Dy
++CONFIG_UNEVICTABLE_LRU=3Dy
++CONFIG_DEFAULT_MMAP_MIN_ADDR=3D4096
++CONFIG_ALIGNMENT_TRAP=3Dy
++
++#
++# Boot options
++#
++CONFIG_ZBOOT_ROM_TEXT=3D0x0
++CONFIG_ZBOOT_ROM_BSS=3D0x0
++CONFIG_CMDLINE=3D"mem=3D64M console=3DttyMSM,115200n8"
++# CONFIG_XIP_KERNEL is not set
++# CONFIG_KEXEC is not set
++
++#
++# CPU Power Management
++#
++CONFIG_CPU_FREQ=3Dy
++CONFIG_CPU_FREQ_TABLE=3Dy
++# CONFIG_CPU_FREQ_DEBUG is not set
++# CONFIG_CPU_FREQ_STAT is not set
++# CONFIG_CPU_FREQ_DEFAULT_GOV_PERFORMANCE is not set
++# CONFIG_CPU_FREQ_DEFAULT_GOV_POWERSAVE is not set
++# CONFIG_CPU_FREQ_DEFAULT_GOV_USERSPACE is not set
++CONFIG_CPU_FREQ_DEFAULT_GOV_ONDEMAND=3Dy
++# CONFIG_CPU_FREQ_DEFAULT_GOV_CONSERVATIVE is not set
++CONFIG_CPU_FREQ_GOV_PERFORMANCE=3Dy
++# CONFIG_CPU_FREQ_GOV_POWERSAVE is not set
++# CONFIG_CPU_FREQ_GOV_USERSPACE is not set
++CONFIG_CPU_FREQ_GOV_ONDEMAND=3Dy
++# CONFIG_CPU_FREQ_GOV_CONSERVATIVE is not set
++CONFIG_CPU_FREQ_MIN_TICKS=3D1
++CONFIG_CPU_FREQ_SAMPLING_LATENCY_MULTIPLIER=3D500
++# CONFIG_CPU_IDLE is not set
++
++#
++# Floating point emulation
++#
++
++#
++# At least one emulation must be selected
++#
++# CONFIG_VFP is not set
++
++#
++# Userspace binary formats
++#
++CONFIG_BINFMT_ELF=3Dy
++CONFIG_HAVE_AOUT=3Dy
++CONFIG_BINFMT_AOUT=3Dy
++CONFIG_BINFMT_MISC=3Dy
++
++#
++# Power management options
++#
++CONFIG_PM=3Dy
++# CONFIG_PM_DEBUG is not set
++CONFIG_PM_SLEEP=3Dy
++CONFIG_SUSPEND=3Dy
++CONFIG_SUSPEND_FREEZER=3Dy
++CONFIG_HAS_WAKELOCK=3Dy
++CONFIG_HAS_EARLYSUSPEND=3Dy
++CONFIG_WAKELOCK=3Dy
++CONFIG_WAKELOCK_STAT=3Dy
++CONFIG_USER_WAKELOCK=3Dy
++CONFIG_EARLYSUSPEND=3Dy
++# CONFIG_NO_USER_SPACE_SCREEN_ACCESS_CONTROL is not set
++# CONFIG_CONSOLE_EARLYSUSPEND is not set
++CONFIG_FB_EARLYSUSPEND=3Dy
++CONFIG_APM_EMULATION=3Dy
++CONFIG_ARCH_SUSPEND_POSSIBLE=3Dy
++CONFIG_NET=3Dy
++
++#
++# Networking options
++#
++CONFIG_COMPAT_NET_DEV_OPS=3Dy
++CONFIG_PACKET=3Dy
++# CONFIG_PACKET_MMAP is not set
++CONFIG_UNIX=3Dy
++CONFIG_XFRM=3Dy
++# CONFIG_XFRM_USER is not set
++# CONFIG_XFRM_SUB_POLICY is not set
++# CONFIG_XFRM_MIGRATE is not set
++# CONFIG_XFRM_STATISTICS is not set
++CONFIG_XFRM_IPCOMP=3Dm
++CONFIG_NET_KEY=3Dy
++# CONFIG_NET_KEY_MIGRATE is not set
++CONFIG_INET=3Dy
++# CONFIG_IP_MULTICAST is not set
++# CONFIG_IP_ADVANCED_ROUTER is not set
++CONFIG_IP_FIB_HASH=3Dy
++# CONFIG_IP_PNP is not set
++# CONFIG_NET_IPIP is not set
++# CONFIG_NET_IPGRE is not set
++# CONFIG_ARPD is not set
++# CONFIG_SYN_COOKIES is not set
++# CONFIG_INET_AH is not set
++CONFIG_INET_ESP=3Dy
++# CONFIG_INET_IPCOMP is not set
++# CONFIG_INET_XFRM_TUNNEL is not set
++CONFIG_INET_TUNNEL=3Dm
++CONFIG_INET_XFRM_MODE_TRANSPORT=3Dy
++# CONFIG_INET_XFRM_MODE_TUNNEL is not set
++# CONFIG_INET_XFRM_MODE_BEET is not set
++# CONFIG_INET_LRO is not set
++# CONFIG_INET_DIAG is not set
++# CONFIG_TCP_CONG_ADVANCED is not set
++CONFIG_TCP_CONG_CUBIC=3Dy
++CONFIG_DEFAULT_TCP_CONG=3D"cubic"
++# CONFIG_TCP_MD5SIG is not set
++CONFIG_IPV6=3Dm
++CONFIG_IPV6_PRIVACY=3Dy
++CONFIG_IPV6_ROUTER_PREF=3Dy
++CONFIG_IPV6_ROUTE_INFO=3Dy
++CONFIG_IPV6_OPTIMISTIC_DAD=3Dy
++CONFIG_INET6_AH=3Dm
++CONFIG_INET6_ESP=3Dm
++CONFIG_INET6_IPCOMP=3Dm
++CONFIG_IPV6_MIP6=3Dm
++CONFIG_INET6_XFRM_TUNNEL=3Dm
++CONFIG_INET6_TUNNEL=3Dm
++CONFIG_INET6_XFRM_MODE_TRANSPORT=3Dm
++CONFIG_INET6_XFRM_MODE_TUNNEL=3Dm
++CONFIG_INET6_XFRM_MODE_BEET=3Dm
++CONFIG_INET6_XFRM_MODE_ROUTEOPTIMIZATION=3Dm
++CONFIG_IPV6_SIT=3Dm
++CONFIG_IPV6_NDISC_NODETYPE=3Dy
++CONFIG_IPV6_TUNNEL=3Dm
++CONFIG_IPV6_MULTIPLE_TABLES=3Dy
++CONFIG_IPV6_SUBTREES=3Dy
++CONFIG_IPV6_MROUTE=3Dy
++CONFIG_IPV6_PIMSM_V2=3Dy
++CONFIG_ANDROID_PARANOID_NETWORK=3Dy
++# CONFIG_NETWORK_SECMARK is not set
++# CONFIG_NETFILTER is not set
++# CONFIG_IP_DCCP is not set
++# CONFIG_IP_SCTP is not set
++# CONFIG_TIPC is not set
++# CONFIG_ATM is not set
++# CONFIG_BRIDGE is not set
++# CONFIG_NET_DSA is not set
++# CONFIG_VLAN_8021Q is not set
++# CONFIG_DECNET is not set
++# CONFIG_LLC2 is not set
++# CONFIG_IPX is not set
++# CONFIG_ATALK is not set
++# CONFIG_X25 is not set
++# CONFIG_LAPB is not set
++# CONFIG_ECONET is not set
++# CONFIG_WAN_ROUTER is not set
++CONFIG_NET_SCHED=3Dy
++
++#
++# Queueing/Scheduling
++#
++# CONFIG_NET_SCH_CBQ is not set
++# CONFIG_NET_SCH_HTB is not set
++# CONFIG_NET_SCH_HFSC is not set
++# CONFIG_NET_SCH_PRIO is not set
++# CONFIG_NET_SCH_MULTIQ is not set
++# CONFIG_NET_SCH_RED is not set
++# CONFIG_NET_SCH_SFQ is not set
++# CONFIG_NET_SCH_TEQL is not set
++# CONFIG_NET_SCH_TBF is not set
++# CONFIG_NET_SCH_GRED is not set
++# CONFIG_NET_SCH_DSMARK is not set
++# CONFIG_NET_SCH_NETEM is not set
++# CONFIG_NET_SCH_DRR is not set
++
++#
++# Classification
++#
++# CONFIG_NET_CLS_BASIC is not set
++# CONFIG_NET_CLS_TCINDEX is not set
++# CONFIG_NET_CLS_ROUTE4 is not set
++# CONFIG_NET_CLS_FW is not set
++# CONFIG_NET_CLS_U32 is not set
++# CONFIG_NET_CLS_RSVP is not set
++# CONFIG_NET_CLS_RSVP6 is not set
++# CONFIG_NET_CLS_FLOW is not set
++# CONFIG_NET_CLS_CGROUP is not set
++# CONFIG_NET_EMATCH is not set
++# CONFIG_NET_CLS_ACT is not set
++CONFIG_NET_SCH_FIFO=3Dy
++# CONFIG_DCB is not set
++
++#
++# Network testing
++#
++# CONFIG_NET_PKTGEN is not set
++# CONFIG_HAMRADIO is not set
++# CONFIG_CAN is not set
++# CONFIG_IRDA is not set
++CONFIG_BT=3Dy
++CONFIG_BT_L2CAP=3Dy
++CONFIG_BT_SCO=3Dy
++CONFIG_BT_RFCOMM=3Dy
++CONFIG_BT_RFCOMM_TTY=3Dy
++CONFIG_BT_BNEP=3Dy
++# CONFIG_BT_BNEP_MC_FILTER is not set
++# CONFIG_BT_BNEP_PROTO_FILTER is not set
++CONFIG_BT_HIDP=3Dy
++
++#
++# Bluetooth device drivers
++#
++# CONFIG_BT_HCIBTSDIO is not set
++CONFIG_BT_HCIUART=3Dy
++CONFIG_BT_HCIUART_H4=3Dy
++# CONFIG_BT_HCIUART_BCSP is not set
++CONFIG_BT_HCIUART_LL=3Dy
++# CONFIG_BT_HCIVHCI is not set
++# CONFIG_AF_RXRPC is not set
++# CONFIG_PHONET is not set
++CONFIG_FIB_RULES=3Dy
++CONFIG_WIRELESS=3Dy
++CONFIG_CFG80211=3Dm
++CONFIG_CFG80211_REG_DEBUG=3Dy
++CONFIG_NL80211=3Dy
++CONFIG_WIRELESS_OLD_REGULATORY=3Dy
++CONFIG_WIRELESS_EXT=3Dy
++CONFIG_WIRELESS_EXT_SYSFS=3Dy
++# CONFIG_LIB80211 is not set
++CONFIG_MAC80211=3Dm
++
++#
++# Rate control algorithm selection
++#
++# CONFIG_MAC80211_RC_PID is not set
++CONFIG_MAC80211_RC_MINSTREL=3Dy
++# CONFIG_MAC80211_RC_DEFAULT_PID is not set
++CONFIG_MAC80211_RC_DEFAULT_MINSTREL=3Dy
++CONFIG_MAC80211_RC_DEFAULT=3D"minstrel"
++CONFIG_MAC80211_MESH=3Dy
++CONFIG_MAC80211_LEDS=3Dy
++CONFIG_MAC80211_DEBUGFS=3Dy
++CONFIG_MAC80211_DEBUG_MENU=3Dy
++CONFIG_MAC80211_DEBUG_PACKET_ALIGNMENT=3Dy
++# CONFIG_MAC80211_NOINLINE is not set
++CONFIG_MAC80211_VERBOSE_DEBUG=3Dy
++CONFIG_MAC80211_HT_DEBUG=3Dy
++CONFIG_MAC80211_TKIP_DEBUG=3Dy
++CONFIG_MAC80211_IBSS_DEBUG=3Dy
++CONFIG_MAC80211_VERBOSE_PS_DEBUG=3Dy
++CONFIG_MAC80211_VERBOSE_MPL_DEBUG=3Dy
++CONFIG_MAC80211_DEBUG_COUNTERS=3Dy
++CONFIG_MAC80211_VERBOSE_SPECT_MGMT_DEBUG=3Dy
++# CONFIG_WIMAX is not set
++CONFIG_RFKILL=3Dy
++# CONFIG_RFKILL_PM is not set
++# CONFIG_RFKILL_INPUT is not set
++CONFIG_RFKILL_LEDS=3Dy
++# CONFIG_NET_9P is not set
++
++#
++# Device Drivers
++#
++
++#
++# Generic Driver Options
++#
++CONFIG_UEVENT_HELPER_PATH=3D""
++CONFIG_STANDALONE=3Dy
++CONFIG_PREVENT_FIRMWARE_BUILD=3Dy
++CONFIG_FW_LOADER=3Dy
++# CONFIG_FIRMWARE_IN_KERNEL is not set
++CONFIG_EXTRA_FIRMWARE=3D""
++# CONFIG_SYS_HYPERVISOR is not set
++# CONFIG_CONNECTOR is not set
++CONFIG_MTD=3Dy
++# CONFIG_MTD_DEBUG is not set
++# CONFIG_MTD_CONCAT is not set
++CONFIG_MTD_PARTITIONS=3Dy
++# CONFIG_MTD_TESTS is not set
++# CONFIG_MTD_REDBOOT_PARTS is not set
++CONFIG_MTD_CMDLINE_PARTS=3Dy
++# CONFIG_MTD_AFS_PARTS is not set
++# CONFIG_MTD_AR7_PARTS is not set
++
++#
++# User Modules And Translation Layers
++#
++CONFIG_MTD_CHAR=3Dy
++CONFIG_MTD_BLKDEVS=3Dy
++CONFIG_MTD_BLOCK=3Dy
++# CONFIG_FTL is not set
++# CONFIG_NFTL is not set
++# CONFIG_INFTL is not set
++# CONFIG_RFD_FTL is not set
++# CONFIG_SSFDC is not set
++# CONFIG_MTD_OOPS is not set
++
++#
++# RAM/ROM/Flash chip drivers
++#
++# CONFIG_MTD_CFI is not set
++# CONFIG_MTD_JEDECPROBE is not set
++CONFIG_MTD_MAP_BANK_WIDTH_1=3Dy
++CONFIG_MTD_MAP_BANK_WIDTH_2=3Dy
++CONFIG_MTD_MAP_BANK_WIDTH_4=3Dy
++# CONFIG_MTD_MAP_BANK_WIDTH_8 is not set
++# CONFIG_MTD_MAP_BANK_WIDTH_16 is not set
++# CONFIG_MTD_MAP_BANK_WIDTH_32 is not set
++CONFIG_MTD_CFI_I1=3Dy
++CONFIG_MTD_CFI_I2=3Dy
++# CONFIG_MTD_CFI_I4 is not set
++# CONFIG_MTD_CFI_I8 is not set
++# CONFIG_MTD_RAM is not set
++# CONFIG_MTD_ROM is not set
++# CONFIG_MTD_ABSENT is not set
++
++#
++# Mapping drivers for chip access
++#
++# CONFIG_MTD_COMPLEX_MAPPINGS is not set
++# CONFIG_MTD_PLATRAM is not set
++
++#
++# Self-contained MTD device drivers
++#
++CONFIG_MTD_MSM_NAND=3Dy
++# CONFIG_MTD_DATAFLASH is not set
++# CONFIG_MTD_M25P80 is not set
++# CONFIG_MTD_SLRAM is not set
++# CONFIG_MTD_PHRAM is not set
++# CONFIG_MTD_MTDRAM is not set
++# CONFIG_MTD_BLOCK2MTD is not set
++
++#
++# Disk-On-Chip Device Drivers
++#
++# CONFIG_MTD_DOC2000 is not set
++# CONFIG_MTD_DOC2001 is not set
++# CONFIG_MTD_DOC2001PLUS is not set
++# CONFIG_MTD_NAND is not set
++# CONFIG_MTD_ONENAND is not set
++
++#
++# LPDDR flash memory drivers
++#
++# CONFIG_MTD_LPDDR is not set
++
++#
++# UBI - Unsorted block images
++#
++# CONFIG_MTD_UBI is not set
++# CONFIG_PARPORT is not set
++CONFIG_BLK_DEV=3Dy
++# CONFIG_BLK_DEV_COW_COMMON is not set
++CONFIG_BLK_DEV_LOOP=3Dy
++# CONFIG_BLK_DEV_CRYPTOLOOP is not set
++# CONFIG_BLK_DEV_NBD is not set
++# CONFIG_BLK_DEV_RAM is not set
++# CONFIG_CDROM_PKTCDVD is not set
++# CONFIG_ATA_OVER_ETH is not set
++CONFIG_MISC_DEVICES=3Dy
++# CONFIG_ANDROID_PMEM is not set
++# CONFIG_ICS932S401 is not set
++# CONFIG_ENCLOSURE_SERVICES is not set
++CONFIG_KERNEL_DEBUGGER_CORE=3Dy
++CONFIG_UID_STAT=3Dy
++# CONFIG_WL127X_RFKILL is not set
++# CONFIG_APANIC is not set
++CONFIG_APANIC_PLABEL=3D"kpanic"
++# CONFIG_C2PORT is not set
++
++#
++# EEPROM support
++#
++# CONFIG_EEPROM_AT24 is not set
++# CONFIG_EEPROM_AT25 is not set
++# CONFIG_EEPROM_LEGACY is not set
++# CONFIG_EEPROM_93CX6 is not set
++CONFIG_HAVE_IDE=3Dy
++# CONFIG_IDE is not set
++
++#
++# SCSI device support
++#
++# CONFIG_RAID_ATTRS is not set
++# CONFIG_SCSI is not set
++# CONFIG_SCSI_DMA is not set
++# CONFIG_SCSI_NETLINK is not set
++# CONFIG_ATA is not set
++CONFIG_MD=3Dy
++# CONFIG_BLK_DEV_MD is not set
++CONFIG_BLK_DEV_DM=3Dy
++CONFIG_DM_DEBUG=3Dy
++CONFIG_DM_CRYPT=3Dy
++# CONFIG_DM_SNAPSHOT is not set
++# CONFIG_DM_MIRROR is not set
++# CONFIG_DM_ZERO is not set
++# CONFIG_DM_MULTIPATH is not set
++# CONFIG_DM_DELAY is not set
++CONFIG_DM_UEVENT=3Dy
++CONFIG_NETDEVICES=3Dy
++CONFIG_DUMMY=3Dy
++# CONFIG_BONDING is not set
++# CONFIG_MACVLAN is not set
++# CONFIG_EQUALIZER is not set
++CONFIG_TUN=3Dy
++# CONFIG_VETH is not set
++# CONFIG_PHYLIB is not set
++CONFIG_NET_ETHERNET=3Dy
++CONFIG_MII=3Dy
++# CONFIG_AX88796 is not set
++CONFIG_SMC91X=3Dy
++# CONFIG_DM9000 is not set
++# CONFIG_ENC28J60 is not set
++# CONFIG_SMC911X is not set
++# CONFIG_SMSC911X is not set
++# CONFIG_DNET is not set
++# CONFIG_IBM_NEW_EMAC_ZMII is not set
++# CONFIG_IBM_NEW_EMAC_RGMII is not set
++# CONFIG_IBM_NEW_EMAC_TAH is not set
++# CONFIG_IBM_NEW_EMAC_EMAC4 is not set
++# CONFIG_IBM_NEW_EMAC_NO_FLOW_CTRL is not set
++# CONFIG_IBM_NEW_EMAC_MAL_CLR_ICINTSTAT is not set
++# CONFIG_IBM_NEW_EMAC_MAL_COMMON_ERR is not set
++# CONFIG_B44 is not set
++CONFIG_NETDEV_1000=3Dy
++CONFIG_NETDEV_10000=3Dy
++
++#
++# Wireless LAN
++#
++# CONFIG_WLAN_PRE80211 is not set
++CONFIG_WLAN_80211=3Dy
++# CONFIG_LIBERTAS is not set
++# CONFIG_LIBERTAS_THINFIRM is not set
++# CONFIG_MAC80211_HWSIM is not set
++# CONFIG_P54_COMMON is not set
++# CONFIG_IWLWIFI_LEDS is not set
++# CONFIG_HOSTAP is not set
++# CONFIG_B43 is not set
++# CONFIG_B43LEGACY is not set
++# CONFIG_RT2X00 is not set
++
++#
++# Enable WiMAX (Networking options) to see the WiMAX drivers
++#
++# CONFIG_WAN is not set
++CONFIG_PPP=3Dy
++# CONFIG_PPP_MULTILINK is not set
++# CONFIG_PPP_FILTER is not set
++CONFIG_PPP_ASYNC=3Dy
++# CONFIG_PPP_SYNC_TTY is not set
++CONFIG_PPP_DEFLATE=3Dy
++CONFIG_PPP_BSDCOMP=3Dy
++CONFIG_PPP_MPPE=3Dy
++# CONFIG_PPPOE is not set
++# CONFIG_PPPOL2TP is not set
++CONFIG_PPPOLAC=3Dy
++CONFIG_PPPOPNS=3Dy
++# CONFIG_SLIP is not set
++CONFIG_SLHC=3Dy
++# CONFIG_NETCONSOLE is not set
++# CONFIG_MSM_RMNET is not set
++# CONFIG_NETPOLL is not set
++# CONFIG_NET_POLL_CONTROLLER is not set
++# CONFIG_ISDN is not set
++
++#
++# Input device support
++#
++CONFIG_INPUT=3Dy
++# CONFIG_INPUT_FF_MEMLESS is not set
++CONFIG_INPUT_POLLDEV=3Dy
++
++#
++# Userland interfaces
++#
++CONFIG_INPUT_MOUSEDEV=3Dy
++CONFIG_INPUT_MOUSEDEV_PSAUX=3Dy
++CONFIG_INPUT_MOUSEDEV_SCREEN_X=3D480
++CONFIG_INPUT_MOUSEDEV_SCREEN_Y=3D320
++# CONFIG_INPUT_JOYDEV is not set
++CONFIG_INPUT_EVDEV=3Dy
++# CONFIG_INPUT_EVBUG is not set
++# CONFIG_INPUT_APMPOWER is not set
++CONFIG_INPUT_KEYRESET=3Dy
++
++#
++# Input Device Drivers
++#
++# CONFIG_INPUT_KEYBOARD is not set
++CONFIG_INPUT_MOUSE=3Dy
++# CONFIG_MOUSE_PS2 is not set
++# CONFIG_MOUSE_SERIAL is not set
++# CONFIG_MOUSE_APPLETOUCH is not set
++# CONFIG_MOUSE_BCM5974 is not set
++# CONFIG_MOUSE_VSXXXAA is not set
++CONFIG_MOUSE_GPIO=3Dy
++# CONFIG_INPUT_JOYSTICK is not set
++# CONFIG_INPUT_TABLET is not set
++CONFIG_INPUT_TOUCHSCREEN=3Dy
++# CONFIG_TOUCHSCREEN_ADS7846 is not set
++# CONFIG_TOUCHSCREEN_FUJITSU is not set
++# CONFIG_TOUCHSCREEN_GUNZE is not set
++CONFIG_TOUCHSCREEN_ELAN_I2C_8232=3Dy
++# CONFIG_TOUCHSCREEN_ELO is not set
++# CONFIG_TOUCHSCREEN_WACOM_W8001 is not set
++# CONFIG_TOUCHSCREEN_MTOUCH is not set
++# CONFIG_TOUCHSCREEN_INEXIO is not set
++# CONFIG_TOUCHSCREEN_MK712 is not set
++# CONFIG_TOUCHSCREEN_PENMOUNT is not set
++CONFIG_TOUCHSCREEN_SYNAPTICS_I2C_RMI=3Dy
++# CONFIG_TOUCHSCREEN_TOUCHRIGHT is not set
++# CONFIG_TOUCHSCREEN_TOUCHWIN is not set
++# CONFIG_TOUCHSCREEN_USB_COMPOSITE is not set
++# CONFIG_TOUCHSCREEN_TOUCHIT213 is not set
++# CONFIG_TOUCHSCREEN_TSC2007 is not set
++CONFIG_INPUT_MISC=3Dy
++# CONFIG_INPUT_ATI_REMOTE is not set
++# CONFIG_INPUT_ATI_REMOTE2 is not set
++# CONFIG_INPUT_KEYSPAN_REMOTE is not set
++# CONFIG_INPUT_POWERMATE is not set
++# CONFIG_INPUT_YEALINK is not set
++# CONFIG_INPUT_CM109 is not set
++CONFIG_INPUT_UINPUT=3Dy
++CONFIG_INPUT_GPIO=3Dy
++CONFIG_INPUT_KEYCHORD=3Dy
++
++#
++# Hardware I/O ports
++#
++CONFIG_SERIO=3Dy
++CONFIG_SERIO_SERPORT=3Dy
++CONFIG_SERIO_LIBPS2=3Dy
++# CONFIG_SERIO_RAW is not set
++# CONFIG_GAMEPORT is not set
++
++#
++# Character devices
++#
++CONFIG_VT=3Dy
++CONFIG_CONSOLE_TRANSLATIONS=3Dy
++CONFIG_VT_CONSOLE=3Dy
++CONFIG_HW_CONSOLE=3Dy
++CONFIG_VT_HW_CONSOLE_BINDING=3Dy
++CONFIG_DEVMEM=3Dy
++CONFIG_DEVKMEM=3Dy
++# CONFIG_SERIAL_NONSTANDARD is not set
++
++#
++# Serial drivers
++#
++# CONFIG_SERIAL_8250 is not set
++
++#
++# Non-8250 serial port support
++#
++CONFIG_SERIAL_CORE=3Dy
++CONFIG_SERIAL_MSM=3Dy
++# CONFIG_SERIAL_MSM_CONSOLE is not set
++CONFIG_SERIAL_MSM_CLOCK_CONTROL=3Dy
++CONFIG_SERIAL_MSM_RX_WAKEUP=3Dy
++CONFIG_SERIAL_MSM_HS=3Dy
++CONFIG_UNIX98_PTYS=3Dy
++CONFIG_DEVPTS_MULTIPLE_INSTANCES=3Dy
++# CONFIG_LEGACY_PTYS is not set
++# CONFIG_IPMI_HANDLER is not set
++# CONFIG_HW_RANDOM is not set
++# CONFIG_R3964 is not set
++# CONFIG_RAW_DRIVER is not set
++# CONFIG_TCG_TPM is not set
++# CONFIG_DCC_TTY is not set
++CONFIG_I2C=3Dy
++CONFIG_I2C_BOARDINFO=3Dy
++# CONFIG_I2C_CHARDEV is not set
++CONFIG_I2C_HELPER_AUTO=3Dy
++
++#
++# I2C Hardware Bus support
++#
++
++#
++# I2C system bus drivers (mostly embedded / system-on-chip)
++#
++# CONFIG_I2C_GPIO is not set
++CONFIG_I2C_MSM=3Dy
++# CONFIG_I2C_OCORES is not set
++# CONFIG_I2C_SIMTEC is not set
++
++#
++# External I2C/SMBus adapter drivers
++#
++# CONFIG_I2C_PARPORT_LIGHT is not set
++# CONFIG_I2C_TAOS_EVM is not set
++
++#
++# Other I2C/SMBus bus drivers
++#
++# CONFIG_I2C_PCA_PLATFORM is not set
++# CONFIG_I2C_STUB is not set
++
++#
++# Miscellaneous I2C Chip support
++#
++# CONFIG_DS1682 is not set
++# CONFIG_SENSORS_PCF8574 is not set
++# CONFIG_PCF8575 is not set
++# CONFIG_SENSORS_PCA9539 is not set
++# CONFIG_SENSORS_PCF8591 is not set
++# CONFIG_SENSORS_MAX6875 is not set
++# CONFIG_SENSORS_TSL2550 is not set
++CONFIG_SENSORS_AKM8976=3Dy
++CONFIG_SENSORS_PCA963X=3Dy
++# CONFIG_SENSORS_MT9T013 is not set
++# CONFIG_I2C_DEBUG_CORE is not set
++# CONFIG_I2C_DEBUG_ALGO is not set
++# CONFIG_I2C_DEBUG_BUS is not set
++# CONFIG_I2C_DEBUG_CHIP is not set
++CONFIG_SPI=3Dy
++CONFIG_SPI_MASTER=3Dy
++
++#
++# SPI Master Controller Drivers
++#
++CONFIG_SPI_BITBANG=3Dy
++# CONFIG_SPI_GPIO is not set
++
++#
++# SPI Protocol Masters
++#
++# CONFIG_SPI_SPIDEV is not set
++# CONFIG_SPI_TLE62X0 is not set
++# CONFIG_W1 is not set
++CONFIG_POWER_SUPPLY=3Dy
++# CONFIG_POWER_SUPPLY_DEBUG is not set
++# CONFIG_PDA_POWER is not set
++# CONFIG_APM_POWER is not set
++# CONFIG_BATTERY_DS2760 is not set
++# CONFIG_BATTERY_BQ27x00 is not set
++# CONFIG_HWMON is not set
++# CONFIG_THERMAL is not set
++# CONFIG_THERMAL_HWMON is not set
++# CONFIG_WATCHDOG is not set
++CONFIG_SSB_POSSIBLE=3Dy
++
++#
++# Sonics Silicon Backplane
++#
++# CONFIG_SSB is not set
++
++#
++# Multifunction device drivers
++#
++# CONFIG_MFD_CORE is not set
++# CONFIG_MFD_SM501 is not set
++# CONFIG_HTC_PASIC3 is not set
++# CONFIG_TWL4030_CORE is not set
++# CONFIG_MFD_TMIO is not set
++# CONFIG_PMIC_DA903X is not set
++# CONFIG_MFD_WM8400 is not set
++# CONFIG_MFD_WM8350_I2C is not set
++# CONFIG_MFD_PCF50633 is not set
++
++#
++# Multimedia devices
++#
++
++#
++# Multimedia core support
++#
++CONFIG_VIDEO_DEV=3Dy
++CONFIG_VIDEO_V4L2_COMMON=3Dy
++# CONFIG_VIDEO_ALLOW_V4L1 is not set
++CONFIG_VIDEO_V4L1_COMPAT=3Dy
++# CONFIG_DVB_CORE is not set
++CONFIG_VIDEO_MEDIA=3Dy
++
++#
++# Multimedia drivers
++#
++# CONFIG_MEDIA_ATTACH is not set
++CONFIG_MEDIA_TUNER=3Dy
++# CONFIG_MEDIA_TUNER_CUSTOMIZE is not set
++CONFIG_MEDIA_TUNER_SIMPLE=3Dy
++CONFIG_MEDIA_TUNER_TDA8290=3Dy
++CONFIG_MEDIA_TUNER_TDA9887=3Dy
++CONFIG_MEDIA_TUNER_TEA5761=3Dy
++CONFIG_MEDIA_TUNER_TEA5767=3Dy
++CONFIG_MEDIA_TUNER_MT20XX=3Dy
++CONFIG_MEDIA_TUNER_XC2028=3Dy
++CONFIG_MEDIA_TUNER_XC5000=3Dy
++CONFIG_VIDEO_V4L2=3Dy
++CONFIG_VIDEO_CAPTURE_DRIVERS=3Dy
++# CONFIG_VIDEO_ADV_DEBUG is not set
++# CONFIG_VIDEO_FIXED_MINOR_RANGES is not set
++CONFIG_VIDEO_HELPER_CHIPS_AUTO=3Dy
++# CONFIG_VIDEO_VIVI is not set
++# CONFIG_VIDEO_SAA5246A is not set
++# CONFIG_VIDEO_SAA5249 is not set
++# CONFIG_SOC_CAMERA is not set
++
++#
++# Qualcomm MSM Camera And Video
++#
++CONFIG_MSM_CAMERA=3Dy
++# CONFIG_MSM_CAMERA_DEBUG is not set
++# CONFIG_MSM_CAMERA_FLASH is not set
++
++#
++# Camera Sensor Selection
++#
++CONFIG_MT9T013=3Dy
++# CONFIG_MT9D112 is not set
++# CONFIG_MT9P012 is not set
++# CONFIG_S5K3E2FX is not set
++CONFIG_RADIO_ADAPTERS=3Dy
++# CONFIG_RADIO_TEA5764 is not set
++CONFIG_DAB=3Dy
++
++#
++# Graphics support
++#
++# CONFIG_VGASTATE is not set
++CONFIG_VIDEO_OUTPUT_CONTROL=3Dy
++CONFIG_FB=3Dy
++CONFIG_FIRMWARE_EDID=3Dy
++# CONFIG_FB_DDC is not set
++# CONFIG_FB_BOOT_VESA_SUPPORT is not set
++CONFIG_FB_CFB_FILLRECT=3Dy
++CONFIG_FB_CFB_COPYAREA=3Dy
++CONFIG_FB_CFB_IMAGEBLIT=3Dy
++# CONFIG_FB_CFB_REV_PIXELS_IN_BYTE is not set
++CONFIG_FB_SYS_FILLRECT=3Dy
++CONFIG_FB_SYS_COPYAREA=3Dy
++CONFIG_FB_SYS_IMAGEBLIT=3Dy
++CONFIG_FB_FOREIGN_ENDIAN=3Dy
++CONFIG_FB_BOTH_ENDIAN=3Dy
++# CONFIG_FB_BIG_ENDIAN is not set
++# CONFIG_FB_LITTLE_ENDIAN is not set
++CONFIG_FB_SYS_FOPS=3Dy
++CONFIG_FB_DEFERRED_IO=3Dy
++# CONFIG_FB_SVGALIB is not set
++# CONFIG_FB_MACMODES is not set
++# CONFIG_FB_BACKLIGHT is not set
++CONFIG_FB_MODE_HELPERS=3Dy
++CONFIG_FB_TILEBLITTING=3Dy
++
++#
++# Frame buffer hardware drivers
++#
++CONFIG_FB_S1D13XXX=3Dy
++# CONFIG_FB_VIRTUAL is not set
++CONFIG_FB_METRONOME=3Dy
++CONFIG_FB_MB862XX=3Dy
++CONFIG_FB_MSM=3Dy
++CONFIG_FB_MSM_REFRESH=3Dy
++CONFIG_BACKLIGHT_LCD_SUPPORT=3Dy
++CONFIG_LCD_CLASS_DEVICE=3Dm
++CONFIG_LCD_LTV350QV=3Dm
++CONFIG_LCD_ILI9320=3Dm
++CONFIG_LCD_TDO24M=3Dm
++CONFIG_LCD_VGG2432A4=3Dm
++CONFIG_LCD_PLATFORM=3Dm
++CONFIG_BACKLIGHT_CLASS_DEVICE=3Dm
++CONFIG_BACKLIGHT_GENERIC=3Dm
++
++#
++# Display device support
++#
++# CONFIG_DISPLAY_SUPPORT is not set
++
++#
++# Console display driver support
++#
++# CONFIG_VGA_CONSOLE is not set
++CONFIG_DUMMY_CONSOLE=3Dy
++CONFIG_FRAMEBUFFER_CONSOLE=3Dy
++CONFIG_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY=3Dy
++CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=3Dy
++# CONFIG_FONTS is not set
++CONFIG_FONT_8x8=3Dy
++CONFIG_FONT_8x16=3Dy
++CONFIG_LOGO=3Dy
++# CONFIG_LOGO_LINUX_MONO is not set
++# CONFIG_LOGO_LINUX_VGA16 is not set
++CONFIG_LOGO_LINUX_CLUT224=3Dy
++CONFIG_SOUND=3Dm
++CONFIG_SOUND_OSS_CORE=3Dy
++CONFIG_SND=3Dm
++CONFIG_SND_TIMER=3Dm
++CONFIG_SND_PCM=3Dm
++CONFIG_SND_SEQUENCER=3Dm
++CONFIG_SND_SEQ_DUMMY=3Dm
++CONFIG_SND_OSSEMUL=3Dy
++CONFIG_SND_MIXER_OSS=3Dm
++CONFIG_SND_PCM_OSS=3Dm
++CONFIG_SND_PCM_OSS_PLUGINS=3Dy
++CONFIG_SND_SEQUENCER_OSS=3Dy
++# CONFIG_SND_HRTIMER is not set
++# CONFIG_SND_DYNAMIC_MINORS is not set
++CONFIG_SND_SUPPORT_OLD_API=3Dy
++CONFIG_SND_VERBOSE_PROCFS=3Dy
++# CONFIG_SND_VERBOSE_PRINTK is not set
++# CONFIG_SND_DEBUG is not set
++CONFIG_SND_DRIVERS=3Dy
++# CONFIG_SND_DUMMY is not set
++# CONFIG_SND_VIRMIDI is not set
++# CONFIG_SND_MTPAV is not set
++# CONFIG_SND_SERIAL_U16550 is not set
++# CONFIG_SND_MPU401 is not set
++CONFIG_SND_ARM=3Dy
++CONFIG_SND_SPI=3Dy
++CONFIG_SND_SOC=3Dm
++
++#
++# MSM SoC Audio support
++#
++CONFIG_SND_MSM_SOC=3Dm
++CONFIG_SND_MSM_DAI_SOC=3Dm
++CONFIG_SND_MSM_SOC_MSM7K=3Dm
++CONFIG_SND_SOC_I2C_AND_SPI=3Dm
++CONFIG_SND_SOC_ALL_CODECS=3Dm
++CONFIG_SND_SOC_AD73311=3Dm
++CONFIG_SND_SOC_AK4535=3Dm
++CONFIG_SND_SOC_CS4270=3Dm
++CONFIG_SND_SOC_L3=3Dm
++CONFIG_SND_SOC_PCM3008=3Dm
++CONFIG_SND_SOC_SSM2602=3Dm
++CONFIG_SND_SOC_TLV320AIC23=3Dm
++CONFIG_SND_SOC_TLV320AIC26=3Dm
++CONFIG_SND_SOC_TLV320AIC3X=3Dm
++CONFIG_SND_SOC_UDA134X=3Dm
++CONFIG_SND_SOC_UDA1380=3Dm
++CONFIG_SND_SOC_WM8510=3Dm
++CONFIG_SND_SOC_WM8580=3Dm
++CONFIG_SND_SOC_WM8728=3Dm
++CONFIG_SND_SOC_WM8731=3Dm
++CONFIG_SND_SOC_WM8750=3Dm
++CONFIG_SND_SOC_WM8753=3Dm
++CONFIG_SND_SOC_WM8900=3Dm
++CONFIG_SND_SOC_WM8903=3Dm
++CONFIG_SND_SOC_WM8971=3Dm
++CONFIG_SND_SOC_WM8990=3Dm
++# CONFIG_SOUND_PRIME is not set
++CONFIG_HID_SUPPORT=3Dy
++CONFIG_HID=3Dy
++# CONFIG_HID_DEBUG is not set
++# CONFIG_HIDRAW is not set
++# CONFIG_HID_PID is not set
++
++#
++# Special HID drivers
++#
++CONFIG_HID_COMPAT=3Dy
++# CONFIG_HID_APPLE is not set
++CONFIG_USB_SUPPORT=3Dy
++CONFIG_USB_ARCH_HAS_HCD=3Dy
++# CONFIG_USB_ARCH_HAS_OHCI is not set
++# CONFIG_USB_ARCH_HAS_EHCI is not set
++# CONFIG_USB is not set
++# CONFIG_USB_OTG_WHITELIST is not set
++# CONFIG_USB_OTG_BLACKLIST_HUB is not set
++# CONFIG_USB_GADGET_MUSB_HDRC is not set
++
++#
++# NOTE: USB_STORAGE depends on SCSI but BLK_DEV_SD may also be needed;
++#
++CONFIG_USB_GADGET=3Dy
++# CONFIG_USB_GADGET_DEBUG_FILES is not set
++# CONFIG_USB_GADGET_DEBUG_FS is not set
++CONFIG_USB_GADGET_VBUS_DRAW=3D2
++CONFIG_USB_GADGET_SELECTED=3Dy
++# CONFIG_USB_GADGET_AT91 is not set
++# CONFIG_USB_GADGET_ATMEL_USBA is not set
++# CONFIG_USB_GADGET_FSL_USB2 is not set
++# CONFIG_USB_GADGET_LH7A40X is not set
++# CONFIG_USB_GADGET_OMAP is not set
++# CONFIG_USB_GADGET_PXA25X is not set
++# CONFIG_USB_GADGET_PXA27X is not set
++# CONFIG_USB_GADGET_S3C2410 is not set
++# CONFIG_USB_GADGET_IMX is not set
++# CONFIG_USB_GADGET_M66592 is not set
++# CONFIG_USB_GADGET_AMD5536UDC is not set
++# CONFIG_USB_GADGET_FSL_QE is not set
++# CONFIG_USB_GADGET_CI13XXX is not set
++# CONFIG_USB_GADGET_NET2280 is not set
++# CONFIG_USB_GADGET_GOKU is not set
++CONFIG_USB_GADGET_MSM_72K=3Dy
++CONFIG_USB_MSM_72K=3Dy
++# CONFIG_USB_GADGET_DUMMY_HCD is not set
++CONFIG_USB_GADGET_DUALSPEED=3Dy
++# CONFIG_USB_ZERO is not set
++CONFIG_USB_ETH=3Dm
++# CONFIG_USB_ETH_RNDIS is not set
++# CONFIG_USB_GADGETFS is not set
++# CONFIG_USB_FILE_STORAGE is not set
++# CONFIG_USB_G_SERIAL is not set
++# CONFIG_USB_MIDI_GADGET is not set
++# CONFIG_USB_G_PRINTER is not set
++# CONFIG_USB_ANDROID is not set
++# CONFIG_USB_CDC_COMPOSITE is not set
++
++#
++# OTG and related infrastructure
++#
++# CONFIG_USB_GPIO_VBUS is not set
++
++#
++# USB Function Support
++#
++# CONFIG_USB_FUNCTION is not set
++CONFIG_MMC=3Dy
++# CONFIG_MMC_DEBUG is not set
++CONFIG_MMC_UNSAFE_RESUME=3Dy
++CONFIG_MMC_EMBEDDED_SDIO=3Dy
++CONFIG_MMC_PARANOID_SD_INIT=3Dy
++
++#
++# MMC/SD/SDIO Card Drivers
++#
++CONFIG_MMC_BLOCK=3Dy
++# CONFIG_MMC_BLOCK_BOUNCE is not set
++# CONFIG_MMC_BLOCK_DEFERRED_RESUME is not set
++# CONFIG_SDIO_UART is not set
++# CONFIG_MMC_TEST is not set
++
++#
++# MMC/SD/SDIO Host Controller Drivers
++#
++# CONFIG_MMC_SDHCI is not set
++# CONFIG_MMC_SPI is not set
++CONFIG_MMC_MSM7X00A=3Dy
++# CONFIG_MMC_MSM7X00A_RESUME_IN_WQ is not set
++# CONFIG_MEMSTICK is not set
++# CONFIG_ACCESSIBILITY is not set
++CONFIG_NEW_LEDS=3Dy
++CONFIG_LEDS_CLASS=3Dy
++
++#
++# LED drivers
++#
++# CONFIG_LEDS_PCA9532 is not set
++CONFIG_LEDS_GPIO=3Dy
++CONFIG_LEDS_CPLD=3Dy
++# CONFIG_LEDS_PCA955X is not set
++
++#
++# LED Triggers
++#
++CONFIG_LEDS_TRIGGERS=3Dy
++CONFIG_LEDS_TRIGGER_TIMER=3Dy
++CONFIG_LEDS_TRIGGER_HEARTBEAT=3Dy
++# CONFIG_LEDS_TRIGGER_BACKLIGHT is not set
++# CONFIG_LEDS_TRIGGER_DEFAULT_ON is not set
++CONFIG_LEDS_TRIGGER_SLEEP=3Dy
++CONFIG_SWITCH=3Dy
++CONFIG_SWITCH_GPIO=3Dy
++CONFIG_RTC_LIB=3Dy
++CONFIG_RTC_CLASS=3Dy
++CONFIG_RTC_HCTOSYS=3Dy
++CONFIG_RTC_HCTOSYS_DEVICE=3D"rtc0"
++# CONFIG_RTC_DEBUG is not set
++
++#
++# RTC interfaces
++#
++CONFIG_RTC_INTF_SYSFS=3Dy
++CONFIG_RTC_INTF_PROC=3Dy
++CONFIG_RTC_INTF_DEV=3Dy
++CONFIG_RTC_INTF_DEV_UIE_EMUL=3Dy
++CONFIG_RTC_INTF_ALARM=3Dy
++# CONFIG_RTC_DRV_TEST is not set
++
++#
++# I2C RTC drivers
++#
++# CONFIG_RTC_DRV_DS1307 is not set
++# CONFIG_RTC_DRV_DS1374 is not set
++# CONFIG_RTC_DRV_DS1672 is not set
++# CONFIG_RTC_DRV_MAX6900 is not set
++# CONFIG_RTC_DRV_RS5C372 is not set
++# CONFIG_RTC_DRV_ISL1208 is not set
++# CONFIG_RTC_DRV_X1205 is not set
++# CONFIG_RTC_DRV_PCF8563 is not set
++# CONFIG_RTC_DRV_PCF8583 is not set
++# CONFIG_RTC_DRV_M41T80 is not set
++# CONFIG_RTC_DRV_S35390A is not set
++# CONFIG_RTC_DRV_FM3130 is not set
++# CONFIG_RTC_DRV_RX8581 is not set
++
++#
++# SPI RTC drivers
++#
++# CONFIG_RTC_DRV_M41T94 is not set
++# CONFIG_RTC_DRV_DS1305 is not set
++# CONFIG_RTC_DRV_DS1390 is not set
++# CONFIG_RTC_DRV_MAX6902 is not set
++# CONFIG_RTC_DRV_R9701 is not set
++# CONFIG_RTC_DRV_RS5C348 is not set
++# CONFIG_RTC_DRV_DS3234 is not set
++
++#
++# Platform RTC drivers
++#
++# CONFIG_RTC_DRV_CMOS is not set
++# CONFIG_RTC_DRV_DS1286 is not set
++# CONFIG_RTC_DRV_DS1511 is not set
++# CONFIG_RTC_DRV_DS1553 is not set
++# CONFIG_RTC_DRV_DS1742 is not set
++# CONFIG_RTC_DRV_STK17TA8 is not set
++# CONFIG_RTC_DRV_M48T86 is not set
++# CONFIG_RTC_DRV_M48T35 is not set
++# CONFIG_RTC_DRV_M48T59 is not set
++# CONFIG_RTC_DRV_BQ4802 is not set
++# CONFIG_RTC_DRV_V3020 is not set
++
++#
++# on-CPU RTC drivers
++#
++CONFIG_RTC_DRV_MSM7X00A=3Dy
++# CONFIG_DMADEVICES is not set
++# CONFIG_REGULATOR is not set
++# CONFIG_UIO is not set
++CONFIG_STAGING=3Dy
++# CONFIG_STAGING_EXCLUDE_BUILD is not set
++# CONFIG_MEILHAUS is not set
++# CONFIG_ECHO is not set
++# CONFIG_AGNX is not set
++# CONFIG_COMEDI is not set
++
++#
++# Android
++#
++CONFIG_ANDROID=3Dy
++# CONFIG_ANDROID_BINDER_IPC is not set
++# CONFIG_ANDROID_LOGGER is not set
++# CONFIG_ANDROID_RAM_CONSOLE is not set
++CONFIG_ANDROID_TIMED_OUTPUT=3Dy
++CONFIG_ANDROID_TIMED_GPIO=3Dy
++# CONFIG_ANDROID_LOW_MEMORY_KILLER is not set
++
++#
++# File systems
++#
++CONFIG_EXT2_FS=3Dy
++CONFIG_EXT2_FS_XATTR=3Dy
++CONFIG_EXT2_FS_POSIX_ACL=3Dy
++CONFIG_EXT2_FS_SECURITY=3Dy
++CONFIG_EXT2_FS_XIP=3Dy
++CONFIG_EXT3_FS=3Dm
++CONFIG_EXT3_FS_XATTR=3Dy
++CONFIG_EXT3_FS_POSIX_ACL=3Dy
++CONFIG_EXT3_FS_SECURITY=3Dy
++CONFIG_EXT4_FS=3Dm
++CONFIG_EXT4DEV_COMPAT=3Dy
++CONFIG_EXT4_FS_XATTR=3Dy
++CONFIG_EXT4_FS_POSIX_ACL=3Dy
++CONFIG_EXT4_FS_SECURITY=3Dy
++CONFIG_FS_XIP=3Dy
++CONFIG_JBD=3Dm
++CONFIG_JBD_DEBUG=3Dy
++CONFIG_JBD2=3Dm
++CONFIG_JBD2_DEBUG=3Dy
++CONFIG_FS_MBCACHE=3Dy
++# CONFIG_REISERFS_FS is not set
++# CONFIG_JFS_FS is not set
++CONFIG_FS_POSIX_ACL=3Dy
++CONFIG_FILE_LOCKING=3Dy
++# CONFIG_XFS_FS is not set
++# CONFIG_OCFS2_FS is not set
++# CONFIG_BTRFS_FS is not set
++# CONFIG_DNOTIFY is not set
++CONFIG_INOTIFY=3Dy
++CONFIG_INOTIFY_USER=3Dy
++# CONFIG_QUOTA is not set
++# CONFIG_AUTOFS_FS is not set
++# CONFIG_AUTOFS4_FS is not set
++# CONFIG_FUSE_FS is not set
++
++#
++# CD-ROM/DVD Filesystems
++#
++# CONFIG_ISO9660_FS is not set
++# CONFIG_UDF_FS is not set
++
++#
++# DOS/FAT/NT Filesystems
++#
++CONFIG_FAT_FS=3Dy
++# CONFIG_MSDOS_FS is not set
++CONFIG_VFAT_FS=3Dy
++CONFIG_FAT_DEFAULT_CODEPAGE=3D437
++CONFIG_FAT_DEFAULT_IOCHARSET=3D"iso8859-1"
++# CONFIG_NTFS_FS is not set
++
++#
++# Pseudo filesystems
++#
++CONFIG_PROC_FS=3Dy
++CONFIG_PROC_SYSCTL=3Dy
++CONFIG_PROC_PAGE_MONITOR=3Dy
++CONFIG_SYSFS=3Dy
++CONFIG_TMPFS=3Dy
++# CONFIG_TMPFS_POSIX_ACL is not set
++# CONFIG_HUGETLB_PAGE is not set
++# CONFIG_CONFIGFS_FS is not set
++CONFIG_MISC_FILESYSTEMS=3Dy
++# CONFIG_ADFS_FS is not set
++# CONFIG_AFFS_FS is not set
++# CONFIG_HFS_FS is not set
++# CONFIG_HFSPLUS_FS is not set
++# CONFIG_BEFS_FS is not set
++# CONFIG_BFS_FS is not set
++# CONFIG_EFS_FS is not set
++CONFIG_YAFFS_FS=3Dy
++CONFIG_YAFFS_YAFFS1=3Dy
++# CONFIG_YAFFS_9BYTE_TAGS is not set
++# CONFIG_YAFFS_DOES_ECC is not set
++CONFIG_YAFFS_YAFFS2=3Dy
++CONFIG_YAFFS_AUTO_YAFFS2=3Dy
++# CONFIG_YAFFS_DISABLE_LAZY_LOAD is not set
++# CONFIG_YAFFS_DISABLE_WIDE_TNODES is not set
++# CONFIG_YAFFS_ALWAYS_CHECK_CHUNK_ERASED is not set
++CONFIG_YAFFS_SHORT_NAMES_IN_RAM=3Dy
++CONFIG_JFFS2_FS=3Dy
++CONFIG_JFFS2_FS_DEBUG=3D0
++CONFIG_JFFS2_FS_WRITEBUFFER=3Dy
++CONFIG_JFFS2_FS_WBUF_VERIFY=3Dy
++CONFIG_JFFS2_SUMMARY=3Dy
++CONFIG_JFFS2_FS_XATTR=3Dy
++CONFIG_JFFS2_FS_POSIX_ACL=3Dy
++CONFIG_JFFS2_FS_SECURITY=3Dy
++CONFIG_JFFS2_COMPRESSION_OPTIONS=3Dy
++CONFIG_JFFS2_ZLIB=3Dy
++CONFIG_JFFS2_LZO=3Dy
++CONFIG_JFFS2_RTIME=3Dy
++CONFIG_JFFS2_RUBIN=3Dy
++# CONFIG_JFFS2_CMODE_NONE is not set
++CONFIG_JFFS2_CMODE_PRIORITY=3Dy
++# CONFIG_JFFS2_CMODE_SIZE is not set
++# CONFIG_JFFS2_CMODE_FAVOURLZO is not set
++# CONFIG_CRAMFS is not set
++# CONFIG_SQUASHFS is not set
++# CONFIG_VXFS_FS is not set
++# CONFIG_MINIX_FS is not set
++# CONFIG_OMFS_FS is not set
++# CONFIG_HPFS_FS is not set
++# CONFIG_QNX4FS_FS is not set
++# CONFIG_ROMFS_FS is not set
++# CONFIG_SYSV_FS is not set
++# CONFIG_UFS_FS is not set
++CONFIG_NETWORK_FILESYSTEMS=3Dy
++CONFIG_NFS_FS=3Dm
++CONFIG_NFS_V3=3Dy
++CONFIG_NFS_V3_ACL=3Dy
++CONFIG_NFS_V4=3Dy
++# CONFIG_NFSD is not set
++CONFIG_LOCKD=3Dm
++CONFIG_LOCKD_V4=3Dy
++CONFIG_NFS_ACL_SUPPORT=3Dm
++CONFIG_NFS_COMMON=3Dy
++CONFIG_SUNRPC=3Dm
++CONFIG_SUNRPC_GSS=3Dm
++# CONFIG_SUNRPC_REGISTER_V4 is not set
++CONFIG_RPCSEC_GSS_KRB5=3Dm
++# CONFIG_RPCSEC_GSS_SPKM3 is not set
++# CONFIG_SMB_FS is not set
++CONFIG_CIFS=3Dm
++CONFIG_CIFS_STATS=3Dy
++CONFIG_CIFS_STATS2=3Dy
++CONFIG_CIFS_WEAK_PW_HASH=3Dy
++CONFIG_CIFS_XATTR=3Dy
++CONFIG_CIFS_POSIX=3Dy
++CONFIG_CIFS_DEBUG2=3Dy
++CONFIG_CIFS_EXPERIMENTAL=3Dy
++# CONFIG_NCP_FS is not set
++# CONFIG_CODA_FS is not set
++# CONFIG_AFS_FS is not set
++
++#
++# Partition Types
++#
++# CONFIG_PARTITION_ADVANCED is not set
++CONFIG_MSDOS_PARTITION=3Dy
++CONFIG_NLS=3Dy
++CONFIG_NLS_DEFAULT=3D"iso8859-1"
++CONFIG_NLS_CODEPAGE_437=3Dy
++# CONFIG_NLS_CODEPAGE_737 is not set
++# CONFIG_NLS_CODEPAGE_775 is not set
++# CONFIG_NLS_CODEPAGE_850 is not set
++# CONFIG_NLS_CODEPAGE_852 is not set
++# CONFIG_NLS_CODEPAGE_855 is not set
++# CONFIG_NLS_CODEPAGE_857 is not set
++# CONFIG_NLS_CODEPAGE_860 is not set
++# CONFIG_NLS_CODEPAGE_861 is not set
++# CONFIG_NLS_CODEPAGE_862 is not set
++# CONFIG_NLS_CODEPAGE_863 is not set
++# CONFIG_NLS_CODEPAGE_864 is not set
++# CONFIG_NLS_CODEPAGE_865 is not set
++# CONFIG_NLS_CODEPAGE_866 is not set
++# CONFIG_NLS_CODEPAGE_869 is not set
++# CONFIG_NLS_CODEPAGE_936 is not set
++# CONFIG_NLS_CODEPAGE_950 is not set
++# CONFIG_NLS_CODEPAGE_932 is not set
++# CONFIG_NLS_CODEPAGE_949 is not set
++# CONFIG_NLS_CODEPAGE_874 is not set
++# CONFIG_NLS_ISO8859_8 is not set
++# CONFIG_NLS_CODEPAGE_1250 is not set
++# CONFIG_NLS_CODEPAGE_1251 is not set
++# CONFIG_NLS_ASCII is not set
++CONFIG_NLS_ISO8859_1=3Dy
++# CONFIG_NLS_ISO8859_2 is not set
++# CONFIG_NLS_ISO8859_3 is not set
++# CONFIG_NLS_ISO8859_4 is not set
++# CONFIG_NLS_ISO8859_5 is not set
++# CONFIG_NLS_ISO8859_6 is not set
++# CONFIG_NLS_ISO8859_7 is not set
++# CONFIG_NLS_ISO8859_9 is not set
++# CONFIG_NLS_ISO8859_13 is not set
++# CONFIG_NLS_ISO8859_14 is not set
++# CONFIG_NLS_ISO8859_15 is not set
++# CONFIG_NLS_KOI8_R is not set
++# CONFIG_NLS_KOI8_U is not set
++# CONFIG_NLS_UTF8 is not set
++# CONFIG_DLM is not set
++
++#
++# Kernel hacking
++#
++CONFIG_PRINTK_TIME=3Dy
++CONFIG_ENABLE_WARN_DEPRECATED=3Dy
++CONFIG_ENABLE_MUST_CHECK=3Dy
++CONFIG_FRAME_WARN=3D1024
++CONFIG_MAGIC_SYSRQ=3Dy
++# CONFIG_UNUSED_SYMBOLS is not set
++CONFIG_DEBUG_FS=3Dy
++# CONFIG_HEADERS_CHECK is not set
++# CONFIG_DEBUG_KERNEL is not set
++# CONFIG_DEBUG_BUGVERBOSE is not set
++# CONFIG_DEBUG_MEMORY_INIT is not set
++CONFIG_FRAME_POINTER=3Dy
++# CONFIG_RCU_CPU_STALL_DETECTOR is not set
++# CONFIG_LATENCYTOP is not set
++CONFIG_HAVE_FUNCTION_TRACER=3Dy
++
++#
++# Tracers
++#
++# CONFIG_DYNAMIC_PRINTK_DEBUG is not set
++# CONFIG_SAMPLES is not set
++CONFIG_HAVE_ARCH_KGDB=3Dy
++# CONFIG_DEBUG_USER is not set
++
++#
++# Security options
++#
++# CONFIG_KEYS is not set
++# CONFIG_SECURITY is not set
++# CONFIG_SECURITYFS is not set
++# CONFIG_SECURITY_FILE_CAPABILITIES is not set
++CONFIG_CRYPTO=3Dy
++
++#
++# Crypto core or helper
++#
++# CONFIG_CRYPTO_FIPS is not set
++CONFIG_CRYPTO_ALGAPI=3Dy
++CONFIG_CRYPTO_ALGAPI2=3Dy
++CONFIG_CRYPTO_AEAD=3Dy
++CONFIG_CRYPTO_AEAD2=3Dy
++CONFIG_CRYPTO_BLKCIPHER=3Dy
++CONFIG_CRYPTO_BLKCIPHER2=3Dy
++CONFIG_CRYPTO_HASH=3Dy
++CONFIG_CRYPTO_HASH2=3Dy
++CONFIG_CRYPTO_RNG2=3Dy
++CONFIG_CRYPTO_MANAGER=3Dy
++CONFIG_CRYPTO_MANAGER2=3Dy
++# CONFIG_CRYPTO_GF128MUL is not set
++# CONFIG_CRYPTO_NULL is not set
++# CONFIG_CRYPTO_CRYPTD is not set
++CONFIG_CRYPTO_AUTHENC=3Dy
++# CONFIG_CRYPTO_TEST is not set
++
++#
++# Authenticated Encryption with Associated Data
++#
++# CONFIG_CRYPTO_CCM is not set
++# CONFIG_CRYPTO_GCM is not set
++# CONFIG_CRYPTO_SEQIV is not set
++
++#
++# Block modes
++#
++CONFIG_CRYPTO_CBC=3Dy
++# CONFIG_CRYPTO_CTR is not set
++# CONFIG_CRYPTO_CTS is not set
++CONFIG_CRYPTO_ECB=3Dy
++# CONFIG_CRYPTO_LRW is not set
++# CONFIG_CRYPTO_PCBC is not set
++# CONFIG_CRYPTO_XTS is not set
++
++#
++# Hash modes
++#
++CONFIG_CRYPTO_HMAC=3Dy
++# CONFIG_CRYPTO_XCBC is not set
++
++#
++# Digest
++#
++# CONFIG_CRYPTO_CRC32C is not set
++# CONFIG_CRYPTO_MD4 is not set
++CONFIG_CRYPTO_MD5=3Dy
++# CONFIG_CRYPTO_MICHAEL_MIC is not set
++# CONFIG_CRYPTO_RMD128 is not set
++# CONFIG_CRYPTO_RMD160 is not set
++# CONFIG_CRYPTO_RMD256 is not set
++# CONFIG_CRYPTO_RMD320 is not set
++CONFIG_CRYPTO_SHA1=3Dy
++# CONFIG_CRYPTO_SHA256 is not set
++# CONFIG_CRYPTO_SHA512 is not set
++# CONFIG_CRYPTO_TGR192 is not set
++# CONFIG_CRYPTO_WP512 is not set
++
++#
++# Ciphers
++#
++CONFIG_CRYPTO_AES=3Dy
++# CONFIG_CRYPTO_ANUBIS is not set
++CONFIG_CRYPTO_ARC4=3Dy
++# CONFIG_CRYPTO_BLOWFISH is not set
++# CONFIG_CRYPTO_CAMELLIA is not set
++# CONFIG_CRYPTO_CAST5 is not set
++# CONFIG_CRYPTO_CAST6 is not set
++CONFIG_CRYPTO_DES=3Dy
++# CONFIG_CRYPTO_FCRYPT is not set
++# CONFIG_CRYPTO_KHAZAD is not set
++# CONFIG_CRYPTO_SALSA20 is not set
++# CONFIG_CRYPTO_SEED is not set
++# CONFIG_CRYPTO_SERPENT is not set
++# CONFIG_CRYPTO_TEA is not set
++CONFIG_CRYPTO_TWOFISH=3Dy
++CONFIG_CRYPTO_TWOFISH_COMMON=3Dy
++
++#
++# Compression
++#
++CONFIG_CRYPTO_DEFLATE=3Dm
++# CONFIG_CRYPTO_LZO is not set
++
++#
++# Random Number Generation
++#
++# CONFIG_CRYPTO_ANSI_CPRNG is not set
++CONFIG_CRYPTO_HW=3Dy
++
++#
++# Library routines
++#
++CONFIG_BITREVERSE=3Dy
++CONFIG_GENERIC_FIND_LAST_BIT=3Dy
++CONFIG_CRC_CCITT=3Dy
++CONFIG_CRC16=3Dm
++# CONFIG_CRC_T10DIF is not set
++# CONFIG_CRC_ITU_T is not set
++CONFIG_CRC32=3Dy
++CONFIG_CRC7=3Dm
++# CONFIG_LIBCRC32C is not set
++CONFIG_ZLIB_INFLATE=3Dy
++CONFIG_ZLIB_DEFLATE=3Dy
++CONFIG_LZO_COMPRESS=3Dy
++CONFIG_LZO_DECOMPRESS=3Dy
++CONFIG_PLIST=3Dy
++CONFIG_HAS_IOMEM=3Dy
++CONFIG_HAS_IOPORT=3Dy
++CONFIG_HAS_DMA=3Dy
+diff --git a/recipes/linux/linux-msm7xxxx_git.bb b/recipes/linux/linux-msm7=
+xxxx_git.bb
+index 0f65ff3..7765d26 100644
+--- a/recipes/linux/linux-msm7xxxx_git.bb
++++ b/recipes/linux/linux-msm7xxxx_git.bb
+@@ -3,19 +3,23 @@ require linux.inc
+ PV =3D "2.6.25+${PR}+gitr${SRCREV}"
+ PV_htcraphael =3D "2.6.27+${PR}+gitr${SRCREV}"
+ PV_htcdiamond =3D "2.6.27+${PR}+gitr${SRCREV}"
++PV_htcdream =3D "2.6.29+${PR}+gitr${SRCREV}"
++
+ PR =3D "r13"
+=20
+-COMPATIBLE_MACHINE =3D "htckaiser|htcpolaris|htcvogue|htctitan|htcnike|htc=
+raphael|htcdiamond|htcblackstone"
++COMPATIBLE_MACHINE =3D "htckaiser|htcpolaris|htcvogue|htctitan|htcnike|htc=
+raphael|htcdiamond|htcblackstone|htcdream"
+=20
+ SRCREV =3D "d2fc2471ba384dabad1c9a4126e2e2372349d34c"
+ SRCREV_htcraphael =3D "905eb169a7d659c221aad5c38aac443065178c4c"
+ SRCREV_htcdiamond =3D "905eb169a7d659c221aad5c38aac443065178c4c"
+ SRCREV_htcblackstone =3D "905eb169a7d659c221aad5c38aac443065178c4c"
++SRCREV_htcdream =3D "881be106ca8c3453a9aa914433d1487a2c4b919c"
+=20
+ SRC_BRANCH =3D "htc-vogue"
+ SRC_BRANCH_htcraphael =3D "htc-msm-2.6.27"
+ SRC_BRANCH_htcdiamond =3D "htc-msm-2.6.27"
+ SRC_BRANCH_htcblackstone =3D "htc-msm-2.6.27"
++SRC_BRANCH_htcdream =3D "htc-msm-2.6.29"
+=20
+ SRC_URI =3D "\
+   git://git.linuxtogo.org/home/groups/mobile-linux/kernel.git;branch=3D${S=
+RC_BRANCH};protocol=3Dgit \
 
+--=_koffein-1040-1254955285-0001-2
+Content-Type: text/x-patch; charset=iso-8859-1; name="patch_correct_device_dscr.patch"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="patch_correct_device_dscr.patch"
 
+commit 0fda9d032453ee85eba54dbd3db20c97a9f33b9b
+Author: David Lanzend=F6rfer <david.lanzendoerfer@o2s.ch>
+Date:   Wed Oct 7 18:49:36 2009 +0200
+
+    corrected device description
+
+diff --git a/conf/machine/htcdream.conf b/conf/machine/htcdream.conf
+index c977ba2..199fd8a 100644
+--- a/conf/machine/htcdream.conf
++++ b/conf/machine/htcdream.conf
+@@ -1,6 +1,6 @@
+ #@TYPE: Machine
+-#@NAME: HTC Kaiser phone
+-#@DESCRIPTION: Machine configuration for HTC Kaiser phone (aka HTC TyTN II=
+)
++#@NAME: HTC Dream phone
++#@DESCRIPTION: Machine configuration for HTC Dream phone (aka T-Mobile G1)
+ require conf/machine/include/tune-arm1136-novfp.inc
+=20
+ PREFERRED_PROVIDER_virtual/kernel =3D "linux-msm7xxxx"
+
+--=_koffein-1040-1254955285-0001-2--
