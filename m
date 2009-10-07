@@ -1,24 +1,24 @@
 Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1MvYOT-0007ua-2K
-	for openembedded-devel@openembedded.org; Wed, 07 Oct 2009 17:25:36 +0200
-Received: (qmail 3015 invoked by uid 1003); 7 Oct 2009 15:24:42 -0000
+	(envelope-from <philip@balister.org>) id 1MvYPZ-0007ww-O2
+	for openembedded-devel@openembedded.org; Wed, 07 Oct 2009 17:26:45 +0200
+Received: (qmail 12042 invoked by uid 1003); 7 Oct 2009 15:25:51 -0000
 Received: from localhost (HELO ?192.168.0.174?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 7 Oct 2009 15:24:39 -0000
-Message-ID: <4ACCB2B5.5050405@balister.org>
-Date: Wed, 07 Oct 2009 08:24:37 -0700
+	by mail.geekisp.com with SMTP; 7 Oct 2009 15:25:50 -0000
+Message-ID: <4ACCB2FD.30801@balister.org>
+Date: Wed, 07 Oct 2009 08:25:49 -0700
 From: Philip Balister <philip@balister.org>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
 	rv:1.9.1.1) Gecko/20090814 Fedora/3.0-2.6.b3.fc11 Thunderbird/3.0b3
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1254921866-5356-1-git-send-email-marcin@juszkiewicz.com.pl>
-In-Reply-To: <1254921866-5356-1-git-send-email-marcin@juszkiewicz.com.pl>
+References: <1254925696-8813-1-git-send-email-marcin@juszkiewicz.com.pl>
+In-Reply-To: <1254925696-8813-1-git-send-email-marcin@juszkiewicz.com.pl>
 X-SA-Exim-Connect-IP: 216.168.135.169
 X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [STABLE][PATCH] linux-bug: updated to newer svn revision, tweaked kernel configuration
+Subject: Re: [STABLE][PATCH] xserver-common: added 1.30 + patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,547 +32,960 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Oct 2009 15:25:36 -0000
-X-Groupsio-MsgNum: 13352
+X-List-Received-Date: Wed, 07 Oct 2009 15:26:45 -0000
+X-Groupsio-MsgNum: 13353
 Content-Type: multipart/signed; protocol="application/pkcs7-signature";
-	micalg=sha1; boundary="------------ms030004000109020208010706"
+	micalg=sha1; boundary="------------ms020307080008080007000902"
 
---------------ms030004000109020208010706
+--------------ms020307080008080007000902
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
 Acked-by: Philip Balister <philip@balister.org>
 
-On 10/07/2009 06:24 AM, Marcin Juszkiewicz wrote:
+On 10/07/2009 07:28 AM, Marcin Juszkiewicz wrote:
+> xserver-common 1.30 is experimental, do not use by default
+> xserver-common 1.30: -screen option is only for Kdrive
+> xserver-common 1.30: another set of updates
+>
+> 0024 moves functionality of /etc/X11/Xserver to separate file (except
+>       running X11 server) - this allows to use xserver-common package i=
+n
+>       systems where xinit is used to run X11 session as root (look at
+>       xserver-nodm-init package)
+>
+> 0025 moves xmodmap files to /etc/X11/xmodmap/ and installs
+>       xserver-common file created in previous patch.
+>
+> 0026 fixes path to default.xmodmap file
+>
+> xserver-common: recommend xtscal (works without it but needs for calibr=
+ation)
 > ---
->   conf/distro/include/sane-srcrevs.inc |    1 -
->   recipes/linux/linux-bug/defconfig    |  222 ++++++++++---------------=
----------
->   recipes/linux/linux-bug_2.6.27.2.bb  |    3 +-
->   3 files changed, 68 insertions(+), 158 deletions(-)
+>   .../0018-zaurus-fixed-machine-names.patch          |   35 ++
+>   .../0019-keymap-fixed-machine-names.patch          |   59 +++
+>   .../0020-keymap-fixed-machine-names-again.patch    |   50 +++
+>   ...roduced-MOUSE-variable-for-mouse-argument.patch |   63 +++
+>   .../0022-xserver-fix-syntax-error.patch            |   27 ++
+>   ...vide-screen-argument-only-for-non-X.org-s.patch |   27 ++
+>   ...e-nearly-whole-functionality-to-xserver-c.patch |  415 +++++++++++=
++++++++++
+>   ...efile-move-modmaps-install-xserver-common.patch |   32 ++
+>   ...98keymap-fixup-fixed-path-to-xmodmap-file.patch |   25 ++
+>   recipes/xserver-common/xserver-common_1.30.bb      |   31 ++
+>   10 files changed, 764 insertions(+), 0 deletions(-)
+>   create mode 100644 recipes/xserver-common/xserver-common-1.30/0018-za=
+urus-fixed-machine-names.patch
+>   create mode 100644 recipes/xserver-common/xserver-common-1.30/0019-ke=
+ymap-fixed-machine-names.patch
+>   create mode 100644 recipes/xserver-common/xserver-common-1.30/0020-ke=
+ymap-fixed-machine-names-again.patch
+>   create mode 100644 recipes/xserver-common/xserver-common-1.30/0021-xs=
+erver-introduced-MOUSE-variable-for-mouse-argument.patch
+>   create mode 100644 recipes/xserver-common/xserver-common-1.30/0022-xs=
+erver-fix-syntax-error.patch
+>   create mode 100644 recipes/xserver-common/xserver-common-1.30/0023-Xs=
+erver-provide-screen-argument-only-for-non-X.org-s.patch
+>   create mode 100644 recipes/xserver-common/xserver-common-1.30/0024-Xs=
+erver-move-nearly-whole-functionality-to-xserver-c.patch
+>   create mode 100644 recipes/xserver-common/xserver-common-1.30/0025-Ma=
+kefile-move-modmaps-install-xserver-common.patch
+>   create mode 100644 recipes/xserver-common/xserver-common-1.30/0026-98=
+keymap-fixup-fixed-path-to-xmodmap-file.patch
+>   create mode 100644 recipes/xserver-common/xserver-common_1.30.bb
 >
-> diff --git a/conf/distro/include/sane-srcrevs.inc b/conf/distro/include=
-/sane-srcrevs.inc
-> index edaa08b..ce34747 100644
-> --- a/conf/distro/include/sane-srcrevs.inc
-> +++ b/conf/distro/include/sane-srcrevs.inc
-> @@ -100,7 +100,6 @@ SRCREV_pn-libw100 ?=3D "47"
->   SRCREV_pn-libowl ?=3D "277"
->   SRCREV_pn-libxosd ?=3D "627"
->   SRCREV_pn-linux-bfin ?=3D "3758"
-> -SRCREV_pn-linux-bug ?=3D "8996"
->   SRCREV_pn-linux-hackndev-2.6 ?=3D "1308"
->   SRCREV_pn-linux-ixp4xx ?=3D "1085"
->   SRCREV_pn-linux-openmoko-2.6.24 ?=3D "fb42ce6724576fc173faf8abfb04aa2=
-c36d213b7"
-> diff --git a/recipes/linux/linux-bug/defconfig b/recipes/linux/linux-bu=
-g/defconfig
-> index 3e685bf..c0b2990 100644
-> --- a/recipes/linux/linux-bug/defconfig
-> +++ b/recipes/linux/linux-bug/defconfig
-> @@ -1,7 +1,7 @@
->   #
->   # Automatically generated make config: don't edit
->   # Linux kernel version: 2.6.27.2
-> -# Thu Apr 23 18:31:57 2009
-> +# Wed Oct  7 15:10:57 2009
->   #
->   CONFIG_ARM=3Dy
->   CONFIG_SYS_SUPPORTS_APM_EMULATION=3Dy
-> @@ -26,6 +26,8 @@ CONFIG_ARCH_SUPPORTS_AOUT=3Dy
->   CONFIG_ZONE_DMA=3Dy
->   CONFIG_ARCH_MTD_XIP=3Dy
->   CONFIG_GENERIC_HARDIRQS_NO__DO_IRQ=3Dy
-> +CONFIG_OPROFILE_ARMV6=3Dy
-> +CONFIG_OPROFILE_ARM11_CORE=3Dy
->   CONFIG_VECTORS_BASE=3D0xffff0000
->   CONFIG_DEFCONFIG_LIST=3D"/lib/modules/$UNAME_RELEASE/.config"
->
-> @@ -50,8 +52,7 @@ CONFIG_IKCONFIG_PROC=3Dy
->   CONFIG_LOG_BUF_SHIFT=3D14
->   # CONFIG_CGROUPS is not set
->   # CONFIG_GROUP_SCHED is not set
-> -CONFIG_SYSFS_DEPRECATED=3Dy
-> -CONFIG_SYSFS_DEPRECATED_V2=3Dy
-> +# CONFIG_SYSFS_DEPRECATED_V2 is not set
->   # CONFIG_RELAY is not set
->   # CONFIG_NAMESPACES is not set
->   # CONFIG_BLK_DEV_INITRD is not set
-> @@ -67,7 +68,7 @@ CONFIG_HOTPLUG=3Dy
->   CONFIG_PRINTK=3Dy
->   CONFIG_BUG=3Dy
->   CONFIG_ELF_CORE=3Dy
-> -CONFIG_COMPAT_BRK=3Dy
-> +# CONFIG_COMPAT_BRK is not set
->   CONFIG_BASE_FULL=3Dy
->   CONFIG_FUTEX=3Dy
->   CONFIG_ANON_INODES=3Dy
-> @@ -80,8 +81,9 @@ CONFIG_VM_EVENT_COUNTERS=3Dy
->   CONFIG_SLAB=3Dy
->   # CONFIG_SLUB is not set
->   # CONFIG_SLOB is not set
-> -# CONFIG_PROFILING is not set
-> +CONFIG_PROFILING=3Dy
->   CONFIG_MARKERS=3Dy
-> +CONFIG_OPROFILE=3Dm
->   CONFIG_HAVE_OPROFILE=3Dy
->   # CONFIG_KPROBES is not set
->   # CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS is not set
-> @@ -292,6 +294,7 @@ CONFIG_BINFMT_ELF=3Dy
->   # Power management options
->   #
->   CONFIG_PM=3Dy
-> +CONFIG_PM_BUG=3Dy
->   # CONFIG_PM_DEBUG is not set
->   CONFIG_PM_SLEEP=3Dy
->   CONFIG_SUSPEND=3Dy
-> @@ -329,10 +332,10 @@ CONFIG_IP_PNP_BOOTP=3Dy
->   # CONFIG_INET_ESP is not set
->   # CONFIG_INET_IPCOMP is not set
->   # CONFIG_INET_XFRM_TUNNEL is not set
-> -CONFIG_INET_TUNNEL=3Dy
-> -CONFIG_INET_XFRM_MODE_TRANSPORT=3Dy
-> -CONFIG_INET_XFRM_MODE_TUNNEL=3Dy
-> -CONFIG_INET_XFRM_MODE_BEET=3Dy
-> +CONFIG_INET_TUNNEL=3Dm
-> +CONFIG_INET_XFRM_MODE_TRANSPORT=3Dm
-> +CONFIG_INET_XFRM_MODE_TUNNEL=3Dm
-> +CONFIG_INET_XFRM_MODE_BEET=3Dm
->   # CONFIG_INET_LRO is not set
->   CONFIG_INET_DIAG=3Dy
->   CONFIG_INET_TCP_DIAG=3Dy
-> @@ -340,21 +343,21 @@ CONFIG_INET_TCP_DIAG=3Dy
->   CONFIG_TCP_CONG_CUBIC=3Dy
->   CONFIG_DEFAULT_TCP_CONG=3D"cubic"
->   # CONFIG_TCP_MD5SIG is not set
-> -CONFIG_IPV6=3Dy
-> +CONFIG_IPV6=3Dm
->   # CONFIG_IPV6_PRIVACY is not set
->   # CONFIG_IPV6_ROUTER_PREF is not set
->   # CONFIG_IPV6_OPTIMISTIC_DAD is not set
->   # CONFIG_INET6_AH is not set
->   # CONFIG_INET6_ESP is not set
->   # CONFIG_INET6_IPCOMP is not set
-> -CONFIG_IPV6_MIP6=3Dy
-> +CONFIG_IPV6_MIP6=3Dm
->   # CONFIG_INET6_XFRM_TUNNEL is not set
->   CONFIG_INET6_TUNNEL=3Dm
-> -CONFIG_INET6_XFRM_MODE_TRANSPORT=3Dy
-> -CONFIG_INET6_XFRM_MODE_TUNNEL=3Dy
-> -CONFIG_INET6_XFRM_MODE_BEET=3Dy
-> +CONFIG_INET6_XFRM_MODE_TRANSPORT=3Dm
-> +CONFIG_INET6_XFRM_MODE_TUNNEL=3Dm
-> +CONFIG_INET6_XFRM_MODE_BEET=3Dm
->   # CONFIG_INET6_XFRM_MODE_ROUTEOPTIMIZATION is not set
-> -CONFIG_IPV6_SIT=3Dy
-> +CONFIG_IPV6_SIT=3Dm
->   CONFIG_IPV6_NDISC_NODETYPE=3Dy
->   CONFIG_IPV6_TUNNEL=3Dm
->   # CONFIG_IPV6_MULTIPLE_TABLES is not set
-> @@ -425,11 +428,7 @@ CONFIG_MAC80211_RC_DEFAULT=3D"pid"
->   # CONFIG_MAC80211_LEDS is not set
->   # CONFIG_MAC80211_DEBUGFS is not set
->   # CONFIG_MAC80211_DEBUG_MENU is not set
-> -CONFIG_IEEE80211=3Dm
-> -# CONFIG_IEEE80211_DEBUG is not set
-> -CONFIG_IEEE80211_CRYPT_WEP=3Dm
-> -# CONFIG_IEEE80211_CRYPT_CCMP is not set
-> -# CONFIG_IEEE80211_CRYPT_TKIP is not set
-> +# CONFIG_IEEE80211 is not set
->   # CONFIG_RFKILL is not set
->   # CONFIG_NET_9P is not set
->
-> @@ -450,93 +449,7 @@ CONFIG_EXTRA_FIRMWARE=3D""
->   # CONFIG_DEBUG_DEVRES is not set
->   # CONFIG_SYS_HYPERVISOR is not set
->   # CONFIG_CONNECTOR is not set
-> -CONFIG_MTD=3Dy
-> -# CONFIG_MTD_DEBUG is not set
-> -# CONFIG_MTD_CONCAT is not set
-> -CONFIG_MTD_PARTITIONS=3Dy
-> -CONFIG_MTD_REDBOOT_PARTS=3Dy
-> -CONFIG_MTD_REDBOOT_DIRECTORY_BLOCK=3D-1
-> -# CONFIG_MTD_REDBOOT_PARTS_UNALLOCATED is not set
-> -# CONFIG_MTD_REDBOOT_PARTS_READONLY is not set
-> -CONFIG_MTD_CMDLINE_PARTS=3Dy
-> -# CONFIG_MTD_AFS_PARTS is not set
-> -# CONFIG_MTD_AR7_PARTS is not set
-> -
-> -#
-> -# User Modules And Translation Layers
-> -#
-> -CONFIG_MTD_CHAR=3Dy
-> -CONFIG_MTD_BLKDEVS=3Dy
-> -CONFIG_MTD_BLOCK=3Dy
-> -# CONFIG_FTL is not set
-> -# CONFIG_NFTL is not set
-> -# CONFIG_INFTL is not set
-> -# CONFIG_RFD_FTL is not set
-> -# CONFIG_SSFDC is not set
-> -# CONFIG_MTD_OOPS is not set
-> -
-> -#
-> -# RAM/ROM/Flash chip drivers
-> -#
-> -CONFIG_MTD_CFI=3Dy
-> -# CONFIG_MTD_JEDECPROBE is not set
-> -CONFIG_MTD_GEN_PROBE=3Dy
-> -CONFIG_MTD_CFI_ADV_OPTIONS=3Dy
-> -CONFIG_MTD_CFI_NOSWAP=3Dy
-> -# CONFIG_MTD_CFI_BE_BYTE_SWAP is not set
-> -# CONFIG_MTD_CFI_LE_BYTE_SWAP is not set
-> -CONFIG_MTD_CFI_GEOMETRY=3Dy
-> -# CONFIG_MTD_MAP_BANK_WIDTH_1 is not set
-> -CONFIG_MTD_MAP_BANK_WIDTH_2=3Dy
-> -# CONFIG_MTD_MAP_BANK_WIDTH_4 is not set
-> -# CONFIG_MTD_MAP_BANK_WIDTH_8 is not set
-> -# CONFIG_MTD_MAP_BANK_WIDTH_16 is not set
-> -# CONFIG_MTD_MAP_BANK_WIDTH_32 is not set
-> -CONFIG_MTD_CFI_I1=3Dy
-> -# CONFIG_MTD_CFI_I2 is not set
-> -# CONFIG_MTD_CFI_I4 is not set
-> -# CONFIG_MTD_CFI_I8 is not set
-> -# CONFIG_MTD_OTP is not set
-> -CONFIG_MTD_CFI_INTELEXT=3Dy
-> -CONFIG_MTD_CFI_AMDSTD=3Dy
-> -# CONFIG_MTD_CFI_STAA is not set
-> -CONFIG_MTD_CFI_UTIL=3Dy
-> -CONFIG_MTD_RAM=3Dy
-> -# CONFIG_MTD_ROM is not set
-> -# CONFIG_MTD_ABSENT is not set
-> -# CONFIG_MTD_XIP is not set
-> -
-> -#
-> -# Mapping drivers for chip access
-> -#
-> -# CONFIG_MTD_COMPLEX_MAPPINGS is not set
-> -# CONFIG_MTD_PHYSMAP is not set
-> -# CONFIG_MTD_ARM_INTEGRATOR is not set
-> -# CONFIG_MTD_PLATRAM is not set
-> -
-> -#
-> -# Self-contained MTD device drivers
-> -#
-> -# CONFIG_MTD_DATAFLASH is not set
-> -# CONFIG_MTD_M25P80 is not set
-> -# CONFIG_MTD_SLRAM is not set
-> -# CONFIG_MTD_PHRAM is not set
-> -# CONFIG_MTD_MTDRAM is not set
-> -# CONFIG_MTD_BLOCK2MTD is not set
-> -
-> -#
-> -# Disk-On-Chip Device Drivers
-> -#
-> -# CONFIG_MTD_DOC2000 is not set
-> -# CONFIG_MTD_DOC2001 is not set
-> -# CONFIG_MTD_DOC2001PLUS is not set
-> -# CONFIG_MTD_NAND is not set
-> -# CONFIG_MTD_ONENAND is not set
-> -
-> -#
-> -# UBI - Unsorted block images
-> -#
-> -# CONFIG_MTD_UBI is not set
-> +# CONFIG_MTD is not set
->   # CONFIG_PARPORT is not set
->   CONFIG_BLK_DEV=3Dy
->   # CONFIG_BLK_DEV_COW_COMMON is not set
-> @@ -544,15 +457,10 @@ CONFIG_BLK_DEV_LOOP=3Dy
->   # CONFIG_BLK_DEV_CRYPTOLOOP is not set
->   # CONFIG_BLK_DEV_NBD is not set
->   # CONFIG_BLK_DEV_UB is not set
-> -CONFIG_BLK_DEV_RAM=3Dy
-> -CONFIG_BLK_DEV_RAM_COUNT=3D16
-> -CONFIG_BLK_DEV_RAM_SIZE=3D16384
-> -# CONFIG_BLK_DEV_XIP is not set
-> +# CONFIG_BLK_DEV_RAM is not set
->   # CONFIG_CDROM_PKTCDVD is not set
->   # CONFIG_ATA_OVER_ETH is not set
-> -CONFIG_MISC_DEVICES=3Dy
-> -# CONFIG_EEPROM_93CX6 is not set
-> -# CONFIG_ENCLOSURE_SERVICES is not set
-> +# CONFIG_MISC_DEVICES is not set
->   CONFIG_HAVE_IDE=3Dy
->   # CONFIG_IDE is not set
->
-> @@ -564,7 +472,7 @@ CONFIG_SCSI=3Dy
->   CONFIG_SCSI_DMA=3Dy
->   # CONFIG_SCSI_TGT is not set
->   # CONFIG_SCSI_NETLINK is not set
-> -CONFIG_SCSI_PROC_FS=3Dy
-> +# CONFIG_SCSI_PROC_FS is not set
->
->   #
->   # SCSI support type (disk, tape, CD-ROM)
-> @@ -572,7 +480,8 @@ CONFIG_SCSI_PROC_FS=3Dy
->   CONFIG_BLK_DEV_SD=3Dy
->   # CONFIG_CHR_DEV_ST is not set
->   # CONFIG_CHR_DEV_OSST is not set
-> -# CONFIG_BLK_DEV_SR is not set
-> +CONFIG_BLK_DEV_SR=3Dm
-> +# CONFIG_BLK_DEV_SR_VENDOR is not set
->   # CONFIG_CHR_DEV_SG is not set
->   # CONFIG_CHR_DEV_SCH is not set
->
-> @@ -593,9 +502,7 @@ CONFIG_SCSI_WAIT_SCAN=3Dm
->   # CONFIG_SCSI_ISCSI_ATTRS is not set
->   # CONFIG_SCSI_SAS_LIBSAS is not set
->   # CONFIG_SCSI_SRP_ATTRS is not set
-> -CONFIG_SCSI_LOWLEVEL=3Dy
-> -# CONFIG_ISCSI_TCP is not set
-> -# CONFIG_SCSI_DEBUG is not set
-> +# CONFIG_SCSI_LOWLEVEL is not set
->   # CONFIG_SCSI_DH is not set
->   # CONFIG_ATA is not set
->   # CONFIG_MD is not set
-> @@ -604,7 +511,7 @@ CONFIG_NETDEVICES=3Dy
->   # CONFIG_BONDING is not set
->   # CONFIG_MACVLAN is not set
->   # CONFIG_EQUALIZER is not set
-> -# CONFIG_TUN is not set
-> +CONFIG_TUN=3Dm
->   # CONFIG_VETH is not set
->   # CONFIG_PHYLIB is not set
->   CONFIG_NET_ETHERNET=3Dy
-> @@ -628,8 +535,9 @@ CONFIG_SMC911X=3Dy
->   # CONFIG_WLAN_PRE80211 is not set
->   CONFIG_WLAN_80211=3Dy
->   CONFIG_LIBERTAS=3Dm
-> -# CONFIG_LIBERTAS_USB is not set
-> +CONFIG_LIBERTAS_USB=3Dm
->   CONFIG_LIBERTAS_SDIO=3Dm
-> +CONFIG_BUG_BASE_WIFI=3Dm
->   CONFIG_LIBERTAS_GSPI=3Dm
->   CONFIG_LIBERTAS_BMI=3Dm
->   CONFIG_LIBERTAS_DEBUG=3Dy
-> @@ -670,7 +578,7 @@ CONFIG_PPP=3Dm
->   CONFIG_PPP_ASYNC=3Dm
->   CONFIG_PPP_SYNC_TTY=3Dm
->   CONFIG_PPP_DEFLATE=3Dm
-> -# CONFIG_PPP_BSDCOMP is not set
-> +CONFIG_PPP_BSDCOMP=3Dm
->   # CONFIG_PPP_MPPE is not set
->   # CONFIG_PPPOE is not set
->   # CONFIG_PPPOL2TP is not set
-> @@ -759,8 +667,7 @@ CONFIG_SERIAL_MXC_CONSOLE=3Dy
->   CONFIG_SERIAL_CORE=3Dy
->   CONFIG_SERIAL_CORE_CONSOLE=3Dy
->   CONFIG_UNIX98_PTYS=3Dy
-> -CONFIG_LEGACY_PTYS=3Dy
-> -CONFIG_LEGACY_PTY_COUNT=3D256
-> +# CONFIG_LEGACY_PTYS is not set
->   # CONFIG_IPMI_HANDLER is not set
->   CONFIG_HW_RANDOM=3Dy
->   # CONFIG_NVRAM is not set
-> @@ -801,7 +708,7 @@ CONFIG_I2C_MXC=3Dy
->   # Miscellaneous I2C Chip support
->   #
->   # CONFIG_DS1682 is not set
-> -# CONFIG_AT24 is not set
-> +CONFIG_AT24=3Dm
->   # CONFIG_SENSORS_EEPROM is not set
->   # CONFIG_SENSORS_PCF8574 is not set
->   # CONFIG_PCF8575 is not set
-> @@ -936,6 +843,7 @@ CONFIG_FB_CFB_IMAGEBLIT=3Dy
->   # CONFIG_FB_SYS_IMAGEBLIT is not set
->   # CONFIG_FB_FOREIGN_ENDIAN is not set
->   # CONFIG_FB_SYS_FOPS is not set
-> +CONFIG_FB_DEFERRED_IO=3Dy
->   # CONFIG_FB_SVGALIB is not set
->   # CONFIG_FB_MACMODES is not set
->   # CONFIG_FB_BACKLIGHT is not set
-> @@ -991,7 +899,7 @@ CONFIG_SND_MIXER_OSS=3Dy
->   CONFIG_SND_PCM_OSS=3Dy
->   CONFIG_SND_PCM_OSS_PLUGINS=3Dy
->   # CONFIG_SND_DYNAMIC_MINORS is not set
-> -CONFIG_SND_SUPPORT_OLD_API=3Dy
-> +# CONFIG_SND_SUPPORT_OLD_API is not set
->   CONFIG_SND_VERBOSE_PROCFS=3Dy
->   # CONFIG_SND_VERBOSE_PRINTK is not set
->   # CONFIG_SND_DEBUG is not set
-> @@ -1023,7 +931,7 @@ CONFIG_USB_HID=3Dm
->   #
->   # USB HID Boot Protocol drivers
->   #
-> -CONFIG_USB_KBD=3Dm
-> +# CONFIG_USB_KBD is not set
->   # CONFIG_USB_MOUSE is not set
->   CONFIG_USB_SUPPORT=3Dy
->   CONFIG_USB_ARCH_HAS_HCD=3Dy
-> @@ -1037,7 +945,7 @@ CONFIG_USB_ANNOUNCE_NEW_DEVICES=3Dy
->   # Miscellaneous USB options
->   #
->   CONFIG_USB_DEVICEFS=3Dy
-> -CONFIG_USB_DEVICE_CLASS=3Dy
-> +# CONFIG_USB_DEVICE_CLASS is not set
->   # CONFIG_USB_DYNAMIC_MINORS is not set
->   # CONFIG_USB_SUSPEND is not set
->   # CONFIG_USB_OTG is not set
-> @@ -1068,9 +976,9 @@ CONFIG_USB_EHCI_ROOT_HUB_TT=3Dy
->   #
->   # USB Device Class drivers
->   #
-> -# CONFIG_USB_ACM is not set
-> -# CONFIG_USB_PRINTER is not set
-> -# CONFIG_USB_WDM is not set
-> +CONFIG_USB_ACM=3Dm
-> +CONFIG_USB_PRINTER=3Dm
-> +CONFIG_USB_WDM=3Dm
->
->   #
->   # NOTE: USB_STORAGE enables SCSI, and 'SCSI disk support'
-> @@ -1135,7 +1043,7 @@ CONFIG_USB_SERIAL_FTDI_SIO=3Dm
->   # CONFIG_USB_SERIAL_MOS7840 is not set
->   # CONFIG_USB_SERIAL_MOTOROLA is not set
->   # CONFIG_USB_SERIAL_NAVMAN is not set
-> -# CONFIG_USB_SERIAL_PL2303 is not set
-> +CONFIG_USB_SERIAL_PL2303=3Dm
->   # CONFIG_USB_SERIAL_OTI6858 is not set
->   # CONFIG_USB_SERIAL_SPCP8X5 is not set
->   # CONFIG_USB_SERIAL_HP4X is not set
-> @@ -1206,7 +1114,7 @@ CONFIG_USB_FILE_STORAGE=3Dm
->   CONFIG_USB_G_SERIAL=3Dm
->   # CONFIG_USB_MIDI_GADGET is not set
->   # CONFIG_USB_G_PRINTER is not set
-> -# CONFIG_USB_CDC_COMPOSITE is not set
-> +CONFIG_USB_CDC_COMPOSITE=3Dm
->   CONFIG_MMC=3Dy
->   # CONFIG_MMC_DEBUG is not set
->   # CONFIG_MMC_UNSAFE_RESUME is not set
-> @@ -1339,9 +1247,9 @@ CONFIG_BMI_CAMERA=3Dm
->   # CONFIG_BMI_CAMERA_VS6624 is not set
->   CONFIG_BMI_CAMERA_OV2640=3Dm
->   CONFIG_BMI_VH=3Dm
-> -# CONFIG_BMI_SENSOR is not set
-> +CONFIG_BMI_SENSOR=3Dm
->   CONFIG_BMI_ZB=3Dm
-> -# CONFIG_BMI_GSM is not set
-> +CONFIG_BMI_GSM=3Dm
->
->   #
->   # Advanced Power Management devices
-> @@ -1405,20 +1313,28 @@ CONFIG_INOTIFY_USER=3Dy
->   # CONFIG_QUOTA is not set
->   # CONFIG_AUTOFS_FS is not set
->   CONFIG_AUTOFS4_FS=3Dm
-> -# CONFIG_FUSE_FS is not set
-> +CONFIG_FUSE_FS=3Dm
->
->   #
->   # CD-ROM/DVD Filesystems
->   #
-> -# CONFIG_ISO9660_FS is not set
-> -# CONFIG_UDF_FS is not set
-> +CONFIG_ISO9660_FS=3Dm
-> +CONFIG_JOLIET=3Dy
-> +CONFIG_ZISOFS=3Dy
-> +CONFIG_UDF_FS=3Dm
-> +CONFIG_UDF_NLS=3Dy
->
->   #
->   # DOS/FAT/NT Filesystems
->   #
-> +CONFIG_FAT_FS=3Dm
->   # CONFIG_MSDOS_FS is not set
-> -# CONFIG_VFAT_FS is not set
-> -# CONFIG_NTFS_FS is not set
-> +CONFIG_VFAT_FS=3Dm
-> +CONFIG_FAT_DEFAULT_CODEPAGE=3D437
-> +CONFIG_FAT_DEFAULT_IOCHARSET=3D"iso8859-1"
-> +CONFIG_NTFS_FS=3Dm
-> +# CONFIG_NTFS_DEBUG is not set
-> +CONFIG_NTFS_RW=3Dy
->
->   #
->   # Pseudo filesystems
-> @@ -1441,17 +1357,6 @@ CONFIG_TMPFS=3Dy
->   # CONFIG_BEFS_FS is not set
->   # CONFIG_BFS_FS is not set
->   # CONFIG_EFS_FS is not set
-> -CONFIG_JFFS2_FS=3Dy
-> -CONFIG_JFFS2_FS_DEBUG=3D0
-> -CONFIG_JFFS2_FS_WRITEBUFFER=3Dy
-> -# CONFIG_JFFS2_FS_WBUF_VERIFY is not set
-> -# CONFIG_JFFS2_SUMMARY is not set
-> -# CONFIG_JFFS2_FS_XATTR is not set
-> -# CONFIG_JFFS2_COMPRESSION_OPTIONS is not set
-> -CONFIG_JFFS2_ZLIB=3Dy
-> -# CONFIG_JFFS2_LZO is not set
-> -CONFIG_JFFS2_RTIME=3Dy
-> -# CONFIG_JFFS2_RUBIN is not set
->   CONFIG_CRAMFS=3Dy
->   # CONFIG_VXFS_FS is not set
->   # CONFIG_MINIX_FS is not set
-> @@ -1474,7 +1379,12 @@ CONFIG_SUNRPC=3Dm
->   # CONFIG_RPCSEC_GSS_KRB5 is not set
->   # CONFIG_RPCSEC_GSS_SPKM3 is not set
->   # CONFIG_SMB_FS is not set
-> -# CONFIG_CIFS is not set
-> +CONFIG_CIFS=3Dm
-> +# CONFIG_CIFS_STATS is not set
-> +# CONFIG_CIFS_WEAK_PW_HASH is not set
-> +# CONFIG_CIFS_XATTR is not set
-> +# CONFIG_CIFS_DEBUG2 is not set
-> +CONFIG_CIFS_EXPERIMENTAL=3Dy
->   # CONFIG_NCP_FS is not set
->   # CONFIG_CODA_FS is not set
->   # CONFIG_AFS_FS is not set
-> @@ -1485,7 +1395,7 @@ CONFIG_SUNRPC=3Dm
->   # CONFIG_PARTITION_ADVANCED is not set
->   CONFIG_MSDOS_PARTITION=3Dy
->   CONFIG_NLS=3Dy
-> -CONFIG_NLS_DEFAULT=3D"iso8859-1"
-> +CONFIG_NLS_DEFAULT=3D"utf-8"
->   CONFIG_NLS_CODEPAGE_437=3Dy
->   # CONFIG_NLS_CODEPAGE_737 is not set
->   # CONFIG_NLS_CODEPAGE_775 is not set
-> @@ -1523,7 +1433,7 @@ CONFIG_NLS_ISO8859_1=3Dy
->   # CONFIG_NLS_ISO8859_15 is not set
->   # CONFIG_NLS_KOI8_R is not set
->   # CONFIG_NLS_KOI8_U is not set
-> -CONFIG_NLS_UTF8=3Dm
-> +CONFIG_NLS_UTF8=3Dy
->   # CONFIG_DLM is not set
->
->   #
-> @@ -1686,12 +1596,12 @@ CONFIG_BITREVERSE=3Dy
->   CONFIG_CRC_CCITT=3Dm
->   # CONFIG_CRC16 is not set
->   # CONFIG_CRC_T10DIF is not set
-> -# CONFIG_CRC_ITU_T is not set
-> +CONFIG_CRC_ITU_T=3Dm
->   CONFIG_CRC32=3Dy
->   # CONFIG_CRC7 is not set
->   # CONFIG_LIBCRC32C is not set
->   CONFIG_ZLIB_INFLATE=3Dy
-> -CONFIG_ZLIB_DEFLATE=3Dy
-> +CONFIG_ZLIB_DEFLATE=3Dm
->   CONFIG_PLIST=3Dy
->   CONFIG_HAS_IOMEM=3Dy
->   CONFIG_HAS_IOPORT=3Dy
-> diff --git a/recipes/linux/linux-bug_2.6.27.2.bb b/recipes/linux/linux-=
-bug_2.6.27.2.bb
-> index 655defa..b5899a7 100644
-> --- a/recipes/linux/linux-bug_2.6.27.2.bb
-> +++ b/recipes/linux/linux-bug_2.6.27.2.bb
-> @@ -2,11 +2,12 @@ DESCRIPTION =3D "Linux kernel for bug"
->
->   PV_append =3D "+svnr${SRCREV}"
->   KV =3D "2.6.27.2"
-> -PR =3D "r27"
-> +PR =3D "r28"
->
->   COMPATIBLE_MACHINE =3D "bug"
->
->   SVN_PRJ =3D "bug-linux-${KV}"
-> +SRCREV =3D "10017"
->
->   SRC_URI =3D "svn://svn.buglabs.net/bug/branches/R1.4/qa;module=3D${SV=
-N_PRJ};proto=3Dsvn \
->              file://defconfig \
+> diff --git a/recipes/xserver-common/xserver-common-1.30/0018-zaurus-fix=
+ed-machine-names.patch b/recipes/xserver-common/xserver-common-1.30/0018-=
+zaurus-fixed-machine-names.patch
+> new file mode 100644
+> index 0000000..d6d6aa8
+> --- /dev/null
+> +++ b/recipes/xserver-common/xserver-common-1.30/0018-zaurus-fixed-mach=
+ine-names.patch
+> @@ -0,0 +1,35 @@
+> +From a287e6414a765926fc7b169617bc1174370bc183 Mon Sep 17 00:00:00 2001=
+
+> +From: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+> +Date: Mon, 20 Jul 2009 18:57:56 +0200
+> +Subject: [PATCH 18/22] zaurus: fixed machine names
+> +
+> +
+> +Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+> +---
+> + X11/Xinit.d/11zaurus |    4 ++--
+> + 1 files changed, 2 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/X11/Xinit.d/11zaurus b/X11/Xinit.d/11zaurus
+> +index 02090be..54ea6f5 100644
+> +--- a/X11/Xinit.d/11zaurus
+> ++++ b/X11/Xinit.d/11zaurus
+> +@@ -13,14 +13,14 @@ fi
+> + $CHCK -e
+> + if [ $? =3D 12 ]; then
+> +    case `machine_id` in
+> +-   	*Spitz | *Akita | *Borzoi)
+> ++   	*spitz | *akita | *borzoi)
+> +    		DIRECTION=3D"normal" ;;
+> +         *)
+> +                 DIRECTION=3D"right" ;;
+> +    esac
+> + else
+> +    case `machine_id` in
+> +-   	*Spitz | *Akita | *Borzoi)
+> ++   	*spitz | *akita | *borzoi)
+> + 		# Xfbdev needs to settle
+> + 		sleep 2
+> +    		DIRECTION=3D"right" ;;
+> +--
+> +1.6.3.3
+> +
+> diff --git a/recipes/xserver-common/xserver-common-1.30/0019-keymap-fix=
+ed-machine-names.patch b/recipes/xserver-common/xserver-common-1.30/0019-=
+keymap-fixed-machine-names.patch
+> new file mode 100644
+> index 0000000..9a4e561
+> --- /dev/null
+> +++ b/recipes/xserver-common/xserver-common-1.30/0019-keymap-fixed-mach=
+ine-names.patch
+> @@ -0,0 +1,59 @@
+> +From e564699c60d69148e19150dc9d2105734b1df7e1 Mon Sep 17 00:00:00 2001=
+
+> +From: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+> +Date: Mon, 20 Jul 2009 18:58:54 +0200
+> +Subject: [PATCH 19/22] keymap: fixed machine names
+> +
+> +
+> +Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+> +---
+> + X11/Xinit.d/12keymap |   18 +++++++++---------
+> + 1 files changed, 9 insertions(+), 9 deletions(-)
+> +
+> +diff --git a/X11/Xinit.d/12keymap b/X11/Xinit.d/12keymap
+> +index 0a909d0..cfa9750 100644
+> +--- a/X11/Xinit.d/12keymap
+> ++++ b/X11/Xinit.d/12keymap
+> +@@ -1,31 +1,31 @@
+> + #!/bin/sh
+> +
+> +-MACHINE=3D`awk 'BEGIN { FS=3D": " } /Hardware/ { print $2 } '</proc/c=
+puinfo`
+> ++. /etc/init.d/functions
+> +
+> + # since kdrive 1.4 there is no default keymap in server
+> + xmodmap -</etc/X11/xmodmap/default.xmodmap
+> +
+> +-case $MACHINE in
+> +-	"SHARP Shepherd" | "SHARP Husky" | "SHARP Corgi")
+> ++case `machine_id` in
+> ++	"sharp shepherd" | "sharp husky" | "sharp corgi")
+> + 		xmodmap -<  /etc/X11/xmodmap/shepherd.xmodmap
+> + 		;;
+> +-	"SHARP Akita" | "SHARP Borzoi" | "SHARP Spitz")
+> ++	"sharp akita" | "sharp borzoi" | "sharp spitz")
+> + 		xmodmap -<  /etc/X11/xmodmap/slcXXXX.xmodmap
+> + 		;;			=09
+> +-	"SHARP Poodle")
+> ++	"sharp poodle")
+> + 		xmodmap -<  /etc/X11/xmodmap/poodle.xmodmap
+> + 		;;
+> +-        "Sharp-Collie")
+> ++        "sharp-collie")
+> +                 xmodmap -<  /etc/X11/xmodmap/collie.xmodmap
+> +                 ;;
+> +-	"HP iPAQ h6300")
+> ++	"hp ipaq h6300")
+> + 		xmodmap -<  /etc/X11/xmodmap/h6300.xmodmap
+> + 		;;
+> +-	"TI-OSK")
+> ++	"ti-osk")
+> + 		xmodmap -<  /etc/X11/xmodmap/omap5912osk.xmodmap
+> + 		;;
+> + 	# All the rest of keyboardless PDA machines use common buttonmap
+> +-	"Simpad" | "HP iPAQ"* | "Asus MyPal"*)
+> ++	"simpad" | "hp ipaq"* | "asus mypal"*)
+> + 		xmodmap -<  /etc/X11/xmodmap/keyboardless.xmodmap
+> + 		;;
+> + esac
+> +--
+> +1.6.3.3
+> +
+> diff --git a/recipes/xserver-common/xserver-common-1.30/0020-keymap-fix=
+ed-machine-names-again.patch b/recipes/xserver-common/xserver-common-1.30=
+/0020-keymap-fixed-machine-names-again.patch
+> new file mode 100644
+> index 0000000..f14f5ae
+> --- /dev/null
+> +++ b/recipes/xserver-common/xserver-common-1.30/0020-keymap-fixed-mach=
+ine-names-again.patch
+> @@ -0,0 +1,50 @@
+> +From f216da13941685575786e617c2cc072edd5b210c Mon Sep 17 00:00:00 2001=
+
+> +From: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+> +Date: Mon, 20 Jul 2009 19:01:08 +0200
+> +Subject: [PATCH 20/22] keymap: fixed machine names again
+> +
+> +
+> +Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+> +---
+> + X11/Xinit.d/12keymap |   10 +++++-----
+> + 1 files changed, 5 insertions(+), 5 deletions(-)
+> +
+> +diff --git a/X11/Xinit.d/12keymap b/X11/Xinit.d/12keymap
+> +index cfa9750..7eac296 100644
+> +--- a/X11/Xinit.d/12keymap
+> ++++ b/X11/Xinit.d/12keymap
+> +@@ -6,26 +6,26 @@
+> + xmodmap -</etc/X11/xmodmap/default.xmodmap
+> +
+> + case `machine_id` in
+> +-	"sharp shepherd" | "sharp husky" | "sharp corgi")
+> ++	"sharp_shepherd" | "sharp_husky" | "sharp_corgi")
+> + 		xmodmap -<  /etc/X11/xmodmap/shepherd.xmodmap
+> + 		;;
+> +-	"sharp akita" | "sharp borzoi" | "sharp spitz")
+> ++	"sharp_akita" | "sharp_borzoi" | "sharp_spitz")
+> + 		xmodmap -<  /etc/X11/xmodmap/slcXXXX.xmodmap
+> + 		;;			=09
+> +-	"sharp poodle")
+> ++	"sharp_poodle")
+> + 		xmodmap -<  /etc/X11/xmodmap/poodle.xmodmap
+> + 		;;
+> +         "sharp-collie")
+> +                 xmodmap -<  /etc/X11/xmodmap/collie.xmodmap
+> +                 ;;
+> +-	"hp ipaq h6300")
+> ++	"hp_ipaq_h6300")
+> + 		xmodmap -<  /etc/X11/xmodmap/h6300.xmodmap
+> + 		;;
+> + 	"ti-osk")
+> + 		xmodmap -<  /etc/X11/xmodmap/omap5912osk.xmodmap
+> + 		;;
+> + 	# All the rest of keyboardless PDA machines use common buttonmap
+> +-	"simpad" | "hp ipaq"* | "asus mypal"*)
+> ++	"simpad" | "hp_ipaq"* | "asus_mypal"*)
+> + 		xmodmap -<  /etc/X11/xmodmap/keyboardless.xmodmap
+> + 		;;
+> + esac
+> +--
+> +1.6.3.3
+> +
+> diff --git a/recipes/xserver-common/xserver-common-1.30/0021-xserver-in=
+troduced-MOUSE-variable-for-mouse-argument.patch b/recipes/xserver-common=
+/xserver-common-1.30/0021-xserver-introduced-MOUSE-variable-for-mouse-arg=
+ument.patch
+> new file mode 100644
+> index 0000000..4d9bfa2
+> --- /dev/null
+> +++ b/recipes/xserver-common/xserver-common-1.30/0021-xserver-introduce=
+d-MOUSE-variable-for-mouse-argument.patch
+> @@ -0,0 +1,63 @@
+> +From 3ada7e341334766f6be27164dbb43a3715faf580 Mon Sep 17 00:00:00 2001=
+
+> +From: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+> +Date: Tue, 21 Jul 2009 13:36:17 +0200
+> +Subject: [PATCH 21/22] xserver: introduced MOUSE variable for "-mouse"=
+ argument
+> +
+> +MOUSE is not passed in ARGS if Xorg server is used as it is KDrive onl=
+y.
+> +
+> +Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+> +---
+> + X11/Xserver |   13 +++++++++----
+> + 1 files changed, 9 insertions(+), 4 deletions(-)
+> +
+> +diff --git a/X11/Xserver b/X11/Xserver
+> +index 25ce816..e7e88d9 100755
+> +--- a/X11/Xserver
+> ++++ b/X11/Xserver
+> +@@ -46,19 +46,20 @@ export XSERVER_DEFAULT_ORIENTATION=3Dnormal
+> +
+> + ARGS=3D"-br -pn $INPUT_EXTRA_ARGS"
+> + DPI=3D"100"
+> ++MOUSE=3D""
+> +
+> + # use ucb 1x00 touchscreen if present
+> + if [ -z "$TSLIB_TSDEVICE" ]&&  [ -e /dev/touchscreen/ucb1x00 ]; then
+> +-  ARGS=3D"$ARGS -mouse /dev/touchscreen/ucb1x00"
+> ++  MOUSE=3D"-mouse /dev/touchscreen/ucb1x00"
+> + fi
+> +
+> + # kdrive 1.4 onwards needs -mouse args
+> + # Xorg doesn't support "-mouse" option, and uses /dev/input/mice auto=
+matically
+> + if [ -e "$TSLIB_TSDEVICE" ] ; then
+> +-  ARGS=3D"$ARGS -mouse tslib"
+> ++  MOUSE=3D"-mouse tslib"
+> + else
+> +   if  [ -e /dev/input/mice ]&&  [ "$XSERVER" !=3D "Xorg" ] ; then
+> +-    ARGS=3D"$ARGS -mouse mouse"
+> ++    MOUSE=3D"-mouse mouse"
+> +   fi
+> + fi
+> +
+> +@@ -103,7 +104,7 @@ else
+> + 		    ARGS=3D"$ARGS -rgba rgb"
+> + 		    DPI=3D"100" ;;
+> + 	    "generic_omap1510/1610/1710")
+> +-		    ARGS=3D"$ARGS -mouse /dev/input/event0"
+> ++		    MOUSE=3D"-mouse /dev/input/event0"
+> + 		    DPI=3D"220" ;;
+> + 	    "ti-osk")
+> + 		    DPI=3D"100" ;;
+> +@@ -183,6 +184,10 @@ else
+> +     esac
+> + fi
+> +
+> ++if [ "$XSERVER" !=3D "Xorg" ] ; then
+> ++    ARGS=3D"$ARGS $MOUSE"
+> ++fi
+> ++
+> + echo "tslib: $TSLIB_TSDEVICE"
+> + echo "exec $XSERVER $ARGS -dpi $DPI $*"
+> + exec $XSERVER $ARGS -dpi $DPI $*
+> +--
+> +1.6.3.3
+> +
+> diff --git a/recipes/xserver-common/xserver-common-1.30/0022-xserver-fi=
+x-syntax-error.patch b/recipes/xserver-common/xserver-common-1.30/0022-xs=
+erver-fix-syntax-error.patch
+> new file mode 100644
+> index 0000000..e96fabf
+> --- /dev/null
+> +++ b/recipes/xserver-common/xserver-common-1.30/0022-xserver-fix-synta=
+x-error.patch
+> @@ -0,0 +1,27 @@
+> +From 00cbc2b27c7df84d7837760e05ac13b686e6bfa9 Mon Sep 17 00:00:00 2001=
+
+> +From: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+> +Date: Thu, 23 Jul 2009 12:04:12 +0200
+> +Subject: [PATCH 22/22] xserver: fix syntax error
+> +
+> +
+> +Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+> +---
+> + X11/Xserver |    2 +-
+> + 1 files changed, 1 insertions(+), 1 deletions(-)
+> +
+> +diff --git a/X11/Xserver b/X11/Xserver
+> +index e7e88d9..3d93a0a 100755
+> +--- a/X11/Xserver
+> ++++ b/X11/Xserver
+> +@@ -63,7 +63,7 @@ else
+> +   fi
+> + fi
+> +
+> +-if [ -e /etc/default/xserver ]
+> ++if [ -e /etc/default/xserver ] ; then
+> +     . /etc/default/xserver
+> + else
+> +     # start off server in conventional location.
+> +--
+> +1.6.3.3
+> +
+> diff --git a/recipes/xserver-common/xserver-common-1.30/0023-Xserver-pr=
+ovide-screen-argument-only-for-non-X.org-s.patch b/recipes/xserver-common=
+/xserver-common-1.30/0023-Xserver-provide-screen-argument-only-for-non-X.=
+org-s.patch
+> new file mode 100644
+> index 0000000..e80cbac
+> --- /dev/null
+> +++ b/recipes/xserver-common/xserver-common-1.30/0023-Xserver-provide-s=
+creen-argument-only-for-non-X.org-s.patch
+> @@ -0,0 +1,27 @@
+> +From 0ea66d0827131952dc1069f1ea3cb317b831df55 Mon Sep 17 00:00:00 2001=
+
+> +From: Marcin Juszkiewicz<hrw@koansoftware.com>
+> +Date: Fri, 28 Aug 2009 18:47:55 +0200
+> +Subject: [PATCH 1/1] Xserver: provide -screen argument only for non-X.=
+org servers
+> +
+> +---
+> + X11/Xserver |    4 +++-
+> + 1 files changed, 3 insertions(+), 1 deletions(-)
+> +
+> +diff --git a/X11/Xserver b/X11/Xserver
+> +index 3d93a0a..583cd0d 100755
+> +--- a/X11/Xserver
+> ++++ b/X11/Xserver
+> +@@ -179,7 +179,9 @@ else
+> + 			# It is a device we do not know about, in which case we force
+> + 			# kdrive to use the current framebuffer geometry -- otherwise
+> + 			# it will default to trying to achieve 1024x768
+> +-			ARGS=3D"$ARGS -screen ${SCREEN_SIZE}"
+> ++			if [ "$XSERVER" !=3D "Xorg" ] ; then
+> ++			    ARGS=3D"$ARGS -screen ${SCREEN_SIZE}"
+> ++			fi
+> + 		    fi
+> +     esac
+> + fi
+> +--
+> +1.6.3.3
+> +
+> diff --git a/recipes/xserver-common/xserver-common-1.30/0024-Xserver-mo=
+ve-nearly-whole-functionality-to-xserver-c.patch b/recipes/xserver-common=
+/xserver-common-1.30/0024-Xserver-move-nearly-whole-functionality-to-xser=
+ver-c.patch
+> new file mode 100644
+> index 0000000..d00e1a7
+> --- /dev/null
+> +++ b/recipes/xserver-common/xserver-common-1.30/0024-Xserver-move-near=
+ly-whole-functionality-to-xserver-c.patch
+> @@ -0,0 +1,415 @@
+> +From dc0efcbc35a7e0c5b5f908fb4d27a76c4ee304ac Mon Sep 17 00:00:00 2001=
+
+> +From: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+> +Date: Mon, 31 Aug 2009 12:05:17 +0200
+> +Subject: [PATCH 1/1] Xserver: move nearly whole functionality to xserv=
+er-common
+> +
+> +/etc/X11/Xserver script now use /etc/X11/xserver-common one to get
+> +values for XSERVER, ARGS, DPI variables.
+> +
+> +This split allows to use xserver-common for other X11 startup systems.=
+
+> +---
+> + X11/Xserver        |  188 +------------------------------------------=
+--------
+> + X11/xserver-common |  191 +++++++++++++++++++++++++++++++++++++++++++=
++++++++++
+> + 2 files changed, 192 insertions(+), 187 deletions(-)
+> + create mode 100644 X11/xserver-common
+> +
+> +diff --git a/X11/Xserver b/X11/Xserver
+> +index 583cd0d..d53e1c9 100755
+> +--- a/X11/Xserver
+> ++++ b/X11/Xserver
+> +@@ -1,194 +1,8 @@
+> + #!/bin/sh
+> + #
+> +
+> +-XSERVER=3DXfbdev
+> +-BINDIR=3D/usr/bin
+> ++. /etc/X11/xserver-common
+> +
+> +-if [ -f $BINDIR/Xepson ]; then
+> +-  XSERVER=3DXepson
+> +-fi
+> +-if [ -f $BINDIR/Xorg ]; then
+> +-  XSERVER=3DXorg
+> +-fi
+> +-if [ -f $BINDIR/Xomap ]; then
+> +-  XSERVER=3DXomap
+> +-fi
+> +-if [ -f $BINDIR/Xw100 ]; then
+> +-  XSERVER=3DXw100
+> +-fi
+> +-if [ -f $BINDIR/Xvesa ]; then
+> +-  XSERVER=3DXvesa
+> +-fi
+> +-if [ -f $BINDIR/Ximageon ]; then
+> +-  XSERVER=3DXimageon
+> +-fi
+> +-if [ -f $BINDIR/Xglamo ]; then
+> +-  XSERVER=3DXglamo
+> +-fi
+> +-
+> +-if [ -f /etc/profile ]; then
+> +-  . /etc/profile
+> +-fi
+> +-
+> +-. /etc/init.d/functions
+> +-
+> +-fallback_screen_arg() {
+> +-    geom=3D`fbset | grep geometry`
+> +-    w=3D`echo $geom | awk '{ print $2 }'`
+> +-    h=3D`echo $geom | awk '{ print $3 }'`
+> +-    b=3D`echo $geom | awk '{ print $6 }'`
+> +-    echo -n "${w}x${h}x${b}"
+> +-}
+> +-
+> +-SCREEN_SIZE=3D`fallback_screen_arg`
+> +-export USER=3Droot
+> +-export XSERVER_DEFAULT_ORIENTATION=3Dnormal
+> +-
+> +-ARGS=3D"-br -pn $INPUT_EXTRA_ARGS"
+> +-DPI=3D"100"
+> +-MOUSE=3D""
+> +-
+> +-# use ucb 1x00 touchscreen if present
+> +-if [ -z "$TSLIB_TSDEVICE" ]&&  [ -e /dev/touchscreen/ucb1x00 ]; then
+> +-  MOUSE=3D"-mouse /dev/touchscreen/ucb1x00"
+> +-fi
+> +-
+> +-# kdrive 1.4 onwards needs -mouse args
+> +-# Xorg doesn't support "-mouse" option, and uses /dev/input/mice auto=
+matically
+> +-if [ -e "$TSLIB_TSDEVICE" ] ; then
+> +-  MOUSE=3D"-mouse tslib"
+> +-else
+> +-  if  [ -e /dev/input/mice ]&&  [ "$XSERVER" !=3D "Xorg" ] ; then
+> +-    MOUSE=3D"-mouse mouse"
+> +-  fi
+> +-fi
+> +-
+> +-if [ -e /etc/default/xserver ] ; then
+> +-    . /etc/default/xserver
+> +-else
+> +-    # start off server in conventional location.
+> +-    case `machine_id` in
+> +-	    "aml_m8050")
+> +-		    ARGS=3D"$ARGS  -screen 320x240@270"
+> +-		    DPI=3D"100" ;;
+> +-	    "hp_ipaq_h3100" | "hp_ipaq_h3800")
+> +-		    ARGS=3D"$ARGS -rgba vrgb -screen 320x240@90"
+> +-		    DPI=3D"100" ;;
+> +-	    "hp_ipaq_h3600" | "hp_ipaq_h3700" | "hp_ipaq_h3900")
+> +-		    ARGS=3D"$ARGS -rgba vbgr -screen 320x240@270"
+> +-		    DPI=3D"100" ;;
+> +-	    "hp_ipaq_h5400" | "hp_ipaq_h2200")
+> +-		    ARGS=3D"$ARGS -rgba rgb"
+> +-		    DPI=3D"100" ;;
+> +-	    "hp_ipaq_hx4700")
+> +-		    DPI=3D"200" ;;
+> +-	    "ramses")
+> +-		    # What is this "vt2" in aid of?
+> +-		    ARGS=3D"$ARGS -rgba vrgb -screen 320x240@90 vt2"
+> +-		    DPI=3D"100" ;;
+> +-	    *poodle)
+> +-		    ARGS=3D"$ARGS -rgba vrgb -screen 320x240@270"
+> +-		    DPI=3D"100" ;;
+> +-	    # both 'Sharp-Collie' and just 'Collie' have been reported
+> +-	    *collie)
+> +-		    ARGS=3D"$ARGS -rgba vrgb -screen 320x240@270"
+> +-		    DPI=3D"100" ;;
+> +-	    "sharp_shepherd" | "sharp_husky" | "sharp_corgi")
+> +-		    ARGS=3D"$ARGS -rgba rgb"
+> +-		    DPI=3D"200" ;;
+> +-	    "sharp_spitz" | "sharp_akita" | "sharp_borzoi")
+> +-		    export XSERVER_DEFAULT_ORIENTATION=3D"normal"
+> +-		    ARGS=3D"$ARGS -rgba rgb -screen 480x640"
+> +-		    DPI=3D"200" ;;
+> +-	    "simpad")
+> +-		    ARGS=3D"$ARGS -rgba rgb"
+> +-		    DPI=3D"100" ;;
+> +-	    "generic_omap1510/1610/1710")
+> +-		    MOUSE=3D"-mouse /dev/input/event0"
+> +-		    DPI=3D"220" ;;
+> +-	    "ti-osk")
+> +-		    DPI=3D"100" ;;
+> +-	    "cellon_c8000_board")
+> +-		    ARGS=3D"$ARGS -screen ${SCREEN_SIZE},10,1"
+> +-		    DPI=3D"100" ;;
+> +-	    "htc_magician")
+> +-		    DPI=3D"142" ;;
+> +-	    "htc_universal")
+> +-		    ARGS=3D"$ARGS -screen 480x640@270"
+> +-		    DPI=3D"100" ;;
+> +-	    "htc_tornado")
+> +-		    ARGS=3D"$ARGS -hide-cursor"
+> +-		    DPI=3D"100" ;;
+> +-	    "generic_omap1510/1610/1710")
+> +-		    ARGS=3D"$ARGS -screen ${SCREEN_SIZE}"
+> +-		    DPI=3D"225" ;;
+> +-	    "nokia_n800" | "nokia_rx-44" | "nokia_n770")
+> +-		    ARGS=3D"$ARGS -screen ${SCREEN_SIZE}"
+> +-		    DPI=3D"225" ;;
+> +-	    "gta01" )
+> +-		    DPI=3D"285"
+> +-		    if [ "$XSERVER" !=3D "Xorg" ] ; then
+> +-			    ARGS=3D"$ARGS -screen 480x640"
+> +-		    fi
+> +-		    ;;
+> +-	    "gta02")
+> +-		    DPI=3D"285"
+> +-		    if [ "$XSERVER" !=3D "Xorg" ] ; then
+> +-			    ARGS=3D"$ARGS -screen ${SCREEN_SIZE}"
+> +-		    fi
+> +-		    ;;
+> +-	    "motorola_ezx_platform")
+> +-		    ARGS=3D"$ARGS -screen 240x320"
+> +-		    DPI=3D"170" ;;
+> +-	    "arm-integratorcp" | "arm-versatile_pb")
+> +-		    ARGS=3D"$ARGS -rgba vrgb" ;;
+> +-	    "compulab_cm-x270")
+> +-		    modprobe mbxfb
+> +-		    ARGS=3D"$ARGS -fb /dev/fb1" ;;
+> +-	    "boundary_devices_neon_board")
+> +-		    ARGS=3D"$ARGS -screen ${SCREEN_SIZE}"
+> +-		    DPI=3D"100" ;;
+> +-	    "hoeft&wessel_hw90350")
+> +-		    ARGS=3D"$ARGS -screen ${SCREEN_SIZE}"
+> +-		    DPI=3D"100" ;;
+> +-	    "hoeft&wessel_hw90250")
+> +-		    ARGS=3D"$ARGS -screen 240x320@90"
+> +-		    DPI=3D"100" ;;
+> +-	    "mini2440")
+> +-		    ARGS=3D"$ARGS -screen ${SCREEN_SIZE}"
+> +-		    DPI=3D"100" ;;
+> +-	    "palm_treo_650")
+> +-	            DPI=3D"181"
+> +-		    ARGS=3D"$ARGS -screen 320x320 -hide-cursor" ;;
+> +-	    "glofiish_m800")
+> +-	            DPI=3D"285"
+> +-		    ARGS=3D"$ARGS -screen ${SCREEN_SIZE} -hide-cursor vt1" ;;
+> +-	    "freescale_mx21ads")
+> +-	    # That's what /proc/cpuinfo shows as hardware on the chumby
+> +-	            DPI=3D"121"
+> +-		    ARGS=3D"$ARGS -screen 320x240 -hide-cursor" ;;
+> +-
+> +-            # this is to rotate X display properly, tested with displ=
+ay TX09D71VM1CCA
+> +-            ronetix*pm9261*  | ronetix*pm9263*)
+> +-         	    ARGS=3D"$ARGS -screen 240/54x320/81@90x16" ;;
+> +-	    # This is a fallback for PCs
+> +-	    "")
+> +-		    if [ -f $BINDIR/Xvesa ]; then
+> +-			    ARGS=3D"$ARGS -mode 0x0114"
+> +-		    else
+> +-			# It is a device we do not know about, in which case we force
+> +-			# kdrive to use the current framebuffer geometry -- otherwise
+> +-			# it will default to trying to achieve 1024x768
+> +-			if [ "$XSERVER" !=3D "Xorg" ] ; then
+> +-			    ARGS=3D"$ARGS -screen ${SCREEN_SIZE}"
+> +-			fi
+> +-		    fi
+> +-    esac
+> +-fi
+> +-
+> +-if [ "$XSERVER" !=3D "Xorg" ] ; then
+> +-    ARGS=3D"$ARGS $MOUSE"
+> +-fi
+> +
+> + echo "tslib: $TSLIB_TSDEVICE"
+> + echo "exec $XSERVER $ARGS -dpi $DPI $*"
+> +diff --git a/X11/xserver-common b/X11/xserver-common
+> +new file mode 100644
+> +index 0000000..29d152f
+> +--- /dev/null
+> ++++ b/X11/xserver-common
+> +@@ -0,0 +1,191 @@
+> ++#!/bin/sh
+> ++#
+> ++
+> ++XSERVER=3DXfbdev
+> ++BINDIR=3D/usr/bin
+> ++
+> ++if [ -f $BINDIR/Xepson ]; then
+> ++  XSERVER=3DXepson
+> ++fi
+> ++if [ -f $BINDIR/Xorg ]; then
+> ++  XSERVER=3DXorg
+> ++fi
+> ++if [ -f $BINDIR/Xomap ]; then
+> ++  XSERVER=3DXomap
+> ++fi
+> ++if [ -f $BINDIR/Xw100 ]; then
+> ++  XSERVER=3DXw100
+> ++fi
+> ++if [ -f $BINDIR/Xvesa ]; then
+> ++  XSERVER=3DXvesa
+> ++fi
+> ++if [ -f $BINDIR/Ximageon ]; then
+> ++  XSERVER=3DXimageon
+> ++fi
+> ++if [ -f $BINDIR/Xglamo ]; then
+> ++  XSERVER=3DXglamo
+> ++fi
+> ++
+> ++if [ -f /etc/profile ]; then
+> ++  . /etc/profile
+> ++fi
+> ++
+> ++. /etc/init.d/functions
+> ++
+> ++fallback_screen_arg() {
+> ++    geom=3D`fbset | grep geometry`
+> ++    w=3D`echo $geom | awk '{ print $2 }'`
+> ++    h=3D`echo $geom | awk '{ print $3 }'`
+> ++    b=3D`echo $geom | awk '{ print $6 }'`
+> ++    echo -n "${w}x${h}x${b}"
+> ++}
+> ++
+> ++SCREEN_SIZE=3D`fallback_screen_arg`
+> ++export USER=3Droot
+> ++export XSERVER_DEFAULT_ORIENTATION=3Dnormal
+> ++
+> ++ARGS=3D"-br -pn $INPUT_EXTRA_ARGS"
+> ++DPI=3D"100"
+> ++MOUSE=3D""
+> ++
+> ++# use ucb 1x00 touchscreen if present
+> ++if [ -z "$TSLIB_TSDEVICE" ]&&  [ -e /dev/touchscreen/ucb1x00 ]; then
+> ++  MOUSE=3D"-mouse /dev/touchscreen/ucb1x00"
+> ++fi
+> ++
+> ++# kdrive 1.4 onwards needs -mouse args
+> ++# Xorg doesn't support "-mouse" option, and uses /dev/input/mice auto=
+matically
+> ++if [ -e "$TSLIB_TSDEVICE" ] ; then
+> ++  MOUSE=3D"-mouse tslib"
+> ++else
+> ++  if  [ -e /dev/input/mice ]&&  [ "$XSERVER" !=3D "Xorg" ] ; then
+> ++    MOUSE=3D"-mouse mouse"
+> ++  fi
+> ++fi
+> ++
+> ++if [ -e /etc/default/xserver ] ; then
+> ++    . /etc/default/xserver
+> ++else
+> ++    # start off server in conventional location.
+> ++    case `machine_id` in
+> ++	    "aml_m8050")
+> ++		    ARGS=3D"$ARGS  -screen 320x240@270"
+> ++		    DPI=3D"100" ;;
+> ++	    "hp_ipaq_h3100" | "hp_ipaq_h3800")
+> ++		    ARGS=3D"$ARGS -rgba vrgb -screen 320x240@90"
+> ++		    DPI=3D"100" ;;
+> ++	    "hp_ipaq_h3600" | "hp_ipaq_h3700" | "hp_ipaq_h3900")
+> ++		    ARGS=3D"$ARGS -rgba vbgr -screen 320x240@270"
+> ++		    DPI=3D"100" ;;
+> ++	    "hp_ipaq_h5400" | "hp_ipaq_h2200")
+> ++		    ARGS=3D"$ARGS -rgba rgb"
+> ++		    DPI=3D"100" ;;
+> ++	    "hp_ipaq_hx4700")
+> ++		    DPI=3D"200" ;;
+> ++	    "ramses")
+> ++		    # What is this "vt2" in aid of?
+> ++		    ARGS=3D"$ARGS -rgba vrgb -screen 320x240@90 vt2"
+> ++		    DPI=3D"100" ;;
+> ++	    *poodle)
+> ++		    ARGS=3D"$ARGS -rgba vrgb -screen 320x240@270"
+> ++		    DPI=3D"100" ;;
+> ++	    # both 'Sharp-Collie' and just 'Collie' have been reported
+> ++	    *collie)
+> ++		    ARGS=3D"$ARGS -rgba vrgb -screen 320x240@270"
+> ++		    DPI=3D"100" ;;
+> ++	    "sharp_shepherd" | "sharp_husky" | "sharp_corgi")
+> ++		    ARGS=3D"$ARGS -rgba rgb"
+> ++		    DPI=3D"200" ;;
+> ++	    "sharp_spitz" | "sharp_akita" | "sharp_borzoi")
+> ++		    export XSERVER_DEFAULT_ORIENTATION=3D"normal"
+> ++		    ARGS=3D"$ARGS -rgba rgb -screen 480x640"
+> ++		    DPI=3D"200" ;;
+> ++	    "simpad")
+> ++		    ARGS=3D"$ARGS -rgba rgb"
+> ++		    DPI=3D"100" ;;
+> ++	    "generic_omap1510/1610/1710")
+> ++		    MOUSE=3D"-mouse /dev/input/event0"
+> ++		    DPI=3D"220" ;;
+> ++	    "ti-osk")
+> ++		    DPI=3D"100" ;;
+> ++	    "cellon_c8000_board")
+> ++		    ARGS=3D"$ARGS -screen ${SCREEN_SIZE},10,1"
+> ++		    DPI=3D"100" ;;
+> ++	    "htc_magician")
+> ++		    DPI=3D"142" ;;
+> ++	    "htc_universal")
+> ++		    ARGS=3D"$ARGS -screen 480x640@270"
+> ++		    DPI=3D"100" ;;
+> ++	    "htc_tornado")
+> ++		    ARGS=3D"$ARGS -hide-cursor"
+> ++		    DPI=3D"100" ;;
+> ++	    "generic_omap1510/1610/1710")
+> ++		    ARGS=3D"$ARGS -screen ${SCREEN_SIZE}"
+> ++		    DPI=3D"225" ;;
+> ++	    "nokia_n800" | "nokia_rx-44" | "nokia_n770")
+> ++		    ARGS=3D"$ARGS -screen ${SCREEN_SIZE}"
+> ++		    DPI=3D"225" ;;
+> ++	    "gta01" )
+> ++		    DPI=3D"285"
+> ++		    if [ "$XSERVER" !=3D "Xorg" ] ; then
+> ++			    ARGS=3D"$ARGS -screen 480x640"
+> ++		    fi
+> ++		    ;;
+> ++	    "gta02")
+> ++		    DPI=3D"285"
+> ++		    if [ "$XSERVER" !=3D "Xorg" ] ; then
+> ++			    ARGS=3D"$ARGS -screen ${SCREEN_SIZE}"
+> ++		    fi
+> ++		    ;;
+> ++	    "motorola_ezx_platform")
+> ++		    ARGS=3D"$ARGS -screen 240x320"
+> ++		    DPI=3D"170" ;;
+> ++	    "arm-integratorcp" | "arm-versatile_pb")
+> ++		    ARGS=3D"$ARGS -rgba vrgb" ;;
+> ++	    "compulab_cm-x270")
+> ++		    modprobe mbxfb
+> ++		    ARGS=3D"$ARGS -fb /dev/fb1" ;;
+> ++	    "boundary_devices_neon_board")
+> ++		    ARGS=3D"$ARGS -screen ${SCREEN_SIZE}"
+> ++		    DPI=3D"100" ;;
+> ++	    "hoeft&wessel_hw90350")
+> ++		    ARGS=3D"$ARGS -screen ${SCREEN_SIZE}"
+> ++		    DPI=3D"100" ;;
+> ++	    "hoeft&wessel_hw90250")
+> ++		    ARGS=3D"$ARGS -screen 240x320@90"
+> ++		    DPI=3D"100" ;;
+> ++	    "mini2440")
+> ++		    ARGS=3D"$ARGS -screen ${SCREEN_SIZE}"
+> ++		    DPI=3D"100" ;;
+> ++	    "palm_treo_650")
+> ++	            DPI=3D"181"
+> ++		    ARGS=3D"$ARGS -screen 320x320 -hide-cursor" ;;
+> ++	    "glofiish_m800")
+> ++	            DPI=3D"285"
+> ++		    ARGS=3D"$ARGS -screen ${SCREEN_SIZE} -hide-cursor vt1" ;;
+> ++	    "freescale_mx21ads")
+> ++	    # That's what /proc/cpuinfo shows as hardware on the chumby
+> ++	            DPI=3D"121"
+> ++		    ARGS=3D"$ARGS -screen 320x240 -hide-cursor" ;;
+> ++
+> ++            # this is to rotate X display properly, tested with displ=
+ay TX09D71VM1CCA
+> ++            ronetix*pm9261*  | ronetix*pm9263*)
+> ++         	    ARGS=3D"$ARGS -screen 240/54x320/81@90x16" ;;
+> ++	    # This is a fallback for PCs
+> ++	    "")
+> ++		    if [ -f $BINDIR/Xvesa ]; then
+> ++			    ARGS=3D"$ARGS -mode 0x0114"
+> ++		    else
+> ++			# It is a device we do not know about, in which case we force
+> ++			# kdrive to use the current framebuffer geometry -- otherwise
+> ++			# it will default to trying to achieve 1024x768
+> ++			if [ "$XSERVER" !=3D "Xorg" ] ; then
+> ++			    ARGS=3D"$ARGS -screen ${SCREEN_SIZE}"
+> ++			fi
+> ++		    fi
+> ++    esac
+> ++fi
+> ++
+> ++if [ "$XSERVER" !=3D "Xorg" ] ; then
+> ++    ARGS=3D"$ARGS $MOUSE"
+> ++fi
+> +--
+> +1.6.3.3
+> +
+> diff --git a/recipes/xserver-common/xserver-common-1.30/0025-Makefile-m=
+ove-modmaps-install-xserver-common.patch b/recipes/xserver-common/xserver=
+-common-1.30/0025-Makefile-move-modmaps-install-xserver-common.patch
+> new file mode 100644
+> index 0000000..1389867
+> --- /dev/null
+> +++ b/recipes/xserver-common/xserver-common-1.30/0025-Makefile-move-mod=
+maps-install-xserver-common.patch
+> @@ -0,0 +1,32 @@
+> +From 309ba3de37f0374c72c4569186e381a3272c24bc Mon Sep 17 00:00:00 2001=
+
+> +From: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+> +Date: Mon, 31 Aug 2009 12:47:05 +0200
+> +Subject: [PATCH 1/1] Makefile: move modmaps, install xserver-common
+> +
+> +---
+> + Makefile |    6 ++++--
+> + 1 file changed, 4 insertions(+), 2 deletions(-)
+> +
+> +--- xserver-common-1.30.orig/Makefile
+> ++++ xserver-common-1.30/Makefile
+> +@@ -15,16 +15,18 @@ endif
+> + all:
+> +
+> + install-program:
+> + 	for i in X11/Xsession.d X11/Xinit.d; do install -d $(DESTDIR)/etc/$$=
+i; FILES=3D`echo $$i/* | sed "s:$$i/CVS::"`; install -m 755 $$FILES $(DES=
+TDIR)/etc/$$i/; done
+> + 	install -d $(DESTDIR)$(PREFIX)/bin
+> ++	install -d $(DESTDIR)/etc/X11/xmodmap
+> + 	install -m 755 run-calibrate.sh $(DESTDIR)$(PREFIX)/bin/run-calibrat=
+e.sh
+> + 	install -m 644 X11/Xdefaults $(DESTDIR)/etc/X11/Xdefaults
+> + 	install -m 755 X11/Xinit $(DESTDIR)/etc/X11/Xinit
+> + 	install -m 755 X11/Xserver $(DESTDIR)/etc/X11/Xserver
+> ++	install -m 644 X11/xserver-common $(DESTDIR)/etc/X11/xserver-common
+> + 	install -m 755 X11/Xsession $(DESTDIR)/etc/X11/Xsession
+> +-	install -m 644 X11/xmodmap/*.xmodmap $(DESTDIR)/etc/X11/
+> +-	install -m 644 X11/xmodmap-* $(DESTDIR)/etc/X11/
+> ++	install -m 644 X11/xmodmap/* $(DESTDIR)/etc/X11/xmodmap/
+> ++	install -m 644 X11/xmodmap-* $(DESTDIR)/etc/X11/xmodmap/
+> +
+> + clean:
+> +
+> + include $(BUILD)/Makefile.dpkg_ipkg
+> diff --git a/recipes/xserver-common/xserver-common-1.30/0026-98keymap-f=
+ixup-fixed-path-to-xmodmap-file.patch b/recipes/xserver-common/xserver-co=
+mmon-1.30/0026-98keymap-fixup-fixed-path-to-xmodmap-file.patch
+> new file mode 100644
+> index 0000000..a667c5f
+> --- /dev/null
+> +++ b/recipes/xserver-common/xserver-common-1.30/0026-98keymap-fixup-fi=
+xed-path-to-xmodmap-file.patch
+> @@ -0,0 +1,25 @@
+> +From 884521a985831e9f6eb231bc8dd96613ca90c636 Mon Sep 17 00:00:00 2001=
+
+> +From: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+> +Date: Mon, 31 Aug 2009 12:53:29 +0200
+> +Subject: [PATCH 1/1] 98keymap-fixup: fixed path to xmodmap file
+> +
+> +---
+> + X11/Xinit.d/98keymap-fixup |    2 +-
+> + 1 files changed, 1 insertions(+), 1 deletions(-)
+> +
+> +diff --git a/X11/Xinit.d/98keymap-fixup b/X11/Xinit.d/98keymap-fixup
+> +index fcc84d9..6895e24 100755
+> +--- a/X11/Xinit.d/98keymap-fixup
+> ++++ b/X11/Xinit.d/98keymap-fixup
+> +@@ -3,7 +3,7 @@
+> + # kdrive 1.4 and up have a heisenbug where it may take multiple tries=
+ to apply a modmap
+> + iter=3D0
+> + while [ $(xmodmap -pke | awk '{if ($2 =3D=3D 36) { if ($4 =3D=3D "Ret=
+urn") { print "good" } else {print "bad" }}}') =3D "bad" ] ; do
+> +-	xmodmap -</etc/X11/default.xmodmap
+> ++	xmodmap -</etc/X11/xmodmap/default.xmodmap
+> + 	let iter=3Diter+1
+> + done
+> +
+> +--
+> +1.6.3.3
+> +
+> diff --git a/recipes/xserver-common/xserver-common_1.30.bb b/recipes/xs=
+erver-common/xserver-common_1.30.bb
+> new file mode 100644
+> index 0000000..797b831
+> --- /dev/null
+> +++ b/recipes/xserver-common/xserver-common_1.30.bb
+> @@ -0,0 +1,31 @@
+> +DESCRIPTION =3D "Common X11 scripts and support files"
+> +LICENSE =3D "GPL"
+> +SECTION =3D "x11"
+> +RDEPENDS_${PN} =3D "xmodmap xrandr xdpyinfo"
+> +RRECOMMENDS_${PN} =3D "xtscal"
+> +PR =3D "r5"
+> +
+> +PACKAGE_ARCH =3D "all"
+> +DEFAULT_PREFERENCE =3D "-1"
+> +
+> +# we are using a gpe-style Makefile
+> +inherit gpe
+> +
+> +SRC_URI_append =3D " file://setDPI.sh \
+> +                   file://89xdgautostart.sh \
+> +file://0018-zaurus-fixed-machine-names.patch;patch=3D1 \
+> +file://0019-keymap-fixed-machine-names.patch;patch=3D1 \
+> +file://0020-keymap-fixed-machine-names-again.patch;patch=3D1 \
+> +file://0021-xserver-introduced-MOUSE-variable-for-mouse-argument.patch=
+;patch=3D1 \
+> +file://0022-xserver-fix-syntax-error.patch;patch=3D1 \
+> +file://0023-Xserver-provide-screen-argument-only-for-non-X.org-s.patch=
+;patch=3D1 \
+> +file://0024-Xserver-move-nearly-whole-functionality-to-xserver-c.patch=
+;patch=3D1 \
+> +file://0025-Makefile-move-modmaps-install-xserver-common.patch;patch=3D=
+1 \
+> +file://0026-98keymap-fixup-fixed-path-to-xmodmap-file.patch;patch=3D1 =
+\
+> +"
+> +
+> +do_install_append() {
+> +	install -m 0755 "${WORKDIR}/setDPI.sh" "${D}/etc/X11/Xinit.d/50setdpi=
+"
+> +	install -m 0755 "${WORKDIR}/89xdgautostart.sh" "${D}/etc/X11/Xsession=
+=2Ed/89xdgautostart"
+> +	sed -i 's:^BINDIR=3D.*$:BINDIR=3D${bindir}:' ${D}/etc/X11/Xserver
+> +}
 
 
---------------ms030004000109020208010706
+--------------ms020307080008080007000902
 Content-Type: application/pkcs7-signature; name="smime.p7s"
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="smime.p7s"
@@ -624,18 +1037,18 @@ rvbqNOUQGls1TXfjViF4gtwhGTXeJLHTHUb/XV9lTzGCA3EwggNtAgEBMHYwYjELMAkGA1UEBhMC
 WkExJTAjBgNVBAoTHFRoYXd0ZSBDb25zdWx0aW5nIChQdHkpIEx0ZC4xLDAqBgNVBAMTI1RoYXd0
 ZSBQZXJzb25hbCBGcmVlbWFpbCBJc3N1aW5nIENBAhAsJXp/6FHKA3dVazaiqf38MAkGBSsOAwIa
 BQCgggHQMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTA5MTAwNzE1
-MjQzN1owIwYJKoZIhvcNAQkEMRYEFHD/DmBVecJnDbRzxMW7ODAe0KvoMF8GCSqGSIb3DQEJDzFS
+MjU0OVowIwYJKoZIhvcNAQkEMRYEFLasz35DUlNiELpiWukXluMAcGtMMF8GCSqGSIb3DQEJDzFS
 MFAwCwYJYIZIAWUDBAECMAoGCCqGSIb3DQMHMA4GCCqGSIb3DQMCAgIAgDANBggqhkiG9w0DAgIB
 QDAHBgUrDgMCBzANBggqhkiG9w0DAgIBKDCBhQYJKwYBBAGCNxAEMXgwdjBiMQswCQYDVQQGEwJa
 QTElMCMGA1UEChMcVGhhd3RlIENvbnN1bHRpbmcgKFB0eSkgTHRkLjEsMCoGA1UEAxMjVGhhd3Rl
 IFBlcnNvbmFsIEZyZWVtYWlsIElzc3VpbmcgQ0ECECwlen/oUcoDd1VrNqKp/fwwgYcGCyqGSIb3
 DQEJEAILMXigdjBiMQswCQYDVQQGEwJaQTElMCMGA1UEChMcVGhhd3RlIENvbnN1bHRpbmcgKFB0
 eSkgTHRkLjEsMCoGA1UEAxMjVGhhd3RlIFBlcnNvbmFsIEZyZWVtYWlsIElzc3VpbmcgQ0ECECwl
-en/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEBBQAEggEAPAT1Iwa6rXDikLbloyqoYpm4MIFwxaEM
-xybKJ0iHHM0gbmAmOhkljlB8w8mYWSmRRHi7+bYYSHK51GhnoO2quyyiy0Ukz1vsTS+lfiwrLy0j
-myruTaGYwOGvsVmJSMtQtwFQ+zMHIbeHtUqGb61fMSQbPAMetXuOuxyX5/iHxaLrKBDhJIYTAP5F
-3tV1TuivXva4yC9UoDtudixwtZT5/thIQa9HY/KkLBtqLX4egAqIPYR3qv/1nDaQNIGYbyzhIMaL
-d6EiQ1hj3fXfJA7kZaLXunRle2sM19zGFTKQeW+RnnsQiQlGT6cMdwNPMMNJvRhySVVIGoOOHq4o
-I9UrkQAAAAAAAA==
+en/oUcoDd1VrNqKp/fwwDQYJKoZIhvcNAQEBBQAEggEAkFfKDRze1BVbviwotbIpmfZoStudfaME
+A+jCPnPvNwlXmVXkDqI7ugHgJXgiMRvsJczIB9YHBJlrHQvCJoGqjo3yzgfOSA8YfOdieuX4hFfn
+2yN8gkpWB7vmsHlUboax53Bh+i4Ali/jhlFCwZxCtePlkH/sSqcdf1cYsu4MX5TVC483a/WLBbhR
+RoAnXUa9WWVkyv02LkgKT7jYog/xiRLPBPv8vKhz/puPfKTN/km0yd2n7QcF7mQyzzXEI1ErpWz2
+yMdj7fqgXZpFYoABBL0AhSAIYYw2No6YIhtwyDN+A9pPvoTSqfMF0/5LrUp1n6mRrMxMMjNmJUY/
+etMq/gAAAAAAAA==
 
---------------ms030004000109020208010706--
+--------------ms020307080008080007000902--
