@@ -1,23 +1,31 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1MvsyZ-0001mS-EC
+	(envelope-from <sledz@DResearch.DE>) id 1Mvszl-00022U-AK
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Oct 2009 15:24:14 +0200
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 8450C1B10C04
+	Thu, 08 Oct 2009 15:25:28 +0200
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 9758216DEDF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Oct 2009 13:31:19 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Thu,  8 Oct 2009 15:24:36 +0200 (CEST)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 53ECE2A4266
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  8 Oct 2009 15:24:36 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Thu, 8 Oct 2009 15:26:03 +0200
+Message-ID: <4ACDE7EB.3000805@dresearch.de>
+Date: Thu, 08 Oct 2009 15:23:55 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 8 Oct 2009 15:23:06 +0200
-User-Agent: KMail/1.12.1 (Linux/2.6.32-rc2; KDE/4.3.1; i686; ; )
 References: <20091008125302.GE10797@xora.vm.bytemark.co.uk>
 In-Reply-To: <20091008125302.GE10797@xora.vm.bytemark.co.uk>
-MIME-Version: 1.0
-Message-Id: <200910081523.06229.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+X-OriginalArrivalTime: 08 Oct 2009 13:26:03.0812 (UTC)
+	FILETIME=[E2654E40:01CA481A]
+X-SA-Exim-Connect-IP: 87.193.137.78
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Revert Request for linux -> linux-gnu changes
@@ -34,15 +42,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Oct 2009 13:24:14 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 08 Oct 2009 13:25:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Thursday 08 October 2009 14:53:02 Graeme Gregory wrote:
-> Hi, I cannot actually carry out this request as I will be without net
-> access for the eV meeting.
-> 
+Graeme Gregory wrote:
 > But it is becoming clear that the linux -> linux-gnu change is throwing
 > up many issues for arches != linux-gnueabi. Partial fixes have been
 > implemented but for every fix another issue seems to pop up.
@@ -50,19 +54,8 @@ On Thursday 08 October 2009 14:53:02 Graeme Gregory wrote:
 > I suggest these changes should be reverted, placed in a branch and
 > properly merged at a later date after proper review.
 
-As hard as it is. I agree that it should be backed out and put in a branch and 
-tested on non EABI systems. We find new regressions every day.
++1
 
-The current list of today are:
-          - insane.bbclass needs 'linux' and 'linux-gnu'. Linux for native 
-            packages and the other for our one
 
-          - bitbake meta-toolchain does not work due task-sdk-base, I think
-            it is due the change but I don't know.
-
-regards
-	holger
-
-PS: I'm willing to help by compile testing non ARM builds
 
 
