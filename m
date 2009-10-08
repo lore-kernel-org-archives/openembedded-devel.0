@@ -1,43 +1,27 @@
 Received: from [209.85.220.207] (helo=mail-fx0-f207.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.lippautz@gmail.com>) id 1Mvrwl-0003fA-Kt
+	(envelope-from <dp@xora.org.uk>) id 1MvsVH-0001sj-Pb
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Oct 2009 14:18:18 +0200
-Received: by fxm3 with SMTP id 3so6197163fxm.20
+	Thu, 08 Oct 2009 14:53:58 +0200
+Received: by fxm3 with SMTP id 3so6228648fxm.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Oct 2009 05:17:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=Wc08OJv00ZHX713v/mb/0Armg8rRN3DBIfOdK6s3/7o=;
-	b=tfxrNNIiJtVOti097u5ZT4Rhi5ft+a+MPBtVFz3Fru4Cb3VDbNjyR+Ps7Qiynv06Dx
-	ScgxMzdQxgHCludlY+BoHzrVkz1Bl3CWimjDjxuSjRVVyt5mgIGPqGFTGpdcGmPGtZyn
-	PT9cbjqoYLm+IEW/ly0NMEcsjmRfMZrnByIRI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=T5e5gpWynqs54kQ8E+rj3c7fKGtERgGFWEqd5zAKRPNkMST6fvW+b02XfVeRwdGG2E
-	ah1e/QMHoXmnEoGjp9IdHFrPCUkAK3XR4Ayt+7vW8OJRAP+u3ygSzIvRJv0opX/H0V1Q
-	grzLnff7Z09DBktToBUEFkxbzixa94qFeVZVM=
-MIME-Version: 1.0
-Received: by 10.223.2.196 with SMTP id 4mr336453fak.3.1255004245513; Thu, 08 
-	Oct 2009 05:17:25 -0700 (PDT)
-In-Reply-To: <be7a9f3d0910071746s21cfaa25i158219e4641ec1ae@mail.gmail.com>
-References: <1254768733.10712.3.camel@leeloo.somedomain>
-	<1254770821.9214.105.camel@lenovo.internal.reciva.com>
-	<1254774335.3947.12.camel@leeloo.somedomain>
-	<be7a9f3d0910051559v21ab3a2et766095a124dfb537@mail.gmail.com>
-	<1254820563.6107.4.camel@leeloo.somedomain>
-	<be7a9f3d0910071746s21cfaa25i158219e4641ec1ae@mail.gmail.com>
-Date: Thu, 8 Oct 2009 14:17:25 +0200
-Message-ID: <fca63bcf0910080517k13dae822j7821bf72ea458da4@mail.gmail.com>
-From: Michael Lippautz <michael.lippautz@gmail.com>
+	Thu, 08 Oct 2009 05:53:05 -0700 (PDT)
+Received: by 10.86.220.9 with SMTP id s9mr1114648fgg.40.1255006385470;
+	Thu, 08 Oct 2009 05:53:05 -0700 (PDT)
+Received: from xora.vm.bytemark.co.uk (www.xora.org.uk [80.68.91.202])
+	by mx.google.com with ESMTPS id 4sm380670fgg.18.2009.10.08.05.53.04
+	(version=SSLv3 cipher=RC4-MD5); Thu, 08 Oct 2009 05:53:04 -0700 (PDT)
+Date: Thu, 8 Oct 2009 13:53:02 +0100
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20091008125302.GE10797@xora.vm.bytemark.co.uk>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 209.85.220.207
-X-SA-Exim-Mail-From: michael.lippautz@gmail.com
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: lighttpd 1.4.18 runtime issue
+Subject: Revert Request for linux -> linux-gnu changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,26 +35,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Oct 2009 12:18:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 08 Oct 2009 12:53:58 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2009/10/8 Otavio Salvador <otavio@ossystems.com.br>:
-> In meanwhile it looks to have been fixed in current master; would be
-> nice if you could test it and provide a updated patch if still needed.
+Hi, I cannot actually carry out this request as I will be without net
+access for the eV meeting.
 
-I actually tested the build today. Unfortunatelly there is still an
-issue remaining.
-The patch fixed the automatically loaded modules, but missed that
-there are still two modules loaded on startup in the config that is
-shipped. These modules are module-access and module-accesslog.
-(Actually I missed them when I wrote the patch, sorry for that.)
+But it is becoming clear that the linux -> linux-gnu change is throwing
+up many issues for arches != linux-gnueabi. Partial fixes have been
+implemented but for every fix another issue seems to pop up.
 
- Since the config states that these modules "should" be loaded, it has
-to be decided whether OE goes with this recommendation and adds the
-additional two modules as runtime dep., OR just strips/uncomments the
-specific sections in the config.
+I suggest these changes should be reverted, placed in a branch and
+properly merged at a later date after proper review.
 
-Regards,
-Michael
+Graeme (XorA)
+
 
 
