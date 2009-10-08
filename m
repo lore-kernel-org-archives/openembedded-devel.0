@@ -1,41 +1,31 @@
-Received: from [74.125.92.147] (helo=qw-out-1920.google.com)
+Received: from [82.192.226.27] (helo=mail.o2s.ch)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Mvzge-0002sp-Tn
+	(envelope-from <david.lanzendoerfer@o2s.ch>) id 1Mw0Ge-0003iU-8P
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Oct 2009 22:34:12 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so2231697qwk.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Oct 2009 13:33:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=7v1q1TB6YRNHlzZvLsDdKbOPoDvLv9ibyv5EpSqZb3M=;
-	b=MLS2dam9aDGhkAUwG3a0eRZrGJr8H0LOxmfNFdFxu2I1QFwyEEcYhRVyBplCSG8t6Q
-	2AxorqjB+j2UXjQQdu4vt31xKmWX2XPMgAPsF1nuYsrZ0XcimvhAb5r9knia38eMxcNM
-	qua8MLeZeBPLSUUOtQm0P82YzbgPfWFRo/+yY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=fvrOPVWd3wr8/2itbPwDQ8Oc7s4UvsBB+1mbRce5mTC5I5YU0in2ZO5dfToFjwr9wc
-	K5KQJi3JPNDzVVDy2OmtLdu5EZpWaxcTxoAk/MZpNxvINEsskzJAWclue6mFimuBoIKL
-	P1uenU2SIKRn7Q3xDDDgsk5em719ELrqgFQww=
-MIME-Version: 1.0
-Received: by 10.229.36.195 with SMTP id u3mr1199906qcd.61.1255033999939; Thu, 
-	08 Oct 2009 13:33:19 -0700 (PDT)
-In-Reply-To: <1255009355.6355.4.camel@mill.internal.reciva.com>
-References: <20091008125302.GE10797@xora.vm.bytemark.co.uk>
-	<200910081523.06229.holger+oe@freyther.de>
-	<1255009355.6355.4.camel@mill.internal.reciva.com>
-Date: Thu, 8 Oct 2009 13:33:19 -0700
-Message-ID: <19c1b8a90910081333u1fc22290v571796c20b2fff12@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 08 Oct 2009 23:11:23 +0200
+Received: from dizzy-6.localnet ([::ffff:192.168.2.122])
+	(TLS: TLSv1/SSLv3,256bits,AES256-SHA)
+	by koffein with esmtp; Thu, 08 Oct 2009 21:58:30 +0200
+	id 0000000000013E17.000000004ACE4466.000026E7
+From: David =?iso-8859-1?q?Lanzend=F6rfer?= <david.lanzendoerfer@o2s.ch>
+Organization: OpenSourceSupport GmbH
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.92.147
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Thu, 8 Oct 2009 23:11:11 +0200
+User-Agent: KMail/1.12.1 (Linux/2.6.31.1; KDE/4.3.1; x86_64; ; )
+References: <A22F8CDABC6B406EA2FC80E3109602BD@pcvirus>
+In-Reply-To: <A22F8CDABC6B406EA2FC80E3109602BD@pcvirus>
+X-Face: a023Y#Om+E(<|Tkz7Ae>YeJ\rvY,eXDn^g66`NiaNQ"#xRJ=gr'!V}V#{MN6!YO{s{{); h
+	=s@Vv%T)fi>gJrAHvijw^ZG9{b1rtf~mn$V^b`:3m>yH=o$Eo')Ul8f}F%1vdg9|52W=Xs
+	rR^/E/SPo^{-R22[a}c?@tgfp<I#oOW7r}0We&3g5"2>N5r/Vu|>kWs"|J'XppA; *0A,6>
+	*GY(0=H@>@^vEy]!m\)I42Lu@k~_=:U@/kf8{AO4'F7:Hy_*"5Xf9Vvkqr4E(32pVlT:=&
+	i4l[3%?Z<zzP~wGSke?1VJj\cd~Z(,Upc;nOR|pqK@<j(`EYFSn,jN)A(~`YwM2nIv,
+MIME-Version: 1.0
+Message-Id: <200910082311.16084.david.lanzendoerfer@o2s.ch>
+X-SA-Exim-Connect-IP: 82.192.226.27
+X-SA-Exim-Mail-From: david.lanzendoerfer@o2s.ch
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Revert Request for linux -> linux-gnu changes
+Subject: Re: build of libxrender failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,51 +39,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Oct 2009 20:34:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 08 Oct 2009 21:11:23 -0000
+X-Groupsio-MsgNum: 13371
+Content-Type: multipart/signed; boundary="nextPart2991987.dYshvY3h8O";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
+
+--nextPart2991987.dYshvY3h8O
+Content-Type: Text/Plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 8, 2009 at 6:42 AM, Phil Blundell <philb@gnu.org> wrote:
-> On Thu, 2009-10-08 at 15:23 +0200, Holger Hans Peter Freyther wrote:
->> As hard as it is. I agree that it should be backed out and put in a bran=
-ch and
->> tested on non EABI systems. We find new regressions every day.
->
-> Yes, I agree. =C2=A0It isn't even completely obvious to me that this chan=
-ge
-> has a great deal of merit. =C2=A0As I wrote in:
->
-> http://lists.linuxtogo.org/pipermail/openembedded-devel/2009-September/01=
-3577.html
->
-> it doesn't seem as if switching TARGET_OS from "linux" to "linux-gnu"
-> brings any benefits other than trivial cosmetic ones, and it is a shame
-> to break everybody's builds just for that.
->
-> So, personally, I would be tempted to just revert it and leave it
-> reverted rather than burning a lot of manpower on trying to make
-> "linux-gnu" work for everybody at once. =C2=A0If individual DISTROs want =
-to
-> switch to linux-gnu then they are obviously welcome to do so and pick up
-> the pieces for themselves.
+Which distro you have configured in your local.conf?
+With the wrong (eg. old openmoko or fso) it doesnt work very good eventuall=
+y.
+The have different prefered versions.
+Please give me more informations over your build/conf/local.conf then I can=
+=20
+help you.
 
-It seems to be more entwined that it initially appeared to me. This
-changes obviously
-needs time to settle in as it gets tested in different ways. I thought
-we would fix the fallouts as we find them
-but I am fine to revert it as it seems to what other devs are leaning towar=
-ds.
-I will revert the cosmetic parts.
+greatings
+	leviathan
 
->
-> p.
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+--nextPart2991987.dYshvY3h8O
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.11 (GNU/Linux)
 
+iEYEABECAAYFAkrOVXQACgkQAeZw77btGjqC/wCgr63K8JaMN3mBkGtyX9cwTTTd
+td0AoK83jOyj5HwPISef8bwRFrER0j6R
+=OthD
+-----END PGP SIGNATURE-----
+
+--nextPart2991987.dYshvY3h8O--
