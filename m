@@ -1,41 +1,29 @@
 Received: from [209.85.219.210] (helo=mail-ew0-f210.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay4mail@gmail.com>) id 1MvutJ-00047t-1y
+	(envelope-from <dp@xora.org.uk>) id 1Mvv0u-0007qD-Ac
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Oct 2009 17:26:56 +0200
-Received: by ewy6 with SMTP id 6so560831ewy.12
+	Thu, 08 Oct 2009 17:34:47 +0200
+Received: by ewy6 with SMTP id 6so568125ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Oct 2009 08:26:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:user-agent:mime-version:content-type:content-transfer-encoding
-	:message-id; bh=aU7ks6SmJloAw1HIFj4ZXJ0TwuXdl8nX+QOFX94gtxU=;
-	b=XshWCf/my/q7fXfo4Kn6+xP0se5A9d18jQzY3GK5/jpa7NmG3AOzetwf8QMlb5Bvt9
-	u5yX0IBYGJ0jGiWQj1FBUehpqg5NRFlkE2g1k3zxsspS0cfDUVoqzYk3QjDEpSJmomtv
-	XFmFvoXCy+2SToHBBBI2GKf4XqeCaUgLTi+eM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:user-agent:mime-version:content-type
-	:content-transfer-encoding:message-id;
-	b=lmhX9DoiOjWX3wRh1vdXV/hcQPdpC+SBHhsaC7iUYkFeH4KYaLvPPA71Uk7NXSRwVQ
-	PD20sutp/7wy66m4gOqyMb+X67EjS7ZYcObQlrWzM02AaUOuH7xcruBkpUPLeA0I+Fkw
-	aqDf0zNbBpfqzNGNaBvS1L3Or/Papm8uu6O6k=
-Received: by 10.211.184.8 with SMTP id l8mr1704519ebp.16.1255015561768;
-	Thu, 08 Oct 2009 08:26:01 -0700 (PDT)
-Received: from is.home (93-81-69-155.broadband.corbina.ru [93.81.69.155])
-	by mx.google.com with ESMTPS id 28sm163374eyg.20.2009.10.08.08.25.58
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 08 Oct 2009 08:25:59 -0700 (PDT)
-From: Yuri Bushmelev <jay4mail@gmail.com>
+	Thu, 08 Oct 2009 08:33:53 -0700 (PDT)
+Received: by 10.211.146.9 with SMTP id y9mr8402640ebn.94.1255016033651;
+	Thu, 08 Oct 2009 08:33:53 -0700 (PDT)
+Received: from xora.vm.bytemark.co.uk (www.xora.org.uk [80.68.91.202])
+	by mx.google.com with ESMTPS id 24sm331015eyx.33.2009.10.08.08.33.52
+	(version=SSLv3 cipher=RC4-MD5); Thu, 08 Oct 2009 08:33:52 -0700 (PDT)
+Date: Thu, 8 Oct 2009 16:33:50 +0100
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 8 Oct 2009 19:25:53 +0400
-User-Agent: KMail/1.12.1 (Linux/2.6.30-std-def-alt12; KDE/4.3.1; i686; ; )
+Message-ID: <20091008153350.GF10797@xora.vm.bytemark.co.uk>
+References: <200910081925.53988.jay4mail@gmail.com>
 MIME-Version: 1.0
-Message-Id: <200910081925.53988.jay4mail@gmail.com>
+In-Reply-To: <200910081925.53988.jay4mail@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 209.85.219.210
-X-SA-Exim-Mail-From: jay4mail@gmail.com
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Request for collie
+Subject: Re: Request for collie
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,21 +37,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Oct 2009 15:26:58 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 08 Oct 2009 15:34:47 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hello!
+On Thu, Oct 08, 2009 at 07:25:53PM +0400, Yuri Bushmelev wrote:
+> Hello!
+> 
+> I'm developing kexecboot and testing images on Zauruses (tosa and akita). 
+> I would like to take one collie (SL-5500) for adopting kexecboot's interface 
+> and bringing x11-image to usable state on collie too.
+> 
+> So if you have any unused collie let me know please :)
+> 
+I have one OE collie I have no need of (I have my own).
 
-I'm developing kexecboot and testing images on Zauruses (tosa and akita). 
-I would like to take one collie (SL-5500) for adopting kexecboot's interface 
-and bringing x11-image to usable state on collie too.
+If no-one objects and we can work out transport I could transfer it.
 
-So if you have any unused collie let me know please :)
+Graeme (XorA)
 
--- 
-Yuri Bushmelev
-aka Jay7
 
 
