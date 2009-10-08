@@ -1,26 +1,43 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.220.207] (helo=mail-fx0-f207.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MvqhD-0005Cm-3n
-	for openembedded-devel@openembedded.org; Thu, 08 Oct 2009 12:58:10 +0200
-Received: (qmail 8097 invoked by uid 813007); 8 Oct 2009 10:57:15 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 8 Oct 2009 10:57:15 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 8 Oct 2009 12:57:20 +0200
-User-Agent: KMail/1.12.1 (Linux/2.6.32-rc3-00052-g0eca52a; KDE/4.3.2; x86_64; ;
-	)
-References: <200910080153.12683.david.lanzendoerfer@o2s.ch>
-In-Reply-To: <200910080153.12683.david.lanzendoerfer@o2s.ch>
+	(envelope-from <michael.lippautz@gmail.com>) id 1Mvrwl-0003fA-Kt
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 08 Oct 2009 14:18:18 +0200
+Received: by fxm3 with SMTP id 3so6197163fxm.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 Oct 2009 05:17:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=Wc08OJv00ZHX713v/mb/0Armg8rRN3DBIfOdK6s3/7o=;
+	b=tfxrNNIiJtVOti097u5ZT4Rhi5ft+a+MPBtVFz3Fru4Cb3VDbNjyR+Ps7Qiynv06Dx
+	ScgxMzdQxgHCludlY+BoHzrVkz1Bl3CWimjDjxuSjRVVyt5mgIGPqGFTGpdcGmPGtZyn
+	PT9cbjqoYLm+IEW/ly0NMEcsjmRfMZrnByIRI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=T5e5gpWynqs54kQ8E+rj3c7fKGtERgGFWEqd5zAKRPNkMST6fvW+b02XfVeRwdGG2E
+	ah1e/QMHoXmnEoGjp9IdHFrPCUkAK3XR4Ayt+7vW8OJRAP+u3ygSzIvRJv0opX/H0V1Q
+	grzLnff7Z09DBktToBUEFkxbzixa94qFeVZVM=
 MIME-Version: 1.0
-Message-Id: <200910081257.22201.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Received: by 10.223.2.196 with SMTP id 4mr336453fak.3.1255004245513; Thu, 08 
+	Oct 2009 05:17:25 -0700 (PDT)
+In-Reply-To: <be7a9f3d0910071746s21cfaa25i158219e4641ec1ae@mail.gmail.com>
+References: <1254768733.10712.3.camel@leeloo.somedomain>
+	<1254770821.9214.105.camel@lenovo.internal.reciva.com>
+	<1254774335.3947.12.camel@leeloo.somedomain>
+	<be7a9f3d0910051559v21ab3a2et766095a124dfb537@mail.gmail.com>
+	<1254820563.6107.4.camel@leeloo.somedomain>
+	<be7a9f3d0910071746s21cfaa25i158219e4641ec1ae@mail.gmail.com>
+Date: Thu, 8 Oct 2009 14:17:25 +0200
+Message-ID: <fca63bcf0910080517k13dae822j7821bf72ea458da4@mail.gmail.com>
+From: Michael Lippautz <michael.lippautz@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.220.207
+X-SA-Exim-Mail-From: michael.lippautz@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Patches and commitment
+Subject: Re: lighttpd 1.4.18 runtime issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,37 +51,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Oct 2009 10:58:10 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 08 Oct 2009 12:18:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Dnia czwartek, 8 pa=BCdziernika 2009 o 01:53:12 David Lanzend=F6rfer napisa=
-=B3(a):
-> I started the project OpenMoko4HTC-Dream[1] and I'd like to have access t=
-o=20
-> push and commit, because I'm developing on a new image for OpenMoko, call=
-ed
-> fso-hildon-image.
-> Until I get access, it would be nice, if someone could merge the followin=
-g=20
-> patches into org.openembedded.dev
-> They are fixing building issues and add htcdream to the list of supported=
-=20
-> devices.
+2009/10/8 Otavio Salvador <otavio@ossystems.com.br>:
+> In meanwhile it looks to have been fixed in current master; would be
+> nice if you could test it and provide a updated patch if still needed.
 
-Please merge those 2 patches (to fix htcdream.conf) and then split them to =
-one=20
-which will add HTC Dream device config, it's kernel and other for OpenMoko=
-=20
-things.
+I actually tested the build today. Unfortunatelly there is still an
+issue remaining.
+The patch fixed the automatically loaded modules, but missed that
+there are still two modules loaded on startup in the config that is
+shipped. These modules are module-access and module-accesslog.
+(Actually I missed them when I wrote the patch, sorry for that.)
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+ Since the config states that these modules "should" be loaded, it has
+to be decided whether OE goes with this recommendation and adds the
+additional two modules as runtime dep., OR just strips/uncomments the
+specific sections in the config.
 
-
+Regards,
+Michael
 
 
