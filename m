@@ -1,24 +1,25 @@
-Received: from [82.192.226.27] (helo=mail.o2s.ch)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <david.lanzendoerfer@o2s.ch>) id 1MwAwt-0006Qh-PF
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Oct 2009 10:35:42 +0200
-Received: from lilith.localnet ([::ffff:192.168.2.1])
-	(TLS: TLSv1/SSLv3,256bits,AES256-SHA)
-	by koffein with esmtp; Fri, 09 Oct 2009 09:22:22 +0200
-	id 0000000000013E05.000000004ACEE4AE.00003962
-From: David =?iso-8859-1?q?Lanzend=F6rfer?= <david.lanzendoerfer@o2s.ch>
-Organization: OpenSourceSupport GmbH
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1MwBHl-0003lV-EV
+	for openembedded-devel@openembedded.org; Fri, 09 Oct 2009 10:57:16 +0200
+Received: (qmail 11021 invoked by uid 813007); 9 Oct 2009 08:56:23 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 9 Oct 2009 08:56:23 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 9 Oct 2009 10:34:35 +0200
-User-Agent: KMail/1.11.4 (Linux/2.6.30-1-686; KDE/4.2.4; i686; ; )
+Date: Fri, 9 Oct 2009 10:56:35 +0200
+User-Agent: KMail/1.12.1 (Linux/2.6.32-rc3-00052-g0eca52a; KDE/4.3.2; x86_64; ;
+	)
 References: <200910080153.12683.david.lanzendoerfer@o2s.ch>
 	<200910081542.18448.mickey@vanille-media.de>
-In-Reply-To: <200910081542.18448.mickey@vanille-media.de>
-Mime-Version: 1.0
-Message-Id: <200910091034.43504.david.lanzendoerfer@o2s.ch>
-X-SA-Exim-Connect-IP: 82.192.226.27
-X-SA-Exim-Mail-From: david.lanzendoerfer@o2s.ch
+	<200910091034.43504.david.lanzendoerfer@o2s.ch>
+In-Reply-To: <200910091034.43504.david.lanzendoerfer@o2s.ch>
+MIME-Version: 1.0
+Message-Id: <200910091056.36809.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Patches and commitment
@@ -35,42 +36,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Oct 2009 08:35:42 -0000
-X-Groupsio-MsgNum: 13375
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg=pgp-sha1; boundary="=_koffein-14691-1255072942-0001-2"
-
---=_koffein-14691-1255072942-0001-2
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 09 Oct 2009 08:57:16 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-2"
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
 
-> +1 for David's commit access.
-Hi.
-How many have to vote for my commitment access onto org.openembedded.dev?
-And I dont see my supplied patches in the tree.
-Has it been rejected?
-What should I do with my modifications? Just make patches and post them?
+Dnia pi=B1tek, 9 pa=BCdziernika 2009 o 10:34:35 David Lanzend=F6rfer napisa=
+=B3(a):
+> > +1 for David's commit access.
 
-> :M:
-Nice greatings leviathan
+> How many have to vote for my commitment access onto org.openembedded.dev?
+
+I vote against - I did not saw any patch from you in org.openembedded.dev t=
+ree=20
+so far ("git log --author=3D"David.*"). Show us patches and we will think a=
+bout=20
+r/w access. So far I saw one patch from you which adds new machine - thats=
+=20
+all.
+
+> And I dont see my supplied patches in the tree. Has it been rejected?
+> What should I do with my modifications? Just make patches and post them?
+
+I wrote what you need to do with those patches in previous mail.
+
+Regards,=20
 =2D-=20
-David Lanzend=F6rfer
-OpenSourceSupport GmbH
-Junior system engineer and supporter
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
---=_koffein-14691-1255072942-0001-2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Transfer-Encoding: 7bit
-Content-Description: This is a digitally signed message part.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
 
-iEYEABECAAYFAkrO9ZwACgkQAeZw77btGjqibwCdEaiC0zXdv5Eel2jKx6m7t/0h
-RUgAoKhhBYLm3N/fPwoywtpzaM+ICa7f
-=75Re
------END PGP SIGNATURE-----
 
---=_koffein-14691-1255072942-0001-2--
