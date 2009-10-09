@@ -1,26 +1,27 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [82.192.226.27] (helo=mail.o2s.ch)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Mw6Cl-000101-VJ
+	(envelope-from <david.lanzendoerfer@o2s.ch>) id 1MwAwt-0006Qh-PF
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Oct 2009 05:31:49 +0200
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 902C11B10C04
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Oct 2009 03:38:55 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Fri, 09 Oct 2009 10:35:42 +0200
+Received: from lilith.localnet ([::ffff:192.168.2.1])
+	(TLS: TLSv1/SSLv3,256bits,AES256-SHA)
+	by koffein with esmtp; Fri, 09 Oct 2009 09:22:22 +0200
+	id 0000000000013E05.000000004ACEE4AE.00003962
+From: David =?iso-8859-1?q?Lanzend=F6rfer?= <david.lanzendoerfer@o2s.ch>
+Organization: OpenSourceSupport GmbH
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 9 Oct 2009 05:30:44 +0200
-User-Agent: KMail/1.12.1 (Linux/2.6.32-rc2; KDE/4.3.1; i686; ; )
-References: <4ACEAB19.1000408@gmail.com>
-In-Reply-To: <4ACEAB19.1000408@gmail.com>
-MIME-Version: 1.0
-Message-Id: <200910090530.44754.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Date: Fri, 9 Oct 2009 10:34:35 +0200
+User-Agent: KMail/1.11.4 (Linux/2.6.30-1-686; KDE/4.2.4; i686; ; )
+References: <200910080153.12683.david.lanzendoerfer@o2s.ch>
+	<200910081542.18448.mickey@vanille-media.de>
+In-Reply-To: <200910081542.18448.mickey@vanille-media.de>
+Mime-Version: 1.0
+Message-Id: <200910091034.43504.david.lanzendoerfer@o2s.ch>
+X-SA-Exim-Connect-IP: 82.192.226.27
+X-SA-Exim-Mail-From: david.lanzendoerfer@o2s.ch
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] matchbox-panel-0.9.3: fix uninitialised variable causing SIGBUS
+Subject: Re: Patches and commitment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,66 +35,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Oct 2009 03:31:49 -0000
-Content-Type: Text/Plain;
+X-List-Received-Date: Fri, 09 Oct 2009 08:35:42 -0000
+X-Groupsio-MsgNum: 13375
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg=pgp-sha1; boundary="=_koffein-14691-1255072942-0001-2"
+
+--=_koffein-14691-1255072942-0001-2
+Content-Type: text/plain;
   charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+> +1 for David's commit access.
+Hi.
+How many have to vote for my commitment access onto org.openembedded.dev?
+And I dont see my supplied patches in the tree.
+Has it been rejected?
+What should I do with my modifications? Just make patches and post them?
+
+> :M:
+Nice greatings leviathan
+=2D-=20
+David Lanzend=F6rfer
+OpenSourceSupport GmbH
+Junior system engineer and supporter
+
+--=_koffein-14691-1255072942-0001-2
+Content-Type: application/pgp-signature; name="signature.asc"
 Content-Transfer-Encoding: 7bit
+Content-Description: This is a digitally signed message part.
 
-On Friday 09 October 2009 05:16:41 Graham Gower wrote:
-> As reported here:
-> http://lists.o-hand.com/matchbox/0289.html
-> 
-> I've not experienced the bug for over a month since applying this change.
-> 
-> 
-> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
 
-Signed-off-by: Holger Hans Peter Freyther <zecke@selfish.org>
+iEYEABECAAYFAkrO9ZwACgkQAeZw77btGjqibwCdEaiC0zXdv5Eel2jKx6m7t/0h
+RUgAoKhhBYLm3N/fPwoywtpzaM+ICa7f
+=75Re
+-----END PGP SIGNATURE-----
 
-
-> ---
->  .../matchbox-panel-uninitialised-crash.patch       |   10 ++++++++++
->  recipes/matchbox-panel/matchbox-panel_0.9.3.bb     |    5 +++--
->  2 files changed, 13 insertions(+), 2 deletions(-)
->  create mode 100644
->  recipes/matchbox-panel/matchbox-panel-0.9.3/matchbox-panel-uninitialised-c
-> rash.patch
-> 
-> diff --git
->  a/recipes/matchbox-panel/matchbox-panel-0.9.3/matchbox-panel-uninitialised
-> -crash.patch
->  b/recipes/matchbox-panel/matchbox-panel-0.9.3/matchbox-panel-uninitialised
-> -crash.patch new file mode 100644
-> index 0000000..6177501
-> --- /dev/null
-> +++
->  b/recipes/matchbox-panel/matchbox-panel-0.9.3/matchbox-panel-uninitialised
-> -crash.patch @@ -0,0 +1,10 @@
-> +--- matchbox-panel-0.9.3/src/panel_app.c.orig
-> ++++ matchbox-panel-0.9.3/src/panel_app.c
-> +@@ -249,6 +249,7 @@
-> +
-> +   papp = NEW(MBPanelApp);
-> +
-> ++  papp->name   = NULL;
-> +   papp->next   = NULL;
-> +   papp->win    = win;
-> +   papp->panel  = panel;
-> diff --git a/recipes/matchbox-panel/matchbox-panel_0.9.3.bb
->  b/recipes/matchbox-panel/matchbox-panel_0.9.3.bb index 5559122..3d50f5f
->  100644
-> --- a/recipes/matchbox-panel/matchbox-panel_0.9.3.bb
-> +++ b/recipes/matchbox-panel/matchbox-panel_0.9.3.bb
-> @@ -1,5 +1,6 @@
->  require matchbox-panel.inc
-> -PR ="r4"
-> +PR ="r5"
->  SRC_URI =
->  "http://projects.o-hand.com/matchbox/sources/${PN}/0.9/${PN}-${PV}.tar.gz
->  \ file://mb-applet-battery-repaint-093.patch;patch=1 \
-> -	   file://mb-applet-system-monitor-crash.patch;patch=1"
-> +	   file://mb-applet-system-monitor-crash.patch;patch=1 \
-> +	   file://matchbox-panel-uninitialised-crash.patch;patch=1"
-> 
-
-
+--=_koffein-14691-1255072942-0001-2--
