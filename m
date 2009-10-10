@@ -1,43 +1,33 @@
-Received: from [72.14.220.157] (helo=fg-out-1718.google.com)
+Received: from [82.192.226.27] (helo=mail.o2s.ch)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MwKIA-0002VP-66
+	(envelope-from <david.lanzendoerfer@o2s.ch>) id 1MwQ5u-0004KH-Qi
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Oct 2009 20:34:17 +0200
-Received: by fg-out-1718.google.com with SMTP id e21so357933fga.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Oct 2009 11:33:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=XRwudtIkZY2lOwOxWBaDpZTBiFmmdHfqvCY/mRoKSyI=;
-	b=nNkWrXjesGNlpnWZKZobrbGi49eQedlf9uJuXNlurPjmMXbz/zxGfBqV4ioVchsnzk
-	/tQ4v0AcEQT/KEIkBXj/BqHFz+fFjF8K0dZO8MmazbiVIFBGROO7iprIiI+LsSDd6y/3
-	wkeLbjObeYVXBgQrhCAhixiqMOcqBreCBDJnw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=H2ySYhNgNU9umPt/xVEW1w48s68AoorhLgB8Nu7zj5AdnRGVZWAkakHBVqnrscuk7b
-	FB//obbLGVzPwbU8+sAS7v/6gxspdfmy/FO5ycilHWzwgntGgY+VX4lVylGbAjFjMkJO
-	peq+KQUwtzNmppoXgObQf3sphXHQSt+5JAnYA=
-Received: by 10.86.227.27 with SMTP id z27mr2695007fgg.66.1255113204983;
-	Fri, 09 Oct 2009 11:33:24 -0700 (PDT)
-Received: from localhost (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id l19sm141245fgb.12.2009.10.09.11.33.22
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 09 Oct 2009 11:33:24 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Sat, 10 Oct 2009 02:46:01 +0200
+Received: from dizzy-6.localnet ([::ffff:192.168.2.122])
+	(TLS: TLSv1/SSLv3,256bits,AES256-SHA)
+	by koffein with esmtp; Sat, 10 Oct 2009 01:32:03 +0200
+	id 0000000000013E15.000000004ACFC7F3.000054BF
+From: David =?iso-8859-1?q?Lanzend=F6rfer?= <david.lanzendoerfer@o2s.ch>
+Organization: OpenSourceSupport GmbH
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  9 Oct 2009 11:32:56 -0700
-Message-Id: <1255113176-19171-3-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1255113176-19171-2-git-send-email-raj.khem@gmail.com>
-References: <1255113176-19171-1-git-send-email-raj.khem@gmail.com>
-	<1255113176-19171-2-git-send-email-raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 72.14.220.157
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Sat, 10 Oct 2009 02:46:01 +0200
+User-Agent: KMail/1.12.1 (Linux/2.6.31.1; KDE/4.3.1; x86_64; ; )
+References: <A22F8CDABC6B406EA2FC80E3109602BD@pcvirus>
+	<200910082311.16084.david.lanzendoerfer@o2s.ch>
+	<4ACF4AF7.9070406@hardware-datenbank.de>
+In-Reply-To: <4ACF4AF7.9070406@hardware-datenbank.de>
+X-Face: a023Y#Om+E(<|Tkz7Ae>YeJ\rvY,eXDn^g66`NiaNQ"#xRJ=gr'!V}V#{MN6!YO{s{{); h
+	=s@Vv%T)fi>gJrAHvijw^ZG9{b1rtf~mn$V^b`:3m>yH=o$Eo')Ul8f}F%1vdg9|52W=Xs
+	rR^/E/SPo^{-R22[a}c?@tgfp<I#oOW7r}0We&3g5"2>N5r/Vu|>kWs"|J'XppA; *0A,6>
+	*GY(0=H@>@^vEy]!m\)I42Lu@k~_=:U@/kf8{AO4'F7:Hy_*"5Xf9Vvkqr4E(32pVlT:=&
+	i4l[3%?Z<zzP~wGSke?1VJj\cd~Z(,Upc;nOR|pqK@<j(`EYFSn,jN)A(~`YwM2nIv,
+MIME-Version: 1.0
+Message-Id: <200910100246.06278.david.lanzendoerfer@o2s.ch>
+X-SA-Exim-Connect-IP: 82.192.226.27
+X-SA-Exim-Mail-From: david.lanzendoerfer@o2s.ch
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 3/3] classes: Use linux-gnuspe instead of non existing linux-spe
+Subject: Re: build of libxrender failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,84 +41,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Oct 2009 18:34:17 -0000
+X-List-Received-Date: Sat, 10 Oct 2009 00:46:02 -0000
+X-Groupsio-MsgNum: 13392
+Content-Type: multipart/signed; boundary="nextPart4894699.cVUH8cySso";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- classes/insane.bbclass                 |    2 +-
- classes/siteinfo.bbclass               |    2 +-
- conf/distro/include/sane-toolchain.inc |    2 +-
- recipes/lsof/lsof_4.78.bb              |    2 +-
- recipes/openssl/openssl.inc            |    2 +-
- 5 files changed, 5 insertions(+), 5 deletions(-)
+--nextPart4894699.cVUH8cySso
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/classes/insane.bbclass b/classes/insane.bbclass
-index 0dacaf8..950bb97 100644
---- a/classes/insane.bbclass
-+++ b/classes/insane.bbclass
-@@ -77,7 +77,7 @@ def package_qa_get_machine_dict():
-                         "arm" :       (40,     0,    0,          True,          True),
-                         "armeb" :     (40,     0,    0,          False,         True),
-                       },
--            "linux-spe" : {
-+            "linux-gnuspe" : {
-                         "powerpc":    (20,     0,    0,          False,         True),
-                       },
-             "linux-uclibcspe" : {
-diff --git a/classes/siteinfo.bbclass b/classes/siteinfo.bbclass
-index c89014a..5c929df 100644
---- a/classes/siteinfo.bbclass
-+++ b/classes/siteinfo.bbclass
-@@ -58,7 +58,7 @@ def get_siteinfo_list(d):
-                "ppc-linux":               "endian-big bit-32 common-linux common-glibc powerpc-common powerpc-linux",\
-                "ppc64-linux":             "endian-big bit-64 common-linux common-glibc powerpc-common powerpc64-linux",\
- 	       "powerpc-linux":           "endian-big bit-32 common-linux common-glibc powerpc-common",\
--	       "powerpc-linux-spe":       "endian-big bit-32 common-linux common-glibc powerpc-common powerpc-linux",\
-+	       "powerpc-linux-gnuspe":       "endian-big bit-32 common-linux common-glibc powerpc-common powerpc-linux",\
-                "powerpc-linux-uclibc":    "endian-big bit-32 common-linux common-uclibc powerpc-common",\
-                "powerpc-linux-uclibcspe": "endian-big bit-32 common-linux common-uclibc powerpc-common powerpc-linux-uclibc",\
-                "sh3-linux":               "endian-little bit-32 common-linux common-glibc sh-common",\
-diff --git a/conf/distro/include/sane-toolchain.inc b/conf/distro/include/sane-toolchain.inc
-index 561c97a..5c326d7 100644
---- a/conf/distro/include/sane-toolchain.inc
-+++ b/conf/distro/include/sane-toolchain.inc
-@@ -184,7 +184,7 @@ def compute_os_portion_of_target_triplet (d):
- 			else:
- 				abi_suffix = "gnueabi"
- 		elif bparch in ppc_spe_supporting_arches.split():
--			abi_suffix = "spe"
-+			abi_suffix = "gnuspe"
- 		else:
- 			abi_suffix = ""
- 	else:
-diff --git a/recipes/lsof/lsof_4.78.bb b/recipes/lsof/lsof_4.78.bb
-index 243b5da..02852a7 100644
---- a/recipes/lsof/lsof_4.78.bb
-+++ b/recipes/lsof/lsof_4.78.bb
-@@ -22,7 +22,7 @@ LSOF_OS_linux-uclibc = "linux"
- LSOF_OS_linux-uclibceabi = "linux"
- LSOF_OS_linux-uclibspe = "linux"
- LSOF_OS_linux-gnueabi = "linux"
--LSOF_OS_linux-spe = "linux"
-+LSOF_OS_linux-gnuspe = "linux"
- export LSOF_INCLUDE = "${STAGING_INCDIR}"
- 
- do_configure () {
-diff --git a/recipes/openssl/openssl.inc b/recipes/openssl/openssl.inc
-index 8b8e870..00f9782 100644
---- a/recipes/openssl/openssl.inc
-+++ b/recipes/openssl/openssl.inc
-@@ -70,7 +70,7 @@ do_configure () {
- 	linux-powerpc)
- 		target=linux-ppc
- 		;;
--	linux-spe-powerpc)
-+	linux-gnuspe-powerpc)
- 		target=linux-ppc
- 		;;
- 	linux-supersparc)
--- 
-1.6.3.3
+Hi
+> I have a config file for the beagleboard (attached).
+Ok. Looks good.
 
+> In the openembedded/conf/distro/angstrom-2008.1.conf I've set=20
+"PREFERRED_VERSION_linux-libc-headers" to "2.6.29"
+Don't do this in the conf. For this purpose there is an include folder!
+Enter the versions in conf/distro/include/angstrom-2008-preferred-versions.=
+inc
+And your problem seems to be a glibc problem.
+Which version gets installed if you make glibc-native?
 
+greatings leviathan
 
+--nextPart4894699.cVUH8cySso
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.11 (GNU/Linux)
+
+iEYEABECAAYFAkrP2U4ACgkQAeZw77btGjqL8QCfaNf8lgerR6EOXOSwafKfVD33
+rO0AmwUvZPwm5KPJmFKgwCOD39aoMcWg
+=x5q2
+-----END PGP SIGNATURE-----
+
+--nextPart4894699.cVUH8cySso--
