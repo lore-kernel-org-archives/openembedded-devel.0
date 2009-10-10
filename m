@@ -1,30 +1,30 @@
-Received: from [121.165.117.45] (helo=mail.dvico.com)
+Received: from [206.46.173.1] (helo=vms173001pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <LeoLiang@dvico.com>) id 1MwV3H-0002fh-Kn
+	(envelope-from <denis@denix.org>) id 1MwVEp-00035L-7b
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 10 Oct 2009 08:03:38 +0200
-Received: from octopus.DViCO.local ([172.28.0.21]) by octopus.DViCO.local
-	([172.28.0.21]) with mapi; Sat, 10 Oct 2009 15:02:41 +0900
-From: Leo Liang <LeoLiang@dvico.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Sat, 10 Oct 2009 15:02:33 +0900
-Thread-Topic: [oe] libxml2-native build issue
-Thread-Index: AcpJVX3lQa+5+O5BQjORqI7YY/WVvAAGZfMg
-Message-ID: <EC39BD99FF22424187B9D113F67FF56634883DD72F@octopus.DViCO.local>
-References: <200910100322.07608.david.lanzendoerfer@o2s.ch>
-	<200910100454.17331.holger+oe@freyther.de>
-In-Reply-To: <200910100454.17331.holger+oe@freyther.de>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: zh-CN, en-US
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 121.165.117.45
-X-SA-Exim-Mail-From: LeoLiang@dvico.com
+	Sat, 10 Oct 2009 08:15:34 +0200
+Received: from gandalf.denix.org ([71.127.57.136]) by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KRA005WQBXXG1B1@vms173001.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sat,
+	10 Oct 2009 01:13:14 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id CEC5514AF60; Sat,
+	10 Oct 2009 02:13:08 -0400 (EDT)
+Date: Sat, 10 Oct 2009 02:13:08 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20091010061308.GA23748@denix.org>
+References: <20091006034646.GA22854@denix.org>
+	<be7a9f3d0910060823y6f3f0ee7n122c8405a2d31390@mail.gmail.com>
+	<1255079009.1184.137.camel@dax.rpnet.com>
+MIME-version: 1.0
+In-reply-to: <1255079009.1184.137.camel@dax.rpnet.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.1
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: libxml2-native build issue
+Subject: Re: [RFC] Version sorting in BitBake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,25 +38,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Oct 2009 06:03:39 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Sat, 10 Oct 2009 06:15:34 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-aGkNCg0KICAgICAgICBJIGFsc28gZ290IHRoaXMgcHJvYmxlbS4uLmNhbiB5b3UgZXhwbGFpbiBt
-b3JlIGFib3V0IGhvdyB0byBmaXggaXQ/DQoNCnRoYW5rcw0KTGVvDQoNCi0tLS0t6YKu5Lu25Y6f
-5Lu2LS0tLS0NCuWPkeS7tuS6ujogb3BlbmVtYmVkZGVkLWRldmVsLWJvdW5jZXNAbGlzdHMub3Bl
-bmVtYmVkZGVkLm9yZyBbbWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9w
-ZW5lbWJlZGRlZC5vcmddIOS7o+ihqCBIb2xnZXIgSGFucyBQZXRlciBGcmV5dGhlcg0K5Y+R6YCB
-5pe26Ze0OiAyMDA55bm0MTDmnIgxMOaXpSAxMDo1NA0K5pS25Lu25Lq6OiBvcGVuZW1iZWRkZWQt
-ZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0K5Li76aKYOiBSZTogW29lXSBsaWJ4bWwyLW5h
-dGl2ZSBidWlsZCBpc3N1ZQ0KDQpPbiBTYXR1cmRheSAxMCBPY3RvYmVyIDIwMDkgMDM6MjI6MDIg
-RGF2aWQgTGFuemVuZMO2cmZlciB3cm90ZToNCj4gRG9lcyBzb21lb25lIGhhdmUgYW4gaWRlYSwg
-d2hhdCBjb3VsZCBjYXVzZSB0aGUgZm9sbG93aW5nIGVycm9yPzoNCg0KVGhlIGxpbnV4IC0+IGxp
-bnV4LWdudSBjaGFuZ2UuIEtoZW0ncyByZXZlcnQgaXMgZ29pbmcgdG8gZml4IHRoYXQuDQoNCmhv
-bGdlcg0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0K
-T3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KT3BlbmVtYmVkZGVkLWRldmVsQGxpc3Rz
-Lm9wZW5lbWJlZGRlZC5vcmcNCmh0dHA6Ly9saXN0cy5saW51eHRvZ28ub3JnL2NnaS1iaW4vbWFp
-bG1hbi9saXN0aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWwNCg==
+On Fri, Oct 09, 2009 at 10:03:29AM +0100, Richard Purdie wrote:
+> On Tue, 2009-10-06 at 12:23 -0300, Otavio Salvador wrote:
+> > Hello Denys,
+> > 
+> > On Tue, Oct 6, 2009 at 12:46 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+> > [...]
+> > > PV1 = "2.6.29-${PR}+gitr${SRCREV}"
+> > > PV2 = "2.6.29+2.6.30-rc5-${PR}+gitr${SRCREV}"
+> > > PV3 = "2.6.30-${PR}+gitr${SRCREV}"
+> > >
+> > > That still works with opkg, as ipkg-compare-versions sorts above PVs as
+> > > expected - PV1 < PV2 < PV3
+> > >
+> > > But BitBake now has this flaw and sorts like this: PV2 < PV1 < PV3
+> > [...]
+> > 
+> > Please send the patch for people to review and would be nice to have
+> > it commited since many of us could have been using non-required
+> > overrides.
+> > 
+> > Thanks by founding and _fixing_ it :-D
+> 
+> This worries me quite a bit as it means bitbake's version comparison
+> function is broken. Is there a python version comparison function
+> somewhere else we can compare bitbake's with to make sure there aren't
+> any other glitches we have?
+
+I was consulting with the ipkg-utils ipkg-compare-versions.c
+
+> Bitbake's and opkg's version handling is meant to model Debian for
+> reference.
+
+We discussed this matter on irc with Phil/pb couple days ago. The agreement 
+was that fixing BitBake to adhere to dpkg/opkg (i.e. Debian) version sorting 
+rules is a good thing. The remaining question was with rpm, which, according 
+to sorting algorithm docs on the Net, does not take into account any 
+separators at all.
+
+Phil was suggesting that the sorting algorithm can be adjusted runtime 
+depending on the distro or whether debian.bbclass is inherited...
+Any preferences of what to do with rpm?
+
+-- 
+Denys
 
 
