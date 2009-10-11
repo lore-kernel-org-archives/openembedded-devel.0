@@ -1,22 +1,23 @@
-Received: from [209.85.216.184] (helo=mail-px0-f184.google.com)
+Received: from [209.85.222.189] (helo=mail-pz0-f189.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mail@april1985.com>) id 1Mx0kl-0006p1-D1
+	(envelope-from <mail@april1985.com>) id 1Mx14X-0002Rq-Bl
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Oct 2009 17:54:38 +0200
-Received: by pxi14 with SMTP id 14so9126736pxi.3
+	Sun, 11 Oct 2009 18:15:04 +0200
+Received: by pzk27 with SMTP id 27so2048285pzk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Oct 2009 08:53:41 -0700 (PDT)
+	Sun, 11 Oct 2009 09:14:07 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.142.196.7 with SMTP id t7mr354875wff.90.1255276421691; Sun, 11 
-	Oct 2009 08:53:41 -0700 (PDT)
-In-Reply-To: <200910111658.23873.holger+oe@freyther.de>
+Received: by 10.143.154.33 with SMTP id g33mr390551wfo.300.1255277647381; Sun, 
+	11 Oct 2009 09:14:07 -0700 (PDT)
+In-Reply-To: <fd72b8f50910110853u46dc80dbr5ba7410e0a6a0840@mail.gmail.com>
 References: <fd72b8f50910110737u5cf0c64dv2e352feaa2c46e1@mail.gmail.com>
 	<200910111658.23873.holger+oe@freyther.de>
-Date: Sun, 11 Oct 2009 23:53:41 +0800
-Message-ID: <fd72b8f50910110853u46dc80dbr5ba7410e0a6a0840@mail.gmail.com>
+	<fd72b8f50910110853u46dc80dbr5ba7410e0a6a0840@mail.gmail.com>
+Date: Mon, 12 Oct 2009 00:14:07 +0800
+Message-ID: <fd72b8f50910110914u3b9ddbfcsaea33748a3a68345@mail.gmail.com>
 From: mail mail <mail@april1985.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.184
+X-SA-Exim-Connect-IP: 209.85.222.189
 X-SA-Exim-Mail-From: mail@april1985.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
@@ -35,39 +36,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Oct 2009 15:54:38 -0000
+X-List-Received-Date: Sun, 11 Oct 2009 16:15:04 -0000
+X-Groupsio-MsgNum: 13406
+Content-Type: multipart/mixed; boundary=001636e0b6ee4446100475ab1a6a
+
+--001636e0b6ee4446100475ab1a6a
 Content-Type: text/plain; charset=ISO-8859-1
 
-Ni Hao too, haha.
-How could you know I'm Chinese ^_^
+Hi, Holger Hans Peter Freyther
+Thank you for your direction. I finished compile it and here is my patch:
 
-Thanks, I'll check it.
+--- delegate.c    2007-09-11 11:20:41.000000000 +0800
++++ delegate.c    2009-10-12 00:04:45.000000000 +0800
+@@ -769,7 +769,7 @@
+   /*
+     Copy source file to destination.
+   */
+-  destination_file=open(destination,O_WRONLY | O_BINARY | O_CREAT);
++  destination_file=open(destination,O_WRONLY | O_BINARY | O_CREAT, 0777);
+   if (destination_file == -1)
+     return;
+   source_file=open(source,O_RDONLY | O_BINARY);
 
-2009/10/11 Holger Hans Peter Freyther
-<holger+oe@freyther.de<holger%2Boe@freyther.de>
+2009/10/11 mail mail <mail@april1985.com>
+
 >
-
+> Ni Hao too, haha.
+> How could you know I'm Chinese ^_^
+>
+> Thanks, I'll check it.
+>
+> 2009/10/11 Holger Hans Peter Freyther <holger+oe@freyther.de<holger%2Boe@freyther.de>
+> >
+>
 > On Sunday 11 October 2009 16:37:19 mail mail wrote:
-> > Hi, all
-> > I'm compiling x11-sato-image. I chose mini2440 as my machine and angstrom
-> >  as distro.
+>> > Hi, all
+>> > I'm compiling x11-sato-image. I chose mini2440 as my machine and
+>> angstrom
+>> >  as distro.
+>>
+>> Ni Hao,
+>>
+>> sorry this is not how it is working. Ask on IRC or google/baidu first.
+>>
+>>
+>> You are using a fortify enabled compiler and the open call lacks a third
+>> argument. Just create a patch to change the open call to have the access
+>> mode
+>> in it as well, send a patch, we will be happy to apply it.
+>>
+>>
+>> z.
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
 >
-> Ni Hao,
->
-> sorry this is not how it is working. Ask on IRC or google/baidu first.
->
->
-> You are using a fortify enabled compiler and the open call lacks a third
-> argument. Just create a patch to change the open call to have the access
-> mode
-> in it as well, send a patch, we will be happy to apply it.
->
->
-> z.
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
+--001636e0b6ee4446100475ab1a6a
+Content-Type: application/octet-stream; name="delegate.patch"
+Content-Disposition: attachment; filename="delegate.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_g0nzvnej0
+
+LS0tIGRlbGVnYXRlLmMJMjAwNy0wOS0xMSAxMToyMDo0MS4wMDAwMDAwMDAgKzA4MDANCisrKyBk
+ZWxlZ2F0ZS5jCTIwMDktMTAtMTIgMDA6MDQ6NDUuMDAwMDAwMDAwICswODAwDQpAQCAtNzY5LDcg
+Kzc2OSw3IEBADQogICAvKg0KICAgICBDb3B5IHNvdXJjZSBmaWxlIHRvIGRlc3RpbmF0aW9uLg0K
+ICAgKi8NCi0gIGRlc3RpbmF0aW9uX2ZpbGU9b3BlbihkZXN0aW5hdGlvbixPX1dST05MWSB8IE9f
+QklOQVJZIHwgT19DUkVBVCk7DQorICBkZXN0aW5hdGlvbl9maWxlPW9wZW4oZGVzdGluYXRpb24s
+T19XUk9OTFkgfCBPX0JJTkFSWSB8IE9fQ1JFQVQsIDA3NzcpOw0KICAgaWYgKGRlc3RpbmF0aW9u
+X2ZpbGUgPT0gLTEpDQogICAgIHJldHVybjsNCiAgIHNvdXJjZV9maWxlPW9wZW4oc291cmNlLE9f
+UkRPTkxZIHwgT19CSU5BUlkpOw==
+
+--001636e0b6ee4446100475ab1a6a--
