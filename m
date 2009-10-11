@@ -1,24 +1,26 @@
-Received: from [209.85.216.184] (helo=mail-px0-f184.google.com)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mail@april1985.com>) id 1MwzYs-0000yZ-0T
+	(envelope-from <holger+oe@freyther.de>) id 1MwztV-0005M6-1K
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Oct 2009 16:38:17 +0200
-Received: by pxi14 with SMTP id 14so9093149pxi.3
+	Sun, 11 Oct 2009 16:59:36 +0200
+Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
+	[123.192.145.111])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id DCACD1B10C04
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Oct 2009 07:37:20 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.142.60.5 with SMTP id i5mr410810wfa.285.1255271839284; Sun, 11 
-	Oct 2009 07:37:19 -0700 (PDT)
-Date: Sun, 11 Oct 2009 22:37:19 +0800
-Message-ID: <fd72b8f50910110737u5cf0c64dv2e352feaa2c46e1@mail.gmail.com>
-From: mail mail <mail@april1985.com>
+	Sun, 11 Oct 2009 15:06:54 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.184
-X-SA-Exim-Mail-From: mail@april1985.com
+Date: Sun, 11 Oct 2009 16:58:23 +0200
+User-Agent: KMail/1.12.2 (Linux/2.6.32-rc3; KDE/4.3.2; i686; ; )
+References: <fd72b8f50910110737u5cf0c64dv2e352feaa2c46e1@mail.gmail.com>
+In-Reply-To: <fd72b8f50910110737u5cf0c64dv2e352feaa2c46e1@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200910111658.23873.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: imagemagick-native-6.3.5 compile problems
+Subject: Re: imagemagick-native-6.3.5 compile problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,103 +34,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Oct 2009 14:38:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 11 Oct 2009 14:59:36 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Hi, all
-I'm compiling x11-sato-image. I chose mini2440 as my machine and angstrom as
-distro. My OE git version is:
-4089b4dd14270a884101cc7b8c240998c4354cd0<http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=4089b4dd14270a884101cc7b8c240998c4354cd0>.
-imagemagick-native-6.3.5 compiled failed. I'm new to OE and didn't know what
-to do. I just bitbake imagemagick-native again and have the screen:
+On Sunday 11 October 2009 16:37:19 mail mail wrote:
+> Hi, all
+> I'm compiling x11-sato-image. I chose mini2440 as my machine and angstrom
+>  as distro.
 
-derek@derek-desktop:~/mini2440$ bitbake imagemagick-native
-/home/derek/mini2440/bitbake/lib/bb/COW.py:29: DeprecationWarning: the sets
-module is deprecated
-  import types, sets
-NOTE: Handling BitBake files: - (7316/7316) [100 %]
-NOTE: Parsing finished. 7023 cached, 0 parsed, 293 skipped, 0 masked.
-NOTE: Cache is clean, not saving.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 100 of 160 (ID: 7,
-/home/derek/mini2440/openembedded/recipes/imagemagick/
-imagemagick-native_6.3.5-10.bb, do_compile)
-NOTE: Running task 151 of 160 (ID: 13,
-/home/derek/mini2440/openembedded/recipes/imagemagick/
-imagemagick-native_6.3.5-10.bb, do_distribute_sources)
-ERROR: function do_compile failed
-ERROR: log data follows
-(/home/derek/mini2440/build/tmp/work/i686-linux/imagemagick-native-6.3.5-10-r4/temp/log.do_compile.10247)
-| NOTE: make -j 4
-| /bin/bash ./libtool --silent --tag=CC   --mode=compile ccache gcc
--DHAVE_CONFIG_H -I. -I./magick -I./wand  -I./ltdl -I./ltdl
--isystem/home/derek/mini2440/build/tmp/staging/i686-linux/usr/include
--isystem/home/derek/mini2440/build/tmp/staging/i686-linux/usr/include -O2 -g
--Wall -W -pthread -MT magick/magick_libMagick_la-delegate.lo -MD -MP -MF
-magick/.deps/magick_libMagick_la-delegate.Tpo -c -o
-magick/magick_libMagick_la-delegate.lo `test -f 'magick/delegate.c' || echo
-'./'`magick/delegate.c
-| /bin/bash ./libtool --silent --tag=CC   --mode=compile ccache gcc
--DHAVE_CONFIG_H -I. -I./magick -I./wand  -I./ltdl -I./ltdl
--isystem/home/derek/mini2440/build/tmp/staging/i686-linux/usr/include
--isystem/home/derek/mini2440/build/tmp/staging/i686-linux/usr/include -O2 -g
--Wall -W -pthread -MT magick/magick_libMagick_la-enhance.lo -MD -MP -MF
-magick/.deps/magick_libMagick_la-enhance.Tpo -c -o
-magick/magick_libMagick_la-enhance.lo `test -f 'magick/enhance.c' || echo
-'./'`magick/enhance.c
-| /bin/bash ./libtool --silent --tag=CC   --mode=compile ccache gcc
--DHAVE_CONFIG_H -I. -I./magick -I./wand  -I./ltdl -I./ltdl
--isystem/home/derek/mini2440/build/tmp/staging/i686-linux/usr/include
--isystem/home/derek/mini2440/build/tmp/staging/i686-linux/usr/include -O2 -g
--Wall -W -pthread -MT magick/magick_libMagick_la-exception.lo -MD -MP -MF
-magick/.deps/magick_libMagick_la-exception.Tpo -c -o
-magick/magick_libMagick_la-exception.lo `test -f 'magick/exception.c' ||
-echo './'`magick/exception.c
-| /bin/bash ./libtool --silent --tag=CC   --mode=compile ccache gcc
--DHAVE_CONFIG_H -I. -I./magick -I./wand  -I./ltdl -I./ltdl
--isystem/home/derek/mini2440/build/tmp/staging/i686-linux/usr/include
--isystem/home/derek/mini2440/build/tmp/staging/i686-linux/usr/include -O2 -g
--Wall -W -pthread -MT magick/magick_libMagick_la-fx.lo -MD -MP -MF
-magick/.deps/magick_libMagick_la-fx.Tpo -c -o
-magick/magick_libMagick_la-fx.lo `test -f 'magick/fx.c' || echo
-'./'`magick/fx.c
-| In function 'open',
-|     inlined from 'CopyDelegateFile' at magick/delegate.c:772,
-|     inlined from 'InvokeDelegate' at magick/delegate.c:998:
-| /usr/include/bits/fcntl2.h:51: error: call to '__open_missing_mode'
-declared with attribute error: open with O_CREAT in second argument needs 3
-arguments
-| make: *** [magick/magick_libMagick_la-delegate.lo] Error 1
-| make: *** Waiting for unfinished jobs....
-| mv -f magick/.deps/magick_libMagick_la-exception.Tpo
-magick/.deps/magick_libMagick_la-exception.Plo
-| magick/fx.c: In function 'ConvolveImageChannel':
-| magick/fx.c:529: warning: ignoring #pragma omp parallel
-| mv -f magick/.deps/magick_libMagick_la-enhance.Tpo
-magick/.deps/magick_libMagick_la-enhance.Plo
-| mv -f magick/.deps/magick_libMagick_la-fx.Tpo
-magick/.deps/magick_libMagick_la-fx.Plo
-| FATAL: oe_runmake failed
-NOTE: Task failed:
-/home/derek/mini2440/build/tmp/work/i686-linux/imagemagick-native-6.3.5-10-r4/temp/log.do_compile.10247
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /home/derek/mini2440/openembedded/recipes/imagemagick/
-imagemagick-native_6.3.5-10.bb do_compile failed
-ERROR: Task 7 (/home/derek/mini2440/openembedded/recipes/imagemagick/
-imagemagick-native_6.3.5-10.bb, do_compile) failed
-NOTE: Tasks Summary: Attempted 150 tasks of which 149 didn't need to be
-rerun and 1 failed.
-ERROR: '/home/derek/mini2440/openembedded/recipes/imagemagick/
-imagemagick-native_6.3.5-10.bb' failed
+Ni Hao,
+
+sorry this is not how it is working. Ask on IRC or google/baidu first.
 
 
-Could anyone give me some ideas about this or how can I fix it?
-Thanks!
+You are using a fortify enabled compiler and the open call lacks a third 
+argument. Just create a patch to change the open call to have the access mode 
+in it as well, send a patch, we will be happy to apply it.
 
 
-Derek
-2009/10/11
-www.april1985.com
+z.
+
 
