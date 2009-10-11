@@ -1,42 +1,24 @@
-Received: from [209.85.220.207] (helo=mail-fx0-f207.google.com)
+Received: from [209.85.216.184] (helo=mail-px0-f184.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1MwzDh-0007JM-2j
+	(envelope-from <mail@april1985.com>) id 1MwzYs-0000yZ-0T
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Oct 2009 16:16:24 +0200
-Received: by fxm3 with SMTP id 3so8429596fxm.20
+	Sun, 11 Oct 2009 16:38:17 +0200
+Received: by pxi14 with SMTP id 14so9093149pxi.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Oct 2009 07:15:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=dCadeb22FrU6puwvi0DQnN/ebrD7RehWLoh6c4vH9SM=;
-	b=cahlrc+n5BnqvKdjUuD5RTZRv9tTZ43F3KpcwBE5UWFM4HDIAdGfj4YjMkQjqHdMJt
-	ZJYY2k0EuX1NZTCIqfF4v7nuetObpwwlWY/JgmYPlShv36HMnq+oFZSsJuTB17kvR8wk
-	GnznqL/qG4jLMJioGhEJo+2WXYiuNAeXiERR8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=GPR5+HzUHK+uQwnT2Jj6ngPoG1Jvf/aQ7wHqZeAb3meQBRfH9EkIVB2b+wgD2OzSTI
-	yIAmfpt/CE4YmURFp3/Jk18nkrSvmT9I/dnQGddW/13vfHqzL0h3IxMS8dBl6qCDmge8
-	T0YL6EtYZq+qsDZfypivW6Xe1k/RvK588BCH0=
-Received: by 10.103.84.30 with SMTP id m30mr2002474mul.23.1255270528413;
-	Sun, 11 Oct 2009 07:15:28 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id e10sm7357397muf.21.2009.10.11.07.15.27
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 11 Oct 2009 07:15:27 -0700 (PDT)
-From: "Martin.Jansa" <martin.jansa@gmail.com>
+	Sun, 11 Oct 2009 07:37:20 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.142.60.5 with SMTP id i5mr410810wfa.285.1255271839284; Sun, 11 
+	Oct 2009 07:37:19 -0700 (PDT)
+Date: Sun, 11 Oct 2009 22:37:19 +0800
+Message-ID: <fd72b8f50910110737u5cf0c64dv2e352feaa2c46e1@mail.gmail.com>
+From: mail mail <mail@april1985.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 11 Oct 2009 16:15:12 +0200
-Message-Id: <1255270512-22926-2-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.6.5.rc2
-In-Reply-To: <1255270512-22926-1-git-send-email-Martin.Jansa@gmail.com>
-References: <E1Mwyda-0001aa-3j@melo.openembedded.org>
-	<1255270512-22926-1-git-send-email-Martin.Jansa@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.220.207
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Connect-IP: 209.85.216.184
+X-SA-Exim-Mail-From: mail@april1985.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 2/2] Add missing patch for xorg-xserver
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: imagemagick-native-6.3.5 compile problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,42 +32,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Oct 2009 14:16:24 -0000
+X-List-Received-Date: Sun, 11 Oct 2009 14:38:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
----
- .../xorg-xserver/xserver-xorg-1.7.0/dolt-fix.patch |   21 ++++++++++++++++++++
- 1 files changed, 21 insertions(+), 0 deletions(-)
- create mode 100644 recipes/xorg-xserver/xserver-xorg-1.7.0/dolt-fix.patch
+Hi, all
+I'm compiling x11-sato-image. I chose mini2440 as my machine and angstrom as
+distro. My OE git version is:
+4089b4dd14270a884101cc7b8c240998c4354cd0<http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=4089b4dd14270a884101cc7b8c240998c4354cd0>.
+imagemagick-native-6.3.5 compiled failed. I'm new to OE and didn't know what
+to do. I just bitbake imagemagick-native again and have the screen:
 
-diff --git a/recipes/xorg-xserver/xserver-xorg-1.7.0/dolt-fix.patch b/recipes/xorg-xserver/xserver-xorg-1.7.0/dolt-fix.patch
-new file mode 100644
-index 0000000..414d72d
---- /dev/null
-+++ b/recipes/xorg-xserver/xserver-xorg-1.7.0/dolt-fix.patch
-@@ -0,0 +1,21 @@
-+Index: xorg-server/m4/dolt.m4
-+===================================================================
-+--- xorg-server/m4/dolt.m4	2009-04-14 21:14:56.000000000 +0400
-++++ xorg-server-2/m4/dolt.m4	2009-07-15 12:38:33.796848843 +0400
-+@@ -147,7 +147,7 @@
-+     cat <<__DOLTLIBTOOL__EOF__ > doltlibtool
-+ #!$DOLT_BASH
-+ __DOLTLIBTOOL__EOF__
-+-    cat <<'__DOLTLIBTOOL__EOF__' >>doltlibtool
-++    cat <<'__DOLTLIBTOOL__EOF__' | sed -e "s/@host_alias@/$host_alias/g" >>doltlibtool
-+ top_builddir_slash="${0%%doltlibtool}"
-+ : ${top_builddir_slash:=./}
-+ args=()
-+@@ -163,7 +163,7 @@
-+ if $modeok && $tagok ; then
-+     . ${top_builddir_slash}doltcompile "${args@<:@@@:>@}"
-+ else
-+-    exec ${top_builddir_slash}libtool "$[]@"
-++    exec ${top_builddir_slash}@host_alias@-libtool "$[]@"
-+ fi
-+ __DOLTLIBTOOL__EOF__
--- 
-1.6.5.rc2
+derek@derek-desktop:~/mini2440$ bitbake imagemagick-native
+/home/derek/mini2440/bitbake/lib/bb/COW.py:29: DeprecationWarning: the sets
+module is deprecated
+  import types, sets
+NOTE: Handling BitBake files: - (7316/7316) [100 %]
+NOTE: Parsing finished. 7023 cached, 0 parsed, 293 skipped, 0 masked.
+NOTE: Cache is clean, not saving.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 100 of 160 (ID: 7,
+/home/derek/mini2440/openembedded/recipes/imagemagick/
+imagemagick-native_6.3.5-10.bb, do_compile)
+NOTE: Running task 151 of 160 (ID: 13,
+/home/derek/mini2440/openembedded/recipes/imagemagick/
+imagemagick-native_6.3.5-10.bb, do_distribute_sources)
+ERROR: function do_compile failed
+ERROR: log data follows
+(/home/derek/mini2440/build/tmp/work/i686-linux/imagemagick-native-6.3.5-10-r4/temp/log.do_compile.10247)
+| NOTE: make -j 4
+| /bin/bash ./libtool --silent --tag=CC   --mode=compile ccache gcc
+-DHAVE_CONFIG_H -I. -I./magick -I./wand  -I./ltdl -I./ltdl
+-isystem/home/derek/mini2440/build/tmp/staging/i686-linux/usr/include
+-isystem/home/derek/mini2440/build/tmp/staging/i686-linux/usr/include -O2 -g
+-Wall -W -pthread -MT magick/magick_libMagick_la-delegate.lo -MD -MP -MF
+magick/.deps/magick_libMagick_la-delegate.Tpo -c -o
+magick/magick_libMagick_la-delegate.lo `test -f 'magick/delegate.c' || echo
+'./'`magick/delegate.c
+| /bin/bash ./libtool --silent --tag=CC   --mode=compile ccache gcc
+-DHAVE_CONFIG_H -I. -I./magick -I./wand  -I./ltdl -I./ltdl
+-isystem/home/derek/mini2440/build/tmp/staging/i686-linux/usr/include
+-isystem/home/derek/mini2440/build/tmp/staging/i686-linux/usr/include -O2 -g
+-Wall -W -pthread -MT magick/magick_libMagick_la-enhance.lo -MD -MP -MF
+magick/.deps/magick_libMagick_la-enhance.Tpo -c -o
+magick/magick_libMagick_la-enhance.lo `test -f 'magick/enhance.c' || echo
+'./'`magick/enhance.c
+| /bin/bash ./libtool --silent --tag=CC   --mode=compile ccache gcc
+-DHAVE_CONFIG_H -I. -I./magick -I./wand  -I./ltdl -I./ltdl
+-isystem/home/derek/mini2440/build/tmp/staging/i686-linux/usr/include
+-isystem/home/derek/mini2440/build/tmp/staging/i686-linux/usr/include -O2 -g
+-Wall -W -pthread -MT magick/magick_libMagick_la-exception.lo -MD -MP -MF
+magick/.deps/magick_libMagick_la-exception.Tpo -c -o
+magick/magick_libMagick_la-exception.lo `test -f 'magick/exception.c' ||
+echo './'`magick/exception.c
+| /bin/bash ./libtool --silent --tag=CC   --mode=compile ccache gcc
+-DHAVE_CONFIG_H -I. -I./magick -I./wand  -I./ltdl -I./ltdl
+-isystem/home/derek/mini2440/build/tmp/staging/i686-linux/usr/include
+-isystem/home/derek/mini2440/build/tmp/staging/i686-linux/usr/include -O2 -g
+-Wall -W -pthread -MT magick/magick_libMagick_la-fx.lo -MD -MP -MF
+magick/.deps/magick_libMagick_la-fx.Tpo -c -o
+magick/magick_libMagick_la-fx.lo `test -f 'magick/fx.c' || echo
+'./'`magick/fx.c
+| In function 'open',
+|     inlined from 'CopyDelegateFile' at magick/delegate.c:772,
+|     inlined from 'InvokeDelegate' at magick/delegate.c:998:
+| /usr/include/bits/fcntl2.h:51: error: call to '__open_missing_mode'
+declared with attribute error: open with O_CREAT in second argument needs 3
+arguments
+| make: *** [magick/magick_libMagick_la-delegate.lo] Error 1
+| make: *** Waiting for unfinished jobs....
+| mv -f magick/.deps/magick_libMagick_la-exception.Tpo
+magick/.deps/magick_libMagick_la-exception.Plo
+| magick/fx.c: In function 'ConvolveImageChannel':
+| magick/fx.c:529: warning: ignoring #pragma omp parallel
+| mv -f magick/.deps/magick_libMagick_la-enhance.Tpo
+magick/.deps/magick_libMagick_la-enhance.Plo
+| mv -f magick/.deps/magick_libMagick_la-fx.Tpo
+magick/.deps/magick_libMagick_la-fx.Plo
+| FATAL: oe_runmake failed
+NOTE: Task failed:
+/home/derek/mini2440/build/tmp/work/i686-linux/imagemagick-native-6.3.5-10-r4/temp/log.do_compile.10247
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /home/derek/mini2440/openembedded/recipes/imagemagick/
+imagemagick-native_6.3.5-10.bb do_compile failed
+ERROR: Task 7 (/home/derek/mini2440/openembedded/recipes/imagemagick/
+imagemagick-native_6.3.5-10.bb, do_compile) failed
+NOTE: Tasks Summary: Attempted 150 tasks of which 149 didn't need to be
+rerun and 1 failed.
+ERROR: '/home/derek/mini2440/openembedded/recipes/imagemagick/
+imagemagick-native_6.3.5-10.bb' failed
 
 
+Could anyone give me some ideas about this or how can I fix it?
+Thanks!
+
+
+Derek
+2009/10/11
+www.april1985.com
 
