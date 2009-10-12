@@ -1,39 +1,24 @@
-Received: from [160.45.40.10] (helo=mail.math.fu-berlin.de)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1MxPdi-0006km-A8
-	for openembedded-devel@openembedded.org; Mon, 12 Oct 2009 20:29:01 +0200
-Received: (qmail 18197 invoked from network); 12 Oct 2009 20:28:06 +0200
-Received: from luzin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.148)
-	by leibniz.math.fu-berlin.de with SMTP; 12 Oct 2009 20:28:06 +0200
-Received: (qmail 15717 invoked by uid 9804); 12 Oct 2009 20:28:05 +0200
-Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
-	by localhost with SMTP; 12 Oct 2009 20:27:06 +0200
-Received: (qmail 15695 invoked by uid 9804); 12 Oct 2009 18:03:04 +0200
-Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
-	(160.45.40.10)
-	by luzin.mi.fu-berlin.de with SMTP; 12 Oct 2009 18:03:04 +0200
-Received: (qmail 8647 invoked from network); 12 Oct 2009 18:03:04 +0200
-Received: from omsk.imp.fu-berlin.de (160.45.45.210)
-	by leibniz.math.fu-berlin.de with SMTP; 12 Oct 2009 16:03:04 -0000
-Received: from heinold by omsk.imp.fu-berlin.de with local (Exim 4.69 #1
-	(Debian)) id 1MxNMQ-00042z-M9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Oct 2009 18:03:01 +0200
-Date: Mon, 12 Oct 2009 18:02:58 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	(envelope-from <philb@gnu.org>) id 1MxQZw-0005c5-3m
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Oct 2009 21:29:11 +0200
+Received: from [85.210.191.75] (helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MxQZ5-0003hF-FA
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Oct 2009 20:28:15 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091012160258.GA15257@mi.fu-berlin.de>
-References: <fca63bcf0910120537n73c7a9dveb742edf1f75542d@mail.gmail.com>
-X-Envelope-Sender: heinold@mi.fu-berlin.de
-X-Virus-Scanned: by AMaViS
-	0.3.12pre7-L41+ClamAV[15539](NAI-uvscan@mi.fu-berlin.de)
-X-Remote-IP: 160.45.45.210
-MIME-Version: 1.0
 In-Reply-To: <fca63bcf0910120537n73c7a9dveb742edf1f75542d@mail.gmail.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-X-SA-Exim-Connect-IP: 160.45.40.10
-X-SA-Exim-Mail-From: heinold@mi.fu-berlin.de
+References: <fca63bcf0910120537n73c7a9dveb742edf1f75542d@mail.gmail.com>
+Date: Mon, 12 Oct 2009 20:28:13 +0100
+Message-Id: <1255375693.9214.311.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-Broken-Reverse-DNS: no host name found for IP address 85.210.191.75
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: patch: lighttpd runtime issues; lighttpd ssl version;
@@ -50,15 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Oct 2009 18:29:01 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 12 Oct 2009 19:29:11 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On Mon, 2009-10-12 at 12:37 +0000, Michael Lippautz wrote:
+>  create mode 100644 recipes/lighttpd/lighttpd-ssl/configure.in.patch
+>  create mode 100644 recipes/lighttpd/lighttpd-ssl/index.html
+>  create mode 100644 recipes/lighttpd/lighttpd-ssl/lighttpd
+>  create mode 100644 recipes/lighttpd/lighttpd-ssl/lighttpd.cnf
+>  create mode 100644 recipes/lighttpd/lighttpd-ssl/lighttpd.conf
+>  create mode 100644 recipes/lighttpd/lighttpd-ssl/mod_redirect.c.patch
+>  create mode 100644 recipes/lighttpd/lighttpd-ssl/src-server.c.patch
+>  create mode 100755 recipes/lighttpd/lighttpd-ssl_1.4.18.bb
 
-this fixes two issues please split up. And please look at commit messages policy under:
-http://wiki.openembedded.net/index.php/Commit_log_example
+Are these just straight copies of the equivalent files from
+recipes/lighttpd/lighttpd/?  If so, it might be better to find a way for
+these two recipes to share them, rather than having all these bits
+duplicated.
 
-Bye Henning
+p.
+
+
 
 
