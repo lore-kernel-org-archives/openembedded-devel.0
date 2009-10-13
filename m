@@ -1,35 +1,36 @@
-Received: from [65.182.109.74] (helo=mta5.brinkster.com)
+Received: from [209.85.210.171] (helo=mail-yx0-f171.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <John.Willis@Distant-earth.com>) id 1MxhqJ-00061V-DT
+	(envelope-from <cliff.brake@gmail.com>) id 1MxiJW-0007lF-3Y
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Oct 2009 15:55:14 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mta5.brinkster.com (Postfix) with ESMTP id 1AFCD2C0363
+	Tue, 13 Oct 2009 16:25:25 +0200
+Received: by yxe1 with SMTP id 1so3169036yxe.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Oct 2009 09:54:31 -0400 (EDT)
-X-Virus-Scanned: amavisd-new at 
-Received: from mta5.brinkster.com ([127.0.0.1])
-	by localhost (mta5.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6UPqD5oVxZ76
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Oct 2009 09:54:26 -0400 (EDT)
-Received: from MareImbrium (82-46-19-72.cable.ubr02.bath.blueyonder.co.uk
-	[82.46.19.72])
-	by mta5.brinkster.com (Postfix) with ESMTP id 712AC2C03A0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Oct 2009 09:54:23 -0400 (EDT)
-From: "John Willis" <John.Willis@Distant-earth.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 13 Oct 2009 14:53:57 +0100
-Message-ID: <008401ca4c0c$9ccc3e70$d664bb50$@Willis@Distant-earth.com>
+	Tue, 13 Oct 2009 07:24:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=spAMmsw0eqE8LimXdcf6dSMxwkH3U46gkH0oSQMN1zo=;
+	b=Fx8DLhW76Y3P8qDL5SaTFMNi/NCOt09V+3wqQTXyX66Ma+6aEBh6qLwbnVnSx5n0Nr
+	8BDaakONFHHKwnLhgyKezhPmQ4pG9VhkCl+JgOkD0kO/fFni5MxdMSZHZBQvQn9z94Z5
+	p9+a/e8r9BwOMOr+OSO4kGc2uJwUmy+F2AToE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=YGJznm0+e8MrDGjtqdnOlNpoLZtMLaAt8dMsgwMvD50PiTORrV0kBh0Dnd3163QpdG
+	1G00kAmX42JfyEl0i1Qb2L7iyCWIChHEEj7unV7Q9vMNWehoSDJmPGM/A4G6O5LFw9Qu
+	cAkynsTVlyKYgliiD7knzi/xZOLUxorSRynVI=
 MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook 12.0
-Thread-Index: AcpMDJvU2Dsdmkc0TAmoyPJBqSburQ==
-X-SA-Exim-Connect-IP: 65.182.109.74
-X-SA-Exim-Mail-From: John.Willis@Distant-earth.com
+Received: by 10.150.33.1 with SMTP id g1mr12568934ybg.265.1255443867132; Tue, 
+	13 Oct 2009 07:24:27 -0700 (PDT)
+Date: Tue, 13 Oct 2009 10:24:27 -0400
+Message-ID: <f96d234e0910130724y27ae6a4dlb50e17a8b18a1e73@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.210.171
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] keymaps: Add basic keymap support for the omap3pandora machine.
+Subject: OE weekly changelog 2009-10-05 to 2009-10-12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,278 +44,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Oct 2009 13:55:15 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
+X-List-Received-Date: Tue, 13 Oct 2009 14:25:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
-Content-Language: en-us
 
+OE weekly changelog 2009-10-05 to 2009-10-12
 
-Signed-off-by: David-John Willis <John.Willis@Distant-earth.com>
----
- .../files/omap3-pandora/keymap-extension-2.6.map   |  192
-++++++++++++++++++++
- recipes/keymaps/keymaps_1.0.bb                     |    4 +-
- 2 files changed, 194 insertions(+), 2 deletions(-)
- create mode 100755
-recipes/keymaps/files/omap3-pandora/keymap-extension-2.6.map
+Andrea Adami (8):
+  kexec-tools_klibc-static_2.0.1: rewrite some functions for klibc compatib=
+ili
+  kexec-tools-klibc-static_2.0.1: revised patchset/Tested on arm. Bump PR.
+  kexec-tools_2.0.1: split klibc patch creating the 'no getline, no fscanf'=
+ pa
+  kexec-tools-klibc-static_2.0.1: bump default preference
+  kexec-tools_2.0.1: rework/fix no-getline-no-fscanf.patch. Credits to Yuri=
+ Bu
+  dietlibc.inc: use the right prefix for cross tools. Bump PR.
+  linux-kexecboot.inc: to be quiet we set master console on serial. Bump PR=
+.
+  kexecboot_git: move to e7f85b13e144a594fa726f5f7ca4bd3e2327e2b3. Bump PR.
 
-diff --git =
-a/recipes/keymaps/files/omap3-pandora/keymap-extension-2.6.map
-b/recipes/keymaps/files/omap3-pandora/keymap-extension-2.6.map
-new file mode 100755
-index 0000000..1e3030d
---- /dev/null
-+++ b/recipes/keymaps/files/omap3-pandora/keymap-extension-2.6.map
-@@ -0,0 +1,192 @@
-+keymaps 0-2,4,8,12
-+
-+# Notes:
-+# FN is setup as AltGr.
-+# AltGr locking not yet working.
-+
-+# 	      Default 		Shift 		AltGr 		Control
-Alt 		Ctrl+Alt =09
-+
-+# DPad/Buttons in keyboard mode (On Input2).
-+
-+# DPad - URDL
-+keycode 103 =3D Up		Up		Prior
-+keycode 106 =3D Right		Right		Incr_Console=09
-+keycode 108 =3D Down		Down		Next
-+keycode 105 =3D Left		Left		Decr_Console=09
-+
-+# Buttons - URDL
-+keycode 307 =3D
-+keycode 304 =3D=20
-+keycode 305 =3D
-+keycode 308 =3D
-+
-+# Left Trigger
-+keycode 310 =3D
-+
-+# Right Trigger=20
-+keycode 311 =3D=20
-+
-+# Special keys.
-+keycode  29 =3D Control=09
-+keycode  56 =3D Alt
-+keycode  464 =3D AltGr		AltGr		AltGr_Lock
-+
-+
-+keycode  14 =3D BackSpace		Delete		Insert
-+     =20
-+keycode  28 =3D Return         	Return		Return		Return
-Return		Return=09
-+keycode  40 =3D apostrophe       	quotedbl        tilde
-+keycode  42 =3D Shift		VoidSymbol	Caps_Lock
-+
-+keycode  51 =3D comma            	less		semicolon
-+keycode  52 =3D period		greater		colon	=09
-+
-+keycode  53 =3D slash		question	Num_Lock
-+
-+keycode  57 =3D space		bar		Tab
-+
-+
-+# Number Bar
-+
-+keycode  2 =3D one		VoidSymbol	F1
-+keycode  3 =3D two		VoidSymbol	F2
-+keycode  4 =3D three		VoidSymbol	F3
-+keycode  5 =3D four		asciitilde	F4
-+keycode  6 =3D five		VoidSymbol	F5
-+keycode  7 =3D six		VoidSymbol	F6
-+keycode  8 =3D seven		ampersand	F7
-+keycode  9 =3D eight		asterisk	F8
-+keycode  10 =3D nine		VoidSymbol	F9
-+keycode  11 =3D zero		VoidSymbol	F10
-+
-+
-+# QWERTY Keypad
-+
-+keycode  16 =3D +q                +Q		Escape		Control_q
-Meta_q
-+keycode  17 =3D +w               	+W		at
-Control_w	Meta_w
-+keycode  18 =3D +e               	+E		three
-Control_e	Meta_e
-+keycode  19 =3D +r               	+R		four
-Control_r	Meta_r
-+keycode  20 =3D +t               	+T		five
-Control_t	Meta_t
-+keycode  21 =3D +y               	+Y		six
-Control_y	Meta_y
-+keycode  22 =3D +u               	+U		seven
-Control_u	Meta_u
-+keycode  23 =3D +i               	+I		eight
-Control_i	Meta_i
-+keycode  24 =3D +o               	+O		F11
-Control_o	Meta_o
-+keycode  25 =3D +p               	+P		F12
-Control_p	Meta_p
-+
-+keycode  30 =3D +a            	+A		exclam   	Control_a
-Meta_a
-+keycode  31 =3D +s               	+S		quotedbl
-Control_s	Meta_s
-+keycode  32 =3D +d		+D		numbersign	Control_d
-Meta_d
-+keycode  33 =3D +f		+F		plus		Control_f
-Meta_f
-+keycode  34 =3D +g               	+G		equals
-Control_g	Meta_g
-+keycode  35 =3D +h               	+H		underscore
-Control_h	Meta_h
-+keycode  36 =3D +j               	+J		ampersand
-Control_j	Meta_j
-+keycode  37 =3D +k               	+K		sterling
-Control_k	Meta_k
-+keycode  38 =3D +l               	+L		yen
-Control_l	Meta_l
-+
-+keycode  44 =3D +z               	+Z		VoidSymbol
-Control_z	Meta_z
-+keycode  45 =3D +x               	+X		question
-Control_x	Meta_x
-+keycode  46 =3D +c               	+C		Control_c
-Control_c	Meta_c
-+keycode  47 =3D +v               	+V		Control_v
-Control_v	Meta_v
-+keycode  48 =3D +b		+B		minus		Control_b
-Meta_b
-+keycode  49 =3D +n               	+N		dollar
-Control_n	Meta_n
-+keycode  50 =3D +m               	+M		equal
-Control_m	Meta_m
-+	=09
-+
-+string F1 =3D "\033[[A"
-+string F2 =3D "\033[[B"
-+string F3 =3D "\033[[C"
-+string F4 =3D "\033[[D"
-+string F5 =3D "\033[[E"
-+string F6 =3D "\033[17~"
-+string F7 =3D "\033[18~"
-+string F8 =3D "\033[19~"
-+string F9 =3D "\033[20~"
-+string F10 =3D "\033[21~"
-+string F11 =3D "\033[23~"
-+string F12 =3D "\033[24~"
-+string F13 =3D "\033[25~"
-+string F14 =3D "\033[26~"
-+string F15 =3D "\033[28~"
-+string F16 =3D "\033[29~"
-+string F17 =3D "\033[31~"
-+string F18 =3D "\033[32~"
-+string F19 =3D "\033[33~"
-+string F20 =3D "\033[34~"
-+string F33 =3D "\033[49~"
-+string Find =3D "\033[1~"
-+string Insert =3D "\033[2~"
-+string Remove =3D "\033[3~"
-+string Select =3D "\033[4~"
-+string Prior =3D "\033[5~"
-+string Next =3D "\033[6~"
-+string Macro =3D "\033[M"
-+string Pause =3D "\033[P"
-+
-+compose '`' 'A' to '=C0'
-+compose '`' 'a' to '=E0'
-+compose '\'' 'A' to '=C1'
-+compose '\'' 'a' to '=E1'
-+compose '^' 'A' to '=C2'
-+compose '^' 'a' to '=E2'
-+compose '~' 'A' to '=C3'
-+compose '~' 'a' to '=E3'
-+compose '"' 'A' to '=C4'
-+compose '"' 'a' to '=E4'
-+compose 'O' 'A' to '=C5'
-+compose 'o' 'a' to '=E5'
-+compose '0' 'A' to '=C5'
-+compose '0' 'a' to '=E5'
-+compose 'A' 'A' to '=C5'
-+compose 'a' 'a' to '=E5'
-+compose 'A' 'E' to '=C6'
-+compose 'a' 'e' to '=E6'
-+compose ',' 'C' to '=C7'
-+compose ',' 'c' to '=E7'
-+compose '`' 'E' to '=C8'
-+compose '`' 'e' to '=E8'
-+compose '\'' 'E' to '=C9'
-+compose '\'' 'e' to '=E9'
-+compose '^' 'E' to '=CA'
-+compose '^' 'e' to '=EA'
-+compose '"' 'E' to '=CB'
-+compose '"' 'e' to '=EB'
-+compose '`' 'I' to '=CC'
-+compose '`' 'i' to '=EC'
-+compose '\'' 'I' to '=CD'
-+compose '\'' 'i' to '=ED'
-+compose '^' 'I' to '=CE'
-+compose '^' 'i' to '=EE'
-+compose '"' 'I' to '=CF'
-+compose '"' 'i' to '=EF'
-+compose '-' 'D' to '=D0'
-+compose '-' 'd' to '=F0'
-+compose '~' 'N' to '=D1'
-+compose '~' 'n' to '=F1'
-+compose '`' 'O' to '=D2'
-+compose '`' 'o' to '=F2'
-+compose '\'' 'O' to '=D3'
-+compose '\'' 'o' to '=F3'
-+compose '^' 'O' to '=D4'
-+compose '^' 'o' to '=F4'
-+compose '~' 'O' to '=D5'
-+compose '~' 'o' to '=F5'
-+compose '"' 'O' to '=D6'
-+compose '"' 'o' to '=F6'
-+compose '/' 'O' to '=D8'
-+compose '/' 'o' to '=F8'
-+compose '`' 'U' to '=D9'
-+compose '`' 'u' to '=F9'
-+compose '\'' 'U' to '=DA'
-+compose '\'' 'u' to '=FA'
-+compose '^' 'U' to '=DB'
-+compose '^' 'u' to '=FB'
-+compose '"' 'U' to '=DC'
-+compose '"' 'u' to '=FC'
-+compose '\'' 'Y' to '=DD'
-+compose '\'' 'y' to '=FD'
-+compose 'T' 'H' to '=DE'
-+compose 't' 'h' to '=FE'
-+compose 's' 's' to '=DF'
-+compose '"' 'y' to '=FF'
-+compose 's' 'z' to '=DF'
-+compose 'i' 'j' to '=FF'
-diff --git a/recipes/keymaps/keymaps_1.0.bb =
-b/recipes/keymaps/keymaps_1.0.bb
-index a9b1e91..3cd1f5a 100755
---- a/recipes/keymaps/keymaps_1.0.bb
-+++ b/recipes/keymaps/keymaps_1.0.bb
-@@ -3,7 +3,7 @@ SECTION =3D "base"
- RDEPENDS_${PN} =3D "initscripts console-tools"
- LICENSE =3D "GPL"
- PACKAGE_ARCH =3D "${MACHINE}"
--PR =3D "r22"
-+PR =3D "r23"
-=20
- inherit update-rc.d
-=20
-@@ -18,7 +18,7 @@ SRC_URI_append_poodle       =3D " =
-file://keymap-2.6.map"
- SRC_URI_append_h2200        =3D " file://keymap-2.6.map"
- SRC_URI_append_htcuniversal =3D " file://keymap-2.6.map"
- SRC_URI_append_qemux86      =3D " file://keymap-2.6.map"
--SRC_URI_append_omap3-pandora =3D " file://keymap-2.6.map"
-+SRC_URI_append_omap3-pandora =3D " file://keymap-extension-2.6.map"
-=20
- SRC_URI_append_jornada6xx   =3D " file://keymap-620lx-660lx \
- 				file://keymap-br.map \
---=20
-1.6.3.1
+Brijesh Singh (1):
+  gstreamer-ti_svn: bump-up svn rev
 
+Graeme Gregory (3):
+  angstrom-*libc.inc : fix the TARGET_OS definitions for non eabi/spe targe=
+ts.
+  linux-omap-zoomsync_2.6.31.bb : increment OEV not PE
 
+Graham Gower (1):
+  matchbox-panel-0.9.3: fix uninitialised variable causing SIGBUS
 
+Henning Heinold (4):
+  lighttpd: switch to .inc file and INC_PR
+  lighttpd: inherit gettext
+  lighttpd: starting depends on three modules
+  opie-networksettings: fix install for changedns
+
+Jeremy Lain=E9 (4):
+  linux-2.6.29: update patch for lm73 on boc01
+  linux-2.6.29: update SPI patch for boc01
+  linux-2.6.29: update boc01 isl12024 driver to new style i2c
+  linux-2.6.29: update boc01 unique ID patch to use sysfs
+
+Khem Raj (16):
+  siteinfo: Add common-mips site file.
+  linux_2.6.31.bb: Make default for db1200
+  wvstreams_4.6.bb: Disable parallel build.
+  siteinfo.bbclass: Fix powerpc triplets and removed unused ones.
+  lsof_4.78.bb: Override LSOF_OS for gnuspe and uclibcspe targets.
+  binutils-cvs: Refresh binutils-uclibc-300-012_check_ldrunpath_length.patc=
+h w
+  gcc-4.4.1: Backport powerpc patches to improve code generation at -Os
+  wvdial_1.60.bb: Use g++ for compilation.
+  siteinfo.bbclass: Remove spurious print.
+  insane.bbclass: Use linux-gnu for TARGET_OS
+  omap5912osk: Use 2.6.31 as default kernel.
+  conf: Decosmetize TARGET_OS
+  angstrom: Revert to linux-gnu triplet
+  classes: Use linux-gnuspe instead of non existing linux-spe
+  gcc-4.4.1: Add TARGET_FIX_V4BX_SPEC to LINK_SPEC
+  uclibc-nptl: Bump the SRCREV
+
+Koen Kooi (4):
+  enlightenment: some modules moved in the svn tree, account for that
+  gstreamer: update some bits
+  wpa-supplicant: fix merge error
+  gst-plugins-base: add pango as dep
+
+Konrad Mattheis (1):
+  u-boot 2009.08
+
+Marcin Juszkiewicz (6):
+  linux-bug: updated to newer svn revision, tweaked kernel configuration
+  linux 2.6.30: update to 2.6.30.9
+  linux 2.6.31: update to 2.6.31.3
+  checksums.ini: added missing entries
+  checksums.ini: some new entries
+  Revert "Add latest xorg stuff for xserver-1.7, script for easy recipe bum=
+p a
+
+Martin Jansa (1):
+  Add latest xorg stuff for xserver-1.7, script for easy recipe bump and xf=
+86-
+
+Omar Barron (1):
+  linux-omap-zoomsync_2.6.31: update commit id
+
+Otavio Salvador (4):
+  machine/qemux86: x86 is MACHINE_FEATURES already set in i686-generic mach=
+ine
+  wpa-supplicant: use INC_PR
+  squashfs-tools: drop 2.0, 2.2r2 and 3.1r2 versions
+  squashfs-tools: refactor 3.3 and 4.0 recipes and use INC_PR
+
+Stanislav Brabec (5):
+  xserver-kdrive-1.3.0.0: Report correct XRandR version. Fixes non-working =
+GTK
+  xorg-xserver: XRandR version fix 06c06f6 ported to all old X servers.
+  python: Fixed -dbg QA error (config/.debug in python-distutils).
+  matchbox-desktop-2: Make fallback folder compatible with current matchbox=
+-co
+  pidgin: crash and recipe fixes:
+
+Steffen Sledz (2):
+  linux-2.6.24: enable root nfs support for hipox machine
+  linux-2.6.24: build some usb-ethernet modules for hipox machine
+
+Steve Sakoman (8):
+  angstrom-2008-preferred-versions.inc: use wpa-supplicant 0.6.9
+  atk: add 1.28.0
+  atk-native: add 1.28.0
+  gcalctool: add 5.28.0
+  gnome-icon-theme: add 2.28.0
+  angstrom-2008-1.conf:  Use gconf rather than gconf-dbus
+  gnome-screensaver: add 2.28.0
+  shadow: add 4.1.4
+
+Yuri Bushmelev (1):
+  Added SHARP Tosa support to linux_2.6.30 recipe
+
+ Bugs fixed:
+
+bug_id resolution        short_desc
+5325 FIXED       clutter uses mesa instead of virtual/libgl
+
+Bugs opened:
+
+bug_id resolution        short_desc
 
 
