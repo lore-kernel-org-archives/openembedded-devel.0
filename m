@@ -1,38 +1,40 @@
-Received: from [209.85.220.207] (helo=mail-fx0-f207.google.com)
+Received: from [209.85.221.180] (helo=mail-qy0-f180.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1MyRnN-000549-Vf
+	(envelope-from <leon.woestenberg@gmail.com>) id 1MyRy8-00076r-VF
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Oct 2009 16:59:17 +0200
-Received: by fxm3 with SMTP id 3so1242485fxm.20
+	Thu, 15 Oct 2009 17:10:24 +0200
+Received: by qyk10 with SMTP id 10so662649qyk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2009 07:58:18 -0700 (PDT)
+	Thu, 15 Oct 2009 08:09:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=SexJI9jkbj4YAQolPb8BH+ji6IqOSYVK5RbgIYPbICE=;
-	b=cZmQlNZC81QY21tgLyjjZc5adZv4V7oNVxRie0bjujlt8ylNrEScZ5qhSGTfRakRf1
-	hRH4fzyCbKQI0MeVik4IML7hS9y9PgFFNU7TTTz6+2ya77PsTfvr2ZPiBIF9YHdeNMxt
-	akeVhcr1pymKmmf3Uoq9byFJ6lVCWZXoaIkVI=
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=DbtMZWkXLAloe/+muf4UYlWPrXfgaXuw9sUHA1W7uWY=;
+	b=kNNJvf8InTHCtrWb6aJ2QDyY7k5vrkAjexbI64EE7p5tmOAIsLDes+pvjB2nB7YGJ8
+	PjsSdmxILH703ALYHjcqy3KA5Zbhl8u3fRyfamHLBIFaRJ4h+3EqM6LuolL37WB69/aU
+	9YYWhuET3IClfUu8LP8u9Rs1gmxhcjXw7DYoE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=X7t8j+CHH2qMK2Tim7g5II/XVtLKTr31FCYhTZJufV00Zbn/Mv/9NTdkpkMKTphOv/
-	xk5J/VGsIuiXi+AT1jC+pZxF7z5nh7n2m8cRkuM2nMbK44u5+qrHKaCBUpXeQVR1VIg4
-	ogBxwZNxATsNi0KvaeC5URcy5TWb/WDNvTidw=
+	:content-type:content-transfer-encoding;
+	b=v8faDz/dMNm3Si8yMzb1ZbZw/E9n05Pcn1QR1qh6741mDsjVL7GTocwlq+sq4lAOnA
+	PQ8R+MyCWM/dY5hE97K2xDRntUDPa4zdtikGDQGG+cZiPd8kr3P8hCmIMEXpmifHBP7G
+	8Y4e0CvHjfXLJZSbaZC4ehp9BP2zbp/3HP11o=
 MIME-Version: 1.0
-Received: by 10.223.2.205 with SMTP id 13mr23304fak.83.1255618697907; Thu, 15 
-	Oct 2009 07:58:17 -0700 (PDT)
-In-Reply-To: <c384c5ea0910150735g8a41d59p4c40f6109a22cb47@mail.gmail.com>
+Received: by 10.239.183.32 with SMTP id s32mr15430hbg.170.1255619363756; Thu, 
+	15 Oct 2009 08:09:23 -0700 (PDT)
+In-Reply-To: <d1b08f940910150758k38aaee7ejab7361acb8581d92@mail.gmail.com>
 References: <ac9c93b10910020010s10fc04fdy6da8c2696d412844@mail.gmail.com>
 	<ha4c1o$s05$1@ger.gmane.org>
 	<ac9c93b10910020328u79f48783of8f64a048484ee5a@mail.gmail.com>
 	<c384c5ea0910150735g8a41d59p4c40f6109a22cb47@mail.gmail.com>
-Date: Thu, 15 Oct 2009 16:58:17 +0200
-Message-ID: <d1b08f940910150758k38aaee7ejab7361acb8581d92@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	<d1b08f940910150758k38aaee7ejab7361acb8581d92@mail.gmail.com>
+Date: Thu, 15 Oct 2009 17:09:23 +0200
+Message-ID: <c384c5ea0910150809h30ab80eflc06e70e24256c401@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.207
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+X-SA-Exim-Connect-IP: 209.85.221.180
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: build inconsistency (strip)
@@ -49,23 +51,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Oct 2009 14:59:17 -0000
+X-List-Received-Date: Thu, 15 Oct 2009 15:10:24 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
->Some target architecture binaries can be stripped with the host strip
->command (for example, this seems to work for x86->arm, but NOT
->x86->powerpc).
+Hello,
 
-Don't rely on this: I had recently a recipe (dietlibc)  failing when
-using the host strip (i686) for arm binaries.
+On Thu, Oct 15, 2009 at 4:58 PM, Andrea Adami <andrea.adami@gmail.com> wrot=
+e:
+>>Some target architecture binaries can be stripped with the host strip
+>>command (for example, this seems to work for x86->arm, but NOT
+>>x86->powerpc).
+>
+> Don't rely on this: I had recently a recipe (dietlibc) =A0failing when
+> using the host strip (i686) for arm binaries.
+>
+> This is failing on Gentoo but reported to work on debian/Ubuntu
+> (multiarch-strip).
+>
+I didn't mean to say we should rely on this; I meant to say that for
+some it may work, for some it may not, and thus MUST NOT BE USED.
 
-This is failing on Gentoo but reported to work on debian/Ubuntu
-(multiarch-strip).
+So to summarize:
 
+- The OpenEmbedded solution is to patch the Makefiles to remove the
+"-s" flag from the install targets.
+- This approach is best as the stripping is then done neatly during
+packaging the debug strip-off.
 
-
-Regards
-
-Andrea
+Regards,
+--=20
+Leon
 
 
