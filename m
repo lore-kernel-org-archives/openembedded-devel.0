@@ -1,34 +1,27 @@
-Received: from [209.85.211.203] (helo=mail-yw0-f203.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1MyWow-0005X6-Ik
-	for openembedded-devel@openembedded.org; Thu, 15 Oct 2009 22:21:13 +0200
-Received: by ywh41 with SMTP id 41so1263394ywh.0
-	for <openembedded-devel@openembedded.org>;
-	Thu, 15 Oct 2009 13:20:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=WR9DSx0CLjBuMbuUHefrZX6LaGbzsgyQKxMNm6Rrvfo=;
-	b=e1ossNdOb+qTk0a/98jkmAXH8+sFpcJc+l1ULQjT0b/JtngBy1F8uaaFh4a5Gwa+7j
-	YXvx8UybwHoUqPSzoFWBZPnjrrJdQK2pOLGBsvjno+LPQkXIEjiwv0j0avNcQMYsV0JW
-	uRJqG2+/8A/z1Yw0tSqsHEhX0j+FKlD0lJNiM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=XE5WV+gLBS1hlterdChVFnZoG2oFqv1eJB5UfHeMwsM6vYtCVTyN1WMhjNP+fS9CrO
-	zCFgOSpsFlQvaSN2l9oLX1NR7hs6QTwE00TPh/8NJExAvezymiIvS4mKl6grY4cT5mRN
-	wtnzwESMOAJtp3uJBJXs18wDHQVqBFGFYLHcI=
-MIME-Version: 1.0
-Received: by 10.101.17.4 with SMTP id u4mr804580ani.62.1255638014000; Thu, 15 
-	Oct 2009 13:20:14 -0700 (PDT)
-Date: Thu, 15 Oct 2009 22:20:13 +0200
-Message-ID: <ac9c93b10910151320t7c6064efqa6d8ad598ecd29d4@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.203
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+	(envelope-from <philb@gnu.org>) id 1MyXKZ-00024w-70
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Oct 2009 22:53:55 +0200
+Received: from 88-109-185-146.dynamic.dsl.as9105.com ([88.109.185.146]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MyXJO-0005tx-Uv
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Oct 2009 21:52:40 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <ac9c93b10910151320t7c6064efqa6d8ad598ecd29d4@mail.gmail.com>
+References: <ac9c93b10910151320t7c6064efqa6d8ad598ecd29d4@mail.gmail.com>
+Date: Thu, 15 Oct 2009 21:52:18 +0100
+Message-Id: <1255639938.9214.514.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: how to get a new machine on the feeds?
+Subject: Re: how to get a new machine on the feeds?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,18 +35,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Oct 2009 20:21:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 15 Oct 2009 20:53:55 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-As reported before I created a new machine conf for openrd-client.
-This is a kirkwood (= armv5te) system.
-I can make console-image and boot from it.
-opkg also works with one exception:
-If I do an opkg update it cannot find
-http://www.angstrom-distribution.org/feeds/unstable/ipk/glibc/armv5te/machine/openrd-client/Packages.gz
+On Thu, 2009-10-15 at 22:20 +0200, Frans Meulenbroeks wrote:
+> As reported before I created a new machine conf for openrd-client.
+> This is a kirkwood (= armv5te) system.
+> I can make console-image and boot from it.
+> opkg also works with one exception:
+> If I do an opkg update it cannot find
+> http://www.angstrom-distribution.org/feeds/unstable/ipk/glibc/armv5te/machine/openrd-client/Packages.gz
+> 
+> Who can add this to the build system and to the feeds?
 
-Who can add this to the build system and to the feeds?
+OE itself doesn't maintain any feeds.  It sounds like you would need to
+take this up with the angstrom folk, who have their own mailing lists.
+See:
 
-Thanks alot. Frans.
+http://www.angstrom-distribution.org/contact
+
+p.
+
+
 
 
