@@ -1,36 +1,40 @@
-Received: from [209.85.210.175] (helo=mail-yx0-f175.google.com)
+Received: from [209.85.221.180] (helo=mail-qy0-f180.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1MyQaT-0007Dq-Kl
+	(envelope-from <leon.woestenberg@gmail.com>) id 1MyRRY-0004Kr-9u
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Oct 2009 15:41:52 +0200
-Received: by yxe5 with SMTP id 5so904852yxe.24
+	Thu, 15 Oct 2009 16:36:43 +0200
+Received: by qyk10 with SMTP id 10so626382qyk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2009 06:40:53 -0700 (PDT)
+	Thu, 15 Oct 2009 07:35:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=dFSyHxmnzkFWbAGDjbnyTFUDK/89MXyULCp8agUulJk=;
-	b=sR1MDChQS/K+WNbPWMV4dq7DKbkjLyAv1EPvS1E8Z0Ztk9+8f2sdoZxhEipHJrCBVa
-	R4Pu6ShOusEhhr6HukN8UKdGWAm7rraEVYhXtVtn8DVbCwyo1iVUkcv9JSaJrR/Sfz2r
-	RTPEYSCWsmjibYFHViaYWDLlZETfGUSQK30i8=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=ZOviMiQzyw1jtmWNNpXxDwV6W/i+O8+/JWTHPgott80=;
+	b=DdGO68IS+GNUAwZ03AY76lbdDm0+LF6IFneOTm//kU27pf448/i7dcYDxJHvUHe1/n
+	/9OsCXluGoj/50TyhHz5VQP0mnB9O2ssoFU5aZJfhgiFe7Wke1JJMVoXTRwZodjhWQ6S
+	NzcDUeIvF8bI9XzVckh8ingmsCHFvP9PlMsIY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=DGhTPHKo0YSdRyJ505kzuMNQo5mV77gVKPBwQU4CoenAi3Ey/TIBeobPuDSf7G55/n
-	iW6LJjZzBeGQ2IvcStrh5mEdNWitXfa2Zo/U08WSD5A7+HPflWoWfhJoA5hJxD/ArGBk
-	hyCiBhsrReGtCezPSdklzDx6iuoVNXNUyh+IA=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=w9TofM+qxpg9wJBzTP0GfIcuHMOC75dCHgYiZKuvv6AOQw5kSwtDfK0C6+oJ6ZvG2o
+	5gGrU8F4ecWTp5e3hXFiGeY6HIt8bxBvLyEk7WJbOSwnfcio2kMYocDHGnCzSK3VnIbL
+	iovMDm8TDMaDk5ZwSWtThM6AeXDjNnvbOCYX4=
 MIME-Version: 1.0
-Received: by 10.239.181.164 with SMTP id m36mr3160hbg.184.1255614052480; Thu, 
-	15 Oct 2009 06:40:52 -0700 (PDT)
-Date: Thu, 15 Oct 2009 15:40:52 +0200
-Message-ID: <c384c5ea0910150640t6b3b74c7qbe9e8b968b6fa670@mail.gmail.com>
+Received: by 10.239.182.161 with SMTP id q33mr13820hbg.41.1255617343161; Thu, 
+	15 Oct 2009 07:35:43 -0700 (PDT)
+In-Reply-To: <ac9c93b10910020328u79f48783of8f64a048484ee5a@mail.gmail.com>
+References: <ac9c93b10910020010s10fc04fdy6da8c2696d412844@mail.gmail.com>
+	<ha4c1o$s05$1@ger.gmane.org>
+	<ac9c93b10910020328u79f48783of8f64a048484ee5a@mail.gmail.com>
+Date: Thu, 15 Oct 2009 16:35:43 +0200
+Message-ID: <c384c5ea0910150735g8a41d59p4c40f6109a22cb47@mail.gmail.com>
 From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	Khem Raj <raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.210.175
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.221.180
 X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: race condition during eglibc do_stage() fails my build
+Subject: Re: build inconsistency (strip)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,58 +48,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Oct 2009 13:41:52 -0000
+X-List-Received-Date: Thu, 15 Oct 2009 14:36:43 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hello Khem, all,
+Hello,
 
-I am hitting a race condition during eglibc do_stage.
+On Fri, Oct 2, 2009 at 12:28 PM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> Still the following is strange to me:
+> I would expect
+> /home/frans/oe/tmp_angstrom/staging/i686-linux/usr/bin/install -s to
+> call the target strip (or maybe ignore the strip command).
+>
+No, AFAIK install is unaware of the preferred strip executable.
 
-do_stage() mentions it implements a workaround for a possible race,
-but I do not understand what races.
+Some target architecture binaries can be stripped with the host strip
+command (for example, this seems to work for x86->arm, but NOT
+x86->powerpc).
 
+One proposal (from me) was to patch core-utils to use env. var. STRIP
+instead of strip.
 
-do_stage() {
-    # Installing directly into staging creates some races between existing
-    # glibc-initial files and us. We could use a new DESTDIR but we may as
-    # well just copy the data installed by do_install
-    cp -pPR /home/leon/sandbox/gtd100/openembedded/tmp/work/ppce500v2-angstrom-linux-gnuspe/eglibc-2.10-r7.1/image/*
-/home/leon/sandbox/gtd100/openembedded/tmp/staging/ppce500v2-angstrom-linux-gnuspe/
+However, the OpenEmbedded solution is to patch the Makefiles to remove
+the "-s" flag from the install targets.
+This approach is best as the stripping is then done neatly during
+packaging the debug strip-off.
 
-}
-
-Note that the temporary files it tries to copy:
-
-
-NOTE: generation of binary locales disabled. this may break i18n!
-ERROR: function do_stage failed
-ERROR: log data follows
-(/home/leon/sandbox/gtd100/openembedded/tmp/work/ppce500v2-angstrom-linux-gnuspe/eglibc-2.10-r7.1/temp/log.do_stage.32628)
-| cp: cannot stat
-`/home/leon/sandbox/gtd100/openembedded/tmp/work/ppce500v2-angstrom-linux-gnuspe/eglibc-2.10-r7.1/image/usr/lib/st4rsJoc':
-No such file or directory
-| cp: cannot stat
-`/home/leon/sandbox/gtd100/openembedded/tmp/work/ppce500v2-angstrom-linux-gnuspe/eglibc-2.10-r7.1/image/usr/lib/stRhhUms':
-No such file or directory
-NOTE: Task failed:
-/home/leon/sandbox/gtd100/openembedded/tmp/work/ppce500v2-angstrom-linux-gnuspe/eglibc-2.10-r7.1/temp/log.do_stage.32628
-
-
-After failure, indeed some other-named temporary files where left,
-indicating there was still activity going on:
-
-leon@bigtee:~/sandbox/gtd100/openembedded/tmp/work/ppce500v2-angstrom-linux-gnuspe/eglibc-2.10-r7.1/temp$
-ls -al /home/leon/sandbox/gtd100/openembedded/tmp/work/ppce500v2-angstrom-linux-gnuspe/eglibc-2.10-r7.1/image/usr/lib/
-
--rw-r--r-- 1 leon leon   23002 2009-10-15 15:10 Scrt1.o
-drwx------ 2 leon leon   40960 2009-10-15 15:37 stGPyioZ
--rw------- 1 leon leon       0 2009-10-15 15:26 stknPu33
-
-
-Is it that the do_install() is racing with do_stage() here?
-
-
-Must we add a task dependency to prevent concurrent tasking here?
 
 Regards,
 -- 
