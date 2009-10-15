@@ -1,35 +1,34 @@
-Received: from [209.85.210.175] (helo=mail-yx0-f175.google.com)
+Received: from [209.85.211.203] (helo=mail-yw0-f203.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1MyWNE-0006B2-OM
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Oct 2009 21:52:35 +0200
-Received: by yxe5 with SMTP id 5so1302947yxe.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Oct 2009 12:51:36 -0700 (PDT)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1MyWow-0005X6-Ik
+	for openembedded-devel@openembedded.org; Thu, 15 Oct 2009 22:21:13 +0200
+Received: by ywh41 with SMTP id 41so1263394ywh.0
+	for <openembedded-devel@openembedded.org>;
+	Thu, 15 Oct 2009 13:20:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:date:message-id:subject
 	:from:to:content-type;
-	bh=BFfBHWPBZJ9wivZK4sbLSmB83nA/qebVaWUQCE96Krs=;
-	b=c32GJBaNxprRuA3iHhgS8ZRK5sD8wHCRhSHlcO9k9CAcAkCHo3iw8fQhFJp3dCSDs/
-	WFcvmODnvVM6dz9+xdrHeHyHQ7dUb9Q56P5kxvUR/qvyxng8xwAUTcCkiwlnBy6FZMK5
-	CWvZGUOj1OhjobmEw8t74JtyzFFNK2cSTrI8U=
+	bh=WR9DSx0CLjBuMbuUHefrZX6LaGbzsgyQKxMNm6Rrvfo=;
+	b=e1ossNdOb+qTk0a/98jkmAXH8+sFpcJc+l1ULQjT0b/JtngBy1F8uaaFh4a5Gwa+7j
+	YXvx8UybwHoUqPSzoFWBZPnjrrJdQK2pOLGBsvjno+LPQkXIEjiwv0j0avNcQMYsV0JW
+	uRJqG2+/8A/z1Yw0tSqsHEhX0j+FKlD0lJNiM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=HoRSFCXoxvFvTAGS1QDnQtZwMqn0sQvjayjJVP4wHqF5N55Fko4OtVa740tKP24MAF
-	KrZETdXGxz6B0mxO+H9LLHctxXvwIaL5gLSYRJr08oxEd8AC0A7oPO6mmg8uUuQBcLby
-	oJ9RObvFDyf7D5LRxHmU1JkQKB2WOBXa596c8=
+	b=XE5WV+gLBS1hlterdChVFnZoG2oFqv1eJB5UfHeMwsM6vYtCVTyN1WMhjNP+fS9CrO
+	zCFgOSpsFlQvaSN2l9oLX1NR7hs6QTwE00TPh/8NJExAvezymiIvS4mKl6grY4cT5mRN
+	wtnzwESMOAJtp3uJBJXs18wDHQVqBFGFYLHcI=
 MIME-Version: 1.0
-Received: by 10.101.137.14 with SMTP id p14mr724681ann.113.1255636296088; Thu, 
-	15 Oct 2009 12:51:36 -0700 (PDT)
-Date: Thu, 15 Oct 2009 21:51:36 +0200
-Message-ID: <ac9c93b10910151251h784f835csfa1064f3b1388ee@mail.gmail.com>
+Received: by 10.101.17.4 with SMTP id u4mr804580ani.62.1255638014000; Thu, 15 
+	Oct 2009 13:20:14 -0700 (PDT)
+Date: Thu, 15 Oct 2009 22:20:13 +0200
+Message-ID: <ac9c93b10910151320t7c6064efqa6d8ad598ecd29d4@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.175
+To: openembedded-devel@openembedded.org
+X-SA-Exim-Connect-IP: 209.85.211.203
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: openembedded.org
+Subject: how to get a new machine on the feeds?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,15 +42,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Oct 2009 19:52:36 -0000
+X-List-Received-Date: Thu, 15 Oct 2009 20:21:13 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-A while ago it was brought to my attention that openembedded.org
-points to linux-to-go.org.
-www.openembedded.org  (I think correctly) points to
-http://wiki.openembedded.net/index.php/Main_Page
-who can arrange that openembeeded.org also points to wiki.openembedded.net ?
+As reported before I created a new machine conf for openrd-client.
+This is a kirkwood (= armv5te) system.
+I can make console-image and boot from it.
+opkg also works with one exception:
+If I do an opkg update it cannot find
+http://www.angstrom-distribution.org/feeds/unstable/ipk/glibc/armv5te/machine/openrd-client/Packages.gz
 
-Frans
+Who can add this to the build system and to the feeds?
+
+Thanks alot. Frans.
 
 
