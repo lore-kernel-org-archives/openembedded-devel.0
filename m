@@ -1,34 +1,33 @@
-Received: from [83.222.23.61] (helo=relay1.mail.masterhost.ru)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1MyngV-0005fY-FE
+	(envelope-from <sledz@DResearch.DE>) id 1MynnO-00066w-39
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Oct 2009 16:21:38 +0200
-Received: from [UNAVAILABLE] ([80.246.246.162] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <khimov@altell.ru> authenticated with rik@osrc.info
-	message id 1MynfZ-000LO4-S6
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Oct 2009 18:20:38 +0400
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Oct 2009 18:20:44 +0400
-User-Agent: KMail/1.12.2 (Linux/2.6.30-1-amd64; KDE/4.3.2; x86_64; ; )
-References: <4AD59AF2.50003@dresearch.de> <4AD8531B.6070208@dresearch.de>
-	<4AD87CF8.8040706@dresearch.de>
-In-Reply-To: <4AD87CF8.8040706@dresearch.de>
+	Fri, 16 Oct 2009 16:28:45 +0200
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 79FBC16E235
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Oct 2009 16:27:47 +0200 (CEST)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 351312A4285
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Oct 2009 16:27:47 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Fri, 16 Oct 2009 16:29:31 +0200
+Message-ID: <4AD882C6.8090609@dresearch.de>
+Date: Fri, 16 Oct 2009 16:27:18 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
 MIME-Version: 1.0
-Message-Id: <200910161820.44480.khimov@altell.ru>
-X-SpamTest-Envelope-From: khimov@altell.ru
-X-SpamTest-Group-ID: 00000000
-X-SpamTest-Info: Profiles 10255 [Oct 16 2009]
-X-SpamTest-Method: none
-X-SpamTest-Rate: 0
-X-SpamTest-Status: Not detected
-X-SpamTest-Status-Extended: not_detected
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
-X-SA-Exim-Connect-IP: 83.222.23.61
-X-SA-Exim-Mail-From: khimov@altell.ru
+To: openembedded-devel@lists.openembedded.org
+References: <4AD59AF2.50003@dresearch.de>
+	<4AD8531B.6070208@dresearch.de>	<4AD87CF8.8040706@dresearch.de>
+	<200910161820.44480.khimov@altell.ru>
+In-Reply-To: <200910161820.44480.khimov@altell.ru>
+X-OriginalArrivalTime: 16 Oct 2009 14:29:32.0046 (UTC)
+	FILETIME=[1395B2E0:01CA4E6D]
+X-SA-Exim-Connect-IP: 87.193.137.78
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: glibc_2.9 compile failed for armv5te
@@ -45,20 +44,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Oct 2009 14:21:38 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 16 Oct 2009 14:28:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0J/Rj9GC0L3QuNGG0LAgMTYg0L7QutGC0Y/QsdGA
-0Y8gMjAwOSAxODowMjozMiDQsNCy0YLQvtGAIFN0ZWZmZW4gU2xlZHog0L3QsNC/0LjRgdCw0Ls6
-Cj4gQW55IHByb3Rlc3RzIGFnYWluc3QgcHV0dGluZyBhCj4gCj4gICBQQVJBTExFTF9NQUtFID0g
-IiAiCj4gCj4gaW50byByZWNpcGVzL2dsaWJjL2dsaWJjXzIuOS5iYj8gT3IgYmV0dGVyIGludG8g
-cmVjaXBlcy9nbGliYy9nbGliYy5pbmM/CgpJdCB3b3VsZCBzbG93IGRvd24gZ2xpYmMgYnVpbGRz
-IGNvbnNpZGVyYWJseSBhbmQgZ2xpYmMgaXMgYWxyZWFkeSBvbmUgb2YgbW9zdCAKdGltZS1jb25z
-dW1pbmcgdGhpbmdzIGluIHRoZSB3aG9sZSBidWlsZCBwcm9jZXNzLiBTbyBpZiBpdCdzIHJlYWxs
-eSBzb21lIGJ1aWxkIApkZXBlbmRlbmN5IHByb2JsZW0gKHdoaWNoIEkndmUgbmV2ZXIgZXhwZXJp
-ZW5jZWQgaW4gZ2xpYmMpLCBiZXR0ZXIgZml4IHRoaXMgCnBhcnRpY3VsYXIgZGVwZW5kZW5jeSBw
-cm9ibGVtLgo=
+Roman I Khimov wrote:
+> =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
+=82 =D0=9F=D1=8F=D1=82=D0=BD=D0=B8=D1=86=D0=B0 16 =D0=BE=D0=BA=D1=82=D1=8F=
+=D0=B1=D1=80=D1=8F 2009 18:02:32 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Steffen S=
+ledz =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+>> Any protests against putting a
+>>
+>>   PARALLEL_MAKE =3D " "
+>>
+>> into recipes/glibc/glibc_2.9.bb? Or better into recipes/glibc/glibc.in=
+c?
+>=20
+> It would slow down glibc builds considerably and glibc is already one o=
+f most=20
+> time-consuming things in the whole build process. So if it's really som=
+e build=20
+> dependency problem (which I've never experienced in glibc), better fix =
+this=20
+> particular dependency problem.
+
+As i wrote before i see no way to find the dependency problem for
+myself. Sorry. Anyone else?
+
+Steffen
+
+
 
 
