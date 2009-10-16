@@ -1,33 +1,30 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1MynnO-00066w-39
+	(envelope-from <philb@gnu.org>) id 1Myo4S-0006nk-Ly
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Oct 2009 16:28:45 +0200
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 79FBC16E235
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2009 16:27:47 +0200 (CEST)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 351312A4285
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2009 16:27:47 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Fri, 16 Oct 2009 16:29:31 +0200
-Message-ID: <4AD882C6.8090609@dresearch.de>
-Date: Fri, 16 Oct 2009 16:27:18 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
-MIME-Version: 1.0
+	Fri, 16 Oct 2009 16:46:23 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1Myo3Z-0002mJ-6A
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Oct 2009 15:45:25 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1Myo3Y-0004rY-Pa
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Oct 2009 15:45:24 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-References: <4AD59AF2.50003@dresearch.de>
-	<4AD8531B.6070208@dresearch.de>	<4AD87CF8.8040706@dresearch.de>
-	<200910161820.44480.khimov@altell.ru>
-In-Reply-To: <200910161820.44480.khimov@altell.ru>
-X-OriginalArrivalTime: 16 Oct 2009 14:29:32.0046 (UTC)
-	FILETIME=[1395B2E0:01CA4E6D]
-X-SA-Exim-Connect-IP: 87.193.137.78
-X-SA-Exim-Mail-From: sledz@DResearch.DE
+In-Reply-To: <4AD87CF8.8040706@dresearch.de>
+References: <4AD59AF2.50003@dresearch.de> <4AD8531B.6070208@dresearch.de>
+	<4AD87CF8.8040706@dresearch.de>
+Date: Fri, 16 Oct 2009 15:45:18 +0100
+Message-Id: <1255704318.28050.19.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: glibc_2.9 compile failed for armv5te
@@ -44,34 +41,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Oct 2009 14:28:45 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 16 Oct 2009 14:46:24 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Roman I Khimov wrote:
-> =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
-=82 =D0=9F=D1=8F=D1=82=D0=BD=D0=B8=D1=86=D0=B0 16 =D0=BE=D0=BA=D1=82=D1=8F=
-=D0=B1=D1=80=D1=8F 2009 18:02:32 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Steffen S=
-ledz =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
->> Any protests against putting a
->>
->>   PARALLEL_MAKE =3D " "
->>
->> into recipes/glibc/glibc_2.9.bb? Or better into recipes/glibc/glibc.in=
-c?
->=20
-> It would slow down glibc builds considerably and glibc is already one o=
-f most=20
-> time-consuming things in the whole build process. So if it's really som=
-e build=20
-> dependency problem (which I've never experienced in glibc), better fix =
-this=20
-> particular dependency problem.
+On Fri, 2009-10-16 at 16:02 +0200, Steffen Sledz wrote:
+> > My tries to identifiy the commit responsible to this problem drive me
+> > crazy. Everytime i thought i'de catched the causer a recheck brought a
+> > different result. :(
+> > 
+> > So i updated to the HEAD (commit
+> > 9a6a9e12a1ef50296621c2eea9fe385464b64f02) and tried again. And really
+> > it seems that the behaviour is not deterministic:
+> > ...
+> 
+> Disabling parallel make for glibc seems to fix this problem (but i'm
+> not really sure).
+> 
+> Any protests against putting a
+> 
+>   PARALLEL_MAKE = " "
+> 
+> into recipes/glibc/glibc_2.9.bb? Or better into recipes/glibc/glibc.inc?
 
-As i wrote before i see no way to find the dependency problem for
-myself. Sorry. Anyone else?
+Putting it in glibc.inc definitely seems like a bad idea unless there is
+evidence to suggest that all versions of glibc have this problem.
+Nobody else has reported it previously, so I am guessing that either it
+is specific to 2.9 or it is in some way unique to your system.
 
-Steffen
+Assuming that it is a general problem with 2.9 then a better solution
+would obviously be to find and fix the dependency problem.  Here's a
+rough guide as to how to attack that:
+
+1. Find the compile command that corresponds to the failing file
+(setjmp.os or whatever it was).  Modify the command to replace -c with
+-E and remove the "-o ..." option, then run it by hand.  This will
+output the preprocessed source to standard output.
+
+2. Inspect the preprocessed source to find out which symbol is not being
+correctly defined.
+
+3. Run a build without -j (so that it works) and then use grep to
+establish which header file is meant to define the symbol in question.
+
+p.
 
 
 
