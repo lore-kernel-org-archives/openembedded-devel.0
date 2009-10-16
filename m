@@ -1,30 +1,29 @@
 Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1MygLQ-0000pX-9x
+	(envelope-from <sledz@DResearch.DE>) id 1MykcZ-0003Be-Bz
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Oct 2009 08:31:23 +0200
+	Fri, 16 Oct 2009 13:05:22 +0200
 Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
 	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id A405016DFDC
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 86F5F16DFDC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2009 08:30:25 +0200 (CEST)
+	Fri, 16 Oct 2009 13:04:24 +0200 (CEST)
 Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 63B1D2A4284
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 44C6F2A4285
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Oct 2009 08:30:25 +0200 (CEST)
+	Fri, 16 Oct 2009 13:04:24 +0200 (CEST)
 Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Fri, 16 Oct 2009 08:32:09 +0200
-Message-ID: <4AD812E4.6030304@dresearch.de>
-Date: Fri, 16 Oct 2009 08:29:56 +0200
+	Microsoft SMTPSVC(6.0.3790.3959); Fri, 16 Oct 2009 13:06:08 +0200
+Message-ID: <4AD8531B.6070208@dresearch.de>
+Date: Fri, 16 Oct 2009 13:03:55 +0200
 From: Steffen Sledz <sledz@dresearch.de>
 User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4AD59AF2.50003@dresearch.de>	<1255516331.9214.327.camel@lenovo.internal.reciva.com>	<4AD5C4B3.1050505@dresearch.de>
-	<19c1b8a90910140958v561e4d04pd48cf3260145b916@mail.gmail.com>
-In-Reply-To: <19c1b8a90910140958v561e4d04pd48cf3260145b916@mail.gmail.com>
-X-OriginalArrivalTime: 16 Oct 2009 06:32:09.0546 (UTC)
-	FILETIME=[63530AA0:01CA4E2A]
+References: <4AD59AF2.50003@dresearch.de>
+In-Reply-To: <4AD59AF2.50003@dresearch.de>
+X-OriginalArrivalTime: 16 Oct 2009 11:06:08.0828 (UTC)
+	FILETIME=[A9E667C0:01CA4E50]
 X-SA-Exim-Connect-IP: 87.193.137.78
 X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
@@ -43,46 +42,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Oct 2009 06:31:23 -0000
+X-List-Received-Date: Fri, 16 Oct 2009 11:05:22 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Khem Raj wrote:
-> On Wed, Oct 14, 2009 at 5:31 AM, Steffen Sledz <sledz@dresearch.de> wrote:
->> Phil Blundell schrieb:
->>> On Wed, 2009-10-14 at 11:33 +0200, Steffen Sledz wrote:
->>>> Since a few days a clean build of glibc_2.9 failed for hipox machine
->>>> (armv5te) with this error (details see attached logfile):
->>>>
->>>> | ../ports/sysdeps/arm/eabi/setjmp.S: Assembler messages:
->>>> | ../ports/sysdeps/arm/eabi/setjmp.S:45: Error: internal_relocation
->>>> (type: OFFSET_IMM) not fixed up
+Steffen Sledz wrote:
+> Since a few days a clean build of glibc_2.9 failed for hipox machine
+> (armv5te) with this error (details see attached logfile):
 > 
-> usually such error means that a undefined define is being used in assembly
-> like in this case LDR a3, [a3, #RTLD_GLOBAL_RO_DL_HWCAP_OFFSET]
+> | ../ports/sysdeps/arm/eabi/setjmp.S: Assembler messages:
+> | ../ports/sysdeps/arm/eabi/setjmp.S:45: Error: internal_relocation
+> (type: OFFSET_IMM) not fixed up
 > 
-> you should trace why RTLD_GLOBAL_RO_DL_HWCAP_OFFSET is not being defined
-> correctly
+> Sorry, but i've no idea what the problem is and which commit is
+> responsible for it. Any ideas?
 
-Sorry, but i'm not really able to trace this. My knowledge in
-assembler and tricky glibc build tooling (and the time i'm able to
-invest) is limited.
+My tries to identifiy the commit responsible to this problem drive me
+crazy. Everytime i thought i'de catched the causer a recheck brought a
+different result. :(
 
-The mentioned symbol seems to be defined in a file named
-rtld-global-offsets.sym. It contains these lines:
+So i updated to the HEAD (commit
+9a6a9e12a1ef50296621c2eea9fe385464b64f02) and tried again. And really
+it seems that the behaviour is not deterministic:
 
- #define SHARED 1
+-----------------------------------------------------------
+# rm -rf tmp.3
+# bitbake glibc
 
- #include <ldsodefs.h>
+--> everything worked well :)
 
- #define rtld_global_ro_offsetof(mem) offsetof (struct rtld_global_ro,
-mem)
+-----------------------------------------------------------
+# rm -rf tmp.3
+# bitbake glibc
 
- RTLD_GLOBAL_RO_DL_HWCAP_OFFSET  rtld_global_ro_offsetof (_dl_hwcap)
+--> failed with something like "sed: can't read
+/home/DRESEARCH/sledz/work/HydraIP/OE/tmp.3/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r35.2/build-arm-angstrom-linux-gnueabi/tcb-offsets.h.dT:
+No such file or directory" :(
 
-But it's not clear to me, how this is involved in the build process. :(
+# bitbake glibc
+
+--> succeeded ???
+
+-----------------------------------------------------------
+# rm -rf tmp.3
+# bitbake glibc
+
+--> failed with something like "sed: can't read
+/home/DRESEARCH/sledz/work/HydraIP/OE/tmp.3/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r35.2/build-arm-angstrom-linux-gnueabi/tcb-offsets.hT3:
+No such file or directory" :(
+
+# bitbake glibc
+
+--> succeeded ???
+
+-----------------------------------------------------------
+
+Any ideas? Can somebody reproduce this behaviour? A bitbake problem?
 
 Steffen
+
+
+
+
+
 
 
 
