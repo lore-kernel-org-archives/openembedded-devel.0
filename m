@@ -1,39 +1,31 @@
-Received: from [209.85.221.176] (helo=mail-qy0-f176.google.com)
+Received: from [93.97.175.187] (helo=dan.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1MzGwo-0000K3-OC
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Oct 2009 23:36:25 +0200
-Received: by qyk6 with SMTP id 6so264143qyk.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Oct 2009 14:35:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=RYvQsjyQD0eo4IHNI9ToXVzUMPyQW/z8OZNSaToA/hs=;
-	b=C6bGbJUoxoQFWCf7xWKJZRw99LySsfbSz1wvKR6anK4gcbdGvz996wl1iaRa7yDFRK
-	MfB6aIg7/kCYMB9yMkUqqFW9ztebhbaG5k/1uu5zvyReA7ze2rD77Pp+VeqAb2aSojYr
-	jvabLf62syQxDMkL0nklwcGquVrb/dbiHKnRM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=t8+xei3y6DC13F9si/WiyDjlK/92zx0mLKO0/npeuRm6EuabqJ0qfpP9l8QZxVYKpb
-	c0AuCbtGhmTDb7f5qm5zdYPwnYTeFXuZQyhSGB9j+zNxXL1hIsO1DIvahZ6PSIZJxARJ
-	Yo2tgguw3v9TMHmGIY1HEJCBTlzQxTygbfdFk=
-MIME-Version: 1.0
-Received: by 10.229.44.21 with SMTP id y21mr442595qce.42.1255815324362; Sat, 
-	17 Oct 2009 14:35:24 -0700 (PDT)
-In-Reply-To: <20091017031315.GB12337@denix.org>
-References: <4AD90574.1080800@mwester.net> <20091017031315.GB12337@denix.org>
-Date: Sat, 17 Oct 2009 14:35:24 -0700
-Message-ID: <19c1b8a90910171435o118e0ca4xd2484c342484a72b@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.221.176
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+	(envelope-from <rpurdie@rpsys.net>) id 1MzWVd-0006Qm-Pi
+	for openembedded-devel@openembedded.org; Sun, 18 Oct 2009 16:13:24 +0200
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n9IE9ijF017393; Sun, 18 Oct 2009 15:09:44 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id tV6kdsq6WX+v; Sun, 18 Oct 2009 15:09:44 +0100 (BST)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n9IE9dIO017362
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
+	Sun, 18 Oct 2009 15:09:40 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: bitbake-dev <bitbake-dev@lists.berlios.de>
+Date: Sun, 18 Oct 2009 15:08:29 +0100
+Message-Id: <1255874909.28889.20.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: commit 806811bf2d72827d3031bfcd5dbab1e82324d34e breaks distros
+Cc: openembedded-devel <openembedded-devel@openembedded.org>
+Subject: Bitbake Roadmap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,71 +39,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Oct 2009 21:36:25 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 18 Oct 2009 14:13:25 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Fri, Oct 16, 2009 at 8:13 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> On Fri, Oct 16, 2009 at 06:44:52PM -0500, Mike Westerhof wrote:
->> The following commit breaks numerous non-angstrom distros:
->>
->> commit 806811bf2d72827d3031bfcd5dbab1e82324d34e
->> Author: Denys Dmytriyenko <denis@denix.org>
->> Date: =C2=A0 Wed Oct 14 14:25:07 2009 -0400
->>
->> =C2=A0 =C2=A0 angstrom: clean ups of the external toolchain support
->>
->>
->> The symptom of the problem is this:
->>
->> $ bitbake slugos-image
->> ERROR: Unable to parse conf/bitbake.conf (Could not include required
->> file conf/distro/include/glibc.inc)
->> $
->>
->> It seems that glibc.inc has been removed, and possibly replaced by
->> either an external or an internal variant, but no non-angstrom distros
->> have been updated.
->>
->> Please forgive me if there was a discussion of this change on the
->> mailing list; I have been locked away behind corporate firewalls, and
->> living on-the-road for the past months, and just haven't been able to
->> keep up. :(
->>
->> How do I fix this, please?
->
-> Mike,
->
-> I'm sorry to hear you are having problems with my commit.
->
-> I was told conf/distro/include/glibc.inc was only used by Angstrom. And
-> grepping through files recursively kind of proves it - there are no in-tr=
-ee
-> distros using this file. There is another glibc.inc in recipes/glibc, but
-> that's obviously a different one.
->
-> I also ran a test build of minimal-image using minimal distro w/o any par=
-sing
-> issues.
+I'd like to propose some changes to the bitbake repo and actually get
+into the habit of regular releases. The big problem is that we want to
+make the client/server split and make a 2.0 release which is "clogging"
+up master. I'm not sure the client/server split is felt to be ready for
+prime time use yet though (shout if you disagree and want to make the
+jump now!).
 
-Minimal uses its own set of files so this change wont affect it.
-Looking at the patch I wonder virtual packages are now
-picked up when you angstrom build which uses internal toolchain/glibc
+Assuming we can't switch yet I think we need to:
 
->
-> It looks like you may have out-of-tree distro which uses glibc.inc file i=
-n the
-> conf directory. If this is the case, I apologize for removing it and woul=
-d be
-> happy to restore it for you.
->
-> --
-> Denys
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+* Continue to plan bitbake 2.0 to be the client/server/ui split.
+
+* Create a bitbake 1.10 branch. This would be designed to replace the
+current 1.8 series. The plan here would be to take everything from trunk
+that isn't the split into client and server. The code would be
+refactored to match the client/server split layout however, particularly
+cooker and adding the command layer. This would most likely require
+python 2.6 for simplicity. This should not have the slowdown associated
+with the xmlrpc and threads which is particularly noticeable on single
+core parsing.
+
+* This paves the way for maintenance releases and further 1.x series
+releases making more sense of the version number again.
+
+* Aim to quickly roll 1.10.0 and after a suitable delay require it for
+OE
+
+* Create a client/server/ui branch which has the changes that are in
+master
+
+* Have master track 1.10 instead. 
+
+* Define a release schedule and more automate the release process.
+
+Shout now if you disagree with any of this or have a better plan! :)
+
+Cheers,
+
+Richard
+
+
 
 
