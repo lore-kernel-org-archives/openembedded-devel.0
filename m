@@ -1,25 +1,26 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Mzwnp-00013b-Po
-	for openembedded-devel@openembedded.org; Mon, 19 Oct 2009 20:17:56 +0200
-Received: (qmail 20279 invoked by uid 813007); 19 Oct 2009 18:16:54 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 19 Oct 2009 18:16:54 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <philb@gnu.org>) id 1MzyYG-0006HW-9X
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Oct 2009 22:10:00 +0200
+Received: from 88-109-185-146.dynamic.dsl.as9105.com ([88.109.185.146]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1MzyX6-0003lS-Ng
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Oct 2009 21:08:47 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 19 Oct 2009 20:18:28 +0200
-User-Agent: KMail/1.12.2 (Linux/2.6.32-rc3-00052-g0eca52a; KDE/4.3.2; x86_64; ;
-	)
+In-Reply-To: <200910191847.30200.marcin@juszkiewicz.com.pl>
 References: <1255966150-1854-1-git-send-email-marcin@juszkiewicz.com.pl>
-	<19c1b8a90910191052i25ebec10q20e2f045cab3914a@mail.gmail.com>
-	<4ADCAB0E.9050607@mwester.net>
-In-Reply-To: <4ADCAB0E.9050607@mwester.net>
-MIME-Version: 1.0
-Message-Id: <200910192018.29300.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+	<1255969713.4434.5.camel@hammer.suse.cz>
+	<200910191847.30200.marcin@juszkiewicz.com.pl>
+Date: Mon, 19 Oct 2009 21:08:20 +0100
+Message-Id: <1255982900.21136.6.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Updating kernels to latest stable versions
@@ -36,39 +37,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Oct 2009 18:17:57 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Mon, 19 Oct 2009 20:10:00 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dnia poniedzia=C5=82ek, 19 pa=C5=BAdziernika 2009 o 20:08:14 Mike Westerhof=
- napisa=C5=82(a):
-> Khem Raj wrote:
-
-> > You might have to try builds because there could be some backported
-> > patches already applied which now are in the new minor release. (I
-> > haven't looked myself if there is such a case.)
-=20
-> There may also be platform-specific patches that won't apply with the
-> newer kernel updates, a possibility that is more likely with the
-> pressure to have maintainers use the generic kernel recipes instead of
-> just creating their own specific recipe.
+On Mon, 2009-10-19 at 18:47 +0200, Marcin Juszkiewicz wrote:
+> Dnia poniedzia=C5=82ek, 19 pa=C5=BAdziernika 2009 o 18:28:33 Stanislav Br=
+abec=20
+> napisa=C5=82(a):
 >=20
-> And no, I haven't yet looked to see this will be a problem for the
-> ixp4xx kernels; that's not a big concern and I'll fix that myself should
-> it be necessary.  I merely mention this to point out that we probably
-> need to move carefully on blanket updates to the kernel if we wish to
-> encourage use of the generic kernel recipes -- that's all. :)
+> > Maybe it should be 2.6.21.7-r0 instead of 2.6.21-r13 and do the same fo=
+r
+> > other patched recipes.
+> =20
+> No, your suggestion will break everyone who uses PREF_VER_linux =3D "2.6.=
+21" for=20
+> example.
 
-And those reasons are why I did not pushed any of those this time (before I=
-=20
-updated .30 and .31). Tomorrow will do some build testing.
+I guess that depends on your definition of "breaks".  One way of looking
+at it is that folks who set PREFERRED_VERSION_linux =3D "2.6.21" are
+wanting the actual version 2.6.21, not 2.6.21.7, and might be dismayed
+to find that they have suddenly been bumped to the latter with no way to
+get back to what they had before.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+2.6.21.7 clearly is a new upstream release and I would have thought that
+it is appropriate to reflect that in PV rather than hiding it behind a
+PR increment.
+
+p.
 
 
 
