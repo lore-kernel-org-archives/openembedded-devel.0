@@ -1,38 +1,37 @@
-Received: from [209.85.221.176] (helo=mail-qy0-f176.google.com)
+Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1N0JT4-0002mz-2b
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Oct 2009 20:30:01 +0200
-Received: by qyk6 with SMTP id 6so2392224qyk.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Oct 2009 11:28:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=X/ryeaNxxImrNpl4VofEzOGK0XFF/dQUIqBMU02YWI0=;
-	b=PSCao8bCVlS3kSTXvpXpLOZyiX037a1QcFiwWRXHK3Gc3Uq4N1PshnBG63VOb2b9FW
-	FeOUp+SKU3AARln8fAF+LROJBQljhT0LgD7nALlCXmcLqJvSJpRiTlBfCFzCO2nKXt/1
-	cI4MiwHGh43g7ce6qn6O9b6ZOKtglgNXPmQHc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=UghK3yJYUWjtjjpAW6B2dRGkOLzkfaJAlzXZ9AgWNdPWXKep2Yo1i1Y5konG1J02lF
-	zEdQhFc3zhP9tR9p3Y+fuw6IxU+r9L5AULe8tEWYRM4CDTQ1mkWwOSjgImQGVJxgcdqZ
-	+XlZPXdRNvU7BQjfFseLsbCM4/3T1MWakVENE=
+	(envelope-from <rpjday@crashcourse.ca>) id 1N0Jow-0003hD-9B
+	for openembedded-devel@openembedded.org; Tue, 20 Oct 2009 20:52:37 +0200
+Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
+	([174.113.191.234] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1N0Jnk-0008JX-Dq
+	for openembedded-devel@openembedded.org; Tue, 20 Oct 2009 14:51:20 -0400
+Date: Tue, 20 Oct 2009 14:50:48 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: openembedded-devel@openembedded.org
+In-Reply-To: <19c1b8a90910201108u1ad326c3w251d73e793d1b848@mail.gmail.com>
+Message-ID: <alpine.LFD.2.00.0910201450110.29057@localhost>
+References: <23738f080910021832k712d31dcra5e2fda045a892e6@mail.gmail.com>
+	<19c1b8a90910201108u1ad326c3w251d73e793d1b848@mail.gmail.com>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
-Received: by 10.229.31.147 with SMTP id y19mr1032294qcc.5.1256063336009; Tue, 
-	20 Oct 2009 11:28:56 -0700 (PDT)
-In-Reply-To: <4AD4BAD9.3080609@2mi.com.br>
-References: <4AD4BAD9.3080609@2mi.com.br>
-Date: Tue, 20 Oct 2009 11:28:55 -0700
-Message-ID: <19c1b8a90910201128j220050b9q1eb981db99e1da91@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.221.176
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Unable to fetch bootsplash, uri broken?
+Subject: Re: building module-init-tools-cross fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,43 +45,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Oct 2009 18:30:02 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 20 Oct 2009 18:52:37 -0000
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323328-557989236-1256064680=:29057"
 
-On Tue, Oct 13, 2009 at 10:37 AM, Jader H. Silva <jader@2mi.com.br> wrote:
-> Hello all.
->
-> I am unable to fetch bootsplash-native.
-> From a quick look into BB's URI and bootsplash site, it seems it's URI has
-> changed (from
-> ftp://ftp.openbios.org/pub/bootsplash/rpm-sources/bootsplash/bootsplash-3.0.7.tar.bz2)
-> to
-> ftp://ftp.bootsplash.org/pub/bootsplash/rpm-sources/bootsplash/bootsplash-3.0.7.tar.bz2
->
-> Even if I changed it's URI in bootsplash_3.0.7.bb and checksums.ini, I was
-> still unable to fetch it.
-> I eventually downloaded the tarball from this page:
-> http://www.filewatcher.com/m/bootsplash-3.0.7.tar.bz2.110507.0.0.html
->
-> Just want to know if someone else is having the same problem, I tested it
-> only in stable/2009.
->
+--8323328-557989236-1256064680=:29057
+Content-Type: TEXT/PLAIN; charset=utf-8
+Content-Transfer-Encoding: QUOTED-PRINTABLE
 
-the note on the main webpage of bootsplash says that it has been
-superseded by splashy. We do not have recipes for splashy yet for OE
-but it would make sense to copy the tar
-file into OE mirror.
+On Tue, 20 Oct 2009, Khem Raj wrote:
 
+> On Fri, Oct 2, 2009 at 6:32 PM, Sashan Govender <sashang@gmail.com> wrote=
+:
+> > I'm trying out openembedded but get this error:
+> >
+> > ERROR: function do_compile failed
+> > ERROR: log data follows
+> > (/home/sashan/code/openembedded/build/tmp/work/i486-oe-linux-gnu/module=
+-init-tools-cross-3.2.2-r5/temp/log.do_compile.12217)
+> > | NOTE: make
+> > | gcc =C2=A0-isystem/home/sashan/code/openembedded/build/tmp/staging/x8=
+6_64-linux/usr/include
+> > -O2 -g -Wunused -Wall -static
+> > -L/home/sashan/code/openembedded/build/tmp/staging/x86_64-linux/usr/lib
+> > -Wl,-rpath-link,/home/sashan/code/openembedded/build/tmp/staging/x86_64=
+-linux/usr/lib
+> > -Wl,-rpath,/home/sashan/code/openembedded/build/tmp/staging/x86_64-linu=
+x/usr/lib
+> > -Wl,-O1 -o insmod.static insmod.o
+> > | /usr/bin/ld: cannot find -lc
+> > | collect2: ld returned 1 exit status
+> > | make: *** [insmod.static] Error 1
+> > | FATAL: oe_runmake failed
+> >
+> > This is my local.conf file:
+> >
+> > DL_DIR =3D "${HOME}/archives"
+> > BBFILES =3D ${OEBASE}/openembedded/recipes/*/*.bb
+> > BBMASK =3D ""
+> > PREFERRED_PROVIDERS =3D "virtual/qte:qte virtual/libqpe:libqpe-opie"
+> > PREFERRED_PROVIDERS +=3D " virtual/libsdl:libsdl-x11"
+> > PREFERRED_PROVIDERS +=3D " virtual/${TARGET_PREFIX}gcc-initial:gcc-cros=
+s-initial"
+> > PREFERRED_PROVIDERS +=3D "
+> > virtual/${TARGET_PREFIX}gcc-intermediate:gcc-cross-intermediate"
+> > PREFERRED_PROVIDERS +=3D " virtual/${TARGET_PREFIX}gcc:gcc-cross"
+> > PREFERRED_PROVIDERS +=3D " virtual/${TARGET_PREFIX}g++:gcc-cross"
+> > MACHINE =3D "x86"
+> > TARGET_OS =3D "linux"
+> > DISTRO =3D "minimal"
+> > IMAGE_FSTYPES =3D "jffs2 tar"
+> > BINCLUDELOGS =3D "yes"
+> >
+> > What am I missing?
 >
-> Att.
-> Jader H. Silva
-> Analista de desenvolvimento
-> 2MI Tecnologia
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> its looking for libc.a on your build machine because you are linking
+> static version. Depending upon what distro you run on
+> your host you can install appropriate package. e.g on debian/ubuntu
+> libc6-dev provides it.
 
+  if you're running fedora, you need to separately install the
+"glibc-static" package.
 
+rday
+--
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+        Linux Consulting, Training and Annoying Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+--8323328-557989236-1256064680=:29057--
