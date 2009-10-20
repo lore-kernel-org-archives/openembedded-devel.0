@@ -1,23 +1,35 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1N03Pi-0001PT-SD
-	for openembedded-devel@openembedded.org; Tue, 20 Oct 2009 03:21:30 +0200
-Received: (qmail 13292 invoked by uid 1003); 20 Oct 2009 01:20:26 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 20 Oct 2009 01:20:26 -0000
-Message-ID: <4ADD1059.70701@balister.org>
-Date: Mon, 19 Oct 2009 21:20:25 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
-	Thunderbird/3.0b4
+	(envelope-from <koansoftware@gmail.com>) id 1N09T1-0004mp-3y
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Oct 2009 09:49:18 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id E43262C7FE
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Oct 2009 07:44:08 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id RcHYlRoTUCYE
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Oct 2009 07:44:05 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 954EC2C7F8
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Oct 2009 07:44:04 +0000 (UTC)
+Message-ID: <4ADD6B54.9060409@gmail.com>
+Date: Tue, 20 Oct 2009 09:48:36 +0200
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+References: <4ADCF9BC.3010209@balister.org>
+In-Reply-To: <4ADCF9BC.3010209@balister.org>
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Server outage
+Subject: Re: OEDEM Attendees
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,17 +43,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Oct 2009 01:21:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 20 Oct 2009 07:49:18 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Seen in #oe:
+Philip Balister ha scritto, Il 20/10/2009 01:43:
+> I've added a section at:
+> 
+> http://wiki.openembedded.net/index.php/Oedem/2009
+> 
+> so we can create a list of who is attending OEDEM. Please add yourself.
+> 
 
-tommorrow @ 2300UTC there will be a short outage of the OE server as we 
-install more memory.
-
-You have been warned :)
-
-Philip
+yep
 
 
