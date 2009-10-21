@@ -1,23 +1,25 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1N0Yzw-0006p6-QF
+	(envelope-from <mickey@vanille-media.de>) id 1N0Z6F-0000h7-MU
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Oct 2009 13:05:00 +0200
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 633211B10C04
+	Wed, 21 Oct 2009 13:11:30 +0200
+Received: from [192.168.1.12] (dialbs-092-079-168-007.static.arcor-ip.net
+	[92.79.168.7])
+	by drlauer-research.com (Postfix) with ESMTP id 9BC65584AE1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Oct 2009 11:12:58 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Wed, 21 Oct 2009 13:54:36 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 21 Oct 2009 13:03:49 +0200
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+In-Reply-To: <200910211303.49278.holger+oe@freyther.de>
 References: <hbmose$gtv$1@ger.gmane.org>
-In-Reply-To: <hbmose$gtv$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200910211303.49278.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+	<200910211303.49278.holger+oe@freyther.de>
+Organization: Vanille-Media
+Date: Wed, 21 Oct 2009 13:10:28 +0200
+Message-Id: <1256123428.14897.18.camel@opal>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: SCM fetched recipes without a SRCREV - e.g. libgee-native
@@ -34,28 +36,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Oct 2009 11:05:00 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Wed, 21 Oct 2009 11:11:30 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Wednesday 21 October 2009 12:47:41 Koen Kooi wrote:
-> Hi,
+> 1.) bitbake -cfetchall task
 > 
-> Lately some people have started adding recipes that fetch from an SCM
-> without adding a srcrev either to the recipe or to sane-srcrevs.inc.
-> That is bad. Unacceptable even.
+> then remove network and
+> 
+> 2.) bitbake task...
+> 
+> if that is not the case we suck.
 
-I agree, It must be possible to do
+Agreed. Perhaps it's really time to add some git commit checks as things
+like the presence of a SRCREV_pn entry in sane-srcrev.inc can easily be
+checked.
 
-1.) bitbake -cfetchall task
+:M:
 
-then remove network and
 
-2.) bitbake task...
-
-if that is not the case we suck.
-
-z.
 
 
