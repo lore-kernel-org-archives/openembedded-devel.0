@@ -1,34 +1,35 @@
-Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1N0ZBO-00012A-5K
-	for openembedded-devel@openembedded.org; Wed, 21 Oct 2009 13:16:49 +0200
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1N0ZAB-0000t6-UK
-	for openembedded-devel@openembedded.org; Wed, 21 Oct 2009 07:15:32 -0400
-Date: Wed, 21 Oct 2009 07:15:08 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: openembedded-devel@openembedded.org
-In-Reply-To: <200910211303.49278.holger+oe@freyther.de>
-Message-ID: <alpine.LFD.2.00.0910210713370.4617@localhost>
-References: <hbmose$gtv$1@ger.gmane.org>
-	<200910211303.49278.holger+oe@freyther.de>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1N0ZHR-0001UE-FI for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Oct 2009 13:23:04 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N0ZGR-0007sw-US
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Oct 2009 13:21:59 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Oct 2009 13:21:59 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Oct 2009 13:21:59 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 21 Oct 2009 13:21:34 +0200
+Message-ID: <hbmqrv$ne5$1@ger.gmane.org>
+References: <hbmose$gtv$1@ger.gmane.org>	<200910211303.49278.holger+oe@freyther.de>
+	<1256123428.14897.18.camel@opal>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <1256123428.14897.18.camel@opal>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: SCM fetched recipes without a SRCREV - e.g. libgee-native
@@ -45,46 +46,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Oct 2009 11:16:50 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 21 Oct 2009 11:23:04 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, 21 Oct 2009, Holger Hans Peter Freyther wrote:
-
-> On Wednesday 21 October 2009 12:47:41 Koen Kooi wrote:
-> > Hi,
-> >
-> > Lately some people have started adding recipes that fetch from an SCM
-> > without adding a srcrev either to the recipe or to sane-srcrevs.inc.
-> > That is bad. Unacceptable even.
+On 21-10-09 13:10, Michael 'Mickey' Lauer wrote:
+>> 1.) bitbake -cfetchall task
+>>
+>> then remove network and
+>>
+>> 2.) bitbake task...
+>>
+>> if that is not the case we suck.
 >
-> I agree, It must be possible to do
->
-> 1.) bitbake -cfetchall task
->
-> then remove network and
->
-> 2.) bitbake task...
->
-> if that is not the case we suck.
+> Agreed. Perhaps it's really time to add some git commit checks as things
+> like the presence of a SRCREV_pn entry in sane-srcrev.inc can easily be
+> checked.
 
-  *yes*, that's what i'd forgotten.  i'd tried just
+If we continue down the sane-srcrevs.inc route we should consider moving 
+PV_pn into there as well. Having SRCREV and PN in 2 different places 
+only adds confusion and leads to misversions.
+Speaking of misversioning, I should really go through all scm fetched 
+packages I use and verify PV is correct for those.
 
-  $ bitbake -c fetch ...
+regards,
 
-but after i started a bitbake, there was still some downloading.  so
-how much extra work does "fetchall" do as a command as opposed to
-just "fetch"?  thanks.
+Koen
 
-rday
---
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-        Linux Consulting, Training and Annoying Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
 
 
