@@ -1,39 +1,38 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [93.97.175.187] (helo=dan.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1N0d4t-0004Vt-D4 for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Oct 2009 17:26:22 +0200
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1N0d3k-0001I5-Go
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Oct 2009 17:25:08 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Oct 2009 17:25:08 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Oct 2009 17:25:08 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 21 Oct 2009 17:24:25 +0200
-Message-ID: <hbn939$a3k$1@ger.gmane.org>
-References: <afb7987a0910200214v11b56177w400fac16a87a09f7@mail.gmail.com>	<20091020110625.GA25350@mi.fu-berlin.de>
-	<hbk60j$m83$2@ger.gmane.org>	<70c9a9110910210114y6a907cb3qc69564fea9c3b565@mail.gmail.com>	<hbmoep$f72$1@ger.gmane.org>
-	<afb7987a0910210653rec4e371s4601e16bdf70168@mail.gmail.com>
+	(envelope-from <rpurdie@rpsys.net>) id 1N0gS5-00053y-1n
+	for openembedded-devel@openembedded.org; Wed, 21 Oct 2009 21:02:32 +0200
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n9LIwlqo028068 for <openembedded-devel@openembedded.org>;
+	Wed, 21 Oct 2009 19:58:48 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id e066jZ801GoY for <openembedded-devel@openembedded.org>;
+	Wed, 21 Oct 2009 19:58:47 +0100 (BST)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n9LIweOP028059
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@openembedded.org>;
+	Wed, 21 Oct 2009 19:58:42 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <1256125373.14897.33.camel@opal>
+References: <hbmose$gtv$1@ger.gmane.org>
+	<200910211303.49278.holger+oe@freyther.de>
+	<1256123428.14897.18.camel@opal>
+	<hbmqrv$ne5$1@ger.gmane.org>  <1256125373.14897.33.camel@opal>
+Date: Wed, 21 Oct 2009 19:57:40 +0100
+Message-Id: <1256151460.23211.40.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <afb7987a0910210653rec4e371s4601e16bdf70168@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: IGEPv2 with TI DSP codecs and GStreamer
+Subject: Re: SCM fetched recipes without a SRCREV - e.g. libgee-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,48 +46,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Oct 2009 15:26:22 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 21 Oct 2009 19:02:32 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 21-10-09 15:53, Andrea wrote:
-> Hi Koen,
->
->>
->> I have them queued on a local branch together with some fixed I need to test
->> before pushing them out.
->> You might have noticed the patchwork status of your patches has been updated
->> :)
->>
->
-> Could you add support for IGEPv2 in dmai?
-> I patched /recipes/ti/ti-dmai/touchbook-support.patch, but I don't
-> think is the right place!
+On Wed, 2009-10-21 at 13:42 +0200, Michael 'Mickey' Lauer wrote:
+> Am Mittwoch, den 21.10.2009, 13:21 +0200 schrieb Koen Kooi:
+> > If we continue down the sane-srcrevs.inc route we should consider moving 
+> > PV_pn into there as well. Having SRCREV and PN in 2 different places 
+> > only adds confusion and leads to misversions.
+> 
+> Correct.
+> 
+> > Speaking of misversioning, I should really go through all scm fetched 
+> > packages I use and verify PV is correct for those.
+> 
+> Agreed, will have to do the same here.
 
-I had the same diff locally :) I've also alerted upstream about it and 
-both touchbook and igep should be in soon.
+Can I also suggest we start using SRCPV in PV, not SRCREV? This removed
+the need to play a lot of games with PV...
 
-regards,
+(Poky has switched to this now)
 
-Koen
+Cheers,
 
->
-> --- /tmp/Cpu.c  2009-09-25 12:41:08.000000000 +0200
-> +++ davinci_multimedia_application_interface/dmai/packages/ti/sdo/dmai/linux/Cpu.c
->       2009-09-25 12:41:36.000000000 +0200
-> @@ -107,6 +107,8 @@
->       }
->       else if ((strcmp(valBuf,"OMAP3EVM Board") == 0) ||
->               (strcmp(valBuf, "OMAP3 EVM") == 0) ||
-> +            (strcmp(valBuf, "IGEP v2.x board") == 0) ||
-> +            (strcmp(valBuf, "OMAP3 Touch Book") == 0) ||
->               (strcmp(valBuf, "OMAP3 Beagle Board") == 0)) {
->               *device = Cpu_Device_OMAP3530;
->       }
->
-> Regards,
-> Andrea
-
+Richard
 
 
 
