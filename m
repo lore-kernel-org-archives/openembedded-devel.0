@@ -1,32 +1,40 @@
-Received: from [206.46.173.15] (helo=vms173015pub.verizon.net)
+Received: from [74.125.78.148] (helo=ey-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1N0m3a-0007na-8x
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Oct 2009 03:01:37 +0200
-Received: from gandalf.denix.org ([71.251.63.147]) by vms173015.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KRW00HTR5FW965D@vms173015.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	21 Oct 2009 20:00:11 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id A633714AF60; Wed,
-	21 Oct 2009 20:59:56 -0400 (EDT)
-Date: Wed, 21 Oct 2009 20:59:56 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20091022005956.GA11194@denix.org>
-References: <hbmose$gtv$1@ger.gmane.org>
-	<200910211303.49278.holger+oe@freyther.de>
-	<1256123428.14897.18.camel@opal>
-	<hbmqrv$ne5$1@ger.gmane.org> <1256125373.14897.33.camel@opal>
-	<1256151460.23211.40.camel@dax.rpnet.com>
-MIME-version: 1.0
-In-reply-to: <1256151460.23211.40.camel@dax.rpnet.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.15
-X-SA-Exim-Mail-From: denis@denix.org
+	(envelope-from <raj.khem@gmail.com>) id 1N0pdM-0005CD-KN
+	for openembedded-devel@openembedded.org; Thu, 22 Oct 2009 06:50:47 +0200
+Received: by ey-out-1920.google.com with SMTP id 3so1951373eyh.4
+	for <openembedded-devel@openembedded.org>;
+	Wed, 21 Oct 2009 21:49:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=6Xjxw6xrro6lbeTE5vP+abhptsbWJ0AZGbYf+ewCOMM=;
+	b=c3+L5kM2uW9TVP5BF+zImRwSoF2ulrR7csjWIM3f1yIAL6EdVGCp2cwSl1Q6obxC3i
+	2+KqDCAFdBj7PpusvjBadX8CuEHNe+6ueLHzg6DqaQHHDNXug2yreJ3R0klByrc9F31n
+	XLvbjdR+y+excOA0EcrW4SSvKvwdmpRihfLTU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=x5n1qa0ED83eJvgiQRkA+iBm6JACp6BXDpXBjUOywcZc8m3QxyFS+moo1lHvQRHph+
+	W2LjVzJtyDHxBcQJZ7e+R/yivoNQ5D4QY+IZSW5pe6V5f7q7wihL9fQa7fttd2CQ8nEc
+	V5M0LJ51ApdeLBYfUo3vGQsp6RgHlpeeKmtqY=
+Received: by 10.216.89.10 with SMTP id b10mr3030237wef.182.1256186985084;
+	Wed, 21 Oct 2009 21:49:45 -0700 (PDT)
+Received: from localhost (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id p37sm1455269gvf.9.2009.10.21.21.49.42
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 21 Oct 2009 21:49:44 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@openembedded.org,
+	bitbake-dev@lists.berlios.de
+Date: Wed, 21 Oct 2009 21:49:23 -0700
+Message-Id: <1256186963-8356-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 74.125.78.148
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: SCM fetched recipes without a SRCREV - e.g. libgee-native
+Subject: [PATCH] build.py: Check for valid file before removing zero sized file.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,35 +48,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2009 01:01:37 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 22 Oct 2009 04:50:47 -0000
 
-On Wed, Oct 21, 2009 at 07:57:40PM +0100, Richard Purdie wrote:
-> On Wed, 2009-10-21 at 13:42 +0200, Michael 'Mickey' Lauer wrote:
-> > Am Mittwoch, den 21.10.2009, 13:21 +0200 schrieb Koen Kooi:
-> > > If we continue down the sane-srcrevs.inc route we should consider moving 
-> > > PV_pn into there as well. Having SRCREV and PN in 2 different places 
-> > > only adds confusion and leads to misversions.
-> > 
-> > Correct.
-> > 
-> > > Speaking of misversioning, I should really go through all scm fetched 
-> > > packages I use and verify PV is correct for those.
-> > 
-> > Agreed, will have to do the same here.
-> 
-> Can I also suggest we start using SRCPV in PV, not SRCREV? This removed
-> the need to play a lot of games with PV...
-> 
-> (Poky has switched to this now)
+* getsize returns an error if the file does not exist
+  we check first if the file exist and then we check if
+  it is zero sized. So we can avoid the error when doing
+  bitbake -c clean -b <recipe>
 
-AFAIK, it's not merged in OE yet. I would definitely like to see it in OE.
-Last time we discussed it, the agreement was to introduce SRCPV in 
-bitbake.conf first and then gradually switch existing recipes over from 
-SRCREV, instead of mass-updating all of them at once...
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ lib/bb/build.py |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
+diff --git a/lib/bb/build.py b/lib/bb/build.py
+index 05b7d94..b7e93be 100644
+--- a/lib/bb/build.py
++++ b/lib/bb/build.py
+@@ -184,7 +184,7 @@ def exec_func(func, d, dirs = None):
+         so.close()
+         se.close()
+ 
+-        if os.path.getsize(logfile) == 0:
++        if os.path.isfile(logfile) is True and os.path.getsize(logfile) == 0:
+             bb.msg.debug(2, bb.msg.domain.Build, "Zero size logfile %s, removing" % logfile)
+             os.remove(logfile)
+ 
 -- 
-Denys
+1.6.3.3
+
 
 
