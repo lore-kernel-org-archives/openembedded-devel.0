@@ -1,28 +1,26 @@
-Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
+Received: from [76.76.67.137] (helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1N13UI-0005ES-KD
+	(envelope-from <gary@mlbassoc.com>) id 1N14Br-0001ol-Kv
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Oct 2009 21:38:21 +0200
-Received: from gandalf.denix.org ([71.251.63.147]) by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KRX007FYL56NEJ2@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	22 Oct 2009 14:36:48 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id B011214AF60; Thu,
-	22 Oct 2009 15:36:40 -0400 (EDT)
-Date: Thu, 22 Oct 2009 15:36:40 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 22 Oct 2009 22:23:22 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 4F91716604EB; Thu, 22 Oct 2009 14:22:19 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id EEB7F16604B5;
+	Thu, 22 Oct 2009 14:22:18 -0600 (MDT)
+Message-ID: <4AE0BEFA.4020905@mlbassoc.com>
+Date: Thu, 22 Oct 2009 14:22:18 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
+	Thunderbird/3.0b4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20091022193640.GA20195@denix.org>
-References: <4AE0B157.80807@gmail.com>
-MIME-version: 1.0
-In-reply-to: <4AE0B157.80807@gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.3
-X-SA-Exim-Mail-From: denis@denix.org
+X-SA-Exim-Connect-IP: 76.76.67.137
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Question about bluez4 and PROVIDES_append_angstrom
+Subject: SDK problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,51 +34,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2009 19:38:21 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 22 Oct 2009 20:23:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Oct 22, 2009 at 09:24:07PM +0200, Marco Cavallini wrote:
-> Hello,
-> first of all I must say that I am not a OE expert and I'd like to learn
-> and understand, so please apologize if my question is too silly for most
-> of you :-)
-> 
-> I am quite confused about a few lines I found into the following files.
-> The result of these lines faced me to errors using KaeilOS distro.
-> 
-> This modification looks (to me) related to bluez4 and Angstrom only and
-> I wonder why some package recipes (bluez4*.bb) contains some lines that
-> strictly ties them to Angstrom distribution breaking other distributions.
+I tried to build the QTE SDK using
+   git://git.openembedded.org/openembedded
+   9e54aa00b3de07933fabf5f6193a4f40af3b54f9
 
-Can you please be more specific as to what is broken for your distribution?
+When I try the example
+   (http://docs.openembedded.org/usermanual/html/ch05s08.html),
+I get:
 
-> Files I found are the following:
-> recipes/bluez/bluez4_4.35.bb:PROVIDES_append_angstrom =
->  " bluez-utils bluez-libs"
-> recipes/bluez/bluez4_4.37.bb:PROVIDES_append_angstrom =
->  " bluez-utils bluez-libs"
-> recipes/bluez/bluez4.inc:PROVIDES_append_angstrom =
->  " bluez-utils-dbus bluez-utils bluez-libs"
-> 
-> Lines are similar to these:
-> # For angstrom we want this to replace at least bluez-libs
-> PROVIDES_append_angstrom = " bluez-utils-dbus bluez-utils bluez-libs"
-> RPROVIDES_bluez4-dev_angstrom = "bluez-libs-dev"
-> 
-> My question is: why these lines are not into angstrom*.bb distro recipe
-> making bluez*.bb distro-independent (agnostic)?
-> 
-> Thank you in advance for your hints.
+$ make
+arm-angstrom-linux-gnueabi-g++ -c -pipe   -Wall -W -D_REENTRANT -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED 
+-I/usr/local/angstrom/arm/arm-angstrom-linux-gnueabi/usr/share/qtopia/mkspecs/linux-g++ -I. -I/usr/local/angstrom/arm/arm-angstrom-linux-gnueabi//usr/include/qtopia/QtCore 
+-I/usr/local/angstrom/arm/arm-angstrom-linux-gnueabi//usr/include/qtopia/QtGui -I/usr/local/angstrom/arm/arm-angstrom-linux-gnueabi//usr/include/qtopia -I. -o main.o main.cpp
+arm-angstrom-linux-gnueabi-g++  -Wl,-rpath-link,/usr/lib -o qte-example main.o    -L/usr/local/angstrom/arm/arm-angstrom-linux-gnueabi//usr/lib -lQtGuiE -lpng -lfreetype 
+-lQtNetworkE -pthread -pthread -pthread -pthread -pthread -pthread -lQtCoreE -lz -lm -pthread -lgthread-2.0 -lrt -lglib-2.0 -ldl -lpthread
+/usr/local/angstrom/arm/arm-angstrom-linux-gnueabi/usr/lib/crt1.o: In function `_start':
+init.c:(.text+0x2c): undefined reference to `__libc_csu_fini'
+init.c:(.text+0x34): undefined reference to `__libc_csu_init'
+collect2: ld returned 1 exit status
+make: *** [qte-example] Error 1
 
-PROVIDES_append_angstrom is an override in bluez4 recipe specific to Angstrom. 
-For other distributions it won't do anything. For Angstrom, it will _extend_ 
-the default PROVIDES variable with extra values.
+Any ideas what I need to do to fix this?
 
-It's pretty standard to see small alterations for specific machines or distros 
-in recipes, when most of the recipe is still common.
+Thanks
 
 -- 
-Denys
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
