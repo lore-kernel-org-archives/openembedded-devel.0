@@ -1,40 +1,27 @@
-Received: from [74.125.78.145] (helo=ey-out-1920.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1N0riy-0002bq-4a
+	(envelope-from <pb@reciva.com>) id 1N0t1B-0003xK-D7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Oct 2009 09:04:43 +0200
-Received: by ey-out-1920.google.com with SMTP id 26so38861eyw.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Oct 2009 00:03:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=mZxFLU3bpLw8GH0mmRJ6kGslP2tClF/RPfyigExZZ1g=;
-	b=OYwDCTgtH5n69WH/EvT5O+76nW2Ow8XB3lfX8yxZJXn2H6vwYStyPC6ThaYYZvRLFr
-	dE0JM9f7Kr86HS0E1GPvY1vITRgwG8Hy0QnX66j/XCRkVjoFTAioZtbY8KW5ohSqPCi/
-	GYlp3zz2wfmGee9grCgEr5GagwK5dy3CI7Kl8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=Amnt5VGZlOb+t3DYNTcQbL9bFFF3Vj+XddyxOhPwbdC8v6WrJ/XmuCBp6VxeYiHQ83
-	npZnL3XfXII2oIkmU8LsbS7uBrAA/ykc9+EUehX2LVLU7Ks7Mgow+w6xXuzVHhwQH9vq
-	SIfyAviMUgmn+G4c5jZbwolkiHa0cswDO3cIc=
-Received: by 10.216.85.194 with SMTP id u44mr3074065wee.65.1256195020092;
-	Thu, 22 Oct 2009 00:03:40 -0700 (PDT)
-Received: from localhost (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id x6sm2175682gvf.1.2009.10.22.00.03.38
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 22 Oct 2009 00:03:39 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 22 Oct 2009 10:27:37 +0200
+Received: from 88-109-185-146.dynamic.dsl.as9105.com ([88.109.185.146]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1N0t03-0001ev-As
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Oct 2009 09:26:24 +0100
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Oct 2009 00:03:31 -0700
-Message-Id: <1256195011-30524-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 74.125.78.145
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+In-Reply-To: <19c1b8a90910212206s1e64c71jd8a168149e39421@mail.gmail.com>
+References: <19c1b8a90910212206s1e64c71jd8a168149e39421@mail.gmail.com>
+Date: Thu, 22 Oct 2009 09:26:12 +0100
+Message-Id: <1256199972.23372.144.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: pb@reciva.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] serial-forward.bb: Fix missing GNU_HASH QA Error.
+Subject: Re: Moving gcc 4.4.1 to 4.4.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,33 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2009 07:04:43 -0000
+X-List-Received-Date: Thu, 22 Oct 2009 08:27:37 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes/serial-utils/serial-forward.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+On Wed, 2009-10-21 at 22:06 -0700, Khem Raj wrote:
+> Hi
+> 
+> I have tested a patch which essentially moves gcc 4.4.1 recipes to gcc
+> 4.4.2. There are no changes other than PR
+> The patch is too big and some lines are larger than 998 chars which
+> violates the RFC2822 and hence git send-email
+> will not send it.
+> 
+> There are 25 bug fixes from 4.4.1 to 4.4.2 (per gcc bugzilla) and
+> essentially its a bug fix release we could have backported
+> these to 4.4.1 too but then I thought using the release conveys better
+> message about the release we are using.
 
-diff --git a/recipes/serial-utils/serial-forward.bb b/recipes/serial-utils/serial-forward.bb
-index f5c1b17..b03fc59 100644
---- a/recipes/serial-utils/serial-forward.bb
-+++ b/recipes/serial-utils/serial-forward.bb
-@@ -3,11 +3,11 @@ AUTHOR = "Holger 'Zecke' Freyther'"
- LICENSE = "GPL"
- SECTION = "console/devel"
- PV = "1.0.1+gitr${SRCREV}"
--PR = "r0"
-+PR = "r1"
- 
- SRC_URI = "${FREESMARTPHONE_GIT}/cornucopia.git/;protocol=git"
- S = "${WORKDIR}/git/tools/serial_forward"
--
-+EXTRA_OEMAKE = "CC="${CC} ${LDFLAGS}""
- do_compile() {
-     cd ${S}
-     oe_runmake
--- 
-1.6.3.3
+You might as well just go ahead and add new recipes for the 4.4.2
+release.  Patching 4.4.1 up to 4.4.2-equivalent but still calling it
+4.4.1 would just be confusing; also, that would remove the ability for
+any folks who might want to use 4.4.1 specifically to do so.
+
+p.
+
 
 
 
