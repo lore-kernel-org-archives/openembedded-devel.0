@@ -1,27 +1,40 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [93.97.175.187] (helo=dan.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1N0t1B-0003xK-D7
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Oct 2009 10:27:37 +0200
-Received: from 88-109-185-146.dynamic.dsl.as9105.com ([88.109.185.146]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1N0t03-0001ev-As
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Oct 2009 09:26:24 +0100
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <19c1b8a90910212206s1e64c71jd8a168149e39421@mail.gmail.com>
-References: <19c1b8a90910212206s1e64c71jd8a168149e39421@mail.gmail.com>
-Date: Thu, 22 Oct 2009 09:26:12 +0100
-Message-Id: <1256199972.23372.144.camel@lenovo.internal.reciva.com>
+	(envelope-from <rpurdie@rpsys.net>) id 1N0tMZ-0001zy-R8
+	for openembedded-devel@openembedded.org; Thu, 22 Oct 2009 10:49:44 +0200
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n9M8jtlY003245 for <openembedded-devel@openembedded.org>;
+	Thu, 22 Oct 2009 09:45:56 +0100
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id PMAbATKXXFek for <openembedded-devel@openembedded.org>;
+	Thu, 22 Oct 2009 09:45:55 +0100 (BST)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	n9M8jqh2003232
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@openembedded.org>;
+	Thu, 22 Oct 2009 09:45:54 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <20091022005956.GA11194@denix.org>
+References: <hbmose$gtv$1@ger.gmane.org>
+	<200910211303.49278.holger+oe@freyther.de>
+	<1256123428.14897.18.camel@opal>
+	<hbmqrv$ne5$1@ger.gmane.org> <1256125373.14897.33.camel@opal>
+	<1256151460.23211.40.camel@dax.rpnet.com>
+	<20091022005956.GA11194@denix.org>
+Date: Thu, 22 Oct 2009 09:44:54 +0100
+Message-Id: <1256201094.23211.64.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: pb@reciva.com
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Moving gcc 4.4.1 to 4.4.2
+Subject: Re: SCM fetched recipes without a SRCREV - e.g. libgee-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,31 +48,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2009 08:27:37 -0000
+X-List-Received-Date: Thu, 22 Oct 2009 08:49:44 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2009-10-21 at 22:06 -0700, Khem Raj wrote:
-> Hi
+On Wed, 2009-10-21 at 20:59 -0400, Denys Dmytriyenko wrote:
+> On Wed, Oct 21, 2009 at 07:57:40PM +0100, Richard Purdie wrote:
+> > On Wed, 2009-10-21 at 13:42 +0200, Michael 'Mickey' Lauer wrote:
+> > > Am Mittwoch, den 21.10.2009, 13:21 +0200 schrieb Koen Kooi:
+> > > > If we continue down the sane-srcrevs.inc route we should consider moving 
+> > > > PV_pn into there as well. Having SRCREV and PN in 2 different places 
+> > > > only adds confusion and leads to misversions.
+> > > 
+> > > Correct.
+> > > 
+> > > > Speaking of misversioning, I should really go through all scm fetched 
+> > > > packages I use and verify PV is correct for those.
+> > > 
+> > > Agreed, will have to do the same here.
+> > 
+> > Can I also suggest we start using SRCPV in PV, not SRCREV? This removed
+> > the need to play a lot of games with PV...
+> > 
+> > (Poky has switched to this now)
 > 
-> I have tested a patch which essentially moves gcc 4.4.1 recipes to gcc
-> 4.4.2. There are no changes other than PR
-> The patch is too big and some lines are larger than 998 chars which
-> violates the RFC2822 and hence git send-email
-> will not send it.
-> 
-> There are 25 bug fixes from 4.4.1 to 4.4.2 (per gcc bugzilla) and
-> essentially its a bug fix release we could have backported
-> these to 4.4.1 too but then I thought using the release conveys better
-> message about the release we are using.
+> AFAIK, it's not merged in OE yet. I would definitely like to see it in OE.
+> Last time we discussed it, the agreement was to introduce SRCPV in 
+> bitbake.conf first and then gradually switch existing recipes over from 
+> SRCREV, instead of mass-updating all of them at once...
 
-You might as well just go ahead and add new recipes for the 4.4.2
-release.  Patching 4.4.1 up to 4.4.2-equivalent but still calling it
-4.4.1 would just be confusing; also, that would remove the ability for
-any folks who might want to use 4.4.1 specifically to do so.
+Either way is fine but this looks like a good time to think about it if
+we're already assessing the variables!
 
-p.
+Cheers,
 
+Richard
 
 
 
