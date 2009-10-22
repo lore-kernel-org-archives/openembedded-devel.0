@@ -1,31 +1,43 @@
-Received: from [82.192.226.27] (helo=mail.o2s.ch)
+Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <david.lanzendoerfer@o2s.ch>) id 1N15RB-0000St-Qt
+	(envelope-from <otavio.salvador@gmail.com>) id 1N15zD-0001uE-GM
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Oct 2009 23:43:16 +0200
-Received: from dizzy-6.localnet ([::ffff:192.168.2.122])
-	(TLS: TLSv1/SSLv3,256bits,AES256-SHA)
-	by koffein with esmtp; Thu, 22 Oct 2009 22:18:16 +0200
-	id 0000000000013E09.000000004AE0BE08.0000458A
-From: David =?iso-8859-1?q?Lanzend=F6rfer?= <david.lanzendoerfer@o2s.ch>
-Organization: OpenSourceSupport GmbH
+	Fri, 23 Oct 2009 00:18:26 +0200
+Received: by bwz9 with SMTP id 9so854787bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Oct 2009 15:17:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=0PunT85/daFIocF8Y03nc+U9LyG0KuIJb7BndoEZncg=;
+	b=T9Z9IG0OxYUSmFUqrSxaBR2AjYUFIHuCInGvDw8RCK/WdPzmGHbTdml4bcpEnAXCEv
+	t2t0BU7MwZpMrzQAKemnhdcEugx8/AiNRxdmF+ITYwyxcSWM8XDL1u2oMdsRNIoJupwC
+	INK6eGKKwINKTcVYK+H4+vLiv7a3c3QGvwzTk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=eM1XhINVfm9mRqEfkX17Uh96SjKi/YyNQIkXp3voDPA61WhIUeL524Wow2pTYY2OdS
+	uEK79hLitgxwhs449AtfyInaq8LAve4vnx+UsrVT0kyNWWdsBMVM7P9+2M6QUgIjJbHK
+	B/Ghx4BCH+pEXA5E0kY62YrnOu6YclY+XCsiM=
+MIME-Version: 1.0
+Sender: otavio.salvador@gmail.com
+Received: by 10.239.139.17 with SMTP id r17mr820942hbr.140.1256249840947; Thu, 
+	22 Oct 2009 15:17:20 -0700 (PDT)
+In-Reply-To: <200910222119.40861.marcin@juszkiewicz.com.pl>
+References: <c384c5ea0910221208y3efee675t6c292de20ed1d8f1@mail.gmail.com>
+	<200910222119.40861.marcin@juszkiewicz.com.pl>
+Date: Thu, 22 Oct 2009 20:17:20 -0200
+X-Google-Sender-Auth: 1474b27cf8108429
+Message-ID: <be7a9f3d0910221517g2bc6d91k55e18e9d3c5e6604@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Oct 2009 23:44:17 +0200
-User-Agent: KMail/1.12.1 (Linux/2.6.31.1; KDE/4.3.1; x86_64; ; )
-References: <200910222339.32881.david.lanzendoerfer@o2s.ch>
-In-Reply-To: <200910222339.32881.david.lanzendoerfer@o2s.ch>
-X-Face: a023Y#Om+E(<|Tkz7Ae>YeJ\rvY,eXDn^g66`NiaNQ"#xRJ=gr'!V}V#{MN6!YO{s{{); h
-	=s@Vv%T)fi>gJrAHvijw^ZG9{b1rtf~mn$V^b`:3m>yH=o$Eo')Ul8f}F%1vdg9|52W=Xs
-	rR^/E/SPo^{-R22[a}c?@tgfp<I#oOW7r}0We&3g5"2>N5r/Vu|>kWs"|J'XppA; *0A,6>
-	*GY(0=H@>@^vEy]!m\)I42Lu@k~_=:U@/kf8{AO4'F7:Hy_*"5Xf9Vvkqr4E(32pVlT:=&
-	i4l[3%?Z<zzP~wGSke?1VJj\cd~Z(,Upc;nOR|pqK@<j(`EYFSn,jN)A(~`YwM2nIv,
-Mime-Version: 1.0
-Message-Id: <200910222344.20662.david.lanzendoerfer@o2s.ch>
-X-SA-Exim-Connect-IP: 82.192.226.27
-X-SA-Exim-Mail-From: david.lanzendoerfer@o2s.ch
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Patches
+Subject: Re: [RFC] package complete ${datadir} ${libdir} by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,72 +51,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2009 21:43:16 -0000
-X-Groupsio-MsgNum: 13559
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg=pgp-sha1; boundary="=_koffein-17804-1256242696-0001-2"
-
---=_koffein-17804-1256242696-0001-2
-Content-Type: multipart/mixed;
-  boundary="Boundary-01=_xIN4K/8Kbd8OIGv"
-Content-Transfer-Encoding: 7bit
-
---Boundary-01=_xIN4K/8Kbd8OIGv
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-Another patch: to fix missing building of other filesystems then tar.gz-
-rootfs-images.
-
-greatings
-	leviathan
-
---Boundary-01=_xIN4K/8Kbd8OIGv
-Content-Type: text/plain;
-  charset="ISO-8859-1";
-  name="commit-2e5480c"
+X-List-Received-Date: Thu, 22 Oct 2009 22:18:26 -0000
+Content-Type: text/plain; charset=ISO-8859-2
 Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment;
-	filename="commit-2e5480c"
 
-commit 2e5480c76bfb3961a5e559b76641c4cce5eb438d
-Author: David Lanzend=F6rfer <david.lanzendoerfer@o2s.ch>
-Date:   Thu Oct 22 23:41:45 2009 +0200
+Hello,
 
-    Removed filesystems declaration from conf/machine/include/htc-msm7.inc =
-because it should been already decleared in ${build}/conf/local.conf
+On Thu, Oct 22, 2009 at 5:19 PM, Marcin Juszkiewicz
+<marcin@juszkiewicz.com.pl> wrote:
+> Dnia czwartek, 22 pa=BCdziernika 2009 o 21:08:27 Leon Woestenberg napisa=
+=B3(a):
+>> Why does FILES_${PN} have ${PN} after ${datadir} and ${libdir}?
+>>
+>> I would propose to just package ${datadir} and ${libdir} as-is.
+>> Or am I overlooking something?
+>
+> PACKAGES =3D "PN-dbg PN PN-doc PN-dev PN-locale"
+>
+> With your suggestion PN-doc and PN-locale starts to be useless as PN will=
+ get
+> /usr/share/{doc,man,info}/ which are part of PN-doc and /usr/share/locale=
+/
+> which is packaged to PN-locale.
 
-diff --git a/conf/machine/include/htc-msm7.inc b/conf/machine/include/htc-m=
-sm7.inc
-index 5d7596f..f2164bd 100644
---- a/conf/machine/include/htc-msm7.inc
-+++ b/conf/machine/include/htc-msm7.inc
-@@ -15,9 +15,6 @@ MACHINE_CLASS =3D "htc-msm7"
- # features
- MACHINE_FEATURES =3D "kernel26 touchscreen screen phone gps usb keyboard"
-=20
--# filesystems
--IMAGE_FSTYPES =3D "tar.gz"
--
- # CPU
- require conf/machine/include/tune-arm1136-novfp.inc
-=20
+Even more; it can "hide" contents inside of the package without
+further noticing.
 
---Boundary-01=_xIN4K/8Kbd8OIGv--
+IMO everything that is not _standard_ ought to be explicited add.
 
---=_koffein-17804-1256242696-0001-2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Transfer-Encoding: 7bit
-Content-Description: This is a digitally signed message part.
+Regards,
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.11 (GNU/Linux)
+--=20
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
-iEYEABECAAYFAkrg0jQACgkQAeZw77btGjqmEQCfab6Hr4EZ0iGyOFL7Q8ab0k9f
-IioAoKSCxPnOzbjPxCWnxmK93CXxR6IO
-=svYT
------END PGP SIGNATURE-----
 
---=_koffein-17804-1256242696-0001-2--
