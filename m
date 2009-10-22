@@ -1,26 +1,29 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [64.22.125.45] (helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N13BL-0003AG-W9
-	for openembedded-devel@openembedded.org; Thu, 22 Oct 2009 21:18:47 +0200
-Received: (qmail 10768 invoked by uid 813007); 22 Oct 2009 19:17:43 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 22 Oct 2009 19:17:43 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Oct 2009 21:19:40 +0200
-User-Agent: KMail/1.12.2 (Linux/2.6.32-rc3-00052-g0eca52a; KDE/4.3.2; x86_64; ;
-	)
-References: <c384c5ea0910221208y3efee675t6c292de20ed1d8f1@mail.gmail.com>
-In-Reply-To: <c384c5ea0910221208y3efee675t6c292de20ed1d8f1@mail.gmail.com>
+	(envelope-from <koansoftware@gmail.com>) id 1N13HV-0003RN-9s
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Oct 2009 21:25:08 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id CEA862C7FE;
+	Thu, 22 Oct 2009 19:19:51 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id CZCkjz3bcdXf; Thu, 22 Oct 2009 19:19:47 +0000 (UTC)
+Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
+	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTPSA id DD4192C7F8;
+	Thu, 22 Oct 2009 19:19:46 +0000 (UTC)
+Message-ID: <4AE0B157.80807@gmail.com>
+Date: Thu, 22 Oct 2009 21:24:07 +0200
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: KOAN sas - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-Message-Id: <200910222119.40861.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] package complete ${datadir} ${libdir} by default
+Subject: Question about bluez4 and PROVIDES_append_angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,34 +37,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2009 19:18:47 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 22 Oct 2009 19:25:08 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: 7bit
 
-Dnia czwartek, 22 pa=C5=BAdziernika 2009 o 21:08:27 Leon Woestenberg napisa=
-=C5=82(a):
-> Why does FILES_${PN} have ${PN} after ${datadir} and ${libdir}?
->=20
-> I would propose to just package ${datadir} and ${libdir} as-is.
-> Or am I overlooking something?
+Hello,
+first of all I must say that I am not a OE expert and I'd like to learn
+and understand, so please apologize if my question is too silly for most
+of you :-)
 
-PACKAGES =3D "PN-dbg PN PN-doc PN-dev PN-locale"
+I am quite confused about a few lines I found into the following files.
+The result of these lines faced me to errors using KaeilOS distro.
 
-With your suggestion PN-doc and PN-locale starts to be useless as PN will g=
-et=20
-/usr/share/{doc,man,info}/ which are part of PN-doc and /usr/share/locale/=
-=20
-which is packaged to PN-locale.
+This modification looks (to me) related to bluez4 and Angstrom only and
+I wonder why some package recipes (bluez4*.bb) contains some lines that
+strictly ties them to Angstrom distribution breaking other distributions.
 
-=46ix me if I am wrong.
+Files I found are the following:
+recipes/bluez/bluez4_4.35.bb:PROVIDES_append_angstrom =
+ " bluez-utils bluez-libs"
+recipes/bluez/bluez4_4.37.bb:PROVIDES_append_angstrom =
+ " bluez-utils bluez-libs"
+recipes/bluez/bluez4.inc:PROVIDES_append_angstrom =
+ " bluez-utils-dbus bluez-utils bluez-libs"
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+Lines are similar to these:
+# For angstrom we want this to replace at least bluez-libs
+PROVIDES_append_angstrom = " bluez-utils-dbus bluez-utils bluez-libs"
+RPROVIDES_bluez4-dev_angstrom = "bluez-libs-dev"
 
+My question is: why these lines are not into angstrom*.bb distro recipe
+making bluez*.bb distro-independent (agnostic)?
+
+Thank you in advance for your hints.
+
+/marco
 
 
 
