@@ -1,35 +1,26 @@
-Received: from [216.239.58.188] (helo=gv-out-0910.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1N137E-0002rF-P9
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Oct 2009 21:14:31 +0200
-Received: by gv-out-0910.google.com with SMTP id e6so1893415gvc.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Oct 2009 12:13:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=nYZImxWDP9jpv85SZaCOU4gT3uNplzUpYIBA2D3XOFQ=;
-	b=iky1y5nKbIVQMuI1eyF+QkfFHPUPmxHu5LTAB6GWPuRmig6KE+7R5/ipIWueXDJbkO
-	np+XiTe6O/dxJwTsdcCoC7lSe//BkLeGoI4XkowASrxekD7ewVLup4xo2mlSieRPe/6D
-	SScIpShBt950g0ljpQA9p0/JvdxHOKlCr35EQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=vLbdYUJ3xVio5GjIrh28Z6npHeS0URGom7UicNC5x6Ua8x1bEoAmwioX1DhCBCc3Pv
-	wCD2GaL9jIlfHIg0BBUxfG+Rf6lYfdaNRhPDk6neQC8t6BPzU9NPoPsi6uw2c6IJUyY4
-	O1BbnoPDnxgR3HW5rhl9EWfAKz5uTSH9/kaPk=
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N13BL-0003AG-W9
+	for openembedded-devel@openembedded.org; Thu, 22 Oct 2009 21:18:47 +0200
+Received: (qmail 10768 invoked by uid 813007); 22 Oct 2009 19:17:43 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 22 Oct 2009 19:17:43 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 22 Oct 2009 21:19:40 +0200
+User-Agent: KMail/1.12.2 (Linux/2.6.32-rc3-00052-g0eca52a; KDE/4.3.2; x86_64; ;
+	)
+References: <c384c5ea0910221208y3efee675t6c292de20ed1d8f1@mail.gmail.com>
+In-Reply-To: <c384c5ea0910221208y3efee675t6c292de20ed1d8f1@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.239.145.5 with SMTP id q5mr832639hba.89.1256238808359; Thu, 22 
-	Oct 2009 12:13:28 -0700 (PDT)
-Date: Thu, 22 Oct 2009 21:13:28 +0200
-Message-ID: <c384c5ea0910221213l732ced5fn3d3fb38594fa4240@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 216.239.58.188
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+Message-Id: <200910222119.40861.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [RFC] Make work subdirs match task name for install and package to avoid confusion
+Subject: Re: [RFC] package complete ${datadir} ${libdir} by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,19 +34,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2009 19:14:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 22 Oct 2009 19:18:47 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Although I am aware of the correctness, I notice new OE devs being
-confused by this fact:
+Dnia czwartek, 22 pa=C5=BAdziernika 2009 o 21:08:27 Leon Woestenberg napisa=
+=C5=82(a):
+> Why does FILES_${PN} have ${PN} after ${datadir} and ${libdir}?
+>=20
+> I would propose to just package ${datadir} and ${libdir} as-is.
+> Or am I overlooking something?
 
-the install task creates the image/ directory.
-the package task creates the install/ directory.
+PACKAGES =3D "PN-dbg PN PN-doc PN-dev PN-locale"
 
-I wonder if we need to change to install/ and package/ instead?
+With your suggestion PN-doc and PN-locale starts to be useless as PN will g=
+et=20
+/usr/share/{doc,man,info}/ which are part of PN-doc and /usr/share/locale/=
+=20
+which is packaged to PN-locale.
 
-Regards,
--- 
-Leon
+=46ix me if I am wrong.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
