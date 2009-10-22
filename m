@@ -1,43 +1,32 @@
-Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1N15zD-0001uE-GM
+	(envelope-from <michael@juice.ott.cti.com>) id 1N1763-00086J-Pw
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Oct 2009 00:18:26 +0200
-Received: by bwz9 with SMTP id 9so854787bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Oct 2009 15:17:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=0PunT85/daFIocF8Y03nc+U9LyG0KuIJb7BndoEZncg=;
-	b=T9Z9IG0OxYUSmFUqrSxaBR2AjYUFIHuCInGvDw8RCK/WdPzmGHbTdml4bcpEnAXCEv
-	t2t0BU7MwZpMrzQAKemnhdcEugx8/AiNRxdmF+ITYwyxcSWM8XDL1u2oMdsRNIoJupwC
-	INK6eGKKwINKTcVYK+H4+vLiv7a3c3QGvwzTk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=eM1XhINVfm9mRqEfkX17Uh96SjKi/YyNQIkXp3voDPA61WhIUeL524Wow2pTYY2OdS
-	uEK79hLitgxwhs449AtfyInaq8LAve4vnx+UsrVT0kyNWWdsBMVM7P9+2M6QUgIjJbHK
-	B/Ghx4BCH+pEXA5E0kY62YrnOu6YclY+XCsiM=
-MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.139.17 with SMTP id r17mr820942hbr.140.1256249840947; Thu, 
-	22 Oct 2009 15:17:20 -0700 (PDT)
-In-Reply-To: <200910222119.40861.marcin@juszkiewicz.com.pl>
-References: <c384c5ea0910221208y3efee675t6c292de20ed1d8f1@mail.gmail.com>
-	<200910222119.40861.marcin@juszkiewicz.com.pl>
-Date: Thu, 22 Oct 2009 20:17:20 -0200
-X-Google-Sender-Auth: 1474b27cf8108429
-Message-ID: <be7a9f3d0910221517g2bc6d91k55e18e9d3c5e6604@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Fri, 23 Oct 2009 01:29:35 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 6A73C5A5350;
+	Thu, 22 Oct 2009 19:28:31 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 16688-06; Thu, 22 Oct 2009 19:28:31 -0400 (EDT)
+Received: by smtp.cbnco.com (Postfix, from userid 1003)
+	id 4B8375A6EA3; Thu, 22 Oct 2009 19:28:31 -0400 (EDT)
+Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTP id 1F6255A342D;
+	Thu, 22 Oct 2009 19:28:30 -0400 (EDT)
+Received: by juice.ott.cti.com (Postfix, from userid 1000)
+	id C9C274DC79C; Thu, 22 Oct 2009 19:28:29 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+Date: Thu, 22 Oct 2009 19:28:29 -0400
+Message-Id: <12562541091460-git-send-email-msmith@cbnco.com>
+X-Mailer: git-send-email 1.5.3.1.20.gb860
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: michael@juice.ott.cti.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] package complete ${datadir} ${libdir} by default
+Subject: [PATCH] cairo 1.8.8: fix libtool name in doltlibtool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,39 +40,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2009 22:18:26 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 22 Oct 2009 23:29:39 -0000
 
-Hello,
+In OE libtool is renamed to ${host_alias}-libtool. Change doltlibtool
+script accordingly.
 
-On Thu, Oct 22, 2009 at 5:19 PM, Marcin Juszkiewicz
-<marcin@juszkiewicz.com.pl> wrote:
-> Dnia czwartek, 22 pa=BCdziernika 2009 o 21:08:27 Leon Woestenberg napisa=
-=B3(a):
->> Why does FILES_${PN} have ${PN} after ${datadir} and ${libdir}?
->>
->> I would propose to just package ${datadir} and ${libdir} as-is.
->> Or am I overlooking something?
->
-> PACKAGES =3D "PN-dbg PN PN-doc PN-dev PN-locale"
->
-> With your suggestion PN-doc and PN-locale starts to be useless as PN will=
- get
-> /usr/share/{doc,man,info}/ which are part of PN-doc and /usr/share/locale=
-/
-> which is packaged to PN-locale.
+Ripped from patch for xserver-xorg 1.6.1
+(c10e9906a2ecea7e9c04bf967a8882d6b4cd1077)
 
-Even more; it can "hide" contents inside of the package without
-further noticing.
+Signed-off-by: Michael Smith <msmith@cbnco.com>
+---
+ recipes/cairo/cairo_1.8.8.bb       |    3 +++
+ recipes/cairo/files/dolt-fix.patch |   20 ++++++++++++++++++++
+ 2 files changed, 23 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/cairo/files/dolt-fix.patch
 
-IMO everything that is not _standard_ ought to be explicited add.
+diff --git a/recipes/cairo/cairo_1.8.8.bb b/recipes/cairo/cairo_1.8.8.bb
+index b2d8e65..74671fb 100644
+--- a/recipes/cairo/cairo_1.8.8.bb
++++ b/recipes/cairo/cairo_1.8.8.bb
+@@ -1,6 +1,9 @@
++PR = "r1"
++
+ require cairo.inc
+ 
+ SRC_URI = "http://cairographics.org/releases/cairo-${PV}.tar.gz \
++           file://dolt-fix.patch;patch=1 \
+           "
+ 
+ 
+diff --git a/recipes/cairo/files/dolt-fix.patch b/recipes/cairo/files/dolt-fix.patch
+new file mode 100644
+index 0000000..16aff34
+--- /dev/null
++++ b/recipes/cairo/files/dolt-fix.patch
+@@ -0,0 +1,20 @@
++--- cairo-1.8.8/build/aclocal.dolt.m4.orig	2008-12-12 07:48:04.000000000 -0500
+++++ cairo-1.8.8/build/aclocal.dolt.m4	2009-10-22 14:36:17.000000000 -0400
++@@ -147,7 +147,7 @@
++     cat <<__DOLTLIBTOOL__EOF__ > doltlibtool
++ #!$DOLT_BASH
++ __DOLTLIBTOOL__EOF__
++-    cat <<'__DOLTLIBTOOL__EOF__' >>doltlibtool
+++    cat <<'__DOLTLIBTOOL__EOF__' | sed -e "s/@host_alias@/$host_alias/g" >>doltlibtool
++ top_builddir_slash="${0%%doltlibtool}"
++ : ${top_builddir_slash:=./}
++ args=()
++@@ -163,7 +163,7 @@
++ if $modeok && $tagok ; then
++     . ${top_builddir_slash}doltcompile "${args@<:@@@:>@}"
++ else
++-    exec ${top_builddir_slash}libtool "$[]@"
+++    exec ${top_builddir_slash}@host_alias@-libtool "$[]@"
++ fi
++ __DOLTLIBTOOL__EOF__
++ 
+-- 
+1.5.3.1.20.gb860
 
-Regards,
-
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
