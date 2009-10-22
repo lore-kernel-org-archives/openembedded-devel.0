@@ -1,40 +1,35 @@
-Received: from [74.125.78.148] (helo=ey-out-1920.google.com)
+Received: from [74.125.92.147] (helo=qw-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1N0pdM-0005CD-KN
-	for openembedded-devel@openembedded.org; Thu, 22 Oct 2009 06:50:47 +0200
-Received: by ey-out-1920.google.com with SMTP id 3so1951373eyh.4
-	for <openembedded-devel@openembedded.org>;
-	Wed, 21 Oct 2009 21:49:45 -0700 (PDT)
+	(envelope-from <raj.khem@gmail.com>) id 1N0ptR-0000kH-8y
+	for Openembedded-devel@lists.openembedded.org;
+	Thu, 22 Oct 2009 07:07:24 +0200
+Received: by qw-out-1920.google.com with SMTP id 4so955482qwk.36
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Oct 2009 22:06:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=6Xjxw6xrro6lbeTE5vP+abhptsbWJ0AZGbYf+ewCOMM=;
-	b=c3+L5kM2uW9TVP5BF+zImRwSoF2ulrR7csjWIM3f1yIAL6EdVGCp2cwSl1Q6obxC3i
-	2+KqDCAFdBj7PpusvjBadX8CuEHNe+6ueLHzg6DqaQHHDNXug2yreJ3R0klByrc9F31n
-	XLvbjdR+y+excOA0EcrW4SSvKvwdmpRihfLTU=
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=+qwzJRgKiocgoCPCFHUvb9+cMZNs+9uDQqnrJI2LS7Y=;
+	b=WT7QliYYreY5nmmkDCbrSMZi5u0gLjyYnE1SIFhmqDM7MzXQ5PXAFnxlh16mFgqXdH
+	mxhD2qNKdDIHvdAPStIHsdBmKixyVn3hzUTPDfAxBAmOtiQtwxjRdcbibcZxku2Cm/Dt
+	QhZSkHlTNILT77FXmQLZ/LyG16KWlqOn8HZzU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=x5n1qa0ED83eJvgiQRkA+iBm6JACp6BXDpXBjUOywcZc8m3QxyFS+moo1lHvQRHph+
-	W2LjVzJtyDHxBcQJZ7e+R/yivoNQ5D4QY+IZSW5pe6V5f7q7wihL9fQa7fttd2CQ8nEc
-	V5M0LJ51ApdeLBYfUo3vGQsp6RgHlpeeKmtqY=
-Received: by 10.216.89.10 with SMTP id b10mr3030237wef.182.1256186985084;
-	Wed, 21 Oct 2009 21:49:45 -0700 (PDT)
-Received: from localhost (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id p37sm1455269gvf.9.2009.10.21.21.49.42
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 21 Oct 2009 21:49:44 -0700 (PDT)
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=d/1Z/LItaO86SRNzPTCvT4/X3h1LDXfRAHt017lt6AYri2X746UGdVKQMtLoMgsnuG
+	b9KMnQawHx25H/EYy/TwDklmiAq2J7cf9K/e03k1w0j+vjtUkgzl7qcY+FWgwybQICPz
+	pN6YNnblMqXmMt374B7JWqaoL0qS4z0al1S7k=
+MIME-Version: 1.0
+Received: by 10.229.44.21 with SMTP id y21mr1234786qce.42.1256187981336; Wed, 
+	21 Oct 2009 22:06:21 -0700 (PDT)
+Date: Wed, 21 Oct 2009 22:06:20 -0700
+Message-ID: <19c1b8a90910212206s1e64c71jd8a168149e39421@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@openembedded.org,
-	bitbake-dev@lists.berlios.de
-Date: Wed, 21 Oct 2009 21:49:23 -0700
-Message-Id: <1256186963-8356-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 74.125.78.148
+To: Openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.92.147
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] build.py: Check for valid file before removing zero sized file.
+Subject: Moving gcc 4.4.1 to 4.4.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,33 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2009 04:50:47 -0000
+X-List-Received-Date: Thu, 22 Oct 2009 05:07:24 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* getsize returns an error if the file does not exist
-  we check first if the file exist and then we check if
-  it is zero sized. So we can avoid the error when doing
-  bitbake -c clean -b <recipe>
+Hi
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- lib/bb/build.py |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+I have tested a patch which essentially moves gcc 4.4.1 recipes to gcc
+4.4.2. There are no changes other than PR
+The patch is too big and some lines are larger than 998 chars which
+violates the RFC2822 and hence git send-email
+will not send it.
 
-diff --git a/lib/bb/build.py b/lib/bb/build.py
-index 05b7d94..b7e93be 100644
---- a/lib/bb/build.py
-+++ b/lib/bb/build.py
-@@ -184,7 +184,7 @@ def exec_func(func, d, dirs = None):
-         so.close()
-         se.close()
- 
--        if os.path.getsize(logfile) == 0:
-+        if os.path.isfile(logfile) is True and os.path.getsize(logfile) == 0:
-             bb.msg.debug(2, bb.msg.domain.Build, "Zero size logfile %s, removing" % logfile)
-             os.remove(logfile)
- 
--- 
-1.6.3.3
+There are 25 bug fixes from 4.4.1 to 4.4.2 (per gcc bugzilla) and
+essentially its a bug fix release we could have backported
+these to 4.4.1 too but then I thought using the release conveys better
+message about the release we are using.
 
+ You can have a look at the patch here
+
+http://sakrah.homelinux.org/Public/0001-gcc-4.2.2-Move-4.4.1-recipes-to-4.4.2.patch
+
+Is this ok or does someone has concerns.
+
+Thanks
+
+-Khem
 
 
