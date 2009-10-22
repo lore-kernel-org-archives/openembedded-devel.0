@@ -1,30 +1,22 @@
-Received: from [206.190.36.215] (helo=web53905.mail.re2.yahoo.com)
+Received: from [128.178.224.219] (helo=smtp0.epfl.ch)
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <cwoloszynski@yahoo.com>) id 1N0wyz-0000BX-SI
-	for openembedded-devel@openembedded.org; Thu, 22 Oct 2009 14:41:37 +0200
-Received: (qmail 13853 invoked by uid 60001); 22 Oct 2009 12:40:31 -0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024;
-	t=1256215231; bh=9LZkfXTClEhTCZ6lpa3ah5u18kHVxmpwVg0cU4K2Kfs=;
-	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type;
-	b=ErZ9rKKUYlwMuGjqCmpHQCV1SREK459bahEAvV5jDjcnEH/DSha5yZOGvGs69B0zG5+mpWEwBh3OnHAGRhihRY9jjSeS8TH6W6J2RLxaTSyTPnA9Z7/bVI5BNowT5a/1sLSEhgpZ7Y1OuaruzR9KpZHs6D48H9MxbDzz4LqVtsk=
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=yahoo.com;
-	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type;
-	b=uH6pFJCMflPcOAxs58KjIfthGhjZZ9++jG5FFx4JLyp9wLDtiB6fYAdmfmRd1S1RdthUX7wIVKTlKiMii4dmVV5zgGNw5CT2CvuOW8/ZwpDIF9hYatP5iK9cc/UCcLKYS28ExUzeVkPyUHx6NhrahvQC6tobjjSednIyTvsmKSA=;
-Message-ID: <699461.13009.qm@web53905.mail.re2.yahoo.com>
-X-YMail-OSG: 9KuhIEsVM1mzl8dmHqjDDq0usy7Zojdl6H24bb96MLL9wpDyzEpPNQu7feM_LAv8TpewfEn7hZPPlPqB.Bw4207HKMUYyOBxYo02oQeKy9CGTeb5oOmEcciufSuXXUnE.qXu.EYQQ6SoIDfX2WHwMzHTE1CVhFPFNc4UhrTH6xkdkR8p2R_6NRXZdCAWiiz8NDYQloqpFHfi1dGVAgJzbDSrKrPWVl.9rV0ukq3CvdoaXJ.TXxS7saaelEw9LQt2Po9MnKv6Hbnh_R3E3eSG4Nr3_oWL9HhD1CgluFW7vGlfhvWhD3__Z5ySDH4gzxmY4mlWL6MEmYF15yyH9PAxH43Ifnp93JuQikoIl_xUayTv8rGAajBX.WHDEw--
-Received: from [68.100.74.251] by web53905.mail.re2.yahoo.com via HTTP;
-	Thu, 22 Oct 2009 05:40:31 PDT
-X-Mailer: YahooMailRC/182.10 YahooMailWebService/0.7.347.3
-Date: Thu, 22 Oct 2009 05:40:31 -0700 (PDT)
-From: Charlie Woloszynski <cwoloszynski@yahoo.com>
-To: openembedded-devel@lists.openembedded.org,
-	gumstix-users@lists.sourceforge.net
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 206.190.36.215
-X-SA-Exim-Mail-From: cwoloszynski@yahoo.com
+	(envelope-from <valentin.longchamp@epfl.ch>) id 1N0xSV-000150-RN
+	for openembedded-devel@openembedded.org; Thu, 22 Oct 2009 15:12:06 +0200
+Received: (qmail 6740 invoked by uid 107); 22 Oct 2009 13:11:00 -0000
+X-Virus-Scanned: ClamAV
+Received: from lsro1pc40.epfl.ch (128.178.145.86) (authenticated)
+	by smtp0.epfl.ch (AngelmatoPhylax SMTP proxy);
+	Thu, 22 Oct 2009 15:11:00 +0200
+From: Valentin Longchamp <valentin.longchamp@epfl.ch>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 22 Oct 2009 15:08:30 +0200
+Message-Id: <1256216911-693-1-git-send-email-valentin.longchamp@epfl.ch>
+X-Mailer: git-send-email 1.6.0.4
+X-SA-Exim-Connect-IP: 128.178.224.219
+X-SA-Exim-Mail-From: valentin.longchamp@epfl.ch
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: bitbake gumstix-basic-image error with 'patches' directory
+Subject: Cmake cross-compile file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,48 +30,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2009 12:41:37 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 22 Oct 2009 13:12:07 -0000
 
-I am new to OE and bitbake, so perhaps this is an easy question:
+Hello,
 
-I am using the pixhawk.oe build setup and I invoke 'bitbake gumstix-basic-image'
+I had already posted this patch earlier bit I got no comment. It allows cmake
+to work with cross-compile files where the needed paths, options and programs
+are given, which is the recommended way of doing cross-compilation with cmake
+according to their documentation.
 
-I get the following output.  Can someone suggest how to 'unstick' this?  Rerunning bitbake results in the same output.
+Furthermore, you can add additionnal path in individual recipes by writing into
+the cross-compile file in the do_generate_toolchain_file_append() task as done 
+below for qt4 for instance.
 
+do_generate_toolchain_file_append() {
+	echo "set( QT_HEADERS_DIR ${OE_QMAKE_INCDIR_QT} CACHE STRING \"Qt4 include dir\" )" >> ${WORKDIR}/toolchain.cmake
+	echo "set( QT_LIBRARY_DIR ${OE_QMAKE_LIBDIR_QT} CACHE STRING \"Qt4 library dir\" )" >> ${WORKDIR}/toolchain.cmake
+	echo "set( QT_QMAKE_EXECUTABLE ${OE_QMAKE_QMAKE} CACHE STRING \"qmake2 binary\" )" >> ${WORKDIR}/toolchain.cmake
+	echo "set( QT_MOC_EXECUTABLE ${OE_QMAKE_MOC} CACHE STRING \"Qt4 moc binary\" )" >> ${WORKDIR}/toolchain.cmake
+	echo "set( QT_UIC_EXECUTABLE ${OE_QMAKE_UIC} CACHE STRING \"Qt4 uic binary\" )" >> ${WORKDIR}/toolchain.cmake
+	echo "set( QT_UIC3_EXECUTABLE ${OE_QMAKE_UIC3} CACHE STRING \"Qt4 uic3 binary\" )" >> ${WORKDIR}/toolchain.cmake
+	echo "set( QT_RCC_EXECUTABLE ${OE_QMAKE_RCC} CACHE STRING \"Qt4 rcc binary\" )" >> ${WORKDIR}/toolchain.cmake
+	echo "set( QT_DBUSXML2CPP_EXECUTABLE ${OE_QMAKE_QDBUSXML2CPP} CACHE STRING \"Qt4 dbus xml2cpp binary\" )" >> ${WORKDIR}/toolchain.cmake
+	echo "set( QT_DBUSCPP2XML_EXECUTABLE ${OE_QMAKE_QDBUSCPP2XML} CACHE STRING \"Qt4 dbus cpp2xml binary\" )" >> ${WORKDIR}/toolchain.cmake
+	echo "set( QT_LRELEASE_EXECUTABLE ${OE_QMAKE_LRELEASE} CACHE STRING \"Qt4 lrelease binary\" )" >> ${WORKDIR}/toolchain.cmake
+	echo "set( QT_LUPDATE_EXECUTABLE ${OE_QMAKE_LUPDATE} CACHE STRING \"Qt4 lupdate binary\" )" >> ${WORKDIR}/toolchain.cmake 
+}
 
-OE:overo charlie@charlie-desktop:~/macfs/pixhawk.oe$ bitbake pixhawk-console-imageNOTE: Handling BitBake files: \ (7409/7409) [100 %]
-NOTE: Parsing finished. 7125 cached, 0 parsed, 284 skipped, 2 masked.
-NOTE: Cache is clean, not saving.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 127 of 4046 (ID: 1263, /home/charlie/macfs/pixhawk.oe/org.openembedded.dev/recipes/mpfr/mpfr-native_2.3.1.bb, do_patch)
-NOTE: Applying patch 'long-long-thumb.patch' (org.openembedded.dev/recipes/mpfr/long-long-thumb.patch)
-NOTE: Task failed: Command Error: exit status: 1  Output:
-Importing patch /home/charlie/macfs/pixhawk.oe/org.openembedded.dev/recipes/mpfr/long-long-thumb.patch (stored as long-long-thumb.patch)
-mkdir: cannot create directory `patches': File exists
-cp: accessing `patches/long-long-thumb.patch': Not a directory
-Failed to import patch long-long-thumb.patch
-ERROR: TaskFailed event exception, aborting
+I have been using it in my overlay for quite some time with various cmake based
+recipes we have here and I definitely think it would deserve OE inlcusion.
 
+Comment welcome
 
-A quick search in my system for directories called 'patches' shows the following:
-
-OE:overo charlie@charlie-desktop:~/macfs/pixhawk.oe$ find . -name "patches" -print | xargs ls -lddrwxr-xr-x 17 charlie charlie 578 2008-05-04 07:28 ./tmp/work/armv7a-angstrom-linux-gnueabi/binutils-cross-2.18.50.0.7-r7.1/binutils-2.18.50.0.7/patches
-drwxrwxr-x 10 charlie charlie 340 2009-10-22 04:17 ./tmp/work/i686-linux/autoconf-native-2.63-r8.0/autoconf-2.63/patches
-drwxrwxr-x  2 charlie charlie  68 2009-10-22 04:17 ./tmp/work/i686-linux/automake-native-1.10.2-r2.0/automake-1.10.2/patches
-drwxrwxr-x  4 charlie charlie 136 2009-10-22 04:25 ./tmp/work/i686-linux/bison-native-2.3-r1/bison-2.3/patches
-drwxrwxr-x  5 charlie charlie 170 2009-10-22 04:25 ./tmp/work/i686-linux/flex-native-2.5.31-r2/flex-2.5.31/patches
-drwxrwxr-x  7 charlie charlie 238 2009-10-22 04:20 ./tmp/work/i686-linux/gettext-native-0.17-r4/gettext-0.17/patches
-drwxrwxr-x  7 charlie charlie 238 2009-10-22 04:19 ./tmp/work/i686-linux/gmp-native-4.2.4-r0.1/gmp-4.2.4/patches
-drwxrwxr-x  5 charlie charlie 170 2009-10-22 04:16 ./tmp/work/i686-linux/gnu-config-native-0.1+cvs20050701-r5/config/patches
-drwxrwxr-x  5 charlie charlie 170 2009-10-22 04:18 ./tmp/work/i686-linux/libtool-native-2.2.6a-r25.0/libtool-2.2.6/patches
-drwxrwxr-x  2 charlie charlie  68 2009-10-22 04:16 ./tmp/work/i686-linux/m4-native-1.4.12-r0/m4-1.4.12/patches
-drwxrwxr-x  2 charlie charlie  68 2009-10-22 04:11 ./tmp/work/i686-linux/stagemanager-native-0.0.1-r11/stagemanager-0.0.1/patches
+Val
 
 
-
-      
 
 
