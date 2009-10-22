@@ -1,26 +1,24 @@
 Received: from [82.192.226.27] (helo=mail.o2s.ch)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <david.lanzendoerfer@o2s.ch>) id 1N15IH-0002mn-Tf
+	(envelope-from <david.lanzendoerfer@o2s.ch>) id 1N15MY-0000Fp-Di
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Oct 2009 23:34:05 +0200
+	Thu, 22 Oct 2009 23:38:30 +0200
 Received: from dizzy-6.localnet ([::ffff:192.168.2.122])
 	(TLS: TLSv1/SSLv3,256bits,AES256-SHA)
-	by koffein with esmtp; Thu, 22 Oct 2009 22:09:04 +0200
-	id 0000000000013E09.000000004AE0BBE0.00004529
+	by koffein with esmtp; Thu, 22 Oct 2009 22:13:29 +0200
+	id 0000000000013E09.000000004AE0BCE9.0000454A
 From: David =?iso-8859-1?q?Lanzend=F6rfer?= <david.lanzendoerfer@o2s.ch>
 Organization: OpenSourceSupport GmbH
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Oct 2009 23:35:06 +0200
+Date: Thu, 22 Oct 2009 23:39:29 +0200
 User-Agent: KMail/1.12.1 (Linux/2.6.31.1; KDE/4.3.1; x86_64; ; )
-X-Face: a023Y#Om+E(<|Tkz7Ae>YeJ\rvY,eXDn^g66`NiaNQ"#xRJ=gr'!V}V#{MN6!YO{s{{)
-	=?utf-8?q?=3Bh=0A=09=3Ds?=@Vv%T)fi>gJrAHvijw^ZG9{b1rtf~mn$V^b`:3m>yH=o$Eo')
-	=?utf-8?q?Ul8f=7DF=251vdg9=7C52W=3DXs=0A=09rR=5E/E/SPo=5E=7B-R22=5Ba?=
-	=?utf-8?q?=7Dc=3F?=@tgfp<I#oOW7r}0We&3g5"2>N5r/Vu|>kWs"|J'XppA;*0A,6>
-	=?utf-8?q?=0A=09*GY?=(0=H@>@^vEy]!m\)I42Lu@k~_=:U@/kf8{AO4'F7:Hy_*"5Xf9Vvkqr4E(
-	=?utf-8?q?32pVlT=3A=3D=26=0A=09i4l=5B3=25=3FZ?=<zzP~wGSke?1VJj\cd~Z(,Upc;
-	nOR|pqK@<j(`EYFSn,jN)A(~`YwM2nIv,
+X-Face: a023Y#Om+E(<|Tkz7Ae>YeJ\rvY,eXDn^g66`NiaNQ"#xRJ=gr'!V}V#{MN6!YO{s{{); h
+	=s@Vv%T)fi>gJrAHvijw^ZG9{b1rtf~mn$V^b`:3m>yH=o$Eo')Ul8f}F%1vdg9|52W=Xs
+	rR^/E/SPo^{-R22[a}c?@tgfp<I#oOW7r}0We&3g5"2>N5r/Vu|>kWs"|J'XppA; *0A,6>
+	*GY(0=H@>@^vEy]!m\)I42Lu@k~_=:U@/kf8{AO4'F7:Hy_*"5Xf9Vvkqr4E(32pVlT:=&
+	i4l[3%?Z<zzP~wGSke?1VJj\cd~Z(,Upc;nOR|pqK@<j(`EYFSn,jN)A(~`YwM2nIv,
 Mime-Version: 1.0
-Message-Id: <200910222335.07387.david.lanzendoerfer@o2s.ch>
+Message-Id: <200910222339.32881.david.lanzendoerfer@o2s.ch>
 X-SA-Exim-Connect-IP: 82.192.226.27
 X-SA-Exim-Mail-From: david.lanzendoerfer@o2s.ch
 X-SA-Exim-Scanned: No (on linuxtogo.org);
@@ -39,30 +37,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2009 21:34:05 -0000
-X-Groupsio-MsgNum: 13557
-Content-Type: multipart/mixed; boundary="=_koffein-17707-1256242145-0001-2"
+X-List-Received-Date: Thu, 22 Oct 2009 21:38:30 -0000
+X-Groupsio-MsgNum: 13558
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg=pgp-sha1; boundary="=_koffein-17740-1256242409-0001-2"
 
---=_koffein-17707-1256242145-0001-2
-Content-Type: text/plain; charset=us-ascii
+--=_koffein-17740-1256242409-0001-2
+Content-Type: multipart/mixed;
+  boundary="Boundary-01=_REN4Kp3e0FT0FMj"
 Content-Transfer-Encoding: 7bit
 
-Hi people
+--Boundary-01=_REN4Kp3e0FT0FMj
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+Hi
 Here are some patches to fix building of OpenMoko images.
 
 commit-9cd10ef:
 Fixed build issue with openmoko and guile
 
+commit-dfe43d6:
+Changed desired kernel to linux-replicant
+(htc-dream)
+
 commit-daf15a0:
 Added replicants kernel from http://gitorious.org/replicant/gnulinuxkernel
 
+I hope, I'll see it soon in the next pull.
+Greatings
+	leviathan
 
-Added replicants kernel from http://gitorious.org/replicant/gnulinuxkernel
-
-Added replicants kernel from http://gitorious.org/replicant/gnulinuxkernel
-
---=_koffein-17707-1256242145-0001-2
-Content-Type: text/plain; charset=iso-8859-1; name=commit-9cd10ef
+--Boundary-01=_REN4Kp3e0FT0FMj
+Content-Type: text/plain;
+  charset="ISO-8859-1";
+  name="commit-9cd10ef"
 Content-Transfer-Encoding: quoted-printable
 Content-Disposition: attachment;
 	filename="commit-9cd10ef"
@@ -88,8 +99,37 @@ index 81d7075..687cac3 100644
 =20
  #
 
---=_koffein-17707-1256242145-0001-2
-Content-Type: text/plain; charset=iso-8859-1; name=commit-daf15a0
+--Boundary-01=_REN4Kp3e0FT0FMj
+Content-Type: text/plain;
+  charset="ISO-8859-1";
+  name="commit-dfe43d6"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="commit-dfe43d6"
+
+commit dfe43d636b6a3c9b44e85ff4028acb735e4286e2
+Author: David Lanzend=F6rfer <david.lanzendoerfer@o2s.ch>
+Date:   Thu Oct 22 20:42:05 2009 +0200
+
+    Changed desired kernel to linux-replicant
+
+diff --git a/conf/machine/htcdream.conf b/conf/machine/htcdream.conf
+index 7f7680a..623901c 100644
+--- a/conf/machine/htcdream.conf
++++ b/conf/machine/htcdream.conf
+@@ -9,5 +9,5 @@ MACHINE_DISPLAY_HEIGHT_PIXELS =3D "480"
+=20
+ MACHINE_FEATURES =3D "kernel26 touchscreen screen phone gps usbgadget blue=
+tooth keyboard ext2"=20
+=20
+-PREFERRED_PROVIDER_virtual/kernel =3D "linux-msm7xxxx"
++PREFERRED_PROVIDER_virtual/kernel =3D "linux-replicant"
+=20
+
+--Boundary-01=_REN4Kp3e0FT0FMj
+Content-Type: text/plain;
+  charset="ISO-8859-1";
+  name="commit-daf15a0"
 Content-Transfer-Encoding: quoted-printable
 Content-Disposition: attachment;
 	filename="commit-daf15a0"
@@ -13744,29 +13784,19 @@ rotocol=3Dgit \
 +
 +S =3D "${WORKDIR}/git"
 
---=_koffein-17707-1256242145-0001-2
-Content-Type: text/plain; charset=iso-8859-1; name=commit-dfe43d6
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment;
-	filename="commit-dfe43d6"
+--Boundary-01=_REN4Kp3e0FT0FMj--
 
-commit dfe43d636b6a3c9b44e85ff4028acb735e4286e2
-Author: David Lanzend=F6rfer <david.lanzendoerfer@o2s.ch>
-Date:   Thu Oct 22 20:42:05 2009 +0200
+--=_koffein-17740-1256242409-0001-2
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Transfer-Encoding: 7bit
+Content-Description: This is a digitally signed message part.
 
-    Changed desired kernel to linux-replicant
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.11 (GNU/Linux)
 
-diff --git a/conf/machine/htcdream.conf b/conf/machine/htcdream.conf
-index 7f7680a..623901c 100644
---- a/conf/machine/htcdream.conf
-+++ b/conf/machine/htcdream.conf
-@@ -9,5 +9,5 @@ MACHINE_DISPLAY_HEIGHT_PIXELS =3D "480"
-=20
- MACHINE_FEATURES =3D "kernel26 touchscreen screen phone gps usbgadget blue=
-tooth keyboard ext2"=20
-=20
--PREFERRED_PROVIDER_virtual/kernel =3D "linux-msm7xxxx"
-+PREFERRED_PROVIDER_virtual/kernel =3D "linux-replicant"
-=20
+iEYEABECAAYFAkrg0RQACgkQAeZw77btGjpF+QCgh9dmyezkBXVj+GikAoIWHOGj
+71cAoKw4oxj4gSkEVqJgy5VlK9hZMDhi
+=npH1
+-----END PGP SIGNATURE-----
 
---=_koffein-17707-1256242145-0001-2--
+--=_koffein-17740-1256242409-0001-2--
