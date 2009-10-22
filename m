@@ -1,25 +1,39 @@
-Received: from [128.178.224.219] (helo=smtp0.epfl.ch)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <valentin.longchamp@epfl.ch>) id 1N0xSW-000151-8i
-	for openembedded-devel@openembedded.org; Thu, 22 Oct 2009 15:12:07 +0200
-Received: (qmail 6742 invoked by uid 107); 22 Oct 2009 13:11:00 -0000
-X-Virus-Scanned: ClamAV
-Received: from lsro1pc40.epfl.ch (128.178.145.86) (authenticated)
-	by smtp0.epfl.ch (AngelmatoPhylax SMTP proxy);
-	Thu, 22 Oct 2009 15:11:00 +0200
-From: Valentin Longchamp <valentin.longchamp@epfl.ch>
+Received: from [209.85.210.175] (helo=mail-yx0-f175.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <martin.jansa@gmail.com>) id 1N0y2C-0008Sk-5s
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Oct 2009 15:48:59 +0200
+Received: by yxe5 with SMTP id 5so3998027yxe.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Oct 2009 06:47:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=89TVEwn+oV0PKZf7DOV7hQr6hixMp4qLlRBH+bJ8IqM=;
+	b=pdSjXCzx3bH7+lemBfSjrz8x7gr6HXUtyCsoQV/Nm9XVQxHeJFuyILZXMEwtdzaEGW
+	4syx+Jrgx37n+JNiempMaBm+awRO5g857smLB6yZ2MniuIm+FLEH9uC9Cj3jITm1k/Vt
+	Hjm76eY8OinkW/WY6orfUqBcHswYaWDt2NVLk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=cnltbZg9O81YF+K0KERXHJkmodtAsrzayhBDoRH35cHiMqqQSdX8FuZhZRVRrwamyt
+	rBL+A+tXytnXoaGhCaSxewCzIwJL4hgoVZZU5Zx+gVUZcW3YQvVAmlNtImg+hc6EGQ37
+	amJQH0R4LyWrg/69EkMS4v5/XAdhqB+AGM0AY=
+Received: by 10.103.125.27 with SMTP id c27mr4090331mun.110.1256219273204;
+	Thu, 22 Oct 2009 06:47:53 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id j6sm3018409mue.50.2009.10.22.06.47.51
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 22 Oct 2009 06:47:52 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Oct 2009 15:08:31 +0200
-Message-Id: <1256216911-693-2-git-send-email-valentin.longchamp@epfl.ch>
-X-Mailer: git-send-email 1.6.0.4
-In-Reply-To: <1256216911-693-1-git-send-email-valentin.longchamp@epfl.ch>
-References: <1256216911-693-1-git-send-email-valentin.longchamp@epfl.ch>
-X-SA-Exim-Connect-IP: 128.178.224.219
-X-SA-Exim-Mail-From: valentin.longchamp@epfl.ch
+Date: Thu, 22 Oct 2009 15:47:41 +0200
+Message-Id: <1256219261-29147-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.6.5.1
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Valentin Longchamp <valentin.longchamp@epfl.ch>
-Subject: [PATCH 1/1] add toolchain file for cmake compilations
+Subject: [PATCH] binutils-2.20 is new enough for glibc_2.9, change configure script to accept it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,82 +47,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Oct 2009 13:12:07 -0000
+X-List-Received-Date: Thu, 22 Oct 2009 13:48:59 -0000
 
-Based on work done by Matthew Dombroski.
-We want to generate a toolchain file for cmake compilations. This
-adds a task that is performed before the configure task.
-
-Additional defines can be made in the toolchain file directly in
-the recipe file by using a do_generate_toolchain_file_append().
-This is especially interesting for recipes that need to define
-values for additionnal libraries.
-
-Signed-off-by: Valentin Longchamp <valentin.longchamp@epfl.ch>
 ---
- classes/cmake.bbclass |   39 +++++++++++++++++++++++++++++++++++++--
- 1 files changed, 37 insertions(+), 2 deletions(-)
+ .../glibc-2.9/glibc-2.9-enable-binutils-2.2.patch  |   35 ++++++++++++++++++++
+ recipes/glibc/glibc_2.9.bb                         |    1 +
+ 2 files changed, 36 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/glibc/glibc-2.9/glibc-2.9-enable-binutils-2.2.patch
 
-diff --git a/classes/cmake.bbclass b/classes/cmake.bbclass
-index b5b7b86..e3ec533 100644
---- a/classes/cmake.bbclass
-+++ b/classes/cmake.bbclass
-@@ -11,6 +11,39 @@ OECMAKE_SOURCEPATH ?= "."
- # "-C ${OECMAKE_BUILDPATH}". So it will run the right makefiles.
- OECMAKE_BUILDPATH ?= ""
+diff --git a/recipes/glibc/glibc-2.9/glibc-2.9-enable-binutils-2.2.patch b/recipes/glibc/glibc-2.9/glibc-2.9-enable-binutils-2.2.patch
+new file mode 100644
+index 0000000..09200dd
+--- /dev/null
++++ b/recipes/glibc/glibc-2.9/glibc-2.9-enable-binutils-2.2.patch
+@@ -0,0 +1,35 @@
++--- glibc-2.9.orig/configure.in	2009-10-22 15:38:13.000000000 +0200
+++++ glibc-2.9/configure.in	2009-10-22 15:37:33.000000000 +0200
++@@ -844,10 +844,10 @@
++ # Accept binutils 2.13 or newer.
++ AC_CHECK_PROG_VER(AS, $AS, --version,
++ 		  [GNU assembler.* \([0-9]*\.[0-9.]*\)],
++-		  [2.1[3-9]*], AS=: critic_missing="$critic_missing as")
+++		  [2.1[3-9]* | 2.2* ], AS=: critic_missing="$critic_missing as")
++ AC_CHECK_PROG_VER(LD, $LD, --version,
++ 		  [GNU ld.* \([0-9][0-9]*\.[0-9.]*\)],
++-		  [2.1[3-9]*], LD=: critic_missing="$critic_missing ld")
+++		  [2.1[3-9]* | 2.2* ], LD=: critic_missing="$critic_missing ld")
++ 
++ # We need the physical current working directory.  We cannot use the
++ # "pwd -P" shell builtin since that's not portable.  Instead we try to
++--- glibc-2.9.orig/configure	2009-02-26 22:28:17.000000000 +0100
+++++ glibc-2.9/configure	2009-10-22 15:43:11.000000000 +0200
++@@ -4531,7 +4531,7 @@
++   ac_prog_version=`$AS --version 2>&1 | sed -n 's/^.*GNU assembler.* \([0-9]*\.[0-9.]*\).*$/\1/p'`
++   case $ac_prog_version in
++     '') ac_prog_version="v. ?.??, bad"; ac_verc_fail=yes;;
++-    2.1[3-9]*)
+++    2.1[3-9]* | 2.2*)
++        ac_prog_version="$ac_prog_version, ok"; ac_verc_fail=no;;
++     *) ac_prog_version="$ac_prog_version, bad"; ac_verc_fail=yes;;
++ 
++@@ -4594,7 +4594,7 @@
++   ac_prog_version=`$LD --version 2>&1 | sed -n 's/^.*GNU ld.* \([0-9][0-9]*\.[0-9.]*\).*$/\1/p'`
++   case $ac_prog_version in
++     '') ac_prog_version="v. ?.??, bad"; ac_verc_fail=yes;;
++-    2.1[3-9]*)
+++    2.1[3-9]* | 2.2*)
++        ac_prog_version="$ac_prog_version, ok"; ac_verc_fail=no;;
++     *) ac_prog_version="$ac_prog_version, bad"; ac_verc_fail=yes;;
++ 
+diff --git a/recipes/glibc/glibc_2.9.bb b/recipes/glibc/glibc_2.9.bb
+index 56a6ff8..cddae98 100644
+--- a/recipes/glibc/glibc_2.9.bb
++++ b/recipes/glibc/glibc_2.9.bb
+@@ -65,6 +65,7 @@ SRC_URI = "ftp://ftp.gnu.org/pub/gnu/glibc/glibc-${PV}.tar.bz2 \
+ 	   file://tls_i486.patch;patch=1 \
+ 	   file://glibc-2.9-use-_begin.patch;patch=1 \
+            file://arm-lowlevellock-include-tls.patch;patch=1 \
++           file://glibc-2.9-enable-binutils-2.2.patch;patch=1 \
+            "
  
-+# C/C++ Compiler (without cpu arch/tune arguments)
-+OECMAKE_C_COMPILER ?= "`echo ${CC} | sed 's/^\([^ ]*\).*/\1/'`"
-+OECMAKE_CXX_COMPILER ?= "`echo ${CXX} | sed 's/^\([^ ]*\).*/\1/'`"
-+
-+# Compiler flags
-+OECMAKE_C_FLAGS ?= "${HOST_CC_ARCH} ${TOOLCHAIN_OPTIONS} ${BUILD_CPPFLAGS}"
-+OECMAKE_CXX_FLAGS ?= "${HOST_CC_ARCH} ${TOOLCHAIN_OPTIONS} ${BUILD_CPPFLAGS} -fpermissive"
-+OECMAKE_C_FLAGS_RELEASE ?= "${SELECTED_OPTIMIZATION} -DNDEBUG"
-+OECMAKE_CXX_FLAGS_RELEASE ?= "${SELECTED_OPTIMIZATION} -DNDEBUG"
-+
-+cmake_do_generate_toolchain_file() {
-+# CMake system name must be something like "Linux".
-+# This is important for cross-compiling.
-+  echo "set( CMAKE_SYSTEM_NAME" `echo ${SDK_OS} | sed 's/^./\u&/'` ")" > ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_C_COMPILER ${OECMAKE_C_COMPILER} )" >> ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_CXX_COMPILER ${OECMAKE_CXX_COMPILER} )" >> ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_C_FLAGS \"${OECMAKE_C_FLAGS}\" CACHE STRING \"OpenEmbedded CFLAGS\" )" >> ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_CXX_FLAGS \"${OECMAKE_CXX_FLAGS}\" CACHE STRING \"OpenEmbedded CXXFLAGS\" )" >> ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_C_FLAGS_RELEASE \"${OECMAKE_C_FLAGS_RELEASE}\" CACHE STRING \"CFLAGS for release\" )" >> ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_CXX_FLAGS_RELEASE \"${OECMAKE_CXX_FLAGS_RELEASE}\" CACHE STRING \"CXXFLAGS for release\" )" >> ${WORKDIR}/toolchain.cmake
-+
-+# only search in the paths provided (from openembedded) so cmake doesnt pick
-+# up libraries and tools from the native build machine
-+  echo "set( CMAKE_FIND_ROOT_PATH ${STAGING_DIR_HOST} ${STAGING_DIR_NATIVE} ${CROSS_DIR} )" >> ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_FIND_ROOT_PATH_MODE_PROGRAM ONLY )" >> ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY )" >> ${WORKDIR}/toolchain.cmake
-+  echo "set( CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY )" >> ${WORKDIR}/toolchain.cmake
-+# Use native cmake modules
-+  echo "set( CMAKE_MODULE_PATH ${STAGING_DIR_NATIVE}/usr/share/cmake-2.6/Modules/ )" >> ${WORKDIR}/toolchain.cmake
-+}
-+
-+addtask generate_toolchain_file after do_patch before do_configure
-+
- cmake_do_configure() {
-   if [ ${OECMAKE_BUILDPATH} ]
-   then
-@@ -20,9 +53,11 @@ cmake_do_configure() {
- 
-   cmake ${OECMAKE_SOURCEPATH} \
-     -DCMAKE_INSTALL_PREFIX:PATH=${prefix} \
--    -DCMAKE_FIND_ROOT_PATH=${STAGING_DIR_HOST} \
-+    -DCMAKE_TOOLCHAIN_FILE=${WORKDIR}/toolchain.cmake \
-+    -DCMAKE_VERBOSE_MAKEFILE=1 \
-     ${EXTRA_OECMAKE} \
-     -Wno-dev
-+
- }
- 
--EXPORT_FUNCTIONS do_configure
-+EXPORT_FUNCTIONS do_configure do_generate_toolchain_file
+ # Build fails on sh3 and sh4 without additional patches
 -- 
-1.6.0.4
+1.6.5.1
 
 
 
