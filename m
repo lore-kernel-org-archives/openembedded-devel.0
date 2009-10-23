@@ -1,26 +1,24 @@
-Received: from [76.76.67.137] (helo=mail.chez-thomas.org)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1N18GM-0006QI-Um
+	(envelope-from <holger+oe@freyther.de>) id 1N18w8-0002nR-R2
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Oct 2009 02:44:18 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 6523A16606DF; Thu, 22 Oct 2009 18:43:14 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 277F216606C3;
-	Thu, 22 Oct 2009 18:43:14 -0600 (MDT)
-Message-ID: <4AE0FC22.4030805@mlbassoc.com>
-Date: Thu, 22 Oct 2009 18:43:14 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
-	Thunderbird/3.0b4
-MIME-Version: 1.0
+	Fri, 23 Oct 2009 03:27:27 +0200
+Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
+	[123.192.145.111])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 8734E1B10C04
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Oct 2009 01:35:34 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4AE0BEFA.4020905@mlbassoc.com> <4AE0C0AE.20305@eukrea.com>
-	<200910230209.42692.holger+oe@freyther.de>
-In-Reply-To: <200910230209.42692.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 76.76.67.137
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+Date: Fri, 23 Oct 2009 03:26:13 +0200
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <4AE0BEFA.4020905@mlbassoc.com>
+	<19c1b8a90910221735t5c91498ft9a692cd75c442db4@mail.gmail.com>
+In-Reply-To: <19c1b8a90910221735t5c91498ft9a692cd75c442db4@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200910230326.13922.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: SDK problems
@@ -37,70 +35,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2009 00:44:18 -0000
-X-Groupsio-MsgNum: 13566
-Content-Type: multipart/mixed; boundary="------------080704080003090002020800"
-
---------------080704080003090002020800
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
-
-On 10/22/2009 06:09 PM, Holger Hans Peter Freyther wrote:
-> On Thursday 22 October 2009 22:29:34 Eric B=E9nard wrote:
->
->> same thing here. Following an advice on IRC, I tried to switch to egli=
-bc
->> without success (eglibc didn' build) and still haven't found a solutio=
-n
->> to generate a working QT SDK for a Cortex A8.
->
-> In both cases post your config. What version of gcc, glibc, binutils we=
-re used?
-
-Stright forward BeagleBoard config - attached
-
---=20
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
-
---------------080704080003090002020800
-Content-Type: text/plain;
- name="local.conf"
+X-List-Received-Date: Fri, 23 Oct 2009 01:27:27 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="local.conf"
 
-# Where to store sources
-DL_DIR = "${OETREE}/downloads"
+On Friday 23 October 2009 02:35:31 Khem Raj wrote:
 
-INHERIT += " rm_work "
+> One reason could be that its not getting right libc to link with. You
+> could check <staging>/usr/lib/libc.so
+> and it should be a text file which points to right libc to link with.
+> On glibc it was different than in eglibc
+> eglibc one should work. I do not know about glibc as I do not have
+> working version of glibc here.
 
-# Make sure you have these installed
-ASSUME_PROVIDED += "gdk-pixbuf-csource-native imagemagick-native librsvg-native"
+Okay,
 
-# Which files do we want to parse:
-#BBFILES := "${OETREE}/org.openembedded.dev/recipes/*/*.bb"
-BBFILES := "${OETREE}/openembedded/recipes/*/*.bb"
-BBMASK = ""
- 
-# What kind of images do we want?
-IMAGE_FSTYPES += " tar.bz2 "
+thanks to Khem on irc and pointing me to -Wl,-verbose there is something fishy 
+with the libc_nonshared.a in the SDK. I have no idea what kind of problem but 
+the workaround is to copy libc_nonshared.a from the OE staging to
 
-# Set TMPDIR instead of defaulting it to $pwd/tmp
-#TMPDIR = "${OETREE}/${DISTRO}-dev"
-
-# Make use of SMP and fast disks
-PARALLEL_MAKE = "-j4"
-BB_NUMBER_THREADS = "4"
-
-#tinderbox
-#INHERIT += "oestats-client"
-OESTATS_BUILDER      = "myname"
-
-DISTRO = "angstrom-2008.1"
-MACHINE = "beagleboard"
+/usr/local/angstrom/arm/arm-angstrom-linux-gnueabi/usr/lib.
 
 
---------------080704080003090002020800--
+regards
+	holger
+
+
+
+
