@@ -1,25 +1,35 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1N1Gru-0007YT-3Z
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1N1H1e-0002Nz-E3 for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Oct 2009 12:05:41 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N1H0g-00021G-5N
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Oct 2009 11:55:38 +0200
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 39A231B10C06
+	Fri, 23 Oct 2009 12:04:38 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Oct 2009 12:04:38 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Oct 2009 10:03:45 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Fri, 23 Oct 2009 12:04:38 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Oct 2009 11:54:22 +0200
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <200910230504.57681.holger+oe@freyther.de>
-	<200910231133.11053.holger+oe@freyther.de>
-	<hbru1e$m80$1@ger.gmane.org>
-In-Reply-To: <hbru1e$m80$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200910231154.22284.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 23 Oct 2009 12:03:48 +0200
+Message-ID: <hbrv24$p0s$1@ger.gmane.org>
+References: <200910230504.57681.holger+oe@freyther.de>	<200910231133.11053.holger+oe@freyther.de>	<hbru1e$m80$1@ger.gmane.org>
+	<200910231154.22284.holger+oe@freyther.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <200910231154.22284.holger+oe@freyther.de>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Revert "package bbclass: strip static libs as well"
@@ -36,24 +46,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2009 09:55:38 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 23 Oct 2009 10:05:41 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Friday 23 October 2009 11:46:22 Koen Kooi wrote:
+On 23-10-09 11:54, Holger Hans Peter Freyther wrote:
+> On Friday 23 October 2009 11:46:22 Koen Kooi wrote:
+>
+>>> and I would prefer to have debug symbols in there. you can always strip
+>>> them out of the final binary but you can not add them when they are gone.
+>>
+>> Installing foo-dbg doesn't work?
+>
+> It will not. At least from my understanding of an .a archive. You will need to
+> get the symbols into the binary when statically linking, this will not happen
+> when they are in a .debug/liba.a.
 
-> > and I would prefer to have debug symbols in there. you can always strip
-> > them out of the final binary but you can not add them when they are gone.
-> 
-> Installing foo-dbg doesn't work?
+If that's the case, we shouldn't be stripping static libs.
 
-It will not. At least from my understanding of an .a archive. You will need to 
-get the symbols into the binary when statically linking, this will not happen 
-when they are in a .debug/liba.a.
+I updated 
+http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=koen/static-libs-rework
 
-Does this sound correct?
+If those changes look OK, I'll start going to recipes with custom 
+packaging (e.g. qt4) and have them put static libs -static as well.
 
-	z.
+And I see a DISTRO_PR bump coming for angstrom.
+
+regards,
+
+Koen
+
 
 
