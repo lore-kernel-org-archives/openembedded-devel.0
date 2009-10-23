@@ -1,32 +1,32 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1N1P62-0002d3-Jr
+	(envelope-from <michael@sles10-64.ott.cti.com>) id 1N1Pal-0004M0-Eq
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Oct 2009 20:42:45 +0200
-Received: from 88-109-185-146.dynamic.dsl.as9105.com ([88.109.185.146]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1N1P0J-0002Me-Th
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Oct 2009 19:36:48 +0100
-From: Phil Blundell <pb@reciva.com>
+	Fri, 23 Oct 2009 21:14:30 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id B4DB35A8613;
+	Fri, 23 Oct 2009 15:13:25 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 13671-04; Fri, 23 Oct 2009 15:13:25 -0400 (EDT)
+Received: by smtp.cbnco.com (Postfix, from userid 1003)
+	id 654985A8611; Fri, 23 Oct 2009 15:13:25 -0400 (EDT)
+Received: from sles10-64.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTP id 8F3ED5A8603;
+	Fri, 23 Oct 2009 15:13:23 -0400 (EDT)
+Received: by sles10-64.ott.cti.com (Postfix, from userid 1000)
+	id 7950C40AA2; Fri, 23 Oct 2009 15:13:23 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20091023182121.GA28604@denix.org>
-References: <200910230504.57681.holger+oe@freyther.de>
-	<1256286976.4529.117.camel@mill.internal.reciva.com>
-	<hbrs68$gbd$1@ger.gmane.org> <200910231133.11053.holger+oe@freyther.de>
-	<hbs7hq$j3v$1@ger.gmane.org>
-	<1256301732.4529.161.camel@mill.internal.reciva.com>
-	<20091023182121.GA28604@denix.org>
-Date: Fri, 23 Oct 2009 19:36:46 +0100
-Message-ID: <1256323006.15214.21.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: pb@reciva.com
+Date: Fri, 23 Oct 2009 15:13:21 -0400
+Message-Id: <1256325202-8516-1-git-send-email-msmith@cbnco.com>
+X-Mailer: git-send-email 1.6.3
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: michael@sles10-64.ott.cti.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Revert "package bbclass: strip static libs as well"
+Subject: [PATCH 1/2] curl, curl-native: add 7.19.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,65 +40,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2009 18:42:45 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 23 Oct 2009 19:14:30 -0000
 
-On Fri, 2009-10-23 at 14:21 -0400, Denys Dmytriyenko wrote:
-> On Fri, Oct 23, 2009 at 01:42:12PM +0100, Phil Blundell wrote:
-> > On Fri, 2009-10-23 at 14:28 +0200, Koen Kooi wrote:
-> > > -libc_baselibs = "${base_libdir}/libcrypt*.so.* 
-> > > ${base_libdir}/libcrypt-*.so ${base_libdir}/libc*.so.* 
-> > > ${base_libdir}/libc-*.so ${base_libdir}/libm*.so.* 
-> > > ${base_libdir}/libm-*.so ${base_libdir}/ld*.so.* ${base_libdir}/ld-*.so 
-> > > ${base_libdir}/libpthread*.so.* ${base_libdir}/libpthread-*.so 
-> > > ${base_libdir}/libresolv*.so.* ${base_libdir}/libresolv-*.so 
-> > > ${base_libdir}/librt*.so.* ${base_libdir}/librt-*.so 
-> > > ${base_libdir}/libutil*.so.* ${base_libdir}/libutil-*.so 
-> > > ${base_libdir}/libnsl*.so.* ${base_libdir}/libnsl-*.so 
-> > > ${base_libdir}/libnss_files*.so.* ${base_libdir}/libnss_files-*.so 
-> > > ${base_libdir}/libnss_compat*.so.* ${base_libdir}/libnss_compat-*.so 
-> > > ${base_libdir}/libnss_dns*.so.* ${base_libdir}/libnss_dns-*.so 
-> > > ${base_libdir}/libdl*.so.* ${base_libdir}/libdl-*.so 
-> > > ${base_libdir}/libanl*.so.* ${base_libdir}/libanl-*.so 
-> > > ${base_libdir}/libBrokenLocale*.so.* ${base_libdir}/libBrokenLocale-*.so"
-> > > +libc_baselibs = "${base_libdir}/libcrypt*.so.* 
-> > > ${base_libdir}/libcrypt-*.so ${base_libdir}/libc*.so.* 
-> > > ${base_libdir}/libc-*.so ${base_libdir}/libm*.so.* 
-> > > ${base_libdir}/libm-*.so ${base_libdir}/ld*.so.* ${base_libdir}/ld-*.so 
-> > > ${base_libdir}/libpthread*.so.* ${base_libdir}/libpthread-*.so 
-> > > ${base_libdir}/libresolv*.so.* ${base_libdir}/libresolv-*.so 
-> > > ${base_libdir}/librt*.so.* ${base_libdir}/librt-*.so 
-> > > ${base_libdir}/libutil*.so.* ${base_libdir}/libutil-*.so 
-> > > ${base_libdir}/libnsl*.so.* ${base_libdir}/libnsl-*.so 
-> > > ${base_libdir}/libnss_files*.so.* ${base_libdir}/libnss_files-*.so 
-> > > ${base_libdir}/libnss_compat*.so.* ${base_libdir}/libnss_compat-*.so 
-> > > ${base_libdir}/libnss_dns*.so.* ${base_libdir}/libnss_dns-*.so 
-> > > ${base_libdir}/libdl*.so.* ${base_libdir}/libdl-*.so 
-> > > ${base_libdir}/libanl*.so.* ${base_libdir}/libanl-*.so 
-> > > ${base_libdir}/libBrokenLocale*.so.* ${base_libdir}/libBrokenLocale-*.so 
-> > > ${base_libdir}/libcidn-*.so  ${base_libdir}/libmemusage.so"
-> > 
-> > It took me a moment to spot what was actually happening here, but I
-> > think this is a step in the wrong direction.  Libmemusage is not
-> > something that most folks are going to want in their rootfs; libcidn is
-> > a bit more debatable but I suspect that at least some people will view
-> > it as bloat.  I would prefer to see the glibc packaging becoming less
-> > rather than more monolithic and I think these two libraries would be
-> > better placed in their own subpackages.
-> 
-> Phil,
-> 
-> I don't understand your concern here - packaging all the libraries from glibc 
-> does not mean they will appear in the rootfs. But having them handy as IPKs is 
-> helpful, when someone wants to do debugging - just opkg install those...
+Signed-off-by: Michael Smith <msmith@cbnco.com>
+---
 
-Everything in ${libc_baselibs} goes into the libc6.ipk output package,
-so there's no practical way for users to avoid installing those
-libraries.
+format-patch doesn't recognize the copies with 1-line changes, so:
 
-p.
+curl-native 7.18.2 and 7.19.6 recipes are identical other than PR.
 
+curl 7.19.5 and 7.19.6 recipes are identical except .6 no longer needs
+curl-add_all_algorithms.patch.
+
+ conf/checksums.ini                 |    4 ++++
+ recipes/curl/curl-native_7.19.6.bb |   11 +++++++++++
+ recipes/curl/curl_7.19.6.bb        |    4 ++++
+ 3 files changed, 19 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/curl/curl-native_7.19.6.bb
+ create mode 100644 recipes/curl/curl_7.19.6.bb
+
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index f91cd4e..14dfd57 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -4606,6 +4606,10 @@ sha256=a0e28b019f022942650ffa4bdf46e4c09bd8ec18e6ca5f08ad273668115f51f7
+ md5=426d161661dce70c8ea9ad8f553363a3
+ sha256=05ad84a9c8d340917370f357ad9fdce5ea595deb11f4cb70f946fa48c7b02cd0
+ 
++[http://curl.haxx.se/download/curl-7.19.6.tar.bz2]
++md5=8402c1f654c51ad7287aad57c3aa79be
++sha256=ea88f48c8415f7d3af482e4d241277b2bdbfaffaf285e8001c88c1376cbc1021
++
+ [http://downloads.sourceforge.net/curlftpfs/curlftpfs-0.9.2.tar.gz]
+ md5=b452123f755114cd4461d56c648d9f12
+ sha256=4eb44739c7078ba0edde177bdd266c4cfb7c621075f47f64c85a06b12b3c6958
+diff --git a/recipes/curl/curl-native_7.19.6.bb b/recipes/curl/curl-native_7.19.6.bb
+new file mode 100644
+index 0000000..2f49ad1
+--- /dev/null
++++ b/recipes/curl/curl-native_7.19.6.bb
+@@ -0,0 +1,11 @@
++require curl-common.inc
++inherit native
++DEPENDS = "zlib-native"
++
++do_stage () {
++	autotools_stage_all
++}
++
++do_install() {
++	:
++}
+diff --git a/recipes/curl/curl_7.19.6.bb b/recipes/curl/curl_7.19.6.bb
+new file mode 100644
+index 0000000..d5ca1bb
+--- /dev/null
++++ b/recipes/curl/curl_7.19.6.bb
+@@ -0,0 +1,4 @@
++require curl-common.inc
++require curl-target.inc
++
++SRC_URI += "file://off_t_abi_fix.patch;patch=1;pnum=0"
+-- 
+1.6.3
 
 
 
