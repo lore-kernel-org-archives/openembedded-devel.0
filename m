@@ -1,36 +1,28 @@
-Received: from [209.85.160.83] (helo=mail-pw0-f83.google.com)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rk.raggit@gmail.com>) id 1N1IDu-00061d-Hv
+	(envelope-from <holger+oe@freyther.de>) id 1N1IQX-0006bb-VN
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Oct 2009 13:22:25 +0200
-Received: by pwi3 with SMTP id 3so594182pwi.12
+	Fri, 23 Oct 2009 13:35:29 +0200
+Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
+	[123.192.145.111])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 3CA121B10C04
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Oct 2009 04:21:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=DwAgMiPttkUu7F2NX+P7kyK1UWqAHhliPBFUEftmk8Q=;
-	b=fYQvCvMpG7De0fs7SUf5/YQuj05XbLvsK+sYYW6KlI7i1guzkeiC/w6lo/KLoSOLEp
-	NWxo7pKiRCrp4D0rmfRTHEemP8Xl/XvaR2K3OpRF6m7JKMIlDIIDpSMBO7XaQ7tyNLMG
-	eDOWBit5gKYVUFRkmUDWKPbIEivZo0arAnPWY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=Ux8iwELu/ezODPnkSTYC14PzRD1WwCwNEC/BmIargIHi8681iuBI8+BY2vRuoRpC0H
-	IWvYn3gSIAeAWjAPnyuzuhkLFGdyhvvUOj7sSaOpjitMMUhXeyath9iOQSeA9Z69GLsZ
-	fYjPOBGBqMr1rWH8TlX9sga6Px0hVkfeORV5U=
-MIME-Version: 1.0
-Received: by 10.140.132.9 with SMTP id f9mr1826900rvd.234.1256296878056; Fri, 
-	23 Oct 2009 04:21:18 -0700 (PDT)
-Date: Fri, 23 Oct 2009 16:51:18 +0530
-Message-ID: <ec1f3d400910230421r4509e19amc899870bdd640ce5@mail.gmail.com>
-From: RK Raggit <rk.raggit@gmail.com>
+	Fri, 23 Oct 2009 11:43:37 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.83
-X-SA-Exim-Mail-From: rk.raggit@gmail.com
+Date: Fri, 23 Oct 2009 13:34:13 +0200
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <200910230504.57681.holger+oe@freyther.de>
+	<hbru1e$m80$1@ger.gmane.org>
+	<1256296026.9503.26.camel@hammer.suse.cz>
+In-Reply-To: <1256296026.9503.26.camel@hammer.suse.cz>
+MIME-Version: 1.0
+Message-Id: <200910231334.13581.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: [help] openembedded tarball sources on HTTP
+Subject: Re: Revert "package bbclass: strip static libs as well"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,23 +36,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2009 11:22:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 23 Oct 2009 11:35:29 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Hi there,
+On Friday 23 October 2009 13:07:06 Stanislav Brabec wrote:
+> Koen Kooi wrote:
+> > On 23-10-09 11:33, Holger Hans Peter Freyther wrote:
+> > > The last bit is that I would like to put /usr/lib/libc_nonshared.a into
+> > > the libc-dev package
+> >
+> > Glibc has its own custom packaging, which we'll probably need to tweaks
+> > as well.
+> 
+> I think that the logic should be:
+> 
+> libfoo.a exists and libfoo.so exists => put .a to -static.
+> 
+> libfoo.a exists and libfoo.so does not exist => put .a to -dev.
+> 
+> This logic will work as most users expect and will need no exception for
+> glibc.
 
-I am building openembedded recipes but i am behind a proxy that only allows
-http accesses and blocks cvs,svn ports.
+This will add even more python code to package.bbclass and can not be realized 
+with a FILES_* change. I would prefer a stupid QA check for that as I don't 
+expect this to happen on many packages.
 
-I would like to know where i can obtain pristine OE package (tarball)
-sources from a HTTP link. I tried
 
-http://oesources.org/source/current
+z.
 
-...but that link does not work. Could someone please guide me the correct
-link ? I will update my CVS_TARBALL_STASH
-variable with this link.
-
-Thanks
-RK
 
