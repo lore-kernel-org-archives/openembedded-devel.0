@@ -1,25 +1,31 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1N1FSB-00021c-4C
+	(envelope-from <philb@gnu.org>) id 1N1FeF-0001G5-Fb
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Oct 2009 10:24:58 +0200
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 0B3971B10C04
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Oct 2009 08:33:06 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Fri, 23 Oct 2009 10:37:26 +0200
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N1FdE-00034U-Es
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Oct 2009 09:36:20 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1N1FdE-00037R-5q
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Oct 2009 09:36:20 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Oct 2009 10:23:43 +0200
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+In-Reply-To: <200910231023.43911.holger+oe@freyther.de>
 References: <200910230504.57681.holger+oe@freyther.de>
-	<200910230930.00314.holger+oe@freyther.de>
-	<hbrnn4$1kd$1@ger.gmane.org>
-In-Reply-To: <hbrnn4$1kd$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200910231023.43911.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+	<200910230930.00314.holger+oe@freyther.de> <hbrnn4$1kd$1@ger.gmane.org>
+	<200910231023.43911.holger+oe@freyther.de>
+Date: Fri, 23 Oct 2009 09:36:16 +0100
+Message-Id: <1256286976.4529.117.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Revert "package bbclass: strip static libs as well"
@@ -36,38 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2009 08:24:58 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 23 Oct 2009 08:37:26 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Friday 23 October 2009 09:58:28 Koen Kooi wrote:
+On Fri, 2009-10-23 at 10:23 +0200, Holger Hans Peter Freyther wrote:
+> One thing that pops back into my mind is to move .a files into a -static 
+> package? People that want to link statically can pick their .a files.
 
-> > Why do you need .a files on the device? Is this normal operation or only
-> > when installing -dev packages?
-> 
-> When installing -dev packages, yes. For example on the touchbook default
-> image we ship a toolchain and -dev packages for clutter to allow people
-> to build things on the target. By stripping the .a files we save about
-> 200MiB.
-> 
-> I can think of a few solutions:
-> 
-> * build toolchain packages with -ggdbN where N < 3
-> * use a safer stripping option in package.bbclass
-> * blacklist libc_nonshared.a
-> 
-> Do you have more solutions and which do you prefer? I really like to
-> avoid blowing up -dev packages if we can safely strip (most of) them.
+Yes, I think someone else proposed this a few weeks ago but it doesn't
+seem to have happened.  Given that static linking is pretty much a
+minority pursuit nowadays (excepting libc_noshared.a) this sounds like a
+fine idea.
 
-I see. Yeah the -ggdb3 can make things quite big. The problem is if I want to 
-link statically and debug having debug symbols and symbols around is quite 
-helpful. Currently the .a files are just plain broken (worse than not 
-installing).
+Stripping .a files with the default options will effectively destroy
+them so the current state of affairs is definitely silly.  If you are
+going to do that then you might as well just delete the files: they are
+no use for anything after stripping.
 
-One thing that pops back into my mind is to move .a files into a -static 
-package? People that want to link statically can pick their .a files.
+An alternative (or an addition) to the -static packaging would be to
+arrange for .a files (and .o files, I guess) to be stripped with "strip
+--strip-debug" (or perhaps --strip-unneeded).  This should leave enough
+symbol data in the files for them to remain usable.  
 
-z.
+p.
+
+
 
 
