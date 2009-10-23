@@ -1,32 +1,37 @@
-Received: from [213.186.62.213] (helo=30.mail-out.ovh.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1N1LZr-0005hP-CZ
-	for openembedded-devel@openembedded.org; Fri, 23 Oct 2009 16:57:18 +0200
-Received: (qmail 11994 invoked by uid 503); 23 Oct 2009 14:56:16 -0000
-Received: from b7.ovh.net (HELO mail437.ha.ovh.net) (213.186.33.57)
-	by 30.mail-out.ovh.net with SMTP; 23 Oct 2009 14:56:16 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 23 Oct 2009 14:56:23 -0000
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 23 Oct 2009 14:56:22 -0000
-Message-ID: <4AE1C40B.7050809@eukrea.com>
-Date: Fri, 23 Oct 2009 16:56:11 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+Received: from [80.91.229.12] (helo=lo.gmane.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1N1OTk-0007UZ-CY for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Oct 2009 20:03:11 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N1OSl-00081Q-IW
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Oct 2009 20:02:07 +0200
+Received: from porcuswine.cbnco.com ([207.164.182.8])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Oct 2009 20:02:07 +0200
+Received: from msmith by porcuswine.cbnco.com with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Oct 2009 20:02:07 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4AE0BEFA.4020905@mlbassoc.com>	<19c1b8a90910221735t5c91498ft9a692cd75c442db4@mail.gmail.com>
-	<200910230326.13922.holger+oe@freyther.de>
-In-Reply-To: <200910230326.13922.holger+oe@freyther.de>
-X-Ovh-Tracer-Id: 14129199407302487369
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 213.186.62.213
-X-SA-Exim-Mail-From: eric@eukrea.com
+From: Michael Smith <msmith@cbnco.com>
+Date: Fri, 23 Oct 2009 18:01:44 +0000 (UTC)
+Message-ID: <loom.20091023T200112-934@post.gmane.org>
+References: <1255966150-1854-1-git-send-email-marcin@juszkiewicz.com.pl>
+	<1255966150-1854-13-git-send-email-marcin@juszkiewicz.com.pl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 207.164.182.8 (Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1.8) Gecko/20071015 SUSE/2.0.0.8-1.2 Firefox/2.0.0.8)
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: SDK problems
+Subject: Re: [PATCH 12/12] linux 2.6.31: update to latest stable patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,22 +45,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2009 14:57:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 23 Oct 2009 18:03:11 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Hi Holger,
+Marcin Juszkiewicz <marcin <at> juszkiewicz.com.pl> writes:
 
-Holger Hans Peter Freyther a écrit :
-> thanks to Khem on irc and pointing me to -Wl,-verbose there is something fishy 
-> with the libc_nonshared.a in the SDK. I have no idea what kind of problem but 
-> the workaround is to copy libc_nonshared.a from the OE staging to
 > 
-> /usr/local/angstrom/arm/arm-angstrom-linux-gnueabi/usr/lib.
 > 
-works fine here both for meta-toolchain & meta-toolchain-qte.
+> Signed-off-by: Marcin Juszkiewicz <marcin <at> juszkiewicz.com.pl>
+> ---
+>  recipes/linux/linux_2.6.31.bb |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
 
-Thanks,
-Eric
+Acked-By: Michael Smith <msmith@cbnco.com>
+
 
 
