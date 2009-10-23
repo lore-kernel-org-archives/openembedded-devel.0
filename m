@@ -1,40 +1,37 @@
-Received: from [74.125.92.150] (helo=qw-out-1920.google.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1N1Pzo-0006LM-Bk
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1N1QAo-00022L-Ob for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Oct 2009 21:51:45 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N1Q9p-0006Qg-T7
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Oct 2009 21:40:23 +0200
-Received: by qw-out-1920.google.com with SMTP id 4so1271732qwk.36
+	Fri, 23 Oct 2009 21:50:41 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Oct 2009 21:50:41 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Oct 2009 12:39:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=dEy1dN1soSX+OcEXFn6nipUvnrr9tAVe7PWQxd/zERc=;
-	b=nuA2PR7ipr5n2f7vdLgoKwh5XF7jiIQUV+V3/f+z46DqyRLdVytNnWF7Ttk3babBbc
-	zHmdD6+tR7fTkhodnf3FmuzbTDkngzQcpw8h0t+DGpvtaaRaszqrbuLaQJctSzUkgyJX
-	5o/4MlhFYEMXCMmo7r6hrw52YU9H/E0AkbDw0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=omyTbQN4u9hpzHiJmRb5Lyl/z8zmuh2DNDeH0bdHxayIFlaUIleCTug/A/ykza2OOH
-	mR3wSn+AfjI8ufe3AISTzeiOdaykfkN/x+LEvNzqyboCWzq0SFMlborxf0p7GmZ5L2zU
-	gksGSs46a/1NgED/a8hzYejUntfsREj9tkvbw=
-MIME-Version: 1.0
-Received: by 10.229.40.200 with SMTP id l8mr201667qce.104.1256326758617; Fri, 
-	23 Oct 2009 12:39:18 -0700 (PDT)
-In-Reply-To: <4AE1B7D6.8070904@epfl.ch>
-References: <4AE0BEFA.4020905@mlbassoc.com>
-	<19c1b8a90910221735t5c91498ft9a692cd75c442db4@mail.gmail.com>
-	<200910230326.13922.holger+oe@freyther.de> <4AE1B7D6.8070904@epfl.ch>
-Date: Fri, 23 Oct 2009 12:39:18 -0700
-Message-ID: <19c1b8a90910231239w7230fd66h39c5b4ce0beb9428@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 23 Oct 2009 21:50:41 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.92.150
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 23 Oct 2009 21:50:21 +0200
+Message-ID: <hbt1dt$ccm$1@ger.gmane.org>
+References: <381446.79903.qm@web53903.mail.re2.yahoo.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <381446.79903.qm@web53903.mail.re2.yahoo.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: SDK problems
+Subject: Re: omap3-console-image broken?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,48 +45,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2009 19:40:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 23 Oct 2009 19:51:46 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Oct 23, 2009 at 7:04 AM, Valentin Longchamp
-<valentin.longchamp@epfl.ch> wrote:
-> Holger Hans Peter Freyther wrote:
->>
->> On Friday 23 October 2009 02:35:31 Khem Raj wrote:
->>
->>> One reason could be that its not getting right libc to link with. You
->>> could check <staging>/usr/lib/libc.so
->>> and it should be a text file which points to right libc to link with.
->>> On glibc it was different than in eglibc
->>> eglibc one should work. I do not know about glibc as I do not have
->>> working version of glibc here.
->>
->> Okay,
->>
->> thanks to Khem on irc and pointing me to -Wl,-verbose there is something
->> fishy with the libc_nonshared.a in the SDK. I have no idea what kind of
->> problem but the workaround is to copy libc_nonshared.a from the OE staging
->> to
->>
->> /usr/local/angstrom/arm/arm-angstrom-linux-gnueabi/usr/lib.
->>
->
-> Thanks for the workaround, it works for me. Any idea/hint on how to correct
-> this ?
+On 23-10-09 21:30, Charlie Woloszynski wrote:
+> I am trying to build an omap3-console-image, but i get the following error.
 
-As Holger pointed out on IRC it could be becasue static library is
-being stripped.
-so stop this stripping
+There is no omap3-console-image in OE, so it can't be broken. If you are 
+using some branch you need to take this issue up with the people that 
+provided you said branch.
 
->
-> Regards
->
-> Valentin
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Koen
+
 
 
