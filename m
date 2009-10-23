@@ -1,34 +1,29 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.ott.cti.com>) id 1N1Pas-0004Mc-C1
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Oct 2009 21:14:37 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id AC8905A861A;
-	Fri, 23 Oct 2009 15:13:32 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 13671-06; Fri, 23 Oct 2009 15:13:32 -0400 (EDT)
-Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id AE3255A861C; Fri, 23 Oct 2009 15:13:30 -0400 (EDT)
-Received: from sles10-64.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id 772885A860B;
-	Fri, 23 Oct 2009 15:13:24 -0400 (EDT)
-Received: by sles10-64.ott.cti.com (Postfix, from userid 1000)
-	id 18F5F40AA2; Fri, 23 Oct 2009 15:13:24 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Oct 2009 15:13:22 -0400
-Message-Id: <1256325202-8516-2-git-send-email-msmith@cbnco.com>
-X-Mailer: git-send-email 1.6.3
-In-Reply-To: <1256325202-8516-1-git-send-email-msmith@cbnco.com>
-References: <1256325202-8516-1-git-send-email-msmith@cbnco.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: michael@sles10-64.ott.cti.com
+Received: from [206.190.36.126] (helo=web53903.mail.re2.yahoo.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <cwoloszynski@yahoo.com>) id 1N1PrD-0005ve-Gs
+	for Openembedded-devel@openembedded.org; Fri, 23 Oct 2009 21:31:30 +0200
+Received: (qmail 79970 invoked by uid 60001); 23 Oct 2009 19:30:24 -0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024;
+	t=1256326224; bh=6x8tRCBF+ANIvxkemx+FHtQiianfntB4yZdycedol6g=;
+	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type;
+	b=UwtF+FAcjrpY03WOj15FkJkMe1DpWkQyx1oHiAE0wnBF+AFESBbqJqtPDOu6E9D/h12/fWF2IwP3Bfhk2yjXOLHv8TZQwP964zJwmG1UWUsTdYGoFpMJ/u1pXKKuvn3/u6ykNasnepf1eNU8pEWgWKSfw/wdPSyW+lmix+sre48=
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=yahoo.com;
+	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type;
+	b=SfSTQCayjHSnMdkTF1ZVWZkPnsBh6l/WOezk72Lp0rl0mkedDQyu1/8FiCWJDAdF2OMUnrBlr4sAfPpEMpe/ptFo9sy5StY0qisR6YxzalhaB40BzSHVlPrgDG+j/mR0I9hGC0iDwUr3CZg8m6UgWH6rakXkx4LTx7sY5QX3ROg=;
+Message-ID: <381446.79903.qm@web53903.mail.re2.yahoo.com>
+X-YMail-OSG: FD0N0OIVM1nwCr2GDCGdt2IB58dMyAbUuy_EsiCjcdvpT7spGj50WmvrSSqavbyehPX7IfXVpY7gB8JqTYrcSo1bWmNvXVZGejgM_x67p2PtpEee_uPvxHg3Dndl6t15iquXmE_KZ6Gl1Ceudde3LCerQshjSe2Jxu7gVJTRyA7lcpydHiEje.I61h.egPHo7BVZby9F0dvmc.YDiBmt8S9ZfFrEy4GKkq_tepknSqoPPOILM1b4ROZjeZIYilXWbk306dTZPEIl91l6HTJMvKjUGZF2qCI.ZL0jn.UfHyZ5eVqydZ0U9qvtZMnmCxb1CEIGmRtgQglQAAIvy0uu878YqLbsv6L3UmmWr3uTJo.pVeLQEVOSF_.eRsrynfakcJawPMLInMRWD2rERd2Xos.KTZzD
+Received: from [68.100.74.251] by web53903.mail.re2.yahoo.com via HTTP;
+	Fri, 23 Oct 2009 12:30:23 PDT
+X-Mailer: YahooMailRC/182.10 YahooMailWebService/0.7.347.3
+Date: Fri, 23 Oct 2009 12:30:23 -0700 (PDT)
+From: Charlie Woloszynski <cwoloszynski@yahoo.com>
+To: Openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 206.190.36.126
+X-SA-Exim-Mail-From: cwoloszynski@yahoo.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 2/2] curl: support openssl in CURL_FEATURES.
+Subject: omap3-console-image broken?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,62 +37,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2009 19:14:37 -0000
+X-List-Received-Date: Fri, 23 Oct 2009 19:31:30 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Default is still gnutls.
+I am trying to build an omap3-console-image, but i get the following error.  
 
-Bump PR for curl-7.19.6.
+I have done a 'git pull' for org.openembedded.dev this morning
 
-Signed-off-by: Michael Smith <msmith@cbnco.com>
----
- recipes/curl/curl-common.inc |    8 ++++++--
- recipes/curl/curl_7.19.6.bb  |    1 +
- 2 files changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/curl/curl-common.inc b/recipes/curl/curl-common.inc
-index ce4f5f2..06d539f 100644
---- a/recipes/curl/curl-common.inc
-+++ b/recipes/curl/curl-common.inc
-@@ -7,7 +7,7 @@ SRC_URI = "http://curl.haxx.se/download/curl-${PV}.tar.bz2 \
- S = "${WORKDIR}/curl-${PV}"
- 
- CURL_FEATURES ?= "zlib,gnutls,cookies,crypto-auth,dict,file,ftp,http,telnet,tftp"
--# other allowed features: ipv6, ares
-+# other allowed features: ipv6, ares, openssl
- 
- inherit autotools pkgconfig binconfig
- 
-@@ -15,7 +15,6 @@ EXTRA_OECONF = " \
-                 --without-libssh2 \
- 		--with-random=/dev/urandom \
- 		--without-libidn \
--                --without-ssl \
- 		"
- 
- python __anonymous() {
-@@ -37,6 +36,11 @@ python __anonymous() {
-                 deps.append("gnutls")
-         else:
-                 oeconf += " --without-gnutls"
-+        if 'openssl' in f:
-+                oeconf += " --with-ssl=${STAGING_LIBDIR}/../"
-+                deps.append("openssl")
-+        else:
-+                oeconf += " --without-ssl"
-         if 'ares' in f:
-                 oeconf += " --enable-ares"
-                 deps.append("c-ares")
-diff --git a/recipes/curl/curl_7.19.6.bb b/recipes/curl/curl_7.19.6.bb
-index d5ca1bb..f67dcdb 100644
---- a/recipes/curl/curl_7.19.6.bb
-+++ b/recipes/curl/curl_7.19.6.bb
-@@ -2,3 +2,4 @@ require curl-common.inc
- require curl-target.inc
- 
- SRC_URI += "file://off_t_abi_fix.patch;patch=1;pnum=0"
-+PR = "r1"
--- 
-1.6.3
+NOTE: Running task 1038 of 4072 (ID: 1010, /home/charlie/pixhawk.oe/org.openembedded.dev/recipes/linux/linux-omap3_2.6.29.bb, do_fetch)
+fatal: Not a git repository
+NOTE: Task failed: Fetch failed: Fetch command export HOME=/home/charlie; export PATH=/home/charlie/pixhawk.oe/tmp/staging/i686-linux/usr/bin/overo-angstrom-linux-gnueabi:/home/charlie/pixhawk.oe/tmp/staging/i686-linux/usr/bin/armv7a-angstrom-linux-gnueabi:/home/charlie/pixhawk.oe/tmp/staging/i686-linux/usr/sbin:/home/charlie/pixhawk.oe/tmp/staging/i686-linux/usr/bin:/home/charlie/pixhawk.oe/tmp/cross/armv7a/bin:/home/charlie/pixhawk.oe/tmp/staging/i686-linux/sbin:/home/charlie/pixhawk.oe/tmp/staging/i686-linux/bin:/home/charlie/pixhawk.oe/bitbake/bin:/home/charlie/pixhawk.oe/bitbake/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games; git fetch git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6.git master failed with signal 128, output:
+fatal: Not a git repository
 
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /home/charlie/pixhawk.oe/org.openembedded.dev/recipes/linux/linux-omap3_2.6.29.bb do_fetch failed
+ERROR: Task 1010 (/home/charlie/pixhawk.oe/org.openembedded.dev/recipes/linux/linux-omap3_2.6.29.bb, do_fetch) failed
+NOTE: Tasks Summary: Attempted 1037 tasks of which 1032 didn't need to be rerun and 1 failed.
+ERROR: '/home/charlie/pixhawk.oe/org.openembedded.dev/recipes/linux/linux-omap3_2.6.29.bb' failed
+
+Any ideas on how to address this?
+
+Charlie
+
+
+      
 
 
