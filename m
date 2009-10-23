@@ -1,38 +1,32 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [212.27.42.4] (helo=smtp4-g21.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1N1F3x-00025S-2O for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Oct 2009 09:59:56 +0200
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1N1F2y-0007Ld-L1
+	(envelope-from <jeremy.laine@bolloretelecom.eu>) id 1N1FEE-0002rQ-Mv
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Oct 2009 09:58:52 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Oct 2009 09:58:52 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Fri, 23 Oct 2009 10:10:33 +0200
+Received: from smtp4-g21.free.fr (localhost [127.0.0.1])
+	by smtp4-g21.free.fr (Postfix) with ESMTP id 7ABA24C80EE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Oct 2009 09:58:52 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 23 Oct 2009 10:09:27 +0200 (CEST)
+Received: from sharky.jerryweb.org (mna75-4-81-56-56-40.fbx.proxad.net
+	[81.56.56.40])
+	by smtp4-g21.free.fr (Postfix) with ESMTP id 94D864C8113
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Oct 2009 10:09:25 +0200 (CEST)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by sharky.jerryweb.org (Postfix) with ESMTP id 2A57D18405F
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Oct 2009 10:09:25 +0200 (CEST)
+Message-ID: <4AE164B5.20001@bolloretelecom.eu>
+Date: Fri, 23 Oct 2009 10:09:25 +0200
+From: =?ISO-8859-1?Q?Jeremy_Lain=E9?= <jeremy.laine@bolloretelecom.eu>
+User-Agent: Mozilla-Thunderbird 2.0.0.22 (X11/20090701)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 23 Oct 2009 09:58:28 +0200
-Message-ID: <hbrnn4$1kd$1@ger.gmane.org>
-References: <200910230504.57681.holger+oe@freyther.de>	<hbrlkn$qt7$1@ger.gmane.org>
-	<200910230930.00314.holger+oe@freyther.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <200910230930.00314.holger+oe@freyther.de>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 212.27.42.4
+X-SA-Exim-Mail-From: jeremy.laine@bolloretelecom.eu
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Revert "package bbclass: strip static libs as well"
+Subject: [PATCH][RFC] update-rc.d.bbclass vs dpkg issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,53 +40,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2009 07:59:56 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 23 Oct 2009 08:10:34 -0000
+Content-Type: multipart/mixed; boundary="------------090409070603020609070906"
+
+--------------090409070603020609070906
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+Having recently switch from opkg to dpkg, I encountered some problems whe=
+n upgrading
+packages which use the update-rc.d class. The problem are that update-rc.=
+d :
+
+a/ unconditionally calls "${INIT_D_DIR}/${INITSCRIPT_NAME} stop" in the p=
+rerm script. This
+is wrong, it should only do so when the prerm script is called for the "u=
+pgrade" and
+"remove" steps.
+
+b/ unconditionally calls "update-rc.d $OPT ${INITSCRIPT_NAME} remove" in =
+the postrm
+script. This is wrong, it should only do so when the prerm script is call=
+ed for the
+"purge" step. However, "opkg" does not seem to support the "purge" step s=
+o I suggest
+calling it both for the "remove" and "purge" steps, after checking that t=
+he init script no
+longer exists.
+
+You can find a description of how maintainer scripts are called by dpkg a=
+t:
+
+http://www.debian.org/doc/debian-policy/ch-maintainerscripts.html
+
+Attached is a patch which fixes both issues. I'd appreciate comments on t=
+his one as
+update-rc.d.bbclass is widely used.
+
+--=20
+Jeremy LAINE
+Bollor=E9 telecom | 11bis, rue Scribe | F-75009 Paris
+
+--------------090409070603020609070906
+Content-Type: text/x-diff;
+ name="update-rc-d-class.patch"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename="update-rc-d-class.patch"
 
-On 23-10-09 09:30, Holger Hans Peter Freyther wrote:
-> On Friday 23 October 2009 09:23:03 Koen Kooi wrote:
->
->>> I don't think we need to strip .a files as they will not end on the
->>> device
->>
->> They do actually
->>
->>> and people will link their binaries to them and we will strip the
->>> binaries.
->>
->> There was a discussion about that and I didn't see people objection, the
->> only point of contention was where to package the debug symbols. How do
->> you propropose to solve the problem that the .a files are huge?
->> Also, you don't mention any problems, you only say "I [..] think", which
->> usually isn't a good enough reason to revert stuff :)
->
-> The above commits cause build problems and break the "toolchain" (native,
-> cross-sdk) at runtime. The toolchain is broken as all symbols are stripped out
-> of the libc_nonshared.a.
+diff --git a/classes/update-rc.d.bbclass b/classes/update-rc.d.bbclass
+index 91af859..4744806 100644
+--- a/classes/update-rc.d.bbclass
++++ b/classes/update-rc.d.bbclass
+@@ -16,17 +16,27 @@ update-rc.d $OPT ${INITSCRIPT_NAME} ${INITSCRIPT_PARAMS}
+ 
+ updatercd_prerm() {
+ if test "x$D" = "x"; then
+-	${INIT_D_DIR}/${INITSCRIPT_NAME} stop
++	if test "$1" = "upgrade" -o "$1" = "remove"; then
++		${INIT_D_DIR}/${INITSCRIPT_NAME} stop
++	fi
+ fi
+ }
+ 
++# Note: to be Debian compliant, we should only invoke update-rc.d remove
++# in the "purge" step, but opkg does not support it. So instead we also
++# run it at the "remove" step in the init script no longer exists.
++
+ updatercd_postrm() {
+ if test "x$D" != "x"; then
+ 	OPT="-r $D"
+ else
+ 	OPT=""
+ fi
+-update-rc.d $OPT ${INITSCRIPT_NAME} remove
++if test "$1" = "remove" -o "$1" = "purge"; then
++	if ! test -e "${INIT_D_DIR}/${INITSCRIPT_NAME}"; then
++		update-rc.d $OPT ${INITSCRIPT_NAME} remove
++	fi
++fi
+ }
+ 
+ 
 
-Ah, that's not nice
-
-> Why do you need .a files on the device? Is this normal operation or only when
-> installing -dev packages?
-
-When installing -dev packages, yes. For example on the touchbook default 
-image we ship a toolchain and -dev packages for clutter to allow people 
-to build things on the target. By stripping the .a files we save about 
-200MiB.
-
-I can think of a few solutions:
-
-* build toolchain packages with -ggdbN where N < 3
-* use a safer stripping option in package.bbclass
-* blacklist libc_nonshared.a
-
-Do you have more solutions and which do you prefer? I really like to 
-avoid blowing up -dev packages if we can safely strip (most of) them.
-
-regards,
-
-Koen
-
-
-
+--------------090409070603020609070906--
