@@ -1,38 +1,36 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [209.85.160.83] (helo=mail-pw0-f83.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1N1I08-0003KZ-TP
+	(envelope-from <rk.raggit@gmail.com>) id 1N1IDu-00061d-Hv
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Oct 2009 13:08:11 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 11236140972D
+	Fri, 23 Oct 2009 13:22:25 +0200
+Received: by pwi3 with SMTP id 3so594182pwi.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Oct 2009 13:03:26 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5Zb0YBOFMi1H
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Oct 2009 13:03:26 +0200 (CEST)
-Received: from [10.20.1.86] (nat.scz.novell.com [213.151.88.252])
-	by ns.penguin.cz (Postfix) with ESMTP id E4615140971E
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Oct 2009 13:03:24 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	Fri, 23 Oct 2009 04:21:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=DwAgMiPttkUu7F2NX+P7kyK1UWqAHhliPBFUEftmk8Q=;
+	b=fYQvCvMpG7De0fs7SUf5/YQuj05XbLvsK+sYYW6KlI7i1guzkeiC/w6lo/KLoSOLEp
+	NWxo7pKiRCrp4D0rmfRTHEemP8Xl/XvaR2K3OpRF6m7JKMIlDIIDpSMBO7XaQ7tyNLMG
+	eDOWBit5gKYVUFRkmUDWKPbIEivZo0arAnPWY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=Ux8iwELu/ezODPnkSTYC14PzRD1WwCwNEC/BmIargIHi8681iuBI8+BY2vRuoRpC0H
+	IWvYn3gSIAeAWjAPnyuzuhkLFGdyhvvUOj7sSaOpjitMMUhXeyath9iOQSeA9Z69GLsZ
+	fYjPOBGBqMr1rWH8TlX9sga6Px0hVkfeORV5U=
+MIME-Version: 1.0
+Received: by 10.140.132.9 with SMTP id f9mr1826900rvd.234.1256296878056; Fri, 
+	23 Oct 2009 04:21:18 -0700 (PDT)
+Date: Fri, 23 Oct 2009 16:51:18 +0530
+Message-ID: <ec1f3d400910230421r4509e19amc899870bdd640ce5@mail.gmail.com>
+From: RK Raggit <rk.raggit@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hbru1e$m80$1@ger.gmane.org>
-References: <200910230504.57681.holger+oe@freyther.de>
-	<1256286976.4529.117.camel@mill.internal.reciva.com>
-	<hbrs68$gbd$1@ger.gmane.org> <200910231133.11053.holger+oe@freyther.de>
-	<hbru1e$m80$1@ger.gmane.org>
-Date: Fri, 23 Oct 2009 13:07:06 +0200
-Message-Id: <1256296026.9503.26.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.0 
-X-SA-Exim-Connect-IP: 84.21.108.25
-X-SA-Exim-Mail-From: utx@penguin.cz
+X-SA-Exim-Connect-IP: 209.85.160.83
+X-SA-Exim-Mail-From: rk.raggit@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Revert "package bbclass: strip static libs as well"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: [help] openembedded tarball sources on HTTP
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,48 +44,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2009 11:08:12 -0000
-Content-Type: text/plain; charset="ISO-8859-2"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 23 Oct 2009 11:22:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Koen Kooi wrote:
-> On 23-10-09 11:33, Holger Hans Peter Freyther wrote:
+Hi there,
 
-> > The last bit is that I would like to put /usr/lib/libc_nonshared.a into the
-> > libc-dev package
-> 
-> Glibc has its own custom packaging, which we'll probably need to tweaks 
-> as well.
+I am building openembedded recipes but i am behind a proxy that only allows
+http accesses and blocks cvs,svn ports.
 
-I think that the logic should be:
+I would like to know where i can obtain pristine OE package (tarball)
+sources from a HTTP link. I tried
 
-libfoo.a exists and libfoo.so exists => put .a to -static.
+http://oesources.org/source/current
 
-libfoo.a exists and libfoo.so does not exist => put .a to -dev.
+...but that link does not work. Could someone please guide me the correct
+link ? I will update my CVS_TARBALL_STASH
+variable with this link.
 
-This logic will work as most users expect and will need no exception for
-glibc.
-
-
-But I would do even one step forward:
-
-In last 12 years I did not need any of system static library instances.
-With exception of bootloader authors, almost nobody else needs static
-libraries.
-
-That is why I would like to introduce new global default:
---disable-static (via variable, site config or so).
-
-Only packages that explicitly require or explicitly build the static
-library will have them (in -dev or -static sub-package, see above).
-
-Distributions that build all-in-one binary can enable it in the
-per-distro config, all other distros will remain without nearly all
-static libraries.
-
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
-
-
+Thanks
+RK
 
