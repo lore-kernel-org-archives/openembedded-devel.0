@@ -1,26 +1,38 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N1Hpy-0002js-V3
-	for openembedded-devel@openembedded.org; Fri, 23 Oct 2009 12:57:42 +0200
-Received: (qmail 28045 invoked by uid 813007); 23 Oct 2009 10:56:37 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 23 Oct 2009 10:56:37 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <utx@penguin.cz>) id 1N1I08-0003KZ-TP
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Oct 2009 13:08:11 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 11236140972D
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Oct 2009 13:03:26 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 5Zb0YBOFMi1H
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Oct 2009 13:03:26 +0200 (CEST)
+Received: from [10.20.1.86] (nat.scz.novell.com [213.151.88.252])
+	by ns.penguin.cz (Postfix) with ESMTP id E4615140971E
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Oct 2009 13:03:24 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Oct 2009 12:58:39 +0200
-User-Agent: KMail/1.12.2 (Linux/2.6.32-rc3-00052-g0eca52a; KDE/4.3.2; x86_64; ;
-	)
-References: <1254931819-14007-1-git-send-email-marcin@juszkiewicz.com.pl>
-In-Reply-To: <1254931819-14007-1-git-send-email-marcin@juszkiewicz.com.pl>
-MIME-Version: 1.0
-Message-Id: <200910231258.40381.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+In-Reply-To: <hbru1e$m80$1@ger.gmane.org>
+References: <200910230504.57681.holger+oe@freyther.de>
+	<1256286976.4529.117.camel@mill.internal.reciva.com>
+	<hbrs68$gbd$1@ger.gmane.org> <200910231133.11053.holger+oe@freyther.de>
+	<hbru1e$m80$1@ger.gmane.org>
+Date: Fri, 23 Oct 2009 13:07:06 +0200
+Message-Id: <1256296026.9503.26.camel@hammer.suse.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.0 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [STABLE][PATCH 1/2] glibc/eglibc: remove calls to obsolete base_set_filespath()
+Subject: Re: Revert "package bbclass: strip static libs as well"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,29 +46,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2009 10:57:42 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 23 Oct 2009 11:08:12 -0000
+Content-Type: text/plain; charset="ISO-8859-2"
+Content-Transfer-Encoding: 7bit
 
-Dnia =B6roda, 7 pa=BCdziernika 2009 o 18:10:18 Marcin Juszkiewicz napisa=B3=
-(a):
-> From: Michael Smith <msmith@cbnco.com>
->=20
-> Some recipes can use the default FILESPATHPKG, others need to override.
+Koen Kooi wrote:
+> On 23-10-09 11:33, Holger Hans Peter Freyther wrote:
 
-ping?=20
+> > The last bit is that I would like to put /usr/lib/libc_nonshared.a into the
+> > libc-dev package
+> 
+> Glibc has its own custom packaging, which we'll probably need to tweaks 
+> as well.
 
-This was Acked by Koen Kooi but as this is glibc I would prefer to get seco=
-nd=20
-Ack.
+I think that the logic should be:
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+libfoo.a exists and libfoo.so exists => put .a to -static.
 
+libfoo.a exists and libfoo.so does not exist => put .a to -dev.
+
+This logic will work as most users expect and will need no exception for
+glibc.
+
+
+But I would do even one step forward:
+
+In last 12 years I did not need any of system static library instances.
+With exception of bootloader authors, almost nobody else needs static
+libraries.
+
+That is why I would like to introduce new global default:
+--disable-static (via variable, site config or so).
+
+Only packages that explicitly require or explicitly build the static
+library will have them (in -dev or -static sub-package, see above).
+
+Distributions that build all-in-one binary can enable it in the
+per-distro config, all other distros will remain without nearly all
+static libraries.
+
+-- 
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
 
