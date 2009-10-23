@@ -1,35 +1,25 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1N1GkM-0004sS-U3 for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Oct 2009 11:47:50 +0200
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1N1GjO-000084-A0
+	(envelope-from <holger+oe@freyther.de>) id 1N1Gru-0007YT-3Z
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Oct 2009 11:46:46 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Oct 2009 11:46:46 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Fri, 23 Oct 2009 11:55:38 +0200
+Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
+	[123.192.145.111])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 39A231B10C06
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Oct 2009 11:46:46 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 23 Oct 2009 10:03:45 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 23 Oct 2009 11:46:22 +0200
-Message-ID: <hbru1e$m80$1@ger.gmane.org>
-References: <200910230504.57681.holger+oe@freyther.de>	<1256286976.4529.117.camel@mill.internal.reciva.com>	<hbrs68$gbd$1@ger.gmane.org>
+Date: Fri, 23 Oct 2009 11:54:22 +0200
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <200910230504.57681.holger+oe@freyther.de>
 	<200910231133.11053.holger+oe@freyther.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <200910231133.11053.holger+oe@freyther.de>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	<hbru1e$m80$1@ger.gmane.org>
+In-Reply-To: <hbru1e$m80$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200910231154.22284.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Revert "package bbclass: strip static libs as well"
@@ -46,57 +36,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Oct 2009 09:47:51 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 23 Oct 2009 09:55:38 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On 23-10-09 11:33, Holger Hans Peter Freyther wrote:
-> On Friday 23 October 2009 11:14:48 Koen Kooi wrote:
->> On 23-10-09 10:36, Phil Blundell wrote:
->
->>> An alternative (or an addition) to the -static packaging would be to
->>> arrange for .a files (and .o files, I guess) to be stripped with "strip
->>> --strip-debug" (or perhaps --strip-unneeded).  This should leave enough
->>> symbol data in the files for them to remain usable.
->>
->> Something like this (but without the mailer induced linewrapping)?
->>
->> diff --git a/classes/package.bbclass b/classes/package.bbclass
->> index 046351a..2bf55e3 100644
->> --- a/classes/package.bbclass
->> +++ b/classes/package.bbclass
->> @@ -183,6 +183,9 @@ def runstrip(file, d):
->>            extraflags = "--remove-section=.comment --remove-section=.note
->> --strip-unneeded"
->>        elif "shared" in result or "executable" in result:
->>            extraflags = "--remove-section=.comment --remove-section=.note"
->> +       elif file.endswith(".a")::
->
-> one colon  please :)
+On Friday 23 October 2009 11:46:22 Koen Kooi wrote:
 
-Right :)
+> > and I would prefer to have debug symbols in there. you can always strip
+> > them out of the final binary but you can not add them when they are gone.
+> 
+> Installing foo-dbg doesn't work?
 
->> +                extraflags = "--remove-section=.comment --strip-debug"
->> +
->
-> and I would prefer to have debug symbols in there. you can always strip them
-> out of the final binary but you can not add them when they are gone.
+It will not. At least from my understanding of an .a archive. You will need to 
+get the symbols into the binary when statically linking, this will not happen 
+when they are in a .debug/liba.a.
 
-Installing foo-dbg doesn't work?
+Does this sound correct?
 
-> The last bit is that I would like to put /usr/lib/libc_nonshared.a into the
-> libc-dev package
-
-Glibc has its own custom packaging, which we'll probably need to tweaks 
-as well.
-
-Anyways, I'll start accumulating patches in 
-http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=koen/static-libs-rework 
-and change those to work in all your comments.
-
-regards,
-
-Koen
-
+	z.
 
 
