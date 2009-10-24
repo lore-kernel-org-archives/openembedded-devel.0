@@ -1,25 +1,27 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [206.46.173.15] (helo=vms173015pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1N1WSF-0007JF-4D
+	(envelope-from <denis@denix.org>) id 1N1XXC-0003dW-5F
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Oct 2009 04:34:10 +0200
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id C191F1B10C04
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Oct 2009 02:42:20 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Sat, 24 Oct 2009 05:43:21 +0200
+Received: from gandalf.denix.org ([71.251.63.147]) by vms173015.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KS0001Y12AE2KTZ@vms173015.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	23 Oct 2009 22:42:14 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3501D14AF60; Fri,
+	23 Oct 2009 23:42:14 -0400 (EDT)
+Date: Fri, 23 Oct 2009 23:42:14 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 24 Oct 2009 04:32:54 +0200
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+Message-id: <20091024034214.GA30861@denix.org>
 References: <200910230504.57681.holger+oe@freyther.de>
 	<1256301732.4529.161.camel@mill.internal.reciva.com>
-	<hbs95i$p6r$1@ger.gmane.org>
-In-Reply-To: <hbs95i$p6r$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200910240432.54335.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+	<hbs95i$p6r$1@ger.gmane.org> <200910240432.54335.holger+oe@freyther.de>
+MIME-version: 1.0
+In-reply-to: <200910240432.54335.holger+oe@freyther.de>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.15
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Revert "package bbclass: strip static libs as well"
@@ -36,20 +38,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Oct 2009 02:34:10 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 24 Oct 2009 03:43:21 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Friday 23 October 2009 14:56:18 Koen Kooi wrote:
-> How about this one:
-> http://dominion.thruhere.net/git/cgit.cgi/openembedded/commit/?h=koen/stati
-> c-libs-rework&id=bfa6dd452da52a4516a712f288030c3571ed6c4c ?
+On Sat, Oct 24, 2009 at 04:32:54AM +0200, Holger Hans Peter Freyther wrote:
+> On Friday 23 October 2009 14:56:18 Koen Kooi wrote:
+> > How about this one:
+> > http://dominion.thruhere.net/git/cgit.cgi/openembedded/commit/?h=koen/stati
+> > c-libs-rework&id=bfa6dd452da52a4516a712f288030c3571ed6c4c ?
+> 
+> Could you push this as shared/static-libs-rework or tell me how to git clone 
+> your tree?
 
-Could you push this as shared/static-libs-rework or tell me how to git clone 
-your tree?
+http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=koen/static-libs-rework
 
-love
-	z.
+-- 
+Denys
 
 
