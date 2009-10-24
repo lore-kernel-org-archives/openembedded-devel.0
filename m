@@ -1,31 +1,34 @@
 Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1N1i4y-0000qu-MX for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Oct 2009 16:58:55 +0200
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1N1i3z-0002PP-3n
+	id 1N1iPg-0003WH-E2 for openembedded-devel@lists.openembedded.org;
+	Sat, 24 Oct 2009 17:20:19 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N1iOg-000210-ND
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Oct 2009 16:57:51 +0200
+	Sat, 24 Oct 2009 17:19:14 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Oct 2009 16:57:51 +0200
+	Sat, 24 Oct 2009 17:19:14 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Oct 2009 16:57:51 +0200
+	Sat, 24 Oct 2009 17:19:14 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 24 Oct 2009 16:57:27 +0200
-Message-ID: <hbv4kn$4ao$1@ger.gmane.org>
-References: <hbuf0m$esa$1@ger.gmane.org> <1256390835.4307.0@zaurus>
+Date: Sat, 24 Oct 2009 17:18:51 +0200
+Message-ID: <hbv5sr$85i$1@ger.gmane.org>
+References: <200910230504.57681.holger+oe@freyther.de>	<hbru1e$m80$1@ger.gmane.org>
+	<1256296026.9503.26.camel@hammer.suse.cz>	<200910231334.13581.holger+oe@freyther.de>	<1256337084.9460.9.camel@utx.utx.cz>
+	<hbuf0m$esa$1@ger.gmane.org>
+	<1256393164.15214.46.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <1256390835.4307.0@zaurus>
+In-Reply-To: <1256393164.15214.46.camel@lenovo.internal.reciva.com>
 Sender: news <news@ger.gmane.org>
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -45,33 +48,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Oct 2009 14:58:55 -0000
+X-List-Received-Date: Sat, 24 Oct 2009 15:20:19 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 24-10-09 15:27, Stanislav Brabec wrote:
+On 24-10-09 16:06, Phil Blundell wrote:
+> On Sat, 2009-10-24 at 10:48 +0200, Koen Kooi wrote:
+>> On 24-10-09 00:31, Stanislav Brabec wrote:
 
->> And these wouldn't need special handling:
+
+>>> bison-2.3-r0: /usr/lib/liby.a
 >
-> All of them probably would need. For example without libgcc.a you will
-> not be able to compile.
+> That one is a special case: it wants to stay in the main bison package,
+> since bison itself is a development tool.  I'm not sure why it is a
+> static-only library; that might be an error.
+
+I put that in ${PN}: 
+http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=koen/static-libs-rework
+
+
+>>> flex-2.5.31-r4: /usr/lib/libfl.a
 >
->>   >  gcc-4.3.3-r7.1: /usr/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/
->> libgcc.a
+> This is like bison.
 
-Now please pay attention, since I'm saying this for the second time now:
+Ditto: 
+http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=koen/static-libs-rework
 
-"Actually it's /lib/*.a,/usr/lib/*.a -> static"
 
-So /usr/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/libgcc.a won't go into 
--static since it doesn't match /lib/*.a,/usr/lib/*.a
+>>> gcc-4.3.3-r7.1: /usr/lib/libstdc++_pic.a
+>>> gcc-4.3.3-r7.1: /usr/lib/libssp_nonshared.a
+>
+> Those are probably special.  I'm not quite sure what the deal is with
+> libstdc++_pic, that would need some further investigation.
+
+Gcc-package-*.inc overrides PACKAGES, so these won't be affected.
+
+>>> glibc-2.9-r35.2: /usr/lib/libc_nonshared.a
+>>> glibc-2.9-r35.2: /usr/lib/libmcheck.a
+>>> glibc-2.9-r35.2: /usr/lib/libg.a
+>>> glibc-2.9-r35.2: /usr/lib/libbsd-compat.a
+>>> glibc-2.9-r35.2: /usr/lib/libieee.a
+>>> glibc-2.9-r35.2: /usr/lib/libpthread_nonshared.a
+>
+> The nonshared ones are special.  The others belong in the -static
+> package.
+
+Already did that: 
+http://dominion.thruhere.net/git/cgit.cgi/openembedded/log/?h=koen/static-libs-rework
+
+I can run stanislavs scripts after the weekend to see if there are 
+anymore special packages.
+
+For people like Holger: you can add 
+git://dominion.thruhere.net/var/cache/git/openembedded.git as a remote 
+and fetch my branch from there.
 
 regards,
 
 Koen
-
-
-
 
 
 
