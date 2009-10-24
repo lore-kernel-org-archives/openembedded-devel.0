@@ -1,27 +1,35 @@
-Received: from [206.46.173.15] (helo=vms173015pub.verizon.net)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1N1XXC-0003dW-5F
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1N1cCZ-0003Tp-Jh for openembedded-devel@lists.openembedded.org;
+	Sat, 24 Oct 2009 10:42:23 +0200
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N1cBY-0001ph-LV
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Oct 2009 05:43:21 +0200
-Received: from gandalf.denix.org ([71.251.63.147]) by vms173015.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KS0001Y12AE2KTZ@vms173015.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	23 Oct 2009 22:42:14 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3501D14AF60; Fri,
-	23 Oct 2009 23:42:14 -0400 (EDT)
-Date: Fri, 23 Oct 2009 23:42:14 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Sat, 24 Oct 2009 10:41:16 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 24 Oct 2009 10:41:16 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 24 Oct 2009 10:41:16 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20091024034214.GA30861@denix.org>
-References: <200910230504.57681.holger+oe@freyther.de>
-	<1256301732.4529.161.camel@mill.internal.reciva.com>
-	<hbs95i$p6r$1@ger.gmane.org> <200910240432.54335.holger+oe@freyther.de>
-MIME-version: 1.0
-In-reply-to: <200910240432.54335.holger+oe@freyther.de>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.15
-X-SA-Exim-Mail-From: denis@denix.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 24 Oct 2009 10:40:54 +0200
+Message-ID: <hbueim$dpg$1@ger.gmane.org>
+References: <200910230504.57681.holger+oe@freyther.de>	<1256301732.4529.161.camel@mill.internal.reciva.com>	<hbs95i$p6r$1@ger.gmane.org>
+	<200910240432.54335.holger+oe@freyther.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <200910240432.54335.holger+oe@freyther.de>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Revert "package bbclass: strip static libs as well"
@@ -38,22 +46,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Oct 2009 03:43:21 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sat, 24 Oct 2009 08:42:24 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sat, Oct 24, 2009 at 04:32:54AM +0200, Holger Hans Peter Freyther wrote:
+On 24-10-09 04:32, Holger Hans Peter Freyther wrote:
 > On Friday 23 October 2009 14:56:18 Koen Kooi wrote:
-> > How about this one:
-> > http://dominion.thruhere.net/git/cgit.cgi/openembedded/commit/?h=koen/stati
-> > c-libs-rework&id=bfa6dd452da52a4516a712f288030c3571ed6c4c ?
-> 
-> Could you push this as shared/static-libs-rework or tell me how to git clone 
+>> How about this one:
+>> http://dominion.thruhere.net/git/cgit.cgi/openembedded/commit/?h=koen/stati
+>> c-libs-rework&id=bfa6dd452da52a4516a712f288030c3571ed6c4c ?
+>
+> Could you push this as shared/static-libs-rework or tell me how to git clone
 > your tree?
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=koen/static-libs-rework
+If you go to http://dominion.thruhere.net/git/cgit.cgi/openembedded/ 
+there's a 'Clone' section at the bottom.
 
--- 
-Denys
+regards,
+
+Koen
+
 
 
