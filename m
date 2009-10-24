@@ -1,32 +1,27 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1N1gfE-0002vX-8e
+	(envelope-from <philb@gnu.org>) id 1N1hHU-0006Iz-0Q
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Oct 2009 15:28:16 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 475A91417181
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Oct 2009 15:23:33 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GZxRWRH7MfO1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Oct 2009 15:23:33 +0200 (CEST)
-Received: from zaurus (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id E972C1416BAC
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Oct 2009 15:23:32 +0200 (CEST)
-Date: Sat, 24 Oct 2009 15:27:15 +0200
-From: Stanislav Brabec <utx@penguin.cz>
+	Sat, 24 Oct 2009 16:07:49 +0200
+Received: from 88-109-185-146.dynamic.dsl.as9105.com ([88.109.185.146]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N1hGF-0005zL-At
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 24 Oct 2009 15:06:29 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hbuf0m$esa$1@ger.gmane.org> (from k.kooi@student.utwente.nl on
-	Sat Oct 24 10:48:22 2009)
-X-Mailer: Balsa 2.4.1
-Message-Id: <1256390835.4307.0@zaurus>
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 84.21.108.25
-X-SA-Exim-Mail-From: utx@penguin.cz
+In-Reply-To: <hbuf0m$esa$1@ger.gmane.org>
+References: <200910230504.57681.holger+oe@freyther.de>
+	<hbru1e$m80$1@ger.gmane.org> <1256296026.9503.26.camel@hammer.suse.cz>
+	<200910231334.13581.holger+oe@freyther.de>
+	<1256337084.9460.9.camel@utx.utx.cz>  <hbuf0m$esa$1@ger.gmane.org>
+Date: Sat, 24 Oct 2009 15:06:04 +0100
+Message-ID: <1256393164.15214.46.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Revert "package bbclass: strip static libs as well"
@@ -43,43 +38,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Oct 2009 13:28:16 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 24 Oct 2009 14:07:49 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Oct 24, 2009 at 10:48:22 Koen Kooi wrote:
->=20
-> I would be happy to take special care of the above recipe in my fixup=20
-> branch. Do we all agree that the above .a files need to go into -dev=20
-> packages? If so I'll add something like FILES_${PN}-static =3D "" to=20
-> the
->=20
-> affected recipes
+On Sat, 2009-10-24 at 10:48 +0200, Koen Kooi wrote:
+> On 24-10-09 00:31, Stanislav Brabec wrote:
+> > alsa-oss-1.0.17-r0: /usr/lib/libossredir.a
+> > binutils-2.18-r8.1: /usr/lib/libiberty.a
 
-All mentioned libraries above must go to -dev or -sdk, otherwise you
-will not be able to build against them without -static installled.
+I'm not convinced you really want to be shipping libiberty at all.
+Every project that uses this library tends to bundle a local copy in
+with its source code.
 
-FILES_${PN}-static =3D "" is not fully correct general solution. There
-are projects, that have more static libraries. Only listed static
-libraries must go to -dev, the rest may go to -static. A good
-example is libsdl-x11. Only libSDLmain.a must go to -dev, the rest may
-go to -static. I'll try to create smarter expression to find such
-packages.
+> > bison-2.3-r0: /usr/lib/liby.a
 
-Note that this list covers only packages actually built for my image.
+That one is a special case: it wants to stay in the main bison package,
+since bison itself is a development tool.  I'm not sure why it is a
+static-only library; that might be an error.
 
-> And these wouldn't need special handling:
+> > bridge-utils-1.4-r0: /usr/lib/libbridge.a
 
-All of them probably would need. For example without libgcc.a you will
-not be able to compile.
+I think this is an internal convenience library, not intended for
+external use.  Debian doesn't seem to package it at all and I suspect OE
+probably shouldn't either.
 
->  > gcc-4.3.3-r7.1: /usr/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/
-> libgcc.a
+> > flex-2.5.31-r4: /usr/lib/libfl.a
 
---=20
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+This is like bison.
+
+> > gcc-4.3.3-r7.1: /usr/lib/libstdc++_pic.a
+> > gcc-4.3.3-r7.1: /usr/lib/libssp_nonshared.a
+
+Those are probably special.  I'm not quite sure what the deal is with
+libstdc++_pic, that would need some further investigation.
+
+> > gdb-7.0-r0: /usr/lib/libbfd.a
+> > gdb-7.0-r0: /usr/lib/libopcodes.a
+> > gdb-7.0-r0: /usr/lib/libiberty.a
+
+As for libiberty above.
+
+> > glibc-2.9-r35.2: /usr/lib/libc_nonshared.a
+> > glibc-2.9-r35.2: /usr/lib/libmcheck.a
+> > glibc-2.9-r35.2: /usr/lib/libg.a
+> > glibc-2.9-r35.2: /usr/lib/libbsd-compat.a
+> > glibc-2.9-r35.2: /usr/lib/libieee.a
+> > glibc-2.9-r35.2: /usr/lib/libpthread_nonshared.a
+
+The nonshared ones are special.  The others belong in the -static
+package.
+
+> > mysql-4.1.22-r3: /usr/lib/libmysys.a
+> > mysql-4.1.22-r3: /usr/lib/libdbug.a
+> > mysql-4.1.22-r3: /usr/lib/libvio.a
+> > mysql-4.1.22-r3: /usr/lib/libheap.a
+> > mysql-4.1.22-r3: /usr/lib/libmerge.a
+> > mysql-4.1.22-r3: /usr/lib/libnisam.a
+> > mysql-4.1.22-r3: /usr/lib/libmysqld.a
+> > mysql-4.1.22-r3: /usr/lib/libmyisam.a
+> > mysql-4.1.22-r3: /usr/lib/libmyisammrg.a
+> > mysql-4.1.22-r3: /usr/lib/libmystrings.a
+
+I think those are all internal convenience libraries and should probably
+not be packaged.
+
+p.
 
 
 
