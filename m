@@ -1,35 +1,35 @@
-Received: from [209.85.217.220] (helo=mail-gx0-f220.google.com)
+Received: from [65.182.109.77] (helo=mta8.brinkster.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N1yxs-0007AS-Aw
+	(envelope-from <John.Willis@Distant-earth.com>) id 1N21oY-00069A-OC
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 25 Oct 2009 10:00:43 +0100
-Received: by gxk20 with SMTP id 20so13630688gxk.12
+	Sun, 25 Oct 2009 13:03:17 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mta8.brinkster.com (Postfix) with ESMTP id 7DDAB4C83F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Oct 2009 01:59:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=MhuBh74J3R5a5WOB4x/MuxsGL+V1+DS6T5ofTk5e9NE=;
-	b=u/gDiD1gmiyDIlgGG9Q7ekTFoG/yA+EcyZlHva3937f5mmS8uyJdcBS0e95rJF4ja3
-	M1K9IpwDluVPDa11fBJiuBx+Od1mWbZF+/Uv+nIcfhvw806c3HvjElnpkNS+QsEN/vAL
-	xD/vgw4h/MTm2paRj/R6xZcLdnFyYaM0deG8U=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=i4WrJ9d56wdXdyOnrPEjlRA5kkM91raOpbrZorubK7K3WePqLxC6PWUY3wRzWurd+o
-	qVm03mSCywNbK3ED+uPKxZy4cAabSBLj9bSZe8b/eX7QnRNlhI3eCXpToYToDbuHkYlf
-	/Z7WC9ihO07shZKfhJ88cftUvsfpTzpqj8UY4=
+	Sun, 25 Oct 2009 08:02:24 -0400 (EDT)
+X-Virus-Scanned: amavisd-new at 
+Received: from mta8.brinkster.com ([127.0.0.1])
+	by localhost (mta8.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 42QQDINMvE84
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 25 Oct 2009 08:02:18 -0400 (EDT)
+Received: from MareImbrium (82-46-19-72.cable.ubr02.bath.blueyonder.co.uk
+	[82.46.19.72])
+	by mta8.brinkster.com (Postfix) with ESMTP id 85AF24C825A
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 25 Oct 2009 08:02:15 -0400 (EDT)
+From: "John Willis" <John.Willis@Distant-earth.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 25 Oct 2009 12:02:01 -0000
+Message-ID: <044c01ca556a$f6f3af20$e4db0d60$@Willis@Distant-earth.com>
 MIME-Version: 1.0
-Received: by 10.100.246.14 with SMTP id t14mr1463789anh.176.1256461175907; 
-	Sun, 25 Oct 2009 01:59:35 -0700 (PDT)
-Date: Sun, 25 Oct 2009 09:59:35 +0100
-Message-ID: <ac9c93b10910250159k36219facpa0c13777d91d068@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.217.220
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: AcpVavWV5xiOxhYJQiee98CeBugB+w==
+X-SA-Exim-Connect-IP: 65.182.109.77
+X-SA-Exim-Mail-From: John.Willis@Distant-earth.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: kirkwood, one or multiple machines
+Subject: [RFC/PATCH] Add support for XFCE 4.6.1.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,46 +43,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Oct 2009 09:00:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 25 Oct 2009 12:03:18 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-us
 
-Recently I added support for the openrd client board to OE by making a
-new machine.
-I guessed this was wat was desired since there was a
-linux-kirkwood_2.6.31.bb file mentioning sheevaplug and openrd base as
-machines.
-Also there is a kirkwood.inc file
+I have added support to XFCE 4.6.1 to OpenEmbedded in a branch I am hosting
+at 
 
-However after digging a little bit deeper I am not too sure if this is
-really desirable.
-All three boards are of course based upon the Marvell Kirkwood CPU.
-But the kernel as is is fully interchangeable. It uses arcNumber to
-identify the board. Which variants are supported can be set (see
-arch/arm/mach-kirkwood/Kconfig)
-However it is perfectly ok to select multiple variants. This results
-in a kernel which supports all these variants.
+http://git.openpandora.org/cgi-bin/gitweb.cgi?p=openembedded.git;a=shortlog;
+h=xfce46-support
 
-As a test I successfully ran an openrd client kernel on a sheevaplug.
+This is based on the earlier patchset I sent to the list and some feedback
+Koen and Corsac (Debian's XFCE maintainer) provided. 
+I have tested images made from the 2 new tasks on some of my OMAP3 boards
+and all seems well.
 
-Then why do we have multiple machines?
-the only things I can think of is:
-- smaller kernel (but more variants does not drag in that much)
-- machine specific patches (but for now these do not exist yet, and a
-clearer way then would be to use the machine specific config macros)
-- tuned defconfigs (which is the only thing that there is now)
+For now it adds an xfce46.bbclass to support the builds and lives alongside
+of XFCE 4.4 but in fairness I would like to propose dropping XFCE 4.4.* from
+dev (and leaving it in stable/2009 for now).
 
-Disadvantage of more machines is that this will grow and grow.
-Guess within a short while we'll see a machine definition for QNAP
-TS219 probably followed by all kind of plug variants like pogoplug,
-toninoplug etc etc.
+I have also taken the liberty of renaming xfce to xfce-base and adding an
+xfce-extras folder to house the non-core apps (gigolo, squeeze,
+xfce4-notifyd, that sort of thing). I would also like to clean up the XFCE
+recipes scattered around the tree but that has a bearing on if XFCE 4.4
+remains supported in-tree.
 
-Btw: wrt the defconfigs: In my opinion the defconfig should be such
-that it is usable by all. Board specific things (like e.g. the video
-on openrd client) should be build as modules so those who need them
-can load them, and those who don't can ignore them.
+Any comments?
 
-What is the community thought on this? Did I miss something?
+Regards,
 
-Frans
+John
+
+--
+
+> What is a grue?
+
+The grue is a sinister, lurking presence in the dark places of the earth.
+Its favourite diet is adventurers, but its insatiable appetite is tempered
+by its fear of light. No grue has ever been seen by the light of day, and
+few have survived its fearsome jaws to tell the tale.
+
+
+
+
 
 
