@@ -1,35 +1,37 @@
-Received: from [65.182.109.77] (helo=mta8.brinkster.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <John.Willis@Distant-earth.com>) id 1N21oY-00069A-OC
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1N23BP-0002CX-R5 for openembedded-devel@lists.openembedded.org;
+	Sun, 25 Oct 2009 14:30:58 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N23AP-0007dQ-Ab
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 25 Oct 2009 13:03:17 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mta8.brinkster.com (Postfix) with ESMTP id 7DDAB4C83F1
+	Sun, 25 Oct 2009 14:29:53 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 25 Oct 2009 14:29:53 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Oct 2009 08:02:24 -0400 (EDT)
-X-Virus-Scanned: amavisd-new at 
-Received: from mta8.brinkster.com ([127.0.0.1])
-	by localhost (mta8.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 42QQDINMvE84
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Oct 2009 08:02:18 -0400 (EDT)
-Received: from MareImbrium (82-46-19-72.cable.ubr02.bath.blueyonder.co.uk
-	[82.46.19.72])
-	by mta8.brinkster.com (Postfix) with ESMTP id 85AF24C825A
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Oct 2009 08:02:15 -0400 (EDT)
-From: "John Willis" <John.Willis@Distant-earth.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 25 Oct 2009 12:02:01 -0000
-Message-ID: <044c01ca556a$f6f3af20$e4db0d60$@Willis@Distant-earth.com>
-MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook 12.0
-Thread-Index: AcpVavWV5xiOxhYJQiee98CeBugB+w==
-X-SA-Exim-Connect-IP: 65.182.109.77
-X-SA-Exim-Mail-From: John.Willis@Distant-earth.com
+	Sun, 25 Oct 2009 14:29:53 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 25 Oct 2009 14:29:33 +0100
+Message-ID: <hc1jrt$ki8$1@ger.gmane.org>
+References: <44440.3488342234$1256472302@news.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <44440.3488342234$1256472302@news.gmane.org>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [RFC/PATCH] Add support for XFCE 4.6.1.
+Subject: Re: [RFC/PATCH] Add support for XFCE 4.6.1.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,50 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Oct 2009 12:03:18 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Sun, 25 Oct 2009 13:30:59 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Language: en-us
 
-I have added support to XFCE 4.6.1 to OpenEmbedded in a branch I am hosting
-at 
+On 25-10-09 13:02, John Willis wrote:
 
-http://git.openpandora.org/cgi-bin/gitweb.cgi?p=openembedded.git;a=shortlog;
-h=xfce46-support
+> For now it adds an xfce46.bbclass to support the builds and lives alongside
+> of XFCE 4.4 but in fairness I would like to propose dropping XFCE 4.4.* from
+> dev (and leaving it in stable/2009 for now).
 
-This is based on the earlier patchset I sent to the list and some feedback
-Koen and Corsac (Debian's XFCE maintainer) provided. 
-I have tested images made from the 2 new tasks on some of my OMAP3 boards
-and all seems well.
+What would be the big advantage of deleting them? I'm generally not a 
+fan of deleting recipes "because we can". OE has lots of users that 
+don't read this mailinglist (which they should...) and generally start 
+bitching (but not to oe mailinglists, as they should) when we drop 
+stuff. That's of course largely their own fault for trying to live in 
+their own insulated bubble, but it would be nice if OE can make their 
+lives easier.
 
-For now it adds an xfce46.bbclass to support the builds and lives alongside
-of XFCE 4.4 but in fairness I would like to propose dropping XFCE 4.4.* from
-dev (and leaving it in stable/2009 for now).
+You're point that stable/2009 would still have them is a valid point :)
 
-I have also taken the liberty of renaming xfce to xfce-base and adding an
-xfce-extras folder to house the non-core apps (gigolo, squeeze,
-xfce4-notifyd, that sort of thing). I would also like to clean up the XFCE
-recipes scattered around the tree but that has a bearing on if XFCE 4.4
-remains supported in-tree.
+regards,
 
-Any comments?
-
-Regards,
-
-John
-
---
-
-> What is a grue?
-
-The grue is a sinister, lurking presence in the dark places of the earth.
-Its favourite diet is adventurers, but its insatiable appetite is tempered
-by its fear of light. No grue has ever been seen by the light of day, and
-few have survived its fearsome jaws to tell the tale.
-
-
-
+Koen
 
 
 
