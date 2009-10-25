@@ -1,36 +1,35 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [209.85.217.220] (helo=mail-gx0-f220.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1N1mNS-0004ud-J0
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N1yxs-0007AS-Aw
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Oct 2009 21:34:17 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 8D2B61416BC5
+	Sun, 25 Oct 2009 10:00:43 +0100
+Received: by gxk20 with SMTP id 20so13630688gxk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Oct 2009 21:29:36 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lUR6dAUBq+Wx
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Oct 2009 21:29:36 +0200 (CEST)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 5D7991416BAC
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Oct 2009 21:29:35 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
+	Sun, 25 Oct 2009 01:59:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=MhuBh74J3R5a5WOB4x/MuxsGL+V1+DS6T5ofTk5e9NE=;
+	b=u/gDiD1gmiyDIlgGG9Q7ekTFoG/yA+EcyZlHva3937f5mmS8uyJdcBS0e95rJF4ja3
+	M1K9IpwDluVPDa11fBJiuBx+Od1mWbZF+/Uv+nIcfhvw806c3HvjElnpkNS+QsEN/vAL
+	xD/vgw4h/MTm2paRj/R6xZcLdnFyYaM0deG8U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=i4WrJ9d56wdXdyOnrPEjlRA5kkM91raOpbrZorubK7K3WePqLxC6PWUY3wRzWurd+o
+	qVm03mSCywNbK3ED+uPKxZy4cAabSBLj9bSZe8b/eX7QnRNlhI3eCXpToYToDbuHkYlf
+	/Z7WC9ihO07shZKfhJ88cftUvsfpTzpqj8UY4=
+MIME-Version: 1.0
+Received: by 10.100.246.14 with SMTP id t14mr1463789anh.176.1256461175907; 
+	Sun, 25 Oct 2009 01:59:35 -0700 (PDT)
+Date: Sun, 25 Oct 2009 09:59:35 +0100
+Message-ID: <ac9c93b10910250159k36219facpa0c13777d91d068@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1256409932.15214.67.camel@lenovo.internal.reciva.com>
-References: <1256398757.4681.0@zaurus>
-	<1256409932.15214.67.camel@lenovo.internal.reciva.com>
-Date: Sat, 24 Oct 2009 21:33:11 +0200
-Message-Id: <1256412791.11033.10.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.1.1 
-X-SA-Exim-Connect-IP: 84.21.108.25
-X-SA-Exim-Mail-From: utx@penguin.cz
+X-SA-Exim-Connect-IP: 209.85.217.220
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Revert "package bbclass: strip static libs as well"
+Subject: kirkwood, one or multiple machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,31 +43,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Oct 2009 19:34:17 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 25 Oct 2009 09:00:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Phil Blundell wrote:
-> but it isn't entirely obvious to me why one would (in general)
-> want to install such a library.  Do you know what the actual use-case
-> for libstdc++_pic is?  If this is for mklibs-style library reduction
-> then it probably belongs in yet another subpackage if anywhere.
+Recently I added support for the openrd client board to OE by making a
+new machine.
+I guessed this was wat was desired since there was a
+linux-kirkwood_2.6.31.bb file mentioning sheevaplug and openrd base as
+machines.
+Also there is a kirkwood.inc file
 
-I guess that it makes possible to create libraries that=EF=BB=BF are writ=
-ten in
-C++ but don't depend on libstdc++. It also contains PIC code of
-libsupc++.
+However after digging a little bit deeper I am not too sure if this is
+really desirable.
+All three boards are of course based upon the Marvell Kirkwood CPU.
+But the kernel as is is fully interchangeable. It uses arcNumber to
+identify the board. Which variants are supported can be set (see
+arch/arm/mach-kirkwood/Kconfig)
+However it is perfectly ok to select multiple variants. This results
+in a kernel which supports all these variants.
 
-Reference: /OE/build/static/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-4=
-.3.3-r7.1/gcc-4.3.3/libstdc++-v3/src/Makefile.am
+As a test I successfully ran an openrd client kernel on a sheevaplug.
 
-_pic.a libraries are typically useful for large convoluted libraries
-containing many independent function sets, e. g. mathematical libraries.
+Then why do we have multiple machines?
+the only things I can think of is:
+- smaller kernel (but more variants does not drag in that much)
+- machine specific patches (but for now these do not exist yet, and a
+clearer way then would be to use the machine specific config macros)
+- tuned defconfigs (which is the only thing that there is now)
 
+Disadvantage of more machines is that this will grow and grow.
+Guess within a short while we'll see a machine definition for QNAP
+TS219 probably followed by all kind of plug variants like pogoplug,
+toninoplug etc etc.
 
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+Btw: wrt the defconfigs: In my opinion the defconfig should be such
+that it is usable by all. Board specific things (like e.g. the video
+on openrd client) should be build as modules so those who need them
+can load them, and those who don't can ignore them.
 
+What is the community thought on this? Did I miss something?
+
+Frans
 
 
