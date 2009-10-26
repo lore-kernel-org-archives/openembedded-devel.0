@@ -1,37 +1,32 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [207.164.182.72] (helo=smtp.cbnco.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1N23BP-0002CX-R5 for openembedded-devel@lists.openembedded.org;
-	Sun, 25 Oct 2009 14:30:58 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1N23AP-0007dQ-Ab
+	(envelope-from <michael@sles10-64.ott.cti.com>) id 1N2Elg-0002Jh-TI
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 25 Oct 2009 14:29:53 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Oct 2009 14:29:53 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Oct 2009 14:29:53 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 26 Oct 2009 02:53:12 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 29CCC5AAFED;
+	Sun, 25 Oct 2009 21:52:03 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 04605-03; Sun, 25 Oct 2009 21:52:03 -0400 (EDT)
+Received: by smtp.cbnco.com (Postfix, from userid 1003)
+	id E9F705AAFC6; Sun, 25 Oct 2009 21:52:02 -0400 (EDT)
+Received: from sles10-64.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTP id 7E4CE5AAFC6;
+	Sun, 25 Oct 2009 21:52:01 -0400 (EDT)
+Received: by sles10-64.ott.cti.com (Postfix, from userid 1000)
+	id 63FB640AA2; Sun, 25 Oct 2009 21:52:01 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 25 Oct 2009 14:29:33 +0100
-Message-ID: <hc1jrt$ki8$1@ger.gmane.org>
-References: <44440.3488342234$1256472302@news.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <44440.3488342234$1256472302@news.gmane.org>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Sun, 25 Oct 2009 21:52:00 -0400
+Message-Id: <1256521920-9126-1-git-send-email-msmith@cbnco.com>
+X-Mailer: git-send-email 1.6.3
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: michael@sles10-64.ott.cti.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC/PATCH] Add support for XFCE 4.6.1.
+Subject: [PATCH] gitver.bbclass: fix git dependency tracking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,29 +40,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Oct 2009 13:30:59 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 26 Oct 2009 01:53:12 -0000
 
-On 25-10-09 13:02, John Willis wrote:
+.git/HEAD doesn't usually change on a commit, but the ref it points to
+(e.g. .git/refs/heads/master) should. Handle this and another couple of
+cases: if a tag is added without a new commit, or if the ref is in
+packed-refs.
 
-> For now it adds an xfce46.bbclass to support the builds and lives alongside
-> of XFCE 4.4 but in fairness I would like to propose dropping XFCE 4.4.* from
-> dev (and leaving it in stable/2009 for now).
+Signed-off-by: Michael Smith <msmith@cbnco.com>
+---
+ classes/gitver.bbclass |   32 +++++++++++++++++++++-----------
+ 1 files changed, 21 insertions(+), 11 deletions(-)
 
-What would be the big advantage of deleting them? I'm generally not a 
-fan of deleting recipes "because we can". OE has lots of users that 
-don't read this mailinglist (which they should...) and generally start 
-bitching (but not to oe mailinglists, as they should) when we drop 
-stuff. That's of course largely their own fault for trying to live in 
-their own insulated bubble, but it would be nice if OE can make their 
-lives easier.
-
-You're point that stable/2009 would still have them is a valid point :)
-
-regards,
-
-Koen
+diff --git a/classes/gitver.bbclass b/classes/gitver.bbclass
+index 92c053a..5b4ba8d 100644
+--- a/classes/gitver.bbclass
++++ b/classes/gitver.bbclass
+@@ -8,20 +8,14 @@
+ 
+ GITVER = "${@get_git_pv('${S}', d)}"
+ 
+-def gitver_mark_dependency(d):
+-    from bb.data import expand
+-    from bb.parse import mark_dependency
+-    from os.path import abspath
+-
+-    fn = abspath(expand("${S}/.git/HEAD", d))
+-    mark_dependency(d, fn)
+-
+ def get_git_pv(path, d, tagadjust=None):
+     from subprocess import Popen, PIPE
+-    from os.path import join
++    import os
+     from bb import error
++    from bb.parse import mark_dependency
+ 
+-    env = {"GIT_DIR": join(d.getVar("S", True), ".git")}
++    gitdir = os.path.abspath(os.path.join(d.getVar("S", True), ".git"))
++    env = { "GIT_DIR": gitdir }
+ 
+     def popen(cmd, **kwargs):
+         kwargs["stderr"] = PIPE
+@@ -39,7 +33,23 @@ def get_git_pv(path, d, tagadjust=None):
+             return
+         return stdout.rstrip()
+ 
+-    gitver_mark_dependency(d)
++    # Force the recipe to be reparsed so the version gets bumped
++    # if the active branch is switched, or if the branch changes.
++    mark_dependency(d, os.path.join(gitdir, "HEAD"))
++
++    ref = popen(["git", "symbolic-ref", "HEAD"])
++    reffile = os.path.join(gitdir, ref)
++    if ref and os.path.exists(reffile):
++        mark_dependency(d, reffile)
++    else:
++        # The ref might be hidden in packed-refs. Force a reparse if anything
++        # in the working copy changes.
++        mark_dependency(d, os.path.join(gitdir, "index"))
++
++    # Catch new tags.
++    tagdir = os.path.join(gitdir, "refs", "tags")
++    if os.path.exists(tagdir):
++        mark_dependency(d, tagdir)
+ 
+     ver = popen(["git", "describe", "--tags"], cwd=path)
+     if not ver:
+-- 
+1.6.3
 
 
 
