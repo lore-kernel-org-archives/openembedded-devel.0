@@ -1,27 +1,27 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1N2Mno-0007oh-GD
+	(envelope-from <holger+oe@freyther.de>) id 1N2N4j-000467-4l
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Oct 2009 11:27:55 +0100
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1N2Mru-00008K-B2
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Oct 2009 11:32:06 +0100
-Message-ID: <4AE57965.3040500@kernelconcepts.de>
-Date: Mon, 26 Oct 2009 11:26:45 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Mon, 26 Oct 2009 11:45:24 +0100
+Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
+	[123.192.145.111])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id DAAF41B10C04
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Oct 2009 10:53:44 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4ADE4231.6040402@balister.org>
-In-Reply-To: <4ADE4231.6040402@balister.org>
-X-Enigmail-Version: 0.95.7
-X-SA-Exim-Connect-IP: 212.60.202.196
-X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
+Date: Mon, 26 Oct 2009 11:44:00 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <ec1f3d400910230421r4509e19amc899870bdd640ce5@mail.gmail.com>
+	<ec1f3d400910260325i54971290u914ff2c0a6ca301d@mail.gmail.com>
+In-Reply-To: <ec1f3d400910260325i54971290u914ff2c0a6ca301d@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200910261144.00888.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: FOSDEM Call for stands
+Subject: Re: [help] openembedded tarball sources on HTTP
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,29 +35,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2009 10:27:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 26 Oct 2009 10:45:24 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-Hi,
-
-Philip Balister schrieb:
-> Who wants to apply?
+On Monday 26 October 2009 11:25:09 RK Raggit wrote:
+> anyone with some idea on this .. ? sorry for pushing , but i am kind of
+> evaluating OE and would like to know whether this is possible at all ?
 > 
-> http://www.fosdem.org/2010/call_for_stands
+> ...unblocking cvs,svn ports is defnitely not an option for me.
 
-sounds like a good topic for OEDEM.
-We might want to discuss how to showcase OE on this kind of events too.
+then find a better place to work at. If your company does not allow you to do 
+your work something is wrong with the company.
 
-Greetings
+Your options are (I have done most of them):
 
-Florian
+	1.) Use bitbake -cfetchall WHAT_YOU_WANT 
+		1.1.0) Do it at home and take the result to the office
+		1.1.1) Rent a separate DSL line for your office and download yourself
+                         (obviously never be connected to both networks 
+                          *giggle*)
+                1.1.2) Use your UMTS dataplan to download the source
+		1.1.3) Go to a public hotspot to download
+		1.1.4) Rent a hotel room on company cost and download
+                          from there.
+	2.) Switch recipes that use CVS/SVN/GIT to the closest release, you
+              can do this by toggling PREFERRED_VERSION of these recipes
+	3.)  You can ask someone to send you a tape with the sources.
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+
+In general with Free Software you will have to have the real internet to be 
+able to work.
+
+love
+	z.
+
 
 
