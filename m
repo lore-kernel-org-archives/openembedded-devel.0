@@ -1,35 +1,38 @@
-Received: from [74.125.78.148] (helo=ey-out-1920.google.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eballetbo@gmail.com>) id 1N2P04-0008Pr-So
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1N2P2V-0008W7-RQ for openembedded-devel@lists.openembedded.org;
+	Mon, 26 Oct 2009 13:51:14 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N2P1U-0005Cu-TB
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Oct 2009 13:48:43 +0100
-Received: by ey-out-1920.google.com with SMTP id 26so671279eyw.4
+	Mon, 26 Oct 2009 13:50:08 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Oct 2009 13:50:08 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Oct 2009 05:47:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=gtWTvkR1sL+Hrh7zAFeRYrBWVnmxg5ItNRdYyrEtPeY=;
-	b=YRm4TiXERBFZw1LOxx0hxKwkZWklmYVmDbljA/n1RW+W/eEchmRXANmCDpiNG0ClH8
-	jXGyLGHgua4dVjTiqIrvUU92xS82gLnktOJUzcgnTsgqN62KTYGyVH60j61LbSgc2Ir1
-	fw9jM/cc5Aa8GMIZoXEuGJlQkxO9EYqB+W+rg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=V0y7rnG/Vv3brY/a1qUASLbyUyUOSkxJ5M5hI4dMAA3j2QZQl2eUjrWjwoUFqms/UL
-	35rppto/NLwUjGY72XHhBhw/+a0BFvtuuUwOPZHx1O2syeFE86r/2WMK8ecOwRu5hknd
-	L0vTk/XY0N5/8vINBdfut0dZ9OEeHuPJdIb8Y=
-MIME-Version: 1.0
-Received: by 10.216.89.135 with SMTP id c7mr175596wef.62.1256561257263; Mon, 
-	26 Oct 2009 05:47:37 -0700 (PDT)
-Date: Mon, 26 Oct 2009 13:47:37 +0100
-Message-ID: <70c9a9110910260547q7c513336rc28555960bd4e5bd@mail.gmail.com>
-From: =?UTF-8?Q?Enric_Balletb=C3=B2_i_Serra?= <eballetbo@gmail.com>
+	Mon, 26 Oct 2009 13:50:08 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.78.148
-X-SA-Exim-Mail-From: eballetbo@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 26 Oct 2009 13:49:47 +0100
+Message-ID: <hc45tb$npe$1@ger.gmane.org>
+References: <ec1f3d400910230421r4509e19amc899870bdd640ce5@mail.gmail.com>	<ec1f3d400910260325i54971290u914ff2c0a6ca301d@mail.gmail.com>
+	<4AE5952E.7060601@balister.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <4AE5952E.7060601@balister.org>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Connman and rootfs over NFS
+Subject: Re: [help] openembedded tarball sources on HTTP
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,18 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2009 12:48:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 26 Oct 2009 12:51:15 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi all,
+On 26-10-09 13:25, Philip Balister wrote:
+> On 10/26/2009 06:25 AM, RK Raggit wrote:
+>> anyone with some idea on this .. ? sorry for pushing , but i am kind of
+>> evaluating OE and would like to know whether this is possible at all ?
+>>
+>> ...unblocking cvs,svn ports is defnitely not an option for me.
+>
+> One possible business associated with OE would be maintaining a server
+> accessible via http that collected all the needed sources and mae them
+> available to people with difficult firewall situations. I'm not sure how
+> to market such a thing though.
 
-Running my Angstrom image and mounting the rootfs over NFS seems that
-the connman package reconfigures the network interface (nfs: server
-192.168.2.6 not responding, still trying). There are any way to
-prevent this ?
+You mean like angstrom does now with its sourcemirror?
 
-Thanks in advance,
+regards,
 
-    Enric
+Koen
+
 
 
