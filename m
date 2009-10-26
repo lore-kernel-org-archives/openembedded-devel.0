@@ -1,28 +1,35 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1N2RAI-0001GJ-Hl
+	(envelope-from <utx@penguin.cz>) id 1N2RO5-000238-67
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Oct 2009 16:07:25 +0100
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1N2REP-0002wy-T5; Mon, 26 Oct 2009 16:11:38 +0100
-Message-ID: <4AE5BAED.2000900@kernelconcepts.de>
-Date: Mon, 26 Oct 2009 16:06:21 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Mon, 26 Oct 2009 16:21:40 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 3586514171A0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Oct 2009 16:17:05 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id lSrOJ8R7YHQA
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Oct 2009 16:17:05 +0100 (CET)
+Received: from [10.20.1.86] (nat.scz.novell.com [213.151.88.252])
+	by ns.penguin.cz (Postfix) with ESMTP id D17211417193
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Oct 2009 16:17:00 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-References: <baaef4710910150931l7c4c7afl6f2b7d7b10c2f0b1@mail.gmail.com>
-	<baaef4710910150934x230f550q120d494b8d64f7d9@mail.gmail.com>
-In-Reply-To: <baaef4710910150934x230f550q120d494b8d64f7d9@mail.gmail.com>
-X-Enigmail-Version: 0.95.7
-X-SA-Exim-Connect-IP: 212.60.202.196
-X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
+In-Reply-To: <1256566659-32412-1-git-send-email-sledz@dresearch.de>
+References: <1256566659-32412-1-git-send-email-sledz@dresearch.de>
+Date: Mon, 26 Oct 2009 16:20:28 +0100
+Message-Id: <1256570428.9503.235.camel@hammer.suse.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.0 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: opkg-devel@googlegroups.com
-Subject: Re: [PATCH] Opkg support for smime (pkcs7) packages list signing
+Subject: Re: [PATCH] glibc_2.9: disable parallel make
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,28 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2009 15:07:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 26 Oct 2009 15:21:40 -0000
+Content-Type: text/plain; charset="ISO-8859-2"
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Steffen Sledz wrote:
+> Parallel make for glibc_2.9.bb fails on different multi-cpu build hosts
+> (e.g. AMD Phenom(tm) 9150e Quad-Core Processor running openSUSE 11.1)
+> with various errors. :(
 
-Camille Moncelier schrieb:
-> As promised :) here is a patch allowing opkg to authenticate
-> a package list using smime and openssl instead of gpgme
+It would make bootstrap longer on multi-CPU machines. :-(
 
-nice, this might be an interesting feature in future. Any reaction from the opkg
-maintainers so far?
+I never seen such failure with PARALLEL_MAKE = "-j 8" and
+BB_NUMBER_THREADS = "8", 8x Xeon, at least with glibc-2.9-r35.2 and not
+before 4249269b.
 
-Greetings
-
-Florian
+Does it happen in the same directory every time? Is there any common
+error or missing library?
 
 -- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
