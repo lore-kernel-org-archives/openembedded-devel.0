@@ -1,34 +1,28 @@
-Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
+Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1N2QPi-00016G-HA
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1N2RAI-0001GJ-Hl
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Oct 2009 15:19:17 +0100
-Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
-	[87.193.137.68])
-	by mail.extern.dresearch.de (Postfix) with ESMTP id 7941716E22C
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Oct 2009 15:18:08 +0100 (CET)
-Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
-	by consult.extern.dresearch.de (Postfix) with ESMTP id 376E32A428B
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Oct 2009 15:18:08 +0100 (CET)
-Received: from fsc-480-012-88.intern.dresearch.de ([10.32.10.177]) by
-	hiob.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 26 Oct 2009 15:20:14 +0100
-Received: by fsc-480-012-88.intern.dresearch.de (Postfix, from userid 10000)
-	id 537AB7225F; Mon, 26 Oct 2009 15:18:07 +0100 (CET)
-From: Steffen Sledz <sledz@dresearch.de>
+	Mon, 26 Oct 2009 16:07:25 +0100
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>)
+	id 1N2REP-0002wy-T5; Mon, 26 Oct 2009 16:11:38 +0100
+Message-ID: <4AE5BAED.2000900@kernelconcepts.de>
+Date: Mon, 26 Oct 2009 16:06:21 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Oct 2009 15:17:39 +0100
-Message-Id: <1256566659-32412-1-git-send-email-sledz@dresearch.de>
-X-Mailer: git-send-email 1.6.4.2
-X-OriginalArrivalTime: 26 Oct 2009 14:20:14.0781 (UTC)
-	FILETIME=[6F8F4ED0:01CA5647]
-X-SA-Exim-Connect-IP: 87.193.137.78
-X-SA-Exim-Mail-From: sledz@DResearch.DE
+References: <baaef4710910150931l7c4c7afl6f2b7d7b10c2f0b1@mail.gmail.com>
+	<baaef4710910150934x230f550q120d494b8d64f7d9@mail.gmail.com>
+In-Reply-To: <baaef4710910150934x230f550q120d494b8d64f7d9@mail.gmail.com>
+X-Enigmail-Version: 0.95.7
+X-SA-Exim-Connect-IP: 212.60.202.196
+X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] glibc_2.9: disable parallel make
+Cc: opkg-devel@googlegroups.com
+Subject: Re: [PATCH] Opkg support for smime (pkcs7) packages list signing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,33 +36,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2009 14:19:17 -0000
+X-List-Received-Date: Mon, 26 Oct 2009 15:07:25 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Parallel make for glibc_2.9.bb fails on different multi-cpu build hosts
-(e.g. AMD Phenom(tm) 9150e Quad-Core Processor running openSUSE 11.1)
-with various errors. :(
+Hi,
 
-Signed-off-by: Steffen Sledz <sledz@dresearch.de>
----
- recipes/glibc/glibc_2.9.bb |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+Camille Moncelier schrieb:
+> As promised :) here is a patch allowing opkg to authenticate
+> a package list using smime and openssl instead of gpgme
 
-diff --git a/recipes/glibc/glibc_2.9.bb b/recipes/glibc/glibc_2.9.bb
-index cddae98..428af03 100644
---- a/recipes/glibc/glibc_2.9.bb
-+++ b/recipes/glibc/glibc_2.9.bb
-@@ -75,6 +75,8 @@ SRC_URI_append_sh4 = " file://no-z-defs.patch;patch=1"
- #powerpc patches to add support for soft-float
- SRC_URI_append_powerpc= " file://powerpc-sqrt-hack.diff;patch=1"
- 
-+PARALLEL_MAKE = " "
-+
- S = "${WORKDIR}/glibc-${PV}"
- B = "${WORKDIR}/build-${TARGET_SYS}"
- 
+nice, this might be an interesting feature in future. Any reaction from the opkg
+maintainers so far?
+
+Greetings
+
+Florian
+
 -- 
-1.6.4.2
-
-
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
