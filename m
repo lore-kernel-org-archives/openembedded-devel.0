@@ -1,24 +1,23 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1N2N4j-000467-4l
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Oct 2009 11:45:24 +0100
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id DAAF41B10C04
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Oct 2009 10:53:44 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	(envelope-from <philip@balister.org>) id 1N2OeY-0007em-UZ
+	for openembedded-devel@openembedded.org; Mon, 26 Oct 2009 13:26:30 +0100
+Received: (qmail 10269 invoked by uid 1003); 26 Oct 2009 12:25:19 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 26 Oct 2009 12:25:19 -0000
+Message-ID: <4AE5952E.7060601@balister.org>
+Date: Mon, 26 Oct 2009 08:25:18 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
+	Thunderbird/3.0b4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Oct 2009 11:44:00 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
 References: <ec1f3d400910230421r4509e19amc899870bdd640ce5@mail.gmail.com>
 	<ec1f3d400910260325i54971290u914ff2c0a6ca301d@mail.gmail.com>
 In-Reply-To: <ec1f3d400910260325i54971290u914ff2c0a6ca301d@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200910261144.00888.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [help] openembedded tarball sources on HTTP
@@ -35,41 +34,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2009 10:45:24 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 26 Oct 2009 12:26:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Monday 26 October 2009 11:25:09 RK Raggit wrote:
+On 10/26/2009 06:25 AM, RK Raggit wrote:
 > anyone with some idea on this .. ? sorry for pushing , but i am kind of
 > evaluating OE and would like to know whether this is possible at all ?
-> 
+>
 > ...unblocking cvs,svn ports is defnitely not an option for me.
 
-then find a better place to work at. If your company does not allow you to do 
-your work something is wrong with the company.
+One possible business associated with OE would be maintaining a server 
+accessible via http that collected all the needed sources and mae them 
+available to people with difficult firewall situations. I'm not sure how 
+to market such a thing though.
 
-Your options are (I have done most of them):
+Philip
 
-	1.) Use bitbake -cfetchall WHAT_YOU_WANT 
-		1.1.0) Do it at home and take the result to the office
-		1.1.1) Rent a separate DSL line for your office and download yourself
-                         (obviously never be connected to both networks 
-                          *giggle*)
-                1.1.2) Use your UMTS dataplan to download the source
-		1.1.3) Go to a public hotspot to download
-		1.1.4) Rent a hotel room on company cost and download
-                          from there.
-	2.) Switch recipes that use CVS/SVN/GIT to the closest release, you
-              can do this by toggling PREFERRED_VERSION of these recipes
-	3.)  You can ask someone to send you a tape with the sources.
-
-
-In general with Free Software you will have to have the real internet to be 
-able to work.
-
-love
-	z.
-
+>
+> --RK
+>
+> On Fri, Oct 23, 2009 at 4:51 PM, RK Raggit<rk.raggit@gmail.com>  wrote:
+>
+>> Hi there,
+>>
+>> I am building openembedded recipes but i am behind a proxy that only allows
+>> http accesses and blocks cvs,svn ports.
+>>
+>> I would like to know where i can obtain pristine OE package (tarball)
+>> sources from a HTTP link. I tried
+>>
+>> http://oesources.org/source/current
+>>
+>> ...but that link does not work. Could someone please guide me the correct
+>> link ? I will update my CVS_TARBALL_STASH
+>> variable with this link.
+>>
+>> Thanks
+>> RK
+>>
+>>
+>>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
