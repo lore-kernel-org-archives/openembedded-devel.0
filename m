@@ -1,33 +1,34 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [87.193.137.78] (helo=mail.extern.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1N2PVH-0001Ar-JP
+	(envelope-from <sledz@DResearch.DE>) id 1N2QPi-00016G-HA
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Oct 2009 14:20:59 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1N2PU8-0006Ev-CY
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Oct 2009 13:19:48 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1N2PU7-0008O6-1V
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Oct 2009 13:19:43 +0000
-From: Phil Blundell <pb@reciva.com>
+	Mon, 26 Oct 2009 15:19:17 +0100
+Received: from consult.extern.dresearch.de (consult.extern.DResearch.DE
+	[87.193.137.68])
+	by mail.extern.dresearch.de (Postfix) with ESMTP id 7941716E22C
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Oct 2009 15:18:08 +0100 (CET)
+Received: from hiob.intern.dresearch.de (unknown [87.193.137.50])
+	by consult.extern.dresearch.de (Postfix) with ESMTP id 376E32A428B
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Oct 2009 15:18:08 +0100 (CET)
+Received: from fsc-480-012-88.intern.dresearch.de ([10.32.10.177]) by
+	hiob.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 26 Oct 2009 15:20:14 +0100
+Received: by fsc-480-012-88.intern.dresearch.de (Postfix, from userid 10000)
+	id 537AB7225F; Mon, 26 Oct 2009 15:18:07 +0100 (CET)
+From: Steffen Sledz <sledz@dresearch.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ec1f3d400910260325i54971290u914ff2c0a6ca301d@mail.gmail.com>
-References: <ec1f3d400910230421r4509e19amc899870bdd640ce5@mail.gmail.com>
-	<ec1f3d400910260325i54971290u914ff2c0a6ca301d@mail.gmail.com>
-Date: Mon, 26 Oct 2009 13:19:39 +0000
-Message-Id: <1256563179.23985.13.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: pb@reciva.com
+Date: Mon, 26 Oct 2009 15:17:39 +0100
+Message-Id: <1256566659-32412-1-git-send-email-sledz@dresearch.de>
+X-Mailer: git-send-email 1.6.4.2
+X-OriginalArrivalTime: 26 Oct 2009 14:20:14.0781 (UTC)
+	FILETIME=[6F8F4ED0:01CA5647]
+X-SA-Exim-Connect-IP: 87.193.137.78
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [help] openembedded tarball sources on HTTP
+Subject: [PATCH] glibc_2.9: disable parallel make
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,68 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2009 13:20:59 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 26 Oct 2009 14:19:17 -0000
 
-I don't think anybody is publishing a comprehensive set of SCM-derived
-source tarballs.  As you say below, oesources.org was the closest to
-this but, since its demise, I don't think anybody else has stepped
-forwards to fill the vacancy.  Some individual DISTROs do mirror the
-sources that they are using, and you might like to check whether your
-distro falls into that category, but I don't believe there is any
-cross-distribution source mirror at present.  
+Parallel make for glibc_2.9.bb fails on different multi-cpu build hosts
+(e.g. AMD Phenom(tm) 9150e Quad-Core Processor running openSUSE 11.1)
+with various errors. :(
 
-Indeed, mirroring a full set of tarballs for every conceivable
-SRCDATE/SRCREV would be a somewhat daunting undertaking: a more feasible
-option would probably be to do an svn-over-http kind of proxy thing,
-where a request for something like
-http://svnproxy.oe.org/checkout?uri=svn://eleet.org/repository&rev=1234
-would run the checkout in real time and hand you back a tarball.  If you
-wanted to implement such a thing then it might be feasible to get it
-hosted on one of the oe.org machines.
+Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+---
+ recipes/glibc/glibc_2.9.bb |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-However, most/all recipes do offer at least one released tarball which
-you should be able to use rather than checking out from SCM every time.
-If you find a particular package whose sources are simply not available
-any other way than CVS or SVN then post the details here and someone may
-be able to point you at a tarball.
+diff --git a/recipes/glibc/glibc_2.9.bb b/recipes/glibc/glibc_2.9.bb
+index cddae98..428af03 100644
+--- a/recipes/glibc/glibc_2.9.bb
++++ b/recipes/glibc/glibc_2.9.bb
+@@ -75,6 +75,8 @@ SRC_URI_append_sh4 = " file://no-z-defs.patch;patch=1"
+ #powerpc patches to add support for soft-float
+ SRC_URI_append_powerpc= " file://powerpc-sqrt-hack.diff;patch=1"
+ 
++PARALLEL_MAKE = " "
++
+ S = "${WORKDIR}/glibc-${PV}"
+ B = "${WORKDIR}/build-${TARGET_SYS}"
+ 
+-- 
+1.6.4.2
 
-p.
-
-On Mon, 2009-10-26 at 15:55 +0530, RK Raggit wrote:
-> anyone with some idea on this .. ? sorry for pushing , but i am kind of
-> evaluating OE and would like to know whether this is possible at all ?
-> 
-> ...unblocking cvs,svn ports is defnitely not an option for me.
-> 
-> --RK
-> 
-> On Fri, Oct 23, 2009 at 4:51 PM, RK Raggit <rk.raggit@gmail.com> wrote:
-> 
-> > Hi there,
-> >
-> > I am building openembedded recipes but i am behind a proxy that only allows
-> > http accesses and blocks cvs,svn ports.
-> >
-> > I would like to know where i can obtain pristine OE package (tarball)
-> > sources from a HTTP link. I tried
-> >
-> > http://oesources.org/source/current
-> >
-> > ...but that link does not work. Could someone please guide me the correct
-> > link ? I will update my CVS_TARBALL_STASH
-> > variable with this link.
-> >
-> > Thanks
-> > RK
-> >
-> >
-> >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
