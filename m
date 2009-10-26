@@ -1,36 +1,39 @@
-Received: from [209.85.210.175] (helo=mail-yx0-f175.google.com)
+Received: from [209.85.211.177] (helo=mail-yw0-f177.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1N2TUT-0000Zg-GM
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N2TZ3-0000wX-5I
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Oct 2009 18:36:24 +0100
-Received: by yxe5 with SMTP id 5so7159519yxe.24
+	Mon, 26 Oct 2009 18:41:08 +0100
+Received: by ywh7 with SMTP id 7so10304270ywh.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Oct 2009 10:35:16 -0700 (PDT)
+	Mon, 26 Oct 2009 10:39:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=dDJYeexcxdE/AeagtXyZOxdi7aekV70StyhnLV8qfpQ=;
-	b=C/3BWV80tR0nDUxIZVhG+ctItfyTHkuukJ3O65reb2kK4AO1IMdnwDRpIGXM99BN9S
-	vWR0wXWBbGZ8JE6/Dff2wrMxwmMVotTPsgoSvH1rJEkOkUEo2FylclVfT1hXhs3NAQj1
-	mNhUIoNaQVLbz9DBW41oRezEefxE3OWHeBNpg=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=nhYTQB5x4j0y2JfqDWebdFIa3wqoZbA4u/4b7+1NEDI=;
+	b=SrY1hzY+mx8C5MiYZfYByHqQ6KyLUwcVVyLgdb1+eJKC7KiyZQvzEmxJKzZD/Lds5N
+	mZSbvu1t3zcfOGdRQQtkHWlpjli/pQGVagv8HP3gxAFdFTM6f9KL8oRTtsFyFzPvNN7f
+	++jfdUOSX6jTQrLvboJN1CqaSQJJ5OcaDDL2w=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=Tq9hQmRuCv3Kkx+8TYPipxGTABErZm5DhJ7vYZexCxIt91Xmg644itEeyEGCLgSHSA
-	EpeVoy8+G1ZRar87cZw2FO1IEvj1a1AJsTdtCbN+eDPLSjc0/lpQyK6P2VjUiw+05GTh
-	SVzZgBaYXwcKoEAdX4PPYumOdVrtRrNDLeJcY=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Zo0MH5XuwIF/spbzdMIET5tJSDCCuhwClyLE7q+lucPL/M7v6Ew0CrheEgmJmzMhbJ
+	Yr4T7dSg7mldCujAIefs1+RhEaE24XmAcD0IDkrpYN7b39JvaIBHUTVBRxJX/BKmWLsS
+	6SInmU1uTZjPo7iBwNEE0OBDPBlcTecUEIfgs=
 MIME-Version: 1.0
-Received: by 10.150.129.25 with SMTP id b25mr24408533ybd.308.1256578515986; 
-	Mon, 26 Oct 2009 10:35:15 -0700 (PDT)
-Date: Mon, 26 Oct 2009 13:35:15 -0400
-Message-ID: <f96d234e0910261035w2b5a4f95v9c1c6351aea586c8@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+Received: by 10.100.80.7 with SMTP id d7mr1404840anb.43.1256578799597; Mon, 26 
+	Oct 2009 10:39:59 -0700 (PDT)
+In-Reply-To: <4AE5D539.7080005@kernelconcepts.de>
+References: <ac9c93b10910250159k36219facpa0c13777d91d068@mail.gmail.com>
+	<4AE5D539.7080005@kernelconcepts.de>
+Date: Mon, 26 Oct 2009 18:39:59 +0100
+Message-ID: <ac9c93b10910261039la639c48w1d6e83b81ec64000@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.175
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+X-SA-Exim-Connect-IP: 209.85.211.177
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: OE weekly changelog 2009-10-19 to 2009-10-26
+Subject: Re: kirkwood, one or multiple machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,216 +47,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2009 17:36:24 -0000
+X-List-Received-Date: Mon, 26 Oct 2009 17:41:08 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-OE weekly changelog 2009-10-19 to 2009-10-26
+2009/10/26 Florian Boor <florian.boor@kernelconcepts.de>:
+> Hi Frans,
+>
+> Frans Meulenbroeks schrieb:
+>> Recently I added support for the openrd client board to OE by making a
+>> new machine.
+>
+> yep - good job, the OpenRD client is an interesting piece of hardware.
+>
+>> Then why do we have multiple machines?
+>> the only things I can think of is:
+>> - smaller kernel (but more variants does not drag in that much)
+>> - machine specific patches (but for now these do not exist yet, and a
+>> clearer way then would be to use the machine specific config macros)
+>> - tuned defconfigs (which is the only thing that there is now)
+>
+> These are good reasons to have one machine conf for every machine. Apart from
+> the fact that it is quite likely that it will cause confusion if you merge
+> multiple machine configs into one.
+>
+>> Disadvantage of more machines is that this will grow and grow.
+>> Guess within a short while we'll see a machine definition for QNAP
+>> TS219 probably followed by all kind of plug variants like pogoplug,
+>> toninoplug etc etc.
+>
+> I do not agree here, a new device configuration file for a new device is
+> something I can live with pretty well. Even if two devices can live with the
+> same kernel one config for each makes it much more obvious which ones are
+> supported in OE and which to look at if you need to change something.
+> Thanks to include files these configs can be small but I don't see a major
+> advantage of merging them. Currently this might be possible but you move away
+> from best results if more specialized Kirkwood devices show up.
 
-Andrea Adami (3):
-  makedevs: fix interpretation of device table (count).
-  device_table(s): fix the 'count' field in device_tables. Line up to the n=
-ew
-  device_table-oldmmc: adjust count fields according to makedevs fixes.
+You have a point here.
+The only disadvantage of different defconfigs is that you need to
+change them all if there is some lower level change.
+E.g. discovered the other day that ubi does not like it if
+CONFIG_MTD_NAND_VERIFY_WRITE is set (which it used to be)
+(see http://www.linux-mtd.infradead.org/faq/ubi.html#L_subpage_verify_fail)
+in that case all defconfigs need to be updated.
+THen again if they live nicely in subdirs, not too much of a problem.
 
-Cliff Brake (1):
-  mono: make 2.4.2.3 the default version
-
-David-John Willis (1):
-  omap3-sgx-modules: Fix broken proc-interface.patch.
-
-Enric Balletbo i Serra (2):
-  igep0020: Add IGEP v2 support to OE
-  linux-igep2: Add 2.6.28.10 for IGEP v2 machine
-
-Frans Meulenbroeks (10):
-  gnu common c++ lib: added recipe
-  commoncpp2: add .h files to staging
-  ccrtp: package created
-  commoncpp: inherit binconfig to install script too
-  samba: added 3.3.9 recipe
-  kernel: changed defconfig so it has RTC as module; bumped MACHINE_KERNEL_=
-PR
-  php: fixed build errors
-  proftpd: moved from 1.3.2 to 1.3.2b
-  linux-kirkwood: disabled ubi verify in defconfig (CONFIG_MTD_NAND_VERIFY_=
-WRI
-
-Henning Heinold (7):
-  fastjar: fix staging
-  fastjar: fix staging now for real
-  checksum.ini: add sums for mkbc.c from jalimo overlay
-  linux-libc-headersr-2.6.20: add unifdef.patch
-  chinook-compat: add new toolchain options and stick to util-linux
-  gcc-cross_csl-arm-2005q3: put into useable state again
-  util-linux-ng: for chinook-compat let util-linux-ng compile with older li=
-bto
-
-Holger Hans Peter Freyther (2):
-  binutils-cross-sdk: Avoid QA error on building
-  mips-common: Add alignment for MIPS
-
-Jeremy Laine (1):
-  klibc_*.inc: fix QA about packaging (klibc.so only for -dev)
-
-Jeremy Lain=E9 (4):
-  linux-2.6.29: update boc01 capsense driver to new i2c style
-  linux-2.6.31: initial port of boc01 patches
-  linux-2.6.31: update defconfig and SPI patch for boc01
-
-John Willis (2):
-  Upstart: Add version 0.3.11.
-  netbase: Add config files for the omap3pandora and bump PR.
-
-Khem Raj (11):
-  lmsensors-apps_2.10.8.bb: Fix QA error about missing GNU hash
-  openscada: Add new recipe for openscada svn trunk.
-  checksums.ini: Add missing checksum for ltrace 0.4
-  binutils-2.20.bb: Fix compilation error with missing braces
-  fftw-3.2: Rename fftw_3.2 recipes to fftw_3.2.2
-  serial-forward.bb: Fix missing GNU_HASH QA Error.
-  gcc-4.4.2: Add new recipes for gcc 4.2.2
-  eglibc_2.9: Remove un-needed patches.
-  ltrace_0.5.3.bb: New recipe for 0.5.3
-  Add support for MIPS qemu machine
-  linux_2.6.31.bb: Add defconfig for mips qemu
-
-Klaus Kurzmann (5):
-  vala(-native): bump to 0.7.7+fso5
-  vala.inc: disable vapigen as it's not strictly needed and does not work (=
-yet
-  libgee-native: new recipe
-  vala-dbus-binding-tool-native: depend on libgee-native
-
-Koen Kooi (44):
-  omap3-sgx-modules: add INHIBIT_PACKAGE_STRIP =3D "1"
-  networkmanager, applet: update to 0.7.2rc
-  pixman: add some new versions, update git recipe
-  u-boot: fix fw_env logic, update beagle and touchbook
-  linux-omap 2.6.29: update touchbook patches
-  libpam: add meta package for all plugins
-  xdg-utils: add 1.0.2
-  ffmpeg: bump SRCREV
-  mplayer: bump SRCREV, remove pld patch that went upstream
-  gmime: add 2.4.10
-  totem-pl-parser: update to 2.28.1
-  igep0020: use omap3.inc
-  angstrom feed sorter: add igep2 support
-  libgdata: add 0.4.0
-  totem: update to 2.28.1
-  totem: clean up totem dir
-  gnome-screensaver: fix packaging
-  gnome-python-extras: fix up patch to python stuff
-  task-perl-module-all: switch it to RRECOMMENDS
-  totem: add missing patch
-  ti-dmai: add igepv2 support
-  gtksourceview: update to latest release, fix packaging
-  gnome-bluetooth git: bump SRCREV
-  gedit: fix packaging so that the .pc ends up in -dev and we don't get the=
- de
-  geoclue: use the correct virtual for gconf
-  libgpsbt: fix QA errors
-  angstrom: blacklist libiconv for *glibc to stop people from corrupting th=
-eir
-  cairo: add 1.8.8
-  poppler: add 0.12.1, latest stable
-  angstrom: prefer cairo 1.8.8, less bugs and faster
-  u-boot git: refresh beagle pinmux patch
-  gdm: add dep on libcanberra and bump PR
-  angstrom-task-gnome: various tasks or a GNOME desktop based image
-  angstrom task gnome: remove non-building uim bit
-  angstrom feed builder: add more stuff
-  lyx: add 1.6.4.1
-  image bbclass: tweak lingue script
-  opkg-*: bump SRCREV
-  redland: add more DEPENDS
-  ekiga git: bump SRCREV, change PV
-  libgles-omap3: merge in changes from overo repo
-  bluez4: update to 4.53
-  bluez4: update to 4.46, 4.53 has build from scratch problems
-
-Leon Woestenberg (2):
-  gnash-fb: Fix DEPENDS from cairo to agg.
-  u-boot: Patched and tested a GIT version for MACHINE=3Dcalamari.
-
-Marcin Juszkiewicz (3):
-  linux-bug: added extra staging, bumped SRCREV
-  checksums.ini: added some kernel patches
-  xserver-xorg-conf: added config fot at91sam9263ek
-
-Marco Cavallini (11):
-  conf/distro/kaeilos.conf added new distro options
-  include/kaeilos-2009-preferred-versions.inc  aligned to latest Angstrom s=
-ett
-  conf/distro/kaeilos.conf completed previous modifications
-  bluez4.inc : temporary solution for KaeilOS just to replace at least blue=
-z-l
-  bluez4_4.35.bb : temporary solution for KaeilOS just to replace at least =
-blu
-  bluez4_4.37.bb : temporary solution for KaeilOS just to replace at least =
-blu
-  kaeilos.inc : temporarily aligned to latest Angstrom settings
-  distro/kaeilos.conf : switched to glibc 2.9
-  glibc-package.bbclass : added KaeilOS hack supporting glibc 2.9
-  xserver-xorg-conf: added config for ronetix-pm9263
-
-Mark Brown (1):
-  smdk6410: Add initial recipe for SMDK6410
-
-Martin Jansa (2):
-  Missing few xorg checksums.ini
-  binutils-2.20 is new enough for glibc_2.9, change configure script to acc=
-ept
-
-Michael 'Mickey' Lauer (11):
-  fso-autorev.inc: add libgee-native
-  vala: delete obsolete version
-  libgee: use 'require' rather than duplicating the recipe; also add a sane=
- sr
-  sane-srcrevs-fso.inc: update to current cornucopia SRCREV
-  libcanberra: depends on libtool
-  fso: add some new dependencies
-  task-fso2-compliance: add libfsoresource and fsogsmd
-  serial-utils: fetch updated versions from FSO git and bump sane-srcrevs
-  libfso-glib: remove bogus additional prefix in SRC_URI
-  task-cli-tools: add serial-forward; bring back ltrace
-  libfsoresource: and add the missing recipe (FSO dbus resource abstraction=
- li
-
-Michael Lippautz (1):
-  rt3070_2.1.1.0.bb: Install missing etc/Wireless/RT2870STA
-
-Michael Smith (6):
-  tzdata: add 2009o as 2009n is no longer available
-  udev 141: fix packaging on x86_64
-  cairo 1.8.8: fix libtool name in doltlibtool
-  libsdl-mixer: add 1.2.9
-  curl, curl-native: add 7.19.6
-  curl: support openssl in CURL_FEATURES.
-
-Stanislav Brabec (1):
-  many recipes: Recipes must not depend on gconf-dbus directly, only dbus c=
-an
-
-Steffen Sledz (1):
-  linux-2.6.24: enable POSIX message queues for hipox machine
-
-Steve Sakoman (8):
-  ckermit: fix GNU_HASH QA error
-  dhcp:  create /var/lib/dhcp3 rather than /var/lib/dhcp
-  evince: stage evince headers to make nautilus happy
-  file-roller: fix packaging
-  gnome-themes: clean up packaging
-  system-tools-backends: fix packaging
-  system-tools-backends: disable 2.8.1 for now
-  usb-gadget: add serial gadget option
-
-Bugs fixed:
-
-bug_id resolution        short_desc
-
-Bugs opened:
-
-bug_id resolution        short_desc
+Frans
 
 
