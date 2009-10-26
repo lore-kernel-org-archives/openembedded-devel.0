@@ -1,27 +1,40 @@
-Received: from [212.60.202.196] (helo=mail.kernelconcepts.de)
+Received: from [209.85.211.177] (helo=mail-yw0-f177.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1N2Sus-0007By-4e
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N2TS4-0000TS-Hk
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Oct 2009 17:59:37 +0100
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1N2Sz0-0004Cs-Fl
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Oct 2009 18:03:50 +0100
-Message-ID: <4AE5D539.7080005@kernelconcepts.de>
-Date: Mon, 26 Oct 2009 17:58:33 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	Mon, 26 Oct 2009 18:33:55 +0100
+Received: by ywh7 with SMTP id 7so10297459ywh.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Oct 2009 10:32:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=GIuWhvlSmbtNQ5sZcTk+5/pbz8/Z/vVX6E/dpJOtl8c=;
+	b=bu4WNxgigBp02wGSCPi3V19REapRruErwn3U1frozGnu052OY6nb7uOaeR2lUEkp6w
+	o03lg9vTdmeFUZMMlVaxIaHY5tkYAiMVThTNRwYK+/TSZ7I7l46JKdpXFJzS2ejTtets
+	7QKP4cEr//G5aXNjkTz/q+AcxQzrgV/RVm0zM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=px5G+TMZTnGPc375YSFv4pTNVx+WnxAcmCBUo3wZVif3T9POPKMkas8WofKUtElTKu
+	LFHocZ7w8Q4Nbr5t5sZb+KhPCXV2h+luGmTw4Z5O5Eh3FuVsrEpK0LOpmPB1kvCzwqhz
+	HgjqQPfPdD1snN+EB9DQw04lG8S6VrhTU5pOI=
 MIME-Version: 1.0
+Received: by 10.101.195.34 with SMTP id x34mr9519390anp.175.1256578366968; 
+	Mon, 26 Oct 2009 10:32:46 -0700 (PDT)
+In-Reply-To: <ac9c93b10910260903o5daa5e8erd5ea2d0c5838ccb6@mail.gmail.com>
+References: <ac9c93b10910260837m708ebc41ja934d825c6b1bec3@mail.gmail.com>
+	<hc4g14$tpm$1@ger.gmane.org>
+	<ac9c93b10910260903o5daa5e8erd5ea2d0c5838ccb6@mail.gmail.com>
+Date: Mon, 26 Oct 2009 18:32:46 +0100
+Message-ID: <ac9c93b10910261032w4d56a5c2g6dd33aaf0fde1b31@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <ac9c93b10910250159k36219facpa0c13777d91d068@mail.gmail.com>
-In-Reply-To: <ac9c93b10910250159k36219facpa0c13777d91d068@mail.gmail.com>
-X-Enigmail-Version: 0.95.7
-X-SA-Exim-Connect-IP: 212.60.202.196
-X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
+X-SA-Exim-Connect-IP: 209.85.211.177
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: kirkwood, one or multiple machines
+Subject: Re: MACHINE_KERNEL_PR issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,51 +48,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2009 16:59:37 -0000
+X-List-Received-Date: Mon, 26 Oct 2009 17:33:55 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-Hi Frans,
+2009/10/26 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+> 2009/10/26 Koen Kooi <k.kooi@student.utwente.nl>:
+>> On 26-10-09 16:37, Frans Meulenbroeks wrote:
+>>>
+>>> Hi,
+>>>
+>>> While creating a recipe which generates a module I bumped into the
+>>> following issue.
+>>> If I do
+>>> inherit module
+>>> the package name uses MACHINE_KERNEL_PR and not PR.
+>>> I understand the reason for this: if the kernel is modified you want
+>>> the proper modules.
+>>> However in a recipe this means that if the recipe changes for whatever
+>>> reason that technically one should increase all MACHINE_KERNEL_PR
+>>> values (as otherwise the new version is not used).
+>>> In my eyes this is not very desirable.
+>>>
+>>> Any opinions how we should fix this?
+>>
+>> koen@dominion:/OE/org.openembedded.dev$ grep PR_append recipes/ti/*
+>> recipes/ti/ti-cmem-module_2.24.01.bb:MACHINE_KERNEL_PR_append = "a"
+>> recipes/ti/ti-dm355mm-module_1.13.bb:MACHINE_KERNEL_PR_append = "a"
+>> recipes/ti/ti-dmai_svn.bb:MACHINE_KERNEL_PR_append = "c"
+>> recipes/ti/ti-dsplink-module_1.61.3.bb:MACHINE_KERNEL_PR_append = "a"
+>> recipes/ti/ti-lpm-module_2.24.01.bb:MACHINE_KERNEL_PR_append = "a"
+>> recipes/ti/ti-sdma-module_2.24.01.bb:MACHINE_KERNEL_PR_append = "a"
+>
+> Ah, ok didn't know about that one and when coined this on #oe no-one
+> mentioned this solution.
+> Thanks alot! Frans
+>
 
-Frans Meulenbroeks schrieb:
-> Recently I added support for the openrd client board to OE by making a
-> new machine.
+Two more things:
 
-yep - good job, the OpenRD client is an interesting piece of hardware.
+We have about 83 recipes that do inherit module.
+and 12 that have MACHINE_KERNEL_PR (10 ti ones, linux omap pm and
+open-iscsi which I just added)
+so ti seems 71 have a problem
 
-> Then why do we have multiple machines?
-> the only things I can think of is:
-> - smaller kernel (but more variants does not drag in that much)
-> - machine specific patches (but for now these do not exist yet, and a
-> clearer way then would be to use the machine specific config macros)
-> - tuned defconfigs (which is the only thing that there is now)
+and why not change the class and add _$(PR) or so instead of _append ?
 
-These are good reasons to have one machine conf for every machine. Apart from
-the fact that it is quite likely that it will cause confusion if you merge
-multiple machine configs into one.
-
-> Disadvantage of more machines is that this will grow and grow.
-> Guess within a short while we'll see a machine definition for QNAP
-> TS219 probably followed by all kind of plug variants like pogoplug,
-> toninoplug etc etc.
-
-I do not agree here, a new device configuration file for a new device is
-something I can live with pretty well. Even if two devices can live with the
-same kernel one config for each makes it much more obvious which ones are
-supported in OE and which to look at if you need to change something.
-Thanks to include files these configs can be small but I don't see a major
-advantage of merging them. Currently this might be possible but you move away
-from best results if more specialized Kirkwood devices show up.
-
-Greetings
-
-Florian
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+Frans
 
 
