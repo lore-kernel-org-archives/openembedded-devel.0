@@ -1,38 +1,38 @@
 Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1N2XkU-0007sU-0w for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Oct 2009 23:09:13 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1N2XjR-0005S9-5X
+	id 1N2XmU-0000Wi-0A for openembedded-devel@lists.openembedded.org;
+	Mon, 26 Oct 2009 23:11:17 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N2XlL-0006IF-HO
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Oct 2009 23:08:05 +0100
+	Mon, 26 Oct 2009 23:10:03 +0100
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Oct 2009 23:08:05 +0100
+	Mon, 26 Oct 2009 23:10:03 +0100
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Oct 2009 23:08:05 +0100
+	Mon, 26 Oct 2009 23:10:03 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 26 Oct 2009 23:07:52 +0100
-Message-ID: <hc56jo$h83$1@ger.gmane.org>
-References: <1255966150-1854-1-git-send-email-marcin@juszkiewicz.com.pl>	<200910192018.29300.marcin@juszkiewicz.com.pl>	<200910211420.34763.marcin@juszkiewicz.com.pl>	<200910262135.55313.marcin@juszkiewicz.com.pl>	<hc526h$1q9$1@ger.gmane.org>
-	<4AE61441.40705@balister.org>
+Date: Mon, 26 Oct 2009 23:08:52 +0100
+Message-ID: <hc56lk$h83$2@ger.gmane.org>
+References: <70c9a9110910260547q7c513336rc28555960bd4e5bd@mail.gmail.com>
+	<1256592782.7623.3.camel@utx.utx.cz>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <4AE61441.40705@balister.org>
+In-Reply-To: <1256592782.7623.3.camel@utx.utx.cz>
 Sender: news <news@ger.gmane.org>
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Updating kernels to latest stable versions
+Subject: Re: Connman and rootfs over NFS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,54 +46,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Oct 2009 22:09:13 -0000
+X-List-Received-Date: Mon, 26 Oct 2009 22:11:17 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 26-10-09 22:27, Philip Balister wrote:
-> On 10/26/2009 04:52 PM, Koen Kooi wrote:
->> On 26-10-09 21:35, Marcin Juszkiewicz wrote:
->>> Dnia środa, 21 października 2009 o 14:20:33 Marcin Juszkiewicz napisał(a
->>>
->>>> I did a check for applying all patches for those machines (they alter
->>>> SRC_URI):
->>>>
->>>> 2.6.18 - at91sam9263ek
->>>> 2.6.19 - at91sam9263ek
->>>> 2.6.20 - n2100, at91sam9263ek
->>>> 2.6.21 - simpad, kb9202, at91sam9263ek, sarge-at91, gumstix-verdex
->>>> (FAIL),
->>>> gumstix-connex (FAIL)
->>>> 2.6.22 - cm-x270, bd-neon
->>>> 2.6.23 - em-x270, cm-x270, mpc8313e-rdb, mpc8323e-rdb
->>>> 2.6.24 - simpad, gesbc-9302, mpc8313e-rdb, cm-x270, ts72xx (FAIL),
->>>> oxnas
->>>> (FAIL), hipox (FAIL)
->>>> 2.6.25 - mpc8313e-rdb, cm-x270, at32stk1000 (FAIL on
->>>> fetching), at91-l9260, m8050
->>>> 2.6.26 - boc01, mpc8313e-rdb, topas910
->>>> 2.6.27 - boc01, progear, simpad
->>>> 2.6.28 - at91sam9263ek, ronetix-pm9263, stb225, collie, tosa, gamecube,
->>>> tx27 FAIL
->>>> 2.6.29 - boc01, canyonlands, micro2440 FAIL, tosa, ep93xx,
->>>> cm-x270, stamp9g20evb
->>>> 2.6.30 - mpc8315e-rdb, at91sam9263ek
->>>> 2.6.31 - boc01, ep93xx
->>>>
->>>> So this changeset breaks few devices at patch level:
->>>> gumstix-verdex/connex in 2.6.21, ts72xx/oxnas/hipox in 2.6.24,
->>>> tx27 in 2.6.28 and micro2440 in 2.6.29.
->>>>
->>>> at32stk1000 patch was not available for fetching.
->>>
->>> Did someone who maintain any of failed devices took a look at it?
+On 26-10-09 22:33, Stanislav Brabec wrote:
+> Enric Balletbò i Serra wrote:
+>> Hi all,
 >>
->> Somewhere on my TODO is to update the pxa gumstix to 2.6.3x, but it's "a
->> few weeks away" down.
+>> Running my Angstrom image and mounting the rootfs over NFS seems that
+>> the connman package reconfigures the network interface (nfs: server
+>> 192.168.2.6 not responding, still trying). There are any way to
+>> prevent this ?
 >
-> There is also some traffic on the gmustix list about this happening.
+> I see very similar problem with Bluetooth networking (BNEP) and openvpn.
+> Connman steals the device when it goes up and mis-configures it.
+>
+> I use a work-around - stopping or not starting the connman daemon.
 
-Which is why it's on my todo :)
+You can also edit /var/lib/conmmand/<if>.conf and set policy to manual 
+(the GUI can also do that for you).
 
 regards,
 
