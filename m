@@ -1,34 +1,26 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [209.85.219.209] (helo=mail-ew0-f209.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1N2mNc-0004uR-5s for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Oct 2009 14:46:35 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1N2mMV-0004Ci-44
+	(envelope-from <dp@xora.org.uk>) id 1N2mVl-00047K-Nw
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Oct 2009 14:45:23 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2009 14:45:18 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Tue, 27 Oct 2009 14:55:00 +0100
+Received: by ewy5 with SMTP id 5so173137ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2009 14:45:18 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 27 Oct 2009 06:53:51 -0700 (PDT)
+Received: by 10.210.9.7 with SMTP id 7mr11748184ebi.5.1256651631509;
+	Tue, 27 Oct 2009 06:53:51 -0700 (PDT)
+Received: from xora-eee (www.xora.org.uk [80.68.91.202])
+	by mx.google.com with ESMTPS id 7sm70486eyg.1.2009.10.27.06.53.49
+	(version=SSLv3 cipher=RC4-MD5); Tue, 27 Oct 2009 06:53:50 -0700 (PDT)
+Date: Tue, 27 Oct 2009 13:53:47 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 27 Oct 2009 14:44:52 +0100
-Message-ID: <hc6tgk$bvp$1@ger.gmane.org>
+Message-ID: <20091027135347.GA2299@xora-eee>
 References: <4AE6F615.4080204@SSpaeth.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+MIME-Version: 1.0
 In-Reply-To: <4AE6F615.4080204@SSpaeth.de>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.219.209
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: gst-plugins-base -> gnome-vfs question
@@ -45,29 +37,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2009 13:46:35 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 27 Oct 2009 13:55:00 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 27-10-09 14:31, Sebastian Spaeth wrote:
-> Current "gst-plugins-base" in org.oe.dev unconditionally depends on
-> "gnome-vfs" which in turn pulls in stuff like "avahi".
->
-> Is that what most people in OE want? It can be turned off on compile
-> time with: "--disable-gnome_vfs", making it optional.
-
-It's already optional, don't install gst-plugin-gnomevfs
-
+On Tue, Oct 27, 2009 at 02:31:01PM +0100, Sebastian Spaeth wrote:
 > I don't want avahi on my Freerunner, just because I want sound on it :-).
+> 
+Eh and what????
 
-I think you are confusing avahi and pulseaudio, in both cases you need 
-to read up on the subject.
+Since I wrote the sound drivers for Freerunner Ive never had avahi
+disable them.
 
-> Should we look into an OEXTRA_CONF solution? Let me know if I have said
-> something dumb here or overlooked something obvious.
+avahi is one of the best networking tools ever written, I cant think
+of any reason someone wouldnt want it on Freerunner.
 
-You overlooked that installing gst-plugin-gnomevfs is completely your 
-own choice
+XorA
 
 
 
