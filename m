@@ -1,26 +1,25 @@
-Received: from [209.85.219.209] (helo=mail-ew0-f209.google.com)
+Received: from [208.97.132.66] (helo=homiemail-a21.g.dreamhost.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1N2mVl-00047K-Nw
+	(envelope-from <Sebastian@SSpaeth.de>) id 1N2mbL-0006qV-6Z
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Oct 2009 14:55:00 +0100
-Received: by ewy5 with SMTP id 5so173137ewy.12
+	Tue, 27 Oct 2009 15:00:46 +0100
+Received: from [192.168.1.154] (unknown [195.190.170.102])
+	by homiemail-a21.g.dreamhost.com (Postfix) with ESMTPA id 98A6F300064
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2009 06:53:51 -0700 (PDT)
-Received: by 10.210.9.7 with SMTP id 7mr11748184ebi.5.1256651631509;
-	Tue, 27 Oct 2009 06:53:51 -0700 (PDT)
-Received: from xora-eee (www.xora.org.uk [80.68.91.202])
-	by mx.google.com with ESMTPS id 7sm70486eyg.1.2009.10.27.06.53.49
-	(version=SSLv3 cipher=RC4-MD5); Tue, 27 Oct 2009 06:53:50 -0700 (PDT)
-Date: Tue, 27 Oct 2009 13:53:47 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091027135347.GA2299@xora-eee>
-References: <4AE6F615.4080204@SSpaeth.de>
+	Tue, 27 Oct 2009 06:59:38 -0700 (PDT)
+Message-ID: <4AE6FCC8.8090704@SSpaeth.de>
+Date: Tue, 27 Oct 2009 14:59:36 +0100
+From: Sebastian Spaeth <Sebastian@SSpaeth.de>
+Organization: ETH Zurich
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-In-Reply-To: <4AE6F615.4080204@SSpaeth.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.219.209
-X-SA-Exim-Mail-From: dp@xora.org.uk
+To: openembedded-devel@lists.openembedded.org
+References: <4AE6F615.4080204@SSpaeth.de> <hc6tgk$bvp$1@ger.gmane.org>
+In-Reply-To: <hc6tgk$bvp$1@ger.gmane.org>
+X-Enigmail-Version: 0.95.7
+OpenPGP: id=C827A062
+X-SA-Exim-Connect-IP: 208.97.132.66
+X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: gst-plugins-base -> gnome-vfs question
@@ -37,22 +36,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2009 13:55:00 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 27 Oct 2009 14:00:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Tue, Oct 27, 2009 at 02:31:01PM +0100, Sebastian Spaeth wrote:
-> I don't want avahi on my Freerunner, just because I want sound on it :-).
-> 
-Eh and what????
+Koen Kooi wrote:
+> On 27-10-09 14:31, Sebastian Spaeth wrote:
+>> Current "gst-plugins-base" in org.oe.dev unconditionally depends on
+>> "gnome-vfs" which in turn pulls in stuff like "avahi".
 
-Since I wrote the sound drivers for Freerunner Ive never had avahi
-disable them.
+> It's already optional, don't install gst-plugin-gnomevfs
+Thanks for the quick reply.
+I was referring to the fact that the "gst-plugins-base" package directly
+depends on gnome-vfs.
 
-avahi is one of the best networking tools ever written, I cant think
-of any reason someone wouldnt want it on Freerunner.
+eg.
+http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/gstreamer/gst-plugins-base_0.10.22.bb
+contains:
+DEPENDS += "libtheora alsa-lib libsm virtual/libx11 freetype gnome-vfs
+libxv"
 
-XorA
+This does not look very optional to me. I keep thinking that there must
+be something very obvious that I have missed.
 
+>> I don't want avahi on my Freerunner, just because I want sound on it :-).
+> I think you are confusing avahi and pulseaudio, in both cases you need
+> to read up on the subject.
+
+I do know the difference between avahi and pulseaudio, thank you ;-).
+
+> You overlooked that installing gst-plugin-gnomevfs is completely your
+> own choice
+
+but gst-plugins-base pulling in gnome-vfs in its DEPENDS is not
+optional, right?
+
+Anyway, thanks for you quick reply. I guess I must have overlooked
+something glaringly obvious here...
+
+spaetz
 
 
