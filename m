@@ -1,41 +1,41 @@
-Received: from [209.85.160.53] (helo=mail-pw0-f53.google.com)
+Received: from [209.85.219.209] (helo=mail-ew0-f209.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rk.raggit@gmail.com>) id 1N2kdR-0006ky-MK
+	(envelope-from <eballetbo@gmail.com>) id 1N2ks1-0002Pn-Og
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Oct 2009 12:54:49 +0100
-Received: by pwi18 with SMTP id 18so23467pwi.12
+	Tue, 27 Oct 2009 13:09:53 +0100
+Received: by ewy5 with SMTP id 5so76676ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2009 04:53:39 -0700 (PDT)
+	Tue, 27 Oct 2009 05:08:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=V/zyvydEQ3iVN9pbTDCLWTtZHtlbUHW/2Tg22ZWQHts=;
-	b=YkXvepXIkW4qlJ66nx3IU3xJZAQGlQHvtniC3uFUwb8y2FdRY/0boBZarIw0XaX0SP
-	utWIcBAETz1dGULFgGXuV1WxZNy2txyovhNHqcoT5zTK17FwV8gmJw5HUHqDrFLobl8k
-	qYNlLXTS2seGBsl3htSBZ2aRk+7wAv67D7+X0=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=x6LEI+KTo5oPC13WqzHi2zaUVP9aW+dEJpokrL9mQrw=;
+	b=sfnlqN5nfa5McQz/fomNggegQtF2OLBCSeU/Zn2NAAgxwu1H3F1LHBtiodvGfp64jh
+	+D4zZ125FEa/BjqDUw2IBYKyJj2JoiXF2tW3XO6xmSBjjZoykHc6YahTxlGUwii0Ec/V
+	2BZnLJ5FEC8ut1hp3IwxD7B5LVGdSDcFGQgzc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=NApFZX7Eg5TotqthCDUf5E983857Fu4j8l/uci2hDSeOREua9kAvP1kssFYcwAHO8B
-	DZ2oUMpq36EM0VgjJrh+K/YHfqZuQg9EpHo6fLLLwy+VW/xRUnsW9qg8mbn5UtpHK5Wq
-	ZK3mUzuCaMLyd4pdK9cREOyPhUQX+6YWQP41I=
-MIME-Version: 1.0
-Received: by 10.140.194.12 with SMTP id r12mr2119820rvf.65.1256644418994; Tue, 
-	27 Oct 2009 04:53:38 -0700 (PDT)
-In-Reply-To: <1256563179.23985.13.camel@mill.internal.reciva.com>
-References: <ec1f3d400910230421r4509e19amc899870bdd640ce5@mail.gmail.com>
-	<ec1f3d400910260325i54971290u914ff2c0a6ca301d@mail.gmail.com>
-	<1256563179.23985.13.camel@mill.internal.reciva.com>
-Date: Tue, 27 Oct 2009 17:23:38 +0530
-Message-ID: <ec1f3d400910270453q2285bf57q98eada6fd37fcecc@mail.gmail.com>
-From: RK Raggit <rk.raggit@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=YTAER3LlrohQlEmUYOb3OpWJq5M4RYunGtE4nERFnytQ8ZAV2l4qUW3IDN05xA1V8g
+	O1HMg/55p0JH5RdwdGt/dx/fQhkRZLNq0Sogqt3TzM4oLs8iEoFcZ+lvIbO1akz4QG9a
+	QDnqq3b8DAIIyS9g5iSH5LrOy+4TD2Uc8Njk4=
+Received: by 10.210.9.18 with SMTP id 18mr6589265ebi.34.1256645323794;
+	Tue, 27 Oct 2009 05:08:43 -0700 (PDT)
+Received: from localhost.localdomain (248.Red-213-97-239.staticIP.rima-tde.net
+	[213.97.239.248])
+	by mx.google.com with ESMTPS id 5sm2206947eyf.9.2009.10.27.05.08.38
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 27 Oct 2009 05:08:41 -0700 (PDT)
+From: Enric Balletbo i Serra <eballetbo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.53
-X-SA-Exim-Mail-From: rk.raggit@gmail.com
+Date: Tue, 27 Oct 2009 13:08:43 +0100
+Message-Id: <1256645324-3210-1-git-send-email-eballetbo@gmail.com>
+X-Mailer: git-send-email 1.6.0.4
+X-SA-Exim-Connect-IP: 209.85.219.209
+X-SA-Exim-Mail-From: eballetbo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [help] openembedded tarball sources on HTTP
+Cc: Enric Balletbo i Serra <eballetbo@iseebcn.com>
+Subject: [PATCH v2 1/2] linux-igep2: Fix audio capture, the capture result is always silence
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,105 +49,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2009 11:54:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 27 Oct 2009 12:09:53 -0000
 
-Thanks for your reply Phil.
-
-I set my ~/.subversion file with http proxy information and when i tried the
-following, it succeeded -
-
-#> svn co http://svn.collab.net/repos/svn/trunk subversion
-
-Based on this i infer that my SVN ports are not blocked by the proxy.
-
-Next i upgraded to cvs-1.12.10 which has support for http proxy tunnelling.
-When i ran this ...
-
-#> ./usr/bin/cvs '-d:pserver;proxy=xx.xx.xx.com
-;proxyport=8080:anonymous@cvs.sv.gnu.org:/cvsroot/config' co -D "20050701
-UTC" config
-
-the command returned with this error "cvs [login aborted]: proxy server
-xx.xx.xx.com:8080 does not support http tunnelling"
-
-So i infer CVS-over-http tunnelling is not possible on my network ...but SVN
-works directly. So thats one good news and one bad !
-
-I will try other options mentioned -- using sources of available
-distributions and using released tarballs (and also pursue my case with the
-network admin ;) )
-
---RK
+From: Enric Balletbo i Serra <eballetbo@iseebcn.com>
 
 
-On Mon, Oct 26, 2009 at 6:49 PM, Phil Blundell <pb@reciva.com> wrote:
+Signed-off-by: Enric Balletbo i Serra <eballetbo@iseebcn.com>
+---
+ conf/machine/include/omap3.inc                     |    2 +-
+ .../twl-asoc-fix-record.diff                       |   34 ++++++++++++++++++++
+ recipes/linux/linux-igep2_2.6.28.10-0.bb           |    4 ++
+ 3 files changed, 39 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/linux/linux-igep2-2.6.28.10-0/twl-asoc-fix-record.diff
 
-> I don't think anybody is publishing a comprehensive set of SCM-derived
-> source tarballs.  As you say below, oesources.org was the closest to
-> this but, since its demise, I don't think anybody else has stepped
-> forwards to fill the vacancy.  Some individual DISTROs do mirror the
-> sources that they are using, and you might like to check whether your
-> distro falls into that category, but I don't believe there is any
-> cross-distribution source mirror at present.
->
-> Indeed, mirroring a full set of tarballs for every conceivable
-> SRCDATE/SRCREV would be a somewhat daunting undertaking: a more feasible
-> option would probably be to do an svn-over-http kind of proxy thing,
-> where a request for something like
-> http://svnproxy.oe.org/checkout?uri=svn://eleet.org/repository&rev=1234
-> would run the checkout in real time and hand you back a tarball.  If you
-> wanted to implement such a thing then it might be feasible to get it
-> hosted on one of the oe.org machines.
->
-> However, most/all recipes do offer at least one released tarball which
-> you should be able to use rather than checking out from SCM every time.
-> If you find a particular package whose sources are simply not available
-> any other way than CVS or SVN then post the details here and someone may
-> be able to point you at a tarball.
->
-> p.
->
-> On Mon, 2009-10-26 at 15:55 +0530, RK Raggit wrote:
-> > anyone with some idea on this .. ? sorry for pushing , but i am kind of
-> > evaluating OE and would like to know whether this is possible at all ?
-> >
-> > ...unblocking cvs,svn ports is defnitely not an option for me.
-> >
-> > --RK
-> >
-> > On Fri, Oct 23, 2009 at 4:51 PM, RK Raggit <rk.raggit@gmail.com> wrote:
-> >
-> > > Hi there,
-> > >
-> > > I am building openembedded recipes but i am behind a proxy that only
-> allows
-> > > http accesses and blocks cvs,svn ports.
-> > >
-> > > I would like to know where i can obtain pristine OE package (tarball)
-> > > sources from a HTTP link. I tried
-> > >
-> > > http://oesources.org/source/current
-> > >
-> > > ...but that link does not work. Could someone please guide me the
-> correct
-> > > link ? I will update my CVS_TARBALL_STASH
-> > > variable with this link.
-> > >
-> > > Thanks
-> > > RK
-> > >
-> > >
-> > >
->  > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/conf/machine/include/omap3.inc b/conf/machine/include/omap3.inc
+index 675249a..bb750aa 100644
+--- a/conf/machine/include/omap3.inc
++++ b/conf/machine/include/omap3.inc
+@@ -1,7 +1,7 @@
+ require conf/machine/include/tune-cortexa8.inc
+ PREFERRED_PROVIDER_virtual/kernel = "linux-omap"
+ # Increase this everytime you change something in the kernel
+-MACHINE_KERNEL_PR = "r47" 
++MACHINE_KERNEL_PR = "r48"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ 
+diff --git a/recipes/linux/linux-igep2-2.6.28.10-0/twl-asoc-fix-record.diff b/recipes/linux/linux-igep2-2.6.28.10-0/twl-asoc-fix-record.diff
+new file mode 100644
+index 0000000..9c0ceaa
+--- /dev/null
++++ b/recipes/linux/linux-igep2-2.6.28.10-0/twl-asoc-fix-record.diff
+@@ -0,0 +1,34 @@
++From linux-omap-owner@vger.kernel.org Sat Dec 06 02:14:21 2008
++Date: 	Fri, 5 Dec 2008 16:46:34 -0800
++From: "Steve Sakoman" <sakoman@gmail.com>
++To: "linux-omap@vger.kernel.org" <linux-omap@vger.kernel.org>
++Subject: [FYI PATCH] ASOC:TWL4030 Audio capture fix
++
++A couple of folks have noticed an issue with audio capture -- the
++capture result is always silence.
++
++The patch below is a quick fix for those with this issue.  There are
++substantial changes to the codec driver that will be trickling down
++from ASoC, and they deal with this issue differently.
++
++So consider this as a bandaid for those who don't want to wait for the
++trickle down :-)
++
++Steve
++
++
++diff --git a/sound/soc/codecs/twl4030.c b/sound/soc/codecs/twl4030.c
++index ee2f0d3..8b4aafb 100644
++--- a/sound/soc/codecs/twl4030.c
+++++ b/sound/soc/codecs/twl4030.c
++@@ -45,8 +45,8 @@ static const u8 twl4030_reg[TWL4030_CACHEREGNUM] = {
++ 	0xc3, /* REG_OPTION		(0x2)	*/
++ 	0x00, /* REG_UNKNOWN		(0x3)	*/
++ 	0x00, /* REG_MICBIAS_CTL	(0x4)	*/
++-	0x24, /* REG_ANAMICL		(0x5)	*/
++-	0x04, /* REG_ANAMICR		(0x6)	*/
+++	0x34, /* REG_ANAMICL		(0x5)	*/
+++	0x14, /* REG_ANAMICR		(0x6)	*/
++ 	0x0a, /* REG_AVADC_CTL		(0x7)	*/
++ 	0x00, /* REG_ADCMICSEL		(0x8)	*/
++ 	0x00, /* REG_DIGMIXING		(0x9)	*/
+diff --git a/recipes/linux/linux-igep2_2.6.28.10-0.bb b/recipes/linux/linux-igep2_2.6.28.10-0.bb
+index ebe2918..c346da7 100644
+--- a/recipes/linux/linux-igep2_2.6.28.10-0.bb
++++ b/recipes/linux/linux-igep2_2.6.28.10-0.bb
+@@ -10,4 +10,8 @@ DEFAULT_PREFERENCE_igep0020 = "1"
+ SRC_URI = "http://downloads.myigep.com/sources/kernel/linux-omap-2.6.28.10-igep0020b-0.tar.gz \
+ 	   file://defconfig"
+ 
++SRC_URI_append = " \
++	file://twl-asoc-fix-record.diff;patch=1 \
++"
++
+ S = "${WORKDIR}/linux-omap-2.6.28.10-igep0020b-0"
+-- 
+1.5.4.3
+
+
 
