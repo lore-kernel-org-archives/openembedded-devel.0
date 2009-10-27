@@ -1,29 +1,26 @@
-Received: from [87.193.137.100] (helo=mail.dresearch.de)
+Received: from [208.97.132.5] (helo=homiemail-a24.g.dreamhost.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1N2lLj-0006QH-MN
+	(envelope-from <Sebastian@SSpaeth.de>) id 1N2mAG-0003rV-8s
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Oct 2009 13:40:34 +0100
-Received: from hiob.intern.dresearch.de (unknown [10.32.0.138])
-	by mail.dresearch.de (Postfix) with ESMTP id D6C6149128E
+	Tue, 27 Oct 2009 14:32:47 +0100
+Received: from [192.168.1.154] (unknown [195.190.170.102])
+	by homiemail-a24.g.dreamhost.com (Postfix) with ESMTPA id 5B4092C806B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2009 13:39:27 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Tue, 27 Oct 2009 09:26:38 +0100
-Message-ID: <4AE6AE15.4080206@dresearch.de>
-Date: Tue, 27 Oct 2009 09:23:49 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+	Tue, 27 Oct 2009 06:31:39 -0700 (PDT)
+Message-ID: <4AE6F615.4080204@SSpaeth.de>
+Date: Tue, 27 Oct 2009 14:31:01 +0100
+From: Sebastian Spaeth <Sebastian@SSpaeth.de>
+Organization: ETH Zurich
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1256566659-32412-1-git-send-email-sledz@dresearch.de>
-In-Reply-To: <1256566659-32412-1-git-send-email-sledz@dresearch.de>
-X-OriginalArrivalTime: 27 Oct 2009 08:26:39.0000 (UTC)
-	FILETIME=[3461C980:01CA56DF]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@DResearch.DE
+X-Enigmail-Version: 0.95.7
+OpenPGP: id=C827A062
+X-SA-Exim-Connect-IP: 208.97.132.5
+X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] glibc_2.9: disable parallel make
+Subject: gst-plugins-base -> gnome-vfs question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,23 +34,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2009 12:40:34 -0000
-Content-Type: text/plain; charset=ISO-8859-15
+X-List-Received-Date: Tue, 27 Oct 2009 13:32:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Steffen Sledz wrote:
-> Parallel make for glibc_2.9.bb fails on different multi-cpu build hosts
-> (e.g. AMD Phenom(tm) 9150e Quad-Core Processor running openSUSE 11.1)
-> with various errors. :(
-> 
-> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
-> ...
+Current "gst-plugins-base" in org.oe.dev unconditionally depends on
+"gnome-vfs" which in turn pulls in stuff like "avahi".
 
-BTW: It is the first time i proposed a patch this way and i expected
-to see it in the patchwork queue but it doesn't. :(
+Is that what most people in OE want? It can be turned off on compile
+time with: "--disable-gnome_vfs", making it optional.
 
-Steffen
+I don't want avahi on my Freerunner, just because I want sound on it :-).
 
+Should we look into an OEXTRA_CONF solution? Let me know if I have said
+something dumb here or overlooked something obvious.
 
+Thanks,
+spaetz
 
 
