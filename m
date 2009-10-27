@@ -1,38 +1,39 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [209.85.223.198] (helo=mail-iw0-f198.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1N2n4r-0003rX-Vj for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Oct 2009 15:31:17 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1N2n3k-0001IP-5J
+	(envelope-from <raj.khem@gmail.com>) id 1N2sD1-00054k-9s
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Oct 2009 15:30:04 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2009 15:30:04 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Tue, 27 Oct 2009 21:00:02 +0100
+Received: by iwn36 with SMTP id 36so59499iwn.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2009 15:30:04 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 27 Oct 2009 12:58:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=V+XcvCTTS1U85msUB0eimao7grok+FfE4tOU9toh8RY=;
+	b=qiphoeEHrarSjjbaXsQf6OQHRLrBB/7pYsalStMj05wX2Ysl4hXw9+/ljL3/H+irvK
+	x8lphrroaQ/DG9E+X14GqSy/uFAPjW5C7cVnIR8mCE55bKeMV6pgQDtXgpbr8VzdamEB
+	2hp+nGxmox7kEuzGxY9JaYK/S/kf1+jAMaruc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=BpgVbIY8ezbbtzOjQtG4nqI2qt8HCL0VSjFdMIeEeTq9bZ2Bzdz+C6myuJvclL1tWX
+	SJZmEUqOC1olfGGsPFI0W+zmkdFdr2q76E4hoQCwUJZQ9//GLtQ/DX67D/ZSxBU8ZWbc
+	T4vEdwkNMOqDeGfMSvX3RVTpYN8VNyGjyuSrs=
+MIME-Version: 1.0
+Received: by 10.231.29.149 with SMTP id q21mr1146641ibc.35.1256673532664; Tue, 
+	27 Oct 2009 12:58:52 -0700 (PDT)
+In-Reply-To: <4AE6AE15.4080206@dresearch.de>
+References: <1256566659-32412-1-git-send-email-sledz@dresearch.de>
+	<4AE6AE15.4080206@dresearch.de>
+Date: Tue, 27 Oct 2009 12:58:52 -0700
+Message-ID: <19c1b8a90910271258kb65e4b3wf62fb79c09413eef@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 27 Oct 2009 15:24:51 +0100
-Message-ID: <hc6vrj$k2o$2@ger.gmane.org>
-References: <4AE6F615.4080204@SSpaeth.de> <hc6tgk$bvp$1@ger.gmane.org>
-	<4AE6FCC8.8090704@SSpaeth.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <4AE6FCC8.8090704@SSpaeth.de>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.223.198
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: gst-plugins-base -> gnome-vfs question
+Subject: Re: [PATCH] glibc_2.9: disable parallel make
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,34 +47,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2009 14:31:17 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 27 Oct 2009 20:00:03 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 27-10-09 14:59, Sebastian Spaeth wrote:
-> Koen Kooi wrote:
->> On 27-10-09 14:31, Sebastian Spaeth wrote:
->>> Current "gst-plugins-base" in org.oe.dev unconditionally depends on
->>> "gnome-vfs" which in turn pulls in stuff like "avahi".
+On Tue, Oct 27, 2009 at 1:23 AM, Steffen Sledz <sledz@dresearch.de> wrote:
+> Steffen Sledz wrote:
+>> Parallel make for glibc_2.9.bb fails on different multi-cpu build hosts
+>> (e.g. AMD Phenom(tm) 9150e Quad-Core Processor running openSUSE 11.1)
+>> with various errors. :(
+
+I would suggest to refrain from applying this patch as it affects
+people who do not suffer from this problem
+and compile time for glibc is quite huge that everyone will feel the
+pinch. I would still urge to
+debug the real problem and fix it. May be there is something wrong
+with the OS on the box or even in the
+parallel build mechanism of glibc.  Or if there is a way to say 'only
+disable parallel build when build machine is
+"AMD Phenom(tm) 9150e Quad-Core Processor running openSUSE 11.1" would
+be ok too.
+
+Thanks
+
+-Khem
+
+>>
+>> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+>> ...
 >
->> It's already optional, don't install gst-plugin-gnomevfs
-> Thanks for the quick reply.
-> I was referring to the fact that the "gst-plugins-base" package directly
-> depends on gnome-vfs.
+> BTW: It is the first time i proposed a patch this way and i expected
+> to see it in the patchwork queue but it doesn't. :(
 >
-> eg.
-> http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/gstreamer/gst-plugins-base_0.10.22.bb
-> contains:
-> DEPENDS += "libtheora alsa-lib libsm virtual/libx11 freetype gnome-vfs
-> libxv"
+> Steffen
 >
-> This does not look very optional to me. I keep thinking that there must
-> be something very obvious that I have missed.
-
-Yes, something along the lines of "build time dependency != runtime 
-depency" or in OE speak "DEPENDS != RDEPENDS".
-
-Glibc has qemu in DEPENDS, does that show up on your freerunner?
-
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
