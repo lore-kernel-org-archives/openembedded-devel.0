@@ -1,40 +1,41 @@
-Received: from [209.85.219.209] (helo=mail-ew0-f209.google.com)
+Received: from [209.85.160.53] (helo=mail-pw0-f53.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eballetbo@gmail.com>) id 1N2kcB-0006i8-B3
+	(envelope-from <rk.raggit@gmail.com>) id 1N2kdR-0006ky-MK
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Oct 2009 12:53:30 +0100
-Received: by ewy5 with SMTP id 5so61449ewy.12
+	Tue, 27 Oct 2009 12:54:49 +0100
+Received: by pwi18 with SMTP id 18so23467pwi.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2009 04:52:20 -0700 (PDT)
+	Tue, 27 Oct 2009 04:53:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=JI75PKy9WpGPJXqOP7EL8U5kmVLvqq6UMKVE3QIzOqE=;
-	b=W2Yj+DdEKITDqYkvSyG77PggifZAotEknw+zlASYReGkNP+4v3bVcSRVLa64AKk1pR
-	pzd58Yr0QYs7euUEM5FO5KcxQ115b5WAqXEGNN4bkXDXvnubSQCfhWet80fgV3D8BqNz
-	AuJkcOEwsj3lu8jKegwmjQq/A4rk0Fwk1K5Jk=
+	:date:message-id:subject:from:to:content-type;
+	bh=V/zyvydEQ3iVN9pbTDCLWTtZHtlbUHW/2Tg22ZWQHts=;
+	b=YkXvepXIkW4qlJ66nx3IU3xJZAQGlQHvtniC3uFUwb8y2FdRY/0boBZarIw0XaX0SP
+	utWIcBAETz1dGULFgGXuV1WxZNy2txyovhNHqcoT5zTK17FwV8gmJw5HUHqDrFLobl8k
+	qYNlLXTS2seGBsl3htSBZ2aRk+7wAv67D7+X0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=MMCK0lFJTmfG2gUPS2CrQVP9OxLJko1TeeM4JSC8Ta1aPSnKr9o4sGCmpKM6xPSwEv
-	ADLDwYGX/skDFmbDDJwPcIo7oRdEgIU3VDZ1Qe7YFP+Xo8OBG5QO/YVSEgJ46DExShjk
-	Ne7SfVPgGth6qW+DgDBLY5skWRxLb/f6J3uHI=
+	:content-type;
+	b=NApFZX7Eg5TotqthCDUf5E983857Fu4j8l/uci2hDSeOREua9kAvP1kssFYcwAHO8B
+	DZ2oUMpq36EM0VgjJrh+K/YHfqZuQg9EpHo6fLLLwy+VW/xRUnsW9qg8mbn5UtpHK5Wq
+	ZK3mUzuCaMLyd4pdK9cREOyPhUQX+6YWQP41I=
 MIME-Version: 1.0
-Received: by 10.216.86.129 with SMTP id w1mr341779wee.145.1256644340310; Tue, 
-	27 Oct 2009 04:52:20 -0700 (PDT)
-In-Reply-To: <hc6eva$qum$1@ger.gmane.org>
-References: <70c9a9110910270155j3d9aed71m4f106612a94b8cfe@mail.gmail.com>
-	<hc6eva$qum$1@ger.gmane.org>
-Date: Tue, 27 Oct 2009 12:52:20 +0100
-Message-ID: <70c9a9110910270452u18bc1a30k6115a3bac4a71554@mail.gmail.com>
-From: =?UTF-8?Q?Enric_Balletb=C3=B2_i_Serra?= <eballetbo@gmail.com>
+Received: by 10.140.194.12 with SMTP id r12mr2119820rvf.65.1256644418994; Tue, 
+	27 Oct 2009 04:53:38 -0700 (PDT)
+In-Reply-To: <1256563179.23985.13.camel@mill.internal.reciva.com>
+References: <ec1f3d400910230421r4509e19amc899870bdd640ce5@mail.gmail.com>
+	<ec1f3d400910260325i54971290u914ff2c0a6ca301d@mail.gmail.com>
+	<1256563179.23985.13.camel@mill.internal.reciva.com>
+Date: Tue, 27 Oct 2009 17:23:38 +0530
+Message-ID: <ec1f3d400910270453q2285bf57q98eada6fd37fcecc@mail.gmail.com>
+From: RK Raggit <rk.raggit@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.209
-X-SA-Exim-Mail-From: eballetbo@gmail.com
+X-SA-Exim-Connect-IP: 209.85.160.53
+X-SA-Exim-Mail-From: rk.raggit@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 1/5] igep0020.conf: Fix missing u-boot entrypoint
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [help] openembedded tarball sources on HTTP
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,40 +49,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2009 11:53:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 27 Oct 2009 11:54:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Ooops ! You're right. Thanks for checking.
+Thanks for your reply Phil.
 
-Regards,
+I set my ~/.subversion file with http proxy information and when i tried the
+following, it succeeded -
 
-Enric
+#> svn co http://svn.collab.net/repos/svn/trunk subversion
 
-2009/10/27 Koen Kooi <k.kooi@student.utwente.nl>:
-> On 27-10-09 09:55, Enric Balletb=C3=B2 i Serra wrote:
->>
->> Signed-off-by: Enric Balletbo i Serra<eballetbo@iseebcn.com>
->> ---
->> =C2=A0conf/machine/igep0020.conf | =C2=A0 =C2=A03 +++
->> =C2=A01 files changed, 3 insertions(+), 0 deletions(-)
->>
->> diff --git a/conf/machine/igep0020.conf b/conf/machine/igep0020.conf
->> index 512a977..7430646 100644
->> --- a/conf/machine/igep0020.conf
->> +++ b/conf/machine/igep0020.conf
->> @@ -24,6 +24,9 @@ IMAGE_FSTYPES +=3D "tar.bz2 ubi"
->> =C2=A0# Guesswork
->> =C2=A0SERIAL_CONSOLE =3D "115200 ttyS2"
->>
->> +UBOOT_ENTRYPOINT =3D "0x80008000"
->> +UBOOT_LOADADDRESS =3D "0x80008000"
+Based on this i infer that my SVN ports are not blocked by the proxy.
+
+Next i upgraded to cvs-1.12.10 which has support for http proxy tunnelling.
+When i ran this ...
+
+#> ./usr/bin/cvs '-d:pserver;proxy=xx.xx.xx.com
+;proxyport=8080:anonymous@cvs.sv.gnu.org:/cvsroot/config' co -D "20050701
+UTC" config
+
+the command returned with this error "cvs [login aborted]: proxy server
+xx.xx.xx.com:8080 does not support http tunnelling"
+
+So i infer CVS-over-http tunnelling is not possible on my network ...but SVN
+works directly. So thats one good news and one bad !
+
+I will try other options mentioned -- using sources of available
+distributions and using released tarballs (and also pursue my case with the
+network admin ;) )
+
+--RK
+
+
+On Mon, Oct 26, 2009 at 6:49 PM, Phil Blundell <pb@reciva.com> wrote:
+
+> I don't think anybody is publishing a comprehensive set of SCM-derived
+> source tarballs.  As you say below, oesources.org was the closest to
+> this but, since its demise, I don't think anybody else has stepped
+> forwards to fill the vacancy.  Some individual DISTROs do mirror the
+> sources that they are using, and you might like to check whether your
+> distro falls into that category, but I don't believe there is any
+> cross-distribution source mirror at present.
 >
-> NACK, that is already set from within omap3.inc
+> Indeed, mirroring a full set of tarballs for every conceivable
+> SRCDATE/SRCREV would be a somewhat daunting undertaking: a more feasible
+> option would probably be to do an svn-over-http kind of proxy thing,
+> where a request for something like
+> http://svnproxy.oe.org/checkout?uri=svn://eleet.org/repository&rev=1234
+> would run the checkout in real time and hand you back a tarball.  If you
+> wanted to implement such a thing then it might be feasible to get it
+> hosted on one of the oe.org machines.
 >
-> regards,
+> However, most/all recipes do offer at least one released tarball which
+> you should be able to use rather than checking out from SCM every time.
+> If you find a particular package whose sources are simply not available
+> any other way than CVS or SVN then post the details here and someone may
+> be able to point you at a tarball.
 >
-> Koen
+> p.
+>
+> On Mon, 2009-10-26 at 15:55 +0530, RK Raggit wrote:
+> > anyone with some idea on this .. ? sorry for pushing , but i am kind of
+> > evaluating OE and would like to know whether this is possible at all ?
+> >
+> > ...unblocking cvs,svn ports is defnitely not an option for me.
+> >
+> > --RK
+> >
+> > On Fri, Oct 23, 2009 at 4:51 PM, RK Raggit <rk.raggit@gmail.com> wrote:
+> >
+> > > Hi there,
+> > >
+> > > I am building openembedded recipes but i am behind a proxy that only
+> allows
+> > > http accesses and blocks cvs,svn ports.
+> > >
+> > > I would like to know where i can obtain pristine OE package (tarball)
+> > > sources from a HTTP link. I tried
+> > >
+> > > http://oesources.org/source/current
+> > >
+> > > ...but that link does not work. Could someone please guide me the
+> correct
+> > > link ? I will update my CVS_TARBALL_STASH
+> > > variable with this link.
+> > >
+> > > Thanks
+> > > RK
+> > >
+> > >
+> > >
+>  > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 >
 > _______________________________________________
@@ -89,5 +150,4 @@ Enric
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
-
 
