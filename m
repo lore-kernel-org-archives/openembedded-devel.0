@@ -1,26 +1,37 @@
-Received: from [208.97.132.5] (helo=homiemail-a24.g.dreamhost.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sebastian@SSpaeth.de>) id 1N2mAG-0003rV-8s
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1N2mNc-0004uR-5s for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Oct 2009 14:46:35 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N2mMV-0004Ci-44
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Oct 2009 14:32:47 +0100
-Received: from [192.168.1.154] (unknown [195.190.170.102])
-	by homiemail-a24.g.dreamhost.com (Postfix) with ESMTPA id 5B4092C806B
+	Tue, 27 Oct 2009 14:45:23 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Oct 2009 14:45:18 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2009 06:31:39 -0700 (PDT)
-Message-ID: <4AE6F615.4080204@SSpaeth.de>
-Date: Tue, 27 Oct 2009 14:31:01 +0100
-From: Sebastian Spaeth <Sebastian@SSpaeth.de>
-Organization: ETH Zurich
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Tue, 27 Oct 2009 14:45:18 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.7
-OpenPGP: id=C827A062
-X-SA-Exim-Connect-IP: 208.97.132.5
-X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 27 Oct 2009 14:44:52 +0100
+Message-ID: <hc6tgk$bvp$1@ger.gmane.org>
+References: <4AE6F615.4080204@SSpaeth.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <4AE6F615.4080204@SSpaeth.de>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: gst-plugins-base -> gnome-vfs question
+Subject: Re: gst-plugins-base -> gnome-vfs question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,22 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2009 13:32:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 27 Oct 2009 13:46:35 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Current "gst-plugins-base" in org.oe.dev unconditionally depends on
-"gnome-vfs" which in turn pulls in stuff like "avahi".
+On 27-10-09 14:31, Sebastian Spaeth wrote:
+> Current "gst-plugins-base" in org.oe.dev unconditionally depends on
+> "gnome-vfs" which in turn pulls in stuff like "avahi".
+>
+> Is that what most people in OE want? It can be turned off on compile
+> time with: "--disable-gnome_vfs", making it optional.
 
-Is that what most people in OE want? It can be turned off on compile
-time with: "--disable-gnome_vfs", making it optional.
+It's already optional, don't install gst-plugin-gnomevfs
 
-I don't want avahi on my Freerunner, just because I want sound on it :-).
+> I don't want avahi on my Freerunner, just because I want sound on it :-).
 
-Should we look into an OEXTRA_CONF solution? Let me know if I have said
-something dumb here or overlooked something obvious.
+I think you are confusing avahi and pulseaudio, in both cases you need 
+to read up on the subject.
 
-Thanks,
-spaetz
+> Should we look into an OEXTRA_CONF solution? Let me know if I have said
+> something dumb here or overlooked something obvious.
+
+You overlooked that installing gst-plugin-gnomevfs is completely your 
+own choice
+
 
 
