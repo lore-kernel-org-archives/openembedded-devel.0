@@ -1,35 +1,37 @@
-Received: from [209.85.219.209] (helo=mail-ew0-f209.google.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eballetbo@gmail.com>) id 1N2hr2-0000UV-KM
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1N2iVM-0005Ss-OL for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Oct 2009 10:38:19 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N2iUC-0004qL-QU
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Oct 2009 09:56:39 +0100
-Received: by mail-ew0-f209.google.com with SMTP id 5so8624074ewy.12
+	Tue, 27 Oct 2009 10:37:04 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Oct 2009 10:37:04 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Oct 2009 01:55:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=IhtU+ADcbnYGtAGs6U6duMOo2boooPOe9msQMbNfXbM=;
-	b=YmM2Mt7sHI/NgZDt80v4g+sQGKzACcbk48om/GjkG8d80rBLicw4p4XpvvU6hpHhbR
-	IHWfX6NY6JJxmRNMJk0cekMlJBkuxbHRzrFyoSrSRPyROnl9gJGC0r+S4gKAIxQv6MGS
-	xxTMXRvTmvM3OqeIJ3rPWipmXYGjzgPVDfwSA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=iAYMIv7k6Cd1hc7LDwdB09ejteiX0Ny2pOk2PZy8TgCCBc8X8MYX5DWa5/XaRgs4Kp
-	PxSYx941UCd/wWNaLTBMz9b0cgieht7oYUL6WRYm4JgMk3FFd9/PbxLKuaNI3v7/fQHs
-	k8x8rcF521t7C+kEe5L0DKEyqbv+77CNV0mQI=
-MIME-Version: 1.0
-Received: by 10.216.88.67 with SMTP id z45mr159448wee.112.1256633732994; Tue, 
-	27 Oct 2009 01:55:32 -0700 (PDT)
-Date: Tue, 27 Oct 2009 09:55:32 +0100
-Message-ID: <70c9a9110910270155x3ddb90fane839454032c017d8@mail.gmail.com>
-From: =?UTF-8?Q?Enric_Balletb=C3=B2_i_Serra?= <eballetbo@gmail.com>
+	Tue, 27 Oct 2009 10:37:04 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.209
-X-SA-Exim-Mail-From: eballetbo@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 27 Oct 2009 10:36:42 +0100
+Message-ID: <hc6eva$qum$1@ger.gmane.org>
+References: <70c9a9110910270155j3d9aed71m4f106612a94b8cfe@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <70c9a9110910270155j3d9aed71m4f106612a94b8cfe@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 5/5] xserver-xf86-config: Add version for IGEP v2 board
+Subject: Re: [PATCH 1/5] igep0020.conf: Fix missing u-boot entrypoint
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,65 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Oct 2009 08:56:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 27 Oct 2009 09:38:19 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Enric Balletbo i Serra <eballetbo@iseebcn.com>
----
- .../xserver-xorg-conf/igep0020/xorg.conf           |   29 ++++++++++++++++++++
- recipes/xorg-xserver/xserver-xorg-conf_0.1.bb      |    2 +-
- 2 files changed, 30 insertions(+), 1 deletions(-)
- create mode 100644 recipes/xorg-xserver/xserver-xorg-conf/igep0020/xorg.conf
+On 27-10-09 09:55, Enric Balletbò i Serra wrote:
+> Signed-off-by: Enric Balletbo i Serra<eballetbo@iseebcn.com>
+> ---
+>   conf/machine/igep0020.conf |    3 +++
+>   1 files changed, 3 insertions(+), 0 deletions(-)
+>
+> diff --git a/conf/machine/igep0020.conf b/conf/machine/igep0020.conf
+> index 512a977..7430646 100644
+> --- a/conf/machine/igep0020.conf
+> +++ b/conf/machine/igep0020.conf
+> @@ -24,6 +24,9 @@ IMAGE_FSTYPES += "tar.bz2 ubi"
+>   # Guesswork
+>   SERIAL_CONSOLE = "115200 ttyS2"
+>
+> +UBOOT_ENTRYPOINT = "0x80008000"
+> +UBOOT_LOADADDRESS = "0x80008000"
 
-diff --git a/recipes/xorg-xserver/xserver-xorg-conf/igep0020/xorg.conf
-b/recipes/xorg-xserver/xserver-xorg-conf/igep0020/xorg.conf
-new file mode 100644
-index 0000000..983bb08
---- /dev/null
-+++ b/recipes/xorg-xserver/xserver-xorg-conf/igep0020/xorg.conf
-@@ -0,0 +1,29 @@
-+Section "Module"
-+        Load    "extmod"
-+        Load    "dbe"
-+        Load    "glx"
-+        Load    "freetype"
-+        Load    "type1"
-+        Load    "record"
-+        Load    "dri"
-+EndSection
-+
-+Section "Monitor"
-+        Identifier      "Builtin Default Monitor"
-+EndSection
-+
-+Section "Device"
-+        Identifier      "Builtin Default fbdev Device 0"
-+        Driver  "omapfb"
-+EndSection
-+
-+Section "Screen"
-+        Identifier      "Builtin Default fbdev Screen 0"
-+        Device  "Builtin Default fbdev Device 0"
-+        Monitor "Builtin Default Monitor"
-+EndSection
-+
-+Section "ServerLayout"
-+        Identifier      "Builtin Default Layout"
-+        Screen  "Builtin Default fbdev Screen 0"
-+EndSection
-diff --git a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-index ba52376..37d200b 100644
---- a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-+++ b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "Machine specific xorg.conf files"
--PR = "r11"
-+PR = "r12"
+NACK, that is already set from within omap3.inc
 
- SRC_URI = "file://xorg.conf"
+regards,
 
--- 
-1.5.4.3
+Koen
+
 
 
