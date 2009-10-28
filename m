@@ -1,16 +1,16 @@
 Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N360v-0001ub-Mj
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N360w-0001ug-3Y
 	for openembedded-devel@openembedded.org; Wed, 28 Oct 2009 11:44:29 +0100
-Received: (qmail 31100 invoked by uid 813007); 28 Oct 2009 10:43:20 -0000
+Received: (qmail 31168 invoked by uid 813007); 28 Oct 2009 10:43:21 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from 195.149.226.213 (HELO localhost.localdomain)
 	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 28 Oct 2009 10:43:20 -0000
+	by 195.149.226.213 with ESMTPA; 28 Oct 2009 10:43:21 -0000
 From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Oct 2009 11:45:55 +0100
-Message-Id: <1256726758-22996-4-git-send-email-marcin@juszkiewicz.com.pl>
+Date: Wed, 28 Oct 2009 11:45:57 +0100
+Message-Id: <1256726758-22996-6-git-send-email-marcin@juszkiewicz.com.pl>
 X-Mailer: git-send-email 1.6.5
 In-Reply-To: <1256726758-22996-1-git-send-email-marcin@juszkiewicz.com.pl>
 References: <1256726758-22996-1-git-send-email-marcin@juszkiewicz.com.pl>
@@ -18,7 +18,8 @@ X-SA-Exim-Connect-IP: 195.149.226.213
 X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [STABLE][PATCH 3/6] coreutils-native: make mandatory dep for all packages
+Cc: Marcin Juszkiewicz <hrw@openembedded.org>
+Subject: [STABLE][PATCH 5/6] task-proper-tools: added few extra packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,36 +35,69 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 28 Oct 2009 10:44:29 -0000
 
-From: Roman I Khimov <khimov@altell.ru>
+From: Marcin Juszkiewicz <hrw@openembedded.org>
 
-Gives us guaranteed sane GNU coreutils on any host. Should greatly ease
-support for various non-GNU host systems and allow to safely remove some other
-native packages like 'install-native'.
-
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 ---
- classes/base.bbclass |    6 ++++--
- 1 files changed, 4 insertions(+), 2 deletions(-)
+ recipes/tasks/task-proper-tools.bb |   35 ++++++++++++++++++++---------------
+ 1 files changed, 20 insertions(+), 15 deletions(-)
 
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index 611c71d..e622aee 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -134,9 +134,11 @@ def base_dep_prepend(d):
- 	# the case where host == build == target, for now we don't work in
- 	# that case though.
- 	#
--	deps = "shasum-native "
--	if bb.data.getVar('PN', d, True) == "shasum-native":
-+	deps = "shasum-native coreutils-native"
-+	if bb.data.getVar('PN', d, True) == "shasum-native" or bb.data.getVar('PN', d, True) == "stagemanager-native":
- 		deps = ""
-+	if bb.data.getVar('PN', d, True) == "coreutils-native":
-+		deps = "shasum-native"
+diff --git a/recipes/tasks/task-proper-tools.bb b/recipes/tasks/task-proper-tools.bb
+index c5045a1..056109e 100644
+--- a/recipes/tasks/task-proper-tools.bb
++++ b/recipes/tasks/task-proper-tools.bb
+@@ -1,31 +1,36 @@
+ DESCRIPTION = "Full versions of tools provided by busybox"
+-PR = "r9"
++PR = "r10"
  
- 	# INHIBIT_DEFAULT_DEPS doesn't apply to the patch command.  Whether or  not
- 	# we need that built is the responsibility of the patch function / class, not
+ inherit task
+ 
+ RDEPENDS_${PN} = "\
++		binutils-symlinks \
+ 		coreutils \
++		cpio \
++		debianutils \
++		diffutils \
++		e2fsprogs \
++		e2fsprogs-fsck \
++		fbset \
+ 		findutils \
+-		util-linux-ng \
+-		grep \
+ 		gawk \
+-		sed \
+-		wget \
+-		patch \
+-		tar \
+-		diffutils \
++		grep \
++		gzip \
++		iproute2 \
++		iputils \
+ 		less \
+-		vim \
+-		e2fsprogs \
+-		binutils-symlinks \
+ 		module-init-tools \
++		netcat \
+ 		net-tools \
+-		iproute2 \
+-		iputils \
++		patch \
++		procps \
+ 		psmisc \
+-		debianutils \
++		sed \
++		tar \
+ 		tcptraceroute \
+-		fbset \
++		util-linux-ng \
++		vim \
++		wget \
+         "
+ #
+ # binutils-symlinks provide ar in a way which conflict with busybox - #1465 for more info
 -- 
 1.6.5
 
