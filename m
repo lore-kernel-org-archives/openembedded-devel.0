@@ -1,23 +1,41 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [72.14.220.159] (helo=fg-out-1718.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N35h0-0004pj-Qa
-	for openembedded-devel@openembedded.org; Wed, 28 Oct 2009 11:23:53 +0100
-Received: (qmail 10214 invoked by uid 813007); 28 Oct 2009 10:22:45 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO localhost.localdomain)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 28 Oct 2009 10:22:45 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <eballetbo@gmail.com>) id 1N35ux-00083G-C6
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Oct 2009 11:38:18 +0100
+Received: by fg-out-1718.google.com with SMTP id d23so352796fga.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Oct 2009 03:37:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=Oeft//gLDEBY4wjpIi1uJ9tbLv9s9Df/EQiuTCEePsg=;
+	b=gymxuZBOZolYEfkGVEZVzBrNde8MfhKilYObCzg+0cruUbbSWGduOX8v0r4Kw31p10
+	IUsxP9FnHoFXS8CpB1h+BvJ5ccHUevgGB3tYP9CkkHA3Byhcx1w+u4WnRQd6TjLr1S0u
+	l5Ebj38cii+TMXl94DcTAfAqvHEpvGiW22rE4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=Y/eRrVuth6yEF+n7hzTnN57qDNEv8ncievv5prfT1Pmx1ZYb8q3meTR5hx/2MphCTZ
+	LCcYF4IrkiOrl7NUvian2LGZeEyPn+w6iNDQnAjKb1WsznktjvLfOFPFufE4yqE9CQzl
+	4ZxUeIx+WvmejSwidXsNQcrMUFKFn4iBmB39A=
+Received: by 10.86.235.14 with SMTP id i14mr5526113fgh.52.1256726230764;
+	Wed, 28 Oct 2009 03:37:10 -0700 (PDT)
+Received: from localhost.localdomain (248.Red-213-97-239.staticIP.rima-tde.net
+	[213.97.239.248])
+	by mx.google.com with ESMTPS id 3sm2027513fge.29.2009.10.28.03.37.09
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 28 Oct 2009 03:37:10 -0700 (PDT)
+From: Enric Balletbo i Serra <eballetbo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Oct 2009 11:25:24 +0100
-Message-Id: <1256725524-28431-1-git-send-email-marcin@juszkiewicz.com.pl>
-X-Mailer: git-send-email 1.6.5
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Date: Wed, 28 Oct 2009 11:37:18 +0100
+Message-Id: <1256726238-2324-1-git-send-email-eballetbo@gmail.com>
+X-Mailer: git-send-email 1.6.0.4
+X-SA-Exim-Connect-IP: 72.14.220.159
+X-SA-Exim-Mail-From: eballetbo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Robert Schuster <robertschuster@fsfe.org>
-Subject: [STABLE][PATCH] jsp2.0 5.5.26: New recipe (from Jalimo SVN). servlet2.3 4.1.37: Dito. servlet2.3-native 4.1.37: Dito. servlet2.4 5.5.26: Dito.
+Cc: Enric Balletbo i Serra <eballetbo@iseebcn.com>
+Subject: [STABLE][PATCH-v2 2/2] igep0020: Add IGEP v2 support to OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,174 +49,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Oct 2009 10:23:54 -0000
+X-List-Received-Date: Wed, 28 Oct 2009 10:38:18 -0000
 
-From: Robert Schuster <robertschuster@fsfe.org>
+From: Enric Balletbo i Serra <eballetbo@iseebcn.com>
 
+
+Signed-off-by: Enric Balletbo i Serra <eballetbo@iseebcn.com>
 ---
- recipes/servlet-api/jsp2.0_5.5.26.bb            |   42 +++++++++++++++++++++++
- recipes/servlet-api/servlet2.3-native_4.1.37.bb |    4 ++
- recipes/servlet-api/servlet2.3_4.1.37.bb        |   41 ++++++++++++++++++++++
- recipes/servlet-api/servlet2.4_5.5.26.bb        |   38 ++++++++++++++++++++
- 4 files changed, 125 insertions(+), 0 deletions(-)
- create mode 100644 recipes/servlet-api/jsp2.0_5.5.26.bb
- create mode 100644 recipes/servlet-api/servlet2.3-native_4.1.37.bb
- create mode 100644 recipes/servlet-api/servlet2.3_4.1.37.bb
- create mode 100644 recipes/servlet-api/servlet2.4_5.5.26.bb
+ conf/machine/igep0020.conf |   45 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 45 insertions(+), 0 deletions(-)
+ create mode 100644 conf/machine/igep0020.conf
 
-diff --git a/recipes/servlet-api/jsp2.0_5.5.26.bb b/recipes/servlet-api/jsp2.0_5.5.26.bb
+diff --git a/conf/machine/igep0020.conf b/conf/machine/igep0020.conf
 new file mode 100644
-index 0000000..6a5f3b6
+index 0000000..deb1723
 --- /dev/null
-+++ b/recipes/servlet-api/jsp2.0_5.5.26.bb
-@@ -0,0 +1,42 @@
-+DESCRIPTION = "Java Server Page (JSP) API 2.0 (from Tomcat 5.5)"
-+LICENSE = "AL2.0"
-+AUTHOR = "Apache Software Foundation"
++++ b/conf/machine/igep0020.conf
+@@ -0,0 +1,45 @@
++#@TYPE: Machine
++#@NAME: IGEP0020 machine
++#@DESCRIPTION: Machine configuration for the http://www.myigep.com/ IGEP v2.x boards
++TARGET_ARCH = "arm"
 +
-+SRC_URI = "http://archive.apache.org/dist/tomcat/tomcat-5/v${PV}/src/apache-tomcat-${PV}-src.tar.gz"
++PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
++XSERVER = "xserver-xorg \
++           xf86-input-evdev \
++           xf86-input-mouse \
++           xf86-video-omapfb \
++           xf86-input-keyboard"
 +
-+S = "${WORKDIR}/apache-tomcat-${PV}-src/servletapi/jsr152"
++# Only has DVI connector for external screen
++GUI_MACHINE_CLASS = "bigscreen"
 +
-+inherit java-library
++require conf/machine/include/omap3.inc
 +
-+DEPENDS = "fastjar-native servlet2.4"
-+RDEPENDS = "libservlet2.4-java"
++PREFERRED_PROVIDER_virtual/kernel = "linux-igep2"
 +
-+# Value of implementation.revision in build.xml
-+IMPL_REVISION = "public_draft"
++KERNEL_IMAGETYPE = "uImage"
 +
-+JARFILENAME = "jsp-api-2.0.${IMPL_REVISION}.jar"
-+ALTJARFILENAMES = "jsp-api-2.0.jar jsp-api.jar"
++UBOOT_MACHINE = "omap3_igep0020b_config"
 +
-+do_unpackpost() {
-+  sed -i -e "s|@implementation.version@|${IMPL_REVISION}|" src/etc/manifest
-+}
++IMAGE_FSTYPES += "tar.bz2 ubi"
 +
-+addtask unpackpost after do_unpack before do_patch
++# Guesswork
++SERIAL_CONSOLE = "115200 ttyS2"
 +
-+do_compile() {
-+  mkdir -p build
++# do ubiattach /dev/ubi_ctrl -m 4
++# From dmesg:
++# UBI: smallest flash I/O unit:    2048
++# UBI: logical eraseblock size:    129024 bytes
++# from ubiattach stdout:
++# UBI device number 0, total 1996 LEBs
++MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
 +
-+  oe_makeclasspath cp -s servlet-api-2.4`
-+  javac -sourcepath src/share -d build -cp $cp `find src/share/javax -name \*.java`
++# do ubiattach /dev/ubi_ctrl -m 4
++# from dmesg:
++# UBI: smallest flash I/O unit:    2048
++# UBI: physical eraseblock size:   131072 bytes (128 KiB)
++# UBI: sub-page size:              512
++UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
 +
-+  # Copy extraneous files according to build.xml's compile task
-+  (cd src/share && find . -name "*.properties" -exec cp {} ../../build/{} \;)
-+
-+  mkdir -p build/javax/servlet/jsp/resources
-+  cp src/share/dtd/jsp*.dtd build/javax/servlet/jsp/resources
-+  cp src/share/dtd/jsp*.xsd build/javax/servlet/jsp/resources
-+  cp src/share/dtd/web-jsp*.dtd build/javax/servlet/jsp/resources
-+  cp src/share/dtd/web-jsp*.xsd build/javax/servlet/jsp/resources
-+
-+  fastjar -C build -c -m src/etc/manifest -f ${JARFILENAME} .
-+}
-diff --git a/recipes/servlet-api/servlet2.3-native_4.1.37.bb b/recipes/servlet-api/servlet2.3-native_4.1.37.bb
-new file mode 100644
-index 0000000..c06f5f4
---- /dev/null
-+++ b/recipes/servlet-api/servlet2.3-native_4.1.37.bb
-@@ -0,0 +1,4 @@
-+require servlet2.3_${PV}.bb
-+
-+inherit java-native
-+
-diff --git a/recipes/servlet-api/servlet2.3_4.1.37.bb b/recipes/servlet-api/servlet2.3_4.1.37.bb
-new file mode 100644
-index 0000000..6176161
---- /dev/null
-+++ b/recipes/servlet-api/servlet2.3_4.1.37.bb
-@@ -0,0 +1,41 @@
-+DESCRIPTION = "Servlet API 2.3 (from Tomcat 4.1)"
-+LICENSE = "AL2.0"
-+AUTHOR = "Apache Software Foundation"
-+
-+SRC_URI = "http://archive.apache.org/dist/tomcat/tomcat-4/v${PV}/src/apache-tomcat-${PV}-src.tar.gz"
-+
-+inherit java-library
-+
-+S = "${WORKDIR}/apache-tomcat-${PV}-src/servletapi"
-+
-+DEPENDS = "fastjar-native"
-+
-+# Value of implementation.revision in build.xml
-+IMPL_REVISION = "1"
-+
-+JARFILENAME = "servlet-2.3.${IMPL_REVISION}.jar"
-+ALTJARFILENAMES = "servlet-2.3.jar servlet2.3.jar"
-+
-+do_unpackpost() {
-+  sed -i -e "s|@implementation.version@|${IMPL_REVISION}|" src/etc/manifest
-+}
-+
-+addtask unpackpost after do_unpack before do_patch
-+
-+do_compile() {
-+  mkdir -p build
-+
-+  javac -sourcepath src/share -d build `find src/share/javax -name \*.java`
-+
-+  # Copy extraneous files according to build.xml's compile task
-+  (cd src/share && find . -name "*.properties" -exec cp {} ../../build/{} \;)
-+
-+  mkdir -p build/javax/servlet/resources
-+  cp src/share/dtd/web-app*.dtd build/javax/servlet/resources
-+
-+  mkdir -p build/javax/servlet/jsp/resources
-+  cp src/share/dtd/web-jsptaglibrary*.dtd build/javax/servlet/jsp/resources
-+  cp src/share/dtd/jspxml.* build/javax/servlet/jsp/resources
-+
-+  fastjar -C build -c -m src/etc/manifest -f ${JARFILENAME} .
-+}
-diff --git a/recipes/servlet-api/servlet2.4_5.5.26.bb b/recipes/servlet-api/servlet2.4_5.5.26.bb
-new file mode 100644
-index 0000000..c4af1ab
---- /dev/null
-+++ b/recipes/servlet-api/servlet2.4_5.5.26.bb
-@@ -0,0 +1,38 @@
-+DESCRIPTION = "Servlet API 2.4 (from Tomcat 5.5)"
-+LICENSE = "AL2.0"
-+AUTHOR = "Apache Software Foundation"
-+
-+SRC_URI = "http://archive.apache.org/dist/tomcat/tomcat-5/v${PV}/src/apache-tomcat-${PV}-src.tar.gz"
-+
-+S = "${WORKDIR}/apache-tomcat-${PV}-src/servletapi/jsr154"
-+
-+inherit java-library
-+
-+DEPENDS = "fastjar-native"
-+
-+# Value of implementation.revision in build.xml
-+IMPL_REVISION = "1"
-+
-+JARFILENAME = "servlet-api-2.4.${IMPL_REVISION}.jar"
-+ALTJARFILENAMES = "servlet-api-2.4.jar servlet-api.jar servlet2.4.jar"
-+
-+do_unpackpost() {
-+  sed -i -e "s|2.3.@implementation.version@|2.4.${IMPL_REVISION}|" src/etc/manifest
-+}
-+
-+addtask unpackpost after do_unpack before do_patch
-+
-+do_compile() {
-+  mkdir -p build
-+
-+  javac -sourcepath src/share -d build `find src/share/javax -name \*.java`
-+
-+  # Copy extraneous files according to build.xml's compile task
-+  (cd src/share && find . -name "*.properties" -exec cp {} ../../build/{} \;)
-+
-+  mkdir -p build/javax/servlet/resources
-+  cp src/share/dtd/jsp*.dtd build/javax/servlet/resources
-+  cp src/share/dtd/web-jsp*.dtd build/javax/servlet/resources
-+
-+  fastjar -C build -c -m src/etc/manifest -f ${JARFILENAME} .
-+}
++# MACHINE_EXTRA_RRECOMMENDS = " omap3-sgx-modules "
++MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
 -- 
-1.6.4.3
-
-
+1.5.4.3
 
 
 
