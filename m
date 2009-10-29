@@ -1,30 +1,41 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N3Ogi-00026q-UP
-	for openembedded-devel@openembedded.org; Thu, 29 Oct 2009 07:40:52 +0100
-Received: (qmail 24382 invoked by uid 813007); 29 Oct 2009 06:39:43 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 29 Oct 2009 06:39:43 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <martin.jansa@gmail.com>) id 1N3RXW-0003MC-M5
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Oct 2009 10:43:33 +0100
+Received: by bwz9 with SMTP id 9so2062115bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Oct 2009 02:42:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:user-agent;
+	bh=DV8s8eTBWDKLV+KGs6mj36Dhi/USrBBcmrYVs/I8tkQ=;
+	b=VPfeiSp7IaPFy3TlwD7s3KnnpwzKaxSf2n+6AFaP/hNgVMHGuZlx0gB6jatRqNd329
+	2jozo9DHtLF0aJNBqHL4TtkTh4S0+K3IMzrMDeAysxZK25OGNWC9oWznxsNHwnIpz8Pl
+	RCxLUfquC+BCQjMyzMqj3ZWCRsMD4DUdrA7Fg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=ucG2jTjUdrkUWeHKzTyd2n7070cKBez/XnFJDBz8gi4AgVmksByb1q4VARICFlWnZ3
+	gyI44KR8rD7ZVa2iidSLonTTk8kNwIk9vXc9POo1nbN5WE2umxo378faGVPmtFdH0+1Q
+	8DQEwNIU1fmLty8AGpzXR7MpyIL8ov9r/N9mA=
+Received: by 10.102.226.17 with SMTP id y17mr7914732mug.67.1256809342808;
+	Thu, 29 Oct 2009 02:42:22 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 23sm3064540mum.44.2009.10.29.02.42.21
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 29 Oct 2009 02:42:21 -0700 (PDT)
+Date: Thu, 29 Oct 2009 10:42:26 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Oct 2009 07:42:23 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.32-rc3-00052-g0eca52a; KDE/4.3.2; x86_64; ;
-	)
-References: <d1b08f940910260052x411022ebh50281bbc10b51f49@mail.gmail.com>
-	<20091028214424.GA8053@elf.ucw.cz>
-	<d1b08f940910281605t16e7d86cgecd84fd2465cbcf0@mail.gmail.com>
-In-Reply-To: <d1b08f940910281605t16e7d86cgecd84fd2465cbcf0@mail.gmail.com>
+Message-ID: <20091029094226.GA3699@jama>
 MIME-Version: 1.0
-Message-Id: <200910290742.29594.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>, pavel@ucw.cz,
-	Cortez <omegamoon@gmail.com>
-Subject: Re: 2.6.31 won't boot from nand (c7x0 and tosa)
+Subject: Commit access
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,35 +49,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2009 06:40:53 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 29 Oct 2009 09:43:33 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Dnia czwartek, 29 pa=C5=BAdziernika 2009 o 00:05:59 Andrea Adami napisa=C5=
-=82(a):
+Hi all OE developers,
+I am politely asking if would be possible to allow me OE commit access.
 
-I think that mailinglist for kernel hacking would be indeed good. But what=
-=20
-about using mobile-linux-discuss@lists.linuxtogo.org for it? I do not know =
-who=20
-maintain that ML but worth ask? Now there are nearly no discussions there.
+I already promised to commit this stuff:
+1) xorg-7.5
+2) scripts for easier updating of checksums.ini
+3) SRCPV support
+4) shr distribution merge from shr/merge
 
-GIT tree on git.linuxtogo.org would be also good. There are mobile-
-linux/kernel.git, thesing/collie.git so next one should fit.
+My previous commits went usually to shr/merge or shr/import through shr
+patchwork, but sometimes it would easier/faster to commit it directly.
 
-So... in past there was kernel-discuss ML on handhelds.org where all ports=
-=20
-were discussed. I think that making new one focused on Zaurus would be too=
-=20
-specific as some work done for collie fits also simpad guys.
+Thank you
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
