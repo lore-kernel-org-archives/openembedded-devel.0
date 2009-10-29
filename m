@@ -1,24 +1,24 @@
 Received: from [195.64.66.119] (helo=mx1.grimmerink.nl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pieterg@gmx.com>) id 1N3Vy5-0002Kv-E8
+	(envelope-from <pieterg@gmx.com>) id 1N3W87-0002oM-J3
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Oct 2009 15:27:16 +0100
+	Thu, 29 Oct 2009 15:37:38 +0100
 Received: from [10.9.0.12] (unknown [10.9.0.12])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mx1.grimmerink.nl (Postfix) with ESMTPSA id BAA716A0D1
+	by mx1.grimmerink.nl (Postfix) with ESMTPSA id 43CC86A0D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2009 15:26:05 +0100 (CET)
+	Thu, 29 Oct 2009 15:36:28 +0100 (CET)
 From: pieterg <pieterg@gmx.com>
-Date: Thu, 29 Oct 2009 15:23:45 +0100
 To: openembedded-devel@lists.openembedded.org
+Date: Thu, 29 Oct 2009 15:36:25 +0100
 MIME-Version: 1.0
-Message-Id: <200910291523.45611.pieterg@gmx.com>
+Message-Id: <200910291536.26049.pieterg@gmx.com>
 X-SA-Exim-Connect-IP: 195.64.66.119
 X-SA-Exim-Mail-From: pieterg@gmx.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] fix libxext-native_1.0.5 dependencies
+Subject: [PATCH] netkit-base: fix building with gcc4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,48 +32,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2009 14:27:16 -0000
+X-List-Received-Date: Thu, 29 Oct 2009 14:37:38 -0000
 Content-Transfer-Encoding: 7bit
 Content-Disposition: inline
 
 ---
 
-The only available libxext-native version is 1.0.5 at the moment, 
-and that version requires xextproto >= 7.0.5, and libx11 >= 1.1.99.1
-So in order to allow libxext-native to be built with X11R7.4, the following 
-changes would be required.
+I guess nobody has been using netkit-base for a while, it needs the 
+following patch to allow it to be built with gcc 4.x.x.
 
-I think it is relatively harmless, because it only affects native stuff. 
-But I must admit my build doesn't require lots of x11-native stuff (apart 
-from libxext), so I'm not 100% certain libx11-native_1.2 won't cause 
-problems for other x11-native stuff.
+ recipes/netkit-base/netkit-base-0.17/gcc4.patch |   12 ++++++++++++
+ recipes/netkit-base/netkit-base_0.17.bb         |    3 ++-
+ 2 files changed, 14 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/netkit-base/netkit-base-0.17/gcc4.patch
 
- conf/distro/include/preferred-xorg-versions-X11R7.4.inc    |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/conf/distro/include/preferred-xorg-versions-X11R7.4.inc 
-b/conf/distro/include/preferred-xorg-versions-X11R7.4.inc
-index 156653f..ac0f6e4 100644
---- a/conf/distro/include/preferred-xorg-versions-X11R7.4.inc
-+++ b/conf/distro/include/preferred-xorg-versions-X11R7.4.inc
-@@ -160,7 +160,7 @@ PREFERRED_VERSION_libfontenc ?= "1.0.4"
- PREFERRED_VERSION_libsm ?= "1.1.0"
- PREFERRED_VERSION_libwindowswm ?= "1.0.0"
- PREFERRED_VERSION_libx11 ?= "1.1.5"
--PREFERRED_VERSION_libx11-native ?= "1.1.1"
-+PREFERRED_VERSION_libx11-native ?= "1.2"
- PREFERRED_VERSION_libxau ?= "1.0.4"
- PREFERRED_VERSION_libxaw ?= "1.0.4"
- PREFERRED_VERSION_libxcomposite ?= "0.4.0"
-@@ -220,7 +220,7 @@ PREFERRED_VERSION_videoproto ?= "2.2.2"
- PREFERRED_VERSION_windowswmproto ?= "1.0.3"
- PREFERRED_VERSION_xmiscproto ?= "1.1.2"
- PREFERRED_VERSION_xextproto ?= "7.0.3"
--PREFERRED_VERSION_xextproto-native ?= "7.0.3"
-+PREFERRED_VERSION_xextproto-native ?= "7.0.5"
- PREFERRED_VERSION_xf86dgaproto ?= "2.0.3"
- PREFERRED_VERSION_xf86driproto ?= "2.0.4"
- PREFERRED_VERSION_xf86miscproto ?= "0.9.2"
+diff --git a/recipes/netkit-base/netkit-base-0.17/gcc4.patch 
+b/recipes/netkit-base/netkit-base-0.17/gcc4.patch
+new file mode 100644
+index 0000000..0a332a8
+--- /dev/null
++++ b/recipes/netkit-base/netkit-base-0.17/gcc4.patch
+@@ -0,0 +1,12 @@
++diff -dur netkit-base-0.17-p/inetd/servtab.c 
+netkit-base-0.17/inetd/servtab.c
++--- netkit-base-0.17-p/inetd/servtab.c	2000-07-22 22:20:50.000000000 +0200
+++++ netkit-base-0.17/inetd/servtab.c	2005-10-19 04:04:33.000000000 +0200
++@@ -771,7 +771,7 @@
++ 			return;
++ 		}
++ 		
++-#define SWAP(type, a, b) {type c=(type)a; (type)a=(type)b; 
+(type)b=(type)c;}
+++#define SWAP(type, a, b) {type c=(type)a; a=(type)b; b=(type)c;}
++ 
++ 		/*
++ 		 * sep->se_wait may be holding the pid of a daemon
+diff --git a/recipes/netkit-base/netkit-base_0.17.bb 
+b/recipes/netkit-base/netkit-base_0.17.bb
+index 88016ea..c910b29 100644
+--- a/recipes/netkit-base/netkit-base_0.17.bb
++++ b/recipes/netkit-base/netkit-base_0.17.bb
+@@ -1,11 +1,12 @@
+ SECTION = "base"
+ DESCRIPTION = "netkit-base includes the inetd daemon."
+ LICENSE = "BSD"
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI 
+= "ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/netkit-base-${PV}.tar.gz 
+\
+            file://configure.patch;patch=1 \
+            file://mconfig.patch;patch=1 \
++           file://gcc4.patch;patch=1 \
+            file://init \
+            file://inetd.conf"
+ 
 -- 
 1.6.5.rc1.44.ga1675
 
