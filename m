@@ -1,39 +1,34 @@
-Received: from [209.85.211.177] (helo=mail-yw0-f177.google.com)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1N3WDG-0006A4-3s
+	(envelope-from <stefan@datenfreihafen.org>) id 1N3WGE-0006QZ-AF
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Oct 2009 15:42:57 +0100
-Received: by ywh7 with SMTP id 7so1748753ywh.24
+	Thu, 29 Oct 2009 15:46:01 +0100
+Received: from w1261.wlan.rz.tu-bs.de ([134.169.204.245] helo=excalibur)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1N3WF6-0002jq-VC by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Oct 2009 07:41:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=2dOY6aomNW0CYUjIAADI5RTxmgZQxv4IhY7wto+NIbQ=;
-	b=oGrcg6EFi5w/U61aXdoIMk50Fw8IkphdlKkaHwrKSUFPpHJznBdakorhAOW0r8+y7J
-	xUZg99pzfK9r0l3o+woU4rZdXMVPeQcGm2oODOEKP113xcHy0CKDaV+TnaGlUgLdByB7
-	roUrRjyIL5h2AqFPxUdr994telbo5O2/wYU6Y=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=nS5t7iwWwwZgCICY4uikifOw9VGBdIFxMFOUhWj/ur4Ti7dcQx2noz428CGfVJg876
-	R/Wa54C8bQEnbi+C2Yepi3k3pqmXFNtVqnUDHb3mWPEdUz5I8BXpYLhEMfFhvwRXodp9
-	XVnTRShljnAKippYjdX32mOT8DGhhwFVjfbjI=
+	Thu, 29 Oct 2009 15:44:51 +0100
+Received: from stefan by excalibur with local (Exim 4.69)
+	(envelope-from <stefan@excalibur.local>) id 1N3WF6-0001I6-AB
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Oct 2009 15:44:48 +0100
+Date: Thu, 29 Oct 2009 15:44:48 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20091029144448.GB3619@excalibur.local>
+References: <1256813632.31481.14.camel@nvc0624>
 MIME-Version: 1.0
-Received: by 10.150.88.3 with SMTP id l3mr509642ybb.92.1256827305640; Thu, 29 
-	Oct 2009 07:41:45 -0700 (PDT)
-In-Reply-To: <20091029094226.GA3699@jama>
-References: <20091029094226.GA3699@jama>
-Date: Thu, 29 Oct 2009 10:41:45 -0400
-Message-ID: <f96d234e0910290741g3fca4a45red7bbc9a421212aa@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
-	Martin Jansa <martin.jansa@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.211.177
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+In-Reply-To: <1256813632.31481.14.camel@nvc0624>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Commit access
+Subject: Re: recipe for xilinx jtag tool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,27 +42,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2009 14:42:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 29 Oct 2009 14:46:01 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Thu, Oct 29, 2009 at 5:42 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Hi all OE developers,
-> I am politely asking if would be possible to allow me OE commit access.
->
-> I already promised to commit this stuff:
-> 1) xorg-7.5
-> 2) scripts for easier updating of checksums.ini
-> 3) SRCPV support
-> 4) shr distribution merge from shr/merge
->
-> My previous commits went usually to shr/merge or shr/import through shr
-> patchwork, but sometimes it would easier/faster to commit it directly.
+Hello.
 
-If you an send me your ssh key, I'll get you added. Please read:
+On Thu, 2009-10-29 at 11:53, Jaap de Jong wrote:
+> 
+> I've build my first openembedded recipe (please don't shoot!)
+> What would be the way to publish it?
 
-http://wiki.openembedded.net/index.php/New_Dev
+Commit it in your local git repo and then do a git format-patch -1 and then send
+it to the list.
 
-Thanks,
-Cliff
+regards
+Stefan Schmidt
 
 
