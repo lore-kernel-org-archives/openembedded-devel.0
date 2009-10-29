@@ -1,32 +1,41 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [209.85.210.175] (helo=mail-yx0-f175.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.ott.cti.com>) id 1N3WmZ-0000nH-6r
+	(envelope-from <otavio.salvador@gmail.com>) id 1N3Yo8-0002n1-Q1
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Oct 2009 16:19:26 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 2D60C5B1BC8;
-	Thu, 29 Oct 2009 11:18:17 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 12530-07; Thu, 29 Oct 2009 11:18:17 -0400 (EDT)
-Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id 0D4AF5B1BEE; Thu, 29 Oct 2009 11:18:16 -0400 (EDT)
-Received: from sles10-64.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id BC8C3575631;
-	Thu, 29 Oct 2009 11:18:15 -0400 (EDT)
-Received: by sles10-64.ott.cti.com (Postfix, from userid 1000)
-	id 959AB40AA4; Thu, 29 Oct 2009 11:18:15 -0400 (EDT)
-From: Michael Smith <msmith@cbnco.com>
+	Thu, 29 Oct 2009 18:29:11 +0100
+Received: by yxe5 with SMTP id 5so1928569yxe.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Oct 2009 10:28:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type; bh=MGNK5RW6ojZXFMQy5cmtepUbTqHtKhRWzM8aCAbTKdw=;
+	b=T2vz1vWsnI/beOVIzLeSACD5J9CHc9NDmlFyZb76FUBejUY7gFauai0f3A2Leu+jZv
+	wN4HYiswshHiEcisUrDBAxW8sEOi70sQmdRI4sDOKYlKbzwqRr4o9eWHNKfi5sIkB55k
+	NnvpATLVhstOFyZ0RaytSzcI0L4+1dzjFkFug=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	b=juJmBK8NytIXaV8Yy8rTKXemxfDzhiGc+RwF+py2RsPCK5+Ds2JA85JWyQz435cL/F
+	S3yhssXWNsHD9Daa7ZIRYL0x6k0Iqe2YMZWCBjeuWujiuNRU0JdWXgT+V+MIsCvFvGlD
+	VvJOKY5Veur2Gm4nHuhcxh2fBI58BCd4qch5I=
+MIME-Version: 1.0
+Sender: otavio.salvador@gmail.com
+Received: by 10.239.184.154 with SMTP id y26mr35255hbg.196.1256837279599; Thu, 
+	29 Oct 2009 10:27:59 -0700 (PDT)
+In-Reply-To: <f96d234e0910290741g3fca4a45red7bbc9a421212aa@mail.gmail.com>
+References: <20091029094226.GA3699@jama>
+	<f96d234e0910290741g3fca4a45red7bbc9a421212aa@mail.gmail.com>
+Date: Thu, 29 Oct 2009 15:27:59 -0200
+X-Google-Sender-Auth: e57288adf74b147a
+Message-ID: <be7a9f3d0910291027k7cbcdb6fj2a8e21ac5ada001d@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Oct 2009 11:18:07 -0400
-Message-Id: <1256829487-29628-1-git-send-email-msmith@cbnco.com>
-X-Mailer: git-send-email 1.6.3
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: michael@sles10-64.ott.cti.com
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] fastjar 0.98: add non-native recipe
+Subject: Re: Commit access
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,92 +49,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Oct 2009 15:19:26 -0000
+X-List-Received-Date: Thu, 29 Oct 2009 17:29:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Michael Smith <msmith@cbnco.com>
----
- recipes/fastjar/fastjar-native.inc     |   12 +-----------
- recipes/fastjar/fastjar-native_0.95.bb |    1 +
- recipes/fastjar/fastjar-native_0.98.bb |    1 +
- recipes/fastjar/fastjar.inc            |   16 ++++++++++++++++
- recipes/fastjar/fastjar_0.98.bb        |    1 +
- 5 files changed, 20 insertions(+), 11 deletions(-)
- create mode 100644 recipes/fastjar/fastjar.inc
- create mode 100644 recipes/fastjar/fastjar_0.98.bb
++1
 
-diff --git a/recipes/fastjar/fastjar-native.inc b/recipes/fastjar/fastjar-native.inc
-index df4d260..e4d7084 100644
---- a/recipes/fastjar/fastjar-native.inc
-+++ b/recipes/fastjar/fastjar-native.inc
-@@ -1,18 +1,8 @@
--DESCRIPTION = "jar replacement written in C."
--HOMEPAGE = "http://savannah.nongnu.org/projects/fastjar/"
--SECTION = "devel"
--PRIORITY = "optional"
--LICENSE = "GPL"
--
--INC_PR = "r2"
--
- DEPENDS = "zlib-native"
- 
--SRC_URI = "http://download.savannah.nongnu.org/releases/fastjar/fastjar-${PV}.tar.gz"
--
- S = "${WORKDIR}/fastjar-${PV}"
- 
--inherit autotools native
-+inherit native
- 
- do_configure () {
- 	gnu-configize || die "failure running gnu-configize"
-diff --git a/recipes/fastjar/fastjar-native_0.95.bb b/recipes/fastjar/fastjar-native_0.95.bb
-index 6d2cdb4..342bf7c 100644
---- a/recipes/fastjar/fastjar-native_0.95.bb
-+++ b/recipes/fastjar/fastjar-native_0.95.bb
-@@ -1,3 +1,4 @@
-+require fastjar.inc
- require fastjar-native.inc
- 
- PR = "${INC_PR}.1"
-diff --git a/recipes/fastjar/fastjar-native_0.98.bb b/recipes/fastjar/fastjar-native_0.98.bb
-index 6d2cdb4..342bf7c 100644
---- a/recipes/fastjar/fastjar-native_0.98.bb
-+++ b/recipes/fastjar/fastjar-native_0.98.bb
-@@ -1,3 +1,4 @@
-+require fastjar.inc
- require fastjar-native.inc
- 
- PR = "${INC_PR}.1"
-diff --git a/recipes/fastjar/fastjar.inc b/recipes/fastjar/fastjar.inc
-new file mode 100644
-index 0000000..7c5439e
---- /dev/null
-+++ b/recipes/fastjar/fastjar.inc
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "jar replacement written in C."
-+HOMEPAGE = "http://savannah.nongnu.org/projects/fastjar/"
-+SECTION = "devel"
-+PRIORITY = "optional"
-+LICENSE = "GPL"
-+
-+DEPENDS = "zlib"
-+
-+INC_PR = "r3"
-+
-+SRC_URI = "http://download.savannah.nongnu.org/releases/fastjar/fastjar-${PV}.tar.gz"
-+
-+inherit autotools
-+
-+PACKAGES =+ "${PN}-grepjar"
-+FILES_${PN}-grepjar = "${bindir}/grepjar"
-diff --git a/recipes/fastjar/fastjar_0.98.bb b/recipes/fastjar/fastjar_0.98.bb
-new file mode 100644
-index 0000000..35392f2
---- /dev/null
-+++ b/recipes/fastjar/fastjar_0.98.bb
-@@ -0,0 +1 @@
-+require fastjar.inc
+On Thu, Oct 29, 2009 at 12:41 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
+> On Thu, Oct 29, 2009 at 5:42 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> Hi all OE developers,
+>> I am politely asking if would be possible to allow me OE commit access.
+>>
+>> I already promised to commit this stuff:
+>> 1) xorg-7.5
+>> 2) scripts for easier updating of checksums.ini
+>> 3) SRCPV support
+>> 4) shr distribution merge from shr/merge
+>>
+>> My previous commits went usually to shr/merge or shr/import through shr
+>> patchwork, but sometimes it would easier/faster to commit it directly.
+>
+> If you an send me your ssh key, I'll get you added. Please read:
+>
+> http://wiki.openembedded.net/index.php/New_Dev
+>
+> Thanks,
+> Cliff
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
+
 -- 
-1.6.3
-
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
