@@ -1,40 +1,21 @@
-Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
+Received: from [150.254.31.31] (helo=idss-pw)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen.kooi@gmail.com>) id 1N3sfv-0001Hw-Pa
+	(envelope-from <jest@idss-pw.cs.put.poznan.pl>) id 1N3tL5-0002mU-Du
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Oct 2009 15:42:04 +0100
-Received: by mail-bw0-f217.google.com with SMTP id 9so3597793bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Oct 2009 07:40:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=sCj+dpiPcPnCPW9gUoDY/uHlQEYqBAdnPkeiAvaY3sU=;
-	b=Dmp8SnqknPYumrG3aLI6xE4NucxfL/ctutcyLOz2cbx7acvNzwnd2Ol6nCzh0el8Ac
-	adT6e2aH4St3u/AwBE1eWDbWPo7JrpqHfzKCG/7A8E6Ob7zc81uBNtiLInC7HXEBBQeH
-	RRCyAl4mJz6TeBYfglufMBQTaQHgc3YhQ+Erc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=J1xksdzUFlDY7mzBsGdKOzHU6J0Ew+K+hYAPlHiC25JpccTQz93vs+pNuiDQyqlxAZ
-	Jf0kzgtyuWfXB9Wmz9YWbatgtkFrK593rDP6fi/hZNRCrXTHe7FrBZ9kk252QMCVJ32g
-	yvXl7D7nMwxKlwz7q019wpQkr0hPngqE0KwZ8=
-Received: by 10.204.143.151 with SMTP id v23mr1145609bku.169.1256913653431;
-	Fri, 30 Oct 2009 07:40:53 -0700 (PDT)
-Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
-	by mx.google.com with ESMTPS id 14sm222989bwz.13.2009.10.30.07.40.51
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 30 Oct 2009 07:40:51 -0700 (PDT)
-From: Koen Kooi <koen.kooi@gmail.com>
+	Fri, 30 Oct 2009 16:24:34 +0100
+Received: from jest by idss-pw with local (Exim 4.69)
+	(envelope-from <jest@idss-pw.cs.put.poznan.pl>)
+	id 1N3tKf-0003ez-0p; Fri, 30 Oct 2009 16:24:05 +0100
+From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Oct 2009 15:40:50 +0100
-Message-Id: <1256913650-22661-1-git-send-email-koen@dominion.thruhere.net>
-X-Mailer: git-send-email 1.6.1
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: koen.kooi@gmail.com
+Date: Fri, 30 Oct 2009 16:23:36 +0100
+Message-Id: <1256916216-14027-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 150.254.31.31
+X-SA-Exim-Mail-From: jest@idss-pw.cs.put.poznan.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Koen Kooi <koen@openembedded.org>, Koen Kooi <k-kooi@ti.com>
-Subject: [STABLE][PATCH] omap3 sgx modules: merge in fixes from .dev
+Subject: [PATCH] Correct ARM detection in Boost 1.36 atomic count.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,80 +29,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Oct 2009 14:42:04 -0000
+X-List-Received-Date: Fri, 30 Oct 2009 15:24:34 -0000
 
-From: Koen Kooi <k-kooi@ti.com>
-
-Signed-off-by: Koen Kooi <k-kooi@ti.com>
-Signed-off-by: Koen Kooi <koen@openembedded.org>
+Signed-off-by: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
 ---
- .../omap3-sgx-modules/proc-interface.patch         |   18 ++++++++++--------
- .../omap3-sgx-modules_1.3.13.1607.bb               |    8 +++-----
- 2 files changed, 13 insertions(+), 13 deletions(-)
- mode change 100644 => 100755 recipes/powervr-drivers/omap3-sgx-modules/proc-interface.patch
+ recipes/boost/boost_1.36.0.bb              |    4 +++-
+ recipes/boost/files/atomic_count_arm.patch |   11 +++++++++++
+ 2 files changed, 14 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/boost/files/atomic_count_arm.patch
 
-diff --git a/recipes/powervr-drivers/omap3-sgx-modules/proc-interface.patch b/recipes/powervr-drivers/omap3-sgx-modules/proc-interface.patch
-old mode 100644
-new mode 100755
-index 831b3ed..185191f
---- a/recipes/powervr-drivers/omap3-sgx-modules/proc-interface.patch
-+++ b/recipes/powervr-drivers/omap3-sgx-modules/proc-interface.patch
-@@ -1,20 +1,22 @@
--Index: omap3-sgx-modules-1.3.13.1607/services4/srvkm/env/linux/proc.c
--===================================================================
----- omap3-sgx-modules-1.3.13.1607.orig/services4/srvkm/env/linux/proc.c
--+++ omap3-sgx-modules-1.3.13.1607/services4/srvkm/env/linux/proc.c
--@@ -134,7 +134,6 @@ int CreateProcEntry(const char * name, r
-+--- ./services4/srvkm/env/linux/proc.c.orig	2009-10-09 13:46:40.000000000 -0500
-++++ ./services4/srvkm/env/linux/proc.c	2009-10-09 13:48:36.000000000 -0500
-+@@ -134,7 +134,9 @@
-  
-      if (file)
-      {
---        file->owner = THIS_MODULE;
-++#if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,31)
-+         file->owner = THIS_MODULE;
-++#endif
-  		file->read_proc = rhandler;
-  		file->write_proc = whandler;
-  		file->data = data;
--@@ -165,7 +164,6 @@ int CreateProcReadEntry(const char * nam
-+@@ -165,7 +167,9 @@
-  
-      if (file)
-      {
---        file->owner = THIS_MODULE;
-++#if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,31)
-+         file->owner = THIS_MODULE;
-++#endif
-  
-          return 0;
-      }
-diff --git a/recipes/powervr-drivers/omap3-sgx-modules_1.3.13.1607.bb b/recipes/powervr-drivers/omap3-sgx-modules_1.3.13.1607.bb
-index ea57fd2..9bd77ad 100644
---- a/recipes/powervr-drivers/omap3-sgx-modules_1.3.13.1607.bb
-+++ b/recipes/powervr-drivers/omap3-sgx-modules_1.3.13.1607.bb
-@@ -7,15 +7,13 @@ SRC_URI = "file://omap3-sgx-modules-${PV}.tar.bz2 \
-            file://0002-Compile-fixes-for-DSS2.patch;patch=1 \
-            file://rotation-dss2.patch;patch=1 \
-            file://build_es3.x_sgx.patch;patch=1 \
-+           file://proc-interface.patch;patch=1 \
- "
+diff --git a/recipes/boost/boost_1.36.0.bb b/recipes/boost/boost_1.36.0.bb
+index 140ab29..550405f 100644
+--- a/recipes/boost/boost_1.36.0.bb
++++ b/recipes/boost/boost_1.36.0.bb
+@@ -1,9 +1,11 @@
+ include boost-36.inc
  
--SRC_URI_append_omapzoom2 = " file://proc-interface.patch;patch=1"
--SRC_URI_append_omap3evm = " file://proc-interface.patch;patch=1"
--SRC_URI_append_omap3517-evm = " file://proc-interface.patch;patch=1"
--
--
- PVRBUILD = "release"
+-PR = "r6"
++PR = "r7"
  
-+INHIBIT_PACKAGE_STRIP = "1"
-+
- MAKE_TARGETS = " BUILD=${PVRBUILD}"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/boost/${BOOST_P}.tar.bz2 \
+            file://arm-intrinsics.patch;patch=1 \
++           file://atomic_count_gcc_atomicity.patch;patch=1 \
++           file://atomic_count_arm.patch;patch=1 \
+           "
  
- do_install() {
+ BJAM_OPTS    = '${BJAM_TOOLS} \
+diff --git a/recipes/boost/files/atomic_count_arm.patch b/recipes/boost/files/atomic_count_arm.patch
+new file mode 100644
+index 0000000..2c4c682
+--- /dev/null
++++ b/recipes/boost/files/atomic_count_arm.patch
+@@ -0,0 +1,11 @@
++--- boost_1_36_0/boost/detail/atomic_count.hpp.orig	2007-11-23 18:03:14.000000000 +0100
+++++ boost_1_36_0/boost/detail/atomic_count.hpp	2009-09-25 18:17:12.602907541 +0200
++@@ -101,7 +101,7 @@
++ 
++ #  include <boost/detail/atomic_count_win32.hpp>
++ 
++-#elif defined( __GNUC__ ) && ( __GNUC__ * 100 + __GNUC_MINOR__ >= 401 )
+++#elif defined( __GNUC__ ) && ( __GNUC__ * 100 + __GNUC_MINOR__ >= 401 ) && !defined( __arm__ ) && !defined( __armel__ )
++ 
++ #  include <boost/detail/atomic_count_sync.hpp>
++ 
 -- 
-1.6.1
+1.6.3.3
 
 
 
