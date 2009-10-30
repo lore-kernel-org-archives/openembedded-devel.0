@@ -1,29 +1,38 @@
-Received: from [82.192.226.27] (helo=mail.o2s.ch)
+Received: from [92.198.50.35] (helo=metis.ext.pengutronix.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <david.lanzendoerfer@o2s.ch>) id 1N3y6p-0004PA-RE
+	(envelope-from <rsc@pengutronix.de>) id 1N3yOo-00059T-Qa
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Oct 2009 21:30:10 +0100
-Received: from dizzy-6.localnet ([::ffff:192.168.2.122])
-	(TLS: TLSv1/SSLv3,256bits,AES256-SHA)
-	by koffein with esmtp; Fri, 30 Oct 2009 23:04:32 +0100
-	id 0000000000013E15.000000004AEB62F0.00000BC1
-From: David =?iso-8859-1?q?Lanzend=F6rfer?= <david.lanzendoerfer@o2s.ch>
-Organization: OpenSourceSupport GmbH
+	Fri, 30 Oct 2009 21:48:45 +0100
+Received: from octopus.hi.pengutronix.de ([2001:6f8:1178:2:215:17ff:fe12:23b0])
+	by metis.ext.pengutronix.de with esmtp (Exim 4.63)
+	(envelope-from <rsc@pengutronix.de>)
+	id 1N3yNi-0008Nq-FV; Fri, 30 Oct 2009 21:47:34 +0100
+Received: from rsc by octopus.hi.pengutronix.de with local (Exim 4.69)
+	(envelope-from <rsc@pengutronix.de>)
+	id 1N3yNh-0007Fh-OW; Fri, 30 Oct 2009 21:47:33 +0100
+Date: Fri, 30 Oct 2009 21:47:33 +0100
+From: Robert Schwebel <r.schwebel@pengutronix.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Oct 2009 21:30:05 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31.1; KDE/4.3.2; x86_64; ; )
-X-Face: a023Y#Om+E(<|Tkz7Ae>YeJ\rvY,eXDn^g66`NiaNQ"#xRJ=gr'!V}V#{MN6!YO{s{{); h
-	=s@Vv%T)fi>gJrAHvijw^ZG9{b1rtf~mn$V^b`:3m>yH=o$Eo')Ul8f}F%1vdg9|52W=Xs
-	rR^/E/SPo^{-R22[a}c?@tgfp<I#oOW7r}0We&3g5"2>N5r/Vu|>kWs"|J'XppA; *0A,6>
-	*GY(0=H@>@^vEy]!m\)I42Lu@k~_=:U@/kf8{AO4'F7:Hy_*"5Xf9Vvkqr4E(32pVlT:=&
-	i4l[3%?Z<zzP~wGSke?1VJj\cd~Z(,Upc;nOR|pqK@<j(`EYFSn,jN)A(~`YwM2nIv,
-Mime-Version: 1.0
-Message-Id: <200910302130.17290.david.lanzendoerfer@o2s.ch>
-X-SA-Exim-Connect-IP: 82.192.226.27
-X-SA-Exim-Mail-From: david.lanzendoerfer@o2s.ch
+Message-ID: <20091030204733.GZ22376@pengutronix.de>
+MIME-Version: 1.0
+X-Sent-From: Pengutronix Entwicklungszentrum Nord - Hildesheim
+X-URL: http://www.pengutronix.de/
+X-IRC: #ptxdist @freenode
+X-Accept-Language: de,en
+X-Accept-Content-Type: text/plain
+X-Impressum: Pengutronix - Linux Solutions for Science and Industry
+	Handelsregister:  Amtsgericht Hildesheim, HRA 2686 Peiner Strasse
+	6-8, 31137 Hildesheim, Germany Phone: +49-5121-206917-0 |  Fax:
+	+49-5121-206917-5555 Inhaber: Dipl.-Ing. Robert Schwebel
+X-Message-Flag: See Message Headers for Impressum
+X-Uptime: 21:31:07 up 18 days,  9:20,  1 user,  load average: 0.06, 0.07, 0.08
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 92.198.50.35
+X-SA-Exim-Mail-From: rsc@pengutronix.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] htc-msm7.inc
+Subject: RFC: Patch policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,74 +46,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Oct 2009 20:30:11 -0000
-X-Groupsio-MsgNum: 13743
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg=pgp-sha1; boundary="=_koffein-3011-1256940272-0001-2"
-
---=_koffein-3011-1256940272-0001-2
-Content-Type: multipart/mixed;
-  boundary="Boundary-01=_Nz06KbJTSisIYMX"
-Content-Transfer-Encoding: 7bit
-
---Boundary-01=_Nz06KbJTSisIYMX
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 30 Oct 2009 20:48:46 -0000
+Content-Type: text/plain; charset=iso-8859-15
 Content-Disposition: inline
 
-=46or htcdream (for example) is an yaffs2-image needed for flashing into=20
-internal memory.
-The IMAGE_FSTYPES in the machine declaration did prohibit that.
-ROOTFS type should be declared in conf/local.conf and NOT in machine specs.
+Hi Marcin, Richard & OE crew,
 
-greatings
-	leviathan
+At ELC-E, we discussed how we could improve the collaboration between
+the cross build systems out there. Although there are big differences
+in what kind of tools people use, there is one thing that all cross
+build systems have in common: patches for upstream packets.
 
---Boundary-01=_Nz06KbJTSisIYMX
-Content-Type: text/x-patch;
-  charset="ISO-8859-1";
-  name="fix_machine.patch"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment;
-	filename="fix_machine.patch"
+What people usually do when starting a new packet which doesn't build
+out of the box is looking around if oe, buildroot, ptxdist, t2, ... has
+a patch, copy it, or, if not, invest more or less time to fix (or hack
+around) the upstream issue. Then patches go into the build systems and
+bit rot there :-)
 
-commit 4425a0bd614a63c4e5d977115ac7d81993c4bfa1
-Author: David Lanzend=F6rfer <david.lanzendoerfer@o2s.ch>
-Date:   Fri Oct 30 21:24:47 2009 +0100
+I'm wondering if there is interest in more collaboration wrt. bringing
+cross development paches upstream; one effort we started after FOSDEM
+this year is the send-patches.org project, mainly by creating the
+crossdev@send-patches.org mailing list. However, I suppose we should
+think about what we could do to increase the activities.
 
-    ROOTFS type should be declared in conf/local.conf and NOT in machine sp=
-ecs
+The main concern of the ptxdist maintainers with simply taking patches
+from other build systems is patch quality; our rules are:
 
-diff --git a/conf/machine/include/htc-msm7.inc b/conf/machine/include/htc-m=
-sm7.inc
-index 5d7596f..f2164bd 100644
---- a/conf/machine/include/htc-msm7.inc
-+++ b/conf/machine/include/htc-msm7.inc
-@@ -15,9 +15,6 @@ MACHINE_CLASS =3D "htc-msm7"
- # features
- MACHINE_FEATURES =3D "kernel26 touchscreen screen phone gps usb keyboard"
-=20
--# filesystems
--IMAGE_FSTYPES =3D "tar.gz"
--
- # CPU
- require conf/machine/include/tune-arm1136-novfp.inc
-=20
+- patches have to be in the canonical patch format, as known from linux
+- proper Signed-off-by: lines
+- patches should be made with upstream in mind, i.e. "correct" fixes
+  instead of quick hacks; if we really need hacks, they should be
+  clearly marked as "not for upstream".
+- modify autotool files separately from their autogenerated files
 
---Boundary-01=_Nz06KbJTSisIYMX--
+What do you think? Should we try to create a new patch stack which
+follows these rules, in order to lower the ammount of duplicate work? At
+least for us, this would be very interesting.
 
---=_koffein-3011-1256940272-0001-2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Transfer-Encoding: 7bit
-Content-Description: This is a digitally signed message part.
+Cheers,
+Robert (ptxdist team)
+-- 
+Pengutronix e.K.                           |                             |
+Industrial Linux Solutions                 | http://www.pengutronix.de/  |
+Peiner Str. 6-8, 31137 Hildesheim, Germany | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.11 (GNU/Linux)
 
-iEYEABECAAYFAkrrTNkACgkQAeZw77btGjp+GgCcDTNBR3dEdBuanzPnZh9E+3SV
-0bcAnR7DMyzkjvh6tQmLeAaoS4wWR/7R
-=elfI
------END PGP SIGNATURE-----
-
---=_koffein-3011-1256940272-0001-2--
