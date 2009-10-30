@@ -1,18 +1,38 @@
-Received: from [150.254.31.31] (helo=idss-pw)
+Received: from [150.254.30.30] (helo=libra.cs.put.poznan.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jest@idss-pw.cs.put.poznan.pl>) id 1N3tL5-0002mU-Du
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Oct 2009 16:24:34 +0100
-Received: from jest by idss-pw with local (Exim 4.69)
-	(envelope-from <jest@idss-pw.cs.put.poznan.pl>)
-	id 1N3tKf-0003ez-0p; Fri, 30 Oct 2009 16:24:05 +0100
+	(envelope-from <przemyslaw.wesolek@cs.put.poznan.pl>)
+	id 1N3tO4-00038Q-MO for openembedded-devel@lists.openembedded.org;
+	Fri, 30 Oct 2009 16:27:40 +0100
+Received: from kas30pipe.localhost (unknown [127.0.0.1])
+	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 3FD3B99;
+	Fri, 30 Oct 2009 15:26:28 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at cs.put.poznan.pl
+Received: from libra.cs.put.poznan.pl ([127.0.0.1])
+	by localhost (libra.cs.put.poznan.pl [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id izT65TRI+w6L; Fri, 30 Oct 2009 16:26:28 +0100 (CET)
+Received: from localhost.localdomain (idss-pw.cs.put.poznan.pl [150.254.31.31])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 04A5D8E;
+	Fri, 30 Oct 2009 16:26:28 +0100 (CET)
 From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Oct 2009 16:23:36 +0100
-Message-Id: <1256916216-14027-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
+Date: Fri, 30 Oct 2009 16:27:05 +0100
+Message-Id: <1256916425-14223-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
 X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 150.254.31.31
-X-SA-Exim-Mail-From: jest@idss-pw.cs.put.poznan.pl
+X-SpamTest-Envelope-From: przemyslaw.wesolek@cs.put.poznan.pl
+X-SpamTest-Group-ID: 00000000
+X-SpamTest-Info: Profiles 9691 [Sep 17 2009]
+X-SpamTest-Info: {received from trusted sender
+	<przemyslaw.wesolek@cs.put.poznan.pl>: common white list}
+X-SpamTest-Method: white email list
+X-SpamTest-Rate: 0
+X-SpamTest-Status: Trusted
+X-SpamTest-Status-Extended: trusted
+X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0278], KAS30/Release
+X-SA-Exim-Connect-IP: 150.254.30.30
+X-SA-Exim-Mail-From: przemyslaw.wesolek@cs.put.poznan.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: [PATCH] Correct ARM detection in Boost 1.36 atomic count.
@@ -29,7 +49,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Oct 2009 15:24:34 -0000
+X-List-Received-Date: Fri, 30 Oct 2009 15:27:40 -0000
 
 Signed-off-by: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
 ---
