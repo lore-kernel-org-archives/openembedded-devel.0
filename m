@@ -1,26 +1,40 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [209.85.211.177] (helo=mail-yw0-f177.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N3uoU-0004xr-Il
-	for openembedded-devel@openembedded.org; Fri, 30 Oct 2009 17:59:01 +0100
-Received: (qmail 18507 invoked by uid 813007); 30 Oct 2009 16:57:51 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 30 Oct 2009 16:57:51 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Oct 2009 18:00:38 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.32-rc3-00052-g0eca52a; KDE/4.3.2; x86_64; ;
-	)
-References: <ac9c93b10910300837j764eea76l7f9412be1d2bfeca@mail.gmail.com>
-In-Reply-To: <ac9c93b10910300837j764eea76l7f9412be1d2bfeca@mail.gmail.com>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N3vLf-0006R0-4X
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 30 Oct 2009 18:33:18 +0100
+Received: by ywh7 with SMTP id 7so2943485ywh.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Oct 2009 10:32:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=5vQSvm7Mpa2/NhxOHz0MySxSIo6VkHw9EwgZjcmYt/U=;
+	b=KFRyo6uzPp/4dqG4n8aiCV+en3iFT5IID2AiDThyyuwRcQHFYFUWMrwJWFZPCO+GWc
+	cLxHG+3OdkullDR0OrBcOshDDTGrWC+roowHN+oLxg76qSGLy6JApxuIL0qojm0V0/4q
+	3/niXDYz1EIMyZGoRLMwEhWihYSmb1vZF4mbY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=to6LEamy5Hsb6Hn6Xy2av//cmhmOmZk7EMqXnlzaHtzAQ+O2cXJe8lCkyz9WApYr+y
+	aMi/+27MvZpUkQseORqMEDKOmKxO43lewnhIIZ3RWZyDm4y7oYUMMIsAF0B4CtLsr14Z
+	AHZUEXL+K3pIMv/07maBV7cMF5jDtRff/2A7U=
 MIME-Version: 1.0
-Message-Id: <200910301800.45304.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Received: by 10.101.155.22 with SMTP id h22mr2037006ano.58.1256923926257; Fri, 
+	30 Oct 2009 10:32:06 -0700 (PDT)
+In-Reply-To: <hcf53t$4jp$1@ger.gmane.org>
+References: <ac9c93b10910300040v779f8446k31de3dfc2b2fe298@mail.gmail.com>
+	<hcf53t$4jp$1@ger.gmane.org>
+Date: Fri, 30 Oct 2009 18:32:05 +0100
+Message-ID: <ac9c93b10910301032s160461bv2c1ddf5a2a7736ec@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.211.177
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: sheevaplug u-boot
+Subject: Re: about staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,47 +48,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Oct 2009 16:59:01 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Fri, 30 Oct 2009 17:33:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Dnia pi=C4=85tek, 30 pa=C5=BAdziernika 2009 o 16:37:58 Frans Meulenbroeks n=
-apisa=C5=82(a):
-> Just noticed this commit:
->=20
-> commit 04bf7d5d151173ac058f4aff2e4be3ae0f98216e
-> Author: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-> Date:   Fri Oct 30 11:38:49 2009 +0100
->=20
->     u-boot: added Sheevaplug support
->=20
->     Marvell devices needs u-boot.kwb instead of u-boot.bin due to header
->  for first stage bootloader. UBOOT_BINARY variable was introduced due of
->  that.
->=20
->=20
-> Any particular reason not to call it u-boot.bin? I know the first
-> stage bootloader needs to be prefixed but as this is device specific
-> and ends up in the sheeva dirs only, I see no need for  a name change
-> (but feel free to enlighten me).
+2009/10/30 Koen Kooi <k.kooi@student.utwente.nl>:
+> On 30-10-09 08:40, Frans Meulenbroeks wrote:
+>>
+>> Hi,
+>>
+>> Yesterday I ended up in a discussion on staging in #oe (ok, ok, I
+>> mainly caused the discussion :-) )
+>> Also based upon that I looked at various recipes on how people
+>> implement staging.
+>>
+>> There does not seem to be really standard way.
+>> Some recipes copy from ${S} which ihmo is not desirable; i think it
+>> should be a file that is exported by the application).
+>> Others use other mechanisms.
+>>
+>> For my own recipe I ended up with something like:
+>>
+>> do_stage() {
+>> =A0 =A0 =A0 =A0 install -d ${STAGING_INCDIR}
+>> =A0 =A0 =A0 =A0 install -d ${STAGING_INCDIR}/${PN}
+>> =A0 =A0 =A0 =A0 install -m 0644 ${D}/${includedir}/${PN}/*.h
+>> ${STAGING_INCDIR}/${PN}
+>> }
+>>
+>> as that seems the best. ${D} contans the exported/installed files from
+>> the application. Those files are the ones the application wants to
+>> make externally available and those should end up in staging. Not
+>> something from ${S}.
+>
+> Is ${D} garanteed to be present at staging time? I don't think we have a
+> current hard rule for that.
 
-During building of U-Boot for Sheevaplug you will get uboot.bin and uboot.k=
-wb=20
-files. Kirkwood first stage bootloader require uboot.kwb to be flashed. I=20
-chosed original names to make that clear. Feel free to change.
-=20
-> BTW: is there already also work being done for openrd u-boot?
+${D} =3D install subdir, so in my case it is definitely there.
+but it might be absent in the generic case (e.g. in case of an empty packag=
+e)
+A solution which automates everything should take that into account
+(if ${D} does not exist: no action))
 
-Give me openrd device and I will try :) But it looks like openrd-base is=20
-supported in that branch but not openrd-client.
+Btw: as a starter I would already be happy with some scripting that
+allows easy copying from ${D} to staging
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+(and I hope you agree with me that copying from ${S} to staging should be a=
+ no)
 
-
+Frans
 
 
