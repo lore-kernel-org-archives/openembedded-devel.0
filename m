@@ -1,35 +1,31 @@
-Received: from [209.85.217.220] (helo=mail-gx0-f220.google.com)
+Received: from [87.193.137.100] (helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N3tZI-0006yr-Ky
+	(envelope-from <sledz@DResearch.DE>) id 1N3u5L-0005Dr-Uf
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Oct 2009 16:39:17 +0100
-Received: by gxk20 with SMTP id 20so4227494gxk.12
+	Fri, 30 Oct 2009 17:12:24 +0100
+Received: from hiob.intern.dresearch.de (unknown [10.32.0.138])
+	by mail.dresearch.de (Postfix) with ESMTP id AD2EE49128A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Oct 2009 08:38:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=UMzgAv6L4VH26jKw0/Yl+Yxl1FyIWIPjol/FYMHqmG8=;
-	b=MZvvwLv9bxVpWCd/4wvD/dbzb4DNoBUasvCQ29+sgw75pYvALBCGwi1rOTHC6tnrbE
-	XwawnYL1f1P66K7nrS54QIHOC3ZBryMyOEDL+kMAT9rTm9fhpvsCOTDB0wtUS/gW2+eD
-	M+uKmkhBBFYDrZnTVOu4RgzMm3I557BV+9Mso=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=FW/cq0BJgt5mno998/aXRBQyX2tieNSiGYAiKzQoGW0/15DoAC4gUYv5sGIYoNSz8I
-	LkGO6z1A4GC3qHjTLZ8hbncuO5p1yuevz2GpAOp+Kfg2eIzrrkfnqCM3927tY2iJbhqh
-	stiO5FOUnoIjFHypZpnMiqb/F5IwUN21hB0Cs=
+	Fri, 30 Oct 2009 17:11:13 +0100 (CET)
+Received: from [10.32.11.62] ([10.32.11.62]) by hiob.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Fri, 30 Oct 2009 17:13:28 +0100
+Message-ID: <4AEB0FF2.6010907@dresearch.de>
+Date: Fri, 30 Oct 2009 17:10:26 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.4pre) Gecko/20090915 SUSE/3.0b4-3.6 Thunderbird/3.0b4
 MIME-Version: 1.0
-Received: by 10.101.54.13 with SMTP id g13mr1659489ank.158.1256917079146; Fri, 
-	30 Oct 2009 08:37:59 -0700 (PDT)
-Date: Fri, 30 Oct 2009 16:37:58 +0100
-Message-ID: <ac9c93b10910300837j764eea76l7f9412be1d2bfeca@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.217.220
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <4AE992C4.4040802@dresearch.de>	<200910291422.50013.holger+oe@freyther.de>	<4AE9986B.6070606@dresearch.de>
+	<4AEAA523.8020101@gefanuc.com>
+In-Reply-To: <4AEAA523.8020101@gefanuc.com>
+X-OriginalArrivalTime: 30 Oct 2009 16:13:28.0906 (UTC)
+	FILETIME=[EAD382A0:01CA597B]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: sheevaplug u-boot
+Subject: Re: How to use patchwork?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,29 +39,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Oct 2009 15:39:17 -0000
+X-List-Received-Date: Fri, 30 Oct 2009 16:12:25 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Just noticed this commit:
+On 10/30/2009 09:34 AM, Martyn Welch wrote:
+>>> Did you have a "Signed-off-by: " line in it?
+>>>     
+>>
+>> Yep, see e.g.
+>> <http://thread.gmane.org/gmane.comp.handhelds.openembedded/26999>
+>>   
+> At a guess it's because your "Signed-off-by:" line has an obscured email
+> address in it.
 
-commit 04bf7d5d151173ac058f4aff2e4be3ae0f98216e
-Author: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-Date:   Fri Oct 30 11:38:49 2009 +0100
+If you mean
 
-    u-boot: added Sheevaplug support
+  Signed-off-by: Steffen Sledz <sledz <at> dresearch.de>
 
-    Marvell devices needs u-boot.kwb instead of u-boot.bin due to header for
-    first stage bootloader. UBOOT_BINARY variable was introduced due of
-    that.
+this is just a modification of GMANE web interface. In the original
+message it was
 
+  Signed-off-by: Steffen Sledz <sledz@dresearch.de>
 
-Any particular reason not to call it u-boot.bin? I know the first
-stage bootloader needs to be prefixed but as this is device specific
-and ends up in the sheeva dirs only, I see no need for  a name change
-(but feel free to enlighten me).
+That should be OK. Or not?
 
-BTW: is there already also work being done for openrd u-boot?
+Steffen
 
-Frans
 
 
