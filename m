@@ -1,35 +1,41 @@
-Received: from [209.85.210.175] (helo=mail-yx0-f175.google.com)
+Received: from [209.85.211.177] (helo=mail-yw0-f177.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N3m74-0007tb-F6
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N3mAe-00082W-5m
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Oct 2009 08:41:37 +0100
-Received: by yxe5 with SMTP id 5so2514664yxe.24
+	Fri, 30 Oct 2009 08:45:19 +0100
+Received: by ywh7 with SMTP id 7so2505421ywh.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Oct 2009 00:40:26 -0700 (PDT)
+	Fri, 30 Oct 2009 00:44:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=SgmXbir4pnRN4+TlFWesPFAEsomCF/dfuOdEOdWAdTk=;
-	b=gj8WAmSPN9rsmEancmVHHINgWBxhDzwVycXUYK2dlH0sdmiKvvswUFJ9fGfwgVkigy
-	az9J+8YQBRYNqRWufOjgwTcenPtnIlnlSj1JB0CfQhhSm5/5fMOl//TbRzt7l/X2gzhH
-	DG3hTtF6rs7pgw1Bb8B2KxVVZdMgXH0fz0G3E=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=XlkUo97fo/x0eJUgRJVsljVqcW/6G+E7dC8HOCnLkzw=;
+	b=A3awWRt3pG6kq/4ox+cJYsgqoBAv2cX9DMCeBVQ99As8hoQ17TK+fw+jaMd/o8KSou
+	GlcsEmVgkTLDftRXty4QssAS2l02rjkbodw6rDaYpWr/rrQokAXWbKVwTkzhNx4Bla+9
+	tigudq4YTSW8rmdRS+SDZVjd2P2kB7xtEzeTc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=JzyON4d93nHZSO2uFV8UWRtBjy8HfQ5KR5gWEOT/6xHktAygiupYpliwa6b3ZFz/SW
-	eMKqjJCgzvJoEsHSZTqeuLX6IgopnYcLYuHL/kuk/AxGpJ+lz6J70PetXcRVaQs+UOX4
-	6ywNmJ6xlbAX2TymuIbWMJO5sZ77kRqVmA/cM=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=ZHkbSpkh5vzAjjV2+IMIBcRqbvYTWlr+hJV3O62VPU9IEz7ESES4E6E6CmktNK7qDP
+	WP/4wNdb6W2royZggu/SxYSqo97dxmgZIhZKK6cus2tI2nS+W2o5ZAGGohqUrKs2oaaU
+	r1ofTCU1oPV0u8Kk1kCKTURnBTMYewT/KfuY8=
 MIME-Version: 1.0
-Received: by 10.101.184.13 with SMTP id l13mr1340531anp.11.1256888426001; Fri, 
-	30 Oct 2009 00:40:26 -0700 (PDT)
-Date: Fri, 30 Oct 2009 08:40:25 +0100
-Message-ID: <ac9c93b10910300040v779f8446k31de3dfc2b2fe298@mail.gmail.com>
+Received: by 10.100.72.2 with SMTP id u2mr1045535ana.117.1256888647715; Fri, 
+	30 Oct 2009 00:44:07 -0700 (PDT)
+In-Reply-To: <ac9c93b10910261032w4d56a5c2g6dd33aaf0fde1b31@mail.gmail.com>
+References: <ac9c93b10910260837m708ebc41ja934d825c6b1bec3@mail.gmail.com>
+	<hc4g14$tpm$1@ger.gmane.org>
+	<ac9c93b10910260903o5daa5e8erd5ea2d0c5838ccb6@mail.gmail.com>
+	<ac9c93b10910261032w4d56a5c2g6dd33aaf0fde1b31@mail.gmail.com>
+Date: Fri, 30 Oct 2009 08:44:07 +0100
+Message-ID: <ac9c93b10910300044vf8ef4bdjf5cc1e2cfa32dc87@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Connect-IP: 209.85.211.177
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: about staging
+Subject: Re: MACHINE_KERNEL_PR issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,70 +49,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Oct 2009 07:41:37 -0000
+X-List-Received-Date: Fri, 30 Oct 2009 07:45:19 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+2009/10/26 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+> 2009/10/26 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+>> 2009/10/26 Koen Kooi <k.kooi@student.utwente.nl>:
+>>> On 26-10-09 16:37, Frans Meulenbroeks wrote:
+>>>>
+>>>> Hi,
+>>>>
+>>>> While creating a recipe which generates a module I bumped into the
+>>>> following issue.
+>>>> If I do
+>>>> inherit module
+>>>> the package name uses MACHINE_KERNEL_PR and not PR.
+>>>> I understand the reason for this: if the kernel is modified you want
+>>>> the proper modules.
+>>>> However in a recipe this means that if the recipe changes for whatever
+>>>> reason that technically one should increase all MACHINE_KERNEL_PR
+>>>> values (as otherwise the new version is not used).
+>>>> In my eyes this is not very desirable.
+>>>>
+>>>> Any opinions how we should fix this?
+>>>
+>>> koen@dominion:/OE/org.openembedded.dev$ grep PR_append recipes/ti/*
+>>> recipes/ti/ti-cmem-module_2.24.01.bb:MACHINE_KERNEL_PR_append = "a"
+>>> recipes/ti/ti-dm355mm-module_1.13.bb:MACHINE_KERNEL_PR_append = "a"
+>>> recipes/ti/ti-dmai_svn.bb:MACHINE_KERNEL_PR_append = "c"
+>>> recipes/ti/ti-dsplink-module_1.61.3.bb:MACHINE_KERNEL_PR_append = "a"
+>>> recipes/ti/ti-lpm-module_2.24.01.bb:MACHINE_KERNEL_PR_append = "a"
+>>> recipes/ti/ti-sdma-module_2.24.01.bb:MACHINE_KERNEL_PR_append = "a"
+>>
+>> Ah, ok didn't know about that one and when coined this on #oe no-one
+>> mentioned this solution.
+>> Thanks alot! Frans
+>>
+>
+> Two more things:
+>
+> We have about 83 recipes that do inherit module.
+> and 12 that have MACHINE_KERNEL_PR (10 ti ones, linux omap pm and
+> open-iscsi which I just added)
+> so ti seems 71 have a problem
+>
+> and why not change the class and add _$(PR) or so instead of _append ?
+As I saw no replies on this, replying to it myself to bring it on the
+table again.
 
-Yesterday I ended up in a discussion on staging in #oe (ok, ok, I
-mainly caused the discussion :-) )
-Also based upon that I looked at various recipes on how people
-implement staging.
-
-There does not seem to be really standard way.
-Some recipes copy from ${S} which ihmo is not desirable; i think it
-should be a file that is exported by the application).
-Others use other mechanisms.
-
-For my own recipe I ended up with something like:
-
-do_stage() {
-        install -d ${STAGING_INCDIR}
-        install -d ${STAGING_INCDIR}/${PN}
-        install -m 0644 ${D}/${includedir}/${PN}/*.h ${STAGING_INCDIR}/${PN}
-}
-
-as that seems the best. ${D} contans the exported/installed files from
-the application. Those files are the ones the application wants to
-make externally available and those should end up in staging. Not
-something from ${S}.
-
-There is something odd here though. Only a few recipes do this
-1453 recipes have a do_stage or do_stage_append function.
-646 of these do autotools_stage_all (and perhaps other things).
-The rest? all kind of interesting variants. Some understandable, some
-outright odd.
-
-That has lead me to the following thoughts:
-Why is not all of install/usr/include (including subdirs) copied to
-staging inc?
-Why is not all of install/usr/lib copiied to staging lib?
-(and of course alternatives like /usr/loocal/lib, /usr/local/include, ...)
-
-A solution could be to do this automatically (and have a way with a
-var to add additional dirs). This is more or less identical to making
-the _dev packages but now copying stuff to staging.
-Alternately we could opt for a manual solution where do_stage()
-invokes e.g. do_stage_inc() and do_stage_lib(), which (apart from the
-obvious defaults) use a variable to decide what directories/files are
-copied to staging (normally from ${D}).
-After that we can clean the existing recipes and probably get rid of
-most of the do_stage rules.
-
-What do people feel about this?
-
-Any volunteers to implement this? I'm more than happy to do part of
-the recipe cleaning. My knowledge of the internal structure and do's
-and don't's of the build system are pretty weak (and so is my pyhthon
-knowledge) so I'd rather not make the build system changes myself.
-(unless someone stands up who wants to guide and mentor me).
+Can we agree on a policy wrt versioning of kernel modules.
+My preference is a solution which uses ${MACHINE_KERNEL_PR} '+' ${PR}
+where the recipe provides PR (just like for non-kernel recipes).
+Can we agree on this (and can someone implement this, or do you trust
+my measly python skills to do this myself :-) )
 
 Frans
-
-PS: I used install in my example above, which I know is the regular
-way to do it.
-As I also had some subdirs it was more complicated than given above.
-Would a cp -r followed by a chmod -R have been ok instead? (it would
-definitely be a lot simpler). FM
 
 
