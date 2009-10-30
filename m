@@ -1,38 +1,39 @@
-Received: from [92.198.50.35] (helo=metis.ext.pengutronix.de)
+Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rsc@pengutronix.de>) id 1N3yOo-00059T-Qa
+	(envelope-from <leon.woestenberg@gmail.com>) id 1N3zOH-0002o1-AV
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Oct 2009 21:48:45 +0100
-Received: from octopus.hi.pengutronix.de ([2001:6f8:1178:2:215:17ff:fe12:23b0])
-	by metis.ext.pengutronix.de with esmtp (Exim 4.63)
-	(envelope-from <rsc@pengutronix.de>)
-	id 1N3yNi-0008Nq-FV; Fri, 30 Oct 2009 21:47:34 +0100
-Received: from rsc by octopus.hi.pengutronix.de with local (Exim 4.69)
-	(envelope-from <rsc@pengutronix.de>)
-	id 1N3yNh-0007Fh-OW; Fri, 30 Oct 2009 21:47:33 +0100
-Date: Fri, 30 Oct 2009 21:47:33 +0100
-From: Robert Schwebel <r.schwebel@pengutronix.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091030204733.GZ22376@pengutronix.de>
+	Fri, 30 Oct 2009 22:52:16 +0100
+Received: by bwz9 with SMTP id 9so4034734bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Oct 2009 14:51:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=4GDD4KlbqMF4zbI1/r/pODMHvi7FydG6KH/yNaCWAyw=;
+	b=Dns/E+H6DAHwKvg3EcWwRRroa2pR4VEZzaj8dFO+UtqrFgf+csHveCaFBOdbrY/koW
+	MNhNIa0aTDqzVxPDodszyVvq73M78ow0n29TvpoE2D2cVGTrv8HI6RmquogdZCwjrshQ
+	0+l8qBRR/GEmTavVZT0tY7BwBZwPW6V1Wcv34=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=aVzwCiCEHMQ+XpcoaSTfxmioePGfxRhv8oT5C1DDbx+DboPH2ZxXw+2ckDqqBJOOVl
+	6401ZMT6p+nuB3kC9ank3QVW/e93U0yCLRMxelhvsKhqPIf34Y1La+AUrhmkeXuhr6b2
+	5YRqJuT9o+qpQzKmDcN549GBpZeX5ij7py6m0=
 MIME-Version: 1.0
-X-Sent-From: Pengutronix Entwicklungszentrum Nord - Hildesheim
-X-URL: http://www.pengutronix.de/
-X-IRC: #ptxdist @freenode
-X-Accept-Language: de,en
-X-Accept-Content-Type: text/plain
-X-Impressum: Pengutronix - Linux Solutions for Science and Industry
-	Handelsregister:  Amtsgericht Hildesheim, HRA 2686 Peiner Strasse
-	6-8, 31137 Hildesheim, Germany Phone: +49-5121-206917-0 |  Fax:
-	+49-5121-206917-5555 Inhaber: Dipl.-Ing. Robert Schwebel
-X-Message-Flag: See Message Headers for Impressum
-X-Uptime: 21:31:07 up 18 days,  9:20,  1 user,  load average: 0.06, 0.07, 0.08
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 92.198.50.35
-X-SA-Exim-Mail-From: rsc@pengutronix.de
+Received: by 10.239.179.80 with SMTP id c16mr197674hbg.155.1256939462754; Fri, 
+	30 Oct 2009 14:51:02 -0700 (PDT)
+In-Reply-To: <20091030204733.GZ22376@pengutronix.de>
+References: <20091030204733.GZ22376@pengutronix.de>
+Date: Fri, 30 Oct 2009 22:51:02 +0100
+Message-ID: <c384c5ea0910301451w42249307w508aa4ca661cbdc8@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	Robert Schwebel <r.schwebel@pengutronix.de>
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: RFC: Patch policy
+Subject: Re: RFC: Patch policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,49 +47,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Oct 2009 20:48:46 -0000
-Content-Type: text/plain; charset=iso-8859-15
-Content-Disposition: inline
+X-List-Received-Date: Fri, 30 Oct 2009 21:52:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi Marcin, Richard & OE crew,
+Hello Robert and crews,
 
-At ELC-E, we discussed how we could improve the collaboration between
-the cross build systems out there. Although there are big differences
-in what kind of tools people use, there is one thing that all cross
-build systems have in common: patches for upstream packets.
+On Fri, Oct 30, 2009 at 9:47 PM, Robert Schwebel
+<r.schwebel@pengutronix.de> wrote:
+> Hi Marcin, Richard & OE crew,
+>
+> At ELC-E, we discussed how we could improve the collaboration between
+> the cross build systems out there. Although there are big differences
+> in what kind of tools people use, there is one thing that all cross
+> build systems have in common: patches for upstream packets.
+>
+> - patches have to be in the canonical patch format, as known from linux
+> - proper Signed-off-by: lines
+> ...
+> What do you think? Should we try to create a new patch stack which
+> follows these rules, in order to lower the ammount of duplicate work? At
+> least for us, this would be very interesting.
+>
 
-What people usually do when starting a new packet which doesn't build
-out of the box is looking around if oe, buildroot, ptxdist, t2, ... has
-a patch, copy it, or, if not, invest more or less time to fix (or hack
-around) the upstream issue. Then patches go into the build systems and
-bit rot there :-)
+- Standard naming of the patch (numbered series etc).
+- A shared (possibly distributed) patch server with patches against the package?
 
-I'm wondering if there is interest in more collaboration wrt. bringing
-cross development paches upstream; one effort we started after FOSDEM
-this year is the send-patches.org project, mainly by creating the
-crossdev@send-patches.org mailing list. However, I suppose we should
-think about what we could do to increase the activities.
-
-The main concern of the ptxdist maintainers with simply taking patches
-from other build systems is patch quality; our rules are:
-
-- patches have to be in the canonical patch format, as known from linux
-- proper Signed-off-by: lines
-- patches should be made with upstream in mind, i.e. "correct" fixes
-  instead of quick hacks; if we really need hacks, they should be
-  clearly marked as "not for upstream".
-- modify autotool files separately from their autogenerated files
-
-What do you think? Should we try to create a new patch stack which
-follows these rules, in order to lower the ammount of duplicate work? At
-least for us, this would be very interesting.
-
-Cheers,
-Robert (ptxdist team)
+Regards,
 -- 
-Pengutronix e.K.                           |                             |
-Industrial Linux Solutions                 | http://www.pengutronix.de/  |
-Peiner Str. 6-8, 31137 Hildesheim, Germany | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+Leon
 
 
