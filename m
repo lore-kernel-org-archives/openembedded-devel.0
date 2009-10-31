@@ -1,29 +1,30 @@
-Received: from [206.46.173.5] (helo=vms173005pub.verizon.net)
+Received: from [206.46.173.3] (helo=vms173003pub.verizon.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1N48N1-0005TR-TG
+	(envelope-from <denis@denix.org>) id 1N48ZU-00016a-0S
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Oct 2009 08:27:35 +0100
-Received: from gandalf.denix.org ([71.251.63.147]) by vms173005.mailsrvcs.net
+	Sat, 31 Oct 2009 08:40:27 +0100
+Received: from gandalf.denix.org ([71.251.63.147]) by vms173003.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KSD00AFLBBDOM0L@vms173005.mailsrvcs.net> for
+	32bit)) with ESMTPA id <0KSD00E71BXG6DE9@vms173003.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Sat,
-	31 Oct 2009 02:26:07 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id BCC5C14AF60; Sat,
-	31 Oct 2009 03:26:01 -0400 (EDT)
-Date: Sat, 31 Oct 2009 03:26:01 -0400
+	31 Oct 2009 02:39:16 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0DE8A14AF60; Sat,
+	31 Oct 2009 03:39:14 -0400 (EDT)
+Date: Sat, 31 Oct 2009 03:39:14 -0400
 From: Denys Dmytriyenko <denis@denix.org>
+In-reply-to: <ac9c93b10910301032s160461bv2c1ddf5a2a7736ec@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20091031072601.GD16188@denix.org>
-References: <1256913629-22621-1-git-send-email-koen@dominion.thruhere.net>
+Message-id: <20091031073914.GE16188@denix.org>
 MIME-version: 1.0
-In-reply-to: <1256913629-22621-1-git-send-email-koen@dominion.thruhere.net>
+References: <ac9c93b10910300040v779f8446k31de3dfc2b2fe298@mail.gmail.com>
+	<hcf53t$4jp$1@ger.gmane.org>
+	<ac9c93b10910301032s160461bv2c1ddf5a2a7736ec@mail.gmail.com>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.5
+X-SA-Exim-Connect-IP: 206.46.173.3
 X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Koen Kooi <koen@openembedded.org>, Koen Kooi <k-kooi@ti.com>
-Subject: Re: [STABLE][PATCH] kernel bbclass: sync with .dev
+Subject: Re: about staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,172 +38,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Oct 2009 07:27:35 -0000
-Content-type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 31 Oct 2009 07:40:27 -0000
+Content-type: text/plain; charset=iso-8859-1
+Content-transfer-encoding: QUOTED-PRINTABLE
 Content-disposition: inline
 
-On Fri, Oct 30, 2009 at 03:40:29PM +0100, Koen Kooi wrote:
-> From: Koen Kooi <k-kooi@ti.com>
-> 
-> * stages more directories
-> * adds mkimage step
-> 
-> Signed-off-by: Koen Kooi <k-kooi@ti.com>
-> Signed-off-by: Koen Kooi <koen@openembedded.org>
+On Fri, Oct 30, 2009 at 06:32:05PM +0100, Frans Meulenbroeks wrote:
+> 2009/10/30 Koen Kooi <k.kooi@student.utwente.nl>:
+> > On 30-10-09 08:40, Frans Meulenbroeks wrote:
+> >>
+> >> Hi,
+> >>
+> >> Yesterday I ended up in a discussion on staging in #oe (ok, ok, =
+I
+> >> mainly caused the discussion :-) )
+> >> Also based upon that I looked at various recipes on how people
+> >> implement staging.
+> >>
+> >> There does not seem to be really standard way.
+> >> Some recipes copy from ${S} which ihmo is not desirable; i think=
+ it
+> >> should be a file that is exported by the application).
+> >> Others use other mechanisms.
+> >>
+> >> For my own recipe I ended up with something like:
+> >>
+> >> do_stage() {
+> >> =A0 =A0 =A0 =A0 install -d ${STAGING_INCDIR}
+> >> =A0 =A0 =A0 =A0 install -d ${STAGING_INCDIR}/${PN}
+> >> =A0 =A0 =A0 =A0 install -m 0644 ${D}/${includedir}/${PN}/*.h
+> >> ${STAGING_INCDIR}/${PN}
+> >> }
+> >>
+> >> as that seems the best. ${D} contans the exported/installed file=
+s from
+> >> the application. Those files are the ones the application wants =
+to
+> >> make externally available and those should end up in staging. No=
+t
+> >> something from ${S}.
+> >
+> > Is ${D} garanteed to be present at staging time? I don't think we=
+ have a
+> > current hard rule for that.
+>=20
+> ${D} =3D install subdir, so in my case it is definitely there.
+> but it might be absent in the generic case (e.g. in case of an empt=
+y package)
+> A solution which automates everything should take that into account
+> (if ${D} does not exist: no action))
+>=20
+> Btw: as a starter I would already be happy with some scripting that
+> allows easy copying from ${D} to staging
+>=20
+> (and I hope you agree with me that copying from ${S} to staging sho=
+uld be a no)
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+Hmm, I guess I missed the discussion on irc, but I don't think the ab=
+ove=20
+statement is correct. For example, -native packages do have do_stage =
+and=20
+ususally don't have do_install. Also, staging some files w/o installi=
+ng them=20
+on the "target" (either the main or -dev package) may be desireable i=
+n some=20
+cases...
 
-> ---
->  classes/kernel.bbclass |   68 +++++++++++++++++++++++++++++++++---------------
->  1 files changed, 47 insertions(+), 21 deletions(-)
-> 
-> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-> index 278aec1..4474f5b 100644
-> --- a/classes/kernel.bbclass
-> +++ b/classes/kernel.bbclass
-> @@ -78,6 +78,10 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
->  UBOOT_ENTRYPOINT ?= "20008000"
->  UBOOT_LOADADDRESS ?= "${UBOOT_ENTRYPOINT}"
->  
-> +# For the kernel, we don't want the '-e MAKEFLAGS=' in EXTRA_OEMAKE.
-> +# We don't want to override kernel Makefile variables from the environment
-> +EXTRA_OEMAKE = ""
-> +
->  kernel_do_compile() {
->  	unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS MACHINE
->  	oe_runmake include/linux/version.h CC="${KERNEL_CC}" LD="${KERNEL_LD}"
-> @@ -103,8 +107,15 @@ kernel_do_stage() {
->  		cp -fR arch/${ARCH}/include/asm/* ${STAGING_KERNEL_DIR}/include/$ASMDIR/
->  		install -d ${STAGING_KERNEL_DIR}/arch/${ARCH}/include
->  		cp -fR arch/${ARCH}/* ${STAGING_KERNEL_DIR}/arch/${ARCH}/	
-> +
-> +	# Check for arch/x86 on i386
-> +	elif [ -d arch/x86/include/asm/ ]; then
-> +		cp -fR arch/x86/include/asm/* ${STAGING_KERNEL_DIR}/include/asm-x86/
-> +		install -d ${STAGING_KERNEL_DIR}/arch/x86/include
-> +		cp -fR arch/x86/* ${STAGING_KERNEL_DIR}/arch/x86/
->  	fi
-> -	rm -f $ASMDIR ${STAGING_KERNEL_DIR}/include/asm
-> +
-> +	rm -f ${STAGING_KERNEL_DIR}/include/asm
->  	ln -sf $ASMDIR ${STAGING_KERNEL_DIR}/include/asm
->  
->  	mkdir -p ${STAGING_KERNEL_DIR}/include/asm-generic
-> @@ -119,7 +130,7 @@ kernel_do_stage() {
->  	mkdir -p ${STAGING_KERNEL_DIR}/include/pcmcia
->  	cp -fR include/pcmcia/* ${STAGING_KERNEL_DIR}/include/pcmcia/
->  
-> -	for entry in drivers/crypto drivers/media include/media include/acpi include/sound include/video include/scsi; do
-> +	for entry in drivers/crypto drivers/media include/media include/acpi include/sound include/video include/scsi include/trace; do
->  		if [ -d $entry ]; then
->  			mkdir -p ${STAGING_KERNEL_DIR}/$entry
->  			cp -fR $entry/* ${STAGING_KERNEL_DIR}/$entry/
-> @@ -175,6 +186,7 @@ kernel_do_install() {
->  	install -m 0644 System.map ${D}/boot/System.map-${KERNEL_VERSION}
->  	install -m 0644 .config ${D}/boot/config-${KERNEL_VERSION}
->  	install -m 0644 vmlinux ${D}/boot/vmlinux-${KERNEL_VERSION}
-> +	[ -e Module.symvers ] && install -m 0644 Module.symvers ${D}/boot/Module.symvers-${KERNEL_VERSION}
->  	install -d ${D}/etc/modutils
->  	if [ "${KERNEL_MAJOR_VERSION}" = "2.6" ]; then
->  		install -d ${D}/etc/modprobe.d
-> @@ -224,8 +236,8 @@ EXPORT_FUNCTIONS do_compile do_install do_stage do_configure
->  # kernel-image becomes kernel-image-${KERNEL_VERISON}
->  PACKAGES = "kernel kernel-base kernel-image kernel-dev kernel-vmlinux"
->  FILES = ""
-> -FILES_kernel-image = "/boot/${KERNEL_IMAGETYPE}*"
-> -FILES_kernel-dev = "/boot/System.map* /boot/config*"
-> +FILES_kernel-image = "/${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE}*"
-> +FILES_kernel-dev = "/boot/System.map* /boot/Module.symvers* /boot/config*"
->  FILES_kernel-vmlinux = "/boot/vmlinux*"
->  RDEPENDS_kernel = "kernel-base"
->  RRECOMMENDS_kernel-module-hostap-cs += '${@base_version_less_or_equal("KERNEL_VERSION", "2.6.17", "", "apm-wifi-suspendfix", d)}'
-> @@ -442,10 +454,14 @@ python populate_packages_prepend () {
->  
->  	postinst = bb.data.getVar('pkg_postinst_modules', d, 1)
->  	postrm = bb.data.getVar('pkg_postrm_modules', d, 1)
-> +
-> +        maybe_update_modules = "update-modules "
-> +        if bb.data.getVar("ONLINE_PACKAGE_MANAGEMENT", d) == "none":
-> +                maybe_update_modules = ""
->  	
->  	do_split_packages(d, root='/lib/firmware', file_regex='^(.*)\.bin$', output_pattern='kernel-firmware-%s', description='Firmware for %s', recursive=True, extra_depends='')
->  	do_split_packages(d, root='/lib/firmware', file_regex='^(.*)\.fw$', output_pattern='kernel-firmware-%s', description='Firmware for %s', recursive=True, extra_depends='')
-> -	do_split_packages(d, root='/lib/modules', file_regex=module_regex, output_pattern=module_pattern, description='%s kernel module', postinst=postinst, postrm=postrm, recursive=True, hook=frob_metadata, extra_depends='update-modules kernel-%s' % bb.data.getVar("KERNEL_VERSION", d, 1))
-> +	do_split_packages(d, root='/lib/modules', file_regex=module_regex, output_pattern=module_pattern, description='%s kernel module', postinst=postinst, postrm=postrm, recursive=True, hook=frob_metadata, extra_depends='%skernel-%s' % (maybe_update_modules, bb.data.getVar("KERNEL_VERSION", d, 1)))
->  
->  	import re, os
->  	metapkg = "kernel-modules"
-> @@ -481,8 +497,32 @@ do_sizecheck() {
->  
->  addtask sizecheck before do_install after do_compile
->  
-> +do_uboot_mkimage() {
-> +    if test "x${KERNEL_IMAGETYPE}" = "xuImage" ; then 
-> +        ENTRYPOINT=${UBOOT_ENTRYPOINT}
-> +        if test -n "${UBOOT_ENTRYSYMBOL}"; then
-> +            ENTRYPOINT=`${HOST_PREFIX}nm ${S}/vmlinux | \
-> +                   awk '$3=="${UBOOT_ENTRYSYMBOL}" {print $1}'`
-> +        fi
-> +        if test -e arch/${ARCH}/boot/compressed/vmlinux ; then
-> +            ${OBJCOPY} -O binary -R .note -R .comment -S arch/${ARCH}/boot/compressed/vmlinux linux.bin
-> +            uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C none -a ${UBOOT_LOADADDRESS} -e $ENTRYPOINT -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin arch/${ARCH}/boot/uImage
-> +            rm -f linux.bin
-> +        else
-> +            ${OBJCOPY} -O binary -R .note -R .comment -S vmlinux linux.bin
-> +            rm -f linux.bin.gz
-> +            gzip -9 linux.bin
-> +            uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C gzip -a ${UBOOT_LOADADDRESS} -e $ENTRYPOINT -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin.gz arch/${ARCH}/boot/uImage
-> +            rm -f linux.bin.gz
-> +        fi
-> +    fi
-> +}
-> +
-> +addtask uboot_mkimage before do_install after do_compile
-> +
->  KERNEL_IMAGE_BASE_NAME ?= "${KERNEL_IMAGETYPE}-${PV}-${PR}-${MACHINE}"
->  KERNEL_IMAGE_SYMLINK_NAME ?= "${KERNEL_IMAGETYPE}-${MACHINE}"
-> +MODULES_IMAGE_BASE_NAME ?= modules-${PV}-${PR}-${MACHINE}
->  
->  do_deploy() {
->  	install -d ${DEPLOY_DIR_IMAGE}
-> @@ -490,22 +530,7 @@ do_deploy() {
->  	package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
->  
->  	if [ -d "${D}/lib" ]; then
-> -	tar -cvzf ${DEPLOY_DIR_IMAGE}/modules-${PV}-${PR}-${MACHINE}.tgz -C ${D} lib
-> -	fi
-> -
-> -	if test "x${KERNEL_IMAGETYPE}" = "xuImage" ; then 
-> -		if test -e arch/${ARCH}/boot/compressed/vmlinux ; then
-> -			${OBJCOPY} -O binary -R .note -R .comment -S arch/${ARCH}/boot/compressed/vmlinux linux.bin
-> -			uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C none -a ${UBOOT_LOADADDRESS} -e ${UBOOT_ENTRYPOINT} -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
-> -			rm -f linux.bin
-> -		else
-> -			${OBJCOPY} -O binary -R .note -R .comment -S vmlinux linux.bin
-> -			rm -f linux.bin.gz
-> -			gzip -9 linux.bin
-> -			uboot-mkimage -A ${UBOOT_ARCH} -O linux -T kernel -C gzip -a ${UBOOT_LOADADDRESS} -e ${UBOOT_ENTRYPOINT} -n "${DISTRO_NAME}/${PV}/${MACHINE}" -d linux.bin.gz ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
-> -			rm -f linux.bin.gz
-> -		fi
-> -		package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
-> +		fakeroot tar -cvzf ${DEPLOY_DIR_IMAGE}/${MODULES_IMAGE_BASE_NAME}.tgz -C ${D} lib
->  	fi
->  
->  	cd ${DEPLOY_DIR_IMAGE}
-> @@ -515,5 +540,6 @@ do_deploy() {
->  }
->  
->  do_deploy[dirs] = "${S}"
-> +do_deploy[depends] += "fakeroot-native:do_populate_staging"
->  
->  addtask deploy before do_package after do_install
-> -- 
-> 1.6.1
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+--=20
+Denys
+
 
 
