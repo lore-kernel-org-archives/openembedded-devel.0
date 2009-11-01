@@ -1,37 +1,23 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1N4eTA-0002Zw-Q7 for openembedded-devel@lists.openembedded.org;
-	Sun, 01 Nov 2009 18:44:03 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1N4eS4-0005dV-Tp
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 01 Nov 2009 18:42:52 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Nov 2009 18:42:52 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Nov 2009 18:42:52 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N4gpn-0001Ce-Vs
+	for openembedded-devel@openembedded.org; Sun, 01 Nov 2009 21:15:35 +0100
+Received: (qmail 25254 invoked by uid 813007); 1 Nov 2009 20:14:23 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO localhost.localdomain)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 1 Nov 2009 20:14:23 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 01 Nov 2009 18:42:28 +0100
-Message-ID: <hckha6$1ud$1@ger.gmane.org>
-References: <200910291241.35265.marcin@juszkiewicz.com.pl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <200910291241.35265.marcin@juszkiewicz.com.pl>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Sun,  1 Nov 2009 21:17:37 +0100
+Message-Id: <1257106657-22380-1-git-send-email-marcin@juszkiewicz.com.pl>
+X-Mailer: git-send-email 1.6.5
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Checksums.ini again - new format this time
+Cc: Holger Hans Peter Freyther <zecke@selfish.org>
+Subject: [STABLE][PATCH] uclibc-initial_0.9.30(.1).bb: Fix do_stage for ubuntu karmic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,53 +31,137 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Nov 2009 17:44:04 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 01 Nov 2009 20:15:35 -0000
 
-On 29-10-09 12:41, Marcin Juszkiewicz wrote:
->
-> Hi
->
-> I know that checksums.ini returns many times on ML so many of you are bored
-> with it. But I have some stuff to show/share about it.
->
-> Sometime ago new format was suggested for conf/checksums.ini and I implemented
-> it today. It looks simple and is simple:
->
-> [archivename]
-> url0=url-to-sources
-> url1=alternative-url-to-sources
-> url2=another-alternative-url-to-sources
-> md5=md5sum
-> sha256=sha256sum
->
-> What differs from old implementation? Use of archive names instead of urls so
-> no more "I fetch from my local Debian mirror and got hit by lack of checksums"
-> etc problems. By default OE does not even care about urls - it just checks for
-> section by archive name and use md5/sha256 sums to check does file is the
-> proper one. Urls can be used by source mirror building tools.
->
-> How many changes are needed? Few:
->
-> 1. 3 lines patch to base.bbclass
-> 2. new checksums sorter
-> 3. old checksums ->  new checksums converter
->
-> I think that it would be nice to switch to that.
->
-> Ideas? Opinions?
+From: Holger Hans Peter Freyther <zecke@selfish.org>
 
-Even though the cabal apparantly doesn't want people to respond to your 
-idea, I'm going to respond anyway.
+gcc4.4 and glibc 2.10 complain that getline already has
+a different signature. Rename the version in the unidef.c.
 
-I like your idea and think we should implement it. I'm not sure how the 
-urlX entries would benefit my usecase, but I suppose it doesn't hurt to 
-have them.
+Hrw's note: patch is also needed on recent Debian system and is not related to
+version of GCC (I have 4.3.x). As stable/2009 uses 0.9.30 by default I patched
+that version too.
 
-regards,
+---
+ .../uclibc/uclibc-0.9.30.1/gcc-4.4-fixlet.patch    |   31 ++++++++++++++++++++
+ recipes/uclibc/uclibc-0.9.30/gcc-4.4-fixlet.patch  |   31 ++++++++++++++++++++
+ recipes/uclibc/uclibc_0.9.30.1.bb                  |    1 +
+ recipes/uclibc/uclibc_0.9.30.bb                    |    3 +-
+ 4 files changed, 65 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/uclibc/uclibc-0.9.30.1/gcc-4.4-fixlet.patch
+ create mode 100644 recipes/uclibc/uclibc-0.9.30/gcc-4.4-fixlet.patch
 
-Koen
+diff --git a/recipes/uclibc/uclibc-0.9.30.1/gcc-4.4-fixlet.patch b/recipes/uclibc/uclibc-0.9.30.1/gcc-4.4-fixlet.patch
+new file mode 100644
+index 0000000..b9ff671
+--- /dev/null
++++ b/recipes/uclibc/uclibc-0.9.30.1/gcc-4.4-fixlet.patch
+@@ -0,0 +1,31 @@
++Index: uClibc-0.9.30.1/extra/scripts/unifdef.c
++===================================================================
++--- uClibc-0.9.30.1.orig/extra/scripts/unifdef.c	2009-08-09 11:55:23.000000000 +0200
+++++ uClibc-0.9.30.1/extra/scripts/unifdef.c	2009-08-09 11:55:46.000000000 +0200
++@@ -206,7 +206,7 @@
++ static void             error(const char *);
++ static int              findsym(const char *);
++ static void             flushline(bool);
++-static Linetype         getline(void);
+++static Linetype         _getline(void);
++ static Linetype         ifeval(const char **);
++ static void             ignoreoff(void);
++ static void             ignoreon(void);
++@@ -512,7 +512,7 @@
++ 
++ 	for (;;) {
++ 		linenum++;
++-		lineval = getline();
+++		lineval = _getline();
++ 		trans_table[ifstate[depth]][lineval]();
++ 		debug("process %s -> %s depth %d",
++ 		    linetype_name[lineval],
++@@ -526,7 +526,7 @@
++  * help from skipcomment().
++  */
++ static Linetype
++-getline(void)
+++_getline(void)
++ {
++ 	const char *cp;
++ 	int cursym;
+diff --git a/recipes/uclibc/uclibc-0.9.30/gcc-4.4-fixlet.patch b/recipes/uclibc/uclibc-0.9.30/gcc-4.4-fixlet.patch
+new file mode 100644
+index 0000000..b9ff671
+--- /dev/null
++++ b/recipes/uclibc/uclibc-0.9.30/gcc-4.4-fixlet.patch
+@@ -0,0 +1,31 @@
++Index: uClibc-0.9.30.1/extra/scripts/unifdef.c
++===================================================================
++--- uClibc-0.9.30.1.orig/extra/scripts/unifdef.c	2009-08-09 11:55:23.000000000 +0200
+++++ uClibc-0.9.30.1/extra/scripts/unifdef.c	2009-08-09 11:55:46.000000000 +0200
++@@ -206,7 +206,7 @@
++ static void             error(const char *);
++ static int              findsym(const char *);
++ static void             flushline(bool);
++-static Linetype         getline(void);
+++static Linetype         _getline(void);
++ static Linetype         ifeval(const char **);
++ static void             ignoreoff(void);
++ static void             ignoreon(void);
++@@ -512,7 +512,7 @@
++ 
++ 	for (;;) {
++ 		linenum++;
++-		lineval = getline();
+++		lineval = _getline();
++ 		trans_table[ifstate[depth]][lineval]();
++ 		debug("process %s -> %s depth %d",
++ 		    linetype_name[lineval],
++@@ -526,7 +526,7 @@
++  * help from skipcomment().
++  */
++ static Linetype
++-getline(void)
+++_getline(void)
++ {
++ 	const char *cp;
++ 	int cursym;
+diff --git a/recipes/uclibc/uclibc_0.9.30.1.bb b/recipes/uclibc/uclibc_0.9.30.1.bb
+index d159ab3..21bfeff 100644
+--- a/recipes/uclibc/uclibc_0.9.30.1.bb
++++ b/recipes/uclibc/uclibc_0.9.30.1.bb
+@@ -20,6 +20,7 @@ SRC_URI += "file://uClibc.machine file://uClibc.distro \
+ 	    file://pthread_atfork.patch;patch=1 \
+ 	    file://uclibc_ldso_use_O0.patch;patch=1 \
+ 	    file://ldso_use_arm_dl_linux_resolve_in_thumb_mode.patch;patch=1 \
++	    file://gcc-4.4-fixlet.patch;patch=1 \
+ 	   "
+ #recent versions uclibc require real kernel headers
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+diff --git a/recipes/uclibc/uclibc_0.9.30.bb b/recipes/uclibc/uclibc_0.9.30.bb
+index bbe809f..7f0f2a4 100644
+--- a/recipes/uclibc/uclibc_0.9.30.bb
++++ b/recipes/uclibc/uclibc_0.9.30.bb
+@@ -7,7 +7,7 @@
+ # on whether the base patches apply to the selected (SRCDATE) svn release.
+ #
+ UCLIBC_BASE ?= "0.9.30"
+-PR = "r6"
++PR = "r7"
+ DEFAULT_PREFERENCE = "1"
+ 
+ require uclibc.inc
+@@ -20,6 +20,7 @@ SRC_URI += "file://uClibc.machine file://uClibc.distro \
+ 	    file://pthread_atfork.patch;patch=1 \
+ 	    file://uclibc_ldso_use_O0.patch;patch=1 \
+ 	    file://ldso_use_arm_dl_linux_resolve_in_thumb_mode.patch;patch=1 \
++	    file://gcc-4.4-fixlet.patch;patch=1 \
+ 	   "
+ #recent versions uclibc require real kernel headers
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+-- 
+1.6.5
+
+
 
 
 
