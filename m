@@ -1,38 +1,38 @@
-Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1N4hAI-0004ob-Tl
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1N4i0h-0006CC-G6 for openembedded-devel@lists.openembedded.org;
+	Sun, 01 Nov 2009 22:30:54 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N4hzb-0003h0-5B
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 01 Nov 2009 21:36:45 +0100
-Received: by bwz9 with SMTP id 9so5515943bwz.12
+	Sun, 01 Nov 2009 22:29:43 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 01 Nov 2009 22:29:43 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Nov 2009 12:35:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=02O2SO0XuWgHIIBD/x7FwhtZz22tadf9kifk0qfVvrc=;
-	b=MGrdF9hgqj/fQEHvfufE8/LS8U7RbE9phwwKOuFIj53NAoxoQ3bhxV/QuqrrvQlX3+
-	OQZ/jw8xqN0GBSRsxV5bDHzgkZcPks8IQ/CBp0XG7YGpqcaJxWzpHrq4J9KVfXRw9sBu
-	PIL3y4dtjG1QcCb9BI3VSPxbwVApQu9C3mii8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=nRjXehdMWAYjch6HRTeqLMpLWP4DgskVc/hER0EDzX/omFuBY96n8JcU6tbFYy2XNz
-	johpM3+d1H+EGDmcSpJ2KapWgh0E+pNhc8hYPZzzgc+t6I4996LLk35Mnyn9yEIPC5W8
-	BDckxbZu4ByWF+jvLoqpn2qor9ZwkearylmBs=
-MIME-Version: 1.0
-Received: by 10.239.183.26 with SMTP id s26mr435846hbg.179.1257107732286; Sun, 
-	01 Nov 2009 12:35:32 -0800 (PST)
-In-Reply-To: <200910291241.35265.marcin@juszkiewicz.com.pl>
-References: <200910291241.35265.marcin@juszkiewicz.com.pl>
-Date: Sun, 1 Nov 2009 21:35:32 +0100
-Message-ID: <c384c5ea0911011235j2a8e6920s43310cce1a3e8498@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
+	Sun, 01 Nov 2009 22:29:43 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 01 Nov 2009 22:29:17 +0100
+Message-ID: <hckujd$8tt$1@ger.gmane.org>
+References: <1256725524-28431-1-git-send-email-marcin@juszkiewicz.com.pl>
+	<200911012126.37619.marcin@juszkiewicz.com.pl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <200911012126.37619.marcin@juszkiewicz.com.pl>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Checksums.ini again - new format this time
+Subject: Re: [STABLE][PATCH] jsp2.0 5.5.26: New recipe (from Jalimo SVN). servlet2.3 4.1.37: Dito. servlet2.3-native 4.1.37: Dito. servlet2.4 5.5.26: Dito.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,38 +46,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Nov 2009 20:36:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 01 Nov 2009 21:30:54 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hello,
-
-On Thu, Oct 29, 2009 at 12:41 PM, Marcin Juszkiewicz
-<marcin@juszkiewicz.com.pl> wrote:
-> [archivename]
-> url0=url-to-sources
-> url1=alternative-url-to-sources
-> url2=another-alternative-url-to-sources
-> md5=md5sum
-> sha256=sha256sum
+On 01-11-09 21:26, Marcin Juszkiewicz wrote:
+> Dnia środa, 28 października 2009 o 11:25:24 Marcin Juszkiewicz napisał(a):
+>>   recipes/servlet-api/jsp2.0_5.5.26.bb            |   42
+>>   +++++++++++++++++++++++ recipes/servlet-api/servlet2.3-native_4.1.37.bb
+>>   |    4 ++
+>>   recipes/servlet-api/servlet2.3_4.1.37.bb        |   41
+>>   ++++++++++++++++++++++
+>>   recipes/servlet-api/servlet2.4_5.5.26.bb        |   38
+>>   ++++++++++++++++++++ 4 files changed, 125 insertions(+), 0 deletions(-)
+>>   create mode 100644 recipes/servlet-api/jsp2.0_5.5.26.bb
+>>   create mode 100644 recipes/servlet-api/servlet2.3-native_4.1.37.bb
+>>   create mode 100644 recipes/servlet-api/servlet2.3_4.1.37.bb
+>>   create mode 100644 recipes/servlet-api/servlet2.4_5.5.26.bb
+>>
 >
+> ping
 
-Can we simplify this a bit? i.e.
+Acked-by: Koen Kooi <koen@openembedded.org>
 
-archivename
-url=url-to-sources
-url=alternative-url-to-sources
-url=another-alternative-url-to-sources
-md5=md5sum
-sha256=sha256sum
 
-Why not just url instead of url0, url1, url2, ... ?
-
-If you need ordering, just use the order they appear in the file.
-
-+1 for the idea,
-
-Regards,
--- 
-Leon
 
 
