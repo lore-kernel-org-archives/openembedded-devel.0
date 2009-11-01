@@ -1,26 +1,46 @@
-Received: from [209.85.211.177] (helo=mail-yw0-f177.google.com)
+Received: from [74.125.78.145] (helo=ey-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ricardo.salveti@openbossa.org>) id 1N4TkS-0002BO-5X
+	(envelope-from <jay4mail@gmail.com>) id 1N4Vsz-0007TG-S3
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 01 Nov 2009 07:17:11 +0100
-Received: by ywh7 with SMTP id 7so3801813ywh.24
+	Sun, 01 Nov 2009 09:34:08 +0100
+Received: by ey-out-1920.google.com with SMTP id 5so73400eyb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Oct 2009 23:15:58 -0700 (PDT)
-Received: by 10.91.19.15 with SMTP id w15mr7555197agi.12.1257056156333;
-	Sat, 31 Oct 2009 23:15:56 -0700 (PDT)
-Received: from localhost.localdomain ([189.115.166.231])
-	by mx.google.com with ESMTPS id 23sm2065320yxe.18.2009.10.31.23.15.54
-	(version=SSLv3 cipher=RC4-MD5); Sat, 31 Oct 2009 23:15:55 -0700 (PDT)
-From: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
+	Sun, 01 Nov 2009 01:32:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:user-agent:references:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:message-id;
+	bh=ULyfVnMxO7SaQ0DaPRbMfJfkcuDlqsRzL9Sk3iL12kU=;
+	b=CoA6O409Aigy4apJURfsb7Ku0vsN43C8DAZqZ9G1bt4vHjLflG7wXuQruutSl4hXFj
+	erIMg9YMsJBbTlC9lW02VuE2lPXSnGlwS1Uz/rtT+ev6DXCHO92vKM8S3c4B7aZrC8zj
+	3FXr91zN4FUNkn+uNY5BXxkifNeY4nrLwCSyo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:message-id;
+	b=Ub7Vs3HvdQybRCdRTkRCC2gbbvZIvFzFhg9kQh4/tfPi0zFceBMFop8PSBshBUsD+5
+	M9UIk7eZNFvDD1EjOGh0P8ChvgBHTSiCNmru3eZo8a8t/jFUOqDzHJpPJuvoQVFA+Zi0
+	vHi+Ep9eB5OAzjRed90JjDZe+YiiFKa8F0GUo=
+Received: by 10.216.90.196 with SMTP id e46mr2667996wef.194.1257064377077;
+	Sun, 01 Nov 2009 01:32:57 -0700 (PDT)
+Received: from is.home (93-81-68-255.broadband.corbina.ru [93.81.68.255])
+	by mx.google.com with ESMTPS id 5sm3174211eyf.11.2009.11.01.01.32.54
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 01 Nov 2009 01:32:55 -0700 (PDT)
+From: Yuri Bushmelev <jay4mail@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  1 Nov 2009 03:10:02 -0300
-Message-Id: <1257055802-7391-1-git-send-email-ricardo.salveti@openbossa.org>
-X-Mailer: git-send-email 1.6.5
-X-SA-Exim-Connect-IP: 209.85.211.177
-X-SA-Exim-Mail-From: ricardo.salveti@openbossa.org
+Date: Sun, 1 Nov 2009 11:32:24 +0300
+User-Agent: KMail/1.12.2 (Linux/2.6.30-std-def-alt14; KDE/4.3.2; i686; ; )
+References: <200910302300.02775.david.lanzendoerfer@o2s.ch>
+	<20091031145402.GA4300@rhein.zuhause.netz>
+	<200910311857.54380.david.lanzendoerfer@o2s.ch>
+In-Reply-To: <200910311857.54380.david.lanzendoerfer@o2s.ch>
+MIME-Version: 1.0
+Message-Id: <200911011132.24990.jay4mail@gmail.com>
+X-SA-Exim-Connect-IP: 74.125.78.145
+X-SA-Exim-Mail-From: jay4mail@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] groff-1.19.2: avoid running install-info when installing the package
+Subject: Re: Maemo5 and OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,47 +54,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Nov 2009 06:17:11 -0000
+X-List-Received-Date: Sun, 01 Nov 2009 08:34:09 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-15"
+Content-Transfer-Encoding: 7bit
 
-Otherwise the package will add the usr/share/info/dir file and can
-conflict with other problematically packages.
+Hello!
 
-Solution based on debian rules provided by the debian package.
+> Here [1] is the link to the mentioned maemo port for OE.
+> Until now, it doesnt seem to be an indipendent branch in the repository.
+> maemo5-angstrom and maemo4-angstrom branches would be nice approaches to
+>  the goal to get hildon desktop fully integrated into the project.
+> I'm glad to hear, that someone is on it.
+> I'll check next week to see, if theres something new.
+> If it is, just ask for help, I'm very motivated to get it running as soon
+>  as possible :-)
+> 
+> [1] http://github.com/rkirti/maemo_angstrom
 
-Signed-off-by: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
----
- recipes/groff/groff_1.19.2.bb |    6 ++++--
- 1 files changed, 4 insertions(+), 2 deletions(-)
+I'm very interested in running hildon environment on my Zauruses (Akita and 
+Tosa). This may requre some patching for smaller screen size (640x480 vs 
+800x480). But I still have no time to test it. I've called for testers on 
+local community.
 
-diff --git a/recipes/groff/groff_1.19.2.bb b/recipes/groff/groff_1.19.2.bb
-index 5598263..03752fa 100644
---- a/recipes/groff/groff_1.19.2.bb
-+++ b/recipes/groff/groff_1.19.2.bb
-@@ -1,18 +1,20 @@
- DESCRIPTION = "GNU roff"
- SECTION = "base"
- LICENSE = "GPL"
--PR = "r5"
-+PR = "r6"
- 
- SRC_URI = "http://ftp.gnu.org/gnu/groff/groff-${PV}.tar.gz \
- 	           file://Makefile.in.patch;patch=1 \
- 	           file://Makefile.sub.patch;patch=1 \
- 	           file://groff.patch;patch=1"
- 
-+inherit autotools
-+
- PARALLEL_MAKE = ""
- # prefix and exec-prefix are broken and the .in file is broken too
- # and can't be autoreconf'ed, so specify every dir
- EXTRA_OECONF="--without-x --prefix=${D} --exec-prefix=${D} --bindir=${D}${bindir} --datadir=${D}${datadir} --mandir=${D}${datadir}/man --infodir=${D}${datadir}/info --with-appresdir=${D}${datadir}"
--inherit autotools
-+EXTRA_OEMAKE = "INSTALL_INFO=:"
- 
- do_configure() {
- 	oe_runconf
 -- 
-1.6.5
-
+Yuri Bushmelev
 
 
