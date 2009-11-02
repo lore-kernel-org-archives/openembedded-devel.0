@@ -1,28 +1,27 @@
-Received: from [209.85.219.225] (helo=mail-ew0-f225.google.com)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1N4kVm-0004ME-8y
+	(envelope-from <holger+oe@freyther.de>) id 1N4mOk-0001JN-1I
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Nov 2009 01:11:09 +0100
-Received: by ewy25 with SMTP id 25so4395909ewy.21
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Nov 2009 16:09:55 -0800 (PST)
-Received: by 10.213.65.69 with SMTP id h5mr33490ebi.30.1257120595699;
-	Sun, 01 Nov 2009 16:09:55 -0800 (PST)
-Received: from Inbox (genld-216-018.t-mobile.co.uk [149.254.216.18])
-	by mx.google.com with ESMTPS id 10sm4364838eyd.6.2009.11.01.16.09.50
-	(version=SSLv3 cipher=RC4-MD5); Sun, 01 Nov 2009 16:09:54 -0800 (PST)
-Message-ID: <4aee2352.0a04d00a.2d4d.39aa@mx.google.com>
+	Mon, 02 Nov 2009 03:12:01 +0100
+Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
+	[123.192.145.111])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id AD3631B10C05;
+	Mon,  2 Nov 2009 02:20:47 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 2 Nov 2009 03:09:56 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <200910291241.35265.marcin@juszkiewicz.com.pl>
+	<c384c5ea0911011235j2a8e6920s43310cce1a3e8498@mail.gmail.com>
+	<d1b08f940911011459i7e8403ees7e509843a0854e2@mail.gmail.com>
+In-Reply-To: <d1b08f940911011459i7e8403ees7e509843a0854e2@mail.gmail.com>
 MIME-Version: 1.0
-From: Graeme Gregory <dp@xora.org.uk>
-Date: Mon, 2 Nov 2009 00:10:20 +0000
-Importance: normal
-X-Priority: 3
-To: <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.219.225
-X-SA-Exim-Mail-From: dp@xora.org.uk
+Message-Id: <200911020309.56350.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: OEDEM next weekend
+Subject: Re: Checksums.ini again - new format this time
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,41 +35,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Nov 2009 00:11:09 -0000
-content-class: 
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Mon, 02 Nov 2009 02:12:01 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-I'm afraid I'm one of the dropouts, I've been ill and need some rest :-)
+On Sunday 01 November 2009 23:59:18 Andrea Adami wrote:
+> And what about having a checksum file in each dir of  /recipes ?
+> If the checksum changes the PR should be changed too.
 
-Graeme (XorA)
 
------Original Message-----
-From: Philip Balister <philip@balister.org>
-Sent: 01 November 2009 16:24
-To: openembedded-devel@lists.openembedded.org
-Subject: [oe] OEDEM next weekend
+I think that is the best way in terms of scalability and BB collections. We 
+have some weird cases where we might do require ../ but these are broken or 
+need to duplicate the checksums...
 
-This has been mentioned here before, but I want to remind people that=20
-OEDEM (Openembedded Developers European Meeting) is next weekend in=20
-Cambridge, UK. There is a information and an agenda at:
-
-http://wiki.openembedded.net/index.php/Oedem/2009
-
-Note that registration is closed, but you can talk to Phil in case there=20
-are last minute dropouts.
-
-If you can't make it, but have any ideas or comments, please talk to one=20
-of the attendees or send us in email so we can collect everyones ideas.
-
-Thanks,
-
-Philip
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+z.
 
 
