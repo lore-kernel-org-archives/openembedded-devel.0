@@ -1,32 +1,37 @@
-Received: from [93.97.175.187] (helo=dan.rpsys.net)
+Received: from [209.85.217.227] (helo=mail-gx0-f227.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1N4ySq-0006ZV-VM
-	for openembedded-devel@openembedded.org; Mon, 02 Nov 2009 16:05:04 +0100
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nA2F0vQj001154
-	for <openembedded-devel@openembedded.org>; Mon, 2 Nov 2009 15:00:57 GMT
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id R6rI7khVXbJP for <openembedded-devel@openembedded.org>;
-	Mon,  2 Nov 2009 15:00:57 +0000 (GMT)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nA2F0rC0001139
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
-	for <openembedded-devel@openembedded.org>; Mon, 2 Nov 2009 15:00:55 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@openembedded.org
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N4ybD-0003Ic-31
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 02 Nov 2009 16:13:44 +0100
+Received: by gxk27 with SMTP id 27so1325550gxk.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Nov 2009 07:12:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=8pAi94PjNe8EKV79LFGpD/ri0381VewCVdQ1jsP27TA=;
+	b=Ai4sXYsyQSpUvbEDmtDOOEtkMjwIlpRTn6mJJVMRZSyixJe1+f6csRfMBxWKImH+jK
+	70tpms19XEqbTTrVU7D0vED9eE8flE56i66qKRlFna2In43IXTR3hNyDu2G/Y1WpUcvo
+	VMivAhGM+a3jQATJI1qHo98Hkcm7gz4KcxUYU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=BkgCPm0xnkIC5O47jQduPui/BRJrRzZac19zXv52Xo9ZN2qpX0c3qNxJ8vd5+KGKGW
+	B7/SxDamT+K8bznu0Vt8j8br+nVH85KK+qiEjAUai9ZjKVwIABFn4T55TOtkavW/PM/D
+	DMbPYeEmPfqdD3pM6RuC3bJ6juHTAtDpl5MWU=
+MIME-Version: 1.0
+Received: by 10.101.25.19 with SMTP id c19mr2714878anj.84.1257174744170; Mon, 
+	02 Nov 2009 07:12:24 -0800 (PST)
 In-Reply-To: <hcmqcv$5n4$1@ger.gmane.org>
 References: <1257169407.11338.71.camel@dax.rpnet.com>
 	<hcmqcv$5n4$1@ger.gmane.org>
-Date: Mon, 02 Nov 2009 15:00:10 +0000
-Message-Id: <1257174010.11338.81.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-SA-Exim-Connect-IP: 93.97.175.187
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Date: Mon, 2 Nov 2009 16:12:24 +0100
+Message-ID: <ac9c93b10911020712r1adc5157jb1d0acc9563870b2@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.217.227
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Staging - time to end the current mess?
@@ -43,71 +48,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Nov 2009 15:05:04 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 02 Nov 2009 15:13:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 2009-11-02 at 15:29 +0100, Koen Kooi wrote:
+2009/11/2 Koen Kooi <k.kooi@student.utwente.nl>:
 > On 02-11-09 14:43, Richard Purdie wrote:
-> > At OEDEM two years ago I proposed radically altering the way staging
-> > worked. For those that don't remember the bad old days, the staging
-> > directory layout didn't match that of the target file system meaning
-> > every recipe needed a custom do_stage and things were a mess.
-> >
-> > We changed the layout allowing the use of the gcc/binutils sysroot
-> > options and also started widespread use of autotools_stage_all and I'd
-> > say things look much improved compared to how they were.
-> >
-> > Anyone who has looked at the packaged-staging code will probably agree
-> > there is still a way to go though - its horrendously complicated. We
-> > also do a lot of duplication. I'd like to propose a new simple way of
-> > doing things. We'd have the following work flow:
-> >
-> >
-> > [...]
-> > do_compile - up to here all as usual
-> > do_install - Everything installs into a DESTDIR (including -native)
-> > do_package - Takes a copy of the DESTDIR, applies any .la/.pc mangling
-> >               then splits into packages as usual
-> > do_populate_staging - Takes a copy of the DESTDIR, mangles, installs
-> >               into staging and creates staging packages from this
-> >
-> > Firstly, does any disagree with this approach or can we all agree its a
-> > nice objective?
-> 
-> Can we make the mangling a seperate tasks? I tend to do the mangling in 
+>>
+>> At OEDEM two years ago I proposed radically altering the way staging
+>> worked. For those that don't remember the bad old days, the staging
+>> directory layout didn't match that of the target file system meaning
+>> every recipe needed a custom do_stage and things were a mess.
+>>
+>> We changed the layout allowing the use of the gcc/binutils sysroot
+>> options and also started widespread use of autotools_stage_all and I'd
+>> say things look much improved compared to how they were.
+>>
+>> Anyone who has looked at the packaged-staging code will probably agree
+>> there is still a way to go though - its horrendously complicated. We
+>> also do a lot of duplication. I'd like to propose a new simple way of
+>> doing things. We'd have the following work flow:
+>>
+>>
+>> [...]
+>> do_compile - up to here all as usual
+>> do_install - Everything installs into a DESTDIR (including -native)
+>> do_package - Takes a copy of the DESTDIR, applies any .la/.pc mangling
+>> =A0 =A0 =A0 =A0 =A0 =A0 =A0then splits into packages as usual
+>> do_populate_staging - Takes a copy of the DESTDIR, mangles, installs
+>> =A0 =A0 =A0 =A0 =A0 =A0 =A0into staging and creates staging packages fro=
+m this
+>>
+>> Firstly, does any disagree with this approach or can we all agree its a
+>> nice objective?
+>
+> Can we make the mangling a seperate tasks? I tend to do the mangling in
 > do_compile_append to be able to do builds *on* the target as well.
-
-I just published my WIP tree:
-
-http://cgit.openembedded.net/cgit.cgi/openembedded/log/?h=rpurdie/work-in-progress
-
-and specifically:
-
-http://cgit.openembedded.net/cgit.cgi/openembedded/commit/?h=rpurdie/work-in-progress&id=1d69a38be629a70faf65dd9f2e9db12164071bfd
-
-which means we'd start declaring "mangling" functions in their own
-right. Does that work for you?
-
-Where we run these is then up to the core metadata so we can attach them
-to stage/install/compile as makes sense. I want to declare some
-conventions of the directories these operate on so we can make the
-functions "relocatable" by changing the input variables.
-
+>
+>> Pros:
+>>
+>> * Only one "make install"
+>> * We can start to work out the differences between do_install and
+>> =A0 do_stage and minimise them (there should be none bar .la mangling)
+>> * Cleaner and simpler do_stage step
+>> * Packaged-Staging becomes much simpler
+>> * Builds should be faster as staging timestamp snapshots are not
+>> =A0 required and staging lock taking should be minimal.
+>>
+>> Cons:
+>>
+>> * Very different to what we have now - how to get there?
+>> * Likely to be some breakage in any transition
+>
 > And
-> 
-> * 'make install' doesn't actually work properly for lots of packages 
-> (you know, the ones with handcrafted makefiles)
-> 
-> But we can solve that by putting the custom do_stage() methods for those 
-> in do_install(), right?
+>
+> * 'make install' doesn't actually work properly for lots of packages (you
+> know, the ones with handcrafted makefiles)
+>
+> But we can solve that by putting the custom do_stage() methods for those =
+in
+> do_install(), right?
 
-Those packages will already have a custom do_install in some directory
-so we can just use them as is.
+I'm in favour of the proposal.
+If not breaking things is important maybe we can call the stage
+differently and transfer packages from the old to the new.
+Perhaps not too desirable as this gives a transition period that
+probably never ends.
 
-Cheers,
+Wrt the packages were make install does not properly work:
+I would expect for packages where it mostly matters (libs etc) the
+install to be proper.
 
-Richard
+And if make install does not work properly the desired solution is
+(imho) not to repair it in do_stage or do_install, but instead come up
+with a patch for the Makefile (and preferably submit it to the package
+to get it repaired more permanently.
 
+Frans.
+
+>
+>
+>> I really like the idea in principle, in practise its hard to get there
+>> incrementally without breaking things. I'm trying to come up with some
+>> code which does that and I'm hoping to have something for OEDEM.
+>>
+>> For now I'd like to ask if there is agreement we need to do this and
+>> support to make this happen?
+>
+> You have my agreement.
+>
+> regards,
+>
+> Koen
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
