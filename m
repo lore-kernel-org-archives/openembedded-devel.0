@@ -1,38 +1,31 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [64.18.0.182] (helo=exprod5og106.obsmtp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1N4sYG-0001nd-06 for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Nov 2009 09:46:15 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1N4sX9-0005Ap-1A
+	(envelope-from <martyn.welch@gefanuc.com>) id 1N4seQ-0002ID-SR
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Nov 2009 09:45:03 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Nov 2009 09:45:03 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Nov 2009 09:45:03 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 02 Nov 2009 09:52:38 +0100
+Received: from source ([12.71.149.1]) (using TLSv1) by
+	exprod5ob106.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKSu6djWIsiMq48H4VESUf4jDBl0kjxGSJ@postini.com;
+	Mon, 02 Nov 2009 00:51:26 PST
+Received: from unknown (HELO cinmlip01.e2k.ad.ge.com) ([3.159.213.48])
+	by Cinmlip07.e2k.ad.ge.com with ESMTP; 02 Nov 2009 03:51:24 -0500
+Received: from es-j7s4d2j.amer.consind.ge.com (HELO [3.138.54.92])
+	([3.138.54.92])
+	by cinmlip01.e2k.ad.ge.com with ESMTP; 02 Nov 2009 03:51:24 -0500
+Message-ID: <4AEE9DF0.6070104@gefanuc.com>
+Date: Mon, 02 Nov 2009 08:53:04 +0000
+From: Martyn Welch <martyn.welch@gefanuc.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 02 Nov 2009 09:41:42 +0100
-Message-ID: <hcm606$u90$2@ger.gmane.org>
-References: <200910291241.35265.marcin@juszkiewicz.com.pl>	<c384c5ea0911011235j2a8e6920s43310cce1a3e8498@mail.gmail.com>
-	<200911020306.33189.holger+oe@freyther.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <200911020306.33189.holger+oe@freyther.de>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <4AE992C4.4040802@dresearch.de>	<200910291422.50013.holger+oe@freyther.de>	<4AE9986B.6070606@dresearch.de>	<4AEAA523.8020101@gefanuc.com>
+	<4AEB0FF2.6010907@dresearch.de>
+In-Reply-To: <4AEB0FF2.6010907@dresearch.de>
+X-SA-Exim-Connect-IP: 64.18.0.182
+X-SA-Exim-Mail-From: martyn.welch@gefanuc.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Checksums.ini again - new format this time
+Subject: Re: How to use patchwork?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,46 +39,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Nov 2009 08:46:15 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 02 Nov 2009 08:52:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 02-11-09 03:06, Holger Hans Peter Freyther wrote:
-> On Sunday 01 November 2009 21:35:32 Leon Woestenberg wrote:
->> Hello,
->>
->> On Thu, Oct 29, 2009 at 12:41 PM, Marcin Juszkiewicz
->>
->> <marcin@juszkiewicz.com.pl>  wrote:
->>> [archivename]
->>> url0=url-to-sources
->>> url1=alternative-url-to-sources
->>> url2=another-alternative-url-to-sources
->>> md5=md5sum
->>> sha256=sha256sum
->>
->> Can we simplify this a bit? i.e.
->>
->> archivename
->> url=url-to-sources
->> url=alternative-url-to-sources
->> url=another-alternative-url-to-sources
->> md5=md5sum
->> sha256=sha256sum
->>
->> Why not just url instead of url0, url1, url2, ... ?
+Steffen Sledz wrote:
+> On 10/30/2009 09:34 AM, Martyn Welch wrote:
+>   
+>>>> Did you have a "Signed-off-by: " line in it?
+>>>>     
+>>>>         
+>>> Yep, see e.g.
+>>> <http://thread.gmane.org/gmane.comp.handhelds.openembedded/26999>
+>>>   
+>>>       
+>> At a guess it's because your "Signed-off-by:" line has an obscured email
+>> address in it.
+>>     
 >
-> the problem with archivename there is no gurantee that the name will be
-> globally unique. E.g. with Open Palmtop Integreated Environment (OPIE) One
-> Password.. (OPIE) there was a clash and we might or might not have had a clash
-> in release versions too...
+> If you mean
+>
+>   Signed-off-by: Steffen Sledz <sledz <at> dresearch.de>
+>
+> this is just a modification of GMANE web interface. In the original
+> message it was
+>
+>   Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+>
+> That should be OK. Or not?
+>   
+Ah, as far as I know that should be OK,
 
-Archives get stored by archive name in DL_DIR already, so that's a moot 
-point.
+Martyn
 
-regards,
-
-Koen
+-- 
+Martyn Welch MEng MPhil MIET (Principal Software Engineer)   T:+44(0)1327322748
+GE Fanuc Intelligent Platforms Ltd,        |Registered in England and Wales
+Tove Valley Business Park, Towcester,      |(3828642) at 100 Barbirolli Square,
+Northants, NN12 6PF, UK T:+44(0)1327359444 |Manchester,M2 3AB  VAT:GB 927559189
 
 
 
