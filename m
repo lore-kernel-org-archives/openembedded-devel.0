@@ -1,31 +1,28 @@
-Received: from [64.18.0.182] (helo=exprod5og106.obsmtp.com)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martyn.welch@gefanuc.com>) id 1N4seQ-0002ID-SR
+	(envelope-from <holger+oe@freyther.de>) id 1N4stn-00005O-LF
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Nov 2009 09:52:38 +0100
-Received: from source ([12.71.149.1]) (using TLSv1) by
-	exprod5ob106.postini.com ([64.18.4.12]) with SMTP
-	ID DSNKSu6djWIsiMq48H4VESUf4jDBl0kjxGSJ@postini.com;
-	Mon, 02 Nov 2009 00:51:26 PST
-Received: from unknown (HELO cinmlip01.e2k.ad.ge.com) ([3.159.213.48])
-	by Cinmlip07.e2k.ad.ge.com with ESMTP; 02 Nov 2009 03:51:24 -0500
-Received: from es-j7s4d2j.amer.consind.ge.com (HELO [3.138.54.92])
-	([3.138.54.92])
-	by cinmlip01.e2k.ad.ge.com with ESMTP; 02 Nov 2009 03:51:24 -0500
-Message-ID: <4AEE9DF0.6070104@gefanuc.com>
-Date: Mon, 02 Nov 2009 08:53:04 +0000
-From: Martyn Welch <martyn.welch@gefanuc.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Mon, 02 Nov 2009 10:08:31 +0100
+Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
+	[123.192.145.111])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id C07DD1B10C05
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  2 Nov 2009 09:17:18 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4AE992C4.4040802@dresearch.de>	<200910291422.50013.holger+oe@freyther.de>	<4AE9986B.6070606@dresearch.de>	<4AEAA523.8020101@gefanuc.com>
-	<4AEB0FF2.6010907@dresearch.de>
-In-Reply-To: <4AEB0FF2.6010907@dresearch.de>
-X-SA-Exim-Connect-IP: 64.18.0.182
-X-SA-Exim-Mail-From: martyn.welch@gefanuc.com
+Date: Mon, 2 Nov 2009 10:07:03 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <200910291241.35265.marcin@juszkiewicz.com.pl>
+	<200911020306.33189.holger+oe@freyther.de>
+	<hcm606$u90$2@ger.gmane.org>
+In-Reply-To: <hcm606$u90$2@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200911021007.03089.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: How to use patchwork?
+Subject: Re: Checksums.ini again - new format this time
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,44 +36,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Nov 2009 08:52:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 02 Nov 2009 09:08:31 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-Steffen Sledz wrote:
-> On 10/30/2009 09:34 AM, Martyn Welch wrote:
->   
->>>> Did you have a "Signed-off-by: " line in it?
->>>>     
->>>>         
->>> Yep, see e.g.
->>> <http://thread.gmane.org/gmane.comp.handhelds.openembedded/26999>
->>>   
->>>       
->> At a guess it's because your "Signed-off-by:" line has an obscured email
->> address in it.
->>     
->
-> If you mean
->
->   Signed-off-by: Steffen Sledz <sledz <at> dresearch.de>
->
-> this is just a modification of GMANE web interface. In the original
-> message it was
->
->   Signed-off-by: Steffen Sledz <sledz@dresearch.de>
->
-> That should be OK. Or not?
->   
-Ah, as far as I know that should be OK,
+On Monday 02 November 2009 09:41:42 Koen Kooi wrote:
 
-Martyn
+> > the problem with archivename there is no gurantee that the name will be
+> > globally unique. E.g. with Open Palmtop Integreated Environment (OPIE)
+> > One Password.. (OPIE) there was a clash and we might or might not have
+> > had a clash in release versions too...
+> 
+> Archives get stored by archive name in DL_DIR already, so that's a moot
+> point.
 
--- 
-Martyn Welch MEng MPhil MIET (Principal Software Engineer)   T:+44(0)1327322748
-GE Fanuc Intelligent Platforms Ltd,        |Registered in England and Wales
-Tove Valley Business Park, Towcester,      |(3828642) at 100 Barbirolli Square,
-Northants, NN12 6PF, UK T:+44(0)1327359444 |Manchester,M2 3AB  VAT:GB 927559189
-
+No, it means we have another bug somewhere else. :)
 
 
