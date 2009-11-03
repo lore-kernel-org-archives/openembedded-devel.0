@@ -1,36 +1,23 @@
-Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
+Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1N5M4s-0003MW-5Q
+	(envelope-from <ricardo.salveti@openbossa.org>) id 1N5N2O-0001Oj-3C
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Nov 2009 17:17:53 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1N5M3K-0002cX-5S for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Nov 2009 11:16:14 -0500
-Date: Tue, 3 Nov 2009 11:15:39 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.0911031112160.3765@localhost>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Tue, 03 Nov 2009 18:19:23 +0100
+Received: by bwz9 with SMTP id 9so7731995bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 03 Nov 2009 09:18:08 -0800 (PST)
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+Received: by 10.223.95.72 with SMTP id c8mr34677fan.73.1257268687894; Tue, 03 
+	Nov 2009 09:18:07 -0800 (PST)
+Date: Tue, 3 Nov 2009 14:18:07 -0300
+Message-ID: <ae9c9a1c0911030918x4bc4e947j5691e8681c09e4dc@mail.gmail.com>
+From: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
+To: mamona-devel@garage.maemo.org, openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: ricardo.salveti@openbossa.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: where to send notes about broken links at http://openembedded.org/?
+Subject: Mamona current status
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,31 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Nov 2009 16:17:53 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Tue, 03 Nov 2009 17:19:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
+Hi all,
 
-  i've decided to go thru the OE documentation thoroughly once and for
-all, so i'm starting at http://openembedded.org/ to pull together
-everything i need to truly understand how it works, and i've already
-noticed a few glitches.  some broken links at the top of that page:
-both the OpenEmbedded and OpenZaurus links seem to be borked, at least
-as far as my ISP rogers is concerned.  oh, and the G(PE)^2 link as
-well.
+After quite a while working on internal projects at INdT, we finally
+got time to work with Mamona again.
 
-  is this the right place to report this?  or is there an individual
-webmaster i should harass with this sort of stuff?
+Currently Mamona is unmaintained at the OE tree, and our public
+repository is quite old, as we created kind of a fork in the past and
+the push work became a quite painful job.
 
-rday
---
+To get the distro up and running again, we decided to do something
+different by creating an overlay and pushing our custom modifications
+there, before actually merging everything into OE.
 
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
+After the merge, we'll probably start using just OE directly, so we
+can avoid facing the same problems we had in the past.
 
-            Linux Consulting, Training and Kernel Pedantry.
+For those who want to follow the work, please check
+http://gitorious.org/mamona and
+http://dev.openbossa.org/trac/mamona/wiki/MergeOe
 
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+And regarding the N900, we'll probably have some news in this direction soon :-)
+
+Cheers,
+-- 
+Ricardo Salveti de Araujo
 
 
