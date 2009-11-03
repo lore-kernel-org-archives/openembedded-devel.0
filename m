@@ -1,33 +1,36 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1N5Jyr-0000rl-6q
+	(envelope-from <rpjday@crashcourse.ca>) id 1N5M4s-0003MW-5Q
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Nov 2009 15:03:33 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1N5JxU-0006DD-4R
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Nov 2009 14:02:04 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1N5JxR-0003Gz-IY
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Nov 2009 14:02:01 +0000
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200911031451.06266.holger+oe@freyther.de>
-References: <1254096967.4ac00047b8abb@imp.free.fr>
-	<200911031451.06266.holger+oe@freyther.de>
-Date: Tue, 03 Nov 2009 14:01:58 +0000
-Message-Id: <1257256918.10421.111.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: pb@reciva.com
+	Tue, 03 Nov 2009 17:17:53 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1N5M3K-0002cX-5S for openembedded-devel@lists.openembedded.org;
+	Tue, 03 Nov 2009 11:16:14 -0500
+Date: Tue, 3 Nov 2009 11:15:39 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.00.0911031112160.3765@localhost>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: xmonobut
+Subject: where to send notes about broken links at http://openembedded.org/?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,49 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Nov 2009 14:03:33 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
-
-On Tue, 2009-11-03 at 14:51 +0100, Holger Hans Peter Freyther wrote:
-> On Monday 28 September 2009 02:16:07 Alain2210 wrote:
-> > Hello,
-> > 
-> > xmonobut segfault. I need this patch to get it works again.
-> 
-> > -  unsigned char map[6];
-> > +  unsigned char map[31];
-> ...
-> > +      buts = XGetPointerMapping(dpy, map, 32);
-> ,,.
-> > +      while((rst = XSetPointerMapping(dpy, map, 32)) == MappingBusy);
-> 
-> 31. vs 32... please send an updated patch
-
-Looking at this patch again, I think it is just broken and (even aside
-from the 31/32 thing) should not be applied.
-
-I guess the cause of the original segfault was that "buts" is set to a
-value greater than six and hence the XSetPointerMapping() call runs off
-the end of the array.  However, the solution presented in the patch,
-i.e. just ignoring the return value from XGetPointerMapping()
-altogether, doesn't seem too good either since this will cause
-XSetPointerMapping() to read uninitialised garbage from the balance of
-the array.
-
-A minimal fix for the original crash would probably be to insert
-something like:
-
-if (buts > sizeof(map))
-  buts = sizeof(map);
-
-after the XGetPointerMapping() call.  A slightly better fix would
-perhaps be to make an initial call to XGetPointerMapping() with nmap=0
-to find out how many buttons are present, then to dynamically allocate
-an array of the right size and read the mapping into it.
-
-p.
+X-List-Received-Date: Tue, 03 Nov 2009 16:17:53 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
+  i've decided to go thru the OE documentation thoroughly once and for
+all, so i'm starting at http://openembedded.org/ to pull together
+everything i need to truly understand how it works, and i've already
+noticed a few glitches.  some broken links at the top of that page:
+both the OpenEmbedded and OpenZaurus links seem to be borked, at least
+as far as my ISP rogers is concerned.  oh, and the G(PE)^2 link as
+well.
+
+  is this the right place to report this?  or is there an individual
+webmaster i should harass with this sort of stuff?
+
+rday
+--
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
