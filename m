@@ -1,27 +1,37 @@
-Received: from [87.249.123.12] (helo=smtp.nedap.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jaap.dejong@nedap.com>) id 1N5IHO-0004tJ-Op
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1N5IYq-0000uG-JF for openembedded-devel@lists.openembedded.org;
+	Tue, 03 Nov 2009 13:32:35 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N5IXi-0001JU-5U
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Nov 2009 13:14:33 +0100
-Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Tue, 3 Nov 2009 13:13:19 +0100
-X-TM-IMSS-Message-ID: <355f750900016966@nedap.com>
-Received: from [10.2.40.9] ([10.2.40.9]) by nedap.com ([10.91.8.1]) with ESMTP
-	(TREND IMSS SMTP Service 7.0) id 355f750900016966 for
-	<jaap.dejong@nedap.com>; Tue, 3 Nov 2009 13:13:15 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
+	Tue, 03 Nov 2009 13:31:22 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 03 Nov 2009 13:31:22 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 03 Nov 2009 13:31:22 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 03 Nov 2009 13:10:14 +0100
-Message-ID: <1257250214.22826.88.camel@nvc0624>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 03 Nov 2009 13:30:53 +0100
+Message-ID: <hcp7pt$ne9$1@ger.gmane.org>
+References: <1257250214.22826.88.camel@nvc0624>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 03 Nov 2009 12:13:19.0110 (UTC)
-	FILETIME=[07922260:01CA5C7F]
-X-SA-Exim-Connect-IP: 87.249.123.12
-X-SA-Exim-Mail-From: jaap.dejong@nedap.com
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <1257250214.22826.88.camel@nvc0624>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] suite of utilities for programming Xilinx FPGAs, CPLDs, and EEPROMs
+Subject: Re: [PATCH] suite of utilities for programming Xilinx FPGAs, CPLDs, and EEPROMs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,69 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Nov 2009 12:14:33 -0000
-X-Groupsio-MsgNum: 13808
-Content-Type: multipart/mixed; boundary="=-cbgOih5ifcqsX0RWSUi8"
-
---=-cbgOih5ifcqsX0RWSUi8
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 03 Nov 2009 12:32:35 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi there,
+On 03-11-09 13:10, Jaap de Jong wrote:
+> Hi there,
+>
+> attached a proposal for a recipe for building a jtag tool for programming xilinx cpld's, fpga's and eeprom's.
+> Disclaimer: this is my first recipe; possibly not optimal...
 
-attached a proposal for a recipe for building a jtag tool for programming xilinx cpld's, fpga's and eeprom's.
-Disclaimer: this is my first recipe; possibly not optimal...
+Please use something like
 
-Jaap
-
-
-
---=-cbgOih5ifcqsX0RWSUi8
-Content-Disposition: attachment; filename*0=0001-Suite-of-utilities-for-programming-Xilinx-FPGAs-CPLD.pat; filename*1=ch
-Content-Type: text/x-patch; name="0001-Suite-of-utilities-for-programming-Xilinx-FPGAs-CPLD.patch"; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+SRC_URI = 
+"svn://xc3sprog.svn.sourceforge.net/svnroot/xc3sprog;proto=https;module=trunk" 
 
 
-Suite of utilities for programming Xilinx FPGAs, CPLDs, and EEPROMs
+and set SRCREV accordingly instead of overriding do_fetch.
 
----
- recipes/xc3sprog/xc3sprog_411.bb |   25 +++++++++++++++++++++++++
- 1 files changed, 25 insertions(+), 0 deletions(-)
- create mode 100644 recipes/xc3sprog/xc3sprog_411.bb
+regards,
 
-diff --git a/recipes/xc3sprog/xc3sprog_411.bb b/recipes/xc3sprog/xc3sprog_411.bb
-new file mode 100644
-index 0000000..21527dd
---- /dev/null
-+++ b/recipes/xc3sprog/xc3sprog_411.bb
-@@ -0,0 +1,25 @@
-+# xc3sprog build file
-+LICENSE="GPL"
-+DESCRIPTION="suite of utilities for programming Xilinx FPGAs, CPLDs, and EEPROMs"
-+HOMEPAGE="http://sourceforge.net/projects/xc3sprog"
-+
-+DEPENDS += "libftdi"
-+
-+S="${WORKDIR}/xc3sprog-${PV}/xc3sprog/trunk"
-+PR = "r0"
-+
-+inherit cmake
-+
-+do_fetch() {
-+	mkdir -p ${WORKDIR}/${P}
-+	cd ${WORKDIR}/${P}
-+	svn co -r ${PV} https://xc3sprog.svn.sourceforge.net/svnroot/xc3sprog
-+}
-+
-+do_unpack() {
-+}
-+
-+do_install() {
-+	oe_runmake install DESTDIR="${D}"
-+}
-+
--- 
-1.6.3.3
+Koen
 
 
---=-cbgOih5ifcqsX0RWSUi8--
+
