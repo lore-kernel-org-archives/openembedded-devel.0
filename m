@@ -1,35 +1,36 @@
-Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
+Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <serra82@gmail.com>) id 1N5bJ9-0001k3-RK
+	(envelope-from <rpjday@crashcourse.ca>) id 1N5blm-0005NK-Nh
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Nov 2009 09:33:38 +0100
-Received: by bwz9 with SMTP id 9so8469964bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Nov 2009 00:32:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=w5J6Q63WGtjsKvWJc1f7AvwhGsD6i6Ts2nQmvKCJHt4=;
-	b=YWjW+MBJ8CTEoJbhnyv3cxGFhtP1D/dhH3l+cT/Q4ManX8MOErnuhvSAaHQGmZlXW4
-	XOmb3jjd5wMBtvNGkQnNzsOcRyB4GFyxHaRmSn37xeEVU/Zhsbgf9i3034rnGY+y3t7B
-	ejFOz5pv6UgWfq0TKIf1EraUQRPpF4aTsxffE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=MkqV/Ac4pu0A0vCZHXCUhXqI7l1SGO0KnWPJIf5/6zcO2006cEGzRcbxltgZzChRzh
-	PrLSA5djee1Oaih0LGtJdgWdz7ux0N9n+l4J7Iw6x8W/GW6chu6+QAaz+zhJw9fAU6Ct
-	LauR/GYMZb/amFk9ZGhh46ejkmBfVvJad1QsU=
+	Wed, 04 Nov 2009 10:03:14 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1N5bkE-0002YP-TQ for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Nov 2009 04:01:35 -0500
+Date: Wed, 4 Nov 2009 04:01:11 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.00.0911040359150.19657@localhost>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
-Received: by 10.103.87.35 with SMTP id p35mr450971mul.75.1257323543484; Wed, 
-	04 Nov 2009 00:32:23 -0800 (PST)
-Date: Wed, 4 Nov 2009 09:32:23 +0100
-Message-ID: <afb7987a0911040032g2bebec62j70a81dd409561c17@mail.gmail.com>
-From: Andrea <serra82@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: serra82@gmail.com
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [patch] ti-cs1-omap3530 upgrade
+Subject: [PATCH] User manual typoes and aesthetics, chapter 2 only.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,54 +44,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2009 08:33:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-
-Is possible upgrade cs1-omap3530?
-thank you
-Andrea Seraghiti
-
-diff --git a/recipes/ti/ti-cs1-omap3530_1.0.1.bb
-b/recipes/ti/ti-cs1-omap3530_1.0.1.bb
-index 9779c33..039aa92 100644
---- a/recipes/ti/ti-cs1-omap3530_1.0.1.bb
-+++ b/recipes/ti/ti-cs1-omap3530_1.0.1.bb
-@@ -1,12 +1,12 @@
- require ti-codec.inc
- require ti-cs1-omap3530.inc
-
--SRC_URI        =
-"http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/dvsdk/DVSDK_3_00/latest//exports/cs1omap3530_setuplinux_1_00_01-42.bin"
-+SRC_URI        =
-"http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/dvsdk/DVSDK_3_00/latest//exports/cs1omap3530_setuplinux_1_00_01-44.bin"
-
- # Specify names of the InstallJammer binary file and the tarball it extracts
--BINFILE = "cs1omap3530_setuplinux_1_00_01-42.bin"
-+BINFILE = "cs1omap3530_setuplinux_1_00_01-44.bin"
-
--S = "${WORKDIR}/dvsdk_3_00_01_42/cs1omap3530_1_00_01"
-+S = "${WORKDIR}/dvsdk_3_00_02_44/cs1omap3530_1_00_01"
-
- DEPENDS="ti-codec-engine ti-dsplink-module"
+X-List-Received-Date: Wed, 04 Nov 2009 09:03:14 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
+  Some minor cleanups for Chapter 2 of the User Manual:
 
+  * add some DocBook tags for filenames
+  * update BitBake version to 1.8.16
+  * add missing space after "wget" command
+  * correct misspelled "local/conf" to "local.conf"
 
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index a2d7bda..d5a9944 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -4486,6 +4486,10 @@
-sha256=8b718c344cf19417447cbc16867d2e04434654c13b330598b96720ead146b961
- md5=0aa2f94c39123f1a0352983e5366179c
- sha256=4bab529afa00cafde3bc5df2769578c88438f80c5152d4257cd0e86986f95bc4
+Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
 
-+[http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/dvsdk/DVSDK_3_00/latest//exports/cs1omap3530_setuplinux_1_00_01-44.bin]
-+md5=4db567252e6c43119e1c0aafe401a679
-+sha256=e042e1aad42a6728adf5c955dc38e4f8331fc0eacd833f1cd75d9cbb4faff0b5
-+
- [http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/dvsdk/DVSDK_3_00/latest//exports/cs1omap3530_setuplinux_1_00_01-42.bin]
- md5=a1e19ef37638e977d059fd22af666301
- sha256=fc7ac2829df8d394635aa1cc704b78e93ca287111df1001e5738ae2282691219
+---
+
+diff --git a/docs/usermanual/chapters/getting_oe.xml b/docs/usermanual/chapters/getting_oe.xml
+index e8d1f2c..8d9c5b7 100644
+--- a/docs/usermanual/chapters/getting_oe.xml
++++ b/docs/usermanual/chapters/getting_oe.xml
+@@ -30,9 +30,9 @@ $ <command>cd</command> $OEBASE</screen>
+ 	you to build your applications and images.
+     </para>
+
+-	<para>The <varname>$OEBASE</varname> will also contain both bitbake/ and
+-	openembedded/ directories. These will be discussed in
+-	<xref linkend="gettingoe_getting_bitbake"/> and
++	<para>The <varname>$OEBASE</varname> will also contain both of the
++	<literal>bitbake/<literal> and <literal>openembedded/</literal> directories.
++	These will be discussed in <xref linkend="gettingoe_getting_bitbake"/> and
+ 	<xref linkend="gettingoe_getting_oe"/>.
+ 	</para>
+   </section>
+@@ -47,19 +47,19 @@ $ <command>cd</command> $OEBASE</screen>
+     directory of <literal>openembedded/</literal>
+     and <literal>build/</literal> directories. Indeed, as bitbake is written
+     in python it does not need compilation for being used. You'll just have to
+-    set the PATH variable so that the BitBake tools are accessible (see
+-    <xref linkend="gettingoe_configuring_oe"/>).</para>
++    set the <varname>PATH</varname> variable so that the BitBake tools are
++    accessible (see <xref linkend="gettingoe_configuring_oe"/>).</para>
+
+ 	<section><title>Downloading a <application>BitBake</application> release</title>
+ 	  <para>Releases are available from the berlios project website. The current
+           release series is <application>BitBake</application> <emphasis>1.8</emphasis>
+-          and the current release is <emphasis>1.8.12</emphasis>. To download execute
++          and the current release is <emphasis>1.8.16</emphasis>. To download execute
+ 	  the following commands:
+ 		<screen>
+ $ <command>cd</command> $OEBASE
+-$ <command>wget</command>http://download.berlios.de/bitbake/bitbake-1.8.12.tar.gz
+-$ <command>tar</command> -xvzf bitbake-1.8.12.tar.gz
+-$ <command>mv</command> bitbake-1.8.12 bitbake
++$ <command>wget</command> http://download.berlios.de/bitbake/bitbake-1.8.16.tar.gz
++$ <command>tar</command> -xvzf bitbake-1.8.16.tar.gz
++$ <command>mv</command> bitbake-1.8.16 bitbake
+ </screen>
+ 	  </para>
+
+@@ -270,7 +270,7 @@ MACHINE = "om-gta01"</screen>
+       BitBake file is a logical unit of tasks to be executed. Normally this is
+       a package to be built. Inter-recipe dependencies are obeyed. The recipes
+       are located by BitBake via the <varname>BBFILES</varname> variable (set
+-      in your <filename>$OEBASE/build/conf/local/conf</filename>), which is a
++      in your <filename>$OEBASE/build/conf/local.conf</filename>), which is a
+       space separated list of <filename>.bb</filename> files, and does handle
+       wildcards.
+     </para>
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
