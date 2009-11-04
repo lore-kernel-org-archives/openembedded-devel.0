@@ -1,40 +1,42 @@
-Received: from [74.125.78.147] (helo=ey-out-1920.google.com)
+Received: from [209.85.219.209] (helo=mail-ew0-f209.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen.kooi@gmail.com>) id 1N5f3E-0008GU-5r
+	(envelope-from <koen.kooi@gmail.com>) id 1N5f3N-0008H3-TV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Nov 2009 13:33:27 +0100
-Received: by ey-out-1920.google.com with SMTP id 5so618158eyb.4
+	Wed, 04 Nov 2009 13:33:36 +0100
+Received: by ewy5 with SMTP id 5so1613700ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Nov 2009 04:32:13 -0800 (PST)
+	Wed, 04 Nov 2009 04:32:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=jDAsarayzQguuAY9D6Dn/OPSCx+YJjc/rfo5tJp/YuQ=;
-	b=SvODk/7b71fwAL4/C2yICP5/OfCWEkzPzM7Hepi/GTlIpac0pIbtmYjwZmF94EKyMe
-	uM4IbJ/CJJIpMXdiL1G9dbdw1OjLNjiVDaen3Fg/5ef6RlG3V6HUcJ0yneogiS1AsoK6
-	SZ43QvPw45Q3EiGiiUot+Oyps9P8p2WmwQPvc=
+	:message-id:x-mailer:in-reply-to:references;
+	bh=1hmwHZYhwJ5F3ePiDNmfVmEGwn6XXej0EWJ7eQV4Nk0=;
+	b=YKgCoVszSI69NSXof331gWwmfCBzeCQDCjk7hBelSYHwfufRM/GrlBmz4LX4f8qM1M
+	hsLWSNAlojrDcGp+t4WEkj8Kpb7cHapG982wWtmimmlMOeSSLVmNFKOlRlHqT/KZj8j8
+	2fYjPvHRhB2yQ3QC+XjUcNlZYohyb2IhQ6utw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=NCJ7Iwg2aWJqTFKTI2oLgqcHPTWaK39YNMrUDkB7tNSQKyMe7Z1XWee7dmsQRT3uOc
-	Yj2aX46qktm/+VC5YxeWXL4rNO86K/6BeZwohXl9Mj3yXCgzNQuSJ5t+kmbiMkpQ0ngW
-	V1WWUCtQPdiXVXTTaLp08iNVS6NIZ2dOSb/3Q=
-Received: by 10.213.23.149 with SMTP id r21mr1607909ebb.19.1257337933236;
-	Wed, 04 Nov 2009 04:32:13 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=jW8Yw4am19uNHPM3sfc/YcidxyNPZhHj626/C/7bFFbApu5vYyCMX8P5Vvi4x/6DdP
+	HB/djxDgwnxXE1dybXS0HdF0k+RTHBsfhNVfmm2NW7Rp4bQJmMO+LZfgQpWsbSPBMqHR
+	QMIPeaGqfDP9EMcLEcHlGGmsn95/tc+nR0SBA=
+Received: by 10.213.58.16 with SMTP id e16mr1642060ebh.17.1257337941088;
+	Wed, 04 Nov 2009 04:32:21 -0800 (PST)
 Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
-	by mx.google.com with ESMTPS id 28sm3210175eyg.38.2009.11.04.04.32.09
+	by mx.google.com with ESMTPS id 24sm3324358eyx.37.2009.11.04.04.32.19
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 04 Nov 2009 04:32:12 -0800 (PST)
+	Wed, 04 Nov 2009 04:32:20 -0800 (PST)
 From: Koen Kooi <koen.kooi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Nov 2009 13:32:03 +0100
-Message-Id: <1257337925-46801-1-git-send-email-koen@dominion.thruhere.net>
+Date: Wed,  4 Nov 2009 13:32:04 +0100
+Message-Id: <1257337925-46801-2-git-send-email-koen@dominion.thruhere.net>
 X-Mailer: git-send-email 1.6.1
-X-SA-Exim-Connect-IP: 74.125.78.147
+In-Reply-To: <1257337925-46801-1-git-send-email-koen@dominion.thruhere.net>
+References: <1257337925-46801-1-git-send-email-koen@dominion.thruhere.net>
+X-SA-Exim-Connect-IP: 209.85.219.209
 X-SA-Exim-Mail-From: koen.kooi@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Cc: Koen Kooi <koen@openembedded.org>, Koen Kooi <k-kooi@ti.com>
-Subject: [STABLE][PATCH 1/3] clutter.inc: rework armv7a machines a bit and add omap3517-evm to compatible machines
+Subject: [STABLE][PATCH 2/3] xserver-xorg-conf: add omap3517-evm support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,59 +50,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2009 12:33:27 -0000
+X-List-Received-Date: Wed, 04 Nov 2009 12:33:37 -0000
 
 From: Koen Kooi <koen@openembedded.org>
+
+* This fixes the "blank screen" problem Frank Walzer reported
 
 Signed-off-by: Koen Kooi <k-kooi@ti.com>
 
 ---
- recipes/clutter/clutter.inc |   18 +++++-------------
- 1 files changed, 5 insertions(+), 13 deletions(-)
+ .../xserver-xorg-conf/omap3517-evm/xorg.conf       |   29 ++++++++++++++++++++
+ recipes/xorg-xserver/xserver-xorg-conf_0.1.bb      |    2 +-
+ 2 files changed, 30 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/xorg-xserver/xserver-xorg-conf/omap3517-evm/xorg.conf
 
-diff --git a/recipes/clutter/clutter.inc b/recipes/clutter/clutter.inc
-index e900c43..7bce3e2 100644
---- a/recipes/clutter/clutter.inc
-+++ b/recipes/clutter/clutter.inc
-@@ -2,7 +2,7 @@ DESCRIPTION = "Clutter graphics library"
- HOMEPAGE = "http://www.clutter-project.org/"
- LICENSE = "LGPL"
- 
--COMPATIBLE_MACHINE = "(zylonite|mx31litekit|omap-3430ldp|omap-3430sdp|mx31ads|qemuarm|qemux86|ipodtouch|beagleboard|overo|omap3evm)"
-+COMPATIBLE_MACHINE = "(zylonite|mx31litekit|omap-3430ldp|omap-3430sdp|mx31ads|qemuarm|qemux86|ipodtouch|omap3517-evm|beagleboard|overo|omap3evm)"
- 
- STDDEPENDS = "virtual/libx11 gtk-doc-native pango glib-2.0 libxfixes gtk+"
- BASE_CONF = "--disable-gtk-doc ${@get_clutter_fpu_setting(bb, d)}"
-@@ -20,6 +20,10 @@ EXTRA_OECONF_mx31litekit = "${BASE_CONF} --with-flavour=eglnative"
- PACKAGE_ARCH_mx31litekit = "${MACHINE_ARCH}"
- LDFLAGS_append_mx31litekit = " -lpvrNULLWSEGL -lstdc++ "
- 
-+DEPENDS_armv7a = "${STDDEPENDS} libgles-omap3 tslib"
-+EXTRA_OECONF_armv7a = "${BASE_CONF} --with-flavour=eglx --with-gles=2.0"
-+PACKAGE_ARCH_armv7a = "${MACHINE_ARCH}"
+diff --git a/recipes/xorg-xserver/xserver-xorg-conf/omap3517-evm/xorg.conf b/recipes/xorg-xserver/xserver-xorg-conf/omap3517-evm/xorg.conf
+new file mode 100644
+index 0000000..983bb08
+--- /dev/null
++++ b/recipes/xorg-xserver/xserver-xorg-conf/omap3517-evm/xorg.conf
+@@ -0,0 +1,29 @@
++Section "Module"                                       
++        Load    "extmod"                                
++        Load    "dbe"                           
++        Load    "glx"                                           
++        Load    "freetype"                             
++        Load    "type1"                        
++        Load    "record"                    
++        Load    "dri"                       
++EndSection                            
 +
- DEPENDS_omap-3430ldp = "${STDDEPENDS} libgles-omap3 tslib"
- EXTRA_OECONF_omap-3430ldp = "${BASE_CONF} --with-flavour=eglx"
- PACKAGE_ARCH_omap-3430ldp = "${MACHINE_ARCH}"
-@@ -28,18 +32,6 @@ DEPENDS_omap-3430sdp = "${STDDEPENDS} libgles-omap3 tslib"
- EXTRA_OECONF_omap-3430sdp = "${BASE_CONF} --with-flavour=eglx"
- PACKAGE_ARCH_omap-3430sdp = "${MACHINE_ARCH}"
++Section "Monitor"                                                                    
++        Identifier      "Builtin Default Monitor"
++EndSection                                       
++
++Section "Device"                                  
++        Identifier      "Builtin Default fbdev Device 0"
++        Driver  "omapfb"
++EndSection                                                
++
++Section "Screen"                                        
++        Identifier      "Builtin Default fbdev Screen 0"     
++        Device  "Builtin Default fbdev Device 0"            
++        Monitor "Builtin Default Monitor"               
++EndSection                                              
++
++Section "ServerLayout"                                 
++        Identifier      "Builtin Default Layout"                                     
++        Screen  "Builtin Default fbdev Screen 0"        
++EndSection                                              
+diff --git a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
+index 95aa82b..67fc683 100644
+--- a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
++++ b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Machine specific xorg.conf files"
+-PR = "r4"
++PR = "r5"
  
--DEPENDS_beagleboard = "${STDDEPENDS} libgles-omap3 tslib"
--EXTRA_OECONF_beagleboard = "${BASE_CONF} --with-flavour=eglx --with-gles=2.0"
--PACKAGE_ARCH_beagleboard = "${MACHINE_ARCH}"
--
--DEPENDS_omap3evm = "${STDDEPENDS} libgles-omap3 tslib"
--EXTRA_OECONF_omap3evm = "${BASE_CONF} --with-flavour=eglx --with-gles=2.0"
--PACKAGE_ARCH_omap3evm = "${MACHINE_ARCH}"
--
--DEPENDS_overo = "${STDDEPENDS} libgles-omap3 tslib"
--EXTRA_OECONF_overo = "${BASE_CONF} --with-flavour=eglx --with-gles=2.0"
--PACKAGE_ARCH_overo = "${MACHINE_ARCH}"
--
- DEPENDS_mx31ads = "${STDDEPENDS} libgles-mx31 tslib"
- EXTRA_OECONF_mx31ads = "${BASE_CONF} --with-flavour=eglnative"
- PACKAGE_ARCH_mx31ads = "${MACHINE_ARCH}"
+ SRC_URI = "file://xorg.conf"
+ 
 -- 
 1.6.1
 
