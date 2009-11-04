@@ -1,26 +1,26 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N5b6z-0000By-Hk
-	for openembedded-devel@openembedded.org; Wed, 04 Nov 2009 09:21:04 +0100
-Received: (qmail 3371 invoked by uid 813007); 4 Nov 2009 08:19:51 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 4 Nov 2009 08:19:51 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <holger+oe@freyther.de>) id 1N5bCT-0001Jy-Vr
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Nov 2009 09:26:45 +0100
+Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
+	[123.192.145.111])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 8A0DD1B10C05
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  4 Nov 2009 08:35:42 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 4 Nov 2009 09:19:49 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.32-rc5-00402-gb6727b1; KDE/4.3.2; x86_64; ;
-	)
-References: <alpine.LFD.2.00.0911040236430.13299@localhost>
-In-Reply-To: <alpine.LFD.2.00.0911040236430.13299@localhost>
+Date: Wed, 4 Nov 2009 09:25:09 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <alpine.LFD.2.00.0911040306440.17282@localhost>
+In-Reply-To: <alpine.LFD.2.00.0911040306440.17282@localhost>
 MIME-Version: 1.0
-Message-Id: <200911040919.51657.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Message-Id: <200911040925.10074.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: trying to get newest bitbake package into fedora
+Subject: Re: [PATCH] Aesthetic fix in chapter 1.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,29 +34,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2009 08:21:04 -0000
+X-List-Received-Date: Wed, 04 Nov 2009 08:26:45 -0000
 Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Dnia =C5=9Broda, 4 listopada 2009 o 08:38:28 Robert P. J. Day napisa=C5=82(=
-a):
->   not sure if anyone involved with OE gets involved with this, but for
-> the sake of fedora folks, i'm trying to get an updated bitbake package
-> into fedora:
->=20
-> https://bugzilla.redhat.com/show_bug.cgi?id=3D529067
->=20
->   obviously not critical, just convenient if it happens.
+On Wednesday 04 November 2009 09:09:17 Robert P. J. Day wrote:
+> A simple tidy of a comma-separated list in Chapter 1.
+> 
+> Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
 
-If that help I have somewhere srpm for bitbake 1.6.2.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+Acked-by: Holger Hans Peter Freyther <zecke@selfish.org>
 
 
+
+> 
+> ---
+> 
+>   first in a list of patches to fix aesthetic stuff in user manual --
+> this patch is as trivial as it gets, but i would prefer to do this a
+> chapter at a time, if i might.  i promise that future patches will be
+> more substantive, but still be logically self-contained.
+> 
+>   is this the right format for submitting patches?  i'm just stealing
+> from the format for kernel patches.
+> 
+> 
+> diff --git a/docs/usermanual/chapters/introduction.xml
+>  b/docs/usermanual/chapters/introduction.xml index 31f1f1f..28e7725 100644
+> --- a/docs/usermanual/chapters/introduction.xml
+> +++ b/docs/usermanual/chapters/introduction.xml
+> @@ -30,7 +30,7 @@
+>          </listitem>
+> 
+>          <listitem>
+> -          <para>Must be able to emit packages (tar, rpm, deb,ipk)</para>
+> +          <para>Must be able to emit packages (tar, rpm, deb, ipk)</para>
+>          </listitem>
+> 
+>          <listitem>
+> 
+> 
+> ========================================================================
+> Robert P. J. Day                               Waterloo, Ontario, CANADA
+> 
+>             Linux Consulting, Training and Kernel Pedantry.
+> 
+> Web page:                                          http://crashcourse.ca
+> Twitter:                                       http://twitter.com/rpjday
+> ========================================================================
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
 
 
