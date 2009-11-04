@@ -1,26 +1,37 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1N5bCT-0001Jy-Vr
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Nov 2009 09:26:45 +0100
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 8A0DD1B10C05
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Nov 2009 08:35:42 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 4 Nov 2009 09:25:09 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <alpine.LFD.2.00.0911040306440.17282@localhost>
-In-Reply-To: <alpine.LFD.2.00.0911040306440.17282@localhost>
+	(envelope-from <rpjday@crashcourse.ca>) id 1N5bCo-0001Kw-A3
+	for openembedded-devel@openembedded.org; Wed, 04 Nov 2009 09:27:05 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1N5bBQ-0008Q4-ED
+	for openembedded-devel@openembedded.org; Wed, 04 Nov 2009 03:25:36 -0500
+Date: Wed, 4 Nov 2009 03:24:01 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: openembedded-devel@openembedded.org
+In-Reply-To: <200911040919.51657.marcin@juszkiewicz.com.pl>
+Message-ID: <alpine.LFD.2.00.0911040322240.18165@localhost>
+References: <alpine.LFD.2.00.0911040236430.13299@localhost>
+	<200911040919.51657.marcin@juszkiewicz.com.pl>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
-Message-Id: <200911040925.10074.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Aesthetic fix in chapter 1.
+Subject: Re: trying to get newest bitbake package into fedora
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,60 +45,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2009 08:26:45 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 04 Nov 2009 08:27:05 -0000
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323328-1616506940-1257323136=:18165"
 
-On Wednesday 04 November 2009 09:09:17 Robert P. J. Day wrote:
-> A simple tidy of a comma-separated list in Chapter 1.
-> 
-> Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+--8323328-1616506940-1257323136=:18165
+Content-Type: TEXT/PLAIN; charset=utf-8
+Content-Transfer-Encoding: QUOTED-PRINTABLE
 
-Acked-by: Holger Hans Peter Freyther <zecke@selfish.org>
+On Wed, 4 Nov 2009, Marcin Juszkiewicz wrote:
 
+> Dnia =C5=9Broda, 4 listopada 2009 o 08:38:28 Robert P. J. Day napisa=C5=
+=82(a):
+> >   not sure if anyone involved with OE gets involved with this, but for
+> > the sake of fedora folks, i'm trying to get an updated bitbake package
+> > into fedora:
+> >
+> > https://bugzilla.redhat.com/show_bug.cgi?id=3D529067
+> >
+> >   obviously not critical, just convenient if it happens.
+>
+> If that help I have somewhere srpm for bitbake 1.6.2.
 
+  i could probably repackage it, i just wasn't sure if someone at OE
+monitored packaging requests like that or was notified by fedora when
+requests like that came in.  and i might as well update that BZ report
+since i notice that there's already a 1.8.16 release.  that was quick.
+show-stopper bug in 1.8.14?
 
-> 
-> ---
-> 
->   first in a list of patches to fix aesthetic stuff in user manual --
-> this patch is as trivial as it gets, but i would prefer to do this a
-> chapter at a time, if i might.  i promise that future patches will be
-> more substantive, but still be logically self-contained.
-> 
->   is this the right format for submitting patches?  i'm just stealing
-> from the format for kernel patches.
-> 
-> 
-> diff --git a/docs/usermanual/chapters/introduction.xml
->  b/docs/usermanual/chapters/introduction.xml index 31f1f1f..28e7725 100644
-> --- a/docs/usermanual/chapters/introduction.xml
-> +++ b/docs/usermanual/chapters/introduction.xml
-> @@ -30,7 +30,7 @@
->          </listitem>
-> 
->          <listitem>
-> -          <para>Must be able to emit packages (tar, rpm, deb,ipk)</para>
-> +          <para>Must be able to emit packages (tar, rpm, deb, ipk)</para>
->          </listitem>
-> 
->          <listitem>
-> 
-> 
-> ========================================================================
-> Robert P. J. Day                               Waterloo, Ontario, CANADA
-> 
->             Linux Consulting, Training and Kernel Pedantry.
-> 
-> Web page:                                          http://crashcourse.ca
-> Twitter:                                       http://twitter.com/rpjday
-> ========================================================================
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+rday
+--
 
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Robert P. J. Day                               Waterloo, Ontario, CANADA
 
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+--8323328-1616506940-1257323136=:18165--
