@@ -1,33 +1,34 @@
-Received: from [93.97.175.187] (helo=dan.rpsys.net)
+Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1N5cSR-0003Vz-Gc
-	for openembedded-devel@openembedded.org; Wed, 04 Nov 2009 10:47:18 +0100
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nA49h8iK018516
-	for <openembedded-devel@openembedded.org>; Wed, 4 Nov 2009 09:43:08 GMT
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id khSkj88kkP3L for <openembedded-devel@openembedded.org>;
-	Wed,  4 Nov 2009 09:43:08 +0000 (GMT)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nA49h1iS018502
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
-	for <openembedded-devel@openembedded.org>; Wed, 4 Nov 2009 09:43:06 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	(envelope-from <rpjday@crashcourse.ca>) id 1N5cjP-0003kJ-VB
+	for openembedded-devel@openembedded.org; Wed, 04 Nov 2009 11:04:51 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1N5ci1-0007PZ-Bc
+	for openembedded-devel@openembedded.org; Wed, 04 Nov 2009 05:03:21 -0500
+Date: Wed, 4 Nov 2009 05:03:00 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: openembedded-devel@openembedded.org
-In-Reply-To: <alpine.LFD.2.00.0911040322240.18165@localhost>
+In-Reply-To: <200911040919.51657.marcin@juszkiewicz.com.pl>
+Message-ID: <alpine.LFD.2.00.0911040502481.29456@localhost>
 References: <alpine.LFD.2.00.0911040236430.13299@localhost>
 	<200911040919.51657.marcin@juszkiewicz.com.pl>
-	<alpine.LFD.2.00.0911040322240.18165@localhost>
-Date: Wed, 04 Nov 2009 09:42:24 +0000
-Message-Id: <1257327744.30217.83.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-SA-Exim-Connect-IP: 93.97.175.187
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: trying to get newest bitbake package into fedora
@@ -44,23 +45,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2009 09:47:18 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 04 Nov 2009 10:04:51 -0000
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323328-880437346-1257329001=:29456"
 
-On Wed, 2009-11-04 at 03:24 -0500, Robert P. J. Day wrote:
->   i could probably repackage it, i just wasn't sure if someone at OE
-> monitored packaging requests like that or was notified by fedora when
-> requests like that came in.  and i might as well update that BZ report
-> since i notice that there's already a 1.8.16 release.  that was quick.
-> show-stopper bug in 1.8.14?
+--8323328-880437346-1257329001=:29456
+Content-Type: TEXT/PLAIN; charset=utf-8
+Content-Transfer-Encoding: QUOTED-PRINTABLE
 
-During the release I screwed up and introduced a typo that was serious
-enough to kill the .14 release :(.
+On Wed, 4 Nov 2009, Marcin Juszkiewicz wrote:
 
-Cheers,
+> Dnia =C5=9Broda, 4 listopada 2009 o 08:38:28 Robert P. J. Day napisa=C5=
+=82(a):
+> >   not sure if anyone involved with OE gets involved with this, but for
+> > the sake of fedora folks, i'm trying to get an updated bitbake package
+> > into fedora:
+> >
+> > https://bugzilla.redhat.com/show_bug.cgi?id=3D529067
+> >
+> >   obviously not critical, just convenient if it happens.
+>
+> If that help I have somewhere srpm for bitbake 1.6.2.
 
-Richard
+  with fedora, it's easier than rummaging around, looking for
+corresponding srpms.  if a binary package exists, then getting the
+corresponding source package usually involves just:
 
+$ yumdownloader --source bitbake
+=2E.. snip ...
+bitbake-1.8.10-3.fc11.src.rpm
+$
 
+  so now i have the source rpm for bitbake 1.8.10.  if it looks easy
+to update it to 1.8.16, i'll take a shot at it, unless someone else
+wants to do the honours.  the source rpm is only 127K in size if
+anyone wants me to email it to them.
 
+rday
+--
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+--8323328-880437346-1257329001=:29456--
