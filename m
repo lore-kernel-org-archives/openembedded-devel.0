@@ -1,26 +1,36 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [93.97.175.187] (helo=dan.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N5cDb-0000eI-I4
-	for openembedded-devel@openembedded.org; Wed, 04 Nov 2009 10:31:58 +0100
-Received: (qmail 14809 invoked by uid 813007); 4 Nov 2009 09:30:44 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 4 Nov 2009 09:30:44 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 4 Nov 2009 10:30:44 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.32-rc5-00402-gb6727b1; KDE/4.3.2; x86_64; ;
-	)
-References: <alpine.LFD.2.00.0911040420180.20197@localhost>
-In-Reply-To: <alpine.LFD.2.00.0911040420180.20197@localhost>
-MIME-Version: 1.0
-Message-Id: <200911041030.45678.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+	(envelope-from <rpurdie@rpsys.net>) id 1N5cSR-0003Vz-Gc
+	for openembedded-devel@openembedded.org; Wed, 04 Nov 2009 10:47:18 +0100
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nA49h8iK018516
+	for <openembedded-devel@openembedded.org>; Wed, 4 Nov 2009 09:43:08 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id khSkj88kkP3L for <openembedded-devel@openembedded.org>;
+	Wed,  4 Nov 2009 09:43:08 +0000 (GMT)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nA49h1iS018502
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@openembedded.org>; Wed, 4 Nov 2009 09:43:06 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@openembedded.org
+In-Reply-To: <alpine.LFD.2.00.0911040322240.18165@localhost>
+References: <alpine.LFD.2.00.0911040236430.13299@localhost>
+	<200911040919.51657.marcin@juszkiewicz.com.pl>
+	<alpine.LFD.2.00.0911040322240.18165@localhost>
+Date: Wed, 04 Nov 2009 09:42:24 +0000
+Message-Id: <1257327744.30217.83.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] User Manual, correct "task-native-sdk" to "task-sdk-native"
+Subject: Re: trying to get newest bitbake package into fedora
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,24 +44,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2009 09:31:58 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 04 Nov 2009 09:47:18 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Dnia =C5=9Broda, 4 listopada 2009 o 10:21:50 Robert P. J. Day napisa=C5=82(=
-a):
->   sorry, i missed this for the previous patch.  i'm assuming the
-> author really wanted to refer to "task-sdk-native", yes?
+On Wed, 2009-11-04 at 03:24 -0500, Robert P. J. Day wrote:
+>   i could probably repackage it, i just wasn't sure if someone at OE
+> monitored packaging requests like that or was notified by fedora when
+> requests like that came in.  and i might as well update that BZ report
+> since i notice that there's already a 1.8.16 release.  that was quick.
+> show-stopper bug in 1.8.14?
 
-I did not noticed that name was changed...
+During the release I screwed up and introduced a typo that was serious
+enough to kill the .14 release :(.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+Cheers,
 
+Richard
 
 
 
