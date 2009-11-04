@@ -1,38 +1,36 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [84.21.108.25] (helo=ns.penguin.cz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1N5eLD-0006I2-6J for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Nov 2009 12:47:58 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1N5eK4-0000nt-Fu
+	(envelope-from <utx@penguin.cz>) id 1N5ems-0002lR-Qw
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Nov 2009 12:46:44 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Nov 2009 12:46:44 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Wed, 04 Nov 2009 13:16:33 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id E58561416BC5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Nov 2009 12:46:44 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed,  4 Nov 2009 13:12:28 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 6UsqZe6+K8sD
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  4 Nov 2009 13:12:28 +0100 (CET)
+Received: from [10.20.1.86] (nat.scz.novell.com [213.151.88.252])
+	by ns.penguin.cz (Postfix) with ESMTP id BDE751416BAC
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  4 Nov 2009 13:12:28 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 04 Nov 2009 12:46:21 +0100
-Message-ID: <hcrpid$jbi$1@ger.gmane.org>
-References: <OF0E05AE88.6B7EB133-ONC1257664.003886C4-C1257664.0039937B@cirsa.com>
-	<hcrnsl$ec8$1@ger.gmane.org>
+In-Reply-To: <1257199740.10804.41.camel@dax.rpnet.com>
+References: <1257169407.11338.71.camel@dax.rpnet.com>
+	<1257199740.10804.41.camel@dax.rpnet.com>
+Date: Wed, 04 Nov 2009 13:15:19 +0100
+Message-Id: <1257336919.14421.60.camel@hammer.suse.cz>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <hcrnsl$ec8$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.0 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Problems building binutils-cross_2.18.50.0.7.bb
+Subject: Re: Staging - time to end the current mess - now with patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,32 +44,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2009 11:47:58 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 04 Nov 2009 12:16:34 -0000
+Content-Type: text/plain; charset="ISO-8859-2"
 Content-Transfer-Encoding: 7bit
 
-On 04-11-09 12:17, Koen Kooi wrote:
-> On 04-11-09 11:27, jorge fernandez monteagudo wrote:
->> Hi OE list members!
->>
->> It's my first message on this list, and it's related to the problems I
->> have building
->> OE for my beagleboard. My host machine is a mandriva 2008.0.
->>
->> I'm following the steps from
->> http://elinux.org/BeagleBoardAndOpenEmbeddedGit
->
-> If you're going to build for beagleboard, don't use that guide, but use
-> http://www.angstrom-distribution.org/building-angstrom
+Richard Purdie wrote:
 
-Before someone says "it's a wiki, fix it!" I must point that this it's a 
-wiki and people have already unfixed it multiple times. The amount of 
-unfixing is just too vast, which is why the official angstrom 
-instructions aren't in a wiki!
+I agree with the new concept. I did not understand, why we need
+do_stage, if we can mangle and stage DESTDIR directly.
 
-regards,
+> do_package takes a copy of ${D} into ${PKGD} and then runs the functions
+> in PACKAGE_PREPROCESS_FUNCS which can alter this directory. The result
+> is then packaged.
 
-Koen
+Maybe do_mangle and do_mangle_append or so may look better from an user
+aspect and easier to port (just move extra commands from do_stage to
+do_mangle_append). But PACKAGE_PREPROCESS_FUNCS should be OK as well.
+
+> * Any do_stage where we do an autotools_stage_all can just be deleted.
+
+And autotools_stage class will become just autotools.
+
+> * Native packages with delete do_install should not anymore.
+
+Thinking about it, do still make separate native recipes sense after
+this change? Most of them could recycle nearly the same recipe then.
+(Specially patched utilities would be an exception.)
+
+I can imagine, that native build will be built from the host recipe,
+just with a different setup.
+
+> * Any do_stage function which installs extra things compared to
+> do_install is very suspect and needs an explanation of why. Most likely
+> do_install should be fixed and do_stage then deleted.
+
+I agree. Shorter file list in do_stage might have had some sense to save
+few megabytes of unused stuff in staging dir, but it is a small profit
+from the double work.
+
+> * If do_stage really needs to do something other than what is in
+> do_install a function should be written to operate on SYSROOT_DESTDIR
+> and that function should be appended to SYSROOT_PREPROCESS_FUNCS. There
+> are some -native binary special cases which will need this but almost
+> everything should *not* need this.
+
+Example of special case may be guile. Mangling of guile-config must be
+done in a special way (guile-config is a guile script, not shell
+script). I cannot remember any other recipe, that needs it.
+
+> Comments and experiments with the branch welcome. If I get some time
+> I'll try and start adding a few conversions to the branch.
+
+It's a bit unrelated, but I would like to see temp/run.do_... script for
+splitting install dir to sub-package dirs and packages and
+temp/log.do_... with QA output that warns about unpackaged files.
+
+-- 
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
 
