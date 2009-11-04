@@ -1,39 +1,29 @@
-Received: from [209.85.223.190] (helo=mail-iw0-f190.google.com)
+Received: from [131.111.8.136] (helo=ppsw-6.csi.cam.ac.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1N5kbZ-0005Kx-VN
+	(envelope-from <jic23@cam.ac.uk>) id 1N5kjv-0005m5-WD
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Nov 2009 19:29:17 +0100
-Received: by iwn28 with SMTP id 28so5338112iwn.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Nov 2009 10:28:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=IjGv7iGVIbNLcbyoUkJvrsfm/O31l68BAoulZUih/Dw=;
-	b=xO5UBThWni4J3L53MyDBw6rbSQgaZJb7P2aAE8di5o0Dkz9G3Bzsn/FJm7ZLq0o77N
-	Q+LyCL6etUt9hMg2FezWtekDrYdIPZIJ/58CzNjUJERoXXHeA34BN0KBEO3nFCLZRHJU
-	G1m7jbjYJqRdfteZjxsNMvvSumiVWvmFogTbE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=IRnrx8aSOkuJwxiDEzln7tbNaw5v0Gnd4eHA0vhFA4cp6dD+RAP3Mq9eDLuPs9OU63
-	B1Hg822dzfj9EduMYS7IfsN58mdbHUKick2ra6Ssas1FStqFm/G5q8xQEk/iS+hOIyj5
-	l362tt66zDsTlRBvLcO0R4ucniLv+kKciVOrI=
+	Wed, 04 Nov 2009 19:37:55 +0100
+X-Cam-AntiVirus: no malware found
+X-Cam-SpamDetails: not scanned
+X-Cam-ScannerInfo: http://www.cam.ac.uk/cs/email/scanner/
+Received: from arcturus.eng.cam.ac.uk ([129.169.154.73]:56173)
+	by ppsw-6.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.156]:25)
+	with esmtpsa (PLAIN:jic23) (TLSv1:DHE-RSA-AES256-SHA:256)
+	id 1N5kin-0004sk-LU (Exim 4.70) for
+	openembedded-devel@lists.openembedded.org
+	(return-path <jic23@cam.ac.uk>); Wed, 04 Nov 2009 18:36:41 +0000
+Message-ID: <4AF1C9D3.2020604@cam.ac.uk>
+Date: Wed, 04 Nov 2009 18:37:07 +0000
+From: Jonathan Cameron <jic23@cam.ac.uk>
+User-Agent: Thunderbird 2.0.0.23 (X11/20091029)
 MIME-Version: 1.0
-Received: by 10.231.161.138 with SMTP id r10mr2482356ibx.34.1257359280949; 
-	Wed, 04 Nov 2009 10:28:00 -0800 (PST)
-In-Reply-To: <1257325402-3232-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1257325402-3232-1-git-send-email-Martin.Jansa@gmail.com>
-Date: Wed, 4 Nov 2009 10:28:00 -0800
-Message-ID: <19c1b8a90911041028y24fa7ca0rc5f6e31b1ca568d7@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.190
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-Enigmail-Version: 0.96.0
+X-SA-Exim-Connect-IP: 131.111.8.136
+X-SA-Exim-Mail-From: jic23@cam.ac.uk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] eglibc: updated armv4t-interworking.patch
+Subject: [PATCH] Chrony time synchronization (chronyc and chronyd)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,150 +37,170 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2009 18:29:17 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Nov 4, 2009 at 1:03 AM, Martin.Jansa <martin.jansa@gmail.com> wrote=
-:
-> From: Martin Jansa <Martin.Jansa@gmail.com>
->
-> * Updated patch to make SYSCALL_ERROR_HANDLER interworking safe.
-> * Phil Blundell found and fixed another issue in eglibc armv4t builds.
->
-> Signed-off-by: Martin.Jansa <Martin.Jansa@gmail.com>
-> ---
-> =C2=A0recipes/eglibc/eglibc_2.10.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A02 +-
-> =C2=A0recipes/eglibc/eglibc_2.9.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A02 +-
-> =C2=A0recipes/eglibc/eglibc_svn.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A02 +-
-> =C2=A0recipes/eglibc/files/armv4t-interworking.patch | =C2=A0 27 ++++++++=
-+++++++++++++++-
-> =C2=A04 files changed, 29 insertions(+), 4 deletions(-)
->
-> diff --git a/recipes/eglibc/eglibc_2.10.bb b/recipes/eglibc/eglibc_2.10.b=
-b
-> index d143b0a..2a62fe3 100644
-> --- a/recipes/eglibc/eglibc_2.10.bb
-> +++ b/recipes/eglibc/eglibc_2.10.bb
-> @@ -3,7 +3,7 @@ require eglibc.inc
-> =C2=A0DEPENDS +=3D "gperf-native"
-> =C2=A0FILESPATHPKG =3D. "eglibc-svn:"
-> =C2=A0PV =3D "2.10"
-> -PR =3D "${INC_PR}.4"
-> +PR =3D "${INC_PR}.5"
-> =C2=A0SVN_REV=3D"9124"
-> =C2=A0EGLIBC_BRANCH=3D"eglibc-2_10"
-> =C2=A0SRC_URI =3D "svn://svn.eglibc.org/branches;module=3Deglibc-2_10;rev=
-=3D${SVN_REV};proto=3Dsvn \
-> diff --git a/recipes/eglibc/eglibc_2.9.bb b/recipes/eglibc/eglibc_2.9.bb
-> index 3efcb36..7a82627 100644
-> --- a/recipes/eglibc/eglibc_2.9.bb
-> +++ b/recipes/eglibc/eglibc_2.9.bb
-> @@ -3,7 +3,7 @@ require eglibc.inc
-> =C2=A0DEPENDS +=3D "gperf-native"
-> =C2=A0FILESPATHPKG =3D. "eglibc-svn:"
-> =C2=A0PV =3D "2.9"
-> -PR =3D "${INC_PR}.5"
-> +PR =3D "${INC_PR}.6"
-> =C2=A0SVN_REV=3D"8690"
-> =C2=A0EGLIBC_BRANCH=3D"eglibc-2_9"
-> =C2=A0SRC_URI =3D "svn://svn.eglibc.org/branches;module=3Deglibc-2_9;rev=
-=3D${SVN_REV};proto=3Dsvn \
-> diff --git a/recipes/eglibc/eglibc_svn.bb b/recipes/eglibc/eglibc_svn.bb
-> index 1a91af8..3376839 100644
-> --- a/recipes/eglibc/eglibc_svn.bb
-> +++ b/recipes/eglibc/eglibc_svn.bb
-> @@ -5,7 +5,7 @@ SRCREV =3D "9170"
-> =C2=A0DEFAULT_PREFERENCE =3D "-1"
-> =C2=A0FILESPATHPKG =3D. "eglibc-svn:"
-> =C2=A0PV =3D "2.10+svnr${SRCREV}"
-> -PR =3D "${INC_PR}.1"
-> +PR =3D "${INC_PR}.2"
-> =C2=A0EGLIBC_BRANCH=3D"trunk"
-> =C2=A0SRC_URI =3D "svn://svn.eglibc.org;module=3Dtrunk \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://eglibc-svn-arm-lowlevello=
-ck-include-tls.patch;patch=3D1 \
-> diff --git a/recipes/eglibc/files/armv4t-interworking.patch b/recipes/egl=
-ibc/files/armv4t-interworking.patch
-> index 55ee856..6ab3061 100644
-> --- a/recipes/eglibc/files/armv4t-interworking.patch
-> +++ b/recipes/eglibc/files/armv4t-interworking.patch
-> @@ -40,7 +40,7 @@ Index: libc/ports/sysdeps/unix/sysv/linux/arm/clone.S
-> =C2=A0#endif
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0@ pick the function arg and call address off t=
-he stack and execute
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0ldr =C2=A0 =C2=A0 r0, [sp, #4]
-> -+#if defined(__ARM_ARCH_V4T__) && defined(__THUMB_INTERWORK__)
-> ++#if defined(__ARM_ARCH_4T__) && defined(__THUMB_INTERWORK__)
-> =C2=A0+ =C2=A0 =C2=A0 =C2=A0ldr =C2=A0 =C2=A0 ip, [sp], #8
-> =C2=A0+ =C2=A0 =C2=A0 =C2=A0mov =C2=A0 =C2=A0 lr, pc
-> =C2=A0+ =C2=A0 =C2=A0 =C2=A0 =C2=A0bx =C2=A0 =C2=A0 =C2=A0ip
-> @@ -51,3 +51,28 @@ Index: libc/ports/sysdeps/unix/sysv/linux/arm/clone.S
->
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0@ and we are done, passing the return value th=
-rough r0
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0b =C2=A0 =C2=A0 =C2=A0 PLTJMP(HIDDEN_JUMPTARGE=
-T(_exit))
-> +Index: libc/ports/sysdeps/unix/sysv/linux/arm/sysdep.h
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- libc.orig/ports/sysdeps/unix/sysv/linux/arm/sysdep.h =C2=A0 =C2=A0 =
-=C2=A0 2009-09-16 13:58:18.000000000 +0100
-> ++++ libc/ports/sysdeps/unix/sysv/linux/arm/sysdep.h =C2=A0 =C2=A02009-11=
--03 19:17:16.000000000 +0000
-> +@@ -129,6 +129,11 @@
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0DO_RET(lr); =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\
-> + 1: =C2=A0 =C2=A0 .word C_SYMBOL_NAME(rtld_errno) - 0b - 8;
-> + # else
-> ++#if defined(__ARM_ARCH_4T__) && defined(__THUMB_INTERWORK__)
-> ++#define POP_PC =C2=A0ldr =C2=A0 =C2=A0 lr, [sp], #4; bx lr
-> ++#else
-> ++#define POP_PC =C2=A0ldr =C2=A0 =C2=A0 pc, [sp], #4
-> ++#endif
-> + # =C2=A0define SYSCALL_ERROR_HANDLER =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 \
-> + __local_syscall_error: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\
-> + =C2=A0 =C2=A0 =C2=A0 str =C2=A0 =C2=A0 lr, [sp, #-4]!; =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 \
-> +@@ -138,7 +143,7 @@
-> + =C2=A0 =C2=A0 =C2=A0 rsb =C2=A0 =C2=A0 r1, r1, #0; =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \
-> + =C2=A0 =C2=A0 =C2=A0 str =C2=A0 =C2=A0 r1, [r0]; =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \
-> + =C2=A0 =C2=A0 =C2=A0 mvn =C2=A0 =C2=A0 r0, #0; =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \
-> +- =C2=A0 =C2=A0 =C2=A0ldr =C2=A0 =C2=A0 pc, [sp], #4;
-> ++ =C2=A0 =C2=A0 =C2=A0 =C2=A0POP_PC;
-> + # endif
-> + #else
-> + # define SYSCALL_ERROR_HANDLER =C2=A0 =C2=A0 =C2=A0 =C2=A0/* Nothing he=
-re; code in sysdep.S is used. =C2=A0*/
-> --
-> 1.6.5.2
->
-
-there is already a define __USE_BX__ and another macro BX(reg)
-I think they should be used here instead
+X-List-Received-Date: Wed, 04 Nov 2009 18:37:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
 
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Signed-off-by: Jonathan Cameron <jic23@cam.ac.uk>
+---
+Unfortunately this package uses a hand rolled set of build scripts.
+The maintainers are happy to add fixes to any problems but are not
+keen on moving over to autotools. I don't get the impression many
+people cross compile this one! That is a shame because it is very
+useful with wireless sensor nodes.
+
+There are a few nasty tests in the configure script that may well
+cause problems in cross compiles when the host is not also linux based.
+
+I will work on getting these fixed at source, but it may take a while
+hence submission of this recipe in the meantime.
+
+The reason this is the git version is recent patches to ensure
+that the LDPATH variable was not ignored in linking.
+
+This recipe includes some convenient scripts and blank config
+files needed to get it up and running easily.
+
+ recipes/chrony/chrony.conf     |    7 +++++++
+ recipes/chrony/chrony.keys     |    1 +
+ recipes/chrony/chrony_git.bb   |   35 +++++++++++++++++++++++++++++++++++
+ recipes/chrony/chrony_start.sh |   20 ++++++++++++++++++++
+ recipes/chrony/chrony_stop.sh  |   20 ++++++++++++++++++++
+ recipes/chrony/init            |    4 ++++
+ 6 files changed, 87 insertions(+), 0 deletions(-)
+
+diff --git a/recipes/chrony/chrony.conf b/recipes/chrony/chrony.conf
+new file mode 100644
+index 0000000..995d5a2
+--- /dev/null
++++ b/recipes/chrony/chrony.conf
+@@ -0,0 +1,7 @@
++server timeserver offline minpoll 2 maxpoll 2
++keyfile /etc/chrony.keys
++commandkey 1
++initstepslew 0 timeserver
++driftfile /etc/chrony.drift
++dumpdir /var/log/chrony
++dumponexit
+\ No newline at end of file
+diff --git a/recipes/chrony/chrony.keys b/recipes/chrony/chrony.keys
+new file mode 100644
+index 0000000..00718ad
+--- /dev/null
++++ b/recipes/chrony/chrony.keys
+@@ -0,0 +1 @@
++1 opensesame
+\ No newline at end of file
+diff --git a/recipes/chrony/chrony_git.bb b/recipes/chrony/chrony_git.bb
+new file mode 100644
+index 0000000..bbba50c
+--- /dev/null
++++ b/recipes/chrony/chrony_git.bb
+@@ -0,0 +1,35 @@
++DESCRIPTION = "Chrony time synchronization"
++LICENSE = "GPL"
++CHRONY_REV="fe2cfe1faee10b3d972f79fe30b5c8ac09469409"
++DEPENDS += "readline"
++REDEPENDS += "readline"
++
++PV = "1.23+gitr${CHRONY_REV}"
++
++SRC_URI = "git://git.tuxfamily.org/gitroot/chrony/chrony.git;protocol=git;rev=${CHRONY_REV} \
++	file://chrony_start.sh \
++	file://chrony_stop.sh \
++	file://init \
++	file://chrony.conf \
++	file://chrony.keys \
++"
++S = "${WORKDIR}/git"
++
++do_configure() {
++	${S}/configure
++}
++
++do_compile() {
++	unset CPPFLAGS
++	oe_runmake
++}
++
++do_install_append() {
++    install -d ${D}${sysconfdir}/init.d
++    install -m 0644 ${WORKDIR}/chrony.conf ${D}${sysconfdir}/
++    install -m 0644 ${WORKDIR}/chrony.keys ${D}${sysconfdir}/
++    install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/chronyd
++    install -d ${D}${bindir}
++    install -m 0755 ${WORKDIR}/chrony_start.sh ${D}${bindir}
++    install -m 0755 ${WORKDIR}/chrony_stop.sh ${D}${bindir}
++}
+\ No newline at end of file
+diff --git a/recipes/chrony/chrony_start.sh b/recipes/chrony/chrony_start.sh
+new file mode 100644
+index 0000000..e50a3a4
+--- /dev/null
++++ b/recipes/chrony/chrony_start.sh
+@@ -0,0 +1,20 @@
++#! /bin/bash
++
++PROC=`ps | grep chronyd | grep -v grep`;
++
++if [ -n "$PROC" ]; then
++
++   RESULT=`chronyc << ___EOF
++   password opensesame
++   online
++___EOF`
++
++   RESULT2=`echo $RESULT | grep OK`
++   if [ -n "$RESULT2" ]; then
++      echo 1
++   else
++      echo 0;
++   fi
++else
++    echo -1;
++fi
+\ No newline at end of file
+diff --git a/recipes/chrony/chrony_stop.sh b/recipes/chrony/chrony_stop.sh
+new file mode 100644
+index 0000000..65b8f1f
+--- /dev/null
++++ b/recipes/chrony/chrony_stop.sh
+@@ -0,0 +1,20 @@
++#! /bin/bash
++
++PROC=`ps | grep chronyd | grep -v grep`;
++
++if [ -n "$PROC" ]; then
++
++   RESULT=`chronyc << ___EOF
++   password opensesame
++   offline
++___EOF`
++
++   RESULT2=`echo $RESULT | grep OK`
++   if [ -n "$RESULT2" ]; then
++      echo 1
++   else
++      echo 0;
++   fi
++else
++    echo -1;
++fi
+\ No newline at end of file
+diff --git a/recipes/chrony/init b/recipes/chrony/init
+new file mode 100644
+index 0000000..b1c62a8
+--- /dev/null
++++ b/recipes/chrony/init
+@@ -0,0 +1,4 @@
++if [ -f /usr/bin/chronyd -a -f /etc/chrony.conf ]; then
++  /usr/bin/chronyd
++  echo "Started chronyd"
++fi
+\ No newline at end of file
+-- 
+1.6.4.4
+
 
 
