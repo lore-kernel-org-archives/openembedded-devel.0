@@ -1,39 +1,39 @@
 Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1N5bnT-0005R0-2x
+	(envelope-from <martin.jansa@gmail.com>) id 1N5btc-0005h6-H4
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Nov 2009 10:04:58 +0100
-Received: by bwz9 with SMTP id 9so8497595bwz.12
+	Wed, 04 Nov 2009 10:11:19 +0100
+Received: by bwz9 with SMTP id 9so8504678bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Nov 2009 01:03:42 -0800 (PST)
+	Wed, 04 Nov 2009 01:10:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=1OighuRDS8hdYZmq+QjR2k/Zyt6ecaWDEQ1sDtg/qUs=;
-	b=Lc8Uv/DPaptfwRHuOXpGZw+jY7MpvPU41GfIBWWxBCPCJNxXiVnWhgIj2WSdGAYp1D
-	gevwCZn3lmAohY6azA8BK0ofli5lAy61x3QS8TMONOkHIn72fL3H3pWqMAr2vzOZYrBT
-	8Y+oQFEqeokzsCOKmVBxhNxUvop4f9WS/WAtE=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type;
+	bh=l+OZyoSwFKYnz+D/AHbDExbkdNAHwQKVn9LMI4R7QoY=;
+	b=hnpFdI29Oah+hYt+El+BGx36lI8uyC5UVlrtBg0J0YDBc/eP1dVD0atN24tSMy0y1a
+	SDmYOMbKt/JJ8hXlSzzQspTjMEhDXLiBaEWCrku7QDziu2GvjS2ToGioohPqKG5tm5VB
+	WiOdIFb5tZI1VcIO858EkjBnnjwnixxSuEXaM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=gobVD0nhH8h9k8tuEAwaEt6PRck6t/dTMKe4lKDio266glw2Z9VKjs6ldkOaYGCNOv
-	R1J1EMWT8T4fR2HUds+aAxtdV4vocdaEH7pqE7xCsGyQ+4ArfNcK4V82wz5PVc55yK3D
-	4IsTqqFEBdBBxcatrqCaI9QkT92c0jKUI+vXM=
-Received: by 10.204.16.88 with SMTP id n24mr1171739bka.52.1257325422606;
-	Wed, 04 Nov 2009 01:03:42 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 14sm260816fxm.11.2009.11.04.01.03.41
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 04 Nov 2009 01:03:41 -0800 (PST)
-From: "Martin.Jansa" <martin.jansa@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	b=l8/mKI31YHubaUQv0Buy1BRWmrgXY0XCU5Adc8OFPpP4IkU40ZKcvHbRm29LoSxJJ3
+	xoyQRuzGX9qrOMNiESPCMJi88ebcxGG1Wh0eiek8IRK2Il0pcU40UtLPJ2ZI7O/vJhGq
+	//zQFL7YPDGIGy+k5f/OuN+H8jLQ9BurbfsvM=
+MIME-Version: 1.0
+Received: by 10.223.53.149 with SMTP id m21mr153656fag.101.1257325804115; Wed, 
+	04 Nov 2009 01:10:04 -0800 (PST)
+In-Reply-To: <1257325402-3232-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1257325402-3232-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Wed, 4 Nov 2009 10:10:04 +0100
+Message-ID: <141020e30911040110q319ae21dxd1c0a266e6ef7599@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Nov 2009 10:03:22 +0100
-Message-Id: <1257325402-3232-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.6.5.2
 X-SA-Exim-Connect-IP: 209.85.218.217
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] eglibc: updated armv4t-interworking.patch
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] eglibc: updated armv4t-interworking.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,104 +47,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2009 09:04:58 -0000
+X-List-Received-Date: Wed, 04 Nov 2009 09:11:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Martin Jansa <Martin.Jansa@gmail.com>
+On Wed, Nov 4, 2009 at 10:03 AM, Martin.Jansa <martin.jansa@gmail.com>wrote:
 
-* Updated patch to make SYSCALL_ERROR_HANDLER interworking safe.
-* Phil Blundell found and fixed another issue in eglibc armv4t builds.
+> From: Martin Jansa <Martin.Jansa@gmail.com>
+>
+> * Updated patch to make SYSCALL_ERROR_HANDLER interworking safe.
+> * Phil Blundell found and fixed another issue in eglibc armv4t builds.
+>
+>
+http://cgit.openembedded.net/cgit.cgi/openembedded/commit/?h=shr/merge&id=b7c9855c7ece03a0876c0d50922f908b65c5f095
+should be also cherry-picked to replace another __ARM_ARCH_V4T__
+with __ARM_ARCH_4T__. pb suggests its typo and gcc output/OE tree grep/GCC
+sources grep and google are confirming it.
 
-Signed-off-by: Martin.Jansa <Martin.Jansa@gmail.com>
----
- recipes/eglibc/eglibc_2.10.bb                  |    2 +-
- recipes/eglibc/eglibc_2.9.bb                   |    2 +-
- recipes/eglibc/eglibc_svn.bb                   |    2 +-
- recipes/eglibc/files/armv4t-interworking.patch |   27 +++++++++++++++++++++++-
- 4 files changed, 29 insertions(+), 4 deletions(-)
-
-diff --git a/recipes/eglibc/eglibc_2.10.bb b/recipes/eglibc/eglibc_2.10.bb
-index d143b0a..2a62fe3 100644
---- a/recipes/eglibc/eglibc_2.10.bb
-+++ b/recipes/eglibc/eglibc_2.10.bb
-@@ -3,7 +3,7 @@ require eglibc.inc
- DEPENDS += "gperf-native"
- FILESPATHPKG =. "eglibc-svn:"
- PV = "2.10"
--PR = "${INC_PR}.4"
-+PR = "${INC_PR}.5"
- SVN_REV="9124"
- EGLIBC_BRANCH="eglibc-2_10"
- SRC_URI = "svn://svn.eglibc.org/branches;module=eglibc-2_10;rev=${SVN_REV};proto=svn \
-diff --git a/recipes/eglibc/eglibc_2.9.bb b/recipes/eglibc/eglibc_2.9.bb
-index 3efcb36..7a82627 100644
---- a/recipes/eglibc/eglibc_2.9.bb
-+++ b/recipes/eglibc/eglibc_2.9.bb
-@@ -3,7 +3,7 @@ require eglibc.inc
- DEPENDS += "gperf-native"
- FILESPATHPKG =. "eglibc-svn:"
- PV = "2.9"
--PR = "${INC_PR}.5"
-+PR = "${INC_PR}.6"
- SVN_REV="8690"
- EGLIBC_BRANCH="eglibc-2_9"
- SRC_URI = "svn://svn.eglibc.org/branches;module=eglibc-2_9;rev=${SVN_REV};proto=svn \
-diff --git a/recipes/eglibc/eglibc_svn.bb b/recipes/eglibc/eglibc_svn.bb
-index 1a91af8..3376839 100644
---- a/recipes/eglibc/eglibc_svn.bb
-+++ b/recipes/eglibc/eglibc_svn.bb
-@@ -5,7 +5,7 @@ SRCREV = "9170"
- DEFAULT_PREFERENCE = "-1"
- FILESPATHPKG =. "eglibc-svn:"
- PV = "2.10+svnr${SRCREV}"
--PR = "${INC_PR}.1"
-+PR = "${INC_PR}.2"
- EGLIBC_BRANCH="trunk"
- SRC_URI = "svn://svn.eglibc.org;module=trunk \
-            file://eglibc-svn-arm-lowlevellock-include-tls.patch;patch=1 \
-diff --git a/recipes/eglibc/files/armv4t-interworking.patch b/recipes/eglibc/files/armv4t-interworking.patch
-index 55ee856..6ab3061 100644
---- a/recipes/eglibc/files/armv4t-interworking.patch
-+++ b/recipes/eglibc/files/armv4t-interworking.patch
-@@ -40,7 +40,7 @@ Index: libc/ports/sysdeps/unix/sysv/linux/arm/clone.S
-  #endif
-  	@ pick the function arg and call address off the stack and execute
-  	ldr	r0, [sp, #4]
--+#if defined(__ARM_ARCH_V4T__) && defined(__THUMB_INTERWORK__)
-++#if defined(__ARM_ARCH_4T__) && defined(__THUMB_INTERWORK__)
- +	ldr 	ip, [sp], #8
- +	mov	lr, pc
- +        bx      ip
-@@ -51,3 +51,28 @@ Index: libc/ports/sysdeps/unix/sysv/linux/arm/clone.S
-  
-  	@ and we are done, passing the return value through r0
-  	b	PLTJMP(HIDDEN_JUMPTARGET(_exit))
-+Index: libc/ports/sysdeps/unix/sysv/linux/arm/sysdep.h
-+===================================================================
-+--- libc.orig/ports/sysdeps/unix/sysv/linux/arm/sysdep.h	2009-09-16 13:58:18.000000000 +0100
-++++ libc/ports/sysdeps/unix/sysv/linux/arm/sysdep.h	2009-11-03 19:17:16.000000000 +0000
-+@@ -129,6 +129,11 @@
-+        DO_RET(lr);						\
-+ 1:     .word C_SYMBOL_NAME(rtld_errno) - 0b - 8;
-+ # else
-++#if defined(__ARM_ARCH_4T__) && defined(__THUMB_INTERWORK__)
-++#define POP_PC  ldr     lr, [sp], #4; bx lr
-++#else
-++#define POP_PC  ldr     pc, [sp], #4
-++#endif
-+ #  define SYSCALL_ERROR_HANDLER					\
-+ __local_syscall_error:						\
-+ 	str	lr, [sp, #-4]!;					\
-+@@ -138,7 +143,7 @@
-+ 	rsb	r1, r1, #0;					\
-+ 	str	r1, [r0];					\
-+ 	mvn	r0, #0;						\
-+-	ldr	pc, [sp], #4;
-++        POP_PC;
-+ # endif
-+ #else
-+ # define SYSCALL_ERROR_HANDLER	/* Nothing here; code in sysdep.S is used.  */
--- 
-1.6.5.2
-
-
+SHR root@gojama ~ $ echo | arm-oe-linux-gnueabi-cpp -march=armv4t -dM -E -
+ | grep __ARM
+#define __ARMEL__ 1
+#define __ARM_ARCH_4T__ 1
+#define __ARM_EABI__ 1
 
