@@ -1,36 +1,40 @@
-Received: from [84.21.108.25] (helo=ns.penguin.cz)
+Received: from [74.125.78.147] (helo=ey-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1N5ems-0002lR-Qw
+	(envelope-from <koen.kooi@gmail.com>) id 1N5f3E-0008GU-5r
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Nov 2009 13:16:33 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id E58561416BC5
+	Wed, 04 Nov 2009 13:33:27 +0100
+Received: by ey-out-1920.google.com with SMTP id 5so618158eyb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Nov 2009 13:12:28 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6UsqZe6+K8sD
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Nov 2009 13:12:28 +0100 (CET)
-Received: from [10.20.1.86] (nat.scz.novell.com [213.151.88.252])
-	by ns.penguin.cz (Postfix) with ESMTP id BDE751416BAC
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Nov 2009 13:12:28 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
+	Wed, 04 Nov 2009 04:32:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=jDAsarayzQguuAY9D6Dn/OPSCx+YJjc/rfo5tJp/YuQ=;
+	b=SvODk/7b71fwAL4/C2yICP5/OfCWEkzPzM7Hepi/GTlIpac0pIbtmYjwZmF94EKyMe
+	uM4IbJ/CJJIpMXdiL1G9dbdw1OjLNjiVDaen3Fg/5ef6RlG3V6HUcJ0yneogiS1AsoK6
+	SZ43QvPw45Q3EiGiiUot+Oyps9P8p2WmwQPvc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=NCJ7Iwg2aWJqTFKTI2oLgqcHPTWaK39YNMrUDkB7tNSQKyMe7Z1XWee7dmsQRT3uOc
+	Yj2aX46qktm/+VC5YxeWXL4rNO86K/6BeZwohXl9Mj3yXCgzNQuSJ5t+kmbiMkpQ0ngW
+	V1WWUCtQPdiXVXTTaLp08iNVS6NIZ2dOSb/3Q=
+Received: by 10.213.23.149 with SMTP id r21mr1607909ebb.19.1257337933236;
+	Wed, 04 Nov 2009 04:32:13 -0800 (PST)
+Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
+	by mx.google.com with ESMTPS id 28sm3210175eyg.38.2009.11.04.04.32.09
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 04 Nov 2009 04:32:12 -0800 (PST)
+From: Koen Kooi <koen.kooi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1257199740.10804.41.camel@dax.rpnet.com>
-References: <1257169407.11338.71.camel@dax.rpnet.com>
-	<1257199740.10804.41.camel@dax.rpnet.com>
-Date: Wed, 04 Nov 2009 13:15:19 +0100
-Message-Id: <1257336919.14421.60.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.0 
-X-SA-Exim-Connect-IP: 84.21.108.25
-X-SA-Exim-Mail-From: utx@penguin.cz
+Date: Wed,  4 Nov 2009 13:32:03 +0100
+Message-Id: <1257337925-46801-1-git-send-email-koen@dominion.thruhere.net>
+X-Mailer: git-send-email 1.6.1
+X-SA-Exim-Connect-IP: 74.125.78.147
+X-SA-Exim-Mail-From: koen.kooi@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Staging - time to end the current mess - now with patches
+Cc: Koen Kooi <koen@openembedded.org>, Koen Kooi <k-kooi@ti.com>
+Subject: [STABLE][PATCH 1/3] clutter.inc: rework armv7a machines a bit and add omap3517-evm to compatible machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,64 +48,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2009 12:16:34 -0000
-Content-Type: text/plain; charset="ISO-8859-2"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 04 Nov 2009 12:33:27 -0000
 
-Richard Purdie wrote:
+From: Koen Kooi <koen@openembedded.org>
 
-I agree with the new concept. I did not understand, why we need
-do_stage, if we can mangle and stage DESTDIR directly.
+Signed-off-by: Koen Kooi <k-kooi@ti.com>
 
-> do_package takes a copy of ${D} into ${PKGD} and then runs the functions
-> in PACKAGE_PREPROCESS_FUNCS which can alter this directory. The result
-> is then packaged.
+---
+ recipes/clutter/clutter.inc |   18 +++++-------------
+ 1 files changed, 5 insertions(+), 13 deletions(-)
 
-Maybe do_mangle and do_mangle_append or so may look better from an user
-aspect and easier to port (just move extra commands from do_stage to
-do_mangle_append). But PACKAGE_PREPROCESS_FUNCS should be OK as well.
-
-> * Any do_stage where we do an autotools_stage_all can just be deleted.
-
-And autotools_stage class will become just autotools.
-
-> * Native packages with delete do_install should not anymore.
-
-Thinking about it, do still make separate native recipes sense after
-this change? Most of them could recycle nearly the same recipe then.
-(Specially patched utilities would be an exception.)
-
-I can imagine, that native build will be built from the host recipe,
-just with a different setup.
-
-> * Any do_stage function which installs extra things compared to
-> do_install is very suspect and needs an explanation of why. Most likely
-> do_install should be fixed and do_stage then deleted.
-
-I agree. Shorter file list in do_stage might have had some sense to save
-few megabytes of unused stuff in staging dir, but it is a small profit
-from the double work.
-
-> * If do_stage really needs to do something other than what is in
-> do_install a function should be written to operate on SYSROOT_DESTDIR
-> and that function should be appended to SYSROOT_PREPROCESS_FUNCS. There
-> are some -native binary special cases which will need this but almost
-> everything should *not* need this.
-
-Example of special case may be guile. Mangling of guile-config must be
-done in a special way (guile-config is a guile script, not shell
-script). I cannot remember any other recipe, that needs it.
-
-> Comments and experiments with the branch welcome. If I get some time
-> I'll try and start adding a few conversions to the branch.
-
-It's a bit unrelated, but I would like to see temp/run.do_... script for
-splitting install dir to sub-package dirs and packages and
-temp/log.do_... with QA output that warns about unpackaged files.
-
+diff --git a/recipes/clutter/clutter.inc b/recipes/clutter/clutter.inc
+index e900c43..7bce3e2 100644
+--- a/recipes/clutter/clutter.inc
++++ b/recipes/clutter/clutter.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = "Clutter graphics library"
+ HOMEPAGE = "http://www.clutter-project.org/"
+ LICENSE = "LGPL"
+ 
+-COMPATIBLE_MACHINE = "(zylonite|mx31litekit|omap-3430ldp|omap-3430sdp|mx31ads|qemuarm|qemux86|ipodtouch|beagleboard|overo|omap3evm)"
++COMPATIBLE_MACHINE = "(zylonite|mx31litekit|omap-3430ldp|omap-3430sdp|mx31ads|qemuarm|qemux86|ipodtouch|omap3517-evm|beagleboard|overo|omap3evm)"
+ 
+ STDDEPENDS = "virtual/libx11 gtk-doc-native pango glib-2.0 libxfixes gtk+"
+ BASE_CONF = "--disable-gtk-doc ${@get_clutter_fpu_setting(bb, d)}"
+@@ -20,6 +20,10 @@ EXTRA_OECONF_mx31litekit = "${BASE_CONF} --with-flavour=eglnative"
+ PACKAGE_ARCH_mx31litekit = "${MACHINE_ARCH}"
+ LDFLAGS_append_mx31litekit = " -lpvrNULLWSEGL -lstdc++ "
+ 
++DEPENDS_armv7a = "${STDDEPENDS} libgles-omap3 tslib"
++EXTRA_OECONF_armv7a = "${BASE_CONF} --with-flavour=eglx --with-gles=2.0"
++PACKAGE_ARCH_armv7a = "${MACHINE_ARCH}"
++
+ DEPENDS_omap-3430ldp = "${STDDEPENDS} libgles-omap3 tslib"
+ EXTRA_OECONF_omap-3430ldp = "${BASE_CONF} --with-flavour=eglx"
+ PACKAGE_ARCH_omap-3430ldp = "${MACHINE_ARCH}"
+@@ -28,18 +32,6 @@ DEPENDS_omap-3430sdp = "${STDDEPENDS} libgles-omap3 tslib"
+ EXTRA_OECONF_omap-3430sdp = "${BASE_CONF} --with-flavour=eglx"
+ PACKAGE_ARCH_omap-3430sdp = "${MACHINE_ARCH}"
+ 
+-DEPENDS_beagleboard = "${STDDEPENDS} libgles-omap3 tslib"
+-EXTRA_OECONF_beagleboard = "${BASE_CONF} --with-flavour=eglx --with-gles=2.0"
+-PACKAGE_ARCH_beagleboard = "${MACHINE_ARCH}"
+-
+-DEPENDS_omap3evm = "${STDDEPENDS} libgles-omap3 tslib"
+-EXTRA_OECONF_omap3evm = "${BASE_CONF} --with-flavour=eglx --with-gles=2.0"
+-PACKAGE_ARCH_omap3evm = "${MACHINE_ARCH}"
+-
+-DEPENDS_overo = "${STDDEPENDS} libgles-omap3 tslib"
+-EXTRA_OECONF_overo = "${BASE_CONF} --with-flavour=eglx --with-gles=2.0"
+-PACKAGE_ARCH_overo = "${MACHINE_ARCH}"
+-
+ DEPENDS_mx31ads = "${STDDEPENDS} libgles-mx31 tslib"
+ EXTRA_OECONF_mx31ads = "${BASE_CONF} --with-flavour=eglnative"
+ PACKAGE_ARCH_mx31ads = "${MACHINE_ARCH}"
 -- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+1.6.1
 
 
 
