@@ -1,36 +1,26 @@
-Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1N5c5m-0000MB-Jb
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Nov 2009 10:23:53 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1N5c4E-0004HP-7W for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Nov 2009 04:22:14 -0500
-Date: Wed, 4 Nov 2009 04:21:50 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.0911040420180.20197@localhost>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N5cDb-0000eI-I4
+	for openembedded-devel@openembedded.org; Wed, 04 Nov 2009 10:31:58 +0100
+Received: (qmail 14809 invoked by uid 813007); 4 Nov 2009 09:30:44 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 4 Nov 2009 09:30:44 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 4 Nov 2009 10:30:44 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.32-rc5-00402-gb6727b1; KDE/4.3.2; x86_64; ;
+	)
+References: <alpine.LFD.2.00.0911040420180.20197@localhost>
+In-Reply-To: <alpine.LFD.2.00.0911040420180.20197@localhost>
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+Message-Id: <200911041030.45678.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] User Manual, correct "task-native-sdk" to "task-sdk-native"
+Subject: Re: [PATCH] User Manual, correct "task-native-sdk" to "task-sdk-native"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,42 +34,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2009 09:23:53 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 04 Nov 2009 09:31:58 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Dnia =C5=9Broda, 4 listopada 2009 o 10:21:50 Robert P. J. Day napisa=C5=82(=
+a):
+>   sorry, i missed this for the previous patch.  i'm assuming the
+> author really wanted to refer to "task-sdk-native", yes?
+
+I did not noticed that name was changed...
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
 
-Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
-
----
-
-  sorry, i missed this for the previous patch.  i'm assuming the
-author really wanted to refer to "task-sdk-native", yes?
-
-
-diff --git a/docs/usermanual/chapters/getting_oe.xml b/docs/usermanual/chapters/getting_oe.xml
-index e8d1f2c..aa4b36c 100644
---- a/docs/usermanual/chapters/getting_oe.xml
-+++ b/docs/usermanual/chapters/getting_oe.xml
-@@ -457,9 +457,9 @@ MACHINE = "om-gta01"</screen>
-             </varlistentry>
-
-             <varlistentry>
--              <term><literal>task-native-sdk</literal></term>
-+              <term><literal>task-sdk-native</literal></term>
-               <listitem>
--                <para>Mata-package for native (on-device) SDK.
-+                <para>Meta-package for native (on-device) SDK.
-                 </para>
-               </listitem>
-             </varlistentry>
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
 
 
