@@ -1,19 +1,19 @@
 Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1N5cjP-0003kJ-VB
-	for openembedded-devel@openembedded.org; Wed, 04 Nov 2009 11:04:51 +0100
+	(envelope-from <rpjday@crashcourse.ca>) id 1N5cmb-0003v3-De
+	for openembedded-devel@openembedded.org; Wed, 04 Nov 2009 11:08:08 +0100
 Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
 	([99.235.241.187] helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1N5ci1-0007PZ-Bc
-	for openembedded-devel@openembedded.org; Wed, 04 Nov 2009 05:03:21 -0500
-Date: Wed, 4 Nov 2009 05:03:00 -0500 (EST)
+	id 1N5clC-0007g6-Rs
+	for openembedded-devel@openembedded.org; Wed, 04 Nov 2009 05:06:39 -0500
+Date: Wed, 4 Nov 2009 05:06:18 -0500 (EST)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@localhost
 To: openembedded-devel@openembedded.org
 In-Reply-To: <200911040919.51657.marcin@juszkiewicz.com.pl>
-Message-ID: <alpine.LFD.2.00.0911040502481.29456@localhost>
+Message-ID: <alpine.LFD.2.00.0911040504580.29456@localhost>
 References: <alpine.LFD.2.00.0911040236430.13299@localhost>
 	<200911040919.51657.marcin@juszkiewicz.com.pl>
 User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
@@ -45,10 +45,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Nov 2009 10:04:51 -0000
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323328-880437346-1257329001=:29456"
+X-List-Received-Date: Wed, 04 Nov 2009 10:08:08 -0000
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323328-2032778085-1257329198=:29456"
 
---8323328-880437346-1257329001=:29456
+--8323328-2032778085-1257329198=:29456
 Content-Type: TEXT/PLAIN; charset=utf-8
 Content-Transfer-Encoding: QUOTED-PRINTABLE
 
@@ -66,19 +66,11 @@ On Wed, 4 Nov 2009, Marcin Juszkiewicz wrote:
 >
 > If that help I have somewhere srpm for bitbake 1.6.2.
 
-  with fedora, it's easier than rummaging around, looking for
-corresponding srpms.  if a binary package exists, then getting the
-corresponding source package usually involves just:
+  or (forgive me for not pointing this out in the earlier post),
+anyone can get the source rpm here:
 
-$ yumdownloader --source bitbake
-=2E.. snip ...
-bitbake-1.8.10-3.fc11.src.rpm
-$
-
-  so now i have the source rpm for bitbake 1.8.10.  if it looks easy
-to update it to 1.8.16, i'll take a shot at it, unless someone else
-wants to do the honours.  the source rpm is only 127K in size if
-anyone wants me to email it to them.
+ftp://ftp.nrc.ca/pub/systems/linux/redhat/fedora/linux//releases/11/Everyth=
+ing/source/SRPMS/bitbake-1.8.10-3.fc11.src.rpm
 
 rday
 --
@@ -96,4 +88,4 @@ Twitter:                                       http://twitter.com/rpjday
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
---8323328-880437346-1257329001=:29456--
+--8323328-2032778085-1257329198=:29456--
