@@ -1,35 +1,38 @@
 Received: from [209.85.219.209] (helo=mail-ew0-f209.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1N6B9O-0005PA-64
+	(envelope-from <cliff.brake@gmail.com>) id 1N6BPy-0000tg-Js
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Nov 2009 23:49:57 +0100
-Received: by ewy5 with SMTP id 5so516080ewy.12
+	Fri, 06 Nov 2009 00:07:05 +0100
+Received: by ewy5 with SMTP id 5so529024ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Nov 2009 14:48:40 -0800 (PST)
+	Thu, 05 Nov 2009 15:05:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=nzleVicw2xxnsVwtpE7tILjFkyPnPpA/ErAoBfako/I=;
-	b=r9XdHZiBuIw33vuRFBJ2tOBvWVr5td4tlq+V03ZYByls/esye6SGAadeAV3gwJbAB+
-	Qe3QJN7k2X2oEqZNIyEd0okED+Q9EyJg9UmbnLtE9DSBlVwgl05vJNjQKkkf3tZMHxgL
-	A9XC5i2QZjR1ieS7Z8wrRulquem10V5uOCvw4=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=xHC9uPBmPgqEdHJXjEiMcOAVDcTYl8wFnFoYyX1PN54=;
+	b=FFVl5DZedCX9EyZCTJRPLi9Mmjf26N89uEZsKiFEf+JMAECiQEoBYkxvawoh3r1Ao4
+	Qx8q3aM+EAU+VSUudcHSbB9lI8hrD6s2vDMcv+8qHrF7ZwbdT2tLwox8GS3t5hox6l96
+	ko40JftTB/MLxIzbwTRmYtSE8MMHu9rT1383s=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=d9wkYD1OjNmEpMvwTJSZXDcJwHh/PQsbeomZSzrpeSRMtpo8LR3xl2AmkBkZQ1i75h
-	WVFHZrVgT5CNgYXuAY+OiFPIgm5kIdG44N1sNJOWHHJdN9gY/EU4c4bAF6Ll7RQORVWo
-	K1HBlEw5c7+Q7tQ0AFN59ov6j6Pg/DtoCsF4E=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=ssCCnlulmqaEh1u8wyZcMife08pNU7NELCJM7ScNe6LgNxWwooqB1tRi3ADriPUP9n
+	Hw2AfXcTdoIQH9gluABsEQSNg0aqEzpTF+su5aJLEmH74pdUTTeF6zRPCBRmXFCZV3rj
+	6JPvB7iO94QkhT1adwElVslJXu3EstD1Zmp7M=
 MIME-Version: 1.0
-Received: by 10.216.89.131 with SMTP id c3mr1147271wef.197.1257457828484; Thu, 
-	05 Nov 2009 13:50:28 -0800 (PST)
-Date: Thu, 5 Nov 2009 16:50:28 -0500
-Message-ID: <f96d234e0911051350q20d9aca6id1b8e599cd7fa067@mail.gmail.com>
+Received: by 10.216.85.144 with SMTP id u16mr135397wee.3.1257462348404; Thu, 
+	05 Nov 2009 15:05:48 -0800 (PST)
+In-Reply-To: <f96d234e0911051350q20d9aca6id1b8e599cd7fa067@mail.gmail.com>
+References: <f96d234e0911051350q20d9aca6id1b8e599cd7fa067@mail.gmail.com>
+Date: Thu, 5 Nov 2009 18:05:48 -0500
+Message-ID: <f96d234e0911051505n6846f59fwcb6094c46afe32ff@mail.gmail.com>
 From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.219.209
 X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: server maint scheduled in 1hr
+Subject: Re: server maint scheduled in 1hr
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,18 +46,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2009 22:49:57 -0000
+X-List-Received-Date: Thu, 05 Nov 2009 23:07:05 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-The Melo server (git, cgit, etc) will be down for about 20 minutes between:
+Server should be back up.  We now have 1.5G RAM in the VM -- thanks OSUOSL!
 
-22:30 UTC, 5:30PM EST, 2:30PM PST
-and
-23:30 UTC, 6:30PM EST, 3:30PM PST
-
-To replace RAM.
-
-Thanks,
 Cliff
+
+On Thu, Nov 5, 2009 at 4:50 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
+> The Melo server (git, cgit, etc) will be down for about 20 minutes between:
+>
+> 22:30 UTC, 5:30PM EST, 2:30PM PST
+> and
+> 23:30 UTC, 6:30PM EST, 3:30PM PST
+>
+> To replace RAM.
+>
+> Thanks,
+> Cliff
+>
 
 
