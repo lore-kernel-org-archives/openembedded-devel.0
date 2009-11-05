@@ -1,42 +1,23 @@
-Received: from [160.45.40.10] (helo=mail.math.fu-berlin.de)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1N63Ba-00082u-7T
-	for openembedded-devel@openembedded.org; Thu, 05 Nov 2009 15:19:41 +0100
-Received: (qmail 11817 invoked from network); 5 Nov 2009 15:06:25 +0100
-Received: from luzin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.148)
-	by leibniz.math.fu-berlin.de with SMTP; 5 Nov 2009 15:06:25 +0100
-Received: (qmail 22771 invoked by uid 9804); 5 Nov 2009 15:06:26 +0100
-Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
-	by localhost with SMTP; 5 Nov 2009 15:06:17 +0100
-Received: (qmail 22754 invoked by uid 9804); 5 Nov 2009 15:06:17 +0100
-Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
-	(160.45.40.10)
-	by luzin.mi.fu-berlin.de with SMTP; 5 Nov 2009 15:06:17 +0100
-Received: (qmail 11800 invoked from network); 5 Nov 2009 15:06:17 +0100
-Received: from omsk.imp.fu-berlin.de (160.45.45.210)
-	by leibniz.math.fu-berlin.de with SMTP; 5 Nov 2009 14:06:17 -0000
-Received: from heinold by omsk.imp.fu-berlin.de with local (Exim 4.69 #1
-	(Debian)) id 1N62yf-0007JL-70
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Nov 2009 15:06:17 +0100
-Date: Thu, 5 Nov 2009 15:06:17 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N63eI-0003wR-Id
+	for openembedded-devel@openembedded.org; Thu, 05 Nov 2009 15:49:21 +0100
+Received: (qmail 22149 invoked by uid 813007); 5 Nov 2009 14:41:25 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO localhost.localdomain)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 5 Nov 2009 14:41:25 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091105140617.GA27537@mi.fu-berlin.de>
-References: <1257427464-316-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
-X-Envelope-Sender: heinold@mi.fu-berlin.de
-X-Virus-Scanned: by AMaViS
-	0.3.12pre7-L41+ClamAV[22757](NAI-uvscan@mi.fu-berlin.de)
-X-Remote-IP: 160.45.45.210
-MIME-Version: 1.0
-In-Reply-To: <1257427464-316-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-X-SA-Exim-Connect-IP: 160.45.40.10
-X-SA-Exim-Mail-From: heinold@mi.fu-berlin.de
+Date: Thu,  5 Nov 2009 15:41:16 +0100
+Message-Id: <1257432076-12239-1-git-send-email-marcin@juszkiewicz.com.pl>
+X-Mailer: git-send-email 1.6.5.2
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] boost-1.33.1: Corrected GNU_HASH error.
+Cc: Marcin Juszkiewicz <marcin@buglabs.net>
+Subject: [STABLE][PATCH] java.bbclass: fixed oe_jarinstall for broken symlinks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,16 +31,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2009 14:19:41 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 05 Nov 2009 14:49:22 -0000
 
-Hi,
+From: Marcin Juszkiewicz <marcin@buglabs.net>
 
-thanks for the patch, but I wonder who is using this older version. Mainly 1.3.36 is used.
-I prefer and started to fix the apps in oe which are using boost, to get working with 1.4 and
-would be much help if more people joins at this. So in the end we can remove all the 1.3 boost recipe.
+Code checked for existance of JAR file and if it was present then it had
+to be removed before symlinking to it. But it was not working sometimes
+so we forced symlinking.
 
-Bye Henning
+Proper fix is to check "does file exists or is a symlink" which we do
+now.
+
+Signed-off-by: Marcin Juszkiewicz <marcin@buglabs.net>
+---
+ classes/java.bbclass |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/classes/java.bbclass b/classes/java.bbclass
+index cacd2ce..b68035c 100644
+--- a/classes/java.bbclass
++++ b/classes/java.bbclass
+@@ -68,11 +68,11 @@ oe_jarinstall() {
+ 
+   # Creates symlinks out of the remaining arguments.
+   while [ "$#" -gt 0 ]; do
+-    if [ -e $dir/$1 ]; then
++    if [ -e $dir/$1 -o -h $dir/$1 ]; then
+       oewarn "file was in the way. removing:" $dir/$1
+       rm $dir/$1
+     fi
+-    ln -sf $destname $dir/$1
++    ln -s $destname $dir/$1
+     shift
+   done
+ }
+-- 
+1.6.5.2
+
+
+
 
 
