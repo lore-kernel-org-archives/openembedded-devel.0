@@ -1,34 +1,36 @@
-Received: from [209.85.219.209] (helo=mail-ew0-f209.google.com)
+Received: from [212.27.42.91] (helo=wmproxy1-g27.free.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1N5yYD-0006RK-7L
+	(envelope-from <alain2210@free.fr>) id 1N5yco-0006i6-0q
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Nov 2009 10:22:44 +0100
-Received: by ewy5 with SMTP id 5so2512570ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Nov 2009 01:21:28 -0800 (PST)
-Received: by 10.213.107.17 with SMTP id z17mr2749396ebo.10.1257412887696;
-	Thu, 05 Nov 2009 01:21:27 -0800 (PST)
-Received: from xora-eee (www.xora.org.uk [80.68.91.202])
-	by mx.google.com with ESMTPS id 24sm1673596eyx.45.2009.11.05.01.21.26
-	(version=SSLv3 cipher=RC4-MD5); Thu, 05 Nov 2009 01:21:27 -0800 (PST)
-Date: Thu, 5 Nov 2009 09:21:23 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091105092123.GB2213@xora-eee>
-References: <alpine.LFD.2.00.0911050014240.6944@localhost>
-	<20091105053459.GC30116@denix.org>
-	<20091105054827.GD30116@denix.org>
-	<alpine.LFD.2.00.0911050153290.19993@localhost>
-	<20091105082723.GA2213@xora-eee>
-	<alpine.LFD.2.00.0911050333270.17625@localhost>
+	Thu, 05 Nov 2009 10:27:29 +0100
+Received: from wmproxy1-g27.free.fr (localhost [127.0.0.1])
+	by wmproxy1-g27.free.fr (Postfix) with ESMTP id 32447359B;
+	Thu,  5 Nov 2009 10:26:15 +0100 (CET)
+Received: from UNKNOWN (imp3-g19.priv.proxad.net [172.20.243.133])
+	by wmproxy1-g27.free.fr (Postfix) with ESMTP id 1FF5E3590;
+	Thu,  5 Nov 2009 10:26:15 +0100 (CET)
+Received: by UNKNOWN (Postfix, from userid 0)
+	id 1F667E660CB3D; Thu,  5 Nov 2009 10:26:15 +0100 (CET)
+Received: from  ([82.123.143.222]) by imp.free.fr (IMP) with HTTP 
+	for <alain2210@172.20.243.55>; Thu, 05 Nov 2009 10:26:15 +0100
+Message-ID: <1257413175.4af29a371a827@imp.free.fr>
+Date: Thu, 05 Nov 2009 10:26:15 +0100
+From: Alain2210 <alain2210@free.fr>
+To: openembedded-devel@lists.openembedded.org, Phil Blundell <pb@reciva.com>
+References: <1254096967.4ac00047b8abb@imp.free.fr>
+	<200911031451.06266.holger+oe@freyther.de>
+	<1257256918.10421.111.camel@mill.internal.reciva.com>
+In-Reply-To: <1257256918.10421.111.camel@mill.internal.reciva.com>
 MIME-Version: 1.0
-In-Reply-To: <alpine.LFD.2.00.0911050333270.17625@localhost>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.219.209
-X-SA-Exim-Mail-From: dp@xora.org.uk
+User-Agent: Internet Messaging Program (IMP) 3.2.8
+X-Originating-IP: 82.123.143.222
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 212.27.42.91
+X-SA-Exim-Mail-From: alain2210@free.fr
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: where is the canonical OE web site these days?
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: xmonobut
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,47 +44,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2009 09:22:44 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 05 Nov 2009 09:27:29 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 05, 2009 at 03:39:26AM -0500, Robert P. J. Day wrote:
-> On Thu, 5 Nov 2009, Graeme Gregory wrote:
-> 
-> > On Thu, Nov 05, 2009 at 02:01:02AM -0500, Robert P. J. Day wrote:
-> > >   but glitches aside, a lot of that info is useful and should be more
-> > > obviously available.
+Hello,
+
+thanks for the answers.
+
+Selon Phil Blundell <pb@reciva.com>:
+
+> On Tue, 2009-11-03 at 14:51 +0100, Holger Hans Peter Freyther wrote:
+> > On Monday 28 September 2009 02:16:07 Alain2210 wrote:
+> > > Hello,
 > > >
-> > Obvious as in the advertised addresses of www.openembedded.org and
-> > www.openembedded.net? Im really confused at what you want.
-> 
->   no, *not* obvious at all since, if one browses over to the
-> (intuitively obvious URL of) openembedded.org, one ends up at
-> what appears to be linux-to-go.org.  once there, the link of "wiki
-> documentation" takes one to *someone's* idea of a wiki, while the top
-> level link to "OpenEmbedded" is currently broken, but if it worked, it
-> would take one to http://oe.linuxtogo.org/ (whatever that is supposed
-> to be).
-> 
->   there is no obvious hint that i can see that would direct readers
-> to openembedded.net, which takes one directly to *that* wiki.
-> 
->   this might all just be a result of misconfigured DNS, but having two
-> top-level openembedded domain names (openembedded.org and
-> openembedded.net) really will cause some confusion.
-> 
->   oh, wait, i just noticed that a simple "openembedded.org" will take
-> you to linuxtogo, while the more formal "www.openembedded.org" takes
-> you to the openembedded.net wiki.  i definitely think this needs some
-> reorg.
-> 
-Your making a whole lot of traffic about one simple DNS misconfiguration.
+> > > xmonobut segfault. I need this patch to get it works again.
+> >
+> > > -  unsigned char map[6];
+> > > +  unsigned char map[31];
+> > ...
+> > > +      buts =3D XGetPointerMapping(dpy, map, 32);
+> > ,,.
+> > > +      while((rst =3D XSetPointerMapping(dpy, map, 32)) =3D=3D Mapp=
+ingBusy);
+> >
+> > 31. vs 32... please send an updated patch
 
-www.openembedded.(net|org) is the canonical address. They lead to the
-most "correct" information we have. Philip has already said he will
-look at the DNS problem at OEDEM.
+Sorry for the mistake.
 
-Graeme
+> Looking at this patch again, I think it is just broken and (even aside
+> from the 31/32 thing) should not be applied.
 
+I have seen in the september answer that you says that xlib should be cor=
+rected.
+In fact, I do not understand the behaviour of XG/SetPointerMapping since =
+the
+third argument seems to be ignored in a certain sense.
+
+>
+> I guess the cause of the original segfault was that "buts" is set to a
+> value greater than six and hence the XSetPointerMapping() call runs off
+> the end of the array. However, the solution presented in the patch,
+> i.e. just ignoring the return value from XGetPointerMapping()
+> altogether, doesn't seem too good either since this will cause
+> XSetPointerMapping() to read uninitialised garbage from the balance of
+> the array.
+>
+> A minimal fix for the original crash would probably be to insert
+> something like:
+>
+> if (buts > sizeof(map))
+>   buts =3D sizeof(map);
+>
+> after the XGetPointerMapping() call.
+
+I will try this. (and will try to remember what was exactly the problem).
+
+> A slightly better fix would
+> perhaps be to make an initial call to XGetPointerMapping() with nmap=3D=
+0
+> to find out how many buttons are present, then to dynamically allocate
+> an array of the right size and read the mapping into it.
+
+Sorry, it is beyond my capabilities.
+
+
+Thanks,
+
+Alain
 
 
