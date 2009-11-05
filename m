@@ -1,35 +1,26 @@
-Received: from [72.14.220.158] (helo=fg-out-1718.google.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1N5yLr-0005sR-P2
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Nov 2009 10:09:58 +0100
-Received: by fg-out-1718.google.com with SMTP id d23so3854626fga.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Nov 2009 01:08:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=1qUyCdz96bn2VQlC52VgzwaLDqDxbsIhhXlUlx4oNnk=;
-	b=NLwfCn099/SunIdtNjdfh5LXP71pXuyv+xQiCy3vUIK6zCT10dYR0TFJhrxxElrWAX
-	wFJFm4lel1ELEd3j7npGzwigPsBtT/t03HSbWZADr6nExpJYfAefvAGlpeAwnolIvOf4
-	5VhwmcRHhZcNc/Df2Vb3jHW9aHbxcN9rWAEtA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=SgK1/yj/4GoghHlty0K7W1s3o1I2lpcTpRL9FW8l4kDV0U36IaYeqNOOiLpDSajVEx
-	SHSVH+qUtsbU8BVXnQNe51M78e9Ygbk9KxPk1UhpP3954A8CB6ssBtOF/8DrMsDk80lz
-	PamVgEN3mLIFrfQxKZLHEmhlq1gSpgINjvo+Y=
+	(envelope-from <philip@balister.org>) id 1N5yRO-000663-PT
+	for openembedded-devel@openembedded.org; Thu, 05 Nov 2009 10:15:42 +0100
+Received: (qmail 8803 invoked by uid 1003); 5 Nov 2009 09:14:25 -0000
+Received: from localhost (HELO ?192.168.0.4?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 5 Nov 2009 09:14:25 -0000
+Message-ID: <4AF2976F.9010003@balister.org>
+Date: Thu, 05 Nov 2009 09:14:23 +0000
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
+	Thunderbird/3.0b4
 MIME-Version: 1.0
-Received: by 10.239.182.158 with SMTP id q30mr285205hbg.23.1257412124528; Thu, 
-	05 Nov 2009 01:08:44 -0800 (PST)
-Date: Thu, 5 Nov 2009 10:08:44 +0100
-Message-ID: <c384c5ea0911050108q6bf87e5diae8fcf2800b263fe@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 72.14.220.158
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <alpine.LFD.2.00.0911050014240.6944@localhost>	<20091105053459.GC30116@denix.org>	<20091105054827.GD30116@denix.org>	<alpine.LFD.2.00.0911050153290.19993@localhost>
+	<20091105082723.GA2213@xora-eee>
+In-Reply-To: <20091105082723.GA2213@xora-eee>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Openembedded vs. OpenEmbedded
+Subject: Re: where is the canonical OE web site these days?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,22 +34,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2009 09:09:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 05 Nov 2009 09:15:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello,
+On 11/05/2009 08:27 AM, Graeme Gregory wrote:
+> On Thu, Nov 05, 2009 at 02:01:02AM -0500, Robert P. J. Day wrote:
+>>    but glitches aside, a lot of that info is useful and should be more
+>> obviously available.
+>>
+> Obvious as in the advertised addresses of www.openembedded.org and
+> www.openembedded.net? Im really confused at what you want.
 
-I noticed we have "Openembedded" on the web site (http://www.openembedded.org/)
-I really think this should "OpenEmbedded", with a capital E.
+openembedded.org used to re-direct to www.openembedded.org. Rather than 
+fix this, I'd like to get the mail sorted out so it works with a MX 
+record, then we can easily point openembedded.org at 
+www.openembedded.org, without depending on ltg to do the re-direct.
 
-Could someone fix this pls?
+Philip
 
-Last time I touched unlocked, edited and locked the wiki main page I
-was flamed for not locking it properly, so I dare not touch it again,
-unless someone can look along to verify me actions.
 
-Regard,
--- 
-Leon
+>
+> Graeme
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
