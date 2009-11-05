@@ -1,31 +1,38 @@
-Received: from [64.18.0.22] (helo=exprod5og111.obsmtp.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martyn.welch@gefanuc.com>) id 1N641I-0000zM-Bb
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1N64dU-0005ix-Qu for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Nov 2009 16:52:35 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N64MZ-00080h-Es
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Nov 2009 16:13:07 +0100
-Received: from source ([4.79.213.129]) (using TLSv1) by
-	exprod5ob111.postini.com ([64.18.4.12]) with SMTP
-	ID DSNKSvLrOOXES5uutb8TFPr5YjHD24JMGSQI@postini.com;
-	Thu, 05 Nov 2009 07:11:53 PST
-Received: from unknown (HELO alpmlip01.e2k.ad.ge.com) ([3.159.17.48])
-	by Alpmlip04.e2k.ad.ge.com with ESMTP; 05 Nov 2009 09:25:28 -0500
-Received: from es-j7s4d2j.amer.consind.ge.com (HELO [3.138.54.92])
-	([3.138.54.92])
-	by alpmlip01.e2k.ad.ge.com with ESMTP; 05 Nov 2009 09:25:28 -0500
-Message-ID: <4AF2E0C2.5010200@gefanuc.com>
-Date: Thu, 05 Nov 2009 14:27:14 +0000
-From: Martyn Welch <martyn.welch@gefanuc.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Thu, 05 Nov 2009 16:35:03 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Nov 2009 16:35:03 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Nov 2009 16:35:03 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <c384c5ea0911050108q6bf87e5diae8fcf2800b263fe@mail.gmail.com>
-	<1257420084.5426.0.camel@opal>
-In-Reply-To: <1257420084.5426.0.camel@opal>
-X-SA-Exim-Connect-IP: 64.18.0.22
-X-SA-Exim-Mail-From: martyn.welch@gefanuc.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 05 Nov 2009 16:31:16 +0100
+Message-ID: <hcur44$elg$2@ger.gmane.org>
+References: <1256849813-10538-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
+	<1257427111-32537-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <1257427111-32537-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Openembedded vs. OpenEmbedded
+Subject: Re: [PATCH] boost: more elaborate and correct usage of GCC atomicity.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,38 +46,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2009 15:13:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 05 Nov 2009 15:52:36 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Michael 'Mickey' Lauer wrote:
->  Am Donnerstag, den 05.11.2009, 10:08 +0100 schrieb Leon Woestenberg:
-> > Hello,
-> >
-> > I noticed we have "Openembedded" on the web site
-> > (http://www.openembedded.org/) I really think this should
-> > "OpenEmbedded", with a capital E.
-> >
-> > Could someone fix this pls?
+On 05-11-09 14:18, Przemyslaw Wesolek wrote:
 >
->  Done. Thanks for spotting.
+> Signed-off-by: Przemyslaw Wesolek<przemyslaw.wesolek@cs.put.poznan.pl>
+> ---
 >
->  :M:
+> This patch is based on upstream corrections spotted in 1.40 version.
+> They allow to properly compile Boost on both<4.2 and>=4.2 GCC, for
+> ARM machines.
+>
+> Applicable to both devel and stable.
 
-Missed one :-)
+Your patch seems to be based on an old (as in: the day before yesterday) 
+snapshot of OE. I added a different set of patches which do almost the 
+same, but keep proper atomic ops for armv6 and armv7a, while yours would 
+fall back to emulated atomic ops for all arm platforms.
 
-"How Openembedded fits in with your distribution"
+regards,
 
-Martyn
+Koen
 
--- 
-Martyn Welch MEng MPhil MIET (Principal Software Engineer)   
-T:+44(0)1327322748
-GE Fanuc Intelligent Platforms Ltd,        |Registered in England and Wales
-Tove Valley Business Park, Towcester,      |(3828642) at 100 Barbirolli 
-Square,
-Northants, NN12 6PF, UK T:+44(0)1327359444 |Manchester,M2 3AB  VAT:GB 
-927559189
+>
+>
+>   recipes/boost/boost_1.36.0.bb                      |    4 +++-
+>   recipes/boost/files/atomic_count_arm.patch         |   11 +++++++++++
+>   .../boost/files/atomic_count_gcc_atomicity.patch   |    7 +++++--
+>   3 files changed, 19 insertions(+), 3 deletions(-)
+>   create mode 100644 recipes/boost/files/atomic_count_arm.patch
+>
+> diff --git a/recipes/boost/boost_1.36.0.bb b/recipes/boost/boost_1.36.0.bb
+> index 140ab29..276ca9b 100644
+> --- a/recipes/boost/boost_1.36.0.bb
+> +++ b/recipes/boost/boost_1.36.0.bb
+> @@ -1,9 +1,11 @@
+>   include boost-36.inc
+>
+> -PR = "r6"
+> +PR = "r8"
+>
+>   SRC_URI = "${SOURCEFORGE_MIRROR}/boost/${BOOST_P}.tar.bz2 \
+>              file://arm-intrinsics.patch;patch=1 \
+> +           file://atomic_count_gcc_atomicity.patch;patch=1 \
+> +           file://atomic_count_arm.patch;patch=1 \
+>             "
+>
+>   BJAM_OPTS    = '${BJAM_TOOLS} \
+> diff --git a/recipes/boost/files/atomic_count_arm.patch b/recipes/boost/files/atomic_count_arm.patch
+> new file mode 100644
+> index 0000000..1017ebc
+> --- /dev/null
+> +++ b/recipes/boost/files/atomic_count_arm.patch
+> @@ -0,0 +1,11 @@
+> +--- boost_1_36_0/boost/detail/atomic_count.hpp.orig	2007-11-23 18:03:14.000000000 +0100
+> ++++ boost_1_36_0/boost/detail/atomic_count.hpp	2009-09-25 18:17:12.602907541 +0200
+> +@@ -101,7 +101,7 @@
+> +
+> + #  include<boost/detail/atomic_count_win32.hpp>
+> +
+> +-#elif defined( __GNUC__ )&&  ( __GNUC__ * 100 + __GNUC_MINOR__>= 401 )
+> ++#elif defined( __GNUC__ )&&  ( __GNUC__ * 100 + __GNUC_MINOR__>= 401 )&&  !defined( __arm__ )&&  !defined( __armel__ )
+> +
+> + #  include<boost/detail/atomic_count_sync.hpp>
+> +
+> diff --git a/recipes/boost/files/atomic_count_gcc_atomicity.patch b/recipes/boost/files/atomic_count_gcc_atomicity.patch
+> index 7d08e73..3b09a8a 100644
+> --- a/recipes/boost/files/atomic_count_gcc_atomicity.patch
+> +++ b/recipes/boost/files/atomic_count_gcc_atomicity.patch
+> @@ -2,12 +2,15 @@ Index: boost_1_33_1/boost/detail/atomic_count_gcc.hpp
+>   ===================================================================
+>   --- boost_1_33_1.orig/boost/detail/atomic_count_gcc.hpp	2008-05-01 20:43:45.000000000 +0200
+>   +++ boost_1_33_1/boost/detail/atomic_count_gcc.hpp	2008-05-01 20:43:55.000000000 +0200
+> -@@ -17,7 +17,7 @@
+> +@@ -17,7 +17,11 @@
+>    //  http://www.boost.org/LICENSE_1_0.txt)
+>    //
+>
+> --#include<bits/atomicity.h>
+> ++#if __GNUC__ * 100 + __GNUC_MINOR__>= 402
+>   +#include<ext/atomicity.h>
+> ++#else
+> + #include<bits/atomicity.h>
+> ++#endif
+>
+>    namespace boost
+>    {
+
 
 
 
