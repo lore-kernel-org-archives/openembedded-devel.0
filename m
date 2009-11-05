@@ -1,28 +1,41 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [150.254.30.30] (helo=libra.cs.put.poznan.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N6Ajo-0002Sk-Ik
-	for openembedded-devel@openembedded.org; Thu, 05 Nov 2009 23:23:31 +0100
-Received: (qmail 19590 invoked by uid 813007); 5 Nov 2009 22:22:17 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 5 Nov 2009 22:22:15 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <przemyslaw.wesolek@cs.put.poznan.pl>)
+	id 1N6Avy-0002yL-UQ for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Nov 2009 23:36:06 +0100
+Received: from kas30pipe.localhost (unknown [127.0.0.1])
+	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 1026D89;
+	Thu,  5 Nov 2009 22:34:49 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at cs.put.poznan.pl
+Received: from libra.cs.put.poznan.pl ([127.0.0.1])
+	by localhost (libra.cs.put.poznan.pl [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id dzTisgv7v7se; Thu,  5 Nov 2009 23:34:48 +0100 (CET)
+Received: from localhost.localdomain (idss-pw.cs.put.poznan.pl [150.254.31.31])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id C371985;
+	Thu,  5 Nov 2009 23:34:48 +0100 (CET)
+From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 5 Nov 2009 23:22:07 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.32-rc5-00402-gb6727b1; KDE/4.3.2; x86_64; ;
-	)
-References: <200910262125.58992.david.lanzendoerfer@o2s.ch>
-	<1257451262.4676.6.camel@andromeda>
-	<200911052316.23264.david.lanzendoerfer@o2s.ch>
-In-Reply-To: <200911052316.23264.david.lanzendoerfer@o2s.ch>
-MIME-Version: 1.0
-Message-Id: <200911052322.08199.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Date: Thu,  5 Nov 2009 23:36:52 +0100
+Message-Id: <1257460612-4885-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
+X-Mailer: git-send-email 1.6.3.3
+X-SpamTest-Envelope-From: przemyslaw.wesolek@cs.put.poznan.pl
+X-SpamTest-Group-ID: 00000000
+X-SpamTest-Info: Profiles 9691 [Sep 17 2009]
+X-SpamTest-Info: {received from trusted sender
+	<przemyslaw.wesolek@cs.put.poznan.pl>: common white list}
+X-SpamTest-Method: white email list
+X-SpamTest-Rate: 0
+X-SpamTest-Status: Trusted
+X-SpamTest-Status-Extended: trusted
+X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0278], KAS30/Release
+X-SA-Exim-Connect-IP: 150.254.30.30
+X-SA-Exim-Mail-From: przemyslaw.wesolek@cs.put.poznan.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] MokoTouch
+Subject: [PATCH] usermanual: corrected a typo in XML tag.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,74 +49,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2009 22:23:31 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 05 Nov 2009 22:36:06 -0000
 
-Dnia czwartek, 5 listopada 2009 o 23:16:19 David Lanzend=F6rfer napisa=B3(a=
-):
+The typo made XML invalid, two openning <literal> tags were specified
+instead of <literal></literal> pair.
 
-> +++ b/recipes/mokotouch/mokotouch-apps-helloworld_2.bb
-> @@ -0,0 +1,24 @@
-> +require mokotouch.inc
-> +
-> +DEPENDS =3D "mokotouch-coreservices-mokotouch"
-> +
-> +do_configure(){
-> +cd ${S}/MokoTouch/Apps/HelloWorld
-> +rm UIKit.framework
-> +ln -s "${S}/MokoTouch/Frameworks/UIKit/" UIKit.framework
-> +${OE_QMAKE_QMAKE} HelloWorld.pro
-> +}
-> +
-> +do_compile(){
-> +cd ${S}/MokoTouch/Apps/HelloWorld
-> +oe_runmake
-> +}
-> +
-> +do_install(){
-> +install -d "${D}/${libdir}"
-> +install "${S}/MokoTouch/Apps/HelloWorld/BUILD/App/libHelloWorld.so.1.0.0"
->  "${D}/${libdir}/libHelloWorld.so.1.0.0" +install
->  "${S}/MokoTouch/Apps/HelloWorld/BUILD/App/libHelloWorld.so.1.0.0"
->  "${D}/${libdir}/libHelloWorld.so.1.0" +install
->  "${S}/MokoTouch/Apps/HelloWorld/BUILD/App/libHelloWorld.so.1.0.0"
->  "${D}/${libdir}/libHelloWorld.so.1" +install
->  "${S}/MokoTouch/Apps/HelloWorld/BUILD/App/libHelloWorld.so.1.0.0"
->  "${D}/${libdir}/libHelloWorld.so" +}
+Signed-off-by: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
+---
+ docs/usermanual/chapters/getting_oe.xml |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-My version of that recipe:
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
-require mokotouch.inc
-
-MTCOMPONENT =3D "HelloWorld"
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
-
-Rest of code should be in mokotouch.inc as you only change component name i=
-n=20
-all recipes. Each and each repeats same errors:
-
-=2D no setting of ${S} but use of "cd somewhere to make it build"
-=2D big duplication of code
-=2D no use of qmake* bbclasses which remove need of do_configure/do_compile=
- in
-  your recipes
-=2D again waste of space by strange installation of libraries (fix loader t=
-o use
-  *.so maybe and skip all *.so.1.0.0 stuff?)
-
-Still nack from me.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+diff --git a/docs/usermanual/chapters/getting_oe.xml b/docs/usermanual/chapters/getting_oe.xml
+index 4ec5fec..c71f32d 100644
+--- a/docs/usermanual/chapters/getting_oe.xml
++++ b/docs/usermanual/chapters/getting_oe.xml
+@@ -31,7 +31,7 @@ $ <command>cd</command> $OEBASE</screen>
+     </para>
+ 
+ 	<para>The <varname>$OEBASE</varname> will also contain both of the
+-	<literal>bitbake/<literal> and <literal>openembedded/</literal> directories.
++	<literal>bitbake/</literal> and <literal>openembedded/</literal> directories.
+ 	These will be discussed in <xref linkend="gettingoe_getting_bitbake"/> and
+ 	<xref linkend="gettingoe_getting_oe"/>.
+ 	</para>
+-- 
+1.6.3.3
 
 
 
