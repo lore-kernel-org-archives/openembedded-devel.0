@@ -1,41 +1,27 @@
-Received: from [209.85.223.190] (helo=mail-iw0-f190.google.com)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1N6ANp-0001s5-77
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Nov 2009 23:00:48 +0100
-Received: by iwn28 with SMTP id 28so391214iwn.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Nov 2009 13:59:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=YUhwB4LlwkuKcaAkfVvXTFrVY9Zm/nP9fSbwsfWjbDI=;
-	b=Ug9WIoB4ynMKJIz3QER6d/YZmmAiqzzdh7vYw/bsm1bCXzgJni8wopIYX3qV2Em9T9
-	U7nEfTRE6x0pE9NjGjSNwgudyD/kgBur4hmt9cP2LjXyscD+yFHlbeA7XeYUBo43meye
-	fZJL0Aaei1/4erY1N+v10bMiTO6ixBwUn1ODs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=n4/rOUflvZg5vAEy29/wgkQ3VexEXkYajq8SEagEeE3waVlPnAx8/4KDrH4VhLB6fq
-	VTyyMYeMttyV2BeyXN9JLWJxfgYdEK9B/2LbOJA6e9xtmbQ+5MwXu40wXSouxncCep0a
-	i1IKri6KL4GxfD+r/ysPdlTp4RAUSiPQT6TYM=
-MIME-Version: 1.0
-Received: by 10.231.161.138 with SMTP id r10mr564038ibx.34.1257458371102; Thu, 
-	05 Nov 2009 13:59:31 -0800 (PST)
-In-Reply-To: <B44D4D5BF344094DABB900C4E0F6E3533945A88B83@srv02.nortechonline.net>
-References: <B44D4D5BF344094DABB900C4E0F6E3533945A88B7F@srv02.nortechonline.net>
-	<19c1b8a90911041606w78796323p8077fc6f6752fc90@mail.gmail.com>
-	<B44D4D5BF344094DABB900C4E0F6E3533945A88B83@srv02.nortechonline.net>
-Date: Thu, 5 Nov 2009 13:59:31 -0800
-Message-ID: <19c1b8a90911051359m74be846cmd490e13506872e50@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N6AXn-0004rT-6E
+	for openembedded-devel@openembedded.org; Thu, 05 Nov 2009 23:11:06 +0100
+Received: (qmail 25927 invoked by uid 813007); 5 Nov 2009 22:09:50 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 5 Nov 2009 22:09:48 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.190
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Thu, 5 Nov 2009 23:09:38 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.32-rc5-00402-gb6727b1; KDE/4.3.2; x86_64; ;
+	)
+References: <200910222339.32881.david.lanzendoerfer@o2s.ch>
+	<1257451160.4676.5.camel@andromeda> <hcvgbb$tc7$1@ger.gmane.org>
+In-Reply-To: <hcvgbb$tc7$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200911052309.39050.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Mono
+Subject: Re: Patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,71 +35,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2009 22:00:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 05 Nov 2009 22:11:10 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 5, 2009 at 1:20 PM, Hodgson, Simon
-<Simon.Hodgson@nortechonline.co.uk> wrote:
-> _______________________________________
-> From: openembedded-devel-bounces@lists.openembedded.org [openembedded-dev=
-el-bounces@lists.openembedded.org] On Behalf Of Khem Raj [raj.khem@gmail.co=
-m]
-> Sent: 05 November 2009 00:06
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] Mono
->
-> On Wed, Nov 4, 2009 at 12:11 PM, Hodgson, Simon
-> <Simon.Hodgson@nortechonline.co.uk> wrote:
->> I've built Mono for OpenEmbedded to run on an arm processor. But when I =
-try to run just a simple Hello World test I get:
->>
->> mini-codegen.c:1073:mono_local_regalloc: assertion failed: (ins->dreg !=
-=3D -1)
->>
->> Does anyone have any suggestion as to what I might be doing wrong?
->>
->> mono -V produces:
->> root@at91sam9g20ek:~# mono -V
->> Mono JIT compiler version 2.4.2.3 (tarball Tue Nov =C2=A03 03:08:58 EST =
-2009)
->> Copyright (C) 2002-2008 Novell, Inc and Contributors. www.mono-project.c=
-om
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0TLS: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 norma=
-l
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0GC: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
-Included Boehm (with typed GC)
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0SIGSEGV: =C2=A0 =C2=A0 =C2=A0 normal
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0Notifications: epoll
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0Architecture: =C2=A0armel,vfp
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0Disabled: =C2=A0 =C2=A0 =C2=A0none
->>
->> Is there anymore info perhaps I can provide?
->
-> Can you apply the attached patch then rebuild mono and retry your test.
->
-> Thanks
->
-> -Khem
->
->
-> Sorry for being a bit dense, but where should I apply this? It appears to=
- patch the receipe and the mono source, is that correct? Do I need to run p=
-atch twice in each directory?
+Dnia czwartek, 5 listopada 2009 o 22:33:31 Koen Kooi napisa=C5=82(a):
+> No, if your machine requires a special format you should use +=3D, that=20
+> way you get the stuff in local.conf and the thing the machine requires.
 
-you can cd into (top of your oe source tree) say openembedded/ then do
+Exactly - I am tired of builds which ends only in jffs2 when I want to chec=
+k=20
+rootfs contents after doing multimachine nightly build.
 
-patch -p1 < this.patch
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
->
-> Thanks
->
->
-> Simon
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
 
 
