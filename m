@@ -1,37 +1,28 @@
-Received: from [150.254.30.30] (helo=libra.cs.put.poznan.pl)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <przemyslaw.wesolek@cs.put.poznan.pl>)
-	id 1N6Az5-00035S-NX for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Nov 2009 23:39:18 +0100
-Received: from kas30pipe.localhost (unknown [127.0.0.1])
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 07C648E
+	(envelope-from <mickey@vanille-media.de>) id 1N6B3A-00052q-DA
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Nov 2009 23:43:31 +0100
+Received: from [192.168.1.105] (e180132129.adsl.alicedsl.de [85.180.132.129])
+	by drlauer-research.com (Postfix) with ESMTP id 1F0D6584DE2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Nov 2009 22:38:01 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at cs.put.poznan.pl
-Received: from libra.cs.put.poznan.pl ([127.0.0.1])
-	by localhost (libra.cs.put.poznan.pl [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id AMY8xzfa8aE6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Nov 2009 23:38:00 +0100 (CET)
-Received: from [192.168.0.100] (103-215.echostar.pl [213.156.103.215])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 3EEB38B
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Nov 2009 23:38:00 +0100 (CET)
-Message-ID: <4AF353C8.80904@cs.put.poznan.pl>
-Date: Thu, 05 Nov 2009 23:38:00 +0100
-From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Fri,  6 Nov 2009 00:27:43 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0278], KAS30/Release
-X-SpamTest-Info: Not protected
-X-SA-Exim-Connect-IP: 150.254.30.30
-X-SA-Exim-Mail-From: przemyslaw.wesolek@cs.put.poznan.pl
+In-Reply-To: <200911052309.39050.marcin@juszkiewicz.com.pl>
+References: <200910222339.32881.david.lanzendoerfer@o2s.ch>
+	<1257451160.4676.5.camel@andromeda> <hcvgbb$tc7$1@ger.gmane.org>
+	<200911052309.39050.marcin@juszkiewicz.com.pl>
+Organization: Vanille-Media
+Date: Thu, 05 Nov 2009 23:42:11 +0100
+Message-ID: <1257460931.4676.9.camel@andromeda>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: menuconfig task for kernels
+Subject: Re: Patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,34 +36,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2009 22:39:18 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 05 Nov 2009 22:43:31 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Am Donnerstag, den 05.11.2009, 23:09 +0100 schrieb Marcin Juszkiewicz:
+> Dnia czwartek, 5 listopada 2009 o 22:33:31 Koen Kooi napisa=C5=82(a):
+> > No, if your machine requires a special format you should use +=3D, th=
+at=20
+> > way you get the stuff in local.conf and the thing the machine require=
+s.
+>=20
+> Exactly - I am tired of builds which ends only in jffs2 when I want to =
+check=20
+> rootfs contents after doing multimachine nightly build.
 
-today I decided to modify the kernel compiled by OE. Accidentally, in
-the same time a person on IRC pointed out problems with that. After some
-investigation we discovered that menuconfig task in kernels is somewhat
-misleading, if not broken.
+Right. +=3D sounds good.
 
-The order of tasks to do menuconfig is, more or less: fetch, patch,
-menuconfig. It means that when menuconfig is run, there is no .config*
-files in linux build dir, and generated .config is far different than
-defconfig resulting from applying OE patches.
+--=20
+:M:
 
-The order for correct configuring of Linux is: fetch, patch, configure,
-so I tried:
-
-  1. bitbake virtual/kernel -c configure
-  2. bitbake virtual/kernel -c menuconfig
-  3. bitbake virtual/kernel
-
-and this allowed me to apply my local changes to OE-proposed .config.
-
-Is this the "right" way to do? If so, maybe menuconfig should be added
-as 'after do_configure', instead of 'after do_patch'?
-
-Przemek
 
 
