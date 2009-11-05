@@ -1,27 +1,38 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1N8T65-0000yW-Lz
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 07:24:00 +0100
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id B32AD1B10C04
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 06:33:29 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	(envelope-from <rpjday@crashcourse.ca>) id 1N8TG9-0002HR-NU
+	for openembedded-devel@openembedded.org; Thu, 12 Nov 2009 07:34:24 +0100
+Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
+	([174.113.191.234] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1N645m-0003y2-TR
+	for openembedded-devel@openembedded.org; Thu, 05 Nov 2009 10:17:43 -0500
+Date: Thu, 5 Nov 2009 10:17:17 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Nov 2009 07:22:09 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <alpine.LFD.2.00.0911120045170.1265@localhost>
-	<200911120656.41249.holger+oe@freyther.de>
-In-Reply-To: <200911120656.41249.holger+oe@freyther.de>
+In-Reply-To: <4AF2EAF3.5020808@cs.put.poznan.pl>
+Message-ID: <alpine.LFD.2.00.0911051014270.7161@localhost>
+References: <1257427464-316-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
+	<20091105140617.GA27537@mi.fu-berlin.de>
+	<4AF2EAF3.5020808@cs.put.poznan.pl>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
-Message-Id: <200911120722.09166.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: xterm: either fix it, or remove it. please.
+Subject: Re: [PATCH] boost-1.33.1: Corrected GNU_HASH error.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,26 +46,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 06:24:00 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 12 Nov 2009 06:34:25 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Thursday 12 November 2009 06:56:41 Holger Hans Peter Freyther wrote:
-> On Thursday 12 November 2009 06:47:22 Robert P. J. Day wrote:
-> >   seriously, either the build of xterm_207 should be fixed, or that
-> > package should be dropped in its entirety.  it's been at least three
-> > weeks since i pointed out that it doesn't build, and even explained in
-> > detail *why* it doesn't build and how to fix it.  to no avail.
-> >
-> >   so, a humble suggestion -- either fix it, or remove it from OE
-> > entirely.
-> 
-> Did you attempt to create a patch?
+On Thu, 5 Nov 2009, Przemyslaw Wesolek wrote:
 
-and on top of that it...it builds here... creates a ipk with the xterm binary 
-in it. So I don't see the need to remove the recipe.
+> Henning Heinold wrote:
+> > thanks for the patch, but I wonder who is using this older
+> > version. Mainly 1.3.36 is used.
+>
+> Did you mean 1.36?
+>
+> I agree, the older versions look like unmaintained for a long time.
 
-z.
+  if you go to boost's home page, they don't even *list* versions
+earlier than 1.36:
+
+  http://www.boost.org/users/news/
+
+that's generally a good indication that it's time to start
+deprecating.  and there's already a beta version of 1.41.
+
+rday
+--
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
