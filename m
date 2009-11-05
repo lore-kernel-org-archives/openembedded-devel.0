@@ -1,27 +1,42 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+Received: from [150.254.30.30] (helo=libra.cs.put.poznan.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N63qX-0002j5-E4
-	for openembedded-devel@openembedded.org; Thu, 05 Nov 2009 16:02:00 +0100
-Received: (qmail 28365 invoked by uid 813007); 5 Nov 2009 14:34:04 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 5 Nov 2009 14:34:04 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 5 Nov 2009 15:34:06 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.32-rc5-00402-gb6727b1; KDE/4.3.2; x86_64; ;
-	)
-References: <1254776922-10892-1-git-send-email-marcin@juszkiewicz.com.pl>
-	<1254818412.9214.107.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1254818412.9214.107.camel@lenovo.internal.reciva.com>
+	(envelope-from <przemyslaw.wesolek@cs.put.poznan.pl>)
+	id 1N63sT-0000Zi-N0 for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Nov 2009 16:04:00 +0100
+Received: from kas30pipe.localhost (unknown [127.0.0.1])
+	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 2369D88
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Nov 2009 15:02:44 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at cs.put.poznan.pl
+Received: from libra.cs.put.poznan.pl ([127.0.0.1])
+	by localhost (libra.cs.put.poznan.pl [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id H0d3Ra0tv36s
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Nov 2009 16:02:43 +0100 (CET)
+Received: from [150.254.31.31] (idss-pw.cs.put.poznan.pl [150.254.31.31])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id E05DE85
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Nov 2009 16:02:43 +0100 (CET)
+Message-ID: <4AF2E98E.8070309@cs.put.poznan.pl>
+Date: Thu, 05 Nov 2009 16:04:46 +0100
+From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
+Organization: Poznan University of Technology
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-Message-Id: <200911051534.07348.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+To: openembedded-devel@lists.openembedded.org
+References: <1257427464-316-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
+	<200911051440.42702.holger+oe@freyther.de>
+In-Reply-To: <200911051440.42702.holger+oe@freyther.de>
+X-Enigmail-Version: 0.96.0
+X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0278], KAS30/Release
+X-SpamTest-Info: Not protected
+X-SA-Exim-Connect-IP: 150.254.30.30
+X-SA-Exim-Mail-From: przemyslaw.wesolek@cs.put.poznan.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [STABLE][PATCH] java.bbclass: Use force (-f) for ln (suggested by Marcin).
+Subject: Re: [PATCH] boost-1.33.1: Corrected GNU_HASH error.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,39 +50,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2009 15:02:00 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 05 Nov 2009 15:04:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Dnia wtorek, 6 pa=C5=BAdziernika 2009 o 10:40:12 Phil Blundell napisa=C5=82=
-(a):
-> On Mon, 2009-10-05 at 23:08 +0200, Marcin Juszkiewicz wrote:
-> > @@ -72,7 +72,7 @@ oe_jarinstall() {
-> >        oewarn "file was in the way. removing:" $dir/$1
-> >        rm $dir/$1
-> >      fi
-> > -    ln -s $destname $dir/$1
-> > +    ln -sf $destname $dir/$1
-> >      shift
-> >    done
-> >  }
->=20
-> What's the reason for the -f argument?  If the target file already
-> exists then it seems like that "rm" should already take care of it.
+Holger Hans Peter Freyther wrote:
+> On Thursday 05 November 2009 14:24:24 you wrote:
+>> Signed-off-by: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
+> 
+> Looks good. but if you change a .inc file you need to bump the PR of
+> every user.
 
-=46inally debugged it. "ln -sf" was needed if $dir/$1 was broken symlink. I=
- have=20
-better fix for that thanks to Thomas Horsten and will push it to .dev and t=
-hen=20
-request for stable.
+1.33 is the only user.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+> In this case it makes sense to convert it to the file pr scheme.
+> 
 
+What is that? I see neither FILE_PR nor INC_PR -- which was mentioned on
+IRC -- in OE manual.
+
+Przemek
 
 
 
