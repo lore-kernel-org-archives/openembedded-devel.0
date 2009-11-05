@@ -1,42 +1,31 @@
-Received: from [150.254.30.30] (helo=libra.cs.put.poznan.pl)
+Received: from [64.18.0.22] (helo=exprod5og111.obsmtp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <przemyslaw.wesolek@cs.put.poznan.pl>)
-	id 1N640C-0000td-Ey for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Nov 2009 16:11:59 +0100
-Received: from kas30pipe.localhost (unknown [127.0.0.1])
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id E6EF884
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Nov 2009 15:10:42 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at cs.put.poznan.pl
-Received: from libra.cs.put.poznan.pl ([127.0.0.1])
-	by localhost (libra.cs.put.poznan.pl [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id l-oAwXNOqv2N
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Nov 2009 16:10:42 +0100 (CET)
-Received: from [150.254.31.31] (idss-pw.cs.put.poznan.pl [150.254.31.31])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 8896D82
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Nov 2009 16:10:42 +0100 (CET)
-Message-ID: <4AF2EB6D.3090209@cs.put.poznan.pl>
-Date: Thu, 05 Nov 2009 16:12:45 +0100
-From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
-Organization: Poznan University of Technology
+	(envelope-from <martyn.welch@gefanuc.com>) id 1N641I-0000zM-Bb
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Nov 2009 16:13:07 +0100
+Received: from source ([4.79.213.129]) (using TLSv1) by
+	exprod5ob111.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKSvLrOOXES5uutb8TFPr5YjHD24JMGSQI@postini.com;
+	Thu, 05 Nov 2009 07:11:53 PST
+Received: from unknown (HELO alpmlip01.e2k.ad.ge.com) ([3.159.17.48])
+	by Alpmlip04.e2k.ad.ge.com with ESMTP; 05 Nov 2009 09:25:28 -0500
+Received: from es-j7s4d2j.amer.consind.ge.com (HELO [3.138.54.92])
+	([3.138.54.92])
+	by alpmlip01.e2k.ad.ge.com with ESMTP; 05 Nov 2009 09:25:28 -0500
+Message-ID: <4AF2E0C2.5010200@gefanuc.com>
+Date: Thu, 05 Nov 2009 14:27:14 +0000
+From: Martyn Welch <martyn.welch@gefanuc.com>
 User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <200911051440.42702.holger+oe@freyther.de>
-	<1257433258-3265-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
-In-Reply-To: <1257433258-3265-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
-X-Enigmail-Version: 0.96.0
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0278], KAS30/Release
-X-SpamTest-Info: Not protected
-X-SA-Exim-Connect-IP: 150.254.30.30
-X-SA-Exim-Mail-From: przemyslaw.wesolek@cs.put.poznan.pl
+References: <c384c5ea0911050108q6bf87e5diae8fcf2800b263fe@mail.gmail.com>
+	<1257420084.5426.0.camel@opal>
+In-Reply-To: <1257420084.5426.0.camel@opal>
+X-SA-Exim-Connect-IP: 64.18.0.22
+X-SA-Exim-Mail-From: martyn.welch@gefanuc.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] boost-1.33.1: Corrected GNU_HASH QA error.
+Subject: Re: Openembedded vs. OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,13 +39,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2009 15:11:59 -0000
-Content-Type: text/plain; charset=ISO-8859-2
+X-List-Received-Date: Thu, 05 Nov 2009 15:13:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Sorry for multiple re-sends, I was being taught by Holger on correct
-commit messages. :)
+Michael 'Mickey' Lauer wrote:
+>  Am Donnerstag, den 05.11.2009, 10:08 +0100 schrieb Leon Woestenberg:
+> > Hello,
+> >
+> > I noticed we have "Openembedded" on the web site
+> > (http://www.openembedded.org/) I really think this should
+> > "OpenEmbedded", with a capital E.
+> >
+> > Could someone fix this pls?
+>
+>  Done. Thanks for spotting.
+>
+>  :M:
 
-Przemek
+Missed one :-)
+
+"How Openembedded fits in with your distribution"
+
+Martyn
+
+-- 
+Martyn Welch MEng MPhil MIET (Principal Software Engineer)   
+T:+44(0)1327322748
+GE Fanuc Intelligent Platforms Ltd,        |Registered in England and Wales
+Tove Valley Business Park, Towcester,      |(3828642) at 100 Barbirolli 
+Square,
+Northants, NN12 6PF, UK T:+44(0)1327359444 |Manchester,M2 3AB  VAT:GB 
+927559189
+
 
 
