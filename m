@@ -1,43 +1,27 @@
-Received: from [150.254.30.30] (helo=libra.cs.put.poznan.pl)
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <przemyslaw.wesolek@cs.put.poznan.pl>)
-	id 1N63oq-0005p8-Ht for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Nov 2009 16:00:17 +0100
-Received: from kas30pipe.localhost (unknown [127.0.0.1])
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id F32708B;
-	Thu,  5 Nov 2009 14:58:58 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at cs.put.poznan.pl
-Received: from libra.cs.put.poznan.pl ([127.0.0.1])
-	by localhost (libra.cs.put.poznan.pl [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id xT0P1q0wmLBy; Thu,  5 Nov 2009 15:58:58 +0100 (CET)
-Received: from localhost.localdomain (idss-pw.cs.put.poznan.pl [150.254.31.31])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id BC23688;
-	Thu,  5 Nov 2009 15:58:58 +0100 (CET)
-From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N63qX-0002j5-E4
+	for openembedded-devel@openembedded.org; Thu, 05 Nov 2009 16:02:00 +0100
+Received: (qmail 28365 invoked by uid 813007); 5 Nov 2009 14:34:04 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 5 Nov 2009 14:34:04 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Nov 2009 16:00:58 +0100
-Message-Id: <1257433258-3265-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <200911051440.42702.holger+oe@freyther.de>
-References: <200911051440.42702.holger+oe@freyther.de>
-X-SpamTest-Envelope-From: przemyslaw.wesolek@cs.put.poznan.pl
-X-SpamTest-Group-ID: 00000000
-X-SpamTest-Info: Profiles 9691 [Sep 17 2009]
-X-SpamTest-Info: {received from trusted sender
-	<przemyslaw.wesolek@cs.put.poznan.pl>: common white list}
-X-SpamTest-Method: white email list
-X-SpamTest-Rate: 0
-X-SpamTest-Status: Trusted
-X-SpamTest-Status-Extended: trusted
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0278], KAS30/Release
-X-SA-Exim-Connect-IP: 150.254.30.30
-X-SA-Exim-Mail-From: przemyslaw.wesolek@cs.put.poznan.pl
+Date: Thu, 5 Nov 2009 15:34:06 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.32-rc5-00402-gb6727b1; KDE/4.3.2; x86_64; ;
+	)
+References: <1254776922-10892-1-git-send-email-marcin@juszkiewicz.com.pl>
+	<1254818412.9214.107.camel@lenovo.internal.reciva.com>
+In-Reply-To: <1254818412.9214.107.camel@lenovo.internal.reciva.com>
+MIME-Version: 1.0
+Message-Id: <200911051534.07348.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] boost-1.33.1: Corrected GNU_HASH QA error.
+Subject: Re: [STABLE][PATCH] java.bbclass: Use force (-f) for ln (suggested by Marcin).
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,49 +35,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2009 15:00:18 -0000
+X-List-Received-Date: Thu, 05 Nov 2009 15:02:00 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-boost 1.33.1 recipe ignores LDFLAGS set by OE, including --hash-style.
-In result package_qa task issues error.
+Dnia wtorek, 6 pa=C5=BAdziernika 2009 o 10:40:12 Phil Blundell napisa=C5=82=
+(a):
+> On Mon, 2009-10-05 at 23:08 +0200, Marcin Juszkiewicz wrote:
+> > @@ -72,7 +72,7 @@ oe_jarinstall() {
+> >        oewarn "file was in the way. removing:" $dir/$1
+> >        rm $dir/$1
+> >      fi
+> > -    ln -s $destname $dir/$1
+> > +    ln -sf $destname $dir/$1
+> >      shift
+> >    done
+> >  }
+>=20
+> What's the reason for the -f argument?  If the target file already
+> exists then it seems like that "rm" should already take care of it.
 
-This patch fixes the recipe by appending OE's specifics to compiler
-flags.
+=46inally debugged it. "ln -sf" was needed if $dir/$1 was broken symlink. I=
+ have=20
+better fix for that thanks to Thomas Horsten and will push it to .dev and t=
+hen=20
+request for stable.
 
-This only affects 1.33, as newer versions of boost don't use boost.inc.
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Signed-off-by: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
----
- recipes/boost/boost.inc       |    3 +++
- recipes/boost/boost_1.33.1.bb |    2 +-
- 2 files changed, 4 insertions(+), 1 deletions(-)
-
-diff --git a/recipes/boost/boost.inc b/recipes/boost/boost.inc
-index 80635b0..8b38a5e 100644
---- a/recipes/boost/boost.inc
-+++ b/recipes/boost/boost.inc
-@@ -77,6 +77,9 @@ FILES_${PN}-dev = "${includedir} ${libdir}/libboost_*.so ${libdir}/libboost_*.a"
- PACKAGES += "${PN}"
- RRECOMMENDS_${PN} += "${BOOSTLIBS}"
- 
-+# to avoid GNU_HASH QA errors added LDFLAGS to ARCH; a little bit dirty but at least it works
-+TARGET_CC_ARCH += " ${LDFLAGS}" 
-+
- # Oh yippee, a new build system, it's sooo cooool I could eat my own
- # foot.  inlining=on lets the compiler choose, I think.  At least this
- # stuff is documented...
-diff --git a/recipes/boost/boost_1.33.1.bb b/recipes/boost/boost_1.33.1.bb
-index 4d8e77d..689c681 100644
---- a/recipes/boost/boost_1.33.1.bb
-+++ b/recipes/boost/boost_1.33.1.bb
-@@ -1,5 +1,5 @@
- include boost.inc
--PR = "r4"
-+PR = "r5"
- 
- SRC_URI = "\
-   ${SOURCEFORGE_MIRROR}/boost/${BOOST_P}.tar.bz2 \
--- 
-1.6.3.3
 
 
 
