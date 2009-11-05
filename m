@@ -1,32 +1,41 @@
-Received: from [131.111.8.131] (helo=ppsw-1.csi.cam.ac.uk)
+Received: from [150.254.30.30] (helo=libra.cs.put.poznan.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jic23@cam.ac.uk>) id 1N62Sd-0005Vx-3y
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Nov 2009 14:33:14 +0100
-X-Cam-AntiVirus: no malware found
-X-Cam-SpamDetails: not scanned
-X-Cam-ScannerInfo: http://www.cam.ac.uk/cs/email/scanner/
-Received: from arcturus.eng.cam.ac.uk ([129.169.154.73]:60607)
-	by ppsw-1.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.151]:25)
-	with esmtpsa (PLAIN:jic23) (TLSv1:DHE-RSA-AES256-SHA:256)
-	id 1N6288-000180-65 (Exim 4.70) for
-	openembedded-devel@lists.openembedded.org
-	(return-path <jic23@cam.ac.uk>); Thu, 05 Nov 2009 13:12:00 +0000
-Message-ID: <4AF2CF3B.2060205@cam.ac.uk>
-Date: Thu, 05 Nov 2009 13:12:27 +0000
-From: Jonathan Cameron <jic23@cam.ac.uk>
-User-Agent: Thunderbird 2.0.0.23 (X11/20091029)
-MIME-Version: 1.0
+	(envelope-from <przemyslaw.wesolek@cs.put.poznan.pl>)
+	id 1N62T7-0005XB-Od for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Nov 2009 14:33:44 +0100
+Received: from kas30pipe.localhost (unknown [127.0.0.1])
+	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 1BC2689;
+	Thu,  5 Nov 2009 13:22:36 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at cs.put.poznan.pl
+Received: from libra.cs.put.poznan.pl ([127.0.0.1])
+	by localhost (libra.cs.put.poznan.pl [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id nlHkL19MyzF7; Thu,  5 Nov 2009 14:22:35 +0100 (CET)
+Received: from localhost.localdomain (idss-pw.cs.put.poznan.pl [150.254.31.31])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id D1D3D88;
+	Thu,  5 Nov 2009 14:22:35 +0100 (CET)
+From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
 To: openembedded-devel@lists.openembedded.org
-References: <4AF1DD1A.80005@cam.ac.uk>	<200911042110.58315.marcin@juszkiewicz.com.pl>
-	<4AF2C807.9070600@cam.ac.uk>
-In-Reply-To: <4AF2C807.9070600@cam.ac.uk>
-X-Enigmail-Version: 0.96.0
-X-SA-Exim-Connect-IP: 131.111.8.131
-X-SA-Exim-Mail-From: jic23@cam.ac.uk
+Date: Thu,  5 Nov 2009 14:24:24 +0100
+Message-Id: <1257427464-316-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
+X-Mailer: git-send-email 1.6.3.3
+X-SpamTest-Envelope-From: przemyslaw.wesolek@cs.put.poznan.pl
+X-SpamTest-Group-ID: 00000000
+X-SpamTest-Info: Profiles 9691 [Sep 17 2009]
+X-SpamTest-Info: {received from trusted sender
+	<przemyslaw.wesolek@cs.put.poznan.pl>: common white list}
+X-SpamTest-Method: white email list
+X-SpamTest-Rate: 0
+X-SpamTest-Status: Trusted
+X-SpamTest-Status-Extended: trusted
+X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0278], KAS30/Release
+X-SA-Exim-Connect-IP: 150.254.30.30
+X-SA-Exim-Mail-From: przemyslaw.wesolek@cs.put.poznan.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH v2] IMote2 machine config
+Subject: [PATCH] boost-1.33.1: Corrected GNU_HASH error.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,50 +49,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2009 13:33:14 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 05 Nov 2009 13:33:45 -0000
 
 
-
-Signed-off-by: Jonathan Cameron <jic23@cam.ac.uk>
+Signed-off-by: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
 ---
-Only change is to provide some info about the board.
- conf/machine/imote2.conf |   23 +++++++++++++++++++++++
- 1 files changed, 23 insertions(+), 0 deletions(-)
- create mode 100644 conf/machine/imote2.conf
+ recipes/boost/boost.inc       |    3 +++
+ recipes/boost/boost_1.33.1.bb |    2 +-
+ 2 files changed, 4 insertions(+), 1 deletions(-)
 
-diff --git a/conf/machine/imote2.conf b/conf/machine/imote2.conf
-new file mode 100644
-index 0000000..7f94f29
---- /dev/null
-+++ b/conf/machine/imote2.conf
-@@ -0,0 +1,23 @@
-+#-----------------------------------------------------------------------------
-+#@TYPE: Machine
-+#@NAME: IMote2
-+#@DESCRIPTION: Machine configuration for the IMote2
-+#              http://imote2-linux.sourceforge.net
-+#-----------------------------------------------------------------------------
+diff --git a/recipes/boost/boost.inc b/recipes/boost/boost.inc
+index 80635b0..8b38a5e 100644
+--- a/recipes/boost/boost.inc
++++ b/recipes/boost/boost.inc
+@@ -77,6 +77,9 @@ FILES_${PN}-dev = "${includedir} ${libdir}/libboost_*.so ${libdir}/libboost_*.a"
+ PACKAGES += "${PN}"
+ RRECOMMENDS_${PN} += "${BOOSTLIBS}"
+ 
++# to avoid GNU_HASH QA errors added LDFLAGS to ARCH; a little bit dirty but at least it works
++TARGET_CC_ARCH += " ${LDFLAGS}" 
 +
-+
-+TARGET_ARCH= "arm"
-+require conf/machine/include/tune-xscale.inc
-+KERNEL_IMAGETYPE="zImage"
-+IMAGE_FSTYPE="jffs2"
-+EXTRA_IMAGECMD_jffs2 = "--little-endian -e 0x40000 --pad=0x01DC0000 --eraseblock=0x20000"
-+MACHINE_FEATURES ="kernel26 usbgadget"
-+CMDLINE="root=/dev/mtdblock2 rootfstype=jffs2 console=ttyS2,115200 mem=32M"
-+
-+# used by sysvinit_2
-+SERIAL_CONSOLE = "115200 ttyS2"
-+
-+ROOT_FLASH_SIZE = "30"
-+MACHINE_EXTRA_RRECOMMENDS = "kernel-modules"
-+
-+RDEPENDS_kernel-base = ""
+ # Oh yippee, a new build system, it's sooo cooool I could eat my own
+ # foot.  inlining=on lets the compiler choose, I think.  At least this
+ # stuff is documented...
+diff --git a/recipes/boost/boost_1.33.1.bb b/recipes/boost/boost_1.33.1.bb
+index 4d8e77d..689c681 100644
+--- a/recipes/boost/boost_1.33.1.bb
++++ b/recipes/boost/boost_1.33.1.bb
+@@ -1,5 +1,5 @@
+ include boost.inc
+-PR = "r4"
++PR = "r5"
+ 
+ SRC_URI = "\
+   ${SOURCEFORGE_MIRROR}/boost/${BOOST_P}.tar.bz2 \
 -- 
-1.6.4.4
+1.6.3.3
 
 
 
