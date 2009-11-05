@@ -1,38 +1,41 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [209.85.223.190] (helo=mail-iw0-f190.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1N69yz-00082T-9Y for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Nov 2009 22:35:08 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1N69xp-0000GT-NP
+	(envelope-from <raj.khem@gmail.com>) id 1N6ANp-0001s5-77
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Nov 2009 22:33:53 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Nov 2009 22:33:53 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Thu, 05 Nov 2009 23:00:48 +0100
+Received: by iwn28 with SMTP id 28so391214iwn.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Nov 2009 22:33:53 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 05 Nov 2009 13:59:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=YUhwB4LlwkuKcaAkfVvXTFrVY9Zm/nP9fSbwsfWjbDI=;
+	b=Ug9WIoB4ynMKJIz3QER6d/YZmmAiqzzdh7vYw/bsm1bCXzgJni8wopIYX3qV2Em9T9
+	U7nEfTRE6x0pE9NjGjSNwgudyD/kgBur4hmt9cP2LjXyscD+yFHlbeA7XeYUBo43meye
+	fZJL0Aaei1/4erY1N+v10bMiTO6ixBwUn1ODs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=n4/rOUflvZg5vAEy29/wgkQ3VexEXkYajq8SEagEeE3waVlPnAx8/4KDrH4VhLB6fq
+	VTyyMYeMttyV2BeyXN9JLWJxfgYdEK9B/2LbOJA6e9xtmbQ+5MwXu40wXSouxncCep0a
+	i1IKri6KL4GxfD+r/ysPdlTp4RAUSiPQT6TYM=
+MIME-Version: 1.0
+Received: by 10.231.161.138 with SMTP id r10mr564038ibx.34.1257458371102; Thu, 
+	05 Nov 2009 13:59:31 -0800 (PST)
+In-Reply-To: <B44D4D5BF344094DABB900C4E0F6E3533945A88B83@srv02.nortechonline.net>
+References: <B44D4D5BF344094DABB900C4E0F6E3533945A88B7F@srv02.nortechonline.net>
+	<19c1b8a90911041606w78796323p8077fc6f6752fc90@mail.gmail.com>
+	<B44D4D5BF344094DABB900C4E0F6E3533945A88B83@srv02.nortechonline.net>
+Date: Thu, 5 Nov 2009 13:59:31 -0800
+Message-ID: <19c1b8a90911051359m74be846cmd490e13506872e50@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 05 Nov 2009 22:33:31 +0100
-Message-ID: <hcvgbb$tc7$1@ger.gmane.org>
-References: <200910222339.32881.david.lanzendoerfer@o2s.ch>	<200910222344.20662.david.lanzendoerfer@o2s.ch>
-	<1257451160.4676.5.camel@andromeda>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <1257451160.4676.5.camel@andromeda>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.223.190
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Patches
+Subject: Re: Mono
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,22 +49,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2009 21:35:08 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 05 Nov 2009 22:00:48 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 05-11-09 20:59, Michael 'Mickey' Lauer wrote:
-> Davind, Thanks for this patch; it makes sense to have a sane default in
-> the machine config file though for people who do not override
-> IMAGE_FSTYPES in their local.conf. Should we rather patch it to use a
-> weak assignment (?=) here?
+On Thu, Nov 5, 2009 at 1:20 PM, Hodgson, Simon
+<Simon.Hodgson@nortechonline.co.uk> wrote:
+> _______________________________________
+> From: openembedded-devel-bounces@lists.openembedded.org [openembedded-dev=
+el-bounces@lists.openembedded.org] On Behalf Of Khem Raj [raj.khem@gmail.co=
+m]
+> Sent: 05 November 2009 00:06
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] Mono
+>
+> On Wed, Nov 4, 2009 at 12:11 PM, Hodgson, Simon
+> <Simon.Hodgson@nortechonline.co.uk> wrote:
+>> I've built Mono for OpenEmbedded to run on an arm processor. But when I =
+try to run just a simple Hello World test I get:
+>>
+>> mini-codegen.c:1073:mono_local_regalloc: assertion failed: (ins->dreg !=
+=3D -1)
+>>
+>> Does anyone have any suggestion as to what I might be doing wrong?
+>>
+>> mono -V produces:
+>> root@at91sam9g20ek:~# mono -V
+>> Mono JIT compiler version 2.4.2.3 (tarball Tue Nov =C2=A03 03:08:58 EST =
+2009)
+>> Copyright (C) 2002-2008 Novell, Inc and Contributors. www.mono-project.c=
+om
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0TLS: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 norma=
+l
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0GC: =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+Included Boehm (with typed GC)
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0SIGSEGV: =C2=A0 =C2=A0 =C2=A0 normal
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0Notifications: epoll
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0Architecture: =C2=A0armel,vfp
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0Disabled: =C2=A0 =C2=A0 =C2=A0none
+>>
+>> Is there anymore info perhaps I can provide?
+>
+> Can you apply the attached patch then rebuild mono and retry your test.
+>
+> Thanks
+>
+> -Khem
+>
+>
+> Sorry for being a bit dense, but where should I apply this? It appears to=
+ patch the receipe and the mono source, is that correct? Do I need to run p=
+atch twice in each directory?
 
-No, if your machine requires a special format you should use +=, that 
-way you get the stuff in local.conf *and* the thing the machine requires.
+you can cd into (top of your oe source tree) say openembedded/ then do
 
-regards,
+patch -p1 < this.patch
 
-Koen
-
+>
+> Thanks
+>
+>
+> Simon
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
