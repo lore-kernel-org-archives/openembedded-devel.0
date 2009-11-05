@@ -1,23 +1,39 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [160.45.40.10] (helo=mail.math.fu-berlin.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1N62qR-0000TV-21
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Nov 2009 14:57:50 +0100
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id F28721B10C05
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1N63Ba-00082u-7T
+	for openembedded-devel@openembedded.org; Thu, 05 Nov 2009 15:19:41 +0100
+Received: (qmail 11817 invoked from network); 5 Nov 2009 15:06:25 +0100
+Received: from luzin.mi.fu-berlin.de (HELO mi.fu-berlin.de) (160.45.117.148)
+	by leibniz.math.fu-berlin.de with SMTP; 5 Nov 2009 15:06:25 +0100
+Received: (qmail 22771 invoked by uid 9804); 5 Nov 2009 15:06:26 +0100
+Received: from localhost (HELO mi.fu-berlin.de) (127.0.0.1)
+	by localhost with SMTP; 5 Nov 2009 15:06:17 +0100
+Received: (qmail 22754 invoked by uid 9804); 5 Nov 2009 15:06:17 +0100
+Received: from leibniz.math.fu-berlin.de (HELO math.fu-berlin.de)
+	(160.45.40.10)
+	by luzin.mi.fu-berlin.de with SMTP; 5 Nov 2009 15:06:17 +0100
+Received: (qmail 11800 invoked from network); 5 Nov 2009 15:06:17 +0100
+Received: from omsk.imp.fu-berlin.de (160.45.45.210)
+	by leibniz.math.fu-berlin.de with SMTP; 5 Nov 2009 14:06:17 -0000
+Received: from heinold by omsk.imp.fu-berlin.de with local (Exim 4.69 #1
+	(Debian)) id 1N62yf-0007JL-70
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Nov 2009 13:51:17 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Thu, 05 Nov 2009 15:06:17 +0100
+Date: Thu, 5 Nov 2009 15:06:17 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 5 Nov 2009 14:40:42 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+Message-ID: <20091105140617.GA27537@mi.fu-berlin.de>
 References: <1257427464-316-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
-In-Reply-To: <1257427464-316-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
+X-Envelope-Sender: heinold@mi.fu-berlin.de
+X-Virus-Scanned: by AMaViS
+	0.3.12pre7-L41+ClamAV[22757](NAI-uvscan@mi.fu-berlin.de)
+X-Remote-IP: 160.45.45.210
 MIME-Version: 1.0
-Message-Id: <200911051440.42702.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+In-Reply-To: <1257427464-316-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-SA-Exim-Connect-IP: 160.45.40.10
+X-SA-Exim-Mail-From: heinold@mi.fu-berlin.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [PATCH] boost-1.33.1: Corrected GNU_HASH error.
@@ -34,20 +50,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Nov 2009 13:57:50 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 05 Nov 2009 14:19:41 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Thursday 05 November 2009 14:24:24 you wrote:
-> Signed-off-by: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
+Hi,
 
-Looks good. but if you change a .inc file you need to bump the PR of
-every user. In this case it makes sense to convert it to the file pr scheme.
+thanks for the patch, but I wonder who is using this older version. Mainly 1.3.36 is used.
+I prefer and started to fix the apps in oe which are using boost, to get working with 1.4 and
+would be much help if more people joins at this. So in the end we can remove all the 1.3 boost recipe.
 
-kind regards
-	holger
-
-
+Bye Henning
 
 
