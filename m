@@ -1,31 +1,36 @@
-Received: from [213.171.216.118] (helo=deferred-out-118.livemail.co.uk)
+Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <james@torbett.co.uk>) id 1N6RsJ-0006z2-8E
+	(envelope-from <rpjday@crashcourse.ca>) id 1N6TeE-0006WH-4U
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Nov 2009 17:41:26 +0100
-Received: from cust-smtp-193.fasthosts.net.uk (smtp-out-50.livemail.co.uk
-	[213.171.216.50])
-	by deferred-out-118.livemail.co.uk (Postfix) with ESMTP id EA7C719CA8C3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Nov 2009 16:09:35 +0000 (GMT)
-Received: from localhost (mail213-171-216-231.livemail.co.uk [213.171.216.231])
-	by cust-smtp-193.fasthosts.net.uk (Postfix) with ESMTP id 58EB3141008A
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Nov 2009 16:09:33 +0000 (GMT)
+	Fri, 06 Nov 2009 19:35:01 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1N61f3-0002n3-Lv for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Nov 2009 07:41:57 -0500
+Date: Thu, 5 Nov 2009 07:41:34 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.00.0911050740410.16169@localhost>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
-X-Mailer: AtMail PHP 5.4
-Message-ID: <41972.1257523773@torbett.co.uk>
-To: <openembedded-devel@lists.openembedded.org>
-X-Origin: 78.32.122.177
-X-Atmail-Account: james@torbett.co.uk
-Date: Fri, 6 Nov 2009 16:09:33 +0000
-From: james@torbett.co.uk
-X-SA-Exim-Connect-IP: 213.171.216.118
-X-SA-Exim-Mail-From: james@torbett.co.uk
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: omap3-console-image building deploying wrong kernel
+Subject: [PATCH] User manual: Fix broken tag from previous patch.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,23 +44,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Nov 2009 16:41:26 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 06 Nov 2009 18:35:01 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-  BODY { font-family:Arial, Helvetica, sans-serif;font-size:12px; }Hi,
- I am using Openembedded as instructed on the gumstix website to set
-up an image for the overo, however I am having problems as the
-deployed image contains kernel 2.6.28 but the modules are for 2.6.30.
-I cannot seem to find why it is deploying the old kernel as it is
-definately calling the recipe to build 2.6.30. Any ideas where it is
-getting that version from? I have tried manually rebuilding the
-2.6.30 kernel using
- bitbake linux-omap3-2.6.30
- bitbake omap3-console-image however when I deploy and run the
-target, uname -r always reports 2.6.28.
- Any ideas?! I have not change any of the configuration settings
-apart from setting machine to Overo and the distro to Angstrom2008.1
-which was advised.
- James.
+
+Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+
+---
+
+  oops ... my bad.
+
+diff --git a/docs/usermanual/chapters/getting_oe.xml b/docs/usermanual/chapters/getting_oe.xml
+index 4ec5fec..c71f32d 100644
+--- a/docs/usermanual/chapters/getting_oe.xml
++++ b/docs/usermanual/chapters/getting_oe.xml
+@@ -31,7 +31,7 @@ $ <command>cd</command> $OEBASE</screen>
+     </para>
+
+ 	<para>The <varname>$OEBASE</varname> will also contain both of the
+-	<literal>bitbake/<literal> and <literal>openembedded/</literal> directories.
++	<literal>bitbake/</literal> and <literal>openembedded/</literal> directories.
+ 	These will be discussed in <xref linkend="gettingoe_getting_bitbake"/> and
+ 	<xref linkend="gettingoe_getting_oe"/>.
+ 	</para>
+
+
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
+
 
