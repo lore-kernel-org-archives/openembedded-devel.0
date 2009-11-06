@@ -1,35 +1,35 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [209.85.210.175] (helo=mail-yx0-f175.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1N6VMt-00027H-Fy
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N6Viq-0002Co-9p
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Nov 2009 21:25:14 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 739E658C049
+	Fri, 06 Nov 2009 21:47:55 +0100
+Received: by yxe5 with SMTP id 5so1289729yxe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Nov 2009 15:15:07 -0500 (EST)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 19381-02 for <openembedded-devel@lists.openembedded.org>; 
-	Fri,  6 Nov 2009 15:15:07 -0500 (EST)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 466A357FFB0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Nov 2009 15:15:07 -0500 (EST)
-Message-ID: <4AF483CA.9060402@cbnco.com>
-Date: Fri, 06 Nov 2009 15:15:06 -0500
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090812)
+	Fri, 06 Nov 2009 12:46:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=qHxTJEJhMyqhR5D5/qY5X2O2ecc2+v25ZFW6C9ZUm9M=;
+	b=NY/N7qo8tQVKuDFTIMKSaHScHrJodMIFnv1fxHhtIvdQrPR/Jv6gjnSKlPWB7t6Muo
+	a/G0wvbl8P4qoN/Gd1oOrUCWY6U3473IHLmbLwcr+zVRZspR8I2swfYONJahTu/m7NtT
+	rXtUQbz85itTfJaVX1GdNNOyy4Y8TV036lhzY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=EjpQ+KXFcYxKcyN9K5qBuNm0QFfz0D9HH9uazevOj9xLg1kOCYDdhSmFVFr0UduOfv
+	sKRD5IQ/QWW+6ALtDgwrrP5W4O18czZQ+XalgFVFBf5I6S8gGRq/iREjxVUdGINvOSvz
+	DGh5S3qWVfMQfFK2CiJfkCFdTixfW2T2aWauE=
 MIME-Version: 1.0
+Received: by 10.100.237.13 with SMTP id k13mr5182642anh.131.1257539920569; 
+	Fri, 06 Nov 2009 12:38:40 -0800 (PST)
+Date: Fri, 6 Nov 2009 21:38:40 +0100
+Message-ID: <ac9c93b10911061238p366f65edqeff04b25c872015f@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1257536522-11924-1-git-send-email-ynezz@true.cz>
-	<1257536522-11924-2-git-send-email-ynezz@true.cz>
-In-Reply-To: <1257536522-11924-2-git-send-email-ynezz@true.cz>
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] linux: Linux 2.6.31.5 for IEI Nano GX-466
+Subject: what to do with wrong checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,34 +43,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Nov 2009 20:25:14 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 06 Nov 2009 20:47:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+While trying to build xmltv I got this:
 
-Marcin Juszkiewicz had a series of patches to update kernels to the=20
-latest stable releases. For example, this one updates 2.6.31:
+NOTE: The MD5Sums did not match. Wanted:
+'495fd8c320f67a0c8e0b90ccb060f0ea' and Got:
+'68d9a93d507bbf917e1f3ad294fd5727'
+NOTE: Task failed: Checksum of
+'http://xmltwig.com/xmltwig/XML-Twig-3.33.tar.gz' failed
 
-http://patchwork.openembedded.org/patch/1158/
+How should I handle this. Of course I can change the checksum, but i
+don't think that is the intention :-)
+Is there a version somewhere cached that has the old checksum (so I
+can compare).
+Or how else should I handle this?
 
-There were some arguments for and against bumping the package version=20
-(i.e. keeping it in linux_2.6.31.bb versus making linux_2.6.31.5.bb) but=20
-I don't recall seeing a conclusion. Anyway, I've been using Marcin's=20
-2.6.31 patch here.
-
-Mike
-
-Petr =C5=A0tetiar wrote:
-> Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
-> ---
->  conf/checksums.ini                                 |    4 +
->  .../linux/linux-2.6.31.5/iei-nanogx-466/defconfig  | 1688 ++++++++++++=
-++++++++
->  recipes/linux/linux_2.6.31.5.bb                    |   12 +
->  3 files changed, 1704 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/linux/linux-2.6.31.5/iei-nanogx-466/defconf=
-ig
->  create mode 100644 recipes/linux/linux_2.6.31.5.bb
+Frans
 
 
