@@ -1,35 +1,32 @@
-Received: from [209.85.210.175] (helo=mail-yx0-f175.google.com)
+Received: from [66.33.216.122] (helo=hapkido.dreamhost.com ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N6Jyd-0000Lj-04
+	(envelope-from <Sebastian@SSpaeth.de>) id 1N6KTs-0000AS-Sv
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Nov 2009 09:15:26 +0100
-Received: by yxe5 with SMTP id 5so751384yxe.24
+	Fri, 06 Nov 2009 09:47:44 +0100
+Received: from homiemail-a25.g.dreamhost.com (caiajhbdcbbj.dreamhost.com
+	[208.97.132.119])
+	by hapkido.dreamhost.com (Postfix) with ESMTP id EB36F179509
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Nov 2009 00:14:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=znogQSJKNzWUld+YBEnOsmR2TUsClMuRzTEUT3xfHj8=;
-	b=gxAb9avMwCGVHGNI6o6CzpWyEfKA1m/I61Dglm6Qd8XYMi5U8BWynFJEMolWAhyVDa
-	+R1oAEWDJC4zprE4ZVs0565LAgfh6Vf5vXi+m4xnGq9gZGNvU+gfXheTdaJG61dTg/0z
-	dQgBwByi/tNk3RdaZ3XGsCp9AhADsiZdhC0IY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=C5wpiwlPgQDNHBe6cFKPwBz6ZTm1WuGbm350H/8jpCNWvTBvecFa1/lfdQDQ8kqiw+
-	MtKXz+Zb8EP41etblD2yGxSw5nT7oOoZFvt+YQTWYVoet9sUYcbhl71Msrugm+UQm+X5
-	nQY/rcxUa8NAyiZtcDM4uCJPWfdY6ikyAKlDQ=
+	Fri,  6 Nov 2009 00:14:12 -0800 (PST)
+Received: from [129.132.133.199] (mtec-hg-docking-1-dhcp-199.ethz.ch
+	[129.132.133.199])
+	by homiemail-a25.g.dreamhost.com (Postfix) with ESMTPA id 335EA678063; 
+	Fri,  6 Nov 2009 00:14:11 -0800 (PST)
+Message-ID: <4AF3DACA.5010909@SSpaeth.de>
+Date: Fri, 06 Nov 2009 09:14:02 +0100
+From: Sebastian Spaeth <Sebastian@SSpaeth.de>
+Organization: ETH Zurich
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-Received: by 10.100.249.3 with SMTP id w3mr3697373anh.118.1257494782179; Fri, 
-	06 Nov 2009 00:06:22 -0800 (PST)
-Date: Fri, 6 Nov 2009 09:06:22 +0100
-Message-ID: <ac9c93b10911060006x1a60e677ic6f2c192eedc176d@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+To: Cliff Brake <cliff.brake@gmail.com>
+X-Enigmail-Version: 0.95.7
+OpenPGP: id=C827A062
+X-SA-Exim-Connect-IP: 66.33.216.122
+X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: mysql 5
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Please delete accidental git branch on OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,55 +40,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Nov 2009 08:15:26 -0000
+X-List-Received-Date: Fri, 06 Nov 2009 08:47:44 -0000
+X-Groupsio-MsgNum: 13937
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enigFF78E29D3DA0EE2C824C7368"
+
+--------------enigFF78E29D3DA0EE2C824C7368
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Sorry for causing inconveniences. I had locally renamed my git branch
+"org.openembedded.org" to "dev" and accidentally "git push'd" that.
 
-Over the last few days I created a recipe for mysql 5.1.40 based upon
-the mysql 4.1.22 recipe, the nslu2 optware patches
-(http://trac.nslu2-linux.org/optware/browser/trunk/sources/mysql5?rev=8339&order=date&desc=1)
-and help on irc.
+Now openembedded.org has a "dev" branch...
 
-I think the work is done, so I have committed my changes. (commit 35cc93da88)
-The package is called mysql5 and resides in the mysql directory
+Could any of the admins (I think cbrake is probably the man here,
+right?), remove that branch again? I promise to send a box of Swiss
+chocolades as a small excuse to whoever fixes that :-).
 
-For now it has DEFAULT_PREFERENCE = "-1" for a number of reasons:
-
-- I am not a mysql wiz so I would suggest someone else tests this too
-(it works for the use case I have (mythtv))
-- I would appeciate it if someone would review the recipe
-- if one generates mysql5 the pacakges are named differently from the
-ones from mysql 4 (mysql5 package names start with mysql5)
-  HOWEVER a lot of filenames are the same. mysql5 requires
-mysql5-native so if you build mysql5, some mysql4 files in staging
-will be overwritten
-- and last but not least: MYSQL5 DATABASES ARE INCOMPATIBLE WITH MYSQL4!
-Apparently it is not possible to convert databases directly from 4 to
-5.1, so I decided just to discard my databases.
-According to the folks in #mysql the solution is to upgrade from 5 via
-5.0 to 5.1.
-If someone feels attracted to making a 5.0 recipe, be my guest (I've
-already spent more time on this than I planned to, then again I also
-learned more than I hoped for :-) )
-
-I would like to ask your opinion on this. If possible I would like to
-remove the DEFAULT_PREFERENCE in a week or so as mythtv 0.22 needs
-mysql5 (and they are different packages)
-Maybe it is possible to issue a big warning if someone moves from 4 to
-5, but I do not really know how to detect this properly (especially
-not in the case someone explicitly uninstalls mysql before installing
-mysql5).
-
-Your feedback is appreciated!
-Frans
-
-PS: for now the pid file of mysql is in /var/lib/mysql dir, if someone
-feels it should live elsewhere let me know (or fix it after
-discussion)
-(it cannot be in /var/run as the pid file is written by user mysql who
-has no write privileges in that dir, and, at least under angstrom,
-/var/run links to /var/volatile/run and is created during boot so
-/var/run/mysql is also not really an option)
+Sebastian Spaeth
 
 
+
+--------------enigFF78E29D3DA0EE2C824C7368
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEARECAAYFAkrz2tEACgkQVYX1jMgnoGIFMgCgjzaW4npuJgHia3Nk/QwJR9pc
+wZcAn1hII0ki6RQ/hJXbeZ352UrH62Jy
+=T9Y9
+-----END PGP SIGNATURE-----
+
+--------------enigFF78E29D3DA0EE2C824C7368--
