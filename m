@@ -1,38 +1,26 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1N6Mzj-0001J8-SY for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Nov 2009 12:28:46 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1N6MyZ-0004UI-5M
+	(envelope-from <mickey@vanille-media.de>) id 1N6N2o-0001Oe-PY
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Nov 2009 12:27:31 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Nov 2009 12:27:31 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Fri, 06 Nov 2009 12:31:57 +0100
+Received: from [192.168.1.105] (e180128006.adsl.alicedsl.de [85.180.128.6])
+	by drlauer-research.com (Postfix) with ESMTP id 0ECA3584E8D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Nov 2009 12:27:31 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri,  6 Nov 2009 13:16:12 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 06 Nov 2009 12:26:29 +0100
-Message-ID: <hd1155$re2$1@ger.gmane.org>
-References: <1257432076-12239-1-git-send-email-marcin@juszkiewicz.com.pl>
-	<20091106091056.GA4739@rhein.zuhause.netz>
+In-Reply-To: <4AF3DACA.5010909@SSpaeth.de>
+References: <4AF3DACA.5010909@SSpaeth.de>
+Organization: Vanille-Media
+Date: Fri, 06 Nov 2009 12:30:35 +0100
+Message-ID: <1257507035.4676.12.camel@andromeda>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <20091106091056.GA4739@rhein.zuhause.netz>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [STABLE][PATCH] java.bbclass: fixed oe_jarinstall for broken symlinks
+Subject: Re: Please delete accidental git branch on OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,15 +34,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Nov 2009 11:28:47 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 06 Nov 2009 11:31:57 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On 06-11-09 10:10, Henning Heinold wrote:
+Am Freitag, den 06.11.2009, 09:14 +0100 schrieb Sebastian Spaeth:
+> Sorry for causing inconveniences. I had locally renamed my git branch
+> "org.openembedded.org" to "dev" and accidentally "git push'd" that.
+> 
+> Now openembedded.org has a "dev" branch...
+> 
+> Could any of the admins (I think cbrake is probably the man here,
+> right?), remove that branch again? I promise to send a box of Swiss
+> chocolades as a small excuse to whoever fixes that :-).
 
-> *ACK*
+Done.
 
-Could people please start giving proper acked-by lines?
+-- 
+:M:
 
 
 
