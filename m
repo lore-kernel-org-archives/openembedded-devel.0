@@ -1,23 +1,40 @@
-Received: from [87.194.255.144] (helo=honeysuckle.london.02.net)
+Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <bluelightning@bluelightning.org>) id 1N6DKt-0001uI-BU
+	(envelope-from <otavio.salvador@gmail.com>) id 1N6DMO-0004W7-Is
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Nov 2009 02:09:58 +0100
-Received: from shodan.localnet (93.96.131.185) by honeysuckle.london.02.net
-	(8.5.016.1)
-	id 4A23EDE605A87B73 for openembedded-devel@lists.openembedded.org;
-	Fri, 6 Nov 2009 01:07:35 +0000
-From: Paul Eggleton <bluelightning@bluelightning.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 6 Nov 2009 01:07:33 +0000
-User-Agent: KMail/1.12.2 (Linux/2.6.31-14-generic; KDE/4.3.2; i686; ; )
+	Fri, 06 Nov 2009 02:11:31 +0100
+Received: by bwz9 with SMTP id 9so642648bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Nov 2009 17:10:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type; bh=/pXXLavjgXIqqoXeEgbw/wCwXOFAmPaR631DDV0z9gA=;
+	b=aIgOx/dysdmPJIyhmIXMw2txy9eJMts65mmwyfuWbzCslz9ZQm8QxpSJ87t6nb/ciI
+	hmF24/ZPrvIUMu5M4lHvlDvFUbMAId9iBokvpgahkpcpcBbvwce2ftro94o0udlp2fKr
+	7LgtRKa/4DMVomemXs4RKpgadFQWDPgmvyOcs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	b=Ucr0rAOqo8bUiWzKgNRSDib5gMvXqkprdo1hmUft1CPfnUAKC5PxtFV4xSDm+ksI8/
+	+CuYQiulcjcgTzv20iBFlygI+d3MwOjp+iQvLaTriog2UW7UmnKNhD6yKYpNkZ2uHi/e
+	EU/pl0wt4EjAHUK9+NWAtVo6SwSWbx/3ykcc4=
 MIME-Version: 1.0
-Message-Id: <200911060107.33807.bluelightning@bluelightning.org>
-X-SA-Exim-Connect-IP: 87.194.255.144
-X-SA-Exim-Mail-From: bluelightning@bluelightning.org
+Sender: otavio.salvador@gmail.com
+Received: by 10.239.163.205 with SMTP id q13mr392049hbd.132.1257469414306; 
+	Thu, 05 Nov 2009 17:03:34 -0800 (PST)
+In-Reply-To: <20091104125439.GA20450@zlo.nu>
+References: <20091104125439.GA20450@zlo.nu>
+Date: Thu, 5 Nov 2009 23:03:34 -0200
+X-Google-Sender-Auth: 973ba83dd1f8c011
+Message-ID: <be7a9f3d0911051703p33a3f0e1p223219ead98055eb@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: sqlite 3.6.20 requires tcl-native
+Subject: Re: [PATCH] Add dhcp 3.1.2p1 and fix unneeded bash dependency in 3.0.*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,17 +48,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Nov 2009 01:09:59 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 06 Nov 2009 01:11:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi all,
+Hello Marc,
 
-It seems that the recently added SQLite 3.6.20 requires tcl-native, but the 
-recipe doesn't depend on it. Should the recipe be fixed?
+On Wed, Nov 4, 2009 at 10:54 AM, Marc Olzheim <zlo@zlo.nu> wrote:
+> Hi,
+>
+> The latest stable of the isc dhcp 3.x source is 3.1.2p1. I realize that
+> there are already 4.x releases out too, but I have not tested any of
+> them yet.
+>
+> In any case: the dhclient/scripts/linux is a #!/bin/bash script which
+> does not use any bashisms. As this was (dependency-wise) the only reason
+> for our image to contain bash, I fixed this and while at it moved from
+> 3.0.2 to 3.1.2p1.
 
-Cheers,
-Paul
+While you're on it, it would be better to make it in a patchset doing:
+
+ - move it all to a .inc and use INC_PR (to avoid useless duplication)
+ - drop the bash requirement (as you did)
+ - add the new version
+
+And please, use format-patch to export those patches so we can easily push it.
+
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
