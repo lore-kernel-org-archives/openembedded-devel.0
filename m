@@ -1,39 +1,40 @@
-Received: from [209.85.220.209] (helo=mail-fx0-f209.google.com)
+Received: from [209.85.211.177] (helo=mail-yw0-f177.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <serra82@gmail.com>) id 1N6M91-0001OC-A4
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N6MD1-0001VF-TH
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Nov 2009 11:34:18 +0100
-Received: by fxm1 with SMTP id 1so170673fxm.12
+	Fri, 06 Nov 2009 11:38:27 +0100
+Received: by ywh7 with SMTP id 7so832682ywh.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Nov 2009 02:33:01 -0800 (PST)
+	Fri, 06 Nov 2009 02:37:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=qPYutIK9IxcjidUrfwaE/rcBSvTtHrFKjVmugD+xORY=;
-	b=qEPMj+v466ANuA7JmY+DTG2PVEqLRQFqiijnTzdtbadTlXjAbihXE45VyMBVFlVCdX
-	ZlD8HszYAz7NJJQf2RdbkvAvUeQjJjcfB1Fo9BjY5pmgvccTuafBomlCiHHSgUaxYgN4
-	DvyNY3H9spEECWuQp305TnIB94vg5oh9MjfO4=
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=SM2G+dA/U5RRdyXAd38OMdOnVs5uqwSAh5WvqP5VP6Y=;
+	b=sxATMFDB8QcqBV2RgfGV+or9mM5FMQDwTrMJ/PJoh4j6RUTR6UGxKd/NbsWNi2KrH6
+	7Ol8dMIdVlcl9ncaCsSRJE4nK+xkxqdGaWWaruskedeKgNBck7ZAcioMvaUI5+oHNJoT
+	mSWAFAi5RnSTF8iyurHdCY+5QIt6qb/3DlDL8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=rjBe/1WElWfBRAfDswNdukCNOPuw77+1iMybT1FCVjNz7zLFQJlAHlCSboq+uYKphA
-	vOP33TTEK8MhiWhXJ86BLLUGeMdMRaN/mo5BnCyhRs1YYZuRO5rEh/AhH2IrnbAc3bv+
-	olaKtnB1E3Za5hgOkAH0WuIIVZgk9rS9+4e24=
+	:content-type:content-transfer-encoding;
+	b=VUlWCHfaSlNqO30ZTsy9uMIc5+2boBgsoDP1v1iOGRIW5252liGDAKSIOl0KNwXmFD
+	9h2Fp54RBFx4NBjaD1eReWcc6dD+6hBpZl97YuiEt385134gEJaYKn/+/HuzxR9nJ2qG
+	+cqhsCgN6YMy15qTlbH9i/iRqO6Y4GD9QcqUc=
 MIME-Version: 1.0
-Received: by 10.103.81.35 with SMTP id i35mr1620427mul.43.1257503116714; Fri, 
-	06 Nov 2009 02:25:16 -0800 (PST)
-In-Reply-To: <hcuqs7$elg$1@ger.gmane.org>
-References: <afb7987a0911040032g2bebec62j70a81dd409561c17@mail.gmail.com>
-	<hcuqs7$elg$1@ger.gmane.org>
-Date: Fri, 6 Nov 2009 11:25:16 +0100
-Message-ID: <afb7987a0911060225y481161bej290d5efaa3ed4c3f@mail.gmail.com>
-From: Andrea <serra82@gmail.com>
+Received: by 10.100.237.9 with SMTP id k9mr3906656anh.139.1257503829476; Fri, 
+	06 Nov 2009 02:37:09 -0800 (PST)
+In-Reply-To: <217663.38369.qm@web112503.mail.gq1.yahoo.com>
+References: <ac9c93b10911060006x1a60e677ic6f2c192eedc176d@mail.gmail.com>
+	<217663.38369.qm@web112503.mail.gq1.yahoo.com>
+Date: Fri, 6 Nov 2009 11:37:09 +0100
+Message-ID: <ac9c93b10911060237i44b0d886qccfb0d64f94ae6ec@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.209
-X-SA-Exim-Mail-From: serra82@gmail.com
+X-SA-Exim-Connect-IP: 209.85.211.177
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [patch] ti-cs1-omap3530 upgrade
+Subject: Re: mysql 5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,80 +48,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Nov 2009 10:34:18 -0000
-X-Groupsio-MsgNum: 13940
-Content-Type: multipart/mixed; boundary=0016e656b6e49363ce0477b142be
-
---0016e656b6e49363ce0477b142be
+X-List-Received-Date: Fri, 06 Nov 2009 10:38:27 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Is it now correct?
-thank you
-Andrea
-
-2009/11/5 Koen Kooi <k.kooi@student.utwente.nl>:
-> Hello Andrea,
+2009/11/6 gagan singh <gagan2172@yahoo.com>:
+> Great work Frans
+> =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0=A0=A0=A0 There is mysql 5.0.67=A0 version with almost finished=
+ recipe for OE.
+> http://209.85.229.132/search?q=3Dcache:P0cKZWGWiMwJ:projects.linuxtogo.or=
+g/pipermail/openembedded-devel/2008-September/006249.html+mysql+5.0+OE&cd=
+=3D3&hl=3Den&ct=3Dclnk&gl=3Duk
 >
-> Thank you for you patch! Could you send it in git-format-patch format so we
-> can properly attribute it to you?
->
-> regards,
->
-> Koen
+> =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 The issue comes up =A0as I was trying to =
+run mythtv on beagle board =A0Sql 5.0 was minimum requirement for mythtv .2=
+1 .I somehow managed to get mysql 5.0.67 =A0get cross complied and run with=
+ mythtv .21 on beagle board.=A0=A0=A0 But I suspect my work around (skippin=
+g some runtime tests at two places during cross compilation)
+> =A0was not a proper fix so=A0 keep to myself. =A0Perhaps some OE experts =
+can port that recipe properly on OE.
 >
 
---0016e656b6e49363ce0477b142be
-Content-Type: text/x-diff; charset=US-ASCII; 
-	name="ti-cs1-omap3530-add-version-1.0.1.44-and-checksums.patch"
-Content-Disposition: attachment; 
-	filename="ti-cs1-omap3530-add-version-1.0.1.44-and-checksums.patch"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_g1oqnw8f0
+Thiere is also some work for 5.0 in the bug tracker.
+http://bugs.openembedded.org/show_bug.cgi?id=3D4577
+Not sure how good or how complete it is.
 
-RnJvbSAxMDVjZWU4MTI4NDY0ZTM3MTdmMmU3ZDQ0OTJmODI5MDJiZTU4NTUxIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBBbmRyZWEgU2VyYWdoaXRpIDxzZXJyYTgyQGdtYWlsLmNvbT4K
-RGF0ZTogRnJpLCA2IE5vdiAyMDA5IDExOjAwOjMxICswMTAwClN1YmplY3Q6IFtQQVRDSF0gdGkt
-Y3MxLW9tYXAzNTMwOiBhZGQgdmVyc2lvbiAxLjAuMS40NCBhbmQgY2hlY2tzdW1zCgoKU2lnbmVk
-LW9mZi1ieTogQW5kcmVhIFNlcmFnaGl0aSA8c2VycmE4MkBnbWFpbC5jb20+Ci0tLQogY29uZi9j
-aGVja3N1bXMuaW5pICAgICAgICAgICAgICAgICAgfCAgICA2ICsrKy0tLQogcmVjaXBlcy90aS90
-aS1jczEtb21hcDM1MzBfMS4wLjEuYmIgfCAgICA4ICsrKystLS0tCiAyIGZpbGVzIGNoYW5nZWQs
-IDcgaW5zZXJ0aW9ucygrKSwgNyBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9jb25mL2NoZWNr
-c3Vtcy5pbmkgYi9jb25mL2NoZWNrc3Vtcy5pbmkKaW5kZXggODA4Y2MxMS4uMWFmN2IyYyAxMDA2
-NDQKLS0tIGEvY29uZi9jaGVja3N1bXMuaW5pCisrKyBiL2NvbmYvY2hlY2tzdW1zLmluaQpAQCAt
-NDU4Niw5ICs0NTg2LDkgQEAgc2hhMjU2PThiNzE4YzM0NGNmMTk0MTc0NDdjYmMxNjg2N2QyZTA0
-NDM0NjU0YzEzYjMzMDU5OGI5NjcyMGVhZDE0NmI5NjEKIG1kNT0wYWEyZjk0YzM5MTIzZjFhMDM1
-Mjk4M2U1MzY2MTc5Ywogc2hhMjU2PTRiYWI1MjlhZmEwMGNhZmRlM2JjNWRmMjc2OTU3OGM4ODQz
-OGY4MGM1MTUyZDQyNTdjZDBlODY5ODZmOTViYzQKIAotW2h0dHA6Ly9zb2Z0d2FyZS1kbC50aS5j
-b20vZHNwcy9kc3BzX3B1YmxpY19zdy9zZG9fc2IvdGFyZ2V0Y29udGVudC9kdnNkay9EVlNES18z
-XzAwL2xhdGVzdC8vZXhwb3J0cy9jczFvbWFwMzUzMF9zZXR1cGxpbnV4XzFfMDBfMDEtNDIuYmlu
-XQotbWQ1PWExZTE5ZWYzNzYzOGU5NzdkMDU5ZmQyMmFmNjY2MzAxCi1zaGEyNTY9ZmM3YWMyODI5
-ZGY4ZDM5NDYzNWFhMWNjNzA0Yjc4ZTkzY2EyODcxMTFkZjEwMDFlNTczOGFlMjI4MjY5MTIxOQor
-W2h0dHA6Ly9zb2Z0d2FyZS1kbC50aS5jb20vZHNwcy9kc3BzX3B1YmxpY19zdy9zZG9fc2IvdGFy
-Z2V0Y29udGVudC9kdnNkay9EVlNES18zXzAwL2xhdGVzdC8vZXhwb3J0cy9jczFvbWFwMzUzMF9z
-ZXR1cGxpbnV4XzFfMDBfMDEtNDQuYmluXQorbWQ1PTRkYjU2NzI1MmU2YzQzMTE5ZTFjMGFhZmU0
-MDFhNjc5CitzaGEyNTY9ZTA0MmUxYWFkNDJhNjcyOGFkZjVjOTU1ZGMzOGU0ZjgzMzFmYzBlYWNk
-ODMzZjFjZDc1ZDljYmI0ZmFmZjBiNQogCiBbaHR0cDovL3NvZnR3YXJlLWRsLnRpLmNvbS9kc3Bz
-L2RzcHNfcHVibGljX3N3L3Nkb19zYi90YXJnZXRjb250ZW50L2R2c2RrL0RWU0RLXzNfMDAvbGF0
-ZXN0Ly9leHBvcnRzL2NzMW9tYXAzNTMwX3NldHVwbGludXhfMV8wMF8wMS5iaW5dCiBtZDU9Nzc5
-NDE1ODcyYzc3MWI1ODBlNGM2ZDEwMzQ2YjNhNzkKZGlmZiAtLWdpdCBhL3JlY2lwZXMvdGkvdGkt
-Y3MxLW9tYXAzNTMwXzEuMC4xLmJiIGIvcmVjaXBlcy90aS90aS1jczEtb21hcDM1MzBfMS4wLjEu
-YmIKaW5kZXggOTc3OWMzMy4uYTJkMDg4ZCAxMDA2NDQKLS0tIGEvcmVjaXBlcy90aS90aS1jczEt
-b21hcDM1MzBfMS4wLjEuYmIKKysrIGIvcmVjaXBlcy90aS90aS1jczEtb21hcDM1MzBfMS4wLjEu
-YmIKQEAgLTEsMTIgKzEsMTIgQEAKIHJlcXVpcmUgdGktY29kZWMuaW5jCiByZXF1aXJlIHRpLWNz
-MS1vbWFwMzUzMC5pbmMKIAotU1JDX1VSSQk9ICJodHRwOi8vc29mdHdhcmUtZGwudGkuY29tL2Rz
-cHMvZHNwc19wdWJsaWNfc3cvc2RvX3NiL3RhcmdldGNvbnRlbnQvZHZzZGsvRFZTREtfM18wMC9s
-YXRlc3QvL2V4cG9ydHMvY3Mxb21hcDM1MzBfc2V0dXBsaW51eF8xXzAwXzAxLTQyLmJpbiIKK1NS
-Q19VUkkJPSAiaHR0cDovL3NvZnR3YXJlLWRsLnRpLmNvbS9kc3BzL2RzcHNfcHVibGljX3N3L3Nk
-b19zYi90YXJnZXRjb250ZW50L2R2c2RrL0RWU0RLXzNfMDAvbGF0ZXN0Ly9leHBvcnRzL2NzMW9t
-YXAzNTMwX3NldHVwbGludXhfMV8wMF8wMS00NC5iaW4iCiAKICMgU3BlY2lmeSBuYW1lcyBvZiB0
-aGUgSW5zdGFsbEphbW1lciBiaW5hcnkgZmlsZSBhbmQgdGhlIHRhcmJhbGwgaXQgZXh0cmFjdHMK
-LUJJTkZJTEUgPSAiY3Mxb21hcDM1MzBfc2V0dXBsaW51eF8xXzAwXzAxLTQyLmJpbiIKK0JJTkZJ
-TEUgPSAiY3Mxb21hcDM1MzBfc2V0dXBsaW51eF8xXzAwXzAxLTQ0LmJpbiIKIAotUyA9ICIke1dP
-UktESVJ9L2R2c2RrXzNfMDBfMDFfNDIvY3Mxb21hcDM1MzBfMV8wMF8wMSIKK1MgPSAiJHtXT1JL
-RElSfS9kdnNka18zXzAwXzAyXzQ0L2NzMW9tYXAzNTMwXzFfMDBfMDEiCiAKIERFUEVORFM9InRp
-LWNvZGVjLWVuZ2luZSB0aS1kc3BsaW5rLW1vZHVsZSIKIApAQCAtMTQsNyArMTQsNyBAQCBleHBv
-cnQgQ09ERUdFTl9JTlNUQUxMX0RJUgogCiAjIFllcywgdGhlIHhkYyBzdHVmZiBzdGlsbCBicmVh
-a3Mgd2l0aCBhICcuJyBpbiBQV0QKIFBWID0gIjEwMSIKLVBSID0gInI1IgorUFIgPSAicjYiCiAK
-IGRvX2NvbXBpbGUoKSB7CiAKLS0gCjEuNS42LjUKCg==
+Frans
 
---0016e656b6e49363ce0477b142be--
+
