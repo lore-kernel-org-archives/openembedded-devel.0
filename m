@@ -1,31 +1,39 @@
-Received: from [98.137.26.130] (helo=web112503.mail.gq1.yahoo.com)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <gagan2172@yahoo.com>) id 1N6LJg-00021S-9P
-	for openembedded-devel@openembedded.org; Fri, 06 Nov 2009 10:41:15 +0100
-Received: (qmail 43098 invoked by uid 60001); 6 Nov 2009 09:33:16 -0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024;
-	t=1257499996; bh=z+lJYikA6Lk32bA01rlHIuFTj2xF+r1JA7HfY4kXZXs=;
-	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:In-Reply-To:MIME-Version:Content-Type;
-	b=DVjqEuAxdHqaYIKftpXVys1eRxkwlInokh5Qpq9ZO6vs0hfspDer4Ismi+9+dG2J+X0V19T1cMJifZbM2VeJV5duThLtWWNDKT5XXEL0fmM5KXNJj4Yv2wmfHLuYcdv5QOREMY9U+8uODk7j7meFsk4a4qTPWl6cJshUQAWylU0=
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=yahoo.com;
-	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:In-Reply-To:MIME-Version:Content-Type;
-	b=unR1C0ahmArKqlpnUzabt59hM+gjJ9FX4MusMtvT/YWwXdDkwTsO+B1RxZteFpvOoQ/DBMmLX0q9tE70XMwGtvoCQ6SoBW8Jnmh+/2SKxpkFZM7AYx55K+Ucvmw6V3WO72Fu5OUZq+zNBvmuhZ5no2c1I20oU/Xkl+BuAwF/H5U=;
-Message-ID: <217663.38369.qm@web112503.mail.gq1.yahoo.com>
-X-YMail-OSG: cCU__VYVM1mw64_igvevupRevXJmwHlROXEP87O0_j1hs_huzrrXAWv96JQzH5XcJAzRPcaDI6AVBXq40DyzeCe39SDjBKCZJ7Z6IESDKTbMNTAFueqipZLfQ0i77nyUmmDFRII7JXgB917ybmRkBjUsyc7bB3zXQjK2lTZJrzCA.tcMhd9U4bGdFuuRnJ_7MqKKSfJqkFVWV7kdNZ6gdAGmezS0N7ym46fNedi63OmX.rGlUtRo8kxWtrrw6MWplVe4MdkoPwH1K_T5On8Z5P6e_CmEaMKXkdft9zwIyb5bvE5ttIRpgq_3bDYM3rkJfVrKYPBcYPQbMiwiOLY5YlWCU7d_DWL57D7zFfzvZlZS7PXm0CPDpQWk4SJu
-Received: from [62.254.217.177] by web112503.mail.gq1.yahoo.com via HTTP;
-	Fri, 06 Nov 2009 01:33:16 PST
-X-Mailer: YahooMailClassic/8.1.6 YahooMailWebService/0.7.361.4
-Date: Fri, 6 Nov 2009 01:33:16 -0800 (PST)
-From: gagan singh <gagan2172@yahoo.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ac9c93b10911060006x1a60e677ic6f2c192eedc176d@mail.gmail.com>
+Received: from [209.85.220.209] (helo=mail-fx0-f209.google.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <serra82@gmail.com>) id 1N6M91-0001OC-A4
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 06 Nov 2009 11:34:18 +0100
+Received: by fxm1 with SMTP id 1so170673fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 06 Nov 2009 02:33:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=qPYutIK9IxcjidUrfwaE/rcBSvTtHrFKjVmugD+xORY=;
+	b=qEPMj+v466ANuA7JmY+DTG2PVEqLRQFqiijnTzdtbadTlXjAbihXE45VyMBVFlVCdX
+	ZlD8HszYAz7NJJQf2RdbkvAvUeQjJjcfB1Fo9BjY5pmgvccTuafBomlCiHHSgUaxYgN4
+	DvyNY3H9spEECWuQp305TnIB94vg5oh9MjfO4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=rjBe/1WElWfBRAfDswNdukCNOPuw77+1iMybT1FCVjNz7zLFQJlAHlCSboq+uYKphA
+	vOP33TTEK8MhiWhXJ86BLLUGeMdMRaN/mo5BnCyhRs1YYZuRO5rEh/AhH2IrnbAc3bv+
+	olaKtnB1E3Za5hgOkAH0WuIIVZgk9rS9+4e24=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 98.137.26.130
-X-SA-Exim-Mail-From: gagan2172@yahoo.com
+Received: by 10.103.81.35 with SMTP id i35mr1620427mul.43.1257503116714; Fri, 
+	06 Nov 2009 02:25:16 -0800 (PST)
+In-Reply-To: <hcuqs7$elg$1@ger.gmane.org>
+References: <afb7987a0911040032g2bebec62j70a81dd409561c17@mail.gmail.com>
+	<hcuqs7$elg$1@ger.gmane.org>
+Date: Fri, 6 Nov 2009 11:25:16 +0100
+Message-ID: <afb7987a0911060225y481161bej290d5efaa3ed4c3f@mail.gmail.com>
+From: Andrea <serra82@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.220.209
+X-SA-Exim-Mail-From: serra82@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: mysql 5
+Subject: Re: [patch] ti-cs1-omap3530 upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,108 +47,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Nov 2009 09:41:16 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 06 Nov 2009 10:34:18 -0000
+X-Groupsio-MsgNum: 13940
+Content-Type: multipart/mixed; boundary=0016e656b6e49363ce0477b142be
 
-Great work Frans
-&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#=
-65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#655=
-33;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;=
-&#65533;&#65533;&#65533; There is mysql 5.0.67&#65533; version with almost =
-finished recipe for OE.&#65533;=20
-http://209.85.229.132/search?q=3Dcache:P0cKZWGWiMwJ:projects.linuxtogo.org=
-/pipermail/openembedded-devel/2008-September/006249.html+mysql+5.0+OE&cd=3D=
-3&hl=3Den&ct=3Dclnk&gl=3Duk
-&#65533;
-&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#=
-65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#655=
-33;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;=
-&#65533;&#65533;&#65533;&#65533;&#65533;&#65533;&#65533; The issue comes up=
- &#65533;as I was trying to run mythtv on beagle board &#65533;Sql 5.0 was =
-minimum requirement for mythtv .21 .I somehow managed to get mysql 5.0.67 &=
-#65533;get cross complied and run with mythtv .21 on beagle board.&#65533;&=
-#65533;&#65533; But I suspect my work around (skipping some runtime tests a=
-t two places during cross compilation)
-&#65533;was not a proper fix so&#65533; keep to myself. &#65533;Perhaps so=
-me OE experts can port that recipe properly on OE.
-&#65533;
-&#65533;
-Regards
-&#65533;
-Gagan
-&#65533;
-&#65533;
-&#65533;
+--0016e656b6e49363ce0477b142be
+Content-Type: text/plain; charset=ISO-8859-1
 
+Is it now correct?
+thank you
+Andrea
 
---- On Fri, 11/6/09, Frans Meulenbroeks <fransmeulenbroeks@gmail.com> wrot=
-e:
+2009/11/5 Koen Kooi <k.kooi@student.utwente.nl>:
+> Hello Andrea,
+>
+> Thank you for you patch! Could you send it in git-format-patch format so we
+> can properly attribute it to you?
+>
+> regards,
+>
+> Koen
+>
 
+--0016e656b6e49363ce0477b142be
+Content-Type: text/x-diff; charset=US-ASCII; 
+	name="ti-cs1-omap3530-add-version-1.0.1.44-and-checksums.patch"
+Content-Disposition: attachment; 
+	filename="ti-cs1-omap3530-add-version-1.0.1.44-and-checksums.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_g1oqnw8f0
 
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-Subject: [oe] mysql 5
-To: openembedded-devel@lists.openembedded.org
-Date: Friday, November 6, 2009, 3:06 AM
+RnJvbSAxMDVjZWU4MTI4NDY0ZTM3MTdmMmU3ZDQ0OTJmODI5MDJiZTU4NTUxIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBBbmRyZWEgU2VyYWdoaXRpIDxzZXJyYTgyQGdtYWlsLmNvbT4K
+RGF0ZTogRnJpLCA2IE5vdiAyMDA5IDExOjAwOjMxICswMTAwClN1YmplY3Q6IFtQQVRDSF0gdGkt
+Y3MxLW9tYXAzNTMwOiBhZGQgdmVyc2lvbiAxLjAuMS40NCBhbmQgY2hlY2tzdW1zCgoKU2lnbmVk
+LW9mZi1ieTogQW5kcmVhIFNlcmFnaGl0aSA8c2VycmE4MkBnbWFpbC5jb20+Ci0tLQogY29uZi9j
+aGVja3N1bXMuaW5pICAgICAgICAgICAgICAgICAgfCAgICA2ICsrKy0tLQogcmVjaXBlcy90aS90
+aS1jczEtb21hcDM1MzBfMS4wLjEuYmIgfCAgICA4ICsrKystLS0tCiAyIGZpbGVzIGNoYW5nZWQs
+IDcgaW5zZXJ0aW9ucygrKSwgNyBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9jb25mL2NoZWNr
+c3Vtcy5pbmkgYi9jb25mL2NoZWNrc3Vtcy5pbmkKaW5kZXggODA4Y2MxMS4uMWFmN2IyYyAxMDA2
+NDQKLS0tIGEvY29uZi9jaGVja3N1bXMuaW5pCisrKyBiL2NvbmYvY2hlY2tzdW1zLmluaQpAQCAt
+NDU4Niw5ICs0NTg2LDkgQEAgc2hhMjU2PThiNzE4YzM0NGNmMTk0MTc0NDdjYmMxNjg2N2QyZTA0
+NDM0NjU0YzEzYjMzMDU5OGI5NjcyMGVhZDE0NmI5NjEKIG1kNT0wYWEyZjk0YzM5MTIzZjFhMDM1
+Mjk4M2U1MzY2MTc5Ywogc2hhMjU2PTRiYWI1MjlhZmEwMGNhZmRlM2JjNWRmMjc2OTU3OGM4ODQz
+OGY4MGM1MTUyZDQyNTdjZDBlODY5ODZmOTViYzQKIAotW2h0dHA6Ly9zb2Z0d2FyZS1kbC50aS5j
+b20vZHNwcy9kc3BzX3B1YmxpY19zdy9zZG9fc2IvdGFyZ2V0Y29udGVudC9kdnNkay9EVlNES18z
+XzAwL2xhdGVzdC8vZXhwb3J0cy9jczFvbWFwMzUzMF9zZXR1cGxpbnV4XzFfMDBfMDEtNDIuYmlu
+XQotbWQ1PWExZTE5ZWYzNzYzOGU5NzdkMDU5ZmQyMmFmNjY2MzAxCi1zaGEyNTY9ZmM3YWMyODI5
+ZGY4ZDM5NDYzNWFhMWNjNzA0Yjc4ZTkzY2EyODcxMTFkZjEwMDFlNTczOGFlMjI4MjY5MTIxOQor
+W2h0dHA6Ly9zb2Z0d2FyZS1kbC50aS5jb20vZHNwcy9kc3BzX3B1YmxpY19zdy9zZG9fc2IvdGFy
+Z2V0Y29udGVudC9kdnNkay9EVlNES18zXzAwL2xhdGVzdC8vZXhwb3J0cy9jczFvbWFwMzUzMF9z
+ZXR1cGxpbnV4XzFfMDBfMDEtNDQuYmluXQorbWQ1PTRkYjU2NzI1MmU2YzQzMTE5ZTFjMGFhZmU0
+MDFhNjc5CitzaGEyNTY9ZTA0MmUxYWFkNDJhNjcyOGFkZjVjOTU1ZGMzOGU0ZjgzMzFmYzBlYWNk
+ODMzZjFjZDc1ZDljYmI0ZmFmZjBiNQogCiBbaHR0cDovL3NvZnR3YXJlLWRsLnRpLmNvbS9kc3Bz
+L2RzcHNfcHVibGljX3N3L3Nkb19zYi90YXJnZXRjb250ZW50L2R2c2RrL0RWU0RLXzNfMDAvbGF0
+ZXN0Ly9leHBvcnRzL2NzMW9tYXAzNTMwX3NldHVwbGludXhfMV8wMF8wMS5iaW5dCiBtZDU9Nzc5
+NDE1ODcyYzc3MWI1ODBlNGM2ZDEwMzQ2YjNhNzkKZGlmZiAtLWdpdCBhL3JlY2lwZXMvdGkvdGkt
+Y3MxLW9tYXAzNTMwXzEuMC4xLmJiIGIvcmVjaXBlcy90aS90aS1jczEtb21hcDM1MzBfMS4wLjEu
+YmIKaW5kZXggOTc3OWMzMy4uYTJkMDg4ZCAxMDA2NDQKLS0tIGEvcmVjaXBlcy90aS90aS1jczEt
+b21hcDM1MzBfMS4wLjEuYmIKKysrIGIvcmVjaXBlcy90aS90aS1jczEtb21hcDM1MzBfMS4wLjEu
+YmIKQEAgLTEsMTIgKzEsMTIgQEAKIHJlcXVpcmUgdGktY29kZWMuaW5jCiByZXF1aXJlIHRpLWNz
+MS1vbWFwMzUzMC5pbmMKIAotU1JDX1VSSQk9ICJodHRwOi8vc29mdHdhcmUtZGwudGkuY29tL2Rz
+cHMvZHNwc19wdWJsaWNfc3cvc2RvX3NiL3RhcmdldGNvbnRlbnQvZHZzZGsvRFZTREtfM18wMC9s
+YXRlc3QvL2V4cG9ydHMvY3Mxb21hcDM1MzBfc2V0dXBsaW51eF8xXzAwXzAxLTQyLmJpbiIKK1NS
+Q19VUkkJPSAiaHR0cDovL3NvZnR3YXJlLWRsLnRpLmNvbS9kc3BzL2RzcHNfcHVibGljX3N3L3Nk
+b19zYi90YXJnZXRjb250ZW50L2R2c2RrL0RWU0RLXzNfMDAvbGF0ZXN0Ly9leHBvcnRzL2NzMW9t
+YXAzNTMwX3NldHVwbGludXhfMV8wMF8wMS00NC5iaW4iCiAKICMgU3BlY2lmeSBuYW1lcyBvZiB0
+aGUgSW5zdGFsbEphbW1lciBiaW5hcnkgZmlsZSBhbmQgdGhlIHRhcmJhbGwgaXQgZXh0cmFjdHMK
+LUJJTkZJTEUgPSAiY3Mxb21hcDM1MzBfc2V0dXBsaW51eF8xXzAwXzAxLTQyLmJpbiIKK0JJTkZJ
+TEUgPSAiY3Mxb21hcDM1MzBfc2V0dXBsaW51eF8xXzAwXzAxLTQ0LmJpbiIKIAotUyA9ICIke1dP
+UktESVJ9L2R2c2RrXzNfMDBfMDFfNDIvY3Mxb21hcDM1MzBfMV8wMF8wMSIKK1MgPSAiJHtXT1JL
+RElSfS9kdnNka18zXzAwXzAyXzQ0L2NzMW9tYXAzNTMwXzFfMDBfMDEiCiAKIERFUEVORFM9InRp
+LWNvZGVjLWVuZ2luZSB0aS1kc3BsaW5rLW1vZHVsZSIKIApAQCAtMTQsNyArMTQsNyBAQCBleHBv
+cnQgQ09ERUdFTl9JTlNUQUxMX0RJUgogCiAjIFllcywgdGhlIHhkYyBzdHVmZiBzdGlsbCBicmVh
+a3Mgd2l0aCBhICcuJyBpbiBQV0QKIFBWID0gIjEwMSIKLVBSID0gInI1IgorUFIgPSAicjYiCiAK
+IGRvX2NvbXBpbGUoKSB7CiAKLS0gCjEuNS42LjUKCg==
 
-
-Hi,
-
-Over the last few days I created a recipe for mysql 5.1.40 based upon
-the mysql 4.1.22 recipe, the nslu2 optware patches
-(http://trac.nslu2-linux.org/optware/browser/trunk/sources/mysql5?rev=3D83=
-39&order=3Ddate&desc=3D1)
-and help on irc.
-
-I think the work is done, so I have committed my changes. (commit 35cc93da=
-88)
-The package is called mysql5 and resides in the mysql directory
-
-For now it has DEFAULT_PREFERENCE =3D "-1" for a number of reasons:
-
-- I am not a mysql wiz so I would suggest someone else tests this too
-(it works for the use case I have (mythtv))
-- I would appeciate it if someone would review the recipe
-- if one generates mysql5 the pacakges are named differently from the
-ones from mysql 4 (mysql5 package names start with mysql5)
-&#65533; HOWEVER a lot of filenames are the same. mysql5 requires
-mysql5-native so if you build mysql5, some mysql4 files in staging
-will be overwritten
-- and last but not least: MYSQL5 DATABASES ARE INCOMPATIBLE WITH MYSQL4!
-Apparently it is not possible to convert databases directly from 4 to
-5.1, so I decided just to discard my databases.
-According to the folks in #mysql the solution is to upgrade from 5 via
-5.0 to 5.1.
-If someone feels attracted to making a 5.0 recipe, be my guest (I've
-already spent more time on this than I planned to, then again I also
-learned more than I hoped for :-) )
-
-I would like to ask your opinion on this. If possible I would like to
-remove the DEFAULT_PREFERENCE in a week or so as mythtv 0.22 needs
-mysql5 (and they are different packages)
-Maybe it is possible to issue a big warning if someone moves from 4 to
-5, but I do not really know how to detect this properly (especially
-not in the case someone explicitly uninstalls mysql before installing
-mysql5).
-
-Your feedback is appreciated!
-Frans
-
-PS: for now the pid file of mysql is in /var/lib/mysql dir, if someone
-feels it should live elsewhere let me know (or fix it after
-discussion)
-(it cannot be in /var/run as the pid file is written by user mysql who
-has no write privileges in that dir, and, at least under angstrom,
-/var/run links to /var/volatile/run and is created during boot so
-/var/run/mysql is also not really an option)
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
-
-
-From dp@xora.org.uk Fri Nov 06 10:49:44 2009
-Received: from [209.85.219.209] (helo
+--0016e656b6e49363ce0477b142be--
