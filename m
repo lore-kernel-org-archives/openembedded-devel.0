@@ -1,44 +1,44 @@
-Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
+Received: from [209.85.219.209] (helo=mail-ew0-f209.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1N6Ni2-0000TC-Jf
+	(envelope-from <nicola.mfb@gmail.com>) id 1N6Nvb-0005jI-72
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Nov 2009 13:14:33 +0100
-Received: by bwz9 with SMTP id 9so1051958bwz.12
+	Fri, 06 Nov 2009 13:28:34 +0100
+Received: by ewy5 with SMTP id 5so927284ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Nov 2009 04:13:16 -0800 (PST)
+	Fri, 06 Nov 2009 04:27:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
-	:content-type:content-transfer-encoding;
-	bh=BwqupL+GCHogU+IIiBxh1/IEsLGuAHwP7OP8EnKeWcg=;
-	b=m3kNHaE6J+jQaSWRR1Dhxqf3ylP6337DXV7ic/w2GzTWXo0u8zlzonxSVSaUFcXjKx
-	3AGY05dOaDyep8sN/zDjA2mSj9ThIj0bhiGxTAt4QevDJ1R+3RZor1HdQuL8yUbJ1ZMH
-	eOakXBIbx4PDY1Ve4nzwUa5mq/iOoqZDjC0/E=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type;
+	bh=S1t0kkNuuPcxRJa/xVXLhdPRk9wcdutb1jtnOSyZbas=;
+	b=bTHUh4zKMow+L7EBbduFhhi0gQebt8LNrtHHUUUS5bjOhk6+vnKl82zBxkfREnjJLy
+	2Ir9wbY17EgMe3nq7MohajBY61InVltFSbOZTA/AjQDGGYac5BCtrd2D4SRwr5KuvxVB
+	tXgWClyVKKHRx8ILz0+FNvpFs+DBY3iHoNTVs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=vaH0ngVBd683Wp4zSJ3ht026QbXBb1YiqgtkrcBz+h3SA52i4RepdaFxBO+B1vEq7g
-	qZj5jZXY8kuVt4SR/yToqSjoH0fh0ftH2NzRN77ypxhR1/Qo6q9RZdlTXvEIaysJSvZv
-	WESVHVOz/X7SB9AmsQVWTWtYTNYC3vl0lpTRM=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	b=GvreW1nvr/XeOM6AeEhb4ePrpU7wBeL04WFSDa34buoK8pV1lwdx/Ki/Y27Uijbkw0
+	x3eLTn14M8hSqBIjHucALhVLYzJBuMyajAol8ZLeuuC0EXioH/laSi/tPchC6/e3fQNG
+	P3MQ7FMa0mYuBIUFEAY+TCGBnkPaN3eYtO/RM=
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.179.94 with SMTP id c30mr387938hbg.159.1257509596163; Fri, 
-	06 Nov 2009 04:13:16 -0800 (PST)
-In-Reply-To: <1257504486-7975-2-git-send-email-ynezz@true.cz>
-References: <1257504486-7975-1-git-send-email-ynezz@true.cz>
-	<1257504486-7975-2-git-send-email-ynezz@true.cz>
-Date: Fri, 6 Nov 2009 10:13:16 -0200
-X-Google-Sender-Auth: 70d4bcd748b790e9
-Message-ID: <be7a9f3d0911060413i778aec0cpf2c618832437665a@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+Received: by 10.213.24.22 with SMTP id t22mr4050867ebb.27.1257510050966; Fri, 
+	06 Nov 2009 04:20:50 -0800 (PST)
+In-Reply-To: <792ba59f0911050343y1b31dab1l54b774e1da1d6df5@mail.gmail.com>
+References: <4AEFEDD5.2080106@SSpaeth.de>
+	<359c5480911031448j5c083c75w1578f6f50a2aa5fa@mail.gmail.com>
+	<20091103230007.GB3295@jama> <1257391610.16913.4276.camel@shrek>
+	<359c5480911042351t7b2326b0kd7cf0b5ff080904f@mail.gmail.com>
+	<792ba59f0911050343y1b31dab1l54b774e1da1d6df5@mail.gmail.com>
+Date: Fri, 6 Nov 2009 13:20:50 +0100
+Message-ID: <359c5480911060420j3238011dw39e64bf395b399bb@mail.gmail.com>
+From: Nicola Mfb <nicola.mfb@gmail.com>
+To: shr-devel@lists.shr-project.org, openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.219.209
+X-SA-Exim-Mail-From: nicola.mfb@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [PATCH][geodegx] geodegx: Fix glibc configure error
+Cc: Maksim 'max_posedon' Melnikau <maxposedon@gmail.com>,
+	Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [Shr-Devel] New shr/image results
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,38 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Nov 2009 12:14:34 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 06 Nov 2009 12:28:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hello,
-
-On Fri, Nov 6, 2009 at 8:48 AM, Petr =C5=A0tetiar <ynezz@true.cz> wrote:
-> Fix glibc configure error:
+On Thu, Nov 5, 2009 at 12:43 PM, Maksim 'max_posedon' Melnikau
+<maxposedon@gmail.com> wrote:
+> On 11/5/09, Nicola Mfb <nicola.mfb@gmail.com> wrote:
+[...]
+>> However on the new image I got a strange error parsing xml files with
+>> qt libraries, it always gives me an error on line 1, character 1, the
+[...]
+> For me it was fixed by using -O2 instead of -Os, -Os ALWAYS reproduce
+> exactly this error. -O2 - never for me. So, try change your compile
+> flags to less agressive (qt-compile flags).
 >
-> | configure: running configure fragment for add-on nptl
-> | checking sysdep dirs... configure: error: The geode subspecies of i486 =
-is not supported.
-> | FATAL: oe_runconf failed
+> Maksim
 >
-> Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
 
-I use it this way here and it works. Which glibc version are you
-using? In my case I'm using:
+Thanks! It fixed the problem! it seems qt runs fine with eglibc and thumb.
+To build qt with -O2 i changed my local.conf adding:
 
-angstrom 2008 versions, plus:
+FULL_OPTIMIZATION_pn-qt4-x11-free = "-fexpensive-optimizations
+-fomit-frame-pointer -frename-registers -O2"
 
-PREFERRED_VERSION_gcc                    =3D "4.3.2"
-PREFERRED_VERSION_gcc-cross              =3D "4.3.2"
-PREFERRED_VERSION_gcc-cross-sdk          =3D "4.3.2"
-PREFERRED_VERSION_gcc-cross-initial      =3D "4.3.2"
-PREFERRED_VERSION_gcc-cross-intermediate =3D "4.3.2"
+To fix that upstream I do not know where it should be placed as it
+should affect all distro using gcc 4.4.x?
 
-And I build in stable; but this is not supposed to affect it.
+Best regards
 
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+    Nicola
 
 
