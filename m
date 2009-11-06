@@ -1,26 +1,30 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [87.193.137.100] (helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1N6IoJ-0000AF-EJ
+	(envelope-from <sledz@DResearch.DE>) id 1N6JwS-0000FG-7L
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Nov 2009 08:00:42 +0100
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 6167A1B10C05
+	Fri, 06 Nov 2009 09:13:11 +0100
+Received: from hiob.intern.dresearch.de (unknown [10.32.0.138])
+	by mail.dresearch.de (Postfix) with ESMTP id A284C4912A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Nov 2009 07:09:46 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 6 Nov 2009 07:59:07 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <b8b15f5e0911052137i83348d4rc21cd418d32c1665@mail.gmail.com>
-In-Reply-To: <b8b15f5e0911052137i83348d4rc21cd418d32c1665@mail.gmail.com>
+	Fri,  6 Nov 2009 08:41:32 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Fri, 6 Nov 2009 08:44:02 +0100
+Message-ID: <4AF3D312.9040101@dresearch.de>
+Date: Fri, 06 Nov 2009 08:41:06 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
 MIME-Version: 1.0
-Message-Id: <200911060759.07303.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+To: openembedded-devel@lists.openembedded.org
+References: <4AF2B936.4020105@dresearch.de>	<baaef4710911050521m19cdb480k3460a4715d939563@mail.gmail.com>
+	<4AF35674.5040608@gmail.com>
+In-Reply-To: <4AF35674.5040608@gmail.com>
+X-OriginalArrivalTime: 06 Nov 2009 07:44:02.0250 (UTC)
+	FILETIME=[E89232A0:01CA5EB4]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: First compilation issues
+Subject: Re: opkg memory problem?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,34 +38,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Nov 2009 07:00:42 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 06 Nov 2009 08:13:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Friday 06 November 2009 06:37:52 Won J Jeon wrote:
-> I successfully compiled Angstrom Linux with OE and now I am trying to learn
-> how to use OE on my Ubuntu 9.04. While I was following the simple
-> instruction to compile 'myhelloworld' in the manual, I have the following
-> error messages:
+Graham Gower wrote:
+> The following is untested and only reduces that chances of this occuring,
+> but perhaps it makes sense to do something like this?
 > 
-> $ bitbake -b recipes/myhelloworld/myhelloworld_0.1.bb
-> /var/lib/python-support/python2.6/bb/COW.py:29: DeprecationWarning: the
->  sets module is deprecated
->   import types, sets
-> NOTE: Preparing runqueue
-> NOTE: Executing runqueue
-> NOTE: Running task 1 of 19 (ID: 1, /OE/openembedded/recipes/myhelloworld/
-> myhelloworld_0.1.bb, do_setscene)
-> ERROR: function staging_helper failed
-> ERROR: see log in
-> ${OETREE}/angstrom-dev/work/armv5te-angstrom-linux-gnueabi/myhelloworld-0.1
-> -r0/temp/log.staging_helper.9492 NOTE: Task failed:
+> diff --git a/classes/rootfs_ipk.bbclass b/classes/rootfs_ipk.bbclass
+> ...
+
+It seems to help in my case. No error messages any longer. :)
 
 
-Oh well... look at the log file? Seeing ${OETREE} unexpanded is weird too... 
-maybe you should set the variable to something?
-
-z.
 
 
