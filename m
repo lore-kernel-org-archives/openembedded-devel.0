@@ -1,35 +1,38 @@
-Received: from [209.85.217.227] (helo=mail-gx0-f227.google.com)
+Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N6s3N-0001rX-1w
+	(envelope-from <otavio.salvador@gmail.com>) id 1N6s5S-00029C-6Y
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Nov 2009 21:38:36 +0100
-Received: by gxk27 with SMTP id 27so682887gxk.7
+	Sat, 07 Nov 2009 21:40:45 +0100
+Received: by bwz9 with SMTP id 9so2154405bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Nov 2009 12:37:17 -0800 (PST)
+	Sat, 07 Nov 2009 12:39:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=zK/yZHnN38D+F0fI3HqEdYIJshMIJhQqNYSZ7HlgDMc=;
-	b=Xk0ztLu6v7Cx8PmAyvfGTnM9DBztvVjSQ3JBVsAHTd9c0PaGzor8VF7ZPcU41DT2sa
-	Uqt90KsnMas/q6S9vy7+DO+oUNewz7DnHkjdCYrjn9ehnOKFRPK43KGsrQ/XR6kKfRoQ
-	RELnRWF0UesSPRgJrzS2VTvGAkED3l+M83CK0=
+	h=domainkey-signature:mime-version:sender:received:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=4iDhIQHP+o7OowOgBGv72/TUXlSnfH3te4/jya66lS8=;
+	b=irgTBScLpkXO+bY8/TF3UcZkfUjWe+cdks9R0YhQZ6dqugL81F7lbmUULdAUnI5hFr
+	wYM4GZ1uuRA0bEvfyAJnNgknOVdJxwQIaGC/cLGcZwxifD55iuZvmRgwwx/7jkuQkPy7
+	udbrG7jQa2YQBczVu2BjR8UVyNEnwTkX4UEFc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=YGaBW5BcH+4Z2pAhU1ZIZUvDYX9cswMpdIvYy7nIhzsRh9J8viC/Apx7ACR5J0XZBw
-	/SgVya6Tr0W69kg+D92JI1R2CbIBeqAPSnDcwbpXN4cEiwcDHEY4t9NwTHfN76v3WzFf
-	Ukh/fycdS8ROx2FGtKScga+afnNP5zKrGTYJs=
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	b=pYeI3FodnghFiOnbCtmBfQqSVedq53fAbLTJJ+eWWg24ZhGeuqVe9AUwl8eziS+63W
+	b+6k2qoPwvxZM1BaP99Zrhz1P9Mjz/gIZaC5s22Or0gEaJO4LO9bTjwGx2IQpt5CROOU
+	kiN6dABBnqtgl2E2kkTfOyxr+0FCuO+2J0Kwg=
 MIME-Version: 1.0
-Received: by 10.101.23.18 with SMTP id a18mr5617095anj.144.1257626237636; Sat, 
-	07 Nov 2009 12:37:17 -0800 (PST)
-Date: Sat, 7 Nov 2009 21:37:17 +0100
-Message-ID: <ac9c93b10911071237p63d19210m619afcaa914189f3@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.217.227
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Sender: otavio.salvador@gmail.com
+Received: by 10.239.163.205 with SMTP id q13mr618074hbd.132.1257625999519; 
+	Sat, 07 Nov 2009 12:33:19 -0800 (PST)
+Date: Sat, 7 Nov 2009 18:33:19 -0200
+X-Google-Sender-Auth: 4f823dcd5f4c659f
+Message-ID: <be7a9f3d0911071233k6241f40jcee37bb9f2fca680@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: bitbake-dev@lists.berlios.de, openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: perl/cpan issue (cpan.bbclass, perl/config.sh)
+Subject: Please review and pull, if possible, our current changes to bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,29 +46,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Nov 2009 20:38:36 -0000
+X-List-Received-Date: Sat, 07 Nov 2009 20:40:45 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-I was trying to make xmltv but noticed some files were missing from the recipe.
-The recipe includes cpan
+The following changes since commit 0bbcb946213f0a8940d9941ad50d6505bd1befcf:
+  Chris Conroy (1):
+        providers.py: Fix package sorting order to reflect priorities
 
-Apparently some of the files are in the xmltv work dir but others are
-copied to the perl work dir.
-I don't think this is good, but I am not a perl/cpan expert, so
-seeking for advice and/or a fix.
+are available in the git repository at:
 
-Apparently cpan.bbclass invokes perl/config.sh
-This one contains things like:
-config_arg7='-Dinstallprefix=/home/frans/oe/tmp_angstrom/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r29/image'
-..
-installbin='/home/frans/oe/tmp_angstrom/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r29/image/usr/bin'
-...
-Guess config.sh is the bad guy
-Not sure how to fix this.
+  git://projetos.ossystems.com.br/git/uses/otavio/bitbake.git 1.10
 
-Please advise (or if you are a wiz, please fix and I'll study the fix
-and learn from it :-) )
+Otavio Salvador (4):
+      [fetch]: Refactor code to be easier to get supported SCMs (from
+O.S. Systems)
+      [fetch/git]: Refactor to allow checking if a revision is already
+taken (from O.S. Systems)
+      [fetch]: Extend the interface to allow SCMs to describe a
+revision (from O.S. Systems)
+      [fetch/git]: Add support to describe a revision
 
-Frans
+ lib/bb/fetch/__init__.py |   47 +++++++++++++++++++++++++++++++++------------
+ lib/bb/fetch/git.py      |   41 ++++++++++++++++++++++++++++++++-------
+ 2 files changed, 67 insertions(+), 21 deletions(-)
+
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
