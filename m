@@ -1,28 +1,38 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1N6lhz-0005i6-CJ
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1N6mTU-0002Cv-PA for openembedded-devel@lists.openembedded.org;
+	Sat, 07 Nov 2009 15:41:11 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N6mSK-00044Z-3V
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Nov 2009 14:52:06 +0100
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 43CA31B10C05
+	Sat, 07 Nov 2009 15:39:56 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 07 Nov 2009 15:39:56 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Nov 2009 14:01:17 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Sat, 07 Nov 2009 15:39:56 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 7 Nov 2009 14:50:30 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <ac9c93b10911061238p366f65edqeff04b25c872015f@mail.gmail.com>
-	<ac9c93b10911070106n587495a5qaf3cfc9288df7e8@mail.gmail.com>
-	<4AF574B5.2010802@mwester.net>
-In-Reply-To: <4AF574B5.2010802@mwester.net>
-MIME-Version: 1.0
-Message-Id: <200911071450.30712.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 07 Nov 2009 15:39:43 +0100
+Message-ID: <hd40rf$sb7$1@ger.gmane.org>
+References: <ac9c93b10911060006x1a60e677ic6f2c192eedc176d@mail.gmail.com>	<217663.38369.qm@web112503.mail.gq1.yahoo.com>	<ac9c93b10911060237i44b0d886qccfb0d64f94ae6ec@mail.gmail.com>
+	<ac9c93b10911060633h7240008eqd035499cf052af1e@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <ac9c93b10911060633h7240008eqd035499cf052af1e@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: what to do with wrong checksum
+Subject: Re: mysql 5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,35 +46,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Nov 2009 13:52:06 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Sat, 07 Nov 2009 14:41:11 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Saturday 07 November 2009 14:23:01 Mike Westerhof wrote:
-> Frans Meulenbroeks wrote:
-> ...
-> 
-> > Reluctantly updated checksums.ini
-> >
-> > Frans
-> 
-> But of course there's no magic that will remove the old cached tarball
-> out of one's downloads directory when this sort of thing happens.
-> (Busybox has been known to do this, too)
-> 
-> What do folks think we should do about that when it occurs?
-> a) support two entries (old and new) in checksums.ini
-> b) do nothing (leave as is)
-> c) add some sort of support so that the user gets additional information
->    with the new checksum match failure explaining that the checksum was
->    updated and they need to manually remove the old (bad) tarball
+On 06-11-09 15:33, Frans Meulenbroeks wrote:
+> one more thing
+> when installing mysql5 client or server packages they insist on
+> installing libmysqlclient-dev
+> No idea why this should be the -dev package. Content seems as expected.
+> Solutions are welcome !
 
+Probably a .so file that isn't a symlink to so.4.5.5.64.4
 
-Good question... currently we only check the checksum after download, a first 
-start would be to do it before unpack... this would create an error and we 
-could implement c) later... (e.g. by creating a old_checksums.ini)
+regards,
 
-z.
+Koen
+
 
 
