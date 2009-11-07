@@ -1,38 +1,37 @@
-Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1N6s5S-00029C-6Y
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1N6tOK-0005ir-4E for openembedded-devel@lists.openembedded.org;
+	Sat, 07 Nov 2009 23:04:19 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N6tN8-0002da-R1
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Nov 2009 21:40:45 +0100
-Received: by bwz9 with SMTP id 9so2154405bwz.12
+	Sat, 07 Nov 2009 23:03:02 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 07 Nov 2009 23:03:02 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Nov 2009 12:39:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	bh=4iDhIQHP+o7OowOgBGv72/TUXlSnfH3te4/jya66lS8=;
-	b=irgTBScLpkXO+bY8/TF3UcZkfUjWe+cdks9R0YhQZ6dqugL81F7lbmUULdAUnI5hFr
-	wYM4GZ1uuRA0bEvfyAJnNgknOVdJxwQIaGC/cLGcZwxifD55iuZvmRgwwx/7jkuQkPy7
-	udbrG7jQa2YQBczVu2BjR8UVyNEnwTkX4UEFc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type;
-	b=pYeI3FodnghFiOnbCtmBfQqSVedq53fAbLTJJ+eWWg24ZhGeuqVe9AUwl8eziS+63W
-	b+6k2qoPwvxZM1BaP99Zrhz1P9Mjz/gIZaC5s22Or0gEaJO4LO9bTjwGx2IQpt5CROOU
-	kiN6dABBnqtgl2E2kkTfOyxr+0FCuO+2J0Kwg=
-MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.163.205 with SMTP id q13mr618074hbd.132.1257625999519; 
-	Sat, 07 Nov 2009 12:33:19 -0800 (PST)
-Date: Sat, 7 Nov 2009 18:33:19 -0200
-X-Google-Sender-Auth: 4f823dcd5f4c659f
-Message-ID: <be7a9f3d0911071233k6241f40jcee37bb9f2fca680@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: bitbake-dev@lists.berlios.de, openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+	Sat, 07 Nov 2009 23:03:02 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 07 Nov 2009 23:02:33 +0100
+Message-ID: <hd4qpq$ee0$1@ger.gmane.org>
+References: <ac9c93b10911061238p366f65edqeff04b25c872015f@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
+In-Reply-To: <ac9c93b10911061238p366f65edqeff04b25c872015f@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Please review and pull, if possible, our current changes to bitbake
+Subject: Re: what to do with wrong checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,33 +45,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Nov 2009 20:40:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 07 Nov 2009 22:04:19 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The following changes since commit 0bbcb946213f0a8940d9941ad50d6505bd1befcf:
-  Chris Conroy (1):
-        providers.py: Fix package sorting order to reflect priorities
+On 06-11-09 21:38, Frans Meulenbroeks wrote:
+> While trying to build xmltv I got this:
+>
+> NOTE: The MD5Sums did not match. Wanted:
+> '495fd8c320f67a0c8e0b90ccb060f0ea' and Got:
+> '68d9a93d507bbf917e1f3ad294fd5727'
+> NOTE: Task failed: Checksum of
+> 'http://xmltwig.com/xmltwig/XML-Twig-3.33.tar.gz' failed
+>
+> How should I handle this. Of course I can change the checksum, but i
+> don't think that is the intention :-)
+> Is there a version somewhere cached that has the old checksum (so I
+> can compare).
+> Or how else should I handle this?
 
-are available in the git repository at:
+I implemented option 'd':
 
-  git://projetos.ossystems.com.br/git/uses/otavio/bitbake.git 1.10
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=7e8f2afa6fb064aaa3b477456c60f64b20caedeb
 
-Otavio Salvador (4):
-      [fetch]: Refactor code to be easier to get supported SCMs (from
-O.S. Systems)
-      [fetch/git]: Refactor to allow checking if a revision is already
-taken (from O.S. Systems)
-      [fetch]: Extend the interface to allow SCMs to describe a
-revision (from O.S. Systems)
-      [fetch/git]: Add support to describe a revision
+And I have to repeat that the twig upstream are idiots for behaving like 
+this. May the fleas of a thousand camels infest their sensitive regions!
 
- lib/bb/fetch/__init__.py |   47 +++++++++++++++++++++++++++++++++------------
- lib/bb/fetch/git.py      |   41 ++++++++++++++++++++++++++++++++-------
- 2 files changed, 67 insertions(+), 21 deletions(-)
+regards,
 
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+Koen
+
 
 
