@@ -1,45 +1,41 @@
-Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
+Received: from [212.18.0.10] (helo=mail-out.m-online.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1N6oKl-0002Ge-P2
+	(envelope-from <mok@mnet-online.de>) id 1N6oLU-0002HR-6P
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Nov 2009 17:40:18 +0100
-Received: by bwz9 with SMTP id 9so2048231bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Nov 2009 08:39:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=kfLv+PbNTlprq3B0jOqKhrO5YixhN1L2bKiXV1VZar0=;
-	b=b9P5QNJSFFjTsB8AHhNtAPynlDoAcmJDESa1ScZK3i5BMm8J8gBwT8cf9n0P9RR0KC
-	KTdMe9EoA/tSG7vU243URSClckze/g7cQS9UVE6UaZxuwX1qZpmnSeFatSiBnXtqRgPk
-	bK9kcEml4f9RZjRA35dGCG80/+wQ2XZdPKYNk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=MB7ovags6BaQ+kKTTM8gOhQmPwSiiGwtZyWDI5KJiZ/YXoRS5+ZhXlZueS4rEUW4up
-	sHl911nsdg5P1fkVdaMx3MDCwVS1uJuLlbHLlypvVTC8BQFKNtHHE+AimGG/6pM3o4g4
-	EecWQmFD1D1ysq2qdKu+hoA6Vym+jSvVTpHvo=
-MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.244.83 with SMTP id l19mr570247hbq.202.1257611939890; Sat, 
-	07 Nov 2009 08:38:59 -0800 (PST)
-In-Reply-To: <hd4108$sbn$2@ger.gmane.org>
-References: <ac9c93b10911061238p366f65edqeff04b25c872015f@mail.gmail.com>
-	<200911070406.18094.holger+oe@freyther.de>
-	<ac9c93b10911070106n587495a5qaf3cfc9288df7e8@mail.gmail.com>
-	<4AF574B5.2010802@mwester.net> <hd4108$sbn$2@ger.gmane.org>
-Date: Sat, 7 Nov 2009 14:38:59 -0200
-X-Google-Sender-Auth: 287ad05ef93a65e6
-Message-ID: <be7a9f3d0911070838x34e5cce8je93bc39aeb8fb3aa@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Sat, 07 Nov 2009 17:41:03 +0100
+Received: from mail01.m-online.net (mail.m-online.net [192.168.3.149])
+	by mail-out.m-online.net (Postfix) with ESMTP id 5FA511C0009F;
+	Sat,  7 Nov 2009 17:30:13 +0100 (CET)
+Received: from localhost (dynscan1.mnet-online.de [192.168.8.164])
+	by mail.m-online.net (Postfix) with ESMTP id D2F4A90247;
+	Sat,  7 Nov 2009 17:30:13 +0100 (CET)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.3.149])
+	by localhost (dynscan1.mnet-online.de [192.168.8.164]) (amavisd-new,
+	port 10024)
+	with ESMTP id aGY1ERL0XEKO; Sat,  7 Nov 2009 17:30:13 +0100 (CET)
+Received: from mrdenker.localdomain (ppp-88-217-30-114.dynamic.mnet-online.de
+	[88.217.30.114])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mail.mnet-online.de (Postfix) with ESMTP;
+	Sat,  7 Nov 2009 17:30:13 +0100 (CET)
+From: "Klaus 'mrmoku' Kurzmann" <mok@mnet-online.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+Date: Sat, 7 Nov 2009 17:30:08 +0100
+User-Agent: KMail/1.12.1 (Linux/2.6.30.8-64.fc11.x86_64; KDE/4.3.1; x86_64; ; )
+References: <200910222339.32881.david.lanzendoerfer@o2s.ch>
+	<200911052309.39050.marcin@juszkiewicz.com.pl>
+	<1257460931.4676.9.camel@andromeda>
+In-Reply-To: <1257460931.4676.9.camel@andromeda>
+MIME-Version: 1.0
+Message-Id: <200911071730.09092.mok@mnet-online.de>
+X-SA-Exim-Connect-IP: 212.18.0.10
+X-SA-Exim-Mail-From: mok@mnet-online.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: what to do with wrong checksum
+Cc: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Subject: Re: Patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,45 +49,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Nov 2009 16:40:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 07 Nov 2009 16:41:03 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hello,
+Am Donnerstag 05 November 2009 23:42:11 schrieb Michael 'Mickey' Lauer:
+> Am Donnerstag, den 05.11.2009, 23:09 +0100 schrieb Marcin Juszkiewicz:
+> > Dnia czwartek, 5 listopada 2009 o 22:33:31 Koen Kooi napisa=C5=82(a):
+> > > No, if your machine requires a special format you should use +=3D, th=
+at
+> > > way you get the stuff in local.conf and the thing the machine require=
+s.
+> >
+> > Exactly - I am tired of builds which ends only in jffs2 when I want to
+> > check rootfs contents after doing multimachine nightly build.
+>=20
+> Right. +=3D sounds good.
+>=20
+hmm, what does this mean for om-gta01/2 for example? I just applied a patch=
+=20
+that changes that +=3D into the weak ?=3D ...
 
-On Sat, Nov 7, 2009 at 12:42 PM, Koen Kooi <k.kooi@student.utwente.nl> wrot=
-e:
-> On 07-11-09 14:23, Mike Westerhof wrote:
->>
->> Frans Meulenbroeks wrote:
->> ...
->>>
->>> Reluctantly updated checksums.ini
->>>
->>> Frans
->>
->> But of course there's no magic that will remove the old cached tarball
->> out of one's downloads directory when this sort of thing happens.
->> (Busybox has been known to do this, too)
->>
->> What do folks think we should do about that when it occurs?
->> a) support two entries (old and new) in checksums.ini
->> b) do nothing (leave as is)
->> c) add some sort of support so that the user gets additional information
->> =A0 =A0with the new checksum match failure explaining that the checksum =
-was
->> =A0 =A0updated and they need to manually remove the old (bad) tarball
->
-> d) rename the tarball slighty and mirror in on a known good server (e.g.
-> angstrom sourcemirror) and have OE use that.
+As for the openmoko phones you can either use a tar.gz for booting from SD =
+or=20
+jffs2 to boot from flash. But I might just want to build one of those?
 
-IMO (d) is the safest and the right thing to do; this avoids more core
-to be written and avoids also we use changed versions without
-noticing.
+Thanks
+=2D-=20
 
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+Klaus 'mrmoku' Kurzmann
 
 
