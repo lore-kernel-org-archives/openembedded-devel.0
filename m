@@ -1,45 +1,43 @@
-Received: from [209.85.218.210] (helo=mail-bw0-f210.google.com)
+Received: from [209.85.211.177] (helo=mail-yw0-f177.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1N6ocy-0002xO-AX
-	for openembedded-devel@openembedded.org; Sat, 07 Nov 2009 17:59:07 +0100
-Received: by bwz2 with SMTP id 2so3016314bwz.20
-	for <openembedded-devel@openembedded.org>;
-	Sat, 07 Nov 2009 08:57:49 -0800 (PST)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N6pbu-0008Kf-Si
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 07 Nov 2009 19:02:06 +0100
+Received: by ywh7 with SMTP id 7so1760673ywh.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 07 Nov 2009 10:00:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
-	:content-type:content-transfer-encoding;
-	bh=4BMdPT4iv3FiDS/uMoezpzaUz1Hn+gH7KdiTlrqCqNg=;
-	b=BWAz9SDIoRZoJg/3KVxjEYNtoSRkNgSN6P9U+7GFGHXZe/0jtbZ6BQUvmRaMW+X39p
-	4zOr3ICruTKblCkHC2DuC7+WC0rzwne6dL0FR/nrbMWpEAuGnrEtY1ivRXdP96yICVX6
-	zit0WwCS8fbr+m51QICFQjiWFPiDhBmC+UJrI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	b=oRgFp9npwy5Y1Sm/93mwZDb0oPE9Bu0gRvVH2WtWmzL8//yO+azb9DM1gQVVSr1WY1
-	g1n0ZlpMqKEQvGgfdQD4GzRJZp8KKN6sO9UEZTaxSxCUi8ucBoHn7sswvRTN6e9o6CT6
-	X4+HlyyDGGNr0+kKUaw0/vVD/5SBPUF4jgaxc=
+	bh=LxPH2s67u/+piFoYLU7505fFgb/+ClqvK8k86IULL/4=;
+	b=N+o73X4Yu/Z43Nw5oiqlxWGCBeGQ8M1OVs4viPpfJZlXJp9cz4Xr8lSS+6ucTvTqxU
+	p0RL4Tq9IMRziuc5um+DE+tSKGLbvZ+Il5BRerJBMGMLPq4Vt+8RMGDYtNEUNV4UdlpU
+	uj5wRICif3Pm2xsYkGzuxIXT2kntux1+0xqAk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=GuZVt0GZhgjY3vc1pt9YvN6bWd7Gylp6UgUYMni70D7RP0Z85Xcp7AoBQQ1PuPPVKG
+	/lpeWoETQWYIj6gDMYrIZr5m++R1s521NR2HV3LZTYjmDF5ikMGiTWL2xYDWZ8bZSJTn
+	Z6p0Opo0gmpn8mQx3abNlmosA0XXaSvZddTr8=
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.160.131 with SMTP id c3mr30259hbd.82.1257613069069; Sat, 
-	07 Nov 2009 08:57:49 -0800 (PST)
-In-Reply-To: <20091106140519.GA25214@ibawizard.net>
-References: <1257504486-7975-1-git-send-email-ynezz@true.cz>
-	<1257504486-7975-2-git-send-email-ynezz@true.cz>
-	<be7a9f3d0911060413i778aec0cpf2c618832437665a@mail.gmail.com>
-	<20091106140519.GA25214@ibawizard.net>
-Date: Sat, 7 Nov 2009 14:57:49 -0200
-X-Google-Sender-Auth: c78c07e0fde136f3
-Message-ID: <be7a9f3d0911070857t179c5c31o7f066945c5738917@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by 10.101.7.37 with SMTP id k37mr5671906ani.121.1257616846540; Sat, 
+	07 Nov 2009 10:00:46 -0800 (PST)
+In-Reply-To: <be7a9f3d0911070838x34e5cce8je93bc39aeb8fb3aa@mail.gmail.com>
+References: <ac9c93b10911061238p366f65edqeff04b25c872015f@mail.gmail.com>
+	<200911070406.18094.holger+oe@freyther.de>
+	<ac9c93b10911070106n587495a5qaf3cfc9288df7e8@mail.gmail.com>
+	<4AF574B5.2010802@mwester.net> <hd4108$sbn$2@ger.gmane.org>
+	<be7a9f3d0911070838x34e5cce8je93bc39aeb8fb3aa@mail.gmail.com>
+Date: Sat, 7 Nov 2009 19:00:46 +0100
+Message-ID: <ac9c93b10911071000p51baba8fi8f4935f962eb8810@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.210
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+X-SA-Exim-Connect-IP: 209.85.211.177
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [PATCH][geodegx] geodegx: Fix glibc configure error
+Subject: Re: what to do with wrong checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,25 +51,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Nov 2009 16:59:07 -0000
-Content-Type: text/plain; charset=ISO-8859-2
+X-List-Received-Date: Sat, 07 Nov 2009 18:02:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hello,
+2009/11/7 Otavio Salvador <otavio@ossystems.com.br>:
+> Hello,
+>
+> On Sat, Nov 7, 2009 at 12:42 PM, Koen Kooi <k.kooi@student.utwente.nl> wr=
+ote:
+>> On 07-11-09 14:23, Mike Westerhof wrote:
+>>>
+>>> Frans Meulenbroeks wrote:
+>>> ...
+>>>>
+>>>> Reluctantly updated checksums.ini
+>>>>
+>>>> Frans
+>>>
+>>> But of course there's no magic that will remove the old cached tarball
+>>> out of one's downloads directory when this sort of thing happens.
+>>> (Busybox has been known to do this, too)
+>>>
+>>> What do folks think we should do about that when it occurs?
+>>> a) support two entries (old and new) in checksums.ini
+>>> b) do nothing (leave as is)
+>>> c) add some sort of support so that the user gets additional informatio=
+n
+>>> =A0 =A0with the new checksum match failure explaining that the checksum=
+ was
+>>> =A0 =A0updated and they need to manually remove the old (bad) tarball
+>>
+>> d) rename the tarball slighty and mirror in on a known good server (e.g.
+>> angstrom sourcemirror) and have OE use that.
+>
+> IMO (d) is the safest and the right thing to do; this avoids more core
+> to be written and avoids also we use changed versions without
+> noticing.
 
-2009/11/6 Petr =A9tetiar <ynezz@true.cz>:
-> I build dev and I found this fix on the web using Google, now looking it =
-up
-> again I found yours and Hrw's conversation on #oe http://pastebin.com/f66=
-40d6f7
-> It seems, that it's 4.3.3 issue?
+Ok, I'll leave it to someone with better access so e.g. the
+sourcemirror to change things.
+BTW I've exchanged an email with the author of twig. He stated that
+the version on CPAN (3.22) is the official version and that the
+version we use is the current development version and subject to
+change.
+He proposed to move the 3.33 version to CPAN (which I encouraged).
+Guess we should then move to the cpan version which is the fixed one.
 
-Yes; you and hrw are the two persons that found it; maybe it is gcc
-related indeed; while you're on it, do you mind to test it?
+Frans
 
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+PS: and I did not think of cached versions of the files, otherwise I
+would probably taken somewhat more caution before upgrading
+checksums.ini
 
 
