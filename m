@@ -1,41 +1,42 @@
-Received: from [212.18.0.10] (helo=mail-out.m-online.net)
+Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mok@mnet-online.de>) id 1N6oLU-0002HR-6P
+	(envelope-from <otavio.salvador@gmail.com>) id 1N6oT1-0002bm-L0
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Nov 2009 17:41:03 +0100
-Received: from mail01.m-online.net (mail.m-online.net [192.168.3.149])
-	by mail-out.m-online.net (Postfix) with ESMTP id 5FA511C0009F;
-	Sat,  7 Nov 2009 17:30:13 +0100 (CET)
-Received: from localhost (dynscan1.mnet-online.de [192.168.8.164])
-	by mail.m-online.net (Postfix) with ESMTP id D2F4A90247;
-	Sat,  7 Nov 2009 17:30:13 +0100 (CET)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.3.149])
-	by localhost (dynscan1.mnet-online.de [192.168.8.164]) (amavisd-new,
-	port 10024)
-	with ESMTP id aGY1ERL0XEKO; Sat,  7 Nov 2009 17:30:13 +0100 (CET)
-Received: from mrdenker.localdomain (ppp-88-217-30-114.dynamic.mnet-online.de
-	[88.217.30.114])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.mnet-online.de (Postfix) with ESMTP;
-	Sat,  7 Nov 2009 17:30:13 +0100 (CET)
-From: "Klaus 'mrmoku' Kurzmann" <mok@mnet-online.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 7 Nov 2009 17:30:08 +0100
-User-Agent: KMail/1.12.1 (Linux/2.6.30.8-64.fc11.x86_64; KDE/4.3.1; x86_64; ; )
-References: <200910222339.32881.david.lanzendoerfer@o2s.ch>
-	<200911052309.39050.marcin@juszkiewicz.com.pl>
-	<1257460931.4676.9.camel@andromeda>
-In-Reply-To: <1257460931.4676.9.camel@andromeda>
+	Sat, 07 Nov 2009 17:48:50 +0100
+Received: by bwz9 with SMTP id 9so2052338bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 07 Nov 2009 08:47:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=LlgG8n48yGXdjYP4clCxBNwWSq5L5/R3+Swix9BHtU4=;
+	b=dby3FQRm7YWmNm8aGPyOzHH9fjEPaQ7VIFNm0X1BNTP77VUiO7RC8GBuQZjfhdQRhY
+	5mskvWAF47/9e5icYzQGk/UWeVEpkWvSAjPDTJZWfoR4rEgFddxcwkkGtYEgfkduVq70
+	EX7W+PqarDU+wBHHyohOAjDmkLse3aqcWBXWY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=cNgDcf1k66iwt07PlJiwjv2hGgOW2mZLUfWgTmVZ8zXY4jIl2oZYHYiKcutcEO2lOc
+	z5gd4ODU3iEsQRVXpRj6qLmSFLx5glFQfFDiV1M+LcYEIYjavppG+kxn+5/yO/YO7Lj8
+	kC+sRfqKeNKklTmEII3UYz/OALA4UxBV76ja0=
 MIME-Version: 1.0
-Message-Id: <200911071730.09092.mok@mnet-online.de>
-X-SA-Exim-Connect-IP: 212.18.0.10
-X-SA-Exim-Mail-From: mok@mnet-online.de
+Sender: otavio.salvador@gmail.com
+Received: by 10.239.182.137 with SMTP id q9mr635034hbg.72.1257612452268; Sat, 
+	07 Nov 2009 08:47:32 -0800 (PST)
+In-Reply-To: <1257536522-11924-1-git-send-email-ynezz@true.cz>
+References: <1257536522-11924-1-git-send-email-ynezz@true.cz>
+Date: Sat, 7 Nov 2009 14:47:32 -0200
+X-Google-Sender-Auth: f7c9c39e00091f84
+Message-ID: <be7a9f3d0911070847v3aa17637i5505f6dfd94f646@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-Subject: Re: Patches
+Subject: Re: [PATCH] Machine configuration for IEI Nano GX-466
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,35 +50,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Nov 2009 16:41:03 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Sat, 07 Nov 2009 16:48:50 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Am Donnerstag 05 November 2009 23:42:11 schrieb Michael 'Mickey' Lauer:
-> Am Donnerstag, den 05.11.2009, 23:09 +0100 schrieb Marcin Juszkiewicz:
-> > Dnia czwartek, 5 listopada 2009 o 22:33:31 Koen Kooi napisa=C5=82(a):
-> > > No, if your machine requires a special format you should use +=3D, th=
-at
-> > > way you get the stuff in local.conf and the thing the machine require=
-s.
-> >
-> > Exactly - I am tired of builds which ends only in jffs2 when I want to
-> > check rootfs contents after doing multimachine nightly build.
->=20
-> Right. +=3D sounds good.
->=20
-hmm, what does this mean for om-gta01/2 for example? I just applied a patch=
-=20
-that changes that +=3D into the weak ?=3D ...
+Hello,
 
-As for the openmoko phones you can either use a tar.gz for booting from SD =
-or=20
-jffs2 to boot from flash. But I might just want to build one of those?
+On Fri, Nov 6, 2009 at 5:42 PM, Petr =C5=A0tetiar <ynezz@true.cz> wrote:
+> +XSERVER =3D "xserver-xorg \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 xf86-input-evdev \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 xf86-input-mouse \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 xf86-input-tslib \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 xf86-video-geode \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 xf86-input-keyboard"
 
-Thanks
-=2D-=20
+xaa and int10 might be added here since you're using XSERVER variable here.
 
-Klaus 'mrmoku' Kurzmann
+So ignore my suggestion to RDEPENDS on them in xf86-video-geode.
+
+--=20
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
