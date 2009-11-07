@@ -1,23 +1,26 @@
-Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N6k4T-0004Zg-Qr
-	for openembedded-devel@openembedded.org; Sat, 07 Nov 2009 13:07:12 +0100
-Received: (qmail 23113 invoked by uid 813007); 7 Nov 2009 12:05:56 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO maluch.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 7 Nov 2009 12:05:56 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 7 Nov 2009 12:05:54 +0000
-User-Agent: KMail/1.12.2 (Linux/2.6.32-rc4-00094-g80f5069; KDE/4.3.2; i686; ; )
+Received: from [72.167.82.86] (helo=p3plsmtpa01-06.prod.phx3.secureserver.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1N6lNU-0001OD-IH
+	for openembedded-devel@openembedded.org; Sat, 07 Nov 2009 14:30:55 +0100
+Received: (qmail 5028 invoked from network); 7 Nov 2009 13:22:57 -0000
+Received: from unknown (209.242.7.133)
+	by p3plsmtpa01-06.prod.phx3.secureserver.net (72.167.82.86) with ESMTP;
+	07 Nov 2009 13:22:57 -0000
+Message-ID: <4AF574B5.2010802@mwester.net>
+Date: Sat, 07 Nov 2009 07:23:01 -0600
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-Message-Id: <200911071205.54504.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+To: openembedded-devel@lists.openembedded.org
+References: <ac9c93b10911061238p366f65edqeff04b25c872015f@mail.gmail.com>	<200911070406.18094.holger+oe@freyther.de>
+	<ac9c93b10911070106n587495a5qaf3cfc9288df7e8@mail.gmail.com>
+In-Reply-To: <ac9c93b10911070106n587495a5qaf3cfc9288df7e8@mail.gmail.com>
+X-SA-Exim-Connect-IP: 72.167.82.86
+X-SA-Exim-Mail-From: mike@mwester.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: hrw/linux-updates branch created
+Subject: Re: what to do with wrong checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,18 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Nov 2009 12:07:13 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Sat, 07 Nov 2009 13:30:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
+Frans Meulenbroeks wrote:
+...
+> 
+> Reluctantly updated checksums.ini
+> 
+> Frans
 
-Hi
+But of course there's no magic that will remove the old cached tarball
+out of one's downloads directory when this sort of thing happens.
+(Busybox has been known to do this, too)
 
-I just pushed hrw/linux-updates branch to our server. It contains all my 
-updates to linux_* recipes and few merges of them. Please do test if you 
-use one of them.
+What do folks think we should do about that when it occurs?
+a) support two entries (old and new) in checksums.ini
+b) do nothing (leave as is)
+c) add some sort of support so that the user gets additional information
+   with the new checksum match failure explaining that the checksum was
+   updated and they need to manually remove the old (bad) tarball
 
-
+-Mike (mwester)
 
 
