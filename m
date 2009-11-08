@@ -1,32 +1,21 @@
-Received: from [93.188.72.201] (helo=mail.o2s.ch)
+Received: from [82.208.49.253] (helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <david.lanzendoerfer@o2s.ch>) id 1N7BAu-0001V4-4q
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 Nov 2009 18:03:39 +0100
-Received: from dizzy-6.localnet ([::ffff:82.192.226.27])
-	(AUTH: PLAIN david.lanzendoerfer@o2s.ch, TLS: TLSv1/SSLv3, 256bits,
-	AES256-SHA) by koffein with esmtp; Sun, 08 Nov 2009 19:03:56 +0000
-	id 000000000002ECD0.000000004AF7161C.000030CD
-From: David =?iso-8859-1?q?Lanzend=F6rfer?= <david.lanzendoerfer@o2s.ch>
-Organization: OpenSourceSupport GmbH
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 8 Nov 2009 18:02:19 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; x86_64; ; )
-References: <200911081347.28851.david.lanzendoerfer@o2s.ch>
-	<1257705205.5055.10.camel@localhost>
-In-Reply-To: <1257705205.5055.10.camel@localhost>
-X-Face: a023Y#Om+E(<|Tkz7Ae>YeJ\rvY,eXDn^g66`NiaNQ"#xRJ=gr'!V}V#{MN6!YO{s{{); h
-	=s@Vv%T)fi>gJrAHvijw^ZG9{b1rtf~mn$V^b`:3m>yH=o$Eo')Ul8f}F%1vdg9|52W=Xs
-	rR^/E/SPo^{-R22[a}c?@tgfp<I#oOW7r}0We&3g5"2>N5r/Vu|>kWs"|J'XppA; *0A,6>
-	*GY(0=H@>@^vEy]!m\)I42Lu@k~_=:U@/kf8{AO4'F7:Hy_*"5Xf9Vvkqr4E(32pVlT:=&
-	i4l[3%?Z<zzP~wGSke?1VJj\cd~Z(,Upc;nOR|pqK@<j(`EYFSn,jN)A(~`YwM2nIv,
+	(envelope-from <ynezz@true.cz>) id 1N7BUs-0002pi-Fr
+	for openembedded-devel@openembedded.org; Sun, 08 Nov 2009 18:24:18 +0100
+Received: from localhost.localdomain (localhost [127.0.0.1])
+	by mengele.ibawizard.net (Postfix) with ESMTP id E0FCE1D36077;
+	Sun,  8 Nov 2009 18:22:56 +0100 (CET)
+From: =?utf-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
+To: openembedded-devel@openembedded.org
+Date: Sun,  8 Nov 2009 18:23:00 +0100
+Message-Id: <1257700980-19879-1-git-send-email-ynezz@true.cz>
+X-Mailer: git-send-email 1.5.6.3
 MIME-Version: 1.0
-Message-Id: <200911081802.22870.david.lanzendoerfer@o2s.ch>
-X-SA-Exim-Connect-IP: 93.188.72.201
-X-SA-Exim-Mail-From: david.lanzendoerfer@o2s.ch
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@true.cz
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Xorg for htcdream
+Subject: [PATCH] wv: fix compile problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,40 +29,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Nov 2009 17:03:39 -0000
-X-Groupsio-MsgNum: 14029
-Content-Type: multipart/signed; boundary="nextPart1611281.m9X0r8oRmI";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
-
---nextPart1611281.m9X0r8oRmI
-Content-Type: Text/Plain;
-  charset="us-ascii"
+X-List-Received-Date: Sun, 08 Nov 2009 17:24:19 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-> Maybe you could:
-> *tell from who you took this xorg.conf(I always try not to forget to
-> credit people for their work even if it's a small work)
-Sry, it was not my intention to steel credit or something like that, just=20
-wanted it to be there in the tree. But youre right: Its your xorg.conf.
-Thx a lot.
+base_do_compile() checks if there's Makefile or makefile in source direct=
+ory,
+and then it runs oe_runmake. Since there's GNUmakefile generated, change
+do_compile accordingly.
 
->*polish it a bit,when I gave you the config I was in a hurry=20
-Yeah, I had to fix some things anyway. There was a incorrect screen=20
-configuration section.
+Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
+---
+ recipes/wv/wv_1.2.0.bb |    6 +++++-
+ 1 files changed, 5 insertions(+), 1 deletions(-)
 
-greatings leviathan
+diff --git a/recipes/wv/wv_1.2.0.bb b/recipes/wv/wv_1.2.0.bb
+index 7f06f58..b3114a5 100644
+--- a/recipes/wv/wv_1.2.0.bb
++++ b/recipes/wv/wv_1.2.0.bb
+@@ -2,7 +2,7 @@ DESCRIPTION =3D "Programs for accessing Microsoft Word do=
+cuments"
+ HOMEPAGE =3D "http://wvware.sourceforge.net/"
+ LICENSE =3D "GPLv2"
+ DEPENDS =3D "libgsf glib-2.0"
+-PR =3D "r3"
++PR =3D "r4"
+=20
+ SRC_URI =3D "${SOURCEFORGE_MIRROR}/wvware/wv-${PV}.tar.gz \
+            file://pkgconfig.patch;patch=3D1"
+@@ -16,3 +16,7 @@ EXTRA_OECONF =3D ""
+ do_stage () {
+ 	autotools_stage_all
+ }
++
++do_compile () {
++	oe_runmake -f GNUmakefile=20
++}
+--=20
+1.5.6.3
 
---nextPart1611281.m9X0r8oRmI
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.11 (GNU/Linux)
 
-iEYEABECAAYFAkr2+Z4ACgkQAeZw77btGjoT5gCeIBV3idY0j/B9TiFZpyYy7lxm
-a2YAn3NxyJ+scYWcxvf4E1o8MFzztKng
-=iuQr
------END PGP SIGNATURE-----
-
---nextPart1611281.m9X0r8oRmI--
