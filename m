@@ -1,39 +1,23 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [82.208.49.253] (helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1N79uI-000085-Eu for openembedded-devel@lists.openembedded.org;
-	Sun, 08 Nov 2009 16:42:25 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1N79t5-0000H9-IE
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 Nov 2009 16:41:07 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Nov 2009 16:41:07 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Nov 2009 16:41:07 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 08 Nov 2009 16:40:42 +0100
-Message-ID: <hd6opq$ke8$1@ger.gmane.org>
-References: <ac9c93b10911061238p366f65edqeff04b25c872015f@mail.gmail.com>	<hd4qpq$ee0$1@ger.gmane.org>
-	<1257682982.26962.14.camel@opal>	<hd6ggj$tf3$1@ger.gmane.org>	<ac9c93b10911080608y6db44dache5b521eb64fafe2d@mail.gmail.com>
-	<be7a9f3d0911080655o4eff671cnaf59a134e7a97ac5@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.3pre) Gecko/20090811 Shredder/3.0b4pre
-In-Reply-To: <be7a9f3d0911080655o4eff671cnaf59a134e7a97ac5@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1N7ATs-0004KP-T2
+	for openembedded-devel@openembedded.org; Sun, 08 Nov 2009 17:19:11 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id D22C31D36078; Sun,  8 Nov 2009 17:17:51 +0100 (CET)
+Date: Sun, 8 Nov 2009 17:17:51 +0100
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+To: openembedded-devel@openembedded.org
+Message-ID: <20091108161751.GA16449@ibawizard.net>
+References: <1257689597-31831-1-git-send-email-ynezz@true.cz>
+	<1257691795.25369.229.camel@lenovo.internal.reciva.com>
+MIME-Version: 1.0
+In-Reply-To: <1257691795.25369.229.camel@lenovo.internal.reciva.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: what to do with wrong checksum
+Subject: Re: [PATCH] libgsf: fix compile error, add missing dependency	on gtk+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,40 +31,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Nov 2009 15:42:25 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 08 Nov 2009 16:19:12 -0000
+Content-Type: text/plain; charset=iso-8859-2
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 08-11-09 15:55, Otavio Salvador wrote:
-> Hello,
->
-> On Sun, Nov 8, 2009 at 12:08 PM, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com>  wrote:
->> Without making a comment on the commit message:
->>
->> As stated before the 3.33 version is clearly mentioned as "latest
->> development version" on http://xmltwig.com/xmltwig/
->> The last stable version is 3.32
->> This project decided to provide snapshots (or whatever you want to
->> call it) of the new version. In this case 3.33. Their choice.
->>
->> IMHO OE should have used the latest stable version.
->
-> I fully agree and I didn't notice it was state on their website; In
-> this case the only wrong side here is OE (not upstream).
+Phil Blundell <pb@reciva.com> [2009-11-08 14:49:54]:
 
-Except if you want to read the docs, because the website states that you 
-should read the docs of the development version. That fact coupled with 
-no obvious signs on that page that the development version shouldn't get 
-used, I wouldn't say OE is wrong to use the 3.33 version. Heck, the 
-development version is the top item on that page.
+> On Sun, 2009-11-08 at 15:13 +0100, Petr =A9tetiar wrote:
+> > This patch fixes this compile error:
+> > main.c:38:35: error: gdk-pixbuf/gdk-pixbuf.h: No such file or directo=
+ry
+>=20
+> I wonder if you might be better off depending on gdk-pixbuf rather than
+> the full gtk+.  Does that work for you?
 
-Either way, xmltwig is now on "the list".
+Yes, it works for me. What should I do now, since the patch has been comm=
+ited
+already? :-)
 
-regards,
-
-Koen
-
-
+-- ynezz
 
 
