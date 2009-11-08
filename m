@@ -1,33 +1,33 @@
 Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1N77sz-00031G-2X
+	(envelope-from <otavio.salvador@gmail.com>) id 1N77wI-00039o-Ir
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 Nov 2009 14:32:56 +0100
-Received: by bwz9 with SMTP id 9so2456571bwz.12
+	Sun, 08 Nov 2009 14:36:21 +0100
+Received: by bwz9 with SMTP id 9so2458026bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Nov 2009 05:31:37 -0800 (PST)
+	Sun, 08 Nov 2009 05:35:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:sender:received:in-reply-to
 	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type; bh=x9Je91GASP+iKizpXxP6PpGwQRlc/hb1A5Xcd3rsmCI=;
-	b=m9CzveK8e7xx0Fhml3GkiTJ94MntEE8KJ/TPf6fvexbrHzjVOC0wXhHq5vWmmwDfBY
-	ONEnf/0UFSoyxIAN+BYfZIP8qphB70ct/TOToUvqjlAbMq1/pW8LAbTptLsdVtO+65fg
-	5YPjuEztlElPoYze65QsK8k/hmEexdhvoNi9c=
+	:content-type; bh=9zLUauVrYgeDcahDAr4NVo3lgdwSsKPcvMoMSfhVMho=;
+	b=JQsaVjXUEBHoI3ikT5XK16V/4Ze9ruxCRSltKcf6MJ/nk9co7fL9qJUd0UuZni0MKB
+	JV0kb6xkRn/1ZE99LEOR/+oTNk39Tudj4oNaTWqI5o116V5/m4ngZ2TKBCEbfEbjBM7A
+	aLiQZw2VlkGW93/7Qu9zTMpQemFMZ46fPST+4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:date
 	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	b=hn3z7bR1NEqPnTJtGg6fSPMqt1fel8U3NcnqbyaYQ+LGRt4CCt/91EhWhPVcARprPP
-	y7aEhAnAM4ja/J5voBuOs7rd83yEzmcTZprjFfZqqPED2ui8zCtIsIgJRx8tT9um3roQ
-	TyKoeui3R1hHrmkDPy/dpMNLLjK6FsdNvS5Lk=
+	b=C5zfkg9C2QYHuJgVneO5YnwSbamtbMq4yoQ/HKlJQ75uVQ7CWoG2OItX2mYQIqiBUK
+	WjbraR/u/OUC4vRNgwWISGvDn+9SkeLdtAIYhrNSKqqvbkgaou/ySFN7cmslFjT6HBpW
+	pFUIhykudBqkhZlMQPbn3FM+yOWHoJiCC/UMQ=
 MIME-Version: 1.0
 Sender: otavio.salvador@gmail.com
-Received: by 10.239.179.80 with SMTP id c16mr597250hbg.155.1257687097093; Sun, 
-	08 Nov 2009 05:31:37 -0800 (PST)
+Received: by 10.239.141.145 with SMTP id c17mr606470hba.14.1257687302410; Sun, 
+	08 Nov 2009 05:35:02 -0800 (PST)
 In-Reply-To: <hd63e9$t75$1@ger.gmane.org>
 References: <hd63e9$t75$1@ger.gmane.org>
-Date: Sun, 8 Nov 2009 11:31:37 -0200
-X-Google-Sender-Auth: 4acfc86165a767ea
-Message-ID: <be7a9f3d0911080531r5f12d1e4g85bef92b9ced4e66@mail.gmail.com>
+Date: Sun, 8 Nov 2009 11:35:02 -0200
+X-Google-Sender-Auth: 1347bf104668c7b1
+Message-ID: <be7a9f3d0911080535w19b1b3d9q917a23023f1edcf7@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.218.217
@@ -48,30 +48,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Nov 2009 13:32:56 -0000
+X-List-Received-Date: Sun, 08 Nov 2009 13:36:21 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hello,
-
 On Sun, Nov 8, 2009 at 7:36 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> Now 1) can be solved by running a script like the one I mentioned above, but
-> 2) needs an attitude adjustment. OE is not wikipedia where recipes get
-> deleted because a single person thinks no-one is using them. We have lots of
-> people using external overlays for various recipes and deleting things from
-> checksums.ini will only make their life harder.
->
-> So, please stop deleting checksums and start using a more automated way to
-> update checksums.ini :)
+> 2) people having deleted(!) checksums that repear due to being in my TMPDIR
+> checksum cache
 
-While I agree that we shouldn't remove recipes just for fun I also
-believe we ought to ignore overlays out there since if they wait to
-use a stable codebase, there's a stable branch available for it.
-Another thing is that I disagree about keeping it growing. IMO
-checksums.ini ought to reflect what is in current metadata and not
-all versions that has existed on it.
-
-If someone uses it in a overlay he/she can keep a specific
-checksums.ini for it as well.
+I pick the specific checksum I'm going to add and add it to
+conf/checksums.ini (copy it from TMPDIR/checksums.ini) so I avoid
+adding non-related checksums (as you did in the tarball change) for no
+reason.
 
 -- 
 Otavio Salvador                  O.S. Systems
