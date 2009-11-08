@@ -1,25 +1,27 @@
 Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1N7Bxk-0002hL-QK
-	for openembedded-devel@openembedded.org; Sun, 08 Nov 2009 18:54:07 +0100
+	(envelope-from <pb@reciva.com>) id 1N7Dd9-00051u-7L
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 08 Nov 2009 20:40:58 +0100
 Received: from 88-109-143-180.dynamic.dsl.as9105.com ([88.109.143.180]
 	helo=[192.168.2.154])
 	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N7BkS-0001Xe-4l
-	for openembedded-devel@openembedded.org; Sun, 08 Nov 2009 17:40:20 +0000
-From: Phil Blundell <philb@gnu.org>
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1N7DJP-0003c0-6C
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 08 Nov 2009 19:20:31 +0000
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1257700980-19879-1-git-send-email-ynezz@true.cz>
-References: <1257700980-19879-1-git-send-email-ynezz@true.cz>
-Date: Sun, 08 Nov 2009 17:40:16 +0000
-Message-ID: <1257702016.25369.230.camel@lenovo.internal.reciva.com>
+In-Reply-To: <200911060107.33807.bluelightning@bluelightning.org>
+References: <200911060107.33807.bluelightning@bluelightning.org>
+Date: Sun, 08 Nov 2009 19:20:28 +0000
+Message-ID: <1257708028.25369.233.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.1 
 X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+X-SA-Exim-Mail-From: pb@reciva.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] wv: fix compile problem
+Subject: Re: sqlite 3.6.20 requires tcl-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,17 +35,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Nov 2009 17:54:08 -0000
+X-List-Received-Date: Sun, 08 Nov 2009 19:40:58 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Sun, 2009-11-08 at 18:23 +0100, Petr =C5=A0tetiar wrote:
-> base_do_compile() checks if there's Makefile or makefile in source direct=
-ory,
-> and then it runs oe_runmake. Since there's GNUmakefile generated, change
-> do_compile accordingly.
+On Fri, 2009-11-06 at 01:07 +0000, Paul Eggleton wrote:
+> It seems that the recently added SQLite 3.6.20 requires tcl-native, but the 
+> recipe doesn't depend on it. Should the recipe be fixed?
 
-Thanks for the patch.  I checked this in.
+It's configuring --disable-tcl, so the intent seems to be not to require
+Tcl.  I guess whichever part of the package is failing to respect that
+configure flag should be fixed.
 
 p.
 
