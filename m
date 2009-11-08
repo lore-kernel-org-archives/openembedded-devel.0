@@ -1,23 +1,31 @@
-Received: from [82.208.49.253] (helo=mengele.ibawizard.net ident=postfix)
+Received: from [85.33.2.12] (helo=smtp-out01.alice.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1N7ATs-0004KP-T2
-	for openembedded-devel@openembedded.org; Sun, 08 Nov 2009 17:19:11 +0100
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id D22C31D36078; Sun,  8 Nov 2009 17:17:51 +0100 (CET)
-Date: Sun, 8 Nov 2009 17:17:51 +0100
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
-To: openembedded-devel@openembedded.org
-Message-ID: <20091108161751.GA16449@ibawizard.net>
-References: <1257689597-31831-1-git-send-email-ynezz@true.cz>
-	<1257691795.25369.229.camel@lenovo.internal.reciva.com>
-MIME-Version: 1.0
-In-Reply-To: <1257691795.25369.229.camel@lenovo.internal.reciva.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+	(envelope-from <GNUtoo@no-log.org>) id 1N7Akm-0001km-Rt
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 08 Nov 2009 17:36:40 +0100
+Received: from fbcmmo06.fbc.local ([192.168.184.137]) by smtp-out01.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sun, 8 Nov 2009 17:34:14 +0100
+Received: from FBCMCL01B01.fbc.local ([192.168.69.82]) by fbcmmo06.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sun, 8 Nov 2009 17:33:48 +0100
+Received: from [192.168.1.107] ([79.25.134.114]) by FBCMCL01B01.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Sun, 8 Nov 2009 17:33:47 +0100
+From: GNUtoo <GNUtoo@no-log.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <200911081347.28851.david.lanzendoerfer@o2s.ch>
+References: <200911081347.28851.david.lanzendoerfer@o2s.ch>
+Date: Sun, 08 Nov 2009 19:33:25 +0100
+Message-Id: <1257705205.5055.10.camel@localhost>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-OriginalArrivalTime: 08 Nov 2009 16:33:48.0157 (UTC)
+	FILETIME=[3F4632D0:01CA6091]
+X-SA-Exim-Connect-IP: 85.33.2.12
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] libgsf: fix compile error, add missing dependency	on gtk+
+Subject: Re: [PATCH] Xorg for htcdream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,25 +39,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Nov 2009 16:19:12 -0000
-Content-Type: text/plain; charset=iso-8859-2
-Content-Disposition: inline
+X-List-Received-Date: Sun, 08 Nov 2009 16:36:40 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Phil Blundell <pb@reciva.com> [2009-11-08 14:49:54]:
-
-> On Sun, 2009-11-08 at 15:13 +0100, Petr =A9tetiar wrote:
-> > This patch fixes this compile error:
-> > main.c:38:35: error: gdk-pixbuf/gdk-pixbuf.h: No such file or directo=
-ry
+On Sun, 2009-11-08 at 13:47 +0100, David Lanzend=C3=B6rfer wrote:
 >=20
-> I wonder if you might be better off depending on gdk-pixbuf rather than
-> the full gtk+.  Does that work for you?
+> Hi folks
+> I added a new xorg.conf in order to be able to start xorg on devices
+> like=20
+> htcdream.
+>=20
+> greatings leviathan
+Maybe you could:
+*tell from who you took this xorg.conf(I always try not to forget to
+credit people for their work even if it's a small work)
+*polish it a bit,when I gave you the config I was in a hurry=20
 
-Yes, it works for me. What should I do now, since the patch has been comm=
-ited
-already? :-)
+I'll send you(leviathan) better xorg.conf
+Denis
 
--- ynezz
 
 
