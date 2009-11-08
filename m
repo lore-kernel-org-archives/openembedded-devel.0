@@ -1,26 +1,23 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [82.208.49.253] (helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1N78Th-0005BJ-Md
-	for openembedded-devel@openembedded.org; Sun, 08 Nov 2009 15:10:52 +0100
-Received: (qmail 28460 invoked by uid 1003); 8 Nov 2009 14:09:33 -0000
-Received: from localhost (HELO ?192.168.5.106?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 8 Nov 2009 14:09:33 -0000
-Message-ID: <4AF6D11B.4030806@balister.org>
-Date: Sun, 08 Nov 2009 14:09:31 +0000
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
-	Thunderbird/3.0b4
+	(envelope-from <ynezz@true.cz>) id 1N78VY-0005JZ-76
+	for openembedded-devel@openembedded.org; Sun, 08 Nov 2009 15:12:47 +0100
+Received: from localhost.localdomain (localhost [127.0.0.1])
+	by mengele.ibawizard.net (Postfix) with ESMTP id 8DB691D3607A;
+	Sun,  8 Nov 2009 15:04:13 +0100 (CET)
+From: =?utf-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
+To: openembedded-devel@openembedded.org
+Date: Sun,  8 Nov 2009 15:04:15 +0100
+Message-Id: <1257689055-4508-3-git-send-email-ynezz@true.cz>
+X-Mailer: git-send-email 1.5.6.3
+In-Reply-To: <1257689055-4508-1-git-send-email-ynezz@true.cz>
+References: <1257689055-4508-1-git-send-email-ynezz@true.cz>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <ac9c93b10911061238p366f65edqeff04b25c872015f@mail.gmail.com>	<hd4qpq$ee0$1@ger.gmane.org>	<1257682982.26962.14.camel@opal>
-	<hd6ggj$tf3$1@ger.gmane.org>
-In-Reply-To: <hd6ggj$tf3$1@ger.gmane.org>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@true.cz
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: what to do with wrong checksum
+Subject: [PATCH] Machine configuration for IEI Nano GX-466
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,32 +31,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Nov 2009 14:10:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 08 Nov 2009 14:12:47 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 11/08/2009 01:19 PM, Koen Kooi wrote:
-> On 08-11-09 13:23, Michael 'Mickey' Lauer wrote:
->> Koen,
->>
->> I usually ignore your pick of language, but I think using such a
->> language in a commit -- visible to all potential users or contributors
->> to OpenEmbedded -- is damaging the reputation of the project as a whole.
->
-> Which part of the commit message in
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=7e8f2afa6fb064aaa3b477456c60f64b20caedeb
-> did you find damaging?
 
-Making remarks about the upstream maintainers is not helpful.
+Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
+---
+ conf/machine/iei-nanogx-466.conf |   30 ++++++++++++++++++++++++++++++
+ 1 files changed, 30 insertions(+), 0 deletions(-)
+ create mode 100644 conf/machine/iei-nanogx-466.conf
 
-Philip
+diff --git a/conf/machine/iei-nanogx-466.conf b/conf/machine/iei-nanogx-4=
+66.conf
+new file mode 100644
+index 0000000..3bab307
+--- /dev/null
++++ b/conf/machine/iei-nanogx-466.conf
+@@ -0,0 +1,30 @@
++# Copyright (C) 2009, Petr Stetiar
++# Released under the MIT license (see packages/COPYING)
++#@TYPE: Machine
++#@NAME: IEI Nano GX-466
++#@DESCRIPTION: Machine configuration for IEI Nano GX-466 - http://bit.ly=
+/t9TOj
++
++TARGET_ARCH =3D  "i586"
++
++require conf/machine/include/tune-geode.inc
++
++MACHINE_FEATURES =3D "kernel26 pci vfat ext2 keyboard usbhost sound touc=
+hscreen screen serial ethernet"
++
++KERNEL_IMAGETYPE =3D "bzImage"
++IMAGE_FSTYPES ?=3D "ext2 tar.bz2"
++
++PREFERRED_PROVIDER_virtual/kernel =3D "linux"
++PREFERRED_PROVIDER_virtual/xserver =3D "xserver-xorg"
++XSERVER =3D "xserver-xorg \
++           xf86-input-evdev \
++           xf86-input-mouse \
++           xf86-input-tslib \
++           xf86-video-geode \
++           xerver-xorg-module-libint10 \
++           xserver-xorg-module-xaa \
++           xf86-input-keyboard"
++
++GUI_MACHINE_CLASS =3D "bigscreen"
++
++GLIBC_ADDONS =3D "nptl"
++GLIBC_EXTRA_OECONF =3D "--with-tls --with-cpu=3Di586"
+--=20
+1.5.6.3
 
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
