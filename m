@@ -1,37 +1,23 @@
-Received: from [209.85.211.177] (helo=mail-yw0-f177.google.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N78SV-000597-6m
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 Nov 2009 15:09:38 +0100
-Received: by ywh7 with SMTP id 7so2081193ywh.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Nov 2009 06:08:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=NFLsToid0ZCEAiAcbLBkwQ6QACqS+/XTfGixeNF2BLo=;
-	b=RjM0QXHeQA3LRYlJLR0ufLH0t9bU0w+pqTqDmvvV+jjyA0ok5YPLFh4a69RunjAu2M
-	vTSBrOG/7zM4nNGmetVT4KDFijtWHxF6QkX5YR2/vURs4I/0JOMXLhWDrSBO4RRIaKEH
-	ojA6nocxMJT62F3u2xViiJLx3YN90mpuHAyEc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Stg+TiSFoxDwqGIQlV0UaSy0l6FrtpblSuzv0OA8qhvPpuOWY0KU/XPcYf7/KHEzoX
-	g6oSMv+M0ZzEVClO1RekmEAIOw1HWY9zDmV/hCmgnzhq+i2RXOPKAAR/D9KylyykVuy/
-	dI/kQi4HzNT1KwrEhqOY9qqxuZqqV1tNnKss0=
+	(envelope-from <philip@balister.org>) id 1N78Th-0005BJ-Md
+	for openembedded-devel@openembedded.org; Sun, 08 Nov 2009 15:10:52 +0100
+Received: (qmail 28460 invoked by uid 1003); 8 Nov 2009 14:09:33 -0000
+Received: from localhost (HELO ?192.168.5.106?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 8 Nov 2009 14:09:33 -0000
+Message-ID: <4AF6D11B.4030806@balister.org>
+Date: Sun, 08 Nov 2009 14:09:31 +0000
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
+	Thunderbird/3.0b4
 MIME-Version: 1.0
-Received: by 10.101.29.11 with SMTP id g11mr2545305anj.125.1257689293683; Sun, 
-	08 Nov 2009 06:08:13 -0800 (PST)
-In-Reply-To: <hd6ggj$tf3$1@ger.gmane.org>
-References: <ac9c93b10911061238p366f65edqeff04b25c872015f@mail.gmail.com>
-	<hd4qpq$ee0$1@ger.gmane.org> <1257682982.26962.14.camel@opal>
-	<hd6ggj$tf3$1@ger.gmane.org>
-Date: Sun, 8 Nov 2009 15:08:13 +0100
-Message-ID: <ac9c93b10911080608y6db44dache5b521eb64fafe2d@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.177
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <ac9c93b10911061238p366f65edqeff04b25c872015f@mail.gmail.com>	<hd4qpq$ee0$1@ger.gmane.org>	<1257682982.26962.14.camel@opal>
+	<hd6ggj$tf3$1@ger.gmane.org>
+In-Reply-To: <hd6ggj$tf3$1@ger.gmane.org>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: what to do with wrong checksum
@@ -48,19 +34,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Nov 2009 14:09:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 08 Nov 2009 14:10:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Without making a comment on the commit message:
+On 11/08/2009 01:19 PM, Koen Kooi wrote:
+> On 08-11-09 13:23, Michael 'Mickey' Lauer wrote:
+>> Koen,
+>>
+>> I usually ignore your pick of language, but I think using such a
+>> language in a commit -- visible to all potential users or contributors
+>> to OpenEmbedded -- is damaging the reputation of the project as a whole.
+>
+> Which part of the commit message in
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=7e8f2afa6fb064aaa3b477456c60f64b20caedeb
+> did you find damaging?
 
-As stated before the 3.33 version is clearly mentioned as "latest
-development version" on http://xmltwig.com/xmltwig/
-The last stable version is 3.32
-This project decided to provide snapshots (or whatever you want to
-call it) of the new version. In this case 3.33. Their choice.
+Making remarks about the upstream maintainers is not helpful.
 
-IMHO OE should have used the latest stable version.
+Philip
 
-Frans
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
