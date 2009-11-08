@@ -1,41 +1,31 @@
-Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
+Received: from [93.188.72.201] (helo=mail.o2s.ch)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1N76uj-0002pW-En
+	(envelope-from <david.lanzendoerfer@o2s.ch>) id 1N77CD-000085-Rn
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 Nov 2009 13:30:40 +0100
-Received: by bwz9 with SMTP id 9so2430806bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Nov 2009 04:29:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
-	:content-type; bh=awIpiQeY59fX3K620g7dlatj/IGDSRlrfaAjyAFpqzA=;
-	b=koOlq34VY7hb9WvclXPZYVlAFCFCuU9p1B7HLXI7FxlM0P5uxwR37Z+vMnO2eaVEHE
-	VY6JOdJ0SUEmfAYCDUe42HydyLAnCLL32Dnj4dN/NFaPFRw8QRZfNm/DEQCZKmJch40i
-	TxF9SGXJuMxtRs4pT/ilwk0pCWzbkgo6lXxD4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	b=NQhc6p6kIEJmAEhVtp5WwPdDTeRi95uun+qOoYlg/kOfITA/sdZJ4VmTVvmD/Vkr4A
-	OLYor6wbOObqiJqy8dJExQ8BrvmskOJjjHfRh2XAqFMgTv2oB52zVLTmzC95VWoUSGRS
-	oAzOGE/OdB5/qUb0/uyfXSVeJL2c72T38G3e4=
-MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.182.137 with SMTP id q9mr719337hbg.72.1257682935117; Sun, 
-	08 Nov 2009 04:22:15 -0800 (PST)
-In-Reply-To: <c384c5ea0911071703o4aec5583w140a128328b5bdcc@mail.gmail.com>
-References: <c384c5ea0911071703o4aec5583w140a128328b5bdcc@mail.gmail.com>
-Date: Sun, 8 Nov 2009 10:22:15 -0200
-X-Google-Sender-Auth: 5f566a99775d17df
-Message-ID: <be7a9f3d0911080422q13f8d4dj7c70da47f03ce9ba@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Leon Woestenberg <leon.woestenberg@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+	Sun, 08 Nov 2009 13:48:44 +0100
+Received: from dizzy-6.localnet ([::ffff:82.192.226.27])
+	(AUTH: PLAIN david.lanzendoerfer@o2s.ch, TLS: TLSv1/SSLv3, 256bits,
+	AES256-SHA) by koffein with esmtp; Sun, 08 Nov 2009 14:49:02 +0000
+	id 000000000002ECD0.000000004AF6DA5E.00002B06
+From: David =?iso-8859-1?q?Lanzend=F6rfer?= <david.lanzendoerfer@o2s.ch>
+Organization: OpenSourceSupport GmbH
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 8 Nov 2009 13:47:23 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; x86_64; ; )
+X-Face: a023Y#Om+E(<|Tkz7Ae>YeJ\rvY,eXDn^g66`NiaNQ"#xRJ=gr'!V}V#{MN6!YO{s{{)
+	=?utf-8?q?=3Bh=0A=09=3Ds?=@Vv%T)fi>gJrAHvijw^ZG9{b1rtf~mn$V^b`:3m>yH=o$Eo')
+	=?utf-8?q?Ul8f=7DF=251vdg9=7C52W=3DXs=0A=09rR=5E/E/SPo=5E=7B-R22=5Ba?=
+	=?utf-8?q?=7Dc=3F?=@tgfp<I#oOW7r}0We&3g5"2>N5r/Vu|>kWs"|J'XppA;*0A,6>
+	=?utf-8?q?=0A=09*GY?=(0=H@>@^vEy]!m\)I42Lu@k~_=:U@/kf8{AO4'F7:Hy_*"5Xf9Vvkqr4E(
+	=?utf-8?q?32pVlT=3A=3D=26=0A=09i4l=5B3=25=3FZ?=<zzP~wGSke?1VJj\cd~Z(,Upc;
+	nOR|pqK@<j(`EYFSn,jN)A(~`YwM2nIv,
+Mime-Version: 1.0
+Message-Id: <200911081347.28851.david.lanzendoerfer@o2s.ch>
+X-SA-Exim-Connect-IP: 93.188.72.201
+X-SA-Exim-Mail-From: david.lanzendoerfer@o2s.ch
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: Machines/users of squashfs 4.0 with lzma?
+Subject: [PATCH] Xorg for htcdream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,38 +39,145 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Nov 2009 12:30:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 08 Nov 2009 12:48:45 -0000
+X-Groupsio-MsgNum: 14002
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg=pgp-sha1; boundary="=_koffein-11016-1257691742-0001-2"
 
-Hello Leon,
+--=_koffein-11016-1257691742-0001-2
+Content-Type: multipart/mixed;
+  boundary="Boundary-01=_b3r9Kacbq8KUhum"
+Content-Transfer-Encoding: 7bit
 
-On Sat, Nov 7, 2009 at 11:03 PM, Leon Woestenberg
-<leon.woestenberg@gmail.com> wrote:
-> Hello Otavio, all,
->
-> I saw you as the committer/author for the current bitbake for squash
-> 4.0 stuff with lzma patches, thanks for that.
->
-> As lzma support is now (almost!) landed upstream, I would like to see
-> what the impact is of moving to the upcoming 4.x release.
+--Boundary-01=_b3r9Kacbq8KUhum
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-I guess it is compatible with current squashfs available on 2.6.31
-right? In this case it is OK I guess.
+Hi folks
+I added a new xorg.conf in order to be able to start xorg on devices like=20
+htcdream.
 
-Do you have a backport of the lzma support in kernel to 2.6.31?
+greatings leviathan
 
-> I have a patch on standby that moves from 4.0+patches to the current
-> SVN where lzma is built-in.
+--Boundary-01=_b3r9Kacbq8KUhum
+Content-Type: text/plain;
+  charset="ISO-8859-1";
+  name="commit-d4dc631"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="commit-d4dc631"
 
-Please do.
+commit d4dc63173726616d4ad5c1bf64f8a9002b6103d3
+Author: David Lanzend=F6rfer <david.lanzendoerfer@o2s.ch>
+Date:   Sun Nov 8 13:43:15 2009 +0100
 
-> However, first, who is using this??
+    Added xorg.conf for htcdream in xserver-xorg
 
-I use it to our OS with a setup similar to Koen's.
+diff --git a/recipes/xorg-xserver/xserver-xorg-conf/htcdream/xorg.conf b/re=
+cipes/xorg-xserver/xserver-xorg-conf/htcdream/xorg.conf
+new file mode 100644
+index 0000000..8d07550
+--- /dev/null
++++ b/recipes/xorg-xserver/xserver-xorg-conf/htcdream/xorg.conf
+@@ -0,0 +1,81 @@
++Section "Monitor"
++	Identifier "Monitor0"
++	Mode "320x480"
++        	DotClock 0	=09
++		HTimings 320 320 320 320
++		VTimings 480 480 480 480
++		Flags    "-HSync" "-VSync"
++	EndMode
++EndSection   =20
++
++
++
++Section "Device"                                 =20
++        Identifier      "fbdev"
++        Driver  "fbdev"
++	Option "ShadowFB" "on"=20
++	#Option "Rotate" "CW"=20
++EndSection                                               =20
++
++
++Section "Screen"                                       =20
++        Identifier "Framebuffer"    =20
++        Device  "fbdev"           =20
++        Monitor "Monitor"              =20
++	DefaultFbBpp 16
++	SubSection "Display"
++		Depth 16
++        	Modes "320x480"
++	EndSubSection
++EndSection                                             =20
++
++Section "Screen"
++        Identifier "320x480x16"
++        Device  "fbdev"
++        Monitor "Monitor"
++        DefaultFbBpp 16
++        SubSection "Display"
++                Depth 16
++                Modes "320x480"
++        EndSubSection
++EndSection
++
++
++Section "ServerLayout"                                =20
++        Identifier      "Builtin Default Layout"                          =
+          =20
++        Screen  "Framebuffer"       =20
++	#InputDevice "Trackball" "CorePointer"
++	InputDevice "Touchscreen" "CorePointer"
++        InputDevice "Keyboard" "CoreKeyboard"
++EndSection       =20
++
++Section "InputDevice"
++    Identifier "Trackball"
++    Driver     "evdev"
++    Option     "Device"        "/dev/input/event2"
++    Option     "ScreenNumber"  "0"
++    Option     "ReportingMode" "Raw"   =20
++    #Option     "ReportingMode" "Scaled"
++    #Option     "ButtonNumber"  "1"
++    #Option     "SendCoreEvents"
++EndSection
++
++Section "InputDevice"
++	Identifier 	"Touchscreen"
++	Driver     	"tslib"
++	Option     	"Device"        "/dev/input/event1"
++	Option  	"ScreenNumber"  "0"
++	Option 		"CorePointer"           "true"
++	Option          "SendCoreEvents"        "true"
++	Option          "Protocol"              "Auto"
++	Option          "Width"                 "320"
++	Option          "Height"                "480"
++	Option          "EmulateRightButton"    "1"
++	Option		"CorePointer"		"true"
++EndSection
++
++Section "InputDevice"
++        Identifier  "Keyboard"
++        Driver      "kbd"
++        Option      "XkbLayout" "en_US"
++EndSection
 
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+--Boundary-01=_b3r9Kacbq8KUhum--
 
+--=_koffein-11016-1257691742-0001-2
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Transfer-Encoding: 7bit
+Content-Description: This is a digitally signed message part.
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.11 (GNU/Linux)
+
+iEYEABECAAYFAkr2veAACgkQAeZw77btGjryVACgmg5ZELa0RYDkvCvpLJszuZbd
+q64AoIUMG5/RG4diA1Tpdap9TpLBPHoB
+=7KoV
+-----END PGP SIGNATURE-----
+
+--=_koffein-11016-1257691742-0001-2--
