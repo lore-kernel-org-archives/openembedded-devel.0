@@ -1,28 +1,24 @@
-Received: from [209.85.219.209] (helo=mail-ew0-f209.google.com)
+Received: from [85.17.141.90] (helo=mzh.zlo.nu)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <lgirdwood@gmail.com>) id 1N7WUL-0005G2-C2
+	(envelope-from <marcolz@zlo.nu>) id 1N7Wgx-0005oI-DX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Nov 2009 16:49:08 +0100
-Received: by ewy5 with SMTP id 5so3037723ewy.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Nov 2009 07:47:48 -0800 (PST)
-Received: by 10.213.109.156 with SMTP id j28mr1497861ebp.79.1257777640772;
-	Mon, 09 Nov 2009 06:40:40 -0800 (PST)
-Received: from ?10.200.221.6? (host81-136-218-57.in-addr.btopenworld.com
-	[81.136.218.57])
-	by mx.google.com with ESMTPS id 10sm6650399eyz.19.2009.11.09.06.40.38
-	(version=SSLv3 cipher=RC4-MD5); Mon, 09 Nov 2009 06:40:39 -0800 (PST)
-From: Liam Girdwood <lrg@slimlogic.co.uk>
+	Mon, 09 Nov 2009 17:02:10 +0100
+Received: by mzh.zlo.nu (Postfix, from userid 1000)
+	id 6F91914030; Mon,  9 Nov 2009 16:54:14 +0100 (CET)
+Date: Mon, 9 Nov 2009 16:54:14 +0100
+From: Marc Olzheim <zlo@zlo.nu>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 09 Nov 2009 14:40:37 +0000
-Message-ID: <1257777637.3583.271.camel@odin>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 209.85.219.209
-X-SA-Exim-Mail-From: lgirdwood@gmail.com
+Message-ID: <20091109155414.GA13145@zlo.nu>
+References: <20091104125439.GA20450@zlo.nu>
+	<be7a9f3d0911051703p33a3f0e1p223219ead98055eb@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <be7a9f3d0911051703p33a3f0e1p223219ead98055eb@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 85.17.141.90
+X-SA-Exim-Mail-From: marcolz@zlo.nu
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] core: add glibc-2.10.1
+Subject: Re: [PATCH] Add dhcp 3.1.2p1 and fix unneeded bash dependency in 3.0.*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,272 +32,294 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Nov 2009 15:49:08 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 09 Nov 2009 16:02:10 -0000
+X-Groupsio-MsgNum: 14052
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="fdj2RfSjLxBAspz7"
+Content-Disposition: inline
 
-Add glibc-2.10.1. Based on glibc-2.9.bb.
+--fdj2RfSjLxBAspz7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Liam Girdwood <lrg@slimlogic.co.uk>
+On Thu, Nov 05, 2009 at 11:03:34PM -0200, Otavio Salvador wrote:
+> > In any case: the dhclient/scripts/linux is a #!/bin/bash script which
+> > does not use any bashisms. As this was (dependency-wise) the only reason
+> > for our image to contain bash, I fixed this and while at it moved from
+> > 3.0.2 to 3.1.2p1.
+>=20
+> While you're on it, it would be better to make it in a patchset doing:
+>=20
+>  - move it all to a .inc and use INC_PR (to avoid useless duplication)
+>  - drop the bash requirement (as you did)
+>  - add the new version
+>=20
+> And please, use format-patch to export those patches so we can easily pus=
+h it.
+
+Ok, thanks for the tip, here's the new patch.
+
+Marc
+
 ---
- conf/checksums.ini                                 |   12 ++
- .../glibc-2.9-enable-binutils-2.2.patch            |   35 +++++
- recipes/glibc/glibc-initial_2.10.1.bb              |    6 +
- recipes/glibc/glibc_2.10.1.bb                      |  150 ++++++++++++++++++++
- 4 files changed, 203 insertions(+), 0 deletions(-)
- create mode 100644 recipes/glibc/glibc-2.10.1/glibc-2.9-enable-binutils-2.2.patch
- create mode 100644 recipes/glibc/glibc-initial_2.10.1.bb
- create mode 100644 recipes/glibc/glibc_2.10.1.bb
+ conf/checksums.ini                           |    4 ++
+ recipes/dhcp/dhcp3.inc                       |   62 ++++++++++++++++++++++=
+++++
+ recipes/dhcp/dhcp_3.0.1.bb                   |    3 +-
+ recipes/dhcp/dhcp_3.0.2.bb                   |   59 ++--------------------=
+--
+ recipes/dhcp/dhcp_3.1.2p1.bb                 |   12 +++++
+ recipes/dhcp/files/useless-use-of-bash.patch |    8 +++
+ 6 files changed, 93 insertions(+), 55 deletions(-)
+ create mode 100644 recipes/dhcp/dhcp3.inc
+ create mode 100644 recipes/dhcp/dhcp_3.1.2p1.bb
+ create mode 100644 recipes/dhcp/files/useless-use-of-bash.patch
 
 diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 2e5f2b1..6b8f20f 100644
+index ec2651a..4c21e29 100644
 --- a/conf/checksums.ini
 +++ b/conf/checksums.ini
-@@ -8766,6 +8766,10 @@ sha256=4224a522ac4ee0fd89eb337e7505e280dfb05e2fe1ad44339ba8874081c0451a
- md5=fc62e989cf31d015f31628609fc3757a
- sha256=098baa84c74af5b21d27ec6e8ba6f1a393de88327cefbcd9e90c9b4edda9a36c
- 
-+[ftp://ftp.gnu.org/pub/gnu/glibc/glibc-2.10.1.tar.bz2]
-+md5=ee71dedf724dc775e4efec9b823ed3be
-+sha256=cbad3e637eab613184405a87a2bf08a41991a0e512a3ced60d120effc73de667
+@@ -5178,6 +5178,10 @@ sha256=3D043dea4144a93b26358ed73cd8fab79be76834a719f=
+13fbb4344a26e8288fc38
+ md5=3D04800a111521e7442749b2ce883f962b
+ sha256=3D21a6e0476fb880e704e0c3cfe7b2bc6a97f6b2b0654db10b38bdd317f511a03a
+=20
++[ftp://ftp.isc.org/isc/dhcp/dhcp-3.1-history/dhcp-3.1.2p1.tar.gz]
++md5=3D787b2924a1965f0d8558521b36dca73d
++sha256=3De0cb405e0fef0ecebec7aaed294032a06178ff28be87498596e6069ccda4341e
 +
- [http://www.kegel.com/crosstool/crosstool-0.43/patches/glibc-2.3.6/glibc-fp-byteorder.patch]
- md5=c89aac92d100761a767b9d5619fe582f
- sha256=3033d84fd9a62d20a8cb0d42645d7cd5a28d2d108afcb4cc2d89db3dc1e328df
-@@ -8790,6 +8794,10 @@ sha256=07de78810a5320d696792b67131c4cf3d6654aee015a6b74820d66fb00799000
- md5=99536b508af988e7cc6275944d12b491
- sha256=27ac255ee701036191118f7a6a4191b24741f5909dccfc9eec4ab611a39e182f
- 
-+[ftp://ftp.gnu.org/pub/gnu/glibc/glibc-libidn-2.10.1.tar.bz2]
-+md5=8ef88560ec608d5923ee05eb5f0e15ea
-+sha256=0fa72d1dd06a30642d3bb20a659f4ed0f4af54a205d7102896b68169b38676dc
-+
- [ftp://ftp.gnu.org/gnu/glibc/glibc-linuxthreads-2.2.5.tar.gz]
- md5=c766a79a51668d7fa33f175a249655b4
- sha256=c027824ee6593a838e0883bdd4bf8bd455b3dcf4ff0aa77fe82452819d882f47
-@@ -8830,6 +8838,10 @@ sha256=3e481996259af87c3581da23481970a27de679e3c87cfa9a5a59751cd20c7b44
- md5=7d5d86031cb15403e4d246658209ee81
- sha256=824c97b83f1ec2894ee0e824db6d542c40b978d2f6c4364c7411777e44b15a64
- 
-+[ftp://ftp.gnu.org/pub/gnu/glibc/glibc-ports-2.10.1.tar.bz2]
-+md5=816b2d48a95ddc23b27fea03a1996443
-+sha256=b1f1ec9720036a3a33598b8478eef102535444a083d5b5813a6981ed74ab4071
-+
- [ftp://ftp.gnome.org/pub/GNOME/sources/glibmm/2.16/glibmm-2.16.2.tar.bz2]
- md5=408054366f0acc01014f4c4af2304da5
- sha256=f033f6f39c32fc17ecce63087e41408671a3a43d698c83de2528af3fc7276d28
-diff --git a/recipes/glibc/glibc-2.10.1/glibc-2.9-enable-binutils-2.2.patch b/recipes/glibc/glibc-2.10.1/glibc-2.9-enable-binutils-2.2.patch
+ [http://savannah.nongnu.org/download/dhcp-fwd/dhcp-forwarder-0.6.tar.bz2]
+ md5=3Dcbe60c8c904394a8e38e12ac42c02284
+ sha256=3D45b708fb49a9fab10d814eb1e340a0960dac91f92800b3d39ddf0245ac913e30
+diff --git a/recipes/dhcp/dhcp3.inc b/recipes/dhcp/dhcp3.inc
 new file mode 100644
-index 0000000..09200dd
+index 0000000..f099003
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.10.1/glibc-2.9-enable-binutils-2.2.patch
-@@ -0,0 +1,35 @@
-+--- glibc-2.9.orig/configure.in	2009-10-22 15:38:13.000000000 +0200
-++++ glibc-2.9/configure.in	2009-10-22 15:37:33.000000000 +0200
-+@@ -844,10 +844,10 @@
-+ # Accept binutils 2.13 or newer.
-+ AC_CHECK_PROG_VER(AS, $AS, --version,
-+ 		  [GNU assembler.* \([0-9]*\.[0-9.]*\)],
-+-		  [2.1[3-9]*], AS=: critic_missing="$critic_missing as")
-++		  [2.1[3-9]* | 2.2* ], AS=: critic_missing="$critic_missing as")
-+ AC_CHECK_PROG_VER(LD, $LD, --version,
-+ 		  [GNU ld.* \([0-9][0-9]*\.[0-9.]*\)],
-+-		  [2.1[3-9]*], LD=: critic_missing="$critic_missing ld")
-++		  [2.1[3-9]* | 2.2* ], LD=: critic_missing="$critic_missing ld")
-+ 
-+ # We need the physical current working directory.  We cannot use the
-+ # "pwd -P" shell builtin since that's not portable.  Instead we try to
-+--- glibc-2.9.orig/configure	2009-02-26 22:28:17.000000000 +0100
-++++ glibc-2.9/configure	2009-10-22 15:43:11.000000000 +0200
-+@@ -4531,7 +4531,7 @@
-+   ac_prog_version=`$AS --version 2>&1 | sed -n 's/^.*GNU assembler.* \([0-9]*\.[0-9.]*\).*$/\1/p'`
-+   case $ac_prog_version in
-+     '') ac_prog_version="v. ?.??, bad"; ac_verc_fail=yes;;
-+-    2.1[3-9]*)
-++    2.1[3-9]* | 2.2*)
-+        ac_prog_version="$ac_prog_version, ok"; ac_verc_fail=no;;
-+     *) ac_prog_version="$ac_prog_version, bad"; ac_verc_fail=yes;;
-+ 
-+@@ -4594,7 +4594,7 @@
-+   ac_prog_version=`$LD --version 2>&1 | sed -n 's/^.*GNU ld.* \([0-9][0-9]*\.[0-9.]*\).*$/\1/p'`
-+   case $ac_prog_version in
-+     '') ac_prog_version="v. ?.??, bad"; ac_verc_fail=yes;;
-+-    2.1[3-9]*)
-++    2.1[3-9]* | 2.2*)
-+        ac_prog_version="$ac_prog_version, ok"; ac_verc_fail=no;;
-+     *) ac_prog_version="$ac_prog_version, bad"; ac_verc_fail=yes;;
-+ 
-diff --git a/recipes/glibc/glibc-initial_2.10.1.bb b/recipes/glibc/glibc-initial_2.10.1.bb
++++ b/recipes/dhcp/dhcp3.inc
+@@ -0,0 +1,62 @@
++SECTION =3D "console/network"
++DESCRIPTION =3D "Internet Software Consortium DHCP package"
++HOMEPAGE =3D "http://www.isc.org/"
++LICENSE =3D "BSD"
++INC_PR =3D "r11"
++
++SRC_URI =3D "ftp://ftp.isc.org/isc/dhcp/dhcp-3.1-history/dhcp-${PV}.tar.gz=
+ \
++	   file://fixincludes.patch;patch=3D1 \
++	   file://useless-use-of-bash.patch;patch=3D1 \
++           file://dhclient-script-exit-status.dpatch;patch=3D1 \
++	   file://dhcp-3.0.3-dhclient-dbus.patch;patch=3D1;pnum=3D0 \
++	   file://init-relay file://default-relay \
++	   file://init-server file://default-server \
++	   file://dhclient.conf file://dhcpd.conf"
++
++
++inherit update-rc.d
++
++INITSCRIPT_PACKAGES =3D "dhcp-server"
++INITSCRIPT_NAME_dhcp-server =3D dhcp-server
++INITSCRIPT_PARAMS_dhcp-server =3D "start 30 2 3 4 5 . stop 30 0 1 6 ."
++
++TARGET_CC_ARCH +=3D "${LDFLAGS}"
++
++do_configure() {
++	./configure
++}
++
++do_compile() {
++	make RANLIB=3D${RANLIB} PREDEFINES=3D'-D_PATH_DHCPD_DB=3D\"/var/lib/dhcp/=
+dhcpd.leases\" \
++        -D_PATH_DHCLIENT_DB=3D\"/var/lib/dhcp/dhclient.leases\" \
++        -D_PATH_DHCLIENT_SCRIPT=3D\"/sbin/dhclient-script\" \
++        -D_PATH_DHCPD_CONF=3D\"/etc/dhcp/dhcpd.conf\" \
++        -D_PATH_DHCLIENT_CONF=3D\"/etc/dhcp/dhclient.conf\"'
++}
++
++do_install() {
++	make -e DESTDIR=3D${D} USRMANDIR=3D${mandir}/man1 ADMMANDIR=3D${mandir}/m=
+an8 FFMANDIR=3D${mandir}/man5 LIBMANDIR=3D${mandir}/man3 LIBDIR=3D${libdir}=
+ INCDIR=3D${includedir} install
++	install -d ${D}${sysconfdir}/init.d
++	install -d ${D}${sysconfdir}/default
++	install -d ${D}${sysconfdir}/dhcp
++	install -m 0755 ${WORKDIR}/init-relay ${D}${sysconfdir}/init.d/dhcp-relay
++	install -m 0644 ${WORKDIR}/default-relay ${D}${sysconfdir}/default/dhcp-r=
+elay
++	install -m 0755 ${WORKDIR}/init-server ${D}${sysconfdir}/init.d/dhcp-serv=
+er
++	install -m 0644 ${WORKDIR}/default-server ${D}${sysconfdir}/default/dhcp-=
+server
++	install -m 0644 ${WORKDIR}/dhclient.conf ${D}${sysconfdir}/dhcp/dhclient.=
+conf
++	install -m 0644 ${WORKDIR}/dhcpd.conf ${D}${sysconfdir}/dhcp/dhcpd.conf
++	install -d ${D}/var/lib/dhcp3
++}
++
++PACKAGES +=3D "dhcp-server dhcp-client dhcp-relay dhcp-omshell"
++FILES_${PN} =3D ""
++FILES_dhcp-server =3D "${sbindir}/dhcpd ${sysconfdir}/init.d/dhcp-server $=
+{sysconfdir}/default/dhcp-server ${sysconfdir}/dhcp/dhcpd.conf"
++FILES_dhcp-relay =3D "${sbindir}/dhcrelay ${sysconfdir}/init.d/dhcp-relay =
+${sysconfdir}/default/dhcp-relay"
++
++FILES_dhcp-client =3D "${base_sbindir}/dhclient ${base_sbindir}/dhclient-s=
+cript ${sysconfdir}/dhcp/dhclient.conf /var/lib/dhcp3"
++
++FILES_dhcp-omshell =3D "${bindir}/omshell"
++
++CONFFILES_dhcp-server_nylon =3D "/etc/dhcp/dhcpd.conf"
++CONFFILES_dhcp-relay_nylon =3D "/etc/default/dhcp-relay"
++CONFFILES_dhcp-client_nylon =3D "/etc/dhcp/dhclient.conf"
+diff --git a/recipes/dhcp/dhcp_3.0.1.bb b/recipes/dhcp/dhcp_3.0.1.bb
+index 7d55dc3..2deee26 100644
+--- a/recipes/dhcp/dhcp_3.0.1.bb
++++ b/recipes/dhcp/dhcp_3.0.1.bb
+@@ -2,10 +2,11 @@ SECTION =3D "console/network"
+ DESCRIPTION =3D "Internet Software Consortium DHCP package"
+ HOMEPAGE =3D "http://www.isc.org/"
+ LICENSE =3D "BSD"
+-PR =3D "r3"
++PR =3D "r4"
+ SRC_URI =3D "ftp://ftp.isc.org/isc/dhcp/dhcp-3.0-history/dhcp-${PV}.tar.gz=
+ \
+ 	   file://noattrmode.patch;patch=3D1 \
+ 	   file://fixincludes.patch;patch=3D1 \
++	   file://useless-use-of-bash.patch;patch=3D1 \
+ 	   file://init-relay file://default-relay \
+ 	   file://init-server file://default-server \
+ 	   file://dhclient.conf file://dhcpd.conf"
+diff --git a/recipes/dhcp/dhcp_3.0.2.bb b/recipes/dhcp/dhcp_3.0.2.bb
+index 052fa7e..7955c8e 100644
+--- a/recipes/dhcp/dhcp_3.0.2.bb
++++ b/recipes/dhcp/dhcp_3.0.2.bb
+@@ -1,62 +1,13 @@
+-SECTION =3D "console/network"
+-DESCRIPTION =3D "Internet Software Consortium DHCP package"
+-HOMEPAGE =3D "http://www.isc.org/"
+-LICENSE =3D "BSD"
+-PR =3D "r10"
++require dhcp3.inc
++
+ SRC_URI =3D "ftp://ftp.isc.org/isc/dhcp/dhcp-3.0-history/dhcp-${PV}.tar.gz=
+ \
+ 	   file://noattrmode.patch;patch=3D1 \
+ 	   file://fixincludes.patch;patch=3D1 \
+-           file://dhclient-script-exit-status.dpatch;patch=3D1 \
++	   file://useless-use-of-bash.patch;patch=3D1 \
++	   file://dhclient-script-exit-status.dpatch;patch=3D1 \
+ 	   file://dhcp-3.0.3-dhclient-dbus.patch;patch=3D1;pnum=3D0 \
+ 	   file://init-relay file://default-relay \
+ 	   file://init-server file://default-server \
+ 	   file://dhclient.conf file://dhcpd.conf"
+=20
+-
+-inherit update-rc.d
+-
+-INITSCRIPT_PACKAGES =3D "dhcp-server"
+-INITSCRIPT_NAME_dhcp-server =3D dhcp-server
+-INITSCRIPT_PARAMS_dhcp-server =3D "start 30 2 3 4 5 . stop 30 0 1 6 ."
+-
+-TARGET_CC_ARCH +=3D "${LDFLAGS}"
+-
+-do_configure() {
+-	./configure
+-}
+-
+-do_compile() {
+-	make RANLIB=3D${RANLIB} PREDEFINES=3D'-D_PATH_DHCPD_DB=3D\"/var/lib/dhcp/=
+dhcpd.leases\" \
+-        -D_PATH_DHCLIENT_DB=3D\"/var/lib/dhcp/dhclient.leases\" \
+-        -D_PATH_DHCLIENT_SCRIPT=3D\"/sbin/dhclient-script\" \
+-        -D_PATH_DHCPD_CONF=3D\"/etc/dhcp/dhcpd.conf\" \
+-        -D_PATH_DHCLIENT_CONF=3D\"/etc/dhcp/dhclient.conf\"'
+-}
+-
+-do_install() {
+-	make -e DESTDIR=3D${D} USRMANDIR=3D${mandir}/man1 ADMMANDIR=3D${mandir}/m=
+an8 FFMANDIR=3D${mandir}/man5 LIBMANDIR=3D${mandir}/man3 LIBDIR=3D${libdir}=
+ INCDIR=3D${includedir} install
+-	install -d ${D}${sysconfdir}/init.d
+-	install -d ${D}${sysconfdir}/default
+-	install -d ${D}${sysconfdir}/dhcp
+-	install -m 0755 ${WORKDIR}/init-relay ${D}${sysconfdir}/init.d/dhcp-relay
+-	install -m 0644 ${WORKDIR}/default-relay ${D}${sysconfdir}/default/dhcp-r=
+elay
+-	install -m 0755 ${WORKDIR}/init-server ${D}${sysconfdir}/init.d/dhcp-serv=
+er
+-	install -m 0644 ${WORKDIR}/default-server ${D}${sysconfdir}/default/dhcp-=
+server
+-	install -m 0644 ${WORKDIR}/dhclient.conf ${D}${sysconfdir}/dhcp/dhclient.=
+conf
+-	install -m 0644 ${WORKDIR}/dhcpd.conf ${D}${sysconfdir}/dhcp/dhcpd.conf
+-	install -d ${D}/var/lib/dhcp3
+-}
+-
+-PACKAGES +=3D "dhcp-server dhcp-client dhcp-relay dhcp-omshell"
+-FILES_${PN} =3D ""
+-FILES_dhcp-server =3D "${sbindir}/dhcpd ${sysconfdir}/init.d/dhcp-server $=
+{sysconfdir}/default/dhcp-server ${sysconfdir}/dhcp/dhcpd.conf"
+-FILES_dhcp-relay =3D "${sbindir}/dhcrelay ${sysconfdir}/init.d/dhcp-relay =
+${sysconfdir}/default/dhcp-relay"
+-
+-FILES_dhcp-client =3D "${base_sbindir}/dhclient ${base_sbindir}/dhclient-s=
+cript ${sysconfdir}/dhcp/dhclient.conf /var/lib/dhcp3"
+-RDEPENDS_dhcp-client =3D "bash"
+-
+-FILES_dhcp-omshell =3D "${bindir}/omshell"
+-
+-CONFFILES_dhcp-server_nylon =3D "/etc/dhcp/dhcpd.conf"
+-CONFFILES_dhcp-relay_nylon =3D "/etc/default/dhcp-relay"
+-CONFFILES_dhcp-client_nylon =3D "/etc/dhcp/dhclient.conf"
++PR =3D "${INC_PR}"
+diff --git a/recipes/dhcp/dhcp_3.1.2p1.bb b/recipes/dhcp/dhcp_3.1.2p1.bb
 new file mode 100644
-index 0000000..d662970
+index 0000000..df3c9b9
 --- /dev/null
-+++ b/recipes/glibc/glibc-initial_2.10.1.bb
-@@ -0,0 +1,6 @@
-+require glibc_${PV}.bb
-+require glibc-initial.inc
++++ b/recipes/dhcp/dhcp_3.1.2p1.bb
+@@ -0,0 +1,12 @@
++require dhcp3.inc
 +
-+do_configure_prepend () {
-+	unset CFLAGS
-+}
-diff --git a/recipes/glibc/glibc_2.10.1.bb b/recipes/glibc/glibc_2.10.1.bb
++SRC_URI =3D "ftp://ftp.isc.org/isc/dhcp/dhcp-3.1-history/dhcp-${PV}.tar.gz=
+ \
++	   file://fixincludes.patch;patch=3D1 \
++	   file://useless-use-of-bash.patch;patch=3D1 \
++	   file://dhclient-script-exit-status.dpatch;patch=3D1 \
++	   file://dhcp-3.0.3-dhclient-dbus.patch;patch=3D1;pnum=3D0 \
++	   file://init-relay file://default-relay \
++	   file://init-server file://default-server \
++	   file://dhclient.conf file://dhcpd.conf"
++
++PR =3D "${INC_PR}"
+diff --git a/recipes/dhcp/files/useless-use-of-bash.patch b/recipes/dhcp/fi=
+les/useless-use-of-bash.patch
 new file mode 100644
-index 0000000..83613be
+index 0000000..6628fe7
 --- /dev/null
-+++ b/recipes/glibc/glibc_2.10.1.bb
-@@ -0,0 +1,150 @@
-+require glibc.inc
-+
-+ARM_INSTRUCTION_SET = "arm"
-+
-+PACKAGES_DYNAMIC = "libc6*"
-+RPROVIDES_${PN}-dev = "libc6-dev virtual-libc-dev"
-+
-+# the -isystem in bitbake.conf screws up glibc do_stage
-+BUILD_CPPFLAGS = "-I${STAGING_INCDIR_NATIVE}"
-+TARGET_CPPFLAGS = "-I${STAGING_DIR_TARGET}${layout_includedir}"
-+
-+
-+FILESPATHPKG =. "glibc-2.4:"
-+
-+GLIBC_ADDONS ?= "ports,nptl,libidn"
-+
-+GLIBC_BROKEN_LOCALES = " _ER _ET so_ET yn_ER sid_ET tr_TR mn_MN gez_ET gez_ER bn_BD te_IN"
-+
-+#
-+# For now, we will skip building of a gcc package if it is a uclibc one
-+# and our build is not a uclibc one, and we skip a glibc one if our build
-+# is a uclibc build.
-+#
-+# See the note in gcc/gcc_3.4.0.oe
-+#
-+
-+python __anonymous () {
-+    import bb, re
-+    uc_os = (re.match('.*uclibc$', bb.data.getVar('TARGET_OS', d, 1)) != None)
-+    if uc_os:
-+        raise bb.parse.SkipPackage("incompatible with target %s" %
-+                                   bb.data.getVar('TARGET_OS', d, 1))
-+}
-+
-+RDEPENDS_${PN}-dev = "linux-libc-headers-dev"
-+
-+SRC_URI = "ftp://ftp.gnu.org/pub/gnu/glibc/glibc-${PV}.tar.bz2 \
-+	   ftp://ftp.gnu.org/pub/gnu/glibc/glibc-ports-${PV}.tar.bz2 \
-+	   ftp://ftp.gnu.org/pub/gnu/glibc/glibc-libidn-${PV}.tar.bz2 \
-+	   file://nscd-init.patch;patch=1;pnum=0 \
-+           file://arm-memcpy.patch;patch=1 \
-+           file://arm-longlong.patch;patch=1 \
-+           file://fhs-linux-paths.patch;patch=1 \
-+           file://dl-cache-libcmp.patch;patch=1 \
-+           file://ldsocache-varrun.patch;patch=1 \
-+           file://nptl-crosscompile.patch;patch=1 \
-+	   file://glibc-check_pf.patch;patch=1;pnum=0 \
-+           file://ldd-unbash.patch;patch=1 \
-+	   file://glibc-arm-IO-acquire-lock-fix.diff;patch=1 \
-+	   file://generic-bits_select.h \
-+	   file://generic-bits_types.h \
-+	   file://generic-bits_typesizes.h \
-+	   file://generic-bits_time.h \
-+           file://etc/ld.so.conf \
-+           file://generate-supported.mk \
-+           file://march-i686.patch;patch=1;pnum=0 \
-+           file://arm-lowlevellock-include-tls.patch;patch=1 \
-+           file://glibc-2.9-enable-binutils-2.2.patch;patch=1 \
-+           "
-+
-+# Build fails on sh3 and sh4 without additional patches
-+SRC_URI_append_sh3 = " file://no-z-defs.patch;patch=1"
-+SRC_URI_append_sh4 = " file://no-z-defs.patch;patch=1"
-+
-+#powerpc patches to add support for soft-float
-+SRC_URI_append_powerpc= " file://powerpc-sqrt-hack.diff;patch=1"
-+
-+S = "${WORKDIR}/glibc-${PV}"
-+B = "${WORKDIR}/build-${TARGET_SYS}"
-+
-+EXTRA_OECONF = "--enable-kernel=${OLDEST_KERNEL} \
-+	        --without-cvs --disable-profile --disable-debug --without-gd \
-+		--enable-clocale=gnu \
-+	        --enable-add-ons=${GLIBC_ADDONS} \
-+		--with-headers=${STAGING_INCDIR} \
-+		--without-selinux \
-+		${GLIBC_EXTRA_OECONF}"
-+
-+EXTRA_OECONF += "${@get_glibc_fpu_setting(bb, d)}"
-+
-+do_munge() {
-+	# Integrate ports and libidn into tree
-+	mv ${WORKDIR}/glibc-ports-${PV} ${S}/ports
-+	mv ${WORKDIR}/glibc-libidn-${PV} ${S}/libidn
-+
-+	# Ports isn't really working... Fix it
-+	# Some of this is rather dirty, but it seems to be the only
-+	# quick way to get this cruft to compile
-+	rm -rf ${S}/ports/sysdeps/unix/sysv/linux/arm/linuxthreads
-+	ln -s nptl ${S}/ports/sysdeps/unix/sysv/linux/arm/linuxthreads
-+	cp ${S}/nptl/sysdeps/pthread/bits/sigthread.h ${S}/ports/sysdeps/unix/sysv/linux/arm/bits/
-+	cp ${S}/sysdeps/unix/sysv/linux/i386/bits/wchar.h ${S}/ports/sysdeps/unix/sysv/linux/arm/bits/
-+	cp ${S}/sysdeps/wordsize-32/bits/wordsize.h ${S}/ports/sysdeps/unix/sysv/linux/arm/bits/
-+	cp ${WORKDIR}/generic-bits_select.h ${S}/ports/sysdeps/unix/sysv/linux/arm/bits/select.h
-+	cp ${WORKDIR}/generic-bits_types.h ${S}/ports/sysdeps/unix/sysv/linux/arm/bits/types.h
-+	cp ${WORKDIR}/generic-bits_typesizes.h ${S}/ports/sysdeps/unix/sysv/linux/arm/bits/typesizes.h
-+	cp ${WORKDIR}/generic-bits_time.h ${S}/ports/sysdeps/unix/sysv/linux/arm/bits/time.h
-+	# Copy in generic stuff for not yet implemented headers
-+	for i in ${S}/bits/*.h; do
-+		F=`basename $i`
-+		[ "$F" = "local_lim.h" ] && continue
-+		[ "$F" = "errno.h" ] && continue
-+		test -e ${S}/ports/sysdeps/unix/sysv/linux/arm/bits/$F || test -e ${S}/ports/sysdeps/arm/bits/$F || test -e ${S}/sysdeps/unix/sysv/linux/bits/$F || test -e ${S}/sysdeps/ieee754/bits/$F || cp $i ${S}/ports/sysdeps/unix/sysv/linux/arm/bits/
-+	done
-+	# This is harmful; we need to get the one from nptl/sysdeps/pthreads
-+	rm -f ${S}/ports/sysdeps/unix/sysv/linux/arm/bits/libc-lock.h
-+	# Obsoleted by sysdeps/arm/{fpu,eabi}/bits/fenv.h
-+	rm -f ${S}/ports/sysdeps/unix/sysv/linux/arm/bits/fenv.h
-+	# Obsoleted by sysdeps/gnu/bits/utmp.h
-+	rm -f ${S}/ports/sysdeps/unix/sysv/linux/arm/bits/utmp.h
-+}
-+
-+addtask munge before do_patch after do_unpack
-+
-+
-+do_configure () {
-+# /var/db was not included to FHS
-+	sed -i s:/var/db/nscd:/var/run/nscd: ${S}/nscd/nscd.h
-+# override this function to avoid the autoconf/automake/aclocal/autoheader
-+# calls for now
-+# don't pass CPPFLAGS into configure, since it upsets the kernel-headers
-+# version check and doesn't really help with anything
-+	if [ -z "`which rpcgen`" ]; then
-+		echo "rpcgen not found.  Install glibc-devel."
-+		exit 1
-+	fi
-+	(cd ${S} && gnu-configize) || die "failure in running gnu-configize"
-+	CPPFLAGS="" oe_runconf
-+}
-+
-+rpcsvc = "bootparam_prot.x nlm_prot.x rstat.x \
-+	  yppasswd.x klm_prot.x rex.x sm_inter.x mount.x \
-+	  rusers.x spray.x nfs_prot.x rquota.x key_prot.x"
-+
-+do_compile () {
-+	# -Wl,-rpath-link <staging>/lib in LDFLAGS can cause breakage if another glibc is in staging
-+	unset LDFLAGS
-+	base_do_compile
-+	(
-+		cd ${S}/sunrpc/rpcsvc
-+		for r in ${rpcsvc}; do
-+			h=`echo $r|sed -e's,\.x$,.h,'`
-+			rpcgen -h $r -o $h || oewarn "unable to generate header for $r"
-+		done
-+	)
-+}
-+
-+require glibc-stage.inc
-+
-+require glibc-package.bbclass
--- 
-1.6.3.3
++++ b/recipes/dhcp/files/useless-use-of-bash.patch
+@@ -0,0 +1,8 @@
++--- dhcp-3.0.2p1/client/scripts/linux	2006-07-22 04:24:16.000000000 +0200
+++++ dhcp-3.0.2p1/client/scripts/linux	2009-11-03 17:51:55.000000000 +0100
++@@ -1,4 +1,4 @@
++-#!/bin/bash
+++#!/bin/sh
++ # dhclient-script for Linux. Dan Halbert, March, 1997.
++ # Updated for Linux 2.[12] by Brian J. Murrell, January 1999.
++ # No guarantees about this. I'm a novice at the details of Linux
+--=20
+1.6.3.1
 
+--fdj2RfSjLxBAspz7
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+Content-Disposition: inline
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
 
+iEYEARECAAYFAkr4OyYACgkQezjnobFOgrEDzQCgnsjMtI2FTnKf3VVCtZAdqpIw
+K+IAn13LhkKsnX/Yl1+B4PMuRNvf5xjj
+=DgfL
+-----END PGP SIGNATURE-----
 
+--fdj2RfSjLxBAspz7--
