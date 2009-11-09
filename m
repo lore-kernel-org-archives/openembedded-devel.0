@@ -1,39 +1,25 @@
-Received: from [150.254.30.30] (helo=libra.cs.put.poznan.pl)
+Received: from [82.208.49.253] (helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <przemyslaw.wesolek@cs.put.poznan.pl>)
-	id 1N7GPU-0002NR-SG for openembedded-devel@lists.openembedded.org;
-	Sun, 08 Nov 2009 23:39:03 +0100
-Received: from kas30pipe.localhost (unknown [127.0.0.1])
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 8C1C987
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Nov 2009 22:37:44 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at cs.put.poznan.pl
-Received: from libra.cs.put.poznan.pl ([127.0.0.1])
-	by localhost (libra.cs.put.poznan.pl [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id U5ByQKxjNr5G
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Nov 2009 23:37:44 +0100 (CET)
-Received: from [192.168.0.100] (103-208.echostar.pl [213.156.103.208])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 1D57882
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Nov 2009 23:37:44 +0100 (CET)
-Message-ID: <4AF74838.6020308@cs.put.poznan.pl>
-Date: Sun, 08 Nov 2009 23:37:44 +0100
-From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1N7O98-0003iE-Ny
+	for openembedded-devel@openembedded.org; Mon, 09 Nov 2009 07:54:42 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id EFA351D36078; Mon,  9 Nov 2009 07:53:22 +0100 (CET)
+Date: Mon, 9 Nov 2009 07:53:22 +0100
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-References: <4AF353C8.80904@cs.put.poznan.pl>
-In-Reply-To: <4AF353C8.80904@cs.put.poznan.pl>
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0278], KAS30/Release
-X-SpamTest-Info: Not protected
-X-SA-Exim-Connect-IP: 150.254.30.30
-X-SA-Exim-Mail-From: przemyslaw.wesolek@cs.put.poznan.pl
+Message-ID: <20091109065322.GD16449@ibawizard.net>
+References: <200910291241.35265.marcin@juszkiewicz.com.pl>
+	<c384c5ea0911011235j2a8e6920s43310cce1a3e8498@mail.gmail.com>
+	<d1b08f940911011459i7e8403ees7e509843a0854e2@mail.gmail.com>
+	<200911020309.56350.holger+oe@freyther.de>
+MIME-Version: 1.0
+In-Reply-To: <200911020309.56350.holger+oe@freyther.de>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: menuconfig task for kernels
+Subject: Re: Checksums.ini again - new format this time
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,16 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Nov 2009 22:39:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 09 Nov 2009 06:54:43 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-> Is this the "right" way to do? If so, maybe menuconfig should be added
-> as 'after do_configure', instead of 'after do_patch'?
+Holger Hans Peter Freyther <holger+oe@freyther.de> [2009-11-02 03:09:56]:
 
-Anyone?
+> On Sunday 01 November 2009 23:59:18 Andrea Adami wrote:
+> > And what about having a checksum file in each dir of  /recipes ?
+> > If the checksum changes the PR should be changed too.
+> 
+> 
+> I think that is the best way in terms of scalability and BB collections. We 
+> have some weird cases where we might do require ../ but these are broken or 
+> need to duplicate the checksums...
 
-Przemek
+I like this idea more than one monolitic checksum file. checksums.ini is place
+for storing of a duplicate information anyway. You need to enter URL in checksums,
+you need to enter URL again into recipe.
 
+Wouldn't it be better to write URL with checksum once at one place and reuse
+it than in recipe as some kind of variable or something like that?
+
+Well, at least that hrw's modification avoids sorting process...
+
+-- ynezz
 
 
