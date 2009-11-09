@@ -1,27 +1,40 @@
-Received: from [213.160.213.92] (helo=smtp.nedap.com)
+Received: from [209.85.220.209] (helo=mail-fx0-f209.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jaap.dejong@nedap.com>) id 1N7Tm4-0002PE-6t
+	(envelope-from <leon.woestenberg@gmail.com>) id 1N7U14-0004ls-84
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Nov 2009 13:55:16 +0100
-Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Mon, 9 Nov 2009 13:52:54 +0100
-X-TM-IMSS-Message-ID: <5469ed1d0001caa3@nedap.com>
-Received: from [10.2.40.9] ([10.2.40.9]) by nedap.com ([10.91.8.1]) with ESMTP
-	(TREND IMSS SMTP Service 7.0) id 5469ed1d0001caa3 for
-	<jaap.dejong@nedap.com>; Mon, 9 Nov 2009 13:52:50 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
+	Mon, 09 Nov 2009 14:10:45 +0100
+Received: by fxm1 with SMTP id 1so995712fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 09 Nov 2009 05:09:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type;
+	bh=VJWZQUpb10NfqWiP5fNG2MyZ5Kz4U57c1jDABjLmRgo=;
+	b=ExhyJovt/rJoP99zGBV9ufptsnxOguGbczf9EKpuUyJmWwYwf25UipSa/K1bgfeD0W
+	CRyeZ3mNYduc0o28FXA4bPi44qu1MBAUUZ+TlAkwmKiIHNxa0xSiKE9tT5f6TDKfw2mJ
+	+02/oQg4NmtYD3z2VXEuBo2IqUSB3a9MZMy88=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	b=t4QjXvHGPA+VxLYTxubp9vNwgEPT3IfCpyYHjxsHYY3lmPEBDs1PNip/icaGL8WjDU
+	9rM6F57qHRSoi2zn8Da8XWJJpijiZhyZ8cWVlkC+HMqKADS+wvuSW6lHU7ZM+YIjKp22
+	GW2M6hduT1CUcywNXSem00/UxN7dapaDy5QnA=
+MIME-Version: 1.0
+Received: by 10.239.145.13 with SMTP id q13mr759887hba.125.1257771681017; Mon, 
+	09 Nov 2009 05:01:21 -0800 (PST)
+In-Reply-To: <be7a9f3d0911080422q13f8d4dj7c70da47f03ce9ba@mail.gmail.com>
+References: <c384c5ea0911071703o4aec5583w140a128328b5bdcc@mail.gmail.com>
+	<be7a9f3d0911080422q13f8d4dj7c70da47f03ce9ba@mail.gmail.com>
+Date: Mon, 9 Nov 2009 14:01:20 +0100
+Message-ID: <c384c5ea0911090501k2d897b61jc5ebadcca510fe28@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Date: Mon, 09 Nov 2009 13:50:17 +0100
-Message-ID: <1257771017.19063.3.camel@nvc0624>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 09 Nov 2009 12:52:54.0111 (UTC)
-	FILETIME=[8DA906F0:01CA613B]
-X-SA-Exim-Connect-IP: 213.160.213.92
-X-SA-Exim-Mail-From: jaap.dejong@nedap.com
+X-SA-Exim-Connect-IP: 209.85.220.209
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] Precision Time Protocol (PTP) as defined by the IEEE 1588 standard
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: Machines/users of squashfs 4.0 with lzma?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,60 +48,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Nov 2009 12:55:16 -0000
-X-Groupsio-MsgNum: 14047
-Content-Type: multipart/mixed; boundary="=-3d0gjEFN7DPL04pX8sCr"
+X-List-Received-Date: Mon, 09 Nov 2009 13:10:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-3d0gjEFN7DPL04pX8sCr
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Hello Otavio, all,
 
-Hi there,
+On Sun, Nov 8, 2009 at 1:22 PM, Otavio Salvador <otavio@ossystems.com.br> wrote:
+> On Sat, Nov 7, 2009 at 11:03 PM, Leon Woestenberg
+> <leon.woestenberg@gmail.com> wrote:
+>>
+>> As lzma support is now (almost!) landed upstream, I would like to see
+>> what the impact is of moving to the upcoming 4.x release.
+>
+> I guess it is compatible with current squashfs available on 2.6.31
+> right? In this case it is OK I guess.
+>
+That's what I'm not 100% sure about...
 
-attached a proposal for a recipe for building the 
-Precision Time Protocol daemon (ptpd).
+> Do you have a backport of the lzma support in kernel to 2.6.31?
+>
+Yes.
 
+>> I have a patch on standby that moves from 4.0+patches to the current
+>> SVN where lzma is built-in.
+>
+> Please do.
+>
+I'll submit it for review.
 
-Jaap
-
-
-
---=-3d0gjEFN7DPL04pX8sCr
-Content-Disposition: attachment; filename="0001-Precision-Time-Protocol.patch"
-Content-Type: text/x-patch; name="0001-Precision-Time-Protocol.patch"; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-
-
-Precision Time protocol (IEEE 1588)
-
----
- recipes/ptpd/ptpd_1.0.0.bb |   15 +++++++++++++++
- 1 files changed, 15 insertions(+), 0 deletions(-)
- create mode 100644 recipes/ptpd/ptpd_1.0.0.bb
-
-diff --git a/recipes/ptpd/ptpd_1.0.0.bb b/recipes/ptpd/ptpd_1.0.0.bb
-new file mode 100644
-index 0000000..3737d63
---- /dev/null
-+++ b/recipes/ptpd/ptpd_1.0.0.bb
-@@ -0,0 +1,15 @@
-+# ptpd build file
-+LICENSE="BSD"
-+DESCRIPTION="Precision Time Protocol (PTP) as defined by the IEEE 1588 standard"
-+HOMEPAGE="http://sourceforge.net/projects/ptpd"
-+
-+SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${PV}/ptpd-${PV}.tar.gz" 
-+
-+S="${WORKDIR}/ptpd-${PV}/src"
-+PR = "r0"
-+
-+do_install() {                                                                                                                                               
-+	install -d ${D}${bindir}
-+	install -m 4555 ptpd ${D}${bindir}
-+}
-+
+Regards,
 -- 
-1.6.3.3
+Leon
 
 
---=-3d0gjEFN7DPL04pX8sCr--
