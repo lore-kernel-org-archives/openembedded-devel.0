@@ -1,25 +1,38 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [209.85.210.175] (helo=mail-yx0-f175.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1N7qSg-0004YP-GX
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N7qZI-0004pA-AH
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Nov 2009 14:08:45 +0100
-Received: from [192.168.1.7] (dialbs-092-079-168-007.static.arcor-ip.net
-	[92.79.168.7])
-	by drlauer-research.com (Postfix) with ESMTP id 24104584D29
+	Tue, 10 Nov 2009 14:15:35 +0100
+Received: by yxe5 with SMTP id 5so3603089yxe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2009 14:53:17 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Tue, 10 Nov 2009 05:14:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=OwyRf77qzn1CzxedPAwXbrjhZorqRZSQRTiriEjTGN4=;
+	b=APp5PcXzU1HEmRx56PdcbQjzjr8Cqy7veRByK5GC+Ohmou9UIq9O8Y3KpMFbcH7y7Q
+	AIqvJxaJM4c3FcuOBIb2JwTwl5GrSAwttih/6MK43JVxTjiqEMzyBSeRbp5XZ/PNkQTD
+	k6x0Is4bVejTYOoUSCWnSrNGXWiMbVAAsklIE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=SttKBx2z7F+67pK79gO+XQlUQsRi4NTr/aslXIMD+LFko0bd0GztaMyKYMp5nbRhHs
+	pOdulS1ecCBIos2rguwzIXKCxLAPur6K8ukGopTeOTaPNVBpPY7BsZpvlzY7FAFRXSfo
+	78lrqyPxC4JTBkzwNowaZaT58eICarzuHrJok=
+MIME-Version: 1.0
+Received: by 10.100.81.1 with SMTP id e1mr18553anb.73.1257858497457; Tue, 10 
+	Nov 2009 05:08:17 -0800 (PST)
+In-Reply-To: <1257857415.3077.2.camel@opal>
+References: <1257857415.3077.2.camel@opal>
+Date: Tue, 10 Nov 2009 14:08:17 +0100
+Message-ID: <ac9c93b10911100508p2fdc1cd5k4c26046120cf1b04@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Organization: Vanille-Media
-Date: Tue, 10 Nov 2009 14:07:26 +0100
-Message-ID: <1257858446.3077.3.camel@opal>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: OEDEM: Summary of 'OE and Poky', 'Hosting', 'Bugtracker'
+Subject: Re: [OE e.V.]: Meeting minutes of the 2009 GA
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,59 +46,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2009 13:08:45 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 10 Nov 2009 13:15:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-===========
-Poky and OE
-===========
+Mickey, thanks for the extensive report.
+All, thanks for your work!
 
-RP still works on Poky, since Poky is easier to break, RP has more
-freedom to break stuff and try new ideas for improvements that will
-also benefit OE.
-
-Intel owns Poky as the brandname, however there seems to be no clear
-direction right now where they want to take it.
-
-OE is being improved gradually to support the merits of Poky, although
-due to the sheer amount of recipes it will probably always lack behind
-in perceived quality. OE and Poky do try to remain in sync, though.
-
-As a product, it is important for Poky to have a short list of
-people with commit access. This already adds up to the quality of the
-metadata. The dictator model works for Poky, but does not work for OE.
-
-It is noted that the current dev process does not work particularly
-well,
-some people think it is too easy to get commit access to OE.
-(Editor's note: See also stable branch session)
-
-=======================================
-Hosting
-=======================================
-The prefix of the member's mailinglist has been removed, reply-to-list
-has been enabled. Various people work on getting the remaining services
-on amethyst to work on LTG (which is a powerful machine these days).
-Phil and Phillip are improving the server configuration to get rid
-of our mail/DNS problems.
-
-We will do changes on the git layout, e.g. org.oe.dev is becoming
-'master'
-and user branches will live in a seperate repository.
-
-=======================================
-Bugtracker
-=======================================
-We will keep the bugtracker, but perform a radical cleanup, i.e.
-all non-OE and non-BB versions/milestones/components will be dumped.
-We will improve the description of what belongs into the bugtracker
-and what not. We will also reinstatiate the bug squashing weekends.
-
-Cheers,
-
-:M:
-
-
+Frans.
 
 
