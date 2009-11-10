@@ -1,19 +1,26 @@
 Received: from [85.17.141.90] (helo=mzh.zlo.nu)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcolz@zlo.nu>) id 1N7nPs-0005C5-7O
+	(envelope-from <marcolz@zlo.nu>) id 1N7nT1-0005TY-DY
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Nov 2009 10:53:40 +0100
+	Tue, 10 Nov 2009 10:56:54 +0100
 Received: by mzh.zlo.nu (Postfix, from userid 1000)
-	id 61E221406D; Tue, 10 Nov 2009 10:52:19 +0100 (CET)
+	id 894D214030; Tue, 10 Nov 2009 10:55:34 +0100 (CET)
+Date: Tue, 10 Nov 2009 10:55:34 +0100
 From: Marc Olzheim <zlo@zlo.nu>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Nov 2009 10:38:58 +0100
-Message-Id: <20091110095219.61E221406D@mzh.zlo.nu>
+Message-ID: <20091110095534.GA18137@zlo.nu>
+References: <20091104125439.GA20450@zlo.nu>
+	<be7a9f3d0911051703p33a3f0e1p223219ead98055eb@mail.gmail.com>
+	<20091109155414.GA13145@zlo.nu>
+	<be7a9f3d0911090900s1d2ca377u96751e5fd5670e66@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <be7a9f3d0911090900s1d2ca377u96751e5fd5670e66@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 85.17.141.90
 X-SA-Exim-Mail-From: marcolz@zlo.nu
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 3/3] Get rid of useless bash dependency in the linux client script.
+Subject: Re: [PATCH] Add dhcp 3.1.2p1 and fix unneeded bash dependency in 3.0.*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -27,83 +34,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2009 09:53:40 -0000
+X-List-Received-Date: Tue, 10 Nov 2009 09:56:54 -0000
+X-Groupsio-MsgNum: 14066
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="GvXjxJ+pjyke8COw"
+Content-Disposition: inline
 
----
- recipes/dhcp/dhcp_3.0.1.bb                   |    3 ++-
- recipes/dhcp/dhcp_3.0.2.bb                   |    3 ++-
- recipes/dhcp/dhcp_3.1.2p1.bb                 |    3 ++-
- recipes/dhcp/files/useless-use-of-bash.patch |    8 ++++++++
- 4 files changed, 14 insertions(+), 3 deletions(-)
- create mode 100644 recipes/dhcp/files/useless-use-of-bash.patch
+--GvXjxJ+pjyke8COw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/recipes/dhcp/dhcp_3.0.1.bb b/recipes/dhcp/dhcp_3.0.1.bb
-index 7d55dc3..2deee26 100644
---- a/recipes/dhcp/dhcp_3.0.1.bb
-+++ b/recipes/dhcp/dhcp_3.0.1.bb
-@@ -2,10 +2,11 @@ SECTION = "console/network"
- DESCRIPTION = "Internet Software Consortium DHCP package"
- HOMEPAGE = "http://www.isc.org/"
- LICENSE = "BSD"
--PR = "r3"
-+PR = "r4"
- SRC_URI = "ftp://ftp.isc.org/isc/dhcp/dhcp-3.0-history/dhcp-${PV}.tar.gz \
- 	   file://noattrmode.patch;patch=1 \
- 	   file://fixincludes.patch;patch=1 \
-+	   file://useless-use-of-bash.patch;patch=1 \
- 	   file://init-relay file://default-relay \
- 	   file://init-server file://default-server \
- 	   file://dhclient.conf file://dhcpd.conf"
-diff --git a/recipes/dhcp/dhcp_3.0.2.bb b/recipes/dhcp/dhcp_3.0.2.bb
-index 9934590..3c3c742 100644
---- a/recipes/dhcp/dhcp_3.0.2.bb
-+++ b/recipes/dhcp/dhcp_3.0.2.bb
-@@ -3,10 +3,11 @@ require dhcp3.inc
- SRC_URI = "ftp://ftp.isc.org/isc/dhcp/dhcp-3.0-history/dhcp-${PV}.tar.gz \
- 	   file://noattrmode.patch;patch=1 \
- 	   file://fixincludes.patch;patch=1 \
-+	   file://useless-use-of-bash.patch;patch=1 \
- 	   file://dhclient-script-exit-status.dpatch;patch=1 \
- 	   file://dhcp-3.0.3-dhclient-dbus.patch;patch=1;pnum=0 \
- 	   file://init-relay file://default-relay \
- 	   file://init-server file://default-server \
- 	   file://dhclient.conf file://dhcpd.conf"
- 
--PR = "${INC_PR}"
-+PR = "${INC_PR}.0"
-diff --git a/recipes/dhcp/dhcp_3.1.2p1.bb b/recipes/dhcp/dhcp_3.1.2p1.bb
-index e57fb01..4900a49 100644
---- a/recipes/dhcp/dhcp_3.1.2p1.bb
-+++ b/recipes/dhcp/dhcp_3.1.2p1.bb
-@@ -2,10 +2,11 @@ require dhcp3.inc
- 
- SRC_URI = "ftp://ftp.isc.org/isc/dhcp/dhcp-3.1-history/dhcp-${PV}.tar.gz \
- 	   file://fixincludes.patch;patch=1 \
-+	   file://useless-use-of-bash.patch;patch=1 \
- 	   file://dhclient-script-exit-status.dpatch;patch=1 \
- 	   file://dhcp-3.0.3-dhclient-dbus.patch;patch=1;pnum=0 \
- 	   file://init-relay file://default-relay \
- 	   file://init-server file://default-server \
- 	   file://dhclient.conf file://dhcpd.conf"
- 
--PR = "${INC_PR}"
-+PR = "${INC_PR}.0"
-diff --git a/recipes/dhcp/files/useless-use-of-bash.patch b/recipes/dhcp/files/useless-use-of-bash.patch
-new file mode 100644
-index 0000000..6628fe7
---- /dev/null
-+++ b/recipes/dhcp/files/useless-use-of-bash.patch
-@@ -0,0 +1,8 @@
-+--- dhcp-3.0.2p1/client/scripts/linux	2006-07-22 04:24:16.000000000 +0200
-++++ dhcp-3.0.2p1/client/scripts/linux	2009-11-03 17:51:55.000000000 +0100
-+@@ -1,4 +1,4 @@
-+-#!/bin/bash
-++#!/bin/sh
-+ # dhclient-script for Linux. Dan Halbert, March, 1997.
-+ # Updated for Linux 2.[12] by Brian J. Murrell, January 1999.
-+ # No guarantees about this. I'm a novice at the details of Linux
--- 
-1.6.3.1
+On Mon, Nov 09, 2009 at 03:00:47PM -0200, Otavio Salvador wrote:
+> Thanks by looking at it again; the only missing things to us to commit it=
+ are:
+>=20
+>  - use a patch for .inc move
+>  - use a patch for the new version
+>  - export both using git format-patch and mail them
+>=20
+> Doing the last allow us to give the credit to you and keep tracking
+> who did what in the project; this help a lot and allow us to ping
+> people in case of problems or radical changes that might affect your
+> usage.
 
+Ok, done, in 3 patches (inc move, add new version, bash-patch).
 
+Marc
 
+--GvXjxJ+pjyke8COw
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+Content-Disposition: inline
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEARECAAYFAkr5OJYACgkQezjnobFOgrFbqQCgkYta7pvivmcMcWniOn926+IS
+XjsAmwYa8yL2DAmn2VTTW4Y1zKTmTAoY
+=O+zO
+-----END PGP SIGNATURE-----
+
+--GvXjxJ+pjyke8COw--
