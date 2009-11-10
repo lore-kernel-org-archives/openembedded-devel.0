@@ -1,39 +1,38 @@
-Received: from [209.85.220.209] (helo=mail-fx0-f209.google.com)
+Received: from [209.85.210.175] (helo=mail-yx0-f175.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1N7o9D-0003vs-Oz
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N7os9-0005s6-PH
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Nov 2009 11:40:30 +0100
-Received: by fxm1 with SMTP id 1so1605480fxm.12
+	Tue, 10 Nov 2009 12:26:56 +0100
+Received: by yxe5 with SMTP id 5so3531444yxe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2009 02:39:10 -0800 (PST)
+	Tue, 10 Nov 2009 03:25:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type; bh=xlbl5mGDvBPUq9MosoZULKJD95S/1HtQYEvTEUDJ5wI=;
-	b=omtaIO7wX/vfZTRu1yUX0GmvgY2u+0DUiNB/IS/l5xlK5PkSOhZwwOR7riQzWUw/gI
-	n5ta1VcmpfU9yxkB+Nw9Df9QXOXbT/mB7dNS/n7oPHRPObs8YH3ue4hP2zKxW0pBVEpg
-	aTEUZKYFrVCcu8UKQcmAMbZIhbKVFE4OUT5rQ=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=VWCMXL8v0L+aonalMc3A1jFJBR9vSKqeRtBlXEih0+U=;
+	b=vBBM88Z9umHOnqVjbUoZfsHKaCEvy73veUw9DTmgfoAtKwjloBoJ/nKCjMH99S7Arn
+	3FK7DUU81egFsprf74tcvu34zKp8wUj3Sl/m5vswgA+t08v5ne0KHvFNdqWU7RG/Zf5N
+	RJ4hwecaSYVTZ5/O1flEPI3ivym9May2lmP5k=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	b=UYgigfvpZ/Nc9duFdrN2Edw+q9jNZDl2UtCZQjeTuwxS2neC+ssPMpXy/Go7kDgJyx
-	EUXat/2DaEUPs44JDPRiRVDBREvo6d6+Xi09DlLqsbOpRIpl/quKsaCfWkqPFJl9NRH0
-	lOd077X95SNceMn1KvWmtU0RKwBCm7eI6D2JE=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=pb/4kYFDSsWx1ePxytSJI1zVcyOhH4GIPyJUiqLdQwmHmGEZU/A0iFN0BpMSvqWREJ
+	hGBmYg9TXALWFjQgHATa40XiU3JgZqGUM8rOTgloOzIBASFol37Go2re+0sE1jMGEM0D
+	WGHO/Szekkc20E6shuQ87wWw0VM+GxZF1efLY=
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.183.20 with SMTP id s20mr892850hbg.66.1257849550343; Tue, 
-	10 Nov 2009 02:39:10 -0800 (PST)
-In-Reply-To: <1257817816.29038.153.camel@dax.rpnet.com>
+Received: by 10.101.167.27 with SMTP id u27mr3761740ano.199.1257852333628; 
+	Tue, 10 Nov 2009 03:25:33 -0800 (PST)
+In-Reply-To: <be7a9f3d0911100239k1fdbc89dr28a4d355d7cad27f@mail.gmail.com>
 References: <1257762970.29038.40.camel@dax.rpnet.com>
 	<hdaeo3$9l5$1@ger.gmane.org>
 	<1257817816.29038.153.camel@dax.rpnet.com>
-Date: Tue, 10 Nov 2009 08:39:10 -0200
-X-Google-Sender-Auth: 238f313ef8e0adb6
-Message-ID: <be7a9f3d0911100239k1fdbc89dr28a4d355d7cad27f@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	<be7a9f3d0911100239k1fdbc89dr28a4d355d7cad27f@mail.gmail.com>
+Date: Tue, 10 Nov 2009 12:25:33 +0100
+Message-ID: <ac9c93b10911100325i2ccebd25y766695688ea999d9@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.209
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: OEDEM - Summary of some the outcome
@@ -50,23 +49,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2009 10:40:30 -0000
+X-List-Received-Date: Tue, 10 Nov 2009 11:26:57 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hello,
+2009/11/10 Otavio Salvador <otavio@ossystems.com.br>:
+> Hello,
+>
+> On Mon, Nov 9, 2009 at 11:50 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+>> That is unfortunate but I suspect if we waited until everyone's personal
+>> favourite distro adopted it, we'd impose artificial limits on what is a
+>> development branch. No easy solution really :(.
+>
+> Even being a big fan of Debian I must to agree here; OE shouldn't wait
+> for distros to make changes otherwise we'll have a nightmare to
+> manage.
 
-On Mon, Nov 9, 2009 at 11:50 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> That is unfortunate but I suspect if we waited until everyone's personal
-> favourite distro adopted it, we'd impose artificial limits on what is a
-> development branch. No easy solution really :(.
+actually installing it from scratch is not really a big deal anyway,
+grab the tarball (I used wget
+http://download.berlios.de/bitbake/bitbake-1.8.16.tar.gz)
+untar to the right place, then rename dir to bitbake; then python
+setup.py build and optionally python setup.py install
 
-Even being a big fan of Debian I must to agree here; OE shouldn't wait
-for distros to make changes otherwise we'll have a nightmare to
-manage.
+And RP, thanks for the report! Very appreciated!
 
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+Frans
 
 
