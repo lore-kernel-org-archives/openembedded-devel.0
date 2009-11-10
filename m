@@ -1,26 +1,35 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1N7t2W-000396-Mx
+	(envelope-from <stefan@datenfreihafen.org>) id 1N7t4Y-0005ar-Dj
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Nov 2009 16:53:55 +0100
-Received: from [192.168.1.7] (dialbs-092-079-168-007.static.arcor-ip.net
-	[92.79.168.7])
-	by drlauer-research.com (Postfix) with ESMTP id C10C8584D5F
+	Tue, 10 Nov 2009 16:56:01 +0100
+Received: from w1203.wlan.rz.tu-bs.de ([134.169.204.187] helo=excalibur)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1N7t3H-0006Ym-R6 by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2009 17:38:27 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Tue, 10 Nov 2009 16:54:42 +0100
+Received: from stefan by excalibur with local (Exim 4.69)
+	(envelope-from <stefan@excalibur.local>) id 1N7t3H-00010S-7Z
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Nov 2009 16:54:39 +0100
+Date: Tue, 10 Nov 2009 16:54:39 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20091110151412.GF3998@excalibur.local>
+Message-ID: <20091110155439.GH3998@excalibur.local>
 References: <1257858446.3077.3.camel@opal>
-	<20091110132756.GC3998@excalibur.local> <1257864635.5228.17.camel@opal>
+	<20091110132756.GC3998@excalibur.local>
+	<1257864635.5228.17.camel@opal>
 	<20091110151412.GF3998@excalibur.local>
-Organization: Vanille-Media
-Date: Tue, 10 Nov 2009 16:52:36 +0100
-Message-ID: <1257868356.5472.1.camel@opal>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+	<1257867529.29038.212.camel@dax.rpnet.com>
+MIME-Version: 1.0
+In-Reply-To: <1257867529.29038.212.camel@dax.rpnet.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: OEDEM: Summary of 'OE and Poky', 'Hosting', 'Bugtracker'
@@ -37,28 +46,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2009 15:53:55 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 10 Nov 2009 15:56:01 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Am Dienstag, den 10.11.2009, 16:14 +0100 schrieb Stefan Schmidt:
-> > Access control: Having user branches in a dedicated tree means we can
-> > give more users commit access so that they can prepare branches we can
-> > pull. This might lead to (IMHO much appreciated) improvements in the
-> > development model towards a pull model.
+Hello.
+
+On Tue, 2009-11-10 at 15:38, Richard Purdie wrote:
+> On Tue, 2009-11-10 at 16:14 +0100, Stefan Schmidt wrote:
+> > > Access control: Having user branches in a dedicated tree means we can
+> > > give more users commit access so that they can prepare branches we can
+> > > pull. This might lead to (IMHO much appreciated) improvements in the
+> > > development model towards a pull model.
+> > 
+> > But why the hassle of administrate an own git repo service for this? I always
+> > thought OE was small on admin power.
 > 
-> But why the hassle of administrate an own git repo service for this? I always
-> thought OE was small on admin power.
+> Note that we're taking about one extra "contrib" repository with user
+> branches so the extra admin overhead is minimal. People proposed a repo
+> per user but that wasn't felt to be acceptable due to the admin
+> concerns.
 
-Sorry, this might have been unclear on my part, it's just different
-projects on the same repository, not different repositories. We'd like
-to and recommend OE developers to host their branch in a 'contrib'
-project on git.oe.org.
+For both you would have to fetch the ssh key and put it into gitosis. The later
+one would also need an initial tree creation. The point I'm making is that on an
+external git repo hoster even that work would be gone.
 
-Cheers,
+Anyway, I stop here. I was mostly interested in the reasons behing the
+decisions not more.
 
-:M:
-
-
+regards
+Stefan Schmidt
 
 
