@@ -1,40 +1,19 @@
-Received: from [209.85.222.185] (helo=mail-pz0-f185.google.com)
+Received: from [85.17.141.90] (helo=mzh.zlo.nu)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1N7nLL-00050i-Oj
+	(envelope-from <marcolz@zlo.nu>) id 1N7nPs-0005C3-5y
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Nov 2009 10:48:58 +0100
-Received: by pzk15 with SMTP id 15so3119377pzk.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2009 01:47:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=4Wu2OLhLgFSp2XnmooCfD0YJMPQhUgNmwQg9yMIe0hI=;
-	b=i3Pdj1k2Q3A9ESxf0siDtR5IUI3U30sev8V6c1WFrDFMCjucLC9f45jV7aUH6ZRy1u
-	mZ7alpEgYmj3HlhrWBvpwg93sknw7HfhdevBwUO0Uc9NusOwGBsHlN2anV9UFUuzvoft
-	sZGJ7ZhF0msXwR/HfsEqm0aZY86wAEK3L3B5E=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=D0z6rRObJdMkCciytFaaI/QeY5Ylj3tiNFYhspFrtBW1ArPmGewZfYMYwythkb9m3B
-	tqiE5mf89XneF1GjRXfmuglFE0r5QS7k1WCvoJG88jaUB/JNV9d7qrriDi8Of61slKkD
-	6gSAnlZD051Gg8r5M4pCUZRRC1+Bc1uzXjpw4=
-MIME-Version: 1.0
-Received: by 10.140.207.16 with SMTP id e16mr457594rvg.86.1257842767936; Tue, 
-	10 Nov 2009 00:46:07 -0800 (PST)
-In-Reply-To: <E1N7djD-0008HQ-Pz@melo.openembedded.org>
-References: <bug-4162-13@http.bugs.openembedded.org/>
-	<E1N7djD-0008HQ-Pz@melo.openembedded.org>
-Date: Tue, 10 Nov 2009 09:46:07 +0100
-Message-ID: <d1b08f940911100046h3eb96156xbbaae272e42a7ced@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Tue, 10 Nov 2009 10:53:40 +0100
+Received: by mzh.zlo.nu (Postfix, from userid 1000)
+	id 5242114030; Tue, 10 Nov 2009 10:52:19 +0100 (CET)
+From: Marc Olzheim <zlo@zlo.nu>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.222.185
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+Date: Tue, 10 Nov 2009 10:33:38 +0100
+Message-Id: <20091110095219.5242114030@mzh.zlo.nu>
+X-SA-Exim-Connect-IP: 85.17.141.90
+X-SA-Exim-Mail-From: marcolz@zlo.nu
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [oe-commits] [Bug 4162] zaurus-updater do_deploy fails to run in .stable
+Subject: [PATCH 1/3] Move 3.0.2 to a .inc and use INC_PR (to avoid useless duplication).
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,45 +27,155 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2009 09:48:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 10 Nov 2009 09:53:40 -0000
 
-Justin,
+---
+ recipes/dhcp/dhcp3.inc     |   62 ++++++++++++++++++++++++++++++++++++++++++++
+ recipes/dhcp/dhcp_3.0.2.bb |   58 +++--------------------------------------
+ 2 files changed, 66 insertions(+), 54 deletions(-)
+ create mode 100644 recipes/dhcp/dhcp3.inc
 
-wrt Zaurus, pleas forget the stable branch for the moment.
-We are fixing the -dev branch but diverging too much to be able to cherry-p=
-ick.
+diff --git a/recipes/dhcp/dhcp3.inc b/recipes/dhcp/dhcp3.inc
+new file mode 100644
+index 0000000..f099003
+--- /dev/null
++++ b/recipes/dhcp/dhcp3.inc
+@@ -0,0 +1,62 @@
++SECTION = "console/network"
++DESCRIPTION = "Internet Software Consortium DHCP package"
++HOMEPAGE = "http://www.isc.org/"
++LICENSE = "BSD"
++INC_PR = "r11"
++
++SRC_URI = "ftp://ftp.isc.org/isc/dhcp/dhcp-3.1-history/dhcp-${PV}.tar.gz \
++	   file://fixincludes.patch;patch=1 \
++	   file://useless-use-of-bash.patch;patch=1 \
++           file://dhclient-script-exit-status.dpatch;patch=1 \
++	   file://dhcp-3.0.3-dhclient-dbus.patch;patch=1;pnum=0 \
++	   file://init-relay file://default-relay \
++	   file://init-server file://default-server \
++	   file://dhclient.conf file://dhcpd.conf"
++
++
++inherit update-rc.d
++
++INITSCRIPT_PACKAGES = "dhcp-server"
++INITSCRIPT_NAME_dhcp-server = dhcp-server
++INITSCRIPT_PARAMS_dhcp-server = "start 30 2 3 4 5 . stop 30 0 1 6 ."
++
++TARGET_CC_ARCH += "${LDFLAGS}"
++
++do_configure() {
++	./configure
++}
++
++do_compile() {
++	make RANLIB=${RANLIB} PREDEFINES='-D_PATH_DHCPD_DB=\"/var/lib/dhcp/dhcpd.leases\" \
++        -D_PATH_DHCLIENT_DB=\"/var/lib/dhcp/dhclient.leases\" \
++        -D_PATH_DHCLIENT_SCRIPT=\"/sbin/dhclient-script\" \
++        -D_PATH_DHCPD_CONF=\"/etc/dhcp/dhcpd.conf\" \
++        -D_PATH_DHCLIENT_CONF=\"/etc/dhcp/dhclient.conf\"'
++}
++
++do_install() {
++	make -e DESTDIR=${D} USRMANDIR=${mandir}/man1 ADMMANDIR=${mandir}/man8 FFMANDIR=${mandir}/man5 LIBMANDIR=${mandir}/man3 LIBDIR=${libdir} INCDIR=${includedir} install
++	install -d ${D}${sysconfdir}/init.d
++	install -d ${D}${sysconfdir}/default
++	install -d ${D}${sysconfdir}/dhcp
++	install -m 0755 ${WORKDIR}/init-relay ${D}${sysconfdir}/init.d/dhcp-relay
++	install -m 0644 ${WORKDIR}/default-relay ${D}${sysconfdir}/default/dhcp-relay
++	install -m 0755 ${WORKDIR}/init-server ${D}${sysconfdir}/init.d/dhcp-server
++	install -m 0644 ${WORKDIR}/default-server ${D}${sysconfdir}/default/dhcp-server
++	install -m 0644 ${WORKDIR}/dhclient.conf ${D}${sysconfdir}/dhcp/dhclient.conf
++	install -m 0644 ${WORKDIR}/dhcpd.conf ${D}${sysconfdir}/dhcp/dhcpd.conf
++	install -d ${D}/var/lib/dhcp3
++}
++
++PACKAGES += "dhcp-server dhcp-client dhcp-relay dhcp-omshell"
++FILES_${PN} = ""
++FILES_dhcp-server = "${sbindir}/dhcpd ${sysconfdir}/init.d/dhcp-server ${sysconfdir}/default/dhcp-server ${sysconfdir}/dhcp/dhcpd.conf"
++FILES_dhcp-relay = "${sbindir}/dhcrelay ${sysconfdir}/init.d/dhcp-relay ${sysconfdir}/default/dhcp-relay"
++
++FILES_dhcp-client = "${base_sbindir}/dhclient ${base_sbindir}/dhclient-script ${sysconfdir}/dhcp/dhclient.conf /var/lib/dhcp3"
++
++FILES_dhcp-omshell = "${bindir}/omshell"
++
++CONFFILES_dhcp-server_nylon = "/etc/dhcp/dhcpd.conf"
++CONFFILES_dhcp-relay_nylon = "/etc/default/dhcp-relay"
++CONFFILES_dhcp-client_nylon = "/etc/dhcp/dhclient.conf"
+diff --git a/recipes/dhcp/dhcp_3.0.2.bb b/recipes/dhcp/dhcp_3.0.2.bb
+index 052fa7e..9934590 100644
+--- a/recipes/dhcp/dhcp_3.0.2.bb
++++ b/recipes/dhcp/dhcp_3.0.2.bb
+@@ -1,62 +1,12 @@
+-SECTION = "console/network"
+-DESCRIPTION = "Internet Software Consortium DHCP package"
+-HOMEPAGE = "http://www.isc.org/"
+-LICENSE = "BSD"
+-PR = "r10"
++require dhcp3.inc
++
+ SRC_URI = "ftp://ftp.isc.org/isc/dhcp/dhcp-3.0-history/dhcp-${PV}.tar.gz \
+ 	   file://noattrmode.patch;patch=1 \
+ 	   file://fixincludes.patch;patch=1 \
+-           file://dhclient-script-exit-status.dpatch;patch=1 \
++	   file://dhclient-script-exit-status.dpatch;patch=1 \
+ 	   file://dhcp-3.0.3-dhclient-dbus.patch;patch=1;pnum=0 \
+ 	   file://init-relay file://default-relay \
+ 	   file://init-server file://default-server \
+ 	   file://dhclient.conf file://dhcpd.conf"
+ 
+-
+-inherit update-rc.d
+-
+-INITSCRIPT_PACKAGES = "dhcp-server"
+-INITSCRIPT_NAME_dhcp-server = dhcp-server
+-INITSCRIPT_PARAMS_dhcp-server = "start 30 2 3 4 5 . stop 30 0 1 6 ."
+-
+-TARGET_CC_ARCH += "${LDFLAGS}"
+-
+-do_configure() {
+-	./configure
+-}
+-
+-do_compile() {
+-	make RANLIB=${RANLIB} PREDEFINES='-D_PATH_DHCPD_DB=\"/var/lib/dhcp/dhcpd.leases\" \
+-        -D_PATH_DHCLIENT_DB=\"/var/lib/dhcp/dhclient.leases\" \
+-        -D_PATH_DHCLIENT_SCRIPT=\"/sbin/dhclient-script\" \
+-        -D_PATH_DHCPD_CONF=\"/etc/dhcp/dhcpd.conf\" \
+-        -D_PATH_DHCLIENT_CONF=\"/etc/dhcp/dhclient.conf\"'
+-}
+-
+-do_install() {
+-	make -e DESTDIR=${D} USRMANDIR=${mandir}/man1 ADMMANDIR=${mandir}/man8 FFMANDIR=${mandir}/man5 LIBMANDIR=${mandir}/man3 LIBDIR=${libdir} INCDIR=${includedir} install
+-	install -d ${D}${sysconfdir}/init.d
+-	install -d ${D}${sysconfdir}/default
+-	install -d ${D}${sysconfdir}/dhcp
+-	install -m 0755 ${WORKDIR}/init-relay ${D}${sysconfdir}/init.d/dhcp-relay
+-	install -m 0644 ${WORKDIR}/default-relay ${D}${sysconfdir}/default/dhcp-relay
+-	install -m 0755 ${WORKDIR}/init-server ${D}${sysconfdir}/init.d/dhcp-server
+-	install -m 0644 ${WORKDIR}/default-server ${D}${sysconfdir}/default/dhcp-server
+-	install -m 0644 ${WORKDIR}/dhclient.conf ${D}${sysconfdir}/dhcp/dhclient.conf
+-	install -m 0644 ${WORKDIR}/dhcpd.conf ${D}${sysconfdir}/dhcp/dhcpd.conf
+-	install -d ${D}/var/lib/dhcp3
+-}
+-
+-PACKAGES += "dhcp-server dhcp-client dhcp-relay dhcp-omshell"
+-FILES_${PN} = ""
+-FILES_dhcp-server = "${sbindir}/dhcpd ${sysconfdir}/init.d/dhcp-server ${sysconfdir}/default/dhcp-server ${sysconfdir}/dhcp/dhcpd.conf"
+-FILES_dhcp-relay = "${sbindir}/dhcrelay ${sysconfdir}/init.d/dhcp-relay ${sysconfdir}/default/dhcp-relay"
+-
+-FILES_dhcp-client = "${base_sbindir}/dhclient ${base_sbindir}/dhclient-script ${sysconfdir}/dhcp/dhclient.conf /var/lib/dhcp3"
+-RDEPENDS_dhcp-client = "bash"
+-
+-FILES_dhcp-omshell = "${bindir}/omshell"
+-
+-CONFFILES_dhcp-server_nylon = "/etc/dhcp/dhcpd.conf"
+-CONFFILES_dhcp-relay_nylon = "/etc/default/dhcp-relay"
+-CONFFILES_dhcp-client_nylon = "/etc/dhcp/dhclient.conf"
++PR = "${INC_PR}"
+-- 
+1.6.3.1
 
-Regards
-
-Andrea
-
-
-On Tue, Nov 10, 2009 at 12:32 AM,  <bugzilla-daemon@git.openembedded.org> w=
-rote:
-> http://bugs.openembedded.org/show_bug.cgi?id=3D4162
->
->
->
->
->
-> --- Comment #9 from Justin Patrin <papercrane@reversefold.com> =A02009-11=
--09 23:32:55 ---
-> I'm amazed that I'm still seeing this in the current metadata. If I just =
-try to
-> bitbake an image the same thing happens. I have to manually bitbake
-> zaurus-updater, then do my image bitbake again.
->
-> --
-> Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=3Demail
-> ------- You are receiving this mail because: -------
-> You are the assignee for the bug.
->
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
->
 
 
