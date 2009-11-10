@@ -1,32 +1,36 @@
-Received: from [207.164.182.72] (helo=smtp.cbnco.com)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@sles10-64.ott.cti.com>) id 1N7cTo-0007xz-BE
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1N7fKG-0003zI-NL for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Nov 2009 02:15:19 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N7fJ3-0007Lu-NX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Nov 2009 23:12:59 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 4E54352CB75;
-	Mon,  9 Nov 2009 17:11:41 -0500 (EST)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 05488-07; Mon,  9 Nov 2009 17:11:41 -0500 (EST)
-Received: by smtp.cbnco.com (Postfix, from userid 1003)
-	id 2F2FF539B71; Mon,  9 Nov 2009 17:11:41 -0500 (EST)
-Received: from sles10-64.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTP id 6CC45522724;
-	Mon,  9 Nov 2009 17:11:40 -0500 (EST)
-Received: by sles10-64.ott.cti.com (Postfix, from userid 1000)
-	id 548BF40FCC; Mon,  9 Nov 2009 17:11:40 -0500 (EST)
-From: Michael Smith <msmith@cbnco.com>
+	Tue, 10 Nov 2009 02:14:01 +0100
+Received: from p4044-ipbf3304marunouchi.tokyo.ocn.ne.jp ([122.29.115.44])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Nov 2009 02:14:01 +0100
+Received: from no2spam by p4044-ipbf3304marunouchi.tokyo.ocn.ne.jp with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Nov 2009 02:14:01 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Nov 2009 17:11:36 -0500
-Message-Id: <1257804696-7728-1-git-send-email-msmith@cbnco.com>
-X-Mailer: git-send-email 1.6.3
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: michael@sles10-64.ott.cti.com
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Tue, 10 Nov 2009 10:13:36 +0900
+Message-ID: <hdaeo3$9l5$1@ger.gmane.org>
+References: <1257762970.29038.40.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p4044-ipbf3304marunouchi.tokyo.ocn.ne.jp
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <1257762970.29038.40.camel@dax.rpnet.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] kernel.bbclass: pass ${KERNEL_VERSION} to depmod -a
+Subject: Re: OEDEM - Summary of some the outcome
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,47 +44,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Nov 2009 22:12:59 -0000
+X-List-Received-Date: Tue, 10 Nov 2009 01:15:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-The postinsts for kernel-image and modules run "depmod -a" on the
-target, but this only updates the old kernel's modules.dep.
+Richard,
 
-"depmod -a ${KERNEL_VERSION}" updates the files in
-/lib/modules/${KERNEL_VERSION}.
+thank you for the information.
 
-Signed-off-by: Michael Smith <msmith@cbnco.com>
----
+I have one question and one comment.
 
-module.bbclass could probably use the same thing, but I don't have a
-test for it atm.
+Richard Purdie wrote:
+> too large. Since there are six candidates this means that we need to
 
- classes/kernel.bbclass |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+Who are the six candidates?  I can't find their names in the wiki or
+elsewhere easily.
 
-diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-index 9c1f637..f6f1180 100644
---- a/classes/kernel.bbclass
-+++ b/classes/kernel.bbclass
-@@ -266,7 +266,7 @@ fi
- if [ -n "$D" ]; then
- 	${HOST_PREFIX}depmod-${KERNEL_MAJOR_VERSION} -A -b $D -F ${STAGING_KERNEL_DIR}/System.map-${KERNEL_VERSION} ${KERNEL_VERSION}
- else
--	depmod -a
-+	depmod -a ${KERNEL_VERSION}
- fi
- }
- 
-@@ -274,7 +274,7 @@ pkg_postinst_modules () {
- if [ -n "$D" ]; then
- 	${HOST_PREFIX}depmod-${KERNEL_MAJOR_VERSION} -A -b $D -F ${STAGING_KERNEL_DIR}/System.map-${KERNEL_VERSION} ${KERNEL_VERSION}
- else
--	depmod -a
-+	depmod -a ${KERNEL_VERSION}
- 	update-modules || true
- fi
- }
--- 
-1.6.3
+> We have the 1.8.16 release (1.8.14 was a mess, sorry about that) and we
+> agreed we should bump the minimum version requirement in OE.dev so we
+
+It would have been nice to make sure that Debian actually has 1.8.16
+before making it a requirement.  I prefer to use packaged software so I
+can worry about other things.
+
+Regards
+
+Rolf
 
 
 
