@@ -1,38 +1,30 @@
-Received: from [209.85.210.175] (helo=mail-yx0-f175.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N7os9-0005s6-PH
+	(envelope-from <pb@reciva.com>) id 1N7p2D-00081s-0o
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Nov 2009 12:26:56 +0100
-Received: by yxe5 with SMTP id 5so3531444yxe.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2009 03:25:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=VWCMXL8v0L+aonalMc3A1jFJBR9vSKqeRtBlXEih0+U=;
-	b=vBBM88Z9umHOnqVjbUoZfsHKaCEvy73veUw9DTmgfoAtKwjloBoJ/nKCjMH99S7Arn
-	3FK7DUU81egFsprf74tcvu34zKp8wUj3Sl/m5vswgA+t08v5ne0KHvFNdqWU7RG/Zf5N
-	RJ4hwecaSYVTZ5/O1flEPI3ivym9May2lmP5k=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=pb/4kYFDSsWx1ePxytSJI1zVcyOhH4GIPyJUiqLdQwmHmGEZU/A0iFN0BpMSvqWREJ
-	hGBmYg9TXALWFjQgHATa40XiU3JgZqGUM8rOTgloOzIBASFol37Go2re+0sE1jMGEM0D
-	WGHO/Szekkc20E6shuQ87wWw0VM+GxZF1efLY=
-MIME-Version: 1.0
-Received: by 10.101.167.27 with SMTP id u27mr3761740ano.199.1257852333628; 
-	Tue, 10 Nov 2009 03:25:33 -0800 (PST)
-In-Reply-To: <be7a9f3d0911100239k1fdbc89dr28a4d355d7cad27f@mail.gmail.com>
+	Tue, 10 Nov 2009 12:37:20 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1N7p0y-0006tW-Ti
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Nov 2009 11:36:00 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1N7p0y-0004qL-JQ
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Nov 2009 11:36:00 +0000
+From: Phil Blundell <pb@reciva.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <hdaeo3$9l5$1@ger.gmane.org>
 References: <1257762970.29038.40.camel@dax.rpnet.com>
 	<hdaeo3$9l5$1@ger.gmane.org>
-	<1257817816.29038.153.camel@dax.rpnet.com>
-	<be7a9f3d0911100239k1fdbc89dr28a4d355d7cad27f@mail.gmail.com>
-Date: Tue, 10 Nov 2009 12:25:33 +0100
-Message-ID: <ac9c93b10911100325i2ccebd25y766695688ea999d9@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Tue, 10 Nov 2009 11:35:57 +0000
+Message-Id: <1257852957.1484.72.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: pb@reciva.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: OEDEM - Summary of some the outcome
@@ -49,29 +41,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2009 11:26:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 10 Nov 2009 11:37:20 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-2009/11/10 Otavio Salvador <otavio@ossystems.com.br>:
-> Hello,
->
-> On Mon, Nov 9, 2009 at 11:50 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
->> That is unfortunate but I suspect if we waited until everyone's personal
->> favourite distro adopted it, we'd impose artificial limits on what is a
->> development branch. No easy solution really :(.
->
-> Even being a big fan of Debian I must to agree here; OE shouldn't wait
-> for distros to make changes otherwise we'll have a nightmare to
-> manage.
+On Tue, 2009-11-10 at 10:13 +0900, Rolf Leggewie wrote:
+> It would have been nice to make sure that Debian actually has 1.8.16
+> before making it a requirement.  I prefer to use packaged software so I
+> can worry about other things.
 
-actually installing it from scratch is not really a big deal anyway,
-grab the tarball (I used wget
-http://download.berlios.de/bitbake/bitbake-1.8.16.tar.gz)
-untar to the right place, then rename dir to bitbake; then python
-setup.py build and optionally python setup.py install
+Remember that bitbake doesn't need to be installed (into /usr or
+anywhere else): you can run it directly from a checkout in your OE
+working directory.  That ought to be a reasonable stopgap for most
+people until the distributions catch up.
 
-And RP, thanks for the report! Very appreciated!
+p.
 
-Frans
+
 
 
