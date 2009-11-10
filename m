@@ -1,30 +1,41 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [209.85.220.209] (helo=mail-fx0-f209.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pb@reciva.com>) id 1N7p2D-00081s-0o
+	(envelope-from <otavio.salvador@gmail.com>) id 1N7pDZ-0008VY-EY
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Nov 2009 12:37:20 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1N7p0y-0006tW-Ti
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Nov 2009 11:36:00 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <pb@reciva.com>) id 1N7p0y-0004qL-JQ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Nov 2009 11:36:00 +0000
-From: Phil Blundell <pb@reciva.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hdaeo3$9l5$1@ger.gmane.org>
+	Tue, 10 Nov 2009 12:49:04 +0100
+Received: by fxm1 with SMTP id 1so1650748fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Nov 2009 03:47:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	bh=jEGvfRiDGW6XG+cqjso1UaCUV0u0V64g0oqzZ5aWYnM=;
+	b=KK6GdmSEJm2AzCwsvGUiOYkSV2hySiLrxasDmFOw+1pY/TThzMaG3rMzeo0vncVOxo
+	SQogoEXDn9tEbTz9dYg5kmytmjmcHqwVSVf+kJNc6xI1f4/jB2Uud0J5WWYypdXlbsug
+	kJtSZ+//dM/ki0ml3w+oB7jm+gJ8WHv18Vk5E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=Dw/vs2wsMXy5XJtglCvhrKgXO1P1G/O+lwTgin5K6gMpgVhTZPD236H68LZXcI1o1y
+	a/l0TIxMXNQ8k5luNi/uggu/Yfb7T+/Ae/qUHIt36G7Orc5bD6srgBuG2c3YbcjiM/sa
+	5x57gYjQ+DAH6UwoXKAupPfhTolOicUrLsEmg=
+MIME-Version: 1.0
+Sender: otavio.salvador@gmail.com
+Received: by 10.239.139.156 with SMTP id t28mr920155hbt.33.1257853664174; Tue, 
+	10 Nov 2009 03:47:44 -0800 (PST)
+In-Reply-To: <1257852957.1484.72.camel@mill.internal.reciva.com>
 References: <1257762970.29038.40.camel@dax.rpnet.com>
 	<hdaeo3$9l5$1@ger.gmane.org>
-Date: Tue, 10 Nov 2009 11:35:57 +0000
-Message-Id: <1257852957.1484.72.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: pb@reciva.com
+	<1257852957.1484.72.camel@mill.internal.reciva.com>
+Date: Tue, 10 Nov 2009 09:47:44 -0200
+X-Google-Sender-Auth: 0dd9d248079c1245
+Message-ID: <be7a9f3d0911100347h2099e088hed77f7b90b1f8b93@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.220.209
+X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: OEDEM - Summary of some the outcome
@@ -41,22 +52,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2009 11:37:20 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 10 Nov 2009 11:49:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, 2009-11-10 at 10:13 +0900, Rolf Leggewie wrote:
-> It would have been nice to make sure that Debian actually has 1.8.16
-> before making it a requirement.  I prefer to use packaged software so I
-> can worry about other things.
+Hello,
 
-Remember that bitbake doesn't need to be installed (into /usr or
-anywhere else): you can run it directly from a checkout in your OE
-working directory.  That ought to be a reasonable stopgap for most
-people until the distributions catch up.
+On Tue, Nov 10, 2009 at 9:35 AM, Phil Blundell <pb@reciva.com> wrote:
+> Remember that bitbake doesn't need to be installed (into /usr or
+> anywhere else): you can run it directly from a checkout in your OE
+> working directory. =A0That ought to be a reasonable stopgap for most
+> people until the distributions catch up.
 
-p.
+This is how I use it; in fact I use a git clone :-)
 
-
+--=20
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
