@@ -1,26 +1,27 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>)
-	id 1N7qzM-0002jM-5Z; Tue, 10 Nov 2009 14:42:31 +0100
-Received: from [192.168.1.7] (dialbs-092-079-168-007.static.arcor-ip.net
-	[92.79.168.7])
-	by drlauer-research.com (Postfix) with ESMTP id BDCC3584D21;
-	Tue, 10 Nov 2009 15:27:02 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-To: Holger Hans Peter Freyther <holger@freyther.de>
-In-Reply-To: <200911101358.14784.holger@freyther.de>
+	(envelope-from <holger+oe@freyther.de>) id 1N7r4q-0002vA-S9
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Nov 2009 14:48:11 +0100
+Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
+	[123.192.145.111])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 375841B10C04;
+	Tue, 10 Nov 2009 13:57:35 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+To: openembedded-members@lists.openembedded.org
+Date: Tue, 10 Nov 2009 14:46:32 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
 References: <1257857415.3077.2.camel@opal>
 	<200911101358.14784.holger@freyther.de>
-Organization: Vanille-Media
-Date: Tue, 10 Nov 2009 14:41:12 +0100
-Message-ID: <1257860472.3077.4.camel@opal>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+	<1257860472.3077.4.camel@opal>
+In-Reply-To: <1257860472.3077.4.camel@opal>
+MIME-Version: 1.0
+Message-Id: <200911101446.32881.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-members@lists.openembedded.org,
+Cc: Michael 'Mickey' Lauer <mickey@vanille-media.de>,
 	openembedded-devel@lists.openembedded.org
 Subject: Re: [OE e.V.]: Meeting minutes of the 2009 GA
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -36,31 +37,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2009 13:42:31 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 10 Nov 2009 13:48:12 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-Hi Z.,
-
-Am Dienstag, den 10.11.2009, 13:58 +0100 schrieb Holger Hans Peter
-Freyther:
-> On Tuesday 10 November 2009 13:50:15 Michael 'Mickey' Lauer wrote:
-> > '''Minutes of the OE e.V. general assembly 2009'''
-> > 
-> > The meeting begins 10:30 on 7th of November in Cambridge, UK.
+On Tuesday 10 November 2009 14:41:12 Michael 'Mickey' Lauer wrote:
 > 
-> do you need a german translation for the court?
+> This is a good question, we were not fully sure about that. Do you
+> know?
 
-This is a good question, we were not fully sure about that. Do you
-know? 
-
-> PS: Congrats to the new board, if you ever consider having a secretary like 
-> FreeBSD has... I'm happy to help with paper work and misc things
-
-Thanks a lot, this is much appreciated!
-
-:M:
+My assumptions is "Amts-Sprache ist Deutsch". Just like we are forced to 
+translate our invoices to german...
 
 
+z.
 
 
