@@ -1,27 +1,27 @@
 Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1N7sMy-0005kK-Rv
+	(envelope-from <stefan@datenfreihafen.org>) id 1N7sSp-0005xM-3O
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Nov 2009 16:10:59 +0100
+	Tue, 10 Nov 2009 16:17:02 +0100
 Received: from w1203.wlan.rz.tu-bs.de ([134.169.204.187] helo=excalibur)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1N7sLd-0005JU-5u by authid <stefan@sostec.de> with cram_md5
+	id 1N7sRY-0005Vx-Su by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2009 16:09:41 +0100
+	Tue, 10 Nov 2009 16:15:43 +0100
 Received: from stefan by excalibur with local (Exim 4.69)
-	(envelope-from <stefan@excalibur.local>) id 1N7sLc-0000fC-N6
+	(envelope-from <stefan@excalibur.local>) id 1N7sQV-0000fM-1n
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Nov 2009 16:09:32 +0100
-Date: Tue, 10 Nov 2009 16:09:13 +0100
+	Tue, 10 Nov 2009 16:14:35 +0100
+Date: Tue, 10 Nov 2009 16:14:12 +0100
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091110150913.GE3998@excalibur.local>
+Message-ID: <20091110151412.GF3998@excalibur.local>
 References: <1257858446.3077.3.camel@opal>
 	<20091110132756.GC3998@excalibur.local>
-	<d2b9ea600911100635v67079116ifb3ba70b83177f13@mail.gmail.com>
+	<1257864635.5228.17.camel@opal>
 MIME-Version: 1.0
-In-Reply-To: <d2b9ea600911100635v67079116ifb3ba70b83177f13@mail.gmail.com>
+In-Reply-To: <1257864635.5228.17.camel@opal>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -44,54 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2009 15:11:00 -0000
+X-List-Received-Date: Tue, 10 Nov 2009 15:17:02 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 Hello.
 
-On Tue, 2009-11-10 at 15:35, Esben Haabendal wrote:
-> On Tue, Nov 10, 2009 at 2:27 PM, Stefan Schmidt
-> <stefan@datenfreihafen.org> wrote:
-> >
+On Tue, 2009-11-10 at 15:50, Michael 'Mickey' Lauer wrote:
+> Am Dienstag, den 10.11.2009, 14:27 +0100 schrieb Stefan Schmidt:
 > > On Tue, 2009-11-10 at 14:07, Michael 'Mickey' Lauer wrote:
-> >>
-> >> We will do changes on the git layout, e.g. org.oe.dev is becoming
-> >> 'master'
-> >> and user branches will live in a seperate repository.
-> >
+> > > 
+> > > We will do changes on the git layout, e.g. org.oe.dev is becoming
+> > > 'master'
+> > > and user branches will live in a seperate repository.
+> > 
 > > While I can understand the former I can't see the reason for the later. Can you
 > > explain why that was decided?
-> >
-> > For me user and other topic branches worked well on the main repository. The
-> > only issue I have is the flood of commits on the commit ml when a branch gets
-> > rebased, but that is something that a filter in the commit mail hook should be
-> > able to solve.
 > 
-> Splitting out user branches into separate repository gives:
+> The major two reasons were clarity and access control.
 > 
-> * option of giving developers access to push to user branches but not master
->   branches
+> Clarity: Reducing the number of branches in the main tree to master and
+> a bunch of topic-branches was perceived as a good thing.
 
-Maybe it's time to do the full step then go over to a pull based model?
+ok
 
-> * git clone of master repository does not pull down all users objects
+> Access control: Having user branches in a dedicated tree means we can
+> give more users commit access so that they can prepare branches we can
+> pull. This might lead to (IMHO much appreciated) improvements in the
+> development model towards a pull model.
 
-Is that really an issue for people?
-
-> * namespace of master repository is not "polluted" by user branches.
-
-The real problem is here that the git commit hooks forbid a branch delete in our
-setup. If you want to ahve a branch removed you have to ping an admin.
-
-> Working with a master and a user repository should work just as well
-> as the current setup in all other aspects than having to do an (extra)
-> "git remote add" command.
-
-I know and I don't have a problem with the change. Just curious what the reasons
-are. I neither have a problem with Otavios proposal that everytone should have
-their own tree. The point is more about a good way of getting the changes _back
-into master_. :)
+But why the hassle of administrate an own git repo service for this? I always
+thought OE was small on admin power.
 
 regards
 Stefan Schmidt
