@@ -1,27 +1,34 @@
-Received: from [206.46.173.9] (helo=vms173009pub.verizon.net)
+Received: from [78.47.116.19] (helo=sirius.lasnet.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1N7rX2-0002E7-ET
-	for openembedded-devel@openembedded.org; Tue, 10 Nov 2009 15:17:19 +0100
-Received: from gandalf.denix.org ([71.251.63.147]) by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KSW00I04A6JJ3TW@vms173009.mailsrvcs.net> for
-	openembedded-devel@openembedded.org;
-	Tue, 10 Nov 2009 07:15:55 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id EA18314AF60; Tue,
-	10 Nov 2009 08:15:54 -0500 (EST)
-Date: Tue, 10 Nov 2009 08:15:54 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	(envelope-from <stefan@datenfreihafen.org>) id 1N7riS-0002X7-Ih
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Nov 2009 15:29:07 +0100
+Received: from w1203.wlan.rz.tu-bs.de ([134.169.204.187] helo=excalibur)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1N7qlI-0002aR-QL by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Nov 2009 14:27:59 +0100
+Received: from stefan by excalibur with local (Exim 4.69)
+	(envelope-from <stefan@excalibur.local>) id 1N7qlI-0000Bw-8g
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Nov 2009 14:27:56 +0100
+Date: Tue, 10 Nov 2009 14:27:56 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20091110131554.GA25450@denix.org>
-References: <4AF963A3.1050906@balister.org>
-MIME-version: 1.0
-In-reply-to: <4AF963A3.1050906@balister.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.9
-X-SA-Exim-Mail-From: denis@denix.org
+Message-ID: <20091110132756.GC3998@excalibur.local>
+References: <1257858446.3077.3.camel@opal>
+MIME-Version: 1.0
+In-Reply-To: <1257858446.3077.3.camel@opal>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Mailing lists
+Subject: Re: OEDEM: Summary of 'OE and Poky', 'Hosting', 'Bugtracker'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,20 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2009 14:17:19 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 10 Nov 2009 14:29:07 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tue, Nov 10, 2009 at 12:59:15PM +0000, Philip Balister wrote:
-> We have made some changes to DNS to try and sort out the oe.org versus 
-> www.oe.org issue (and a few other nits). If the mailing list stops working, 
-> send me an email direct and we will try and get things going again ASAP. I 
-> think we have the correct DNS incantation this time.
+Hello.
 
-Ah, nice! Thanks. Have you added rewrite rules in exim to avoid duplication of 
-mails sent to lists.oe.org vs oe.org? Let me try it with this email... :)
+On Tue, 2009-11-10 at 14:07, Michael 'Mickey' Lauer wrote:
+> 
+> We will do changes on the git layout, e.g. org.oe.dev is becoming
+> 'master'
+> and user branches will live in a seperate repository.
 
--- 
-Denys
+While I can understand the former I can't see the reason for the later. Can you
+explain why that was decided?
+
+For me user and other topic branches worked well on the main repository. The
+only issue I have is the flood of commits on the commit ml when a branch gets
+rebased, but that is something that a filter in the commit mail hook should be
+able to solve.
+
+regards
+Stefan Schmidt
 
 
