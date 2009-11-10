@@ -1,32 +1,24 @@
-Received: from [206.46.173.9] (helo=vms173009pub.verizon.net)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1N7q2C-0001xs-7j
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Nov 2009 13:41:23 +0100
-Received: from gandalf.denix.org ([71.251.63.147]) by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KSW008TL5QBNMCQ@vms173009.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	10 Nov 2009 05:39:47 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id CA89414AF64; Tue,
-	10 Nov 2009 06:39:46 -0500 (EST)
-Date: Tue, 10 Nov 2009 06:39:46 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20091110113946.GA24738@denix.org>
-References: <200910291241.35265.marcin@juszkiewicz.com.pl>
-	<c384c5ea0911011235j2a8e6920s43310cce1a3e8498@mail.gmail.com>
-	<d1b08f940911011459i7e8403ees7e509843a0854e2@mail.gmail.com>
-	<200911020309.56350.holger+oe@freyther.de>
-	<20091109065322.GD16449@ibawizard.net>
-MIME-version: 1.0
-In-reply-to: <20091109065322.GD16449@ibawizard.net>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.9
-X-SA-Exim-Mail-From: denis@denix.org
+	(envelope-from <mickey@vanille-media.de>)
+	id 1N7qC4-0006Nh-CG; Tue, 10 Nov 2009 13:51:35 +0100
+Received: from [192.168.1.7] (dialbs-092-079-168-007.static.arcor-ip.net
+	[92.79.168.7])
+	by drlauer-research.com (Postfix) with ESMTP id 6F62E584D11;
+	Tue, 10 Nov 2009 14:36:06 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+To: openembedded-members@lists.openembedded.org
+Organization: Vanille-Media
+Date: Tue, 10 Nov 2009 13:50:15 +0100
+Message-ID: <1257857415.3077.2.camel@opal>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Checksums.ini again - new format this time
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [OE e.V.]: Meeting minutes of the 2009 GA
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,33 +32,161 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2009 12:41:23 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 10 Nov 2009 12:51:36 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 09, 2009 at 07:53:22AM +0100, Petr ?tetiar wrote:
-> Holger Hans Peter Freyther <holger+oe@freyther.de> [2009-11-02 03:09:56]:
-> 
-> > On Sunday 01 November 2009 23:59:18 Andrea Adami wrote:
-> > > And what about having a checksum file in each dir of  /recipes ?
-> > > If the checksum changes the PR should be changed too.
-> > 
-> > 
-> > I think that is the best way in terms of scalability and BB collections. We 
-> > have some weird cases where we might do require ../ but these are broken or 
-> > need to duplicate the checksums...
-> 
-> I like this idea more than one monolitic checksum file. checksums.ini is place
-> for storing of a duplicate information anyway. You need to enter URL in checksums,
-> you need to enter URL again into recipe.
-> 
-> Wouldn't it be better to write URL with checksum once at one place and reuse
-> it than in recipe as some kind of variable or something like that?
+'''Minutes of the OE e.V. general assembly 2009'''
 
-It was discussed during OEDEM and the conclusion was to switch to using 
-checksums in SRC_URIs of corresponding recipes.
+The meeting begins 10:30 on 7th of November in Cambridge, UK.
 
---
-Denys
+Present are the following people:
+
+* Michael 'Mickey' Lauer
+* Robert Schuster
+* Philip Balister
+* Marcin Juszkiewicz
+* Florian Boor
+* Richard Purdie
+* Denys Dmytriyenko
+* Henning Heinold
+* Phil Blundell
+* Marco Cavallini [elected during the GA]
+* Esben Haabendal [elected during the GA]
+* Ken Gilmer [elected during the GA]
+* Jonathan Cameron (non-member, observing)
+
+Represented by proxies:
+* Koen Kooi
+* Graeme Gregory
+* Cliff Brake
+
+Apologies:
+* Liam
+* Dirk
+* Leon
+* Allessandro
+
+=3D 0. Procedural =3D
+
+The general assembly has been properly announced and there are
+enough people present to be able to make decisions.
+All in favour to elect Mickey as chairman.
+Phil volunteers to write the minutes.
+
+Proxy forms:
+
+Philip is acting as proxy for Koen & Graeme
+Phil is acting as proxy for Cliff
+
+The members agree to adjust the announced agenda as follows:
+
+1. Enrolling new members
+2. Membership Fees
+3. Travel reimbursement policy
+4. Financial status
+5. Sponsors
+6. Public Relations
+7. Board Election
+8. Misc
+
+=3D 1. Enrolling new members =3D
+
+Three nominations for new members:
+
+* Marco Cavallini [elected during the GA]
+* Esben Haabendal [elected during the GA]
+* Ken Gilmer [elected during the GA]
+
+Vote: 11 in favour, 0 opposed, motion carried.
+
+Members duly enrolled
+
+Chairman notes that membership is effective immediately.  Welcome to
+those new members.
+
+=3D 2. Membership fees =3D
+
+Discussion how to encourage sponsors engaging in supporting OE e.V.
+leads to the following proposal:
+
+Basic corporate membership - free
+Bronze sponsor - 500 EUR p.a.
+Silver sponsor - 5000 EUR p.a.
+Gold sponsor   - 25000 EUR p.a.
+
+Vote: accepted on show of hands
+
+Also note that companies should be encouraged to provide "sponsorship"
+in the form of services, manpower, etc.
+
+=3D 3. Travel reimbursement policy =3D
+
+GA delegates to the board the authority to reimburse travel expenses.
+Esben: principle of transparency important.
+
+Vote: accepted on show of hands
+
+Marco: are companies allowed to claim travel expenses?
+Phil: Technically yes, but we don't expect them to do so in general.
+
+=3D 4. Financial status =3D
+
+Florian as the interrim treasurer reports EUR 1495.26 on hand.
+
+Kind donation from Eric B=C3=A9nard, Eukrea is gratefully acknowledged.
+
+Accounts inspected by Esben, Henning.  All appears in order although
+presentation leaves a bit to be desired.
+
+Mickey: accounts will be better presented next year, this year is bad
+because of interrim board roles.
+
+Vote to accept Florian's report: 9 in favour, 0 opposed.  Duly accepted.
+
+=3D 5. Sponsors =3D
+
+Marco will find out if anybody in his company can work on the website.
+
+Ken will put together an interim page on the wiki.
+
+=3D 6. Public relations =3D
+
+Robert volunteers to be the PR Dude.  Everyone, forward your PR stuff to
+him.
+
+Florian or Mickey will create a mailing list for PR issues.
+
+All: Add your favourite machines to the wiki page
+All: Fix broken links in wiki
+All: Alert wikimasters if you need more privs
+
+=3D 7. Board election =3D
+
+GA thanks the outgoing board for their efforts.
+
+Four vacancies on the board for 2010.
+
+Nominations (after much discussion): Mickey, Florian, Philip, Graeme
+Gregory (in absentia)
+
+Vote: 9 in favour, 0 opposed.  Above four duly elected. Welcome to our
+new board!
+
+=3D 8. Misc =3D
+
+Mickey to make enquiries of KDE e.V. regarding money from Trolltech and
+try to get it re-donated to OE e.V.
+
+Endorse the foundation of a TSC (Technical Steering Committee)
+according to the job description on the website.
+5 members are going to be elected by internet vote.  The board
+directed to organise this vote at its earliest convenience.
+
+Vote: approved on show of hands
+
+The meeting closed at 12:56.
+
+
 
 
