@@ -1,45 +1,43 @@
-Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
+Received: from [209.85.217.215] (helo=mail-gx0-f215.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1N8HFc-0001nx-8u
+	(envelope-from <esbenhaabendal@gmail.com>) id 1N8HqI-0007r0-3L
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 18:45:03 +0100
-Received: by bwz9 with SMTP id 9so1210498bwz.12
+	Wed, 11 Nov 2009 19:22:57 +0100
+Received: by gxk7 with SMTP id 7so1912634gxk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2009 09:43:42 -0800 (PST)
+	Wed, 11 Nov 2009 10:21:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=uRTO7jkUyIFyND5UgxMKHZXybSe/2QR3mpmaPLVV3wI=;
-	b=rCZE6fzOblwBIib1O3RNsvnT2BjacCw6Y0iXrlWxLWmSl3C7uJnB6h320mDVCzro6m
-	ajTbusmRFFsifTELjG/zakNuDlgqZ5toXpgnsGyZyCA3k06ZhnACTO3n83YMzgcajLmW
-	Yxrk0x0EqUaOwlwwa1pieYsVMfwPVNMMNNDag=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=6801ke18rHg7OXMRjVvx1iDqz82OCcGgTzZgf0Eh34I=;
+	b=F3Fo8PPivw17qbG1MUUg4I6xionjnRBsvYnaRkm1VQWIS91agEefZ6TzLq+VAuPM6g
+	nWB7ewqUVOpSQ94rKAYfoVehuFB2nJ2zIRhpFZc5UcSYY2ogr8eC6CcIq/FH1QyoS8YJ
+	AVR6mQzkx0jLR2aD+MvZCWtJZwPmuYNe4hthM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=PmFie3MWKvyq10y7SRkQDV7ULpavPp0DHkm8hzTteJcNzvDHFD2E6fIgiKkYWMJt/e
-	wRJkOIisVeTy0Vn6pfURw1tk3ha3/cc2W/Wlgez6oQJvqsjzv17CJy7ED65gsPo1NizR
-	RB2VkF42NPV6oOnYY60E6bGmeviw2fUaXElDk=
-Received: by 10.204.24.71 with SMTP id u7mr1861882bkb.35.1257961421949;
-	Wed, 11 Nov 2009 09:43:41 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 13sm639331fxm.13.2009.11.11.09.43.41
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 11 Nov 2009 09:43:41 -0800 (PST)
-Date: Wed, 11 Nov 2009 18:43:17 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091111174317.GB11484@jama>
-References: <1257953228-2353-1-git-send-email-Martin.Jansa@gmail.com>
-	<20091111154511.GA2761@denix.org>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=HSsaGbpmlTICFEfVaMUkLYSm6POPVrxHCffxfMFvoiD6lu2zUP3J8Ja5R9XynkV9UM
+	sLvKio4Slqh1OZu4zbkb0sJ8+Vo6NJPiUClK7yaYOt+KNyVwXsO9sYnuB33X+9R3VgeA
+	v9mWxNlHRLF2wwK2bQ6xPzVBRcPryOj5ZuyUY=
 MIME-Version: 1.0
-In-Reply-To: <20091111154511.GA2761@denix.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.239.140.66 with SMTP id w2mr168023hbw.208.1257961708932; Wed, 
+	11 Nov 2009 09:48:28 -0800 (PST)
+In-Reply-To: <1257931062.25369.292.camel@lenovo.internal.reciva.com>
+References: <1257872140.1484.335.camel@mill.internal.reciva.com>
+	<200911110206.20901.holger+oe@freyther.de>
+	<1257927850.25369.283.camel@lenovo.internal.reciva.com>
+	<200911110944.10399.holger+oe@freyther.de>
+	<1257931062.25369.292.camel@lenovo.internal.reciva.com>
+Date: Wed, 11 Nov 2009 18:48:28 +0100
+Message-ID: <d2b9ea600911110948n47be4971le5145f3939fbee19@mail.gmail.com>
+From: Esben Haabendal <esbenhaabendal@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.217.215
+X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] bitbake.conf: SRCPV always upgradeable paths for git recipes
+Subject: Re: OEDEM 2009 summary: Death to checksums.ini?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,34 +51,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2009 17:45:03 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 11 Nov 2009 18:22:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Nov 11, 2009 at 10:45:11AM -0500, Denys Dmytriyenko wrote:
-> On Wed, Nov 11, 2009 at 04:27:08PM +0100, Martin Jansa wrote:
-> > * Holger Hans Peter Freyther <zecke@openmoko.org> did for the OM git
-> >   tree that was never merged back into OE.
-> > * Taken from xora/angstrom-srcpv branch where it rot for long enough
-> 
-> We also discussed it during the OEDEM...
+On Wed, Nov 11, 2009 at 10:17 AM, Phil Blundell <philb@gnu.org> wrote:
+> On Wed, 2009-11-11 at 09:44 +0100, Holger Hans Peter Freyther wrote:
+>> This will create an even bigger mess. Sometimes you need to download two
+>> things, this means you will end up with A_MD5SUM, B_MD5SUM, A_SHASUM,
+>> B_SHASUM. The main problem with the above is that in contrast to a well =
+defined
+>> checksums.ini file we will end up with n-variants of the above trick.
+>
+> The number of recipes where multiple items need to be downloaded and
+> checksummed is small: this is a tiny minority of the total. =A0So,
+> although I agree that this case will become more ugly, I don't think
+> this is going to be a common enough problem that it will represent a
+> very big deal.
 
-RP said you did on #oe
-16:25:45 < RP> JaMa|Wrk: I can't sanction that, needs to be proposed on
-list but I'd ack it
-16:26:18 < XorA> JaMa|Wrk: got my Ack
-16:26:46 < RP> It was mentioned informally at OEDEM and nobody I talked
-to objected...
+That seems to depend on how must weigth you put on clean vs. "messy"
+solutions.
 
-Mickey acked too on #openmoko-cdevel
-16:47:28 < JaMa|Wrk> mickey|office: ack for SRCPV?
-16:50:47 < mickey|office> ya
+>> I agree that conceptually the checksum belongs to the URI, but putting i=
+t into
+>> the URI is just creating a horrible mess. It has issues with .inc files,=
+ adding
+>> a shasum will make the URI not fit in any terminal...
+>>
+>> The best alternatives so far where:
+>> =A0 =A0 =A0 - Place the checksums into the dir of the recipe
+>> =A0 =A0 =A0 - Use a MD5SUM_${URL} =3D "", SHA256SUM_${URL} =3D "" syntax
+>
+> I would be happy with the latter of those suggestions. =A0I don't think
+> the former really addresses the problems with the current checksums.ini.
 
-So that's at least 3 ACKs, if there is no objection today I'll push it.
+Which part of the current checksums.ini problems does the former not resolv=
+e?
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+Isn't the main issue with checksums.ini is the merge nightmare it poses?
+I don't see how this will be a big problem with per recipe checksums
+files.
+
+A per recipe checksums file is also the one solution I have seen
+that would reduce manual work needed for OE developers to
+actually maintain checksums.  And face it, we are for the most part lazy :-=
+D
+
+As I also made clear on OEDEM, I think it is important to make things
+simpler and easier to work with.  Not cause more mess and come
+up with additional hurdless for OE developers.
+
+/Esben
 
 
