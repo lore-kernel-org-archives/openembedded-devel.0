@@ -1,26 +1,26 @@
-Received: from [206.46.173.15] (helo=vms173015pub.verizon.net)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1N8Gpd-00041Z-OP
+	(envelope-from <philb@gnu.org>) id 1N8H2x-0000DQ-JF
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 18:18:12 +0100
-Received: from gandalf.denix.org ([71.251.63.147]) by vms173015.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KSY00HCSD6X2PKP@vms173015.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	11 Nov 2009 10:16:15 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id E7A5014AF60; Wed,
-	11 Nov 2009 11:16:08 -0500 (EST)
-Date: Wed, 11 Nov 2009 11:16:08 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 11 Nov 2009 18:31:58 +0100
+Received: from [85.210.2.237] (helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N8H1j-0008CI-42
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 11 Nov 2009 17:30:39 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20091111161608.GA3246@denix.org>
-References: <4AF963A3.1050906@balister.org> <20091110131554.GA25450@denix.org>
-	<4AF996BE.2080904@balister.org>
-MIME-version: 1.0
-In-reply-to: <4AF996BE.2080904@balister.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.15
-X-SA-Exim-Mail-From: denis@denix.org
+In-Reply-To: <20091111161608.GA3246@denix.org>
+References: <4AF963A3.1050906@balister.org>
+	<20091110131554.GA25450@denix.org> <4AF996BE.2080904@balister.org>
+	<20091111161608.GA3246@denix.org>
+Date: Wed, 11 Nov 2009 17:30:36 +0000
+Message-ID: <1257960636.25369.404.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-Broken-Reverse-DNS: no host name found for IP address 85.210.2.237
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Mailing lists
@@ -37,33 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2009 17:18:13 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 11 Nov 2009 17:31:58 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Tue, Nov 10, 2009 at 11:37:18AM -0500, Philip Balister wrote:
-> On 11/10/2009 08:15 AM, Denys Dmytriyenko wrote:
->> On Tue, Nov 10, 2009 at 12:59:15PM +0000, Philip Balister wrote:
->>> We have made some changes to DNS to try and sort out the oe.org versus
->>> www.oe.org issue (and a few other nits). If the mailing list stops 
->>> working,
->>> send me an email direct and we will try and get things going again ASAP. 
->>> I
->>> think we have the correct DNS incantation this time.
->>
->> Ah, nice! Thanks. Have you added rewrite rules in exim to avoid 
->> duplication of
->> mails sent to lists.oe.org vs oe.org? Let me try it with this email... :)
->
-> It will take some time for this to take effect and for us to fix anything 
-> that needs fixing :)
->
-> I still do not see the DNS change. Dotster is low to copy updates made on 
-> their website to actual DNS.
+On Wed, 2009-11-11 at 11:16 -0500, Denys Dmytriyenko wrote:
+> On Tue, Nov 10, 2009 at 11:37:18AM -0500, Philip Balister wrote:
+> > On 11/10/2009 08:15 AM, Denys Dmytriyenko wrote:
+> >> On Tue, Nov 10, 2009 at 12:59:15PM +0000, Philip Balister wrote:
+> >>> We have made some changes to DNS to try and sort out the oe.org versus
+> >>> www.oe.org issue (and a few other nits). If the mailing list stops 
+> >>> working,
+> >>> send me an email direct and we will try and get things going again ASAP. 
+> >>> I
+> >>> think we have the correct DNS incantation this time.
+> >>
+> >> Ah, nice! Thanks. Have you added rewrite rules in exim to avoid 
+> >> duplication of
+> >> mails sent to lists.oe.org vs oe.org? Let me try it with this email... :)
+> >
+> > It will take some time for this to take effect and for us to fix anything 
+> > that needs fixing :)
+> >
+> > I still do not see the DNS change. Dotster is low to copy updates made on 
+> > their website to actual DNS.
+> 
+> DNS seems to work fine, but it still takes hours to bounce an email...
 
-DNS seems to work fine, but it still takes hours to bounce an email...
+This particular mail of yours was delayed for an hour due to
+greylisting; this happens the first time you try to send mail to the
+list from a particular host (vms173001.mailsrvcs.net in this case).  I
+haven't seen any instances recently of mail taking any more than that,
+and for folks who aren't greylisted it should only be a minute or two.
 
--- 
-Denys
+If you are routinely seeing round-trip times of "hours", please send me
+a copy of the headers for one of the offending messages and I will take
+a look at it.
+
+p.
+
+
 
 
