@@ -1,31 +1,24 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1N8FPd-0002JW-5p
+	(envelope-from <philip@balister.org>) id 1N8FaU-0004dO-Pg
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 16:47:16 +0100
-Received: from [85.210.2.237] (helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N8FOO-000601-Dt
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 15:45:56 +0000
-From: Phil Blundell <philb@gnu.org>
+	Wed, 11 Nov 2009 16:58:31 +0100
+Received: (qmail 4599 invoked by uid 1003); 11 Nov 2009 15:57:07 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 11 Nov 2009 15:57:07 -0000
+Message-ID: <4AFADED2.8010708@balister.org>
+Date: Wed, 11 Nov 2009 10:57:06 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
+	Thunderbird/3.0b4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1257949048.29038.388.camel@dax.rpnet.com>
-References: <1257872140.1484.335.camel@mill.internal.reciva.com>
-	<200911110206.20901.holger+oe@freyther.de>
-	<1257927850.25369.283.camel@lenovo.internal.reciva.com>
-	<200911110944.10399.holger+oe@freyther.de>
-	<1257949048.29038.388.camel@dax.rpnet.com>
-Date: Wed, 11 Nov 2009 15:45:53 +0000
-Message-ID: <1257954353.25369.304.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-Broken-Reverse-DNS: no host name found for IP address 85.210.2.237
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: OEDEM 2009 summary: Death to checksums.ini?
+Subject: Summary of Toolchain/SDK session
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,28 +32,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2009 15:47:16 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 11 Nov 2009 15:58:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2009-11-11 at 14:17 +0000, Richard Purdie wrote:
-> SCR_URI = "xyz://abc.com/efg.tgz;name=bar"
-> 
-> MD5SUM_bar = ""
-> 
-> or maybe :
-> 
-> MD5SUM[bar] = ""
+Toolchain generation is currently a fragile process. Richard's staging 
+changes should help resolve these issues.
 
-The labelling is a good idea, although I am not especially keen on
-either of those notations.  How about:
+There are several classes of developers:
 
-SRC_URI = "xyz://abc.com/efg.tgz;name=bar"
-SRC_URI[md5sum:bar] = "..."
-SRC_URI[sha256sum:bar] = "..."
+1) Create recipes for existing software.
+2) Modifying kernel config within OE.
+3) People creating new software to run on machine that can not be tested 
+on desktop.
 
-p.
+Marco and Ken briefly presented their Eclipse based projects to help 
+developers. Marco's is targeted at hiding OE from developers, Ken's 
+provides help for people writing recipes. Ken has promised to write more 
+on the eclipse plugin issues.
 
+http://community.buglabs.net/kgilmer/posts/110-BitBake-Commander-6-8-Installers-
+
+For SW developers (3) there is an Anjuta plugin:
+
+http://labs.o-hand.com/anjuta-poky-sdk-plugin/
+
+and you can do remote development on a Beagle with Netbeans:
+
+http://mechomaniac.com/BeagleboardDevelopmentWithNetbeans
+
+There was also discussion on making it easier to install OE/bitbake.
+
+Conclusions:
+
+1) Toolchain generation should improve after staging layout changes.
+2) People are working on Eclipse plugins, this should be encouraged.
+3) Need better documentation to setup Eclipse and CDT with OE toolchains.
+4) Need to add a page linking to projects that are useful for people 
+using OE.
+
+Philip
 
 
 
