@@ -1,40 +1,39 @@
-Received: from [209.85.211.177] (helo=mail-yw0-f177.google.com)
+Received: from [209.85.223.198] (helo=mail-iw0-f198.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N863s-00054H-NW
+	(envelope-from <raj.khem@gmail.com>) id 1N88R6-0007TS-Fl
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 06:48:11 +0100
-Received: by ywh7 with SMTP id 7so723743ywh.24
+	Wed, 11 Nov 2009 09:20:20 +0100
+Received: by iwn36 with SMTP id 36so731413iwn.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2009 21:46:50 -0800 (PST)
+	Wed, 11 Nov 2009 00:18:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=4n9ejxqVKbOEDotm6K8KS/Dmzfmk3v37xLIiZ4IvG/0=;
-	b=WFMnFzh4Vku3A/n6pP12lfPMpvJHMBIKwzm9bpcFa2GjSr6OttX/NoEShUs5hdKRQF
-	w3fYhFFO8hHFGJqGMoAp04vh9DNTIapW+Lwrk/ghGE2JfnWbdiGE73IBXUzP7io/A8mE
-	0v6LWEqpQXcHBfZwgfCH48nf3WSB5yGIM6xgY=
+	bh=y3HW/CJnRk5ObD+ORhdofIIw5ju6BivMT150VhVQz8U=;
+	b=KLSCXoIqrjeGiG2LeMbGtWbVvzLOx21rACW8pkbsyCZef5OS+kVZdKvy/QnDH75pbh
+	tkCNxEur8pVRUJgoOeQ0+Di7OIpf2jsPJ60FEnlScDbZXZygsW0F1HKnyL1DoDIVsmK/
+	vbIwb+1bOjveEKPL/UToELbEVQX3lN+6Ywjg4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=qc1IgLvkkIc2nJswRD3iZIVwgcX5TdS/fvhT7BQDrwn3iFkAVqsX/MIvPul8Eaq+gp
-	5t2iU0A0AB0dqvBolKXIvwYoSxVij6FuAoWpqKwDGX4lyzeaUzDDxXsCJ9wWT/fdx1EI
-	qDseSMxt/pvoB4s8fyN+XchVE7dLMw2T7iQa8=
+	b=hIpSKow2i68vhIiOh2gZY/UrQwBdWzMEnY9mPcXlY4ZA57hXaydESH6psCrpZfrbE4
+	7YqC9pejNzEYDztXrisfj4XSkGr0C0ofYLK14a5SE+95Ll/dlu8esTGEehyk2p+hXZb3
+	AQzogzI8BsTrTlftRR9swANyI+nu0AgjrVKes=
 MIME-Version: 1.0
-Received: by 10.101.61.20 with SMTP id o20mr1137752ank.166.1257918410425; Tue, 
-	10 Nov 2009 21:46:50 -0800 (PST)
-In-Reply-To: <200911110206.20901.holger+oe@freyther.de>
-References: <1257872140.1484.335.camel@mill.internal.reciva.com>
-	<200911110206.20901.holger+oe@freyther.de>
-Date: Wed, 11 Nov 2009 06:46:50 +0100
-Message-ID: <ac9c93b10911102146p32f140b3g83005736bb9b441e@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.231.83.75 with SMTP id e11mr2261547ibl.11.1257927213078; Wed, 
+	11 Nov 2009 00:13:33 -0800 (PST)
+In-Reply-To: <DIIE.000005E3001861E8@192.168.11.6>
+References: <DIIE.000005E3001861E8@192.168.11.6>
+Date: Wed, 11 Nov 2009 00:13:33 -0800
+Message-ID: <19c1b8a90911110013q22055182i911816f070bc0f7a@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.177
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.223.198
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: OEDEM 2009 summary: Death to checksums.ini?
+Subject: Re: question meta-toolchain on x86_64 for armv5te
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,53 +47,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2009 05:48:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 11 Nov 2009 08:20:20 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-2009/11/11 Holger Hans Peter Freyther <holger+oe@freyther.de>:
-> On Tuesday 10 November 2009 17:55:40 Phil Blundell wrote:
->> The current checksums.ini arrangement has a number of issues:
->>
->> =A0- single monolithic file is a rich source of merge conflicts
->> =A0- concrete URIs require many duplicate entries for different mirrors
->> =A0- can be annoying for folks using overlays and/or collections
->> =A0- storing the checksum separately from the rest of the .bb file makes
->> cherry-picking harder than it needs to be
->> =A0- large amount of churn in checksums.ini can make it hard to spot cas=
-es
->> where checksums were changed rather than just added.
->>
->> It was proposed that, rather than storing checksums centrally in
->> checksums.ini, they should be placed in the individual .bb file to which
->> the checksum relates. =A0Bitbake already has a certain level of support
->> for reading checksums from SRC_URI and it would seem natural to try to
->> make use of that.
+On Tue, Nov 10, 2009 at 8:03 AM, Johannes Maier <jm@huber-online.com> wrote=
+:
+> Hi@all,
 >
-> *sigh*
+> I'm new to openembedded and I didn't find any answers to my questions so =
+I hope to find here some help.
 >
-> SRC_URI =3D "http://example.org/${PN}-${PV}.tar,bz2"
+> I get an error while building the meta-toolchain on x86_64 for armv5te.
 >
-> how do you want to handle these? What happens if you place a checksum in =
-the
-> inc file? Do you want to propose removing SRC_URI from .ini files and put=
- them
-> back to the .bb files?
+> So I wanted to ask if it is in general better to use a 32bit system for s=
+uch tasks since I don't get any error there?
+>
+> The error is as follows:
+>
+> angstrom-linux-gnueabi/gdb-cross-sdk-6.8-r2/gdb-6.8/gdb -I/home/test/oe/s=
+tuff/openembedded/tmp/work/x86_64-armv5te-sdk-angstrom-linux-gnueabi/gdb-cr=
+oss-sdk-6.8-r2/gdb-6.8/gdb/config -DLOCALEDIR=3D"\"/usr/local/angstrom/arm/=
+share/locale\"" -DHAVE_CONFIG_H -I/home/test/oe/stuff/openembedded/tmp/work=
+/x86_64-armv5te-sdk-angstrom-linux-gnueabi/gdb-cross-sdk-6.8-r2/gdb-6.8/gdb=
+/../include/opcode -I/home/test/oe/stuff/openembedded/tmp/work/x86_64-armv5=
+te-sdk-angstrom-linux-gnueabi/gdb-cross-sdk-6.8-r2/gdb-6.8/gdb/../readline/=
+.. -I../bfd -I/home/test/oe/stuff/openembedded/tmp/work/x86_64-armv5te-sdk-=
+angstrom-linux-gnueabi/gdb-cross-sdk-6.8-r2/gdb-6.8/gdb/../bfd -I/home/test=
+/oe/stuff/openembedded/tmp/work/x86_64-armv5te-sdk-angstrom-linux-gnueabi/g=
+db-cross-sdk-6.8-r2/gdb-6.8/gdb/../include -I../libdecnumber -I/home/test/o=
+e/stuff/openembedded/tmp/work/x86_64-armv5te-sdk-angstrom-linux-gnueabi/gdb=
+-cross-sdk-6.8-r2/gdb-6.8/gdb/../libdecnumber =C2=A0 -DMI_OUT=3D1 -DTUI=3D1
+> -isystem/home/test/oe/stuff/opene
+> mbedded/tmp/staging/x86_64-linux/usr/include -Wall -Wdeclaration-after-st=
+atement -Wpointer-arith -Wformat-nonliteral -Wno-pointer-sign -Wno-unused -=
+Wno-switch -Wno-char-subscripts -Werror /home/test/oe/stuff/openembedded/tm=
+p/work/x86_64-armv5te-sdk-angstrom-linux-gnueabi/gdb-cross-sdk-6.8-r2/gdb-6=
+.8/gdb/value.c
+> | ccache gcc -c -isystem/home/test/oe/stuff/openembedded/tmp/staging/x86_=
+64-linux/usr/include -O2 =C2=A0 -I. -I/home/test/oe/stuff/openembedded/tmp/=
+work/x86_64-armv5te-sdk-angstrom-linux-gnueabi/gdb-cross-sdk-6.8-r2/gdb-6.8=
+/gdb -I/home/test/oe/stuff/openembedded/tmp/work/x86_64-armv5te-sdk-angstro=
+m-linux-gnueabi/gdb-cross-sdk-6.8-r2/gdb-6.8/gdb/config -DLOCALEDIR=3D"\"/u=
+sr/local/angstrom/arm/share/locale\"" -DHAVE_CONFIG_H -I/home/test/oe/stuff=
+/openembedded/tmp/work/x86_64-armv5te-sdk-angstrom-linux-gnueabi/gdb-cross-=
+sdk-6.8-r2/gdb-6.8/gdb/../include/opcode -I/home/test/oe/stuff/openembedded=
+/tmp/work/x86_64-armv5te-sdk-angstrom-linux-gnueabi/gdb-cross-sdk-6.8-r2/gd=
+b-6.8/gdb/../readline/.. -I../bfd -I/home/test/oe/stuff/openembedded/tmp/wo=
+rk/x86_64-armv5te-sdk-angstrom-linux-gnueabi/gdb-cross-sdk-6.8-r2/gdb-6.8/g=
+db/../bfd -I/home/test/oe/stuff/openembedded/tmp/work/x86_64-armv5te-sdk-an=
+gstrom-linux-gnueabi/gdb-cross-sdk-6.8-r2/gdb-6.8/gdb/../include -I../libde=
+cnumber
+> -I/home/test/oe/stuff/
+> openembedded/tmp/work/x86_64-armv5te-sdk-angstrom-linux-gnueabi/gdb-cross=
+-sdk-6.8-r2/gdb-6.8/gdb/../libdecnumber =C2=A0 -DMI_OUT=3D1 -DTUI=3D1 -isys=
+tem/home/test/oe/stuff/openembedded/tmp/staging/x86_64-linux/usr/include -W=
+all -Wdeclaration-after-statement -Wpointer-arith -Wformat-nonliteral -Wno-=
+pointer-sign -Wno-unused -Wno-switch -Wno-char-subscripts -Werror /home/tes=
+t/oe/stuff/openembedded/tmp/work/x86_64-armv5te-sdk-angstrom-linux-gnueabi/=
+gdb-cross-sdk-6.8-r2/gdb-6.8/gdb/eval.c
+> | cc1: warnings being treated as errors
+> | /home/test/oe/stuff/openembedded/tmp/work/x86_64-armv5te-sdk-angstrom-l=
+inux-gnueabi/gdb-cross-sdk-6.8-r2/gdb-6.8/gdb/eval.c: In function 'evaluate=
+_subexp_standard':
+> | /home/test/oe/stuff/openembedded/tmp/work/x86_64-armv5te-sdk-angstrom-l=
+inux-gnueabi/gdb-cross-sdk-6.8-r2/gdb-6.8/gdb/eval.c:1705: error: 'subscrip=
+t_array' may be used uninitialized in this function
+> | /home/test/oe/stuff/openembedded/tmp/work/x86_64-armv5te-sdk-angstrom-l=
+inux-gnueabi/gdb-cross-sdk-6.8-r2/gdb-6.8/gdb/eval.c:1644: note: 'subscript=
+_array' was declared here
 
-While I think the monolithic checksums.ini file has its problems (I've
-cursed more than once that someone changed the fiel just wwhen I had
-changed it), I think Holger has a point with ${PN}-{$PV}
-One now needs to explicitly add the checksum to the recipe.
+you might be using gcc 4.4 on your build box.
+gcc 4.4 spits more warnings like what you see. You can do couple of
+things. add --disable-werror to gdb recipes but
+I would not recommend that. Secondly you can create a patch to gdb/eval.c
+Modify line 1644 of gdb/eval.c to
+int subscript_array[MAX_FORTRAN_DIMS] =3D {0};
 
-Would it be better to have a separate checksums.ini file in the
-directory with the packages (and I know that for some dirs like perl
-this still can become substantial)..
-With some machinery we could even generate the checksum automatically
-if a new package or version is added (NOT if the checksum is alreayd
-there and is changed).
+and this should make gcc 4.4 happy.
 
-How about that?
-
-Frans.
+-Khem
+Thanks
 
 
