@@ -1,24 +1,44 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [209.85.210.175] (helo=mail-yx0-f175.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1N8FaU-0004dO-Pg
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N8FeW-0004sk-TT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 16:58:31 +0100
-Received: (qmail 4599 invoked by uid 1003); 11 Nov 2009 15:57:07 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 11 Nov 2009 15:57:07 -0000
-Message-ID: <4AFADED2.8010708@balister.org>
-Date: Wed, 11 Nov 2009 10:57:06 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
-	Thunderbird/3.0b4
+	Wed, 11 Nov 2009 17:02:40 +0100
+Received: by yxe5 with SMTP id 5so1085417yxe.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Nov 2009 08:01:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=FTNAaQxVBlYxQ0dIgnl4DF6hfJusXMBE0/iUzkBEzs8=;
+	b=piSBLpHbUke998uGA1azaFiu5ZbY6FvT3Uvu9g73jBTIAC/C5HyDgk4Zvw0K3G6gw3
+	y/882bVXp0T6c84BKp8ZoeqzjSQ5u3nK0MW4SmfXjUkwjokTZa2hdTildvzGlO1sWG5R
+	JZRVavCs95Y/bjLVP3a/xGhS6d2agElQJ9Izo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=XRPQQQA3utVEeP+9FuIQmUmGw0njYuL+aHKqDFVpacoKfFCNLc7TMu8mjHkIbMr4nq
+	+Jqy6SZsAE4TbGMYnZ9hlbaEHe43EpaG1zZ+drdQoEpfsJgdix+z6CIV5NQ9ewjZmjg8
+	nXXC7t9Ss/vIpWcluw1WKYU2PVPB06g6AMOZY=
 MIME-Version: 1.0
+Received: by 10.101.54.13 with SMTP id g13mr1552243ank.158.1257955277886; Wed, 
+	11 Nov 2009 08:01:17 -0800 (PST)
+In-Reply-To: <1257954353.25369.304.camel@lenovo.internal.reciva.com>
+References: <1257872140.1484.335.camel@mill.internal.reciva.com>
+	<200911110206.20901.holger+oe@freyther.de>
+	<1257927850.25369.283.camel@lenovo.internal.reciva.com>
+	<200911110944.10399.holger+oe@freyther.de>
+	<1257949048.29038.388.camel@dax.rpnet.com>
+	<1257954353.25369.304.camel@lenovo.internal.reciva.com>
+Date: Wed, 11 Nov 2009 17:01:17 +0100
+Message-ID: <ac9c93b10911110801q308a2d80g916a0271757fedd5@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Summary of Toolchain/SDK session
+Subject: Re: OEDEM 2009 summary: Death to checksums.ini?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,46 +52,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2009 15:58:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 11 Nov 2009 16:02:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Toolchain generation is currently a fragile process. Richard's staging 
-changes should help resolve these issues.
-
-There are several classes of developers:
-
-1) Create recipes for existing software.
-2) Modifying kernel config within OE.
-3) People creating new software to run on machine that can not be tested 
-on desktop.
-
-Marco and Ken briefly presented their Eclipse based projects to help 
-developers. Marco's is targeted at hiding OE from developers, Ken's 
-provides help for people writing recipes. Ken has promised to write more 
-on the eclipse plugin issues.
-
-http://community.buglabs.net/kgilmer/posts/110-BitBake-Commander-6-8-Installers-
-
-For SW developers (3) there is an Anjuta plugin:
-
-http://labs.o-hand.com/anjuta-poky-sdk-plugin/
-
-and you can do remote development on a Beagle with Netbeans:
-
-http://mechomaniac.com/BeagleboardDevelopmentWithNetbeans
-
-There was also discussion on making it easier to install OE/bitbake.
-
-Conclusions:
-
-1) Toolchain generation should improve after staging layout changes.
-2) People are working on Eclipse plugins, this should be encouraged.
-3) Need better documentation to setup Eclipse and CDT with OE toolchains.
-4) Need to add a page linking to projects that are useful for people 
-using OE.
-
-Philip
-
+2009/11/11 Phil Blundell <philb@gnu.org>:
+> On Wed, 2009-11-11 at 14:17 +0000, Richard Purdie wrote:
+>> SCR_URI =3D "xyz://abc.com/efg.tgz;name=3Dbar"
+>>
+>> MD5SUM_bar =3D ""
+>>
+>> or maybe :
+>>
+>> MD5SUM[bar] =3D ""
+>
+> The labelling is a good idea, although I am not especially keen on
+> either of those notations. =A0How about:
+>
+> SRC_URI =3D "xyz://abc.com/efg.tgz;name=3Dbar"
+> SRC_URI[md5sum:bar] =3D "..."
+> SRC_URI[sha256sum:bar] =3D "..."
+>
+Would we still be able to use PN and PV in the md5sum:bar etc?
 
 
