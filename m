@@ -1,28 +1,28 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1N88b4-0002WB-H8
+	(envelope-from <holger+oe@freyther.de>) id 1N88pn-0001Zn-QI
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 09:30:38 +0100
-Received: from [85.210.2.237] (helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N88Zp-0005yW-VO
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 08:29:18 +0000
-From: Phil Blundell <philb@gnu.org>
+	Wed, 11 Nov 2009 09:45:50 +0100
+Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
+	[123.192.145.111])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 803A21B10C04
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Nov 2009 08:55:17 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200911110207.40753.holger+oe@freyther.de>
-References: <1257858446.3077.3.camel@opal>
-	<200911110207.40753.holger+oe@freyther.de>
-Date: Wed, 11 Nov 2009 08:29:16 +0000
-Message-ID: <1257928156.25369.287.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-Broken-Reverse-DNS: no host name found for IP address 85.210.2.237
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+Date: Wed, 11 Nov 2009 09:44:10 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <1257872140.1484.335.camel@mill.internal.reciva.com>
+	<200911110206.20901.holger+oe@freyther.de>
+	<1257927850.25369.283.camel@lenovo.internal.reciva.com>
+In-Reply-To: <1257927850.25369.283.camel@lenovo.internal.reciva.com>
+MIME-Version: 1.0
+Message-Id: <200911110944.10399.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: OEDEM: Summary of 'OE and Poky', 'Hosting', 'Bugtracker'
+Subject: Re: OEDEM 2009 summary: Death to checksums.ini?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,25 +36,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2009 08:30:38 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 11 Nov 2009 08:45:50 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2009-11-11 at 02:07 +0100, Holger Hans Peter Freyther wrote:
-> > It is noted that the current dev process does not work particularly
-> > well,
-> > some people think it is too easy to get commit access to OE.
+On Wednesday 11 November 2009 09:24:09 Phil Blundell wrote:
+> On Wed, 2009-11-11 at 02:06 +0100, Holger Hans Peter Freyther wrote:
+> > SRC_URI = "http://example.org/${PN}-${PV}.tar,bz2"
+> >
+> > how do you want to handle these? What happens if you place a checksum in
+> > the inc file? Do you want to propose removing SRC_URI from .ini files and
+> > put them back to the .bb files?
 > 
-> At WebKit we hand out commit access easily as well, this doesn't mean that 
-> people can commit at free will... We still require review for every change.
+> SRC_URI = "http://example.org/${PN}-${PV}.tar,bz2;md5sum=${MD5SUM}"
+> 
+> You can define ${MD5SUM} whereever you like.
 
-Yes, this is quite a common paradigm.  GCC works the same way: there are
-many people with "write after approval" access, which means that they
-are technically able to check in to the tree but they are expected to
-get their patches reviewed first.
+This will create an even bigger mess. Sometimes you need to download two 
+things, this means you will end up with A_MD5SUM, B_MD5SUM, A_SHASUM, 
+B_SHASUM. The main problem with the above is that in contrast to a well defined 
+checksums.ini file we will end up with n-variants of the above trick.
 
-p.
 
+I agree that conceptually the checksum belongs to the URI, but putting it into
+the URI is just creating a horrible mess. It has issues with .inc files, adding 
+a shasum will make the URI not fit in any terminal...
+
+The best alternatives so far where:
+	- Place the checksums into the dir of the recipe
+	- Use a MD5SUM_${URL} = "", SHA256SUM_${URL} = "" syntax
+
+
+z.
 
 
 
