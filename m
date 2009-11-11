@@ -1,43 +1,44 @@
-Received: from [209.85.160.53] (helo=mail-pw0-f53.google.com)
+Received: from [209.85.219.209] (helo=mail-ew0-f209.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1N8ATS-0005vO-0U
+	(envelope-from <jay4mail@gmail.com>) id 1N8Aoy-00023x-UP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 11:30:53 +0100
-Received: by pwj11 with SMTP id 11so601835pwj.12
+	Wed, 11 Nov 2009 11:53:08 +0100
+Received: by ewy5 with SMTP id 5so925316ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2009 02:29:31 -0800 (PST)
+	Wed, 11 Nov 2009 02:51:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=4h1BjWPzYxN6FhACskkBYNyzXMiTUVZVq6XwZ+N5PFQ=;
-	b=JUP8uoFpO1Y80NJZwD/ikWHY3R1tm9Tl+YgsFpd0SaWlfg7mKm/1Pd5Cuat9BAI4g9
-	2D6EvKTHp4PlFyqKjSa51duVAfI9rAbCQ3uXf5HrUbqc/iE9MNpaOgUcVflKaLuTdQGw
-	YUhPUdSsAxGyPBV8q9+En7eDRBgNwJeRyhvyU=
+	h=domainkey-signature:received:received:from:to:subject:date
+	:user-agent:references:in-reply-to:mime-version:content-type
+	:content-transfer-encoding:message-id;
+	bh=Emm0/ZDz3HLcgYlGpPN9fseuskhc7uA9C6V84Nz52Rc=;
+	b=loF2k0CrfAvfbT7XA77qP7FrQj/nI7OFg9VVI1ozWk8poommmPb9b7CpRHKicriwk/
+	LqJvQMgzmjr0/92LkCsmIDTz6tO6n6JDhgcnE6/neMwjGhOe0toT0T3HGJMlebAKs3PF
+	9YgN5TtF/GeGIgPU15v8BvGYbiR9FfTAnmh/U=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=DvFOagYofxfGk/Z5PNg4/kwoiFYOiFWPJCXoe+T2OtFw9sCJ4sl8hqsreoVtyBNckZ
-	CL7+svGUwDz3iWDhw3K6VKV1gZwcLH9+TbAKtZ9RiMVeHrfSk6VNu5DtcxoBv7fKiAYz
-	dhQGcYSTXHHA4Gw7Jv+DS5/zTgW4rSGhC6krA=
-MIME-Version: 1.0
-Received: by 10.140.148.9 with SMTP id v9mr69720rvd.247.1257933993545; Wed, 11 
-	Nov 2009 02:06:33 -0800 (PST)
-In-Reply-To: <1257931062.25369.292.camel@lenovo.internal.reciva.com>
-References: <1257872140.1484.335.camel@mill.internal.reciva.com>
-	<200911110206.20901.holger+oe@freyther.de>
-	<1257927850.25369.283.camel@lenovo.internal.reciva.com>
-	<200911110944.10399.holger+oe@freyther.de>
-	<1257931062.25369.292.camel@lenovo.internal.reciva.com>
-Date: Wed, 11 Nov 2009 11:06:33 +0100
-Message-ID: <d1b08f940911110206h594dff39mb9a3cf7912124018@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
+	:content-type:content-transfer-encoding:message-id;
+	b=g+gP4ho8uWExGYBY+/lz/+U5AtSBOfAlpM346oT6IU/GQvsAjiElET6ynAhMn0AzPP
+	+gX96ovbzgm2wh90i31vU+BPTtkfAvmEgCgoKgjI+i6Jm+v8gHaCnFtduHUghVMgXinH
+	osOxCTrkenoNDOri9JJwmmqrWU3bPnCN+dDGg=
+Received: by 10.213.0.218 with SMTP id 26mr1456954ebc.85.1257934774063;
+	Wed, 11 Nov 2009 02:19:34 -0800 (PST)
+Received: from is.home (93-81-70-123.broadband.corbina.ru [93.81.70.123])
+	by mx.google.com with ESMTPS id 7sm3743944eyg.17.2009.11.11.02.19.32
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 11 Nov 2009 02:19:32 -0800 (PST)
+From: Yuri Bushmelev <jay4mail@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.53
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+Date: Wed, 11 Nov 2009 13:19:16 +0300
+User-Agent: KMail/1.12.2 (Linux/2.6.30-std-def-alt14; KDE/4.3.2; i686; ; )
+References: <1257867936.1484.281.camel@mill.internal.reciva.com>
+In-Reply-To: <1257867936.1484.281.camel@mill.internal.reciva.com>
+MIME-Version: 1.0
+Message-Id: <200911111319.16947.jay4mail@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.219.209
+X-SA-Exim-Mail-From: jay4mail@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: OEDEM 2009 summary: Death to checksums.ini?
+Subject: Re: OEDEM 2009 summary: Future plans for stable branch(es)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,34 +52,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2009 10:30:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 11 Nov 2009 10:53:08 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
->>There was some discussion around alternative proposals of storing the
->> checksums in separate files within the recipes/ directory.
+Hello!
 
->> The best alternatives so far where:
->> =A0 =A0 =A0 - Place the checksums into the dir of the recipe
->> =A0 =A0 =A0 - Use a MD5SUM_${URL} =3D "", SHA256SUM_${URL} =3D "" syntax
->
-> I would be happy with the latter of those suggestions. =A0I don't think
-> the former really addresses the problems with the current checksums.ini.
+> - RP: important not to let backwards compatibility stand in the way of
+> progress; development tree needs to move forwards.  There will come a
+> point where old stuff cannot be sensibly maintained and must be deleted:
+> e.g. old gcc versions do not support sysroot which is needed for staging
+> nowadays.
+> 
+> - Phil B: agreed, but would prefer to keep old versions working as long
+> as there is little/no cost in doing so.
+> 
+> - KG: lots of old cruft in tree makes it hard for new users to find
+> examples of best current practice.
+> 
+> - Phil B: can we move the cruft out of sight rather than deleting it?
+> Punt this to discussion on splitting the tree.
 
-Yes, I sponsor the idea of a single Manifest in each dir.
+I just want to remind about tagging possibility of git :)
+We can (and imho definitely must) tag revisions before dropping any of such 
+things.
 
-Let apart filetype specifier, example here:
-http://www.gentoo.org/proj/en/glep/glep-0044-extras/manifest2-example.txt
-
-Having a Manifest listing the filename, the size and some checksums on
-a single line seems to me very easy to parse for an automated script
-wich could refresh/generate the whole file.
-
-Finally, a question: why do we have full URL in the checksum-file?
-I can't see the real advantages in case of checksum mismatch...
-
-My (euro)2 cents
-
-Andrea
+-- 
+Yuri Bushmelev
 
 
