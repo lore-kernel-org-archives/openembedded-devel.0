@@ -1,44 +1,35 @@
-Received: from [209.85.220.209] (helo=mail-fx0-f209.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1N8JuO-0007op-8S
+	(envelope-from <philb@gnu.org>) id 1N8Juc-0007pH-JS
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 21:35:19 +0100
-Received: by fxm1 with SMTP id 1so1380587fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2009 12:33:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=1Yd5jGmIK9iTN8qF2jB87hJ76Cpsovc7JCEctcQzjqc=;
-	b=ZxFgve4JKihlM2ZAnbZw1msKSGCtbpKIwV6K5EL7Xh7ECPiUq/YVZmfnmSyEo/mYUQ
-	Mx0N63l5Sz+CXEJYLqaj4uobRXF7+bKtNyu8bs2kiYnjtbM7HCJaeWu9sczhRU4rsh40
-	lSjiLmeV7RbbtQQWM25hpxjm+zkvM1Se9oQEk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=vxhJw8KTx3u047FcjpB/fte5XNgWxXPhPe7NkRyOsx/+7Kcj/llGIZ7U4fqEPmh//c
-	6qWIBPQSHqR8jw1DorUz2lAMa7g84uKOmlhraQrFbF4RnKh2puoIGaGI04ocMlZ0rYx7
-	Ho3PdswL3Y954afOLXWISWjDSS4qDGCsMM5DI=
-Received: by 10.204.48.131 with SMTP id r3mr745549bkf.195.1257971637843;
-	Wed, 11 Nov 2009 12:33:57 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 14sm700535fxm.7.2009.11.11.12.33.57
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 11 Nov 2009 12:33:57 -0800 (PST)
-Date: Wed, 11 Nov 2009 21:33:32 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 11 Nov 2009 21:35:35 +0100
+Received: from [85.210.2.237] (helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N8JtK-0003Hw-Lk
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 11 Nov 2009 20:34:11 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091111203332.GC11484@jama>
-References: <1257959521.25369.393.camel@lenovo.internal.reciva.com>
-MIME-Version: 1.0
-In-Reply-To: <1257959521.25369.393.camel@lenovo.internal.reciva.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.209
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+In-Reply-To: <ac9c93b10911110937u4607a2c8w9e63c9df738d8fe8@mail.gmail.com>
+References: <1257872140.1484.335.camel@mill.internal.reciva.com>
+	<200911110206.20901.holger+oe@freyther.de>
+	<1257927850.25369.283.camel@lenovo.internal.reciva.com>
+	<200911110944.10399.holger+oe@freyther.de>
+	<1257949048.29038.388.camel@dax.rpnet.com>
+	<1257954353.25369.304.camel@lenovo.internal.reciva.com>
+	<ac9c93b10911110801q308a2d80g916a0271757fedd5@mail.gmail.com>
+	<1257955603.25369.325.camel@lenovo.internal.reciva.com>
+	<ac9c93b10911110937u4607a2c8w9e63c9df738d8fe8@mail.gmail.com>
+Date: Wed, 11 Nov 2009 20:34:01 +0000
+Message-ID: <1257971641.25369.426.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-Broken-Reverse-DNS: no host name found for IP address 85.210.2.237
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: OEDEM 2009 summary: Package management
+Subject: Re: OEDEM 2009 summary: Death to checksums.ini?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,47 +43,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2009 20:35:19 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 11 Nov 2009 20:35:35 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Wed, Nov 11, 2009 at 05:12:01PM +0000, Phil Blundell wrote:
-> This was the last session of the OEDEM schedule and the number of
-> participants was much reduced compared to the previous ones.  Partly as
-> a result of that it was also very short.
-> 
-> Key issue: opkg is the defacto standard for package management in
-> OE-derived distros but its quality is perceived as low.  What can we do
-> about this?
+On Wed, 2009-11-11 at 18:37 +0100, Frans Meulenbroeks wrote:
+> 2009/11/11 Phil Blundell <pb@reciva.com>:
+> > On Wed, 2009-11-11 at 17:01 +0100, Frans Meulenbroeks wrote:
+> >> 2009/11/11 Phil Blundell <philb@gnu.org>:
+> >> > On Wed, 2009-11-11 at 14:17 +0000, Richard Purdie wrote:
+> >> >> SCR_URI = "xyz://abc.com/efg.tgz;name=bar"
+> >> >>
+> >> >> MD5SUM_bar = ""
+> >> >>
+> >> >> or maybe :
+> >> >>
+> >> >> MD5SUM[bar] = ""
+> >> >
+> >> > The labelling is a good idea, although I am not especially keen on
+> >> > either of those notations.  How about:
+> >> >
+> >> > SRC_URI = "xyz://abc.com/efg.tgz;name=bar"
+> >> > SRC_URI[md5sum:bar] = "..."
+> >> > SRC_URI[sha256sum:bar] = "..."
+> >> >
+> >> Would we still be able to use PN and PV in the md5sum:bar etc?
+> >
+> > Not directly, though it isn't entirely obvious to me why this would be a
+> > useful thing to do.  Did you have a situation in mind where this would
+> > be desirable?
+> >
+> I am somewhat lazy so if a new version of a recipe has to be made I'd
+> like to touch as little as possible.
+> (the less I have to do the less chance of an error occurring)
+> So preferably I would use PV an PN in the url and not copy it from
+> somewhere (as that is more error prone too.
 
-Today I've "fixed" one problem we had with opkg in shr.
+That should still work fine.  The purpose of the "name=bar" thing is to
+decouple the checksum from the exact URI in use.  So, you can write:
 
-opkg installs own version of update-alternatives
+SRC_URI = "${MIRROR}/somedir/${PN}-${PV}.tar.gz;name=mytarball \
+           ${OTHERMIRROR}/${PN}-${PV}-extra-files.tar.gz;name=extrafiles"
 
-its the same script as the one packaged as update-alternatives-cworth
+and then, in another file if you prefer, add:
 
-its installed to /usr/bin (update-alternatives-cworth is using
-/usr/sbin so in PATH is after version from opkg)
+SRC_URI[md5sum:mytarball] = "d3b07384d113edec49eaa6238ad5ff00"
+SRC_URI[md5sum:extrafiles] = "c157a79031e1c40f85931829bc5fc552"
 
-I've patch for update-alternatives-cworth to use alternative which was
-installed last if there is no alternative with higher priority (see 
-http://cgit.openembedded.net/cgit.cgi/openembedded/commit/?h=shr/merge&id=6c1ed757c1498aff5b4b1b876332d2981f0855a1
-)
-
-And it was really confusing to have 2 simillar update-alternatives
-scripts in image.
-
-So it should be removed from opkg as I did in
-http://cgit.openembedded.net/cgit.cgi/openembedded/commit/?h=shr/merge&id=376cca189eed7a13de5a348e630c0af274c4704b
-http://cgit.openembedded.net/cgit.cgi/openembedded/commit/?h=shr/merge&id=416f6e5f5cfa23f0b3ae731af5c2a1dcd1e27189
-
-or opkg should provide virtual/update-alternatives as distros are using
-preferred_provider for that already.
+p.
 
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
 
 
