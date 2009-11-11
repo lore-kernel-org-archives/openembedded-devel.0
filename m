@@ -1,35 +1,26 @@
-Received: from [209.85.210.175] (helo=mail-yx0-f175.google.com)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N7x9B-0001IL-EJ
+	(envelope-from <holger+oe@freyther.de>) id 1N81gj-0005TY-7E
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Nov 2009 21:17:04 +0100
-Received: by yxe5 with SMTP id 5so366161yxe.24
+	Wed, 11 Nov 2009 02:08:00 +0100
+Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
+	[123.192.145.111])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 7A9C21B10C04
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Nov 2009 12:15:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=diF9o0WEX4RKRerX4vK2GIWBBcU5k0n+/oTtDHHnDK8=;
-	b=RQiRixMTkyL4TvfbmOP2sd46xY3wwvttb/ysiT0YFOgTh2LfsX6Tzq0MDCD8OrAnvB
-	Cjwl8msNnmj6R1hs429Q5aw0QoREDNdqqmwe+mlHWbhCiYzOAccaadphZkYggP7YFdxh
-	K+B4l1VKOopF9yNCUBJDa0AA/3qhdX4q1gOgs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=tJ6QGYURm2FfW8yG7YM/boknbPA+C3JGTre3m/hTgjwAKG6IZPOaMS3SMVfz2sWBre
-	uP6g1lsKD3nWmDEHHIOxwfistl/l4P1KjfISsMgj/jIs6NsnpvLDLA/UHA1SRJQ5xH/9
-	njEtLR8COu5uzfaKzeHrRMQM7J/m6+fT6/1WU=
-MIME-Version: 1.0
-Received: by 10.101.162.10 with SMTP id p10mr913565ano.92.1257884143372; Tue, 
-	10 Nov 2009 12:15:43 -0800 (PST)
-Date: Tue, 10 Nov 2009 21:15:43 +0100
-Message-ID: <ac9c93b10911101215v6d52641tb71d919cb5de23e2@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 11 Nov 2009 01:17:25 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Wed, 11 Nov 2009 02:06:20 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <1257872140.1484.335.camel@mill.internal.reciva.com>
+In-Reply-To: <1257872140.1484.335.camel@mill.internal.reciva.com>
+MIME-Version: 1.0
+Message-Id: <200911110206.20901.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: apache2 2.2.14
+Subject: Re: OEDEM 2009 summary: Death to checksums.ini?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,18 +34,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Nov 2009 20:17:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 11 Nov 2009 01:08:00 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-I tried to bring apache up to 2.2.14 but ran into problems.
-I needed to add a patch in srclib/apr/configure.in but for some reason
-the configure file in that dir is not regenerated.
-As autotools is not really my league of sports, I'm asking for help here.
+On Tuesday 10 November 2009 17:55:40 Phil Blundell wrote:
+> The current checksums.ini arrangement has a number of issues:
+> 
+>  - single monolithic file is a rich source of merge conflicts
+>  - concrete URIs require many duplicate entries for different mirrors
+>  - can be annoying for folks using overlays and/or collections
+>  - storing the checksum separately from the rest of the .bb file makes
+> cherry-picking harder than it needs to be
+>  - large amount of churn in checksums.ini can make it hard to spot cases
+> where checksums were changed rather than just added.
+> 
+> It was proposed that, rather than storing checksums centrally in
+> checksums.ini, they should be placed in the individual .bb file to which
+> the checksum relates.  Bitbake already has a certain level of support
+> for reading checksums from SRC_URI and it would seem natural to try to
+> make use of that.
 
-The recipe + patches can be found at
-http://filebin.ca/umxxuc/2.2.14.tar (for the next 30 days)
-Can someone have a look at it and come with a suggestion.
+*sigh*
 
-Thanks, Frans.
+SRC_URI = "http://example.org/${PN}-${PV}.tar,bz2"
+
+how do you want to handle these? What happens if you place a checksum in the 
+inc file? Do you want to propose removing SRC_URI from .ini files and put them 
+back to the .bb files?
+
+
+z.
 
 
