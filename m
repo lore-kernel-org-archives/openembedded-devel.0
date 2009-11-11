@@ -1,25 +1,29 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [206.46.173.1] (helo=vms173001.mailsrvcs.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1N8GGV-0000DV-GI
+	(envelope-from <denis@denix.org>) id 1N8GLC-0000Mq-Dm
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 17:41:55 +0100
-Received: from [85.210.2.237] (helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N8GB9-0006yl-Qn
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 16:36:20 +0000
-From: Phil Blundell <philb@gnu.org>
+	Wed, 11 Nov 2009 17:46:45 +0100
+Received: from gandalf.denix.org ([unknown] [71.251.63.147])
+	by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0KSY00DZTBRBF043@vms173001.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	11 Nov 2009 09:45:12 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 115B014AF60; Wed,
+	11 Nov 2009 10:45:11 -0500 (EST)
+Date: Wed, 11 Nov 2009 10:45:11 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Nov 2009 16:36:09 +0000
-Message-ID: <1257957370.25369.356.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-Broken-Reverse-DNS: no host name found for IP address 85.210.2.237
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+Message-id: <20091111154511.GA2761@denix.org>
+References: <1257953228-2353-1-git-send-email-Martin.Jansa@gmail.com>
+MIME-version: 1.0
+In-reply-to: <1257953228-2353-1-git-send-email-Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.1
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: OEDEM 2009 summary: DISTROs and FEATURES
+Subject: Re: [PATCH] bitbake.conf: SRCPV always upgradeable paths for	git recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,56 +37,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2009 16:41:55 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 11 Nov 2009 16:46:45 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-One topic which crops up on the mailing list now and again is the
-tension between, on one hand, the desire to have packages tailored to
-particular requirements or applications (for example, no x11 libs on a
-system that never runs X); and, on the other hand, the desire for
-"reproducible" builds.  How can we resolve this?
+On Wed, Nov 11, 2009 at 04:27:08PM +0100, Martin Jansa wrote:
+> * Holger Hans Peter Freyther <zecke@openmoko.org> did for the OM git
+>   tree that was never merged back into OE.
+> * Taken from xora/angstrom-srcpv branch where it rot for long enough
 
-After a bit of discussion we arrived at the following principles.  I
-think most/all of these are really just a formalisation of existing
-practice rather than a radically new departure, but I don't think they
-have previously been spelled out in this form:
+We also discussed it during the OEDEM...
 
-a) a DISTRO represents a coherent set of binaries that are expected to
-work together for a given MACHINE.  (If the distro chooses, there may
-also be scope to share binary packages between sets of MACHINEs.)
-
-b) we accept that, if the end user chooses to override parts of the
-DISTRO configuration, there are nonetheless a myriad ways in which he
-can generate incompatible binaries.  There doesn't seem to be much to
-say about this other than to discourage users from doing it.
-
-c) there is no expectation that binaries from different DISTROs, even on
-the same MACHINE, should be compatible.  (For example, they might use
-different C libraries or even different endianness.)
-
-d) for a given TMPDIR, the DISTRO setting is immutable.  If you change
-DISTRO you must rebuild from scratch in a different working tree.
-
-e) DISTROs should be encouraged to minimize the number of unbound
-variables which the user is expected to set in local.conf.  As a general
-principle, the tuple of (MACHINE, DISTRO) should be enough to completely
-determine the build environment.  Extra user-frobbable switches will
-undermine the coherence of the DISTRO.
-
-f) DISTROs have wide discretion to determine the contents of their own
-binary packages (e.g. configuring python with or without x11 support)
-and we should provide them with the mechanisms to do so.  There are
-already various ad-hoc mechanisms to accomplish this for certain
-packages (e.g. USE_LDCONFIG in glibc) and it would be desirable to come
-up with a more over-arching framework.
-
-g) the existing DISTRO_FEATURES variable is well suited to this role.
-We should encourage DISTROs to use it where conditionality is needed
-rather than inventing alternatives.
-
-p.
+-- 
+Denys
 
 
+> ---
+>  conf/bitbake.conf |    3 ++-
+>  1 files changed, 2 insertions(+), 1 deletions(-)
+> 
+> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+> index 39a1f27..7c0defe 100644
+> --- a/conf/bitbake.conf
+> +++ b/conf/bitbake.conf
+> @@ -570,7 +570,8 @@ UPDATECOMMAND_cvs = "/usr/bin/env 'PATH=${PATH}' cvs -d${CVSROOT} update -d -P $
+>  UPDATECOMMAND_svn = "/usr/bin/env svn update ${SVNCOOPTS}"
+>  SRCDATE = "${DATE}"
+>  SRCREV = "1"
+> -AUTOREV = "${@bb.fetch.get_srcrev(d)}"
+> +SRCPV = "${@bb.fetch.get_srcrev(d)}"
+> +AUTOREV = "${SRCPV}"
+>  
+>  SRC_URI = "file://${FILE}"
+>  
+> -- 
+> 1.6.5.2
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
