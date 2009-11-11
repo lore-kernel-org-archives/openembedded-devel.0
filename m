@@ -1,21 +1,21 @@
 Received: from [203.143.174.143] (helo=lemon.ken.nicta.com.au)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <peter.chubb@nicta.com.au>) id 1N8JZx-0001NV-Od
+	(envelope-from <peter.chubb@nicta.com.au>) id 1N8Ja4-0001Nk-Dw
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 21:14:13 +0100
+	Wed, 11 Nov 2009 21:14:19 +0100
 Received: from c220-239-171-171.farfl1.nsw.optusnet.com.au
-	([220.239.171.171]:54771 helo=quokka.chubb.wattle.id.au)
+	([220.239.171.171]:54773 helo=quokka.chubb.wattle.id.au)
 	by lemon.ken.nicta.com.au with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.69) (envelope-from <peter.chubb@nicta.com.au>)
-	id 1N8JGI-0002eR-NH for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 06:53:54 +1100
+	id 1N8JGc-0002eW-8f for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Nov 2009 06:54:13 +1100
 Received: from localhost ([127.0.0.1] helo=localhost.chubb.wattle.id.au)
 	by localhost with esmtp (Exim 4.69)
-	(envelope-from <peter.chubb@nicta.com.au>) id 1N8JFZ-0001m0-AA
+	(envelope-from <peter.chubb@nicta.com.au>) id 1N8JFt-0001m5-3k
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 06:53:05 +1100
-Date: Thu, 12 Nov 2009 06:53:05 +1100
-Message-ID: <87hbt0bzz2.wl%peter@chubb.wattle.id.au>
+	Thu, 12 Nov 2009 06:53:25 +1100
+Date: Thu, 12 Nov 2009 06:53:25 +1100
+Message-ID: <87fx8kbzyi.wl%peter@chubb.wattle.id.au>
 From: Peter Chubb <peter.chubb@nicta.com.au>
 To: openembedded-devel@lists.openembedded.org
 User-Agent: Wanderlust/2.14.0 (Africa) SEMI/1.14.6 (Maruoka) FLIM/1.14.9
@@ -41,7 +41,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2009 20:14:13 -0000
+X-List-Received-Date: Wed, 11 Nov 2009 20:14:20 -0000
 Content-Type: text/plain; charset=US-ASCII
 
 
