@@ -1,26 +1,26 @@
 Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1N81i1-0005Ym-0h
+	(envelope-from <holger+oe@freyther.de>) id 1N82Pi-0007cw-S9
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 02:09:20 +0100
+	Wed, 11 Nov 2009 02:54:29 +0100
 Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
 	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 782291B10C04
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 605251B10C04
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2009 01:18:45 +0000 (UTC)
+	Wed, 11 Nov 2009 02:03:55 +0000 (UTC)
 From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Nov 2009 02:07:40 +0100
+Date: Wed, 11 Nov 2009 02:52:48 +0100
 User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <1257858446.3077.3.camel@opal>
-In-Reply-To: <1257858446.3077.3.camel@opal>
+References: <DIIE.000005E3001861E8@192.168.11.6>
+In-Reply-To: <DIIE.000005E3001861E8@192.168.11.6>
 MIME-Version: 1.0
-Message-Id: <200911110207.40753.holger+oe@freyther.de>
+Message-Id: <200911110252.48370.holger+oe@freyther.de>
 X-SA-Exim-Connect-IP: 78.46.147.237
 X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: OEDEM: Summary of 'OE and Poky', 'Hosting', 'Bugtracker'
+Subject: Re: question meta-toolchain on x86_64 for armv5te
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,19 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2009 01:09:20 -0000
+X-List-Received-Date: Wed, 11 Nov 2009 01:54:30 -0000
 Content-Type: Text/Plain;
   charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
+On Tuesday 10 November 2009 17:03:06 Johannes Maier wrote:
+> Hi@all,
+> 
+> I'm new to openembedded and I didn't find any answers to my questions so I
+>  hope to find here some help.
+> 
+> I get an error while building the meta-toolchain on x86_64 for armv5te.
+> 
+> So I wanted to ask if it is in general better to use a 32bit system for
+>  such tasks since I don't get any error there?
 
-> It is noted that the current dev process does not work particularly
-> well,
-> some people think it is too easy to get commit access to OE.
-
-At WebKit we hand out commit access easily as well, this doesn't mean that 
-people can commit at free will... We still require review for every change.
+This is not 32 vs 64 bits... more likely if fortify is enabled during 
+compile.. The error looks like something I had fixed... so what are you 
+building, using which OE revision?
 
 z.
+
+
 
 
