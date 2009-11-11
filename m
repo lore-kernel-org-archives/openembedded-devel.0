@@ -1,29 +1,28 @@
-Received: from [74.125.78.147] (helo=ey-out-1920.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1N8I1b-0001wZ-Jf
+	(envelope-from <philb@gnu.org>) id 1N8I8t-0002G0-5r
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 19:34:38 +0100
-Received: by ey-out-1920.google.com with SMTP id 3so927526eyh.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2009 10:33:19 -0800 (PST)
-Received: by 10.213.23.87 with SMTP id q23mr1016994ebb.75.1257953869219;
-	Wed, 11 Nov 2009 07:37:49 -0800 (PST)
-Received: from xora-eee (www.xora.org.uk [80.68.91.202])
-	by mx.google.com with ESMTPS id 10sm566678eyd.47.2009.11.11.07.37.47
-	(version=SSLv3 cipher=RC4-MD5); Wed, 11 Nov 2009 07:37:48 -0800 (PST)
-Date: Wed, 11 Nov 2009 15:37:45 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Wed, 11 Nov 2009 19:42:10 +0100
+Received: from [85.210.2.237] (helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N8I7b-0001H9-9p
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 11 Nov 2009 18:40:47 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091111153745.GA2533@xora-eee>
-References: <1257953228-2353-1-git-send-email-Martin.Jansa@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1257953228-2353-1-git-send-email-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 74.125.78.147
-X-SA-Exim-Mail-From: dp@xora.org.uk
+In-Reply-To: <4AFB02B7.8060303@cs.put.poznan.pl>
+References: <1257957370.25369.356.camel@lenovo.internal.reciva.com>
+	<4AFB02B7.8060303@cs.put.poznan.pl>
+Date: Wed, 11 Nov 2009 18:40:40 +0000
+Message-ID: <1257964840.25369.421.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-Broken-Reverse-DNS: no host name found for IP address 85.210.2.237
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] bitbake.conf: SRCPV always upgradeable paths for git recipes
+Subject: Re: OEDEM 2009 summary: DISTROs and FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,45 +36,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2009 18:34:38 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 11 Nov 2009 18:42:10 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Graeme Gregory <dp@xora.org.uk>
-
-For inclusion in .dev
-
-Graeme
-
-On Wed, Nov 11, 2009 at 04:27:08PM +0100, Martin Jansa wrote:
-> * Holger Hans Peter Freyther <zecke@openmoko.org> did for the OM git
->   tree that was never merged back into OE.
-> * Taken from xora/angstrom-srcpv branch where it rot for long enough
-> ---
->  conf/bitbake.conf |    3 ++-
->  1 files changed, 2 insertions(+), 1 deletions(-)
+On Wed, 2009-11-11 at 19:30 +0100, Przemyslaw Wesolek wrote:
+> Phil Blundell wrote:
+> > d) for a given TMPDIR, the DISTRO setting is immutable.  If you change
+> > DISTRO you must rebuild from scratch in a different working tree.
 > 
-> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-> index 39a1f27..7c0defe 100644
-> --- a/conf/bitbake.conf
-> +++ b/conf/bitbake.conf
-> @@ -570,7 +570,8 @@ UPDATECOMMAND_cvs = "/usr/bin/env 'PATH=${PATH}' cvs -d${CVSROOT} update -d -P $
->  UPDATECOMMAND_svn = "/usr/bin/env svn update ${SVNCOOPTS}"
->  SRCDATE = "${DATE}"
->  SRCREV = "1"
-> -AUTOREV = "${@bb.fetch.get_srcrev(d)}"
-> +SRCPV = "${@bb.fetch.get_srcrev(d)}"
-> +AUTOREV = "${SRCPV}"
->  
->  SRC_URI = "file://${FILE}"
->  
-> -- 
-> 1.6.5.2
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> In consequence, this also holds for DEPLOY_DIR_PSTAGE making TMPDIR and
+> DISTRO immutable.
+
+I think the standard configuration is for DEPLOY_DIR_PSTAGE to be within
+TMPDIR, so the two things tend to go together.  But you're right, a
+DISTRO change would indeed invalidate the contents of DEPLOY_DIR_PSTAGE.
+
+p.
+
+
 
 
