@@ -1,38 +1,25 @@
-Received: from [66.80.197.243] (helo=looper.buglabs.net)
+Received: from [76.76.67.137] (helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ken@buglabs.net>) id 1N8GbM-0003RG-0U
+	(envelope-from <gary@mlbassoc.com>) id 1N8GgZ-0003dg-VN
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 18:03:27 +0100
-Received: from aphid.buglabs.net (aphid.buglabs.net [192.168.20.30])
-	by looper.buglabs.net (Postfix) with ESMTP id E31D634050
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2009 11:56:04 -0500 (EST)
-Received: from localhost (localhost [127.0.0.1])
-	by aphid.buglabs.net (Postfix) with ESMTP id 916BE28E002
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2009 11:57:57 -0500 (EST)
-X-Virus-Scanned: amavisd-new at aphid.buglabs.net
-Received: from aphid.buglabs.net ([127.0.0.1])
-	by localhost (aphid.buglabs.net [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id QQ73HluVYmTZ
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2009 11:57:57 -0500 (EST)
-Received: from [192.168.0.120] (t61.buglabs.net [192.168.0.120])
-	by aphid.buglabs.net (Postfix) with ESMTP id 1562028E001
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Nov 2009 11:57:57 -0500 (EST)
-From: Ken Gilmer <ken@buglabs.net>
+	Wed, 11 Nov 2009 18:08:51 +0100
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 9E68316608E3; Wed, 11 Nov 2009 10:00:52 -0700 (MST)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 063B31660872;
+	Wed, 11 Nov 2009 10:00:52 -0700 (MST)
+Message-ID: <4AFAEDC3.80404@mlbassoc.com>
+Date: Wed, 11 Nov 2009 10:00:51 -0700
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.6pre) Gecko/20091110 Shredder/3.0pre
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Organization: Bug Labs, Inc.
-Date: Wed, 11 Nov 2009 12:55:36 -0500
-Message-Id: <1257962136.6495.27.camel@localhost>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.5 
-X-SA-Exim-Connect-IP: 66.80.197.243
-X-SA-Exim-Mail-From: ken@buglabs.net
+X-SA-Exim-Connect-IP: 76.76.67.137
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: OE "repo tool" installer wiki page
+Subject: Prebuilt toolchains
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,30 +33,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2009 17:03:27 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 11 Nov 2009 17:08:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
+I'd like to use my own toolchains when building OpenEmbedded.
+I've tried to follow the information at:
+   http://docs.openembedded.org/usermanual/usermanual.html#commonuse_prebuilt_toolchain
+It's a bit terse and confusing, so I'm just trying to see
+what I need (I think the section tries to discuss too many
+concepts at once)
 
-Hi ~
+Anyway, I added these lines to my local.conf:
+   TARGET_SYS = "${TARGET_ARCH}-${TARGET_OS}"
+   ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}gcc "
+   ASSUME_PROVIDED += " virtual/libc "
 
-  At OEDEM several people discussed various approaches at automating (or
-making easier) the process of installing and configuring OE for new
-users.  Several different strategies were discussed.  The outcome of the
-discussion was to continue after the meeting and compare different
-approaches.  I've documented some details on how OTE does installation
-on this wiki page:
+This led to a number of other inferences which I don't understand.
+   NOTE: selecting glibc to satisfy virtual/libintl due to PREFERRED_PROVIDERS
+   NOTE: selecting glibc to satisfy runtime libsegfault due to PREFERRED_PROVIDER_virtual/libc = glibc
+   NOTE: selecting linux-libc-headers to satisfy runtime linux-libc-headers-dev due to PREFERRED_PROVIDER_linux-libc-headers = linux-libc-headers
+   NOTE: selecting glibc to satisfy runtime glibc due to PREFERRED_PROVIDER_virtual/libc = glibc
+   NOTE: selecting gcc-cross-intermediate to satisfy virtual/powerpc-linux-gcc-intermediate due to PREFERRED_PROVIDERS
+   NOTE: selecting linux-libc-headers to satisfy linux-libc-headers due to PREFERRED_PROVIDERS
+   NOTE: selecting glibc to satisfy virtual/libiconv due to PREFERRED_PROVIDERS
+   NOTE: selecting gcc-cross to satisfy runtime libgcc due to PREFERRED_PROVIDER_virtual/powerpc-linux-gcc = gcc-cross
+   NOTE: selecting binutils-cross to satisfy virtual/powerpc-linux-binutils due to PREFERRED_PROVIDERS
+   NOTE: selecting glibc-initial to satisfy virtual/powerpc-linux-libc-initial due to PREFERRED_PROVIDERS
+   NOTE: selecting glibc to satisfy virtual/powerpc-linux-libc-for-gcc due to PREFERRED_PROVIDERS
+   NOTE: selecting gcc-cross-initial to satisfy virtual/powerpc-linux-gcc-initial due to PREFERRED_PROVIDERS
 
-http://wiki.openembedded.net/index.php/EasyInstall
+At which point, OE goes off on its merry way to build the
+internal toolchains.
 
+What am I missing?
 
-thx
-ken
-
-
-
-
-
-
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
