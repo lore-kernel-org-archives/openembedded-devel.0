@@ -1,31 +1,29 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [74.125.78.147] (helo=ey-out-1920.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1N8Hza-00088w-O1
+	(envelope-from <dp@xora.org.uk>) id 1N8I1b-0001wZ-Jf
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 19:32:34 +0100
-Received: from [85.210.2.237] (helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N8HyJ-00018S-TF
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 18:31:12 +0000
-From: Phil Blundell <philb@gnu.org>
+	Wed, 11 Nov 2009 19:34:38 +0100
+Received: by ey-out-1920.google.com with SMTP id 3so927526eyh.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Nov 2009 10:33:19 -0800 (PST)
+Received: by 10.213.23.87 with SMTP id q23mr1016994ebb.75.1257953869219;
+	Wed, 11 Nov 2009 07:37:49 -0800 (PST)
+Received: from xora-eee (www.xora.org.uk [80.68.91.202])
+	by mx.google.com with ESMTPS id 10sm566678eyd.47.2009.11.11.07.37.47
+	(version=SSLv3 cipher=RC4-MD5); Wed, 11 Nov 2009 07:37:48 -0800 (PST)
+Date: Wed, 11 Nov 2009 15:37:45 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <d1b08f940911110941h3b145988s3afe5fe109b938b@mail.gmail.com>
-References: <4AF963A3.1050906@balister.org>
-	<20091110131554.GA25450@denix.org> <4AF996BE.2080904@balister.org>
-	<20091111161608.GA3246@denix.org>
-	<1257960636.25369.404.camel@lenovo.internal.reciva.com>
-	<d1b08f940911110941h3b145988s3afe5fe109b938b@mail.gmail.com>
-Date: Wed, 11 Nov 2009 18:31:05 +0000
-Message-ID: <1257964265.25369.416.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-Broken-Reverse-DNS: no host name found for IP address 85.210.2.237
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+Message-ID: <20091111153745.GA2533@xora-eee>
+References: <1257953228-2353-1-git-send-email-Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1257953228-2353-1-git-send-email-Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 74.125.78.147
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Mailing lists
+Subject: Re: [PATCH] bitbake.conf: SRCPV always upgradeable paths for git recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,25 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2009 18:32:34 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 11 Nov 2009 18:34:38 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, 2009-11-11 at 18:41 +0100, Andrea Adami wrote:
-> FWIW I experience since some days strange delays, probably caused by
-> greylisting.
-> I suspect all gmail users are affected.
+Signed-off-by: Graeme Gregory <dp@xora.org.uk>
+
+For inclusion in .dev
+
+Graeme
+
+On Wed, Nov 11, 2009 at 04:27:08PM +0100, Martin Jansa wrote:
+> * Holger Hans Peter Freyther <zecke@openmoko.org> did for the OM git
+>   tree that was never merged back into OE.
+> * Taken from xora/angstrom-srcpv branch where it rot for long enough
+> ---
+>  conf/bitbake.conf |    3 ++-
+>  1 files changed, 2 insertions(+), 1 deletions(-)
 > 
-> On my server I use following whitelist_dsname table for greylist demon
-> (policyd):
-> bigfish.com  	# bigfish.com has smtp servers behind multiple ips
-> google.com 	# Google for GMail 	^^^
-
-Yeah, it does look as though gmail folks are getting greylisted rather
-often.  I'll see if I can install a similar whitelist on ltg.
-
-p.
-
-
+> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+> index 39a1f27..7c0defe 100644
+> --- a/conf/bitbake.conf
+> +++ b/conf/bitbake.conf
+> @@ -570,7 +570,8 @@ UPDATECOMMAND_cvs = "/usr/bin/env 'PATH=${PATH}' cvs -d${CVSROOT} update -d -P $
+>  UPDATECOMMAND_svn = "/usr/bin/env svn update ${SVNCOOPTS}"
+>  SRCDATE = "${DATE}"
+>  SRCREV = "1"
+> -AUTOREV = "${@bb.fetch.get_srcrev(d)}"
+> +SRCPV = "${@bb.fetch.get_srcrev(d)}"
+> +AUTOREV = "${SRCPV}"
+>  
+>  SRC_URI = "file://${FILE}"
+>  
+> -- 
+> 1.6.5.2
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
