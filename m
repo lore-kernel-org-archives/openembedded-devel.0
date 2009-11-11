@@ -1,25 +1,25 @@
-Received: from [76.76.67.137] (helo=mail.chez-thomas.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1N8GgZ-0003dg-VN
+	(envelope-from <philb@gnu.org>) id 1N8Gl9-0003qP-JD
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Nov 2009 18:08:51 +0100
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 9E68316608E3; Wed, 11 Nov 2009 10:00:52 -0700 (MST)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 063B31660872;
-	Wed, 11 Nov 2009 10:00:52 -0700 (MST)
-Message-ID: <4AFAEDC3.80404@mlbassoc.com>
-Date: Wed, 11 Nov 2009 10:00:51 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.6pre) Gecko/20091110 Shredder/3.0pre
-MIME-Version: 1.0
+	Wed, 11 Nov 2009 18:13:35 +0100
+Received: from [85.210.2.237] (helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N8Gjr-0007hA-Hj
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 11 Nov 2009 17:12:12 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 76.76.67.137
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+Date: Wed, 11 Nov 2009 17:12:01 +0000
+Message-ID: <1257959521.25369.393.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-Broken-Reverse-DNS: no host name found for IP address 85.210.2.237
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Prebuilt toolchains
+Subject: OEDEM 2009 summary: Package management
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,45 +33,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2009 17:08:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 11 Nov 2009 17:13:35 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-I'd like to use my own toolchains when building OpenEmbedded.
-I've tried to follow the information at:
-   http://docs.openembedded.org/usermanual/usermanual.html#commonuse_prebuilt_toolchain
-It's a bit terse and confusing, so I'm just trying to see
-what I need (I think the section tries to discuss too many
-concepts at once)
+This was the last session of the OEDEM schedule and the number of
+participants was much reduced compared to the previous ones.  Partly as
+a result of that it was also very short.
 
-Anyway, I added these lines to my local.conf:
-   TARGET_SYS = "${TARGET_ARCH}-${TARGET_OS}"
-   ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}gcc "
-   ASSUME_PROVIDED += " virtual/libc "
+Key issue: opkg is the defacto standard for package management in
+OE-derived distros but its quality is perceived as low.  What can we do
+about this?
 
-This led to a number of other inferences which I don't understand.
-   NOTE: selecting glibc to satisfy virtual/libintl due to PREFERRED_PROVIDERS
-   NOTE: selecting glibc to satisfy runtime libsegfault due to PREFERRED_PROVIDER_virtual/libc = glibc
-   NOTE: selecting linux-libc-headers to satisfy runtime linux-libc-headers-dev due to PREFERRED_PROVIDER_linux-libc-headers = linux-libc-headers
-   NOTE: selecting glibc to satisfy runtime glibc due to PREFERRED_PROVIDER_virtual/libc = glibc
-   NOTE: selecting gcc-cross-intermediate to satisfy virtual/powerpc-linux-gcc-intermediate due to PREFERRED_PROVIDERS
-   NOTE: selecting linux-libc-headers to satisfy linux-libc-headers due to PREFERRED_PROVIDERS
-   NOTE: selecting glibc to satisfy virtual/libiconv due to PREFERRED_PROVIDERS
-   NOTE: selecting gcc-cross to satisfy runtime libgcc due to PREFERRED_PROVIDER_virtual/powerpc-linux-gcc = gcc-cross
-   NOTE: selecting binutils-cross to satisfy virtual/powerpc-linux-binutils due to PREFERRED_PROVIDERS
-   NOTE: selecting glibc-initial to satisfy virtual/powerpc-linux-libc-initial due to PREFERRED_PROVIDERS
-   NOTE: selecting glibc to satisfy virtual/powerpc-linux-libc-for-gcc due to PREFERRED_PROVIDERS
-   NOTE: selecting gcc-cross-initial to satisfy virtual/powerpc-linux-gcc-initial due to PREFERRED_PROVIDERS
+RP: not many problems encountered with opkg in poky
 
-At which point, OE goes off on its merry way to build the
-internal toolchains.
+PB: opkg generally performs OK within its own "comfort envelope".  Main
+triggers for badness seem to be online upgrades, and the requirement to
+make a decision between two alternatives.  If you stay away from those
+things and use opkg only for image construction then it is not so bad.
 
-What am I missing?
+Can we fix opkg to make it work better?
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+- many have tried and not gotten anywhere, e.g. openmoko spent a while
+hacking on it but many problems remain.  Suspect that maybe the codebase
+in its current form is just unfixable and it would be better to throw it
+away.
+
+- nonetheless, Graham Gower is trying to repair it.  All strength to his
+elbow!
+
+Can we use something else instead?
+
+- dpkg: does its job well but this is only half the problem (and opkg is
+not so bad at this part anyway).  Not obvious that this would help very
+much.  Note that busybox includes a dpkg implementation nowadays as
+well.
+
+- apt: high quality but footprint is too big.  written in C++, which is
+a big deal for folks who would not otherwise be shipping libstdc++.
+Run-time memory requirements also larger than we think we can tolerate
+on small devices.
+
+- others?  No obvious candidates come to mind.  
+
+Can we do something better for image construction, at least?
+
+- when building an initial rootfs, can bring the whole power of the
+build machine to bear on the problem.  Can we use another tool to
+resolve dependencies, then just pass a flat package list to opkg/dpkg
+for installation?
+
+- it would be nice to leverage bitbake's knowledge of the dependency
+graph if this is possible
+
+- RP: it is not possible, bitbake thinks only in terms of task
+dependencies and doesn't care about runtime ones per se.  Metadata for
+output packages is not re-injected into bitbake core and hence not
+usable for this purpose.
+
+- PB: Drat.
+
+- could write another program to do this but it would not be trivial
+
+Conclusions
+
+- right now, opkg seems to be as good as it gets
+
+- encourage folks to write replacements, maybe OE e.V. can offer
+bounties for this at some point
+
+- improving image construction is a worthwhile goal in itself: not
+everybody has the capability/desire to do online upgrades.
+
+
+
 
 
