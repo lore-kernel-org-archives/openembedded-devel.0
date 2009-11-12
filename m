@@ -1,25 +1,26 @@
-Received: from [194.158.229.47] (helo=smtp-be-02.be08.sunrise.ch)
+Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dv@vollmann.ch>) id 1N8Miu-0005SL-5W
+	(envelope-from <holger+oe@freyther.de>) id 1N8OLi-0005g8-6v
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 00:35:39 +0100
-Received: from [192.168.26.14] (212-98-43-140.static.adslpremium.ch
-	[212.98.43.140])
-	by smtp-be-02.be08.sunrise.ch (8.13.1/8.12.10) with ESMTP id
-	nABNJM8f023804; Thu, 12 Nov 2009 00:19:23 +0100
-Message-ID: <4AFB46E5.10700@vollmann.ch>
-Date: Thu, 12 Nov 2009 00:21:09 +0100
-From: Detlef Vollmann <dv@vollmann.ch>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Thu, 12 Nov 2009 02:19:49 +0100
+Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
+	[123.192.145.111])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id E33EF1B10C04;
+	Thu, 12 Nov 2009 01:29:16 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1257957370.25369.356.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1257957370.25369.356.camel@lenovo.internal.reciva.com>
-X-SA-Exim-Connect-IP: 194.158.229.47
-X-SA-Exim-Mail-From: dv@vollmann.ch
+Date: Thu, 12 Nov 2009 02:17:46 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <hdfdoe$kj7$1@ger.gmane.org>
+In-Reply-To: <hdfdoe$kj7$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <200911120217.46744.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: OEDEM 2009 summary: DISTROs and FEATURES
+Cc: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+Subject: Re: Blackfin toolchain question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,22 +34,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Nov 2009 23:35:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 12 Nov 2009 01:19:49 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On 11/11/09 17:36, Phil Blundell wrote:
-> e) DISTROs should be encouraged to minimize the number of unbound
-> variables which the user is expected to set in local.conf.  As a general
-> principle, the tuple of (MACHINE, DISTRO) should be enough to completely
-> determine the build environment.  Extra user-frobbable switches will
-> undermine the coherence of the DISTRO.
-This ('build environment') could be misleading.
-I'd say it this way:
-  DISTRO defines what to build
-  local.conf defines, how to build (directory paths, parallelism, ...)
+On Wednesday 11 November 2009 23:27:26 Dmitry Eremin-Solenikov wrote:
+> Hello,
+> 
+> I'm currently trying to restore/update blackfin toolchain. One of the major
+>  problems I've stumbled upon are versioned scripts/export symbols.
+>  Basically there are lot's of software starting from g++ itself that have
+>  symbol versioning scripts. The problem is that blackfin arch prepends all
+>  symbols with underscore, thus breaking all that scripts.
 
-   Detlef
 
+Do you have a link to the ABI? Isn't this underscore thingie defined by SystemV 
+ABI?
+
+z.
 
 
