@@ -1,25 +1,39 @@
-Received: from [78.47.116.26] (helo=drlauer-research.com)
+Received: from [150.254.30.30] (helo=libra.cs.put.poznan.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1N8V4L-0000hv-M9
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 09:30:20 +0100
-Received: from [192.168.1.7] (dialbs-092-079-168-007.static.arcor-ip.net
-	[92.79.168.7])
-	by drlauer-research.com (Postfix) with ESMTP id 0142A128001A
+	(envelope-from <przemyslaw.wesolek@cs.put.poznan.pl>)
+	id 1N8V8m-0000rm-CU for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Nov 2009 09:34:55 +0100
+Received: from kas30pipe.localhost (unknown [127.0.0.1])
+	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 2A28C90
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 10:14:59 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Thu, 12 Nov 2009 08:33:33 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at cs.put.poznan.pl
+Received: from libra.cs.put.poznan.pl ([127.0.0.1])
+	by localhost (libra.cs.put.poznan.pl [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id AS8xgzpbOQhS
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Nov 2009 09:33:32 +0100 (CET)
+Received: from [150.254.31.31] (idss-pw.cs.put.poznan.pl [150.254.31.31])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id DCA2C82
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Nov 2009 09:33:32 +0100 (CET)
+Message-ID: <4AFBC85D.2000204@cs.put.poznan.pl>
+Date: Thu, 12 Nov 2009 09:33:33 +0100
+From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
+Organization: Poznan University of Technology
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Organization: Vanille-Media
-Date: Thu, 12 Nov 2009 09:29:00 +0100
-Message-ID: <1258014540.6879.18.camel@opal>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+X-Enigmail-Version: 0.96.0
+X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0278], KAS30/Release
+X-SpamTest-Info: Not protected
+X-SA-Exim-Connect-IP: 150.254.30.30
+X-SA-Exim-Mail-From: przemyslaw.wesolek@cs.put.poznan.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: OEDEM: Summary of the 'Splitting the tree' session
+Subject: Patches procedure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,51 +47,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 08:30:20 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 12 Nov 2009 08:34:55 -0000
+Content-Type: text/plain; charset=ISO-8859-2
 Content-Transfer-Encoding: 7bit
 
-Hi guys,
+Hi,
 
-here's the summary of the 'splitting the tree' session:
+On 5 November I posted two patches considering boost. None of them has
+been applied to git.
 
-Nobody seems to disagree with splitting the metadata tree into more
-managable chunks. The expected goals are:
+As I'm a novice here, am I breaking some social contract or missing some
+procedural steps to get patches applied? Shall I ask for Ack's and
+commits directly, or simply sending patches is enough?
 
-1. Making it easier to find things,
-2. Being able to mask whole groups out for improved parsing
-3. Identifying core code which needs to always work, hence improving the
-observed quality of OE.
+I don't want to sound rude, I just don't understand the "machinery" and
+wiki doesn't explain anything beyond my current knowledge.
 
-Several criteria for splitting were discussed and there was a consensus
-for splitting by functional complex. A tentative list of directories to
-be used is:
-
-base (10% underlying recipes)
-toolchain
-x11
-framebuffer
-gtk (includes gnome apps)
-qte (includes opie and kde)
-efl
-
-The attendendees were well aware of all the inherent problems with
-taxonomy and its different meaning to anybody in the first place as well
-as that some recipes will always be difficult to categorize since they
-are very flexible to configure. This did not prevent the consensus that
-splitting up will be necessary to improve quality.
-
-It was noted that oestats should be enhanced to be able to report a
-subset of stats to start developing a test matrix of things which should
-always work.
-
-More discussion shall be carried on on this list and after the TSC has
-been elected, it will make a final decision.
-
-Cheers,
-
-:M:
-
-
+Przemek
 
 
