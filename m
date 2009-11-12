@@ -1,24 +1,38 @@
-Received: from [12.173.51.132] (helo=emailgateway.hillcrestlabs.com)
+Received: from [209.85.160.53] (helo=mail-pw0-f53.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Chris.Conroy@hillcrestlabs.com>) id 1N8bW3-00030n-Pd
+	(envelope-from <andrea.adami@gmail.com>) id 1N8bXX-00036L-Of
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 16:23:22 +0100
-X-AuditID: 0a1e000a-b7b8cae000000d7b-c1-4afc2818a914
-From: Chris Conroy <Chris.Conroy@hillcrestlabs.com>
+	Thu, 12 Nov 2009 16:24:54 +0100
+Received: by pwj11 with SMTP id 11so1385319pwj.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Nov 2009 07:23:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=kppQ+0bKYFIWi3yIq75PQx4InppxfUe6j4YInZRPURM=;
+	b=R6FWyEfoA53vfI07UFnDP9HFjy4hZnJcmTL0vPNj7UzOQKOU0fJRR4jrnwViThigFu
+	AoFNfbKoMtrYTLtkrEjD6GtIC2pNw67AfuJe+qJwaGTP9X5tBn1czuYCEeIIc2l9O+jU
+	Kumw1pKr4YrGvqsCeyF9ilgRPjrjWNym3ug+w=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=xDW9udQ9Sd5Pvla7n9z2gkjPegPxhkzaE54lPHrfiqPEKyw2TCO7t5bFMVPm75e71y
+	jIFheT8Y8WnT+JMKr2uUWoP9mMsK8Rr1cjdzfEwzwloex1UYag5IXguamRQhL7DeLkTY
+	57i15Dnzlyo7QZG4AujAIQ94I0PKXiYk4x0dk=
+MIME-Version: 1.0
+Received: by 10.140.136.21 with SMTP id j21mr168665rvd.271.1258038066368; Thu, 
+	12 Nov 2009 07:01:06 -0800 (PST)
+In-Reply-To: <200911121520.18394.pieterg@gmx.com>
+References: <200911121520.18394.pieterg@gmx.com>
+Date: Thu, 12 Nov 2009 16:01:06 +0100
+Message-ID: <d1b08f940911120701r41cef8fam218846ae8dfaf8be@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <6ec4247d0911112034v54f570ccn4c4334a1da094f0d@mail.gmail.com>
-References: <200911120457.39018.holger+oe@freyther.de>
-	<6ec4247d0911112034v54f570ccn4c4334a1da094f0d@mail.gmail.com>
-Date: Thu, 12 Nov 2009 10:14:29 -0500
-Message-Id: <1258038869.4924.67.camel@conroy-linux>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-Brightmail-Tracker: AAAAAA==
-X-SA-Exim-Connect-IP: 12.173.51.132
-X-SA-Exim-Mail-From: Chris.Conroy@hillcrestlabs.com
+X-SA-Exim-Connect-IP: 209.85.160.53
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: meta-toolchain continues to woe
+Subject: Re: initramfs dependency loop
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,29 +46,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 15:23:23 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 12 Nov 2009 15:24:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, 2009-11-12 at 15:04 +1030, Graham Gower wrote:
-> 2009/11/12 Holger Hans Peter Freyther <holger+oe@freyther.de>:
-> >
-> > ./run.do_populate_sdk.27727
-> > Collected errors:
-> >  * Could not obtain administrative lock for offline root (ERR: Bad file
-> > descriptor)  at /data/openembedded/build/arm/cortex-a8/tmp/work/x86_64-armv7a-
-> > sdk-angstrom-linux-gnueabi/meta-toolchain-1.0-r0/sdk/image//usr/lib/opkg/lock
-> 
-> Presumably, the lock file could not be creat()ed. Unfortunately, there
-> is no error checking on that creat() call in opkg and you don't get a
-> useful error message.
-I submitted a patch to opkg back in September to fix this error message
-to be a bit more useful. If you upgrade to opkg >=216 it will save you
-some headaches whenever this error occurs.
+>I'm using an initramfs image, based on klibc.
+Same here.
+I fear you need a second recipe for the initramfs-enabled kernel.
 
-http://code.google.com/p/opkg/issues/detail?id=22
+See                    /conf/machine/include/initramfs-kexecboot.inc
+and the triplet    /recipes/kexecboot , initramfs-kexecboot-image ,
+linux-kexecboot
 
+Regards
 
---Chris Conroy
+Andrea
 
 
