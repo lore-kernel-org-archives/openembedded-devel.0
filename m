@@ -1,26 +1,32 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1N8YEK-0004FO-Eu
+	(envelope-from <philb@gnu.org>) id 1N8YFl-0004L4-A8
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 12:52:51 +0100
-Received: (qmail 19818 invoked by uid 1003); 12 Nov 2009 11:51:28 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 12 Nov 2009 11:51:28 -0000
-Message-ID: <4AFBF6BF.9030204@balister.org>
-Date: Thu, 12 Nov 2009 06:51:27 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
-	Thunderbird/3.0b4
-MIME-Version: 1.0
+	Thu, 12 Nov 2009 12:54:20 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N8YET-0004GX-T5
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Nov 2009 11:52:58 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1N8YES-0006jd-FM
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Nov 2009 11:52:56 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-References: <alpine.LFD.2.00.0911120045170.1265@localhost>
-In-Reply-To: <alpine.LFD.2.00.0911120045170.1265@localhost>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+In-Reply-To: <hdfdoe$kj7$1@ger.gmane.org>
+References: <hdfdoe$kj7$1@ger.gmane.org>
+Date: Thu, 12 Nov 2009 11:52:52 +0000
+Message-Id: <1258026772.1484.358.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: xterm: either fix it, or remove it. please.
+Subject: Re: Blackfin toolchain question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,45 +40,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 11:52:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 12 Nov 2009 11:54:20 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 11/12/2009 12:47 AM, Robert P. J. Day wrote:
->
->    seriously, either the build of xterm_207 should be fixed, or that
-> package should be dropped in its entirety.  it's been at least three
-> weeks since i pointed out that it doesn't build, and even explained in
-> detail *why* it doesn't build and how to fix it.  to no avail.
->
->    so, a humble suggestion -- either fix it, or remove it from OE
-> entirely.
+On Wed, 2009-11-11 at 22:27 +0000, Dmitry Eremin-Solenikov wrote:
+> I'm currently trying to restore/update blackfin toolchain. One of the major problems I've stumbled upon
+> are versioned scripts/export symbols. Basically there are lot's of software starting from g++ itself
+> that have symbol versioning scripts. The problem is that blackfin arch prepends all symbols with underscore,
+> thus breaking all that scripts.
+> 
+> My first intention was to follow the alsa-libs approach: handle all prefixing on package-per-package basis.
+> However that would be a nigtmare.
+> 
+> My current intention (that at least partially works) is to make libtool (when it's used) generate correct
+> versioning scripts and resort to package-per-package updating after that.
+> 
+> The problem comes from C++ world, where versioning script can contain unmangled name, but it's demangled
+> name that should be prefixed with underscore.
+> 
+> So I have a bit hackish idea: maybe it's better to hack ld to accept scripts w/o underscores and prefix all
+> symbols with it? This will eliminate most of changes. The question is if this patch is acceptable for OE?
+> Does this approach sound too hackish?
 
-Current status, dev changes aren't building at all for me and now the 
-machine I work decided to hang in grub. Yah, this recipe is cursed.
+How do other Blackfin folks deal with this issue?  It doesn't sound like
+there is anything OE-specific about the problem you are facing, and I
+would have thought that it is something that should be solved upstream
+rather than with a local hack in OE.
 
-You could remove it locally for your build.
+Linker version scripts operate on symbol names, not on function names,
+so I don't think that having the underscores automatically added here
+would be appropriate.  
 
-Philip
+It is a little bit unfortunate that the Blackfin folks have decided to
+put these underscores in their symbols.  The ELF gABI calls for symbol
+names to be the same as C function names (i.e. no prefix) and, although
+I guess the psABI is permitted to countermand that, the vast majority of
+architectures do follow the gABI convention.  Underscore-prefixed symbol
+names are fairly common in the a.out and COFF worlds but of course there
+are no version scripts there so this issue does not arise.
+
+p.
 
 
->
-> rday
-> --
->
-> ========================================================================
-> Robert P. J. Day                               Waterloo, Ontario, CANADA
->
->              Linux Consulting, Training and Kernel Pedantry.
->
-> Web page:                                          http://crashcourse.ca
-> Twitter:                                       http://twitter.com/rpjday
-> ========================================================================
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
