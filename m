@@ -1,42 +1,38 @@
-Received: from [150.254.30.30] (helo=libra.cs.put.poznan.pl)
+Received: from [93.97.175.187] (helo=dan.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <przemyslaw.wesolek@cs.put.poznan.pl>)
-	id 1N8WZN-0003GY-LF for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 11:06:28 +0100
-Received: from kas30pipe.localhost (unknown [127.0.0.1])
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 607DA89
+	(envelope-from <rpurdie@rpsys.net>) id 1N8Wd0-0003MM-Sl
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Nov 2009 11:10:14 +0100
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nACA5jbn006916 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Nov 2009 10:05:46 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id 5NSW+HewhbYA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 10:05:06 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at cs.put.poznan.pl
-Received: from libra.cs.put.poznan.pl ([127.0.0.1])
-	by localhost (libra.cs.put.poznan.pl [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id KA5deIT3fvzY
+	Thu, 12 Nov 2009 10:05:45 +0000 (GMT)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nACA5a6J006887
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 11:05:06 +0100 (CET)
-Received: from [150.254.31.31] (idss-pw.cs.put.poznan.pl [150.254.31.31])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 1A7DB88
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 11:05:06 +0100 (CET)
-Message-ID: <4AFBDDD2.7010602@cs.put.poznan.pl>
-Date: Thu, 12 Nov 2009 11:05:06 +0100
-From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
-Organization: Poznan University of Technology
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Thu, 12 Nov 2009 10:05:43 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1257427464-316-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>	<20091105140617.GA27537@mi.fu-berlin.de>	<4AF2EAF3.5020808@cs.put.poznan.pl>
-	<alpine.LFD.2.00.0911051014270.7161@localhost>
-In-Reply-To: <alpine.LFD.2.00.0911051014270.7161@localhost>
-X-Enigmail-Version: 0.96.0
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0278], KAS30/Release
-X-SpamTest-Info: Not protected
-X-SA-Exim-Connect-IP: 150.254.30.30
-X-SA-Exim-Mail-From: przemyslaw.wesolek@cs.put.poznan.pl
+In-Reply-To: <200911121045.36412.holger+oe@freyther.de>
+References: <4AFBA741.6090207@techsol.ca>
+	<200911121045.36412.holger+oe@freyther.de>
+Date: Thu, 12 Nov 2009 10:03:48 +0000
+Message-Id: <1258020228.7382.29.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] boost-1.33.1: Corrected GNU_HASH error.
+Subject: Re: curl-native doesn't install includes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,31 +46,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 10:06:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 12 Nov 2009 10:10:14 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Robert P. J. Day wrote:
-> On Thu, 5 Nov 2009, Przemyslaw Wesolek wrote:
+On Thu, 2009-11-12 at 10:45 +0100, Holger Hans Peter Freyther wrote:
+> On Thursday 12 November 2009 07:12:17 Dallas Foley wrote:
+> > Pretty sure curl-native doesn't install it's includes, because from a clean
+> > build opkg-native cant' find curl includes.
+> > 
+> > $ git show-ref org.openembedded.dev
+> > 0462985d8af5e8d2a71f548abe29c6e3bbaa2d2a refs/heads/org.openembedded.dev
+> > 
+> > I'm not really sure if this patch is correct, but seems to work.
 > 
->> Henning Heinold wrote:
->>> thanks for the patch, but I wonder who is using this older
->>> version. Mainly 1.3.36 is used.
->> Did you mean 1.36?
->>
->> I agree, the older versions look like unmaintained for a long time.
-> 
->   if you go to boost's home page, they don't even *list* versions
-> earlier than 1.36:
-> 
->   http://www.boost.org/users/news/
-> 
+> Is this a recent breakage? Could you attempt to build from a weeks older OE 
+> metadata?
 
-They do, but as 1.33 is not news anymore ;) it appears on history page:
+I can confirm this is a recent breakage and I'll push some fixes
+shortly.
 
-  http://www.boost.org/users/history/
+Cheers,
 
-Przemek
+Richard
 
 
 
