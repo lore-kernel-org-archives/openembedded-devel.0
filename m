@@ -1,28 +1,36 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1N8Rzj-0002bw-9H
+	(envelope-from <rpjday@crashcourse.ca>) id 1N8SY0-00008l-HI
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 06:13:22 +0100
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id C25C41B10C04
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 05:22:50 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Nov 2009 06:11:24 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <200911120457.39018.holger+oe@freyther.de>
-	<6ec4247d0911112034v54f570ccn4c4334a1da094f0d@mail.gmail.com>
-	<200911120549.11166.holger+oe@freyther.de>
-In-Reply-To: <200911120549.11166.holger+oe@freyther.de>
+	Thu, 12 Nov 2009 06:48:47 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1N8SWl-0002kJ-FI for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Nov 2009 00:47:27 -0500
+Date: Thu, 12 Nov 2009 00:47:22 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.00.0911120045170.1265@localhost>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
-Message-Id: <200911120611.24699.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: meta-toolchain continues to woe
+Subject: xterm: either fix it, or remove it. please.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,29 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 05:13:22 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-
-On Thursday 12 November 2009 05:49:11 Holger Hans Peter Freyther wrote:
-
-> The test case is really simple and I will repeat it here:
-> 
-> 	bitbake -c populate_sdk -b meta-toolchain.bb
+X-List-Received-Date: Thu, 12 Nov 2009 05:48:47 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
-bisect shows me:
-	bea72c2fecde175add169bb55df1922b048030c8
+  seriously, either the build of xterm_207 should be fixed, or that
+package should be dropped in its entirety.  it's been at least three
+weeks since i pointed out that it doesn't build, and even explained in
+detail *why* it doesn't build and how to fix it.  to no avail.
 
+  so, a humble suggestion -- either fix it, or remove it from OE
+entirely.
 
-IMHO the pace of the recent classes/ change was way too high, a branch and 
-some builds would have been a lot better (no critics on the changes 
-themselves). I'm about to write a simple meta-toolchain checker and plan to 
-run it once a a week.... or if someone has a spare machine I would run this 
-test there with every day..
+rday
+--
 
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
 
-z.
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
