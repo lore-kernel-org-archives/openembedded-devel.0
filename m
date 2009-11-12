@@ -1,41 +1,38 @@
-Received: from [209.85.216.175] (helo=mail-px0-f175.google.com)
+Received: from [85.33.2.12] (helo=smtp-out01.alice.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1N8h3K-0000wm-Ib
+	(envelope-from <GNUtoo@no-log.org>) id 1N8hSH-0006Fb-8Y
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 22:18:05 +0100
-Received: by pxi5 with SMTP id 5so1834077pxi.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 13:16:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=MhN/7XaOr0ikOo2IRpiGl/08ZvVOWchig6cqSaxdYvo=;
-	b=e8Vfqc127IDRO97DoUfQOBLG7dS/GEYZvwRwBNrwW+RlV5rYeVx48EUHY2KA3EJTmw
-	eBKde/oWePBU/DT5QBEHEWBiMOubOS+fxDznAurz9DlOl1BMWqBETDNCa0c6Odo1ymO2
-	OfQO/9eW1X65eglnB98fabkQaE/0QE0PN4ezQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=fcBRHDTVlBq77zwxkUgeW0Q3EuwhLny5mayFyLPIvxq2V7aRwslA8421NGTBTdTEoE
-	ptzmaA86FFC+mKTbCpT4AMiac+wBfsTd0D7jfDi8OobgpSpV2wA3IF0j9fOPgqO3tILB
-	Y0mHsJCBfU6dxltHjq6WeIXOBFF8LbxQILyLg=
-MIME-Version: 1.0
-Received: by 10.143.27.37 with SMTP id e37mr376889wfj.234.1258060602562; Thu, 
-	12 Nov 2009 13:16:42 -0800 (PST)
-In-Reply-To: <1258039776.4924.69.camel@conroy-linux>
-References: <200911120457.39018.holger+oe@freyther.de>
-	<6ec4247d0911112034v54f570ccn4c4334a1da094f0d@mail.gmail.com>
-	<1258038869.4924.67.camel@conroy-linux>
-	<1258039776.4924.69.camel@conroy-linux>
-Date: Fri, 13 Nov 2009 07:46:42 +1030
-Message-ID: <6ec4247d0911121316p41602634l75a789e752cc286f@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+	Thu, 12 Nov 2009 22:43:52 +0100
+Received: from FBCMMO01.fbc.local ([192.168.68.195]) by smtp-out01.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 12 Nov 2009 22:42:30 +0100
+Received: from FBCMCL01B08.fbc.local ([192.168.171.46]) by FBCMMO01.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 12 Nov 2009 22:42:30 +0100
+Received: from [192.168.10.100] ([79.54.10.26]) by FBCMCL01B08.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Thu, 12 Nov 2009 22:42:29 +0100
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+In-Reply-To: <4AFC58B0.3080000@mwester.net>
+References: <alpine.LFD.2.00.0911120045170.1265@localhost>
+	<200911120656.41249.holger+oe@freyther.de>
+	<200911120722.09166.holger+oe@freyther.de>
+	<alpine.LFD.2.00.0911120125380.1977@localhost>
+	<ac9c93b10911120015j5b8cbc07j30f57f2dc68987ca@mail.gmail.com>
+	<alpine.LFD.2.00.0911120727540.7268@localhost>
+	<ac9c93b10911120447k496f094bg478dc05ae612b4a9@mail.gmail.com>
+	<4AFC58B0.3080000@mwester.net>
+Date: Thu, 12 Nov 2009 22:42:24 +0100
+Message-Id: <1258062144.13299.1.camel@gnutoo-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-OriginalArrivalTime: 12 Nov 2009 21:42:29.0654 (UTC)
+	FILETIME=[08995B60:01CA63E1]
+X-SA-Exim-Connect-IP: 85.33.2.12
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: meta-toolchain continues to woe
+Subject: Re: xterm: either fix it, or remove it. please.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,18 +46,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 21:18:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 12 Nov 2009 21:43:52 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Chris,
-The patch you submitted prints out an error from the lockf() function
-call. Which is fine, but its more common for the creat() call to fail
-before hand, meaning that the lockf() function would have be passed -1
-as the file descriptor.
+> Is it practical?  I think the answer is no.  In my experience, tools
+> like selinux have a tendency to require inordinate amounts of
+> administrative burden that just isn't practical in a development
+> environment.  I think requiring that selinux be disabled on build
+> hosts
+> is a reasonable requirement, and will avoid wasting a lot of cycles
+> that
+> should be spent on OE, and not on administration (or sending lots of
+> emails).
+What about supporting only the unconfined user selinux
+type(unconfined_u),in targeted mode?
+Denis.
 
-I made a small change to hopefully improve this.
-http://code.google.com/p/opkg/source/detail?r=288
 
--Graham
 
 
