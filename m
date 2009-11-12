@@ -1,38 +1,38 @@
-Received: from [93.97.175.187] (helo=dan.rpsys.net)
+Received: from [85.214.48.103] (helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1N8Wd0-0003MM-Sl
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1N8X1H-0001XJ-39
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 11:10:14 +0100
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nACA5jbn006916 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 10:05:46 GMT
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id 5NSW+HewhbYA
+	Thu, 12 Nov 2009 11:35:18 +0100
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 110CA1100226
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 10:05:45 +0000 (GMT)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nACA5a6J006887
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	Thu, 12 Nov 2009 11:33:58 +0100 (CET)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 130331100223
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 10:05:43 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Thu, 12 Nov 2009 11:33:57 +0100 (CET)
+Received: from rhein.familie-heinold.de (unknown [78.52.239.229])
+	by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Nov 2009 11:33:57 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 73DFD3C109; Thu, 12 Nov 2009 11:33:56 +0100 (CET)
+Date: Thu, 12 Nov 2009 11:33:56 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200911121045.36412.holger+oe@freyther.de>
-References: <4AFBA741.6090207@techsol.ca>
-	<200911121045.36412.holger+oe@freyther.de>
-Date: Thu, 12 Nov 2009 10:03:48 +0000
-Message-Id: <1258020228.7382.29.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-SA-Exim-Connect-IP: 93.97.175.187
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Message-ID: <20091112103356.GA30768@rhein.zuhause.netz>
+References: <4AFBC85D.2000204@cs.put.poznan.pl>
+MIME-Version: 1.0
+In-Reply-To: <4AFBC85D.2000204@cs.put.poznan.pl>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: curl-native doesn't install includes
+Subject: Re: Patches procedure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,29 +46,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 10:10:14 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 12 Nov 2009 10:35:18 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Thu, 2009-11-12 at 10:45 +0100, Holger Hans Peter Freyther wrote:
-> On Thursday 12 November 2009 07:12:17 Dallas Foley wrote:
-> > Pretty sure curl-native doesn't install it's includes, because from a clean
-> > build opkg-native cant' find curl includes.
-> > 
-> > $ git show-ref org.openembedded.dev
-> > 0462985d8af5e8d2a71f548abe29c6e3bbaa2d2a refs/heads/org.openembedded.dev
-> > 
-> > I'm not really sure if this patch is correct, but seems to work.
+On Thu, Nov 12, 2009 at 09:33:33AM +0100, Przemyslaw Wesolek wrote:
+> Hi,
 > 
-> Is this a recent breakage? Could you attempt to build from a weeks older OE 
-> metadata?
+> On 5 November I posted two patches considering boost. None of them has
+> been applied to git.
+> 
+> As I'm a novice here, am I breaking some social contract or missing some
+> procedural steps to get patches applied? Shall I ask for Ack's and
+> commits directly, or simply sending patches is enough?
+> 
+> I don't want to sound rude, I just don't understand the "machinery" and
+> wiki doesn't explain anything beyond my current knowledge.
+> 
+> Przemek
 
-I can confirm this is a recent breakage and I'll push some fixes
-shortly.
+The problem is time and man power. And as I said earlier I only have the time to fix the
+packages with the latest version. The best solution I can think of is, that you apply
+for write access. So you have to write an email to the dev list with pointers
+to your patches and ask for write access. If 3 devs or 2 from core(steering comitee now?) 
+give there ack you have to send your ssh-key to the admins.
 
-Cheers,
-
-Richard
-
+Bye Henning
 
 
