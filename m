@@ -1,27 +1,27 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1N8eou-0002Rm-O2
+Received: from [72.167.82.84] (helo=p3plsmtpa01-04.prod.phx3.secureserver.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1N8erF-0002at-Mg
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 19:55:04 +0100
-Received: (qmail 26514 invoked by uid 1003); 12 Nov 2009 18:53:41 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 12 Nov 2009 18:53:40 -0000
-Message-ID: <4AFC59B3.8030803@balister.org>
-Date: Thu, 12 Nov 2009 13:53:39 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
-	Thunderbird/3.0b4
+	Thu, 12 Nov 2009 19:57:29 +0100
+Received: (qmail 8584 invoked from network); 12 Nov 2009 18:49:25 -0000
+Received: from unknown (75.49.209.68)
+	by p3plsmtpa01-04.prod.phx3.secureserver.net (72.167.82.84) with ESMTP;
+	12 Nov 2009 18:49:25 -0000
+Message-ID: <4AFC58B0.3080000@mwester.net>
+Date: Thu, 12 Nov 2009 12:49:20 -0600
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23 Mnenhy/0.7.6.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1257427464-316-1-git-send-email-przemyslaw.wesolek@cs.put.poznan.pl>	<20091105140617.GA27537@mi.fu-berlin.de>	<4AF2EAF3.5020808@cs.put.poznan.pl>
-	<alpine.LFD.2.00.0911051014270.7161@localhost>
-In-Reply-To: <alpine.LFD.2.00.0911051014270.7161@localhost>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+References: <alpine.LFD.2.00.0911120045170.1265@localhost>	<200911120656.41249.holger+oe@freyther.de>	<200911120722.09166.holger+oe@freyther.de>	<alpine.LFD.2.00.0911120125380.1977@localhost>	<ac9c93b10911120015j5b8cbc07j30f57f2dc68987ca@mail.gmail.com>	<alpine.LFD.2.00.0911120727540.7268@localhost>
+	<ac9c93b10911120447k496f094bg478dc05ae612b4a9@mail.gmail.com>
+In-Reply-To: <ac9c93b10911120447k496f094bg478dc05ae612b4a9@mail.gmail.com>
+X-SA-Exim-Connect-IP: 72.167.82.84
+X-SA-Exim-Mail-From: mike@mwester.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] boost-1.33.1: Corrected GNU_HASH error.
+Subject: Re: xterm: either fix it, or remove it. please.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,51 +35,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 18:55:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 12 Nov 2009 18:57:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 11/05/2009 10:17 AM, Robert P. J. Day wrote:
-> On Thu, 5 Nov 2009, Przemyslaw Wesolek wrote:
->
->> Henning Heinold wrote:
->>> thanks for the patch, but I wonder who is using this older
->>> version. Mainly 1.3.36 is used.
->>
->> Did you mean 1.36?
->>
->> I agree, the older versions look like unmaintained for a long time.
->
->    if you go to boost's home page, they don't even *list* versions
-> earlier than 1.36:
->
->    http://www.boost.org/users/news/
->
-> that's generally a good indication that it's time to start
-> deprecating.  and there's already a beta version of 1.41.
+Frans Meulenbroeks wrote:
 
-unfortunately the boost api is not very stable, so upgrading is not 
-painless ....
+> So it is not really fedora specific, but it is SELinux specific.
+> Do we want to support SELinux as build host ?
 
-Philip
+Do we want to?  Yes, it would be a nice thing to support.
 
->
-> rday
-> --
->
-> ========================================================================
-> Robert P. J. Day                               Waterloo, Ontario, CANADA
->
->              Linux Consulting, Training and Kernel Pedantry.
->
-> Web page:                                          http://crashcourse.ca
-> Twitter:                                       http://twitter.com/rpjday
-> ========================================================================
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Is it practical?  I think the answer is no.  In my experience, tools
+like selinux have a tendency to require inordinate amounts of
+administrative burden that just isn't practical in a development
+environment.  I think requiring that selinux be disabled on build hosts
+is a reasonable requirement, and will avoid wasting a lot of cycles that
+should be spent on OE, and not on administration (or sending lots of
+emails).
+
+-Mike (mwester)
+
+
+
 
 
