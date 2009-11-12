@@ -1,26 +1,35 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [209.85.220.209] (helo=mail-fx0-f209.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1N8ShZ-0000LZ-N3
+	(envelope-from <lamiaposta71@gmail.com>) id 1N8Srx-0000gb-Ej
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 06:58:40 +0100
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 7EF1D1B10C04
+	Thu, 12 Nov 2009 07:09:24 +0100
+Received: by fxm1 with SMTP id 1so1756441fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 06:08:09 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Nov 2009 06:56:41 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <alpine.LFD.2.00.0911120045170.1265@localhost>
-In-Reply-To: <alpine.LFD.2.00.0911120045170.1265@localhost>
+	Wed, 11 Nov 2009 22:08:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=J18KLmjM5xAXLacXOQF7MwC5hr6uohBZ/06nIu5APOI=;
+	b=BstoUqlQ8xyJy1w+mvPbOH7HQ77+Uis6cTF43vUrZoFUjDkdDfuFwCYksN68DowsDg
+	xJF9GmMNCsJJ3QqTWhvYsKryWZrfjKkpGG8/zHws11lnrTkTcdEYs6mdhuwtfxCejqwf
+	mN1NE3WFUbtkBqPR/pjOqLRkv3FMEaFHLPbM8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=igodpoEFirVwkg2O+SyzI3qQHlICl9Fdlosezkj48i+/LRX9pQylf4I1tnBIKJvE+L
+	XzGR5lYRi5ucM/iGZHm1gagu/QsALwfpTZ027jNAYhhkdTj68YUf5NvebGa40bkx7swq
+	h/HimL57/pFt4mfPbhn1a5L+0FgoGJ3ueTCHs=
 MIME-Version: 1.0
-Message-Id: <200911120656.41249.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Received: by 10.239.162.129 with SMTP id l1mr235696hbd.214.1258006082897; Wed, 
+	11 Nov 2009 22:08:02 -0800 (PST)
+Date: Thu, 12 Nov 2009 07:08:02 +0100
+Message-ID: <ade1bdc0911112208r64cb5dd7n11ecdccc3c8af7c6@mail.gmail.com>
+From: Raffaele Recalcati <lamiaposta71@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.220.209
+X-SA-Exim-Mail-From: lamiaposta71@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: xterm: either fix it, or remove it. please.
+Subject: test subscription
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,20 +43,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 05:58:40 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 12 Nov 2009 06:09:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thursday 12 November 2009 06:47:22 Robert P. J. Day wrote:
->   seriously, either the build of xterm_207 should be fixed, or that
-> package should be dropped in its entirety.  it's been at least three
-> weeks since i pointed out that it doesn't build, and even explained in
-> detail *why* it doesn't build and how to fix it.  to no avail.
-> 
->   so, a humble suggestion -- either fix it, or remove it from OE
-> entirely.
+sorry for this test, I need to understand If it is all ok.
 
-Did you attempt to create a patch?
+-- 
+www.opensurf.it
 
 
