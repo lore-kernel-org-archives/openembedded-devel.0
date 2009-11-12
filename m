@@ -1,29 +1,38 @@
-Received: from [212.124.40.25] (helo=mail.huber-online.com)
+Received: from [66.80.197.243] (helo=looper.buglabs.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jm@huber-online.com>) id 1N8cBP-0004R3-7N
+	(envelope-from <ken@buglabs.net>) id 1N8crl-0003jW-W7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 17:06:06 +0100
-Received: from 192.168.11.6 ([213.23.61.90]:2958)
-	by mail.wiessoft.de ([192.168.62.2]:25) with [XMail 1.25 ESMTP Server]
-	id <SC1BA5A> for <openembedded-devel@lists.openembedded.org> from
-	<jm@huber-online.com>; Thu, 12 Nov 2009 16:59:23 +0100
-From: "Johannes Maier" <jm@huber-online.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Nov 2009 16:06:03 +0000
-Priority: normal
-X-Priority: 3 (Normal)
-Importance: normal
-X-Mailer: DvISE by Tobit Software, Germany (0250.444B484C494747504A4B),
-	Mime Converter 101.20
-X-David-Sym: 0
-X-David-Flags: 33554432
-Message-ID: <DIIE.00000513001877B9@192.168.11.6>
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 212.124.40.25
-X-SA-Exim-Mail-From: jm@huber-online.com
+	Thu, 12 Nov 2009 17:49:53 +0100
+Received: from aphid.buglabs.net (aphid.buglabs.net [192.168.20.30])
+	by looper.buglabs.net (Postfix) with ESMTP id B0D4934049
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Nov 2009 11:48:39 -0500 (EST)
+Received: from localhost (localhost [127.0.0.1])
+	by aphid.buglabs.net (Postfix) with ESMTP id 9D33128E002
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Nov 2009 11:50:33 -0500 (EST)
+X-Virus-Scanned: amavisd-new at aphid.buglabs.net
+Received: from aphid.buglabs.net ([127.0.0.1])
+	by localhost (aphid.buglabs.net [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id VBH4uqrIWhyn
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Nov 2009 11:50:33 -0500 (EST)
+Received: from [192.168.0.120] (t61.buglabs.net [192.168.0.120])
+	by aphid.buglabs.net (Postfix) with ESMTP id 0F58D28E001
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Nov 2009 11:50:33 -0500 (EST)
+From: Ken Gilmer <ken@buglabs.net>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Organization: Bug Labs, Inc.
+Date: Thu, 12 Nov 2009 12:48:10 -0500
+Message-Id: <1258048090.6495.40.camel@localhost>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.24.5 
+X-SA-Exim-Connect-IP: 66.80.197.243
+X-SA-Exim-Mail-From: ken@buglabs.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re-2: question meta-toolchain on x86_64 for armv5te
+Subject: Summary of Toolchain/SDK session (Continued)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,55 +46,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 16:06:06 -0000
-Content-Type: text/plain;
- charset="us-ascii"
-Content-Transfer-Encoding: 7Bit
-
--------- Original Message --------
-Subject: Re: [oe] question meta-toolchain on x86_64 for armv5te (11-Nov-2009 2:52)
-From:    Holger Hans Peter Freyther <holger=oe@freyther.de>
-To:      jm@huber-online.com
-
-> On Tuesday 10 November 2009 17:03:06 Johannes Maier wrote:
-> > Hi@all,
-> > 
-> > I'm new to openembedded and I didn't find any answers to my questions so I
-> >  hope to find here some help.
-> > 
-> > I get an error while building the meta-toolchain on x86_64 for armv5te.
-> > 
-> > So I wanted to ask if it is in general better to use a 32bit system for
-> >  such tasks since I don't get any error there?
-> 
-> This is not 32 vs 64 bits... more likely if fortify is enabled during 
-> compile.. The error looks like something I had fixed... so what are you 
-> building, using which OE revision?
-> 
-> z.
-> 
-
-Just for your information:
-
-I did some further testing now.
-- My environment is Kubuntu 9.10 64bit.
-- OE version stable/2009 branch
-- AFAIK 
-    BUILD_CPPFLAGS += "-Wno-format-security -U_FORTIFY_SOURCE"
-  is necessary since (K)ubuntu 8.10, so I use it in bitbake.conf
-Of course you were right, it's not 32 vs 64 bits. But it's a matter of the new (K)ubuntu 9.10. Sorry for the disturbance and thanks for your hint.
-The issue is already fixed in the dev branch but not in the stable branch. For those that want to use the 9.10 version with the stable branch can use the gdb-6.8-fix-compile-karmic.patch in the dev branch.
-
-Thanks,
-majo
+X-List-Received-Date: Thu, 12 Nov 2009 16:49:53 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Carried on from Philop's earlier post:
+
+Regarding classes of developers, I've started a wiki page that attempts
+to give some details.  Next will be to list apps and tools (or
+proposals) that address the needs of each developer class.
+
+http://wiki.openembedded.net/index.php/ToolingUseCases
+
+Another part of the discussion (unless this is covered under another
+section) focused ease of setup of OE.  There are some custom tools for
+doing this, Denis suggested something like Android repo tool.  Esben has
+his own script.  OTE has a simple installer.  It was agreed to
+collaborate on a approach for easier installation and configuration of
+OE.  Denis proposed defining a data format that could be read by a
+variety of tools to download and install all pieces necessary for OE to
+work and could be used by customers and other users.  Wiki page for
+this:
+
+http://wiki.openembedded.net/index.php/EasyInstall
+
+thx
+ken
 
 
 
