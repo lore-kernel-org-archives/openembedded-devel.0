@@ -1,27 +1,33 @@
-Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ricardo.salveti@openbossa.org>) id 1N8do2-000109-2W
+	(envelope-from <philb@gnu.org>) id 1N8eY1-0002UD-1o
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 18:50:05 +0100
-Received: by bwz9 with SMTP id 9so2360745bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 09:48:42 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.204.154.155 with SMTP id o27mr3505524bkw.198.1258047666038; 
-	Thu, 12 Nov 2009 09:41:06 -0800 (PST)
-In-Reply-To: <d1b08f940911110206h594dff39mb9a3cf7912124018@mail.gmail.com>
+	Thu, 12 Nov 2009 19:37:36 +0100
+Received: from [85.210.2.237] (helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N8eWh-0004Kv-KE
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Nov 2009 18:36:12 +0000
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1257971641.25369.426.camel@lenovo.internal.reciva.com>
 References: <1257872140.1484.335.camel@mill.internal.reciva.com>
 	<200911110206.20901.holger+oe@freyther.de>
 	<1257927850.25369.283.camel@lenovo.internal.reciva.com>
 	<200911110944.10399.holger+oe@freyther.de>
-	<1257931062.25369.292.camel@lenovo.internal.reciva.com>
-	<d1b08f940911110206h594dff39mb9a3cf7912124018@mail.gmail.com>
-Date: Thu, 12 Nov 2009 14:41:05 -0300
-Message-ID: <ae9c9a1c0911120941t3e90a78cg10ce0319c31990a7@mail.gmail.com>
-From: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: ricardo.salveti@openbossa.org
+	<1257949048.29038.388.camel@dax.rpnet.com>
+	<1257954353.25369.304.camel@lenovo.internal.reciva.com>
+	<ac9c93b10911110801q308a2d80g916a0271757fedd5@mail.gmail.com>
+	<1257955603.25369.325.camel@lenovo.internal.reciva.com>
+	<ac9c93b10911110937u4607a2c8w9e63c9df738d8fe8@mail.gmail.com>
+	<1257971641.25369.426.camel@lenovo.internal.reciva.com>
+Date: Thu, 12 Nov 2009 18:36:02 +0000
+Message-ID: <1258050962.25369.454.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-Broken-Reverse-DNS: no host name found for IP address 85.210.2.237
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: OEDEM 2009 summary: Death to checksums.ini?
@@ -38,42 +44,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 17:50:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 12 Nov 2009 18:37:36 -0000
+X-Groupsio-MsgNum: 14230
+Content-Type: multipart/mixed; boundary="=-WO+usx6MvcFxMqP+Axo0"
 
-On Wed, Nov 11, 2009 at 7:06 AM, Andrea Adami <andrea.adami@gmail.com> wrot=
-e:
->>>There was some discussion around alternative proposals of storing the
->>> checksums in separate files within the recipes/ directory.
->
->>> The best alternatives so far where:
->>> =A0 =A0 =A0 - Place the checksums into the dir of the recipe
->>> =A0 =A0 =A0 - Use a MD5SUM_${URL} =3D "", SHA256SUM_${URL} =3D "" synta=
-x
->>
->> I would be happy with the latter of those suggestions. =A0I don't think
->> the former really addresses the problems with the current checksums.ini.
->
-> Yes, I sponsor the idea of a single Manifest in each dir.
->
-> Let apart filetype specifier, example here:
-> http://www.gentoo.org/proj/en/glep/glep-0044-extras/manifest2-example.txt
->
-> Having a Manifest listing the filename, the size and some checksums on
-> a single line seems to me very easy to parse for an automated script
-> wich could refresh/generate the whole file.
+--=-WO+usx6MvcFxMqP+Axo0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-I also like the way Gentoo handle with this problem, but I guess that
-if we go that way we'd still have trouble regarding merging and
-conflicts, like we current have with checksums.
+On Wed, 2009-11-11 at 20:34 +0000, Phil Blundell wrote:
+> That should still work fine.  The purpose of the "name=bar" thing is to
+> decouple the checksum from the exact URI in use.  So, you can write:
+> 
+> SRC_URI = "${MIRROR}/somedir/${PN}-${PV}.tar.gz;name=mytarball \
+>            ${OTHERMIRROR}/${PN}-${PV}-extra-files.tar.gz;name=extrafiles"
+> 
+> and then, in another file if you prefer, add:
+> 
+> SRC_URI[md5sum:mytarball] = "d3b07384d113edec49eaa6238ad5ff00"
+> SRC_URI[md5sum:extrafiles] = "c157a79031e1c40f85931829bc5fc552"
 
-Adding the checksum metadata in the recipe itself makes easier the
-life of a lot of people, we just need to identify the easier and
-prettier way of doing that.
+It turns out that colons in flag names aren't actually accepted by the
+parser, but something similar with dots is OK.  So, here's a patch to
+make it work.  The modified notation is actually:
 
-Cheers,
---=20
-Ricardo Salveti de Araujo
+SRC_URI[mytarball.md5sum] = "d3b07384d113edec49eaa6238ad5ff00"
+
+and likewise for sha256sum.
+
+p.
 
 
+
+--=-WO+usx6MvcFxMqP+Axo0
+Content-Disposition: attachment; filename="base.patch"
+Content-Type: text/x-patch; name="base.patch"; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+diff --git a/classes/base.bbclass b/classes/base.bbclass
+index 9d063f2..9508754 100644
+--- a/classes/base.bbclass
++++ b/classes/base.bbclass
+@@ -56,6 +56,50 @@ def base_chk_load_parser(config_paths):
+ 
+     return parser
+ 
++def base_chk_file_vars(parser, localpath, params, data):
++    try:
++        name = params["name"]
++    except KeyError:
++        return False
++    flagName = "%s.md5sum" % name
++    want_md5sum = bb.data.getVarFlag("SRC_URI", flagName, data)
++    flagName = "%s.sha256sum" % name
++    want_sha256sum = bb.data.getVarFlag("SRC_URI", flagName, data)
++
++    if (want_sha256sum == None and want_md5sum == None):
++        # no checksums to check, nothing to do
++        return False
++
++    if not os.path.exists(localpath):
++        localpath = base_path_out(localpath, data)
++        bb.note("The localpath does not exist '%s'" % localpath)
++        raise Exception("The path does not exist '%s'" % localpath)
++
++    if want_md5sum:
++        try:
++	    md5pipe = os.popen('PATH=%s md5sum %s' % (bb.data.getVar('PATH', data, True), localpath))
++            md5data = (md5pipe.readline().split() or [ "" ])[0]
++            md5pipe.close()
++        except OSError, e:
++            raise Exception("Executing md5sum failed")
++        if want_md5sum != md5data:
++            bb.note("The MD5Sums did not match. Wanted: '%s' and Got: '%s'" % (want_md5sum, md5data))
++            raise Exception("MD5 Sums do not match. Wanted: '%s' Got: '%s'" % (want_md5sum, md5data))
++
++    if want_sha256sum:
++        try:
++            shapipe = os.popen('PATH=%s oe_sha256sum %s' % (bb.data.getVar('PATH', data, True), localpath))
++            shadata = (shapipe.readline().split() or [ "" ])[0]
++            shapipe.close()
++        except OSError, e:
++            raise Exception("Executing shasum failed")
++        if want_sha256sum != sha256data:
++            bb.note("The SHA256Sums did not match. Wanted: '%s' and Got: '%s'" % (want_sha256sum, sha256data))
++            raise Exception("SHA256 Sums do not match. Wanted: '%s' Got: '%s'" % (want_sha256sum, sha256data))
++
++    return True
++
++
+ def base_chk_file(parser, pn, pv, src_uri, localpath, data):
+     no_checksum = False
+     # Try PN-PV-SRC_URI first and then try PN-SRC_URI
+@@ -639,11 +683,11 @@ python base_do_fetch() {
+ 	# Check each URI
+ 	for url in src_uri.split():
+ 		localpath = bb.data.expand(bb.fetch.localpath(url, localdata), localdata)
+-		(type,host,path,_,_,_) = bb.decodeurl(url)
++		(type,host,path,_,_,params) = bb.decodeurl(url)
+ 		uri = "%s://%s%s" % (type,host,path)
+ 		try:
+ 			if type == "http" or type == "https" or type == "ftp" or type == "ftps":
+-				if not base_chk_file(parser, pn, pv,uri, localpath, d):
++				if not (base_chk_file_vars(parser, localpath, params, d) or base_chk_file(parser, pn, pv,uri, localpath, d)):
+ 					if not bb.data.getVar("OE_ALLOW_INSECURE_DOWNLOADS",d, True):
+ 						bb.fatal("%s-%s: %s has no entry in conf/checksums.ini, not checking URI" % (pn,pv,uri))
+ 					else:
+
+--=-WO+usx6MvcFxMqP+Axo0--
