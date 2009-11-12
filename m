@@ -1,39 +1,31 @@
-Received: from [150.254.30.30] (helo=libra.cs.put.poznan.pl)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <przemyslaw.wesolek@cs.put.poznan.pl>)
-	id 1N8V8m-0000rm-CU for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 09:34:55 +0100
-Received: from kas30pipe.localhost (unknown [127.0.0.1])
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 2A28C90
+	(envelope-from <mickey@vanille-media.de>) id 1N8V8s-0000s0-3H
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Nov 2009 09:35:01 +0100
+Received: from [192.168.1.7] (dialbs-092-079-168-007.static.arcor-ip.net
+	[92.79.168.7])
+	by drlauer-research.com (Postfix) with ESMTP id 4579B584116
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 08:33:33 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at cs.put.poznan.pl
-Received: from libra.cs.put.poznan.pl ([127.0.0.1])
-	by localhost (libra.cs.put.poznan.pl [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id AS8xgzpbOQhS
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 09:33:32 +0100 (CET)
-Received: from [150.254.31.31] (idss-pw.cs.put.poznan.pl [150.254.31.31])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id DCA2C82
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 09:33:32 +0100 (CET)
-Message-ID: <4AFBC85D.2000204@cs.put.poznan.pl>
-Date: Thu, 12 Nov 2009 09:33:33 +0100
-From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
-Organization: Poznan University of Technology
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Thu, 12 Nov 2009 10:19:40 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.96.0
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0278], KAS30/Release
-X-SpamTest-Info: Not protected
-X-SA-Exim-Connect-IP: 150.254.30.30
-X-SA-Exim-Mail-From: przemyslaw.wesolek@cs.put.poznan.pl
+In-Reply-To: <alpine.LFD.2.00.0911120226140.3969@localhost>
+References: <alpine.LFD.2.00.0911120045170.1265@localhost>
+	<200911120722.09166.holger+oe@freyther.de>
+	<alpine.LFD.2.00.0911120125380.1977@localhost>
+	<200911120820.08344.holger+oe@freyther.de>
+	<alpine.LFD.2.00.0911120226140.3969@localhost>
+Organization: Vanille-Media
+Date: Thu, 12 Nov 2009 09:33:40 +0100
+Message-ID: <1258014820.6879.19.camel@opal>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Patches procedure
+Subject: Re: xterm: either fix it, or remove it. please.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,22 +39,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 08:34:55 -0000
-Content-Type: text/plain; charset=ISO-8859-2
+X-List-Received-Date: Thu, 12 Nov 2009 08:35:01 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Hi,
+> > Work on OE is purely community driven, ...
+> 
+>   i'm well aware of that.  i was trying to become a productive
+> *member* of that community.  at this point, i've pretty much lost
+> interest.
 
-On 5 November I posted two patches considering boost. None of them has
-been applied to git.
+That would be sad. Please don't let yourself be driven a way buy a
+single incident. I appreciate you looking into things. Surely we will
+find a way to fix this little recipe...
 
-As I'm a novice here, am I breaking some social contract or missing some
-procedural steps to get patches applied? Shall I ask for Ack's and
-commits directly, or simply sending patches is enough?
+Cheers,
 
-I don't want to sound rude, I just don't understand the "machinery" and
-wiki doesn't explain anything beyond my current knowledge.
+:M:
 
-Przemek
 
 
