@@ -1,38 +1,25 @@
-Received: from [66.80.197.243] (helo=looper.buglabs.net)
+Received: from [62.2.86.239] (helo=a.mx.bitcloner.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ken@buglabs.net>) id 1N8crl-0003jW-W7
+	(envelope-from <betheg@bitcloner.org>) id 1N8d4i-0004BQ-RW
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 17:49:53 +0100
-Received: from aphid.buglabs.net (aphid.buglabs.net [192.168.20.30])
-	by looper.buglabs.net (Postfix) with ESMTP id B0D4934049
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 11:48:39 -0500 (EST)
-Received: from localhost (localhost [127.0.0.1])
-	by aphid.buglabs.net (Postfix) with ESMTP id 9D33128E002
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 11:50:33 -0500 (EST)
-X-Virus-Scanned: amavisd-new at aphid.buglabs.net
-Received: from aphid.buglabs.net ([127.0.0.1])
-	by localhost (aphid.buglabs.net [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id VBH4uqrIWhyn
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 11:50:33 -0500 (EST)
-Received: from [192.168.0.120] (t61.buglabs.net [192.168.0.120])
-	by aphid.buglabs.net (Postfix) with ESMTP id 0F58D28E001
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 11:50:33 -0500 (EST)
-From: Ken Gilmer <ken@buglabs.net>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Organization: Bug Labs, Inc.
-Date: Thu, 12 Nov 2009 12:48:10 -0500
-Message-Id: <1258048090.6495.40.camel@localhost>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.5 
-X-SA-Exim-Connect-IP: 66.80.197.243
-X-SA-Exim-Mail-From: ken@buglabs.net
+	Thu, 12 Nov 2009 18:03:15 +0100
+Received: from p5b2cf4e8.dip.t-dialin.net ([91.44.244.232] helo=127.0.0.1)
+	by a.mx.bitcloner.org with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <betheg@bitcloner.org>)
+	id 1N8d3T-0003hm-Nl for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Nov 2009 18:01:56 +0100
+From: Michael Kurz <betheg@bitcloner.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 12 Nov 2009 18:00:49 +0100
+Message-Id: <1258045249-18095-4-git-send-email-betheg@bitcloner.org>
+X-Mailer: git-send-email 1.6.5.2
+In-Reply-To: <1258045249-18095-1-git-send-email-betheg@bitcloner.org>
+References: <1258045249-18095-1-git-send-email-betheg@bitcloner.org>
+X-SA-Exim-Connect-IP: 62.2.86.239
+X-SA-Exim-Mail-From: betheg@bitcloner.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Summary of Toolchain/SDK session (Continued)
+Subject: [PATCH 3/3] checksums.ini: add entry for tzdata2009r
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,34 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 16:49:53 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 12 Nov 2009 17:03:16 -0000
 
+Signed-off-by: Michael Kurz <betheg@bitcloner.org>
+---
+ conf/checksums.ini |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
 
-Carried on from Philop's earlier post:
-
-Regarding classes of developers, I've started a wiki page that attempts
-to give some details.  Next will be to list apps and tools (or
-proposals) that address the needs of each developer class.
-
-http://wiki.openembedded.net/index.php/ToolingUseCases
-
-Another part of the discussion (unless this is covered under another
-section) focused ease of setup of OE.  There are some custom tools for
-doing this, Denis suggested something like Android repo tool.  Esben has
-his own script.  OTE has a simple installer.  It was agreed to
-collaborate on a approach for easier installation and configuration of
-OE.  Denis proposed defining a data format that could be read by a
-variety of tools to download and install all pieces necessary for OE to
-work and could be used by customers and other users.  Wiki page for
-this:
-
-http://wiki.openembedded.net/index.php/EasyInstall
-
-thx
-ken
-
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index 55110c0..0b3e075 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -25826,6 +25826,10 @@ sha256=7b08bb8a98ad8a06e2cafda05ab21f2a69b2d64252dfc9435c93094d979e7c5a
+ md5=75c74b9c8df7c83c8e3c3068fff08a82
+ sha256=5fbd4053a4eb01b814799855e35a3c01743f98acf9fcd167522e6484a2edd7b7
+ 
++[ftp://elsie.nci.nih.gov/pub/tzdata2009r.tar.gz]
++md5=c38d977a3f9f4d4646cab902554c519e
++sha256=684d23e3ebe825c9db90732534446f4e33f5ad4455980b15fd9eb2e4ba5a6731
++
+ [ftp://elsie.nci.nih.gov/pub/tzdata2009p.tar.gz]
+ md5=e401e284512be17f5cf63ee52e4f3284
+ sha256=7182ad6f03bfe16ccdbac4a3efb9e765ea7c51afc33c3a7fefb053122aa6da2c
+-- 
+1.6.5.2
 
 
 
