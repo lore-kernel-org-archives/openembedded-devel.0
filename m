@@ -1,40 +1,37 @@
-Received: from [150.254.30.30] (helo=libra.cs.put.poznan.pl)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <przemyslaw.wesolek@cs.put.poznan.pl>)
-	id 1N8fO0-0007ne-Sc for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 20:31:20 +0100
-Received: from kas30pipe.localhost (unknown [127.0.0.1])
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 0CB7DAC
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 19:29:57 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at cs.put.poznan.pl
-Received: from libra.cs.put.poznan.pl ([127.0.0.1])
-	by localhost (libra.cs.put.poznan.pl [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id A++KhlANwfBY
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 20:29:56 +0100 (CET)
-Received: from [192.168.0.100] (109-81.echostar.pl [213.156.109.81])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id DD4D2A7
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 20:29:55 +0100 (CET)
-Message-ID: <4AFC6233.6090504@cs.put.poznan.pl>
-Date: Thu, 12 Nov 2009 20:29:55 +0100
-From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	(envelope-from <philb@gnu.org>) id 1N8fPr-0007xp-O2
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Nov 2009 20:33:15 +0100
+Received: from [85.210.2.237] (helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N8fOb-0005Na-Bm
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Nov 2009 19:31:53 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-References: <4AF353C8.80904@cs.put.poznan.pl>	<c384c5ea0911100806r7b163600l9adb62a23f1877a4@mail.gmail.com>	<be7a9f3d0911100905i791157e1lfd73c3cdb7f58f51@mail.gmail.com>
-	<c384c5ea0911120715j12181ff2oe93d0b68c4b3fa92@mail.gmail.com>
-In-Reply-To: <c384c5ea0911120715j12181ff2oe93d0b68c4b3fa92@mail.gmail.com>
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0278], KAS30/Release
-X-SpamTest-Info: Not protected
-X-SA-Exim-Connect-IP: 150.254.30.30
-X-SA-Exim-Mail-From: przemyslaw.wesolek@cs.put.poznan.pl
+In-Reply-To: <20091112191809.GG9787@mx.loc>
+References: <200911110206.20901.holger+oe@freyther.de>
+	<1257927850.25369.283.camel@lenovo.internal.reciva.com>
+	<200911110944.10399.holger+oe@freyther.de>
+	<1257949048.29038.388.camel@dax.rpnet.com>
+	<1257954353.25369.304.camel@lenovo.internal.reciva.com>
+	<ac9c93b10911110801q308a2d80g916a0271757fedd5@mail.gmail.com>
+	<1257955603.25369.325.camel@lenovo.internal.reciva.com>
+	<ac9c93b10911110937u4607a2c8w9e63c9df738d8fe8@mail.gmail.com>
+	<1257971641.25369.426.camel@lenovo.internal.reciva.com>
+	<1258050962.25369.454.camel@lenovo.internal.reciva.com>
+	<20091112191809.GG9787@mx.loc>
+Date: Thu, 12 Nov 2009 19:31:49 +0000
+Message-ID: <1258054309.25369.457.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-Broken-Reverse-DNS: no host name found for IP address 85.210.2.237
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: menuconfig task for kernels
+Subject: Re: OEDEM 2009 summary: Death to checksums.ini?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,31 +45,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 19:31:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 12 Nov 2009 19:33:15 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Leon Woestenberg wrote:
-> Hello Otavio,
+On Thu, 2009-11-12 at 20:18 +0100, Bernhard Reutner-Fischer wrote:
+> >+            raise Exception("MD5 Sums do not match. Wanted: '%s' Got: '%s'" % (want_md5sum, md5data))
 > 
-> On Tue, Nov 10, 2009 at 6:05 PM, Otavio Salvador
-> <otavio@ossystems.com.br> wrote:
->> Hello,
->>
->> On Tue, Nov 10, 2009 at 2:06 PM, Leon Woestenberg
->> <leon.woestenberg@gmail.com> wrote:
->>> Look in classes/kernel.bbclass, line ~221:
->>>
->>> addtask menuconfig after do_patch
->>> change it to:
->>> addtask menuconfig after do_configure
->>>
->>> I wonder if this can go upstream.
-> Any response to this idea?
+> Why are you providing the same information as a note and in the
+> exception text?
 
-I support it. This is expected behavior from the casual user point of view.
+This is the way those diagnostics have always been done (see the
+existing code in base.bbclass).  In practice I don't think the exception
+text is used for anything but it seems fairly harmless to go on
+providing it.  If we're going to change that then it should presumably
+be done for both forms of the checksum code, not just for this one.
 
-Przemek
+p.
+
 
 
 
