@@ -1,25 +1,40 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1N8ZUV-0000wP-OH
+	(envelope-from <rpjday@crashcourse.ca>) id 1N8ZXp-00013Y-JT
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 14:13:38 +0100
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 5C2651B10C04
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 13:23:10 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Thu, 12 Nov 2009 14:17:04 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1N8ZWZ-0006Ft-D2 for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Nov 2009 08:15:43 -0500
+Date: Thu, 12 Nov 2009 08:15:38 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Nov 2009 14:11:53 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+In-Reply-To: <ac9c93b10911120447k496f094bg478dc05ae612b4a9@mail.gmail.com>
+Message-ID: <alpine.LFD.2.00.0911120812490.4597@localhost>
 References: <alpine.LFD.2.00.0911120045170.1265@localhost>
+	<200911120656.41249.holger+oe@freyther.de>
+	<200911120722.09166.holger+oe@freyther.de>
+	<alpine.LFD.2.00.0911120125380.1977@localhost>
+	<ac9c93b10911120015j5b8cbc07j30f57f2dc68987ca@mail.gmail.com>
+	<alpine.LFD.2.00.0911120727540.7268@localhost>
 	<ac9c93b10911120447k496f094bg478dc05ae612b4a9@mail.gmail.com>
-	<alpine.LFD.2.00.0911120748300.3045@localhost>
-In-Reply-To: <alpine.LFD.2.00.0911120748300.3045@localhost>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
-Message-Id: <200911121411.53422.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: xterm: either fix it, or remove it. please.
@@ -36,25 +51,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 13:13:38 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-15"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 12 Nov 2009 13:17:04 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Thursday 12 November 2009 13:58:23 Robert P. J. Day wrote:
+On Thu, 12 Nov 2009, Frans Meulenbroeks wrote:
 
->   i'm checking right now if there's an option to "ls" to turn *off*
-> that feature, but i don't see one offhand.  perhaps a better lesson is
-> that the way xterm's sinstall.sh script works is really hacky, using
-> sed to allegedly reproduce a file's existing mode settings.  perhaps
-> there's a simpler way to get that effect without dragging "sed" into
-> it.  but, again, if only one package was affected, maybe just hack up
-> an xterm fix and move on, and deal with things on a case-by-case
-> basis as they come up.
+> PS: Personally I think it is a bad idea to change the output format
+> of a utility that is more than 30 years old and that is so
+> widespread. (and I did not even see an obvious way to get the old
+> behaviour).
 
-Could you please try this patch to the sinstall.sh?
+  someone on the fedora list just suggested the following if all you
+want is the numeric mode of a file:
 
-http://paste.lisp.org/display/90216
+$ stat -c %a /etc/passwd
+644
+$
 
+  i'm fairly sure that's safe for the rare occasion when you need that
+information.  but, as i suggested, given that this only caused a
+problem with a single package, it's probably not worth obsessing over
+unless that breakage begins to occur more often.
+
+rday
+--
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
