@@ -1,27 +1,41 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [209.85.216.175] (helo=mail-px0-f175.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1N8g14-0001wD-8u
+	(envelope-from <graham.gower@gmail.com>) id 1N8h3K-0000wm-Ib
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 21:11:41 +0100
-Received: from [85.210.2.237] (helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N8fzl-00069e-Kj
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 20:10:18 +0000
-From: Phil Blundell <philb@gnu.org>
+	Thu, 12 Nov 2009 22:18:05 +0100
+Received: by pxi5 with SMTP id 5so1834077pxi.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Nov 2009 13:16:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=MhN/7XaOr0ikOo2IRpiGl/08ZvVOWchig6cqSaxdYvo=;
+	b=e8Vfqc127IDRO97DoUfQOBLG7dS/GEYZvwRwBNrwW+RlV5rYeVx48EUHY2KA3EJTmw
+	eBKde/oWePBU/DT5QBEHEWBiMOubOS+fxDznAurz9DlOl1BMWqBETDNCa0c6Odo1ymO2
+	OfQO/9eW1X65eglnB98fabkQaE/0QE0PN4ezQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=fcBRHDTVlBq77zwxkUgeW0Q3EuwhLny5mayFyLPIvxq2V7aRwslA8421NGTBTdTEoE
+	ptzmaA86FFC+mKTbCpT4AMiac+wBfsTd0D7jfDi8OobgpSpV2wA3IF0j9fOPgqO3tILB
+	Y0mHsJCBfU6dxltHjq6WeIXOBFF8LbxQILyLg=
+MIME-Version: 1.0
+Received: by 10.143.27.37 with SMTP id e37mr376889wfj.234.1258060602562; Thu, 
+	12 Nov 2009 13:16:42 -0800 (PST)
+In-Reply-To: <1258039776.4924.69.camel@conroy-linux>
+References: <200911120457.39018.holger+oe@freyther.de>
+	<6ec4247d0911112034v54f570ccn4c4334a1da094f0d@mail.gmail.com>
+	<1258038869.4924.67.camel@conroy-linux>
+	<1258039776.4924.69.camel@conroy-linux>
+Date: Fri, 13 Nov 2009 07:46:42 +1030
+Message-ID: <6ec4247d0911121316p41602634l75a789e752cc286f@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1257762970.29038.40.camel@dax.rpnet.com>
-References: <1257762970.29038.40.camel@dax.rpnet.com>
-Date: Thu, 12 Nov 2009 20:10:10 +0000
-Message-ID: <1258056610.25369.459.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-Broken-Reverse-DNS: no host name found for IP address 85.210.2.237
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: OEDEM - Summary of some the outcome
+Subject: Re: meta-toolchain continues to woe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,36 +49,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 20:11:41 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 12 Nov 2009 21:18:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, 2009-11-09 at 10:36 +0000, Richard Purdie wrote:
-> The proposals were:
-> 
-> a) Adopt the removal of the layout_* variables from Poky.
-> b) Change the do_populate_staging/do_stage functions to use the results 
->    from the do_install step as proposed in other emails
-> c) Adopt the native.bbclass changes from Poky to allow use of 
->    BBCLASSEXTEND = "native"
-> d) Start removing legacy do_stage functions and convert exclusively to 
->    the new model
-> e) Start converting recipes to BBCLASSEXTEND = "native"
-> f) Merge the new canadian SDK classes from Poky and start a gradual 
->    conversion to them with a view to obsoleting the existing sdk and 
->    canadian recipes.
-> g) Rename "do_populate_staging" to "do_populate_sysroot" and 
->    "TMPDIR/staging" to "TMPDIR/sysroots" to reflect how much this 
->    directory has changed and to truly reflect its contents. The word 
->    "staging" confuses a lot of new users in my experience.
+Chris,
+The patch you submitted prints out an error from the lockf() function
+call. Which is fine, but its more common for the creat() call to fail
+before hand, meaning that the lockf() function would have be passed -1
+as the file descriptor.
 
-I think there was one more:
+I made a small change to hopefully improve this.
+http://code.google.com/p/opkg/source/detail?r=288
 
-h) Enable packaged staging as default, with a view to making it
-mandatory after a suitable transition period.
-
-p.
-
-
+-Graham
 
 
