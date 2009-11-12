@@ -1,40 +1,27 @@
-Received: from [209.85.211.177] (helo=mail-yw0-f177.google.com)
+Received: from [87.249.123.12] (helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1N8bqC-0003gy-Ss
+	(envelope-from <jaap.dejong@nedap.com>) id 1N8bzZ-0003xc-SV
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 16:44:12 +0100
-Received: by ywh7 with SMTP id 7so2125178ywh.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 07:42:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=4oatadlNijsyVD3MApSFmYHxBc79ZoWFP87qGQ2Ks5E=;
-	b=DVoC2vniJWrzfQK9aIB4VNHguGE1fw9bVFl2rYOejQd2gLFMWg9/+vmDeNpjcrQSjL
-	TyeT0W0pbtJcdOvdvPQmIvJ4eGOBMtzqr8sL3KBrA3PFhl0u61jEw25CKCBOpbecTisp
-	gJdRuMDY/LtCtl1LYGpE7hnZAKJLRfu/W1mt8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=P9BUQ7Qxv7IWBBcKzACAVEol+6b638iEv1QjwplT3jy8QKbafuFLVlBYHsVNl50yLv
-	WjD93VeuJvNpr47TyT0iTmnzCsrltsxMk7sN4TolCa1+PchUO/w8YxjkhVfqsr2S20Vw
-	DyYvpKtC0voiyy2I59Vc8Gypx7tNek0EW7PIA=
-MIME-Version: 1.0
-Received: by 10.239.181.167 with SMTP id m39mr278733hbg.169.1258038917643; 
-	Thu, 12 Nov 2009 07:15:17 -0800 (PST)
-In-Reply-To: <be7a9f3d0911100905i791157e1lfd73c3cdb7f58f51@mail.gmail.com>
-References: <4AF353C8.80904@cs.put.poznan.pl>
-	<c384c5ea0911100806r7b163600l9adb62a23f1877a4@mail.gmail.com>
-	<be7a9f3d0911100905i791157e1lfd73c3cdb7f58f51@mail.gmail.com>
-Date: Thu, 12 Nov 2009 16:15:17 +0100
-Message-ID: <c384c5ea0911120715j12181ff2oe93d0b68c4b3fa92@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.177
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+	Thu, 12 Nov 2009 16:53:52 +0100
+Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
+	Microsoft SMTPSVC(6.0.3790.1830); Thu, 12 Nov 2009 16:51:28 +0100
+X-TM-IMSS-Message-ID: <64808bb100021266@nedap.com>
+Received: from [10.2.40.9] ([10.2.40.9]) by nedap.com ([10.91.8.1]) with ESMTP
+	(TREND IMSS SMTP Service 7.0) id 64808bb100021266 for
+	<jaap.dejong@nedap.com>; Thu, 12 Nov 2009 16:51:27 +0100
+From: Jaap de Jong <jaap.dejong@nedap.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Thu, 12 Nov 2009 16:49:01 +0100
+Message-ID: <1258040941.18126.5.camel@nvc0624>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 12 Nov 2009 15:51:29.0000 (UTC)
+	FILETIME=[FF789680:01CA63AF]
+X-SA-Exim-Connect-IP: 87.249.123.12
+X-SA-Exim-Mail-From: jaap.dejong@nedap.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: menuconfig task for kernels
+Subject: [PATCH] Precision Time Protocol (PTP) as defined by the IEEE 1588 standard
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,37 +35,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 15:44:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 12 Nov 2009 15:53:53 -0000
+X-Groupsio-MsgNum: 14220
+Content-Type: multipart/mixed; boundary="=-3PHcTYh7v3mkUBXpU/7D"
 
-Hello Otavio,
+--=-3PHcTYh7v3mkUBXpU/7D
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Tue, Nov 10, 2009 at 6:05 PM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> Hello,
->
-> On Tue, Nov 10, 2009 at 2:06 PM, Leon Woestenberg
-> <leon.woestenberg@gmail.com> wrote:
->> Look in classes/kernel.bbclass, line ~221:
->>
->> addtask menuconfig after do_patch
->> change it to:
->> addtask menuconfig after do_configure
->>
->> I wonder if this can go upstream.
->
-Any response to this idea?
+Hi there,
 
+attached a proposal for a recipe for building the 
+Precision Time Protocol daemon (ptpd).
 
-> After menuconfig the .config might be copied back to the recipe?
->
-That's a(n additional totally different) feature request.
+Suggestions by Michael Smith:
+> 
+> You are also missing the addition to checksums.ini, and maybe a line to 
+> install the manpage so the doc package gets built.
+> 
+are hacked into it
 
-I'ld rather fix things first, then add new features.
+Jaap de Jong
 
 
-Regards,
+--=-3PHcTYh7v3mkUBXpU/7D
+Content-Disposition: attachment; filename="0001-Precision-Time-Protocol.patch"
+Content-Type: text/x-patch; name="0001-Precision-Time-Protocol.patch"; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+
+Precision Time protocol (IEEE 1588)
+
+---
+ conf/checksums.ini         |    4 ++++
+ recipes/ptpd/ptpd_1.0.0.bb |   16 +++++++++++++++
+ 2 files changed, 20 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/ptpd/ptpd_1.0.0.bb
+
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index a8c8263..cf8a275 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -20774,6 +20774,10 @@ sha256=22eae4f6c72247f8ac79c57ce4469797ad3df67614758c5096b7ce9290bd10b4
+ md5=db7fd581b66998cd76d96f8b7c3f22a1
+ sha256=78e290d3cf78d4dc15c7397b0edd138b4d29cf2ad0a7311bfc1c4dfb88f2a400
+ 
++[http://downloads.sourceforge.net/project/ptpd/ptpd/1.0.0/ptpd-1.0.0.tar.gz]
++md5=b112b2bedc7f6e6e11a838608b9e0357
++sha256=8ac1fdcad1e246b0395097dd9af29966c6823533d7e6989aae91506048fb51bc
++
+ [http://pypi.python.org/packages/source/p/ptrace/ptrace-0.3.2.tar.gz]
+ md5=8108c2474bef16d126e956dce3c5073b
+ sha256=634fe75e195179adafb6218040724f38252bd0fc8f796bb3e3e9bdba065890c5
+diff --git a/recipes/ptpd/ptpd_1.0.0.bb b/recipes/ptpd/ptpd_1.0.0.bb
+new file mode 100644
+index 0000000..3737d63
+--- /dev/null
++++ b/recipes/ptpd/ptpd_1.0.0.bb
+@@ -0,0 +1,16 @@
++# ptpd build file
++LICENSE="BSD"
++DESCRIPTION="Precision Time Protocol (PTP) as defined by the IEEE 1588 standard"
++HOMEPAGE="http://sourceforge.net/projects/ptpd"
++
++SRC_URI = "http://downloads.sourceforge.net/project/ptpd/ptpd/${PV}/ptpd-${PV}.tar.gz" 
++
++S="${WORKDIR}/ptpd-${PV}/src"
++PR = "r0"
++
++do_install() {
++        install -d ${D}${bindir} ${D}${mandir}/man8
++        install -m 4555 ptpd ${D}${bindir}
++        install -m 644 ptpd.8 ${D}${mandir}/man8
++}
++
 -- 
-Leon
+1.6.3.3
 
 
+--=-3PHcTYh7v3mkUBXpU/7D--
