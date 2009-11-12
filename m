@@ -1,32 +1,40 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from [93.97.175.187] (helo=dan.rpsys.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1N8YFl-0004L4-A8
+	(envelope-from <rpurdie@rpsys.net>) id 1N8YaO-0003rx-M2
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 12:54:20 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N8YET-0004GX-T5
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 11:52:58 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1N8YES-0006jd-FM
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 11:52:56 +0000
-From: Phil Blundell <philb@gnu.org>
+	Thu, 12 Nov 2009 13:15:39 +0100
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nACCBBOa021272 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Nov 2009 12:11:11 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id tdVM415-g3gK
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Nov 2009 12:11:11 +0000 (GMT)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nACCB7fG021255
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Nov 2009 12:11:09 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hdfdoe$kj7$1@ger.gmane.org>
-References: <hdfdoe$kj7$1@ger.gmane.org>
-Date: Thu, 12 Nov 2009 11:52:52 +0000
-Message-Id: <1258026772.1484.358.camel@mill.internal.reciva.com>
+In-Reply-To: <200911120611.24699.holger+oe@freyther.de>
+References: <200911120457.39018.holger+oe@freyther.de>
+	<6ec4247d0911112034v54f570ccn4c4334a1da094f0d@mail.gmail.com>
+	<200911120549.11166.holger+oe@freyther.de>
+	<200911120611.24699.holger+oe@freyther.de>
+Date: Thu, 12 Nov 2009 12:09:20 +0000
+Message-Id: <1258027760.7382.36.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Blackfin toolchain question
+Subject: Re: meta-toolchain continues to woe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,48 +48,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 11:54:20 -0000
+X-List-Received-Date: Thu, 12 Nov 2009 12:15:39 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2009-11-11 at 22:27 +0000, Dmitry Eremin-Solenikov wrote:
-> I'm currently trying to restore/update blackfin toolchain. One of the major problems I've stumbled upon
-> are versioned scripts/export symbols. Basically there are lot's of software starting from g++ itself
-> that have symbol versioning scripts. The problem is that blackfin arch prepends all symbols with underscore,
-> thus breaking all that scripts.
+On Thu, 2009-11-12 at 06:11 +0100, Holger Hans Peter Freyther wrote:
+> On Thursday 12 November 2009 05:49:11 Holger Hans Peter Freyther wrote:
 > 
-> My first intention was to follow the alsa-libs approach: handle all prefixing on package-per-package basis.
-> However that would be a nigtmare.
+> > The test case is really simple and I will repeat it here:
+> > 
+> > 	bitbake -c populate_sdk -b meta-toolchain.bb
 > 
-> My current intention (that at least partially works) is to make libtool (when it's used) generate correct
-> versioning scripts and resort to package-per-package updating after that.
 > 
-> The problem comes from C++ world, where versioning script can contain unmangled name, but it's demangled
-> name that should be prefixed with underscore.
+> bisect shows me:
+> 	bea72c2fecde175add169bb55df1922b048030c8
 > 
-> So I have a bit hackish idea: maybe it's better to hack ld to accept scripts w/o underscores and prefix all
-> symbols with it? This will eliminate most of changes. The question is if this patch is acceptable for OE?
-> Does this approach sound too hackish?
+> 
+> IMHO the pace of the recent classes/ change was way too high, a branch and 
+> some builds would have been a lot better (no critics on the changes 
+> themselves). I'm about to write a simple meta-toolchain checker and plan to 
+> run it once a a week.... or if someone has a spare machine I would run this 
+> test there with every day..
 
-How do other Blackfin folks deal with this issue?  It doesn't sound like
-there is anything OE-specific about the problem you are facing, and I
-would have thought that it is something that should be solved upstream
-rather than with a local hack in OE.
+I think regardless of how we did this there would be some bumps. It was
+on a branch for a week and it was obvious nobody was testing it expect
+me. Getting on and doing it and dealing with problems quickly seemed
+like the best approach and was what we agreed at OEDEM.
 
-Linker version scripts operate on symbol names, not on function names,
-so I don't think that having the underscores automatically added here
-would be appropriate.  
+For this specific issue, I've pushed some fixes for meta-toolchain, let
+me know if there are any further problems. My test build completed
+locally (bitbake meta-toolchain).
 
-It is a little bit unfortunate that the Blackfin folks have decided to
-put these underscores in their symbols.  The ELF gABI calls for symbol
-names to be the same as C function names (i.e. no prefix) and, although
-I guess the psABI is permitted to countermand that, the vast majority of
-architectures do follow the gABI convention.  Underscore-prefixed symbol
-names are fairly common in the a.out and COFF worlds but of course there
-are no version scripts there so this issue does not arise.
+Cheers,
 
-p.
-
+Richard
 
 
 
