@@ -1,25 +1,32 @@
-Received: from [62.2.86.239] (helo=a.mx.bitcloner.org)
+Received: from [82.71.203.194] (helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <betheg@bitcloner.org>) id 1N8d4i-0004BT-Sv
+	(envelope-from <philb@gnu.org>) id 1N8d6v-0004YA-RP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 18:03:15 +0100
-Received: from p5b2cf4e8.dip.t-dialin.net ([91.44.244.232] helo=127.0.0.1)
-	by a.mx.bitcloner.org with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <betheg@bitcloner.org>)
-	id 1N8d3T-0003hn-Oc for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 18:01:56 +0100
-From: Michael Kurz <betheg@bitcloner.org>
+	Thu, 12 Nov 2009 18:05:33 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N8d5c-0002aM-1C
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Nov 2009 17:04:08 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1N8d5a-0000pN-A3
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Nov 2009 17:04:06 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Nov 2009 18:00:48 +0100
-Message-Id: <1258045249-18095-3-git-send-email-betheg@bitcloner.org>
-X-Mailer: git-send-email 1.6.5.2
-In-Reply-To: <1258045249-18095-1-git-send-email-betheg@bitcloner.org>
-References: <1258045249-18095-1-git-send-email-betheg@bitcloner.org>
-X-SA-Exim-Connect-IP: 62.2.86.239
-X-SA-Exim-Mail-From: betheg@bitcloner.org
+In-Reply-To: <1258040941.18126.5.camel@nvc0624>
+References: <1258040941.18126.5.camel@nvc0624>
+Date: Thu, 12 Nov 2009 17:04:02 +0000
+Message-Id: <1258045442.1484.368.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 2/3] tzdata: update to version 2009r
+Subject: Re: [PATCH] Precision Time Protocol (PTP) as defined by the IEEE 1588 standard
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,25 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 17:03:16 -0000
+X-List-Received-Date: Thu, 12 Nov 2009 17:05:33 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Michael Kurz <betheg@bitcloner.org>
----
- recipes/tzdata/tzdata_2009r.bb |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
- create mode 100644 recipes/tzdata/tzdata_2009r.bb
+On Thu, 2009-11-12 at 16:49 +0100, Jaap de Jong wrote:
+> Hi there,
+> 
+> attached a proposal for a recipe for building the 
+> Precision Time Protocol daemon (ptpd).
 
-diff --git a/recipes/tzdata/tzdata_2009r.bb b/recipes/tzdata/tzdata_2009r.bb
-new file mode 100644
-index 0000000..17c2dd4
---- /dev/null
-+++ b/recipes/tzdata/tzdata_2009r.bb
-@@ -0,0 +1,3 @@
-+require tzdata.inc
-+SRC_URI = "ftp://elsie.nci.nih.gov/pub/tzdata${PV}.tar.gz"
-+PR = "${INC_PR}.0"
--- 
-1.6.5.2
+Thanks for the patch.  I checked this in.
+
+p.
+
 
 
 
