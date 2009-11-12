@@ -1,32 +1,24 @@
-Received: from [74.125.78.145] (helo=ey-out-1920.google.com)
+Received: from [12.173.51.132] (helo=emailgateway.hillcrestlabs.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1N8aoR-0002K9-FT
+	(envelope-from <Chris.Conroy@hillcrestlabs.com>) id 1N8bW3-00030n-Pd
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 15:38:18 +0100
-Received: by ey-out-1920.google.com with SMTP id 26so525610eyw.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 06:36:58 -0800 (PST)
-Received: by 10.213.0.144 with SMTP id 16mr468023ebb.37.1258014525539;
-	Thu, 12 Nov 2009 00:28:45 -0800 (PST)
-Received: from xora-eee (www.xora.org.uk [80.68.91.202])
-	by mx.google.com with ESMTPS id 7sm2753439eyg.1.2009.11.12.00.28.44
-	(version=SSLv3 cipher=RC4-MD5); Thu, 12 Nov 2009 00:28:44 -0800 (PST)
-Date: Thu, 12 Nov 2009 08:28:41 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Thu, 12 Nov 2009 16:23:22 +0100
+X-AuditID: 0a1e000a-b7b8cae000000d7b-c1-4afc2818a914
+From: Chris Conroy <Chris.Conroy@hillcrestlabs.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091112082841.GA2239@xora-eee>
-References: <alpine.LFD.2.00.0911120045170.1265@localhost>
-	<200911120722.09166.holger+oe@freyther.de>
-	<alpine.LFD.2.00.0911120125380.1977@localhost>
-	<200911120820.08344.holger+oe@freyther.de>
-MIME-Version: 1.0
-In-Reply-To: <200911120820.08344.holger+oe@freyther.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 74.125.78.145
-X-SA-Exim-Mail-From: dp@xora.org.uk
+In-Reply-To: <6ec4247d0911112034v54f570ccn4c4334a1da094f0d@mail.gmail.com>
+References: <200911120457.39018.holger+oe@freyther.de>
+	<6ec4247d0911112034v54f570ccn4c4334a1da094f0d@mail.gmail.com>
+Date: Thu, 12 Nov 2009 10:14:29 -0500
+Message-Id: <1258038869.4924.67.camel@conroy-linux>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-Brightmail-Tracker: AAAAAA==
+X-SA-Exim-Connect-IP: 12.173.51.132
+X-SA-Exim-Mail-From: Chris.Conroy@hillcrestlabs.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: xterm: either fix it, or remove it. please.
+Subject: Re: meta-toolchain continues to woe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,40 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 14:38:18 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 12 Nov 2009 15:23:23 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Thu, Nov 12, 2009 at 08:20:08AM +0100, Holger Hans Peter Freyther wrote:
-> On Thursday 12 November 2009 07:36:32 Robert P. J. Day wrote:
+On Thu, 2009-11-12 at 15:04 +1030, Graham Gower wrote:
+> 2009/11/12 Holger Hans Peter Freyther <holger+oe@freyther.de>:
+> >
+> > ./run.do_populate_sdk.27727
+> > Collected errors:
+> >  * Could not obtain administrative lock for offline root (ERR: Bad file
+> > descriptor)  at /data/openembedded/build/arm/cortex-a8/tmp/work/x86_64-armv7a-
+> > sdk-angstrom-linux-gnueabi/meta-toolchain-1.0-r0/sdk/image//usr/lib/opkg/lock
 > 
-> 
-> >   anyway, this is about the fourth time i've explained this, either
-> > here or on the angstrom-devel list.  that's the error, and it's
-> > entirely reproducible on my f11 system.  at this point, i'm leaving it
-> > with the powers that be, and you're free to deal with it or totally
-> > ignore it.  whatever suits you.
-> 
-> Robert,
-> 
-> I totally agree that bugs should be fixed. Your attitude is somehow weird as 
-> you demand others to fix problems you are experiencing. Honestly speaking I am 
-> a bit disturbed by this attitude. Work on OE is purely community driven, if 
-> something reported is not picked up, it is saddening, but you really can't 
-> play the escalation game from the commercial world.
-> 
-I agree with Holger here, we are not you contractors/slaves. I can fix it
-for you but it will costs $$$ I can give you the email address of my
-manager who will negotiate a fee.
+> Presumably, the lock file could not be creat()ed. Unfortunately, there
+> is no error checking on that creat() call in opkg and you don't get a
+> useful error message.
+I submitted a patch to opkg back in September to fix this error message
+to be a bit more useful. If you upgrade to opkg >=216 it will save you
+some headaches whenever this error occurs.
 
-Or you could get with the rest of the open source community and start
-to understand that whining is not a construction addition to the community.
+http://code.google.com/p/opkg/issues/detail?id=22
 
-It would take you maybe 2 minutes to make a patch. Why be so damn difficult?
 
-And I also see no problem here.
-
-Graeme
-
+--Chris Conroy
 
 
