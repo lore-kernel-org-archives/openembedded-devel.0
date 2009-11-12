@@ -1,28 +1,44 @@
-Received: from [78.46.147.237] (helo=gandharva.secretlabs.de)
+Received: from [209.85.211.177] (helo=mail-yw0-f177.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1N8YoJ-0006HY-H1
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1N8Z6y-0006jB-Ck
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Nov 2009 13:30:02 +0100
-Received: from tamarin.localnet (123-192-145-111.dynamic.kbronet.com.tw
-	[123.192.145.111])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 080F11B10C04
+	Thu, 12 Nov 2009 13:49:19 +0100
+Received: by ywh7 with SMTP id 7so1956700ywh.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Nov 2009 12:39:34 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Nov 2009 13:28:19 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <200911120457.39018.holger+oe@freyther.de>
-	<200911120611.24699.holger+oe@freyther.de>
-	<1258027760.7382.36.camel@dax.rpnet.com>
-In-Reply-To: <1258027760.7382.36.camel@dax.rpnet.com>
+	Thu, 12 Nov 2009 04:47:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=zufiXWqMxWoQF9oPYhX1CUfVcLrcMfuYcMf9CqRg8KU=;
+	b=jLEUN5zHQGx1AcNlnKslDTuR6NLg+U0ayST+fyEw3o1Ug1/E7WFAKVzOsHBypGYlks
+	sUo/x4g1aDmyaUTeBOnZTs8FsJC/GRP+NgQpFUnhKilqGpTnUlM/DAgMJQslFup1CeeN
+	j6eVmU1PGGPqELPF7+2ldSH6Y2S3UGbPb8xgs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=BVBFuP+d7VBlMLxmFfhq4aTOxu4oaHHq0/zIQfFbQG46Tj9fDHJzC3EusG5Isg0+oN
+	ovwWlp2ucfcImczF4+VwYgBOGEYIoWJgPVuFkbVufukvsP3ooHdW+sk3RvEUlzIGbuvo
+	shtq7PK0EWypw1qKJWZlnJ8KHq3VJVOwCifSY=
 MIME-Version: 1.0
-Message-Id: <200911121328.19183.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Received: by 10.100.200.9 with SMTP id x9mr2406129anf.172.1258030076767; Thu, 
+	12 Nov 2009 04:47:56 -0800 (PST)
+In-Reply-To: <alpine.LFD.2.00.0911120727540.7268@localhost>
+References: <alpine.LFD.2.00.0911120045170.1265@localhost>
+	<200911120656.41249.holger+oe@freyther.de>
+	<200911120722.09166.holger+oe@freyther.de>
+	<alpine.LFD.2.00.0911120125380.1977@localhost>
+	<ac9c93b10911120015j5b8cbc07j30f57f2dc68987ca@mail.gmail.com>
+	<alpine.LFD.2.00.0911120727540.7268@localhost>
+Date: Thu, 12 Nov 2009 13:47:56 +0100
+Message-ID: <ac9c93b10911120447k496f094bg478dc05ae612b4a9@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.211.177
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: meta-toolchain continues to woe
+Subject: Re: xterm: either fix it, or remove it. please.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,42 +52,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Nov 2009 12:30:02 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 12 Nov 2009 12:49:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Thursday 12 November 2009 13:09:20 Richard Purdie wrote:
+2009/11/12 Robert P. J. Day <rpjday@crashcourse.ca>:
+> On Thu, 12 Nov 2009, Frans Meulenbroeks wrote:
+>
+>> 2009/11/12 Robert P. J. Day <rpjday@crashcourse.ca>:
+>>
+>> > the above is switching on a symbolic mode, and that final line is
+>> > using sed to convert the symbolic mode to the corresponding numeric
+>> > mode for installation.
+>> >
+>> > =A0that worked fine a few years back, but it fails on newer linux
+>> > distros for which the long listing might have a trailing period, as
+>> > does my fedora 11 system:
+>> >
+>> > $ ls -l /etc/passwd
+>> > -rw-r--r--. 1 root root 2474 2009-11-09 14:59 /etc/passwd
+>> > =A0 =A0 =A0 =A0 =A0^ there
+>>
+>> Hm. I've never ever heard about this trailing period. Where does it
+>> come from/how was it introduced?
+>
+> https://fedoraproject.org/wiki/Fedora_11_FAQ#Why_does_ls_show_a_dot_.28..=
+29_or_a_plus_.28.2B.29_at_the_end_on_the_file_modes_for_some_files.3F
+>
+> rday
+> --
 
-> 
-> I think regardless of how we did this there would be some bumps. It was
-> on a branch for a week and it was obvious nobody was testing it expect
-> me. Getting on and doing it and dealing with problems quickly seemed
-> like the best approach and was what we agreed at OEDEM.
+Robert thanks for the link.
+Didn't know that. Apparently one is never too old to learn something new.
 
-You are right, I was simply not aware that you have posted a branch for 
-review. So thank you for the changes and thank you for being stand bye
-to address these. Who ever is going to be in the TSC I would greatly 
-appreciate if we can formalize our process for updating the core 
-infrastructure.
+So it is not really fedora specific, but it is SELinux specific.
+Do we want to support SELinux as build host ?
+(the ideal solution of course would be to have our own ls in the cross dir)=
+.
 
-E.g.
+Frans.
 
-1.) Do the changes in a branch
-2.) Mail that the branch will be merged (top level posting, [MERGE] in the 
-subject)
-2.1) Get feedback from testers
-3.) Merge core changes on a "core-merge" day...
-
-
-
-
-
-> 
-> For this specific issue, I've pushed some fixes for meta-toolchain, let
-> me know if there are any further problems. My test build completed
-> locally (bitbake meta-toolchain).
-
-Thanks a lot! It is greatly appreciated.
+PS: Personally I think it is a bad idea to change the output format of
+a utility that is more than 30 years old and that is so widespread.
+(and I did not even see an obvious way to get the old behaviour).
 
 
