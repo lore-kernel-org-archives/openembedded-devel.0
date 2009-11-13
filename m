@@ -1,27 +1,42 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [150.254.30.30] (helo=libra.cs.put.poznan.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1N8vVc-0001It-ES
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Nov 2009 13:44:23 +0100
-Received: (qmail 10232 invoked by uid 1003); 13 Nov 2009 12:42:48 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 Nov 2009 12:42:48 -0000
-Message-ID: <4AFD5440.6080202@balister.org>
-Date: Fri, 13 Nov 2009 07:42:40 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
-	Thunderbird/3.0b4
+	(envelope-from <przemyslaw.wesolek@cs.put.poznan.pl>)
+	id 1N8vtZ-0001dY-3E for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Nov 2009 14:09:00 +0100
+Received: from kas30pipe.localhost (unknown [127.0.0.1])
+	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id B372F87
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Nov 2009 13:07:36 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at cs.put.poznan.pl
+Received: from libra.cs.put.poznan.pl ([127.0.0.1])
+	by localhost (libra.cs.put.poznan.pl [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id mGcg1UmpKDjC
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Nov 2009 14:07:36 +0100 (CET)
+Received: from [150.254.31.31] (idss-pw.cs.put.poznan.pl [150.254.31.31])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 4EF8682
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Nov 2009 14:07:36 +0100 (CET)
+Message-ID: <4AFD5A18.6090606@cs.put.poznan.pl>
+Date: Fri, 13 Nov 2009 14:07:36 +0100
+From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
+Organization: Poznan University of Technology
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <alpine.LFD.2.00.0911130443520.1157@localhost>	<4AFD4DD6.70509@balister.org>
-	<alpine.LFD.2.00.0911130732220.17745@localhost>
-In-Reply-To: <alpine.LFD.2.00.0911130732220.17745@localhost>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+References: <alpine.LFD.2.00.0911130555020.3622@localhost>
+	<4AFD3F42.5010309@eukrea.com>
+In-Reply-To: <4AFD3F42.5010309@eukrea.com>
+X-Enigmail-Version: 0.96.0
+X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0278], KAS30/Release
+X-SpamTest-Info: Not protected
+X-SA-Exim-Connect-IP: 150.254.30.30
+X-SA-Exim-Mail-From: przemyslaw.wesolek@cs.put.poznan.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: build breakage: python-native-2.6.1
+Subject: Re: how to remove all traces of a previous package build?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,70 +50,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Nov 2009 12:44:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 13 Nov 2009 13:09:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 11/13/2009 07:34 AM, Robert P. J. Day wrote:
-> On Fri, 13 Nov 2009, Philip Balister wrote:
->
->> On 11/13/2009 04:45 AM, Robert P. J. Day wrote:
->>>
->>>     building beagleboard-demo-image:
->>>
->>> NOTE: make -j4 BUILD_SYS= HOST_SYS= LIBC=
->>> STAGING_LIBDIR=/home/rpjday/oe/angstrom-dev/staging/x86_64-linux/usr/lib
->>> STAGING_INCDIR=/home/rpjday/oe/angstrom-dev/staging/x86_64-linux/usr/include
->>> *** WARNING: renaming "dbm" since importing it failed:
->>> build/lib.linux-x86_64-2.6/dbm.so: undefined symbol: dbm_firstkey
->>> /bin/sh: line 1:   515 Segmentation fault
->>> LD_LIBRARY_PATH=/home/rpjday/oe/angstrom-dev/work/x86_64-linux/python-native-2.6.1-ml8.2/Python-2.6.1:
->>> CC='ccache gcc -pthread' LDSHARED='ccache gcc -pthread -shared'
->>> OPT='-DNDEBUG -g  -O3 -Wall -Wstrict-prototypes' ./python -E ./setup.py -q
->>> build
->>> make: *** [sharedmods] Error 139
->>> FATAL: oe_runmake failed
->>>
->>>     that's it, that's the entire log file.  and it's entirely
->>> reproducible.
+Eric B=E9nard wrote:
+> Hi Robert,
+>=20
+> Robert P. J. Day a =E9crit :
+>>   surely a dumb question, but what's the recipe for deleting every
+>> trace of a single previous package build, so i know i'm rebuilding it
+>> absolutely from step one?  i'll use that to test a rebuild of the
+>> packages that are failing for me.
 >>
->> Well, your and my setups are the same :) Graeme is the the other F11 user and
->> it is working for him :(
->
->    i'm not on F11 anymore, i'm effectively on F12 (fully-updated f12
-> beta).  i made the upgrade a couple days ago and that's when those
-> other packages broke.  hmmmm ... i really should have made that
-> chronological connection.
->
->    but after the upgrade, i did a full rebuild of everything and those
-> were the only packages to fail.  so, percentage-wise, that's not bad.
+> I think bitbake -c clean package does what you want.
 
-I'm on F11 fwiw.
+Or '-c distclean' if you also want to remove source. :)
 
-I got this from gsb and a core file:
+Przemek
 
-http://pastebin.ca/1669812
-
-Philip
-
->
-> rday
-> --
->
->
-> ========================================================================
-> Robert P. J. Day                               Waterloo, Ontario, CANADA
->
->              Linux Consulting, Training and Kernel Pedantry.
->
-> Web page:                                          http://crashcourse.ca
-> Twitter:                                       http://twitter.com/rpjday
-> ========================================================================
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
