@@ -1,26 +1,31 @@
-Received: from [82.208.49.253] (helo=mengele.ibawizard.net ident=postfix)
+Received: from [76.76.67.137] (helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1N8wBn-0004O9-NH
+	(envelope-from <gary@mlbassoc.com>) id 1N8woK-0005lL-0C
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Nov 2009 14:27:50 +0100
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id 9B0C61D36078; Fri, 13 Nov 2009 14:19:26 +0100 (CET)
-Date: Fri, 13 Nov 2009 14:19:26 +0100
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezzor@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091113131926.GE32004@ibawizard.net>
-References: <alpine.LFD.2.00.0911130443520.1157@localhost>
-	<4AFD4DD6.70509@balister.org>
-	<alpine.LFD.2.00.0911130732220.17745@localhost>
-	<4AFD5440.6080202@balister.org>
+	Fri, 13 Nov 2009 15:07:40 +0100
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 8C759166089F; Fri, 13 Nov 2009 07:06:17 -0700 (MST)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 25C5B166082B;
+	Fri, 13 Nov 2009 07:06:17 -0700 (MST)
+Message-ID: <4AFD67D9.7080608@mlbassoc.com>
+Date: Fri, 13 Nov 2009 07:06:17 -0700
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.5) Gecko/20091112 Shredder/3.0pre
 MIME-Version: 1.0
-In-Reply-To: <4AFD5440.6080202@balister.org>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+To: Chris Conroy <Chris.Conroy@hillcrestlabs.com>
+References: <4AFAEDC3.80404@mlbassoc.com>	
+	<1257971990.4924.37.camel@conroy-linux>
+	<4AFB27AD.1010602@mlbassoc.com>
+	<1257974982.4924.56.camel@conroy-linux>
+In-Reply-To: <1257974982.4924.56.camel@conroy-linux>
+X-SA-Exim-Connect-IP: 76.76.67.137
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: build breakage: python-native-2.6.1
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Prebuilt toolchains
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,36 +39,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Nov 2009 13:27:51 -0000
-Content-Type: text/plain; charset=iso-8859-2
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 13 Nov 2009 14:07:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Philip Balister <philip@balister.org> [2009-11-13 07:42:40]:
-
-> I'm on F11 fwiw.
+On 11/11/2009 02:29 PM, Chris Conroy wrote:
+> On Wed, 2009-11-11 at 14:07 -0700, Gary Thomas wrote:
+>>
+>> Thanks for the pointer.  Given that I'm really new with OE, can you
+>> give me a clue as to how to use that recipe?  Can I just add some
+>> magic to my local.conf to make this work (instead of the lines quoted above)?
+>>
 >
-> I got this from gsb and a core file:
+> Sure thing. Sadly the snapshot of OE that we're working with internally
+> had some issues which required us to pull a few changes from poky and
+> make some local changes which I haven't been able to push upstream yet.
+> Long story short, I'm not 100% in sync with trunk here so you may need
+> to change a couple of things, but this will get you most of the way
+> there. Most of my issues were in the creation, not in the sourcing of
+> the toolchain.
 >
-> http://pastebin.ca/1669812
+> We allow developers to choose between an "external" or "scratch" (let OE
+> build it) toolchain and use a paradigm similar to the pokymode. In my
+> local.conf I have
 >
-> Philip
+>> TOOLCHAIN="external"
+>
+> In my distro conf I have:
+>
+>> #Default to build the toolchain if no external one is selected
+>> TOOLCHAIN ?= "scratch"
+>> require conf/toolchain-${TOOLCHAIN}.conf
+>
+> My toolchain-external.conf looks like:
+>> PREFERRED_PROVIDER_linux-libc-headers = "external-toolchain"
+>> PREFERRED_PROVIDER_glibc-thread-db = "external-toolchain"
+>> PREFERRED_PROVIDER_libstdc++-dev = "external-toolchain"
+>> PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc = "external-toolchain"
+>> PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}g++ = "external-toolchain"
+>> PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-initial = "external-toolchain"
+>> PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-intermediate =  "external-toolchain"
+>> PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}binutils = "external-toolchain"
+>> PREFERRED_PROVIDER_virtual/binutils = "external-toolchain"
+>> PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-for-gcc =  "external-toolchain"
+>> PREFERRED_PROVIDER_virtual/libc =  "external-toolchain"
+>> PREFERRED_PROVIDER_virtual/libintl =  "external-toolchain"
+>> PREFERRED_PROVIDER_virtual/libiconv =  "external-toolchain"
+>>
+>>
+>> TOOLCHAIN_OPTIONS = " --sysroot=${STAGING_DIR_HOST}"
+>> PATH =. "${SDK_PREFIX}/bin:"
+>
+> I believe the SDK_PREFIX is a pokyism. I also pulled in the BUILDSDK_CPPFLAGS and friends from poky.
+>
+> in bitbake.conf...
+>> export BUILDSDK_CPPFLAGS = "-isystem${STAGING_INCDIR}"
+>> export BUILDSDK_CFLAGS = "${BUILDSDK_CPPFLAGS} ${BUILD_OPTIMIZATION}"
+>> export BUILDSDK_LDFLAGS = "-L${STAGING_LIBDIR} \
+>>                      -Wl,-rpath-link,${STAGING_LIBDIR} \
+>>                      -Wl,-rpath,${libdir} -Wl,-O1"
+>
+> in sdk.bbclass...
+>> CPPFLAGS = "${BUILDSDK_CPPFLAGS}"
+>> CFLAGS = "${BUILDSDK_CFLAGS}"
+>> CXXFLAGS = "${BUILDSDK_CFLAGS}"
+>> LDFLAGS = "${BUILDSDK_LDFLAGS}"
+>
+>
+> Hopefully that helps. Ideally this stuff would just work out of the box, but it sounds like the toolchain setup is going to get a major makeover soon.
 
-I had problems building lot of native packages on Ubuntu 8.10, so I've tr=
-ied
-to update to 9.04 and voal=E1, beagleboard-demo-image builds now without =
-any
-problem.
+I've tried this setup and it _almost_ works.  I still have
+a problem though in that it insists on building gcc-cross
+(which is failing for some reason).
 
-What I'm trying to say here, is that there should be some prebuilt chroot
-environment with sane host tools everyone can use. Or we can build everyt=
-hing
-from scratch using OE, so we don't need to use anything from the host sys=
-tem.
+I can't figure out why gcc-cross is required, nor how to
+override/remove this dependency.
 
-It's simply impossible to have same result on different systems,
-distributions.
+Any ideas?
 
--- ynezz
+Thanks
+
+
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
