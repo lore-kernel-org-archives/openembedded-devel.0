@@ -1,20 +1,20 @@
 Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1N8x3J-0003cA-Qw
+	(envelope-from <rpjday@crashcourse.ca>) id 1N8x91-0003wE-Ge
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Nov 2009 15:23:09 +0100
+	Fri, 13 Nov 2009 15:29:02 +0100
 Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
 	([99.235.241.187] helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1N8x20-0003MR-7y for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Nov 2009 09:21:47 -0500
-Date: Fri, 13 Nov 2009 09:21:26 -0500 (EST)
+	id 1N8x7j-0003w9-9G for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Nov 2009 09:27:41 -0500
+Date: Fri, 13 Nov 2009 09:27:18 -0500 (EST)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <1258121373.5799.64.camel@dax.rpnet.com>
-Message-ID: <alpine.LFD.2.00.0911130921120.26077@localhost>
+Message-ID: <alpine.LFD.2.00.0911130924490.26215@localhost>
 References: <alpine.LFD.2.00.0911130447260.1157@localhost>
 	<1258106998.5799.7.camel@dax.rpnet.com>
 	<alpine.LFD.2.00.0911130702580.16806@localhost>
@@ -48,92 +48,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Nov 2009 14:23:09 -0000
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323328-190625545-1258122100=:26077"
-
---8323328-190625545-1258122100=:26077
+X-List-Received-Date: Fri, 13 Nov 2009 14:29:02 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
-Content-Transfer-Encoding: QUOTED-PRINTABLE
 
 On Fri, 13 Nov 2009, Richard Purdie wrote:
 
-> On Fri, 2009-11-13 at 07:04 -0500, Robert P. J. Day wrote:
-> > On Fri, 13 Nov 2009, Richard Purdie wrote:
-> >
-> > > On Fri, 2009-11-13 at 04:49 -0500, Robert P. J. Day wrote:
-> > > > NOTE: make -j4 sqlite3.h
-> > > > make: `sqlite3.h' is up to date.
-> > > > NOTE: make -j4
-> > > > rm -rf tsrc
-> > > > mkdir -p tsrc
-> > > > cp ./src/alter.c ./src/analyze.c ./src/attach.c ./src/auth.c ./src/=
-backup.c ./src/bitvec.c ./src/btmutex.c ./src/btree.c ./src/btree.h ./src/b=
-treeInt.h ./src/build.c ./src/callback.c ./src/complete.c ./src/date.c ./sr=
-c/delete.c ./src/expr.c ./src/fault.c ./src/fkey.c ./src/func.c ./src/globa=
-l.c ./src/hash.c ./src/hash.h ./src/hwtime.h ./src/insert.c ./src/journal.c=
- ./src/legacy.c ./src/loadext.c ./src/main.c ./src/malloc.c ./src/mem0.c ./=
-src/mem1.c ./src/mem2.c ./src/mem3.c ./src/mem5.c ./src/memjournal.c ./src/=
-mutex.c ./src/mutex.h ./src/mutex_noop.c ./src/mutex_os2.c ./src/mutex_unix=
-=2Ec ./src/mutex_w32.c ./src/notify.c ./src/os.c ./src/os.h ./src/os_common=
-=2Eh ./src/os_os2.c ./src/os_unix.c ./src/os_win.c ./src/pager.c ./src/page=
-r.h ./src/parse.y ./src/pcache.c ./src/pcache.h ./src/pcache1.c ./src/pragm=
-a.c ./src/prepare.c ./src/printf.c ./src/random.c ./src/resolve.c ./src/row=
-set.c ./src/select.c ./src/status.c ./src/shell.c ./src/sqlite.h.in ./src/s=
-qlite3ext.h ./src/sqliteInt.h ./src/sqliteLimit.h ./src/table.c ./src/tclsq=
-lite.c ./src/tokenize.c ./src/trigger.c ./src/utf.c ./src/update.c ./src/ut=
-il.c ./src/vacuum.c ./src/vdbe.c ./src/vdbe.h ./src/vdbeapi.c ./src/vdbeaux=
-=2Ec ./src/vdbeblob.c ./src/vdbemem.c ./src/vdbeInt.h ./src/vtab.c ./src/wa=
-lker.c ./src/where.c keywordhash.h opcodes.c opcodes.h parse.c parse.h conf=
-ig.h sqlite3.h ./ext/fts1/fts1.c ./ext/fts1/fts1.h ./ext/fts1/fts1_hash.c .=
-/ext/fts1/fts1_hash.h ./ext/fts1/fts1_porter.c ./ext/fts1/fts1_tokenizer.h =
-=2E/ext/fts1/fts1_tokenizer1.c ./ext/fts2/fts2.c ./ext/fts2/fts2.h ./ext/ft=
-s2/fts2_hash.c ./ext/fts2/fts2_hash.h ./ext/fts2/fts2_icu.c ./ext/fts2/fts2=
-_porter.c ./ext/fts2/fts2_tokenizer.h ./ext/fts2/fts2_tokenizer.c ./ext/fts=
-2/fts2_tokenizer1.c ./ext/fts3/fts3.c ./ext/fts3/fts3.h ./ext/fts3/fts3_exp=
-r.c ./ext/fts3/fts3_expr.h ./ext/fts3/fts3_hash.c ./ext/fts3/fts3_hash.h ./=
-ext/fts3/fts3_icu.c ./ext/fts3/fts3_porter.c ./ext/fts3/fts3_tokenizer.h ./=
-ext/fts3/fts3_tokenizer.c ./ext/fts3/fts3_tokenizer1.c ./ext/icu/sqliteicu.=
-h ./ext/icu/icu.c ./ext/rtree/rtree.h ./ext/rtree/rtree.c tsrc
-> > > > rm tsrc/sqlite.h.in tsrc/parse.y
-> > > > tclsh8.4 ./tool/vdbe-compress.tcl <tsrc/vdbe.c >vdbe.new
-> > > > tclsh8.4: error while loading shared libraries: libtcl8.4.so.0: can=
-not open shared object file: No such file or directory
-> > > > make: *** [.target_source] Error 127
-> > > > FATAL: oe_runmake failed
-> > >
-> > > There is talk on irc of the symbolic link for libtcl8.4.so.0 not bein=
-g
-> > > created. This should be done in the tcl-native recipe by the
-> > > oe_libinstall shell function call.
-> > >
-> > > We're going to need someone who is experiencing this problem to find =
-out
-> > > why that function is not creating the symlink...
-> > >
-> > > (assuming the symlink is missing)
-> >
-> >   i reran that build verbosely and with debugging, and posted it:
-> >
-> > http://pastebin.com/d2fbcdbb
->
 > Phil Blundell pushed a fix for tcl-native, could you see if that helps?
 
-  already cleaned and built, looks good.
+  i probably could have confirmed that build a little more precisely:
+
+$ find . -name libtcl8.4*
+./deploy/glibc/ipk/armv7a/libtcl8.4-0_8.4.19-r2.4_armv7a.ipk
+./staging/x86_64-linux/usr/lib/libtcl8.4.so
+./staging/x86_64-linux/usr/lib/libtcl8.4.so.0
+./staging/armv7a-angstrom-linux-gnueabi/usr/lib/libtcl8.4.so
+./staging/armv7a-angstrom-linux-gnueabi/usr/lib/libtcl8.4.so.0
+$
+
+  so the symlink that was previously missing under x86_64-linux is now
+there, so i assume building sqlite3 is now no longer an issue.
 
 rday
 --
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+========================================================================
 Robert P. J. Day                               Waterloo, Ontario, CANADA
 
             Linux Consulting, Training and Kernel Pedantry.
 
 Web page:                                          http://crashcourse.ca
 Twitter:                                       http://twitter.com/rpjday
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+========================================================================
 
---8323328-190625545-1258122100=:26077--
+
