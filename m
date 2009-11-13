@@ -1,42 +1,25 @@
-Received: from [209.85.216.183] (helo=mail-px0-f183.google.com)
+Received: from [12.173.51.132] (helo=emailgateway.hillcrestlabs.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1N8yi2-0003rk-0p
+	(envelope-from <Chris.Conroy@hillcrestlabs.com>) id 1N8yma-00042Z-HH
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Nov 2009 17:09:17 +0100
-Received: by pxi13 with SMTP id 13so2348093pxi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Nov 2009 08:07:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=xpPcvXAylZfvBxQzyvHGaYGY7eGKDhpExROd7/g9cT4=;
-	b=frnyP6EC3Xwdi9xxXP58/qv6Q9PE8mZ3tURnkunOG/eymoSXYp/mTSlhPadwyd4JGV
-	MH0Q5IUbo8rKKhVRcvPS7eoymtGItnt+45+QJ5gyrLf1e7tS2jKzk7tuzAr66gEf+a2D
-	ta9EjRT8YirY9pSfIpF5QuqCXN9FkoLTfiKMo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=oYSdiMB2cKmL65G3VqaEoRn1d6YFiQ9TxULNAWQ7SeS/rZ9flkWdVmcp0jx8XATXMM
-	Vy5Y2c2lC83PDxQw9hey1V3Ojz8hah657Is0MsqQmMMJ33kiqr58TPYwg/WXChckVZ8j
-	ew5RRIZ1G5PDML8l4FW5d/vM81VJJhClC0Vgc=
-MIME-Version: 1.0
-Received: by 10.115.114.18 with SMTP id r18mr8120591wam.24.1258126884202; Fri, 
-	13 Nov 2009 07:41:24 -0800 (PST)
-In-Reply-To: <20091113131926.GE32004@ibawizard.net>
-References: <alpine.LFD.2.00.0911130443520.1157@localhost>
-	<4AFD4DD6.70509@balister.org>
-	<alpine.LFD.2.00.0911130732220.17745@localhost>
-	<4AFD5440.6080202@balister.org> <20091113131926.GE32004@ibawizard.net>
-Date: Fri, 13 Nov 2009 09:41:24 -0600
-Message-ID: <d1ded4380911130741q571d3978i64862c9e09561861@mail.gmail.com>
-From: Adrian Alonso <aalonso00@gmail.com>
+	Fri, 13 Nov 2009 17:14:00 +0100
+X-AuditID: 0a1e000a-b7b8cae000000d7b-93-4afd857371be
+From: Chris Conroy <Chris.Conroy@hillcrestlabs.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.183
-X-SA-Exim-Mail-From: aalonso00@gmail.com
+In-Reply-To: <Pine.LNX.4.64.0911130657000.4186@juice.ott.cti.com>
+References: <alpine.LFD.2.00.0911130555020.3622@localhost>
+	<1258110604.5799.10.camel@dax.rpnet.com>
+	<Pine.LNX.4.64.0911130657000.4186@juice.ott.cti.com>
+Date: Fri, 13 Nov 2009 11:03:27 -0500
+Message-Id: <1258128207.4913.29.camel@conroy-linux>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-Brightmail-Tracker: AAAAAA==
+X-SA-Exim-Connect-IP: 12.173.51.132
+X-SA-Exim-Mail-From: Chris.Conroy@hillcrestlabs.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: build breakage: python-native-2.6.1
+Subject: Re: how to remove all traces of a previous package build?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,63 +33,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Nov 2009 16:09:17 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 13 Nov 2009 16:14:00 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-I workaround python-native-2.6.1 segfault by un-comment
-
-readline readline.c -lreadline -ltermcap
-
-in the file
-
-work/x86_64-linux/python-native-2.6.1-ml8.2/Python-2.6.1/Modules/Setup
-
-I'm also under Fedora 12 beta, hope this help;
-
-
-
-2009/11/13 Petr =A9tetiar <ynezzor@gmail.com>
-
-> Philip Balister <philip@balister.org> [2009-11-13 07:42:40]:
->
-> > I'm on F11 fwiw.
-> >
-> > I got this from gsb and a core file:
-> >
-> > http://pastebin.ca/1669812
-> >
-> > Philip
->
-> I had problems building lot of native packages on Ubuntu 8.10, so I've
-> tried
-> to update to 9.04 and voal=E1, beagleboard-demo-image builds now without =
-any
-> problem.
->
-> What I'm trying to say here, is that there should be some prebuilt chroot
-> environment with sane host tools everyone can use. Or we can build
-> everything
-> from scratch using OE, so we don't need to use anything from the host
-> system.
->
-> It's simply impossible to have same result on different systems,
-> distributions.
->
-> -- ynezz
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+On Fri, 2009-11-13 at 07:00 -0500, Michael Smith wrote:
+> On Fri, 13 Nov 2009, Richard Purdie wrote:
+> 
+> > On Fri, 2009-11-13 at 05:56 -0500, Robert P. J. Day wrote:
+> > > surely a dumb question, but what's the recipe for deleting every
+> > > trace of a single previous package build, so i know i'm rebuilding it
+> > > absolutely from step one?  i'll use that to test a rebuild of the
+> > > packages that are failing for me.
+> > 
+> > bitbake X -c clean
+> 
+> Then remove all packages under tmp/deploy; also tmp/pkgdata/*/X and
+> tmp/pkgdata/*/runtime/X*; and tmp/staging/*/*/shlibs/X*. Otherwise you may 
+> get problems if you've switched PACKAGE_ARCH in a recipe, or switched 
+> between packages that provide the same shared library.
+> 
+> I don't think there's a way to remove files from the staging directory. 
+> Maybe with packaged staging?
+> 
+> Mike
 
 
+I almost wonder if we should consider adding a task which handles the
+above in addition to the standard bitbake clean. I was burned a few
+weeks ago by having a stale package in my deploy directory that kept
+getting chosen over the new one I was building due to some versioning
+nastiness. I can see how automatically purging stuff from deploy would
+be considered destructive, but IMHO there should be a command which just
+nukes every last bit of a package the build system knows about.
 
---=20
-Saludos
-Adrian Alonso
-http://aalonso.wordpress.com
-Fedora Project Contributor
-https://fedoraproject.org/wiki/User:Aalonso
+--Chris
+
 
