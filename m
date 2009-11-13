@@ -1,38 +1,26 @@
-Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
+Received: from [216.168.135.169] (helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1N8uv0-0000Fs-OS
+	(envelope-from <philip@balister.org>) id 1N8v51-0000fF-Ta
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Nov 2009 13:06:26 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1N8utk-0006pW-Ip for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Nov 2009 07:05:04 -0500
-Date: Fri, 13 Nov 2009 07:04:57 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1258106998.5799.7.camel@dax.rpnet.com>
-Message-ID: <alpine.LFD.2.00.0911130702580.16806@localhost>
-References: <alpine.LFD.2.00.0911130447260.1157@localhost>
-	<1258106998.5799.7.camel@dax.rpnet.com>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Fri, 13 Nov 2009 13:16:47 +0100
+Received: (qmail 19699 invoked by uid 1003); 13 Nov 2009 12:15:21 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 13 Nov 2009 12:15:20 -0000
+Message-ID: <4AFD4DD6.70509@balister.org>
+Date: Fri, 13 Nov 2009 07:15:18 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
+	Thunderbird/3.0b4
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+To: openembedded-devel@lists.openembedded.org
+References: <alpine.LFD.2.00.0911130443520.1157@localhost>
+In-Reply-To: <alpine.LFD.2.00.0911130443520.1157@localhost>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: build breakage: sqlite3_3.6.20
+Subject: Re: build breakage: python-native-2.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,83 +34,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Nov 2009 12:06:26 -0000
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323328-174224166-1258113901=:16806"
+X-List-Received-Date: Fri, 13 Nov 2009 12:16:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---8323328-174224166-1258113901=:16806
-Content-Type: TEXT/PLAIN; charset=US-ASCII
-Content-Transfer-Encoding: QUOTED-PRINTABLE
-
-On Fri, 13 Nov 2009, Richard Purdie wrote:
-
-> On Fri, 2009-11-13 at 04:49 -0500, Robert P. J. Day wrote:
-> > NOTE: make -j4 sqlite3.h
-> > make: `sqlite3.h' is up to date.
-> > NOTE: make -j4
-> > rm -rf tsrc
-> > mkdir -p tsrc
-> > cp ./src/alter.c ./src/analyze.c ./src/attach.c ./src/auth.c ./src/back=
-up.c ./src/bitvec.c ./src/btmutex.c ./src/btree.c ./src/btree.h ./src/btree=
-Int.h ./src/build.c ./src/callback.c ./src/complete.c ./src/date.c ./src/de=
-lete.c ./src/expr.c ./src/fault.c ./src/fkey.c ./src/func.c ./src/global.c =
-=2E/src/hash.c ./src/hash.h ./src/hwtime.h ./src/insert.c ./src/journal.c .=
-/src/legacy.c ./src/loadext.c ./src/main.c ./src/malloc.c ./src/mem0.c ./sr=
-c/mem1.c ./src/mem2.c ./src/mem3.c ./src/mem5.c ./src/memjournal.c ./src/mu=
-tex.c ./src/mutex.h ./src/mutex_noop.c ./src/mutex_os2.c ./src/mutex_unix.c=
- ./src/mutex_w32.c ./src/notify.c ./src/os.c ./src/os.h ./src/os_common.h .=
-/src/os_os2.c ./src/os_unix.c ./src/os_win.c ./src/pager.c ./src/pager.h ./=
-src/parse.y ./src/pcache.c ./src/pcache.h ./src/pcache1.c ./src/pragma.c ./=
-src/prepare.c ./src/printf.c ./src/random.c ./src/resolve.c ./src/rowset.c =
-=2E/src/select.c ./src/status.c ./src/shell.c ./src/sqlite.h.in ./src/sqlit=
-e3ext.h ./src/sqliteInt.h ./src/sqliteLimit.h ./src/table.c ./src/tclsqlite=
-=2Ec ./src/tokenize.c ./src/trigger.c ./src/utf.c ./src/update.c ./src/util=
-=2Ec ./src/vacuum.c ./src/vdbe.c ./src/vdbe.h ./src/vdbeapi.c ./src/vdbeaux=
-=2Ec ./src/vdbeblob.c ./src/vdbemem.c ./src/vdbeInt.h ./src/vtab.c ./src/wa=
-lker.c ./src/where.c keywordhash.h opcodes.c opcodes.h parse.c parse.h conf=
-ig.h sqlite3.h ./ext/fts1/fts1.c ./ext/fts1/fts1.h ./ext/fts1/fts1_hash.c .=
-/ext/fts1/fts1_hash.h ./ext/fts1/fts1_porter.c ./ext/fts1/fts1_tokenizer.h =
-=2E/ext/fts1/fts1_tokenizer1.c ./ext/fts2/fts2.c ./ext/fts2/fts2.h ./ext/ft=
-s2/fts2_hash.c ./ext/fts2/fts2_hash.h ./ext/fts2/fts2_icu.c ./ext/fts2/fts2=
-_porter.c ./ext/fts2/fts2_tokenizer.h ./ext/fts2/fts2_tokenizer.c ./ext/fts=
-2/fts2_tokenizer1.c ./ext/fts3/fts3.c ./ext/fts3/fts3.h ./ext/fts3/fts3_exp=
-r.c ./ext/fts3/fts3_expr.h ./ext/fts3/fts3_hash.c ./ext/fts3/fts3_hash.h ./=
-ext/fts3/fts3_icu.c ./ext/fts3/fts3_porter.c ./ext/fts3/fts3_tokenizer.h ./=
-ext/fts3/fts3_tokenizer.c ./ext/fts3/fts3_tokenizer1.c ./ext/icu/sqliteicu.=
-h ./ext/icu/icu.c ./ext/rtree/rtree.h ./ext/rtree/rtree.c tsrc
-> > rm tsrc/sqlite.h.in tsrc/parse.y
-> > tclsh8.4 ./tool/vdbe-compress.tcl <tsrc/vdbe.c >vdbe.new
-> > tclsh8.4: error while loading shared libraries: libtcl8.4.so.0: cannot =
-open shared object file: No such file or directory
-> > make: *** [.target_source] Error 127
-> > FATAL: oe_runmake failed
+On 11/13/2009 04:45 AM, Robert P. J. Day wrote:
 >
-> There is talk on irc of the symbolic link for libtcl8.4.so.0 not being
-> created. This should be done in the tcl-native recipe by the
-> oe_libinstall shell function call.
+>    building beagleboard-demo-image:
 >
-> We're going to need someone who is experiencing this problem to find out
-> why that function is not creating the symlink...
+> NOTE: make -j4 BUILD_SYS= HOST_SYS= LIBC= STAGING_LIBDIR=/home/rpjday/oe/angstrom-dev/staging/x86_64-linux/usr/lib STAGING_INCDIR=/home/rpjday/oe/angstrom-dev/staging/x86_64-linux/usr/include
+> *** WARNING: renaming "dbm" since importing it failed: build/lib.linux-x86_64-2.6/dbm.so: undefined symbol: dbm_firstkey
+> /bin/sh: line 1:   515 Segmentation fault      LD_LIBRARY_PATH=/home/rpjday/oe/angstrom-dev/work/x86_64-linux/python-native-2.6.1-ml8.2/Python-2.6.1: CC='ccache gcc -pthread' LDSHARED='ccache gcc -pthread -shared' OPT='-DNDEBUG -g  -O3 -Wall -Wstrict-prototypes' ./python -E ./setup.py -q build
+> make: *** [sharedmods] Error 139
+> FATAL: oe_runmake failed
 >
-> (assuming the symlink is missing)
+>    that's it, that's the entire log file.  and it's entirely
+> reproducible.
 
-  i reran that build verbosely and with debugging, and posted it:
+Well, your and my setups are the same :) Graeme is the the other F11 
+user and it is working for him :(
 
-http://pastebin.com/d2fbcdbb
+Philip
 
-rday
---
+>
+> rday
+> --
+>
+> ========================================================================
+> Robert P. J. Day                               Waterloo, Ontario, CANADA
+>
+>              Linux Consulting, Training and Kernel Pedantry.
+>
+> Web page:                                          http://crashcourse.ca
+> Twitter:                                       http://twitter.com/rpjday
+> ========================================================================
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Robert P. J. Day                               Waterloo, Ontario, CANADA
 
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
---8323328-174224166-1258113901=:16806--
