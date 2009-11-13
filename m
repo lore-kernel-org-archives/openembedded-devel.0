@@ -1,27 +1,42 @@
-Received: from [12.173.51.132] (helo=emailgateway.hillcrestlabs.com)
+Received: from [209.85.223.198] (helo=mail-iw0-f198.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Chris.Conroy@hillcrestlabs.com>) id 1N916s-0000gb-7n
+	(envelope-from <raj.khem@gmail.com>) id 1N929c-0000lX-Mr
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Nov 2009 19:43:05 +0100
-X-AuditID: 0a1e000a-b7b8cae000000d7b-33-4afda862a857
-From: Chris Conroy <Chris.Conroy@hillcrestlabs.com>
-To: Gary Thomas <gary@mlbassoc.com>
-In-Reply-To: <4AFD968E.3050205@mlbassoc.com>
-References: <4AFAEDC3.80404@mlbassoc.com>
-	<1257971990.4924.37.camel@conroy-linux> <4AFB27AD.1010602@mlbassoc.com>
-	<1257974982.4924.56.camel@conroy-linux> <4AFD67D9.7080608@mlbassoc.com>
-	<1258127837.4913.25.camel@conroy-linux> <4AFD968E.3050205@mlbassoc.com>
-Date: Fri, 13 Nov 2009 13:41:36 -0500
-Message-Id: <1258137696.4913.55.camel@conroy-linux>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-Brightmail-Tracker: AAAAAA==
-X-SA-Exim-Connect-IP: 12.173.51.132
-X-SA-Exim-Mail-From: Chris.Conroy@hillcrestlabs.com
+	Fri, 13 Nov 2009 20:50:00 +0100
+Received: by iwn36 with SMTP id 36so2792670iwn.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Nov 2009 11:48:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=vpQs2742vIfHsyn8pQdVQWZE0g6XLY1ZMYkGCH4NizA=;
+	b=Z6XasianrCARJ8oMh9fZEylZBPed5teTUaOfGWpI9QduM+7zjzkJx5IC4S/g5ix+QQ
+	NC3Lpeh/HN5OVE2NRmJJaBUtLFLAFGtaYri2KIWtirE4Mcjhz6qis7llKU0SuxcYIQzl
+	7tWiZJNfuqtuafqB63Vf9spMGyHD+hQiL/ZD8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=E5mw9GrVXW5BD8yWDcbzCTucMk8wp16GZadQSmRjY1gElAYH9YblX6v0TeM1PTJy++
+	iki+NjZQv36sAnBMzH21dyuV6ogk4nNvvk9K96/VRsdRUa+aAMb1ctAC5fjfPu4iwbGh
+	quXSmJT3rRSKC75OEmV0jmHdCVP03TsYVF2KQ=
+MIME-Version: 1.0
+Received: by 10.231.148.135 with SMTP id p7mr2470340ibv.27.1258141715228; Fri, 
+	13 Nov 2009 11:48:35 -0800 (PST)
+In-Reply-To: <6ec4247d0911121316p41602634l75a789e752cc286f@mail.gmail.com>
+References: <200911120457.39018.holger+oe@freyther.de>
+	<6ec4247d0911112034v54f570ccn4c4334a1da094f0d@mail.gmail.com>
+	<1258038869.4924.67.camel@conroy-linux>
+	<1258039776.4924.69.camel@conroy-linux>
+	<6ec4247d0911121316p41602634l75a789e752cc286f@mail.gmail.com>
+Date: Fri, 13 Nov 2009 11:48:35 -0800
+Message-ID: <19c1b8a90911131148g491c5f33qc629d45ed156ba1@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.223.198
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Prebuilt toolchains
+Subject: Re: meta-toolchain continues to woe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,97 +50,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Nov 2009 18:43:05 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 13 Nov 2009 19:50:00 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Fri, 2009-11-13 at 10:25 -0700, Gary Thomas wrote:
-> This helped me find the problem - libgcc was required by busybox and
-> the default provider for libgcc included gcc-cross.
-> 
-> I ended up with only these [few] changes to get my own toolchain to
-> do the job:
-> 
->    #
->    # Use prebuilt compiler components
->    #
->    TOOLCHAIN = "external"
->    HOST_SYS = "${TARGET_ARCH}-${TARGET_OS}"
->    TARGET_SYS = "${TARGET_ARCH}-${TARGET_OS}"
->    ASSUME_PROVIDED += " linux-libc-headers "
->    ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}gcc "
->    ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}gcc-cross "
->    ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}gcc-initial "
->    ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}gcc-intermediate "
->    ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}binutils "
->    ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}libc-for-gcc "
->    ASSUME_PROVIDED += " libgcc "
->    ASSUME_PROVIDED += " virtual/libc "
->    ASSUME_PROVIDED += " virtual/libintl "
->    ASSUME_PROVIDED += " virtual/libiconv "
->    export TARGET_LDFLAGS = "-L${STAGING_DIR_TARGET}${layout_libdir} \
->                             -Wl,-rpath-link,${STAGING_DIR_TARGET}${layout_libdir} \
->                             -Wl,-O1"
-> 
-> The HOST_SYS and TARGET_SYS changes were necessary because my toolchain
-> is called 'powerpc-linux-XXX', not 'powerpc-oe-linux-XXX'.
-> 
-> I chose these changes (instead of just your advice) because I was already
-> down this path.  Sadly, this incantation *did* complete the build, but the
-> resulting file system did not import any of the "provided" libraries from
-> my external toolchain.  Did I miss something that would let the build
-> import these libraries?
+On Thu, Nov 12, 2009 at 1:16 PM, Graham Gower <graham.gower@gmail.com> wrote:
+> Chris,
+> The patch you submitted prints out an error from the lockf() function
+> call. Which is fine, but its more common for the creat() call to fail
+> before hand, meaning that the lockf() function would have be passed -1
+> as the file descriptor.
+>
+> I made a small change to hopefully improve this.
+> http://code.google.com/p/opkg/source/detail?r=288
 
-Yeah, this is the problem with ASSUME_PROVIDED as I see it. It removes
-the build system knowledge of these things and basically gives the
-responsibility for managing them back to you. Not good.
+creat could be replaced by open() as SUS says creat is redundant
+ if creat fails it will still report Could not obtain administrative lock .....
+that would be misleading too.
 
-> 
-> Finally, in an effort to explore and understand more, I tried your method:
->    #
->    # Use prebuilt compiler components
->    #
->    TOOLCHAIN = "external"
->    HOST_SYS = "${TARGET_ARCH}-${TARGET_OS}"
->    TARGET_SYS = "${TARGET_ARCH}-${TARGET_OS}"
->    export TARGET_LDFLAGS = "-L${STAGING_DIR_TARGET}${layout_libdir} \
->                             -Wl,-rpath-link,${STAGING_DIR_TARGET}${layout_libdir} \
->                             -Wl,-O1"
->    PREFERRED_PROVIDER_linux-libc-headers = "external-toolchain"
->    PREFERRED_PROVIDER_glibc-thread-db = "external-toolchain"
->    PREFERRED_PROVIDER_libstdc++-dev = "external-toolchain"
->    PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc = "external-toolchain"
->    PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}g++ = "external-toolchain"
->    PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-initial = "external-toolchain"
->    PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-intermediate =  "external-toolchain"
->    PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}binutils = "external-toolchain"
->    PREFERRED_PROVIDER_virtual/binutils = "external-toolchain"
->    PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-for-gcc =  "external-toolchain"
->    PREFERRED_PROVIDER_virtual/libc =  "external-toolchain"
->    PREFERRED_PROVIDER_virtual/libintl =  "external-toolchain"
->    PREFERRED_PROVIDER_virtual/libiconv =  "external-toolchain"
-> 
-> Which led to these errors right away:
->    ERROR: Conflicting PREFERRED_PROVIDER entries were found which resulted in an attempt to select multiple providers
->    (['/local/Angstrom_BeagleBoard  /openembedded/recipes/glibc/glibc_2.6.1.bb',
->    '/local/Angstrom_BeagleBoard/openembedded/recipes/meta/external-toolchain.bb']) for runtime dependecy libsegfault
->    The entries resulting in this conflict were: ['PREFERRED_PROVIDER_virtual/libc = glibc', 'PREFERRED_PROVIDER_virtual/libintl = external-toolchain']
->    ERROR: Conflicting PREFERRED_PROVIDER entries were found which resulted in an attempt to select multiple providers
->    (['/local/Angstrom_BeagleBoard/openembedded/recipes/gcc/gcc-cross_4.4.2.bb',
->    '/local/Angstrom_BeagleBoard/openembedded/recipes/meta/external-toolchain.bb']) for runtime dependecy libgcc
->    The entries resulting in this conflict were: ['PREFERRED_PROVIDER_virtual/powerpc-linux-gcc = gcc-cross', 'PREFERRED_PROVIDER_virtual/libintl = external-toolchain']
-> 
+-Khem
 
-You may need to edit the RPROVIDES of your toolchain. Here's what mine
-looks like:
-
-RPROVIDES = " glibc-dbg glibc catchsegv sln nscd ldd localedef
-glibc-utils glibc-dev glibc-locale libsegfault glibc-extra-nss
-glibc-thread-db glibc-pcprofile \
-              libgcc libgcc-dev libstdc++-dev libstdc++"
-PACKAGES_DYNAMIC = "glibc-gconv-*"
-INHIBIT_DEFAULT_DEPS = "1"
-
-
+>
+> -Graham
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
