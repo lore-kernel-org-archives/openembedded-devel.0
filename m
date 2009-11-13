@@ -1,20 +1,20 @@
 Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1N8sGx-0003kw-7x
+	(envelope-from <rpjday@crashcourse.ca>) id 1N8skC-00057D-DA
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Nov 2009 10:16:54 +0100
+	Fri, 13 Nov 2009 10:47:07 +0100
 Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
 	([99.235.241.187] helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1N8sFc-0002Oi-T0 for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Nov 2009 04:15:32 -0500
-Date: Fri, 13 Nov 2009 04:14:57 -0500 (EST)
+	id 1N8siv-0004RP-Sm for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Nov 2009 04:45:46 -0500
+Date: Fri, 13 Nov 2009 04:45:39 -0500 (EST)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@localhost
 To: OpenEmbedded Development mailing list
 	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.0911130358360.32705@localhost>
+Message-ID: <alpine.LFD.2.00.0911130443520.1157@localhost>
 User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
 X-AntiAbuse: This header was added to track abuse,
@@ -30,7 +30,7 @@ X-SA-Exim-Connect-IP: 64.235.106.9
 X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: currently broken packages: python-native, guile-native, sqlite3
+Subject: build breakage: python-native-2.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,20 +44,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Nov 2009 09:16:54 -0000
+X-List-Received-Date: Fri, 13 Nov 2009 09:47:07 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
-  from my latest build attempt at beagleboard-demo-image (after
-hacking xterm to build):
+  building beagleboard-demo-image:
 
-... snip ...
-NOTE: Tasks Summary: Attempted 8147 tasks of which 8147 didn't need to be rerun and 3 failed.
-ERROR: '/home/rpjday/oe/openembedded/recipes/python/python-native_2.6.1.bb' failed
-ERROR: '/home/rpjday/oe/openembedded/recipes/guile/guile-native_1.8.6.bb' failed
-ERROR: '/home/rpjday/oe/openembedded/recipes/sqlite/sqlite3_3.6.20.bb' failed
+NOTE: make -j4 BUILD_SYS= HOST_SYS= LIBC= STAGING_LIBDIR=/home/rpjday/oe/angstrom-dev/staging/x86_64-linux/usr/lib STAGING_INCDIR=/home/rpjday/oe/angstrom-dev/staging/x86_64-linux/usr/include
+*** WARNING: renaming "dbm" since importing it failed: build/lib.linux-x86_64-2.6/dbm.so: undefined symbol: dbm_firstkey
+/bin/sh: line 1:   515 Segmentation fault      LD_LIBRARY_PATH=/home/rpjday/oe/angstrom-dev/work/x86_64-linux/python-native-2.6.1-ml8.2/Python-2.6.1: CC='ccache gcc -pthread' LDSHARED='ccache gcc -pthread -shared' OPT='-DNDEBUG -g  -O3 -Wall -Wstrict-prototypes' ./python -E ./setup.py -q build
+make: *** [sharedmods] Error 139
+FATAL: oe_runmake failed
 
-  i'm about to look into those.
+  that's it, that's the entire log file.  and it's entirely
+reproducible.
 
 rday
 --
