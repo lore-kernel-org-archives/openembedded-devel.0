@@ -1,20 +1,20 @@
 Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1N8slm-0005D6-UO
+	(envelope-from <rpjday@crashcourse.ca>) id 1N8snk-0005J8-TS
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Nov 2009 10:48:46 +0100
+	Fri, 13 Nov 2009 10:50:48 +0100
 Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
 	([99.235.241.187] helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1N8skW-0004fB-LI for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Nov 2009 04:47:24 -0500
-Date: Fri, 13 Nov 2009 04:47:20 -0500 (EST)
+	id 1N8smU-0004sz-Lk for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Nov 2009 04:49:26 -0500
+Date: Fri, 13 Nov 2009 04:49:22 -0500 (EST)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@localhost
 To: OpenEmbedded Development mailing list
 	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.0911130446000.1157@localhost>
+Message-ID: <alpine.LFD.2.00.0911130447260.1157@localhost>
 User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
 X-AntiAbuse: This header was added to track abuse,
@@ -30,7 +30,7 @@ X-SA-Exim-Connect-IP: 64.235.106.9
 X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: build breakage: guile-native-1.8.6-r0
+Subject: build breakage: sqlite3_3.6.20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,73 +44,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Nov 2009 09:48:46 -0000
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323328-162657877-1258105641=:1157"
+X-List-Received-Date: Fri, 13 Nov 2009 09:50:48 -0000
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323328-338911782-1258105763=:1157"
 
---8323328-162657877-1258105641=:1157
+--8323328-338911782-1258105763=:1157
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 Content-Transfer-Encoding: QUOTED-PRINTABLE
 
 
   the log file:
 
+NOTE: make -j4 sqlite3.h
+make: `sqlite3.h' is up to date.
 NOTE: make -j4
-make  all-recursive
-make[1]: Entering directory `/home/rpjday/oe/angstrom-dev/work/x86_64-linux=
-/guile-native-1.8.6-r0/guile-1.8.6'
-Making all in oop
-make[2]: Entering directory `/home/rpjday/oe/angstrom-dev/work/x86_64-linux=
-/guile-native-1.8.6-r0/guile-1.8.6/oop'
-Making all in goops
-make[3]: Entering directory `/home/rpjday/oe/angstrom-dev/work/x86_64-linux=
-/guile-native-1.8.6-r0/guile-1.8.6/oop/goops'
-make[3]: Nothing to be done for `all'.
-make[3]: Leaving directory `/home/rpjday/oe/angstrom-dev/work/x86_64-linux/=
-guile-native-1.8.6-r0/guile-1.8.6/oop/goops'
-make[3]: Entering directory `/home/rpjday/oe/angstrom-dev/work/x86_64-linux=
-/guile-native-1.8.6-r0/guile-1.8.6/oop'
-make[3]: Nothing to be done for `all-am'.
-make[3]: Leaving directory `/home/rpjday/oe/angstrom-dev/work/x86_64-linux/=
-guile-native-1.8.6-r0/guile-1.8.6/oop'
-make[2]: Leaving directory `/home/rpjday/oe/angstrom-dev/work/x86_64-linux/=
-guile-native-1.8.6-r0/guile-1.8.6/oop'
-Making all in libguile
-make[2]: Entering directory `/home/rpjday/oe/angstrom-dev/work/x86_64-linux=
-/guile-native-1.8.6-r0/guile-1.8.6/libguile'
-make  all-am
-make[3]: Entering directory `/home/rpjday/oe/angstrom-dev/work/x86_64-linux=
-/guile-native-1.8.6-r0/guile-1.8.6/libguile'
-cat alist.doc arbiters.doc async.doc backtrace.doc boolean.doc chars.doc co=
-ntinuations.doc debug.doc deprecation.doc deprecated.doc discouraged.doc dy=
-nl.doc dynwind.doc environments.doc eq.doc error.doc eval.doc evalext.doc e=
-xtensions.doc feature.doc fluids.doc fports.doc futures.doc gc.doc goops.do=
-c gsubr.doc gc-mark.doc gc-segment.doc gc-malloc.doc gc-card.doc guardians.=
-doc hash.doc hashtab.doc hooks.doc i18n.doc init.doc ioext.doc keywords.doc=
- lang.doc list.doc load.doc macros.doc mallocs.doc modules.doc numbers.doc =
-objects.doc objprop.doc options.doc pairs.doc ports.doc print.doc procprop.=
-doc procs.doc properties.doc random.doc rdelim.doc read.doc root.doc rw.doc=
- scmsigs.doc script.doc simpos.doc smob.doc sort.doc srcprop.doc stackchk.d=
-oc stacks.doc stime.doc strings.doc srfi-4.doc srfi-13.doc srfi-14.doc stro=
-rder.doc strports.doc struct.doc symbols.doc threads.doc throw.doc values.d=
-oc variable.doc vectors.doc version.doc vports.doc weaks.doc ramap.doc unif=
-=2Edoc dynl.doc filesys.doc posix.doc net_db.doc socket.doc regex-posix.doc=
- | GUILE=3D"/home/rpjday/oe/angstrom-dev/work/x86_64-linux/guile-native-1.8=
-=2E6-r0/guile-1.8.6/pre-inst-guile" ../scripts/snarf-check-and-output-texi =
-         > guile-procedures.texi || { rm guile-procedures.texi; false; }
-ERROR: unknown doc attribute: (location (string . alist.c) (int . 40) (hash=
- . hash))
-cat: write error: Broken pipe
-make[3]: *** [guile-procedures.texi] Error 1
-make[3]: Leaving directory `/home/rpjday/oe/angstrom-dev/work/x86_64-linux/=
-guile-native-1.8.6-r0/guile-1.8.6/libguile'
-make[2]: *** [all] Error 2
-make[2]: Leaving directory `/home/rpjday/oe/angstrom-dev/work/x86_64-linux/=
-guile-native-1.8.6-r0/guile-1.8.6/libguile'
-make[1]: *** [all-recursive] Error 1
-make[1]: Leaving directory `/home/rpjday/oe/angstrom-dev/work/x86_64-linux/=
-guile-native-1.8.6-r0/guile-1.8.6'
-make: *** [all] Error 2
+rm -rf tsrc
+mkdir -p tsrc
+cp ./src/alter.c ./src/analyze.c ./src/attach.c ./src/auth.c ./src/backup.c=
+ ./src/bitvec.c ./src/btmutex.c ./src/btree.c ./src/btree.h ./src/btreeInt.=
+h ./src/build.c ./src/callback.c ./src/complete.c ./src/date.c ./src/delete=
+=2Ec ./src/expr.c ./src/fault.c ./src/fkey.c ./src/func.c ./src/global.c ./=
+src/hash.c ./src/hash.h ./src/hwtime.h ./src/insert.c ./src/journal.c ./src=
+/legacy.c ./src/loadext.c ./src/main.c ./src/malloc.c ./src/mem0.c ./src/me=
+m1.c ./src/mem2.c ./src/mem3.c ./src/mem5.c ./src/memjournal.c ./src/mutex.=
+c ./src/mutex.h ./src/mutex_noop.c ./src/mutex_os2.c ./src/mutex_unix.c ./s=
+rc/mutex_w32.c ./src/notify.c ./src/os.c ./src/os.h ./src/os_common.h ./src=
+/os_os2.c ./src/os_unix.c ./src/os_win.c ./src/pager.c ./src/pager.h ./src/=
+parse.y ./src/pcache.c ./src/pcache.h ./src/pcache1.c ./src/pragma.c ./src/=
+prepare.c ./src/printf.c ./src/random.c ./src/resolve.c ./src/rowset.c ./sr=
+c/select.c ./src/status.c ./src/shell.c ./src/sqlite.h.in ./src/sqlite3ext.=
+h ./src/sqliteInt.h ./src/sqliteLimit.h ./src/table.c ./src/tclsqlite.c ./s=
+rc/tokenize.c ./src/trigger.c ./src/utf.c ./src/update.c ./src/util.c ./src=
+/vacuum.c ./src/vdbe.c ./src/vdbe.h ./src/vdbeapi.c ./src/vdbeaux.c ./src/v=
+dbeblob.c ./src/vdbemem.c ./src/vdbeInt.h ./src/vtab.c ./src/walker.c ./src=
+/where.c keywordhash.h opcodes.c opcodes.h parse.c parse.h config.h sqlite3=
+=2Eh ./ext/fts1/fts1.c ./ext/fts1/fts1.h ./ext/fts1/fts1_hash.c ./ext/fts1/=
+fts1_hash.h ./ext/fts1/fts1_porter.c ./ext/fts1/fts1_tokenizer.h ./ext/fts1=
+/fts1_tokenizer1.c ./ext/fts2/fts2.c ./ext/fts2/fts2.h ./ext/fts2/fts2_hash=
+=2Ec ./ext/fts2/fts2_hash.h ./ext/fts2/fts2_icu.c ./ext/fts2/fts2_porter.c =
+=2E/ext/fts2/fts2_tokenizer.h ./ext/fts2/fts2_tokenizer.c ./ext/fts2/fts2_t=
+okenizer1.c ./ext/fts3/fts3.c ./ext/fts3/fts3.h ./ext/fts3/fts3_expr.c ./ex=
+t/fts3/fts3_expr.h ./ext/fts3/fts3_hash.c ./ext/fts3/fts3_hash.h ./ext/fts3=
+/fts3_icu.c ./ext/fts3/fts3_porter.c ./ext/fts3/fts3_tokenizer.h ./ext/fts3=
+/fts3_tokenizer.c ./ext/fts3/fts3_tokenizer1.c ./ext/icu/sqliteicu.h ./ext/=
+icu/icu.c ./ext/rtree/rtree.h ./ext/rtree/rtree.c tsrc
+rm tsrc/sqlite.h.in tsrc/parse.y
+tclsh8.4 ./tool/vdbe-compress.tcl <tsrc/vdbe.c >vdbe.new
+tclsh8.4: error while loading shared libraries: libtcl8.4.so.0: cannot open=
+ shared object file: No such file or directory
+make: *** [.target_source] Error 127
 FATAL: oe_runmake failed
+
 
 rday
 --
@@ -128,4 +111,4 @@ Twitter:                                       http://twitter.com/rpjday
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
---8323328-162657877-1258105641=:1157--
+--8323328-338911782-1258105763=:1157--
