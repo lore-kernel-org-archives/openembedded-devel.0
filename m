@@ -1,40 +1,32 @@
-Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
+Received: from [66.33.216.122] (helo=hapkido.dreamhost.com ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1N8rxh-0006qj-GE
+	(envelope-from <Sebastian@SSpaeth.de>) id 1N8s9t-0003YK-Iy
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Nov 2009 09:57:00 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1N8rwP-0000hD-30; Fri, 13 Nov 2009 03:55:39 -0500
-Date: Fri, 13 Nov 2009 03:55:02 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200911121411.53422.holger+oe@freyther.de>
-Message-ID: <alpine.LFD.2.00.0911130349390.31541@localhost>
-References: <alpine.LFD.2.00.0911120045170.1265@localhost>
-	<ac9c93b10911120447k496f094bg478dc05ae612b4a9@mail.gmail.com>
-	<alpine.LFD.2.00.0911120748300.3045@localhost>
-	<200911121411.53422.holger+oe@freyther.de>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Fri, 13 Nov 2009 10:09:36 +0100
+Received: from homiemail-a21.g.dreamhost.com (caiajhbdcbbj.dreamhost.com
+	[208.97.132.119])
+	by hapkido.dreamhost.com (Postfix) with ESMTP id 6FAB917E74B
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Nov 2009 01:08:14 -0800 (PST)
+Received: from [129.132.133.199] (mtec-hg-docking-1-dhcp-199.ethz.ch
+	[129.132.133.199])
+	by homiemail-a21.g.dreamhost.com (Postfix) with ESMTPA id CA405300061
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Nov 2009 01:08:12 -0800 (PST)
+Message-ID: <4AFD21FA.8000605@SSpaeth.de>
+Date: Fri, 13 Nov 2009 10:08:10 +0100
+From: Sebastian Spaeth <Sebastian@SSpaeth.de>
+Organization: ETH Zurich
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.7
+OpenPGP: id=C827A062
+X-SA-Exim-Connect-IP: 66.33.216.122
+X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Holger Hans Peter Freyther <holger@freyther.de>
-Subject: Re: xterm: either fix it, or remove it. please.
+Subject: dbus-native still failing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,55 +40,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Nov 2009 08:57:00 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Fri, 13 Nov 2009 09:09:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Fri, 13 Nov 2009, Holger Hans Peter Freyther wrote:
+Hi Richard, I've seen you fixed dbus-native. However it still doesn't
+work for me:
 
-> On Thursday 12 November 2009 13:58:23 Robert P. J. Day wrote:
->
-> >   i'm checking right now if there's an option to "ls" to turn
-> > *off* that feature, but i don't see one offhand.  perhaps a better
-> > lesson is that the way xterm's sinstall.sh script works is really
-> > hacky, using sed to allegedly reproduce a file's existing mode
-> > settings.  perhaps there's a simpler way to get that effect
-> > without dragging "sed" into it.  but, again, if only one package
-> > was affected, maybe just hack up an xterm fix and move on, and
-> > deal with things on a case-by-case basis as they come up.
->
-> Hi Robert,
->
-> Could you please try this patch to the sinstall.sh?
->
-> http://paste.lisp.org/display/90216
+/src/shr-unstable/tmp/staging/x86_64-linux/usr/bin/install -c
+.libs/dbus-daemon src/shr-unstable/tmp/staging/x86_64-linux/usr/bin
 
-  it looks like that patch was already applied, but that doesn't solve
-the problem since the final numeric mode string still has that
-trailing period that mucks things up.
-
-  as a simple fix that i've used before, i just added this to
-sinstall.sh, at line 131:
-
-        PROG_MODE=`echo ".$cf_mode" | sed -e 's/^..//' -e 's/rw./7/g'
--e 's/r-./5/g' -e 's/---/0/g' -e 's/--[sxt]/1/g' -e 's/+//g'`
-        $trace "final PROG_MODE = ${PROG_MODE}"  # prints "755."
-        PROG_MODE=${PROG_MODE%\.}     <--  manually strip that period
-        $trace "really final PROG_MODE = ${PROG_MODE}"  # prints "755"
-
-and it works, i just tested that.  so i'm not sure what that extended
-sed expression was supposed to accomplish but it did nothing to solve
-this issue.
-
-rday
---
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+/src/shr-unstable/tmp/staging/x86_64-linux/usr/bin/install: cannot stat
+`.libs/dbus-daemon': No such file or directory
 
 
