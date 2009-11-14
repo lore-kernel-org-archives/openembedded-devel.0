@@ -1,20 +1,20 @@
 Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1N9IWN-00068t-T4
+	(envelope-from <rpjday@crashcourse.ca>) id 1N9Igp-0000fD-J5
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 14 Nov 2009 14:18:35 +0100
+	Sat, 14 Nov 2009 14:29:22 +0100
 Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
 	([99.235.241.187] helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1N9IV6-0006WN-Ff for openembedded-devel@lists.openembedded.org;
-	Sat, 14 Nov 2009 08:17:12 -0500
-Date: Sat, 14 Nov 2009 08:17:04 -0500 (EST)
+	id 1N9IfY-0007M1-GM for openembedded-devel@lists.openembedded.org;
+	Sat, 14 Nov 2009 08:28:00 -0500
+Date: Sat, 14 Nov 2009 08:27:52 -0500 (EST)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <4AFEACEE.4050302@balister.org>
-Message-ID: <alpine.LFD.2.00.0911140816090.13494@localhost>
+Message-ID: <alpine.LFD.2.00.0911140826370.26934@localhost>
 References: <alpine.LFD.2.00.0911130443520.1157@localhost>
 	<4AFD4DD6.70509@balister.org>
 	<alpine.LFD.2.00.0911130732220.17745@localhost>
@@ -56,7 +56,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Nov 2009 13:18:35 -0000
+X-List-Received-Date: Sat, 14 Nov 2009 13:29:24 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 On Sat, 14 Nov 2009, Philip Balister wrote:
@@ -113,14 +113,8 @@ On Sat, 14 Nov 2009, Philip Balister wrote:
 >
 > It is working for me. Check and see if the patch is applied.
 
-$ git log
-commit a4bddfe9e6a513a8ad1881ed2ffd419390cf20e7
-Author: Richard Purdie <rpurdie@linux.intel.com>
-Date:   Sat Nov 14 13:25:03 2009 +0100
-
-    python-native: do not look in host paths for shared objects
-
-yes?
+ weird.  i retried the distclean on that package, tried to build again
+and now it's fine.  how odd.
 
 rday
 --
