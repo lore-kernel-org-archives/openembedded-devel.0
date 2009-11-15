@@ -1,34 +1,28 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [78.47.116.26] (helo=drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1N9j8r-0001kB-0q for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Nov 2009 18:44:04 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1N9j7W-0004H8-Vj
+	(envelope-from <mickey@vanille-media.de>) id 1N9lMs-0001wY-DM
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Nov 2009 18:42:39 +0100
-Received: from 91.213.169.4 ([91.213.169.4])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Nov 2009 18:42:38 +0100
-Received: from dbaryshkov by 91.213.169.4 with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Nov 2009 18:42:38 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-Date: Sun, 15 Nov 2009 17:42:26 +0000 (UTC)
-Message-ID: <hdpei2$9pm$1@ger.gmane.org>
+	Sun, 15 Nov 2009 21:06:41 +0100
+Received: from [192.168.0.100] (ip-81-210-244-172.unitymediagroup.de
+	[81.210.244.172])
+	by drlauer-research.com (Postfix) with ESMTP id AB42E584141
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Nov 2009 21:51:35 +0100 (CET)
+Message-Id: <765C6FD6-3D2B-4E03-9DA5-F369ABC1A21F@vanille-media.de>
+From: Michael Lauer <mickey@vanille-media.de>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <hdpei2$9pm$1@ger.gmane.org>
+X-Mailer: iPhone Mail (7D11)
+Mime-Version: 1.0 (iPhone Mail 7D11)
+Date: Sun, 15 Nov 2009 21:05:16 +0100
 References: <E1N9c2H-0004ay-Ni@melo.openembedded.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: 91.213.169.4
-User-Agent: Pan/0.132 (Waxed in Black)
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	<hdpei2$9pm$1@ger.gmane.org>
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Michael 'Mickey' Lauer : ltrace: fix wrong path to	coreutils-native and add actual dependency
+Subject: Re: Michael 'Mickey' Lauer : ltrace: fix wrong path to coreutils-native and add actual dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,30 +36,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Nov 2009 17:44:06 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 15 Nov 2009 20:06:41 -0000
+Content-Type: text/plain;
+	charset=us-ascii;
+	format=flowed;
+	delsp=yes
+Content-Transfer-Encoding: 7bit
 
-git version control wrote:
+Sorry, for some reason coreutils installs its install exactly with  
+this path here - guess that's why it broke for me without my patch.
 
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: 7df40b3378412f4700224e44042656159bc8f86c URL:   
-> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=7df40b3378412f4700224e44042656159bc8f86c
-> 
-> Author: Michael 'Mickey' Lauer
-> <mickey@vanille-media.de> Date:   Sun Nov 15
-> 11:08:43 2009 +0100
-> 
-> ltrace: fix wrong path to coreutils-native and add actual dependency
+Which version are you building?
 
-Hmmm. This broke ltrace for me (install.coreutils-native not found).
-Do you have any pending patches on coreutils-native?
+Cheers,
 
--- 
-With best wishes
-Dmitry
-
-
+:M:
 
 
