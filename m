@@ -1,27 +1,36 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [209.85.220.209] (helo=mail-fx0-f209.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1N9JYR-0008Ux-1E
+	(envelope-from <thoughtmonster@gmail.com>) id 1N9fNB-00057T-4Z
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 14 Nov 2009 15:24:46 +0100
-Received: (qmail 24480 invoked by uid 1003); 14 Nov 2009 14:23:20 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 14 Nov 2009 14:23:20 -0000
-Message-ID: <4AFEBD57.4090100@balister.org>
-Date: Sat, 14 Nov 2009 09:23:19 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
-	Thunderbird/3.0b4
+	Sun, 15 Nov 2009 14:42:36 +0100
+Received: by fxm1 with SMTP id 1so4549466fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Nov 2009 05:41:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=bbpJ+sB7R/KIcznXyVrZOeB4BXcaOyls7IFlNsL/cZ0=;
+	b=DKiNIWB6aTiPLHctZhRb9cfdf0dqFB1YEw8H8P4Ya/3nMA9ZLtd6x5JFKzvHJAEeqC
+	X9EzkqC23Wo2S4drqLL50cjX+Jmn9pinCPOjgVX6ozpqcSqZXqrq5JGP4ckjwNEwkID8
+	lkNmwWVvVb+yiG2vBwbMhjaBs5BThJYaXDsaA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=UDIi7zZbjH5d/eKzvPCSrqTuZsm96fVzlA8Ayhkp7zUJiiOyOY61Dm2b8wFzPeOk8I
+	R0MgilT3om0tuglz2hOz9ZUuwkW481C2nu8Zadoqm/npeDuXRSylozOycXsRnHI8gGbS
+	dxXIrCx5Is7tTx1l7mveOkEug5ZP15xWbaUxM=
 MIME-Version: 1.0
+Received: by 10.239.141.136 with SMTP id c8mr642743hba.148.1258292078915; Sun, 
+	15 Nov 2009 05:34:38 -0800 (PST)
+Date: Sun, 15 Nov 2009 15:34:38 +0200
+Message-ID: <992df8520911150534v4aeec248u91c5ca477de25eb9@mail.gmail.com>
+From: Alex Ferguson <thoughtmonster@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <alpine.LFD.2.00.0911130443520.1157@localhost>	<4AFD4DD6.70509@balister.org>	<alpine.LFD.2.00.0911130732220.17745@localhost>	<4AFD5440.6080202@balister.org>	<1258129007.5799.73.camel@dax.rpnet.com>	<alpine.LFD.2.00.0911131129020.5980@localhost>	<1258130362.5799.80.camel@dax.rpnet.com>	<1258152092.13901.11.camel@andromeda>	<4AFEA793.5020504@balister.org>	<alpine.LFD.2.00.0911140751320.12790@localhost>	<alpine.LFD.2.00.0911140758030.13079@localhost>	<4AFEACEE.4050302@balister.org>
-	<alpine.LFD.2.00.0911140826370.26934@localhost>
-In-Reply-To: <alpine.LFD.2.00.0911140826370.26934@localhost>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+X-SA-Exim-Connect-IP: 209.85.220.209
+X-SA-Exim-Mail-From: thoughtmonster@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: build breakage: python-native-2.6.1
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Initial Support for the Samsung Omnia (SGH-i900)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,89 +44,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Nov 2009 14:24:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 15 Nov 2009 13:42:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 11/14/2009 08:27 AM, Robert P. J. Day wrote:
-> On Sat, 14 Nov 2009, Philip Balister wrote:
->
->> On 11/14/2009 07:59 AM, Robert P. J. Day wrote:
->>> On Sat, 14 Nov 2009, Robert P. J. Day wrote:
->>>
->>>> On Sat, 14 Nov 2009, Philip Balister wrote:
->>>>
->>>>>
->>>>>
->>>>> On 11/13/2009 05:41 PM, Michael 'Mickey' Lauer wrote:
->>>>>> Hi folks,
->>>>>>
->>>>>>> That readline tweak is a hack and there is a bigger problem here.
->>>>>>> I'd
->>>>>>> like to solve it completely so yes, I'd like to confirm that was the
->>>>>>> problem please. Once someone has done that I also have a proposed
->>>>>>> fix:
->>>>>>>
->>>>>>> http://tim.rpsys.net/python-hostfix.patch
->>>>>>
->>>>>> Acked-by: Michael 'Mickey' Lauer<mickey@vanille-media.de>
->>>>>
->>>>> Tested-by: Philip Balister<philip@balister.org>
->>>>>
->>>>> Fixed on F11.
->>>>>
->>>>> Philip
->>>>>
->>>>> PS: Yes, I know RP just pushed the patch.
->>>>
->>>>     so there's only one package between me and a build of the
->>>> beagleboard demo image -- guile-native -- and adrian alonso(?)
->>>> allegedly posted a usable fix for that yesterday.  looking good.
->>>
->>>     i just pulled that python patch and i'm still getting the same build
->>> error as yesterday -- segmentation fault:
->>>
->>> NOTE: make -j4 BUILD_SYS= HOST_SYS= LIBC=
->>> STAGING_LIBDIR=/home/rpjday/oe/angstrom-dev/staging/x86_64-linux/usr/lib
->>> STAGING_INCDIR=/home/rpjday/oe/angstrom-dev/staging/x86_64-linux/usr/include
->>> *** WARNING: renaming "dbm" since importing it failed:
->>> build/lib.linux-x86_64-2.6/dbm.so: undefined symbol: dbm_firstkey
->>> /bin/sh: line 1: 12842 Segmentation fault      (core dumped)
->>> LD_LIBRARY_PATH=/home/rpjday/oe/angstrom-dev/work/x86_64-linux/python-native-2.6.1-ml8.2/Python-2.6.1:
->>> CC='ccache gcc -pthread' LDSHARED='ccache gcc -pthread -shared'
->>> OPT='-DNDEBUG -g  -O3 -Wall -Wstrict-prototypes' ./python -E
->>> ./setup.py -q build
->>> make: *** [sharedmods] Error 139
->>> FATAL: oe_runmake failed
->>>
->>>     this is after "bitbake -c distclean python-native".
->>
->> It is working for me. Check and see if the patch is applied.
->
->   weird.  i retried the distclean on that package, tried to build again
-> and now it's fine.  how odd.
+I've been working on some initial support for the Samsung Omnia (SGH-i900)
+in the form of a machine configuration file and kernel. I also posted this
+as a bug here:
 
-Obviously not enough coffee :)
+http://bugs.openembedded.org/show_bug.cgi?id=5335
 
-Philip
+Stefan Schmidt pointed out some issues with the kernel recipe, and I'd like
+some help with one of them.
 
->
-> rday
-> --
->
-> ========================================================================
-> Robert P. J. Day                               Waterloo, Ontario, CANADA
->
->              Linux Consulting, Training and Kernel Pedantry.
->
-> Web page:                                          http://crashcourse.ca
-> Twitter:                                       http://twitter.com/rpjday
-> ========================================================================
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Currently, the kernel comes from the Andromnia project, and uses their git
+repository to fetch the sources. They are the only ones who are actively
+working on a kernel, and working together should help speed up the process
+of porting the Linux kernel on the SGH-i900, no matter the userspace
+implementation.
 
+The kernel requires the gspi8686 firmware images from Marvell for the WiFi
+adapter to work. Currently, the firmware files are copied into the kernel
+source tree under the directory "firmware" for static inclusion. That's
+because of certain constraints with Android.
+
+Question: I'd like to keep the same behavior, but I'm not certain of the
+exact way. I could DEPEND on the marvell-gspi-fw package and then have the
+kernel recipe copy the firmware files from STAGING_LIBDIR. But that seems
+like an error prone behavior. Is there any other way, short of providing my
+own files in SRC_URI or not including the firmware in the kernel at all?
 
