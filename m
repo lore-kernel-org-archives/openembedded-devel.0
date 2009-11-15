@@ -1,36 +1,26 @@
-Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1N9oAQ-0002yu-9K
+Received: from [64.202.165.33] (helo=smtpauth11.prod.mesa1.secureserver.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1N9olk-00052H-Ds
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 00:06:01 +0100
-Received: from cpe00222d3a26f0-cm00222d3a26ec.cpe.net.cable.rogers.com
-	([174.113.186.52] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1N9Lcf-0005yh-Mx for openembedded-devel@lists.openembedded.org;
-	Sat, 14 Nov 2009 11:37:16 -0500
-Date: Sat, 14 Nov 2009 11:36:43 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.0911141135050.4243@localhost>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Mon, 16 Nov 2009 00:44:35 +0100
+Received: (qmail 12123 invoked from network); 15 Nov 2009 23:36:29 -0000
+Received: from unknown (75.49.209.68)
+	by smtpauth11.prod.mesa1.secureserver.net (64.202.165.33) with ESMTP;
+	15 Nov 2009 23:36:28 -0000
+Message-ID: <4B009073.6070607@mwester.net>
+Date: Sun, 15 Nov 2009 17:36:19 -0600
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+To: openembedded-devel@lists.openembedded.org
+References: <alpine.LFD.2.00.0911141040530.14929@localhost>
+In-Reply-To: <alpine.LFD.2.00.0911141040530.14929@localhost>
+X-SA-Exim-Connect-IP: 64.202.165.33
+X-SA-Exim-Mail-From: mike@mwester.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] i2c-tools: Remove i2c-tools 3.0.1, superseded by 3.0.2.
+Subject: Re: removing superseded packages?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,44 +34,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Nov 2009 23:06:01 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sun, 15 Nov 2009 23:44:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
+Robert P. J. Day wrote:
+>   is there a protocol for suggesting the removal of obsoleted(?)
+> packages?...
 
-Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+Removal of packages has been discussed in the past; it's not as simple
+as it seems.
+...
+>   given the above, it would seem reasonable that version 3.0.1 can be
+> tossed, no?  unless there's a compelling reason to keep it around.
 
----
+It does seem reasonable, and in this case I have no opinion one way or
+the other.  However, I want to point out that in the past, it has been
+the case where a "dot-dot" version difference has made substantial
+problems for one distro or another.
 
-  as near as i can tell, there is no compelling reason to keep
-i2c-tools 3.0.1.  the rebuild works just fine after deleting that
-file, and nothing seems to explicitly require 3.0.1.
+It's my opinion that disk space is cheap, and the cost of parsing a few
+extra bb files is not so high that we cannot afford to keep a few
+versions about.  There's nothing more frustrating than taking a weekend
+set aside for making significant progress on a distro issue, and instead
+spending it sorting out what changed that made the distro not build or
+not boot, and then struggling to sort out why the new version won't
+work, and then the infuriating part is when you decide to just use a
+PREFERRED_VERSION so that you can go work on your original issue, only
+to discover that path is blocked because somebody decided, for no reason
+other than aesthetics, to delete the old version that used to work!
 
-diff --git a/recipes/i2c-tools/i2c-tools_3.0.1.bb b/recipes/i2c-tools/i2c-tools_3.0.1.bb
-deleted file mode 100644
-index c8ea32a..0000000
---- a/recipes/i2c-tools/i2c-tools_3.0.1.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--DESCRIPTION = "Set of i2c tools for linux"
--SECTION = "base"
--LICENSE = "GPL"
--
--SRC_URI = "http://dl.lm-sensors.org/i2c-tools/releases/i2c-tools-${PV}.tar.bz2"
--
--inherit autotools
--
--do_compile_prepend() {
--        sed -i 's_/usr/local_/usr_' Makefile
--        sed -i 's_CC\t:= gcc_CC\t:= ${CC}_' Makefile
--}
+Again, no opinion on this specific package, just a strong opinion
+regarding the removal of old versions.
 
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
+And yes, I'm quite aware that there are others who disagree with my
+opinion very strongly as well -- there is unlikely to be agreement on
+any protocol or policy for this, I think.
 
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+-Mike (mwester)
 
 
