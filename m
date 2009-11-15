@@ -1,24 +1,38 @@
-Received: from [216.168.135.169] (helo=starfish.geekisp.com)
+Received: from [209.85.218.217] (helo=mail-bw0-f217.google.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1N9ln1-0001IV-5S
+	(envelope-from <leon.woestenberg@gmail.com>) id 1N9mLk-0005Eo-TC
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Nov 2009 21:33:42 +0100
-Received: (qmail 23017 invoked by uid 1003); 15 Nov 2009 20:32:14 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 15 Nov 2009 20:32:14 -0000
-Message-ID: <4B00654D.3010507@balister.org>
-Date: Sun, 15 Nov 2009 15:32:13 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
-	Thunderbird/3.0b4
+	Sun, 15 Nov 2009 22:09:35 +0100
+Received: by bwz9 with SMTP id 9so4774072bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Nov 2009 13:08:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=rLx/SXT+mjMenciMk0tCcoT+cLvRf6Z/UOoebVDXZpI=;
+	b=pVVgHjIqLrRrLVqWIIvbKsxe1GBuOh033QlYazC090NcjSKSZcAKWyOIijQqTQ9DsI
+	5f+LDAMtx4ZpHApm1b6HyhscC+UeqdcZkcVwSI2qgtI+WjA9Mz40HcGtF3BAf5+08YCX
+	UVmooze9Bkc033ux3yPVZ/nSu6He9DIAllzNc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=ZN9Q7Cci9dboRYS7GD4mwVfOfYhgoSkZKp6mRYXgprwzy02JL3DUwdUBcdgc8hB/K7
+	ClZHFD6g+xUvXJtofqMLgUKg7vlRnVxeZYnCKS3hof+/W+puwrezD0V7PVEcQ+deOIZK
+	6pL34V5e95Jkr9ejGtUpJ3tsi6C+86CFtFB5U=
 MIME-Version: 1.0
+Received: by 10.239.145.148 with SMTP id s20mr681482hba.142.1258319290763; 
+	Sun, 15 Nov 2009 13:08:10 -0800 (PST)
+In-Reply-To: <4B00654D.3010507@balister.org>
+References: <4B00654D.3010507@balister.org>
+Date: Sun, 15 Nov 2009 22:08:10 +0100
+Message-ID: <c384c5ea0911151308r5c745d56h63b7fa62e1ef74f8@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: New parse error in dev
+Subject: Re: New parse error in dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,26 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Nov 2009 20:33:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 15 Nov 2009 21:09:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Commit:
+Hello Philip,
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=f18414059f60ec5924a702a227069aac09f19a0b
+On Sun, Nov 15, 2009 at 9:32 PM, Philip Balister <philip@balister.org> wrote:
+> Commit:
+>
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=f18414059f60ec5924a702a227069aac09f19a0b
+>
+> introduces the following parse error:
+>
+> NOTE: Handling BitBake files: / (3129/7521) [41 %]ERROR: Could not inherit
+> file classes/girepository.bbclass while parsing
+>
+typo maybe?
 
-introduces the following parse error:
+gitrepository.bbclass vs. girepository.bbclass
 
-NOTE: Handling BitBake files: / (3129/7521) [41 %]ERROR: Could not 
-inherit file classes/girepository.bbclass while parsing 
-/home/balister/oe/openembedded/recipes/shr/libmodulo_git.bb
-NOTE: Handling BitBake files: | (7521/7521) [100 %]
-NOTE: Parsing finished. 7158 cached, 73 parsed, 289 skipped, 0 masked.
-ERROR: Parsing errors found, exiting...
-
-I don't see a quick fix, can someone knowledgeable about shr please fix 
-this ASAP.
-
-Philip
+Regards,
+-- 
+Leon
 
 
