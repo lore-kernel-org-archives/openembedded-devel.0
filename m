@@ -1,23 +1,37 @@
-Received: from [82.208.49.253] (helo=mengele.ibawizard.net ident=postfix)
+Received: from [80.91.229.12] (helo=lo.gmane.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1N9wUx-0002fF-FJ
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1N9x7w-0006ob-0o for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Nov 2009 09:40:03 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N9x6c-0005KE-7J
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 08:59:46 +0100
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id 7DC611D36078; Mon, 16 Nov 2009 08:58:16 +0100 (CET)
-Date: Mon, 16 Nov 2009 08:58:16 +0100
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezzor@gmail.com>
+	Mon, 16 Nov 2009 09:38:38 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Nov 2009 09:38:38 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Nov 2009 09:38:38 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091116075816.GF32004@ibawizard.net>
-References: <alpine.LFD.2.00.0911150948430.14311@localhost>
-MIME-Version: 1.0
-In-Reply-To: <alpine.LFD.2.00.0911150948430.14311@localhost>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 16 Nov 2009 09:38:15 +0100
+Message-ID: <hdr31n$8b0$1@ger.gmane.org>
+References: <20091115163618.GA3317@jama>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
+In-Reply-To: <20091115163618.GA3317@jama>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: any ETA on a working dev beagleboard demo image?
+Subject: Re: SRCPV migration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,24 +45,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Nov 2009 07:59:46 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 16 Nov 2009 08:40:03 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Robert P. J. Day <rpjday@crashcourse.ca> [2009-11-15 09:56:36]:
+On 15-11-09 17:36, Martin Jansa wrote:
+> As I sent earlier as reply to [PATCH] bitbake.conf: SRCPV always upgradeable
+> paths for git recipes.
+>
+> First few changes are already in martin_jansa/srcpv branch. All changes to svn.bb
+> recipes seems safe, so I would like to push them really soon. For git.bb changes
+> I need your advise/ack so please reply.
+>
+> Original e-mail:
+>
+> 1) svn recipes with +svnr{SRCREV} could be just replaced with
+> +svnr{SRCPV} as the output should be the same
+>
+> 2) svn recipes with -r{SRCREV}, -svn{SRCREV}, -svnr{SRCREV}, +r{SRCREV},
+> +svn{SRCREV} unified to +svnr{SRCPV}? I'm not sure if '+' will be sorted
+> higher version wise, so do we need to bump PE?
+>
+> 3) git recipes with -git{SRCREV}, -gitr{SRCREV}, +git{SRCREV} unified to
+> +gitr{SRCPV} with PE bump?
 
-> or perhaps start a branch named, oh, "bleeding", which, when it builds
-> properly, can be merged back into development.  whatever.  but it
-> strikes me that it's overwhelmingly pointless to have a development
-> branch that doesn't build since that gives no one the opportunity to
-> actually test it.
+If something needs a PE bump, make sure you do it properly and bump PE 
+on the non scm fetched entries as well. For the kernel I wouldn't bump 
+PE, since too many machines can use different kernel recipes.
 
-Bleeding = dev, for me at least.
+And can someone tell me how SRCPV works when you have multiple 
+buildmachines across the world, how does one keep SRCPV in sync between 
+all those machines?
 
-I had problems with building dev on Ubuntu 8.10(some weird host setup, like
-gcc and includes) so I upgraded to 9.04 and I can build beagleboard-demo-image
-again. Last time I tried it was yesterday.
+How does SRCPV work when you have recipes for 1.2+gitrfoo, 1.3+gitrbar, etc?
 
--- ynezz
+IOW: will it create more work for me (like the proposed checksums 
+changes) instead of making things easier?
+
+regards,
+
+Koen
+
 
 
