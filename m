@@ -1,40 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1N9zKH-0006xv-BN for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 12:00:56 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1N9zIz-0005Rr-Al
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1N9zdC-0001z3-D2
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 11:59:33 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Nov 2009 11:59:33 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Nov 2009 11:59:33 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 16 Nov 2009 12:20:29 +0100
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1N9zjq-0006Xv-L5
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Nov 2009 12:27:18 +0100
+Message-ID: <4B01352A.6070808@kernelconcepts.de>
+Date: Mon, 16 Nov 2009 12:19:06 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 16 Nov 2009 11:59:10 +0100
-Message-ID: <hdrb9v$1dp$1@ger.gmane.org>
-References: <20091115163618.GA3317@jama>
-	<hdr31n$8b0$1@ger.gmane.org>	<1258364356.5799.94.camel@dax.rpnet.com>
-	<hdra17$t4d$1@ger.gmane.org>
-	<1258368570.5799.99.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-In-Reply-To: <1258368570.5799.99.camel@dax.rpnet.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <alpine.LFD.2.00.0911141154040.29809@localhost>
+In-Reply-To: <alpine.LFD.2.00.0911141154040.29809@localhost>
+X-Enigmail-Version: 0.95.7
+X-SA-Exim-Connect-IP: 212.60.202.196
+X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: SRCPV migration
+Subject: Re: [PATCH] i2c-tools: Remove superseded i2c-tools 3.0.1.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,35 +35,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Nov 2009 11:00:56 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 16 Nov 2009 11:20:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 16-11-09 11:49, Richard Purdie wrote:
-> On Mon, 2009-11-16 at 11:37 +0100, Koen Kooi wrote:
->> So basically every recipe that is using SRCPV in PV or PR is unsuitable
->> to be put in online feeds. That should be enough to stop the SRCPV merge
->> into .dev.
->
-> How is this different to the current situation though?
+Hi,
 
-In the current situation (actually, last weeks situation) SRCPV was 
-never used.
+Robert P. J. Day schrieb:
+> Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
 
-> If SRCREV is locked down you will get 1 as the local build revision back
-> and it will not change and will be the same for everyone.
+I do not agree on this. There is no way to make sure people are not using it.
+Even if it is unlikely the new release might break for some of our users or just
+rely on something that is not available for everyone.
+Apart from this I do not see much of a reason for removing it at all.
 
-> If its not locked down, all bets are off but they always have been - no
-> change.
+Greetings
 
-Ah, that was the bit of info I was missing. But if SRCREV is locked down 
-(as it should!) what's the point of putting SRCPV in PV or PR? It seems 
-to make things worse if you update a locked SRCREV, since SRCPV will 
-remain '1'.
+Florian
 
-regards,
-
-Koen
-
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
