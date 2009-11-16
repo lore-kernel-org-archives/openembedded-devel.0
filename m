@@ -1,20 +1,20 @@
 Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1N9zoN-0002G0-Mo
+	(envelope-from <rpjday@crashcourse.ca>) id 1N9zto-0002RD-6H
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 12:32:03 +0100
+	Mon, 16 Nov 2009 12:37:39 +0100
 Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
 	([99.235.241.187] helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1N9zn4-00088q-Ng for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 06:30:38 -0500
-Date: Mon, 16 Nov 2009 06:30:32 -0500 (EST)
+	id 1N9zsU-0000Be-P3 for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Nov 2009 06:36:14 -0500
+Date: Mon, 16 Nov 2009 06:35:42 -0500 (EST)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <4B01352A.6070808@kernelconcepts.de>
-Message-ID: <alpine.LFD.2.00.0911160627480.16206@localhost>
+Message-ID: <alpine.LFD.2.00.0911160632490.24057@localhost>
 References: <alpine.LFD.2.00.0911141154040.29809@localhost>
 	<4B01352A.6070808@kernelconcepts.de>
 User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
@@ -46,8 +46,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Nov 2009 11:32:03 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Mon, 16 Nov 2009 11:37:40 -0000
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323328-1281820352-1258371374=:24057"
+
+--8323328-1281820352-1258371374=:24057
+Content-Type: TEXT/PLAIN; charset=ISO-8859-15
+Content-Transfer-Encoding: QUOTED-PRINTABLE
 
 On Mon, 16 Nov 2009, Florian Boor wrote:
 
@@ -62,21 +66,33 @@ On Mon, 16 Nov 2009, Florian Boor wrote:
 > for everyone. Apart from this I do not see much of a reason for
 > removing it at all.
 
-  based on a couple earlier comments, i'll agree.  so what's the
-proper protocol for adding a newer version?  just submit a patch that
-*adds* the appropriate content while leaving the current version info
-in place?  i can easily submit a patch for that.
+  by the way, i did check the changelog first to see if the
+enhancements were useful enough to warrant upgrading.  the changelog:
+
+http://linux.softpedia.com/progChangelog/I2C-Tools-Changelog-31650.html
+
+What's new in I2C Tools 3.0.2:
+=B7 Error handling has been improved.
+=B7 Buses can now be passed by name.
+=B7 A compatibility issue with perl 5.10.0 has been fixed.
+
+that struck me as sufficiently useful to warrant an upgrade, but maybe
+not.
 
 rday
 --
 
-========================================================================
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 Robert P. J. Day                               Waterloo, Ontario, CANADA
 
             Linux Consulting, Training and Kernel Pedantry.
 
 Web page:                                          http://crashcourse.ca
 Twitter:                                       http://twitter.com/rpjday
-========================================================================
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-
+--8323328-1281820352-1258371374=:24057--
