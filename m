@@ -1,37 +1,38 @@
-Received: from [80.91.229.12] (helo=lo.gmane.org)
+Received: from [64.235.106.9] (helo=astoria.ccjclearline.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1N9x7w-0006ob-0o for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 09:40:03 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1N9x6c-0005KE-7J
+	(envelope-from <rpjday@crashcourse.ca>) id 1N9xYM-000092-0z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 09:38:38 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Nov 2009 09:38:38 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Nov 2009 09:38:38 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 16 Nov 2009 10:07:21 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1N9xX0-0005FK-Mk for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Nov 2009 04:05:56 -0500
+Date: Mon, 16 Nov 2009 04:05:45 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 16 Nov 2009 09:38:15 +0100
-Message-ID: <hdr31n$8b0$1@ger.gmane.org>
-References: <20091115163618.GA3317@jama>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-In-Reply-To: <20091115163618.GA3317@jama>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+In-Reply-To: <200911160100.38336.marcin@juszkiewicz.com.pl>
+Message-ID: <alpine.LFD.2.00.0911160353130.16011@localhost>
+References: <alpine.LFD.2.00.0911150948430.14311@localhost>
+	<200911160100.38336.marcin@juszkiewicz.com.pl>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: SRCPV migration
+Subject: Re: any ETA on a working dev beagleboard demo image?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,46 +46,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Nov 2009 08:40:03 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 16 Nov 2009 09:07:21 -0000
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323328-1449353468-1258362354=:16011"
 
-On 15-11-09 17:36, Martin Jansa wrote:
-> As I sent earlier as reply to [PATCH] bitbake.conf: SRCPV always upgradeable
-> paths for git recipes.
+--8323328-1449353468-1258362354=:16011
+Content-Type: TEXT/PLAIN; charset=utf-8
+Content-Transfer-Encoding: QUOTED-PRINTABLE
+
+On Mon, 16 Nov 2009, Marcin Juszkiewicz wrote:
+
+> Dnia niedziela, 15 listopada 2009 o 15:56:36 Robert P. J. Day napisa=C5=
+=82(a):
 >
-> First few changes are already in martin_jansa/srcpv branch. All changes to svn.bb
-> recipes seems safe, so I would like to push them really soon. For git.bb changes
-> I need your advise/ack so please reply.
+> >   yes, i know i'm sounding like a broken record, but i have an
+> > invite to give a short local demo of the beagleboard this tuesday
+> > and i'd like to do it with an angstrom development demo image,
+> > just because i prefer to live out there on the edge.
 >
-> Original e-mail:
+> You can always move back to some revision before recent changes
+> happened, ...
+
+  except that i've been trying to build a beagleboard-demo-image from
+the dev branch for the last few *weeks* and have yet to have a single
+successful build.  i'd be *happy* to tag a working build if i ever get
+one.
+
+> > i appreciate that development means exactly that but, at the very
+> > least, even the development branch should *build*, even if there
+> > are run issues.
 >
-> 1) svn recipes with +svnr{SRCREV} could be just replaced with
-> +svnr{SRCPV} as the output should be the same
->
-> 2) svn recipes with -r{SRCREV}, -svn{SRCREV}, -svnr{SRCREV}, +r{SRCREV},
-> +svn{SRCREV} unified to +svnr{SRCPV}? I'm not sure if '+' will be sorted
-> higher version wise, so do we need to bump PE?
->
-> 3) git recipes with -git{SRCREV}, -gitr{SRCREV}, +git{SRCREV} unified to
-> +gitr{SRCPV} with PE bump?
+> No, it is not 'org.openembedded.always-building' branch. This is
+> development branch where everything can happen. At OEDEM it was
+> decided that many core changes will be made and we accepted some
+> breakage during that time. We are working on making it buildable
+> again but testing takes time.
 
-If something needs a PE bump, make sure you do it properly and bump PE 
-on the non scm fetched entries as well. For the kernel I wouldn't bump 
-PE, since too many machines can use different kernel recipes.
+  and therein lies the conflict -- if the branch can't even be
+*built*, it can't possibly be *tested*.  of course development
+branches are going to break on occasion, everyone knows that.  but it
+seems that, if the build itself fails, the first priority is to fix
+that.  otherwise, if you leave it broken and keep developing, all
+you're doing is layering more unknown code on top of something that
+doesn't even build (at least for some people).  and you're explicitly
+removing the ability to test from people that are willing to do that.
+that strikes me as counter-productive.
 
-And can someone tell me how SRCPV works when you have multiple 
-buildmachines across the world, how does one keep SRCPV in sync between 
-all those machines?
+  it's particularly counter-productive when it's nothing more than a
+single package that's causing the problem.
 
-How does SRCPV work when you have recipes for 1.2+gitrfoo, 1.3+gitrbar, etc?
+> "where it builds" is not a definition. For me one revision builds
+> for at91sam9263ek/x11-image target but not for progear/xfce-image
+> for example. Or build on my Debian system but breaks in Ubuntu 9.04
+> virtual. There is no such thing as 'it builds for everyone' and you
+> should know that from your xterm-207 problem which was not a problem
+> for me (as it was building under my Debian and I do not have a
+> client who would use Fedora for builds).
 
-IOW: will it create more work for me (like the proposed checksums 
-changes) instead of making things easier?
+  IMHO, the fact that you don't know anyone who uses a fedora build
+host is not a compelling reason to ignore build breakage that happens
+on a fedora build host.
 
-regards,
+  in any event, that's my $0.02.  build breakage is one thing.  but
+breakage that's lasted for as long as i've been trying to build --
+even on a development branch -- strikes me as a bad thing.
 
-Koen
+rday
+--
 
 
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Robert P. J. Day                               Waterloo, Ontario, CANADA
 
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+--8323328-1449353468-1258362354=:16011--
