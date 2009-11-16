@@ -1,27 +1,40 @@
-Received: from mail.kernelconcepts.de ([212.60.202.196])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1N9zHw-0006fq-4l
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1N9zKH-0006xv-BN for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Nov 2009 12:00:56 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1N9zIz-0005Rr-Al
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 11:58:31 +0100
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1N9zOa-0006M9-8A
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 12:05:20 +0100
-Message-ID: <4B013004.8010602@kernelconcepts.de>
-Date: Mon, 16 Nov 2009 11:57:08 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Mon, 16 Nov 2009 11:59:33 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Nov 2009 11:59:33 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Nov 2009 11:59:33 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1257959521.25369.393.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1257959521.25369.393.camel@lenovo.internal.reciva.com>
-X-Enigmail-Version: 0.95.7
-X-SA-Exim-Connect-IP: 212.60.202.196
-X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 16 Nov 2009 11:59:10 +0100
+Message-ID: <hdrb9v$1dp$1@ger.gmane.org>
+References: <20091115163618.GA3317@jama>
+	<hdr31n$8b0$1@ger.gmane.org>	<1258364356.5799.94.camel@dax.rpnet.com>
+	<hdra17$t4d$1@ger.gmane.org>
+	<1258368570.5799.99.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
+In-Reply-To: <1258368570.5799.99.camel@dax.rpnet.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: OEDEM 2009 summary: Package management
+Subject: Re: SRCPV migration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,32 +48,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Nov 2009 10:58:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 16 Nov 2009 11:00:56 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi,
+On 16-11-09 11:49, Richard Purdie wrote:
+> On Mon, 2009-11-16 at 11:37 +0100, Koen Kooi wrote:
+>> So basically every recipe that is using SRCPV in PV or PR is unsuitable
+>> to be put in online feeds. That should be enough to stop the SRCPV merge
+>> into .dev.
+>
+> How is this different to the current situation though?
 
-Phil Blundell schrieb:
-> PB: opkg generally performs OK within its own "comfort envelope".  Main
-> triggers for badness seem to be online upgrades, and the requirement to
-> make a decision between two alternatives.  If you stay away from those
-> things and use opkg only for image construction then it is not so bad.
+In the current situation (actually, last weeks situation) SRCPV was 
+never used.
 
-I have not tried much online upgrades for some time but I ran into package
-selection issues lately. We always suffered from the problem that opkg failed
-with an error message if the same package was available with two different
-architectures... but this is fixed upstream now.
+> If SRCREV is locked down you will get 1 as the local build revision back
+> and it will not change and will be the same for everyone.
 
-greetings
+> If its not locked down, all bets are off but they always have been - no
+> change.
 
-Florian
+Ah, that was the bit of info I was missing. But if SRCREV is locked down 
+(as it should!) what's the point of putting SRCPV in PV or PR? It seems 
+to make things worse if you update a locked SRCREV, since SRCPV will 
+remain '1'.
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+regards,
+
+Koen
+
 
 
