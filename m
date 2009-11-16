@@ -1,38 +1,43 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from qw-out-1920.google.com ([74.125.92.149])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NA4ol-0007xk-UL
+	(envelope-from <leon.woestenberg@gmail.com>) id 1NA5Dk-0006fP-6l
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 17:52:47 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NA4nR-0001f2-Vm for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 11:51:22 -0500
-Date: Mon, 16 Nov 2009 11:51:18 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4B017271.5040209@balister.org>
-Message-ID: <alpine.LFD.2.00.0911161148030.9291@localhost>
-References: <alpine.LFD.2.00.0911161031420.15588@localhost>
-	<4B017271.5040209@balister.org>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Mon, 16 Nov 2009 18:18:35 +0100
+Received: by qw-out-1920.google.com with SMTP id 4so948862qwk.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Nov 2009 09:17:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=8P0ZbBqU/TbP/YXe58V+XnGlmpBPuTm46/UGW50mhhQ=;
+	b=lPuw24HOGXxOTrW4G8XsMpT3EBgVBe3/lr73lEbF16E3AT7GieJXDXPMa5O2wJe0TK
+	0G2e30u6jSz0GCIiPpO6RdtT4SnkonJ96zRjBUGPgI/POzw/Vjh+M1xJdZssNy7otAV0
+	ggKpTAZCuPmbOQmYjeM94uPS7rcMPHmuKbETI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=G3gL0JO6pqAdSUA6COHjQxnCdVbPF5L7iKS5mIwHBKE6wmGxA31obSq6vwroumq193
+	A484d8PIRMt0IFkJwoH+1JDV8KypMB5jMuWEtlWpYbQ3XyCFaWHcbuyU2bHsWN8SCN4m
+	IOSswT+IWz7/zojTbkJldlKVhz7be7XNS44p4=
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+Received: by 10.239.143.219 with SMTP id l27mr808454hba.162.1258391829994; 
+	Mon, 16 Nov 2009 09:17:09 -0800 (PST)
+In-Reply-To: <alpine.LFD.2.00.0911160553300.13586@localhost>
+References: <alpine.LFD.2.00.0911150948430.14311@localhost>
+	<200911160100.38336.marcin@juszkiewicz.com.pl>
+	<alpine.LFD.2.00.0911160353130.16011@localhost>
+	<1258365971.25369.528.camel@lenovo.internal.reciva.com>
+	<alpine.LFD.2.00.0911160553300.13586@localhost>
+Date: Mon, 16 Nov 2009 18:17:09 +0100
+Message-ID: <c384c5ea0911160917y101a8759l9b879c0028f8ffa6@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.92.149
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: apparently, i have a beagleboard-demo-image!
+Subject: Re: any ETA on a working dev beagleboard demo image?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,42 +51,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Nov 2009 16:52:47 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Mon, 16 Nov 2009 17:18:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 16 Nov 2009, Philip Balister wrote:
+Hello,
 
-> On 11/16/2009 10:34 AM, Robert P. J. Day wrote:
-> >
-> >    build just finished, 0 errors.  go figure.  but i'm puzzled
-> > since, until recently, guile-native was failing to build and i
-> > don't see anything in the git log that would have done anything
-> > with that package.  can someone clarify this?  i also don't recall
-> > manually patching that package based on an earlier poster's
-> > suggestion, so i have no idea why it would suddenly start to
-> > build.  (perhaps i'll distclean that and make sure it builds
-> > again.)
-> >
-> >    in any event, happy happy, joy joy.
->
-> Lucky you, opkg-cl is failing for me. Fortunately, I have some real
-> work to keep me out of trouble.
+On Mon, Nov 16, 2009 at 11:53 AM, Robert P. J. Day
+<rpjday@crashcourse.ca> wrote:
+> On Mon, 16 Nov 2009, Phil Blundell wrote:
+>> On Mon, 2009-11-16 at 04:05 -0500, Robert P. J. Day wrote:
+>> > =A0 IMHO, the fact that you don't know anyone who uses a fedora
+>> > build host is not a compelling reason to ignore build breakage
+>> > that happens on a fedora build host.
+>>
 
-  well, crap.  so i distclean'ed guile-native and just tried to
-re-bitbake it -- same build error as before.  i have no idea how i got
-past that during this last build of beagleboard-demo-image.  i'm
-confused.
+There has been talk about automated build tests (in fact, I have used
+nightly builds to find regressions but no longer have the hardware
+available to me).
 
-rday
---
+I think it would be good to generate a set of "well-known good
+building combo's" that build from scratch.
 
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
+Which keys should be in there? I think: host system (uname output?),
+target (MACHINE), bitbake target (image name), OE .dev revision (git
+commit)
 
-            Linux Consulting, Training and Kernel Pedantry.
+What can we extract from the tinderbox database?
 
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+Should we modify the oe-stats class so that we collect this
+information automatically?
+
+Maybe detect that the user is building from scratch (i.e. no
+destination directory exists yet)
+
+Regards,
+--=20
+Leon
 
 
