@@ -1,20 +1,20 @@
 Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NA44W-0007Re-Ga
+	(envelope-from <rpjday@crashcourse.ca>) id 1NA4ol-0007xk-UL
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 17:04:59 +0100
+	Mon, 16 Nov 2009 17:52:47 +0100
 Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
 	([99.235.241.187] helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NA43B-0005hI-PH for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 11:03:33 -0500
-Date: Mon, 16 Nov 2009 11:03:18 -0500 (EST)
+	id 1NA4nR-0001f2-Vm for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Nov 2009 11:51:22 -0500
+Date: Mon, 16 Nov 2009 11:51:18 -0500 (EST)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <4B017271.5040209@balister.org>
-Message-ID: <alpine.LFD.2.00.0911161100340.31519@localhost>
+Message-ID: <alpine.LFD.2.00.0911161148030.9291@localhost>
 References: <alpine.LFD.2.00.0911161031420.15588@localhost>
 	<4B017271.5040209@balister.org>
 User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
@@ -46,7 +46,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Nov 2009 16:05:00 -0000
+X-List-Received-Date: Mon, 16 Nov 2009 16:52:47 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 On Mon, 16 Nov 2009, Philip Balister wrote:
@@ -67,39 +67,10 @@ On Mon, 16 Nov 2009, Philip Balister wrote:
 > Lucky you, opkg-cl is failing for me. Fortunately, I have some real
 > work to keep me out of trouble.
 
-  anything i can do to test on this end?  here's my current repo
-status:
-
-=====
-
-$ git show
-commit 9cbd93cd04ffa16a6b9aee5b6d63751777b91b16
-Author: Richard Purdie <rpurdie@linux.intel.com>
-Date:   Mon Nov 16 12:46:10 2009 +0000
-
-    package.bbclass: Add back import os until further metadata cleanups happen
-
-    Signed-off-by: Richard Purdie <rpurdie@linux.intel.com>
-
-diff --git a/classes/package.bbclass b/classes/package.bbclass
-index 5de48d6..246ecd4 100644
---- a/classes/package.bbclass
-+++ b/classes/package.bbclass
-@@ -338,7 +338,7 @@ python perform_packagecopy () {
- }
-
- python populate_packages () {
--       import glob, stat, errno, re
-+       import glob, stat, errno, re,os
-
-        workdir = bb.data.getVar('WORKDIR', d, True)
-        outdir = bb.data.getVar('DEPLOY_DIR', d, True)
-
-=====
-
-  at some point in the near future when f12 comes out (couple days),
-i'll try to reproduce the build from scratch on a fresh install, just
-to play it safe.  at least i have a benchmark now.
+  well, crap.  so i distclean'ed guile-native and just tried to
+re-bitbake it -- same build error as before.  i have no idea how i got
+past that during this last build of beagleboard-demo-image.  i'm
+confused.
 
 rday
 --
