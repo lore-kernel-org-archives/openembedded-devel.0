@@ -1,28 +1,39 @@
-Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
+Received: from mail-pw0-f53.google.com ([209.85.160.53])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1NAAGu-000642-H7
+	(envelope-from <graham.gower@gmail.com>) id 1NAAMN-0006DK-Hd
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 23:42:12 +0100
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 6071116607B8; Mon, 16 Nov 2009 15:40:46 -0700 (MST)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 7CF531660790;
-	Mon, 16 Nov 2009 15:40:42 -0700 (MST)
-Message-ID: <4B01D4EA.4050507@mlbassoc.com>
-Date: Mon, 16 Nov 2009 15:40:42 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.5) Gecko/20091116 Shredder/3.0.1pre
+	Mon, 16 Nov 2009 23:47:50 +0100
+Received: by pwj11 with SMTP id 11so3555805pwj.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Nov 2009 14:46:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=lNPnb5wX7P40VnSiMVfR1v6+5HqKBi/2qUN9v/8gmBU=;
+	b=WHmBzpH5kskGHBjB+bgdKO6dk7AZz5VZEUuSHsFRynMftF2A2W9cvtiyCo0dlBPifF
+	sYh7yUBUVfaDRsdI4l2XciMIHc5DZ1dEmooOiSXbkRHOa7Gc4qCTVvy/agepF8gh7I70
+	3OKgYI6MvoI98zIVrqehnrJ/fLX8Mgrg5bVOI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=koCsaRwofKlQqmAtklUlokZBMzpareyw1Qs47ad0gU4MLY1hnceDyvDRSZ8DWQANx8
+	sSyqE2KR9rD0P+BTlhkzZRveOgA80cOsjvyuXWxg2EwVnqR0PKcCyUDzl1AB+sP+ewLO
+	nqtDoIopx8lfvcfSovRWz1WcJGh18wgp9TJT0=
 MIME-Version: 1.0
+Received: by 10.142.119.10 with SMTP id r10mr881985wfc.255.1258411583954; Mon, 
+	16 Nov 2009 14:46:23 -0800 (PST)
+In-Reply-To: <4AA75260.4010901@gmail.com>
+References: <4AA75260.4010901@gmail.com>
+Date: Tue, 17 Nov 2009 09:16:23 +1030
+Message-ID: <6ec4247d0911161446n4c645ff1ia7e2ebeaa9b6c765@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4AFAEDC3.80404@mlbassoc.com>		<1257971990.4924.37.camel@conroy-linux>	<4AFB27AD.1010602@mlbassoc.com>		<1257974982.4924.56.camel@conroy-linux>	<4AFD67D9.7080608@mlbassoc.com>		<1258127837.4913.25.camel@conroy-linux>	<4AFD968E.3050205@mlbassoc.com>	<1258137696.4913.55.camel@conroy-linux>
-	<4AFDE513.3080205@mlbassoc.com>
-In-Reply-To: <4AFDE513.3080205@mlbassoc.com>
-X-SA-Exim-Connect-IP: 76.76.67.137
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+X-SA-Exim-Connect-IP: 209.85.160.53
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Prebuilt toolchains
+Subject: Re: [PATCH] Add fbreader 0.10.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,214 +47,274 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Nov 2009 22:42:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 16 Nov 2009 22:47:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 11/13/2009 04:00 PM, Gary Thomas wrote:
-> On 11/13/2009 11:41 AM, Chris Conroy wrote:
->> On Fri, 2009-11-13 at 10:25 -0700, Gary Thomas wrote:
->>> This helped me find the problem - libgcc was required by busybox and
->>> the default provider for libgcc included gcc-cross.
->>>
->>> I ended up with only these [few] changes to get my own toolchain to
->>> do the job:
->>>
->>> #
->>> # Use prebuilt compiler components
->>> #
->>> TOOLCHAIN = "external"
->>> HOST_SYS = "${TARGET_ARCH}-${TARGET_OS}"
->>> TARGET_SYS = "${TARGET_ARCH}-${TARGET_OS}"
->>> ASSUME_PROVIDED += " linux-libc-headers "
->>> ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}gcc "
->>> ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}gcc-cross "
->>> ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}gcc-initial "
->>> ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}gcc-intermediate "
->>> ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}binutils "
->>> ASSUME_PROVIDED += " virtual/${TARGET_PREFIX}libc-for-gcc "
->>> ASSUME_PROVIDED += " libgcc "
->>> ASSUME_PROVIDED += " virtual/libc "
->>> ASSUME_PROVIDED += " virtual/libintl "
->>> ASSUME_PROVIDED += " virtual/libiconv "
->>> export TARGET_LDFLAGS = "-L${STAGING_DIR_TARGET}${layout_libdir} \
->>> -Wl,-rpath-link,${STAGING_DIR_TARGET}${layout_libdir} \
->>> -Wl,-O1"
->>>
->>> The HOST_SYS and TARGET_SYS changes were necessary because my toolchain
->>> is called 'powerpc-linux-XXX', not 'powerpc-oe-linux-XXX'.
->>>
->>> I chose these changes (instead of just your advice) because I was
->>> already
->>> down this path. Sadly, this incantation *did* complete the build, but
->>> the
->>> resulting file system did not import any of the "provided" libraries
->>> from
->>> my external toolchain. Did I miss something that would let the build
->>> import these libraries?
->>
->> Yeah, this is the problem with ASSUME_PROVIDED as I see it. It removes
->> the build system knowledge of these things and basically gives the
->> responsibility for managing them back to you. Not good.
->>
->>>
->>> Finally, in an effort to explore and understand more, I tried your
->>> method:
->>> #
->>> # Use prebuilt compiler components
->>> #
->>> TOOLCHAIN = "external"
->>> HOST_SYS = "${TARGET_ARCH}-${TARGET_OS}"
->>> TARGET_SYS = "${TARGET_ARCH}-${TARGET_OS}"
->>> export TARGET_LDFLAGS = "-L${STAGING_DIR_TARGET}${layout_libdir} \
->>> -Wl,-rpath-link,${STAGING_DIR_TARGET}${layout_libdir} \
->>> -Wl,-O1"
->>> PREFERRED_PROVIDER_linux-libc-headers = "external-toolchain"
->>> PREFERRED_PROVIDER_glibc-thread-db = "external-toolchain"
->>> PREFERRED_PROVIDER_libstdc++-dev = "external-toolchain"
->>> PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc = "external-toolchain"
->>> PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}g++ = "external-toolchain"
->>> PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-initial =
->>> "external-toolchain"
->>> PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-intermediate =
->>> "external-toolchain"
->>> PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}binutils =
->>> "external-toolchain"
->>> PREFERRED_PROVIDER_virtual/binutils = "external-toolchain"
->>> PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-for-gcc =
->>> "external-toolchain"
->>> PREFERRED_PROVIDER_virtual/libc = "external-toolchain"
->>> PREFERRED_PROVIDER_virtual/libintl = "external-toolchain"
->>> PREFERRED_PROVIDER_virtual/libiconv = "external-toolchain"
->>>
->>> Which led to these errors right away:
->>> ERROR: Conflicting PREFERRED_PROVIDER entries were found which
->>> resulted in an attempt to select multiple providers
->>> (['/local/Angstrom_BeagleBoard
->>> /openembedded/recipes/glibc/glibc_2.6.1.bb',
->>> '/local/Angstrom_BeagleBoard/openembedded/recipes/meta/external-toolchain.bb'])
->>> for runtime dependecy libsegfault
->>> The entries resulting in this conflict were:
->>> ['PREFERRED_PROVIDER_virtual/libc = glibc',
->>> 'PREFERRED_PROVIDER_virtual/libintl = external-toolchain']
->>> ERROR: Conflicting PREFERRED_PROVIDER entries were found which
->>> resulted in an attempt to select multiple providers
->>> (['/local/Angstrom_BeagleBoard/openembedded/recipes/gcc/gcc-cross_4.4.2.bb',
->>>
->>> '/local/Angstrom_BeagleBoard/openembedded/recipes/meta/external-toolchain.bb'])
->>> for runtime dependecy libgcc
->>> The entries resulting in this conflict were:
->>> ['PREFERRED_PROVIDER_virtual/powerpc-linux-gcc = gcc-cross',
->>> 'PREFERRED_PROVIDER_virtual/libintl = external-toolchain']
->>>
->>
->> You may need to edit the RPROVIDES of your toolchain. Here's what mine
->> looks like:
->>
->> RPROVIDES = " glibc-dbg glibc catchsegv sln nscd ldd localedef
->> glibc-utils glibc-dev glibc-locale libsegfault glibc-extra-nss
->> glibc-thread-db glibc-pcprofile \
->> libgcc libgcc-dev libstdc++-dev libstdc++"
->> PACKAGES_DYNAMIC = "glibc-gconv-*"
->> INHIBIT_DEFAULT_DEPS = "1"
->
-> Still no joy, I'm afraid. I now get a *huge* series of messages like these:
->
-> NOTE: preferred version 2.11.4.1 of xf86-video-geode not available (for
-> item libsegfault)
-> NOTE: preferred version 1.0.1 of font-screen-cyrillic not available (for
-> item libsegfault)
-> NOTE: preferred version 1.2.4 of opie-securityplugin-dummy not available
-> (for item libsegfault)
-> NOTE: preferred version 6.9.0 of xf86-video-ati not available (for item
-> libsegfault)
-> NOTE: preferred version 12.5.1 of xf86-input-vmmouse not available (for
-> item libsegfault)
-> ERROR: Conflicting PREFERRED_PROVIDER entries were found which resulted
-> in an attempt to select multiple providers
-> (['/local/Angstrom_BeagleBoard/openembedded/recipes/gcc/gcc-cross_4.4.2.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libxpm_3.5.7.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libice_1.0.4.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libxrandr_1.2.3.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libxfixes_4.0.3.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libxinerama_1.0.3.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/libqpe/libqpe-opie_1.2.4.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libx11_1.1.5.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-proto/xproto_7.0.13.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libxt_1.0.5.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libxv_1.0.4.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libxcursor_1.1.9.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libxrender_0.9.4.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-xserver/xserver-xorg_1.5.3.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/gcc/gcc-cross-intermediate_4.4.2.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libxext_1.0.4.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libxi_1.2.0.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libxmu_1.0.4.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/glibc/glibc_2.6.1.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/binutils/binutils-cross_2.20.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/glibc/glibc-initial_2.6.1.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libxcomposite_0.4.0.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libsm_1.1.0.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libxft_2.1.13.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/gcc/gcc-cross-initial_4.4.2.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-app/xrandr_1.2.3.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libxaw_1.0.4.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libxxf86vm_1.0.2.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/qte/qte-mt_2.3.10.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/xorg-lib/libxdamage_1.1.1.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/linux-libc-headers/linux-libc-headers_2.6.23.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/gnome/gconf-dbus_svn.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/avahi/avahi_0.6.24.bb', '/local/Angstrom_BeagleBoard/openembedded/recipes/libgpewidget/libgpewidget_0.117.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/libsdl/libsdl-x11_1.2.11.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/meta/external-toolchain.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/linux/linux_2.6.31.bb', '/local/Angstrom_BeagleBoard/openembedded/recipes/gtk+/gtk+_2.14.2.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/libusb/libusb_0.1.12.bb',
-> '/local/Angstrom_BeagleBoard/openembedded/recipes/db/db3_3.2.9.bb']) for
-> runtime dependecy libsegfault
-> The entries resulting in this conflict were:
-> ['PREFERRED_PROVIDER_virtual/powerpc-linux-gcc = gcc-cross',
-> 'PREFERRED_PROVIDER_libxpm = libxpm', 'PREFERRED_PROVIDER_libice =
-> libice', 'PREFERRED_PROVIDER_libxrandr = libxrandr',
-> 'PREFERRED_PROVIDER_libxfixes = libxfixes',
-> 'PREFERRED_PROVIDER_libxinerama = libxinerama',
-> 'PREFERRED_PROVIDER_virtual/libqpe1 = libqpe-opie',
-> 'PREFERRED_PROVIDER_virtual/libx11 = libx11', 'PREFERRED_PROVIDER_xproto
-> = xproto', 'PREFERRED_PROVIDER_libxt = libxt', 'PREFERRED_PROVIDER_libxv
-> = libxv', 'PREFERRED_PROVIDER_libxcursor = libxcursor',
-> 'PREFERRED_PROVIDER_libxrender = libxrender',
-> 'PREFERRED_PROVIDER_virtual/xserver = xserver-xorg',
-> 'PREFERRED_PROVIDER_virtual/powerpc-linux-gcc-intermediate =
-> gcc-cross-intermediate', 'PREFERRED_PROVIDER_libxext = libxext',
-> 'PREFERRED_PROVIDER_libxi = libxi', 'PREFERRED_PROVIDER_libxmu =
-> libxmu', 'PREFERRED_PROVIDER_virtual/libc = glibc',
-> 'PREFERRED_PROVIDER_virtual/powerpc-linux-binutils = binutils-cross',
-> 'PREFERRED_PROVIDER_virtual/powerpc-linux-libc-initial = glibc-initial',
-> 'PREFERRED_PROVIDER_libxcomposite = libxcomposite',
-> 'PREFERRED_PROVIDER_libsm = libsm', 'PREFERRED_PROVIDER_libxft =
-> libxft', 'PREFERRED_PROVIDER_virtual/powerpc-linux-gcc-initial =
-> gcc-cross-initial', 'PREFERRED_PROVIDER_xrandr = xrandr',
-> 'PREFERRED_PROVIDER_libxaw = libxaw', 'PREFERRED_PROVIDER_libxxf86vm =
-> libxxf86vm', 'PREFERRED_PROVIDER_virtual/libqte2 = qte-mt',
-> 'PREFERRED_PROVIDER_libxdamage = libxdamage',
-> 'PREFERRED_PROVIDER_linux-libc-headers = linux-libc-headers',
-> 'PREFERRED_PROVIDER_gconf = gconf-dbus', 'PREFERRED_PROVIDER_avahi =
-> avahi', 'PREFERRED_PROVIDER_libgpewidget = libgpewidget',
-> 'PREFERRED_PROVIDER_virtual/libsdl = libsdl-x11',
-> 'PREFERRED_PROVIDER_virtual/libintl = external-toolchain',
-> 'PREFERRED_PROVIDER_virtual/kernel = linux', 'PREFERRED_PROVIDER_gtk+ =
-> gtk+', 'PREFERRED_PROVIDER_virtual/libusb0 = libusb',
-> 'PREFERRED_PROVIDER_virtual/db = db3']
->
-> Why is this so hard?? I just want to use the tools I already
-> have (and my customers are comfortable with)!
->
+I'm a little surprised that this patch was ignored, and then someone
+else imported fbreader 0.10.7. Without my useful patches (ignored
+upstream too...).
 
-Any ideas how I can move forward with this?
+-Graham
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+2009/9/9 Graham Gower <graham.gower@gmail.com>:
+> Probably looks ugly on small screens, but as none of the other build targ=
+ets
+> would build for me, nor the older fbreader recipes, I adapted the
+> desktop/gtk
+> target for this latest version.
+>
+> Patches are mostly to fix tap scrolling bugs.
+>
+> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+> ---
+> conf/checksums.ini =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 | =A0 =A04 +
+> .../fbreader/fbreader-0.10.7/clear-selection.patch | =A0 14 +++++
+> .../fbreader-0.10.7/motion-threshold.patch =A0 =A0 =A0 =A0 | =A0 23 +++++=
++++
+> .../fbreader-0.10.7/remove-recursion.patch =A0 =A0 =A0 =A0 | =A0 10 +++
+> recipes/fbreader/fbreader-0.10.7/sane-events.patch | =A0 59
+> ++++++++++++++++++++
+> recipes/fbreader/fbreader_0.10.7.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =A0 =
+41 ++++++++++++++
+> 6 files changed, 151 insertions(+), 0 deletions(-)
+> create mode 100644 recipes/fbreader/fbreader-0.10.7/clear-selection.patch
+> create mode 100644 recipes/fbreader/fbreader-0.10.7/motion-threshold.patc=
+h
+> create mode 100644 recipes/fbreader/fbreader-0.10.7/remove-recursion.patc=
+h
+> create mode 100644 recipes/fbreader/fbreader-0.10.7/sane-events.patch
+> create mode 100644 recipes/fbreader/fbreader_0.10.7.bb
+>
+> diff --git a/conf/checksums.ini b/conf/checksums.ini
+> index a69b6b0..74580d6 100644
+> --- a/conf/checksums.ini
+> +++ b/conf/checksums.ini
+> @@ -6066,6 +6066,10 @@
+> sha256=3De4db7a6305ffe2333fae08c940ded8f7e5b02999e0917b0ea4ef3764c80f58c8
+> md5=3D2d2f3713cf3c17b71997064f39d4c888
+> sha256=3De4db7a6305ffe2333fae08c940ded8f7e5b02999e0917b0ea4ef3764c80f58c8
+>
+> +[http://www.fbreader.org/fbreader-sources-0.10.7.tgz]
+> +md5=3D145f4d2ba24c54288bad2d66ddd2baf2
+> +sha256=3Dd7bcc7cafb1c78f00b380dc2facdb82c5a2fb1475e1ddfc8e5d44a2b855cec1=
+a
+> +
+> [http://only.mawhrin.net/fbreader/obsolete/fbreader-sources-0.7.3d.tgz]
+> md5=3D705a89bb03860fb312a7afa25db0310e
+> sha256=3Dec9f93968147526a9b2dd17e31a6d2795356b2eeed309f796f655b37b98abd83
+> diff --git a/recipes/fbreader/fbreader-0.10.7/clear-selection.patch
+> b/recipes/fbreader/fbreader-0.10.7/clear-selection.patch
+> new file mode 100644
+> index 0000000..813b2ba
+> --- /dev/null
+> +++ b/recipes/fbreader/fbreader-0.10.7/clear-selection.patch
+> @@ -0,0 +1,14 @@
+> +--- fbreader-0.10.7.orig/zlibrary/text/src/view/ZLTextView.cpp
+> ++++ fbreader-0.10.7/zlibrary/text/src/view/ZLTextView.cpp
+> +@@ -479,6 +478,11 @@
+> + bool ZLTextView::onStylusRelease(int x, int y) {
+> + =A0 =A0 =A0 myDoubleClickInfo.update(x, y, false);
+> + ++ =A0 =A0 =A0if (myDoubleClickInfo.Count =3D=3D 2) {
+> ++ =A0 =A0 =A0 =A0 =A0 =A0 =A0/* fast tap */
+> ++ =A0 =A0 =A0 =A0 =A0 =A0 =A0mySelectionModel.clear();
+> ++ =A0 =A0 =A0 =A0 =A0 =A0 =A0application().refreshWindow();
+> ++ =A0 =A0 =A0}
+> + =A0 =A0 =A0 if (myDoubleClickInfo.Count > 0) {
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 return onStylusClick(x, y, myDoubleClickInf=
+o.Count);
+> + =A0 =A0 =A0 }
+> diff --git a/recipes/fbreader/fbreader-0.10.7/motion-threshold.patch
+> b/recipes/fbreader/fbreader-0.10.7/motion-threshold.patch
+> new file mode 100644
+> index 0000000..0359aba
+> --- /dev/null
+> +++ b/recipes/fbreader/fbreader-0.10.7/motion-threshold.patch
+> @@ -0,0 +1,23 @@
+> +http://www.mikecrash.com/index.php?name=3DNews&file=3Darticle&id=3D107
+> +
+> +diff -ur fbreader-0.10.7/fbreader/src/fbreader/FBView.cpp
+> fbreader-0.10.7dfsg/fbreader/src/fbreader/FBView.cpp
+> +--- fbreader-0.10.7/fbreader/src/fbreader/FBView.cpp =A0 2009-03-30
+> 23:26:07.000000000 +1030
+> ++++ fbreader-0.10.7dfsg/fbreader/src/fbreader/FBView.cpp =A0 =A0 =A0 200=
+9-05-29
+> 13:07:36.000000000 +0930
+> +@@ -151,7 +154,7 @@
+> + =A0 =A0 =A0 }
+> + + =A0 =A0 =A0 myIsReleasedWithoutMotion =3D
+> +- =A0 =A0 =A0 =A0 =A0 =A0 =A0myIsReleasedWithoutMotion && (abs(x - press=
+edX()) <=3D 5) &&
+> (abs(y - pressedY()) <=3D 5);
+> ++ =A0 =A0 =A0 =A0 =A0 =A0 =A0myIsReleasedWithoutMotion && (abs(x - press=
+edX()) <=3D 50) &&
+> (abs(y - pressedY()) <=3D 50);
+> + =A0 =A0 =A0 if (isReleasedWithoutMotion() &&
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 fbreader().EnableTapScrolli=
+ngOption.value() &&
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 (!ZLBooleanOption(ZLCategor=
+yKey::EMPTY,
+> ZLOption::PLATFORM_GROUP, ZLOption::FINGER_TAP_DETECTABLE, false).value()=
+ ||
+> +@@ -185,7 +188,7 @@
+> + + bool FBView::onStylusMovePressed(int x, int y) {
+> + =A0 =A0 =A0 if (myIsReleasedWithoutMotion) {
+> +- =A0 =A0 =A0 =A0 =A0 =A0 =A0if ((abs(x - pressedX()) > 5) || (abs(y - p=
+ressedY()) > 5))
+> {
+> ++ =A0 =A0 =A0 =A0 =A0 =A0 =A0if ((abs(x - pressedX()) > 50) || (abs(y - =
+pressedY()) >
+> 50)) {
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 myIsReleasedWithoutMotion =
+=3D false;
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 activateSelection(pressedX(=
+), pressedY());
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 }
+> diff --git a/recipes/fbreader/fbreader-0.10.7/remove-recursion.patch
+> b/recipes/fbreader/fbreader-0.10.7/remove-recursion.patch
+> new file mode 100644
+> index 0000000..cab3bb4
+> --- /dev/null
+> +++ b/recipes/fbreader/fbreader-0.10.7/remove-recursion.patch
+> @@ -0,0 +1,10 @@
+> +--- fbreader-0.10.7/zlibrary/core/src/application/ZLApplication.cpp.orig
+> ++++ fbreader-0.10.7/zlibrary/core/src/application/ZLApplication.cpp
+> +@@ -210,7 +210,6 @@
+> + void ZLApplicationWindow::refresh() {
+> + =A0 =A0 =A0 refreshToolbar(WINDOW_TOOLBAR);
+> + =A0 =A0 =A0 refreshToolbar(FULLSCREEN_TOOLBAR);
+> +- =A0 =A0 =A0processAllEvents();
+> + }
+> + + void ZLApplicationWindow::refreshToolbar(ToolbarType type) {
+> diff --git a/recipes/fbreader/fbreader-0.10.7/sane-events.patch
+> b/recipes/fbreader/fbreader-0.10.7/sane-events.patch
+> new file mode 100644
+> index 0000000..8f583e9
+> --- /dev/null
+> +++ b/recipes/fbreader/fbreader-0.10.7/sane-events.patch
+> @@ -0,0 +1,59 @@
+> +--- fbreader-0.10.7.orig/zlibrary/ui/src/gtk/view/ZLGtkViewWidget.cpp
+> ++++ fbreader-0.10.7/zlibrary/ui/src/gtk/view/ZLGtkViewWidget.cpp
+> +@@ -23,6 +23,7 @@
+> + + #include <ZLibrary.h>
+> + #include <ZLLanguageUtil.h>
+> ++#include <stdlib.h>
+> + + #include "ZLGtkViewWidget.h"
+> + #include "ZLGtkPaintContext.h"
+> +@@ -54,7 +55,15 @@
+> + =A0 =A0 =A0 }
+> + }
+> + ++static int mouse_is_down =3D 0;
+> ++
+> + static void mousePressed(GtkWidget *area, GdkEventButton *event, gpoint=
+er
+> data) {
+> ++ =A0 =A0 =A0if (event->button =3D=3D 3)
+> ++ =A0 =A0 =A0 =A0 =A0 =A0 =A0/* ignore gtkstylus long touch events */
+> ++ =A0 =A0 =A0 =A0 =A0 =A0 =A0return;
+> ++
+> ++ =A0 =A0 =A0mouse_is_down =3D 1;
+> ++
+> + =A0 =A0 =A0 gtk_window_set_focus(GTK_WINDOW(gtk_widget_get_toplevel(are=
+a)),
+> area);
+> + =A0 =A0 =A0 ZLGtkViewWidget *viewWidget =3D (ZLGtkViewWidget*)data;
+> + =A0 =A0 =A0 int x =3D (int)event->x;
+> +@@ -65,6 +74,12 @@
+> + }
+> + + static void mouseReleased(GtkWidget*, GdkEventButton *event, gpointer
+> data) {
+> ++ =A0 =A0 =A0if (event->button =3D=3D 3)
+> ++ =A0 =A0 =A0 =A0 =A0 =A0 =A0/* ignore gtkstylus long touch events */
+> ++ =A0 =A0 =A0 =A0 =A0 =A0 =A0return;
+> ++
+> ++ =A0 =A0 =A0mouse_is_down =3D 0;
+> ++
+> + =A0 =A0 =A0 ZLGtkViewWidget *viewWidget =3D (ZLGtkViewWidget*)data;
+> + =A0 =A0 =A0 int x =3D (int)event->x;
+> + =A0 =A0 =A0 int y =3D (int)event->y;
+> +@@ -73,6 +88,19 @@
+> + }
+> + + static void mouseMoved(GtkWidget*, GdkEventMotion *event, gpointer da=
+ta)
+> {
+> ++ =A0 =A0 =A0static gdouble last_x=3D0, last_y=3D0;
+> ++
+> ++ =A0 =A0 =A0if (!mouse_is_down)
+> ++ =A0 =A0 =A0 =A0 =A0 =A0 =A0/* we couldn't possibly want this mouse mov=
+e event */
+> ++ =A0 =A0 =A0 =A0 =A0 =A0 =A0return;
+> ++
+> ++ =A0 =A0 =A0if (abs(last_x-event->x) < 5 && abs(last_y-event->y) < 5)
+> ++ =A0 =A0 =A0 =A0 =A0 =A0 =A0/* give the touchscreen tolerance for small=
+ movement */
+> ++ =A0 =A0 =A0 =A0 =A0 =A0 =A0return;
+> ++
+> ++ =A0 =A0 =A0last_x =3D event->x;
+> ++ =A0 =A0 =A0last_y =3D event->y;
+> ++
+> + =A0 =A0 =A0 ZLGtkViewWidget *viewWidget =3D (ZLGtkViewWidget*)data;
+> + =A0 =A0 =A0 int x, y;
+> + =A0 =A0 =A0 GdkModifierType state;
+> diff --git a/recipes/fbreader/fbreader_0.10.7.bb
+> b/recipes/fbreader/fbreader_0.10.7.bb
+> new file mode 100644
+> index 0000000..256467e
+> --- /dev/null
+> +++ b/recipes/fbreader/fbreader_0.10.7.bb
+> @@ -0,0 +1,41 @@
+> +DESCRIPTION =3D "FBreader is an ebook reader"
+> +HOMEPAGE =3D "http://www.fbreader.org"
+> +SECTION =3D "x11/utils"
+> +PRIORITY =3D "optional"
+> +LICENSE =3D "GPLv2"
+> +DEPENDS =3D "gtk+ expat bzip2 libfribidi liblinebreak virtual/libiconv"
+> +
+> +SRC_URI =3D "http://www.fbreader.org/fbreader-sources-${PV}.tgz \
+> + =A0 =A0 =A0 =A0 =A0file://motion-threshold.patch;patch=3D1 \
+> + =A0 =A0 =A0 =A0 =A0file://remove-recursion.patch;patch=3D1 \
+> + =A0 =A0 =A0 =A0 =A0file://sane-events.patch;patch=3D1 \
+> + =A0 =A0 =A0 =A0 =A0file://clear-selection.patch;patch=3D1 \
+> + =A0 =A0 =A0 =A0 =A0"
+> +
+> +READER_ARCH =A0 =A0 =A0=3D "desktop"
+> +READER_GUI =A0 =A0 =A0 =3D "gtk"
+> +READER_STATUS =A0 =A0=3D "release"
+> +
+> +FILES_${PN} +=3D "${datadir}/FBReader ${datadir}/zlibrary ${libdir}/zlib=
+rary"
+> +FILES_${PN}-dbg +=3D "${libdir}/zlibrary/ui/.debug"
+> +
+> +CFLAGS_append =3D "INSTALLDIR=3D/usr"
+> +EXTRA_OEMAKE =3D "CC=3D'${CXX}' LD=3D'${CXX}' OE_CFLAGS=3D'${CXXFLAGS}'
+> INCPATH=3D'${STAGING_INCDIR}' LIBPATH=3D'${STAGING_LIBDIR}'"
+> +
+> +inherit pkgconfig
+> +
+> +do_configure() {
+> + =A0 =A0 =A0 echo "TARGET_ARCH =3D ${READER_ARCH}" > ${S}/makefiles/targ=
+et.mk
+> + =A0 =A0 =A0 echo "UI_TYPE =3D ${READER_GUI}" >> ${S}/makefiles/target.m=
+k
+> + =A0 =A0 =A0 echo "TARGET_STATUS =3D ${READER_STATUS}" >> ${S}/makefiles=
+/target.mk
+> +}
+> +
+> +do_compile_append() {
+> + =A0 =A0 =A0 # enable tap scrolling
+> + =A0 =A0 =A0 sed -i -e 's/Enabled" value=3D"false/Enabled" value=3D"true=
+/' \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 ${S}/fbreader/data/default/config.desktop.x=
+ml
+> +}
+> +
+> +do_install () {
+> + =A0 =A0 =A0 oe_runmake DESTDIR=3D${D} install
+> +}
+> --
+> 1.6.0.3
+>
+>
 
 
