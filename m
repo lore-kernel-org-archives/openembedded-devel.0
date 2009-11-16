@@ -1,28 +1,41 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from dan.rpsys.net ([93.97.175.187])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NA220-0007xZ-KN
+	(envelope-from <rpurdie@rpsys.net>) id 1NA29I-0008I5-6T
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 14:54:15 +0100
-Received: (qmail 15667 invoked by uid 813007); 16 Nov 2009 13:52:51 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 16 Nov 2009 13:52:49 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	Mon, 16 Nov 2009 15:01:47 +0100
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nAGDvD8U027893 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Nov 2009 13:57:13 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id a9vQ0NVJIZ0d
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Nov 2009 13:57:12 +0000 (GMT)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nAGDv8gP027884
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Nov 2009 13:57:10 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Nov 2009 14:52:52 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.32-rc5-00402-gb6727b1; KDE/4.3.2; x86_64; ;
-	)
-References: <992df8520911150534v4aeec248u91c5ca477de25eb9@mail.gmail.com>
-	<992df8520911160511s4e641b28ya68dd6bd14f1101@mail.gmail.com>
-In-Reply-To: <992df8520911160511s4e641b28ya68dd6bd14f1101@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <200911161453.01127.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+In-Reply-To: <20091116134339.GC23383@jama>
+References: <20091115163618.GA3317@jama> <hdr31n$8b0$1@ger.gmane.org>
+	<1258364356.5799.94.camel@dax.rpnet.com> <hdra17$t4d$1@ger.gmane.org>
+	<1258368570.5799.99.camel@dax.rpnet.com> <hdrb9v$1dp$1@ger.gmane.org>
+	<1258371591.5799.112.camel@dax.rpnet.com> <hdrffa$do6$1@ger.gmane.org>
+	<1258375022.16625.3.camel@dax.rpnet.com> <20091116134339.GC23383@jama>
+Date: Mon, 16 Nov 2009 13:55:48 +0000
+Message-Id: <1258379748.16625.8.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Initial Support for the Samsung Omnia (SGH-i900)
+Subject: Re: SRCPV migration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,46 +49,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Nov 2009 13:54:17 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 16 Nov 2009 14:01:47 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Dnia poniedzia=C5=82ek, 16 listopada 2009 o 14:11:29 Alex Ferguson napisa=
-=C5=82(a):
-> However, I am having some problems with the Marvell firmware. The driver
-> expects firmware images with names like "gspi8686.bin" and
-> "gspi8686_hlp.bin". The marvell-gspi-fw package contains firmware files
->  with non-compatible names. Even with compatible names, the driver fails =
-to
->  find the firmware under /lib/firmware, though this probably hasn't
->  anything to do with OE.
->=20
-> There exists a git repository on git.kernel.org with the required firmware
-> files, though I believe it's better I fix the marvell-gspi-fw package for
-> future use, as I found no packages depending on it and thus risking
-> breakage.
+On Mon, 2009-11-16 at 14:43 +0100, Martin Jansa wrote:
+> On Mon, Nov 16, 2009 at 12:37:02PM +0000, Richard Purdie wrote:
+> > On Mon, 2009-11-16 at 13:10 +0100, Koen Kooi wrote:
+> > I think we will have to hold off some of the SRCPV migration until
+> > bitbake has some kind of lock down functionality for the local build
+> > numbers. Any volunteers to write a patch?
+> 
+> This could be enough?
+> 
+> Just putting
+> BB_GIT_LOCALCOUNT_FOR_SRCREV = "0"
+> somewhere (local.conf/distro.conf) and _count will always stay on 0
+> (gitr0+abc1234def)
 
-BUG from BugLabs uses Marvell SPI and SDIO firmwares for 8686 wifi chipset.=
-=20
-Present version of hardware (r1.3) comes with SDIO connected wifi and uses =
-=20
-firmwares/marvell-sdio-fw_9.70.3-p37.bb recipe for it.=20
+No, we need to be able to control the version and it shouldn't be git
+specific...
 
-Older firmwares/marvell-gspi-fw_9.70.3-p37.bb recipe is used for BugWifi=20
-module support which adds SPI connected Wifi/BT for older hardware revision=
-s.
+Cheers,
 
-And this device is supported in OpenEmbedded - we use stable/2009 for it pl=
-us=20
-own overlay.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+Richard
 
 
 
