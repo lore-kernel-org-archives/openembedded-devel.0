@@ -1,26 +1,27 @@
-Received: from [64.202.165.33] (helo=smtpauth11.prod.mesa1.secureserver.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <mike@mwester.net>) id 1N9olk-00052H-Ds
+Received: from [195.149.226.213] (helo=smtp.host4.kei.pl)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1N9p8q-00082N-9f
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 00:44:35 +0100
-Received: (qmail 12123 invoked from network); 15 Nov 2009 23:36:29 -0000
-Received: from unknown (75.49.209.68)
-	by smtpauth11.prod.mesa1.secureserver.net (64.202.165.33) with ESMTP;
-	15 Nov 2009 23:36:28 -0000
-Message-ID: <4B009073.6070607@mwester.net>
-Date: Sun, 15 Nov 2009 17:36:19 -0600
-From: Mike Westerhof <mike@mwester.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23 Mnenhy/0.7.6.0
-MIME-Version: 1.0
+	Mon, 16 Nov 2009 01:08:27 +0100
+Received: (qmail 13454 invoked by uid 813007); 16 Nov 2009 00:00:22 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 16 Nov 2009 00:00:22 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-References: <alpine.LFD.2.00.0911141040530.14929@localhost>
-In-Reply-To: <alpine.LFD.2.00.0911141040530.14929@localhost>
-X-SA-Exim-Connect-IP: 64.202.165.33
-X-SA-Exim-Mail-From: mike@mwester.net
+Date: Mon, 16 Nov 2009 01:00:37 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.32-rc5-00402-gb6727b1; KDE/4.3.2; x86_64; ;
+	)
+References: <alpine.LFD.2.00.0911150948430.14311@localhost>
+In-Reply-To: <alpine.LFD.2.00.0911150948430.14311@localhost>
+MIME-Version: 1.0
+Message-Id: <200911160100.38336.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: removing superseded packages?
+Subject: Re: any ETA on a working dev beagleboard demo image?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,43 +35,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Nov 2009 23:44:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 16 Nov 2009 00:08:27 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Robert P. J. Day wrote:
->   is there a protocol for suggesting the removal of obsoleted(?)
-> packages?...
+Dnia niedziela, 15 listopada 2009 o 15:56:36 Robert P. J. Day napisa=C5=82(=
+a):
 
-Removal of packages has been discussed in the past; it's not as simple
-as it seems.
-...
->   given the above, it would seem reasonable that version 3.0.1 can be
-> tossed, no?  unless there's a compelling reason to keep it around.
+>   yes, i know i'm sounding like a broken record, but i have an invite
+> to give a short local demo of the beagleboard this tuesday and i'd
+> like to do it with an angstrom development demo image, just because i
+> prefer to live out there on the edge.
 
-It does seem reasonable, and in this case I have no opinion one way or
-the other.  However, I want to point out that in the past, it has been
-the case where a "dot-dot" version difference has made substantial
-problems for one distro or another.
+You can always move back to some revision before recent changes happened, y=
+ou=20
+can use Angstrom narcissus to generate working image.
+=20
+>   at the moment, there is just the one package standing in the way --
+> guile-native -- and as i recall, someone posted what looked like a
+> manual fix.  is that being turned into a patch at any point? =20
 
-It's my opinion that disk space is cheap, and the cost of parsing a few
-extra bb files is not so high that we cannot afford to keep a few
-versions about.  There's nothing more frustrating than taking a weekend
-set aside for making significant progress on a distro issue, and instead
-spending it sorting out what changed that made the distro not build or
-not boot, and then struggling to sort out why the new version won't
-work, and then the infuriating part is when you decide to just use a
-PREFERRED_VERSION so that you can go work on your original issue, only
-to discover that path is blocked because somebody decided, for no reason
-other than aesthetics, to delete the old version that used to work!
+Did you tried to make it a patch? Patches are always welcome.
 
-Again, no opinion on this specific package, just a strong opinion
-regarding the removal of old versions.
+> i realize i'm nagging, but it's literally been *weeks* since that
+> particular bitbake target actually built, and every time it looks like
+> it's getting close to being buildable, more packages break.
 
-And yes, I'm quite aware that there are others who disagree with my
-opinion very strongly as well -- there is unlikely to be agreement on
-any protocol or policy for this, I think.
+Maybe start tagging your copy of OE to know which version was buildable for=
+=20
+you? It will make life easier to make 'git bisect' to find out what broke i=
+t.
 
--Mike (mwester)
+> i appreciate that development means exactly that but, at the very
+> least, even the development branch should *build*, even if there are
+> run issues.
+
+No, it is not 'org.openembedded.always-building' branch. This is developmen=
+t=20
+branch where everything can happen. At OEDEM it was decided that many core=
+=20
+changes will be made and we accepted some breakage during that time. We are=
+=20
+working on making it buildable again but testing takes time.
+=20
+> p.s.  perhaps it would be useful to start tagging the development
+> branch at points where it builds, just so someone can always retreat
+> to the most recent known good build.
+
+"where it builds" is not a definition. For me one revision builds for=20
+at91sam9263ek/x11-image target but not for progear/xfce-image for example. =
+Or=20
+build on my Debian system but breaks in Ubuntu 9.04 virtual. There is no su=
+ch=20
+thing as 'it builds for everyone' and you should know that from your xterm-=
+207=20
+problem which was not a problem for me (as it was building under my Debian =
+and=20
+I do not have a client who would use Fedora for builds).
+=20
+> or perhaps start a branch named, oh, "bleeding", which, when it builds
+> properly, can be merged back into development.  whatever.  but it
+> strikes me that it's overwhelmingly pointless to have a development
+> branch that doesn't build since that gives no one the opportunity to
+> actually test it.
+
+There is a tag on .dev branch which marks moment before OE core changes=20
+landed: "pre-nov2009-core-updates" - maybe checkout that version and just=20
+cherry-pick those updates which are needed to make OE buildable for you?
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
