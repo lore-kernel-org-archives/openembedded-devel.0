@@ -1,29 +1,29 @@
-Received: from [82.71.203.194] (helo=crown.reciva.com)
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1N9yUh-0004kD-Gk
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1N9yu3-0005eE-9V
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 11:07:38 +0100
-Received: from [85.210.2.237] (helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1N9yTN-000403-PN
+	Mon, 16 Nov 2009 11:33:50 +0100
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1N9z0h-00069c-9n
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Nov 2009 10:06:14 +0000
-From: Phil Blundell <philb@gnu.org>
+	Mon, 16 Nov 2009 11:40:39 +0100
+Message-ID: <4B012A3B.3070506@kernelconcepts.de>
+Date: Mon, 16 Nov 2009 11:32:27 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <alpine.LFD.2.00.0911160353130.16011@localhost>
-References: <alpine.LFD.2.00.0911150948430.14311@localhost>
-	<200911160100.38336.marcin@juszkiewicz.com.pl>
-	<alpine.LFD.2.00.0911160353130.16011@localhost>
-Date: Mon, 16 Nov 2009 10:06:11 +0000
-Message-ID: <1258365971.25369.528.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-Broken-Reverse-DNS: no host name found for IP address 85.210.2.237
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+References: <4AF963A3.1050906@balister.org>	<20091110131554.GA25450@denix.org>
+	<4AF996BE.2080904@balister.org>	<20091111161608.GA3246@denix.org>	<1257960636.25369.404.camel@lenovo.internal.reciva.com>	<d1b08f940911110941h3b145988s3afe5fe109b938b@mail.gmail.com>
+	<1257964265.25369.416.camel@lenovo.internal.reciva.com>
+In-Reply-To: <1257964265.25369.416.camel@lenovo.internal.reciva.com>
+X-Enigmail-Version: 0.95.7
+X-SA-Exim-Connect-IP: 212.60.202.196
+X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: any ETA on a working dev beagleboard demo image?
+Subject: Re: Mailing lists
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,27 +37,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Nov 2009 10:07:38 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 16 Nov 2009 10:33:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2009-11-16 at 04:05 -0500, Robert P. J. Day wrote:
->   IMHO, the fact that you don't know anyone who uses a fedora build
-> host is not a compelling reason to ignore build breakage that happens
-> on a fedora build host.
+Hi,
 
-That's true, but not having access to a host where the problem occurs
-does make it much harder to do anything about it.
+Phil Blundell schrieb:
+> Yeah, it does look as though gmail folks are getting greylisted rather
+> often.  I'll see if I can install a similar whitelist on ltg.
 
-If you have a patch for the guile-native failure then I'm sure someone
-can check it in.  But, otherwise, it is going to be a case of waiting
-for someone with a suitable build host to investigate and debug whatever
-is going wrong.  If this is blocking you from doing other work then you
-could consider using ASSUME_PROVIDED, or not building whatever it is
-that depends on guile-native, or building on a different host system.
+ok we have this list now. It covers google.com, gmail.com, bigfish.com,
+debian.org and our local domains.
+I would be happy to get confirmations if it really works like expected.
 
-p.
+If I should add more domains please let me know.
 
+Greetings
 
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
