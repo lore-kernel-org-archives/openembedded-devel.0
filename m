@@ -1,24 +1,38 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from mail-yx0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NAOem-0003XG-RR
+	(envelope-from <otavio.salvador@gmail.com>) id 1NAOkS-00046w-2T
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Nov 2009 15:03:49 +0100
-Received: (qmail 29355 invoked by uid 813007); 17 Nov 2009 14:02:22 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 17 Nov 2009 14:02:22 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Nov 2009 15:02:39 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.32-rc5-00402-gb6727b1; KDE/4.3.2; x86_64; ;
-	)
-References: <200911171337.35127.marcin@juszkiewicz.com.pl>
-In-Reply-To: <200911171337.35127.marcin@juszkiewicz.com.pl>
+	Tue, 17 Nov 2009 15:09:39 +0100
+Received: by yxe5 with SMTP id 5so5559yxe.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Nov 2009 06:08:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type; bh=h9HpDbLj7t0htvZjACd2bKzrvF7Qekx1W13h36K/PNY=;
+	b=xA533x7T8V20C6fbIPDIrmeJYpUMJ/At+nM2JZ0OzullxVV94BiKKVLqVTu3juWrTT
+	8Tbimdwu8mAL/PSpJkX1JS+trX5dNidqKHHc9i2y403ysxvmStp+7H9d6eE8YW9b/IFC
+	bNgyxaBkc8++e/OpgnKhopgxUOGq8jJUKa0UI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	b=kbr4We0/a2vmsjrfFgei+MNYH0zbch7CCv1FbHE1hJQRpzvHsUAgNvSHgS9X1hPiPo
+	kcu4h/46+lmrtdE7NAavksV9cHisPMPai6b2rPz2ZmNGBvwGzhFItJWrNEAJZu3KbJmm
+	DuZJJe1/lE6xFSkF3zBddKFACm/4DBiUNIFdg=
 MIME-Version: 1.0
-Message-Id: <200911171502.40498.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Sender: otavio.salvador@gmail.com
+Received: by 10.239.183.26 with SMTP id s26mr866752hbg.179.1258466888799; Tue, 
+	17 Nov 2009 06:08:08 -0800 (PST)
+In-Reply-To: <200911171502.40498.marcin@juszkiewicz.com.pl>
+References: <200911171337.35127.marcin@juszkiewicz.com.pl>
+	<200911171502.40498.marcin@juszkiewicz.com.pl>
+Date: Tue, 17 Nov 2009 12:08:08 -0200
+X-Google-Sender-Auth: 8164959d189baf54
+Message-ID: <be7a9f3d0911170608w214df901y8c376f0f67fe26c1@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: RFC: Geode machines support changes
@@ -35,41 +49,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Nov 2009 14:03:49 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 17 Nov 2009 14:09:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Dnia wtorek, 17 listopada 2009 o 13:37:17 Marcin Juszkiewicz napisa=C5=82(a=
-):
+Hello,
 
-> GeodeLX processor is i586 class. Has MMX, 3Dnow and few other flags from
->  that family. We treat it as i486 anyway as someone noted that they are
->  faster that way.
->=20
-> I would like to do few changes:
->=20
-> 1. drop "geodelx" kernel and machine config.
-> 2. rename "alix" to "geodelx" and use Alix defconfig
-> 3. move all target related flags from machine configs to tune-geode.inc
->    - TARGET_ARCH
->    - glibc tune (GLIBC_ADDONS, GLIBC_EXTRA_OECONF)
-  4. move "geodegx" to linux-2.6.31 with copy of "iei-nanogx-466" defconfig
+On Tue, Nov 17, 2009 at 12:02 PM, Marcin Juszkiewicz
+<marcin@juszkiewicz.com.pl> wrote:
+> I found one problem with it. Currently we have some geode machines as i586 and
+> some as i486 but packages are generated with "geode" arch each time. Same for
+> tmp/cross/ dir etc. So we will need to decide for all devices at once.
 
-> Then we can consider changing TARGET_ARCH to i586 for Geode machines.
+I think the way to go is to test if gx is compatible with i586 and
+then check of performance lose with it. Then we see if:
 
-I found one problem with it. Currently we have some geode machines as i586 =
-and=20
-some as i486 but packages are generated with "geode" arch each time. Same f=
-or=20
-tmp/cross/ dir etc. So we will need to decide for all devices at once.
+ - we can merge geodelx and geodegx?
+ - we need to have geodelx and geodegx with different base arch?
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
