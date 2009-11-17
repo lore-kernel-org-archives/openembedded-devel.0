@@ -1,21 +1,53 @@
-Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
-	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <root@zlo.nu>)
-	id 1NALVm-0002Ze-7d for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Nov 2009 11:42:17 +0100
-Received: by mzh.zlo.nu (Postfix, from userid 0)
-	id 6DD8014068; Tue, 17 Nov 2009 11:34:42 +0100 (CET)
-From: Marc Olzheim <zlo@zlo.nu>
+Received: from mail-bw0-f219.google.com ([209.85.218.219])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <martin.jansa@gmail.com>) id 1NALlb-0005PZ-9O
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Nov 2009 11:58:38 +0100
+Received: by bwz19 with SMTP id 19so6737072bwz.28
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Nov 2009 02:57:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=Vy8lQeDxT6vBeTmZL2d+46zfTol9xagFP7zalMViZMg=;
+	b=huZ1O0eE7M8l4RAtOKbgxfSotO4LTxtRLUGmCcMNz725n+/8fMKp8QoV/EWrIrP98S
+	LA/QnYNv7GbHjOaKmguyeH6UNvfFEwSIPSOnBw048FVzAjbRRtQmJbnVH9qu6plkpofZ
+	XYa8un6yCQ9aH/Wchts/bhv9wQI+c/G/cWklo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=DoVcl7Z4s4VdrHi4qUsauob7/uz0MBg8aH6uXXWzc0PzbfiskahRyQgV/5fzUzFzzT
+	JbDUVLJXqqsyH8O17M0AcSjpkhcO41H4nyxD/wOzEccAuIKlAPMYDW1OKkW2x5uhY0or
+	AMtSHftXu8IcH07Lbic3NH4/yuGBEHzmNph0I=
+Received: by 10.204.160.154 with SMTP id n26mr5259146bkx.90.1258455432340;
+	Tue, 17 Nov 2009 02:57:12 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 13sm328971fxm.5.2009.11.17.02.57.11
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 17 Nov 2009 02:57:11 -0800 (PST)
+Date: Tue, 17 Nov 2009 11:57:15 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Nov 2009 11:13:54 +0100
-In-Reply-To: <200908171521.07317.holger+oe@freyther.de>
-References: <20090812095518.GA21131@zlo.nu>
-	<200908171521.07317.holger+oe@freyther.de>
-Message-Id: <20091117103442.6DD8014068@mzh.zlo.nu>
-X-SA-Exim-Connect-IP: 85.17.141.90
-X-SA-Exim-Mail-From: root@zlo.nu
+Message-ID: <20091117105715.GH23383@jama>
+References: <hdra17$t4d$1@ger.gmane.org>
+	<1258368570.5799.99.camel@dax.rpnet.com>
+	<hdrb9v$1dp$1@ger.gmane.org>
+	<1258371591.5799.112.camel@dax.rpnet.com>
+	<hdrffa$do6$1@ger.gmane.org>
+	<1258375022.16625.3.camel@dax.rpnet.com>
+	<20091116134339.GC23383@jama>
+	<1258379748.16625.8.camel@dax.rpnet.com>
+	<20091117085518.GF23383@jama>
+	<1258452062.8810.5.camel@dax.rpnet.com>
+MIME-Version: 1.0
+In-Reply-To: <1258452062.8810.5.camel@dax.rpnet.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.218.219
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] curl: Fix CVE-2009-2417.
+Subject: Re: SRCPV migration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -29,252 +61,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Nov 2009 10:42:17 -0000
+X-List-Received-Date: Tue, 17 Nov 2009 10:58:38 -0000
+X-Groupsio-MsgNum: 14379
+Content-Type: multipart/mixed; boundary="32u276st3Jlj2kUU"
+Content-Disposition: inline
 
-For some reason, my patch never landed and 7.19.6 was added in the mean time,
-which fixed this problem, but we still need the patches for previous versions.
+--32u276st3Jlj2kUU
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-The 7.18.1 patch applies cleanly on 7.18.2.
+Updated patch, thanks RP!
 
-See http://curl.haxx.se/docs/adv_20090812.html for more information.
----
- recipes/curl/curl-native_7.18.2.bb                 |    4 +-
- recipes/curl/curl-sdk_7.18.2.bb                    |    4 +-
- recipes/curl/curl_7.18.2.bb                        |    4 +-
- recipes/curl/curl_7.19.5.bb                        |    6 +-
- recipes/curl/files/curl-7.18.1-CVE-2009-2417.patch |   83 ++++++++++++++++++++
- recipes/curl/files/curl-7.19.5-CVE-2009-2417.patch |   80 +++++++++++++++++++
- 6 files changed, 176 insertions(+), 5 deletions(-)
- create mode 100644 recipes/curl/files/curl-7.18.1-CVE-2009-2417.patch
- create mode 100644 recipes/curl/files/curl-7.19.5-CVE-2009-2417.patch
-
-diff --git a/recipes/curl/curl-native_7.18.2.bb b/recipes/curl/curl-native_7.18.2.bb
-index 1eef23b..e2e3a48 100644
---- a/recipes/curl/curl-native_7.18.2.bb
-+++ b/recipes/curl/curl-native_7.18.2.bb
-@@ -1,4 +1,6 @@
- require curl-common.inc
- inherit native
- DEPENDS = "zlib-native"
--PR = "${INC_PR}.1"
-+SRC_URI += "file://curl-7.18.1-CVE-2009-2417.patch;patch=1;pnum=0"
-+
-+PR = "${INC_PR}.2"
-diff --git a/recipes/curl/curl-sdk_7.18.2.bb b/recipes/curl/curl-sdk_7.18.2.bb
-index f1fd34f..e26c532 100644
---- a/recipes/curl/curl-sdk_7.18.2.bb
-+++ b/recipes/curl/curl-sdk_7.18.2.bb
-@@ -1,4 +1,6 @@
- require curl-common.inc
- inherit sdk
- DEPENDS = "zlib-sdk"
--PR = "${INC_PR}.1"
-+SRC_URI += "file://curl-7.18.1-CVE-2009-2417.patch;patch=1;pnum=0"
-+
-+PR = "${INC_PR}.2"
-diff --git a/recipes/curl/curl_7.18.2.bb b/recipes/curl/curl_7.18.2.bb
-index 84c0d07..21eaedc 100644
---- a/recipes/curl/curl_7.18.2.bb
-+++ b/recipes/curl/curl_7.18.2.bb
-@@ -1,4 +1,6 @@
- require curl-common.inc
- require curl-target.inc
- 
--PR = "${INC_PR}.1"
-+SRC_URI += "file://curl-7.18.1-CVE-2009-2417.patch;patch=1;pnum=0"
-+
-+PR = "${INC_PR}.2"
-diff --git a/recipes/curl/curl_7.19.5.bb b/recipes/curl/curl_7.19.5.bb
-index d0577b0..e447610 100644
---- a/recipes/curl/curl_7.19.5.bb
-+++ b/recipes/curl/curl_7.19.5.bb
-@@ -2,5 +2,7 @@ require curl-common.inc
- require curl-target.inc
- 
- SRC_URI += "file://off_t_abi_fix.patch;patch=1;pnum=0 \
--            file://curl-add_all_algorithms.patch;patch=1"
--PR = "${INC_PR}.1"
-+            file://curl-add_all_algorithms.patch;patch=1 \
-+            file://curl-7.19.5-CVE-2009-2417.patch;patch=1;pnum=0"
-+
-+PR = "${INC_PR}.2"
-diff --git a/recipes/curl/files/curl-7.18.1-CVE-2009-2417.patch b/recipes/curl/files/curl-7.18.1-CVE-2009-2417.patch
-new file mode 100644
-index 0000000..e7c24c0
---- /dev/null
-+++ b/recipes/curl/files/curl-7.18.1-CVE-2009-2417.patch
-@@ -0,0 +1,83 @@
-+---
-+ lib/ssluse.c |   40 +++++++++++++++++++++++++++-------------
-+ 1 file changed, 27 insertions(+), 13 deletions(-)
-+
-+--- lib/ssluse.c.orig
-++++ lib/ssluse.c
-+@@ -1061,7 +1061,7 @@ static CURLcode verifyhost(struct connec
-+       if(check->type == target) {
-+         /* get data and length */
-+         const char *altptr = (char *)ASN1_STRING_data(check->d.ia5);
-+-        int altlen;
-++        size_t altlen = (size_t) ASN1_STRING_length(check->d.ia5);
-+ 
-+         switch(target) {
-+         case GEN_DNS: /* name/pattern comparison */
-+@@ -1075,14 +1075,16 @@ static CURLcode verifyhost(struct connec
-+              "I checked the 0.9.6 and 0.9.8 sources before my patch and
-+              it always 0-terminates an IA5String."
-+           */
-+-          if(cert_hostcheck(altptr, conn->host.name))
-++          if((altlen == strlen(altptr)) &&
-++             /* if this isn't true, there was an embedded zero in the name
-++                string and we cannot match it. */
-++             cert_hostcheck(altptr, conn->host.name))
-+             matched = TRUE;
-+           break;
-+ 
-+         case GEN_IPADD: /* IP address comparison */
-+           /* compare alternative IP address if the data chunk is the same size
-+              our server IP address is */
-+-          altlen = ASN1_STRING_length(check->d.ia5);
-+           if((altlen == addrlen) && !memcmp(altptr, &addr, altlen))
-+             matched = TRUE;
-+           break;
-+@@ -1122,18 +1124,27 @@ static CURLcode verifyhost(struct connec
-+          string manually to avoid the problem. This code can be made
-+          conditional in the future when OpenSSL has been fixed. Work-around
-+          brought by Alexis S. L. Carvalho. */
-+-      if(tmp && ASN1_STRING_type(tmp) == V_ASN1_UTF8STRING) {
-+-        j = ASN1_STRING_length(tmp);
-+-        if(j >= 0) {
-+-          peer_CN = OPENSSL_malloc(j+1);
-+-          if(peer_CN) {
-+-            memcpy(peer_CN, ASN1_STRING_data(tmp), j);
-+-            peer_CN[j] = '\0';
-++      if(tmp) {
-++        if(ASN1_STRING_type(tmp) == V_ASN1_UTF8STRING) {
-++          j = ASN1_STRING_length(tmp);
-++          if(j >= 0) {
-++            peer_CN = OPENSSL_malloc(j+1);
-++            if(peer_CN) {
-++              memcpy(peer_CN, ASN1_STRING_data(tmp), j);
-++              peer_CN[j] = '\0';
-++            }
-+           }
-+         }
-++        else /* not a UTF8 name */
-++          j = ASN1_STRING_to_UTF8(&peer_CN, tmp);
-++
-++        if(peer_CN && ((int)strlen((char *)peer_CN) != j)) {
-++          /* there was a terminating zero before the end of string, this
-++             cannot match and we return failure! */
-++          failf(data, "SSL: illegal cert name field");
-++          res = CURLE_PEER_FAILED_VERIFICATION;
-++        }
-+       }
-+-      else /* not a UTF8 name */
-+-        j = ASN1_STRING_to_UTF8(&peer_CN, tmp);
-+     }
-+ 
-+     if(peer_CN == nulstr)
-+@@ -1151,7 +1162,10 @@ static CURLcode verifyhost(struct connec
-+     }
-+ #endif /* CURL_DOES_CONVERSIONS */
-+ 
-+-    if(!peer_CN) {
-++    if(res)
-++      /* error already detected, pass through */
-++      ;
-++    else if(!peer_CN) {
-+       failf(data,
-+             "SSL: unable to obtain common name from peer certificate");
-+       return CURLE_PEER_FAILED_VERIFICATION;
-diff --git a/recipes/curl/files/curl-7.19.5-CVE-2009-2417.patch b/recipes/curl/files/curl-7.19.5-CVE-2009-2417.patch
-new file mode 100644
-index 0000000..f64232c
---- /dev/null
-+++ b/recipes/curl/files/curl-7.19.5-CVE-2009-2417.patch
-@@ -0,0 +1,80 @@
-+--- lib/ssluse.c-7.19.5	2009-08-03 16:01:58.000000000 +0200
-++++ lib/ssluse.c	2009-08-03 16:07:17.000000000 +0200
-+@@ -1092,7 +1092,8 @@
-+       if(check->type == target) {
-+         /* get data and length */
-+         const char *altptr = (char *)ASN1_STRING_data(check->d.ia5);
-+-        size_t altlen;
-++        size_t altlen = (size_t) ASN1_STRING_length(check->d.ia5);
-++
-+ 
-+         switch(target) {
-+         case GEN_DNS: /* name/pattern comparison */
-+@@ -1106,14 +1107,16 @@
-+              "I checked the 0.9.6 and 0.9.8 sources before my patch and
-+              it always 0-terminates an IA5String."
-+           */
-+-          if(cert_hostcheck(altptr, conn->host.name))
-++          if((altlen == strlen(altptr)) &&
-++             /* if this isn't true, there was an embedded zero in the name
-++                string and we cannot match it. */
-++             cert_hostcheck(altptr, conn->host.name))
-+             matched = TRUE;
-+           break;
-+ 
-+         case GEN_IPADD: /* IP address comparison */
-+           /* compare alternative IP address if the data chunk is the same size
-+              our server IP address is */
-+-          altlen = (size_t) ASN1_STRING_length(check->d.ia5);
-+           if((altlen == addrlen) && !memcmp(altptr, &addr, altlen))
-+             matched = TRUE;
-+           break;
-+@@ -1153,18 +1156,27 @@
-+          string manually to avoid the problem. This code can be made
-+          conditional in the future when OpenSSL has been fixed. Work-around
-+          brought by Alexis S. L. Carvalho. */
-+-      if(tmp && ASN1_STRING_type(tmp) == V_ASN1_UTF8STRING) {
-+-        j = ASN1_STRING_length(tmp);
-+-        if(j >= 0) {
-+-          peer_CN = OPENSSL_malloc(j+1);
-+-          if(peer_CN) {
-+-            memcpy(peer_CN, ASN1_STRING_data(tmp), j);
-+-            peer_CN[j] = '\0';
-++      if(tmp) {
-++        if(ASN1_STRING_type(tmp) == V_ASN1_UTF8STRING) {
-++          j = ASN1_STRING_length(tmp);
-++          if(j >= 0) {
-++            peer_CN = OPENSSL_malloc(j+1);
-++            if(peer_CN) {
-++              memcpy(peer_CN, ASN1_STRING_data(tmp), j);
-++              peer_CN[j] = '\0';
-++            }
-+           }
-+         }
-++        else /* not a UTF8 name */
-++          j = ASN1_STRING_to_UTF8(&peer_CN, tmp);
-++
-++        if(peer_CN && ((int)strlen((char *)peer_CN) != j)) {
-++          /* there was a terminating zero before the end of string, this
-++             cannot match and we return failure! */
-++          failf(data, "SSL: illegal cert name field");
-++          res = CURLE_PEER_FAILED_VERIFICATION;
-++        }
-+       }
-+-      else /* not a UTF8 name */
-+-        j = ASN1_STRING_to_UTF8(&peer_CN, tmp);
-+     }
-+ 
-+     if(peer_CN == nulstr)
-+@@ -1182,7 +1194,10 @@
-+     }
-+ #endif /* CURL_DOES_CONVERSIONS */
-+ 
-+-    if(!peer_CN) {
-++    if(res)
-++      /* error already detected, pass through */
-++      ;
-++    else if(!peer_CN) {
-+       failf(data,
-+             "SSL: unable to obtain common name from peer certificate");
-+       return CURLE_PEER_FAILED_VERIFICATION;
 -- 
-1.6.3.1
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
+
+--32u276st3Jlj2kUU
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename="0001-Optional-LOCALCOUNT-for-recipe.patch"
+
+From 55c8f06a1382dfb11214b6e12ac47b06fce412a4 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 17 Nov 2009 08:24:52 +0100
+Subject: [PATCH] Optional LOCALCOUNT for recipe
+
+* Instead of autoincrement from persistent cache when srcrev is changed.
+* Should be used by distributions with multiple builders, where consistent
+  PV is needed.
+* Can be used instead of PR bump in PVs like this "0.0+${PR}+gitr${SRCPV}"
+* BB_LOCALCOUNT_OVERRIDE to enable setting LOCALCOUNT for recipe
+* This way LOCALCOUNTs can be specified directly in recipes instead of
+  separated distro config (as not all want to use them). And will be
+  used only when BB_LOCALCOUNT_OVERRIDE set in distro config.
+---
+ lib/bb/fetch/__init__.py |   26 +++++++++++++++++++++++++-
+ 1 files changed, 25 insertions(+), 1 deletions(-)
+
+diff --git a/lib/bb/fetch/__init__.py b/lib/bb/fetch/__init__.py
+index 8c0d7ea..9508908 100644
+--- a/lib/bb/fetch/__init__.py
++++ b/lib/bb/fetch/__init__.py
+@@ -448,6 +448,23 @@ class Fetch(object):
+ 
+     srcrev_internal_helper = staticmethod(srcrev_internal_helper)
+ 
++    def localcount_internal_helper(ud, d):
++        """
++        Return:
++            a) a locked localcount if specified
++            b) None otherwise
++        """
++
++        localcount= None
++        if 'name' in ud.parm:
++            pn = data.getVar("PN", d, 1)
++            localcount = data.getVar("LOCALCOUNT_" + ud.parm['name'], d, 1)
++        if not localcount:
++            localcount = data.getVar("LOCALCOUNT", d, 1)
++        return localcount
++
++    localcount_internal_helper = staticmethod(localcount_internal_helper)
++
+     def try_mirror(d, tarfn):
+         """
+         Try to use a mirrored version of the sources. We do this
+@@ -550,13 +567,20 @@ class Fetch(object):
+ 
+         latest_rev = self._build_revision(url, ud, d)
+         last_rev = pd.getValue("BB_URI_LOCALCOUNT", key + "_rev")
+-        count = pd.getValue("BB_URI_LOCALCOUNT", key + "_count")
++        uselocalcount = bb.data.getVar("BB_LOCALCOUNT_OVERRIDE", d, True) or False
++        count = None
++        if uselocalcount:
++            count = Fetch.localcount_internal_helper(ud, d)
++        if count is None:
++            count = pd.getValue("BB_URI_LOCALCOUNT", key + "_count")
+ 
+         if last_rev == latest_rev:
+             return str(count + "+" + latest_rev)
+ 
+         if count is None:
+             count = "0"
++        elif uselocalcount:
++            count = str(count)
+         else:
+             count = str(int(count) + 1)
+ 
+-- 
+1.6.5.2
 
 
-
+--32u276st3Jlj2kUU--
