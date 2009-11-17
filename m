@@ -1,38 +1,43 @@
-Received: from firebug.buglabs.net ([66.80.197.243] helo=looper.buglabs.net)
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ken@buglabs.net>) id 1NAQCH-0006W2-K8
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1NAQIq-0006hR-Ke
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Nov 2009 16:42:28 +0100
-Received: from aphid.buglabs.net (aphid.buglabs.net [192.168.20.30])
-	by looper.buglabs.net (Postfix) with ESMTP id 9C64334047
+	Tue, 17 Nov 2009 16:49:15 +0100
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 51E7E110009B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Nov 2009 10:41:10 -0500 (EST)
-Received: from localhost (localhost [127.0.0.1])
-	by aphid.buglabs.net (Postfix) with ESMTP id EE8CD28E002
+	Tue, 17 Nov 2009 16:47:50 +0100 (CET)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id B292E11001F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Nov 2009 10:43:10 -0500 (EST)
-X-Virus-Scanned: amavisd-new at aphid.buglabs.net
-Received: from aphid.buglabs.net ([127.0.0.1])
-	by localhost (aphid.buglabs.net [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id sLbtGcu6rZoj
+	Tue, 17 Nov 2009 16:47:47 +0100 (CET)
+Received: from rhein.familie-heinold.de (g225004015.adsl.alicedsl.de
+	[92.225.4.15]) by mail.familie-heinold.de (Postfix) with ESMTPA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Nov 2009 10:43:10 -0500 (EST)
-Received: from [192.168.0.120] (t61.buglabs.net [192.168.0.120])
-	by aphid.buglabs.net (Postfix) with ESMTP id AFE1228E001
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Nov 2009 10:43:10 -0500 (EST)
-From: Ken Gilmer <ken@buglabs.net>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Organization: Bug Labs, Inc.
-Date: Tue, 17 Nov 2009 11:40:39 -0500
-Message-Id: <1258476039.1078.33.camel@localhost>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.24.5 
-X-SA-Exim-Connect-IP: 66.80.197.243
-X-SA-Exim-Mail-From: ken@buglabs.net
+	Tue, 17 Nov 2009 16:47:47 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 1DE773C10C; Tue, 17 Nov 2009 16:47:40 +0100 (CET)
+Date: Tue, 17 Nov 2009 16:47:40 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20091117154737.GA4401@rhein.zuhause.netz>
+References: <4AFBC85D.2000204@cs.put.poznan.pl>
+	<20091112103356.GA30768@rhein.zuhause.netz>
+	<4B01D18B.10902@cs.put.poznan.pl>
+	<20091117090249.GA4195@rhein.zuhause.netz>
+	<1258458308.3298.38.camel@opal>
+MIME-Version: 1.0
+In-Reply-To: <1258458308.3298.38.camel@opal>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Docs and Bug tracker migration to OE from bug for OpenEmbedded tools for Eclipse
+Subject: Re: write access for Przemyslaw Wesolek
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,20 +51,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Nov 2009 15:42:28 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 17 Nov 2009 15:49:15 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
+On Tue, Nov 17, 2009 at 12:45:08PM +0100, Michael 'Mickey' Lauer wrote:
+> The technical steering committee has not yet been voted on, so it can't
+> be effective :)
+> 
 
-Hello ~
+Ah okay,
 
-  I'm thinking it might be more appropriate to have information
-regarding OTE
-(http://community.buglabs.net/kgilmer/posts/110-BitBake-Commander-6-8-Installers-) on the OE wiki rather than the bug labs community site.  The plugins are independent from any BL product, and it may serve the community better to have this tool more closely associated with OE.  Maybe also defect tracking might be better suited in the OE bugzilla.  Comments/concerns?
+> That aside, I don't think voting on accepting new members should be put
+> to the TSC in the first place.
+> 
+> So... +1 from me.
+> 
+> :M:
+> 
 
-thx
-ken
+because this was the 3rd vote, didnt you forgot to write "please send us your ssh-key" or something ;)
 
-
+Bye Henning
 
 
