@@ -1,41 +1,32 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1NAJyz-0008SF-N7
+	(envelope-from <philb@gnu.org>) id 1NAK4j-0000CN-Ue
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Nov 2009 10:04:20 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 8C8BF11001F8
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Nov 2009 10:02:56 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id C04BC11000DC
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Nov 2009 10:02:55 +0100 (CET)
-Received: from rhein.familie-heinold.de (g225147183.adsl.alicedsl.de
-	[92.225.147.183]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Nov 2009 10:02:55 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id BDCE43C10C; Tue, 17 Nov 2009 10:02:49 +0100 (CET)
-Date: Tue, 17 Nov 2009 10:02:49 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Tue, 17 Nov 2009 10:10:17 +0100
+Received: from [85.210.2.237] (helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NAK3Q-0005AG-N9
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Nov 2009 09:08:52 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091117090249.GA4195@rhein.zuhause.netz>
-References: <4AFBC85D.2000204@cs.put.poznan.pl>
-	<20091112103356.GA30768@rhein.zuhause.netz>
-	<4B01D18B.10902@cs.put.poznan.pl>
-MIME-Version: 1.0
-In-Reply-To: <4B01D18B.10902@cs.put.poznan.pl>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+In-Reply-To: <20091117085518.GF23383@jama>
+References: <hdr31n$8b0$1@ger.gmane.org>
+	<1258364356.5799.94.camel@dax.rpnet.com> <hdra17$t4d$1@ger.gmane.org>
+	<1258368570.5799.99.camel@dax.rpnet.com> <hdrb9v$1dp$1@ger.gmane.org>
+	<1258371591.5799.112.camel@dax.rpnet.com> <hdrffa$do6$1@ger.gmane.org>
+	<1258375022.16625.3.camel@dax.rpnet.com> <20091116134339.GC23383@jama>
+	<1258379748.16625.8.camel@dax.rpnet.com> <20091117085518.GF23383@jama>
+Date: Tue, 17 Nov 2009 09:08:50 +0000
+Message-ID: <1258448930.25369.668.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-Broken-Reverse-DNS: no host name found for IP address 85.210.2.237
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: write access for Przemyslaw Wesolek
+Subject: Re: SRCPV migration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,36 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Nov 2009 09:04:20 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 17 Nov 2009 09:10:17 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 16, 2009 at 11:26:19PM +0100, Przemyslaw Wesolek wrote:
-> Henning Heinold wrote:
-> > The problem is time and man power. And as I said earlier I only have the time to fix the
-> > packages with the latest version. The best solution I can think of is, that you apply
-> > for write access. So you have to write an email to the dev list with pointers
-> > to your patches and ask for write access. If 3 devs or 2 from core(steering comitee now?) 
-> > give there ack you have to send your ssh-key to the admins.
-> 
-> So hereby I ask for commit bit to OpenEmbedded git repo.
-> 
-> Patches which are proposed by me:
-> 
->   http://patchwork.openembedded.org/patch/1273/
->   http://patchwork.openembedded.org/patch/1229/
->   http://patchwork.openembedded.org/patch/1227/
->   http://patchwork.openembedded.org/patch/1226/
-> 
-> 
-> Regards,
-> Przemek
+On Tue, 2009-11-17 at 09:55 +0100, Martin Jansa wrote:
+> (btw seems like LOCALCOUNT_pn-bar has higher preferrence even if I use
+> "LOCALCOUNT = 4" in recipe, why?)
 
-Hi,
+This is the way overrides always work.  See the bitbake manual:
 
-are we doing the old way for write access or is the steering commite in function now?
-But for the safety he has my ACK for write access.
+http://bitbake.berlios.de/manual/ch02.html#id869082
 
-Bye Henning
+p.
+
+
 
 
