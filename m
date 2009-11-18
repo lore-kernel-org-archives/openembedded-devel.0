@@ -1,41 +1,42 @@
-Received: from gv-out-0910.google.com ([216.239.58.189])
+Received: from gv-out-0910.google.com ([216.239.58.187])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1NAqLo-0004FH-0d
+	(envelope-from <thoughtmonster@gmail.com>) id 1NAqWW-0005QJ-1F
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Nov 2009 20:38:03 +0100
-Received: by gv-out-0910.google.com with SMTP id e6so366348gvc.4
+	Wed, 18 Nov 2009 20:49:07 +0100
+Received: by gv-out-0910.google.com with SMTP id e6so370222gvc.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Nov 2009 11:36:37 -0800 (PST)
+	Wed, 18 Nov 2009 11:47:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type;
-	bh=OqxZBGWflrnL2PJrG6PCQqj6l516auOaTiFccd/hQ7I=;
-	b=xfWrzoE29a0xUdLeaj2z6nPyNsc7//Tqafih+zHdE8kfkrOK9LMy2Fnqe+X7mCeiDc
-	ZwA2Qt08Ql6Gas7wqEdqQrcGr0P3HTMSEi+aGGfOkqNP9zDbHmkZ9J+RVzs2yW+Zk/2L
-	5zUq9yxRf6r4qKWfsF5yTeUV1WJhyQULKEGEo=
+	bh=uONMT3R6gMHJuDY+0u17wUS9R0YfT0g5ksj3xcXVWAE=;
+	b=D5jeSPyWHtZiM0CHuFxeryEW1ZpesOEHkNwQXzfLTvPA5h/QfBFJVdF2IusBH7S5pO
+	fensHvq5G7PxlrlDf2U8HXMgPVM8cw2kYa65wjnIFhehQlAURB4U4RUXEV8+u6Rn3dhs
+	UuLyz/DsZi+dZnV0r3eVq2b6+rjEBX0FJ+VTQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=oDFSzOtMwuCMpHuFOUy/QlZ2Fb+bDYUhxS4vGQRFjH3la/0f2clH4fy9rIlnrR0f3r
-	iAQrNCWbedu2HMZmgCykc6Agh1BiajrLANn4fTTZJbMga8bpQ9H5dVl+TC+7ctkzXJ8c
-	s7Jlp243zUHUF46+Zz+DZ8sgfJLD+as793mCk=
+	b=PQuK4pajjBm7rUcPRXNDceVJc0ZHUKFWk8s9MLMEZ6W2hF/PmzwbD2OIC2Th4pra4h
+	vmyA7ICySfseoo3Du32cmxBJxcEVVB3QA+ZdGEydMCP4stmXCDC1f0wvYjpm0ij+qozl
+	8GkpYFmbPj1JRNoCLYV7Gi4YXOI9bSW2ZHSBo=
 MIME-Version: 1.0
-Received: by 10.239.168.154 with SMTP id k26mr1204578hbe.104.1258572997332; 
-	Wed, 18 Nov 2009 11:36:37 -0800 (PST)
-In-Reply-To: <be7a9f3d0911181029u57f93a50y1715d81701191323@mail.gmail.com>
-References: <1258504413-25056-1-git-send-email-leon@sidebranch.com>
-	<be7a9f3d0911180509x7df420cetc4ed1575602b68e2@mail.gmail.com>
-	<c384c5ea0911180814sc16a03dt3a829c5e5a8f9a@mail.gmail.com>
-	<be7a9f3d0911181029u57f93a50y1715d81701191323@mail.gmail.com>
-Date: Wed, 18 Nov 2009 20:36:37 +0100
-Message-ID: <c384c5ea0911181136k68f3f724g84f78b9786995093@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
+Received: by 10.239.130.28 with SMTP id 28mr1124388hbh.22.1258573661556; Wed, 
+	18 Nov 2009 11:47:41 -0800 (PST)
+In-Reply-To: <he1c7t$h1t$1@ger.gmane.org>
+References: <992df8520911150534v4aeec248u91c5ca477de25eb9@mail.gmail.com>
+	<992df8520911160511s4e641b28ya68dd6bd14f1101@mail.gmail.com>
+	<992df8520911180812o76a71538o4095a8f08f95448@mail.gmail.com>
+	<he1c7t$h1t$1@ger.gmane.org>
+Date: Wed, 18 Nov 2009 21:47:41 +0200
+Message-ID: <992df8520911181147x21f624b7p97b549f955c3c057@mail.gmail.com>
+From: Alex Ferguson <thoughtmonster@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 216.239.58.189
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+X-SA-Exim-Connect-IP: 216.239.58.187
+X-SA-Exim-Mail-From: thoughtmonster@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] squashfs-4.0: update squashfs-tools to include upstream LZMA inclusion.
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Initial Support for the Samsung Omnia (SGH-i900)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,58 +50,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Nov 2009 19:38:06 -0000
+X-List-Received-Date: Wed, 18 Nov 2009 19:49:07 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hello Otavio,
-
-On Wed, Nov 18, 2009 at 7:29 PM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> On Wed, Nov 18, 2009 at 2:14 PM, Leon Woestenberg
-> <leon.woestenberg@gmail.com> wrote:
->>> I agree with the move to mainline version however your recipe changes
->>> might need some improvement. You don't use the lzma recipe available
->>> in OE and instead grab it again ... IMO this is wrong since it
->>> duplicates the lzma source and also make more difficult to us to
->>> "share" fixes.
->>>
->> Yes, I noticed this.
->>
->> However, this is *exactl*y how the squashfs author designed his
->> integration of LZMA; simply referring to a specific extracted archive
->> of the LZMA SDK.
->>
->> (consider this is a lazy man's way of static linking)
->
-> Anyway I think it is worth fixing it.
->
-Yes, agreed, only if that approach would work (i.e. the needed
-functions are correctly exported into the static library)
-with the current code base.
-
-> Duplicating sources (and the needed fixes, in case LZMA requires one)
-> is wrong if avoidable so I'd say it would be nice to fix it.
->
-Duplicating effort working against the upstream package is wrong too.
-I would rather
-go through the author to see this approach mainlined.
-
-
->> In the meantime, should I apply the patch as-is?
-> You already did but I'd expect some time to reply before you pushing it.
->
-Sorry I misunderstood your "good and thx" reply on IRC.
-The current lzma recipe has some problems (use of dos2unix, not
-building for target) that we need to fix first.
-
-The currently committed recipe is pure metadata, builds the same way
-as the upstream package does, and is tested for -native on a target,
-by booting a squashfs-lzma compressed rootfs.
-I propose to keep it as-is, then see if we can fix lzma, neaten the
-squashfs-tools build, and bring it upstream.
-
-Regards,
--- 
-Leon
-
+I updated bug #5335 (http://bugs.openembedded.org/show_bug.cgi?id=5335) with
+a new patch. Most userspace issues fixed, though a small issue with
+xf86-input-tslib remains. Fixes are coming shortly.
 
