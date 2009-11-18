@@ -1,23 +1,34 @@
-Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcolz@zlo.nu>) id 1NAi3d-0007Ja-0y
+	(envelope-from <philb@gnu.org>) id 1NAi9v-0007lX-7C
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Nov 2009 11:46:44 +0100
-Received: by mzh.zlo.nu (Postfix, from userid 1000)
-	id 75145140B0; Wed, 18 Nov 2009 11:45:17 +0100 (CET)
-Date: Wed, 18 Nov 2009 11:45:17 +0100
-From: Marc Olzheim <zlo@zlo.nu>
+	Wed, 18 Nov 2009 11:53:14 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NAi8X-0001LP-4y
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 18 Nov 2009 10:51:45 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1NAi8V-0003mL-Lo
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 18 Nov 2009 10:51:43 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091118104517.GA17441@zlo.nu>
-References: <1258540671-652-1-git-send-email-zlo@zlo.nu>
-MIME-Version: 1.0
-In-Reply-To: <1258540671-652-1-git-send-email-zlo@zlo.nu>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 85.17.141.90
-X-SA-Exim-Mail-From: marcolz@zlo.nu
+In-Reply-To: <20091117103442.6DD8014068@mzh.zlo.nu>
+References: <20090812095518.GA21131@zlo.nu>
+	<200908171521.07317.holger+oe@freyther.de>
+	<20091117103442.6DD8014068@mzh.zlo.nu>
+Date: Wed, 18 Nov 2009 10:51:40 +0000
+Message-Id: <1258541500.26517.92.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: iproute2: Remove undocumented bash runtime dependency, move to INC_PR and rework dir layout
+Subject: Re: [PATCH] curl: Fix CVE-2009-2417.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,54 +42,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Nov 2009 10:46:44 -0000
-X-Groupsio-MsgNum: 14413
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="RnlQjJ0d97Da+TV1"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 18 Nov 2009 10:53:14 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
---RnlQjJ0d97Da+TV1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, 2009-11-17 at 11:13 +0100, Marc Olzheim wrote:
+> For some reason, my patch never landed and 7.19.6 was added in the mean time,
+> which fixed this problem, but we still need the patches for previous versions.
+> 
+> The 7.18.1 patch applies cleanly on 7.18.2.
+> 
+> See http://curl.haxx.se/docs/adv_20090812.html for more information.
 
-On Wed, Nov 18, 2009 at 11:37:48AM +0100, Marc Olzheim wrote:
-> I noticed that iproute2 has a runtime dependency on bash in two of its sc=
-ripts.
-> Those dependencies are unneeded, so I removed them.
->=20
-> Before doing that though, I moved the recipes to INC_PR and changed the
-> directory layout to prevent useless duplication of the patches in the
-> directories.
+Thanks for the patch.  I checked this in.
 
-For some reason the commit messages of patch 1 and 2 are not in the
-output of git send-email...
+p.
 
-They were:
 
----
-Move to INC_PR.
----
 
-and
 
----
-Move all patches to one directory to avoid duplication.
----
-
-Marc
-
---RnlQjJ0d97Da+TV1
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEARECAAYFAksD0D0ACgkQezjnobFOgrFDigCgspUcv1xznUJIvx5eONl8llUT
-7akAoIp4GuDhcropuOnW0OXT1E09xqxY
-=Sr07
------END PGP SIGNATURE-----
-
---RnlQjJ0d97Da+TV1--
