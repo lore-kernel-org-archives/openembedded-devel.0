@@ -1,28 +1,39 @@
-Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
+Received: from mail-fx0-f209.google.com ([209.85.220.209])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1NAkmk-0002cy-JP
+	(envelope-from <martin.jansa@gmail.com>) id 1NAkzn-000306-Hl
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Nov 2009 14:41:29 +0100
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 5D6AD166081F; Wed, 18 Nov 2009 06:40:02 -0700 (MST)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id C603E166081B;
-	Wed, 18 Nov 2009 06:40:01 -0700 (MST)
-Message-ID: <4B03F931.70501@mlbassoc.com>
-Date: Wed, 18 Nov 2009 06:40:01 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.5) Gecko/20091117 Shredder/3.0.1pre
-MIME-Version: 1.0
+	Wed, 18 Nov 2009 14:54:58 +0100
+Received: by fxm1 with SMTP id 1so1145722fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Nov 2009 05:53:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=ZK+nXfIcsu9bvDa9+N0IVOTD52yzBoO8MyJR+D/IjQM=;
+	b=miOsNKjDdYeErHzX2DMe5hSiiQfvAeyedKKQaVWYf6CaKY3vjEpsULiXQCWc4iOuJv
+	DvU1MUZWDl7N6ejZr2JCBLaq/47FtSAILI8twD1u4XTZtYIFGeG9EVb9fNXkFsb7EWgB
+	fB3cfFaCsWXjzj3UADmuDwD/B43lnm5IgAekw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=ecpFQ6s5bJMyYw2zZLjelgnQQo1YpfIi9Zy6ygCOwERR5bpvD2TRozBZjh/n4EI6an
+	Jb8xu5oI0wSCaeAxGd2hP887nzZ+s7WaYQC93vpWFSfxTE2uSv3BkYJ6DXdcmyExJT3y
+	0Tuq6STlNPf+KpmtwPE2bmuceX8BhYAzxn5fI=
+Received: by 10.204.24.2 with SMTP id t2mr6227939bkb.65.1258552410658;
+	Wed, 18 Nov 2009 05:53:30 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 13sm33307fxm.13.2009.11.18.05.53.29
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 18 Nov 2009 05:53:29 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4AFAEDC3.80404@mlbassoc.com> <hdtjmt$rcf$1@ger.gmane.org>
-In-Reply-To: <hdtjmt$rcf$1@ger.gmane.org>
-X-SA-Exim-Connect-IP: 76.76.67.137
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+Date: Wed, 18 Nov 2009 14:53:22 +0100
+Message-Id: <1258552403-11571-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.6.5.3
+X-SA-Exim-Connect-IP: 209.85.220.209
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Koen Kooi <k.kooi@student.utwente.nl>
-Subject: Re: Prebuilt toolchains
+Subject: [PATCH 06/51] opkg: don't install update-alternatives script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,60 +47,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Nov 2009 13:41:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 18 Nov 2009 13:54:58 -0000
 
-On 11/17/2009 12:34 AM, Koen Kooi wrote:
-> On 11-11-09 18:00, Gary Thomas wrote:
->> I'd like to use my own toolchains when building OpenEmbedded.
->> I've tried to follow the information at:
->> http://docs.openembedded.org/usermanual/usermanual.html#commonuse_prebuilt_toolchain
->>
->>
->> It's a bit terse and confusing, so I'm just trying to see
->> what I need (I think the section tries to discuss too many
->> concepts at once)
->
-> If you're using angstrom and want to use a prebuilt CSL toolchain, you
-> only need to add this to local.conf (I suspect thunderbird will linewrap
-> it):
->
-> # Black magic to automatically set SDK_PATH out of PATH - don't touch this!
-> # Works with pretty much any external toolchain, like CS Lite or MV Pro 5
-> # Handles cross-toolchain vs. native toolchain
-> # SDK_PATH can be overwritten externally by META_SDK_PATH, e.g. for SDK
-> TOOLCHAIN_SYSPATH = "${@bb.data.getVar('TARGET_ARCH', d, 1) !=
-> bb.data.getVar('BUILD_ARCH', d, 1) and
-> os.path.abspath(os.path.dirname(bb.which(bb.data.getVar('PATH', d, 1),
-> bb.data.getVar('TARGET_PREFIX', d,
-> 1)+'cpp'))+'/../'+bb.data.getVar('TARGET_SYS', d, 1)) or ''}"
-> TOOLCHAIN_PATH = "${@bool(bb.data.getVar('TOOLCHAIN_SYSPATH', d, 1)) and
-> (os.path.exists(bb.data.getVar('TOOLCHAIN_SYSPATH', d, 1)) and
-> os.path.dirname(bb.data.getVar('TOOLCHAIN_SYSPATH', d, 1)) or
-> bb.fatal('No valid toolchain in PATH')) or ''}"
-> SDK_PATH = "${@[bb.data.getVar('TOOLCHAIN_PATH', d, 1),
-> bb.data.getVar('META_SDK_PATH', d,
-> 1)][bool(bb.data.getVar('META_SDK_PATH', d, 1))]}"
->
-> # Set the necessary variables to use binary CodeSourcery Lite
-> TARGET_VENDOR = "-none"
-> TARGET_CPPFLAGS_append = " -I${SDK_PATH}/${TARGET_SYS}/libc/usr/include "
-> TARGET_LDFLAGS_prepend = " -L${SDK_PATH}/${TARGET_SYS}/libc/lib
-> -Wl,-rpath-link,${SDK_PATH}/${TARGET_SYS}/libc/lib "
-> TOOLCHAIN_TYPE = "external"
-> TOOLCHAIN_BRAND = "csl"
+* it is copy of update-alternatives-cworth
+* it's not what distribution specifies with
+  virtual/update-alternatives(-native)
+* make sure that update-alternatives-native is available for image
+  creation (added to task-boot)
+---
+ recipes/opkg/opkg.inc                              |    5 +++--
+ .../opkg/dont-install-update-alternatives.patch    |    6 ++++++
+ recipes/tasks/task-boot.bb                         |    2 +-
+ 3 files changed, 10 insertions(+), 3 deletions(-)
+ create mode 100644 recipes/opkg/opkg/dont-install-update-alternatives.patch
 
-Thanks, this looks like something to try.
-
-I'm having a bit of trouble with the setting of 'TOOLCHAIN_SYSPATH'
-(my toolchain is home-grown. not CSL).  Is there some way to debug this
-line, e.g. print out the components and results?
-
+diff --git a/recipes/opkg/opkg.inc b/recipes/opkg/opkg.inc
+index d744e72..3b4cc35 100644
+--- a/recipes/opkg/opkg.inc
++++ b/recipes/opkg/opkg.inc
+@@ -4,14 +4,15 @@ SECTION = "base"
+ LICENSE = "GPL"
+ DEPENDS = "curl gpgme"
+ PV = "0.1.6+svnr${SRCPV}"
+-INC_PR = "r16"
++INC_PR = "r17"
+ 
+ FILESPATHPKG =. "opkg:"
+ 
+ SRC_URI = "svn://opkg.googlecode.com/svn;module=trunk;proto=http \
+ 	file://opkg_unarchive.patch;patch=1;maxrev=201 \
+ 	file://opkg-intercept-cleanup.patch;patch=1 \
+-	file://isatty.patch;patch=1"
++	file://isatty.patch;patch=1 \
++	file://dont-install-update-alternatives.patch;patch=1"
+ 
+ SRC_URI += "file://configure"
+ 
+diff --git a/recipes/opkg/opkg/dont-install-update-alternatives.patch b/recipes/opkg/opkg/dont-install-update-alternatives.patch
+new file mode 100644
+index 0000000..4ab7707
+--- /dev/null
++++ b/recipes/opkg/opkg/dont-install-update-alternatives.patch
+@@ -0,0 +1,6 @@
++diff -uNr trunk.orig/utils/Makefile.am trunk/utils/Makefile.am
++--- trunk.orig/utils/Makefile.am	2009-10-24 00:55:25.000000000 +0200
+++++ trunk/utils/Makefile.am	2009-11-11 16:56:00.000000000 +0100
++@@ -1 +1 @@
++-bin_SCRIPTS = update-alternatives opkg-key
+++bin_SCRIPTS = opkg-key
+diff --git a/recipes/tasks/task-boot.bb b/recipes/tasks/task-boot.bb
+index 1a1b9f2..bdba970 100644
+--- a/recipes/tasks/task-boot.bb
++++ b/recipes/tasks/task-boot.bb
+@@ -14,7 +14,7 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS ?= ""
+ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
+ 
+ # Make sure we build the kernel
+-DEPENDS = "virtual/kernel"
++DEPENDS = "virtual/kernel virtual/update-alternatives-native"
+ 
+ #
+ # minimal set of packages - needed to boot
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+1.6.5.3
+
 
 
