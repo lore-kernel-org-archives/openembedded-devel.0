@@ -1,27 +1,36 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-bw0-f217.google.com ([209.85.218.217])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NAh4E-0001bf-E8 for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Nov 2009 10:43:17 +0100
-Received: from f053038222.adsl.alicedsl.de ([78.53.38.222]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NAh31-00084G-Ko for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Nov 2009 09:41:59 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <tasskjapp@gmail.com>) id 1NAh4w-0001d6-RO
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 18 Nov 2009 10:44:01 +0100
+Received: by bwz9 with SMTP id 9so903316bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Nov 2009 01:42:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=l59UYlgcLGskKHI4l5NXNKGwtfkB6MucpVgGOSww3mg=;
+	b=et8hDzJwPOpOBsTFmuEPWQCStqOis6H+eHmtoR8AxzPzDJMlCxvBEwS1Z6Nt0zTCku
+	Wv1MDEasCvz9opxrw4/ncRnAfz/+GvHSXz9fQECDSTvgmQz5/WZ97BZvCuV36fzbuv8b
+	Q9jNLyV68pX6U14ne1FSYN4flU/Bxi7J4HUgo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=Oe6eJYj1l3d38GCIQpiZGFBFTtcNEIz65Jei0UqETNotXUOKEFcKdWT1Lh+Srs4Nii
+	a3heLJzupTbliEMDRavszy/Hr4WsBqDD9P+EzJBUuj5uYujkwtZR+qA/aMpKfyiyEvu9
+	eHXEdlOFLBCR59GCi3SyTVtpo/ATT/W9er+S0=
+MIME-Version: 1.0
+Received: by 10.223.132.207 with SMTP id c15mr2997229fat.56.1258537345203; 
+	Wed, 18 Nov 2009 01:42:25 -0800 (PST)
+Date: Wed, 18 Nov 2009 10:42:24 +0100
+Message-ID: <ec7df6a60911180142j65980c0bnaf494f4c76fbe980@mail.gmail.com>
+From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1258311783.18820.149.camel@mattotaupa.wohnung.familie-menzel.net>
-References: <1258311783.18820.149.camel@mattotaupa.wohnung.familie-menzel.net>
-Date: Wed, 18 Nov 2009 10:41:45 +0100
-Message-ID: <1258537305.3021.14.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: tasskjapp@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: bitbake base-image: gmp-native: ERROR: function do_configure failed: configure: error: Oops, mp_limb_t is 32 bits, but the assembler code
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Proposed patch for usb-gadget
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,161 +44,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Nov 2009 09:43:17 -0000
-X-Groupsio-MsgNum: 14399
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-x4+saEsWW0bl3L1x0ahS"
+X-List-Received-Date: Wed, 18 Nov 2009 09:44:02 -0000
+X-Groupsio-MsgNum: 14400
+Content-Type: multipart/mixed; boundary=0023545bd49465c2760478a20f9f
 
---=-x4+saEsWW0bl3L1x0ahS
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+--0023545bd49465c2760478a20f9f
+Content-Type: text/plain; charset=ISO-8859-1
 
-Dear OpenEmbedded hackers,
+usb-gadget failed when MODULE_OPTIONS contained more than one option. Here's
+the patch I used to make it work.
 
+- Tasslehoff
 
-Am Sonntag, den 15.11.2009, 20:03 +0100 schrieb Paul Menzel:
-> I am trying to build =C3=85ngstr=C3=B6m following [1]. But
->=20
->         $ bitbake base-image
->=20
-> fails when working with gmp-native.
->=20
->         ERROR: function do_configure failed
->         ERROR: see log in /oe/angstrom-dev/work/x86_64-linux/gmp-native-4=
-.2.4-r0/temp/log.do_configure.29183
->         NOTE: Task failed: /oe/angstrom-dev/work/x86_64-linux/gmp-native-=
-4.2.4-r0/temp/log.do_configure.29183
->         ERROR: TaskFailed event exception, aborting
->         ERROR: Build of /oe/openembedded/recipes/gmp/gmp-native_4.2.4.bb =
-do_configure failed
->         ERROR: Task 1273 (/oe/openembedded/recipes/gmp/gmp-native_4.2.4.b=
-b, do_configure) failed
->         NOTE: Waiting for 3 active tasks to finish
->         NOTE: 1: /oe/openembedded/recipes/gettext/gettext-native_0.17.bb,=
- do_configure (29189)
->         NOTE: 2: /oe/openembedded/recipes/zlib/zlib-native_1.2.3.bb, do_c=
-onfigure (12652)
->         NOTE: 3: /oe/openembedded/recipes/pkgconfig/pkgconfig-native_0.23=
-.bb, do_configure (12447)
->         NOTE: Waiting for 2 active tasks to finish
->         NOTE: 1: /oe/openembedded/recipes/gettext/gettext-native_0.17.bb,=
- do_configure (29189)
->         NOTE: 2: /oe/openembedded/recipes/pkgconfig/pkgconfig-native_0.23=
-.bb, do_configure (12447)
->         NOTE: Waiting for 1 active tasks to finish
->         NOTE: 1: /oe/openembedded/recipes/gettext/gettext-native_0.17.bb,=
- do_configure (29189)
->         NOTE: Tasks Summary: Attempted 539 tasks of which 0 didn't need t=
-o be rerun and 1 failed.
->         ERROR: '/oe/openembedded/recipes/gmp/gmp-native_4.2.4.bb' failed
->=20
-> The log [2] =E2=80=93 also attached =E2=80=93 shows
->=20
->         checking size of mp_limb_t... 4
->         configure: error: Oops, mp_limb_t is 32 bits, but the assembler c=
-ode
->         in this configuration expects 64 bits.
->         You appear to have set $CFLAGS, perhaps you also need to tell GMP=
- the
->         intended ABI, see "ABI and ISA" in the manual.
->         FATAL: oe_runconf failed
->=20
-> The exact same happens for gmp-native 4.3.1. blindvt send me the recipes =
-for this.
->=20
-> Could someone enlighten me please, what I am missing.
->=20
-> local.conf is attached and all other files related to gmp-native.
->=20
->         $ git branch
->         * stable/2009
->=20
->         HEAD fdfedf718dd484607f1b1b839e5e9608406e02e4
->=20
-> I am using Debian unstable and MACHINE =3D "beagleboard".
->=20
-> I think the problem is that I am running a 64-bit Linux kernel with a
-> 32-bit userspace.
->=20
->         $ uname -r
->         2.6.31-1-amd64
->         $ dpkg --print-architecture
->         i386
->=20
-> But running `./.bootstrap` and `./configure` on a normal gmplib checkout
-> [3] does not return any errors, so it must be OpenEmbedded related, must
-> not it?
->=20
-> Please tell me, if you need other information.
+--0023545bd49465c2760478a20f9f
+Content-Type: text/x-patch; charset=US-ASCII; 
+	name="0001-fix-usage-of-MODULE_OPTIONS-in-modprobe.patch"
+Content-Disposition: attachment; 
+	filename="0001-fix-usage-of-MODULE_OPTIONS-in-modprobe.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_g25wnhqn0
 
-I did some more testing and the same problem exists in the branch
-org.openembedded.dev where gmp 4.2.4 is also present.
+RnJvbSBhZTZkOTkwNmJkNGJmYjVjMDY0Y2RjMTJjNDE0N2U5NWEwZTUxNjY5IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpEYXRlOiBXZWQsIDE4IE5vdiAyMDA5IDEwOjI4OjI4ICswMTAwClN1Ympl
+Y3Q6IFtQQVRDSF0gZml4IHVzYWdlIG9mIE1PRFVMRV9PUFRJT05TIGluIG1vZHByb2JlCgotLS0K
+IHVzYi1nYWRnZXQgfCAgIDIwICsrKysrKysrKystLS0tLS0tLS0tCiAxIGZpbGVzIGNoYW5nZWQs
+IDEwIGluc2VydGlvbnMoKyksIDEwIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3VzYi1nYWRn
+ZXQgYi91c2ItZ2FkZ2V0CmluZGV4IDNmMjVlZGMuLjhkYTg4YWQgMTAwNzU1Ci0tLSBhL3VzYi1n
+YWRnZXQKKysrIGIvdXNiLWdhZGdldApAQCAtMjMsMTYgKzIzLDE2IEBAIGdvKCkgewogCXRlc3Qg
+LWUgIiRDT05GX0ZJTEUiICYmIC4gIiRDT05GX0ZJTEUiIAogCQogCWNhc2UgIiRVU0JfTU9ERSIg
+aW4KLQluZXR3b3JraW5nKQlzZXR1cF91c2IgZ19ldGhlciAiJE1PRFVMRV9PUFRJT05TIiA7Owot
+CXplcm8pCQlzZXR1cF91c2IgZ196ZXJvICIkTU9EVUxFX09QVElPTlMiIDs7Ci0JbWlkaSkJCXNl
+dHVwX3VzYiBnX21pZGkgIiRNT0RVTEVfT1BUSU9OUyIgOzsKLQlwcmludGVyKQlzZXR1cF91c2Ig
+Z19wcmludGVyICIkTU9EVUxFX09QVElPTlMiIDs7Ci0JZ2FkZ2V0ZnMpIAlzZXR1cF91c2IgZ2Fk
+Z2V0ZnMgIiRNT0RVTEVfT1BUSU9OUyIgOzsKLQljb21wb3NpdGUpCXNldHVwX3VzYiBnX2NkYyAi
+JE1PRFVMRV9PUFRJT05TIiA7OwotCXNlcmlhbCkJCXNldHVwX3VzYiBnX3NlcmlhbCAiJE1PRFVM
+RV9PUFRJT05TIiA7OwotCXN0b3JhZ2UpCXNldHVwX3VzYiBnX2ZpbGVfc3RvcmFnZSAiJE1PRFVM
+RV9PUFRJT05TIiA7OworCW5ldHdvcmtpbmcpCXNldHVwX3VzYiBnX2V0aGVyIDs7CisJemVybykJ
+CXNldHVwX3VzYiBnX3plcm8gOzsKKwltaWRpKQkJc2V0dXBfdXNiIGdfbWlkaSA7OworCXByaW50
+ZXIpCXNldHVwX3VzYiBnX3ByaW50ZXIgOzsKKwlnYWRnZXRmcykgCXNldHVwX3VzYiBnYWRnZXRm
+cyA7OworCWNvbXBvc2l0ZSkJc2V0dXBfdXNiIGdfY2RjIDs7CisJc2VyaWFsKQkJc2V0dXBfdXNi
+IGdfc2VyaWFsIDs7CisJc3RvcmFnZSkJc2V0dXBfdXNiIGdfZmlsZV9zdG9yYWdlIDs7CiAJaG9z
+dG1vZGUpCXVubG9hZF91c2JfZ2FkZ2V0cwotCQkJc2V0dXBfdXNiIG9oY2lfaGNkICIkTU9EVUxF
+X09QVElPTlMiIDs7CisJCQlzZXR1cF91c2Igb2hjaV9oY2QgOzsKIAlub25lKQkJdW5sb2FkX3Vz
+Yl9nYWRnZXRzIDs7CiAJZXNhYwkJCiAJCQpAQCAtNDQsNyArNDQsNyBAQCBzZXR1cF91c2IoKSB7
+CiAJdGhlbgogCQl1bmxvYWRfdXNiX2dhZGdldHMKIAkJZWNobyAiTG9hZGluZyBbJDFdIgotCQlt
+b2Rwcm9iZSAiJDEiICIkTU9EVUxFX09QVElPTlMiCisJCW1vZHByb2JlICIkMSIgJE1PRFVMRV9P
+UFRJT05TCiAJZWxzZQogCQllY2hvICJBbHJlYWR5IGxvYWRlZDogWyQxXSIKIAlmaQotLSAKMS42
+LjMuMwoK
 
-1. Is there a maintainer for GMP in OpenEmbedded? I did not find an
-entry in MAINTAINERS [4].
-
-2. Running `./configure` with the flags in the log file
-
-        $ ./configure                --build=3Dx86_64-linux
-        --host=3Dx86_64-linux                     --target=3Dx86_64-linux
-        --prefix=3D/srv/oe/angstrom-dev/staging/x86_64-linux/usr
-        --exec_prefix=3D/srv/oe/angstrom-dev/staging/x86_64-linux/usr
-        --bindir=3D/srv/oe/angstrom-dev/staging/x86_64-linux/usr/bin
-        --sbindir=3D/srv/oe/angstrom-dev/staging/x86_64-linux/usr/sbin
-        --libexecdir=3D/srv/oe/angstrom-dev/staging/x86_64-linux/usr/libexe=
-c                --datadir=3D/srv/oe/angstrom-dev/staging/x86_64-linux/usr/=
-share                     --sysconfdir=3D/srv/oe/angstrom-dev/staging/x86_6=
-4-linux/etc                --sharedstatedir=3D/srv/oe/angstrom-dev/staging/=
-x86_64-linux/com                    --localstatedir=3D/srv/oe/angstrom-dev/=
-staging/x86_64-linux/var                     --libdir=3D/srv/oe/angstrom-de=
-v/staging/x86_64-linux/usr/lib                --includedir=3D/srv/oe/angstr=
-om-dev/staging/x86_64-linux/usr/include                --oldincludedir=3D/s=
-rv/oe/angstrom-dev/staging/x86_64-linux/usr/include                     --i=
-nfodir=3D/srv/oe/angstrom-dev/staging/x86_64-linux/usr/share/info          =
-      --mandir=3D/srv/oe/angstrom-dev/staging/x86_64-linux/usr/share/man
-
-in the upstream source and in the temporary directory for build =C3=85ngstr=
-=C3=B6m
-`angstrom-dev/work/x86_64-linux/gmp-native-4.2.4-r0.1/gmp-4.2.4` works
-without problem.
-
-        [=E2=80=A6]
-        checking if the assembler takes cl with shldl... yes
-        checking size of unsigned short... 2
-        checking size of unsigned... 4
-        checking size of unsigned long... 4
-        checking size of mp_limb_t... 4
-        checking for stack_t... yes
-        checking for tputs in -lncurses... yes
-        [=E2=80=A6]
-
-How do find out what other flags are passed during the BitBake run or
-what environment variables are set, so that I can test the upstream copy
-with these settings?
-
-
-Thanks,
-
-Paul
-
-
-> [1] http://www.angstrom-distribution.org/building-=C3=A5ngstr=C3=B6m
-> [2] oe/angstrom-dev/work/x86_64-linux/gmp-native-4.2.4-r0/temp$ less log.=
-do_configure.29183
-> [3] hg clone http://gmplib.org:8000/gmp-4.3/
-[4] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/MAINTAINERS
-
---=-x4+saEsWW0bl3L1x0ahS
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAksDwVMACgkQPX1aK2wOHViHSwCdEdW+DjFuvBHMVqPN1+BGGoHM
-uSoAnRyC+aJ5003ZA2oPlj71D+kgvcCF
-=CQUV
------END PGP SIGNATURE-----
-
---=-x4+saEsWW0bl3L1x0ahS--
+--0023545bd49465c2760478a20f9f--
