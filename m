@@ -1,41 +1,41 @@
-Received: from mail-bw0-f217.google.com ([209.85.218.217])
+Received: from mail-pz0-f192.google.com ([209.85.222.192])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1NAsvV-0004sN-19
+	(envelope-from <graham.gower@gmail.com>) id 1NAtRv-0001UV-Hf
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Nov 2009 23:23:04 +0100
-Received: by bwz9 with SMTP id 9so1661543bwz.12
+	Wed, 18 Nov 2009 23:56:34 +0100
+Received: by pzk30 with SMTP id 30so1090516pzk.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Nov 2009 14:21:36 -0800 (PST)
+	Wed, 18 Nov 2009 14:55:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type; bh=ZSHZFUlKnz0qBnZPoyZi7KhKq9fKaSl5Rs1s+fA7mDk=;
-	b=PxhqzH6HejpRBI41blq3pGH/vmCA7FWpK755OOW3ne4+wHcMqGHwHjD+uLc2O3lZm+
-	xWy90qPWyVoZWUWLECRi/oLEUu5xJj9MsBdmrQLsvIDfUiUotiY2/0CKi8tkVNAPSdLN
-	ErvComPjqhq9qcgLcV/q5JhAxzQ9xfOuwll5Y=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=OZ88ZIoVNMr+baCyfVUFRRDUNAQbglHQZeqP/x+OocQ=;
+	b=g6r3I6U5icxYkykNxShgvVA7u4xmOU8A0rWAjMXXnrsNy7skxy12ydv5qQ0RosJe1a
+	PaXQPyVILaan2rr8SqanCeUPOuiK4fwr9dH/D4Xuwz6Rq+x+uiXUVekt7OUOZz++Sm34
+	seKCwXJ2x/GeEA30sRNd9fJetWR5MAzmnQaPg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	b=uYt9rZzLa0rRylej3mfSvzILxHopR2d7qF+/lPWsESG78W2y7T6fjy8mCUO06mGmc+
-	r1H5gCfqf5QseMn+MOS/Sjy1/rwRHsVRN+3gdKh/zDG4IAL8utdQNy0wigyi3aTE6WtU
-	fwAAC+9rGnQYAAtXscbN+NgmiAYQNRcQPqlFY=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=iCkYuk5DPuRPnznq2pYrPxwOHNCE9qA2AOXYJHn/0aHGlSxU2CPShOfkZcWDdbS6FN
+	+K23la+js1a9T7J4UUtCgALFD6cuAae8q87cd9fBT0Fu4mCe723iSIIeSrJdUn8Blgl3
+	rmgYp8t+EogQSkIug3CTapB1xRb7MxdezOXKA=
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.185.77 with SMTP id b13mr881335hbh.158.1258582895984; Wed, 
-	18 Nov 2009 14:21:35 -0800 (PST)
-In-Reply-To: <1258576924.25369.687.camel@lenovo.internal.reciva.com>
-References: <be7a9f3d0911181211s614defeaq5a49ca33c3691c50@mail.gmail.com>
-	<1258576924.25369.687.camel@lenovo.internal.reciva.com>
-Date: Wed, 18 Nov 2009 20:21:35 -0200
-X-Google-Sender-Auth: 1fad45021704c4da
-Message-ID: <be7a9f3d0911181421i4d3a1ffy2417cbbd91d9a1ff@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by 10.142.249.2 with SMTP id w2mr1336126wfh.198.1258584906531; Wed, 
+	18 Nov 2009 14:55:06 -0800 (PST)
+In-Reply-To: <1258582348.25369.689.camel@lenovo.internal.reciva.com>
+References: <4B03CBF0.5010000@SSpaeth.de> <4B03CDD9.1010202@SSpaeth.de>
+	<6ec4247d0911181320o1aae5e21o2f6a8038daff6173@mail.gmail.com>
+	<1258582348.25369.689.camel@lenovo.internal.reciva.com>
+Date: Thu, 19 Nov 2009 09:25:06 +1030
+Message-ID: <6ec4247d0911181455g6399eeeci38db4e9b727886d@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+X-SA-Exim-Connect-IP: 209.85.222.192
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] Merging of stable/2009 into dev
+Subject: Re: BAD_RECOMMENDATIONS is broken (opkg issue)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,33 +49,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Nov 2009 22:23:04 -0000
+X-List-Received-Date: Wed, 18 Nov 2009 22:56:34 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hello Phil,
-
-On Wed, Nov 18, 2009 at 6:42 PM, Phil Blundell <philb@gnu.org> wrote:
-> On Wed, 2009-11-18 at 18:11 -0200, Otavio Salvador wrote:
->> From my POV the best alternative is, before we start changing a lot of
->> stuff in dev we do a merge of stable/2009 into dev to allow easy
->> merging from outside "forks" made by users.
+2009/11/19 Phil Blundell <philb@gnu.org>:
 >
-> I don't quite understand what you mean by merging stable/2009 into dev.
-> Isn't it the case that all the changesets in stable/2009 were
-> cherry-picked from .dev in the first place, and hence are already there?
->
-> Can you give a bit more detail on what exactly you are proposing?
+> It's meant to be handled by this chunk of code, and I'm fairly sure that
+> this used to work reliably. =A0Has that part of opkg changed recently?
 
-Please try it:
+Nope, no changes there. And no particularly invasive changes up to r240.
 
-git checkout -b merge-try origin/org.openembedded.dev
-git merge stable/2009
+I have some minor worries that
+http://code.google.com/p/opkg/source/detail?r=3D328 will have some non
+obvious fallout. (Obviously not the issue here though)
 
-You'll notice how many conflicts it produces.
-
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+-Graham
 
 
