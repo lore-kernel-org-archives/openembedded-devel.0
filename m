@@ -1,38 +1,29 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NAmOR-0007Kv-GV
+	(envelope-from <gary@mlbassoc.com>) id 1NAmUZ-0001sN-SB
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Nov 2009 16:24:30 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NAmN4-0008US-AP for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Nov 2009 10:23:02 -0500
-Date: Wed, 18 Nov 2009 10:22:48 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4B040BB5.20308@balister.org>
-Message-ID: <alpine.LFD.2.00.0911181018010.22422@localhost>
-References: <alpine.LFD.2.00.0911180935590.20580@localhost>
-	<4B040BB5.20308@balister.org>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Wed, 18 Nov 2009 16:30:51 +0100
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id E89A91660831; Wed, 18 Nov 2009 08:29:24 -0700 (MST)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 473A9166082D;
+	Wed, 18 Nov 2009 08:29:24 -0700 (MST)
+Message-ID: <4B0412D4.2010100@mlbassoc.com>
+Date: Wed, 18 Nov 2009 08:29:24 -0700
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.5) Gecko/20091117 Shredder/3.0.1pre
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+To: openembedded-devel@lists.openembedded.org
+References: <4AFAEDC3.80404@mlbassoc.com> <hdtjmt$rcf$1@ger.gmane.org>
+	<4B03F931.70501@mlbassoc.com>
+In-Reply-To: <4B03F931.70501@mlbassoc.com>
+X-SA-Exim-Connect-IP: 76.76.67.137
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: building versus just using native guile?
+Cc: Koen Kooi <k.kooi@student.utwente.nl>
+Subject: Re: Prebuilt toolchains
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,86 +37,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Nov 2009 15:24:30 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 18 Nov 2009 15:30:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, 18 Nov 2009, Philip Balister wrote:
-
-> Can you remind me what distro you are using on your build machine?
-> Normally, I seem to share your pain, but beagle-demo-image is
-> building for me at the moment. (I'm basically wiping tmp and
-> starting over as fast as i can atm)
+On 11/18/2009 06:40 AM, Gary Thomas wrote:
+> On 11/17/2009 12:34 AM, Koen Kooi wrote:
+>> On 11-11-09 18:00, Gary Thomas wrote:
+>>> I'd like to use my own toolchains when building OpenEmbedded.
+>>> I've tried to follow the information at:
+>>> http://docs.openembedded.org/usermanual/usermanual.html#commonuse_prebuilt_toolchain
+>>>
+>>>
+>>>
+>>> It's a bit terse and confusing, so I'm just trying to see
+>>> what I need (I think the section tries to discuss too many
+>>> concepts at once)
+>>
+>> If you're using angstrom and want to use a prebuilt CSL toolchain, you
+>> only need to add this to local.conf (I suspect thunderbird will linewrap
+>> it):
+>>
+>> # Black magic to automatically set SDK_PATH out of PATH - don't touch
+>> this!
+>> # Works with pretty much any external toolchain, like CS Lite or MV Pro 5
+>> # Handles cross-toolchain vs. native toolchain
+>> # SDK_PATH can be overwritten externally by META_SDK_PATH, e.g. for SDK
+>> TOOLCHAIN_SYSPATH = "${@bb.data.getVar('TARGET_ARCH', d, 1) !=
+>> bb.data.getVar('BUILD_ARCH', d, 1) and
+>> os.path.abspath(os.path.dirname(bb.which(bb.data.getVar('PATH', d, 1),
+>> bb.data.getVar('TARGET_PREFIX', d,
+>> 1)+'cpp'))+'/../'+bb.data.getVar('TARGET_SYS', d, 1)) or ''}"
+>> TOOLCHAIN_PATH = "${@bool(bb.data.getVar('TOOLCHAIN_SYSPATH', d, 1)) and
+>> (os.path.exists(bb.data.getVar('TOOLCHAIN_SYSPATH', d, 1)) and
+>> os.path.dirname(bb.data.getVar('TOOLCHAIN_SYSPATH', d, 1)) or
+>> bb.fatal('No valid toolchain in PATH')) or ''}"
+>> SDK_PATH = "${@[bb.data.getVar('TOOLCHAIN_PATH', d, 1),
+>> bb.data.getVar('META_SDK_PATH', d,
+>> 1)][bool(bb.data.getVar('META_SDK_PATH', d, 1))]}"
+>>
+>> # Set the necessary variables to use binary CodeSourcery Lite
+>> TARGET_VENDOR = "-none"
+>> TARGET_CPPFLAGS_append = " -I${SDK_PATH}/${TARGET_SYS}/libc/usr/include "
+>> TARGET_LDFLAGS_prepend = " -L${SDK_PATH}/${TARGET_SYS}/libc/lib
+>> -Wl,-rpath-link,${SDK_PATH}/${TARGET_SYS}/libc/lib "
+>> TOOLCHAIN_TYPE = "external"
+>> TOOLCHAIN_BRAND = "csl"
 >
-> I am building on F11.
+> Thanks, this looks like something to try.
 >
-> Philip
+> I'm having a bit of trouble with the setting of 'TOOLCHAIN_SYSPATH'
+> (my toolchain is home-grown. not CSL). Is there some way to debug this
+> line, e.g. print out the components and results?
 >
-> On 11/18/2009 09:40 AM, Robert P. J. Day wrote:
-> >
-> >    i'm hoping there's a simple OE solution to this.  i'm still fighting
-> > trying to bitbake guile-native, and here's the tail end of log file
-> > that shows the problem:
-> >
-> > cat alist.doc arbiters.doc async.doc backtrace.doc boolean.doc
-> > chars.doc continuations.doc debug.doc deprecation.doc deprecated.doc
-> > discouraged.doc dynl.doc dynwind.doc environments.doc eq.doc error.doc
-> > eval.doc evalext.doc extensions.doc feature.doc fluids.doc fports.doc
-> > futures.doc gc.doc goops.doc gsubr.doc gc-mark.doc gc-segment.doc
-> > gc-malloc.doc gc-card.doc guardians.doc hash.doc hashtab.doc hooks.doc
-> > i18n.doc init.doc ioext.doc keywords.doc lang.doc list.doc load.doc
-> > macros.doc mallocs.doc modules.doc numbers.doc objects.doc objprop.doc
-> > options.doc pairs.doc ports.doc print.doc procprop.doc procs.doc
-> > properties.doc random.doc rdelim.doc read.doc root.doc rw.doc
-> > scmsigs.doc script.doc simpos.doc smob.doc sort.doc srcprop.doc
-> > stackchk.doc stacks.doc stime.doc strings.doc srfi-4.doc srfi-13.doc
-> > srfi-14.doc strorder.doc strports.doc struct.doc symbols.doc
-> > threads.doc throw.doc values.doc variable.doc vectors.doc version.doc
-> > vports.doc weaks.doc ramap.doc unif.doc dynl.doc filesys.doc posix.doc
-> > net_db.doc socket.doc regex-posix.doc |
-> > GUILE="/home/rpjday/oe/angstrom-dev/work/x86_64-linux/guile-native-1.8.7-r0/guile-1.8.7/pre-inst-guile"
-> > ../scripts/snarf-check-and-output-texi>
-> > guile-procedures.texi || { rm guile-procedures.texi; false; }
 
-  i'm effectively on F12 (rawhide updated F11), about to re-install
-fresh with F12.  not that long ago, adrian alonso(?) mentioned that,
-when his build of guile-native failed, he *manually* ran that failing
-step, substituting a reference to the already-installed guile on his
-system, and that seemed to work.
+Here's what I'm getting:
+$ bitbake minimal-image
+NOTE: Handling BitBake files: \ (0045/7445) [ 0 %]ERROR: No valid toolchain in PATH
+NOTE: <type 'exceptions.SystemExit'>:1 while evaluating:
+${@bool(bb.data.getVar('TOOLCHAIN_SYSPATH', d, 1)) and (os.path.exists(bb.data.getVar('TOOLCHAIN_SYSPATH', d, 1)) and os.path.dirname(bb.data.getVar('TOOLCHAIN_SYSPATH', d, 1)) or 
+bb.fatal('No valid toolchain in PATH')) or ''}
+NOTE: <type 'exceptions.SystemExit'>:1 while evaluating:
+${@[bb.data.getVar('TOOLCHAIN_PATH', d, 1), bb.data.getVar('META_SDK_PATH', d, 1)][bool(bb.data.getVar('META_SDK_PATH', d, 1))]}
+NOTE: <type 'exceptions.SystemExit'>:1 while evaluating:
+-isystem${STAGING_DIR_TARGET}${layout_includedir} -I${SDK_PATH}/${TARGET_SYS}/libc/usr/include
+NOTE: <type 'exceptions.SystemExit'>:1 while evaluating:
+${TARGET_CPPFLAGS} ${SELECTED_OPTIMIZATION}
+NOTE: <type 'exceptions.SystemExit'>:1 while evaluating:
+${TARGET_CFLAGS}
+ERROR: Error in executing: /local/Angstrom_BeagleBoard/openembedded/recipes/xmame/xmame_0.100.bb
+ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
+ERROR: Printing the environment of the function
 
-  and when i pull open the guile 1.8.7 tarball (i was testing to see
-if a newer version would help), down in the libguile directory, in
-Makefile.am, there's this snippet that clearly represents that command
-that's failing:
+How can I debug what 'TOOLCHAIN_SYSPATH' is evaluating to?
 
-=====
-
-alldotdocfiles    = $(DOT_DOC_FILES) $(EXTRA_DOT_DOC_FILES)
-snarf2checkedtexi = GUILE="$(GUILE_FOR_BUILD)" $(top_srcdir)/scripts/snarf-check-and-output-texi
-dotdoc2texi       = cat $(alldotdocfiles) | $(snarf2checkedtexi)
-
-=====
-
-  you can see how those Makefile variables are set up to construct
-that massive "cat" command that eventually fails.  and how the GUILE
-variable is being set to the constructed version (pre-inst-guile)
-rather than to the native version, even after i set the
-GUILE_FOR_BUILD env variable.  so all i can deduce is that that env
-var isn't percolating down to the libguile build step.
-
-  so i'm still confused.  and i'm guessing that my f12-ishness on this
-system is what's causing the difference in our builds.
-
-rday
---
+Thanks
 
 
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
