@@ -1,42 +1,42 @@
-Received: from gv-out-0910.google.com ([216.239.58.186])
+Received: from libra.cs.put.poznan.pl ([150.254.30.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1NAkJh-0005OR-51
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Nov 2009 14:11:28 +0100
-Received: by gv-out-0910.google.com with SMTP id e6so218707gvc.4
+	(envelope-from <przemyslaw.wesolek@cs.put.poznan.pl>)
+	id 1NAkWM-00083C-Sn for openembedded-devel@lists.openembedded.org;
+	Wed, 18 Nov 2009 14:24:33 +0100
+Received: from kas30pipe.localhost (unknown [127.0.0.1])
+	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id DF72898
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Nov 2009 05:10:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=d3ipL1eIp4p9iqVN5CpJ+lteYv7dOQMh65sB72EfZU0=;
-	b=wpWY3LhR2SzhsJG9sK6g40QKDYFhaC9MZ0o3oDoNpB6EoCwrOuoDQwRx0xRj7XKUV1
-	/mvCTJL/FNWRkrausBeHOcKFbOeUV5yKdQP6s1yqm6F0GcO44VsQh3p9z2HhA/XYqEO/
-	9DEmEx+Za1yz8unIhYx+JPelwAwKAo8MDq0qU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=Hs+WctpWZAw4X8LZwroC6FuxoxGB9UcDJZiT+J7myZkh/CxOGVGda00PfUa8bFbqG8
-	D8LPod/NxTNTonAyWxNzRHWN9UlmQUlJ82saw874MevaV+7apgiTG4tl8pI/lhCM8VcK
-	ap2JrYbgDGpMixaKTsB2ZREu2wy5x0ShyB/Jc=
+	Wed, 18 Nov 2009 13:23:04 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at cs.put.poznan.pl
+Received: from libra.cs.put.poznan.pl ([127.0.0.1])
+	by localhost (libra.cs.put.poznan.pl [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id OewUKiwalXKx
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Nov 2009 14:23:04 +0100 (CET)
+Received: from [150.254.31.31] (idss-pw.cs.put.poznan.pl [150.254.31.31])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id A9D5B91
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Nov 2009 14:23:04 +0100 (CET)
+Message-ID: <4B03F539.9080806@cs.put.poznan.pl>
+Date: Wed, 18 Nov 2009 14:23:05 +0100
+From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
+Organization: Poznan University of Technology
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.162.129 with SMTP id l1mr116880hbd.201.1258549802378; Wed, 
-	18 Nov 2009 05:10:02 -0800 (PST)
-In-Reply-To: <1258504066-24834-1-git-send-email-leon@sidebranch.com>
-References: <1258504066-24834-1-git-send-email-leon@sidebranch.com>
-Date: Wed, 18 Nov 2009 11:10:02 -0200
-X-Google-Sender-Auth: c18d1183d268e700
-Message-ID: <be7a9f3d0911180510p6f359154ve1c6219ca8ac0f4c@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 216.239.58.186
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+References: <1258504066-24834-1-git-send-email-leon@sidebranch.com>
+	<be7a9f3d0911180510p6f359154ve1c6219ca8ac0f4c@mail.gmail.com>
+In-Reply-To: <be7a9f3d0911180510p6f359154ve1c6219ca8ac0f4c@mail.gmail.com>
+X-Enigmail-Version: 0.96.0
+X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0278], KAS30/Release
+X-SpamTest-Info: Not protected
+X-SA-Exim-Connect-IP: 150.254.30.30
+X-SA-Exim-Mail-From: przemyslaw.wesolek@cs.put.poznan.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] kernel.bbclass: Move do_menuconfigure after do_configure.
+Subject: Re: [PATCH] kernel.bbclass: Move do_menuconfigure after	do_configure.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,58 +50,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Nov 2009 13:11:28 -0000
+X-List-Received-Date: Wed, 18 Nov 2009 13:24:34 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+Otavio Salvador wrote:
+> Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+> 
 
-On Tue, Nov 17, 2009 at 10:27 PM, Leon Woestenberg
-<leon.woestenberg@gmail.com> wrote:
-> Currently, menuconfigure comes after the patch task and before
-> the configure task. If someone runs the menuconfigure task,
-> then builds the kernel, the configure task will overwrite the
-> configuration just edited. This is unexpected and/or unwanted
-> behaviour.
->
-> Rather moved menuconfigure past configure, so that the OpenEmbedded
-> supplied defconfig can be edited afterwards.
->
-> Signed-off-by: Leon Woestenberg <leon@sidebranch.com>
-> ---
-> =A0classes/kernel.bbclass | =A0 =A02 +-
-> =A01 files changed, 1 insertions(+), 1 deletions(-)
->
-> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-> index 9c1f637..cf7cc4f 100644
-> --- a/classes/kernel.bbclass
-> +++ b/classes/kernel.bbclass
-> @@ -218,7 +218,7 @@ do_menuconfig() {
-> =A0 =A0 =A0 =A0fi
-> =A0}
-> =A0do_menuconfig[nostamp] =3D "1"
-> -addtask menuconfig after do_patch
-> +addtask menuconfig after do_configure
->
-> =A0pkg_postinst_kernel () {
-> =A0 =A0 =A0 =A0cd /${KERNEL_IMAGEDEST}; update-alternatives --install /${=
-KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYP=
-E}-${KERNEL_VERSION} ${KERNEL_PRIORITY} || true
-> --
-> 1.6.0.4
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+For not to make a confusion: this was already commited from the other patch.
 
+Przemek
 
-
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
