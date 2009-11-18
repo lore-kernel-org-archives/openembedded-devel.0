@@ -1,23 +1,37 @@
-Received: from aa013msr.fastwebnet.it ([85.18.95.73])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pisa.t@teledata-i.com>) id 1NAl0b-00039e-0I
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NAlES-0005XC-Be for openembedded-devel@lists.openembedded.org;
+	Wed, 18 Nov 2009 15:10:07 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NAlD8-00076N-EP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Nov 2009 14:55:48 +0100
-Received: from [193.100.100.18] (27.253.111.36) by aa013msr.fastwebnet.it
-	(8.5.016.6)
-	id 4B033DEA0013FEA9 for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Nov 2009 14:51:39 +0100
-From: Paolo Cremonese <pisa.t@teledata-i.com>
+	Wed, 18 Nov 2009 15:08:42 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Nov 2009 15:08:42 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Nov 2009 15:08:42 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Nov 2009 14:51:46 +0100
-Message-Id: <1258552306.29255.2.camel@ubuntu2>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 18 Nov 2009 15:08:15 +0100
+Message-ID: <he0v4f$tqp$1@ger.gmane.org>
+References: <1258552306.29255.2.camel@ubuntu2>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-SA-Exim-Connect-IP: 85.18.95.73
-X-SA-Exim-Mail-From: pisa.t@teledata-i.com
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
+In-Reply-To: <1258552306.29255.2.camel@ubuntu2>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: LPC3250
+Subject: Re: LPC3250
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,17 +45,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Nov 2009 13:55:48 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 18 Nov 2009 14:10:07 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi ALL,
-does anybody have a suggestion about the DISTRO and MACHINE to use to
-develop an image for a LPC3250 platform?
-It is an ARM926 by NXP
+On 18-11-09 14:51, Paolo Cremonese wrote:
+> Hi ALL,
+> does anybody have a suggestion about the DISTRO and MACHINE to use to
+> develop an image for a LPC3250 platform?
+> It is an ARM926 by NXP
 
-Thanks in advance
-Paolo
+DISTRO=angstrom-2008.1 and MACHINE=sheevaplug should be compatible for 
+userspace
 
 
 
