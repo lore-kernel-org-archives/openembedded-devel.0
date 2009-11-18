@@ -1,39 +1,41 @@
-Received: from mail-fx0-f209.google.com ([209.85.220.209])
+Received: from ey-out-1920.google.com ([74.125.78.149])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1NASBv-0006bA-RH
+	(envelope-from <leon.woestenberg@gmail.com>) id 1NAYQ3-0002Ip-PF
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Nov 2009 18:50:14 +0100
-Received: by fxm1 with SMTP id 1so235686fxm.12
+	Wed, 18 Nov 2009 01:29:14 +0100
+Received: by ey-out-1920.google.com with SMTP id 26so139296eyw.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Nov 2009 09:48:48 -0800 (PST)
+	Tue, 17 Nov 2009 16:27:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=aDxZlyZhWJLsA/w0j9CTUsffwDxwDJJBrEN8Qqp/dE4=;
-	b=POR+AnIOgHir+DOxVqdWFdP/AdmO5IAuMRopFB5ue3/vrjrKX3KjHjrirW6K7a/1O9
-	QPiHNTEtGDqDSvpuny/T5E7DwsDDJMdsKJBuaSbWDHi5uEN2o8pVtXvyLdtQCQweZ5eh
-	2CjXLAlWo/sBecyT/3OQPisXX7jtptT0IRK5Q=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=Tvzlrn99U9MyxYwqEoKQLJo5/CbWvJCTWV0kFcEah1o=;
+	b=vqUldm7lesz6OWObt0mQZGg91AG1pXf+FI/Y8tA50JU0VkFTifukKF1MJSthMar8/x
+	hMuHe2OHjt5b9QNH4KisAlOcVe3X2YP/MZqS6RUgkyki4dcmfFGn/yhXbWt1izAvt9fg
+	cdds4z4Ct353p1umzK+kwbJ+0zqyDZezLyVDo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=OuCDOO6NPJWu/A4YLb/h5r4ISww54iYWKjeuLhEWGt/4q6cRed0mpTG6aSVh7wxs2Y
-	yoMcJX3xxI1cVVROM7Iya8OLsHoC0gUB/IEq0ya6+idXnqR0YpxIwisbNr0DhNTeEMzo
-	8aqalxQdmy4g50aln5BEw9511H/qjflPzIr3w=
-MIME-Version: 1.0
-Received: by 10.216.90.76 with SMTP id d54mr1134085wef.55.1258480128520; Tue, 
-	17 Nov 2009 09:48:48 -0800 (PST)
-In-Reply-To: <1258476039.1078.33.camel@localhost>
-References: <1258476039.1078.33.camel@localhost>
-Date: Tue, 17 Nov 2009 12:48:48 -0500
-Message-ID: <f96d234e0911170948i53bded13i64db5531ad6c3e51@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=xIMD/PHFQ3n3fsdM+83gyVFHKwsAgaJsSO5EbjUk5/UiA+DR4/5Tl3K28Cu/wcePqR
+	VNSqBemvkXiBnk2Zgbvi/ayXfTPmNjqu6iXpb2TmDOJPv3mvgBH7lBBl5B3Q9LT2QGlQ
+	4sgYahDSpBKURFwnjFhbGxY637nSptV86/mOk=
+Received: by 10.213.100.13 with SMTP id w13mr1572998ebn.15.1258504070413;
+	Tue, 17 Nov 2009 16:27:50 -0800 (PST)
+Received: from localhost.localdomain (82-171-51-231.ip.telfort.nl
+	[82.171.51.231])
+	by mx.google.com with ESMTPS id 28sm749560eyg.30.2009.11.17.16.27.49
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 17 Nov 2009 16:27:49 -0800 (PST)
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.209
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+Date: Wed, 18 Nov 2009 01:27:46 +0100
+Message-Id: <1258504066-24834-1-git-send-email-leon@sidebranch.com>
+X-Mailer: git-send-email 1.6.0.4
+X-SA-Exim-Connect-IP: 74.125.78.149
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Docs and Bug tracker migration to OE from bug for OpenEmbedded tools for Eclipse
+Cc: Leon Woestenberg <leon@sidebranch.com>
+Subject: [PATCH] kernel.bbclass: Move do_menuconfigure after do_configure.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,27 +49,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Nov 2009 17:50:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 18 Nov 2009 00:29:14 -0000
 
-On Tue, Nov 17, 2009 at 11:40 AM, Ken Gilmer <ken@buglabs.net> wrote:
->
-> Hello ~
->
-> =A0I'm thinking it might be more appropriate to have information
-> regarding OTE
-> (http://community.buglabs.net/kgilmer/posts/110-BitBake-Commander-6-8-Ins=
-tallers-) on the OE wiki rather than the bug labs community site. =A0The pl=
-ugins are independent from any BL product, and it may serve the community b=
-etter to have this tool more closely associated with OE. =A0Maybe also defe=
-ct tracking might be better suited in the OE bugzilla. =A0Comments/concerns=
-?
+Currently, menuconfigure comes after the patch task and before
+the configure task. If someone runs the menuconfigure task,
+then builds the kernel, the configure task will overwrite the
+configuration just edited. This is unexpected and/or unwanted
+behaviour.
 
-Seems like a good idea to me.  This information in the OE wiki would
-be welcome from my perspective, and would likely get more exposure.
+Rather moved menuconfigure past configure, so that the OpenEmbedded
+supplied defconfig can be edited afterwards.
 
-Regards,
-Cliff
+Signed-off-by: Leon Woestenberg <leon@sidebranch.com>
+---
+ classes/kernel.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+index 9c1f637..cf7cc4f 100644
+--- a/classes/kernel.bbclass
++++ b/classes/kernel.bbclass
+@@ -218,7 +218,7 @@ do_menuconfig() {
+ 	fi
+ }
+ do_menuconfig[nostamp] = "1"
+-addtask menuconfig after do_patch
++addtask menuconfig after do_configure
+ 
+ pkg_postinst_kernel () {
+ 	cd /${KERNEL_IMAGEDEST}; update-alternatives --install /${KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE}-${KERNEL_VERSION} ${KERNEL_PRIORITY} || true
+-- 
+1.6.0.4
+
 
 
