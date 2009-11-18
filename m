@@ -1,41 +1,27 @@
-Received: from ey-out-1920.google.com ([74.125.78.149])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1NAYVe-0000GB-Pc
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Nov 2009 01:35:01 +0100
-Received: by ey-out-1920.google.com with SMTP id 3so1671883eyh.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Nov 2009 16:33:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=Zlq3DmZcyEytPSJ0kcib6fWzOaN2UBtap4GtISY3X18=;
-	b=o9DoIGb9pAuWfMFg0np7WDgtPKtbnXS8mXP3wlDCvw6f8DALFqQsyWGkYJ7au0N6mO
-	LJ+SHTl6dL+xbwmcE0DlMdsvsijKVTqYjttWjYQ5n9Uq5JJtit5sM0d4a+4vGTMeKPjD
-	Q+R7i1Jxj8tZhyrhIF9qZY7NhomI0jeA858D0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=S/Wyl1vfOfQ3SM0KIa5Qqrgu+I07QHIcOT94U1vDUYDRFewikUKPLuAeTNpcwtNu/B
-	ykvq6P/U3930bn2um8NBik4HZV+DclZmiOMEQhiB0dwJi+1O9m12m8talhe4yLPQlOlN
-	4KcSt8JdQrN4TtSbQPPMO6sNwlLV2NWrnhPCE=
-Received: by 10.213.109.156 with SMTP id j28mr2940768ebp.79.1258504417343;
-	Tue, 17 Nov 2009 16:33:37 -0800 (PST)
-Received: from localhost.localdomain (82-171-51-231.ip.telfort.nl
-	[82.171.51.231])
-	by mx.google.com with ESMTPS id 10sm900694eyd.7.2009.11.17.16.33.36
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 17 Nov 2009 16:33:36 -0800 (PST)
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NAh4E-0001bf-E8 for openembedded-devel@lists.openembedded.org;
+	Wed, 18 Nov 2009 10:43:17 +0100
+Received: from f053038222.adsl.alicedsl.de ([78.53.38.222]
+	helo=[192.168.178.25])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NAh31-00084G-Ko for openembedded-devel@lists.openembedded.org;
+	Wed, 18 Nov 2009 09:41:59 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Nov 2009 01:33:33 +0100
-Message-Id: <1258504413-25056-1-git-send-email-leon@sidebranch.com>
-X-Mailer: git-send-email 1.6.0.4
-X-SA-Exim-Connect-IP: 74.125.78.149
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+In-Reply-To: <1258311783.18820.149.camel@mattotaupa.wohnung.familie-menzel.net>
+References: <1258311783.18820.149.camel@mattotaupa.wohnung.familie-menzel.net>
+Date: Wed, 18 Nov 2009 10:41:45 +0100
+Message-ID: <1258537305.3021.14.camel@mattotaupa.wohnung.familie-menzel.net>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Leon Woestenberg <leon@sidebranch.com>
-Subject: [PATCH] squashfs-4.0: update squashfs-tools to include upstream LZMA inclusion.
+Subject: Re: bitbake base-image: gmp-native: ERROR: function do_configure failed: configure: error: Oops, mp_limb_t is 32 bits, but the assembler code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,122 +35,161 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Nov 2009 00:35:01 -0000
+X-List-Received-Date: Wed, 18 Nov 2009 09:43:17 -0000
+X-Groupsio-MsgNum: 14399
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-x4+saEsWW0bl3L1x0ahS"
 
-In OpenEmbedded we used squashfs 4.0 with external patch for LZMA
-compression support. In the meantime, squashfs has mainlined LZMA
-support in its CVS version.
+--=-x4+saEsWW0bl3L1x0ahS
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This patches switches to the upstream squashfs-tools and modifies
-bitbake.conf to match the slightly different arguments to mksquashfs.
-
-Signed-off-by: Leon Woestenberg <leon@sidebranch.com>
----
- conf/bitbake.conf                                  |    2 +-
- conf/distro/include/sane-srcdates.inc              |    1 +
- .../squashfs-tools/squashfs-tools-native_4.0.bb    |    7 +--
- recipes/squashfs-tools/squashfs-tools_4.0.bb       |   42 +++++++++++++++-----
- 4 files changed, 37 insertions(+), 15 deletions(-)
-
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index 96e7799..bb99d3c 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -345,7 +345,7 @@ IMAGE_CMD_ext2.gz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.gz ; genext2fs -b ${ROOT
- IMAGE_CMD_ext3 = "genext2fs -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3"
- IMAGE_CMD_ext3.gz = "install -d ${DEPLOY_DIR_IMAGE}/tmp.gz ; genext2fs -b ${ROOTFS_SIZE} -d ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3 ${EXTRA_IMAGECMD}; tune2fs -j ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; gzip -f -9 ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3; mv ${DEPLOY_DIR_IMAGE}/tmp.gz/${IMAGE_NAME}.rootfs.ext3.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ext3.gz"
- IMAGE_CMD_squashfs = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs ${EXTRA_IMAGECMD} -noappend"
--IMAGE_CMD_squashfs-lzma = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs-lzma ${EXTRA_IMAGECMD} -noappend -lzma"
-+IMAGE_CMD_squashfs-lzma = "mksquashfs ${IMAGE_ROOTFS} ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.squashfs-lzma ${EXTRA_IMAGECMD} -noappend -comp lzma"
- IMAGE_CMD_tar = "cd ${IMAGE_ROOTFS} && tar -cvf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.tar ."
- IMAGE_CMD_tar.gz = "cd ${IMAGE_ROOTFS} && tar -zcvf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.tar.gz ."
- IMAGE_CMD_tar.bz2 = "cd ${IMAGE_ROOTFS} && tar -jcvf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.tar.bz2 ."
-diff --git a/conf/distro/include/sane-srcdates.inc b/conf/distro/include/sane-srcdates.inc
-index 422145c..4ea318f 100644
---- a/conf/distro/include/sane-srcdates.inc
-+++ b/conf/distro/include/sane-srcdates.inc
-@@ -41,6 +41,7 @@ SRCDATE_rdesktop ?= "20080917"
- SRCDATE_roadster ?= "20060814"
- SRCDATE_rosetta ?= "20090514"
- SRCDATE_sctzap ?= "20060814"
-+SRCDATE_squashfs ?= "20091110"
- SRCDATE_tslib ?= "20051101"
- SRCDATE_waimea ?= "20060814"
- SRCDATE_xcompmgr ?= "20060814"
-diff --git a/recipes/squashfs-tools/squashfs-tools-native_4.0.bb b/recipes/squashfs-tools/squashfs-tools-native_4.0.bb
-index 8fc80a6..cc01604 100644
---- a/recipes/squashfs-tools/squashfs-tools-native_4.0.bb
-+++ b/recipes/squashfs-tools/squashfs-tools-native_4.0.bb
-@@ -1,13 +1,12 @@
--require squashfs-tools_${PV}.bb
-+require squashfs-tools_4.0.bb
- 
- inherit native
- 
--DEPENDS = "zlib-native lzma-native "
--
--PR = "${INC_PR}.1"
-+DEPENDS = "zlib-native"
- 
- PACKAGES = ""
- 
- do_stage () {
- 	install -m 0755 mksquashfs ${STAGING_BINDIR}/
- }
-+
-diff --git a/recipes/squashfs-tools/squashfs-tools_4.0.bb b/recipes/squashfs-tools/squashfs-tools_4.0.bb
-index 17ab6dc..4e18489 100644
---- a/recipes/squashfs-tools/squashfs-tools_4.0.bb
-+++ b/recipes/squashfs-tools/squashfs-tools_4.0.bb
-@@ -1,14 +1,36 @@
--require squashfs-tools.inc
--DEPENDS += "lzma"
--PR = "${INC_PR}.1"
-+DESCRIPTION = "Squashfs is a highly compressed read-only filesystem for Linux."
-+SECTION = "base"
-+LICENSE = "GPLv2"
-+DEPENDS = "zlib"
-+PR = "r2"
- 
--EXTRA_OEMAKE = "USE_LZMA=1 \
--                LZMA_CFLAGS='-I${STAGING_INCDIR}/lzma -DUSE_LZMA' \
--                LZMA_LIB='${STAGING_LIBDIR}/liblzma.a'"
-+# 2009-10-22 snapshot
-+#SRC_URI = "http://www.kernel.org/pub/linux/kernel/people/pkl/squashfs4.0-lzma-snapshot.tgz"
-+#S = "${WORKDIR}/squashfs4.0-lzma-snapshot/squashfs-tools"
- 
--DEFAULT_PREFERENCE = "-1"
--DEFAULT_PREFERENCE_angstrom = "1"
-+SRC_URI  = "cvs://anonymous@squashfs.cvs.sourceforge.net/cvsroot/squashfs;module=squashfs;date=${SRCDATE}"
-+S = "${WORKDIR}/squashfs/squashfs-tools"
- 
--SRC_URI += " file://portability.patch;patch=1;pnum=2 \
--             file://lzma-support.patch;patch=1;pnum=2"
-+SRC_URI += "http://downloads.sourceforge.net/sevenzip/lzma465.tar.bz2"
-+
-+COMP_DEFAULT = gzip
-+
-+EXTRA_OEMAKE += "LZMA_SUPPORT=1 LZMA_DIR=../.."
-+
-+TARGET_CC_ARCH += "${LDFLAGS}"
-+
-+# the COMP_DEFAULT macro should result in a string including quotes: "gzip"
-+CFLAGS_append = ' -I. -I../../C -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE \
-+ -D_GNU_SOURCE -DLZMA_SUPPORT -DCOMP_DEFAULT=\\"${COMP_DEFAULT}\\" '
-+
-+prefix = ""
-+
-+do_compile() {
-+	oe_runmake mksquashfs
-+}
-+
-+do_install () {
-+	install -d ${D}${sbindir}
-+	install -m 0755 mksquashfs ${D}${sbindir}/
-+}
- 
--- 
-1.6.0.4
+Dear OpenEmbedded hackers,
 
 
+Am Sonntag, den 15.11.2009, 20:03 +0100 schrieb Paul Menzel:
+> I am trying to build =C3=85ngstr=C3=B6m following [1]. But
+>=20
+>         $ bitbake base-image
+>=20
+> fails when working with gmp-native.
+>=20
+>         ERROR: function do_configure failed
+>         ERROR: see log in /oe/angstrom-dev/work/x86_64-linux/gmp-native-4=
+.2.4-r0/temp/log.do_configure.29183
+>         NOTE: Task failed: /oe/angstrom-dev/work/x86_64-linux/gmp-native-=
+4.2.4-r0/temp/log.do_configure.29183
+>         ERROR: TaskFailed event exception, aborting
+>         ERROR: Build of /oe/openembedded/recipes/gmp/gmp-native_4.2.4.bb =
+do_configure failed
+>         ERROR: Task 1273 (/oe/openembedded/recipes/gmp/gmp-native_4.2.4.b=
+b, do_configure) failed
+>         NOTE: Waiting for 3 active tasks to finish
+>         NOTE: 1: /oe/openembedded/recipes/gettext/gettext-native_0.17.bb,=
+ do_configure (29189)
+>         NOTE: 2: /oe/openembedded/recipes/zlib/zlib-native_1.2.3.bb, do_c=
+onfigure (12652)
+>         NOTE: 3: /oe/openembedded/recipes/pkgconfig/pkgconfig-native_0.23=
+.bb, do_configure (12447)
+>         NOTE: Waiting for 2 active tasks to finish
+>         NOTE: 1: /oe/openembedded/recipes/gettext/gettext-native_0.17.bb,=
+ do_configure (29189)
+>         NOTE: 2: /oe/openembedded/recipes/pkgconfig/pkgconfig-native_0.23=
+.bb, do_configure (12447)
+>         NOTE: Waiting for 1 active tasks to finish
+>         NOTE: 1: /oe/openembedded/recipes/gettext/gettext-native_0.17.bb,=
+ do_configure (29189)
+>         NOTE: Tasks Summary: Attempted 539 tasks of which 0 didn't need t=
+o be rerun and 1 failed.
+>         ERROR: '/oe/openembedded/recipes/gmp/gmp-native_4.2.4.bb' failed
+>=20
+> The log [2] =E2=80=93 also attached =E2=80=93 shows
+>=20
+>         checking size of mp_limb_t... 4
+>         configure: error: Oops, mp_limb_t is 32 bits, but the assembler c=
+ode
+>         in this configuration expects 64 bits.
+>         You appear to have set $CFLAGS, perhaps you also need to tell GMP=
+ the
+>         intended ABI, see "ABI and ISA" in the manual.
+>         FATAL: oe_runconf failed
+>=20
+> The exact same happens for gmp-native 4.3.1. blindvt send me the recipes =
+for this.
+>=20
+> Could someone enlighten me please, what I am missing.
+>=20
+> local.conf is attached and all other files related to gmp-native.
+>=20
+>         $ git branch
+>         * stable/2009
+>=20
+>         HEAD fdfedf718dd484607f1b1b839e5e9608406e02e4
+>=20
+> I am using Debian unstable and MACHINE =3D "beagleboard".
+>=20
+> I think the problem is that I am running a 64-bit Linux kernel with a
+> 32-bit userspace.
+>=20
+>         $ uname -r
+>         2.6.31-1-amd64
+>         $ dpkg --print-architecture
+>         i386
+>=20
+> But running `./.bootstrap` and `./configure` on a normal gmplib checkout
+> [3] does not return any errors, so it must be OpenEmbedded related, must
+> not it?
+>=20
+> Please tell me, if you need other information.
 
+I did some more testing and the same problem exists in the branch
+org.openembedded.dev where gmp 4.2.4 is also present.
+
+1. Is there a maintainer for GMP in OpenEmbedded? I did not find an
+entry in MAINTAINERS [4].
+
+2. Running `./configure` with the flags in the log file
+
+        $ ./configure                --build=3Dx86_64-linux
+        --host=3Dx86_64-linux                     --target=3Dx86_64-linux
+        --prefix=3D/srv/oe/angstrom-dev/staging/x86_64-linux/usr
+        --exec_prefix=3D/srv/oe/angstrom-dev/staging/x86_64-linux/usr
+        --bindir=3D/srv/oe/angstrom-dev/staging/x86_64-linux/usr/bin
+        --sbindir=3D/srv/oe/angstrom-dev/staging/x86_64-linux/usr/sbin
+        --libexecdir=3D/srv/oe/angstrom-dev/staging/x86_64-linux/usr/libexe=
+c                --datadir=3D/srv/oe/angstrom-dev/staging/x86_64-linux/usr/=
+share                     --sysconfdir=3D/srv/oe/angstrom-dev/staging/x86_6=
+4-linux/etc                --sharedstatedir=3D/srv/oe/angstrom-dev/staging/=
+x86_64-linux/com                    --localstatedir=3D/srv/oe/angstrom-dev/=
+staging/x86_64-linux/var                     --libdir=3D/srv/oe/angstrom-de=
+v/staging/x86_64-linux/usr/lib                --includedir=3D/srv/oe/angstr=
+om-dev/staging/x86_64-linux/usr/include                --oldincludedir=3D/s=
+rv/oe/angstrom-dev/staging/x86_64-linux/usr/include                     --i=
+nfodir=3D/srv/oe/angstrom-dev/staging/x86_64-linux/usr/share/info          =
+      --mandir=3D/srv/oe/angstrom-dev/staging/x86_64-linux/usr/share/man
+
+in the upstream source and in the temporary directory for build =C3=85ngstr=
+=C3=B6m
+`angstrom-dev/work/x86_64-linux/gmp-native-4.2.4-r0.1/gmp-4.2.4` works
+without problem.
+
+        [=E2=80=A6]
+        checking if the assembler takes cl with shldl... yes
+        checking size of unsigned short... 2
+        checking size of unsigned... 4
+        checking size of unsigned long... 4
+        checking size of mp_limb_t... 4
+        checking for stack_t... yes
+        checking for tputs in -lncurses... yes
+        [=E2=80=A6]
+
+How do find out what other flags are passed during the BitBake run or
+what environment variables are set, so that I can test the upstream copy
+with these settings?
+
+
+Thanks,
+
+Paul
+
+
+> [1] http://www.angstrom-distribution.org/building-=C3=A5ngstr=C3=B6m
+> [2] oe/angstrom-dev/work/x86_64-linux/gmp-native-4.2.4-r0/temp$ less log.=
+do_configure.29183
+> [3] hg clone http://gmplib.org:8000/gmp-4.3/
+[4] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/MAINTAINERS
+
+--=-x4+saEsWW0bl3L1x0ahS
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAksDwVMACgkQPX1aK2wOHViHSwCdEdW+DjFuvBHMVqPN1+BGGoHM
+uSoAnRyC+aJ5003ZA2oPlj71D+kgvcCF
+=CQUV
+-----END PGP SIGNATURE-----
+
+--=-x4+saEsWW0bl3L1x0ahS--
