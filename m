@@ -1,45 +1,35 @@
-Received: from mail-fx0-f209.google.com ([209.85.220.209])
+Received: from mail-bw0-f217.google.com ([209.85.218.217])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1NAitw-0001vC-EZ
+	(envelope-from <leon.woestenberg@gmail.com>) id 1NAiz5-0004ZR-9P
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Nov 2009 12:40:47 +0100
-Received: by fxm1 with SMTP id 1so1007117fxm.12
+	Wed, 18 Nov 2009 12:46:06 +0100
+Received: by bwz9 with SMTP id 9so1015305bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Nov 2009 03:39:20 -0800 (PST)
+	Wed, 18 Nov 2009 03:44:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=Hs74YGTsyyPUoOuAwxjmANVYy6ECPFFDdWiZriUx4aI=;
-	b=H+49I6jWddVW544HlkPlK1KnVkL1ypCkeNXqAngv8Ga3juYVwkhmlxDh/HE0BmmCFC
-	MjPVJ2IfMGfmZQZlZKFbH+au95qvCZ7wVdz/boFh4wMeAxQRljlBDRmSu9/H50pY+3F6
-	E/WMDUKlVpPH/QlTEzqbttg2ygFGfF7rGMkk4=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=pUlhzwidnekyYi/FQdGZY2C5ye0i5tjZNxyFhre2Onk=;
+	b=hj7TteimrjF+QkibJLAr/xMydTXfiUXXP59f/cB3pwBM2Ko4CukvFYTqbL4+1JmTgO
+	Qa5XpQLipYjl6abMaIwG6SugH0kILa79m7S+0vDM2slinJl4razaBf7t2DA1kW71lT8H
+	Ov0gw0hFyKXgPFhCT/3NpkZmbuROvkIGrd3wM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=rAGf5PQobRdP1JRX/KOtQ9t/vdekMWfset85ig/CZAmE3WiYT82hGR3qJ5FJKv/UUq
-	Vnf0h2T7Bkwjsme5Qgx72+1S662z8NTnFNEDNFRdWR39OX7+rEn8FehEuTooNMDdOy9g
-	+K1hWBmIyMazJf4T3qbjH71Z9uNn6QNea62Rc=
-Received: by 10.204.48.144 with SMTP id r16mr1063224bkf.170.1258544360714;
-	Wed, 18 Nov 2009 03:39:20 -0800 (PST)
-Received: from s42.loc (85-127-251-67.dynamic.xdsl-line.inode.at
-	[85.127.251.67])
-	by mx.google.com with ESMTPS id 16sm617263bwz.7.2009.11.18.03.39.19
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 18 Nov 2009 03:39:19 -0800 (PST)
-Received: from cow by s42.loc with local (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1NAiuP-0001iN-Uk; Wed, 18 Nov 2009 12:41:13 +0100
-Date: Wed, 18 Nov 2009 12:41:13 +0100
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091118114113.GC2919@mx.loc>
-References: <he0ijk$kqa$2@ger.gmane.org>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=iKI79gCLXDF4i+3PA/zkc93+MOUN0pXogTKpRagLgQA9UcN4ZRw0MFkqMs/o1VUCoa
+	Zd3/mPfB/fqz1rbTQq76veZnDvFwgD4gqT25SheDk34VGML90KYT3l8OC6K0sZqL0Xew
+	Ovoy/VikMKSP+5TN+5QrkCQW/BF0Lee2s9q8c=
 MIME-Version: 1.0
-In-Reply-To: <he0ijk$kqa$2@ger.gmane.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.209
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+Received: by 10.239.144.90 with SMTP id n26mr1065354hba.133.1258544679422; 
+	Wed, 18 Nov 2009 03:44:39 -0800 (PST)
+In-Reply-To: <20091118114113.GC2919@mx.loc>
+References: <he0ijk$kqa$2@ger.gmane.org> <20091118114113.GC2919@mx.loc>
+Date: Wed, 18 Nov 2009 12:44:39 +0100
+Message-ID: <c384c5ea0911180344u7aa5a29ao71528ff23547643e@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Revert of 406cd0fee12ad99ba6d6f7d55f743cc4c6697955
@@ -56,18 +46,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Nov 2009 11:40:47 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 18 Nov 2009 11:46:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Nov 18, 2009 at 11:34:28AM +0100, Koen Kooi wrote:
->Hi,
+Hello Bernhard,
+
+On Wed, Nov 18, 2009 at 12:41 PM, Bernhard Reutner-Fischer
+<rep.dot.nop@gmail.com> wrote:
+> On Wed, Nov 18, 2009 at 11:34:28AM +0100, Koen Kooi wrote:
+>>Hi,
+>>
+>>Since 406cd0fee12ad99ba6d6f7d55f743cc4c6697955 broke all
+>>glibc-internal-iconv builds and I'm too lazy/stupid to fix it
+>>properly for uclibc I reverted this commit.
 >
->Since 406cd0fee12ad99ba6d6f7d55f743cc4c6697955 broke all
->glibc-internal-iconv builds and I'm too lazy/stupid to fix it
->properly for uclibc I reverted this commit.
+> for unpatched uClibc you could just
+> TARGET_CPPFLAGS += -D_Exit=_exit
+>
+Thanks, and what's the patched uClibc alternative (and where's the
+patch)? It defines _Exit()?
 
-for unpatched uClibc you could just
-TARGET_CPPFLAGS += -D_Exit=_exit
+Maybe that's better for OE.
+
+Regards,
+-- 
+Leon
 
 
