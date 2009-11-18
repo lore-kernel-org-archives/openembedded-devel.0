@@ -1,35 +1,33 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NAhtl-00047g-9A for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Nov 2009 11:36:32 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NAhsN-0006yA-69
+	(envelope-from <Sebastian@SSpaeth.de>) id 1NAhto-00047m-8Q
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Nov 2009 11:35:03 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Nov 2009 11:35:03 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Wed, 18 Nov 2009 11:36:35 +0100
+Received: from homiemail-a15.g.dreamhost.com (caiajhbdcbef.dreamhost.com
+	[208.97.132.145])
+	by hapkido.dreamhost.com (Postfix) with ESMTP id AFC2C17B68A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Nov 2009 11:35:03 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 18 Nov 2009 02:35:10 -0800 (PST)
+Received: from [192.168.1.154] (unknown [195.190.181.110])
+	by homiemail-a15.g.dreamhost.com (Postfix) with ESMTPA id 4DDB776C069
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 18 Nov 2009 02:35:07 -0800 (PST)
+Message-ID: <4B03CDD9.1010202@SSpaeth.de>
+Date: Wed, 18 Nov 2009 11:35:05 +0100
+From: Sebastian Spaeth <Sebastian@SSpaeth.de>
+Organization: ETH Zurich
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 18 Nov 2009 11:34:28 +0100
-Message-ID: <he0ijk$kqa$2@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <4B03CBF0.5010000@SSpaeth.de>
+In-Reply-To: <4B03CBF0.5010000@SSpaeth.de>
+X-Enigmail-Version: 0.95.7
+OpenPGP: id=C827A062
+X-SA-Exim-Connect-IP: 66.33.216.122
+X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Revert of 406cd0fee12ad99ba6d6f7d55f743cc4c6697955
+Subject: Re: BAD_RECOMMENDATIONS is broken (opkg issue)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,17 +41,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Nov 2009 10:36:32 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 18 Nov 2009 10:36:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hi,
+additional: as this is an opkg issue, I am using opkg-native r240.
 
-Since 406cd0fee12ad99ba6d6f7d55f743cc4c6697955 broke all 
-glibc-internal-iconv builds and I'm too lazy/stupid to fix it properly 
-for uclibc I reverted this commit.
+Graham, is this supposed to work?
 
-Koen
-
+Thanks,
+Spaetz
 
 
