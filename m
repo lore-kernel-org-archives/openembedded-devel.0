@@ -1,40 +1,42 @@
-Received: from mail-fx0-f209.google.com ([209.85.220.209])
+Received: from gv-out-0910.google.com ([216.239.58.186])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1NAkJD-00037L-Rc
+	(envelope-from <otavio.salvador@gmail.com>) id 1NAkJh-0005OR-51
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Nov 2009 14:10:58 +0100
-Received: by fxm1 with SMTP id 1so1099326fxm.12
+	Wed, 18 Nov 2009 14:11:28 +0100
+Received: by gv-out-0910.google.com with SMTP id e6so218707gvc.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Nov 2009 05:09:30 -0800 (PST)
+	Wed, 18 Nov 2009 05:10:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:sender:received:in-reply-to
 	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type; bh=tLTNxiJbg1M6CEWe8diT/h0h0dMyj2NcAn0Z4vIfSmo=;
-	b=ZbTyU/V33kNizzvPQ8vQaTSypXHvWSh4Tq1yzH0wOYabWtqb8wb9/DoK/Q2gAZghFM
-	BLc+1Dybiw1ZBsF08E/BPtitGz+3agpbYQxzhV/+RY9w+gUrZPHEwD60suhBrL7e93m0
-	Ud3qdRM7JMWYt+0raknLKYcxs6iz4byFcrU9k=
+	:content-type:content-transfer-encoding;
+	bh=d3ipL1eIp4p9iqVN5CpJ+lteYv7dOQMh65sB72EfZU0=;
+	b=wpWY3LhR2SzhsJG9sK6g40QKDYFhaC9MZ0o3oDoNpB6EoCwrOuoDQwRx0xRj7XKUV1
+	/mvCTJL/FNWRkrausBeHOcKFbOeUV5yKdQP6s1yqm6F0GcO44VsQh3p9z2HhA/XYqEO/
+	9DEmEx+Za1yz8unIhYx+JPelwAwKAo8MDq0qU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	b=exA5DA+B+cUbNAufP9nYtK7n0gk8oasLWrieWRVFyPN4r8BsGU2EH/+9ZzsODufcv4
-	BNskoGYUq4IBJSC1Yq9sXHr+UYbk2FKnfGYrjHmYbSfWu76efYwPLUbj8yfglK8KMLtv
-	J3ZUTmvEY9M1suCgk1Naq4J/c5sNl4qK7NxaE=
+	:x-google-sender-auth:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=Hs+WctpWZAw4X8LZwroC6FuxoxGB9UcDJZiT+J7myZkh/CxOGVGda00PfUa8bFbqG8
+	D8LPod/NxTNTonAyWxNzRHWN9UlmQUlJ82saw874MevaV+7apgiTG4tl8pI/lhCM8VcK
+	ap2JrYbgDGpMixaKTsB2ZREu2wy5x0ShyB/Jc=
 MIME-Version: 1.0
 Sender: otavio.salvador@gmail.com
-Received: by 10.239.190.227 with SMTP id y35mr1042229hbh.212.1258549770148; 
-	Wed, 18 Nov 2009 05:09:30 -0800 (PST)
-In-Reply-To: <1258504413-25056-1-git-send-email-leon@sidebranch.com>
-References: <1258504413-25056-1-git-send-email-leon@sidebranch.com>
-Date: Wed, 18 Nov 2009 11:09:30 -0200
-X-Google-Sender-Auth: 19e4cb38811801f5
-Message-ID: <be7a9f3d0911180509x7df420cetc4ed1575602b68e2@mail.gmail.com>
+Received: by 10.239.162.129 with SMTP id l1mr116880hbd.201.1258549802378; Wed, 
+	18 Nov 2009 05:10:02 -0800 (PST)
+In-Reply-To: <1258504066-24834-1-git-send-email-leon@sidebranch.com>
+References: <1258504066-24834-1-git-send-email-leon@sidebranch.com>
+Date: Wed, 18 Nov 2009 11:10:02 -0200
+X-Google-Sender-Auth: c18d1183d268e700
+Message-ID: <be7a9f3d0911180510p6f359154ve1c6219ca8ac0f4c@mail.gmail.com>
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.209
+X-SA-Exim-Connect-IP: 216.239.58.186
 X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] squashfs-4.0: update squashfs-tools to include upstream LZMA inclusion.
+Subject: Re: [PATCH] kernel.bbclass: Move do_menuconfigure after do_configure.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,31 +50,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Nov 2009 13:10:58 -0000
+X-List-Received-Date: Wed, 18 Nov 2009 13:11:28 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hello Leon,
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 
-On Tue, Nov 17, 2009 at 10:33 PM, Leon Woestenberg
+On Tue, Nov 17, 2009 at 10:27 PM, Leon Woestenberg
 <leon.woestenberg@gmail.com> wrote:
-> In OpenEmbedded we used squashfs 4.0 with external patch for LZMA
-> compression support. In the meantime, squashfs has mainlined LZMA
-> support in its CVS version.
+> Currently, menuconfigure comes after the patch task and before
+> the configure task. If someone runs the menuconfigure task,
+> then builds the kernel, the configure task will overwrite the
+> configuration just edited. This is unexpected and/or unwanted
+> behaviour.
 >
-> This patches switches to the upstream squashfs-tools and modifies
-> bitbake.conf to match the slightly different arguments to mksquashfs.
+> Rather moved menuconfigure past configure, so that the OpenEmbedded
+> supplied defconfig can be edited afterwards.
+>
+> Signed-off-by: Leon Woestenberg <leon@sidebranch.com>
+> ---
+> =A0classes/kernel.bbclass | =A0 =A02 +-
+> =A01 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+> index 9c1f637..cf7cc4f 100644
+> --- a/classes/kernel.bbclass
+> +++ b/classes/kernel.bbclass
+> @@ -218,7 +218,7 @@ do_menuconfig() {
+> =A0 =A0 =A0 =A0fi
+> =A0}
+> =A0do_menuconfig[nostamp] =3D "1"
+> -addtask menuconfig after do_patch
+> +addtask menuconfig after do_configure
+>
+> =A0pkg_postinst_kernel () {
+> =A0 =A0 =A0 =A0cd /${KERNEL_IMAGEDEST}; update-alternatives --install /${=
+KERNEL_IMAGEDEST}/${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYPE} ${KERNEL_IMAGETYP=
+E}-${KERNEL_VERSION} ${KERNEL_PRIORITY} || true
+> --
+> 1.6.0.4
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-I agree with the move to mainline version however your recipe changes
-might need some improvement. You don't use the lzma recipe available
-in OE and instead grab it again ... IMO this is wrong since it
-duplicates the lzma source and also make more difficult to us to
-"share" fixes.
 
-Besides that  I think it is ok. Can you fix it and send a new patch for review?
 
-Cheers,
-
--- 
+--=20
 Otavio Salvador                  O.S. Systems
 E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
 Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
