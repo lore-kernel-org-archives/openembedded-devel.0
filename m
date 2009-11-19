@@ -1,26 +1,36 @@
-Received: from mail-bw0-f217.google.com ([209.85.218.217])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ricardo.salveti@openbossa.org>) id 1NB7Qj-0002mZ-TT
+	(envelope-from <philb@gnu.org>) id 1NB7Sg-0004Yx-2z
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Nov 2009 14:52:16 +0100
-Received: by bwz9 with SMTP id 9so2299105bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 05:50:48 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.204.152.151 with SMTP id g23mr3619797bkw.148.1258638648574; 
-	Thu, 19 Nov 2009 05:50:48 -0800 (PST)
-In-Reply-To: <1258637832.23826.88.camel@mill.internal.reciva.com>
-References: <B44D4D5BF344094DABB900C4E0F6E3533945A36F15@srv02.nortechonline.net>
-	<1258637832.23826.88.camel@mill.internal.reciva.com>
-Date: Thu, 19 Nov 2009 10:50:48 -0300
-Message-ID: <ae9c9a1c0911190550s6e47efe7s23bac24ba6546849@mail.gmail.com>
-From: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
+	Thu, 19 Nov 2009 14:54:17 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NB7RH-0002Wc-5M
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Nov 2009 13:52:47 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1NB7RF-0003GP-SL
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Nov 2009 13:52:45 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: ricardo.salveti@openbossa.org
+In-Reply-To: <be7a9f3d0911190542j2bea66ccs65d6261b9c92bf87@mail.gmail.com>
+References: <be7a9f3d0911181211s614defeaq5a49ca33c3691c50@mail.gmail.com>
+	<1258576924.25369.687.camel@lenovo.internal.reciva.com>
+	<be7a9f3d0911181421i4d3a1ffy2417cbbd91d9a1ff@mail.gmail.com>
+	<1258631715.23826.63.camel@mill.internal.reciva.com>
+	<be7a9f3d0911190542j2bea66ccs65d6261b9c92bf87@mail.gmail.com>
+Date: Thu, 19 Nov 2009 13:52:42 +0000
+Message-Id: <1258638762.23826.90.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Which distro for OE development?
+Subject: Re: [RFC] Merging of stable/2009 into dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,39 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Nov 2009 13:52:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 19 Nov 2009 13:54:17 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Thu, Nov 19, 2009 at 10:37 AM, Phil Blundell <philb@gnu.org> wrote:
-> On Thu, 2009-11-19 at 13:06 +0000, Hodgson, Simon wrote:
->> I'm looking to make it as easy as possible to get started, so ideally al=
-l the packages I need will be available from that distro's standard reposit=
-ry.
->>
->> I've tried SuSE in the past and given up trying to get all of the requir=
-ed tools installed, and more recently been using Debian, but the Python ver=
-sion in Debian is a few versions behind and there was talk of OE soon requi=
-ring a more up to date version.
->
-> I'm using Debian on most of my machines and I am fairly happy with it.
->
-> The python that's currently in Debian is fine for bitbake 1.8.x. =A0By th=
-e
-> time OE starts to require bitbake 1.10.x, I suspect Debian's python
-> support will have caught up: failing that, you can always install the
-> package from Ubuntu.
+On Thu, 2009-11-19 at 11:42 -0200, Otavio Salvador wrote:
+> Ok but what is the planned migration path from users that used
+> stable/2009 to stable/2010?
+> 
+> I mean, when we start stable/2010 we expect that users that based
+> their distros in stable/2009 need to redo all work to move to
+> stable/2010? If we merge stable/2009 into .dev then this is going to
+> be much easier.
 
-I'm using both Ubuntu 9.04 and Gentoo and they are working quite fine.
+I am still struggling to understand what you mean by "merge stable/2009
+into .dev".  Can you please explain what exactly you think the result of
+this merge would look like?  Maybe you could pick a couple of sample
+packages and give a concrete description of how the merged version would
+differ from what is currently in .dev.
 
-Didn't test with latest Ubuntu version, but probably someone already
-did, as it's now such a common distro.
+p.
 
-I think people were having problems with latest Fedora release, but
-they can tell more about that.
 
-Cheers,
---=20
-Ricardo Salveti de Araujo
 
 
