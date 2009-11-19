@@ -1,42 +1,24 @@
-Received: from gv-out-0910.google.com ([216.239.58.184])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1NB88z-0001MS-WE
+	(envelope-from <philip@balister.org>) id 1NB8Fe-0001c4-GK
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Nov 2009 15:38:01 +0100
-Received: by gv-out-0910.google.com with SMTP id e6so504307gvc.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 06:36:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=29hus1GPcfNSiN7KG3uTabEz3GscbrHjQ9DI6UIKQRw=;
-	b=xGMIM5n7CfnswgJ72KYSNP+2L5hxfcjidhlaKCTzeBP3UUgzY7fWkyl9aD0Mc/D2Ai
-	V0qEOwT6cAUJBHfYi8EfiweN9QFccE9xu9r8XBwtRSp2xd95IXDPAZWmITj+PWAZJ4sT
-	HmY8053r3h40k+snJlaLPa/twI1J+W2IXQfOM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=nbZ+f82b80eyiold4JrJf7An4I/T0XnEI2Dqal9eEXY2fxZkukX8HQziAO31MZx6Sm
-	bq5N3t9l5sjbvXAX3WdZTnVhqktQ8nfXrqJDa3NW3dvTgCFaJVAgJKqwQk/+VbuE8SnB
-	bGAGUaevIbPq29AyuXthnSU6M34YGdyxX0zyY=
+	Thu, 19 Nov 2009 15:44:53 +0100
+Received: (qmail 30633 invoked by uid 1003); 19 Nov 2009 14:43:24 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 19 Nov 2009 14:43:24 -0000
+Message-ID: <4B055989.4030407@balister.org>
+Date: Thu, 19 Nov 2009 09:43:21 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
+	Thunderbird/3.0b4
 MIME-Version: 1.0
-Received: by 10.239.168.195 with SMTP id l3mr8029hbe.27.1258641394755; Thu, 19 
-	Nov 2009 06:36:34 -0800 (PST)
-In-Reply-To: <alpine.LFD.2.00.0911190909260.5078@localhost>
-References: <be7a9f3d0911181211s614defeaq5a49ca33c3691c50@mail.gmail.com>
-	<1258576924.25369.687.camel@lenovo.internal.reciva.com>
-	<be7a9f3d0911181421i4d3a1ffy2417cbbd91d9a1ff@mail.gmail.com>
-	<1258631715.23826.63.camel@mill.internal.reciva.com>
-	<be7a9f3d0911190542j2bea66ccs65d6261b9c92bf87@mail.gmail.com>
-	<1258638762.23826.90.camel@mill.internal.reciva.com>
-	<alpine.LFD.2.00.0911190909260.5078@localhost>
-Date: Thu, 19 Nov 2009 15:36:34 +0100
-Message-ID: <d2b9ea600911190636s2c260d20i50048f2efc500dd8@mail.gmail.com>
-From: Esben Haabendal <esbenhaabendal@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 216.239.58.184
-X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
+References: <be7a9f3d0911181211s614defeaq5a49ca33c3691c50@mail.gmail.com>	<1258576924.25369.687.camel@lenovo.internal.reciva.com>	<be7a9f3d0911181421i4d3a1ffy2417cbbd91d9a1ff@mail.gmail.com>	<1258631715.23826.63.camel@mill.internal.reciva.com>	<be7a9f3d0911190542j2bea66ccs65d6261b9c92bf87@mail.gmail.com>	<1258638762.23826.90.camel@mill.internal.reciva.com>
+	<alpine.LFD.2.00.0911190909260.5078@localhost>
+In-Reply-To: <alpine.LFD.2.00.0911190909260.5078@localhost>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [RFC] Merging of stable/2009 into dev
@@ -53,18 +35,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Nov 2009 14:38:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 19 Nov 2009 14:44:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Nov 19, 2009 at 3:12 PM, Robert P. J. Day <rpjday@crashcourse.ca> w=
-rote:
+On 11/19/2009 09:12 AM, Robert P. J. Day wrote:
+> On Thu, 19 Nov 2009, Phil Blundell wrote:
+>
+>> On Thu, 2009-11-19 at 11:42 -0200, Otavio Salvador wrote:
+>>> Ok but what is the planned migration path from users that used
+>>> stable/2009 to stable/2010?
+>>>
+>>> I mean, when we start stable/2010 we expect that users that based
+>>> their distros in stable/2009 need to redo all work to move to
+>>> stable/2010? If we merge stable/2009 into .dev then this is going
+>>> to be much easier.
+>>
+>> I am still struggling to understand what you mean by "merge
+>> stable/2009 into .dev".  Can you please explain what exactly you
+>> think the result of this merge would look like?  Maybe you could
+>> pick a couple of sample packages and give a concrete description of
+>> how the merged version would differ from what is currently in .dev.
+>
+>    what *is* the protocol for a new OE release?  if one were to emulate
+> kernel development, it would normally involve, perhaps, starting a new
+> branch headed toward, say, stable/2010, where packages would slowly be
+> frozen and, as the release date approached, we'd see tags like "rc1",
+> "rc2" and so on, and a final freeze and tag of "stable/2010", no?
+>
+>    in the meantime, the .dev branch would chug merrily on.  is that
+> even remotely close?
 
-> =A0what *is* the protocol for a new OE release?
+Basically, the users define a release. From the discussion at OEDEM it 
+is clear that there groups of people with similar (but very different 
+needs).
 
-As there are no OE releases as such, I guess you will have a hard time
-looking for this protocol.
+I don't see a problem with groups of people getting together and 
+defining a workflow for a branch they maintain. There is more than one 
+right way to do this.
 
-/Esben
+Philip
 
 
