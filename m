@@ -1,41 +1,33 @@
-Received: from dan.rpsys.net ([93.97.175.187])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NB5Tk-00021B-4w
+	(envelope-from <philb@gnu.org>) id 1NB5Uy-0002Zn-Q5
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Nov 2009 12:47:15 +0100
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nAJBgZDu024633 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 11:42:35 GMT
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id Q33xgXa8L0RP
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 11:42:35 +0000 (GMT)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nAJBgS4h024618
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 11:42:30 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Thu, 19 Nov 2009 12:48:33 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NB5TX-00081M-Lr
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Nov 2009 11:46:59 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1NB5TW-0002HC-17
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Nov 2009 11:46:58 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1258629037.3093.129.camel@mattotaupa.wohnung.familie-menzel.net>
-References: <1258311783.18820.149.camel@mattotaupa.wohnung.familie-menzel.net>
-	<1258537305.3021.14.camel@mattotaupa.wohnung.familie-menzel.net>
-	<1258586470.3071.10.camel@mattotaupa.wohnung.familie-menzel.net>
-	<1258589851.5229.17.camel@dax.rpnet.com>
-	<1258629037.3093.129.camel@mattotaupa.wohnung.familie-menzel.net>
-Date: Thu, 19 Nov 2009 11:45:21 +0000
-Message-Id: <1258631121.5229.22.camel@dax.rpnet.com>
+In-Reply-To: <c384c5ea0911190303v66fe7aa9he03d5d81f14400cc@mail.gmail.com>
+References: <818ccfc40911182327t686578acn565645806bcf280e@mail.gmail.com>
+	<c384c5ea0911190303v66fe7aa9he03d5d81f14400cc@mail.gmail.com>
+Date: Thu, 19 Nov 2009 11:46:54 +0000
+Message-Id: <1258631214.23826.59.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-SA-Exim-Connect-IP: 93.97.175.187
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: bitbake base-image: gmp-native: ERROR: function	do_configure failed: configure: error: Oops, mp_limb_t is 32 bits, but the	assembler code
+Subject: Re: do staging failed while building eglibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,56 +41,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Nov 2009 11:47:15 -0000
+X-List-Received-Date: Thu, 19 Nov 2009 11:48:33 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2009-11-19 at 12:10 +0100, Paul Menzel wrote:
-> Am Donnerstag, den 19.11.2009, 00:17 +0000 schrieb Richard Purdie:
-> > On Thu, 2009-11-19 at 00:21 +0100, Paul Menzel wrote:
-> > [...]
-> > > well, unfortunately my search results did not include any hits from the
-> > > OE bug tracker. I looked there a moment ago and found bug #3470 which
-> > > seems to be related to my problem [5].
-> > > 
-> > > I will try to update it with the information from my messages to the
-> > > list in the next days.
-> > [...]
-> > > > > [2] oe/angstrom-dev/work/x86_64-linux/gmp-native-4.2.4-r0/temp$ less log.do_configure.29183
-> > 
-> > I saw this recently, I wish I could remember how I fixed it :/.
-> > 
-> > I looked back at the above log and it says:
-> > 
-> > checking whether to build shared libraries... yes
-> > checking whether to build static libraries... yes
-> > checking for ld used by g++... ld -m elf_i386
-> > checking if the linker (ld -m elf_i386) is GNU ld... yes
-> > checking whether the g++ linker (ld -m elf_i386) supports shared libraries... yes
-> > checking for g++ option to produce PIC... -fPIC -DPIC
-> > checking if g++ PIC flag -fPIC -DPIC works... yes
-> > 
-> > and the i386 references above show configure is off the rails before it
-> > hits the fatal error.
-> > 
-> > Do you have the config.log file from the broken builds?
+On Thu, 2009-11-19 at 12:03 +0100, Leon Woestenberg wrote:
+> Hmm, do we support building a bare metal (i.e. no target operating
+> system) toolchain?
 > 
-> Here you go.
+> Also, I doubt (e)glibc supports that at all.
+> 
+> Maybe someone can confirm/correct me.
 
-So just to be clear, you don't have any 64 bit userspace, just a 32 bit
-one? Running gcc to compile something gives you a 32 bit binary, not a
-64 bit one?
+I don't think there is a great deal of specific support for bare metal
+environments in OE right now, but there is no reason you couldn't use OE
+to build either the toolchains or indeed the complete binary images for
+such environments.  In some ways it would be nice to see OE become a
+little bit Linux-centric.
 
-I'd try adding:
+As for glibc itself, it did use to support ARM bare metal back in the
+day and, if glibc is not rejecting that target at configure time, it
+probably is still supported to at least some extent today.  That said,
+this is certainly not one of glibc's core competencies and I personally
+would probably use something like newlib in a bare metal environment.
 
-BUILD_ARCH = "i686"
-BUILD_OS = "linux"
+p.
 
-to your local.conf
-
-Cheers,
-
-Richard
 
 
 
