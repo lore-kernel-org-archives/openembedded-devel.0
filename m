@@ -1,40 +1,42 @@
-Received: from dan.rpsys.net ([93.97.175.187])
+Received: from gv-out-0910.google.com ([216.239.58.184])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NB87b-0001Gn-0S
+	(envelope-from <esbenhaabendal@gmail.com>) id 1NB88z-0001MS-WE
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Nov 2009 15:36:34 +0100
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nAJEVqEa010951 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 14:31:53 GMT
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id vCz5WD3rfuGx
+	Thu, 19 Nov 2009 15:38:01 +0100
+Received: by gv-out-0910.google.com with SMTP id e6so504307gvc.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 14:31:52 +0000 (GMT)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nAJEVij2010918
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 14:31:46 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <be7a9f3d0911190601r4243233fv807e4f04d6b631cc@mail.gmail.com>
+	Thu, 19 Nov 2009 06:36:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=29hus1GPcfNSiN7KG3uTabEz3GscbrHjQ9DI6UIKQRw=;
+	b=xGMIM5n7CfnswgJ72KYSNP+2L5hxfcjidhlaKCTzeBP3UUgzY7fWkyl9aD0Mc/D2Ai
+	V0qEOwT6cAUJBHfYi8EfiweN9QFccE9xu9r8XBwtRSp2xd95IXDPAZWmITj+PWAZJ4sT
+	HmY8053r3h40k+snJlaLPa/twI1J+W2IXQfOM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=nbZ+f82b80eyiold4JrJf7An4I/T0XnEI2Dqal9eEXY2fxZkukX8HQziAO31MZx6Sm
+	bq5N3t9l5sjbvXAX3WdZTnVhqktQ8nfXrqJDa3NW3dvTgCFaJVAgJKqwQk/+VbuE8SnB
+	bGAGUaevIbPq29AyuXthnSU6M34YGdyxX0zyY=
+MIME-Version: 1.0
+Received: by 10.239.168.195 with SMTP id l3mr8029hbe.27.1258641394755; Thu, 19 
+	Nov 2009 06:36:34 -0800 (PST)
+In-Reply-To: <alpine.LFD.2.00.0911190909260.5078@localhost>
 References: <be7a9f3d0911181211s614defeaq5a49ca33c3691c50@mail.gmail.com>
 	<1258576924.25369.687.camel@lenovo.internal.reciva.com>
 	<be7a9f3d0911181421i4d3a1ffy2417cbbd91d9a1ff@mail.gmail.com>
 	<1258631715.23826.63.camel@mill.internal.reciva.com>
 	<be7a9f3d0911190542j2bea66ccs65d6261b9c92bf87@mail.gmail.com>
-	<1258638966.5229.25.camel@dax.rpnet.com>
-	<be7a9f3d0911190601r4243233fv807e4f04d6b631cc@mail.gmail.com>
-Date: Thu, 19 Nov 2009 14:34:38 +0000
-Message-Id: <1258641278.5229.31.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-SA-Exim-Connect-IP: 93.97.175.187
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	<1258638762.23826.90.camel@mill.internal.reciva.com>
+	<alpine.LFD.2.00.0911190909260.5078@localhost>
+Date: Thu, 19 Nov 2009 15:36:34 +0100
+Message-ID: <d2b9ea600911190636s2c260d20i50048f2efc500dd8@mail.gmail.com>
+From: Esben Haabendal <esbenhaabendal@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 216.239.58.184
+X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [RFC] Merging of stable/2009 into dev
@@ -51,44 +53,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Nov 2009 14:36:34 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 19 Nov 2009 14:38:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2009-11-19 at 12:01 -0200, Otavio Salvador wrote:
-> On Thu, Nov 19, 2009 at 11:56 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> > I think you actually want to do something like:
-> >
-> > git-merge --strategy=ours
-> >
-> > which should leave OE.dev unchanged.
-> >
-> > Does that actually help though?
-> 
-> No since it would lose any specific commit done for local development.
+On Thu, Nov 19, 2009 at 3:12 PM, Robert P. J. Day <rpjday@crashcourse.ca> w=
+rote:
 
-So you have commits against OE.stable 2009 that you want to preserve.
-How picky are you about your history?
+> =A0what *is* the protocol for a new OE release?
 
-If you rebase your local changes against OE.stable 2009, then do the
-above git merge against OE.dev, then rebase your changes against that,
-you might get something meaningful out.
+As there are no OE releases as such, I guess you will have a hard time
+looking for this protocol.
 
-Alternatively you could just diff your changes against OE.stable 2009
-and then forward port and apply that diff against OE.stable 2010.
-
-It really depends what you value. You may just have to do a painful
-merge if thats what you really want...
-
-Cheers,
-
-Richard
-
-
-
-
-
-
-
+/Esben
 
 
