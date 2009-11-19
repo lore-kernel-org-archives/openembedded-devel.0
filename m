@@ -1,44 +1,35 @@
-Received: from dan.rpsys.net ([93.97.175.187])
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NB8cp-0000QM-Oy
+	(envelope-from <koansoftware@gmail.com>) id 1NB93L-0005ke-S6
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Nov 2009 16:08:50 +0100
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nAJF4Atu013935 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 15:04:10 GMT
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id mGr4zqAcQH+L
+	Thu, 19 Nov 2009 16:36:15 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id D75FD2C814
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 15:04:10 +0000 (GMT)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nAJF44Fm013922
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	Thu, 19 Nov 2009 15:33:59 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id AcrgU45ci6Ko
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 15:04:05 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Thu, 19 Nov 2009 15:33:55 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 2848F2C798
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Nov 2009 15:33:54 +0000 (UTC)
+Message-ID: <4B0565A1.1010302@gmail.com>
+Date: Thu, 19 Nov 2009 16:34:57 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4B055989.4030407@balister.org>
-References: <be7a9f3d0911181211s614defeaq5a49ca33c3691c50@mail.gmail.com>
-	<1258576924.25369.687.camel@lenovo.internal.reciva.com>
-	<be7a9f3d0911181421i4d3a1ffy2417cbbd91d9a1ff@mail.gmail.com>
-	<1258631715.23826.63.camel@mill.internal.reciva.com>
-	<be7a9f3d0911190542j2bea66ccs65d6261b9c92bf87@mail.gmail.com>
-	<1258638762.23826.90.camel@mill.internal.reciva.com>
-	<alpine.LFD.2.00.0911190909260.5078@localhost>
-	<4B055989.4030407@balister.org>
-Date: Thu, 19 Nov 2009 15:06:58 +0000
-Message-Id: <1258643218.5229.35.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-SA-Exim-Connect-IP: 93.97.175.187
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+References: <B44D4D5BF344094DABB900C4E0F6E3533945A36F15@srv02.nortechonline.net>
+In-Reply-To: <B44D4D5BF344094DABB900C4E0F6E3533945A36F15@srv02.nortechonline.net>
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] Merging of stable/2009 into dev
+Subject: Re: Which distro for OE development?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,30 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Nov 2009 15:08:51 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 19 Nov 2009 15:36:15 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2009-11-19 at 09:43 -0500, Philip Balister wrote:
-> Basically, the users define a release. From the discussion at OEDEM it 
-> is clear that there groups of people with similar (but very different 
-> needs).
-> 
-> I don't see a problem with groups of people getting together and 
-> defining a workflow for a branch they maintain. There is more than one 
-> right way to do this.
+Hodgson, Simon ha scritto, Il 19/11/2009 14:06:
+> I'm setting up a new machine with Linux specifically to use for OpenEmb=
+edded development. Which Linux distro should I go with?
+>=20
+> I'm looking to make it as easy as possible to get started, so ideally a=
+ll the packages I need will be available from that distro's standard repo=
+sitry.
+>=20
+> I've tried SuSE in the past and given up trying to get all of the requi=
+red tools installed, and more recently been using Debian, but the Python =
+version in Debian is a few versions behind and there was talk of OE soon =
+requiring a more up to date version.
+>=20
+> Ubuntu is a good candidate at the moment as I belive there won't be any=
+ hardware issues with the laptop I want to use, but this wiki page sugges=
+ts there's some faffing to do http://wiki.openembedded.net/index.php/Gcc_=
+issues_in_Intrepid_and_later which I'd like to avoid if possible - does a=
+nyone know if these issues are present in the latest version 9.10?
+>=20
+> Thanks
 
-Totally agreed. The people who want to make a given branch happen just
-need to step up, agree an objective for the branch (preferably a
-documented one) and then go for it.
+I use OpenEmbedded on three different machines.
+Debian Lenny on main OE development Quad core server.
+Ubuntu 8.10 on my desktop and laptop.
 
-The problem is there are many definitions of "stable" from "massive
-security fixes only" to "everything in .dev after two weeks and nobody's
-noticed a problem".
 
-Cheers,
-
-Richard
-
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+   Atmel third party certified consultant
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
 
 
