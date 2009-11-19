@@ -1,35 +1,24 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NB6wT-0002aI-9Q
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NB6zW-0004ew-Fh
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Nov 2009 14:21:00 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NB6v7-00084R-8v for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Nov 2009 08:19:33 -0500
-Date: Thu, 19 Nov 2009 08:19:29 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <B44D4D5BF344094DABB900C4E0F6E3533945A36F15@srv02.nortechonline.net>
-Message-ID: <alpine.LFD.2.00.0911190818300.16520@localhost>
+	Thu, 19 Nov 2009 14:24:09 +0100
+Received: (qmail 2973 invoked by uid 813007); 19 Nov 2009 13:22:43 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 19 Nov 2009 13:22:43 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 19 Nov 2009 14:22:42 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.32-rc7-00029-ga9366e6-dirty; KDE/4.3.2;
+	x86_64; ; )
 References: <B44D4D5BF344094DABB900C4E0F6E3533945A36F15@srv02.nortechonline.net>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+In-Reply-To: <B44D4D5BF344094DABB900C4E0F6E3533945A36F15@srv02.nortechonline.net>
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+Message-Id: <200911191422.43470.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Which distro for OE development?
@@ -46,43 +35,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Nov 2009 13:21:00 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Thu, 19 Nov 2009 13:24:09 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 19 Nov 2009, Hodgson, Simon wrote:
+Dnia czwartek, 19 listopada 2009 o 14:06:43 Hodgson, Simon napisa=C5=82(a):
 
 > I'm setting up a new machine with Linux specifically to use for
-> OpenEmbedded development. Which Linux distro should I go with?
->
-> I'm looking to make it as easy as possible to get started, so
-> ideally all the packages I need will be available from that distro's
-> standard repositry.
->
-> I've tried SuSE in the past and given up trying to get all of the
-> required tools installed, and more recently been using Debian, but
-> the Python version in Debian is a few versions behind and there was
-> talk of OE soon requiring a more up to date version.
->
-> Ubuntu is a good candidate at the moment as I belive there won't be
-> any hardware issues with the laptop I want to use, but this wiki
-> page suggests there's some faffing to do
+>  OpenEmbedded development. Which Linux distro should I go with?
+>=20
+> I'm looking to make it as easy as possible to get started, so ideally all
+>  the packages I need will be available from that distro's standard
+>  repositry.
+>=20
+> I've tried SuSE in the past and given up trying to get all of the required
+> tools installed, and more recently been using Debian, but the Python
+> version in Debian is a few versions behind and there was talk of OE soon
+> requiring a more up to date version.
+
+OpenEmbedded require Python 2.4 or newer. Debian lenny (stable) and squeeze=
+=20
+(testing) should work fine. I use 'sid' for development.
+
+> Ubuntu is a good candidate at the moment as I belive there won't be any
+> hardware issues with the laptop I want to use, but this wiki page suggests
+> there's some faffing to do
 > http://wiki.openembedded.net/index.php/Gcc_issues_in_Intrepid_and_later
-> which I'd like to avoid if possible - does anyone know if these
-> issues are present in the latest version 9.10?
+> which I'd like to avoid if possible - does anyone know if these issues are
+> present in the latest version 9.10?
 
-  despite my occasional(?) shrieks of outrage, fedora has generally
-served me well for OE builds.
+I use OpenEmbedded on Ubuntu 8.04 machine and Poky on 8.04/9.04/9.10 withou=
+t=20
+problems.=20
 
-rday
---
+So I suggest Debian 'testing' or Ubuntu 9.10/9.04 as a base.
 
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-            Linux Consulting, Training and Kernel Pedantry.
 
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
 
 
