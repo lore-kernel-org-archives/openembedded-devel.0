@@ -1,39 +1,43 @@
 Received: from mail-bw0-f217.google.com ([209.85.218.217])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NB7GN-0005JH-91
+	(envelope-from <otavio.salvador@gmail.com>) id 1NB7Id-0006Mn-7I
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Nov 2009 14:41:34 +0100
-Received: by bwz9 with SMTP id 9so2287708bwz.12
+	Thu, 19 Nov 2009 14:43:54 +0100
+Received: by bwz9 with SMTP id 9so2290257bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 05:40:06 -0800 (PST)
+	Thu, 19 Nov 2009 05:42:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=DXi31LMR7IKCZ3+r805bczz2YiPi1RNYFFUZbtlH2Ew=;
-	b=RSt/VkG9nczo464JOgOXtBu1xOGdip1XXt9pXTOgBXyXjhdLr6BIqS8IYV6Lot8/SR
-	yJBpRw/FLcKqNTohToKCkuvhOBvsB5vwxCP+itIayPsf3csnqLurbTwLRZZM6Ny5RIZ5
-	pqXxf4if68AsgWxhAUFLMWkz0oW1lqiYGc1qs=
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type; bh=P6HlWM9WUGUhB88nlgzGU3CE6YUZpZYE0qVJiSCscSE=;
+	b=Av4bskQ8g9n6hyz+z9DTACSbokCFIRITRZduPtt6lgJyjfs280xHH+dJcxjC/EWjGl
+	FOmzvdfQEZLmGhNEFHED/VaXHzqkzQ7CO/pWLYFC34cRz/UywpXagqWfqELKvHuDKx7Q
+	S+76YENCIDWhhiNB3ApdFk/mu81Hhew3b47j0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=dgsfvYM1ihs2EdaPB5RwLszuMAsuLJXKerj9iuq8PAS+Cio0DVM+KZlMJRmHPs4waK
-	pc1vccp3OGtVytUCOGXs8665PTNit7YQlkzx0fbRTwZZmLySMtnoBGTy4td9nrq/qmAY
-	5BT71nbWap1rFEHnFXQvWyYtTCqLa57bqmOC4=
-Received: by 10.204.36.206 with SMTP id u14mr4099647bkd.199.1258638006596;
-	Thu, 19 Nov 2009 05:40:06 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 14sm178900fxm.15.2009.11.19.05.40.05
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 19 Nov 2009 05:40:05 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	b=ibR75asLJA5/SDWnRo7hWZ+buOwMUCF0NZ37TR+XnRpyvsL3ZGyq724XbLuDNMFgyR
+	0gspouB6n8B4gbNd2OqF/qQXfmVkifiymw4ihPu/VaQx26p7zh2afM5U1U53/7Fr0Qsz
+	bSL65QeKstRAkAMmJvEBeMx4VTafsl5dI4kiw=
+MIME-Version: 1.0
+Sender: otavio.salvador@gmail.com
+Received: by 10.239.141.155 with SMTP id c27mr311hba.48.1258638146299; Thu, 19 
+	Nov 2009 05:42:26 -0800 (PST)
+In-Reply-To: <1258631715.23826.63.camel@mill.internal.reciva.com>
+References: <be7a9f3d0911181211s614defeaq5a49ca33c3691c50@mail.gmail.com>
+	<1258576924.25369.687.camel@lenovo.internal.reciva.com>
+	<be7a9f3d0911181421i4d3a1ffy2417cbbd91d9a1ff@mail.gmail.com>
+	<1258631715.23826.63.camel@mill.internal.reciva.com>
+Date: Thu, 19 Nov 2009 11:42:26 -0200
+X-Google-Sender-Auth: bad673aea38cd633
+Message-ID: <be7a9f3d0911190542j2bea66ccs65d6261b9c92bf87@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Nov 2009 14:39:56 +0100
-Message-Id: <1258637996-19441-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.6.5.3
 X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] bitbake.conf: Fix OVERRIDES description (After pb's explanation)
+Subject: Re: [RFC] Merging of stable/2009 into dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,37 +51,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Nov 2009 13:41:34 -0000
+X-List-Received-Date: Thu, 19 Nov 2009 13:43:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
----
- conf/bitbake.conf |   11 ++++++++---
- 1 files changed, 8 insertions(+), 3 deletions(-)
+Hello,
 
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index 4435fdd..2f7cef2 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -651,10 +651,15 @@ BUILDCFG_NEEDEDVARS ?= "TARGET_ARCH TARGET_OS"
- ### Config file processing
- ###
- 
-+# Overrides are processed left to right, so the ones that are named later take precedence.
-+# You generally want them to go from least to most specific.
-+# 
- # This means that an envionment variable named '<foo>_arm' overrides an
--# environment variable '<foo>' (when ${TARGET_ARCH} is arm). And the same: an
--# environment variable '<foo>_ramses' overrides both '<foo>' and '<foo>_arm
--# when ${MACHINE} is 'ramses'. And finally '<foo>_local' overrides anything.
-+# environment variable '<foo>' (when ${TARGET_ARCH} is arm).
-+# an environment variable '<foo>_ramses' overrides '<foo>' but doesn't override
-+# '<foo>_arm' when ${MACHINE} is 'ramses'. 
-+# You can use combination ie you can use '<foo>_arm_ramses' to override both '<foo>' and '<foo>_arm'.
-+# And finally '<foo>_local' overrides anything, but with lowest priority.
- #
- # This works for  functions as well, they are really just environment variables.
- # Default OVERRIDES to make compilation fail fast in case of build system misconfiguration.
+On Thu, Nov 19, 2009 at 9:55 AM, Phil Blundell <philb@gnu.org> wrote:
+> Right, but I think these conflicts are a result of attempting what seems
+> like a nonsensical merge.
+>
+> Which specific changesets from stable/2009 do you feel are missing
+> in .dev?
+
+Ok but what is the planned migration path from users that used
+stable/2009 to stable/2010?
+
+I mean, when we start stable/2010 we expect that users that based
+their distros in stable/2009 need to redo all work to move to
+stable/2010? If we merge stable/2009 into .dev then this is going to
+be much easier.
+
 -- 
-1.6.5.3
-
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
