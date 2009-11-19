@@ -1,34 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f209.google.com ([209.85.220.209])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NB69T-0007Ia-4U for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Nov 2009 13:30:22 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NB685-0000L3-He
+	(envelope-from <leon.woestenberg@gmail.com>) id 1NB6Hq-0007W3-4S
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Nov 2009 13:28:53 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 13:28:53 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Thu, 19 Nov 2009 13:39:01 +0100
+Received: by fxm1 with SMTP id 1so2225176fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 13:28:53 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 19 Nov 2009 13:28:39 +0100
-Message-ID: <he3dlo$8lb$1@ger.gmane.org>
+	Thu, 19 Nov 2009 04:37:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=efBiNxKTGpSAWlk73iV2JV9rydBgWLBm1Y8ArebJxjc=;
+	b=sCwVguTq3PsNbW6/uM4HEw5tHcHp4hzHEMHBBOk7i3nO6mR61SFukDXgUQkzX2O7ol
+	+CInVb1CEkZwiTqCpxnyXVY4VocvwYtc2E+BRB38zcTtBuWW3RiRuxR6kGVvmCEXanJa
+	anZaaht2tC8NXqq3vPGmwSwRrDVUzQchpzcLs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=G0tozZZswxr2mrAst+kL9XfRA8SYbdoRX/mbW1dZeloWgbm1k51YUggZbvKBwzpfRd
+	XKHHAjo5wEO/1FdZdjATgnIRcPYTWXuIRNFreUddjMiXXGj81i6+nVMLJ4ibK4llygzM
+	UElx87O5kclQmW62z70Rb9Nzmhfow+ZRJy1ms=
+MIME-Version: 1.0
+Received: by 10.239.160.75 with SMTP id b11mr590986hbd.178.1258634252878; Thu, 
+	19 Nov 2009 04:37:32 -0800 (PST)
+In-Reply-To: <he3dlo$8lb$1@ger.gmane.org>
 References: <be7a9f3d0911181211s614defeaq5a49ca33c3691c50@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-In-Reply-To: <be7a9f3d0911181211s614defeaq5a49ca33c3691c50@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	<he3dlo$8lb$1@ger.gmane.org>
+Date: Thu, 19 Nov 2009 13:37:32 +0100
+Message-ID: <c384c5ea0911190437g302a68efx54f2d760990b4543@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.220.209
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [RFC] Merging of stable/2009 into dev
@@ -45,33 +47,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Nov 2009 12:30:22 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 19 Nov 2009 12:39:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 18-11-09 21:11, Otavio Salvador wrote:
-> Hello,
+Hello,
+
+On Thu, Nov 19, 2009 at 1:28 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
 >
-> I've been thinking about how difficult will be when we start stable/2010.
+> It bothers me that everybody seems to have an opinion of stable/2009 but
+> only very few people actually contribute to it. The OP is a great example of
 >
->  From my POV the best alternative is, before we start changing a lot of
-> stuff in dev we do a merge of stable/2009 into dev to allow easy
-> merging from outside "forks" made by users.
+It being stable is the greatest feature of the branch.
 
-What would be the point of that? Stable/2009 only received changes that 
-were already in .dev. If there are differences then that's due to 
-needing to account for differences in classes, config files and old(er) 
-bitbake releases.
+I think it's fine to contribute on a need-to-fix basis, only for its users.
 
-It bothers me that everybody seems to have an opinion of stable/2009 but 
-only very few people actually contribute to it. The OP is a great 
-example of people not knowing what they are talking about. I can only 
-imagine the amount of headdesks Marcin did at OEDEM when reading the 
-hilarious summary of the stable branch discussion.
+There seems to be too much difference in perception when talking "stable".
 
-regards,
-
-Koen
-
+Regards,
+-- 
+Leon
 
 
