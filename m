@@ -1,35 +1,35 @@
 Received: from mail-fx0-f209.google.com ([209.85.220.209])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NB9cf-00085M-M6
+	(envelope-from <martin.jansa@gmail.com>) id 1NB9yr-0008UY-3m
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Nov 2009 17:12:44 +0100
-Received: by fxm1 with SMTP id 1so2445466fxm.12
+	Thu, 19 Nov 2009 17:35:40 +0100
+Received: by fxm1 with SMTP id 1so2468414fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 08:11:17 -0800 (PST)
+	Thu, 19 Nov 2009 08:34:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=8uVwFVn6KW+pqVdus+vo3c1MJdOKvZ2+f0Albw4Mm/s=;
-	b=F10Kydb6T7Zw6lFNFxxic3LL2zY2Z9FxGR73AWPObk937A8zclVpWtvdymRZrlxDd3
-	4cq0ZzO9hbcGjC2sKLXjZSEdj3bPu9FJJ9YM6Q+N5ihqT6MUq124VHjlM9tOxX3huQIb
-	o5es6vNaKpafeTYm4OEbfgmoWU91rK8Yc9Kp8=
+	bh=TImIUXKtdk9owQb863aRtor+4IQQChxmm6yujlogDog=;
+	b=SdKBViRa9gZ9BESZ41Hn6/mH6znc2wYYGF2YrY2icHlAoapWwaiJUiX3euo6+vqxl5
+	QT3DYQ0dlpOJJRODY+AVfH3t+CSk9sLTQvgrthbpYijpmURmpUizxjLYONbWpCf/0yio
+	jcdV/2hDHef25iU3y/1G6Sz7euw174MXeXybg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=oHc9D6/VkUv7/CVyc6sbUKb5HT+Iou/QTWtW5JBRpa6pndWR9loyXl7vUQqOL12+Xm
-	WWi9qgC6aqSvy5ycX6Qy7gDKTbZluD65DCAvJfg8VQMuyxJ07bqdqYDwb0/mvzHYtSK6
-	QbK0WIugXOlcW40N9ZTmHV9lHHp6SvWCVg2ZQ=
-Received: by 10.204.10.2 with SMTP id n2mr175856bkn.91.1258647076760;
-	Thu, 19 Nov 2009 08:11:16 -0800 (PST)
+	b=dbPDkgVDLQgBAqi9+c2YhlUspEWKnIbxEzaE+uV+xbFjsF89F01S1tfItwAghN66T1
+	1LSMqQCaE6pXbHc9Ji5dKoJRSW7T3WNCy+6/JjlB0AyTtO/nYoW4aAeIfKHoUf0EZwLq
+	PvZ8imelaNTOjhzxvhaERXnZobDEBsqxLbi4c=
+Received: by 10.204.160.73 with SMTP id m9mr155209bkx.214.1258648452108;
+	Thu, 19 Nov 2009 08:34:12 -0800 (PST)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 16sm236792fxm.4.2009.11.19.08.11.16
+	by mx.google.com with ESMTPS id 14sm243209fxm.11.2009.11.19.08.34.10
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 19 Nov 2009 08:11:16 -0800 (PST)
-Date: Thu, 19 Nov 2009 17:11:08 +0100
+	Thu, 19 Nov 2009 08:34:10 -0800 (PST)
+Date: Thu, 19 Nov 2009 17:34:03 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091119161108.GC3366@jama>
+Message-ID: <20091119163403.GD3366@jama>
 References: <20091115163618.GA3317@jama> <hdr31n$8b0$1@ger.gmane.org>
 	<1258364356.5799.94.camel@dax.rpnet.com>
 	<hdra17$t4d$1@ger.gmane.org>
@@ -60,7 +60,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Nov 2009 16:12:44 -0000
+X-List-Received-Date: Thu, 19 Nov 2009 16:35:40 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
@@ -80,16 +80,97 @@ On Thu, Nov 19, 2009 at 05:02:05PM +0100, Koen Kooi wrote:
 > 
 > FFS!
 
-Sorry for that :/
+Hi again.. 
 
-I'm merging stuff from shr/merge branch where its already used and it
-sliped through.
+there is more SRCPVs in stuff I merged.. (which weren't probably built before and hopefully
+aren't built now)
 
-Should I commit SRCPV->SRCREV now, or is it ok for now as there is also
-DEFAULT_PREFERRENCE = -1? which I also should set to -2 to ensure that
-won't be pulled instead of mplayer_svn :/.
+Do I have to kill all SRCPV there?
 
-Sorry again..
+.. bitbake patches are prepared, waiting for review.. as soon as there is newer bitbake version
+forced by sanity check, then all builders with 
+BB_LOCALCOUNT_OVERRIDE = "1"
+LOCALCOUNT = "0"
+in local.conf, should get consistent localcount numbers == 0
+
+If its ok to stay with SRCPV for those new recipes then we can save PE bump there..
+
+Thanks..
+
+Regards,
+
+./calc/calc_git.bb:PV = "0.0.1+gitr${SRCPV}"
+./xorg-util/glamo-dri-tests/glamo-dri-tests_git.bb:PV = "1.0.0+gitr${SRCPV}"
+./efl1/illume-keyboard-default-alt_git.bb:PV = "0.0+gitr${SRCPV}"
+./efl1/illume-keyboard-dutch_git.bb:PV = "0.0+gitr${SRCPV}"
+./efl1/illume-keyboard-german_git.bb:PV = "0.0+gitr${SRCPV}"
+./efl1/illume-keyboard-russian-terminal_git.bb:PV = "0.0+gitr${SRCPV}"
+./efl1/illume-keyboard-numeric-alt_git.bb:PV = "0.0+gitr${SRCPV}"
+./efl1/illume-keyboard-dvorak_git.bb:PV = "0.0+gitr${SRCPV}"
+./efl1/illume-keyboard-arabic_git.bb:PV = "0.0+gitr${SRCPV}"
+./efl1/illume-keyboard-hebrew_git.bb:PV = "0.0+gitr${SRCPV}"
+./efl1/illume-keyboard-russian_git.bb:PV = "0.0+gitr${SRCPV}"
+./efl1/illume-keyboard-browse_git.bb:PV = "0.0+gitr${SRCPV}"
+./efl1/illume-keyboard-french_git.bb:PV = "0.0+gitr${SRCPV}"
+./efl1/illume-keyboard-danish_git.bb:PV = "0.0+gitr${SRCPV}"
+./linux/linux-openmoko-2.6.31_git.bb:PV = "${KERNEL_RELEASE}-${OEV}+gitr${SRCPV}"
+./linux/linux-openmoko-shr-devel_git.bb:PV = "${KERNEL_RELEASE}-${OMV}+gitr${SRCPV}"
+./linux/linux-openmoko-shr-drm-devel_git.bb:PV = "${KERNEL_RELEASE}-drm-${OMV}+gitr${SRCPV}"
+./openmoko-3rdparty/advancedcaching_git.bb:PV = "0.1.2+gitr${SRCPV}"
+./blipomoko/blipomoko_git.bb:PV = "0.0+gitr${SRCPV}"
+./openmoocow/openmoocow_git.bb:PV = "0.0.3+gitr${SRCPV}"
+./shr/shr-dialer_git.bb:PV = "0.0.2+gitr${SRCPV}"
+./shr/shr-theme_git.bb:PV = "0.0.2+gitr${SRCPV}"
+./shr/shr-splash-theme-simple_git.bb:PV = "1.2+gitr${SRCPV}"
+./shr/gtk-theme-neo_git.bb:PV = "0.2-${EFL_SRCREV}+gitr${SRCPV}"
+./shr/shr-splash-theme-niebiee_git.bb:PV = "1.2+gitr${SRCPV}"
+./shr/e-wm-theme-illume-sixteen_git.bb:PV = "0.1-${EFL_SRCREV}+gitr${SRCPV}"
+./shr/shr-splash_git.bb:PV = "1.2+gitr${SRCPV}"
+./shr/libphone-ui-shr_git.bb:PV = "0.0.0+gitr${SRCPV}"
+./shr/phoneuid_git.bb:PV = "0.0.0+gitr${SRCPV}"
+./shr/shr-config_git.bb:PV = "0.0.2+gitr${SRCPV}"
+./shr/shr-settings_git.bb:PV = "0.1.1+gitr${SRCPV}"
+./shr/shr-specs_git.bb:PV = "0.0.0+gitr${SRCPV}"
+./shr/etk-theme-shr_git.bb:PV = "1.1.1-${EFL_SRCREV}+gitr${SRCPV}"
+./shr/icon-theme-neo_git.bb:PV = "0.2-${EFL_SRCREV}+gitr${SRCPV}"
+./shr/libframeworkd-phonegui_git.bb:PV = "0.0.2+gitr${SRCPV}"
+./shr/etk-theme-neo_git.bb:PV = "0.2-${EFL_SRCREV}+gitr${SRCPV}"
+./shr/e-wm-theme-illume-shr_git.bb:PV = "1.1-${EFL_SRCREV}+gitr${SRCPV}"
+./shr/elementary-theme-neo_git.bb:PV = "0.2.1-${EFL_SRCREV}+gitr${SRCPV}"
+./shr/shr-splash-theme-dontpanic_git.bb:PV = "1.2+gitr${SRCPV}"
+./shr/frameworkd-config-shr_git.bb:PV = "0.9.5.9+gitr${SRCPV}"
+./shr/e-wm-theme-illume-gry_git.bb:PV = "0.3-${EFL_SRCREV}+gitr${SRCPV}"
+./shr/elementary-theme-gry_git.bb:PV = "0.8-${EFL_SRCREV}+gitr${SRCPV}"
+./shr/libframeworkd-phonegui-efl_git.bb:PV = "0.0.3+gitr${SRCPV}"
+./shr/phoneui-apps_git.bb:PV = "0.0.0+gitr${SRCPV}"
+./shr/shr-splash-theme-handy_git.bb:PV = "1.2+gitr${SRCPV}"
+./shr/phonefsod_git.bb:PV = "0.0.0+gitr${SRCPV}"
+./shr/libframeworkd-phonegui-efl-theme-neo_git.bb:PV = "0.2-${EFL_SRCREV}+gitr${SRCPV}"
+./shr/e-wm-menu-shr_git.bb:PV = "1.1-${EFL_SRCREV}+gitr${SRCPV}"
+./shr/e-wm-theme-illume-neo_git.bb:PV = "0.1-${EFL_SRCREV}+gitr${SRCPV}"
+./shr/libframeworkd-phonegui-efl2_git.bb:PV = "0.0.1+gitr${SRCPV}"
+./shr/elementary-theme-niebiee_git.bb:PV = "0.1-${EFL_SRCREV}+gitr${SRCPV}"
+./shr/e-wm-config-illume-shr_git.bb:PV = "1.1-${EFL_SRCREV}+gitr${SRCPV}"
+./shr/shr-messages_git.bb:PV = "0.0.2+gitr${SRCPV}"
+./shr/shr-splash-theme-tux_git.bb:PV = "0.1+gitr${SRCPV}"
+./shr/alsa-scenarii-shr_git.bb:PV = "1.0+gitr${SRCPV}"
+./shr/shr-contacts_git.bb:PV = "0.0.2+gitr${SRCPV}"
+./shr/elementary-theme-sixteen_git.bb:PV = "0.1-${EFL_SRCREV}+gitr${SRCPV}"
+./shr/libmodulo_git.bb:PV = "0.0.1+gitr${SRCPV}"
+./shr/shr-installer_git.bb:PV = "0.0.1+gitr${SRCPV}"
+./shr/shr-theme-gtk-e17lookalike_git.bb:PV = "0.1.1+gitr${SRCPV}"
+./shr/libphone-utils_git.bb:PV = "0.0.2+gitr${SRCPV}"
+./shr/shr-today_git.bb:PV = "0.0.1+gitr${SRCPV}"
+./shr/e-wm-theme-illume-niebiee_git.bb:PV = "0.1-${EFL_SRCREV}+gitr${SRCPV}"
+./shr/ologicd_git.bb:PV = "0.0.1+gitr${SRCPV}"
+./shr/shr-splash-theme-logo_git.bb:PV = "0.1+gitr${SRCPV}"
+./shr/libphone-ui_git.bb:PV = "0.0.0+gitr${SRCPV}"
+./shr/e-wm-sysactions-shr_git.bb:PV = "1.1-${EFL_SRCREV}+gitr${SRCPV}"
+./pyphonelog/pyphonelog_git.bb:PV = "0.17.0+gitr${SRCPV}"
+./bt-configure/bt-configure_git.bb:PV = "1.0.0+gitr${SRCPV}"
+./pidgin/msn-pecan_git.bb:PV="0.0.1+gitr${SRCPV}"
+./openmoko-projects/paroli_git.bb:PV = "0.2.1+gitr${SRCPV}"
+./python/python-phoneutils_git.bb:PV = "0.0.2+gitr${SRCPV}"
 
 -- 
 uin:136542059                jid:Martin.Jansa@gmail.com
