@@ -1,38 +1,26 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail-bw0-f217.google.com ([209.85.218.217])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NB7Ko-0002bi-Cp
+	(envelope-from <ricardo.salveti@openbossa.org>) id 1NB7Qj-0002mZ-TT
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Nov 2009 14:46:09 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NB7JS-00024C-6T for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Nov 2009 08:44:42 -0500
-Date: Thu, 19 Nov 2009 08:44:41 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4B054898.4040409@balister.org>
-Message-ID: <alpine.LFD.2.00.0911190841200.3913@localhost>
-References: <alpine.LFD.2.00.0911190116480.18080@localhost>
-	<4B054898.4040409@balister.org>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Thu, 19 Nov 2009 14:52:16 +0100
+Received: by bwz9 with SMTP id 9so2299105bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Nov 2009 05:50:48 -0800 (PST)
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+Received: by 10.204.152.151 with SMTP id g23mr3619797bkw.148.1258638648574; 
+	Thu, 19 Nov 2009 05:50:48 -0800 (PST)
+In-Reply-To: <1258637832.23826.88.camel@mill.internal.reciva.com>
+References: <B44D4D5BF344094DABB900C4E0F6E3533945A36F15@srv02.nortechonline.net>
+	<1258637832.23826.88.camel@mill.internal.reciva.com>
+Date: Thu, 19 Nov 2009 10:50:48 -0300
+Message-ID: <ae9c9a1c0911190550s6e47efe7s23bac24ba6546849@mail.gmail.com>
+From: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: ricardo.salveti@openbossa.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: the latest scoop on guile (native) build failure on fedora
+Subject: Re: Which distro for OE development?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,52 +34,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Nov 2009 13:46:09 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Thu, 19 Nov 2009 13:52:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 19 Nov 2009, Philip Balister wrote:
-
-> On 11/19/2009 01:22 AM, Robert P. J. Day wrote:
-> >
-> >    just FYI, as a benchmark for a native build, i downloaded the
-> > guile-1.8.7 tarball and tried to build it on my system with your basic
-> > "make; configure".  that failed exactly as the OE build has been
-> > failing.
-> >
-> >    as a last resort, i downloaded the fedora source rpm and tried to
-> > use "rpmbuild" to rebuild the binary package.  same failure.  so this
-> > is clearly a guile/fedora issue, nothing to do with OE.
-> >
-> >    i'm about to bugzilla this, but i'm wary only because i'm running on
-> > a sort of f12 system that is f11 but rawhide updated, so it might be
-> > that there's a subtle version mismatch.
-> >
-> >    if someone out there has either a pure f11 or pure f12 system, feel
-> > free to download the guile-1.8.7 tarball:
-> >
-> >    ftp://ftp.gnu.org/pub/gnu/guile/guile-1.8.7.tar.gz
-> >
-> > and try nothing more than untar/configure/make and see what happens.
+On Thu, Nov 19, 2009 at 10:37 AM, Phil Blundell <philb@gnu.org> wrote:
+> On Thu, 2009-11-19 at 13:06 +0000, Hodgson, Simon wrote:
+>> I'm looking to make it as easy as possible to get started, so ideally al=
+l the packages I need will be available from that distro's standard reposit=
+ry.
+>>
+>> I've tried SuSE in the past and given up trying to get all of the requir=
+ed tools installed, and more recently been using Debian, but the Python ver=
+sion in Debian is a few versions behind and there was talk of OE soon requi=
+ring a more up to date version.
 >
-> Built OK on F11. I'm afraid to upgrade to F12 atm :)
+> I'm using Debian on most of my machines and I am fairly happy with it.
+>
+> The python that's currently in Debian is fine for bitbake 1.8.x. =A0By th=
+e
+> time OE starts to require bitbake 1.10.x, I suspect Debian's python
+> support will have caught up: failing that, you can always install the
+> package from Ubuntu.
 
-  don't:
+I'm using both Ubuntu 9.04 and Gentoo and they are working quite fine.
 
-https://www.redhat.com/archives/fedora-list/2009-November/msg01503.html
+Didn't test with latest Ubuntu version, but probably someone already
+did, as it's now such a common distro.
 
-but i'm hoping this will be resolved shortly.  as you can see, this
-appears to be a fedora issue, nothing to do with OE.
+I think people were having problems with latest Fedora release, but
+they can tell more about that.
 
-rday
---
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+Cheers,
+--=20
+Ricardo Salveti de Araujo
 
 
