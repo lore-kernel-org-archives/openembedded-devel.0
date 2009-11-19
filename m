@@ -1,40 +1,36 @@
-Received: from mail-px0-f174.google.com ([209.85.216.174])
+Received: from srv02.nortechonline.net ([89.151.113.230])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ahsan.khwaja@gmail.com>) id 1NB6P0-0003oS-71
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Nov 2009 13:46:25 +0100
-Received: by pxi4 with SMTP id 4so1423880pxi.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 04:44:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=Rpb+FOTyPvMlF9RYKd8Hw5fZGweqmlhsz5IkiaprY9I=;
-	b=aL6hWV313ut+mvfKaDv6Im1T77xdkJP9QeTMXBrDRjNIWQZtRCGAUFwOrcA7B4m4PG
-	2nXe4bha83l9qBbizAyuV/f9NMRnugQhZnwPFBkd+0KCt0gEXAbL+MMEi6BOc/3MmjoP
-	XNdZBiLkcX3Yn43r6N844irelN0cbk/rdIHE0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=dR9t6oQREFUWxmabxLc1CJK+UjFoaQjGfkpHf30Pj8Tpz29WNV/sTsJKXCvrYTV+ZR
-	OsoxbTWVntcGSIIFL+ZYB7wFQJHrMFfqNLQkO1dnnUw+JNz/Z10vKozaWamBLyPXXysf
-	3CsfRadTYbHMQLJshZroS+E71ghMWrtUI1n+c=
+	(envelope-from <Simon.Hodgson@nortechonline.co.uk>)
+	id 1NB6jw-0008L2-UM for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Nov 2009 14:08:03 +0100
+Received: from srv02.nortechonline.net ([89.151.113.230]) by
+	srv02.nortechonline.net ([89.151.113.230]) with mapi; Thu, 19 Nov 2009
+	13:06:51 +0000
+From: "Hodgson, Simon" <Simon.Hodgson@nortechonline.co.uk>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 19 Nov 2009 13:06:43 +0000
+Thread-Topic: Which distro for OE development?
+Thread-Index: AcppGSQplXZe97+2S5qjD9xsObmksQ==
+Message-ID: <B44D4D5BF344094DABB900C4E0F6E3533945A36F15@srv02.nortechonline.net>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-cr-hashedpuzzle: Anj+ Aysx BExQ CH5r CoSM DaxW EPn9 EYff F2RY GKt3 GbVT
+	G0Pw HOHU I5cf KDlw KkdX; 1;
+	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnAA==;
+	Sosha1_v1; 7; {A6515411-296A-4A4B-974D-4171DDF62DC6};
+	cwBpAG0AbwBuAC4AaABvAGQAZwBzAG8AbgBAAG4AbwByAHQAZQBjAGgAbwBuAGwAaQBuAGUALgBjAG8ALgB1AGsA;
+	Thu, 19 Nov 2009 13:06:43 GMT;
+	VwBoAGkAYwBoACAAZABpAHMAdAByAG8AIABmAG8AcgAgAE8ARQAgAGQAZQB2AGUAbABvAHAAbQBlAG4AdAA/AA==
+x-cr-puzzleid: {A6515411-296A-4A4B-974D-4171DDF62DC6}
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.114.236.22 with SMTP id j22mr6743029wah.217.1258634693618; 
-	Thu, 19 Nov 2009 04:44:53 -0800 (PST)
-In-Reply-To: <c384c5ea0911190438l6e351ad0i97a798890ba152d4@mail.gmail.com>
-References: <818ccfc40911182327t686578acn565645806bcf280e@mail.gmail.com>
-	<c384c5ea0911190438l6e351ad0i97a798890ba152d4@mail.gmail.com>
-Date: Thu, 19 Nov 2009 17:44:53 +0500
-Message-ID: <818ccfc40911190444x5dc93e37g2fa2ebef9b339946@mail.gmail.com>
-From: Ahsan Khawaja <ahsan.khwaja@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.174
-X-SA-Exim-Mail-From: ahsan.khwaja@gmail.com
+X-SA-Exim-Connect-IP: 89.151.113.230
+X-SA-Exim-Mail-From: Simon.Hodgson@nortechonline.co.uk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: do staging failed while building eglibc
+Subject: Which distro for OE development?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,57 +44,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Nov 2009 12:46:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 19 Nov 2009 13:08:04 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Hello,
+I'm setting up a new machine with Linux specifically to use for OpenEmbedde=
+d development. Which Linux distro should I go with?
 
-Architecture : ARM
-Machine: imx31
+I'm looking to make it as easy as possible to get started, so ideally all t=
+he packages I need will be available from that distro's standard repositry.
 
-I am unable to understand the error. Can you explain to me why staging phase
-is failing. it just says
+I've tried SuSE in the past and given up trying to get all of the required =
+tools installed, and more recently been using Debian, but the Python versio=
+n in Debian is a few versions behind and there was talk of OE soon requirin=
+g a more up to date version.
 
-make -r PARALLELMFLAGS="" CVSOPTS="" -C
-/opt/embeddedalley/freescale_mx31pdk/src/devsys/build_mx31pdk_debug_rebuild001/work/armv6-none-eabi/eglibc-initial-2.9-r4/eglibc-2_9/libc
-objdir=`pwd` csu/subdir_lib
-make[1]: Entering directory
-`/opt/embeddedalley/freescale_mx31pdk/src/devsys/build_mx31pdk_debug_rebuild001/work/armv6-none-eabi/eglibc-initial-2.9-r4/eglibc-2_9/libc'
-make  subdir=csu -C csu ..=../ subdir_lib
-make[1]: *** [csu/subdir_lib] Error 2
-make[1]: Leaving directory
-`/opt/embeddedalley/freescale_mx31pdk/src/devsys/build_mx31pdk_debug_rebuild001/work/armv6-none-eabi/eglibc-initial-2.9-r4/eglibc-2_9/libc'
-make: *** [csu/subdir_lib] Error 2
-FATAL: oe_runmake failed
+Ubuntu is a good candidate at the moment as I belive there won't be any har=
+dware issues with the laptop I want to use, but this wiki page suggests the=
+re's some faffing to do http://wiki.openembedded.net/index.php/Gcc_issues_i=
+n_Intrepid_and_later which I'd like to avoid if possible - does anyone know=
+ if these issues are present in the latest version 9.10?
 
-there is no clue that what went wrong
+Thanks
 
-Regards,
-Noor
 
-On Thu, Nov 19, 2009 at 5:38 PM, Leon Woestenberg <
-leon.woestenberg@gmail.com> wrote:
 
-> Hello Ahsan,
->
-> On Thu, Nov 19, 2009 at 8:27 AM, Ahsan Khawaja <ahsan.khwaja@gmail.com>
-> wrote:
-> >
-> > i am using openembedded to build my develoment system for bare metal. I
-> > changed the TARGET _OS to arm-none-eabi. while building the system the
-> > eglibc gets error during staging process. Error description is to
-> confusing.
-> > Please help me in resolving this issue.
-> >
-> For what machine and/or architecture?
->
-> Regards,
-> --
-> Leon
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Simon
+
 
