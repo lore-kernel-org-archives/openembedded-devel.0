@@ -1,43 +1,38 @@
-Received: from mail-bw0-f217.google.com ([209.85.218.217])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1NB7Id-0006Mn-7I
+	(envelope-from <rpjday@crashcourse.ca>) id 1NB7Ko-0002bi-Cp
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Nov 2009 14:43:54 +0100
-Received: by bwz9 with SMTP id 9so2290257bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 05:42:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type; bh=P6HlWM9WUGUhB88nlgzGU3CE6YUZpZYE0qVJiSCscSE=;
-	b=Av4bskQ8g9n6hyz+z9DTACSbokCFIRITRZduPtt6lgJyjfs280xHH+dJcxjC/EWjGl
-	FOmzvdfQEZLmGhNEFHED/VaXHzqkzQ7CO/pWLYFC34cRz/UywpXagqWfqELKvHuDKx7Q
-	S+76YENCIDWhhiNB3ApdFk/mu81Hhew3b47j0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	b=ibR75asLJA5/SDWnRo7hWZ+buOwMUCF0NZ37TR+XnRpyvsL3ZGyq724XbLuDNMFgyR
-	0gspouB6n8B4gbNd2OqF/qQXfmVkifiymw4ihPu/VaQx26p7zh2afM5U1U53/7Fr0Qsz
-	bSL65QeKstRAkAMmJvEBeMx4VTafsl5dI4kiw=
-MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.141.155 with SMTP id c27mr311hba.48.1258638146299; Thu, 19 
-	Nov 2009 05:42:26 -0800 (PST)
-In-Reply-To: <1258631715.23826.63.camel@mill.internal.reciva.com>
-References: <be7a9f3d0911181211s614defeaq5a49ca33c3691c50@mail.gmail.com>
-	<1258576924.25369.687.camel@lenovo.internal.reciva.com>
-	<be7a9f3d0911181421i4d3a1ffy2417cbbd91d9a1ff@mail.gmail.com>
-	<1258631715.23826.63.camel@mill.internal.reciva.com>
-Date: Thu, 19 Nov 2009 11:42:26 -0200
-X-Google-Sender-Auth: bad673aea38cd633
-Message-ID: <be7a9f3d0911190542j2bea66ccs65d6261b9c92bf87@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Thu, 19 Nov 2009 14:46:09 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NB7JS-00024C-6T for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Nov 2009 08:44:42 -0500
+Date: Thu, 19 Nov 2009 08:44:41 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+In-Reply-To: <4B054898.4040409@balister.org>
+Message-ID: <alpine.LFD.2.00.0911190841200.3913@localhost>
+References: <alpine.LFD.2.00.0911190116480.18080@localhost>
+	<4B054898.4040409@balister.org>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] Merging of stable/2009 into dev
+Subject: Re: the latest scoop on guile (native) build failure on fedora
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,29 +46,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Nov 2009 13:43:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 19 Nov 2009 13:46:09 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Hello,
+On Thu, 19 Nov 2009, Philip Balister wrote:
 
-On Thu, Nov 19, 2009 at 9:55 AM, Phil Blundell <philb@gnu.org> wrote:
-> Right, but I think these conflicts are a result of attempting what seems
-> like a nonsensical merge.
+> On 11/19/2009 01:22 AM, Robert P. J. Day wrote:
+> >
+> >    just FYI, as a benchmark for a native build, i downloaded the
+> > guile-1.8.7 tarball and tried to build it on my system with your basic
+> > "make; configure".  that failed exactly as the OE build has been
+> > failing.
+> >
+> >    as a last resort, i downloaded the fedora source rpm and tried to
+> > use "rpmbuild" to rebuild the binary package.  same failure.  so this
+> > is clearly a guile/fedora issue, nothing to do with OE.
+> >
+> >    i'm about to bugzilla this, but i'm wary only because i'm running on
+> > a sort of f12 system that is f11 but rawhide updated, so it might be
+> > that there's a subtle version mismatch.
+> >
+> >    if someone out there has either a pure f11 or pure f12 system, feel
+> > free to download the guile-1.8.7 tarball:
+> >
+> >    ftp://ftp.gnu.org/pub/gnu/guile/guile-1.8.7.tar.gz
+> >
+> > and try nothing more than untar/configure/make and see what happens.
 >
-> Which specific changesets from stable/2009 do you feel are missing
-> in .dev?
+> Built OK on F11. I'm afraid to upgrade to F12 atm :)
 
-Ok but what is the planned migration path from users that used
-stable/2009 to stable/2010?
+  don't:
 
-I mean, when we start stable/2010 we expect that users that based
-their distros in stable/2009 need to redo all work to move to
-stable/2010? If we merge stable/2009 into .dev then this is going to
-be much easier.
+https://www.redhat.com/archives/fedora-list/2009-November/msg01503.html
 
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+but i'm hoping this will be resolved shortly.  as you can see, this
+appears to be a fedora issue, nothing to do with OE.
+
+rday
+--
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
