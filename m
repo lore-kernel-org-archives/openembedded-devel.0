@@ -1,39 +1,49 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f209.google.com ([209.85.220.209])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NB9UC-0007lN-1Y for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Nov 2009 17:03:59 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NB9Sr-0002We-AA
+	(envelope-from <martin.jansa@gmail.com>) id 1NB9cf-00085M-M6
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Nov 2009 17:02:33 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 17:02:33 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Thu, 19 Nov 2009 17:12:44 +0100
+Received: by fxm1 with SMTP id 1so2445466fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Nov 2009 17:02:33 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 19 Nov 2009 08:11:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=8uVwFVn6KW+pqVdus+vo3c1MJdOKvZ2+f0Albw4Mm/s=;
+	b=F10Kydb6T7Zw6lFNFxxic3LL2zY2Z9FxGR73AWPObk937A8zclVpWtvdymRZrlxDd3
+	4cq0ZzO9hbcGjC2sKLXjZSEdj3bPu9FJJ9YM6Q+N5ihqT6MUq124VHjlM9tOxX3huQIb
+	o5es6vNaKpafeTYm4OEbfgmoWU91rK8Yc9Kp8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=oHc9D6/VkUv7/CVyc6sbUKb5HT+Iou/QTWtW5JBRpa6pndWR9loyXl7vUQqOL12+Xm
+	WWi9qgC6aqSvy5ycX6Qy7gDKTbZluD65DCAvJfg8VQMuyxJ07bqdqYDwb0/mvzHYtSK6
+	QbK0WIugXOlcW40N9ZTmHV9lHHp6SvWCVg2ZQ=
+Received: by 10.204.10.2 with SMTP id n2mr175856bkn.91.1258647076760;
+	Thu, 19 Nov 2009 08:11:16 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 16sm236792fxm.4.2009.11.19.08.11.16
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 19 Nov 2009 08:11:16 -0800 (PST)
+Date: Thu, 19 Nov 2009 17:11:08 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 19 Nov 2009 17:02:05 +0100
-Message-ID: <he3q5u$mq2$1@ger.gmane.org>
-References: <20091115163618.GA3317@jama>
-	<hdr31n$8b0$1@ger.gmane.org>	<1258364356.5799.94.camel@dax.rpnet.com>
-	<hdra17$t4d$1@ger.gmane.org>	<1258368570.5799.99.camel@dax.rpnet.com>
-	<hdrb9v$1dp$1@ger.gmane.org>	<1258371591.5799.112.camel@dax.rpnet.com>
+Message-ID: <20091119161108.GC3366@jama>
+References: <20091115163618.GA3317@jama> <hdr31n$8b0$1@ger.gmane.org>
+	<1258364356.5799.94.camel@dax.rpnet.com>
+	<hdra17$t4d$1@ger.gmane.org>
+	<1258368570.5799.99.camel@dax.rpnet.com>
+	<hdrb9v$1dp$1@ger.gmane.org>
+	<1258371591.5799.112.camel@dax.rpnet.com>
 	<hdrffa$do6$1@ger.gmane.org>
 	<1258375022.16625.3.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-In-Reply-To: <1258375022.16625.3.camel@dax.rpnet.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	<he3q5u$mq2$1@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <he3q5u$mq2$1@ger.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.209
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: SRCPV migration
@@ -50,24 +60,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Nov 2009 16:03:59 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 19 Nov 2009 16:12:44 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 16-11-09 13:37, Richard Purdie wrote:
+On Thu, Nov 19, 2009 at 05:02:05PM +0100, Koen Kooi wrote:
+> On 16-11-09 13:37, Richard Purdie wrote:
+> 
+> >I think we will have to hold off some of the SRCPV migration until
+> >bitbake has some kind of lock down functionality for the local build
+> >numbers.
+> 
+> So at least 2 core developers (Richard, me) have said we shouldn't
+> use SRCPV for git stuff, and what do I spot today:
+> 
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=4f1f60e0f46324c6a968aff9bffeb727d98d5283
+> 
+> +PV = "0.0+1.0rc2+gitr${SRCPV}"
+> 
+> FFS!
 
-> I think we will have to hold off some of the SRCPV migration until
-> bitbake has some kind of lock down functionality for the local build
-> numbers.
+Sorry for that :/
 
-So at least 2 core developers (Richard, me) have said we shouldn't use 
-SRCPV for git stuff, and what do I spot today:
+I'm merging stuff from shr/merge branch where its already used and it
+sliped through.
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=4f1f60e0f46324c6a968aff9bffeb727d98d5283
+Should I commit SRCPV->SRCREV now, or is it ok for now as there is also
+DEFAULT_PREFERRENCE = -1? which I also should set to -2 to ensure that
+won't be pulled instead of mplayer_svn :/.
 
-+PV = "0.0+1.0rc2+gitr${SRCPV}"
+Sorry again..
 
-FFS!
-
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
