@@ -1,37 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from ey-out-1920.google.com ([74.125.78.144])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NBPkK-0001FJ-F2 for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Nov 2009 10:25:43 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NBPiy-0006QY-51
+	(envelope-from <dp@xora.org.uk>) id 1NBPs9-0003PC-8U
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Nov 2009 10:24:16 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2009 10:24:16 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Fri, 20 Nov 2009 10:33:48 +0100
+Received: by ey-out-1920.google.com with SMTP id 3so283057eyh.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2009 10:24:16 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 20 Nov 2009 01:32:22 -0800 (PST)
+Received: by 10.213.1.5 with SMTP id 5mr2587498ebd.21.1258709541254;
+	Fri, 20 Nov 2009 01:32:21 -0800 (PST)
+Received: from localhost (lumison.wolfsonmicro.com [87.246.78.27])
+	by mx.google.com with ESMTPS id 28sm325485eye.9.2009.11.20.01.32.20
+	(version=SSLv3 cipher=RC4-MD5); Fri, 20 Nov 2009 01:32:21 -0800 (PST)
+Date: Fri, 20 Nov 2009 09:32:20 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 20 Nov 2009 10:23:46 +0100
-Message-ID: <he5n72$ltj$1@ger.gmane.org>
-References: <992df8520911150534v4aeec248u91c5ca477de25eb9@mail.gmail.com>
+Message-ID: <20091120093220.61196d38@xora.org.uk>
+In-Reply-To: <alpine.LFD.2.00.0911200415360.22257@localhost>
+References: <alpine.LFD.2.00.0911200415360.22257@localhost>
+X-Mailer: Claws Mail 3.7.3 (GTK+ 2.18.3; i686-redhat-linux-gnu)
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-In-Reply-To: <992df8520911150534v4aeec248u91c5ca477de25eb9@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 74.125.78.144
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Initial Support for the Samsung Omnia (SGH-i900)
+Subject: Re: FYI, non-fatal fetch errors for ffmpeg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,37 +37,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Nov 2009 09:25:43 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 20 Nov 2009 09:33:48 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On 15-11-09 14:34, Alex Ferguson wrote:
-> I've been working on some initial support for the Samsung Omnia (SGH-i900)
-> in the form of a machine configuration file and kernel. I also posted this
-> as a bug here:
->
-> http://bugs.openembedded.org/show_bug.cgi?id=5335
+On Fri, 20 Nov 2009 04:20:25 -0500 (EST)
+"Robert P. J. Day" <rpjday@crashcourse.ca> wrote:
 
-Oops, I missed a serious bug in your patches:
+> 
+>   in the midst of a bb-demo-image build:
 
-+++ b/recipes/tslib/tslib/sgh-i900/tslib.sh
-@@ -0,0 +1,5 @@
-+#!/bin/sh
-+
-+TSLIB_TSDEVICE=/dev/input/event1
-+
-+export TSLIB_TSDEVICE
+> 
+>   obviously, the fetch of ffmpeg eventually works, but any value in
+> cleaning up the initial fetch errors?
+> 
+Is it April 1st in your locale????????
 
-That is so wrong it isn't funny anymore. The eventX numbers are pretty 
-much randomly assigned, so you can't depend on them. In OE we have a 
-udev script that finds all touchscreens and creates 
-/dev/input/touchscreenX symlinks. The default tslib.sh uses those.
+This is normal operation of fetch module. Which is long documented.
 
-Could you please explain why the default tslib.sh isn't working for you?
-
-regards,
-
-Koen
-
+Graeme
 
 
