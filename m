@@ -1,39 +1,40 @@
-Received: from mail-bw0-f217.google.com ([209.85.218.217])
+Received: from mail-fx0-f209.google.com ([209.85.220.209])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NBQA7-0003uU-4o
+	(envelope-from <thoughtmonster@gmail.com>) id 1NBQAQ-0003wU-I1
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Nov 2009 10:52:22 +0100
-Received: by bwz9 with SMTP id 9so3068979bwz.12
+	Fri, 20 Nov 2009 10:52:41 +0100
+Received: by fxm1 with SMTP id 1so3266661fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2009 01:50:53 -0800 (PST)
+	Fri, 20 Nov 2009 01:51:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=kyrgwA6XYlLYfOTSwqUgu0/gDe3uP3RKLoGCTx3QBRY=;
-	b=R6Xws3gWK7x3aVR5nJUvTeYjk+lYbacDXbH/ZS0g8MuTNe46q//RK5TFIMm6tR0Iuc
-	7jzYYL7CDMYYdSnRALSV6bjUPUiwVu1aVXYl2HshgYQ6yZDPVTHMBLLiY8Gr/ZC2lh97
-	d75hUdBYKkFEgsGCMm9QQzThGkb/UHi+Cz6oA=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=NwhDDhaI5P+T3JVL8Ss7n+G7wzIHDE5oMk50qon3BtM=;
+	b=tSRwo6o+VAMHHOFZ4vt4maBH5HLkjVvgz13jjgQxk4nbFhD59isy26evX8UAdji8mT
+	b8xWO+B55+b8r7N1NjKHQrabx09nkW5KQWQVunn43qIL5473lf95k+kJW7iaKkU9sZMu
+	jxmbzihZEXAyCP9IM09v2Dcdev2wzaEuc0bpg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=W9BEyYDW5kCcYnZ4lLhcDs9o6MFjQx7kgtkyCV4/uzyEnmdLXTfo6prHy+u/nG1W7k
-	jE28qOc+hHSML24kS65SpL1bdqjy5SO42xNBM0wkwoGzPt/2WDQrhW9q2U03rB4cnN+5
-	XlsSV09onMcNZXW/zzOJCUupo28Mm1ar4Bs6Q=
-Received: by 10.204.34.9 with SMTP id j9mr1212410bkd.10.1258710653787;
-	Fri, 20 Nov 2009 01:50:53 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 16sm481905fxm.12.2009.11.20.01.50.53
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 20 Nov 2009 01:50:53 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=u5FLhRNU2vCLkH9fl9ZhpN+B12uqpbx1Ml+HG+/2bp3VOI+UG2BX5OnOKQDf+u6RqS
+	EVtd9GGx1Q0CnNbkdKn1yUHL9zkD14Jqq+Mh7X3JsAy2mbf3EKJ6/opFHrH9FiAR8L3h
+	jaS78MhvEQ59EfyqrbRglGgyRj2YLCF5KnUNA=
+MIME-Version: 1.0
+Received: by 10.239.143.212 with SMTP id l20mr116250hba.210.1258710673279; 
+	Fri, 20 Nov 2009 01:51:13 -0800 (PST)
+In-Reply-To: <he5n72$ltj$1@ger.gmane.org>
+References: <992df8520911150534v4aeec248u91c5ca477de25eb9@mail.gmail.com>
+	<he5n72$ltj$1@ger.gmane.org>
+Date: Fri, 20 Nov 2009 11:51:13 +0200
+Message-ID: <992df8520911200151q57520791n6395642f5bc18e@mail.gmail.com>
+From: Alex Ferguson <thoughtmonster@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Nov 2009 10:50:45 +0100
-Message-Id: <1258710645-6118-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.6.5.3
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Connect-IP: 209.85.220.209
+X-SA-Exim-Mail-From: thoughtmonster@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] tzdata: add 2009s, fix typo in do_compile, install zone.tab and iso1366.tab for eglibc
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Initial Support for the Samsung Omnia (SGH-i900)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,72 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Nov 2009 09:52:22 -0000
+X-List-Received-Date: Fri, 20 Nov 2009 09:52:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* there was ${WORKDIR}}
-* zone.tab, iso1366.tab is removed in eglibc/eglibc-package.bbclass
----
- recipes/tzdata/tzdata.inc      |   13 ++++++++++---
- recipes/tzdata/tzdata_2009s.bb |    3 +++
- 2 files changed, 13 insertions(+), 3 deletions(-)
- create mode 100644 recipes/tzdata/tzdata_2009s.bb
+On Fri, Nov 20, 2009 at 11:23 AM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
 
-diff --git a/recipes/tzdata/tzdata.inc b/recipes/tzdata/tzdata.inc
-index 71de930..cfc5d2f 100644
---- a/recipes/tzdata/tzdata.inc
-+++ b/recipes/tzdata/tzdata.inc
-@@ -3,7 +3,7 @@ SECTION = "base"
- PRIORITY = "optional"
- DEPENDS = "tzcode-native"
- 
--INC_PR = "r4"
-+INC_PR = "r5"
- 
- DEFAULT_TIMEZONE ?= "Europe/London"
- 
-@@ -28,9 +28,9 @@ do_compile () {
-         for zone in ${TZONES}; do \
-             ${STAGING_BINDIR_NATIVE}/zic -d ${WORKDIR}/build${datadir}/zoneinfo -L /dev/null \
-                 -y ${S}/yearistype.sh ${S}/${zone} ; \
--            ${STAGING_BINDIR_NATIVE}/zic -d ${WORKDIR}}/build${datadir}/zoneinfo/posix -L /dev/null \
-+            ${STAGING_BINDIR_NATIVE}/zic -d ${WORKDIR}/build${datadir}/zoneinfo/posix -L /dev/null \
-                 -y ${S}/yearistype.sh ${S}/${zone} ; \
--            ${STAGING_BINDIR_NATIVE}/zic -d ${WORKDIR}}/build${datadir}/zoneinfo/right -L ${S}/leapseconds \
-+            ${STAGING_BINDIR_NATIVE}/zic -d ${WORKDIR}/build${datadir}/zoneinfo/right -L ${S}/leapseconds \
-                 -y ${S}/yearistype.sh ${S}/${zone} ; \
-         done
- }
-@@ -38,6 +38,11 @@ do_compile () {
- do_install () {
-         install -d ${D}${prefix} ${D}${datadir}/zoneinfo
-         cp -pPR ${WORKDIR}/build${prefix}/* ${D}${prefix}
-+        # Only eglibc is removing zoneinfo files from package
-+        if [ "${LIBC}"x == "eglibc"x ] ; then
-+          cp -pP "${WORKDIR}/zone.tab" ${D}${datadir}/zoneinfo
-+          cp -pP "${WORKDIR}/iso3166.tab" ${D}${datadir}/zoneinfo
-+        fi
- 
-         # Install a sane default for timezones
-         install -d ${D}${sysconfdir}
-@@ -168,5 +173,7 @@ FILES_${PN} += "${datadir}/zoneinfo/Pacific/Honolulu     \
-                 ${datadir}/zoneinfo/WET                  \
-                 ${datadir}/zoneinfo/Zulu                 \
-                 ${datadir}/zoneinfo/Etc/*                \
-+                ${datadir}/zoneinfo/iso3166.tab          \
-+                ${datadir}/zoneinfo/zone.tab             \
-                 ${sysconfdir}/localtime                  \
-                 ${sysconfdir}/timezone                   "
-diff --git a/recipes/tzdata/tzdata_2009s.bb b/recipes/tzdata/tzdata_2009s.bb
-new file mode 100644
-index 0000000..17c2dd4
---- /dev/null
-+++ b/recipes/tzdata/tzdata_2009s.bb
-@@ -0,0 +1,3 @@
-+require tzdata.inc
-+SRC_URI = "ftp://elsie.nci.nih.gov/pub/tzdata${PV}.tar.gz"
-+PR = "${INC_PR}.0"
--- 
-1.6.5.3
+>
+> Could you please explain why the default tslib.sh isn't working for you?
 
 
+Because it doesn't? /dev/input/touchscreenX doesn't exist. The devices
+/dev/input/event0 and /dev/input/event1 are consistently assigned to
+keyboard and touchscreen, respectively, and I'm having no problem with that.
+
+Support for the SGH-i900 in the kernel isn't perfect yet. There is still a
+lot of work to be done, and a lot of drivers are missing or incomplete. It
+boots, touchscreen works, wifi works, but that's about it.
+
+Once the drivers are improved and the need for a custom tslib.sh file
+evaporates, I'll be sure to open a bug report.
+
+Thanks.
 
