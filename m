@@ -1,26 +1,26 @@
 Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1NBSUw-0000KX-OB
+	(envelope-from <philip@balister.org>) id 1NBSXu-0004nd-1Y
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Nov 2009 13:22:03 +0100
-Received: (qmail 22310 invoked by uid 1003); 20 Nov 2009 12:20:32 -0000
+	Fri, 20 Nov 2009 13:25:05 +0100
+Received: (qmail 14643 invoked by uid 1003); 20 Nov 2009 12:23:35 -0000
 Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 20 Nov 2009 12:20:32 -0000
-Message-ID: <4B06898F.1090408@balister.org>
-Date: Fri, 20 Nov 2009 07:20:31 -0500
+	by mail.geekisp.com with SMTP; 20 Nov 2009 12:23:35 -0000
+Message-ID: <4B068A46.8090701@balister.org>
+Date: Fri, 20 Nov 2009 07:23:34 -0500
 From: Philip Balister <philip@balister.org>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
 	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
 	Thunderbird/3.0b4
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4B067785.50600@SSpaeth.de> <he5vbj$enr$1@ger.gmane.org>
-In-Reply-To: <he5vbj$enr$1@ger.gmane.org>
+References: <alpine.LFD.2.00.0911200514430.18485@localhost>
+In-Reply-To: <alpine.LFD.2.00.0911200514430.18485@localhost>
 X-SA-Exim-Connect-IP: 216.168.135.169
 X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [Fwd: [Shr-Devel] [PATCH] ILLUME_CONFIG is now also set by a variable]
+Subject: Re: [PATCH] Upgrade guile from 1.8.6 to 1.8.7.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,31 +34,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Nov 2009 12:22:03 -0000
+X-List-Received-Date: Fri, 20 Nov 2009 12:25:05 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 11/20/2009 06:42 AM, Koen Kooi wrote:
-> On 20-11-09 12:03, Sebastian Spaeth wrote:
->> See attached patch. We'd love to replace the default illume config with
->> our distro-specific version, so this will make the config RDEPENDS
->> overridable from our distro conf. Is such a change acceptable for OE?
->
-> The change looks file, but the Author field is wrong (people have last
-> names, unless you're called Wookie) and the commit message isn't to OE
-> standards either.
+I applied this. A couple of comments for the future:
 
-Is Wookie his first name or last name?
+1) Make the commit message "guile: Upgrade from 1.8.6 to 1.8.7" for 
+consistency.
+
+2) You can include the checksums in the recipe now. See:
+
+http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/curl/curl_7.19.7.bb
+
+look in the curl-common.inc file for the "tarball" naming.
+
+Thanks,
 
 Philip
 
-> In the future fix up both before committing. It can get tedious, I know,
-> I do it for my coworkers as well :)
+On 11/20/2009 05:16 AM, Robert P. J. Day wrote:
 >
-> regards,
+> Signed-off-by: Robert P. J. Day<rpjday@crashcourse.ca>
 >
-> Koen
+> ---
 >
+>    bitbake tested on x86_64.
+>
+> diff --git a/conf/checksums.ini b/conf/checksums.ini
+> index b2bc05b..5529b73 100644
+> --- a/conf/checksums.ini
+> +++ b/conf/checksums.ini
+> @@ -11426,6 +11426,10 @@ sha256=e2f63d2d445ffeb072638eab885b1a629e372d1db711c8afb26a62bc56096289
+>   md5=9e23d3dbea0e89bab8a9acc6880150de
+>   sha256=69a2f9491480ff756d1cc4c8ea2bdc13d40ea8ddc8f93f26957bade8219a1d86
+>
+> +[http://ftp.gnu.org/pub/gnu/guile/guile-1.8.7.tar.gz]
+> +md5=991b5b3efcbbc3f7507d05bc42f80a5e
+> +sha256=bfee6339d91955a637e7f541d96f5b1d53271b42bb4a37b8867d186a6c66f0b3
+> +
+>   [http://gupnp.org/sources/gupnp/gupnp-0.12.2.tar.gz]
+>   md5=5350f5f28fb3742779702a496ab75d72
+>   sha256=9e4edb3ca6d11e397d9f98537fa8954851dc044d13ecafd4f4547117cefbdd28
+> diff --git a/recipes/guile/guile-native_1.8.7.bb b/recipes/guile/guile-native_1.8.7.bb
+> new file mode 100644
+> index 0000000..2f87c48
+> --- /dev/null
+> +++ b/recipes/guile/guile-native_1.8.7.bb
+> @@ -0,0 +1,5 @@
+> +require guile-native.inc
+> +SRC_URI = "http://ftp.gnu.org/pub/gnu/guile/guile-${PV}.tar.gz \
+> +           file://configure-fix.patch;patch=1 \
+> +           file://cpp-linemarkers.patch;patch=1 \
+> +          "
+> diff --git a/recipes/guile/guile_1.8.7.bb b/recipes/guile/guile_1.8.7.bb
+> new file mode 100644
+> index 0000000..6889f33
+> --- /dev/null
+> +++ b/recipes/guile/guile_1.8.7.bb
+> @@ -0,0 +1,6 @@
+> +require guile.inc
+> +
+> +SRC_URI = "http://ftp.gnu.org/pub/gnu/guile/guile-${PV}.tar.gz \
+> +           file://configure-fix.patch;patch=1 \
+> +          "
+> +
+>
+> ========================================================================
+> Robert P. J. Day                               Waterloo, Ontario, CANADA
+>
+>              Linux Consulting, Training and Kernel Pedantry.
+>
+> Web page:                                          http://crashcourse.ca
+> Twitter:                                       http://twitter.com/rpjday
+> ========================================================================
 >
 > _______________________________________________
 > Openembedded-devel mailing list
