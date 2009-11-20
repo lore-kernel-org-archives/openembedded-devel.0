@@ -1,34 +1,24 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NBUaB-0005kj-L8 for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Nov 2009 15:35:34 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NBUYq-0005Lb-7j
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mickey@vanille-media.de>) id 1NBUfZ-0005uv-Oy
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Nov 2009 15:34:08 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2009 15:34:08 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Fri, 20 Nov 2009 15:41:08 +0100
+Received: from [192.168.1.150] (e180135046.adsl.alicedsl.de [85.180.135.46])
+	by drlauer-research.com (Postfix) with ESMTP id 24A39584AED
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2009 15:34:08 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 20 Nov 2009 16:26:23 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 20 Nov 2009 15:33:44 +0100
-Message-ID: <he69c8$h0c$1@ger.gmane.org>
+In-Reply-To: <200911201531.00181.marcin@juszkiewicz.com.pl>
 References: <he689r$c57$1@ger.gmane.org> <4B06A6A7.1080204@SSpaeth.de>
+	<200911201531.00181.marcin@juszkiewicz.com.pl>
+Organization: Vanille-Media
+Date: Fri, 20 Nov 2009 15:39:41 +0100
+Message-ID: <1258727981.13348.7.camel@opal>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-In-Reply-To: <4B06A6A7.1080204@SSpaeth.de>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: MACHINE_FEATURE changes
@@ -45,47 +35,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Nov 2009 14:35:34 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 20 Nov 2009 14:41:08 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 20-11-09 15:24, Sebastian Spaeth wrote:
-> Koen Kooi wrote:
->> Can someone please explain to me what
->>
->> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=1bfa409a3a28cee60c4800d3caf33ce3f100d4ca
->> is trying to accomplish? It looks like this makes task-base unusable on
->> om-gta0X, am I right?
->
-> FSO/SHR based distros use fso-apm rather than "apm".
-> Using PROVIDES in fso-apm however means that it's pulled into other
-> distros too.
+Am Freitag, den 20.11.2009, 15:30 +0100 schrieb Marcin Juszkiewicz:
+> Dnia pi=C4=85tek, 20 listopada 2009 o 15:24:39 Sebastian Spaeth napisa=C5=
+=82(a):
+>=20
+> > Better suggestions on how to achieve this are welcome.
+>=20
+> In distro config:
+>=20
+> MACHINE_FEATURES_om-gta01 =3D "this that those butnoapm"
+>=20
+> This way your distro has what you want and others have what was set in =
+machine=20
+> config.
 
-Which we do not want.
+Good idea.
 
-> We could do this with a virtual/apm but that would mean we need to set a
-> preferred provider for all other distros too.
+For the records though, I would consider it being the machine
+maintainer's call to define the machine config. If he decides that apm
+is very misleading on said machine, perhaps because without taking
+special care about the peripheral devices there will no be proper
+suspend in the first place, then I might be inclined to follow this
+reasoning and leave apm out there...
 
-So instead you just broke all other distros.
+:M:
 
-> So the least intrusive change seemed to remove apm from om-gtaX.
-
-Except that you just broke all other distros.
-
-> Mickey (informally) agreed with me, and as this change is very limited
-> in scope, it went in. It is more distro than machine-specific I have to
-> admit.
->
-> Better suggestions on how to achieve this are welcome.
-
-Change task-base and task-boot to use APM =? "apm" and set APM = 
-"fso-apm" in your distro.
-
-Please revert the cset since it breaks every distro except SHR[1].
-
-annoyed,
-
-Koen
 
 
 
