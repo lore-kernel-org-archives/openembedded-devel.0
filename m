@@ -1,24 +1,27 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1NBUfZ-0005uv-Oy
+Received: from caiajhbdcaid.dreamhost.com ([208.97.132.83]
+	helo=homiemail-a22.g.dreamhost.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <Sebastian@SSpaeth.de>) id 1NBUhV-00062J-UY
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Nov 2009 15:41:08 +0100
-Received: from [192.168.1.150] (e180135046.adsl.alicedsl.de [85.180.135.46])
-	by drlauer-research.com (Postfix) with ESMTP id 24A39584AED
+	Fri, 20 Nov 2009 15:43:09 +0100
+Received: from [192.168.1.154] (unknown [195.190.181.110])
+	by homiemail-a22.g.dreamhost.com (Postfix) with ESMTPA id 359281A807E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2009 16:26:23 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Fri, 20 Nov 2009 06:41:39 -0800 (PST)
+Message-ID: <4B06AAA0.7070903@SSpaeth.de>
+Date: Fri, 20 Nov 2009 15:41:36 +0100
+From: Sebastian Spaeth <Sebastian@SSpaeth.de>
+Organization: ETH Zurich
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <200911201531.00181.marcin@juszkiewicz.com.pl>
 References: <he689r$c57$1@ger.gmane.org> <4B06A6A7.1080204@SSpaeth.de>
-	<200911201531.00181.marcin@juszkiewicz.com.pl>
-Organization: Vanille-Media
-Date: Fri, 20 Nov 2009 15:39:41 +0100
-Message-ID: <1258727981.13348.7.camel@opal>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+	<he69c8$h0c$1@ger.gmane.org>
+In-Reply-To: <he69c8$h0c$1@ger.gmane.org>
+X-Enigmail-Version: 0.95.7
+OpenPGP: id=C827A062
+X-SA-Exim-Connect-IP: 208.97.132.83
+X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: MACHINE_FEATURE changes
@@ -35,35 +38,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Nov 2009 14:41:08 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 20 Nov 2009 14:43:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Am Freitag, den 20.11.2009, 15:30 +0100 schrieb Marcin Juszkiewicz:
-> Dnia pi=C4=85tek, 20 listopada 2009 o 15:24:39 Sebastian Spaeth napisa=C5=
-=82(a):
->=20
-> > Better suggestions on how to achieve this are welcome.
->=20
-> In distro config:
->=20
-> MACHINE_FEATURES_om-gta01 =3D "this that those butnoapm"
->=20
-> This way your distro has what you want and others have what was set in =
-machine=20
-> config.
+Koen Kooi wrote:
 
-Good idea.
+> Please revert the cset since it breaks every distro except SHR[1].
 
-For the records though, I would consider it being the machine
-maintainer's call to define the machine config. If he decides that apm
-is very misleading on said machine, perhaps because without taking
-special care about the peripheral devices there will no be proper
-suspend in the first place, then I might be inclined to follow this
-reasoning and leave apm out there...
-
-:M:
-
-
+done
 
 
