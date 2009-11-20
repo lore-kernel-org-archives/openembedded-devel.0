@@ -1,22 +1,21 @@
 Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NBYWT-0002Fn-GV
+	(envelope-from <holger+oe@freyther.de>) id 1NBYan-0004sg-Ml
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Nov 2009 19:48:00 +0100
+	Fri, 20 Nov 2009 19:52:28 +0100
 Received: from tamarin.localnet (siminn-int-gw.on-waves.com [157.157.59.158])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 03C9A1B10C03
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 428F11B10C03
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2009 18:58:05 +0000 (UTC)
+	Fri, 20 Nov 2009 19:02:34 +0000 (UTC)
 From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Nov 2009 19:46:21 +0100
+Date: Fri, 20 Nov 2009 19:50:51 +0100
 User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <he689r$c57$1@ger.gmane.org>
-	<200911201531.00181.marcin@juszkiewicz.com.pl>
-	<1258727981.13348.7.camel@opal>
-In-Reply-To: <1258727981.13348.7.camel@opal>
+References: <he689r$c57$1@ger.gmane.org> <he69c8$h0c$1@ger.gmane.org>
+	<4B06AAA0.7070903@SSpaeth.de>
+In-Reply-To: <4B06AAA0.7070903@SSpaeth.de>
 MIME-Version: 1.0
-Message-Id: <200911201946.21779.holger+oe@freyther.de>
+Message-Id: <200911201950.51431.holger+oe@freyther.de>
 X-SA-Exim-Connect-IP: 78.46.147.237
 X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
@@ -35,27 +34,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Nov 2009 18:48:00 -0000
+X-List-Received-Date: Fri, 20 Nov 2009 18:52:28 -0000
 Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Friday 20 November 2009 15:39:41 Michael 'Mickey' Lauer wrote:
-> Am Freitag, den 20.11.2009, 15:30 +0100 schrieb Marcin Juszkiewicz:
-> > Dnia pi=C4=85tek, 20 listopada 2009 o 15:24:39 Sebastian Spaeth napisa=
-=C5=82(a):
-> > > Better suggestions on how to achieve this are welcome.
-> >
-> > In distro config:
-> >
-> > MACHINE_FEATURES_om-gta01 =3D "this that those butnoapm"
-> >
-> > This way your distro has what you want and others have what was set in
-> > machine config.
->=20
-> Good idea.
+On Friday 20 November 2009 15:41:36 Sebastian Spaeth wrote:
+> Koen Kooi wrote:
+> > Please revert the cset since it breaks every distro except SHR[1].
+> 
+> done
+
+One thing with the revert... you have a PR that went backwards. You will have 
+to figure out if that is a problem for your distro or not.
 
 
-Stupid question. What is fso-apm and what does it provide?
+holger
 
 
