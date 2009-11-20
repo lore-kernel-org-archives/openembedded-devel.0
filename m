@@ -1,26 +1,22 @@
-Received: from ey-out-1920.google.com ([74.125.78.144])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1NBPs9-0003PC-8U
+	(envelope-from <holger+oe@freyther.de>) id 1NBPzz-0003cN-FO
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Nov 2009 10:33:48 +0100
-Received: by ey-out-1920.google.com with SMTP id 3so283057eyh.4
+	Fri, 20 Nov 2009 10:41:54 +0100
+Received: from tamarin.localnet (siminn-int-gw.on-waves.com [157.157.59.158])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id D9FAC1B10C04
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2009 01:32:22 -0800 (PST)
-Received: by 10.213.1.5 with SMTP id 5mr2587498ebd.21.1258709541254;
-	Fri, 20 Nov 2009 01:32:21 -0800 (PST)
-Received: from localhost (lumison.wolfsonmicro.com [87.246.78.27])
-	by mx.google.com with ESMTPS id 28sm325485eye.9.2009.11.20.01.32.20
-	(version=SSLv3 cipher=RC4-MD5); Fri, 20 Nov 2009 01:32:21 -0800 (PST)
-Date: Fri, 20 Nov 2009 09:32:20 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Fri, 20 Nov 2009 09:51:58 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091120093220.61196d38@xora.org.uk>
-In-Reply-To: <alpine.LFD.2.00.0911200415360.22257@localhost>
+Date: Fri, 20 Nov 2009 10:40:17 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
 References: <alpine.LFD.2.00.0911200415360.22257@localhost>
-X-Mailer: Claws Mail 3.7.3 (GTK+ 2.18.3; i686-redhat-linux-gnu)
-Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 74.125.78.144
-X-SA-Exim-Mail-From: dp@xora.org.uk
+In-Reply-To: <alpine.LFD.2.00.0911200415360.22257@localhost>
+MIME-Version: 1.0
+Message-Id: <200911201040.17657.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: FYI, non-fatal fetch errors for ffmpeg
@@ -37,24 +33,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Nov 2009 09:33:48 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Fri, 20 Nov 2009 09:41:54 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On Fri, 20 Nov 2009 04:20:25 -0500 (EST)
-"Robert P. J. Day" <rpjday@crashcourse.ca> wrote:
+On Friday 20 November 2009 10:20:25 Robert P. J. Day wrote:
 
-> 
->   in the midst of a bb-demo-image build:
-
-> 
 >   obviously, the fetch of ffmpeg eventually works, but any value in
 > cleaning up the initial fetch errors?
-> 
-Is it April 1st in your locale????????
 
-This is normal operation of fetch module. Which is long documented.
+This is normal operation. The reasoning is that we want to be good to the 
+upstream infrastructure and don't want all OE users hammer on the SCM Servers 
+of the upstream project to checkout a static tarball.
 
-Graeme
+This is why OE tries to download a snapshot from a tarball stash, in your case 
+two have been tried and then it falls back to the SCM of the upstream 
+directly.
+
+Now one can argue that another output on the console would be nice... but so 
+far no one has been bothered enough to do it. Help is greatly appreciated and 
+I can point you to the places in bitbake and classes/base.bbclass.
+
+possible output
+
+Trying to find tarball for ffmpeg revision XYZ:
+    ... trying www.foo-mirror.org/... FAIL
+   .... trying wwww.bla-mirror.org/ ... FAIL
+
+Couldn't find a tarball for ffmpeg revision XYZ, checking it out..
+
+wget starts
+
 
 
