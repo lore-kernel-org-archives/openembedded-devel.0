@@ -1,35 +1,24 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NBSiz-0005Dg-1S for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Nov 2009 13:36:32 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NBShb-0007f8-W1
+	(envelope-from <philip@balister.org>) id 1NBSpf-0005N3-Gh
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Nov 2009 13:35:04 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2009 13:35:03 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Nov 2009 13:35:03 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 20 Nov 2009 13:43:26 +0100
+Received: (qmail 12008 invoked by uid 1003); 20 Nov 2009 12:41:57 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 20 Nov 2009 12:41:57 -0000
+Message-ID: <4B068E93.1030501@balister.org>
+Date: Fri, 20 Nov 2009 07:41:55 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
+	Thunderbird/3.0b4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 20 Nov 2009 13:30:44 +0100
-Message-ID: <he625k$ni0$2@ger.gmane.org>
-References: <alpine.LFD.2.00.0911200514430.18485@localhost>
-	<4B068A46.8090701@balister.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-In-Reply-To: <4B068A46.8090701@balister.org>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <alpine.LFD.2.00.0911200514430.18485@localhost>	<4B068A46.8090701@balister.org>
+	<alpine.LFD.2.00.0911200728270.9326@localhost>
+In-Reply-To: <alpine.LFD.2.00.0911200728270.9326@localhost>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [PATCH] Upgrade guile from 1.8.6 to 1.8.7.
@@ -46,24 +35,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Nov 2009 12:36:32 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 20 Nov 2009 12:43:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 20-11-09 13:23, Philip Balister wrote:
+Dont't worry, I already applied it. The notes are for future reference.
 
-> 2) You can include the checksums in the recipe now. See:
+On 11/20/2009 07:28 AM, Robert P. J. Day wrote:
+> On Fri, 20 Nov 2009, Philip Balister wrote:
 >
-> http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/curl/curl_7.19.7.bb
+>> I applied this. A couple of comments for the future:
+>>
+>> 1) Make the commit message "guile: Upgrade from 1.8.6 to 1.8.7" for
+>> consistency.
+>>
+>> 2) You can include the checksums in the recipe now. See:
+>>
+>> http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/curl/curl_7.19.7.bb
+>>
+>> look in the curl-common.inc file for the "tarball" naming.
+>>
+>> Thanks,
+>>
+>> Philip
 >
-> look in the curl-common.inc file for the "tarball" naming.
-
-Is there a script to do that for me? If not, I'll continue to use 
-checksums.ini, since that's scriptable :)
-
-regards,
-
-Koen
-
+>    ok, will resubmit properly shortly.  thanks.
+>
+> rday
+> --
+> ========================================================================
+> Robert P. J. Day                               Waterloo, Ontario, CANADA
+>
+>              Linux Consulting, Training and Kernel Pedantry.
+>
+> Web page:                                          http://crashcourse.ca
+> Twitter:                                       http://twitter.com/rpjday
+> ========================================================================
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
