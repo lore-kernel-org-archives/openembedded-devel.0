@@ -1,34 +1,39 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-out.m-online.net ([212.18.0.10])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NBmEd-0005lz-Mx for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Nov 2009 10:26:30 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NBmDH-0003Hg-L8
+	(envelope-from <mok@mnet-online.de>) id 1NBmlN-0000Kg-Nl
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Nov 2009 10:25:03 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Nov 2009 10:25:03 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Sat, 21 Nov 2009 11:00:20 +0100
+Received: from mail01.m-online.net (mail.m-online.net [192.168.3.149])
+	by mail-out.m-online.net (Postfix) with ESMTP id E396B1C0028F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Nov 2009 10:25:03 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat, 21 Nov 2009 10:58:53 +0100 (CET)
+Received: from localhost (dynscan2.mnet-online.de [192.168.1.215])
+	by mail.m-online.net (Postfix) with ESMTP id AE1E49176F
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 21 Nov 2009 10:58:53 +0100 (CET)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.3.149])
+	by localhost (dynscan2.mnet-online.de [192.168.1.215]) (amavisd-new,
+	port 10024) with ESMTP id nHV85CgYUFTX
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 21 Nov 2009 10:58:51 +0100 (CET)
+Received: from mrdenker.palutemo (ppp-82-135-69-249.dynamic.mnet-online.de
+	[82.135.69.249]) by mail.mnet-online.de (Postfix) with SMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 21 Nov 2009 10:58:51 +0100 (CET)
+Received: by mrdenker.palutemo (sSMTP sendmail emulation);
+	Sat, 21 Nov 2009 10:58:51 +0100
+Date: Sat, 21 Nov 2009 10:58:51 +0100
+From: Klaus 'mrmoku' Kurzmann <mok@mnet-online.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 21 Nov 2009 10:22:05 +0100
-Message-ID: <he8bft$ttd$2@ger.gmane.org>
+Message-ID: <20091121095851.GA29264@mrdenker.palutemo>
 References: <1258755695-24978-1-git-send-email-mok@mnet-online.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-In-Reply-To: <1258755695-24978-1-git-send-email-mok@mnet-online.de>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	<he8bft$ttd$2@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <he8bft$ttd$2@ger.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-08-17)
+X-SA-Exim-Connect-IP: 212.18.0.10
+X-SA-Exim-Mail-From: mok@mnet-online.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [RFC] extra packages for default illume keyboards
@@ -45,28 +50,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Nov 2009 09:26:30 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 21 Nov 2009 10:00:20 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 20-11-09 23:21, mok@mnet-online.de wrote:
->
-> Hello all,
->
-> For SHR we want to be able to remove illumes default keyboard as most people
-> don't like it. To be able to do this nicely via the package manager we need to
-> have them in extra packages.
->
-> The first patch just moves a bunch of custom illume keyboards to the correct
-> place (at least I think so :)
+On Sat, 21 Nov 2009, Koen Kooi wrote:
 
-I can't really see why all those keyboards need to have a different 
-recipe, it looks like a single recipe could generate all the needed 
-packages, no?
+> On 20-11-09 23:21, mok@mnet-online.de wrote:
+> >
+> >Hello all,
+> >
+> >For SHR we want to be able to remove illumes default keyboard as most people
+> >don't like it. To be able to do this nicely via the package manager we need to
+> >have them in extra packages.
+> >
+> >The first patch just moves a bunch of custom illume keyboards to the correct
+> >place (at least I think so :)
 
-regards,
+> I can't really see why all those keyboards need to have a different
+> recipe, it looks like a single recipe could generate all the needed
+> packages, no?
+for the three default keyboards from illume it is one recipe. For the
+others... I could do one illume-keyboards-shr_git.bb for them if that is
+preferred. Might be cleaner, yes.
 
-Koen
+> regards,
 
+> Koen
+
+-- 
+Klaus 'mrmoku' Kurzmann
 
 
