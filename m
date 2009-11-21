@@ -1,46 +1,40 @@
-Received: from mail-ew0-f216.google.com ([209.85.219.216])
+Received: from mail-pw0-f53.google.com ([209.85.160.53])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <javieralso@gmail.com>) id 1NBuuI-0001Sy-Ga
+	(envelope-from <darkstar6262@gmail.com>) id 1NBwxk-0004Ha-Lv
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Nov 2009 19:42:05 +0100
-Received: by ewy8 with SMTP id 8so604415ewy.12
+	Sat, 21 Nov 2009 21:53:47 +0100
+Received: by pwj11 with SMTP id 11so2711682pwj.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Nov 2009 10:40:36 -0800 (PST)
+	Sat, 21 Nov 2009 12:52:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:in-reply-to:references:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	bh=17slbTVhn6r9iwwD8L6yoYt2vNuIAlBOVpG2Qdp81h0=;
-	b=eqey+EccmGmZ8K0jYVpEo2Oe12ueBIH4EOS/l/JgEKyipHtRVks9gPeEMyDvR0k86i
-	y+e6TNOy4KfydenKPSa9TfPMVftSuhdFNyaGzy59m+6LkYrhH1rTSmEzLgyXQ0LtpAAu
-	ql7i5n1655mdZNBGCS/yf64X4+p033EoRBVB0=
+	h=domainkey-signature:received:received:subject:from:to:content-type
+	:date:message-id:mime-version:x-mailer:content-transfer-encoding;
+	bh=CFDzJUyqmciinAiD8aXoMNQGn9b3ODCDRf8cnW+x7ls=;
+	b=UzApNYB8JbN6EgNJUAOTDLo4L7joW0Ymz7qFHllw+MuaYqEtZDnroz01acAtT1D+De
+	gvwdXsCLp43lH03CO5/zETP7C2fVcaF7TgPh2mxxTaQvhPUI1Uy9AfaTiCZB8PliRKCu
+	ZtmtGwMOFDjNH+ei5B7JpT8ZbVal8SqyZoTr4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:in-reply-to:references:x-mailer
-	:mime-version:content-type:content-transfer-encoding;
-	b=NEyHTXSVVtphd4/gXrvLQob+X636o+oS9OU28UON0FUnlwJwPnpGP7XcmFJabkqLSV
-	/NZSwY884Qvon22ZRLbXil9doEbVmDzYOKw5JdMne9IrDab0uagdi4FnnzJ8RzgnJ+dX
-	Qn0OG7SVVI8UUaTbeWZTKUkTrISArb3bnMCLs=
-Received: by 10.213.24.2 with SMTP id t2mr1666738ebb.23.1258828835955;
-	Sat, 21 Nov 2009 10:40:35 -0800 (PST)
-Received: from Gorodetsky ([95.214.11.136])
-	by mx.google.com with ESMTPS id 28sm659040eyg.12.2009.11.21.10.40.33
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 21 Nov 2009 10:40:35 -0800 (PST)
-Date: Sat, 21 Nov 2009 19:41:24 +0100
-From: Javier Almansa Sobrino <javieralso@gmail.com>
+	h=subject:from:to:content-type:date:message-id:mime-version:x-mailer
+	:content-transfer-encoding;
+	b=hi2JGuWCfuTmkMVl/4yik2BFHGbaHupE2+JzG/MdRxicgcIi1xublvoyND6xc/2eBj
+	lh7mmhsCFgaOVZZU+RADrYyfJgOpqMK/WlUM5t0+H95WCLH3/POfYF9/NBS/UiBW/mLV
+	zriTUgPMHZyxEyxj8eOgpFoMtUmT+ZSsgnPqw=
+Received: by 10.115.81.21 with SMTP id i21mr4619312wal.125.1258836737140;
+	Sat, 21 Nov 2009 12:52:17 -0800 (PST)
+Received: from ?192.168.0.102? (97-126-104-157.tukw.qwest.net [97.126.104.157])
+	by mx.google.com with ESMTPS id 20sm1797787pxi.15.2009.11.21.12.52.16
+	(version=SSLv3 cipher=RC4-MD5); Sat, 21 Nov 2009 12:52:16 -0800 (PST)
+From: Cory Maccarrone <darkstar6262@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091121194124.04fb19e2@Gorodetsky>
-In-Reply-To: <d1b08f940911201429g31d37920n704868df08015f3f@mail.gmail.com>
-References: <20091120172438.3e6f603e@Gorodetsky>
-	<200911202055.21122.david.lanzendoerfer@o2s.ch>
-	<d1b08f940911201429g31d37920n704868df08015f3f@mail.gmail.com>
-X-Mailer: Claws Mail 3.7.3 (GTK+ 2.18.3; i486-pc-linux-gnu)
+Date: Sat, 21 Nov 2009 12:52:15 -0800
+Message-ID: <1258836735.21876.2.camel@runt>
 Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 209.85.219.216
-X-SA-Exim-Mail-From: javieralso@gmail.com
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 209.85.160.53
+X-SA-Exim-Mail-From: darkstar6262@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Error building opie-image
+Subject: [STABLE] [PATCH] base.bbclass: Replace os.system with subprocess call.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,51 +48,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Nov 2009 18:42:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 21 Nov 2009 20:53:47 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Fri, 20 Nov 2009 23:29:58 +0100
-Andrea Adami <andrea.adami@gmail.com> wrote:
+(This patch is being submitted on behalf of Khem Raj.  I am not the original
+author, nor do I claim any part of this work.)
+--------------
 
-> Hello,
->=20
-> the issue with opie-networksettings appears with the new kernel headers.
-> Quick fix you could try:
->=20
-> wextensions.h
->=20
-> 6c6
-> -#include <net/if.h>
-> +//#include <net/if.h>
->=20
-> Code is now in <linux/wireless.h>
->=20
-> Regards
->=20
-> Andrea
->=20
+Often gzip is reporting broken pipe errors with do_unpack of
+tar.gz files.
 
-Ok, it fix my problem and the compilation finished OK. Thanks a lot.
+If you use the commands described above to extract a tar.gz file, gzip
+sometimes emits a Broken pipe error message. This can safely be ignored
+if tar extracted all files without any other error message.
 
+We do not let python install its SIGPIPE handler and use subprocess call
+to invoke the command.
 
---=20
-I can remeber the exact instant when I relized that a large
-part of my life from then on was going to be spent in finding
-mistakes in my own programs.
+This is based on the following python bug report.
+http://bugs.python.org/issue1652
 
--- Maurice Wilkes, Head of the Computer Laboratory
-   of the University of Cambridge, 1949 --
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ classes/base.bbclass |    9 +++++++--
+ 1 files changed, 7 insertions(+), 2 deletions(-)
 
---------------------------------
-Javier Almansa Sobrino.
-Ingeniero T=C3=A9cnico en Inform=C3=A1tica de Sistemas.
+diff --git a/classes/base.bbclass b/classes/base.bbclass
+index e622aee..69d1979 100644
+--- a/classes/base.bbclass
++++ b/classes/base.bbclass
+@@ -716,9 +716,14 @@ base_do_buildall() {
+ 	:
+ }
+ 
++def subprocess_setup():
++	import signal, subprocess
++	# Python installs a SIGPIPE handler by default. This is usually not what
++	# non-Python subprocesses expect.
++	signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+ 
+ def oe_unpack_file(file, data, url = None):
+-	import bb, os
++	import bb, os, signal, subprocess
+ 	if not url:
+ 		url = "file://%s" % file
+ 	dots = file.split(".")
+@@ -787,7 +792,7 @@ def oe_unpack_file(file, data, url = None):
+ 
+ 	cmd = "PATH=\"%s\" %s" % (bb.data.getVar('PATH', data, 1), cmd)
+ 	bb.note("Unpacking %s to %s/" % (base_path_out(file, data), base_path_out(os.getcwd(), data)))
+-	ret = os.system(cmd)
++	ret = subprocess.call(cmd, preexec_fn=subprocess_setup, shell=True)
+ 
+ 	os.chdir(save_cwd)
+ 
+-- 
+1.6.3.3
 
-FSF #7032 Member (www.fsf.com)
-
-Grupo de Investigaci=C3=B3n ARCo.
-Escuela Superior de Inform=C3=A1tica. Ciudad Real
-Tel: (+34)926 29 53 00 Ext: 3705
 
 
 
