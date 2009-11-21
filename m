@@ -1,39 +1,29 @@
-Received: from mail-out.m-online.net ([212.18.0.9])
+Received: from smtp-out13.alice.it ([85.33.2.18])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mok@mnet-online.de>) id 1NBc0r-0002zW-VR
+	(envelope-from <GNUtoo@no-log.org>) id 1NBj0y-00047q-3C
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Nov 2009 23:31:36 +0100
-Received: from mail01.m-online.net (mail.m-online.net [192.168.3.149])
-	by mail-out.m-online.net (Postfix) with ESMTP id A37861C160C4;
-	Fri, 20 Nov 2009 23:21:44 +0100 (CET)
-Received: from localhost (dynscan2.mnet-online.de [192.168.1.215])
-	by mail.m-online.net (Postfix) with ESMTP id 9D444912F2;
-	Fri, 20 Nov 2009 23:21:44 +0100 (CET)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.3.149])
-	by localhost (dynscan2.mnet-online.de [192.168.1.215]) (amavisd-new,
-	port 10024)
-	with ESMTP id 2YFAwegK7GIl; Fri, 20 Nov 2009 23:21:43 +0100 (CET)
-Received: from mrdenker.palutemo (ppp-82-135-69-249.dynamic.mnet-online.de
-	[82.135.69.249]) by mail.mnet-online.de (Postfix) with SMTP;
-	Fri, 20 Nov 2009 23:21:43 +0100 (CET)
-Received: by mrdenker.palutemo (sSMTP sendmail emulation);
-	Fri, 20 Nov 2009 23:21:43 +0100
-From: mok@mnet-online.de
+	Sat, 21 Nov 2009 07:00:11 +0100
+Received: from FBCMMO04.fbc.local ([192.168.184.135]) by smtp-out13.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 21 Nov 2009 06:57:39 +0100
+Received: from FBCMCL01B03.fbc.local ([192.168.69.84]) by FBCMMO04.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 21 Nov 2009 06:55:59 +0100
+Received: from [192.168.1.116] ([80.117.39.202]) by FBCMCL01B03.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Sat, 21 Nov 2009 06:55:58 +0100
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Nov 2009 23:21:35 +0100
-Message-Id: <1258755695-24978-4-git-send-email-mok@mnet-online.de>
-X-Mailer: git-send-email 1.6.5.2
-In-Reply-To: <1258755695-24978-3-git-send-email-mok@mnet-online.de>
-References: <1258755695-24978-1-git-send-email-mok@mnet-online.de>
-	<1258755695-24978-2-git-send-email-mok@mnet-online.de>
-	<1258755695-24978-3-git-send-email-mok@mnet-online.de>
-X-SA-Exim-Connect-IP: 212.18.0.9
-X-SA-Exim-Mail-From: mok@mnet-online.de
+Date: Sat, 21 Nov 2009 06:55:56 +0100
+Message-Id: <1258782956.5424.17.camel@gnutoo-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-OriginalArrivalTime: 21 Nov 2009 05:55:58.0523 (UTC)
+	FILETIME=[4C2A38B0:01CA6A6F]
+X-SA-Exim-Connect-IP: 85.33.2.18
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Klaus Kurzmann <mok@fluxnetz.de>
-Subject: [PATCH 3/3] illume-keyboard-default: new recipe for default illume keyboards as e-wm does not install them anymore (via a patch to the makefile), we can put them in extra packages.
+Subject: wrong checksum for libsdl-mixer-1.2.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,82 +37,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Nov 2009 22:31:37 -0000
+X-List-Received-Date: Sat, 21 Nov 2009 06:00:11 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-From: Klaus Kurzmann <mok@fluxnetz.de>
+hi, I've a bad checksum for SDL_mixer-1.2.9.tar.gz
+I've tried to download it a second time and the bad checksum persist:
+NOTE: Handling BitBake files: / (7861/7861) [100 %]
+NOTE: Parsing finished. 7056 cached, 461 parsed, 344 skipped, 0 masked.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 885 of 1396 (ID:
+209, /home/embedded/oe/org.openembedded.dev/recipes/libsdl/libsdl-mixer_1.2.9.bb, do_fetch)
+NOTE: fetch http://build.shr-project.org/sources/SDL_mixer-1.2.9.tar.gz
+--2009-11-21 06:37:49--
+http://build.shr-project.org/sources/SDL_mixer-1.2.9.tar.gz
+Resolving build.shr-project.org... 78.40.125.6
+Connecting to build.shr-project.org|78.40.125.6|:80... connected.
+HTTP request sent, awaiting response... 404 Not Found
+2009-11-21 06:37:50 ERROR 404: Not Found.
 
-Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
----
- conf/distro/include/sane-srcrevs.inc       |    3 ++
- recipes/e17/illume-keyboard-default_svn.bb |   43 ++++++++++++++++++++++++++++
- 2 files changed, 46 insertions(+), 0 deletions(-)
- create mode 100644 recipes/e17/illume-keyboard-default_svn.bb
+NOTE: fetch
+http://www.libsdl.org/projects/SDL_mixer/release/SDL_mixer-1.2.9.tar.gz
+--2009-11-21 06:37:50--
+http://www.libsdl.org/projects/SDL_mixer/release/SDL_mixer-1.2.9.tar.gz
+Resolving www.libsdl.org... 69.163.143.10
+Connecting to www.libsdl.org|69.163.143.10|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2690766 (2.6M) [application/x-tar]
+Saving to: `/home/embedded/sources/SDL_mixer-1.2.9.tar.gz'
 
-diff --git a/conf/distro/include/sane-srcrevs.inc b/conf/distro/include/sane-srcrevs.inc
-index f8e06ea..52c808f 100644
---- a/conf/distro/include/sane-srcrevs.inc
-+++ b/conf/distro/include/sane-srcrevs.inc
-@@ -412,6 +412,9 @@ SRCREV_pn-illume ?= "${EFL_SRCREV}"
- SRCREV_pn-illume-theme-illume ?= "${EFL_SRCREV}"
- SRCREV_pn-waker ?= "${EFL_SRCREV}"
- 
-+#illume default keyboards
-+SRCREV_pn-illume-keyboard-default ?= "${EFL_SRCREV}"
-+
- #exalt
- SRCREV_pn-exalt ?= "${EFL_SRCREV}"
- SRCREV_pn-exalt-client ?= "${EFL_SRCREV}"
-diff --git a/recipes/e17/illume-keyboard-default_svn.bb b/recipes/e17/illume-keyboard-default_svn.bb
-new file mode 100644
-index 0000000..90b09b2
---- /dev/null
-+++ b/recipes/e17/illume-keyboard-default_svn.bb
-@@ -0,0 +1,43 @@
-+DESCRIPTION = "The illume default keyboards"
-+SECTION = "x11/data"
-+SRCNAME = "e"
-+PV = "0.16.999.060+svnr${SRCPV}"
-+PR = "r0"
-+
-+SRC_URI = "svn://svn.enlightenment.org/svn/e/trunk;module=${SRCNAME};proto=http"
-+S = "${WORKDIR}/${SRCNAME}"
-+
-+PACKAGE_ARCH = "all"
-+
-+BASEDIR = "modules/illume/keyboards"
-+INSTFILES = "\
-+Default.kbd \
-+alpha.png \
-+Numbers.kbd \
-+numeric.png \
-+Terminal.kbd \
-+qwerty.png \
-+"
-+
-+PACKAGES = "${PN}-alpha ${PN}-numeric ${PN}-terminal"
-+
-+FILES_${PN}-alpha = "\
-+${libdir}/enlightenment/modules/illume/keyboards/Default.kbd \
-+${libdir}/enlightenment/modules/illume/keyboards/alpha.png \
-+"
-+FILES_${PN}-numeric = "\
-+${libdir}/enlightenment/modules/illume/keyboards/Numeric.kbd \
-+${libdir}/enlightenment/modules/illume/keyboards/numeric.png \
-+"
-+FILES_${PN}-terminal = "\
-+${libdir}/enlightenment/modules/illume/keyboards/Terminal.kbd \
-+${libdir}/enlightenment/modules/illume/keyboards/qwerty.png \
-+"
-+
-+do_install() {
-+	install -d ${D}${libdir}/enlightenment/modules/illume/keyboards
-+	for f in ${INSTFILES}; do
-+		install -m 0644 ${S}/${BASEDIR}/${f} ${D}${libdir}/enlightenment/modules/illume/keyboards/
-+	done
-+}
-+
--- 
-1.6.5.2
+100%[====[...]=====================>] 2,690,766    746K/s   in 4.5s    
+
+2009-11-21 06:38:00 (588 KB/s) -
+`/home/embedded/sources/SDL_mixer-1.2.9.tar.gz' saved [2690766/2690766]
+
+NOTE: The MD5Sums did not match. Wanted:
+'a9eb8750e920829ff41dbe7555850156' and Got:
+'09eb4585f46d3527fe7fce8af8f9e591'
+NOTE: Task failed: Checksum of
+'http://www.libsdl.org/projects/SDL_mixer/release/SDL_mixer-1.2.9.tar.gz' failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build
+of /home/embedded/oe/org.openembedded.dev/recipes/libsdl/libsdl-mixer_1.2.9.bb do_fetch failed
+ERROR: Task 209
+(/home/embedded/oe/org.openembedded.dev/recipes/libsdl/libsdl-mixer_1.2.9.bb, do_fetch) failed
+NOTE: Tasks Summary: Attempted 884 tasks of which 884 didn't need to be
+rerun and 1 failed.
+ERROR:
+'/home/embedded/oe/org.openembedded.dev/recipes/libsdl/libsdl-mixer_1.2.9.bb' failed
+
+I bet we should do like the last time in [oe] what to do with wrong
+checksum
+that is to say: mirror the old source(which I don't have obviously) in a
+distro's mirror
+
+Denis.
+
 
 
 
