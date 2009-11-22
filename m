@@ -1,40 +1,41 @@
-Received: from mail-pw0-f53.google.com ([209.85.160.53])
+Received: from mail-bw0-f217.google.com ([209.85.218.217])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <darkstar6262@gmail.com>) id 1NBwxk-0004Ha-Lv
+	(envelope-from <martin.jansa@gmail.com>) id 1NC3lV-00009W-4x
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Nov 2009 21:53:47 +0100
-Received: by pwj11 with SMTP id 11so2711682pwj.12
+	Sun, 22 Nov 2009 05:09:36 +0100
+Received: by bwz9 with SMTP id 9so4130934bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Nov 2009 12:52:17 -0800 (PST)
+	Sat, 21 Nov 2009 20:08:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:subject:from:to:content-type
-	:date:message-id:mime-version:x-mailer:content-transfer-encoding;
-	bh=CFDzJUyqmciinAiD8aXoMNQGn9b3ODCDRf8cnW+x7ls=;
-	b=UzApNYB8JbN6EgNJUAOTDLo4L7joW0Ymz7qFHllw+MuaYqEtZDnroz01acAtT1D+De
-	gvwdXsCLp43lH03CO5/zETP7C2fVcaF7TgPh2mxxTaQvhPUI1Uy9AfaTiCZB8PliRKCu
-	ZtmtGwMOFDjNH+ei5B7JpT8ZbVal8SqyZoTr4=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=1LOMg0QCRF80ZVID3nEqEiuJnTPg8BJfTjrRx1dDs9c=;
+	b=fJSw7AWSTanDaDCfZsGdeuGXrYBErxhbFpWegHPWHCe8gjGU9U3Qaru5r14CuQkmiU
+	kwXvzpTC0sriiweoCpgFWFpoZ2Fu5fhHzIfM9Qo78J23X7/Um22R5A/Pv3hcC4LvBRzJ
+	zKnNVavQHpkH5lVjQfIMEq2IiUbPYWwLlxta4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=subject:from:to:content-type:date:message-id:mime-version:x-mailer
-	:content-transfer-encoding;
-	b=hi2JGuWCfuTmkMVl/4yik2BFHGbaHupE2+JzG/MdRxicgcIi1xublvoyND6xc/2eBj
-	lh7mmhsCFgaOVZZU+RADrYyfJgOpqMK/WlUM5t0+H95WCLH3/POfYF9/NBS/UiBW/mLV
-	zriTUgPMHZyxEyxj8eOgpFoMtUmT+ZSsgnPqw=
-Received: by 10.115.81.21 with SMTP id i21mr4619312wal.125.1258836737140;
-	Sat, 21 Nov 2009 12:52:17 -0800 (PST)
-Received: from ?192.168.0.102? (97-126-104-157.tukw.qwest.net [97.126.104.157])
-	by mx.google.com with ESMTPS id 20sm1797787pxi.15.2009.11.21.12.52.16
-	(version=SSLv3 cipher=RC4-MD5); Sat, 21 Nov 2009 12:52:16 -0800 (PST)
-From: Cory Maccarrone <darkstar6262@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=HIZ4tL+NTTiLorbLKs2XVkq6l6es3qY2E7z2pprc61DOlhQJArzhQagnRixnr9D9KI
+	ap8ku+4O8nu1mZ+bLsGmdkt8Cr+DSt6mm0L6cf9geJxZBlVtIrhkqb0i1lzGsGH/iTPi
+	QBXV5S2943bID0ZzerCN59eW9T8xzU1FXDnTQ=
+Received: by 10.204.33.193 with SMTP id i1mr3241654bkd.75.1258862886257;
+	Sat, 21 Nov 2009 20:08:06 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 13sm987188fxm.1.2009.11.21.20.08.05
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 21 Nov 2009 20:08:05 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Nov 2009 12:52:15 -0800
-Message-ID: <1258836735.21876.2.camel@runt>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 209.85.160.53
-X-SA-Exim-Mail-From: darkstar6262@gmail.com
+Date: Sun, 22 Nov 2009 05:08:00 +0100
+Message-Id: <1258862880-17496-2-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.6.5.3
+In-Reply-To: <1258862880-17496-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1258862880-17496-1-git-send-email-Martin.Jansa@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [STABLE] [PATCH] base.bbclass: Replace os.system with subprocess call.
+Subject: [PATCH 2/2] kernel.bbclass: deploy both stripped and non-stripped modules in tgz
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,64 +49,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Nov 2009 20:53:47 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 22 Nov 2009 04:09:36 -0000
 
-(This patch is being submitted on behalf of Khem Raj.  I am not the original
-author, nor do I claim any part of this work.)
---------------
-
-Often gzip is reporting broken pipe errors with do_unpack of
-tar.gz files.
-
-If you use the commands described above to extract a tar.gz file, gzip
-sometimes emits a Broken pipe error message. This can safely be ignored
-if tar extracted all files without any other error message.
-
-We do not let python install its SIGPIPE handler and use subprocess call
-to invoke the command.
-
-This is based on the following python bug report.
-http://bugs.python.org/issue1652
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+* Change name of old modules*.tgz file to modules*-dbg.tgz
+* Run do_strip_modules in PKGDEST for every package and then in PKGD,
+  from where .tgz will be created, just because I haven't found where
+  do_strip_modules can be hooked, to be run only in PKGD before files
+  are copied to PKGDEST, or are they moved directly from source?
+* After do_strip_modules create modules*.tgz with stripped modules
 ---
- classes/base.bbclass |    9 +++++++--
- 1 files changed, 7 insertions(+), 2 deletions(-)
+ classes/kernel.bbclass       |    2 +-
+ classes/module_strip.bbclass |   26 ++++++++++++++++++++++++--
+ 2 files changed, 25 insertions(+), 3 deletions(-)
 
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index e622aee..69d1979 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -716,9 +716,14 @@ base_do_buildall() {
- 	:
+diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+index 637805e..335957d 100644
+--- a/classes/kernel.bbclass
++++ b/classes/kernel.bbclass
+@@ -528,7 +528,7 @@ do_deploy() {
+ 	package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
+ 
+ 	if [ -d "${D}/lib" ]; then
+-		fakeroot tar -cvzf ${DEPLOY_DIR_IMAGE}/${MODULES_IMAGE_BASE_NAME}.tgz -C ${D} lib
++		fakeroot tar -cvzf ${DEPLOY_DIR_IMAGE}/${MODULES_IMAGE_BASE_NAME}-dbg.tgz -C ${D} lib
+ 	fi
+ 
+ 	cd ${DEPLOY_DIR_IMAGE}
+diff --git a/classes/module_strip.bbclass b/classes/module_strip.bbclass
+index 1740919..d69acc0 100644
+--- a/classes/module_strip.bbclass
++++ b/classes/module_strip.bbclass
+@@ -13,14 +13,36 @@ do_strip_modules () {
+ 					if ! [ -d "$module"  ] ; then
+ 						${STRIP} -v -g $module
+ 					fi
+-				done	
+-#				NM="${CROSS_DIR}/bin/${HOST_PREFIX}nm" OBJCOPY="${CROSS_DIR}/bin/${HOST_PREFIX}objcopy" strip_module $modules
++				done
++#			      NM="${CROSS_DIR}/bin/${HOST_PREFIX}nm" OBJCOPY="${CROSS_DIR}/bin/${HOST_PREFIX}objcopy" strip_module $modules
+ 			fi
+ 		fi
+ 	done
++	if test -e ${PKGD}/lib/modules; then
++		if [ "${KERNEL_MAJOR_VERSION}" == "2.6" ]; then
++			modules="`find ${PKGD}/lib/modules -name \*.ko`"
++		else
++			modules="`find ${PKGD}/lib/modules -name \*.o`"
++		fi
++		if [ -n "$modules" ]; then
++			for module in $modules ; do
++				if ! [ -d "$module"  ] ; then
++					${STRIP} -v -g $module
++				fi
++			done	
++#			NM="${CROSS_DIR}/bin/${HOST_PREFIX}nm" OBJCOPY="${CROSS_DIR}/bin/${HOST_PREFIX}objcopy" strip_module $modules
++		fi
++	fi
++}
++
++do_deploy_stripped_modules () {
++	if [ -d "${PKGD}/lib" ]; then
++		fakeroot tar -cvzf ${DEPLOY_DIR_IMAGE}/${MODULES_IMAGE_BASE_NAME}.tgz -C ${PKGD} lib
++	fi
  }
  
-+def subprocess_setup():
-+	import signal, subprocess
-+	# Python installs a SIGPIPE handler by default. This is usually not what
-+	# non-Python subprocesses expect.
-+	signal.signal(signal.SIGPIPE, signal.SIG_DFL)
- 
- def oe_unpack_file(file, data, url = None):
--	import bb, os
-+	import bb, os, signal, subprocess
- 	if not url:
- 		url = "file://%s" % file
- 	dots = file.split(".")
-@@ -787,7 +792,7 @@ def oe_unpack_file(file, data, url = None):
- 
- 	cmd = "PATH=\"%s\" %s" % (bb.data.getVar('PATH', data, 1), cmd)
- 	bb.note("Unpacking %s to %s/" % (base_path_out(file, data), base_path_out(os.getcwd(), data)))
--	ret = os.system(cmd)
-+	ret = subprocess.call(cmd, preexec_fn=subprocess_setup, shell=True)
- 
- 	os.chdir(save_cwd)
- 
+ python do_package_append () {
+ 	if (bb.data.getVar('INHIBIT_PACKAGE_STRIP', d, 1) != '1'):
+ 		bb.build.exec_func('do_strip_modules', d)
++		bb.build.exec_func('do_deploy_stripped_modules', d)
+ }
 -- 
-1.6.3.3
-
+1.6.5.3
 
 
 
