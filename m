@@ -1,37 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NCBB4-0001Pf-Ls for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Nov 2009 13:04:29 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NCB9g-0000e5-LX
+Received: from mail.gmx.net ([213.165.64.20])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <bernhard.kaindl@gmx.net>) id 1NCBQu-0000ci-60
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Nov 2009 13:03:00 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Nov 2009 13:03:00 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Nov 2009 13:03:00 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 22 Nov 2009 13:20:51 +0100
+Received: (qmail invoked by alias); 22 Nov 2009 12:19:20 -0000
+Received: from 93-82-10-50.adsl.highway.telekom.at (EHLO
+	localhost.localdomain) [93.82.10.50]
+	by mail.gmx.net (mp048) with SMTP; 22 Nov 2009 13:19:20 +0100
+X-Authenticated: #154622
+X-Provags-ID: V01U2FsdGVkX18tSFNhx1YtEMCdsdft97rOZnLUveygfhmccUvt58
+	4SPsQouQHlgT9G
+From: Bernhard Kaindl <bernhard.kaindl@gmx.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 22 Nov 2009 13:02:34 +0100
-Message-ID: <heb98q$uh8$1@ger.gmane.org>
-References: <1258782956.5424.17.camel@gnutoo-desktop>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-In-Reply-To: <1258782956.5424.17.camel@gnutoo-desktop>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Sun, 22 Nov 2009 13:19:14 +0100
+Message-Id: <1258892354-24039-1-git-send-email-bernhard.kaindl@gmx.net>
+X-Mailer: git-send-email 1.6.5.2
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.58
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: bernhard.kaindl@gmx.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: wrong checksum for libsdl-mixer-1.2.9
+Subject: [PATCH] Fix setscene of binutils-cross-sdk_2.17: Switch binutils_2.17.bb to INC_PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,20 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Nov 2009 12:04:30 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 22 Nov 2009 12:20:51 -0000
 
-On 21-11-09 06:55, GNUtoo wrote:
-> hi, I've a bad checksum for SDL_mixer-1.2.9.tar.gz
-> I've tried to download it a second time and the bad checksum persist
+binutils_2.17.bb and binutils-cross-sdk_2.17.bb:
+ * All of the binutils-cross-sdk_*.bb recipes rely on their binutils_*.bb
+   recipe to define INC_PR, but binutils_2.17.bb does not define it, so
+   setscene of binutils-cross-sdk_2.17 fails because it does a mkdir of
+   work/.../binutils-cross-sdk-2.17-\$\{INC_PR\}.1/ which causes an abort
+   when trying to find the setscene scripts later.
+   Fix this by switching binutils_2.17.bb to INC_PR like silbings have done.
 
-I propose we delete the 1.2.9 recipe and switch to 1.2.10 or 1.2.11 as 
-the default.
+Signed-off-by: Bernhard Kaindl <bernhard.kaindl@gmx.net>
 
-regards,
+ binutils_2.17.bb |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Koen
-
+diff --git a/recipes/binutils/binutils_2.17.bb b/recipes/binutils/binutils_2.17.bb
+index fdee8a5..ceea7c6 100644
+--- a/recipes/binutils/binutils_2.17.bb
++++ b/recipes/binutils/binutils_2.17.bb
+@@ -1,7 +1,8 @@
+ require binutils.inc
+ require binutils-avr32.inc
+ 
+-PR = "r7"
++INC_PR = "r7"
++PR = "${INC_PR}.1"
+ 
+ SRC_URI = \
+     "http://ftp.gnu.org/gnu/binutils/binutils-${PV}.tar.bz2 \
 
 
