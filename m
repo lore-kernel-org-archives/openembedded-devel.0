@@ -1,27 +1,45 @@
-Received: from mail.gmx.net ([213.165.64.20])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <bernhard.kaindl@gmx.net>) id 1NCBQu-0000ci-60
+Received: from mail-yx0-f175.google.com ([209.85.210.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NCBSu-0000j7-9l
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Nov 2009 13:20:51 +0100
-Received: (qmail invoked by alias); 22 Nov 2009 12:19:20 -0000
-Received: from 93-82-10-50.adsl.highway.telekom.at (EHLO
-	localhost.localdomain) [93.82.10.50]
-	by mail.gmx.net (mp048) with SMTP; 22 Nov 2009 13:19:20 +0100
-X-Authenticated: #154622
-X-Provags-ID: V01U2FsdGVkX18tSFNhx1YtEMCdsdft97rOZnLUveygfhmccUvt58
-	4SPsQouQHlgT9G
-From: Bernhard Kaindl <bernhard.kaindl@gmx.net>
+	Sun, 22 Nov 2009 13:22:55 +0100
+Received: by yxe5 with SMTP id 5so1701107yxe.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 22 Nov 2009 04:21:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=CUbk0u8WBGtARomitWirqaFGcLLlf9iVr6EPsJ2beqo=;
+	b=xQCeXdGgK+KacVdtMjquHFaAySNA2v94LoBPuH8rYVJsvmW2GuwxpH3af9OekGsUbD
+	Mz4DUD28Y2SobdB+5h7olJOF9YYGkHbRKzcpwsLSN82tU3QPWyLP95IV+LHC0ivna4pP
+	NDtKdp0A2lz3twlsXoGzbj7ujQZAQIpsUOHSg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=TLklshwBPH7Eb3eTKR2SWGliW1GVVCcmBcFGZB8NAQ8v/pDXqtF0nWgk3huYzHwuX8
+	T8kF3Yr1NkKwIezImxbowmnq9FzLiK+hZQjQPU9yTNqpAcQyr7vpNcbWu4jM9D4T4GTu
+	zwrRwuZS4hw9kAPAcnwKOKd1kxZKkWAeMYCew=
+MIME-Version: 1.0
+Received: by 10.101.143.37 with SMTP id v37mr3192163ann.182.1258892483784; 
+	Sun, 22 Nov 2009 04:21:23 -0800 (PST)
+In-Reply-To: <20091122103022.GB4400@jama>
+References: <1258782956.5424.17.camel@gnutoo-desktop>
+	<alpine.LFD.2.00.0911210112500.25956@localhost>
+	<4B07F8F8.3060802@balister.org> <4B082733.1060504@gmx.net>
+	<ac9c93b10911211007m44955ef9uc99a0e8cf6408339@mail.gmail.com>
+	<20091121183054.GA3299@jama>
+	<ac9c93b10911220151p41e1deb9q1cdc0c0210827097@mail.gmail.com>
+	<20091122103022.GB4400@jama>
+Date: Sun, 22 Nov 2009 13:21:23 +0100
+Message-ID: <ac9c93b10911220421m37819b7ey54cbf6df942cb0f7@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 22 Nov 2009 13:19:14 +0100
-Message-Id: <1258892354-24039-1-git-send-email-bernhard.kaindl@gmx.net>
-X-Mailer: git-send-email 1.6.5.2
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.58
-X-SA-Exim-Connect-IP: 213.165.64.20
-X-SA-Exim-Mail-From: bernhard.kaindl@gmx.net
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] Fix setscene of binutils-cross-sdk_2.17: Switch binutils_2.17.bb to INC_PR
+Subject: Re: [PATCH] wrong checksum for libsdl-mixer-1.2.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,34 +53,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Nov 2009 12:20:51 -0000
+X-List-Received-Date: Sun, 22 Nov 2009 12:22:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-binutils_2.17.bb and binutils-cross-sdk_2.17.bb:
- * All of the binutils-cross-sdk_*.bb recipes rely on their binutils_*.bb
-   recipe to define INC_PR, but binutils_2.17.bb does not define it, so
-   setscene of binutils-cross-sdk_2.17 fails because it does a mkdir of
-   work/.../binutils-cross-sdk-2.17-\$\{INC_PR\}.1/ which causes an abort
-   when trying to find the setscene scripts later.
-   Fix this by switching binutils_2.17.bb to INC_PR like silbings have done.
+2009/11/22 Martin Jansa <martin.jansa@gmail.com>:
+> On Sun, Nov 22, 2009 at 10:51:52AM +0100, Frans Meulenbroeks wrote:
+>> I'm flabbergasted.
+>>
+>> The link Philip provided suggests this is a bug fix, but Martin does
+>> not find any differences ????
+>
+> I haven't found any notice about SDL_mixer on that news link (only
+> SDL_image-1.2.9),
+>
+> Refreshed date on sources, can be sort of bug fix even without actuall
+> source change, ie if Makefile don't want to regenerate some file,
+> because its newer than its "source", but haven't checked if that's the
+> case.
 
-Signed-off-by: Bernhard Kaindl <bernhard.kaindl@gmx.net>
+Hm. That would put things in loser++ mode. If files are generated by
+the makefile they do not belong in the archive  ...
+Then again the website says:
 
- binutils_2.17.bb |    3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+    * Fixed alpha premultiplication on Mac OS X and iPhone OS
+    * Fixed checking for IMG_Init() return value in image loaders
 
-diff --git a/recipes/binutils/binutils_2.17.bb b/recipes/binutils/binutils_2.17.bb
-index fdee8a5..ceea7c6 100644
---- a/recipes/binutils/binutils_2.17.bb
-+++ b/recipes/binutils/binutils_2.17.bb
-@@ -1,7 +1,8 @@
- require binutils.inc
- require binutils-avr32.inc
- 
--PR = "r7"
-+INC_PR = "r7"
-+PR = "${INC_PR}.1"
- 
- SRC_URI = \
-     "http://ftp.gnu.org/gnu/binutils/binutils-${PV}.tar.bz2 \
+But I agree with Koen, let's move to 1.2.11.
+
+FM
+>
+> If someone want's recheck old source and cannot find it, I put it here
+> http://jama.mk.cvut.cz/SDL_mixer-1.2.9.tar.gz
+>
+>> Also this does not fix the problem that people will have wrong files
+>> in their downloads dir.
+>
+> No idea how to fix this, but for me, if it says I have wrong checksum,
+> first thing I do is remove local file + check if checksums.ini changed
+> (hopefully with some ACK or at least by some respectfull commiter)
+>
+>> Frans (who thingks the package upstream name should have been changed
+>> after making the patch).
+>
+> No doubt about it
+>
+> --
+> uin:136542059 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0jid:Martin.Jansa@gmail.com
+> Jansa Martin =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 sip:jamasip@voip.wengo.fr
+> JaMa
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
