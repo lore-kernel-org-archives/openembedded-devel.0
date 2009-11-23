@@ -1,28 +1,26 @@
-Received: from moutng.kundenserver.de ([212.227.126.187])
+Received: from mail-gx0-f215.google.com ([209.85.217.215])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chris@2net.co.uk>) id 1NCco6-0001Wn-Dz
+	(envelope-from <ricardo.salveti@openbossa.org>) id 1NCdQj-0001QK-LS
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Nov 2009 18:34:37 +0100
-Received: from [192.168.159.11] ([89.240.49.212])
-	by mrelayeu.kundenserver.de (node=mreu0) with ESMTP (Nemesis)
-	id 0MZQdt-1NTKcg1zMD-00LGNq; Mon, 23 Nov 2009 18:20:28 +0100
-Message-ID: <4B0AC426.3030505@2net.co.uk>
-Date: Mon, 23 Nov 2009 17:19:34 +0000
-From: Chris Simmonds <chris@2net.co.uk>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Mon, 23 Nov 2009 19:14:32 +0100
+Received: by gxk7 with SMTP id 7so8873512gxk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Nov 2009 10:13:01 -0800 (PST)
+Received: by 10.101.207.1 with SMTP id j1mr3931429anq.39.1258999979459;
+	Mon, 23 Nov 2009 10:12:59 -0800 (PST)
+Received: from localhost.localdomain ([200.184.118.130])
+	by mx.google.com with ESMTPS id 9sm1559186ywf.5.2009.11.23.10.12.49
+	(version=SSLv3 cipher=RC4-MD5); Mon, 23 Nov 2009 10:12:53 -0800 (PST)
+From: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1258901140-30575-1-git-send-email-bernhard.kaindl@gmx.net>
-	<1258990008.8426.29.camel@conroy-linux>
-In-Reply-To: <1258990008.8426.29.camel@conroy-linux>
-X-Provags-ID: V01U2FsdGVkX1/+kBi+6/tO2joSqL+Tzmu1BIMFbznOgVr7WiB
-	ldWHaX6wig/qF2qnvjmlsjeNHgRy/uZCxH5V4rxJnB0DXuQ7w1
-	mw+hda6RSlSd39TTmtdZzg11x6xuVT5nOSI+NioReA=
-X-SA-Exim-Connect-IP: 212.227.126.187
-X-SA-Exim-Mail-From: chris@2net.co.uk
+Date: Mon, 23 Nov 2009 15:06:23 -0300
+Message-Id: <1258999585-10614-1-git-send-email-ricardo.salveti@openbossa.org>
+X-Mailer: git-send-email 1.6.5
+X-SA-Exim-Connect-IP: 209.85.217.215
+X-SA-Exim-Mail-From: ricardo.salveti@openbossa.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] external-toolchain: Really accept toolchains built by meta-toolchain.bb
+Subject: [PATCHES] Fixing Mamona-related packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,41 +34,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2009 17:34:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 23 Nov 2009 18:14:32 -0000
 
-Chris Conroy wrote:
-> On Sun, 2009-11-22 at 15:45 +0100, Bernhard Kaindl wrote:
->> external-toolchain-generic,
->> external-toolchain:
->>
->> * The current external-toolchain recipes which are documented to accept
->>   toolchains built by meta-toolchain actually do not accept such because
->>   they expect ${prefix}/package-status to exist which is provieded by
->>   the poky toolchains but not the current OE meta-toolchain package.
->>
->>   Fix this by also looking for ${prefix}/usr/lib/opkg/status, which is the
->>   package-status file of the OE meta-toolchain package.
->>
->> * Also change the error message which is shown when neither file is found
->>   more explicit.
-> 
-> What about changing the meta-toolchain to generate the environment-setup
-> script? While it's not important to have the script for normal building
-> of packages, I've found it helpful to be able to do a quick compile of a
-> test program here or there. Though, I understand that it might be
-> dangerous since some folks might think the environment-setup creates an
-> an entire cross building platform for them when they really want to stay
-> inside OE....
-> 
-> --Chris
+Patches:
+[PATCH 1/2] mamonaim-e-applet-git: bumping rev, fixing PV and using oe-stylize
+[PATCH 2/2] mamona-input-methods-git: bumping rev, fixing PV and using oe-stylize
 
-meta-toolchain does generate environment-setup and so far as I am aware 
-it works fine as a stand-alone toolchain. Is there some reason why I 
-should not be using it as such?
+Both patches are basically to fix broken Mamona-related packages at current OE. When Rodrigo Vivi started
+to merge some Mamona commits, he actually got the wrong ones for these recipes, so this basically fix
+something that didn't actually work.
 
-Chris S.
+As current Rodrigo Vivi is not working at Mamona and OE anymore (at least not directly related as before),
+I'm basically maintaining it with Alecrim and Willer, but as none of us have commit access, I'm asking
+for anyone to please apply both pathes at OE tree.
+
+We are currently working at Mamona Overlay and probably until the end of this week I'll submit many other
+commits for review and merge.
+
+Thanks,
+
+Ricardo
 
 
 
