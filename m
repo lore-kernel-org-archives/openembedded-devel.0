@@ -1,27 +1,39 @@
-Received: from mail-yx0-f175.google.com ([209.85.210.175])
+Received: from dan.rpsys.net ([93.97.175.187])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ricardo.salveti@openbossa.org>) id 1NCeHb-00057U-Mh
+	(envelope-from <rpurdie@rpsys.net>) id 1NCeXF-000371-4b
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Nov 2009 20:09:10 +0100
-Received: by yxe5 with SMTP id 5so2605667yxe.24
+	Mon, 23 Nov 2009 20:25:20 +0100
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nANJKVML018954 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Nov 2009 19:20:31 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id unCoNPS4Ffiy
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 11:07:39 -0800 (PST)
-Received: by 10.101.183.22 with SMTP id k22mr3841203anp.107.1259003259064;
-	Mon, 23 Nov 2009 11:07:39 -0800 (PST)
-Received: from localhost.localdomain ([200.184.118.130])
-	by mx.google.com with ESMTPS id 9sm1339297ywe.41.2009.11.23.11.07.36
-	(version=SSLv3 cipher=RC4-MD5); Mon, 23 Nov 2009 11:07:37 -0800 (PST)
-From: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
+	Mon, 23 Nov 2009 19:20:31 +0000 (GMT)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nANJKThF018940
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Nov 2009 19:20:30 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Nov 2009 16:01:13 -0300
-Message-Id: <1259002873-10408-1-git-send-email-ricardo.salveti@openbossa.org>
-X-Mailer: git-send-email 1.6.5
-X-SA-Exim-Connect-IP: 209.85.210.175
-X-SA-Exim-Mail-From: ricardo.salveti@openbossa.org
+In-Reply-To: <c384c5ea0911231043h75ae7402me61d82d90b8234bd@mail.gmail.com>
+References: <c384c5ea0911230925u5d6e29b4v5801057f25971574@mail.gmail.com>
+	<1259001133.10321.140.camel@dax.rpnet.com>
+	<c384c5ea0911231043h75ae7402me61d82d90b8234bd@mail.gmail.com>
+Date: Mon, 23 Nov 2009 19:23:48 +0000
+Message-Id: <1259004228.10321.168.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: koen@openembedded.org
-Subject: [PATCH] udev-141: avoid using full path when linking udev rules.d
+Subject: Re: what is the expected STAGING_INCDIR for cross packages?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,41 +47,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2009 19:09:10 -0000
+X-List-Received-Date: Mon, 23 Nov 2009 19:25:20 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-When it's directly linked to ${sysconfdir}/udev/rules.d dpkg will fail when
-unpacking Network Manager, as it'll try to extract files over this directory
-and the link will be pointing to the main host files.
+On Mon, 2009-11-23 at 19:43 +0100, Leon Woestenberg wrote:
+> Hello Richard,
+> 
+> On Mon, Nov 23, 2009 at 7:32 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> > On Mon, 2009-11-23 at 18:25 +0100, Leon Woestenberg wrote:
+> >> what is the expected STAGING_INCDIR for -cross packages?
+> >
+> > Where is this used and what kind of problem is occurring?
+> >
+> It's in binutils-cross.
+> 
+> I'm adding a new architecture (nios2) which has additional staging
+> steps in which it brings out a few binutils build-host specifics,
+> in order for the following "elf2flt" tool to build.
+> 
+> Up-to-current binutils-cross did not stage anything, so we never saw this there.
+> 
+> (I'm aware this should fold into install with your packaged-staging
+> cleanup, but I don't dare to move the binutils to the new approach
+> just yet).
 
-Signed-off-by: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
----
- recipes/udev/udev_141.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+Take a look at what cross.bbclass looks like in Poky. There are things
+like ${target_includedir} defined there for exactly this kind of
+problem.
 
-diff --git a/recipes/udev/udev_141.bb b/recipes/udev/udev_141.bb
-index b54b059..1ebfccb 100644
---- a/recipes/udev/udev_141.bb
-+++ b/recipes/udev/udev_141.bb
-@@ -6,7 +6,7 @@ LICENSE = "GPL"
- # Untested
- DEFAULT_PREFERENCE = "-1"
- 
--PR = "r15"
-+PR = "r16"
- 
- # needed for init.d script
- RDEPENDS_${PN} += "udev-utils"
-@@ -70,7 +70,7 @@ do_install () {
- 	# This is hardcoded to $(udev_prefix)/lib/udev/rules.d in the
- 	# Makefile, even if libdir is lib64.
- 	mv ${D}/lib/udev/rules.d ${D}${sysconfdir}/udev/
--	ln -sf ${sysconfdir}/udev/rules.d ${D}/lib/udev/
-+	ln -sf ../../${sysconfdir}/udev/rules.d ${D}/lib/udev/
- 
-  	cp ${S}/rules/rules.d/* ${D}${sysconfdir}/udev/rules.d/
- 	cp ${S}/rules/packages/* ${D}${sysconfdir}/udev/rules.d/
--- 
-1.6.5
+Cheers,
+
+Richard
 
 
 
