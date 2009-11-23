@@ -1,29 +1,38 @@
-Received: from moutng.kundenserver.de ([212.227.126.186])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chris@2net.co.uk>) id 1NCech-0003HR-OI
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NCfGh-0000lZ-KT for openembedded-devel@lists.openembedded.org;
+	Mon, 23 Nov 2009 21:12:19 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NCfFI-0003cx-I3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Nov 2009 20:30:58 +0100
-Received: from [192.168.159.11] ([78.147.83.187])
-	by mrelayeu.kundenserver.de (node=mreu2) with ESMTP (Nemesis)
-	id 0LcCMD-1Nvr9u3cCz-00jOza; Mon, 23 Nov 2009 20:24:24 +0100
-Message-ID: <4B0AE162.3030307@2net.co.uk>
-Date: Mon, 23 Nov 2009 19:24:18 +0000
-From: Chris Simmonds <chris@2net.co.uk>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Mon, 23 Nov 2009 21:10:48 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Nov 2009 21:10:48 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Nov 2009 21:10:48 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1258901140-30575-1-git-send-email-bernhard.kaindl@gmx.net>	<1258990008.8426.29.camel@conroy-linux>
-	<4B0AC426.3030505@2net.co.uk>
-	<1259001108.19077.4.camel@conroy-linux>
-In-Reply-To: <1259001108.19077.4.camel@conroy-linux>
-X-Provags-ID: V01U2FsdGVkX1+HqdWhQha7o9+vW7FKLRGaXqqPY0cCDQ7oQb4
-	+qfkz9uAAB15gzcDF1NCNdGkTv92t0JczvBxRj+MlVDXhoqBE0
-	5dL6XbdVnKGUZ3HyxsFYoT4Zux/7g4rH566F0M1mfs=
-X-SA-Exim-Connect-IP: 212.227.126.186
-X-SA-Exim-Mail-From: chris@2net.co.uk
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 23 Nov 2009 21:10:26 +0100
+Message-ID: <heeq7i$11r$1@ger.gmane.org>
+References: <c384c5ea0911230925u5d6e29b4v5801057f25971574@mail.gmail.com>	<1259001133.10321.140.camel@dax.rpnet.com>
+	<c384c5ea0911231043h75ae7402me61d82d90b8234bd@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
+In-Reply-To: <c384c5ea0911231043h75ae7402me61d82d90b8234bd@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] external-toolchain: Really accept toolchains built by meta-toolchain.bb
+Subject: Re: what is the expected STAGING_INCDIR for cross packages?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,31 +46,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2009 19:30:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 23 Nov 2009 20:12:19 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Chris Conroy wrote:
-> On Mon, 2009-11-23 at 17:19 +0000, Chris Simmonds wrote:
->> meta-toolchain does generate environment-setup and so far as I am aware 
->> it works fine as a stand-alone toolchain. Is there some reason why I 
->> should not be using it as such?
->>
->> Chris S.
-> 
-> It's fine as just a standalone toolchain. It's just not a "Build
-> Platform." Meaning, you can't just source it and get all the other
-> things that OE gives you. This is perhaps too obvious to even warrant
-> mentioning.
-> 
-> I misinterpreted the original patch since I was comparing against my
-> local tree, where we've modified to check for environment-setup rather
-> than package-status (simply as a sanity check for the setting of
-> ${prefix}, so you can safely disregard my previous posting.
-> 
+On 23-11-09 19:43, Leon Woestenberg wrote:
 
+> I'm adding a new architecture (nios2) which has additional staging
+> steps in which it brings out a few binutils build-host specifics,
+> in order for the following "elf2flt" tool to build.
 
-Phew! Thanks for the clarification.
-Chris S.
+elf2flt brings back nasty uclinux memories here ;)
+
+regards,
+
+Koen
+
 
 
