@@ -1,28 +1,35 @@
-Received: from mail-yw0-f188.google.com ([209.85.211.188])
+Received: from mail-fx0-f216.google.com ([209.85.220.216])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ricardo.salveti@openbossa.org>) id 1NCcey-00012R-Je
+	(envelope-from <leon.woestenberg@gmail.com>) id 1NCcgP-0001HF-Vp
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Nov 2009 18:25:11 +0100
-Received: by ywh26 with SMTP id 26so4947676ywh.12
+	Mon, 23 Nov 2009 18:26:41 +0100
+Received: by fxm8 with SMTP id 8so6001033fxm.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 09:23:40 -0800 (PST)
-Received: by 10.100.245.22 with SMTP id s22mr457393anh.136.1258997020047;
-	Mon, 23 Nov 2009 09:23:40 -0800 (PST)
-Received: from localhost.localdomain ([200.184.118.130])
-	by mx.google.com with ESMTPS id 9sm1537045ywf.50.2009.11.23.09.23.38
-	(version=SSLv3 cipher=RC4-MD5); Mon, 23 Nov 2009 09:23:39 -0800 (PST)
-From: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Nov 2009 14:17:15 -0300
-Message-Id: <1258996635-20162-2-git-send-email-ricardo.salveti@openbossa.org>
-X-Mailer: git-send-email 1.6.5
-In-Reply-To: <1258996635-20162-1-git-send-email-ricardo.salveti@openbossa.org>
-References: <1258996635-20162-1-git-send-email-ricardo.salveti@openbossa.org>
-X-SA-Exim-Connect-IP: 209.85.211.188
-X-SA-Exim-Mail-From: ricardo.salveti@openbossa.org
+	Mon, 23 Nov 2009 09:25:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=ugETPCk+Em852Ti4zuDVySHPb/A8mCTDEn3e+CE93jo=;
+	b=WUhanX9FwRZYGfUeKehJHYA36U/tmo8iMj2xikoqHXuedL4dVy+Jyv0XSqqkwRJGin
+	QCU+3OUzhLg41DGKu09OlqJjC0xg+gOMvR8bLEcYmWF602EdyWbaWMQrn/rQ4gmA13Sf
+	z1OwgjHjaq3QKhJt4NinhTJcva4i9Ix4b1stA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=MpHyey+sWbicVr1NEP9o4ZZbwb/Y37x9XcA/18h35DJP0i9kvTA+Uke26oAp5iXb8g
+	Q6ZD7Y9tfGMcwC3CCmqRQdc99nR3IDgp3Em0XMo2Dbqk0yWkCLHsU25Ug0hyLTSVhj2W
+	df+ORiIjy3QlKYE6bgdkwMWklmHodbYQUjspY=
+MIME-Version: 1.0
+Received: by 10.239.183.22 with SMTP id s22mr518994hbg.6.1258997109646; Mon, 
+	23 Nov 2009 09:25:09 -0800 (PST)
+Date: Mon, 23 Nov 2009 18:25:09 +0100
+Message-ID: <c384c5ea0911230925u5d6e29b4v5801057f25971574@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.220.216
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 2/2] libxml, rpm, zope: avoid generating native packages
+Subject: what is the expected STAGING_INCDIR for cross packages?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,55 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2009 17:25:11 -0000
+X-List-Received-Date: Mon, 23 Nov 2009 17:26:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
----
- recipes/libxml/libxml2-native.inc |    2 +-
- recipes/rpm/rpm-native_4.4.2.3.bb |    5 ++---
- recipes/zope/zope-native_3.3.1.bb |    2 +-
- 3 files changed, 4 insertions(+), 5 deletions(-)
+Hello,
 
-diff --git a/recipes/libxml/libxml2-native.inc b/recipes/libxml/libxml2-native.inc
-index 3f67152..395a3a9 100644
---- a/recipes/libxml/libxml2-native.inc
-+++ b/recipes/libxml/libxml2-native.inc
-@@ -5,7 +5,7 @@ FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/libxml2-${PV}"
- SRC_URI = "ftp://xmlsoft.org/libxml2/libxml2-${PV}.tar.gz"
- S = "${WORKDIR}/libxml2-${PV}"
- 
--inherit autotools native pkgconfig distutils-native-base
-+inherit autotools pkgconfig distutils-native-base native
- 
- do_configure_prepend () {
- 	EXTRA_LIBXML2_OECONF="\
-diff --git a/recipes/rpm/rpm-native_4.4.2.3.bb b/recipes/rpm/rpm-native_4.4.2.3.bb
-index 3cfb43e..d27a392 100644
---- a/recipes/rpm/rpm-native_4.4.2.3.bb
-+++ b/recipes/rpm/rpm-native_4.4.2.3.bb
-@@ -1,8 +1,7 @@
--inherit native distutils-native-base
--
- require rpm-${PV}.inc
- 
-+inherit distutils-native-base native
-+
- DEPENDS = "beecrypt-native gettext-native zlib-native file-native popt-native python-native"
--PACKAGES = ""
- 
- export varprefix = "${localstatedir}"
-diff --git a/recipes/zope/zope-native_3.3.1.bb b/recipes/zope/zope-native_3.3.1.bb
-index cb0d690..a1c5eac 100644
---- a/recipes/zope/zope-native_3.3.1.bb
-+++ b/recipes/zope/zope-native_3.3.1.bb
-@@ -1,4 +1,4 @@
--inherit native distutils-native-base
-+inherit distutils-native-base native
- 
- require zope.inc
- 
+what is the expected STAGING_INCDIR for -cross packages?
+
+
+Our STAGING_INCDIR for -cross packages contains two concatenated absolute paths,
+one based of CROSS_DIR, one based of STAGING_DIR.
+
+Both are absolute, based against TMPDIR.
+
+Is that correct?
+
+
+i.e.
+
+CROSS_DIR = ${TMPDIR}/cross/$BASE_PACKAGE_ARCH
+prefix = ${CROSS_DIR}
+exec_prefix = ${prefix}
+includedir = ${exec_prefix}/include
+
+STAGING_DIR = ${TMPDIR}/staging
+BASEPKG_HOST_SYS=${HOST_ARCH}${HOST_VENDOR}-${HOST_OS}
+STAGING_DIR_HOST=${STAGIG_DIR}/$BASEPKG_HOST_SYS}
+
+which are then concatenated for -cross packages as:
+
+STAGING_INCDIR = "${STAGING_DIR_HOST}${includedir}"
+
+
+Regards,
 -- 
-1.6.5
-
+Leon
 
 
