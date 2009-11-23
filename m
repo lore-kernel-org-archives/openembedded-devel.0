@@ -1,38 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NCaUt-00033c-Ri for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Nov 2009 16:06:38 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NCaTR-0003fH-7X
+	(envelope-from <philip@balister.org>) id 1NCaVk-00038p-22
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Nov 2009 16:05:05 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 16:05:05 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 16:05:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 23 Nov 2009 16:07:31 +0100
+Received: (qmail 1901 invoked by uid 1003); 23 Nov 2009 15:05:58 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 23 Nov 2009 15:05:58 -0000
+Message-ID: <4B0AA4D5.8020507@balister.org>
+Date: Mon, 23 Nov 2009 10:05:57 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
+	Thunderbird/3.0b4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 23 Nov 2009 16:00:26 +0100
-Message-ID: <hee82a$td1$1@ger.gmane.org>
 References: <20091115163618.GA3317@jama>
 	<hdr31n$8b0$1@ger.gmane.org>	<1258364356.5799.94.camel@dax.rpnet.com>
 	<20091122190547.GC3349@jama>	<hedfru$gol$1@ger.gmane.org>
 	<1258978516.10321.79.camel@dax.rpnet.com>	<hee2r8$bav$1@ger.gmane.org>
 	<1258986598.10321.99.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
 In-Reply-To: <1258986598.10321.99.camel@dax.rpnet.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: SRCPV migration - How SRCPV works!
@@ -49,11 +38,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2009 15:06:39 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 23 Nov 2009 15:07:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 23-11-09 15:29, Richard Purdie wrote:
+On 11/23/2009 09:29 AM, Richard Purdie wrote:
 > On Mon, 2009-11-23 at 14:31 +0100, Koen Kooi wrote:
 >> On 23-11-09 13:15, Richard Purdie wrote:
 >>
@@ -66,17 +55,54 @@ On 23-11-09 15:29, Richard Purdie wrote:
 >
 > How is locking the counts down using LOCALCOUNT any different to the
 > current situation?
+>
+>> If there is a way to convert the database to a .inc file then we'd be a
+>> step closer to coordinating counts between buildhosts (or rebuilds from
+>> scratch).
+>
+> Any method using .inc files is going to race. The only solution that is
+> likely to work is a single server allocating numbers in some form.
+>
+>> Currently the SRCPV looks like a major step backwards to the current
+>> situation unless you are on a single buildhost *and* never delete TMPDIR
+>> *and* use AUTOREV *and* care about upgrade paths.
+>
+> Well this clearly isn't the case.
+>
+> Its intended to be a neural step (apart from some PE issues) for
+> everyone except for the users of AUTOREV who it helps. Their use case is
+> limited to a single autobuilder model where they need to keep one file
+> in TMPDIR but can otherwise delete it.
 
-In the current situation you lock down SRCREV and change PV,PR 
-accordingly. In the new world you lock down SRCREV, increase localcount 
-(per recipe or globally) and change PV,PR accordingly.
+Given the only concrete benefit I can see is that it makes it easier for 
+people using AUTOREV and git, can we examine the use case for this and 
+see if there are alternatives? If this is needed for people doing 
+development work, wouldn't it make more sense to focus in sdk issues?
 
-I just went from a 2 step error prone situation to a 3 step error prone 
-situation. And I need to track an *extra* variable as well now.
+Philip
 
-regards,
 
-Koen
 
+>
+>> It would be a lot better if bitbake could just do the revlog | wc -l
+>> trick after do_fetch has run. Or at least use that as localcount if a
+>> snapshot exists in TMPDIR during parsing.
+>
+> As you're more than well aware, two different behaviours depending on
+> whether "a snapshot exists in TMPDIR during parsing" is maintenance and
+> reproducibility nightmare.
+>
+> The first suggestion would be nice, patches welcome.
+>
+> Cheers,
+>
+> Richard
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
