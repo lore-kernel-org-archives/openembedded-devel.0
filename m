@@ -1,26 +1,26 @@
 Received: from mail-yx0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ricardo.salveti@openbossa.org>) id 1NCceW-00011X-RV
+	(envelope-from <ricardo.salveti@openbossa.org>) id 1NCcet-00011X-Tz
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Nov 2009 18:24:44 +0100
-Received: by yxe5 with SMTP id 5so2509593yxe.24
+	Mon, 23 Nov 2009 18:25:07 +0100
+Received: by mail-yx0-f175.google.com with SMTP id 5so2509593yxe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 09:23:12 -0800 (PST)
-Received: by 10.101.143.10 with SMTP id v10mr3739526ann.170.1258996989229;
-	Mon, 23 Nov 2009 09:23:09 -0800 (PST)
+	Mon, 23 Nov 2009 09:23:37 -0800 (PST)
+Received: by 10.100.24.20 with SMTP id 20mr502760anx.15.1258997017872;
+	Mon, 23 Nov 2009 09:23:37 -0800 (PST)
 Received: from localhost.localdomain ([200.184.118.130])
-	by mx.google.com with ESMTPS id 5sm1540994ywd.23.2009.11.23.09.23.06
-	(version=SSLv3 cipher=RC4-MD5); Mon, 23 Nov 2009 09:23:08 -0800 (PST)
+	by mx.google.com with ESMTPS id 9sm1537045ywf.50.2009.11.23.09.23.35
+	(version=SSLv3 cipher=RC4-MD5); Mon, 23 Nov 2009 09:23:37 -0800 (PST)
 From: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Nov 2009 14:16:45 -0300
-Message-Id: <1258996605-20124-1-git-send-email-ricardo.salveti@openbossa.org>
+Date: Mon, 23 Nov 2009 14:17:14 -0300
+Message-Id: <1258996635-20162-1-git-send-email-ricardo.salveti@openbossa.org>
 X-Mailer: git-send-email 1.6.5
 X-SA-Exim-Connect-IP: 209.85.210.175
 X-SA-Exim-Mail-From: ricardo.salveti@openbossa.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] package_deb.bbclass: make the PACKAGES check earlier so if there is nothing to package we don't read potentially stale pkgdata from staging.
+Subject: [PATCH 1/2] rpm-native-4.4.2.3: removing invalid layout var
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,59 +34,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2009 17:24:44 -0000
+X-List-Received-Date: Mon, 23 Nov 2009 17:25:07 -0000
 
-This is basically the commit 27b9bc946eeb3faa7b10d92689ab527af42727bd that got
-lost when merging poky stuff into the repo. The behavior is much like
-what we already have with package_ipk.
+rpm-native will break with old layout definition at an invalid recursion.
 
 Signed-off-by: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
 ---
- classes/package_deb.bbclass |   19 ++++++++-----------
- 1 files changed, 8 insertions(+), 11 deletions(-)
+ recipes/rpm/rpm-native_4.4.2.3.bb |    3 +--
+ 1 files changed, 1 insertions(+), 2 deletions(-)
 
-diff --git a/classes/package_deb.bbclass b/classes/package_deb.bbclass
-index 2a9bf76..9fb1674 100644
---- a/classes/package_deb.bbclass
-+++ b/classes/package_deb.bbclass
-@@ -86,20 +86,12 @@ python do_package_deb () {
-         return
-     bb.mkdirhier(dvar)
+diff --git a/recipes/rpm/rpm-native_4.4.2.3.bb b/recipes/rpm/rpm-native_4.4.2.3.bb
+index 62cef86..3cfb43e 100644
+--- a/recipes/rpm/rpm-native_4.4.2.3.bb
++++ b/recipes/rpm/rpm-native_4.4.2.3.bb
+@@ -5,5 +5,4 @@ require rpm-${PV}.inc
+ DEPENDS = "beecrypt-native gettext-native zlib-native file-native popt-native python-native"
+ PACKAGES = ""
  
--    packages = bb.data.getVar('PACKAGES', d, 1)
--    if not packages:
--        bb.debug(1, "PACKAGES not defined, nothing to package")
--        return
--
-     tmpdir = bb.data.getVar('TMPDIR', d, 1)
- 
-     if os.access(os.path.join(tmpdir, "stamps", "DEB_PACKAGE_INDEX_CLEAN"),os.R_OK):
-         os.unlink(os.path.join(tmpdir, "stamps", "DEB_PACKAGE_INDEX_CLEAN"))
- 
--    if packages == []:
--        bb.debug(1, "No packages; nothing to do")
--        return
--
-+    packages = bb.data.getVar('PACKAGES', d, 1)
-     for pkg in packages.split():
-         localdata = bb.data.createCopy(d)
-         pkgdest = bb.data.getVar('PKGDEST', d, 1)
-@@ -268,8 +260,13 @@ python () {
- }
- 
- python do_package_write_deb () {
--	bb.build.exec_func("read_subpackage_metadata", d)
--	bb.build.exec_func("do_package_deb", d)
-+    packages = bb.data.getVar('PACKAGES', d, True)
-+    if not packages:
-+        bb.debug(1, "No PACKAGES defined, nothing to package")
-+        return
-+
-+    bb.build.exec_func("read_subpackage_metadata", d)
-+    bb.build.exec_func("do_package_deb", d)
- }
- do_package_write_deb[dirs] = "${D}"
- addtask package_write_deb before do_package_write after do_package
+-export localstatedir = "${layout_localstatedir}"
+-export varprefix = "${layout_localstatedir}"
++export varprefix = "${localstatedir}"
 -- 
 1.6.5
 
