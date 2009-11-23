@@ -1,36 +1,39 @@
-Received: from mail-px0-f182.google.com ([209.85.216.182])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rk.raggit@gmail.com>) id 1NCSD9-0007tK-TM
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NCTz7-0007z9-6A for openembedded-devel@lists.openembedded.org;
+	Mon, 23 Nov 2009 09:09:24 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NCTxi-0003vJ-VF
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Nov 2009 07:15:47 +0100
-Received: by pxi12 with SMTP id 12so3752609pxi.3
+	Mon, 23 Nov 2009 09:07:54 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Nov 2009 09:07:54 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Nov 2009 22:14:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=5alDlZLS779WPAUqvYzmAUeI3yoQeQsxmqASm13vknc=;
-	b=cluIKnAh72FIToyQT4L1lMfqN9zq2DauBX/0pWtvuziurtANXcnf8bBDe8FH2geVyI
-	vDbcEnOL/m0oAOc/g9XdwZx3UlyO6PYGyALDfT1vforDsQJdCZG+ushi7y3b863A9RCz
-	NSa8llAKrDIYBGvsp28sfKo4Ln0CfCVIvcHRg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=ozDSKjCdLxvdl8H3ryOu3s50/LGS7n5nr5z787fTvOPS+CvLuAvlSRPL83r/oqJ75C
-	1qqLFlCnQSJb5eRfyypPLjJbOBNn55ItZZLk21Q43W54CeMIqALs6IJX4XNsqvOuZE78
-	SsnMC50DH/oaerG+0I1y9DPTNhu8eI+ucAibs=
-MIME-Version: 1.0
-Received: by 10.141.45.9 with SMTP id x9mr250844rvj.220.1258956855143; Sun, 22 
-	Nov 2009 22:14:15 -0800 (PST)
-Date: Mon, 23 Nov 2009 11:44:15 +0530
-Message-ID: <ec1f3d400911222214l37838f37i204c88bba6971d5b@mail.gmail.com>
-From: RK Raggit <rk.raggit@gmail.com>
+	Mon, 23 Nov 2009 09:07:54 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.182
-X-SA-Exim-Mail-From: rk.raggit@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 23 Nov 2009 09:07:26 +0100
+Message-ID: <hedfru$gol$1@ger.gmane.org>
+References: <20091115163618.GA3317@jama>
+	<hdr31n$8b0$1@ger.gmane.org>	<1258364356.5799.94.camel@dax.rpnet.com>
+	<20091122190547.GC3349@jama>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
+In-Reply-To: <20091122190547.GC3349@jama>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: cortex-a9 machine build failure at gcc
+Subject: Re: SRCPV migration - How SRCPV works!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,40 +47,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2009 06:15:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 23 Nov 2009 08:09:24 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 22-11-09 20:05, Martin Jansa wrote:
 
-I am adding support for a cortex-a9 based machine but the build fails at gcc
-with this error -
+> Every git recipe in OE tree should have some sane hash stored in
+> conf/distro/include/sane-srcrevs.inc
 
-****************
-|
-/home/work/armv7a-angstrom-linux-gnueabi/gcc-cross-initial-4.2.4-r9.1/gcc-4.2.4/gcc/crtstuff.c:1:
-error: bad value (cortex-a9) for -mtune= switch
-|
-/home/work/armv7a-angstrom-linux-gnueabi/gcc-cross-initial-4.2.4-r9.1/gcc-4.2.4/gcc/crtstuff.c:1:
-error: bad value (armv7-a) for -march= switch
-|
-/home/work/armv7a-angstrom-linux-gnueabi/gcc-cross-initial-4.2.4-r9.1/gcc-4.2.4/gcc/crtstuff.c:1:
-error: invalid floating point option: -mfpu=neon
-*****************
+The cabal decided that checksums are "part of the metadata" and belongs 
+in the recipes. I don't understand why SRCREVs are so different. For 
+SRCREVs my life would be a lot easier if all SRCREV where put in their 
+respective recipes. Distros can always do
 
-gcc variables in my local.conf read thus -
+SRCREV_pn-foo = "bar"
+PV_pn-foo = "1.2.3+gitr$SRCPV"
 
-PREFERRED_VERSION_gcc                    = "4.2.4"
-PREFERRED_VERSION_gcc-cross              = "csl-arm-2008q1"
-PREFERRED_VERSION_gcc-cross-initial      = "csl-arm-2008q1"
-PREFERRED_VERSION_gcc-cross-intermediate = "csl-arm-2008q1"
+in their distro.conf if needed. Due to scoping we do need some include 
+for EFL_SRCREV, since those recipes are tightly tied together.
 
-I had also tried something funky like below but to no avail -
+ > Kernel recipes are even more tricky, I bumped PE with SRCPV there too,
+ > but Koen warned me later (thanks again) that there needs to be 
+consistent PE
+ > even between different recipes, because multiple machines can share same
+ > kernel recipe and machine can pick between multiple recipes with highest
+ > PV? Hmm now I don't understand what you mean with kernel recipes in this:
+ >
+ > <snip>
+ > If something needs a PE bump, make sure you do it properly and bump PE
+ > on the non scm fetched entries as well. For the kernel I wouldn't bump
+ > PE, since too many machines can use different kernel recipes.
+ > </snip>
 
-PREFERRED_VERSION_gcc = "4.2.4+csl-arm-2008q1-126"
-PREFERRED_VERSION_gcc-cross = "4.2.4+csl-arm-2008q1-126"
-REFERRED_VERSION_gcc-cross-initial = "4.2.4+csl-arm-2008q1-126"
-PREFERRED_VERSION_gcc-cross-intermediate = "4.2.4+csl-arm-2008q1-126"
-Whats gone wrong ?
+Basically: if you bump PE for one kernel recipe, you need to bump PE for 
+all of them, so I guess it should be done in e.g. kernel.bbclass or 
+linux.inc.
 
---RK
+Imagine I use a git kernel for 2.6.32rc6 and then add a recipe for 
+2.6.32, I'm fairly sure I'm going to forget to add PE in 2.6.32 the 
+first time.
+
+ > But be carefull with persistent cache file
+ > something like this:
+ > tmpdir-dev-shr/cache/om-gta02/bb_persist_data.sqlite
+
+So if I build pixman_git.bb for om-gta02 weekly, but monthly for 
+beagleboard or om-gta01 I'll also get different numbers, right?
+I think the count should only be in a machine specific database if the 
+SRC_URI/SRCREV is machine specific.
+
+regards,
+
+Koen
+
+
 
