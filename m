@@ -1,25 +1,40 @@
-Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
+Received: from dan.rpsys.net ([93.97.175.187])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcolz@zlo.nu>) id 1NCXTb-0005UN-Tb
+	(envelope-from <rpurdie@rpsys.net>) id 1NCXcK-00063n-0O
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Nov 2009 12:53:07 +0100
-Received: by mzh.zlo.nu (Postfix, from userid 1000)
-	id DAD4C140B0; Mon, 23 Nov 2009 12:51:35 +0100 (CET)
-Date: Mon, 23 Nov 2009 12:51:35 +0100
-From: Marc Olzheim <zlo@zlo.nu>
+	Mon, 23 Nov 2009 13:02:07 +0100
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nANBvJuN010458 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Nov 2009 11:57:19 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id wNDsuWLCf-bn
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Nov 2009 11:57:19 +0000 (GMT)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nANBvGPN010446
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Nov 2009 11:57:18 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091123115135.GA26444@zlo.nu>
-References: <alpine.LFD.2.00.0911200514430.18485@localhost>
-	<4B068A46.8090701@balister.org>
-	<alpine.LFD.2.00.0911200916270.11844@localhost>
-MIME-Version: 1.0
-In-Reply-To: <alpine.LFD.2.00.0911200916270.11844@localhost>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 85.17.141.90
-X-SA-Exim-Mail-From: marcolz@zlo.nu
+In-Reply-To: <20091123114228.GF3349@jama>
+References: <20091115163618.GA3317@jama> <hdr31n$8b0$1@ger.gmane.org>
+	<1258364356.5799.94.camel@dax.rpnet.com> <20091122190547.GC3349@jama>
+	<hedfru$gol$1@ger.gmane.org> <20091123085259.GD3349@jama>
+	<hedqm4$gon$1@ger.gmane.org>  <20091123114228.GF3349@jama>
+Date: Mon, 23 Nov 2009 12:00:32 +0000
+Message-Id: <1258977632.10321.65.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Upgrade guile from 1.8.6 to 1.8.7.
+Subject: Re: SRCPV migration - How SRCPV works!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,57 +48,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2009 11:53:07 -0000
-X-Groupsio-MsgNum: 14608
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="9amGYk9869ThD9tj"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 23 Nov 2009 12:02:07 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
---9amGYk9869ThD9tj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, 2009-11-23 at 12:42 +0100, Martin Jansa wrote:
+> RP or someone else:
+> 
+> What do you think about proposed implementation?
+> 
+> Another table with localcount for every revision built, not only for last
+> one.
+> 
+> And table with last revisions with branch and machine in key?
 
-On Fri, Nov 20, 2009 at 09:22:04AM -0500, Robert P. J. Day wrote:
-> > 2) You can include the checksums in the recipe now. See:
-> >
-> > http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/curl/cu=
-rl_7.19.7.bb
-> >
-> > look in the curl-common.inc file for the "tarball" naming.
->=20
->   ok, there's some curious stuff going on there.  first, while the
-> newest curl .bb file is version 7.19.7, there is no equivalent
-> curl-native .bb file, even though earlier version have them.  is there
-> a reason for that?
+Keeping history is actually quite pointless. The only thing you can use
+it for is to make PV go backwards which is exactly what we're trying to
+avoid.
 
-Yes, I did not bother to add a -native version of it, because the update
-(from 7.19.6) did not provide anything new or fixed anything that would
-be of value to an OE build. ;-)
+The machine specific part is a massive nightmare and my advise is simple
+- don't use different revisions for different machines, this is simply
+not designed to work. Worst case you create a locked down version for
+one of the machines.
 
->   also, it's only that latest .bb file -- curl_7.19.7.bb -- that has
-> the tarball checksums.  if there *was* a corresponding -native .bb
-> file, would it *also* need those identical checksums?  i would like to
-> think not since that would be redundant.  a grep of recipes shows only
-> two recipes that appear to be taking advantage of this feature --
-> busybox and curl.
+> Then script for persistent cache upgrade or upgrade it while building if
+> new table with localname will have have new name and if not found there,
+> bitbake will try in oldtable and safe result to new one.
 
-The -native .bb would include the non-native .bb and thus use the same
-checksums, which would be correct.
+This is getting way too complicated for a set of hypothetical situations
+nobody is likely to use. Lets try and keep this simple.
 
-Marc
+The core problem is that nobody has created a way to share the persist
+data between build machines. The agreed workaround was to add a way for
+the revisions to be locked down though configuration and we're on our
+way to do this.
 
---9amGYk9869ThD9tj
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
+Cheers,
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Richard
 
-iEYEARECAAYFAksKd0cACgkQezjnobFOgrF01ACfQ5PFIoYeO9qbs7u3bTngaqQq
-GjQAn1sObEmNurXLZ4UxOwuC0IonJ0jq
-=n+3t
------END PGP SIGNATURE-----
 
---9amGYk9869ThD9tj--
+
