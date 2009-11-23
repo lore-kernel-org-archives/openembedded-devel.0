@@ -1,32 +1,34 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NCYw9-0003Cp-HS for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Nov 2009 14:26:40 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NCYul-0002GX-5s
+	id 1NCZ2a-0005vB-8F for openembedded-devel@lists.openembedded.org;
+	Mon, 23 Nov 2009 14:33:19 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NCZ1A-00050p-Uv
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Nov 2009 14:25:11 +0100
+	Mon, 23 Nov 2009 14:31:48 +0100
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 14:25:11 +0100
+	Mon, 23 Nov 2009 14:31:43 +0100
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 14:25:11 +0100
+	Mon, 23 Nov 2009 14:31:43 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 23 Nov 2009 14:24:44 +0100
-Message-ID: <hee2es$a4o$1@ger.gmane.org>
-References: <20091115163618.GA3317@jama>	<hdr31n$8b0$1@ger.gmane.org>	<1258364356.5799.94.camel@dax.rpnet.com>	<20091122190547.GC3349@jama>	<hedfru$gol$1@ger.gmane.org>	<1258978516.10321.79.camel@dax.rpnet.com>
-	<4B0A803D.8080600@balister.org>
+Date: Mon, 23 Nov 2009 14:31:20 +0100
+Message-ID: <hee2r8$bav$1@ger.gmane.org>
+References: <20091115163618.GA3317@jama>
+	<hdr31n$8b0$1@ger.gmane.org>	<1258364356.5799.94.camel@dax.rpnet.com>
+	<20091122190547.GC3349@jama>	<hedfru$gol$1@ger.gmane.org>
+	<1258978516.10321.79.camel@dax.rpnet.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-In-Reply-To: <4B0A803D.8080600@balister.org>
+In-Reply-To: <1258978516.10321.79.camel@dax.rpnet.com>
 Sender: news <news@ger.gmane.org>
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -46,38 +48,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2009 13:26:40 -0000
+X-List-Received-Date: Mon, 23 Nov 2009 13:33:19 -0000
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 23-11-09 13:29, Philip Balister wrote:
-> On 11/23/2009 07:15 AM, Richard Purdie wrote:
->> On Mon, 2009-11-23 at 09:07 +0100, Koen Kooi wrote:
->>> On 22-11-09 20:05, Martin Jansa wrote:
->>>
->>>> Every git recipe in OE tree should have some sane hash stored in
->>>> conf/distro/include/sane-srcrevs.inc
->>>
->>> The cabal decided that checksums are "part of the metadata" and belongs
->>> in the recipes. I don't understand why SRCREVs are so different. For
->>> SRCREVs my life would be a lot easier if all SRCREV where put in their
->>> respective recipes. Distros can always do
->>>
->>> SRCREV_pn-foo = "bar"
->>> PV_pn-foo = "1.2.3+gitr$SRCPV"
->>>
->>> in their distro.conf if needed. Due to scoping we do need some include
->>> for EFL_SRCREV, since those recipes are tightly tied together.
->>
->> FWIW I dislike it that we have SRCREVs elsewhere. There is a problem
->> (bug?) with bitbake that makes this necessary though and that bug is
->> hard to fix :(.
->
-> The difference between checksums and SRCREV's is that there is one
-> checksum per file, but different distro's may use different versions of
-> the same software.
+On 23-11-09 13:15, Richard Purdie wrote:
 
-And that makes it not part of the metadata?
+> As I understand it you'll lock locking down the local build revisions
+> with Angstrom anyway?
+
+Dunno about that, ideally the SRCPV merge should have no impact at all 
+on existing distros, but it looks like everyone will be forced to lock 
+revisions/counts down.
+If there is a way to convert the database to a .inc file then we'd be a 
+step closer to coordinating counts between buildhosts (or rebuilds from 
+scratch).
+Currently the SRCPV looks like a major step backwards to the current 
+situation unless you are on a single buildhost *and* never delete TMPDIR 
+*and* use AUTOREV *and* care about upgrade paths.
+
+It would be a lot better if bitbake could just do the revlog | wc -l 
+trick after do_fetch has run. Or at least use that as localcount if a 
+snapshot exists in TMPDIR during parsing.
 
 regards,
 
