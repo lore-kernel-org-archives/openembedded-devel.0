@@ -1,35 +1,36 @@
-Received: from mail-out.m-online.net ([212.18.0.9])
+Received: from mail-px0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mok@mnet-online.de>) id 1NCKuL-0002hI-G7
+	(envelope-from <rk.raggit@gmail.com>) id 1NCSD9-0007tK-TM
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Nov 2009 23:27:52 +0100
-Received: from mail01.m-online.net (mail.m-online.net [192.168.3.149])
-	by mail-out.m-online.net (Postfix) with ESMTP id 6987A1C15570;
-	Sun, 22 Nov 2009 23:26:22 +0100 (CET)
-Received: from localhost (dynscan2.mnet-online.de [192.168.1.215])
-	by mail.m-online.net (Postfix) with ESMTP id 50DAA91D6F;
-	Sun, 22 Nov 2009 23:26:22 +0100 (CET)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.3.149])
-	by localhost (dynscan2.mnet-online.de [192.168.1.215]) (amavisd-new,
-	port 10024)
-	with ESMTP id ymlUimHnilAQ; Sun, 22 Nov 2009 23:26:20 +0100 (CET)
-Received: from mrdenker.palutemo (ppp-82-135-69-249.dynamic.mnet-online.de
-	[82.135.69.249]) by mail.mnet-online.de (Postfix) with SMTP;
-	Sun, 22 Nov 2009 23:26:19 +0100 (CET)
-Received: by mrdenker.palutemo (sSMTP sendmail emulation);
-	Sun, 22 Nov 2009 23:26:19 +0100
-From: mok@mnet-online.de
+	Mon, 23 Nov 2009 07:15:47 +0100
+Received: by pxi12 with SMTP id 12so3752609pxi.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 22 Nov 2009 22:14:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=5alDlZLS779WPAUqvYzmAUeI3yoQeQsxmqASm13vknc=;
+	b=cluIKnAh72FIToyQT4L1lMfqN9zq2DauBX/0pWtvuziurtANXcnf8bBDe8FH2geVyI
+	vDbcEnOL/m0oAOc/g9XdwZx3UlyO6PYGyALDfT1vforDsQJdCZG+ushi7y3b863A9RCz
+	NSa8llAKrDIYBGvsp28sfKo4Ln0CfCVIvcHRg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=ozDSKjCdLxvdl8H3ryOu3s50/LGS7n5nr5z787fTvOPS+CvLuAvlSRPL83r/oqJ75C
+	1qqLFlCnQSJb5eRfyypPLjJbOBNn55ItZZLk21Q43W54CeMIqALs6IJX4XNsqvOuZE78
+	SsnMC50DH/oaerG+0I1y9DPTNhu8eI+ucAibs=
+MIME-Version: 1.0
+Received: by 10.141.45.9 with SMTP id x9mr250844rvj.220.1258956855143; Sun, 22 
+	Nov 2009 22:14:15 -0800 (PST)
+Date: Mon, 23 Nov 2009 11:44:15 +0530
+Message-ID: <ec1f3d400911222214l37838f37i204c88bba6971d5b@mail.gmail.com>
+From: RK Raggit <rk.raggit@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 22 Nov 2009 23:26:10 +0100
-Message-Id: <1258928770-18179-1-git-send-email-mok@mnet-online.de>
-X-Mailer: git-send-email 1.6.5.2
-X-SA-Exim-Connect-IP: 212.18.0.9
-X-SA-Exim-Mail-From: mok@mnet-online.de
+X-SA-Exim-Connect-IP: 209.85.216.182
+X-SA-Exim-Mail-From: rk.raggit@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Klaus Kurzmann <mok@fluxnetz.de>
-Subject: [PATCH] e-wm_svn.bb: split ${sysconfdir}/xdg/menus/applications.menu into it's own package
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: cortex-a9 machine build failure at gcc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,63 +44,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Nov 2009 22:27:52 -0000
+X-List-Received-Date: Mon, 23 Nov 2009 06:15:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Klaus Kurzmann <mok@fluxnetz.de>
+Hi,
 
-Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
----
- recipes/e17/e-wm_svn.bb |    7 ++++++-
- 1 files changed, 6 insertions(+), 1 deletions(-)
+I am adding support for a cortex-a9 based machine but the build fails at gcc
+with this error -
 
-diff --git a/recipes/e17/e-wm_svn.bb b/recipes/e17/e-wm_svn.bb
-index 83dbd81..a935728 100644
---- a/recipes/e17/e-wm_svn.bb
-+++ b/recipes/e17/e-wm_svn.bb
-@@ -80,6 +80,7 @@ PACKAGES =+ "\
-   ${PN}-input-methods \
-   ${PN}-sysactions \
-   ${PN}-utils \
-+  ${PN}-menu \
- "
- 
- RRECOMMENDS_${PN} = "\
-@@ -89,6 +90,7 @@ RRECOMMENDS_${PN} = "\
-   ${PN}-other \
-   ${PN}-input-methods \
-   ${PN}-sysactions \
-+  ${PN}-menu \
- "
- 
- PACKAGE_ARCH_${PN}-config-default = "all"
-@@ -106,6 +108,7 @@ PACKAGE_ARCH_${PN}-icons = "all"
- PACKAGE_ARCH_${PN}-other = "all"
- PACKAGE_ARCH_${PN}-input-methods = "all"
- PACKAGE_ARCH_${PN}-sysactions = "all"
-+PACKAGE_ARCH_${PN}-menu = "all"
- 
- FILES_${PN} = "\
-   ${bindir}/* \
-@@ -140,6 +143,7 @@ FILES_${PN}-other = "${datadir}/enlightenment/data/other"
- FILES_${PN}-input-methods = "${datadir}/enlightenment/data/input_methods"
- FILES_${PN}-sysactions = "${sysconfdir}/enlightenment/sysactions.conf"
- FILES_${PN}-utils = "${libdir}/enlightenment/utils/*"
-+FILES_${PN}-menu = "${sysconfdir}/xdg/menus/applications.menu"
- 
- RRECOMMENDS_${PN}-config-default = "${PN}-theme-default"
- RRECOMMENDS_${PN}-config-illume = "${PN}-theme-illume"
-@@ -165,7 +169,8 @@ FILES_${PN}-doc += "\
-   ${datadir}/enlightenment/doc \
- "
- 
--CONFFILES_${PN} = "${sysconfdir}/xdg/menus/applications.menu"
-+CONFFILES_${PN}-menu = "${sysconfdir}/xdg/menus/applications.menu"
-+CONFFILES_${PN}-sysactions = "/etc/enlightenment/sysactions.conf"
- 
- ALTERNATIVE_PATH = "${bindir}/enlightenment_start.oe"
- ALTERNATIVE_NAME = "x-window-manager"
--- 
-1.6.5.2
+****************
+|
+/home/work/armv7a-angstrom-linux-gnueabi/gcc-cross-initial-4.2.4-r9.1/gcc-4.2.4/gcc/crtstuff.c:1:
+error: bad value (cortex-a9) for -mtune= switch
+|
+/home/work/armv7a-angstrom-linux-gnueabi/gcc-cross-initial-4.2.4-r9.1/gcc-4.2.4/gcc/crtstuff.c:1:
+error: bad value (armv7-a) for -march= switch
+|
+/home/work/armv7a-angstrom-linux-gnueabi/gcc-cross-initial-4.2.4-r9.1/gcc-4.2.4/gcc/crtstuff.c:1:
+error: invalid floating point option: -mfpu=neon
+*****************
 
+gcc variables in my local.conf read thus -
 
+PREFERRED_VERSION_gcc                    = "4.2.4"
+PREFERRED_VERSION_gcc-cross              = "csl-arm-2008q1"
+PREFERRED_VERSION_gcc-cross-initial      = "csl-arm-2008q1"
+PREFERRED_VERSION_gcc-cross-intermediate = "csl-arm-2008q1"
+
+I had also tried something funky like below but to no avail -
+
+PREFERRED_VERSION_gcc = "4.2.4+csl-arm-2008q1-126"
+PREFERRED_VERSION_gcc-cross = "4.2.4+csl-arm-2008q1-126"
+REFERRED_VERSION_gcc-cross-initial = "4.2.4+csl-arm-2008q1-126"
+PREFERRED_VERSION_gcc-cross-intermediate = "4.2.4+csl-arm-2008q1-126"
+Whats gone wrong ?
+
+--RK
 
