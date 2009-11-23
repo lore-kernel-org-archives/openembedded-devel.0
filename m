@@ -1,33 +1,32 @@
 Received: from dan.rpsys.net ([93.97.175.187])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NCXcK-00063n-0O
+	(envelope-from <rpurdie@rpsys.net>) id 1NCXqa-0001nS-QO
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Nov 2009 13:02:07 +0100
+	Mon, 23 Nov 2009 13:16:51 +0100
 Received: from localhost (dan.rpsys.net [127.0.0.1])
 	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nANBvJuN010458 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 11:57:19 GMT
+	nANCC4sJ011973 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Nov 2009 12:12:04 GMT
 X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
 Received: from dan.rpsys.net ([127.0.0.1])
 	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id wNDsuWLCf-bn
+	with LMTP id qPIdmdNLgExo
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 11:57:19 +0000 (GMT)
+	Mon, 23 Nov 2009 12:12:04 +0000 (GMT)
 Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
 	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nANBvGPN010446
+	nANCC1vc011959
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 11:57:18 GMT
+	Mon, 23 Nov 2009 12:12:03 GMT
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20091123114228.GF3349@jama>
+In-Reply-To: <hedfru$gol$1@ger.gmane.org>
 References: <20091115163618.GA3317@jama> <hdr31n$8b0$1@ger.gmane.org>
 	<1258364356.5799.94.camel@dax.rpnet.com> <20091122190547.GC3349@jama>
-	<hedfru$gol$1@ger.gmane.org> <20091123085259.GD3349@jama>
-	<hedqm4$gon$1@ger.gmane.org>  <20091123114228.GF3349@jama>
-Date: Mon, 23 Nov 2009 12:00:32 +0000
-Message-Id: <1258977632.10321.65.camel@dax.rpnet.com>
+	<hedfru$gol$1@ger.gmane.org>
+Date: Mon, 23 Nov 2009 12:15:16 +0000
+Message-Id: <1258978516.10321.79.camel@dax.rpnet.com>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.22.3.1 
 X-SA-Exim-Connect-IP: 93.97.175.187
@@ -48,44 +47,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2009 12:02:07 -0000
+X-List-Received-Date: Mon, 23 Nov 2009 12:16:52 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2009-11-23 at 12:42 +0100, Martin Jansa wrote:
-> RP or someone else:
+On Mon, 2009-11-23 at 09:07 +0100, Koen Kooi wrote:
+> On 22-11-09 20:05, Martin Jansa wrote:
 > 
-> What do you think about proposed implementation?
+> > Every git recipe in OE tree should have some sane hash stored in
+> > conf/distro/include/sane-srcrevs.inc
 > 
-> Another table with localcount for every revision built, not only for last
-> one.
+> The cabal decided that checksums are "part of the metadata" and belongs 
+> in the recipes. I don't understand why SRCREVs are so different. For 
+> SRCREVs my life would be a lot easier if all SRCREV where put in their 
+> respective recipes. Distros can always do
 > 
-> And table with last revisions with branch and machine in key?
+> SRCREV_pn-foo = "bar"
+> PV_pn-foo = "1.2.3+gitr$SRCPV"
+> 
+> in their distro.conf if needed. Due to scoping we do need some include 
+> for EFL_SRCREV, since those recipes are tightly tied together.
 
-Keeping history is actually quite pointless. The only thing you can use
-it for is to make PV go backwards which is exactly what we're trying to
-avoid.
+FWIW I dislike it that we have SRCREVs elsewhere. There is a problem
+(bug?) with bitbake that makes this necessary though and that bug is
+hard to fix :(.
 
-The machine specific part is a massive nightmare and my advise is simple
-- don't use different revisions for different machines, this is simply
-not designed to work. Worst case you create a locked down version for
-one of the machines.
+>  > But be carefull with persistent cache file
+>  > something like this:
+>  > tmpdir-dev-shr/cache/om-gta02/bb_persist_data.sqlite
+> 
+> So if I build pixman_git.bb for om-gta02 weekly, but monthly for 
+> beagleboard or om-gta01 I'll also get different numbers, right?
+> I think the count should only be in a machine specific database if the 
+> SRC_URI/SRCREV is machine specific.
 
-> Then script for persistent cache upgrade or upgrade it while building if
-> new table with localname will have have new name and if not found there,
-> bitbake will try in oldtable and safe result to new one.
+As I understand it you'll lock locking down the local build revisions
+with Angstrom anyway?
 
-This is getting way too complicated for a set of hypothetical situations
-nobody is likely to use. Lets try and keep this simple.
+If we try and solve every issue all at once with this, I doubt we're
+going to get anywhere fast. If we take the issues one at a time and chip
+away at them we may end up somewhere better.
 
-The core problem is that nobody has created a way to share the persist
-data between build machines. The agreed workaround was to add a way for
-the revisions to be locked down though configuration and we're on our
-way to do this.
+The whole SRCREV thing is a can of worms. Its no secret I dislike the
+thing and the fact we've never had a totally clean way to implement it.
+I also recognise its useful though, I use it myself :/. SRCPV is a step
+to fixing a number of problems, we just need to be careful we don't
+create many others.
 
 Cheers,
 
 Richard
+
 
 
 
