@@ -1,39 +1,29 @@
-Received: from dan.rpsys.net ([93.97.175.187])
+Received: from moutng.kundenserver.de ([212.227.126.186])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NCeXF-000371-4b
+	(envelope-from <chris@2net.co.uk>) id 1NCech-0003HR-OI
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Nov 2009 20:25:20 +0100
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nANJKVML018954 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 19:20:31 GMT
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id unCoNPS4Ffiy
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 19:20:31 +0000 (GMT)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nANJKThF018940
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 19:20:30 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Mon, 23 Nov 2009 20:30:58 +0100
+Received: from [192.168.159.11] ([78.147.83.187])
+	by mrelayeu.kundenserver.de (node=mreu2) with ESMTP (Nemesis)
+	id 0LcCMD-1Nvr9u3cCz-00jOza; Mon, 23 Nov 2009 20:24:24 +0100
+Message-ID: <4B0AE162.3030307@2net.co.uk>
+Date: Mon, 23 Nov 2009 19:24:18 +0000
+From: Chris Simmonds <chris@2net.co.uk>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c384c5ea0911231043h75ae7402me61d82d90b8234bd@mail.gmail.com>
-References: <c384c5ea0911230925u5d6e29b4v5801057f25971574@mail.gmail.com>
-	<1259001133.10321.140.camel@dax.rpnet.com>
-	<c384c5ea0911231043h75ae7402me61d82d90b8234bd@mail.gmail.com>
-Date: Mon, 23 Nov 2009 19:23:48 +0000
-Message-Id: <1259004228.10321.168.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-SA-Exim-Connect-IP: 93.97.175.187
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+References: <1258901140-30575-1-git-send-email-bernhard.kaindl@gmx.net>	<1258990008.8426.29.camel@conroy-linux>
+	<4B0AC426.3030505@2net.co.uk>
+	<1259001108.19077.4.camel@conroy-linux>
+In-Reply-To: <1259001108.19077.4.camel@conroy-linux>
+X-Provags-ID: V01U2FsdGVkX1+HqdWhQha7o9+vW7FKLRGaXqqPY0cCDQ7oQb4
+	+qfkz9uAAB15gzcDF1NCNdGkTv92t0JczvBxRj+MlVDXhoqBE0
+	5dL6XbdVnKGUZ3HyxsFYoT4Zux/7g4rH566F0M1mfs=
+X-SA-Exim-Connect-IP: 212.227.126.186
+X-SA-Exim-Mail-From: chris@2net.co.uk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: what is the expected STAGING_INCDIR for cross packages?
+Subject: Re: [PATCH] external-toolchain: Really accept toolchains built by meta-toolchain.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,38 +37,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2009 19:25:20 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 23 Nov 2009 19:30:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2009-11-23 at 19:43 +0100, Leon Woestenberg wrote:
-> Hello Richard,
+Chris Conroy wrote:
+> On Mon, 2009-11-23 at 17:19 +0000, Chris Simmonds wrote:
+>> meta-toolchain does generate environment-setup and so far as I am aware 
+>> it works fine as a stand-alone toolchain. Is there some reason why I 
+>> should not be using it as such?
+>>
+>> Chris S.
 > 
-> On Mon, Nov 23, 2009 at 7:32 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> > On Mon, 2009-11-23 at 18:25 +0100, Leon Woestenberg wrote:
-> >> what is the expected STAGING_INCDIR for -cross packages?
-> >
-> > Where is this used and what kind of problem is occurring?
-> >
-> It's in binutils-cross.
+> It's fine as just a standalone toolchain. It's just not a "Build
+> Platform." Meaning, you can't just source it and get all the other
+> things that OE gives you. This is perhaps too obvious to even warrant
+> mentioning.
 > 
-> I'm adding a new architecture (nios2) which has additional staging
-> steps in which it brings out a few binutils build-host specifics,
-> in order for the following "elf2flt" tool to build.
+> I misinterpreted the original patch since I was comparing against my
+> local tree, where we've modified to check for environment-setup rather
+> than package-status (simply as a sanity check for the setting of
+> ${prefix}, so you can safely disregard my previous posting.
 > 
-> Up-to-current binutils-cross did not stage anything, so we never saw this there.
-> 
-> (I'm aware this should fold into install with your packaged-staging
-> cleanup, but I don't dare to move the binutils to the new approach
-> just yet).
 
-Take a look at what cross.bbclass looks like in Poky. There are things
-like ${target_includedir} defined there for exactly this kind of
-problem.
 
-Cheers,
-
-Richard
-
+Phew! Thanks for the clarification.
+Chris S.
 
 
