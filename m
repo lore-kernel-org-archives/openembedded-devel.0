@@ -1,37 +1,38 @@
-Received: from dan.rpsys.net ([93.97.175.187])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NCZwv-0008EK-VL
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NCaOR-0000h3-2p for openembedded-devel@lists.openembedded.org;
+	Mon, 23 Nov 2009 15:59:58 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NCaN1-0000gw-BF
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Nov 2009 15:31:33 +0100
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nANEQjS4023001 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 14:26:45 GMT
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id eoUJccE-5kAY
+	Mon, 23 Nov 2009 15:58:27 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Nov 2009 15:58:27 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 14:26:44 +0000 (GMT)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nANEQgd0022977
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 14:26:43 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Mon, 23 Nov 2009 15:58:27 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hee2r8$bav$1@ger.gmane.org>
-References: <20091115163618.GA3317@jama> <hdr31n$8b0$1@ger.gmane.org>
-	<1258364356.5799.94.camel@dax.rpnet.com> <20091122190547.GC3349@jama>
-	<hedfru$gol$1@ger.gmane.org> <1258978516.10321.79.camel@dax.rpnet.com>
-	<hee2r8$bav$1@ger.gmane.org>
-Date: Mon, 23 Nov 2009 14:29:58 +0000
-Message-Id: <1258986598.10321.99.camel@dax.rpnet.com>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 23 Nov 2009 15:58:00 +0100
+Message-ID: <hee7to$sn0$1@ger.gmane.org>
+References: <20091115163618.GA3317@jama>
+	<hdr31n$8b0$1@ger.gmane.org>	<1258364356.5799.94.camel@dax.rpnet.com>
+	<20091122190547.GC3349@jama>	<hedfru$gol$1@ger.gmane.org>
+	<1258978516.10321.79.camel@dax.rpnet.com>	<hee2r8$bav$1@ger.gmane.org>
+	<be7a9f3d0911230552y2e49df3cm4e847863de6f426e@mail.gmail.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-SA-Exim-Connect-IP: 93.97.175.187
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
+In-Reply-To: <be7a9f3d0911230552y2e49df3cm4e847863de6f426e@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: SRCPV migration - How SRCPV works!
@@ -48,54 +49,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2009 14:31:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 23 Nov 2009 14:59:58 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2009-11-23 at 14:31 +0100, Koen Kooi wrote:
-> On 23-11-09 13:15, Richard Purdie wrote:
-> 
-> > As I understand it you'll lock locking down the local build revisions
-> > with Angstrom anyway?
-> 
-> Dunno about that, ideally the SRCPV merge should have no impact at all 
-> on existing distros, but it looks like everyone will be forced to lock 
-> revisions/counts down.
+On 23-11-09 14:52, Otavio Salvador wrote:
+> Hello,
+>
+> On Mon, Nov 23, 2009 at 11:31 AM, Koen Kooi<k.kooi@student.utwente.nl>  wrote:
+>> On 23-11-09 13:15, Richard Purdie wrote:
+>>
+>>> As I understand it you'll lock locking down the local build revisions
+>>> with Angstrom anyway?
+>>
+>> Dunno about that, ideally the SRCPV merge should have no impact at all on
+>> existing distros, but it looks like everyone will be forced to lock
+>> revisions/counts down.
+>> If there is a way to convert the database to a .inc file then we'd be a step
+>> closer to coordinating counts between buildhosts (or rebuilds from scratch).
+>> Currently the SRCPV looks like a major step backwards to the current
+>> situation unless you are on a single buildhost *and* never delete TMPDIR
+>> *and* use AUTOREV *and* care about upgrade paths.
+>>
+>> It would be a lot better if bitbake could just do the revlog | wc -l trick
+>> after do_fetch has run. Or at least use that as localcount if a snapshot
+>> exists in TMPDIR during parsing.
+>
+> After looking at what SRCPV means for distro POV I fully agree with Koen.
+>
+> It is going to add more problems then it solves. If a distro has more
+> then one buildhost it will be a nightmare to manage it and very error
+> prone :-(
 
-How is locking the counts down using LOCALCOUNT any different to the
-current situation?
+Even in the single buildhost world things start falling down if you rm 
+TMPDIR.
 
-> If there is a way to convert the database to a .inc file then we'd be a 
-> step closer to coordinating counts between buildhosts (or rebuilds from 
-> scratch).
+regards,
 
-Any method using .inc files is going to race. The only solution that is
-likely to work is a single server allocating numbers in some form.
+Koen
 
-> Currently the SRCPV looks like a major step backwards to the current 
-> situation unless you are on a single buildhost *and* never delete TMPDIR 
-> *and* use AUTOREV *and* care about upgrade paths.
-
-Well this clearly isn't the case. 
-
-Its intended to be a neural step (apart from some PE issues) for
-everyone except for the users of AUTOREV who it helps. Their use case is
-limited to a single autobuilder model where they need to keep one file
-in TMPDIR but can otherwise delete it.
-
-> It would be a lot better if bitbake could just do the revlog | wc -l 
-> trick after do_fetch has run. Or at least use that as localcount if a 
-> snapshot exists in TMPDIR during parsing.
-
-As you're more than well aware, two different behaviours depending on
-whether "a snapshot exists in TMPDIR during parsing" is maintenance and
-reproducibility nightmare.
-
-The first suggestion would be nice, patches welcome.
-
-Cheers,
-
-Richard
 
 
 
