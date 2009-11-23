@@ -1,28 +1,37 @@
-Received: from mail-gx0-f215.google.com ([209.85.217.215])
+Received: from dan.rpsys.net ([93.97.175.187])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ricardo.salveti@openbossa.org>) id 1NCdR0-0001QK-9f
+	(envelope-from <rpurdie@rpsys.net>) id 1NCdjN-0008Di-MY
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Nov 2009 19:14:49 +0100
-Received: by mail-gx0-f215.google.com with SMTP id 7so8873512gxk.12
+	Mon, 23 Nov 2009 19:33:48 +0100
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nANISxvl014686 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Nov 2009 18:29:00 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id Fe6Sp9JVyCwE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 10:13:20 -0800 (PST)
-Received: by 10.101.202.1 with SMTP id e1mr3941059anq.69.1258999999684;
-	Mon, 23 Nov 2009 10:13:19 -0800 (PST)
-Received: from localhost.localdomain ([200.184.118.130])
-	by mx.google.com with ESMTPS id 9sm1559186ywf.5.2009.11.23.10.13.09
-	(version=SSLv3 cipher=RC4-MD5); Mon, 23 Nov 2009 10:13:12 -0800 (PST)
-From: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
+	Mon, 23 Nov 2009 18:28:59 +0000 (GMT)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nANISssX014641
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Nov 2009 18:28:56 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Nov 2009 15:06:25 -0300
-Message-Id: <1258999585-10614-3-git-send-email-ricardo.salveti@openbossa.org>
-X-Mailer: git-send-email 1.6.5
-In-Reply-To: <1258999585-10614-1-git-send-email-ricardo.salveti@openbossa.org>
-References: <1258999585-10614-1-git-send-email-ricardo.salveti@openbossa.org>
-X-SA-Exim-Connect-IP: 209.85.217.215
-X-SA-Exim-Mail-From: ricardo.salveti@openbossa.org
+In-Reply-To: <c384c5ea0911230925u5d6e29b4v5801057f25971574@mail.gmail.com>
+References: <c384c5ea0911230925u5d6e29b4v5801057f25971574@mail.gmail.com>
+Date: Mon, 23 Nov 2009 18:32:13 +0000
+Message-Id: <1259001133.10321.140.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 2/2] mamona-input-methods-git: bumping rev, fixing PV and using oe-stylize
+Subject: Re: what is the expected STAGING_INCDIR for cross packages?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,128 +45,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2009 18:14:49 -0000
+X-List-Received-Date: Mon, 23 Nov 2009 18:33:49 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
----
- conf/distro/include/sane-srcrevs.inc       |    2 +-
- recipes/mamona/mamona-input-methods_git.bb |   58 ++++++++++++----------------
- 2 files changed, 26 insertions(+), 34 deletions(-)
+On Mon, 2009-11-23 at 18:25 +0100, Leon Woestenberg wrote:
+> what is the expected STAGING_INCDIR for -cross packages?
+> 
+> 
+> Our STAGING_INCDIR for -cross packages contains two concatenated absolute paths,
+> one based of CROSS_DIR, one based of STAGING_DIR.
+> 
+> Both are absolute, based against TMPDIR.
+> 
+> Is that correct?
 
-diff --git a/conf/distro/include/sane-srcrevs.inc b/conf/distro/include/sane-srcrevs.inc
-index 42598c1..fa9795d 100644
---- a/conf/distro/include/sane-srcrevs.inc
-+++ b/conf/distro/include/sane-srcrevs.inc
-@@ -171,7 +171,7 @@ SRCREV_pn-llvm-gcc4 ?= "374"
- SRCREV_pn-llvm-gcc4-cross ?= "374"
- SRCREV_pn-madbutterfly ?= "ecd1842714b5e982f3138cbdd358517d57be6aa3"
- SRCREV_pn-maemo-mapper ?= "118"
--SRCREV_pn-mamona_input_methods ?= "7e6a8cc947689a045d0fba90015da599275347d9"
-+SRCREV_pn-mamona-input-methods ?= "4a8f11973021b8b4f157f5743e00f9f9a3c4802b"
- SRCREV_pn-mamonaim-e-applet ?= "a1ba7e8a388ffce3cca92bad059cd801e7733a7a"
- SRCREV_pn-matchbox-config-gtk ?= "1614"
- SRCREV_pn-matchbox-desktop-2 ?= "2096"
-diff --git a/recipes/mamona/mamona-input-methods_git.bb b/recipes/mamona/mamona-input-methods_git.bb
-index ca89453..6b82697 100644
---- a/recipes/mamona/mamona-input-methods_git.bb
-+++ b/recipes/mamona/mamona-input-methods_git.bb
-@@ -3,21 +3,30 @@
- 
- DESCRIPTION = "Mamona input methods"
- HOMEPAGE = "http://dev.openbossa.org/trac/mamona/wiki"
--LICENSE = "GPL"
- SECTION = "libs/inputmethods"
-+LICENSE = "GPL"
- DEPENDS = "ecore gtk+"
--PR = "r4"
--
--PV = "0.1+git"
--
--inherit autotools pkgconfig lib_package
-+RPROVIDES_${PN} = "libmamona-im0"
-+RPROVIDES_${PN}-ecore = "libmamona-im-ecore"
-+RPROVIDES_${PN}-gtk = "libmamona-im-gtk"
-+PV = "0.1-${PR}+gitr${SRCREV}"
-+PR = "r5"
-+PE = "1"
- 
- SRC_URI = "git://dev.openbossa.org/mamona/projects/mamona_input_methods.git;protocol=http"
- 
- S = "${WORKDIR}/git"
- 
--# Mamona IM
--RPROVIDES_${PN} = "libmamona-im0"
-+inherit autotools_stage pkgconfig lib_package
-+
-+EXTRA_OECONF = "\
-+        --enable-ecore-im \
-+        --enable-gtk-im \
-+        "
-+
-+do_configure_prepend() {
-+        ./autogen.sh
-+}
- 
- # Ecore
- PACKAGES += "\
-@@ -25,10 +34,13 @@ PACKAGES += "\
-             ${PN}-ecore-dev \
-             ${PN}-ecore-dbg \
-         "
--RPROVIDES_${PN}-ecore = "libmamona-im-ecore"
--EXTRA_OECONF = "\
--            --enable-ecore-im \
-+# GTK
-+PACKAGES += "\
-+            ${PN}-gtk \
-+            ${PN}-gtk-dev \
-+            ${PN}-gtk-dbg \
-         "
-+
- FILES_${PN}-ecore = "\
-             ${libdir}/ecore/immodules/mamona-im-ecore-module.so \
-         "
-@@ -39,17 +51,6 @@ FILES_${PN}-ecore-dev = "\
- FILES_${PN}-ecore-dbg = "\
-             ${libdir}/ecore/immodules/.debug \
-         "
--
--# GTK
--PACKAGES += "\
--            ${PN}-gtk \
--            ${PN}-gtk-dev \
--            ${PN}-gtk-dbg \
--        "
--RPROVIDES_${PN}-gtk = "libmamona-im-gtk"
--EXTRA_OECONF += "\
--            --enable-gtk-im \
--        "
- FILES_${PN}-gtk = "\
-             ${libdir}/gtk-2.0/*/immodules/mamona-im-gtk-module.so \
-         "
-@@ -61,18 +62,9 @@ FILES_${PN}-gtk-dbg = "\
-             ${libdir}/gtk-2.0/*/immodules/.debug \
-         "
- 
--do_configure_prepend() {
--    ./autogen.sh
--}
--
--do_stage() {
--    autotools_stage_all
--}
--
- pkg_postinst_${PN}-gtk() {
--    gtk-query-immodules-2.0 > ${sysconfdir}/gtk-2.0/gtk.immodules
-+        gtk-query-immodules-2.0 > ${sysconfdir}/gtk-2.0/gtk.immodules
- }
--
- pkg_postrm_${PN}-gtk() {
--    gtk-query-immodules-2.0 > ${sysconfdir}/gtk-2.0/gtk.immodules
-+        gtk-query-immodules-2.0 > ${sysconfdir}/gtk-2.0/gtk.immodules
- }
--- 
-1.6.5
+Cross recipes are tricky. Half the time variables refer to the "host"
+and half the time they refer to the "target". This sounds like a case
+where the two have combined in a rather unfortunate way.
+
+Where is this used and what kind of problem is occurring?
+
+> CROSS_DIR = ${TMPDIR}/cross/$BASE_PACKAGE_ARCH
+> prefix = ${CROSS_DIR}
+> exec_prefix = ${prefix}
+> includedir = ${exec_prefix}/include
+
+These all look correct. Cross packages are installed into "/" under
+${prefix} which puts them in the correctly place
+
+> STAGING_DIR = ${TMPDIR}/staging
+> BASEPKG_HOST_SYS=${HOST_ARCH}${HOST_VENDOR}-${HOST_OS}
+> STAGING_DIR_HOST=${STAGIG_DIR}/$BASEPKG_HOST_SYS}
+> 
+> which are then concatenated for -cross packages as:
+> 
+> STAGING_INCDIR = "${STAGING_DIR_HOST}${includedir}"
+
+So I'd guess that cross.bbclass should be setting STAGING_DIR_HOST = "/"
+like native.bbclass does and then ${includedir} will map to the correct
+place.
+
+I have to wonder what other side effects that would have of course
+(although there aren't that may -cross recipes to break comparatively
+speaking).
+
+Cheers,
+
+Richard
+
+
 
 
 
