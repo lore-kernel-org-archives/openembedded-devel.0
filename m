@@ -1,50 +1,26 @@
-Received: from mail-bw0-f219.google.com ([209.85.218.219])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NCaYz-0007BY-GM
+	(envelope-from <philip@balister.org>) id 1NCacM-0000NY-Ib
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Nov 2009 16:10:52 +0100
-Received: by bwz19 with SMTP id 19so5124734bwz.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Nov 2009 07:09:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=6TGaA12CmHVEZu/WfLXEDA+yFRKPDpz/+75lEF9wT6c=;
-	b=DjOPZrYBfk5x3WJi4kCoFnJxG1uIuVRNtJtvPn8sdg8F+ls4grlPZpWr8YIrH2xiF8
-	FbnNddJsXyCxaSKoT9fyGHZOq7hFJPTUNkATbeJ7oo7GZlJNezoQ0FhHM/Fo5/2GvcHC
-	3hRGhXeo6+vsrdQ/fLUx8VR/hdZuKYF8pCMto=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=cXbo26wI24PNJlDr2AUpnCpUXNBf3ZDSM2BkmWAu97dL7a5Aw1qsYsmLMOzxnj5U7k
-	yDJGwWx+nPIBPh7yjiK8fAzsNnVqld1R8qCYKzZWQ0o26RA2Mwofth9T2usYxSZo+SZC
-	wsDpWsr6ls7W7CJYKR1o0efMpL62fkOlwfpi0=
-Received: by 10.204.25.76 with SMTP id y12mr4827192bkb.13.1258988961396;
-	Mon, 23 Nov 2009 07:09:21 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 14sm1402574fxm.15.2009.11.23.07.09.19
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 23 Nov 2009 07:09:20 -0800 (PST)
-Date: Mon, 23 Nov 2009 16:09:22 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091123150922.GG3349@jama>
-References: <20091115163618.GA3317@jama> <hdr31n$8b0$1@ger.gmane.org>
-	<1258364356.5799.94.camel@dax.rpnet.com>
-	<20091122190547.GC3349@jama> <hedfru$gol$1@ger.gmane.org>
-	<1258978516.10321.79.camel@dax.rpnet.com>
-	<hee2r8$bav$1@ger.gmane.org>
-	<be7a9f3d0911230552y2e49df3cm4e847863de6f426e@mail.gmail.com>
-	<hee7to$sn0$1@ger.gmane.org>
+	Mon, 23 Nov 2009 16:14:21 +0100
+Received: (qmail 32057 invoked by uid 1003); 23 Nov 2009 15:12:43 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 23 Nov 2009 15:12:43 -0000
+Message-ID: <4B0AA668.3030500@balister.org>
+Date: Mon, 23 Nov 2009 10:12:40 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
+	Thunderbird/3.0b4
 MIME-Version: 1.0
-In-Reply-To: <hee7to$sn0$1@ger.gmane.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.218.219
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <1258836735.21876.2.camel@runt>
+In-Reply-To: <1258836735.21876.2.camel@runt>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: SRCPV migration - How SRCPV works!
+Subject: Re: [STABLE] [PATCH] base.bbclass: Replace os.system with subprocess call.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,64 +34,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2009 15:10:52 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 23 Nov 2009 15:14:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Nov 23, 2009 at 03:58:00PM +0100, Koen Kooi wrote:
-> On 23-11-09 14:52, Otavio Salvador wrote:
-> >Hello,
-> >
-> >On Mon, Nov 23, 2009 at 11:31 AM, Koen Kooi<k.kooi@student.utwente.nl>  wrote:
-> >>On 23-11-09 13:15, Richard Purdie wrote:
-> >>
-> >>>As I understand it you'll lock locking down the local build revisions
-> >>>with Angstrom anyway?
-> >>
-> >>Dunno about that, ideally the SRCPV merge should have no impact at all on
-> >>existing distros, but it looks like everyone will be forced to lock
-> >>revisions/counts down.
-> >>If there is a way to convert the database to a .inc file then we'd be a step
-> >>closer to coordinating counts between buildhosts (or rebuilds from scratch).
-> >>Currently the SRCPV looks like a major step backwards to the current
-> >>situation unless you are on a single buildhost *and* never delete TMPDIR
-> >>*and* use AUTOREV *and* care about upgrade paths.
-> >>
-> >>It would be a lot better if bitbake could just do the revlog | wc -l trick
-> >>after do_fetch has run. Or at least use that as localcount if a snapshot
-> >>exists in TMPDIR during parsing.
-> >
-> >After looking at what SRCPV means for distro POV I fully agree with Koen.
-> >
-> >It is going to add more problems then it solves. If a distro has more
-> >then one buildhost it will be a nightmare to manage it and very error
-> >prone :-(
-> 
-> Even in the single buildhost world things start falling down if you
-> rm TMPDIR.
-> 
-> regards,
+Acked-by: Philip Balister <philip@balister.org>
 
-No if you're using LOCALCOUNT_OVERRIDE
-
-Yes if you're using AUTOREV without SRCPV.
-
-What about enabling LOCALCOUNT_OVERRIDE by default.
-Nothing change for everybody (only harmless constant '0+' in PV).
-If they want to stay with bumping PR, its their choice. I think bumping
-LOCALCOUNT with SRCREV change is nicer, because it changes only number 
-before hash and not both PV and PR, but package maintainer can choose
-which he likes better.
-
-And people using AUTOREV will get upgradable versions even when they
-switch to sane-srcrev for some package from time to time. And nothings
-is worse then before for them, because they cannot rm TMPDIR now as well
-as with SRCPV.
-
-regards,
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+On 11/21/2009 03:52 PM, Cory Maccarrone wrote:
+> (This patch is being submitted on behalf of Khem Raj.  I am not the original
+> author, nor do I claim any part of this work.)
+> --------------
+>
+> Often gzip is reporting broken pipe errors with do_unpack of
+> tar.gz files.
+>
+> If you use the commands described above to extract a tar.gz file, gzip
+> sometimes emits a Broken pipe error message. This can safely be ignored
+> if tar extracted all files without any other error message.
+>
+> We do not let python install its SIGPIPE handler and use subprocess call
+> to invoke the command.
+>
+> This is based on the following python bug report.
+> http://bugs.python.org/issue1652
+>
+> Signed-off-by: Khem Raj<raj.khem@gmail.com>
+> ---
+>   classes/base.bbclass |    9 +++++++--
+>   1 files changed, 7 insertions(+), 2 deletions(-)
+>
+> diff --git a/classes/base.bbclass b/classes/base.bbclass
+> index e622aee..69d1979 100644
+> --- a/classes/base.bbclass
+> +++ b/classes/base.bbclass
+> @@ -716,9 +716,14 @@ base_do_buildall() {
+>   	:
+>   }
+>
+> +def subprocess_setup():
+> +	import signal, subprocess
+> +	# Python installs a SIGPIPE handler by default. This is usually not what
+> +	# non-Python subprocesses expect.
+> +	signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+>
+>   def oe_unpack_file(file, data, url = None):
+> -	import bb, os
+> +	import bb, os, signal, subprocess
+>   	if not url:
+>   		url = "file://%s" % file
+>   	dots = file.split(".")
+> @@ -787,7 +792,7 @@ def oe_unpack_file(file, data, url = None):
+>
+>   	cmd = "PATH=\"%s\" %s" % (bb.data.getVar('PATH', data, 1), cmd)
+>   	bb.note("Unpacking %s to %s/" % (base_path_out(file, data), base_path_out(os.getcwd(), data)))
+> -	ret = os.system(cmd)
+> +	ret = subprocess.call(cmd, preexec_fn=subprocess_setup, shell=True)
+>
+>   	os.chdir(save_cwd)
+>
 
 
