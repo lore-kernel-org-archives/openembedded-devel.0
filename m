@@ -1,24 +1,24 @@
-Received: from emailgateway.hillcrestlabs.com ([12.173.51.132])
+Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Chris.Conroy@hillcrestlabs.com>) id 1NCbA0-0004Fg-53
+	(envelope-from <marcolz@zlo.nu>) id 1NCbD2-0004Nr-Mw
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Nov 2009 16:49:07 +0100
-X-AuditID: 0a1e000a-b7b8cae000000d7b-67-4b0aae97207e
-From: Chris Conroy <Chris.Conroy@hillcrestlabs.com>
+	Mon, 23 Nov 2009 16:52:15 +0100
+Received: by mzh.zlo.nu (Postfix, from userid 1000)
+	id DCB07140B0; Mon, 23 Nov 2009 16:50:44 +0100 (CET)
+Date: Mon, 23 Nov 2009 16:50:44 +0100
+From: Marc Olzheim <zlo@zlo.nu>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20091122190547.GC3349@jama>
-References: <20091115163618.GA3317@jama> <hdr31n$8b0$1@ger.gmane.org>
-	<1258364356.5799.94.camel@dax.rpnet.com> <20091122190547.GC3349@jama>
-Date: Mon, 23 Nov 2009 10:47:06 -0500
-Message-Id: <1258991226.8426.37.camel@conroy-linux>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-Brightmail-Tracker: AAAAAA==
-X-SA-Exim-Connect-IP: 12.173.51.132
-X-SA-Exim-Mail-From: Chris.Conroy@hillcrestlabs.com
+Message-ID: <20091123155044.GA27698@zlo.nu>
+References: <1258380584-16437-1-git-send-email-marcin@juszkiewicz.com.pl>
+	<200911231641.03815.marcin@juszkiewicz.com.pl>
+MIME-Version: 1.0
+In-Reply-To: <200911231641.03815.marcin@juszkiewicz.com.pl>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 85.17.141.90
+X-SA-Exim-Mail-From: marcolz@zlo.nu
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: SRCPV migration - How SRCPV works!
+Subject: Re: [STABLE][PATCH 1/3] bug: ship SDIO firmware for WiFi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,40 +32,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Nov 2009 15:49:07 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 23 Nov 2009 15:52:15 -0000
+X-Groupsio-MsgNum: 14626
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="uAKRQypu60I7Lcqm"
+Content-Disposition: inline
 
-On Sun, 2009-11-22 at 20:05 +0100, Martin Jansa wrote:
-> Problem with this is that it downloads whole git repository (huge load
-> on git repository servers) just to count how many revisions are in
-> some
-> branch before your revision.
-> 
-> That's what it do now (without SRCPV merge) for every recipe you set
-> to
-> AUTOREV. And this is done during recipe parsing phase (because we need
-> to know PV string for every recipe).
-> 
-> We all agreed that upstream server maintainers won't like us this way.
+--uAKRQypu60I7Lcqm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Forgive me since before this thread I have not been following the SRCPV
-stuff terribly closely, but this seems to be like a lot of work to solve
-a different sort of use case.
+On Mon, Nov 23, 2009 at 04:41:03PM +0100, Marcin Juszkiewicz wrote:
+> ping for whole series
+>=20
+> no idea why it is not in patchwork
 
-If you are a distro that is tracking untagged, unreleased git revisions
-from an upstream tree, then do you really care if you have to clone the
-tree once per build machine? You're probably already doing this anyways
-if you are using a package in this fashion. Doing a full clone on every
-single build would obviously be a terrible thing, but as long as this
-gets cached it doesn't seem like an awful cost to me.
+Well, I do not know when you posted the series, but the message-id in
+the In-Reply-To: suggests it would have been posted November 16th. I
+do not see them in the mailing list archives, so I suspect they never
+arrived. Maybe you could check the mail log on the box you used git
+send-email on to find out more... ;-)
 
-And, if you have many build users in your distro, then you could easily
-fix this by hosting your own mirrored git server.
+Marc
 
-I'm probably ignorant of the real use case, but just in case I'm not,
-there's my two cents.
+--uAKRQypu60I7Lcqm
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+Content-Disposition: inline
 
---Chris
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
 
+iEYEARECAAYFAksKr1QACgkQezjnobFOgrFA1gCgwoeM89abInsyK7rxAWXh/Bjx
+ZR8An3hFfq9qcy7FM053aD+K5d0IAHRt
+=GQgR
+-----END PGP SIGNATURE-----
 
+--uAKRQypu60I7Lcqm--
