@@ -1,45 +1,29 @@
-Received: from mail-bw0-f219.google.com ([209.85.218.219])
+Received: from smtp1.utsp.utwente.nl ([130.89.2.8] helo=smtp.utwente.nl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NCtgS-0008GL-RN
+	(envelope-from <k.kooi@student.utwente.nl>) id 1NCtog-0000uw-LS
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Nov 2009 12:35:51 +0100
-Received: by bwz19 with SMTP id 19so5941088bwz.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Nov 2009 03:34:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=EX+tFHOmKGoazo1vmAdAbpz5pfO12xn20esxc6eTG8A=;
-	b=Nw7sWl9Lga3oDEBb9c/vSYZkxd5kdjs9jGUcKwX/NFBmX3WjI/5hyV+6jCIZ0MPmlJ
-	QzXsu0k4hpsS7KT4wZOjxEKAxmDttCMlkX6ypJZTOtZN3zsQ5Z37O09Aoe1wNyJvzzGY
-	eKweH98tP0MjJxYdEYS04uAvJPmH17W1ODmdA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Iy8Rh2MhC4J2TF6naUEhEnIUZYE1ReCayYlARJMs2AFENzSND4xAIGSLFNZw7hT2Iq
-	CYLeWsu3ZLBN9LOME8Sh7X4hmCKzqoJmZGss6+sq9UXCMhqWwH0IBDK+9q7BvmDhFul9
-	yCCu30SeXm6YfLdZdLcG1iJGfrpawwvsdr1wM=
-Received: by 10.204.155.65 with SMTP id r1mr6005820bkw.143.1259062459971;
-	Tue, 24 Nov 2009 03:34:19 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 13sm1745001fxm.13.2009.11.24.03.34.19
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 24 Nov 2009 03:34:19 -0800 (PST)
-Date: Tue, 24 Nov 2009 12:34:24 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091124113424.GH28485@jama>
+	Tue, 24 Nov 2009 12:44:21 +0100
+Received: from [172.20.0.255] (vpn006019.vpn.utwente.nl [130.89.6.19])
+	by smtp.utwente.nl (8.12.10/SuSE Linux 0.7) with ESMTP id
+	nAOAbmdU032469; Tue, 24 Nov 2009 11:37:49 +0100
+Mime-Version: 1.0 (Apple Message framework v1076)
+From: Koen Kooi <k.kooi@student.utwente.nl>
+In-Reply-To: <20091124102028.GG28485@jama>
+Date: Tue, 24 Nov 2009 11:37:48 +0100
+Message-Id: <F143DC04-C363-40F0-99C7-84B5305F684C@student.utwente.nl>
 References: <E1NCsJm-0008Ly-9m@melo.openembedded.org>
 	<20091124102028.GG28485@jama>
-	<6ec4247d0911240309o4f296a6cy42dcbdad758afcc4@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <6ec4247d0911240309o4f296a6cy42dcbdad758afcc4@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.218.219
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Mailer: Apple Mail (2.1076)
+X-UTwente-MailScanner-Information: Scanned by MailScanner. Contact
+	icts.servicedesk@utwente.nl for more information.
+X-UTwente-MailScanner: Found to be clean
+X-UTwente-MailScanner-From: k.kooi@student.utwente.nl
+X-SA-Exim-Connect-IP: 130.89.2.8
+X-SA-Exim-Mail-From: k.kooi@student.utwente.nl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [oe-commits] Koen Kooi : opkg-target,sdk: bump SRCREV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -54,50 +38,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Nov 2009 11:35:52 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 24 Nov 2009 11:44:21 -0000
+Content-Type: text/plain; charset=us-ascii; format=flowed; delsp=yes
+Content-Transfer-Encoding: 7bit
 
-On Tue, Nov 24, 2009 at 09:39:27PM +1030, Graham Gower wrote:
-> Is there a reason why another update-alternatives exists at all?
-> Wouldn't it be better to get fixes merged upstream?
 
-I'm not sure what update-alternatives-dpkg in OE does different
-grep -R  virtual/update-alternatives conf/distro
-shows only mamona.conf using dpkg
+Op 24 nov 2009, om 11:20 heeft Martin Jansa het volgende geschreven:
 
-Even with fixes merged upstream we should block installing own u-a with
-images, because its really confusing to have one u-a in /usr/bin/ and
-second in /usr/sbin/ and if someone in OE doesn't use opkg as pkg
-manager then we still need virtual/u-a.
+> On Tue, Nov 24, 2009 at 10:08:18AM +0000, git version control wrote:
+>> Module: openembedded.git
+>> Branch: org.openembedded.dev
+>> Commit: 2fdf1aa1c869ea9deecee86206f49a2eca9d7c00
+>> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=2fdf1aa1c869ea9deecee86206f49a2eca9d7c00
+>>
+>> Author: Koen Kooi <koen@openembedded.org>
+>> Date:   Tue Nov 24 10:22:43 2009 +0100
+>>
+>> opkg-target,sdk: bump SRCREV
+>
+> Hi,
+>
+> just out of curiosity, does your opkg also ship with update- 
+> alternatives
+> script included in package?
 
-Maybe add
-PROVIDES = "virtua/update-alternatives" to opkg recipes (the same for
--native) and switch default providers in distro configs?
+Yes:
 
-> I would be quite happy to accept diffs.
+koen@dominion:/OE/angstrom-dev$ dpkg-deb -c deploy/glibc/ipk/armv7a/ 
+opkg-nogpg-nocurl_0.1.6+svnr363-r16.4_armv7a.ipk
+drwxr-xr-x root/root         0 2009-11-24 11:06 ./
+drwxr-xr-x root/root         0 2009-11-24 11:06 ./usr/
+drwxr-xr-x root/root         0 2009-11-24 11:06 ./usr/bin/
+-rwxr-xr-x root/root    134428 2009-11-24 11:06 ./usr/bin/opkg-cl
+-rwxr-xr-x root/root      4248 2009-11-24 11:06 ./usr/bin/update- 
+alternatives
+-rwxr-xr-x root/root      1671 2009-11-24 11:06 ./usr/bin/opkg-key
+drwxr-xr-x root/root         0 2009-11-24 11:06 ./usr/share/
+drwxr-xr-x root/root         0 2009-11-24 11:06 ./usr/share/opkg/
+drwxr-xr-x root/root         0 2009-11-24 11:06 ./usr/share/opkg/ 
+intercept/
+-rwxr-xr-x root/root       151 2009-11-24 11:06 ./usr/share/opkg/ 
+intercept/ldconfig
+-rwxr-xr-x root/root       175 2009-11-24 11:06 ./usr/share/opkg/ 
+intercept/update-modules
+-rwxr-xr-x root/root       231 2009-11-24 11:06 ./usr/share/opkg/ 
+intercept/depmod
+drwxr-xr-x root/root         0 2009-11-24 11:06 ./etc/
+drwxr-xr-x root/root         0 2009-11-24 11:06 ./etc/rcS.d/
+-rwxr-xr-x root/root       513 2009-11-24 11:06 ./etc/rcS.d/S98configure
 
-You can consider u-a changes in
-http://patchwork.openembedded.org/patch/1291/
-should apply cleanly to your u-a, last time I checked it was the same as
-unpatched update-alternatives-cworth in OE repo.
 
-First 2 chunks are for use case, when I install new package foo-bar which
-provides alternative for foo with same priority as some other package
-foo-old before. 
-Then I would like to use alternative from foo-bar if there is no
-alternative with highest priority (foo-bar and foo-old have highest
-alternatives installed)
+> Haven't you problem with it, ie not respecting
+> virtual/update-alternatives set for distribution in OE?
 
-Last chunk solves issue when you use update-alternatives for links to
-directories, when new link is "installed" inside the old alternative
-directory instead of replacing old link.
+virtual/foo is for buildtime, so some other solution is needed if you  
+want to install a different u-a.
 
-Cheers,
+> We're using slightly modified cworth's update-alternatives script
+> http://patchwork.openembedded.org/patch/1291/
+> so we need to remove it from opkg, because otherwise version from opkg
+> is higher in PATH :/
+> http://patchwork.openembedded.org/patch/1290/
+>
+> Could other distributions also use this?
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+Those 2 patches look OK, expect that you need to add RDEPENDS =  
+"update-alternatices-cworth" to the opkg recipes since they will stop  
+working otherwise.
+We might need something like the virtual/xserver + XSERVER to solve it  
+runtime and buildtime.
+
+regards,
+
+Koen
 
 
