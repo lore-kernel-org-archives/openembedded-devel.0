@@ -1,27 +1,45 @@
-Received: from caiajhbdcahe.dreamhost.com ([208.97.132.74]
-	helo=homiemail-a22.g.dreamhost.com)
+Received: from dan.rpsys.net ([93.97.175.187])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sebastian@SSpaeth.de>) id 1NCuvj-0000lJ-Mr
+	(envelope-from <rpurdie@rpsys.net>) id 1NCvRi-00039i-AO
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Nov 2009 13:55:42 +0100
-Received: from localhost.localdomain (mtec-hg-docking-1-dhcp-199.ethz.ch
-	[129.132.133.199])
-	by homiemail-a22.g.dreamhost.com (Postfix) with ESMTPA id 4ED831A8061; 
-	Tue, 24 Nov 2009 04:54:07 -0800 (PST)
-From: Sebastian Spaeth <Sebastian@SSpaeth.de>
+	Tue, 24 Nov 2009 14:28:45 +0100
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nAODNtYQ004249 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Nov 2009 13:23:55 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id mOaosQ8mvP5c
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Nov 2009 13:23:55 +0000 (GMT)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nAODNomj004221
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Nov 2009 13:23:52 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Nov 2009 13:53:57 +0100
-Message-Id: <1259067237-25725-1-git-send-email-Sebastian@SSpaeth.de>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <4B0BD1AC.1010806@SSpaeth.de>
-References: <4B0BD1AC.1010806@SSpaeth.de>
-X-SA-Exim-Connect-IP: 208.97.132.74
-X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
+In-Reply-To: <1259011185.7271.32.camel@mattotaupa.wohnung.familie-menzel.net>
+References: <1258311783.18820.149.camel@mattotaupa.wohnung.familie-menzel.net>
+	<1258537305.3021.14.camel@mattotaupa.wohnung.familie-menzel.net>
+	<1258586470.3071.10.camel@mattotaupa.wohnung.familie-menzel.net>
+	<1258589851.5229.17.camel@dax.rpnet.com>
+	<1258629037.3093.129.camel@mattotaupa.wohnung.familie-menzel.net>
+	<1258631121.5229.22.camel@dax.rpnet.com>
+	<1259011185.7271.32.camel@mattotaupa.wohnung.familie-menzel.net>
+Date: Tue, 24 Nov 2009 13:27:15 +0000
+Message-Id: <1259069235.10321.176.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-MIME-Autoconverted: from 8bit to quoted-printable by dan.rpsys.net id
+	nAODNtYQ004249
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Sebastian Spaeth <Sebastian@SSpaeth.de>,
-	SHR-devel <shr-devel@lists.shr-project.org>
-Subject: [PATCH] navit: Do not set /proc/sys/vm/overcommit in an app launcher, especially not without ever changing it back.
+Subject: Re: bitbake base-image: gmp-native: ERROR: function	do_configure failed: configure: error: Oops, mp_limb_t is 32 bits, but the	assembler code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,77 +53,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Nov 2009 12:55:42 -0000
+X-List-Received-Date: Tue, 24 Nov 2009 13:28:45 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-* This reverts parts of 742fb4ae71e6a7e655385086ba9edebbf00b6ebd
-* If someone wants to do use this, it should be done on a more finegrained distro basis
+On Mon, 2009-11-23 at 22:19 +0100, Paul Menzel wrote:
+> Am Donnerstag, den 19.11.2009, 11:45 +0000 schrieb Richard Purdie:
+> > So just to be clear, you don't have any 64 bit userspace, just a 32 b=
+it
+> > one? Running gcc to compile something gives you a 32 bit binary, not =
+a
+> > 64 bit one?
+>=20
+> That is correct.
+>=20
+>         $ dpkg --print-architecture
+>         i386
+>=20
+> > I'd try adding:
+> >=20
+> > BUILD_ARCH =3D "i686"
+> > BUILD_OS =3D "linux"
+> >=20
+> > to your local.conf
+>=20
+> That worked perfectly. Thank you!
+>=20
+> I do not know how to proceed with #3470 though. Can it be closed as
+> won=E2=80=99t fix and a note added to the FAQ?
 
-Signed-off-by: Sebastian Spaeth <Sebastian@SSpaeth.de>
----
- recipes/navit/files/navit.launcher |   30 ------------------------------
- recipes/navit/navit.inc            |    4 ----
- 2 files changed, 0 insertions(+), 34 deletions(-)
- delete mode 100644 recipes/navit/files/navit.launcher
+I've closed the bug as fixed, detailing how to work around the problem.
+Adding to the FAQ would be good too. As I mentioned in the bug,
+identifying this problem case in sanity.bbclass would also be a nice
+enhancement.
 
-diff --git a/recipes/navit/files/navit.launcher b/recipes/navit/files/navit.launcher
-deleted file mode 100644
-index b95aadb..0000000
---- a/recipes/navit/files/navit.launcher
-+++ /dev/null
-@@ -1,30 +0,0 @@
--#! /bin/sh
--#
--# Copyright Matthias Hentges <devel@hentges.net> (c) 2008
--# License: GPL (see http://www.gnu.org/licenses/gpl.txt for a copy of the license)
--#
--# Filename: navit.launcher
--# Date: 20080105 (YMD)
--#
--#################################################################################
--#
--# 20080105 - v0.0.1	- Initial release
--
--# On devices with low memory (< 512Mb?) Navit will segfault on start.
--# This can be worked around by doing
--# "echo 1 > /proc/sys/vm/overcommit_memory"
--
--if test "`cat /proc/meminfo | grep ^MemTotal | awk '{print $2}'`" -lt "500000"
--then
--	if test "$USER" = "root"
--	then
--		echo "Enabling low-mem workaround..."
--		echo 1 > /proc/sys/vm/overcommit_memory
--	else
--		echo "I need root-privs to enable the low-mem workaround!"
--	fi
--fi
--
--navit.real $*
--	
--
-diff --git a/recipes/navit/navit.inc b/recipes/navit/navit.inc
-index 8ad439d..fa250ff 100644
---- a/recipes/navit/navit.inc
-+++ b/recipes/navit/navit.inc
-@@ -15,7 +15,6 @@ FILES_${PN}-dbg += "${libdir}/${PN}/*/.debug"
- 
- SRC_URI_append = " \
-                   file://navit.desktop \
--                  file://navit.launcher \
-                   file://navit.png \
- 	  	 "
- 
-@@ -25,8 +24,5 @@ do_install_append() {
-         install -d ${D}${datadir}/pixmaps/
-         install -m 0644 ${WORKDIR}/navit.png ${D}${datadir}/pixmaps/
- 
--        mv ${D}${bindir}/navit ${D}${bindir}/navit.real
--        install -m 0755 ${WORKDIR}/navit.launcher ${D}${bindir}/navit
--
- 	rm ${D}${libdir}/${PN}/*/*.la
- }
--- 
-1.6.3.3
+Cheers,
+
+Richard
 
 
 
