@@ -1,38 +1,41 @@
-Received: from mail-px0-f183.google.com ([209.85.216.183])
+Received: from mail-fx0-f216.google.com ([209.85.220.216])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1NCtKd-0007jc-Ro
+	(envelope-from <leon.woestenberg@gmail.com>) id 1NCtOP-0007ri-BS
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Nov 2009 12:13:19 +0100
-Received: by pxi13 with SMTP id 13so4510849pxi.24
+	Tue, 24 Nov 2009 12:17:12 +0100
+Received: by fxm8 with SMTP id 8so6724925fxm.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Nov 2009 03:11:46 -0800 (PST)
+	Tue, 24 Nov 2009 03:15:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type;
-	bh=PkSFiLZ/fCTbD+GeZIz9N2U5hi/BQfBExdsSYy2WiM8=;
-	b=an+1aib2m+60toCSnQf99R9H25zeUiaU8kaD+XBUWqOdDPqALpk4yX4lj+SmXTvqUu
-	Vm5uGqMKBOKt+66YuWYmGNwnHmxGEelkBPIXS3SWU2dyV6Qc/PjEuzIDlq72ecfLdSEV
-	fz88Kou/Ck7Rs6Q/NEUwPMADmS+pIv4wVh8/A=
+	bh=Ylr8+T5UN8nOIDXmJS0SH7SBBqZGRd6a9unTE4JkUk4=;
+	b=xb9Qfba88tqwq/vSKCADRH4khdyjHoOAnKmpXfohbULsknDxT9KcOsyAE2al18uVC7
+	BaM8v1E5P9r9XPcJML4Sp3wWRRT2q8R1NPeaOxgyNPA+9qN5aD76wf+86VowiuPgLnSm
+	fGAL17rIYdWtMXPxQKDz4yuCyXhAnN8bCP0Lo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=TbL/omB9VYAMS9eLgVUoCTrPw+L/ck5ZYp9glhX+KmZZKdvAVXiXlycqRbbrBcMWqL
-	JfHdtv8xJvWaW2Oggs9Hd7sbEIlZIBl6x37FBoTrV3SvwJhryS/SXDt1gEZk1+Fw9PY4
-	1cgfo0r0YxeSt2RKbZpOFFUbIyAZ7kSFAam0I=
+	b=EC0rEmD5/UHla3RLXpJM47s+SxBN0ufJVmgFuOaxbGgQ2aYW49FCAP4WONkZOsUYYu
+	25zuWFf5YpUz3h/Z6/Ov0X6Zl4rw2aWhdZqYCClw1KuhMBmZ4Clg9itf/MgoC+Away8i
+	4Ds/mktJFMCxojwGn/nWVj41Ft+lhFX4GKJaI=
 MIME-Version: 1.0
-Received: by 10.142.2.24 with SMTP id 24mr626571wfb.139.1259061106359; Tue, 24 
-	Nov 2009 03:11:46 -0800 (PST)
-In-Reply-To: <heg84r$lhh$1@ger.gmane.org>
-References: <heg84r$lhh$1@ger.gmane.org>
-Date: Tue, 24 Nov 2009 21:41:46 +1030
-Message-ID: <6ec4247d0911240311x4e758d1ctd6a0295b10510aa6@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+Received: by 10.239.141.131 with SMTP id c3mr720029hba.44.1259061340676; Tue, 
+	24 Nov 2009 03:15:40 -0800 (PST)
+In-Reply-To: <1259004228.10321.168.camel@dax.rpnet.com>
+References: <c384c5ea0911230925u5d6e29b4v5801057f25971574@mail.gmail.com>
+	<1259001133.10321.140.camel@dax.rpnet.com>
+	<c384c5ea0911231043h75ae7402me61d82d90b8234bd@mail.gmail.com>
+	<1259004228.10321.168.camel@dax.rpnet.com>
+Date: Tue, 24 Nov 2009 12:15:40 +0100
+Message-ID: <c384c5ea0911240315v488a5d85v3621676ff8ed005b@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.183
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 209.85.220.216
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Custom handling of ipk upgrade conflicts..
+Subject: Re: what is the expected STAGING_INCDIR for cross packages?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,13 +49,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Nov 2009 11:13:19 -0000
+X-List-Received-Date: Tue, 24 Nov 2009 11:17:12 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-It sounds like something that a preinst script would be suited to.
+Hello,
 
-Could you elaborate on the custom merging that you wish to do?
+On Mon, Nov 23, 2009 at 8:23 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Mon, 2009-11-23 at 19:43 +0100, Leon Woestenberg wrote:
+>> On Mon, Nov 23, 2009 at 7:32 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+>> > On Mon, 2009-11-23 at 18:25 +0100, Leon Woestenberg wrote:
+>> >> what is the expected STAGING_INCDIR for -cross packages?
+>
+> Take a look at what cross.bbclass looks like in Poky. There are things
+> like ${target_includedir} defined there for exactly this kind of
+> problem.
+>
+This seems the right approach.
 
--Graham
+Emptying STAGING_DIR_HOST opened another can of worms (/shlibs related).
+
+Groeten,
+-- 
+Leon
 
 
