@@ -1,37 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NCq8B-00074O-AV for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Nov 2009 08:48:14 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NCq6l-0000g2-DQ
+	(envelope-from <rpjday@crashcourse.ca>) id 1NCqyc-0000AZ-Bg
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Nov 2009 08:46:43 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Nov 2009 08:46:43 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Nov 2009 08:46:43 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 24 Nov 2009 08:46:20 +0100
-Message-ID: <heg30c$7a4$1@ger.gmane.org>
-References: <1259015105.7271.96.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-In-Reply-To: <1259015105.7271.96.camel@mattotaupa.wohnung.familie-menzel.net>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	Tue, 24 Nov 2009 09:42:25 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NCqxC-0001Rj-Gl for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Nov 2009 03:40:54 -0500
+Date: Tue, 24 Nov 2009 03:40:36 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.00.0911240339170.30249@localhost>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: bitbake console-image: ERROR: function do_deploy failed: install: cannot stat `arch/arm/boot/uImage': No such file or directory
+Subject: known build error for gcc-4.3.3?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,37 +44,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Nov 2009 07:48:14 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 24 Nov 2009 08:42:26 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On 23-11-09 23:25, Paul Menzel wrote:
-> Dear OpenEmbedded hackers,
->
->
-> I successfully built base-image with
->
->          $ bitbake base-image
->
-> following [1].
->
-> I now want to build console-image afterwards, but I get an error.
->
->          ERROR: function do_deploy failed
->          ERROR: see log in /srv/oe/angstrom-dev/work/beagleboard-angstrom-linux-gnueabi/linux-omap-2.6.29-r49/temp/log.do_deploy.18428
->          NOTE: Task failed: /srv/oe/angstrom-dev/work/beagleboard-angstrom-linux-gnueabi/linux-omap-2.6.29-r49/temp/log.do_deploy.18428
->          ERROR: TaskFailed event exception, aborting
->          ERROR: Build of /srv/oe/openembedded/recipes/linux/linux-omap_2.6.29.bb do_deploy failed
->          ERROR: Task 737 (/srv/oe/openembedded/recipes/linux/linux-omap_2.6.29.bb, do_deploy) failed
->          ERROR: '/srv/oe/openembedded/recipes/linux/linux-omap_2.6.29.bb' failed
 
-'bitbake -c clean virtual/kernel'
+  latest angstrom/beagle dev build failed building gcc-4.3.3.  i'm
+cleaning and trying again just in case it was something i did, but is
+there a known build error for that target?
 
-This error is a side effect of moving the deploy task.
+rday
+--
 
-regards,
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
 
-Koen
+            Linux Consulting, Training and Kernel Pedantry.
 
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
