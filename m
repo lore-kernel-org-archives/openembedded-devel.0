@@ -1,36 +1,34 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NCqyc-0000AZ-Bg
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NCrV3-00025o-PY for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Nov 2009 10:15:56 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NCrTe-0007Ou-MM
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Nov 2009 09:42:25 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NCqxC-0001Rj-Gl for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Nov 2009 03:40:54 -0500
-Date: Tue, 24 Nov 2009 03:40:36 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.0911240339170.30249@localhost>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+	Tue, 24 Nov 2009 10:14:26 +0100
+Received: from 203.117.234.153 ([203.117.234.153])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Nov 2009 10:14:26 +0100
+Received: from robk by 203.117.234.153 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Nov 2009 10:14:26 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Rob Kramer <robk@starhub.net.sg>
+Followup-To: gmane.comp.handhelds.openembedded
+Date: Tue, 24 Nov 2009 17:12:28 +0800
+Message-ID: <heg84r$lhh$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: 203.117.234.153
+User-Agent: KNode/4.3.2
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: known build error for gcc-4.3.3?
+Subject: Custom handling of ipk upgrade conflicts..
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,24 +42,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Nov 2009 08:42:26 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Tue, 24 Nov 2009 09:15:56 -0000
+Content-Type: text/plain; charset="ISO-8859-1"
+Content-Transfer-Encoding: 7Bit
 
+Hi all,
 
-  latest angstrom/beagle dev build failed building gcc-4.3.3.  i'm
-cleaning and trying again just in case it was something i did, but is
-there a known build error for that target?
+I'm wondering how I could deal with conditionally installing some files in a 
+ipk package, such as configuration files. For example, to not install some 
+file if it already exists, or to merge it in some customized way. The 
+CONFFILES directive is too interactive for my use, and doesn't allow custom 
+handling of conflicts.
 
-rday
---
+Does someone know of an example of a recipe that does a similar thing, 
+perhaps using ipkg preinstall scripts etc?
 
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
+Cheers!
 
-            Linux Consulting, Training and Kernel Pedantry.
+    Rob
 
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
 
 
