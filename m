@@ -1,34 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from dan.rpsys.net ([93.97.175.187])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NDHpi-0006LJ-Vj for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Nov 2009 14:23:02 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NDHoI-000478-NL
+	(envelope-from <rpurdie@rpsys.net>) id 1NDIs2-0007zd-3e
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Nov 2009 14:21:30 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Nov 2009 14:21:30 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Wed, 25 Nov 2009 15:29:29 +0100
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nAPEOaLS000462 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Nov 2009 14:24:37 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id k-cfemQVYfFr
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Nov 2009 14:21:30 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 25 Nov 2009 14:24:36 +0000 (GMT)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nAPEOQWY000434
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Nov 2009 14:24:27 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 25 Nov 2009 14:21:11 +0100
-Message-ID: <hejb07$qpm$1@ger.gmane.org>
-References: <4B0D2724.3070709@SSpaeth.de>
+In-Reply-To: <hejb07$qpm$1@ger.gmane.org>
+References: <4B0D2724.3070709@SSpaeth.de>  <hejb07$qpm$1@ger.gmane.org>
+Date: Wed, 25 Nov 2009 14:27:59 +0000
+Message-Id: <1259159279.10321.204.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-In-Reply-To: <4B0D2724.3070709@SSpaeth.de>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: pkgconfig bbclass: also sed out bogus includes
@@ -45,31 +45,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Nov 2009 13:23:02 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 25 Nov 2009 14:29:29 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 25-11-09 13:46, Sebastian Spaeth wrote:
->> author	Koen Kooi<koen@openembedded.org>
->> commit	2c8134baa56ad047f5c37069379c0e560dd6477e
->>
->> RP says: In theory the recipes themselves should be patched to stop
->> this nonesense getting in there in the first place but that is
->> appropriate for pkgconfig.bbclass
->
-> Nice one. Should we add a warning when we find such a bogus include so
-> recipes can be fixed up over time?
+On Wed, 2009-11-25 at 14:21 +0100, Koen Kooi wrote:
+> On 25-11-09 13:46, Sebastian Spaeth wrote:
+> >> author	Koen Kooi<koen@openembedded.org>
+> >> commit	2c8134baa56ad047f5c37069379c0e560dd6477e
+> >>
+> >> RP says: In theory the recipes themselves should be patched to stop
+> >> this nonesense getting in there in the first place but that is
+> >> appropriate for pkgconfig.bbclass
+> >
+> > Nice one. Should we add a warning when we find such a bogus include so
+> > recipes can be fixed up over time?
+> 
+> Before this commit insane.bbclass aborted the build during 
+> do_qa_staging, so I don't think there are a lot of such recipes around :)
+> 
+> Feel free to add such a warning to this class.
+> 
+> I ran into this issue with eet.pc when trying to build a newer e-wm.
 
-Before this commit insane.bbclass aborted the build during 
-do_qa_staging, so I don't think there are a lot of such recipes around :)
+Now is probably a good time to discuss some ideas. In Poky I split
+pkgconfig.bbclass into two, with pkgconfig.bbclass just adding
+pkgconfig-native into DEPENDS.
 
-Feel free to add such a warning to this class.
+How about we just require pkgconfig-native as part of the default
+DEPENDS and start removing pkgconfig.bbclass everywhere we can?
 
-I ran into this issue with eet.pc when trying to build a newer e-wm.
+Ifs its needed anywhere there is a bug in the application's use of .pc
+files.
 
-regards,
+Cheers,
 
-Koen
+Richard
 
 
 
