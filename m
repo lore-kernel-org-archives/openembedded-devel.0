@@ -1,37 +1,23 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f217.google.com ([209.85.218.217])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NDMUf-0004Hx-LN for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Nov 2009 19:21:36 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NDMTF-0001Ul-BG
+	(envelope-from <ricardo.salveti@openbossa.org>) id 1NDN9z-0004f1-8i
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Nov 2009 19:20:05 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Nov 2009 19:20:05 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Wed, 25 Nov 2009 20:04:18 +0100
+Received: by bwz9 with SMTP id 9so11699bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Nov 2009 19:20:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 25 Nov 2009 11:02:45 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.204.2.73 with SMTP id 9mr561863bki.159.1259175765276; Wed, 25 
+	Nov 2009 11:02:45 -0800 (PST)
+Date: Wed, 25 Nov 2009 16:02:45 -0300
+Message-ID: <ae9c9a1c0911251102x3e727255l94dcb5f75e36a158@mail.gmail.com>
+From: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 25 Nov 2009 19:18:10 +0100
-Message-ID: <hejsd2$plq$1@ger.gmane.org>
-References: <4B0D6590.2040009@mwester.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-In-Reply-To: <4B0D6590.2040009@mwester.net>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: ricardo.salveti@openbossa.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: sane-backends-1.0.20 failing to build
+Subject: Commit access to rsalveti
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,27 +31,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Nov 2009 18:21:36 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 25 Nov 2009 19:04:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 25-11-09 18:12, Mike Westerhof wrote:
-> Something is rather fishy with the sane-backends that was just committed
-> -- anyone else see failures similar to this?
+Hi all,
 
-I just tried over here:
+So, following the last email regarding mamona patches, I'm kindly
+asking if it would be possible to allow me to have commit access to
+OE.
 
-NOTE: Running task 1774 of 1774 (ID: 0, 
-/OE/org.openembedded.dev/recipes/sane/sane-backends_1.0.20.bb, 
-do_rm_work_all)
-NOTE: Tasks Summary: Attempted 1774 tasks of which 1755 didn't need to 
-be rerun and 0 failed.
+During the past I helped maintaining the mamona distribution, that was
+basically another OE branch that we used to maintain inside openbossa
+repository.
+Until now Rodrigo Vivi was mainly the one getting and applying the
+patches into OE upstream, but as he's not working with Mamona and OE
+anymore, I'm now the mamona maintainer, together with other developers
+inside INdT.
 
-does mkinstalldirs come from gettext or coreutils?
+Currently the plan is to merge Mamona commits into the repo and keep
+using the main OE repository for development, avoiding working as we
+did before.
 
-regards,
-
-Koen
-
+Thanks,
+-- 
+Ricardo Salveti de Araujo
 
 
