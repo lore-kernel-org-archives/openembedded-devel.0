@@ -1,31 +1,31 @@
 Received: from dan.rpsys.net ([93.97.175.187])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NDJJx-000590-Da
+	(envelope-from <rpurdie@rpsys.net>) id 1NDJMb-0006qS-8l
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Nov 2009 15:58:20 +0100
+	Wed, 25 Nov 2009 16:01:04 +0100
 Received: from localhost (dan.rpsys.net [127.0.0.1])
 	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nAPErS2R004295 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Nov 2009 14:53:28 GMT
+	nAPEuCbK004533 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Nov 2009 14:56:12 GMT
 X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
 Received: from dan.rpsys.net ([127.0.0.1])
 	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id cOenOpmMfc-S
+	with LMTP id PnKpOqYEipH5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Nov 2009 14:53:28 +0000 (GMT)
+	Wed, 25 Nov 2009 14:56:12 +0000 (GMT)
 Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
 	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	nAPErO2v004275
+	nAPEu7Ox004526
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Nov 2009 14:53:26 GMT
+	Wed, 25 Nov 2009 14:56:09 GMT
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ac9c93b10911200613u538b43berf63c36cea61cdfb3@mail.gmail.com>
+In-Reply-To: <c384c5ea0911230831x44589834ga3fce8c59d29a45d@mail.gmail.com>
 References: <1258645184.5229.46.camel@dax.rpnet.com>
-	<ac9c93b10911200613u538b43berf63c36cea61cdfb3@mail.gmail.com>
-Date: Wed, 25 Nov 2009 14:56:57 +0000
-Message-Id: <1259161017.10321.207.camel@dax.rpnet.com>
+	<c384c5ea0911230831x44589834ga3fce8c59d29a45d@mail.gmail.com>
+Date: Wed, 25 Nov 2009 14:59:40 +0000
+Message-Id: <1259161180.10321.211.camel@dax.rpnet.com>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.22.3.1 
 X-SA-Exim-Connect-IP: 93.97.175.187
@@ -46,39 +46,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Nov 2009 14:58:20 -0000
+X-List-Received-Date: Wed, 25 Nov 2009 15:01:04 -0000
 Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2009-11-20 at 15:13 +0100, Frans Meulenbroeks wrote:
-> 2009/11/19 Richard Purdie <rpurdie@rpsys.net>:
-> > So to summarise, the list of tasks remaining is therefore:
+On Mon, 2009-11-23 at 17:31 +0100, Leon Woestenberg wrote:
+> On Thu, Nov 19, 2009 at 4:39 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> > d) Start removing legacy do_stage functions and convert exclusively to
+> >   the new model
 > >
-> > a) Generate a list of recipes using legacy staging during parsing and
-> >   save it into tmp?
-> > b) Start to convert recipes to use do_install for staging. Poky has
-> >   many examples.
-> > c) Start to add BBCLASSEXTEND = "native" to recipes
-> > d) Start to add BBCLASSEXTEND = "nativesdk" to recipes
-> > e) Port the "do_populate_staging" to "do_populate_sysroot" change from
-> >   Poky to OE.dev
-> > f) Enable packaged staging as default.
->
-> Richard, I'm more than happy to convert/update some of the recipes
-> (e.g. the ones I've worked on in the past), but I would appreciate it
-> if you could point me to one or two specific examples (to avoid the
-> case that I pick one which is not the best).
+> > Not really started yet. Poky has now converted all of its recipes to the
+> > new model and has no legacy staging however so there are plenty of
+> > examples out there.
+> >
+> Where is this work happening (branch?) and who is expected to work on this?
 
-I can't really give specific advice on this, just pick something and see
-how it goes. If its also in Poky, look there to see how the conversion
-was made.
+Its going to happen in org.openembedded.dev over the next few weeks as
+far as I know.
 
-If you have any questions or want me to work through some examples, just
-pick them and I'll do so on the list here...
+I'd really like some help with this, I don't think I can do it alone.
+I've converted Poky entirely which is hopefully proof it works and can
+be done along with providing a ton of examples. 
+
+> I would especially see the toolchain bits up-to-date, and would like
+> to help, but this will certainly introduce breakage at some point.
+
+I'm hoping most of that is behind us. Obviously if the conversion isn't
+made correctly there is a risk of breakage but outside of the areas like
+toolchains, it should be contained to small areas.
 
 Cheers,
 
 Richard
+
 
 
 
