@@ -1,36 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NDBXf-0000f8-60 for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Nov 2009 07:39:58 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NDBWF-0000lb-5j
+	(envelope-from <Sebastian@SSpaeth.de>) id 1NDHHv-0007Vt-4X
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Nov 2009 07:38:27 +0100
-Received: from 203.117.234.153 ([203.117.234.153])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Nov 2009 07:38:27 +0100
-Received: from robk by 203.117.234.153 with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Nov 2009 07:38:27 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 25 Nov 2009 13:48:06 +0100
+Received: from homiemail-a20.g.dreamhost.com (mailbigip.dreamhost.com
+	[208.97.132.5])
+	by hapkido.dreamhost.com (Postfix) with ESMTP id B1B7A17DC53
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Nov 2009 04:46:33 -0800 (PST)
+Received: from [129.132.208.142] (vpn-global-dhcp1-142.ethz.ch
+	[129.132.208.142])
+	by homiemail-a20.g.dreamhost.com (Postfix) with ESMTPA id 1A41D7EC063
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Nov 2009 04:46:30 -0800 (PST)
+Message-ID: <4B0D2724.3070709@SSpaeth.de>
+Date: Wed, 25 Nov 2009 13:46:28 +0100
+From: Sebastian Spaeth <Sebastian@SSpaeth.de>
+Organization: ETH Zurich
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Rob Kramer <robk@starhub.net.sg>
-Followup-To: gmane.comp.handhelds.openembedded
-Date: Wed, 25 Nov 2009 14:36:32 +0800
-Message-ID: <heijcd$lme$1@ger.gmane.org>
-References: <heg84r$lhh$1@ger.gmane.org>
-	<6ec4247d0911240311x4e758d1ctd6a0295b10510aa6@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: 203.117.234.153
-User-Agent: KNode/4.3.2
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Enigmail-Version: 0.95.7
+OpenPGP: id=C827A062
+X-SA-Exim-Connect-IP: 66.33.216.122
+X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Custom handling of ipk upgrade conflicts..
+Subject: pkgconfig bbclass: also sed out bogus includes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,23 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Nov 2009 06:39:58 -0000
-Content-Type: text/plain; charset="ISO-8859-1"
-Content-Transfer-Encoding: 7Bit
+X-List-Received-Date: Wed, 25 Nov 2009 12:48:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Graham Gower wrote:
-> It sounds like something that a preinst script would be suited to.
-> 
-> Could you elaborate on the custom merging that you wish to do?
+> author	Koen Kooi <koen@openembedded.org>
+> commit	2c8134baa56ad047f5c37069379c0e560dd6477e
+>
+> RP says: In theory the recipes themselves should be patched to stop
+> this nonesense getting in there in the first place but that is
+> appropriate for pkgconfig.bbclass
 
-For example, it could merge setting entries in a config file with a new file 
-from the ipk package. Or decide not to install the file at all, if there 
-already is a file that is 'good enough' (i.e. passes some custom testing).
+Nice one. Should we add a warning when we find such a bogus include so
+recipes can be fixed up over time?
 
-Cheers,
-
-    Rob
-
-
+Sebastian
 
 
