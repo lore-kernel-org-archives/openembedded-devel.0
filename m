@@ -1,27 +1,40 @@
-Received: from mail-bw0-f217.google.com ([209.85.218.217])
+Received: from mail-fx0-f216.google.com ([209.85.220.216])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ricardo.salveti@openbossa.org>) id 1NDNAx-0003C7-Fw
+	(envelope-from <otavio.salvador@gmail.com>) id 1NDSH0-0006Mu-7p
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Nov 2009 20:05:18 +0100
-Received: by bwz9 with SMTP id 9so12672bwz.12
+	Thu, 26 Nov 2009 01:31:53 +0100
+Received: by fxm8 with SMTP id 8so261940fxm.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Nov 2009 11:03:45 -0800 (PST)
+	Wed, 25 Nov 2009 16:30:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type; bh=QOaz7nLxVsWkyZnYvbFEKD2i32njzSCMGfFTKVOUFFo=;
+	b=eaJjKoX5H0TLBHt1hMlHz90mQGkC+xj8YgL8bQA8UZ9Pg55iGhbJhevGuv+aZIZDNQ
+	OAqf6xziJtfSuM/WQN/k0OFVYMBX5IKed3YtxnhooLrpvBgBAOGtERU4ajLsPdYD+k1F
+	t7ISBbiCtM4EpirtXoR4a6hUUsqOxl4DjRwz4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	b=votD4jPimeITxYrqeeM7PzsNuTJXvmhEi6KIsJHYMq4oytxV3JViczLvVpIMyKfl/t
+	UtJszgrt3fSevYyoI8BSDhQsX3D7dsa7o9OlDZCgc6U3X1WrUn33bTU363xR9Hv/Pnbx
+	qqs4IHrgoFHkhuZkeQRQsRmHZPEJzpF71mREI=
 MIME-Version: 1.0
-Received: by 10.204.2.131 with SMTP id 3mr5204587bkj.175.1259175824164; Wed, 
-	25 Nov 2009 11:03:44 -0800 (PST)
-In-Reply-To: <hejsa1$p9i$1@ger.gmane.org>
-References: <1258999585-10614-1-git-send-email-ricardo.salveti@openbossa.org>
-	<ae9c9a1c0911250924x3ae0a610n3b15b06fee0ad8b7@mail.gmail.com>
-	<hejsa1$p9i$1@ger.gmane.org>
-Date: Wed, 25 Nov 2009 16:03:44 -0300
-Message-ID: <ae9c9a1c0911251103m61743ed4l782f79b0155d7734@mail.gmail.com>
-From: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
+Sender: otavio.salvador@gmail.com
+Received: by 10.239.139.199 with SMTP id u7mr820772hbu.96.1259195419928; Wed, 
+	25 Nov 2009 16:30:19 -0800 (PST)
+In-Reply-To: <ae9c9a1c0911251102x3e727255l94dcb5f75e36a158@mail.gmail.com>
+References: <ae9c9a1c0911251102x3e727255l94dcb5f75e36a158@mail.gmail.com>
+Date: Wed, 25 Nov 2009 22:30:19 -0200
+X-Google-Sender-Auth: c86774765e90bdcc
+Message-ID: <be7a9f3d0911251630o2c6d2cc8x3e43720dd562657c@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: ricardo.salveti@openbossa.org
+X-SA-Exim-Connect-IP: 209.85.220.216
+X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCHES] Fixing Mamona-related packages.
+Subject: Re: Commit access to rsalveti
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,27 +48,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Nov 2009 19:05:18 -0000
+X-List-Received-Date: Thu, 26 Nov 2009 00:31:53 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Nov 25, 2009 at 3:16 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> On 25-11-09 18:24, Ricardo Salveti de Araujo wrote:
->>
->> Anyone?
->
-> I was planning to look at them later this week but...
->
->> Or should I ask for commit access to push the modifications we're
->> creating for mamona?
->
-> ...having commit access won't hurt :)
+Hello Ricardo,
 
-Ok, send the email asking commit access :-)
+On Wed, Nov 25, 2009 at 5:02 PM, Ricardo Salveti de Araujo
+<ricardo.salveti@openbossa.org> wrote:
+> Currently the plan is to merge Mamona commits into the repo and keep
+> using the main OE repository for development, avoiding working as we
+> did before.
 
-Then I can apply these patches later.
+This is not up to me however I'd be better post the branch with
+initial changes for review in the mailing list. This is specially for
+changes that could affect other distributions.
 
-Thanks,
+I do support your commit access but after few review cycles to avoid
+possible mistakes.
+
+My 2c.
+
 -- 
-Ricardo Salveti de Araujo
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
