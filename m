@@ -1,44 +1,31 @@
-Received: from mail-bw0-f217.google.com ([209.85.218.217])
+Received: from mail-out.m-online.net ([212.18.0.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NDaht-0005HL-5C
+	(envelope-from <mok@mnet-online.de>) id 1NDalH-0007EM-Hq
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Nov 2009 10:32:12 +0100
-Received: by bwz9 with SMTP id 9so363984bwz.12
+	Thu, 26 Nov 2009 10:35:42 +0100
+Received: from mail01.m-online.net (mail.m-online.net [192.168.3.149])
+	by mail-out.m-online.net (Postfix) with ESMTP id A627D1C15EA0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Nov 2009 01:30:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=/QXBAXlgsU+6waFBtFYngbJDVe+egXuuexByKolA4Pg=;
-	b=Is/cTShyudY/ih0RwXyBLL90Q7jnUZaol9NOOGiDNVefqvRMFEYdPF6PKjN4gyjpXG
-	CcVoOaAKU5saca5ubDf6L1Px7VAe8jxp5WMcBsln25p64GSwHrSc4AJjIeHNFCEf5sFe
-	yAx3m3FjrFWm2CXoTVyw2FCOTNecF1efPFVz4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=J1VWryB44/MHH+paQuZu9AcayxMKKG0609SElFlvWgtcSizjTVqTPOrKFi0CXvJiVU
-	BQpcjZCc1A8D3OoG254rqK7wIHHZ+7Gwc4fSnqFk8/M8MFFHE9NyBEH7s1jYgrqJDUgd
-	0zUNeEZR60K8c5cZNQ635Dpwkn7CPOWIwoa+w=
-Received: by 10.204.48.131 with SMTP id r3mr2283057bkf.195.1259227838919;
-	Thu, 26 Nov 2009 01:30:38 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 16sm152791fxm.8.2009.11.26.01.30.37
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 26 Nov 2009 01:30:38 -0800 (PST)
-Date: Thu, 26 Nov 2009 10:30:31 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 26 Nov 2009 10:34:09 +0100 (CET)
+Received: from mrdenker.palutemo (unknown [188.174.20.204])
+	by mail.mnet-online.de (Postfix) with SMTP id 64B0E9086F
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Nov 2009 10:34:08 +0100 (CET)
+Received: by mrdenker.palutemo (sSMTP sendmail emulation);
+	Thu, 26 Nov 2009 10:34:09 +0100
+Date: Thu, 26 Nov 2009 10:34:09 +0100
+From: Klaus 'mrmoku' Kurzmann <mok@mnet-online.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091126093031.GA3354@jama>
-References: <E1NDaYW-0003Fx-Nr@melo.openembedded.org>
+Message-ID: <20091126093409.GA19254@mrdenker.palutemo>
+References: <heldod$obj$1@ger.gmane.org>
 MIME-Version: 1.0
-In-Reply-To: <E1NDaYW-0003Fx-Nr@melo.openembedded.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+In-Reply-To: <heldod$obj$1@ger.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-08-17)
+X-SA-Exim-Connect-IP: 212.18.0.9
+X-SA-Exim-Mail-From: mok@mnet-online.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [oe-commits] Steve Sakoman : gnome-mplayer: bump SRCREV
+Subject: Re: e-wm-menu problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,48 +39,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Nov 2009 09:32:12 -0000
+X-List-Received-Date: Thu, 26 Nov 2009 09:35:42 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Thu, Nov 26, 2009 at 09:22:28AM +0000, git version control wrote:
-> gnome-mplayer: bump SRCREV
-> 
-> ---
-> 
->  recipes/gnome-mplayer/gnome-mplayer_svn.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes/gnome-mplayer/gnome-mplayer_svn.bb b/recipes/gnome-mplayer/gnome-mplayer_svn.bb
-> index 5540f94..2769bcb 100644
-> --- a/recipes/gnome-mplayer/gnome-mplayer_svn.bb
-> +++ b/recipes/gnome-mplayer/gnome-mplayer_svn.bb
-> @@ -1,7 +1,7 @@
->  require gnome-mplayer.inc
->  
-> -SRCREV = "1569"
-> -PV = "0.9.8+svnr${SRCPV}"
-> +SRCREV = "1583"
-> +PV = "0.9.8+svn${SRCPV}"
+On Thu, 26 Nov 2009, Koen Kooi wrote:
 
-Did you remove 'r' intentionally or is it a typo?
+> Hi,
 
-I was trying to make svnr consistent in OE tree and only few recipes
-were using svn without 'r'
-http://cgit.openembedded.net/cgit.cgi/openembedded/commit/?id=6ca479d37af6d1e4e89e5dac0dc5b2fb81819c2b
-if this isn't true:
-* Should be safe as version svnr[1234567890]* > svn[1234567890]*
-then I should fix more recipes
+> Lately I've notice a problem when building and installing e-wm: it
+> drags in e-menu-shr. It's due to (improper) usage of RPROVIDES +
+> RCONFLICTS.
 
-and if it is true then your srcrev bump won't be upgraded for people who
-built gnome-mplayer between 6ca479d37af6d1e4e89e5dac0dc5b2fb81819c2b and
-this change.
+> My proposal is that images should choose which applications.menu
+> they are using (the one from gnome-desktop, e-wm, e-menu-shr-etc)
+> and have e-wm stop RRECOMMENDING it.
 
-Cheers,
+> The basic patch looks like this:
+
+> --- a/recipes/e17/e-wm_svn.bb
+> +++ b/recipes/e17/e-wm_svn.bb
+> @@ -3,7 +3,7 @@ DEPENDS = "eet evas ecore edje efreet edbus"
+> -PR = "r7"
+> +PR = "r8"
+
+> @@ -90,7 +90,6 @@ RRECOMMENDS_${PN} = "\
+> -  ${PN}-menu \
+
+> --- a/recipes/shr/e-wm-menu-shr_git.bb
+> +++ b/recipes/shr/e-wm-menu-shr_git.bb
+> @@ -2,8 +2,8 @@ DESCRIPTION = "illume SHR applications.menu config"
+
+> +PR = "r1"
+
+> -RPROVIDES_${PN} = "e-wm-menu"
+
+> And then a + <menu of choice> in your tasks and/or images.
+
+> What do you think about it?
+Fine for us - will just add it to the SHR image... And sorry for
+breaking it :|
+
+> regards,
+
+> Koen
+
+Thanks
 
 -- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+Klaus 'mrmoku' Kurzmann
 
 
