@@ -1,40 +1,35 @@
-Received: from mail-pz0-f192.google.com ([209.85.222.192])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rk.raggit@gmail.com>) id 1NDXJW-0006BP-4g
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NDZcT-0002BA-2x for openembedded-devel@lists.openembedded.org;
+	Thu, 26 Nov 2009 09:22:32 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NDZat-0001Un-E3
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Nov 2009 06:54:49 +0100
-Received: by pzk30 with SMTP id 30so320180pzk.24
+	Thu, 26 Nov 2009 09:20:51 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Nov 2009 09:20:51 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Nov 2009 21:53:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=Vw/6MC6/Mb8c7Z4C0zH72wwzHa4WYxN/GM/U5RIsmhU=;
-	b=Fh4rRwhJ4CCrA3N+8pd9UVj5KwfU7W+0tHgfXGKKeDFL0kCBwMMYKh6rstRqZrljKo
-	AGGnAWVVO/MpZ9aKxg9KAnp6GQVuUN0oNhitBASOtJQLefI/+oM+icH/eWMKnBCBEeba
-	obD3ZmMGJxdtfW3ZKo5nK+xG+gOKDdFGoh3x4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=ZBEuBFb2Wo4NeIeItvWGYyZ2qRnvbuBNuVwL2nnL2/ECslkkK7EaqqimZjovqwZK1P
-	IlbMlRx0AwF2mIpzhB+sPXGQ3YQiN7hCJaqxNdRYUZ+9Ila6zPHPO/NkyC+eQo7ITaeL
-	Qt+w+MeiO7b6jWO3W12EJaiG2Uw4nE7FRQ0Lo=
-MIME-Version: 1.0
-Received: by 10.141.28.16 with SMTP id f16mr488404rvj.109.1259214795050; Wed, 
-	25 Nov 2009 21:53:15 -0800 (PST)
-In-Reply-To: <1258973177.23826.231.camel@mill.internal.reciva.com>
-References: <ec1f3d400911222214l37838f37i204c88bba6971d5b@mail.gmail.com>
-	<1258973177.23826.231.camel@mill.internal.reciva.com>
-Date: Thu, 26 Nov 2009 11:23:15 +0530
-Message-ID: <ec1f3d400911252153n2cdcd3f5vb9bc29d3760bd623@mail.gmail.com>
-From: RK Raggit <rk.raggit@gmail.com>
+	Thu, 26 Nov 2009 09:20:51 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.222.192
-X-SA-Exim-Mail-From: rk.raggit@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 26 Nov 2009 09:20:29 +0100
+Message-ID: <heldod$obj$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: cortex-a9 machine build failure at gcc
+Subject: e-wm-menu problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,59 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Nov 2009 05:54:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 26 Nov 2009 08:22:32 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
->
->
-> The version you select here needs to match ${PV} from one of the
-> available recipes in order to have any useful effect.  It looks like the
-> magic string for 2008q1 (see gcc-csl-arm-2008q1.inc) would be:
->
-> PREFERRED_VERSION_gcc-cross-initial = "4.2.3+csl-arm-2008q1-126"
->
-> and likewise for the others.  As things stand, it appears that you are
-> getting the regular gcc 4.2.4 selected and this one doesn't understand
-> cortex-a9.
->
-> If you wanted to try 2008q3 then that would be 4.3.2+csl-arm-2008q3-39.
->
->
+Hi,
 
-Thanks Phil. My conf now reads like this -
+Lately I've notice a problem when building and installing e-wm: it drags 
+in e-menu-shr. It's due to (improper) usage of RPROVIDES + RCONFLICTS.
 
-PREFERRED_VERSION_gcc                    = "4.2.3+csl-arm-2008q1-126"
-PREFERRED_VERSION_gcc-cross              = "4.2.3+csl-arm-2008q1-126"
-PREFERRED_VERSION_gcc-cross-initial      = "4.2.3+csl-arm-2008q1-126"
-PREFERRED_VERSION_gcc-cross-intermediate = "4.2.3+csl-arm-2008q1-126"
-When i do a clean build , it fails at gcc-cross-initial do_compile task.
-This is the log-
+My proposal is that images should choose which applications.menu they 
+are using (the one from gnome-desktop, e-wm, e-menu-shr-etc) and have 
+e-wm stop RRECOMMENDING it.
 
-********************************************
-| + cd
-/home/raghu/opendistro/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-initial-4.2.3+csl-arm-2008q1-126-r5/gcc-4.2/build.i686-linux.arm-angstrom-linux-gnueabi
-| + do_compile
-| + ln -sf
-'/home/raghu/opendistro/build/tmp/staging/armv7a-angstrom-linux-gnueabi/usr/lib/crt*.o'
-/home/raghu/opendistro/build/tmp/cross/armv7a/arm-angstrom-linux-gnueabi/lib/
-| ln: target
-`/home/raghu/opendistro/build/tmp/cross/armv7a/arm-angstrom-linux-gnueabi/lib/'
-is not a directory: No such file or directory
-NOTE: Task failed:
-/home/raghu/opendistro/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-initial-4.2.3+csl-arm-2008q1-126-r5/temp/log.do_compile.8147
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /home/raghu/opendistro/openembedded/recipes/gcc/
-gcc-cross-initial_csl-arm-2008q1.bb do_compile failed
-ERROR: Task 2484 (/home/raghu/opendistro/openembedded/recipes/gcc/
-gcc-cross-initial_csl-arm-2008q1.bb, do_compile) failed
-NOTE: Tasks Summary: Attempted 262 tasks of which 0 didn't need to be rerun
-and 1 failed.
-ERROR: '/home/raghu/opendistro/openembedded/recipes/gcc/
-gcc-cross-initial_csl-arm-2008q1.bb' failed
-********************************************
+The basic patch looks like this:
 
-OE is trying to make a link but the directory is missing. Any ideas ? My
-binutils was built fine with version 2.18.50.0.7
+--- a/recipes/e17/e-wm_svn.bb
++++ b/recipes/e17/e-wm_svn.bb
+@@ -3,7 +3,7 @@ DEPENDS = "eet evas ecore edje efreet edbus"
+-PR = "r7"
++PR = "r8"
 
---RK
+@@ -90,7 +90,6 @@ RRECOMMENDS_${PN} = "\
+-  ${PN}-menu \
+
+--- a/recipes/shr/e-wm-menu-shr_git.bb
++++ b/recipes/shr/e-wm-menu-shr_git.bb
+@@ -2,8 +2,8 @@ DESCRIPTION = "illume SHR applications.menu config"
+
++PR = "r1"
+
+-RPROVIDES_${PN} = "e-wm-menu"
+
+And then a + <menu of choice> in your tasks and/or images.
+
+What do you think about it?
+
+regards,
+
+Koen
+
+
 
