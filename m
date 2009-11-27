@@ -1,31 +1,40 @@
-Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
+Received: from mail-fx0-f216.google.com ([209.85.220.216])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sebastian@SSpaeth.de>) id 1NDxT2-00053I-9Z
+	(envelope-from <otavio.salvador@gmail.com>) id 1NDyOV-0000Jg-EN
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Nov 2009 10:50:23 +0100
-Received: from homiemail-a21.g.dreamhost.com (caiajhbdcahe.dreamhost.com
-	[208.97.132.74])
-	by hapkido.dreamhost.com (Postfix) with ESMTP id 8204017DA16
+	Fri, 27 Nov 2009 11:49:46 +0100
+Received: by fxm8 with SMTP id 8so1281438fxm.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Nov 2009 01:48:48 -0800 (PST)
-Received: from [192.168.1.154] (unknown [195.190.181.110])
-	by homiemail-a21.g.dreamhost.com (Postfix) with ESMTPA id 22AD4300059
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Nov 2009 01:48:45 -0800 (PST)
-Message-ID: <4B0FA07C.6070501@SSpaeth.de>
-Date: Fri, 27 Nov 2009 10:48:44 +0100
-From: Sebastian Spaeth <Sebastian@SSpaeth.de>
-Organization: ETH Zurich
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	Fri, 27 Nov 2009 02:48:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type; bh=aEyuFlPcG7/ZS1sKZpUknksJK5vamn6b9JhVjkrG6xI=;
+	b=Dh6lniinfUADaFNld8lgFTCnrDYZpHf7uXo+w2y4dySuAB+HPKvM0wBbMvXm+Qoif4
+	T6qST+k+iKEOGv+/AxZTMKmuAXz6wHWToAOzEFKp/ETJ1eU36YT/DmsNbU09h51J9Eh9
+	T1YXEUXeNHxLLhHCD4ukCIC8Fb6ZyHTKmRh/Q=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	b=a3sRVc4HRZyg4B/9ZDkJzQyDSrg5enLOlaS0YCY0ZZygwP0wTe+5SyYZnpth3gihmy
+	3YyV5ysanmXNDi1eY8FhJcb4KzE+S8mwdYTFXfdTzTnPynN3ga+d+nqABOkbbpY9mLaP
+	bRW9q0+KUXyYxIQopeduUcAyQxillW4MAoN50=
 MIME-Version: 1.0
+Sender: otavio.salvador@gmail.com
+Received: by 10.239.145.129 with SMTP id s1mr89689hba.45.1259318892210; Fri, 
+	27 Nov 2009 02:48:12 -0800 (PST)
+In-Reply-To: <ae9c9a1c0911261845m6a81efcblf372b4409fcc1185@mail.gmail.com>
+References: <ae9c9a1c0911261845m6a81efcblf372b4409fcc1185@mail.gmail.com>
+Date: Fri, 27 Nov 2009 08:48:12 -0200
+X-Google-Sender-Auth: a94d71a7fcd87459
+Message-ID: <be7a9f3d0911270248r3d2e75ffibe3cc71248d61a9e@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.7
-OpenPGP: id=C827A062
-X-SA-Exim-Connect-IP: 66.33.216.122
-X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
+X-SA-Exim-Connect-IP: 209.85.220.216
+X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: bootchart-lite uses "install" in postinst
+Subject: Re: Mamona: classes and configs for fist review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,39 +48,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Nov 2009 09:50:23 -0000
-X-Groupsio-MsgNum: 14706
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enigC97150DC564567A3AD23AF8D"
-
---------------enigC97150DC564567A3AD23AF8D
+X-List-Received-Date: Fri, 27 Nov 2009 10:49:46 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-bootchart-lite uses "install" in postinst, which was not available on my
-device.
+Hello Ricardo,
 
-Would it be preferable to RDEPENDS on coreutils, or should we be using a
-simple "mkdir /etc/bootchart-lite" in postinst.
+On Fri, Nov 27, 2009 at 12:45 AM, Ricardo Salveti de Araujo
+<ricardo.salveti@openbossa.org> wrote:
+> Hello all,
+>
+> I just created a branch in gitorious with mamona patches related with
+> classes and configs, for first review.
 
-All it does is creating that empty dir.
+The changes looks good to me at least. One thing that I'd interesting
+to know is how are you using the PRODUCT setting and what use cases
+you've been solving with it.
 
-spaetz
+The only cosmetic thing that you might change is to reorder the patch
+that introduces PRODUCT in bitbake.conf and the distro change to allow
+for easier understanding of where it come from.
+
+Cheers,
+
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
---------------enigC97150DC564567A3AD23AF8D
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEARECAAYFAksPoHwACgkQVYX1jMgnoGIrpgCcDGTRZWR2sQI0MdZ3x4jYcAjF
-3WwAmgIgb3ti/mnFOYZ09IZdnrKdv3u/
-=h5Oe
------END PGP SIGNATURE-----
-
---------------enigC97150DC564567A3AD23AF8D--
