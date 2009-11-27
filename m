@@ -1,31 +1,36 @@
-Received: from mail-out.m-online.net ([212.18.0.9])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mok@mnet-online.de>) id 1NDlxV-0005rB-0K
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NDpDK-0002oe-54 for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Nov 2009 02:01:37 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NDpBs-0005iu-1X
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Nov 2009 22:33:04 +0100
-Received: from mail01.m-online.net (mail.m-online.net [192.168.3.149])
-	by mail-out.m-online.net (Postfix) with ESMTP id A00531C159D3
+	Fri, 27 Nov 2009 02:00:04 +0100
+Received: from 68-25-27-139.pools.spcsdns.net ([68.25.27.139])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Nov 2009 02:00:04 +0100
+Received: from jerm7861 by 68-25-27-139.pools.spcsdns.net with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Nov 2009 22:31:30 +0100 (CET)
-Received: from mrdenker.palutemo (unknown [188.174.20.204])
-	by mail.mnet-online.de (Postfix) with SMTP id 715DE90D6B
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Nov 2009 22:31:29 +0100 (CET)
-Received: by mrdenker.palutemo (sSMTP sendmail emulation);
-	Thu, 26 Nov 2009 22:31:30 +0100
-Date: Thu, 26 Nov 2009 22:31:30 +0100
-From: Klaus 'mrmoku' Kurzmann <mok@mnet-online.de>
+	Fri, 27 Nov 2009 02:00:04 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091126213130.GA26299@mrdenker.palutemo>
-References: <1258755695-24978-1-git-send-email-mok@mnet-online.de>
-MIME-Version: 1.0
-In-Reply-To: <1258755695-24978-1-git-send-email-mok@mnet-online.de>
-User-Agent: Mutt/1.5.20 (2009-08-17)
-X-SA-Exim-Connect-IP: 212.18.0.9
-X-SA-Exim-Mail-From: mok@mnet-online.de
+From: Jeremy Williams <jerm7861@yahoo.com>
+Date: Fri, 27 Nov 2009 00:51:38 +0000 (UTC)
+Message-ID: <loom.20091127T012624-591@post.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 68.25.27.139 (Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.0.14) Gecko/2009090216 Ubuntu/9.04 (jaunty) Firefox/3.0.14)
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] extra packages for default illume keyboards
+Subject: gcc-cross-4.3.3 build failure - PPC/Sequoia
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,23 +44,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Nov 2009 21:33:05 -0000
+X-List-Received-Date: Fri, 27 Nov 2009 01:01:37 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-On Fri, 20 Nov 2009, mok@mnet-online.de wrote:
+Looks like a recent commit applies a patch to libobjc in gcc-4.3.3 that causes
+the build of gcc-cross-4.3.3 on PPC to fail (and I'm assuming other non-ARM
+machines as well).
 
+gcc 4.3.4: add objective-c patch for eabi and add a package for libobjc
+27622153e629cdff24e0f528b4802019d7f87f81 
 
-> Hello all,
+The issue lies in the failure to remove the old "#define __objc_exception_class"
+macro in the (#else (non ARM_EABI_UNWINDER) case.
 
-> For SHR we want to be able to remove illumes default keyboard as most people
-> don't like it. To be able to do this nicely via the package manager we need to
-> have them in extra packages.
-so... would anybody object to split out the illume keyboards into an
-extra package, or can I go ahead?
+Koen, since this one is yours can you revert and apply a fix? Might want to
+update the headline too, this patch is applied to gcc 4.3.3 not 4.3.4.
 
-Thanks
--- 
-Klaus 'mrmoku' Kurzmann
+Thanks!
+
+-jeremy w
+
 
 
