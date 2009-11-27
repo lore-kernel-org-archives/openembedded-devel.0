@@ -1,37 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f217.google.com ([209.85.218.217])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NE1ch-00035U-CX for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Nov 2009 15:16:38 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NE1bG-0004uD-15
+	(envelope-from <ricardo.salveti@openbossa.org>) id 1NE3fH-0004fb-Qn
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Nov 2009 15:15:06 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Nov 2009 15:15:06 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Fri, 27 Nov 2009 17:27:26 +0100
+Received: by bwz9 with SMTP id 9so1219717bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Nov 2009 15:15:06 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 27 Nov 2009 08:25:52 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.204.5.138 with SMTP id 10mr1303779bkv.110.1259339152306; Fri, 
+	27 Nov 2009 08:25:52 -0800 (PST)
+In-Reply-To: <be7a9f3d0911270248r3d2e75ffibe3cc71248d61a9e@mail.gmail.com>
+References: <ae9c9a1c0911261845m6a81efcblf372b4409fcc1185@mail.gmail.com>
+	<be7a9f3d0911270248r3d2e75ffibe3cc71248d61a9e@mail.gmail.com>
+Date: Fri, 27 Nov 2009 13:25:52 -0300
+Message-ID: <ae9c9a1c0911270825u37d60de9h260d9507b3d44eab@mail.gmail.com>
+From: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 27 Nov 2009 15:14:53 +0100
-Message-ID: <heomst$ko$1@ger.gmane.org>
-References: <4B0FA07C.6070501@SSpaeth.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-In-Reply-To: <4B0FA07C.6070501@SSpaeth.de>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: ricardo.salveti@openbossa.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: bootchart-lite uses "install" in postinst
+Subject: Re: Mamona: classes and configs for fist review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,25 +34,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Nov 2009 14:16:38 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Nov 2009 16:27:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 27-11-09 10:48, Sebastian Spaeth wrote:
-> bootchart-lite uses "install" in postinst, which was not available on my
-> device.
+On Fri, Nov 27, 2009 at 7:48 AM, Otavio Salvador
+<otavio@ossystems.com.br> wrote:
+> Hello Ricardo,
 >
-> Would it be preferable to RDEPENDS on coreutils, or should we be using a
-> simple "mkdir /etc/bootchart-lite" in postinst.
+> On Fri, Nov 27, 2009 at 12:45 AM, Ricardo Salveti de Araujo
+> <ricardo.salveti@openbossa.org> wrote:
+>> Hello all,
+>>
+>> I just created a branch in gitorious with mamona patches related with
+>> classes and configs, for first review.
 >
-> All it does is creating that empty dir.
+> The changes looks good to me at least. One thing that I'd interesting
+> to know is how are you using the PRODUCT setting and what use cases
+> you've been solving with it.
 
-if the script itself doesn't need anymore coreutils stuff then replacing 
-it with an mkdir would be preferable.
+Cool, thanks for reviewing it.
 
-regards,
+The PRODUCT override came with the need of using Mamona with a common
+machine but for different purposes. Instead of maintaining different
+trees, we decided to create the concept of a product and define there
+the preferred version and providers for different packages.
 
-Koen
+With this we could work with both "products" at the same tree, just
+using the overrides at the product file to define the best behavior
+for that machine.
 
+One single example we had was regarding the legal check phase of a
+product, that we knew that some version of some packages was already
+approved, when at the same moment newer versions weren't (so with
+another product that we just started we could use the newer version,
+but for the older one we had keep the same old version, because was
+close to be finished).
+
+> The only cosmetic thing that you might change is to reorder the patch
+> that introduces PRODUCT in bitbake.conf and the distro change to allow
+> for easier understanding of where it come from.
+
+Ok, will change that. Will also change the commit message to explain
+that the idea came from mamona.
+
+Thanks,
+-- 
+Ricardo Salveti de Araujo
 
 
