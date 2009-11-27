@@ -1,44 +1,40 @@
-Received: from mail-fx0-f216.google.com ([209.85.220.216])
+Received: from qw-out-1920.google.com ([74.125.92.145])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1NE4sZ-0000f7-4f
+	(envelope-from <sakoman@gmail.com>) id 1NE57i-0007BX-2n
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Nov 2009 18:45:14 +0100
-Received: by fxm8 with SMTP id 8so1579018fxm.27
+	Fri, 27 Nov 2009 19:00:53 +0100
+Received: by qw-out-1920.google.com with SMTP id 4so277858qwk.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Nov 2009 09:43:39 -0800 (PST)
+	Fri, 27 Nov 2009 09:59:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type; bh=l8+BiLkI1ILJoHOqgkhXDG32lL9dR/aZG/6nX8snna8=;
-	b=wda3AEBCNqICDf3Ge4AIfrmtna4NLyO/EKsVjQ1S+5LNHNZpRudLsuoCn3HZ9J7o7e
-	9Xgw4uGATf+daqwq/Z1I0tE9qsYFFc2I4bosNn0Dvf2BXWPrJhxDVsyPuVp+URtCzuHS
-	K1c62MUzRspLFTbQQfmy0CTcKHOyIbVLkDcTs=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=a4gs2MIT1PgLe/aTxIasF8whJGZlBYoPMJBJwW+lHQU=;
+	b=IfMPgNWx+1yq3Gfej5ahg+spqweosykIAjy0e8SlkhAqRZVV/3WQSKN43lGsoCYt3h
+	C5+xHpT/W6yQqngDO6BdksH5RqJsRfONRfLex7fNYzLt1ZIKX54ZkACOy6jRX3XLt37F
+	5ecj56QPNiunGqvHVb0+zYgTngNMDwtn3pVlQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	b=trGHyY0doc/QgK2wyi2eci/83Jb7V+qeKt9Pyw8aNEagQ/3zEYHx+NxMtz2XgBAqUe
-	4KYEsegpokx9XVUtzJjAsacxxVK+0UHhuyWRgvvEzomtWtbWgl+1zE2FOloOmMqpV08u
-	1dvMuIp7nXzqIO2JBcndtc5W8eKvG2oOF13o0=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=aN5p4tvkSNlKJlBfKhEuistnxLoAMSSUgKWkJCyWP/6tLfDfZfzgGKP5pk5NwB6OAd
+	Jv/aVM6ckPmVHPcFm/Ck85RmB9Yq67Ta1DXZu4FHbljn/BMfRCocY9r4ZR6ApbE/VuNX
+	lefKjk23SOxspsH8ItLjOcpdSBvJY636tzF2A=
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.150.79 with SMTP id m15mr125791hbb.32.1259343819621; Fri, 
-	27 Nov 2009 09:43:39 -0800 (PST)
-In-Reply-To: <ae9c9a1c0911270911t4569b4b9nd8607178577f3390@mail.gmail.com>
-References: <ae9c9a1c0911261845m6a81efcblf372b4409fcc1185@mail.gmail.com>
-	<be7a9f3d0911270248r3d2e75ffibe3cc71248d61a9e@mail.gmail.com>
-	<ae9c9a1c0911270825u37d60de9h260d9507b3d44eab@mail.gmail.com>
-	<be7a9f3d0911270906lc65be18vd9f42786068ecb9b@mail.gmail.com>
-	<ae9c9a1c0911270911t4569b4b9nd8607178577f3390@mail.gmail.com>
-Date: Fri, 27 Nov 2009 15:43:39 -0200
-X-Google-Sender-Auth: 18da37a1de45be6d
-Message-ID: <be7a9f3d0911270943q52856cb8q8e87dd984f099459@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by 10.229.49.137 with SMTP id v9mr172292qcf.21.1259344759910; Fri, 
+	27 Nov 2009 09:59:19 -0800 (PST)
+In-Reply-To: <20091126093031.GA3354@jama>
+References: <E1NDaYW-0003Fx-Nr@melo.openembedded.org>
+	<20091126093031.GA3354@jama>
+Date: Fri, 27 Nov 2009 09:59:19 -0800
+Message-ID: <5e088bd90911270959k35e5ab34u6e79b654abbe37b7@mail.gmail.com>
+From: Steve Sakoman <sakoman@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.216
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+X-SA-Exim-Connect-IP: 74.125.92.145
+X-SA-Exim-Mail-From: sakoman@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Mamona: classes and configs for fist review
+Subject: Re: [oe-commits] Steve Sakoman : gnome-mplayer: bump SRCREV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,47 +48,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Nov 2009 17:45:14 -0000
+X-List-Received-Date: Fri, 27 Nov 2009 18:00:53 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hello,
-
-On Fri, Nov 27, 2009 at 3:11 PM, Ricardo Salveti de Araujo
-<ricardo.salveti@openbossa.org> wrote:
-> On Fri, Nov 27, 2009 at 2:06 PM, Otavio Salvador
->> Well but it looks like that to it properly work you need to use one
->> $TMPDIR for each "product" otherwise if this product has a patch (or
->> requires one) and the package is already built it won't get it.
+On Thu, Nov 26, 2009 at 1:30 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> On Thu, Nov 26, 2009 at 09:22:28AM +0000, git version control wrote:
+>> gnome-mplayer: bump SRCREV
 >>
->> Am I missing anything?
+>> ---
+>>
+>> =A0recipes/gnome-mplayer/gnome-mplayer_svn.bb | =A0 =A04 ++--
+>> =A01 files changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/recipes/gnome-mplayer/gnome-mplayer_svn.bb b/recipes/gnome-=
+mplayer/gnome-mplayer_svn.bb
+>> index 5540f94..2769bcb 100644
+>> --- a/recipes/gnome-mplayer/gnome-mplayer_svn.bb
+>> +++ b/recipes/gnome-mplayer/gnome-mplayer_svn.bb
+>> @@ -1,7 +1,7 @@
+>> =A0require gnome-mplayer.inc
+>>
+>> -SRCREV =3D "1569"
+>> -PV =3D "0.9.8+svnr${SRCPV}"
+>> +SRCREV =3D "1583"
+>> +PV =3D "0.9.8+svn${SRCPV}"
 >
-> Yep, you're right, you need to do that in order to have a clean build
-> for each product. At mamona we set that while configuring the
-> environment, and in our case we were using a buildbot for each
-> machine, doing always a clean build, so it wasn't actually a problem
-> for us.
+> Did you remove 'r' intentionally or is it a typo?
 
-Here we use it at distro and use previous distro in override as well
-reducing this diverging problem.
+Sorry, it was indeed a typo and I see that Koen has already fixed it.
 
-We do it as making a new distro for each product that include the
-"base" and changes what is required providing a new distro that has
-all base distro as base for settings, versions and like.
+Steve
 
-In your case it might be:
 
- mamona.conf
- mamona-vanilla.conf
- mamona-foo.conf
-
-This could avoid the multiple TMPDIR issues. We added here a
-DISTRO_MACHINE_ARCH so in case the configuration is specific to a
-machine and distro we use it, instead of MACHINE_ARCH allowing for
-speedup in compilation and sharing the TMPDIR for those.
-
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+> I was trying to make svnr consistent in OE tree and only few recipes
+> were using svn without 'r'
+> http://cgit.openembedded.net/cgit.cgi/openembedded/commit/?id=3D6ca479d37=
+af6d1e4e89e5dac0dc5b2fb81819c2b
+> if this isn't true:
+> * Should be safe as version svnr[1234567890]* > svn[1234567890]*
+> then I should fix more recipes
+>
+> and if it is true then your srcrev bump won't be upgraded for people who
+> built gnome-mplayer between 6ca479d37af6d1e4e89e5dac0dc5b2fb81819c2b and
+> this change.
+>
+> Cheers,
+>
+> --
+> uin:136542059 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0jid:Martin.Jansa@gmail.com
+> Jansa Martin =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 sip:jamasip@voip.wengo.fr
+> JaMa
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
