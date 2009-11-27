@@ -1,26 +1,27 @@
 Received: from mail-bw0-f217.google.com ([209.85.218.217])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ricardo.salveti@openbossa.org>) id 1NE3fH-0004fb-Qn
+	(envelope-from <ricardo.salveti@openbossa.org>) id 1NE3ia-0004p5-8R
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Nov 2009 17:27:26 +0100
-Received: by bwz9 with SMTP id 9so1219717bwz.12
+	Fri, 27 Nov 2009 17:30:51 +0100
+Received: by bwz9 with SMTP id 9so1221724bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Nov 2009 08:25:52 -0800 (PST)
+	Fri, 27 Nov 2009 08:29:16 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.204.5.138 with SMTP id 10mr1303779bkv.110.1259339152306; Fri, 
-	27 Nov 2009 08:25:52 -0800 (PST)
-In-Reply-To: <be7a9f3d0911270248r3d2e75ffibe3cc71248d61a9e@mail.gmail.com>
-References: <ae9c9a1c0911261845m6a81efcblf372b4409fcc1185@mail.gmail.com>
-	<be7a9f3d0911270248r3d2e75ffibe3cc71248d61a9e@mail.gmail.com>
-Date: Fri, 27 Nov 2009 13:25:52 -0300
-Message-ID: <ae9c9a1c0911270825u37d60de9h260d9507b3d44eab@mail.gmail.com>
+Received: by 10.204.8.151 with SMTP id h23mr1259654bkh.194.1259339356574; Fri, 
+	27 Nov 2009 08:29:16 -0800 (PST)
+In-Reply-To: <be7a9f3d0911270254o516192e3wd01d78b0b2005d16@mail.gmail.com>
+References: <E1NDcWJ-0005Ee-Np@melo.openembedded.org>
+	<ae9c9a1c0911261808v3dec996fqd83d164f6c960798@mail.gmail.com>
+	<be7a9f3d0911270254o516192e3wd01d78b0b2005d16@mail.gmail.com>
+Date: Fri, 27 Nov 2009 13:29:16 -0300
+Message-ID: <ae9c9a1c0911270829l1d8b80eem40d3beffb40eec43@mail.gmail.com>
 From: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.218.217
 X-SA-Exim-Mail-From: ricardo.salveti@openbossa.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Mamona: classes and configs for fist review
+Subject: Re: [oe-commits] Thomas Zimmermann : obexd: add version 0.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,50 +35,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Nov 2009 16:27:26 -0000
+X-List-Received-Date: Fri, 27 Nov 2009 16:30:51 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, Nov 27, 2009 at 7:48 AM, Otavio Salvador
+On Fri, Nov 27, 2009 at 7:54 AM, Otavio Salvador
 <otavio@ossystems.com.br> wrote:
 > Hello Ricardo,
 >
-> On Fri, Nov 27, 2009 at 12:45 AM, Ricardo Salveti de Araujo
+> On Fri, Nov 27, 2009 at 12:08 AM, Ricardo Salveti de Araujo
 > <ricardo.salveti@openbossa.org> wrote:
->> Hello all,
+>> Hi,
 >>
->> I just created a branch in gitorious with mamona patches related with
->> classes and configs, for first review.
+>> I actually sent a similar patch to the list, but also moving the
+>> content to a .inc file, 4 days ago.
+>>
+>> Was this patch available anywhere else or simply no one is paying much
+>> attention to patchwork?
+>>
+>> Just to understand better how the patch process is actually being handled in OE.
 >
-> The changes looks good to me at least. One thing that I'd interesting
-> to know is how are you using the PRODUCT setting and what use cases
-> you've been solving with it.
+> Most people look at OE mailing list and patchwork from time to time
+> and then this happens sometimes when someone commit a change in
+> meanwhile.
 
-Cool, thanks for reviewing it.
+Ok, np about that, just wanted to be sure because I saw a similar case
+the other week.
 
-The PRODUCT override came with the need of using Mamona with a common
-machine but for different purposes. Instead of maintaining different
-trees, we decided to create the concept of a product and define there
-the preferred version and providers for different packages.
+> It would be nice if you could put you .inc improvement in the next patch set :-)
 
-With this we could work with both "products" at the same tree, just
-using the overrides at the product file to define the best behavior
-for that machine.
+Yep, will add this patch with others I sent to patchwork at the mamona
+queue, so them can be reviewed all together.
 
-One single example we had was regarding the legal check phase of a
-product, that we knew that some version of some packages was already
-approved, when at the same moment newer versions weren't (so with
-another product that we just started we could use the newer version,
-but for the older one we had keep the same old version, because was
-close to be finished).
-
-> The only cosmetic thing that you might change is to reorder the patch
-> that introduces PRODUCT in bitbake.conf and the distro change to allow
-> for easier understanding of where it come from.
-
-Ok, will change that. Will also change the commit message to explain
-that the idea came from mamona.
-
-Thanks,
+Cheers,
 -- 
 Ricardo Salveti de Araujo
 
