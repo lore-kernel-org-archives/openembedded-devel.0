@@ -1,38 +1,31 @@
-Received: from hsp-52.hspserver.com ([85.197.80.179])
+Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ml@vdm-design.de>) id 1NDw8d-0001Us-7o
+	(envelope-from <Sebastian@SSpaeth.de>) id 1NDxT2-00053I-9Z
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Nov 2009 09:25:14 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by hsp-52.hspserver.com (Postfix) with ESMTP id 9EDB8A2C357
+	Fri, 27 Nov 2009 10:50:23 +0100
+Received: from homiemail-a21.g.dreamhost.com (caiajhbdcahe.dreamhost.com
+	[208.97.132.74])
+	by hapkido.dreamhost.com (Postfix) with ESMTP id 8204017DA16
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Nov 2009 09:00:28 +0100 (CET)
-Received: from hsp-52.hspserver.com ([127.0.0.1])
-	by localhost (hsp-52.hspserver.com [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id XpDwzgT24z8g
+	Fri, 27 Nov 2009 01:48:48 -0800 (PST)
+Received: from [192.168.1.154] (unknown [195.190.181.110])
+	by homiemail-a21.g.dreamhost.com (Postfix) with ESMTPA id 22AD4300059
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Nov 2009 09:00:24 +0100 (CET)
-Received: from tomboy.localnet (pD9E15882.dip.t-dialin.net [217.225.88.130])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by hsp-52.hspserver.com (Postfix) with ESMTP id 8E1B2A2C341
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Nov 2009 09:00:24 +0100 (CET)
-From: Thomas Zimmermann <ml@vdm-design.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Nov 2009 09:00:24 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31-6.slh.2-sidux-amd64; KDE/4.3.2; x86_64; ;
-	)
-References: <E1NDcWJ-0005Ee-Np@melo.openembedded.org>
-	<ae9c9a1c0911261808v3dec996fqd83d164f6c960798@mail.gmail.com>
-In-Reply-To: <ae9c9a1c0911261808v3dec996fqd83d164f6c960798@mail.gmail.com>
+	Fri, 27 Nov 2009 01:48:45 -0800 (PST)
+Message-ID: <4B0FA07C.6070501@SSpaeth.de>
+Date: Fri, 27 Nov 2009 10:48:44 +0100
+From: Sebastian Spaeth <Sebastian@SSpaeth.de>
+Organization: ETH Zurich
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-Message-Id: <200911270900.24221.ml@vdm-design.de>
-X-SA-Exim-Connect-IP: 85.197.80.179
-X-SA-Exim-Mail-From: ml@vdm-design.de
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.7
+OpenPGP: id=C827A062
+X-SA-Exim-Connect-IP: 66.33.216.122
+X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [oe-commits] Thomas Zimmermann : obexd: add version 0.19
+Subject: bootchart-lite uses "install" in postinst
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,84 +39,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Nov 2009 08:25:14 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Nov 2009 09:50:23 -0000
+X-Groupsio-MsgNum: 14706
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enigC97150DC564567A3AD23AF8D"
 
-Am Freitag 27 November 2009 03:08:42 schrieb Ricardo Salveti de Araujo:
-> Hi,
-> 
-> I actually sent a similar patch to the list, but also moving the
-> content to a .inc file, 4 days ago.
-> 
-> Was this patch available anywhere else or simply no one is paying much
-> attention to patchwork?
-> 
-> Just to understand better how the patch process is actually being handled
->  in OE.
-> 
-> Thanks,
-> 
-> Ricardo
-> 
-> On Thu, Nov 26, 2009 at 8:28 AM, git version control
-> 
-> <git@git.openembedded.org> wrote:
-> > Module: openembedded.git
-> > Branch: org.openembedded.dev
-> > Commit: 05e63abd2b64cd171d41d7f4745463bfb325d396
-> > URL:  
-> >  http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=05e63abd2b
-> >64cd171d41d7f4745463bfb325d396
-> >
-> > Author: Thomas Zimmermann <ml@vdm-design.de>
-> > Date:   Thu Nov 26 09:20:49 2009 +0000
-> >
-> > obexd: add version 0.19
-> >
-> > Signed-off-by: Klaus Kurzmann <mok@fluxnetz.de>
-> >
-> > ---
-> >
-> >  conf/checksums.ini          |    4 ++++
-> >  recipes/bluez/obexd_0.19.bb |   10 ++++++++++
-> >  2 files changed, 14 insertions(+), 0 deletions(-)
-> >
-> > diff --git a/conf/checksums.ini b/conf/checksums.ini
-> > index df3e609..5755108 100644
-> > --- a/conf/checksums.ini
-> > +++ b/conf/checksums.ini
-> > @@ -19802,6 +19802,10 @@
-> > sha256=44ba0d99e1bf8fa2caf9f7a85d569e513208c0710c1ad00032e271289e87b63f
-> > md5=5674f746b55439d32bc765d2c5baad16
-> >  sha256=6dbabd9345967120ad21cc25489a6d244aed7975cee9297cc5716af4debc7228
-> >
-> > +[http://www.kernel.org/pub/linux/bluetooth/obexd-0.19.tar.gz]
-> > +md5=2f03b81411a1f7c359ada35459d946a5
-> > +sha256=37fb4cffad7e361daffa9915ee6a37e615d0bf4d1f24760e585d5ac922515ca8
-> > +
-> >  [http://downloads.sourceforge.net/openobex/obexftp-0.20.tar.gz]
-> >  md5=085b9edc0504c0d79e7479a54e2018c5
-> >  sha256=7246fc75257afcd30ff16dc70185057157bcefc12fa9fba111b3b201577cc40e
-> > diff --git a/recipes/bluez/obexd_0.19.bb b/recipes/bluez/obexd_0.19.bb
-> > new file mode 100644
-> > index 0000000..e1cc6ce
-> > --- /dev/null
-> > +++ b/recipes/bluez/obexd_0.19.bb
-> > @@ -0,0 +1,10 @@
-> > +DESCRIPTION = "OBEX Server and Client"
-> > +DEPENDS = "openobex glib-2.0 dbus bluez4"
-> > +
-> > +LICENSE = "GPLv2"
-> > +
-> > +SRC_URI = "http://www.kernel.org/pub/linux/bluetooth/obexd-${PV}.tar.gz"
-> > +
-> > +inherit autotools_stage
-> > +
-> > +FILES_${PN} += "${datadir}/dbus-1/"
-> >
-I needed that package und because of that i asked Klaus to commit it for me.
-I haven't looked at patchworkd, sorry for that.
+--------------enigC97150DC564567A3AD23AF8D
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+bootchart-lite uses "install" in postinst, which was not available on my
+device.
+
+Would it be preferable to RDEPENDS on coreutils, or should we be using a
+simple "mkdir /etc/bootchart-lite" in postinst.
+
+All it does is creating that empty dir.
+
+spaetz
 
 
+--------------enigC97150DC564567A3AD23AF8D
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEARECAAYFAksPoHwACgkQVYX1jMgnoGIrpgCcDGTRZWR2sQI0MdZ3x4jYcAjF
+3WwAmgIgb3ti/mnFOYZ09IZdnrKdv3u/
+=h5Oe
+-----END PGP SIGNATURE-----
+
+--------------enigC97150DC564567A3AD23AF8D--
