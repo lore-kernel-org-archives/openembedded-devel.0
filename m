@@ -1,23 +1,29 @@
 Received: from mail-bw0-f217.google.com ([209.85.218.217])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ricardo.salveti@openbossa.org>) id 1NDqrF-0003PZ-Q9
+	(envelope-from <dp@xora.org.uk>) id 1NDw1U-00022p-BP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Nov 2009 03:46:56 +0100
-Received: by bwz9 with SMTP id 9so872426bwz.12
+	Fri, 27 Nov 2009 09:17:51 +0100
+Received: by bwz9 with SMTP id 9so948601bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Nov 2009 18:45:23 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.204.8.151 with SMTP id h23mr470974bkh.194.1259289922861; Thu, 
-	26 Nov 2009 18:45:22 -0800 (PST)
-Date: Thu, 26 Nov 2009 23:45:22 -0300
-Message-ID: <ae9c9a1c0911261845m6a81efcblf372b4409fcc1185@mail.gmail.com>
-From: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
-To: openembedded-devel@lists.openembedded.org, mamona-devel@garage.maemo.org
+	Fri, 27 Nov 2009 00:16:17 -0800 (PST)
+Received: by 10.204.11.3 with SMTP id r3mr749238bkr.107.1259309777165;
+	Fri, 27 Nov 2009 00:16:17 -0800 (PST)
+Received: from localhost (www.xora.org.uk [80.68.91.202])
+	by mx.google.com with ESMTPS id 15sm340323bwz.0.2009.11.27.00.16.16
+	(version=SSLv3 cipher=RC4-MD5); Fri, 27 Nov 2009 00:16:16 -0800 (PST)
+Date: Fri, 27 Nov 2009 08:16:23 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20091127081623.7155d194@xora.org.uk>
+In-Reply-To: <loom.20091127T012624-591@post.gmane.org>
+References: <loom.20091127T012624-591@post.gmane.org>
+X-Mailer: Claws Mail 3.7.3 (GTK+ 2.18.3; i686-redhat-linux-gnu)
+Mime-Version: 1.0
 X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: ricardo.salveti@openbossa.org
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Mamona: classes and configs for fist review
+Subject: Re: gcc-cross-4.3.3 build failure - PPC/Sequoia
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,26 +37,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Nov 2009 02:46:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 27 Nov 2009 08:17:51 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Hello all,
+On Fri, 27 Nov 2009 00:51:38 +0000 (UTC)
+Jeremy Williams <jerm7861@yahoo.com> wrote:
 
-I just created a branch in gitorious with mamona patches related with
-classes and configs, for first review.
+> Looks like a recent commit applies a patch to libobjc in gcc-4.3.3
+> that causes the build of gcc-cross-4.3.3 on PPC to fail (and I'm
+> assuming other non-ARM machines as well).
+> 
+> gcc 4.3.4: add objective-c patch for eabi and add a package for
+> libobjc 27622153e629cdff24e0f528b4802019d7f87f81 
+> 
+> The issue lies in the failure to remove the old "#define
+> __objc_exception_class" macro in the (#else (non ARM_EABI_UNWINDER)
+> case.
+> 
+> Koen, since this one is yours can you revert and apply a fix? Might
+> want to update the headline too, this patch is applied to gcc 4.3.3
+> not 4.3.4.
+> 
+I had already found this and have been testing a fix, will commit
+later today!
 
-I'll be rebasing the repository until it gets the quality needed to
-get merged into OE.
-
-Branch: http://gitorious.org/mamona/mamona-oe-class-conf/commits/master
-
-Tomorrow I'm going to post another branch for changes we created in recipes.
-
-I'll be very thankful for anyone that takes a look at the branch and
-send me any comments.
-
-Thanks,
--- 
-Ricardo Salveti de Araujo
+Graeme
 
 
