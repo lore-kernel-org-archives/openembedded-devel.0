@@ -1,27 +1,38 @@
-Received: from mail-bw0-f217.google.com ([209.85.218.217])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ricardo.salveti@openbossa.org>) id 1NE3ia-0004p5-8R
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NE4EZ-0005lr-9E for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Nov 2009 18:03:54 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NE4D7-0002NO-0t
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Nov 2009 17:30:51 +0100
-Received: by bwz9 with SMTP id 9so1221724bwz.12
+	Fri, 27 Nov 2009 18:02:21 +0100
+Received: from 68-25-27-139.pools.spcsdns.net ([68.25.27.139])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Nov 2009 18:02:20 +0100
+Received: from jerm7861 by 68-25-27-139.pools.spcsdns.net with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Nov 2009 08:29:16 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.204.8.151 with SMTP id h23mr1259654bkh.194.1259339356574; Fri, 
-	27 Nov 2009 08:29:16 -0800 (PST)
-In-Reply-To: <be7a9f3d0911270254o516192e3wd01d78b0b2005d16@mail.gmail.com>
-References: <E1NDcWJ-0005Ee-Np@melo.openembedded.org>
-	<ae9c9a1c0911261808v3dec996fqd83d164f6c960798@mail.gmail.com>
-	<be7a9f3d0911270254o516192e3wd01d78b0b2005d16@mail.gmail.com>
-Date: Fri, 27 Nov 2009 13:29:16 -0300
-Message-ID: <ae9c9a1c0911270829l1d8b80eem40d3beffb40eec43@mail.gmail.com>
-From: Ricardo Salveti de Araujo <ricardo.salveti@openbossa.org>
+	Fri, 27 Nov 2009 18:02:20 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: ricardo.salveti@openbossa.org
+From: Jeremy Williams <jerm7861@yahoo.com>
+Date: Fri, 27 Nov 2009 17:01:58 +0000 (UTC)
+Message-ID: <loom.20091127T175942-262@post.gmane.org>
+References: <loom.20091127T012624-591@post.gmane.org>
+	<20091127081623.7155d194@xora.org.uk>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 68.25.27.139 (Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.9.0.15) Gecko/2009101601 Firefox/3.0.15 (.NET CLR 3.5.30729))
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [oe-commits] Thomas Zimmermann : obexd: add version 0.19
+Subject: Re: gcc-cross-4.3.3 build failure - PPC/Sequoia
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,39 +46,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Nov 2009 16:30:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 27 Nov 2009 17:03:54 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-On Fri, Nov 27, 2009 at 7:54 AM, Otavio Salvador
-<otavio@ossystems.com.br> wrote:
-> Hello Ricardo,
->
-> On Fri, Nov 27, 2009 at 12:08 AM, Ricardo Salveti de Araujo
-> <ricardo.salveti@openbossa.org> wrote:
->> Hi,
->>
->> I actually sent a similar patch to the list, but also moving the
->> content to a .inc file, 4 days ago.
->>
->> Was this patch available anywhere else or simply no one is paying much
->> attention to patchwork?
->>
->> Just to understand better how the patch process is actually being handled in OE.
->
-> Most people look at OE mailing list and patchwork from time to time
-> and then this happens sometimes when someone commit a change in
-> meanwhile.
+Graeme Gregory <dp <at> xora.org.uk> writes:
+> I had already found this and have been testing a fix, will commit
+> later today!
 
-Ok, np about that, just wanted to be sure because I saw a similar case
-the other week.
+Graeme,
+  I was going to apply a fix (it is pretty simple) as well but I thought it made
+more sense to wait for Koen to review to give him a chance to revert? This
+commit probably needs to be completely removed due to its impacts.
 
-> It would be nice if you could put you .inc improvement in the next patch set :-)
+-jeremy
 
-Yep, will add this patch with others I sent to patchwork at the mamona
-queue, so them can be reviewed all together.
 
-Cheers,
--- 
-Ricardo Salveti de Araujo
+
+
 
 
