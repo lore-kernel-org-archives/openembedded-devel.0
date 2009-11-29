@@ -1,29 +1,38 @@
-Received: from vms173009pub.verizon.net ([206.46.173.9])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1NEVf9-0003Gm-Ry
+	(envelope-from <rpjday@crashcourse.ca>) id 1NEi46-0006BA-UV
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 28 Nov 2009 23:21:11 +0100
-Received: from gandalf.denix.org ([71.251.63.147]) by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KTU004XFBCMAXVN@vms173009.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	28 Nov 2009 16:19:35 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3DB8314AF60; Sat,
-	28 Nov 2009 17:19:34 -0500 (EST)
-Date: Sat, 28 Nov 2009 17:19:34 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Sun, 29 Nov 2009 12:35:46 +0100
+Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
+	([174.113.191.234] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NEi2c-0006Uw-Bc for openembedded-devel@lists.openembedded.org;
+	Sun, 29 Nov 2009 06:34:10 -0500
+Date: Sun, 29 Nov 2009 06:33:59 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20091128221934.GB29288@denix.org>
-References: <ec1f3d400911270337wbbbcae8gab291075d242c9d9@mail.gmail.com>
-	<ec1f3d400911280005s62b8916dm43a1977b52b2e755@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <ec1f3d400911280005s62b8916dm43a1977b52b2e755@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.9
-X-SA-Exim-Mail-From: denis@denix.org
+In-Reply-To: <20091128221627.GA29288@denix.org>
+Message-ID: <alpine.LFD.2.00.0911290633120.8046@localhost>
+References: <alpine.LFD.2.00.0911281441150.14889@localhost>
+	<20091128221627.GA29288@denix.org>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: cortex-a9 build failure at glibc
+Subject: Re: invalid git commit for beagle in u-boot recipe?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,17 +46,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Nov 2009 22:21:11 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sun, 29 Nov 2009 11:35:46 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Sat, Nov 28, 2009 at 01:35:03PM +0530, RK Raggit wrote:
-> Resending mail as this doesnt seem to have reached the mailing list first
-> time around ....
+On Sat, 28 Nov 2009, Denys Dmytriyenko wrote:
 
-Actually it showed up 3 times...
+> On Sat, Nov 28, 2009 at 02:46:52PM -0500, Robert P. J. Day wrote:
+> >
+> >   as best i can tell, this entry in u-boot_git.bb on the OE dev
+> > branch:
+> >
+> > SRCREV_beagleboard = "1590f84007e2b50ad346a482fff89195cb04ff4e"
+> >
+> > refers to an invalid commit.  this is what happens when i build for
+> > the beagle:
+> >
+> > NOTE: preferred version git of u-boot not available (for item u-boot)
+> >
+> > just an observation.
+>
+> The message above has nothing to do with the commit number
+> specified. The problem is with PV being overwritten for beagleboard
+> to specify a proper version, while PREFERRED_VERSION still wants
+> "git"...
 
--- 
-Denys
+  ok, but isn't it still an issue that that commit appears to exist
+nowhere in that git repo?  i scanned the log and that commit tag
+simply doesn't show up.
+
+rday
+--
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
