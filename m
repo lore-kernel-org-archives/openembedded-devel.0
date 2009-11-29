@@ -1,29 +1,36 @@
-Received: from mout.perfora.net ([74.208.4.194])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <charles.woloszynski@handheldmedia.us>)
-	id 1NElnj-00005X-W6 for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Nov 2009 16:35:07 +0100
-Received: from [10.0.1.199] (ip68-100-74-251.dc.dc.cox.net [68.100.74.251])
-	by mrelay.perfora.net (node=mrus1) with ESMTP (Nemesis)
-	id 0LkNil-1NplHr2dSt-00cMdI; Sun, 29 Nov 2009 10:20:47 -0500
-Message-Id: <E70C26B4-5D20-4CEA-AC49-794CFEB6F6C3@handheldmedia.us>
-From: Charles Woloszynski <charles.woloszynski@handheldmedia.us>
-To: "openembedded-devel@lists.openembedded.org"
+	(envelope-from <rpjday@crashcourse.ca>) id 1NElr0-0004QH-UA
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 29 Nov 2009 16:38:30 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NElpV-0003tY-C8 for openembedded-devel@lists.openembedded.org;
+	Sun, 29 Nov 2009 10:36:53 -0500
+Date: Sun, 29 Nov 2009 10:36:41 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
 	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <1259505030.24812.8.camel@gregoire-laptop>
-X-Mailer: iPhone Mail (7A400)
-Mime-Version: 1.0 (iPhone Mail 7A400)
-Date: Sun, 29 Nov 2009 10:20:38 -0500
-References: <mailman.3.1259492402.612.openembedded-devel@lists.openembedded.org>
-	<1259505030.24812.8.camel@gregoire-laptop>
-X-Provags-ID: V01U2FsdGVkX1+8erOPr9rAAjE+EBWoTdwycQp8NaiZ5N+5RhJ
-	c7EGqYhB8AA+Ps4FXo84kgfSVOvvVIdhjSyUqBndLNbLVtAXzZ
-	DdaqBX8fItU38FmwzUcMQsz+8p08R4CvEVcfHCA0z7VN6yYBZT fOQ==
-X-SA-Exim-Connect-IP: 74.208.4.194
-X-SA-Exim-Mail-From: charles.woloszynski@handheldmedia.us
+Message-ID: <alpine.LFD.2.00.0911291035490.2789@localhost>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Initramfs and kernel
+Subject: [PATCH] Docs: Update usermanual bitbake references to 1.8.18.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,49 +44,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Nov 2009 15:35:07 -0000
-Content-Type: text/plain;
-	charset=utf-8;
-	format=flowed;
-	delsp=yes
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 29 Nov 2009 15:38:30 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Why does your initramfs depend on the kernel?  Are you using kernel  
-modules in the initramfs?
 
-I thought the idea of initramfs was to decouple the kernel from the  
-Filesystem image AMAP.
+Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
 
-Trying to learn from your adventure (since I plan to use an initramfs  
-on the future)
+---
 
-Charlie
-On Nov 29, 2009, at 9:30 AM, Gregoire Gentil <gregoire@gentil.com>  
-wrote:
+diff --git a/docs/usermanual/chapters/getting_oe.xml b/docs/usermanual/chapters/getting_oe.xml
+index c71f32d..d18c955 100644
+--- a/docs/usermanual/chapters/getting_oe.xml
++++ b/docs/usermanual/chapters/getting_oe.xml
+@@ -53,13 +53,13 @@ $ <command>cd</command> $OEBASE</screen>
+ 	<section><title>Downloading a <application>BitBake</application> release</title>
+ 	  <para>Releases are available from the berlios project website. The current
+           release series is <application>BitBake</application> <emphasis>1.8</emphasis>
+-          and the current release is <emphasis>1.8.16</emphasis>. To download execute
++          and the current release is <emphasis>1.8.18</emphasis>. To download execute
+ 	  the following commands:
+ 		<screen>
+ $ <command>cd</command> $OEBASE
+-$ <command>wget</command> http://download.berlios.de/bitbake/bitbake-1.8.16.tar.gz
+-$ <command>tar</command> -xvzf bitbake-1.8.16.tar.gz
+-$ <command>mv</command> bitbake-1.8.16 bitbake
++$ <command>wget</command> http://download.berlios.de/bitbake/bitbake-1.8.18.tar.gz
++$ <command>tar</command> -xvzf bitbake-1.8.18.tar.gz
++$ <command>mv</command> bitbake-1.8.18 bitbake
+ </screen>
+ 	  </para>
 
-> Hello,
->
-> I'm building an initramfs image for a beagleboard-like platform. I
-> managed to make it work but I have a kind of circular dependency,
-> meaning:
->
-> I build initramfs (which depends kernel), I add to the .config of  
-> kernel
-> the path of the initramfs.cpio.gz, then I need to rebuild the kernel  
-> to
-> have the initramfs inside the uImage...
->
-> I obviously don't do it right. How is initramfs supposed to work in  
-> OE?
->
-> Gr=C3=A9goire
->
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
