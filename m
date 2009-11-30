@@ -1,41 +1,40 @@
-Received: from mail-iw0-f194.google.com ([209.85.223.194])
+Received: from libra.cs.put.poznan.pl ([150.254.30.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NFBak-0006Iv-Aj
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Nov 2009 20:07:25 +0100
-Received: by iwn32 with SMTP id 32so2269988iwn.24
+	(envelope-from <przemyslaw.wesolek@cs.put.poznan.pl>)
+	id 1NFEsC-00061j-Tz for openembedded-devel@lists.openembedded.org;
+	Mon, 30 Nov 2009 23:37:40 +0100
+Received: from kas30pipe.localhost (unknown [127.0.0.1])
+	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 3689D90
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Nov 2009 11:05:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=7HRObH7DC8JNtMrQjamaI9Nself5SKme0nwDHveALVw=;
-	b=ILfl1aotRjxoKdvkX5YQfML4AjlfYopX+QEX7bxy0D+6ZdhiA7Ztwaj/T6g9w7/T1R
-	k0cBi95OyxbF3Lc/qCE+4MUd88fj8PN6PvA1TUXYDycqjI0OvqzdsrnJZy5Xe224g2Wl
-	iuoM5rEnI8bIesPv3m51W3X2uZ8GKcEBSc2KY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Cv1FllRgG7LwWajuZILVhe1wB6YYlVJ2mJruxyHv1o6iwqRVMvSiA4XuMcAB4Rvtxb
-	h5et7Bv00s6i4XcrtPG4UGo2b39k3Db47rMc8ZvuzMeucOVNelm3zObTme9OZ5AAUFx+
-	VghWVzf9KAIvluh2g9ng5kPkj3196QMpTeGy4=
+	Mon, 30 Nov 2009 22:36:01 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at cs.put.poznan.pl
+Received: from libra.cs.put.poznan.pl ([127.0.0.1])
+	by localhost (libra.cs.put.poznan.pl [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id 5kXCWigB58e0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Nov 2009 23:36:01 +0100 (CET)
+Received: from [192.168.0.100] (103-9.echostar.pl [213.156.103.9])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id E7CEE8F
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Nov 2009 23:36:00 +0100 (CET)
+Message-ID: <4B1448D1.2000905@cs.put.poznan.pl>
+Date: Mon, 30 Nov 2009 23:36:01 +0100
+From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-Received: by 10.231.153.69 with SMTP id j5mr232550ibw.33.1259607947781; Mon, 
-	30 Nov 2009 11:05:47 -0800 (PST)
-In-Reply-To: <200911260929.02079.sgh@sgh.dk>
-References: <200911241045.20901.sgh@sgh.dk>
-	<19c1b8a90911250951v40fd87cas91f027e748a4a8c@mail.gmail.com>
-	<200911260929.02079.sgh@sgh.dk>
-Date: Mon, 30 Nov 2009 11:05:47 -0800
-Message-ID: <19c1b8a90911301105m2053c527o5a751cea02dca9d@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.194
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <mailman.3.1259492402.612.openembedded-devel@lists.openembedded.org>
+	<1259504704.24812.2.camel@gregoire-laptop>
+In-Reply-To: <1259504704.24812.2.camel@gregoire-laptop>
+X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0278], KAS30/Release
+X-SpamTest-Info: Not protected
+X-SA-Exim-Connect-IP: 150.254.30.30
+X-SA-Exim-Mail-From: przemyslaw.wesolek@cs.put.poznan.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: gcc-cross build failure
+Subject: Re: Boost compilation error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,74 +48,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Nov 2009 19:07:25 -0000
+X-List-Received-Date: Mon, 30 Nov 2009 22:37:40 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Thu, Nov 26, 2009 at 12:29 AM, S=C3=B8ren Holm <sgh@sgh.dk> wrote:
-> Onsdag 25 november 2009 18:51:03 skrev Khem Raj:
->> you need to post full log.
->> -Khem
->>
->
-> Sorry =C2=A0Here it is.
->
-> Apparently this is the error :
-> /home/sgh/svn/OpenEmbedded/build/tmp/work/i686-angstrom-linux/gcc-cross-4=
-.3.3-
-> r9.1/gcc-4.3.3/libobjc/exception.c:51: error: expected ')' before 'G'
-> /home/sgh/svn/OpenEmbedded/build/tmp/work/i686-angstrom-linux/gcc-cross-4=
-.3.3-
-> r9.1/gcc-4.3.3/libobjc/exception.c:51: error: expected ')' before '<<' to=
-ken
-> /home/sgh/svn/OpenEmbedded/build/tmp/work/i686-angstrom-linux/gcc-cross-4=
-.3.3-
-> r9.1/gcc-4.3.3/libobjc/exception.c:51: error: expected ')' before '<<' to=
-ken
-> /home/sgh/svn/OpenEmbedded/build/tmp/work/i686-angstrom-linux/gcc-cross-4=
-.3.3-
-> r9.1/gcc-4.3.3/libobjc/exception.c:51: error: expected ')' before '<<' to=
-ken
-> /home/sgh/svn/OpenEmbedded/build/tmp/work/i686-angstrom-linux/gcc-cross-4=
-.3.3-
-> r9.1/gcc-4.3.3/libobjc/exception.c:51: error: expected ')' before '<<' to=
-ken
-> /home/sgh/svn/OpenEmbedded/build/tmp/work/i686-angstrom-linux/gcc-cross-4=
-.3.3-
-> r9.1/gcc-4.3.3/libobjc/exception.c:51: error: expected ')' before '<<' to=
-ken
-> /home/sgh/svn/OpenEmbedded/build/tmp/work/i686-angstrom-linux/gcc-cross-4=
-.3.3-
-> r9.1/gcc-4.3.3/libobjc/exception.c:51: error: expected ')' before '<<' to=
-ken
-> /home/sgh/svn/OpenEmbedded/build/tmp/work/i686-angstrom-linux/gcc-cross-4=
-.3.3-
-> r9.1/gcc-4.3.3/libobjc/exception.c: In function 'objc_exception_throw':
-> /home/sgh/svn/OpenEmbedded/build/tmp/work/i686-angstrom-linux/gcc-cross-4=
-.3.3-
-> r9.1/gcc-4.3.3/libobjc/exception.c:487: error: lvalue required as unary '=
-&'
-> operand
+Gregoire Gentil wrote:
+> Hello,
+> 
+> I get this error when building latest of boost:
+> http://pastebin.com/m6bb87892
+> I'm on Ubuntu 9.10 with gcc4.4.
+> The do compile is here:
+> http://pastebin.com/m1822da98
+> 
+> I didn't have such problem on Ubuntu 9.04.
+> 
+> Any idea if I'm doing something wrong or if the latest commit on boost
+> has a problem?
 
+I can only say it works for me on Ubuntu 9.10.
 
-is this still a problem after this commit
+Przemek
 
-commit 1eac4dda40a4e1c542e4a6fd32ad3b86cce92653
-Author: Koen Kooi <koen@openembedded.org>
-Date:   Tue Nov 24 10:15:00 2009 +0100
-
-    gcc 4.3.3: fix patch and packaging
-
->
->
-> --
-> S=C3=B8ren Holm
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
 
 
