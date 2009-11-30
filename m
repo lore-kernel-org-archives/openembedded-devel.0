@@ -1,39 +1,38 @@
-Received: from mail-pw0-f53.google.com ([209.85.160.53])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1NEqS3-0003Lf-DJ
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NEut5-0005ml-MO for openembedded-devel@lists.openembedded.org;
+	Mon, 30 Nov 2009 02:17:14 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NEurb-0001NJ-Q3
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Nov 2009 21:33:02 +0100
-Received: by pwj11 with SMTP id 11so1790822pwj.12
+	Mon, 30 Nov 2009 02:15:40 +0100
+Received: from 68-25-27-139.pools.spcsdns.net ([68.25.27.139])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Nov 2009 02:15:39 +0100
+Received: from jerm7861 by 68-25-27-139.pools.spcsdns.net with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Nov 2009 12:31:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=n+UV4WoA2ZPsZeUg7yF9W46VlPme27rRJ9xmX2kL68Y=;
-	b=w2dpQO24BLSFw3lQ+bOrNQyqgBcitlpghQAlUwQW4vknN+HPU8bV2Dn+gNnEYeAEjF
-	ih3yY9eUF22J0S7wPij7WDNmEcubUJZrq1ddsOhUuNWwKTtEIxELWo3fLCeM0pdOjhlB
-	FCptc1C2wpH/1yNBwibLSCTBw2za0VqZnC/L0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=j5nYUiFYbG+/PLy8O9CdRGouTd9kaXQ31F9ce2Ma5NZ6Ai4j9KrISnR5+mb+RFG4Tb
-	qV0yf0q1Gtjn/OHnZn6YPkSb0Ck0BLpKjB+Hf/p7X+1qQMMxYuxWdrFnQk7I/Ezu6mhs
-	KagiDrGJRsaIwpsFaRs9dk7IaOYMRrSfBd7jY=
-MIME-Version: 1.0
-Received: by 10.140.163.4 with SMTP id l4mr195554rve.35.1259526684349; Sun, 29 
-	Nov 2009 12:31:24 -0800 (PST)
-In-Reply-To: <1259505030.24812.8.camel@gregoire-laptop>
-References: <mailman.3.1259492402.612.openembedded-devel@lists.openembedded.org>
-	<1259505030.24812.8.camel@gregoire-laptop>
-Date: Sun, 29 Nov 2009 21:31:24 +0100
-Message-ID: <d1b08f940911291231k148967bcne311b8b5f40af90f@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Mon, 30 Nov 2009 02:15:39 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.53
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+From: Jeremy Williams <jerm7861@yahoo.com>
+Date: Mon, 30 Nov 2009 01:15:13 +0000 (UTC)
+Message-ID: <loom.20091130T021309-622@post.gmane.org>
+References: <4A365C10.8020307@mta.it> <200906172309.40571.raj.khem@gmail.com>
+	<4A3A5A84.6090602@mta.it> <200906261759.56663.raj.khem@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 68.25.27.139 (Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.9.0.15) Gecko/2009101601 Firefox/3.0.15 (.NET CLR 3.5.30729))
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Initramfs and kernel
+Subject: Re: nof/libgcc_s.so installed instead of libgcc_s.so on powerpc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,21 +46,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Nov 2009 20:33:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 30 Nov 2009 01:17:14 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-> I obviously don't do it right. How is initramfs supposed to work in OE?
-
-One way is the one we used for :
-kexecboot -> initramfs-kexecboot-image -> linux-kexecboot
-
-See how images of initramfs-enabled kernel is pulled in
-conf/machine/include/initramfs-kexecboot.inc
-Basically we ended up with two recipes for kernel.
+Khem Raj <raj.khem <at> gmail.com> writes:
 
 
-Regards
+> 
+> Thanks. It might be problem in install section of our recipes.
+> Can you post log.do_compile file 
+> 
+> Thx
+> 
+> -Khem
 
-Andrea
+This is a bump. I am still seeing this issue. I'm assuming that the OP did not
+provide a do_compile log which is why this thread died. I am willing to provide
+the necessary information but I have noticed that the problem does not exist in
+the image directory when the gcc-sdk package is created. Is this file perhaps
+included from some other package that gets installed to the rootfs?
+
+-jeremy
+
+
+
 
 
