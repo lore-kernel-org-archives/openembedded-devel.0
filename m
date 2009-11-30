@@ -1,38 +1,22 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from gnv.quaddro.net
+	([68.110.131.118] helo=dishwasher.gnv.quaddro.net ident=root)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NEut5-0005ml-MO for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Nov 2009 02:17:14 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NEurb-0001NJ-Q3
+	(envelope-from <stephen@quaddro.net>) id 1NEvvR-0002ER-7h
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Nov 2009 02:15:40 +0100
-Received: from 68-25-27-139.pools.spcsdns.net ([68.25.27.139])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Nov 2009 02:15:39 +0100
-Received: from jerm7861 by 68-25-27-139.pools.spcsdns.net with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Nov 2009 02:15:39 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 30 Nov 2009 03:23:44 +0100
+Received: from localhost.localdomain (cerebrum.gnv.quaddro.net [10.2.1.11])
+	by dishwasher.gnv.quaddro.net (8.14.3/8.14.3) with ESMTP id
+	nAU22P2f029917; Sun, 29 Nov 2009 21:02:25 -0500
+From: Stephen Simpson <stephen@quaddro.net>
 To: openembedded-devel@lists.openembedded.org
-From: Jeremy Williams <jerm7861@yahoo.com>
-Date: Mon, 30 Nov 2009 01:15:13 +0000 (UTC)
-Message-ID: <loom.20091130T021309-622@post.gmane.org>
-References: <4A365C10.8020307@mta.it> <200906172309.40571.raj.khem@gmail.com>
-	<4A3A5A84.6090602@mta.it> <200906261759.56663.raj.khem@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 68.25.27.139 (Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.9.0.15) Gecko/2009101601 Firefox/3.0.15 (.NET CLR 3.5.30729))
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Sun, 29 Nov 2009 21:02:22 -0500
+Message-Id: <1259546542-24318-1-git-send-email-stephen@quaddro.net>
+X-Mailer: git-send-email 1.6.5.2
+X-SA-Exim-Connect-IP: 68.110.131.118
+X-SA-Exim-Mail-From: stephen@quaddro.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: nof/libgcc_s.so installed instead of libgcc_s.so on powerpc
+Subject: [PATCH] libdvb 0.5.5.1: Fix build on GCC 4.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,30 +30,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Nov 2009 01:17:14 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 30 Nov 2009 02:23:44 -0000
 
-Khem Raj <raj.khem <at> gmail.com> writes:
+Patches:
+* sample_progs/cam_menu.hh was missing #include <cstring>, does not error on gcc < 4.x
+* dvb-mpegtools/Makefile did not pass LDFLAGS when necessary for linking, causing QA Issues
+Recipe changes:
+* Change recipe to remove CFLAGS from config.mk to allow the CFLAGS variable passed to be used instead
+* Add patches to recipe
+---
+ recipes/libdvb/files/gcc4.patch    |   11 +++++++++++
+ recipes/libdvb/files/ldflags.patch |   27 +++++++++++++++++++++++++++
+ recipes/libdvb/libdvb_0.5.5.1.bb   |    6 ++++--
+ 3 files changed, 42 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/libdvb/files/gcc4.patch
+ create mode 100644 recipes/libdvb/files/ldflags.patch
 
-
-> 
-> Thanks. It might be problem in install section of our recipes.
-> Can you post log.do_compile file 
-> 
-> Thx
-> 
-> -Khem
-
-This is a bump. I am still seeing this issue. I'm assuming that the OP did not
-provide a do_compile log which is why this thread died. I am willing to provide
-the necessary information but I have noticed that the problem does not exist in
-the image directory when the gcc-sdk package is created. Is this file perhaps
-included from some other package that gets installed to the rootfs?
-
--jeremy
-
-
+diff --git a/recipes/libdvb/files/gcc4.patch b/recipes/libdvb/files/gcc4.patch
+new file mode 100644
+index 0000000..280c2ea
+--- /dev/null
++++ b/recipes/libdvb/files/gcc4.patch
+@@ -0,0 +1,11 @@
++diff -urN libdvb-0.5.5.1/sample_progs/cam_menu.hh libdvb-0.5.5.1-superterrific/sample_progs/cam_menu.hh
++--- libdvb-0.5.5.1/sample_progs/cam_menu.hh	2005-03-22 08:23:25.000000000 -0500
+++++ libdvb-0.5.5.1-superterrific/sample_progs/cam_menu.hh	2009-11-29 19:34:44.000000000 -0500
++@@ -4,6 +4,7 @@
++  */
++ #include <sys/types.h>
++ #include <sys/socket.h>
+++#include <cstring>
++ 
++ #ifndef __CAM_MENU_HH
++ #define __CAM_MENU_HH
+diff --git a/recipes/libdvb/files/ldflags.patch b/recipes/libdvb/files/ldflags.patch
+new file mode 100644
+index 0000000..70a7ea6
+--- /dev/null
++++ b/recipes/libdvb/files/ldflags.patch
+@@ -0,0 +1,27 @@
++diff -urN libdvb-0.5.5.1/dvb-mpegtools/Makefile libdvb-0.5.5.1-superterrific/dvb-mpegtools/Makefile
++--- libdvb-0.5.5.1/dvb-mpegtools/Makefile	2009-11-29 19:40:06.000000000 -0500
+++++ libdvb-0.5.5.1-superterrific/dvb-mpegtools/Makefile	2009-11-29 19:40:21.000000000 -0500
++@@ -33,19 +33,19 @@
++ 	dvbaudio
++ 
++ dvb-mpegtools_main: main.o
++-	$(CXX) main.o $(LIBS) -o $@
+++	$(CXX) main.o $(LDFLAGS) $(LIBS) -o $@
++ 
++ ctest: mainc.o 
++ 	$(CC) $(COBJ) -o $@
++ 
++ dvb-mplex: $(MPLEXOBS)
++-	$(CXX) $(MPLEXOBS) $(LIBS) -o $@
+++	$(CXX) $(MPLEXOBS) $(LDFLAGS) $(LIBS) -o $@
++ 
++ dvbaudio: dvbaudio.o
++-	$(CXX) dvbaudio.o $(LIBS) -ldvb -o $@
+++	$(CXX) dvbaudio.o $(LDFLAGS) $(LIBS) -ldvb -o $@
++ 
++ audiofilter: audiofilter.o
++-	$(CXX) audiofilter.o -o $@
+++	$(CXX) audiofilter.o $(LDFLAGS) -o $@
++ 
++ %.o:    %.cc 
++ 	$(CXX) -c $(DCFLAGS) $(INCLUDES) $(DEFINES) $<
+diff --git a/recipes/libdvb/libdvb_0.5.5.1.bb b/recipes/libdvb/libdvb_0.5.5.1.bb
+index d2db2ce..e982c1f 100644
+--- a/recipes/libdvb/libdvb_0.5.5.1.bb
++++ b/recipes/libdvb/libdvb_0.5.5.1.bb
+@@ -7,7 +7,9 @@ LICENSE = "GPL"
+ PR = "r3"
+ 
+ SRC_URI = "http://www.metzlerbros.org/dvb/${P}.tar.gz \
+-          file://topf2ps.patch;patch=1"
++          file://topf2ps.patch;patch=1 \
++          file://gcc4.patch;patch=1 \
++          file://ldflags.patch;patch=1"
+ 
+ S = "${WORKDIR}/${PN}-${PV}"
+ 
+@@ -16,7 +18,7 @@ PARALLEL_MAKE = ""
+ inherit autotools pkgconfig
+ 
+ do_configure() {
+-        grep -v ^PREFIX ${S}/config.mk > ${S}/config.mk.new
++        grep -v ^PREFIX ${S}/config.mk | grep -v ^CFLAGS > ${S}/config.mk.new
+         echo "PREFIX=${prefix}" >> ${S}/config.mk.new
+         mv ${S}/config.mk.new ${S}/config.mk
+ }
+-- 
+1.6.5.2
 
 
 
