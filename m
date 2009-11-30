@@ -1,36 +1,39 @@
-Received: from mail-ew0-f210.google.com ([209.85.219.210])
+Received: from mail-iw0-f194.google.com ([209.85.223.194])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1NFAkK-0000qQ-1I
+	(envelope-from <raj.khem@gmail.com>) id 1NFBEX-0002NL-OG
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Nov 2009 19:13:15 +0100
-Received: by ewy2 with SMTP id 2so1627899ewy.12
+	Mon, 30 Nov 2009 19:44:29 +0100
+Received: by iwn32 with SMTP id 32so2252129iwn.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Nov 2009 10:11:38 -0800 (PST)
+	Mon, 30 Nov 2009 10:42:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=6BvRri7itnwfUXADtTold+8U7aHKNa3rYtnb2Kes9g0=;
-	b=HV4S+4k3pV/vzLqxIzsUXLzp8QvYjAgHrv866sQs8xEN9jhtLXo63ALDNrxSo2KdFh
-	NITNnbE+MIy7/2RvNdxSxwGLQG9GblIQLOISYqbWn/C1CvTamJ1Utm2xK8PlUAuUwlba
-	E5nagiQV30pwt4pp+2mPPhClj7TCioLV5eYpI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	b=AzW5a2hdmhZGFd/ZrbonIIK+3ghmPKkyf0TIfGAGwnSK4FQ6ObE+HtHJeAnLZhtrNW
-	TneoQMbYN/3l8TzM0jOdb1AK3I9YX8/d40uXes+J9cPkuoFU4p2teX/FchEQ1EmFVMQk
-	CPMM3q4YgQPAiDsOn2epEIkGMiOPo8JFpyMBM=
+	bh=8vK1dUZi3r9rSQsL+ui9r6AHSaszrs2pIyr/nINyaw0=;
+	b=MgPMPrPbiS2mfjhjR0mh/csudwhLYKhW9Is+j7O31U0jmzxQ3uAVfMmam3YBtR6V4L
+	5r6KK0151tmAQDijIKFj0jRUSNAFi11fpSF+nzmRGpCcLe/hvZeM5k5DuSvfNNlBqde/
+	Mgg7jW6Q3Y5GipYbC+hrBSh7uCdZoowH72UbU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=A6flshUuepI04DOZlKtrOQKR4zGTo4MakK2yc51K6kKvQrMDwhtHtBxvDxj6q0l0HV
+	7KIiOY9VmF2yF0HQTiAvcUhcNS8kzmMiU+M0NvwldlEHMbJCSjeeduZ7ZQ38mQTquA+f
+	trEu6TDVYvAyrhwBifKIuP0ekHBEyMd70uVQU=
 MIME-Version: 1.0
-Received: by 10.216.93.68 with SMTP id k46mr1576227wef.161.1259604697932; Mon, 
-	30 Nov 2009 10:11:37 -0800 (PST)
-Date: Mon, 30 Nov 2009 13:11:37 -0500
-Message-ID: <f96d234e0911301011n6dfa9cc3n272356a84412f051@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+Received: by 10.231.29.149 with SMTP id q21mr8679276ibc.35.1259606571252; Mon, 
+	30 Nov 2009 10:42:51 -0800 (PST)
+In-Reply-To: <ec1f3d400911270337wbbbcae8gab291075d242c9d9@mail.gmail.com>
+References: <ec1f3d400911270337wbbbcae8gab291075d242c9d9@mail.gmail.com>
+Date: Mon, 30 Nov 2009 10:42:51 -0800
+Message-ID: <19c1b8a90911301042t6ed432b2m1189c619772edf9c@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.210
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+X-SA-Exim-Connect-IP: 209.85.223.194
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: OE weekly changelog 2009-11-23 to 2009-11-30
+Subject: Re: cortex-a9 build failure at glibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,257 +47,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Nov 2009 18:13:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 30 Nov 2009 18:44:29 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-OE weekly changelog 2009-11-23 to 2009-11-30
+On Fri, Nov 27, 2009 at 3:37 AM, RK Raggit <rk.raggit@gmail.com> wrote:
+> hi folks,
+>
+> a strange internal compiler error pops up when i am compiling glibc. This=
+ is
+> my version -
+>
+> PREFERRED_VERSION_glibc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =3D "2.6.1"
+> PREFERRED_VERSION_glibc-initial =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D "2.6.1"
+> I see the same error when i change the version to 2.9. This is the error =
+log
+> -
+>
+> ****************************************************
+> ccache arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a9
+> -mfpu=3Dneon -mfloat-abi=3Dsoftfp ../sysdeps/unix/sysv/linux/mq_unlink.c =
+-c
+> -std=3Dgnu99 -fgnu89-inline -O2 -Wall -Winline -Wwrite-strings
+> -fexpensive-optimizations -fmerge-all-constants -Wstrict-prototypes
+> -fomit-frame-pointer =C2=A0 =C2=A0-I../include
+> -I/home/raghu/opendistro/build/tmp/work/armv7a-angstrom-linux-gnueabi/gli=
+bc-2.6.1-r35.0/build-arm-angstrom-linux-gnueabi/rt
+> -I/home/raghu/opendistro/build/tmp/work/armv7a-angstrom-linux-gnueabi/gli=
+bc-2.6.1-r35.0/build-arm-angstrom-linux-gnueabi
+> -I../ports/sysdeps/arm/elf -I../ports/sysdeps/unix/sysv/linux/arm/eabi/np=
+tl
+> -I../ports/sysdeps/unix/sysv/linux/arm/eabi
+> -I../sysdeps/unix/sysv/linux/arm/eabi
+> -I../ports/sysdeps/unix/sysv/linux/arm/nptl
+> -I../ports/sysdeps/unix/sysv/linux/arm -I../sysdeps/unix/sysv/linux/arm
+> -I../ports/sysdeps/unix/sysv/linux -I../nptl/sysdeps/unix/sysv/linux
+> -I../nptl/sysdeps/pthread -I../sysdeps/pthread -I../sysdeps/unix/sysv/lin=
+ux
+> -I../sysdeps/gnu -I../sysdeps/unix/common -I../sysdeps/unix/mman
+> -I../sysdeps/unix/inet -I../ports/sysdeps/unix/sysv
+> -I../nptl/sysdeps/unix/sysv -I../sysdeps/unix/sysv
+> -I../ports/sysdeps/unix/arm -I../ports/sysdeps/unix -I../nptl/sysdeps/uni=
+x
+> -I../sysdeps/unix -I../sysdeps/posix -I../ports/sysdeps/arm/eabi
+> -I../ports/sysdeps/arm/fpu -I../ports/sysdeps/arm/nptl
+> -I../ports/sysdeps/arm -I../sysdeps/wordsize-32 -I../sysdeps/ieee754/flt-=
+32
+> -I../sysdeps/ieee754/dbl-64 -I../sysdeps/ieee754 -I../sysdeps/generic/elf
+> -I../sysdeps/generic -I../ports -I../nptl =C2=A0-I.. -I../libio -I. -nost=
+dinc
+> -isystem
+> /home/raghu/opendistro/build/tmp/cross/armv7a/lib/gcc/arm-angstrom-linux-=
+gnueabi/4.2.3/include
+> -isystem
+> /home/raghu/opendistro/build/tmp/cross/armv7a/lib/gcc/arm-angstrom-linux-=
+gnueabi/4.2.3/include-fixed
+> -isystem
+> /home/raghu/opendistro/build/tmp/staging/armv7a-angstrom-linux-gnueabi/us=
+r/include
+> -D_LIBC_REENTRANT -include ../include/libc-symbols.h =C2=A0 -DNOT_IN_libc=
+=3D1
+> -DIS_IN_librt=3D1 =C2=A0 =C2=A0-o
+> /home/raghu/opendistro/build/tmp/work/armv7a-angstrom-linux-gnueabi/glibc=
+-2.6.1-r35.0/build-arm-angstrom-linux-gnueabi/rt/mq_unlink.o
+> -MD -MP -MF
+> /home/raghu/opendistro/build/tmp/work/armv7a-angstrom-linux-gnueabi/glibc=
+-2.6.1-r35.0/build-arm-angstrom-linux-gnueabi/rt/mq_unlink.o.dt
+> -MT
+> /home/raghu/opendistro/build/tmp/work/armv7a-angstrom-linux-gnueabi/glibc=
+-2.6.1-r35.0/build-arm-angstrom-linux-gnueabi/rt/mq_unlink.o
+> ../sysdeps/unix/sysv/linux/mq_unlink.c: In function 'mq_unlink':
+> ../sysdeps/unix/sysv/linux/mq_unlink.c:50: error: could not split insn
+> (insn:TI 80 48 39 ../sysdeps/unix/sysv/linux/mq_unlink.c:43 (parallel [
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(set (reg/v:SI 4 r4 [orig:135 re=
+t ] [135])
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(if_then_else:SI (=
+ne (reg/v:SI 0 r0 [orig:133 ret.53 ]
+> [133])
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0(const_int -1 [0xffffffffffffffff]))
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(neg=
+:SI (reg/v:SI 0 r0 [orig:133 ret.53 ] [133]))
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(con=
+st_int 13 [0xd])))
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(clobber (reg:CC 24 cc))
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0]) 311 {*ifcompare_neg_move} (nil)
+> =C2=A0 =C2=A0(expr_list:REG_DEAD (reg/v:SI 0 r0 [orig:133 ret.53 ] [133])
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0(expr_list:REG_UNUSED (reg:CC 24 cc)
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(nil))))
+> ../sysdeps/unix/sysv/linux/mq_unlink.c:50: internal compiler error: in
+> final_scan_insn, at final.c:2553
+> Please submit a full bug report,
+> with preprocessed source if appropriate.
+> See <URL:http://gcc.gnu.org/bugs.html <http://gcc.gnu.org/bugs.html>> for
+> instructions.
+> make[2]: ***
+> [/home/raghu/opendistro/build/tmp/work/armv7a-angstrom-linux-gnueabi/glib=
+c-2.6.1-r35.0/build-arm-angstrom-linux-gnueabi/rt/mq_unlink.o]
+> Error 1
+> ******************************************************
+>
+> glibc-initial seems to have built fine. I couldnt find any hints by
+> googling.
 
-Andrea Adami (2):
-  nandlogical: rework klibc statical recipe pointing to staged mtd headers =
-ins
-  Revert "palmtop.bbclass: fix QA of plugins wrt packaging of -dbg files"
+glibc-initial does not compile much of code.
 
-Benjamin Schieder (2):
-  fltkclock, fltkhackdiet, fltkwwpointcal: new fltk apps from Benjamin Schi=
-ede
-  add package fltkcocktailbar
+>
+> Anyone seen something similar and could help out with some clues ?
+>
 
-Cliff Brake (2):
-  docs: fix type in Makefile
-  usermanual: add entries to .gitignore for ps, etc
+This is gcc ICE. You could preprocess the file and provide commandline
+options and the preprocessed file.
+Secondly I also noticed that you are using gcc 4.2. It would be
+interesting to know if the same ICE happens
+with gcc 4.4. Btw. you would be better of using gcc 4.4 for new arm
+processors like cortex a9
 
-David-John Willis (5):
-  blueman: Add 1.21
-  libpam-base-files: Start to add default config files for libpam
-  shadow: Add version 4.1.4.2 and checksum.
-  sudo: Add 1.7.2p1 and enable PAM support by default in newer sudo builds.=
- su
-  angstrom.inc: Add DISTRO_FEATURES =3D "pam" to Angstrom distro.
-
-Frans Meulenbroeks (3):
-  apache2: upgraded to 2.2.14
-  linux-kirkwood: added sound driver for openrd-client
-
-Graeme Gregory (3):
-  bluez4.inc : remove DISTRO hacks as they arent really needed its ok to ad=
-d t
-  gcc-4.3.3.inc : replace objc patch with undamaged one from gcc-patches
-
-Henning Heinold (14):
-  uclibc: clean up uClibc for the new oe features mainly done Richard Purdi=
-e
-  libpam: fix building on uClibc
-  libvorbis: update to version 1.2.3
-  libogg: update to version 1.1.4
-  libtheora: update to version 1.1.1
-  uclibc: add O_CLOEXEC support needed for newer pulseaudio
-  pulseaudio: make compileable under uclibc again
-  eina: fix building on uClibc
-  mplayer: fix install for micro
-  proxy-libintl: fix install for micro and simply stage
-  mplayer-common: fix arch and install
-  guile-native: simplify the .inc file
-  gnome-games: fix sdl in configure.ac
-  libsdl-mixer: remove defpref -1 from version 1.2.10 because 1.2.11 is now=
- de
-
-Jeremy Lain=E9 (3):
-  sane-backends: remove ${sysconfdir}/sane.d/qcam.conf from conffiles
-  sane-backends: add version 1.0.20
-  linux.inc: create DEPLOY_DIR_IMAGE in do_devicetree_image
-
-Klaus Kurzmann (14):
-  e-wm_svn.bb: split ${sysconfdir}/xdg/menus/applications.menu into it's ow=
-n p
-  sane-srcrevs-fso.inc: bump fsodeviced and others to get new alsa stuff
-  fsodeviced: adjust path in initscript - fsodeviced moved to /usr/sbin
-  task-shr-minimal: add e-wm-menu-shr
-  sane-srcrevs.inc: bump mokonnect to 112
-  sane-srcrevs-fso: bump rev for libframeworkd-glib
-  task-shr-feed: add fltkcocktailbar and babiloo-efl
-  phoneuid: conform with the recent changes in upstreams Makefiles
-  phonefsod: conform with latest autotools configuration changes in upstrea=
-m
-  task-shr-feed: add make
-  sane-srcrevs-fso: bump fsodeviced to get the alsa player ringtone fix
-  python-phoneutils_git: fix DEPENDS
-  exhibit: fix SRC_URI - exhibit moved to OLD
-
-Koen Kooi (27):
-  pixman git: bump SRCREV to 0.17.3 and add support for overlapping blits
-  xserver-xorg: use overlapped blts, needs pixman support, hence not defaul=
-t
-  gcc 4.3.4: add objective-c patch for eabi and add a package for libobjc
-  gcc 4.3.3: fix patch and packaging
-  gcc 4.3.3: ...and bump PR
-  opkg-target,sdk: bump SRCREV
-  Angstrom: switch to opkg-nogpg-nocurl per RFC on the angstrom-devel maili=
-ngl
-  flac: new style staging
-  flac 1.1.2: fix for new style staging
-  webkit-efl: this is 1.1.11, not 0.1
-  eve: eve-themes is mandatory, so add it to RDEPENDS
-  angstrom-glibc: switch back to -O2
-  linux-omap 2.6.29: add smsc patches and update overo defconfig
-  angstrom feed configs: rrecommend opkg-nogpg-nocurl
-  angstrom-feed-builder: add more stuff
-  angstrom feed sorter: add more boards
-  angstrom task gnome: clean up package list a bit
-  libpam-base-files: polkit is provided by policykit itself
-  pkgconfig bbclass: also sed out bogus includes
-  inkscape: add 0.47
-  gnome-mplayer: fix typo
-  e-wm: stop RRECOMMENDING e-wm-menu e-wm-menu-shr: stop RPROVIDING it
-  checksums.ini: add gdm checksum
-  gdm: tweak do_install a bit
-  linux 2.6.24: add support for smartq5 device (machine.conf will follow la=
-ter
-  e17: bump SRCREV and start adapting it to new-style staging
-
-Kristoffer Ericson (1):
-  Fix so package_tar yet again produces tar packages. This closes bug 5339.=
- Th
-
-Liam Girdwood (1):
-  pulseaudio: add version 0.9.21
-
-Mario Domenech Goulart (7):
-  chicken-native: removed
-  chicken: added support for cross compilation with chicken
-  chicken: added support for INC_PR for chicken recipes
-  chicken: fixed installation dir
-  chicken, chicken-cross: added translator-cross.patch for chicken 4.2.0
-  chicken: Added recipes for chicken 4.2.10
-  chicken: path and dependencies fixes for chicken recipes
-
-Martin Dietze (8):
-  linux-mtx-[12]-2.4.27: support bash4 for oldconfig
-  conf/distro/nylon.conf: fixed some broken preferred versions
-  e2fsprogs-libs.inc: removed dependency to unsupported util-linux-ng for n=
-ylo
-  gcc-configure-common.inc: remove objc from the list of supported language=
-s f
-  mtd-utils.inc: flexible handling of ${mtd_utils} in do_stage and do_insta=
-ll
-  opkg_svn.bb: added missing dependency to openssl to recipe
-  opkg-nogpg_svn.bb: link without `-Wl,--as-needed' for nylon
-
-Martin Jansa (14):
-  module-strip.bbclass: fix typo, last PKGDEST should be PKGD too
-  kernel.bbclass, linux.inc: move do_deploy task after do_package
-  kernel.bbclass: force do_deploy call before do_build
-  linux-openmoko: bump PR to get module_strip fix
-  task-shr-feed: add new packages fltkclock, fltkhackdiet, fltkwwpointcal
-  preferred-shr-versions: remove preferred version of pixmap, increase DEFA=
-ULT
-  shr.conf: merge minimal.conf to shr.conf directly, remove all preferred-x=
-org
-  fltk2: switch to build directly from svn, as that old snapshot is not ava=
-ila
-  shr: use newer classpath and jamvm
-  babilo-efl: switch SRCREV -> SRCPV, formal change as bzr returns sortable=
- re
-  shr: bump linux-libc-headers to 2.6.31, use EFL_SRCREV from sane-srcrevs
-  linux-openmoko-2.6.31: enable NFS and INOTIFY_USER for gta02
-  om-gta02: create also ubinized image from ubifs
-
-Michael 'Mickey' Lauer (11):
-  libnl2: change includedir to not step over libnl1; also convert to new st=
-agi
-  sane-toolchain.inc: bump linux-userspace-headers to match with bumped egl=
-ibc
-  fsogsmd: no longer requires libxml2 nor broadband info
-  libfsoframework: add missing dependency on alsa-lib
-  vala: add 0.7.8.2 release
-  fsodeviced: explicitly enable the rfkill and canberra player plugins
-  fsodatad: new recipe; FSO data storage service fsomusicd: new recipe; FSO=
- mu
-  fsolocationd: renamed recipe; source was fsogpsd
-  fsomusicd: add SRCREV
-
-Otavio Salvador (1):
-  Revert "chicken.inc: fix install and compilation issues"
-
-Richard Purdie (1):
-  uclibc-initial: Convert to us do_install for staging. 0.9.30.1 is tested =
-and
-
-Robert P. J. Day (1):
-  usermanual: Update usermanual bitbake references to 1.8.18.
-
-Roger Monk (1):
-  Hawkboard: Add Hawkboard machine and kernel
-
-Sebastian Krzyszkowiak (1):
-  shr-autorev: add opimd-utils to AUTOREV
-
-Sebastian Spaeth (13):
-  navit: Do not set /proc/sys/vm/overcommit in an app launcher, especially =
-not
-  calc: add v0.0.3 recipe
-  initscripts-shr: add glamoFIFOtweak to Xsession.d
-  sane-srcrevs.inc: bump 'calc' sane rev to latest release
-  initscripts-shr: remove runtime glamo tweak. Has been pushed into andy-tr=
-ack
-  sane-srcrevs.inc: bump linux-openmoko-shr-devel
-  bootchart-lite: Use mkdir rather than install in postinst.
-  babiloo-efl: add tar-based recipe in addion to _bzr variant.
-  babiloo-efl: don't prefer _bzr version over releases
-  task-shr-feed: add babiloo-efl, remove hermining.
-  babiloo: upstream changed SRC_URI
-
-Steffen Sledz (2):
-  u-boot-2009.03: fix flash layout for hipox machine
-  u-boot-2009.03: disable features to fit size requirements for hipox machi=
-ne
-
-Steve Sakoman (6):
-  flac: disable xmms plugin since it breaks the build
-  gdm: update to 2.28.1
-  gnome-mplayer: bump SRCREV
-  gnome-system-monitor: fix typo
-  system-tools-backends: fix packaging
-  totem: don't disable python
-
-Thomas Zimmermann (15):
-  policykit: fix depends it requires intltool >=3D 0.36.0
-  xournal: add version 0.4.5 and include .desktop file from source. Fixes S=
-HR
-  atd-over-fso: override RPROVIDES, RCONFLICTS and RREPLACE for -dbg and -d=
-ev
-  task-shr-feed: add transmission to the feed, fixes SHR bug #745
-  task-shr-feed: add xf86-input-tslib to the feed, with this TS can be cali=
-bra
-  obexd: add version 0.19
-  babiloo: new recipe
-  openttd: add version 0.7.4-RC1 and sound and graphic files from openttdco=
-op.
-  openttd: correct path for config file
-  scummvm: copy config from openmoko to shr
-  scummvm: update version to 1.0.0
-  neomis: new recipe
-  numberx: new recipe
-  task-shr-feed: add gtkmm, solves SHR bug #546
-  di: new recipe
-
-Bugs fixed:
-
-bug_id resolution        short_desc
-3470 FIXED       bitbake doesn't work when using a x86_64 kernel with
-a 32bit userspace
-1182 FIXED       Kernel modules are not stripped before they are packaged
-1904 FIXED       glibc-intermediate build failure (icecc compile farm)
-2393 FIXED       meta-toolchain/sdk does not build.
-4203 FIXED       gcc-cross-sdk-4.1.2-r11: task do_compile fails if
-toolchain target exists
-5149 FIXED       e2fsprogs-libs fails to compile for RELEASE
-5339 FIXED       package_tar no longer produces packages
-4179 FIXED       external toolchain generated by meta-toolchain
-depends on the original build location
-
-Bugs opened:
-
-bug_id resolution        short_desc
+-Khem
 
 
