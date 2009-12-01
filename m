@@ -1,36 +1,32 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NFQGQ-0004ZC-VX
+	(envelope-from <pb@reciva.com>) id 1NFQU7-0006bo-DY
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Dec 2009 11:47:26 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NFQEv-0008OW-Ix for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Dec 2009 05:45:49 -0500
-Date: Tue, 1 Dec 2009 05:45:36 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
+	Tue, 01 Dec 2009 12:01:34 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1NFQSb-0003VZ-Qx
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Dec 2009 10:59:57 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <pb@reciva.com>) id 1NFQSb-0000Z3-GB
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Dec 2009 10:59:57 +0000
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20091201103917.GC4345@xora.vm.bytemark.co.uk>
-Message-ID: <alpine.LFD.2.00.0912010544560.8109@localhost>
+In-Reply-To: <alpine.LFD.2.00.0912010544560.8109@localhost>
 References: <ad82c8890912010126u374499a4jdbd39414b67558fb@mail.gmail.com>
 	<ac9c93b10912010229g2b53c52fw671178a33c644114@mail.gmail.com>
 	<20091201103917.GC4345@xora.vm.bytemark.co.uk>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+	<alpine.LFD.2.00.0912010544560.8109@localhost>
+Date: Tue, 01 Dec 2009 10:59:54 +0000
+Message-Id: <1259665194.4332.317.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: pb@reciva.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Error while running bibake
@@ -47,56 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Dec 2009 10:47:26 -0000
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323328-678330293-1259664339=:8109"
+X-List-Received-Date: Tue, 01 Dec 2009 11:01:34 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
---8323328-678330293-1259664339=:8109
-Content-Type: TEXT/PLAIN; charset=iso-8859-1
-Content-Transfer-Encoding: QUOTED-PRINTABLE
+On Tue, 2009-12-01 at 05:45 -0500, Robert P. J. Day wrote:
+>   if you feel that strongly about it, why not just have bitbake refuse
+> to run as root?  seems like a simple solution.
 
-On Tue, 1 Dec 2009, Graeme Gregory wrote:
+sanity.bbclass does already include a check for non-root:
 
-> On Tue, Dec 01, 2009 at 11:29:46AM +0100, Frans Meulenbroeks wrote:
-> > 2009/12/1 vivek tambakad <vivektambakad@gmail.com>:
-> > > hi
-> > > I want cross compile linphone for compulab EM-x270 board.when i try
-> > > =A0 sudo bitbake -b
-> > > /home/development/em-x270/stuff/openembedded/recipes/linphone/
-> > > linphone_3.1.0.bb
-> > > =A0 =A0then i will get the following error
-> > > =A0 *bb.parse.ParseError: Could not inherit file classes/autotools.bb=
-class
-> > > *
-> > > =A0 =A0pleasse guide me in compiling linphone for compulab board.
-> >
-> > first remark:
-> > there is no need to run bitbake as root.
-> >
-> Rephrase that.
->
-> DONT RUN BITBAKE AS ROOT!!!!!!!!!
->
-> That way will only lead to your host machine having bits of its
-> filesystem replaced/deleted. OE relies on sandboxing the build as a
-> non priviledged user.
+        if 0 == os.getuid():
+                raise_sanity_error("Do not use Bitbake as root.")
 
-  if you feel that strongly about it, why not just have bitbake refuse
-to run as root?  seems like a simple solution.
+I think that ought to be sufficient.  Folks who override the sanity
+checking do so at their own risk.
 
-rday
---
+p.
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Robert P. J. Day                               Waterloo, Ontario, CANADA
 
-            Linux Consulting, Training and Kernel Pedantry.
 
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
---8323328-678330293-1259664339=:8109--
