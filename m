@@ -1,36 +1,25 @@
-Received: from mail-yx0-f175.google.com ([209.85.210.175])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NFQ0v-0003yp-8V
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NFQ5t-0003Je-DT
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Dec 2009 11:31:24 +0100
-Received: by yxe5 with SMTP id 5so4355401yxe.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Dec 2009 02:29:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=/Pc4++j5ZeoK2x3Ot/zdpOhYBuBNMP5f8IyZKkTUciA=;
-	b=Zd52E2LGknh8T/PzkItW/NV0eIPUzVHm1sTUfHEMVX7fnj9FQCHtjYQwdQaoBia5HE
-	zPuOZCSUjFF91aGf60le0uvvtOuzkbhILUUS2wpTVGCYaQ9vLD4VlCmIFc4i63iD6AKM
-	FaENo8aBHyyIvjTbC1Ye8L/osDmbFZd446LxA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Of8E6NjeAvbc9a7r2kiAxVHiwJy+HM9zFRajokn4IU12ZTHGIXTu3zw4Bi9PaPqsQW
-	oGzYE1coWgT3CscNcrOy8DJCwT33hdMwa2SChtJeZa/v7EGY21+SNvMz7DKYQt12USsO
-	Gb3sMl55WfjZUOnIgarUgwGYjg+rTwUL7U+ks=
-MIME-Version: 1.0
-Received: by 10.101.11.34 with SMTP id o34mr2250157ani.25.1259663386313; Tue, 
-	01 Dec 2009 02:29:46 -0800 (PST)
-In-Reply-To: <ad82c8890912010126u374499a4jdbd39414b67558fb@mail.gmail.com>
-References: <ad82c8890912010126u374499a4jdbd39414b67558fb@mail.gmail.com>
-Date: Tue, 1 Dec 2009 11:29:46 +0100
-Message-ID: <ac9c93b10912010229g2b53c52fw671178a33c644114@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Tue, 01 Dec 2009 11:36:32 +0100
+Received: (qmail 31793 invoked by uid 813007); 1 Dec 2009 10:34:55 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 1 Dec 2009 10:34:55 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Tue, 1 Dec 2009 11:35:07 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.32-rc7-00029-ga9366e6-dirty; KDE/4.3.2;
+	x86_64; ; )
+References: <ad82c8890912010126u374499a4jdbd39414b67558fb@mail.gmail.com>
+	<ac9c93b10912010229g2b53c52fw671178a33c644114@mail.gmail.com>
+In-Reply-To: <ac9c93b10912010229g2b53c52fw671178a33c644114@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200912011135.08560.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Error while running bibake
@@ -47,28 +36,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Dec 2009 10:31:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 01 Dec 2009 10:36:32 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-2009/12/1 vivek tambakad <vivektambakad@gmail.com>:
-> hi
-> I want cross compile linphone for compulab EM-x270 board.when i try
-> =A0 sudo bitbake -b
-> /home/development/em-x270/stuff/openembedded/recipes/linphone/
-> linphone_3.1.0.bb
-> =A0 =A0then i will get the following error
-> =A0 *bb.parse.ParseError: Could not inherit file classes/autotools.bbclas=
-s
-> *
-> =A0 =A0pleasse guide me in compiling linphone for compulab board.
+Dnia wtorek, 1 grudnia 2009 o 11:29:46 Frans Meulenbroeks napisa=C5=82(a):
+> 2009/12/1 vivek tambakad <vivektambakad@gmail.com>:
+> > hi
+> > I want cross compile linphone for compulab EM-x270 board.when i try
+> >   sudo bitbake -b
+> > /home/development/em-x270/stuff/openembedded/recipes/linphone/
+> > linphone_3.1.0.bb
+> >    then i will get the following error
+> >   *bb.parse.ParseError: Could not inherit file classes/autotools.bbclass
+> > *
+> >    pleasse guide me in compiling linphone for compulab board.
+>=20
+> first remark:
+> there is no need to run bitbake as root.
+>=20
+> 2nd thing you could check is if the file exists in your tree and if so
+> if your path is set properly.
 
-first remark:
-there is no need to run bitbake as root.
+3rd: do not use "bitbake -b" command but "bitbake" because "-b" expands to=
+=20
+"--be-not-nice-to-me-and-do-not-build-dependencies".
 
-2nd thing you could check is if the file exists in your tree and if so
-if your path is set properly.
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-FM
+
 
 
