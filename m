@@ -1,31 +1,35 @@
-Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sebastian@SSpaeth.de>) id 1NFO4J-0003kH-Vf
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NFOwt-0007sX-AM for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Dec 2009 10:23:10 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NFOvO-0004EY-8q
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Dec 2009 09:26:47 +0100
-Received: from homiemail-a22.g.dreamhost.com (caiajhbdccah.dreamhost.com
-	[208.97.132.207])
-	by hapkido.dreamhost.com (Postfix) with ESMTP id 223D217B3EB
+	Tue, 01 Dec 2009 10:21:34 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Dec 2009 10:21:34 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Dec 2009 00:25:10 -0800 (PST)
-Received: from [192.168.1.154] (unknown [195.190.181.110])
-	by homiemail-a22.g.dreamhost.com (Postfix) with ESMTPA id 930BE1A8061
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Dec 2009 00:25:07 -0800 (PST)
-Message-ID: <4B14D2E1.6050506@SSpaeth.de>
-Date: Tue, 01 Dec 2009 09:25:05 +0100
-From: Sebastian Spaeth <Sebastian@SSpaeth.de>
-Organization: ETH Zurich
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Tue, 01 Dec 2009 10:21:34 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4B14BAD9.2060402@fqingenieria.es>
-	<20091201072521.GA11505@denix.org>
-In-Reply-To: <20091201072521.GA11505@denix.org>
-X-Enigmail-Version: 0.95.7
-OpenPGP: id=C827A062
-X-SA-Exim-Connect-IP: 66.33.216.122
-X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 01 Dec 2009 10:21:09 +0100
+Message-ID: <hf2n65$t39$1@ger.gmane.org>
+References: <4B14BAD9.2060402@fqingenieria.es>	<20091201072521.GA11505@denix.org>
+	<4B14D2E1.6050506@SSpaeth.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
+In-Reply-To: <4B14D2E1.6050506@SSpaeth.de>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Recipes relation tree
@@ -42,42 +46,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Dec 2009 08:26:47 -0000
-X-Groupsio-MsgNum: 14753
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enigE15DE67527D46C4A726F70BB"
+X-List-Received-Date: Tue, 01 Dec 2009 09:23:11 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---------------enigE15DE67527D46C4A726F70BB
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+On 01-12-09 09:25, Sebastian Spaeth wrote:
+> Denys Dmytriyenko wrote:
+>> Have you looked at -g option of bitbake?
+>>
+>>    -g, --graphviz        emit the dependency trees of the specified packages in
+>>                          the dot syntax
+>
+> A related question. This generates depends.dot just fine, but I found a
+> reference to rdepends.dot in some manual. I would be very much
+> interested in an RDEPENDS tree, is there a way to get this?
 
-Denys Dmytriyenko wrote:
-> Have you looked at -g option of bitbake?
->=20
->   -g, --graphviz        emit the dependency trees of the specified pack=
-ages in
->                         the dot syntax
+If you use testlab.bbclass you get one for each image.
 
-A related question. This generates depends.dot just fine, but I found a
-reference to rdepends.dot in some manual. I would be very much
-interested in an RDEPENDS tree, is there a way to get this?
+regards,
 
-spaetz
+Koen
 
 
---------------enigE15DE67527D46C4A726F70BB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEARECAAYFAksU0uIACgkQVYX1jMgnoGK0xgCgh9kOjkyytqNgkE/UG9fGegME
-tWkAn3B9e6qKk67J+Py/dYcOtic6OshI
-=eO00
------END PGP SIGNATURE-----
-
---------------enigE15DE67527D46C4A726F70BB--
