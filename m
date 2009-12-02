@@ -1,35 +1,30 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from caiajhbdccac.dreamhost.com ([208.97.132.202]
+	helo=homiemail-a12.g.dreamhost.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NFpqq-0002sx-9u for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Dec 2009 15:06:43 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NFppI-0003Ha-L3
+	(envelope-from <Sebastian@SSpaeth.de>) id 1NFpsw-00030O-NL
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Dec 2009 15:05:04 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Dec 2009 15:05:04 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Wed, 02 Dec 2009 15:08:53 +0100
+Received: from [129.132.133.199] (mtec-hg-docking-1-dhcp-199.ethz.ch
+	[129.132.133.199])
+	by homiemail-a12.g.dreamhost.com (Postfix) with ESMTPA id 43CDF714060
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Dec 2009 15:05:04 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed,  2 Dec 2009 06:07:16 -0800 (PST)
+Message-ID: <4B167492.9040501@SSpaeth.de>
+Date: Wed, 02 Dec 2009 15:07:14 +0100
+From: Sebastian Spaeth <Sebastian@SSpaeth.de>
+Organization: ETH Zurich
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 02 Dec 2009 15:00:46 +0100
-Message-ID: <hf5ruf$cr3$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <4B16624C.3090400@SSpaeth.de> <hf5rjb$b3u$1@ger.gmane.org>
+In-Reply-To: <hf5rjb$b3u$1@ger.gmane.org>
+X-Enigmail-Version: 0.95.7
+OpenPGP: id=C827A062
+X-SA-Exim-Connect-IP: 208.97.132.202
+X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Heads up: stricter package checking with newer opkg versions
+Subject: Re: Proposed change to om-gta02.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,29 +38,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Dec 2009 14:06:43 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Wed, 02 Dec 2009 14:08:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Koen Kooi wrote:
 
-Opkg > r387 propagates all errors, so if your package is broken it might 
-have installed before, but won't anymore.
+> Have you considered using usb-gadget-mode recipe for that? 
 
-Things like creating a symlink over an existing dir (e.g. udev 141 after 
-another package installed a udev rule already) or creating a dir with 
-the insufficient permissions and installing a file into it (adobe-fonts) 
-now fail.
+Nifty! We have have that installed already. THanks for the hint, Koen.
 
-If building an image suddenly starts failing, have a look at the log and 
-see what's wrong. Most likely the package is trying to do something 
-wrong and we need to fix that.
+> And also not
+> that changing module autoloads requires a PR bump for the kernel(s).
 
-I'm testing a fix for the udev symlink currently.
+Yep, that I learned already the hard way.
 
-regards,
-
-Koen
-
+spaetz
 
 
