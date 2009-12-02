@@ -1,22 +1,35 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-yw0-f188.google.com ([209.85.211.188])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NFlh6-0005XH-Vo
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NFljE-0005eq-AR
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Dec 2009 10:40:24 +0100
-Received: from tamarin.localnet (unknown [122.181.150.106])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 925D71B10C02
+	Wed, 02 Dec 2009 10:42:35 +0100
+Received: by ywh26 with SMTP id 26so6443ywh.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Dec 2009 09:51:17 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 2 Dec 2009 10:38:13 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <ad82c8890912020032t44008a96m4fb5d477050adbf4@mail.gmail.com>
-In-Reply-To: <ad82c8890912020032t44008a96m4fb5d477050adbf4@mail.gmail.com>
+	Wed, 02 Dec 2009 01:40:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=CBMofldF6y/uexu+CyObkotmiBwrQSD+JZa7M3xmot8=;
+	b=G2PecYPh1LbqqRWlJD1rTyaTH41pHU9MpGCyPgMg39ZIgmpMnX2P5U7dWj/4y/xhyF
+	P81ttOYhxZQx6cx4K8nGUUzrtbT6DXx0yA4k24qyWPk6yKa0nea8zOq0tv2wkm3mHpfm
+	bNwJ7KG3C1BpIACSBS0/Y3GVeUn0q9yp1h37I=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=xE90I8H70vctngrCsOLcBkm3R0pUEdSfwZRYdOH85oq1Wjvhtb/H5gAKuLc6HqXEql
+	9d+LE4ePRMBPHT3WBwMzbC++6hUBQOF7h5KENUvn8IDhsrczokg6JOQMHlpdyEIzSdEX
+	pq9BltB3beTg2BmOwoGswif455MOUs9Ifis+8=
 MIME-Version: 1.0
-Message-Id: <200912021038.13339.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Received: by 10.101.4.22 with SMTP id g22mr3131671ani.40.1259746856551; Wed, 
+	02 Dec 2009 01:40:56 -0800 (PST)
+In-Reply-To: <ad82c8890912020032t44008a96m4fb5d477050adbf4@mail.gmail.com>
+References: <ad82c8890912020032t44008a96m4fb5d477050adbf4@mail.gmail.com>
+Date: Wed, 2 Dec 2009 10:40:56 +0100
+Message-ID: <ac9c93b10912020140t72082f3bodfd5bd9d955401b7@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.211.188
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: compilation error while building linphone
@@ -33,27 +46,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Dec 2009 09:40:24 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 02 Dec 2009 09:42:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wednesday 02 December 2009 09:32:54 vivek tambakad wrote:
-> Thanks for the help .I solved all the dependency problems.now i can atleast
-> build.
-> Now I am getting build error for linphone as follows:
+Vivek,
 
-1.) Learn to quote email. Please google for "how to quote email" as I don't 
-have enough bandwidth for http...
-2.) We have a oestats-client... The thing that computer program is doing well 
-is to actually send the log file of the failed task to a server. Your options 
-are to either use it and send a link to the failed task, join irc to see if 
-people want to support you, or be as clever as the computer program and attach 
-the actual log to your email.
-3.) In case you are an intelligent lifeform, pre-process the output and apply 
-thinking to the problem.
+This part is your problem:
+NOTE: The MD5Sums did not match. Wanted: '0499a958a561781b125c740f18061ea8'
+and Got: '6b459ba67d4ec47f106335ab741174c2'
+NOTE: Task failed: Checksum of 'ftp://ftp.gnu.org/gnu/m4/m4-1.4.12.tar.gz'
+failed
 
+No idea why this happens, and cannot check locally now.
+You might also consider asking in #oe on freenode.
 
-z.
+FM
 
 
