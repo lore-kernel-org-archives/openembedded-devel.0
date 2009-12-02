@@ -1,36 +1,45 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from fg-out-1718.google.com ([72.14.220.155])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NFb0P-00081D-MN
+	(envelope-from <d.vinokuroff@gmail.com>) id 1NFiE6-0000aW-Uw
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Dec 2009 23:15:36 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NFays-0001do-DJ for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Dec 2009 17:13:58 -0500
-Date: Tue, 1 Dec 2009 17:13:44 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.0912011711380.20250@localhost>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Wed, 02 Dec 2009 06:58:13 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so121779fge.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Dec 2009 21:56:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:references:in-reply-to
+	:content-type:content-transfer-encoding;
+	bh=TFfRM3SCvAmb1tK0lWSMi0Y2CbONzbhuKzkkr70YW/k=;
+	b=YZ4iosxY5vFqNOEjvrISn0W7i0oDveA1KHgh0MFbIHqAI3T3tVR8bC8/yqmI2o1oFb
+	K7ELwDKd/647lUXLsb50/ld34Q2JkJzpwXTV6Cz+hGD2zQmxaeD+XFMZZm7aBoEUdETd
+	Fg8snC9aOFvbDUgzK1myvNhb30aJiXs6CpvGQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=sprHW7zqt1iInEX23TKTOwN/DrssqUwV1J2wKf7oZpPKBZ3NpJdjShCBrRnE7ecT5T
+	JoLmpeFmdD1TIPSxNV5iZ1g5O1jYnHldfgTV14aPXzYV7Vy4AJYBVhEROwr+9RKHEGZ7
+	FHcrmxKOPTY3hHAfQ6t5GUZshSUyvVIyncNVc=
+Received: by 10.103.81.8 with SMTP id i8mr2351825mul.80.1259733397841;
+	Tue, 01 Dec 2009 21:56:37 -0800 (PST)
+Received: from ?192.168.0.101? ([94.180.45.122])
+	by mx.google.com with ESMTPS id y37sm2208708mug.17.2009.12.01.21.56.35
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 01 Dec 2009 21:56:36 -0800 (PST)
+Message-ID: <4B160147.9050303@gmail.com>
+Date: Wed, 02 Dec 2009 10:55:19 +0500
+From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20091001)
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+To: openembedded-devel@lists.openembedded.org
+References: <4B0CC1A4.1060401@gmail.com>
+	<200911260953.02170.holger+oe@freyther.de>
+In-Reply-To: <200911260953.02170.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 72.14.220.155
+X-SA-Exim-Mail-From: d.vinokuroff@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: build failure, dev branch, e2fsprogs
+Subject: Re: Making simple QTE application, cannot find libpthread_nonshared.a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,81 +53,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Dec 2009 22:15:37 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 02 Dec 2009 05:58:14 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
+Yesterday pulled from dev branch (git describe output is 
+pre-nov2009-core-updates-606-g237cbb4) and made meta-toolchain-qte 
+rebuild, then tried again to build example -- same error "cannot find 
+/usr/lib/libpthread_nonshared.a inside 
+/usr/local/minimal/arm/arm-oe-linux-gnueabi"
 
-NOTE: Running task 9139 of 10168 (ID: 6935,
-/home/rpjday/oe/openembedded/recipes/e2fsprogs/e2fsprogs_1.41.5.bb,
-do_compile)
-ERROR: function do_compile failed
-ERROR: see log in
-/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/e2fsprogs-1.41.5-r1/temp/log.do_compile.18972
-NOTE: Task failed:
-/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/e2fsprogs-1.41.5-r1/temp/log.do_compile.18972
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/home/rpjday/oe/openembedded/recipes/e2fsprogs/e2fsprogs_1.41.5.bb
-do_compile failed
-ERROR: Task 6935
-(/home/rpjday/oe/openembedded/recipes/e2fsprogs/e2fsprogs_1.41.5.bb,
-do_compile) failed
-NOTE: Tasks Summary: Attempted 10142 tasks of which 10142 didn't need
-to be rerun and 1 failed.
-ERROR:
-'/home/rpjday/oe/openembedded/recipes/e2fsprogs/e2fsprogs_1.41.5.bb'
-failed
-
-log:
-
-... snip ...
-making all in e2fsck
-make[2]: Entering directory
-`/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/e2fsprogs-1.41.5-r1/e2fsprogs-1.41.5/e2fsck'
-        CC crc32.c
-        CC unix.c
-        CC e2fsck.c
-        CC super.c
-        CC pass1.c
-        CC pass1b.c
-        CC pass2.c
-        CC pass3.c
-        CC pass4.c
-        CC pass5.c
-        CC journal.c
-        CC badblocks.c
-        CC util.c
-        CC dirinfo.c
-        CC dx_dirinfo.c
-        CC ehandler.c
-        CC problem.c
-        CC message.c
-        CC recovery.c
-        CC region.c
-        CC revoke.c
-        CC ea_refcount.c
-        CC rehash.c
-make[2]: *** No rule to make target `-lpthread', needed by `e2fsck'.
-Stop.
-make[2]: Leaving directory
-`/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/e2fsprogs-1.41.5-r1/e2fsprogs-1.41.5/e2fsck'
-make[1]: *** [all-progs-recursive] Error 1
-make[1]: Leaving directory
-`/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/e2fsprogs-1.41.5-r1/e2fsprogs-1.41.5'
-make: *** [all] Error 2
-FATAL: oe_runmake failed
-
-
-rday
 --
+Best Regards, 
+Dmitry Vinokurov 
+<d.vinokuroff@gmail.com>
 
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
 
-            Linux Consulting, Training and Kernel Pedantry.
 
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+Holger Hans Peter Freyther пишет:
+> On Wednesday 25 November 2009 06:33:24 Dmitry Vinokurov wrote:
+>   
+>> Hello,
+>>
+>> Example from manual chapter"Creating and Using a Qt Embedded SDK" fails
+>>     
+>
+> When did you build meta-toolchain-qte?
+>
+> z.
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>   
 
 
