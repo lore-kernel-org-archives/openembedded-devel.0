@@ -1,32 +1,27 @@
-Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sebastian@SSpaeth.de>) id 1NFofY-0002lm-PG
+	(envelope-from <holger+oe@freyther.de>) id 1NForb-0003Q9-6G
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Dec 2009 13:51:00 +0100
-Received: from homiemail-a19.g.dreamhost.com (caiajhbdcahe.dreamhost.com
-	[208.97.132.74])
-	by hapkido.dreamhost.com (Postfix) with ESMTP id 764EF17A36B
+	Wed, 02 Dec 2009 14:03:26 +0100
+Received: from tamarin.localnet (unknown [122.181.150.106])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id A34C81B10C02
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Dec 2009 04:49:20 -0800 (PST)
-Received: from [129.132.133.199] (mtec-hg-docking-1-dhcp-199.ethz.ch
-	[129.132.133.199])
-	by homiemail-a19.g.dreamhost.com (Postfix) with ESMTPA id 1A56B604069
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Dec 2009 04:49:17 -0800 (PST)
-Message-ID: <4B16624C.3090400@SSpaeth.de>
-Date: Wed, 02 Dec 2009 13:49:16 +0100
-From: Sebastian Spaeth <Sebastian@SSpaeth.de>
-Organization: ETH Zurich
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Wed,  2 Dec 2009 13:14:20 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.7
-OpenPGP: id=C827A062
-X-SA-Exim-Connect-IP: 66.33.216.122
-X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
+Date: Wed, 2 Dec 2009 14:01:42 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <4B0CC1A4.1060401@gmail.com>
+	<200912020749.50936.holger+oe@freyther.de>
+	<4B163ABC.6010008@gmail.com>
+In-Reply-To: <4B163ABC.6010008@gmail.com>
+MIME-Version: 1.0
+Message-Id: <200912021401.42124.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Proposed change to om-gta02.conf
+Subject: Re: Making simple QTE application, cannot find libpthread_nonshared.a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,43 +35,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Dec 2009 12:51:00 -0000
-X-Groupsio-MsgNum: 14787
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enigDAD60C952FD12AEBC12705DF"
+X-List-Received-Date: Wed, 02 Dec 2009 13:03:26 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
---------------enigDAD60C952FD12AEBC12705DF
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+On Wednesday 02 December 2009 11:00:28 Dmitry Vinokurov wrote:
 
-I would like to propose a change to om-gta0[1|2].conf:
+> Here is search results:
+> --------
+> [14:50]raydan@t46x[build]$ find tmp | grep libpthread_nonshared.a
+> tmp/staging/armv5te-oe-linux-gnueabi/usr/lib/libpthread_nonshared.a
+> tmp/work/armv5te-oe-linux-gnueabi/eglibc-2.10-r7.5/staging-pkg/staging/armv
+> 5te-oe-linux-gnueabi/usr/lib/libpthread_nonshared.a
+>  tmp/work/armv5te-oe-linux-gnueabi/eglibc-2.10-r7.5/image/usr/lib/libpthrea
+> d_nonshared.a
+>  tmp/work/armv5te-oe-linux-gnueabi/eglibc-2.10-r7.5/package/usr/lib/libpthr
+> ead_nonshared.a
+>  tmp/work/armv5te-oe-linux-gnueabi/eglibc-2.10-r7.5/build-arm-oe-linux-gnue
+> abi/nptl/libpthread_nonshared.a --------
+
+ah eglibc... so your finding is that this library is not in any glibc-* 
+package? So when building glibc you must get a warning like unpackaged 
+content...   could you take a look at the log?
+
+In high level terms. The library should be in a package (like -dev) and it 
+should be installed. If that is not the case it must be fixed.
 
 
-+ module_autoload_g_ether =3D "g_ether"
+thanks
+	z.
 
 
-Many other machines also use that already, and the name is generic
-enough to work with all kernel variants that we have. Also, having a
-Freerunner but not being able to connect to it via USB does not make
-sense in most cases.
-
-Thanks for feedback,
-spaetz
-
-
---------------enigDAD60C952FD12AEBC12705DF
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEARECAAYFAksWYkwACgkQVYX1jMgnoGKMygCeL+K6cFhED6Mn8sIUYAGp8Yah
-VDMAnAmBa5B8CN8X/N5gpHWuRLmXMUgS
-=47fB
------END PGP SIGNATURE-----
-
---------------enigDAD60C952FD12AEBC12705DF--
