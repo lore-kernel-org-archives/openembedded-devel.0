@@ -1,31 +1,27 @@
-Received: from caiajhbdcahe.dreamhost.com ([208.97.132.74]
-	helo=homiemail-a17.g.dreamhost.com)
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sebastian@SSpaeth.de>) id 1NFjIx-0003Kf-7Z
+	(envelope-from <holger+oe@freyther.de>) id 1NFjp8-0003pY-A8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Dec 2009 08:07:18 +0100
-Received: from [129.132.133.199] (mtec-hg-docking-1-dhcp-199.ethz.ch
-	[129.132.133.199])
-	by homiemail-a17.g.dreamhost.com (Postfix) with ESMTPA id 723C87A8063
+	Wed, 02 Dec 2009 08:40:33 +0100
+Received: from tamarin.localnet (unknown [122.181.150.106])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 811B41B10C02
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Dec 2009 23:05:40 -0800 (PST)
-Message-ID: <4B1611C3.7050101@SSpaeth.de>
-Date: Wed, 02 Dec 2009 08:05:39 +0100
-From: Sebastian Spaeth <Sebastian@SSpaeth.de>
-Organization: ETH Zurich
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Wed,  2 Dec 2009 07:51:26 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4B14BAD9.2060402@fqingenieria.es>	<20091201072521.GA11505@denix.org>
-	<4B14D2E1.6050506@SSpaeth.de> <20091201194025.GB11505@denix.org>
-In-Reply-To: <20091201194025.GB11505@denix.org>
-X-Enigmail-Version: 0.95.7
-OpenPGP: id=C827A062
-X-SA-Exim-Connect-IP: 208.97.132.74
-X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
+Date: Wed, 2 Dec 2009 08:38:48 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <4B0CC1A4.1060401@gmail.com>
+	<200911260953.02170.holger+oe@freyther.de>
+	<4B160147.9050303@gmail.com>
+In-Reply-To: <4B160147.9050303@gmail.com>
+MIME-Version: 1.0
+Message-Id: <200912020838.48141.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Recipes relation tree
+Subject: Re: Making simple QTE application, cannot find libpthread_nonshared.a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,22 +35,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Dec 2009 07:07:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 02 Dec 2009 07:40:33 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
 
-Denys Dmytriyenko wrote:
->> A related question. This generates depends.dot just fine, but I found a
->> reference to rdepends.dot in some manual. I would be very much
->> interested in an RDEPENDS tree, is there a way to get this?
-> 
-> Actually it does generate both.
+On Wednesday 02 December 2009 06:55:19 Dmitry Vinokurov wrote:
+> Yesterday pulled from dev branch (git describe output is
+> pre-nov2009-core-updates-606-g237cbb4) and made meta-toolchain-qte
+> rebuild, then tried again to build example -- same error "cannot find
+> /usr/lib/libpthread_nonshared.a inside
+> /usr/local/minimal/arm/arm-oe-linux-gnueabi"
 
-Interesting, here with bitbake 1.8 I definitely only get
-	depends.dot  task-depends.dot
+Oh you are using minimal? So all these files are installed into /lib? So you 
+actually do have a libpthread_nonshared.a but it is in lib/ and not usr/lib? 
+Could you confirm this?
 
-Is this only in 1.10, or am I missing a secret config option?
-
-spaetz
+z.
 
 
