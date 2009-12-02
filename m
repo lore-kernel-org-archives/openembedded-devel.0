@@ -1,27 +1,25 @@
 Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NFlSQ-0003vB-3z
+	(envelope-from <holger+oe@freyther.de>) id 1NFlh6-0005XH-Vo
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Dec 2009 10:25:13 +0100
+	Wed, 02 Dec 2009 10:40:24 +0100
 Received: from tamarin.localnet (unknown [122.181.150.106])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id AE3E91B10C02
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 925D71B10C02
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Dec 2009 09:36:06 +0000 (UTC)
+	Wed,  2 Dec 2009 09:51:17 +0000 (UTC)
 From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 2 Dec 2009 10:22:53 +0100
+Date: Wed, 2 Dec 2009 10:38:13 +0100
 User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <4B0CC1A4.1060401@gmail.com>
-	<200912020838.48141.holger+oe@freyther.de>
-	<1259743166.4916.35.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1259743166.4916.35.camel@lenovo.internal.reciva.com>
+References: <ad82c8890912020032t44008a96m4fb5d477050adbf4@mail.gmail.com>
+In-Reply-To: <ad82c8890912020032t44008a96m4fb5d477050adbf4@mail.gmail.com>
 MIME-Version: 1.0
-Message-Id: <200912021022.53480.holger+oe@freyther.de>
+Message-Id: <200912021038.13339.holger+oe@freyther.de>
 X-SA-Exim-Connect-IP: 78.46.147.237
 X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Making simple QTE application, cannot find libpthread_nonshared.a
+Subject: Re: compilation error while building linphone
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,29 +33,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Dec 2009 09:25:13 -0000
+X-List-Received-Date: Wed, 02 Dec 2009 09:40:24 -0000
 Content-Type: Text/Plain;
   charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On Wednesday 02 December 2009 09:39:26 Phil Blundell wrote:
-> On Wed, 2009-12-02 at 08:38 +0100, Holger Hans Peter Freyther wrote:
-> > On Wednesday 02 December 2009 06:55:19 Dmitry Vinokurov wrote:
-> > > Yesterday pulled from dev branch (git describe output is
-> > > pre-nov2009-core-updates-606-g237cbb4) and made meta-toolchain-qte
-> > > rebuild, then tried again to build example -- same error "cannot find
-> > > /usr/lib/libpthread_nonshared.a inside
-> > > /usr/local/minimal/arm/arm-oe-linux-gnueabi"
-> >
-> > Oh you are using minimal? So all these files are installed into /lib? So
-> > you actually do have a libpthread_nonshared.a but it is in lib/ and not
-> > usr/lib? Could you confirm this?
-> 
-> I think you're thinking of micro, not minimal.  AFAIK, minimal uses the
-> "normal" filesystem layout, complete with /usr.
+On Wednesday 02 December 2009 09:32:54 vivek tambakad wrote:
+> Thanks for the help .I solved all the dependency problems.now i can atleast
+> build.
+> Now I am getting build error for linphone as follows:
 
-Yeah... confusion on my side... I know that DISTRO=micro is broken for gcc 
-targets (on the device, on the SDK).
+1.) Learn to quote email. Please google for "how to quote email" as I don't 
+have enough bandwidth for http...
+2.) We have a oestats-client... The thing that computer program is doing well 
+is to actually send the log file of the failed task to a server. Your options 
+are to either use it and send a link to the failed task, join irc to see if 
+people want to support you, or be as clever as the computer program and attach 
+the actual log to your email.
+3.) In case you are an intelligent lifeform, pre-process the output and apply 
+thinking to the problem.
+
 
 z.
 
