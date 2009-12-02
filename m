@@ -1,30 +1,30 @@
-Received: from vms173009pub.verizon.net ([206.46.173.9])
+Received: from vms173007pub.verizon.net ([206.46.173.7])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1NFw8t-0008Po-Ni
+	(envelope-from <denis@denix.org>) id 1NFw9P-0008RB-Fv
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Dec 2009 21:49:46 +0100
-Received: from gandalf.denix.org ([71.255.235.232]) by vms173009.mailsrvcs.net
+	Wed, 02 Dec 2009 21:50:18 +0100
+Received: from gandalf.denix.org ([71.255.235.232]) by vms173007.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KU1004ZKLRRE775@vms173009.mailsrvcs.net> for
+	32bit)) with ESMTPA id <0KU100FRPLSROWJY@vms173007.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Wed,
-	02 Dec 2009 14:47:57 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 1976C14AF60; Wed,
-	02 Dec 2009 15:47:51 -0500 (EST)
-Date: Wed, 02 Dec 2009 15:47:51 -0500
+	02 Dec 2009 14:48:27 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id AF32D14AF60; Wed,
+	02 Dec 2009 15:48:26 -0500 (EST)
+Date: Wed, 02 Dec 2009 15:48:26 -0500
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20091202204751.GE21762@denix.org>
+Message-id: <20091202204826.GF21762@denix.org>
 References: <1259691294-1131-1-git-send-email-marcin@juszkiewicz.com.pl>
-	<1259691294-1131-2-git-send-email-marcin@juszkiewicz.com.pl>
+	<1259691294-1131-3-git-send-email-marcin@juszkiewicz.com.pl>
 MIME-version: 1.0
-In-reply-to: <1259691294-1131-2-git-send-email-marcin@juszkiewicz.com.pl>
+In-reply-to: <1259691294-1131-3-git-send-email-marcin@juszkiewicz.com.pl>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.9
+X-SA-Exim-Connect-IP: 206.46.173.7
 X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Cc: Marcin Juszkiewicz <marcin@buglabs.net>
-Subject: Re: [STABLE][PATCH 2/3] xserver-xorg-conf: added BUG support
+Subject: Re: [STABLE][PATCH 3/3] MAINTAINERS: added BUG to my devices
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,11 +38,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Dec 2009 20:49:47 -0000
+X-List-Received-Date: Wed, 02 Dec 2009 20:50:18 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Tue, Dec 01, 2009 at 07:14:53PM +0100, Marcin Juszkiewicz wrote:
+On Tue, Dec 01, 2009 at 07:14:54PM +0100, Marcin Juszkiewicz wrote:
 > From: Marcin Juszkiewicz <marcin@buglabs.net>
 > 
 > Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
@@ -50,102 +50,33 @@ On Tue, Dec 01, 2009 at 07:14:53PM +0100, Marcin Juszkiewicz wrote:
 Acked-by: Denys Dmytriyenko <denis@denix.org>
 
 > ---
->  .../xorg-xserver/xserver-xorg-conf/bug/xorg.conf   |   65 ++++++++++++++++++++
->  recipes/xorg-xserver/xserver-xorg-conf_0.1.bb      |    2 +-
->  2 files changed, 66 insertions(+), 1 deletions(-)
->  create mode 100644 recipes/xorg-xserver/xserver-xorg-conf/bug/xorg.conf
+>  MAINTAINERS |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
 > 
-> diff --git a/recipes/xorg-xserver/xserver-xorg-conf/bug/xorg.conf b/recipes/xorg-xserver/xserver-xorg-conf/bug/xorg.conf
-> new file mode 100644
-> index 0000000..8b6cd94
-> --- /dev/null
-> +++ b/recipes/xorg-xserver/xserver-xorg-conf/bug/xorg.conf
-> @@ -0,0 +1,65 @@
-> +#
-> +# Initial version of X11 configuration for BugLabs BUG device.
-> +#
-> +# Up to 2 LCD modules are supported (as DISPLAY=0.0/0.1).
-> +# Touchscreen on first screen works properly (req tslib 0.0.6 driver).
-> +#
-> +# By default software starts on 0.0 only.
-> +#
-> +
-> +Section "Monitor"
-> +        Identifier      "Monitor 1"
-> +EndSection
-> +
-> +Section "Monitor"
-> +        Identifier      "Monitor 2"
-> +EndSection
-> +
-> +Section "Device"
-> +        Identifier      "fbdev Device 2"
-> +        Driver  "fbdev"
-> +	Option "fbdev" "/dev/fb2"
-> +	Option "shadowfb" "true"
-> +EndSection
-> +
-> +Section "Device"
-> +        Identifier      "fbdev Device 1"
-> +        Driver  "fbdev"
-> +	Option "fbdev" "/dev/fb1"
-> +	Option "shadowfb" "true"
-> +EndSection
-> +
-> +Section "Screen"
-> +        Identifier      "fbdev Screen 2"
-> +        Device  "fbdev Device 2"
-> +        Monitor "Monitor 2"
-> +EndSection
-> +
-> +Section "Screen"
-> +        Identifier      "fbdev Screen 1"
-> +        Device  "fbdev Device 1"
-> +        Monitor "Monitor 1"
-> +EndSection
-> +
-> +Section "ServerLayout"
-> +        Identifier      "Layout"
-> +        Screen  "fbdev Screen 1"
-> +        Screen  "fbdev Screen 2" Below "fbdev Screen 1"
-> +	InputDevice "ts4" "CorePointer"
-> +EndSection
-> +
-> +Section "InputDevice"
-> +    Identifier "ts5"
-> +    Driver "tslib"
-> +    Option "Device" "/dev/input/bmi_lcd_ts5"
-> +EndSection
-> +
-> +Section "InputDevice"
-> +    Identifier "ts4"
-> +    Driver "tslib"
-> +    Option "Device" "/dev/input/bmi_lcd_ts4"
-> +EndSection
-> +
-> +Section "ServerFlags"
-> +	Option "AutoAddDevices" "false"
-> +EndSection
-> diff --git a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-> index 95aa82b..67fc683 100644
-> --- a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-> +++ b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-> @@ -1,5 +1,5 @@
->  DESCRIPTION = "Machine specific xorg.conf files"
-> -PR = "r4"
-> +PR = "r5"
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index c4185ab..c66ebe6 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -160,7 +160,7 @@ Recipes:    mx31ads-kernel*
+>  Person:     Marcin Juszkiewicz
+>  Mail:       marcin@juszkiewicz.com.pl
+>  Website:    http://marcin.juszkiewicz.com.pl/
+> -Machines:   progear, alix, at91sam9263ek
+> +Machines:   bug, progear, alix, at91sam9263ek
+>  Distros:    Poky, ??ngstr??m
 >  
->  SRC_URI = "file://xorg.conf"
->  
+>  Person:     Matthias 'CoreDump' Hentges
 > -- 
 > 1.6.5.2
 > 
 > 
 > 
 > 
+
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
