@@ -1,25 +1,29 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from vms173007pub.verizon.net ([206.46.173.7])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NFtoS-0004nR-GR
+	(envelope-from <denis@denix.org>) id 1NFvc3-0008Vn-3c
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Dec 2009 19:20:31 +0100
-Received: (qmail 16114 invoked by uid 813007); 2 Dec 2009 18:18:53 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 2 Dec 2009 18:18:53 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	Wed, 02 Dec 2009 21:15:50 +0100
+Received: from gandalf.denix.org ([71.255.235.232]) by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KU1006KYHEZ2S67@vms173007.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	02 Dec 2009 13:13:48 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0420414AF60; Wed,
+	02 Dec 2009 14:13:46 -0500 (EST)
+Date: Wed, 02 Dec 2009 14:13:46 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 2 Dec 2009 19:19:05 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.32-rc7-00029-ga9366e6-dirty; KDE/4.3.2;
-	x86_64; ; )
-MIME-Version: 1.0
-Message-Id: <200912021919.06663.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Message-id: <20091202191346.GC21762@denix.org>
+References: <1259769386-5786-1-git-send-email-marcin@juszkiewicz.com.pl>
+MIME-version: 1.0
+In-reply-to: <1259769386-5786-1-git-send-email-marcin@juszkiewicz.com.pl>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.7
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: SVN fetcher fix for SRCREV=AUTOREV situations
+Cc: Marcin Juszkiewicz <marcin@buglabs.net>
+Subject: Re: [STABLE][PATCH] linux-bug: bumped SRCREV for new fixes, autoload SDIO wifi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,59 +37,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Dec 2009 18:20:31 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 02 Dec 2009 20:15:50 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
+On Wed, Dec 02, 2009 at 04:56:26PM +0100, Marcin Juszkiewicz wrote:
+> From: Marcin Juszkiewicz <marcin@buglabs.net>
 
-Hi
+Acked-by: Denys Dmytriyenko <denis@denix.org>
 
-I know that for most people here using SRCREV="${AUTOREV}" sounds bad but
-there are situations where it is needed. We, at BugLabs, use it for all
-our Java stuff which is run on our device.
-
-We got hit by svn fetcher as it uses "svn co -r REV svn://url@REV" syntax
-which fails on AUTOREV... Nevermind which Subversion we use (1.4.6, 1.6.6)
-we got same situation:
-
-$ svn co -r 7916 svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.common@7916
-svn: URL 'svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.common' doesn't exist
-
-But:
-
-$ svn co -r 7916 svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.common
-
-works fine.
-
-I looked at svn fetcher and prepared this change which fixes situation for me:
-
-diff --git a/bitbake/lib/bb/fetch/svn.py b/bitbake/lib/bb/fetch/svn.py
-index aead162..f5dabdb 100644
---- a/bitbake/lib/bb/fetch/svn.py
-+++ b/bitbake/lib/bb/fetch/svn.py
-@@ -117,7 +117,9 @@ class Svn(Fetch):
-             suffix = ""
-             if ud.revision:
-                 options.append("-r %s" % ud.revision)
--                suffix = "@%s" % (ud.revision)
-+                url = "%s://%s/%s/" % (proto, svnroot, ud.module)
-+                if ud.revision != self._latest_revision(url, ud, d):
-+                    suffix = "@%s" % (ud.revision)
-             elif ud.date:
-                 options.append("-r {%s}" % ud.date)
-
-What it does? It adds extra "svn info" run to get latest revision
-(think AUTOREV) and if it is not the same as wanted revision (think 
-SRCREV) then it use "@REV" syntax. I do not feel that it is good way to
-solve problem so want to know what other people think about it.
-
-Regards, 
--- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+> ---
+>  recipes/linux/linux-bug_2.6.27.2.bb |    5 +++--
+>  1 files changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes/linux/linux-bug_2.6.27.2.bb b/recipes/linux/linux-bug_2.6.27.2.bb
+> index bb4d11f..85ed0a9 100644
+> --- a/recipes/linux/linux-bug_2.6.27.2.bb
+> +++ b/recipes/linux/linux-bug_2.6.27.2.bb
+> @@ -2,12 +2,12 @@ DESCRIPTION = "Linux kernel for bug"
+>  
+>  PV_append = "+svnr${SRCREV}"
+>  KV = "2.6.27.2"
+> -PR = "r30"
+> +PR = "r31"
+>  
+>  COMPATIBLE_MACHINE = "bug"
+>  
+>  SVN_PRJ = "bug-linux-${KV}"
+> -SRCREV = "10371"
+> +SRCREV = "10550"
+>  
+>  SRC_URI = "svn://svn.buglabs.net/bug/branches/R1.4/qa;module=${SVN_PRJ};proto=svn \
+>             file://defconfig \
+> @@ -46,5 +46,6 @@ module_autoload_bugpm = "bugpm"
+>  module_autoload_bugpm_apm = "bugpm_apm"
+>  module_autoload_rtc-isl12026 = "rtc-isl12026"
+>  module_autoload_bug_v4l2_capture = "bug_v4l2_capture"
+> +module_autoload_libertas_sdio = "libertas_sdio"
+>  # bmi_lcd_core loaded to ensure xserver device nodes are created on boot.
+>  module_autoload_bmi_lcd_core = "bmi_lcd_core"
+> -- 
+> 1.6.5.3
+> 
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
