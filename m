@@ -1,34 +1,35 @@
-Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sebastian@SSpaeth.de>) id 1NG6WS-0008SG-6Q
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NG82E-0006QK-3I for openembedded-devel@lists.openembedded.org;
+	Thu, 03 Dec 2009 10:31:41 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NG80e-0003r9-MU
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Dec 2009 08:54:47 +0100
-Received: from homiemail-a18.g.dreamhost.com (caiajhbdcagg.dreamhost.com
-	[208.97.132.66])
-	by hapkido.dreamhost.com (Postfix) with ESMTP id 436F917DE17
+	Thu, 03 Dec 2009 10:30:00 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 03 Dec 2009 10:30:00 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Dec 2009 23:53:08 -0800 (PST)
-Received: from [129.132.133.199] (mtec-hg-docking-1-dhcp-199.ethz.ch
-	[129.132.133.199])
-	by homiemail-a18.g.dreamhost.com (Postfix) with ESMTPA id 1F7D8250065
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Dec 2009 23:53:05 -0800 (PST)
-Message-ID: <4B176E5A.3020806@SSpaeth.de>
-Date: Thu, 03 Dec 2009 08:52:58 +0100
-From: Sebastian Spaeth <Sebastian@SSpaeth.de>
-Organization: ETH Zurich
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Thu, 03 Dec 2009 10:30:00 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <hf647c$erv$1@ger.gmane.org>
-In-Reply-To: <hf647c$erv$1@ger.gmane.org>
-X-Enigmail-Version: 0.95.7
-OpenPGP: id=C827A062
-X-SA-Exim-Connect-IP: 66.33.216.122
-X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 03 Dec 2009 10:29:38 +0100
+Message-ID: <hf80e2$f5n$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: fso-apm breakage redux
+Subject: Commit policy and jlime commits
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,59 +43,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Dec 2009 07:54:47 -0000
-X-Groupsio-MsgNum: 14806
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig5BC122D15C5AC93FB88EB090"
+X-List-Received-Date: Thu, 03 Dec 2009 09:31:41 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
---------------enig5BC122D15C5AC93FB88EB090
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-Koen Kooi wrote:
-> Hi,
->=20
-> fso-apm is now getting dragged in OE by default due to the excessive us=
-e
-> of RPROVIDES and RCONFLICTS.
->=20
-> Please remove those and find a better solution (e.g. using u-a to
-> replace regular apmd) instead of messing up everyones build.
+We have a commit policy for a good reason so things like
 
-According to our information the RPROVIDES would only be used if you
-added that package to your dependency list somewhere. Apparently we were
-wrong, sorry for this.
+"Fix configure error (no 16bit type!)"
 
-I think we could take up your recent proposal here again and do a
+are unacceptable. Please use proper commit messages from now on, there 
+are not enough hours in a day to read thru every diff to see that you 
+touched cdparanoia in that commit.
 
-DISTRO_PROVIDER_APM ?=3D "apm"
+regards,
 
-and include that in RDEPENDS in task-base-apm (and all recipes pulling
-apm). This would allow any distro to override the default apm provider
-but not cause hassle for other distros.
-
-Would that be acceptable? Is the variable naming ok? Open for
-suggestions, I am not familiar with OE conventions here.
-
-spaetz
-
-P.s. u-a would install both apm and fso-apm which seems less optimal
-here, given that we really only want one.
+Koen
 
 
---------------enig5BC122D15C5AC93FB88EB090
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEARECAAYFAksXbmAACgkQVYX1jMgnoGLwIgCeMT5T8ebWu2Bod46G/9LzIq/+
-JHsAn0uKozALauGncOIOyRy+ceR6E3Xa
-=ZDlS
------END PGP SIGNATURE-----
-
---------------enig5BC122D15C5AC93FB88EB090--
