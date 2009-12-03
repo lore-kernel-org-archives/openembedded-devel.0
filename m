@@ -1,35 +1,38 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NGE1h-00014j-Jf for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Dec 2009 16:55:32 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NGE07-0005Ek-TH
+	(envelope-from <rpjday@crashcourse.ca>) id 1NGFbO-00086f-9N
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Dec 2009 16:53:51 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Dec 2009 16:53:51 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Dec 2009 16:53:51 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 03 Dec 2009 18:36:29 +0100
+Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
+	([174.113.191.234] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NGFZo-0001tx-CN for openembedded-devel@lists.openembedded.org;
+	Thu, 03 Dec 2009 12:34:49 -0500
+Date: Thu, 3 Dec 2009 12:34:32 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 03 Dec 2009 16:53:29 +0100
-Message-ID: <hf8mtp$p4d$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+In-Reply-To: <200912031051.36434.holger+oe@freyther.de>
+Message-ID: <alpine.LFD.2.00.0912031233230.6255@localhost>
+References: <alpine.LFD.2.00.0912030424330.12259@localhost>
+	<200912031051.36434.holger+oe@freyther.de>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Revert "gnome-keyring 2.28 has a language file ta.po that fails to build."
+Subject: Re: any thoughts on current dev branch e2fsprogs build error?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,23 +46,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Dec 2009 15:55:32 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 03 Dec 2009 17:36:29 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Hi,
+On Thu, 3 Dec 2009, Holger Hans Peter Freyther wrote:
 
-I reverted 1f16e2c5f999a795b1dc77b2f2011f17a077f16e because:
+> On Thursday 03 December 2009 10:42:04 Robert P. J. Day wrote:
+> >   on a fully updated dev branch, the tail end of the log file:
+> >
+> > ... snip ...
+> > making all in e2fsck
+>
+> what changed on your system? can you look at the Makefile? at the
+> config.log? why does it list -lpthread?
 
-* The 'patch' is not a patch and breaks the build
-* The error this commit tries to fix can be remedied by using a more 
-recent gettext-native
+  i can only guess that some variable that used to expand to something
+now doesn't anymore and, somehow, "-lpthread" is being picked up as a
+target because of it.
 
-And it also doesn't adhere to our commit policy.
+  i'll make sure i'm up to date, then try again.  e2fsprogs has been
+building fine all this time.
 
-regards,
+rday
+--
 
-Koen
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
 
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
