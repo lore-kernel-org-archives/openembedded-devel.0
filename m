@@ -1,26 +1,34 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NG5iX-0007VQ-E3
+	(envelope-from <Sebastian@SSpaeth.de>) id 1NG6WS-0008SG-6Q
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Dec 2009 08:03:12 +0100
-Received: from tamarin.localnet (unknown [122.181.150.106])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 41B5C1B10C03
+	Thu, 03 Dec 2009 08:54:47 +0100
+Received: from homiemail-a18.g.dreamhost.com (caiajhbdcagg.dreamhost.com
+	[208.97.132.66])
+	by hapkido.dreamhost.com (Postfix) with ESMTP id 436F917DE17
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Dec 2009 07:14:09 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 3 Dec 2009 08:01:20 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <200912021919.06663.marcin@juszkiewicz.com.pl>
-	<200912030631.57262.holger+oe@freyther.de>
-In-Reply-To: <200912030631.57262.holger+oe@freyther.de>
+	Wed,  2 Dec 2009 23:53:08 -0800 (PST)
+Received: from [129.132.133.199] (mtec-hg-docking-1-dhcp-199.ethz.ch
+	[129.132.133.199])
+	by homiemail-a18.g.dreamhost.com (Postfix) with ESMTPA id 1F7D8250065
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  2 Dec 2009 23:53:05 -0800 (PST)
+Message-ID: <4B176E5A.3020806@SSpaeth.de>
+Date: Thu, 03 Dec 2009 08:52:58 +0100
+From: Sebastian Spaeth <Sebastian@SSpaeth.de>
+Organization: ETH Zurich
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-Message-Id: <200912030801.20540.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+To: openembedded-devel@lists.openembedded.org
+References: <hf647c$erv$1@ger.gmane.org>
+In-Reply-To: <hf647c$erv$1@ger.gmane.org>
+X-Enigmail-Version: 0.95.7
+OpenPGP: id=C827A062
+X-SA-Exim-Connect-IP: 66.33.216.122
+X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: SVN fetcher fix for SRCREV=AUTOREV situations
+Subject: Re: fso-apm breakage redux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,26 +42,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Dec 2009 07:03:13 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 03 Dec 2009 07:54:47 -0000
+X-Groupsio-MsgNum: 14806
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig5BC122D15C5AC93FB88EB090"
 
-On Thursday 03 December 2009 06:31:57 Holger Hans Peter Freyther wrote:
+--------------enig5BC122D15C5AC93FB88EB090
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-> that sucks... we are doomed now. If the above directory is deleted in trunk
-> the -r option will not work to download a old rev...
+Koen Kooi wrote:
+> Hi,
+>=20
+> fso-apm is now getting dragged in OE by default due to the excessive us=
+e
+> of RPROVIDES and RCONFLICTS.
+>=20
+> Please remove those and find a better solution (e.g. using u-a to
+> replace regular apmd) instead of messing up everyones build.
+
+According to our information the RPROVIDES would only be used if you
+added that package to your dependency list somewhere. Apparently we were
+wrong, sorry for this.
+
+I think we could take up your recent proposal here again and do a
+
+DISTRO_PROVIDER_APM ?=3D "apm"
+
+and include that in RDEPENDS in task-base-apm (and all recipes pulling
+apm). This would allow any distro to override the default apm provider
+but not cause hassle for other distros.
+
+Would that be acceptable? Is the variable naming ok? Open for
+suggestions, I am not familiar with OE conventions here.
+
+spaetz
+
+P.s. u-a would install both apm and fso-apm which seems less optimal
+here, given that we really only want one.
 
 
-Stefan just highlighted the above might sound rude. What I tried to say is 
-that IIRC I changed the code to use @rev for the case of downloading a 
-revision where the directory is not in trunk with the current HEAD...
+--------------enig5BC122D15C5AC93FB88EB090
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
-I don't think we can decide when to use -r and when to use @.. this is why I 
-say we are doomed. The best thing I can think of right now is to try @ and 
-then to go with -r... :(
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-love
-	z.
+iEYEARECAAYFAksXbmAACgkQVYX1jMgnoGLwIgCeMT5T8ebWu2Bod46G/9LzIq/+
+JHsAn0uKozALauGncOIOyRy+ceR6E3Xa
+=ZDlS
+-----END PGP SIGNATURE-----
 
-
+--------------enig5BC122D15C5AC93FB88EB090--
