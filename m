@@ -1,35 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NG82E-0006QK-3I for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Dec 2009 10:31:41 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NG80e-0003r9-MU
+	(envelope-from <rpjday@crashcourse.ca>) id 1NG8E9-0001oC-4l
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Dec 2009 10:30:00 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Dec 2009 10:30:00 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Dec 2009 10:30:00 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 03 Dec 2009 10:29:38 +0100
-Message-ID: <hf80e2$f5n$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	Thu, 03 Dec 2009 10:44:00 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NG8Ca-0007hG-R0 for openembedded-devel@lists.openembedded.org;
+	Thu, 03 Dec 2009 04:42:21 -0500
+Date: Thu, 3 Dec 2009 04:42:04 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.00.0912030424330.12259@localhost>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Commit policy and jlime commits
+Subject: any thoughts on current dev branch e2fsprogs build error?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,23 +44,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Dec 2009 09:31:41 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 03 Dec 2009 09:44:00 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Hi,
 
-We have a commit policy for a good reason so things like
+  on a fully updated dev branch, the tail end of the log file:
 
-"Fix configure error (no 16bit type!)"
+... snip ...
+making all in e2fsck
+make[2]: Entering directory
+`/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/e2fsprogs-1.41.5-r1/e2fsprogs-1.41.5/e2fsck'
+        CC crc32.c
+        CC unix.c
+        CC e2fsck.c
+        CC super.c
+        CC pass1.c
+        CC pass1b.c
+        CC pass2.c
+        CC pass3.c
+        CC pass4.c
+        CC pass5.c
+        CC journal.c
+        CC badblocks.c
+        CC util.c
+        CC dirinfo.c
+        CC dx_dirinfo.c
+        CC ehandler.c
+        CC problem.c
+        CC message.c
+        CC recovery.c
+        CC region.c
+        CC revoke.c
+        CC ea_refcount.c
+        CC rehash.c
+make[2]: *** No rule to make target `-lpthread', needed by `e2fsck'.
+Stop.
+make[2]: Leaving directory
+`/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/e2fsprogs-1.41.5-r1/e2fsprogs-1.41.5/e2fsck'
+make[1]: *** [all-progs-recursive] Error 1
+make[1]: Leaving directory
+`/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/e2fsprogs-1.41.5-r1/e2fsprogs-1.41.5'
+make: *** [all] Error 2
+FATAL: oe_runmake failed
 
-are unacceptable. Please use proper commit messages from now on, there 
-are not enough hours in a day to read thru every diff to see that you 
-touched cdparanoia in that commit.
+  i can provide more details if necessary.
 
-regards,
+rday
+--
 
-Koen
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
 
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
