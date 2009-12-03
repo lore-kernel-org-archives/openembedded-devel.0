@@ -1,29 +1,25 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1NFx4J-00021U-L5
+	(envelope-from <holger+oe@freyther.de>) id 1NG4K7-0004bk-Jk
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Dec 2009 22:49:06 +0100
-Received: from gandalf.denix.org ([71.255.235.232]) by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
-	32bit)) with ESMTPA id <0KU10027HLQ42LDD@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	02 Dec 2009 14:46:58 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 05E7514AF60; Wed,
-	02 Dec 2009 15:46:52 -0500 (EST)
-Date: Wed, 02 Dec 2009 15:46:52 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 03 Dec 2009 06:33:54 +0100
+Received: from tamarin.localnet (unknown [122.181.150.106])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 4CFA81B10C02
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  3 Dec 2009 05:44:49 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20091202204652.GD21762@denix.org>
-References: <1259691294-1131-1-git-send-email-marcin@juszkiewicz.com.pl>
-MIME-version: 1.0
-In-reply-to: <1259691294-1131-1-git-send-email-marcin@juszkiewicz.com.pl>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.5
-X-SA-Exim-Mail-From: denis@denix.org
+Date: Thu, 3 Dec 2009 06:31:57 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <200912021919.06663.marcin@juszkiewicz.com.pl>
+In-Reply-To: <200912021919.06663.marcin@juszkiewicz.com.pl>
+MIME-Version: 1.0
+Message-Id: <200912030631.57262.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Marcin Juszkiewicz <marcin@buglabs.net>
-Subject: Re: [STABLE][PATCH 1/3] bug: ship SDIO firmware for WiFi
+Subject: Re: SVN fetcher fix for SRCREV=AUTOREV situations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,43 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Dec 2009 21:49:06 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 03 Dec 2009 05:33:54 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Tue, Dec 01, 2009 at 07:14:52PM +0100, Marcin Juszkiewicz wrote:
-> From: Marcin Juszkiewicz <marcin@buglabs.net>
-> 
-> Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+On Wednesday 02 December 2009 19:19:05 Marcin Juszkiewicz wrote:
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+> $ svn co -r 7916
+>  svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.common@79
+> 16 svn: URL
+>  'svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.common'
+>  doesn't exist
+> 
+> But:
+> 
+> $ svn co -r 7916
+>  svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.common
+> 
+> works fine.
 
-> ---
->  conf/machine/bug.conf |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
-> 
-> diff --git a/conf/machine/bug.conf b/conf/machine/bug.conf
-> index cec3d5b..3e0389a 100644
-> --- a/conf/machine/bug.conf
-> +++ b/conf/machine/bug.conf
-> @@ -3,7 +3,7 @@
->  #@DESCRIPTION: Machine configuration for the BUG base unit.
->  TARGET_ARCH = "arm"
->  
-> -MACHINE_EXTRA_RRECOMMENDS = "marvell-gspi-fw"
-> +MACHINE_EXTRA_RRECOMMENDS = "marvell-gspi-fw marvell-sdio-fw"
->  PREFERRED_PROVIDER_virtual/kernel = "linux-bug"
->  
->  MACHINE_FEATURES = "kernel26 screen touchscreen hotplug alsa wifi usbhost usbgadget"
-> -- 
-> 1.6.5.2
-> 
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+that sucks... we are doomed now. If the above directory is deleted in trunk 
+the -r option will not work to download a old rev...
+
+
+z.
 
 
