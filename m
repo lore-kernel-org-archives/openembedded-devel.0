@@ -1,39 +1,28 @@
-Received: from mail-fx0-f225.google.com ([209.85.220.225])
+Received: from mail-bw0-f217.google.com ([209.85.218.217])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NGUqO-00087h-3Q
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Dec 2009 10:52:59 +0100
-Received: by fxm25 with SMTP id 25so2248457fxm.26
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Dec 2009 01:51:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type;
-	bh=JQ8O2dYjf26cYrXb/q2lYt1IM8aAirlodooxe0WBj/c=;
-	b=WVLqJn3NYhI3UBX9raL93n2byXYBhgNOrVmvTaIE45/bPnA/XBC+UyfWRn9XYt5sem
-	WYD1dB1eV6LV0geXBrnV9xlTOl+HO+ci0JlGEDpEhVPLjiCOgjSK90xcaQep8en5RMYv
-	wvQ0yAADp6aE3stIxUoO7fw+2eUxR3pRVFUpc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	b=S3PumBnGGvOPz2BI7CBqZFY78diyUfrGSEv8kJT9QUh8a1n57NvlXruTuerZmEddlE
-	6nyi5OG5mo34i0CPy/m9FttGLdISFyev6v7yP9L5647Eclt+PltWir3Sz0zF8Kardjdj
-	sq2FsQ4vCQDFb///k3N1kOFiQk7LitkMCJRxE=
-MIME-Version: 1.0
-Received: by 10.223.144.85 with SMTP id y21mr455677fau.1.1259920279311; Fri, 
-	04 Dec 2009 01:51:19 -0800 (PST)
-In-Reply-To: <E1NGUiP-00061U-6s@melo.openembedded.org>
+	(envelope-from <dp@xora.org.uk>)
+	id 1NGUye-0008VG-7Z; Fri, 04 Dec 2009 11:01:31 +0100
+Received: by bwz9 with SMTP id 9so1740839bwz.12
+	for <multiple recipients>; Fri, 04 Dec 2009 01:59:51 -0800 (PST)
+Received: by 10.204.156.28 with SMTP id u28mr2991012bkw.74.1259920791095;
+	Fri, 04 Dec 2009 01:59:51 -0800 (PST)
+Received: from localhost (www.xora.org.uk [80.68.91.202])
+	by mx.google.com with ESMTPS id 15sm803657bwz.4.2009.12.04.01.59.50
+	(version=SSLv3 cipher=RC4-MD5); Fri, 04 Dec 2009 01:59:50 -0800 (PST)
+Date: Fri, 4 Dec 2009 09:59:51 +0000
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-commits@lists.openembedded.org
+Message-ID: <20091204095951.6846190d@xora.org.uk>
+In-Reply-To: <141020e30912040151l26670979g9cb02c4d4539da38@mail.gmail.com>
 References: <E1NGUiP-00061U-6s@melo.openembedded.org>
-Date: Fri, 4 Dec 2009 10:51:18 +0100
-Message-ID: <141020e30912040151l26670979g9cb02c4d4539da38@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.225
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+	<141020e30912040151l26670979g9cb02c4d4539da38@mail.gmail.com>
+X-Mailer: Claws Mail 3.7.3 (GTK+ 2.18.3; i686-redhat-linux-gnu)
+Mime-Version: 1.0
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: openembedded-commits@openembedded.org
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [oe-commits] David-John Willis : font-util: Add 1.1.1 target and native.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,44 +37,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Dec 2009 09:52:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 04 Dec 2009 10:01:31 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-On Fri, Dec 4, 2009 at 10:44 AM, git version control <
-git@git.openembedded.org> wrote:
+On Fri, 4 Dec 2009 10:51:18 +0100
+Martin Jansa <martin.jansa@gmail.com> wrote:
 
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: a0fb85891d24df07bd140f0b9f277e9ebb3768d7
-> URL:
-> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=a0fb85891d24df07bd140f0b9f277e9ebb3768d7
->
-> Author: David-John Willis <John.Willis@Distant-earth.com>
-> Date:   Thu Dec  3 09:30:27 2009 +0000
->
-> font-util: Add 1.1.1 target and native.
->
+> On Fri, Dec 4, 2009 at 10:44 AM, git version control <
+> git@git.openembedded.org> wrote:
+> 
+> > Module: openembedded.git
+> > Branch: org.openembedded.dev
+> > Commit: a0fb85891d24df07bd140f0b9f277e9ebb3768d7
+> > URL:
+> > http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=a0fb85891d24df07bd140f0b9f277e9ebb3768d7
+> >
+> > Author: David-John Willis <John.Willis@Distant-earth.com>
+> > Date:   Thu Dec  3 09:30:27 2009 +0000
+> >
+> > font-util: Add 1.1.1 target and native.
+> >
+> 
+> http://cgit.openembedded.net/cgit.cgi/openembedded/commit/?h=martin_jansa/xorg-7.5&id=c465d9fcf16a6e42afc2f984978ddeaacd9568d3
+> 
+> 
+> You still probably need this patch.
+> 
+> Would be great to merge it from that branch first, I like INC_PR but
+> now I'll get lots of conflicts in all font packages and I'll have to
+> update font recipes in that branch to INC_PR too :/.
+> 
+> BTW: as I don't have all angstrom/OE supported devices to test
+> xorg-7.5 there, I won't merge that branch to oe.dev myself, I need
+> help from device/distro maintainers, please...
+> 
+We have the preferred-x11R6 versions files so people can lock
+themselves to 7.4 if they wish.
 
-http://cgit.openembedded.net/cgit.cgi/openembedded/commit/?h=martin_jansa/xorg-7.5&id=c465d9fcf16a6e42afc2f984978ddeaacd9568d3
+You'll be waiting approximately for infinity if you wait to test on all
+devices. I'd say merge it.
 
+Graeme
 
-You still probably need this patch.
-
-Would be great to merge it from that branch first, I like INC_PR but now
-I'll get lots of conflicts in all font packages and I'll have to update font
-recipes in that branch to INC_PR too :/.
-
-BTW: as I don't have all angstrom/OE supported devices to test xorg-7.5
-there, I won't merge that branch to oe.dev myself, I need  help from
-device/distro maintainers, please...
-
-Regards,
-
-
->
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
->
 
