@@ -1,38 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f225.google.com ([209.85.220.225])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NGVBN-0004AQ-BD for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Dec 2009 11:14:40 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NGV9o-0000nv-Vu
+	(envelope-from <otavio.salvador@gmail.com>) id 1NGVFX-0003Ix-2N
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Dec 2009 11:13:00 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Dec 2009 11:13:00 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Fri, 04 Dec 2009 11:18:58 +0100
+Received: by fxm25 with SMTP id 25so2266429fxm.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Dec 2009 11:13:00 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 04 Dec 2009 02:17:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:message-id:subject:from:to
+	:content-type; bh=EFqCVOsRFnb8oM09190sHPu54xIXKgnzECT1kjfnlvo=;
+	b=upNv1YWcHPcS0vEURqtx9I0vQiRXxs7LLrbSDKNwgfibhJQ34xmXNnlQEdIPybtJlP
+	ZATUZHOzK6oDqkTGYicpgfKnRtaCNE7TcLs/dDLksplQsl+liI6SGVxKhbCwAkoxjjqk
+	In6RpPb6pBCkJhej4wYNK3z2aU6Oyz7yfve+w=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	b=EGtCV+STiZV30iqrePAloN1m916E1E+xdEMp4e/ZrPxkfN33K9pRA71XocUVUPKZjP
+	2zQgsR84FHVtvZkw/gXolFGAZ9FAnAh5jMynYu2kgqrznswx2mTjfBYgAkogieetjQqS
+	LBG4kuydu4x18s31pl7wH3PsXwh5ZypoJCgoM=
+MIME-Version: 1.0
+Sender: otavio.salvador@gmail.com
+Received: by 10.239.139.201 with SMTP id u9mr307492hbu.112.1259921838104; Fri, 
+	04 Dec 2009 02:17:18 -0800 (PST)
+In-Reply-To: <hfamji$7nr$1@ger.gmane.org>
+References: <20091204090048.GA3233@jama> <hfamji$7nr$1@ger.gmane.org>
+Date: Fri, 4 Dec 2009 08:17:18 -0200
+X-Google-Sender-Auth: 8dde0ad5bbd86c45
+Message-ID: <be7a9f3d0912040217x747ede28p78b38839ce6d74cc@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 04 Dec 2009 11:12:36 +0100
-Message-ID: <hfanak$9l5$1@ger.gmane.org>
-References: <E1NGUiP-00061U-6s@melo.openembedded.org>	<141020e30912040151l26670979g9cb02c4d4539da38@mail.gmail.com>	<20091204095951.6846190d@xora.org.uk>
-	<20091204100443.GA13717@jama>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-In-Reply-To: <20091204100443.GA13717@jama>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.220.225
+X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: David-John Willis : font-util: Add 1.1.1 target and native.
+Subject: Re: [RFC] sane-providers.inc with default providers for all distributions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,23 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Dec 2009 10:14:41 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 04 Dec 2009 10:18:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 04-12-09 11:04, Martin Jansa wrote:
+Hello,
 
-> Should I merge oe.dev to that "short lived" xorg-7.5 branch? (lots of
-> commits but better to resolve conflicts once there than in every
-> distribution tester who merge that branch as shr do).
+On Fri, Dec 4, 2009 at 8:00 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> On 04-12-09 10:00, Martin Jansa wrote:
+>>
+>> I would like to create new file conf/distro/include/sane-providers.inc
+>> where we could store all default providers.
+>
+> If it's the same for everyone, can't it be put in bitbake.conf? I'm growing
+> a bit tired of mandatory sane-* files to include.
 
-That'd be nice.
+This makes much more sense to me.
 
-regards,
-
-Koen
-
-
-
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
