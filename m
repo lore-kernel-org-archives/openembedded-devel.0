@@ -1,40 +1,31 @@
-Received: from mail-fx0-f225.google.com ([209.85.220.225])
+Received: from caiajhbdcbhh.dreamhost.com ([208.97.132.177]
+	helo=homiemail-a11.g.dreamhost.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1NGVFX-0003Ix-2N
+	(envelope-from <Sebastian@SSpaeth.de>) id 1NGVxe-000766-Oa
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Dec 2009 11:18:58 +0100
-Received: by fxm25 with SMTP id 25so2266429fxm.26
+	Fri, 04 Dec 2009 12:04:33 +0100
+Received: from [129.132.133.199] (mtec-hg-docking-1-dhcp-199.ethz.ch
+	[129.132.133.199])
+	by homiemail-a11.g.dreamhost.com (Postfix) with ESMTPA id 7039F19406D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Dec 2009 02:17:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type; bh=EFqCVOsRFnb8oM09190sHPu54xIXKgnzECT1kjfnlvo=;
-	b=upNv1YWcHPcS0vEURqtx9I0vQiRXxs7LLrbSDKNwgfibhJQ34xmXNnlQEdIPybtJlP
-	ZATUZHOzK6oDqkTGYicpgfKnRtaCNE7TcLs/dDLksplQsl+liI6SGVxKhbCwAkoxjjqk
-	In6RpPb6pBCkJhej4wYNK3z2aU6Oyz7yfve+w=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	b=EGtCV+STiZV30iqrePAloN1m916E1E+xdEMp4e/ZrPxkfN33K9pRA71XocUVUPKZjP
-	2zQgsR84FHVtvZkw/gXolFGAZ9FAnAh5jMynYu2kgqrznswx2mTjfBYgAkogieetjQqS
-	LBG4kuydu4x18s31pl7wH3PsXwh5ZypoJCgoM=
+	Fri,  4 Dec 2009 03:02:53 -0800 (PST)
+Message-ID: <4B18EC5B.8030704@SSpaeth.de>
+Date: Fri, 04 Dec 2009 12:02:51 +0100
+From: Sebastian Spaeth <Sebastian@SSpaeth.de>
+Organization: ETH Zurich
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.139.201 with SMTP id u9mr307492hbu.112.1259921838104; Fri, 
-	04 Dec 2009 02:17:18 -0800 (PST)
-In-Reply-To: <hfamji$7nr$1@ger.gmane.org>
-References: <20091204090048.GA3233@jama> <hfamji$7nr$1@ger.gmane.org>
-Date: Fri, 4 Dec 2009 08:17:18 -0200
-X-Google-Sender-Auth: 8dde0ad5bbd86c45
-Message-ID: <be7a9f3d0912040217x747ede28p78b38839ce6d74cc@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.225
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+References: <1259911168-19992-1-git-send-email-Sebastian@SSpaeth.de>	<1259911168-19992-2-git-send-email-Sebastian@SSpaeth.de>
+	<hfahsd$ofp$1@ger.gmane.org>
+In-Reply-To: <hfahsd$ofp$1@ger.gmane.org>
+X-Enigmail-Version: 0.95.7
+OpenPGP: id=C827A062
+X-SA-Exim-Connect-IP: 208.97.132.177
+X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] sane-providers.inc with default providers for all distributions
+Subject: Re: [PATCH 2/2] task-base: Introduce DISTRO_apm and convert recipes to use it.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,25 +39,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Dec 2009 10:18:58 -0000
+X-List-Received-Date: Fri, 04 Dec 2009 11:04:34 -0000
+X-Groupsio-MsgNum: 14837
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig6B7291971D3528296F7DF494"
+
+--------------enig6B7291971D3528296F7DF494
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hello,
+Koen Kooi wrote:
+> Don't forget to remove the (R)PROVIDES in fso-apmd which are causing al=
+l
+> the problems. Some comment as mickey, please use caps for vars.
 
-On Fri, Dec 4, 2009 at 8:00 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> On 04-12-09 10:00, Martin Jansa wrote:
->>
->> I would like to create new file conf/distro/include/sane-providers.inc
->> where we could store all default providers.
->
-> If it's the same for everyone, can't it be put in bitbake.conf? I'm growing
-> a bit tired of mandatory sane-* files to include.
+I have pushed this now (using caps), to get angstrom fixed. I agree with
+Phil that using "virtaul/apm" would be cleaner though, so I will be
+working towards using that.
 
-This makes much more sense to me.
+Removing the RPROVIDES now from fsp-apm.
 
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+spaetz
 
 
+
+--------------enig6B7291971D3528296F7DF494
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEARECAAYFAksY7FsACgkQVYX1jMgnoGKpsQCfeIa/XA0NKud/Y+AMzb7PS6mi
+z0QAn38tYTLiwmE0h6CMPS4DqCWzx+Sx
+=F4Fh
+-----END PGP SIGNATURE-----
+
+--------------enig6B7291971D3528296F7DF494--
