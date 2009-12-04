@@ -1,38 +1,40 @@
-Received: from mail-iw0-f194.google.com ([209.85.223.194])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NGfEw-00085m-0V
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1NGfIk-0008Jg-5G
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Dec 2009 21:59:01 +0100
-Received: by iwn32 with SMTP id 32so1805689iwn.24
+	Fri, 04 Dec 2009 22:02:57 +0100
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id E751E110025E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Dec 2009 12:57:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=uVI3sfoggsc4C23Nr832Cd/IVPOoixxyAjw/6eQ5U3k=;
-	b=UC5AnhBykTrgWuDiGMaeju6l309I2fgcJj9WC+OQPAbE6KFtvfCi3RKQ5Ha18H7yhh
-	KGiuFl7UIEvW0SDl3Eam/HYwO4C/gOppyARB3E5Jv8wbESf8bWGpwxXJFrow+87uwuzk
-	WWWYuMnCsLCS+dCv41iHeHWMk/Di0KHNZpseA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=ID+D2z/WIggwtf1aQMH6MQs45zNKG8f4KS/o7GhLeuXyA7c63EEZ5DR3Wcm59F/PNq
-	1IC5thHaZcxJxOnw5pgjIM436kjyVzAd8S9mJ0Ua0RGIoWcuY0iCvJZYvlrU3WEFqI3Y
-	rVK0bJe447kOM8dkEv6ZxrqmHcizpmuMqPO+w=
-MIME-Version: 1.0
-Received: by 10.231.120.90 with SMTP id c26mr1888614ibr.1.1259960239889; Fri, 
-	04 Dec 2009 12:57:19 -0800 (PST)
-In-Reply-To: <loom.20091204T213241-372@post.gmane.org>
-References: <loom.20091204T213241-372@post.gmane.org>
-Date: Fri, 4 Dec 2009 12:57:19 -0800
-Message-ID: <19c1b8a90912041257g4324f59bq2d6d4db5176effbe@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Fri,  4 Dec 2009 22:01:14 +0100 (CET)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 2131E11001B9
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  4 Dec 2009 22:01:14 +0100 (CET)
+Received: from rhein.familie-heinold.de (g225147097.adsl.alicedsl.de
+	[92.225.147.97]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  4 Dec 2009 22:01:14 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 335343C04A; Fri,  4 Dec 2009 22:01:13 +0100 (CET)
+Date: Fri, 4 Dec 2009 22:01:13 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.194
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Message-ID: <20091204210112.GA22210@rhein.zuhause.netz>
+References: <1259880334.25344.7.camel@mattotaupa.wohnung.familie-menzel.net>
+	<1259939828.4859.1456.camel@pblack-ubuntu>
+MIME-Version: 1.0
+In-Reply-To: <1259939828.4859.1456.camel@pblack-ubuntu>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Questions about gcc target packages
+Subject: Re: [abiword] CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include/freetype2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,52 +48,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Dec 2009 20:59:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 04 Dec 2009 21:02:57 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Fri, Dec 4, 2009 at 12:49 PM, Jeremy Williams <jerm7861@yahoo.com> wrote:
-> I am seeing some QA errors when building the gcc target package. The two QA
-> errors are .so symlink in non -dev package (for the gcc package) and GNU_HASH in
-> objc libraries.
->
-> Looking into the first issue reveals something puzzling to me. If you look at
-> gcc-package-target.inc, the do_install operation creates a .so symlink to
-> libgcc. Looking at the FILES definition for the gcc package (non -dev), it
-> appears that this symlink is being sucked into the package by the entry
-> "${gcclibdir}/${TARGET_SYS}/${BINV}/lib*". Am I confused here?
+The problem here is the libwmf plugin, which is enabled to auto. OE hasnt packed
+libwmf yet(besides the lib was last updated 2002). So if you have libwmf-dev package
+installed on your hostmachine the autotools will find libwmf-config from host
+and set CLFAGS for the host libwmf, which is infect /usr/include.
 
-Seems plausible
+There are 3 solutions:
 
->
-> I'm not sure what is causing the GNU_HASH issue with the objc libraries...
+- package libwmf into oe
+- run abiword configure with --enbale-plugin "list of all plugins without libwmf"
+- edit .m4 files so it dont includes wmf plugin
 
-LDFLAGS are not honored. May be you could try to force the --hash-style option
-into builds of target parts of gcc
-
->
-> I do have one other question. What is the thought behind the rule that first
-> looks for the soft-float (nof) version of libgcc and copies that into
-> base_libdir instead of the hard-float version? This version of libgcc ends up in
-> the package libgcc1. When building an sdk with meta-toolchain, libgcc1 ends up
-> getting installed in the target folder and overwrites the hard-float library
-> that the gcc-cross-sdk package installs. This causes issues with libstdc++ which
-> is built to expect the hard-float version of libgcc when linking qmul and
-> friends (hard float is version GCC_4.1, soft float is version GCC_4.2).
-
-Due to multilib and nof happens to be first. I think we should patch
-gcc to not generate
-nof version if not asked for.
-
->
-> thanks!
->
-> -jeremy
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Bye Henning
 
 
