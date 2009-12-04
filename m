@@ -1,25 +1,24 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NGfYz-0003Uh-OH for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Dec 2009 22:19:44 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NGfXQ-0003wO-C7
+	id 1NGh9W-0004E2-38 for openembedded-devel@lists.openembedded.org;
+	Sat, 05 Dec 2009 00:01:33 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NGh7x-0005z9-Ck
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Dec 2009 22:18:04 +0100
+	Fri, 04 Dec 2009 23:59:53 +0100
 Received: from 167.225.107.17 ([167.225.107.17])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Dec 2009 22:18:04 +0100
+	Fri, 04 Dec 2009 23:59:53 +0100
 Received: from jerm7861 by 167.225.107.17 with local (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Dec 2009 22:18:04 +0100
+	Fri, 04 Dec 2009 23:59:53 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Jeremy Williams <jerm7861@yahoo.com>
-Date: Fri, 4 Dec 2009 21:17:42 +0000 (UTC)
-Message-ID: <loom.20091204T221736-170@post.gmane.org>
+Date: Fri, 4 Dec 2009 22:59:40 +0000 (UTC)
+Message-ID: <loom.20091204T235627-565@post.gmane.org>
 References: <loom.20091204T213241-372@post.gmane.org>
-	<19c1b8a90912041257g4324f59bq2d6d4db5176effbe@mail.gmail.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: sea.gmane.org
@@ -45,28 +44,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Dec 2009 21:19:44 -0000
+X-List-Received-Date: Fri, 04 Dec 2009 23:01:33 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Khem Raj <raj.khem <at> gmail.com> writes:
-
-> >
-> > I'm not sure what is causing the GNU_HASH issue with the objc libraries...
-> 
-> LDFLAGS are not honored. May be you could try to force the --hash-style option
-> into builds of target parts of gcc
-> 
-
-Why is it only the objc libraries that are affected? It appears that this was
-addressed by gcc-configure-common.inc, correct?
-
-http://cgit.openembedded.net/cgit.cgi/openembedded/tree/recipes/gcc/gcc-configure-common.inc#n79
+Actually I stand corrected regarding the libgcc issues. The
+gcc-package-target.inc file has a FILES_libgcc entry but does not actually
+provide this package. This package is provided by the gcc-cross recipe
+(gcc-package-cross.inc). So the libgcc problem is coming from here...
 
 -jeremy
-
-
-
 
 
 
