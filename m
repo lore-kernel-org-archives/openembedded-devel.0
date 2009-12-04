@@ -1,39 +1,38 @@
-Received: from mail-pw0-f53.google.com ([209.85.160.53])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1NGTkK-0007rW-Ik
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NGToG-00081H-0M for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Dec 2009 09:46:43 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NGTmh-00018H-SX
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Dec 2009 09:42:39 +0100
-Received: by pwj11 with SMTP id 11so1990940pwj.12
+	Fri, 04 Dec 2009 09:45:03 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Dec 2009 09:45:03 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Dec 2009 00:40:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=na7q39HdXJkoKNbXJKeuU8trcfw3MblZ6xdiXRmoDqE=;
-	b=kK6qRxkop2Kc67Q/SeqwdjozxDSnRm40pThYKsxdFxqOCMBh08Y4CeV7rk5IYJ6eCm
-	8zjWiomuXYpjaXjhTaJPtGt6x/DsBBqVZ5+iZCsoZ+tAUECELAilwzJAIjIusurd1CsP
-	g8LzcI9L9QHS4IC+4qZ528O/eWpOkKm/M8+cs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=tioCE7h+LQeFoBDVM+ZYZH3wO81DUfqsNFipymymHf5nuCJItH8ww0g6QA+4JvavEk
-	1O4+JOO9xAKgUwPSq9yPk/oAOhgRJ3sAnC7qMtQTj9pxjJZJdNRBVBHRw6kH5mtF2Roz
-	DjJINBHWC7D9Wd3o2fKDnIfAof/YQg+OL55rI=
-MIME-Version: 1.0
-Received: by 10.141.52.15 with SMTP id e15mr166100rvk.204.1259916058833; Fri, 
-	04 Dec 2009 00:40:58 -0800 (PST)
-In-Reply-To: <6ec4247d0912032053g5f4963a7t6280f5341cce12e8@mail.gmail.com>
-References: <4B18811D.8020206@mwester.net>
-	<6ec4247d0912032053g5f4963a7t6280f5341cce12e8@mail.gmail.com>
-Date: Fri, 4 Dec 2009 09:40:58 +0100
-Message-ID: <d1b08f940912040040v3289f021k4e7877e4c5f46777@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Fri, 04 Dec 2009 09:45:03 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.53
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 04 Dec 2009 09:39:41 +0100
+Message-ID: <hfahsd$ofp$1@ger.gmane.org>
+References: <1259911168-19992-1-git-send-email-Sebastian@SSpaeth.de>
+	<1259911168-19992-2-git-send-email-Sebastian@SSpaeth.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
+In-Reply-To: <1259911168-19992-2-git-send-email-Sebastian@SSpaeth.de>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Commit 2fdf1aa1c869ea9deecee86206f49a2eca9d7c00 breaks opkg
+Subject: Re: [PATCH 2/2] task-base: Introduce DISTRO_apm and convert recipes to use it.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,29 +46,137 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Dec 2009 08:42:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 04 Dec 2009 08:46:43 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-FYI,
+On 04-12-09 08:19, Sebastian Spaeth wrote:
+> * This allows distros to override the apm provider with an DISTRO_apm variable
+> * The change should be transparent and invisible for other distros
+> * This could also be done with a virtual/apm package, and a PREFERED_PROVIDER set to apm
 
-I had similar issues with opkg-cl (was linked with libldap of my
-buildhost...[1]).
+Don't forget to remove the (R)PROVIDES in fso-apmd which are causing all 
+the problems. Some comment as mickey, please use caps for vars.
 
-I thouht it was originated by bump to SRCREV to 413 but a rebuild from
-scratch fixed all.
+regards,
 
-Please retry the hard way...
-
-
-Regards
-
-Andrea
+Koen
 
 
-[1] What I did was to unmerge openldap on my Gentoo buildhost. This
-broke opkg-cl and friends..
-Suspicious bits:
- /bin/grep: /usr/lib/libldap.la: No such file or directory
- /bin/sed: can't read /usr/lib/libldap.la: No such file or directory
+> Signed-off-by: Sebastian Spaeth<Sebastian@SSpaeth.de>
+> ---
+>   recipes/ipaq-sleep/ipaq-sleep_0.9.bb           |    5 +++--
+>   recipes/matchbox2/matchbox-panel-2_svn.bb      |    6 ++++--
+>   recipes/openmoko2/neod_svn.bb                  |    6 ++++--
+>   recipes/suspend-desktop/suspend-desktop_1.0.bb |    5 +++--
+>   recipes/tasks/task-base.bb                     |    7 +++++--
+>   5 files changed, 19 insertions(+), 10 deletions(-)
+>
+> diff --git a/recipes/ipaq-sleep/ipaq-sleep_0.9.bb b/recipes/ipaq-sleep/ipaq-sleep_0.9.bb
+> index 24d881d..6c37b73 100644
+> --- a/recipes/ipaq-sleep/ipaq-sleep_0.9.bb
+> +++ b/recipes/ipaq-sleep/ipaq-sleep_0.9.bb
+> @@ -2,8 +2,9 @@ DESCRIPTION = "Automatic sleep/suspend control daemon"
+>   SECTION = "x11/base"
+>   LICENSE = "GPL"
+>   DEPENDS = "apmd virtual/xserver libxext virtual/libx11 libxau xscrnsaverh libxss"
+> -RDEPENDS = "apm"
+> -PR = "r6"
+> +DISTRO_apm ?= "apm"
+> +RDEPENDS = "${DISTRO_apm}"
+> +PR = "r7"
+>
+>   inherit gpe pkgconfig
+>
+> diff --git a/recipes/matchbox2/matchbox-panel-2_svn.bb b/recipes/matchbox2/matchbox-panel-2_svn.bb
+> index a2a807f..9d1781b 100644
+> --- a/recipes/matchbox2/matchbox-panel-2_svn.bb
+> +++ b/recipes/matchbox2/matchbox-panel-2_svn.bb
+> @@ -1,13 +1,15 @@
+>   DESCRIPTION = "matchbox-panel-2 is a lightweight dock (system tray) application based on Gtk+"
+>   LICENSE = "GPLv2"
+>   SECTION = "x11/panels"
+> +
+> +DISTRO_apm ?= "apm"
+>   DEPENDS = "gtk+ startup-notification dbus dbus-glib matchbox-panel-2-icon-themes"
+>   DEPENDS += " ${@base_contains("MACHINE_FEATURES", "acpi", "libacpi", "",d)}"
+> -DEPENDS += " ${@base_contains("MACHINE_FEATURES", "apm", "apmd", "",d)}"
+> +DEPENDS += " ${@base_contains("MACHINE_FEATURES", "${DISTRO_apm}", "apmd", "",d)}"
+>   RDEPENDS_${PN} = "matchbox-panel-2-icon-theme"
+>   PACKAGE_ARCH = "${MACHINE_ARCH}"
+>   PV = "2.0+svnr${SRCPV}"
+> -PR = "r0"
+> +PR = "r1"
+>
+>   inherit autotools_stage pkgconfig
+>
+> diff --git a/recipes/openmoko2/neod_svn.bb b/recipes/openmoko2/neod_svn.bb
+> index aeeee87..14858a7 100644
+> --- a/recipes/openmoko2/neod_svn.bb
+> +++ b/recipes/openmoko2/neod_svn.bb
+> @@ -1,9 +1,11 @@
+>   DESCRIPTION = "Simple Neo1973 Daemon for Button Handling and Power Management"
+>   SECTION = "openmoko/daemons"
+> +
+> +DISTRO_apm ?= "apm"
+>   DEPENDS = "gtk+ pulseaudio apmd"
+> -RDEPENDS = "gpe-scap xrandr alsa-utils-amixer apm dbus"
+> +RDEPENDS = "gpe-scap xrandr alsa-utils-amixer ${DISTRO_apm} dbus"
+>   PV = "0.1.0+svnr${SRCPV}"
+> -PR = "r6"
+> +PR = "r7"
+>
+>   inherit openmoko2 gconf
+>
+> diff --git a/recipes/suspend-desktop/suspend-desktop_1.0.bb b/recipes/suspend-desktop/suspend-desktop_1.0.bb
+> index fa9efba..8fcdfea 100644
+> --- a/recipes/suspend-desktop/suspend-desktop_1.0.bb
+> +++ b/recipes/suspend-desktop/suspend-desktop_1.0.bb
+> @@ -3,10 +3,11 @@ PRIORITY    = "optional"
+>   DESCRIPTION = "Suspend feature for the application launcher menu."
+>   LICENSE     = "GPL"
+>
+> -PR          = "r1"
+> +PR          = "r2"
+>
+> +DISTRO-apm ?= "apm"
+>   RDEPENDS    = "gpe-conf"
+> -RRECOMMENDS = "apm"
+> +RRECOMMENDS = "${DISTRO_apm}"
+>
+>   PACKAGES    = "${PN}"
+>   PACKAGE_ARCH = "all"
+> diff --git a/recipes/tasks/task-base.bb b/recipes/tasks/task-base.bb
+> index ed561b8..6aad873 100644
+> --- a/recipes/tasks/task-base.bb
+> +++ b/recipes/tasks/task-base.bb
+> @@ -1,5 +1,5 @@
+>   DESCRIPTION = "Merge machine and distro options to create a basic machine task/package"
+> -PR = "r86"
+> +PR = "r87"
+>
+>   inherit task
+>
+> @@ -60,6 +60,9 @@ HOTPLUG ?= "${@base_contains("MACHINE_FEATURES", "kernel24",  "linux-hotplug",""
+>   #
+>   DISTRO_SSH_DAEMON ?= "dropbear"
+>
+> +# Distro can override apm provider
+> +DISTRO_apm ?= "apm"
+> +
+>   #
+>   # bluetooth manager
+>   #
+> @@ -190,7 +193,7 @@ RDEPENDS_task-base-acpi = "\
+>       acpid"
+>
+>   RDEPENDS_task-base-apm = "\
+> -    apm \
+> +    "${DISTRO_apm}" \
+>       apmd \
+>       ${@base_contains('MACHINE_FEATURES', 'kernel24', 'network-suspend-scripts', '',d)}"
+>
+
+
 
 
