@@ -1,40 +1,37 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1NGfIk-0008Jg-5G
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NGfTR-00006M-S7 for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Dec 2009 22:14:00 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NGfRq-0001jC-VT
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Dec 2009 22:02:57 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id E751E110025E
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Dec 2009 22:01:14 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 2131E11001B9
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Dec 2009 22:01:14 +0100 (CET)
-Received: from rhein.familie-heinold.de (g225147097.adsl.alicedsl.de
-	[92.225.147.97]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Dec 2009 22:01:14 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 335343C04A; Fri,  4 Dec 2009 22:01:13 +0100 (CET)
-Date: Fri, 4 Dec 2009 22:01:13 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Fri, 04 Dec 2009 22:12:18 +0100
+Received: from 167.225.107.17 ([167.225.107.17])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Dec 2009 22:12:13 +0100
+Received: from jerm7861 by 167.225.107.17 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Dec 2009 22:12:13 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091204210112.GA22210@rhein.zuhause.netz>
-References: <1259880334.25344.7.camel@mattotaupa.wohnung.familie-menzel.net>
-	<1259939828.4859.1456.camel@pblack-ubuntu>
-MIME-Version: 1.0
-In-Reply-To: <1259939828.4859.1456.camel@pblack-ubuntu>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+From: Jeremy Williams <jerm7861@yahoo.com>
+Date: Fri, 4 Dec 2009 21:11:50 +0000 (UTC)
+Message-ID: <loom.20091204T221141-753@post.gmane.org>
+References: <loom.20091204T213241-372@post.gmane.org>
+	<19c1b8a90912041257g4324f59bq2d6d4db5176effbe@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 167.225.107.17 (Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.5) Gecko/20091105 Fedora/3.5.5-1.fc11 Firefox/3.5.5)
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [abiword] CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include/freetype2
+Subject: Re: Questions about gcc target packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,21 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Dec 2009 21:02:57 -0000
+X-List-Received-Date: Fri, 04 Dec 2009 21:14:01 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-The problem here is the libwmf plugin, which is enabled to auto. OE hasnt packed
-libwmf yet(besides the lib was last updated 2002). So if you have libwmf-dev package
-installed on your hostmachine the autotools will find libwmf-config from host
-and set CLFAGS for the host libwmf, which is infect /usr/include.
+Khem Raj <raj.khem <at> gmail.com> writes:
 
-There are 3 solutions:
+> 
+> Due to multilib and nof happens to be first. I think we should patch
+> gcc to not generate
+> nof version if not asked for.
+> 
+I am not a gcc expert by any stretch of the imagination but if your target has
+hard-float support, wouldn't one prefer that over software emulation?
 
-- package libwmf into oe
-- run abiword configure with --enbale-plugin "list of all plugins without libwmf"
-- edit .m4 files so it dont includes wmf plugin
+Why not switch the if/else check around to first check for the non nof library
+first?
 
-Bye Henning
+-jeremy
+
+
+
+
 
 
