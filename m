@@ -1,37 +1,45 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f217.google.com ([209.85.218.217])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NGUzQ-000096-FH for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Dec 2009 11:02:19 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NGUxt-0004kA-9V
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Dec 2009 11:00:41 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Dec 2009 11:00:41 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Dec 2009 11:00:41 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <martin.jansa@gmail.com>)
+	id 1NGV3Q-0000Ke-CQ; Fri, 04 Dec 2009 11:06:27 +0100
+Received: by bwz9 with SMTP id 9so1743802bwz.12
+	for <multiple recipients>; Fri, 04 Dec 2009 02:04:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:cc:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=Gxh7t54mtRoag+0w0qYk9wxwdKVqLBwkz5C4seLjSPI=;
+	b=CMK5zulzHyAPEmu5fWwKPLAzLfaSNtpapAElYn9wrtJK4GSsDt47Mr/FqnfSDcpGxT
+	L/SQWAyX92SqVp9t+7ZSC1Ag4e35zTPT4bUXx0/Sky0IkkLm+qoN/crq3R1nKqrIGrFM
+	hVpWCab12LHQXp/qAuBxpT9sjw2IC5TpGI+v4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=cRFC02SqMDV9DVsba+bDRe6dCSbbsNbWllb7XFszOmIRacN+03Pv8+7RhSXHLYllS/
+	SmAXa7RI2fE7yx5Y21+Mx+0d4U20BQxhExfHzKQtouRF9PYHJ/2wm46ftD6NLXDIbqS9
+	fxLuFwiap9858WtUVmlanMLilRiTAOMz8eUZE=
+Received: by 10.204.13.212 with SMTP id d20mr1294989bka.63.1259921087501;
+	Fri, 04 Dec 2009 02:04:47 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 15sm1028053fxm.14.2009.12.04.02.04.46
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 04 Dec 2009 02:04:47 -0800 (PST)
+Date: Fri, 4 Dec 2009 11:04:43 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 04 Dec 2009 11:00:17 +0100
-Message-ID: <hfamji$7nr$1@ger.gmane.org>
-References: <20091204090048.GA3233@jama>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
-In-Reply-To: <20091204090048.GA3233@jama>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20091204100443.GA13717@jama>
+References: <E1NGUiP-00061U-6s@melo.openembedded.org>
+	<141020e30912040151l26670979g9cb02c4d4539da38@mail.gmail.com>
+	<20091204095951.6846190d@xora.org.uk>
+MIME-Version: 1.0
+In-Reply-To: <20091204095951.6846190d@xora.org.uk>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] sane-providers.inc with default providers for all distributions
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] David-John Willis : font-util: Add 1.1.1 target and native.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,54 +53,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Dec 2009 10:02:19 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 04 Dec 2009 10:06:27 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 04-12-09 10:00, Martin Jansa wrote:
-> I would like to create new file conf/distro/include/sane-providers.inc
-> where we could store all default providers.
+On Fri, Dec 04, 2009 at 09:59:51AM +0000, Graeme Gregory wrote:
+> On Fri, 4 Dec 2009 10:51:18 +0100
+> Martin Jansa <martin.jansa@gmail.com> wrote:
+> 
+> > On Fri, Dec 4, 2009 at 10:44 AM, git version control <
+> > git@git.openembedded.org> wrote:
+> > 
+> > > Module: openembedded.git
+> > > Branch: org.openembedded.dev
+> > > Commit: a0fb85891d24df07bd140f0b9f277e9ebb3768d7
+> > > URL:
+> > > http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=a0fb85891d24df07bd140f0b9f277e9ebb3768d7
+> > >
+> > > Author: David-John Willis <John.Willis@Distant-earth.com>
+> > > Date:   Thu Dec  3 09:30:27 2009 +0000
+> > >
+> > > font-util: Add 1.1.1 target and native.
+> > >
+> > 
+> > http://cgit.openembedded.net/cgit.cgi/openembedded/commit/?h=martin_jansa/xorg-7.5&id=c465d9fcf16a6e42afc2f984978ddeaacd9568d3
+> > 
+> > 
+> > You still probably need this patch.
+> > 
+> > Would be great to merge it from that branch first, I like INC_PR but
+> > now I'll get lots of conflicts in all font packages and I'll have to
+> > update font recipes in that branch to INC_PR too :/.
+> > 
+> > BTW: as I don't have all angstrom/OE supported devices to test
+> > xorg-7.5 there, I won't merge that branch to oe.dev myself, I need
+> > help from device/distro maintainers, please...
+> > 
+> We have the preferred-x11R6 versions files so people can lock
+> themselves to 7.4 if they wish.
+> 
+> You'll be waiting approximately for infinity if you wait to test on all
+> devices. I'd say merge it.
+> 
+> Graeme
 
-If it's the same for everyone, can't it be put in bitbake.conf? I'm 
-growing a bit tired of mandatory sane-* files to include.
+But ie angstrom has no include for xorg versions, so I need to test it
+at least on angstrom supported devices or include preferred-X11R6 in
+angstrom config which is maybe not so good idea (at least pixman,
+xserver and now font recipes needs to be higher than what was in X11R6.
 
-regards,
+I have only spitz and freerunner for test on real device...
 
-Koen
+Should I merge oe.dev to that "short lived" xorg-7.5 branch? (lots of
+commits but better to resolve conflicts once there than in every
+distribution tester who merge that branch as shr do).
 
-
-> Every distro should include this file and probably should drop own
-> PREFERRED_PROVIDERS if preferring same provider as sane-providers.inc.
->
-> I already prepared something, but not sure if its worth finishing. So I
-> need your opinion.
->
-> With this file it would be easier to add PROVIDES to new recipe while
-> forcing old provider in sane-providers for all other distributions
-> (something like what happen with fso-apm in shr).
->
-> Maybe it will be nice to have all options in comment above the default
-> provider.
->
-> I would use weak assignments in this file, but it means that this file
-> needs to be included after all distro prefered providers, because distro
-> config use weak assignments too (and also other includes like eglibc.inc).
->
-> As opkg have patch from cworth now I would add
-> PROVIDERS=update-alternatives to opkg and change preferred u-a provider
-> to opkg (removing 2 u-a scripts on target).
->
-> This process seems a bit error prone to me, so I can prepare patch for
-> shr and angstrom where I can test with rebuild that "nothing" changed.
-> For other distributions it would be nice to include sane-providers by
-> distro maintainers.
->
-> Can I go ahead and send patches for this or do you see some dead-end as
-> with SRCPV? :).
->
-> Regards,
->
-
-
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
