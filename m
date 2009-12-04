@@ -1,47 +1,40 @@
-Received: from mail-bw0-f217.google.com ([209.85.218.217])
+Received: from mail-fx0-f216.google.com ([209.85.220.216])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NGYFQ-0005He-QN
+	(envelope-from <martin.jansa@gmail.com>) id 1NGYXu-00079V-Ob
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Dec 2009 14:31:03 +0100
-Received: by bwz9 with SMTP id 9so1870267bwz.12
+	Fri, 04 Dec 2009 14:50:10 +0100
+Received: by fxm8 with SMTP id 8so1334803fxm.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Dec 2009 05:29:23 -0800 (PST)
+	Fri, 04 Dec 2009 05:48:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=vqi6td7Yv8+L8sLxessDFwq4GE5DFoM8xHw9VdPJuc8=;
-	b=M7HAUmHCuTry55S4IOzLEg1aWlLfYC+m77fAXhgDgh/Y3skcT0xuT8PK4lptotlB3c
-	XElxVEFM2k2lRWJm4q1Cgw6hcAgOqLn9sl35Mrb0NjMEDH2jYcm/LaigtT4sW+aj9otL
-	rJkcS7+SDu5Y1GEqM3kqX8XMsKJCUmOlQfPkA=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type;
+	bh=uCkP0Bv/DNeInbsKMidplpi7TJS10GXKJsKhtYIPd4Q=;
+	b=JtoQegAn1Wn0A7Meqgni9xWN+psCLL48uYPxj5vYTkeFRPvyVi695rAF+wz/HxKrgg
+	o6bRBUYei7UANVi75FwO+ncl6tJltl/EcobWOE0ucxxXmT3dp35OQf8kEWgXf9qyktJD
+	6hIzvFW28986dV0x+QkypuTrU5qneRKaKtolQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=aC93njhVdhhVDDomQnLT2ejerZXUo3g8zMYGNNbNV12fOetQJ+1sXXttPoR80gu9a2
-	HKJ9AcX6K1WRGZj8VWnTDLfRTewyX42mZKzqhfwqGrnYvZOGxs9Tvw6CoTX0Go10p8nJ
-	mVDvwsZ/uKkCcwmEZ1a56Px293CnIkDMKVE3g=
-Received: by 10.204.154.219 with SMTP id p27mr3239944bkw.115.1259933363279;
-	Fri, 04 Dec 2009 05:29:23 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 13sm1091503fxm.5.2009.12.04.05.29.21
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 04 Dec 2009 05:29:21 -0800 (PST)
-Date: Fri, 4 Dec 2009 14:29:17 +0100
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	b=sfm5qtZeGTWg0XuqyHzTQEs/W9/xk/85voDRQh6mphhl5XnFQtFvGIaQxQu6+UdhEm
+	8fwZnpFP7dVN2QYQHXK0SWae+saG7j2HlC+XUkFQhxApmIck4hrUlnB4PRwKbwn1tsGf
+	96SMavubVhHC2CLHnirzWMcxoTcMlk6dcG+9Q=
+MIME-Version: 1.0
+Received: by 10.223.15.4 with SMTP id i4mr492037faa.39.1259934509824; Fri, 04 
+	Dec 2009 05:48:29 -0800 (PST)
+In-Reply-To: <E1NGVGl-0006do-JZ@melo.openembedded.org>
+References: <E1NGVGl-0006do-JZ@melo.openembedded.org>
+Date: Fri, 4 Dec 2009 14:48:29 +0100
+Message-ID: <141020e30912040548u2fec09dal9cf48622ded5adb7@mail.gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091204132917.GB13717@jama>
-References: <E1NGUiP-00061U-6s@melo.openembedded.org>
-	<141020e30912040151l26670979g9cb02c4d4539da38@mail.gmail.com>
-	<20091204095951.6846190d@xora.org.uk> <20091204100443.GA13717@jama>
-	<hfanak$9l5$1@ger.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <hfanak$9l5$1@ger.gmane.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Connect-IP: 209.85.220.216
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: David-John Willis : font-util: Add 1.1.1 target and native.
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: openembedded-commits@openembedded.org
+Subject: Re: [oe-commits] Koen Kooi : efl: bump SRCREV to fix some crashes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,38 +48,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Dec 2009 13:31:04 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 04 Dec 2009 13:50:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, Dec 04, 2009 at 11:12:36AM +0100, Koen Kooi wrote:
-> On 04-12-09 11:04, Martin Jansa wrote:
-> 
-> >Should I merge oe.dev to that "short lived" xorg-7.5 branch? (lots of
-> >commits but better to resolve conflicts once there than in every
-> >distribution tester who merge that branch as shr do).
-> 
-> That'd be nice.
+On Fri, Dec 4, 2009 at 11:20 AM, git version control <
+git@git.openembedded.org> wrote:
 
-Pushed..
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: ea85fd4e1fdb1f09fd21f65e077aab2f7ccdf65e
+> URL:
+> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=ea85fd4e1fdb1f09fd21f65e077aab2f7ccdf65e
+>
+> Author: Koen Kooi <koen@openembedded.org>
+> Date:   Fri Dec  4 11:17:57 2009 +0100
+>
+> efl: bump SRCREV to fix some crashes
+>
 
-woglinde suggested pushing remaining recipes with 
-DEFAULT_PREFERRENCE = "-1"
-I would add
-DEFAULT_PREFERRENCE_shr = "1"
-as we are already using it without include for preferred-xorg-versions,
-can I merge that branch with those 2 in all new recipes (except util-macros
-and font recipes)?
+This patch
+http://cgit.openembedded.net/cgit.cgi/openembedded/tree/recipes/efl1/ecore/iconv.patch
+does not apply anymore, only first chunk, which should be easy to update
 
-Or can Angstrom include
-preferred-xorg-versions-X11R7.4-updates.inc
-+ updates already used in Angstrom (ie util-macros, pixman, fonts). Then
-I could merge it without DEFAULT_PREFERRENCE change..
+I'm not sure if its worth creating new patch and let old one exist with
+maxrev=sth, so please someone else update that one.
 
 Thanks
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
 
+Regards,
 
