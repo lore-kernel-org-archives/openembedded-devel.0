@@ -1,26 +1,39 @@
-Received: from caiajhbdccac.dreamhost.com ([208.97.132.202]
-	helo=homiemail-a20.g.dreamhost.com)
+Received: from mail-pw0-f53.google.com ([209.85.160.53])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sebastian@SSpaeth.de>) id 1NGTG2-00052D-NB
+	(envelope-from <andrea.adami@gmail.com>) id 1NGTkK-0007rW-Ik
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Dec 2009 09:11:22 +0100
-Received: from localhost.localdomain (mtec-hg-docking-1-dhcp-199.ethz.ch
-	[129.132.133.199])
-	by homiemail-a20.g.dreamhost.com (Postfix) with ESMTPA id 499577EC060; 
-	Fri,  4 Dec 2009 00:09:42 -0800 (PST)
-From: Sebastian Spaeth <Sebastian@SSpaeth.de>
+	Fri, 04 Dec 2009 09:42:39 +0100
+Received: by pwj11 with SMTP id 11so1990940pwj.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Dec 2009 00:40:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=na7q39HdXJkoKNbXJKeuU8trcfw3MblZ6xdiXRmoDqE=;
+	b=kK6qRxkop2Kc67Q/SeqwdjozxDSnRm40pThYKsxdFxqOCMBh08Y4CeV7rk5IYJ6eCm
+	8zjWiomuXYpjaXjhTaJPtGt6x/DsBBqVZ5+iZCsoZ+tAUECELAilwzJAIjIusurd1CsP
+	g8LzcI9L9QHS4IC+4qZ528O/eWpOkKm/M8+cs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=tioCE7h+LQeFoBDVM+ZYZH3wO81DUfqsNFipymymHf5nuCJItH8ww0g6QA+4JvavEk
+	1O4+JOO9xAKgUwPSq9yPk/oAOhgRJ3sAnC7qMtQTj9pxjJZJdNRBVBHRw6kH5mtF2Roz
+	DjJINBHWC7D9Wd3o2fKDnIfAof/YQg+OL55rI=
+MIME-Version: 1.0
+Received: by 10.141.52.15 with SMTP id e15mr166100rvk.204.1259916058833; Fri, 
+	04 Dec 2009 00:40:58 -0800 (PST)
+In-Reply-To: <6ec4247d0912032053g5f4963a7t6280f5341cce12e8@mail.gmail.com>
+References: <4B18811D.8020206@mwester.net>
+	<6ec4247d0912032053g5f4963a7t6280f5341cce12e8@mail.gmail.com>
+Date: Fri, 4 Dec 2009 09:40:58 +0100
+Message-ID: <d1b08f940912040040v3289f021k4e7877e4c5f46777@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 Dec 2009 09:09:35 +0100
-Message-Id: <1259914175-22032-1-git-send-email-Sebastian@SSpaeth.de>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1259911783.1467.8.camel@andromeda>
-References: <1259911783.1467.8.camel@andromeda>
-X-SA-Exim-Connect-IP: 208.97.132.202
-X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
+X-SA-Exim-Connect-IP: 209.85.160.53
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Sebastian Spaeth <Sebastian@SSpaeth.de>
-Subject: [PATCH] [UPDATED] task-base: Introduce DISTRO_APM and convert recipes to use that
+Subject: Re: Commit 2fdf1aa1c869ea9deecee86206f49a2eca9d7c00 breaks opkg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,121 +47,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Dec 2009 08:11:22 -0000
+X-List-Received-Date: Fri, 04 Dec 2009 08:42:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Sebastian Spaeth <Sebastian@SSpaeth.de>
----
- conf/distro/shr.conf                           |    2 +-
- recipes/ipaq-sleep/ipaq-sleep_0.9.bb           |    5 +++--
- recipes/openmoko2/neod_svn.bb                  |    6 ++++--
- recipes/suspend-desktop/suspend-desktop_1.0.bb |    5 +++--
- recipes/tasks/task-base.bb                     |    7 +++++--
- 5 files changed, 16 insertions(+), 9 deletions(-)
+FYI,
 
-diff --git a/conf/distro/shr.conf b/conf/distro/shr.conf
-index 80f89bd..833eb09 100644
---- a/conf/distro/shr.conf
-+++ b/conf/distro/shr.conf
-@@ -30,6 +30,7 @@ DISTRO_TYPE = "debug"
- DISTRO = "shr"
- 
- DISTRO_SSH_DAEMON = "openssh"
-+DISTRO_APM = "fso-apm"
- 
- #Generate locales on the buildsystem instead of on the target. Speeds up first boot, set to "1" to enable
- ENABLE_BINARY_LOCALE_GENERATION ?= "1"
-@@ -183,7 +184,6 @@ PREFERRED_PROVIDER_virtual/db-native = "db3-native"
- PREFERRED_PROVIDER_virtual/libsdl = "libsdl-x11"
- PREFERRED_PROVIDER_virtual/libx11 ?= "libx11"
- PREFERRED_PROVIDER_virtual/libusb0 ?= "libusb"
--DISTRO_apm = "fso-apm"
- 
- #############################################################################
- # PREFERRED VERSIONS
-diff --git a/recipes/ipaq-sleep/ipaq-sleep_0.9.bb b/recipes/ipaq-sleep/ipaq-sleep_0.9.bb
-index 24d881d..158de80 100644
---- a/recipes/ipaq-sleep/ipaq-sleep_0.9.bb
-+++ b/recipes/ipaq-sleep/ipaq-sleep_0.9.bb
-@@ -2,8 +2,9 @@ DESCRIPTION = "Automatic sleep/suspend control daemon"
- SECTION = "x11/base"
- LICENSE = "GPL"
- DEPENDS = "apmd virtual/xserver libxext virtual/libx11 libxau xscrnsaverh libxss"
--RDEPENDS = "apm"
--PR = "r6"
-+DISTRO_APM ?= "apm"
-+RDEPENDS = "${DISTRO_APM}"
-+PR = "r7"
- 
- inherit gpe pkgconfig
- 
-diff --git a/recipes/openmoko2/neod_svn.bb b/recipes/openmoko2/neod_svn.bb
-index aeeee87..e57bf08 100644
---- a/recipes/openmoko2/neod_svn.bb
-+++ b/recipes/openmoko2/neod_svn.bb
-@@ -1,9 +1,11 @@
- DESCRIPTION = "Simple Neo1973 Daemon for Button Handling and Power Management"
- SECTION = "openmoko/daemons"
-+
-+DISTRO_APM ?= "apm"
- DEPENDS = "gtk+ pulseaudio apmd"
--RDEPENDS = "gpe-scap xrandr alsa-utils-amixer apm dbus"
-+RDEPENDS = "gpe-scap xrandr alsa-utils-amixer ${DISTRO_APM} dbus"
- PV = "0.1.0+svnr${SRCPV}"
--PR = "r6"
-+PR = "r7"
- 
- inherit openmoko2 gconf
- 
-diff --git a/recipes/suspend-desktop/suspend-desktop_1.0.bb b/recipes/suspend-desktop/suspend-desktop_1.0.bb
-index fa9efba..085d686 100644
---- a/recipes/suspend-desktop/suspend-desktop_1.0.bb
-+++ b/recipes/suspend-desktop/suspend-desktop_1.0.bb
-@@ -3,10 +3,11 @@ PRIORITY    = "optional"
- DESCRIPTION = "Suspend feature for the application launcher menu."
- LICENSE     = "GPL"
- 
--PR          = "r1"
-+PR          = "r2"
- 
-+DISTRO_APM ?= "apm"
- RDEPENDS    = "gpe-conf"
--RRECOMMENDS = "apm"
-+RRECOMMENDS = "${DISTRO_APM}"
- 
- PACKAGES    = "${PN}"
- PACKAGE_ARCH = "all"
-diff --git a/recipes/tasks/task-base.bb b/recipes/tasks/task-base.bb
-index ed561b8..b540c80 100644
---- a/recipes/tasks/task-base.bb
-+++ b/recipes/tasks/task-base.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "Merge machine and distro options to create a basic machine task/package"
--PR = "r86"
-+PR = "r87"
- 
- inherit task
- 
-@@ -60,6 +60,9 @@ HOTPLUG ?= "${@base_contains("MACHINE_FEATURES", "kernel24",  "linux-hotplug",""
- #
- DISTRO_SSH_DAEMON ?= "dropbear"
- 
-+# Distro can override apm provider
-+DISTRO_APM ?= "apm"
-+
- #
- # bluetooth manager
- #
-@@ -190,7 +193,7 @@ RDEPENDS_task-base-acpi = "\
-     acpid"
- 
- RDEPENDS_task-base-apm = "\
--    apm \
-+    "${DISTRO_APM}" \
-     apmd \
-     ${@base_contains('MACHINE_FEATURES', 'kernel24', 'network-suspend-scripts', '',d)}"
- 
--- 
-1.6.3.3
+I had similar issues with opkg-cl (was linked with libldap of my
+buildhost...[1]).
 
+I thouht it was originated by bump to SRCREV to 413 but a rebuild from
+scratch fixed all.
+
+Please retry the hard way...
+
+
+Regards
+
+Andrea
+
+
+[1] What I did was to unmerge openldap on my Gentoo buildhost. This
+broke opkg-cl and friends..
+Suspicious bits:
+ /bin/grep: /usr/lib/libldap.la: No such file or directory
+ /bin/sed: can't read /usr/lib/libldap.la: No such file or directory
 
 
