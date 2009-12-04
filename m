@@ -1,34 +1,40 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from mail-fx0-f225.google.com ([209.85.220.225])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NGUGu-0005Ac-S0
+	(envelope-from <martin.jansa@gmail.com>) id 1NGUqO-00087h-3Q
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Dec 2009 10:16:20 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NGUFM-00066g-Lo
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Dec 2009 09:14:40 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1NGUFM-0005P9-Hx
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Dec 2009 09:14:40 +0000
-From: Phil Blundell <philb@gnu.org>
+	Fri, 04 Dec 2009 10:52:59 +0100
+Received: by fxm25 with SMTP id 25so2248457fxm.26
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Dec 2009 01:51:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type;
+	bh=JQ8O2dYjf26cYrXb/q2lYt1IM8aAirlodooxe0WBj/c=;
+	b=WVLqJn3NYhI3UBX9raL93n2byXYBhgNOrVmvTaIE45/bPnA/XBC+UyfWRn9XYt5sem
+	WYD1dB1eV6LV0geXBrnV9xlTOl+HO+ci0JlGEDpEhVPLjiCOgjSK90xcaQep8en5RMYv
+	wvQ0yAADp6aE3stIxUoO7fw+2eUxR3pRVFUpc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	b=S3PumBnGGvOPz2BI7CBqZFY78diyUfrGSEv8kJT9QUh8a1n57NvlXruTuerZmEddlE
+	6nyi5OG5mo34i0CPy/m9FttGLdISFyev6v7yP9L5647Eclt+PltWir3Sz0zF8Kardjdj
+	sq2FsQ4vCQDFb///k3N1kOFiQk7LitkMCJRxE=
+MIME-Version: 1.0
+Received: by 10.223.144.85 with SMTP id y21mr455677fau.1.1259920279311; Fri, 
+	04 Dec 2009 01:51:19 -0800 (PST)
+In-Reply-To: <E1NGUiP-00061U-6s@melo.openembedded.org>
+References: <E1NGUiP-00061U-6s@melo.openembedded.org>
+Date: Fri, 4 Dec 2009 10:51:18 +0100
+Message-ID: <141020e30912040151l26670979g9cb02c4d4539da38@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4B18BA2B.40602@SSpaeth.de>
-References: <1259911168-19992-1-git-send-email-Sebastian@SSpaeth.de>
-	<1259911168-19992-2-git-send-email-Sebastian@SSpaeth.de>
-	<4B18BA2B.40602@SSpaeth.de>
-Date: Fri, 04 Dec 2009 09:14:37 +0000
-Message-Id: <1259918077.779.11.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+X-SA-Exim-Connect-IP: 209.85.220.225
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 2/2] task-base: Introduce DISTRO_apm and convert recipes to use it.
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: openembedded-commits@openembedded.org
+Subject: Re: [oe-commits] David-John Willis : font-util: Add 1.1.1 target and native.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,39 +48,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Dec 2009 09:16:20 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 04 Dec 2009 09:52:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, 2009-12-04 at 08:28 +0100, Sebastian Spaeth wrote:
-> This is my take on solving our problem that we want a different "apm"
-> provider. Koen outlined this solution, so this way I went.
-> 
-> All recipes that RDPEND on "apm" basically get a
-> 
-> DISTRO_apm ?= "apm"
-> RDEPEND    += ${DISTRO_apm}
-> 
-> This could also be done with a virtual/apm package, and a
-> PREFERED_PROVIDER set to apm for all distros. Which would even be
-> cleaner I think, with the downside that all other distros would need to
-> set a prefered provider too.
+On Fri, Dec 4, 2009 at 10:44 AM, git version control <
+git@git.openembedded.org> wrote:
 
-The latter approach does sound rather better to me.  This is exactly
-what virtuals are for, and I'm not sure that we want a massive
-proliferation of DISTRO_foo variables that effectively shadow
-PREFERRED_PROVIDER. 
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: a0fb85891d24df07bd140f0b9f277e9ebb3768d7
+> URL:
+> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=a0fb85891d24df07bd140f0b9f277e9ebb3768d7
+>
+> Author: David-John Willis <John.Willis@Distant-earth.com>
+> Date:   Thu Dec  3 09:30:27 2009 +0000
+>
+> font-util: Add 1.1.1 target and native.
+>
 
-You're right that there is a bit of an issue with adding new virtuals,
-in that old distros need to remain pinned to the provider they were
-getting previously rather than being left to flap in the wind.  Your
-proposal of adding a new include file sounds like a reasonable way to
-address that, though I'm not completely enamoured of the "sane-"
-terminology.  I think something like "compatibility-providers.inc" or
-even "legacy-providers.inc" would better capture what the file is for.
-
-p.
+http://cgit.openembedded.net/cgit.cgi/openembedded/commit/?h=martin_jansa/xorg-7.5&id=c465d9fcf16a6e42afc2f984978ddeaacd9568d3
 
 
+You still probably need this patch.
 
+Would be great to merge it from that branch first, I like INC_PR but now
+I'll get lots of conflicts in all font packages and I'll have to update font
+recipes in that branch to INC_PR too :/.
+
+BTW: as I don't have all angstrom/OE supported devices to test xorg-7.5
+there, I won't merge that branch to oe.dev myself, I need  help from
+device/distro maintainers, please...
+
+Regards,
+
+
+>
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+>
 
