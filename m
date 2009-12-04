@@ -1,38 +1,28 @@
-Received: from mail-pz0-f192.google.com ([209.85.222.192])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1NGZOs-0005Ij-5O
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mickey@vanille-media.de>) id 1NGZbL-0005aq-F1
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Dec 2009 15:44:53 +0100
-Received: by pzk30 with SMTP id 30so2340550pzk.24
+	Fri, 04 Dec 2009 15:57:46 +0100
+Received: from [192.168.1.12] (dialbs-092-079-168-007.static.arcor-ip.net
+	[92.79.168.7])
+	by drlauer-research.com (Postfix) with ESMTP id 8E9C65846E9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Dec 2009 06:43:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=gqzTKcm1IW3LQAN4aGOeWNYwuZnzUMSmu4LUdRj0Xc4=;
-	b=BYjX52KLed2PPRHAdo4h1y+d4Pyb9vkfDISr1pSkX3oZTv6AO7UNv/gdiKoDNRmpW5
-	3HajkIkDoktGQrNlF89nueJX7aZgWsMjDwJB+rjNAMsaFrmfavPEQd8IWWjvLpYpaPiF
-	wPpWYrfu19QNxA+R1rYJfVfAP/nQKqEc47azs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=RIhB7kHTuj0xmhy77cvxQqD5EKRB9fkvVQbUHwnYhjqvoB/t7RC4xA4kEVi7cCP031
-	MXO+qd0kQTxZ2fQMtBBmxGft6Ouw6MrIDuDlyJcoMeWmDAMIuQqlRtCLAkwVQkvIPNba
-	42dOa6EORRpEDUoFD9nWInMEGm8zv1JjdIW8k=
-MIME-Version: 1.0
-Received: by 10.140.247.21 with SMTP id u21mr202179rvh.3.1259937792228; Fri, 
-	04 Dec 2009 06:43:12 -0800 (PST)
-In-Reply-To: <BAY127-W12EABE192FF93EC42483CFD8930@phx.gbl>
-References: <BAY127-W12EABE192FF93EC42483CFD8930@phx.gbl>
-Date: Fri, 4 Dec 2009 15:43:12 +0100
-Message-ID: <d1b08f940912040643k2d5dc2a5j3b72bb9e18bce88c@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Fri,  4 Dec 2009 16:44:00 +0100 (CET)
+Mime-Version: 1.0 (Apple Message framework v1077)
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+In-Reply-To: <4B191AC0.80807@mwester.net>
+Date: Fri, 4 Dec 2009 15:56:07 +0100
+Message-Id: <F953E3E9-F54E-4B54-9398-D23EBDA0209E@vanille-media.de>
+References: <4B18811D.8020206@mwester.net>
+	<6ec4247d0912032053g5f4963a7t6280f5341cce12e8@mail.gmail.com>
+	<4B191AC0.80807@mwester.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.222.192
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+X-Mailer: Apple Mail (2.1077)
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Facing problem with "bitbake" command
+Subject: Re: Commit 2fdf1aa1c869ea9deecee86206f49a2eca9d7c00 breaks opkg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,18 +36,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Dec 2009 14:44:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-
-> [root@localhost build]# bitbake nano
-> bash: bitbake: command not found
-> [root@localhost build]#
->
-> Plz tell me where might be the problem.
-
-First problem is you're building as root...
+X-List-Received-Date: Fri, 04 Dec 2009 14:57:46 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
 
-Andrea
+Am 04.12.2009 um 15:20 schrieb Mike Westerhof:
+> So I'm leaning toward the latter solution right now - I don't want to
+> anger those who found the opkg recipe rewrites beneficial.  So I'll
+> rephrase it now:  If you have valid objections to my creating a custom
+> SlugOS opkg recipe, voice those concerns now. :)
+
+My concern is probably not valid, since I'm not volunteering to do the =
+hard work on it,
+but obviously I do not fancy multiple versions of one software where =
+each variant
+sucks in another way...
+
+:M:
+
 
 
