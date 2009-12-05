@@ -1,42 +1,39 @@
-Received: from mail-bw0-f217.google.com ([209.85.218.217])
+Received: from mail-pw0-f53.google.com ([209.85.160.53])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <d.vinokuroff@gmail.com>) id 1NGtsD-0001a3-6R
+	(envelope-from <darkstar6262@gmail.com>) id 1NGztE-0007bq-B4
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Dec 2009 13:36:32 +0100
-Received: by bwz9 with SMTP id 9so2463444bwz.12
+	Sat, 05 Dec 2009 20:01:59 +0100
+Received: by pwj11 with SMTP id 11so2888126pwj.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Dec 2009 04:34:51 -0800 (PST)
+	Sat, 05 Dec 2009 11:00:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=5j4up4UTnrIOBpwu6IkJmOsUNCGfmzj2Ylk8C7GeXiM=;
-	b=RhGN6yeoKEGhRBwGx9BKCDGoblkU64GhwFPqcW0gambTWZMNDd3jpLaBAgwNHIOKhL
-	FgDZuADio5TzmnyJZEWytMQVX6ZsTO/V6wevO7rBpg19f5z61KBwsiClHpTI61iqcV1n
-	QExCChqztqp1d/sofPrsiJVKAEdV+AR7LZZR8=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=AxWGGz1STVkepYO8RVQOddWDRu3egNJdLRKL8j23L7g=;
+	b=eBUkEauLXe8wZGhbTxzR9s/vzUPU67Ny9hSisBwExxurMDeigMO92oCA1qv5HpB5Hk
+	1vPC6ZIYGQK67tc1lkE7NdCEARF+FGpTDkFnYMi6M0el+5U8FrOVS1dbCLIcqEyeoGV8
+	1fo3/dcrLj/JFKuSriXyKu8wRjt9i8wxJh5Xg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=KpV2Rkje6QyX7hvuA5xhhCgRCEcjpOjR80DcX5r3EYUSQEszylR+D2kcRIXTo8D1/Q
-	8NZED5Bm8Ws3qDzXR9+EXmTCEYJEacTDGCnL+snI2PkPlUj6Efg4xJfFeiYxv5kqqxPQ
-	uU0vy/D3DkBTmNKTVv5QA+6qYJIVwyprA1MDM=
-Received: by 10.204.20.143 with SMTP id f15mr4500565bkb.49.1260016491378;
-	Sat, 05 Dec 2009 04:34:51 -0800 (PST)
-Received: from ?192.168.0.101? ([94.180.13.80])
-	by mx.google.com with ESMTPS id 14sm1104699bwz.5.2009.12.05.04.34.49
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=fF4gFZ0iojJjwRuP9wEQ99doVPF18hFoH6NSQPRshPOOCDLcUUMQpZ4LERLHoBO2HE
+	TFFKzbQMFqlKjZDsls4GGGNWRrJMa5LG1rtri43de104vhNxkGsHSJFiMBuN6ZqdRCWy
+	3YRoEDlcyDEuUcHx1iUsMqZ7IFoljK2rRytdc=
+Received: by 10.115.99.11 with SMTP id b11mr7169100wam.17.1260039617322;
+	Sat, 05 Dec 2009 11:00:17 -0800 (PST)
+Received: from localhost (97-126-116-159.tukw.qwest.net [97.126.116.159])
+	by mx.google.com with ESMTPS id 20sm3516423pzk.9.2009.12.05.11.00.16
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 05 Dec 2009 04:34:50 -0800 (PST)
-Message-ID: <4B1A531A.6010401@gmail.com>
-Date: Sat, 05 Dec 2009 17:33:30 +0500
-From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20091001)
-MIME-Version: 1.0
+	Sat, 05 Dec 2009 11:00:16 -0800 (PST)
+From: Cory Maccarrone <darkstar6262@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: d.vinokuroff@gmail.com
+Date: Sat,  5 Dec 2009 11:00:02 -0800
+Message-Id: <1260039602-21665-1-git-send-email-darkstar6262@gmail.com>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 209.85.160.53
+X-SA-Exim-Mail-From: darkstar6262@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Updating packages list
+Subject: [STABLE] [PATCH] icu: Add patch for dangling #elif expression
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,24 +47,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Dec 2009 12:36:32 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 05 Dec 2009 19:01:59 -0000
 
-Hello,
+This change adds a patch that fixes a compile error in
+source/layoutex/ParagraphLayout.cpp caused by an
 
-Began working with package feeds and can't understand one thing -- when 
-Packages lists (such as tmp/deploy/ipk/Packages.gz) are updated on the 
-server side. Could anybody explain it, please?
+Signed-off-by: Cory Maccarrone <darkstar6262@gmail.com>
+---
+ recipes/icu/files/fix-elif-expression.patch |   11 +++++++++++
+ recipes/icu/icu-3.6.inc                     |    3 ++-
+ 2 files changed, 13 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/icu/files/fix-elif-expression.patch
 
-For example, I built new package, let it be helloworld, and the package 
-exist in tmp/deploy/ipk/armv5te, but there is no helloworld in 
-tmp/deploy/ipk/armv5te/Packages, Packages.gz etc.
-
+diff --git a/recipes/icu/files/fix-elif-expression.patch b/recipes/icu/files/fix-elif-expression.patch
+new file mode 100644
+index 0000000..6021bee
+--- /dev/null
++++ b/recipes/icu/files/fix-elif-expression.patch
+@@ -0,0 +1,11 @@
++--- source/layoutex/ParagraphLayout.cpp	2006-08-22 17:12:42.000000000 -0700
+++++ source/layoutex/ParagraphLayout.cpp-new	2009-12-05 10:35:04.728241416 -0800
++@@ -798,7 +798,7 @@
++ 
++     return nullLanguageCode;
++ }
++-#elif
+++#else
++ 
++ // TODO - dummy implementation for right now...
++ le_int32 ParagraphLayout::getLanguageCode(const Locale *locale)
+diff --git a/recipes/icu/icu-3.6.inc b/recipes/icu/icu-3.6.inc
+index 04fc842..aaacd83 100644
+--- a/recipes/icu/icu-3.6.inc
++++ b/recipes/icu/icu-3.6.inc
+@@ -1,7 +1,8 @@
+ 
+ LICENSE = "ICU"
+ 
+-SRC_URI = "ftp://ftp.software.ibm.com/software/globalization/icu/3.6/icu4c-3_6-src.tgz"
++SRC_URI = "ftp://ftp.software.ibm.com/software/globalization/icu/3.6/icu4c-3_6-src.tgz \
++           file://fix-elif-expression.patch;patch=1"
+ 
+ S = "${WORKDIR}/icu/source"
+ 
 -- 
-Best Regards, 
-Dmitry Vinokurov 
-<d.vinokuroff@gmail.com>
+1.6.3.3
 
 
 
