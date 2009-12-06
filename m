@@ -1,33 +1,26 @@
-Received: from mail-yx0-f175.google.com ([209.85.210.175])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1NHIX7-0007No-QL
+	(envelope-from <philip@balister.org>) id 1NHKZ8-0002hw-Qc
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Dec 2009 15:56:24 +0100
-Received: by yxe5 with SMTP id 5so1534595yxe.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Dec 2009 06:54:42 -0800 (PST)
-Received: by 10.90.11.10 with SMTP id 10mr6169579agk.51.1260111281832;
-	Sun, 06 Dec 2009 06:54:41 -0800 (PST)
-Received: from localhost (166-70-153-80.ip.xmission.com [166.70.153.80])
-	by mx.google.com with ESMTPS id 20sm2910409iwn.9.2009.12.06.06.54.40
-	(version=SSLv3 cipher=RC4-MD5); Sun, 06 Dec 2009 06:54:41 -0800 (PST)
-Date: Sun, 6 Dec 2009 07:54:42 -0700
-From: Graeme Gregory <dp@xora.org.uk>
+	Sun, 06 Dec 2009 18:06:38 +0100
+Received: (qmail 14733 invoked by uid 1003); 6 Dec 2009 17:04:54 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 6 Dec 2009 17:04:54 -0000
+Message-ID: <4B1BE435.7080805@balister.org>
+Date: Sun, 06 Dec 2009 12:04:53 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
+	Thunderbird/3.0b4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091206075442.5eda3c23@xora.org.uk>
-In-Reply-To: <ac9c93b10912060417x27e41790k5c1826d19898b7dc@mail.gmail.com>
-References: <4B14BAD9.2060402@fqingenieria.es>
-	<20091201072521.GA11505@denix.org> <4B14D2E1.6050506@SSpaeth.de>
-	<20091201194025.GB11505@denix.org> <4B1611C3.7050101@SSpaeth.de>
-	<20091202114959.GA8668@zlo.nu>
-	<ac9c93b10912060417x27e41790k5c1826d19898b7dc@mail.gmail.com>
-X-Mailer: Claws Mail 3.7.3 (GTK+ 2.18.3; i686-redhat-linux-gnu)
-Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 209.85.210.175
-X-SA-Exim-Mail-From: dp@xora.org.uk
+References: <1260039602-21665-1-git-send-email-darkstar6262@gmail.com>
+In-Reply-To: <1260039602-21665-1-git-send-email-darkstar6262@gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Recipes relation tree
+Subject: Re: [STABLE] [PATCH] icu: Add patch for dangling #elif expression
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,24 +34,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Dec 2009 14:56:25 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Sun, 06 Dec 2009 17:06:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Sun, 6 Dec 2009 13:17:16 +0100
-Frans Meulenbroeks <fransmeulenbroeks@gmail.com> wrote:
+On 12/05/2009 02:00 PM, Cory Maccarrone wrote:
+> This change adds a patch that fixes a compile error in
+> source/layoutex/ParagraphLayout.cpp caused by an
+>
+> Signed-off-by: Cory Maccarrone<darkstar6262@gmail.com>
 
-> It would also be nice to be able to get the used by information.
-> E.g. if I change a package (especially wrt staging) I would like to
-> verify that the packages which use the modified package still build.
-> 
-> The current el-cheapo solution for a package XYZ is to do something
-> like a grep  DEPENDS.*XYZ */*.bb but of course that won't work if
-> DEPENDS spans multiple lines.
-> 
-bitbake -g target will drop a dependency graph in the directory you run
-bitbake from.
+Acked-by: Philip Balister <philip@balister.org>
 
-Graeme
+When I push this, I'll will add another patch adding INC_PR to the 
+recipe. In the future bump the PR to force rebuilds. I had to manually 
+clean the icu-native recipe after duplicating the original failure.
+
+Philip
+
+> ---
+>   recipes/icu/files/fix-elif-expression.patch |   11 +++++++++++
+>   recipes/icu/icu-3.6.inc                     |    3 ++-
+>   2 files changed, 13 insertions(+), 1 deletions(-)
+>   create mode 100644 recipes/icu/files/fix-elif-expression.patch
+>
+> diff --git a/recipes/icu/files/fix-elif-expression.patch b/recipes/icu/files/fix-elif-expression.patch
+> new file mode 100644
+> index 0000000..6021bee
+> --- /dev/null
+> +++ b/recipes/icu/files/fix-elif-expression.patch
+> @@ -0,0 +1,11 @@
+> +--- source/layoutex/ParagraphLayout.cpp	2006-08-22 17:12:42.000000000 -0700
+> ++++ source/layoutex/ParagraphLayout.cpp-new	2009-12-05 10:35:04.728241416 -0800
+> +@@ -798,7 +798,7 @@
+> +
+> +     return nullLanguageCode;
+> + }
+> +-#elif
+> ++#else
+> +
+> + // TODO - dummy implementation for right now...
+> + le_int32 ParagraphLayout::getLanguageCode(const Locale *locale)
+> diff --git a/recipes/icu/icu-3.6.inc b/recipes/icu/icu-3.6.inc
+> index 04fc842..aaacd83 100644
+> --- a/recipes/icu/icu-3.6.inc
+> +++ b/recipes/icu/icu-3.6.inc
+> @@ -1,7 +1,8 @@
+>
+>   LICENSE = "ICU"
+>
+> -SRC_URI = "ftp://ftp.software.ibm.com/software/globalization/icu/3.6/icu4c-3_6-src.tgz"
+> +SRC_URI = "ftp://ftp.software.ibm.com/software/globalization/icu/3.6/icu4c-3_6-src.tgz \
+> +           file://fix-elif-expression.patch;patch=1"
+>
+>   S = "${WORKDIR}/icu/source"
+>
 
 
