@@ -1,27 +1,26 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NHOXG-0002QO-Dc
+Received: from smtpauth01.prod.mesa1.secureserver.net ([64.202.165.181])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1NHOvR-0002xd-Am
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Dec 2009 22:20:57 +0100
-Received: from [85.210.162.25] (helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NHOVh-0005L8-DC
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Dec 2009 21:19:17 +0000
-From: Phil Blundell <philb@gnu.org>
+	Sun, 06 Dec 2009 22:45:56 +0100
+Received: (qmail 920 invoked from network); 6 Dec 2009 21:37:33 -0000
+Received: from unknown (209.242.7.187)
+	by smtpauth01.prod.mesa1.secureserver.net (64.202.165.181) with ESMTP;
+	06 Dec 2009 21:37:33 -0000
+Message-ID: <4B1C241D.4010700@mwester.net>
+Date: Sun, 06 Dec 2009 15:37:33 -0600
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23 Mnenhy/0.7.6.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <loom.20091204T213241-372@post.gmane.org>
-References: <loom.20091204T213241-372@post.gmane.org>
-Date: Sun, 06 Dec 2009 21:19:15 +0000
-Message-ID: <1260134355.6896.4.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-Broken-Reverse-DNS: no host name found for IP address 85.210.162.25
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+References: <4B0D6590.2040009@mwester.net>
+In-Reply-To: <4B0D6590.2040009@mwester.net>
+X-SA-Exim-Connect-IP: 64.202.165.181
+X-SA-Exim-Mail-From: mike@mwester.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Questions about gcc target packages
+Subject: Re: sane-backends-1.0.20 failing to build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,24 +34,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Dec 2009 21:20:57 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 06 Dec 2009 21:45:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2009-12-04 at 20:49 +0000, Jeremy Williams wrote:
-> Looking into the first issue reveals something puzzling to me. If you look at
-> gcc-package-target.inc, the do_install operation creates a .so symlink to
-> libgcc. Looking at the FILES definition for the gcc package (non -dev), it
-> appears that this symlink is being sucked into the package by the entry
-> "${gcclibdir}/${TARGET_SYS}/${BINV}/lib*". Am I confused here?
+Mike Westerhof wrote:
+> Something is rather fishy with the sane-backends that was just committed
+> -- anyone else see failures similar to this?  (Looks like the
+> mkinstalldirs script doesn't take the -g option?)
 
-I think you're probably right, and the QA test is just wrong/unhelpful
-in this situation.  Having the .so symlink in the gcc package is the
-correct thing to do: it would be silly to force everybody to install an
-extra gcc-dev package in order to get it.
+Digging into this to find out why it works on one of my build machines
+and not on the other reveals that the failure only occurs if the user
+doing the build is a member of the "uucp" group.
 
-p.
+The configure script is attempting to determine if it should/can change
+the group ownership of the lock directory during install.
 
+We can fix this by disabling the lockfile mechanism by passing the
+appropriate --without or --disable flags to configure, if anyone cares
+enough.  In the meantime, I've fixed it for my builder by removing
+myself from the "uucp" group.
 
+-Mike (mwester)
 
 
