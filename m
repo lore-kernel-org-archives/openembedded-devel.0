@@ -1,48 +1,46 @@
-Received: from ey-out-1920.google.com ([74.125.78.147])
+Received: from mail-ew0-f224.google.com ([209.85.219.224])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1NHPsJ-0000cG-GV
+	(envelope-from <leon.woestenberg@gmail.com>) id 1NHPsK-0000a6-1P
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Dec 2009 23:46:46 +0100
-Received: by ey-out-1920.google.com with SMTP id 5so985082eyb.4
+	Sun, 06 Dec 2009 23:46:47 +0100
+Received: by ewy24 with SMTP id 24so4866271ewy.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Dec 2009 14:45:06 -0800 (PST)
+	Sun, 06 Dec 2009 14:45:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=bsGnbRZQ4kTQOicrkpNb7om9BygakcNALnFAsEAPAWA=;
-	b=WNqsXoxdcq/2NOALP6AmTyTUpvfemD/H2x0E2Z6fVr0SAwObHK1HYCxsA4rBvN4kLn
-	trdKWTtc78049I4IPhAAUPWxhuXYCtreydKnIRrUdRjLPOyAq1BdglF6///I84daOtb/
-	aZwqa4Vo9+0Byv7R7lskJh/W4RC+ldaqToxdE=
+	bh=496jp8i9C2fk8FCgP16MFmNHqkUBASwNMCV6bVcy8c0=;
+	b=MBjtvFPSe24O/43HVHrQAIjF8iK2x5YQWf7fExYtqAvmIkSh8yWf7f9IiZL2L4op8W
+	wRzuSClg8IuiSuuPnhM/wiVsQHNaNJOHeF4xAVJbwEtBLGLZiiWKMAtJZRO/vDZrmsct
+	ZMVImRz2YUdll8KOfasm5utTJkONXABQzT/xw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=wolWbmcxkNcVu3EWg1fW0Pw3dOoDBbslSCWar6Jm2IWwBPHl8ROUr75L1qoWGLAGv/
-	+bpULGMVe/UI1eZQXkFy7fw/h3hnQFGecvzdAmb/dkTgdCAgMZwsE6reyvYaJjE+ojyP
-	E7GGn1Kd1aFpeE/BT9BedZe65ikv22UjOj6RU=
-Received: by 10.213.104.78 with SMTP id n14mr6300290ebo.22.1260139506561;
-	Sun, 06 Dec 2009 14:45:06 -0800 (PST)
+	b=apNm5AO3p8+K5vZNRumCzeMAf98P1EkkGlt1hb3QTGqpASupoRE1gX2DN0MaT9Ew/x
+	dhBHbhMxPAT1Zr1MzWrnHYCZxl4yP1zNbUVtXFRgypMJle6u4h5f2hPE5RB38kCBfXDL
+	BOpFigP57nkaH17yC0MyUFIXgQMMTp1hx5ZVg=
+Received: by 10.213.110.9 with SMTP id l9mr6291152ebp.14.1260139505259;
+	Sun, 06 Dec 2009 14:45:05 -0800 (PST)
 Received: from localhost.localdomain (82-171-51-231.ip.telfort.nl
 	[82.171.51.231])
-	by mx.google.com with ESMTPS id 15sm3113864ewy.12.2009.12.06.14.45.05
+	by mx.google.com with ESMTPS id 15sm3113864ewy.12.2009.12.06.14.45.04
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 06 Dec 2009 14:45:06 -0800 (PST)
+	Sun, 06 Dec 2009 14:45:04 -0800 (PST)
 From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  6 Dec 2009 23:44:42 +0100
-Message-Id: <1260139496-21442-7-git-send-email-leon@sidebranch.com>
+Date: Sun,  6 Dec 2009 23:44:40 +0100
+Message-Id: <1260139496-21442-5-git-send-email-leon@sidebranch.com>
 X-Mailer: git-send-email 1.6.0.4
-In-Reply-To: <1260139496-21442-6-git-send-email-leon@sidebranch.com>
+In-Reply-To: <1260139496-21442-4-git-send-email-leon@sidebranch.com>
 References: <1260139496-21442-1-git-send-email-leon@sidebranch.com>
 	<1260139496-21442-2-git-send-email-leon@sidebranch.com>
 	<1260139496-21442-3-git-send-email-leon@sidebranch.com>
 	<1260139496-21442-4-git-send-email-leon@sidebranch.com>
-	<1260139496-21442-5-git-send-email-leon@sidebranch.com>
-	<1260139496-21442-6-git-send-email-leon@sidebranch.com>
-X-SA-Exim-Connect-IP: 74.125.78.147
+X-SA-Exim-Connect-IP: 209.85.219.224
 X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Cc: Leon Woestenberg <leon@sidebranch.com>
-Subject: [PATCH] elf2flt-cross_nios2-git.bb: elf2flt-cross for nios2.
+Subject: [PATCH] binutils-cross.inc: Stage libiberty.h for elf2flt linker wrapper.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,42 +54,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Dec 2009 22:46:46 -0000
+X-List-Received-Date: Sun, 06 Dec 2009 22:46:47 -0000
 
-This is from a non-upstream GIT'd fork of elf2flt, community
-maintained.
+For non-MMU targets, the binutils linker is wrapped by elf2flt,
+which converts ELF into a flat memory space file.
+
+The elf2flt-cross tool needs libiberty staged. This patch stages
+the header file. The library seems staged into cross elsewhere,
+although it is vague under old packaged-staging how exactly.
 
 Tested-by: Walter Goossens <walter.goossens@axon.tv>
-Tested-by: Leon Woestenberg <leon@sidebranch.com>
 Signed-off-by: Leon Woestenberg <leon@sidebranch.com>
 ---
- recipes/elf2flt/elf2flt-cross_nios2-git.bb |   17 +++++++++++++++++
- 1 files changed, 17 insertions(+), 0 deletions(-)
- create mode 100644 recipes/elf2flt/elf2flt-cross_nios2-git.bb
+ conf/distro/angstrom-2008.1.conf        |    2 +-
+ conf/distro/include/angstrom-uclibc.inc |    2 +-
+ recipes/binutils/binutils-cross.inc     |    3 +++
+ 3 files changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/elf2flt/elf2flt-cross_nios2-git.bb b/recipes/elf2flt/elf2flt-cross_nios2-git.bb
-new file mode 100644
-index 0000000..a7925cd
---- /dev/null
-+++ b/recipes/elf2flt/elf2flt-cross_nios2-git.bb
-@@ -0,0 +1,17 @@
-+DESCRIPTION = "Elf2flt is a wrapper around the linker for uclinux platforms"
-+PV = "0.1"
-+DEPENDS = "binutils-cross zlib-native"
+diff --git a/conf/distro/angstrom-2008.1.conf b/conf/distro/angstrom-2008.1.conf
+index abc9a93..51d8242 100644
+--- a/conf/distro/angstrom-2008.1.conf
++++ b/conf/distro/angstrom-2008.1.conf
+@@ -79,7 +79,7 @@ PREFERRED_VERSION_linux-handhelds-2.6 ?= "2.6.21-hh20"
+ #KERNEL_INITRAMFS_PATH = "${KERNEL_INITRAMFS_DIR}/$(readlink ${KERNEL_INITRAMFS_DIR}initramfs-bootmenu-image-${MACHINE}.cpio.gz)"
+ 
+ #This is unrelated to the kernel version, but userspace apps (e.g. HAL) require a recent version to build against
+-PREFERRED_VERSION_linux-libc-headers 	= "2.6.31"
++PREFERRED_VERSION_linux-libc-headers 	?= "2.6.31"
+ 
+ #Prefer glibc 2.6 and uclibc 0.9.30, these have had the most testing.
+ PREFERRED_VERSION_glibc 		?= "2.9"
+diff --git a/conf/distro/include/angstrom-uclibc.inc b/conf/distro/include/angstrom-uclibc.inc
+index 004d904..e49d078 100644
+--- a/conf/distro/include/angstrom-uclibc.inc
++++ b/conf/distro/include/angstrom-uclibc.inc
+@@ -27,7 +27,7 @@ BUILD_OPTIMIZATION = "-O2 -ggdb3"
+ #Note that this testing was done without the gcc-pr32889.patch.
+ FULL_OPTIMIZATION_avr32 = "-Os -fomit-frame-pointer"
+ 
+-TARGET_LINK_HASH_STYLE = "${@['-Wl,--hash-style=gnu',''][bb.data.getVar('TARGET_ARCH',d,1) in ['mips', 'mipsel', 'avr32']]}"
++TARGET_LINK_HASH_STYLE = "${@['-Wl,--hash-style=gnu',''][bb.data.getVar('TARGET_ARCH',d,1) in ['mips', 'mipsel', 'avr32', 'nios2']]}"
+ 
+ CXXFLAGS += "-fvisibility-inlines-hidden"
+ 
+diff --git a/recipes/binutils/binutils-cross.inc b/recipes/binutils/binutils-cross.inc
+index 5808c1f..a113f7e 100644
+--- a/recipes/binutils/binutils-cross.inc
++++ b/recipes/binutils/binutils-cross.inc
+@@ -11,6 +11,9 @@ EXTRA_OECONF = "--with-sysroot=${STAGING_DIR_TARGET} \
+ do_stage () {
+ 	oe_runmake install
+ 
++	install -d ${CROSS_DIR}/include
++	install -m 0644 ${S}/include/libiberty.h ${CROSS_DIR}/include
 +
-+inherit autotools cross
-+
-+SRC_URI = "git://sopc.et.ntust.edu.tw/git/elf2flt.git;protocol=git;branch=nios2;tag=7f2f6c6b107fb18b6b6d3692b273a00315948da4"
-+
-+S = "${WORKDIR}/git"
-+
-+EXTRA_OECONF = " --with-libiberty=${CROSS_DIR}/lib/libiberty.a \
-+                 --with-libbfd=${CROSS_DIR}/${HOST_SYS}/${TARGET_SYS}/lib/libbfd.a \
-+                 --with-bfd-include-dir=${CROSS_DIR}/${HOST_SYS}/${TARGET_SYS}/include \
-+                 --with-binutils-include-dir=${CROSS_DIR}/include \
-+                 --disable-emit-relocs \
-+               "
-+
+ 	# We don't really need these, so we'll remove them...
+ 	rm -rf ${CROSS_DIR}/lib/ldscripts
+ 	rm -rf ${CROSS_DIR}/share/info
 -- 
 1.6.0.4
 
