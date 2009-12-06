@@ -1,40 +1,38 @@
-Received: from mail-ew0-f224.google.com ([209.85.219.224])
+Received: from fg-out-1718.google.com ([72.14.220.152])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1NHPus-0002YZ-Iu
+	(envelope-from <otavio.salvador@gmail.com>) id 1NHQIk-00032u-37
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Dec 2009 23:49:25 +0100
-Received: by ewy24 with SMTP id 24so4867957ewy.26
+	Mon, 07 Dec 2009 00:14:05 +0100
+Received: by fg-out-1718.google.com with SMTP id 16so443713fgg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Dec 2009 14:47:41 -0800 (PST)
+	Sun, 06 Dec 2009 15:12:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=7+DyvDaUSbAi+2sseN0aw8hRqoteZ4XnhVbawuAQ5uQ=;
-	b=hN7tNaBPekeUdpGSv1VH8e6XAUAd0jAunEfJYCrU/6CC4EPVXtcB1kAxUsVHfgZDOq
-	2Vmdu1aDCUedutFklLWw8IDhfWFerPTz5mQpcIF6obdsPualXuAaSrr/IdtltvDRZVRc
-	DylF9HAVDBKEnNCId/f3waoAardfixCcoOhhE=
+	h=domainkey-signature:mime-version:sender:received:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=vgfJRdHa4QC59CeLoVCi3wsWw1qtWO4afPcqUXBtMXA=;
+	b=HXrMDjKqia5tsBv+RGGYuy+ivO7mDPENA/3upFLvLrDelZkUVa4dbAM+0RhZ5FbYVJ
+	MrXMTME9fbXb3vpFOSCtB0UNO1bOQ81ZW9JTsXXkvPRr6pML4YmFFKQkb3wFCkU4YqbF
+	rd/c8wp66OZtYQf9zs4aTbdjdexej0uAkYpUg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=CFBLTJBqyeGaJttuhAxk10gowCE1LsQhkagWqS0OXZPYN1h7FHHLm8gZ3+8foz4Dau
-	A6exVQfrG45ohX+/GOFOKgEoeI+tg8X0lRwpEXtbDwwdyLQERFkFqciV8sDDm0WO25OO
-	wK9yaFACeOSNOqZ9AgdHNevTv0gwfRoF5g9yU=
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	b=i6LK4fH3G46AAew2z5/QnMRdYpUqJk5TVJQBrr/0/7AFV8PkWVXW0tBR4LuA5OjqmE
+	q9uuKmvBcB+aa/QEU7ckGMFSM9iNYxxZLfQmd6QJUmoB1rRBmbGgGbmWiBH3GN2bdFFl
+	uHKFGz2J+Y0ZDRk7WnFPbdrJeJB82eDNLY3DM=
 MIME-Version: 1.0
-Received: by 10.213.25.67 with SMTP id y3mr6063787ebb.48.1260139661151; Sun, 
-	06 Dec 2009 14:47:41 -0800 (PST)
-In-Reply-To: <1260133938.6896.2.camel@lenovo.internal.reciva.com>
-References: <c384c5ea0912061249g6201f0adwc6ff58ff20d68331@mail.gmail.com>
-	<1260133938.6896.2.camel@lenovo.internal.reciva.com>
-Date: Sun, 6 Dec 2009 23:47:41 +0100
-Message-ID: <c384c5ea0912061447v22a53b90jc71a893e0ac067ec@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.224
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+Sender: otavio.salvador@gmail.com
+Received: by 10.239.130.145 with SMTP id 17mr568005hbj.52.1260141145076; Sun, 
+	06 Dec 2009 15:12:25 -0800 (PST)
+Date: Sun, 6 Dec 2009 21:12:25 -0200
+X-Google-Sender-Auth: 91cb19ac1d8b08d2
+Message-ID: <be7a9f3d0912061512x5bc07adeo82c10cecb19af423@mail.gmail.com>
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 72.14.220.152
+X-SA-Exim-Mail-From: otavio.salvador@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] toolchain team question about libiberty.a
+Subject: [RFH] Best way to handle qt4 native tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,31 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Dec 2009 22:49:25 -0000
+X-List-Received-Date: Sun, 06 Dec 2009 23:14:05 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
 Hello,
 
-On Sun, Dec 6, 2009 at 10:12 PM, Phil Blundell <philb@gnu.org> wrote:
-> On Sun, 2009-12-06 at 21:49 +0100, Leon Woestenberg wrote:
->> can we safely remove this from gcc/gcc-configure-cross.inc?
->>
->> do_stage_append () {
->> =A0 =A0 =A0 =A0 ...
->> =A0 =A0 =A0 =A0 # We use libiberty from binutils
->> =A0 =A0 =A0 =A0 rm -f ${CROSS_DIR}/lib/libiberty.a
->> =A0 =A0 =A0 =A0 ...
->
-> Yes, I think those two lines are bogus and can/should be deleted.
->
-After further discussion on #irc, the commit is here:
-b3312705e639262b3b83017897cd3056b22e8912
+Here at work we'll need to integrate few packages into our OE tree and
+most of them has been quite easy to do, as usual.
 
-(Just in case our analysis was way off and if this needs quick revertion.)
+After integrating most packages we are now on we need to build a
+native tool to be used in the compilation step and this tool depends
+on qt4 to be compiled. So we'd need to have a qt4-x11-free-native
+recipe. What bothers me is that we do most of qt4 compilation already
+in the qt4-tools-native and I wish to discuss the possibility to
+change this to qt4-x11-free-native and this to provide the
+qt4-tools-native one. What people think about it?
 
-Regards,
---=20
-Leon
+Cheers,
+
+-- 
+Otavio Salvador                  O.S. Systems
+E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
+Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
