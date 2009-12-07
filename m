@@ -1,41 +1,29 @@
-Received: from mail-iw0-f198.google.com ([209.85.223.198])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NHhil-0001Qf-1R
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Dec 2009 18:50:06 +0100
-Received: by iwn36 with SMTP id 36so3160288iwn.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Dec 2009 09:48:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=deh48yycP4nubd/4wmGS7RdLiSgArDxasxU6fpiOYAs=;
-	b=rqdOpUqPCB9XxCZmT3HyYvXHMDiX9vet9i8cjxtw14zHClj7mGGBE5/xL05OsVxuo0
-	YGJiroTR0ngTY2ABp6S8ONNFtpebMQqjnqS3cz9tXTq4tKyY76RNqQ1xzlY4tTLeHkUX
-	0cgSrWbeBskuc3522DC/SlUfAEiS51ynhRoIk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=TFcq9jqf7Z55s5QwS74TP1Deu1leBmp7h5MtRiDtq0a+mMQKyeanaugawO9b+JXicB
-	3wzieGPWGnnGEev0z7bkimCsKBynVaFwQW5KErxS4nnYAW2B2rR5gat94zrg2r8vG3uW
-	2ol5sYEs5o83TO1NKf5l5qEnL3PXbCwLK6CFo=
-MIME-Version: 1.0
-Received: by 10.231.125.19 with SMTP id w19mr585783ibr.8.1260208102939; Mon, 
-	07 Dec 2009 09:48:22 -0800 (PST)
-In-Reply-To: <c384c5ea0912061447v22a53b90jc71a893e0ac067ec@mail.gmail.com>
-References: <c384c5ea0912061249g6201f0adwc6ff58ff20d68331@mail.gmail.com>
-	<1260133938.6896.2.camel@lenovo.internal.reciva.com>
-	<c384c5ea0912061447v22a53b90jc71a893e0ac067ec@mail.gmail.com>
-Date: Mon, 7 Dec 2009 09:48:22 -0800
-Message-ID: <19c1b8a90912070948w470f32fej9eb6bb8620994e32@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NHiIg-0005iR-Vn for openembedded-devel@lists.openembedded.org;
+	Mon, 07 Dec 2009 19:27:14 +0100
+Received: from f053037079.adsl.alicedsl.de ([78.53.37.79]
+	helo=[192.168.178.25])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NHiHf-00053B-Fu for openembedded-devel@lists.openembedded.org;
+	Mon, 07 Dec 2009 18:26:07 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.198
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+In-Reply-To: <20091204210112.GA22210@rhein.zuhause.netz>
+References: <1259880334.25344.7.camel@mattotaupa.wohnung.familie-menzel.net>
+	<1259939828.4859.1456.camel@pblack-ubuntu>
+	<20091204210112.GA22210@rhein.zuhause.netz>
+Date: Mon, 07 Dec 2009 19:25:44 +0100
+Message-ID: <1260210344.3403.13.camel@mattotaupa.wohnung.familie-menzel.net>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] toolchain team question about libiberty.a
+Subject: Re: [abiword] CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include/freetype2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,53 +37,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Dec 2009 17:50:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 07 Dec 2009 18:27:14 -0000
+X-Groupsio-MsgNum: 14934
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-gouTAak3cMhakn5W946r"
+
+--=-gouTAak3cMhakn5W946r
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Dec 6, 2009 at 2:47 PM, Leon Woestenberg
-<leon.woestenberg@gmail.com> wrote:
-> Hello,
->
-> On Sun, Dec 6, 2009 at 10:12 PM, Phil Blundell <philb@gnu.org> wrote:
->> On Sun, 2009-12-06 at 21:49 +0100, Leon Woestenberg wrote:
->>> can we safely remove this from gcc/gcc-configure-cross.inc?
->>>
->>> do_stage_append () {
->>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 ...
->>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 # We use libiberty from binutils
->>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 rm -f ${CROSS_DIR}/lib/libiberty.a
->>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 ...
->>
->> Yes, I think those two lines are bogus and can/should be deleted.
->>
-> After further discussion on #irc, the commit is here:
-> b3312705e639262b3b83017897cd3056b22e8912
->
-> (Just in case our analysis was way off and if this needs quick revertion.=
-)
+Am Freitag, den 04.12.2009, 22:01 +0100 schrieb Henning Heinold:
+> The problem here is the libwmf plugin, which is enabled to auto. OE hasnt=
+ packed
+> libwmf yet(besides the lib was last updated 2002). So if you have libwmf-=
+dev package
+> installed on your hostmachine the autotools will find libwmf-config from =
+host
+> and set CLFAGS for the host libwmf, which is infect /usr/include.
 
-binutils maintains its own version and gcc its own for libiberty even
-though the sources are same.
-During build time they do not use the one you install but they use the
-one they build for themselves. So unless some other package is
-requiring this library we can stop installing it altogether in
-binutils as well as in gcc. But if we need to have one copy in the
-installation then
-we should choose whichever is newer of two.
+Based on my tests, that analysis seems to be correct. Thank you!
 
-Thx
--Khem
+> There are 3 solutions:
+>=20
+> - package libwmf into oe
 
->
-> Regards,
-> --
-> Leon
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+I have never done something like this. I hope I will have some time in
+the further.
+
+> - run abiword configure with --enbale-plugin "list of all plugins without=
+ libwmf"
+
+Somehow I did not find the right way to just disable libwmf. The output
+of `./configure --help` only has `--with-libwmf-config` mentioned
+concerting libwmf.
+
+I did also not know what plugins are available. So I removed
+`--enable-plugins` all together from `recipes/abiword/abiword_2.8.1.bb`.
+
+> - edit .m4 files so it dont includes wmf plugin
+
+Did not need to do this.
+
+Should I open a ticket for this issue, so that it will not be forgotten?
 
 
+Thank you and bests,
+
+Paul
+
+--=-gouTAak3cMhakn5W946r
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAksdSKgACgkQPX1aK2wOHVic4ACgjMm49n4y5RGvUuPW5K1yX1VX
+KGUAn3TFrlDwMlG/QxZgfC+oGDMZcM80
+=CcLN
+-----END PGP SIGNATURE-----
+
+--=-gouTAak3cMhakn5W946r--
