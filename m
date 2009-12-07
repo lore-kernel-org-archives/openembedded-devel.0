@@ -1,26 +1,24 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NHkj2-0000qb-Np
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Dec 2009 22:02:35 +0100
-Received: from tamarin.localnet (unknown [212.94.238.51])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 604A71B10C02
+Received: from smtp1.cybercity.dk ([212.242.43.251])
+	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <sgh@sgh.dk>)
+	id 1NHkwy-0007Wt-Kg for openembedded-devel@lists.openembedded.org;
+	Mon, 07 Dec 2009 22:16:59 +0100
+Received: from natla.sgh.dk (0x4dd5bf76.adsl.cybercity.dk [77.213.191.118])
+	by smtp1.cybercity.dk (Postfix) with ESMTP id 9C08658681C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  7 Dec 2009 21:13:52 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Mon,  7 Dec 2009 22:18:20 +0100 (CET)
+Received: from localhost.localdomain (phoenix.local [192.168.0.226])
+	by natla.sgh.dk (Postfix) with ESMTP id B429C1248E5;
+	Mon,  7 Dec 2009 22:57:54 +0100 (CET)
+From: =?utf-8?q?S=C3=B8ren=20Holm?= <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 7 Dec 2009 18:18:09 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <200912071145.06960.holger+oe@freyther.de>
-	<hfitm2$i84$1@ger.gmane.org>
-In-Reply-To: <hfitm2$i84$1@ger.gmane.org>
-MIME-Version: 1.0
-Message-Id: <200912071818.09247.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Date: Mon,  7 Dec 2009 22:14:51 +0100
+Message-Id: <1260220491-4605-1-git-send-email-sgh@sgh.dk>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 212.242.43.251
+X-SA-Exim-Mail-From: sgh@sgh.dk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: meta-toolchain-qte emitted something useful
+Subject: [PATCH] Unset DEFAULT_PREFERENCE for mesa-dri-7.2 and mesa-dri-7.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,24 +32,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Dec 2009 21:02:37 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 07 Dec 2009 21:17:00 -0000
 
-On Monday 07 December 2009 13:50:10 Koen Kooi wrote:
-> On 07-12-09 11:45, Holger Hans Peter Freyther wrote:
-> > Hi all,
-> >
-> > instead of reporting regressions I can do something more positive and say
-> > that meta-toolchain-qte built without any problem and the resulting
-> > toolchain compiled a Qt application.
-> 
-> Sweet, that eliminates at least 1 item on my TODO. Too bad 4.6.0 fails
-> to compile for me :(
+---
+ recipes/mesa/mesa-dri_7.2.bb |    2 +-
+ recipes/mesa/mesa-dri_7.4.bb |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-Good idea to make it work... I will try to do it in the next couple of days
+diff --git a/recipes/mesa/mesa-dri_7.2.bb b/recipes/mesa/mesa-dri_7.2.bb
+index 9356843..3030395 100644
+--- a/recipes/mesa/mesa-dri_7.2.bb
++++ b/recipes/mesa/mesa-dri_7.2.bb
+@@ -9,7 +9,7 @@ PE = "1"
+ PR = "${INC_PR}.0"
+ 
+ # most of our targets do not have DRI so will use mesa-xlib
+-DEFAULT_PREFERENCE = "-1"
++#DEFAULT_PREFERENCE = "-1"
+ 
+ # ASUS EeePC 901 has DRI support so use mesa-dri by default
+ DEFAULT_PREFERENCE_eee901 = "1"
+diff --git a/recipes/mesa/mesa-dri_7.4.bb b/recipes/mesa/mesa-dri_7.4.bb
+index 9356843..3030395 100644
+--- a/recipes/mesa/mesa-dri_7.4.bb
++++ b/recipes/mesa/mesa-dri_7.4.bb
+@@ -9,7 +9,7 @@ PE = "1"
+ PR = "${INC_PR}.0"
+ 
+ # most of our targets do not have DRI so will use mesa-xlib
+-DEFAULT_PREFERENCE = "-1"
++#DEFAULT_PREFERENCE = "-1"
+ 
+ # ASUS EeePC 901 has DRI support so use mesa-dri by default
+ DEFAULT_PREFERENCE_eee901 = "1"
+-- 
+1.6.3.3
 
-z.
 
 
