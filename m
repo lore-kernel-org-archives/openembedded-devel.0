@@ -1,41 +1,38 @@
-Received: from ey-out-1920.google.com ([74.125.78.146])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1NHaoe-0007Ft-2z
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NHaz1-0007Tr-El for openembedded-devel@lists.openembedded.org;
+	Mon, 07 Dec 2009 11:38:26 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NHaxN-0003sm-EF
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Dec 2009 11:27:43 +0100
-Received: by ey-out-1920.google.com with SMTP id 5so1063495eyb.4
+	Mon, 07 Dec 2009 11:36:41 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 07 Dec 2009 11:36:41 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Dec 2009 02:26:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=NHy8p7HnJ1woM4DAKpkDnBqL2r20+N66PQckQTfl8bM=;
-	b=MC3PbcXL92KyPL1+XciD9suTzv93wyt7s7k0cNP6brDtVrj5hvXqIN0PONQMR6dcpO
-	zjzFo5UqMaEpHdMhaiYAL14v9NFbu6xae+wJQ1VwWT9bpJxv7xTK/ZvsybCokgYypu6R
-	vCagp4ZzZNpbbQtIR+kAJkDQRbD9lnConBAWA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=VN57dWvyrpVOb8nAj5Nd5Q7hyYd9A03KudzbRs/VipcQHRLX3qJx6SJqBTViC31fho
-	bGMdvkyzl/gmOqla/K8fJVJlJbg0S9eFEY8d0p01bcw9riXaHmTbuU30Xf/yLU8YfRny
-	13BwBtgVcxtcwODIfGDbga4SXa7VJOwobNyfs=
-MIME-Version: 1.0
-Received: by 10.213.25.79 with SMTP id y15mr6910970ebb.78.1260181562656; Mon, 
-	07 Dec 2009 02:26:02 -0800 (PST)
-In-Reply-To: <200912070921.27555.marcin@juszkiewicz.com.pl>
+	Mon, 07 Dec 2009 11:36:41 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 07 Dec 2009 11:36:19 +0100
+Message-ID: <hfilr3$osr$1@ger.gmane.org>
 References: <1260139496-21442-1-git-send-email-leon@sidebranch.com>
 	<1260139496-21442-2-git-send-email-leon@sidebranch.com>
-	<1260139496-21442-3-git-send-email-leon@sidebranch.com>
-	<200912070921.27555.marcin@juszkiewicz.com.pl>
-Date: Mon, 7 Dec 2009 11:26:02 +0100
-Message-ID: <c384c5ea0912070226h5a7720f8y38e07350978b48fa@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.78.146
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
+In-Reply-To: <1260139496-21442-2-git-send-email-leon@sidebranch.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] cyclone3_starter.conf: New machine/board for architecture nios2.
+Subject: Re: [PATCH] nios2.conf: New architecture nios2.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,20 +46,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Dec 2009 10:27:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 07 Dec 2009 10:38:26 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello Marcin,
+On 06-12-09 23:44, Leon Woestenberg wrote:
 
-On Mon, Dec 7, 2009 at 9:21 AM, Marcin Juszkiewicz
-<marcin@juszkiewicz.com.pl> wrote:
->
-> Do not use underscore in names as this conflicts with OVERRIDES.
->
-Thanks, will be fixed.
+> +# Select the nios2-specific toolchain parts
+> +PREFERRED_VERSION_binutils = "nios2-2.15"
+> +PREFERRED_VERSION_binutils-cross = "nios2-2.15"
+> +PREFERRED_VERSION_linux-libc-headers = "nios2-2.6.28"
+> +PREFERRED_VERSION_elf2flt-cross = "nios2-git"
+> +PREFERRED_VERSION_gcc-cross = "nios2-3.4.6"
+> +PREFERRED_VERSION_gcc-cross-initial = "nios2-3.4.6"
+> +PREFERRED_VERSION_gcc-cross-intermediate = "nios2-3.4.6"
+> +PREFERRED_VERSION_uclibc = "nios2-0.9.29"
+> +PREFERRED_VERSION_uclibc-initial = "nios2-0.9.27"
 
-Regards,
--- 
-Leon
+NAK
+
+This doesn't belong in a machine.conf, it belongs in the distro.
+
+regards,
+
+Koen
+
 
 
