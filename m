@@ -1,29 +1,25 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NHggb-0004At-9E
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1NHh3D-0000bI-Ja
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Dec 2009 17:43:48 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NHgf0-000599-KH
+	Mon, 07 Dec 2009 18:07:10 +0100
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1NHhCR-0000n9-0G
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Dec 2009 16:42:06 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1NHgf0-0008QA-Cu
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Dec 2009 16:42:06 +0000
-From: Phil Blundell <philb@gnu.org>
+	Mon, 07 Dec 2009 18:16:39 +0100
+Message-ID: <4B1D35DD.3050202@kernelconcepts.de>
+Date: Mon, 07 Dec 2009 18:05:33 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4B1D222A.90105@kernelconcepts.de>
 References: <4B1D222A.90105@kernelconcepts.de>
-Date: Mon, 07 Dec 2009 16:42:02 +0000
-Message-Id: <1260204122.779.75.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+	<1260204122.779.75.camel@mill.internal.reciva.com>
+In-Reply-To: <1260204122.779.75.camel@mill.internal.reciva.com>
+X-Enigmail-Version: 0.95.7
+X-SA-Exim-Connect-IP: 212.60.202.196
+X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [RFC] gtk+ and fonts
@@ -40,32 +36,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Dec 2009 16:43:48 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 07 Dec 2009 17:07:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
 
-On Mon, 2009-12-07 at 16:41 +0100, Florian Boor wrote:
-> our current GTK+ packages recommend a single Truetype font (ttf-dejavu-sans).
-> This might pull in a quite large font collection that might be different from
-> what the user wants. For a Japanese image e.g. you might not want these at all
-> or you might just want different fonts (like the Android ones).
-> 
-> I would be fine removing this RRECOMMENDS entry without any replacement. Another
-> option would be to create a virtual provider for basic ttf fonts and define a
-> matching run time dependency.
+Hi,
 
-Just removing that RRECOMMENDS (or weakening it to RSUGGESTS) would run
-the risk of breaking images that are currently depending on it.  I
-suspect there are probably quite a few of those and this might not be a
-good idea.
+Phil Blundell schrieb:
+> Just removing that RRECOMMENDS (or weakening it to RSUGGESTS) would run
+> the risk of breaking images that are currently depending on it.  I
+> suspect there are probably quite a few of those and this might not be a
+> good idea.
 
-Creating some kind of virtual for gtk+ to depend on instead of a
-particular concrete font does sound like the best way forwards with
-this.  And, of course, individual DISTROs are welcome to eliminate that
-RRECOMMENDS in the gtk+ packaging.
+yes right, I see this is problematic. In fact Angström solves on its own already
+and other distributions should do the same.
 
-p.
+> Creating some kind of virtual for gtk+ to depend on instead of a
+> particular concrete font does sound like the best way forwards with
+> this.  And, of course, individual DISTROs are welcome to eliminate that
+> RRECOMMENDS in the gtk+ packaging.
 
+Eliminating it on my own is what I do currently but I somehow refuse to accept
+this as a good solution. I do not see why some misfeature we introduced a long
+time ago should not be fixed - even if if can cause some things to break.
 
+Greetings
+
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
