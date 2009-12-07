@@ -1,31 +1,39 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from mail-px0-f189.google.com ([209.85.216.189])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NHby7-0006Mb-RM
+	(envelope-from <ahsan.khwaja@gmail.com>) id 1NHc7Y-0006Yo-8P
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Dec 2009 12:41:35 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NHbwW-0002Vf-F6
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Dec 2009 11:39:52 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1NHbwU-0005eZ-Ra
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Dec 2009 11:39:50 +0000
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <818ccfc40912070241pa211c18ibb1a556607680c6@mail.gmail.com>
+	Mon, 07 Dec 2009 12:51:19 +0100
+Received: by pxi27 with SMTP id 27so1810537pxi.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 07 Dec 2009 03:49:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=9YbAX6w4O0EkczBW8C+x5BE886lml8Q4VUT0AOOt9eo=;
+	b=lRmSRObcCIpbVK64y4fFtrTVsQf7v8prUaz7/ytVqXrG9MJYYgm5Gb7bn19GDBsyEz
+	Iai77QSn/PQSu8//SceMxrFL5wmOCQiQRuzy7hCTVlAyKYFs9n/7dI2iGZavCVekQCyM
+	o3eeJmrP8tGEHZ63mtwghrHjsSkJg+Kc9/RNk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=N92ucdlJ7sSI012omH7xh79bsUDaTU3hKc4fPg28KFlxQV1gxufV5k/rvxKEjSg/Mm
+	0y25j4mN1+Qdt/Jepq+nHHtUj/+yldQtDJoDZ9luFahzfl5tW+E9N8aWzp73OYRGGSVw
+	KvdVGWgNw3UFZFeNLEXB8MH8+Ivwq4hF5lv/E=
+MIME-Version: 1.0
+Received: by 10.114.215.6 with SMTP id n6mr11458311wag.158.1260186575932; Mon, 
+	07 Dec 2009 03:49:35 -0800 (PST)
+In-Reply-To: <1260185987.779.70.camel@mill.internal.reciva.com>
 References: <818ccfc40912070241pa211c18ibb1a556607680c6@mail.gmail.com>
-Date: Mon, 07 Dec 2009 11:39:47 +0000
-Message-Id: <1260185987.779.70.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.3 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+	<1260185987.779.70.camel@mill.internal.reciva.com>
+Date: Mon, 7 Dec 2009 16:49:35 +0500
+Message-ID: <818ccfc40912070349oaee021ewc43fb1767037965c@mail.gmail.com>
+From: Ahsan Khawaja <ahsan.khwaja@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.216.189
+X-SA-Exim-Mail-From: ahsan.khwaja@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: building GCC cross compiler without building any library
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -40,24 +48,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Dec 2009 11:41:35 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 07 Dec 2009 11:51:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, 2009-12-07 at 15:41 +0500, Ahsan Khawaja wrote:
-> Is it possible to build GCC cross compiler with support of any library
-> (eglic, glibc,uclibc and newlib). What should I have to do in this regard.
+sorry i missed typed it. i want to ask
 
-I'm not quite sure what you're asking.  Do you mean that you want to
-build a generic version of GCC which can then be used with any of the
-four C libraries that you mention?
+Is it possible to build GCC cross compiler *without* support of any
+library(eglic, glibc,uclibc and newlib) for bare metal. if yes what I have
+to do in this regard.
 
-If so, the answer is probably "yes" so long as you restrict yourself to
-plain C only.  If you want C++ or the like, the answer is almost
-certainly no.
+On Mon, Dec 7, 2009 at 4:39 PM, Phil Blundell <philb@gnu.org> wrote:
 
-p.
-
-
-
+> On Mon, 2009-12-07 at 15:41 +0500, Ahsan Khawaja wrote:
+> > Is it possible to build GCC cross compiler with support of any library
+> > (eglic, glibc,uclibc and newlib). What should I have to do in this
+> regard.
+>
+> I'm not quite sure what you're asking.  Do you mean that you want to
+> build a generic version of GCC which can then be used with any of the
+> four C libraries that you mention?
+>
+> If so, the answer is probably "yes" so long as you restrict yourself to
+> plain C only.  If you want C++ or the like, the answer is almost
+> certainly no.
+>
+> p.
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
