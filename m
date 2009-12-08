@@ -1,37 +1,30 @@
-Received: from mail-ew0-f210.google.com ([209.85.219.210])
+Received: from qmta03.westchester.pa.hmc1.comcast.net ([76.96.53.20])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <niko84embedded@googlemail.com>) id 1NI776-0006D6-6W
+	(envelope-from <john@soundmetrics.com>) id 1NI7mn-0005ej-Dd
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Dec 2009 21:56:55 +0100
-Received: by ewy2 with SMTP id 2so4517405ewy.27
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Dec 2009 12:55:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=/Mxo356Y7NAosaYcpERnNRE5RCqrCUfu3nsaPwafXSQ=;
-	b=t7mXevsLAImDKdnRSZcBsUG4Zln8Bf1xAnMXFnGzlxaaqpJBDG8/X1q6IlKESO1yEd
-	HZGWZCHluvCiHSfH0AqFRSGGrelC9TikoyQzyzLNvt6a7TpRNz8T/gGVa5eQOr7E65VB
-	8W2ZvicEe9eagdBMn4HRcZTpgkPX31oNWxX1g=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=gH2j0qlxwArjvSJeM+73tdrso+X6UjaAoBphqVmbseDVRw5X2hPW1Y7k8BXaxztuMk
-	gnfqx2JCyXuvrpxgKBzPvKhFV6Wa47BGmOEWC+rmP/RMABwVsvsgwlA2MZIpjbDhkOIG
-	SL4gClVEugaNnVornibjqDpdqC1Ii8gv/qIWE=
+	Tue, 08 Dec 2009 22:40:00 +0100
+Received: from omta03.westchester.pa.hmc1.comcast.net ([76.96.53.19])
+	by qmta03.westchester.pa.hmc1.comcast.net with comcast
+	id EidY1d0080Qry6401ld23G; Tue, 08 Dec 2009 21:37:02 +0000
+Received: from [192.168.10.132] ([75.147.191.205])
+	by omta03.westchester.pa.hmc1.comcast.net with bizsmtp
+	id Eld01d0044SLwm301ld1aD; Tue, 08 Dec 2009 21:37:01 +0000
+Message-ID: <4B1EC6FC.90207@soundmetrics.com>
+Date: Tue, 08 Dec 2009 13:37:00 -0800
+From: John Faith <john@soundmetrics.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1.21) Gecko/20090303 SeaMonkey/1.1.15
+	(Ubuntu-1.1.15+nobinonly-0ubuntu0.8.04.2)
 MIME-Version: 1.0
-Received: by 10.216.89.11 with SMTP id b11mr759820wef.171.1260305711469; Tue, 
-	08 Dec 2009 12:55:11 -0800 (PST)
-Date: Tue, 8 Dec 2009 21:55:11 +0100
-Message-ID: <c1c0c07e0912081255r2bcb06c9mcf5485d478bad1dc@mail.gmail.com>
-From: Niko Lau <niko84embedded@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.210
-X-SA-Exim-Mail-From: niko84embedded@googlemail.com
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <c1c0c07e0912081255r2bcb06c9mcf5485d478bad1dc@mail.gmail.com>
+In-Reply-To: <c1c0c07e0912081255r2bcb06c9mcf5485d478bad1dc@mail.gmail.com>
+X-SA-Exim-Connect-IP: 76.96.53.20
+X-SA-Exim-Mail-From: john@soundmetrics.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: =?UTF-8?B?Li9nbnVwbG90OiBjYW7CtHQgcmVzb2x2ZSBzeW1ib2wgJ3BuZ19wYXNzX3lzdGFydCc=?=
+Subject: =?UTF-8?B?UmU6IC4vZ251cGxvdDogY2FuwrR0IHJlc29sdmUgc3ltYm9sICdwbmdfcGFzc195c3RhcnQn?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,19 +38,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Dec 2009 20:56:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 08 Dec 2009 21:40:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello,
+Niko Lau wrote:
+> Hello,
+>
+> I have a custom board based on the at91sam9260 with a handmade linux system.
+> I'm now trying to switch to a oe system.
+> I went throught the getting started and made the helloworld program (with
+> uclib), which worked fine on my board.
+> After that I built gnuplot. When I try to start it on my board I get the
+> above error.
+> Sounds for me like a missing lib, but libpng and libgd is on the target.
+> Has someone a idea what the problem is?
+>
+>   
+Hi Niko,
+You might try 'strace gnuplot' to see exactly what's failing at run 
+time.  Even if libpng is installed , you might get a missing symbol 
+error for png_pass_ystart if you've built against a different version 
+than what's installed.  I'd guess just building gnuplot in oe without 
+first building the libs it needs is the root cause.  You could check 
+your gnuplot build log to make sure headers from outside oe are not 
+leaking in somehow.
 
-I have a custom board based on the at91sam9260 with a handmade linux system.
-I'm now trying to switch to a oe system.
-I went throught the getting started and made the helloworld program (with
-uclib), which worked fine on my board.
-After that I built gnuplot. When I try to start it on my board I get the
-above error.
-Sounds for me like a missing lib, but libpng and libgd is on the target.
-Has someone a idea what the problem is?
+If libpng is left over from building your pre-oe target file system, you 
+should rebuild everything using oe.
 
-THX
+Good luck,
+John
+
+
 
