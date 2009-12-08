@@ -1,43 +1,37 @@
-Received: from mail-yx0-f175.google.com ([209.85.210.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NHuwJ-0000xC-Rc
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NHv6l-0001Zh-FS for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Dec 2009 09:07:46 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NHv5B-0001Ox-0R
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Dec 2009 08:56:58 +0100
-Received: by yxe5 with SMTP id 5so2948593yxe.24
+	Tue, 08 Dec 2009 09:06:05 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 08 Dec 2009 09:06:04 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Dec 2009 23:55:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:organization
-	:subject:to:mime-version:content-transfer-encoding:from:date
-	:message-id:user-agent;
-	bh=utO6cKA7G9EXjfuRKAf00div66xZwMGYtXqEnntBSk8=;
-	b=NsRmL4YVfGl20BVvGBMtDepn6QM08MO7Uj+d3yZdmuTwK79K5qlxb+XjgG6eKYIUnZ
-	DwB1JO0XinQzM6BHgKcnvii+WVRSa4/ZkTajZ4DHk1oCzQwhqMB/mIv+9PEEnbYNDUBA
-	ZYpuaV+WnuwEGjreRbNaEsDurf4EfRxyDtLvM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:organization:subject:to:mime-version
-	:content-transfer-encoding:from:date:message-id:user-agent;
-	b=Dazf0IovOAGI+ntpZNIypBU2tjVh8M0yBmZclQqjHDXeII3ydRhQzpsp3UNtnFtyAc
-	1Hwf6ipZdeD7ARWd+mjLFferfk0N4Dq7bZTjTOiE77rBgHWMK81GzTBWpEosFos1VLrm
-	mAS5FTdoy2tiKYePEdf9OoDBnL+h5xL+Vyvb0=
-Received: by 10.90.19.28 with SMTP id 28mr1242185ags.89.1260258915038;
-	Mon, 07 Dec 2009 23:55:15 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.162.69.77])
-	by mx.google.com with ESMTPS id 20sm3992429iwn.9.2009.12.07.23.55.12
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 07 Dec 2009 23:55:14 -0800 (PST)
-Organization: Gulessoft, Inc
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Date: Tue, 08 Dec 2009 15:55:05 +0800
-Message-ID: <op.u4lz932emn1qzu@guohr-laptop-ubuntu>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.210.175
-X-SA-Exim-Mail-From: camelguo@gmail.com
+	Tue, 08 Dec 2009 09:06:04 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 08 Dec 2009 09:05:40 +0100
+Message-ID: <hfl1ck$sog$1@ger.gmane.org>
+References: <1260221130-4958-1-git-send-email-sgh@sgh.dk>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.6pre) Gecko/20091109 Shredder/3.0pre
+In-Reply-To: <1260221130-4958-1-git-send-email-sgh@sgh.dk>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Does it possible to use pre-built native tools
+Subject: Re: [PATCH] Unset DEFAULT_PREFERENCE for mesa-dri-7.2 and mesa-dri-7.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,23 +45,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Dec 2009 07:56:59 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 08 Dec 2009 08:07:46 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hi guys,
-      I want to configure openembedded to use the pre-built native tools.
-e.g: qemu-native, quilt-native when building the whole image, so that the
-building can save lots of time. Is there anyone know how to achieve it?
+What's the rationale behind this change? And why do you comment it when 
+we have an scm that can track changes?
 
-      Thanks a lot!
+regards,
+
+Koen
+
+On 07-12-09 22:25, Søren Holm wrote:
+> ---
+>   recipes/mesa/mesa-dri_7.2.bb |    2 +-
+>   recipes/mesa/mesa-dri_7.4.bb |    2 +-
+>   2 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/recipes/mesa/mesa-dri_7.2.bb b/recipes/mesa/mesa-dri_7.2.bb
+> index 9356843..3030395 100644
+> --- a/recipes/mesa/mesa-dri_7.2.bb
+> +++ b/recipes/mesa/mesa-dri_7.2.bb
+> @@ -9,7 +9,7 @@ PE = "1"
+>   PR = "${INC_PR}.0"
+>
+>   # most of our targets do not have DRI so will use mesa-xlib
+> -DEFAULT_PREFERENCE = "-1"
+> +#DEFAULT_PREFERENCE = "-1"
+>
+>   # ASUS EeePC 901 has DRI support so use mesa-dri by default
+>   DEFAULT_PREFERENCE_eee901 = "1"
+> diff --git a/recipes/mesa/mesa-dri_7.4.bb b/recipes/mesa/mesa-dri_7.4.bb
+> index 9356843..3030395 100644
+> --- a/recipes/mesa/mesa-dri_7.4.bb
+> +++ b/recipes/mesa/mesa-dri_7.4.bb
+> @@ -9,7 +9,7 @@ PE = "1"
+>   PR = "${INC_PR}.0"
+>
+>   # most of our targets do not have DRI so will use mesa-xlib
+> -DEFAULT_PREFERENCE = "-1"
+> +#DEFAULT_PREFERENCE = "-1"
+>
+>   # ASUS EeePC 901 has DRI support so use mesa-dri by default
+>   DEFAULT_PREFERENCE_eee901 = "1"
 
 
--- 
-Guo Hongruan, Embedded Linux Consultant
-Mobile: +86-0-13484056007
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
 
 
