@@ -1,44 +1,23 @@
-Received: from mail-fx0-f216.google.com ([209.85.220.216])
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1NIU0B-0007Aj-1f
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Dec 2009 22:23:18 +0100
-Received: by fxm8 with SMTP id 8so6225749fxm.27
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Dec 2009 13:21:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:from:to:cc:subject
-	:date:message-id:x-mailer;
-	bh=hvupgwyWtVq2QETENPY39/yUWah+LWdRjy9tno881wo=;
-	b=V4ObfMA1AF9c7zz106bvPKi+el6IUHk5hkYg/YIe0yO/13TZI1iCeYsxbnxByYLr9X
-	gSAQbOBsRBTMkxLkEONJi4GRfJiNgHjDooB9QgrQVbTTVm9tYFGnBdWhvjvFVwNJMpWx
-	/p9C4cvIUx3PHGKpH+EeS8OgCt4hx+NyblJQc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=GThvW0HKyI+Ol/pKhzmpJ4G/zLIE2AMdrY4Ru2dLF71HlBzjpz1kdwFn6NPneDSta4
-	uy7RVtqEfvZFgHMUZifLkwl7qMsp8u07hn69ujiOde4ymOuGIRBhayX8DgvHA6yZsF2p
-	G3XoAH4tK3cuudybISlpdMSL6t+VS2BZzA6Yo=
-Received: by 10.223.15.92 with SMTP id j28mr2246100faa.11.1260393688286;
-	Wed, 09 Dec 2009 13:21:28 -0800 (PST)
-Received: from s42.loc (85-127-241-136.dynamic.xdsl-line.inode.at
-	[85.127.241.136])
-	by mx.google.com with ESMTPS id p17sm346538fka.35.2009.12.09.13.21.27
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 09 Dec 2009 13:21:27 -0800 (PST)
-Received: from cow by s42.loc with local (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1NIU1Q-00029K-9G; Wed, 09 Dec 2009 22:24:32 +0100
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Wed,  9 Dec 2009 22:24:29 +0100
-Message-Id: <1260393869-8231-1-git-send-email-rep.dot.nop@gmail.com>
-X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 209.85.220.216
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1NIUED-0005mj-NY
+	for openembedded-devel@openembedded.org; Wed, 09 Dec 2009 22:37:49 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id B3BC51D36078; Wed,  9 Dec 2009 22:35:56 +0100 (CET)
+Date: Wed, 9 Dec 2009 22:35:56 +0100
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20091209213556.GC18123@ibawizard.net>
+References: <1259502600-10053-1-git-send-email-ynezz@true.cz>
+MIME-Version: 1.0
+In-Reply-To: <1259502600-10053-1-git-send-email-ynezz@true.cz>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] binutils-2.20: remove unneeded/unwanted patches
+Subject: Re: [PATCH] linux-omap-2.6.29: add support for ET&T TC5UH	touchscreen controller
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,130 +31,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Dec 2009 21:23:18 -0000
+X-List-Received-Date: Wed, 09 Dec 2009 21:37:49 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi khem,
+Hi,
 
-In 33630af91d1027a91b43f697c86e809a770668e1 you (AFAICS) added
-binutils-2.20 support, yet the hunks mentioned below were already
-applied or are unneeded in that release?! How did you patch/compile
-this, perhaps i'm missing some crucial part in the setup?
-Thanks for clarification/fixing this up,
-Bernhard
+it's probably just lack of spare time that my patches[1] weren't applied yet,
+right? I would like to ask how should I proceed now, resent them again along
+with more patches I plan to send soon? Or should I create branch on GitHub or
+somewhere else and ask for pull? Would it be easier? Thanks.
 
-Already applied to 2.20 or unnecessary nowadays
+-- ynezz
 
-Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
----
- ...tils-2.16.91.0.6-objcopy-rename-errorcode.patch |   39 --------------------
- .../binutils-2.20/binutils-arm-pr7093.patch        |   19 ----------
- .../binutils/binutils-2.20/uclibc-segfault.patch   |   23 ------------
- 3 files changed, 0 insertions(+), 81 deletions(-)
- delete mode 100644 recipes/binutils/binutils-2.20/binutils-2.16.91.0.6-objcopy-rename-errorcode.patch
- delete mode 100644 recipes/binutils/binutils-2.20/binutils-arm-pr7093.patch
- delete mode 100644 recipes/binutils/binutils-2.20/uclibc-segfault.patch
-
-diff --git a/recipes/binutils/binutils-2.20/binutils-2.16.91.0.6-objcopy-rename-errorcode.patch b/recipes/binutils/binutils-2.20/binutils-2.16.91.0.6-objcopy-rename-errorcode.patch
-deleted file mode 100644
-index 8df5b1f..0000000
---- a/recipes/binutils/binutils-2.20/binutils-2.16.91.0.6-objcopy-rename-errorcode.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--# strip (and objcopy) fail to set the error code if there is no
--# output file name and the rename of the stripped (or copied) file
--# fails, yet the command fails to do anything.  This fixes both
--# objcopy and strip.
--#
--# modification by bero: Ported to 2.16.91.0.6
--#
--#Signed-off-by: John Bowler <jbowler@acm.org>
--#Signed-off-by: Bernhard Rosenkraenzer <bero@arklinux.org>
-----
--# binutils/objcopy.c |    8 +++++---
--# 1 file changed, 5 insertions(+), 3 deletions(-)
--#
--Index: src/binutils/objcopy.c
--===================================================================
----- src.orig/binutils/objcopy.c	2007-08-09 13:26:03.000000000 +0100
--+++ src/binutils/objcopy.c	2007-08-09 16:36:12.000000000 +0100
--@@ -2787,8 +2787,9 @@ strip_main (int argc, char *argv[])
-- 	  if (preserve_dates)
-- 	    set_times (tmpname, &statbuf);
-- 	  if (output_file != tmpname)
---	    smart_rename (tmpname, output_file ? output_file : argv[i],
---			  preserve_dates);
--+	    if (smart_rename (tmpname, output_file ? output_file : argv[i],
--+			  preserve_dates))
--+	      hold_status = 1;
-- 	  status = hold_status;
-- 	}
--       else
--@@ -3411,7 +3412,8 @@ copy_main (int argc, char *argv[])
--       if (preserve_dates)
-- 	set_times (tmpname, &statbuf);
--       if (tmpname != output_filename)
---	smart_rename (tmpname, input_filename, preserve_dates);
--+	if (smart_rename (tmpname, input_filename, preserve_dates))
--+	  status = 1;
--     }
--   else
--     unlink_if_ordinary (tmpname);
-diff --git a/recipes/binutils/binutils-2.20/binutils-arm-pr7093.patch b/recipes/binutils/binutils-2.20/binutils-arm-pr7093.patch
-deleted file mode 100644
-index ad4a556..0000000
---- a/recipes/binutils/binutils-2.20/binutils-arm-pr7093.patch
-+++ /dev/null
-@@ -1,19 +0,0 @@
--Index: binutils/bfd/elf32-arm.c
--===================================================================
--RCS file: /cvs/src/src/bfd/elf32-arm.c,v
--retrieving revision 1.162
--retrieving revision 1.163
--diff -u -r1.162 -r1.163
----- binutils/bfd/elf32-arm.c	23 Dec 2008 09:01:45 -0000	1.162
--+++ binutils/bfd/elf32-arm.c	23 Dec 2008 11:46:17 -0000	1.163
--@@ -4608,6 +4608,10 @@
--   Elf_Internal_Shdr *hdr;
--   unsigned int i, localsyms;
-- 
--+  /* PR 7093: Make sure that we are dealing with an arm elf binary.  */
--+  if (! is_arm_elf (abfd))
--+    return;
--+
--   if ((abfd->flags & DYNAMIC) != 0)
--     return;
-- 
-diff --git a/recipes/binutils/binutils-2.20/uclibc-segfault.patch b/recipes/binutils/binutils-2.20/uclibc-segfault.patch
-deleted file mode 100644
-index 16a875f..0000000
---- a/recipes/binutils/binutils-2.20/uclibc-segfault.patch
-+++ /dev/null
-@@ -1,23 +0,0 @@
--upstream: already committed
--
----- clean/binutils-2.19.51/bfd/elf32-arm.c	2009-05-22 12:58:44.000000000 +0100
--+++ binutils-2.19.51/bfd/elf32-arm.c	2009-06-08 21:29:49.000000000 +0100
--@@ -8960,7 +8964,7 @@ elf32_arm_fix_exidx_coverage (asection *
-- 	  struct bfd_elf_section_data *elf_sec = elf_section_data (sec);
-- 	  Elf_Internal_Shdr *hdr = &elf_sec->this_hdr;
-- 	  
---	  if (hdr->sh_type != SHT_ARM_EXIDX)
--+	  if (!hdr || hdr->sh_type != SHT_ARM_EXIDX)
-- 	    continue;
-- 	  
-- 	  if (elf_sec->linked_to)
----- clean/binutils-2.19.51/ld/emultempl/armelf.em	2009-05-22 12:58:45.000000000 +0100
--+++ binutils-2.19.51/ld/emultempl/armelf.em	2009-06-08 21:26:34.000000000 +0100
--@@ -309,6 +309,7 @@ gld${EMULATION_NAME}_finish (void)
-- 	      asection *out_sec = sec->output_section;
-- 
-- 	      if (out_sec
--+		  && elf_section_data (sec)
-- 		  && elf_section_type (sec) == SHT_PROGBITS
-- 		  && (elf_section_flags (sec) & SHF_EXECINSTR) != 0
-- 		  && (sec->flags & SEC_EXCLUDE) == 0
--- 
-1.6.5.2
-
+1. http://patchwork.openembedded.org/patch/1324/
+   http://patchwork.openembedded.org/patch/1325/
+   http://patchwork.openembedded.org/patch/1326/
 
 
