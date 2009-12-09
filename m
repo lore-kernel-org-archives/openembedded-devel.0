@@ -1,27 +1,33 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1NIN2k-0005tz-Te
+	(envelope-from <Sebastian@SSpaeth.de>) id 1NIO6h-00054i-F2
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Dec 2009 14:57:29 +0100
-Received: from hiob.intern.dresearch.de (unknown [10.32.0.138])
-	by mail.dresearch.de (Postfix) with ESMTP id C1F7449127F
+	Wed, 09 Dec 2009 16:05:38 +0100
+Received: from homiemail-a22.g.dreamhost.com (caiajhbdccac.dreamhost.com
+	[208.97.132.202])
+	by hapkido.dreamhost.com (Postfix) with ESMTP id 2473717DB2D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Dec 2009 14:55:42 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Wed, 9 Dec 2009 14:56:53 +0100
-Message-ID: <4B1FAC54.9070709@dresearch.de>
-Date: Wed, 09 Dec 2009 14:55:32 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+	Wed,  9 Dec 2009 07:03:49 -0800 (PST)
+Received: from [192.168.1.154] (unknown [84.55.206.192])
+	by homiemail-a22.g.dreamhost.com (Postfix) with ESMTPA id E4B771A8069
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  9 Dec 2009 07:03:27 -0800 (PST)
+Message-ID: <4B1FBC3D.9010400@SSpaeth.de>
+Date: Wed, 09 Dec 2009 16:03:25 +0100
+From: Sebastian Spaeth <Sebastian@SSpaeth.de>
+Organization: ETH Zurich
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 09 Dec 2009 13:56:53.0771 (UTC)
-	FILETIME=[76AB25B0:01CA78D7]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@DResearch.DE
+References: <1260365221-11155-1-git-send-email-Sebastian@SSpaeth.de>
+In-Reply-To: <1260365221-11155-1-git-send-email-Sebastian@SSpaeth.de>
+X-Enigmail-Version: 0.95.7
+OpenPGP: id=C827A062
+X-SA-Exim-Connect-IP: 66.33.216.122
+X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: howto add external built kernel modules to an image?
+Subject: Re: [PATCH] connman: don't give user 'system' permissions by default. We might not have one. (connman 0.46)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,29 +41,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Dec 2009 13:57:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 09 Dec 2009 15:05:38 -0000
+X-Groupsio-MsgNum: 14980
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enigDF78853D314D3165CE48EC7D"
 
-I'd like to build a kernel module (let's say it's named drpnx) outside
-the kernel sources and add the resulting drpnx.ko to an rootfs image.
+--------------enigDF78853D314D3165CE48EC7D
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-I created a bitbake recipe using
-recipes/minifo/minifo-modules_0.6.1-pre1.bb as a sample and i'm able
-to bitbake this recipe using the -b option.
+Can I get an ACK for this? default connman configuration assumes that we
+have a user called "system". This simply gets rid of that assumption.
 
-But now i'm out of ideas. How to add drpnx.ko to a rootfs image? I tried
+I would push this in addition to a PR bump.
 
-IMAGE_INSTALL += " drpnx "
-IMAGE_INSTALL += " kernel-module-drpnx "
-IMAGE_INSTALL += " drpnx-module "
-
-but none of them worked. :(
-
-What's the right way to do this?
-
-Steffen
+spaetz
 
 
+--------------enigDF78853D314D3165CE48EC7D
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
+iEYEARECAAYFAksfvD4ACgkQVYX1jMgnoGIjDwCfQ5fxBrInJ78sXCCwNjJpGL+i
+gEMAnRHwAjMvvamhVoYFuVhlI4a9MKfJ
+=r2If
+-----END PGP SIGNATURE-----
+
+--------------enigDF78853D314D3165CE48EC7D--
