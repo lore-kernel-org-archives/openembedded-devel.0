@@ -1,41 +1,27 @@
-Received: from mail-ew0-f166.google.com ([209.85.219.166])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <niko84embedded@googlemail.com>) id 1NIMrZ-0004Om-Sw
+	(envelope-from <sledz@DResearch.DE>) id 1NIN2k-0005tz-Te
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Dec 2009 14:45:56 +0100
-Received: by ewy6 with SMTP id 6so4312265ewy.7
+	Wed, 09 Dec 2009 14:57:29 +0100
+Received: from hiob.intern.dresearch.de (unknown [10.32.0.138])
+	by mail.dresearch.de (Postfix) with ESMTP id C1F7449127F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Dec 2009 05:44:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=jzwqY0srFZnHK/SghhFo2nyrLHtD+tVdoSxhueExUsA=;
-	b=KdVLIRY9RcrmCgVtJinUyc9elKQKTMctgQ/FiudlsqDtrR/0ivlf2m8U4YzCHZjm+u
-	/nIPAoOnPgenatNMvF53txb7TfIxyzyq5oPudWHn90MZQ6LumXAeIx9UZDuAY/6qGt71
-	XHmO7Ld1GUC1wCFKYsSgplT5XEoA2nt2psGrQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=hJKHgcKA/vXXp3Z15xZZLyA5KElCJk78yd/K0gl42sfvHXDR7jzCfrGl03DdnXCpWv
-	RW0DyCJDRuzrUk6hI+tZgitGsdsxRV+1DVN4IU+ueVBOg+s1fUKUx0eFnr+yrviWOI6V
-	7wVBYWNmAwd1iEET0fHax8X/EhE2yUFM1peK0=
+	Wed,  9 Dec 2009 14:55:42 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by hiob.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Wed, 9 Dec 2009 14:56:53 +0100
+Message-ID: <4B1FAC54.9070709@dresearch.de>
+Date: Wed, 09 Dec 2009 14:55:32 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
 MIME-Version: 1.0
-Received: by 10.216.91.20 with SMTP id g20mr3437442wef.94.1260366252433; Wed, 
-	09 Dec 2009 05:44:12 -0800 (PST)
-In-Reply-To: <4B1EC6FC.90207@soundmetrics.com>
-References: <c1c0c07e0912081255r2bcb06c9mcf5485d478bad1dc@mail.gmail.com>
-	<4B1EC6FC.90207@soundmetrics.com>
-Date: Wed, 9 Dec 2009 14:44:12 +0100
-Message-ID: <c1c0c07e0912090544v52ac1525ve37d4a59b6d056f8@mail.gmail.com>
-From: Niko Lau <niko84embedded@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.166
-X-SA-Exim-Mail-From: niko84embedded@googlemail.com
+X-OriginalArrivalTime: 09 Dec 2009 13:56:53.0771 (UTC)
+	FILETIME=[76AB25B0:01CA78D7]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: =?UTF-8?B?UmU6IC4vZ251cGxvdDogY2FuwrR0IHJlc29sdmUgc3ltYm9sICdwbmdfcGFzc195c3RhcnQn?=
+Subject: howto add external built kernel modules to an image?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,36 +35,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Dec 2009 13:45:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 09 Dec 2009 13:57:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi,
-I built gnuplot statically then it worked fine.
-There is something messed up with my handmade rfs. If I switch completly to
-oe it should work also with dynamic libs.
-Thanks.
+I'd like to build a kernel module (let's say it's named drpnx) outside
+the kernel sources and add the resulting drpnx.ko to an rootfs image.
 
-2009/12/8 John Faith <john@soundmetrics.com>
+I created a bitbake recipe using
+recipes/minifo/minifo-modules_0.6.1-pre1.bb as a sample and i'm able
+to bitbake this recipe using the -b option.
 
-> Hi Niko,
-> You might try 'strace gnuplot' to see exactly what's failing at run time.
->  Even if libpng is installed , you might get a missing symbol error for
-> png_pass_ystart if you've built against a different version than what's
-> installed.  I'd guess just building gnuplot in oe without first building the
-> libs it needs is the root cause.  You could check your gnuplot build log to
-> make sure headers from outside oe are not leaking in somehow.
->
-> If libpng is left over from building your pre-oe target file system, you
-> should rebuild everything using oe.
->
-> Good luck,
-> John
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+But now i'm out of ideas. How to add drpnx.ko to a rootfs image? I tried
+
+IMAGE_INSTALL += " drpnx "
+IMAGE_INSTALL += " kernel-module-drpnx "
+IMAGE_INSTALL += " drpnx-module "
+
+but none of them worked. :(
+
+What's the right way to do this?
+
+Steffen
+
+
+
 
