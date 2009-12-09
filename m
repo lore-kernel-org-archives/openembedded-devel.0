@@ -1,33 +1,36 @@
-Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
+Received: from qw-out-1920.google.com ([74.125.92.147])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sebastian@SSpaeth.de>) id 1NIO6h-00054i-F2
+	(envelope-from <bjorn.forsman@gmail.com>) id 1NIOf1-0002MP-E8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Dec 2009 16:05:38 +0100
-Received: from homiemail-a22.g.dreamhost.com (caiajhbdccac.dreamhost.com
-	[208.97.132.202])
-	by hapkido.dreamhost.com (Postfix) with ESMTP id 2473717DB2D
+	Wed, 09 Dec 2009 16:41:06 +0100
+Received: by qw-out-1920.google.com with SMTP id 4so1091772qwk.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Dec 2009 07:03:49 -0800 (PST)
-Received: from [192.168.1.154] (unknown [84.55.206.192])
-	by homiemail-a22.g.dreamhost.com (Postfix) with ESMTPA id E4B771A8069
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Dec 2009 07:03:27 -0800 (PST)
-Message-ID: <4B1FBC3D.9010400@SSpaeth.de>
-Date: Wed, 09 Dec 2009 16:03:25 +0100
-From: Sebastian Spaeth <Sebastian@SSpaeth.de>
-Organization: ETH Zurich
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	Wed, 09 Dec 2009 07:39:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type:content-transfer-encoding;
+	bh=LGvnoYNSBJTZmWua7w/7/ImNQrCcgrrnSfiGOMbcgMI=;
+	b=nBTEz4m2YTJ2j5GFZ7Euv4j4v9+z0UATo5CjdehdGWV3KeBfUazMRoaOXzRa0xJf24
+	/UmcNRVRrAhfujZ9va6js5+J9sprv6OPh8F6NESEK2ox09nbstwJ9GCnGukyDEyTiZO4
+	xu+W/7wbTLGyEH0qHw6FR2XIOvJeJqi/Iq3ZU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=vSMi40OzE9poOaGP/sNJlEg9rZ8ulB9xzJUMQw/q4lyJbxnsYL3/H5BCVjINtQnJdC
+	+vffGh9H70HkVNoKCZnCjE3n0KljKcmXKvHZs0BIAVPskI2uK6l8Nb7KwBKj7JNFx/1X
+	PsFg0mmrBxz8TCnSFe2zr7z6AvOr75ycjzrec=
 MIME-Version: 1.0
+Received: by 10.229.128.90 with SMTP id j26mr414428qcs.103.1260373158594; Wed, 
+	09 Dec 2009 07:39:18 -0800 (PST)
+Date: Wed, 9 Dec 2009 16:39:18 +0100
+Message-ID: <5f2b60912090739i1f62eb17jb747f91e26153cab@mail.gmail.com>
+From: =?UTF-8?Q?Bj=C3=B8rn_Forsman?= <bjorn.forsman@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1260365221-11155-1-git-send-email-Sebastian@SSpaeth.de>
-In-Reply-To: <1260365221-11155-1-git-send-email-Sebastian@SSpaeth.de>
-X-Enigmail-Version: 0.95.7
-OpenPGP: id=C827A062
-X-SA-Exim-Connect-IP: 66.33.216.122
-X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
+X-SA-Exim-Connect-IP: 74.125.92.147
+X-SA-Exim-Mail-From: bjorn.forsman@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] connman: don't give user 'system' permissions by default. We might not have one. (connman 0.46)
+Subject: OE builds LKMs not matching kernel version (MACHINE="dm6446-evm")
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,36 +44,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Dec 2009 15:05:38 -0000
-X-Groupsio-MsgNum: 14980
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enigDF78853D314D3165CE48EC7D"
-
---------------enigDF78853D314D3165CE48EC7D
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 09 Dec 2009 15:41:06 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Can I get an ACK for this? default connman configuration assumes that we
-have a user called "system". This simply gets rid of that assumption.
+Hi all,
 
-I would push this in addition to a PR bump.
+I'm using MACHINE=3D"dm6446-evm" and DISTRO=3D"angstrom-2008.1" and OE
+builds different/incompatible versions of the kernel modules (LKM) and
+the kernel. How do I go about debugging this?
 
-spaetz
+The built images seem correct on the host (same version number):
+
+uImage-2.6.31+2.6.32-rc2-r28+gitr7b2683fd0168df1576fcea947ef9f63e905de807-r=
+28-dm6446-evm.bin
+modules-2.6.31+2.6.32-rc2-r28+gitr7b2683fd0168df1576fcea947ef9f63e905de807-=
+r28-dm6446-evm.tgz
+
+But when booting the target, the kernel complains because the LKMs
+doesn't match the kernel version:
+----
+WARNING: Couldn't open directory
+/lib/modules/2.6.32-rc2-09211-g17d857b: No such file or directory
+FATAL: Could not open
+/lib/modules/2.6.32-rc2-09211-g17d857b/modules.dep.temp for writing:
+No such file or directory
+WARNING: Couldn't open directory
+/lib/modules/2.6.32-rc2-09211-g17d857b: No such file or directory
+FATAL: Could not open
+/lib/modules/2.6.32-rc2-09211-g17d857b/modules.dep.temp for writing:
+No such file or directory
+...snip...
+# ls -l /lib/modules
+drwxr-xr-x    3 root     root         4096 Dec  9 00:10 2.6.32-rc2-davinci1
+# insmod /lib/modules/2.6.32-rc2-davinci1/kernel/fs/smbfs/smbfs.ko
+[  264.580000] smbfs: disagrees about version of symbol module_layout
+insmod: cannot insert
+'/lib/modules/2.6.32-rc2-davinci1/kernel/fs/smbfs/smbfs.ko': invalid
+module format
+# uname -r
+2.6.32-rc2-09211-g17d857b
+----
+
+I really wish I knew OE well enough to debug this myself, but I don't
+(yet). What is the bitbake target for kernel modules? Where is is the
+decision on what kernel version to build the LKMs against? How is it
+possible for LKMs to end up being built for wrong kernels?
+
+(I have tried to generate a dependency graph with 'bitbake -g
+base-image', hoping that it would give me some clues. But my machine
+just hangs for a long time and then segfaults when trying to view
+depends.dot.)
+
+Best regards,
+Bj=C3=B8rn Forsman
 
 
---------------enigDF78853D314D3165CE48EC7D
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
-
-iEYEARECAAYFAksfvD4ACgkQVYX1jMgnoGIjDwCfQ5fxBrInJ78sXCCwNjJpGL+i
-gEMAnRHwAjMvvamhVoYFuVhlI4a9MKfJ
-=r2If
------END PGP SIGNATURE-----
-
---------------enigDF78853D314D3165CE48EC7D--
