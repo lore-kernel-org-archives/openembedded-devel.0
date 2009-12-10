@@ -1,33 +1,44 @@
-Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
+Received: from mail-pw0-f53.google.com ([209.85.160.53])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sebastian@SSpaeth.de>) id 1NIfG0-0002LU-DW
+	(envelope-from <rk.raggit@gmail.com>) id 1NIgmo-0002eJ-JS
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Dec 2009 10:24:23 +0100
-Received: from homiemail-a20.g.dreamhost.com (caiajhbdcagg.dreamhost.com
-	[208.97.132.66])
-	by hapkido.dreamhost.com (Postfix) with ESMTP id A739417AFE9
+	Thu, 10 Dec 2009 12:02:21 +0100
+Received: by pwi18 with SMTP id 18so394802pwi.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Dec 2009 01:22:33 -0800 (PST)
-Received: from [192.168.1.154] (unknown [84.55.206.192])
-	by homiemail-a20.g.dreamhost.com (Postfix) with ESMTPA id 8B7947EC065
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Dec 2009 01:22:21 -0800 (PST)
-Message-ID: <4B20BDCB.5010604@SSpaeth.de>
-Date: Thu, 10 Dec 2009 10:22:19 +0100
-From: Sebastian Spaeth <Sebastian@SSpaeth.de>
-Organization: ETH Zurich
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	Thu, 10 Dec 2009 03:00:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=xBYIBAgrUpIXDfdHaA53UejiQmnvD7G/Z70m63rWITQ=;
+	b=wYeZ7yQ97qtT9DExplBxvYKygG1BH26MlZxnBG3pxna2gjhC8nr1GThWtmGI2AjF0z
+	OtUfTSGIXHv9dsekmGoBFAvt8nDEjVLpBXG/ipM3djRWOJi20ux+pJF9+QOsWFVkH14A
+	2swnmPHN1ouxaRqFqq2sRMXwzNbo3IExODqtI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=QlMWChQO9UilRgZB9/Sl/C/vEt3MBaByuliWrsdRBHp/qhJIdNJCufIPnWIwnVIB5Q
+	EtL/vO6x169IPlQZm7WCE9Tvi1D8dRjrFlJjwMgJEvv1LI1RDZ4ac3s65zULKJoR5jgt
+	5Pc6ErYB3dOdid7hrM0OMeltHR9SXKCevF6NI=
 MIME-Version: 1.0
+Received: by 10.140.255.17 with SMTP id c17mr1170529rvi.137.1260442835680; 
+	Thu, 10 Dec 2009 03:00:35 -0800 (PST)
+In-Reply-To: <19c1b8a90912092118o54903eb4v4044e2c1191617c8@mail.gmail.com>
+References: <ec1f3d400911270337wbbbcae8gab291075d242c9d9@mail.gmail.com>
+	<19c1b8a90911301042t6ed432b2m1189c619772edf9c@mail.gmail.com>
+	<ec1f3d400912072024u2ab3a98bg96665cd8457efcd9@mail.gmail.com>
+	<19c1b8a90912081214u9abe04fm774bd7f54e7bf70a@mail.gmail.com>
+	<ec1f3d400912090347w217d39d2jd64c9801f95e96e4@mail.gmail.com>
+	<19c1b8a90912092118o54903eb4v4044e2c1191617c8@mail.gmail.com>
+Date: Thu, 10 Dec 2009 16:30:35 +0530
+Message-ID: <ec1f3d400912100300l42da9902wee299ca7bd27e6bb@mail.gmail.com>
+From: RK Raggit <rk.raggit@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1260365221-11155-1-git-send-email-Sebastian@SSpaeth.de>
-In-Reply-To: <1260365221-11155-1-git-send-email-Sebastian@SSpaeth.de>
-X-Enigmail-Version: 0.95.7
-OpenPGP: id=C827A062
-X-SA-Exim-Connect-IP: 66.33.216.122
-X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
+X-SA-Exim-Connect-IP: 209.85.160.53
+X-SA-Exim-Mail-From: rk.raggit@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] connman: don't give user 'system' permissions by default. We might not have one. (connman 0.46)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: cortex-a9 build failure at glibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,32 +52,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Dec 2009 09:24:23 -0000
-X-Groupsio-MsgNum: 14991
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enig4FDF07273D6F47A969ABD139"
-
---------------enig4FDF07273D6F47A969ABD139
+X-List-Received-Date: Thu, 10 Dec 2009 11:02:21 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-Not having heard back anything negative,
-I took the freedom to push this now.
+> What version are you using for binutils ? I could not reproduce the
+> issue with 2.20
+>
 
+I was using 2.18.50.0.7. I have just started a fresh build with the
+following line-up -
 
---------------enig4FDF07273D6F47A969ABD139
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+***********
+PREFERRED_VERSION_binutils               = "2.20"
+PREFERRED_VERSION_binutils-cross         = "2.20"
+PREFERRED_VERSION_binutils-cross-sdk     = "2.20"
+PREFERRED_VERSION_gcc                    = "4.4.1"
+PREFERRED_VERSION_gcc-cross              = "4.4.1"
+PREFERRED_VERSION_gcc-cross-initial      = "4.4.1"
+PREFERRED_VERSION_gcc-cross-intermediate = "4.4.1"
+PREFERRED_VERSION_glibc                 = "2.6.1"
+PREFERRED_VERSION_glibc-initial         = "2.6.1"
+**********
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+Will let you know about my progress.
 
-iEYEARECAAYFAksgvcsACgkQVYX1jMgnoGLQbwCeOJ5OW/wR3526ibRpsNk0bJUs
-RBMAnjSFO+zIqHBDBzAvBUgfACnqtAyw
-=RqO7
------END PGP SIGNATURE-----
+Thanks
 
---------------enig4FDF07273D6F47A969ABD139--
+--RK
+
