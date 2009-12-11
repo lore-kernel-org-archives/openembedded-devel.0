@@ -1,40 +1,27 @@
-Received: from out1.smtp.messagingengine.com ([66.111.4.25])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1NJ1a1-0000z9-8x
+	(envelope-from <philb@gnu.org>) id 1NJ1mF-0000e5-JL
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Dec 2009 10:14:32 +0100
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id 0DFF5C4DC8
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Dec 2009 04:12:48 -0500 (EST)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute2.internal (MEProxy); Fri, 11 Dec 2009 04:12:48 -0500
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
-	s=smtpout; bh=6rPn6eClAQoaLp6i1CTxsQwhae4=;
-	b=n144XcQ46XmQmuAiQpfhla1+hUVdr9Vn5EZ5ZsjjFgib9E0Z9Wjem7LnO7/U0jvvf+TbZc+UOsCX32PWnSN+Q25kiW5SM+uOx65L6Le79MSDHWEZbRhTNWOdM+n1SM99SOBxltKF0yCF8pctv5P3guC5gXf9WIm+XbZm3jTRbLU=
-X-Sasl-enc: MeXgjctXfTceXFjtZ60UTGU0C5by9cmr+s1IJN3XqbLd 1260522767
-Received: from [192.168.178.120] (p54838071.dip0.t-ipconnect.de
-	[84.131.128.113])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 41DCA4ABB88
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Dec 2009 04:12:47 -0500 (EST)
-Date: Fri, 11 Dec 2009 10:12:39 +0100 (CET)
-From: Vitus Jensen <vjensen@gmx.de>
+	Fri, 11 Dec 2009 10:27:11 +0100
+Received: from 88-109-152-31.dynamic.dsl.as9105.com ([88.109.152.31]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NJ1kV-0002j3-09
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Dec 2009 09:25:20 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <alpine.LNX.2.00.0912110857540.5053@asterix.crazy-teaparty.dyndns.org>
-Message-ID: <alpine.LNX.2.00.0912111008130.5053@asterix.crazy-teaparty.dyndns.org>
-References: <alpine.LNX.2.00.0912110857540.5053@asterix.crazy-teaparty.dyndns.org>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.25
-X-SA-Exim-Mail-From: vjensen@gmx.de
+In-Reply-To: <ac9c93b10912110039u28303201t5a762e715ed53ceb@mail.gmail.com>
+References: <ac9c93b10912110039u28303201t5a762e715ed53ceb@mail.gmail.com>
+Date: Fri, 11 Dec 2009 09:25:07 +0000
+Message-ID: <1260523507.6896.130.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] linux_2.6.29.bb: update to kernel 2.6.29.6
+Subject: Re: multiple DISTRO's in tmp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,25 +35,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Dec 2009 09:14:32 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Fri, 11 Dec 2009 09:27:11 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Fri, 11 Dec 2009, Vitus Jensen wrote:
+On Fri, 2009-12-11 at 09:39 +0100, Frans Meulenbroeks wrote:
+> However, I was wondering: wouldn't it be nice to allow multiple
+> distro's in one tmp dir (so that e.g. if they share the same version
+> of a recipe (like m4-native or os), this does not need to be
+> recompiled?
 
->
-> Version 2.6.29 fails on arch powerpc because of a syntax error.  See
-> http://lkml.indiana.edu/hypermail/linux/kernel/0906.1/00867.html
+Even if the (PN, PV) tuple is the same for two DISTROs it doesn't
+necessarily follow that the resulting packages will be the same.  They
+might have selected different compilers, configuration options, or
+versions of depended-on packages.  Or they might have a different
+filesystem layout, or any number of other things.
 
-Sorry, I did not see my first post (tried git send-email for the very 
-first time).  The first patch was rubbish.
+So, practically speaking, no: it isn't going to be feasible to make
+multiple DISTROs coexist in a single TMPDIR.  This is a case where you
+do need to create a separate TMPDIR.
 
-BTW: angstrom is not affected by the error in kernel 2.6.29 because it 
-uses an older compiler, minimal is.
+p.
 
-Vitus
 
--- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
 
 
