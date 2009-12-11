@@ -1,36 +1,33 @@
-Received: from mail-px0-f183.google.com ([209.85.216.183])
+Received: from bay0-omc1-s23.bay0.hotmail.com ([65.54.190.34])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vivektambakad@gmail.com>) id 1NJ4R2-00087h-C4
+	(envelope-from <salehusman@hotmail.com>) id 1NJ6an-0002F4-B1
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Dec 2009 13:17:27 +0100
-Received: by pxi13 with SMTP id 13so628732pxi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Dec 2009 04:15:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=LCiVAQO6rnrCkTPKDX6hMBKIvgEORDKLhNH2tvgXjVg=;
-	b=NwWiSQC7gVsgRWl3Wicfm5n30tuUm1TmPRf97OZaxUl+8hXrW0pwYAPcXekLj+OZR7
-	xNrl1F881iJEmGcVM8AdYsg1Y/KiJbyUG0zYdmgNjP1iSO8MdSOn5F3uil6Y5GJeK5Jx
-	qd/M+qDjcUmNhMUm5Om+OYezSYpTuOGhjDKM4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=M8W5Hp8cp5oDVqlFIn5XkP7rY6v6KkCmxDkMKS414rS6wADwO6Si3fd2KZ4FK65OmJ
-	RB6eE9dwb7JugN3e5CQTmNVxuTjmz7+cWJCAZz+HA/CEoXfV5cLwXMeF8Vl2F3EheRSF
-	UGO12xcyWfcMCIAWjFbmrolc3qWJJpoOda7dc=
+	Fri, 11 Dec 2009 15:35:40 +0100
+Received: from BAY127-W6 ([65.54.190.61]) by bay0-omc1-s23.bay0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 11 Dec 2009 06:32:48 -0800
+Message-ID: <BAY127-W6237F900F669541AE5747D88C0@phx.gbl>
+X-Originating-IP: [203.82.49.5]
+From: saleh usman <salehusman@hotmail.com>
+To: Openembedded Charis Larson <clarson@kergoth.com>, Openembedded Discussion
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 11 Dec 2009 19:32:48 +0500
+Importance: Normal
+In-Reply-To: <b6ebd0a50912100702s63a6db1lc3ce936f15ce0ad1@mail.gmail.com>
+References: <BAY127-W12CD092294401BAF297F8DD88F0@phx.gbl>
+	<4B1E7699.7000004@mlbassoc.com>,
+	<b6ebd0a50912080821r295faf03rd8b4159561a497c6@mail.gmail.com>,
+	<BAY127-W19F38E3292656B84EAB3A3D88D0@phx.gbl>,
+	<b6ebd0a50912100702s63a6db1lc3ce936f15ce0ad1@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.115.24.12 with SMTP id b12mr799486waj.86.1260533740689; Fri, 
-	11 Dec 2009 04:15:40 -0800 (PST)
-Date: Fri, 11 Dec 2009 17:45:40 +0530
-Message-ID: <ad82c8890912110415jde47da1kde90de8fdb2b56fc@mail.gmail.com>
-From: vivek tambakad <vivektambakad@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.183
-X-SA-Exim-Mail-From: vivektambakad@gmail.com
+X-OriginalArrivalTime: 11 Dec 2009 14:32:48.0656 (UTC)
+	FILETIME=[CFE80100:01CA7A6E]
+X-SA-Exim-Connect-IP: 65.54.190.34
+X-SA-Exim-Mail-From: salehusman@hotmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: choosing correct flash image for Compulab EM-X270
+Subject: Re: Problem using "bitbake"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,17 +41,161 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Dec 2009 12:17:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 11 Dec 2009 14:35:40 -0000
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
-        I compiled linphone successfully.Now I wanted to create flash image
-for linphone to port on Nand flash.
-Please tell me which image i have to choose for compulab EM-X270 in
-recipes/images to build image.
-and also tell me that what changes i have to do for .bb image file to build
-image for linphone.
 
-with regards
-vivek tambakad
+Oh sorry=2CI've missed to set oe.Thanks a lot for guidance.
+Now it is showing a different kind of error in terminal window as below.Whe=
+re to find these missing dependencies?
+
+[saleh@localhost build]$ bitbake helloworld-image
+NOTE: Handling BitBake files: | (0001/0001) [100 %]
+NOTE: Parsing finished. 0 cached=2C 1 parsed=2C 0 skipped=2C 0 masked.
+NOTE: Resolving any missing task queue dependencies
+ERROR: Required build target 'helloworld-image' has no buildable providers.
+Missing or unbuildable dependency chain was: ['helloworld-image'=2C 'shasum=
+-native']
+
+
+I am building this image for an embedded platform which has an ARM 9 proces=
+sor and linux has been ported and running on it.But our board doesn't suppo=
+rt gcc.What else I need to run this om my board.
+
+From: clarson@kergoth.com
+Date: Thu=2C 10 Dec 2009 08:02:27 -0700
+Subject: Re: [oe] Problem using "bitbake"
+To: salehusman@hotmail.com
+CC: openembedded-devel@lists.openembedded.org
+
+If that's a copy/pasted line=2C you're referencing an 'oe' variable=2C like=
+ly set in your environment?  Is it exported?  Did you add it to the bitbake=
+ environment whitelist?  Run bitbake -e | grep \^BBFILES=2C and see what it=
+ *really* ends up set to.
+
+
+
+On Thu=2C Dec 10=2C 2009 at 8:00 AM=2C saleh usman <salehusman@hotmail.com>=
+ wrote:
+
+
+
+
+
+
+
+I've set BBFILES in the local.conf file as  =20
+ BBFILES =3D "${oe}/openembedded/recipes/images/helloworld-image.bb"
+
+
+where oe is directory in which openembedded is placed. I've also tried hell=
+oworld-image.But it returned same messages.
+
+I am just following the isntructions of Getting Started page and using hell=
+oworld-image given in the openembedded/recipes/images directory.
+
+
+
+
+Terminal window was like this
+
+[saleh@localhost build]$ bitbake helloworld-image
+
+
+
+NOTE: Parsing finished. 0 cached=2C 0 parsed=2C 0 skipped=2C 0 masked.
+NOTE: Cache is clean=2C not saving.
+
+
+ERROR: Nothing PROVIDES 'helloworld-image'
+
+
+From: clarson@kergoth.com
+Date: Tue=2C 8 Dec 2009 09:21:04 -0700
+
+
+Subject: Re: [oe] Problem using "bitbake"
+To: openembedded-devel@lists.openembedded.org
+CC: salehusman@hotmail.com
+
+
+
+
+
+On Tue=2C Dec 8=2C 2009 at 8:54 AM=2C Gary Thomas <gary@mlbassoc.com> wrote=
+:
+
+
+
+
+On 12/08/2009 08:49 AM=2C saleh usman wrote:
+
+
+
+
+Hello
+
+
+
+I am trying to build   "helloworld_image"  given in openembedded recipes/im=
+ages directory but the following error is occuring. Please help me in diagn=
+osing the pr0blem and moving forward.
+
+
+
+
+
+[saleh@localhost build]$ bitbake helloworld_image
+
+
+
+NOTE: Parsing finished. 0 cached=2C 0 parsed=2C 0 skipped=2C 0 masked.
+
+NOTE: Cache is clean=2C not saving.
+
+ERROR: Nothing PROVIDES 'helloword_image'
+
+
+
+
+Try 'bitbake helloworld-image' (dash=2C not underscore)
+
+
+The 0 cached=2C 0 parsed=2C 0 skipped=2C 0 masked from the parse implies th=
+at BBFILES was not set correctly=2C or at all.
+
+
+
+--=20
+Chris Larson
+clarson at kergoth dot com
+clarson at mvista dot com
+Founder - BitBake=2C OpenEmbedded=2C OpenZaurus
+Maintainer - Tslib
+Software Engineer
+MontaVista Software=2C Inc.
+ 		 	   		 =20
+
+
+Keep your friends updated=97 even when you=92re not signed in.
+
+
+
+
+--=20
+Chris Larson
+clarson at kergoth dot com
+clarson at mvista dot com
+Founder - BitBake=2C OpenEmbedded=2C OpenZaurus
+Maintainer - Tslib
+Software Engineer
+MontaVista Software=2C Inc.
+ 		 	   		 =20
+_________________________________________________________________
+Windows Live Hotmail: Your friends can get your Facebook updates=2C right f=
+rom Hotmail=AE.
+http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/so=
+cial-network-basics.aspx?ocid=3DPID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_4:092=
+009=
 
