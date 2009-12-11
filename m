@@ -1,27 +1,30 @@
-Received: from mail-gx0-f227.google.com ([209.85.217.227])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1NJ7jm-00006n-2Q
+	(envelope-from <philb@gnu.org>) id 1NJ7tt-0002yt-JY
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Dec 2009 16:49:01 +0100
-Received: by gxk27 with SMTP id 27so915226gxk.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Dec 2009 07:47:14 -0800 (PST)
-Received: by 10.101.179.23 with SMTP id g23mr2241802anp.171.1260546434611;
-	Fri, 11 Dec 2009 07:47:14 -0800 (PST)
-Received: from xora-eee.xora.org.uk (elphelut.fttp.xmission.com
-	[166.70.233.217])
-	by mx.google.com with ESMTPS id 8sm898441yxg.24.2009.12.11.07.47.12
-	(version=SSLv3 cipher=RC4-MD5); Fri, 11 Dec 2009 07:47:13 -0800 (PST)
-Date: Fri, 11 Dec 2009 08:47:16 -0700
-From: Graeme Gregory <dp@xora.org.uk>
+	Fri, 11 Dec 2009 16:59:28 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NJ7sF-0006iN-98
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Dec 2009 15:57:43 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1NJ7sF-0002H3-1n
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Dec 2009 15:57:43 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091211154716.GB12304@xora-eee.xora.org.uk>
+In-Reply-To: <20091211154716.GB12304@xora-eee.xora.org.uk>
 References: <ac9c93b10912110039u28303201t5a762e715ed53ceb@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <ac9c93b10912110039u28303201t5a762e715ed53ceb@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-08-17)
-X-SA-Exim-Connect-IP: 209.85.217.227
-X-SA-Exim-Mail-From: dp@xora.org.uk
+	<20091211154716.GB12304@xora-eee.xora.org.uk>
+Date: Fri, 11 Dec 2009 15:57:39 +0000
+Message-Id: <1260547059.779.229.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: multiple DISTRO's in tmp
@@ -38,29 +41,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Dec 2009 15:49:01 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 11 Dec 2009 15:59:28 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Fri, Dec 11, 2009 at 09:39:21AM +0100, Frans Meulenbroeks wrote:
-> I bumped upon the following issue.
-> 
-> Normally I use angstrom as distro, but this time I needed a small
-> image to be used in an initramfs.
-> In order to achieve that I changed DISTRO in my local.conf to minimal
-> (tried minimal-uclibc first, but that would complain before generating
-> packages, probably due to a mismatch between my target (powerpc) and
-> uclibc (I refrained from sidetracking to dig into it)).
-> 
-minimal being an Angstrom clone will not actually produce smaller
-images. I would suggest for an initramfs you just switch Angstrom
-to uclibc mode.
+On Fri, 2009-12-11 at 08:47 -0700, Graeme Gregory wrote:
+> The only real advantage micro has in size is that it creates less
+> directories. The images are not as far as I can see physically any
+> smaller.
 
-The only real advantage micro has in size is that it creates less
-directories. The images are not as far as I can see physically any
-smaller.
+You should generally get smaller images with micro, though how much
+smaller will obviously depend on what exactly you are building.  What
+file sizes were you seeing in your test?
 
-Graeme
+p.
+
 
 
 
