@@ -1,47 +1,40 @@
 Received: from mail-fx0-f225.google.com ([209.85.220.225])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1NJET2-0007Rl-JX
+	(envelope-from <leon.woestenberg@gmail.com>) id 1NJEkY-0000NX-TJ
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Dec 2009 00:00:11 +0100
-Received: by fxm25 with SMTP id 25so1510509fxm.26
+	Sat, 12 Dec 2009 00:18:18 +0100
+Received: by fxm25 with SMTP id 25so1520124fxm.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Dec 2009 14:58:25 -0800 (PST)
+	Fri, 11 Dec 2009 15:16:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type;
-	bh=0Owf0/UalVHH63LbMmxpov7Z3mJ+Z6JkCt9ecYH8Qvw=;
-	b=ZQI8GLByQK58W4Q9L8pM1bXMjdyrZgT+sIN+AfE7FujDjQZ3c77Nk4L0AZftEWP8YP
-	2CVaJA8vbtOzigsyyQXFPkHVckLcMZHoGYHFpHvTEnJzqaw3k5PG3RaF1m+MbrLhqvm9
-	A4NeFGF1LVsjyB+J6rbdZud1AXsugfCFM2Png=
+	bh=Tz+4VPXhWNkrMkaM0c8aNDhwp5REZdNwiFPyA9IHTZE=;
+	b=Kre0r+UWqnxTvUMSDgwoKrDakqxLVmpNUMvdoiPZ7H+B2oW3Q6N/CENQufgSAcyDts
+	PeTWWgJgVGEb6lgwxBsQyTGSDsNs2fCivetMf7X6MkgU5FCnM00cf27RDDnAKQGUEBLe
+	Nf5oAP3UEhD2FaxaFVyzw5fqG5BG5dD4oDZec=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=ptuZPSQanbrX7XKdW8LFiJG4idIb4P9kYJb8T87VxVYf/ZBeMB4Gg0WnfA/sYfzUDK
-	k3bfGOAr3wBw6geeXF3T/7yD5yt+kX/H4xT1a5+K90Cqthe78Wpll2ZHalvwjbBZykYG
-	cSkrXDWnPlUrIPhfG/3TnNTYV8X/1LaH4mCsM=
+	b=SF2VVRVRaRK+/9RJ5dc2EpOqQWKeuan/1vDhqvabAJvtLfl8XooKR70W9bmI6Y95kn
+	AM1qXhRSJhDpxYTRpCrTYz7Io8hCyWLQeiPBW6BPB8xbTmp9KlNlT3oFMP5mp+kVGC/K
+	5cxfUQDkHjqhzRmho8lThdK3A+gi0mRFjiSkM=
 MIME-Version: 1.0
-Received: by 10.239.179.97 with SMTP id c33mr194994hbg.157.1260572304765; Fri, 
-	11 Dec 2009 14:58:24 -0800 (PST)
-In-Reply-To: <hfim4t$osr$5@ger.gmane.org>
+Received: by 10.239.170.36 with SMTP id q36mr202165hbe.153.1260573391804; Fri, 
+	11 Dec 2009 15:16:31 -0800 (PST)
+In-Reply-To: <hfilr3$osr$1@ger.gmane.org>
 References: <1260139496-21442-1-git-send-email-leon@sidebranch.com>
-	<1260139496-21442-5-git-send-email-leon@sidebranch.com>
-	<1260139496-21442-6-git-send-email-leon@sidebranch.com>
-	<1260139496-21442-7-git-send-email-leon@sidebranch.com>
-	<1260139496-21442-8-git-send-email-leon@sidebranch.com>
-	<1260139496-21442-9-git-send-email-leon@sidebranch.com>
-	<1260139496-21442-10-git-send-email-leon@sidebranch.com>
-	<1260139496-21442-11-git-send-email-leon@sidebranch.com>
-	<1260139496-21442-12-git-send-email-leon@sidebranch.com>
-	<hfim4t$osr$5@ger.gmane.org>
-Date: Fri, 11 Dec 2009 23:58:24 +0100
-Message-ID: <c384c5ea0912111458q22c6da86p79a68a835a0331d0@mail.gmail.com>
+	<1260139496-21442-2-git-send-email-leon@sidebranch.com>
+	<hfilr3$osr$1@ger.gmane.org>
+Date: Sat, 12 Dec 2009 00:16:31 +0100
+Message-ID: <c384c5ea0912111516m616a6032v1f1f32cc58f2e927@mail.gmail.com>
 From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.220.225
 X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] angstrom-2008.1.conf: Use ?= on PREFERRED_VERSION_linux-libc-headers.
+Subject: Re: [PATCH] nios2.conf: New architecture nios2.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,21 +48,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Dec 2009 23:00:14 -0000
+X-List-Received-Date: Fri, 11 Dec 2009 23:18:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hello Koen,
+Hello,
 
-On Mon, Dec 7, 2009 at 11:41 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+On Mon, Dec 7, 2009 at 11:36 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> On 06-12-09 23:44, Leon Woestenberg wrote:
 >
-> That way we know that it is nios that needs an older kernel. The actual
-> preferred solution is to patch nios2 support into linux-libc-headers-2.6.31.
+>> +# Select the nios2-specific toolchain parts
+>> +PREFERRED_VERSION_binutils = "nios2-2.15"
+>> +PREFERRED_VERSION_binutils-cross = "nios2-2.15"
+>> +PREFERRED_VERSION_linux-libc-headers = "nios2-2.6.28"
+>> +PREFERRED_VERSION_elf2flt-cross = "nios2-git"
+>> +PREFERRED_VERSION_gcc-cross = "nios2-3.4.6"
+>> +PREFERRED_VERSION_gcc-cross-initial = "nios2-3.4.6"
+>> +PREFERRED_VERSION_gcc-cross-intermediate = "nios2-3.4.6"
+>> +PREFERRED_VERSION_uclibc = "nios2-0.9.29"
+>> +PREFERRED_VERSION_uclibc-initial = "nios2-0.9.27"
 >
-The first fix is in my local branch.
+> NAK
+>
+> This doesn't belong in a machine.conf, it belongs in the distro.
+>
 
-I will do the second fix when I attack the MMU variant of the architecture.
+Hmm, the architecture file (conf/machine/nios2.conf) is the most
+related file to give sane defaults for the toolchain etc.
 
-Thanks,
+Of course distro's and end-users can override that, but I think this
+information belongs with the machine or underlying architecture by
+default.
+
+
+I will change it, but my opinion is per above, unless some good
+reasons are given why we shouldn't use the system where higher-level
+.conf files can override lower-level .conf files.
 
 Regards,
 -- 
