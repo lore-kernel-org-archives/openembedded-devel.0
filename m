@@ -1,35 +1,40 @@
-Received: from mail-yw0-f199.google.com ([209.85.211.199])
+Received: from out1.smtp.messagingengine.com ([66.111.4.25])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NJ13g-00048U-BS
+	(envelope-from <vjensen@gmx.de>) id 1NJ1a1-0000z9-8x
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Dec 2009 09:41:07 +0100
-Received: by ywh37 with SMTP id 37so680527ywh.13
+	Fri, 11 Dec 2009 10:14:32 +0100
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id 0DFF5C4DC8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Dec 2009 00:39:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=ZAOfOWDb8xp3Tuw8GO96G3pyvVuw8Cim5qsBUvBGY5o=;
-	b=N5XHQE/jQOAYwLIWh9N+NFKFcNBn9XbffOXwQVT6/gAWXZJoit1vFGMSaiq7QMs48q
-	kw8ugVZbdpwBV+WHLZitH+0WinytXHGCzmxM6FZyKabB5I7kEkhfRc7+hFp5M5dnxdXW
-	Nw1QRQOahZl7UA/Kr4bNOvJer4v6O1JWDKW7I=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=cvnZ/0EJyeLTLneAdr1mFa3gMdcffVRWsDhjWieffRLeBuRxY5+cEALkK6hpjryxv/
-	StWoRr4leTogolNNNGSLRvJkLDAcLauakIQ+MGQNKfakBmHbxpREy6vE2XRY4bJvPQy2
-	7kwgujdYCDH0KeRqBC87gEI9KZtInoT6NHxYI=
-MIME-Version: 1.0
-Received: by 10.101.169.1 with SMTP id w1mr1806824ano.21.1260520761153; Fri, 
-	11 Dec 2009 00:39:21 -0800 (PST)
-Date: Fri, 11 Dec 2009 09:39:21 +0100
-Message-ID: <ac9c93b10912110039u28303201t5a762e715ed53ceb@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Fri, 11 Dec 2009 04:12:48 -0500 (EST)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute2.internal (MEProxy); Fri, 11 Dec 2009 04:12:48 -0500
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
+	s=smtpout; bh=6rPn6eClAQoaLp6i1CTxsQwhae4=;
+	b=n144XcQ46XmQmuAiQpfhla1+hUVdr9Vn5EZ5ZsjjFgib9E0Z9Wjem7LnO7/U0jvvf+TbZc+UOsCX32PWnSN+Q25kiW5SM+uOx65L6Le79MSDHWEZbRhTNWOdM+n1SM99SOBxltKF0yCF8pctv5P3guC5gXf9WIm+XbZm3jTRbLU=
+X-Sasl-enc: MeXgjctXfTceXFjtZ60UTGU0C5by9cmr+s1IJN3XqbLd 1260522767
+Received: from [192.168.178.120] (p54838071.dip0.t-ipconnect.de
+	[84.131.128.113])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 41DCA4ABB88
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Dec 2009 04:12:47 -0500 (EST)
+Date: Fri, 11 Dec 2009 10:12:39 +0100 (CET)
+From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.199
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <alpine.LNX.2.00.0912110857540.5053@asterix.crazy-teaparty.dyndns.org>
+Message-ID: <alpine.LNX.2.00.0912111008130.5053@asterix.crazy-teaparty.dyndns.org>
+References: <alpine.LNX.2.00.0912110857540.5053@asterix.crazy-teaparty.dyndns.org>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 66.111.4.25
+X-SA-Exim-Mail-From: vjensen@gmx.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: multiple DISTRO's in tmp
+Subject: Re: [PATCH] linux_2.6.29.bb: update to kernel 2.6.29.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,31 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Dec 2009 08:41:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 11 Dec 2009 09:14:32 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
-I bumped upon the following issue.
+On Fri, 11 Dec 2009, Vitus Jensen wrote:
 
-Normally I use angstrom as distro, but this time I needed a small
-image to be used in an initramfs.
-In order to achieve that I changed DISTRO in my local.conf to minimal
-(tried minimal-uclibc first, but that would complain before generating
-packages, probably due to a mismatch between my target (powerpc) and
-uclibc (I refrained from sidetracking to dig into it)).
+>
+> Version 2.6.29 fails on arch powerpc because of a syntax error.  See
+> http://lkml.indiana.edu/hypermail/linux/kernel/0906.1/00867.html
 
-However, when trying to build minimal, it immediately complained about
-DISTRO_PR (minimal does not have DISTRO_PR, which you may find a bug,
-but anyway that is what exists now).
-I had to put it in a new tmp dir.
+Sorry, I did not see my first post (tried git send-email for the very 
+first time).  The first patch was rubbish.
 
-However, I was wondering: wouldn't it be nice to allow multiple
-distro's in one tmp dir (so that e.g. if they share the same version
-of a recipe (like m4-native or os), this does not need to be
-recompiled?
+BTW: angstrom is not affected by the error in kernel 2.6.29 because it 
+uses an older compiler, minimal is.
 
-If this is considered to be a good plan what would be the best way to
-achieve this?
+Vitus
 
-Frans
+-- 
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
 
 
