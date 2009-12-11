@@ -1,45 +1,47 @@
 Received: from mail-fx0-f225.google.com ([209.85.220.225])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1NJDJz-0000tA-04
+	(envelope-from <leon.woestenberg@gmail.com>) id 1NJET2-0007Rl-JX
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Dec 2009 22:46:46 +0100
-Received: by fxm25 with SMTP id 25so1465337fxm.26
+	Sat, 12 Dec 2009 00:00:11 +0100
+Received: by fxm25 with SMTP id 25so1510509fxm.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Dec 2009 13:44:59 -0800 (PST)
+	Fri, 11 Dec 2009 14:58:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=nQ3mwJSCn68AG0JKv8NVlXLylD/NRvLKnLzAnXIEoKc=;
-	b=OE0BZuBuo5AewpD17KetahDi5ALRppyhkvb6mWoVGhpz3i6ifDT1Vbrcq3ib6HhTLq
-	QjdjE0cNOuFMChA+FzZhAwGAyNWntrIaVPQi5kCmMvGvJwfnepNmpipGKIQo36Z6rlmP
-	WHBb7TAoY1WL1//RoqmKZZz78UOTDaNH5S5gw=
+	:date:message-id:subject:from:to:content-type;
+	bh=0Owf0/UalVHH63LbMmxpov7Z3mJ+Z6JkCt9ecYH8Qvw=;
+	b=ZQI8GLByQK58W4Q9L8pM1bXMjdyrZgT+sIN+AfE7FujDjQZ3c77Nk4L0AZftEWP8YP
+	2CVaJA8vbtOzigsyyQXFPkHVckLcMZHoGYHFpHvTEnJzqaw3k5PG3RaF1m+MbrLhqvm9
+	A4NeFGF1LVsjyB+J6rbdZud1AXsugfCFM2Png=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=VI1c9sUDNwZT1awVsAeAWS82nGQGzACD3qzt1sBNmrw0jhAc0vZE3y1eiF6nDWT7V2
-	Ml6lQ6EGaEhyHmOlgW3lpB8/rkEVclvUPYGtulKrCCg3mi2cI7JDSXQcVFeW3QKIgvSn
-	gjK3fzXMyZmbSUhDAfpQTya1m/4furoe7NAGo=
+	:content-type;
+	b=ptuZPSQanbrX7XKdW8LFiJG4idIb4P9kYJb8T87VxVYf/ZBeMB4Gg0WnfA/sYfzUDK
+	k3bfGOAr3wBw6geeXF3T/7yD5yt+kX/H4xT1a5+K90Cqthe78Wpll2ZHalvwjbBZykYG
+	cSkrXDWnPlUrIPhfG/3TnNTYV8X/1LaH4mCsM=
 MIME-Version: 1.0
-Received: by 10.239.173.204 with SMTP id g12mr202588hbf.190.1260567899057; 
-	Fri, 11 Dec 2009 13:44:59 -0800 (PST)
-In-Reply-To: <hfim04$osr$3@ger.gmane.org>
+Received: by 10.239.179.97 with SMTP id c33mr194994hbg.157.1260572304765; Fri, 
+	11 Dec 2009 14:58:24 -0800 (PST)
+In-Reply-To: <hfim4t$osr$5@ger.gmane.org>
 References: <1260139496-21442-1-git-send-email-leon@sidebranch.com>
-	<1260139496-21442-2-git-send-email-leon@sidebranch.com>
-	<1260139496-21442-3-git-send-email-leon@sidebranch.com>
-	<1260139496-21442-4-git-send-email-leon@sidebranch.com>
 	<1260139496-21442-5-git-send-email-leon@sidebranch.com>
 	<1260139496-21442-6-git-send-email-leon@sidebranch.com>
-	<hfim04$osr$3@ger.gmane.org>
-Date: Fri, 11 Dec 2009 22:44:59 +0100
-Message-ID: <c384c5ea0912111344o588a950dq7dc06954f6d71be0@mail.gmail.com>
+	<1260139496-21442-7-git-send-email-leon@sidebranch.com>
+	<1260139496-21442-8-git-send-email-leon@sidebranch.com>
+	<1260139496-21442-9-git-send-email-leon@sidebranch.com>
+	<1260139496-21442-10-git-send-email-leon@sidebranch.com>
+	<1260139496-21442-11-git-send-email-leon@sidebranch.com>
+	<1260139496-21442-12-git-send-email-leon@sidebranch.com>
+	<hfim4t$osr$5@ger.gmane.org>
+Date: Fri, 11 Dec 2009 23:58:24 +0100
+Message-ID: <c384c5ea0912111458q22c6da86p79a68a835a0331d0@mail.gmail.com>
 From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.220.225
 X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] binutils{, -cross}_nios2-2.15.bb: binutils for 	nios2.
+Subject: Re: [PATCH] angstrom-2008.1.conf: Use ?= on PREFERRED_VERSION_linux-libc-headers.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,28 +55,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Dec 2009 21:46:46 -0000
+X-List-Received-Date: Fri, 11 Dec 2009 23:00:14 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
 Hello Koen,
 
->> ---
->> =A0recipes/binutils/binutils-cross_nios2-2.15.bb | =A0 =A08 +++++++
->> =A0recipes/binutils/binutils_nios2-2.15.bb =A0 =A0 =A0 | =A0 26
->> +++++++++++++++++++++++++
+On Mon, Dec 7, 2009 at 11:41 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
 >
+> That way we know that it is nios that needs an older kernel. The actual
+> preferred solution is to patch nios2 support into linux-libc-headers-2.6.31.
 >
-> That's bogus. Change that to 2.15-nios2 or put nios2 in PR, but don't scr=
-ew
-> up binutils versioning.
->
-nios2-<version> has been fixed to <version>-nios2 my local branch.
+The first fix is in my local branch.
 
-Thanks for the review and remarks,
+I will do the second fix when I attack the MMU variant of the architecture.
+
+Thanks,
 
 Regards,
---=20
+-- 
 Leon
 
 
