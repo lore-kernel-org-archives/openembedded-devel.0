@@ -1,39 +1,47 @@
-Received: from mail-iw0-f194.google.com ([209.85.223.194])
+Received: from mail-fx0-f225.google.com ([209.85.220.225])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NJ9Oy-0005Sc-AN
+	(envelope-from <leon.woestenberg@gmail.com>) id 1NJD7Q-0002Xk-Lb
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Dec 2009 18:35:39 +0100
-Received: by iwn32 with SMTP id 32so557491iwn.24
+	Fri, 11 Dec 2009 22:33:47 +0100
+Received: by fxm25 with SMTP id 25so1456695fxm.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Dec 2009 09:33:52 -0800 (PST)
+	Fri, 11 Dec 2009 13:32:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=LBXMDX/ZWH8rnoibGABRyPV8unwyhE5yVihfIANtj9I=;
-	b=BRIWLjG/ws6lSv9e3wR74ya3TlE0EgpSacbeoZrtxs6z8gBdplWA2I7PjiOkGV0UJ4
-	aXaqNfnRQ7P8TRzmHA45dV0DsNUBjlbi82r0fNrq2MPEpfgJ+a829Vu9/hU7h2MCPN0i
-	ZiNYhpHRHuPMXOFQRtDj/iIptC50kJWrZphUQ=
+	:date:message-id:subject:from:to:content-type;
+	bh=sUYRl9Na/JVvUWV4LQ1P1QIfPdpAcyYZj3toWyFzz10=;
+	b=XuCivr5eUWTYZiX22XmUmco5/kSK3oF36MHnBw2DSXvxneDh06XnpA25laomMSroNY
+	b3EJhYe8RSpIFYXFhh/uRoc+XwsL0UP/GlJCMEkmG8ZF7uZGxVLbWyA7wEYpUQp1P0MI
+	qmjaB/HqO3AuRE60+hAbghWnzsA40ilUfVCUA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=vXBas/oW6mEkDYkB16g5uPDn8FWiR7BZZKfhJVogdIgl0rqYDTQ7jvKOVDGtKSn/ri
-	wdK3pQGUvql7Jv4Mz0FormJLTSciRQRgajEeuApXDVtjMzsUccyuKV8QBrSurIp0nA9h
-	+q3k0eXF0AtgbjhoQ7tfnFayXgxPl0Ft7LOEQ=
+	:content-type;
+	b=tawRb438VlotCRo2lXKZY9gNmyUpfsJBxbWc2o6XnBZqJ3jhQbkYcBSTYTgazAdk5v
+	3mQz7R4MS0l4KO/+xuhImrX+k7Jbw+P9vX3F1q7P0kcYi2cHhUbfPQ4QV5y0WjZfEgAs
+	xm2q+RNvOKV61abuyPzmEuU8KHWRNlmhGkp4I=
 MIME-Version: 1.0
-Received: by 10.231.190.83 with SMTP id g61mr355807iba.6.1260552832553; Fri, 
-	11 Dec 2009 09:33:52 -0800 (PST)
-In-Reply-To: <alpine.LNX.2.00.0912110857540.5053@asterix.crazy-teaparty.dyndns.org>
-References: <alpine.LNX.2.00.0912110857540.5053@asterix.crazy-teaparty.dyndns.org>
-Date: Fri, 11 Dec 2009 09:33:52 -0800
-Message-ID: <19c1b8a90912110933n5b8878c3g8b850c50ff435310@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+Received: by 10.239.163.208 with SMTP id q16mr193334hbd.102.1260567121595; 
+	Fri, 11 Dec 2009 13:32:01 -0800 (PST)
+In-Reply-To: <hfim7g$osr$6@ger.gmane.org>
+References: <1260139496-21442-1-git-send-email-leon@sidebranch.com>
+	<1260139496-21442-6-git-send-email-leon@sidebranch.com>
+	<1260139496-21442-7-git-send-email-leon@sidebranch.com>
+	<1260139496-21442-8-git-send-email-leon@sidebranch.com>
+	<1260139496-21442-9-git-send-email-leon@sidebranch.com>
+	<1260139496-21442-10-git-send-email-leon@sidebranch.com>
+	<1260139496-21442-11-git-send-email-leon@sidebranch.com>
+	<1260139496-21442-12-git-send-email-leon@sidebranch.com>
+	<1260139496-21442-13-git-send-email-leon@sidebranch.com>
+	<hfim7g$osr$6@ger.gmane.org>
+Date: Fri, 11 Dec 2009 22:32:01 +0100
+Message-ID: <c384c5ea0912111332y4e8d3e40j4cdbb4edf913e9b2@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.194
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.220.225
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] linux_2.6.29.bb: update to kernel 2.6.29.6
+Subject: Re: [PATCH] sane-srcrevs.inc: Add PREFERRED_VERSION_linux-libc-headers for nios2.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,71 +55,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Dec 2009 17:35:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 11 Dec 2009 21:33:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Dec 10, 2009 at 11:59 PM, Vitus Jensen <vjensen@gmx.de> wrote:
->
-> Version 2.6.29 fails on arch powerpc because of a syntax error. =C2=A0See
-> http://lkml.indiana.edu/hypermail/linux/kernel/0906.1/00867.html
->
-> Signed-off-by: Vitus Jensen <vjensen@gmx.de>
-> ---
-> =C2=A0recipes/linux/linux_2.6.29.bb | =C2=A0 =C2=A05 ++++-
-> =C2=A01 files changed, 4 insertions(+), 1 deletions(-)
->
-> diff --git a/recipes/linux/linux_2.6.29.bb b/recipes/linux/linux_2.6.29.b=
-b
-> index f78193d..87599d4 100644
-> --- a/recipes/linux/linux_2.6.29.bb
-> +++ b/recipes/linux/linux_2.6.29.bb
-> @@ -1,6 +1,6 @@
-> =C2=A0require linux.inc
->
-> -PR =3D "r9"
-> +PR =3D "r10"
->
-> =C2=A0S =3D "${WORKDIR}/linux-2.6.29"
->
-> @@ -21,6 +21,9 @@ DEFAULT_PREFERENCE_stamp9g20evb =3D "1"
-> =C2=A0SRC_URI =3D "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-2.6.29=
-.tar.bz2 \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://defconfig"
->
-> +# Bug fixes on the 2.6.29.x stable branch
-> +SRC_URI +=3D "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/patch-2.6.29.6.b=
-z2;patch=3D1"
-> +
-> =C2=A0SRC_URI_append_boc01 =3D "\
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0file://boc01.dts \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0file://boc01.dts.v1 \
-> --
-> 1.6.4.4
+Hello Koen,
 
-
-Although your patch seems technically correct except missing
-checksum.ini entry. There was concern amongst devs in the past about
-handing minor releases
-of kernel. Should it be added as a patch on top of base release or
-should they be added as
-separate recipes. There were opinions on both sides I am not sure what
-the outcome was.
-
-Thanks
-
--Khem
-
+On Mon, Dec 7, 2009 at 11:42 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> On 06-12-09 23:44, Leon Woestenberg wrote:
 >
+>> +SRCREV_pn-linux-libs-headers_nios2 =
+>> "d01303a1035a39e445007c7522d89ad985c4153c"
 >
-> --
-> Vitus Jensen, Hannover, Germany, Universe (current)
-> pgp public key available from keyservers
+> Using a machine override make it non-generic. Anyway, since the cabal said
+> checksums belong in the recipe, SRCREVs should be in there as well.
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Removed from sane-srcrev. I leave it in the non-generic recipe.
+
+Thanks,
+-- 
+Leon
 
 
