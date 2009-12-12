@@ -1,50 +1,25 @@
-Received: from mail-fx0-f216.google.com ([209.85.220.216])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1NJQSD-0003Oa-DB
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Dec 2009 12:48:08 +0100
-Received: by fxm8 with SMTP id 8so2017737fxm.27
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Dec 2009 03:46:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:cc
-	:subject:message-id:references:mime-version:content-type
-	:content-disposition:in-reply-to:user-agent;
-	bh=8y++GEHIicsvHD4GwOQWH/b64D3YkwDIp7kyHonNNXw=;
-	b=LOVI2MIaSnmfIl+7aIOQqfCwf2HMz4tJ7VptYKVg6bjWj75Xn+7on9u9nskx/XWiQn
-	Gs+3TILs0NXtuxg1722eE2xHvq588NUbx/5SvceNHHlUgPJRIgBe/sB2L3KqTKThPxUi
-	lrcLvNGkaGfIkxuca4nTivEdXU4e6NGEmgfLE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=AmVX0dFIWmn+4bl3PHwnUSEx0ksS2vNSK9xOm5NkQT5CMuZM5rYF8Ql7/aEsVxt73Z
-	uWtzJfFDvGROgbJsa1KRNUeq3JDu1S91MK9DMH3dik8faDL0BopX39oodMLJYoBM80C+
-	yqDwbYxVtd3QqhAIUHK9zH/tftrgEKIYYLrXI=
-Received: by 10.223.17.65 with SMTP id r1mr2924757faa.5.1260618381996;
-	Sat, 12 Dec 2009 03:46:21 -0800 (PST)
-Received: from s42.loc (85-127-241-136.dynamic.xdsl-line.inode.at
-	[85.127.241.136])
-	by mx.google.com with ESMTPS id h2sm4258951fkh.32.2009.12.12.03.46.19
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 12 Dec 2009 03:46:19 -0800 (PST)
-Received: from cow by s42.loc with local (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1NJQTd-0005CQ-SM; Sat, 12 Dec 2009 12:49:33 +0100
-Date: Sat, 12 Dec 2009 12:49:33 +0100
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20091212114933.GA8391@mx.loc>
-References: <1260393869-8231-1-git-send-email-rep.dot.nop@gmail.com>
-	<19c1b8a90912092039w592aed8btf658721b77f8e646@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <19c1b8a90912092039w592aed8btf658721b77f8e646@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.216
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NJQUL-0005Nn-Gq for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Dec 2009 12:50:20 +0100
+Received: from g225139006.adsl.alicedsl.de ([92.225.139.6]
+	helo=[192.168.178.25])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NJQSi-0002tU-23 for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Dec 2009 11:48:36 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 12 Dec 2009 12:48:40 +0100
+Message-ID: <1260618520.3373.23.camel@mattotaupa.wohnung.familie-menzel.net>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] binutils-2.20: remove unneeded/unwanted patches
+Subject: package VDR for OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,37 +33,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Dec 2009 11:48:08 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 12 Dec 2009 11:50:21 -0000
+X-Groupsio-MsgNum: 15024
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-aw+ryJC/19Wd0N9t2Ugf"
 
-On Wed, Dec 09, 2009 at 08:39:20PM -0800, Khem Raj wrote:
->On Wed, Dec 9, 2009 at 1:24 PM, Bernhard Reutner-Fischer
-><rep.dot.nop@gmail.com> wrote:
->> Hi khem,
->>
->> In 33630af91d1027a91b43f697c86e809a770668e1 you (AFAICS) added
->> binutils-2.20 support, yet the hunks mentioned below were already
->> applied or are unneeded in that release?! How did you patch/compile
->> this, perhaps i'm missing some crucial part in the setup?
->> Thanks for clarification/fixing this up,
->
->out of these three only patch which is applied right now is
->binutils-arm-pr7093.patch and by nature of the patch it adds a check
->and returns if true. Now that the patch it applied twice the check is done twice
->making one redundant but not incorrect. Just existence of patch does not apply
->them automatically you have to add the patches to SRC_URI in order to include
->them.
+--=-aw+ryJC/19Wd0N9t2Ugf
+Content-Type: multipart/mixed; boundary="=-AVbcNRgpWH2W3ULCdbKI"
 
-I'm aware of this, yes. But the fact that you pulled them into the 2.20
-patchdir suggested that they were somehow still of interrest for that
-version, although not applied.
->
->I will remove these patches from repo as they are not applied.
+--=-AVbcNRgpWH2W3ULCdbKI
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thanks alot for removing them, they're just taking up space and
-bandwidth.
-
-cheers,
+Dear OE hackers,
 
 
+I am trying to write a recipe for The Video Disc Recorder (VDR) [1] and
+get it into OE.
+
+Unfortunately I have never done this and I also do not know much about
+things related to compiling.
+
+I tried to follow [2] and [3] and came up with the following which is
+not much as you can see and in addition does not work yet.
+
+The problem I am facing is, that in the Makefile of VDR [4] there is
+
+        [=E2=80=A6]
+        LIBS     =3D -ljpeg -lpthread -ldl -lcap -lrt -lfreetype
+        -lfontconfig
+        INCLUDES =3D -I/usr/include/freetype
+        [=E2=80=A6]
+
+so that the path `/usr/include/freetype/` is passed to the make command
+which of course fails trying to cross compile the program.
+
+        CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include/fr=
+eetype2
+        cc1plus: internal compiler error: in add_path, at c-incpath.c:425
+
+Now, if I understand it correctly by looking at other recipes there is
+EXTRA_OEMAKE =3D "" where I should be able to set the INCLUDEPATH to the
+OE build environment. Is that correct.
+
+Could you please also tell me what the recipe variable name is for libs?
+
+
+Thank you,
+
+Paul
+
+
+[1] http://www.tvdr.de
+[2] http://wiki.openmoko.org/wiki/BitBake_recipe
+[3] http://docs.openembedded.org/usermanual/html/recipes_directories.html
+[4] http://git.gekrumbel.de/vdr.git?p=3Dvdr.git;a=3Dblob;f=3DMakefile;h=3D7=
+03b801f623d16d9f3e872716a2646d908f35273;hb=3Dea01358b3bca9d55402ba632c95cdd=
+6458abfdb3
+
+
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index 3bf9854..e717f1b 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -27046,6 +27046,10 @@ sha256=3D05b473815f9706387a3c5eaeb4da2e492f624e0b7=
+7834321
+ md5=3Dd97a8dbc72942c57542f50322b538a48
+ sha256=3D05b473815f9706387a3c5eaeb4da2e492f624e0b7783432179454f9d69bb973c
+=20
++[ftp://ftp.tvdr.de/vdr/Developer/vdr-1.7.10.tar.bz2]
++md5=3Dc74ee966baca1c47ed6b9e2be3d1639b
++sha256=3D165bfcd811ef92cab50d11a88a76c481e105689438929414d27edfacfb312f52
++
+ [ftp://ftp.billsgames.com/unix/x/vectoroids/src/vectoroids-1.1.0.tar.gz]
+ md5=3Dc63ce56b09aa7da9a6e95d804e9ee314
+ sha256=3D8d14dd281767e994108abd77c8e67d5a17718d0ad1e34d37e026911d14697b2e
+
+--=-AVbcNRgpWH2W3ULCdbKI
+Content-Disposition: attachment; filename="vdr_1.7.10.bb"
+Content-Type: text/plain; name="vdr_1.7.10.bb"; charset="UTF-8"
+Content-Transfer-Encoding: base64
+
+REVTQ1JJUFRJT04gPSAiVmlkZW8gRGlzayBSZWNvcmRlciAoVkRSKSBpcyBhIGRpZ2l0YWwgc2F0
+LXJlY2VpdmVyIHByb2dyYW0gdXNpbmcgTGludXggYW5kIERWQiB0ZWNobm9sb2dpZXMuIEl0IGFs
+bG93cyBvbmUgdG8gcmVjb3JkIE1QRUcyIHN0cmVhbXMsIGFzIHdlbGwgYXMgb3V0cHV0IHRoZSBz
+dHJlYW0gdG8gVFYuIEl0IGlzIGFsc28gcG9zc2libGUgdG8gd2F0Y2ggRFZEcyAoaGFyZHdhcmUg
+YWNjZWxlcmF0ZWQpIHdpdGggc29tZSBjb21mb3J0IGFuZCB1c2UgYW4gSVIgcmVtb3RlIGNvbnRy
+b2wuIg0KQVVUSE9SID0gIktsYXVzIFNjaG1pZGluZ2VyIg0KTElDRU5TRSA9ICJHUEx2MiINCkhP
+TUVQQUdFID0gImh0dHA6Ly93d3cudHZkci5kZSINCg0KREVQRU5EUyA9ICJmb250Y29uZmlnIGZy
+ZWV0eXBlIGdldHRleHQgbGliY2FwIGpwZWciDQoNClNSQ19VUkkgPSAiZnRwOi8vZnRwLnR2ZHIu
+ZGUvdmRyL0RldmVsb3Blci8ke1B9LnRhci5iejIiDQoNCg0KRVhUUkFfT0VNQUtFID0gIiINCg==
+
+--=-AVbcNRgpWH2W3ULCdbKI--
+
+--=-aw+ryJC/19Wd0N9t2Ugf
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAksjgw8ACgkQPX1aK2wOHViM5wCfZipKsbbqX5d6zyhkaRlelp4h
+Cl4AmgP3J2CRHU2FdrcjR3v0LuN28HLW
+=UkPE
+-----END PGP SIGNATURE-----
+
+--=-aw+ryJC/19Wd0N9t2Ugf--
