@@ -1,44 +1,39 @@
-Received: from wam.ukma.de ([188.40.105.250])
+Received: from mail-yx0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mattheis@ukma.de>) id 1NJa3V-0003Zs-Js
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NJaao-0000D6-4C
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Dec 2009 23:03:16 +0100
-Received: from wam.ukma.de (localhost [127.0.0.1])
-	by wam.ukma.de (Postfix) with ESMTP id 1615749E4E
+	Sat, 12 Dec 2009 23:37:42 +0100
+Received: by yxe5 with SMTP id 5so1813867yxe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Dec 2009 22:56:17 +0100 (CET)
-Received: from ws.ukma.de (ws.ukma.local [172.16.20.10])
-	by wam.ukma.de (Postfix) with ESMTP id F2E4E49B9E
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Dec 2009 22:56:16 +0100 (CET)
-Received: from ws.ukma.de ([172.16.20.10]) by ws ([172.16.20.10]) with mapi;
-	Sat, 12 Dec 2009 22:56:48 +0100
-From: Konrad Mattheis <mattheis@ukma.de>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Sat, 12 Dec 2009 22:55:34 +0100
-Thread-Topic: recipe for libgdiplus
-Thread-Index: Acp7ddTWg2hxfaPHRU6Y7J85lAJqhg==
-Message-ID: <F32E8C2599F37641BB4E3F3AC4A3C412016E0369E56F@ws>
-Accept-Language: de-DE, de-LU
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-cr-hashedpuzzle: BOU= ANlu BEkz Bz07 CDWm Csth Ct+w DO42 EQaM EX/4 Ed6V
-	Ijq0 Iqr5 JlLc KOov LSt6; 1;
-	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnAA==;
-	Sosha1_v1; 7; {D9047D33-A0E8-46CD-AD72-F3C9EC50CDA9};
-	bQBhAHQAdABoAGUAaQBzAEAAdQBrAG0AYQAuAGQAZQA=; Sat,
-	12 Dec 2009 21:55:34
-	GMT;cgBlAGMAaQBwAGUAIABmAG8AcgAgAGwAaQBiAGcAZABpAHAAbAB1AHMA
-x-cr-puzzleid: {D9047D33-A0E8-46CD-AD72-F3C9EC50CDA9}
-acceptlanguage: de-DE, de-LU
+	Sat, 12 Dec 2009 14:35:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=QUsMd82g9HkSxpwShwaQrYd3pU52szf77qT+T8Ddvm8=;
+	b=MoyQDMKVp0zqNIUxhrXFbGmgtZ0Q+KL7MIls/rSEoDknLXkbopva03AyE6YNK5bNS8
+	JXkNVDDtu12QPLWyBp5QezW/HNUNszEwTompqaeqr3Dw7YKJFWGoQ7KF1fIZHnlnXs3o
+	08jDSqzxdtMPi0M6cO8fimp/FNal+Tns721vQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=vr92KtQIqOdQ/qSl0RiUOeYE61ffjkpVY8Rzg6bE9tAwF+ChAzszt+jh/ppcKf/0LE
+	MJ3Tqrcmsw6G8YBQ1liff4HBlts3xh8DDwuclxqL7pxO/D+BSYEySxT0RkIaGwfSCV45
+	lQ0oKC8xn8SrdCZjnhomQ8UdeoYm7C5F5/a5Q=
 MIME-Version: 1.0
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 188.40.105.250
-X-SA-Exim-Mail-From: mattheis@ukma.de
+Received: by 10.101.3.26 with SMTP id f26mr4759679ani.5.1260657352654; Sat, 12 
+	Dec 2009 14:35:52 -0800 (PST)
+In-Reply-To: <hg126h$djg$2@ger.gmane.org>
+References: <ac9c93b10912110039u28303201t5a762e715ed53ceb@mail.gmail.com>
+	<hg126h$djg$2@ger.gmane.org>
+Date: Sat, 12 Dec 2009 23:35:52 +0100
+Message-ID: <ac9c93b10912121435i13dd9c3ds6b37e46fd51dc4c9@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: recipe for libgdiplus
+Subject: Re: multiple DISTRO's in tmp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,30 +47,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Dec 2009 22:03:16 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 12 Dec 2009 22:37:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+2009/12/12 Koen Kooi <k.kooi@student.utwente.nl>:
+> On 11-12-09 09:39, Frans Meulenbroeks wrote:
+>>
+>> I bumped upon the following issue.
+>>
+>> Normally I use angstrom as distro, but this time I needed a small
+>> image to be used in an initramfs.
+>
+> My initramfs built with angstrom is 80KiB and it has an fbdev GUI, how much
+> smaller do you want to get with changing DISTRO?
 
-try to build a recipe for libgdiplus. This is a library which you need
-if you want to get Winforms with mono working.
+80 kb is small enough for me.
+What do you build to get that?
 
-A lot of stuff is already working but it always stops because it=20
-don't find the "glib.h"
-
-In this headerfiles basic types of the glib are described.
-see:
-http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html
-
-I already wrote in my recipe:
-
-DEPENDS =3D "... glib-2.0 ..." but I don't solve the problem.
-
-Any ideas??
-
-bye
-Konrad
+Frans
 
 
