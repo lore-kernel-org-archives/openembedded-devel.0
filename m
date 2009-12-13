@@ -1,25 +1,38 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NJqiO-000785-2M for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Dec 2009 16:50:35 +0100
-Received: from g225081191.adsl.alicedsl.de ([92.225.81.191]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NJqgj-00035W-PS for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Dec 2009 15:48:49 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NJrRA-0000Ky-4m for openembedded-devel@lists.openembedded.org;
+	Sun, 13 Dec 2009 17:36:51 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NJrPU-0008A3-Mq
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 13 Dec 2009 17:35:04 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 13 Dec 2009 17:35:04 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 13 Dec 2009 17:35:04 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 13 Dec 2009 16:48:55 +0100
-Message-ID: <1260719335.3110.27.camel@mattotaupa.wohnung.familie-menzel.net>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 13 Dec 2009 17:34:11 +0100
+Message-ID: <hg3523$2lg$3@ger.gmane.org>
+References: <1260618520.3373.23.camel@mattotaupa.wohnung.familie-menzel.net>	<20091212173311.GA3730@rhein.zuhause.netz>
+	<1260711980.3110.21.camel@mattotaupa.wohnung.familie-menzel.net>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.5) Gecko/20091201 Shredder/3.0.1pre
+In-Reply-To: <1260711980.3110.21.camel@mattotaupa.wohnung.familie-menzel.net>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 1/1] Typo. s/to used/to use/
+Subject: Re: package VDR for OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,83 +46,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Dec 2009 15:50:35 -0000
-X-Groupsio-MsgNum: 15035
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-p55/cDjnQZ+7dV1C69b+"
+X-List-Received-Date: Sun, 13 Dec 2009 16:36:51 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
---=-p55/cDjnQZ+7dV1C69b+
-Content-Type: multipart/mixed; boundary="=-hOFFXk9D4lZhEiegZJRI"
+On 13-12-09 14:46, Paul Menzel wrote:
+> Am Samstag, den 12.12.2009, 18:33 +0100 schrieb Henning Heinold:
+>> On Sat, Dec 12, 2009 at 12:48:40PM +0100, Paul Menzel wrote:
+>>> I am trying to write a recipe for The Video Disc Recorder (VDR) [1] and
+>>> get it into OE.
+>>>
+>>> Unfortunately I have never done this and I also do not know much about
+>>> things related to compiling.
+>>>
+>>> I tried to follow [2] and [3] and came up with the following which is
+>>> not much as you can see and in addition does not work yet.
+>>>
+>>> The problem I am facing is, that in the Makefile of VDR [4] there is
+>>>
+>>>          […]
+>>>          LIBS     = -ljpeg -lpthread -ldl -lcap -lrt -lfreetype
+>>>          -lfontconfig
+>>>          INCLUDES = -I/usr/include/freetype
+>>>          […]
+>>>
+>>> so that the path `/usr/include/freetype/` is passed to the make command
+>>> which of course fails trying to cross compile the program.
+>>>
+>>>          CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include/freetype2
+>>>          cc1plus: internal compiler error: in add_path, at c-incpath.c:425
+>>>
+>>> Now, if I understand it correctly by looking at other recipes there is
+>>> EXTRA_OEMAKE = "" where I should be able to set the INCLUDEPATH to the
+>>> OE build environment. Is that correct.
+>>>
+>>> Could you please also tell me what the recipe variable name is for libs?
+>>
+>> What buildsystem is vdr using autotools or handmade Makefiles?
+>
+> VDR uses a handmade Makefile.
+>
+> […]
+>
+>> for handmade Makefiles
+>>
+>> make a Patch which patches the Makefile and sets the include path to
+>> our staginginclude-Path
+>
+> Thank you! I tried this
+>
+>          +-INCLUDES = -I/usr/include/freetype2
+>          ++INCLUDES = -I${STAGING_INCDIR}/freetype2
+>
+> but the `${STAGING_INCDIR}` was not expanded. The result is the
+> following.
+>
+>          INCLUDES = -I${STAGING_INCDIR}freetype2
+>
+> Using an absolute path worked.
+>
+> Could you please point out my mistake?
 
---=-hOFFXk9D4lZhEiegZJRI
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+AFAIK Makefiles don't use accolades but parens for variables.
 
-Dear OE hackers,
+regards,
 
-
-please see attachment.
+Koen
 
 
-Thanks,
 
-Paul
-
---=-hOFFXk9D4lZhEiegZJRI
-Content-Disposition: attachment; filename="0001-Typo.-s-to-used-to-use.patch"
-Content-Transfer-Encoding: base64
-Content-Type: text/x-patch; name="0001-Typo.-s-to-used-to-use.patch"; charset="UTF-8"
-
-RnJvbSAwZWM0MDE5MDkwN2FkNWU0ZDYxYTVhYjUxMTFlNTM1NGFhYjJmNTkwIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQ0KRnJvbTogUGF1bCBNZW56ZWwgPHBhdWxlcGFudGVyQHVzZXJzLnNvdXJj
-ZWZvcmdlLm5ldD4NCkRhdGU6IFN1biwgMTMgRGVjIDIwMDkgMTY6NDc6MDUgKzAxMDANClN1Ympl
-Y3Q6IFtQQVRDSCAxLzFdIFR5cG8uIHMvdG8gdXNlZC90byB1c2UvDQoNCg0KU2lnbmVkLW9mZi1i
-eTogUGF1bCBNZW56ZWwgPHBhdWxlcGFudGVyQHVzZXJzLnNvdXJjZWZvcmdlLm5ldD4NCi0tLQ0K
-IGRvY3MvdXNlcm1hbnVhbC9jaGFwdGVycy9yZWNpcGVzLnhtbCB8ICAgIDQgKystLQ0KIDEgZmls
-ZXMgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQ0KDQpkaWZmIC0tZ2l0
-IGEvZG9jcy91c2VybWFudWFsL2NoYXB0ZXJzL3JlY2lwZXMueG1sIGIvZG9jcy91c2VybWFudWFs
-L2NoYXB0ZXJzL3JlY2lwZXMueG1sDQppbmRleCA3NGU4ZTE2Li5jYWQxZDgwIDEwMDY0NA0KLS0t
-IGEvZG9jcy91c2VybWFudWFsL2NoYXB0ZXJzL3JlY2lwZXMueG1sDQorKysgYi9kb2NzL3VzZXJt
-YW51YWwvY2hhcHRlcnMvcmVjaXBlcy54bWwNCkBAIC0yMDEsNyArMjAxLDcgQEAgVkFSMSA/PSAi
-TmV3IHZhbHVlIjwvc2NyZWVuPjwvcGFyYT4NCiAgICAgICAgICAgd2hpY2ggcmVzdWx0cyBpbiB0
-aGUgYWN0aW9ucyBvbmx5IGJlaW5nIHBlcmZvcm1lZCBmb3IgdGhlIHNwZWNpZmllZA0KICAgICAg
-ICAgICB0YXJnZXQgb3IgbWFjaGluZTogW1RPRE86IExpbmsgdG8gc2VjdGlvbiBvbiBvdmVycmlk
-ZXNdPHNjcmVlbj5TUkNfVVJJX2FwcGVuZF9zaDQgPSAiIGZpbGU6Ly9maXgtbWFrZWZpbGUucGF0
-Y2g7cGF0Y2g9MSI8L3NjcmVlbj5Ob3RlDQogICAgICAgICAgIHRoYXQgdGhlIGFwcGVuZGVkIGlu
-Zm9ybWF0aW9uIGlzIGEgdmFyaWFibGUgaXRzZWxmLCBhbmQgdGhlcmVmb3JlDQotICAgICAgICAg
-IGl0J3MgcG9zc2libGUgdG8gdXNlZCA8ZW1waGFzaXM+Kz08L2VtcGhhc2lzPiBvcg0KKyAgICAg
-ICAgICBpdCdzIHBvc3NpYmxlIHRvIHVzZSA8ZW1waGFzaXM+Kz08L2VtcGhhc2lzPiBvcg0KICAg
-ICAgICAgICA8ZW1waGFzaXM+PSs8L2VtcGhhc2lzPiB0byBhc3NpZ24gdmFyaWFibGVzIHRvIHRo
-ZQ0KICAgICAgICAgICA8ZW1waGFzaXM+X2FwcGVuZDwvZW1waGFzaXM+IGluZm9ybWF0aW9uOjxz
-Y3JlZW4+U1JDX1VSSV9hcHBlbmQgPSAiIGZpbGU6Ly9maXgtbWFrZWZpbGUucGF0Y2g7cGF0Y2g9
-MSINCiBTUkNfVVJJX2FwcGVuZCArPSAiZmlsZTovL2ZpeC1pbnN0YWxsLnBhdGNoO3BhdGNoPTEi
-PC9zY3JlZW4+PC9wYXJhPg0KQEAgLTIyNSw3ICsyMjUsNyBAQCBTUkNfVVJJX2FwcGVuZCArPSAi
-ZmlsZTovL2ZpeC1pbnN0YWxsLnBhdGNoO3BhdGNoPTEiPC9zY3JlZW4+PC9wYXJhPg0KICAgICAg
-ICAgICBzcGVjaWZpZWQgdGFyZ2V0IG9yIG1hY2hpbmU6IFtUT0RPOiBMaW5rIHRvIHNlY3Rpb24g
-b24NCiAgICAgICAgICAgb3ZlcnJpZGVzXTxzY3JlZW4+Q0ZMQUdTX3ByZXBlbmRfc2g0ID0gIiBm
-aWxlOi8vZml4LW1ha2VmaWxlLnBhdGNoO3BhdGNoPTEiPC9zY3JlZW4+Tm90ZQ0KICAgICAgICAg
-ICB0aGF0IHRoZSBhcHBlbmRlZCBpbmZvcm1hdGlvbiBpcyBhIHZhcmlhYmxlIGl0c2VsZiwgYW5k
-IHRoZXJlZm9yZQ0KLSAgICAgICAgICBpdCdzIHBvc3NpYmxlIHRvIHVzZWQgPGVtcGhhc2lzPis9
-PC9lbXBoYXNpcz4gb3INCisgICAgICAgICAgaXQncyBwb3NzaWJsZSB0byB1c2UgPGVtcGhhc2lz
-Pis9PC9lbXBoYXNpcz4gb3INCiAgICAgICAgICAgPGVtcGhhc2lzPj0rPC9lbXBoYXNpcz4gdG8g
-YXNzaWduIHZhcmlhYmxlcyB0byB0aGUNCiAgICAgICAgICAgPGVtcGhhc2lzPl9wcmVwZW5kPC9l
-bXBoYXNpcz4gaW5mb3JtYXRpb246PHNjcmVlbj5DRkxBR1NfcHJlcGVuZCA9ICItSSR7U30vbXlp
-bmNsdWRlcyAiDQogQ0ZMQUdTX3ByZXBlbmQgKz0gIi1JJHtTfS9teWluY2x1ZGVzMiAiPC9zY3Jl
-ZW4+Tm90ZSBhbHNvIHRoZSBsYWNrIG9mIGEgc3BhY2UNCi0tIA0KMS42LjUuNA0KDQo=
-
---=-hOFFXk9D4lZhEiegZJRI--
-
---=-p55/cDjnQZ+7dV1C69b+
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkslDOcACgkQPX1aK2wOHViUXwCaAj5cpzi69VM4NHrIsgeJy7ls
-FgcAn2X4P96myF4m5d0wtbvSbQh+bX5r
-=tHqT
------END PGP SIGNATURE-----
-
---=-p55/cDjnQZ+7dV1C69b+--
