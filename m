@@ -1,38 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from bay0-omc4-s1.bay0.hotmail.com ([65.54.190.203])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NJrW3-0000TP-9a for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Dec 2009 17:41:54 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NJrUK-00027J-Up
+	(envelope-from <salehusman@hotmail.com>) id 1NJs8s-0006rP-9k
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Dec 2009 17:40:04 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Dec 2009 17:40:04 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Dec 2009 17:40:04 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 13 Dec 2009 17:32:54 +0100
-Message-ID: <hg34vm$2lg$2@ger.gmane.org>
-References: <ac9c93b10912110039u28303201t5a762e715ed53ceb@mail.gmail.com>	<hg126h$djg$2@ger.gmane.org>
-	<ac9c93b10912121435i13dd9c3ds6b37e46fd51dc4c9@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.5) Gecko/20091201 Shredder/3.0.1pre
-In-Reply-To: <ac9c93b10912121435i13dd9c3ds6b37e46fd51dc4c9@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	Sun, 13 Dec 2009 18:22:01 +0100
+Received: from BAY127-W3 ([65.54.190.199]) by bay0-omc4-s1.bay0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sun, 13 Dec 2009 09:19:09 -0800
+Message-ID: <BAY127-W32DC804131DD0AD0DBD49D88A0@phx.gbl>
+X-Originating-IP: [119.153.67.244]
+From: saleh usman <salehusman@hotmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Date: Sun, 13 Dec 2009 22:19:09 +0500
+Importance: Normal
+MIME-Version: 1.0
+X-OriginalArrivalTime: 13 Dec 2009 17:19:09.0953 (UTC)
+	FILETIME=[620C8F10:01CA7C18]
+X-SA-Exim-Connect-IP: 65.54.190.203
+X-SA-Exim-Mail-From: salehusman@hotmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: multiple DISTRO's in tmp
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Problem using "bitbake"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,32 +34,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Dec 2009 16:41:55 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-On 12-12-09 23:35, Frans Meulenbroeks wrote:
-> 2009/12/12 Koen Kooi<k.kooi@student.utwente.nl>:
->> On 11-12-09 09:39, Frans Meulenbroeks wrote:
->>>
->>> I bumped upon the following issue.
->>>
->>> Normally I use angstrom as distro, but this time I needed a small
->>> image to be used in an initramfs.
->>
->> My initramfs built with angstrom is 80KiB and it has an fbdev GUI, how much
->> smaller do you want to get with changing DISTRO?
->
-> 80 kb is small enough for me.
-> What do you build to get that?
+X-List-Received-Date: Sun, 13 Dec 2009 17:22:01 -0000
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
 
-kexecboot for beagleboard.
-
-regards,
-
-Koen
-
-
-
+If I'll use "stars" where to specify image for which bitbake will build.
+ 		 	   		 =20
+_________________________________________________________________
+Windows Live: Make it easier for your friends to see what you=92re up to on=
+ Facebook.
+http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/so=
+cial-network-basics.aspx?ocid=3DPID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_2:092=
+009=
 
