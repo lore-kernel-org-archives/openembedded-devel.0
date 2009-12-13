@@ -1,26 +1,35 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from mail-gx0-f215.google.com ([209.85.217.215])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1NJpJL-0000nU-LK
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NJpmN-0003A9-75
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Dec 2009 15:20:38 +0100
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id AF89E1D36078; Sun, 13 Dec 2009 15:18:49 +0100 (CET)
-Date: Sun, 13 Dec 2009 15:18:49 +0100
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091213141849.GG17995@ibawizard.net>
-References: <1260618520.3373.23.camel@mattotaupa.wohnung.familie-menzel.net>
-	<20091212173311.GA3730@rhein.zuhause.netz>
-	<1260711980.3110.21.camel@mattotaupa.wohnung.familie-menzel.net>
+	Sun, 13 Dec 2009 15:50:38 +0100
+Received: by gxk7 with SMTP id 7so3597991gxk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 13 Dec 2009 06:48:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=oj+vIOHjgT+4TJfUTKCUhYvA1d41yWGabLzKPEssjZs=;
+	b=us+iQSLg58b4e/q0/xjtcTnAGNreZUr/3IMKqGGrp4BLFs/DMuEEnAzQFrBlTPFUIa
+	BIogTSPEdpQ169AUXloyf/ZSSw0yoUmG+vkymV43FQSR5IzDkBQ+xZwnL4lLPO3VRxPG
+	0UAZMJ/5z38Ss9WweomjpsUK+JaG74fo9eGFA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=ENYaFVBCt+gd+MSfqRi1pxRiI9yuswu7ONNs9ksyby5Uu7VoaRGdl8bbZlgym4iY6k
+	e9pk6MV86z2WWXcolmoFCFhSjKGARsr7KMTsEOTMF3hW9XdMY18INgeg7dc1gigMHlsi
+	uGEHZ74AvG2yrL361w8y+RAt2xL5M7ZmjLl7Q=
 MIME-Version: 1.0
-In-Reply-To: <1260711980.3110.21.camel@mattotaupa.wohnung.familie-menzel.net>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+Received: by 10.101.7.20 with SMTP id k20mr5524388ani.35.1260715730180; Sun, 
+	13 Dec 2009 06:48:50 -0800 (PST)
+Date: Sun, 13 Dec 2009 15:48:50 +0100
+Message-ID: <ac9c93b10912130648q6fd4e04ax3b1a24edf523688a@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.217.215
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: package VDR for OE
+Subject: pcre staging (was: Re: new staging breaks apache2)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,57 +43,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Dec 2009 14:20:38 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 13 Dec 2009 14:50:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Paul Menzel <paulepanter@users.sourceforge.net> [2009-12-13 14:46:20]:
+Hi,
 
-> Thank you! I tried this
-> 
->         +-INCLUDES = -I/usr/include/freetype2
->         ++INCLUDES = -I${STAGING_INCDIR}/freetype2
-> 
-> but the `${STAGING_INCDIR}` was not expanded. The result is the
-> following.
-> 
->         INCLUDES = -I${STAGING_INCDIR}freetype2
-> 
-> Using an absolute path worked.
-> 
-> Could you please point out my mistake?
+I've dived into this problem.
+The root cause is that pcre-config is not staged properly for package pcre
+No idea why, maybe because it is part of the -dev package.
+I tried to dive into this and peeked at classes/autotools.bbclass but
+didn't manage to find the cause
+(or maybe I did, but in that case I didn't find the fix).
 
-Maybe, it's because you don't have STAGING_INCDIR variable available in
-do_compile() step. If I were you, I would grep for STAGING_INCDIR variable in
-other recipes: grep -R STAGING_INCDIR recipes/* and you should get idea how to
-use it. Hint, change :
+What I saw were three references to STAGE_TEMP_PREFIX . However a grep
+-r on my openembedded dir did not deliver an indication on where this
+var is set.
+so either this is the problem, or I am totally lost wrt this issue.
 
-INCLUDES = -I${STAGING_INCDIR}freetype2
+Anyway, I've fixed things for now by re-adding do_stage and explicitly
+stage pcre-config.
+This works and solves the breakage I had introduced by this.
+Apache2 builds fine with this fix.
 
-to 
+Looking for an expert opinion on how to really fix this
 
-INCLUDES = ${CFLAGS}
+Frans.
 
-and in your recipe do:
+PS: probably I would prefer it if the STAGE_TEMP dir remains and is
+not removed. This could help diagnosing things.
 
-CFLAGS_append  += " -I${STAGING_INCDIR}/freetype2"
 
-> Furthermore is there a better way for upstream to set things up so that
-> no patching is needed? Or is autotools needed for this?
-
-No for this hardcoded paths.
-
-> +--- vdr/Makefile~fixpaths	2009-10-18 15:59:25.000000000 +0200
-> ++++ vdr/Makefile	2009-12-13 12:28:22.000000000 +0100
-> +@@ -21,7 +21,7 @@
-> + BINDIR   = $(PREFIX)/bin
-> + LOCDIR   = ./locale
-> + LIBS     = -ljpeg -lpthread -ldl -lcap -lrt -lfreetype -lfontconfig
-> +-INCLUDES = -I/usr/include/freetype2
-> ++INCLUDES = -I/srv/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/freetype2
-
-Maybe you've overlooked that, but it's unacceptable hardcoded path...
-
--- ynezz
+2009/12/13 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+> Hi,
+>
+> I changed apache to use libpcre and also moved libpcre to the new
+> staging. (effectively removing do_stage)
+> However, apparently things do not work as the should.
+>
+> apparently things seemed to work so I committed my work.
+> However after changing one more thing in apache, it does not build any more.
+> I get an error in configure stating:
+> configure: error: Did not find pcre-config script at
+> /home/frans/oe/tmp_angstrom/staging/armv7a-angstrom-linux-gnueabi/usr/bin/..
+>
+> In the libpcre work dir it creates:
+> ./package/usr/bin/pcre-config
+>
+> would expect this to end up in staging too with the new staging.
+>
+> However, if I run a find for pcre-config in staging I get:
+> ./i686-linux/usr/bin/armv5te-angstrom-linux-gnueabi/pcre-config
+> ./i686-linux/usr/bin/armv7a-angstrom-linux-gnueabi/pcre-config
+> ./armv7a-angstrom-linux-gnueabi/usr/share/doc/pcre/pcre-config.txt
+> ./armv7a-angstrom-linux-gnueabi/usr/share/doc/pcre/html/pcre-config.html
+>
+> no ./armv7a-angstrom-linux-gnueabi/usr/bin/pcre-config
+>
+> What did I do wrong/what went wrong?????
+>
+> Totally puzzled.
+> Will dig into this tomorrow (it is now 1 am here so little chance I
+> can find a decent solution, need some sleep first).
+> Any suggestions/help is appreciated (and apologies for breaking the
+> apache2 build (and yes, I could revert but actually the old version
+> was not really sound either).
+>
+> Frans
+>
 
 
