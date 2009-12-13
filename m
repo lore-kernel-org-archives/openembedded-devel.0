@@ -1,39 +1,28 @@
-Received: from libra.cs.put.poznan.pl ([150.254.30.30])
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <przemyslaw.wesolek@cs.put.poznan.pl>)
-	id 1NJtCO-0005wR-Gh for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Dec 2009 19:29:43 +0100
-Received: from kas30pipe.localhost (unknown [127.0.0.1])
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 9D1989E
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Dec 2009 18:26:17 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at cs.put.poznan.pl
-Received: from libra.cs.put.poznan.pl ([127.0.0.1])
-	by localhost (libra.cs.put.poznan.pl [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id FIMECllc2TG4
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Dec 2009 19:26:17 +0100 (CET)
-Received: from [192.168.0.100] (102-101.echostar.pl [213.156.102.101])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 0563C91
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Dec 2009 19:26:17 +0100 (CET)
-Message-ID: <4B25322A.4020602@cs.put.poznan.pl>
-Date: Sun, 13 Dec 2009 19:27:54 +0100
-From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1NJtGz-0003bK-QS
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 13 Dec 2009 19:34:28 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id 1E78C1D36078; Sun, 13 Dec 2009 19:32:39 +0100 (CET)
+Date: Sun, 13 Dec 2009 19:32:38 +0100
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-References: <BAY127-W32DC804131DD0AD0DBD49D88A0@phx.gbl>
-In-Reply-To: <BAY127-W32DC804131DD0AD0DBD49D88A0@phx.gbl>
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0278], KAS30/Release
-X-SpamTest-Info: Not protected
-X-SA-Exim-Connect-IP: 150.254.30.30
-X-SA-Exim-Mail-From: przemyslaw.wesolek@cs.put.poznan.pl
+Message-ID: <20091213183238.GB1260@ibawizard.net>
+References: <1260618520.3373.23.camel@mattotaupa.wohnung.familie-menzel.net>
+	<20091212173311.GA3730@rhein.zuhause.netz>
+	<1260711980.3110.21.camel@mattotaupa.wohnung.familie-menzel.net>
+	<hg3523$2lg$3@ger.gmane.org>
+	<1260727515.3110.65.camel@mattotaupa.wohnung.familie-menzel.net>
+MIME-Version: 1.0
+In-Reply-To: <1260727515.3110.65.camel@mattotaupa.wohnung.familie-menzel.net>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Problem using "bitbake"
+Subject: Re: package VDR for OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,20 +36,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Dec 2009 18:29:43 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 13 Dec 2009 18:34:29 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-saleh usman wrote:
-> If I'll use "stars" where to specify image for which bitbake will build.
+Paul Menzel <paulepanter@users.sourceforge.net> [2009-12-13 19:05:15]:
 
-As usually, as the argument to bitbake command.
+> > AFAIK Makefiles don't use accolades but parens for variables.
+> 
+> I see. But
+> 
+>         -INCLUDES = -I/usr/include/freetype2
+>         +INCLUDES = $(STAGING_INCDIR)/freetype2
+> 
+> did not help and resulted in.
+> 
+>         INCLUDES = $(STAGING_INCDIR)/freetype2
 
-The stars in BBFILES are replacement for path parts. Just use the
-correct prefix instead of "/stuff/openembedded/" and run 'bitbake
-helloworld-image'.
+No, I think, that Koen was writing about your general mistake. If there was
+STAGING_INCDIR available in the environment, your ${} won't work anyway.
+Correct is to use $(), parens in Makefile when accessing variables. It's
+nothing about your issue.
 
-Przemek
-
+-- ynezz
 
 
