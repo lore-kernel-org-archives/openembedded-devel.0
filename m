@@ -1,26 +1,30 @@
-Received: from bay0-omc4-s1.bay0.hotmail.com ([65.54.190.203])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <salehusman@hotmail.com>) id 1NJs8s-0006rP-9k
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Dec 2009 18:22:01 +0100
-Received: from BAY127-W3 ([65.54.190.199]) by bay0-omc4-s1.bay0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sun, 13 Dec 2009 09:19:09 -0800
-Message-ID: <BAY127-W32DC804131DD0AD0DBD49D88A0@phx.gbl>
-X-Originating-IP: [119.153.67.244]
-From: saleh usman <salehusman@hotmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-Date: Sun, 13 Dec 2009 22:19:09 +0500
-Importance: Normal
-MIME-Version: 1.0
-X-OriginalArrivalTime: 13 Dec 2009 17:19:09.0953 (UTC)
-	FILETIME=[620C8F10:01CA7C18]
-X-SA-Exim-Connect-IP: 65.54.190.203
-X-SA-Exim-Mail-From: salehusman@hotmail.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NJsqK-0001Gx-Cf for openembedded-devel@lists.openembedded.org;
+	Sun, 13 Dec 2009 19:06:55 +0100
+Received: from g229063066.adsl.alicedsl.de ([92.229.63.66]
+	helo=[192.168.178.25])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NJsof-0007Oi-FE for openembedded-devel@lists.openembedded.org;
+	Sun, 13 Dec 2009 18:05:09 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <hg3523$2lg$3@ger.gmane.org>
+References: <1260618520.3373.23.camel@mattotaupa.wohnung.familie-menzel.net>
+	<20091212173311.GA3730@rhein.zuhause.netz>
+	<1260711980.3110.21.camel@mattotaupa.wohnung.familie-menzel.net>
+	<hg3523$2lg$3@ger.gmane.org>
+Date: Sun, 13 Dec 2009 19:05:15 +0100
+Message-ID: <1260727515.3110.65.camel@mattotaupa.wohnung.familie-menzel.net>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Problem using "bitbake"
+Subject: Re: package VDR for OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,17 +38,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Dec 2009 17:22:01 -0000
-Content-Type: text/plain; charset="Windows-1252"
+X-List-Received-Date: Sun, 13 Dec 2009 18:06:56 -0000
+X-Groupsio-MsgNum: 15039
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-jf3WNThY+4wEtvdyJM4z"
+
+--=-jf3WNThY+4wEtvdyJM4z
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
+Am Sonntag, den 13.12.2009, 17:34 +0100 schrieb Koen Kooi:
+> On 13-12-09 14:46, Paul Menzel wrote:
 
-If I'll use "stars" where to specify image for which bitbake will build.
- 		 	   		 =20
-_________________________________________________________________
-Windows Live: Make it easier for your friends to see what you=92re up to on=
- Facebook.
-http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/so=
-cial-network-basics.aspx?ocid=3DPID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_2:092=
-009=
+[=E2=80=A6]
 
+> > Thank you! I tried this
+> >
+> >          +-INCLUDES =3D -I/usr/include/freetype2
+> >          ++INCLUDES =3D -I${STAGING_INCDIR}/freetype2
+> >
+> > but the `${STAGING_INCDIR}` was not expanded. The result is the
+> > following.
+> >
+> >          INCLUDES =3D -I${STAGING_INCDIR}freetype2
+> >
+> > Using an absolute path worked.
+> >
+> > Could you please point out my mistake?
+>=20
+> AFAIK Makefiles don't use accolades but parens for variables.
+
+I see. But
+
+        -INCLUDES =3D -I/usr/include/freetype2
+        +INCLUDES =3D $(STAGING_INCDIR)/freetype2
+
+did not help and resulted in.
+
+        INCLUDES =3D $(STAGING_INCDIR)/freetype2
+
+So I guess Petr=E2=80=99s solution is the way to go.
+
+
+Thanks,
+
+Paul
+
+--=-jf3WNThY+4wEtvdyJM4z
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkslLNsACgkQPX1aK2wOHVioiwCdGenEWcgAa3KjyHHWEWwDPr5u
+0hEAn1euCook/L5b07Tj+pf2XP2B2m9d
+=gIc6
+-----END PGP SIGNATURE-----
+
+--=-jf3WNThY+4wEtvdyJM4z--
