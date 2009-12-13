@@ -1,32 +1,28 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from vms173009pub.verizon.net ([206.46.173.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1NJtTB-0001Wv-1g
+	(envelope-from <denis@denix.org>) id 1NJwvB-00079m-Cs
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Dec 2009 19:47:04 +0100
-Received: from p5b0346d6.dip.t-dialin.net ([91.3.70.214] helo=excalibur)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1NJtRK-0002Ed-U6 by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Dec 2009 19:45:18 +0100
-Received: from stefan by excalibur with local (Exim 4.69)
-	(envelope-from <stefan@excalibur.local>) id 1NJtRJ-0001ZA-Ui
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Dec 2009 19:45:06 +0100
-Date: Sun, 13 Dec 2009 19:45:05 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Sun, 13 Dec 2009 23:28:13 +0100
+Received: from gandalf.denix.org ([71.255.235.232]) by vms173009.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KUM00IH73NKJ3UB@vms173009.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	13 Dec 2009 16:26:13 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id CBA4014AF60; Sun,
+	13 Dec 2009 17:26:07 -0500 (EST)
+Date: Sun, 13 Dec 2009 17:26:07 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091213184505.GC5310@excalibur.local>
-MIME-Version: 1.0
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+Message-id: <20091213222607.GA24370@denix.org>
+References: <20091213184505.GC5310@excalibur.local>
+MIME-version: 1.0
+In-reply-to: <20091213184505.GC5310@excalibur.local>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.9
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [ADMIN REQUEST] Could we get git.oe.org CNAME for cgit.oe.org?
+Subject: Re: [ADMIN REQUEST] Could we get git.oe.org CNAME for	cgit.oe.org?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,19 +36,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Dec 2009 18:47:04 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 13 Dec 2009 22:28:13 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hello.
+On Sun, Dec 13, 2009 at 07:45:05PM +0100, Stefan Schmidt wrote:
+> Hello.
+> 
+> Subject says it all. I don't have a strong opinion if cgit or gitweb is used,
+> but I would found git.openembedded.org useful.
+> 
+> This is so common in other projects that I normally type it and then wonder what
+> I did wrong before remembering that it is cgit here. :)
 
-Subject says it all. I don't have a strong opinion if cgit or gitweb is used,
-but I would found git.openembedded.org useful.
+Both git.oe.org and cgit.oe.org point to the same IP address, although Web 
+server only handles cgit.oe.org vhost...
 
-This is so common in other projects that I normally type it and then wonder what
-I did wrong before remembering that it is cgit here. :)
-
-regards
-Stefan Schmidt
+--
+Denys
 
 
