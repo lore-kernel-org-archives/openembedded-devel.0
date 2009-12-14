@@ -1,49 +1,28 @@
-Received: from mail-px0-f183.google.com ([209.85.216.183])
+Received: from bay0-omc4-s12.bay0.hotmail.com ([65.54.190.214])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NK9l6-0006LN-U2
+	(envelope-from <salehusman@hotmail.com>) id 1NKCJY-0007Pj-9n
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Dec 2009 13:10:40 +0100
-Received: by pxi13 with SMTP id 13so2144576pxi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2009 04:08:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:to:subject
-	:references:date:mime-version:content-transfer-encoding:from
-	:organization:message-id:in-reply-to:user-agent;
-	bh=FzZD8wFVrWa/r8b827gl1r5ffIQqn2SqswBUjfuONdU=;
-	b=uw39eUjdFiehoARgsSxy2vJI+GaOT0UGETj7Qfpdf0CPcn5pLEKDIMmOUMtEWK8fFZ
-	+RXvPtiSm2zZR+tegxQMC7+iWTPdLa6vkXQh674zJyjukXfM2dn/5DOHs0Jw+l/AXx9c
-	p5N5HmF1HoIQPI3LBkH4jHFc5Lqxzj01uH3Rk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:to:subject:references:date:mime-version
-	:content-transfer-encoding:from:organization:message-id:in-reply-to
-	:user-agent;
-	b=QGmSHv4HcB8rqR/YsSrkBLoLzWm1XUTdOMj7xQSmOxUPHyUioQwNH50jLCh7UUDGRO
-	tVlWQK8ofbsOzDH/h7hgSWf5FtzVFnPk7yIYS51Yt6jueXUeJ3G9BxlNR7+bpgMtyy2d
-	0dZieKvUrwSUCrlxXTnfVvCC+etJZQZxxYBno=
-Received: by 10.114.164.38 with SMTP id m38mr793414wae.179.1260792530852;
-	Mon, 14 Dec 2009 04:08:50 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.54.125.108])
-	by mx.google.com with ESMTPS id 20sm4958999pzk.1.2009.12.14.04.08.47
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 14 Dec 2009 04:08:50 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <op.u4w4tyyrmn1qzu@guohr-laptop-ubuntu>
-	<200912140947.10207.holger+oe@freyther.de>
-	<op.u4w8hfz5mn1qzu@guohr-laptop-ubuntu>
-	<200912141032.19529.holger+oe@freyther.de>
-Date: Mon, 14 Dec 2009 20:08:40 +0800
+	Mon, 14 Dec 2009 15:54:25 +0100
+Received: from BAY127-W23 ([65.54.190.199]) by bay0-omc4-s12.bay0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 14 Dec 2009 06:49:52 -0800
+Message-ID: <BAY127-W239262942CF14E74E9699ED8890@phx.gbl>
+X-Originating-IP: [203.82.49.5]
+From: saleh usman <salehusman@hotmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>,
+	Openembedded Charis Larson <clarson@kergoth.com>,
+	<przemyslaw.wesolek@cs.put.poznan.pl>
+Date: Mon, 14 Dec 2009 19:49:52 +0500
+Importance: Normal
 MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Organization: Gulessoft, Inc
-Message-ID: <op.u4xf0qmqmn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <200912141032.19529.holger+oe@freyther.de>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.216.183
-X-SA-Exim-Mail-From: camelguo@gmail.com
+X-OriginalArrivalTime: 14 Dec 2009 14:49:52.0419 (UTC)
+	FILETIME=[B15B1730:01CA7CCC]
+X-SA-Exim-Connect-IP: 65.54.190.214
+X-SA-Exim-Mail-From: salehusman@hotmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: How generate dependence file without native packages
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Problem using "bitbake"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,75 +36,144 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2009 12:10:40 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: Quoted-Printable
-
-Hi Holger,
-    I think we should change the following lines:
-
-360         if item in dataCache.ignored_dependencies:
-361             return
-
-    When I call the bitbake -g helloworld-image -I "*native", the  =
-
-ignored_dependencies is ["*native",], so when the item is "quilt-native"=
-  =
-
-or "qemu-native" or any names ends with -native , the expression should =
- =
-
-return ture.
-
-    But I don't know how to change it.
+X-List-Received-Date: Mon, 14 Dec 2009 14:54:25 -0000
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
 
-=E5=9C=A8 Mon, 14 Dec 2009 17:32:19 +0800=EF=BC=8CHolger Hans Peter Frey=
-ther  =
+Now the lockfile path is not existing .How to remove this error. Plz help m=
+e to
+move forward.Terminal window is looking like this.
 
-<holger+oe@freyther.de> =E5=86=99=E9=81=93:
+bitbake helloworld-image
+NOTE: Handling BitBake files: \ (1324/7634) [17 %]NOTE: Angstrom DOES NOT
+support libiconv because the glibc builtin iconv replacement is used
+NOTE: Angstrom DOES NOT support libiconv because the glibc builtin iconv
+replacement is used
+NOTE: Handling BitBake files: \ (2305/7634) [30 %]NOTE: Angstrom DOES NOT
+support bluez-libs because bluez-libs 3.x has been replaced by bluez4
+NOTE: Handling BitBake files: | (2307/7634) [30 %]NOTE: Angstrom DOES NOT
+support bluez-libs because bluez-libs 3.x has been replaced by bluez4
+NOTE: Angstrom DOES NOT support bluez-utils because bluez-utils 3.x has bee=
+n
+replaced by bluez4
+NOTE: Handling BitBake files: / (2320/7634) [30 %]NOTE: Angstrom DOES NOT
+support bluez-libs because bluez-libs 3.x has been replaced by bluez4
+NOTE: Handling BitBake files: | (2325/7634) [30 %]NOTE: Angstrom DOES NOT
+support bluez-utils because bluez-utils 3.x has been replaced by bluez4
+NOTE: Handling BitBake files: - (7634/7634) [100 %]
+NOTE: Parsing finished. 0 cached=2C 7348 parsed=2C 286 skipped=2C 0 masked.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 1 of 736 (ID: 19=2C
+/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_setscene)
+NOTE: Running task 2 of 736 (ID: 20=2C
+/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_fetch)
+NOTE: Running task 3 of 736 (ID: 21=2C
+/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_unpack)
+NOTE: Unpacking ../openembedded/recipes/shasum/files/main.c to
+tmp/work/i686-linux/shasum-native-1.0-r1/
+NOTE: Unpacking ../openembedded/recipes/shasum/files/mhash_sha256.h to
+tmp/work/i686-linux/shasum-native-1.0-r1/
+NOTE: Unpacking ../openembedded/recipes/shasum/files/sha256.c to
+tmp/work/i686-linux/shasum-native-1.0-r1/
+NOTE: Running task 4 of 736 (ID: 22=2C
+/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_patch)
+NOTE: Running task 5 of 736 (ID: 23=2C
+/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_configure)
+NOTE: Running task 6 of 736 (ID: 24=2C
+/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_qa_configure)
+NOTE: Running task 7 of 736 (ID: 25=2C
+/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_compile)
+NOTE: Running task 8 of 736 (ID: 26=2C
+/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_install)
+NOTE: Running task 9 of 736 (ID: 27=2C
+/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_populate_staging)
+NOTE: Legacy staging mode for /oe/openembedded/recipes/shasum/shasum-native=
+.bb
+NOTE: Running task 10 of 736 (ID: 280=2C
+/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C do_s=
+etscene)
+NOTE: Running task 11 of 736 (ID: 281=2C
+/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C do_f=
+etch)
+NOTE: Running task 12 of 736 (ID: 282=2C
+/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C do_u=
+npack)
+NOTE: Unpacking ../openembedded/recipes/stage-manager/files/stage-manager t=
+o
+tmp/work/i686-linux/stagemanager-native-0.0.1-r11/
+NOTE: Unpacking ../openembedded/recipes/stage-manager/files/stage-manager-i=
+pkg
+to tmp/work/i686-linux/stagemanager-native-0.0.1-r11/
+NOTE: Unpacking
+../openembedded/recipes/stage-manager/files/stage-manager-ipkg-build to
+tmp/work/i686-linux/stagemanager-native-0.0.1-r11/
+NOTE: Running task 13 of 736 (ID: 283=2C
+/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C do_p=
+atch)
+NOTE: Running task 14 of 736 (ID: 284=2C
+/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C do_c=
+onfigure)
+NOTE: Running task 15 of 736 (ID: 285=2C
+/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C
+do_qa_configure)
+NOTE: Running task 16 of 736 (ID: 286=2C
+/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C do_c=
+ompile)
+NOTE: Running task 17 of 736 (ID: 287=2C
+/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C do_i=
+nstall)
+NOTE: Running task 18 of 736 (ID: 288=2C
+/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C
+do_populate_staging)
+NOTE: Legacy staging mode for
+/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb
+NOTE: Running task 19 of 736 (ID: 110=2C
+/oe/openembedded/recipes/coreutils/coreutils-native_7.2.bb=2C do_setscene)
+NOTE: Running task 20 of 736 (ID: 111=2C
+/oe/openembedded/recipes/coreutils/coreutils-native_7.2.bb=2C do_fetch)
+ERROR: Error=2C lockfile path does not exist!: ${oe}/sources
+NOTE: Task failed: Unknown fetch Error: 1
+ERROR: TaskFailed event exception=2C aborting
+ERROR: Build of /oe/openembedded/recipes/coreutils/coreutils-native_7.2.bb
+do_fetch failed
+ERROR: Task 111 (/oe/openembedded/recipes/coreutils/coreutils-native_7.2.bb=
+=2C
+do_fetch) failed
+NOTE: Tasks Summary: Attempted 19 tasks of which 0 didn't need to be rerun =
+and 1
+failed.
+ERROR: '/oe/openembedded/recipes/coreutils/coreutils-native_7.2.bb' failed
 
-> On Monday 14 December 2009 10:25:53 Guo Hongruan wrote:
->> Hi,
->>      Yes, it works. The following is the command line I used to gener=
-ate
->> dot file
->>
->> bitbake -g helloworld-image -I quilt-native -I opkg-native -I
->> shasum-native -I ipkg-utils-native
->>
->>      Unfortunately,  It does not support wild characters, so I must  =
-
->> append
->> lots of -I options for every native packages.
->
->
-> patches for wildcards are welcome. I don't remember the source file bu=
-t  =
-
-> I would
-> start in bin/bitbake and search for the -I option and follow its users=
-  =
-
-> until
-> you hit the string comparison.
->
-> z.
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
+Regards=20
+Saleh Usman
 
 
 
--- =
+rzemyslaw Wesolek <przemyslaw.wesolek <at> cs.put.poznan.pl> writes:
 
-Guo Hongruan, Embedded Linux Consultant
-Mobile: +86-0-13484056007
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
+>=20
+> saleh usman wrote:
+> > If I'll use "stars" where to specify image for which bitbake will build=
+.
+>=20
+> As usually=2C as the argument to bitbake command.
+>=20
+> The stars in BBFILES are replacement for path parts. Just use the
+> correct prefix instead of "/stuff/openembedded/" and run 'bitbake
+> helloworld-image'.
+>=20
+> Przemek
+>=20
 
+
+
+ 		 	   		 =20
+_________________________________________________________________
+Keep your friends updated=97even when you=92re not signed in.
+http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/so=
+cial-network-basics.aspx?ocid=3DPID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_5:092=
+010=
 
