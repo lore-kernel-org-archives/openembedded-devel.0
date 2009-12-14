@@ -1,33 +1,27 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NKHYD-0004zK-F3 for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Dec 2009 21:29:52 +0100
-Received: from g225083029.adsl.alicedsl.de ([92.225.83.29]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NKHWY-0002Re-4N for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Dec 2009 20:28:06 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <philip@balister.org>) id 1NKI1d-00076X-7f
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Dec 2009 22:00:16 +0100
+Received: (qmail 24135 invoked by uid 1003); 14 Dec 2009 20:58:26 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 14 Dec 2009 20:58:26 -0000
+Message-ID: <4B26A6F0.6040706@balister.org>
+Date: Mon, 14 Dec 2009 15:58:24 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.4pre) Gecko/20091014 Fedora/3.0-2.8.b4.fc11
+	Thunderbird/3.0b4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20091214201018.GA26808@rhein.zuhause.netz>
-References: <1260618520.3373.23.camel@mattotaupa.wohnung.familie-menzel.net>
-	<20091212173311.GA3730@rhein.zuhause.netz>
-	<1260711980.3110.21.camel@mattotaupa.wohnung.familie-menzel.net>
-	<20091213141849.GG17995@ibawizard.net>
-	<1260719131.3110.26.camel@mattotaupa.wohnung.familie-menzel.net>
-	<1260818012.9310.9.camel@mattotaupa.wohnung.familie-menzel.net>
-	<20091214201018.GA26808@rhein.zuhause.netz>
-Date: Mon, 14 Dec 2009 21:28:12 +0100
-Message-ID: <1260822492.9310.16.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+References: <alpine.LFD.2.00.0912140512120.21693@localhost>	<20091214102214.GM3601@jama>
+	<alpine.LFD.2.00.0912141041310.29685@localhost>
+In-Reply-To: <alpine.LFD.2.00.0912141041310.29685@localhost>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: package VDR for OE
+Subject: Re: test build just finished, three failed package builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,46 +35,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2009 20:29:52 -0000
-X-Groupsio-MsgNum: 15061
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-ze8/vJ1Hp12qfleN8A+T"
+X-List-Received-Date: Mon, 14 Dec 2009 21:00:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---=-ze8/vJ1Hp12qfleN8A+T
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 12/14/2009 10:42 AM, Robert P. J. Day wrote:
+> On Mon, 14 Dec 2009, Martin Jansa wrote:
+>
+>> On Mon, Dec 14, 2009 at 05:13:32AM -0500, Robert P. J. Day wrote:
+>>>
+>>>    just this minute, my latest build attempt for beagle demo image off
+>>> of dev branch produced:
+>>>
+>>> ERROR: '/home/rpjday/oe/openembedded/recipes/mesa/mesa-dri_7.0.3.bb' failed
+>> We probably need those patches from DJWillis
+>> http://git.openpandora.org/cgi-bin/gitweb.cgi?p=openembedded.git;a=commit;h=e6f17d1cc03bdd90c575b7e2bd482932e53ba9c0
+>> http://git.openpandora.org/cgi-bin/gitweb.cgi?p=openembedded.git;a=commit;h=60b64bead81643e5c97c29abc4574c66398b3ebb
+>> http://git.openpandora.org/cgi-bin/gitweb.cgi?p=openembedded.git;a=commit;h=f8b4d26e7cfe06bfc8474df50035b886045a0324
+>> http://git.openpandora.org/cgi-bin/gitweb.cgi?p=openembedded.git;a=commit;h=de272c2db0e37b72bfa55268a2e383c906ee0680
+>> http://git.openpandora.org/cgi-bin/gitweb.cgi?p=openembedded.git;a=commit;h=63144b3bb0e035d3f8109fb907bb018694f2a9f0
+>>
+>> Or I can set PREFERRED_PROVIDER_virtual/libgl to "mesa" instead of
+>> "mesa-dri" in compatibility_providers.conf or maybe it should be set on
+>> distro/machine level.
+>
+>    if someone pushes some patches for the current build fails on
+> fedora, mention that here and i'll be happy to pull and retest the dev
+> branch.
 
-Am Montag, den 14.12.2009, 21:10 +0100 schrieb Henning Heinold:
-> On Mon, Dec 14, 2009 at 08:13:32PM +0100, Paul Menzel wrote:
-> > Could someone advise me on how to get VDR included officially into OE?
-> > Had someone time already to test the recipe?
->=20
-> Please submit your recipe here with git format-patch. I will look into it=
-.
+I've cherry-picked these from openpandora. If it builds, or at least 
+gets past mesa stuff, I'll push.
 
-Thank you. I sent it already on yesterday 16:45 CET [1]. If you do not
-have it in your mailbox I can sent the attachment again.
+Philip
 
 
-Thanks,
-
-Paul
-
-
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2009-December/0=
-15599.html
-
---=-ze8/vJ1Hp12qfleN8A+T
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAksmn9sACgkQPX1aK2wOHVgteACeNVIL8EOje90hAFZ/0ISABSLn
-UpgAnA8BkhPNrulPbiUysbIAVG4skl9D
-=a9mo
------END PGP SIGNATURE-----
-
---=-ze8/vJ1Hp12qfleN8A+T--
