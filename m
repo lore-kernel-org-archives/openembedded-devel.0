@@ -1,26 +1,35 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from mail-yx0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NK8nZ-0002R7-1d
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NK9e5-000644-1z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Dec 2009 12:09:08 +0100
-Received: (qmail 31500 invoked by uid 813007); 14 Dec 2009 11:07:20 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 14 Dec 2009 11:07:20 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Dec 2009 12:07:00 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.32; KDE/4.3.2; x86_64; ; )
-References: <alpine.LNX.2.00.0912110857540.5053@asterix.crazy-teaparty.dyndns.org>
-In-Reply-To: <alpine.LNX.2.00.0912110857540.5053@asterix.crazy-teaparty.dyndns.org>
+	Mon, 14 Dec 2009 13:03:24 +0100
+Received: by yxe5 with SMTP id 5so2619977yxe.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Dec 2009 04:01:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=e28ug+UB3JY4S97COfr37T3ss6tHB/E2UZQxTU2/xk0=;
+	b=h/aHCq0ai6+wlUYosth+VDYFRjqrVLMIX0g3iaetlJGCDayz7DpMKwVX74u8mSLRCu
+	HPO1Wj1fZ1FMd+wvvtbFRt1OSp627LH92r2xTYltmHCcm6TTiLZ88djWw94s3srLl9Se
+	UIBgRp8uJk5KRRnPgtGP7xKTxerFz5mIPwSN4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=Z2cBC7kOCD44QRNMksZVA/px0mcta70MASR2rwc9G+g81pYy8iF2UY7KiV+8LZ/51m
+	fAtvnyJ+Ph6Qp0ruouVq/EFdep0eqFRYOiN/rz6FZsDqnBQiZxIvYxB5mub/xaB4wgU5
+	4rmwvycoDEjGCDFF7SaJsLMrFn4/4A4hbdvco=
 MIME-Version: 1.0
-Message-Id: <200912141207.01056.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Received: by 10.101.174.28 with SMTP id b28mr6733854anp.160.1260792095322; 
+	Mon, 14 Dec 2009 04:01:35 -0800 (PST)
+Date: Mon, 14 Dec 2009 13:01:35 +0100
+Message-ID: <ac9c93b10912140401o52fa183k90819ba5fdec4b34@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] linux_2.6.29.bb: update to kernel 2.6.29.6
+Subject: bitbake -c menuconfig virtual/kernel and ncurses
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,23 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2009 11:09:08 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 14 Dec 2009 12:03:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Dnia pi=C4=85tek, 11 grudnia 2009 o 08:59:22 Vitus Jensen napisa=C5=82(a):
-> Version 2.6.29 fails on arch powerpc because of a syntax error.  See
-> http://lkml.indiana.edu/hypermail/linux/kernel/0906.1/00867.html
+Not sure how to fix this, but I just bumped into the following:
 
-2.6.29.6 is now in repository - I merged all my kernel updates.
+I did a bitbake -c menuconfig virtual/kernel.
+This launched an xterm which exited without me giving an opportunity
+to change settings.
+Still bitbake reported success.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+Cause was that this system didn't have ncurses-dev installed yet.
 
+No idea on how to fix this in a proper way.
 
+Frans
 
 
