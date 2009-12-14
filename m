@@ -1,28 +1,38 @@
-Received: from bay0-omc4-s12.bay0.hotmail.com ([65.54.190.214])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <salehusman@hotmail.com>) id 1NKCJY-0007Pj-9n
+	(envelope-from <rpjday@crashcourse.ca>) id 1NKD5o-0005nh-6C
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Dec 2009 15:54:25 +0100
-Received: from BAY127-W23 ([65.54.190.199]) by bay0-omc4-s12.bay0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 14 Dec 2009 06:49:52 -0800
-Message-ID: <BAY127-W239262942CF14E74E9699ED8890@phx.gbl>
-X-Originating-IP: [203.82.49.5]
-From: saleh usman <salehusman@hotmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>,
-	Openembedded Charis Larson <clarson@kergoth.com>,
-	<przemyslaw.wesolek@cs.put.poznan.pl>
-Date: Mon, 14 Dec 2009 19:49:52 +0500
-Importance: Normal
+	Mon, 14 Dec 2009 16:44:15 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NKD47-0006Vs-EY for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Dec 2009 10:42:27 -0500
+Date: Mon, 14 Dec 2009 10:42:07 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20091214102214.GM3601@jama>
+Message-ID: <alpine.LFD.2.00.0912141041310.29685@localhost>
+References: <alpine.LFD.2.00.0912140512120.21693@localhost>
+	<20091214102214.GM3601@jama>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
-X-OriginalArrivalTime: 14 Dec 2009 14:49:52.0419 (UTC)
-	FILETIME=[B15B1730:01CA7CCC]
-X-SA-Exim-Connect-IP: 65.54.190.214
-X-SA-Exim-Mail-From: salehusman@hotmail.com
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Problem using "bitbake"
+Subject: Re: test build just finished, three failed package builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,144 +46,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Dec 2009 14:54:25 -0000
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 14 Dec 2009 15:44:15 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
+On Mon, 14 Dec 2009, Martin Jansa wrote:
 
-Now the lockfile path is not existing .How to remove this error. Plz help m=
-e to
-move forward.Terminal window is looking like this.
+> On Mon, Dec 14, 2009 at 05:13:32AM -0500, Robert P. J. Day wrote:
+> >
+> >   just this minute, my latest build attempt for beagle demo image off
+> > of dev branch produced:
+> >
+> > ERROR: '/home/rpjday/oe/openembedded/recipes/mesa/mesa-dri_7.0.3.bb' failed
+> We probably need those patches from DJWillis
+> http://git.openpandora.org/cgi-bin/gitweb.cgi?p=openembedded.git;a=commit;h=e6f17d1cc03bdd90c575b7e2bd482932e53ba9c0
+> http://git.openpandora.org/cgi-bin/gitweb.cgi?p=openembedded.git;a=commit;h=60b64bead81643e5c97c29abc4574c66398b3ebb
+> http://git.openpandora.org/cgi-bin/gitweb.cgi?p=openembedded.git;a=commit;h=f8b4d26e7cfe06bfc8474df50035b886045a0324
+> http://git.openpandora.org/cgi-bin/gitweb.cgi?p=openembedded.git;a=commit;h=de272c2db0e37b72bfa55268a2e383c906ee0680
+> http://git.openpandora.org/cgi-bin/gitweb.cgi?p=openembedded.git;a=commit;h=63144b3bb0e035d3f8109fb907bb018694f2a9f0
+>
+> Or I can set PREFERRED_PROVIDER_virtual/libgl to "mesa" instead of
+> "mesa-dri" in compatibility_providers.conf or maybe it should be set on
+> distro/machine level.
 
-bitbake helloworld-image
-NOTE: Handling BitBake files: \ (1324/7634) [17 %]NOTE: Angstrom DOES NOT
-support libiconv because the glibc builtin iconv replacement is used
-NOTE: Angstrom DOES NOT support libiconv because the glibc builtin iconv
-replacement is used
-NOTE: Handling BitBake files: \ (2305/7634) [30 %]NOTE: Angstrom DOES NOT
-support bluez-libs because bluez-libs 3.x has been replaced by bluez4
-NOTE: Handling BitBake files: | (2307/7634) [30 %]NOTE: Angstrom DOES NOT
-support bluez-libs because bluez-libs 3.x has been replaced by bluez4
-NOTE: Angstrom DOES NOT support bluez-utils because bluez-utils 3.x has bee=
-n
-replaced by bluez4
-NOTE: Handling BitBake files: / (2320/7634) [30 %]NOTE: Angstrom DOES NOT
-support bluez-libs because bluez-libs 3.x has been replaced by bluez4
-NOTE: Handling BitBake files: | (2325/7634) [30 %]NOTE: Angstrom DOES NOT
-support bluez-utils because bluez-utils 3.x has been replaced by bluez4
-NOTE: Handling BitBake files: - (7634/7634) [100 %]
-NOTE: Parsing finished. 0 cached=2C 7348 parsed=2C 286 skipped=2C 0 masked.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 1 of 736 (ID: 19=2C
-/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_setscene)
-NOTE: Running task 2 of 736 (ID: 20=2C
-/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_fetch)
-NOTE: Running task 3 of 736 (ID: 21=2C
-/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_unpack)
-NOTE: Unpacking ../openembedded/recipes/shasum/files/main.c to
-tmp/work/i686-linux/shasum-native-1.0-r1/
-NOTE: Unpacking ../openembedded/recipes/shasum/files/mhash_sha256.h to
-tmp/work/i686-linux/shasum-native-1.0-r1/
-NOTE: Unpacking ../openembedded/recipes/shasum/files/sha256.c to
-tmp/work/i686-linux/shasum-native-1.0-r1/
-NOTE: Running task 4 of 736 (ID: 22=2C
-/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_patch)
-NOTE: Running task 5 of 736 (ID: 23=2C
-/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_configure)
-NOTE: Running task 6 of 736 (ID: 24=2C
-/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_qa_configure)
-NOTE: Running task 7 of 736 (ID: 25=2C
-/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_compile)
-NOTE: Running task 8 of 736 (ID: 26=2C
-/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_install)
-NOTE: Running task 9 of 736 (ID: 27=2C
-/oe/openembedded/recipes/shasum/shasum-native.bb=2C do_populate_staging)
-NOTE: Legacy staging mode for /oe/openembedded/recipes/shasum/shasum-native=
-.bb
-NOTE: Running task 10 of 736 (ID: 280=2C
-/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C do_s=
-etscene)
-NOTE: Running task 11 of 736 (ID: 281=2C
-/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C do_f=
-etch)
-NOTE: Running task 12 of 736 (ID: 282=2C
-/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C do_u=
-npack)
-NOTE: Unpacking ../openembedded/recipes/stage-manager/files/stage-manager t=
-o
-tmp/work/i686-linux/stagemanager-native-0.0.1-r11/
-NOTE: Unpacking ../openembedded/recipes/stage-manager/files/stage-manager-i=
-pkg
-to tmp/work/i686-linux/stagemanager-native-0.0.1-r11/
-NOTE: Unpacking
-../openembedded/recipes/stage-manager/files/stage-manager-ipkg-build to
-tmp/work/i686-linux/stagemanager-native-0.0.1-r11/
-NOTE: Running task 13 of 736 (ID: 283=2C
-/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C do_p=
-atch)
-NOTE: Running task 14 of 736 (ID: 284=2C
-/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C do_c=
-onfigure)
-NOTE: Running task 15 of 736 (ID: 285=2C
-/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C
-do_qa_configure)
-NOTE: Running task 16 of 736 (ID: 286=2C
-/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C do_c=
-ompile)
-NOTE: Running task 17 of 736 (ID: 287=2C
-/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C do_i=
-nstall)
-NOTE: Running task 18 of 736 (ID: 288=2C
-/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb=2C
-do_populate_staging)
-NOTE: Legacy staging mode for
-/oe/openembedded/recipes/stage-manager/stagemanager-native_0.0.1.bb
-NOTE: Running task 19 of 736 (ID: 110=2C
-/oe/openembedded/recipes/coreutils/coreutils-native_7.2.bb=2C do_setscene)
-NOTE: Running task 20 of 736 (ID: 111=2C
-/oe/openembedded/recipes/coreutils/coreutils-native_7.2.bb=2C do_fetch)
-ERROR: Error=2C lockfile path does not exist!: ${oe}/sources
-NOTE: Task failed: Unknown fetch Error: 1
-ERROR: TaskFailed event exception=2C aborting
-ERROR: Build of /oe/openembedded/recipes/coreutils/coreutils-native_7.2.bb
-do_fetch failed
-ERROR: Task 111 (/oe/openembedded/recipes/coreutils/coreutils-native_7.2.bb=
-=2C
-do_fetch) failed
-NOTE: Tasks Summary: Attempted 19 tasks of which 0 didn't need to be rerun =
-and 1
-failed.
-ERROR: '/oe/openembedded/recipes/coreutils/coreutils-native_7.2.bb' failed
+  if someone pushes some patches for the current build fails on
+fedora, mention that here and i'll be happy to pull and retest the dev
+branch.
 
-Regards=20
-Saleh Usman
+rday
+--
 
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
 
+            Linux Consulting, Training and Kernel Pedantry.
 
-rzemyslaw Wesolek <przemyslaw.wesolek <at> cs.put.poznan.pl> writes:
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
->=20
-> saleh usman wrote:
-> > If I'll use "stars" where to specify image for which bitbake will build=
-.
->=20
-> As usually=2C as the argument to bitbake command.
->=20
-> The stars in BBFILES are replacement for path parts. Just use the
-> correct prefix instead of "/stuff/openembedded/" and run 'bitbake
-> helloworld-image'.
->=20
-> Przemek
->=20
-
-
-
- 		 	   		 =20
-_________________________________________________________________
-Keep your friends updated=97even when you=92re not signed in.
-http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/so=
-cial-network-basics.aspx?ocid=3DPID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_5:092=
-010=
 
