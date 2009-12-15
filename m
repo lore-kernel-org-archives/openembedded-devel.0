@@ -1,36 +1,41 @@
-Received: from mail-px0-f183.google.com ([209.85.216.183])
+Received: from mail-iw0-f194.google.com ([209.85.223.194])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vivektambakad@gmail.com>) id 1NKSFO-0000MW-Qn
+	(envelope-from <camelguo@gmail.com>) id 1NKTS0-0007Na-Jv
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Dec 2009 08:55:10 +0100
-Received: by pxi13 with SMTP id 13so2794596pxi.24
+	Tue, 15 Dec 2009 10:12:15 +0100
+Received: by iwn32 with SMTP id 32so2532654iwn.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2009 23:53:20 -0800 (PST)
+	Tue, 15 Dec 2009 01:10:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=LxNhUbJWpjR8vQd/6KAyU17+WJuN93wvV1Jd37vXqQA=;
-	b=tEs492Pis/SSQFpnVozIKvR9WMmJI932rq8hGW+j/g4i2W2bk2lStUH1C6iyVvTmgW
-	GZvtg+Z+HUpinRQqKXY140OXRChUeDpN6ofi83KTooun9wc/d3zuVwcPR8Gl+t2Te4Yr
-	gqsFa/OKEskGgtlRlWnzdBAEKTGmqF3gTfKtw=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=9MXIxtypttuE38Vy6l/1ZiRpqPyYDNhQbrySPqoGdgg=;
+	b=gntH+B/UAZ7kSICycsv3xiI4yXeR4pxN7a4ZXnBeCY/FpQmDA4HLBhB+zPw5taa4MJ
+	4g7IYVKLlj0nCKC93l348WmxDLzj4EaZQs6pOMEYQO+BuRCzb4AScglYTGKjiPrZk+XJ
+	XZqC9ZdYiU6kQVV9LhNtMRVPsHlfaCvrokC3w=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=LmmPHc4ubvVKsh9+luX7RWsgZnh9f91JMYB7hBHYfYA6YPeZ3RmOw61ofVnEFlzoSC
-	sdvHAGmIfCqyMJRlMZsa4Bthud19fK1Y+zmuMzficLgW3VAEcFLQHtMXYWEbTAJwdWwW
-	0fE1pe+D2+rzucUA4u68xm1dCV9fcTMoqgSj0=
-MIME-Version: 1.0
-Received: by 10.114.237.24 with SMTP id k24mr4036343wah.5.1260863599867; Mon, 
-	14 Dec 2009 23:53:19 -0800 (PST)
-Date: Tue, 15 Dec 2009 13:23:19 +0530
-Message-ID: <ad82c8890912142353j1ed5f5b1l3e0684d060d61f09@mail.gmail.com>
-From: vivek tambakad <vivektambakad@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=DCtfK604+X1pQ9byfS41Lq0eAFKV02uBUY0t8BcbhaRAtNjqAkZbAmkA1kM/wTslti
+	KdIaO0H7AkjvOm6Q8UvRNukHp3KyvfgLKWh5Fn41Dvo5xfr3TQICdMUNlmkGV6338Lzz
+	YB5wU2T5F2WG1Xm1gCqWd1HyURR6Zno1IRwtg=
+Received: by 10.231.170.14 with SMTP id b14mr744571ibz.26.1260868225672;
+	Tue, 15 Dec 2009 01:10:25 -0800 (PST)
+Received: from localhost ([123.162.68.164])
+	by mx.google.com with ESMTPS id 21sm4102094iwn.10.2009.12.15.01.10.23
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 15 Dec 2009 01:10:25 -0800 (PST)
+From: Guo Hongruan <camelguo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.183
-X-SA-Exim-Mail-From: vivektambakad@gmail.com
+Date: Tue, 15 Dec 2009 17:10:13 +0800
+Message-Id: <1260868213-26276-1-git-send-email-camelguo@gmail.com>
+X-Mailer: git-send-email 1.5.4.3
+In-Reply-To: <>
+References: <>
+X-SA-Exim-Connect-IP: 209.85.223.194
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: mkfs.jffs2: command not found while building x11-image
+Subject: [PATCH] Enable --ignore-deps options to access regular expression string
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,37 +49,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Dec 2009 07:55:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 15 Dec 2009 09:12:15 -0000
 
-Hi,
-        I am getting mkfs.jffs2:command not found while running bitbake
-x11-image.
+1. Add a function named re_match_strings(target,strings), to match
+   target using the string in strings which can be regular expression
+---
+ lib/bb/taskdata.py |   21 +++++++++++++++++----
+ 1 files changed, 17 insertions(+), 4 deletions(-)
 
-| + mkfs.jffs2
---root=/home/vivek/development/em-x270/stuff/build/oetmp/rootfs/x11-image
---output=/home/vivek/development/em-x270/stuff/build/oetmp/deploy/glibc/images/em-x270/Angstrom-x11-image-glibc-ipk-2009.X-test-20091215-em-x270.rootfs.jffs2
---eraseblock=0x20000 --pad --faketime -n
-|
-/home/vivek/development/em-x270/stuff/build/oetmp/work/em-x270-angstrom-linux-gnueabi/x11-image-1.0-r0/temp/run.do_rootfs.2207:
-line 699: mkfs.jffs2: command not found
-NOTE: Task failed:
-/home/vivek/development/em-x270/stuff/build/oetmp/work/em-x270-angstrom-linux-gnueabi/x11-image-1.0-r0/temp/log.do_rootfs.2207
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/home/vivek/development/em-x270/stuff//openembedded/recipes/images/
-x11-image.bb do_rootfs failed
-ERROR: Task 10
-(/home/vivek/development/em-x270/stuff//openembedded/recipes/images/
-x11-image.bb, do_rootfs) failed
-NOTE: Tasks Summary: Attempted 5679 tasks of which 5678 didn't need to be
-rerun and 1 failed.
-ERROR: '/home/vivek/development/em-x270/stuff//openembedded/recipes/images/
-x11-image.bb' failed
+diff --git a/lib/bb/taskdata.py b/lib/bb/taskdata.py
+index 45f6902..3935e09 100644
+--- a/lib/bb/taskdata.py
++++ b/lib/bb/taskdata.py
+@@ -26,6 +26,19 @@ Task data collection and handling
+ from bb import data, event, mkdirhier, utils
+ import bb, os
+ 
++def re_match_strings(target, strings):
++    """
++    Whether or not the string 'target' matches 
++    any one string of the strings which can be regular expression string
++    """
++    import re
++
++    for name in strings:
++        if (name==target or 
++                re.search(name,target)!=None):
++            return True
++    return False
++
+ class TaskData:
+     """
+     BitBake Task Data implementation
+@@ -262,7 +275,7 @@ class TaskData:
+         """
+         unresolved = []
+         for target in self.build_names_index:
+-            if target in dataCache.ignored_dependencies:
++            if re_match_strings(target, dataCache.ignored_dependencies):
+                 continue
+             if self.build_names_index.index(target) in self.failed_deps:
+                 continue
+@@ -277,7 +290,7 @@ class TaskData:
+         """
+         unresolved = []
+         for target in self.run_names_index:
+-            if target in dataCache.ignored_dependencies:
++            if re_match_strings(target, dataCache.ignored_dependencies):
+                 continue
+             if self.run_names_index.index(target) in self.failed_rdeps:
+                 continue
+@@ -357,7 +370,7 @@ class TaskData:
+         added internally during dependency resolution
+         """
+ 
+-        if item in dataCache.ignored_dependencies:
++        if re_match_strings(item, dataCache.ignored_dependencies):
+             return
+ 
+         if not item in dataCache.providers:
+@@ -408,7 +421,7 @@ class TaskData:
+         (takes item names from RDEPENDS/PACKAGES namespace)
+         """
+ 
+-        if item in dataCache.ignored_dependencies:
++        if re_match_strings(item, dataCache.ignored_dependencies):
+             return
+ 
+         if self.have_runtime_target(item):
+-- 
+1.5.4.3
 
-Is there anything i need to add in x11-image.bb files. Please tell me how to
-overcome from this error.
 
-with regards
-vivek tambakad
 
