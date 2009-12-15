@@ -1,47 +1,38 @@
-Received: from mail-px0-f183.google.com ([209.85.216.183])
+Received: from mail-yx0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NKUco-0003KA-U4
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NKUhQ-0003V2-DA
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Dec 2009 11:27:30 +0100
-Received: by pxi13 with SMTP id 13so2863803pxi.24
+	Tue, 15 Dec 2009 11:32:15 +0100
+Received: by yxe5 with SMTP id 5so3627821yxe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Dec 2009 02:25:40 -0800 (PST)
+	Tue, 15 Dec 2009 02:30:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:to:subject
-	:references:mime-version:content-transfer-encoding:from:organization
-	:date:message-id:in-reply-to:user-agent;
-	bh=NfqoWNN+RChbyRPRpmQX0PJ8lYgXe3TGUBzBm29qKB8=;
-	b=FjeZyvJDrSwJtdE64/Xp9yoEI0slaVhpZX29H3+J7CD9l5GaZjbNp9ItlI65uR1bKR
-	7UqaUMNEozB4n1sP7B9X+CuFFgmqs7TnfXU7YCTvSr8SIiF4iCkNSy7HnV/eiUhgj7AI
-	QZygyHJE9wfbV4io0mFquQSj3Gf7d2ehnrx4U=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=r0sK4z4+QYrQUv8ko0qgMFW6zk+sfEygV7iluGyEb3Y=;
+	b=U/sOBbVVoYPk82bTMyRQ/Fln5EDZcMaFOu1gnZ2+MLy9MWBehUVDRHS+8u97VkbfSH
+	qscMKvPoNtq5H79K7vodVMtMhk9SbUnYlSKoAOUyzZ+hJWzDEcn8V+GUfNgM7uHdLDyI
+	e+RV50RJNLrWwDrkELvrkzUaxrNidpeTRRggE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:to:subject:references:mime-version
-	:content-transfer-encoding:from:organization:date:message-id
-	:in-reply-to:user-agent;
-	b=t5qL/euHCI4VBIXbzKfo1fXFlrrtRjswYrdjM1TYF/swqZP86qPZ9MVh1XDPz55iio
-	IRJvorhMkW49QDMgebkSBKaMRCidMqWuLaHyGaZkvQgQ4tlSZDLeCNiOlkL3tfLjNm4y
-	m1ueH3XJTOgLAxjHz0krxAQRy9WG4KHZWPv04=
-Received: by 10.142.65.22 with SMTP id n22mr1121567wfa.32.1260872739677;
-	Tue, 15 Dec 2009 02:25:39 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.162.68.164])
-	by mx.google.com with ESMTPS id 23sm5788361pzk.0.2009.12.15.02.25.36
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 15 Dec 2009 02:25:39 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <op.u4y295q0mn1qzu@guohr-laptop-ubuntu>
-	<1260871055.779.337.camel@mill.internal.reciva.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=xnMz/wPFdJ64HDyDFW63+1Iq8mIXtTgw/1dtPhZJmW5G3DmPBPgoYryWbHedk2yjl8
+	/5NgqirUP+hJOUQNVoIEvCspUHhye/l5OBh7Yw5ORFLT4fH+hnp5+eKdearWzDUKinp3
+	pfc3d69RbGx6CtWbE0dk/y8PjwVNThM7Z5Lk0=
 MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Organization: Gulessoft, Inc
-Date: Tue, 15 Dec 2009 18:25:28 +0800
-Message-ID: <op.u4y5wqaymn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <1260871055.779.337.camel@mill.internal.reciva.com>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.216.183
-X-SA-Exim-Mail-From: camelguo@gmail.com
+Received: by 10.101.181.15 with SMTP id i15mr9212007anp.90.1260873022441; Tue, 
+	15 Dec 2009 02:30:22 -0800 (PST)
+In-Reply-To: <ac9c93b10912140401o52fa183k90819ba5fdec4b34@mail.gmail.com>
+References: <ac9c93b10912140401o52fa183k90819ba5fdec4b34@mail.gmail.com>
+Date: Tue, 15 Dec 2009 11:30:22 +0100
+Message-ID: <ac9c93b10912150230i79083a9s65f5a7fd4376c5a7@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Compile eglibc for x86 failed.
+Subject: Re: bitbake -c menuconfig virtual/kernel and ncurses
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,41 +46,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Dec 2009 10:27:30 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Tue, 15 Dec 2009 10:32:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Yes, it works OK on my site.
-
-=E5=9C=A8 Tue, 15 Dec 2009 17:57:35 +0800=EF=BC=8CPhil Blundell <philb@g=
-nu.org> =E5=86=99=E9=81=93:
-
-> On Tue, 2009-12-15 at 17:28 +0800, Guo Hongruan wrote:
->> /media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r4/bui=
-ld-i586-oe-linux/elf/librtld.os:
->> In function `_dl_tlsdesc_dynamic':
->> (.text+0x141f5): undefined reference to `__i686.get_pc_thunk.bx'
->> collect2: ld returned 1 exit status
+2009/12/14 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+> Not sure how to fix this, but I just bumped into the following:
 >
-> See tls_i486.patch from recipes/glibc/files/.
+> I did a bitbake -c menuconfig virtual/kernel.
+> This launched an xterm which exited without me giving an opportunity
+> to change settings.
+> Still bitbake reported success.
 >
-> p.
+> Cause was that this system didn't have ncurses-dev installed yet.
 >
+> No idea on how to fix this in a proper way.
 >
+> Frans
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
+Addition: there is also a dependency on X11 as it wants to launch an xterm.
+guess this is the only thing in oe where we rely on x11. Perhaps
+better make this happen in the terminal the command is invoked (or
+perhaps only if xterm is not there).
 
-
-
--- =
-
-Guo Hongruan, Embedded Linux Consultant
-Mobile: +86-0-13484056007
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
+Frans
 
 
