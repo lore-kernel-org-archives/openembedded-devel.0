@@ -1,47 +1,36 @@
-Received: from mail-yx0-f175.google.com ([209.85.210.175])
+Received: from mail-px0-f183.google.com ([209.85.216.183])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NKQd8-0006qF-Kw
+	(envelope-from <vivektambakad@gmail.com>) id 1NKSFO-0000MW-Qn
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Dec 2009 07:11:33 +0100
-Received: by yxe5 with SMTP id 5so3505943yxe.24
+	Tue, 15 Dec 2009 08:55:10 +0100
+Received: by pxi13 with SMTP id 13so2794596pxi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Dec 2009 22:09:44 -0800 (PST)
+	Mon, 14 Dec 2009 23:53:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:to:subject
-	:references:date:mime-version:content-transfer-encoding:from
-	:organization:message-id:in-reply-to:user-agent;
-	bh=VjGXZ3YgNmTLCvgJVM933xMnWMVVgPBtSLgLjmwXp1A=;
-	b=DCg38YAcgbukPBpHSe8L7lyf2KBWqVdfHaIJv6fPrA+xMZpKFo0mhaa+ptOQBZHjr2
-	9NctT6JY8SCNcXXmCAFi7RdLlQF9vHJKZOAwFhUXX/W/mJPw1/S6jrMDjCGVk/klPiGi
-	w0QmKoeBMMXjIH5RZSW56NVcmzS+XLDhM2GBY=
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=LxNhUbJWpjR8vQd/6KAyU17+WJuN93wvV1Jd37vXqQA=;
+	b=tEs492Pis/SSQFpnVozIKvR9WMmJI932rq8hGW+j/g4i2W2bk2lStUH1C6iyVvTmgW
+	GZvtg+Z+HUpinRQqKXY140OXRChUeDpN6ofi83KTooun9wc/d3zuVwcPR8Gl+t2Te4Yr
+	gqsFa/OKEskGgtlRlWnzdBAEKTGmqF3gTfKtw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:to:subject:references:date:mime-version
-	:content-transfer-encoding:from:organization:message-id:in-reply-to
-	:user-agent;
-	b=I3axfUqA28GR9tVGiX88sU2X8gCVmhkYyaYwc7FbowUQ8qn/wTvsM2OQgGJLLf8AAs
-	mse6S5SBJbnGk8xiHH1LXMbOskfwxS1BS0HZX+VZiK9aEqbyEd2amOO3iF80bgIqMdcx
-	npGQzVJKHox8n/171A/nSYc7QqR5pe/bqFRnM=
-Received: by 10.151.20.8 with SMTP id x8mr8880962ybi.163.1260857384204;
-	Mon, 14 Dec 2009 22:09:44 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.162.68.164])
-	by mx.google.com with ESMTPS id 20sm4019531iwn.13.2009.12.14.22.09.36
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 14 Dec 2009 22:09:39 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <op.u4yom7zgmn1qzu@guohr-laptop-ubuntu>
-	<200912150650.46475.holger+oe@freyther.de>
-Date: Tue, 15 Dec 2009 14:09:29 +0800
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=LmmPHc4ubvVKsh9+luX7RWsgZnh9f91JMYB7hBHYfYA6YPeZ3RmOw61ofVnEFlzoSC
+	sdvHAGmIfCqyMJRlMZsa4Bthud19fK1Y+zmuMzficLgW3VAEcFLQHtMXYWEbTAJwdWwW
+	0fE1pe+D2+rzucUA4u68xm1dCV9fcTMoqgSj0=
 MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Organization: Gulessoft, Inc
-Message-ID: <op.u4yt13aymn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <200912150650.46475.holger+oe@freyther.de>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.210.175
-X-SA-Exim-Mail-From: camelguo@gmail.com
+Received: by 10.114.237.24 with SMTP id k24mr4036343wah.5.1260863599867; Mon, 
+	14 Dec 2009 23:53:19 -0800 (PST)
+Date: Tue, 15 Dec 2009 13:23:19 +0530
+Message-ID: <ad82c8890912142353j1ed5f5b1l3e0684d060d61f09@mail.gmail.com>
+From: vivek tambakad <vivektambakad@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.216.183
+X-SA-Exim-Mail-From: vivektambakad@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Patch for bitbake to enable the --ignore-deps option accept regular expression
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: mkfs.jffs2: command not found while building x11-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,99 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Dec 2009 06:11:33 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Tue, 15 Dec 2009 07:55:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
 Hi,
-    Sorry. I will recreate the patch using git as soon as possible.
+        I am getting mkfs.jffs2:command not found while running bitbake
+x11-image.
 
-> 2.) You have added the same code to 3 (or 4... I don't want to count) =
- =
+| + mkfs.jffs2
+--root=/home/vivek/development/em-x270/stuff/build/oetmp/rootfs/x11-image
+--output=/home/vivek/development/em-x270/stuff/build/oetmp/deploy/glibc/images/em-x270/Angstrom-x11-image-glibc-ipk-2009.X-test-20091215-em-x270.rootfs.jffs2
+--eraseblock=0x20000 --pad --faketime -n
+|
+/home/vivek/development/em-x270/stuff/build/oetmp/work/em-x270-angstrom-linux-gnueabi/x11-image-1.0-r0/temp/run.do_rootfs.2207:
+line 699: mkfs.jffs2: command not found
+NOTE: Task failed:
+/home/vivek/development/em-x270/stuff/build/oetmp/work/em-x270-angstrom-linux-gnueabi/x11-image-1.0-r0/temp/log.do_rootfs.2207
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of
+/home/vivek/development/em-x270/stuff//openembedded/recipes/images/
+x11-image.bb do_rootfs failed
+ERROR: Task 10
+(/home/vivek/development/em-x270/stuff//openembedded/recipes/images/
+x11-image.bb, do_rootfs) failed
+NOTE: Tasks Summary: Attempted 5679 tasks of which 5678 didn't need to be
+rerun and 1 failed.
+ERROR: '/home/vivek/development/em-x270/stuff//openembedded/recipes/images/
+x11-image.bb' failed
 
-> places,
-> I think this warrants to create a new python helper function (feel fre=
-e  =
+Is there anything i need to add in x11-image.bb files. Please tell me how to
+overcome from this error.
 
-> to ask
-> me how to do it) to have some code sharing.
-    In fact, this is my first python code. So you may need to pay more  =
-
-attention on reviewing it. (I used to be a C programmer, everything seem=
-  =
-
-strange)
-
-
-=E5=9C=A8 Tue, 15 Dec 2009 13:50:46 +0800=EF=BC=8CHolger Hans Peter Frey=
-ther  =
-
-<holger+oe@freyther.de> =E5=86=99=E9=81=93:
-
-> On Tuesday 15 December 2009 05:12:41 Guo Hongruan wrote:
->> Hi guys,
->>     I modified the bitbake to enable it accept regular expression wit=
-h  =
-
->> -I
->> option. Now I can generate dot file without any native packages, usin=
-g  =
-
->> the
->> following command:
->>
->> bitbake -g helloworld-image -I "native$"
->>
->>     Hope it is useful for you
->>
->> Thanks a lot!
->>
->
-> Awesome! Could you please do me three more favors?
->
-> 1.) Use git commit and send us the result of git format-patch. This wa=
-y  =
-
-> you
-> will be properly credited as the author of the change.
->
-> 2.) You have added the same code to 3 (or 4... I don't want to count) =
- =
-
-> places,
-> I think this warrants to create a new python helper function (feel fre=
-e  =
-
-> to ask
-> me how to do it) to have some code sharing.
->
-> 3.) Once you have factored out the code into a method that returns  =
-
-> True/False
-> depending on if you filter it or not... You can directly return on the=
-  =
-
-> first
-> match instead of doing the regexp on every other dependency as well.
->
->
-> thanks a lot!
->
-> 	z.
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
-
-
-
--- =
-
-Guo Hongruan, Embedded Linux Consultant
-Mobile: +86-0-13484056007
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
-
+with regards
+vivek tambakad
 
