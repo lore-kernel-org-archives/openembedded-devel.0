@@ -1,43 +1,27 @@
-Received: from mail-px0-f183.google.com ([209.85.216.183])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vijay.rathi@gmail.com>) id 1NKtjw-0006s1-4j
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NKuII-0000bR-Rd
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Dec 2009 14:16:31 +0100
-Received: by pxi13 with SMTP id 13so663059pxi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Dec 2009 05:14:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=HsQU98YAoEp3danjIAUKN3hPmYZ/9VpCmuM7KUQZJ0o=;
-	b=Ujswi7GQL1X7By5x6CXmGH7X5vj6HvxJTU2HjQ7KpUXoZAWMykjuLLNLE5fgi8FY19
-	jNcAxhvaZQkyWgPp1EWkuS+0RQVg4geyFQyTdzbU84iOB9CmAOGzWTFfPOCvcHCAmpvs
-	XqIAZRTGivw+cvqtNG/GpbgYTcXM0RmBMapH0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=RGCvHR6URssGZ9QlJ2juw6MbbTyG/j7BcxrueJBM8Ww1rZbode3qaORsQvlfuEvGSt
-	snry7wIxsCHQrN4WK8CNYnPTbwQXQUCSRXRQbYOh+7yOfATZQth+aYw0gsO8eZ1wQyD8
-	C8aruanpTgFE1iciX7KbtfxBKB8U4MdcKRtHY=
+	Wed, 16 Dec 2009 14:52:02 +0100
+Received: (qmail 24259 invoked by uid 813007); 16 Dec 2009 13:50:13 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 16 Dec 2009 13:50:13 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 16 Dec 2009 14:50:08 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.32; KDE/4.3.2; x86_64; ; )
+References: <200912021919.06663.marcin@juszkiewicz.com.pl>
+	<4B283AD7.9020501@tait.co.nz>
+In-Reply-To: <4B283AD7.9020501@tait.co.nz>
 MIME-Version: 1.0
-Received: by 10.141.89.19 with SMTP id r19mr737612rvl.113.1260969280199; Wed, 
-	16 Dec 2009 05:14:40 -0800 (PST)
-In-Reply-To: <4B28D9D8.90102@balister.org>
-References: <b381e0f80912150646v710aa0ecy4c4526d78f5acde3@mail.gmail.com>
-	<b381e0f80912160336t7a5a447as34fe2684abcc3649@mail.gmail.com>
-	<4B28C8D2.3000101@kernelconcepts.de>
-	<b381e0f80912160454t1fa01b67id1a1426bbe97c722@mail.gmail.com>
-	<4B28D9D8.90102@balister.org>
-Date: Wed, 16 Dec 2009 18:44:40 +0530
-Message-ID: <b381e0f80912160514m25966eex30346d116a3d0176@mail.gmail.com>
-From: Vijay Rathi <vijay.rathi@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.216.183
-X-SA-Exim-Mail-From: vijay.rathi@gmail.com
+Message-Id: <200912161450.09037.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Issue with bitbake
+Subject: Re: SVN fetcher fix for SRCREV=AUTOREV situations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,111 +35,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2009 13:16:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 16 Dec 2009 13:52:02 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Dnia =C5=9Broda, 16 grudnia 2009 o 02:41:43 Douglas Royds napisa=C5=82(a):
+> Marcin Juszkiewicz wrote:
+> > $ svn co -r 7916
+> > svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.common=
+@7
+> >916 svn: URL
+> > 'svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.commo=
+n'
+> > doesn't exist
+> >
+> > But:
+> >
+> > $ svn co -r 7916
+> > svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.common
+> >
+> > works fine.
+=20
+> The R1.4 branch didn't exist in r7916 -=20
 
-Even after git pull, I am getting same build result.
-Is this branch broken? OR Am  I missing some dependency?
+14:47 hrw@home:~$ LC_ALL=3DC svn info=20
+svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.common
+Path: com.buglabs.bug.audio.common
+URL: svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.common
+Repository Root: svn://svn.buglabs.net
+Repository UUID: 35ad6e01-222d-0410-b96a-b41bba574936
+Revision: 10697
+Node Kind: directory
+Last Changed Author: kgilmer
+Last Changed Rev: 7916
+Last Changed Date: 2009-01-12 17:15:17 +0100 (Mon, 12 Jan 2009)
 
-I am not using -b option with bitbake anywhere.
+And Bitbake uses "Last Changed Rev" field for AUTOREV.=20
 
-Regards,
-Vijay
+> that branch was created in r8660.
 
-On Wed, Dec 16, 2009 at 6:30 PM, Philip Balister <philip@balister.org>wrote:
+That branch was created by using "svn move" so it has history of previous=20
+branch. And /bug/trunk/ is other branch of same code - they have common=20
+ancestor.
 
-> On 12/16/2009 07:54 AM, Vijay Rathi wrote:
->
->> Hi,
->>
->> Thanks for quick reply.
->>
->> I followed steps mentioned at :
->>
->> http://www.angstrom-distribution.org/building-angstrom
->>
->> I tried using two approach in different directory/environment
->>
->> 1. As mentioned in online manual, I added ->  MACHINE ?= "beagleboard"
->> (which
->> i feel incorrect)
->> 2. As mentioned in online manual, I added ->  MACHINE = "beagleboard"
->>
->> But I had same results with - bitbake base-image ie. libsdl-native...
->> failed
->>
->> I am using Fedora Core 9 on my host.
->>
->> Am I missing something?
->>
->
-> Try a git pull and restart the build.
->
-> Philip
->
->
->
->
->
->> Regards,
->> Vijay
->>
->> On Wed, Dec 16, 2009 at 5:17 PM, Florian Boor<
->> florian.boor@kernelconcepts.de>  wrote:
->>
->>  Hi,
->>>
->>> Vijay Rathi schrieb:
->>>
->>>> I have recently setup the bitbake, OE development tree as per the  wiki
->>>>
->>> for
->>>
->>>> beagleboard.
->>>>
->>>
->>> it would be good to have a link to which instruction you are referring.
->>>
->>>
->>>> /home/dev/OE/angstrom-dev/work/i686-linux/libsdl-native-1.2.11-r2/temp/log.do_compile.12862
->>>
->>>> NOTE: Task failed:
->>>>
->>>> /home/dev/OE/angstrom-dev/work/i686-linux/libsdl-native-1.2.11-r2/temp/log.do_compile.12862
->>>
->>> these logs should provide the information to find out what's wrong. You
->>> should
->>> try to provide them through some pastebin if you need help to find out
->>> what
->>> actually went wrong.
->>>
->>> Greetings
->>>
->>> Florian
->>>
->>> --
->>> The dream of yesterday                  Florian Boor
->>> is the hope of today                    Tel: +49 271-771091-15
->>> and the reality of tomorrow.            Fax: +49 271-771091-19
->>> [Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
->>>                                        http://www.kernelconcepts.de/en
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>
->>>  _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->>
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
+
 
