@@ -1,24 +1,41 @@
-Received: from static-92-33-14-100.sme.bredbandsbolaget.se ([92.33.14.100]
-	helo=mailhost.lundinova.se) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <johan.hovold@lundinova.se>) id 1NKtOb-00068G-VA
+Received: from mail-pw0-f53.google.com ([209.85.160.53])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <vijay.rathi@gmail.com>) id 1NKtQ2-0006ES-Ux
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Dec 2009 13:54:29 +0100
-Received: from pi (unknown [10.240.22.2])
-	by mailhost.lundinova.se (Postfix) with ESMTP id 4E4C6B94006;
-	Wed, 16 Dec 2009 13:27:54 +0100 (CET)
-Received: from johan by pi with local (Exim 4.69) (envelope-from <johan@pi>)
-	id 1NKsyw-00064S-0q; Wed, 16 Dec 2009 13:27:54 +0100
-From: Johan Hovold <johan.hovold@lundinova.se>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 Dec 2009 13:27:54 +0100
-Message-Id: <1260966474-23290-1-git-send-email-johan.hovold@lundinova.se>
-X-Mailer: git-send-email 1.6.5.6
-Sender: <johan.hovold@lundinova.se>
-X-SA-Exim-Connect-IP: 92.33.14.100
-X-SA-Exim-Mail-From: johan.hovold@lundinova.se
+	Wed, 16 Dec 2009 13:55:59 +0100
+Received: by pwi18 with SMTP id 18so608613pwi.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Dec 2009 04:54:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=0KaaJzkDsSF/ZvdWcEAIFqMY2XltISr4gp3GdEOsuF8=;
+	b=vQlTcHT/A8zgJjYhSf3KNlEh5PovsowFQbCQxK9O5ByC5GKUYYEcwKs+bzFIrikTT1
+	1i/uDEap/FdsAN+PC+otLJYAVt9RGQy3r2mSoXseObX0ix1B5VCANQqJN6u4z8JHkIHW
+	aP+dTfVjMyiJWI+G5PVFvZoDYd0UyAWSZ028w=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=FzfgS5UWUM0R+IzQ+2hEkKKZ/2koiRuG7EBjG20y4SGLL2m8eGRbdMHceO/j7jHb2W
+	MhV0sIAK4DW8xHJjfpjc/9NaJo+XbDKYaklU+7eU8XHPWRXEbJQhSR9E/pusI+q2WWs7
+	CWkPe8sZ06y8rBDMe5+WmdOhacoRyRymaxnkY=
+MIME-Version: 1.0
+Received: by 10.141.188.34 with SMTP id q34mr723770rvp.155.1260968047125; Wed, 
+	16 Dec 2009 04:54:07 -0800 (PST)
+In-Reply-To: <4B28C8D2.3000101@kernelconcepts.de>
+References: <b381e0f80912150646v710aa0ecy4c4526d78f5acde3@mail.gmail.com>
+	<b381e0f80912160336t7a5a447as34fe2684abcc3649@mail.gmail.com>
+	<4B28C8D2.3000101@kernelconcepts.de>
+Date: Wed, 16 Dec 2009 18:24:07 +0530
+Message-ID: <b381e0f80912160454t1fa01b67id1a1426bbe97c722@mail.gmail.com>
+From: Vijay Rathi <vijay.rathi@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.160.53
+X-SA-Exim-Mail-From: vijay.rathi@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] openvpn: remove dependency on kernel module
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Issue with bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,31 +49,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2009 12:54:29 -0000
+X-List-Received-Date: Wed, 16 Dec 2009 12:55:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Fix image creation when tun module is compiled into kernel by using
-RRECOMMENDS instead of RDEPENDS for kernel-module-tun.
+Hi,
 
-Signed-off-by: Johan Hovold <johan.hovold@lundinova.se>
----
- recipes/openvpn/openvpn.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Thanks for quick reply.
 
-diff --git a/recipes/openvpn/openvpn.inc b/recipes/openvpn/openvpn.inc
-index 70cdf4c..0bccbc5 100644
---- a/recipes/openvpn/openvpn.inc
-+++ b/recipes/openvpn/openvpn.inc
-@@ -4,7 +4,7 @@ SECTION = "console/network"
- LICENSE = "GPLv2"
- PRIORITY = "optional"
- DEPENDS = "lzo openssl"
--RDEPENDS = "kernel-module-tun"
-+RRECOMMENDS = "kernel-module-tun"
- 
- SRC_URI = "http://openvpn.net/release/openvpn-${PV}.tar.gz \
- 	file://openvpn"
--- 
-1.6.5.6
+I followed steps mentioned at :
 
+http://www.angstrom-distribution.org/building-angstrom
 
+I tried using two approach in different directory/environment
+
+1. As mentioned in online manual, I added -> MACHINE ?= "beagleboard" (which
+i feel incorrect)
+2. As mentioned in online manual, I added -> MACHINE = "beagleboard"
+
+But I had same results with - bitbake base-image ie. libsdl-native... failed
+
+I am using Fedora Core 9 on my host.
+
+Am I missing something?
+
+Regards,
+Vijay
+
+On Wed, Dec 16, 2009 at 5:17 PM, Florian Boor <
+florian.boor@kernelconcepts.de> wrote:
+
+> Hi,
+>
+> Vijay Rathi schrieb:
+> > I have recently setup the bitbake, OE development tree as per the  wiki
+> for
+> > beagleboard.
+>
+> it would be good to have a link to which instruction you are referring.
+>
+> >
+> /home/dev/OE/angstrom-dev/work/i686-linux/libsdl-native-1.2.11-r2/temp/log.do_compile.12862
+> > NOTE: Task failed:
+> >
+> /home/dev/OE/angstrom-dev/work/i686-linux/libsdl-native-1.2.11-r2/temp/log.do_compile.12862
+>
+> these logs should provide the information to find out what's wrong. You
+> should
+> try to provide them through some pastebin if you need help to find out what
+> actually went wrong.
+>
+> Greetings
+>
+> Florian
+>
+> --
+> The dream of yesterday                  Florian Boor
+> is the hope of today                    Tel: +49 271-771091-15
+> and the reality of tomorrow.            Fax: +49 271-771091-19
+> [Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+>                                        http://www.kernelconcepts.de/en
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
