@@ -1,43 +1,43 @@
-Received: from mail-yx0-f175.google.com ([209.85.210.175])
+Received: from mail-gx0-f215.google.com ([209.85.217.215])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NKkti-0002MX-GI
+	(envelope-from <camelguo@gmail.com>) id 1NKmPT-0001XJ-LF
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Dec 2009 04:50:01 +0100
-Received: by yxe5 with SMTP id 5so594569yxe.24
+	Wed, 16 Dec 2009 06:26:54 +0100
+Received: by gxk7 with SMTP id 7so1229071gxk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Dec 2009 19:48:11 -0800 (PST)
+	Tue, 15 Dec 2009 21:25:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:content-type:to:subject
 	:references:date:mime-version:content-transfer-encoding:from
 	:organization:message-id:in-reply-to:user-agent;
-	bh=rUFY7Aod2GCQkPfCI8QVRLcleOZ1B7VKQdFUkDYkuwo=;
-	b=IgufIzCs8e9nnHdQ3w3t6qXn283Gqhurfg9k6Q7quQYzzmzdGO9bIO8jAubKti3Bbm
-	gL/BjSX9tZqMdDCPeSu9dS0tEYW/QH6lqJ7wuqjZaqZEygSGWiwSiCGSYBQLgc0SaEu9
-	NJV7xRJVtQeCKyGcwq38h7Q+tGcx2hu1dGsEg=
+	bh=GWuP0fI3eikEklEBib1RYX0P5Ly6qjFDLKv/RmeXqe0=;
+	b=rkUSD1LJegFf3RK/THncC4Gj0/BT+cuALFl28Sq2l+VHSRP/j+y+1uLrEEpoqWuuQs
+	B9EO1gXUTdIvkOqkPfpFCA20deriFb8TdXi8/UcZqxIo+3ImfmXryNEqoa4iDP4jeMrW
+	Z2q3GQ9V5vziutlXCJN/8h6tRCFBEh17/J/D8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=content-type:to:subject:references:date:mime-version
 	:content-transfer-encoding:from:organization:message-id:in-reply-to
 	:user-agent;
-	b=izyTfvcmUZNUQb2KeSuUeGC9zr4OCqkfSkdUzn+Y/8bRHmjSH1+kr1NPsfBhC9zEv8
-	YvUjejRwZ4sR2/CYasDM9MjV19AnD3BokDxHOVm9wUAmmfovjkkMWS7JVZNGBkgzE99U
-	6KV5YK9q6UP6P7CtSIml1H3+u9SjB7pSYf8JQ=
-Received: by 10.150.234.15 with SMTP id g15mr835345ybh.194.1260935290938;
-	Tue, 15 Dec 2009 19:48:10 -0800 (PST)
+	b=X7L///dEI8L+QyBeBuBiRK+MeSuG3W9xn7NaXaiJj6HNDlTT0wgEay+jlkMfTv7glE
+	Ym5WwOx8mFYtfHa+0M2eU9Cc6XlEqCfy9ZvPUZN+cvcFWdo4TYSooCuT+YWgtSdn50LR
+	odi32HeeHpIUfrMzWUvaWXO9DVOFyEZzCbB/8=
+Received: by 10.90.37.33 with SMTP id k33mr593637agk.114.1260941104143;
+	Tue, 15 Dec 2009 21:25:04 -0800 (PST)
 Received: from guohr-laptop-ubuntu ([123.162.71.250])
-	by mx.google.com with ESMTPS id 8sm240269yxg.42.2009.12.15.19.48.07
+	by mx.google.com with ESMTPS id 22sm334300iwn.8.2009.12.15.21.25.00
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 15 Dec 2009 19:48:10 -0800 (PST)
+	Tue, 15 Dec 2009 21:25:03 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
 References: <op.u4y7xof0mn1qzu@guohr-laptop-ubuntu>
 	<19c1b8a90912150944l4488a139vcb3602869da3844c@mail.gmail.com>
-Date: Wed, 16 Dec 2009 11:48:00 +0800
+Date: Wed, 16 Dec 2009 13:24:51 +0800
 MIME-Version: 1.0
 From: "Guo Hongruan" <camelguo@gmail.com>
 Organization: Gulessoft, Inc
-Message-ID: <op.u40h6aehmn1qzu@guohr-laptop-ubuntu>
+Message-ID: <op.u40mnpo7mn1qzu@guohr-laptop-ubuntu>
 In-Reply-To: <19c1b8a90912150944l4488a139vcb3602869da3844c@mail.gmail.com>
 User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Connect-IP: 209.85.217.215
 X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
@@ -55,15 +55,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2009 03:50:01 -0000
+X-List-Received-Date: Wed, 16 Dec 2009 05:26:55 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
 Content-Transfer-Encoding: Quoted-Printable
 
-This error has not been reproduced on org.openembedded.dev branch of  =
+I found the cause. it is caused by the incorrect libc-initial defination=
+.
 
-openembedded. I used to meet this error at stable/2009 branch when  =
-
-MACHINE=3Dqemux86 DISTRO=3Dminimal-eglibc
+PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-initial =3D "eglibc-init=
+ial"
 
 =E5=9C=A8 Wed, 16 Dec 2009 01:44:09 +0800=EF=BC=8CKhem Raj <raj.khem@gma=
 il.com> =E5=86=99=E9=81=93:
