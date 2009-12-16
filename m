@@ -1,28 +1,24 @@
-Received: from mail.kernelconcepts.de ([212.60.202.196])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1NKsNb-00008N-Ms
+Received: from static-92-33-14-100.sme.bredbandsbolaget.se ([92.33.14.100]
+	helo=mailhost.lundinova.se) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <johan.hovold@lundinova.se>) id 1NKtOb-00068G-VA
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Dec 2009 12:49:23 +0100
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1NKsXs-00011t-Jj
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Dec 2009 12:59:56 +0100
-Message-ID: <4B28C8D2.3000101@kernelconcepts.de>
-Date: Wed, 16 Dec 2009 12:47:30 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Wed, 16 Dec 2009 13:54:29 +0100
+Received: from pi (unknown [10.240.22.2])
+	by mailhost.lundinova.se (Postfix) with ESMTP id 4E4C6B94006;
+	Wed, 16 Dec 2009 13:27:54 +0100 (CET)
+Received: from johan by pi with local (Exim 4.69) (envelope-from <johan@pi>)
+	id 1NKsyw-00064S-0q; Wed, 16 Dec 2009 13:27:54 +0100
+From: Johan Hovold <johan.hovold@lundinova.se>
 To: openembedded-devel@lists.openembedded.org
-References: <b381e0f80912150646v710aa0ecy4c4526d78f5acde3@mail.gmail.com>
-	<b381e0f80912160336t7a5a447as34fe2684abcc3649@mail.gmail.com>
-In-Reply-To: <b381e0f80912160336t7a5a447as34fe2684abcc3649@mail.gmail.com>
-X-Enigmail-Version: 0.95.7
-X-SA-Exim-Connect-IP: 212.60.202.196
-X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
+Date: Wed, 16 Dec 2009 13:27:54 +0100
+Message-Id: <1260966474-23290-1-git-send-email-johan.hovold@lundinova.se>
+X-Mailer: git-send-email 1.6.5.6
+Sender: <johan.hovold@lundinova.se>
+X-SA-Exim-Connect-IP: 92.33.14.100
+X-SA-Exim-Mail-From: johan.hovold@lundinova.se
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Issue with bitbake
+Subject: [PATCH] openvpn: remove dependency on kernel module
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,35 +32,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2009 11:49:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 16 Dec 2009 12:54:29 -0000
 
-Hi,
+Fix image creation when tun module is compiled into kernel by using
+RRECOMMENDS instead of RDEPENDS for kernel-module-tun.
 
-Vijay Rathi schrieb:
-> I have recently setup the bitbake, OE development tree as per the  wiki for
-> beagleboard.
+Signed-off-by: Johan Hovold <johan.hovold@lundinova.se>
+---
+ recipes/openvpn/openvpn.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-it would be good to have a link to which instruction you are referring.
-
-> /home/dev/OE/angstrom-dev/work/i686-linux/libsdl-native-1.2.11-r2/temp/log.do_compile.12862
-> NOTE: Task failed:
-> /home/dev/OE/angstrom-dev/work/i686-linux/libsdl-native-1.2.11-r2/temp/log.do_compile.12862
-
-these logs should provide the information to find out what's wrong. You should
-try to provide them through some pastebin if you need help to find out what
-actually went wrong.
-
-Greetings
-
-Florian
-
+diff --git a/recipes/openvpn/openvpn.inc b/recipes/openvpn/openvpn.inc
+index 70cdf4c..0bccbc5 100644
+--- a/recipes/openvpn/openvpn.inc
++++ b/recipes/openvpn/openvpn.inc
+@@ -4,7 +4,7 @@ SECTION = "console/network"
+ LICENSE = "GPLv2"
+ PRIORITY = "optional"
+ DEPENDS = "lzo openssl"
+-RDEPENDS = "kernel-module-tun"
++RRECOMMENDS = "kernel-module-tun"
+ 
+ SRC_URI = "http://openvpn.net/release/openvpn-${PV}.tar.gz \
+ 	file://openvpn"
 -- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+1.6.5.6
+
 
 
