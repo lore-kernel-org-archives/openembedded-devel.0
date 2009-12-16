@@ -1,40 +1,47 @@
-Received: from gatekeeper.tait.co.nz ([202.37.96.11])
+Received: from mail-yx0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <douglas.royds@tait.co.nz>) id 1NKjHa-0002ku-Ee
+	(envelope-from <camelguo@gmail.com>) id 1NKkti-0002MX-GI
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Dec 2009 03:06:34 +0100
-Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
-	by localhost.tait.co.nz (Postfix) with ESMTP id DDB4446756
+	Wed, 16 Dec 2009 04:50:01 +0100
+Received: by yxe5 with SMTP id 5so594569yxe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Dec 2009 14:41:52 +1300 (NZDT)
-Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])
-	by gatekeeper.tait.co.nz (Postfix) with ESMTP id CBBC946755
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Dec 2009 14:41:50 +1300 (NZDT)
-Received: from conversion-daemon.sunstrike.tait.co.nz by sunstrike.tait.co.nz
-	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
-	id <0KUQ00A0114HEZ00@sunstrike.tait.co.nz>
-	(original mail from douglas.royds@tait.co.nz)
-	for openembedded-devel@lists.openembedded.org; Wed,
-	16 Dec 2009 14:41:50 +1300 (NZDT)
-Received: from [172.25.114.21] by sunstrike.tait.co.nz
-	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
-	with ESMTP id <0KUQ0072Z21JYQ10@sunstrike.tait.co.nz> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	16 Dec 2009 14:41:45 +1300 (NZDT)
-Date: Wed, 16 Dec 2009 14:41:43 +1300
-From: Douglas Royds <douglas.royds@tait.co.nz>
-In-reply-to: <200912021919.06663.marcin@juszkiewicz.com.pl>
+	Tue, 15 Dec 2009 19:48:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:content-type:to:subject
+	:references:date:mime-version:content-transfer-encoding:from
+	:organization:message-id:in-reply-to:user-agent;
+	bh=rUFY7Aod2GCQkPfCI8QVRLcleOZ1B7VKQdFUkDYkuwo=;
+	b=IgufIzCs8e9nnHdQ3w3t6qXn283Gqhurfg9k6Q7quQYzzmzdGO9bIO8jAubKti3Bbm
+	gL/BjSX9tZqMdDCPeSu9dS0tEYW/QH6lqJ7wuqjZaqZEygSGWiwSiCGSYBQLgc0SaEu9
+	NJV7xRJVtQeCKyGcwq38h7Q+tGcx2hu1dGsEg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=content-type:to:subject:references:date:mime-version
+	:content-transfer-encoding:from:organization:message-id:in-reply-to
+	:user-agent;
+	b=izyTfvcmUZNUQb2KeSuUeGC9zr4OCqkfSkdUzn+Y/8bRHmjSH1+kr1NPsfBhC9zEv8
+	YvUjejRwZ4sR2/CYasDM9MjV19AnD3BokDxHOVm9wUAmmfovjkkMWS7JVZNGBkgzE99U
+	6KV5YK9q6UP6P7CtSIml1H3+u9SjB7pSYf8JQ=
+Received: by 10.150.234.15 with SMTP id g15mr835345ybh.194.1260935290938;
+	Tue, 15 Dec 2009 19:48:10 -0800 (PST)
+Received: from guohr-laptop-ubuntu ([123.162.71.250])
+	by mx.google.com with ESMTPS id 8sm240269yxg.42.2009.12.15.19.48.07
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 15 Dec 2009 19:48:10 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-Message-id: <4B283AD7.9020501@tait.co.nz>
-MIME-version: 1.0
-References: <200912021919.06663.marcin@juszkiewicz.com.pl>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-X-SA-Exim-Connect-IP: 202.37.96.11
-X-SA-Exim-Mail-From: douglas.royds@tait.co.nz
+References: <op.u4y7xof0mn1qzu@guohr-laptop-ubuntu>
+	<19c1b8a90912150944l4488a139vcb3602869da3844c@mail.gmail.com>
+Date: Wed, 16 Dec 2009 11:48:00 +0800
+MIME-Version: 1.0
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u40h6aehmn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <19c1b8a90912150944l4488a139vcb3602869da3844c@mail.gmail.com>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: SVN fetcher fix for SRCREV=AUTOREV situations
+Subject: Re: undefined reference when installing eglibc on x86 platform
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,49 +55,141 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2009 02:06:34 -0000
-Content-type: text/plain; format=flowed; charset=ISO-8859-1
-Content-transfer-encoding: 7BIT
+X-List-Received-Date: Wed, 16 Dec 2009 03:50:01 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: Quoted-Printable
 
-Marcin Juszkiewicz wrote:
-> $ svn co -r 7916 svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.common@7916
-> svn: URL 'svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.common' doesn't exist
+This error has not been reproduced on org.openembedded.dev branch of  =
+
+openembedded. I used to meet this error at stable/2009 branch when  =
+
+MACHINE=3Dqemux86 DISTRO=3Dminimal-eglibc
+
+=E5=9C=A8 Wed, 16 Dec 2009 01:44:09 +0800=EF=BC=8CKhem Raj <raj.khem@gma=
+il.com> =E5=86=99=E9=81=93:
+
+> On Tue, Dec 15, 2009 at 3:09 AM, Guo Hongruan <camelguo@gmail.com> wro=
+te:
+>> Hi guys,
+>>   I compiled eglibc for my x86 box. But when installing, the folllowi=
+ng
+>> error occured. Anyone can give me some hints
+>>
+>> Thanks a lot!
+>>
+>> /media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/bui=
+ld-i586-oe-linux/nscd/connections.o:
+>> In function `nscd_init':
+>> connections.c:(.text+0x2292): undefined reference to `inotify_init1'
+>> connections.c:(.text+0x2b9f): undefined reference to `mkostemp'
+>> /media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/bui=
+ld-i586-oe-linux/nscd/getpwnam_r.o:
+>> In function `getpwnam_r':
+>> getpwnam_r.c:(.text+0xb2): undefined reference to `__nss_next2'
+>> getpwnam_r.c:(.text+0x11c): undefined reference to  =
+
+>> `__nss_passwd_lookup2'
+>> /media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/bui=
+ld-i586-oe-linux/nscd/getpwuid_r.o:
+>> In function `getpwuid_r':
+>> getpwuid_r.c:(.text+0xb2): undefined reference to `__nss_next2'
+>> getpwuid_r.c:(.text+0x11c): undefined reference to  =
+
+>> `__nss_passwd_lookup2'
+>> /media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/bui=
+ld-i586-oe-linux/nscd/getgrnam_r.o:
+>> In function `getgrnam_r':
+>> getgrnam_r.c:(.text+0xb2): undefined reference to `__nss_next2'
+>> getgrnam_r.c:(.text+0x11c): undefined reference to `__nss_group_looku=
+p2'
+>> /media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/bui=
+ld-i586-oe-linux/nscd/getgrgid_r.o:
+>> In function `getgrgid_r':
+>> getgrgid_r.c:(.text+0xb2): undefined reference to `__nss_next2'
+>> getgrgid_r.c:(.text+0x11c): undefined reference to `__nss_group_looku=
+p2'
+>> /media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/bui=
+ld-i586-oe-linux/nscd/gethstbyad_r.o:
+>> In function `__gethostbyaddr2_r':
+>> gethstbyad_r.c:(.text+0x87): undefined reference to `__nss_next2'
+>> gethstbyad_r.c:(.text+0x148): undefined reference to  =
+
+>> `__nss_hosts_lookup2'
+>> /media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/bui=
+ld-i586-oe-linux/nscd/gethstbynm3_r.o:
+>> In function `__gethostbyname3_r':
+>> gethstbynm3_r.c:(.text+0xd6): undefined reference to `__nss_next2'
+>> gethstbynm3_r.c:(.text+0x1e3): undefined reference to  =
+
+>> `__nss_hosts_lookup2'
+>> /media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/bui=
+ld-i586-oe-linux/nscd/getsrvbynm_r.o:
+>> In function `getservbyname_r':
+>> getsrvbynm_r.c:(.text+0xb7): undefined reference to `__nss_next2'
+>> getsrvbynm_r.c:(.text+0x121): undefined reference to
+>> `__nss_services_lookup2'
+>> /media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/bui=
+ld-i586-oe-linux/nscd/getsrvbypt_r.o:
+>> In function `getservbyport_r':
+>> getsrvbypt_r.c:(.text+0xb7): undefined reference to `__nss_next2'
+>> getsrvbypt_r.c:(.text+0x121): undefined reference to
+>> `__nss_services_lookup2'
+>> /media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/bui=
+ld-i586-oe-linux/nscd/gai.o:
+>> In function `getaddrinfo':
+>> gai.c:(.text+0x3ae6): undefined reference to `qsort_r'
+>> gai.c:(.text+0x3bea): undefined reference to `qsort_r'
+>> /media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/bui=
+ld-i586-oe-linux/nscd/res_hconf.o:
+>> In function `arg_bool':
+>> res_hconf.c:(.text+0xa8): undefined reference to `__asprintf_chk'
+>> /media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/bui=
+ld-i586-oe-linux/nscd/res_hconf.o:
+>> In function `arg_trimdomain_list':
+>> res_hconf.c:(.text+0x2a9): undefined reference to `__asprintf_chk'
+>> res_hconf.c:(.text+0x308): undefined reference to `__asprintf_chk'
+>> /media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/bui=
+ld-i586-oe-linux/nscd/res_hconf.o:
+>> In function `do_init':
+>> res_hconf.c:(.text+0x545): undefined reference to `__asprintf_chk'
+>> /media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/bui=
+ld-i586-oe-linux/nis/libnsl.so:
+>> undefined reference to `__libc_clntudp_bufcreate@GLIBC_PRIVATE'
+>> /media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/bui=
+ld-i586-oe-linux/rt/librt.so:
+>> undefined reference to `__fortify_fail@GLIBC_PRIVATE'
+>> collect2: ld returned 1 exit status
+>> make[2]: ***
+>> [/media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/bu=
+ild-i586-oe-linux/nscd/nscd]
+>> Error 1
+>> make[2]: Leaving directory
+>> `/media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/eg=
+libc-2_9/libc/nscd'
+>> make[1]: *** [nscd/subdir_install] Error 2
+>> make[1]: Leaving directory
+>> `/media/work-disk/workdir/oe-mini/work/i586-oe-linux/eglibc-2.9-r5/eg=
+libc-2_9/libc'
+>>
 >
-> But:
+> post your log files and run files somewhere
 >
-> $ svn co -r 7916 svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.common
+> -Khem
+>>
 >
-> works fine.
->   
-
-The R1.4 branch didn't exist in r7916 - that branch was created in 
-r8660. The correct URL is:
-
-    svn://svn.buglabs.net/bug/trunk/com.buglabs.bug.audio.common
-
-So this should work:
-
-    $ svn co -r7916
-    svn://svn.buglabs.net/bug/trunk/com.buglabs.bug.audio.common@7916
-
-Douglas.
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
 
 
 
+-- =
 
-
-
-=======================================================================
-This email, including any attachments, is only for the intended
-addressee.  It is subject to copyright, is confidential and may be
-the subject of legal or other privilege, none of which is waived or
-lost by reason of this transmission.
-If the receiver is not the intended addressee, please accept our
-apologies, notify us by return, delete all copies and perform no
-other act on the email.
-Unfortunately, we cannot warrant that the email has not been
- altered or corrupted during transmission.
-=======================================================================
-
+Guo Hongruan, Embedded Linux Consultant
+Mobile: +86-0-13484056007
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
 
