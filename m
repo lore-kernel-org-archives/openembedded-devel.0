@@ -1,20 +1,20 @@
 Received: from static-92-33-14-100.sme.bredbandsbolaget.se ([92.33.14.100]
 	helo=mailhost.lundinova.se) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <johan.hovold@lundinova.se>) id 1NKwnH-0001Wr-34
+	(envelope-from <johan.hovold@lundinova.se>) id 1NKwwJ-0003ya-2n
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Dec 2009 17:32:10 +0100
+	Wed, 16 Dec 2009 17:41:30 +0100
 Received: from pi (unknown [10.240.22.2])
-	by mailhost.lundinova.se (Postfix) with ESMTP id E6F50B94006;
-	Wed, 16 Dec 2009 17:30:19 +0100 (CET)
+	by mailhost.lundinova.se (Postfix) with ESMTP id EEE94B94006;
+	Wed, 16 Dec 2009 17:39:39 +0100 (CET)
 Received: from johan by pi with local (Exim 4.69) (envelope-from <johan@pi>)
-	id 1NKwlX-0007HZ-Qa; Wed, 16 Dec 2009 17:30:19 +0100
+	id 1NKwuZ-0007Tp-TC; Wed, 16 Dec 2009 17:39:39 +0100
 From: Johan Hovold <johan.hovold@lundinova.se>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 Dec 2009 17:29:59 +0100
-Message-Id: <1260980999-27920-1-git-send-email-johan.hovold@lundinova.se>
+Date: Wed, 16 Dec 2009 17:39:32 +0100
+Message-Id: <1260981572-28691-1-git-send-email-johan.hovold@lundinova.se>
 X-Mailer: git-send-email 1.6.5.6
-In-Reply-To: <200912161526.36033.holger+oe@freyther.de>
-References: <200912161526.36033.holger+oe@freyther.de>
+In-Reply-To: <1260980999-27920-1-git-send-email-johan.hovold@lundinova.se>
+References: <1260980999-27920-1-git-send-email-johan.hovold@lundinova.se>
 Sender: <johan.hovold@lundinova.se>
 X-SA-Exim-Connect-IP: 92.33.14.100
 X-SA-Exim-Mail-From: johan.hovold@lundinova.se
@@ -34,7 +34,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2009 16:32:11 -0000
+X-List-Received-Date: Wed, 16 Dec 2009 16:41:30 -0000
 
 Fix image creation when tun module is compiled into kernel by using
 RRECOMMENDS instead of RDEPENDS for kernel-module-tun.
@@ -92,25 +92,25 @@ index bb22dc9..5bb4a28 100644
 -PR = "r1"
 +PR = "r2"
 diff --git a/recipes/openvpn/openvpn_2.0.9+2.1rc19.bb b/recipes/openvpn/openvpn_2.0.9+2.1rc19.bb
-index 9375cd6..80ab6e9 100644
+index 9375cd6..04a333b 100644
 --- a/recipes/openvpn/openvpn_2.0.9+2.1rc19.bb
 +++ b/recipes/openvpn/openvpn_2.0.9+2.1rc19.bb
 @@ -1,5 +1,7 @@
  require openvpn.inc
  
-+PR = "r2"
++PR = "r1"
 +
  SRC_URI = "http://openvpn.net/release/openvpn-2.1_rc19.tar.gz \
  	   file://openvpn"
  
 diff --git a/recipes/openvpn/openvpn_2.0.9+2.1rc20.bb b/recipes/openvpn/openvpn_2.0.9+2.1rc20.bb
-index f671e15..25eafc8 100644
+index f671e15..7493dca 100644
 --- a/recipes/openvpn/openvpn_2.0.9+2.1rc20.bb
 +++ b/recipes/openvpn/openvpn_2.0.9+2.1rc20.bb
 @@ -1,5 +1,7 @@
  require openvpn.inc
  
-+PR = "r2"
++PR = "r1"
 +
  SRC_URI = "http://openvpn.net/release/openvpn-2.1_rc20.tar.gz \
  	   file://openvpn"
