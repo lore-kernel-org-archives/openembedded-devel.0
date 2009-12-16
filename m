@@ -1,27 +1,26 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NKuII-0000bR-Rd
+	(envelope-from <holger+oe@freyther.de>) id 1NKurc-0001F4-Ss
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Dec 2009 14:52:02 +0100
-Received: (qmail 24259 invoked by uid 813007); 16 Dec 2009 13:50:13 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 16 Dec 2009 13:50:13 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	Wed, 16 Dec 2009 15:28:31 +0100
+Received: from tamarin.localnet (123-192-180-176.dynamic.kbronet.com.tw
+	[123.192.180.176])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 0FA641B10C03
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Dec 2009 14:22:23 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 Dec 2009 14:50:08 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.32; KDE/4.3.2; x86_64; ; )
-References: <200912021919.06663.marcin@juszkiewicz.com.pl>
-	<4B283AD7.9020501@tait.co.nz>
-In-Reply-To: <4B283AD7.9020501@tait.co.nz>
+Date: Wed, 16 Dec 2009 15:26:35 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <1260966474-23290-1-git-send-email-johan.hovold@lundinova.se>
+In-Reply-To: <1260966474-23290-1-git-send-email-johan.hovold@lundinova.se>
 MIME-Version: 1.0
-Message-Id: <200912161450.09037.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Message-Id: <200912161526.36033.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: SVN fetcher fix for SRCREV=AUTOREV situations
+Subject: Re: [PATCH] openvpn: remove dependency on kernel module
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,56 +34,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2009 13:52:02 -0000
+X-List-Received-Date: Wed, 16 Dec 2009 14:28:32 -0000
 Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Dnia =C5=9Broda, 16 grudnia 2009 o 02:41:43 Douglas Royds napisa=C5=82(a):
-> Marcin Juszkiewicz wrote:
-> > $ svn co -r 7916
-> > svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.common=
-@7
-> >916 svn: URL
-> > 'svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.commo=
-n'
-> > doesn't exist
-> >
-> > But:
-> >
-> > $ svn co -r 7916
-> > svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.common
-> >
-> > works fine.
-=20
-> The R1.4 branch didn't exist in r7916 -=20
+On Wednesday 16 December 2009 13:27:54 Johan Hovold wrote:
+> Fix image creation when tun module is compiled into kernel by using
+> RRECOMMENDS instead of RDEPENDS for kernel-module-tun.
 
-14:47 hrw@home:~$ LC_ALL=3DC svn info=20
-svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.common
-Path: com.buglabs.bug.audio.common
-URL: svn://svn.buglabs.net/bug/branches/R1.4/qa/com.buglabs.bug.audio.common
-Repository Root: svn://svn.buglabs.net
-Repository UUID: 35ad6e01-222d-0410-b96a-b41bba574936
-Revision: 10697
-Node Kind: directory
-Last Changed Author: kgilmer
-Last Changed Rev: 7916
-Last Changed Date: 2009-01-12 17:15:17 +0100 (Mon, 12 Jan 2009)
+Agreed, but you will need to bump the PR of the openvpn recipes.
 
-And Bitbake uses "Last Changed Rev" field for AUTOREV.=20
-
-> that branch was created in r8660.
-
-That branch was created by using "svn move" so it has history of previous=20
-branch. And /bug/trunk/ is other branch of same code - they have common=20
-ancestor.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+regards
+	holger
 
 
 
