@@ -1,30 +1,26 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NLCyG-0007T6-SZ
+Received: from static-92-33-14-100.sme.bredbandsbolaget.se ([92.33.14.100]
+	helo=mailhost.lundinova.se) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <johan.hovold@lundinova.se>) id 1NLDq3-0003j8-3m
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Dec 2009 10:48:35 +0100
-Received: from 88-110-14-177.dynamic.dsl.as9105.com ([88.110.14.177]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>)
-	id 1NLCwX-0005Ni-1U; Thu, 17 Dec 2009 09:46:45 +0000
-From: Phil Blundell <philb@gnu.org>
-To: Johan Hovold <johan.hovold@lundinova.se>
-In-Reply-To: <20091217091605.GB32444@lundinova.se>
+	Thu, 17 Dec 2009 11:44:10 +0100
+Received: from pi (unknown [10.240.22.2])
+	by mailhost.lundinova.se (Postfix) with ESMTP id 27EC0B94006;
+	Thu, 17 Dec 2009 11:42:19 +0100 (CET)
+Received: from johan by pi with local (Exim 4.69) (envelope-from <johan@pi>)
+	id 1NLDoJ-0005Xv-0h; Thu, 17 Dec 2009 11:42:19 +0100
+From: Johan Hovold <johan.hovold@lundinova.se>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 17 Dec 2009 11:42:10 +0100
+Message-Id: <1261046530-21258-1-git-send-email-johan.hovold@lundinova.se>
+X-Mailer: git-send-email 1.6.5.6
+In-Reply-To: <200912161526.36033.holger+oe@freyther.de>
 References: <200912161526.36033.holger+oe@freyther.de>
-	<1260980999-27920-1-git-send-email-johan.hovold@lundinova.se>
-	<1260993181.6896.442.camel@lenovo.internal.reciva.com>
-	<20091217091605.GB32444@lundinova.se>
-Date: Thu, 17 Dec 2009 09:46:42 +0000
-Message-ID: <1261043202.6896.456.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+Sender: <johan.hovold@lundinova.se>
+X-SA-Exim-Connect-IP: 92.33.14.100
+X-SA-Exim-Mail-From: johan.hovold@lundinova.se
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] openvpn: remove dependency on kernel module
+Subject: [PATCH] openvpn: remove dependency on kernel module
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,25 +34,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Dec 2009 09:48:36 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 17 Dec 2009 10:44:10 -0000
 
-On Thu, 2009-12-17 at 10:16 +0100, Johan Hovold wrote:
-> > -RDEPENDS = "kernel-module-tun"
-> > > +RRECOMMENDS = "kernel-module-tun"
-> > 
-> > Did you want RRECOMMENDS_${PN} there? 
-> 
-> What is the reason for preferring the _${PN} form here? I notice a lot
-> of recipes do not use it.
+Fix image creation when tun module is compiled into kernel by using
+RRECOMMENDS instead of RDEPENDS for kernel-module-tun.
 
-RRECOMMENDS_${PN} will only insert the recommendation into ${PN},
-whereas plain RRECOMMENDS will insert the recommendation into all of the
-${PACKAGES}.
+Use INC_PR.
 
-p.
+Signed-off-by: Johan Hovold <johan.hovold@lundinova.se>
+---
 
+This version also uses INC_PR and RRECOMMENDS_${PN} as suggested by Otavio
+Salvador and Phil Blundell, respectively.
+
+Thanks,
+Johan
+
+
+ recipes/openvpn/openvpn.inc              |    4 +++-
+ recipes/openvpn/openvpn_1.5.0.bb         |    2 +-
+ recipes/openvpn/openvpn_1.6.0.bb         |    2 +-
+ recipes/openvpn/openvpn_2.0.2.bb         |    2 +-
+ recipes/openvpn/openvpn_2.0.9+2.1rc19.bb |    2 ++
+ recipes/openvpn/openvpn_2.0.9+2.1rc20.bb |    2 ++
+ recipes/openvpn/openvpn_2.0.9.bb         |    2 +-
+ recipes/openvpn/openvpn_2.0.bb           |    2 +-
+ 8 files changed, 12 insertions(+), 6 deletions(-)
+
+diff --git a/recipes/openvpn/openvpn.inc b/recipes/openvpn/openvpn.inc
+index 70cdf4c..97f3de7 100644
+--- a/recipes/openvpn/openvpn.inc
++++ b/recipes/openvpn/openvpn.inc
+@@ -4,7 +4,9 @@ SECTION = "console/network"
+ LICENSE = "GPLv2"
+ PRIORITY = "optional"
+ DEPENDS = "lzo openssl"
+-RDEPENDS = "kernel-module-tun"
++RRECOMMENDS_${PN} = "kernel-module-tun"
++
++INC_PR = "r3"
+ 
+ SRC_URI = "http://openvpn.net/release/openvpn-${PV}.tar.gz \
+ 	file://openvpn"
+diff --git a/recipes/openvpn/openvpn_1.5.0.bb b/recipes/openvpn/openvpn_1.5.0.bb
+index 12cebf5..beaa92c 100644
+--- a/recipes/openvpn/openvpn_1.5.0.bb
++++ b/recipes/openvpn/openvpn_1.5.0.bb
+@@ -1,3 +1,3 @@
+ require openvpn.inc
+ 
+-PR = "r3"
++PR = "${INC_PR}.1"
+diff --git a/recipes/openvpn/openvpn_1.6.0.bb b/recipes/openvpn/openvpn_1.6.0.bb
+index 5bb4a28..878a722 100644
+--- a/recipes/openvpn/openvpn_1.6.0.bb
++++ b/recipes/openvpn/openvpn_1.6.0.bb
+@@ -1,3 +1,3 @@
+ require openvpn.inc
+ 
+-PR = "r2"
++PR = "${INC_PR}.0"
+diff --git a/recipes/openvpn/openvpn_2.0.2.bb b/recipes/openvpn/openvpn_2.0.2.bb
+index bb22dc9..878a722 100644
+--- a/recipes/openvpn/openvpn_2.0.2.bb
++++ b/recipes/openvpn/openvpn_2.0.2.bb
+@@ -1,3 +1,3 @@
+ require openvpn.inc
+ 
+-PR = "r1"
++PR = "${INC_PR}.0"
+diff --git a/recipes/openvpn/openvpn_2.0.9+2.1rc19.bb b/recipes/openvpn/openvpn_2.0.9+2.1rc19.bb
+index 9375cd6..01ce08b 100644
+--- a/recipes/openvpn/openvpn_2.0.9+2.1rc19.bb
++++ b/recipes/openvpn/openvpn_2.0.9+2.1rc19.bb
+@@ -1,5 +1,7 @@
+ require openvpn.inc
+ 
++PR = "${INC_PR}.0"
++
+ SRC_URI = "http://openvpn.net/release/openvpn-2.1_rc19.tar.gz \
+ 	   file://openvpn"
+ 
+diff --git a/recipes/openvpn/openvpn_2.0.9+2.1rc20.bb b/recipes/openvpn/openvpn_2.0.9+2.1rc20.bb
+index f671e15..d2bb3c0 100644
+--- a/recipes/openvpn/openvpn_2.0.9+2.1rc20.bb
++++ b/recipes/openvpn/openvpn_2.0.9+2.1rc20.bb
+@@ -1,5 +1,7 @@
+ require openvpn.inc
+ 
++PR = "${INC_PR}.0"
++
+ SRC_URI = "http://openvpn.net/release/openvpn-2.1_rc20.tar.gz \
+ 	   file://openvpn"
+ 
+diff --git a/recipes/openvpn/openvpn_2.0.9.bb b/recipes/openvpn/openvpn_2.0.9.bb
+index 5bb4a28..878a722 100644
+--- a/recipes/openvpn/openvpn_2.0.9.bb
++++ b/recipes/openvpn/openvpn_2.0.9.bb
+@@ -1,3 +1,3 @@
+ require openvpn.inc
+ 
+-PR = "r2"
++PR = "${INC_PR}.0"
+diff --git a/recipes/openvpn/openvpn_2.0.bb b/recipes/openvpn/openvpn_2.0.bb
+index bb22dc9..878a722 100644
+--- a/recipes/openvpn/openvpn_2.0.bb
++++ b/recipes/openvpn/openvpn_2.0.bb
+@@ -1,3 +1,3 @@
+ require openvpn.inc
+ 
+-PR = "r1"
++PR = "${INC_PR}.0"
+-- 
+1.6.5.6
 
 
 
