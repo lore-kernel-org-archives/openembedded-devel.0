@@ -1,42 +1,27 @@
-Received: from mail-yw0-f188.google.com ([209.85.211.188])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NLMf7-0001CB-PG
+	(envelope-from <philb@gnu.org>) id 1NLMu0-0006pW-Rh
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Dec 2009 21:09:29 +0100
-Received: by ywh26 with SMTP id 26so2457607ywh.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Dec 2009 12:07:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=sywJZGjIG35mEs+LS4C9HGXT+ow2jm7ZGT8XP3GUCgI=;
-	b=xU8CbwLQMGLwpcgDDbKlGjcbyxwg/vFqOUbFDto530gWVCT78i/4RscPTspeJNFvTD
-	sUROn9/7eCeALdpivJ2g4982Rmux/GnK2GJwN0BdqjsHt3LmCzfh48GMILJ9c2DpyWHR
-	nMxpF8gd11aLtxAM/2WbheT7fEeaGxAnp/MgM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=wfLbggOifI8khy+CEj1ZbhzyFZqeJOMRIc80bMcfOkhcK/wy/BPgBdgpqCuikmJTCv
-	HugQDzhwoWHdej4lbg1z6Q50pu25fmS+ECljLoj0dvJrbQ10HvFklGqfvp3Wwv/C+uE/
-	MnGEB1MzSTZbUJuOt015NJrAJGW5yqAKFGBlE=
-Received: by 10.91.31.20 with SMTP id i20mr3263766agj.20.1261080456628;
-	Thu, 17 Dec 2009 12:07:36 -0800 (PST)
-Received: from localhost (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id 14sm1119593gxk.6.2009.12.17.12.07.35
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 17 Dec 2009 12:07:35 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 17 Dec 2009 21:24:51 +0100
+Received: from 88-110-14-177.dynamic.dsl.as9105.com ([88.110.14.177]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NLMsH-0003oQ-ED
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Dec 2009 20:23:01 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Dec 2009 12:07:33 -0800
-Message-Id: <1261080453-12752-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.5.4.3
-In-Reply-To: <>
-References: <>
-X-SA-Exim-Connect-IP: 209.85.211.188
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+In-Reply-To: <1261080453-12752-1-git-send-email-raj.khem@gmail.com>
+References: <>  <1261080453-12752-1-git-send-email-raj.khem@gmail.com>
+Date: Thu, 17 Dec 2009 20:22:58 +0000
+Message-ID: <1261081378.6896.472.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] conf/machine: Add x86_64 machine.
+Subject: Re: [PATCH] conf/machine: Add x86_64 machine.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,84 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Dec 2009 20:09:29 -0000
+X-List-Received-Date: Thu, 17 Dec 2009 20:24:52 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-* This is not supporting multilib
-* Only 64-bit userspace can be built.
+On Thu, 2009-12-17 at 12:07 -0800, Khem Raj wrote:
+> * This is not supporting multilib
+> * Only 64-bit userspace can be built.
+> 
+> --- /dev/null
+> +++ b/conf/machine/include/tune-x86_64.inc
+> @@ -0,0 +1,4 @@
+> +TARGET_CC_ARCH = "-mtune=generic"
+> +BASE_PACKAGE_ARCH = "x86_64"
+> +FEED_ARCH = "x86_64"
+> +PACKAGE_EXTRA_ARCHS += "x86 i386 i486 i586 i686"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- conf/machine/include/tune-x86_64.inc |    4 ++++
- conf/machine/x86_64-generic.conf     |   31 +++++++++++++++++++++++++++++++
- recipes/gcc/gcc-common.inc           |    4 ++++
- 3 files changed, 39 insertions(+), 0 deletions(-)
- create mode 100644 conf/machine/include/tune-x86_64.inc
- create mode 100644 conf/machine/x86_64-generic.conf
+If this is a pure 64-bit environment, surely you don't want that stuff
+in PACKAGE_EXTRA_ARCHS.
 
-diff --git a/conf/machine/include/tune-x86_64.inc b/conf/machine/include/tune-x86_64.inc
-new file mode 100644
-index 0000000..db2a560
---- /dev/null
-+++ b/conf/machine/include/tune-x86_64.inc
-@@ -0,0 +1,4 @@
-+TARGET_CC_ARCH = "-mtune=generic"
-+BASE_PACKAGE_ARCH = "x86_64"
-+FEED_ARCH = "x86_64"
-+PACKAGE_EXTRA_ARCHS += "x86 i386 i486 i586 i686"
-diff --git a/conf/machine/x86_64-generic.conf b/conf/machine/x86_64-generic.conf
-new file mode 100644
-index 0000000..0dad0ff
---- /dev/null
-+++ b/conf/machine/x86_64-generic.conf
-@@ -0,0 +1,31 @@
-+# Copyright (C) 2007,2009 Stelios Koroneos - Digital OPSiS, All Rights Reserved
-+# Released under the MIT license (see packages/COPYING)
-+#@TYPE: Machine
-+#@NAME: x86_64-generic
-+#@DESCRIPTION: Machine configuration for a generic x86_64 machine
-+
-+
-+TARGET_ARCH = "x86_64"
-+
-+PREFERRED_PROVIDER_virtual/kernel = "linux"
-+PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
-+XSERVER="xserver-kdrive-vesa"
-+
-+KERNEL_IMAGETYPE = "bzImage"
-+
-+GLIBC_ADDONS = "nptl"
-+GLIBC_EXTRA_OECONF = "--with-tls"
-+
-+IMAGE_FSTYPES ?= "ext2.gz"
-+IMAGE_DEVICE_TABLES = " \
-+  files/device_table-minimal.txt \
-+  files/device_table_add-loop.txt \
-+  files/device_table_add-scsi.txt \
-+"
-+
-+MACHINE_FEATURES = "kernel26 screen keyboard pci usbhost acpi ext2 x86"
-+MACHINE_EXTRA_RRECOMMENDS = " kernel-modules"
-+
-+#tune for x86_64
-+require conf/machine/include/tune-x86_64.inc
-+
-diff --git a/recipes/gcc/gcc-common.inc b/recipes/gcc/gcc-common.inc
-index 6e777e6..772e7a7 100644
---- a/recipes/gcc/gcc-common.inc
-+++ b/recipes/gcc/gcc-common.inc
-@@ -15,6 +15,10 @@ def get_gcc_fpu_setting(bb, d):
-         return "--with-float=soft"
-     return ""
- 
-+EXTRA_OECONF_append_x86_64	= " --disable-multilib"
-+EXTRA_OECONF_append_mips64	= " --disable-multilib"
-+EXTRA_OECONF_append_powerpc64	= " --disable-multilib"
-+
- # We really need HOST_SYS here for some packages and TARGET_SYS for others.
- # For now, libgcc is most important so we fix for that - RP.
- SHLIBSDIR = "${STAGING_DIR_TARGET}/shlibs"
--- 
-1.5.4.3
+It's also not completely obvious to me that this stuff belongs in a
+tune-* file at all, or indeed that it makes much sense to talk about
+"tuning" for generic x86-64 in the first place.
+
+p.
+
 
 
 
