@@ -1,36 +1,25 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NLJQA-0002y0-4i
+	(envelope-from <philip@balister.org>) id 1NLL5Y-0007ms-57
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Dec 2009 17:41:49 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NLJOP-0001hL-A2 for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Dec 2009 11:39:57 -0500
-Date: Thu, 17 Dec 2009 11:39:31 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.0912171137010.30166@localhost>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Thu, 17 Dec 2009 19:28:39 +0100
+Received: (qmail 31261 invoked by uid 1003); 17 Dec 2009 18:26:46 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 17 Dec 2009 18:26:46 -0000
+Message-ID: <4B2A77E5.1040804@balister.org>
+Date: Thu, 17 Dec 2009 13:26:45 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+To: openembedded-devel@lists.openembedded.org
+References: <alpine.LFD.2.00.0912171137010.30166@localhost>
+In-Reply-To: <alpine.LFD.2.00.0912171137010.30166@localhost>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: should i submit detailed bugs for e2fsprogs and gnome-games?
+Subject: Re: should i submit detailed bugs for e2fsprogs and gnome-games?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,34 +33,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Dec 2009 16:41:49 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Thu, 17 Dec 2009 18:28:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
+On 12/17/2009 11:39 AM, Robert P. J. Day wrote:
+>
+>    just trying a beagleboard-demo-image build on the dev branch, last
+> attempt still produced failed builds for:
+>
+>    * e2fsprogs
+>    * gnome-games
+>
+> i don't see that the latest pull would change any of that, but i'm
+> trying it anyway.  if those two packages still fail, should i supply
+> details?  (fully-updated fedora 12, as always).
+>
+>    philip?  are you seeing the same things?  i'll verify that i haven't
+> done anything weird in my shell environment that might be causing
+> this.
 
-  just trying a beagleboard-demo-image build on the dev branch, last
-attempt still produced failed builds for:
+I saw the gnome-games problem. Steve says he has a later version in his 
+repo, when he figure out some other things we hope that update solves 
+the problem.
 
-  * e2fsprogs
-  * gnome-games
+Philip
 
-i don't see that the latest pull would change any of that, but i'm
-trying it anyway.  if those two packages still fail, should i supply
-details?  (fully-updated fedora 12, as always).
-
-  philip?  are you seeing the same things?  i'll verify that i haven't
-done anything weird in my shell environment that might be causing
-this.
-
-rday
---
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+>
+> rday
+> --
+>
+> ========================================================================
+> Robert P. J. Day                               Waterloo, Ontario, CANADA
+>
+>              Linux Consulting, Training and Kernel Pedantry.
+>
+> Web page:                                          http://crashcourse.ca
+> Twitter:                                       http://twitter.com/rpjday
+> ========================================================================
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
