@@ -1,39 +1,26 @@
-Received: from mail-fx0-f212.google.com ([209.85.220.212])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1NL18y-00051l-8m
+Received: from static-92-33-14-100.sme.bredbandsbolaget.se ([92.33.14.100]
+	helo=mailhost.lundinova.se) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <johan.hovold@lundinova.se>) id 1NLCUb-0008KN-EL
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Dec 2009 22:10:51 +0100
-Received: by fxm4 with SMTP id 4so1339629fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Dec 2009 13:09:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to:cc
-	:content-type; bh=zdAn278QbuLJMJiR+1/Db5GsZAbOpVPbnRlCoWBS25g=;
-	b=kYDRoUurvZyCQr4+Y0+Y0RfJIFROVLg5eKUtLCjd1s9vf16frJbbbRtr5DJlZ6mWX/
-	kUsTxmY1u4eubJ4B29VEIICeUu/2q6cFijZvHwNLjUvVTWyZVnd8bsUmK37MP31i9e9F
-	NjWJme70p3wFBn0ZelH/EAU8cdB49mSWrPVxk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type;
-	b=YGLvxU+uMibzjV9C9jmLcUQzY77x80Bn5zreqKgA4SUibR+pzJPQ2mpDV7XFkHfaWR
-	zlYz3u0/obr/dzUfLvhQTafCa2/qYAuxoP6PAjBwjedC/5HVmTl4QtbscS3k6xEdDGYU
-	x9E+sh8t3n6cYzsiVY/kqAbYcf0oVdgyQGaTg=
-MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.168.220 with SMTP id l28mr141442hbe.117.1260997740992; 
-	Wed, 16 Dec 2009 13:09:00 -0800 (PST)
-In-Reply-To: <20091216164339.GA28014@lundinova.se>
-References: <1260980999-27920-1-git-send-email-johan.hovold@lundinova.se>
-	<1260981572-28691-1-git-send-email-johan.hovold@lundinova.se>
-	<20091216164339.GA28014@lundinova.se>
-Date: Wed, 16 Dec 2009 19:09:00 -0200
-X-Google-Sender-Auth: 1633a25d1ff73852
-Message-ID: <be7a9f3d0912161309p182cbdefm784dc7931e8963fb@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Thu, 17 Dec 2009 10:17:56 +0100
+Received: from pi (unknown [10.240.22.2])
+	by mailhost.lundinova.se (Postfix) with ESMTP id 56C87B94006;
+	Thu, 17 Dec 2009 10:16:05 +0100 (CET)
+Received: from johan by pi with local (Exim 4.69) (envelope-from <johan@pi>)
+	id 1NLCSr-000878-2d; Thu, 17 Dec 2009 10:16:05 +0100
+Date: Thu, 17 Dec 2009 10:16:05 +0100
+From: Johan Hovold <johan.hovold@lundinova.se>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.212
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+Message-ID: <20091217091605.GB32444@lundinova.se>
+References: <200912161526.36033.holger+oe@freyther.de>
+	<1260980999-27920-1-git-send-email-johan.hovold@lundinova.se>
+	<1260993181.6896.442.camel@lenovo.internal.reciva.com>
+MIME-Version: 1.0
+In-Reply-To: <1260993181.6896.442.camel@lenovo.internal.reciva.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Sender: <johan.hovold@lundinova.se>
+X-SA-Exim-Connect-IP: 92.33.14.100
+X-SA-Exim-Mail-From: johan.hovold@lundinova.se
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [PATCH] openvpn: remove dependency on kernel module
@@ -50,20 +37,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Dec 2009 21:10:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 17 Dec 2009 09:17:56 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hello,
+ > -RDEPENDS = "kernel-module-tun"
+> > +RRECOMMENDS = "kernel-module-tun"
+> 
+> Did you want RRECOMMENDS_${PN} there? 
 
-On Wed, Dec 16, 2009 at 2:43 PM, Johan Hovold <johan.hovold@lundinova.se> wrote:
-> My second patch bumped PR from r0 directly to r2 for two of the recipes.
-> Fixed in the last one (bump to r1).
+What is the reason for preferring the _${PN} form here? I notice a lot
+of recipes do not use it.
 
-Please move it to INC_PR as well.
+Thanks,
+Johan
 
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
