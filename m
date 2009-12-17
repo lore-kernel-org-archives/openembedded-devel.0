@@ -1,29 +1,31 @@
-Received: from smtp-out112.alice.it ([85.37.17.112])
+Received: from smtp-out05a.alice.it ([85.33.3.5])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1NLPUn-000169-7X
+	(envelope-from <GNUtoo@no-log.org>) id 1NLPVS-00017q-AA
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Dec 2009 00:11:00 +0100
-Received: from fbcmmo06.fbc.local ([192.168.184.137]) by smtp-out112.alice.it
+	Fri, 18 Dec 2009 00:11:41 +0100
+Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-OUT05A.alice.it
 	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 18 Dec 2009 00:09:09 +0100
-Received: from FBCMCL01B01.fbc.local ([192.168.69.82]) by fbcmmo06.fbc.local
+	Fri, 18 Dec 2009 00:08:47 +0100
+Received: from FBCMCL01B01.fbc.local ([192.168.69.82]) by FBCMMO02.fbc.local
 	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 18 Dec 2009 00:08:43 +0100
+	Fri, 18 Dec 2009 00:08:47 +0100
 Received: from localhost.localdomain ([79.41.7.172]) by FBCMCL01B01.fbc.local
 	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 18 Dec 2009 00:08:43 +0100
+	Fri, 18 Dec 2009 00:08:45 +0100
 From: Denis 'Gnutoo' Carikli <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Dec 2009 00:08:41 +0100
-Message-Id: <1261091322-11271-1-git-send-email-GNUtoo@no-log.org>
+Date: Fri, 18 Dec 2009 00:08:42 +0100
+Message-Id: <1261091322-11271-2-git-send-email-GNUtoo@no-log.org>
 X-Mailer: git-send-email 1.6.4.4
-X-OriginalArrivalTime: 17 Dec 2009 23:08:43.0608 (UTC)
-	FILETIME=[E0F95580:01CA7F6D]
-X-SA-Exim-Connect-IP: 85.37.17.112
+In-Reply-To: <1261091322-11271-1-git-send-email-GNUtoo@no-log.org>
+References: <1261091322-11271-1-git-send-email-GNUtoo@no-log.org>
+X-OriginalArrivalTime: 17 Dec 2009 23:08:45.0764 (UTC)
+	FILETIME=[E2425040:01CA7F6D]
+X-SA-Exim-Connect-IP: 85.33.3.5
 X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] udev: add bug device's device nodes
+Subject: [PATCH 1/2] udev-141: added support for buglabs's bug device
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,18 +39,171 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Dec 2009 23:11:00 -0000
+X-List-Received-Date: Thu, 17 Dec 2009 23:11:41 -0000
 
-hi,
-I'd like to add some devices nodes for the bug device,
-some of theses nodes are needed for touchscreen support
-in xorg.conf
-By the way theses files comes from :
-meta-bug/packages/udev-rules/bug-udev/
-in:
-svn://svn.buglabs.net/bug/branches/hrw/oe-stable-2009/
+The udev configurations files are needed for Xorg configuration
+  for buglabs's bug device that will be commited later,
+  in order to find the right device nodes for the touchscreens
 
-In #oe I was told to post for review(I bet udev is a core thing)
-Denis.
+Note that the script creating the bmi(Bug module interface)
+  event pipe has not been commented out,because it will be needed
+  when the java bindings for the bug device will be in openembedded
+
+Signed-off-by: Denis 'Gnutoo' Carikli <GNUtoo@no-log.org>
+---
+ recipes/udev/udev-141/bug/10-mx31.rules    |   49 ++++++++++++++++++++++++++++
+ recipes/udev/udev-141/bug/30-BUG.rules     |   26 +++++++++++++++
+ recipes/udev/udev-141/bug/bmi_eventpipe.sh |    8 ++++
+ recipes/udev/udev_141.bb                   |   16 ++++++++-
+ 4 files changed, 98 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/udev/udev-141/bug/10-mx31.rules
+ create mode 100644 recipes/udev/udev-141/bug/30-BUG.rules
+ create mode 100644 recipes/udev/udev-141/bug/bmi_eventpipe.sh
+
+diff --git a/recipes/udev/udev-141/bug/10-mx31.rules b/recipes/udev/udev-141/bug/10-mx31.rules
+new file mode 100644
+index 0000000..de427fc
+--- /dev/null
++++ b/recipes/udev/udev-141/bug/10-mx31.rules
+@@ -0,0 +1,49 @@
++KERNEL=="ttyS[0-9]",	NAME="tts/%n",		SYMLINK+="tts%n"
++KERNEL=="ttymxc[0-9]",	NAME="ttymxc/%n",	SYMLINK+="ttymxc%n"
++
++KERNEL=="mxc_mu[0-9]",	NAME="mxc_mu/%n",	SYMLINK+="mxc_mu%n"
++KERNEL=="fb*",		NAME="fb/%n",		SYMLINK+="fb%n"
++KERNEL=="i2c*",		NAME="i2c/%n"
++KERNEL=="mxc_ipc*",	NAME="mxc_ipc/%n"
++KERNEL=="video*",	NAME="v4l/video%n"
++
++KERNEL=="rtc",		NAME="misc/rtc"
++KERNEL=="watchdog",	NAME="misc/watchdog"
++
++KERNEL=="mc13783_adc",	NAME="mc13783_adc",	SYMLINK+="ts"
++KERNEL=="pmic_adc",	NAME="pmic_adc",	SYMLINK+="ts"
++
++# The long class name gets cut off to be mc13783_connectiv in 
++# /sys/class/mc13783_connectivity/mc13783_connectivit
++KERNEL=="mc13783_connectiv*",	NAME="mc13783_connectivity"
++
++KERNEL=="mxc_ssi[0-9]*",	NAME="mxc_ssi/%n",	SYMLINK+="mxc_ssi%n"
++KERNEL=="spi[0-9]*",	NAME="spi/%n",		SYMLINK+="spi%n"
++
++KERNEL=="mtdblock*",	NAME="mtdblock/%n"	SYMLINK+="mtdblock%n"
++KERNEL=="mtd[0-9]",	NAME="mtd/%n"
++
++# A more elegant way of doing this must exist...
++KERNEL=="mtd0ro",	NAME="mtd/0ro"
++KERNEL=="mtd1ro",	NAME="mtd/1ro"
++KERNEL=="mtd2ro",	NAME="mtd/2ro"
++KERNEL=="mtd3ro",	NAME="mtd/3ro"
++KERNEL=="mtd4ro",	NAME="mtd/4ro"
++KERNEL=="mtd5ro",	NAME="mtd/5ro"
++KERNEL=="mtd6ro",	NAME="mtd/6ro"
++KERNEL=="mtd7ro",	NAME="mtd/7ro"
++KERNEL=="mtd8ro",	NAME="mtd/8ro"
++KERNEL=="mtd9ro",	NAME="mtd/9ro"
++
++# Note that we want /dev/dsp linked to /dev/sound/dsp1...
++KERNEL=="dsp",		NAME="sound/dsp"
++KERNEL=="dspW",		NAME="sound/dspW"
++KERNEL=="dsp1",		NAME="sound/dsp1",	SYMLINK+="dsp"
++KERNEL=="mixer",		NAME="sound/mixer",	SYMLINK+="mixer"
++KERNEL=="sequencer",	NAME="sound/sequencer"
++KERNEL=="sequencer2",	NAME="sound/sequencer2"
++
++KERNEL=="ram[0-9]*",	NAME="ram/%n",		SYMLINK+="ram%n"
++
++KERNEL=="dvfs_dptc",	NAME="dvfs_dptc",	SYMLINK+="dptc dvfs"
++
+diff --git a/recipes/udev/udev-141/bug/30-BUG.rules b/recipes/udev/udev-141/bug/30-BUG.rules
+new file mode 100644
+index 0000000..06faa6b
+--- /dev/null
++++ b/recipes/udev/udev-141/bug/30-BUG.rules
+@@ -0,0 +1,26 @@
++##
++## BUG/BMI specific
++##
++KERNEL=="event*", ATTRS{name}=="bugnav", SYMLINK+="input/bugnav"
++KERNEL=="event*", ATTRS{name}=="bmi_motion", SYMLINK+="input/bmi_motion"
++KERNEL=="event*", ATTRS{name}=="bug_cam", SYMLINK+="input/bmi_cam"
++KERNEL=="event*", ATTRS{name}=="bmi_audio_status_m1", SYMLINK+="input/bmi_audio_m1"
++KERNEL=="event*", ATTRS{name}=="bmi_audio_status_m2", SYMLINK+="input/bmi_audio_m2"
++KERNEL=="event*", ATTRS{name}=="bmi_audio_status_m3", SYMLINK+="input/bmi_audio_m3"
++KERNEL=="event*", ATTRS{name}=="bmi_audio_status_m4", SYMLINK+="input/bmi_audio_m4"
++DEVPATH=="/devices/platform/bugfb.0", SYMLINK+="bugfb"
++KERNEL=="rtc0", SYMLINK+="rtc"
++KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts0", SYMLINK+="input/bmi_lcd_ts0"
++KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts1", SYMLINK+="input/bmi_lcd_ts1"
++KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts2", SYMLINK+="input/bmi_lcd_ts2"
++KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts3", SYMLINK+="input/bmi_lcd_ts3"
++KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts4", SYMLINK+="input/bmi_lcd_ts4"
++KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts5", SYMLINK+="input/bmi_lcd_ts5"
++KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts6", SYMLINK+="input/bmi_lcd_ts6"
++ACTION=="add", DEVPATH=="/devices/conn*", RUN+="/bin/sh /etc/udev/scripts/bmi_eventpipe.sh"
++ACTION=="remove", DEVPATH=="/devices/conn*", RUN+="/bin/sh /etc/udev/scripts/bmi_eventpipe.sh"
++#
++# For USB PBPSD, which we've arbitrarily decided will be module F001
++#
++ACTION=="remove", SUBSYSTEM=="usb", DRIVERS=="psd_driver", ENV{BMIBUS_PRODUCT}="F001", ENV{BMIBUS_SLOT}="%n", RUN+="/bin/sh /etc/udev/scripts/bmi_eventpipe.sh"
++ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="psd_driver", ENV{BMIBUS_PRODUCT}="F001", ENV{BMIBUS_SLOT}="%n", RUN+="/bin/sh /etc/udev/scripts/bmi_eventpipe.sh"
+diff --git a/recipes/udev/udev-141/bug/bmi_eventpipe.sh b/recipes/udev/udev-141/bug/bmi_eventpipe.sh
+new file mode 100644
+index 0000000..acbae56
+--- /dev/null
++++ b/recipes/udev/udev-141/bug/bmi_eventpipe.sh
+@@ -0,0 +1,8 @@
++#!/bin/sh
++#
++# This script passes BMI state variables to the running JVM.
++#
++if [ ${BMIBUS_PRODUCT} != "" ] && [ ${BMIBUS_SLOT} != "" ] && [ ${ACTION} != "" ];
++then                                                                            
++        echo $BMIBUS_PRODUCT 0 $BMIBUS_SLOT $ACTION > /tmp/eventpipe            
++fi
+diff --git a/recipes/udev/udev_141.bb b/recipes/udev/udev_141.bb
+index e07150d..00ba971 100644
+--- a/recipes/udev/udev_141.bb
++++ b/recipes/udev/udev_141.bb
+@@ -6,7 +6,7 @@ LICENSE = "GPL"
+ # Untested
+ DEFAULT_PREFERENCE = "-1"
+ 
+-PR = "r18"
++PR = "r19"
+ 
+ # needed for init.d script
+ RDEPENDS_${PN} += "udev-utils"
+@@ -29,6 +29,14 @@ SRC_URI += " \
+ SRC_URI_append_h2200 = " file://50-hostap_cs.rules "
+ PACKAGE_ARCH_h2200 = "h2200"
+ 
++#buglabs's bug device
++SRC_URI_append_bug = " \
++       file://30-BUG.rules \
++       file://10-mx31.rules \
++       file://bmi_eventpipe.sh "
++
++PACKAGE_ARCH_bug = "bug"
++
+ inherit update-rc.d autotools_stage
+ 
+ # Put stuff in /lib and /sbin
+@@ -98,6 +106,12 @@ do_install_append_h2200() {
+ 	install -m 0644 ${WORKDIR}/50-hostap_cs.rules         ${D}${sysconfdir}/udev/rules.d/50-hostap_cs.rules
+ }
+ 
++do_install_append_bug() {
++	install -m 0644 ${WORKDIR}/30-BUG.rules ${D}${sysconfdir}/udev/rules.d/30-BUG.rules
++	install -m 0644 ${WORKDIR}/10-mx31.rules ${D}${sysconfdir}/udev/rules.d/10-mx31.rules
++	install -m 0644 ${WORKDIR}/bmi_eventpipe.sh ${D}${sysconfdir}/udev/scripts/bmi_eventpipe.sh
++}
++
+ pkg_postinst_${PN}_append() {
+ if [ -d $D/lib/udev/rules.d ] ; then
+ 	echo "$D/lib/udev/rules.d is not a symlink, fixing that"
+-- 
+1.6.4.4
+
 
 
