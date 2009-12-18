@@ -1,25 +1,27 @@
-Received: from vs148181.vserver.de ([62.75.148.181])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Florian.Mayer@mayer-electronics.de>)
-	id 1NLc6D-0006TP-Lr for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Dec 2009 13:38:28 +0100
-Received: from [62.224.59.25] (helo=[192.168.100.22])
-	by vs148181.vserver.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <Florian.Mayer@mayer-electronics.de>)
-	id 1NLbfE-0006km-9i for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Dec 2009 12:10:32 +0000
-Message-ID: <4B2B7131.6020604@mayer-electronics.de>
-Date: Fri, 18 Dec 2009 13:10:25 +0100
-From: "Florian Mayer (Mayer Electronics)" <Florian.Mayer@mayer-electronics.de>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NLdWG-00022J-GC for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Dec 2009 15:09:27 +0100
+Received: from g229061059.adsl.alicedsl.de ([92.229.61.59]
+	helo=[192.168.178.25])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NLdUX-0006F0-N1 for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Dec 2009 14:07:37 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 62.75.148.181
-X-SA-Exim-Mail-From: Florian.Mayer@mayer-electronics.de
+In-Reply-To: <1261080453-12752-1-git-send-email-raj.khem@gmail.com>
+References: <>  <1261080453-12752-1-git-send-email-raj.khem@gmail.com>
+Date: Fri, 18 Dec 2009 15:07:51 +0100
+Message-ID: <1261145271.3191.12.camel@mattotaupa.wohnung.familie-menzel.net>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: init becomes a zombie process on ARM device
+Subject: Re: [PATCH] conf/machine: Add x86_64 machine.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,59 +35,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Dec 2009 12:38:28 -0000
-X-Groupsio-MsgNum: 15127
-Content-Type: multipart/mixed; boundary="------------070902080906040004090504"
+X-List-Received-Date: Fri, 18 Dec 2009 14:09:27 -0000
+X-Groupsio-MsgNum: 15128
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-u8eC6OzV6AE9d1hRHoy/"
 
---------------070902080906040004090504
-Content-Type: text/plain; charset=ISO-8859-15; format=flowed
-Content-Transfer-Encoding: 7bit
+--=-u8eC6OzV6AE9d1hRHoy/
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hello folks,
+Am Donnerstag, den 17.12.2009, 12:07 -0800 schrieb Khem Raj:
+> * This is not supporting multilib
+> * Only 64-bit userspace can be built.
+>=20
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  conf/machine/include/tune-x86_64.inc |    4 ++++
+>  conf/machine/x86_64-generic.conf     |   31 ++++++++++++++++++++++++++++=
++++
+>  recipes/gcc/gcc-common.inc           |    4 ++++
+>  3 files changed, 39 insertions(+), 0 deletions(-)
+>  create mode 100644 conf/machine/include/tune-x86_64.inc
+>  create mode 100644 conf/machine/x86_64-generic.conf
 
-I am currenty trying to build a working system for a chineese mini 
-computer based on a Samsung S3C2440 SOC. I got a patched kernel source 
-tree (based on 2.6.18.2) from my hardware supplier, no separate patch. 
-The machine is called SBZ2440 which is not in the official kernel tree. 
-I managed to compile the kernel inside OE (creating a machine definition 
-based on the smdk2440.conf and at2440evb.conf file (the AT2440EVB is 
-from the same manufacturer in China) and a bitbake recipe.) The selfmade 
-kernel boots up fine.
-When it loads the root fs (currently over NFS) I get a quite strange 
-behavior: the init process zobiefies after running the rcS script. 
-Nearly all tasks started by the init scripts are zobies too. The only 
-thing running is dropbear (SSH server), I get no login on RS-232 because 
-init crashes  before starting a getty. I can login via dropbear.
-UDEV need over two minutes for initializing, after this the /dev folder 
-is empty and udev a zombie. It does not work either. I disabled it in my 
-NFS root filesystem to exclude it as error source with no effect.
-The NFS itself is not the source of trouble, it has the right 
-permissions, it is exported with the no_root_squash option, nothing in 
-the logs etc.
-A btw: I use the stable_2009 branch.
-Any ideas for this???
+I do not know how OE handles it, but is there a list of available
+machines where this new machine has to be added? That means keep
+documentation up to date. I guess I can add this new machine to
+local.conf (MACHINE =3D "x86_64-generic")?
 
-Regards
-Florian Mayer
-Mayer Electronics
+[=E2=80=A6]
 
---------------070902080906040004090504
-Content-Type: text/x-vcard; charset=utf-8;
- name="Florian_Mayer.vcf"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="Florian_Mayer.vcf"
+> diff --git a/conf/machine/x86_64-generic.conf b/conf/machine/x86_64-gener=
+ic.conf
+> new file mode 100644
+> index 0000000..0dad0ff
+> --- /dev/null
+> +++ b/conf/machine/x86_64-generic.conf
+> @@ -0,0 +1,31 @@
+> +# Copyright (C) 2007,2009 Stelios Koroneos - Digital OPSiS, All Rights R=
+eserved
 
-begin:vcard
-fn:Florian Mayer (Mayer Electronics)
-n:Mayer;Florian
-adr:;;Hohenzollernstr. 20;Messkirch;;88605;Deutschland
-email;internet:Florian.Mayer@mayer-electronics.de
-title:Dipl. Ing. (BA)
-tel;work:++49 (0) 7575/924940
-tel;cell:++49 (0) 176/22209624
-version:2.1
-end:vcard
+Since this is a new file, is this copyright correct?
+
+[=E2=80=A6]
 
 
---------------070902080906040004090504--
+Thanks and sorry if my question are nonsense,
+
+Paul
+
+--=-u8eC6OzV6AE9d1hRHoy/
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAksrjLYACgkQPX1aK2wOHVgcHgCdGQCUz7Gg32GbCp1FV69a4HLI
+HwwAoIwN62TlAHp44P4RvSQJYfCvXDjS
+=mcGA
+-----END PGP SIGNATURE-----
+
+--=-u8eC6OzV6AE9d1hRHoy/--
