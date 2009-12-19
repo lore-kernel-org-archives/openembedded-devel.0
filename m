@@ -1,40 +1,27 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from vs148181.vserver.de ([62.75.148.181])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NLyyB-0000En-Va
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Dec 2009 14:03:43 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NLywR-0002vL-3Q for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Dec 2009 08:01:51 -0500
-Date: Sat, 19 Dec 2009 08:01:26 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1261226260.10861.20.camel@mattotaupa.wohnung.familie-menzel.net>
-Message-ID: <alpine.LFD.2.00.0912190758060.6856@localhost>
-References: <alpine.LFD.2.00.0912171137010.30166@localhost>
-	<4B2A77E5.1040804@balister.org>
-	<alpine.LFD.2.00.0912171402080.2265@localhost>
-	<1261226260.10861.20.camel@mattotaupa.wohnung.familie-menzel.net>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	(envelope-from <Florian.Mayer@mayer-electronics.de>)
+	id 1NM6O4-00016K-Dp for openembedded-devel@lists.openembedded.org;
+	Sat, 19 Dec 2009 21:58:55 +0100
+Received: from [62.224.48.196] (helo=[192.168.100.22])
+	by vs148181.vserver.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <Florian.Mayer@mayer-electronics.de>)
+	id 1NM6MK-0001Ws-Pl for openembedded-devel@lists.openembedded.org;
+	Sat, 19 Dec 2009 20:57:04 +0000
+Message-ID: <4B2D3E19.6010402@mayer-electronics.de>
+Date: Sat, 19 Dec 2009 21:56:57 +0100
+From: "Florian Mayer (Mayer Electronics)" <Florian.Mayer@mayer-electronics.de>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+To: openembedded-devel@lists.openembedded.org
+References: <4B2B7131.6020604@mayer-electronics.de>
+In-Reply-To: <4B2B7131.6020604@mayer-electronics.de>
+X-SA-Exim-Connect-IP: 62.75.148.181
+X-SA-Exim-Mail-From: Florian.Mayer@mayer-electronics.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: should i submit detailed bugs for e2fsprogs and gnome-games?
+Subject: Re: init becomes a zombie process on ARM device
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,45 +35,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Dec 2009 13:03:43 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sat, 19 Dec 2009 20:58:55 -0000
+X-Groupsio-MsgNum: 15132
+Content-Type: multipart/mixed; boundary="------------030604030201030306020602"
 
-On Sat, 19 Dec 2009, Paul Menzel wrote:
+--------------030604030201030306020602
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+Content-Transfer-Encoding: 7bit
 
-> Am Donnerstag, den 17.12.2009, 14:02 -0500 schrieb Robert P. J. Day:
-> > On Thu, 17 Dec 2009, Philip Balister wrote:
-> >
-> > > I saw the gnome-games problem. Steve says he has a later version
-> > > in his repo, when he figure out some other things we hope that
-> > > update solves the problem.
-> >
-> >   but the e2fsprogs build problem is all mine, is it?  *sigh*.
-> > i'll see what i can figure out.
+Florian Mayer (Mayer Electronics) schrieb:
+> Hello folks,
 >
-> Sorry, bad news for you Robert. My `bitbake beagleboard-demo-image`
-> was successful with a030c6b8e12445a266a8673efe589375baf93ccc (with
-> local commit to build Abiword without plugins) on a Debian
-> Sid/unstable system.
+> I am currenty trying to build a working system for a chineese mini 
+> computer based on a Samsung S3C2440 SOC. I got a patched kernel source 
+> tree (based on 2.6.18.2) from my hardware supplier, no separate patch. 
+> The machine is called SBZ2440 which is not in the official kernel 
+> tree. I managed to compile the kernel inside OE (creating a machine 
+> definition based on the smdk2440.conf and at2440evb.conf file (the 
+> AT2440EVB is from the same manufacturer in China) and a bitbake 
+> recipe.) The selfmade kernel boots up fine.
+> When it loads the root fs (currently over NFS) I get a quite strange 
+> behavior: the init process zobiefies after running the rcS script. 
+> Nearly all tasks started by the init scripts are zobies too. The only 
+> thing running is dropbear (SSH server), I get no login on RS-232 
+> because init crashes  before starting a getty. I can login via dropbear.
+> UDEV need over two minutes for initializing, after this the /dev 
+> folder is empty and udev a zombie. It does not work either. I disabled 
+> it in my NFS root filesystem to exclude it as error source with no 
+> effect.
+> The NFS itself is not the source of trouble, it has the right 
+> permissions, it is exported with the no_root_squash option, nothing in 
+> the logs etc.
+> A btw: I use the stable_2009 branch.
+> Any ideas for this???
+>
+> Regards
+> Florian Mayer
+> Mayer Electronics
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>   
+Hello,
 
-  that's ok, it's still useful to know that other distros have no
-problem since it helps narrow down the search.  i started out with
-three broken packages, the mesa package got fixed quickly, philip
-suggests there's a known issue with gnome-games, so that just leaves
-me with e2fsprogs and figuring out why it won't build specifically on
-fedora 12.
+I found out why the system behaves such strange (thanks to Florian Boor 
+for pulling me in the right direction). In my constellation thumb 
+interworking does not work. glibc is arm compiled, the rest is thumb 
+format. To test it I added
 
-  these things happen, but e2fsprogs is the real puzzler.  dang.
+ARM_INSTRUCTION_SET="arm"
+THUMB_INTERWORK="no"
 
-rday
---
+to my machine configuration. But that did not help!
 
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+Both variables are overwritten in 
+openembedded/conf/dist/include/angstrom.inc. So I commented it out in 
+that file and voila, the result boots correctly. Is there a more elegant 
+way to solve this? Perhaps allow to configure this in the machine conf?
 
 
+Regards
+Florian Mayer
+
+--------------030604030201030306020602
+Content-Type: text/x-vcard; charset=utf-8;
+ name="Florian_Mayer.vcf"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="Florian_Mayer.vcf"
+
+begin:vcard
+fn:Florian Mayer (Mayer Electronics)
+n:Mayer;Florian
+adr:;;Hohenzollernstr. 20;Messkirch;;88605;Deutschland
+email;internet:Florian.Mayer@mayer-electronics.de
+title:Dipl. Ing. (BA)
+tel;work:++49 (0) 7575/924940
+tel;cell:++49 (0) 176/22209624
+version:2.1
+end:vcard
+
+
+--------------030604030201030306020602--
