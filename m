@@ -1,27 +1,40 @@
-Received: from vs148181.vserver.de ([62.75.148.181])
+Received: from mail-gx0-f215.google.com ([209.85.217.215])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Florian.Mayer@mayer-electronics.de>)
-	id 1NM6O4-00016K-Dp for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Dec 2009 21:58:55 +0100
-Received: from [62.224.48.196] (helo=[192.168.100.22])
-	by vs148181.vserver.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <Florian.Mayer@mayer-electronics.de>)
-	id 1NM6MK-0001Ws-Pl for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Dec 2009 20:57:04 +0000
-Message-ID: <4B2D3E19.6010402@mayer-electronics.de>
-Date: Sat, 19 Dec 2009 21:56:57 +0100
-From: "Florian Mayer (Mayer Electronics)" <Florian.Mayer@mayer-electronics.de>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	(envelope-from <raj.khem@gmail.com>) id 1NM7mP-0006Gh-Dg
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 19 Dec 2009 23:28:08 +0100
+Received: by gxk7 with SMTP id 7so8977535gxk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 19 Dec 2009 14:26:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=19koyYEKrNoqFAd/tMo/Zs927GSpJAiioQEgIDY5FYw=;
+	b=LFsf/Sg9TM/J0c24w+SFe5GzhHKFdcKpFv10L+rzz8dNWVGY2oCQ5ZzAvcdqkRTrTL
+	g2ldNFGsiwLKrMKL0cVT0FSOKs3D18rFYNE9iK6A7qVyplqZwdydTA4I7+1bL8UYmlFq
+	EpOW9tYOuulWD/ZO1gEZQKftifiSLxYSawkkI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=thy9F4ISLTv8DRKYedkEnKk1oZg17ksKL04dWXl/PznPcWIM6EH7B75T1BwA7aTuXb
+	/JK07rwMriP8Mx4/Y0b2xTAuldRzalFnWBYOdMeb5hmVq8RVhKsFZrBlSELNelwWi8Vs
+	h4yMxU6UlWFm+1a+9lkb41GAmd/AA66kIT83k=
+Received: by 10.151.92.12 with SMTP id u12mr8923780ybl.32.1261261575282;
+	Sat, 19 Dec 2009 14:26:15 -0800 (PST)
+Received: from localhost (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 4sm1572110ywd.44.2009.12.19.14.26.13
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 19 Dec 2009 14:26:14 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4B2B7131.6020604@mayer-electronics.de>
-In-Reply-To: <4B2B7131.6020604@mayer-electronics.de>
-X-SA-Exim-Connect-IP: 62.75.148.181
-X-SA-Exim-Mail-From: Florian.Mayer@mayer-electronics.de
+Date: Sat, 19 Dec 2009 14:26:09 -0800
+Message-Id: <1261261569-19196-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 209.85.217.215
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: init becomes a zombie process on ARM device
+Subject: [PATCH 1/3] eglibc: Add libc_nonshared.a to FILE list in eglibc-dev.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,86 +48,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Dec 2009 20:58:55 -0000
-X-Groupsio-MsgNum: 15132
-Content-Type: multipart/mixed; boundary="------------030604030201030306020602"
+X-List-Received-Date: Sat, 19 Dec 2009 22:28:08 -0000
 
---------------030604030201030306020602
-Content-Type: text/plain; charset=ISO-8859-15; format=flowed
-Content-Transfer-Encoding: 7bit
+* This file is an essential one even for shared linking so
+  once one installs libc6-dev package he expects the linking
+  to work which will not happen without this file as some
+  start up files refer to functions in this library therefore
+  package this file in eglibc-dev
 
-Florian Mayer (Mayer Electronics) schrieb:
-> Hello folks,
->
-> I am currenty trying to build a working system for a chineese mini 
-> computer based on a Samsung S3C2440 SOC. I got a patched kernel source 
-> tree (based on 2.6.18.2) from my hardware supplier, no separate patch. 
-> The machine is called SBZ2440 which is not in the official kernel 
-> tree. I managed to compile the kernel inside OE (creating a machine 
-> definition based on the smdk2440.conf and at2440evb.conf file (the 
-> AT2440EVB is from the same manufacturer in China) and a bitbake 
-> recipe.) The selfmade kernel boots up fine.
-> When it loads the root fs (currently over NFS) I get a quite strange 
-> behavior: the init process zobiefies after running the rcS script. 
-> Nearly all tasks started by the init scripts are zobies too. The only 
-> thing running is dropbear (SSH server), I get no login on RS-232 
-> because init crashes  before starting a getty. I can login via dropbear.
-> UDEV need over two minutes for initializing, after this the /dev 
-> folder is empty and udev a zombie. It does not work either. I disabled 
-> it in my NFS root filesystem to exclude it as error source with no 
-> effect.
-> The NFS itself is not the source of trouble, it has the right 
-> permissions, it is exported with the no_root_squash option, nothing in 
-> the logs etc.
-> A btw: I use the stable_2009 branch.
-> Any ideas for this???
->
-> Regards
-> Florian Mayer
-> Mayer Electronics
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->   
-Hello,
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes/eglibc/eglibc-package.bbclass |    2 +-
+ recipes/eglibc/eglibc.inc             |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-I found out why the system behaves such strange (thanks to Florian Boor 
-for pulling me in the right direction). In my constellation thumb 
-interworking does not work. glibc is arm compiled, the rest is thumb 
-format. To test it I added
-
-ARM_INSTRUCTION_SET="arm"
-THUMB_INTERWORK="no"
-
-to my machine configuration. But that did not help!
-
-Both variables are overwritten in 
-openembedded/conf/dist/include/angstrom.inc. So I commented it out in 
-that file and voila, the result boots correctly. Is there a more elegant 
-way to solve this? Perhaps allow to configure this in the machine conf?
+diff --git a/recipes/eglibc/eglibc-package.bbclass b/recipes/eglibc/eglibc-package.bbclass
+index 27437f6..fcaba47 100644
+--- a/recipes/eglibc/eglibc-package.bbclass
++++ b/recipes/eglibc/eglibc-package.bbclass
+@@ -48,7 +48,7 @@ FILES_ldd = "${bindir}/ldd"
+ FILES_libsegfault = "${base_libdir}/libSegFault*"
+ FILES_eglibc-extra-nss = "${base_libdir}/libnss*"
+ FILES_sln = "/sbin/sln"
+-FILES_eglibc-dev_append = " ${libdir}/*.o ${bindir}/rpcgen"
++FILES_eglibc-dev_append = " ${libdir}/*.o ${bindir}/rpcgen ${libdir}/libc_nonshared.a"
+ FILES_nscd = "${sbindir}/nscd*"
+ FILES_eglibc-utils = "${bindir}/* ${sbindir}/*"
+ FILES_eglibc-gconv = "${libdir}/gconv/*"
+diff --git a/recipes/eglibc/eglibc.inc b/recipes/eglibc/eglibc.inc
+index 1b655e1..356b838 100644
+--- a/recipes/eglibc/eglibc.inc
++++ b/recipes/eglibc/eglibc.inc
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.eglibc.org/home"
+ SECTION = "libs"
+ PRIORITY = "required"
+ LICENSE = "LGPL"
+-INC_PR = "r7"
++INC_PR = "r8"
+ # nptl needs unwind support in gcc, which can't be built without glibc.
+ DEPENDS = "virtual/${TARGET_PREFIX}gcc-intermediate linux-libc-headers"
+ #this leads to circular deps, so lets not add it yet
+-- 
+1.6.3.3
 
 
-Regards
-Florian Mayer
 
---------------030604030201030306020602
-Content-Type: text/x-vcard; charset=utf-8;
- name="Florian_Mayer.vcf"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="Florian_Mayer.vcf"
-
-begin:vcard
-fn:Florian Mayer (Mayer Electronics)
-n:Mayer;Florian
-adr:;;Hohenzollernstr. 20;Messkirch;;88605;Deutschland
-email;internet:Florian.Mayer@mayer-electronics.de
-title:Dipl. Ing. (BA)
-tel;work:++49 (0) 7575/924940
-tel;cell:++49 (0) 176/22209624
-version:2.1
-end:vcard
-
-
---------------030604030201030306020602--
