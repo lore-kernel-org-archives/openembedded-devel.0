@@ -1,42 +1,27 @@
-Received: from mail-yx0-f171.google.com ([209.85.210.171])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NM7ms-0006H7-As
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NM8AK-0005BQ-CJ
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Dec 2009 23:28:37 +0100
-Received: by yxe1 with SMTP id 1so4031013yxe.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Dec 2009 14:26:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=A069A8bt9RTKPvDFN7iYX5TmHCTZVYRhsnDO8SEFywM=;
-	b=Z4M8ZGtYLH5XWi93WG803Vw6AC6DH9ZSdEKCGUYt512h8IZ+upUseZifV/uMnNpQW5
-	dxazgTUb0dVEnbZtfhd5SzEbH6Km8Ql2+zvFXa0OgpA6Riee2Kdy85G4lSi9B6Ku03Jh
-	PtsGgFnMwmB4YMiisSXNetZsCaumSDYQpal6w=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=IoGW2UNY8hbA9v1/gWlM9eGNy19NfLtk/cGMe3T8ok/Rsk9kIGVrVn+Enlq/R+loeW
-	Gc3kdna+LqyoMDPJvhyHYDmmXeONSsFLMJjOLAchg32QY0Z0/HUZQqA6s2HhLrE6xhEc
-	Bm4QDhDok2OFj9/QTaWIy5d90JBZr4Uke1USk=
-Received: by 10.150.118.21 with SMTP id q21mr8583729ybc.279.1261261604129;
-	Sat, 19 Dec 2009 14:26:44 -0800 (PST)
-Received: from localhost (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id 22sm3341573iwn.0.2009.12.19.14.26.43
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 19 Dec 2009 14:26:43 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Sat, 19 Dec 2009 23:52:51 +0100
+Received: (qmail 16408 invoked by uid 813007); 19 Dec 2009 22:51:00 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 19 Dec 2009 22:51:00 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 19 Dec 2009 14:26:36 -0800
-Message-Id: <1261261596-19241-2-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1261261596-19241-1-git-send-email-raj.khem@gmail.com>
-References: <1261261596-19241-1-git-send-email-raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.210.171
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Sat, 19 Dec 2009 23:50:38 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.32; KDE/4.3.4; x86_64; ; )
+References: <4B2B7131.6020604@mayer-electronics.de>
+	<4B2D3E19.6010402@mayer-electronics.de>
+In-Reply-To: <4B2D3E19.6010402@mayer-electronics.de>
+MIME-Version: 1.0
+Message-Id: <200912192350.39349.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 3/3] minimal: Add 'mplt' to DISTRO_FEATURES.
+Subject: Re: init becomes a zombie process on ARM device
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,54 +35,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Dec 2009 22:28:37 -0000
+X-List-Received-Date: Sat, 19 Dec 2009 22:52:51 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 
-* As minimal-uclibc includes minimal conf the
-  distro features get inherited. mplt is not
-  supported on uclibc yet. So we should disable
-  it for uclibc/mips based distros.
+Dnia sobota, 19 grudnia 2009 o 21:56:57 Florian Mayer (Mayer Electronics)=20
+napisa=B3(a):
+> I found out why the system behaves such strange (thanks to Florian Boor=20
+> for pulling me in the right direction). In my constellation thumb=20
+> interworking does not work. glibc is arm compiled, the rest is thumb=20
+> format. To test it I added
+>=20
+> ARM_INSTRUCTION_SET=3D"arm"
+> THUMB_INTERWORK=3D"no"
+>=20
+> to my machine configuration. But that did not help!
+>=20
+> Both variables are overwritten in=20
+> openembedded/conf/dist/include/angstrom.inc. So I commented it out in=20
+> that file and voila, the result boots correctly. Is there a more elegant=
+=20
+> way to solve this? Perhaps allow to configure this in the machine conf?
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- conf/distro/minimal-uclibc.conf |    8 ++++++++
- conf/distro/minimal.conf        |    6 ++++++
- 2 files changed, 14 insertions(+), 0 deletions(-)
+Start using OE to build your kernel and let your kernel recipe use linux.in=
+c=20
+file. This will automatically enable Thumb support for your ARM cpu and=20
+Angstrom will start working without those hacks.=20
 
-diff --git a/conf/distro/minimal-uclibc.conf b/conf/distro/minimal-uclibc.conf
-index 9594622..62855ee 100644
---- a/conf/distro/minimal-uclibc.conf
-+++ b/conf/distro/minimal-uclibc.conf
-@@ -19,3 +19,11 @@ TARGET_FPU_armeb = "soft"
- LIBC = "uclibc"
- 
- require conf/distro/minimal.conf
-+
-+# FEATURE SELECTION
-+#############################################################################
-+# We want images supporting the following features (for task-base)
-+DISTRO_FEATURES = "nfs smbfs wifi ppp alsa ext2 vfat pcmcia usbgadget usbhost pci"
-+# Following features are for ARM and E500 based machines
-+DISTRO_FEATURES += "eabi"
-+
-diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
-index 1e9eec2..00397db 100644
---- a/conf/distro/minimal.conf
-+++ b/conf/distro/minimal.conf
-@@ -28,6 +28,12 @@ DISTRO_FEATURES = "nfs smbfs wifi ppp alsa ext2 vfat pcmcia usbgadget usbhost pc
- # Following features are for ARM and E500 based machines
- DISTRO_FEATURES += "eabi"
- 
-+# The following feature enables the MIPS ABI PLT extensions
-+# This feature needs GCC 4.4 binutils 2.19 or glibc/eglibc 2.9
-+# or higher
-+
-+DISTRO_FEATURES += "mplt"
-+
- #############################################################################
- # LIBRARY NAMES
- #############################################################################
--- 
-1.6.3.3
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
 
 
 
