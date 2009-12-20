@@ -1,26 +1,38 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NMCS0-0003kG-Ip
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NMHCn-0001bU-0A for openembedded-devel@lists.openembedded.org;
+	Sun, 20 Dec 2009 09:32:00 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NMHAz-0003MS-Fc
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Dec 2009 04:27:23 +0100
-Received: from tamarin.localnet (123-192-180-176.dynamic.kbronet.com.tw
-	[123.192.180.176])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id DF6251B10C03
+	Sun, 20 Dec 2009 09:30:05 +0100
+Received: from c-24-2-192-205.hsd1.ct.comcast.net ([24.2.192.205])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 Dec 2009 09:30:05 +0100
+Received: from buckleyassoc by c-24-2-192-205.hsd1.ct.comcast.net with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Dec 2009 03:21:30 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Sun, 20 Dec 2009 09:30:05 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 20 Dec 2009 04:25:25 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <1261261569-19196-1-git-send-email-raj.khem@gmail.com>
-In-Reply-To: <1261261569-19196-1-git-send-email-raj.khem@gmail.com>
-MIME-Version: 1.0
-Message-Id: <200912200425.25787.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+From: John Buckley <buckleyassoc@comcast.net>
+Date: Sun, 20 Dec 2009 08:27:38 +0000 (UTC)
+Message-ID: <loom.20091220T090122-975@post.gmane.org>
+References: <1986479129.867281259879607562.JavaMail.root@sz0029a.westchester.pa.mail.comcast.net>
+	<4B1916FD.7080905@cs.put.poznan.pl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 24.2.192.205 (Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.0.14) Gecko/2009090216 Ubuntu/9.04 (jaunty) Firefox/3.0.14)
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 1/3] eglibc: Add libc_nonshared.a to FILE list in eglibc-dev.
+Subject: Re: minimal xwindows
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,20 +46,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Dec 2009 03:27:23 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Sun, 20 Dec 2009 08:32:00 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Saturday 19 December 2009 23:26:09 Khem Raj wrote:
-> * This file is an essential one even for shared linking so
->   once one installs libc6-dev package he expects the linking
->   to work which will not happen without this file as some
->   start up files refer to functions in this library therefore
->   package this file in eglibc-dev
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Przemyslaw Wesolek <przemyslaw.wesolek <at> cs.put.poznan.pl> writes:
 
-Acked-by: Holger Hans Peter Freyther <zecke@selfish.org>
+> 
+> John Buckley wrote:
+> > I would like to keep the build intact since it contains all the
+> > components and libraries I need.  However, I would like to strip the
+> > XWindows boot-up so that only my Xwindow application runs for now so
+> > I can see if there are any significant performance improvements in my
+> > video streaming.
+> > 
+> > Does anyone know how I can prevent the GPE from starting?  And, how I
+> > can launch my GTK+/Xwindows application on bootup.
+> 
+> Startup of application happens as a result of running scripts in
+> /etc/rcX.d dirs which are links to /etc/init.d. To stop program loading,
+> simply remove the appropriate links, preferably with update-rc.d.
+> 
+> GPE login screen is loaded from gpe-dm script.
+> 
+> Similarly, to run a program on boot time, just add a script for it in
+> /etc/init.d and link to it in /etc/rcX.d. Take a look on existing
+> scripts on how to implement "start", "stop", etc. modes.
+> 
+> Przemek
+> 
+
+
+Okay, I was able to disable the bootup of gpe-dm.  Now I want to run my own
+Xwindows program and have it be the only client calling on the Xserver.
+
+It appears that the 'X' command will launch an instance of Xserver and I can
+bring up a plain black or white screen but then OE waits for this process to
+finish, therefore I can't subsequently launch my own GTK+/Gstreamer application
+that will interact with the Xserver.
+
+Question:  How do I get the Xserver to run in the background as a service so I
+can then run my application.  Or, do I just run 'X' and launch my application
+using the script .xinitrc or .xsession?
+
+-John
+
+
 
 
