@@ -1,38 +1,41 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iw0-f194.google.com ([209.85.223.194])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NMHCn-0001bU-0A for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Dec 2009 09:32:00 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NMHAz-0003MS-Fc
+	(envelope-from <raj.khem@gmail.com>) id 1NMHhL-00029W-GN
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Dec 2009 09:30:05 +0100
-Received: from c-24-2-192-205.hsd1.ct.comcast.net ([24.2.192.205])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Dec 2009 09:30:05 +0100
-Received: from buckleyassoc by c-24-2-192-205.hsd1.ct.comcast.net with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	Sun, 20 Dec 2009 10:03:34 +0100
+Received: by iwn32 with SMTP id 32so2621532iwn.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Dec 2009 09:30:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 20 Dec 2009 01:01:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=9jpeeWZylhaO0jj53iKD/ZknhY5+QgDLtUHSjIciQC8=;
+	b=bpgWnue/jR+yiz3tie2MB4t5d2BgeP0ZNzAWuKbctaGDWrxR7X3dDJplqPV0eZ1khc
+	FE7RqdwuS7EoJlaO9wP99eOoKpSb8XpGNDzjX2X5m6M+J0k6lBlOjWAtZpI9qFLHIOQN
+	PjGssGuvopaysTUPLV/xuz2r41liAKB3CgucY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=QSVxFj+Dq1T/VstFg0Cj5yQaHRDcsQKGxMqJ50r/42UvG7ka1rmV2lHpCqVylamKOo
+	ldT+BgnW0LRVAubr1AVYeEtYt9V+EKGujFW20Qpmz5KGsyAPxNZwi0pOgAo8rkXvGdZp
+	2Coh5Hskcim9p39voq9XgN9ZC/q74n769NNII=
+MIME-Version: 1.0
+Received: by 10.231.159.198 with SMTP id k6mr2024969ibx.54.1261299700861; Sun, 
+	20 Dec 2009 01:01:40 -0800 (PST)
+In-Reply-To: <200912200422.50437.holger+oe@freyther.de>
+References: <1261261596-19241-1-git-send-email-raj.khem@gmail.com>
+	<1261261596-19241-2-git-send-email-raj.khem@gmail.com>
+	<200912200422.50437.holger+oe@freyther.de>
+Date: Sun, 20 Dec 2009 01:01:40 -0800
+Message-ID: <19c1b8a90912200101i4fa53a20q5f8f75c5e809827c@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: John Buckley <buckleyassoc@comcast.net>
-Date: Sun, 20 Dec 2009 08:27:38 +0000 (UTC)
-Message-ID: <loom.20091220T090122-975@post.gmane.org>
-References: <1986479129.867281259879607562.JavaMail.root@sz0029a.westchester.pa.mail.comcast.net>
-	<4B1916FD.7080905@cs.put.poznan.pl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 24.2.192.205 (Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.0.14) Gecko/2009090216 Ubuntu/9.04 (jaunty) Firefox/3.0.14)
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.223.194
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: minimal xwindows
+Subject: Re: [PATCH 3/3] minimal: Add 'mplt' to DISTRO_FEATURES.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,51 +49,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Dec 2009 08:32:00 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 20 Dec 2009 09:03:34 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Przemyslaw Wesolek <przemyslaw.wesolek <at> cs.put.poznan.pl> writes:
+On Sat, Dec 19, 2009 at 7:22 PM, Holger Hans Peter Freyther
+<holger+oe@freyther.de> wrote:
+> On Saturday 19 December 2009 23:26:36 Khem Raj wrote:
+>> * As minimal-uclibc includes minimal conf the
+>> =C2=A0 distro features get inherited. mplt is not
+>> =C2=A0 supported on uclibc yet. So we should disable
+>> =C2=A0 it for uclibc/mips based distros.
+>
+>> =C2=A0require conf/distro/minimal.conf
+>> +
+>> +# FEATURE SELECTION
+>> +#######################################################################=
+###
+>> ### +# We want images supporting the following features (for task-base)
+>> =C2=A0+DISTRO_FEATURES =3D "nfs smbfs wifi ppp alsa ext2 vfat pcmcia usb=
+gadget
+>> =C2=A0usbhost pci" +# Following features are for ARM and E500 based mach=
+ines
+>> +DISTRO_FEATURES +=3D "eabi"
+>
+> maybe you want to use the oe filterout thing?
 
-> 
-> John Buckley wrote:
-> > I would like to keep the build intact since it contains all the
-> > components and libraries I need.  However, I would like to strip the
-> > XWindows boot-up so that only my Xwindow application runs for now so
-> > I can see if there are any significant performance improvements in my
-> > video streaming.
-> > 
-> > Does anyone know how I can prevent the GPE from starting?  And, how I
-> > can launch my GTK+/Xwindows application on bootup.
-> 
-> Startup of application happens as a result of running scripts in
-> /etc/rcX.d dirs which are links to /etc/init.d. To stop program loading,
-> simply remove the appropriate links, preferably with update-rc.d.
-> 
-> GPE login screen is loaded from gpe-dm script.
-> 
-> Similarly, to run a program on boot time, just add a script for it in
-> /etc/init.d and link to it in /etc/rcX.d. Take a look on existing
-> scripts on how to implement "start", "stop", etc. modes.
-> 
-> Przemek
-> 
+I tried to use oe_filter_out but I did not succeed, I guess distro
+conf files are too early for in place evaluation
+and if I had to do lazy evaluation then it has to be done somewhere
+later which I did not know what it could be
 
+any ideas ?
 
-Okay, I was able to disable the bootup of gpe-dm.  Now I want to run my own
-Xwindows program and have it be the only client calling on the Xserver.
+Thanks
 
-It appears that the 'X' command will launch an instance of Xserver and I can
-bring up a plain black or white screen but then OE waits for this process to
-finish, therefore I can't subsequently launch my own GTK+/Gstreamer application
-that will interact with the Xserver.
-
-Question:  How do I get the Xserver to run in the background as a service so I
-can then run my application.  Or, do I just run 'X' and launch my application
-using the script .xinitrc or .xsession?
-
--John
-
-
+-Khem
 
 
