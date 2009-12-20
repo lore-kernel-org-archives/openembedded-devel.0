@@ -1,41 +1,38 @@
-Received: from mail-iw0-f194.google.com ([209.85.223.194])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NMPzW-0000GF-EZ
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NMR73-0003VO-Lr for openembedded-devel@lists.openembedded.org;
+	Sun, 20 Dec 2009 20:06:44 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NMR59-0001ZJ-Op
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Dec 2009 18:54:53 +0100
-Received: by iwn32 with SMTP id 32so2762494iwn.24
+	Sun, 20 Dec 2009 20:04:43 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 Dec 2009 20:04:43 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Dec 2009 09:52:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=uXFtEPGETVYO1fOsVQZ3JfegaUFCDNNDEli7FHad1Fg=;
-	b=bGPUhqlybj29y5+sOkPRLhK25+lyg/mCU940+kdtUy9z9LJDiZl5Jfk9P2AfOxXMun
-	ZFKngH/tFftj8waG4f3tcIsA5IwnbiGHQp9W+YSqj1hHWhkJaNDhbeacflqCQcar5mr5
-	tEBvxEtHDQ5xb/CGVY5g5GP3/xKYp83cvoOAA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=pPknTKthcKXitCmkWbwmYc2d35HvjMyWHv+f2yp7GYnFj4vpXJIvQ1F2SSaviWudt9
-	UvwGZjUNXiGECpUUQLfCilFJ9d9YKkb3My2fb0WsVHWX5PU/UvasvGsJB870LdtWti7t
-	92fqO9g/oDSsPrToXdUNRp6iMQt91VGLDLrBA=
-MIME-Version: 1.0
-Received: by 10.231.159.198 with SMTP id k6mr2555339ibx.54.1261331579489; Sun, 
-	20 Dec 2009 09:52:59 -0800 (PST)
-In-Reply-To: <200912201021.14646.holger+oe@freyther.de>
-References: <1261261596-19241-1-git-send-email-raj.khem@gmail.com>
-	<200912200422.50437.holger+oe@freyther.de>
-	<19c1b8a90912200101i4fa53a20q5f8f75c5e809827c@mail.gmail.com>
-	<200912201021.14646.holger+oe@freyther.de>
-Date: Sun, 20 Dec 2009 09:52:59 -0800
-Message-ID: <19c1b8a90912200952x2e1983c7x30937d93ebb9f15d@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Sun, 20 Dec 2009 20:04:43 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.194
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 20 Dec 2009 20:04:19 +0100
+Message-ID: <hglsfj$2vi$1@ger.gmane.org>
+References: <> <1261080453-12752-1-git-send-email-raj.khem@gmail.com>
+	<1261081378.6896.472.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.5) Gecko/20091201 Shredder/3.0.1pre
+In-Reply-To: <1261081378.6896.472.camel@lenovo.internal.reciva.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 3/3] minimal: Add 'mplt' to DISTRO_FEATURES.
+Subject: Re: [PATCH] conf/machine: Add x86_64 machine.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,41 +46,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Dec 2009 17:54:53 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 20 Dec 2009 19:06:44 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sun, Dec 20, 2009 at 1:21 AM, Holger Hans Peter Freyther
-<holger+oe@freyther.de> wrote:
-> On Sunday 20 December 2009 10:01:40 Khem Raj wrote:
->
->> I tried to use oe_filter_out but I did not succeed, I guess distro
->> conf files are too early for in place evaluation
->> and if I had to do lazy evaluation then it has to be done somewhere
->> later which I did not know what it could be
->
-> did you try with := ?
+> On Thu, 2009-12-17 at 12:07 -0800, Khem Raj wrote:
+>> * This is not supporting multilib
+>> * Only 64-bit userspace can be built.
+>>
+>> --- /dev/null
+>> +++ b/conf/machine/include/tune-x86_64.inc
+>> @@ -0,0 +1,4 @@
+>> +TARGET_CC_ARCH = "-mtune=generic"
+>> +BASE_PACKAGE_ARCH = "x86_64"
+>> +FEED_ARCH = "x86_64"
+>> +PACKAGE_EXTRA_ARCHS += "x86 i386 i486 i586 i686"
 
- DISTRO_FEATURES := "${@oe_filter_out('mplt',
-bb.data.getVar('DISTRO_FEATURES', d, 1), d))}"
+NAK! Don't use underscores in machine names since it's what bitbake is 
+using to mark overrides. I fell into that trap twice already :(
 
-If I use := I get this
+Also, please explain to me what you plan to do with 'FEED_ARCH'.
 
-NameError: name 'oe_filter_out' is not defined
+regards,
 
-and if I use something like this
-DISTRO_FEATURES = "${@bb.data.setVar('DISTRO_FEATURES',
-oe_filter_out('mplt', bb.data.getVar('DISTRO_FEATURES', d, 1), d))}"
-that ends up in same error too
+Koen
 
--Khem
-
-
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
