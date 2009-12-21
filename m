@@ -1,40 +1,26 @@
-Received: from mail-iw0-f194.google.com ([209.85.223.194])
+Received: from bay0-omc4-s7.bay0.hotmail.com ([65.54.190.209])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NMjwY-0000Gg-Gf
+	(envelope-from <salehusman@hotmail.com>) id 1NMkG6-0000mS-Eg
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Dec 2009 16:13:09 +0100
-Received: by iwn32 with SMTP id 32so3243852iwn.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Dec 2009 07:11:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=lFAP9OuYMM9jqMRQSnIR5ed/U19LYMjVOOzk+3G5SaI=;
-	b=qXZ/Ryr3E03qDQ4xjBMz3LFrl0PoBqZFcPzzM1EPveyIe97pqFwE2KxOI/Ea2HTJ08
-	0otbCw1VPM9PbefNHQPkY9MlQuSbMBVVjhCyTY9n7uiuhlOhslVfahFC/OfA0HSU1NA/
-	eM0rer67ttQW2K967IWgW3fMOmVnd/TK7nhq4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=QT4NkZ73stkQozubhX5EsN3VnDASh8a+3PoFXU3cIW21DuITWjfJXTy9/TAV3qae4N
-	c4H+C0ntRpBZA6joRBy1HSRl4B/1oxkwXUXRGh/Fd4WBqURnAjWI1vKQJaNByMuyL818
-	9423iJ6VQDluVfk8idiugVXH+0AbAQPVoXaIQ=
+	Mon, 21 Dec 2009 16:33:21 +0100
+Received: from BAY127-W4 ([65.54.190.199]) by bay0-omc4-s7.bay0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 21 Dec 2009 07:30:23 -0800
+Message-ID: <BAY127-W4FA6C5C1EEBBD693C15EFD8820@phx.gbl>
+X-Originating-IP: [203.82.49.5]
+From: saleh usman <salehusman@hotmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Date: Mon, 21 Dec 2009 20:30:23 +0500
+Importance: Normal
 MIME-Version: 1.0
-Received: by 10.231.146.2 with SMTP id f2mr1333585ibv.23.1261408274286; Mon, 
-	21 Dec 2009 07:11:14 -0800 (PST)
-In-Reply-To: <hgneg9$kka$1@ger.gmane.org>
-References: <1261261596-19241-1-git-send-email-raj.khem@gmail.com>
-	<hgneg9$kka$1@ger.gmane.org>
-Date: Mon, 21 Dec 2009 07:11:14 -0800
-Message-ID: <19c1b8a90912210711w560614betc4ff2fe27b3032c8@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.194
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-OriginalArrivalTime: 21 Dec 2009 15:30:23.0219 (UTC)
+	FILETIME=[831DFC30:01CA8252]
+X-SA-Exim-Connect-IP: 65.54.190.209
+X-SA-Exim-Mail-From: salehusman@hotmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 2/3] gcc: Enable mips plt extentions if DISTRO_FEATURE has mplt.
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Building "console-image"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,370 +34,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Dec 2009 15:13:10 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 21 Dec 2009 15:33:21 -0000
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Dec 21, 2009 at 1:18 AM, Koen Kooi <k.kooi@student.utwente.nl> wrot=
-e:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Why am I getting these errors:
->
-> NOTE: <type 'exceptions.NameError'>:name 'get_gcc_mips_plt_setting' is
-> not defined while evaluating:
->
-> when building kernel modules for an arm machine?
->
-> On 19-12-09 23:26, Khem Raj wrote:
->> * Newer gcc (4.4+) has implemented -mplt option to
->> =C2=A0 enable PLT and copy relocation extentions of MIPS ABI
->> =C2=A0 which makes shared code run a lot faster. This feature
->> =C2=A0 is however controlled by DISTRO_FEATURES which should
->> =C2=A0 add 'mplt' to DISTRO_FEATURES to enable it.
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->> =C2=A0recipes/gcc/gcc-3.3.4.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| =C2=A0 =C2=A02 +-
->> =C2=A0recipes/gcc/gcc-3.4.3.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| =C2=A0 =C2=A02 +-
->> =C2=A0recipes/gcc/gcc-3.4.4.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| =C2=A0 =C2=A02 +-
->> =C2=A0recipes/gcc/gcc-4.1.0.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| =C2=A0 =C2=A02 +-
->> =C2=A0recipes/gcc/gcc-4.1.1.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| =C2=A0 =C2=A02 +-
->> =C2=A0recipes/gcc/gcc-4.1.2.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| =C2=A0 =C2=A02 +-
->> =C2=A0recipes/gcc/gcc-4.2.2.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| =C2=A0 =C2=A02 +-
->> =C2=A0recipes/gcc/gcc-4.2.3.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| =C2=A0 =C2=A02 +-
->> =C2=A0recipes/gcc/gcc-4.2.4.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| =C2=A0 =C2=A02 +-
->> =C2=A0recipes/gcc/gcc-4.3.1.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| =C2=A0 =C2=A02 +-
->> =C2=A0recipes/gcc/gcc-4.3.2.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| =C2=A0 =C2=A02 +-
->> =C2=A0recipes/gcc/gcc-4.3.3.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| =C2=A0 =C2=A02 +-
->> =C2=A0recipes/gcc/gcc-4.3.4.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| =C2=A0 =C2=A02 +-
->> =C2=A0recipes/gcc/gcc-4.4.1.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| =C2=A0 =C2=A02 +-
->> =C2=A0recipes/gcc/gcc-4.4.2.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0| =C2=A0 =C2=A02 +-
->> =C2=A0recipes/gcc/gcc-common.inc =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 | =C2=A0 =C2=A05 +++++
->> =C2=A0recipes/gcc/gcc-configure-common.inc =C2=A0 | =C2=A0 =C2=A05 ++++-
->> =C2=A0recipes/gcc/gcc-cross-initial.inc =C2=A0 =C2=A0 =C2=A0| =C2=A0 =C2=
-=A03 ++-
->> =C2=A0recipes/gcc/gcc-cross-intermediate.inc | =C2=A0 =C2=A03 ++-
->> =C2=A019 files changed, 28 insertions(+), 18 deletions(-)
->>
->> diff --git a/recipes/gcc/gcc-3.3.4.inc b/recipes/gcc/gcc-3.3.4.inc
->> index 635e617..a3fbdde 100644
->> --- a/recipes/gcc/gcc-3.3.4.inc
->> +++ b/recipes/gcc/gcc-3.3.4.inc
->> @@ -1,6 +1,6 @@
->> =C2=A0require gcc-common.inc
->>
->> -INC_PR =3D "r10"
->> +INC_PR =3D "r11"
->>
->> =C2=A0SRC_URI =3D "${GNU_MIRROR}/gcc/releases/gcc-${PV}/gcc-${PV}.tar.bz=
-2 \
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://arm-gotoff.dpatch;patch=3D1;pnu=
-m=3D0 \
->> diff --git a/recipes/gcc/gcc-3.4.3.inc b/recipes/gcc/gcc-3.4.3.inc
->> index 72f9042..febe0fc 100644
->> --- a/recipes/gcc/gcc-3.4.3.inc
->> +++ b/recipes/gcc/gcc-3.4.3.inc
->> @@ -1,6 +1,6 @@
->> =C2=A0require gcc-common.inc
->>
->> -INC_PR =3D "r18"
->> +INC_PR =3D "r19"
->>
->> =C2=A0SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2 \
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://gcc34-reverse-compare.patch;pat=
-ch=3D1 \
->> diff --git a/recipes/gcc/gcc-3.4.4.inc b/recipes/gcc/gcc-3.4.4.inc
->> index 9a02c5d..b87e1e3 100644
->> --- a/recipes/gcc/gcc-3.4.4.inc
->> +++ b/recipes/gcc/gcc-3.4.4.inc
->> @@ -1,6 +1,6 @@
->> =C2=A0require gcc-common.inc
->>
->> -INC_PR =3D "r14"
->> +INC_PR =3D "r15"
->>
->> =C2=A0SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2 \
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://gcc34-reverse-compare.patch;pat=
-ch=3D1 \
->> diff --git a/recipes/gcc/gcc-4.1.0.inc b/recipes/gcc/gcc-4.1.0.inc
->> index 7bb1a34..df0ae3f 100644
->> --- a/recipes/gcc/gcc-4.1.0.inc
->> +++ b/recipes/gcc/gcc-4.1.0.inc
->> @@ -1,6 +1,6 @@
->> =C2=A0require gcc-common.inc
->>
->> -INC_PR =3D "r9"
->> +INC_PR =3D "r10"
->>
->> =C2=A0DEFAULT_PREFERENCE =3D "-1"
->>
->> diff --git a/recipes/gcc/gcc-4.1.1.inc b/recipes/gcc/gcc-4.1.1.inc
->> index 68323ac..a960b41 100644
->> --- a/recipes/gcc/gcc-4.1.1.inc
->> +++ b/recipes/gcc/gcc-4.1.1.inc
->> @@ -2,7 +2,7 @@ require gcc-common.inc
->>
->> =C2=A0DEPENDS =3D "mpfr gmp"
->>
->> -INC_PR =3D "r0"
->> +INC_PR =3D "r1"
->>
->> =C2=A0SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2 \
->> =C2=A0 =C2=A0 =C2=A0 file://100-uclibc-conf.patch;patch=3D1 \
->> diff --git a/recipes/gcc/gcc-4.1.2.inc b/recipes/gcc/gcc-4.1.2.inc
->> index 911d2d9..21bf486 100644
->> --- a/recipes/gcc/gcc-4.1.2.inc
->> +++ b/recipes/gcc/gcc-4.1.2.inc
->> @@ -2,7 +2,7 @@ require gcc-common.inc
->>
->> =C2=A0DEPENDS =3D "mpfr gmp"
->>
->> -INC_PR =3D "r21"
->> +INC_PR =3D "r22"
->>
->> =C2=A0SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2 \
->> =C2=A0 =C2=A0 =C2=A0 file://100-uclibc-conf.patch;patch=3D1 \
->> diff --git a/recipes/gcc/gcc-4.2.2.inc b/recipes/gcc/gcc-4.2.2.inc
->> index 0eb1223..931de9a 100644
->> --- a/recipes/gcc/gcc-4.2.2.inc
->> +++ b/recipes/gcc/gcc-4.2.2.inc
->> @@ -3,7 +3,7 @@ LICENSE =3D "GPLv3"
->>
->> =C2=A0DEPENDS =3D "mpfr gmp"
->>
->> -INC_PR =3D "r15"
->> +INC_PR =3D "r16"
->>
->> =C2=A0SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2 \
->> =C2=A0 =C2=A0 =C2=A0 file://100-uclibc-conf.patch;patch=3D1 \
->> diff --git a/recipes/gcc/gcc-4.2.3.inc b/recipes/gcc/gcc-4.2.3.inc
->> index 1501c7e..b2fb029 100644
->> --- a/recipes/gcc/gcc-4.2.3.inc
->> +++ b/recipes/gcc/gcc-4.2.3.inc
->> @@ -3,7 +3,7 @@ LICENSE =3D "GPLv3"
->>
->> =C2=A0DEPENDS =3D "mpfr gmp"
->>
->> -INC_PR =3D "r12"
->> +INC_PR =3D "r17"
->>
->> =C2=A0SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2 \
->> =C2=A0 =C2=A0 =C2=A0 file://100-uclibc-conf.patch;patch=3D1 \
->> diff --git a/recipes/gcc/gcc-4.2.4.inc b/recipes/gcc/gcc-4.2.4.inc
->> index 3249c09..e96122a 100644
->> --- a/recipes/gcc/gcc-4.2.4.inc
->> +++ b/recipes/gcc/gcc-4.2.4.inc
->> @@ -3,7 +3,7 @@ LICENSE =3D "GPLv3"
->>
->> =C2=A0DEPENDS =3D "mpfr gmp"
->>
->> -INC_PR =3D "r9"
->> +INC_PR =3D "r10"
->>
->> =C2=A0SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2 \
->> =C2=A0 =C2=A0 =C2=A0 file://100-uclibc-conf.patch;patch=3D1 \
->> diff --git a/recipes/gcc/gcc-4.3.1.inc b/recipes/gcc/gcc-4.3.1.inc
->> index 0b05f0a..3eaff45 100644
->> --- a/recipes/gcc/gcc-4.3.1.inc
->> +++ b/recipes/gcc/gcc-4.3.1.inc
->> @@ -7,7 +7,7 @@ LICENSE =3D "GPLv3"
->>
->> =C2=A0DEPENDS =3D "mpfr gmp"
->>
->> -INC_PR =3D "r19"
->> +INC_PR =3D "r20"
->>
->> =C2=A0SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2 \
->> =C2=A0 =C2=A0 =C2=A0 file://fedora/gcc43-c++-builtin-redecl.patch;patch=
-=3D1;pnum=3D0 \
->> diff --git a/recipes/gcc/gcc-4.3.2.inc b/recipes/gcc/gcc-4.3.2.inc
->> index 5483b8f..8d40d72 100644
->> --- a/recipes/gcc/gcc-4.3.2.inc
->> +++ b/recipes/gcc/gcc-4.3.2.inc
->> @@ -7,7 +7,7 @@ LICENSE =3D "GPLv3"
->>
->> =C2=A0DEPENDS =3D "mpfr gmp"
->>
->> -INC_PR =3D "r9"
->> +INC_PR =3D "r10"
->>
->> =C2=A0SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2 \
->> =C2=A0 =C2=A0 =C2=A0 file://fedora/gcc43-c++-builtin-redecl.patch;patch=
-=3D1;pnum=3D0 \
->> diff --git a/recipes/gcc/gcc-4.3.3.inc b/recipes/gcc/gcc-4.3.3.inc
->> index 46d5e35..47bfbc6 100644
->> --- a/recipes/gcc/gcc-4.3.3.inc
->> +++ b/recipes/gcc/gcc-4.3.3.inc
->> @@ -7,7 +7,7 @@ LICENSE =3D "GPLv3"
->>
->> =C2=A0DEPENDS =3D "mpfr gmp"
->>
->> -INC_PR =3D "r10"
->> +INC_PR =3D "r11"
->>
->> =C2=A0SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2 \
->> =C2=A0 =C2=A0 =C2=A0 file://fedora/gcc43-c++-builtin-redecl.patch;patch=
-=3D1;pnum=3D0 \
->> diff --git a/recipes/gcc/gcc-4.3.4.inc b/recipes/gcc/gcc-4.3.4.inc
->> index 2b1054c..ff02ac5 100644
->> --- a/recipes/gcc/gcc-4.3.4.inc
->> +++ b/recipes/gcc/gcc-4.3.4.inc
->> @@ -7,7 +7,7 @@ LICENSE =3D "GPLv3"
->>
->> =C2=A0DEPENDS =3D "mpfr gmp"
->>
->> -INC_PR =3D "r7"
->> +INC_PR =3D "r8"
->>
->> =C2=A0SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2 \
->> =C2=A0 =C2=A0 =C2=A0 file://fedora/gcc43-c++-builtin-redecl.patch;patch=
-=3D1;pnum=3D0 \
->> diff --git a/recipes/gcc/gcc-4.4.1.inc b/recipes/gcc/gcc-4.4.1.inc
->> index 9daff95..cbf28dd 100644
->> --- a/recipes/gcc/gcc-4.4.1.inc
->> +++ b/recipes/gcc/gcc-4.4.1.inc
->> @@ -7,7 +7,7 @@ LICENSE =3D "GPLv3"
->>
->> =C2=A0DEPENDS =3D "mpfr gmp"
->>
->> -INC_PR =3D "r7"
->> +INC_PR =3D "r8"
->>
->> =C2=A0FILESPATHPKG .=3D ":gcc-$PV"
->>
->> diff --git a/recipes/gcc/gcc-4.4.2.inc b/recipes/gcc/gcc-4.4.2.inc
->> index 514cc9f..1ef1359 100644
->> --- a/recipes/gcc/gcc-4.4.2.inc
->> +++ b/recipes/gcc/gcc-4.4.2.inc
->> @@ -7,7 +7,7 @@ LICENSE =3D "GPLv3"
->>
->> =C2=A0DEPENDS =3D "mpfr gmp"
->>
->> -INC_PR =3D "r0"
->> +INC_PR =3D "r1"
->>
->> =C2=A0FILESPATHPKG .=3D ":gcc-$PV"
->>
->> diff --git a/recipes/gcc/gcc-common.inc b/recipes/gcc/gcc-common.inc
->> index 6e777e6..97b140c 100644
->> --- a/recipes/gcc/gcc-common.inc
->> +++ b/recipes/gcc/gcc-common.inc
->> @@ -15,6 +15,11 @@ def get_gcc_fpu_setting(bb, d):
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return "--with-float=3Dsoft"
->> =C2=A0 =C2=A0 =C2=A0return ""
->>
->> +def get_gcc_mips_plt_setting(bb, d):
->> + =C2=A0 =C2=A0if bb.data.getVar('TARGET_ARCH', d, 1) in [ 'mips', 'mips=
-el' ] and 'mplt' in bb.data.getVar('DISTRO_FEATURES',d,1).split() :
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0return "--with-mips-plt"
->> + =C2=A0 =C2=A0return ""
->> +
->> =C2=A0# We really need HOST_SYS here for some packages and TARGET_SYS fo=
-r others.
->> =C2=A0# For now, libgcc is most important so we fix for that - RP.
->> =C2=A0SHLIBSDIR =3D "${STAGING_DIR_TARGET}/shlibs"
->> diff --git a/recipes/gcc/gcc-configure-common.inc b/recipes/gcc/gcc-conf=
-igure-common.inc
->> index 8a96326..ee6c0e7 100644
->> --- a/recipes/gcc/gcc-configure-common.inc
->> +++ b/recipes/gcc/gcc-configure-common.inc
->> @@ -13,6 +13,8 @@ OBJC_linux-uclibceabi ?=3D ""
->> =C2=A0OBJC_linux-uclibc ?=3D ""
->> =C2=A0OBJC_avr ?=3D ""
->> =C2=A0OBJC_nylon ?=3D ""
->> +OBJC_mips ?=3D ""
->> +OBJC_mipsel ?=3D ""
->> =C2=A0OBJC ?=3D ",objc"
->>
->> =C2=A0# gcc 3.x expects 'f77', 4.0 expects 'f95', 4.1 and 4.2 expect 'fo=
-rtran'
->> @@ -36,7 +38,8 @@ EXTRA_OECONF =3D "${@['--enable-clocale=3Dgeneric', ''=
-][bb.data.getVar('USE_NLS', d,
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0--program-=
-prefix=3D${TARGET_PREFIX} \
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${EXTRA_OE=
-CONF_BASE} \
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${EXTRA_OE=
-CONF_FPU} \
->> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${EXTRA_OECONF_=
-PATHS}"
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${EXTRA_OECONF_=
-PATHS} \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${@get_gcc_mips_plt_setting(=
-bb, d)}"
->>
->> =C2=A0# Build uclibc compilers without cxa_atexit support
->> =C2=A0EXTRA_OECONF_append_linux =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =3D " --enable-__cxa_atexit"
->> diff --git a/recipes/gcc/gcc-cross-initial.inc b/recipes/gcc/gcc-cross-i=
-nitial.inc
->> index a2c4445..2ab1d7f 100644
->> --- a/recipes/gcc/gcc-cross-initial.inc
->> +++ b/recipes/gcc/gcc-cross-initial.inc
->> @@ -16,7 +16,8 @@ EXTRA_OECONF =3D "--with-local-prefix=3D${STAGING_DIR_=
-TARGET}${target_prefix} \
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 --program-prefix=3D${TA=
-RGET_PREFIX} \
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 --with-sysroot=3D${STAG=
-ING_DIR_TARGET} \
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 --with-build-sysroot=3D=
-${STAGING_DIR_TARGET} \
->> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${@get_gcc_fpu_setting(bb, d=
-)}"
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${@get_gcc_fpu_setting(bb, d=
-)} \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${@get_gcc_mips_plt_setting(=
-bb, d)}"
->>
->> =C2=A0do_install () {
->> =C2=A0 =C2=A0 =C2=A0 :
->> diff --git a/recipes/gcc/gcc-cross-intermediate.inc b/recipes/gcc/gcc-cr=
-oss-intermediate.inc
->> index ccfa2b4..50792b6 100644
->> --- a/recipes/gcc/gcc-cross-intermediate.inc
->> +++ b/recipes/gcc/gcc-cross-intermediate.inc
->> @@ -14,7 +14,8 @@ EXTRA_OECONF =3D "--with-local-prefix=3D${STAGING_DIR_=
-TARGET}${target_prefix} \
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 --program-prefix=3D${TA=
-RGET_PREFIX} \
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 --with-sysroot=3D${STAG=
-ING_DIR_TARGET} \
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 --with-build-sysroot=3D=
-${STAGING_DIR_TARGET} \
->> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${@get_gcc_fpu_setting(bb, d=
-)}"
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${@get_gcc_fpu_setting(bb, d=
-)} \
->> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ${@get_gcc_mips_plt_setting(=
-bb, d)}"
->>
->> =C2=A0do_stage_append () {
->> =C2=A0 =C2=A0 =C2=A0 # get rid of dummy libc.so
 
-I did an arm build earlier and did not see this message at all.
-which gcc version are you building ? my guess is that some version
-does not include gcc-common.inc thats one reason it can happen
 
-Thanks
 
--Khem
 
+Hello=20
+I am building "console-image"  and aftrer bitbaking what steps I should exa=
+ctly follow to run it on my board b.I've bord which has an ARM GPP processo=
+r runing  linux on it=2C means which files I need and how to run them and a=
+lso my board dosn't suppot gcc.
+
+I am new to both linux and openembedded so plz help me in moving forward.
+
+Terminal window is looking like as below.
+=20
+=20
+=20
+[saleh@localhost build]$ bitbake console-image
+NOTE: Handling BitBake files: - (7634/7634) [100 %]
+NOTE: Parsing finished. 7045 cached=2C 303 parsed=2C 286 skipped=2C 0 maske=
+d.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 1399 of 2472 (ID: 228=2C /oe/openembedded/recipes/angstr=
+om/angstrom-version.bb=2C do_setscene)
+staging-angstrom-version-omap5912osk-angstrom-linux-gnueabi - 2009.X-test-2=
+0091221-r2
+Removing package staging-angstrom-version-omap5912osk-angstrom-linux-gnueab=
+i from root...
+(offline root mode: not running staging-angstrom-version-omap5912osk-angstr=
+om-linux-gnueabi.prerm)
+(offline root mode: not running staging-angstrom-version-omap5912osk-angstr=
+om-linux-gnueabi.postrm)
+Installing staging-angstrom-version-omap5912osk-angstrom-linux-gnueabi (200=
+9.X-test-20091221-r2) to root...
+(offline root mode: not running staging-angstrom-version-omap5912osk-angstr=
+om-linux-gnueabi.preinst)
+Configuring staging-angstrom-version-omap5912osk-angstrom-linux-gnueabi
+(offline root mode: not running staging-angstrom-version-omap5912osk-angstr=
+om-linux-gnueabi.postinst)
+NOTE: Staging package found but invalid for /oe/openembedded/recipes/angstr=
+om/angstrom-version.bb
+NOTE: Running task 1400 of 2472 (ID: 229=2C /oe/openembedded/recipes/angstr=
+om/angstrom-version.bb=2C do_fetch)
+NOTE: Running task 1401 of 2472 (ID: 230=2C /oe/openembedded/recipes/angstr=
+om/angstrom-version.bb=2C do_unpack)
+NOTE: Unpacking ../openembedded/recipes/angstrom/angstrom-version.bb to tmp=
+/work/omap5912osk-angstrom-linux-gnueabi/angstrom-version-1_2009.X-test-200=
+91221-r2/
+NOTE: Running task 1568 of 2472 (ID: 231=2C /oe/openembedded/recipes/angstr=
+om/angstrom-version.bb=2C do_patch)
+NOTE: Running task 1569 of 2472 (ID: 232=2C /oe/openembedded/recipes/angstr=
+om/angstrom-version.bb=2C do_configure)
+NOTE: Running task 1674 of 2472 (ID: 233=2C /oe/openembedded/recipes/angstr=
+om/angstrom-version.bb=2C do_qa_configure)
+NOTE: Running task 1675 of 2472 (ID: 234=2C /oe/openembedded/recipes/angstr=
+om/angstrom-version.bb=2C do_compile)
+NOTE: Running task 1676 of 2472 (ID: 235=2C /oe/openembedded/recipes/angstr=
+om/angstrom-version.bb=2C do_install)
+NOTE: Running task 1695 of 2472 (ID: 238=2C /oe/openembedded/recipes/angstr=
+om/angstrom-version.bb=2C do_package)
+NOTE: Running task 2064 of 2472 (ID: 240=2C /oe/openembedded/recipes/angstr=
+om/angstrom-version.bb=2C do_package_write_ipk)
+Packaged contents of angstrom-version into /oe/build/tmp/deploy/glibc/ipk/o=
+map5912osk/angstrom-version_2009.X-test-20091221-r2.5_omap5912osk.ipk
+NOTE: Running task 2065 of 2472 (ID: 236=2C /oe/openembedded/recipes/angstr=
+om/angstrom-version.bb=2C do_populate_staging)
+NOTE: Running task 2433 of 2472 (ID: 237=2C /oe/openembedded/recipes/angstr=
+om/angstrom-version.bb=2C do_package_write)
+NOTE: Running task 2434 of 2472 (ID: 239=2C /oe/openembedded/recipes/angstr=
+om/angstrom-version.bb=2C do_package_stage)
+NOTE: Running task 2467 of 2472 (ID: 18=2C /oe/openembedded/recipes/images/=
+console-image.bb=2C do_package_update_index_ipk)
+NOTE: Running task 2471 of 2472 (ID: 10=2C /oe/openembedded/recipes/images/=
+console-image.bb=2C do_rootfs)
+NOTE: Running task 2472 of 2472 (ID: 0=2C /oe/openembedded/recipes/images/c=
+onsole-image.bb=2C do_build)
+NOTE: Tasks Summary: Attempted 2472 tasks of which 2456 didn't need to be r=
+erun and 0 failed.
+=20
+Regards=20
+Saleh Usman
+=20
+=20
+
+ 		 	   		 =20
+_________________________________________________________________
+Windows Live: Keep your friends up to date with what you do online.
+http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/so=
+cial-network-basics.aspx?ocid=3DPID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_1:092=
+010=
 
