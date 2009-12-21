@@ -1,39 +1,27 @@
-Received: from mail-iw0-f194.google.com ([209.85.223.194])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NMmIm-0005p0-2P
+	(envelope-from <philb@gnu.org>) id 1NMn6e-0006GZ-23
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Dec 2009 18:44:15 +0100
-Received: by iwn32 with SMTP id 32so3353318iwn.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Dec 2009 09:42:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=jh7PwV/Ny+SUEWtqzpUG7HsI1KYovSWoeFbAQB7J8Jo=;
-	b=kVFMwYw6XFcrwZvbk5Mu+od3xULlrmc4b/xvCYHW8/w9sE1Yz9f3NF/WJ6W1vHJ8qC
-	NyfAZlZFdn495GQ+Jo7VCGfpRu4RLGeEPxI6adhksahArMMkUTdiDJ5lilqDSUBDgSzO
-	6WL8h2tSGzUFeOhscqGSJc8q/6keeneB+4NLM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=R+1WFJ+HhBqNd4sN+eB/NhnNXxpZBVQeaD2RfX2kZBO6q6oWqLBfJFxi3NZ+Vi74T5
-	WD2HUnal+pqpeBmMloNkW6Gd8DZMpcC6Vbbf52ysjdPXXyATIWgNN162cwTDd/nH+oXK
-	x1Cl8FiQOrtTQHtIi4ss98nFQwx0o2hEOjeOQ=
-MIME-Version: 1.0
-Received: by 10.231.143.12 with SMTP id s12mr4267844ibu.38.1261417340081; Mon, 
-	21 Dec 2009 09:42:20 -0800 (PST)
-In-Reply-To: <hgndpv$i9t$1@ger.gmane.org>
+	Mon, 21 Dec 2009 19:35:47 +0100
+Received: from [85.210.12.93] (helo=[192.168.2.155])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NMn4q-0002Ae-FL
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Dec 2009 18:33:52 +0000
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <19c1b8a90912201813i54c9e5d9r6e1545a3a9106f74@mail.gmail.com>
 References: <1261080453-12752-1-git-send-email-raj.khem@gmail.com>
 	<1261081378.6896.472.camel@lenovo.internal.reciva.com>
 	<hglsfj$2vi$1@ger.gmane.org>
 	<19c1b8a90912201813i54c9e5d9r6e1545a3a9106f74@mail.gmail.com>
-	<hgndpv$i9t$1@ger.gmane.org>
-Date: Mon, 21 Dec 2009 09:42:20 -0800
-Message-ID: <19c1b8a90912210942l31f117d4k8a16800bfff79d49@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.194
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Mon, 21 Dec 2009 18:33:50 +0000
+Message-ID: <1261420430.28755.188.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-Broken-Reverse-DNS: no host name found for IP address 85.210.12.93
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [PATCH] conf/machine: Add x86_64 machine.
@@ -50,69 +38,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Dec 2009 17:44:15 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 21 Dec 2009 18:35:47 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Mon, Dec 21, 2009 at 1:06 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 21-12-09 03:13, Khem Raj wrote:
->> On Sun, Dec 20, 2009 at 11:04 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
->>>> On Thu, 2009-12-17 at 12:07 -0800, Khem Raj wrote:
->>>>>
->>>>> * This is not supporting multilib
->>>>> * Only 64-bit userspace can be built.
->>>>>
->>>>> --- /dev/null
->>>>> +++ b/conf/machine/include/tune-x86_64.inc
->>>>> @@ -0,0 +1,4 @@
->>>>> +TARGET_CC_ARCH = "-mtune=generic"
->>>>> +BASE_PACKAGE_ARCH = "x86_64"
->>>>> +FEED_ARCH = "x86_64"
->>>>> +PACKAGE_EXTRA_ARCHS += "x86 i386 i486 i586 i686"
->>>
->>> NAK! Don't use underscores in machine names since it's what bitbake is using
->>> to mark overrides. I fell into that trap twice already :(
->>>
->>> Also, please explain to me what you plan to do with 'FEED_ARCH'.
->>
->> I was thinking of using amd64 but ARCH has to be
->> x86_64 at least for gcc so I think we can not avoid
->> it. may be we should make bitbake ignore certain
->> overrides like x86_64 if thats possible at all.
->
-> We re-write arch already for kernel recipes, so why can't we do the same
-> for gcc?
+On Sun, 2009-12-20 at 18:13 -0800, Khem Raj wrote:
+> I was thinking of using amd64 but ARCH has to be
+> x86_64 at least for gcc so I think we can not avoid
+> it. may be we should make bitbake ignore certain
+> overrides like x86_64 if thats possible at all.
 
-Good point. If gcc was the only one then yes it was relatively ok. But
-here we are talking about gcc and some other packages which
-have x86_64 for target architecture in their configure scripts. I
-thought of writing a class for target arch mapping but the recipes
-which
-depend upon TARGET_ARCH in some way will need to be taken care of. If
-this approach sounds reasonable I can try a bit more on amd64
+I guess the primary variable that gcc actually cares about is
+${TARGET_SYS} (which isn't, itself, an OVERRIDE).  It isn't strictly
+necessary for the first part of ${TARGET_SYS} to match ${TARGET_ARCH}:
+you could, in theory, set TARGET_SYS to "x86_64-unknown-linux-gnu" while
+having TARGET_ARCH = "x86-64" or some other, non-underscore-containing,
+value.
 
-Thanks
--Khem
+All that said, I'm not sure that TARGET_ARCH=x86_64 will be much of an
+issue in practice.  The only situation where I can immediately think
+that it would be problematic would be if both "x86" and "64" were
+individually to appear in OVERRIDES for some other reason, and this
+doesn't sound especially likely.  There are already plenty of situations
+where you can, at least in theory, run into namespace collisions and it
+isn't obvious to me that the x86_64 one is especially egregious.
 
->
-> regards,
->
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFLLzqAMkyGM64RGpERAtuHAJ9YxU54qCR7lAiUbjkxRqBi7ISycACeOkMG
-> yrR9wiUNLhHC4im/yz7j92s=
-> =Lk4J
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+p.
+
+
 
 
