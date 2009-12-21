@@ -1,37 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iw0-f194.google.com ([209.85.223.194])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NMRC4-0003cQ-TX for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Dec 2009 20:11:55 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NMRAJ-0003WG-JP
+	(envelope-from <raj.khem@gmail.com>) id 1NMXo1-00071v-Tt
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Dec 2009 20:10:03 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Dec 2009 20:10:03 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Mon, 21 Dec 2009 03:15:33 +0100
+Received: by iwn32 with SMTP id 32so2925635iwn.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Dec 2009 20:10:03 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 20 Dec 2009 18:13:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=jxXIZWWI09iNlFAqNYnfYCK9EA7zZ/z8PciAr9zCej0=;
+	b=eriJGa2X4o6IHMR8psC2XThRMoZFTXJDByBMpSBzRcp4PD+StmYfj6c3evUONDPNa+
+	bkPBbAizR3qS0ZPV/tvPKPLuedgPH0fkyasE0CAChY74nhD/aeX+hLmajFIPCzNjWQjV
+	4ISdOTvvmJpVNsB6PE5SBvDhQJMN7LaX3tFRs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=EweHvdHKeRUn2SUfrWg8/sRjVqkC4EYqRDr7C5owEhDQz++qHYxEQ+9/gFr58BqOYR
+	46mRBJ2KBEJvPlnIDVzO5lFG8WiSf8OOrJAmTEMY3xqQ/za1I3/xiPe3IEXTbA29LQKi
+	VVM1sZRlGSdRSjoXKpB1spguAcuJ4EkirfjgY=
+MIME-Version: 1.0
+Received: by 10.231.157.83 with SMTP id a19mr88068ibx.41.1261361618655; Sun, 
+	20 Dec 2009 18:13:38 -0800 (PST)
+In-Reply-To: <hglsfj$2vi$1@ger.gmane.org>
+References: <1261080453-12752-1-git-send-email-raj.khem@gmail.com>
+	<1261081378.6896.472.camel@lenovo.internal.reciva.com>
+	<hglsfj$2vi$1@ger.gmane.org>
+Date: Sun, 20 Dec 2009 18:13:38 -0800
+Message-ID: <19c1b8a90912201813i54c9e5d9r6e1545a3a9106f74@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 20 Dec 2009 20:05:59 +0100
-Message-ID: <hglsin$2vi$2@ger.gmane.org>
-References: <200912190854.11510.holger+oe@freyther.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.5) Gecko/20091201 Shredder/3.0.1pre
-In-Reply-To: <200912190854.11510.holger+oe@freyther.de>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.223.194
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Qt4 GLES (once again)
+Subject: Re: [PATCH] conf/machine: Add x86_64 machine.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,38 +48,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Dec 2009 19:11:56 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 21 Dec 2009 02:15:33 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 19-12-09 08:54, Holger Hans Peter Freyther wrote:
-> Hi Koen, All,
+On Sun, Dec 20, 2009 at 11:04 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+>> On Thu, 2009-12-17 at 12:07 -0800, Khem Raj wrote:
+>>>
+>>> * This is not supporting multilib
+>>> * Only 64-bit userspace can be built.
+>>>
+>>> --- /dev/null
+>>> +++ b/conf/machine/include/tune-x86_64.inc
+>>> @@ -0,0 +1,4 @@
+>>> +TARGET_CC_ARCH = "-mtune=generic"
+>>> +BASE_PACKAGE_ARCH = "x86_64"
+>>> +FEED_ARCH = "x86_64"
+>>> +PACKAGE_EXTRA_ARCHS += "x86 i386 i486 i586 i686"
 >
-> we have the GLES problem once again in the Qt4 recipes. My opinion is still
-> the same that a "bitbake meta-toolchain-qte" should work without requiring
-> downloading proprietary stuff from TI/PowerVR.
+> NAK! Don't use underscores in machine names since it's what bitbake is using
+> to mark overrides. I fell into that trap twice already :(
+>
+> Also, please explain to me what you plan to do with 'FEED_ARCH'.
 
-Exactly
+I was thinking of using amd64 but ARCH has to be
+x86_64 at least for gcc so I think we can not avoid
+it. may be we should make bitbake ignore certain
+overrides like x86_64 if thats possible at all.
 
->  From what I think to know, the only difference between GLES and the non GLES
-> recipe is that we have one plugin more. Koen could you help me to verify that?
-
-For qt/e it's one plugin more (a gfxdriver) and library (openvg) and for 
-qt/x11 it's one plugin (gldriver) + 2 libs (opengl + openvg) more.
-
-> If the above is the case, we could just use qt4-embedded-gles (without
-> claiming to provide anything else) and then just package the GLES plugin?
-
-That was my original goal, but the current structure of the .inc makes 
-that very hard to do. I tried packaging *only* the extra stuff, but that 
-leave to with one big problem: you need to build regular QT first and 
-you can't build QT if a QT is present in staging.
-
-I'm open to suggestions that don't involve useflags.
-
-regards,
-
-Koen
-
+>
+> regards,
+>
+> Koen
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
