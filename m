@@ -1,32 +1,25 @@
-Received: from smtp-out13.alice.it ([85.33.2.18])
+Received: from vs148181.vserver.de ([62.75.148.181])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1NMpjV-0007bX-0M
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Dec 2009 22:24:04 +0100
-Received: from FBCMMO01.fbc.local ([192.168.68.195]) by smtp-out13.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 21 Dec 2009 22:22:08 +0100
-Received: from FBCMCL01B06.fbc.local ([192.168.69.87]) by FBCMMO01.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 21 Dec 2009 22:22:08 +0100
-Received: from [192.168.1.116] ([79.54.158.130]) by FBCMCL01B06.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Mon, 21 Dec 2009 22:22:08 +0100
-From: GNUtoo <GNUtoo@no-log.org>
+	(envelope-from <Florian.Mayer@mayer-electronics.de>)
+	id 1NMptA-00085V-Ik for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Dec 2009 22:34:03 +0100
+Received: from [62.224.96.49] (helo=[192.168.100.22])
+	by vs148181.vserver.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <Florian.Mayer@mayer-electronics.de>)
+	id 1NMprO-00021e-9O for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Dec 2009 21:32:10 +0000
+Message-ID: <4B2FE953.30301@mayer-electronics.de>
+Date: Mon, 21 Dec 2009 22:32:03 +0100
+From: "Florian Mayer (Mayer Electronics)" <Florian.Mayer@mayer-electronics.de>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1261091322-11271-2-git-send-email-GNUtoo@no-log.org>
-References: <1261091322-11271-1-git-send-email-GNUtoo@no-log.org>
-	<1261091322-11271-2-git-send-email-GNUtoo@no-log.org>
-Date: Mon, 21 Dec 2009 22:22:08 +0100
-Message-Id: <1261430528.3714.0.camel@gnutoo-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-OriginalArrivalTime: 21 Dec 2009 21:22:08.0393 (UTC)
-	FILETIME=[A6C7F790:01CA8283]
-X-SA-Exim-Connect-IP: 85.33.2.18
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+X-SA-Exim-Connect-IP: 62.75.148.181
+X-SA-Exim-Mail-From: Florian.Mayer@mayer-electronics.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 1/2] udev-141: added support for buglabs's bug device
+Subject: Cannot build gpe-mini browser
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,173 +33,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Dec 2009 21:24:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 21 Dec 2009 21:34:03 -0000
+X-Groupsio-MsgNum: 15162
+Content-Type: multipart/mixed; boundary="------------000509030106020806020306"
+
+--------------000509030106020806020306
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
 Content-Transfer-Encoding: 7bit
 
-ping:
-On Fri, 2009-12-18 at 00:08 +0100, Denis 'Gnutoo' Carikli wrote:
-> The udev configurations files are needed for Xorg configuration
->   for buglabs's bug device that will be commited later,
->   in order to find the right device nodes for the touchscreens
-> 
-> Note that the script creating the bmi(Bug module interface)
->   event pipe has not been commented out,because it will be needed
->   when the java bindings for the bug device will be in openembedded
-> 
-> Signed-off-by: Denis 'Gnutoo' Carikli <GNUtoo@no-log.org>
-> ---
->  recipes/udev/udev-141/bug/10-mx31.rules    |   49 ++++++++++++++++++++++++++++
->  recipes/udev/udev-141/bug/30-BUG.rules     |   26 +++++++++++++++
->  recipes/udev/udev-141/bug/bmi_eventpipe.sh |    8 ++++
->  recipes/udev/udev_141.bb                   |   16 ++++++++-
->  4 files changed, 98 insertions(+), 1 deletions(-)
->  create mode 100644 recipes/udev/udev-141/bug/10-mx31.rules
->  create mode 100644 recipes/udev/udev-141/bug/30-BUG.rules
->  create mode 100644 recipes/udev/udev-141/bug/bmi_eventpipe.sh
-> 
-> diff --git a/recipes/udev/udev-141/bug/10-mx31.rules b/recipes/udev/udev-141/bug/10-mx31.rules
-> new file mode 100644
-> index 0000000..de427fc
-> --- /dev/null
-> +++ b/recipes/udev/udev-141/bug/10-mx31.rules
-> @@ -0,0 +1,49 @@
-> +KERNEL=="ttyS[0-9]",	NAME="tts/%n",		SYMLINK+="tts%n"
-> +KERNEL=="ttymxc[0-9]",	NAME="ttymxc/%n",	SYMLINK+="ttymxc%n"
-> +
-> +KERNEL=="mxc_mu[0-9]",	NAME="mxc_mu/%n",	SYMLINK+="mxc_mu%n"
-> +KERNEL=="fb*",		NAME="fb/%n",		SYMLINK+="fb%n"
-> +KERNEL=="i2c*",		NAME="i2c/%n"
-> +KERNEL=="mxc_ipc*",	NAME="mxc_ipc/%n"
-> +KERNEL=="video*",	NAME="v4l/video%n"
-> +
-> +KERNEL=="rtc",		NAME="misc/rtc"
-> +KERNEL=="watchdog",	NAME="misc/watchdog"
-> +
-> +KERNEL=="mc13783_adc",	NAME="mc13783_adc",	SYMLINK+="ts"
-> +KERNEL=="pmic_adc",	NAME="pmic_adc",	SYMLINK+="ts"
-> +
-> +# The long class name gets cut off to be mc13783_connectiv in 
-> +# /sys/class/mc13783_connectivity/mc13783_connectivit
-> +KERNEL=="mc13783_connectiv*",	NAME="mc13783_connectivity"
-> +
-> +KERNEL=="mxc_ssi[0-9]*",	NAME="mxc_ssi/%n",	SYMLINK+="mxc_ssi%n"
-> +KERNEL=="spi[0-9]*",	NAME="spi/%n",		SYMLINK+="spi%n"
-> +
-> +KERNEL=="mtdblock*",	NAME="mtdblock/%n"	SYMLINK+="mtdblock%n"
-> +KERNEL=="mtd[0-9]",	NAME="mtd/%n"
-> +
-> +# A more elegant way of doing this must exist...
-> +KERNEL=="mtd0ro",	NAME="mtd/0ro"
-> +KERNEL=="mtd1ro",	NAME="mtd/1ro"
-> +KERNEL=="mtd2ro",	NAME="mtd/2ro"
-> +KERNEL=="mtd3ro",	NAME="mtd/3ro"
-> +KERNEL=="mtd4ro",	NAME="mtd/4ro"
-> +KERNEL=="mtd5ro",	NAME="mtd/5ro"
-> +KERNEL=="mtd6ro",	NAME="mtd/6ro"
-> +KERNEL=="mtd7ro",	NAME="mtd/7ro"
-> +KERNEL=="mtd8ro",	NAME="mtd/8ro"
-> +KERNEL=="mtd9ro",	NAME="mtd/9ro"
-> +
-> +# Note that we want /dev/dsp linked to /dev/sound/dsp1...
-> +KERNEL=="dsp",		NAME="sound/dsp"
-> +KERNEL=="dspW",		NAME="sound/dspW"
-> +KERNEL=="dsp1",		NAME="sound/dsp1",	SYMLINK+="dsp"
-> +KERNEL=="mixer",		NAME="sound/mixer",	SYMLINK+="mixer"
-> +KERNEL=="sequencer",	NAME="sound/sequencer"
-> +KERNEL=="sequencer2",	NAME="sound/sequencer2"
-> +
-> +KERNEL=="ram[0-9]*",	NAME="ram/%n",		SYMLINK+="ram%n"
-> +
-> +KERNEL=="dvfs_dptc",	NAME="dvfs_dptc",	SYMLINK+="dptc dvfs"
-> +
-> diff --git a/recipes/udev/udev-141/bug/30-BUG.rules b/recipes/udev/udev-141/bug/30-BUG.rules
-> new file mode 100644
-> index 0000000..06faa6b
-> --- /dev/null
-> +++ b/recipes/udev/udev-141/bug/30-BUG.rules
-> @@ -0,0 +1,26 @@
-> +##
-> +## BUG/BMI specific
-> +##
-> +KERNEL=="event*", ATTRS{name}=="bugnav", SYMLINK+="input/bugnav"
-> +KERNEL=="event*", ATTRS{name}=="bmi_motion", SYMLINK+="input/bmi_motion"
-> +KERNEL=="event*", ATTRS{name}=="bug_cam", SYMLINK+="input/bmi_cam"
-> +KERNEL=="event*", ATTRS{name}=="bmi_audio_status_m1", SYMLINK+="input/bmi_audio_m1"
-> +KERNEL=="event*", ATTRS{name}=="bmi_audio_status_m2", SYMLINK+="input/bmi_audio_m2"
-> +KERNEL=="event*", ATTRS{name}=="bmi_audio_status_m3", SYMLINK+="input/bmi_audio_m3"
-> +KERNEL=="event*", ATTRS{name}=="bmi_audio_status_m4", SYMLINK+="input/bmi_audio_m4"
-> +DEVPATH=="/devices/platform/bugfb.0", SYMLINK+="bugfb"
-> +KERNEL=="rtc0", SYMLINK+="rtc"
-> +KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts0", SYMLINK+="input/bmi_lcd_ts0"
-> +KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts1", SYMLINK+="input/bmi_lcd_ts1"
-> +KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts2", SYMLINK+="input/bmi_lcd_ts2"
-> +KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts3", SYMLINK+="input/bmi_lcd_ts3"
-> +KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts4", SYMLINK+="input/bmi_lcd_ts4"
-> +KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts5", SYMLINK+="input/bmi_lcd_ts5"
-> +KERNEL=="event*", ATTRS{name}=="bmi_lcd_ts6", SYMLINK+="input/bmi_lcd_ts6"
-> +ACTION=="add", DEVPATH=="/devices/conn*", RUN+="/bin/sh /etc/udev/scripts/bmi_eventpipe.sh"
-> +ACTION=="remove", DEVPATH=="/devices/conn*", RUN+="/bin/sh /etc/udev/scripts/bmi_eventpipe.sh"
-> +#
-> +# For USB PBPSD, which we've arbitrarily decided will be module F001
-> +#
-> +ACTION=="remove", SUBSYSTEM=="usb", DRIVERS=="psd_driver", ENV{BMIBUS_PRODUCT}="F001", ENV{BMIBUS_SLOT}="%n", RUN+="/bin/sh /etc/udev/scripts/bmi_eventpipe.sh"
-> +ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="psd_driver", ENV{BMIBUS_PRODUCT}="F001", ENV{BMIBUS_SLOT}="%n", RUN+="/bin/sh /etc/udev/scripts/bmi_eventpipe.sh"
-> diff --git a/recipes/udev/udev-141/bug/bmi_eventpipe.sh b/recipes/udev/udev-141/bug/bmi_eventpipe.sh
-> new file mode 100644
-> index 0000000..acbae56
-> --- /dev/null
-> +++ b/recipes/udev/udev-141/bug/bmi_eventpipe.sh
-> @@ -0,0 +1,8 @@
-> +#!/bin/sh
-> +#
-> +# This script passes BMI state variables to the running JVM.
-> +#
-> +if [ ${BMIBUS_PRODUCT} != "" ] && [ ${BMIBUS_SLOT} != "" ] && [ ${ACTION} != "" ];
-> +then                                                                            
-> +        echo $BMIBUS_PRODUCT 0 $BMIBUS_SLOT $ACTION > /tmp/eventpipe            
-> +fi
-> diff --git a/recipes/udev/udev_141.bb b/recipes/udev/udev_141.bb
-> index e07150d..00ba971 100644
-> --- a/recipes/udev/udev_141.bb
-> +++ b/recipes/udev/udev_141.bb
-> @@ -6,7 +6,7 @@ LICENSE = "GPL"
->  # Untested
->  DEFAULT_PREFERENCE = "-1"
->  
-> -PR = "r18"
-> +PR = "r19"
->  
->  # needed for init.d script
->  RDEPENDS_${PN} += "udev-utils"
-> @@ -29,6 +29,14 @@ SRC_URI += " \
->  SRC_URI_append_h2200 = " file://50-hostap_cs.rules "
->  PACKAGE_ARCH_h2200 = "h2200"
->  
-> +#buglabs's bug device
-> +SRC_URI_append_bug = " \
-> +       file://30-BUG.rules \
-> +       file://10-mx31.rules \
-> +       file://bmi_eventpipe.sh "
-> +
-> +PACKAGE_ARCH_bug = "bug"
-> +
->  inherit update-rc.d autotools_stage
->  
->  # Put stuff in /lib and /sbin
-> @@ -98,6 +106,12 @@ do_install_append_h2200() {
->  	install -m 0644 ${WORKDIR}/50-hostap_cs.rules         ${D}${sysconfdir}/udev/rules.d/50-hostap_cs.rules
->  }
->  
-> +do_install_append_bug() {
-> +	install -m 0644 ${WORKDIR}/30-BUG.rules ${D}${sysconfdir}/udev/rules.d/30-BUG.rules
-> +	install -m 0644 ${WORKDIR}/10-mx31.rules ${D}${sysconfdir}/udev/rules.d/10-mx31.rules
-> +	install -m 0644 ${WORKDIR}/bmi_eventpipe.sh ${D}${sysconfdir}/udev/scripts/bmi_eventpipe.sh
-> +}
-> +
->  pkg_postinst_${PN}_append() {
->  if [ -d $D/lib/udev/rules.d ] ; then
->  	echo "$D/lib/udev/rules.d is not a symlink, fixing that"
+Hello,
+
+if I try to bitbake gpe-mini-browser, I get the following output:
+
+| arm-angstrom-linux-gcc -march=armv4 -mtune=strongarm 
+-DPACKAGE_NAME=\"gpe-mini-browser\" 
+-DPACKAGE_TARNAME=\"gpe-mini-browser\" -DPACKAGE_VERSION=\"0.21\" 
+-DPACKAGE_STRING=\"gpe-mini-browser\ 0.21\" 
+-DPACKAGE_BUGREPORT=\"philippedeswert@scarlet.be\" 
+-DPACKAGE=\"gpe-mini-browser\" -DVERSION=\"0.21\" -DSTDC_HEADERS=1 
+-DGETTEXT_PACKAGE=\"gpe-mini-browser\" -DHAVE_SYS_TYPES_H=1 
+-DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 
+-DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 
+-DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_LOCALE_H=1 
+-DHAVE_LC_MESSAGES=1 -DHAVE_BIND_TEXTDOMAIN_CODESET=1 -DHAVE_GETTEXT=1 
+-DHAVE_DCGETTEXT=1 -DENABLE_NLS=1 -I. 
+-I/home/gonzo/ARM-devel/oe/build/tmp/staging/arm-oabi-angstrom-linux/usr/include/gtk-2.0 
+-I/home/gonzo/ARM-devel/oe/build/tmp/staging/arm-oabi-angstrom-linux/usr/lib/gtk-2.0/include 
+-I/home/gonzo/ARM-devel/oe/build/tmp/staging/arm-oabi-angstrom-linux/usr/include/atk-1.0 
+-I/home/gonzo/ARM-devel/oe/build/tmp/staging/arm-oabi-angstrom-linux/usr/include/cairo 
+-I/home/gonzo/ARM-devel/oe/build/tmp/staging/arm-oabi-angstrom-linux/usr/include/pango-1.0 
+-I/home/gonzo/ARM-devel/oe/build/tmp/staging/arm-oabi-angstrom-linux/usr/include/glib-2.0 
+-I/home/gonzo/ARM-devel/oe/build/tmp/staging/arm-oabi-angstrom-linux/usr/lib/glib-2.0/include 
+-I/home/gonzo/ARM-devel/oe/build/tmp/staging/arm-oabi-angstrom-linux/usr/include/pixman-1 
+-I/home/gonzo/ARM-devel/oe/build/tmp/staging/arm-oabi-angstrom-linux/usr/include/freetype2 
+-I/home/gonzo/ARM-devel/oe/build/tmp/staging/arm-oabi-angstrom-linux/usr/include/libpng12 
+-I/home/gonzo/ARM-devel/oe/build/tmp/staging/arm-oabi-angstrom-linux/usr/include/gtk-webcore/webi 
+-I/home/gonzo/ARM-devel/oe/build/tmp/staging/arm-oabi-angstrom-linux/usr/include/gtk-webcore 
+-I/home/gonzo/ARM-devel/oe/build/tmp/staging/arm-oabi-angstrom-linux/usr/include/gtk-webcore/   
+-DPREFIX=\"/usr\" -Wall  
+-isystem/home/gonzo/ARM-devel/oe/build/tmp/staging/arm-oabi-angstrom-linux/usr/include  
+-Os -Wall -g -pedantic -std=c99   -MT db-backend.o -MD -MP -MF 
+.deps/db-backend.Tpo -c -o db-backend.o db-backend.c
+| db-backend.c:224: warning: C99 inline functions are not supported; 
+using GNU89
+| db-backend.c:224: warning: to disable this warning use -fgnu89-inline 
+or the gnu_inline function attribute
+| mv -f .deps/db-backend.Tpo .deps/db-backend.Po
+| arm-angstrom-linux-gcc -march=armv4 -mtune=strongarm  -Os -Wall -g 
+-pedantic -std=c99    
+-L/home/gonzo/ARM-devel/oe/build/tmp/staging/arm-oabi-angstrom-linux/usr/lib 
+-Wl,-rpath-link,/home/gonzo/ARM-devel/oe/build/tmp/staging/arm-oabi-angstrom-linux/usr/lib 
+-Wl,-O1 -Wl,--hash-style=gnu -o gpe-mini-browser interface-calls.o 
+loading-calls.o misc-calls.o settings.o  gpe-mini-browser.o 
+db-backend.o  -lgpewidget -lgtk_webcore_nrcit -lgthread-2.0 
+-lgtk_webcore_nrcore -lcurl -lgtk_webcore_jscore -lXft -lgtk-x11-2.0 
+-lXrender -lX11 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 
+-lgdk_pixbuf-2.0 -lpangocairo-1.0 -lcairo -lpango-1.0 -lfreetype 
+-lfontconfig -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lsqlite
+| 
+/home/gonzo/ARM-devel/oe/build/tmp/cross/arm-oabi/lib/gcc/arm-angstrom-linux/4.2.4/../../../../arm-angstrom-linux/bin/ld: 
+gpe-mini-browser: hidden symbol `__ltdf2' in 
+/home/gonzo/ARM-devel/oe/build/tmp/cross/arm-oabi/lib/gcc/arm-angstrom-linux/4.2.4/libgcc.a(_cmpdf2.o) 
+is referenced by DSO
+| 
+/home/gonzo/ARM-devel/oe/build/tmp/cross/arm-oabi/lib/gcc/arm-angstrom-linux/4.2.4/../../../../arm-angstrom-linux/bin/ld: 
+final link failed: Nonrepresentable section on output
+| collect2: ld returned 1 exit status
+| make[1]: *** [gpe-mini-browser] Error 1
+| make[1]: Leaving directory 
+`/home/gonzo/ARM-devel/oe/build/tmp/work/arm-oabi-angstrom-linux/gpe-mini-browser-0.21-r1/gpe-mini-browser-0.21'
+| make: *** [all-recursive] Error 1
+| FATAL: oe_runmake failed
+NOTE: Task failed: 
+/home/gonzo/ARM-devel/oe/build/tmp/work/arm-oabi-angstrom-linux/gpe-mini-browser-0.21-r1/temp/log.do_compile.18419
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of 
+/home/gonzo/ARM-devel/oe/openembedded/recipes/gpe-mini-browser/gpe-mini-browser_0.21.bb 
+do_compile failed
+ERROR: Task 7 
+(/home/gonzo/ARM-devel/oe/openembedded/recipes/gpe-mini-browser/gpe-mini-browser_0.21.bb, 
+do_compile) failed
+NOTE: Tasks Summary: Attempted 1233 tasks of which 1168 didn't need to 
+be rerun and 1 failed.
+ERROR: 
+'/home/gonzo/ARM-devel/oe/openembedded/recipes/gpe-mini-browser/gpe-mini-browser_0.21.bb' 
+failed
+
+My build system is Ubuntu 9.04, I am using the stable2009 branch. The 
+machine is a simpad.
+
+The x11-image has been built well and is already running on the target.
+
+Regards
+Florian Mayer
+Mayer Electronics
+
+--------------000509030106020806020306
+Content-Type: text/x-vcard; charset=utf-8;
+ name="Florian_Mayer.vcf"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="Florian_Mayer.vcf"
+
+begin:vcard
+fn:Florian Mayer (Mayer Electronics)
+n:Mayer;Florian
+adr:;;Hohenzollernstr. 20;Messkirch;;88605;Deutschland
+email;internet:Florian.Mayer@mayer-electronics.de
+title:Dipl. Ing. (BA)
+tel;work:++49 (0) 7575/924940
+tel;cell:++49 (0) 176/22209624
+version:2.1
+end:vcard
 
 
-
+--------------000509030106020806020306--
