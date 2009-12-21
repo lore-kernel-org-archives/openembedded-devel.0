@@ -1,40 +1,28 @@
-Received: from mail-iw0-f194.google.com ([209.85.223.194])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NMXo1-00071v-Tt
+	(envelope-from <holger+oe@freyther.de>) id 1NMYuK-0002VR-Ig
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Dec 2009 03:15:33 +0100
-Received: by iwn32 with SMTP id 32so2925635iwn.24
+	Mon, 21 Dec 2009 04:26:07 +0100
+Received: from tamarin.localnet (123-192-180-176.dynamic.kbronet.com.tw
+	[123.192.180.176])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id A8BA41B10C03
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Dec 2009 18:13:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=jxXIZWWI09iNlFAqNYnfYCK9EA7zZ/z8PciAr9zCej0=;
-	b=eriJGa2X4o6IHMR8psC2XThRMoZFTXJDByBMpSBzRcp4PD+StmYfj6c3evUONDPNa+
-	bkPBbAizR3qS0ZPV/tvPKPLuedgPH0fkyasE0CAChY74nhD/aeX+hLmajFIPCzNjWQjV
-	4ISdOTvvmJpVNsB6PE5SBvDhQJMN7LaX3tFRs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=EweHvdHKeRUn2SUfrWg8/sRjVqkC4EYqRDr7C5owEhDQz++qHYxEQ+9/gFr58BqOYR
-	46mRBJ2KBEJvPlnIDVzO5lFG8WiSf8OOrJAmTEMY3xqQ/za1I3/xiPe3IEXTbA29LQKi
-	VVM1sZRlGSdRSjoXKpB1spguAcuJ4EkirfjgY=
-MIME-Version: 1.0
-Received: by 10.231.157.83 with SMTP id a19mr88068ibx.41.1261361618655; Sun, 
-	20 Dec 2009 18:13:38 -0800 (PST)
-In-Reply-To: <hglsfj$2vi$1@ger.gmane.org>
-References: <1261080453-12752-1-git-send-email-raj.khem@gmail.com>
-	<1261081378.6896.472.camel@lenovo.internal.reciva.com>
-	<hglsfj$2vi$1@ger.gmane.org>
-Date: Sun, 20 Dec 2009 18:13:38 -0800
-Message-ID: <19c1b8a90912201813i54c9e5d9r6e1545a3a9106f74@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Mon, 21 Dec 2009 03:20:17 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.194
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Mon, 21 Dec 2009 04:24:04 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <1261261596-19241-1-git-send-email-raj.khem@gmail.com>
+	<200912201021.14646.holger+oe@freyther.de>
+	<19c1b8a90912200952x2e1983c7x30937d93ebb9f15d@mail.gmail.com>
+In-Reply-To: <19c1b8a90912200952x2e1983c7x30937d93ebb9f15d@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <200912210424.04554.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] conf/machine: Add x86_64 machine.
+Subject: Re: [PATCH 3/3] minimal: Add 'mplt' to DISTRO_FEATURES.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,43 +36,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Dec 2009 02:15:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 21 Dec 2009 03:26:07 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Sun, Dec 20, 2009 at 11:04 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
->> On Thu, 2009-12-17 at 12:07 -0800, Khem Raj wrote:
->>>
->>> * This is not supporting multilib
->>> * Only 64-bit userspace can be built.
->>>
->>> --- /dev/null
->>> +++ b/conf/machine/include/tune-x86_64.inc
->>> @@ -0,0 +1,4 @@
->>> +TARGET_CC_ARCH = "-mtune=generic"
->>> +BASE_PACKAGE_ARCH = "x86_64"
->>> +FEED_ARCH = "x86_64"
->>> +PACKAGE_EXTRA_ARCHS += "x86 i386 i486 i586 i686"
->
-> NAK! Don't use underscores in machine names since it's what bitbake is using
-> to mark overrides. I fell into that trap twice already :(
->
-> Also, please explain to me what you plan to do with 'FEED_ARCH'.
+On Sunday 20 December 2009 18:52:59 Khem Raj wrote:
+> On Sun, Dec 20, 2009 at 1:21 AM, Holger Hans Peter Freyther
+> 
+> <holger+oe@freyther.de> wrote:
+> > On Sunday 20 December 2009 10:01:40 Khem Raj wrote:
+> >> I tried to use oe_filter_out but I did not succeed, I guess distro
+> >> conf files are too early for in place evaluation
+> >> and if I had to do lazy evaluation then it has to be done somewhere
+> >> later which I did not know what it could be
+> >
+> > did you try with := ?
+> 
+>  DISTRO_FEATURES := "${@oe_filter_out('mplt',
+> bb.data.getVar('DISTRO_FEATURES', d, 1), d))}"
+> 
+> If I use := I get this
+> 
+> NameError: name 'oe_filter_out' is not defined
 
-I was thinking of using amd64 but ARCH has to be
-x86_64 at least for gcc so I think we can not avoid
-it. may be we should make bitbake ignore certain
-overrides like x86_64 if thats possible at all.
+Ah right.... base.bbclass might or might not be parsed by then and 
+oe_filter_out not being known at this state. So we really have no other way 
+than copying the definition. Could you add a comment to the place where we 
+copied the stuff from hinting that -uclibc.conf needs to be updated too?
 
->
-> regards,
->
-> Koen
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
+z.
 
 
