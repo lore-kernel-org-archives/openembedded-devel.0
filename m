@@ -1,38 +1,27 @@
-Received: from mail-pw0-f53.google.com ([209.85.160.53])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1NN1xz-0000zX-0P
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Dec 2009 11:27:50 +0100
-Received: by pwi18 with SMTP id 18so3709420pwi.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Dec 2009 02:25:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=oCaTwUO61EKoGZY2Ahq+ObW1AgVGpkSQEBlkDouqgwk=;
-	b=IR3XqwpJkPz8euN8wXUUYPqw0sEGa79LS/JWKqEKZl6Ps2TU90S+Ldrx7QYgZxkTUm
-	LuXGBOlsRYJ598XeRh7h7jCoZiyAJxm8p5VqjU1babLO0+ko5Iovj4BzFeX5ZqSWHcot
-	s2d5Kl5RQ2jhaXRR2NZjvrWyljqGWBo1BTtas=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=VWnONweeov9H2SS2ftttyre2aPN3bdZFgaygN+f5Ln1FJUTG/m2c4qB/9x+3ut95/+
-	uHLmT8T7j4JVZI+VZgSNb/XaBGvlDBUC0pdB5ugkzZR0HJ1LEYs6KDVjmgohk6CYFI3q
-	NKUHap02CM1oDRpdwXdgojEt0owfL41nKbPBQ=
-MIME-Version: 1.0
-Received: by 10.141.1.1 with SMTP id d1mr6066374rvi.71.1261477554407; Tue, 22 
-	Dec 2009 02:25:54 -0800 (PST)
-In-Reply-To: <1260750381-15943-1-git-send-email-andrea.adami@gmail.com>
-References: <1260750381-15943-1-git-send-email-andrea.adami@gmail.com>
-Date: Tue, 22 Dec 2009 11:25:54 +0100
-Message-ID: <d1b08f940912220225s3c456f1bsfd8e1b763e254ba6@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NN2BB-0003cS-6e for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Dec 2009 11:41:28 +0100
+Received: from g225137190.adsl.alicedsl.de ([92.225.137.190]
+	helo=[192.168.178.25])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NN29P-0008V5-GL for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Dec 2009 10:39:35 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.53
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+In-Reply-To: <1260719335.3110.27.camel@mattotaupa.wohnung.familie-menzel.net>
+References: <1260719335.3110.27.camel@mattotaupa.wohnung.familie-menzel.net>
+Date: Tue, 22 Dec 2009 11:39:55 +0100
+Message-ID: <1261478395.3238.45.camel@mattotaupa.wohnung.familie-menzel.net>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] kernel.bbclass: deploy all kind of compressed initramfs cpio images.
+Subject: Re: [PATCH 1/1] Typo. s/to used/to use/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,9 +35,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Dec 2009 10:27:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 22 Dec 2009 10:41:28 -0000
+X-Groupsio-MsgNum: 15174
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-+Sa69XWr9ksOt8F5UwAW"
 
-Bump
+--=-+Sa69XWr9ksOt8F5UwAW
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Am Sonntag, den 13.12.2009, 16:48 +0100 schrieb Paul Menzel:
+> Dear OE hackers,
+>=20
+>=20
+> please see attachment.
+
+If I did not make a mistake this should be trivial to be committed?
 
 
+Thanks,
+
+Paul
+
+--=-+Sa69XWr9ksOt8F5UwAW
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkswofsACgkQPX1aK2wOHVgcGwCeKRYvuaQgooGx/6uh9dFMd9v2
+gRcAnigXlSqlsmi+mS6jnAxaddwXEb9l
+=V/KE
+-----END PGP SIGNATURE-----
+
+--=-+Sa69XWr9ksOt8F5UwAW--
