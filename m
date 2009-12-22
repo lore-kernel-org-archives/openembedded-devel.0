@@ -1,36 +1,23 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NN7ra-0003zH-LC for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Dec 2009 17:45:37 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NN7pn-0001NW-OU
+	(envelope-from <philip@balister.org>) id 1NN7vx-00046M-QJ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Dec 2009 17:43:43 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Dec 2009 17:43:43 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Dec 2009 17:43:43 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 22 Dec 2009 17:50:09 +0100
+Received: (qmail 622 invoked by uid 1003); 22 Dec 2009 16:48:12 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 22 Dec 2009 16:48:12 -0000
+Message-ID: <4B30F84A.7080004@balister.org>
+Date: Tue, 22 Dec 2009 11:48:10 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 22 Dec 2009 17:43:18 +0100
-Message-ID: <hgqsv5$456$1@ger.gmane.org>
-References: <20091222140029.GF10910@xora.vm.bytemark.co.uk>	<ac9c93b10912220747q2c3278b3l761fe2229f1f2873@mail.gmail.com>
-	<df74cfb40912220813t2ee6c989h357c33a031a9eb3c@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.5) Gecko/20091219 Shredder/3.0.1pre
-In-Reply-To: <df74cfb40912220813t2ee6c989h357c33a031a9eb3c@mail.gmail.com>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <20091222140029.GF10910@xora.vm.bytemark.co.uk>
+	<ac9c93b10912220747q2c3278b3l761fe2229f1f2873@mail.gmail.com>
+In-Reply-To: <ac9c93b10912220747q2c3278b3l761fe2229f1f2873@mail.gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [TSC] First Meeting
@@ -47,50 +34,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Dec 2009 16:45:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 22 Dec 2009 16:50:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 22-12-09 17:13, Graeme Gregory wrote:
-> 2009/12/22 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-> 
->> 2009/12/22 Graeme Gregory <dp@xora.org.uk>:
->>> Hi, fellow TSC members and general OE community.
->>>
->>> I think we should try and organise a general one hour chat of the
->>> TSC on irc sometime the first week in January (4th - 8th). I think
->>> we should probably hold this private discussion just to organise
->>> ourselves then organise some form of public meeting later in the
->>> month to let the OE community have their say.
->>>
->>> Ultimately I think it might be a good plan to hold open meetings
->>> once a month or so. Just so people feel they can contribute to
->>> the decision making process.
->>>
->>> What do people think?
->>>
->>> Graeme
+On 12/22/2009 10:47 AM, Frans Meulenbroeks wrote:
+> 2009/12/22 Graeme Gregory<dp@xora.org.uk>:
+>> Hi, fellow TSC members and general OE community.
 >>
->> For the public meeting, may I suggest a F2F meeting @ fosdem (feb 6/7
->> iirc).
+>> I think we should try and organise a general one hour chat of the
+>> TSC on irc sometime the first week in January (4th - 8th). I think
+>> we should probably hold this private discussion just to organise
+>> ourselves then organise some form of public meeting later in the
+>> month to let the OE community have their say.
 >>
->>  At least one TSC member will not be there.
+>> Ultimately I think it might be a good plan to hold open meetings
+>> once a month or so. Just so people feel they can contribute to
+>> the decision making process.
+>>
+>> What do people think?
+>>
+>> Graeme
+>
+> For the public meeting, may I suggest a F2F meeting @ fosdem (feb 6/7 iirc).
 
-Unless you're talking about me, 2 members will not be there.
+FOSDEM is a difficult time for us to have official OE functions, the 
+main focus there is promoting OE to the outside world.
 
-regards,
+There are plenty of chances for face to face talks with OE developers 
+there though.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+I'm still watching airfares, sadly the airlines seem to have dropped 
+enough flights to keep prices up this year :(
 
-iD8DBQFLMPclMkyGM64RGpERAl+dAKCQWflr0AzGZMlmphWN7s8hsjT7lgCgjE6m
-shCZXTwZPkhUntbCx6VWPIk=
-=OsuA
------END PGP SIGNATURE-----
-
+Philip
 
 
