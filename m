@@ -1,27 +1,39 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NN2BB-0003cS-6e for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Dec 2009 11:41:28 +0100
-Received: from g225137190.adsl.alicedsl.de ([92.225.137.190]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NN29P-0008V5-GL for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Dec 2009 10:39:35 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1NN2oP-0005uI-Iw
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Dec 2009 12:22:00 +0100
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 6E17211000A6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Dec 2009 12:20:07 +0100 (CET)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id E57401100092
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Dec 2009 12:20:06 +0100 (CET)
+Received: from rhein.familie-heinold.de (g225074124.adsl.alicedsl.de
+	[92.225.74.124]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Dec 2009 12:20:06 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 2E4FC3C112; Tue, 22 Dec 2009 12:20:06 +0100 (CET)
+Date: Tue, 22 Dec 2009 12:20:06 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1260719335.3110.27.camel@mattotaupa.wohnung.familie-menzel.net>
-References: <1260719335.3110.27.camel@mattotaupa.wohnung.familie-menzel.net>
-Date: Tue, 22 Dec 2009 11:39:55 +0100
-Message-ID: <1261478395.3238.45.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Message-ID: <20091222112005.GA21050@rhein.zuhause.netz>
+References: <op.u5bvk31emn1qzu@guohr-laptop-ubuntu>
+MIME-Version: 1.0
+In-Reply-To: <op.u5bvk31emn1qzu@guohr-laptop-ubuntu>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 1/1] Typo. s/to used/to use/
+Subject: Re: compiling dietlibc failed when DISTRO = "minimal" and MACHINE = "qemux86"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,39 +47,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Dec 2009 10:41:28 -0000
-X-Groupsio-MsgNum: 15174
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-+Sa69XWr9ksOt8F5UwAW"
+X-List-Received-Date: Tue, 22 Dec 2009 11:22:00 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---=-+Sa69XWr9ksOt8F5UwAW
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-Am Sonntag, den 13.12.2009, 16:48 +0100 schrieb Paul Menzel:
-> Dear OE hackers,
->=20
->=20
-> please see attachment.
+sorry I didnt test it with i386 yet. But seems that the strip of diet somehow effected compilation, because
+the compilation of elftrunc segfaults now. Maybee its my patch, which let diet compile with ccache.
+And sorry that I dont have the time to look at it closer.
 
-If I did not make a mistake this should be trivial to be committed?
+Bye Henning
 
 
-Thanks,
-
-Paul
-
---=-+Sa69XWr9ksOt8F5UwAW
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkswofsACgkQPX1aK2wOHVgcGwCeKRYvuaQgooGx/6uh9dFMd9v2
-gRcAnigXlSqlsmi+mS6jnAxaddwXEb9l
-=V/KE
------END PGP SIGNATURE-----
-
---=-+Sa69XWr9ksOt8F5UwAW--
