@@ -1,27 +1,38 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from mail-pw0-f53.google.com ([209.85.160.53])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NN16f-0006rQ-9w
+	(envelope-from <andrea.adami@gmail.com>) id 1NN1xz-0000zX-0P
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Dec 2009 10:32:44 +0100
-Received: from [85.210.12.93] (helo=[192.168.2.155])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NN14r-0001oE-8U
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Dec 2009 09:30:49 +0000
-From: Phil Blundell <philb@gnu.org>
+	Tue, 22 Dec 2009 11:27:50 +0100
+Received: by pwi18 with SMTP id 18so3709420pwi.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Dec 2009 02:25:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=oCaTwUO61EKoGZY2Ahq+ObW1AgVGpkSQEBlkDouqgwk=;
+	b=IR3XqwpJkPz8euN8wXUUYPqw0sEGa79LS/JWKqEKZl6Ps2TU90S+Ldrx7QYgZxkTUm
+	LuXGBOlsRYJ598XeRh7h7jCoZiyAJxm8p5VqjU1babLO0+ko5Iovj4BzFeX5ZqSWHcot
+	s2d5Kl5RQ2jhaXRR2NZjvrWyljqGWBo1BTtas=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=VWnONweeov9H2SS2ftttyre2aPN3bdZFgaygN+f5Ln1FJUTG/m2c4qB/9x+3ut95/+
+	uHLmT8T7j4JVZI+VZgSNb/XaBGvlDBUC0pdB5ugkzZR0HJ1LEYs6KDVjmgohk6CYFI3q
+	NKUHap02CM1oDRpdwXdgojEt0owfL41nKbPBQ=
+MIME-Version: 1.0
+Received: by 10.141.1.1 with SMTP id d1mr6066374rvi.71.1261477554407; Tue, 22 
+	Dec 2009 02:25:54 -0800 (PST)
+In-Reply-To: <1260750381-15943-1-git-send-email-andrea.adami@gmail.com>
+References: <1260750381-15943-1-git-send-email-andrea.adami@gmail.com>
+Date: Tue, 22 Dec 2009 11:25:54 +0100
+Message-ID: <d1b08f940912220225s3c456f1bsfd8e1b763e254ba6@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1261448680-12334-1-git-send-email-camelguo@gmail.com>
-References: <>  <1261448680-12334-1-git-send-email-camelguo@gmail.com>
-Date: Tue, 22 Dec 2009 09:25:49 +0000
-Message-ID: <1261473949.28755.191.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-Broken-Reverse-DNS: no host name found for IP address 85.210.12.93
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+X-SA-Exim-Connect-IP: 209.85.160.53
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Modify distro/minimal.conf to use glibc and add an eglibc-based minimal distribution
+Subject: Re: [PATCH] kernel.bbclass: deploy all kind of compressed initramfs cpio images.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,21 +46,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Dec 2009 09:32:44 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Dec 2009 10:27:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, 2009-12-22 at 10:24 +0800, Guo Hongruan wrote:
-> 1. conf/distro/minimal-eglibc.conf: add minimal distribution based on eglibc.
-> 2. conf/distro/minimal.conf: use glibc instead of eglibc
-
-What's the reason for this change?  If eglibc is deficient in some way
-then I would prefer to either see it fixed, or just switch minimal back
-to using glibc generically.  I am not sure that adding another distro
-variant for this is a good idea.
-
-p.
-
-
+Bump
 
 
