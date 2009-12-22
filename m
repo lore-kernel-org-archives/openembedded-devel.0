@@ -1,26 +1,40 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-iw0-f194.google.com ([209.85.223.194])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1NN7vx-00046M-QJ
+	(envelope-from <raj.khem@gmail.com>) id 1NNAoo-0008KN-7x
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Dec 2009 17:50:09 +0100
-Received: (qmail 622 invoked by uid 1003); 22 Dec 2009 16:48:12 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 22 Dec 2009 16:48:12 -0000
-Message-ID: <4B30F84A.7080004@balister.org>
-Date: Tue, 22 Dec 2009 11:48:10 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
+	Tue, 22 Dec 2009 20:54:57 +0100
+Received: by iwn32 with SMTP id 32so4155132iwn.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Dec 2009 11:53:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=ZC1CU9G5Eit4x87J0CGQI/AqtAc7GjAW1Wp8v/RXEQQ=;
+	b=NoMSpa2fI+rMbffj/DTYFbGk5tC/GskFtsgKZWyBiRf6dKE/C2Qi7ylLKpjIV7F1rX
+	3gbmHIZeGKYOH53h1dUI4swzsOH8uqztknKuzfR8WJoJoTV4vZco+4exfCik0mJK5pH4
+	g+rgVhYKKEzydfAE/au0ATyftxurFo5Yfi6Zs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=b74IA27igmw758jHjULnh+OmJK9AmIb+8bWgu28VnZA3wh0B6adPn7Kx2d8y3AeM7Z
+	KPWef9k6SO6ztEsWCwSmabm1xkcV2dSfNbWfYJjx4dYiDXzw5/x66eM9eIPFxHyCtZ2D
+	RZJ7lDxGpLQTZ300CfsP8VN01Xa8BvPEY8ejM=
 MIME-Version: 1.0
+Received: by 10.231.169.197 with SMTP id a5mr1864545ibz.56.1261511581473; Tue, 
+	22 Dec 2009 11:53:01 -0800 (PST)
+In-Reply-To: <1261448680-12334-2-git-send-email-camelguo@gmail.com>
+References: <1261448680-12334-1-git-send-email-camelguo@gmail.com>
+	<1261448680-12334-2-git-send-email-camelguo@gmail.com>
+Date: Tue, 22 Dec 2009 11:53:01 -0800
+Message-ID: <19c1b8a90912221153l67cf16act91731ae32f6eb478@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20091222140029.GF10910@xora.vm.bytemark.co.uk>
-	<ac9c93b10912220747q2c3278b3l761fe2229f1f2873@mail.gmail.com>
-In-Reply-To: <ac9c93b10912220747q2c3278b3l761fe2229f1f2873@mail.gmail.com>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+X-SA-Exim-Connect-IP: 209.85.223.194
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [TSC] First Meeting
+Subject: Re: [PATCH] change uclibc to eglibc on comments
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,39 +48,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Dec 2009 16:50:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Dec 2009 19:54:57 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 12/22/2009 10:47 AM, Frans Meulenbroeks wrote:
-> 2009/12/22 Graeme Gregory<dp@xora.org.uk>:
->> Hi, fellow TSC members and general OE community.
->>
->> I think we should try and organise a general one hour chat of the
->> TSC on irc sometime the first week in January (4th - 8th). I think
->> we should probably hold this private discussion just to organise
->> ourselves then organise some form of public meeting later in the
->> month to let the OE community have their say.
->>
->> Ultimately I think it might be a good plan to hold open meetings
->> once a month or so. Just so people feel they can contribute to
->> the decision making process.
->>
->> What do people think?
->>
->> Graeme
+On Mon, Dec 21, 2009 at 6:24 PM, Guo Hongruan <camelguo@gmail.com> wrote:
+> ---
+> =C2=A0conf/distro/minimal-eglibc.conf | =C2=A0 14 +++++++-------
+> =C2=A0conf/distro/minimal.conf =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A0=
+2 +-
+> =C2=A02 files changed, 8 insertions(+), 8 deletions(-)
 >
-> For the public meeting, may I suggest a F2F meeting @ fosdem (feb 6/7 iirc).
+> diff --git a/conf/distro/minimal-eglibc.conf b/conf/distro/minimal-eglibc=
+.conf
+> index 5ab275b..10f271b 100644
+> --- a/conf/distro/minimal-eglibc.conf
+> +++ b/conf/distro/minimal-eglibc.conf
+> @@ -1,7 +1,7 @@
+> =C2=A0#------------------------------------------------------------------=
+-----------
+> =C2=A0#@TYPE: Distribution
+> -#@NAME: Minimal uClibc
+> -#@DESCRIPTION: uClibc based Embedded Linux Distribution Configuration (m=
+inimal)
+> +#@NAME: Minimal eglibc
+> +#@DESCRIPTION: eglibc based Embedded Linux Distribution Configuration (m=
+inimal)
+> =C2=A0#
+> =C2=A0#@COMMENT: This distribution configuration serves as a starting poi=
+nt for
+> =C2=A0#@COMMENT: the integration of new target platforms, machines, or di=
+stributions.
+> @@ -24,13 +24,13 @@ require conf/distro/minimal.conf
+> =C2=A0#
+> =C2=A0# We get the DISTRO_FEATURES defined in minimal.conf here but
+> =C2=A0# however there are some features like mips -mplt support which
+> -# is not supported on uclibc yet so we need to disable that
+> -# feature for uclibc based distributions, therefore we redefine
+> -# the DISTRO_FEATURES for minimal-uclibc and notably leave mplt
+> +# is not supported on eglibc yet so we need to disable that
+> +# feature for eglibc based distributions, therefore we redefine
+> +# the DISTRO_FEATURES for minimal-eglibc and notably leave mplt
+> =C2=A0# out. Make sure that if there is a new DISTRO_FEATURE thats added
+> -# to minimal.conf will not get included in minimal-uclibc.conf
+> +# to minimal.conf will not get included in minimal-eglibc.conf
+> =C2=A0# it has to be added to the below selection if it should also be
+> -# enabled for minimal-uclibc
+> +# enabled for minimal-eglibc
+>
+> =C2=A0# FEATURE SELECTION
+> =C2=A0###################################################################=
+##########
+> diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
+> index 00397db..d0ec876 100644
+> --- a/conf/distro/minimal.conf
+> +++ b/conf/distro/minimal.conf
+> @@ -86,7 +86,7 @@ OVERRIDES =3D "local:${MACHINE}:${MACHINE_CLASS}:${DIST=
+RO}:${TARGET_OS}:${TARGET_A
+> =C2=A0###################################################################=
+##########
+> =C2=A0# TOOLCHAIN
+> =C2=A0###################################################################=
+##########
+> -LIBC ?=3D "eglibc"
+> +LIBC ?=3D "glibc"
 
-FOSDEM is a difficult time for us to have official OE functions, the 
-main focus there is promoting OE to the outside world.
+We have intentionally switched to use eglibc as default C library for
+minimal. As you can see its a weak assignment which means
+you can still override it in you local.conf but the default is to stay as i=
+t is
 
-There are plenty of chances for face to face talks with OE developers 
-there though.
+Thanks
 
-I'm still watching airfares, sadly the airlines seem to have dropped 
-enough flights to keep prices up this year :(
-
-Philip
+-Khem
 
 
