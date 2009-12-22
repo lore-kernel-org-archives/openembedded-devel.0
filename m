@@ -1,27 +1,39 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-fx0-f216.google.com ([209.85.220.216])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1NNDX3-0002ln-T0
+	(envelope-from <martin.jansa@gmail.com>) id 1NNDoQ-0006CY-5E
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Dec 2009 23:48:49 +0100
-Received: (qmail 15998 invoked by uid 1003); 22 Dec 2009 22:46:52 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 22 Dec 2009 22:46:52 -0000
-Message-ID: <4B314C5B.8000703@balister.org>
-Date: Tue, 22 Dec 2009 17:46:51 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
-MIME-Version: 1.0
+	Wed, 23 Dec 2009 00:06:45 +0100
+Received: by fxm8 with SMTP id 8so6282409fxm.27
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Dec 2009 15:04:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=WQzw3Py00BOpilD4It2koy5NgN1Tjo+61EH7gBos9Ck=;
+	b=e5r4fJdRJc4SluxnfyB9mwgEjQVQR/xzUYZC7qDwL0pmfYHHMtAdfKFq8wcFnoaTz9
+	uAsrFIzxipzDCzt/cRpLgMDsoXt/86KMRiRcJzpaOLNHOir3rVs9xEJ924EoeMFscuuL
+	gEKKkeiyGXehhlI6sn0wsojZ2iKpzf0hAeTVs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=kW0w0XLXpjVFLFxEs+qpJFq9lOs9Kk00aTs1mElXx0PQzckSz70nUxnZH/tByOjFmq
+	3N4oYEFbrl8+BGsUMrKGWRuef2PdIYvXGyCLRi3HrsUnoLOxjtiEuuKPpuB9FWAkjK6X
+	CL8lPZ+O2JXTNSwM/tSPTK21d70xj5/FDhStI=
+Received: by 10.223.95.76 with SMTP id c12mr6651458fan.41.1261523090016;
+	Tue, 22 Dec 2009 15:04:50 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 15sm2422960fxm.2.2009.12.22.15.04.48
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 22 Dec 2009 15:04:49 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <op.u5b0cczimn1qzu@guohr-laptop-ubuntu>	<4B30E03B.1040500@mwester.net>
-	<20091222195157.GB2271@denix.org>
-	<ac9c93b10912221425g4fee3ca0kdc0257be7eb677bc@mail.gmail.com>
-In-Reply-To: <ac9c93b10912221425g4fee3ca0kdc0257be7eb677bc@mail.gmail.com>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+Date: Wed, 23 Dec 2009 00:04:16 +0100
+Message-Id: <1261523056-27211-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.6.0.4
+X-SA-Exim-Connect-IP: 209.85.220.216
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: why rootfs directory in temp is empty
+Subject: [PATCH] kernel, linux-kernel-base classes: update for 2.6.33-rc1 and newer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,41 +47,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Dec 2009 22:48:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Dec 2009 23:06:46 -0000
 
-On 12/22/2009 05:25 PM, Frans Meulenbroeks wrote:
-> 2009/12/22 Denys Dmytriyenko<denis@denix.org>:
->> On Tue, Dec 22, 2009 at 09:05:31AM -0600, Mike Westerhof wrote:
->>> Guo Hongruan wrote:
->>>> Hi guys,
->>>>    Today, I build an base-image using OE. And I want to check the content
->>>> of rootfs, but I found the directory rootfs in building directory is
->>>> empty. I remember there was the ontent of the target root filesystem.
->>>> Why have to remove them? Does it means the rootfs directory is unuseful?
->>>>
->>>> Thanks a lot!
->>>>
->>>
->>> Add IMAGE_KEEPROOTFS = "1" to your local.conf file.
->>> I'm not sure why the change was made to clean it out every build, though.
->>
->> To prevent people from using it as an NFS share and having problems.
->
-> Ehm, can you please clarify why this would cause a problem?
-> (btw if I recall correctly the rootfs is still there in the work dir,
-> and anyway you can build a rootfs in a tar.gz file and untar that).
+* include/asm link was killed in
+  http://git.kernel.org/?p=linux/kernel/git/torvalds/linux-2.6.git;a=commitdiff;h=f7f16b7799ed68654850ab340ef812895aebcf4c
+* utsrelease.h was moved in
+  http://git.kernel.org/?p=linux/kernel/git/torvalds/linux-2.6.git;a=commitdiff;h=273b281fa22c293963ee3e6eec418f5dda2dbc83
 
-Someone correct me if I get this wrong ...
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ classes/kernel.bbclass            |   19 +++++++++++++------
+ classes/linux-kernel-base.bbclass |    3 +++
+ 2 files changed, 16 insertions(+), 6 deletions(-)
 
-Since OE does not run as root, the file ownership are not suitable for 
-use as a true rootfs. During the assembly of the tarball, the file owner 
-information is "fixed" so that if you unpack the tarball as root, the 
-files have the proper owners.
+diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+index edeaa66..069dceb 100644
+--- a/classes/kernel.bbclass
++++ b/classes/kernel.bbclass
+@@ -95,13 +95,18 @@ kernel_do_compile() {
+ kernel_do_compile[depends] = "${INITRAMFS_TASK}"
+ 
+ kernel_do_stage() {
+-	ASMDIR=`readlink include/asm`
++	if [ -e include/asm ] ; then
++		# This link is generated only in kernel before 2.6.33-rc1, don't stage it for newer kernels
++		ASMDIR=`readlink include/asm`
+ 
+-	mkdir -p ${STAGING_KERNEL_DIR}/include/$ASMDIR
+-	cp -fR include/$ASMDIR/* ${STAGING_KERNEL_DIR}/include/$ASMDIR/
++		mkdir -p ${STAGING_KERNEL_DIR}/include/$ASMDIR
++		cp -fR include/$ASMDIR/* ${STAGING_KERNEL_DIR}/include/$ASMDIR/
++	fi
+ 	# Kernel 2.6.27 moved headers from includes/asm-${ARCH} to arch/${ARCH}/include/asm	
+ 	if [ -e arch/${ARCH}/include/asm/ ] ; then 
+-		cp -fR arch/${ARCH}/include/asm/* ${STAGING_KERNEL_DIR}/include/$ASMDIR/
++		if [ -e include/asm ] ; then
++			cp -fR arch/${ARCH}/include/asm/* ${STAGING_KERNEL_DIR}/include/$ASMDIR/
++		fi
+ 		install -d ${STAGING_KERNEL_DIR}/arch/${ARCH}/include
+ 		cp -fR arch/${ARCH}/* ${STAGING_KERNEL_DIR}/arch/${ARCH}/	
+ 
+@@ -112,8 +117,10 @@ kernel_do_stage() {
+ 		cp -fR arch/x86/* ${STAGING_KERNEL_DIR}/arch/x86/
+ 	fi
+ 
+-	rm -f ${STAGING_KERNEL_DIR}/include/asm
+-	ln -sf $ASMDIR ${STAGING_KERNEL_DIR}/include/asm
++	if [ -e include/asm ] ; then
++		rm -f ${STAGING_KERNEL_DIR}/include/asm
++		ln -sf $ASMDIR ${STAGING_KERNEL_DIR}/include/asm
++	fi
+ 
+ 	mkdir -p ${STAGING_KERNEL_DIR}/include/asm-generic
+ 	cp -fR include/asm-generic/* ${STAGING_KERNEL_DIR}/include/asm-generic/
+diff --git a/classes/linux-kernel-base.bbclass b/classes/linux-kernel-base.bbclass
+index b3e0fda..510951a 100644
+--- a/classes/linux-kernel-base.bbclass
++++ b/classes/linux-kernel-base.bbclass
+@@ -4,6 +4,9 @@ def get_kernelversion(p):
+ 
+     fn = p + '/include/linux/utsrelease.h'
+     if not os.path.isfile(fn):
++        # after 2.6.33-rc1
++        fn = p + '/include/generated/utsrelease.h'
++    if not os.path.isfile(fn):
+         fn = p + '/include/linux/version.h'
+ 
+     import re
+-- 
+1.6.0.4
 
-So the temporary root file system will not do what people expect.
-
-Philip
 
 
