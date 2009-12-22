@@ -1,27 +1,26 @@
-Received: from mail-bw0-f217.google.com ([209.85.218.217])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1NN5Jg-0007KD-U2
+Received: from smtpauth23.prod.mesa1.secureserver.net ([64.202.165.47])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1NN6RE-00044i-0i
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Dec 2009 15:02:28 +0100
-Received: by bwz9 with SMTP id 9so3989193bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Dec 2009 06:00:31 -0800 (PST)
-Received: by 10.204.36.194 with SMTP id u2mr4982207bkd.138.1261490431618;
-	Tue, 22 Dec 2009 06:00:31 -0800 (PST)
-Received: from xora.vm.bytemark.co.uk (www.xora.org.uk [80.68.91.202])
-	by mx.google.com with ESMTPS id 13sm1896320bwz.14.2009.12.22.06.00.30
-	(version=SSLv3 cipher=RC4-MD5); Tue, 22 Dec 2009 06:00:31 -0800 (PST)
-Date: Tue, 22 Dec 2009 14:00:29 +0000
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091222140029.GF10910@xora.vm.bytemark.co.uk>
+	Tue, 22 Dec 2009 16:14:20 +0100
+Received: (qmail 9372 invoked from network); 22 Dec 2009 15:05:42 -0000
+Received: from unknown (209.242.7.187)
+	by smtpauth23.prod.mesa1.secureserver.net (64.202.165.47) with ESMTP;
+	22 Dec 2009 15:05:42 -0000
+Message-ID: <4B30E03B.1040500@mwester.net>
+Date: Tue, 22 Dec 2009 09:05:31 -0600
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: dp@xora.org.uk
+To: openembedded-devel@lists.openembedded.org
+References: <op.u5b0cczimn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <op.u5b0cczimn1qzu@guohr-laptop-ubuntu>
+X-SA-Exim-Connect-IP: 64.202.165.47
+X-SA-Exim-Mail-From: mike@mwester.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [TSC] First Meeting
+Subject: Re: why rootfs directory in temp is empty
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,25 +34,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Dec 2009 14:02:28 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 22 Dec 2009 15:14:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hi, fellow TSC members and general OE community.
+Guo Hongruan wrote:
+> Hi guys,
+>   Today, I build an base-image using OE. And I want to check the content
+> of rootfs, but I found the directory rootfs in building directory is
+> empty. I remember there was the ontent of the target root filesystem.
+> Why have to remove them? Does it means the rootfs directory is unuseful?
+> 
+> Thanks a lot!
+> 
 
-I think we should try and organise a general one hour chat of the
-TSC on irc sometime the first week in January (4th - 8th). I think
-we should probably hold this private discussion just to organise
-ourselves then organise some form of public meeting later in the
-month to let the OE community have their say.
+Add IMAGE_KEEPROOTFS = "1" to your local.conf file.
+I'm not sure why the change was made to clean it out every build, though.
 
-Ultimately I think it might be a good plan to hold open meetings
-once a month or so. Just so people feel they can contribute to
-the decision making process.
-
-What do people think?
-
-Graeme
-
+-Mike (mwester)
 
 
