@@ -1,38 +1,39 @@
-Received: from mail-fx0-f216.google.com ([209.85.220.216])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1NNRfM-0005Zx-I9
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NNSGB-0004eh-1I for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Dec 2009 15:32:22 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NNSEN-0006af-4s
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Dec 2009 14:54:19 +0100
-Received: by fxm8 with SMTP id 8so6737336fxm.27
+	Wed, 23 Dec 2009 15:30:27 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Dec 2009 15:30:27 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Dec 2009 05:52:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=jKYnAko3VSZ7n49Z47tUfYt67zz6GdSBBw21wtZoU+4=;
-	b=k5mLIg5yup0yeTkwOWnLqlDkk1LtJk7Wqv7j5xB/1yG6qYsHg5TxwCZHCVTOz3GNP8
-	yn+/TaTRcc/pBjVKBqyjUShWchWk0nrDOJwclIuhsfb9pUraqwACnBGHzu3QyFYpntDJ
-	VDZ1IGI5i/FGgsKMf9STXxhiazYswd0X+2/Og=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=RN3IAbDhWf4bAGhKDI/EJTiS9N3oeB3pNR/cMWCOhMxeEJqzSKqIO/uKzUln3LxdX9
-	vg9CDeIzbv39ANdiOuQV4ZRX+CdOS+hcQDCBcb+Db5o5dBj933Nm6W1xIHSDMldm3nCs
-	jtWUxe/g/q5Ps2nDUlMepvOE9mqi5zFKOzZNw=
-MIME-Version: 1.0
-Received: by 10.239.139.39 with SMTP id r39mr1153035hbr.116.1261576343847; 
-	Wed, 23 Dec 2009 05:52:23 -0800 (PST)
-In-Reply-To: <1261448680-12334-1-git-send-email-camelguo@gmail.com>
-References: <1261448680-12334-1-git-send-email-camelguo@gmail.com>
-Date: Wed, 23 Dec 2009 14:52:23 +0100
-Message-ID: <c384c5ea0912230552o1d62883bte754fcc5da4b8d69@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
+	Wed, 23 Dec 2009 15:30:27 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.216
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 23 Dec 2009 15:30:00 +0100
+Message-ID: <hgt9h8$25m$1@ger.gmane.org>
+References: <200912190854.11510.holger+oe@freyther.de>
+	<hglsin$2vi$2@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.5) Gecko/20091220 Shredder/3.0.1pre
+In-Reply-To: <hglsin$2vi$2@ger.gmane.org>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Modify distro/minimal.conf to use glibc and add an eglibc-based minimal distribution
+Subject: Re: Qt4 GLES (once again)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,22 +47,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Dec 2009 13:54:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 23 Dec 2009 14:32:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Tue, Dec 22, 2009 at 3:24 AM, Guo Hongruan <camelguo@gmail.com> wrote:
-> 1. conf/distro/minimal-eglibc.conf: add minimal distribution based on eglibc.
-> 2. conf/distro/minimal.conf: use glibc instead of eglibc
+On 20-12-09 20:05, Koen Kooi wrote:
+> On 19-12-09 08:54, Holger Hans Peter Freyther wrote:
+>> Hi Koen, All,
+>>
+>> we have the GLES problem once again in the Qt4 recipes. My opinion is
+>> still
+>> the same that a "bitbake meta-toolchain-qte" should work without
+>> requiring
+>> downloading proprietary stuff from TI/PowerVR.
+> 
+> Exactly
+> 
+>>  From what I think to know, the only difference between GLES and the
+>> non GLES
+>> recipe is that we have one plugin more. Koen could you help me to
+>> verify that?
+> 
+> For qt/e it's one plugin more (a gfxdriver) and library (openvg) and for
+> qt/x11 it's one plugin (gldriver) + 2 libs (opengl + openvg) more.
 
-NAK.
+It looks like it also changes stuff in libQtGui(E) :(
 
-OE is not supposed to have a different distribution file name for each
-for the variants.
+regards,
 
-Regards,
--- 
-Leon
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLMiloMkyGM64RGpERAsCYAKCu7ora2XgofUYjPZaznsbySr8x2QCglffO
+97qYBGfnD1kQZYXvVm4/sNk=
+=FvSK
+-----END PGP SIGNATURE-----
+
 
 
