@@ -1,26 +1,35 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from mail-fx0-f216.google.com ([209.85.220.216])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NNNRx-0008VM-RL
+	(envelope-from <leon.woestenberg@gmail.com>) id 1NNRfM-0005Zx-I9
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Dec 2009 10:24:14 +0100
-Received: from [85.210.12.93] (helo=[192.168.2.155])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NNNQ9-00016z-5F
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Dec 2009 09:22:17 +0000
-From: Phil Blundell <philb@gnu.org>
+	Wed, 23 Dec 2009 14:54:19 +0100
+Received: by fxm8 with SMTP id 8so6737336fxm.27
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Dec 2009 05:52:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=jKYnAko3VSZ7n49Z47tUfYt67zz6GdSBBw21wtZoU+4=;
+	b=k5mLIg5yup0yeTkwOWnLqlDkk1LtJk7Wqv7j5xB/1yG6qYsHg5TxwCZHCVTOz3GNP8
+	yn+/TaTRcc/pBjVKBqyjUShWchWk0nrDOJwclIuhsfb9pUraqwACnBGHzu3QyFYpntDJ
+	VDZ1IGI5i/FGgsKMf9STXxhiazYswd0X+2/Og=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=RN3IAbDhWf4bAGhKDI/EJTiS9N3oeB3pNR/cMWCOhMxeEJqzSKqIO/uKzUln3LxdX9
+	vg9CDeIzbv39ANdiOuQV4ZRX+CdOS+hcQDCBcb+Db5o5dBj933Nm6W1xIHSDMldm3nCs
+	jtWUxe/g/q5Ps2nDUlMepvOE9mqi5zFKOzZNw=
+MIME-Version: 1.0
+Received: by 10.239.139.39 with SMTP id r39mr1153035hbr.116.1261576343847; 
+	Wed, 23 Dec 2009 05:52:23 -0800 (PST)
+In-Reply-To: <1261448680-12334-1-git-send-email-camelguo@gmail.com>
+References: <1261448680-12334-1-git-send-email-camelguo@gmail.com>
+Date: Wed, 23 Dec 2009 14:52:23 +0100
+Message-ID: <c384c5ea0912230552o1d62883bte754fcc5da4b8d69@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <op.u5c91ae4mn1qzu@guohr-laptop-ubuntu>
-References: <> <1261448680-12334-1-git-send-email-camelguo@gmail.com>
-	<1261473949.28755.191.camel@lenovo.internal.reciva.com>
-	<op.u5c91ae4mn1qzu@guohr-laptop-ubuntu>
-Date: Wed, 23 Dec 2009 09:22:15 +0000
-Message-ID: <1261560135.28755.207.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-Broken-Reverse-DNS: no host name found for IP address 85.210.12.93
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+X-SA-Exim-Connect-IP: 209.85.220.216
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [PATCH] Modify distro/minimal.conf to use glibc and add an eglibc-based minimal distribution
@@ -37,20 +46,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Dec 2009 09:24:17 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 23 Dec 2009 13:54:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, 2009-12-23 at 09:21 +0800, Guo Hongruan wrote:
-> No, it is not a bug. I just want to specify the libc type explicitly in  
-> the distribution name.
+Hello,
 
-This isn't what your patch does, though: it changes the "minimal" distro
-from eglibc to glibc.  Are you saying that this isn't what you actually
-wanted to do?
+On Tue, Dec 22, 2009 at 3:24 AM, Guo Hongruan <camelguo@gmail.com> wrote:
+> 1. conf/distro/minimal-eglibc.conf: add minimal distribution based on eglibc.
+> 2. conf/distro/minimal.conf: use glibc instead of eglibc
 
-p.
+NAK.
 
+OE is not supposed to have a different distribution file name for each
+for the variants.
 
+Regards,
+-- 
+Leon
 
 
