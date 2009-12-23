@@ -1,39 +1,50 @@
-Received: from mail-iw0-f194.google.com ([209.85.223.194])
+Received: from mail-px0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NNFlP-0000qE-Rm
+	(envelope-from <camelguo@gmail.com>) id 1NNFsA-0003e5-FJ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Dec 2009 02:11:47 +0100
-Received: by iwn32 with SMTP id 32so4310123iwn.24
+	Wed, 23 Dec 2009 02:18:45 +0100
+Received: by pxi12 with SMTP id 12so3265981pxi.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Dec 2009 17:09:51 -0800 (PST)
+	Tue, 22 Dec 2009 17:16:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=UU2WnW2MNbKaUFVYh7gl6KukSJQfakCdrURypAiLRAA=;
-	b=uceRrlyUC7G9hmS4Ad73XkecFwu5z9mXW6Dso46eGBSi1rz/85PGjDi31ZlnUy/htL
-	2aorKs2E3l2yn5P4J23zCDJB4nDEJl8LWyY0gLCqVgoIQhThJTxDRTxdvJ8FKZKV2qSp
-	rAqcGxOio7X+vzS5qXgFxeK5CN5H6HbaN2HXc=
+	h=domainkey-signature:received:received:content-type:to:subject
+	:references:date:mime-version:content-transfer-encoding:from
+	:organization:message-id:in-reply-to:user-agent;
+	bh=FwmkraZmK1Hw+2Gym15ULbNFlVlys2M7Y0Ug6HaILQA=;
+	b=iPxmZPfsxDDgotbLODR5aDiq5vfheIkr1dWDQJyn9gHdoxkInIoukPvGCMpvZff9FX
+	JsIIYaSiaiegyPj0Pb2ujsTotXbnhEHSF1QuKinjPRWnweythnNnyTInzxU+wJOi/4xv
+	lq/ji/dvN8knr9cuJQhSOpfy6Q2cL3arKg4ao=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=g1VDq6cP+S0ZIfXFDF2Wqg6J6A3jhBJ2JEvRCBcv+BwonMbA0GxyAGURBicxVSGm1w
-	yMU15ZxhQifJEuWaEFb6NU7WjupAKSUNORTMOhw5DzIfiBMl+LKqhXS/ZWgrkgcFCOXj
-	OSufV0+RpQEUzv98vdIlJamcFzS/JPWzOXxPg=
-MIME-Version: 1.0
-Received: by 10.231.167.204 with SMTP id r12mr486972iby.31.1261530590966; Tue, 
-	22 Dec 2009 17:09:50 -0800 (PST)
-In-Reply-To: <1261523056-27211-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1261523056-27211-1-git-send-email-Martin.Jansa@gmail.com>
-Date: Tue, 22 Dec 2009 17:09:50 -0800
-Message-ID: <19c1b8a90912221709sb14dd6aj5b53657b5c56af49@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	h=content-type:to:subject:references:date:mime-version
+	:content-transfer-encoding:from:organization:message-id:in-reply-to
+	:user-agent;
+	b=c6EIiC8OnmlcP281tXkdLxX/mVUZAkB16eRxxQgOHcAiNT6hxTuB06GfXwsxurgaED
+	MrRPU4QbtgBs28MQZGnWcuwdTC23v0JYcyr+eNrijF94s0ANqELI+psgPWJF06o3Cvhc
+	POhgzdl7JZJsEFXNuu7m+E/56mGDv+sMaLbf4=
+Received: by 10.140.255.13 with SMTP id c13mr6644457rvi.211.1261531006122;
+	Tue, 22 Dec 2009 17:16:46 -0800 (PST)
+Received: from guohr-laptop-ubuntu ([123.162.69.196])
+	by mx.google.com with ESMTPS id 23sm6471682pzk.0.2009.12.22.17.16.43
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 22 Dec 2009 17:16:45 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.194
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <op.u5b0cczimn1qzu@guohr-laptop-ubuntu>
+	<4B30E03B.1040500@mwester.net> <20091222195157.GB2271@denix.org>
+	<ac9c93b10912221425g4fee3ca0kdc0257be7eb677bc@mail.gmail.com>
+	<4B314C5B.8000703@balister.org>
+	<19c1b8a90912221707u113e5e4eie71ca721702e4551@mail.gmail.com>
+Date: Wed, 23 Dec 2009 09:16:31 +0800
+MIME-Version: 1.0
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u5c9tnq2mn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <19c1b8a90912221707u113e5e4eie71ca721702e4551@mail.gmail.com>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.216.182
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] kernel, linux-kernel-base classes: update for 	2.6.33-rc1 and newer
+Subject: Re: why rootfs directory in temp is empty
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,109 +58,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Dec 2009 01:11:47 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 23 Dec 2009 01:18:45 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: Quoted-Printable
 
-On Tue, Dec 22, 2009 at 3:04 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
-e:
-> * include/asm link was killed in
-> =C2=A0http://git.kernel.org/?p=3Dlinux/kernel/git/torvalds/linux-2.6.git;=
-a=3Dcommitdiff;h=3Df7f16b7799ed68654850ab340ef812895aebcf4c
-> * utsrelease.h was moved in
-> =C2=A0http://git.kernel.org/?p=3Dlinux/kernel/git/torvalds/linux-2.6.git;=
-a=3Dcommitdiff;h=3D273b281fa22c293963ee3e6eec418f5dda2dbc83
->
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Yea, I understand. Thanks a lot.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+I used to check the rootfs directory quickly, to verify whether or not  =
 
-> ---
-> =C2=A0classes/kernel.bbclass =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =
-=C2=A0 19 +++++++++++++------
-> =C2=A0classes/linux-kernel-base.bbclass | =C2=A0 =C2=A03 +++
-> =C2=A02 files changed, 16 insertions(+), 6 deletions(-)
+some packages have been installed correctly and to check the rootfs size=
+.  =
+
+So when I can not find it as usual, I am amazing.
+
+Thank all of you.
+
+=E5=9C=A8 Wed, 23 Dec 2009 09:07:42 +0800=EF=BC=8CKhem Raj <raj.khem@gma=
+il.com> =E5=86=99=E9=81=93:
+
+> On Tue, Dec 22, 2009 at 2:46 PM, Philip Balister <philip@balister.org>=
+  =
+
+> wrote:
+>> On 12/22/2009 05:25 PM, Frans Meulenbroeks wrote:
+>>>
+>>> 2009/12/22 Denys Dmytriyenko<denis@denix.org>:
+>>>>
+>>>> On Tue, Dec 22, 2009 at 09:05:31AM -0600, Mike Westerhof wrote:
+>>>>>
+>>>>> Guo Hongruan wrote:
+>>>>>>
+>>>>>> Hi guys,
+>>>>>>   Today, I build an base-image using OE. And I want to check the
+>>>>>> content
+>>>>>> of rootfs, but I found the directory rootfs in building directory=
+ is
+>>>>>> empty. I remember there was the ontent of the target root  =
+
+>>>>>> filesystem.
+>>>>>> Why have to remove them? Does it means the rootfs directory is
+>>>>>> unuseful?
+>>>>>>
+>>>>>> Thanks a lot!
+>>>>>>
+>>>>>
+>>>>> Add IMAGE_KEEPROOTFS =3D "1" to your local.conf file.
+>>>>> I'm not sure why the change was made to clean it out every build,
+>>>>> though.
+>>>>
+>>>> To prevent people from using it as an NFS share and having problems=
+.
+>>>
+>>> Ehm, can you please clarify why this would cause a problem?
+>>> (btw if I recall correctly the rootfs is still there in the work dir=
+,
+>>> and anyway you can build a rootfs in a tar.gz file and untar that).
+>>
+>> Someone correct me if I get this wrong ...
+>>
+>> Since OE does not run as root, the file ownership are not suitable fo=
+r  =
+
+>> use
+>> as a true rootfs. During the assembly of the tarball, the file owner
+>> information is "fixed" so that if you unpack the tarball as root, the=
+  =
+
+>> files
+>> have the proper owners.
+>>
+>> So the temporary root file system will not do what people expect.
 >
-> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-> index edeaa66..069dceb 100644
-> --- a/classes/kernel.bbclass
-> +++ b/classes/kernel.bbclass
-> @@ -95,13 +95,18 @@ kernel_do_compile() {
-> =C2=A0kernel_do_compile[depends] =3D "${INITRAMFS_TASK}"
+> This is the real cause. Always use the tar file to populate the
+> root file system even if it is to be nfs mounted
 >
-> =C2=A0kernel_do_stage() {
-> - =C2=A0 =C2=A0 =C2=A0 ASMDIR=3D`readlink include/asm`
-> + =C2=A0 =C2=A0 =C2=A0 if [ -e include/asm ] ; then
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 # This link is generat=
-ed only in kernel before 2.6.33-rc1, don't stage it for newer kernels
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ASMDIR=3D`readlink inc=
-lude/asm`
->
-> - =C2=A0 =C2=A0 =C2=A0 mkdir -p ${STAGING_KERNEL_DIR}/include/$ASMDIR
-> - =C2=A0 =C2=A0 =C2=A0 cp -fR include/$ASMDIR/* ${STAGING_KERNEL_DIR}/inc=
-lude/$ASMDIR/
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 mkdir -p ${STAGING_KER=
-NEL_DIR}/include/$ASMDIR
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cp -fR include/$ASMDIR=
-/* ${STAGING_KERNEL_DIR}/include/$ASMDIR/
-> + =C2=A0 =C2=A0 =C2=A0 fi
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0# Kernel 2.6.27 moved headers from includes/as=
-m-${ARCH} to arch/${ARCH}/include/asm
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0if [ -e arch/${ARCH}/include/asm/ ] ; then
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 cp -fR arch/${ARCH}/in=
-clude/asm/* ${STAGING_KERNEL_DIR}/include/$ASMDIR/
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if [ -e include/asm ] =
-; then
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 cp -fR arch/${ARCH}/include/asm/* ${STAGING_KERNEL_DIR}/include/$ASM=
-DIR/
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 fi
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0install -d ${STAGI=
-NG_KERNEL_DIR}/arch/${ARCH}/include
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cp -fR arch/${ARCH=
-}/* ${STAGING_KERNEL_DIR}/arch/${ARCH}/
->
-> @@ -112,8 +117,10 @@ kernel_do_stage() {
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0cp -fR arch/x86/* =
-${STAGING_KERNEL_DIR}/arch/x86/
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
->
-> - =C2=A0 =C2=A0 =C2=A0 rm -f ${STAGING_KERNEL_DIR}/include/asm
-> - =C2=A0 =C2=A0 =C2=A0 ln -sf $ASMDIR ${STAGING_KERNEL_DIR}/include/asm
-> + =C2=A0 =C2=A0 =C2=A0 if [ -e include/asm ] ; then
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 rm -f ${STAGING_KERNEL=
-_DIR}/include/asm
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ln -sf $ASMDIR ${STAGI=
-NG_KERNEL_DIR}/include/asm
-> + =C2=A0 =C2=A0 =C2=A0 fi
->
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0mkdir -p ${STAGING_KERNEL_DIR}/include/asm-gen=
-eric
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0cp -fR include/asm-generic/* ${STAGING_KERNEL_=
-DIR}/include/asm-generic/
-> diff --git a/classes/linux-kernel-base.bbclass b/classes/linux-kernel-bas=
-e.bbclass
-> index b3e0fda..510951a 100644
-> --- a/classes/linux-kernel-base.bbclass
-> +++ b/classes/linux-kernel-base.bbclass
-> @@ -4,6 +4,9 @@ def get_kernelversion(p):
->
-> =C2=A0 =C2=A0 fn =3D p + '/include/linux/utsrelease.h'
-> =C2=A0 =C2=A0 if not os.path.isfile(fn):
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0# after 2.6.33-rc1
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0fn =3D p + '/include/generated/utsrelease.h'
-> + =C2=A0 =C2=A0if not os.path.isfile(fn):
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 fn =3D p + '/include/linux/version.h'
->
-> =C2=A0 =C2=A0 import re
-> --
-> 1.6.0.4
->
+> -Khem
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
+
+
+
+-- =
+
+Guo Hongruan, Embedded Linux Consultant
+Mobile: +86-0-13484056007
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
 
