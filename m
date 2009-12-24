@@ -1,41 +1,40 @@
-Received: from mail-pz0-f192.google.com ([209.85.222.192])
+Received: from gate.tarent.de ([212.79.178.249] helo=ugs.tarent.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NNkDS-0006U4-IB
+	(envelope-from <thebohemian@gmx.net>) id 1NNl0k-0006sP-3K
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Dec 2009 10:42:47 +0100
-Received: by pzk30 with SMTP id 30so5538173pzk.24
+	Thu, 24 Dec 2009 11:33:41 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id 5B009400083CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Dec 2009 01:40:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=4HT3J/Z9T+PilmBhod6n1O4hepRX+Op2yPr8vwJbzRg=;
-	b=bHCWiWOVT4HUCFZQRdNJEjCX/n8MIlFZ0Z5ukjLwYGvAc+Vt8Vl/bD5bb5CKzu/hhj
-	avuWEfd3Mql6fBPdD5nMOgxY5Q/lBCFeIkI9E1b5sFjAUott9IZc33icQp355TmEaTwx
-	teO0AyQbsrdsgQ16fVUgr7Z/5whB7J7H9zyXs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=JCDt6cw6vjZogQ1c9QUs3FmJNKCv/N7EBdU9VMVBcVcembPri9Mjmby3aX20H+kkLS
-	1A9wPxxUGNlriszysSnGwB38HX5pItm6v4Slc9yJvNDxtGNKN/G+ZGibbOmNaGtMBVmN
-	Patc2/YGz21JJdCHt/fBovrKevAIaLw0kX/0U=
-Received: by 10.141.89.4 with SMTP id r4mr7916554rvl.217.1261647648208;
-	Thu, 24 Dec 2009 01:40:48 -0800 (PST)
-Received: from localhost ([123.162.69.101])
-	by mx.google.com with ESMTPS id 22sm7626217pzk.6.2009.12.24.01.40.46
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 24 Dec 2009 01:40:47 -0800 (PST)
-From: Guo Hongruan <camelguo@gmail.com>
+	Thu, 24 Dec 2009 11:31:44 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id 2B51D400083FC
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Dec 2009 11:31:44 +0100 (CET)
+X-Virus-Scanned: by amavisd-new-2.4.2 (20060627) (Debian) at tarent.de
+Received: from ugs.tarent.de ([127.0.0.1])
+	by localhost (ugs.tarent.de [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id SrOBwW6KCc8V
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Dec 2009 11:31:43 +0100 (CET)
+Received: from [192.168.4.51] (entw2.tarent.buero [192.168.4.51])
+	by ugs.tarent.de (Postfix) with ESMTP id A6CFA400083CC
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Dec 2009 11:31:43 +0100 (CET)
+Message-ID: <4B334316.6020006@gmx.net>
+Date: Thu, 24 Dec 2009 11:31:50 +0100
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Dec 2009 17:40:39 +0800
-Message-Id: <1261647639-12424-1-git-send-email-camelguo@gmail.com>
-X-Mailer: git-send-email 1.5.4.3
-In-Reply-To: <>
-References: <>
-X-SA-Exim-Connect-IP: 209.85.222.192
-X-SA-Exim-Mail-From: camelguo@gmail.com
+References: <200912071959.19252.marcin@juszkiewicz.com.pl>
+In-Reply-To: <200912071959.19252.marcin@juszkiewicz.com.pl>
+X-Enigmail-Version: 0.95.7
+X-SA-Exim-Connect-IP: 212.79.178.249
+X-SA-Exim-Mail-From: thebohemian@gmx.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] Remove ANGSTROM_FEED_CONFIGS reference in base-image.bb
+Subject: Re: Java handling in OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,31 +48,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Dec 2009 09:42:47 -0000
+X-List-Received-Date: Thu, 24 Dec 2009 10:33:41 -0000
+X-Groupsio-MsgNum: 15220
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig925946B1B7DB4E3985248A2F"
 
-Rmove ANGSTROM_FEED_CONFIGS reference in recipes/images/base-image.bb, so that it is distro-independent.
----
- recipes/images/base-image.bb |    3 +--
- 1 files changed, 1 insertions(+), 2 deletions(-)
+--------------enig925946B1B7DB4E3985248A2F
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/recipes/images/base-image.bb b/recipes/images/base-image.bb
-index 295e0ed..8b1ed23 100644
---- a/recipes/images/base-image.bb
-+++ b/recipes/images/base-image.bb
-@@ -22,10 +22,9 @@ DISTRO_SSH_DAEMON ?= "dropbear"
- 
- DISTRO_PACKAGE_MANAGER ?= "ipkg ipkg-collateral"
- 
--# FIXME: We need a distro-indendent way of specifying feed configs.
- # Once the RFC for the DISTRO_FEED_CONFIGS variable name is approved,
- # we can remove this default definition and set it in the distro config.
--DISTRO_FEED_CONFIGS ?= "${ANGSTROM_FEED_CONFIGS}"
-+DISTRO_FEED_CONFIGS ?= ""
- 
- DEPENDS = "\
- 	task-boot \
--- 
-1.5.4.3
+Hi Marcin,
+I am all fine with this change. However shouldn't the Jars end up in
+something
+like all-angstrom-foobar/usr/share/java then?
+
+The second problem is native staging. In case 'inherit native' is active
+STAGING_DIR_JAVA
+needs to be changed to point into something like x86_64/usr/share/java.
+Its a one
+line change I am committing to org.oe.dev. It should be applied to the
+stable branch as well:
+
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Da0bed236d=
+b2e2bc4beace697809eab8db9e51e01
+
+Regards,
+Robert
+
+Marcin Juszkiewicz schrieb:
+> Hi
+>
+> For most of time I do builds of BugLabs software for just one device: B=
+UG=20
+> which uses i.mx31 cpu (armv6). As I need to test it also on BeagleBoard=
+ I got=20
+> hit by one problem when it comes to building Java software...
+>
+> As Java is target independent we package it as "all". But the problem i=
+s when=20
+> build want to get JAR files built from other recipes (think dependencie=
+s). By=20
+> default all those jars are staged into target staging (armv6-angstrom-l=
+inux-
+> gnueabi in this case). It works fine as long as you do not want to buil=
+d for=20
+> other architecture in same tmpdir.
+>
+> After MACHINE change OE thinks (correctly) that it does not need to bui=
+ld Java=20
+> things again (as it was PACKAGE_ARCH=3D"all") and tries to use it from =
+staging.=20
+> But staging/usr/share/java/ dir is empty...
+>
+> OK, someone can say "but what is a deal? it got built before so you can=
+ just=20
+> install packages - they are 'all' anyway". Sure, but some of our Java r=
+ecipes=20
+> are bind to BUG kernel services so can not be built for other devices a=
+nd we=20
+> do not want to be forced to keep MACHINE values in specific order to 'm=
+aybe=20
+> this will work' way of building.
+>
+> What is a solution? I had few ideas during weekend and tested two of th=
+em.
+>
+> 1. Drop PACKAGE_ARCH=3D"all" for ALL Java recipes. It works but adds ex=
+tra
+>    building time.
+>
+> 2. Change staging of JAR files. This worked fine for my build. Patch to=
+
+>    stable/2009 branch attached.
+>
+> Please test and reply what do you think about it. I did tests with BugL=
+abs=20
+> meta-bug/ overlay [1] (concierge and some of bug-osgi are good test tar=
+gets).
+>
+> 1. svn://svn.buglabs.net/bug/trunk/com.buglabs.build.oe/meta-bug/
+>
+> Regards,=20
+>  =20
+> -----------------------------------------------------------------------=
+-
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
+--------------enig925946B1B7DB4E3985248A2F
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEARECAAYFAkszQxcACgkQG9cfwmwwEtoS3QCfSl8xwcLwyPHLsTBkDp51T4pC
+9j4An1stVPsBZTIH+iP/JhHnHD9oA/t9
+=WYbY
+-----END PGP SIGNATURE-----
+
+--------------enig925946B1B7DB4E3985248A2F--
