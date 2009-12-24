@@ -1,22 +1,44 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-pz0-f192.google.com ([209.85.222.192])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1NNnF8-0002Me-12
+	(envelope-from <camelguo@gmail.com>) id 1NNnfU-00033p-UD
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Dec 2009 13:56:41 +0100
-Received: (qmail 19324 invoked by uid 1003); 24 Dec 2009 12:54:43 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 24 Dec 2009 12:54:43 -0000
-Message-ID: <4B336493.9060706@balister.org>
-Date: Thu, 24 Dec 2009 07:54:43 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
-MIME-Version: 1.0
+	Thu, 24 Dec 2009 14:23:56 +0100
+Received: by pzk30 with SMTP id 30so5623991pzk.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Dec 2009 05:21:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:content-type:to:subject
+	:references:date:mime-version:content-transfer-encoding:from
+	:organization:message-id:in-reply-to:user-agent;
+	bh=2z/XBeIPDN1X4YJdhysk/sg+8murWeq8DMFenTdB+uo=;
+	b=lOMsZCFn8KeqDGeOOHcz67dNW395DhChwESktBPYA4A4VRDqSsavHFL0/2aSVTzD1b
+	fMRK3hAnJbeUiAfWGibAPQ4x3S+kAMzaXLcnu8r6hAhxIHQk+gv2pFjUSGlZRiTKiEEe
+	phMbDjGK5sWpOxNur141YZHP9bcRSr223BCXY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=content-type:to:subject:references:date:mime-version
+	:content-transfer-encoding:from:organization:message-id:in-reply-to
+	:user-agent;
+	b=daEp0XFxHPu8KcljSlAdYVYmBnsTRtLuULI8m3VWgSWzJnrAoeGbDL14hWslnfdAB3
+	SuifJ09ckJhF9tfYL3hulyLzb8noM5JTFanYrCTNbCfuurSVPeUOhMF9vjmBehMnbfr1
+	9r0DUf3kKV0oRw6nmPOA5tPChCf1AJdYFPL9k=
+Received: by 10.141.89.11 with SMTP id r11mr8156397rvl.285.1261660918385;
+	Thu, 24 Dec 2009 05:21:58 -0800 (PST)
+Received: from guohr-laptop-ubuntu ([123.162.69.101])
+	by mx.google.com with ESMTPS id 22sm7782993pzk.2.2009.12.24.05.21.55
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 24 Dec 2009 05:21:57 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
 References: <op.u5fqn7fimn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <op.u5fqn7fimn1qzu@guohr-laptop-ubuntu>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+	<4B336493.9060706@balister.org>
+Date: Thu, 24 Dec 2009 21:21:51 +0800
+MIME-Version: 1.0
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u5f12pnlmn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <4B336493.9060706@balister.org>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.222.192
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: auto report bug onto bugzilla when building failure
@@ -33,23 +55,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Dec 2009 12:56:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 24 Dec 2009 13:23:56 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: Quoted-Printable
 
-On 12/24/2009 04:15 AM, Guo Hongruan wrote:
-> Hi guys?
-> I found seppuku.bbclass and have some question about it.
+Yes, I understand that
+
+=E5=9C=A8 Thu, 24 Dec 2009 20:54:43 +0800=EF=BC=8CPhilip Balister <phili=
+p@balister.org>  =
+
+=E5=86=99=E9=81=93:
+
+> On 12/24/2009 04:15 AM, Guo Hongruan wrote:
+>> Hi guys?
+>> I found seppuku.bbclass and have some question about it.
+>>
+>> 1. Is it used to report building bug onto bugzilla automatically?
+>> 2. If so, anyone can give me some hint about how to use it?
+>> 3. will the bugzilla it reports automatically be related with
+>> http://tinderbox.openembedded.net/?
 >
-> 1. Is it used to report building bug onto bugzilla automatically?
-> 2. If so, anyone can give me some hint about how to use it?
-> 3. will the bugzilla it reports automatically be related with
-> http://tinderbox.openembedded.net/?
+> We found that automatically reporting things into bugzilla was not suc=
+h  =
 
-We found that automatically reporting things into bugzilla was not such 
-a good idea. You end up with a lot of "bugs" that are user configuration 
-issues that end up being hard to close without being arbitrary.
+> a good idea. You end up with a lot of "bugs" that are user configurati=
+on  =
 
-Philip
+> issues that end up being hard to close without being arbitrary.
+>
+> Philip
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
+
+
+
+-- =
+
+Guo Hongruan, Embedded Linux Consultant
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
 
