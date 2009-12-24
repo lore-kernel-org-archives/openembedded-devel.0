@@ -1,40 +1,49 @@
-Received: from mail-yw0-f188.google.com ([209.85.211.188])
+Received: from mail-gx0-f215.google.com ([209.85.217.215])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NNfQc-0001dl-FT
+	(envelope-from <camelguo@gmail.com>) id 1NNgH0-0002AN-U7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Dec 2009 05:36:01 +0100
-Received: by ywh26 with SMTP id 26so7820365ywh.12
+	Thu, 24 Dec 2009 06:30:10 +0100
+Received: by gxk7 with SMTP id 7so16762641gxk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Dec 2009 20:34:04 -0800 (PST)
+	Wed, 23 Dec 2009 21:28:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=nl2KooRJ5ypeTWcvpNYxFRMS575UrabY2XVfrZBtUwM=;
-	b=EoZSVmaOeJB580P2aD1iL30DmSEJ34pHTBmKuoqjjfpWrHNYStEyZrJWoHOVzTzfm8
-	cl1v3pAF/VmLgpaJd+OvbBLMVBrBcCz2CBvH3GyN1VGkY1C1mxVqQ6yoD+BW86LLr+RM
-	g4bnSl/GpTpAd0MHtFuRjteiWNl5qkYQQnTek=
+	h=domainkey-signature:received:received:content-type:to:subject
+	:references:date:mime-version:content-transfer-encoding:from
+	:organization:message-id:in-reply-to:user-agent;
+	bh=fxR/aQzcnYf9hEwkwmaHCQ99c90lnrlybeAuqoPj/dc=;
+	b=X3WT2beMzGbbhAV8/pZOcWjUjfHKk9L0QFYECEua23Kxvw/2HaJyTyyl/cShctxvkk
+	oNn3nGGfyanJ9Co4xWfBhzg7xxfVVHy0xoREHs27opbUEr3eLlTpLq4sCS5m80n1M+sN
+	rDsdgWwHWwjGjo8LkqK7iZ5rnsNb7pYrQkF1o=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=CxDxHvYFhwnrU2KOdeoi0JLMIhV96kQV8+DmxzyrqTV8lAs93llgmQZv+FSkiB3Liy
-	PqAQRNLpP3gtVYIPDqb/6FYZQCjjILzO0KIynxyu8RTJTPL8G5ce6PVKplHuH/SEKgYK
-	zJBo0epr/bmnCa+viigFaMYhGmFw5qjLifFgY=
-Received: by 10.150.117.39 with SMTP id p39mr16881605ybc.48.1261629244354;
-	Wed, 23 Dec 2009 20:34:04 -0800 (PST)
-Received: from localhost (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id 6sm3033758ywc.39.2009.12.23.20.34.03
+	h=content-type:to:subject:references:date:mime-version
+	:content-transfer-encoding:from:organization:message-id:in-reply-to
+	:user-agent;
+	b=W2coyG026NMJhmgG7M3RHbgvHnmSlZhcset3jlGMEnFgquWp6HVNfGD8zPBEDoWg9I
+	HOKSc6X/EqlGKuJj3OVYUEZaEuJNpkoKTZ/hoAFLtwi7dXkQI5TFaTyr4EXAR3/h1k8W
+	R801acAD7YRamSDPAp4Q8yGGYGz00R3qEnohY=
+Received: by 10.100.234.26 with SMTP id g26mr9170680anh.38.1261632492767;
+	Wed, 23 Dec 2009 21:28:12 -0800 (PST)
+Received: from guohr-laptop-ubuntu ([123.162.69.101])
+	by mx.google.com with ESMTPS id 21sm6890796iwn.6.2009.12.23.21.28.09
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 23 Dec 2009 20:34:03 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 23 Dec 2009 21:28:12 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Dec 2009 20:33:57 -0800
-Message-Id: <1261629237-15118-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 209.85.211.188
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <op.u5dklxm5mn1qzu@guohr-laptop-ubuntu>
+	<19c1b8a90912222220j543c443ei1d24890b83c4b7f9@mail.gmail.com>
+	<op.u5dn37xvmn1qzu@guohr-laptop-ubuntu>
+	<19c1b8a90912231429y68b32709x735ae17b0ed97493@mail.gmail.com>
+Date: Thu, 24 Dec 2009 13:28:03 +0800
+MIME-Version: 1.0
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u5ff41opmn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <19c1b8a90912231429y68b32709x735ae17b0ed97493@mail.gmail.com>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.217.215
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 1/2] u-boot_git.bb: Change SRC_URI to a valid location for beagleboard.
+Subject: Re: Compiling glibc-2.6.1 failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,111 +57,175 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Dec 2009 04:36:02 -0000
+X-List-Received-Date: Thu, 24 Dec 2009 05:30:10 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: Quoted-Printable
 
-* The commit-id it is looking for is not there in upstream git
-  repo therefore get the tar file from angstrom mirror.
+I will tried to reproduce it and put the result into  =
 
-* On ARM gcc 4.4 does not allow weak inline, patch them.
+http://tinderbox.openembedded.net/
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- conf/checksums.ini                          |    4 ++
- recipes/u-boot/u-boot-git/weak_inline.patch |   51 +++++++++++++++++++++++++++
- recipes/u-boot/u-boot_git.bb                |    3 +-
- 3 files changed, 57 insertions(+), 1 deletions(-)
- create mode 100644 recipes/u-boot/u-boot-git/weak_inline.patch
+=E5=9C=A8 Thu, 24 Dec 2009 06:29:00 +0800=EF=BC=8CKhem Raj <raj.khem@gma=
+il.com> =E5=86=99=E9=81=93:
 
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 2d59a3a..f87af15 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -8754,6 +8754,10 @@ sha256=692901194603cc4fb4072d8f907487d867caef6b62161f50f0f44dbeb001066e
- md5=ed8c4fa007a44d51b646865c35461ce8
- sha256=f8ccac357f2c721e735ae16bbb02a420d2aaaed483f5d46043c5fe627ab4b260
- 
-+[http://www.angstrom-distribution.org/unstable/sources/git_git.denx.de.u-boot-ti.git_1590f84007e2b50ad346a482fff89195cb04ff4e.tar.gz]
-+md5=6ff9ee1f4d43997b6e533b3c2c2a739f
-+sha256=6b3cfb0ae1f35e695da38561877bd185da5f8471f4377c0069f999114d93521a
-+
- [http://downloads.sourceforge.net/gizmod/gizmod-2.3.tar.bz2]
- md5=b7200b08149599c4c0f56d88f0c7f208
- sha256=53af32530e58ba23cbb752f063364612bbea57b31de2ee35814973452c2f63f2
-diff --git a/recipes/u-boot/u-boot-git/weak_inline.patch b/recipes/u-boot/u-boot-git/weak_inline.patch
-new file mode 100644
-index 0000000..d0014ff
---- /dev/null
-+++ b/recipes/u-boot/u-boot-git/weak_inline.patch
-@@ -0,0 +1,51 @@
-+From: Ron Lee <ron@debian.org>
-+Date: Wed, 5 Aug 2009 18:14:01 +0000 (+0200)
-+Subject: ARM Don't inline weak symbols
-+X-Git-Url: http://git.denx.de/?p=u-boot%2Fu-boot-arm.git;a=commitdiff_plain;h=f865fcbbb35851e75fee9c3a3fa8e0f71d9e6463
-+
-+ARM Don't inline weak symbols
-+
-+------------------------------------------------------------------------
-+
-+GCC 4.4 complains about this now.
-+
-+Signed-off-by: Ron Lee <ron@debian.org>
-+---
-+
-+Index: git/lib_arm/board.c
-+===================================================================
-+--- git.orig/lib_arm/board.c	2009-10-20 04:08:52.000000000 -0700
-++++ git/lib_arm/board.c	2009-12-23 15:30:11.687436024 -0800
-+@@ -89,23 +89,23 @@ extern void rtl8019_get_enetaddr (uchar 
-+  * May be supplied by boards if desired
-+  */
-+ void inline __coloured_LED_init (void) {}
-+-void inline coloured_LED_init (void) __attribute__((weak, alias("__coloured_LED_init")));
-++void coloured_LED_init (void) __attribute__((weak, alias("__coloured_LED_init")));
-+ void inline __red_LED_on (void) {}
-+-void inline red_LED_on (void) __attribute__((weak, alias("__red_LED_on")));
-++void red_LED_on (void) __attribute__((weak, alias("__red_LED_on")));
-+ void inline __red_LED_off(void) {}
-+-void inline red_LED_off(void)	     __attribute__((weak, alias("__red_LED_off")));
-++void red_LED_off(void) __attribute__((weak, alias("__red_LED_off")));
-+ void inline __green_LED_on(void) {}
-+-void inline green_LED_on(void) __attribute__((weak, alias("__green_LED_on")));
-++void green_LED_on(void) __attribute__((weak, alias("__green_LED_on")));
-+ void inline __green_LED_off(void) {}
-+-void inline green_LED_off(void)__attribute__((weak, alias("__green_LED_off")));
-++void green_LED_off(void) __attribute__((weak, alias("__green_LED_off")));
-+ void inline __yellow_LED_on(void) {}
-+-void inline yellow_LED_on(void)__attribute__((weak, alias("__yellow_LED_on")));
-++void yellow_LED_on(void) __attribute__((weak, alias("__yellow_LED_on")));
-+ void inline __yellow_LED_off(void) {}
-+-void inline yellow_LED_off(void)__attribute__((weak, alias("__yellow_LED_off")));
-++void yellow_LED_off(void) __attribute__((weak, alias("__yellow_LED_off")));
-+ void inline __blue_LED_on(void) {}
-+-void inline blue_LED_on(void)__attribute__((weak, alias("__blue_LED_on")));
-++void blue_LED_on(void) __attribute__((weak, alias("__blue_LED_on")));
-+ void inline __blue_LED_off(void) {}
-+-void inline blue_LED_off(void)__attribute__((weak, alias("__blue_LED_off")));
-++void blue_LED_off(void) __attribute__((weak, alias("__blue_LED_off")));
-+ 
-+ /************************************************************************
-+  * Init Utilities							*
-diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
-index 5fcf7c5..9f0adb2 100644
---- a/recipes/u-boot/u-boot_git.bb
-+++ b/recipes/u-boot/u-boot_git.bb
-@@ -16,9 +16,10 @@ SRC_URI_append_afeb9260 = " file://AFEB9260-network-fix.patch;patch=1"
- SRC_URI_append_afeb9260-180 = " file://AFEB9260-network-fix.patch;patch=1"
- SRC_URI_append_cm-t35 = "file://cm-t35/cm-t35.patch;patch=1"
- 
--SRC_URI_beagleboard = "git://git.denx.de/u-boot-ti.git;protocol=git \
-+SRC_URI_beagleboard = "http://www.angstrom-distribution.org/unstable/sources/git_git.denx.de.u-boot-ti.git_1590f84007e2b50ad346a482fff89195cb04ff4e.tar.gz \
-                  file://fw_env.config \
-                  file://new-pinmux.patch;patch=1 \
-+		 file://weak_inline.patch;patch=1 \
- "
- SRCREV_beagleboard = "1590f84007e2b50ad346a482fff89195cb04ff4e"
- PV_beagleboard = "2009.08+${PR}+gitr${SRCREV}"
--- 
-1.6.3.3
+> On Tue, Dec 22, 2009 at 10:25 PM, Guo Hongruan <camelguo@gmail.com>  =
 
+> wrote:
+>> That's what I think. I tried to apply the patch and configure/compile=
+  =
+
+>> glibc.
+>> the configuring process works OK but the compilation failed. I think =
+the
+>> patch is not the only one cause of the error.
+>
+> Could be and we would not know more unless you give more details about=
+
+> the next errors.
+>
+>>
+>> =E5=9C=A8 Wed, 23 Dec 2009 14:20:21 +0800=EF=BC=8CKhem Raj <raj.khem@=
+gmail.com> =E5=86=99=E9=81=93:
+>>
+>>> On Tue, Dec 22, 2009 at 9:09 PM, Guo Hongruan <camelguo@gmail.com>  =
+
+>>> wrote:
+>>>>
+>>>> Hi guys,
+>>>>   When compiling glibc,  I meet the following error information. Yo=
+u  =
+
+>>>> can
+>>>> reproduce it as the following:
+>>>> DISTRO =3D "minimal"
+>>>> MACHINE =3D "qemux86"
+>>>> bitbake helloworld-image
+>>>>
+>>>>  By the way, when using eglibc, it works OK.  Anyone can give me so=
+me
+>>>> hints?
+>>>>
+>>>> Thanks a lot.
+>>>>
+>>>> | checking whether
+>>>>
+>>>> /media/work-disk/workdir/oe-mini-glibc-bug/cross/i686/lib/gcc/i686-=
+oe-linux/4.4.2/../../../../i686-oe-linux/bin/ld
+>>>> is GNU ld... yes
+>>>> | checking for
+>>>>
+>>>> /media/work-disk/workdir/oe-mini-glibc-bug/cross/i686/lib/gcc/i686-=
+oe-linux/4.4.2/../../../../i686-oe-linux/bin/as...
+>>>>
+>>>> /media/work-disk/workdir/oe-mini-glibc-bug/cross/i686/lib/gcc/i686-=
+oe-linux/4.4.2/../../../../i686-oe-linux/bin/as
+>>>> | checking version of
+>>>>
+>>>> /media/work-disk/workdir/oe-mini-glibc-bug/cross/i686/lib/gcc/i686-=
+oe-linux/4.4.2/../../../../i686-oe-linux/bin/as...
+>>>> 2.20, bad
+>>>> | checking for
+>>>>
+>>>> /media/work-disk/workdir/oe-mini-glibc-bug/cross/i686/lib/gcc/i686-=
+oe-linux/4.4.2/../../../../i686-oe-linux/bin/ld...
+>>>>
+>>>> /media/work-disk/workdir/oe-mini-glibc-bug/cross/i686/lib/gcc/i686-=
+oe-linux/4.4.2/../../../../i686-oe-linux/bin/ld
+>>>> | checking version of
+>>>>
+>>>> /media/work-disk/workdir/oe-mini-glibc-bug/cross/i686/lib/gcc/i686-=
+oe-linux/4.4.2/../../../../i686-oe-linux/bin/ld...
+>>>> 2.20, bad
+>>>
+>>> here lies the problem. I think the sed expression is not
+>>> able to comprehend that 2.20 version of ld is newer
+>>>
+>>> you need to backport glibc-2.9/glibc-2.9-enable-binutils-2.2.patch
+>>>
+>>> to 2.6.1
+>>>
+>>> Thx
+>>>
+>>> -Khem
+>>>
+>>>
+>>>
+>>>> | checking for pwd...
+>>>> /media/work-disk/workdir/oe-mini-glibc-bug/staging/i686-linux/usr/b=
+in/pwd
+>>>> | checking for i686-oe-linux-gcc... (cached) ccache i686-oe-linux-g=
+cc
+>>>> -march=3Dpentiumpro
+>>>> | checking version of ccache i686-oe-linux-gcc -march=3Dpentiumpro.=
+..
+>>>> 4.4.2,
+>>>> ok
+>>>> | checking for gnumake... make
+>>>> | checking version of make... 3.81, ok
+>>>> | checking for gnumsgfmt... no
+>>>> | checking for gmsgfmt... no
+>>>> | checking for msgfmt... msgfmt
+>>>> | checking version of msgfmt... 0.17, ok
+>>>> | checking for makeinfo... makeinfo
+>>>> | checking version of makeinfo... 4.11, ok
+>>>> | checking for sed... sed
+>>>> | checking version of sed... 4.1.5, ok
+>>>> | checking for autoconf... autoconf
+>>>> | checking whether autoconf works... yes
+>>>> | configure: error:
+>>>> | *** These critical programs are missing or too old: as ld
+>>>> | *** Check the INSTALL file for required versions.
+>>>> | FATAL: oe_runconf failed
+>>>>
+>>>>
+>>>>
+>>>> --
+>>>> Guo Hongruan, Embedded Linux Consultant
+>>>> Mobile: +86-0-13484056007
+>>>> Skype: camelguo
+>>>> Twitter: camelguo
+>>>> http://www.gulessoft.com
+>>>> _______________________________________________
+>>>> Openembedded-devel mailing list
+>>>> Openembedded-devel@lists.openembedded.org
+>>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-de=
+vel
+>>>>
+>>>>
+>>>
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-dev=
+el
+>>
+>>
+>> --
+>> Guo Hongruan, Embedded Linux Consultant
+>> Mobile: +86-0-13484056007
+>> Skype: camelguo
+>> Twitter: camelguo
+>> http://www.gulessoft.com
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-deve=
+l
+>>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
+
+
+
+-- =
+
+Guo Hongruan, Embedded Linux Consultant
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
 
