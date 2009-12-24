@@ -1,36 +1,44 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail-yw0-f188.google.com ([209.85.211.188])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1NNcWP-0004ge-Uk
+	(envelope-from <camelguo@gmail.com>) id 1NNd3G-0002ti-7W
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Dec 2009 02:29:49 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id BDA3E11000B4
+	Thu, 24 Dec 2009 03:03:45 +0100
+Received: by ywh26 with SMTP id 26so7735616ywh.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Dec 2009 02:27:54 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 9B7561100092
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Dec 2009 02:27:53 +0100 (CET)
-Received: from rhein.familie-heinold.de (f052239021.adsl.alicedsl.de
-	[78.52.239.21]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Dec 2009 02:27:53 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id EB7033C112; Thu, 24 Dec 2009 02:27:52 +0100 (CET)
-Date: Thu, 24 Dec 2009 02:27:52 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Wed, 23 Dec 2009 18:01:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:content-type:to:subject
+	:references:date:mime-version:content-transfer-encoding:from
+	:organization:message-id:in-reply-to:user-agent;
+	bh=DDjKm+0ZnxFOd6b0MD6AbIJeFxooU1vLnOmFeiO52Ec=;
+	b=miB0RJvDnPfQ0fL+C1HYqpb5le66Y2Srifc3N2GQ8P1Hc2j+8IY+5NMiYIjHfMWfhE
+	RQakwTdMpizF66U2Lzac1kTjw5Dp7+gr24WbS3yn2dNm38U9ub6JPOxdfeUnv3WqymuX
+	wgKlM2e2rDO4+tWti3oQeNJgJrQ9L0eciSX8g=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=content-type:to:subject:references:date:mime-version
+	:content-transfer-encoding:from:organization:message-id:in-reply-to
+	:user-agent;
+	b=nOC+AVhO8aHPSS0fGLUL8yc8h5Ijnff5V2OETXCoWjOm6tt2z5RqBAhSpL4GcQ4jee
+	Z9RhXhlllbVFKtOvCAbXdQJklQz26Rzgk9sDnZQ3bXTKZVxorCFvIeJLIzbulWPGQVrf
+	SM2OChFmKYTCY+bbHsAjNVOaajKh2Jy9T7qvE=
+Received: by 10.150.126.27 with SMTP id y27mr7926871ybc.309.1261620106902;
+	Wed, 23 Dec 2009 18:01:46 -0800 (PST)
+Received: from guohr-laptop-ubuntu ([123.162.69.101])
+	by mx.google.com with ESMTPS id 20sm6777323iwn.1.2009.12.23.18.01.45
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 23 Dec 2009 18:01:46 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091224012752.GA25454@rhein.zuhause.netz>
 References: <op.u5e34zgkmn1qzu@guohr-laptop-ubuntu>
+	<20091224012752.GA25454@rhein.zuhause.netz>
+Date: Thu, 24 Dec 2009 10:01:40 +0800
 MIME-Version: 1.0
-In-Reply-To: <op.u5e34zgkmn1qzu@guohr-laptop-ubuntu>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u5e6k2rwmn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <20091224012752.GA25454@rhein.zuhause.netz>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.211.188
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: how can I upload my OE building failure information and log to tinderbox of OE
@@ -47,19 +55,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Dec 2009 01:29:49 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 24 Dec 2009 02:03:45 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: Quoted-Printable
 
-Hi,
+Do I have to register an OSSTATS_BUILDER name?
 
-the magic is the following putting into your local.conf
+OESTATS_BUILDER =3D "youruploadername"
 
-INHERIT += "oestats-client"
-OESTATS_SERVER = "tinderbox.openembedded.net"
-OESTATS_BUILDER = "youruploadername"
+=E5=9C=A8 Thu, 24 Dec 2009 09:27:52 +0800=EF=BC=8CHenning Heinold  =
+
+<heinold@inf.fu-berlin.de> =E5=86=99=E9=81=93:
+
+> Hi,
+>
+> the magic is the following putting into your local.conf
+>
+> INHERIT +=3D "oestats-client"
+> OESTATS_SERVER =3D "tinderbox.openembedded.net"
+> OESTATS_BUILDER =3D "youruploadername"
+>
+>
+> Bye Henning
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
 
 
-Bye Henning
+
+-- =
+
+Guo Hongruan, Embedded Linux Consultant
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
 
