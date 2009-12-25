@@ -1,41 +1,41 @@
-Received: from mail-pw0-f53.google.com ([209.85.160.53])
+Received: from mail-pz0-f192.google.com ([209.85.222.192])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NO10E-0005gm-NR
+	(envelope-from <camelguo@gmail.com>) id 1NO16o-0005qi-Rx
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Dec 2009 04:38:13 +0100
-Received: by pwi18 with SMTP id 18so5174949pwi.12
+	Fri, 25 Dec 2009 04:45:02 +0100
+Received: by pzk30 with SMTP id 30so5902322pzk.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Dec 2009 19:36:16 -0800 (PST)
+	Thu, 24 Dec 2009 19:43:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=xFDjJZ89ya6eULVvrsvIeRtBAjQNiQcSFhgXSGJb5Po=;
-	b=DFYDlScXr3UUX4sT6G2k8kiXnvb5b6XbCl4HSWTm98VpIniSQQSTLRsawecuAuhxvx
-	LWnfqolP6j0KlbAEtRLzkCYTPLhXRNoN1BYyjc/uqBbc0TYrpisGGIqEwnbFBxrZ3k6r
-	VDjAVrTyinPr9DDB3LhbBXaSCmkm5tZs1cYj0=
+	bh=F5fmDlOj+t276YF/ZTAdyaRMY3kKhiWl46HJOm8hEj8=;
+	b=RoDVAmJj2aGu3S3vX1A1f7GVWswrnOlFqTb4G+XQlU8QDLqznAwaDeqS3B29QTEyOR
+	ilVwpkMuL9GE+SZ5qyLLbCYE1+ugW/8Xd6HmknVtJ1dgtrUb2ZoRwb7qW5u+dh5ibaXJ
+	B4/aCHCi9i9CsqkXKux0ouGNpwgAG9UREWxZM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=OV84YE0NJoggC4voGvCmKVFZGuTQxig36SajQL4guNRB+o0DpOsCmkKYTEdR4AxlKV
-	+z+kpNwDuFqaiiCNPe9NwC1xe/G5bRKeupVjsp4i4oaLj+qxLWQPaW6qh64ViYuOj3Hz
-	q4bfI6Mj9ywnaMjXwiWjQQsw8ZBX68WT7wyuE=
-Received: by 10.142.119.7 with SMTP id r7mr8042622wfc.261.1261712175912;
-	Thu, 24 Dec 2009 19:36:15 -0800 (PST)
+	b=Bo5klU+s1CNVJxZ98fYxFHtilxuu1SPjlO6VhDS+Me7zBPrQmagdHNNE+pliS3iWKR
+	UzoftZgWpMQfa560VKzcsipnWZjHSXS23GB+zejyvJc1kzz7jfl0UIFWTObtf5eY++LP
+	xa9Pp3YqoRVigcBaBWMI3ew4amvIDmxjpZKcQ=
+Received: by 10.142.249.41 with SMTP id w41mr8213620wfh.347.1261712584055;
+	Thu, 24 Dec 2009 19:43:04 -0800 (PST)
 Received: from localhost ([123.54.105.26])
-	by mx.google.com with ESMTPS id 20sm8292540pzk.13.2009.12.24.19.36.13
+	by mx.google.com with ESMTPS id 20sm8294966pzk.9.2009.12.24.19.43.01
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 24 Dec 2009 19:36:15 -0800 (PST)
+	Thu, 24 Dec 2009 19:43:03 -0800 (PST)
 From: Guo Hongruan <camelguo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Dec 2009 11:36:04 +0800
-Message-Id: <1261712164-7584-1-git-send-email-camelguo@gmail.com>
+Date: Fri, 25 Dec 2009 11:42:53 +0800
+Message-Id: <1261712573-10282-1-git-send-email-camelguo@gmail.com>
 X-Mailer: git-send-email 1.5.4.3
 In-Reply-To: <>
 References: <>
-X-SA-Exim-Connect-IP: 209.85.160.53
+X-SA-Exim-Connect-IP: 209.85.222.192
 X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] Remove the include <linux/ptrace.h> from events.c of ltrace
+Subject: [PATCH] Upgrade glibc from 2.6.1 to 2.10.1, the 2.6.1 glibc cause ltrace compilation failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,54 +49,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Dec 2009 03:38:14 -0000
+X-List-Received-Date: Fri, 25 Dec 2009 03:45:02 -0000
 
-Previously, I added include <linux/ptrace.h> which lets the ltrace compilation successfully based on glibc-2.6.1. This is not a bug of ltrace but of glibc-2.6.1. This commit revert the previous change.
+the include/sys/ptrace.h of glibc 2.6.1 does not include the PTRACE_EVENT* macroes, which is needed by ltrace. the one of glibc 2.10.1 does include them and on it the compilation of ltrace succeed
 ---
- .../files/ltrace-fix-ptrace-event-macros.patch     |   12 ------------
- recipes/ltrace/ltrace_0.5.3.bb                     |    3 +--
- 2 files changed, 1 insertions(+), 14 deletions(-)
- delete mode 100644 recipes/ltrace/files/ltrace-fix-ptrace-event-macros.patch
+ conf/distro/include/sane-toolchain.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/ltrace/files/ltrace-fix-ptrace-event-macros.patch b/recipes/ltrace/files/ltrace-fix-ptrace-event-macros.patch
-deleted file mode 100644
-index 7232ca8..0000000
---- a/recipes/ltrace/files/ltrace-fix-ptrace-event-macros.patch
-+++ /dev/null
-@@ -1,12 +0,0 @@
--Index: ltrace-0.5.3/sysdeps/linux-gnu/events.c
--===================================================================
----- ltrace-0.5.3.orig/sysdeps/linux-gnu/events.c	2009-12-24 15:58:24.000000000 +0800
--+++ ltrace-0.5.3/sysdeps/linux-gnu/events.c	2009-12-24 15:58:41.000000000 +0800
--@@ -8,6 +8,7 @@
-- #include <signal.h>
-- #include <string.h>
-- #include <sys/ptrace.h>
--+#include <linux/ptrace.h>
-- 
-- #include "common.h"
-- 
-diff --git a/recipes/ltrace/ltrace_0.5.3.bb b/recipes/ltrace/ltrace_0.5.3.bb
-index 1f70878..ea11b16 100644
---- a/recipes/ltrace/ltrace_0.5.3.bb
-+++ b/recipes/ltrace/ltrace_0.5.3.bb
-@@ -4,7 +4,7 @@ SECTION = "devel"
- DEPENDS = "libelf"
- LICENSE = "GPLv2"
+diff --git a/conf/distro/include/sane-toolchain.inc b/conf/distro/include/sane-toolchain.inc
+index 7bf1963..39bc9aa 100644
+--- a/conf/distro/include/sane-toolchain.inc
++++ b/conf/distro/include/sane-toolchain.inc
+@@ -9,8 +9,8 @@ PREFERRED_GCC_VERSION                ?= "4.4.2"
+ PREFERRED_BINUTILS                   ?= "2.20"
  
--PR = "r2"
-+PR = "r3"
- 
- SRC_URI = "\
-   ${DEBIAN_MIRROR}/main/l/ltrace/ltrace_${PV}.orig.tar.gz \
-@@ -14,7 +14,6 @@ SRC_URI = "\
-   file://ltrace-mips-remove-CP.patch;patch=1 \
-   file://ltrace-mips.patch;patch=1 \
-   file://ltrace-ppc.patch;patch=1 \
--  file://ltrace-fix-ptrace-event-macros.patch;patch=1 \
- "
- 
- inherit autotools
+ # Prefer glibc 2.6 and uclibc 0.9.30, these have had the most testing.
+-PREFERRED_VERSION_glibc             ?= "2.6.1"
+-PREFERRED_VERSION_glibc-initial     ?= "2.6.1"
++PREFERRED_VERSION_glibc             ?= "2.10.1"
++PREFERRED_VERSION_glibc-initial     ?= "2.10.1"
+ PREFERRED_VERSION_eglibc             ?= "2.10"
+ PREFERRED_VERSION_eglibc-initial     ?= "2.10"
+ PREFERRED_VERSION_uclibc            ?= "0.9.30.1"
 -- 
 1.5.4.3
 
