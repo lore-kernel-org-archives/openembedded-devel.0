@@ -1,27 +1,24 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NO7qe-0007Ig-QI
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mickey@vanille-media.de>) id 1NOC18-0002Ff-Iv
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Dec 2009 11:56:47 +0100
-Received: from tamarin.localnet (123-192-180-176.dynamic.kbronet.com.tw
-	[123.192.180.176])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 2096E1B10C04
+	Fri, 25 Dec 2009 16:23:53 +0100
+Received: from [192.168.1.150] (e180140078.adsl.alicedsl.de [85.180.140.78])
+	by drlauer-research.com (Postfix) with ESMTP id 710F3584B14
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Dec 2009 10:51:17 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Fri, 25 Dec 2009 17:11:36 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Dec 2009 11:54:45 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <> <200912250546.52376.holger+oe@freyther.de>
-	<op.u5hc0pupmn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <op.u5hc0pupmn1qzu@guohr-laptop-ubuntu>
-MIME-Version: 1.0
-Message-Id: <200912251154.45042.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Organization: Vanille-Media
+Date: Fri, 25 Dec 2009 16:21:55 +0100
+Message-ID: <1261754515.2355.6.camel@opal>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Upgrade glibc from 2.6.1 to 2.10.1, the 2.6.1 glibc cause ltrace compilation failed
+Subject: Autobuilder bugs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,25 +32,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Dec 2009 10:56:47 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 25 Dec 2009 15:23:57 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Friday 25 December 2009 07:16:00 Guo Hongruan wrote:
-> =E5=9C=A8 Fri, 25 Dec 2009 12:46:52 +0800=EF=BC=8CHolger Hans Peter Freyt=
-her
+Could whoever started to report autobuilder bugs to the bugtracker again
+please stop that asap? They're not raising any more attention to
+problems, but rather cluttering the bug tracker even more.
 
-> The include/sys/ptrace.h of glibc 2.6.1 lacks of the above macroes, this
-> is a bug of it, which was fixed by the later glibc There is a newer
-> version of glibc recipes, so I have no reason to not test with it.
+Thanks,
 
-Sure you have no reason to not test it but that is different from changing =
-the=20
-default for everyone else. The other thing from released software something=
- is=20
-always missing...
-
+:M:
 
 
 
