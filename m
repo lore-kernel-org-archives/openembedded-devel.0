@@ -1,46 +1,29 @@
-Received: from mail-pw0-f53.google.com ([209.85.160.53])
+Received: from vms173013pub.verizon.net ([206.46.173.13])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NOKob-0000fH-V6
+	(envelope-from <denis@denix.org>) id 1NORM4-0004UE-C7
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Dec 2009 01:47:33 +0100
-Received: by pwi18 with SMTP id 18so5454398pwi.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Dec 2009 16:45:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:to:subject
-	:references:date:mime-version:content-transfer-encoding:from
-	:organization:message-id:in-reply-to:user-agent;
-	bh=D2ImUYY+S5HDIn8oKpqt3zaeVCav362SKZWDyBuALmk=;
-	b=MLD9Xa8oQQtYS8AxwOdGxSkVwfMRYcKFqwRlUiM8oLvOufXi4pW+wjdiSD5cS4rbhO
-	/UQLVh+gbgznz+FqNwxHvvddQMTSz+seJle/g7H7VlYKvJgIB/C6ydIHzv8dn21rEzJ0
-	e0g9qFs/d2FoFWMoAq0nAv3M/Pd5CDyaZ67ys=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:to:subject:references:date:mime-version
-	:content-transfer-encoding:from:organization:message-id:in-reply-to
-	:user-agent;
-	b=ormU033eTMubf5oJv16egFgCCDy6KfZFIVt1Lmi86PBGZY6J9lDjvp38jME8aBF86v
-	ZVz2xouJCSIr5ygT1xfYAfPbqpyEo6YUKrkuLWjbkqUTwPIOiXkrvbo90BAgbQVMabYO
-	VYfzKzTHydoG2wR4nYJZqJcJnnbgaPnHCBsYA=
-Received: by 10.141.187.40 with SMTP id o40mr561583rvp.299.1261788334271;
-	Fri, 25 Dec 2009 16:45:34 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.162.70.81])
-	by mx.google.com with ESMTPS id 20sm9209637pzk.13.2009.12.25.16.45.32
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 25 Dec 2009 16:45:33 -0800 (PST)
+	Sat, 26 Dec 2009 08:46:31 +0100
+Received: from gandalf.denix.org ([71.255.235.232]) by vms173013.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 6.3-7.04 (built Sep 26 2008;
+	32bit)) with ESMTPA id <0KV900FU51HTLCB1@vms173013.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sat,
+	26 Dec 2009 01:44:22 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id EC4E414AF60; Sat,
+	26 Dec 2009 02:44:16 -0500 (EST)
+Date: Sat, 26 Dec 2009 02:44:16 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1261754515.2355.6.camel@opal>
-Date: Sat, 26 Dec 2009 08:45:30 +0800
-MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Organization: Gulessoft, Inc
-Message-ID: <op.u5isd4u2mn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <1261754515.2355.6.camel@opal>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.160.53
-X-SA-Exim-Mail-From: camelguo@gmail.com
+Message-id: <20091226074416.GA30555@denix.org>
+References: <mailman.5915.1261661037.5853.openembedded-devel@lists.openembedded.org>
+	<555454227.741261683762051.JavaMail.root@aphid.buglabs.net>
+MIME-version: 1.0
+In-reply-to: <555454227.741261683762051.JavaMail.root@aphid.buglabs.net>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.13
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Autobuilder bugs
+Subject: Re: Eclipse tools (OTE) wiki page complete.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,43 +37,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Dec 2009 00:47:33 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Sat, 26 Dec 2009 07:46:31 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Sorry, I did not know that. I have closed it. No building failure from m=
-e  =
+On Thu, Dec 24, 2009 at 02:42:42PM -0500, Ken Gilmer wrote:
+> 
+> Hi!  
+> 
+>   I've finally finished the first pass at documenting OpenEmbedded Tools for 
+> Eclipse (OTE) on the OE wiki.  Please have a look if you're interested:
+> 
+> http://wiki.openembedded.net/index.php/OpenEmbedded_Tools_for_Eclipse_%28OTE%29
+> 
+>   Any suggestions on categories and other ways of linking this content in 
+> with the rest of the wiki?
 
-will report to bugtracker
+Ken,
 
-=E5=9C=A8 Fri, 25 Dec 2009 23:21:55 +0800=EF=BC=8CMichael 'Mickey' Lauer=
-  =
+Thanks for your work on the plugin and the Wiki page! It is a very useful tool 
+for existing and especially new OE developers. :)
 
-<mickey@vanille-media.de> =E5=86=99=E9=81=93:
-
-> Could whoever started to report autobuilder bugs to the bugtracker aga=
-in
-> please stop that asap? They're not raising any more attention to
-> problems, but rather cluttering the bug tracker even more.
->
-> Thanks,
->
-> :M:
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
-
-
-
--- =
-
-Guo Hongruan, Embedded Linux Consultant
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
+-- 
+Denys
 
 
