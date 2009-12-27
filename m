@@ -1,43 +1,37 @@
-Received: from mail-yw0-f178.google.com ([209.85.211.178])
+Received: from mail-px0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NOiq1-0005NX-PA
+	(envelope-from <graham.gower@gmail.com>) id 1NOoPs-0003jl-Qr
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Dec 2009 03:26:36 +0100
-Received: by ywh8 with SMTP id 8so9396699ywh.3
+	Sun, 27 Dec 2009 09:24:00 +0100
+Received: by pxi12 with SMTP id 12so5391587pxi.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Dec 2009 18:24:37 -0800 (PST)
+	Sun, 27 Dec 2009 00:22:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=OHzMHqb2WazDV9ytZEPkg/r19MAL5lCcULqe222trv8=;
-	b=QdfcMRDTm/5WJsYXL01KAdOum8MQvKrLuJ9qupDM4xjXKqHwZmERxE+43+v4DoQL4F
-	jRcwrl+dKUeFaqcUyUs+TEYqvrJf+F6CSh394Cxjo1PtQApg8epZCOygBlwIHZDg2ERQ
-	zl0Zx5H1YZoBcO5Uq+AVnq4gH4svxYTSlU+uo=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=byt5R584rgbjpgfDWxWn9Gd4kIPDpoNxwtpI/U20SF0=;
+	b=E5lae+z3hlWp8vDpsfjBsSLX0BUbWwLcQbXUNhbW4SY9jndtYjiu7fUC+ERpMKXbTt
+	JiioKopyyn3IbrtVqxF9aDoT1BERcAfVHPfnWdKmrQwJelClZcaI7ntifpTlmcEge4rf
+	gDoQsomdWY5PZ6kFgZXEuWmSiNRbHFVj6uTgg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=CxIYV+zb3yFGvkqL29zhgyfpvj96pbBXMOW4vVkrWhgOGTSbhwSbwXohTERjQ8FpWY
-	3KoPTYmkKdwiizRY5gIzP1y+IGR8KTPCIVRCMBWOWAHxKOaUKa+BH8BiJnbyaPnqJk6q
-	PJTsI0O9vTHt0uEcXPICZTdlAJ4TGBDPTywg0=
-Received: by 10.150.18.18 with SMTP id 18mr2241774ybr.295.1261880677495;
-	Sat, 26 Dec 2009 18:24:37 -0800 (PST)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id 6sm4326154yxg.48.2009.12.26.18.24.35
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 26 Dec 2009 18:24:36 -0800 (PST)
-Date: Sat, 26 Dec 2009 18:24:11 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20091227022411.GA10352@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=r/6Mo/oYnQ5yUrDXZ6P1Xzzb/SMVTrPC1DJ1Xar4kpSLNIe+MU+QmnuJTjJkp7YRFM
+	RVLn75zHFJdBSCtdZztTrUF4Hc6L6tqKQDlN6Q2xchsEOTmaXu02AOPWmN7ee7ELay9R
+	hMte1qtnoT9IgeDxPGOdjjcRIb6zhp8eZRA3c=
+MIME-Version: 1.0
+Received: by 10.142.4.17 with SMTP id 17mr9695576wfd.85.1261902119497; Sun, 27 
+	Dec 2009 00:21:59 -0800 (PST)
+In-Reply-To: <20091227022411.GA10352@gmail.com>
 References: <4B0C2825.2070001@gmail.com> <4B0C3B50.8010901@gmail.com>
 	<6ec4247d0911241319j364e424asfe231aeb6c5738a0@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <6ec4247d0911241319j364e424asfe231aeb6c5738a0@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.211.178
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+	<20091227022411.GA10352@gmail.com>
+Date: Sun, 27 Dec 2009 18:51:59 +1030
+Message-ID: <6ec4247d0912270021v22c7c46ay408c68f2d626d915@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.216.182
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: opkg-sdk_svn build failure
@@ -54,27 +48,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Dec 2009 02:26:37 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 27 Dec 2009 08:24:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On (25/11/09 07:49), Graham Gower wrote:
-> sizeof returns long unsigned int on x86_64. This is fixed in r365.
+2009/12/27 Khem Raj <raj.khem@gmail.com>:
+> On (25/11/09 07:49), Graham Gower wrote:
+>> sizeof returns long unsigned int on x86_64. This is fixed in r365.
+>
+> sizeof return size_t which is a type in itself so if you want
+> portability between 32-bit and 64-bit systems you should probably
+> use 'z' length modifier in printf formats. '%zd' would work correctly
+> irrespective of word lenght of the processor. You need C99 compliant
+> compiler though.
+>
+> Thanks
+>
+> -Khem
 
-sizeof return size_t which is a type in itself so if you want
-portability between 32-bit and 64-bit systems you should probably
-use 'z' length modifier in printf formats. '%zd' would work correctly
-irrespective of word lenght of the processor. You need C99 compliant
-compiler though.
-
-Thanks
-
--Khem
-
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+You're right. r365 casts it to an int instead, in an attempt to
+maintain portability.
 
 
