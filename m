@@ -1,40 +1,28 @@
-Received: from mail-px0-f182.google.com ([209.85.216.182])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1NOoPs-0003jl-Qr
+Received: from mail.gmx.net ([213.165.64.20])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <theBohemian@gmx.net>) id 1NOs5j-0001zt-Uj
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Dec 2009 09:24:00 +0100
-Received: by pxi12 with SMTP id 12so5391587pxi.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Dec 2009 00:22:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=byt5R584rgbjpgfDWxWn9Gd4kIPDpoNxwtpI/U20SF0=;
-	b=E5lae+z3hlWp8vDpsfjBsSLX0BUbWwLcQbXUNhbW4SY9jndtYjiu7fUC+ERpMKXbTt
-	JiioKopyyn3IbrtVqxF9aDoT1BERcAfVHPfnWdKmrQwJelClZcaI7ntifpTlmcEge4rf
-	gDoQsomdWY5PZ6kFgZXEuWmSiNRbHFVj6uTgg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=r/6Mo/oYnQ5yUrDXZ6P1Xzzb/SMVTrPC1DJ1Xar4kpSLNIe+MU+QmnuJTjJkp7YRFM
-	RVLn75zHFJdBSCtdZztTrUF4Hc6L6tqKQDlN6Q2xchsEOTmaXu02AOPWmN7ee7ELay9R
-	hMte1qtnoT9IgeDxPGOdjjcRIb6zhp8eZRA3c=
+	Sun, 27 Dec 2009 13:19:27 +0100
+Received: (qmail invoked by alias); 27 Dec 2009 12:17:27 -0000
+Received: from f053000120.adsl.alicedsl.de (EHLO [192.168.4.110]) [78.53.0.120]
+	by mail.gmx.net (mp058) with SMTP; 27 Dec 2009 13:17:27 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+auhM1YtmaLrvs0uMxht0yxYw0dQzeBJBT7QhM6E
+	IDBza74tOvaZsy
+Message-ID: <4B3750AB.6030301@gmx.net>
+Date: Sun, 27 Dec 2009 13:18:51 +0100
+From: Robert Schuster <theBohemian@gmx.net>
+User-Agent: Mozilla-Thunderbird 2.0.0.22 (X11/20090707)
 MIME-Version: 1.0
-Received: by 10.142.4.17 with SMTP id 17mr9695576wfd.85.1261902119497; Sun, 27 
-	Dec 2009 00:21:59 -0800 (PST)
-In-Reply-To: <20091227022411.GA10352@gmail.com>
-References: <4B0C2825.2070001@gmail.com> <4B0C3B50.8010901@gmail.com>
-	<6ec4247d0911241319j364e424asfe231aeb6c5738a0@mail.gmail.com>
-	<20091227022411.GA10352@gmail.com>
-Date: Sun, 27 Dec 2009 18:51:59 +1030
-Message-ID: <6ec4247d0912270021v22c7c46ay408c68f2d626d915@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.182
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-Enigmail-Version: 0.95.0
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.77
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: theBohemian@gmx.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: opkg-sdk_svn build failure
+Subject: FOSDEM 2010: embedded devroom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,24 +36,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Dec 2009 08:24:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 27 Dec 2009 12:19:27 -0000
+X-Groupsio-MsgNum: 15255
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="------------enigC93679D6BE689D972A34BF42"
 
-2009/12/27 Khem Raj <raj.khem@gmail.com>:
-> On (25/11/09 07:49), Graham Gower wrote:
->> sizeof returns long unsigned int on x86_64. This is fixed in r365.
->
-> sizeof return size_t which is a type in itself so if you want
-> portability between 32-bit and 64-bit systems you should probably
-> use 'z' length modifier in printf formats. '%zd' would work correctly
-> irrespective of word lenght of the processor. You need C99 compliant
-> compiler though.
->
-> Thanks
->
-> -Khem
+--------------enigC93679D6BE689D972A34BF42
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-You're right. r365 casts it to an int instead, in an attempt to
-maintain portability.
+Hi,
+as in the years before OpenEmbedded can participate in the talks at
+FOSDEM via the embedded devroom. Please send me your ideas for talks and
+I forward them to the room responsible.
+
+All the best,
+Robert
 
 
+--------------enigC93679D6BE689D972A34BF42
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iEYEAREIAAYFAks3UKsACgkQG9cfwmwwEtrKiwCeMM9P+DCJEoBucLbR2Lvm8pdA
+jzUAn0hpe5mF7ZG7MK3+J95+EDekNI95
+=i82r
+-----END PGP SIGNATURE-----
+
+--------------enigC93679D6BE689D972A34BF42--
