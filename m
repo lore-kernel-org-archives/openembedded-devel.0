@@ -1,28 +1,42 @@
-Received: from mail.gmx.net ([213.165.64.20])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <theBohemian@gmx.net>) id 1NOsAz-00028f-77
+Received: from mail-yw0-f178.google.com ([209.85.211.178])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <camelguo@gmail.com>) id 1NP6VG-0001rd-JG
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Dec 2009 13:24:52 +0100
-Received: (qmail invoked by alias); 27 Dec 2009 12:16:12 -0000
-Received: from f053000120.adsl.alicedsl.de (EHLO [192.168.4.110]) [78.53.0.120]
-	by mail.gmx.net (mp020) with SMTP; 27 Dec 2009 13:16:12 +0100
-X-Authenticated: #17532834
-X-Provags-ID: V01U2FsdGVkX1/ELY1jW5DEiaJL0EJXM3U1nJbFcv6MqrqZBu9XgC
-	/3f9M2JNxrG6/M
-Message-ID: <4B375060.8010607@gmx.net>
-Date: Sun, 27 Dec 2009 13:17:36 +0100
-From: Robert Schuster <theBohemian@gmx.net>
-User-Agent: Mozilla-Thunderbird 2.0.0.22 (X11/20090707)
+	Mon, 28 Dec 2009 04:42:45 +0100
+Received: by ywh8 with SMTP id 8so9845576ywh.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 27 Dec 2009 19:40:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:content-type:to:subject:date
+	:mime-version:content-transfer-encoding:from:organization:message-id
+	:user-agent; bh=IvEpqw2vQ4dQHz3NdWLXH8hwC0pQYa9uTmwaJ5Gbkjk=;
+	b=GzkS2Hjb04yAvbbQmj1LuGDEgfi607cvwPvfeyeTQ14d2JXgCrqd2PypsMfC/k2aNG
+	jRYq3uisqyz8TrXycxh9FdBOspOHOxhoHgHHk/jWRiUYYQ83QLTHoK63gEd89u+N+bwK
+	PbBIj+zochbChwpiNyjoeIlEqHVrZY1TD/y5M=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=content-type:to:subject:date:mime-version:content-transfer-encoding
+	:from:organization:message-id:user-agent;
+	b=AdmHJC0T+Fy7UrIW712C9XyN57ZC5gjUO/hHAhxOZLAgvKlmgYMaDg8BL+gsdJlNQF
+	XMwVeReNTEWSuXuY0K3YL3v9wnKagVi/kulMjH7FBODt1Fo/VQjGEmiWiuwO9V94IGF0
+	+MsEvKHsxZAKuLwBMYOlNFUna4vuyNmS8Ko2A=
+Received: by 10.91.109.16 with SMTP id l16mr3070595agm.120.1261971645656;
+	Sun, 27 Dec 2009 19:40:45 -0800 (PST)
+Received: from guohr-laptop-ubuntu ([123.162.70.72])
+	by mx.google.com with ESMTPS id 21sm10599328iwn.2.2009.12.27.19.40.42
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 27 Dec 2009 19:40:44 -0800 (PST)
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Date: Mon, 28 Dec 2009 11:40:38 +0800
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.95.0
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.73
-X-SA-Exim-Connect-IP: 213.165.64.20
-X-SA-Exim-Mail-From: theBohemian@gmx.net
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u5mptvjzmn1qzu@guohr-laptop-ubuntu>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.211.178
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: OpenEmbedded stand at FOSDEM
+Subject: Install base-file failed due to lack of usbd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,43 +50,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Dec 2009 12:24:52 -0000
-X-Groupsio-MsgNum: 15256
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="------------enig3941733F2FC38015971B0FD5"
+X-List-Received-Date: Mon, 28 Dec 2009 03:42:45 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: 7bit
 
---------------enig3941733F2FC38015971B0FD5
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Hi guys,
+    the installation of base-file failed due to lack of usbd. I found this  
+bug when
+1. MACHINE=qemumips and DISTRO=micro (using eglibc)
+2. MACHINE=qemuarm and DISTRO=micro (using eglibc)
 
-Hi,
-sorry for being late with this. Work and Christmas came into the way.
+install: cannot create regular file  
+`/media/work-disk/workdir/oe-qemumips-micro-eglibc/work/qemumips-oe-linux/base-files-3.0.14-r89/image/etc/default/usbd':  
+No such file or directory
 
-Our request for a stand at FOSDEM was successful! However as in the
-years before we only get one table (I explicitly asked for a second one
-and gave a reason for it but they ignored it).
+It seems that the base-file recipe may have some problem.
 
-Anyway. Who is going to man the booth?
+see the following URLs for more detailed information:
+http://tinderbox.openembedded.net/packages/392296/
+http://tinderbox.openembedded.net/packages/391393/
 
-
-
-Regards,
-Robert
+Thanks a lot
 
 
---------------enig3941733F2FC38015971B0FD5
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
+-- 
+Guo Hongruan, Embedded Linux Consultant
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iEYEAREIAAYFAks3UGAACgkQG9cfwmwwEtrbvgCgmfaRGF+3TW2c+aWiW1xu8ch6
-HwUAnjMWZ4pPOFYYM5453dXgeU6S4Pqd
-=iWYs
------END PGP SIGNATURE-----
-
---------------enig3941733F2FC38015971B0FD5--
