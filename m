@@ -1,35 +1,39 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1NPCy5-0000So-Fj
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1NPE0j-0002BV-2x
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Dec 2009 11:36:56 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 6ECBE2C816
+	Mon, 28 Dec 2009 12:43:44 +0100
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 2FF0B1100090
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Dec 2009 10:32:48 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4lZxEjRpjCOH
+	Mon, 28 Dec 2009 12:41:46 +0100 (CET)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 4FAFD110008C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Dec 2009 10:32:44 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 0A4552C7D5
+	Mon, 28 Dec 2009 12:41:45 +0100 (CET)
+Received: from rhein.familie-heinold.de (f052225126.adsl.alicedsl.de
+	[78.52.225.126]) by mail.familie-heinold.de (Postfix) with ESMTPA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Dec 2009 10:32:43 +0000 (UTC)
-Message-ID: <4B3889CE.4060205@gmail.com>
-Date: Mon, 28 Dec 2009 11:34:54 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Mon, 28 Dec 2009 12:41:45 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 8EF683C112; Mon, 28 Dec 2009 12:41:44 +0100 (CET)
+Date: Mon, 28 Dec 2009 12:41:44 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4B375060.8010607@gmx.net>
-In-Reply-To: <4B375060.8010607@gmx.net>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+Message-ID: <20091228114144.GA19465@rhein.zuhause.netz>
+References: <op.u5mqggdmmn1qzu@guohr-laptop-ubuntu>
+MIME-Version: 1.0
+In-Reply-To: <op.u5mqggdmmn1qzu@guohr-laptop-ubuntu>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: OpenEmbedded stand at FOSDEM
+Subject: Re: compilation of libxft failed due to lack of XFT* macroes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,35 +47,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Dec 2009 10:36:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 28 Dec 2009 11:43:44 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Robert Schuster ha scritto, Il 27/12/2009 13:17:
-> Hi,
-> sorry for being late with this. Work and Christmas came into the way.
->=20
-> Our request for a stand at FOSDEM was successful! However as in the
-> years before we only get one table (I explicitly asked for a second one
-> and gave a reason for it but they ignored it).
->=20
-> Anyway. Who is going to man the booth?
->=20
->=20
->=20
-> Regards,
+On Mon, Dec 28, 2009 at 11:54:06AM +0800, Guo Hongruan wrote:
+> Hi guys,
+>   I found a building error, when
+> 1. MACHINE=qemux86 DISTRO=micro, see the following url for more detailed.
+> http://tinderbox.openembedded.net/packages/391109/
+> 
+> It seems that the compiler can not find the XFT* macroes.
 
-Robert,
-I am gojg to be at FOSDEM 2010 and I'm available to stay at booth for
-some hours (not the whole day) if necessary.
+I already fixed with the latest libxft. It's an error inside autotools or using
+if you use #undef fobarr /* ddfdf*/ the #undef will be not replaced by configure.
+If you need this in libxft with smaller version numbers, backport my patch yourself.
 
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-   Atmel third party certified consultant
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
-
+Bye Henning
 
 
