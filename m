@@ -1,47 +1,38 @@
-Received: from mail-pz0-f192.google.com ([209.85.222.192])
+Received: from mail-iw0-f194.google.com ([209.85.223.194])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NPEBa-0005nh-UG
+	(envelope-from <raj.khem@gmail.com>) id 1NPKkD-0002x8-Lk
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Dec 2009 12:54:58 +0100
-Received: by pzk30 with SMTP id 30so7114160pzk.24
+	Mon, 28 Dec 2009 19:55:08 +0100
+Received: by iwn32 with SMTP id 32so7067387iwn.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Dec 2009 03:52:57 -0800 (PST)
+	Mon, 28 Dec 2009 10:53:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:to:subject
-	:references:date:mime-version:content-transfer-encoding:from
-	:organization:message-id:in-reply-to:user-agent;
-	bh=F5qma5Ezx9cJTsBuhuK3M3uIK5KE9lHBGhLcNOK8Ubc=;
-	b=Jbr11XbplG9AaCw1M8gKEqycZZJpZtg7MxPj8yyU43nClwPeQlCWJybw9TvIApPO1v
-	UBvWR5aDfehvMlR5WvZ0HMi7/+KphCEOMzd82d9QbocK2yQddWL7vgE1lJ4EbU93rFbQ
-	qlKLqc+CAORmECaF/Hh1wgwxi8vTrCKkLzumA=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=/0niuRono3vyeJZowvPUrcKW8+5uk61DYhkAvMlsvt8=;
+	b=h++E1W2rFqn3Yh+csgYeacv6CI/Jc9JVfxQaxfuA4J2cW/W84oQFuWAnSVAhmt3zeS
+	EfiIg/Z4+gQmRF7q/cmubqefGkKCC3S+2dg5reHZ05gZTvglYAZ62DkSihjXrfe9zOT2
+	na3K3p0O4PPNXEMl0WKbIXSH/k4VL3sCuufjI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:to:subject:references:date:mime-version
-	:content-transfer-encoding:from:organization:message-id:in-reply-to
-	:user-agent;
-	b=LSJznbw0Ei2rdVeMhQ5giI6M33bOA6TvfElZ3Es/1Rtt5Y+NLhukcctJHmoenW7W9s
-	qIas5gzpH/sZntQyG9t12zeJ8zWjc8jgm7GT41ZRWgVFzbYC/0VWt82CzX8osI53/Pzb
-	kmuIjNHe5A6puV7yRtr5gEIdlBnhSLUzKZcts=
-Received: by 10.141.23.17 with SMTP id a17mr11009649rvj.17.1262001177055;
-	Mon, 28 Dec 2009 03:52:57 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.162.70.72])
-	by mx.google.com with ESMTPS id 23sm11822239pzk.4.2009.12.28.03.52.54
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 28 Dec 2009 03:52:56 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <op.u5mqggdmmn1qzu@guohr-laptop-ubuntu>
-	<20091228114144.GA19465@rhein.zuhause.netz>
-Date: Mon, 28 Dec 2009 19:52:46 +0800
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=QojqgouchUgpa8NYJO6Wn4Th1tteJ4sbicSzr/uaiTgblzEY3vMnn9b4tzYBQl+DJQ
+	0PNdlc4k4S5PeowRqOSZtrsqizyV2hqRuI4ql/0QDVOzQ514fPShXNLviOXlPTABIdQL
+	WXqS4969Sy3g8EvncfP6068kN2n5W34TYGPhg=
 MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Organization: Gulessoft, Inc
-Message-ID: <op.u5ncl8iwmn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <20091228114144.GA19465@rhein.zuhause.netz>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.222.192
-X-SA-Exim-Mail-From: camelguo@gmail.com
+Received: by 10.231.167.212 with SMTP id r20mr5649862iby.7.1262026387992; Mon, 
+	28 Dec 2009 10:53:07 -0800 (PST)
+In-Reply-To: <op.u5mp87ximn1qzu@guohr-laptop-ubuntu>
+References: <op.u5mp87ximn1qzu@guohr-laptop-ubuntu>
+Date: Mon, 28 Dec 2009 10:53:07 -0800
+Message-ID: <19c1b8a90912281053u2ebb8e62k313b1c41f99462f6@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.223.194
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: compilation of libxft failed due to lack of XFT* macroes
+Subject: Re: compilation of gcc-cross-intermediate-4.4.2 failed due to lack of fenv.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,52 +46,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Dec 2009 11:54:58 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Mon, 28 Dec 2009 18:55:08 -0000
+X-Groupsio-MsgNum: 15263
+Content-Type: multipart/mixed; boundary=001636c5a4bd8db4fb047bce6a09
 
-Great! I will try the new version of libxft tonight
+--001636c5a4bd8db4fb047bce6a09
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-=E5=9C=A8 Mon, 28 Dec 2009 19:41:44 +0800=EF=BC=8CHenning Heinold  =
-
-<heinold@inf.fu-berlin.de> =E5=86=99=E9=81=93:
-
-> On Mon, Dec 28, 2009 at 11:54:06AM +0800, Guo Hongruan wrote:
->> Hi guys,
->>   I found a building error, when
->> 1. MACHINE=3Dqemux86 DISTRO=3Dmicro, see the following url for more  =
-
->> detailed.
->> http://tinderbox.openembedded.net/packages/391109/
->>
->> It seems that the compiler can not find the XFT* macroes.
+On Sun, Dec 27, 2009 at 7:49 PM, Guo Hongruan <camelguo@gmail.com> wrote:
+> Hi guys,
+> =C2=A0 I found a build error when building openembedded using:
+> 1. MACHINE =3D qemux86 DISTRO=3Dmicro-uclibc, see the follow url for deta=
+iled.
+> http://tinderbox.openembedded.net/packages/391641/
+> 2. MACHINE =3D qemux86 DISTRO=3Dminimal-uclibc, see the following url for
+> detailed
+> http://tinderbox.openembedded.net/packages/391427/
 >
-> I already fixed with the latest libxft. It's an error inside autotools=
-  =
-
-> or using
-> if you use #undef fobarr /* ddfdf*/ the #undef will be not replaced by=
-  =
-
-> configure.
-> If you need this in libxft with smaller version numbers, backport my  =
-
-> patch yourself.
+> It seems that the comiler can not find the fenv.h which should be provide=
+d
+> by uclibc.
 >
-> Bye Henning
+> /media/work-disk/workdir/oe-qemux86-micro-uclibc/work/i686-oe-linux-uclib=
+c/gcc-cross-intermediate-4.4.2-r1.1/gcc-4.4.2/libgcc/config/libbid/bid_deci=
+mal_globals.c:47:18:
+> error: fenv.h: No such file or directory
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
+> Any advice is welcome.
 
+You can add --disable-decimal-float to the configure options if its missing=
+.
+try the attached patch.
 
+or you can enable UCLIBC_HAS_FENV in the uclibc config file.
 
--- =
+--001636c5a4bd8db4fb047bce6a09
+Content-Type: application/octet-stream; name=diff
+Content-Disposition: attachment; filename=diff
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_g3rlx9r00
 
-Guo Hongruan, Embedded Linux Consultant
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
+ZGlmZiAtLWdpdCBhL3JlY2lwZXMvZ2NjL2djYy00LjQuMi5pbmMgYi9yZWNpcGVzL2djYy9nY2Mt
+NC40LjIuaW5jCmluZGV4IDFlZjEzNTkuLjBjOWYzYzQgMTAwNjQ0Ci0tLSBhL3JlY2lwZXMvZ2Nj
+L2djYy00LjQuMi5pbmMKKysrIGIvcmVjaXBlcy9nY2MvZ2NjLTQuNC4yLmluYwpAQCAtMzMsNCAr
+MzMsNyBAQCBFWFRSQV9PRUNPTkZfQkFTRSA9ICIgLS1lbmFibGUtbGlic3NwIFwKIAkJICAgICAg
+LS1kaXNhYmxlLWJvb3RzdHJhcCAtLWRpc2FibGUtbGliZ29tcCBcCiAJCSAgICAgIC0tZGlzYWJs
+ZS1saWJtdWRmbGFwIgogCi1FWFRSQV9PRUNPTkZfYXBwZW5kX2xpbnV4LXVjbGliYyA9ICIgJHtA
+YmFzZV9jb250YWlucygnVEFSR0VUX0FSQ0gnLCAncG93ZXJwYycsICctLWRpc2FibGUtZGVjaW1h
+bC1mbG9hdCAtLXdpdGhvdXQtbG9uZy1kb3VibGUtMTI4JywgJycsZCl9IgorRVhUUkFfT0VDT05G
+X2FwcGVuZF9saW51eC11Y2xpYmMgPSAiIC0tZGlzYWJsZS1kZWNpbWFsLWZsb2F0ICIKK0VYVFJB
+X09FQ09ORl9hcHBlbmRfbGludXgtdWNsaWJjZWFiaSA9ICIgLS1kaXNhYmxlLWRlY2ltYWwtZmxv
+YXQgIgorRVhUUkFfT0VDT05GX2FwcGVuZF9saW51eC11Y2xpYmNzcGUgPSAiIC0tZGlzYWJsZS1k
+ZWNpbWFsLWZsb2F0ICIKK0VYVFJBX09FQ09ORl9hcHBlbmRfbGludXgtdWNsaWJjID0gIiAke0Bi
+YXNlX2NvbnRhaW5zKCdUQVJHRVRfQVJDSCcsICdwb3dlcnBjJywgJy0td2l0aG91dC1sb25nLWRv
+dWJsZS0xMjgnLCAnJyxkKX0iCg==
 
-
+--001636c5a4bd8db4fb047bce6a09--
