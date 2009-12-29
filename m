@@ -1,35 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f212.google.com ([209.85.220.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NPXt7-0004Ko-I2 for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Dec 2009 09:57:12 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NPXrE-0007b2-7e
+	(envelope-from <leon.woestenberg@gmail.com>) id 1NPdRm-0005Av-Ou
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Dec 2009 09:55:12 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Dec 2009 09:55:12 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Tue, 29 Dec 2009 15:53:21 +0100
+Received: by fxm4 with SMTP id 4so9566787fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Dec 2009 09:55:12 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 29 Dec 2009 09:54:49 +0100
-Message-ID: <hhcg4o$ubd$1@ger.gmane.org>
+	Tue, 29 Dec 2009 06:51:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=zFcgQSusm49TBkYjY8SAjaGGgUgurbyyLtns9dh0lyk=;
+	b=YtIo5GHBYbYbVPL/XPsoLKjAWAF4NXFXrcQXH1F7H3nqnQBAJx80WVpMepp+q02blc
+	PCKHDjOx4IMytbrhSzS3kifIbrc1kdCTfWQljPdalXnsd0fvzZZMnAcuNee6B2E0tU7L
+	OE+hMDDM5BADIAEQkaEXv0/iT5wmEFqSUGkSA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=UE6xB0eQnTWfJl0O/40KE2NPV7qL321i7KCuiaX30xCv86COJ0m/r/aJPsGwjwGkUO
+	p2jyMw3mVCPFk5kcviFcoeqiHA4sTye4jAt6yo46oJ6tJPve9+D6vZFo9BXoz2dF7YMc
+	zMJ3zflkooQ3WPUpOC5yENk3YKvrAitKWgAos=
+MIME-Version: 1.0
+Received: by 10.239.193.74 with SMTP id h10mr451796hbi.163.1262098280594; Tue, 
+	29 Dec 2009 06:51:20 -0800 (PST)
+In-Reply-To: <hhcg4o$ubd$1@ger.gmane.org>
 References: <c384c5ea0912281419h3c14c675r8ec6d044c234a381@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.5) Gecko/20091220 Shredder/3.0.1pre
-In-Reply-To: <c384c5ea0912281419h3c14c675r8ec6d044c234a381@mail.gmail.com>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	<hhcg4o$ubd$1@ger.gmane.org>
+Date: Tue, 29 Dec 2009 15:51:20 +0100
+Message-ID: <c384c5ea0912290651i1d3370bdk509d6f04f54a8d1a@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.220.212
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: helloworld image
@@ -46,44 +47,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Dec 2009 08:57:12 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 29 Dec 2009 14:53:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Koen,
 
-On 28-12-09 23:19, Leon Woestenberg wrote:
-> Hello (world),
-> 
-> 
-> when compiling my favorite minimal image ("helloworld-image") under
-> both the minimal-distro and angstrom
-> shows 4 MB of cruft being dragged in.
-> 
-> What happened?
-> 
-> I would like to start with nothing and then configure the system for
-> what I need.
-> 
-> Should I start another more-minimal distro or can we change the
-> minimal distro to be truely minimalistic?
+On Tue, Dec 29, 2009 at 9:54 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> On 28-12-09 23:19, Leon Woestenberg wrote:
+>> I would like to start with nothing and then configure the system for
+>> what I need.
+>>
+>> Should I start another more-minimal distro or can we change the
+>> minimal distro to be truely minimalistic?
+>
+> You're confusing image and distro again. With angstrom I'm using a 80KiB
+> big image that has an fbdev based gui, so it looks your image recipe is
+> doing something wrong.
+>
+I think I am not confusing them again, I think other people are.
 
-You're confusing image and distro again. With angstrom I'm using a 80KiB
-big image that has an fbdev based gui, so it looks your image recipe is
-doing something wrong.
+This is what happened:
 
-regards,
+Changes to the distro have made the image bigger (80 kB to 4MB).
 
-Koen
+Apparently, the image does not define what goes in the image, but the
+distro now specifies a minimum amount of packages that goes in.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Also, we seem to be moving to the point where people must both disable
+default packages to go in, and enable packages to go in.
 
-iD8DBQFLOcPZMkyGM64RGpERAkP9AKCE4ooqQ0ZfZs72oY5+y/YiYBeHiwCfTqbo
-czpMNG83R1f5tge+nY2iK3E=
-=YlYb
------END PGP SIGNATURE-----
+Why not simply go back to the idea where the images defines what goes
+in?  I think it's more user friendly.
 
+Regards,
+-- 
+Leon
 
 
