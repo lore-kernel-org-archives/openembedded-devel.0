@@ -1,35 +1,32 @@
-Received: from mail-fx0-f212.google.com ([209.85.220.212])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1NPdot-0005vd-Gs
+	(envelope-from <philb@gnu.org>) id 1NPe7M-00032L-D3
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Dec 2009 16:17:14 +0100
-Received: by fxm4 with SMTP id 4so9582613fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Dec 2009 07:15:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=3AhdUcb/O0OtrgOriaDsxoFe+nEPgqgmebfFuJ/ctWQ=;
-	b=UvVxAiqt2qG6aQG1DY72wKKtIfbKKSxSawoDNpqMVklLmTRO6DPohf9tVNnDZU5M7h
-	0QSxWWbPjLNmBafIPHDRMgFsE2VAQ/YuuDQX3jm6xdy/CuT2NGHLuLSXNkYChYTfI642
-	/rYQazmpEHt++rqmnY0Wm7mQds7BOzC9gMIUU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=FjURE9ph10uy/2FKoHF8cruyx4nlrGjAF9D8VTGZCMREzY5EgcuWySJJE7NRHKleun
-	yF3jBoUiCFE4dczXuZOQ0gMW63U/8ulRYc0L+PtbsbIR2QE+BIPjU64gLSZvXnmB0xxX
-	wtWUeQP05ncrJ9KJ645Arb6aOrssKVUGCJoe4=
-MIME-Version: 1.0
-Received: by 10.239.138.35 with SMTP id n35mr1866921hbn.30.1262099713845; Tue, 
-	29 Dec 2009 07:15:13 -0800 (PST)
-Date: Tue, 29 Dec 2009 16:15:13 +0100
-Message-ID: <c384c5ea0912290715l24b705fat6700077741b1cc5b@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.220.212
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+	Tue, 29 Dec 2009 16:36:19 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NPe5U-00052S-JB
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Dec 2009 15:34:20 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1NPe5U-0001F6-95
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Dec 2009 15:34:20 +0000
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <c384c5ea0912290715l24b705fat6700077741b1cc5b@mail.gmail.com>
+References: <c384c5ea0912290715l24b705fat6700077741b1cc5b@mail.gmail.com>
+Date: Tue, 29 Dec 2009 15:34:16 +0000
+Message-Id: <1262100857.15344.112.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Move IMAGE_BOOT stuff into distro's?
+Subject: Re: Move IMAGE_BOOT stuff into distro's?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,42 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Dec 2009 15:17:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 29 Dec 2009 15:36:19 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Why do we hardcode names of default packages in the "image.bbclass"?
+On Tue, 2009-12-29 at 16:15 +0100, Leon Woestenberg wrote:
+> Why do we hardcode names of default packages in the "image.bbclass"?
+> 
+> Now every image recipe that doesn't want these has to know the
+> variables it has to override.
+> 
+> Shouldn't this be distro material instead?
 
-Now every image recipe that doesn't want these has to know the
-variables it has to override.
+Funnily enough I was just discussing a similar issue with Mickey on IRC
+a few minutes ago.
 
-Shouldn't this be distro material instead?
+Most of these variables did use to be part of the distro configuration
+but it appears they were moved into image.bbclass by commit
+9752b780ae9cbe8b36507890d8ee55c439eb2b35.  Presumably this change was
+made for a reason, but it does seem like a retrograde step to me: one
+particular ill-effect of that change is that images built for micro have
+regressed to using udev, whereas previously they were selecting
+busybox-mdev via ${DISTRO_DEV_MANAGER}.  There doesn't seem to be any
+obviously-correct way to restore the previous behaviour.
 
-#
-# udev, devfsd, busybox-mdev (from busybox) or none
-#
-IMAGE_DEV_MANAGER ?= "${@base_contains("MACHINE_FEATURES", "kernel26",
- "udev","",d)} "
-#
-# sysvinit, upstart
-#
-IMAGE_INIT_MANAGER ?= "sysvinit sysvinit-pidof"
-IMAGE_INITSCRIPTS ?= "initscripts"
-#
-# tinylogin, getty
-#
-IMAGE_LOGIN_MANAGER ?= "tinylogin"
+I have suggested to Mickey that perhaps the TSC would like to consider
+this issue and come up with a coherent policy on how this stuff should
+be managed.
 
-IMAGE_KEEPROOTFS ?= ""
-IMAGE_KEEPROOTFS[doc] = "Set to non-empty to keep ${IMAGE_ROOTFS}
-around after image creation."
+p.
 
-IMAGE_BOOT ?= "${IMAGE_INITSCRIPTS} \
-${IMAGE_DEV_MANAGER} \
-${IMAGE_INIT_MANAGER} \
-${IMAGE_LOGIN_MANAGER} "
 
-Regards,
--- 
-Leon
 
 
