@@ -1,39 +1,35 @@
 Received: from mail-fx0-f212.google.com ([209.85.220.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1NPde2-00085A-Uj
+	(envelope-from <leon.woestenberg@gmail.com>) id 1NPdot-0005vd-Gs
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Dec 2009 16:06:02 +0100
-Received: by fxm4 with SMTP id 4so9575070fxm.12
+	Tue, 29 Dec 2009 16:17:14 +0100
+Received: by fxm4 with SMTP id 4so9582613fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Dec 2009 07:04:01 -0800 (PST)
+	Tue, 29 Dec 2009 07:15:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=D4f0QPEn7gx9+9WoJqzMmH3UhGZtopF8TQd3Obfy3PU=;
-	b=JjQOReLuUNLqYIcqGXZ/paAQa9rtv0LdJXTzHoUQSUO/L8X/izfFOBvbvTuEwOpqEA
-	JzBUgymW6ne92u24sIfO9cyZsoX34WDWjOl0EK7nTJzeBVMSMihm77ksvBqKE2Zrn5UG
-	j9yP6pJaI4gT9/2Fc1iAgwPUP6TPUUAdI4+98=
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=3AhdUcb/O0OtrgOriaDsxoFe+nEPgqgmebfFuJ/ctWQ=;
+	b=UvVxAiqt2qG6aQG1DY72wKKtIfbKKSxSawoDNpqMVklLmTRO6DPohf9tVNnDZU5M7h
+	0QSxWWbPjLNmBafIPHDRMgFsE2VAQ/YuuDQX3jm6xdy/CuT2NGHLuLSXNkYChYTfI642
+	/rYQazmpEHt++rqmnY0Wm7mQds7BOzC9gMIUU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=U2jEb7gRlLyWyDzBlVaM9ddtu7nG+ruA4GmDT1J6f736tGwxAxOjAQ/3l5IQ/Qr62b
-	TP+8TZLoC7AzbpqlwJhiKQ42GxyfJRRpNP+SvTQgqhCuUG/K626PoSCWMfKE0y/eaJIB
-	UxrvlAa5WJBXIyelE2jV+tmqdDUJjtKZybQ14=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=FjURE9ph10uy/2FKoHF8cruyx4nlrGjAF9D8VTGZCMREzY5EgcuWySJJE7NRHKleun
+	yF3jBoUiCFE4dczXuZOQ0gMW63U/8ulRYc0L+PtbsbIR2QE+BIPjU64gLSZvXnmB0xxX
+	wtWUeQP05ncrJ9KJ645Arb6aOrssKVUGCJoe4=
 MIME-Version: 1.0
-Received: by 10.239.183.37 with SMTP id s37mr1793797hbg.90.1262099041110; Tue, 
-	29 Dec 2009 07:04:01 -0800 (PST)
-In-Reply-To: <1262040945.28755.270.camel@lenovo.internal.reciva.com>
-References: <c384c5ea0912281419h3c14c675r8ec6d044c234a381@mail.gmail.com>
-	<1262040945.28755.270.camel@lenovo.internal.reciva.com>
-Date: Tue, 29 Dec 2009 16:04:01 +0100
-Message-ID: <c384c5ea0912290704j1bbc52c4s25d7009fc880f3ac@mail.gmail.com>
+Received: by 10.239.138.35 with SMTP id n35mr1866921hbn.30.1262099713845; Tue, 
+	29 Dec 2009 07:15:13 -0800 (PST)
+Date: Tue, 29 Dec 2009 16:15:13 +0100
+Message-ID: <c384c5ea0912290715l24b705fat6700077741b1cc5b@mail.gmail.com>
 From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-SA-Exim-Connect-IP: 209.85.220.212
 X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: helloworld image
+Subject: Move IMAGE_BOOT stuff into distro's?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,37 +43,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Dec 2009 15:06:02 -0000
+X-List-Received-Date: Tue, 29 Dec 2009 15:17:14 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hello Phil,
+Why do we hardcode names of default packages in the "image.bbclass"?
 
-On Mon, Dec 28, 2009 at 11:55 PM, Phil Blundell <philb@gnu.org> wrote:
-> On Mon, 2009-12-28 at 23:19 +0100, Leon Woestenberg wrote:
->> when compiling my favorite minimal image ("helloworld-image") under
->> both the minimal-distro and angstrom
->> shows 4 MB of cruft being dragged in.
->>
->> What happened?
->>
->> I would like to start with nothing and then configure the system for
->> what I need.
->>
->> Should I start another more-minimal distro or can we change the
->> minimal distro to be truely minimalistic?
->
-> It might be worth trying DISTRO=micro to see if that works any better
-> for you.
->
-Thanks for the suggestion.
+Now every image recipe that doesn't want these has to know the
+variables it has to override.
 
-Instead I would like to learn how is (wrongly) determined what goes
-into the image.
+Shouldn't this be distro material instead?
 
-This looks pretty definite to me, nothing should override the image
-recipe on this one:
+#
+# udev, devfsd, busybox-mdev (from busybox) or none
+#
+IMAGE_DEV_MANAGER ?= "${@base_contains("MACHINE_FEATURES", "kernel26",
+ "udev","",d)} "
+#
+# sysvinit, upstart
+#
+IMAGE_INIT_MANAGER ?= "sysvinit sysvinit-pidof"
+IMAGE_INITSCRIPTS ?= "initscripts"
+#
+# tinylogin, getty
+#
+IMAGE_LOGIN_MANAGER ?= "tinylogin"
 
-IMAGE_INSTALL = "helloworld"
+IMAGE_KEEPROOTFS ?= ""
+IMAGE_KEEPROOTFS[doc] = "Set to non-empty to keep ${IMAGE_ROOTFS}
+around after image creation."
+
+IMAGE_BOOT ?= "${IMAGE_INITSCRIPTS} \
+${IMAGE_DEV_MANAGER} \
+${IMAGE_INIT_MANAGER} \
+${IMAGE_LOGIN_MANAGER} "
 
 Regards,
 -- 
