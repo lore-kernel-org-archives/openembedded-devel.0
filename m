@@ -1,39 +1,39 @@
-Received: from ey-out-1920.google.com ([74.125.78.146])
+Received: from dan.rpsys.net ([93.97.175.187])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1NPi1M-0005ZV-7b
+	(envelope-from <rpurdie@rpsys.net>) id 1NPii0-000481-8C
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Dec 2009 20:46:23 +0100
-Received: by ey-out-1920.google.com with SMTP id 26so1164815eyw.4
+	Tue, 29 Dec 2009 21:30:27 +0100
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nBTKOTCl023677 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Dec 2009 20:24:29 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id RQExx0VSXg1y
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Dec 2009 11:44:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=UwoAr4x+cOEQ/XdIWPwpIz6nYzMjJX2K6n9kb3Vq8IU=;
-	b=nWHaqZjXS/SbqImKLwhJ8r492QKlmEjsIK92Tx7yGHLdRj7YBUdxQJWCOI8EK7W4Je
-	blzRjdyr1km4Qajasfi8B2TdiOOEOuJiECJ0TmXQXCXJwllDXm1yTeVdEOT1yRwwMKHe
-	ouqH5cP7kMkMhvS7bsz2JkZjtc3kVgE4jBAG4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=FiKdhJgG0Rv4vrW/MClfP/kv1yIy9LRTBOXNOSh4g4fR3DZuHKIDMX0ITrX4Cyaw3z
-	eT5vPdILdOq8F1HZurcRhik9Ydmz5szm0dmXF8L1r6cFaM53x4/vEvnGMZDJqJl8Mlf/
-	E32eSsfm6++Gy2YB9pXNT8zbPt6Iy3q8v3jrE=
-MIME-Version: 1.0
-Received: by 10.213.102.138 with SMTP id g10mr11973637ebo.19.1262115864407; 
-	Tue, 29 Dec 2009 11:44:24 -0800 (PST)
-In-Reply-To: <hhdipd$25q$2@ger.gmane.org>
-References: <c384c5ea0912290715l24b705fat6700077741b1cc5b@mail.gmail.com>
-	<hhdipd$25q$2@ger.gmane.org>
-Date: Tue, 29 Dec 2009 20:44:24 +0100
-Message-ID: <c384c5ea0912291144p3c800d9fq4975f94494a04e1f@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
+	Tue, 29 Dec 2009 20:24:29 +0000 (GMT)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	nBTKOOJW023668
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Dec 2009 20:24:25 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.78.146
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+In-Reply-To: <hhdikl$25q$1@ger.gmane.org>
+References: <20091222140029.GF10910@xora.vm.bytemark.co.uk>
+	<1261596258.8748.156.camel@dax.rpnet.com>
+	<20091229155215.00006145@unknown> <hhdikl$25q$1@ger.gmane.org>
+Date: Tue, 29 Dec 2009 20:30:37 +0000
+Message-Id: <1262118637.8748.173.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Move IMAGE_BOOT stuff into distro's?
+Subject: Re: [TSC] First Meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,38 +47,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Dec 2009 19:46:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 29 Dec 2009 20:30:27 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Hello Koen,
+On Tue, 2009-12-29 at 19:43 +0100, Koen Kooi wrote:
+> On 29-12-09 16:52, Graeme Gregory wrote:
+> > On Wed, 23 Dec 2009 19:24:18 +0000
+> > Richard Purdie <rpurdie@rpsys.net> wrote:
+> >> On Tue, 2009-12-22 at 14:00 +0000, Graeme Gregory wrote:
+> >>> I think we should try and organise a general one hour chat of the
+> >>> TSC on irc sometime the first week in January (4th - 8th). I think
+> >>> we should probably hold this private discussion just to organise
+> >>> ourselves then organise some form of public meeting later in the
+> >>> month to let the OE community have their say.
+> >>
+> >> Agreed, we should meet and the first week in January sounds good to
+> >> me. Looking at the timezones of the TSC members an afternoon or
+> >> evening GMT probably works best. How about I pick a time, say 8pm-9pm
+> >> on Monday 5th and then we can discuss who that doesn't work for :)
+> >>
+> > That works for me.
+> 
+> Both the date and the medium don't work for me. I don't do IRC after
+> office hours anymore, since I'm only on IRC for work related things.
 
-On Tue, Dec 29, 2009 at 7:46 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 29-12-09 16:15, Leon Woestenberg wrote:
->> Why do we hardcode names of default packages in the "image.bbclass"?
->>
->> Now every image recipe that doesn't want these has to know the
->> variables it has to override.
->>
->> Shouldn't this be distro material instead?
->
-> No, since these are things you want to be able to manage on a per image
-> basis, not distro wide. I don't want to create a whole 'new' distro just
-> to try mdev instead of udev or use tinylogin instead of shadow, etc.
-> When we made that change we discussed what the default values for those
-> vars should be and it was agreed they should provide sane defaults.
->
-OK understood, apparantly we want to have a generic image base
-containing udev, a login, shadow etc.
-that is distro-indepent.
+Could you make an IRC meeting if it was during work hours?
 
-Can we remove that from the image class, and move into a
-image-boot.inc or something?
+Is so, I suspect there may be others who might not be able to but we can
+try.
 
-Regards,
--- 
-Leon
+If not, can you suggest an interactive medium that does work? Or are we
+not planning to have any interactive meetings?
+
+Cheers,
+
+Richard
+
+
 
 
