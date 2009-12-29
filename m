@@ -1,24 +1,35 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NPOXV-0007EL-Ev
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NPXt7-0004Ko-I2 for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Dec 2009 09:57:12 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NPXrE-0007b2-7e
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Dec 2009 23:58:17 +0100
-Received: from [85.210.12.93] (helo=[192.168.2.155])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NPOVS-0005yq-D0
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Dec 2009 22:56:08 +0000
-From: Phil Blundell <philb@gnu.org>
+	Tue, 29 Dec 2009 09:55:12 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Dec 2009 09:55:12 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Dec 2009 09:55:12 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <c384c5ea0912281419h3c14c675r8ec6d044c234a381@mail.gmail.com>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 29 Dec 2009 09:54:49 +0100
+Message-ID: <hhcg4o$ubd$1@ger.gmane.org>
 References: <c384c5ea0912281419h3c14c675r8ec6d044c234a381@mail.gmail.com>
-Date: Mon, 28 Dec 2009 22:55:45 +0000
-Message-ID: <1262040945.28755.270.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-Broken-Reverse-DNS: no host name found for IP address 85.210.12.93
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.5) Gecko/20091220 Shredder/3.0.1pre
+In-Reply-To: <c384c5ea0912281419h3c14c675r8ec6d044c234a381@mail.gmail.com>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: helloworld image
@@ -35,11 +46,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Dec 2009 22:58:17 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 29 Dec 2009 08:57:12 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2009-12-28 at 23:19 +0100, Leon Woestenberg wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 28-12-09 23:19, Leon Woestenberg wrote:
+> Hello (world),
+> 
+> 
 > when compiling my favorite minimal image ("helloworld-image") under
 > both the minimal-distro and angstrom
 > shows 4 MB of cruft being dragged in.
@@ -52,11 +69,21 @@ On Mon, 2009-12-28 at 23:19 +0100, Leon Woestenberg wrote:
 > Should I start another more-minimal distro or can we change the
 > minimal distro to be truely minimalistic?
 
-It might be worth trying DISTRO=micro to see if that works any better
-for you.
+You're confusing image and distro again. With angstrom I'm using a 80KiB
+big image that has an fbdev based gui, so it looks your image recipe is
+doing something wrong.
 
-p.
+regards,
 
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLOcPZMkyGM64RGpERAkP9AKCE4ooqQ0ZfZs72oY5+y/YiYBeHiwCfTqbo
+czpMNG83R1f5tge+nY2iK3E=
+=YlYb
+-----END PGP SIGNATURE-----
 
 
 
