@@ -1,38 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NPuMY-0006P1-TU for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Dec 2009 09:57:05 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NPuKf-0005K3-Ia
+	(envelope-from <holger+oe@freyther.de>) id 1NPuQ1-0006e8-IW
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Dec 2009 09:55:05 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2009 09:55:05 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Wed, 30 Dec 2009 10:00:40 +0100
+Received: from tamarin.localnet (123-192-180-176.dynamic.kbronet.com.tw
+	[123.192.180.176])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 9FAF11B10C03
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2009 09:55:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 30 Dec 2009 08:55:29 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 30 Dec 2009 09:49:48 +0100
-Message-ID: <hhf47c$n7h$3@ger.gmane.org>
-References: <1262129957.3447.37.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.5) Gecko/20091220 Shredder/3.0.1pre
-In-Reply-To: <1262129957.3447.37.camel@mattotaupa.wohnung.familie-menzel.net>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Wed, 30 Dec 2009 09:58:31 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <> <200912300930.12895.holger+oe@freyther.de>
+	<op.u5qsujbtmn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <op.u5qsujbtmn1qzu@guohr-laptop-ubuntu>
+MIME-Version: 1.0
+Message-Id: <200912300958.31264.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [`bitbake initramfs-kexecboot-image`] [kexecboot_git.bb] ERROR: function do_compile failed
+Subject: Re: [PATCH] Remove the micro distro specific overridding of variables
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,38 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Dec 2009 08:57:06 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 30 Dec 2009 09:00:40 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 30-12-09 00:39, Paul Menzel wrote:
-> Dear OpenEmbedded hackers,
+On Wednesday 30 December 2009 09:36:09 Guo Hongruan wrote:
+> The micro/micro-uclibc specific check does cause the miss of the
+> /etc/default directory, which is required by the following installation.
+> So the installation of base-file failed when DISTRO=micro or
+> DISTRO=micro-uclibc.
 > 
+> On my site, the following check did work. I have verified on qemux86,
+> qemuarm and qemumips machine.
 > 
-> after reading Koen’s reply [1] I tried to `bitbake
-> initramfs-kexecboot-image`. But do_compile failed for kexecboot_git.bb.
-> Here is the snippet from the error log.
-> 
->         […]
->         In file included from util.h:24,
->                          from cfgparser.c:40:
->         /oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/lib/klibc/include/asm/setup.h:143: error: expected specifier-qualifier-list before 'u8'
+> I am not sure the goal of this check.
 
-For armv7a builds you need to change that 'u8' to '__u8'
+I'm not really into this but you seem to just undo the goal. The goal for 
+"micro" is to be as small as possible, so it is trying to reduce the size of 
+every package in a way or another. For base-files it means to install less 
+files.
 
-regards,
+Now the question we should ask could be:
+	- Why is what I'm trying to build breaking and how can I fix it without
+          blowing up "micro" to be full featured again.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLOxQsMkyGM64RGpERArQwAJ4snzYppULW2fmTpZulujV4NM3QrgCgkfqI
-h3EVq0rhye+z9XZIuO7yIHk=
-=NIcd
------END PGP SIGNATURE-----
-
+z.
 
 
