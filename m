@@ -1,47 +1,40 @@
-Received: from mail-pw0-f53.google.com ([209.85.160.53])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NPu4Q-0005y8-0O
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NPuFQ-0006Aq-OU for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Dec 2009 09:49:43 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NPuDW-0003Tp-0N
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Dec 2009 09:38:21 +0100
-Received: by pwi18 with SMTP id 18so7235124pwi.12
+	Wed, 30 Dec 2009 09:47:42 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Dec 2009 09:47:41 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2009 00:36:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:to:subject
-	:references:date:mime-version:content-transfer-encoding:from
-	:organization:message-id:in-reply-to:user-agent;
-	bh=EMPC6ceKuCoYb+S6dAUiJk/Xhz+hBKLg5WiVNVpYm8Q=;
-	b=iwXR6rOn0nSbPBXTZVf5lWV3gjinCuZeWo6wMvWykfw9CCx1rXfIAf9+BiSdt5wIET
-	0eu50uM/Gh/aC1cwXTegYAATHyWpfapzERgzA/w5FmvifdAMvOKOir/5BYhxfbZ+G4QH
-	SuxeGMFv/80J/zGKtMvdoQzgRes2yNAznGp+A=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:to:subject:references:date:mime-version
-	:content-transfer-encoding:from:organization:message-id:in-reply-to
-	:user-agent;
-	b=KY6+/YEd7y+RYOks9TZj3XOVBWag9mt8dESgyDJzNCXbNtfTAk69KxdF5UsFEb5Ru4
-	1VXmFqHwZpZcaOa7wXZSSlB6FtmopEBBDQgMJWtHPy26tDshFEIlQ3K7jj4is2Ksj+q5
-	EblYhYjfv2Ca/G6PPSvMBeUhgD4MMHjy+9Jg4=
-Received: by 10.142.66.27 with SMTP id o27mr11358241wfa.216.1262162178075;
-	Wed, 30 Dec 2009 00:36:18 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.54.101.56])
-	by mx.google.com with ESMTPS id 20sm13330102pzk.1.2009.12.30.00.36.15
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 30 Dec 2009 00:36:17 -0800 (PST)
+	Wed, 30 Dec 2009 09:47:41 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <> <1262160936-28480-1-git-send-email-camelguo@gmail.com>
-	<200912300930.12895.holger+oe@freyther.de>
-Date: Wed, 30 Dec 2009 16:36:09 +0800
-MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Organization: Gulessoft, Inc
-Message-ID: <op.u5qsujbtmn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <200912300930.12895.holger+oe@freyther.de>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.160.53
-X-SA-Exim-Mail-From: camelguo@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 30 Dec 2009 09:47:19 +0100
+Message-ID: <hhf42m$n7h$1@ger.gmane.org>
+References: <20091222140029.GF10910@xora.vm.bytemark.co.uk>	<1261596258.8748.156.camel@dax.rpnet.com>	<20091229155215.00006145@unknown>
+	<hhdikl$25q$1@ger.gmane.org>
+	<1262118637.8748.173.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.5) Gecko/20091220 Shredder/3.0.1pre
+In-Reply-To: <1262118637.8748.173.camel@dax.rpnet.com>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Remove the micro distro specific overridding of variables
+Subject: Re: [TSC] First Meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,57 +48,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Dec 2009 08:38:21 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Wed, 30 Dec 2009 08:49:43 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-The micro/micro-uclibc specific check does cause the miss of the  =
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-/etc/default directory, which is required by the following installation.=
-  =
+On 29-12-09 21:30, Richard Purdie wrote:
+> On Tue, 2009-12-29 at 19:43 +0100, Koen Kooi wrote:
+>> On 29-12-09 16:52, Graeme Gregory wrote:
+>>> On Wed, 23 Dec 2009 19:24:18 +0000
+>>> Richard Purdie <rpurdie@rpsys.net> wrote:
+>>>> On Tue, 2009-12-22 at 14:00 +0000, Graeme Gregory wrote:
+>>>>> I think we should try and organise a general one hour chat of the
+>>>>> TSC on irc sometime the first week in January (4th - 8th). I think
+>>>>> we should probably hold this private discussion just to organise
+>>>>> ourselves then organise some form of public meeting later in the
+>>>>> month to let the OE community have their say.
+>>>>
+>>>> Agreed, we should meet and the first week in January sounds good to
+>>>> me. Looking at the timezones of the TSC members an afternoon or
+>>>> evening GMT probably works best. How about I pick a time, say 8pm-9pm
+>>>> on Monday 5th and then we can discuss who that doesn't work for :)
+>>>>
+>>> That works for me.
+>>
+>> Both the date and the medium don't work for me. I don't do IRC after
+>> office hours anymore, since I'm only on IRC for work related things.
+> 
+> Could you make an IRC meeting if it was during work hours?
 
-So the installation of base-file failed when DISTRO=3Dmicro or  =
+That might work
 
-DISTRO=3Dmicro-uclibc.
+> Is so, I suspect there may be others who might not be able to but we can
+> try.
+> 
+> If not, can you suggest an interactive medium that does work? Or are we
+> not planning to have any interactive meetings?
 
-On my site, the following check did work. I have verified on qemux86,  =
+Jabber conference rooms?
 
-qemuarm and qemumips machine.
+regards,
 
-I am not sure the goal of this check.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-=E5=9C=A8 Wed, 30 Dec 2009 16:30:12 +0800=EF=BC=8CHolger Hans Peter Frey=
-ther  =
+iD8DBQFLOxOWMkyGM64RGpERAm9fAJ9d5BbMLHrxwJiZGJqjy0zKWP/EmQCfWfIt
+8s7a+Qky/BQU4M6MBeYeQAQ=
+=clRO
+-----END PGP SIGNATURE-----
 
-<holger+oe@freyther.de> =E5=86=99=E9=81=93:
-
-> On Wednesday 30 December 2009 09:15:36 Guo Hongruan wrote:
->> 1. Remove the *_micro variable overridding;
->> 2. Remove the micro/micro-uclibc specific installation decision, whic=
-h
->>  causes the installation of base-file failed when
->
-> Are you sure the initial goal of the check is still met? If so, it wou=
-ld  =
-
-> be
-> nice to find this as explanation in the commit message.
->
-> thanks
-> 	z.
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
-
-
-
--- =
-
-Guo Hongruan, Embedded Linux Consultant
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
 
 
