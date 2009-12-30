@@ -1,46 +1,33 @@
-Received: from mail-px0-f182.google.com ([209.85.216.182])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NPwmt-0008R1-DA
+	(envelope-from <philb@gnu.org>) id 1NPwvl-0000Dd-JE
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Dec 2009 12:32:26 +0100
-Received: by pxi12 with SMTP id 12so7111866pxi.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Dec 2009 03:30:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:to:subject
-	:references:date:mime-version:content-transfer-encoding:from
-	:organization:message-id:in-reply-to:user-agent;
-	bh=x3XRQHoVkrzzm5UwT1amjA2fn3BIkYrpLCx8R+sbe14=;
-	b=kWOkFXifwJrkrBKgTST3eIqpgsOAi6N/RRiAvZ22RkZBG/Rl5ss+y+G/gWasH6yaDK
-	i2q6Vrj4AA8b+cfhQ3rhJeOcKBqLrPoRn1aSKzTnsNR+Em9jIwpE4U5FBdBtQwUuq3xD
-	ZmwGwlNzA4PI0OspKKqng8oY8ctivTUu4QuJE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:to:subject:references:date:mime-version
-	:content-transfer-encoding:from:organization:message-id:in-reply-to
-	:user-agent;
-	b=azFlft04DsJ32WgCuJyX0T/3oC4/X4KCZ+vQloOVvT5KuETpSeiRUXaeHnTohSi9AD
-	7hlQBM4JoN72mAvU5wsHnBbLjAKFgyEW+AWuL5d9/e9lT6vCWUDBY3r69z3kEWq7vc5b
-	lEXYf6vWpP2w4Uwh4CGCMAchWnnCCPjTYepFM=
-Received: by 10.115.100.4 with SMTP id c4mr9609863wam.13.1262172624032;
-	Wed, 30 Dec 2009 03:30:24 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.54.101.56])
-	by mx.google.com with ESMTPS id 22sm13426059pzk.6.2009.12.30.03.30.21
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 30 Dec 2009 03:30:23 -0800 (PST)
+	Wed, 30 Dec 2009 12:41:36 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NPwts-0000Tl-3X
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Dec 2009 11:39:36 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1NPwtr-0004fi-Iv
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Dec 2009 11:39:35 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <op.u5q0wnlkmn1qzu@guohr-laptop-ubuntu>
 References: <> <1262160936-28480-1-git-send-email-camelguo@gmail.com>
 	<1262164396.2553.2.camel@lenovo.internal.reciva.com>
 	<op.u5qvsqdlmn1qzu@guohr-laptop-ubuntu>
 	<1262172255.15344.118.camel@mill.internal.reciva.com>
-Date: Wed, 30 Dec 2009 19:30:13 +0800
-MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Organization: Gulessoft, Inc
-Message-ID: <op.u5q0wnlkmn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <1262172255.15344.118.camel@mill.internal.reciva.com>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.216.182
-X-SA-Exim-Mail-From: camelguo@gmail.com
+	<op.u5q0wnlkmn1qzu@guohr-laptop-ubuntu>
+Date: Wed, 30 Dec 2009 11:39:31 +0000
+Message-Id: <1262173171.15344.122.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.3 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [PATCH] Remove the micro distro specific overridding of variables
@@ -57,236 +44,221 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Dec 2009 11:32:26 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Wed, 30 Dec 2009 11:41:36 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I just want to test openembedded with all possible combinations and to  =
+That is a worthy goal and one that I certainly support.  But, if testing
+is your primary focus, I would encourage you to test with an unmodified
+tree rather than one that contains local changes.  Otherwise it can be
+difficult to distinguish between true bugs in the main OE tree and
+issues which have been introduced by your local modifications.
 
-make openembedded better.  ;)
+p.
 
-=E5=9C=A8 Wed, 30 Dec 2009 19:24:14 +0800=EF=BC=8CPhil Blundell <philb@g=
-nu.org> =E5=86=99=E9=81=93:
+On Wed, 2009-12-30 at 19:30 +0800, Guo Hongruan wrote:
+> I just want to test openembedded with all possible combinations and to =20
+> make openembedded better.  ;)
+>=20
+> =E5=9C=A8 Wed, 30 Dec 2009 19:24:14 +0800=EF=BC=8CPhil Blundell <philb@gn=
+u.org> =E5=86=99=E9=81=93:
+>=20
+> > It sounds to me as though micro is simply not the right DISTRO for your
+> > purposes.  If you want to use eglibc, and you want the packages to
+> > contain the full complement of files, you might be better off with
+> > minimal.
+> >
+> > p.
+> >
+> > On Wed, 2009-12-30 at 17:39 +0800, Guo Hongruan wrote:
+> >> I searched the whole openembedded directory and found the following
+> >> references of micro as DISTRO overriding.
+> >> recipes/base-passwd/base-passwd_3.5.20.bb:do_install_micro () {
+> >> recipes/sysvinit/sysvinit_2.86.bb:RRECOMMENDS_${PN}_micro =3D ""
+> >>
+> >> Through the above references, I can say that the initial motion of usi=
+ng
+> >> micro as overriding is trying to keep the image as small as possible. =
+To
+> >> achieve the goal, the initial author added the check/overriding of
+> >> micro/micro-uclibc. But how many space will be saved by just no =20
+> >> installing
+> >> the several plain text files? I think the basic unit of installation
+> >> should be package not file. To keep the image small, we should control=
+ =20
+> >> the
+> >> packages installed.
+> >>
+> >> If someone realy does not want to install some files in
+> >> base-file/base-passwd/sysvinit to keep the image smaller, they can
+> >> rewrites the corresponding recipes and put them into their private bb =
+=20
+> >> file
+> >> collection.
+> >>
+> >> =E5=9C=A8 Wed, 30 Dec 2009 17:13:16 +0800=EF=BC=8CPhil Blundell <philb=
+@gnu.org> =E5=86=99=E9=81=93:
+> >>
+> >> > This patch is wrong.  If you make this change then base-files will =20
+> >> gain
+> >> > a whole load of files which are not wanted for micro.
+> >> >
+> >> > p.
+> >> >
+> >> > On Wed, 2009-12-30 at 16:15 +0800, Guo Hongruan wrote:
+> >> >> 1. Remove the *_micro variable overridding;
+> >> >> 2. Remove the micro/micro-uclibc specific installation decision, =20
+> >> which
+> >> >> causes the installation of base-file failed when
+> >> >> DISTRO=3Dmicro/micro-uclibc.
+> >> >> ---
+> >> >>  recipes/base-files/base-files_3.0.14.bb |   70
+> >> >> ++++++++++++++-----------------
+> >> >>  1 files changed, 31 insertions(+), 39 deletions(-)
+> >> >>
+> >> >> diff --git a/recipes/base-files/base-files_3.0.14.bb
+> >> >> b/recipes/base-files/base-files_3.0.14.bb
+> >> >> index 483aef7..61bb71e 100644
+> >> >> --- a/recipes/base-files/base-files_3.0.14.bb
+> >> >> +++ b/recipes/base-files/base-files_3.0.14.bb
+> >> >> @@ -46,12 +46,7 @@ dirs755 =3D "/bin /boot /dev ${sysconfdir}
+> >> >> ${sysconfdir}/default \
+> >> >>  	   /media/union /media/realroot /media/hdd \
+> >> >>  	   /media/mmc1"
+> >> >>
+> >> >> -dirs755_micro =3D "/dev /proc /sys ${sysconfdir}"
+> >> >> -dirs2775_micro =3D ""
+> >> >> -dirs1777_micro =3D "/tmp"
+> >> >> -
+> >> >>  media =3D "card cf net ram"
+> >> >> -media_micro =3D ""
+> >> >>
+> >> >>  volatiles =3D "cache run log lock tmp"
+> >> >>  conffiles =3D "${sysconfdir}/debian_version ${sysconfdir}/host.con=
+f \
+> >> >> @@ -93,40 +88,38 @@ do_install () {
+> >> >>  		echo ${hostname} > ${D}${sysconfdir}/hostname
+> >> >>  	fi
+> >> >>
+> >> >> -        if [ "${DISTRO}" !=3D "micro" -a "${DISTRO}" !=3D "micro-u=
+clibc"
+> >> >> ]; then
+> >> >> -                install -m 644 ${WORKDIR}/issue*  ${D}${sysconfdir=
+}
+> >> >> -
+> >> >> -                if [ -n "${DISTRO_NAME}" ]; then
+> >> >> -        		echo -n "${DISTRO_NAME} " >> ${D}${sysconfdir}/issue
+> >> >> -        		echo -n "${DISTRO_NAME} " >> ${D}${sysconfdir}/issue.net
+> >> >> -        		if [ -n "${DISTRO_VERSION}" ]; then
+> >> >> -        			echo -n "${DISTRO_VERSION} " >> ${D}${sysconfdir}/issue
+> >> >> -        			echo -n "${DISTRO_VERSION} " >> =20
+> >> ${D}${sysconfdir}/issue.net
+> >> >> -        		fi
+> >> >> -        		echo "\n \l" >> ${D}${sysconfdir}/issue
+> >> >> -        		echo >> ${D}${sysconfdir}/issue
+> >> >> -        		echo "%h"    >> ${D}${sysconfdir}/issue.net
+> >> >> -        		echo >> ${D}${sysconfdir}/issue.net
+> >> >> -        	else
+> >> >> - 	                install -m 0644 ${WORKDIR}/issue
+> >> >> ${D}${sysconfdir}/issue
+> >> >> -                        install -m 0644 ${WORKDIR}/issue.net
+> >> >> ${D}${sysconfdir}/issue.net
+> >> >> -                fi
+> >> >> +	install -m 644 ${WORKDIR}/issue*  ${D}${sysconfdir}
+> >> >> +
+> >> >> +	if [ -n "${DISTRO_NAME}" ]; then
+> >> >> +		echo -n "${DISTRO_NAME} " >> ${D}${sysconfdir}/issue
+> >> >> +		echo -n "${DISTRO_NAME} " >> ${D}${sysconfdir}/issue.net
+> >> >> +		if [ -n "${DISTRO_VERSION}" ]; then
+> >> >> +			echo -n "${DISTRO_VERSION} " >> ${D}${sysconfdir}/issue
+> >> >> +			echo -n "${DISTRO_VERSION} " >> ${D}${sysconfdir}/issue.net
+> >> >> +		fi
+> >> >> +		echo "\n \l" >> ${D}${sysconfdir}/issue
+> >> >> +		echo >> ${D}${sysconfdir}/issue
+> >> >> +		echo "%h"    >> ${D}${sysconfdir}/issue.net
+> >> >> +		echo >> ${D}${sysconfdir}/issue.net
+> >> >> +	else
+> >> >> +		install -m 0644 ${WORKDIR}/issue ${D}${sysconfdir}/issue
+> >> >> +		install -m 0644 ${WORKDIR}/issue.net ${D}${sysconfdir}/issue.net
+> >> >> +	fi
+> >> >> +
+> >> >> +	install -m 0644 ${WORKDIR}/fstab ${D}${sysconfdir}/fstab
+> >> >> +	install -m 0644 ${WORKDIR}/filesystems =20
+> >> ${D}${sysconfdir}/filesystems
+> >> >> +	install -m 0644 ${WORKDIR}/usbd ${D}${sysconfdir}/default/usbd
+> >> >> +	install -m 0644 ${WORKDIR}/profile ${D}${sysconfdir}/profile
+> >> >> +	install -m 0755 ${WORKDIR}/share/dot.profile
+> >> >> ${D}${sysconfdir}/skel/.profile
+> >> >> +	install -m 0755 ${WORKDIR}/share/dot.bashrc
+> >> >> ${D}${sysconfdir}/skel/.bashrc
+> >> >> +	install -m 0644 ${WORKDIR}/inputrc ${D}${sysconfdir}/inputrc
+> >> >> +	install -m 0644 ${WORKDIR}/motd ${D}${sysconfdir}/motd
+> >> >> +	for license in BSD GPL-2 LGPL-2 LGPL-2.1 Artistic GPL-3 LGPL-3
+> >> >> GFDL-1.2; do
+> >> >> +		install -m 0644 ${WORKDIR}/licenses/$license
+> >> >> ${D}${datadir}/common-licenses/
+> >> >> +	done
+> >> >>
+> >> >> -                install -m 0644 ${WORKDIR}/fstab
+> >> >> ${D}${sysconfdir}/fstab
+> >> >> -        	install -m 0644 ${WORKDIR}/filesystems
+> >> >> ${D}${sysconfdir}/filesystems
+> >> >> -        	install -m 0644 ${WORKDIR}/usbd =20
+> >> ${D}${sysconfdir}/default/usbd
+> >> >> -        	install -m 0644 ${WORKDIR}/profile =20
+> >> ${D}${sysconfdir}/profile
+> >> >> -        	install -m 0755 ${WORKDIR}/share/dot.profile
+> >> >> ${D}${sysconfdir}/skel/.profile
+> >> >> -        	install -m 0755 ${WORKDIR}/share/dot.bashrc
+> >> >> ${D}${sysconfdir}/skel/.bashrc
+> >> >> -        	install -m 0644 ${WORKDIR}/inputrc =20
+> >> ${D}${sysconfdir}/inputrc
+> >> >> -        	install -m 0644 ${WORKDIR}/motd ${D}${sysconfdir}/motd
+> >> >> -        	for license in BSD GPL-2 LGPL-2 LGPL-2.1 Artistic GPL-3
+> >> >> LGPL-3 GFDL-1.2; do
+> >> >> -	        	install -m 0644 ${WORKDIR}/licenses/$license
+> >> >> ${D}${datadir}/common-licenses/
+> >> >> -        	done
+> >> >> -
+> >> >> -	        ln -sf /proc/mounts ${D}${sysconfdir}/mtab
+> >> >> -        	install -m 0644 ${WORKDIR}/host.conf
+> >> >> ${D}${sysconfdir}/host.conf
+> >> >> -        fi
+> >> >> +	ln -sf /proc/mounts ${D}${sysconfdir}/mtab
+> >> >> +	install -m 0644 ${WORKDIR}/host.conf ${D}${sysconfdir}/host.conf
+> >> >>
+> >> >>  	install -m 0644 ${WORKDIR}/nsswitch.conf
+> >> >> ${D}${sysconfdir}/nsswitch.conf
+> >> >>  }
+> >> >> @@ -168,7 +161,6 @@ PACKAGE_ARCH_rt3000 =3D "rt3000"
+> >> >>  PACKAGE_ARCH =3D "${MACHINE_ARCH}"
+> >> >>
+> >> >>  CONFFILES_${PN} =3D "${sysconfdir}/fstab ${sysconfdir}/hostname"
+> >> >> -CONFFILES_${PN}_micro =3D ""
+> >> >>  CONFFILES_${PN}_nylon =3D "${sysconfdir}/resolv.conf =20
+> >> ${sysconfdir}/fstab
+> >> >> ${sysconfdir}/hostname"
+> >> >>  CONFFILES_${PN}_slugos =3D "${sysconfdir}/resolv.conf
+> >> >> ${sysconfdir}/fstab ${sysconfdir}/hostname"
+> >> >>
+> >> >
+> >> >
+> >> >
+> >> > _______________________________________________
+> >> > Openembedded-devel mailing list
+> >> > Openembedded-devel@lists.openembedded.org
+> >> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-dev=
+el
+> >>
+> >>
+> >
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
+>=20
 
-> It sounds to me as though micro is simply not the right DISTRO for you=
-r
-> purposes.  If you want to use eglibc, and you want the packages to
-> contain the full complement of files, you might be better off with
-> minimal.
->
-> p.
->
-> On Wed, 2009-12-30 at 17:39 +0800, Guo Hongruan wrote:
->> I searched the whole openembedded directory and found the following
->> references of micro as DISTRO overriding.
->> recipes/base-passwd/base-passwd_3.5.20.bb:do_install_micro () {
->> recipes/sysvinit/sysvinit_2.86.bb:RRECOMMENDS_${PN}_micro =3D ""
->>
->> Through the above references, I can say that the initial motion of us=
-ing
->> micro as overriding is trying to keep the image as small as possible.=
- To
->> achieve the goal, the initial author added the check/overriding of
->> micro/micro-uclibc. But how many space will be saved by just no  =
-
->> installing
->> the several plain text files? I think the basic unit of installation
->> should be package not file. To keep the image small, we should contro=
-l  =
-
->> the
->> packages installed.
->>
->> If someone realy does not want to install some files in
->> base-file/base-passwd/sysvinit to keep the image smaller, they can
->> rewrites the corresponding recipes and put them into their private bb=
-  =
-
->> file
->> collection.
->>
->> =E5=9C=A8 Wed, 30 Dec 2009 17:13:16 +0800=EF=BC=8CPhil Blundell <phil=
-b@gnu.org> =E5=86=99=E9=81=93:
->>
->> > This patch is wrong.  If you make this change then base-files will =
- =
-
->> gain
->> > a whole load of files which are not wanted for micro.
->> >
->> > p.
->> >
->> > On Wed, 2009-12-30 at 16:15 +0800, Guo Hongruan wrote:
->> >> 1. Remove the *_micro variable overridding;
->> >> 2. Remove the micro/micro-uclibc specific installation decision,  =
-
->> which
->> >> causes the installation of base-file failed when
->> >> DISTRO=3Dmicro/micro-uclibc.
->> >> ---
->> >>  recipes/base-files/base-files_3.0.14.bb |   70
->> >> ++++++++++++++-----------------
->> >>  1 files changed, 31 insertions(+), 39 deletions(-)
->> >>
->> >> diff --git a/recipes/base-files/base-files_3.0.14.bb
->> >> b/recipes/base-files/base-files_3.0.14.bb
->> >> index 483aef7..61bb71e 100644
->> >> --- a/recipes/base-files/base-files_3.0.14.bb
->> >> +++ b/recipes/base-files/base-files_3.0.14.bb
->> >> @@ -46,12 +46,7 @@ dirs755 =3D "/bin /boot /dev ${sysconfdir}
->> >> ${sysconfdir}/default \
->> >>  	   /media/union /media/realroot /media/hdd \
->> >>  	   /media/mmc1"
->> >>
->> >> -dirs755_micro =3D "/dev /proc /sys ${sysconfdir}"
->> >> -dirs2775_micro =3D ""
->> >> -dirs1777_micro =3D "/tmp"
->> >> -
->> >>  media =3D "card cf net ram"
->> >> -media_micro =3D ""
->> >>
->> >>  volatiles =3D "cache run log lock tmp"
->> >>  conffiles =3D "${sysconfdir}/debian_version ${sysconfdir}/host.co=
-nf \
->> >> @@ -93,40 +88,38 @@ do_install () {
->> >>  		echo ${hostname} > ${D}${sysconfdir}/hostname
->> >>  	fi
->> >>
->> >> -        if [ "${DISTRO}" !=3D "micro" -a "${DISTRO}" !=3D "micro-=
-uclibc"
->> >> ]; then
->> >> -                install -m 644 ${WORKDIR}/issue*  ${D}${sysconfdi=
-r}
->> >> -
->> >> -                if [ -n "${DISTRO_NAME}" ]; then
->> >> -        		echo -n "${DISTRO_NAME} " >> ${D}${sysconfdir}/issue
->> >> -        		echo -n "${DISTRO_NAME} " >> ${D}${sysconfdir}/issue.ne=
-t
->> >> -        		if [ -n "${DISTRO_VERSION}" ]; then
->> >> -        			echo -n "${DISTRO_VERSION} " >> ${D}${sysconfdir}/issu=
-e
->> >> -        			echo -n "${DISTRO_VERSION} " >>  =
-
->> ${D}${sysconfdir}/issue.net
->> >> -        		fi
->> >> -        		echo "\n \l" >> ${D}${sysconfdir}/issue
->> >> -        		echo >> ${D}${sysconfdir}/issue
->> >> -        		echo "%h"    >> ${D}${sysconfdir}/issue.net
->> >> -        		echo >> ${D}${sysconfdir}/issue.net
->> >> -        	else
->> >> - 	                install -m 0644 ${WORKDIR}/issue
->> >> ${D}${sysconfdir}/issue
->> >> -                        install -m 0644 ${WORKDIR}/issue.net
->> >> ${D}${sysconfdir}/issue.net
->> >> -                fi
->> >> +	install -m 644 ${WORKDIR}/issue*  ${D}${sysconfdir}
->> >> +
->> >> +	if [ -n "${DISTRO_NAME}" ]; then
->> >> +		echo -n "${DISTRO_NAME} " >> ${D}${sysconfdir}/issue
->> >> +		echo -n "${DISTRO_NAME} " >> ${D}${sysconfdir}/issue.net
->> >> +		if [ -n "${DISTRO_VERSION}" ]; then
->> >> +			echo -n "${DISTRO_VERSION} " >> ${D}${sysconfdir}/issue
->> >> +			echo -n "${DISTRO_VERSION} " >> ${D}${sysconfdir}/issue.net
->> >> +		fi
->> >> +		echo "\n \l" >> ${D}${sysconfdir}/issue
->> >> +		echo >> ${D}${sysconfdir}/issue
->> >> +		echo "%h"    >> ${D}${sysconfdir}/issue.net
->> >> +		echo >> ${D}${sysconfdir}/issue.net
->> >> +	else
->> >> +		install -m 0644 ${WORKDIR}/issue ${D}${sysconfdir}/issue
->> >> +		install -m 0644 ${WORKDIR}/issue.net ${D}${sysconfdir}/issue.ne=
-t
->> >> +	fi
->> >> +
->> >> +	install -m 0644 ${WORKDIR}/fstab ${D}${sysconfdir}/fstab
->> >> +	install -m 0644 ${WORKDIR}/filesystems  =
-
->> ${D}${sysconfdir}/filesystems
->> >> +	install -m 0644 ${WORKDIR}/usbd ${D}${sysconfdir}/default/usbd
->> >> +	install -m 0644 ${WORKDIR}/profile ${D}${sysconfdir}/profile
->> >> +	install -m 0755 ${WORKDIR}/share/dot.profile
->> >> ${D}${sysconfdir}/skel/.profile
->> >> +	install -m 0755 ${WORKDIR}/share/dot.bashrc
->> >> ${D}${sysconfdir}/skel/.bashrc
->> >> +	install -m 0644 ${WORKDIR}/inputrc ${D}${sysconfdir}/inputrc
->> >> +	install -m 0644 ${WORKDIR}/motd ${D}${sysconfdir}/motd
->> >> +	for license in BSD GPL-2 LGPL-2 LGPL-2.1 Artistic GPL-3 LGPL-3
->> >> GFDL-1.2; do
->> >> +		install -m 0644 ${WORKDIR}/licenses/$license
->> >> ${D}${datadir}/common-licenses/
->> >> +	done
->> >>
->> >> -                install -m 0644 ${WORKDIR}/fstab
->> >> ${D}${sysconfdir}/fstab
->> >> -        	install -m 0644 ${WORKDIR}/filesystems
->> >> ${D}${sysconfdir}/filesystems
->> >> -        	install -m 0644 ${WORKDIR}/usbd  =
-
->> ${D}${sysconfdir}/default/usbd
->> >> -        	install -m 0644 ${WORKDIR}/profile  =
-
->> ${D}${sysconfdir}/profile
->> >> -        	install -m 0755 ${WORKDIR}/share/dot.profile
->> >> ${D}${sysconfdir}/skel/.profile
->> >> -        	install -m 0755 ${WORKDIR}/share/dot.bashrc
->> >> ${D}${sysconfdir}/skel/.bashrc
->> >> -        	install -m 0644 ${WORKDIR}/inputrc  =
-
->> ${D}${sysconfdir}/inputrc
->> >> -        	install -m 0644 ${WORKDIR}/motd ${D}${sysconfdir}/motd
->> >> -        	for license in BSD GPL-2 LGPL-2 LGPL-2.1 Artistic GPL-3
->> >> LGPL-3 GFDL-1.2; do
->> >> -	        	install -m 0644 ${WORKDIR}/licenses/$license
->> >> ${D}${datadir}/common-licenses/
->> >> -        	done
->> >> -
->> >> -	        ln -sf /proc/mounts ${D}${sysconfdir}/mtab
->> >> -        	install -m 0644 ${WORKDIR}/host.conf
->> >> ${D}${sysconfdir}/host.conf
->> >> -        fi
->> >> +	ln -sf /proc/mounts ${D}${sysconfdir}/mtab
->> >> +	install -m 0644 ${WORKDIR}/host.conf ${D}${sysconfdir}/host.conf=
-
->> >>
->> >>  	install -m 0644 ${WORKDIR}/nsswitch.conf
->> >> ${D}${sysconfdir}/nsswitch.conf
->> >>  }
->> >> @@ -168,7 +161,6 @@ PACKAGE_ARCH_rt3000 =3D "rt3000"
->> >>  PACKAGE_ARCH =3D "${MACHINE_ARCH}"
->> >>
->> >>  CONFFILES_${PN} =3D "${sysconfdir}/fstab ${sysconfdir}/hostname"
->> >> -CONFFILES_${PN}_micro =3D ""
->> >>  CONFFILES_${PN}_nylon =3D "${sysconfdir}/resolv.conf  =
-
->> ${sysconfdir}/fstab
->> >> ${sysconfdir}/hostname"
->> >>  CONFFILES_${PN}_slugos =3D "${sysconfdir}/resolv.conf
->> >> ${sysconfdir}/fstab ${sysconfdir}/hostname"
->> >>
->> >
->> >
->> >
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-de=
-vel
->>
->>
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
-
-
-
--- =
-
-Guo Hongruan, Embedded Linux Consultant
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
 
 
