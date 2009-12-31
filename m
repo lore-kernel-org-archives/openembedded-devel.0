@@ -1,43 +1,42 @@
-Received: from mail-yx0-f175.google.com ([209.85.210.175])
+Received: from mail-gx0-f215.google.com ([209.85.217.215])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NQI2u-0004Nj-P5
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NQI7H-0004Vu-2y
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 31 Dec 2009 11:14:24 +0100
-Received: by yxe5 with SMTP id 5so7908000yxe.24
+	Thu, 31 Dec 2009 11:18:54 +0100
+Received: by gxk7 with SMTP id 7so3058691gxk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Dec 2009 02:12:21 -0800 (PST)
+	Thu, 31 Dec 2009 02:16:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type;
-	bh=ZTeyVJXG60Zr9wPawZsVh+AGBqkU/AMF1UHB309E9lk=;
-	b=lMEzLBVcn3Mxj1gM8kCnW5oyUQRr2mtIJckRu+9MXgzNZ/eKBavG2mbcoVLHZI0IN2
-	uwFZQ/iTor87w/+NPVsislaWWRyXDzpsEoE71h359VnmqG9JlGsT7KMdxt25sLVoZgMB
-	FnMtZXImVvq2dX5SmGHynRiR7XLYYCXI7/BT8=
+	bh=hZz4V4p/wlJx5xzplePfDyR+IdLNboDYBaNAfI+o4u0=;
+	b=q72Y/6PzqqoK/rEAK3hO2mQVFSzryG/esPBxQ29whINO0o2Xk9wxMKX24eI2f2hGRJ
+	BDPTNBTJpb8aQII2d66CJOac+Lu8mHttlRb/cj2DkC5aBx8TgPoSFPvlo1BMnLjJMvsf
+	eFV9/qKdtH+OrvEAxsm49xsgLHvBRHQ0AZWxA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=sc4jjLPMwZie3FvDjbTMZVuyv9EA95H3YBwHWVBl7qyLFIG5p892UlwJ45hCufMigT
-	9vfcs4cn+DzZQa/dY7cIwlAUlhRP1k6SU2+j7fLdweSb5AjqZilDBSytlegRPEfeyrPE
-	zrrIfZkVKcI1MUeWKzEDcje7pqFAQDBR9H6gI=
+	b=VHmC9QT+R+XYH6vNERSMkaw2a1fFYCyJWEfJN0Sr2qh7Ky5kFvEpUsGWwjtSco2f/6
+	gf7oW8SjFim3qJamkLjkOfcer4jMs8hdwnsZlqrGC9m1Wg1wSOkDwIejQtsqIkaBwIdF
+	GZXqF/ZYns+l+EWYrqnxQj0jPnzZLDfgD+ViM=
 MIME-Version: 1.0
-Received: by 10.101.139.20 with SMTP id r20mr13133458ann.100.1262254340919; 
-	Thu, 31 Dec 2009 02:12:20 -0800 (PST)
-In-Reply-To: <c384c5ea0912301137r4990f109kd0db648bd2b1a546@mail.gmail.com>
-References: <c384c5ea0912290715l24b705fat6700077741b1cc5b@mail.gmail.com>
-	<hhdipd$25q$2@ger.gmane.org>
-	<c384c5ea0912291144p3c800d9fq4975f94494a04e1f@mail.gmail.com>
-	<19c1b8a90912291442q426ddd95n9acff7b8df592092@mail.gmail.com>
-	<hhf457$n7h$2@ger.gmane.org>
-	<c384c5ea0912301137r4990f109kd0db648bd2b1a546@mail.gmail.com>
-Date: Thu, 31 Dec 2009 11:12:20 +0100
-Message-ID: <ac9c93b10912310212m11a02f01g3831f92b4473d11@mail.gmail.com>
+Received: by 10.101.139.20 with SMTP id r20mr13138931ann.100.1262254610790; 
+	Thu, 31 Dec 2009 02:16:50 -0800 (PST)
+In-Reply-To: <20091230144538.6a171e4e@xora-desktop.xora.org.uk>
+References: <20091222140029.GF10910@xora.vm.bytemark.co.uk>
+	<1261596258.8748.156.camel@dax.rpnet.com>
+	<20091229155215.00006145@unknown> <hhdikl$25q$1@ger.gmane.org>
+	<1262118637.8748.173.camel@dax.rpnet.com> <hhf42m$n7h$1@ger.gmane.org>
+	<20091230144538.6a171e4e@xora-desktop.xora.org.uk>
+Date: Thu, 31 Dec 2009 11:16:50 +0100
+Message-ID: <ac9c93b10912310216m3c08fa80v11cc00029d16fdb7@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Connect-IP: 209.85.217.215
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Move IMAGE_BOOT stuff into distro's?
+Subject: Re: [TSC] First Meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,55 +50,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Dec 2009 10:14:24 -0000
+X-List-Received-Date: Thu, 31 Dec 2009 10:18:54 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2009/12/30 Leon Woestenberg <leon.woestenberg@gmail.com>:
-> Hello,
->
-> On Wed, Dec 30, 2009 at 9:48 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
->>>> OK understood, apparantly we want to have a generic image base
->>>> containing udev, a login, shadow etc.
->>>> that is distro-indepent.
->>>>
->>>> Can we remove that from the image class, and move into a
->>>> image-boot.inc or something?
->>
->> What's the problem with setting 3 vars to "" in your helloworld image?
->>
-> Let me counter that question: What's the problem with bitrot and poor
-> design if the end result still works?
->
-> Of course it's easy to add 3 vars, that's not my point. The point is
-> those 3 vars do not need to be hard coded by
-> default in a class.
->
->
-> Design:
->
-> The class implements the work to be done.
-> The recipes describe what work has to be done indirectly.
->
-> Design problem:
->
-> The class now contains hard-coded package names directly.
->
-> The image recipes have to know the internals of the class in order to
-> revert to fully customizable behaviour.
->
->
-> Of course I could stop being frustrated about this and happily add 3
-> vars to my image and not care about this anymore.
->
->
-> Regards,
-> --
-> Leon
+Not sure if TSC is going to say things about technical issues, but if
+so I would appreciate a statement of the TSC on whether classes should
+define things that are really image or recipe specific.
 
-Leon, I agree with your line of reasoning. Classes specify the how and
-recipes specify the what.
+As an example I would like to refer to the discussion in the thread
+'Move IMAGE_BOOT stuff into distro's?" and the fact that the image
+class drags in defaults for some system components.
 
-May I propose to put this on the agenda of the TSC ?
+However note that this is just an example. I would prefer a general statement.
+Or is this outside the scope of TSC (and if so how do we resolve
+technical issues without ending in a commit war (which is the last I
+would see happen).
 
 Frans.
 
