@@ -1,36 +1,27 @@
-Received: from mail-pw0-f53.google.com ([209.85.160.53])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ahsan.khwaja@gmail.com>) id 1NQbKz-000144-TA
+	(envelope-from <holger+oe@freyther.de>) id 1NQgy0-0001Zy-BK
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 01 Jan 2010 07:50:21 +0100
-Received: by pwi18 with SMTP id 18so8223121pwi.12
+	Fri, 01 Jan 2010 13:50:59 +0100
+Received: from tamarin.localnet (123-192-180-176.dynamic.kbronet.com.tw
+	[123.192.180.176])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id A55681B10C02
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Dec 2009 22:48:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=31SIyUqj9g06T0To9JrZb9214fIJa9KdEeepziwa/SE=;
-	b=VRwGQYLRCYWewz3udGOVK54DQxk4V++A4PjZMcMstshNBx1Yd75Ou7XKu2PtHjCX6O
-	NPhKjmbzRLdnREWK9oDn6iK9ExCwuWEt8VrKmyrnW33XV1I4MT6+czNdeqeyNqAEEL7f
-	9H9P03OMA+UlfkzSap+cjFyD76WuLR+1w5w/8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=qjqsGSWYLDKI5pkebQcPABqjnll3hOFwfppGhG3oZW64pUG15EHtlxkSJXFklypL5I
-	htfjAP6hw3WyPI/gfYF059PlIb/SBShhpRQvlRRs3Ur1SOxaXJ//L1fDb+DqjvYGnark
-	1bohYcdn7usADR81+shZ2UboT6jtdxKy3Lz9c=
-MIME-Version: 1.0
-Received: by 10.115.103.7 with SMTP id f7mr12281210wam.1.1262328497186; Thu, 
-	31 Dec 2009 22:48:17 -0800 (PST)
-Date: Fri, 1 Jan 2010 11:48:17 +0500
-Message-ID: <818ccfc40912312248w6cbab38eo600057cd5a9b485e@mail.gmail.com>
-From: Ahsan Khawaja <ahsan.khwaja@gmail.com>
+	Fri,  1 Jan 2010 12:45:57 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.53
-X-SA-Exim-Mail-From: ahsan.khwaja@gmail.com
+Date: Fri, 1 Jan 2010 13:48:44 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <200912190854.11510.holger+oe@freyther.de>
+	<hglsin$2vi$2@ger.gmane.org> <hgt9h8$25m$1@ger.gmane.org>
+In-Reply-To: <hgt9h8$25m$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <201001011348.44168.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Problem in configuring Newlib while building GCC cross compiler
+Subject: Re: Qt4 GLES (once again)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,26 +35,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Jan 2010 06:50:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 01 Jan 2010 12:50:59 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Hello,
+On Wednesday 23 December 2009 15:30:00 Koen Kooi wrote:
+> On 20-12-09 20:05, Koen Kooi wrote:
 
-I am building newlib library instead of eglibc using openembedded. I divided
-newlib package in newlib-initial-version and newlib-version. I added
-gcc-initial dependency on newlib-initial-version. I am having problem while
-configuring newlib-initial. When its configure script runs it give me error
-"checking C compiler works ... ld could not found crt0.o". I did not see any
-kind of such thing in eglibc configure script. Please help me in resolving
-this issue. I dont see any crt0.o file while compiler has place at time of
-configuring newlib-initial package.
+> It looks like it also changes stuff in libQtGui(E) :(
 
-I have few confusions here. What is the different between eglibc-initial and
-eglibc package and should I do the same for newlib package. Secondly why GCC
-is divided in different packages gcc-cross-initial, gcc-cross-intermediate
-and gcc-cross. what is the difference between these packages. Please help me
-in understanding these things. Thanks.
+it does, it is compiling the egl and OpenVG part into libQtGui... 
 
-regards,
-Noor
+
+what about something like this? This way one can select qt4-embedded as 
+default and switch to the gles variant when ones needs it?
+
+
+
+diff --git a/recipes/qt4/qt4-embedded-gles_4.6.0.bb b/recipes/qt4/qt4-embedded-
+gles_4.6.0.bb
+index f819c66..06cdcc5 100644
+--- a/recipes/qt4/qt4-embedded-gles_4.6.0.bb
++++ b/recipes/qt4/qt4-embedded-gles_4.6.0.bb
+@@ -1,6 +1,7 @@
+ require qt4-embedded.inc
+ PR = "${INC_PR}.0"
+ 
++PROVIDES += "qt4-embedded"
+ QT_GLFLAGS = "-opengl es2 -openvg"
+ 
+ require qt-4.6.0.inc
+
+
 
