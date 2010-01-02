@@ -1,29 +1,41 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-px0-f183.google.com ([209.85.216.183])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NQzzq-0005tl-Nf for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Jan 2010 10:10:09 +0100
-Received: from g225080015.adsl.alicedsl.de ([92.225.80.15]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NQzxv-0001sW-Q6 for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Jan 2010 09:08:07 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <camelguo@gmail.com>) id 1NR0Jt-0006FL-VK
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 02 Jan 2010 10:30:53 +0100
+Received: by pxi13 with SMTP id 13so6335645pxi.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 02 Jan 2010 01:28:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=zbbqy5arb8kYzEIsYGmNU7pvkAbgVUvo+ukeMtP4ANY=;
+	b=bEdlnYhGmctMqj7v2isO9JRZCEklnVUEAc/ME2iB9azV0BSrwn9bicvcEhALShfgM8
+	/GuMwLxBaSU6lD8X5jVan8WZrn/wpYkKdNnyGTqsR5+meqxHkCTkCUR5Frq5TxrIdUOb
+	JrDT3CeBQgj4VwwK7wUpKRFJyDsOQuIj05fLE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=TTQzQCsDOFszwAdhBs/rR2nIs8WC8X3AQ3aSN1sKnAsWJkYl7FHRiE7tFLj8GtQLSJ
+	wwH7RNUnLrw91gkrUGgYe5S4ftaco5W6RAr6ryfSAcbc3/LeJ26hBZ1MAbquvLLwCIfW
+	JhdcN9Gtls2KuDAuMuWJa59zS136caSZil3vo=
+Received: by 10.142.6.11 with SMTP id 11mr9899957wff.260.1262424528305;
+	Sat, 02 Jan 2010 01:28:48 -0800 (PST)
+Received: from localhost ([123.54.101.56])
+	by mx.google.com with ESMTPS id 23sm16060891pzk.0.2010.01.02.01.28.45
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 02 Jan 2010 01:28:47 -0800 (PST)
+From: Guo Hongruan <camelguo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <op.u5wc44txmn1qzu@guohr-laptop-ubuntu>
-References: <> <1262417674-26652-1-git-send-email-camelguo@gmail.com>
-	<201001020935.04959.holger+oe@freyther.de>
-	<op.u5wc44txmn1qzu@guohr-laptop-ubuntu>
-Date: Sat, 02 Jan 2010 10:08:51 +0100
-Message-ID: <1262423331.3308.8.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Sat,  2 Jan 2010 17:28:37 +0800
+Message-Id: <1262424517-21966-1-git-send-email-camelguo@gmail.com>
+X-Mailer: git-send-email 1.5.4.3
+In-Reply-To: <>
+References: <>
+X-SA-Exim-Connect-IP: 209.85.216.183
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: signed-off procedure (was: [PATCH] Fix compiling error of uclibc-initial-0.9.30.1 due to incorrect uClibc.machine for qemumips)
+Subject: [PATCH] Add mips entry for linux-uclibc into package_qa_get_machine_dict of insane.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,71 +49,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Jan 2010 09:10:09 -0000
-X-Groupsio-MsgNum: 15327
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-1w960OjcV8K3DI1eRbv/"
+X-List-Received-Date: Sat, 02 Jan 2010 09:30:53 -0000
 
---=-1w960OjcV8K3DI1eRbv/
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+* Without it the insance check will fail due to key miss exception.
 
-Dear Guo,
+Signed-off-by: Guo Hongruan <camelguo@gmail.com>
+---
+ classes/insane.bbclass |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-
-Am Samstag, den 02.01.2010, 16:42 +0800 schrieb Guo Hongruan:
-> =E5=9C=A8 Sat, 02 Jan 2010 16:35:04 +0800=EF=BC=8CHolger Hans Peter Freyt=
-her =20
-> <holger+oe@freyther.de> =E5=86=99=E9=81=93:
-
-[=E2=80=A6]
-
-> > The other bit is... use "Signed-off-by:" on your patches if you want th=
-em
-> > included in OE. Only if you use the above they will show up in
-> > patchwork.openembedded.org which people go through to look at outstandi=
-ng
-> > patches...
->=20
-> Signed-off-by? How to do it.
-
-Just add a line
-
-Signed-off-by: name <email>
-
-below the commit message. In Git you can specify to do this
-automatically most of the time with the =C2=BB-s=C2=AB parameter, for examp=
-le when
-you commit something or format a patch.
-
-> Could you give me some links about this topics? I will google it
-
-The coreboot project took this also over from Linux [1]. I did not find
-a link to where the recent Linux procedure is described. Basically if
-you sign off a patch, you will say that you are complying with the
-project rules and license terms so that it can be included.
-
-[=E2=80=A6]
+diff --git a/classes/insane.bbclass b/classes/insane.bbclass
+index 495c3a5..804caf0 100644
+--- a/classes/insane.bbclass
++++ b/classes/insane.bbclass
+@@ -61,6 +61,7 @@ def package_qa_get_machine_dict():
+                         "i486":       (   3,     0,    0,          True,          True),
+                         "i586":       (   3,     0,    0,          True,          True),
+                         "i686":       (   3,     0,    0,          True,          True),
++                        "mips":       (   8,     0,    0,          False,         True),
+                         "mipsel":     (   8,     0,    0,          True,          True),
+                         "avr32":      (6317,     0,    0,          False,         True),
+ 			"sh4":        (42,	 0,    0,          True,          True),
+-- 
+1.5.4.3
 
 
-Bests,
 
-Paul
-
-
-[1] http://www.coreboot.org/Development_Guidelines#Sign-off_Procedure
-
---=-1w960OjcV8K3DI1eRbv/
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAks/DRwACgkQPX1aK2wOHVhWagCfZv5nQQxW1M2SHjIRWY2nmO0e
-0OcAn1Z40ViWr4bWob3KViMg5vMYdUA7
-=zUX1
------END PGP SIGNATURE-----
-
---=-1w960OjcV8K3DI1eRbv/--
