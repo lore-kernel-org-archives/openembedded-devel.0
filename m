@@ -1,31 +1,27 @@
-Received: from smtp-out114.alice.it ([85.37.17.114])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1NR7f3-0008IW-Il
+	(envelope-from <philb@gnu.org>) id 1NR8SQ-0003zT-Gz
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 02 Jan 2010 18:21:12 +0100
-Received: from FBCMMO03.fbc.local ([192.168.68.197]) by smtp-out114.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 2 Jan 2010 18:19:08 +0100
-Received: from FBCMCL01B01.fbc.local ([192.168.69.82]) by FBCMMO03.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 2 Jan 2010 18:19:08 +0100
-Received: from [192.168.1.116] ([79.11.151.179]) by FBCMCL01B01.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Sat, 2 Jan 2010 18:19:08 +0100
-From: GNUtoo <GNUtoo@no-log.org>
+	Sat, 02 Jan 2010 19:12:13 +0100
+Received: from [85.210.22.104] (helo=[192.168.2.155])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NR8QT-0000hQ-7i
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 02 Jan 2010 18:10:09 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <BAY127-W5DE44CC203D3230ABC3C7D8790@phx.gbl>
-References: <BAY127-W5DE44CC203D3230ABC3C7D8790@phx.gbl>
-Date: Sat, 02 Jan 2010 18:19:07 +0100
-Message-Id: <1262452747.5161.36.camel@gnutoo-desktop>
+In-Reply-To: <1262452243-8187-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1262452243-8187-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Sat, 02 Jan 2010 18:10:05 +0000
+Message-ID: <1262455806.2553.90.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-OriginalArrivalTime: 02 Jan 2010 17:19:08.0194 (UTC)
-	FILETIME=[B1432820:01CA8BCF]
-X-SA-Exim-Connect-IP: 85.37.17.114
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+X-Mailer: Evolution 2.28.1 
+X-Broken-Reverse-DNS: no host name found for IP address 85.210.22.104
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Problem in using output
+Subject: Re: [PATCH] sanity.bbclass: Reading /proc/sys/vm/mmap_min_addr is not permitted with 2.6.33+ on host
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,25 +35,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Jan 2010 17:21:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 02 Jan 2010 18:12:13 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2009-12-30 at 20:31 +0500, saleh usman wrote:
+On Sat, 2010-01-02 at 18:10 +0100, Martin Jansa wrote:
+> * With 2.6.33-rc2-00252-ge9e5521 on my host I noticed that
+>   "cat /proc/sys/vm/mmap_min_addr" returns now
+>   "cat: /proc/sys/vm/mmap_min_addr: Operation not permitted"
+>   Its probably becuse of
+>   http://git.kernel.org/?p=linux/kernel/git/torvalds/linux-2.6.git;a=commit;h=0e1a6ef2dea88101b056b6d9984f3325c5efced3
+>   But I'm not sure if checking CAP_SYS_RAWIO even for reading this value
+>   is intentional or just bug which should be fixed in kernel.
 > 
-> Hi 
-> I've successfully built console image
-> by using bitbake.My target board has a ARM9 GPP and C64 DSP.Linux have
-> been ported
-> and  running on GPP.How can I run generated output on my
-> board .Actually I am new to linux and unfamiliar with file
-> system and executables of linux.I don't know exactly how and where  to
-> use which files/images generated in temp/deploy. 
-It depends a lot on the specificities of your target board.
-I think you should look at the documentation of your board to see how to
-boot an image...
-Denis.
+> * This patch prints notice about need to check that value yourself (as
+>   root) instead of failing with "ERROR: IO Error: [Errno 1] Operation
+>   not permitted"
+> 
+> * Its not optimal, because this notice is shown every time you run
+>   bitbake (even after checking/setting 0 to mmap_min_addr if you have
+>   kernel not allowing to read it
+> 
 
+That does sound fairly unsatisfactory.  Printing a diagnostic on every
+build, with no way for the user to suppress it, surely can't be the way
+of the future.
+
+If you can't tell whether mmap_min_addr is set correctly or not then it
+would probably be better to not show the diagnostic at all.  Perhaps you
+could investigate patching qemu to print a more meaningful message if it
+actually encounters a mmap() failure of this kind.
+
+p.
 
 
 
