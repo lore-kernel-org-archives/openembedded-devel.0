@@ -1,34 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-yw0-f178.google.com ([209.85.211.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NRRHI-0001QU-Sv for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Jan 2010 15:18:00 +0100
-Received: from f053045068.adsl.alicedsl.de ([78.53.45.68]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NRRFN-0000aL-4W for openembedded-devel@lists.openembedded.org;
-	Sun, 03 Jan 2010 14:15:57 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NRTQq-00040s-LH
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 03 Jan 2010 17:35:59 +0100
+Received: by ywh8 with SMTP id 8so14425087ywh.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 03 Jan 2010 08:33:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=pm96vLumYgC/IIqePcTCV/koB8HWmPG7t8CFIW1k/lY=;
+	b=Iuk0Ztm87/XtRr2mDSs6aJptPZDAezN0KByrR0JYFjWipKcg++qvCVSaG9mKO8Uvt+
+	jQOrPk8wLR+w6ixt0NNp3URNQK2NBS77sAWHBEkPodcmHNu+3JlmVGKrBsBy8DxRHWc2
+	UQbnXOMucDiBUtJbi9IyZ6TKaiS+GBJ0Oxyo0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=K1X+OLcocvf/tPewB+Ox9bXSR8W86pYDzepHurw2Ov25OJkzVzpPHWXisn6SUPu5bU
+	1F7fnVwKdoPh0VHXZnCNHhmMJlssf0wt0AxBTaBrso9+lPkrtp3nyYuPnFjNuTyHU6VH
+	u7eyID+KDeUGsxE3LKm+wjOEKIA9j8SqKs8qk=
+MIME-Version: 1.0
+Received: by 10.101.2.7 with SMTP id e7mr15719932ani.89.1262536431477; Sun, 03 
+	Jan 2010 08:33:51 -0800 (PST)
+Date: Sun, 3 Jan 2010 17:33:51 +0100
+Message-ID: <ac9c93b11001030833v6236cb2ew11627fb47a6d7fa8@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1260822492.9310.16.camel@mattotaupa.wohnung.familie-menzel.net>
-References: <1260618520.3373.23.camel@mattotaupa.wohnung.familie-menzel.net>
-	<20091212173311.GA3730@rhein.zuhause.netz>
-	<1260711980.3110.21.camel@mattotaupa.wohnung.familie-menzel.net>
-	<20091213141849.GG17995@ibawizard.net>
-	<1260719131.3110.26.camel@mattotaupa.wohnung.familie-menzel.net>
-	<1260818012.9310.9.camel@mattotaupa.wohnung.familie-menzel.net>
-	<20091214201018.GA26808@rhein.zuhause.netz>
-	<1260822492.9310.16.camel@mattotaupa.wohnung.familie-menzel.net>
-Date: Sun, 03 Jan 2010 15:15:50 +0100
-Message-ID: <1262528150.3326.46.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.211.178
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: package VDR for OE
+Subject: qmake issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,190 +43,149 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Jan 2010 14:18:00 -0000
-X-Groupsio-MsgNum: 15340
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-/lK27eamhbTfY6m8DodZ"
+X-List-Received-Date: Sun, 03 Jan 2010 16:36:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-/lK27eamhbTfY6m8DodZ
-Content-Type: multipart/mixed; boundary="=-XJ3HWBSQweWX+ErrAlik"
+Hi,
 
---=-XJ3HWBSQweWX+ErrAlik
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+I noticed the following issue when building mythtv.
+Mythtv uses qmake. Several of the .pro files contain additional
+libraries with -L
 
-Am Montag, den 14.12.2009, 21:28 +0100 schrieb Paul Menzel:
-> Am Montag, den 14.12.2009, 21:10 +0100 schrieb Henning Heinold:
-> > On Mon, Dec 14, 2009 at 08:13:32PM +0100, Paul Menzel wrote:
-> > > Could someone advise me on how to get VDR included officially into OE=
-?
-> > > Had someone time already to test the recipe?
-> >=20
-> > Please submit your recipe here with git format-patch. I will look into =
-it.
->=20
-> Thank you. I sent it already on yesterday 16:45 CET [1]. If you do not
-> have it in your mailbox I can sent the attachment again.
+However if e.g. I look at the generated Makefile for mythfrontend I see:
 
-Sorry to bother you again. I guess you had and have a lot of other
-business to take care of.
+LIBS          = $(SUBLIBS)  -L$(OE_QMAKE_LIBDIR_QT)
+-Wl,-rpath-link,/home/frans/oe/tmp_angstrom/work/armv7a-angstrom-linux-gnueabi/qt4-x11-free-4.6.0-r13.1/qt-everywhere-opensource-src-4.6.0/lib
+-L../../libs/libmyth -L../../libs/libmythtv -L../../libs/libavutil
+-L../../libs/libavcodec -L../../libs/libavformat
+-L../../libs/libswscale -L../../libs/libmythdb -L../../libs/libmythui
+-L../../libs/libmythupnp -lmythtv-0.22 -lmythavformat-0.22
+-lmythavutil-0.22 -lmythavcodec-0.22 -lmythswscale-0.22
+-lmythupnp-0.22 -lmyth-0.22 -lmythui-0.22 -lmythdb-0.22
+-L../../libs/libmythlivemedia -lmythlivemedia-0.22
+-L../../libs/libmythfreemheg -lmythfreemheg-0.22
+-L../../libs/libmythhdhomerun -lmythhdhomerun-0.22
+-L/home/frans/oe/tmp_angstrom/staging/armv7a-angstrom-linux-gnueabi/usr/lib
+-lfreetype -lXinerama -lX11 -lXext -lXxf86vm -lXv -lXrandr -lQtWebKit
+-Wl,-rpath-link,/usr/lib -lphonon -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -lQtDBus -Wl,-rpath-link,/usr/lib -lQtSql
+-Wl,-rpath-link,/usr/lib -lQtXml -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -lQtGui -Wl,-rpath-link,/usr/lib -lQtNetwork
+-Wl,-rpath-link,/usr/lib -lQtCore -Wl,-rpath-link,/usr/lib -lglib-2.0
+-lpthread
 
-I paste the patch into this message and also attach it.
+and eventually the executed link command is:
+
+ccache arm-angstrom-linux-gnueabi-g++
+-L/home/frans/oe/tmp_angstrom/staging/armv7a-angstrom-linux-gnueabi/usr/lib
+-Wl,-rpath-link,/home/frans/oe/tmp_angstrom/staging/armv7a-angstrom-linux-gnueabi/usr/lib
+-Wl,-O1 -Wl,--hash-style=gnu -o mythfrontend version.o main.o
+playbackbox.o viewscheduled.o globalsettings.o manualschedule.o
+programrecpriority.o channelrecpriority.o statusbox.o networkcontrol.o
+mediarenderer.o mythfexml.o playbackboxlistitem.o custompriority.o
+mythappearance.o exitprompt.o proglist.o action.o actionset.o
+mythcontrols.o keybindings.o keygrabber.o mythosdmenueditor.o
+progfind.o guidegrid.o customedit.o schedulecommon.o progdetails.o
+scheduleeditor.o moc_main.o moc_playbackbox.o moc_viewscheduled.o
+moc_globalsettings.o moc_manualschedule.o moc_programrecpriority.o
+moc_channelrecpriority.o moc_statusbox.o moc_networkcontrol.o
+moc_custompriority.o moc_mythappearance.o moc_exitprompt.o
+moc_proglist.o moc_mythcontrols.o moc_keygrabber.o
+moc_mythosdmenueditor.o moc_progfind.o moc_guidegrid.o
+moc_customedit.o moc_progdetails.o moc_scheduleeditor.o
+-L/home/frans/oe/tmp_angstrom/staging/armv7a-angstrom-linux-gnueabi/usr/lib
+-Wl,-rpath-link,/home/frans/oe/tmp_angstrom/work/armv7a-angstrom-linux-gnueabi/qt4-x11-free-4.6.0-r13.1/qt-everywhere-opensource-src-4.6.0/lib
+-L../../libs/libmyth -L../../libs/libmythtv -L../../libs/libavutil
+-L../../libs/libavcodec -L../../libs/libavformat
+-L../../libs/libswscale -L../../libs/libmythdb -L../../libs/libmythui
+-L../../libs/libmythupnp -lmythtv-0.22 -lmythavformat-0.22
+-lmythavutil-0.22 -lmythavcodec-0.22 -lmythswscale-0.22
+-lmythupnp-0.22 -lmyth-0.22 -lmythui-0.22 -lmythdb-0.22
+-L../../libs/libmythlivemedia -lmythlivemedia-0.22
+-L../../libs/libmythfreemheg -lmythfreemheg-0.22
+-L../../libs/libmythhdhomerun -lmythhdhomerun-0.22
+-L/home/frans/oe/tmp_angstrom/staging/armv7a-angstrom-linux-gnueabi/usr/lib
+-lfreetype -lXinerama -lX11 -lXext -lXxf86vm -lXv -lXrandr -lQtWebKit
+-Wl,-rpath-link,/usr/lib -lphonon -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib -lQtDBus
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -lQtSql -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib -lQtXml
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -lQtGui -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib -lQtNetwork
+-Wl,-rpath-link,/usr/lib -Wl,-rpath-link,/usr/lib
+-Wl,-rpath-link,/usr/lib -lQtCore -Wl,-rpath-link,/usr/lib -lglib-2.0
+-lpthread
+
+In this I see two issues.
+
+The obvious one is of course the explosion of  -Wl,-rpath-link,/usr/lib
+Somewhat annoying but not really harmful.
+
+What is more harmful though is that somewhere in the build process the
+linking is done by invoking: arm-angstrom-linux-gnueabi-g++
+-L/home/frans/oe/tmp_angstrom/staging/armv7a-angstrom-linux-gnueabi/usr/lib
+...
+-L dirs are searched for in the order they appear on the command line,
+so the version in staging has preference above the local version
+(which is only moved to staging after the compilation is completed).
+
+I can imagine a few solutions, but no idea which one is the best and
+how to implement them.
+First option is to hack the generated makefile in a configure_append
+step. While this would solve the issue for me it is not really a
+generic solution.
+Second option is to force removing a package from staging when a new
+version is build
+Third option is to change the class which generates the above command
+to put the -L near the end (after any -L's from the makefile itself.
+
+No idea on the way to solve this. Anyone an idea (and perhaps the
+knowledge to fix this)?
+
+Frans.
 
 
-Thanks,
-
-Paul
-
-
-> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2009-December=
-/015599.html
-
---
-=46rom bb3ddb5df2b506f67ebcc9f1ed9f09d80c16e1bf Mon Sep 17 00:00:00 2001
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-Date: Sat, 12 Dec 2009 10:17:52 +0100
-Subject: [PATCH 1/1] Package VDR.
-
-The upstream Makefile needs to be patched to use the headers from the
-staging area.
-
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
- conf/checksums.ini               |    4 ++++
- recipes/vdr/files/fixpaths.patch |   11 +++++++++++
- recipes/vdr/vdr_1.7.10.bb        |   11 +++++++++++
- 3 files changed, 26 insertions(+), 0 deletions(-)
- create mode 100644 recipes/vdr/files/fixpaths.patch
- create mode 100644 recipes/vdr/vdr_1.7.10.bb
-
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-index 3bf9854..e717f1b 100644
---- a/conf/checksums.ini
-+++ b/conf/checksums.ini
-@@ -27046,6 +27046,10 @@
-sha256=3D05b473815f9706387a3c5eaeb4da2e492f624e0b7783432179454f9d69bb973c
- md5=3Dd97a8dbc72942c57542f50322b538a48
- sha256=3D05b473815f9706387a3c5eaeb4da2e492f624e0b7783432179454f9d69bb973c
-=20
-+[ftp://ftp.tvdr.de/vdr/Developer/vdr-1.7.10.tar.bz2]
-+md5=3Dc74ee966baca1c47ed6b9e2be3d1639b
-+sha256=3D165bfcd811ef92cab50d11a88a76c481e105689438929414d27edfacfb312f52
-+
-
-[ftp://ftp.billsgames.com/unix/x/vectoroids/src/vectoroids-1.1.0.tar.gz]
- md5=3Dc63ce56b09aa7da9a6e95d804e9ee314
- sha256=3D8d14dd281767e994108abd77c8e67d5a17718d0ad1e34d37e026911d14697b2e
-diff --git a/recipes/vdr/files/fixpaths.patch
-b/recipes/vdr/files/fixpaths.patch
-new file mode 100644
-index 0000000..418f2d9
---- /dev/null
-+++ b/recipes/vdr/files/fixpaths.patch
-@@ -0,0 +1,11 @@
-+--- vdr/Makefile~fixpaths	2009-10-18 15:59:25.000000000 +0200
-++++ vdr/Makefile	2009-12-13 12:28:22.000000000 +0100
-+@@ -21,7 +21,7 @@
-+ BINDIR   =3D $(PREFIX)/bin
-+ LOCDIR   =3D ./locale
-+ LIBS     =3D -ljpeg -lpthread -ldl -lcap -lrt -lfreetype -lfontconfig
-+-INCLUDES =3D -I/usr/include/freetype2
-++INCLUDES =3D ${CFLAGS}
-+=20
-+ PLUGINDIR=3D ./PLUGINS
-+ PLUGINLIBDIR=3D $(PLUGINDIR)/lib
-diff --git a/recipes/vdr/vdr_1.7.10.bb b/recipes/vdr/vdr_1.7.10.bb
-new file mode 100644
-index 0000000..d9bcfb4
---- /dev/null
-+++ b/recipes/vdr/vdr_1.7.10.bb
-@@ -0,0 +1,11 @@
-+DESCRIPTION =3D "Video Disk Recorder (VDR) is a digital sat-receiver
-program using Linux and DVB technologies. It allows one to record MPEG2
-streams, as well as output the stream to TV. It is also possible to
-watch DVDs (hardware accelerated) with some comfort and use an IR remote
-control."
-+AUTHOR =3D "Klaus Schmidinger"
-+LICENSE =3D "GPLv2"
-+HOMEPAGE =3D "http://www.tvdr.de"
-+
-+DEPENDS =3D "fontconfig freetype gettext libcap jpeg"
-+
-+SRC_URI =3D "ftp://ftp.tvdr.de/vdr/Developer/${P}.tar.bz2 \
-+           file://fixpaths.patch;patch=3D1"
-+
-+CFLAGS_append +=3D " -I${STAGING_INCDIR}/freetype2"
---=20
-1.6.5.4
-
---=-XJ3HWBSQweWX+ErrAlik
-Content-Disposition: attachment; filename="0001-Package-VDR.patch"
-Content-Type: text/x-patch; name="0001-Package-VDR.patch"; charset="UTF-8"
-Content-Transfer-Encoding: base64
-
-RnJvbSBiYjNkZGI1ZGYyYjUwNmY2N2ViY2M5ZjFlZDlmMDlkODBjMTZlMWJmIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQ0KRnJvbTogUGF1bCBNZW56ZWwgPHBhdWxlcGFudGVyQHVzZXJzLnNvdXJj
-ZWZvcmdlLm5ldD4NCkRhdGU6IFNhdCwgMTIgRGVjIDIwMDkgMTA6MTc6NTIgKzAxMDANClN1Ympl
-Y3Q6IFtQQVRDSCAxLzFdIFBhY2thZ2UgVkRSLg0KDQpUaGUgdXBzdHJlYW0gTWFrZWZpbGUgbmVl
-ZHMgdG8gYmUgcGF0Y2hlZCB0byB1c2UgdGhlIGhlYWRlcnMgZnJvbSB0aGUgc3RhZ2luZyBhcmVh
-Lg0KDQpTaWduZWQtb2ZmLWJ5OiBQYXVsIE1lbnplbCA8cGF1bGVwYW50ZXJAdXNlcnMuc291cmNl
-Zm9yZ2UubmV0Pg0KLS0tDQogY29uZi9jaGVja3N1bXMuaW5pICAgICAgICAgICAgICAgfCAgICA0
-ICsrKysNCiByZWNpcGVzL3Zkci9maWxlcy9maXhwYXRocy5wYXRjaCB8ICAgMTEgKysrKysrKysr
-KysNCiByZWNpcGVzL3Zkci92ZHJfMS43LjEwLmJiICAgICAgICB8ICAgMTEgKysrKysrKysrKysN
-CiAzIGZpbGVzIGNoYW5nZWQsIDI2IGluc2VydGlvbnMoKyksIDAgZGVsZXRpb25zKC0pDQogY3Jl
-YXRlIG1vZGUgMTAwNjQ0IHJlY2lwZXMvdmRyL2ZpbGVzL2ZpeHBhdGhzLnBhdGNoDQogY3JlYXRl
-IG1vZGUgMTAwNjQ0IHJlY2lwZXMvdmRyL3Zkcl8xLjcuMTAuYmINCg0KZGlmZiAtLWdpdCBhL2Nv
-bmYvY2hlY2tzdW1zLmluaSBiL2NvbmYvY2hlY2tzdW1zLmluaQ0KaW5kZXggM2JmOTg1NC4uZTcx
-N2YxYiAxMDA2NDQNCi0tLSBhL2NvbmYvY2hlY2tzdW1zLmluaQ0KKysrIGIvY29uZi9jaGVja3N1
-bXMuaW5pDQpAQCAtMjcwNDYsNiArMjcwNDYsMTAgQEAgc2hhMjU2PTA1YjQ3MzgxNWY5NzA2Mzg3
-YTNjNWVhZWI0ZGEyZTQ5MmY2MjRlMGI3NzgzNDMyMTc5NDU0ZjlkNjliYjk3M2MNCiBtZDU9ZDk3
-YThkYmM3Mjk0MmM1NzU0MmY1MDMyMmI1MzhhNDgNCiBzaGEyNTY9MDViNDczODE1Zjk3MDYzODdh
-M2M1ZWFlYjRkYTJlNDkyZjYyNGUwYjc3ODM0MzIxNzk0NTRmOWQ2OWJiOTczYw0KIA0KK1tmdHA6
-Ly9mdHAudHZkci5kZS92ZHIvRGV2ZWxvcGVyL3Zkci0xLjcuMTAudGFyLmJ6Ml0NCittZDU9Yzc0
-ZWU5NjZiYWNhMWM0N2VkNmI5ZTJiZTNkMTYzOWINCitzaGEyNTY9MTY1YmZjZDgxMWVmOTJjYWI1
-MGQxMWE4OGE3NmM0ODFlMTA1Njg5NDM4OTI5NDE0ZDI3ZWRmYWNmYjMxMmY1Mg0KKw0KIFtmdHA6
-Ly9mdHAuYmlsbHNnYW1lcy5jb20vdW5peC94L3ZlY3Rvcm9pZHMvc3JjL3ZlY3Rvcm9pZHMtMS4x
-LjAudGFyLmd6XQ0KIG1kNT1jNjNjZTU2YjA5YWE3ZGE5YTZlOTVkODA0ZTllZTMxNA0KIHNoYTI1
-Nj04ZDE0ZGQyODE3NjdlOTk0MTA4YWJkNzdjOGU2N2Q1YTE3NzE4ZDBhZDFlMzRkMzdlMDI2OTEx
-ZDE0Njk3YjJlDQpkaWZmIC0tZ2l0IGEvcmVjaXBlcy92ZHIvZmlsZXMvZml4cGF0aHMucGF0Y2gg
-Yi9yZWNpcGVzL3Zkci9maWxlcy9maXhwYXRocy5wYXRjaA0KbmV3IGZpbGUgbW9kZSAxMDA2NDQN
-CmluZGV4IDAwMDAwMDAuLjQxOGYyZDkNCi0tLSAvZGV2L251bGwNCisrKyBiL3JlY2lwZXMvdmRy
-L2ZpbGVzL2ZpeHBhdGhzLnBhdGNoDQpAQCAtMCwwICsxLDExIEBADQorLS0tIHZkci9NYWtlZmls
-ZX5maXhwYXRocwkyMDA5LTEwLTE4IDE1OjU5OjI1LjAwMDAwMDAwMCArMDIwMA0KKysrKyB2ZHIv
-TWFrZWZpbGUJMjAwOS0xMi0xMyAxMjoyODoyMi4wMDAwMDAwMDAgKzAxMDANCitAQCAtMjEsNyAr
-MjEsNyBAQA0KKyBCSU5ESVIgICA9ICQoUFJFRklYKS9iaW4NCisgTE9DRElSICAgPSAuL2xvY2Fs
-ZQ0KKyBMSUJTICAgICA9IC1sanBlZyAtbHB0aHJlYWQgLWxkbCAtbGNhcCAtbHJ0IC1sZnJlZXR5
-cGUgLWxmb250Y29uZmlnDQorLUlOQ0xVREVTID0gLUkvdXNyL2luY2x1ZGUvZnJlZXR5cGUyDQor
-K0lOQ0xVREVTID0gJHtDRkxBR1N9DQorIA0KKyBQTFVHSU5ESVI9IC4vUExVR0lOUw0KKyBQTFVH
-SU5MSUJESVI9ICQoUExVR0lORElSKS9saWINCmRpZmYgLS1naXQgYS9yZWNpcGVzL3Zkci92ZHJf
-MS43LjEwLmJiIGIvcmVjaXBlcy92ZHIvdmRyXzEuNy4xMC5iYg0KbmV3IGZpbGUgbW9kZSAxMDA2
-NDQNCmluZGV4IDAwMDAwMDAuLmQ5YmNmYjQNCi0tLSAvZGV2L251bGwNCisrKyBiL3JlY2lwZXMv
-dmRyL3Zkcl8xLjcuMTAuYmINCkBAIC0wLDAgKzEsMTEgQEANCitERVNDUklQVElPTiA9ICJWaWRl
-byBEaXNrIFJlY29yZGVyIChWRFIpIGlzIGEgZGlnaXRhbCBzYXQtcmVjZWl2ZXIgcHJvZ3JhbSB1
-c2luZyBMaW51eCBhbmQgRFZCIHRlY2hub2xvZ2llcy4gSXQgYWxsb3dzIG9uZSB0byByZWNvcmQg
-TVBFRzIgc3RyZWFtcywgYXMgd2VsbCBhcyBvdXRwdXQgdGhlIHN0cmVhbSB0byBUVi4gSXQgaXMg
-YWxzbyBwb3NzaWJsZSB0byB3YXRjaCBEVkRzIChoYXJkd2FyZSBhY2NlbGVyYXRlZCkgd2l0aCBz
-b21lIGNvbWZvcnQgYW5kIHVzZSBhbiBJUiByZW1vdGUgY29udHJvbC4iDQorQVVUSE9SID0gIkts
-YXVzIFNjaG1pZGluZ2VyIg0KK0xJQ0VOU0UgPSAiR1BMdjIiDQorSE9NRVBBR0UgPSAiaHR0cDov
-L3d3dy50dmRyLmRlIg0KKw0KK0RFUEVORFMgPSAiZm9udGNvbmZpZyBmcmVldHlwZSBnZXR0ZXh0
-IGxpYmNhcCBqcGVnIg0KKw0KK1NSQ19VUkkgPSAiZnRwOi8vZnRwLnR2ZHIuZGUvdmRyL0RldmVs
-b3Blci8ke1B9LnRhci5iejIgXA0KKyAgICAgICAgICAgZmlsZTovL2ZpeHBhdGhzLnBhdGNoO3Bh
-dGNoPTEiDQorDQorQ0ZMQUdTX2FwcGVuZCArPSAiIC1JJHtTVEFHSU5HX0lOQ0RJUn0vZnJlZXR5
-cGUyIg0KLS0gDQoxLjYuNS40DQoNCg==
-
---=-XJ3HWBSQweWX+ErrAlik--
-
---=-/lK27eamhbTfY6m8DodZ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktAppYACgkQPX1aK2wOHVjhmACeP0iuGnRc1tGPC+FLDPM9StUH
-MwYAmgJJeP2UEwOAbPo2eCSUBuisQgPO
-=71W8
------END PGP SIGNATURE-----
-
---=-/lK27eamhbTfY6m8DodZ--
