@@ -1,39 +1,47 @@
-Received: from dan.rpsys.net ([93.97.175.187])
+Received: from mail-fx0-f212.google.com ([209.85.220.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NRpHV-0003OD-Kw
+	(envelope-from <raj.khem@gmail.com>) id 1NRrQ0-0006xe-Ea
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Jan 2010 16:55:49 +0100
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	o04FneLZ028721 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 4 Jan 2010 15:49:40 GMT
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id nudGa3NvZzFx
+	Mon, 04 Jan 2010 19:12:43 +0100
+Received: by fxm4 with SMTP id 4so12769947fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2010 15:49:40 +0000 (GMT)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	o04FnZoP028693
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 4 Jan 2010 15:49:36 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Mon, 04 Jan 2010 10:10:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=MJWhhTevD/reDS5KU1aUQx5YoDIgjlVgsJ7vXaDOiYw=;
+	b=oanW7Li5zDM9FOOjPB21amoTa5CTWBw4xdfxWaOZKmFcSYrWEInWTx7ZDux1p2axXj
+	Aecj9HVcMIX63yhW3kBULeH6EPeCzjJKX3BSBaJWGn4q/cTUMh/o0oG8kv2d9DLqjtoD
+	UiSB7GLprGGCqUhmRPiOmz9zNP8X1PXn3V9nw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=EJRmHmuMV38541rikirpAg9ex5dtXthMdeIYn56pg4pQkSUvotMQ349ExadCo1ThWK
+	IjUcyEpoUqcOjUneDn5bzGhZCEKw73s7sNbp1rala5UK0mTf6VjWYpIZjFXGW2VgFvku
+	DVTJnxw67zHFvQwJ3JUT58/Qm/vpHrKJEmYR4=
+Received: by 10.87.44.39 with SMTP id w39mr21117956fgj.17.1262628637182;
+	Mon, 04 Jan 2010 10:10:37 -0800 (PST)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id d4sm43195128fga.21.2010.01.04.10.10.34
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 04 Jan 2010 10:10:36 -0800 (PST)
+Date: Mon, 4 Jan 2010 10:10:57 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ac9c93b11001032331g641d1015hb7191696fdf5bb65@mail.gmail.com>
-References: <ac9c93b11001030833v6236cb2ew11627fb47a6d7fa8@mail.gmail.com>
-	<1262552980.2553.104.camel@lenovo.internal.reciva.com>
-	<ac9c93b11001032331g641d1015hb7191696fdf5bb65@mail.gmail.com>
-Date: Mon, 04 Jan 2010 15:56:05 +0000
-Message-Id: <1262620565.8748.246.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-SA-Exim-Connect-IP: 93.97.175.187
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Message-ID: <20100104181057.GA4326@gmail.com>
+References: <op.u5mp87ximn1qzu@guohr-laptop-ubuntu>
+	<19c1b8a90912281053u2ebb8e62k313b1c41f99462f6@mail.gmail.com>
+	<op.u5sogndnmn1qzu@guohr-laptop-ubuntu>
+MIME-Version: 1.0
+In-Reply-To: <op.u5sogndnmn1qzu@guohr-laptop-ubuntu>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.212
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: qmake issue
+Subject: Re: compilation of gcc-cross-intermediate-4.4.2 failed due to lack of fenv.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,33 +55,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2010 15:55:50 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 04 Jan 2010 18:12:43 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Mon, 2010-01-04 at 08:31 +0100, Frans Meulenbroeks wrote:
-> Yeah figured out after a brief discussion on #oe that they probably
-> didn't need to be staged.
+On (31/12/09 16:56), Guo Hongruan wrote:
+> I am afraid that the failure is not so easy.
 > 
-> Actually the recipe does not contain any staging, so this is a side
-> effect of the new automated staging.
-> It could well be that other,  non qmake recipes also suffer from this.
+> Today, I recompile the following builds:
+> MACHINE=qemux86 DISTRO=micro-uclibc
+> MACHINE=qemuarm DISTRO=micro-uclibc
+> MACHINE=qemumips DISTRO=micro-uclibc
 > 
-> The fix for mythtv is probably to have an empty do_stage()
+> only qemuarm works. But the problem is that the uclibc configuration
+> in qemuarm building has not defined UCLIBC_HAS_FENV, and the
+> configuration options of gcc-cross-intermedia lacks
+> --disable-decimal-float. So according the previous analysis, the
+> qemuarm building should failed and reported the same reason.
 > 
-> However as a general rule the -L and -I flags to staging should be
-> last, not first.
-> And, ideally, when building a recipe the old contents from that
-> package in staging should be removed first.
-> By removing that we avoid the problem that if rX adds a file A to
-> staging and rY does not do so any more, the file A still remains in
-> staging (although perhaps incompatible with what rY made.
+> Why did qemuarm build pass? I can not figure it out.
 
-If packaged staging is enabled this should happen already...
+decimal float is enabled by default for powerpc, x86 and x86_64 in gcc
+thats why you see that it works ok on arm because its disabled by
+default for arm. So yes for uclibc on these architectures you need to
+disable it because uclibc does not have decimal floating library
+implementation. Thats why in my patch in previous email I disabled 
+it for all uclibc based builds of gcc. 
+It should be disabled for mips as the code in gcc seems
+like.  If you could post your gcc build logs somewhere I can have a
+look.
 
-Cheers,
-
-Richard
+-Khem
 
 
 
