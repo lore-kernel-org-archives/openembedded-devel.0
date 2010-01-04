@@ -1,44 +1,30 @@
-Received: from mail-yx0-f171.google.com ([209.85.210.171])
+Received: from smtp-out112.alice.it ([85.37.17.112])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NRtll-0000xU-TO
+	(envelope-from <GNUtoo@no-log.org>) id 1NRuSV-0004SW-T3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Jan 2010 21:43:21 +0100
-Received: by yxe1 with SMTP id 1so14377209yxe.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jan 2010 12:41:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=Ik34IOItyC2/AtyThCs4g69y2Wv6JDKvBvjhAV2zFCM=;
-	b=i1vU4VgXGP5CoyUJiX5CPMr2WEe0HW40CG/uaQOsmuluc7UlozKBBHeb+JCS402qq6
-	OggwKRajC3NiKm21iaY3KQd7/uXgSLeiCqkMDpEfXRrOCqzo06x/5xcNtMbZx8B+WC7G
-	GGRR1KVkMedn0hlf8qHLKrIezEaiNJXNIbsMg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=TGzPq/3ZCLBQjq9WPNasxiNdvcot3KR8+hUmOMFAK6ryNhWjJNnSRSp9OOQap5C6/M
-	3spqCNK1zgGJth3UTAUAwfO96tQmLQgY7AsMX5oE2+ydQitqsxdjccL4Vdt21i0eOTSK
-	RbuXOGPYXhqpbwQel47aJydklmSn9kELYNjM0=
-MIME-Version: 1.0
-Received: by 10.101.141.11 with SMTP id t11mr25299144ann.18.1262637673404; 
-	Mon, 04 Jan 2010 12:41:13 -0800 (PST)
-In-Reply-To: <hhtj8l$acs$1@ger.gmane.org>
-References: <ac9c93b11001030833v6236cb2ew11627fb47a6d7fa8@mail.gmail.com>
-	<1262552980.2553.104.camel@lenovo.internal.reciva.com>
-	<ac9c93b11001032331g641d1015hb7191696fdf5bb65@mail.gmail.com>
-	<1262620565.8748.246.camel@dax.rpnet.com>
-	<ac9c93b11001041214w71476fedrcfa5a9cfb7137ebc@mail.gmail.com>
-	<hhtj8l$acs$1@ger.gmane.org>
-Date: Mon, 4 Jan 2010 21:41:13 +0100
-Message-ID: <ac9c93b11001041241m29cb8c57rb11b358257e486e1@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 04 Jan 2010 22:27:30 +0100
+Received: from FBCMMO03.fbc.local ([192.168.68.197]) by smtp-out112.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 4 Jan 2010 22:25:24 +0100
+Received: from FBCMCL01B04.fbc.local ([192.168.69.85]) by FBCMMO03.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 4 Jan 2010 22:25:25 +0100
+Received: from [192.168.10.100] ([79.11.151.179]) by FBCMCL01B04.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 4 Jan 2010 22:25:24 +0100
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.171
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Mon, 04 Jan 2010 22:25:17 +0100
+Message-Id: <1262640317.3767.6.camel@gnutoo-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-OriginalArrivalTime: 04 Jan 2010 21:25:24.0131 (UTC)
+	FILETIME=[6D3BB730:01CA8D84]
+X-SA-Exim-Connect-IP: 85.37.17.112
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: qmake issue
+Subject: ro/rw boot order
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,68 +38,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2010 20:43:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 04 Jan 2010 21:27:31 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-2010/1/4 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 04-01-10 21:14, Frans Meulenbroeks wrote:
->> 2010/1/4 Richard Purdie <rpurdie@rpsys.net>:
->>> On Mon, 2010-01-04 at 08:31 +0100, Frans Meulenbroeks wrote:
->>>> Yeah figured out after a brief discussion on #oe that they probably
->>>> didn't need to be staged.
->>>>
->>>> Actually the recipe does not contain any staging, so this is a side
->>>> effect of the new automated staging.
->>>> It could well be that other, =A0non qmake recipes also suffer from thi=
-s.
->>>>
->>>> The fix for mythtv is probably to have an empty do_stage()
->>>>
->>>> However as a general rule the -L and -I flags to staging should be
->>>> last, not first.
->>>> And, ideally, when building a recipe the old contents from that
->>>> package in staging should be removed first.
->>>> By removing that we avoid the problem that if rX adds a file A to
->>>> staging and rY does not do so any more, the file A still remains in
->>>> staging (although perhaps incompatible with what rY made.
->>>
->>> If packaged staging is enabled this should happen already...
->>>
->>> Cheers,
->>>
->>> Richard
->>>
->> Ehm, I use angstrom unstable head on the beagleboard.I've been told on
->> #oe that angstrom used pacakged staging.
->> I've removed my tmp dir and rebuild from scratch on dec 30, 2009,
->> including mythtv.
->> Yesterday I rebuild the latest version of mythtv, and it linked
->> against the myth lib in staging (produced by the same recipe).
->> As the lib was changed between those versions it gave a linking error.
->> After removing the lib from staging manually and rebuilding mythtv
->> builds properly.
->> To me this seems there is still a problem.
->
-> Packaged-staging only works if you have built opkg-native, otherwise it
-> won't remove things from staging. The problem is that you can't to
-> 'bitbake opkg-native' twice, so the angstrom buildscripts now do:
-> http://dominion.thruhere.net/git/cgit.cgi/openembedded/commit/?h=3Dorg.op=
-enembedded.dev&id=3D6fb8200b0002fad7ed4b67b7b5a01a54bc3db91c
->
-> regards,
->
-> Koen
+hi,
+I used that combinaison:
+MACHINE = "eee701"
+DISTRO = "angstrom-2008.1"
+
+eee701 beeing that file:
+#-----------------------------------------------------------------------------
+#@TYPE: Machine
+#@NAME: eeepc 701
+#@DESCRIPTION: Machine configuration for the eeepc 701 netbook
+#-----------------------------------------------------------------------------
+
+require i686-generic.conf
+
+PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+PREFERRED_PROVIDER_virtual/libgl = "mesa-dri"
+MACHINE_DRI_MODULES = "i915"
+
+XSERVER = "xserver-xorg xf86-video-intel xf86-input-evdev
+xf86-input-keyboard xf86-input-mouse"
+
+MACHINE_FEATURES +=" wifi alsa "
+MACHINE_DISPLAY_WIDTH_PIXELS = "800"
+MACHINE_DISPLAY_HEIGHT_PIXELS = "480"
+MACHINE_DISPLAY_ORIENTATION = "0"
+XSERVER ?= "xserver-xorg \
+           xf86-video-intel \
+           xf86-input-evdev \
+	   xf86-input-keyboard \
+	   xf86-input-mouse"
+
+IMAGE_FSTYPES += "tar.gz"
+
+PREFERRED_PROVIDER_virtual/kernel ?= "linux"
+PREFERRED_VERSION_linux ?= "2.6.32"
+
+so I use a BIOS and grub-0.97 on top of it
+
+and menu.lst says root=/dev/hda1 ro
+(it should be /dev/sda1 but that's another problem I should fix for my
+machine(with a new overriden menu.lst))
+
+and in angstrom /etc/rcS.d there is:
+S03udev
+S10checkroot
+
+And when booting it freeze unless you change udev/checkroot order or put
+rw to the kernel command line.
+
+I bet that some people already started working arround the issue:
+CMDLINE = "root=/dev/sda1 rw init=/sbin/init console=ttyS2,115200n8
+mem=128M nohz=off"
+can be found in the archos5 machine config
+
+what's the best fix for that?
+
+Denis.
 
 
-Ah ok, understood, Should opkg-native then not be build in the
-beginning of the build process?
-I would like to see it build automatically next time I rm my tmp dir...
-
-
-Frans
 
 
