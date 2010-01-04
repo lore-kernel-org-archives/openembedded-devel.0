@@ -1,28 +1,40 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-yw0-f178.google.com ([209.85.211.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NRg4E-0003ZS-S3
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NRhR8-0008Ln-47
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Jan 2010 07:05:29 +0100
-Received: from tamarin.localnet (123-192-180-176.dynamic.kbronet.com.tw
-	[123.192.180.176])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 2473A1B10C02
+	Mon, 04 Jan 2010 08:33:13 +0100
+Received: by ywh8 with SMTP id 8so14841212ywh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Jan 2010 06:00:39 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 4 Jan 2010 07:03:10 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <1262570891.5811.14.camel@dejunliu-desktop>
-	<1262574693.5811.27.camel@dejunliu-desktop>
-	<201001040502.59944.holger+oe@freyther.de>
-In-Reply-To: <201001040502.59944.holger+oe@freyther.de>
+	Sun, 03 Jan 2010 23:31:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=syu9wv5hXkR1IUloPoIlillR4XMPLJkMVJ5rVEoWiwo=;
+	b=aq4qBQ5YE/pDFivE1dPJZed5M26SBW7DMUHvlf4VabxSXtZAq37ql5zKMqtAPzkpDr
+	EQrHnu1ccTD1K1xvDUNbWoHCiMb/X2CDcx+9deyauIutlL/YHiB3q3yllzTbKi9jBgnT
+	W6mIlElgjRerfDe2twS6V08dQ0+xIXJhHi5fE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=NboYwXb5r5bbhBir4iknMbYNBqse4v1AUTJ/iB1vSjKFyxN0pb/0nUNZgPT4v6T05k
+	bg1q2SDT6Ktnp0owAXwRPTlry3dNmhYjSay3lEsXMY7umgguLgYL2M7gUVgjmonSyb5C
+	tkDbZWtluPIhRN43EMPYKdUazdGFMJmqkxol0=
 MIME-Version: 1.0
-Message-Id: <201001040703.10655.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Received: by 10.100.1.4 with SMTP id 4mr19586179ana.150.1262590266197; Sun, 03 
+	Jan 2010 23:31:06 -0800 (PST)
+In-Reply-To: <1262552980.2553.104.camel@lenovo.internal.reciva.com>
+References: <ac9c93b11001030833v6236cb2ew11627fb47a6d7fa8@mail.gmail.com>
+	<1262552980.2553.104.camel@lenovo.internal.reciva.com>
+Date: Mon, 4 Jan 2010 08:31:06 +0100
+Message-ID: <ac9c93b11001032331g641d1015hb7191696fdf5bb65@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.211.178
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: help on angstrom qemu
+Subject: Re: qmake issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,27 +48,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2010 06:05:30 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 04 Jan 2010 07:33:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Monday 04 January 2010 05:02:59 Holger Hans Peter Freyther wrote:
-> On Monday 04 January 2010 04:11:33 Dejun.Liu wrote:
-> > -->I used the OE build Qemu which at the staging
-> > dir(angstrom-dev/staging/i686-linux/usr/bin).
-> > and i executed the command in the buildserver not using ssh
-> 
-> The good thing is, I was just trying the same and see the error you see.
->  The error is printed by qemu when it can not use the SetVideoMode call of
->  SDL.
-> 
-> I will land a fix in a second. What you want to change in libsdl-native as
->  a quick solution is to add DEPENDS += "libx11-native" and change
->  --disable- video-x11" to --enable-video-x11".
+2010/1/3 Phil Blundell <philb@gnu.org>:
+> On Sun, 2010-01-03 at 17:33 +0100, Frans Meulenbroeks wrote:
+>> I can imagine a few solutions, but no idea which one is the best and
+>> how to implement them.
+>> First option is to hack the generated makefile in a configure_append
+>> step. While this would solve the issue for me it is not really a
+>> generic solution.
+>> Second option is to force removing a package from staging when a new
+>> version is build
+>> Third option is to change the class which generates the above command
+>> to put the -L near the end (after any -L's from the makefile itself.
+>
+> In the particular case of the myth* libraries, I think they should not
+> be getting staged in the first place. =A0As far as I know, no other
+> package uses them for anything.
+>
+> However, that obviously doesn't solve your qmake problem in the general
+> case. =A0With a bit of luck some Qt hacker will be able to shed light on
+> what is really going on there.
 
-I have comitted two patches for it (one with a crappy username though).
+Yeah figured out after a brief discussion on #oe that they probably
+didn't need to be staged.
 
-z.
+Actually the recipe does not contain any staging, so this is a side
+effect of the new automated staging.
+It could well be that other,  non qmake recipes also suffer from this.
+
+The fix for mythtv is probably to have an empty do_stage()
+
+However as a general rule the -L and -I flags to staging should be
+last, not first.
+And, ideally, when building a recipe the old contents from that
+package in staging should be removed first.
+By removing that we avoid the problem that if rX adds a file A to
+staging and rY does not do so any more, the file A still remains in
+staging (although perhaps incompatible with what rY made.
+
+Frans
 
 
