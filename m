@@ -1,44 +1,34 @@
-Received: from mail-ew0-f212.google.com ([209.85.219.212])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NRsSJ-0004q4-NZ
+	(envelope-from <msmith@cbnco.com>) id 1NRt58-0007aW-Cu
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Jan 2010 20:19:10 +0100
-Received: by ewy4 with SMTP id 4so16557813ewy.12
+	Mon, 04 Jan 2010 20:59:18 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 8FCA0610C0A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jan 2010 11:17:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=KsHCefaH09Ca714d72rqiExBijSvVqdao3DxcFhzNmM=;
-	b=uRr0AdDNrSDVavmrX3S193JUYkz1VXHOTIPCgRNn+UfddXG4ziF0AhPDoUJQXbaQoA
-	qeg4sUKo+n3KPfAqQ6KpqqzPzxtQ/OQJgQslxxgg0Obh5PQGCva5wK+xoE4QC9DLkbly
-	8+h6+8PM5a/QgasqmFsMKesq4VIHt4UANSCSI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=NP79IaWX3Fh1luEenS9QuYcHCJ7kkjae/czuE2E1VvBvaCKtiYR3unAO6nXpsvRBmF
-	ovoHGmx1+ZT/LCXXctvm6Aow3105Pc3t4bOBWuzyfVTT5nsWTg9NqswfRNMiG+5AFu8y
-	uGGfZiZvw1MALu925kS8c83rC2fUer/+hDM6E=
-Received: by 10.213.107.8 with SMTP id z8mr314569ebo.32.1262632624928;
-	Mon, 04 Jan 2010 11:17:04 -0800 (PST)
-Received: from gmail.com ([72.14.240.163])
-	by mx.google.com with ESMTPS id 23sm37524856eya.19.2010.01.04.11.17.02
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 04 Jan 2010 11:17:04 -0800 (PST)
-Date: Mon, 4 Jan 2010 11:17:28 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100104191728.GE4326@gmail.com>
-References: <op.u5yhl8usmn1qzu@guohr-laptop-ubuntu>
+	Mon,  4 Jan 2010 14:57:12 -0500 (EST)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 05115-06 for <openembedded-devel@lists.openembedded.org>; 
+	Mon,  4 Jan 2010 14:57:12 -0500 (EST)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 6885C60F0D2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  4 Jan 2010 14:57:12 -0500 (EST)
+Message-ID: <4B424818.3030603@cbnco.com>
+Date: Mon, 04 Jan 2010 14:57:12 -0500
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090812)
 MIME-Version: 1.0
-In-Reply-To: <op.u5yhl8usmn1qzu@guohr-laptop-ubuntu>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.219.212
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <1262450620.5161.33.camel@gnutoo-desktop>
+In-Reply-To: <1262450620.5161.33.camel@gnutoo-desktop>
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: compiling glibc-2.6.1 failed due to undefined reference to `_begin
+Subject: Re: DOLT(doltlibtool)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,21 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2010 19:19:10 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 04 Jan 2010 19:59:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On (03/01/10 20:14), Guo Hongruan wrote:
-> Hi guys:
->    There is a building failure of org.openembedded.dev. I think it
-> may be a bug of openembedded. Have anyone met the same bug? Or have
-> some idea about it?
+GNUtoo wrote:
 
-I guess you are using latest binutils. There has been changes in ld
-which surfaced this issue. So either you could switch back to using 
-older binutils like 2.18 or something. Or you could also port the patch
-recipes/glibc/glibc-2.9/glibc-2.9-use-_begin.patch
+> So far I identified 4 software using dolt:
+> *abiword 2.8.1
+> *goffice 0.7.4
+> *xf86-video-intel 2.9.1
+> *gmime 2.4.10
 
--Khem
+Also xserver-xorg (patched in c10e9906a2ecea7e9c04bf967a8882d6b4cd1077), 
+cairo (b57a5b04cd35c935bd7ed46ec8db07ec7c0766db), and webkit 
+(c70445331f91cb7f02503e7567927b9b6e40e6bb).
+
+The real fix is to get upstream dolt.m4 updated with this patch:
+
+http://lists.x.org/archives/xorg/2009-May/045835.html
+
+Mike
 
 
