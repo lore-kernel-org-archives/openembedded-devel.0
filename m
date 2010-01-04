@@ -1,40 +1,28 @@
-Received: from mail-yw0-f178.google.com ([209.85.211.178])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NRhR8-0008Ln-47
+	(envelope-from <holger+oe@freyther.de>) id 1NRhaN-00005z-GL
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Jan 2010 08:33:13 +0100
-Received: by ywh8 with SMTP id 8so14841212ywh.3
+	Mon, 04 Jan 2010 08:42:46 +0100
+Received: from tamarin.localnet (123-192-180-176.dynamic.kbronet.com.tw
+	[123.192.180.176])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 67CC51B10C02
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Jan 2010 23:31:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=syu9wv5hXkR1IUloPoIlillR4XMPLJkMVJ5rVEoWiwo=;
-	b=aq4qBQ5YE/pDFivE1dPJZed5M26SBW7DMUHvlf4VabxSXtZAq37ql5zKMqtAPzkpDr
-	EQrHnu1ccTD1K1xvDUNbWoHCiMb/X2CDcx+9deyauIutlL/YHiB3q3yllzTbKi9jBgnT
-	W6mIlElgjRerfDe2twS6V08dQ0+xIXJhHi5fE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=NboYwXb5r5bbhBir4iknMbYNBqse4v1AUTJ/iB1vSjKFyxN0pb/0nUNZgPT4v6T05k
-	bg1q2SDT6Ktnp0owAXwRPTlry3dNmhYjSay3lEsXMY7umgguLgYL2M7gUVgjmonSyb5C
-	tkDbZWtluPIhRN43EMPYKdUazdGFMJmqkxol0=
-MIME-Version: 1.0
-Received: by 10.100.1.4 with SMTP id 4mr19586179ana.150.1262590266197; Sun, 03 
-	Jan 2010 23:31:06 -0800 (PST)
-In-Reply-To: <1262552980.2553.104.camel@lenovo.internal.reciva.com>
-References: <ac9c93b11001030833v6236cb2ew11627fb47a6d7fa8@mail.gmail.com>
-	<1262552980.2553.104.camel@lenovo.internal.reciva.com>
-Date: Mon, 4 Jan 2010 08:31:06 +0100
-Message-ID: <ac9c93b11001032331g641d1015hb7191696fdf5bb65@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon,  4 Jan 2010 07:37:56 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.178
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Mon, 4 Jan 2010 08:40:27 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <200912190854.11510.holger+oe@freyther.de>
+	<201001011348.44168.holger+oe@freyther.de>
+	<hhn031$6hg$1@ger.gmane.org>
+In-Reply-To: <hhn031$6hg$1@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <201001040840.28000.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: qmake issue
+Subject: Re: Qt4 GLES (once again)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,47 +36,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2010 07:33:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 04 Jan 2010 07:42:46 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-2010/1/3 Phil Blundell <philb@gnu.org>:
-> On Sun, 2010-01-03 at 17:33 +0100, Frans Meulenbroeks wrote:
->> I can imagine a few solutions, but no idea which one is the best and
->> how to implement them.
->> First option is to hack the generated makefile in a configure_append
->> step. While this would solve the issue for me it is not really a
->> generic solution.
->> Second option is to force removing a package from staging when a new
->> version is build
->> Third option is to change the class which generates the above command
->> to put the -L near the end (after any -L's from the makefile itself.
->
-> In the particular case of the myth* libraries, I think they should not
-> be getting staged in the first place. =A0As far as I know, no other
-> package uses them for anything.
->
-> However, that obviously doesn't solve your qmake problem in the general
-> case. =A0With a bit of luck some Qt hacker will be able to shed light on
-> what is really going on there.
+On Saturday 02 January 2010 09:28:18 Koen Kooi wrote:
 
-Yeah figured out after a brief discussion on #oe that they probably
-didn't need to be staged.
+> If that works, I can live with that.
 
-Actually the recipe does not contain any staging, so this is a side
-effect of the new automated staging.
-It could well be that other,  non qmake recipes also suffer from this.
+Hi Koen,
 
-The fix for mythtv is probably to have an empty do_stage()
+that is the current patch. It is working for the !GLES case and it would be
+great if you could test the GLES case and then I would be happy to commit
+it.
 
-However as a general rule the -L and -I flags to staging should be
-last, not first.
-And, ideally, when building a recipe the old contents from that
-package in staging should be removed first.
-By removing that we avoid the problem that if rX adds a file A to
-staging and rY does not do so any more, the file A still remains in
-staging (although perhaps incompatible with what rY made.
 
-Frans
+ich@knecht:/data/openembedded/openembedded$ cat 0001-qt4-embedded-make-qt4-=
+embedded-and-qt4-
+embedded-gles.patch=20
+=46rom 4b7c9f94bc7441919e1b9e24179e0b45236739ae Mon Sep 17 00:00:00 2001
+=46rom: Holger Hans Peter Freyther <zecke@selfish.org>
+Date: Mon, 4 Jan 2010 15:37:05 +0800
+Subject: [PATCH] qt4-embedded: make qt4-embedded and qt4-embedded-gles both=
+ provide qt4-embedded
+
+This way a distribution/user can set PREFERRED_PROVIDER_qt4-embedded =3D "q=
+t4-embedded-gles"
+to select the GLES/OpenVG runtime. The default is qt4-embedded as GLES requ=
+ire a dedicated
+library most of the time provided as a binary blob by the vendor requiring =
+the user
+to manually download and store it at the right place.
+=2D--
+ conf/compatibility-providers.conf      |    1 +
+ recipes/qt4/qt4-embedded-gles_4.6.0.bb |    1 +
+ 2 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/conf/compatibility-providers.conf b/conf/compatibility-provide=
+rs.conf
+index 10a81f2..cf61ab5 100644
+=2D-- a/conf/compatibility-providers.conf
++++ b/conf/compatibility-providers.conf
+@@ -47,6 +47,7 @@ PREFERRED_PROVIDER_openmoko-alsa-scenarios ?=3D "alsa-sce=
+narii-shr"
+ PREFERRED_PROVIDER_opkg ?=3D "opkg"
+ #PREFERRED_PROVIDER_opkg ?=3D "opkg-nogpg"
+ PREFERRED_PROVIDER_qemu-native ?=3D "qemu-native"
++PREFERRED_PROVIDER_qt4-embedded ?=3D "qt4-embedded"
+ PREFERRED_PROVIDER_qt4x11 ?=3D "qt4-x11-free"
+ PREFERRED_PROVIDER_task-bootstrap ?=3D "task-bootstrap"
+ PREFERRED_PROVIDER_tslib-conf ?=3D "tslib"
+diff --git a/recipes/qt4/qt4-embedded-gles_4.6.0.bb b/recipes/qt4/qt4-embed=
+ded-gles_4.6.0.bb
+index f819c66..06cdcc5 100644
+=2D-- a/recipes/qt4/qt4-embedded-gles_4.6.0.bb
++++ b/recipes/qt4/qt4-embedded-gles_4.6.0.bb
+@@ -1,6 +1,7 @@
+ require qt4-embedded.inc
+ PR =3D "${INC_PR}.0"
+=20
++PROVIDES +=3D "qt4-embedded"
+ QT_GLFLAGS =3D "-opengl es2 -openvg"
+=20
+ require qt-4.6.0.inc
+=2D-=20
+1.6.5
+
+
+
+
+
+>=20
+> regards,
+>=20
+> Koen
+>=20
+> > diff --git a/recipes/qt4/qt4-embedded-gles_4.6.0.bb
+> > b/recipes/qt4/qt4-embedded- gles_4.6.0.bb
+> > index f819c66..06cdcc5 100644
+> > --- a/recipes/qt4/qt4-embedded-gles_4.6.0.bb
+> > +++ b/recipes/qt4/qt4-embedded-gles_4.6.0.bb
+> > @@ -1,6 +1,7 @@
+> >  require qt4-embedded.inc
+> >  PR =3D "${INC_PR}.0"
+> >
+> > +PROVIDES +=3D "qt4-embedded"
+> >  QT_GLFLAGS =3D "-opengl es2 -openvg"
+> >
+> >  require qt-4.6.0.inc
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
 
 
