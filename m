@@ -1,49 +1,30 @@
-Received: from mail-yw0-f178.google.com ([209.85.211.178])
+Received: from [210.83.210.153] (helo=mailgate1.neusoft.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NRyqy-00080b-VV
+	(envelope-from <liu-dj@neusoft.com>) id 1NS4Fh-00064V-Un
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Jan 2010 03:09:04 +0100
-Received: by ywh8 with SMTP id 8so15677967ywh.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jan 2010 18:06:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:to:cc:subject
-	:references:date:mime-version:content-transfer-encoding:from
-	:organization:message-id:in-reply-to:user-agent;
-	bh=/Cdi9brxy6WHX3CsxyyBml72FTl3/d2iEm6w/6zxCBc=;
-	b=oiIE9PX9UH7ZK5yBCm79rNvTUgjcd7zSXdhc8Db5HsdPKPb07MfadnBz2Y55N3ozw+
-	hQdC0bfRqipqt/I8JJPf3WJ9i8d4Bsnaq0wyA07rrwmVaSjKnDphwc6iYNJflHhOf4TS
-	JeP8QuylDrFfIUAJnIyGTPx9IWOfjwQigWilM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:to:cc:subject:references:date:mime-version
-	:content-transfer-encoding:from:organization:message-id:in-reply-to
-	:user-agent;
-	b=POSnHyFyTh6hm5GC6X5eZ/xVDFp+2a6B3bG8nKiZ2z9VcaeOIiT3OVJBMy88A+Aicd
-	coMbCNli7wbmWqtUUXx9zJfPOZO+bgHB0dg1LGDx5TVw52quyr1gMTM4CKsVjsQ+iz9D
-	S1Ax33HRHqDhOs2RKMPdrV9qucTa3cDcuzmW8=
-Received: by 10.150.250.1 with SMTP id x1mr21093382ybh.86.1262657217238;
-	Mon, 04 Jan 2010 18:06:57 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.54.101.56])
-	by mx.google.com with ESMTPS id 21sm7547945yxe.37.2010.01.04.18.06.53
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 04 Jan 2010 18:06:56 -0800 (PST)
+	Tue, 05 Jan 2010 08:54:57 +0100
+X-IronPort-AV: E=McAfee;i="5400,1158,5851"; a="41689726"
+Received: from unknown (HELO mailgate8.neusoft.com) ([10.0.5.18])
+	by mailgate1.neusoft.com with ESMTP/TLS/DHE-RSA-AES256-SHA;
+	05 Jan 2010 15:49:36 +0800
+Received: from unknown (HELO smtp3.neusoft.com) ([210.83.210.139])
+	by mailgate8.neusoft.com with ESMTP; 05 Jan 2010 15:52:47 +0800
+Received: from [10.1.10.188] ([10.1.10.188])
+	by smtp3.neusoft.com (iPlanet Messaging Server 5.2 Patch 2 (built Jul
+	14 2004)) with ESMTPPSA id <0KVR00HJEKLGNB@smtp3.neusoft.com> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	05 Jan 2010 15:53:40 +0800 (CST)
+Date: Tue, 05 Jan 2010 04:53:20 -0300
+From: "Dejun.Liu" <liu-dj@neusoft.com>
 To: openembedded-devel@lists.openembedded.org
-References: <op.u5zi1ghgmn1qzu@guohr-laptop-ubuntu>
-	<201001040357.33204.holger+oe@freyther.de>
-	<4B42044B.8050801@nospam.arcornews.de>
-Date: Tue, 05 Jan 2010 10:06:47 +0800
-MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Organization: Gulessoft, Inc
-Message-ID: <op.u51etl01mn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <4B42044B.8050801@nospam.arcornews.de>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.211.178
-X-SA-Exim-Mail-From: camelguo@gmail.com
+Message-id: <1262678000.5798.9.camel@dejunliu-desktop>
+MIME-version: 1.0
+X-Mailer: Evolution 2.22.2
+X-SA-Exim-Connect-IP: 210.83.210.153
+X-SA-Exim-Mail-From: liu-dj@neusoft.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Holger Freyther <freyther@inf.fu-berlin.de>
-Subject: Re: why we don't setup a buildbot for openembedded QA?
+Subject: x11-image can't start up
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,52 +38,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jan 2010 02:09:04 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Tue, 05 Jan 2010 07:54:57 -0000
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
 
-No, I am not talking about tinderbox but buildbot. I want to setup a  =
+Hi,
 
-public buildbot and validate every possible combinations of openembedded=
-.  =
+I have build angstrom x11-image and test it with Qemu,
 
-In another words, I want to do some QA jobs of openembedded.
+But Qemu failed to start up.
 
-Of course, I need help and support from all of you. I want a public serv=
-er  =
+i dig the reason find that system have no more inodes to use.
 
-which runs python and twist and I also want any volunteer can provide  =
+df -i result:
+-------------------
+filesystem		inodes		used	Available	use%	
+/dev/root		11040		11040	 0		100%
+............
+/dev/sda		11040		11040		0	100%
+..............
 
-their machine as build slaver when it is available.
+-------------------
 
-Thanks a lot!
+so does anyone know how to fix it in OE?
 
-=E5=9C=A8 Mon, 04 Jan 2010 23:07:55 +0800=EF=BC=8CRolf Leggewie  =
+Cheers
 
-<no2spam@nospam.arcornews.de> =E5=86=99=E9=81=93:
+Steven Liu
 
-> Holger Hans Peter Freyther wrote:
->> The other is the tinderbox setup will soon gain a waterfall view[...]=
+ 
 
->
-> I thought I updated the necessary code about a month ago, no? I'm not
-> sure how the feature is supposed to be used, but isn't
-> http://tinderbox.openembedded.net/waterfall/ what you are talking abou=
-t?
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
+---------------------------------------------------------------------------------------------------
+Confidentiality Notice: The information contained in this e-mail and any accompanying attachment(s) 
+is intended only for the use of the intended recipient and may be confidential and/or privileged of 
+Neusoft Corporation, its subsidiaries and/or its affiliates. If any reader of this communication is 
+not the intended recipient, unauthorized use, forwarding, printing,  storing, disclosure or copying 
+is strictly prohibited, and may be unlawful.If you have received this communication in error,please 
+immediately notify the sender by return e-mail, and delete the original message and all copies from 
+your system. Thank you. 
+---------------------------------------------------------------------------------------------------
 
-
-
--- =
-
-Guo Hongruan, Embedded Linux Consultant
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
 
 
