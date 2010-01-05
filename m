@@ -1,41 +1,47 @@
-Received: from ey-out-1920.google.com ([74.125.78.145])
+Received: from mail-gx0-f215.google.com ([209.85.217.215])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1NS7Ly-0003mk-US
+	(envelope-from <camelguo@gmail.com>) id 1NS8M5-0001nU-VK
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Jan 2010 12:13:37 +0100
-Received: by ey-out-1920.google.com with SMTP id 26so2202121eyw.4
+	Tue, 05 Jan 2010 13:17:49 +0100
+Received: by gxk7 with SMTP id 7so11212827gxk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Jan 2010 03:11:33 -0800 (PST)
-Received: by 10.213.100.65 with SMTP id x1mr12887396ebn.67.1262689893493;
-	Tue, 05 Jan 2010 03:11:33 -0800 (PST)
-Received: from xora-vm2.xora.org.uk (93-97-174-2.zone5.bethere.co.uk
-	[93.97.174.2])
-	by mx.google.com with ESMTPS id 24sm38908060eyx.6.2010.01.05.03.11.31
+	Tue, 05 Jan 2010 04:15:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:content-type:to:subject
+	:references:date:mime-version:content-transfer-encoding:from
+	:organization:message-id:in-reply-to:user-agent;
+	bh=Ol7LkG2TQr2ZSNnSRSZ7J/yc5u/H6HR1G6AyNKIG1OA=;
+	b=Fd0WLo9XCE9ACZ5XvAGOBRtoanhKs6tC1p8OtldlQjWImKGwD53DMecxiAcBx6D1el
+	kuKfEj8WJKwgO+afaBQklSF5r3AAE9xOiDPGpUSEwyK/RQyV2kdw62YP4fNowaBUN4SJ
+	x5hCFRCiWsMZwBr0j6IEiWWrMUhV8FeCONqeM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=content-type:to:subject:references:date:mime-version
+	:content-transfer-encoding:from:organization:message-id:in-reply-to
+	:user-agent;
+	b=S9IAm8N++gmRMrqNeycCsYKc6BmOa6nqgn+mG4MdYqVBpfUqd23uNiaj8BU7oHkYWe
+	obSQO0jsycUwoGE8qb//YR72FHfAHxA5qqp4LZvTbNSG34yrAIAcfnmn5Oa8bS7vtBr5
+	1oT4lN+L2ApLAF4uM7Xgt0/62S5ozPQ3u4P8g=
+Received: by 10.100.246.25 with SMTP id t25mr25607949anh.4.1262693740642;
+	Tue, 05 Jan 2010 04:15:40 -0800 (PST)
+Received: from guohr-laptop-ubuntu ([123.54.99.142])
+	by mx.google.com with ESMTPS id 21sm6606988ywh.16.2010.01.05.04.15.36
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 05 Jan 2010 03:11:32 -0800 (PST)
-Received: by xora-vm2.xora.org.uk (Postfix, from userid 500)
-	id 9538221342; Tue,  5 Jan 2010 11:11:30 +0000 (GMT)
-Date: Tue, 5 Jan 2010 11:11:28 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Tue, 05 Jan 2010 04:15:39 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100105111128.GB1983@xora-vm2.xora.org.uk>
-References: <20091222140029.GF10910@xora.vm.bytemark.co.uk>
-	<1261596258.8748.156.camel@dax.rpnet.com>
-	<20091229155215.00006145@unknown> <hhdikl$25q$1@ger.gmane.org>
-	<1262118637.8748.173.camel@dax.rpnet.com>
-	<hhf42m$n7h$1@ger.gmane.org>
-	<20091230144538.6a171e4e@xora-desktop.xora.org.uk>
-	<1262602007.8748.206.camel@dax.rpnet.com>
-	<20100104110233.GA2017@xora-vm2.xora.org.uk>
-	<1262629172.22868.4.camel@andromeda>
+References: <op.u5yhl8usmn1qzu@guohr-laptop-ubuntu>
+	<20100104191728.GE4326@gmail.com>
+Date: Tue, 05 Jan 2010 20:15:30 +0800
 MIME-Version: 1.0
-In-Reply-To: <1262629172.22868.4.camel@andromeda>
-User-Agent: Mutt/1.5.20 (2009-08-17)
-X-SA-Exim-Connect-IP: 74.125.78.145
-X-SA-Exim-Mail-From: dp@xora.org.uk
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u516ztggmn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <20100104191728.GE4326@gmail.com>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.217.215
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [TSC] First Meeting
+Subject: Re: compiling glibc-2.6.1 failed due to undefined reference to `_begin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,23 +55,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jan 2010 11:13:38 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 05 Jan 2010 12:17:49 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: Quoted-Printable
 
-On Mon, Jan 04, 2010 at 07:19:32PM +0100, Michael 'Mickey' Lauer wrote:
-> Am Montag, den 04.01.2010, 11:02 +0000 schrieb Graeme Gregory:
-> > If people can tell me there jabber login I can create a TSC private room and invite
-> > people to it.
-> 
-> mickey@totalueberwachung.de
-> 
-> Apart from today and Friday, I'm pretty open towards a date.
-> 
-Putting together everyones free times unless I misread it seems
-the only day this can happen now is thursday.
+=E5=9C=A8 Tue, 05 Jan 2010 03:17:28 +0800=EF=BC=8CKhem Raj <raj.khem@gma=
+il.com> =E5=86=99=E9=81=93:
 
-Graeme
+> On (03/01/10 20:14), Guo Hongruan wrote:
+>> Hi guys:
+>>    There is a building failure of org.openembedded.dev. I think it
+>> may be a bug of openembedded. Have anyone met the same bug? Or have
+>> some idea about it?
+>
+> I guess you are using latest binutils. There has been changes in ld
+> which surfaced this issue. So either you could switch back to using
+> older binutils like 2.18 or something. Or you could also port the patc=
+h
+> recipes/glibc/glibc-2.9/glibc-2.9-use-_begin.patch
 
+Yes, you are right. With binutils 2.18, it works OK.
+
+Thanks a lot
+
+>
+> -Khem
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
+
+
+
+-- =
+
+Guo Hongruan, Embedded Linux Consultant
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
 
