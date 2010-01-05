@@ -1,39 +1,25 @@
-Received: from libra.cs.put.poznan.pl ([150.254.30.30])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <przemyslaw.wesolek@cs.put.poznan.pl>)
-	id 1NSFbw-0000dK-1P for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Jan 2010 21:02:39 +0100
-Received: from kas30pipe.localhost (unknown [127.0.0.1])
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id C2F96A7
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Jan 2010 20:00:17 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at cs.put.poznan.pl
-Received: from libra.cs.put.poznan.pl ([127.0.0.1])
-	by localhost (libra.cs.put.poznan.pl [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id ZIkdUmfoVtgn
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Jan 2010 21:00:17 +0100 (CET)
-Received: from [150.254.31.31] (idss-pw.cs.put.poznan.pl [150.254.31.31])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by libra.cs.put.poznan.pl (Postfix on VMS) with ESMTP id 8A1A6A4
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Jan 2010 21:00:13 +0100 (CET)
-Message-ID: <4B439A5A.9030908@cs.put.poznan.pl>
-Date: Tue, 05 Jan 2010 21:00:26 +0100
-From: Przemyslaw Wesolek <przemyslaw.wesolek@cs.put.poznan.pl>
-Organization: Poznan University of Technology
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	(envelope-from <philip@balister.org>) id 1NSHf3-0002Dk-Jo
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Jan 2010 23:14:00 +0100
+Received: (qmail 7740 invoked by uid 1003); 5 Jan 2010 22:11:52 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 5 Jan 2010 22:11:52 -0000
+Message-ID: <4B43B926.2030700@balister.org>
+Date: Tue, 05 Jan 2010 17:11:50 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 0.96.0
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0278], KAS30/Release
-X-SpamTest-Info: Not protected
-X-SA-Exim-Connect-IP: 150.254.30.30
-X-SA-Exim-Mail-From: przemyslaw.wesolek@cs.put.poznan.pl
+References: <BAY127-W1795412CA5C5CD1A8D270CD8730@phx.gbl>
+In-Reply-To: <BAY127-W1795412CA5C5CD1A8D270CD8730@phx.gbl>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: ushare_hg problems
+Subject: Re: using bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,31 +33,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jan 2010 20:02:39 -0000
-Content-Type: text/plain; charset=ISO-8859-2
+X-List-Received-Date: Tue, 05 Jan 2010 22:14:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-After commit f60bce0c2475242b733b28998b2de5c7b6e01a4c, I have problems
-parsing newly added recipes/ushare/ushare_hg.bb:
+On 01/05/2010 10:46 AM, saleh usman wrote:
+>
+> Hello
+>
+> I've built console-image usnig bitbake. If I want to build another recipie  like helloworld  than what should I do?.wheather to delete tmp directory and rebuild all of the things or any other way?
 
-> NOTE: Handling BitBake files: \ (4122/7940) [51 %]ERROR: SRCREV was used yet no valid SCM was found in SRC_URI
-> NOTE: <class 'bb.fetch.ParameterError'>: while evaluating:
-> ${@bb.fetch.get_srcrev(d)}
-> NOTE: <class 'bb.fetch.ParameterError'>: while evaluating:
-> r1+hg${SRCPV}
-> NOTE: <class 'bb.fetch.ParameterError'>: while evaluating:
-> ${PN}-${EXTENDPE}${PV}-${PR}
-> NOTE: <class 'bb.fetch.ParameterError'>: while evaluating:
-> ${TMPDIR}/work/${MULTIMACH_TARGET_SYS}/${PF}
-> NOTE: <class 'bb.fetch.ParameterError'>: while evaluating:
-> ${WORKDIR}/ushare
-> NOTE: <class 'bb.fetch.ParameterError'>: while evaluating:
-> ${S}
-> ERROR:  while parsing /home/jest/miszmasz/angstrom.dev/openembedded/recipes/ushare/ushare_hg.bb
-> NOTE: Handling BitBake files: | (7940/7940) [100 %]
-> NOTE: Parsing finished. 7306 cached, 310 parsed, 323 skipped, 0 masked.
-> ERROR: Parsing errors found, exiting...
+For console-image, you can add a line like:
 
-Przemek
+ANGSTROM_EXTRA_INSTALL = " screen oprofile task-native-sdk "
+
+to local.conf
+
+Do a "bitbake -c clean task-base" then "bitbake console-image" (cleaning 
+task-base may be overkill)
+
+You can also bitbake recipe-name and find the ipk in 
+tmp/deploy/..../ipks/machine or arch/package ...
+
+Philip
+
+
+>
+> Saleh
+>   		 	   		
+> _________________________________________________________________
+> Windows Live: Friends get your Flickr, Yelp, and Digg updates when they e-mail you.
+> http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/social-network-basics.aspx?ocid=PID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_3:092010
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
