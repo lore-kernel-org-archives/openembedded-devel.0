@@ -1,47 +1,47 @@
 Received: from mail-yw0-f178.google.com ([209.85.211.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NRydd-0007LI-5A
+	(envelope-from <camelguo@gmail.com>) id 1NRyk7-0005qE-4m
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Jan 2010 02:55:16 +0100
-Received: by ywh8 with SMTP id 8so15668209ywh.3
+	Tue, 05 Jan 2010 03:01:58 +0100
+Received: by ywh8 with SMTP id 8so15672949ywh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Jan 2010 17:53:09 -0800 (PST)
+	Mon, 04 Jan 2010 17:59:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:content-type:to:subject
 	:references:date:mime-version:content-transfer-encoding:from
 	:organization:message-id:in-reply-to:user-agent;
-	bh=yLnUur66r0jOhC4Ry5Q8fVJKshwDgufhvh4rw58v1GQ=;
-	b=LMhzgulc/Hgy8kw+CSfwVanqN2jvHMRCyQtTBut7sPmahxAN/DiPKbK9FGBKHgeQq+
-	S3NplakuC/amY+h+5pvW7KyeoBE9RCGt5seH8vEGbWvaqYPzobuQzcyCyrQTTGxYLu63
-	9/Yktz9vVKn3+h6XAvF98AJm098JGOn8ia1ws=
+	bh=eNd2KKkVutKTJOYNUw2TumAPxKA8BDIy/k0+W+YJvXk=;
+	b=ruO2ykObxz/D2cGCeLNGfv9QxEB1aQuvB5q0ppLrjiiKVbmoGMT29nRn1F6+T54vnl
+	I8IgSlDgnE/+qEvS0RfEEXACcr+FioYz7sqn4DQtKVJRWy8kBw7bYep4ipX70pnplZ6e
+	gk8WghYhpFeIfG72PULSf6eo7LrhCFKkUaRyU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=content-type:to:subject:references:date:mime-version
 	:content-transfer-encoding:from:organization:message-id:in-reply-to
 	:user-agent;
-	b=xGmIxcUCno0nLsfyJaF1wXTEV4sWSfEVWQllXmewBb6SQiWSKTWt6cDtaEfISJ6ERO
-	5iZrTymLAZOaRuX8NX2iG3Ib+nfIYXgBmpVvkvPl3EKuyndmZwfb20sIEnZ2yL06DzVL
-	nOt8QU0nI+gSu5z40IYhSjIyqRzWxkMjMMOpk=
-Received: by 10.150.120.8 with SMTP id s8mr7556472ybc.185.1262656389536;
-	Mon, 04 Jan 2010 17:53:09 -0800 (PST)
+	b=VRr/cyiABM8x8nsjXoCw8vTUau8uVc8WP014SIpd2kd8sIIOcsyw2mJILVNwazFemu
+	jXkPeLXylldpYRh9R2jD4KR/kc2GFxU4jUS0EzSSr+/WAuAoYIZ0dcWFxraICf3lyCgL
+	GD9N1lcp7elxKUaZA/pFhUxDLDMznPx2yinKI=
+Received: by 10.101.187.18 with SMTP id o18mr27577610anp.8.1262656791557;
+	Mon, 04 Jan 2010 17:59:51 -0800 (PST)
 Received: from guohr-laptop-ubuntu ([123.54.101.56])
-	by mx.google.com with ESMTPS id 36sm7540094yxh.49.2010.01.04.17.53.05
+	by mx.google.com with ESMTPS id 34sm7555234yxf.29.2010.01.04.17.59.47
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 04 Jan 2010 17:53:07 -0800 (PST)
+	Mon, 04 Jan 2010 17:59:49 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-References: <op.u5yhl8usmn1qzu@guohr-laptop-ubuntu>
-	<20100104191728.GE4326@gmail.com>
-Date: Tue, 05 Jan 2010 09:52:59 +0800
+References: <> <1262417638-26595-1-git-send-email-camelguo@gmail.com>
+	<20100104231453.GA10191@gmail.com>
+Date: Tue, 05 Jan 2010 09:59:41 +0800
 MIME-Version: 1.0
 From: "Guo Hongruan" <camelguo@gmail.com>
 Organization: Gulessoft, Inc
-Message-ID: <op.u51d6f11mn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <20100104191728.GE4326@gmail.com>
+Message-ID: <op.u51ehr2pmn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <20100104231453.GA10191@gmail.com>
 User-Agent: Opera Mail/10.10 (Linux)
 X-SA-Exim-Connect-IP: 209.85.211.178
 X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: compiling glibc-2.6.1 failed due to undefined reference to `_begin
+Subject: Re: [PATCH] Add --disable-decimal-float option to gcc-cross-intermediate/gcc-cross_4.4.2.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,30 +55,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jan 2010 01:55:16 -0000
+X-List-Received-Date: Tue, 05 Jan 2010 02:01:58 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
 Content-Transfer-Encoding: Quoted-Printable
 
-Thanks for your information, I will try it on my site.
-
-  Thanks again.
-
-=E5=9C=A8 Tue, 05 Jan 2010 03:17:28 +0800=EF=BC=8CKhem Raj <raj.khem@gma=
+=E5=9C=A8 Tue, 05 Jan 2010 07:14:53 +0800=EF=BC=8CKhem Raj <raj.khem@gma=
 il.com> =E5=86=99=E9=81=93:
 
-> On (03/01/10 20:14), Guo Hongruan wrote:
->> Hi guys:
->>    There is a building failure of org.openembedded.dev. I think it
->> may be a bug of openembedded. Have anyone met the same bug? Or have
->> some idea about it?
+> On (02/01/10 15:33), Guo Hongruan wrote:
+>> 1. Add --disable-decimal-float option to  =
+
+>> gcc-cross-intermediate_4.4.2.bb when LIBC =3D=3D uclibc and TARGET_AR=
+CH =3D=3D  =
+
+>> i[3|4|5|6]86, without it, the compilation will failed due to lack of =
+ =
+
+>> fenv.h.
+>> ---
+>>  recipes/gcc/gcc-cross-intermediate_4.4.2.bb |    7 +++++++
+>>  recipes/gcc/gcc-cross_4.4.2.bb              |    7 ++++++-
+>>  2 files changed, 13 insertions(+), 1 deletions(-)
+>>
+>> diff --git a/recipes/gcc/gcc-cross-intermediate_4.4.2.bb  =
+
+>> b/recipes/gcc/gcc-cross-intermediate_4.4.2.bb
+>> index 3ca59aa..4bb1004 100644
+>> --- a/recipes/gcc/gcc-cross-intermediate_4.4.2.bb
+>> +++ b/recipes/gcc/gcc-cross-intermediate_4.4.2.bb
+>> @@ -1,9 +1,16 @@
+>>  require gcc-cross_${PV}.bb
+>>  require gcc-cross-intermediate.inc
+>>
+>> +PR =3D "${INC_PR}.2"
+>> +
+>>  DEPENDS +=3D "gmp-native mpfr-native"
+>>
+>>  EXTRA_OECONF +=3D " --disable-libmudflap \
+>>  		  --disable-libgomp \
+>>  		  --disable-libssp \
+>>  		"
+>> +
+>> +EXTRA_OECONF_append_linux-uclibc +=3D " ${@base_contains('TARGET_ARC=
+H',  =
+
+>> 'i386', '--disable-decimal-float', '',d)}"
+>> +EXTRA_OECONF_append_linux-uclibc +=3D " ${@base_contains('TARGET_ARC=
+H',  =
+
+>> 'i486', '--disable-decimal-float', '',d)}"
+>> +EXTRA_OECONF_append_linux-uclibc +=3D " ${@base_contains('TARGET_ARC=
+H',  =
+
+>> 'i586', '--disable-decimal-float', '',d)}"
+>> +EXTRA_OECONF_append_linux-uclibc +=3D " ${@base_contains('TARGET_ARC=
+H',  =
+
+>> 'i686', '--disable-decimal-float', '',d)}"
 >
-> I guess you are using latest binutils. There has been changes in ld
-> which surfaced this issue. So either you could switch back to using
-> older binutils like 2.18 or something. Or you could also port the patc=
-h
-> recipes/glibc/glibc-2.9/glibc-2.9-use-_begin.patch
+> It should be disabled for all uclibc based arch/distro combo's
+> and the change should go to gcc-<version>.inc files as in my original
+> patch.
+
+Yes, I agree with you.
+
+My proposal is to keep the effect of my patch as small as possible. For =
+I  =
+
+have not validated other platforms, so I can not disable it this way. I =
+ =
+
+will try it as soon as possible, if it did has the same problem on other=
+  =
+
+platform, I will fix the patch.
+
+By the way, on arm, mips platform, there is no such problem. I have not =
+ =
+
+figured our why it does not occur on the platforms.
+
 >
-> -Khem
 >
 > _______________________________________________
 > Openembedded-devel mailing list
