@@ -1,24 +1,24 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NS5DQ-0006qD-7D for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Jan 2010 09:56:39 +0100
-Received: from g225142234.adsl.alicedsl.de ([92.225.142.234]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NS5BT-0000St-0r for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Jan 2010 08:54:35 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <philb@gnu.org>) id 1NS5wm-0007Vx-4a
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Jan 2010 10:43:31 +0100
+Received: from 89-168-180-155.dynamic.dsl.as9105.com ([89.168.180.155]
+	helo=[192.168.2.155])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NS5uo-0002bs-Gm
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Jan 2010 09:41:26 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <1262678000.5798.9.camel@dejunliu-desktop>
 References: <1262678000.5798.9.camel@dejunliu-desktop>
-Date: Tue, 05 Jan 2010 09:54:28 +0100
-Message-ID: <1262681668.3209.2.camel@mattotaupa.wohnung.familie-menzel.net>
+Date: Tue, 05 Jan 2010 09:41:23 +0000
+Message-ID: <1262684483.2553.157.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: x11-image can't start up
@@ -35,59 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Jan 2010 08:56:39 -0000
-X-Groupsio-MsgNum: 15399
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-5+gYWDxbKvM1hgXsf3Ba"
-
---=-5+gYWDxbKvM1hgXsf3Ba
+X-List-Received-Date: Tue, 05 Jan 2010 09:43:31 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Dear Steven,
-
-
-Am Dienstag, den 05.01.2010, 04:53 -0300 schrieb Dejun.Liu:
->=20
+On Tue, 2010-01-05 at 04:53 -0300, Dejun.Liu wrote:
+> Hi,
+> 
 > I have build angstrom x11-image and test it with Qemu,
->=20
+> 
 > But Qemu failed to start up.
->=20
+> 
 > i dig the reason find that system have no more inodes to use.
->=20
-> df -i result:
-> -------------------
-> filesystem		inodes		used	Available	use%=09
-> /dev/root		11040		11040	 0		100%
-> ............
-> /dev/sda		11040		11040		0	100%
-> ..............
->=20
-> -------------------
->=20
+[...]
 > so does anyone know how to fix it in OE?
 
-did OE create the filesystem or did you? What filesystem is it?
+Check your IMAGE_CMD,  You didn't mention what filesystem you are using,
+but I'm guessing it's probably ext2.  In that case, I think you need to
+add a suitable -N or -i option to genext2fs.
 
-If you did create it and depending on your filesystem, I think you have
-to recreate the filesystem with more inodes.
+p.
 
 
-Thanks,
 
-Paul
 
---=-5+gYWDxbKvM1hgXsf3Ba
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktC/j0ACgkQPX1aK2wOHViC0wCeN0teGwwF7jwgJAkoxhVHxKnU
-2G4AmgKKYrf0qmHC/NK6dW9ta1cChzVB
-=g2Wk
------END PGP SIGNATURE-----
-
---=-5+gYWDxbKvM1hgXsf3Ba--
