@@ -1,25 +1,47 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-yw0-f178.google.com ([209.85.211.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NRwkE-0006lw-J5 for openembedded-devel@lists.openembedded.org;
-	Tue, 05 Jan 2010 00:53:57 +0100
-Received: from g225142234.adsl.alicedsl.de ([92.225.142.234]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NRwiH-0007Wk-KL for openembedded-devel@lists.openembedded.org;
-	Mon, 04 Jan 2010 23:51:53 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <camelguo@gmail.com>) id 1NRydd-0007LI-5A
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 05 Jan 2010 02:55:16 +0100
+Received: by ywh8 with SMTP id 8so15668209ywh.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 04 Jan 2010 17:53:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:content-type:to:subject
+	:references:date:mime-version:content-transfer-encoding:from
+	:organization:message-id:in-reply-to:user-agent;
+	bh=yLnUur66r0jOhC4Ry5Q8fVJKshwDgufhvh4rw58v1GQ=;
+	b=LMhzgulc/Hgy8kw+CSfwVanqN2jvHMRCyQtTBut7sPmahxAN/DiPKbK9FGBKHgeQq+
+	S3NplakuC/amY+h+5pvW7KyeoBE9RCGt5seH8vEGbWvaqYPzobuQzcyCyrQTTGxYLu63
+	9/Yktz9vVKn3+h6XAvF98AJm098JGOn8ia1ws=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=content-type:to:subject:references:date:mime-version
+	:content-transfer-encoding:from:organization:message-id:in-reply-to
+	:user-agent;
+	b=xGmIxcUCno0nLsfyJaF1wXTEV4sWSfEVWQllXmewBb6SQiWSKTWt6cDtaEfISJ6ERO
+	5iZrTymLAZOaRuX8NX2iG3Ib+nfIYXgBmpVvkvPl3EKuyndmZwfb20sIEnZ2yL06DzVL
+	nOt8QU0nI+gSu5z40IYhSjIyqRzWxkMjMMOpk=
+Received: by 10.150.120.8 with SMTP id s8mr7556472ybc.185.1262656389536;
+	Mon, 04 Jan 2010 17:53:09 -0800 (PST)
+Received: from guohr-laptop-ubuntu ([123.54.101.56])
+	by mx.google.com with ESMTPS id 36sm7540094yxh.49.2010.01.04.17.53.05
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 04 Jan 2010 17:53:07 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 05 Jan 2010 00:51:47 +0100
-Message-ID: <1262649107.3238.44.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+References: <op.u5yhl8usmn1qzu@guohr-laptop-ubuntu>
+	<20100104191728.GE4326@gmail.com>
+Date: Tue, 05 Jan 2010 09:52:59 +0800
+MIME-Version: 1.0
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u51d6f11mn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <20100104191728.GE4326@gmail.com>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.211.178
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [bitbake vdr] /arm-angstrom-linux-gnueabi/bin/ld: cannot find -lintl
+Subject: Re: compiling glibc-2.6.1 failed due to undefined reference to `_begin
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,96 +55,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Jan 2010 23:53:57 -0000
-X-Groupsio-MsgNum: 15394
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-+vz9iHlxMaSQHfNZ7YAJ"
+X-List-Received-Date: Tue, 05 Jan 2010 01:55:16 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: Quoted-Printable
 
---=-+vz9iHlxMaSQHfNZ7YAJ
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Thanks for your information, I will try it on my site.
 
-Dear OpenEmbedded hackers,
+  Thanks again.
 
+=E5=9C=A8 Tue, 05 Jan 2010 03:17:28 +0800=EF=BC=8CKhem Raj <raj.khem@gma=
+il.com> =E5=86=99=E9=81=93:
 
-I tried to build the new VDR recipe [1] with the following command.
-
-        $ bitbake -c clean vdr
-        $ bitbake vdr
-
-But I get the following error.
-
-        NOTE: Running task 802 of 813 (ID: 8, /oe/openembedded/recipes/vdr/=
-vdr_1.7.10.bb, do_compile)
-        ERROR: function do_compile failed
-
-The log shows the following.
-
-        [=E2=80=A6]
-        arm-angstrom-linux-gnueabi-g++ -march=3Darmv7-a -mtune=3Dcortex-a8 =
--mfpu=3Dneon -mfloat-abi=3Dsoftfp -isystem/oe/angstrom-dev/staging/armv7a-a=
-ngstrom-linux-gnueabi/usr/include -fexpensive-optimizations -frename-regist=
-ers -fomit-frame-pointer -O2 -ggdb3 -fpermissive -fvisibility-inlines-hidde=
-n -rdynamic audio.o channels.o ci.o config.o cutter.o device.o diseqc.o dvb=
-device.o dvbci.o dvbosd.o dvbplayer.o dvbspu.o dvbsubtitle.o eit.o eitscan.=
-o epg.o filter.o font.o i18n.o interface.o keys.o lirc.o menu.o menuitems.o=
- nit.o osdbase.o osd.o pat.o player.o plugin.o rcu.o receiver.o recorder.o =
-recording.o remote.o remux.o ringbuffer.o sdt.o sections.o shutdown.o skinc=
-lassic.o skins.o skinsttng.o sources.o spu.o status.o svdrp.o themes.o thre=
-ad.o timers.o tools.o transfer.o vdr.o videodir.o -ljpeg -lpthread -ldl -lc=
-ap -lrt -lfreetype -lfontconfig -lintl -L/oe/angstrom-dev/staging/armv7a-an=
-gstrom-linux-gnueabi/usr/lib -Wl,-rpath-link,/oe/angstrom-dev/staging/armv7=
-a-angstrom-linux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=3Dgnu  ./libsi/li=
-bsi.a -o vdr
-        /oe/angstrom-dev/cross/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.=
-3.3/../../../../arm-angstrom-linux-gnueabi/bin/ld: cannot find -lintl
-        collect2: ld returned 1 exit status
-        make: *** [vdr] Error 1
-        FATAL: oe_runmake failed
-
-Without knowing what I have to do, I tried the fix it by adding a
-dependency on `virtual/libintl` according to [2] to no avail. (It had
-todo with lintl. ;-))
-
-        diff --git a/recipes/vdr/vdr_1.7.10.bb b/recipes/vdr/vdr_1.7.10.bb
-        index 64b89b8..49c9079 100644
-        --- a/recipes/vdr/vdr_1.7.10.bb
-        +++ b/recipes/vdr/vdr_1.7.10.bb
-        @@ -4,7 +4,7 @@ LICENSE =3D "GPLv2"
-         HOMEPAGE =3D "http://www.tvdr.de"
-         PR =3D "r0"
-        =20
-        -DEPENDS =3D "fontconfig freetype gettext libcap jpeg"
-        +DEPENDS =3D "fontconfig freetype gettext libcap jpeg virtual/libin=
-tl"
-        =20
-         SRC_URI =3D "ftp://ftp.tvdr.de/vdr/Developer/${P}.tar.bz2 \
-                    file://fixpaths.patch;patch=3D1 \
-
-Can someone help me please.
+> On (03/01/10 20:14), Guo Hongruan wrote:
+>> Hi guys:
+>>    There is a building failure of org.openembedded.dev. I think it
+>> may be a bug of openembedded. Have anyone met the same bug? Or have
+>> some idea about it?
+>
+> I guess you are using latest binutils. There has been changes in ld
+> which surfaced this issue. So either you could switch back to using
+> older binutils like 2.18 or something. Or you could also port the patc=
+h
+> recipes/glibc/glibc-2.9/glibc-2.9-use-_begin.patch
+>
+> -Khem
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
 
 
-Thanks,
 
-Paul
+-- =
+
+Guo Hongruan, Embedded Linux Consultant
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
 
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/vdr/vdr=
-_1.7.10.bb
-[2] http://lists.linuxtogo.org/pipermail/openembedded-commits/2009-Septembe=
-r/031178.html
-
---=-+vz9iHlxMaSQHfNZ7YAJ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEUEABECAAYFAktCfxIACgkQPX1aK2wOHVidWwCYzS2CH2H/decRAJg7RDe3EPBh
-awCfbYWoLwSKKkKCUCtecXSEGdrtoXQ=
-=H/l+
------END PGP SIGNATURE-----
-
---=-+vz9iHlxMaSQHfNZ7YAJ--
