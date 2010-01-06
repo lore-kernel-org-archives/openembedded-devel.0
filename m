@@ -1,35 +1,28 @@
-Received: from [210.83.210.153] (helo=mailgate1.neusoft.com)
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <liu-dj@neusoft.com>) id 1NSL9h-0005zG-6u
+	(envelope-from <holger+oe@freyther.de>) id 1NSN5n-00055c-HA
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jan 2010 02:57:52 +0100
-X-IronPort-AV: E=McAfee;i="5400,1158,5852"; a="41779563"
-Received: from unknown (HELO mailgate8.neusoft.com) ([10.0.5.18])
-	by mailgate1.neusoft.com with ESMTP/TLS/DHE-RSA-AES256-SHA;
-	06 Jan 2010 09:52:30 +0800
-Received: from unknown (HELO smtp3.neusoft.com) ([210.83.210.139])
-	by mailgate8.neusoft.com with ESMTP; 06 Jan 2010 09:55:43 +0800
-Received: from [10.1.10.188] ([10.1.10.188])
-	by smtp3.neusoft.com (iPlanet Messaging Server 5.2 Patch 2 (built Jul
-	14 2004)) with ESMTPPSA id <0KVS003XOYQCZN@smtp3.neusoft.com> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	06 Jan 2010 09:56:36 +0800 (CST)
-Date: Tue, 05 Jan 2010 22:56:17 -0300
-From: "Dejun.Liu" <liu-dj@neusoft.com>
-In-reply-to: <20100106015220.GD12135@denix.org>
+	Wed, 06 Jan 2010 05:01:59 +0100
+Received: from tamarin.localnet (123-192-180-176.dynamic.kbronet.com.tw
+	[123.192.180.176])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 061CA1B10C04
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  6 Jan 2010 03:57:15 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <1262742977.5798.17.camel@dejunliu-desktop>
-MIME-version: 1.0
-X-Mailer: Evolution 2.22.2
-References: <1262678000.5798.9.camel@dejunliu-desktop>
-	<1262684483.2553.157.camel@lenovo.internal.reciva.com>
-	<1262739710.5798.14.camel@dejunliu-desktop>
-	<20100106015220.GD12135@denix.org>
-X-SA-Exim-Connect-IP: 210.83.210.153
-X-SA-Exim-Mail-From: liu-dj@neusoft.com
+Date: Wed, 6 Jan 2010 04:59:45 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <op.u5zi1ghgmn1qzu@guohr-laptop-ubuntu>
+	<4B42044B.8050801@nospam.arcornews.de>
+	<op.u51etl01mn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <op.u51etl01mn1qzu@guohr-laptop-ubuntu>
+MIME-Version: 1.0
+Message-Id: <201001060459.45399.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: x11-image can't start up
+Subject: Re: why we don't setup a buildbot for openembedded QA?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,69 +36,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jan 2010 01:57:52 -0000
+X-List-Received-Date: Wed, 06 Jan 2010 04:01:59 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"
 
-Hi,
+On Tuesday 05 January 2010 03:06:47 Guo Hongruan wrote:
+> No, I am not talking about tinderbox but buildbot. I want to setup a
+> public buildbot and validate every possible combinations of openembedded.
+> In another words, I want to do some QA jobs of openembedded.
 
-Thanks Denys,i will try it.
+This is a nice goal, but it is probably not the biggest concern as well. E.g. 
+there is little benefit of making every version of binutils work with glibc and 
+gcc. It is certainly cool to be able to pick any GCC, BINUTILS, GLIBC and 
+guarnatee that it will work on any host distro. But besides being totally cool 
+it is also totally wasting your time (unless your goal is to learn how GCC, 
+BINUTILS and GLIBC interact). And the next step would be to have make world 
+build on top of that...
 
-Cheers
 
-Steven Liu
+I have been at your point a couple of years back (seppuku, a tinderbox setup, 
+autobuild scripts are the result). The QA that is working best is to have 
+people sign up for "maintaining" certain areas.
 
-On Tue, 2010-01-05 at 20:52 -0500, Denys Dmytriyenko wrote:
-> On Tue, Jan 05, 2010 at 10:01:50PM -0300, Dejun.Liu wrote:
-> > Hi,
-> > 
-> > Sorry for the delay in replying,my company's email server is down.
-> > 
-> > On Tue, 2010-01-05 at 09:41 +0000, Phil Blundell wrote:
-> > > On Tue, 2010-01-05 at 04:53 -0300, Dejun.Liu wrote:
-> > > > Hi,
-> > > > 
-> > > > I have build angstrom x11-image and test it with Qemu,
-> > > > 
-> > > > But Qemu failed to start up.
-> > > > 
-> > > > i dig the reason find that system have no more inodes to use.
-> > > [...]
-> > > > so does anyone know how to fix it in OE?
-> > > 
-> > > Check your IMAGE_CMD,  You didn't mention what filesystem you are using,
-> > > but I'm guessing it's probably ext2.  In that case, I think you need to
-> > > add a suitable -N or -i option to genext2fs.
-> > -->yes i used the ext2 filesystem,because im not family with the OE
-> > build system,so i can't find where is genext2fs.it's my first time to
-> > build OE.would you like to tell me which recipe should i fix?
-> 
-> Add something like this in the image recipe or your local.conf:
-> 
-> EXTRA_IMAGECMD_ext2.gz += "-i 4096"
-> 
-> > ---------------------------------------------------------------------------------------------------
-> > Confidentiality Notice: The information contained in this e-mail and any accompanying attachment(s) 
-> > is intended only for the use of the intended recipient and may be confidential and/or privileged of 
-> > Neusoft Corporation, its subsidiaries and/or its affiliates. If any reader of this communication is 
-> > not the intended recipient, unauthorized use, forwarding, printing,  storing, disclosure or copying 
-> > is strictly prohibited, and may be unlawful.If you have received this communication in error,please 
-> > immediately notify the sender by return e-mail, and delete the original message and all copies from 
-> > your system. Thank you. 
-> > ---------------------------------------------------------------------------------------------------
-> 
-> http://goldmark.org/jeff/stupid-disclaimers/
-> 
+E.g.: I'm feeling responsible for:
 
----------------------------------------------------------------------------------------------------
-Confidentiality Notice: The information contained in this e-mail and any accompanying attachment(s) 
-is intended only for the use of the intended recipient and may be confidential and/or privileged of 
-Neusoft Corporation, its subsidiaries and/or its affiliates. If any reader of this communication is 
-not the intended recipient, unauthorized use, forwarding, printing,  storing, disclosure or copying 
-is strictly prohibited, and may be unlawful.If you have received this communication in error,please 
-immediately notify the sender by return e-mail, and delete the original message and all copies from 
-your system. Thank you. 
----------------------------------------------------------------------------------------------------
+	- QtE, meta-toolchain-qte, qmake and such
+	- I'm also testing mipsel from time to time
 
+Other people like pb_ feel responsible for:
+	- DISTRO micro (I think i got it wrong)
+
+Or Khem is doing kick ass work on the toolchain bits..
+
+
+> Of course, I need help and support from all of you. I want a public server
+> which runs python and twist and I also want any volunteer can provide
+> their machine as build slaver when it is available.
+
+Technology is not the problem here. What use is this system if no one is fixing 
+build problems because of a too new or too old version of GCC? What use is it 
+to the user to have thousands of tested configurations when he can not navigate 
+through the list of packages?
+
+
+let me write another mail about QA topics.
+
+	z.
 
 
