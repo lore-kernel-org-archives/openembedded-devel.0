@@ -1,41 +1,36 @@
-Received: from mail-fx0-f212.google.com ([209.85.220.212])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1NSahN-0007hX-J3
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NSe6L-0007KQ-CQ for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Jan 2010 23:11:40 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NSe4L-0008KB-Da
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jan 2010 19:33:40 +0100
-Received: by fxm4 with SMTP id 4so14598160fxm.12
+	Wed, 06 Jan 2010 23:09:33 +0100
+Received: from p5b3b2a17.dip.t-dialin.net ([91.59.42.23])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Jan 2010 23:09:33 +0100
+Received: from no2spam by p5b3b2a17.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jan 2010 10:31:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type; bh=KYgBRsO1fcrHxQljb/aWg1eH8TCEVcMxqtyPld40N0I=;
-	b=JqqKDvTomH71syicT1moxTAdd/vdV9dfzMgP1GIfs/RZfn6THQCgCARICUvOvlzC4I
-	BT8rlKUKVjlk0SmSLHLpvGuGPuvgAHzgTtM4mjpKylABAeKiiknVc0CtMmi9uHLe/v2h
-	HCcsLrZ/M+m2nVUvMWRcuKp2nS6v2kk6GDc1I=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	b=VE/NWFIk1MxPsodNI+yOxtoRRddVAWWlnEEssUpwoQSQ7ojmytc7qaUtBLoA14CnRS
-	167wb8hvaCwxUHUlRmmXK2mMZV2gb1MCd7lM/z+Ccip21k6GFmMYK7B4o0kXdX6y3S+q
-	ZkRI6g2kYQloNwm3Td/6Bs4hr8b91pCGjLTCE=
-MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.134.18 with SMTP id 18mr1292966hbx.42.1262802693083; Wed, 
-	06 Jan 2010 10:31:33 -0800 (PST)
-In-Reply-To: <4B424818.3030603@cbnco.com>
-References: <1262450620.5161.33.camel@gnutoo-desktop>
-	<4B424818.3030603@cbnco.com>
-Date: Wed, 6 Jan 2010 16:31:33 -0200
-X-Google-Sender-Auth: ddf093ffd306b288
-Message-ID: <be7a9f3d1001061031i6660f42emf51273ac5e5e6fe1@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+	Wed, 06 Jan 2010 23:09:33 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.212
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Wed, 06 Jan 2010 23:09:10 +0100
+Message-ID: <hi31m7$hc3$1@ger.gmane.org>
+References: <201001060507.31754.holger+oe@freyther.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5b3b2a17.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <201001060507.31754.holger+oe@freyther.de>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: DOLT(doltlibtool)
+Subject: Re: QA Goals for OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,33 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jan 2010 18:33:40 -0000
+X-List-Received-Date: Wed, 06 Jan 2010 22:11:40 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hello Mike,
+Holger Hans Peter Freyther wrote:
+> 	*) Does bitbake world work? If not it would be cool if someone could take
+>             a look?
 
-On Mon, Jan 4, 2010 at 5:57 PM, Michael Smith <msmith@cbnco.com> wrote:
-> GNUtoo wrote:
->
->> So far I identified 4 software using dolt:
->> *abiword 2.8.1
->> *goffice 0.7.4
->> *xf86-video-intel 2.9.1
->> *gmime 2.4.10
->
-> Also xserver-xorg (patched in c10e9906a2ecea7e9c04bf967a8882d6b4cd1077),
-> cairo (b57a5b04cd35c935bd7ed46ec8db07ec7c0766db), and webkit
-> (c70445331f91cb7f02503e7567927b9b6e40e6bb).
->
-> The real fix is to get upstream dolt.m4 updated with this patch:
->
-> http://lists.x.org/archives/xorg/2009-May/045835.html
+I was hoping for bitbake world to work as a QA tool.  But my efforts on
+the world target didn't really receive a warm welcome.  By now world is
+so utterly broken that bitbake won't even ever start to execute any
+tasks (I killed bitbake after two days when it still did nothing the
+last time I tried).
 
-Yes, this is the right fix however Xorg people didn't push it YET!
+Unfortunately, currently there is no consensus in OE that
+"MACHINE=$machine bitbake $bb" shouldn't arbitrarily fail somewhere.
+Right now, OE does not have the tools in place to specify that for
+example $bb1 does not compile for $machineA (some people are very
+allergic to COMPATIBLE_MACHINE for no particular reason).  Bitbake can't
+do versioned depends and so we can't say that $bb2-$version does not
+compile with gcc less than 3.4.x, for example.  Those are just two
+examples.  XorA "solved" this in a hackish way with angsstrom.bbclass.
 
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
 
 
