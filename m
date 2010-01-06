@@ -1,35 +1,37 @@
-Received: from mail-yx0-f171.google.com ([209.85.210.171])
+Received: from dan.rpsys.net ([93.97.175.187])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NSTlc-0002cx-J5
+	(envelope-from <rpurdie@rpsys.net>) id 1NSXlt-0008Q1-Du
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jan 2010 12:09:35 +0100
-Received: by yxe1 with SMTP id 1so15959367yxe.3
+	Wed, 06 Jan 2010 16:26:08 +0100
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	o06FJu0e027107 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 6 Jan 2010 15:19:56 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id qgayiazsFbwG
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jan 2010 03:07:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=2GXipUoFKYezExseBQ/HaydVZ6yq1AGhJlMbD5buT+c=;
-	b=Kb6v80Tnx8Z0M7SLJ0ybX2XjaP7rbNvCESTjHlVF/iIpYR6Nyl0h/RPeTaIAiGjoI4
-	XL4QBgRlsKXb3HehcSDlX19HKHiUTXGSy+KKIh1vQJckxv+E0dJNorAUkXk5tVLYJdY+
-	65WrzqPKswIrkmpOXe1njocb8Gcw9swQMnLDs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=kunURLmNwJ6mKEc6t9AjEY9+BSGZZPPNsD66+x6VuAKj2jFNMMD3yCRMKJFNLf7x2g
-	lXyFApmK2RiYH0HfCwnHEQHdGm+GkRdyzfMnEBV9jUizPiSML4iuXXUsyJ4TVKBmQ5m9
-	M+/5khda+Er4XAOOnbotun1RqBawRb+jFyNEA=
-MIME-Version: 1.0
-Received: by 10.101.184.1 with SMTP id l1mr2585861anp.198.1262776047867; Wed, 
-	06 Jan 2010 03:07:27 -0800 (PST)
-Date: Wed, 6 Jan 2010 12:07:27 +0100
-Message-ID: <ac9c93b11001060307w301eca52kce287f410ae4a69a@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: bitbake-dev@lists.berlios.de, openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.171
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+	Wed,  6 Jan 2010 15:19:56 +0000 (GMT)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	o06FJqc9027096
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 6 Jan 2010 15:19:54 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <201001060507.31754.holger+oe@freyther.de>
+References: <201001060507.31754.holger+oe@freyther.de>
+Date: Wed, 06 Jan 2010 15:26:41 +0000
+Message-Id: <1262791601.32622.2.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: bitbake image building problem; possible bug in bitbake; also some 	openembedded image.bbclass suggestions
+Subject: Re: QA Goals for OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,83 +45,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jan 2010 11:09:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 06 Jan 2010 15:26:08 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-I'm mailing this to both the bitbake and oe dev lists. The problem
-might be bitbake related, but I can't explain it without openembedded.
-Also there are some openembedded improvement suggestions too.
-BTW please be gentle with me wrt the python part as I am really a python n00b.
-And notice that I am not subscribed to the bitbake-dev ML, only to the OE one.
+On Wed, 2010-01-06 at 05:07 +0100, Holger Hans Peter Freyther wrote:
+> 	*) Koen reported that dependency loop reporting is not working anymore..
+>             anyone cares to invest thes five minutes to fix that?
 
-Problem: when I build an image with a static devicetable it does not build.
-This is with a personal image for which I have an own recipe. The
-device table file given to IMAGE_DEVICE_TABLES resides in the recipe
-directory and in the .bb file I say:
-IMAGE_DEVICE_TABLES="mydevicetable.txt"
-Howver if I change to IMAGE_DEVICE_TABLE="mydevicetable.txt" it works again
+In bitbake?
 
-With bitbake 1.8.2 this worked like a charm. With 1.8.18 it does not
-work any more.
-The file to find the exact location of the devicetable is in image.bbclass.
+> 	*) Sometimes we have pretty embarassing issues like some images switching
+>             from mdev back to udev and we don't notice for months(!!!)
+>             It would totally rock if one could change the rootfs.bbclass (or
+>             such) class and count the size of the image on the first run, store 
+>             it in the temp directory and report the diff's back to the 
+>             tinderbox and then we could have a view on the tinderbox?
+> 
+>             Inside the build summary we should see the new size of the image
+>             and the growth compared to the first built?
+> 
+>             The idea would be to have people look at the waterfall and go OMG 
+>             why did "minimal-image" grow by 2MB?
 
-It contains this func:
+I started packagehistory.bbclass in Poky with ideas like this in mind.
+It stores data in a filesystem layout and checked package versions don't
+go backwards. Adding transports to send and receive data from a database
+server would be a nice improvement.
 
-def get_devtable_list(d):
-    import bb
-    devtable = bb.data.getVar('IMAGE_DEVICE_TABLE', d, 1)
-    if devtable != None:
-        return devtable
-    devtables = bb.data.getVar('IMAGE_DEVICE_TABLES', d, 1)
-    if devtables == None:
-        devtables = 'files/device_table-minimal.txt'
-    return " ".join([ bb.which(bb.data.getVar('BBPATH', d, 1), devtable)
-                      for devtable in devtables.split() ])
+>           *) The next step would be to transfer packet sizes as well
 
-In the func I added a print for BBPATH. When comparing the 1.8.2
-bitbake and the 1.8.18 bitbake I noticed that in .2 the recipe dir was
-in the path and in .18 it was not.
+package sizes? Again this was a goal for packagehistory.bbclass
 
-Diving deeper I compared 1.8.2 and  1.8.18 and noticed that in
-BBHandler.py a concatenation to BBHandler was removed.
-Drilling deeper in the git log I found this commit which seemed to be
-the bad guy: http://cgit.openembedded.org/cgit.cgi/bitbake/commit/?id=a50104766965a8f48a8455502b804a18a9be5c02
-After restoring the change to BBHandler things worked like expected.
 
-This brings me to the question whether having the device table in my
-recipe dir is desirable (personally I'd say yes) and whether the
-BBPATH should or should not be extended with the recipe dir in this
-case.
-If yes, there is a bitbake issue and the commit above might need to be
-reverted (or we need another change somewhere)
+Cheers,
 
-Of course I do have a workaround. If I give a path which is relative
-to a dir in the BBPATH things work too. (e.g.
-IMAGE_DEVICE_TABLES="recipes/myimage/mydevicetable.txt" )
-Or copying the device table to the top of the tree (or the files
-subdir and adjust IMAGE_DEVICE_TABLES). However this all seems a
-little bit less clean.
-Also using  IMAGE_DEVICE_TABLE works.
+Richard
 
-Meanwhile, as I had to peek into image.bbclass I would suggest some
-additional changes to the func above (as my python skills is mainly
-reading, I will not provide a patch):
-I would suggest that
-1) if IMAGE_DEVICE_TABLES exist, but is not found that somewhere along
-the line an error is given, either here or in the caller (the recipe
-gave a var so there better be something)
-2) extending the possible locations of IMAGE_DEVICE_TABLES by checking
-if the file exists without a BBPATH prefix. That would allow for
-absolute paths and (hopefully) also things like ${S}/mydevicetable.txt
-(perhaps changing
-bb.data.getVar('BBPATH', d, 1)
-into something like
-bb.data.getVar(".:" +'BBPATH', d, 1)
-is sufficient to achieve this.
-
-I hope this helps. If there are unclarities, feel free to mail me or
-ping me on irc (eFfeM on #oe).
-
-Frans
 
 
