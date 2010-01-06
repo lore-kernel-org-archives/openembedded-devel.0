@@ -1,36 +1,35 @@
-Received: from mail-gx0-f227.google.com ([209.85.217.227])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NSQfx-0008QV-Nu
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NSR7r-0006P6-KB for openembedded-devel@lists.openembedded.org;
+	Wed, 06 Jan 2010 09:20:22 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NSR5s-0005hy-Kq
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jan 2010 08:51:32 +0100
-Received: by gxk27 with SMTP id 27so16941510gxk.7
+	Wed, 06 Jan 2010 09:18:16 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Jan 2010 09:18:16 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Jan 2010 23:49:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=lDDDmzNJsZqrDpxdutUPTXmf9kk0Kmc8R9hkhSS/7e8=;
-	b=R06NG+InoEohoplMGFKqbHa0AMvYQdMnp7q4q3KhPTJdytUopIqNOsSU/WMT6WWuQy
-	wGOpUCxPoTQbmIOxYSTb1jkm+pFPt+b0bKcx0pFMizGfLgvoCX5GM9Mx5l6HTDtGlq5D
-	L1wlYgN/3EnT70reFD6GLQM2qIQfrepnne6zE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=nYj/7HpJrdvqqesopGfwyqddrijh/Z4A4C1lN2OwE/PTGq6jOpQ2RTQtMIua/NmrTA
-	kcfTpJsv7Tfdz+VSR/PKOsMIiv16KCyAd5m4C3AGrHvu9T/m1Sntm7wTD0dNrmu/Thmn
-	786pleJjcFwxKAhHmB265FObDK/QwoSv310vQ=
-MIME-Version: 1.0
-Received: by 10.101.128.18 with SMTP id f18mr41204804ann.165.1262764164877; 
-	Tue, 05 Jan 2010 23:49:24 -0800 (PST)
-In-Reply-To: <201001060507.31754.holger+oe@freyther.de>
-References: <201001060507.31754.holger+oe@freyther.de>
-Date: Wed, 6 Jan 2010 08:49:23 +0100
-Message-ID: <ac9c93b11001052349u285341b9p80d339ac96f73a38@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 06 Jan 2010 09:18:16 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.217.227
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 06 Jan 2010 09:17:52 +0100
+Message-ID: <hi1gvg$auc$1@ger.gmane.org>
+References: <201001060507.31754.holger+oe@freyther.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.5) Gecko/20091222 Shredder/3.0.1pre
+In-Reply-To: <201001060507.31754.holger+oe@freyther.de>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: QA Goals for OpenEmbedded
@@ -47,85 +46,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jan 2010 07:51:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 06 Jan 2010 08:20:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/1/6 Holger Hans Peter Freyther <holger+oe@freyther.de>:
-> Hi all,
->
-> mostly inspired by Guo's last mail about buildbot. In one way I agree wit=
-h
-> Guo, we need more QA and also an attitute to not commit when the tree is
-> somehow broken...
->
->
-> Here is my list of short term goals and it would be cool if people sign u=
-p for
-> it:
->
->
-> =A0 =A0 =A0 =A0*) Does bitbake world work? If not it would be cool if som=
-eone could take
-> =A0 =A0 =A0 =A0 =A0 =A0a look?
->
-> =A0 =A0 =A0 =A0*) Fix compile errors of bitbake world for a set of config=
-urations?
->
-> =A0 =A0 =A0 =A0*) Koen reported that dependency loop reporting is not wor=
-king anymore..
-> =A0 =A0 =A0 =A0 =A0 =A0anyone cares to invest thes five minutes to fix th=
-at?
->
-> =A0 =A0 =A0 =A0*) Sometimes we have pretty embarassing issues like some i=
-mages switching
-> =A0 =A0 =A0 =A0 =A0 =A0from mdev back to udev and we don't notice for mon=
-ths(!!!)
-> =A0 =A0 =A0 =A0 =A0 =A0It would totally rock if one could change the root=
-fs.bbclass (or
-> =A0 =A0 =A0 =A0 =A0 =A0such) class and count the size of the image on the=
- first run, store
-> =A0 =A0 =A0 =A0 =A0 =A0it in the temp directory and report the diff's bac=
-k to the
-> =A0 =A0 =A0 =A0 =A0 =A0tinderbox and then we could have a view on the tin=
-derbox?
->
-> =A0 =A0 =A0 =A0 =A0 =A0Inside the build summary we should see the new siz=
-e of the image
-> =A0 =A0 =A0 =A0 =A0 =A0and the growth compared to the first built?
->
-> =A0 =A0 =A0 =A0 =A0 =A0The idea would be to have people look at the water=
-fall and go OMG
-> =A0 =A0 =A0 =A0 =A0 =A0why did "minimal-image" grow by 2MB?
->
-> =A0 =A0 =A0 =A0 =A0*) The next step would be to transfer packet sizes as =
-well
->
-> =A0 =A0 =A0 =A0 =A0*) Integrate some testing into recipes. E.g. attempt t=
-o boot the console-
-> =A0 =A0 =A0 =A0 =A0 =A0 image and grep the Serial Console for the "Loging=
-:" prompt..
-> =A0 =A0 =A0 =A0 =A0 =A0 Test the toolchain to compile binaries...
->
->
->
-> anyone feels like helping?
-> =A0 =A0 =A0 =A0z.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Holger, I'm always open to helping (time permitting of course).
+On 06-01-10 05:07, Holger Hans Peter Freyther wrote:
 
-Another thing I found missing is the lack of error messages in the
-classes if e.g. a file is missing. In some cases this seems to be
-silently ignored.
-Had a case yesterday (will report on it in a separate message) and
-also saw it on a different place to report (but forgot to note it and
-can't recall it, sorry).
+> 
+> 	*) Sometimes we have pretty embarassing issues like some images switching
+>             from mdev back to udev and we don't notice for months(!!!)
+>             It would totally rock if one could change the rootfs.bbclass (or
+>             such) class and count the size of the image on the first run, store 
+>             it in the temp directory and report the diff's back to the 
+>             tinderbox and then we could have a view on the tinderbox?
+> 
+>             Inside the build summary we should see the new size of the image
+>             and the growth compared to the first built?
+> 
+>             The idea would be to have people look at the waterfall and go OMG 
+>             why did "minimal-image" grow by 2MB?
+> 
+>           *) The next step would be to transfer packet sizes as well
+> 
+> 	  *) Integrate some testing into recipes. E.g. attempt to boot the console-
+>              image and grep the Serial Console for the "Loging:" prompt..
+>              Test the toolchain to compile binaries...
 
-Frans
+Those 3 points are exactly what testlab.bbclass was created for :) Over
+2 years old now, but illustrates the usefullness of that class:
+http://dominion.thruhere.net/koen/cms/the-testlab-strikes-again
 
-(btw dependency testing worked for me a few days ago, but that was on
-a tree that was not in the dev head).
+regards,
 
-Frans.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLREcwMkyGM64RGpERAquMAJ0ew07LQRZutS5gu6vCIvmyukEEAgCeJ6Lx
+/4mvjNmmqeVP6TbVl8pRSYY=
+=qUTY
+-----END PGP SIGNATURE-----
+
 
 
