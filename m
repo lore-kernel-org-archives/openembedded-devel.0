@@ -1,45 +1,25 @@
-Received: from mail-bw0-f217.google.com ([209.85.218.217])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NSYGP-0003lv-9B
+	(envelope-from <philip@balister.org>) id 1NSYk4-0004ad-9w
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jan 2010 16:57:40 +0100
-Received: by bwz9 with SMTP id 9so10338770bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jan 2010 07:55:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=3kQsIna1yemt5+wHtb5KTwyXcl6osVuSvSeXRGjwX7o=;
-	b=s5+sfmyaTEHyCgGkRXIAAW6PekO7ZC69UdogPBewfoNHcXUydl9IXyymuxCHz71tI8
-	Uy0eAkXvrv87cJjZHsfCTcTgxmKcjflboXaitg7kC+WsQPkj6AbP0sHSzbhlOTSAFzhj
-	LlXhLjBLMEAVeL5VNlJHLuyqMHcP3IZlfNHuQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=VtBM3qj0vXyJAUGjF81Je1Hfs3za4XDqE8X0vBe4yEaR22kewERRAF5tPNfijN2OSJ
-	oalvEQclvwD0/IrMDoSnjlPFJBgDOBFD9RuIDzfSk7rZltZ8iB4ubWoFagNsVm4NnJst
-	NesPG4vt9UpGlfmbIp0weQ9Fm65QxiXGdQmtw=
-Received: by 10.204.148.85 with SMTP id o21mr3444506bkv.134.1262793332877;
-	Wed, 06 Jan 2010 07:55:32 -0800 (PST)
-Received: from localhost ([72.14.240.163])
-	by mx.google.com with ESMTPS id 13sm6318697bwz.14.2010.01.06.07.55.30
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 06 Jan 2010 07:55:31 -0800 (PST)
-Date: Wed, 6 Jan 2010 16:55:29 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100106155529.GB3198@jama>
-References: <201001060507.31754.holger+oe@freyther.de>
-	<1262791601.32622.2.camel@dax.rpnet.com>
+	Wed, 06 Jan 2010 17:28:19 +0100
+Received: (qmail 24146 invoked by uid 1003); 6 Jan 2010 16:26:09 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 6 Jan 2010 16:26:09 -0000
+Message-ID: <4B44B99F.9050508@balister.org>
+Date: Wed, 06 Jan 2010 11:26:07 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
 MIME-Version: 1.0
-In-Reply-To: <1262791601.32622.2.camel@dax.rpnet.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <BAY127-W279A13B86B227AAF2D8080D8720@phx.gbl>
+In-Reply-To: <BAY127-W279A13B86B227AAF2D8080D8720@phx.gbl>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: QA Goals for OpenEmbedded
+Subject: Re: Problem using output of console-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,58 +33,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jan 2010 15:57:40 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 06 Jan 2010 16:28:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jan 06, 2010 at 03:26:41PM +0000, Richard Purdie wrote:
-> On Wed, 2010-01-06 at 05:07 +0100, Holger Hans Peter Freyther wrote:
-> > 	*) Koen reported that dependency loop reporting is not working anymore..
-> >             anyone cares to invest thes five minutes to fix that?
-> 
-> In bitbake?
+On 01/06/2010 10:25 AM, saleh usman wrote:
+>
+> Hi
+> I've built console-image for omap5912osk machine but I am facing problem in using output.There are four folders named all, armv5te, i686, omap5912osk in /temp/deploy/glibc/ipk.and so many ipk files in these folders.
+> Which files exactly I should use to run the output on my target platform and how to run these files.
+> Wheather to install these files, any other package  or directly run them just by typing their names.
+> Since
+> linux is running on ARM9 GPP of machine ,should I take care of u-boot, kernel version or
+> anything else to run generated output on my target platform
 
-I've seen that too on the same case as Koen, for me it didn't fail
-visibly, but after saying that it runs dependency loop detection it
-hanged for about 20 mins still working.. then I killed it...
+The file console-image* in tmp/deploy/.../images/omap5912osk/ will have 
+copies of the root file system in various formats. The directories you 
+mention are in tmp/deploy/..../ipks.
 
-Dependency loop between bitbake tasks was resolved ok and fast (last
-time I was changing do_deploy position in kernel.bbclass).
+Philip
 
-> > 	*) Sometimes we have pretty embarassing issues like some images switching
-> >             from mdev back to udev and we don't notice for months(!!!)
-> >             It would totally rock if one could change the rootfs.bbclass (or
-> >             such) class and count the size of the image on the first run, store 
-> >             it in the temp directory and report the diff's back to the 
-> >             tinderbox and then we could have a view on the tinderbox?
-> > 
-> >             Inside the build summary we should see the new size of the image
-> >             and the growth compared to the first built?
-> > 
-> >             The idea would be to have people look at the waterfall and go OMG 
-> >             why did "minimal-image" grow by 2MB?
-> 
-> I started packagehistory.bbclass in Poky with ideas like this in mind.
-> It stores data in a filesystem layout and checked package versions don't
-> go backwards. Adding transports to send and receive data from a database
-> server would be a nice improvement.
-> 
-> >           *) The next step would be to transfer packet sizes as well
-> 
-> package sizes? Again this was a goal for packagehistory.bbclass
 
-Maybe not as much QA as above examples, but would be nice to add .md5
-sums not only to downloaded sources but also to generated files in
-deploy dir (feeds are safe but images are created without).
-
-I've checked kernel.bbclass and image.bbclass and it seems quite easy to
-implement, should I prepare patch for that or is there something already?
-
-Cheers,
-
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+>
+> Saleh 		 	   		
+> _________________________________________________________________
+> Windows Live: Friends get your Flickr, Yelp, and Digg updates when they e-mail you.
+> http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/social-network-basics.aspx?ocid=PID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_3:092010
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
