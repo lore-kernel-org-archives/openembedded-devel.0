@@ -1,41 +1,35 @@
-Received: from mail-pw0-f53.google.com ([209.85.160.53])
+Received: from mail-yx0-f171.google.com ([209.85.210.171])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dothemango@gmail.com>) id 1NSSEL-0003T7-O7
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NSTlc-0002cx-J5
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 06 Jan 2010 10:31:08 +0100
-Received: by pwi18 with SMTP id 18so10902049pwi.12
+	Wed, 06 Jan 2010 12:09:35 +0100
+Received: by yxe1 with SMTP id 1so15959367yxe.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Jan 2010 01:29:00 -0800 (PST)
+	Wed, 06 Jan 2010 03:07:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type; bh=H9RMY+ve/8OT+luVXxRtJmoRYK/khQoTbEmp97pPnII=;
-	b=DyCkclJlu6+G2dxKxGkkOIk7LeobuYzBM/UfKy3v+F4yy/nBzomADx0FHSiyEdlBPz
-	5n3qXWa/1IcfGC4i2jW3NOhuLXHxsEWKPr9G45S3HS0grCSVwSWEPvdVQuQCHwSyoP9z
-	hOUzdBRB0agFJe4MwDaSxrXqC/vxm0KEros2s=
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=2GXipUoFKYezExseBQ/HaydVZ6yq1AGhJlMbD5buT+c=;
+	b=Kb6v80Tnx8Z0M7SLJ0ybX2XjaP7rbNvCESTjHlVF/iIpYR6Nyl0h/RPeTaIAiGjoI4
+	XL4QBgRlsKXb3HehcSDlX19HKHiUTXGSy+KKIh1vQJckxv+E0dJNorAUkXk5tVLYJdY+
+	65WrzqPKswIrkmpOXe1njocb8Gcw9swQMnLDs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	b=ZjXJ3njRwEspVew7Tso2nkHHRFrqPk7dnBgfMFCe0nwsh8VuzbhkGxJ7vZiO4zd+EG
-	fj0IT4g2nF0wlssJd9OnpA/4ggPhb8i0qswpThY5l8IALkATqzJ3WY0ZrXYyCXwsGE9T
-	ud1X9t52u3OBhjDQukH8LJIAZ0LbNtq1PjW+w=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=kunURLmNwJ6mKEc6t9AjEY9+BSGZZPPNsD66+x6VuAKj2jFNMMD3yCRMKJFNLf7x2g
+	lXyFApmK2RiYH0HfCwnHEQHdGm+GkRdyzfMnEBV9jUizPiSML4iuXXUsyJ4TVKBmQ5m9
+	M+/5khda+Er4XAOOnbotun1RqBawRb+jFyNEA=
 MIME-Version: 1.0
-Sender: dothemango@gmail.com
-Received: by 10.141.89.15 with SMTP id r15mr1796689rvl.252.1262770140700; Wed, 
-	06 Jan 2010 01:29:00 -0800 (PST)
-In-Reply-To: <20100105182044.GB21048@gmail.com>
-References: <325d766d1001050900y3eef724eu5eb68fc04ec969d7@mail.gmail.com>
-	<20100105182044.GB21048@gmail.com>
-Date: Wed, 6 Jan 2010 10:29:00 +0100
-X-Google-Sender-Auth: 6724ec94cd9ac525
-Message-ID: <325d766d1001060129j7b63dd3bj1f4e039ff38513e7@mail.gmail.com>
-From: martin mangard <martin@mangard.at>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.53
-X-SA-Exim-Mail-From: dothemango@gmail.com
+Received: by 10.101.184.1 with SMTP id l1mr2585861anp.198.1262776047867; Wed, 
+	06 Jan 2010 03:07:27 -0800 (PST)
+Date: Wed, 6 Jan 2010 12:07:27 +0100
+Message-ID: <ac9c93b11001060307w301eca52kce287f410ae4a69a@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: bitbake-dev@lists.berlios.de, openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.210.171
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Error building gcc-cross
+Subject: bitbake image building problem; possible bug in bitbake; also some 	openembedded image.bbclass suggestions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,29 +43,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jan 2010 09:31:09 -0000
+X-List-Received-Date: Wed, 06 Jan 2010 11:09:35 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-> gcc 3.4 will not build libstdc++.so.5. You have to use gcc 3.3
-> try to build one of those. They may be rusted over a long time.
-> You can also take a prebuild ipk
->
+I'm mailing this to both the bitbake and oe dev lists. The problem
+might be bitbake related, but I can't explain it without openembedded.
+Also there are some openembedded improvement suggestions too.
+BTW please be gentle with me wrt the python part as I am really a python n00b.
+And notice that I am not subscribed to the bitbake-dev ML, only to the OE one.
 
-I tried to build other versions but they also failed with the error:
-"./read-rtl.c:653: error: lvalue required as increment operand"
+Problem: when I build an image with a static devicetable it does not build.
+This is with a personal image for which I have an own recipe. The
+device table file given to IMAGE_DEVICE_TABLES resides in the recipe
+directory and in the .bb file I say:
+IMAGE_DEVICE_TABLES="mydevicetable.txt"
+Howver if I change to IMAGE_DEVICE_TABLE="mydevicetable.txt" it works again
 
-After a little Googling, I found out that this is a common issue
-caused by an incompatibly between gcc 4.3 and gcc 3.3. It is not
-possible to build gcc 3.3 with gcc 4.3.
+With bitbake 1.8.2 this worked like a charm. With 1.8.18 it does not
+work any more.
+The file to find the exact location of the devicetable is in image.bbclass.
 
-A possible solution for my problem, which is also mentioned at
-http://en.gentoo-wiki.com/wiki/VirtualBox would be to just build
-"libstdc++-v3" which seems to be build able with gcc 4.x.
+It contains this func:
 
-But for today I think the prebuild libstdc++.so.5 will do the job as well ;-).
+def get_devtable_list(d):
+    import bb
+    devtable = bb.data.getVar('IMAGE_DEVICE_TABLE', d, 1)
+    if devtable != None:
+        return devtable
+    devtables = bb.data.getVar('IMAGE_DEVICE_TABLES', d, 1)
+    if devtables == None:
+        devtables = 'files/device_table-minimal.txt'
+    return " ".join([ bb.which(bb.data.getVar('BBPATH', d, 1), devtable)
+                      for devtable in devtables.split() ])
 
-thanks for your help
+In the func I added a print for BBPATH. When comparing the 1.8.2
+bitbake and the 1.8.18 bitbake I noticed that in .2 the recipe dir was
+in the path and in .18 it was not.
 
-Martin
+Diving deeper I compared 1.8.2 and  1.8.18 and noticed that in
+BBHandler.py a concatenation to BBHandler was removed.
+Drilling deeper in the git log I found this commit which seemed to be
+the bad guy: http://cgit.openembedded.org/cgit.cgi/bitbake/commit/?id=a50104766965a8f48a8455502b804a18a9be5c02
+After restoring the change to BBHandler things worked like expected.
+
+This brings me to the question whether having the device table in my
+recipe dir is desirable (personally I'd say yes) and whether the
+BBPATH should or should not be extended with the recipe dir in this
+case.
+If yes, there is a bitbake issue and the commit above might need to be
+reverted (or we need another change somewhere)
+
+Of course I do have a workaround. If I give a path which is relative
+to a dir in the BBPATH things work too. (e.g.
+IMAGE_DEVICE_TABLES="recipes/myimage/mydevicetable.txt" )
+Or copying the device table to the top of the tree (or the files
+subdir and adjust IMAGE_DEVICE_TABLES). However this all seems a
+little bit less clean.
+Also using  IMAGE_DEVICE_TABLE works.
+
+Meanwhile, as I had to peek into image.bbclass I would suggest some
+additional changes to the func above (as my python skills is mainly
+reading, I will not provide a patch):
+I would suggest that
+1) if IMAGE_DEVICE_TABLES exist, but is not found that somewhere along
+the line an error is given, either here or in the caller (the recipe
+gave a var so there better be something)
+2) extending the possible locations of IMAGE_DEVICE_TABLES by checking
+if the file exists without a BBPATH prefix. That would allow for
+absolute paths and (hopefully) also things like ${S}/mydevicetable.txt
+(perhaps changing
+bb.data.getVar('BBPATH', d, 1)
+into something like
+bb.data.getVar(".:" +'BBPATH', d, 1)
+is sufficient to achieve this.
+
+I hope this helps. If there are unclarities, feel free to mail me or
+ping me on irc (eFfeM on #oe).
+
+Frans
 
 
