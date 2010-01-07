@@ -1,35 +1,38 @@
-Received: from mail-fx0-f212.google.com ([209.85.220.212])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1NSoaV-0001Lg-RA
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NSoiJ-0001X1-31 for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Jan 2010 10:31:34 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NSogI-0002U9-Vk
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jan 2010 10:23:30 +0100
-Received: by fxm4 with SMTP id 4so15027584fxm.12
+	Thu, 07 Jan 2010 10:29:26 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Jan 2010 10:29:26 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Jan 2010 01:21:23 -0800 (PST)
-Received: by 10.103.76.22 with SMTP id d22mr3899911mul.79.1262856082021;
-	Thu, 07 Jan 2010 01:21:22 -0800 (PST)
-Received: from xora-vm2.xora.org.uk (www.xora.org.uk [80.68.91.202])
-	by mx.google.com with ESMTPS id 25sm24909048mul.50.2010.01.07.01.21.20
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 07 Jan 2010 01:21:21 -0800 (PST)
-Received: by xora-vm2.xora.org.uk (Postfix, from userid 500)
-	id B714124162; Thu,  7 Jan 2010 09:21:22 +0000 (GMT)
-Date: Thu, 7 Jan 2010 09:21:21 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Thu, 07 Jan 2010 10:29:26 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100107092121.GC1950@xora-vm2.xora.org.uk>
-References: <201001060507.31754.holger+oe@freyther.de>
-	<hi31m7$hc3$1@ger.gmane.org>
-	<20100107084341.GB1950@xora-vm2.xora.org.uk>
-	<ac9c93b11001070050i67af2caem7ac6d7164b130c@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <ac9c93b11001070050i67af2caem7ac6d7164b130c@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-08-17)
-X-SA-Exim-Connect-IP: 209.85.220.212
-X-SA-Exim-Mail-From: dp@xora.org.uk
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 07 Jan 2010 10:29:11 +0100
+Message-ID: <hi49h6$gpt$1@ger.gmane.org>
+References: <201001070633.04317.holger+oe@freyther.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.5) Gecko/20091222 Shredder/3.0.1pre
+In-Reply-To: <201001070633.04317.holger+oe@freyther.de>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: QA Goals for OpenEmbedded
+Subject: Re: RFC Namespace for GDB python helper scripts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,33 +46,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jan 2010 09:23:30 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 07 Jan 2010 09:31:34 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jan 07, 2010 at 09:50:36AM +0100, Frans Meulenbroeks wrote:
-> 2010/1/7 Graeme Gregory <dp@xora.org.uk>:
-> > On Wed, Jan 06, 2010 at 11:09:10PM +0100, Rolf Leggewie wrote:
-> >> allergic to COMPATIBLE_MACHINE for no particular reason).  Bitbake can't
-> >> do versioned depends and so we can't say that $bb2-$version does not
-> >> compile with gcc less than 3.4.x, for example.  Those are just two
-> >> examples.  XorA "solved" this in a hackish way with angsstrom.bbclass.
-> >>
-> > No he didnt and no its not a hack. Its a blacklist of packages that for
-> > various reasons Angstrom NEVER wants built.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 07-01-10 06:33, Holger Hans Peter Freyther wrote:
+> Hi All,
 > 
-> Should we have such a blacklist per machine?
-> My sheevaplug rungs angstrom, but as it has no display it has no need
-> for an X server, nor for ide or pci or sata tools.
+> since GDB 7.0 it is possible to write some python scripts and hook into core 
+> functionality of GDB. To date I'm only aware of scripts in glib to make use of 
+> it but I think we will see many more.
 > 
-It follows the standard overide rules (or should do) so you should
-be able to blacklist per machine.
+> I think it would be nice if we have a common name for these helper scripts as 
+> this will ease finding them when a user needs to install them.
+> 
+> What do you think about:
+> 
+> 	gdb-helper-NAME
+> 
+> as generic name?
 
-Of course you chose a bad example as I know quite a few people are using
-the sheeva with usb displaylink adapters.
+So gdb-helper-glib-2.0, gdb-helper-qt4-x11?
 
-Graeme
+Sounds good to me if the packages has a dependency on both gdb and the
+NAME itself/
+
+regards.
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLRalnMkyGM64RGpERAr4IAKCrCXj+tIpeBf9scPlZvnd/7AhQNwCff32D
+3GKwZYdDmr7P46dVBGX2W9c=
+=TGmJ
+-----END PGP SIGNATURE-----
 
 
 
