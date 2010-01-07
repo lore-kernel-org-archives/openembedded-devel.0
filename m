@@ -1,42 +1,34 @@
-Received: from mail-yx0-f171.google.com ([209.85.210.171])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NSp6L-0005Wn-E8
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NSppf-0003aC-E0 for openembedded-devel@lists.openembedded.org;
+	Thu, 07 Jan 2010 11:43:14 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NSpnf-0006IA-7E
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jan 2010 10:56:24 +0100
-Received: by yxe1 with SMTP id 1so16927873yxe.3
+	Thu, 07 Jan 2010 11:41:07 +0100
+Received: from p5b3b29e4.dip.t-dialin.net ([91.59.41.228])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Jan 2010 11:41:07 +0100
+Received: from no2spam by p5b3b29e4.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Jan 2010 01:54:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=bXZO4as4FuDgJRdLI1hW2iE/anrnwzvLM6ASeeEFV7I=;
-	b=JhkvSHwZFKtOwmT4RwtQ/v6ZNabzg7y9QkBCmeGMykFLCFLLRaMxeLAyu5a7XoszYl
-	aB3nfKhEr+tNefoWK4yYNUEmvj0z5uUwRboxzFzf3eO2pLYWxTdDBZl7/mnh1pCRrnE6
-	4gT6MmcENEXEpWL1hHkOmojU9u+Y9RD5NtQt8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=BY4vX38jfI5i1XA4f0ULwN4Nb0Zs4pZWG2S6o++M7KgXfyL/gr6dzdzkuVbe7yzIvU
-	p13ZxKVaxQrcgbaumzVaozIOHF7UFVzpvQi/RJJR1ifJZHf78HKBGm7r0X+oX6nRZfmB
-	naoNO9AMF4BW4iWbOo1QjR8Q3vR1fTwoa6FoM=
-MIME-Version: 1.0
-Received: by 10.101.168.12 with SMTP id v12mr8191660ano.122.1262858055834; 
-	Thu, 07 Jan 2010 01:54:15 -0800 (PST)
-In-Reply-To: <hi4a73$gpt$2@ger.gmane.org>
-References: <201001060507.31754.holger+oe@freyther.de>
-	<hi31m7$hc3$1@ger.gmane.org>
-	<20100107084341.GB1950@xora-vm2.xora.org.uk>
-	<ac9c93b11001070050i67af2caem7ac6d7164b130c@mail.gmail.com>
-	<20100107092121.GC1950@xora-vm2.xora.org.uk>
-	<ac9c93b11001070135v3ec3e542m892c8a0fc014f4f6@mail.gmail.com>
-	<hi4a73$gpt$2@ger.gmane.org>
-Date: Thu, 7 Jan 2010 10:54:15 +0100
-Message-ID: <ac9c93b11001070154u1cbc1f06xfdb127aadd8bc42d@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Thu, 07 Jan 2010 11:41:07 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.171
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Thu, 07 Jan 2010 11:40:39 +0100
+Message-ID: <hi4dn8$vig$1@ger.gmane.org>
+References: <201001060507.31754.holger+oe@freyther.de>	<hi31m7$hc3$1@ger.gmane.org>
+	<20100107084341.GB1950@xora-vm2.xora.org.uk>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5b3b29e4.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <20100107084341.GB1950@xora-vm2.xora.org.uk>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: QA Goals for OpenEmbedded
@@ -53,77 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jan 2010 09:56:25 -0000
+X-List-Received-Date: Thu, 07 Jan 2010 10:43:14 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-2010/1/7 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 07-01-10 10:35, Frans Meulenbroeks wrote:
->> 2010/1/7 Graeme Gregory <dp@xora.org.uk>:
->>> On Thu, Jan 07, 2010 at 09:50:36AM +0100, Frans Meulenbroeks wrote:
->>>> 2010/1/7 Graeme Gregory <dp@xora.org.uk>:
->>>>> On Wed, Jan 06, 2010 at 11:09:10PM +0100, Rolf Leggewie wrote:
->>>>>> allergic to COMPATIBLE_MACHINE for no particular reason). =A0Bitbake=
- can't
->>>>>> do versioned depends and so we can't say that $bb2-$version does not
->>>>>> compile with gcc less than 3.4.x, for example. =A0Those are just two
->>>>>> examples. =A0XorA "solved" this in a hackish way with angsstrom.bbcl=
-ass.
->>>>>>
->>>>> No he didnt and no its not a hack. Its a blacklist of packages that f=
-or
->>>>> various reasons Angstrom NEVER wants built.
->>>>
->>>> Should we have such a blacklist per machine?
->>>> My sheevaplug rungs angstrom, but as it has no display it has no need
->>>> for an X server, nor for ide or pci or sata tools.
->>>>
->>> It follows the standard overide rules (or should do) so you should
->>> be able to blacklist per machine.
->>>
->>> Of course you chose a bad example as I know quite a few people are usin=
-g
->>> the sheeva with usb displaylink adapters.
+Graeme Gregory wrote:
+> On Wed, Jan 06, 2010 at 11:09:10PM +0100, Rolf Leggewie wrote:
+>> XorA "solved" this in a hackish way with angsstrom.bbclass.
 >>
->> Ah ok, I don't know any of them, but let's stay on safe grounds and
->> take pci or sata tools as an example ;-)
->
-> You don't like usb2sata adaptors?
+> No he didnt and no its not a hack.
 
-Ok the grounds were not as safe as I hoped  :-)
-Do they expose as sata drives? I know about usb2sata adaptors to
-connect a sata disk via usb, but afaik it shows to the system as a usb
-peripheral not as a sata peripheral.
+He didn't?  On August 15th last year somebody in #oe with the nick
+XorA|gone claimed he did.
 
-Guess pci is a safer example (but if someone knows a usb to pci or
-mini-pci adaptor I'd be glad to learn about it).
+http://www.hentges.net/irclogs/%23oe/2009/August/20090815_oe.log?lines=500#[20090815%2015:29:59]
 
-And sorry for dragging this off-topic, but eventually probably the
-question remains whether everything should be supported on every hw.
-(I'm also thinking about sw like compiz, sw for dedicated, platform
-specific hw (e.g. fpga), etc)
+<XorA|gone>: it is in the end why I wrote the generic blacklist code
 
-FM
->
-> regards,
->
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFLRawjMkyGM64RGpERAoFSAKCds8QU/tPv0gOIpDIshm1FZ/cJVQCgnoMl
-> 3J3CPrd7P7UyYBDhCOebPfQ=3D
-> =3Dcmr3
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+and the following sounded rather hackish to me
+
+<XorA|gone>: beware it gives a crazy python dump if you use it in combo
+             with bitbake -b
+[...]
+<Laibsch>: OK, so not yet ready to be turned by default, he?
+<XorA|gone>: Laibsch: any call to skippackage with bitbake -b does that
+<XorA|gone>: Laibsch: as you rip out the recipe under bitbakes nose
+
+As I said during that IRC chat I am of the opinion that OE needs a way
+to specify tuples of for example PN/PV/DISTRO/MACHINE and maybe even the
+version of gcc/binutils used that bitbake should not consider in the
+task queue.  If the approach taken by angstrom.bbclass provides a proper
+solution here it should be turned on by default. Comments welcome.  If
+we had something like this in place I see a chance to resurrect "bitbake
+world" and that would help a lot with QA (not saying that everybody
+needs to build world all the time, but it would provide a good test).
+
 
 
