@@ -1,33 +1,49 @@
-Received: from ns.penguin.cz ([84.21.108.25])
+Received: from mail-yw0-f178.google.com ([209.85.211.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1NSgHE-0000ra-O1
+	(envelope-from <camelguo@gmail.com>) id 1NShjZ-0004fF-Pg
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jan 2010 01:31:03 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 002A21417182
+	Thu, 07 Jan 2010 03:04:24 +0100
+Received: by ywh8 with SMTP id 8so17728926ywh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jan 2010 01:04:23 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id d46VVFZYmI8w
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jan 2010 01:04:23 +0100 (CET)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id CBE881417181
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Jan 2010 01:04:23 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
+	Wed, 06 Jan 2010 18:02:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:content-type:to:subject
+	:references:date:mime-version:content-transfer-encoding:from
+	:organization:message-id:in-reply-to:user-agent;
+	bh=Bg7OiIRvBnIzDMm6rgkUVTBexpcsEsmMpPhro8xKfkY=;
+	b=uMjEs+5LzVabdWuTLYfCgOYmW0zypQ3nxR7njEAStbCFxTnNJRmHSISNpwUOdV89hp
+	LdAZHEwdFKv6yjw+zmzVreABIof3jH3U903vsZIpleYrhVkrN5+hgK2KbLSAOXRNU+vp
+	Dh5zPYoPTfSbtqbhGKuATZA1Ha5HFG5O94DCo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=content-type:to:subject:references:date:mime-version
+	:content-transfer-encoding:from:organization:message-id:in-reply-to
+	:user-agent;
+	b=HJCxVAjaZH6WMCD/aEBqKd3o8fdSUCAZpmlfK8x7U2GzgVKWoK77KxVvT/B0y3lO3W
+	h2JR14PUxplh2xqnsRIwp2Fx4FUThFl6ab7OLaOzXWaWZo3gdu8+0QF4CBrrySgEIXsi
+	jEE+9HGqMbBd3opXsUHa1YOJQjX9dfVlNxCYg=
+Received: by 10.150.47.2 with SMTP id u2mr16146731ybu.245.1262829736407;
+	Wed, 06 Jan 2010 18:02:16 -0800 (PST)
+Received: from guohr-laptop-ubuntu ([123.54.99.142])
+	by mx.google.com with ESMTPS id 21sm8532417yxe.1.2010.01.06.18.02.10
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 06 Jan 2010 18:02:12 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 07 Jan 2010 01:03:33 +0100
-Message-Id: <1262822613.6732.13.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.0 
-X-SA-Exim-Connect-IP: 84.21.108.25
-X-SA-Exim-Mail-From: utx@penguin.cz
+References: <op.u5zi1ghgmn1qzu@guohr-laptop-ubuntu>
+	<4B42044B.8050801@nospam.arcornews.de>
+	<op.u51etl01mn1qzu@guohr-laptop-ubuntu>
+	<201001060459.45399.holger+oe@freyther.de>
+Date: Thu, 07 Jan 2010 10:02:05 +0800
+MIME-Version: 1.0
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u543xk1rmn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <201001060459.45399.holger+oe@freyther.de>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.211.178
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: SIGSEGV during python-native build workarounds
+Subject: Re: why we don't setup a buildbot for openembedded QA?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,40 +57,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jan 2010 00:31:03 -0000
-Content-Type: text/plain; charset="ISO-8859-2"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 07 Jan 2010 02:04:25 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: Quoted-Printable
 
-Hallo.
+=E5=9C=A8 Wed, 06 Jan 2010 11:59:45 +0800=EF=BC=8CHolger Hans Peter Frey=
+ther  =
 
-In last few months I encountered crashes during build of python-native
-with openSUSE 11.2 x86_64 host. Backtrace signalizes that the crash
-happens while ncurses attempts to parse termcap.
+<holger+oe@freyther.de> =E5=86=99=E9=81=93:
 
-I has not been searching for a patch yet, but these workarounds may help
-to somebody who will encounter this SIGSEGV as well:
+> On Tuesday 05 January 2010 03:06:47 Guo Hongruan wrote:
+>> No, I am not talking about tinderbox but buildbot. I want to setup a
+>> public buildbot and validate every possible combinations of  =
 
-This works:
-- Adding ASSUME_PROVIDED += "ncurses-native" to my local.conf (it also
-  requires ASSUME_PROVIDED += "readline-native") and installing proper
-  host system packages.
+>> openembedded.
+>> In another words, I want to do some QA jobs of openembedded.
+>
+> This is a nice goal, but it is probably not the biggest concern as wel=
+l.  =
 
-This also works:
-- Hide all available termcaps on the host system:
-  /etc/termcap and /usr/share/misc/termcap
+> E.g.
+> there is little benefit of making every version of binutils work with =
+ =
 
-This did not help:
-- Update python to 2.6.2
+> glibc and
+> gcc. It is certainly cool to be able to pick any GCC, BINUTILS, GLIBC =
+and
+> guarnatee that it will work on any host distro. But besides being  =
 
-This may help (not tested yet):
-- build python without ncurses support
-- Update ncurses to the latest version (I did not yet succeed to do it)
+> totally cool
+> it is also totally wasting your time (unless your goal is to learn how=
+  =
 
-Best regards.
+> GCC,
+> BINUTILS and GLIBC interact). And the next step would be to have make =
+ =
 
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+> world
+> build on top of that...
 
+Yes, I agree with you. It is not worth to make sure every combinations o=
+f  =
+
+GCC, GLIBC and BINUTILS work perfectly. For example, some versions of  =
+
+binutils is too old to work with newest glibc/gcc and there are little  =
+
+projects using these combinations.
+
+But, My idea is that we can maintain a table which records which version=
+  =
+
+of package A can not work with which version of package B.
+(for example, glibc-2.6.1 can not work with binutils-2.20)
+So that, when the user chooses these combinations, the  =
+
+openembedded/bitbake can give them a warning or error to indicate that  =
+
+this combination will not work.
+
+>
+>
+> I have been at your point a couple of years back (seppuku, a tinderbox=
+  =
+
+> setup,
+> autobuild scripts are the result). The QA that is working best is to h=
+ave
+> people sign up for "maintaining" certain areas.
+>
+> E.g.: I'm feeling responsible for:
+>
+> 	- QtE, meta-toolchain-qte, qmake and such
+> 	- I'm also testing mipsel from time to time
+>
+> Other people like pb_ feel responsible for:
+> 	- DISTRO micro (I think i got it wrong)
+>
+> Or Khem is doing kick ass work on the toolchain bits..
+>
+>
+>> Of course, I need help and support from all of you. I want a public  =
+
+>> server
+>> which runs python and twist and I also want any volunteer can provide=
+
+>> their machine as build slaver when it is available.
+>
+> Technology is not the problem here. What use is this system if no one =
+is  =
+
+> fixing
+> build problems because of a too new or too old version of GCC? What us=
+e  =
+
+> is it
+> to the user to have thousands of tested configurations when he can not=
+  =
+
+> navigate
+> through the list of packages?
+>
+>
+> let me write another mail about QA topics.
+>
+> 	z.
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
+
+
+
+-- =
+
+Guo Hongruan, Embedded Linux Consultant
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
 
