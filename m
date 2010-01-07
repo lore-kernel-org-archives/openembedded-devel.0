@@ -1,26 +1,33 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from ns.penguin.cz ([84.21.108.25])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1NSerB-0008T1-6W
+	(envelope-from <utx@penguin.cz>) id 1NSgHE-0000ra-O1
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jan 2010 00:00:04 +0100
-Received: (qmail 5718 invoked by uid 1003); 6 Jan 2010 22:57:55 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 6 Jan 2010 22:57:55 -0000
-Message-ID: <4B451571.70305@balister.org>
-Date: Wed, 06 Jan 2010 17:57:53 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
-MIME-Version: 1.0
+	Thu, 07 Jan 2010 01:31:03 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 002A21417182
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  7 Jan 2010 01:04:23 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id d46VVFZYmI8w
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  7 Jan 2010 01:04:23 +0100 (CET)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id CBE881417181
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  7 Jan 2010 01:04:23 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-References: <201001060507.31754.holger+oe@freyther.de>
-	<hi31m7$hc3$1@ger.gmane.org>
-In-Reply-To: <hi31m7$hc3$1@ger.gmane.org>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+Date: Thu, 07 Jan 2010 01:03:33 +0100
+Message-Id: <1262822613.6732.13.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.0 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: QA Goals for OpenEmbedded
+Subject: SIGSEGV during python-native build workarounds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,44 +41,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Jan 2010 23:00:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 07 Jan 2010 00:31:03 -0000
+Content-Type: text/plain; charset="ISO-8859-2"
 Content-Transfer-Encoding: 7bit
 
-On 01/06/2010 05:09 PM, Rolf Leggewie wrote:
-> Holger Hans Peter Freyther wrote:
->> 	*) Does bitbake world work? If not it would be cool if someone could take
->>              a look?
->
-> I was hoping for bitbake world to work as a QA tool.  But my efforts on
-> the world target didn't really receive a warm welcome.  By now world is
-> so utterly broken that bitbake won't even ever start to execute any
-> tasks (I killed bitbake after two days when it still did nothing the
-> last time I tried).
+Hallo.
 
-Can someone explain what bitbake world does?
+In last few months I encountered crashes during build of python-native
+with openSUSE 11.2 x86_64 host. Backtrace signalizes that the crash
+happens while ncurses attempts to parse termcap.
 
-I would be happier working toward a set of images building for a set of 
-distributions.
+I has not been searching for a patch yet, but these workarounds may help
+to somebody who will encounter this SIGSEGV as well:
 
-Philip
+This works:
+- Adding ASSUME_PROVIDED += "ncurses-native" to my local.conf (it also
+  requires ASSUME_PROVIDED += "readline-native") and installing proper
+  host system packages.
 
+This also works:
+- Hide all available termcaps on the host system:
+  /etc/termcap and /usr/share/misc/termcap
 
->
-> Unfortunately, currently there is no consensus in OE that
-> "MACHINE=$machine bitbake $bb" shouldn't arbitrarily fail somewhere.
-> Right now, OE does not have the tools in place to specify that for
-> example $bb1 does not compile for $machineA (some people are very
-> allergic to COMPATIBLE_MACHINE for no particular reason).  Bitbake can't
-> do versioned depends and so we can't say that $bb2-$version does not
-> compile with gcc less than 3.4.x, for example.  Those are just two
-> examples.  XorA "solved" this in a hackish way with angsstrom.bbclass.
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+This did not help:
+- Update python to 2.6.2
+
+This may help (not tested yet):
+- build python without ncurses support
+- Update ncurses to the latest version (I did not yet succeed to do it)
+
+Best regards.
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
