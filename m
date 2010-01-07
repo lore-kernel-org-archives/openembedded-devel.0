@@ -1,28 +1,41 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NSzwo-0005gj-34
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1NT07r-0005vq-OW
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jan 2010 22:31:17 +0100
-Received: from 89-168-180-155.dynamic.dsl.as9105.com ([89.168.180.155]
-	helo=[192.168.2.155])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NSzuj-0003oq-7n
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 07 Jan 2010 21:29:06 +0000
-From: Phil Blundell <philb@gnu.org>
+	Thu, 07 Jan 2010 22:42:42 +0100
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 2BA251100098
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  7 Jan 2010 22:40:36 +0100 (CET)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id BC7181100086
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  7 Jan 2010 22:40:35 +0100 (CET)
+Received: from rhein.familie-heinold.de (f052225177.adsl.alicedsl.de
+	[78.52.225.177]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  7 Jan 2010 22:40:35 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 83BF23C118; Thu,  7 Jan 2010 22:40:25 +0100 (CET)
+Date: Thu, 7 Jan 2010 22:40:25 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1262891117.3218.16.camel@mattotaupa.wohnung.familie-menzel.net>
+Message-ID: <20100107214018.GA19522@rhein.zuhause.netz>
 References: <1262649107.3238.44.camel@mattotaupa.wohnung.familie-menzel.net>
 	<20100105095147.GA3433@rhein.zuhause.netz>
 	<1262694630.3209.10.camel@mattotaupa.wohnung.familie-menzel.net>
 	<1262697909.3209.26.camel@mattotaupa.wohnung.familie-menzel.net>
 	<1262891117.3218.16.camel@mattotaupa.wohnung.familie-menzel.net>
-Date: Thu, 07 Jan 2010 21:28:49 +0000
-Message-ID: <1262899729.457.1.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+	<1262899729.457.1.camel@lenovo.internal.reciva.com>
+MIME-Version: 1.0
+In-Reply-To: <1262899729.457.1.camel@lenovo.internal.reciva.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [PATCH 1/1] Remove `-lintl` from `LIBS`. (was: [bitbake vdr] /arm-angstrom-linux-gnueabi/bin/ld: cannot find -lintl)
@@ -39,17 +52,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Jan 2010 21:31:17 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 07 Jan 2010 21:42:42 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Thu, 2010-01-07 at 20:05 +0100, Paul Menzel wrote:
-> thanks to you all. Please review and commit the attached patch.
+Hi,
 
-Does the package still build successfully for uclibc with this patch?
+I am just now testing the right patch for it, please stay tuned.
 
-p.
-
-
+Bye Henning
 
 
