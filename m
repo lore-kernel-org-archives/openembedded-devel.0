@@ -1,36 +1,42 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f212.google.com ([209.85.220.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NTFZd-0002CD-Sw for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jan 2010 15:12:24 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NTFXc-0006tI-9c
+	(envelope-from <martin.jansa@gmail.com>) id 1NTFnq-0007z3-QP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jan 2010 15:10:16 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jan 2010 15:10:16 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Fri, 08 Jan 2010 15:27:05 +0100
+Received: by fxm4 with SMTP id 4so16147859fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jan 2010 15:10:16 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 08 Jan 2010 06:24:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=lA9/JoqAcqbBv5gE72Ap3jP4Ug23FB82YG78nBzKx1Y=;
+	b=sYqpfPbQOt/3+uax6Gfdx7uVoSHvLL8ESsv947/sqKHl9hUtH0M/4LwlFB6Fac2eBu
+	ETR1pGUFtHt+WF63HqgkvCMR72Prh3J7EuF383iUTJswWBaCbiIb7jw3gSTjpKFYoGlD
+	/gYDtjwLOm/psH9QaWbqqPiQd/zaTQAt9vAmQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=a+XWC7U9QRUyQKHyzgoG++kNQQcxaGteSwkhg7CGnLGmkl6Yk7kvH6EMqRdlfF+GQr
+	xcxpRr5KS/EdBInlzYEcFWkHYCbck2FLE0iSFXETpRhV2pxF0zE0xvrc2lvScuO7pGhM
+	0fY9G+cyFYSjaCvvCsujg8sBn8WX6EMfXjnSk=
+Received: by 10.223.13.209 with SMTP id d17mr4811870faa.100.1262960696537;
+	Fri, 08 Jan 2010 06:24:56 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 15sm8269512fxm.2.2010.01.08.06.24.55
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 08 Jan 2010 06:24:55 -0800 (PST)
+Date: Fri, 8 Jan 2010 15:24:53 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 08 Jan 2010 15:07:12 +0100
-Message-ID: <hi7e6f$cda$2@ger.gmane.org>
+Message-ID: <20100108142453.GC2156@jama>
 References: <20100108132344.GB2156@jama>
 	<201001081502.46952.holger+oe@freyther.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.5) Gecko/20091222 Shredder/3.0.1pre
+MIME-Version: 1.0
 In-Reply-To: <201001081502.46952.holger+oe@freyther.de>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.212
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: update-alternatives broken badly (by me :()
@@ -47,18 +53,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jan 2010 14:12:25 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 08 Jan 2010 14:27:06 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 08-01-10 15:02, Holger Hans Peter Freyther wrote:
+On Fri, Jan 08, 2010 at 03:02:46PM +0100, Holger Hans Peter Freyther wrote:
 > On Friday 08 January 2010 14:23:44 Martin Jansa wrote:
->> After this change
->> http://cgit.openembedded.net/cgit.cgi/openembedded/commit/?id=9b641bbfed07c
->> 075ae5cbe84082a85f1ba703447
+> > After this change
+> > http://cgit.openembedded.net/cgit.cgi/openembedded/commit/?id=9b641bbfed07c
+> > 075ae5cbe84082a85f1ba703447
 > 
 > thanks for highlighting this. Let me say something regarding the commit 
 > message. Your commit message is not saying anything regarding "Why", it is not 
@@ -69,16 +72,26 @@ On 08-01-10 15:02, Holger Hans Peter Freyther wrote:
 > 	- How
 > 	- Why
 > 
-> in our commit messages? 
+> in our commit messages? And maybe ask someone for review before touching basic 
+> files(*)?
 
-Hey, did you spy on the TSC meeting yesterday? I proposed the same thing :)
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+It was sent here about month before commit
+http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg01444.html
 
-iD8DBQFLRzwQMkyGM64RGpERAq7cAJ9Ik62s427Q1wijR4fEvT4Y38TlhgCfXftU
-JQEBShfcyAiD0XVB7Qn8Y48=
-=9oKn
------END PGP SIGNATURE-----
+Also discussed here
+http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg01180.html
 
+Then again as part of compatibility-providers
+http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg01891.html
+
+And one other thread I cannot find now..
+
+But sorry I haven't provide better overwiev and/or links to those
+threads in commit msg.
+
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
