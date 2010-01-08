@@ -1,46 +1,31 @@
-Received: from mail-pw0-f53.google.com ([209.85.160.53])
+Received: from exprod5og105.obsmtp.com ([64.18.0.180])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NT9uf-0005nT-6x
+	(envelope-from <martyn.welch@gefanuc.com>) id 1NTByq-0004bQ-JJ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jan 2010 09:09:44 +0100
-Received: by pwi18 with SMTP id 18so12391632pwi.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jan 2010 00:07:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:to:subject
-	:references:date:mime-version:content-transfer-encoding:from
-	:organization:message-id:in-reply-to:user-agent;
-	bh=MrcOy9bbG9g0KTqRnGH6C8bkFcsJCSMGQuwCCRoYEho=;
-	b=V7W5zX5X32JiOAgIfcvgbIe5OlLXPcarqHS5DzwU7sPqKiYU/RPzcrEayBowFYNcsS
-	3Hy8uhsSJnA7La/BXkyK0RrVlM64GvbILixcHAxetoMiXepWe7ZKwvS6O8zq1hyAu16S
-	NXU8lgCKQZAILCJQx3UBklVx0fhnCg/kM4MwU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:to:subject:references:date:mime-version
-	:content-transfer-encoding:from:organization:message-id:in-reply-to
-	:user-agent;
-	b=LbeU7y1P7ZHC44XGaWMaoeEoyiMn5cSwCs3lXYob95Qqi1f++ch9UUqvQaFsGWwZ1b
-	Vs5FWJQ8rrcn8r790m1ttNQ1lydlGWhQSw7TO4hn6+1Ne3fOuA6oDhNqOMFFpoztsa0V
-	GHRK6FnheI20PFUOy2uCXxMUmv7QMprVWzX9g=
-Received: by 10.140.58.17 with SMTP id g17mr5885820rva.56.1262938054594;
-	Fri, 08 Jan 2010 00:07:34 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.54.97.2])
-	by mx.google.com with ESMTPS id 21sm18505101pzk.11.2010.01.08.00.07.31
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 08 Jan 2010 00:07:33 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <4B46E623.9030005@gmail.com>
-Date: Fri, 08 Jan 2010 16:07:28 +0800
+	Fri, 08 Jan 2010 11:22:11 +0100
+Received: from source ([12.43.191.1]) (using TLSv1) by
+	exprod5ob105.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKS0cG060MtnkndkKytuMOiKQw+KAy3/x7@postini.com;
+	Fri, 08 Jan 2010 02:20:04 PST
+Received: from unknown (HELO alpmlip01.e2k.ad.ge.com) ([3.159.17.48])
+	by Alpmlip07.e2k.ad.ge.com with ESMTP; 08 Jan 2010 04:33:31 -0500
+Received: from es-j7s4d2j.amer.consind.ge.com (HELO [3.138.54.92])
+	([3.138.54.92])
+	by alpmlip01.e2k.ad.ge.com with ESMTP; 08 Jan 2010 04:33:31 -0500
+Message-ID: <4B46FC81.10006@gefanuc.com>
+Date: Fri, 08 Jan 2010 09:36:01 +0000
+From: Martyn Welch <martyn.welch@gefanuc.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Organization: Gulessoft, Inc
-Message-ID: <op.u57fiqskmn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <4B46E623.9030005@gmail.com>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.160.53
-X-SA-Exim-Mail-From: camelguo@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <hi5b61$f7h$1@ger.gmane.org>	<1262892164.2553.230.camel@lenovo.internal.reciva.com>	<c384c5ea1001071148h770db2a7p10f6a7b51582fea5@mail.gmail.com>
+	<1262896003.2553.266.camel@lenovo.internal.reciva.com>
+In-Reply-To: <1262896003.2553.266.camel@lenovo.internal.reciva.com>
+X-SA-Exim-Connect-IP: 64.18.0.180
+X-SA-Exim-Mail-From: martyn.welch@gefanuc.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: How to extract OE cross toolchain?
+Subject: Re: RFC: Bump default version for gtk+ to 2.18.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,42 +39,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jan 2010 08:09:44 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Fri, 08 Jan 2010 10:22:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-bitbake meta-toolchain
-
-You can export toolchain and header files, libraries for application  =
-
-development.
-
-Hope it is what you want.
-
-=E5=9C=A8 Fri, 08 Jan 2010 16:00:35 +0800=EF=BC=8CDmitry Vinokurov  =
-
-<d.vinokuroff@gmail.com> =E5=86=99=E9=81=93:
-
-> Hello,
->
-> I've got an OE building host and some development hosts with same  =
-
-> hardware platform and same GNU/Linux distribution. I wonder, is it  =
-
-> possible to extract cross toolchain, builded on OE host, to deb packag=
-e  =
-
-> for example?
->
-> Thanks.
+Phil Blundell wrote:
+> Automatically adding new versions with a negative DEFAULT_PREFERENCE
+>  doesn't scale: if everybody did this then, eventually, we would end
+>  up with virtually the whole tree being D_P -1. And it sends a
+> confusing message to other users, since people tend to assume that a
+> recipe with a negative D_P is broken or harmful in some way rather
+> than merely untested or untrusted.  I would also propose that, in
+> future, any setting of DEFAULT_PREFERENCE in a recipe must be
+> accompanied by a comment explaining why it was set, and (if it is set
+> negatively) under what conditions it can or should be removed.
 >
 
+I've recently had a small problem related to this. All of the kernel
+packages seem to have DEFAULT_PREFERENCE=-1, for popular targets this
+isn't a problem, but for less popular ones it was picking the latest
+kernel at D_P=-1. Oddly this failed to build for "x86".
 
--- =
+I'd suggest it would be sensible to remove all (or most)
+"DEFAULT_PREFERENCE=-1" instances and only use
+"DEFAULT_PREFERENCE-<target>=x" it to increase the preference for
+specific targets, or leave it entirely up to the distributions.
 
-Guo Hongruan, Embedded Linux Consultant
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
+Martyn
+
+
+-- 
+Martyn Welch (Principal Software Engineer)   |   Registered in England and
+GE Intelligent Platforms                     |   Wales (3828642) at 100
+T +44(0)127322748                            |   Barbirolli Square,
+Manchester,
+E martyn.welch@gefanuc.com                   |   M2 3AB  VAT:GB 927559189
+
 
 
