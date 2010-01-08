@@ -1,46 +1,29 @@
-Received: from mail-fx0-f212.google.com ([209.85.220.212])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <d.vinokuroff@gmail.com>) id 1NTCco-0001fR-GV
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NTCuj-0004PS-Bc
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jan 2010 12:03:29 +0100
-Received: by fxm4 with SMTP id 4so15998104fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jan 2010 03:01:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=XBofcFv2slB2kIdOqzKFl9CX+ZkD+pmT+dJuZvzPQAA=;
-	b=N8ilfah75NwLth1XGVoeLktjnTtTIk4JNL+bvSdFZWvdsHAPL8c/b+a+5/qEttQyKd
-	8D9GFxWFbC5dgSHiGWXibQqpYzATw33qZSzkXR7K1doLjxsitDSkrAn6IKk+iFuw1dsG
-	ZAUTtSYDsjxRp6Jy1hE1ETroZ0q8cSLdw6hLY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=HMMB56xx4M/mRBgsS898nca+jZ52WzUSxvrPoLWD9VJMU1FwaP7rbaOHgInHkG3p+/
-	dIFNSY6TAvEFpGKRxFIiJjKTM9dOZIWMV7zMjsfagwRwG0MD8UZkjeEbM53KTydasCgF
-	0hR0RR9S2olB7TnpSoBTQwl0eVm1a8LylVmOo=
-Received: by 10.87.45.13 with SMTP id x13mr12629960fgj.70.1262948479916;
-	Fri, 08 Jan 2010 03:01:19 -0800 (PST)
-Received: from ?192.168.0.100? ([92.255.152.210])
-	by mx.google.com with ESMTPS id e11sm48556847fga.9.2010.01.08.03.01.18
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 08 Jan 2010 03:01:19 -0800 (PST)
-Message-ID: <4B47107B.3010609@gmail.com>
-Date: Fri, 08 Jan 2010 16:01:15 +0500
-From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.8pre) Gecko/20100104 Shredder/3.0.1pre
-MIME-Version: 1.0
+	Fri, 08 Jan 2010 12:22:00 +0100
+Received: (qmail 13774 invoked by uid 813007); 8 Jan 2010 11:19:52 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 8 Jan 2010 11:19:52 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-References: <4B46E623.9030005@gmail.com>
-	<op.u57fiqskmn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <op.u57fiqskmn1qzu@guohr-laptop-ubuntu>
-X-SA-Exim-Connect-IP: 209.85.220.212
-X-SA-Exim-Mail-From: d.vinokuroff@gmail.com
+Date: Fri, 8 Jan 2010 12:19:09 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-rc2-00268-g45d28b0; KDE/4.3.4; x86_64; ;
+	)
+References: <hi5b61$f7h$1@ger.gmane.org>
+	<1262896003.2553.266.camel@lenovo.internal.reciva.com>
+	<4B46FC81.10006@gefanuc.com>
+In-Reply-To: <4B46FC81.10006@gefanuc.com>
+MIME-Version: 1.0
+Message-Id: <201001081219.09856.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: How to extract OE cross toolchain?
+Subject: Re: RFC: Bump default version for gtk+ to 2.18.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,38 +37,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jan 2010 11:03:29 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 08 Jan 2010 11:22:00 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thanks, it was exactly what I want.
+Dnia pi=C4=85tek, 8 stycznia 2010 o 10:36:01 Martyn Welch napisa=C5=82(a):
 
-On 08.01.2010 13:07 Guo Hongruan wrote:
-> bitbake meta-toolchain
->
-> You can export toolchain and header files, libraries for application 
-> development.
->
-> Hope it is what you want.
->
-> 在 Fri, 08 Jan 2010 16:00:35 +0800，Dmitry Vinokurov 
-> <d.vinokuroff@gmail.com> 写道:
->
->> Hello,
->>
->> I've got an OE building host and some development hosts with same 
->> hardware platform and same GNU/Linux distribution. I wonder, is it 
->> possible to extract cross toolchain, builded on OE host, to deb 
->> package for example?
->>
->> Thanks.
->>
->
->
--- 
-Best Regards,
-Dmitry Vinokurov
-<d.vinokuroff@gmail.com>
+> I've recently had a small problem related to this. All of the kernel
+> packages seem to have DEFAULT_PREFERENCE=3D-1, for popular targets this
+> isn't a problem, but for less popular ones it was picking the latest
+> kernel at D_P=3D-1. Oddly this failed to build for "x86".
+=20
+> I'd suggest it would be sensible to remove all (or most)
+> "DEFAULT_PREFERENCE=3D-1" instances and only use
+> "DEFAULT_PREFERENCE-<target>=3Dx" it to increase the preference for
+> specific targets, or leave it entirely up to the distributions.
+
+=46or kernels I would ack it. If device is supported by one version then it=
+ has=20
+D_P_machinename =3D "1" set usually. Some of targets are fine with newer=20
+versions out-of-box.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
 
 
 
