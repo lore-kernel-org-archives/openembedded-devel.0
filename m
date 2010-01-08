@@ -1,41 +1,41 @@
 Received: from mail-fx0-f212.google.com ([209.85.220.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NTEqe-0008E2-H6
+	(envelope-from <martin.jansa@gmail.com>) id 1NTFJj-0004al-RG
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jan 2010 14:25:55 +0100
-Received: by fxm4 with SMTP id 4so16096928fxm.12
+	Fri, 08 Jan 2010 14:55:58 +0100
+Received: by fxm4 with SMTP id 4so16120363fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jan 2010 05:23:46 -0800 (PST)
+	Fri, 08 Jan 2010 05:53:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:mime-version:content-type:content-disposition:user-agent;
-	bh=IM5NBTHU93/9gdhmPbJ2RmO2kf8JT9rRBATef44n+qs=;
-	b=rWWZ361RJgU0Nhn8zFJo8HBzx6uSN1jAthRUU5qEmcm6QIrbhnUgtQvHVhPuULmeDl
-	45DgA+/ampDMUkfOx3T8aV1GOwg1gnBEO7dvRjyzwVAupmXWSUQv+hUucSSKPsmjaDWo
-	YFpDXBLN8KUscbUW5VipcqQhQtg69L5+RiDCE=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=cW6t6O9brlhXhEZDr36x9nchPvBc/L8mcHiB/TZMGYQ=;
+	b=muwVLL2KVz5fY1bCz7/huAiJlYV03frNay7PrB9ee8UTmm2AQRVFCTfXAnUAMjCh+Q
+	tETLXwztNfHcdbvVqc5aSufgDCdpSO4wxAuHd7sIiMYBRRikOhteKX95d8+R1p9/y+Au
+	tQiUdAezsVICbygS5D5aRLIPex+RG/fje/OS8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	b=uA1aqcO7RmujrVS84PCowXN7t3b2puJz5TjQFGnTTXJIk2ZdqPPZU7KBuFcnhXLOrH
-	NcjO10uezq/oeIUJkKMuuDyte+s5h22EYOdBbS8hsz0+AepC1Q00uoMNTvCBjKyTBQNE
-	zgHzd+enTc75Ugj/UIwU3fXnu2aClxryHw/TM=
-Received: by 10.223.94.200 with SMTP id a8mr2744041fan.77.1262957026711;
-	Fri, 08 Jan 2010 05:23:46 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=ImkiWXApIGjLmisF8mIZOzWNgPiu5eH0ZzpPxBCshqqDveeneYZYw3r9XHlR3hZ2Qr
+	EY9Z0tkdhtxbmnEtBF3ICsajsI4C1jApKXLMwAng+eah2ZgG8Gy2akWvqaa5P10YSSEw
+	QXlj20T2G16YitySljyqYGRgZtGVWps2eGCGo=
+Received: by 10.223.73.20 with SMTP id o20mr3487498faj.71.1262958829013;
+	Fri, 08 Jan 2010 05:53:49 -0800 (PST)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 15sm8241485fxm.6.2010.01.08.05.23.45
+	by mx.google.com with ESMTPS id 14sm8262865fxm.15.2010.01.08.05.53.48
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 08 Jan 2010 05:23:45 -0800 (PST)
-Date: Fri, 8 Jan 2010 14:23:44 +0100
+	Fri, 08 Jan 2010 05:53:48 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100108132344.GB2156@jama>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Date: Fri,  8 Jan 2010 14:53:33 +0100
+Message-Id: <1262958813-4030-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.6.6
+In-Reply-To: <20100108132344.GB2156@jama>
+References: <20100108132344.GB2156@jama>
 X-SA-Exim-Connect-IP: 209.85.220.212
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: update-alternatives broken badly (by me :()
+Subject: [PATCH] task-boot: use DISTRO_UPDATE_ALTERNATIVES instead of update-alternatives directly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,70 +49,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jan 2010 13:25:55 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 08 Jan 2010 13:55:59 -0000
 
-After this change
-http://cgit.openembedded.net/cgit.cgi/openembedded/commit/?id=9b641bbfed07c075ae5cbe84082a85f1ba703447
+* make opkg RCONFLICTS with update-alternatives-cworth because both
+  do the same but installs alternatives to different directory
+  (/usr/lib/ipkg/alternatives and /usr/lib/opkg/alternatives)
+* Images built after 2009-12-08 9b641bbfed07c075ae5cbe84082a85f1ba703447
+  probably use opkg-native, but also ship with u-a-cworth
+* Upgrade path is quite difficult, because users should remove cworth
+  (RCONFLICT in opkg) and merge alternatives to opkg/alternatives
+---
+ recipes/opkg/opkg.inc      |    4 +++-
+ recipes/tasks/task-boot.bb |   10 ++++++++--
+ 2 files changed, 11 insertions(+), 3 deletions(-)
 
-most distributions use opkg-native as u-a provider for building their
-images, but I haven't noticed that 
-
-update-alternatives-cworth use alternatives from
-/usr/lib/ipkg/alternatives
-
-opkg use
-/usr/lib/opkg/alternatives
-
-So image prepared with opkg-native cannot ship with
-update-alternatives-cworth installed, but it does, because task-boot
-DEPENDS on "update-alternatives" which could be fixed with 
-DISTRO_UPDATE_ALTERNATIVES and using DISTRO_UPDATE_ALTERNATIVES for
-PREFERRED_PROVIDER_virtual/update-alternatives
-PREFERRED_PROVIDER_virtual/update-alternatives-native
-and here in task-boot.
-
-But this won't fix already installed/built images :/.
-
-How to fix this properly? I guess that right combination of RCONFLICTS
-and good postinst scipt can fix that.. but its quite difficult to test
-it and it can break things even more :/. Please advise..
-
-Sort of nasty workaround now is
-opkg remove update-alternatives-cworth
-opkg reinstall busybox
-
-Here is info I just sent to SHR mailing list
-
-In last opkg upgrade there is bump to busybox package, which triggers
-old bug in our images :(.
-
-There are 2 scripts providing update-alternatives in our images, one is
-part of opkg itself installed in
-/usr/bin/update-alternatives (it was added to opkg later)
-
-and older update-alternatives-cworth installed in
-/usr/sbin/update-alternatives and used by default
-
-But with busybox upgrade all symlinks are updated with knowledge only
-from /usr/lib/ipkg/alternatives because of that -cworth which shouldn't
-be part of image! (I'll push -cworth blacklist to our shr.conf but its
-too late for those who upgraded busybox yesterday).
-
-Hopefully working work-around (haven't tested because I'm at work)
-
-opkg remove update-alternatives-cworth
-opkg reinstall busybox
-
-Please also check
-diff -rq /usr/lib/opkg/alternatives /usr/lib/ipkg/alternatives
-if there is some major difference, if yes reinstall packages where the
-alternatives provided by them are different in those 2 dirs.
-
+diff --git a/recipes/opkg/opkg.inc b/recipes/opkg/opkg.inc
+index 1716034..caf90e7 100644
+--- a/recipes/opkg/opkg.inc
++++ b/recipes/opkg/opkg.inc
+@@ -4,10 +4,12 @@ SECTION = "base"
+ LICENSE = "GPL"
+ DEPENDS = "curl gpgme"
+ PV = "0.1.6+svnr${SRCPV}"
+-INC_PR = "r18"
++INC_PR = "r19"
+ 
+ FILESPATHPKG =. "opkg:"
+ 
++RCONFLICTS_${PN} = "update-alternatives-cworth"
++
+ SRC_URI = "svn://opkg.googlecode.com/svn;module=trunk;proto=http \
+ 	file://opkg_unarchive.patch;patch=1;maxrev=201 \
+ 	file://opkg-intercept-cleanup.patch;patch=1;maxrev=241 \
+diff --git a/recipes/tasks/task-boot.bb b/recipes/tasks/task-boot.bb
+index 04c5535..45d50ef 100644
+--- a/recipes/tasks/task-boot.bb
++++ b/recipes/tasks/task-boot.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Basic task to get a device booting"
+-PR = "r51"
++PR = "r52"
+ 
+ inherit task
+ 
+@@ -13,6 +13,12 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ MACHINE_ESSENTIAL_EXTRA_RDEPENDS ?= ""
+ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
+ 
++# update-alternatives script installed in rootfs needs to be the same as
++# u-a script used for building image which is defined with
++# PREFERRED_PROVIDER_virtual/update-alternatives-native
++
++DISTRO_UPDATE_ALTERNATIVES ?= "${PREFERRED_PROVIDER_virtual/update-alternatives}"
++
+ # Make sure we build the kernel
+ DEPENDS = "virtual/kernel"
+ 
+@@ -26,7 +32,7 @@ RDEPENDS_task-boot = "\
+     ${@base_contains("MACHINE_FEATURES", "keyboard", "keymaps", "", d)} \
+     modutils-initscripts \
+     netbase \
+-    update-alternatives \
++    ${DISTRO_UPDATE_ALTERNATIVES} \
+     ${MACHINE_ESSENTIAL_EXTRA_RDEPENDS} \
+     "
+ 
 -- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+1.6.6
+
 
 
