@@ -1,31 +1,32 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NTFVD-00086w-Ad for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jan 2010 15:07:50 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NTFT9-0004sB-KU
+	id 1NTFZd-0002CD-Sw for openembedded-devel@lists.openembedded.org;
+	Fri, 08 Jan 2010 15:12:24 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NTFXc-0006tI-9c
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jan 2010 15:05:39 +0100
+	Fri, 08 Jan 2010 15:10:16 +0100
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jan 2010 15:05:39 +0100
+	Fri, 08 Jan 2010 15:10:16 +0100
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jan 2010 15:05:39 +0100
+	Fri, 08 Jan 2010 15:10:16 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 08 Jan 2010 15:05:03 +0100
-Message-ID: <hi7e2e$cda$1@ger.gmane.org>
+Date: Fri, 08 Jan 2010 15:07:12 +0100
+Message-ID: <hi7e6f$cda$2@ger.gmane.org>
 References: <20100108132344.GB2156@jama>
+	<201001081502.46952.holger+oe@freyther.de>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.5) Gecko/20091222 Shredder/3.0.1pre
-In-Reply-To: <20100108132344.GB2156@jama>
+In-Reply-To: <201001081502.46952.holger+oe@freyther.de>
 X-Enigmail-Version: 1.0
 Sender: news <news@ger.gmane.org>
 X-SA-Exim-Connect-IP: 80.91.229.12
@@ -46,84 +47,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jan 2010 14:07:50 -0000
+X-List-Received-Date: Fri, 08 Jan 2010 14:12:25 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Can't we just make them both read from the opkg dir?
+On 08-01-10 15:02, Holger Hans Peter Freyther wrote:
+> On Friday 08 January 2010 14:23:44 Martin Jansa wrote:
+>> After this change
+>> http://cgit.openembedded.net/cgit.cgi/openembedded/commit/?id=9b641bbfed07c
+>> 075ae5cbe84082a85f1ba703447
+> 
+> thanks for highlighting this. Let me say something regarding the commit 
+> message. Your commit message is not saying anything regarding "Why", it is not 
+> indicating a post to the mailinglist, it is not saying what problem is fixed.
+> 
+> Could we all try to have answers to:
+> 	- What
+> 	- How
+> 	- Why
+> 
+> in our commit messages? 
 
-regards,
-
-Koen
-
-On 08-01-10 14:23, Martin Jansa wrote:
-> After this change
-> http://cgit.openembedded.net/cgit.cgi/openembedded/commit/?id=9b641bbfed07c075ae5cbe84082a85f1ba703447
-> 
-> most distributions use opkg-native as u-a provider for building their
-> images, but I haven't noticed that 
-> 
-> update-alternatives-cworth use alternatives from
-> /usr/lib/ipkg/alternatives
-> 
-> opkg use
-> /usr/lib/opkg/alternatives
-> 
-> So image prepared with opkg-native cannot ship with
-> update-alternatives-cworth installed, but it does, because task-boot
-> DEPENDS on "update-alternatives" which could be fixed with 
-> DISTRO_UPDATE_ALTERNATIVES and using DISTRO_UPDATE_ALTERNATIVES for
-> PREFERRED_PROVIDER_virtual/update-alternatives
-> PREFERRED_PROVIDER_virtual/update-alternatives-native
-> and here in task-boot.
-> 
-> But this won't fix already installed/built images :/.
-> 
-> How to fix this properly? I guess that right combination of RCONFLICTS
-> and good postinst scipt can fix that.. but its quite difficult to test
-> it and it can break things even more :/. Please advise..
-> 
-> Sort of nasty workaround now is
-> opkg remove update-alternatives-cworth
-> opkg reinstall busybox
-> 
-> Here is info I just sent to SHR mailing list
-> 
-> In last opkg upgrade there is bump to busybox package, which triggers
-> old bug in our images :(.
-> 
-> There are 2 scripts providing update-alternatives in our images, one is
-> part of opkg itself installed in
-> /usr/bin/update-alternatives (it was added to opkg later)
-> 
-> and older update-alternatives-cworth installed in
-> /usr/sbin/update-alternatives and used by default
-> 
-> But with busybox upgrade all symlinks are updated with knowledge only
-> from /usr/lib/ipkg/alternatives because of that -cworth which shouldn't
-> be part of image! (I'll push -cworth blacklist to our shr.conf but its
-> too late for those who upgraded busybox yesterday).
-> 
-> Hopefully working work-around (haven't tested because I'm at work)
-> 
-> opkg remove update-alternatives-cworth
-> opkg reinstall busybox
-> 
-> Please also check
-> diff -rq /usr/lib/opkg/alternatives /usr/lib/ipkg/alternatives
-> if there is some major difference, if yes reinstall packages where the
-> alternatives provided by them are different in those 2 dirs.
-> 
-
+Hey, did you spy on the TSC meeting yesterday? I proposed the same thing :)
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFLRzuPMkyGM64RGpERAhO/AJ96HpNyFXugDyZQM72YbijPg61k2ACePp/e
-WiVNV4APMwMBJ/HCK3sof48=
-=UpsU
+iD8DBQFLRzwQMkyGM64RGpERAq7cAJ9Ik62s427Q1wijR4fEvT4Y38TlhgCfXftU
+JQEBShfcyAiD0XVB7Qn8Y48=
+=9oKn
 -----END PGP SIGNATURE-----
 
 
