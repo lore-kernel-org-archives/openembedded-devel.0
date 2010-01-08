@@ -1,39 +1,26 @@
-Received: from mail-fx0-f212.google.com ([209.85.220.212])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1NT2QP-0005Vv-ES
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mickey@vanille-media.de>) id 1NT2po-0005xN-Bc
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jan 2010 01:10:00 +0100
-Received: by fxm4 with SMTP id 4so15744241fxm.12
+	Fri, 08 Jan 2010 01:36:15 +0100
+Received: from [192.168.1.105] (e180140219.adsl.alicedsl.de [85.180.140.219])
+	by drlauer-research.com (Postfix) with ESMTP id E7B5D5841A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Jan 2010 16:07:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=wLiEraD6E+hghB1BHubEeqP0cbbRI1I0R6EH8+HJXo0=;
-	b=bxZaPTMVgAG1ulrXboTbRd1N1QAv+oWgKsjgKDb2qF6YsH4AbJgTrVPxMq5vsuKesa
-	Wxzo1q+wEhAO4RQ8UN4+GdWaa6XOmZUpF1hov5Pusr+My6pz995cLN7r2IrpuQg88ZZJ
-	PV5VvghBgBLhlWB+5BcDfTp7busRyBF4vu66Q=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=CsJELS1maK2o2oaeqriTBjyvxqL/QTIrYqynxa8zKU5MKfxlRd8sf9g7QNFngIUgtC
-	afzOMD5B4hI/zeX2nVeGETnWX5D0Ykz5gw9LkfdhBoiCWbP+k0XbneHXIDl02eHlXEVV
-	UZsqXELUIXZt9Cz8GEhx+4fnRQp3NbrhVZEvk=
-MIME-Version: 1.0
-Received: by 10.239.188.193 with SMTP id q1mr895422hbh.71.1262909271850; Thu, 
-	07 Jan 2010 16:07:51 -0800 (PST)
+	Fri,  8 Jan 2010 02:24:54 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <1262896003.2553.266.camel@lenovo.internal.reciva.com>
 References: <hi5b61$f7h$1@ger.gmane.org>
 	<1262892164.2553.230.camel@lenovo.internal.reciva.com>
 	<c384c5ea1001071148h770db2a7p10f6a7b51582fea5@mail.gmail.com>
 	<1262896003.2553.266.camel@lenovo.internal.reciva.com>
-Date: Fri, 8 Jan 2010 01:07:51 +0100
-Message-ID: <c384c5ea1001071607j4feb0521u44d03f682201d1b9@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.212
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+Organization: Vanille-Media
+Date: Fri, 08 Jan 2010 01:34:31 +0100
+Message-ID: <1262910871.22868.17.camel@andromeda>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: RFC: Bump default version for gtk+ to 2.18.3
@@ -50,33 +37,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jan 2010 00:10:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 08 Jan 2010 00:36:15 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hello,
-
-thanks for the valuable insights.
-
-On Thu, Jan 7, 2010 at 9:26 PM, Phil Blundell <philb@gnu.org> wrote:
->
-> untested or untrusted. =A0I would also propose that, in future, any
+Am Donnerstag, den 07.01.2010, 20:26 +0000 schrieb Phil Blundell:
+> On Thu, 2010-01-07 at 20:48 +0100, Leon Woestenberg wrote:
+> > What should that responsibility involve?
+> > 
+> > I usually "test" on one or two machines but still set a DEFAULT_PREFERENCE "-1".
+> > 
+> > It's very hard for the committer to collect enough testing evidence
+> > for all the use cases / variables.
+> 
+> It seems fairly clear that no individual committer is going to be able
+> to test all the possible permutations for even moderately complicated
+> packages.  If we require exhaustive testing before anything can land in
+> the tree then development will just grind to a halt.  And, as I
+> mentioned in my previous email, the primary responsibility for
+> integration lies with the DISTRO maintainers, who can use tools like
+> PREFERRED_VERSION to limit the amount of unexpected churn in their
+> configurations.
+> 
+> It's probably a job for the TSC to come up with a definitive policy in
+> this area.  But, for myself, I would consider someone checking in a new
+> version to have discharged their duties in a responsible manner if:
+> 
+>  - the new version has the same, or at least an equivalent, default
+> configuration as the old one (i.e. no gratuitous changes to EXTRA_OECONF
+> or the like); and
+> 
+>  - all the patches that were applied to the old version are either still
+> applied to the new version, or have been established to be unnecessary;
+> and
+> 
+>  - the new package has been successfully compiled, and ideally tested,
+> in at least one configuration; and
+> 
+>  - once we have a functioning waterfall view in tinderbox, the checkin
+> doesn't cause any of our primary MACHINE/DISTRO combinations to burst
+> into flames
+> 
+> I guess the key thing is not to make committers feel that they will be
+> held to account for things that are outside their realistic control
+> (i.e. bugs that have been introduced upstream in the new version), while
+> still expecting them to take reasonable steps to avoid introducing
+> unnecessary breakage.
+> 
+> Automatically adding new versions with a negative DEFAULT_PREFERENCE
+> doesn't scale: if everybody did this then, eventually, we would end up
+> with virtually the whole tree being D_P -1.  And it sends a confusing
+> message to other users, since people tend to assume that a recipe with a
+> negative D_P is broken or harmful in some way rather than merely
+> untested or untrusted.  I would also propose that, in future, any
 > setting of DEFAULT_PREFERENCE in a recipe must be accompanied by a
 > comment explaining why it was set, and (if it is set negatively) under
 > what conditions it can or should be removed.
->
 
-I would propose that anything out-of-the ordinary in a recipe is accompanie=
-d
-with a comment.
+Agreed, I think that's a sensible way to deal with it.
 
-I.e. if there is a reason outside OpenEmbedded for disabling or working aro=
-und
-something, please mention it in the recipe.
+:M:
 
 
-Regards,
---=20
-Leon
 
 
