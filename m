@@ -1,31 +1,46 @@
-Received: from exprod5og105.obsmtp.com ([64.18.0.180])
+Received: from mail-fx0-f212.google.com ([209.85.220.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martyn.welch@gefanuc.com>) id 1NTByq-0004bQ-JJ
+	(envelope-from <d.vinokuroff@gmail.com>) id 1NTCco-0001fR-GV
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jan 2010 11:22:11 +0100
-Received: from source ([12.43.191.1]) (using TLSv1) by
-	exprod5ob105.postini.com ([64.18.4.12]) with SMTP
-	ID DSNKS0cG060MtnkndkKytuMOiKQw+KAy3/x7@postini.com;
-	Fri, 08 Jan 2010 02:20:04 PST
-Received: from unknown (HELO alpmlip01.e2k.ad.ge.com) ([3.159.17.48])
-	by Alpmlip07.e2k.ad.ge.com with ESMTP; 08 Jan 2010 04:33:31 -0500
-Received: from es-j7s4d2j.amer.consind.ge.com (HELO [3.138.54.92])
-	([3.138.54.92])
-	by alpmlip01.e2k.ad.ge.com with ESMTP; 08 Jan 2010 04:33:31 -0500
-Message-ID: <4B46FC81.10006@gefanuc.com>
-Date: Fri, 08 Jan 2010 09:36:01 +0000
-From: Martyn Welch <martyn.welch@gefanuc.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	Fri, 08 Jan 2010 12:03:29 +0100
+Received: by fxm4 with SMTP id 4so15998104fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 08 Jan 2010 03:01:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:references:in-reply-to
+	:content-type:content-transfer-encoding;
+	bh=XBofcFv2slB2kIdOqzKFl9CX+ZkD+pmT+dJuZvzPQAA=;
+	b=N8ilfah75NwLth1XGVoeLktjnTtTIk4JNL+bvSdFZWvdsHAPL8c/b+a+5/qEttQyKd
+	8D9GFxWFbC5dgSHiGWXibQqpYzATw33qZSzkXR7K1doLjxsitDSkrAn6IKk+iFuw1dsG
+	ZAUTtSYDsjxRp6Jy1hE1ETroZ0q8cSLdw6hLY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=HMMB56xx4M/mRBgsS898nca+jZ52WzUSxvrPoLWD9VJMU1FwaP7rbaOHgInHkG3p+/
+	dIFNSY6TAvEFpGKRxFIiJjKTM9dOZIWMV7zMjsfagwRwG0MD8UZkjeEbM53KTydasCgF
+	0hR0RR9S2olB7TnpSoBTQwl0eVm1a8LylVmOo=
+Received: by 10.87.45.13 with SMTP id x13mr12629960fgj.70.1262948479916;
+	Fri, 08 Jan 2010 03:01:19 -0800 (PST)
+Received: from ?192.168.0.100? ([92.255.152.210])
+	by mx.google.com with ESMTPS id e11sm48556847fga.9.2010.01.08.03.01.18
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 08 Jan 2010 03:01:19 -0800 (PST)
+Message-ID: <4B47107B.3010609@gmail.com>
+Date: Fri, 08 Jan 2010 16:01:15 +0500
+From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.8pre) Gecko/20100104 Shredder/3.0.1pre
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <hi5b61$f7h$1@ger.gmane.org>	<1262892164.2553.230.camel@lenovo.internal.reciva.com>	<c384c5ea1001071148h770db2a7p10f6a7b51582fea5@mail.gmail.com>
-	<1262896003.2553.266.camel@lenovo.internal.reciva.com>
-In-Reply-To: <1262896003.2553.266.camel@lenovo.internal.reciva.com>
-X-SA-Exim-Connect-IP: 64.18.0.180
-X-SA-Exim-Mail-From: martyn.welch@gefanuc.com
+References: <4B46E623.9030005@gmail.com>
+	<op.u57fiqskmn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <op.u57fiqskmn1qzu@guohr-laptop-ubuntu>
+X-SA-Exim-Connect-IP: 209.85.220.212
+X-SA-Exim-Mail-From: d.vinokuroff@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: RFC: Bump default version for gtk+ to 2.18.3
+Subject: Re: How to extract OE cross toolchain?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,41 +54,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jan 2010 10:22:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 08 Jan 2010 11:03:29 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Phil Blundell wrote:
-> Automatically adding new versions with a negative DEFAULT_PREFERENCE
->  doesn't scale: if everybody did this then, eventually, we would end
->  up with virtually the whole tree being D_P -1. And it sends a
-> confusing message to other users, since people tend to assume that a
-> recipe with a negative D_P is broken or harmful in some way rather
-> than merely untested or untrusted.  I would also propose that, in
-> future, any setting of DEFAULT_PREFERENCE in a recipe must be
-> accompanied by a comment explaining why it was set, and (if it is set
-> negatively) under what conditions it can or should be removed.
+Thanks, it was exactly what I want.
+
+On 08.01.2010 13:07 Guo Hongruan wrote:
+> bitbake meta-toolchain
 >
-
-I've recently had a small problem related to this. All of the kernel
-packages seem to have DEFAULT_PREFERENCE=-1, for popular targets this
-isn't a problem, but for less popular ones it was picking the latest
-kernel at D_P=-1. Oddly this failed to build for "x86".
-
-I'd suggest it would be sensible to remove all (or most)
-"DEFAULT_PREFERENCE=-1" instances and only use
-"DEFAULT_PREFERENCE-<target>=x" it to increase the preference for
-specific targets, or leave it entirely up to the distributions.
-
-Martyn
-
-
+> You can export toolchain and header files, libraries for application 
+> development.
+>
+> Hope it is what you want.
+>
+> 在 Fri, 08 Jan 2010 16:00:35 +0800，Dmitry Vinokurov 
+> <d.vinokuroff@gmail.com> 写道:
+>
+>> Hello,
+>>
+>> I've got an OE building host and some development hosts with same 
+>> hardware platform and same GNU/Linux distribution. I wonder, is it 
+>> possible to extract cross toolchain, builded on OE host, to deb 
+>> package for example?
+>>
+>> Thanks.
+>>
+>
+>
 -- 
-Martyn Welch (Principal Software Engineer)   |   Registered in England and
-GE Intelligent Platforms                     |   Wales (3828642) at 100
-T +44(0)127322748                            |   Barbirolli Square,
-Manchester,
-E martyn.welch@gefanuc.com                   |   M2 3AB  VAT:GB 927559189
+Best Regards,
+Dmitry Vinokurov
+<d.vinokuroff@gmail.com>
 
 
 
