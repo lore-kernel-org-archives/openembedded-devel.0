@@ -1,36 +1,36 @@
 Received: from mail-fx0-f212.google.com ([209.85.220.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NTH1P-000237-Io
+	(envelope-from <martin.jansa@gmail.com>) id 1NTH5V-000733-UC
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 08 Jan 2010 16:45:10 +0100
-Received: by fxm4 with SMTP id 4so16224618fxm.12
+	Fri, 08 Jan 2010 16:49:26 +0100
+Received: by fxm4 with SMTP id 4so16228693fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Jan 2010 07:43:01 -0800 (PST)
+	Fri, 08 Jan 2010 07:47:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
 	bh=wSm7oimVPAqpE+MAEipUrrIUoHYca0yJPhs7uOCATcs=;
-	b=ZetRxBQK8XSGg+D/DdtsQ1jV39AcoxvmFlqe4H7qgtaM9K0NW7kYGeS/E/LJPZMEQG
-	CYjErY9bhP7F7T3SSyKsC+YU/0pKisFL5IAViUqjfr54f7tT9jz3ZIhohFs5onJ/miQO
-	uxvl6BsedFTl7U9udlwwm2NSsRmvofwqhSAtY=
+	b=g1TLYnupig2+q6nuNEwe2gHkiHIpns43S9vpfuX0onaSVRofUJwLcz/iyNkKLSjkAL
+	nmXlA+pVhrG9xu8dwKUhj3sxEFYWaqwn81wKAgU5SIGnE7HgWp7V6ddT5US1xsBSHD9D
+	sTFoWYTevai0eD/LIUORuihifZcCKcIN6Pu3s=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=PRoT5Ve47gsz3v0wbTFn9OeYaif/fNprq2WwRDoG7xbv5UY4kJDvQwbvBYl7nfFIHS
-	ur+S7uBHDcUvcsRa7QvJHPHbcI5guhyMqBjMJwKEizwRl/1zvnZHh4es/a170bu4PMTA
-	Dl3WSHMERckNdedeD3tb1zUwVElp8bFvNVOVY=
-Received: by 10.223.4.144 with SMTP id 16mr3101198far.36.1262965381584;
-	Fri, 08 Jan 2010 07:43:01 -0800 (PST)
+	b=MfkyAqVBFupGrmldcM7/ax3DdSG/QlZDt+O9NG6tXw+NSEQuwYGmemTRIn2K97jfl/
+	7pH8deLeYbR6lBXgvaVBnM35mHzUkesluCIHQ+HuzuPN/4xiAQ4Q3Wlt6j05JbGjyJpo
+	pEe/AUE7C+krjAOs2ZU+3yAOZNVlD8LYtKBas=
+Received: by 10.223.3.197 with SMTP id 5mr13381673fao.75.1262965635949;
+	Fri, 08 Jan 2010 07:47:15 -0800 (PST)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 14sm8317436fxm.11.2010.01.08.07.43.01
+	by mx.google.com with ESMTPS id 16sm8302566fxm.0.2010.01.08.07.47.15
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 08 Jan 2010 07:43:01 -0800 (PST)
+	Fri, 08 Jan 2010 07:47:15 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Jan 2010 16:42:56 +0100
-Message-Id: <1262965376-16205-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Fri,  8 Jan 2010 16:47:12 +0100
+Message-Id: <1262965632-16251-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.6.6
-In-Reply-To: <hi7e2e$cda$1@ger.gmane.org>
-References: <hi7e2e$cda$1@ger.gmane.org>
+In-Reply-To: <20100108143501.GD2156@jama>
+References: <20100108143501.GD2156@jama>
 X-SA-Exim-Connect-IP: 209.85.220.212
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
@@ -49,7 +49,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Jan 2010 15:45:10 -0000
+X-List-Received-Date: Fri, 08 Jan 2010 15:49:27 -0000
 
 * It's usefull to make it compatible with u-a script in opkg package
 * Old entries are merged to new directory in quite verbose postinst
