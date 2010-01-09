@@ -1,40 +1,37 @@
-Received: from mail-fx0-f212.google.com ([209.85.220.212])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NTfhz-0002tZ-6E
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NTg4U-00069Y-FY for openembedded-devel@lists.openembedded.org;
+	Sat, 09 Jan 2010 19:30:01 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NTg2O-0000JY-Pe
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Jan 2010 19:06:46 +0100
-Received: by fxm4 with SMTP id 4so16904930fxm.12
+	Sat, 09 Jan 2010 19:27:48 +0100
+Received: from p5b3b1d48.dip.t-dialin.net ([91.59.29.72])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 09 Jan 2010 19:27:48 +0100
+Received: from no2spam by p5b3b1d48.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Jan 2010 10:04:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=zB+u8QDeSFCYTQxDNDegq4il1orUzrrQKIxHgLZu64I=;
-	b=RJN2z2Aci67NQ605FbHpKhVa8SRWOJ5ru6jUSR4ZOb4J88Glsxnib6XDDXxAj7YL7/
-	BvIIw+mGT5pFS+pSQFk3gJpdi+BemoCKHpZT4UnMpcsemctMpubTtFxSM6Y8Qj30KMub
-	IWJdjiN5bLTZUq8o7z8C6+X0A9EEiRjGBt8zw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=ObTfb+gp5iXtBr6cPmRePjVFrzicRZq4hgTromVgZinlrBeJlqdp2/l6vzj9wdqBMa
-	Ql9UftN62e/yGZAz6d4cfmJb19q1GoFR/ZQ80M0n3KCb7J1tgMvdxpHMxlonii2lkUUM
-	O12y2Y5OhsNLP0iwRPVN2R0TR/DiZ0JDxz6bY=
-MIME-Version: 1.0
-Received: by 10.223.5.87 with SMTP id 23mr5402278fau.87.1263060276185; Sat, 09 
-	Jan 2010 10:04:36 -0800 (PST)
-In-Reply-To: <141020e31001081032o4b1d2fa1qf61607964a136271@mail.gmail.com>
-References: <hi7e2e$cda$1@ger.gmane.org>
-	<1262965376-16205-1-git-send-email-Martin.Jansa@gmail.com>
-	<141020e31001081032o4b1d2fa1qf61607964a136271@mail.gmail.com>
-Date: Sat, 9 Jan 2010 19:04:36 +0100
-Message-ID: <141020e31001091004u6ec8fa27v2550be57d976e3de@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sat, 09 Jan 2010 19:27:48 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.212
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Sat, 09 Jan 2010 19:27:25 +0100
+Message-ID: <hiahqe$g5u$1@ger.gmane.org>
+References: <1263047335.14620.17.camel@mattotaupa.wohnung.familie-menzel.net>	<hia7oe$i01$1@ger.gmane.org>
+	<1263059728.14620.64.camel@mattotaupa.wohnung.familie-menzel.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5b3b1d48.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <1263059728.14620.64.camel@mattotaupa.wohnung.familie-menzel.net>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] update-alternatives-cworth: use /usr/lib/opkg/alternatives directory instead of /usr/lib/ipkg/alternatives
+Subject: Re: [PATCH] vdr: Put common information in separate file and require it in the recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,21 +45,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Jan 2010 18:06:46 -0000
+X-List-Received-Date: Sat, 09 Jan 2010 18:30:01 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-I've already pushed it to shr/merge branch with temporary D_P = -1 in
-new busybox. Please review if its good enough for oe.dev.
+Paul Menzel wrote:
+> Maybe there is some OE terminology to even shorten the message.
 
-BTW: same postinst should be added to opkg, to fix the issue also on
-systems where u-a-cworth was removed already, or used only for
-building image. And if its part of opkg postinst we can remove
--cworth.
+I usually call it "$PN: unify"  Can't be much shorter than that ;-)
 
-Does opkg upgrade itself before upgrading other stuff? As we need to
-force "alternatives merge" with opkg or u-a-cworth bump, before ie
-busybox upgrade.
-
-Cheers,
 
 
