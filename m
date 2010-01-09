@@ -1,33 +1,36 @@
-Received: from ey-out-1920.google.com ([74.125.78.148])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1NTjBv-0007kG-6T
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NTjEC-0007qO-04 for openembedded-devel@lists.openembedded.org;
+	Sat, 09 Jan 2010 22:52:15 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NTjC9-0006vQ-3c
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Jan 2010 22:49:54 +0100
-Received: by ey-out-1920.google.com with SMTP id 26so3150645eyw.4
+	Sat, 09 Jan 2010 22:50:05 +0100
+Received: from chello080108092216.22.11.tuwien.teleweb.at ([80.108.92.216])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 09 Jan 2010 22:50:05 +0100
+Received: from chris by chello080108092216.22.11.tuwien.teleweb.at with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Jan 2010 13:47:46 -0800 (PST)
-Received: by 10.213.109.156 with SMTP id j28mr1136559ebp.79.1263073666050;
-	Sat, 09 Jan 2010 13:47:46 -0800 (PST)
-Received: from xora-vm1.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by mx.google.com with ESMTPS id 7sm1857790eyb.34.2010.01.09.13.47.45
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 09 Jan 2010 13:47:45 -0800 (PST)
-Received: by xora-vm1.xora.org.uk (Postfix, from userid 500)
-	id C13E42411E; Sat,  9 Jan 2010 21:47:41 +0000 (GMT)
-Date: Sat, 9 Jan 2010 21:47:41 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Sat, 09 Jan 2010 22:50:05 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100109214741.GA2150@xora-vm1.xora.org.uk>
-References: <hiarul$ifi$1@ger.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <hiarul$ifi$1@ger.gmane.org>
-User-Agent: Mutt/1.5.20 (2009-08-17)
-X-SA-Exim-Connect-IP: 74.125.78.148
-X-SA-Exim-Mail-From: dp@xora.org.uk
+From: Chris Veigl <chris@shifz.org>
+Date: Sat, 9 Jan 2010 20:47:34 +0000 (UTC)
+Message-ID: <loom.20100109T213305-664@post.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 80.108.92.216 (Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.0.17) Gecko/2010010604 Ubuntu/9.04 (jaunty) Firefox/3.0.17)
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Are we starting udev too early in the boot process?
+Subject: building classpath / ecj-initial fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,27 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Jan 2010 21:49:55 -0000
+X-List-Received-Date: Sat, 09 Jan 2010 21:52:15 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-On Sat, Jan 09, 2010 at 10:20:20PM +0100, Rolf Leggewie wrote:
-> Hi,
-> 
-> could it be that we are starting udev too early in the boot process?
-> 
-> http://bugs.openembedded.org/show_bug.cgi?id=5090
-> http://bugs.openembedded.org/show_bug.cgi?id=5246
-> 
-> Above two bug reports whose effects I can confirm would suggest that to
-> me.  But I'm not sure about the side-effects of starting udev later than
-> where it currently is at.  Anybody care to comment?
-> 
-My opinion is the dev cache code is wrong, it should cache into /dev which
-is the only place guaranteed to be writeable. There then should be a second
-init script later in the boot process which moves this to /etc/
+Hi all,
 
-Graeme
+  I ran into problems when bitbaking java-related stuff for the 
+  OMAP3-platforms (gumstix-overo, beagleboard)
+  in the current org.openembedded.dev environment:
+
+  I receive the following error at task 
+  /recipes/classpath/classpath-native_0.97.2.bb, do_configure
+
+"checking if /media/disk/overo-oe/tmp/staging/i686-linux/usr/bin/ecj-initial
+works... configure: error: The Java compiler
+/media/disk/overo-oe/tmp/staging/i686-linux/usr/bin/ecj-initial failed (see
+config.log, check the CLASSPATH?)"
+
+  the problem seems to be that jamvm-initial (which is called by ecj-initial)
+  produces a memory-allocation fault (maybe related to the argument -Xmx1024m ?)
+
+  I found similar problems browsing the OE-build stats and the web, 
+  but no hints for a solution ..
+
+any help or comments very much apprechiated,
+regards,
+Chris
 
 
 
