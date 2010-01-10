@@ -1,47 +1,34 @@
-Received: from dan.rpsys.net ([93.97.175.187])
+Received: from mail-ew0-f209.google.com ([209.85.219.209])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NU0S7-0006GT-RA
+	(envelope-from <dp@xora.org.uk>) id 1NU0pn-0002In-2T
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Jan 2010 17:15:46 +0100
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	o0AG9ShS001524 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jan 2010 16:09:28 GMT
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id Qh5OnfekzN1x
+	Sun, 10 Jan 2010 17:40:14 +0100
+Received: by ewy1 with SMTP id 1so2275098ewy.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jan 2010 16:09:28 +0000 (GMT)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	o0AG9Lsp001513
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jan 2010 16:09:23 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Sun, 10 Jan 2010 08:38:03 -0800 (PST)
+Received: by 10.213.48.75 with SMTP id q11mr1197163ebf.84.1263141483337;
+	Sun, 10 Jan 2010 08:38:03 -0800 (PST)
+Received: from xora-vm1.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by mx.google.com with ESMTPS id 13sm168770ewy.1.2010.01.10.08.38.02
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 10 Jan 2010 08:38:02 -0800 (PST)
+Received: by xora-vm1.xora.org.uk (Postfix, from userid 500)
+	id B797A2414A; Sun, 10 Jan 2010 16:38:02 +0000 (GMT)
+Date: Sun, 10 Jan 2010 16:38:02 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hictcm$b0c$1@ger.gmane.org>
-References: <20091222140029.GF10910@xora.vm.bytemark.co.uk>
-	<1262118637.8748.173.camel@dax.rpnet.com> <hhf42m$n7h$1@ger.gmane.org>
-	<20091230144538.6a171e4e@xora-desktop.xora.org.uk>
-	<1262602007.8748.206.camel@dax.rpnet.com>
-	<20100104110233.GA2017@xora-vm2.xora.org.uk>
-	<1262629172.22868.4.camel@andromeda>
-	<20100105111128.GB1983@xora-vm2.xora.org.uk>
-	<1262702588.8748.466.camel@dax.rpnet.com>
-	<b6ebd0a51001050826t3bd42641g925c023c706d5ca0@mail.gmail.com>
-	<ac9c93b11001070004j6d2c599bie9249c7aab3758ad@mail.gmail.com>
-	<hictcm$b0c$1@ger.gmane.org>
-Date: Sun, 10 Jan 2010 16:16:37 +0000
-Message-Id: <1263140197.10097.169.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-SA-Exim-Connect-IP: 93.97.175.187
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Message-ID: <20100110163802.GB1893@xora-vm1.xora.org.uk>
+References: <hiarul$ifi$1@ger.gmane.org>
+	<20100109214741.GA2150@xora-vm1.xora.org.uk>
+MIME-Version: 1.0
+In-Reply-To: <20100109214741.GA2150@xora-vm1.xora.org.uk>
+User-Agent: Mutt/1.5.20 (2009-08-17)
+X-SA-Exim-Connect-IP: 209.85.219.209
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [TSC] First Meeting
+Subject: Re: Are we starting udev too early in the boot process?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,26 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jan 2010 16:15:47 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 10 Jan 2010 16:40:14 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sun, 2010-01-10 at 16:57 +0100, Rolf Leggewie wrote:
-> Frans Meulenbroeks wrote:
-> > May I suggest that the TSC thinks of a mechanism for developers to
-> > bring topics to the TSC table (something somewhat more structured than
-> > just mailing one of the TSC members or mailing it to the list
+On Sat, Jan 09, 2010 at 09:47:41PM +0000, Graeme Gregory wrote:
+> On Sat, Jan 09, 2010 at 10:20:20PM +0100, Rolf Leggewie wrote:
+> > Hi,
+> > 
+> > could it be that we are starting udev too early in the boot process?
+> > 
+> > http://bugs.openembedded.org/show_bug.cgi?id=5090
+> > http://bugs.openembedded.org/show_bug.cgi?id=5246
+> > 
+> > Above two bug reports whose effects I can confirm would suggest that to
+> > me.  But I'm not sure about the side-effects of starting udev later than
+> > where it currently is at.  Anybody care to comment?
+> > 
+> My opinion is the dev cache code is wrong, it should cache into /dev which
+> is the only place guaranteed to be writeable. There then should be a second
+> init script later in the boot process which moves this to /etc/
 > 
-> How about the bug tracker?  I could add a specific category and cc TSC
-> members when tasks are added.
+In fact to follow on from my mail, as 2.6.32 devfs has reapperred in the
+kernel we could do away with the caching on modern kernels totally.
 
-The TSC has discussed this in its last meeting. There is a draft summary
-waiting for approval from the TSC members which has some details of our
-proposal for handling this.
-
-Cheers,
-
-Richard
+Graeme
 
 
 
