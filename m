@@ -1,31 +1,48 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-px0-f183.google.com ([209.85.216.183])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NTx7v-0002ma-25 for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Jan 2010 13:42:42 +0100
-Received: from f053034057.adsl.alicedsl.de ([78.53.34.57]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NTx5t-0003dA-9A for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Jan 2010 12:40:33 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1260719131.3110.26.camel@mattotaupa.wohnung.familie-menzel.net>
-References: <1260618520.3373.23.camel@mattotaupa.wohnung.familie-menzel.net>
-	<20091212173311.GA3730@rhein.zuhause.netz>
-	<1260711980.3110.21.camel@mattotaupa.wohnung.familie-menzel.net>
-	<20091213141849.GG17995@ibawizard.net>
-	<1260719131.3110.26.camel@mattotaupa.wohnung.familie-menzel.net>
-Date: Sun, 10 Jan 2010 13:40:31 +0100
-Message-ID: <1263127231.3163.3.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	(envelope-from <camelguo@gmail.com>) id 1NTxMN-000396-7F
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Jan 2010 13:57:38 +0100
+Received: by pxi13 with SMTP id 13so11617452pxi.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Jan 2010 04:55:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:content-type:to:cc:subject
+	:references:date:mime-version:content-transfer-encoding:from
+	:organization:message-id:in-reply-to:user-agent;
+	bh=Pfn2HMixnzWm00MRgD5QEwMgreM+k178H6cFLptfxzE=;
+	b=wMUyCtN/s0jjBOtG3zXVD1V1pyqgpIiYHoF3LU58M3ewJJ789UQbbohdMZf726ZjIX
+	rdv5j9Rhf0GhS/d3zrQYz030GkCcKIhQRS8p4CK5hL+QlTSlqGeItt5Zn45HoK6B4mNb
+	Fl/9rgxBwtDT/cPaFdCHQoGebllq7oReWrTQw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=content-type:to:cc:subject:references:date:mime-version
+	:content-transfer-encoding:from:organization:message-id:in-reply-to
+	:user-agent;
+	b=lPxCmsBdJAgGps0Kqm3badC2fXWKdhYHr8fCpF1v0A9lbI6O4fNreB7STRh/1yE1hF
+	5eAGANHcHViAlyfcFdrB2MTyznLz5u4Co03u+60RzvA3H/lTwDT/+zmyYId0Np1kmpD8
+	gN5gZeOypKJmjt4phKWM14jWYnefwonKEEo8g=
+Received: by 10.114.251.10 with SMTP id y10mr2595214wah.149.1263128126306;
+	Sun, 10 Jan 2010 04:55:26 -0800 (PST)
+Received: from guohr-laptop-ubuntu ([123.54.100.219])
+	by mx.google.com with ESMTPS id 21sm20527691pzk.7.2010.01.10.04.55.22
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 10 Jan 2010 04:55:25 -0800 (PST)
+To: "Khem Raj" <raj.khem@gmail.com>
+References: <op.u6ax2r1qmn1qzu@guohr-laptop-ubuntu>
+	<19c1b8a91001092210k7aa59b12l4417d8654c9b5954@mail.gmail.com>
+Date: Sun, 10 Jan 2010 20:55:13 +0800
+MIME-Version: 1.0
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u6bh6baxmn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <19c1b8a91001092210k7aa59b12l4417d8654c9b5954@mail.gmail.com>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.216.183
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: environment variables in Makefile for cross compilation (was: package VDR for OE)
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [Bug 5362] compilation of gcc-cross-intermediate-4.4.2 failed due to lack of fenv.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,61 +56,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jan 2010 12:42:42 -0000
-X-Groupsio-MsgNum: 15516
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-j4JhcHSNA517xqxnpgiV"
+X-List-Received-Date: Sun, 10 Jan 2010 12:57:38 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: Quoted-Printable
 
---=-j4JhcHSNA517xqxnpgiV
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Yes, you are right. I tried to build a powerpc project and verify that.
 
-Am Sonntag, den 13.12.2009, 16:45 +0100 schrieb Paul Menzel:
-> Am Sonntag, den 13.12.2009, 15:18 +0100 schrieb Petr =C5=A0tetiar:
-> > Paul Menzel <paulepanter@users.sourceforge.net> [2009-12-13 14:46:20]:
->=20
-> [=E2=80=A6]
-> =20
-> > INCLUDES =3D -I${STAGING_INCDIR}freetype2
-> >=20
-> > to=20
-> >=20
-> > INCLUDES =3D ${CFLAGS}
-> >=20
-> > and in your recipe do:
-> >=20
-> > CFLAGS_append  +=3D " -I${STAGING_INCDIR}/freetype2"
->=20
-> Great. That worked.
->=20
-> > > Furthermore is there a better way for upstream to set things up so th=
+
+=E5=9C=A8 Sun, 10 Jan 2010 14:10:35 +0800=EF=BC=8CKhem Raj <raj.khem@gma=
+il.com> =E5=86=99=E9=81=93:
+
+> On Sat, Jan 9, 2010 at 9:41 PM, Guo Hongruan <camelguo@gmail.com> wrot=
+e:
+>> Hi raj,khem:
+>>  I think the change you made is not equivalent with before. Please se=
+e  =
+
+>> the
+>> following patch. When TARGET_ARCH =3D=3D powerpc, the
+>> EXTRA_OECONF_append_linux-uclibc should be set "--disable-decimal-flo=
 at
-> > > no patching is needed? Or is autotools needed for this?
->=20
-> I am still asking if upstream could change something to make the
-> Makefile cross compilable by default.
+>> --without-long-double-128", but in your change, it will be set
+>> "--without-long-double-128"
+>
+> No, thats not correct this patch is unnecessary. Its using _append
+> override which I guess is self explanatory.
+>
+>>
+>> Thanks a lot!
+>>
+>> diff --git a/recipes/gcc/gcc-4.4.2.inc b/recipes/gcc/gcc-4.4.2.inc
+>> index 4b11f31..32a27c0 100644
+>> --- a/recipes/gcc/gcc-4.4.2.inc
+>> +++ b/recipes/gcc/gcc-4.4.2.inc
+>> @@ -36,4 +36,4 @@ EXTRA_OECONF_BASE =3D " --enable-libssp \
+>>  EXTRA_OECONF_append_linux-uclibc =3D " --disable-decimal-float "
+>>  EXTRA_OECONF_append_linux-uclibceabi =3D " --disable-decimal-float "=
 
-Is there an environment variable for a handmade Makefile to make it
-cross compilable? Or is patching the upstream Makefile inevitable?
+>>  EXTRA_OECONF_append_linux-uclibcspe =3D " --disable-decimal-float "
+>> -EXTRA_OECONF_append_linux-uclibc =3D " ${@base_contains('TARGET_ARCH=
+',
+>> 'powerpc', '--without-long-double-128', '',d)}"
+>> +EXTRA_OECONF_append_linux-uclibc +=3D " ${@base_contains('TARGET_ARC=
+H',
+>> 'powerpc', '--without-long-double-128', '',d)}"
+>>
+>> --
+>> Guo Hongruan, Embedded Linux Consultant
+>> Skype: camelguo
+>> Twitter: camelguo
+>> http://www.gulessoft.com
+>>
 
-[=E2=80=A6]
+
+-- =
+
+Guo Hongruan, Embedded Linux Consultant
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
 
-Thanks,
-
-Paul
-
---=-j4JhcHSNA517xqxnpgiV
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktJyrgACgkQPX1aK2wOHVhLEgCfe8mQCPeuZ3WhZT9cKDgF/eDT
-edgAnAgM89lmueurMxS6SFiYI6ZQ6l0o
-=g6HM
------END PGP SIGNATURE-----
-
---=-j4JhcHSNA517xqxnpgiV--
