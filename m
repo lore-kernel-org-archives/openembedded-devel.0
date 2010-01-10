@@ -1,48 +1,44 @@
-Received: from mail-px0-f183.google.com ([209.85.216.183])
+Received: from mail-yx0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NTxMN-000396-7F
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NTxQr-0003NT-DC
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Jan 2010 13:57:38 +0100
-Received: by pxi13 with SMTP id 13so11617452pxi.24
+	Sun, 10 Jan 2010 14:02:16 +0100
+Received: by yxe5 with SMTP id 5so15454692yxe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jan 2010 04:55:26 -0800 (PST)
+	Sun, 10 Jan 2010 05:00:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:to:cc:subject
-	:references:date:mime-version:content-transfer-encoding:from
-	:organization:message-id:in-reply-to:user-agent;
-	bh=Pfn2HMixnzWm00MRgD5QEwMgreM+k178H6cFLptfxzE=;
-	b=wMUyCtN/s0jjBOtG3zXVD1V1pyqgpIiYHoF3LU58M3ewJJ789UQbbohdMZf726ZjIX
-	rdv5j9Rhf0GhS/d3zrQYz030GkCcKIhQRS8p4CK5hL+QlTSlqGeItt5Zn45HoK6B4mNb
-	Fl/9rgxBwtDT/cPaFdCHQoGebllq7oReWrTQw=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=ic2U1IAnJoxzf9blVRXju9uvEOrbTDTOkGwBAmsEFEM=;
+	b=fC4rGACpvNdP6DJ3ywiocSoHSBGadADOFT49xs034i2SpSKfDHbN04gmyNaA/srNrB
+	4ZM+9i99nGNc4RzftahWaiyWDdgid0dZ1YsEzNAEtPMQMvN+eiY85ugJUyYfHPVF8/wt
+	QyDcyyXoSyFllNUATmUrHk95Rk9xr0MW92G98=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:to:cc:subject:references:date:mime-version
-	:content-transfer-encoding:from:organization:message-id:in-reply-to
-	:user-agent;
-	b=lPxCmsBdJAgGps0Kqm3badC2fXWKdhYHr8fCpF1v0A9lbI6O4fNreB7STRh/1yE1hF
-	5eAGANHcHViAlyfcFdrB2MTyznLz5u4Co03u+60RzvA3H/lTwDT/+zmyYId0Np1kmpD8
-	gN5gZeOypKJmjt4phKWM14jWYnefwonKEEo8g=
-Received: by 10.114.251.10 with SMTP id y10mr2595214wah.149.1263128126306;
-	Sun, 10 Jan 2010 04:55:26 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.54.100.219])
-	by mx.google.com with ESMTPS id 21sm20527691pzk.7.2010.01.10.04.55.22
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 10 Jan 2010 04:55:25 -0800 (PST)
-To: "Khem Raj" <raj.khem@gmail.com>
-References: <op.u6ax2r1qmn1qzu@guohr-laptop-ubuntu>
-	<19c1b8a91001092210k7aa59b12l4417d8654c9b5954@mail.gmail.com>
-Date: Sun, 10 Jan 2010 20:55:13 +0800
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=utNdamBVvF+etZmUKNirpACCxgjDtylRVoos3n6BvAx47q2RPSjBTc0/fNPQ6KLa81
+	Of6xET2wEFlyDSlR/htqwAByMy2iqbKpONxfT3F+3NSVnob/HiM0FVIGfKPSBELEHxFZ
+	toFTMLpMXJGEufwydKb8WLHeo+0MM/tyRHUWA=
 MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Organization: Gulessoft, Inc
-Message-ID: <op.u6bh6baxmn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <19c1b8a91001092210k7aa59b12l4417d8654c9b5954@mail.gmail.com>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.216.183
-X-SA-Exim-Mail-From: camelguo@gmail.com
+Received: by 10.101.7.31 with SMTP id k31mr2511568ani.83.1263128405161; Sun, 
+	10 Jan 2010 05:00:05 -0800 (PST)
+In-Reply-To: <1263127231.3163.3.camel@mattotaupa.wohnung.familie-menzel.net>
+References: <1260618520.3373.23.camel@mattotaupa.wohnung.familie-menzel.net>
+	<20091212173311.GA3730@rhein.zuhause.netz>
+	<1260711980.3110.21.camel@mattotaupa.wohnung.familie-menzel.net>
+	<20091213141849.GG17995@ibawizard.net>
+	<1260719131.3110.26.camel@mattotaupa.wohnung.familie-menzel.net>
+	<1263127231.3163.3.camel@mattotaupa.wohnung.familie-menzel.net>
+Date: Sun, 10 Jan 2010 14:00:05 +0100
+Message-ID: <ac9c93b11001100500w4ba2cfdfuae4d91888aec5b4c@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [Bug 5362] compilation of gcc-cross-intermediate-4.4.2 failed due to lack of fenv.h
+Subject: Re: environment variables in Makefile for cross compilation (was: package VDR for OE)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,64 +52,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jan 2010 12:57:38 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Sun, 10 Jan 2010 13:02:16 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Yes, you are right. I tried to build a powerpc project and verify that.
-
-
-=E5=9C=A8 Sun, 10 Jan 2010 14:10:35 +0800=EF=BC=8CKhem Raj <raj.khem@gma=
-il.com> =E5=86=99=E9=81=93:
-
-> On Sat, Jan 9, 2010 at 9:41 PM, Guo Hongruan <camelguo@gmail.com> wrot=
-e:
->> Hi raj,khem:
->>  I think the change you made is not equivalent with before. Please se=
-e  =
-
->> the
->> following patch. When TARGET_ARCH =3D=3D powerpc, the
->> EXTRA_OECONF_append_linux-uclibc should be set "--disable-decimal-flo=
-at
->> --without-long-double-128", but in your change, it will be set
->> "--without-long-double-128"
+2010/1/10 Paul Menzel <paulepanter@users.sourceforge.net>:
+> Am Sonntag, den 13.12.2009, 16:45 +0100 schrieb Paul Menzel:
+>> Am Sonntag, den 13.12.2009, 15:18 +0100 schrieb Petr =C5=A0tetiar:
+>> > Paul Menzel <paulepanter@users.sourceforge.net> [2009-12-13 14:46:20]:
+>>
+>> [=E2=80=A6]
+>>
+>> > INCLUDES =3D -I${STAGING_INCDIR}freetype2
+>> >
+>> > to
+>> >
+>> > INCLUDES =3D ${CFLAGS}
+>> >
+>> > and in your recipe do:
+>> >
+>> > CFLAGS_append =C2=A0+=3D " -I${STAGING_INCDIR}/freetype2"
+>>
+>> Great. That worked.
+>>
+>> > > Furthermore is there a better way for upstream to set things up so t=
+hat
+>> > > no patching is needed? Or is autotools needed for this?
+>>
+>> I am still asking if upstream could change something to make the
+>> Makefile cross compilable by default.
 >
-> No, thats not correct this patch is unnecessary. Its using _append
-> override which I guess is self explanatory.
+> Is there an environment variable for a handmade Makefile to make it
+> cross compilable? Or is patching the upstream Makefile inevitable?
+
+You can always have your own makefile in the recipe dir and overwrite
+the existing one in a patch.
+But personally I prefer patches to makefiles, as you can piggyback on
+changes in the original makefile (or worst case, if the patch fails on
+a newer version you know that some work is waiting.
+
+Frans
 >
->>
->> Thanks a lot!
->>
->> diff --git a/recipes/gcc/gcc-4.4.2.inc b/recipes/gcc/gcc-4.4.2.inc
->> index 4b11f31..32a27c0 100644
->> --- a/recipes/gcc/gcc-4.4.2.inc
->> +++ b/recipes/gcc/gcc-4.4.2.inc
->> @@ -36,4 +36,4 @@ EXTRA_OECONF_BASE =3D " --enable-libssp \
->>  EXTRA_OECONF_append_linux-uclibc =3D " --disable-decimal-float "
->>  EXTRA_OECONF_append_linux-uclibceabi =3D " --disable-decimal-float "=
-
->>  EXTRA_OECONF_append_linux-uclibcspe =3D " --disable-decimal-float "
->> -EXTRA_OECONF_append_linux-uclibc =3D " ${@base_contains('TARGET_ARCH=
-',
->> 'powerpc', '--without-long-double-128', '',d)}"
->> +EXTRA_OECONF_append_linux-uclibc +=3D " ${@base_contains('TARGET_ARC=
-H',
->> 'powerpc', '--without-long-double-128', '',d)}"
->>
->> --
->> Guo Hongruan, Embedded Linux Consultant
->> Skype: camelguo
->> Twitter: camelguo
->> http://www.gulessoft.com
->>
-
-
--- =
-
-Guo Hongruan, Embedded Linux Consultant
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
+> [=E2=80=A6]
+>
+>
+> Thanks,
+>
+> Paul
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
