@@ -1,41 +1,39 @@
 Received: from mail-iw0-f202.google.com ([209.85.223.202])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NTrGB-0007nF-46
+	(envelope-from <raj.khem@gmail.com>) id 1NTs31-0001jA-N1
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Jan 2010 07:26:50 +0100
-Received: by iwn40 with SMTP id 40so4021060iwn.24
+	Sun, 10 Jan 2010 08:17:18 +0100
+Received: by iwn40 with SMTP id 40so4031669iwn.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Jan 2010 22:24:39 -0800 (PST)
+	Sat, 09 Jan 2010 23:15:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=IexOIQQFiHKIjvsgvKRE18l6mugbTc2rHIh1KCoJW4M=;
-	b=rmOmVSE0afnmwyX7/9bfFHnpKHk0mGCRUqyUar+Oov2RP6tcksgKbrMeKe7bQ/SpNy
-	+iDmSIVb7MRxa9fqkMKvIQNSZpBFGGoxDFxnPApFT+CwaKrfgAJy5E+MWRaZ8QY+WONo
-	uSsX0oPBIsYpY/8YS758L0UtNyMp1kNvD8f4c=
+	bh=cdokx4jj8kG8BEbu2dFi2FRS4V7SVmAz9+c3+GJfOek=;
+	b=rupenrL4z7m3cB7Op5uAw8ALg8nXpUWURQ/NVB53HTB+5GMJBYWGzbPiqLT6goUVfC
+	Ji/2hT0Tx7/RwoY60RCFYVzSL+3k0oOc7/2fGon+v/p/XQGYy6TiMJn0BA1Gg+uswoYk
+	M6JRPGRYWFoxfAA0MT6boG1ycWHPjanOPssGg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=wA0YJDcOMAUMBqGa2+m3AjAMhTgdadqKbMFqale6ElLhAdvQ1i5QL/h20zvVBAVhIo
-	E2tRylV6gP7kkskF0QmGpfb8/JUDNfVDXkw69AWGkc1H8LceICWU32TXuPd6daN0y166
-	vHFIfLM62Bv/btpVQglVymq4nVPyqLRO8f080=
+	b=lyGFXEdNem3nTAnT6HtJWKG9iH+4ELLhYrPRxj5TEiAKoW6RHR5JvnOy577dFyZ9qt
+	BcVmJMN4rytfJiC0spAdyner3CxlNVJpFG3Y7+SxFeC+VpMueLCpU3v1vEB7+Y+jv//W
+	wUOLRt9BYdR90NFXa2CnzOXAtcOYnkCj2TO/Q=
 MIME-Version: 1.0
-Received: by 10.231.5.23 with SMTP id 23mr2462841ibt.45.1263104679213; Sat, 09 
-	Jan 2010 22:24:39 -0800 (PST)
-In-Reply-To: <1263057308.6614.7.camel@fred.uchi.de>
-References: <1262986639.11887.8.camel@fred.uchi.de>
-	<20100108223915.GA29981@gmail.com>
-	<1263057308.6614.7.camel@fred.uchi.de>
-Date: Sat, 9 Jan 2010 22:24:39 -0800
-Message-ID: <19c1b8a91001092224j569793dfla5f7d33effa5e2ca@mail.gmail.com>
+Received: by 10.231.157.131 with SMTP id b3mr972210ibx.19.1263107707577; Sat, 
+	09 Jan 2010 23:15:07 -0800 (PST)
+In-Reply-To: <alpine.LFD.2.00.1001091915010.6810@localhost>
+References: <alpine.LFD.2.00.1001091915010.6810@localhost>
+Date: Sat, 9 Jan 2010 23:15:07 -0800
+Message-ID: <19c1b8a91001092315o183ad3f5t1870ba1e0bbdbf9c@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.223.202
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Remote Debugging
+Subject: Re: still unable to "bitbake e2fsprogs"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,102 +47,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jan 2010 06:26:50 -0000
+X-List-Received-Date: Sun, 10 Jan 2010 07:17:19 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jan 9, 2010 at 9:15 AM, Joerg Eesmann <jeesmann@gmx.de> wrote:
-> Hi again,
-> sometimes one can`t see the obvious, but thanks for help.
-> I connected gdb remote. But I got following message:
+On Sat, Jan 9, 2010 at 4:17 PM, Robert P. J. Day <rpjday@crashcourse.ca> wr=
+ote:
 >
-> warning: The current binary is a PIE (Position Independent Executable),
-> which
-> GDB does NOT currently support. =A0Most debugger features will fail if
-> used
-> in this session.
+> =A0to this day, i still can't build e2fsprogs from the dev branch, and
+> i'm absolutely baffled. =A0this is on a fully-updated fedora 12 system,
+> and i'm sure philip balister can do this on his f12 system, so i'm at
+> a loss. =A0any advice would be appreciated.
 >
-> Reading symbols
-> from /home/joerg/prj/OpenMoko/shr/shr-build/shr-unstable/tmp/work/armv4t-=
-oe-linux-gnueabi/bluez4-4.59-r5.0/bluez-4.59/src/.libs/bluetoothd...done.
-> (gdb) target remote 192.168.0.202:3333
-> Remote debugging using 192.168.0.202:3333
-> warning: Unable to find dynamic linker breakpoint function.
-> GDB will be unable to debug shared library initializers
-> and track explicitly loaded dynamic code.
+> =A0just as a refresher, the salient excerpt from the log file is:
 >
-> and I cannot set breakpoints or whatever.
-> I thought, gdb 7.0 is supporting PIE.
-> Is there any possibility to compile bluez4 not as PIE, would it work?
+> make[2]: Entering directory
+> `/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/e2fsprog=
+s-1.41.5-r1/e2fsprogs-1.41.5/e2fsck'
+> =A0 =A0 =A0 =A0CC crc32.c
+> =A0 =A0 =A0 =A0CC unix.c
+> =A0 =A0 =A0 =A0CC e2fsck.c
+> =A0 =A0 =A0 =A0CC super.c
+> =A0 =A0 =A0 =A0CC pass1.c
+> =A0 =A0 =A0 =A0CC pass1b.c
+> =A0 =A0 =A0 =A0CC pass2.c
+> =A0 =A0 =A0 =A0CC pass3.c
+> =A0 =A0 =A0 =A0CC pass4.c
+> =A0 =A0 =A0 =A0CC pass5.c
+> =A0 =A0 =A0 =A0CC journal.c
+> =A0 =A0 =A0 =A0CC badblocks.c
+> =A0 =A0 =A0 =A0CC util.c
+> =A0 =A0 =A0 =A0CC dirinfo.c
+> =A0 =A0 =A0 =A0CC dx_dirinfo.c
+> =A0 =A0 =A0 =A0CC ehandler.c
+> =A0 =A0 =A0 =A0CC problem.c
+> =A0 =A0 =A0 =A0CC message.c
+> =A0 =A0 =A0 =A0CC recovery.c
+> =A0 =A0 =A0 =A0CC region.c
+> =A0 =A0 =A0 =A0CC revoke.c
+> =A0 =A0 =A0 =A0CC ea_refcount.c
+> =A0 =A0 =A0 =A0CC rehash.c
+> make[2]: *** No rule to make target `-lpthread', needed by `e2fsck'.
 
-you could add -nopie to ldflags
+post your e2fsprogs build tree somewhere.
 
-> While googeling, I found some patches for gdb, which may help.
-> Any ideas?
-
-they could if you send the pointers.
-
+> Stop.
 >
-> (by the way, is there a usable graphical frontend for gdb for this case:
-> remote-debugging wit cross gdb)?
-
-I have used ddd its decent. You can also use eclipse CDT they are others to=
-o
-http://sourceware.org/gdb/wiki/GDB%20Front%20Ends
-
-> I only managed to get it running (until the message) textbased.
+> rday
+> --
 >
-> Thank you for supporting me,
-> best regards,
-> Joerg
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> Robert P. J. Day =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 Waterloo, Ontario, CANADA
 >
+> =A0 =A0 =A0 =A0 =A0 =A0Linux Consulting, Training and Kernel Pedantry.
 >
-> On Fri, 2010-01-08 at 14:39 -0800, Khem Raj wrote:
->> On (08/01/10 22:37), Joerg Eesmann wrote:
->> > Hi there,
->> > I am trying to remote debug my Openmoko freerunner.
->> > I already installed succesfully gdbserver, and can attach it to the
->> > progem I am going to debug.
->> > The question is, what to do on host side?
->> > I bitbaked gdb-cross-sdk, I bitbaked my changed package (bluez4)
->> > So I will install a debug version of the package, and attach to the
->> > bluetoothd-demon.
->> > On host side, I guessed I needed a gdb, that can handle ARM-processor,
->> > therefore gdb-cross-sdk.
->> > Now I should have everything... but a few questions left.
->> > GDB ist only ipk-package, what to do with this?
->>
->> you need gdb-cross once you build that you should be able to use it
->> from same place as cross gcc.
->>
->> > Where do I find the arm-compiler bluetoothd on my host (I guess in wor=
-k,
->> > but will this be the strippded version or not, because also stripped
->> > package has been made).
->> > Am I on the right way? Is there any howto or something like that
->> > availlable, where you could point me?
->> >
->>
->> if you build it then the non stripped version should be there in
->> your workdir (where the package was built)
->>
->> -Khem
->> > thank you for your help in advance,
->> > best regards,
->> > Joerg
->> >
->> >
->> >
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> Web page: =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0http://crashcourse.ca
+> Twitter: =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 http://twitter.com/rpjday
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 >
 > _______________________________________________
 > Openembedded-devel mailing list
