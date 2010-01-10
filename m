@@ -1,44 +1,38 @@
-Received: from mail-yx0-f175.google.com ([209.85.210.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NTxQr-0003NT-DC
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NU0CQ-00081X-JB for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Jan 2010 16:59:33 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NU0AN-0004V1-B8
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Jan 2010 14:02:16 +0100
-Received: by yxe5 with SMTP id 5so15454692yxe.24
+	Sun, 10 Jan 2010 16:57:23 +0100
+Received: from p5b3b204c.dip.t-dialin.net ([91.59.32.76])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Jan 2010 16:57:23 +0100
+Received: from no2spam by p5b3b204c.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jan 2010 05:00:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=ic2U1IAnJoxzf9blVRXju9uvEOrbTDTOkGwBAmsEFEM=;
-	b=fC4rGACpvNdP6DJ3ywiocSoHSBGadADOFT49xs034i2SpSKfDHbN04gmyNaA/srNrB
-	4ZM+9i99nGNc4RzftahWaiyWDdgid0dZ1YsEzNAEtPMQMvN+eiY85ugJUyYfHPVF8/wt
-	QyDcyyXoSyFllNUATmUrHk95Rk9xr0MW92G98=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=utNdamBVvF+etZmUKNirpACCxgjDtylRVoos3n6BvAx47q2RPSjBTc0/fNPQ6KLa81
-	Of6xET2wEFlyDSlR/htqwAByMy2iqbKpONxfT3F+3NSVnob/HiM0FVIGfKPSBELEHxFZ
-	toFTMLpMXJGEufwydKb8WLHeo+0MM/tyRHUWA=
-MIME-Version: 1.0
-Received: by 10.101.7.31 with SMTP id k31mr2511568ani.83.1263128405161; Sun, 
-	10 Jan 2010 05:00:05 -0800 (PST)
-In-Reply-To: <1263127231.3163.3.camel@mattotaupa.wohnung.familie-menzel.net>
-References: <1260618520.3373.23.camel@mattotaupa.wohnung.familie-menzel.net>
-	<20091212173311.GA3730@rhein.zuhause.netz>
-	<1260711980.3110.21.camel@mattotaupa.wohnung.familie-menzel.net>
-	<20091213141849.GG17995@ibawizard.net>
-	<1260719131.3110.26.camel@mattotaupa.wohnung.familie-menzel.net>
-	<1263127231.3163.3.camel@mattotaupa.wohnung.familie-menzel.net>
-Date: Sun, 10 Jan 2010 14:00:05 +0100
-Message-ID: <ac9c93b11001100500w4ba2cfdfuae4d91888aec5b4c@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sun, 10 Jan 2010 16:57:23 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Sun, 10 Jan 2010 16:57:10 +0100
+Message-ID: <hictcm$b0c$1@ger.gmane.org>
+References: <20091222140029.GF10910@xora.vm.bytemark.co.uk>	<1262118637.8748.173.camel@dax.rpnet.com>
+	<hhf42m$n7h$1@ger.gmane.org>	<20091230144538.6a171e4e@xora-desktop.xora.org.uk>	<1262602007.8748.206.camel@dax.rpnet.com>	<20100104110233.GA2017@xora-vm2.xora.org.uk>	<1262629172.22868.4.camel@andromeda>	<20100105111128.GB1983@xora-vm2.xora.org.uk>	<1262702588.8748.466.camel@dax.rpnet.com>	<b6ebd0a51001050826t3bd42641g925c023c706d5ca0@mail.gmail.com>
+	<ac9c93b11001070004j6d2c599bie9249c7aab3758ad@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5b3b204c.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <ac9c93b11001070004j6d2c599bie9249c7aab3758ad@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: environment variables in Makefile for cross compilation (was: package VDR for OE)
+Subject: Re: [TSC] First Meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,59 +46,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jan 2010 13:02:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 10 Jan 2010 15:59:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-2010/1/10 Paul Menzel <paulepanter@users.sourceforge.net>:
-> Am Sonntag, den 13.12.2009, 16:45 +0100 schrieb Paul Menzel:
->> Am Sonntag, den 13.12.2009, 15:18 +0100 schrieb Petr =C5=A0tetiar:
->> > Paul Menzel <paulepanter@users.sourceforge.net> [2009-12-13 14:46:20]:
->>
->> [=E2=80=A6]
->>
->> > INCLUDES =3D -I${STAGING_INCDIR}freetype2
->> >
->> > to
->> >
->> > INCLUDES =3D ${CFLAGS}
->> >
->> > and in your recipe do:
->> >
->> > CFLAGS_append =C2=A0+=3D " -I${STAGING_INCDIR}/freetype2"
->>
->> Great. That worked.
->>
->> > > Furthermore is there a better way for upstream to set things up so t=
-hat
->> > > no patching is needed? Or is autotools needed for this?
->>
->> I am still asking if upstream could change something to make the
->> Makefile cross compilable by default.
->
-> Is there an environment variable for a handmade Makefile to make it
-> cross compilable? Or is patching the upstream Makefile inevitable?
+Frans Meulenbroeks wrote:
+> May I suggest that the TSC thinks of a mechanism for developers to
+> bring topics to the TSC table (something somewhat more structured than
+> just mailing one of the TSC members or mailing it to the list
 
-You can always have your own makefile in the recipe dir and overwrite
-the existing one in a patch.
-But personally I prefer patches to makefiles, as you can piggyback on
-changes in the original makefile (or worst case, if the patch fails on
-a newer version you know that some work is waiting.
+How about the bug tracker?  I could add a specific category and cc TSC
+members when tasks are added.
 
-Frans
->
-> [=E2=80=A6]
->
->
-> Thanks,
->
-> Paul
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
 
 
