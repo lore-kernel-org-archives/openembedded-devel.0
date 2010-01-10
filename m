@@ -1,36 +1,44 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail-px0-f183.google.com ([209.85.216.183])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NTlXW-0006Xd-7Y
+	(envelope-from <camelguo@gmail.com>) id 1NTqaB-0003bc-Fd
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Jan 2010 01:20:21 +0100
-Received: from bas4-kitchener06-1128672736.dsl.bell.ca ([67.70.45.224]
-	helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NTlVT-00045B-1Z for openembedded-devel@lists.openembedded.org;
-	Sat, 09 Jan 2010 19:18:11 -0500
-Date: Sat, 9 Jan 2010 19:17:25 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.1001091915010.6810@localhost>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Sun, 10 Jan 2010 06:43:26 +0100
+Received: by pxi13 with SMTP id 13so11517496pxi.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 09 Jan 2010 21:41:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:content-type:date:to:cc
+	:subject:mime-version:content-transfer-encoding:from:organization
+	:message-id:user-agent;
+	bh=y/5ylcXv+7t2g1oriJjW3Wr7Byjjat9wTgFuZ0TPox4=;
+	b=oEmShnFG51jONYeHnVnCNGnWTHX1vUXsZuFfP2+pTGvQRBg3wfRk9+7yKkrauA9av/
+	NHnPpvlXejpLJbe2Gxddal4JaB03OPzlrS/utCL7OqC2paENx+4WHSMeAZl9818D0X8a
+	PwwK9rnfkaH61lojG3htNzUviAEFKQ6l872mQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=content-type:date:to:cc:subject:mime-version
+	:content-transfer-encoding:from:organization:message-id:user-agent;
+	b=tl4pH0EmVGy2OhtjB+7Y8sPs6Ikk4IkwK+Pnq4CX7CZVRalVuy5X8bgmn4q6fKSzxz
+	FO2STmXlZ0jRN78jj5IuVGgi6SBLZJ+x94qDIrFWNrGacHEiuH5V92dTg3QUavdqRweq
+	A/w6BZK16fXeFQM+uAFQTwLBqZIBlVhizlk/g=
+Received: by 10.140.55.12 with SMTP id d12mr1493050rva.160.1263102075041;
+	Sat, 09 Jan 2010 21:41:15 -0800 (PST)
+Received: from guohr-laptop-ubuntu ([123.54.100.219])
+	by mx.google.com with ESMTPS id 20sm20155273pzk.5.2010.01.09.21.41.11
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 09 Jan 2010 21:41:14 -0800 (PST)
+Date: Sun, 10 Jan 2010 13:41:05 +0800
+To: raj.khem@gmail.com
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u6ax2r1qmn1qzu@guohr-laptop-ubuntu>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.216.183
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: still unable to "bitbake e2fsprogs"
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: [Bug 5362] compilation of gcc-cross-intermediate-4.4.2 failed due to lack of fenv.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,55 +52,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jan 2010 00:20:22 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sun, 10 Jan 2010 05:43:26 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: 7bit
 
+Hi raj,khem:
+   I think the change you made is not equivalent with before. Please see  
+the following patch. When TARGET_ARCH == powerpc, the  
+EXTRA_OECONF_append_linux-uclibc should be set "--disable-decimal-float  
+--without-long-double-128", but in your change, it will be set  
+"--without-long-double-128"
 
-  to this day, i still can't build e2fsprogs from the dev branch, and
-i'm absolutely baffled.  this is on a fully-updated fedora 12 system,
-and i'm sure philip balister can do this on his f12 system, so i'm at
-a loss.  any advice would be appreciated.
+Thanks a lot!
 
-  just as a refresher, the salient excerpt from the log file is:
+diff --git a/recipes/gcc/gcc-4.4.2.inc b/recipes/gcc/gcc-4.4.2.inc
+index 4b11f31..32a27c0 100644
+--- a/recipes/gcc/gcc-4.4.2.inc
++++ b/recipes/gcc/gcc-4.4.2.inc
+@@ -36,4 +36,4 @@ EXTRA_OECONF_BASE = " --enable-libssp \
+  EXTRA_OECONF_append_linux-uclibc = " --disable-decimal-float "
+  EXTRA_OECONF_append_linux-uclibceabi = " --disable-decimal-float "
+  EXTRA_OECONF_append_linux-uclibcspe = " --disable-decimal-float "
+-EXTRA_OECONF_append_linux-uclibc = " ${@base_contains('TARGET_ARCH',  
+'powerpc', '--without-long-double-128', '',d)}"
++EXTRA_OECONF_append_linux-uclibc += " ${@base_contains('TARGET_ARCH',  
+'powerpc', '--without-long-double-128', '',d)}"
 
-make[2]: Entering directory
-`/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/e2fsprogs-1.41.5-r1/e2fsprogs-1.41.5/e2fsck'
-        CC crc32.c
-        CC unix.c
-        CC e2fsck.c
-        CC super.c
-        CC pass1.c
-        CC pass1b.c
-        CC pass2.c
-        CC pass3.c
-        CC pass4.c
-        CC pass5.c
-        CC journal.c
-        CC badblocks.c
-        CC util.c
-        CC dirinfo.c
-        CC dx_dirinfo.c
-        CC ehandler.c
-        CC problem.c
-        CC message.c
-        CC recovery.c
-        CC region.c
-        CC revoke.c
-        CC ea_refcount.c
-        CC rehash.c
-make[2]: *** No rule to make target `-lpthread', needed by `e2fsck'.
-Stop.
-
-rday
---
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+-- 
+Guo Hongruan, Embedded Linux Consultant
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
 
