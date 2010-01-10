@@ -1,34 +1,33 @@
-Received: from mail-ew0-f209.google.com ([209.85.219.209])
+Received: from ns.penguin.cz ([84.21.108.25])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1NU0pn-0002In-2T
+	(envelope-from <utx@penguin.cz>) id 1NU1HK-0005iJ-Q5
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Jan 2010 17:40:14 +0100
-Received: by ewy1 with SMTP id 1so2275098ewy.28
+	Sun, 10 Jan 2010 18:08:41 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 10F8D1422AC0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jan 2010 08:38:03 -0800 (PST)
-Received: by 10.213.48.75 with SMTP id q11mr1197163ebf.84.1263141483337;
-	Sun, 10 Jan 2010 08:38:03 -0800 (PST)
-Received: from xora-vm1.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by mx.google.com with ESMTPS id 13sm168770ewy.1.2010.01.10.08.38.02
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 10 Jan 2010 08:38:02 -0800 (PST)
-Received: by xora-vm1.xora.org.uk (Postfix, from userid 500)
-	id B797A2414A; Sun, 10 Jan 2010 16:38:02 +0000 (GMT)
-Date: Sun, 10 Jan 2010 16:38:02 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Sun, 10 Jan 2010 18:08:28 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 2-MPMoFotT11
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Jan 2010 18:08:27 +0100 (CET)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id D32E81422AAE
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Jan 2010 18:08:27 +0100 (CET)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100110163802.GB1893@xora-vm1.xora.org.uk>
-References: <hiarul$ifi$1@ger.gmane.org>
-	<20100109214741.GA2150@xora-vm1.xora.org.uk>
-MIME-Version: 1.0
-In-Reply-To: <20100109214741.GA2150@xora-vm1.xora.org.uk>
-User-Agent: Mutt/1.5.20 (2009-08-17)
-X-SA-Exim-Connect-IP: 209.85.219.209
-X-SA-Exim-Mail-From: dp@xora.org.uk
+Date: Sun, 10 Jan 2010 18:06:35 +0100
+Message-Id: <1263143195.3710.30.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.0 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Are we starting udev too early in the boot process?
+Subject: [PATCH 1/2] introduce global control on shared/static libraries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,31 +41,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jan 2010 16:40:14 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 10 Jan 2010 17:08:42 -0000
+Content-Type: text/plain; charset="ISO-8859-2"
+Content-Transfer-Encoding: 7bit
 
-On Sat, Jan 09, 2010 at 09:47:41PM +0000, Graeme Gregory wrote:
-> On Sat, Jan 09, 2010 at 10:20:20PM +0100, Rolf Leggewie wrote:
-> > Hi,
-> > 
-> > could it be that we are starting udev too early in the boot process?
-> > 
-> > http://bugs.openembedded.org/show_bug.cgi?id=5090
-> > http://bugs.openembedded.org/show_bug.cgi?id=5246
-> > 
-> > Above two bug reports whose effects I can confirm would suggest that to
-> > me.  But I'm not sure about the side-effects of starting udev later than
-> > where it currently is at.  Anybody care to comment?
-> > 
-> My opinion is the dev cache code is wrong, it should cache into /dev which
-> is the only place guaranteed to be writeable. There then should be a second
-> init script later in the boot process which moves this to /etc/
-> 
-In fact to follow on from my mail, as 2.6.32 devfs has reapperred in the
-kernel we could do away with the caching on modern kernels totally.
+This patch adds support for global enabling and disabling of shared or
+static libraries in autoconf based packages.
 
-Graeme
+All required fixes in packages that I was able to test are already in
+place with exception of apmd (I plan to commit it soon as well).
+
+diff --git a/classes/base.bbclass b/classes/base.bbclass
+index 384a67d..ea1ea1e 100644
+--- a/classes/base.bbclass
++++ b/classes/base.bbclass
+@@ -346,10 +346,10 @@ oe_libinstall() {
+ 			silent=1
+ 			;;
+ 		-a)
+-			require_static=1
++			if test "$enable_static" != "no" ; then require_static=1 ; fi
+ 			;;
+ 		-so)
+-			require_shared=1
++			if test "$enable_shared" != "no" ; then require_shared=1 ; fi
+ 			;;
+ 		-*)
+ 			oefatal "oe_libinstall: unknown option: $1"
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index 3a68959..4903952 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -86,6 +86,10 @@ bindir_cross = "/bin"
+ #
+ target_datadir := "${datadir}"
+ 
++# Basic autoconf defaults
++export enable_static = "yes"
++export enable_shared = "yes"
++
+ ##################################################################
+ # Architecture-dependent build variables.
+ ##################################################################
+diff --git a/conf/local.conf.sample b/conf/local.conf.sample
+index 643ae0b..3fa7a32 100644
+--- a/conf/local.conf.sample
++++ b/conf/local.conf.sample
+@@ -146,6 +146,12 @@ IMAGE_FSTYPES = "jffs2 tar"
+ # SELECTED_OPTIMIZATION = "${PROFILE_OPTIMIZATION}"
+ # LDFLAGS =+ "-pg"
+ 
++# Uncomment these and define whether you want to build stared and static
++# libraries by default.
++# Normally the DISTRO of your choosing will take care of this 
++# export enable_static = "yes"
++# export enable_shared = "yes"
++
+ # Uncomment this to enable parallel make.
+ # This allows make to spawn mutliple processes to take advantage of multiple 
+ # processors. Useful on SMP machines. This may break some packages - we're
+
+
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
 
 
