@@ -1,33 +1,27 @@
-Received: from ns.penguin.cz ([84.21.108.25])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1NU1LA-0005pX-II
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Jan 2010 18:12:39 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id B8B561422AC0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jan 2010 18:12:25 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NYC2lEnShHF1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jan 2010 18:12:25 +0100 (CET)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 91C121422AAE
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jan 2010 18:12:25 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NU1XS-00066d-Ao for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Jan 2010 18:25:21 +0100
+Received: from f053034057.adsl.alicedsl.de ([78.53.34.57]
+	helo=[192.168.178.25])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NU1VQ-0005W4-NE for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Jan 2010 17:23:12 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Jan 2010 18:10:33 +0100
-Message-Id: <1263143433.3710.34.camel@utx.utx.cz>
+In-Reply-To: <1263143195.3710.30.camel@utx.utx.cz>
+References: <1263143195.3710.30.camel@utx.utx.cz>
+Date: Sun, 10 Jan 2010 18:23:11 +0100
+Message-ID: <1263144191.3423.0.camel@mattotaupa.wohnung.familie-menzel.net>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.0 
-X-SA-Exim-Connect-IP: 84.21.108.25
-X-SA-Exim-Mail-From: utx@penguin.cz
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 2/2] disable static libraries in Angstrom
+Subject: Re: [PATCH 1/2] introduce global control on shared/static libraries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,40 +35,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jan 2010 17:12:39 -0000
-Content-Type: text/plain; charset="ISO-8859-2"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 10 Jan 2010 17:25:21 -0000
+X-Groupsio-MsgNum: 15524
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-9qhiBRUBAP52mx6y69no"
 
-Attached patch disables build of major part of static libraries in the
-Angstrom distribution.
+--=-9qhiBRUBAP52mx6y69no
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Rationale:
+Am Sonntag, den 10.01.2010, 18:06 +0100 schrieb Stanislav Brabec:
 
-Angstrom distribution is intended for project that are typically based
-on multiple packages and use of shared libraries. In such environment,
-static libraries are mostly only a waste of space. Disabling static
-libraries seems to be a smart default.
+[=E2=80=A6]
 
-diff --git a/conf/distro/angstrom-2008.1.conf b/conf/distro/angstrom-2008.1.conf
-index 85d6f3f..bddedda 100644
---- a/conf/distro/angstrom-2008.1.conf
-+++ b/conf/distro/angstrom-2008.1.conf
-@@ -41,6 +41,9 @@ require conf/distro/include/preferred-opie-versions-1.2.4.inc
- DISTRO_TYPE ?= "debug"
- #DISTRO_TYPE = "release"
- 
-+# Do not build static libraries by default.
-+export enable_static = "no"
-+
- # Set the toolchain type (internal, external) and brand (generic, csl etc.)
- TOOLCHAIN_TYPE ?= "internal"
- TOOLCHAIN_BRAND ?= ""
+> +# Uncomment these and define whether you want to build stared and static
+> +# libraries by default.
+
+s/stared/shared/
+
+[=E2=80=A6]
 
 
+Thanks,
 
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+Paul
 
+--=-9qhiBRUBAP52mx6y69no
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
 
+iEYEABECAAYFAktKDPgACgkQPX1aK2wOHViFzwCfUWDjVvyoP/kJneeF/y4P0Mn4
+JdoAnRIWubJ0ljYk7RBOcugTTWfyKkvL
+=Ind5
+-----END PGP SIGNATURE-----
+
+--=-9qhiBRUBAP52mx6y69no--
