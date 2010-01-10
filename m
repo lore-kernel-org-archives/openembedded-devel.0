@@ -1,27 +1,38 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NU1XS-00066d-Ao for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Jan 2010 18:25:21 +0100
-Received: from f053034057.adsl.alicedsl.de ([78.53.34.57]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NU1VQ-0005W4-NE for openembedded-devel@lists.openembedded.org;
-	Sun, 10 Jan 2010 17:23:12 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NU29n-00027I-SL for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Jan 2010 19:04:59 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NU27j-0004zv-MP
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 10 Jan 2010 19:02:47 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Jan 2010 19:02:47 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 10 Jan 2010 19:02:47 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1263143195.3710.30.camel@utx.utx.cz>
-References: <1263143195.3710.30.camel@utx.utx.cz>
-Date: Sun, 10 Jan 2010 18:23:11 +0100
-Message-ID: <1263144191.3423.0.camel@mattotaupa.wohnung.familie-menzel.net>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 10 Jan 2010 19:02:25 +0100
+Message-ID: <hid4ng$12q$1@ger.gmane.org>
+References: <1263143433.3710.34.camel@utx.utx.cz>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100104 Shredder/3.0.1pre
+In-Reply-To: <1263143433.3710.34.camel@utx.utx.cz>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 1/2] introduce global control on shared/static libraries
+Subject: Re: [PATCH 2/2] disable static libraries in Angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,42 +46,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Jan 2010 17:25:21 -0000
-X-Groupsio-MsgNum: 15524
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-9qhiBRUBAP52mx6y69no"
+X-List-Received-Date: Sun, 10 Jan 2010 18:04:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-9qhiBRUBAP52mx6y69no
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am Sonntag, den 10.01.2010, 18:06 +0100 schrieb Stanislav Brabec:
+On 10-01-10 18:10, Stanislav Brabec wrote:
+> Attached patch disables build of major part of static libraries in the
+> Angstrom distribution.
 
-[=E2=80=A6]
+NAK
 
-> +# Uncomment these and define whether you want to build stared and static
-> +# libraries by default.
+> Rationale:
+> 
+> Angstrom distribution is intended for project that are typically based
+> on multiple packages and use of shared libraries.
 
-s/stared/shared/
+Yes, but...
 
-[=E2=80=A6]
+> In such environment,
+> static libraries are mostly only a waste of space.
 
+Static libs are packaged in seperate packages, so they only 'waste'
+space on the feed server.
 
-Thanks,
+> Disabling static libraries seems to be a smart default.
 
-Paul
+It isn't there are a lot of people using the static libs we provide for
+the applications. No need to stab them in the eye.
 
---=-9qhiBRUBAP52mx6y69no
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
+regards,
 
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAktKDPgACgkQPX1aK2wOHViFzwCfUWDjVvyoP/kJneeF/y4P0Mn4
-JdoAnRIWubJ0ljYk7RBOcugTTWfyKkvL
-=Ind5
+iD8DBQFLShYxMkyGM64RGpERAhSSAJ4/lJ0EOSLpe5YZoFBpeam6hVqc5ACfUcuA
+V+XGBg2Hnxl1w74iJ9Oglug=
+=yY8p
 -----END PGP SIGNATURE-----
 
---=-9qhiBRUBAP52mx6y69no--
+
+
