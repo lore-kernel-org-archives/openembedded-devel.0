@@ -1,25 +1,26 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from bay0-omc4-s21.bay0.hotmail.com ([65.54.190.223])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1NUKaf-0003Oj-FC
+	(envelope-from <salehusman@hotmail.com>) id 1NUKse-0000dp-Bd
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 14:45:56 +0100
-Received: (qmail 27452 invoked by uid 1003); 11 Jan 2010 13:43:44 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 11 Jan 2010 13:43:44 -0000
-Message-ID: <4B4B2B0E.8030501@balister.org>
-Date: Mon, 11 Jan 2010 08:43:42 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
+	Mon, 11 Jan 2010 15:04:31 +0100
+Received: from BAY127-W8 ([65.54.190.199]) by bay0-omc4-s21.bay0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 11 Jan 2010 06:01:15 -0800
+Message-ID: <BAY127-W8334C401E093FAC091CDDD86D0@phx.gbl>
+X-Originating-IP: [203.82.49.5]
+From: saleh usman <salehusman@hotmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Date: Mon, 11 Jan 2010 19:01:14 +0500
+Importance: Normal
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <alpine.LFD.2.00.1001110722550.22930@localhost>
-In-Reply-To: <alpine.LFD.2.00.1001110722550.22930@localhost>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+X-OriginalArrivalTime: 11 Jan 2010 14:01:15.0208 (UTC)
+	FILETIME=[8A210480:01CA92C6]
+X-SA-Exim-Connect-IP: 65.54.190.223
+X-SA-Exim-Mail-From: salehusman@hotmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: bitbake and e2fsprogs-1.41.9?
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: output of helloworld
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,52 +34,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jan 2010 13:45:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
-
-On 01/11/2010 07:27 AM, Robert P. J. Day wrote:
->
->    apologies as i accidentally deleted the emails i was going to
-> respond to, the thread is here:
->
-> http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-January/016074.html
->
->    and here:
->
-> http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-January/016097.html
->
-> graham gower suggests that an upgrade to e2fsprogs might be the
-> solution.  i might have time later this week to try that upgrade
-> unless someone else gets to it first and checks it in to the dev
-> branch.
->
->    what would be useful, though, is to get some confirmation that there
-> really *was* a build error in the current version.  otherwise, i'll be
-> back where i started.
-
-It builds on my F11 machine.
-
-Philip
+X-List-Received-Date: Mon, 11 Jan 2010 14:04:31 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
 
->
-> rday
-> --
->
-> ========================================================================
-> Robert P. J. Day                               Waterloo, Ontario, CANADA
->
->              Linux Consulting, Training and Kernel Pedantry.
->
-> Web page:                                          http://crashcourse.ca
-> Twitter:                                       http://twitter.com/rpjday
-> ========================================================================
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Hi
+I've run bitbake helloworld but I am unable to find /tmp/deploy folder wher=
+e I can find output of helloworld.Where will be the output of this build? T=
+erminal window is looking like as
 
+[saleh@localhost ~]$ bitbake helloworld
+NOTE: Handling BitBake files: - (7634/7634) [100 %]
+NOTE: Parsing finished. 7045 cached=2C 303 parsed=2C 286 skipped=2C 0 maske=
+d.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Tasks Summary: Attempted 461 tasks of which 461 didn't need to be rer=
+un and 0 failed.
+
+Saleh
+ 		 	   		 =20
+_________________________________________________________________
+Windows Live: Friends get your Flickr=2C Yelp=2C and Digg updates when they=
+ e-mail you.
+http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/so=
+cial-network-basics.aspx?ocid=3DPID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_3:092=
+010=
 
