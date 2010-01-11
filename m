@@ -1,27 +1,28 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NURM6-0001A7-3d for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 21:59:21 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NURK2-0006No-4o
+	id 1NUROz-0001cZ-Ub for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Jan 2010 22:02:21 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NURMr-0007Yc-CS
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 21:57:10 +0100
+	Mon, 11 Jan 2010 22:00:05 +0100
 Received: from chello080108092216.22.11.tuwien.teleweb.at ([80.108.92.216])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jan 2010 21:57:10 +0100
+	Mon, 11 Jan 2010 22:00:05 +0100
 Received: from chris by chello080108092216.22.11.tuwien.teleweb.at with local
 	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jan 2010 21:57:10 +0100
+	Mon, 11 Jan 2010 22:00:05 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Chris Veigl <chris@shifz.org>
-Date: Mon, 11 Jan 2010 20:56:46 +0000 (UTC)
-Message-ID: <loom.20100111T215259-536@post.gmane.org>
-References: <loom.20100109T213305-664@post.gmane.org>	<20100109221158.GA1444@rhein.zuhause.netz>	<loom.20100111T101557-577@post.gmane.org>
-	<20100111094046.GQ17224@jama> <1263219513.3293.6.camel@nvc1511>
-	<4B4B759D.3040609@techsol.ca>
+Date: Mon, 11 Jan 2010 20:57:13 +0000 (UTC)
+Message-ID: <loom.20100111T211613-99@post.gmane.org>
+References: <loom.20100109T213305-664@post.gmane.org>
+	<20100109221158.GA1444@rhein.zuhause.netz>
+	<loom.20100111T101557-577@post.gmane.org>
+	<20100111094046.GQ17224@jama>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: sea.gmane.org
@@ -47,62 +48,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jan 2010 20:59:21 -0000
+X-List-Received-Date: Mon, 11 Jan 2010 21:02:21 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-
-Dallas Foley <dfoley <at> techsol.ca> writes:
-
-> 
-> Jaap de Jong wrote:
-> > Hi Henning,
-> > 
-> > My approach after many unsuccessful attempts:
-> > 
-> > 	- install
-> > 		apt-get install sun-java6-jdk
-> > 	- edit local.conf 
-> > 		ASSUME_PROVIDED += " ecj-initial "
-> > 		ASSUME_PROVIDED += " virtual/java-initial "
-> > 		ASSUME_PROVIDED += " virtual/java-native "
-> > 		ASSUME_PROVIDED += " virtual/javac-native "
-> > 		PREFERRED_PROVIDER_classpath = "classpath"
-> > 		PREFERRED_VERSION_classpath = "0.97.2"
-> > 	- bitbake cacao
+Martin Jansa <martin.jansa <at> gmail.com> writes:
+> > ERROR: function do_compile failed
 > > 
 
-thank you for the hint - i will try this next
-
-> > Could not get jamvm nor classpath 0.98 compiled.
-
-what problems did arise ?
+> git pull.. se my commit yesterday
 
 
-> 
-> Not sure if this is the right answer, but I also could not build ecj-initial 
-> until I changed "-Xmx1024m" to "-Xmx512m" in recipes/ecj/files/ecj.in
-> and I think rebuilding ecj-bootstrap-native and ecj-initial worked for me.
-> 
+I did a git pull, cleared the tmp folder and let 
+bitbake run during the night, but get the same error:
+
+  tmp/staging/i686-linux/usr/bin/java-initial -classpath  antlr.Tool -o \
+    ../tools/generated/gnu/classpath/tools/gjdoc/expr/ \
+    ./gnu/classpath/tools/gjdoc/expr/java-expression.g
+  Unrecognised command line option: -o
 
 
-I suppose this solves the memory error in the "classpath - configure" - task.
-which setup (in terms of PREFERRED_PROVIDER, PREFERRED_VERSION, ASSUME_PROVIDED)
-did you use ? - and: could you build jamvm and classpath successfully ?
+must be something different ...
+seems like jamvm version 1.4.5 does not have the "-o" switch !?
 
-Using the OE-wiki setup, I got problems with the "compile" task (jamvm does not
-recognize option "-o"), which do not relate to the above memory problems.
+I currently use
 
+  PREFERRED_VERSION_jamvm-initial = "1.4.5"
+  PREFERRED_VERSION_classpath-initial = "0.93"
 
+  PREFERRED_VERSION_jamvm-native = "1.5.3"
+  PREFERRED_VERSION_classpath-native = "0.98"
 
+  PREFERRED_VERSION_jamvm = "1.5.2"
+  PREFERRED_VERSION_classpath = "0.98"
+
+  PREFERRED_VERSION_libecj-bootstrap = "3.4"
+
+as recommended in the openembedded wiki ...
 regards,
 chris.
-
-
-
-
-
-
 
 
 
