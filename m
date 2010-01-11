@@ -1,38 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.atmel.fr ([81.80.104.162] helo=atmel-es2.atmel.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NULJX-0003FK-Ng for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 15:32:18 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NULHS-0003we-Nr
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 15:30:07 +0100
-Received: from mbl-82-49-5.dsl.net.pk ([203.82.49.5])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jan 2010 15:30:06 +0100
-Received: from salehusman by mbl-82-49-5.dsl.net.pk with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jan 2010 15:30:06 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Saleh Usman <salehusman@hotmail.com>
-Date: Mon, 11 Jan 2010 14:25:06 +0000 (UTC)
-Message-ID: <loom.20100111T152023-889@post.gmane.org>
-References: <BAY127-W8334C401E093FAC091CDDD86D0@phx.gbl>
-	<4B4B3323.2090506@mlbassoc.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 203.82.49.5 (Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.1.3) Gecko/20070417 Fedora/2.0.0.3-4.fc7 Firefox/2.0.0.3)
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <nicolas.ferre@atmel.com>)
+	id 1NULQn-0003CM-6l; Mon, 11 Jan 2010 15:39:48 +0100
+Received: from fwat.rfo.atmel.com (gateway [192.168.1.1])
+	by atmel-es2.atmel.fr (8.11.7p1+Sun/8.11.6) with SMTP id o0BEa8F08320; 
+	Mon, 11 Jan 2010 15:36:59 +0100 (MET)
+Received: from meyreuil ([10.159.254.132]) by fwat;
+	Mon, 11 Jan 2010 15:19:38 +0100 (MET)
+Received: from localhost.localdomain ([10.159.245.201])
+	by meyreuil.atmel.fr (8.11.7p1+Sun/8.11.7) with ESMTP id o0BEZag24665; 
+	Mon, 11 Jan 2010 15:35:36 +0100 (MET)
+From: Nicolas Ferre <nicolas.ferre@atmel.com>
+To: angstrom-distro-devel@linuxtogo.org,
+	openembedded-devel@lists.openembedded.org
+Date: Mon, 11 Jan 2010 16:45:31 +0100
+Message-Id: <1263224731-2691-1-git-send-email-nicolas.ferre@atmel.com>
+X-Mailer: git-send-email 1.5.6.5
+X-SA-Exim-Connect-IP: 81.80.104.162
+X-SA-Exim-Mail-From: nicolas.ferre@atmel.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: output of helloworld
+Subject: [PATCH] sane-feed.inc: adding some ATMEL boards
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,41 +34,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jan 2010 14:32:18 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 11 Jan 2010 14:39:48 -0000
 
-Gary Thomas <gary <at> mlbassoc.com> writes:
+Add some armv5te entries for ATMEL -EK boards.
 
-> 
-> On 01/11/2010 07:01 AM, saleh usman wrote:
-> >
-> > Hi
-> > I've run bitbake helloworld but I am unable to find /tmp/deploy folder where
-I can find output of
-> helloworld.Where will be the output of this build? Terminal window is looking
-like as
-> >
-> > [saleh <at> localhost ~]$ bitbake helloworld
-> > NOTE: Handling BitBake files: - (7634/7634) [100 %]
-> > NOTE: Parsing finished. 7045 cached, 303 parsed, 286 skipped, 0 masked.
-> > NOTE: Resolving any missing task queue dependencies
-> > NOTE: Preparing runqueue
-> > NOTE: Executing runqueue
-> > NOTE: Tasks Summary: Attempted 461 tasks of which 461 didn't need to be
-rerun and 0 failed.
-> 
-> It's most likely not "/tmp" - look in your local.conf for TMPDIR.
-> Mine's set like this:
->    TMPDIR = "${OEROOT}/build/tmp"
-> so my deploy directory is at
->    ${OEROOT}/build/tmp/deploy
-> 
+Signed-off-by: Nicolas Ferre <nicolas.ferre@atmel.com>
+---
+ conf/distro/include/sane-feed.inc |    6 ++++++
+ 1 files changed, 6 insertions(+), 0 deletions(-)
 
-/tmp directory is there i.e. in ${OEROOT}/build but It doesn't contain deploy
-directory in it.There are cache,staging,stamps,user and work directories in tmp
-but it doesn't contain deploy directory.
-
+diff --git a/conf/distro/include/sane-feed.inc b/conf/distro/include/sane-feed.inc
+index 5bc19a1..873972f 100644
+--- a/conf/distro/include/sane-feed.inc
++++ b/conf/distro/include/sane-feed.inc
+@@ -41,7 +41,13 @@ FEED_ARCH_a780 		= "armv5te"
+ FEED_ARCH_akita 	= "armv5te"
+ FEED_ARCH_asus620 	= "armv5te"
+ FEED_ARCH_asus730 	= "armv5te"
++FEED_ARCH_at91sam9260ek = "armv5te"
++FEED_ARCH_at91sam9261ek = "armv5te"
+ FEED_ARCH_at91sam9263ek = "armv5te"
++FEED_ARCH_at91sam9rlek 	= "armv5te"
++FEED_ARCH_at91sam9g10ek = "armv5te"
++FEED_ARCH_at91sam9g20ek = "armv5te"
++FEED_ARCH_at91sam9g45ekes = "armv5te"
+ FEED_ARCH_aximx50 	= "armv5te"
+ FEED_ARCH_aximx50v 	= "armv5te"
+ FEED_ARCH_c7x0 		= "armv5te"
+-- 
+1.5.6.5
 
 
 
