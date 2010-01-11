@@ -1,38 +1,40 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail-pz0-f185.google.com ([209.85.222.185])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NUSeS-0005I0-F5
+	(envelope-from <graham.gower@gmail.com>) id 1NUSxd-0005V1-4E
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 23:22:23 +0100
-Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
-	([174.113.191.234] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NUScL-0002qK-Vg for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 17:20:10 -0500
-Date: Mon, 11 Jan 2010 17:19:23 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <6ec4247d1001111337x5a5572a2l74d23bf1bfa03a68@mail.gmail.com>
-Message-ID: <alpine.LFD.2.00.1001111718250.2601@localhost>
+	Mon, 11 Jan 2010 23:42:12 +0100
+Received: by pzk15 with SMTP id 15so13578315pzk.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Jan 2010 14:39:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=6N9WmG0/5OKOLzB4Zx8/57tEfrOwqJtRwGgIMdY4OQA=;
+	b=IcyO02fYOmh+lHXdg24eOoU8hJu5MT/C7MRXSTEv1j4EOtBNIf2fXfuDwCu6rxLnql
+	wg4l/oem6Gwz6vn6JVFq5QWPyPx/SpiFGWtQHG1DEspLt/qcwGnLumxEeBpyMeJrz7gi
+	H7qy9/6tfXKysg7w8U5QZ34dEW/Uu85LT2QC4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=C9k18RcPIqGWTZnR2DAnzvosQzSPd22Dwb96CIrdAQbsrvvOZ3Iu0yhTUfC7AeFx55
+	PssK7w2KCdOybDJq/iVjVLzHBnMoUbyavlAoHC8Fdcz86/hcPdjxLx4+ZgOJ04oioIMR
+	eD45UOUyQnnoTYXgXcz2Y02CVzF28fQt8qa8A=
+MIME-Version: 1.0
+Received: by 10.142.56.6 with SMTP id e6mr4812539wfa.158.1263249599608; Mon, 
+	11 Jan 2010 14:39:59 -0800 (PST)
+In-Reply-To: <alpine.LFD.2.00.1001111718250.2601@localhost>
 References: <alpine.LFD.2.00.1001110722550.22930@localhost>
 	<4B4B2B0E.8030501@balister.org>
 	<alpine.LFD.2.00.1001110856460.28813@localhost>
 	<4B4B3301.2090808@balister.org>
 	<6ec4247d1001111337x5a5572a2l74d23bf1bfa03a68@mail.gmail.com>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+	<alpine.LFD.2.00.1001111718250.2601@localhost>
+Date: Tue, 12 Jan 2010 09:09:59 +1030
+Message-ID: <6ec4247d1001111439m43a8147bk8a614a253563999c@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.222.185
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: bitbake and e2fsprogs-1.41.9?
@@ -49,32 +51,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jan 2010 22:22:24 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Mon, 11 Jan 2010 22:42:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, 12 Jan 2010, Graham Gower wrote:
+I'll send a patch later today.
 
-> Yes, there is a build issue with e2fsprogs 1.41.5. I experienced it
-> on a slackware64-13.0 host. It is not a Fedora issue, it is a bug in
-> the Makefile. If you look in the Makefile you will see that the
-> e2fsck dependency resolves to something containing "-lpthread".
->
-> Why this doesn't cause issues for anyone else is beyond me. I can't
-> even do a native, out of oe, build of e2fsprogs 1.41.5.
-
-  thank you immensely for clarifying that, now i can stop fighting
-with it.  is someone already working on upgrading e2fsprogs to 1.41.9?
-
-rday
---
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+-Graham
 
 
