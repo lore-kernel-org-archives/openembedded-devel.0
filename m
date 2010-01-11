@@ -1,28 +1,25 @@
-Received: from caiajhbdccac.dreamhost.com ([208.97.132.202]
-	helo=homiemail-a11.g.dreamhost.com)
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sebastian@SSpaeth.de>) id 1NUKMm-0007g6-9M
+	(envelope-from <philip@balister.org>) id 1NUKaf-0003Oj-FC
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 14:31:35 +0100
-Received: from [82.130.121.62] (mtec-hg-docking-2-dhcp-062.ethz.ch
-	[82.130.121.62])
-	by homiemail-a11.g.dreamhost.com (Postfix) with ESMTPA id 0D22B194058
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jan 2010 05:29:23 -0800 (PST)
-Message-ID: <4B4B27B2.7000607@SSpaeth.de>
-Date: Mon, 11 Jan 2010 14:29:22 +0100
-From: Sebastian Spaeth <Sebastian@SSpaeth.de>
+	Mon, 11 Jan 2010 14:45:56 +0100
+Received: (qmail 27452 invoked by uid 1003); 11 Jan 2010 13:43:44 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 11 Jan 2010 13:43:44 -0000
+Message-ID: <4B4B2B0E.8030501@balister.org>
+Date: Mon, 11 Jan 2010 08:43:42 -0500
+From: Philip Balister <philip@balister.org>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.8pre) Gecko/20100105 Shredder/3.0.1pre
+	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <hif5ir$ccj$1@ger.gmane.org>
-In-Reply-To: <hif5ir$ccj$1@ger.gmane.org>
-X-SA-Exim-Connect-IP: 208.97.132.202
-X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
+References: <alpine.LFD.2.00.1001110722550.22930@localhost>
+In-Reply-To: <alpine.LFD.2.00.1001110722550.22930@localhost>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: unset foo && bar in .desktop files doesn't work with all launchers
+Subject: Re: bitbake and e2fsprogs-1.41.9?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,23 +33,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jan 2010 13:31:35 -0000
+X-List-Received-Date: Mon, 11 Jan 2010 13:45:56 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 01/11/10 13:29, Koen Kooi wrote:
-> I tried to launch navit from inside angstrom-gnome-image and it
-> complained that it couldn't find the file 'unset', which isn't suprising
-> since it's a shell builtin for (b)ash.
+On 01/11/2010 07:27 AM, Robert P. J. Day wrote:
+>
+>    apologies as i accidentally deleted the emails i was going to
+> respond to, the thread is here:
+>
+> http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-January/016074.html
+>
+>    and here:
+>
+> http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-January/016097.html
+>
+> graham gower suggests that an upgrade to e2fsprogs might be the
+> solution.  i might have time later this week to try that upgrade
+> unless someone else gets to it first and checks it in to the dev
+> branch.
+>
+>    what would be useful, though, is to get some confirmation that there
+> really *was* a build error in the current version.  otherwise, i'll be
+> back where i started.
 
-I removed this from the .desktop file. We'll think about whether to use 
-a shell script wrapper.
+It builds on my F11 machine.
 
-> Could the navit maintainers please change .desktop hacking to a shell
+Philip
 
-I don't find "navit" in MAINTAINERS but it would be nice to have a navit 
-maintainer, actually :).
 
-spaetz
+>
+> rday
+> --
+>
+> ========================================================================
+> Robert P. J. Day                               Waterloo, Ontario, CANADA
+>
+>              Linux Consulting, Training and Kernel Pedantry.
+>
+> Web page:                                          http://crashcourse.ca
+> Twitter:                                       http://twitter.com/rpjday
+> ========================================================================
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
