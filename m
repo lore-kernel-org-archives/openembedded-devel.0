@@ -1,39 +1,38 @@
-Received: from mail-pz0-f185.google.com ([209.85.222.185])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1NU8V7-0003FW-2I
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NUGaV-0000wu-WE for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Jan 2010 10:29:33 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NUGYR-0004NQ-DI
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 01:51:24 +0100
-Received: by pzk15 with SMTP id 15so12835206pzk.3
+	Mon, 11 Jan 2010 10:27:19 +0100
+Received: from chello080108092216.22.11.tuwien.teleweb.at ([80.108.92.216])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Jan 2010 10:27:19 +0100
+Received: from chris by chello080108092216.22.11.tuwien.teleweb.at with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Jan 2010 16:49:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=qWx20Or52osiPx3Dx18GpQTVGASNAkMvF3/g27h+MaI=;
-	b=ZcFS1t02dcMClsjU7rwlXsy8W3UqI5UTAy31LbFrbqvKVuFCCRpxvDlhg3jAwhHNNd
-	WbX+SowsOVxsFI04xafiLr2LWklPzkGJQGeQ6ZmMnLuXUg4z9n5eihf0CQWsLfpYMJa2
-	SzE/b02i0D8m30vTGBGJu8on4DqamwkR1vQ0Q=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=wMb2yyxg+Brt3PJwG9Z3TF8Y7Fsznq3pS6f6/uGUNTgfst54NYdGq9IEnJClEMJ2nU
-	wq6OkAyxHaupNP4nc1i2pDZ90DZrTrLE9Dylu2c/thFUlQTCTtY6KyEU6ImFtPkKVMk1
-	VhArETyd+PBW3HbvCB+eKzEFZaPliHvzMp1lo=
-MIME-Version: 1.0
-Received: by 10.142.74.8 with SMTP id w8mr16076244wfa.192.1263170951998; Sun, 
-	10 Jan 2010 16:49:11 -0800 (PST)
-In-Reply-To: <19c1b8a91001092315o183ad3f5t1870ba1e0bbdbf9c@mail.gmail.com>
-References: <alpine.LFD.2.00.1001091915010.6810@localhost>
-	<19c1b8a91001092315o183ad3f5t1870ba1e0bbdbf9c@mail.gmail.com>
-Date: Mon, 11 Jan 2010 11:19:11 +1030
-Message-ID: <6ec4247d1001101649j22ca897h5b28be68d038ce7f@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+	Mon, 11 Jan 2010 10:27:19 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.222.185
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+From: Chris Veigl <chris@shifz.org>
+Date: Mon, 11 Jan 2010 09:27:00 +0000 (UTC)
+Message-ID: <loom.20100111T101557-577@post.gmane.org>
+References: <loom.20100109T213305-664@post.gmane.org>
+	<20100109221158.GA1444@rhein.zuhause.netz>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 80.108.92.216 (Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.0.17) Gecko/2010010604 Ubuntu/9.04 (jaunty) Firefox/3.0.17)
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: still unable to "bitbake e2fsprogs"
+Subject: Re: building classpath / ecj-initial fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,12 +46,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jan 2010 00:51:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 11 Jan 2010 09:29:33 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-This is an upstream bug in the e2fsprogs makefiles. It looks fixed the
-most recent version, 1.41.9.
 
--Graham
+Dear Henning,
+
+thank you for the fast response,
+
+> jamvm 1.5 needs classpath-0.98, we don't use classpath-0.98  yet as default
+> because there were some issues with cacao. So add
+> PREFFERED_VERSION_classpath = "0.98" 
+> to your local.conf and it should work.
+
+after my first rebuild i did not notice any effect,
+then i relalized the type in "PREFERRED_VERSION_classpath" ;-)
+
+after that changed, i still got the same error,
+because the problem happens at the config of classpath_native... 
+
+i then deleted my tmp folder and gave it another try, using
+the settings recommended at http://wiki.openembedded.net/index.php/Java :
+
+PREFERRED_VERSION_jamvm-initial = "1.4.5"
+PREFERRED_VERSION_classpath-initial = "0.93"
+
+PREFERRED_VERSION_jamvm-native = "1.5.3"
+PREFERRED_VERSION_classpath-native = "0.98"
+
+PREFERRED_VERSION_jamvm = "1.5.2"
+PREFERRED_VERSION_classpath = "0.98"
+
+PREFERRED_VERSION_libecj-bootstrap = "3.4"
+
+
+Unfortunately, i ran into a different error using this configuration:
+
+task 1610 of 7888 (ID: 3738,
+/media/disk/overo-oe/org.openembedded.dev/recipes/classpath/classpath-
+native_0.98.bb,
+do_compile)
+ERROR: function do_compile failed
+
+/media/disk/overo-oe/tmp/staging/i686-linux/usr/bin/java-initial -classpath
+antlr.Tool -o ../tools/generated/gnu/classpath/tools/gjdoc/expr/ \
+| 	  ./gnu/classpath/tools/gjdoc/expr/java-expression.g
+| Unrecognised command line option: -o
+
+
+any ideas what is going wrong now ?
+regards,
+chris
+
 
 
