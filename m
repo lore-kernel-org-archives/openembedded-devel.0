@@ -1,36 +1,28 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from caiajhbdccac.dreamhost.com ([208.97.132.202]
+	helo=homiemail-a11.g.dreamhost.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NUJQo-00076h-Os for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 13:31:41 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NUJOk-0003lW-LY
+	(envelope-from <Sebastian@SSpaeth.de>) id 1NUKMm-0007g6-9M
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 13:29:30 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jan 2010 13:29:30 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Mon, 11 Jan 2010 14:31:35 +0100
+Received: from [82.130.121.62] (mtec-hg-docking-2-dhcp-062.ethz.ch
+	[82.130.121.62])
+	by homiemail-a11.g.dreamhost.com (Postfix) with ESMTPA id 0D22B194058
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jan 2010 13:29:30 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 11 Jan 2010 05:29:23 -0800 (PST)
+Message-ID: <4B4B27B2.7000607@SSpaeth.de>
+Date: Mon, 11 Jan 2010 14:29:22 +0100
+From: Sebastian Spaeth <Sebastian@SSpaeth.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.8pre) Gecko/20100105 Shredder/3.0.1pre
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 11 Jan 2010 13:29:16 +0100
-Message-ID: <hif5ir$ccj$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100104 Shredder/3.0.1pre
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <hif5ir$ccj$1@ger.gmane.org>
+In-Reply-To: <hif5ir$ccj$1@ger.gmane.org>
+X-SA-Exim-Connect-IP: 208.97.132.202
+X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: unset foo && bar in .desktop files doesn't work with all launchers
+Subject: Re: unset foo && bar in .desktop files doesn't work with all launchers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,33 +36,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jan 2010 12:31:42 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 11 Jan 2010 13:31:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On 01/11/10 13:29, Koen Kooi wrote:
+> I tried to launch navit from inside angstrom-gnome-image and it
+> complained that it couldn't find the file 'unset', which isn't suprising
+> since it's a shell builtin for (b)ash.
 
-Hi,
+I removed this from the .desktop file. We'll think about whether to use 
+a shell script wrapper.
 
-I tried to launch navit from inside angstrom-gnome-image and it
-complained that it couldn't find the file 'unset', which isn't suprising
-since it's a shell builtin for (b)ash.
+> Could the navit maintainers please change .desktop hacking to a shell
 
-Could the navit maintainers please change .desktop hacking to a shell
-wrapper script?
+I don't find "navit" in MAINTAINERS but it would be nice to have a navit 
+maintainer, actually :).
 
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLSxmcMkyGM64RGpERAmhfAJ9vE5IvTo1ivbZMOEwX8ZRJxhzccgCgsakV
-YmqwtHPIutjtaztyrxdJ2UM=
-=lmD5
------END PGP SIGNATURE-----
-
+spaetz
 
 
