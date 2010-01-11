@@ -1,31 +1,38 @@
-Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jaap.dejong@nedap.com>) id 1NUL8M-0005Jr-IS
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NULJX-0003FK-Ng for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Jan 2010 15:32:18 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NULHS-0003we-Nr
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 15:20:45 +0100
-Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Mon, 11 Jan 2010 15:18:34 +0100
-X-TM-IMSS-Message-ID: <9929c1550001b77a@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.0) id 9929c1550001b77a for
-	<jaap.dejong@nedap.com>; Mon, 11 Jan 2010 15:18:30 +0100
-From: Jaap de Jong <jaap.dejong@nedap.com>
+	Mon, 11 Jan 2010 15:30:07 +0100
+Received: from mbl-82-49-5.dsl.net.pk ([203.82.49.5])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Jan 2010 15:30:06 +0100
+Received: from salehusman by mbl-82-49-5.dsl.net.pk with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Jan 2010 15:30:06 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100111094046.GQ17224@jama>
-References: <loom.20100109T213305-664@post.gmane.org>
-	<20100109221158.GA1444@rhein.zuhause.netz>
-	<loom.20100111T101557-577@post.gmane.org> <20100111094046.GQ17224@jama>
-Date: Mon, 11 Jan 2010 15:18:33 +0100
-Message-ID: <1263219513.3293.6.camel@nvc1511>
+From: Saleh Usman <salehusman@hotmail.com>
+Date: Mon, 11 Jan 2010 14:25:06 +0000 (UTC)
+Message-ID: <loom.20100111T152023-889@post.gmane.org>
+References: <BAY127-W8334C401E093FAC091CDDD86D0@phx.gbl>
+	<4B4B3323.2090506@mlbassoc.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 11 Jan 2010 14:18:34.0063 (UTC)
-	FILETIME=[F555B5F0:01CA92C8]
-X-SA-Exim-Connect-IP: 213.160.213.92
-X-SA-Exim-Mail-From: jaap.dejong@nedap.com
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 203.82.49.5 (Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1.3) Gecko/20070417 Fedora/2.0.0.3-4.fc7 Firefox/2.0.0.3)
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: building classpath / ecj-initial fails
+Subject: Re: output of helloworld
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,85 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jan 2010 14:20:45 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 11 Jan 2010 14:32:18 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Hi Henning,
+Gary Thomas <gary <at> mlbassoc.com> writes:
 
-My approach after many unsuccessful attempts:
-
-	- install
-		apt-get install sun-java6-jdk
-	- edit local.conf 
-		ASSUME_PROVIDED += " ecj-initial "
-		ASSUME_PROVIDED += " virtual/java-initial "
-		ASSUME_PROVIDED += " virtual/java-native "
-		ASSUME_PROVIDED += " virtual/javac-native "
-		PREFERRED_PROVIDER_classpath = "classpath"
-		PREFERRED_VERSION_classpath = "0.97.2"
-	- bitbake cacao
-
-Could not get jamvm nor classpath 0.98 compiled.
-
-Regards,
-Jaap
-
-
-On Mon, 2010-01-11 at 10:40 +0100, Martin Jansa wrote:
-> On Mon, Jan 11, 2010 at 09:27:00AM +0000, Chris Veigl wrote:
-> > 
-> > Dear Henning,
-> > 
-> > thank you for the fast response,
-> > 
-> > > jamvm 1.5 needs classpath-0.98, we don't use classpath-0.98  yet as default
-> > > because there were some issues with cacao. So add
-> > > PREFFERED_VERSION_classpath = "0.98" 
-> > > to your local.conf and it should work.
-> > 
-> > after my first rebuild i did not notice any effect,
-> > then i relalized the type in "PREFERRED_VERSION_classpath" ;-)
-> > 
-> > after that changed, i still got the same error,
-> > because the problem happens at the config of classpath_native... 
-> > 
-> > i then deleted my tmp folder and gave it another try, using
-> > the settings recommended at http://wiki.openembedded.net/index.php/Java :
-> > 
-> > PREFERRED_VERSION_jamvm-initial = "1.4.5"
-> > PREFERRED_VERSION_classpath-initial = "0.93"
-> > 
-> > PREFERRED_VERSION_jamvm-native = "1.5.3"
-> > PREFERRED_VERSION_classpath-native = "0.98"
-> > 
-> > PREFERRED_VERSION_jamvm = "1.5.2"
-> > PREFERRED_VERSION_classpath = "0.98"
-> > 
-> > PREFERRED_VERSION_libecj-bootstrap = "3.4"
-> > 
-> > 
-> > Unfortunately, i ran into a different error using this configuration:
-> > 
-> > task 1610 of 7888 (ID: 3738,
-> > /media/disk/overo-oe/org.openembedded.dev/recipes/classpath/classpath-
-> > native_0.98.bb,
-> > do_compile)
-> > ERROR: function do_compile failed
-> > 
-> > /media/disk/overo-oe/tmp/staging/i686-linux/usr/bin/java-initial -classpath
-> > antlr.Tool -o ../tools/generated/gnu/classpath/tools/gjdoc/expr/ \
-> > | 	  ./gnu/classpath/tools/gjdoc/expr/java-expression.g
-> > | Unrecognised command line option: -o
 > 
-> git pull.. se my commit yesterday
+> On 01/11/2010 07:01 AM, saleh usman wrote:
+> >
+> > Hi
+> > I've run bitbake helloworld but I am unable to find /tmp/deploy folder where
+I can find output of
+> helloworld.Where will be the output of this build? Terminal window is looking
+like as
+> >
+> > [saleh <at> localhost ~]$ bitbake helloworld
+> > NOTE: Handling BitBake files: - (7634/7634) [100 %]
+> > NOTE: Parsing finished. 7045 cached, 303 parsed, 286 skipped, 0 masked.
+> > NOTE: Resolving any missing task queue dependencies
+> > NOTE: Preparing runqueue
+> > NOTE: Executing runqueue
+> > NOTE: Tasks Summary: Attempted 461 tasks of which 461 didn't need to be
+rerun and 0 failed.
 > 
-> > any ideas what is going wrong now ?
-> > regards,
-> > chris
+> It's most likely not "/tmp" - look in your local.conf for TMPDIR.
+> Mine's set like this:
+>    TMPDIR = "${OEROOT}/build/tmp"
+> so my deploy directory is at
+>    ${OEROOT}/build/tmp/deploy
 > 
-> Regards,
-> 
+
+/tmp directory is there i.e. in ${OEROOT}/build but It doesn't contain deploy
+directory in it.There are cache,staging,stamps,user and work directories in tmp
+but it doesn't contain deploy directory.
 
 
 
