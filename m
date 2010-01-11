@@ -1,32 +1,27 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from mail.atmel.fr ([81.80.104.162] helo=atmel-es2.atmel.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NUIsA-0005Hq-7W
+	(envelope-from <nicolas.ferre@atmel.com>) id 1NUJDf-0003nX-FZ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 12:55:53 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NUIq6-0002hL-IP
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 11:53:42 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1NUIq6-0003bQ-Bq
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 11:53:42 +0000
-From: Phil Blundell <philb@gnu.org>
+	Mon, 11 Jan 2010 13:18:06 +0100
+Received: from fwat.rfo.atmel.com (gateway [192.168.1.1])
+	by atmel-es2.atmel.fr (8.11.7p1+Sun/8.11.6) with SMTP id o0BBwWF16088; 
+	Mon, 11 Jan 2010 12:59:07 +0100 (MET)
+Received: from meyreuil ([10.159.254.132]) by fwat;
+	Mon, 11 Jan 2010 12:40:53 +0100 (MET)
+Received: from localhost.localdomain ([10.159.245.201])
+	by meyreuil.atmel.fr (8.11.7p1+Sun/8.11.7) with ESMTP id o0BBuog11682; 
+	Mon, 11 Jan 2010 12:56:50 +0100 (MET)
+From: Nicolas Ferre <nicolas.ferre@atmel.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1263143195.3710.30.camel@utx.utx.cz>
-References: <1263143195.3710.30.camel@utx.utx.cz>
-Date: Mon, 11 Jan 2010 11:53:38 +0000
-Message-ID: <1263210818.3675.296.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+Date: Mon, 11 Jan 2010 14:06:44 +0100
+Message-Id: <1263215204-1497-1-git-send-email-nicolas.ferre@atmel.com>
+X-Mailer: git-send-email 1.5.6.5
+X-SA-Exim-Connect-IP: 81.80.104.162
+X-SA-Exim-Mail-From: nicolas.ferre@atmel.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 1/2] introduce global control on shared/static libraries
+Cc: patrice.vilchez@atmel.com
+Subject: [PATCH] Update of ATMEL board configuration files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,31 +35,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jan 2010 11:55:53 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 11 Jan 2010 12:18:06 -0000
 
-On Sun, 2010-01-10 at 18:06 +0100, Stanislav Brabec wrote:
-> This patch adds support for global enabling and disabling of shared or
-> static libraries in autoconf based packages.
-> 
-> All required fixes in packages that I was able to test are already in
-> place with exception of apmd (I plan to commit it soon as well).
+Correction of at91sam9260ek and at91sam9g20ek configuration files:
+Xserver is not needed. At91sam9rlek configuration file: no usbhost.
 
-I'm not very keen on the names of these configuration variables or the
-global exports of them.  I understand your desire to leverage the
-existing support in autoconf for taking settings from the environment,
-but I am not sure that it is wholesome to pollute the global environment
-for all tasks, including non-autoconf-using ones, with this stuff.
+Adding of two new boards: at91sam9g10ek and at91sam9g45ekes. "es" stands
+for Engineering Sample and correspond to the marking that is on the board.
 
-I would suggest something more along the lines of a
-BITBAKE_LIBRARY_STYLE variable (not exported to the environment), which
-you can set to "shared", "static" or "both", and then some code in
-autotools_do_configure() to translate this into the appropriate flags or
-environment settings for configure.
+Signed-off-by: Nicolas Ferre <nicolas.ferre@atmel.com>
+---
+ conf/machine/at91sam9260ek.conf   |    1 -
+ conf/machine/at91sam9g10ek.conf   |   23 +++++++++++++++++++++++
+ conf/machine/at91sam9g20ek.conf   |    1 -
+ conf/machine/at91sam9g45ekes.conf |   23 +++++++++++++++++++++++
+ conf/machine/at91sam9rlek.conf    |    2 +-
+ 5 files changed, 47 insertions(+), 3 deletions(-)
+ create mode 100644 conf/machine/at91sam9g10ek.conf
+ create mode 100644 conf/machine/at91sam9g45ekes.conf
 
-p.
-
+diff --git a/conf/machine/at91sam9260ek.conf b/conf/machine/at91sam9260ek.conf
+index 9a7ca9a..3fdfce4 100644
+--- a/conf/machine/at91sam9260ek.conf
++++ b/conf/machine/at91sam9260ek.conf
+@@ -7,7 +7,6 @@ TARGET_ARCH = "arm"
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux"
+ PREFERRED_VERSION_linux = "2.6.28"
+-PREFERRED_PROVIDER_xserver = "xserver-kdrive"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ UBOOT_MACHINE = "at91sam9260ek_config"
+diff --git a/conf/machine/at91sam9g10ek.conf b/conf/machine/at91sam9g10ek.conf
+new file mode 100644
+index 0000000..9f41fd9
+--- /dev/null
++++ b/conf/machine/at91sam9g10ek.conf
+@@ -0,0 +1,23 @@
++#@TYPE: Machine
++#@Name: Atmel AT91SAM9G10EK Development Platform
++#@DESCRIPTION: Machine configuration for the at91sam9g10ek development board with a at91sam9g10 processor
++
++TARGET_ARCH = "arm"
++#PACKAGE_EXTRA_ARCHS = "armv4t armv5te"
++
++PREFERRED_PROVIDER_virtual/kernel = "linux"
++PREFERRED_PROVIDER_xserver = "xserver-kdrive"
++
++KERNEL_IMAGETYPE = "uImage"
++
++#don't try to access tty1
++USE_VT = "0"
++
++MACHINE_FEATURES = "kernel26 alsa ext2 usbhost usbgadget screen touchscreen"
++
++# used by sysvinit_2
++SERIAL_CONSOLE = "115200 ttyS0"
++IMAGE_FSTYPES ?= "jffs2"
++EXTRA_IMAGECMD_jffs2 = "--pad --little-endian --eraseblock=0x20000 -n"
++
++require conf/machine/include/tune-arm926ejs.inc
+diff --git a/conf/machine/at91sam9g20ek.conf b/conf/machine/at91sam9g20ek.conf
+index 7dc6ba0..59c5a42 100644
+--- a/conf/machine/at91sam9g20ek.conf
++++ b/conf/machine/at91sam9g20ek.conf
+@@ -6,7 +6,6 @@ TARGET_ARCH = "arm"
+ 
+ PREFERRED_PROVIDER_virtual/kernel = "linux"
+ PREFERRED_VERSION_linux = "2.6.28"
+-PREFERRED_PROVIDER_xserver = "xserver-kdrive"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ UBOOT_MACHINE = "at91sam9g20ek_config"
+diff --git a/conf/machine/at91sam9g45ekes.conf b/conf/machine/at91sam9g45ekes.conf
+new file mode 100644
+index 0000000..2d962ef
+--- /dev/null
++++ b/conf/machine/at91sam9g45ekes.conf
+@@ -0,0 +1,23 @@
++#@TYPE: Machine
++#@Name: Atmel AT91SAM9G45EKES Development Platform
++#@DESCRIPTION: Machine configuration for the at91sam9g45ekes development board with a at91sam9g45-es processor
++
++TARGET_ARCH = "arm"
++#PACKAGE_EXTRA_ARCHS = "armv4t armv5te"
++
++PREFERRED_PROVIDER_virtual/kernel = "linux"
++PREFERRED_PROVIDER_xserver = "xserver-kdrive"
++
++KERNEL_IMAGETYPE = "uImage"
++
++#don't try to access tty1
++USE_VT = "0"
++
++MACHINE_FEATURES = "kernel26 alsa ext2 usbhost usbgadget screen touchscreen"
++
++# used by sysvinit_2
++SERIAL_CONSOLE = "115200 ttyS0"
++IMAGE_FSTYPES ?= "jffs2"
++EXTRA_IMAGECMD_jffs2 = "--pad --little-endian --eraseblock=0x20000 -n"
++
++require conf/machine/include/tune-arm926ejs.inc
+diff --git a/conf/machine/at91sam9rlek.conf b/conf/machine/at91sam9rlek.conf
+index f7a78dc..de26926 100644
+--- a/conf/machine/at91sam9rlek.conf
++++ b/conf/machine/at91sam9rlek.conf
+@@ -17,7 +17,7 @@ PREFERRED_VERSION_at91bootstrap = "2.10"
+ #don't try to access tty1
+ USE_VT = "0"
+ 
+-MACHINE_FEATURES = "kernel26 alsa ext2 usbhost usbgadget screen touchscreen"
++MACHINE_FEATURES = "kernel26 alsa ext2 usbgadget screen touchscreen"
+ EXTRA_IMAGEDEPENDS += "u-boot"
+ #EXTRA_IMAGEDEPENDS += "at91bootstrap"
+ 
+-- 
+1.5.6.5
 
 
 
