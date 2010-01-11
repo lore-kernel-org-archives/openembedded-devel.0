@@ -1,37 +1,36 @@
-Received: from mail-yx0-f175.google.com ([209.85.210.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NUR11-0006fh-2k
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NUR8J-0007vt-3x for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Jan 2010 21:45:06 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NUR6E-0008C1-8h
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 21:37:34 +0100
-Received: by yxe5 with SMTP id 5so16438483yxe.24
+	Mon, 11 Jan 2010 21:42:54 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Jan 2010 21:42:54 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jan 2010 12:35:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=Xyx7mXt/L9RzdnAmIKVWMT/QQ1rp+KD3vvS+BNv1Xds=;
-	b=JxP5Ku2E+psqDb24eLq24GYdOolzPiMfIlqzmJsVc7QiT2th+e2fEWGzmc+qc+Yeil
-	nSnHF1EaUhfs6+KuNgwv82/vCjhqekjHhGVdeSInahlOoXRpU/sqQSF/A98CZ+CrBLyy
-	+ofixx9uDuGEcUJ8CPoUOK4q2A3T9pE+uUx9A=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Jc51p437ffDuB0LO7vqH4GirF99A9CWG0ENoT87pomB4W8CL6VCPb5F/a//PYGjvmJ
-	GCnSl9HD0hPnGvUsVmB2oHssubWXb6WI5VO9r7VlAilp0/pbU+jTA6tBvJ+PLgp81aCn
-	IEzDivcfkm0WeQFzEGckNBwsofFVmJPYtqe3c=
-MIME-Version: 1.0
-Received: by 10.101.138.5 with SMTP id q5mr7583824ann.158.1263242121653; Mon, 
-	11 Jan 2010 12:35:21 -0800 (PST)
-In-Reply-To: <1263236290.22868.33.camel@andromeda>
+	Mon, 11 Jan 2010 21:42:54 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 11 Jan 2010 21:42:23 +0100
+Message-ID: <hig2fe$ui2$1@ger.gmane.org>
 References: <18e217241001110959k4d346f05j7e00c36dfd18021d@mail.gmail.com>
 	<1263236290.22868.33.camel@andromeda>
-Date: Mon, 11 Jan 2010 21:35:21 +0100
-Message-ID: <ac9c93b11001111235t5eac350csee3fe9b4621d02b4@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100104 Shredder/3.0.1pre
+In-Reply-To: <1263236290.22868.33.camel@andromeda>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: dependencies between packages
@@ -48,63 +47,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jan 2010 20:37:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 11 Jan 2010 20:45:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/1/11 Michael 'Mickey' Lauer <mickey@vanille-media.de>:
-> Am Montag, den 11.01.2010, 09:59 -0800 schrieb C Michael Sundius:
->> Some of our developers have been running into this problem and I'm wonde=
-ring
->> how others deal with it.
->>
->> It seems if we have a recipe, (A) that depends upon header files staged =
-by
->> another recipe (B) then:
->>
->> 1) if the source for recipe (B) is modified and recompiled with:
->>
->> =A0 =A0 bitbake -f -c compile B
->> =A0 =A0 bitbake B,
->>
->> I would expect that when recipe A is run:
->>
->> =A0 =A0bitbake A
->>
->> It too would be recompiled, however that does not seem to be the case. I=
-n
->> fact even if recipe B is cleaned up:
->>
->> =A0 =A0 bitbake -c clean B
->>
->> and then we run recipe A
->>
->> =A0 =A0 bitbake A
->>
->> only recipe B is run and recipe A is NOT rerun! the dependency is satisf=
-ied
->> by rerunning recipe B and then bitbake stops..
->>
->> is this expected behaviour? Is there away to force rerunning of recipes =
-that
->> would be "out of date" due to one of its dependent recipes being return =
-and
->> re-staging (potentially) new headers and libraries?
->
-> It is indeed expected behaviour, since there is no code in Bitbake that
-> would add any dependending packages and add them to your build.
->
-> Frans' suggestion is a workaround, however that only works with targets
-> that already include all the depending packages, usually a 'task',
-> 'feed', or 'image' target.
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 11-01-10 19:58, Michael 'Mickey' Lauer wrote:
+
 > I would welcome such a mode that automatically rebuilds all depending
 > packages, however as this could dramatically increase build time it
 > would need to be optional. BitBake hackers, what do you think?
->
 
-Let's first start with a mechanism that lists the users of a package.
+Bitbake already has such a mechanism and like I mentioned earlier in
+this thread, it's of limited use, since the PRs won't get changed, so
+from a DISTRO POV you still need to manually increment each affected PR
+or bump DISTRO_PR, which will rebuild everything.
+And even if we could bump PR automatically, we need a way to distribute
+that too all buildhosts.
 
-Frans
+And yes, I'm cranky because I need exactly this to deal with the bzip2
+SOVERSION fallout :/
+
+regards,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLS40vMkyGM64RGpERAvo9AKCJENnNSjDBNKTZ63ufo/g+qwja/wCgvNIm
+FKkq1RuyaSHHXVq+g1H+QN4=
+=kv/H
+-----END PGP SIGNATURE-----
+
 
 
