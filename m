@@ -1,35 +1,23 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NUPRy-0006bu-24 for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 19:57:17 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NUPPs-0007FB-8R
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mickey@vanille-media.de>) id 1NUPTt-00072c-50
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 19:55:04 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jan 2010 19:55:04 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Mon, 11 Jan 2010 19:59:16 +0100
+Received: from [192.168.1.105] (e180133168.adsl.alicedsl.de [85.180.133.168])
+	by drlauer-research.com (Postfix) with ESMTP id E1BD3584142
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jan 2010 19:55:04 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 11 Jan 2010 20:48:11 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 11 Jan 2010 19:54:10 +0100
-Message-ID: <hifs4h$5ha$1@ger.gmane.org>
-References: <18e217241001110959k4d346f05j7e00c36dfd18021d@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100104 Shredder/3.0.1pre
 In-Reply-To: <18e217241001110959k4d346f05j7e00c36dfd18021d@mail.gmail.com>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <18e217241001110959k4d346f05j7e00c36dfd18021d@mail.gmail.com>
+Organization: Vanille-Media
+Date: Mon, 11 Jan 2010 19:58:10 +0100
+Message-ID: <1263236290.22868.33.camel@andromeda>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: dependencies between packages
@@ -46,14 +34,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jan 2010 18:57:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 11 Jan 2010 18:59:16 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 11-01-10 18:59, C Michael Sundius wrote:
+Am Montag, den 11.01.2010, 09:59 -0800 schrieb C Michael Sundius:
 > Some of our developers have been running into this problem and I'm wondering
 > how others deal with it.
 > 
@@ -81,30 +66,23 @@ On 11-01-10 18:59, C Michael Sundius wrote:
 > only recipe B is run and recipe A is NOT rerun! the dependency is satisfied
 > by rerunning recipe B and then bitbake stops..
 > 
-> is this expected behaviour?
-
-Yes, although it's a bit counter intuitive from a buildsystem POV, but
-we currently don't have a foolproof, distributed way of automatically
-bumping PR for dependant packages, so we don't enable that rebuild
-feature. It's no use rebuilding when the packagemanager won't notice
-that the package has been updated.
-
-> Is there away to force rerunning of recipes that
+> is this expected behaviour? Is there away to force rerunning of recipes that
 > would be "out of date" due to one of its dependent recipes being return and
 > re-staging (potentially) new headers and libraries?
 
-Have a look at BB_STAMP_POLICY, I forgot the details.
+It is indeed expected behaviour, since there is no code in Bitbake that
+would add any dependending packages and add them to your build.
 
-regards,
+Frans' suggestion is a workaround, however that only works with targets
+that already include all the depending packages, usually a 'task',
+'feed', or 'image' target.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+I would welcome such a mode that automatically rebuilds all depending
+packages, however as this could dramatically increase build time it
+would need to be optional. BitBake hackers, what do you think?
 
-iD8DBQFLS3PSMkyGM64RGpERAnpGAJwIthWw2W383J1cW+OCu41oLUSqQgCfRYW/
-DUlLsi+a3tcysXsxLnRa5Pg=
-=Upuw
------END PGP SIGNATURE-----
+-- 
+:M:
 
 
 
