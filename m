@@ -1,39 +1,39 @@
-Received: from mail-yx0-f175.google.com ([209.85.210.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NURJZ-00012h-E5
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NURM6-0001A7-3d for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Jan 2010 21:59:21 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NURK2-0006No-4o
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 21:56:44 +0100
-Received: by yxe5 with SMTP id 5so16455907yxe.24
+	Mon, 11 Jan 2010 21:57:10 +0100
+Received: from chello080108092216.22.11.tuwien.teleweb.at ([80.108.92.216])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Jan 2010 21:57:10 +0100
+Received: from chris by chello080108092216.22.11.tuwien.teleweb.at with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jan 2010 12:54:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=HKHy0DbpfBbZtHZ1EU1NpW56V/wsWRHfjeBGsifdzqE=;
-	b=tfSszJt+k914iY8l0Zg/dnfpII3vaXbHt8MSULFrms7s1empmCLCfx/0uE8fOw/pr4
-	fv4rHMNrEp//5gpvX1SjZWCRqlqcnQGh2nvXtE+YtBLm8x1c7vpeAhaXXxmv4QqZErv2
-	/9hXbD/Lyl6fGV1XFkAXKFiOzUMfdJbM5vt2U=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=dfQae1YeTxpx1ijMQc+EyaOp8GqQjyQhr0sNYsVJh1OjjdgppMSubuy6Q49NY3XE84
-	Gh8Upxys5dnsxzSZyEHDBwC8ojNsoMGm4FGbt7hdPdEF4NsM3oPpgknkMJ9LCBo9PqQB
-	SyCnnlAyMlnDG7TlU+1zim0JgIxea9VcxxwaA=
-MIME-Version: 1.0
-Received: by 10.101.7.19 with SMTP id k19mr6513200ani.123.1263243272004; Mon, 
-	11 Jan 2010 12:54:32 -0800 (PST)
-In-Reply-To: <hig2fe$ui2$1@ger.gmane.org>
-References: <18e217241001110959k4d346f05j7e00c36dfd18021d@mail.gmail.com>
-	<1263236290.22868.33.camel@andromeda> <hig2fe$ui2$1@ger.gmane.org>
-Date: Mon, 11 Jan 2010 21:54:31 +0100
-Message-ID: <ac9c93b11001111254j4a52b1a8xb6fa1c6c3a9567d6@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 11 Jan 2010 21:57:10 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Chris Veigl <chris@shifz.org>
+Date: Mon, 11 Jan 2010 20:56:46 +0000 (UTC)
+Message-ID: <loom.20100111T215259-536@post.gmane.org>
+References: <loom.20100109T213305-664@post.gmane.org>	<20100109221158.GA1444@rhein.zuhause.netz>	<loom.20100111T101557-577@post.gmane.org>
+	<20100111094046.GQ17224@jama> <1263219513.3293.6.camel@nvc1511>
+	<4B4B759D.3040609@techsol.ca>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 80.108.92.216 (Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.0.17) Gecko/2010010604 Ubuntu/9.04 (jaunty) Firefox/3.0.17)
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: dependencies between packages
+Subject: Re: building classpath / ecj-initial fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,51 +47,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jan 2010 20:56:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 11 Jan 2010 20:59:21 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-2010/1/11 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 11-01-10 19:58, Michael 'Mickey' Lauer wrote:
->
->> I would welcome such a mode that automatically rebuilds all depending
->> packages, however as this could dramatically increase build time it
->> would need to be optional. BitBake hackers, what do you think?
->
-> Bitbake already has such a mechanism and like I mentioned earlier in
-> this thread, it's of limited use, since the PRs won't get changed, so
-> from a DISTRO POV you still need to manually increment each affected PR
-> or bump DISTRO_PR, which will rebuild everything.
-> And even if we could bump PR automatically, we need a way to distribute
-> that too all buildhosts.
->
-> And yes, I'm cranky because I need exactly this to deal with the bzip2
-> SOVERSION fallout :/
->
-> regards,
->
-> Koen
->
 
-One way to resolve this without bumping all the PR's would be to
-record the PRs of all pacakges it depends on.  (direct and indirect).
-If you rebuild a package and any of the depends packages has a PR that
-is increased, the package is rebuild, even if PR is not changed.
-Another way could be to use the timestamps. If the staging timestamp
-of a package one depends on is newer than the last build of the
-package itself it is rebuild.
-And a third way is to compute all packages that depend on another
-package and rebuild those when the package is changed. However that
-would probably rebuild way too much (everyone depends on glibc so if
-that changes this would become a bitbake world).
+Dallas Foley <dfoley <at> techsol.ca> writes:
 
-However, I think the problem is not the rebuilding of packages, but
-more the deployment of packages. Currently PV + PR are used to
-determine if an upgrade is needed and that kinda gets lost (unless
-opkg also has a version or time check; yuk)..
+> 
+> Jaap de Jong wrote:
+> > Hi Henning,
+> > 
+> > My approach after many unsuccessful attempts:
+> > 
+> > 	- install
+> > 		apt-get install sun-java6-jdk
+> > 	- edit local.conf 
+> > 		ASSUME_PROVIDED += " ecj-initial "
+> > 		ASSUME_PROVIDED += " virtual/java-initial "
+> > 		ASSUME_PROVIDED += " virtual/java-native "
+> > 		ASSUME_PROVIDED += " virtual/javac-native "
+> > 		PREFERRED_PROVIDER_classpath = "classpath"
+> > 		PREFERRED_VERSION_classpath = "0.97.2"
+> > 	- bitbake cacao
+> > 
 
-Frans.
+thank you for the hint - i will try this next
+
+> > Could not get jamvm nor classpath 0.98 compiled.
+
+what problems did arise ?
+
+
+> 
+> Not sure if this is the right answer, but I also could not build ecj-initial 
+> until I changed "-Xmx1024m" to "-Xmx512m" in recipes/ecj/files/ecj.in
+> and I think rebuilding ecj-bootstrap-native and ecj-initial worked for me.
+> 
+
+
+I suppose this solves the memory error in the "classpath - configure" - task.
+which setup (in terms of PREFERRED_PROVIDER, PREFERRED_VERSION, ASSUME_PROVIDED)
+did you use ? - and: could you build jamvm and classpath successfully ?
+
+Using the OE-wiki setup, I got problems with the "compile" task (jamvm does not
+recognize option "-o"), which do not relate to the above memory problems.
+
+
+
+regards,
+chris.
+
+
+
+
+
+
+
 
 
