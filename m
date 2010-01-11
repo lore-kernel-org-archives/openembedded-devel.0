@@ -1,38 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NUICD-0005sN-Ss for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 12:12:32 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NUIAA-0000RK-A0
+	(envelope-from <philb@gnu.org>) id 1NUIsA-0005Hq-7W
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 12:10:22 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jan 2010 12:10:22 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jan 2010 12:10:22 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 11 Jan 2010 12:55:53 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NUIq6-0002hL-IP
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Jan 2010 11:53:42 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1NUIq6-0003bQ-Bq
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 11 Jan 2010 11:53:42 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 11 Jan 2010 12:09:58 +0100
-Message-ID: <hif0u5$trl$1@ger.gmane.org>
-References: <hid4ng$12q$1@ger.gmane.org> <1263152005.2342.0@zaurus>
+In-Reply-To: <1263143195.3710.30.camel@utx.utx.cz>
+References: <1263143195.3710.30.camel@utx.utx.cz>
+Date: Mon, 11 Jan 2010 11:53:38 +0000
+Message-ID: <1263210818.3675.296.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100104 Shredder/3.0.1pre
-In-Reply-To: <1263152005.2342.0@zaurus>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 2/2] disable static libraries in Angstrom
+Subject: Re: [PATCH 1/2] introduce global control on shared/static libraries
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,43 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jan 2010 11:12:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 11 Jan 2010 11:55:53 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-I repeat: you need to discuss things like this on the angstrom-devel ml
-
-On 10-01-10 20:33, Stanislav Brabec wrote:
-> Jan 10, 2010 19:02:25 Koen Kooi wrote:
->> On 10-01-10 18:10, Stanislav Brabec wrote:
->>> Attached patch disables build of major part of static libraries in
->> the
->>> Angstrom distribution.
->>
->> NAK
+On Sun, 2010-01-10 at 18:06 +0100, Stanislav Brabec wrote:
+> This patch adds support for global enabling and disabling of shared or
+> static libraries in autoconf based packages.
 > 
->> Static libs are packaged in seperate packages, so they only 'waste'
->> space on the feed server.
-> 
-> OK, in this case, patch 1/2 can exist standalone and people can set
-> their local.conf as they want. Comment can be changed appropriately.
-> Even the part in bitbake.conf may be removed (yes+yes is the default)
-> and configuration may be completely moved to the local.conf.sample.
-> 
-> The primary goal of this patch is a decreasing of feed size and
-> compilation time, which is useful especially for custom builds.
-> 
+> All required fixes in packages that I was able to test are already in
+> place with exception of apmd (I plan to commit it soon as well).
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+I'm not very keen on the names of these configuration variables or the
+global exports of them.  I understand your desire to leverage the
+existing support in autoconf for taking settings from the environment,
+but I am not sure that it is wholesome to pollute the global environment
+for all tasks, including non-autoconf-using ones, with this stuff.
 
-iD8DBQFLSwcGMkyGM64RGpERAoQ8AKClJitbRzaoBdx0CblffAItrhvWbgCfbQ0S
-kkhQnUOhYfpx4EsZOOjP96I=
-=Unc2
------END PGP SIGNATURE-----
+I would suggest something more along the lines of a
+BITBAKE_LIBRARY_STYLE variable (not exported to the environment), which
+you can set to "shared", "static" or "both", and then some code in
+autotools_do_configure() to translate this into the appropriate flags or
+environment settings for configure.
+
+p.
+
 
 
 
