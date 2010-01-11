@@ -1,40 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mxb.rambler.ru ([81.19.66.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NUROz-0001cZ-Ub for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 22:02:21 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NURMr-0007Yc-CS
+	(envelope-from <alexondi@rambler.ru>) id 1NURPr-0001gv-OV
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 11 Jan 2010 22:00:05 +0100
-Received: from chello080108092216.22.11.tuwien.teleweb.at ([80.108.92.216])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jan 2010 22:00:05 +0100
-Received: from chris by chello080108092216.22.11.tuwien.teleweb.at with local
-	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	Mon, 11 Jan 2010 22:03:14 +0100
+Received: from mailc.rambler.ru (mailc.rambler.ru [81.19.66.27])
+	by mxb.rambler.ru (Postfix) with ESMTP id 2C1681FF5FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Jan 2010 22:00:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 12 Jan 2010 00:01:05 +0300 (MSK)
+Received: from [192.168.0.100] (unknown [109.86.169.209])
+	(Authenticated sender: alexondi@rambler.ru)
+	by mailc.rambler.ru (Postfix) with ESMTP id 5F992621C49
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jan 2010 00:01:04 +0300 (MSK)
+Message-ID: <4B4B9189.3080906@rambler.ru>
+Date: Mon, 11 Jan 2010 23:00:57 +0200
+From: Perepelica Alexander <alexondi@rambler.ru>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; ru;
+	rv:1.9.1.5) Gecko/20091204 Thunderbird/3.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Chris Veigl <chris@shifz.org>
-Date: Mon, 11 Jan 2010 20:57:13 +0000 (UTC)
-Message-ID: <loom.20100111T211613-99@post.gmane.org>
-References: <loom.20100109T213305-664@post.gmane.org>
-	<20100109221158.GA1444@rhein.zuhause.netz>
-	<loom.20100111T101557-577@post.gmane.org>
-	<20100111094046.GQ17224@jama>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 80.108.92.216 (Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.0.17) Gecko/2010010604 Ubuntu/9.04 (jaunty) Firefox/3.0.17)
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 81.19.66.30
+X-SA-Exim-Mail-From: alexondi@rambler.ru
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: building classpath / ecj-initial fails
+Subject: Building x86_64 target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,45 +37,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Jan 2010 21:02:21 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 11 Jan 2010 21:03:14 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Martin Jansa <martin.jansa <at> gmail.com> writes:
-> > ERROR: function do_compile failed
-> > 
+Hello!
 
-> git pull.. se my commit yesterday
+Why OE don't provide default configs for x86_64 target (on market exists
+many industrial PC with core 2 duo and other 64-bit CPU) is this some
+forbidden themes or nobody build target for thouse CPU?
 
+Thank you!
 
-I did a git pull, cleared the tmp folder and let 
-bitbake run during the night, but get the same error:
-
-  tmp/staging/i686-linux/usr/bin/java-initial -classpath  antlr.Tool -o \
-    ../tools/generated/gnu/classpath/tools/gjdoc/expr/ \
-    ./gnu/classpath/tools/gjdoc/expr/java-expression.g
-  Unrecognised command line option: -o
-
-
-must be something different ...
-seems like jamvm version 1.4.5 does not have the "-o" switch !?
-
-I currently use
-
-  PREFERRED_VERSION_jamvm-initial = "1.4.5"
-  PREFERRED_VERSION_classpath-initial = "0.93"
-
-  PREFERRED_VERSION_jamvm-native = "1.5.3"
-  PREFERRED_VERSION_classpath-native = "0.98"
-
-  PREFERRED_VERSION_jamvm = "1.5.2"
-  PREFERRED_VERSION_classpath = "0.98"
-
-  PREFERRED_VERSION_libecj-bootstrap = "3.4"
-
-as recommended in the openembedded wiki ...
-regards,
-chris.
 
 
 
