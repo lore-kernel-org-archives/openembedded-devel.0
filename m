@@ -1,44 +1,31 @@
-Received: from mail-fx0-f212.google.com ([209.85.220.212])
+Received: from proxy1.bredband.net ([195.54.101.71])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NUp9J-0002EB-09
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1NUpcZ-0004ue-Lt
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 23:23:44 +0100
-Received: by fxm4 with SMTP id 4so19470031fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2010 14:21:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=r9oQn4yXLoF519yCMuZ0eP6J96lBqKyOsKJFQB7wJVs=;
-	b=QAIXvaxgz4KEyY6YN9qvz3IqNbk3OcdTLLjbTSiynDgkio/V3OB+cNgo8Cwm+gvw6q
-	BV4MP7xPl5aYq7gOcsvHgeA9GP/zDBj0SCIpzE6sI1+3ObJOfrGuqUVz7gzZQy704p9K
-	doPNpaDfHRiteJnwVbLosWqipHPICjNQ8USOI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=RtSbaP2C9Xjj4ySvr8dlOTcciRwPXopthW2X/AkEckIdT30KE0Tok0UBWOx03p9oYb
-	64UBK5hGdLINQsqLxr5rhKwsJs47gySYC/aafz+WbaJpHUekjJekEf22xQSa4MgI4or1
-	FRFVmcv28v/e2HLy+GR51lLAocTuQoO9GhLkE=
-Received: by 10.223.95.72 with SMTP id c8mr4319651fan.73.1263334891275;
-	Tue, 12 Jan 2010 14:21:31 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 15sm559136fxm.10.2010.01.12.14.21.29
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 12 Jan 2010 14:21:29 -0800 (PST)
-Date: Tue, 12 Jan 2010 23:21:21 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100112222121.GD10781@jama>
-References: <20100108132344.GB2156@jama>
+	Tue, 12 Jan 2010 23:53:58 +0100
+Received: from ipb1.telenor.se (195.54.127.164) by proxy1.bredband.net
+	(7.3.140.3)
+	id 4AD3E1C00251CBFB for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Jan 2010 23:51:46 +0100
+X-SMTPAUTH-B2: 
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: Al4VAGeLTEtT4zqIPGdsb2JhbAAIiCqTKAEBAQE3umCEMAQ
+X-IronPort-AV: E=Sophos;i="4.49,264,1262559600"; d="scan'208";a="26152048"
+Received: from c-883ae353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.224]) ([83.227.58.136])
+	by ipb1.telenor.se with ESMTP; 12 Jan 2010 23:51:45 +0100
+Message-ID: <4B4CFD01.8050302@atmel.com>
+Date: Tue, 12 Jan 2010 23:51:45 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-In-Reply-To: <20100108132344.GB2156@jama>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.212
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 195.54.101.71
+X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: update-alternatives broken badly (by me :()
+Subject: [PATCH] Additional defconfigs for at91bootstrap-2.13 (untested)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,119 +39,853 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2010 22:23:44 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 12 Jan 2010 22:53:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hi,
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 
-Still no review/ACK :(.
+Add at91bootstrap-2.13 defconfig's for non-at91sam9g45ek board.
+These configurations compiles, but have not been tested on a board yet.
+They are provided to allow others to test and perhaps merge.
 
-I'll try to explain it better to show how bad it can be and even make
-review easier.
+Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+---
 
-We have target where sysvinit as init is crucial for successful boot (ie
-SHR on freerunner) and u-a-cworth is installed on image, because
-task-boot RDEPENDs on update-alternatives.
 
-Let's start with image built after 2009-12-08.
-u-a-opkg is used for in do_rootfs, but u-a-cworth is installed in image
-too and is used by default.
-
-T1) after flashing
-  ipkg/alternatives/init        opkg/alternatives/init
-    doesnt-exist                  /sbin/init
-                                  /sbin/init.sysvinit 60
-                                 ../bin/busybox 50
-  =>sysvinit is used, everything is fine
-
-good scenario:
-T2a) sysvinit is upgraded first
-  ipkg/alternatives/init        opkg/alternatives/init
-    /sbin/init                    /sbin/init
-    /sbin/init.sysvinit 60        /sbin/init.sysvinit 60
-                                  ../bin/busybox 50
-  =>sysvinit is used, everything is fine
-  - newer file works but is incomplete
-
-T3a) busybox is upgraded
-  ipkg/alternatives/init        opkg/alternatives/init
-    /sbin/init                    /sbin/init
-    /sbin/init.sysvinit 60        /sbin/init.sysvinit 60
-    ../bin/busybox 50             ../bin/busybox 50
-  =>sysvinit is used, everything is fine
-  - newer file works and is the same as opkg
-
-bad scenario
-T2b) busybox is upgrade first
-  ipkg/alternatives/init        opkg/alternatives/init
-    /sbin/init                    /sbin/init
-    ../bin/busybox 50             /sbin/init.sysvinit 60
-                                  ../bin/busybox 50
-  =>busybox is used, device won't boot anymore
-  - newer file is from cworth but is worse
-
-T3b) sysvinit is upgraded
-  ipkg/alternatives/init        opkg/alternatives/init
-    /sbin/init                    /sbin/init
-    /sbin/init.sysvinit 60        /sbin/init.sysvinit 60
-  ../bin/busybox 50             ../bin/busybox 50
-  
-  =>sysvinit is used again, everything is fine
-  - newer file works and is the same again
-
-If we merge ipkg/alternatives and opkg/alternatives before T2b) there
-will be no problem.
-
-If we merge it after T2b) and then force busybox upgrade then we will
-fix broken image too (as busybox is using probably the most u-a links
-and has lowest priority). So busybox PR bump is good idea AFTER merging
-u-a alternatives.
-
-Worst scenario (where merger fails):
-Tfsck) After T3a) or T3b) user intentionally remove sysvint package 
-  (ie because he can boot even with busybox)
-  ipkg/alternatives/init        opkg/alternatives/init
-    /sbin/init                    /sbin/init
-    ../bin/busybox 50             /sbin/init.sysvinit 60
-                                  ../bin/busybox 50
-  =>busybox is used, user is happy
-
-then we run merge script (longer alternative file wins
-=>sysvinit is used again, but without actuall /sbin/init.sysvinit file
-in fs.. boot fails, user is sad. I think there is no way to distinguish
-between T2b where newer shorter file is wrong and Tfsck where newer
-shorter file is the right one (without checking opkg history..)
-
-With images built before 2009-12-08 it should be simple
-opkg/alternatives should be empty, all files from ipkg/alternatives are
-just moved there..
-
-Why would I like to add the same merge script to opkg?
-1) someone maybe already removed -cworth from image with first sign of
-   issues (but still too late) and -cworth postinst is still needed
-
-2) task-boot will be fixed (RDEPEND on same u-a as
-   virtual/update-alternatives-native) and user won't get -cworth update.
-
-3) If I get new -cworth and busybox in one opkg upgrade batch, then I'm
-   not sure which postinst will be executed first (we need -cworth first),
-   but opkg maybe run own postinst before configuring other packages (ie
-   portage does that completely even with restart of upgrade process)
-
-Updated -cworth is already used in SHR (from shr/merge branch).
-
-My shell foo is maybe not strong enough to check that everything is available 
-in all environments and no bashisms were used..)
-
-Thanks and please comment (I'll resend whole patch serie as soon as
-someone confirms that's good path to go).
-
-Regards,
+diff --git
+a/recipes/at91bootstrap/at91bootstrap-2.13/at91cap9adk/defconfig
+b/recipes/at91bootstrap/at91bootstrap-2.13/at91cap9adk/defconfig
+new file mode 100644
+index 0000000..8ccd36d
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-2.13/at91cap9adk/defconfig
+@@ -0,0 +1,110 @@
++#
++# Automatically generated make config: don't edit
++# Tue Jan 12 22:00:30 2010
++#
++HAVE_DOT_CONFIG=y
++CONFIG_BOARDNAME="at91cap9df"
++# CONFIG_AT91SAM9260EK is not set
++# CONFIG_AT91SAM9261EK is not set
++# CONFIG_AT91SAM9263EK is not set
++# CONFIG_AT91SAM9RLEK is not set
++# CONFIG_AT91SAM9XEEK is not set
++# CONFIG_AT91SAM9G10EK is not set
++# CONFIG_AT91SAM9G20EK is not set
++# CONFIG_AT91SAM9G45EK is not set
++# CONFIG_AT91SAM9G45EKES is not set
++# CONFIG_AT91SAM9M10EK is not set
++CONFIG_AT91CAP9ADK=y
++# CONFIG_AT91CAP9STK is not set
++# CONFIG_AFEB9260 is not set
++CONFIG_CHIP="AT91CAP9"
++CONFIG_BOARD="at91cap9adk"
++CONFIG_MACH_TYPE="0x61E"
++CONFIG_LINK_ADDR="0x000000"
++CONFIG_TOP_OF_MEMORY="0x108000"
++CONFIG_BOOTSTRAP_MAXSIZE="13000"
++CONFIG_CRYSTAL_12_000MHZ=y
++# CONFIG_CRYSTAL_16_000MHZ is not set
++# CONFIG_CRYSTAL_16_36766MHZ is not set
++# CONFIG_CRYSTAL_18_432MHZ is not set
++ALLOW_CRYSTAL_12_000MHZ=y
++CONFIG_CRYSTAL="CRYSTAL_18_432MHZ"
++# CONFIG_CPU_CLK_166MHZ is not set
++# CONFIG_CPU_CLK_180MHZ is not set
++CONFIG_CPU_CLK_200MHZ=y
++# CONFIG_CPU_CLK_240MHZ is not set
++# CONFIG_CPU_CLK_266MHZ is not set
++# CONFIG_CPU_CLK_400MHZ is not set
++ALLOW_CPU_CLK_200MHZ=y
++ALLOW_CPU_CLK_240MHZ=y
++# DISABLE_CPU_CLK_240MHZ is not set
++# CONFIG_BUS_SPEED_83MHZ is not set
++# CONFIG_BUS_SPEED_90MHZ is not set
++CONFIG_BUS_SPEED_100MHZ=y
++# CONFIG_BUS_SPEED_133MHZ is not set
++
++#
++# Memory selection
++#
++# CONFIG_SDRAM is not set
++CONFIG_SDDRC=y
++# CONFIG_DDR2 is not set
++ALLOW_DATAFLASH=y
++ALLOW_FLASH=y
++# ALLOW_NANDFLASH is not set
++# ALLOW_SDCARD is not set
++# ALLOW_PSRAM is not set
++# ALLOW_SDRAM_16BIT is not set
++# CONFIG_RAM_32MB is not set
++CONFIG_RAM_64MB=y
++# CONFIG_RAM_128MB is not set
++# CONFIG_RAM_256MB is not set
++CONFIG_DATAFLASH=y
++# CONFIG_FLASH is not set
++# CONFIG_NANDFLASH is not set
++# CONFIG_SDCARD is not set
++CONFIG_MEMORY="dataflash"
++
++#
++# SPI configuration
++#
++CONFIG_SPI_CLK=33000000
++CONFIG_SMALL_DATAFLASH=y
++# ALLOW_DATAFLASH_RECOVERY is not set
++CONFIG_SPI_BOOT_CS0=y
++# CONFIG_SPI_BOOT_CS1 is not set
++# CONFIG_SPI_BOOT_CS2 is not set
++# CONFIG_SPI_BOOT_CS3 is not set
++ALLOW_BOOT_FROM_DATAFLASH_CS0=y
++# ALLOW_BOOT_FROM_DATAFLASH_CS1 is not set
++# ALLOW_BOOT_FROM_DATAFLASH_CS2 is not set
++# ALLOW_BOOT_FROM_DATAFLASH_CS3 is not set
++DATAFLASHCARD_ON_CS0=y
++# DATAFLASHCARD_ON_CS1 is not set
++# DATAFLASHCARD_ON_CS2 is not set
++# DATAFLASHCARD_ON_CS3 is not set
++CONFIG_DATAFLASHCARD=y
++CONFIG_CARD_SUFFIX="card"
++CONFIG_SPI_BOOT="AT91C_SPI_PCS0_DATAFLASH"
++CONFIG_SPI_MODE_0=y
++# CONFIG_SPI_MODE_1 is not set
++# CONFIG_SPI_MODE_2 is not set
++# CONFIG_SPI_MODE_3 is not set
++CONFIG_SPI_MODE=0
++CONFIG_PROJECT="dataflash"
++CONFIG_LOAD_UBOOT=y
++# CONFIG_LOAD_64KB is not set
++# CONFIG_LOAD_1MB is not set
++# CONFIG_LOAD_4MB is not set
++CONFIG_IMG_ADDRESS="0x00008400"
++CONFIG_IMG_SIZE="0x00040000"
++CONFIG_JUMP_ADDR="0x73F00000"
++CONFIG_APP_CHECK=y
++# CONFIG_LONG_TEST is not set
++CONFIG_DEBUG=y
++CONFIG_VERBOSE=y
++CONFIG_HW_INIT=y
++# CONFIG_USER_HW_INIT is not set
++# CONFIG_THUMB is not set
++CONFIG_SX_AT91=y
++CONFIG_RAW_AT91=y
+diff --git
+a/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9260ek/defconfig
+b/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9260ek/defconfig
+new file mode 100644
+index 0000000..5e744ad
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9260ek/defconfig
+@@ -0,0 +1,110 @@
++#
++# Automatically generated make config: don't edit
++# Tue Jan 12 22:00:52 2010
++#
++HAVE_DOT_CONFIG=y
++CONFIG_BOARDNAME="at91sam9260dfc"
++CONFIG_AT91SAM9260EK=y
++# CONFIG_AT91SAM9261EK is not set
++# CONFIG_AT91SAM9263EK is not set
++# CONFIG_AT91SAM9RLEK is not set
++# CONFIG_AT91SAM9XEEK is not set
++# CONFIG_AT91SAM9G10EK is not set
++# CONFIG_AT91SAM9G20EK is not set
++# CONFIG_AT91SAM9G45EK is not set
++# CONFIG_AT91SAM9G45EKES is not set
++# CONFIG_AT91SAM9M10EK is not set
++# CONFIG_AT91CAP9ADK is not set
++# CONFIG_AT91CAP9STK is not set
++# CONFIG_AFEB9260 is not set
++CONFIG_CHIP="AT91SAM9260"
++CONFIG_BOARD="at91sam9260ek"
++CONFIG_MACH_TYPE="0x44B"
++CONFIG_LINK_ADDR="0x000000"
++CONFIG_TOP_OF_MEMORY="0x301000"
++CONFIG_BOOTSTRAP_MAXSIZE="4096"
++# CONFIG_CRYSTAL_12_000MHZ is not set
++# CONFIG_CRYSTAL_16_000MHZ is not set
++# CONFIG_CRYSTAL_16_36766MHZ is not set
++CONFIG_CRYSTAL_18_432MHZ=y
++ALLOW_CRYSTAL_18_432MHZ=y
++CONFIG_CRYSTAL="CRYSTAL_18_432MHZ"
++# CONFIG_CPU_CLK_166MHZ is not set
++# CONFIG_CPU_CLK_180MHZ is not set
++CONFIG_CPU_CLK_200MHZ=y
++# CONFIG_CPU_CLK_240MHZ is not set
++# CONFIG_CPU_CLK_266MHZ is not set
++# CONFIG_CPU_CLK_400MHZ is not set
++ALLOW_CPU_CLK_200MHZ=y
++# DISABLE_CPU_CLK_240MHZ is not set
++# CONFIG_BUS_SPEED_83MHZ is not set
++# CONFIG_BUS_SPEED_90MHZ is not set
++CONFIG_BUS_SPEED_100MHZ=y
++# CONFIG_BUS_SPEED_133MHZ is not set
++
++#
++# Memory selection
++#
++CONFIG_SDRAM=y
++# CONFIG_SDDRC is not set
++# CONFIG_DDR2 is not set
++ALLOW_DATAFLASH=y
++# ALLOW_FLASH is not set
++ALLOW_NANDFLASH=y
++# ALLOW_SDCARD is not set
++# ALLOW_PSRAM is not set
++# ALLOW_SDRAM_16BIT is not set
++# CONFIG_RAM_32MB is not set
++CONFIG_RAM_64MB=y
++# CONFIG_RAM_128MB is not set
++# CONFIG_RAM_256MB is not set
++CONFIG_DATAFLASH=y
++# CONFIG_FLASH is not set
++# CONFIG_NANDFLASH is not set
++# CONFIG_SDCARD is not set
++CONFIG_MEMORY="dataflash"
++
++#
++# SPI configuration
++#
++CONFIG_SPI_CLK=33000000
++# CONFIG_SMALL_DATAFLASH is not set
++CONFIG_DATAFLASH_RECOVERY=y
++ALLOW_DATAFLASH_RECOVERY=y
++CONFIG_SPI_BOOT_CS0=y
++# CONFIG_SPI_BOOT_CS1 is not set
++# CONFIG_SPI_BOOT_CS2 is not set
++# CONFIG_SPI_BOOT_CS3 is not set
++ALLOW_BOOT_FROM_DATAFLASH_CS0=y
++ALLOW_BOOT_FROM_DATAFLASH_CS1=y
++# ALLOW_BOOT_FROM_DATAFLASH_CS2 is not set
++# ALLOW_BOOT_FROM_DATAFLASH_CS3 is not set
++DATAFLASHCARD_ON_CS0=y
++# DATAFLASHCARD_ON_CS1 is not set
++# DATAFLASHCARD_ON_CS2 is not set
++# DATAFLASHCARD_ON_CS3 is not set
++CONFIG_DATAFLASHCARD=y
++CONFIG_CARD_SUFFIX="card"
++CONFIG_SPI_BOOT="AT91C_SPI_PCS0_DATAFLASH"
++CONFIG_SPI_MODE_0=y
++# CONFIG_SPI_MODE_1 is not set
++# CONFIG_SPI_MODE_2 is not set
++# CONFIG_SPI_MODE_3 is not set
++CONFIG_SPI_MODE=0
++CONFIG_PROJECT="dataflash"
++CONFIG_LOAD_UBOOT=y
++# CONFIG_LOAD_64KB is not set
++# CONFIG_LOAD_1MB is not set
++# CONFIG_LOAD_4MB is not set
++CONFIG_IMG_ADDRESS="0x00008400"
++CONFIG_IMG_SIZE="0x00040000"
++CONFIG_JUMP_ADDR="0x23F00000"
++CONFIG_APP_CHECK=y
++# CONFIG_LONG_TEST is not set
++# CONFIG_DEBUG is not set
++# CONFIG_VERBOSE is not set
++CONFIG_HW_INIT=y
++# CONFIG_USER_HW_INIT is not set
++# CONFIG_THUMB is not set
++CONFIG_SX_AT91=y
++CONFIG_RAW_AT91=y
+diff --git
+a/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9261ek/defconfig
+b/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9261ek/defconfig
+new file mode 100644
+index 0000000..05058be
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9261ek/defconfig
+@@ -0,0 +1,110 @@
++#
++# Automatically generated make config: don't edit
++# Tue Jan 12 22:00:56 2010
++#
++HAVE_DOT_CONFIG=y
++CONFIG_BOARDNAME="at91sam9261df"
++# CONFIG_AT91SAM9260EK is not set
++CONFIG_AT91SAM9261EK=y
++# CONFIG_AT91SAM9263EK is not set
++# CONFIG_AT91SAM9RLEK is not set
++# CONFIG_AT91SAM9XEEK is not set
++# CONFIG_AT91SAM9G10EK is not set
++# CONFIG_AT91SAM9G20EK is not set
++# CONFIG_AT91SAM9G45EK is not set
++# CONFIG_AT91SAM9G45EKES is not set
++# CONFIG_AT91SAM9M10EK is not set
++# CONFIG_AT91CAP9ADK is not set
++# CONFIG_AT91CAP9STK is not set
++# CONFIG_AFEB9260 is not set
++CONFIG_CHIP="AT91SAM9261"
++CONFIG_BOARD="at91sam9261ek"
++CONFIG_MACH_TYPE="0x350"
++CONFIG_LINK_ADDR="0x000000"
++CONFIG_TOP_OF_MEMORY="0x328000"
++CONFIG_BOOTSTRAP_MAXSIZE="13000"
++# CONFIG_CRYSTAL_12_000MHZ is not set
++# CONFIG_CRYSTAL_16_000MHZ is not set
++# CONFIG_CRYSTAL_16_36766MHZ is not set
++CONFIG_CRYSTAL_18_432MHZ=y
++ALLOW_CRYSTAL_18_432MHZ=y
++CONFIG_CRYSTAL="CRYSTAL_18_432MHZ"
++# CONFIG_CPU_CLK_166MHZ is not set
++# CONFIG_CPU_CLK_180MHZ is not set
++CONFIG_CPU_CLK_200MHZ=y
++# CONFIG_CPU_CLK_240MHZ is not set
++# CONFIG_CPU_CLK_266MHZ is not set
++# CONFIG_CPU_CLK_400MHZ is not set
++ALLOW_CPU_CLK_200MHZ=y
++ALLOW_CPU_CLK_266MHZ=y
++# DISABLE_CPU_CLK_240MHZ is not set
++# CONFIG_BUS_SPEED_83MHZ is not set
++# CONFIG_BUS_SPEED_90MHZ is not set
++CONFIG_BUS_SPEED_100MHZ=y
++# CONFIG_BUS_SPEED_133MHZ is not set
++
++#
++# Memory selection
++#
++CONFIG_SDRAM=y
++# CONFIG_SDDRC is not set
++# CONFIG_DDR2 is not set
++ALLOW_DATAFLASH=y
++# ALLOW_FLASH is not set
++ALLOW_NANDFLASH=y
++# ALLOW_SDCARD is not set
++# ALLOW_PSRAM is not set
++# ALLOW_SDRAM_16BIT is not set
++# CONFIG_RAM_32MB is not set
++CONFIG_RAM_64MB=y
++# CONFIG_RAM_128MB is not set
++# CONFIG_RAM_256MB is not set
++CONFIG_DATAFLASH=y
++# CONFIG_FLASH is not set
++# CONFIG_NANDFLASH is not set
++# CONFIG_SDCARD is not set
++CONFIG_MEMORY="dataflash"
++
++#
++# SPI configuration
++#
++CONFIG_SPI_CLK=33000000
++CONFIG_SMALL_DATAFLASH=y
++# ALLOW_DATAFLASH_RECOVERY is not set
++CONFIG_SPI_BOOT_CS0=y
++# CONFIG_SPI_BOOT_CS1 is not set
++# CONFIG_SPI_BOOT_CS2 is not set
++# CONFIG_SPI_BOOT_CS3 is not set
++ALLOW_BOOT_FROM_DATAFLASH_CS0=y
++# ALLOW_BOOT_FROM_DATAFLASH_CS1 is not set
++# ALLOW_BOOT_FROM_DATAFLASH_CS2 is not set
++ALLOW_BOOT_FROM_DATAFLASH_CS3=y
++# DATAFLASHCARD_ON_CS0 is not set
++# DATAFLASHCARD_ON_CS1 is not set
++# DATAFLASHCARD_ON_CS2 is not set
++# DATAFLASHCARD_ON_CS3 is not set
++# CONFIG_DATAFLASHCARD is not set
++CONFIG_CARD_SUFFIX=""
++CONFIG_SPI_BOOT="AT91C_SPI_PCS0_DATAFLASH"
++CONFIG_SPI_MODE_0=y
++# CONFIG_SPI_MODE_1 is not set
++# CONFIG_SPI_MODE_2 is not set
++# CONFIG_SPI_MODE_3 is not set
++CONFIG_SPI_MODE=0
++CONFIG_PROJECT="dataflash"
++CONFIG_LOAD_UBOOT=y
++# CONFIG_LOAD_64KB is not set
++# CONFIG_LOAD_1MB is not set
++# CONFIG_LOAD_4MB is not set
++CONFIG_IMG_ADDRESS="0x00008400"
++CONFIG_IMG_SIZE="0x00040000"
++CONFIG_JUMP_ADDR="0x23F00000"
++CONFIG_APP_CHECK=y
++# CONFIG_LONG_TEST is not set
++CONFIG_DEBUG=y
++CONFIG_VERBOSE=y
++CONFIG_HW_INIT=y
++# CONFIG_USER_HW_INIT is not set
++# CONFIG_THUMB is not set
++CONFIG_SX_AT91=y
++CONFIG_RAW_AT91=y
+diff --git
+a/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9263ek/defconfig
+b/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9263ek/defconfig
+new file mode 100644
+index 0000000..70f6e32
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9263ek/defconfig
+@@ -0,0 +1,113 @@
++#
++# Automatically generated make config: don't edit
++# Tue Jan 12 22:00:59 2010
++#
++HAVE_DOT_CONFIG=y
++CONFIG_BOARDNAME="at91sam9263dfc"
++# CONFIG_AT91SAM9260EK is not set
++# CONFIG_AT91SAM9261EK is not set
++CONFIG_AT91SAM9263EK=y
++# CONFIG_AT91SAM9RLEK is not set
++# CONFIG_AT91SAM9XEEK is not set
++# CONFIG_AT91SAM9G10EK is not set
++# CONFIG_AT91SAM9G20EK is not set
++# CONFIG_AT91SAM9G45EK is not set
++# CONFIG_AT91SAM9G45EKES is not set
++# CONFIG_AT91SAM9M10EK is not set
++# CONFIG_AT91CAP9ADK is not set
++# CONFIG_AT91CAP9STK is not set
++# CONFIG_AFEB9260 is not set
++CONFIG_CHIP="AT91SAM9263"
++CONFIG_BOARD="at91sam9263ek"
++CONFIG_MACH_TYPE="0x4B2"
++CONFIG_LINK_ADDR="0x000000"
++CONFIG_TOP_OF_MEMORY="0x314000"
++CONFIG_BOOTSTRAP_MAXSIZE="13000"
++# CONFIG_CRYSTAL_12_000MHZ is not set
++# CONFIG_CRYSTAL_16_000MHZ is not set
++CONFIG_CRYSTAL_16_36766MHZ=y
++# CONFIG_CRYSTAL_18_432MHZ is not set
++ALLOW_CRYSTAL_16_36766MHZ=y
++ALLOW_CRYSTAL_18_432MHZ=y
++CONFIG_CRYSTAL="CRYSTAL_16_36766MHZ"
++# CONFIG_CPU_CLK_166MHZ is not set
++# CONFIG_CPU_CLK_180MHZ is not set
++CONFIG_CPU_CLK_200MHZ=y
++# CONFIG_CPU_CLK_240MHZ is not set
++# CONFIG_CPU_CLK_266MHZ is not set
++# CONFIG_CPU_CLK_400MHZ is not set
++ALLOW_CPU_CLK_200MHZ=y
++ALLOW_CPU_CLK_240MHZ=y
++DISABLE_CPU_CLK_240MHZ=y
++# CONFIG_BUS_SPEED_83MHZ is not set
++# CONFIG_BUS_SPEED_90MHZ is not set
++CONFIG_BUS_SPEED_100MHZ=y
++# CONFIG_BUS_SPEED_133MHZ is not set
++
++#
++# Memory selection
++#
++CONFIG_SDRAM=y
++# CONFIG_SDDRC is not set
++# CONFIG_DDR2 is not set
++ALLOW_DATAFLASH=y
++# ALLOW_FLASH is not set
++ALLOW_NANDFLASH=y
++# ALLOW_SDCARD is not set
++ALLOW_PSRAM=y
++ALLOW_SDRAM_16BIT=y
++# CONFIG_RAM_32MB is not set
++CONFIG_RAM_64MB=y
++# CONFIG_RAM_128MB is not set
++# CONFIG_RAM_256MB is not set
++# CONFIG_SDRAM_16BIT is not set
++# CONFIG_PSRAM is not set
++CONFIG_DATAFLASH=y
++# CONFIG_FLASH is not set
++# CONFIG_NANDFLASH is not set
++# CONFIG_SDCARD is not set
++CONFIG_MEMORY="dataflash"
++
++#
++# SPI configuration
++#
++CONFIG_SPI_CLK=33000000
++CONFIG_SMALL_DATAFLASH=y
++# ALLOW_DATAFLASH_RECOVERY is not set
++CONFIG_SPI_BOOT_CS0=y
++# CONFIG_SPI_BOOT_CS1 is not set
++# CONFIG_SPI_BOOT_CS2 is not set
++# CONFIG_SPI_BOOT_CS3 is not set
++ALLOW_BOOT_FROM_DATAFLASH_CS0=y
++# ALLOW_BOOT_FROM_DATAFLASH_CS1 is not set
++# ALLOW_BOOT_FROM_DATAFLASH_CS2 is not set
++# ALLOW_BOOT_FROM_DATAFLASH_CS3 is not set
++DATAFLASHCARD_ON_CS0=y
++# DATAFLASHCARD_ON_CS1 is not set
++# DATAFLASHCARD_ON_CS2 is not set
++# DATAFLASHCARD_ON_CS3 is not set
++CONFIG_DATAFLASHCARD=y
++CONFIG_CARD_SUFFIX="card"
++CONFIG_SPI_BOOT="AT91C_SPI_PCS0_DATAFLASH"
++CONFIG_SPI_MODE_0=y
++# CONFIG_SPI_MODE_1 is not set
++# CONFIG_SPI_MODE_2 is not set
++# CONFIG_SPI_MODE_3 is not set
++CONFIG_SPI_MODE=0
++CONFIG_PROJECT="dataflash"
++CONFIG_LOAD_UBOOT=y
++# CONFIG_LOAD_64KB is not set
++# CONFIG_LOAD_1MB is not set
++# CONFIG_LOAD_4MB is not set
++CONFIG_IMG_ADDRESS="0x00008400"
++CONFIG_IMG_SIZE="0x00040000"
++CONFIG_JUMP_ADDR="0x23F00000"
++CONFIG_APP_CHECK=y
++# CONFIG_LONG_TEST is not set
++# CONFIG_DEBUG is not set
++CONFIG_VERBOSE=y
++CONFIG_HW_INIT=y
++# CONFIG_USER_HW_INIT is not set
++# CONFIG_THUMB is not set
++CONFIG_SX_AT91=y
++CONFIG_RAW_AT91=y
+diff --git
+a/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9g20ek/defconfig
+b/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9g20ek/defconfig
+new file mode 100644
+index 0000000..8520a79
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9g20ek/defconfig
+@@ -0,0 +1,110 @@
++#
++# Automatically generated make config: don't edit
++# Tue Jan 12 22:00:34 2010
++#
++HAVE_DOT_CONFIG=y
++CONFIG_BOARDNAME="at91sam9g20dfc"
++# CONFIG_AT91SAM9260EK is not set
++# CONFIG_AT91SAM9261EK is not set
++# CONFIG_AT91SAM9263EK is not set
++# CONFIG_AT91SAM9RLEK is not set
++# CONFIG_AT91SAM9XEEK is not set
++# CONFIG_AT91SAM9G10EK is not set
++CONFIG_AT91SAM9G20EK=y
++# CONFIG_AT91SAM9G45EK is not set
++# CONFIG_AT91SAM9G45EKES is not set
++# CONFIG_AT91SAM9M10EK is not set
++# CONFIG_AT91CAP9ADK is not set
++# CONFIG_AT91CAP9STK is not set
++# CONFIG_AFEB9260 is not set
++CONFIG_CHIP="AT91SAM9G20"
++CONFIG_BOARD="at91sam9g20ek"
++CONFIG_MACH_TYPE="0x658"
++CONFIG_LINK_ADDR="0x000000"
++CONFIG_TOP_OF_MEMORY="0x301000"
++CONFIG_BOOTSTRAP_MAXSIZE="13000"
++# CONFIG_CRYSTAL_12_000MHZ is not set
++# CONFIG_CRYSTAL_16_000MHZ is not set
++# CONFIG_CRYSTAL_16_36766MHZ is not set
++CONFIG_CRYSTAL_18_432MHZ=y
++ALLOW_CRYSTAL_18_432MHZ=y
++CONFIG_CRYSTAL="CRYSTAL_18_432MHZ"
++# CONFIG_CPU_CLK_166MHZ is not set
++# CONFIG_CPU_CLK_180MHZ is not set
++# CONFIG_CPU_CLK_200MHZ is not set
++# CONFIG_CPU_CLK_240MHZ is not set
++# CONFIG_CPU_CLK_266MHZ is not set
++CONFIG_CPU_CLK_400MHZ=y
++ALLOW_CPU_CLK_400MHZ=y
++# DISABLE_CPU_CLK_240MHZ is not set
++# CONFIG_BUS_SPEED_83MHZ is not set
++# CONFIG_BUS_SPEED_90MHZ is not set
++# CONFIG_BUS_SPEED_100MHZ is not set
++CONFIG_BUS_SPEED_133MHZ=y
++
++#
++# Memory selection
++#
++CONFIG_SDRAM=y
++# CONFIG_SDDRC is not set
++# CONFIG_DDR2 is not set
++ALLOW_DATAFLASH=y
++# ALLOW_FLASH is not set
++ALLOW_NANDFLASH=y
++# ALLOW_SDCARD is not set
++# ALLOW_PSRAM is not set
++# ALLOW_SDRAM_16BIT is not set
++# CONFIG_RAM_32MB is not set
++CONFIG_RAM_64MB=y
++# CONFIG_RAM_128MB is not set
++# CONFIG_RAM_256MB is not set
++CONFIG_DATAFLASH=y
++# CONFIG_FLASH is not set
++# CONFIG_NANDFLASH is not set
++# CONFIG_SDCARD is not set
++CONFIG_MEMORY="dataflash"
++
++#
++# SPI configuration
++#
++CONFIG_SPI_CLK=33000000
++CONFIG_SMALL_DATAFLASH=y
++CONFIG_DATAFLASH_RECOVERY=y
++ALLOW_DATAFLASH_RECOVERY=y
++CONFIG_SPI_BOOT_CS0=y
++# CONFIG_SPI_BOOT_CS1 is not set
++# CONFIG_SPI_BOOT_CS2 is not set
++# CONFIG_SPI_BOOT_CS3 is not set
++ALLOW_BOOT_FROM_DATAFLASH_CS0=y
++ALLOW_BOOT_FROM_DATAFLASH_CS1=y
++# ALLOW_BOOT_FROM_DATAFLASH_CS2 is not set
++# ALLOW_BOOT_FROM_DATAFLASH_CS3 is not set
++DATAFLASHCARD_ON_CS0=y
++# DATAFLASHCARD_ON_CS1 is not set
++# DATAFLASHCARD_ON_CS2 is not set
++# DATAFLASHCARD_ON_CS3 is not set
++CONFIG_DATAFLASHCARD=y
++CONFIG_CARD_SUFFIX="card"
++CONFIG_SPI_BOOT="AT91C_SPI_PCS0_DATAFLASH"
++CONFIG_SPI_MODE_0=y
++# CONFIG_SPI_MODE_1 is not set
++# CONFIG_SPI_MODE_2 is not set
++# CONFIG_SPI_MODE_3 is not set
++CONFIG_SPI_MODE=0
++CONFIG_PROJECT="dataflash"
++CONFIG_LOAD_UBOOT=y
++# CONFIG_LOAD_64KB is not set
++# CONFIG_LOAD_1MB is not set
++# CONFIG_LOAD_4MB is not set
++CONFIG_IMG_ADDRESS="0x00008400"
++CONFIG_IMG_SIZE="0x00040000"
++CONFIG_JUMP_ADDR="0x23F00000"
++CONFIG_APP_CHECK=y
++# CONFIG_LONG_TEST is not set
++CONFIG_DEBUG=y
++CONFIG_VERBOSE=y
++CONFIG_HW_INIT=y
++# CONFIG_USER_HW_INIT is not set
++# CONFIG_THUMB is not set
++CONFIG_SX_AT91=y
++CONFIG_RAW_AT91=y
+diff --git
+a/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9rlek/defconfig
+b/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9rlek/defconfig
+new file mode 100644
+index 0000000..af7ce6a
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9rlek/defconfig
+@@ -0,0 +1,110 @@
++#
++# Automatically generated make config: don't edit
++# Tue Jan 12 22:00:47 2010
++#
++HAVE_DOT_CONFIG=y
++CONFIG_BOARDNAME="at91sam9rldf"
++# CONFIG_AT91SAM9260EK is not set
++# CONFIG_AT91SAM9261EK is not set
++# CONFIG_AT91SAM9263EK is not set
++CONFIG_AT91SAM9RLEK=y
++# CONFIG_AT91SAM9XEEK is not set
++# CONFIG_AT91SAM9G10EK is not set
++# CONFIG_AT91SAM9G20EK is not set
++# CONFIG_AT91SAM9G45EK is not set
++# CONFIG_AT91SAM9G45EKES is not set
++# CONFIG_AT91SAM9M10EK is not set
++# CONFIG_AT91CAP9ADK is not set
++# CONFIG_AT91CAP9STK is not set
++# CONFIG_AFEB9260 is not set
++CONFIG_CHIP="AT91SAM9RL"
++CONFIG_BOARD="at91sam9rlek"
++CONFIG_MACH_TYPE="1326"
++CONFIG_LINK_ADDR="0x000000"
++CONFIG_TOP_OF_MEMORY="0x310000"
++CONFIG_BOOTSTRAP_MAXSIZE="13000"
++# CONFIG_CRYSTAL_12_000MHZ is not set
++# CONFIG_CRYSTAL_16_000MHZ is not set
++# CONFIG_CRYSTAL_16_36766MHZ is not set
++CONFIG_CRYSTAL_18_432MHZ=y
++ALLOW_CRYSTAL_18_432MHZ=y
++CONFIG_CRYSTAL="CRYSTAL_18_432MHZ"
++# CONFIG_CPU_CLK_166MHZ is not set
++# CONFIG_CPU_CLK_180MHZ is not set
++CONFIG_CPU_CLK_200MHZ=y
++# CONFIG_CPU_CLK_240MHZ is not set
++# CONFIG_CPU_CLK_266MHZ is not set
++# CONFIG_CPU_CLK_400MHZ is not set
++ALLOW_CPU_CLK_200MHZ=y
++ALLOW_CPU_CLK_266MHZ=y
++# DISABLE_CPU_CLK_240MHZ is not set
++# CONFIG_BUS_SPEED_83MHZ is not set
++# CONFIG_BUS_SPEED_90MHZ is not set
++CONFIG_BUS_SPEED_100MHZ=y
++# CONFIG_BUS_SPEED_133MHZ is not set
++
++#
++# Memory selection
++#
++CONFIG_SDRAM=y
++# CONFIG_SDDRC is not set
++# CONFIG_DDR2 is not set
++ALLOW_DATAFLASH=y
++# ALLOW_FLASH is not set
++ALLOW_NANDFLASH=y
++# ALLOW_SDCARD is not set
++# ALLOW_PSRAM is not set
++# ALLOW_SDRAM_16BIT is not set
++# CONFIG_RAM_32MB is not set
++CONFIG_RAM_64MB=y
++# CONFIG_RAM_128MB is not set
++# CONFIG_RAM_256MB is not set
++CONFIG_DATAFLASH=y
++# CONFIG_FLASH is not set
++# CONFIG_NANDFLASH is not set
++# CONFIG_SDCARD is not set
++CONFIG_MEMORY="dataflash"
++
++#
++# SPI configuration
++#
++CONFIG_SPI_CLK=33000000
++CONFIG_SMALL_DATAFLASH=y
++# ALLOW_DATAFLASH_RECOVERY is not set
++CONFIG_SPI_BOOT_CS0=y
++# CONFIG_SPI_BOOT_CS1 is not set
++# CONFIG_SPI_BOOT_CS2 is not set
++# CONFIG_SPI_BOOT_CS3 is not set
++ALLOW_BOOT_FROM_DATAFLASH_CS0=y
++# ALLOW_BOOT_FROM_DATAFLASH_CS1 is not set
++# ALLOW_BOOT_FROM_DATAFLASH_CS2 is not set
++# ALLOW_BOOT_FROM_DATAFLASH_CS3 is not set
++# DATAFLASHCARD_ON_CS0 is not set
++# DATAFLASHCARD_ON_CS1 is not set
++# DATAFLASHCARD_ON_CS2 is not set
++# DATAFLASHCARD_ON_CS3 is not set
++# CONFIG_DATAFLASHCARD is not set
++CONFIG_CARD_SUFFIX=""
++CONFIG_SPI_BOOT="AT91C_SPI_PCS0_DATAFLASH"
++CONFIG_SPI_MODE_0=y
++# CONFIG_SPI_MODE_1 is not set
++# CONFIG_SPI_MODE_2 is not set
++# CONFIG_SPI_MODE_3 is not set
++CONFIG_SPI_MODE=0
++CONFIG_PROJECT="dataflash"
++CONFIG_LOAD_UBOOT=y
++# CONFIG_LOAD_64KB is not set
++# CONFIG_LOAD_1MB is not set
++# CONFIG_LOAD_4MB is not set
++CONFIG_IMG_ADDRESS="0x00008400"
++CONFIG_IMG_SIZE="0x00040000"
++CONFIG_JUMP_ADDR="0x23F00000"
++CONFIG_APP_CHECK=y
++# CONFIG_LONG_TEST is not set
++CONFIG_DEBUG=y
++CONFIG_VERBOSE=y
++CONFIG_HW_INIT=y
++# CONFIG_USER_HW_INIT is not set
++# CONFIG_THUMB is not set
++CONFIG_SX_AT91=y
++CONFIG_RAW_AT91=y
+diff --git
+a/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9xeek/defconfig
+b/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9xeek/defconfig
+new file mode 100644
+index 0000000..fc83730
+--- /dev/null
++++ b/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9xeek/defconfig
+@@ -0,0 +1,110 @@
++#
++# Automatically generated make config: don't edit
++# Tue Jan 12 22:00:49 2010
++#
++HAVE_DOT_CONFIG=y
++CONFIG_BOARDNAME="at91sam9xedfc"
++# CONFIG_AT91SAM9260EK is not set
++# CONFIG_AT91SAM9261EK is not set
++# CONFIG_AT91SAM9263EK is not set
++# CONFIG_AT91SAM9RLEK is not set
++CONFIG_AT91SAM9XEEK=y
++# CONFIG_AT91SAM9G10EK is not set
++# CONFIG_AT91SAM9G20EK is not set
++# CONFIG_AT91SAM9G45EK is not set
++# CONFIG_AT91SAM9G45EKES is not set
++# CONFIG_AT91SAM9M10EK is not set
++# CONFIG_AT91CAP9ADK is not set
++# CONFIG_AT91CAP9STK is not set
++# CONFIG_AFEB9260 is not set
++CONFIG_CHIP="AT91SAM9XE"
++CONFIG_BOARD="at91sam9xeek"
++CONFIG_MACH_TYPE="0x44B"
++CONFIG_LINK_ADDR="0x000000"
++CONFIG_TOP_OF_MEMORY="0x301000"
++CONFIG_BOOTSTRAP_MAXSIZE="13000"
++# CONFIG_CRYSTAL_12_000MHZ is not set
++# CONFIG_CRYSTAL_16_000MHZ is not set
++# CONFIG_CRYSTAL_16_36766MHZ is not set
++CONFIG_CRYSTAL_18_432MHZ=y
++ALLOW_CRYSTAL_18_432MHZ=y
++CONFIG_CRYSTAL="CRYSTAL_18_432MHZ"
++# CONFIG_CPU_CLK_166MHZ is not set
++# CONFIG_CPU_CLK_180MHZ is not set
++CONFIG_CPU_CLK_200MHZ=y
++# CONFIG_CPU_CLK_240MHZ is not set
++# CONFIG_CPU_CLK_266MHZ is not set
++# CONFIG_CPU_CLK_400MHZ is not set
++ALLOW_CPU_CLK_200MHZ=y
++# DISABLE_CPU_CLK_240MHZ is not set
++# CONFIG_BUS_SPEED_83MHZ is not set
++# CONFIG_BUS_SPEED_90MHZ is not set
++CONFIG_BUS_SPEED_100MHZ=y
++# CONFIG_BUS_SPEED_133MHZ is not set
++
++#
++# Memory selection
++#
++CONFIG_SDRAM=y
++# CONFIG_SDDRC is not set
++# CONFIG_DDR2 is not set
++ALLOW_DATAFLASH=y
++# ALLOW_FLASH is not set
++ALLOW_NANDFLASH=y
++# ALLOW_SDCARD is not set
++# ALLOW_PSRAM is not set
++# ALLOW_SDRAM_16BIT is not set
++# CONFIG_RAM_32MB is not set
++CONFIG_RAM_64MB=y
++# CONFIG_RAM_128MB is not set
++# CONFIG_RAM_256MB is not set
++CONFIG_DATAFLASH=y
++# CONFIG_FLASH is not set
++# CONFIG_NANDFLASH is not set
++# CONFIG_SDCARD is not set
++CONFIG_MEMORY="dataflash"
++
++#
++# SPI configuration
++#
++CONFIG_SPI_CLK=33000000
++CONFIG_SMALL_DATAFLASH=y
++CONFIG_DATAFLASH_RECOVERY=y
++ALLOW_DATAFLASH_RECOVERY=y
++CONFIG_SPI_BOOT_CS0=y
++# CONFIG_SPI_BOOT_CS1 is not set
++# CONFIG_SPI_BOOT_CS2 is not set
++# CONFIG_SPI_BOOT_CS3 is not set
++ALLOW_BOOT_FROM_DATAFLASH_CS0=y
++ALLOW_BOOT_FROM_DATAFLASH_CS1=y
++# ALLOW_BOOT_FROM_DATAFLASH_CS2 is not set
++# ALLOW_BOOT_FROM_DATAFLASH_CS3 is not set
++DATAFLASHCARD_ON_CS0=y
++# DATAFLASHCARD_ON_CS1 is not set
++# DATAFLASHCARD_ON_CS2 is not set
++# DATAFLASHCARD_ON_CS3 is not set
++CONFIG_DATAFLASHCARD=y
++CONFIG_CARD_SUFFIX="card"
++CONFIG_SPI_BOOT="AT91C_SPI_PCS0_DATAFLASH"
++CONFIG_SPI_MODE_0=y
++# CONFIG_SPI_MODE_1 is not set
++# CONFIG_SPI_MODE_2 is not set
++# CONFIG_SPI_MODE_3 is not set
++CONFIG_SPI_MODE=0
++CONFIG_PROJECT="dataflash"
++CONFIG_LOAD_UBOOT=y
++# CONFIG_LOAD_64KB is not set
++# CONFIG_LOAD_1MB is not set
++# CONFIG_LOAD_4MB is not set
++CONFIG_IMG_ADDRESS="0x00008400"
++CONFIG_IMG_SIZE="0x00040000"
++CONFIG_JUMP_ADDR="0x23F00000"
++CONFIG_APP_CHECK=y
++# CONFIG_LONG_TEST is not set
++CONFIG_DEBUG=y
++CONFIG_VERBOSE=y
++CONFIG_HW_INIT=y
++# CONFIG_USER_HW_INIT is not set
++# CONFIG_THUMB is not set
++CONFIG_SX_AT91=y
++CONFIG_RAW_AT91=y
 
 -- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+Best Regards
+Ulf Samuelsson
+
 
 
