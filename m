@@ -1,24 +1,28 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from mxa.rambler.ru ([81.19.66.231])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NUdCc-0003lE-QR
+	(envelope-from <alexondi@rambler.ru>) id 1NUe08-0002fd-QC
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 10:38:21 +0100
-Received: from 88-109-31-216.dynamic.dsl.as9105.com ([88.109.31.216]
-	helo=[192.168.2.155])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NUdAY-0005Nb-1s
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 09:36:10 +0000
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1234549968.1263282575.49599928.71648@mcgi65.rambler.ru>
+	Tue, 12 Jan 2010 11:29:32 +0100
+Received: from mcgi53.rambler.ru (mcgi53.rambler.ru [81.19.67.58])
+	by mxa.rambler.ru (Postfix) with ESMTP id 6F805CE9B4
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jan 2010 13:27:21 +0300 (MSK)
+Received: from mcgi53.rambler.ru (localhost [127.0.0.1])
+	by mcgi53.rambler.ru (Postfix) with ESMTP id E241311518
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jan 2010 13:27:18 +0300 (MSK)
+Received: from [77.52.17.176] by mcgi53.rambler.ru with HTTP (mailimap);
+	Tue, 12 Jan 2010 13:27:16 +0300
+From: Perepelica Alexander <alexondi@rambler.ru>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 12 Jan 2010 13:27:16 +0300
+MIME-Version: 1.0
 References: <1234549968.1263282575.49599928.71648@mcgi65.rambler.ru>
-Date: Tue, 12 Jan 2010 09:36:06 +0000
-Message-ID: <1263288966.457.153.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+	<1263288966.457.153.camel@lenovo.internal.reciva.com>
+Message-Id: <728686868.1263292036.179341680.5053@mcgi53.rambler.ru>
+X-Mailer: Ramail 3u, (untone), http://mail.rambler.ru
+X-SA-Exim-Connect-IP: 81.19.66.231
+X-SA-Exim-Mail-From: alexondi@rambler.ru
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Gnu/stubs-32.h not found
@@ -35,25 +39,154 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2010 09:38:22 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 12 Jan 2010 10:29:32 -0000
+X-Groupsio-MsgNum: 15583
 Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="_----------=_126329203650532"
 
-On Tue, 2010-01-12 at 10:49 +0300, Perepelica Alexander wrote:
-> I try compile target for x86_64 platform but I get
-> /x86_64-oe-linux/usr/include/gnu/stubs.h:7:27: error: gnu/stubs-32.h: No 
-> such file or directory
-> Where can I disable multilib feature gcc?
-> Or maybe can I install multilibs into target?
+--_----------=_126329203650532
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 
-This isn't really anything to do with multilibs.  I think you just need
-to figure out why that file is not being correctly installed and fix it.
-It's hard/impossible to give any real advice on that without knowing
-which package versions you are using and which one you were trying to
-build when this error occurred.
+Hello Phil!
 
-p.
+> This isn't really anything to do with multilibs.  I think you just 
+need
+> to figure out why that file is not being correctly installed and fix 
+it.
+> It's hard/impossible to give any real advice on that without knowing
+> which package versions you are using and which one you were trying to
+> build when this error occurred.
+In attachments are my configs
+--
+Thank you.
+Perepelica Alexander
 
+--_----------=_126329203650532
+Content-Disposition: attachment; filename="x86_64-generic.conf"
+Content-Transfer-Encoding: base64
+Content-Type: application/octet-stream; name="x86_64-generic.conf"
 
+IyBDb3B5cmlnaHQgKEMpIDIwMDcsMjAwOSBTdGVsaW9zIEtvcm9uZW9zIC0gRGlnaXRhbCBPUFNp
+UywgQWxsIFJpZ2h0cyBSZXNlcnZlZAojIFJlbGVhc2VkIHVuZGVyIHRoZSBNSVQgbGljZW5zZSAo
+c2VlIHBhY2thZ2VzL0NPUFlJTkcpCiNAVFlQRTogTWFjaGluZQojQE5BTUU6IHg4Nl82NC1nZW5l
+cmljCiNAREVTQ1JJUFRJT046IE1hY2hpbmUgY29uZmlndXJhdGlvbiBmb3IgYSBnZW5lcmljIHg4
+Nl82NCBtYWNoaW5lCgoKVEFSR0VUX0FSQ0ggPSAieDg2XzY0IgoKUFJFRkVSUkVEX1BST1ZJREVS
+X3ZpcnR1YWwva2VybmVsID0gImxpbnV4IgoKUFJFRkVSUkVEX1ZFUlNJT05fZ2NjID0gIjQuNC4y
+IgoKS0VSTkVMX0lNQUdFVFlQRSA9ICJiekltYWdlIgoKR0xJQkNfQURET05TID0gIm5wdGwiCkdM
+SUJDX0VYVFJBX09FQ09ORiA9ICItLXdpdGgtdGxzIgoKSU1BR0VfRlNUWVBFUyA/PSAiZXh0Mi5n
+eiIKSU1BR0VfREVWSUNFX1RBQkxFUyA9ICIgXAogIGZpbGVzL2RldmljZV90YWJsZS1taW5pbWFs
+LnR4dCBcCiAgZmlsZXMvZGV2aWNlX3RhYmxlX2FkZC1sb29wLnR4dCBcCiAgZmlsZXMvZGV2aWNl
+X3RhYmxlX2FkZC1zY3NpLnR4dCBcCiIKCk1BQ0hJTkVfRkVBVFVSRVMgPSAia2VybmVsMjYgc2Ny
+ZWVuIGtleWJvYXJkIHBjaSB1c2Job3N0IGFjcGkgZXh0MiB4ODYiCk1BQ0hJTkVfRVhUUkFfUlJF
+Q09NTUVORFMgPSAiIGtlcm5lbC1tb2R1bGVzIgoKI3R1bmUgZm9yIHg4Nl82NApyZXF1aXJlIGNv
+bmYvbWFjaGluZS9pbmNsdWRlL3R1bmUteDg2XzY0LmluYwoK
 
+--_----------=_126329203650532
+Content-Disposition: attachment; filename="mylinux.conf"
+Content-Transfer-Encoding: base64
+Content-Type: application/octet-stream; name="mylinux.conf"
 
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMKI0BUWVBFOiBEaXN0cmlidXRpb24KI0BOQU1FOiBteWxpbnV4
+CiNAREVTQ1JJUFRJT046IFNwcnV0IExpbnV4IERpc3RyaWJ1dGlvbiAoZWdsaWJjIGJhc2VkKQoj
+QE1BSU5UQUlORVI6IGFsZXhvbmRpCiNAQ09NTUVOVDogVGhpcyBkaXN0cmlidXRpb24gY29uZmln
+dXJhdGlvbiBkZWZpbmVzIGEgdHJ1ZWx5IHRpbnkgT0UgTGludXggIAojQENPTU1FTlQ6IGRpc3Ry
+aWJ1dGlvbi4gVGhlIG1hdGNoaW5nIGJ1aWxkYWJsZSBpbWFnZSB0YXJnZXQgKG1pY3JvLWltYWdl
+KQojQENPTU1FTlQ6IGJhc2ljYWxseSBjb25zaXN0cyBvZjogbGliYywgYnVzeWJveCwgdWRldiwg
+c3lzdiBpbml0LCBhbmQgYSBmZXcKI0BDT01NRU5UOiBpbml0IHNjcmlwdHMgZm9yIHJ1bm5pbmcg
+dXAgdGhlIHN5c3RlbS4KIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMKCiMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+CiMgRElTVFJPIENPTkZJR1VSQVRJT04KIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMKRElTVFJPX05BTUUg
+PSAibXlsaW51eCIKRElTVFJPX1ZFUlNJT04gPSAiJHtTUkNEQVRFfSIKCiMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjCiMgRElTVFJPIEZFQVRVUkUgU0VMRUNUSU9OCiMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjCiMg
+Tm8gZmVhdHVyZXMgc2VsZWN0ZWQKI0RJU1RST19GRUFUVVJFUyA9ICJlYWJpIgoKIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMKIyBMSUJSQVJZIE5BTUVTCiMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjCiMgVXNlIERl
+YmlhbiBuYW1pbmcgc2NoZW1lIGZvciBsaWJyYXJ5ICguc28pIGZpbGVzCklOSEVSSVQgKz0gImRl
+YmlhbiIKCiMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjCiMgUEFDS0FHSU5HICYgRkVFRFMKIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMKIyBTZWxlY3QgcGFja2FnaW5nIHN5c3RlbQpQUkVGRVJSRURfUEtHX0ZPUk1B
+VCA9ICJpcGsiCklQS0dfVkFSSUFOVCA9ICJvcGtnLW5vZ3BnIgoKcmVxdWlyZSBjb25mL2Rpc3Ry
+by9pbmNsdWRlL3NhbmUtZmVlZC5pbmMKcmVxdWlyZSBjb25mL2Rpc3Ryby9pbmNsdWRlL3NhbmUt
+ZmVlZC0ke1BSRUZFUlJFRF9QS0dfRk9STUFUfS5pbmMKCiMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjCiMg
+SU1BR0VTCiMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjCiMgTmFtZSBnZW5lcmF0ZWQgaW1hZ2VzCklNQUdF
+X05BTUUgPSAiJHtESVNUUk9fTkFNRX0tJHtJTUFHRV9CQVNFTkFNRX0tJHtMSUJDfS1cCiR7UFJF
+RkVSUkVEX1BLR19GT1JNQVR9LSR7RElTVFJPX1ZFUlNJT059LSR7TUFDSElORX0iCgpDQUNIRSA/
+PSAiJHtUTVBESVJ9L2NhY2hlLyR7TElCQ30vJHtNQUNISU5FfSIKREVQTE9ZX0RJUiA/PSAiJHtU
+TVBESVJ9L2RlcGxveS8ke0xJQkN9IgpERVBMT1lfRElSX0lNQUdFID0gIiR7REVQTE9ZX0RJUn0v
+aW1hZ2VzLyR7TUFDSElORX0iCgojIEltYWdlIG91dHB1dCB0eXBlcwpJTUFHRV9GU1RZUEVTID89
+ICJleHQyIGV4dDMgdGFyLmd6IgoKIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMKIyBMSU5VWCBLRVJORUwg
+U0VMRUNUSU9OCiMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjCktFUk5FTCA9ICJrZXJuZWwyNiIKTUFDSElO
+RV9LRVJORUxfVkVSU0lPTiA9ICIyLjYiCgojIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIwojIFRPT0xDSEFJ
+TgojIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIwpMSUJDID89ICJlZ2xpYmMiCiNMSUJDID89ICJnbGliYyIK
+UFJFRkVSUkVEX0JJTlVUSUxTID0gIjIuMjAiCgpyZXF1aXJlIGNvbmYvZGlzdHJvL2luY2x1ZGUv
+c2FuZS10b29sY2hhaW4uaW5jCgojIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIwojIE9WRVJSSURFUyBhZGp1
+c3RlZCBmcm9tIGJpdGJha2UuY29uZiB0byBmZWF0dXJlIHRoZSBNQUNISU5FX0NMQVNTCiMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjCk9WRVJSSURFUyA9ICJsb2NhbDoke01BQ0hJTkV9OiR7TUFDSElORV9D
+TEFTU306JHtESVNUUk99OiR7VEFSR0VUX09TfTpcCiR7VEFSR0VUX0FSQ0h9OmJ1aWxkLSR7QlVJ
+TERfT1N9OmZhaWwtZmFzdDpwbi0ke1BOfSIKCgojIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIwojIE5MUwoj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIwpVU0VfTkxTID0gIm5vIgpVU0VfTkxTX2dsaWItMi4wID0gInll
+cyIKVVNFX05MU19nbGliLTIuMC1uYXRpdmUgPSAieWVzIgpVU0VfTkxTX2djYy1jcm9zcyA9ICJu
+byIKCiMgRGlzYWJsZSBiaW5hcnkgbG9jYWxlIGdlbmVyYXRpb24KRU5BQkxFX0JJTkFSWV9MT0NB
+TEVfR0VORVJBVElPTiA9ICIwIgoKIyBEb24ndCBpbnN0YWxsIHVzZWxlc3Mgc3ltbGlua3MgdG8g
+bGlicmFyaWVzClBBQ0tBR0VfU05BUF9MSUJfU1lNTElOS1MgPSAiMSIKCiMgQ29sbGFwc2UgL3Vz
+ciBpbnRvIC8KI3ByZWZpeCA9ICIiCiNleGVjX3ByZWZpeCA9ICIiCiNwcmVmaXhfbmF0aXZlID0g
+IiIKI2V4ZWNfcHJlZml4X25hdGl2ZSA9ICIiCgojIERvbid0IGluc3RhbGwgbGRjb25maWcgYW5k
+IGFzc29jaWF0ZWQgZ3ViYmlucwojVVNFX0xEQ09ORklHID0gIjAiCgojIERpc2FibGUgb25saW5l
+IHBhY2thZ2UgbWFuYWdlbWVudApPTkxJTkVfUEFDS0FHRV9NQU5BR0VNRU5UID0gIm5vbmUiCgpE
+SVNUUk9fQkxVRVRPT1RIX01BTkFHRVIgPSAiIgoKIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMKIyBQUkVG
+RVJSRUQgVkVSU0lPTlMKIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
+IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMKCgojTWFrZSBzdXJlIHdlIHVzZSAy
+LjYgb24gbWFjaGluZXMgd2l0aCBhIDIuNC8yLjYgc2VsZWN0b3IKI0tFUk5FTCA9ICJrZXJuZWwy
+NiIKI01BQ0hJTkVfS0VSTkVMX1ZFUlNJT04gPSAiMi42IgojIFNlbGVjdCB4c2VydmVyLXhvcmcg
+YXMgZGVmYXVsdCwgc2luY2Uga2RyaXZlIGhhcyBiZWVuIEVPTCdlZApYU0VSVkVSID89ICJ4c2Vy
+dmVyLXhvcmcgeGY4Ni1pbnB1dC1ldmRldiB4Zjg2LWlucHV0LWtleWJvYXJkIHhmODYtaW5wdXQt
+bW91c2UgeGY4Ni12aWRlby1mYmRldiIgCiNQUkVGRVJSRURfUFJPVklERVJfdmlydHVhbC94c2Vy
+dmVyID89ICJ4c2VydmVyLXhvcmciCiNQUkVGRVJSRURfUFJPVklERVJfeHNlcnZlciA/PSAieHNl
+cnZlci14b3JnIgoKCnJlcXVpcmUgY29uZi9kaXN0cm8vaW5jbHVkZS9zYW5lLXNyY2RhdGVzLmlu
+YwpyZXF1aXJlIGNvbmYvZGlzdHJvL2luY2x1ZGUvc2FuZS1zcmNyZXZzLmluYwpyZXF1aXJlIGNv
+bmYvZGlzdHJvL2luY2x1ZGUvc2FuZS10b29sY2hhaW4uaW5jCnJlcXVpcmUgY29uZi9kaXN0cm8v
+aW5jbHVkZS9wcmVmZXJyZWQteG9yZy12ZXJzaW9ucy1YMTFSNy41LmluYwo=
+
+--_----------=_126329203650532
+Content-Disposition: attachment; filename="local.conf"
+Content-Transfer-Encoding: base64
+Content-Type: application/octet-stream; name="local.conf"
+
+RExfRElSID0gIiR7SE9NRX0vT0Uvc291cmNlcyIKCkJCRklMRVMgOj0gIiR7SE9NRX0vT0Uvb3Bl
+bmVtYmVkZGVkL3JlY2lwZXMvKi8qLmJiIgoKIyBTZWxlY3QgYmV0d2VlbiBtdWx0aXBsZSBhbHRl
+cm5hdGl2ZSBwcm92aWRlcnMsIGlmIG1vcmUgdGhhbiBvbmUgaXMgZWxpZ2libGUuClBSRUZFUlJF
+RF9QUk9WSURFUlMgPSAidmlydHVhbC9xdGU6cXRlIHZpcnR1YWwvbGlicXBlOmxpYnFwZS1vcGll
+IgpQUkVGRVJSRURfUFJPVklERVJTICs9ICIgdmlydHVhbC9saWJzZGw6bGlic2RsLXgxMSIKUFJF
+RkVSUkVEX1BST1ZJREVSUyArPSAiIHZpcnR1YWwvJHtUQVJHRVRfUFJFRklYfWdjYy1pbml0aWFs
+OmdjYy1jcm9zcy1pbml0aWFsIgpQUkVGRVJSRURfUFJPVklERVJTICs9ICIgdmlydHVhbC8ke1RB
+UkdFVF9QUkVGSVh9Z2NjLWludGVybWVkaWF0ZTpnY2MtY3Jvc3MtaW50ZXJtZWRpYXRlIgpQUkVG
+RVJSRURfUFJPVklERVJTICs9ICIgdmlydHVhbC8ke1RBUkdFVF9QUkVGSVh9Z2NjOmdjYy1jcm9z
+cyIKUFJFRkVSUkVEX1BST1ZJREVSUyArPSAiIHZpcnR1YWwvJHtUQVJHRVRfUFJFRklYfWcrKzpn
+Y2MtY3Jvc3MiCgpNQUNISU5FID0gIng4Nl82NC1nZW5lcmljIgoKVEFSR0VUX09TID0gImxpbnV4
+IgoKRElTVFJPID0gIm15bGludXgiCgpFTkFCTEVfQklOQVJZX0xPQ0FMRV9HRU5FUkFUSU9OID0g
+IjEiCgpHTElCQ19HRU5FUkFURV9MT0NBTEVTID0gImVuX1VTLlVURi04IgoKTUFDSElORV9LRVJO
+RUxfVkVSU0lPTiA9ICIyLjYiCgpJTUFHRV9GU1RZUEVTID0gImV4dDMgZXh0MiIKClBBUkFMTEVM
+X01BS0UgPSAiLWogNCIKCkJCX05VTUJFUl9USFJFQURTID0gIjIiCgpCQklOQ0xVREVMT0dTID0g
+InllcyIKCg==
+
+--_----------=_126329203650532--
