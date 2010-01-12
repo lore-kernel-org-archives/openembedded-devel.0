@@ -1,27 +1,44 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from mail-fx0-f212.google.com ([209.85.220.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NUnti-0002iz-Pt
+	(envelope-from <martin.jansa@gmail.com>) id 1NUp9J-0002EB-09
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 22:03:35 +0100
-Received: from 88-109-31-216.dynamic.dsl.as9105.com ([88.109.31.216]
-	helo=[192.168.2.155])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NUnrO-0004f2-RB
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 21:01:09 +0000
-From: Phil Blundell <philb@gnu.org>
+	Tue, 12 Jan 2010 23:23:44 +0100
+Received: by fxm4 with SMTP id 4so19470031fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jan 2010 14:21:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=r9oQn4yXLoF519yCMuZ0eP6J96lBqKyOsKJFQB7wJVs=;
+	b=QAIXvaxgz4KEyY6YN9qvz3IqNbk3OcdTLLjbTSiynDgkio/V3OB+cNgo8Cwm+gvw6q
+	BV4MP7xPl5aYq7gOcsvHgeA9GP/zDBj0SCIpzE6sI1+3ObJOfrGuqUVz7gzZQy704p9K
+	doPNpaDfHRiteJnwVbLosWqipHPICjNQ8USOI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=RtSbaP2C9Xjj4ySvr8dlOTcciRwPXopthW2X/AkEckIdT30KE0Tok0UBWOx03p9oYb
+	64UBK5hGdLINQsqLxr5rhKwsJs47gySYC/aafz+WbaJpHUekjJekEf22xQSa4MgI4or1
+	FRFVmcv28v/e2HLy+GR51lLAocTuQoO9GhLkE=
+Received: by 10.223.95.72 with SMTP id c8mr4319651fan.73.1263334891275;
+	Tue, 12 Jan 2010 14:21:31 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 15sm559136fxm.10.2010.01.12.14.21.29
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 12 Jan 2010 14:21:29 -0800 (PST)
+Date: Tue, 12 Jan 2010 23:21:21 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1263304959.18954.38.camel@balakrishnan-desktop>
-References: <1263304959.18954.38.camel@balakrishnan-desktop>
-Date: Tue, 12 Jan 2010 21:00:45 +0000
-Message-ID: <1263330045.457.260.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+Message-ID: <20100112222121.GD10781@jama>
+References: <20100108132344.GB2156@jama>
+MIME-Version: 1.0
+In-Reply-To: <20100108132344.GB2156@jama>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.212
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Adding PXA270 based Machine....
+Subject: Re: update-alternatives broken badly (by me :()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,33 +52,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2010 21:03:35 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 12 Jan 2010 22:23:44 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tue, 2010-01-12 at 19:32 +0530, balakrishnan wrote:
-> I going to add pxa270 based machine with Angstrom distribution
-> to OE, regarding this can I have answer of list of my doubts...   
-> 
-> 1.Whether I can send machine conf ,linux recipes, U-Boot recipes and
-> Image recipes are in single patch or separated patch?  
+Hi,
 
-Please send them as separate patches.
+Still no review/ACK :(.
 
-> 2.If OE-Dev mailing list accepted my patches then, what is my next step?
+I'll try to explain it better to show how bad it can be and even make
+review easier.
 
-If they are accepted then someone will commit them to the repository.
-You don't need to take any action.
+We have target where sysvinit as init is crucial for successful boot (ie
+SHR on freerunner) and u-a-cworth is installed on image, because
+task-boot RDEPENDs on update-alternatives.
 
-> 3.If it commited by myself then, what commit rights I have?
-> 4.Can I commit with out "Signed-off-by" line?
+Let's start with image built after 2009-12-08.
+u-a-opkg is used for in do_rootfs, but u-a-cworth is installed in image
+too and is used by default.
 
-If you need to ask the question then the answer is that you don't have
-any commit access: if you did have direct checkin access to the tree
-then you would know about it.
+T1) after flashing
+  ipkg/alternatives/init        opkg/alternatives/init
+    doesnt-exist                  /sbin/init
+                                  /sbin/init.sysvinit 60
+                                 ../bin/busybox 50
+  =>sysvinit is used, everything is fine
 
-p.
+good scenario:
+T2a) sysvinit is upgraded first
+  ipkg/alternatives/init        opkg/alternatives/init
+    /sbin/init                    /sbin/init
+    /sbin/init.sysvinit 60        /sbin/init.sysvinit 60
+                                  ../bin/busybox 50
+  =>sysvinit is used, everything is fine
+  - newer file works but is incomplete
 
+T3a) busybox is upgraded
+  ipkg/alternatives/init        opkg/alternatives/init
+    /sbin/init                    /sbin/init
+    /sbin/init.sysvinit 60        /sbin/init.sysvinit 60
+    ../bin/busybox 50             ../bin/busybox 50
+  =>sysvinit is used, everything is fine
+  - newer file works and is the same as opkg
 
+bad scenario
+T2b) busybox is upgrade first
+  ipkg/alternatives/init        opkg/alternatives/init
+    /sbin/init                    /sbin/init
+    ../bin/busybox 50             /sbin/init.sysvinit 60
+                                  ../bin/busybox 50
+  =>busybox is used, device won't boot anymore
+  - newer file is from cworth but is worse
+
+T3b) sysvinit is upgraded
+  ipkg/alternatives/init        opkg/alternatives/init
+    /sbin/init                    /sbin/init
+    /sbin/init.sysvinit 60        /sbin/init.sysvinit 60
+  ../bin/busybox 50             ../bin/busybox 50
+  
+  =>sysvinit is used again, everything is fine
+  - newer file works and is the same again
+
+If we merge ipkg/alternatives and opkg/alternatives before T2b) there
+will be no problem.
+
+If we merge it after T2b) and then force busybox upgrade then we will
+fix broken image too (as busybox is using probably the most u-a links
+and has lowest priority). So busybox PR bump is good idea AFTER merging
+u-a alternatives.
+
+Worst scenario (where merger fails):
+Tfsck) After T3a) or T3b) user intentionally remove sysvint package 
+  (ie because he can boot even with busybox)
+  ipkg/alternatives/init        opkg/alternatives/init
+    /sbin/init                    /sbin/init
+    ../bin/busybox 50             /sbin/init.sysvinit 60
+                                  ../bin/busybox 50
+  =>busybox is used, user is happy
+
+then we run merge script (longer alternative file wins
+=>sysvinit is used again, but without actuall /sbin/init.sysvinit file
+in fs.. boot fails, user is sad. I think there is no way to distinguish
+between T2b where newer shorter file is wrong and Tfsck where newer
+shorter file is the right one (without checking opkg history..)
+
+With images built before 2009-12-08 it should be simple
+opkg/alternatives should be empty, all files from ipkg/alternatives are
+just moved there..
+
+Why would I like to add the same merge script to opkg?
+1) someone maybe already removed -cworth from image with first sign of
+   issues (but still too late) and -cworth postinst is still needed
+
+2) task-boot will be fixed (RDEPEND on same u-a as
+   virtual/update-alternatives-native) and user won't get -cworth update.
+
+3) If I get new -cworth and busybox in one opkg upgrade batch, then I'm
+   not sure which postinst will be executed first (we need -cworth first),
+   but opkg maybe run own postinst before configuring other packages (ie
+   portage does that completely even with restart of upgrade process)
+
+Updated -cworth is already used in SHR (from shr/merge branch).
+
+My shell foo is maybe not strong enough to check that everything is available 
+in all environments and no bashisms were used..)
+
+Thanks and please comment (I'll resend whole patch serie as soon as
+someone confirms that's good path to go).
+
+Regards,
+
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
