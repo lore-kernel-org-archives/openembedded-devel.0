@@ -1,38 +1,35 @@
-Received: from familie-heinold.de ([85.214.48.103]
-	helo=mail.familie-heinold.de) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1NUkXq-000344-78
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NUl99-0007NL-8s for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Jan 2010 19:07:20 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NUl74-0001su-0t
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 18:28:45 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 59F1F11000E9
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2010 18:26:29 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id A17A91100096
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2010 18:26:28 +0100 (CET)
-Received: from rhein.familie-heinold.de (f052064053.adsl.alicedsl.de
-	[78.52.64.53]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2010 18:26:28 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id B11D73C11F; Tue, 12 Jan 2010 18:26:27 +0100 (CET)
-Date: Tue, 12 Jan 2010 18:26:27 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Tue, 12 Jan 2010 19:05:06 +0100
+Received: from 69.199.146.210 ([69.199.146.210])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jan 2010 19:05:05 +0100
+Received: from q-newsgroup by 69.199.146.210 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jan 2010 19:05:05 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100112172626.GA3850@rhein.zuhause.netz>
-References: <1263304959.18954.38.camel@balakrishnan-desktop>
-MIME-Version: 1.0
-In-Reply-To: <1263304959.18954.38.camel@balakrishnan-desktop>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+From: David Winn <q-newsgroup@qypea.com>
+Date: Tue, 12 Jan 2010 18:01:12 +0000 (UTC)
+Message-ID: <loom.20100112T185527-540@post.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 69.199.146.210 (Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.6) Gecko/20100107 Fedora/3.5.6-1.fc12 Firefox/3.5.6)
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Adding PXA270 based Machine....
+Subject: Apache staging for building modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,33 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2010 17:28:45 -0000
+X-List-Received-Date: Tue, 12 Jan 2010 18:07:20 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jan 12, 2010 at 07:32:39PM +0530, balakrishnan wrote:
->          I going to add pxa270 based machine with Angstrom distribution
-> to OE, regarding this can I have answer of list of my doubts...   
-> 
-> 1.Whether I can send machine conf ,linux recipes, U-Boot recipes and
-> Image recipes are in single patch or separated patch?  
+I'm trying to create a recipe mod_fastcgi for use with apache2 in OE, and hit a
+bit of a problem. In order to build mod_fastcgi requires access to the apache
+source directory, which is removed by rm_work. Apache2-native is staging headers
+and apxs which might work for building native modules, but won't cross compile.
 
-seperated patches please
+Is there something I am overlooking here? Are any other apache modules compiled
+by OE?
 
-> 2.If OE-Dev mailing list accepted my patches then, what is my next step?
-oe-dev list is good
+Thanks,
+David
 
-> 3.If it commited by myself then, what commit rights I have?
-If you work hard and provide us patches and apply for write
-access you can do it in the end your self if you want.
-
-> 4.Can I commit with out "Signed-off-by" line?
-If you have write access Signed-off is not needed,
-If you dont have it sign your patches
-
-> 
-> Thank You
-
-Bye Henning
 
 
