@@ -1,39 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NUhUb-00013w-0l for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 15:13:12 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NUhSW-0004Yz-3x
+	(envelope-from <philb@gnu.org>) id 1NUhaB-0001Kf-LG
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 15:11:00 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2010 15:11:00 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2010 15:11:00 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 12 Jan 2010 15:18:58 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NUhY8-0008Ly-1o
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Jan 2010 14:16:48 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1NUhY7-0001LE-He
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Jan 2010 14:16:47 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 12 Jan 2010 15:10:33 +0100
-Message-ID: <hihvso$eon$1@ger.gmane.org>
-References: <E1NTDIp-00055S-0r@melo.openembedded.org>
-	<20100112140326.GC10781@jama>
+In-Reply-To: <727203316.1263292376.164699196.97945@mcgi41.rambler.ru>
+References: <1234549968.1263282575.49599928.71648@mcgi65.rambler.ru>
+	<1263288966.457.153.camel@lenovo.internal.reciva.com>
+	<728686868.1263292036.179341680.5053@mcgi53.rambler.ru>
+	<727203316.1263292376.164699196.97945@mcgi41.rambler.ru>
+Date: Tue, 12 Jan 2010 14:16:44 +0000
+Message-ID: <1263305804.3675.396.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100104 Shredder/3.0.1pre
-In-Reply-To: <20100112140326.GC10781@jama>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Koen Kooi : xserver-xorg 1.7.3: fix regression where hal was disabled
+Subject: Re: Gnu/stubs-32.h not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,58 +43,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2010 14:13:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 12 Jan 2010 14:18:58 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, 2010-01-12 at 13:32 +0300, Perepelica Alexander wrote:
+> He is log
 
-On 12-01-10 15:03, Martin Jansa wrote:
-> On Fri, Jan 08, 2010 at 11:46:51AM +0000, git version control wrote:
->> Module: openembedded.git
->> Branch: org.openembedded.dev
->> Commit: 3a9b352acba24c78b562d8dc6527b774cbb86041
->> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=3a9b352acba24c78b562d8dc6527b774cbb86041
->>
->> Author: Koen Kooi <koen@openembedded.org>
->> Date:   Fri Jan  8 12:44:47 2010 +0100
->>
->> xserver-xorg 1.7.3: fix regression where hal was disabled
->>
->> * this fixes the "my touchscreen isn't working anymore" bug
-> 
-> Thanks,
-> 
-> can we add hal conditionaly as XINERAMA is?
-> Maybe for both om-gta01, om-gta02?
-> 
-> We have input configuration in xorg.conf and with hal for input
-> detection deprecated by xorg devs I guess we won't change that before
-> 1.8 xserver (maybe with deviceKit or something else).
+Ah, I see.  So, you were right: it is in fact a multilibs problem.  What
+has happened here is that gcc is trying to build a 32-bit version of
+libgcc2, but you haven't compiled a 32-bit version of glibc yet.
 
-AIUI you can do --enable-udev to get udev based device handling (aka
-"The Future") working, but that would involve one of the OE devs
-expanding the current touchscreen0 udev rule.
-- --enable hal and --enable-udev are mutually exclusive, though.
+There are two possible fixes:
 
-> Before this change hal could be removed from om-gta*
-> 
-> I'm also willing to accept that we also need hal from reasons I don't know
-> about yet..
+- write a variant .bb file to build a 32 bit glibc, and arrange for
+gcc-cross to DEPEND on that; or
 
-e.g. people wanting to use xf86-input-tslib on gta0X, like me :)
+- patch t-linux64, and/or the gcc configury, to stop it trying to build
+the 32-bit multilib.
 
-regards,
+Which of those is appropriate obviously depends on what you are trying
+to achieve, and I guess it would be sensible to provide a switch that
+the DISTRO can use to enable or disable 32-bit multilibs.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+p.
 
-iD8DBQFLTILZMkyGM64RGpERAv0+AKCKBN96oE8Yvx1/dK7/y0lG82oMOgCfcgpx
-CHftf+HCW1kH9SHY1aKb9gI=
-=bmXf
------END PGP SIGNATURE-----
 
 
 
