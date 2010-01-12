@@ -1,29 +1,34 @@
-Received: from mxa.rambler.ru ([81.19.66.231])
+Received: from mail.atmel.fr ([81.80.104.162] helo=atmel-es2.atmel.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <alexondi@rambler.ru>) id 1NUbcw-0000VS-6w
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 08:57:25 +0100
-Received: from mcgi65.rambler.ru (mcgi65.rambler.ru [81.19.67.199])
-	by mxa.rambler.ru (Postfix) with ESMTP id 9B9C8A2BC1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2010 10:49:40 +0300 (MSK)
-Received: from mcgi65.rambler.ru (localhost [127.0.0.1])
-	by mcgi65.rambler.ru (Postfix) with ESMTP id 04D055CB0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2010 10:49:38 +0300 (MSK)
-Received: from [77.52.17.176] by mcgi65.rambler.ru with HTTP (mailimap);
-	Tue, 12 Jan 2010 10:49:35 +0300
-From: Perepelica Alexander <alexondi@rambler.ru>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 12 Jan 2010 10:49:35 +0300
+	(envelope-from <nicolas.ferre@atmel.com>)
+	id 1NUc7m-0005O9-6e; Tue, 12 Jan 2010 09:29:17 +0100
+Received: from fwat.rfo.atmel.com (gateway [192.168.1.1])
+	by atmel-es2.atmel.fr (8.11.7p1+Sun/8.11.6) with SMTP id o0C8QTF22045; 
+	Tue, 12 Jan 2010 09:26:30 +0100 (MET)
+Received: from meyreuil ([10.159.254.132]) by fwat;
+	Tue, 12 Jan 2010 09:10:59 +0100 (MET)
+Received: from [127.0.0.1] (pc245_112.atmel.fr [10.159.245.112])
+	by meyreuil.atmel.fr (8.11.7p1+Sun/8.11.7) with ESMTP id o0C8Qvg29440; 
+	Tue, 12 Jan 2010 09:26:57 +0100 (MET)
+Message-ID: <4B4C3253.7040702@atmel.com>
+Date: Tue, 12 Jan 2010 09:26:59 +0100
+From: Nicolas Ferre <nicolas.ferre@atmel.com>
+Organization: atmel
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
+	rv:1.9.1.5) Gecko/20091204 Lightning/1.0b2pre Thunderbird/3.0
 MIME-Version: 1.0
-Message-Id: <1234549968.1263282575.49599928.71648@mcgi65.rambler.ru>
-X-Mailer: Ramail 3u, (untone), http://mail.rambler.ru
-X-SA-Exim-Connect-IP: 81.19.66.231
-X-SA-Exim-Mail-From: alexondi@rambler.ru
+To: Discussion of the angstrom distribution development
+	<angstrom-distro-devel@linuxtogo.org>
+References: <1263224731-2691-1-git-send-email-nicolas.ferre@atmel.com>
+	<hiflqc$b75$1@ger.gmane.org>
+In-Reply-To: <hiflqc$b75$1@ger.gmane.org>
+X-SA-Exim-Connect-IP: 81.80.104.162
+X-SA-Exim-Mail-From: nicolas.ferre@atmel.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Gnu/stubs-32.h not found
+Cc: Koen Kooi <k.kooi@student.utwente.nl>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [Angstrom-devel] [PATCH] sane-feed.inc: adding some ATMEL boards
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,21 +42,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2010 07:57:25 -0000
-Content-Disposition: inline
+X-List-Received-Date: Tue, 12 Jan 2010 08:29:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
 
-Hi!
-I try compile target for x86_64 platform but I get
-/x86_64-oe-linux/usr/include/gnu/stubs.h:7:27: error: gnu/stubs-32.h: No 
-such file or directory
-Where can I disable multilib feature gcc?
-Or maybe can I install multilibs into target?
+Le 11/01/2010 18:06, Koen Kooi :
+> On 11-01-10 16:45, Nicolas Ferre wrote:
+>> Add some armv5te entries for ATMEL -EK boards.
+> 
+> FEED_ARCH is deprecated and shouldn't be used any more. I'm surprised it
+> spread beyond angstrom after it being deprecated, but I guess that's
+> what blind copy-pasting will do for you.
 
+Ok then.
 
---
-Thank you.
-Perepelica Alexander
+Bye,
+-- 
+Nicolas Ferre
+
 
 
