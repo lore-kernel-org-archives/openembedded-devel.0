@@ -1,38 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NUiXd-0002dh-Sn for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 16:20:24 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NUiVR-0002bO-1Q
+	(envelope-from <msmith@cbnco.com>) id 1NUiYR-0002fr-3f
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 16:18:05 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2010 16:18:05 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Tue, 12 Jan 2010 16:21:14 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 374DB61C9EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2010 16:18:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 12 Jan 2010 10:19:03 -0500 (EST)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 20963-07 for <openembedded-devel@lists.openembedded.org>; 
+	Tue, 12 Jan 2010 10:19:03 -0500 (EST)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 0661F61C9DC
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jan 2010 10:19:03 -0500 (EST)
+Message-ID: <4B4C92E7.3090107@cbnco.com>
+Date: Tue, 12 Jan 2010 10:19:03 -0500
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090812)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 12 Jan 2010 16:17:35 +0100
-Message-ID: <hii3qe$tnl$1@ger.gmane.org>
-References: <247988.68463.qm@web112503.mail.gq1.yahoo.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100104 Shredder/3.0.1pre
-In-Reply-To: <247988.68463.qm@web112503.mail.gq1.yahoo.com>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <1234549968.1263282575.49599928.71648@mcgi65.rambler.ru>	<1263288966.457.153.camel@lenovo.internal.reciva.com>	<728686868.1263292036.179341680.5053@mcgi53.rambler.ru>	<727203316.1263292376.164699196.97945@mcgi41.rambler.ru>
+	<1263305804.3675.396.camel@mill.internal.reciva.com>
+In-Reply-To: <1263305804.3675.396.camel@mill.internal.reciva.com>
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: =?UTF-8?B?UmU6IERvZXMgT0XigJlzIEFuZ3N0cm9tIExpbnV4IHN1cHBvcnQgU01QIChTeW1tZXRyaWMgbXVsdGlwcm9jZXNzaW5nKSBvbiBiZWFnbGUgYm9hcmQu?=
+Subject: Re: Gnu/stubs-32.h not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,33 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2010 15:20:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 12 Jan 2010 15:21:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Phil Blundell wrote:
+> On Tue, 2010-01-12 at 13:32 +0300, Perepelica Alexander wrote:
 
-On 12-01-10 15:57, gagan singh wrote:
-> Chaps,
->                      Do the Angstrom version of Linux supports SMP for  Dual core (A8 + TI DSP 320C64x) beagle board. If not, where I should look in tutorial to work on adding support for such a feature.
->  I try Google it but no much could be located.
+> Ah, I see.  So, you were right: it is in fact a multilibs problem.  What
+> has happened here is that gcc is trying to build a 32-bit version of
+> libgcc2, but you haven't compiled a 32-bit version of glibc yet.
+> 
+> There are two possible fixes:
+> 
+> - write a variant .bb file to build a 32 bit glibc, and arrange for
+> gcc-cross to DEPEND on that; or
+> 
+> - patch t-linux64, and/or the gcc configury, to stop it trying to build
+> the 32-bit multilib.
 
-I think you mean "is dsplink supported", which case, yes, dsplink is
-supported.
+One hack that worked for me is to amend the gcc-cross recipe to include:
 
-regards,
+# glibc only built the 64-bit stubs, so don't try to build a 32-bit gcc
+EXTRA_OECONF_append_x86_64 = " --disable-multilib"
 
-Koen
+And for gcc-cross-intermediate:
 
-http://wiki.davincidsp.com/index.php/DSPLink_Overview
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+do_compile_prepend() {
+         # On x86_64, glibc-initial stages crti.o to
+         # x86_64-oe-linux/lib64/crti.o.
+         # When gcc-cross-intermediate tries to build libgcc, it looks
+         # for x86_64-oe-linux/lib/../lib64/crti.o.
+         # Create the "lib" dir so this shenanigan works.
+         install -d ${STAGING_DIR_TARGET}/lib
+}
 
-iD8DBQFLTJKPMkyGM64RGpERAmWqAKCgyzg/ElV/lguyAgVQ0++UW8XceACfTvjY
-bH50aXoKYdiPmG2oSnid7wA=
-=Omt9
------END PGP SIGNATURE-----
-
+Mike
 
 
