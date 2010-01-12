@@ -1,32 +1,40 @@
-Received: from mxa.rambler.ru ([81.19.66.231])
+Received: from mail-pz0-f192.google.com ([209.85.222.192])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <alexondi@rambler.ru>) id 1NUig1-00031e-QN
+	(envelope-from <andrea.adami@gmail.com>) id 1NUimk-0001D4-1c
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 16:29:04 +0100
-Received: from mcgi44.rambler.ru (mcgi44.rambler.ru [81.19.67.197])
-	by mxa.rambler.ru (Postfix) with ESMTP id 56B7CA33B6
+	Tue, 12 Jan 2010 16:36:01 +0100
+Received: by pzk30 with SMTP id 30so14267979pzk.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2010 18:26:53 +0300 (MSK)
-Received: from mcgi44.rambler.ru (localhost [127.0.0.1])
-	by mcgi44.rambler.ru (Postfix) with ESMTP id BED4B1143C
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2010 18:26:50 +0300 (MSK)
-Received: from [77.52.17.176] by mcgi44.rambler.ru with HTTP (mailimap);
-	Tue, 12 Jan 2010 18:26:48 +0300
-From: Perepelica Alexander <alexondi@rambler.ru>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 12 Jan 2010 18:26:48 +0300
+	Tue, 12 Jan 2010 07:33:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=QcukNTwayvo9CsvpFqMm9hU2qQi+yZNMJgPfzd++kvw=;
+	b=W9wgxeB10nOTdBYXJDD/lWjDObOAYKwbkVpx6e4AT3fRdO/0Pyn6xfaZmpGI97E7mX
+	l9PgtSf3osNl7LkyDE8pRTlJHb0VRp7zg9IkOmY4f0K0VyB+vP2BbBmr0OCae6AeANe+
+	CHa8h5NCs7HK8OzhM8aXO+CLcwsdW3bwrCgds=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=XwVhgl4vY9/JkVGN3iX8kP2k3UaaRyngcgi5K8JNHJoPVYWKV2kdXQULZ3iV9567sw
+	qb4u8LgYAaDmeocuyMVl3+ZaM2F8eYg8T7mO71Kucm96+G2/W/l84sAW1md5nvCmGKPl
+	/+UwPie1Y7wMZzbCyArGHKQQW88HFoWMER3jo=
 MIME-Version: 1.0
-References: <1234549968.1263282575.49599928.71648@mcgi65.rambler.ru>	<1263288966.457.153.camel@lenovo.internal.reciva.com>	<728686868.1263292036.179341680.5053@mcgi53.rambler.ru>	<727203316.1263292376.164699196.97945@mcgi41.rambler.ru>
-	<1263305804.3675.396.camel@mill.internal.reciva.com>
-	<4B4C92E7.3090107@cbnco.com>
-Message-Id: <677336408.1263310008.156348904.7710@mcgi44.rambler.ru>
-X-Mailer: Ramail 3u, (untone), http://mail.rambler.ru
-X-SA-Exim-Connect-IP: 81.19.66.231
-X-SA-Exim-Mail-From: alexondi@rambler.ru
+Received: by 10.141.91.4 with SMTP id t4mr128978rvl.190.1263310427763; Tue, 12 
+	Jan 2010 07:33:47 -0800 (PST)
+In-Reply-To: <loom.20100112T154902-934@post.gmane.org>
+References: <BAY127-W199A6B7DA19A55E32E8648D86C0@phx.gbl>
+	<d1b08f941001120644q1a82954bhc3e867abadc9fa66@mail.gmail.com>
+	<loom.20100112T154902-934@post.gmane.org>
+Date: Tue, 12 Jan 2010 16:33:47 +0100
+Message-ID: <d1b08f941001120733t85ff7f2vc51449fa3d7c5c6e@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.222.192
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Gnu/stubs-32.h not found
+Subject: Re: bitbaking helloworld
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,58 +48,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2010 15:29:05 -0000
-Content-Disposition: inline
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+X-List-Received-Date: Tue, 12 Jan 2010 15:36:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Thanks, Michael, Phil!
-I will try but I now stuck with e2fsprogs and AM_GNU_GETTEXT.
-After I resolve I try changes which Michael propose
+> and which ipk I should extract that contains executable to be run on my platform
 
-* Michael Smith <msmith@cbnco.com> [Tue, 12 Jan 2010 10:19:03 -0500]:
-> Phil Blundell wrote:
-> > On Tue, 2010-01-12 at 13:32 +0300, Perepelica Alexander wrote:
->
-> > Ah, I see.  So, you were right: it is in fact a multilibs problem.
-> What
-> > has happened here is that gcc is trying to build a 32-bit version of
-> > libgcc2, but you haven't compiled a 32-bit version of glibc yet.
-> >
-> > There are two possible fixes:
-> >
-> > - write a variant .bb file to build a 32 bit glibc, and arrange for
-> > gcc-cross to DEPEND on that; or
-> >
-> > - patch t-linux64, and/or the gcc configury, to stop it trying to
-> build
-> > the 32-bit multilib.
->
-> One hack that worked for me is to amend the gcc-cross recipe to 
-include:
->
-> # glibc only built the 64-bit stubs, so don't try to build a 32-bit 
-gcc
-> EXTRA_OECONF_append_x86_64 = " --disable-multilib"
->
-> And for gcc-cross-intermediate:
->
-> do_compile_prepend() {
->          # On x86_64, glibc-initial stages crti.o to
->          # x86_64-oe-linux/lib64/crti.o.
->          # When gcc-cross-intermediate tries to build libgcc, it looks
->          # for x86_64-oe-linux/lib/../lib64/crti.o.
->          # Create the "lib" dir so this shenanigan works.
->          install -d ${STAGING_DIR_TARGET}/lib
-> }
->
-> Mike
+something like deploy/glibc/ipk/ARCH/helloworld-static-xyz.ipk ?
 
-
-
-
---
-Thank you.
-Perepelica Alexander
+Andrea
 
 
