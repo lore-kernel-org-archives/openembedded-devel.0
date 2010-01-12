@@ -1,26 +1,38 @@
-Received: from bay0-omc4-s9.bay0.hotmail.com ([65.54.190.211])
+Received: from mail-pw0-f53.google.com ([209.85.160.53])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <salehusman@hotmail.com>) id 1NUhsx-0006GR-Kq
+	(envelope-from <andrea.adami@gmail.com>) id 1NUi1U-00012Y-4p
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 15:38:22 +0100
-Received: from BAY127-W19 ([65.54.190.199]) by bay0-omc4-s9.bay0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 12 Jan 2010 06:35:05 -0800
-Message-ID: <BAY127-W199A6B7DA19A55E32E8648D86C0@phx.gbl>
-X-Originating-IP: [203.82.49.5]
-From: saleh usman <salehusman@hotmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-Date: Tue, 12 Jan 2010 19:35:05 +0500
-Importance: Normal
+	Tue, 12 Jan 2010 15:47:11 +0100
+Received: by pwj3 with SMTP id 3so528458pwj.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jan 2010 06:44:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=AiVqv4aBbvIPheTIOpRMkOcJG5qOsCmzjWqLIoSpFDM=;
+	b=eDBpWE7u/gQCpVV6uzaJtmx9EtI8pWGvOVrna6gPzf4r3fTbduON/c/g84VVAoheCQ
+	gYplB/N2Bbr9iZIAFQglCCRAlGn9OJaes8awFCRvlRQgwZqRAhcAVYYlUqpjf2EqWrUF
+	ULfmWg+UQCLtM+aPq3PduJatWUn1on6gp6fdc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=bcqHvPlBt0FKewpMy5o/UIqjkWYqof8cL83x2WwEjw3KhUHcHryLmrZ9jHnt0jgLbY
+	bgIuQMNtnNGzo562sM2LOfd0j0m+PzViYRIuLagFRCdLLxeksE4awi29S+8gnNTrzTrl
+	G3AD+NRgUvD5yvcS6aeVnYbk6Og+RvXnsSA9Y=
 MIME-Version: 1.0
-X-OriginalArrivalTime: 12 Jan 2010 14:35:05.0716 (UTC)
-	FILETIME=[6ED1B340:01CA9394]
-X-SA-Exim-Connect-IP: 65.54.190.211
-X-SA-Exim-Mail-From: salehusman@hotmail.com
+Received: by 10.141.214.24 with SMTP id r24mr10272986rvq.27.1263307497915; 
+	Tue, 12 Jan 2010 06:44:57 -0800 (PST)
+In-Reply-To: <BAY127-W199A6B7DA19A55E32E8648D86C0@phx.gbl>
+References: <BAY127-W199A6B7DA19A55E32E8648D86C0@phx.gbl>
+Date: Tue, 12 Jan 2010 15:44:57 +0100
+Message-ID: <d1b08f941001120644q1a82954bhc3e867abadc9fa66@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.53
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: bitbaking helloworld
+Subject: Re: bitbaking helloworld
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,24 +46,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2010 14:38:22 -0000
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 12 Jan 2010 14:47:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
+Saleh, the ipk can be opened with ar -x
+Usually one *installs* the ipk...otherwise you can have hard time with
+the dependencies.
+(not for helloworld, happily :)
 
-Hi=20
-I've run bitbake helloworld and  it has generated output .There are 3 folde=
-rs in /deploy/glibc all which contain so many ipk files. In openembedde Get=
-ting Started it has been said that it will generate static executable.I don=
-'t know which file is the static executable which I can run on my target pl=
-atform.I am unfamiliar with ipk files=2Cso how I'll run ipk files? any othe=
-r tutorial?
+Regards
 
-Saleh
- 		 	   		 =20
-_________________________________________________________________
-Windows Live: Keep your friends up to date with what you do online.
-http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/so=
-cial-network-basics.aspx?ocid=3DPID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_1:092=
-010=
+Andrea
+
 
