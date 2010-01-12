@@ -1,45 +1,32 @@
-Received: from mail-fx0-f212.google.com ([209.85.220.212])
+Received: from mail-gx0-f217.google.com ([209.85.217.217])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NUhNR-0001lr-Fv
+	(envelope-from <dp@xora.org.uk>) id 1NUhOF-0001o1-R8
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 15:05:49 +0100
-Received: by fxm4 with SMTP id 4so18983653fxm.12
+	Tue, 12 Jan 2010 15:06:39 +0100
+Received: by gxk9 with SMTP id 9so48972093gxk.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2010 06:03:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=HwrH0Kv6GZU6qDVhICtGAH5LOnzvZvH1Nug/BKoFHCw=;
-	b=DQIheRqCSvCLGAD35gmbegQO5eTiNXRKLZ9BbIdepi9n5/rmEgyWWJgEYw677HMuhP
-	GYADz0+9ykya3iT6WqYnb/oAcGV58mpWMAmnEU3Pi4ZIJHHrx0ZbmGm8HdxS2db1Imkj
-	KJTIUOv2RjsWleaHhjerp+mIYX13LhFXI7shM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=e9mJ3ejCCCo6E7d5RNBa0/UtkaTUQLzKiZsMNxicPyqf9v24pJNU4pzbDWRBbn4YkK
-	r9l+pfaHAAek74X7CP4WU+Ib20jqaU9T5FH+ErRuYf2+8dCwUHZ9cH6fKgyYpRQai7yy
-	8CX7GJFG0NJY96IrM29gqKA22NzRm73jUAf8s=
-Received: by 10.223.75.136 with SMTP id y8mr11743571faj.69.1263305016215;
-	Tue, 12 Jan 2010 06:03:36 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 16sm10206531fxm.0.2010.01.12.06.03.34
+	Tue, 12 Jan 2010 06:04:26 -0800 (PST)
+Received: by 10.101.164.4 with SMTP id r4mr235047ano.189.1263305065930;
+	Tue, 12 Jan 2010 06:04:25 -0800 (PST)
+Received: from xora-eee.xora.org.uk ([12.69.71.130])
+	by mx.google.com with ESMTPS id 13sm12885191gxk.5.2010.01.12.06.04.23
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 12 Jan 2010 06:03:34 -0800 (PST)
-Date: Tue, 12 Jan 2010 15:03:26 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 12 Jan 2010 06:04:24 -0800 (PST)
+Received: by xora-eee.xora.org.uk (Postfix, from userid 500)
+	id E024F21438; Tue, 12 Jan 2010 08:04:13 -0600 (CST)
+Date: Tue, 12 Jan 2010 08:04:13 -0600
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100112140326.GC10781@jama>
-References: <E1NTDIp-00055S-0r@melo.openembedded.org>
+Message-ID: <20100112140413.GA2098@xora-eee.xora.org.uk>
+References: <hihuv8$b6u$1@ger.gmane.org>
 MIME-Version: 1.0
-In-Reply-To: <E1NTDIp-00055S-0r@melo.openembedded.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.212
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+In-Reply-To: <hihuv8$b6u$1@ger.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-08-17)
+X-SA-Exim-Connect-IP: 209.85.217.217
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-commits@openembedded.org
-Subject: Re: [oe-commits] Koen Kooi : xserver-xorg 1.7.3: fix regression where hal was disabled
+Subject: Re: [RFC][PATCH] Move udev cache creation after checkroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,76 +40,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2010 14:05:49 -0000
+X-List-Received-Date: Tue, 12 Jan 2010 14:06:39 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Fri, Jan 08, 2010 at 11:46:51AM +0000, git version control wrote:
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: 3a9b352acba24c78b562d8dc6527b774cbb86041
-> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=3a9b352acba24c78b562d8dc6527b774cbb86041
+On Tue, Jan 12, 2010 at 02:54:48PM +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
-> Author: Koen Kooi <koen@openembedded.org>
-> Date:   Fri Jan  8 12:44:47 2010 +0100
+> Hi,
 > 
-> xserver-xorg 1.7.3: fix regression where hal was disabled
+> What's your opinion on attached (untested) patch? If there's some
+> consensus that this is a step in the right direction I'll create a
+> working & tested patch to commit.
 > 
-> * this fixes the "my touchscreen isn't working anymore" bug
-
-Thanks,
-
-can we add hal conditionaly as XINERAMA is?
-Maybe for both om-gta01, om-gta02?
-
-We have input configuration in xorg.conf and with hal for input
-detection deprecated by xorg devs I guess we won't change that before
-1.8 xserver (maybe with deviceKit or something else).
-
-Before this change hal could be removed from om-gta*
-
-I'm also willing to accept that we also need hal from reasons I don't know
-about yet..
-
-Regards,
-
-> ---
+> Nota bene: I'm not going to discuss the merits of udev caching, only the
+> impact of this patch to the current situation.
 > 
->  recipes/xorg-xserver/xserver-xorg_1.7.3.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes/xorg-xserver/xserver-xorg_1.7.3.bb b/recipes/xorg-xserver/xserver-xorg_1.7.3.bb
-> index af01a90..edede8b 100644
-> --- a/recipes/xorg-xserver/xserver-xorg_1.7.3.bb
-> +++ b/recipes/xorg-xserver/xserver-xorg_1.7.3.bb
-> @@ -3,7 +3,7 @@ require xorg-xserver-common.inc
->  DESCRIPTION = "the X.Org X server"
->  DEPENDS += "pixman libpciaccess openssl dri2proto glproto xorg-minimal-fonts"
->  PE = "2"
-> -PR = "r3"
-> +PR = "r4"
->  
->  SRC_URI += "file://sysroot_fix.patch;patch=1 \
->              file://dolt-fix-1.7.0.patch;patch=1 \
-> @@ -20,7 +20,7 @@ do_install_prepend() {
->  # The NVidia driver requires Xinerama support in the X server. Ion uses it.
->  XINERAMA = "${@['--disable-xinerama','--enable-xinerama'][bb.data.getVar('MACHINE',d) in ['ion']]}"
->  
-> -EXTRA_OECONF += "--disable-xephyr --disable-config-hal ${XINERAMA} --disable-kdrive --disable-xephyr --disable-xsdl --disable-xfake --disable-xfbdev --disable-dmx"
-> +EXTRA_OECONF += " --enable-config-hal ${XINERAMA} --disable-kdrive --disable-xephyr --disable-xsdl --disable-xfake --disable-xfbdev --disable-dmx"
->  EXTRA_OECONF += " --disable-glx-tls --enable-dri2 --disable-unit-tests "
->  
->  export LDFLAGS += " -ldl "
-> 
-> 
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+That patch seems to match what I have been saying but not had time
+to code.
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+Acked-by: Graeme Gregory <dp@xora.org.uk>
+
+
 
 
