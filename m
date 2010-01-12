@@ -1,35 +1,26 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from bay0-omc4-s9.bay0.hotmail.com ([65.54.190.211])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NUhaB-0001Kf-LG
+	(envelope-from <salehusman@hotmail.com>) id 1NUhsx-0006GR-Kq
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 15:18:58 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NUhY8-0008Ly-1o
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 14:16:48 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1NUhY7-0001LE-He
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 14:16:47 +0000
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <727203316.1263292376.164699196.97945@mcgi41.rambler.ru>
-References: <1234549968.1263282575.49599928.71648@mcgi65.rambler.ru>
-	<1263288966.457.153.camel@lenovo.internal.reciva.com>
-	<728686868.1263292036.179341680.5053@mcgi53.rambler.ru>
-	<727203316.1263292376.164699196.97945@mcgi41.rambler.ru>
-Date: Tue, 12 Jan 2010 14:16:44 +0000
-Message-ID: <1263305804.3675.396.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+	Tue, 12 Jan 2010 15:38:22 +0100
+Received: from BAY127-W19 ([65.54.190.199]) by bay0-omc4-s9.bay0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 12 Jan 2010 06:35:05 -0800
+Message-ID: <BAY127-W199A6B7DA19A55E32E8648D86C0@phx.gbl>
+X-Originating-IP: [203.82.49.5]
+From: saleh usman <salehusman@hotmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Date: Tue, 12 Jan 2010 19:35:05 +0500
+Importance: Normal
+MIME-Version: 1.0
+X-OriginalArrivalTime: 12 Jan 2010 14:35:05.0716 (UTC)
+	FILETIME=[6ED1B340:01CA9394]
+X-SA-Exim-Connect-IP: 65.54.190.211
+X-SA-Exim-Mail-From: salehusman@hotmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Gnu/stubs-32.h not found
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: bitbaking helloworld
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,31 +34,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2010 14:18:58 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-
-On Tue, 2010-01-12 at 13:32 +0300, Perepelica Alexander wrote:
-> He is log
-
-Ah, I see.  So, you were right: it is in fact a multilibs problem.  What
-has happened here is that gcc is trying to build a 32-bit version of
-libgcc2, but you haven't compiled a 32-bit version of glibc yet.
-
-There are two possible fixes:
-
-- write a variant .bb file to build a 32 bit glibc, and arrange for
-gcc-cross to DEPEND on that; or
-
-- patch t-linux64, and/or the gcc configury, to stop it trying to build
-the 32-bit multilib.
-
-Which of those is appropriate obviously depends on what you are trying
-to achieve, and I guess it would be sensible to provide a switch that
-the DISTRO can use to enable or disable 32-bit multilibs.
-
-p.
+X-List-Received-Date: Tue, 12 Jan 2010 14:38:22 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
 
+Hi=20
+I've run bitbake helloworld and  it has generated output .There are 3 folde=
+rs in /deploy/glibc all which contain so many ipk files. In openembedde Get=
+ting Started it has been said that it will generate static executable.I don=
+'t know which file is the static executable which I can run on my target pl=
+atform.I am unfamiliar with ipk files=2Cso how I'll run ipk files? any othe=
+r tutorial?
 
+Saleh
+ 		 	   		 =20
+_________________________________________________________________
+Windows Live: Keep your friends up to date with what you do online.
+http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/so=
+cial-network-basics.aspx?ocid=3DPID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_1:092=
+010=
 
