@@ -1,31 +1,31 @@
-Received: from proxy1.bredband.net ([195.54.101.71])
+Received: from proxy2.bredband.net ([195.54.101.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1NUpqu-00087z-Ow
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1NUprk-0008Bs-3L
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 00:08:47 +0100
-Received: from ipb1.telenor.se (195.54.127.164) by proxy1.bredband.net
+	Wed, 13 Jan 2010 00:09:39 +0100
+Received: from ipb2.telenor.se (195.54.127.165) by proxy2.bredband.net
 	(7.3.140.3)
-	id 4AD3E1C00251C813 for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 23:45:50 +0100
+	id 4AD3E1BC0254CCD2 for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Jan 2010 23:46:43 +0100
 X-SMTPAUTH-B2: 
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: Ao0ZADqKTEtT4zqIPGdsb2JhbAAIiCqTKAEBAQE3R7oYhDAE
-X-IronPort-AV: E=Sophos;i="4.49,264,1262559600"; d="scan'208";a="26151425"
+X-IronPort-Anti-Spam-Result: Ao0ZAAiKTEtT4zqIPGdsb2JhbAAIiCqTKAEBAQE3R7oThDAE
+X-IronPort-AV: E=Sophos;i="4.49,264,1262559600"; d="scan'208";a="26147555"
 Received: from c-883ae353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
 	[10.175.196.224]) ([83.227.58.136])
-	by ipb1.telenor.se with ESMTP; 12 Jan 2010 23:45:50 +0100
-Message-ID: <4B4CFB9D.5010107@atmel.com>
-Date: Tue, 12 Jan 2010 23:45:49 +0100
+	by ipb2.telenor.se with ESMTP; 12 Jan 2010 23:46:43 +0100
+Message-ID: <4B4CFBD2.6010701@atmel.com>
+Date: Tue, 12 Jan 2010 23:46:42 +0100
 From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 Organization: Atmel Nordic AB
 User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 195.54.101.71
+X-SA-Exim-Connect-IP: 195.54.101.72
 X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH} AT91SAM9G45 BSP [1/4] Machine Configuration
+Subject: [PATCH} AT91SAM9G45 BSP [2/4] at91bootstrap-2.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,150 +39,180 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2010 23:08:48 -0000
+X-List-Received-Date: Tue, 12 Jan 2010 23:09:39 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
 From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 
-Add support for AT91SAM9G45EK (SAM9M10G45EK with AT91SAM9G45 chip)
-Board config is split up into three files to allow easier maintenance
-of AT91 boards.
+Add support for at91bootstrap-2.13.
+Fixes problem with stack, breaking all boards, compared to 2.13-rc[1-7]
+Updates kconfig to 2.6.32
+More options to save code on SRAM constrained SAM9260.
+Builds for the following at91 chips.
+* afeb9260
+* at91cap9adk
+* at91cap9stk
+* at91sam9g10ek,
+* at91sam9g20ek
+* at91sam9g45ek
+* at91sam9g45ekes
+* at91sam9rlek
+* at91sam9xeek
+* at91sam9m10ek
+* at91sam9260ek
+* at91sam9261ek
+* at91sam9263ek
 
-machine/<board>.conf
-machine/include/AT91.inc
-machine/include/AT91-LCD.inc
-
-A machine with an LCD controller would normally include
-"machine/include/AT91-LCD.inc", while a machine without
-would "include machine/include/AT91.inc"
+So far, it has only been downloaded and tested on the sam9g45ek (dataflash)
 
 Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 ---
-diff --git a/conf/machine/at91sam9g45ek.conf
-b/conf/machine/at91sam9g45ek.conf
+
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index 90f402c..2ab8494 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -32142,3 +32142,7 @@
+sha256=f57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af
+ md5=5f7b88ebb2bcd7e8044328482d079661
+ sha256=f57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af
+
++[ftp://www.at91.com/pub/buildroot/at91bootstrap-2.13.tar.bz2]
++md5=1f539d6db38111b6a1d7ab93eb0a648b
++sha256=93b01b723ed69f33316384f097da864f5d49c40520c87ccf5537518dbff9df86
++
+diff --git a/recipes/at91bootstrap/at91bootstrap_2.13.bb
+b/recipes/at91bootstrap/at91bootstrap_2.13.bb
 new file mode 100644
-index 0000000..290d120
+index 0000000..2fbab43
 --- /dev/null
-+++ b/conf/machine/at91sam9g45ek.conf
-@@ -0,0 +1,28 @@
-+#@TYPE: Machine
-+#@Name: Atmel AT91SAM9G45EK Development Platform
-+#@DESCRIPTION: Machine configuration for the at91sam9g45ek development
-board with a at91sam9g45-ES processor
-+# Once a at91sam9g45ek development board with a production at91sam9g45
-processor
-+# is available we should change the recipe to use the
-at91sam9m10g45ek_defconfig
++++ b/recipes/at91bootstrap/at91bootstrap_2.13.bb
+@@ -0,0 +1,6 @@
++require at91bootstrap.inc
++PR = "r0"
++DEFAULT_PREFERENCE = "-1"
++DEFAULT_PREFERENCE_at91sam9g45ek = "1"
 +
-+include conf/machine/include/AT91-LCD.inc
 +
-+# Has linux config file in OpenEmbedded
-+# Which to use, otherwise?
-+# LINUX26_DEFCONFIG = "at91sam9g45ek_defconfig"
-+# LINUX26_DEFCONFIG = "at91sam9m10g45ek_defconfig"
-+
-+#UBOOT_MACHINE = "at91sam9m10g45ek_nandflash_config"
-+#UBOOT_MACHINE = "at91sam9m10g45ek_dataflash_config"
-+UBOOT_MACHINE = "at91sam9m10g45ek_dataflash_cs0_config"
-+#UBOOT_MACHINE = "at91sam9m10g45ek_config"
-+#UBOOT_MACHINE = "at91sam9g45ekes_nandflash_config"
-+#UBOOT_MACHINE = "at91sam9g45ekes_dataflash_config"
-+#UBOOT_MACHINE = "at91sam9g45ekes_dataflash_cs0_config"
-+#UBOOT_MACHINE = "at91sam9g45ekes_config"
-+
-+# Boot from Dataflash, so we do not have to reprogram
-+# At91bootstrap/U-Boot everytime we erase the NAND flash
-+AT91BOOTSTRAP_BOARD = "at91sam9g45df"
-+
-+MACHINE_FEATURES += "usbhost"
-+
-diff --git a/conf/machine/include/AT91-LCD.inc
-b/conf/machine/include/AT91-LCD.inc
+diff --git
+a/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9g45ek/defconfig
+b/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9g45ek/defconfig
 new file mode 100644
-index 0000000..3036295
+index 0000000..6259b01
 --- /dev/null
-+++ b/conf/machine/include/AT91-LCD.inc
-@@ -0,0 +1,15 @@
-+# Common description for Atmel ARM processors with LCD controller
-+
-+include conf/machine/include/AT91.inc
-+
-+MACHINE_FEATURES += "screen touchscreen keyboard"
-+
-+# Some options we disable for now
-+# MACHINE_FEATURES += "apm"
-+# MACHINE_FEATURES += "lcd"
-+# MACHINE_FEATURES += "bluetooth wifi irda phone gps"
-+# MACHINE_FEATURES += "mmc mmcroot fat"
-+# MACHINE_FEATURES += "i2c spi serial"
-+# MACHINE_FEATURES += "sound libogg libvorbis"
-+
-+
-diff --git a/conf/machine/include/AT91.inc b/conf/machine/include/AT91.inc
-new file mode 100644
-index 0000000..c6f16c3
---- /dev/null
-+++ b/conf/machine/include/AT91.inc
-@@ -0,0 +1,55 @@
-+# Common description for Atmel ARM processors
-+
-+TARGET_ARCH = "arm"
-+#PACKAGE_EXTRA_ARCHS = "armv4t armv5te"
-+CPU_FAMILY = "at91"
-+
-+PREFERRED_PROVIDER_virtual/kernel = "linux"
-+PREFERRED_VERSION_linux = "2.6.32"
-+
-+#PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive"
-+#PREFERRED_PROVIDER_virtual/xserver = "xserver-kdrive-1300"
-+#PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-+#PREFERRED_PROVIDER_xserver = "xserver-xorg"
-+#PREFERRED_PROVIDER_xserver = "xserver-kdrive"
-+#XSERVER = "xserver-kdrive-fbdev"
-+# Angstrom defines:
-+#PREFERRED_VERSION_xserver-kdrive = "1.4.0.90"
-+#PREFERRED_VERSION_xserver-kdrive = "1.6.1"
-+
-+PREFERRED_PROVIDER_at91bootstrap = "at91bootstrap_2.13"
-+PREFERRED_VERSION_at91bootstrap = "2.13"
-+
-+PREFERRED_PROVIDER_u-boot = "u-boot_2009.08"
-+PREFERRED_VERSION_u-boot = "2009.08"
-+
-+KERNEL_IMAGETYPE = "uImage"
-+
-+# PREFERRED_VERSION_mplayer = "svn"
-+
-+#PREFERRED_VERSION_x11-gpe-image = "atmel"
-+#PREFERRED_VERSION_alsa-state = "atmel"
-+
-+#don't try to access tty1
-+USE_VT = "0"
-+
-+MACHINE_FEATURES = " kernel26 alsa ext2 usbgadget vfat uboot "
-+EXTRA_IMAGEDEPENDS += "u-boot"
-+EXTRA_IMAGEDEPENDS += "at91bootstrap"
-+#EXTRA_IMAGEDEPENDS += "atmel-fixes"
-+
-+MACHINE_EXTRA_RDEPENDS += " kernel-modules "
-+#MACHINE_EXTRA_RDEPENDS += " atmel-fixes "
-+
-+# used by sysvinit_2
-+SERIAL_CONSOLE = "115200 ttyS0"
-+IMAGE_FSTYPES ?= "jffs2"
-+EXTRA_IMAGECMD_jffs2 = "--pad --little-endian --eraseblock=0x20000 -n"
++++ b/recipes/at91bootstrap/at91bootstrap-2.13/at91sam9g45ek/defconfig
+@@ -0,0 +1,110 @@
 +#
-+# Uncomment or add kernel modules that should be autoloaded
-+#module_autoload_g_file_storage = ${@base_contains('MACHINE_FEATURES',
-'usbgadget',  'g_file_storage', '',d)}
-+#module_autoload_g_ether        = ${@base_contains('MACHINE_FEATURES',
-'usbgadget',  'g_ether', '',d)}
-+module_autoload_g_serial       = ${@base_contains('MACHINE_FEATURES',
-'usbgadget',  'g_serial', '',d)}
++# Automatically generated make config: don't edit
++# Tue Jan 12 22:00:42 2010
++#
++HAVE_DOT_CONFIG=y
++CONFIG_BOARDNAME="at91sam9g45df"
++# CONFIG_AT91SAM9260EK is not set
++# CONFIG_AT91SAM9261EK is not set
++# CONFIG_AT91SAM9263EK is not set
++# CONFIG_AT91SAM9RLEK is not set
++# CONFIG_AT91SAM9XEEK is not set
++# CONFIG_AT91SAM9G10EK is not set
++# CONFIG_AT91SAM9G20EK is not set
++CONFIG_AT91SAM9G45EK=y
++# CONFIG_AT91SAM9G45EKES is not set
++# CONFIG_AT91SAM9M10EK is not set
++# CONFIG_AT91CAP9ADK is not set
++# CONFIG_AT91CAP9STK is not set
++# CONFIG_AFEB9260 is not set
++CONFIG_CHIP="AT91SAM9G45"
++CONFIG_BOARD="at91sam9g45ek"
++CONFIG_MACH_TYPE="1830"
++CONFIG_LINK_ADDR="0x000000"
++CONFIG_TOP_OF_MEMORY="0x304000"
++CONFIG_BOOTSTRAP_MAXSIZE="13000"
++# CONFIG_CRYSTAL_12_000MHZ is not set
++# CONFIG_CRYSTAL_16_000MHZ is not set
++# CONFIG_CRYSTAL_16_36766MHZ is not set
++CONFIG_CRYSTAL_18_432MHZ=y
++ALLOW_CRYSTAL_18_432MHZ=y
++CONFIG_CRYSTAL="CRYSTAL_18_432MHZ"
++# CONFIG_CPU_CLK_166MHZ is not set
++# CONFIG_CPU_CLK_180MHZ is not set
++# CONFIG_CPU_CLK_200MHZ is not set
++# CONFIG_CPU_CLK_240MHZ is not set
++# CONFIG_CPU_CLK_266MHZ is not set
++CONFIG_CPU_CLK_400MHZ=y
++ALLOW_CPU_CLK_400MHZ=y
++# DISABLE_CPU_CLK_240MHZ is not set
++# CONFIG_BUS_SPEED_83MHZ is not set
++# CONFIG_BUS_SPEED_90MHZ is not set
++# CONFIG_BUS_SPEED_100MHZ is not set
++CONFIG_BUS_SPEED_133MHZ=y
 +
-+require conf/machine/include/tune-arm926ejs.inc
++#
++# Memory selection
++#
++# CONFIG_SDRAM is not set
++# CONFIG_SDDRC is not set
++CONFIG_DDR2=y
++ALLOW_DATAFLASH=y
++# ALLOW_FLASH is not set
++ALLOW_NANDFLASH=y
++# ALLOW_SDCARD is not set
++# ALLOW_PSRAM is not set
++# ALLOW_SDRAM_16BIT is not set
++# CONFIG_RAM_32MB is not set
++# CONFIG_RAM_64MB is not set
++CONFIG_RAM_128MB=y
++# CONFIG_RAM_256MB is not set
++CONFIG_DATAFLASH=y
++# CONFIG_FLASH is not set
++# CONFIG_NANDFLASH is not set
++# CONFIG_SDCARD is not set
++CONFIG_MEMORY="dataflash"
 +
++#
++# SPI configuration
++#
++CONFIG_SPI_CLK=33000000
++CONFIG_SMALL_DATAFLASH=y
++CONFIG_DATAFLASH_RECOVERY=y
++ALLOW_DATAFLASH_RECOVERY=y
++CONFIG_SPI_BOOT_CS0=y
++# CONFIG_SPI_BOOT_CS1 is not set
++# CONFIG_SPI_BOOT_CS2 is not set
++# CONFIG_SPI_BOOT_CS3 is not set
++ALLOW_BOOT_FROM_DATAFLASH_CS0=y
++# ALLOW_BOOT_FROM_DATAFLASH_CS1 is not set
++# ALLOW_BOOT_FROM_DATAFLASH_CS2 is not set
++# ALLOW_BOOT_FROM_DATAFLASH_CS3 is not set
++DATAFLASHCARD_ON_CS0=y
++# DATAFLASHCARD_ON_CS1 is not set
++# DATAFLASHCARD_ON_CS2 is not set
++# DATAFLASHCARD_ON_CS3 is not set
++CONFIG_DATAFLASHCARD=y
++CONFIG_CARD_SUFFIX="card"
++CONFIG_SPI_BOOT="AT91C_SPI_PCS0_DATAFLASH"
++CONFIG_SPI_MODE_0=y
++# CONFIG_SPI_MODE_1 is not set
++# CONFIG_SPI_MODE_2 is not set
++# CONFIG_SPI_MODE_3 is not set
++CONFIG_SPI_MODE=0
++CONFIG_PROJECT="dataflash"
++CONFIG_LOAD_UBOOT=y
++# CONFIG_LOAD_64KB is not set
++# CONFIG_LOAD_1MB is not set
++# CONFIG_LOAD_4MB is not set
++CONFIG_IMG_ADDRESS="0x00008400"
++CONFIG_IMG_SIZE="0x00040000"
++CONFIG_JUMP_ADDR="0x73F00000"
++CONFIG_APP_CHECK=y
++# CONFIG_LONG_TEST is not set
++CONFIG_DEBUG=y
++CONFIG_VERBOSE=y
++CONFIG_HW_INIT=y
++# CONFIG_USER_HW_INIT is not set
++# CONFIG_THUMB is not set
++CONFIG_SX_AT91=y
++CONFIG_RAW_AT91=y
 
 -- 
 Best Regards
