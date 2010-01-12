@@ -1,35 +1,35 @@
-Received: from mail-pw0-f53.google.com ([209.85.160.53])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1NUi1U-00012Y-4p
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NUi6z-0001My-El for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Jan 2010 15:52:52 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NUi4v-000601-06
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 15:47:11 +0100
-Received: by pwj3 with SMTP id 3so528458pwj.12
+	Tue, 12 Jan 2010 15:50:41 +0100
+Received: from mbl-82-49-5.dsl.net.pk ([203.82.49.5])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jan 2010 15:50:40 +0100
+Received: from salehusman by mbl-82-49-5.dsl.net.pk with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2010 06:44:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=AiVqv4aBbvIPheTIOpRMkOcJG5qOsCmzjWqLIoSpFDM=;
-	b=eDBpWE7u/gQCpVV6uzaJtmx9EtI8pWGvOVrna6gPzf4r3fTbduON/c/g84VVAoheCQ
-	gYplB/N2Bbr9iZIAFQglCCRAlGn9OJaes8awFCRvlRQgwZqRAhcAVYYlUqpjf2EqWrUF
-	ULfmWg+UQCLtM+aPq3PduJatWUn1on6gp6fdc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=bcqHvPlBt0FKewpMy5o/UIqjkWYqof8cL83x2WwEjw3KhUHcHryLmrZ9jHnt0jgLbY
-	bgIuQMNtnNGzo562sM2LOfd0j0m+PzViYRIuLagFRCdLLxeksE4awi29S+8gnNTrzTrl
-	G3AD+NRgUvD5yvcS6aeVnYbk6Og+RvXnsSA9Y=
-MIME-Version: 1.0
-Received: by 10.141.214.24 with SMTP id r24mr10272986rvq.27.1263307497915; 
-	Tue, 12 Jan 2010 06:44:57 -0800 (PST)
-In-Reply-To: <BAY127-W199A6B7DA19A55E32E8648D86C0@phx.gbl>
-References: <BAY127-W199A6B7DA19A55E32E8648D86C0@phx.gbl>
-Date: Tue, 12 Jan 2010 15:44:57 +0100
-Message-ID: <d1b08f941001120644q1a82954bhc3e867abadc9fa66@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Tue, 12 Jan 2010 15:50:40 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.53
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+From: Saleh Usman <salehusman@hotmail.com>
+Date: Tue, 12 Jan 2010 14:50:18 +0000 (UTC)
+Message-ID: <loom.20100112T154902-934@post.gmane.org>
+References: <BAY127-W199A6B7DA19A55E32E8648D86C0@phx.gbl>
+	<d1b08f941001120644q1a82954bhc3e867abadc9fa66@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 203.82.49.5 (Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1.3) Gecko/20070417 Fedora/2.0.0.3-4.fc7 Firefox/2.0.0.3)
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: bitbaking helloworld
@@ -46,16 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2010 14:47:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 12 Jan 2010 14:52:52 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-Saleh, the ipk can be opened with ar -x
-Usually one *installs* the ipk...otherwise you can have hard time with
-the dependencies.
-(not for helloworld, happily :)
+Andrea Adami <andrea.adami <at> gmail.com> writes:
 
-Regards
+> 
+> Saleh, the ipk can be opened with ar -x
+> Usually one *installs* the ipk...otherwise you can have hard time with
+> the dependencies.
+> (not for helloworld, happily :)
+> 
+> Regards
+> 
+> Andrea
+> 
+and which ipk I should extract that contains executable to be run on my platform
 
-Andrea
+Saleh
+
+
+
 
 
