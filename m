@@ -1,23 +1,34 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from mxa.rambler.ru ([81.19.66.231])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NUjZY-00021b-3v
+	(envelope-from <alexondi@rambler.ru>) id 1NUjbR-0002BZ-HK
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 17:26:27 +0100
-Received: (qmail 18560 invoked by uid 813007); 12 Jan 2010 16:24:16 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO localhost.localdomain)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 12 Jan 2010 16:24:16 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Jan 2010 17:24:00 +0100
-Message-Id: <1263313440-14774-1-git-send-email-marcin@juszkiewicz.com.pl>
-X-Mailer: git-send-email 1.6.6
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+	Tue, 12 Jan 2010 17:28:24 +0100
+Received: from mcgi57.rambler.ru (mcgi57.rambler.ru [81.19.67.74])
+	by mxa.rambler.ru (Postfix) with ESMTP id 2BBA1CAAB1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jan 2010 19:26:14 +0300 (MSK)
+Received: from mcgi57.rambler.ru (localhost [127.0.0.1])
+	by mcgi57.rambler.ru (Postfix) with ESMTP id 824491141F
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jan 2010 19:26:11 +0300 (MSK)
+Received: from [77.52.17.176] by mcgi57.rambler.ru with HTTP (mailimap);
+	Tue, 12 Jan 2010 19:26:08 +0300
+From: Perepelica Alexander <alexondi@rambler.ru>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 12 Jan 2010 19:26:08 +0300
+MIME-Version: 1.0
+References: <1234549968.1263282575.49599928.71648@mcgi65.rambler.ru>	<1263288966.457.153.camel@lenovo.internal.reciva.com>	<728686868.1263292036.179341680.5053@mcgi53.rambler.ru>	<727203316.1263292376.164699196.97945@mcgi41.rambler.ru>
+	<1263305804.3675.396.camel@mill.internal.reciva.com>
+	<4B4C92E7.3090107@cbnco.com>
+	<677336408.1263310008.156348904.7710@mcgi44.rambler.ru>
+	<578649919.1263312754.64087816.75695@mcgi68.rambler.ru>
+Message-Id: <649645510.1263313568.161559808.95427@mcgi57.rambler.ru>
+X-Mailer: Ramail 3u, (untone), http://mail.rambler.ru
+X-SA-Exim-Connect-IP: 81.19.66.231
+X-SA-Exim-Mail-From: alexondi@rambler.ru
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [STABLE][PATCH] classpath-native: disable-gjdoc, it calls antlr and fails without antlr installed on buildhost (runantlr from antlr-native is found by configure, but antlr.jar from staging doesn't work)
+Subject: Re: Gnu/stubs-32.h not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,59 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2010 16:26:27 -0000
+X-List-Received-Date: Tue, 12 Jan 2010 16:28:24 -0000
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 
-From: Martin Jansa <Martin.Jansa@gmail.com>
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
----
- recipes/classpath/classpath-native.inc       |    1 +
- recipes/classpath/classpath-native_0.97.2.bb |    2 +-
- recipes/classpath/classpath-native_0.98.bb   |    2 +-
- 3 files changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/recipes/classpath/classpath-native.inc b/recipes/classpath/classpath-native.inc
-index e7570c4..35a2485 100644
---- a/recipes/classpath/classpath-native.inc
-+++ b/recipes/classpath/classpath-native.inc
-@@ -30,6 +30,7 @@ EXTRA_OECONF = "\
-   --disable-gtk-peer \
-   --disable-plugin \
-   --disable-dssi \
-+  --disable-gjdoc \
-   --enable-examples \
-   --enable-tools \
-   --includedir=${STAGING_INCDIR}/classpath \
-diff --git a/recipes/classpath/classpath-native_0.97.2.bb b/recipes/classpath/classpath-native_0.97.2.bb
-index 4de5602..b026f40 100644
---- a/recipes/classpath/classpath-native_0.97.2.bb
-+++ b/recipes/classpath/classpath-native_0.97.2.bb
-@@ -1,6 +1,6 @@
- require classpath-native.inc
- 
--PR = "r6"
-+PR = "r7"
- 
- # The code affected by the javanet-local patch
- # is usually not compiled. However if someone changes
-diff --git a/recipes/classpath/classpath-native_0.98.bb b/recipes/classpath/classpath-native_0.98.bb
-index 6659178..a924b8a 100644
---- a/recipes/classpath/classpath-native_0.98.bb
-+++ b/recipes/classpath/classpath-native_0.98.bb
-@@ -3,7 +3,7 @@ require classpath-native.inc
- # Deadlocks occur on at least amd64 hosts.
- DEFAULT_PREFERENCE = "-1"
- 
--PR = "r2"
-+PR = "r3"
- 
- # The code affected by the javanet-local patch
- # is usually not compiled. However if someone changes
--- 
-1.6.6
+> > Thanks, Michael, Phil!
+> > I will try but I now stuck with e2fsprogs and AM_GNU_GETTEXT.
+> > After I resolve I try changes which Michael propose
+ I don't why but I already two time stuck in problem when I get errors 
+in
+ compiling but after I comment my local.conf lines
+ PARALLEL_MAKE = "-j 20"
+ BB_NUMBER_THREADS = "4"
+ all errors disapearing
+ I think problem is in waiting of dependent task
+ BUT I create hello-world for x86_64 !
+ Thank you very much!!!
+ Next I would try bootstrap and X11 images
 
 
 
+
+
+--
+Thank you.
+Perepelica Alexander
 
 
