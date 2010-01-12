@@ -1,25 +1,39 @@
-Received: from smtp7.myhsphere.biz ([204.10.105.69] helo=mail9.myhsphere.biz)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <balakrishnan@e-consystems.com>) id 1NUhU9-0000ZK-LE
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NUhUb-00013w-0l for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Jan 2010 15:13:12 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NUhSW-0004Yz-3x
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 15:12:44 +0100
-Received: (qmail 3022 invoked by uid 399); 12 Jan 2010 14:03:46 -0000
-Received: from dsl-tn-dynamic-134.253.164.122.airtelbroadband.in (HELO
-	?192.168.1.3?) (balakrishnan@e-consystems.com@122.164.253.134)
-	by mail9.myhsphere.biz with ESMTPAM; 12 Jan 2010 14:03:46 -0000
-X-Originating-IP: 122.164.253.134
-X-Sender: balakrishnan@e-consystems.com
-From: balakrishnan <balakrishnan@e-consystems.com>
+	Tue, 12 Jan 2010 15:11:00 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jan 2010 15:11:00 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Jan 2010 15:11:00 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Jan 2010 19:32:39 +0530
-Message-Id: <1263304959.18954.38.camel@balakrishnan-desktop>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 12 Jan 2010 15:10:33 +0100
+Message-ID: <hihvso$eon$1@ger.gmane.org>
+References: <E1NTDIp-00055S-0r@melo.openembedded.org>
+	<20100112140326.GC10781@jama>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-SA-Exim-Connect-IP: 204.10.105.69
-X-SA-Exim-Mail-From: balakrishnan@e-consystems.com
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100104 Shredder/3.0.1pre
+In-Reply-To: <20100112140326.GC10781@jama>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Adding PXA270 based Machine....
+Subject: Re: Koen Kooi : xserver-xorg 1.7.3: fix regression where hal was disabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,22 +47,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2010 14:12:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 12 Jan 2010 14:13:12 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-         I going to add pxa270 based machine with Angstrom distribution
-to OE, regarding this can I have answer of list of my doubts...   
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-1.Whether I can send machine conf ,linux recipes, U-Boot recipes and
-Image recipes are in single patch or separated patch?  
-2.If OE-Dev mailing list accepted my patches then, what is my next step?
-3.If it commited by myself then, what commit rights I have?
-4.Can I commit with out "Signed-off-by" line?
+On 12-01-10 15:03, Martin Jansa wrote:
+> On Fri, Jan 08, 2010 at 11:46:51AM +0000, git version control wrote:
+>> Module: openembedded.git
+>> Branch: org.openembedded.dev
+>> Commit: 3a9b352acba24c78b562d8dc6527b774cbb86041
+>> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=3a9b352acba24c78b562d8dc6527b774cbb86041
+>>
+>> Author: Koen Kooi <koen@openembedded.org>
+>> Date:   Fri Jan  8 12:44:47 2010 +0100
+>>
+>> xserver-xorg 1.7.3: fix regression where hal was disabled
+>>
+>> * this fixes the "my touchscreen isn't working anymore" bug
+> 
+> Thanks,
+> 
+> can we add hal conditionaly as XINERAMA is?
+> Maybe for both om-gta01, om-gta02?
+> 
+> We have input configuration in xorg.conf and with hal for input
+> detection deprecated by xorg devs I guess we won't change that before
+> 1.8 xserver (maybe with deviceKit or something else).
 
-Thank You
-J.Balakrishnan
+AIUI you can do --enable-udev to get udev based device handling (aka
+"The Future") working, but that would involve one of the OE devs
+expanding the current touchscreen0 udev rule.
+- --enable hal and --enable-udev are mutually exclusive, though.
 
+> Before this change hal could be removed from om-gta*
+> 
+> I'm also willing to accept that we also need hal from reasons I don't know
+> about yet..
+
+e.g. people wanting to use xf86-input-tslib on gta0X, like me :)
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLTILZMkyGM64RGpERAv0+AKCKBN96oE8Yvx1/dK7/y0lG82oMOgCfcgpx
+CHftf+HCW1kH9SHY1aKb9gI=
+=bmXf
+-----END PGP SIGNATURE-----
 
 
 
