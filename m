@@ -1,35 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NUl99-0007NL-8s for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 19:07:20 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NUl74-0001su-0t
+	(envelope-from <philb@gnu.org>) id 1NUnti-0002iz-Pt
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 12 Jan 2010 19:05:06 +0100
-Received: from 69.199.146.210 ([69.199.146.210])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2010 19:05:05 +0100
-Received: from q-newsgroup by 69.199.146.210 with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Jan 2010 19:05:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 12 Jan 2010 22:03:35 +0100
+Received: from 88-109-31-216.dynamic.dsl.as9105.com ([88.109.31.216]
+	helo=[192.168.2.155])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NUnrO-0004f2-RB
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 12 Jan 2010 21:01:09 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-From: David Winn <q-newsgroup@qypea.com>
-Date: Tue, 12 Jan 2010 18:01:12 +0000 (UTC)
-Message-ID: <loom.20100112T185527-540@post.gmane.org>
+In-Reply-To: <1263304959.18954.38.camel@balakrishnan-desktop>
+References: <1263304959.18954.38.camel@balakrishnan-desktop>
+Date: Tue, 12 Jan 2010 21:00:45 +0000
+Message-ID: <1263330045.457.260.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 69.199.146.210 (Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.6) Gecko/20100107 Fedora/3.5.6-1.fc12 Firefox/3.5.6)
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Apache staging for building modules
+Subject: Re: Adding PXA270 based Machine....
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,20 +35,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Jan 2010 18:07:20 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 12 Jan 2010 21:03:35 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-I'm trying to create a recipe mod_fastcgi for use with apache2 in OE, and hit a
-bit of a problem. In order to build mod_fastcgi requires access to the apache
-source directory, which is removed by rm_work. Apache2-native is staging headers
-and apxs which might work for building native modules, but won't cross compile.
+On Tue, 2010-01-12 at 19:32 +0530, balakrishnan wrote:
+> I going to add pxa270 based machine with Angstrom distribution
+> to OE, regarding this can I have answer of list of my doubts...   
+> 
+> 1.Whether I can send machine conf ,linux recipes, U-Boot recipes and
+> Image recipes are in single patch or separated patch?  
 
-Is there something I am overlooking here? Are any other apache modules compiled
-by OE?
+Please send them as separate patches.
 
-Thanks,
-David
+> 2.If OE-Dev mailing list accepted my patches then, what is my next step?
+
+If they are accepted then someone will commit them to the repository.
+You don't need to take any action.
+
+> 3.If it commited by myself then, what commit rights I have?
+> 4.Can I commit with out "Signed-off-by" line?
+
+If you need to ask the question then the answer is that you don't have
+any commit access: if you did have direct checkin access to the tree
+then you would know about it.
+
+p.
+
 
 
 
