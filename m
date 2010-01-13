@@ -1,29 +1,36 @@
-Received: from mxa.rambler.ru ([81.19.66.231])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <alexondi@rambler.ru>) id 1NUxOx-00080i-B0
+	(envelope-from <rpjday@crashcourse.ca>) id 1NUyR0-0004zH-0B
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 08:12:26 +0100
-Received: from mcgi30.rambler.ru (mcgi30.rambler.ru [81.19.67.201])
-	by mxa.rambler.ru (Postfix) with ESMTP id 2A736AA48E
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2010 10:10:15 +0300 (MSK)
-Received: from mcgi30.rambler.ru (localhost.rambler.ru [127.0.0.1])
-	by mcgi30.rambler.ru (Postfix) with ESMTP id 77FFB1144B
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2010 10:10:12 +0300 (MSK)
-Received: from [77.52.208.230] by mcgi30.rambler.ru with HTTP (mailimap);
-	Wed, 13 Jan 2010 10:10:09 +0300
-From: Perepelica Alexander <alexondi@rambler.ru>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 13 Jan 2010 10:10:09 +0300
+	Wed, 13 Jan 2010 09:18:37 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NUyOu-0002G4-E9 for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jan 2010 03:16:24 -0500
+Date: Wed, 13 Jan 2010 03:15:42 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.00.1001130313390.3548@localhost>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
-Message-Id: <490981633.1263366609.160668084.15032@mcgi30.rambler.ru>
-X-Mailer: Ramail 3u, (untone), http://mail.rambler.ru
-X-SA-Exim-Connect-IP: 81.19.66.231
-X-SA-Exim-Mail-From: alexondi@rambler.ru
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Correct way continue build after error
+Subject: the new (fedora 12) "setsebool" setting?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,21 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 07:12:26 -0000
-Content-Disposition: inline
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-
-Hello!
-I look in docs but didn't find answer for subj. Problem is if build is 
-failed then I change receipt or configs and then what must I do to 
-continue?
-If I must recompile last stage (with configuring and/or unpacking) are 
-some ways to do that?
+X-List-Received-Date: Wed, 13 Jan 2010 08:18:37 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
---
-Thank you.
-Perepelica Alexander
+  here:
+
+http://docs.openembedded.org/usermanual/html/gettingoe_building_software.html
+
+one reads of setting the proper selinux boolean thusly:
+
+  $ setsebool -P allow_unconfirmed_mmap_low 1
+
+however a recent poster on the beagleboard ML claims that that's the
+fedora 11 way to do it, and in fedora 12, it's:
+
+  $ setsebool -P mmap_low_allowed 1
+
+i was unaware of this change.  can anyone else verify that this is the
+new and improved way to do things?  and would it still correspond to
+the same sysctl variable?
+
+rday
+--x
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
