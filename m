@@ -1,27 +1,38 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NV9Sa-0001Xf-6z
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NV9Ut-0006Nc-Qc for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jan 2010 21:07:22 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NV9Sm-0002Zl-TF
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 21:04:59 +0100
-Received: from 88-109-31-216.dynamic.dsl.as9105.com ([88.109.31.216]
-	helo=[192.168.2.155])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NV9QV-00079U-10
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 20:02:47 +0000
-From: Phil Blundell <philb@gnu.org>
+	Wed, 13 Jan 2010 21:05:08 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jan 2010 21:05:08 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jan 2010 21:05:08 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <353547.18069.qm@web112505.mail.gq1.yahoo.com>
-References: <353547.18069.qm@web112505.mail.gq1.yahoo.com>
-Date: Wed, 13 Jan 2010 20:02:43 +0000
-Message-ID: <1263412963.457.280.camel@lenovo.internal.reciva.com>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 13 Jan 2010 20:53:15 +0100
+Message-ID: <hil8ba$835$5@ger.gmane.org>
+References: <1263313440-14774-1-git-send-email-marcin@juszkiewicz.com.pl>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100112 Shredder/3.0.2pre
+In-Reply-To: <1263313440-14774-1-git-send-email-marcin@juszkiewicz.com.pl>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: =?UTF-8?B?UmU6IERvZXMgT0XigJlzIEFuZ3N0cm9tIExpbnV4IHN1cHBvcnQgU01QIChTeW1tZXRyaWMgbXVsdGlwcm9jZXNzaW5nKSBvbiBiZWFnbGUgYm9hcmQu?=
+Subject: Re: [STABLE][PATCH] classpath-native: disable-gjdoc, it calls antlr and fails without antlr installed on buildhost (runantlr from antlr-native is found by configure, but antlr.jar from staging doesn't work)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,127 +46,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 20:04:59 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 13 Jan 2010 20:07:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-It sounds as if you are hoping to use the DSP as a general purpose
-application accelerator.  If that's the case then I fear you will be
-disappointed; I don't believe there is any existing solution for that on
-this hardware platform.  You can, obviously, use the DSP to accelerate
-your own particular applications but you would need to write custom code
-to do that.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-If you want to do general purpose multiprocessing then you should
-probably select a different processor: something like the Cortex-A9
-MPCore would be much more suitable for this kind of application than the
-CPU on the beagleboard.
+Acked-by: Koen Kooi <koen@openembedded.org>
 
-p.
+On 12-01-10 17:24, Marcin Juszkiewicz wrote:
+> From: Martin Jansa <Martin.Jansa@gmail.com>
+> 
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+> ---
+>  recipes/classpath/classpath-native.inc       |    1 +
+>  recipes/classpath/classpath-native_0.97.2.bb |    2 +-
+>  recipes/classpath/classpath-native_0.98.bb   |    2 +-
+>  3 files changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes/classpath/classpath-native.inc b/recipes/classpath/classpath-native.inc
+> index e7570c4..35a2485 100644
+> --- a/recipes/classpath/classpath-native.inc
+> +++ b/recipes/classpath/classpath-native.inc
+> @@ -30,6 +30,7 @@ EXTRA_OECONF = "\
+>    --disable-gtk-peer \
+>    --disable-plugin \
+>    --disable-dssi \
+> +  --disable-gjdoc \
+>    --enable-examples \
+>    --enable-tools \
+>    --includedir=${STAGING_INCDIR}/classpath \
+> diff --git a/recipes/classpath/classpath-native_0.97.2.bb b/recipes/classpath/classpath-native_0.97.2.bb
+> index 4de5602..b026f40 100644
+> --- a/recipes/classpath/classpath-native_0.97.2.bb
+> +++ b/recipes/classpath/classpath-native_0.97.2.bb
+> @@ -1,6 +1,6 @@
+>  require classpath-native.inc
+>  
+> -PR = "r6"
+> +PR = "r7"
+>  
+>  # The code affected by the javanet-local patch
+>  # is usually not compiled. However if someone changes
+> diff --git a/recipes/classpath/classpath-native_0.98.bb b/recipes/classpath/classpath-native_0.98.bb
+> index 6659178..a924b8a 100644
+> --- a/recipes/classpath/classpath-native_0.98.bb
+> +++ b/recipes/classpath/classpath-native_0.98.bb
+> @@ -3,7 +3,7 @@ require classpath-native.inc
+>  # Deadlocks occur on at least amd64 hosts.
+>  DEFAULT_PREFERENCE = "-1"
+>  
+> -PR = "r2"
+> +PR = "r3"
+>  
+>  # The code affected by the javanet-local patch
+>  # is usually not compiled. However if someone changes
 
-On Wed, 2010-01-13 at 07:06 -0800, gagan singh wrote:
-> Hi Phil,
->             Thanks for the response.  So you recon Asynchronous Multi-Pro=
-cessing (AMP) concept is better suited in beagle board configuration.   If =
-so what exactly I have to do in angstom to get such thing working.=20
-> =20
-> regards
-> =20
-> Gagan
-> =20
-> =20
-> --- On Tue, 1/12/10, Phil Blundell <philb@gnu.org> wrote:
->=20
->=20
-> From: Phil Blundell <philb@gnu.org>
-> Subject: Re: [oe] Does OE=E2=80=99s Angstrom Linux support SMP (Symmetric=
- multiprocessing) on beagle board.
-> To: openembedded-devel@lists.openembedded.org
-> Date: Tuesday, January 12, 2010, 11:44 AM
->=20
->=20
-> I would have thought the interconnect performance would be the least of
-> your worries.  It seems that a rather bigger obstacle to running any
-> kind of SMP on this hardware would be the issue that the two cores have
-> different instruction sets: the DSP can't execute ARM code, and the ARM
-> can't execute DSP code.
->=20
-> p.
->=20
-> On Tue, 2010-01-12 at 07:51 -0800, gagan singh wrote:
-> > Hi Phil,
-> >               =20
-> > I thought general response time of any general application time will be=
- faster.
-> > Say Just getting a feeling of running General purpose Computer OS/appli=
-cations  on a 1 GHz  processor while actually it is running on 500MHz CPU w=
-ith SMP support(Keeping overhead time aside)
-> >            DSP seems to remain idle most of the time while everything r=
-uns on Arm core.  You says difficult to implement on that sort Of Cores. Do=
- the inter communication link/memory interface  is bottle neck for implemen=
-ting shared workload.
-> > =20
-> > regards
-> > =20
-> > Gagan
-> >=20
-> >=20
-> > --- On Tue, 1/12/10, Phil Blundell <philb@gnu.org> wrote:
-> >=20
-> >=20
-> > From: Phil Blundell <philb@gnu.org>
-> > Subject: Re: [oe] Does OE=E2=80=99s Angstrom Linux support SMP (Symmetr=
-ic multiprocessing) on beagle board.
-> > To: openembedded-devel@lists.openembedded.org
-> > Date: Tuesday, January 12, 2010, 10:06 AM
-> >=20
-> >=20
-> > On Tue, 2010-01-12 at 06:57 -0800, gagan singh wrote:
-> > >                      Do the Angstrom version of Linux supports SMP fo=
-r  Dual core (A8 + TI DSP 320C64x) beagle board. If not, where I should loo=
-k in tutorial to work on adding support for such a feature.
-> > >  I try Google it but no much could be located.
-> >=20
-> > I'm not quite sure what you are trying to do here.  It's hard to imagin=
-e
-> > how you could have any meaningful kind of "symmetric" multiprocessing o=
-n
-> > that combination of cores.
-> >=20
-> > What exactly are you hoping to achieve?
-> >=20
-> > p.
-> >=20
-> >=20
-> >=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >=20
-> >=20
-> >=20
-> >      =20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
->=20
->=20
->      =20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFLTiSrMkyGM64RGpERAmeGAKCoFZG2dXBWBd7shkM2GLqNPZ7t6wCeLPwy
+jCNhbK/4VMRNnO4MTr26Kx0=
+=3/3x
+-----END PGP SIGNATURE-----
 
 
 
