@@ -1,30 +1,38 @@
-Received: from vms173015pub.verizon.net ([206.46.173.15])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1NV7fp-0000aa-NU
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NV9IZ-0000ru-0y for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jan 2010 20:54:38 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NV9GR-0004UO-TD
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 19:10:32 +0100
-Received: from gandalf.denix.org ([unknown] [71.255.235.232])
-	by vms173015.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0KW700BT33LDP683@vms173015.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	13 Jan 2010 11:08:02 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 6235914AF60; Wed,
-	13 Jan 2010 12:08:01 -0500 (EST)
-Date: Wed, 13 Jan 2010 12:08:01 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 13 Jan 2010 20:52:23 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jan 2010 20:52:23 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jan 2010 20:52:23 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100113170801.GA24151@denix.org>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 13 Jan 2010 20:52:11 +0100
+Message-ID: <hil89a$835$1@ger.gmane.org>
 References: <1263401193-12161-1-git-send-email-marcin@juszkiewicz.com.pl>
 	<1263401193-12161-2-git-send-email-marcin@juszkiewicz.com.pl>
-MIME-version: 1.0
-In-reply-to: <1263401193-12161-2-git-send-email-marcin@juszkiewicz.com.pl>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.15
-X-SA-Exim-Mail-From: denis@denix.org
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100112 Shredder/3.0.2pre
+In-Reply-To: <1263401193-12161-2-git-send-email-marcin@juszkiewicz.com.pl>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Marcin Juszkiewicz <marcin@buglabs.net>
 Subject: Re: [STABLE][PATCH 1/2] bug: use full X.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -39,18 +47,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 18:10:32 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 13 Jan 2010 19:54:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jan 13, 2010 at 05:46:32PM +0100, Marcin Juszkiewicz wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Acked-by: Koen Kooi <koen@openembedded.org>
+
+
+On 13-01-10 17:46, Marcin Juszkiewicz wrote:
 > From: Marcin Juszkiewicz <marcin@buglabs.net>
 > 
 > 
 > Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-
-Acked-by: Denys Dmytriyenko <denis@denix.org>
-
 > ---
 >  conf/machine/bug.conf |    8 ++++++++
 >  1 files changed, 8 insertions(+), 0 deletions(-)
@@ -71,15 +82,14 @@ Acked-by: Denys Dmytriyenko <denis@denix.org>
 > +           xf86-input-mouse \
 > +           xf86-video-fbdev \
 > +           xf86-input-keyboard"
-> -- 
-> 1.6.6
-> 
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLTiRrMkyGM64RGpERAl8sAJ4wGzNROfUA4iOUIj0WkbaIdh2uOgCdEQl3
+6obKyJJLCTx+PUf5gWJIAUc=
+=hSWq
+-----END PGP SIGNATURE-----
+
 
 
