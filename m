@@ -1,29 +1,38 @@
-Received: from mxa.rambler.ru ([81.19.66.231])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <alexondi@rambler.ru>) id 1NV2ns-0006Rz-PT
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NV3Br-0000tf-0A for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jan 2010 14:23:18 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NV39k-0007ZH-C9
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 13:58:31 +0100
-Received: from mcgi47.rambler.ru (mcgi47.rambler.ru [81.19.67.71])
-	by mxa.rambler.ru (Postfix) with ESMTP id 0DFCAAC237
+	Wed, 13 Jan 2010 14:21:04 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jan 2010 14:21:04 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2010 15:55:18 +0300 (MSK)
-Received: from mcgi47.rambler.ru (localhost [127.0.0.1])
-	by mcgi47.rambler.ru (Postfix) with ESMTP id 7836D1144F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2010 15:55:15 +0300 (MSK)
-Received: from [77.52.208.230] by mcgi47.rambler.ru with HTTP (mailimap);
-	Wed, 13 Jan 2010 15:55:12 +0300
-From: Perepelica Alexander <alexondi@rambler.ru>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 13 Jan 2010 15:55:12 +0300
-MIME-Version: 1.0
-Message-Id: <97332218.1263387312.156294792.17546@mcgi47.rambler.ru>
-X-Mailer: Ramail 3u, (untone), http://mail.rambler.ru
-X-SA-Exim-Connect-IP: 81.19.66.231
-X-SA-Exim-Mail-From: alexondi@rambler.ru
+	Wed, 13 Jan 2010 14:21:04 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 13 Jan 2010 14:20:43 +0100
+Message-ID: <hikhba$fcu$1@ger.gmane.org>
+References: <alpine.LFD.2.00.1001130657110.487@localhost>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100112 Shredder/3.0.2pre
+In-Reply-To: <alpine.LFD.2.00.1001130657110.487@localhost>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Adding a new Machine question
+Subject: Re: dev branch, bitbake of "mplayer" fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,60 +46,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 12:58:32 -0000
-Content-Disposition: inline
+X-List-Received-Date: Wed, 13 Jan 2010 13:23:18 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
 
-Hi!
-I have problem with configs for new x86_64 machine.
-How I read in manual I need set next vasiables
-1. TARGET_ARCH
-  TARGET_ARCH = "x86_64"
-2. MACHINE_FEATURES
- MACHINE_FEATURES = "kernel26 screen keyboard pci usbhost acpi ext2 x86"
- MACHINE_EXTRA_RRECOMMENDS = " kernel-modules"
-3. PREFERRED_PROVIDER_virtual/kernel
- PREFERRED_PROVIDER_virtual/kernel = "linux"
- And now when I build  helloworld-image all is ok i get my RFS image.
-But when I try build bootstrap-image I got error
-"  no such directory asm-x86" but I see dir with name "asm-generic" and
-name of machine conf file is x86_64-generic.conf.
-So, I don't understand what I do wrong?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-x86_64-generic.conf
-# Released under the MIT license (see packages/COPYING)
-#@TYPE: Machine
-#@NAME: x86_64
-#@DESCRIPTION: Machine configuration for a generic x86_64 machine
+On 13-01-10 12:59, Robert P. J. Day wrote:
+> 
+>   i'm starting to think these build errors only ever happen to me.
+> :-( once again, on fedora 12, dev branch:
 
-TARGET_ARCH = "x86_64"
+You're the second person to run into a build failure, I'll look into it.
 
-#PREFERRED_PROVIDER_virtual/kernel = "linux"
-PREFERRED_VERSION_gcc = "4.4.2"
-KERNEL_IMAGETYPE = "bzImage"
-GLIBC_ADDONS = "nptl"
-GLIBC_EXTRA_OECONF = "--with-tls"
+regards,
 
-IMAGE_FSTYPES ?= "ext2.gz"
-IMAGE_DEVICE_TABLES = " \
-  files/device_table-minimal.txt \
-  files/device_table_add-loop.txt \
-  files/device_table_add-scsi.txt \
-"
-MACHINE_FEATURES = "kernel26 screen keyboard pci usbhost acpi ext2"
-MACHINE_EXTRA_RRECOMMENDS = " kernel-modules"
-TARGET_CC_ARCH = "-m64"
-BASE_PACKAGE_ARCH = "x86_64"
-FEED_ARCH = "x86_64"
-#PACKAGE_EXTRA_ARCHS += "x86 i386 i486 i586 i686"
+Koen
 
 
+> ERROR: function do_compile failed
+> ERROR: see log in
+> /home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/mplayer-0.0+1.0rc2+svnr30247-r15/temp/log.do_compile.26510
+> NOTE: Task failed:
+> /home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/mplayer-0.0+1.0rc2+svnr30247-r15/temp/log.do_compile.26510
+> ERROR: TaskFailed event exception, aborting
+> ERROR: Build of
+> /home/rpjday/oe/openembedded/recipes/mplayer/mplayer_svn.bb do_compile
+> failed
+> 
+>   log file:
+> 
+> NOTE: make
+> ccache arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8
+> -mfpu=neon -mfloat-abi=softfp -Wundef -Wdisabled-optimization
+> -Wno-pointer-sign -Wdeclaration-after-statement -std=gnu99
+> -isystem/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include
+> -fexpensive-optimizations  -ftree-vectorize -fomit-frame-pointer -O4
+> -ffast-math
+> -I/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/mplayer-0.0+1.0rc2+svnr30247-r15/trunk/libdvdread4
+> -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE -I.
+> -isystem/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include
+> -D_REENTRANT
+> -I/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/freetype2
+> -I/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include
+> -I/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/schroedinger-1.0
+> -I/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/liboil-0.3
+> -isystem/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include
+> -c -o libmpcodecs/vf_fspp.o libmpcodecs/vf_fspp.c
+> In file included from libmpcodecs/vf_fspp.c:50:
+> ./libavutil/internal.h:266:6: warning: "HAVE_EXP2" is not defined
+> ./libavutil/internal.h:273:6: warning: "HAVE_EXP2F" is not defined
+> ./libavutil/internal.h:294:6: warning: "HAVE_LOG2F" is not defined
+> In file included from libmpcodecs/vf_fspp.c:51:
+> ./libavutil/internal.h:267: error: static declaration of 'exp2'
+> follows non-static declaration
+> ./libavutil/internal.h:274: error: static declaration of 'exp2f'
+> follows non-static declaration
+> ./libavutil/internal.h:295: error: static declaration of 'log2f'
+> follows non-static declaration
+> make: *** [libmpcodecs/vf_fspp.o] Error 1
+> FATAL: oe_runmake failed
+> 
+> 
+> rday
+> --
+> 
+> ========================================================================
+> Robert P. J. Day                               Waterloo, Ontario, CANADA
+> 
+>             Linux Consulting, Training and Kernel Pedantry.
+> 
+> Web page:                                          http://crashcourse.ca
+> Twitter:                                       http://twitter.com/rpjday
+> ========================================================================
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFLTcirMkyGM64RGpERAjy6AKCNpo6j8xHKfOiTGGLASFjabsjwtQCfd+eK
+8yGE8fGobR+YKqd9wz3OJsE=
+=VrIl
+-----END PGP SIGNATURE-----
 
---
-Thank you.
-Perepelica Alexander
 
 
