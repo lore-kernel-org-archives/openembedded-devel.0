@@ -1,38 +1,38 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NV9Ut-0006Nc-Qc for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 21:07:22 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NV9Sm-0002Zl-TF
+	id 1NV9Zf-0000vp-Js for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jan 2010 21:12:18 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NV9XZ-0004rv-TZ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 21:05:08 +0100
+	Wed, 13 Jan 2010 21:10:05 +0100
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2010 21:05:08 +0100
+	Wed, 13 Jan 2010 21:10:05 +0100
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2010 21:05:08 +0100
+	Wed, 13 Jan 2010 21:10:05 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 13 Jan 2010 20:53:15 +0100
-Message-ID: <hil8ba$835$5@ger.gmane.org>
-References: <1263313440-14774-1-git-send-email-marcin@juszkiewicz.com.pl>
+Date: Wed, 13 Jan 2010 20:53:01 +0100
+Message-ID: <hil8at$835$4@ger.gmane.org>
+References: <1263314629-15492-1-git-send-email-marcin@juszkiewicz.com.pl>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.7) Gecko/20100112 Shredder/3.0.2pre
-In-Reply-To: <1263313440-14774-1-git-send-email-marcin@juszkiewicz.com.pl>
+In-Reply-To: <1263314629-15492-1-git-send-email-marcin@juszkiewicz.com.pl>
 X-Enigmail-Version: 1.0
 Sender: news <news@ger.gmane.org>
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [STABLE][PATCH] classpath-native: disable-gjdoc, it calls antlr and fails without antlr installed on buildhost (runantlr from antlr-native is found by configure, but antlr.jar from staging doesn't work)
+Subject: Re: [STABLE][PATCH] matchbox-session: simple provider of Matchbox session for X11 startup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,70 +46,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 20:07:23 -0000
+X-List-Received-Date: Wed, 13 Jan 2010 20:12:19 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
+On 12-01-10 17:43, Marcin Juszkiewicz wrote:
+> From: Marcin Juszkiewicz <hrw@koansoftware.com>
+
 Acked-by: Koen Kooi <koen@openembedded.org>
 
-On 12-01-10 17:24, Marcin Juszkiewicz wrote:
-> From: Martin Jansa <Martin.Jansa@gmail.com>
+
+> In GPE images we use gpe-session-scripts to provide Xsession init
+> scripts for launching Matchbox components. But what if someone do not
+> want GPE but want Matchbox?
 > 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> Poky has it cleaned in other way.
+> 
 > Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 > ---
->  recipes/classpath/classpath-native.inc       |    1 +
->  recipes/classpath/classpath-native_0.97.2.bb |    2 +-
->  recipes/classpath/classpath-native_0.98.bb   |    2 +-
->  3 files changed, 3 insertions(+), 2 deletions(-)
+>  recipes/matchbox-session/matchbox-session.bb |   14 ++++++++++++++
+>  1 files changed, 14 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/matchbox-session/matchbox-session.bb
 > 
-> diff --git a/recipes/classpath/classpath-native.inc b/recipes/classpath/classpath-native.inc
-> index e7570c4..35a2485 100644
-> --- a/recipes/classpath/classpath-native.inc
-> +++ b/recipes/classpath/classpath-native.inc
-> @@ -30,6 +30,7 @@ EXTRA_OECONF = "\
->    --disable-gtk-peer \
->    --disable-plugin \
->    --disable-dssi \
-> +  --disable-gjdoc \
->    --enable-examples \
->    --enable-tools \
->    --includedir=${STAGING_INCDIR}/classpath \
-> diff --git a/recipes/classpath/classpath-native_0.97.2.bb b/recipes/classpath/classpath-native_0.97.2.bb
-> index 4de5602..b026f40 100644
-> --- a/recipes/classpath/classpath-native_0.97.2.bb
-> +++ b/recipes/classpath/classpath-native_0.97.2.bb
-> @@ -1,6 +1,6 @@
->  require classpath-native.inc
->  
-> -PR = "r6"
-> +PR = "r7"
->  
->  # The code affected by the javanet-local patch
->  # is usually not compiled. However if someone changes
-> diff --git a/recipes/classpath/classpath-native_0.98.bb b/recipes/classpath/classpath-native_0.98.bb
-> index 6659178..a924b8a 100644
-> --- a/recipes/classpath/classpath-native_0.98.bb
-> +++ b/recipes/classpath/classpath-native_0.98.bb
-> @@ -3,7 +3,7 @@ require classpath-native.inc
->  # Deadlocks occur on at least amd64 hosts.
->  DEFAULT_PREFERENCE = "-1"
->  
-> -PR = "r2"
-> +PR = "r3"
->  
->  # The code affected by the javanet-local patch
->  # is usually not compiled. However if someone changes
+> diff --git a/recipes/matchbox-session/matchbox-session.bb b/recipes/matchbox-session/matchbox-session.bb
+> new file mode 100644
+> index 0000000..c9014f9
+> --- /dev/null
+> +++ b/recipes/matchbox-session/matchbox-session.bb
+> @@ -0,0 +1,14 @@
+> +DESCRIPTION = "Matchbox session support"
+> +RDEPENDS = "matchbox-common"
+> +# they do the same in other way
+> +RCONFLICTS = "gpe-session-scripts"
+> +
+> +do_install() {
+> +        install -d ${D}${sysconfdir}/X11/Xsession.d/
+> +        ln -sf ${bindir}/matchbox-session ${D}${sysconfdir}/X11/Xsession.d/90matchbox-session
+> +}
+> +
+> +PACKAGE_ARCH = "all"
+> +PACKAGES = "${PN}"
+> +
+> +FILES_${PN} = "${sysconfdir}"
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFLTiSrMkyGM64RGpERAmeGAKCoFZG2dXBWBd7shkM2GLqNPZ7t6wCeLPwy
-jCNhbK/4VMRNnO4MTr26Kx0=
-=3/3x
+iD8DBQFLTiSdMkyGM64RGpERAs3OAJ9KCftUBcdgmjvh3nIKGE9FXGC15wCfSiwN
+4pY8wWTwcZVW7Zba23whThE=
+=E1uW
 -----END PGP SIGNATURE-----
 
 
