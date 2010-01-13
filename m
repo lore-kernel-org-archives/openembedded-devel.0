@@ -1,32 +1,38 @@
-Received: from bay0-omc2-s3.bay0.hotmail.com ([65.54.190.78])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <salehusman@hotmail.com>) id 1NV42K-0005uZ-An
+	(envelope-from <rpjday@crashcourse.ca>) id 1NV44U-00064D-MR
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 15:17:31 +0100
-Received: from BAY127-W27 ([65.54.190.125]) by bay0-omc2-s3.bay0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 13 Jan 2010 06:14:13 -0800
-Message-ID: <BAY127-W27A372814070C4B6AFAFB9D86B0@phx.gbl>
-X-Originating-IP: [203.82.49.5]
-From: saleh usman <salehusman@hotmail.com>
-To: <gary@mlbassoc.com>, Openembedded Discussion
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 13 Jan 2010 19:14:13 +0500
-Importance: Normal
-In-Reply-To: <4B4D0AB4.1020402@mlbassoc.com>
-References: <BAY127-W199A6B7DA19A55E32E8648D86C0@phx.gbl>
-	<d1b08f941001120644q1a82954bhc3e867abadc9fa66@mail.gmail.com>
-	<loom.20100112T154902-934@post.gmane.org>,
-	<4B4D0AB4.1020402@mlbassoc.com>
+	Wed, 13 Jan 2010 15:19:45 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NV42P-0001mV-88 for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jan 2010 09:17:33 -0500
+Date: Wed, 13 Jan 2010 09:16:49 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <hikjqr$ohr$1@ger.gmane.org>
+Message-ID: <alpine.LFD.2.00.1001130915570.18493@localhost>
+References: <alpine.LFD.2.00.1001130657110.487@localhost>
+	<hikjqr$ohr$1@ger.gmane.org>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
-X-OriginalArrivalTime: 13 Jan 2010 14:14:13.0886 (UTC)
-	FILETIME=[AF1559E0:01CA945A]
-X-SA-Exim-Connect-IP: 65.54.190.78
-X-SA-Exim-Mail-From: salehusman@hotmail.com
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: bitbaking helloworld
+Subject: Re: dev branch, bitbake of "mplayer" fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,63 +46,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 14:17:31 -0000
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 13 Jan 2010 14:19:45 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
+On Wed, 13 Jan 2010, Koen Kooi wrote:
 
-I've a board on which linux is actually running then I think I only need ex=
-ecutables.Is it so?
-What console-image actually does.Which functionality executables of console=
--image will perform?
-Saleh  =20
+> I suspect the build will work if you happen to have ffmpeg already staged.
+>
+> This should solve the issue:
+>
+> http://lists.mplayerhq.hu/pipermail/mplayer-cvslog/2010-January/038178.html
+>
+> testing now to see if that works.
 
-> Date: Tue=2C 12 Jan 2010 16:50:12 -0700
-> From: gary@mlbassoc.com
-> To: openembedded-devel@lists.openembedded.org
-> CC: salehusman@hotmail.com
-> Subject: Re: [oe] bitbaking helloworld
->=20
-> On 01/12/2010 07:50 AM=2C Saleh Usman wrote:
-> > Andrea Adami<andrea.adami<at>  gmail.com>  writes:
-> >
-> >>
-> >> Saleh=2C the ipk can be opened with ar -x
-> >> Usually one *installs* the ipk...otherwise you can have hard time with
-> >> the dependencies.
-> >> (not for helloworld=2C happily :)
-> >>
-> >> Regards
-> >>
-> >> Andrea
-> >>
-> > and which ipk I should extract that contains executable to be run on my=
- platform
->=20
-> I think there's a bit of confusion here.  Building 'helloword'
-> does not create a useful embedded environment=2C i.e. you can't
-> run it on target/embedded hardware directly.  IIRC you are
-> trying to deploy (keyword!) this on an OMAP platform.  This
-> means that you'll need to build something more substantial
-> that has all the base pieces required to get Linux running
-> on that hardware.
->=20
-> I'd suggest that you try building something like 'console-image'
-> This *will* create files in the tmp/deploy/... tree that you've
-> been told to use.  Once you figure out how to get those files
-> onto your target and run them=2C then you can experiment with
-> adding additional packages=2C etc.
->=20
-> --=20
-> ------------------------------------------------------------
-> Gary Thomas                 |  Consulting for the
-> MLB Associates              |    Embedded world
-> ------------------------------------------------------------
- 		 	   		 =20
-_________________________________________________________________
-Windows Live Hotmail: Your friends can get your Facebook updates=2C right f=
-rom Hotmail=AE.
-http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/so=
-cial-network-basics.aspx?ocid=3DPID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_4:092=
-009=
+  so you're saying that if i bitbake ffmpeg first, then the bitbake of
+mplayer should work?  i can test that quickly enough.
+
+rday
+--
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
+
 
