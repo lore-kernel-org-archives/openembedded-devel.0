@@ -1,35 +1,24 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NUzvc-0003gu-A5 for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 10:54:19 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NUztT-0004C8-0d
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NV02J-00043p-Ir
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 10:52:03 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2010 10:52:03 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2010 10:52:03 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 13 Jan 2010 11:01:14 +0100
+Received: (qmail 16723 invoked by uid 813007); 13 Jan 2010 09:59:01 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 13 Jan 2010 09:59:01 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 13 Jan 2010 10:51:39 +0100
-Message-ID: <hik53a$4tu$1@ger.gmane.org>
+Date: Wed, 13 Jan 2010 10:58:54 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-rc2-00268-g45d28b0; KDE/4.3.4; x86_64; ;
+	)
 References: <hihuv8$b6u$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100110 Shredder/3.0.1pre
 In-Reply-To: <hihuv8$b6u$1@ger.gmane.org>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+MIME-Version: 1.0
+Message-Id: <201001131059.00112.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [RFC][PATCH] Move udev cache creation after checkroot
@@ -46,41 +35,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 09:54:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 13 Jan 2010 10:01:14 -0000
+X-Groupsio-MsgNum: 15638
+Content-Type: multipart/signed; boundary="nextPart2447186.cCiPm5Ouqn";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--nextPart2447186.cCiPm5Ouqn
+Content-Type: Text/Plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 
-ping
-
-On 12-01-10 14:54, Koen Kooi wrote:
+Dnia wtorek, 12 stycznia 2010 o 14:54:48 Koen Kooi napisa=B3(a):
 > Hi,
-> 
+>=20
 > What's your opinion on attached (untested) patch? If there's some
 > consensus that this is a step in the right direction I'll create a
 > working & tested patch to commit.
-> 
-> Nota bene: I'm not going to discuss the merits of udev caching, only the
-> impact of this patch to the current situation.
-> 
-> regards,
-> 
-> Koen
 
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+--nextPart2447186.cCiPm5Ouqn
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-iD8DBQFLTZerMkyGM64RGpERAg9CAKCNetCgK7Xs4b2UFLsn3pOoHRrSpgCgulfl
-H2qZxaChQx0kSuc/8Jguhmg=
-=4lQ5
+iEYEABECAAYFAktNmV8ACgkQeQ6MlGH/2qtOjgCfbftr9EkGQnJwiNpNdx9hLaw9
+vSsAoI42ISNr9nDEhS1iADOzAnl/HQ45
+=00XC
 -----END PGP SIGNATURE-----
 
-
-
+--nextPart2447186.cCiPm5Ouqn--
