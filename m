@@ -1,30 +1,38 @@
-Received: from vms173013pub.verizon.net ([206.46.173.13])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1NV6nR-00048d-TV
+	(envelope-from <rpjday@crashcourse.ca>) id 1NV7H8-0005Th-SH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 18:14:21 +0100
-Received: from gandalf.denix.org ([unknown] [71.255.235.232])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0KW700MY93R6ZDF3@vms173013.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	13 Jan 2010 11:11:35 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 51D7814AF60; Wed,
-	13 Jan 2010 12:11:30 -0500 (EST)
-Date: Wed, 13 Jan 2010 12:11:30 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 13 Jan 2010 18:45:02 +0100
+Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
+	([174.113.191.234] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NV7F1-0006FD-U5 for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jan 2010 12:42:48 -0500
+Date: Wed, 13 Jan 2010 12:42:02 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100113171130.GE24151@denix.org>
-References: <1263313682-14996-1-git-send-email-marcin@juszkiewicz.com.pl>
-MIME-version: 1.0
-In-reply-to: <1263313682-14996-1-git-send-email-marcin@juszkiewicz.com.pl>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.13
-X-SA-Exim-Mail-From: denis@denix.org
+In-Reply-To: <hiktaf$u79$1@ger.gmane.org>
+Message-ID: <alpine.LFD.2.00.1001131241110.3295@localhost>
+References: <alpine.LFD.2.00.1001131007240.7565@localhost>
+	<hiktaf$u79$1@ger.gmane.org>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [STABLE][PATCH] jamvm-initial: add libffi-native	dependency
+Subject: Re: mplayer still failing to build new error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,44 +46,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 17:14:21 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 13 Jan 2010 17:45:02 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Tue, Jan 12, 2010 at 05:28:02PM +0100, Marcin Juszkiewicz wrote:
-> From: Martin Jansa <martin.jansa@gmail.com>
-> 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+On Wed, 13 Jan 2010, Rolf Leggewie wrote:
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+> Robert P. J. Day wrote:
+> >   long story short, tail end of log file:
+>
+> FWIW, mplayer builds for me (on a Debian host).
 
-> ---
->  recipes/jamvm/jamvm-initial_1.5.0.bb |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
-> 
-> diff --git a/recipes/jamvm/jamvm-initial_1.5.0.bb b/recipes/jamvm/jamvm-initial_1.5.0.bb
-> index 1566deb..4ef56c1 100644
-> --- a/recipes/jamvm/jamvm-initial_1.5.0.bb
-> +++ b/recipes/jamvm/jamvm-initial_1.5.0.bb
-> @@ -2,7 +2,7 @@ SUMMARY = "A compact Java Virtual Machine which conforms to the JVM specificatio
->  HOMEPAGE = "http://jamvm.sourceforge.net/"
->  LICENSE = "GPL"
->  
-> -DEPENDS = "zlib-native classpath-initial jikes-initial"
-> +DEPENDS = "zlib-native classpath-initial jikes-initial libffi-native"
->  
->  PR = "r1"
->  
-> -- 
-> 1.6.6
-> 
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+  i'm already resigned to the fact that i'll get build errors that
+others aren't seeing. :-)
+
+> Please be sure to report your build failures to our tinderbox.
+>
+> http://wiki.openembedded.net/index.php/How_do_I_send_automatic_success_and_failure_reports
+
+  yes, i suspect it's time to start using tinderbox and do this
+properly.
+
+rday
+--
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
