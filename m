@@ -1,30 +1,38 @@
-Received: from exprod5og105.obsmtp.com ([64.18.0.180])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martyn.welch@gefanuc.com>) id 1NV3EO-0002DX-Si
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NV3r4-0003L7-Tn for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jan 2010 15:05:54 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NV3ou-0008Qr-9w
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 14:25:56 +0100
-Received: from source ([4.79.213.129]) (using TLSv1) by
-	exprod5ob105.postini.com ([64.18.4.12]) with SMTP
-	ID DSNKS03JX7sAj0u1nYyN6tjPgkSX7vRXMBoY@postini.com;
-	Wed, 13 Jan 2010 05:23:44 PST
-Received: from unknown (HELO cinmlip01.e2k.ad.ge.com) ([3.159.213.48])
-	by Alpmlip07.e2k.ad.ge.com with ESMTP; 13 Jan 2010 08:23:43 -0500
-Received: from es-j7s4d2j.amer.consind.ge.com (HELO [3.138.54.92])
-	([3.138.54.92])
-	by cinmlip01.e2k.ad.ge.com with ESMTP; 13 Jan 2010 08:23:42 -0500
-Message-ID: <4B4DCA07.4050005@gefanuc.com>
-Date: Wed, 13 Jan 2010 13:26:31 +0000
-From: Martyn Welch <martyn.welch@gefanuc.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Wed, 13 Jan 2010 15:03:36 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jan 2010 15:03:36 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jan 2010 15:03:36 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <97332218.1263387312.156294792.17546@mcgi47.rambler.ru>
-In-Reply-To: <97332218.1263387312.156294792.17546@mcgi47.rambler.ru>
-X-SA-Exim-Connect-IP: 64.18.0.180
-X-SA-Exim-Mail-From: martyn.welch@gefanuc.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 13 Jan 2010 15:03:08 +0100
+Message-ID: <hikjqr$ohr$1@ger.gmane.org>
+References: <alpine.LFD.2.00.1001130657110.487@localhost>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100112 Shredder/3.0.2pre
+In-Reply-To: <alpine.LFD.2.00.1001130657110.487@localhost>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Adding a new Machine question
+Subject: Re: dev branch, bitbake of "mplayer" fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,59 +46,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 13:25:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 13 Jan 2010 14:05:54 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Perepelica Alexander wrote:
-> Hi!
-> I have problem with configs for new x86_64 machine.
-> How I read in manual I need set next vasiables
-> 1. TARGET_ARCH
->  TARGET_ARCH = "x86_64"
-> 2. MACHINE_FEATURES
-> MACHINE_FEATURES = "kernel26 screen keyboard pci usbhost acpi ext2 x86"
-> MACHINE_EXTRA_RRECOMMENDS = " kernel-modules"
-> 3. PREFERRED_PROVIDER_virtual/kernel
-> PREFERRED_PROVIDER_virtual/kernel = "linux"
-> And now when I build  helloworld-image all is ok i get my RFS image.
-> But when I try build bootstrap-image I got error
-> "  no such directory asm-x86" but I see dir with name "asm-generic" and
-> name of machine conf file is x86_64-generic.conf.
-> So, I don't understand what I do wrong?
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I think I had this problem as well when compiling for a i586-generic
-(infact i686-generic and x86 as well).
+On 13-01-10 12:59, Robert P. J. Day wrote:
+> 
+>   i'm starting to think these build errors only ever happen to me.
+> :-( once again, on fedora 12, dev branch:
+> 
+> 
+> ERROR: function do_compile failed
+> ERROR: see log in
+> /home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/mplayer-0.0+1.0rc2+svnr30247-r15/temp/log.do_compile.26510
+> NOTE: Task failed:
+> /home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/mplayer-0.0+1.0rc2+svnr30247-r15/temp/log.do_compile.26510
+> ERROR: TaskFailed event exception, aborting
+> ERROR: Build of
+> /home/rpjday/oe/openembedded/recipes/mplayer/mplayer_svn.bb do_compile
+> failed
+> 
+>   log file:
+> 
+> NOTE: make
+> ccache arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8
+> -mfpu=neon -mfloat-abi=softfp -Wundef -Wdisabled-optimization
+> -Wno-pointer-sign -Wdeclaration-after-statement -std=gnu99
+> -isystem/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include
+> -fexpensive-optimizations  -ftree-vectorize -fomit-frame-pointer -O4
+> -ffast-math
+> -I/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/mplayer-0.0+1.0rc2+svnr30247-r15/trunk/libdvdread4
+> -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE -I.
+> -isystem/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include
+> -D_REENTRANT
+> -I/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/freetype2
+> -I/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include
+> -I/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/schroedinger-1.0
+> -I/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/liboil-0.3
+> -isystem/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include
+> -c -o libmpcodecs/vf_fspp.o libmpcodecs/vf_fspp.c
+> In file included from libmpcodecs/vf_fspp.c:50:
+> ./libavutil/internal.h:266:6: warning: "HAVE_EXP2" is not defined
+> ./libavutil/internal.h:273:6: warning: "HAVE_EXP2F" is not defined
+> ./libavutil/internal.h:294:6: warning: "HAVE_LOG2F" is not defined
+> In file included from libmpcodecs/vf_fspp.c:51:
+> ./libavutil/internal.h:267: error: static declaration of 'exp2'
+> follows non-static declaration
+> ./libavutil/internal.h:274: error: static declaration of 'exp2f'
+> follows non-static declaration
+> ./libavutil/internal.h:295: error: static declaration of 'log2f'
+> follows non-static declaration
+> make: *** [libmpcodecs/vf_fspp.o] Error 1
+> FATAL: oe_runmake failed
 
-All the kernel bitbake files contain DEFAULT_PREFERENCE = "-1" and the
-bitbake file for the newest kernel (linux_2.6.32+2.6.33-rc3.bb
-<http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/linux_2.6.32+2.6.33-rc3.bb>
-I think) was failing for x86.
+I suspect the build will work if you happen to have ffmpeg already staged.
 
-I modified linux_2.6.32.bb
-<http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/linux_2.6.32.bb>
-from:
+This should solve the issue:
 
-|DEFAULT_PREFERENCE = "-1"
-|
+http://lists.mplayerhq.hu/pipermail/mplayer-cvslog/2010-January/038178.html
 
-to:
+testing now to see if that works.
 
-|DEFAULT_PREFERENCE = "1"
-|
+regards,
 
-and was able to build (though I haven't got around to testing the
-resulting kernel yet...)
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Martyn
-
-
--- 
-Martyn Welch (Principal Software Engineer)   |   Registered in England and
-GE Intelligent Platforms                     |   Wales (3828642) at 100
-T +44(0)127322748                            |   Barbirolli Square, Manchester,
-E martyn.welch@gefanuc.com                   |   M2 3AB  VAT:GB 927559189
+iD8DBQFLTdKcMkyGM64RGpERAiV+AJ0ZGouTbWx7MZR0KEqnqAqFq066fwCgpFZh
+uIkas3vZpcLtHtzjRoKjlp8=
+=TJt7
+-----END PGP SIGNATURE-----
 
 
 
