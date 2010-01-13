@@ -1,25 +1,44 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-fx0-f212.google.com ([209.85.220.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NUzOt-00024S-G9 for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 10:20:30 +0100
-Received: from f053038039.adsl.alicedsl.de ([78.53.38.39]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NUzMp-0007Y6-Mt for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 09:18:19 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <martin.jansa@gmail.com>) id 1NUzZG-0000rF-Ey
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jan 2010 10:31:13 +0100
+Received: by fxm4 with SMTP id 4so19751743fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jan 2010 01:29:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=HAFRe1vl2VKQQrw6CKvAQ5/pvQvTVZxP8BV6R3fIJtU=;
+	b=ItHOjQke/u3m0LjVazTbbPCuzQb/U72NShgKSKtxMLXRjiItvv4fk9+JEKO4zqnCG6
+	tVX8pxiHRvRd27+JIccvK3weNX0OVMssUOj3J5ca2umeB3GhS67MhA0ipuhlT/4FnUGp
+	uGiA8X1n1obiID6TOXZBj00cJnk49xR50Gzyc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=rFfYwuW0L+y3Q/3nbL/KSFyktaY7VOHA5bunMIrQAb8Ip0oksyJ9OiCcCaXAvaee48
+	kTtzctS5cKzdGugRBTTdg+7jOCyoZBpTVPcsTxPlHNbyadTBQfJ1WSDTLtP3wd1F1zE0
+	QS3hTWJIGupxCe4jv8fYXUBGvu/JbRcUT4xOw=
+Received: by 10.223.76.69 with SMTP id b5mr12643004fak.20.1263374940507;
+	Wed, 13 Jan 2010 01:29:00 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 16sm10631630fxm.4.2010.01.13.01.28.59
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 13 Jan 2010 01:29:00 -0800 (PST)
+Date: Wed, 13 Jan 2010 10:28:55 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1263341840-19186-1-git-send-email-Martin.Jansa@gmail.com>
+Message-ID: <20100113092855.GA3340@jama>
 References: <20100112222121.GD10781@jama>
 	<1263341840-19186-1-git-send-email-Martin.Jansa@gmail.com>
-Date: Wed, 13 Jan 2010 10:18:17 +0100
-Message-ID: <1263374297.3228.3.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	<1263374297.3228.3.camel@mattotaupa.wohnung.familie-menzel.net>
+MIME-Version: 1.0
+In-Reply-To: <1263374297.3228.3.camel@mattotaupa.wohnung.familie-menzel.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.212
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [PATCH 1/3] opkg, update-alternatives-cworth: use /usr/lib/opkg/alternatives directory instead of /usr/lib/ipkg/alternatives
@@ -36,60 +55,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 09:20:30 -0000
-X-Groupsio-MsgNum: 15635
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-XGq58c6GpD0AJjgWNX/C"
+X-List-Received-Date: Wed, 13 Jan 2010 09:31:13 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
---=-XGq58c6GpD0AJjgWNX/C
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Wed, Jan 13, 2010 at 10:18:17AM +0100, Paul Menzel wrote:
+> Am Mittwoch, den 13.01.2010, 01:17 +0100 schrieb Martin Jansa:
+> > * It's usefull to make it compatible with u-a script in opkg package
+> > * Old entries are merged to new directory in quite verbose postinst
+> >   script
+> > * If entry exists only in old its moved
+> 
+> it’s
 
-Am Mittwoch, den 13.01.2010, 01:17 +0100 schrieb Martin Jansa:
-> * It's usefull to make it compatible with u-a script in opkg package
-> * Old entries are merged to new directory in quite verbose postinst
->   script
-> * If entry exists only in old its moved
+Thanks, will fix that.
 
-it=E2=80=99s
+> 
+> […]
+> 
+> > diff --git a/recipes/opkg/opkg.inc b/recipes/opkg/opkg.inc
+> > index 1716034..b317de4 100644
+> > --- a/recipes/opkg/opkg.inc
+> > +++ b/recipes/opkg/opkg.inc
+> > @@ -4,7 +4,7 @@ SECTION = "base"
+> >  LICENSE = "GPL"
+> >  DEPENDS = "curl gpgme"
+> >  PV = "0.1.6+svnr${SRCPV}"
+> > -INC_PR = "r18"
+> > +INC_PR = "r20"
+> I know it would not be a problem, but should not that only be increased
+> by one [1]?
+> 
 
-[=E2=80=A6]
+OK, will fix that one too, sorry for that.. I had one bump in between
+because adding RCONFLICTS_${PN} = "update-alternatives-cworth", but I
+dropped this patch later, because it's not such a problem with both u-a
+using same dir. And would confuse end-user a bit more with next upgrade.
 
-> diff --git a/recipes/opkg/opkg.inc b/recipes/opkg/opkg.inc
-> index 1716034..b317de4 100644
-> --- a/recipes/opkg/opkg.inc
-> +++ b/recipes/opkg/opkg.inc
-> @@ -4,7 +4,7 @@ SECTION =3D "base"
->  LICENSE =3D "GPL"
->  DEPENDS =3D "curl gpgme"
->  PV =3D "0.1.6+svnr${SRCPV}"
-> -INC_PR =3D "r18"
-> +INC_PR =3D "r20"
-
-I know it would not be a problem, but should not that only be increased
-by one [1]?
-
-[=E2=80=A6]
+> […]
+> 
+> 
+> Thanks,
+> 
+> Paul
+> 
+> 
+> [1] http://docs.openembedded.org/usermanual/html/recipes_versioning.html
 
 
-Thanks,
 
-Paul
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
-[1] http://docs.openembedded.org/usermanual/html/recipes_versioning.html
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
---=-XGq58c6GpD0AJjgWNX/C
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktNj9MACgkQPX1aK2wOHViNowCdFiaVs0kfS50UgzqLWiUn6bQW
-t28AniP2X1hftmY4Y8x43wY3xTKqGiTb
-=1exL
------END PGP SIGNATURE-----
-
---=-XGq58c6GpD0AJjgWNX/C--
