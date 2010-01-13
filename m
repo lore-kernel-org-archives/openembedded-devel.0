@@ -1,38 +1,31 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from vms173015pub.verizon.net ([206.46.173.15])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NV7H8-0005Th-SH
+	(envelope-from <denis@denix.org>) id 1NV7fp-0000aa-NU
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 18:45:02 +0100
-Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
-	([174.113.191.234] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NV7F1-0006FD-U5 for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 12:42:48 -0500
-Date: Wed, 13 Jan 2010 12:42:02 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
+	Wed, 13 Jan 2010 19:10:32 +0100
+Received: from gandalf.denix.org ([unknown] [71.255.235.232])
+	by vms173015.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0KW700BT33LDP683@vms173015.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	13 Jan 2010 11:08:02 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 6235914AF60; Wed,
+	13 Jan 2010 12:08:01 -0500 (EST)
+Date: Wed, 13 Jan 2010 12:08:01 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hiktaf$u79$1@ger.gmane.org>
-Message-ID: <alpine.LFD.2.00.1001131241110.3295@localhost>
-References: <alpine.LFD.2.00.1001131007240.7565@localhost>
-	<hiktaf$u79$1@ger.gmane.org>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+Message-id: <20100113170801.GA24151@denix.org>
+References: <1263401193-12161-1-git-send-email-marcin@juszkiewicz.com.pl>
+	<1263401193-12161-2-git-send-email-marcin@juszkiewicz.com.pl>
+MIME-version: 1.0
+In-reply-to: <1263401193-12161-2-git-send-email-marcin@juszkiewicz.com.pl>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.15
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: mplayer still failing to build new error
+Cc: Marcin Juszkiewicz <marcin@buglabs.net>
+Subject: Re: [STABLE][PATCH 1/2] bug: use full X.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,36 +39,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 17:45:02 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 13 Jan 2010 18:10:32 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Wed, 13 Jan 2010, Rolf Leggewie wrote:
+On Wed, Jan 13, 2010 at 05:46:32PM +0100, Marcin Juszkiewicz wrote:
+> From: Marcin Juszkiewicz <marcin@buglabs.net>
+> 
+> 
+> Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 
-> Robert P. J. Day wrote:
-> >   long story short, tail end of log file:
->
-> FWIW, mplayer builds for me (on a Debian host).
+Acked-by: Denys Dmytriyenko <denis@denix.org>
 
-  i'm already resigned to the fact that i'll get build errors that
-others aren't seeing. :-)
-
-> Please be sure to report your build failures to our tinderbox.
->
-> http://wiki.openembedded.net/index.php/How_do_I_send_automatic_success_and_failure_reports
-
-  yes, i suspect it's time to start using tinderbox and do this
-properly.
-
-rday
---
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+> ---
+>  conf/machine/bug.conf |    8 ++++++++
+>  1 files changed, 8 insertions(+), 0 deletions(-)
+> 
+> diff --git a/conf/machine/bug.conf b/conf/machine/bug.conf
+> index 3e0389a..d79cf15 100644
+> --- a/conf/machine/bug.conf
+> +++ b/conf/machine/bug.conf
+> @@ -14,3 +14,11 @@ CPU_FEATURES += "vfp"
+>  require conf/machine/include/tune-arm1136jf-s.inc
+>  
+>  KERNEL_IMAGETYPE = "uImage"
+> +
+> +PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+> +XSERVER = "xserver-xorg \
+> +           xf86-input-evdev \
+> +           xf86-input-tslib \
+> +           xf86-input-mouse \
+> +           xf86-video-fbdev \
+> +           xf86-input-keyboard"
+> -- 
+> 1.6.6
+> 
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
