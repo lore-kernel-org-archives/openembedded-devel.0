@@ -1,36 +1,38 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NUyR0-0004zH-0B
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NUyaR-0007y0-C0 for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jan 2010 09:28:22 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NUyYJ-0004dk-17
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 09:18:37 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NUyOu-0002G4-E9 for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 03:16:24 -0500
-Date: Wed, 13 Jan 2010 03:15:42 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.1001130313390.3548@localhost>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+	Wed, 13 Jan 2010 09:26:07 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jan 2010 09:26:07 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jan 2010 09:26:07 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 13 Jan 2010 09:25:45 +0100
+Message-ID: <hik028$l2q$1@ger.gmane.org>
+References: <1263337290.13906.27.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100110 Shredder/3.0.1pre
+In-Reply-To: <1263337290.13906.27.camel@utx.utx.cz>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: the new (fedora 12) "setsebool" setting?
+Subject: Re: GTK+, disabled XKB a.k.a. why keymaps/ModeSwitch don't work well in GPE or XFCE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,37 +46,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 08:18:37 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 13 Jan 2010 08:28:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-  here:
+On 13-01-10 00:01, Stanislav Brabec wrote:
+> Hallo.
+> 
+> We just spent some time by debugging of an annoying bug - broken
+> Mode_Switch key in GPE and XFCE.
+> 
+> Surprisingly, the problem affects only GTK+ applications and it is
+> caused by --disable-xkb configure options in OE gtk+ recipes(*).
+> 
+> It
+> - made impossible to upgrade to the new version of kdrive on Zaurus
+> - now makes impossible to upgrade to Xorg on Zaurus
+> - causes keyboard breakage on Always Innovating Touch Book.
+>   http://bugzilla.alwaysinnovating.com/show_bug.cgi?id=41
+> 
+> So there is a question: Why XKB is disabled in OE GTK+? Does it have any
+> reason or it is a relict from the ancient age of kdrive based
+> systems(**)? If it is true, I propose a patch to remove --disable-xkb
+> not only from gtk+, but also all xorg-app and xorg-lib,
 
-http://docs.openembedded.org/usermanual/html/gettingoe_building_software.html
+I vote for this option.
 
-one reads of setting the proper selinux boolean thusly:
+> or at least move
+> this option to distribution configuration.
 
-  $ setsebool -P allow_unconfirmed_mmap_low 1
+I think we can put that burden on xkb haters (if they exist).
 
-however a recent poster on the beagleboard ML claims that that's the
-fedora 11 way to do it, and in fedora 12, it's:
+regards,
 
-  $ setsebool -P mmap_low_allowed 1
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-i was unaware of this change.  can anyone else verify that this is the
-new and improved way to do things?  and would it still correspond to
-the same sysctl variable?
+iD8DBQFLTYOJMkyGM64RGpERAij5AKCiFh6ugEWa2s9OuaJTQok9EDg6IwCeK6aW
+OuAdysqxQeP0SZxLFcbDMxw=
+=Sqtj
+-----END PGP SIGNATURE-----
 
-rday
---x
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
 
 
