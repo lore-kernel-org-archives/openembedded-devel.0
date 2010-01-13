@@ -1,36 +1,28 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NUzDx-0003E1-Qf
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 10:09:12 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NUzBr-0005YW-RB for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 04:07:00 -0500
-Date: Wed, 13 Jan 2010 04:06:14 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.1001130359030.22243@localhost>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NUzOt-00024S-G9 for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jan 2010 10:20:30 +0100
+Received: from f053038039.adsl.alicedsl.de ([78.53.38.39]
+	helo=[192.168.178.25])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NUzMp-0007Y6-Mt for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jan 2010 09:18:19 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1263341840-19186-1-git-send-email-Martin.Jansa@gmail.com>
+References: <20100112222121.GD10781@jama>
+	<1263341840-19186-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Wed, 13 Jan 2010 10:18:17 +0100
+Message-ID: <1263374297.3228.3.camel@mattotaupa.wohnung.familie-menzel.net>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: is there a summary of OE-related selinux issues?
+Subject: Re: [PATCH 1/3] opkg, update-alternatives-cworth: use /usr/lib/opkg/alternatives directory instead of /usr/lib/ipkg/alternatives
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,46 +36,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 09:09:13 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 13 Jan 2010 09:20:30 -0000
+X-Groupsio-MsgNum: 15635
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-XGq58c6GpD0AJjgWNX/C"
+
+--=-XGq58c6GpD0AJjgWNX/C
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Am Mittwoch, den 13.01.2010, 01:17 +0100 schrieb Martin Jansa:
+> * It's usefull to make it compatible with u-a script in opkg package
+> * Old entries are merged to new directory in quite verbose postinst
+>   script
+> * If entry exists only in old its moved
+
+it=E2=80=99s
+
+[=E2=80=A6]
+
+> diff --git a/recipes/opkg/opkg.inc b/recipes/opkg/opkg.inc
+> index 1716034..b317de4 100644
+> --- a/recipes/opkg/opkg.inc
+> +++ b/recipes/opkg/opkg.inc
+> @@ -4,7 +4,7 @@ SECTION =3D "base"
+>  LICENSE =3D "GPL"
+>  DEPENDS =3D "curl gpgme"
+>  PV =3D "0.1.6+svnr${SRCPV}"
+> -INC_PR =3D "r18"
+> +INC_PR =3D "r20"
+
+I know it would not be a problem, but should not that only be increased
+by one [1]?
+
+[=E2=80=A6]
 
 
-  as a followup to my earlier post, the selinux issue related to mmap
-is already well known.  but does this represent these selinux warnings
-i get on my f12 system?
+Thanks,
+
+Paul
 
 
-Summary:
+[1] http://docs.openembedded.org/usermanual/html/recipes_versioning.html
 
-SELinux is preventing
-/home/rpjday/oe/angstrom-dev/staging/x86_64-linux/usr/bin/python from
-making the program stack executable.
+--=-XGq58c6GpD0AJjgWNX/C
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
 
-Detailed Description:
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-[SELinux is in permissive mode. This access was not denied.]
+iEYEABECAAYFAktNj9MACgkQPX1aK2wOHViNowCdFiaVs0kfS50UgzqLWiUn6bQW
+t28AniP2X1hftmY4Y8x43wY3xTKqGiTb
+=1exL
+-----END PGP SIGNATURE-----
 
-The python application attempted to make its stack executable. This is
-a potential security problem. This should never ever be necessary.
-Stack memory is not executable on most OSes these days and this will
-not change.
-
-... snip ...
-
-is this the same issue?  and is this related to running qemu-arm?  it
-would be nice to have a concise summary of OE-related selinux gotchas
-somewhere, and how to deal with them.
-
-rday
---
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
-
-
+--=-XGq58c6GpD0AJjgWNX/C--
