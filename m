@@ -1,36 +1,29 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mxa.rambler.ru ([81.19.66.231])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NV1vQ-000395-1d
+	(envelope-from <alexondi@rambler.ru>) id 1NV2ns-0006Rz-PT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 13:02:15 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NV1tK-0007cg-7z for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 07:00:02 -0500
-Date: Wed, 13 Jan 2010 06:59:20 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.1001130657110.487@localhost>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Wed, 13 Jan 2010 13:58:31 +0100
+Received: from mcgi47.rambler.ru (mcgi47.rambler.ru [81.19.67.71])
+	by mxa.rambler.ru (Postfix) with ESMTP id 0DFCAAC237
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jan 2010 15:55:18 +0300 (MSK)
+Received: from mcgi47.rambler.ru (localhost [127.0.0.1])
+	by mcgi47.rambler.ru (Postfix) with ESMTP id 7836D1144F
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jan 2010 15:55:15 +0300 (MSK)
+Received: from [77.52.208.230] by mcgi47.rambler.ru with HTTP (mailimap);
+	Wed, 13 Jan 2010 15:55:12 +0300
+From: Perepelica Alexander <alexondi@rambler.ru>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 13 Jan 2010 15:55:12 +0300
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+Message-Id: <97332218.1263387312.156294792.17546@mcgi47.rambler.ru>
+X-Mailer: Ramail 3u, (untone), http://mail.rambler.ru
+X-SA-Exim-Connect-IP: 81.19.66.231
+X-SA-Exim-Mail-From: alexondi@rambler.ru
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: dev branch, bitbake of "mplayer" fails
+Subject: Adding a new Machine question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,68 +37,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 12:02:15 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 13 Jan 2010 12:58:32 -0000
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+
+Hi!
+I have problem with configs for new x86_64 machine.
+How I read in manual I need set next vasiables
+1. TARGET_ARCH
+  TARGET_ARCH = "x86_64"
+2. MACHINE_FEATURES
+ MACHINE_FEATURES = "kernel26 screen keyboard pci usbhost acpi ext2 x86"
+ MACHINE_EXTRA_RRECOMMENDS = " kernel-modules"
+3. PREFERRED_PROVIDER_virtual/kernel
+ PREFERRED_PROVIDER_virtual/kernel = "linux"
+ And now when I build  helloworld-image all is ok i get my RFS image.
+But when I try build bootstrap-image I got error
+"  no such directory asm-x86" but I see dir with name "asm-generic" and
+name of machine conf file is x86_64-generic.conf.
+So, I don't understand what I do wrong?
+
+x86_64-generic.conf
+# Released under the MIT license (see packages/COPYING)
+#@TYPE: Machine
+#@NAME: x86_64
+#@DESCRIPTION: Machine configuration for a generic x86_64 machine
+
+TARGET_ARCH = "x86_64"
+
+#PREFERRED_PROVIDER_virtual/kernel = "linux"
+PREFERRED_VERSION_gcc = "4.4.2"
+KERNEL_IMAGETYPE = "bzImage"
+GLIBC_ADDONS = "nptl"
+GLIBC_EXTRA_OECONF = "--with-tls"
+
+IMAGE_FSTYPES ?= "ext2.gz"
+IMAGE_DEVICE_TABLES = " \
+  files/device_table-minimal.txt \
+  files/device_table_add-loop.txt \
+  files/device_table_add-scsi.txt \
+"
+MACHINE_FEATURES = "kernel26 screen keyboard pci usbhost acpi ext2"
+MACHINE_EXTRA_RRECOMMENDS = " kernel-modules"
+TARGET_CC_ARCH = "-m64"
+BASE_PACKAGE_ARCH = "x86_64"
+FEED_ARCH = "x86_64"
+#PACKAGE_EXTRA_ARCHS += "x86 i386 i486 i586 i686"
 
 
-  i'm starting to think these build errors only ever happen to me.
-:-( once again, on fedora 12, dev branch:
 
 
-ERROR: function do_compile failed
-ERROR: see log in
-/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/mplayer-0.0+1.0rc2+svnr30247-r15/temp/log.do_compile.26510
-NOTE: Task failed:
-/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/mplayer-0.0+1.0rc2+svnr30247-r15/temp/log.do_compile.26510
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/home/rpjday/oe/openembedded/recipes/mplayer/mplayer_svn.bb do_compile
-failed
 
-  log file:
-
-NOTE: make
-ccache arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8
--mfpu=neon -mfloat-abi=softfp -Wundef -Wdisabled-optimization
--Wno-pointer-sign -Wdeclaration-after-statement -std=gnu99
--isystem/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include
--fexpensive-optimizations  -ftree-vectorize -fomit-frame-pointer -O4
--ffast-math
--I/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/mplayer-0.0+1.0rc2+svnr30247-r15/trunk/libdvdread4
--D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE -I.
--isystem/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include
--D_REENTRANT
--I/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/freetype2
--I/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include
--I/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/schroedinger-1.0
--I/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/liboil-0.3
--isystem/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include
--c -o libmpcodecs/vf_fspp.o libmpcodecs/vf_fspp.c
-In file included from libmpcodecs/vf_fspp.c:50:
-./libavutil/internal.h:266:6: warning: "HAVE_EXP2" is not defined
-./libavutil/internal.h:273:6: warning: "HAVE_EXP2F" is not defined
-./libavutil/internal.h:294:6: warning: "HAVE_LOG2F" is not defined
-In file included from libmpcodecs/vf_fspp.c:51:
-./libavutil/internal.h:267: error: static declaration of 'exp2'
-follows non-static declaration
-./libavutil/internal.h:274: error: static declaration of 'exp2f'
-follows non-static declaration
-./libavutil/internal.h:295: error: static declaration of 'log2f'
-follows non-static declaration
-make: *** [libmpcodecs/vf_fspp.o] Error 1
-FATAL: oe_runmake failed
-
-
-rday
 --
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+Thank you.
+Perepelica Alexander
 
 
