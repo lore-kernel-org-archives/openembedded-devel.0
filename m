@@ -1,28 +1,36 @@
-Received: from moutng.kundenserver.de ([212.227.126.186])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chris@2net.co.uk>) id 1NUym8-0000M8-TL
+	(envelope-from <rpjday@crashcourse.ca>) id 1NUzDx-0003E1-Qf
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 09:40:27 +0100
-Received: from [192.168.159.11] ([78.149.183.2])
-	by mrelayeu.kundenserver.de (node=mreu0) with ESMTP (Nemesis)
-	id 0MWvXU-1NPavS4Bl6-00WP3p; Wed, 13 Jan 2010 09:38:15 +0100
-Message-ID: <4B4D8676.4040208@2net.co.uk>
-Date: Wed, 13 Jan 2010 08:38:14 +0000
-From: Chris Simmonds <chris@2net.co.uk>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	Wed, 13 Jan 2010 10:09:12 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NUzBr-0005YW-RB for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jan 2010 04:07:00 -0500
+Date: Wed, 13 Jan 2010 04:06:14 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.00.1001130359030.22243@localhost>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1262986639.11887.8.camel@fred.uchi.de>	<20100108223915.GA29981@gmail.com>	<1263057308.6614.7.camel@fred.uchi.de>	<19c1b8a91001092224j569793dfla5f7d33effa5e2ca@mail.gmail.com>
-	<4B4C3D79.5070206@fqingenieria.es>
-In-Reply-To: <4B4C3D79.5070206@fqingenieria.es>
-X-Provags-ID: V01U2FsdGVkX1+HW8yf42mue9VTRKq5z+BqfKDWJtqTWqSaxPU
-	C3TadMiz0f4ugPvbGJ33xs9gjxNqPvjugUCRUppcEaqvrwjs/j
-	I2VNOTPaRzeF3PeASBbPwiZPQ7nKM3oWSVdXe6PZAw=
-X-SA-Exim-Connect-IP: 212.227.126.186
-X-SA-Exim-Mail-From: chris@2net.co.uk
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Remote Debugging
+Subject: is there a summary of OE-related selinux issues?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,30 +44,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 08:40:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 Jan 2010 09:09:13 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-FQ | Jaume Ribot wrote:
->>> (by the way, is there a usable graphical frontend for gdb for this case:
->>> remote-debugging wit cross gdb)?
->>>     
->>
->> I have used ddd its decent. You can also use eclipse CDT they are 
->> others too
->> http://sourceware.org/gdb/wiki/GDB%20Front%20Ends
->>   
-> I also used eclipse (galileo) with CDT extensions. It's a good idea, as
-> you can compile/debug the application with the same tool.
-> 
 
-FYI: there is an article on using Eclipse for remote debug (written by 
-me) here
-http://www.embedded-linux.co.uk/tutorial/eclipse-rse
+  as a followup to my earlier post, the selinux issue related to mmap
+is already well known.  but does this represent these selinux warnings
+i get on my f12 system?
 
--- 
-Chris Simmonds                   2net Limited
-chris@2net.co.uk                 http://www.2net.co.uk/
 
+Summary:
+
+SELinux is preventing
+/home/rpjday/oe/angstrom-dev/staging/x86_64-linux/usr/bin/python from
+making the program stack executable.
+
+Detailed Description:
+
+[SELinux is in permissive mode. This access was not denied.]
+
+The python application attempted to make its stack executable. This is
+a potential security problem. This should never ever be necessary.
+Stack memory is not executable on most OSes these days and this will
+not change.
+
+... snip ...
+
+is this the same issue?  and is this related to running qemu-arm?  it
+would be nice to have a concise summary of OE-related selinux gotchas
+somewhere, and how to deal with them.
+
+rday
+--
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
