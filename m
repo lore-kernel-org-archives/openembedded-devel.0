@@ -1,30 +1,30 @@
-Received: from vms173001pub.verizon.net ([206.46.173.1])
+Received: from vms173013pub.verizon.net ([206.46.173.13])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1NV6mH-00042e-PL
+	(envelope-from <denis@denix.org>) id 1NV6nR-00048d-TV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 18:13:08 +0100
+	Wed, 13 Jan 2010 18:14:21 +0100
 Received: from gandalf.denix.org ([unknown] [71.255.235.232])
-	by vms173001.mailsrvcs.net
+	by vms173013.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0KW700MR43PZ4RS0@vms173001.mailsrvcs.net> for
+	2009)) with ESMTPA id <0KW700MY93R6ZDF3@vms173013.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Wed,
-	13 Jan 2010 11:10:47 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id CDCDE14AF60; Wed,
-	13 Jan 2010 12:10:46 -0500 (EST)
-Date: Wed, 13 Jan 2010 12:10:46 -0500
+	13 Jan 2010 11:11:35 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 51D7814AF60; Wed,
+	13 Jan 2010 12:11:30 -0500 (EST)
+Date: Wed, 13 Jan 2010 12:11:30 -0500
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100113171046.GD24151@denix.org>
-References: <1263314629-15492-1-git-send-email-marcin@juszkiewicz.com.pl>
+Message-id: <20100113171130.GE24151@denix.org>
+References: <1263313682-14996-1-git-send-email-marcin@juszkiewicz.com.pl>
 MIME-version: 1.0
-In-reply-to: <1263314629-15492-1-git-send-email-marcin@juszkiewicz.com.pl>
+In-reply-to: <1263313682-14996-1-git-send-email-marcin@juszkiewicz.com.pl>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.1
+X-SA-Exim-Connect-IP: 206.46.173.13
 X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Marcin Juszkiewicz <hrw@koansoftware.com>
-Subject: Re: [STABLE][PATCH] matchbox-session: simple provider of	Matchbox session for X11 startup
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: [STABLE][PATCH] jamvm-initial: add libffi-native	dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,48 +38,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 17:13:09 -0000
+X-List-Received-Date: Wed, 13 Jan 2010 17:14:21 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Tue, Jan 12, 2010 at 05:43:49PM +0100, Marcin Juszkiewicz wrote:
-> From: Marcin Juszkiewicz <hrw@koansoftware.com>
+On Tue, Jan 12, 2010 at 05:28:02PM +0100, Marcin Juszkiewicz wrote:
+> From: Martin Jansa <martin.jansa@gmail.com>
 > 
-> In GPE images we use gpe-session-scripts to provide Xsession init
-> scripts for launching Matchbox components. But what if someone do not
-> want GPE but want Matchbox?
-> 
-> Poky has it cleaned in other way.
-> 
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 > Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 
 Acked-by: Denys Dmytriyenko <denis@denix.org>
 
 > ---
->  recipes/matchbox-session/matchbox-session.bb |   14 ++++++++++++++
->  1 files changed, 14 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/matchbox-session/matchbox-session.bb
+>  recipes/jamvm/jamvm-initial_1.5.0.bb |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
 > 
-> diff --git a/recipes/matchbox-session/matchbox-session.bb b/recipes/matchbox-session/matchbox-session.bb
-> new file mode 100644
-> index 0000000..c9014f9
-> --- /dev/null
-> +++ b/recipes/matchbox-session/matchbox-session.bb
-> @@ -0,0 +1,14 @@
-> +DESCRIPTION = "Matchbox session support"
-> +RDEPENDS = "matchbox-common"
-> +# they do the same in other way
-> +RCONFLICTS = "gpe-session-scripts"
-> +
-> +do_install() {
-> +        install -d ${D}${sysconfdir}/X11/Xsession.d/
-> +        ln -sf ${bindir}/matchbox-session ${D}${sysconfdir}/X11/Xsession.d/90matchbox-session
-> +}
-> +
-> +PACKAGE_ARCH = "all"
-> +PACKAGES = "${PN}"
-> +
-> +FILES_${PN} = "${sysconfdir}"
+> diff --git a/recipes/jamvm/jamvm-initial_1.5.0.bb b/recipes/jamvm/jamvm-initial_1.5.0.bb
+> index 1566deb..4ef56c1 100644
+> --- a/recipes/jamvm/jamvm-initial_1.5.0.bb
+> +++ b/recipes/jamvm/jamvm-initial_1.5.0.bb
+> @@ -2,7 +2,7 @@ SUMMARY = "A compact Java Virtual Machine which conforms to the JVM specificatio
+>  HOMEPAGE = "http://jamvm.sourceforge.net/"
+>  LICENSE = "GPL"
+>  
+> -DEPENDS = "zlib-native classpath-initial jikes-initial"
+> +DEPENDS = "zlib-native classpath-initial jikes-initial libffi-native"
+>  
+>  PR = "r1"
+>  
 > -- 
 > 1.6.6
 > 
