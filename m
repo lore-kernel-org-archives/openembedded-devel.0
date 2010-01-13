@@ -1,42 +1,42 @@
-Received: from fg-out-1718.google.com ([72.14.220.157])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1NV4jt-0000M1-Td
+Received: from n71.bullet.mail.sp1.yahoo.com ([98.136.44.36])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <gagan2172@yahoo.com>) id 1NV4sf-0004Di-UN
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 16:02:32 +0100
-Received: by fg-out-1718.google.com with SMTP id e12so402483fga.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2010 07:00:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=7rBp0ElEaRqcunu4Wfr7m/8KjpvXA1KLHP9pzqYq63U=;
-	b=mcY7w+yao6Oa7/3tnzEyaHgib2nea9DibloJUGgIic7efjYenAzYylTgDTkiIyXeCz
-	x4e0FwRGrj/pDus3jDh9IjNllU/SPEdV9Unaczpf2uQC67IdoKkYmHWVsv+tRbZm1CFH
-	QpcDxvT6SOIATQLkaXJ7SwM1ZBk4s0nmitkfU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=rsvJYFXYGHzTGlbmdw+ZPT9OheIEGTubm7E/O7Xf1O4xNw5ssj+P+Vcn+Wu6rHKtA0
-	d/xVEcNfLRHTK/ma6re+/8Aprq7TXs7ItAEjsdRruOJVSYeJWlso472WlgjTG2MJOgrE
-	1454O3gQEqRWBjG69gqBZbcE1RznpRC2eby30=
-MIME-Version: 1.0
-Received: by 10.216.89.141 with SMTP id c13mr374999wef.66.1263394821580; Wed, 
-	13 Jan 2010 07:00:21 -0800 (PST)
-In-Reply-To: <4B33FFC4.2060803@balister.org>
-References: <1261629237-15118-1-git-send-email-raj.khem@gmail.com>
-	<hgvcnd$9gv$1@ger.gmane.org>
-	<19c1b8a90912240928p40d3c391ybb4289c6a987a5a4@mail.gmail.com>
-	<4B33FFC4.2060803@balister.org>
-Date: Wed, 13 Jan 2010 10:00:21 -0500
-Message-ID: <f96d234e1001130700h10b931i479ebd1dd216ca77@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	Wed, 13 Jan 2010 16:11:37 +0100
+Received: from [216.252.122.219] by n71.bullet.mail.sp1.yahoo.com with NNFMP;
+	13 Jan 2010 15:06:16 -0000
+Received: from [67.195.9.81] by t4.bullet.sp1.yahoo.com with NNFMP;
+	13 Jan 2010 15:06:16 -0000
+Received: from [98.137.27.129] by t1.bullet.mail.gq1.yahoo.com with NNFMP;
+	13 Jan 2010 15:06:16 -0000
+Received: from [127.0.0.1] by omp203.mail.gq1.yahoo.com with NNFMP;
+	13 Jan 2010 15:06:16 -0000
+X-Yahoo-Newman-Property: ymail-3
+X-Yahoo-Newman-Id: 555185.86699.bm@omp203.mail.gq1.yahoo.com
+Received: (qmail 23354 invoked by uid 60001); 13 Jan 2010 15:06:16 -0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024;
+	t=1263395176; bh=CvD82EWkZiB1oKew7VeFWFIRKNAa0jUZQ1whJWTn2hQ=;
+	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:In-Reply-To:MIME-Version:Content-Type;
+	b=h2Qqb//n6uDqyKeKOYohB6fssg8LorHTGIgjjQIdL/TOSNPoRzqtAtB5DHYdD60anBkcwJb74eYGE7QvbWYJ5/9hzcPuyDzkkeijTcNdlp9dq4EDKgIzpw3KvUdFmTRfPib71CKjIPm7oxUVEYgTTf76XJY7SwHusr53hkxbeHA=
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=yahoo.com;
+	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:In-Reply-To:MIME-Version:Content-Type;
+	b=2Kl2lqMABA+urlUtIFKS0qEFWwAFNSsW3cIE9TlgMRZNkZYtphmdJOEVYbuxF2jDaP+SndkgZBdb6e7qWyKXlPvA4DUOYrcVtrNo7P8vWD9hIETImIOJcpcQiZKcuekL/qCnXTp02FpmYdLryMP8t7cHbd7B/6SaL07stVSjy9U=;
+Message-ID: <353547.18069.qm@web112505.mail.gq1.yahoo.com>
+X-YMail-OSG: DGQGcvMVM1lLCLeyXG9WvHjnafrV0gjRxxpViR00UbK4lPICib83TSk6X0piYRcNBAaW1EEcd_LYYcuuDrxC9Zb9r1f6FDBAhIOH19kRfCcCx1HscMi9mB6.NozlJwhl3WkOZ5b60Tg3nQ.SEFNTxZqPVK90hC_kovcQLCujZkonOuREAtkz67WWtlF_Rvrzr3_GH74WrRFZRfGcvp8yaT7GE5__lnDr5BqJo8PUy8z3dxeEXoi9QVC_xNcdScEDX_xE71Ckj5CB5y6.CUxvFrf01TJBMOZlN8dmfOp2IYpd58Eg92Fn4vXehatIDp.uLa9OuvEVlJWCTRo8hTy5XIiAy9R1XUfVlxgdlgWwjyAAx_PcGm7K0ft.5IwO2bijvVeEW2lfMtrvygnddSYvSZ9d1Q5fKjiZPbS.MsEGLHgUud0NxeGbX.HRcgas9y0XmnZo7uqMWwT9JTIUUHap6h66nNByqImL1wFwhZepEg1mPHPAgd3MGYwyKkFwSREsAEcVIVrIPGfZdMPL_vOPAl4tT22dt99WUQfeLCw.HVBXgVsY.d0IFUrXS7TpClB56WcXuw2kAF6.oZdmsAea
+Received: from [62.254.217.177] by web112505.mail.gq1.yahoo.com via HTTP;
+	Wed, 13 Jan 2010 07:06:16 PST
+X-Mailer: YahooMailClassic/9.0.20 YahooMailWebService/0.8.100.260964
+Date: Wed, 13 Jan 2010 07:06:16 -0800 (PST)
+From: gagan singh <gagan2172@yahoo.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 72.14.220.157
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+In-Reply-To: <1263314688.3675.435.camel@mill.internal.reciva.com>
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 98.136.44.36
+X-SA-Exim-Mail-From: gagan2172@yahoo.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 1/2] u-boot_git.bb: Change SRC_URI to a valid location for beagleboard.
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: =?UTF-8?B?UmU6IERvZXMgT0XigJlzIEFuZ3N0cm9tIExpbnV4IHN1cHBvcnQgU01QIChTeW1tZXRyaWMgbXVsdGlwcm9jZXNzaW5nKSBvbiBiZWFnbGUgYm9hcmQu?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,163 +50,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 15:02:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 13 Jan 2010 15:11:37 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Dec 24, 2009 at 6:56 PM, Philip Balister <philip@balister.org> wrot=
-e:
-> On 12/24/2009 12:28 PM, Khem Raj wrote:
->>
->> On Thu, Dec 24, 2009 at 1:36 AM, Koen Kooi<k.kooi@student.utwente.nl>
->> =A0wrote:
->>>
->>> -----BEGIN PGP SIGNED MESSAGE-----
->>> Hash: SHA1
->>>
->>> NAK, uboot_git.bb should fetch from git.
->>
->> It was intermediate solution measure because I could not track this
->> commit-id which is in SRCREV for beagle anywhere in git trees. If
->> anyone knows where this commit exist or where this got rebased to then
->> we can add that
->> secondly at present even for angstrom its fetching snapshot so
->> essentially its is not what a git recipe should do either.
->
-> We understand your reasoning, but the correct fix is to move from the rep=
-o
-> that "lost" the commit to a more stable repo. I'm told the HEAD of the
-> u-boot repo might work. When I am back from the holidays, I can help reso=
-lve
-> this issue.
-
-So what is the path forward on this issue?
-
-NOTE: Running task 850 of 868 (ID: 2,
-/build/oe/oe-testing/openembedded/recipes/u-boot/u-boot_git.bb,
-do_fetch)
-Initialized empty Git repository in
-/build/oe/oe-testing/downloads/git/git.denx.de.u-boot-ti.git/.git/
-From git://git.denx.de/u-boot-ti
- * branch            master     -> FETCH_HEAD
-NOTE: Creating tarball of git repository
-fatal: failed to unpack tree object a5cf522a91ba479d459f8221135bdb3e9ae9747=
-9
-NOTE: Task failed: Fetch failed: Fetch command export
-HOME=3D/home/cbrake; export
-SSH_AUTH_SOCK=3D/tmp/keyring-f5gZsP/socket.ssh; export
-PATH=3D/build/oe/oe-testing/build/angstrom-2008.1/tmp/staging/x86_64-linux/=
-usr/bin/beagleboard-angstrom-linux-gnueabi:/build/oe/oe-testing/build/angst=
-rom-2008.1/tmp/staging/x86_64-linux/usr/bin/armv7a-angstrom-linux-gnueabi:/=
-build/oe/oe-testing/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/sbin=
-:/build/oe/oe-testing/build/angstrom-2008.1/tmp/staging/x86_64-linux/usr/bi=
-n:/build/oe/oe-testing/build/angstrom-2008.1/tmp/cross/armv7a//bin:/build/o=
-e/oe-testing/build/angstrom-2008.1/tmp/staging/x86_64-linux/sbin:/build/oe/=
-oe-testing/build/angstrom-2008.1/tmp/staging/x86_64-linux/bin:/build/oe/oe-=
-testing/bitbake/bin:/build/oe/oe-testing/bitbake/bin:/home/cbrake/bin:/usr/=
-local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games;
-git read-tree a5cf522a91ba479d459f8221135bdb3e9ae97479 failed with
-signal 128, output:
-fatal: failed to unpack tree object a5cf522a91ba479d459f8221135bdb3e9ae9747=
-9
-
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/build/oe/oe-testing/openembedded/recipes/u-boot/u-boot_git.bb
-do_fetch failed
-ERROR: Task 2 (/build/oe/oe-testing/openembedded/recipes/u-boot/u-boot_git.=
-bb,
-do_fetch) failed
-NOTE: Tasks Summary: Attempted 849 tasks of which 849 didn't need to
-be rerun and 1 failed.
-ERROR: '/build/oe/oe-testing/openembedded/recipes/u-boot/u-boot_git.bb' fai=
-led
-
-Even though I'm building Angstrom, it does not seem to be fetching
-from the mirror.  From bitbake -e, it seems the angstrom mirrors are
-enabled (see below).
-
-Thanks,
-Cliff
-
-MIRRORS() {
-ftp://ftp.debian.org/debian/pool/main	http://snapshot.debian.net/archive/po=
-ol
-ftp://ftp.debian.org/debian/pool	ftp://ftp.de.debian.org/debian/pool
-ftp://ftp.debian.org/debian/pool	ftp://ftp.au.debian.org/debian/pool
-ftp://ftp.debian.org/debian/pool	ftp://ftp.cl.debian.org/debian/pool
-ftp://ftp.debian.org/debian/pool	ftp://ftp.hr.debian.org/debian/pool
-ftp://ftp.debian.org/debian/pool	ftp://ftp.fi.debian.org/debian/pool
-ftp://ftp.debian.org/debian/pool	ftp://ftp.hk.debian.org/debian/pool
-ftp://ftp.debian.org/debian/pool	ftp://ftp.hu.debian.org/debian/pool
-ftp://ftp.debian.org/debian/pool	ftp://ftp.ie.debian.org/debian/pool
-ftp://ftp.debian.org/debian/pool	ftp://ftp.it.debian.org/debian/pool
-ftp://ftp.debian.org/debian/pool	ftp://ftp.jp.debian.org/debian/pool
-ftp://ftp.debian.org/debian/pool	ftp://ftp.no.debian.org/debian/pool
-ftp://ftp.debian.org/debian/pool	ftp://ftp.pl.debian.org/debian/pool
-ftp://ftp.debian.org/debian/pool	ftp://ftp.ro.debian.org/debian/pool
-ftp://ftp.debian.org/debian/pool	ftp://ftp.si.debian.org/debian/pool
-ftp://ftp.debian.org/debian/pool	ftp://ftp.es.debian.org/debian/pool
-ftp://ftp.debian.org/debian/pool	ftp://ftp.se.debian.org/debian/pool
-ftp://ftp.debian.org/debian/pool	ftp://ftp.tr.debian.org/debian/pool
-ftp://ftp.gnu.org/gnu	ftp://mirrors.kernel.org/gnu
-ftp://ftp.gnu.org/gnu	ftp://ftp.cs.ubc.ca/mirror2/gnu
-ftp://ftp.gnu.org/gnu	ftp://sunsite.ust.hk/pub/gnu
-ftp://ftp.gnu.org/gnu	ftp://ftp.ayamura.org/pub/gnu
-http://kernel.org	http://www.kernel.org/pub
-http://kernel.org	ftp://ftp.us.kernel.org/pub
-http://kernel.org	ftp://ftp.uk.kernel.org/pub
-http://kernel.org	ftp://ftp.hk.kernel.org/pub
-http://kernel.org	ftp://ftp.au.kernel.org/pub
-http://kernel.org	ftp://ftp.jp.kernel.org/pub
-ftp://ftp.gnupg.org/gcrypt/
-ftp://ftp.franken.de/pub/crypt/mirror/ftp.gnupg.org/gcrypt/
-ftp://ftp.gnupg.org/gcrypt/     ftp://ftp.surfnet.nl/pub/security/gnupg/
-ftp://ftp.gnupg.org/gcrypt/     http://gulus.USherbrooke.ca/pub/appl/GnuPG/
-ftp://dante.ctan.org/tex-archive ftp://ftp.fu-berlin.de/tex/CTAN
-ftp://dante.ctan.org/tex-archive http://sunsite.sut.ac.jp/pub/archives/ctan=
-/
-ftp://dante.ctan.org/tex-archive http://ctan.unsw.edu.au/
-ftp://ftp.gnutls.org/pub/gnutls ftp://ftp.gnutls.org/pub/gnutls/
-ftp://ftp.gnutls.org/pub/gnutls ftp://ftp.gnupg.org/gcrypt/gnutls/
-ftp://ftp.gnutls.org/pub/gnutls
-http://www.mirrors.wiretapped.net/security/network-security/gnutls/
-ftp://ftp.gnutls.org/pub/gnutls
-ftp://ftp.mirrors.wiretapped.net/pub/security/network-security/gnutls/
-ftp://ftp.gnutls.org/pub/gnutls http://josefsson.org/gnutls/releases/
-http://ftp.info-zip.org/pub/infozip/src/
-http://mirror.switch.ch/ftp/mirror/infozip/src/
-http://ftp.info-zip.org/pub/infozip/src/
-ftp://sunsite.icm.edu.pl/pub/unix/archiving/info-zip/src/
-ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/
-ftp://ftp.cerias.purdue.edu/pub/tools/unix/sysutils/lsof/
-ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/
-ftp://ftp.tau.ac.il/pub/unix/admin/
-ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/
-ftp://ftp.cert.dfn.de/pub/tools/admin/lsof/
-ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/
-ftp://ftp.fu-berlin.de/pub/unix/tools/lsof/
-ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/  ftp://ftp.kaizo.org/pub/ls=
-of/
-ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/
-ftp://ftp.tu-darmstadt.de/pub/sysadmin/lsof/
-ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/
-ftp://ftp.tux.org/pub/sites/vic.cc.purdue.edu/tools/unix/lsof/
-ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/
-ftp://gd.tuwien.ac.at/utils/admin-tools/lsof/
-ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/
-ftp://sunsite.ualberta.ca/pub/Mirror/lsof/
-ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/
-ftp://the.wiretapped.net/pub/security/host-security/lsof/
-http://www.apache.org/dist  http://archive.apache.org/dist
-ftp://.*/.*     http://mirrors.openembedded.org/
-https?$://.*/.* http://mirrors.openembedded.org/
-ftp://.*/.*     http://sources.openembedded.org/
-https?$://.*/.* http://sources.openembedded.org/
-
-ftp://.*/.*	http://www.angstrom-distribution.org/unstable/sources/
-https?$://.*/.*	http://www.angstrom-distribution.org/unstable/sources/
-
-}
+Hi Phil,
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0Th=
+anks for the response. =C2=A0So you recon=C2=A0Asynchronous Multi-Processin=
+g (AMP) concept is better suited in beagle board configuration.=C2=A0=C2=A0=
+ If so what exactly I have to do in angstom to get such thing working.=20
+=C2=A0
+regards
+=C2=A0
+Gagan
+=C2=A0
+=C2=A0
+--- On Tue, 1/12/10, Phil Blundell <philb@gnu.org> wrote:
 
 
+From: Phil Blundell <philb@gnu.org>
+Subject: Re: [oe] Does OE=E2=80=99s Angstrom Linux support SMP (Symmetric =
+multiprocessing) on beagle board.
+To: openembedded-devel@lists.openembedded.org
+Date: Tuesday, January 12, 2010, 11:44 AM
+
+
+I would have thought the interconnect performance would be the least of
+your worries.=C2=A0 It seems that a rather bigger obstacle to running any
+kind of SMP on this hardware would be the issue that the two cores have
+different instruction sets: the DSP can't execute ARM code, and the ARM
+can't execute DSP code.
+
+p.
+
+On Tue, 2010-01-12 at 07:51 -0800, gagan singh wrote:
+> Hi Phil,
+>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=20
+> I thought general response time of any general application time will be =
+faster.
+> Say Just getting a feeling of running General purpose Computer OS/applic=
+ations=C2=A0 on a 1 GHz=C2=A0 processor while actually it is running on 500=
+MHz CPU with SMP support(Keeping overhead time aside)
+>=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 DSP seems to remain idle most o=
+f the time while everything runs on Arm core.=C2=A0 You says difficult to i=
+mplement on that sort Of Cores. Do the inter communication link/memory inte=
+rface=C2=A0 is bottle neck for implementing shared workload.
+>=C2=A0=20
+> regards
+>=C2=A0=20
+> Gagan
+>=20
+>=20
+> --- On Tue, 1/12/10, Phil Blundell <philb@gnu.org> wrote:
+>=20
+>=20
+> From: Phil Blundell <philb@gnu.org>
+> Subject: Re: [oe] Does OE=E2=80=99s Angstrom Linux support SMP (Symmetri=
+c multiprocessing) on beagle board.
+> To: openembedded-devel@lists.openembedded.org
+> Date: Tuesday, January 12, 2010, 10:06 AM
+>=20
+>=20
+> On Tue, 2010-01-12 at 06:57 -0800, gagan singh wrote:
+> >=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 Do the Angstrom version of Linux supports SMP for=C2=A0 Dual core (=
+A8 + TI DSP 320C64x) beagle board. If not, where I should look in tutorial =
+to work on adding support for such a feature.
+> >=C2=A0 I try Google it but no much could be located.
+>=20
+> I'm not quite sure what you are trying to do here.=C2=A0 It's hard to im=
+agine
+> how you could have any meaningful kind of "symmetric" multiprocessing on
+> that combination of cores.
+>=20
+> What exactly are you hoping to achieve?
+>=20
+> p.
+>=20
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>=20
+>=20
+>=20
+>=C2=A0 =C2=A0 =C2=A0=C2=A0=C2=A0
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+
+
+From rpjday@crashcourse.ca Wed Jan 13 16:12:15 2010
+Received: from astoria.ccjclearline.com ([64.235.106.9])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpjday@crashcourse.ca>) id 1NV4tI-0004Hy-Aw
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jan 2010 16:12:15 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo
