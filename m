@@ -1,39 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mxa.rambler.ru ([81.19.66.231])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NV59B-0003QM-1v for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 16:28:40 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NV56w-000642-QX
+	(envelope-from <alexondi@rambler.ru>) id 1NV5Kh-0008QU-P9
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 16:26:18 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2010 16:26:18 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Wed, 13 Jan 2010 16:40:34 +0100
+Received: from mcgi62.rambler.ru (mcgi62.rambler.ru [81.19.67.192])
+	by mxa.rambler.ru (Postfix) with ESMTP id 47CBE86716
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2010 16:26:18 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 13 Jan 2010 16:25:50 +0100
-Message-ID: <hikolt$aul$1@ger.gmane.org>
-References: <490981633.1263366609.160668084.15032@mcgi30.rambler.ru>
-	<4B4DE2A2.2030800@zafena.se>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100112 Shredder/3.0.2pre
-In-Reply-To: <4B4DE2A2.2030800@zafena.se>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	Wed, 13 Jan 2010 18:38:23 +0300 (MSK)
+Received: from mcgi62.rambler.ru (localhost [127.0.0.1])
+	by mcgi62.rambler.ru (Postfix) with ESMTP id B35C711412
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jan 2010 18:38:20 +0300 (MSK)
+Received: from [77.52.208.230] by mcgi62.rambler.ru with HTTP (mailimap);
+	Wed, 13 Jan 2010 18:38:17 +0300
+From: Perepelica Alexander <alexondi@rambler.ru>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 13 Jan 2010 18:38:17 +0300
+MIME-Version: 1.0
+Message-Id: <968959991.1263397097.41458488.98027@mcgi62.rambler.ru>
+X-Mailer: Ramail 3u, (untone), http://mail.rambler.ru
+X-SA-Exim-Connect-IP: 81.19.66.231
+X-SA-Exim-Mail-From: alexondi@rambler.ru
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Correct way continue build after error
+Subject: Re: Adding a new Machine question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,44 +37,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 15:28:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 13 Jan 2010 15:40:34 -0000
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello Martin!
+I set DEFAULT_PREFERENCE = "1" but this don't helped
+here is my changes
 
-On 13-01-10 16:11, Xerxes Rånby wrote:
-> Perepelica Alexander wrote:
->> Hello!
->> I look in docs but didn't find answer for subj. Problem is if build is
->> failed then I change receipt or configs and then what must I do to
->> continue?
->> If I must recompile last stage (with configuring and/or unpacking) are
->> some ways to do that?
+diff --git a/recipes/linux/linux_2.6.32+2.6.33-rc3.bb 
+b/recipes/linux/linux_2.6.32+2.6.33-rc3.bb
+index c459312..eb688a5 100644
+--- a/recipes/linux/linux_2.6.32+2.6.33-rc3.bb
++++ b/recipes/linux/linux_2.6.32+2.6.33-rc3.bb
+@@ -8,7 +8,7 @@ PR = "r1"
+ S = "${WORKDIR}/linux-${OLD_KERNEL_RELEASE}"
 
-> Hi, if you have changed the .bb recipe for the package named "foo" to
-> fix the error, then recompile the package from scratch using:
-> 
-> bitbake -c clean foo
-> bitbake foo
+ # Mark archs/machines that this kernel supports
+-DEFAULT_PREFERENCE = "-1"
++DEFAULT_PREFERENCE = "1"
+ DEFAULT_PREFERENCE_simone = "-1"
+ DEFAULT_PREFERENCE_akita = "-1"
+ DEFAULT_PREFERENCE_c7x0 = "-1"
+diff --git a/recipes/linux/linux_2.6.32.bb 
+b/recipes/linux/linux_2.6.32.bb
+index 6a97f1b..46388bc 100644
+--- a/recipes/linux/linux_2.6.32.bb
++++ b/recipes/linux/linux_2.6.32.bb
+@@ -5,7 +5,7 @@ PR = "r3"
+ S = "${WORKDIR}/linux-${PV}"
 
-or just add:
+ # Mark archs/machines that this kernel supports
+-DEFAULT_PREFERENCE = "-1"
++DEFAULT_PREFERENCE = "1"
+ DEFAULT_PREFERENCE_ion = "1"
+ DEFAULT_PREFERENCE_simone = "1"
 
-INHERIT += "failure-cleanup"
-
-to your local.conf.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLTeX+MkyGM64RGpERAhDtAJ9H83zpQHxD6A2ARfwBoY7mUsfsTgCcC4PG
-i19vKTXNxwhvnJOyOa1gMWo=
-=/s3L
------END PGP SIGNATURE-----
 
 
 
