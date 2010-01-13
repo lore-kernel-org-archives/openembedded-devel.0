@@ -1,34 +1,36 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NV160-00075x-Va for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 12:09:07 +0100
-Received: from f053038039.adsl.alicedsl.de ([78.53.38.39]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NV13w-0002wS-Uc for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 11:06:57 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hik8s9$iop$1@ger.gmane.org>
-References: <1263109998.16109.11.camel@mattotaupa.wohnung.familie-menzel.net>
-	<20100110123923.GB6363@rhein.zuhause.netz>
-	<1263156477.3423.6.camel@mattotaupa.wohnung.familie-menzel.net>
-	<1263249767.3308.236.camel@mattotaupa.wohnung.familie-menzel.net>
-	<1263296160.20557.136.camel@mattotaupa.wohnung.familie-menzel.net>
-	<20100113102738.GA15906@gmail.com>
-	<1263379487.3228.23.camel@mattotaupa.wohnung.familie-menzel.net>
-	<hik8s9$iop$1@ger.gmane.org>
-Date: Wed, 13 Jan 2010 12:06:54 +0100
-Message-ID: <1263380814.3228.27.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	(envelope-from <rpjday@crashcourse.ca>) id 1NV1vQ-000395-1d
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jan 2010 13:02:15 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NV1tK-0007cg-7z for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jan 2010 07:00:02 -0500
+Date: Wed, 13 Jan 2010 06:59:20 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.00.1001130657110.487@localhost>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [vdr] TARGET_CXXFLAGS do not include CXX_FLAGS from Makefile
+Subject: dev branch, bitbake of "mplayer" fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,45 +44,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 11:09:08 -0000
-X-Groupsio-MsgNum: 15643
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-haHp4NvT1f8UGW9ud68J"
-
---=-haHp4NvT1f8UGW9ud68J
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Am Mittwoch, den 13.01.2010, 11:56 +0100 schrieb Koen Kooi:
-> On 13-01-10 11:44, Paul Menzel wrote:
->=20
-> > I did not define any CXXFLAGS. It looks like BitBake is setting them
-> and
-> > not respecting those in the Makefile.
->=20
-> In 99.99% of the cases OE knows a while lot better which flags to
-> use :)
-> If upstream has the need for a specific flag, they should append it to
-> CXXFLAGS in the makefile, not redefine CXXFLAGS.
-
-Thanks for your answer. Now I know, what to tell.
+X-List-Received-Date: Wed, 13 Jan 2010 12:02:15 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
-Thanks,
+  i'm starting to think these build errors only ever happen to me.
+:-( once again, on fedora 12, dev branch:
 
-Paul
 
---=-haHp4NvT1f8UGW9ud68J
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
+ERROR: function do_compile failed
+ERROR: see log in
+/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/mplayer-0.0+1.0rc2+svnr30247-r15/temp/log.do_compile.26510
+NOTE: Task failed:
+/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/mplayer-0.0+1.0rc2+svnr30247-r15/temp/log.do_compile.26510
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of
+/home/rpjday/oe/openembedded/recipes/mplayer/mplayer_svn.bb do_compile
+failed
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+  log file:
 
-iEYEABECAAYFAktNqU4ACgkQPX1aK2wOHVgoQQCfeR31Cp1beLXEnOLr4/8VCaIh
-oJMAoIPX6kKf/K01F66KPnLf1+xQ0L24
-=qk61
------END PGP SIGNATURE-----
+NOTE: make
+ccache arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8
+-mfpu=neon -mfloat-abi=softfp -Wundef -Wdisabled-optimization
+-Wno-pointer-sign -Wdeclaration-after-statement -std=gnu99
+-isystem/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include
+-fexpensive-optimizations  -ftree-vectorize -fomit-frame-pointer -O4
+-ffast-math
+-I/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/mplayer-0.0+1.0rc2+svnr30247-r15/trunk/libdvdread4
+-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE -I.
+-isystem/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include
+-D_REENTRANT
+-I/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/freetype2
+-I/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include
+-I/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/schroedinger-1.0
+-I/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/liboil-0.3
+-isystem/home/rpjday/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include
+-c -o libmpcodecs/vf_fspp.o libmpcodecs/vf_fspp.c
+In file included from libmpcodecs/vf_fspp.c:50:
+./libavutil/internal.h:266:6: warning: "HAVE_EXP2" is not defined
+./libavutil/internal.h:273:6: warning: "HAVE_EXP2F" is not defined
+./libavutil/internal.h:294:6: warning: "HAVE_LOG2F" is not defined
+In file included from libmpcodecs/vf_fspp.c:51:
+./libavutil/internal.h:267: error: static declaration of 'exp2'
+follows non-static declaration
+./libavutil/internal.h:274: error: static declaration of 'exp2f'
+follows non-static declaration
+./libavutil/internal.h:295: error: static declaration of 'log2f'
+follows non-static declaration
+make: *** [libmpcodecs/vf_fspp.o] Error 1
+FATAL: oe_runmake failed
 
---=-haHp4NvT1f8UGW9ud68J--
+
+rday
+--
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
+
+
