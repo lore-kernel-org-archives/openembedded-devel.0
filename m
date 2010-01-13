@@ -1,34 +1,37 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from dan.rpsys.net ([93.97.175.187])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NVCjb-0008Sj-Km for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jan 2010 00:34:46 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NVChK-0006hS-Ci
+	(envelope-from <rpurdie@rpsys.net>) id 1NVCoe-0000AQ-3e
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jan 2010 00:32:22 +0100
-Received: from p5b3b3319.dip.t-dialin.net ([91.59.51.25])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jan 2010 00:32:22 +0100
-Received: from no2spam by p5b3b3319.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Thu, 14 Jan 2010 00:39:59 +0100
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	o0DNXYYU010020 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jan 2010 23:33:34 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id AacBwLptgbrn
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jan 2010 00:32:22 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 13 Jan 2010 23:33:34 +0000 (GMT)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	o0DNXVex010010
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jan 2010 23:33:32 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Thu, 14 Jan 2010 00:31:58 +0100
-Message-ID: <hill5g$ll0$1@ger.gmane.org>
+In-Reply-To: <hill5g$ll0$1@ger.gmane.org>
+References: <hill5g$ll0$1@ger.gmane.org>
+Date: Wed, 13 Jan 2010 23:37:40 +0000
+Message-Id: <1263425860.15954.3.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b3319.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: RFC: Sane default for SPLASH
+Subject: Re: RFC: Sane default for SPLASH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,23 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 23:34:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 13 Jan 2010 23:39:59 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Hello,
+On Thu, 2010-01-14 at 00:31 +0100, Rolf Leggewie wrote:
+> the variable SPLASH is currently defined and not defined in a variety of
+> places leading to undesired results.  I think it should be set OE-wide
+> to a sane default.  Sane for me would be either "" to not have a splash
+> at all or psplash or some other generic splash that shows an OE logo.
+> As always, this would be set ?= so that distributions and individuals
+> can override the setting.  I think the sane default is no splash but
+> invite your opinion on the matter.
 
-the variable SPLASH is currently defined and not defined in a variety of
-places leading to undesired results.  I think it should be set OE-wide
-to a sane default.  Sane for me would be either "" to not have a splash
-at all or psplash or some other generic splash that shows an OE logo.
-As always, this would be set ?= so that distributions and individuals
-can override the setting.  I think the sane default is no splash but
-invite your opinion on the matter.
+So a key question is "Where is it actually used?"
 
-Regards
+I'm asking this in public rather than just looking myself and providing
+an answer so people can see the reasoning ;-).
 
-Rolf
+Cheers,
+
+Richard
 
 
 
