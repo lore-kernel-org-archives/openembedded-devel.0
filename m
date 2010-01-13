@@ -1,29 +1,36 @@
-Received: from mxa.rambler.ru ([81.19.66.231])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <alexondi@rambler.ru>) id 1NV5pq-0002Dp-RS
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NV6Na-0002oo-VQ for openembedded-devel@lists.openembedded.org;
+	Wed, 13 Jan 2010 17:47:38 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NV6LV-0000c9-CZ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 13 Jan 2010 17:12:45 +0100
-Received: from mcgi25.rambler.ru (mcgi25.rambler.ru [81.19.67.67])
-	by mxa.rambler.ru (Postfix) with ESMTP id 9EB0574F08
+	Wed, 13 Jan 2010 17:45:25 +0100
+Received: from p5b3b3319.dip.t-dialin.net ([91.59.51.25])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Jan 2010 17:45:25 +0100
+Received: from no2spam by p5b3b3319.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2010 19:10:34 +0300 (MSK)
-Received: from mcgi25.rambler.ru (localhost [127.0.0.1])
-	by mcgi25.rambler.ru (Postfix) with ESMTP id 05B3C1700D
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Jan 2010 19:10:32 +0300 (MSK)
-Received: from [77.52.208.230] by mcgi25.rambler.ru with HTTP (mailimap);
-	Wed, 13 Jan 2010 19:10:29 +0300
-From: Perepelica Alexander <alexondi@rambler.ru>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 13 Jan 2010 19:10:29 +0300
-MIME-Version: 1.0
-Message-Id: <318819580.1263399029.155991028.16785@mcgi25.rambler.ru>
-X-Mailer: Ramail 3u, (untone), http://mail.rambler.ru
-X-SA-Exim-Connect-IP: 81.19.66.231
-X-SA-Exim-Mail-From: alexondi@rambler.ru
+	Wed, 13 Jan 2010 17:45:25 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Wed, 13 Jan 2010 17:45:01 +0100
+Message-ID: <hiktaf$u79$1@ger.gmane.org>
+References: <alpine.LFD.2.00.1001131007240.7565@localhost>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5b3b3319.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <alpine.LFD.2.00.1001131007240.7565@localhost>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Adding a new Machine question
+Subject: Re: mplayer still failing to build new error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,74 +44,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Jan 2010 16:12:46 -0000
-Content-Disposition: inline
+X-List-Received-Date: Wed, 13 Jan 2010 16:47:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
 
-Thank you, Martyn!
-I remove my changes from linux_2.6.32+2.6.33-rc3.bb and I build was 
-successful but don't boot with image :(  - all hangs
+Robert P. J. Day wrote:
+>   long story short, tail end of log file:
 
-Perepelica Alexander wrote:
-> Hi!
-> I have problem with configs for new x86_64 machine.
-> How I read in manual I need set next vasiables
-> 1. TARGET_ARCH
->  TARGET_ARCH = "x86_64"
-> 2. MACHINE_FEATURES
-> MACHINE_FEATURES = "kernel26 screen keyboard pci usbhost acpi ext2
-x86"
-> MACHINE_EXTRA_RRECOMMENDS = " kernel-modules"
-> 3. PREFERRED_PROVIDER_virtual/kernel
-> PREFERRED_PROVIDER_virtual/kernel = "linux"
-> And now when I build  helloworld-image all is ok i get my RFS image.
-> But when I try build bootstrap-image I got error
-> "  no such directory asm-x86" but I see dir with name "asm-generic"
-and
-> name of machine conf file is x86_64-generic.conf.
-> So, I don't understand what I do wrong?
->
+FWIW, mplayer builds for me (on a Debian host).  Please be sure to
+report your build failures to our tinderbox.
 
-I think I had this problem as well when compiling for a i586-generic
-(infact i686-generic and x86 as well).
+http://wiki.openembedded.net/index.php/How_do_I_send_automatic_success_and_failure_reports
 
-All the kernel bitbake files contain DEFAULT_PREFERENCE = "-1" and the
-bitbake file for the newest kernel (linux_2.6.32+2.6.33-rc3.bb
-<http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/linux_2.6.32+2.6.33-rc3.bb>
-I think) was failing for x86.
-
-I modified linux_2.6.32.bb
-<http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/linux_2.6.32.bb>
-from:
-
-|DEFAULT_PREFERENCE = "-1"
-|
-
-to:
-
-|DEFAULT_PREFERENCE = "1"
-|
-
-and was able to build (though I haven't got around to testing the
-resulting kernel yet...)
-
-Martyn
-
-
---
-Martyn Welch (Principal Software Engineer)   |   Registered in England
-and
-GE Intelligent Platforms                     |   Wales (3828642) at 100
-T +44(0)127322748                            |   Barbirolli Square,
-Manchester,
-E martyn.welch@gefanuc.com                   |   M2 3AB  VAT:GB
-927559189
-
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
