@@ -1,24 +1,25 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from bay0-omc4-s1.bay0.hotmail.com ([65.54.190.203])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1NVR4k-0005bh-6u
+	(envelope-from <salehusman@hotmail.com>) id 1NVRJq-0000if-Qc
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jan 2010 15:53:33 +0100
-Received: (qmail 21925 invoked by uid 1003); 14 Jan 2010 14:51:18 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 14 Jan 2010 14:51:18 -0000
-Message-ID: <4B4F2F65.80208@balister.org>
-Date: Thu, 14 Jan 2010 09:51:17 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
+	Thu, 14 Jan 2010 16:09:11 +0100
+Received: from BAY127-W12 ([65.54.190.199]) by bay0-omc4-s1.bay0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 14 Jan 2010 07:06:54 -0800
+Message-ID: <BAY127-W124C37647E3E094EB4CEB6D86A0@phx.gbl>
+X-Originating-IP: [203.82.49.5]
+From: saleh usman <salehusman@hotmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Date: Thu, 14 Jan 2010 20:06:54 +0500
+Importance: Normal
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <BAY127-W12FB3A39A8C20F3160AD98D86A0@phx.gbl>
-In-Reply-To: <BAY127-W12FB3A39A8C20F3160AD98D86A0@phx.gbl>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+X-OriginalArrivalTime: 14 Jan 2010 15:06:54.0676 (UTC)
+	FILETIME=[35796140:01CA952B]
+X-SA-Exim-Connect-IP: 65.54.190.203
+X-SA-Exim-Mail-From: salehusman@hotmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: console-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -33,28 +34,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jan 2010 14:53:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 14 Jan 2010 15:09:11 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On 01/14/2010 09:46 AM, saleh usman wrote:
+
+But I've a basic linux system runing on my board then still I've any need o=
+f bitbaiking=20
+console-iamge?
+if not then what procedure I should adopt for porting  ossie.
+can bitbaking only ossie related files will work or any other way?
+
+
+saleh
+
+
+On 01/14/2010 09:46 AM=2C saleh usman wrote:
 >
-> What console-image actually does.There is a little information about it in openembedded manual.
+> What console-image actually does.There is a little information about it i=
+n openembedded manual.
 
-Read the bb file. Basically, it is an image that provides a basic linux 
+Read the bb file. Basically=2C it is an image that provides a basic linux=20
 system with most of the familiar command line utilities.
 
 Philip
 
 > Saleh
->   		 	   		
-> _________________________________________________________________
-> Windows Live Hotmail: Your friends can get your Facebook updates, right from Hotmail®.
-> http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/social-network-basics.aspx?ocid=PID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_4:092009
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
+>   		 	 		 	   		 =20
+_________________________________________________________________
+Windows Live Hotmail: Your friends can get your Facebook updates=2C right f=
+rom Hotmail=AE.
+http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/so=
+cial-network-basics.aspx?ocid=3DPID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_4:092=
+009=
 
