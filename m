@@ -1,39 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NVLou-0007m2-Cp for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jan 2010 10:16:51 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NVLmm-0001v1-Ma
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NVLpJ-0007n8-TC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jan 2010 10:14:36 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jan 2010 10:14:36 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jan 2010 10:14:36 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 14 Jan 2010 10:17:17 +0100
+Received: (qmail 2040 invoked by uid 813007); 14 Jan 2010 09:15:04 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 14 Jan 2010 09:15:04 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 14 Jan 2010 10:14:13 +0100
-Message-ID: <himn94$8ui$1@ger.gmane.org>
-References: <hill5g$ll0$1@ger.gmane.org>	<1263426466.457.286.camel@lenovo.internal.reciva.com>	<1263427123.15954.6.camel@dax.rpnet.com>
-	<hilp2s$ag$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100112 Shredder/3.0.2pre
-In-Reply-To: <hilp2s$ag$1@ger.gmane.org>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Thu, 14 Jan 2010 10:14:53 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-rc2-00268-g45d28b0; KDE/4.3.4; x86_64; ;
+	)
+References: <> <1263455739-13595-1-git-send-email-camelguo@gmail.com>
+In-Reply-To: <1263455739-13595-1-git-send-email-camelguo@gmail.com>
+MIME-Version: 1.0
+Message-Id: <201001141014.53764.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: RFC: Sane default for SPLASH
+Subject: Re: [PATCH] Support building all project in one directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,450 +35,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jan 2010 09:16:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 14 Jan 2010 09:17:17 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dnia czwartek, 14 stycznia 2010 o 08:55:39 Guo Hongruan napisa=C5=82(a):
+> * Append ${LIBC} to CACHE, STAMP, WORKDIR, STAGING_DIR and CROSS_DIR
+>  defination, so that package building with different libc will not bother
+>  each other.
 
-NAK, the needless SPLASH -> BOOTSPLASH will create too much work for
-people to catch up to, and it messes up the docs on the subject.
+How does it differ from TMPDIR =3D "tmp/${LIBC}/" setting in local.conf? En=
+d=20
+result is the same and you do not force all developers to restart their bui=
+lds=20
+from scratch.
 
-On 14-01-10 01:38, Rolf Leggewie wrote:
-> diff --git a/classes/image.bbclass b/classes/image.bbclass
-> index ab58031..8f45aeb 100644
-> --- a/classes/image.bbclass
-> +++ b/classes/image.bbclass
-> @@ -17,6 +17,9 @@ IMAGE_INITSCRIPTS ?= "initscripts"
->  #
->  IMAGE_LOGIN_MANAGER ?= "tinylogin"
->  
-> +# set sane default for the BOOTSPLASH variable
-> +BOOTSPLASH ?= ""
-> +
->  IMAGE_KEEPROOTFS ?= ""
->  IMAGE_KEEPROOTFS[doc] = "Set to non-empty to keep ${IMAGE_ROOTFS} around after image creation."
->  
-> diff --git a/recipes/images/beagleboard-demo-image.bb b/recipes/images/beagleboard-demo-image.bb
-> index d83281c..a410263 100644
-> --- a/recipes/images/beagleboard-demo-image.bb
-> +++ b/recipes/images/beagleboard-demo-image.bb
-> @@ -10,7 +10,7 @@ XSERVER ?= "xserver-xorg \
->  "
->  
->  ANGSTROM_EXTRA_INSTALL ?= ""
-> -SPLASH = "exquisite exquisite-themes exquisite-theme-angstrom"
-> +BOOTSPLASH = "exquisite exquisite-themes exquisite-theme-angstrom"
->  
->  export IMAGE_BASENAME = "Beagleboard-demo-image"
->  
-> @@ -19,7 +19,7 @@ IMAGE_INSTALL = "\
->      ${XSERVER} \
->      ${ANGSTROM_EXTRA_INSTALL} \
->      task-beagleboard-demo \
-> -    ${SPLASH} \
-> +    ${BOOTSPLASH} \
->      "
->  
->  IMAGE_PREPROCESS_COMMAND = "create_etc_timestamp"
-> diff --git a/recipes/images/bootmanager-image.bb b/recipes/images/bootmanager-image.bb
-> index db05437..21d11a1 100644
-> --- a/recipes/images/bootmanager-image.bb
-> +++ b/recipes/images/bootmanager-image.bb
-> @@ -1,9 +1,9 @@
->  #Angstrom bootmanager image
->  
-> -SPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
-> +BOOTSPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
->  
->  DEPENDS = "task-angstrom"
-> -IMAGE_INSTALL = "angstrom-base-depends angstrom-bootmanager ${SPLASH}"
-> +IMAGE_INSTALL = "angstrom-base-depends angstrom-bootmanager ${BOOTSPLASH}"
->  
->  export IMAGE_BASENAME = "bootmanager-image"
->  
-> diff --git a/recipes/images/console-base-image.bb b/recipes/images/console-base-image.bb
-> index d25a4fc..0b196b6 100644
-> --- a/recipes/images/console-base-image.bb
-> +++ b/recipes/images/console-base-image.bb
-> @@ -4,17 +4,16 @@ IMAGE_PREPROCESS_COMMAND = "create_etc_timestamp"
->  
->  ANGSTROM_EXTRA_INSTALL ?= ""
->  
-> -SPLASH ?= ""
->  ZZAPSPLASH = ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-zap", "",d)}'
->  
->  DEPENDS = "task-base \
-> -           ${SPLASH} \
-> +           ${BOOTSPLASH} \
->             ${ZZAPSPLASH} \
->  	   "
->  
->  IMAGE_INSTALL = "task-base \
->  	    ${ANGSTROM_EXTRA_INSTALL} \
-> -	    ${SPLASH} \
-> +	    ${BOOTSPLASH} \
->  	    ${ZZAPSPLASH} \
->  	    "
->  
-> diff --git a/recipes/images/gateway-image.bb b/recipes/images/gateway-image.bb
-> index d7a77e0..061b6b0 100644
-> --- a/recipes/images/gateway-image.bb
-> +++ b/recipes/images/gateway-image.bb
-> @@ -1,7 +1,7 @@
->  #Angstrom gateway image
->  #gives you a gateway with SMB, ssh and dnsmasqs
->  
-> -SPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
-> +BOOTSPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
->  
->  ANGSTROM_EXTRA_INSTALL ?= ""
->  DISTRO_SSH_DAEMON ?= "dropbear"
-> @@ -13,7 +13,7 @@ IMAGE_INSTALL = "task-boot \
->              dnsmasq \
->  #            vsftpd \
->              angstrom-version \
-> -            ${SPLASH} \
-> +            ${BOOTSPLASH} \
->  	   "
->  
->  export IMAGE_BASENAME = "gateway-image"
-> diff --git a/recipes/images/gnuradio-image.bb b/recipes/images/gnuradio-image.bb
-> index 53e79b8..0c9bfe2 100644
-> --- a/recipes/images/gnuradio-image.bb
-> +++ b/recipes/images/gnuradio-image.bb
-> @@ -4,17 +4,16 @@ IMAGE_PREPROCESS_COMMAND = "create_etc_timestamp"
->  
->  IMAGE_EXTRA_INSTALL ?= ""
->  
-> -SPLASH ?= ""
->  ZZAPSPLASH = ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-zap", "",d)}'
->  
->  DEPENDS = "task-base-extended \
-> -           ${SPLASH} \
-> +           ${BOOTSPLASH} \
->             ${ZZAPSPLASH} \
->  	   "
->  
->  IMAGE_INSTALL = "task-base-extended \
->  	    ${IMAGE_EXTRA_INSTALL} \
-> -	    ${SPLASH} \
-> +	    ${BOOTSPLASH} \
->  	    ${ZZAPSPLASH} \
->              oprofile \
->              screen \
-> diff --git a/recipes/images/gpe-image.bb b/recipes/images/gpe-image.bb
-> index 768cc6b..df4a802 100644
-> --- a/recipes/images/gpe-image.bb
-> +++ b/recipes/images/gpe-image.bb
-> @@ -8,7 +8,7 @@ XSERVER ?= "xserver-kdrive-fbdev"
->  GPE_EXTRA_THEMES = "gpe-theme-industrial"
->  
->  # Select bootsplash 
-> -SPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
-> +BOOTSPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
->  
->  # Select some useful things depending on the device capabilities
->  
-> @@ -29,7 +29,7 @@ GPE_EXTRA_INSTALL += "${GPE_BIGFLASH_INSTALL}"
->  
->  
->  DEPENDS = "${MACHINE_TASK_PROVIDER} \
-> -	   ${SPLASH} \
-> +	   ${BOOTSPLASH} \
->  	   task-gpe-base \
->             task-gpe-apps \
->             task-gpe-pim \
-> @@ -44,7 +44,7 @@ IMAGE_INSTALL = "\
->      task-gpe-settings \
->      task-gpe-apps \
->      ${XSERVER} \
-> -    ${SPLASH} \
-> +    ${BOOTSPLASH} \
->      ${GPE_EXTRA_INSTALL}"
->  
->  ROOTFS_POSTPROCESS_COMMAND += '${@base_conditional("DISTRO_TYPE", "release", "zap_root_password; ", "",d)}'
-> diff --git a/recipes/images/illume-image.bb b/recipes/images/illume-image.bb
-> index 3ab006a..ca219f2 100644
-> --- a/recipes/images/illume-image.bb
-> +++ b/recipes/images/illume-image.bb
-> @@ -5,7 +5,7 @@
->  IMAGE_LINGUAS = "en-us de-de fr-fr pt-br ca-es zh-cn zh-tw bg-bg cs-cz da-dk nl-nl fi-fi hu-hu it-it ja-jp ko-kr nb-no pl-pl ru-ru sk-sk sl-si es-ar sv-se"
->  
->  # use exquisite splash
-> -SPLASH = "exquisite exquisite-themes exquisite-theme-illume"
-> +BOOTSPLASH = "exquisite exquisite-themes exquisite-theme-illume"
->  
->  # getting the base system up
->  BASE_INSTALL = "\
-> @@ -154,7 +154,7 @@ IMAGE_INSTALL = "\
->  #  ${ZHONE_INSTALL} \
->    ${APPS_INSTALL} \
->    ${DEV_INSTALL} \
-> -  ${SPLASH} \
-> +  ${BOOTSPLASH} \
->  "
->  inherit image
->  
-> diff --git a/recipes/images/minimal-gpe-image.bb b/recipes/images/minimal-gpe-image.bb
-> index c37225d..de6a625 100644
-> --- a/recipes/images/minimal-gpe-image.bb
-> +++ b/recipes/images/minimal-gpe-image.bb
-> @@ -3,7 +3,7 @@
->  # Very angstrom and opkg centric
->  
->  XSERVER ?= "xserver-kdrive-fbdev"
-> -SPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
-> +BOOTSPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
->  
->  export IMAGE_BASENAME = "minimalist-gpe-image"
->  
-> @@ -18,7 +18,7 @@ IMAGE_INSTALL = "\
->      gpe-terminal \
->      angstrom-feed-configs \
->      opkg-nogpg opkg-collateral \
-> -    ${SPLASH} \
-> +    ${BOOTSPLASH} \
->      "
->  
->  #zap root password for release images
-> diff --git a/recipes/images/minimal-image.bb b/recipes/images/minimal-image.bb
-> index e9abcb3..3d5d3aa 100644
-> --- a/recipes/images/minimal-image.bb
-> +++ b/recipes/images/minimal-image.bb
-> @@ -4,8 +4,6 @@
->  ANGSTROM_EXTRA_INSTALL ?= ""
->  DISTRO_SSH_DAEMON ?= "dropbear"
->  
-> -SPLASH ?= " "
-> -
->  IMAGE_PREPROCESS_COMMAND = "create_etc_timestamp"
->  
->  IMAGE_INSTALL = "task-boot \
-> @@ -13,7 +11,7 @@ IMAGE_INSTALL = "task-boot \
->              ${DISTRO_SSH_DAEMON} \
->              ${ANGSTROM_EXTRA_INSTALL} \
->              angstrom-version \
-> -            ${SPLASH} \
-> +            ${BOOTSPLASH} \
->  	   "
->  
->  export IMAGE_BASENAME = "minimalist-image"
-> diff --git a/recipes/images/sdr-image.bb b/recipes/images/sdr-image.bb
-> index 55a59a2..7c52553 100644
-> --- a/recipes/images/sdr-image.bb
-> +++ b/recipes/images/sdr-image.bb
-> @@ -15,7 +15,7 @@ IMAGE_FSTYPES += "tar.bz2"
->  ANGSTROM_EXTRA_INSTALL ?= ""
->  DISTRO_SSH_DAEMON ?= "dropbear"
->  XSERVER ?= "xserver-kdrive-fbdev"
-> -SPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
-> +BOOTSPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
->  
->  # Install "big" X if the target has a screen
->  GUIPACKAGES_BIGX = " \
-> @@ -44,7 +44,7 @@ IMAGE_INSTALL = " task-base-extended \
->  	uucp picocom \
->  	angstrom-zeroconf-audio avahi-utils \
->  	${ANGSTROM_EXTRA_INSTALL} \
-> -        ${SPLASH} \
-> +        ${BOOTSPLASH} \
->  "
->  
->  inherit image
-> diff --git a/recipes/images/sugar-image.bb b/recipes/images/sugar-image.bb
-> index e4513f6..01218ad 100644
-> --- a/recipes/images/sugar-image.bb
-> +++ b/recipes/images/sugar-image.bb
-> @@ -1,5 +1,5 @@
->  XSERVER ?= "xserver-kdrive-fbdev"
-> -SPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
-> +BOOTSPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
->  ANGSTROM_EXTRA_INSTALL += ""
->  
->  export IMAGE_BASENAME = "sugar-image"
-> @@ -12,7 +12,7 @@ IMAGE_INSTALL = "\
->      angstrom-gpe-task-base \
->      angstrom-gpe-task-settings \
->      task-sugar-sucrose \
-> -    ${SPLASH} \
-> +    ${BOOTSPLASH} \
->      ${ANGSTROM_EXTRA_INSTALL}"
->  
->  IMAGE_PREPROCESS_COMMAND = "create_etc_timestamp"
-> diff --git a/recipes/images/ti-demo-x11-image.bb b/recipes/images/ti-demo-x11-image.bb
-> index e37d183..2ed9150 100644
-> --- a/recipes/images/ti-demo-x11-image.bb
-> +++ b/recipes/images/ti-demo-x11-image.bb
-> @@ -10,7 +10,7 @@ XSERVER ?= "xserver-xorg \
->  "
->  
->  ANGSTROM_EXTRA_INSTALL ?= ""
-> -SPLASH = "exquisite exquisite-themes exquisite-theme-angstrom"
-> +BOOTSPLASH = "exquisite exquisite-themes exquisite-theme-angstrom"
->  
->  export IMAGE_BASENAME = "ti-demo-x11-image"
->  
-> @@ -19,7 +19,7 @@ IMAGE_INSTALL = "\
->      ${XSERVER} \
->      ${ANGSTROM_EXTRA_INSTALL} \
->      task-demo-x11 \
-> -    ${SPLASH} \
-> +    ${BOOTSPLASH} \
->      "
->  
->  IMAGE_PREPROCESS_COMMAND = "create_etc_timestamp"
-> diff --git a/recipes/images/udumpty-image.bb b/recipes/images/udumpty-image.bb
-> index 8f616d9..3cda81f 100644
-> --- a/recipes/images/udumpty-image.bb
-> +++ b/recipes/images/udumpty-image.bb
-> @@ -1,6 +1,6 @@
->  # Image that mimics the default desktop of a certain distro
->  
-> -SPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
-> +BOOTSPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
->  XSERVER ?= "xserver-xorg \
->             xf86-input-evdev \
->             xf86-input-mouse \
-> @@ -44,7 +44,7 @@ IMAGE_INSTALL = "\
->  	gnome-control-center \
->  	gnome-settings-daemon \
->  	gnome-session \
-> -    ${SPLASH} \
-> +    ${BOOTSPLASH} \
->  "
->  
->  IMAGE_PREPROCESS_COMMAND = "create_etc_timestamp"
-> diff --git a/recipes/images/x11-gpe-image.bb b/recipes/images/x11-gpe-image.bb
-> index 837d94a..c3fc947 100644
-> --- a/recipes/images/x11-gpe-image.bb
-> +++ b/recipes/images/x11-gpe-image.bb
-> @@ -3,7 +3,7 @@
->  ANGSTROM_EXTRA_INSTALL += " \
->  			  " 
->  XSERVER ?= "xserver-kdrive-fbdev"
-> -SPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
-> +BOOTSPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
->  
->  export IMAGE_BASENAME = "x11-gpe-image"
->  
-> @@ -17,7 +17,7 @@ IMAGE_INSTALL = "\
->      kernel-modules \
->      hal \
->      angstrom-gpe-task-pim \
-> -    ${SPLASH} \
-> +    ${BOOTSPLASH} \
->      ${ANGSTROM_EXTRA_INSTALL}"
->  
->  
-> diff --git a/recipes/images/x11-gpe-java-image.bb b/recipes/images/x11-gpe-java-image.bb
-> index 760fe52..e4b7998 100644
-> --- a/recipes/images/x11-gpe-java-image.bb
-> +++ b/recipes/images/x11-gpe-java-image.bb
-> @@ -3,7 +3,7 @@
->  ANGSTROM_EXTRA_INSTALL += " \
->  			  " 
->  XSERVER ?= "xserver-kdrive-fbdev"
-> -SPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
-> +BOOTSPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
->  
->  export IMAGE_BASENAME = "x11-gpe-java-image"
->  
-> @@ -19,7 +19,7 @@ IMAGE_INSTALL = "\
->      kernel-modules \
->      hal \
->      angstrom-gpe-task-pim \
-> -    ${SPLASH} \
-> +    ${BOOTSPLASH} \
->      ${ANGSTROM_EXTRA_INSTALL}"
->  
->  IMAGE_PREPROCESS_COMMAND = "create_etc_timestamp"
-> diff --git a/recipes/images/x11-image.bb b/recipes/images/x11-image.bb
-> index 7c632e3..552a8ab 100644
-> --- a/recipes/images/x11-image.bb
-> +++ b/recipes/images/x11-image.bb
-> @@ -12,7 +12,7 @@ IMAGE_INSTALL = "\
->      angstrom-x11-base-depends \
->      angstrom-gpe-task-base \
->      angstrom-gpe-task-settings \
-> -    ${SPLASH} \
-> +    ${BOOTSPLASH} \
->      ${ANGSTROM_EXTRA_INSTALL}"
->  
->  IMAGE_PREPROCESS_COMMAND = "create_etc_timestamp"
-> diff --git a/recipes/images/x11-jvm-image.bb b/recipes/images/x11-jvm-image.bb
-> index fd0e5f0..63c0652 100644
-> --- a/recipes/images/x11-jvm-image.bb
-> +++ b/recipes/images/x11-jvm-image.bb
-> @@ -28,7 +28,7 @@ IMAGE_INSTALL = "\
->      angstrom-x11-base-depends \
->      angstrom-gpe-task-base \
->      angstrom-gpe-task-settings \
-> -    ${SPLASH} \
-> +    ${BOOTSPLASH} \
->      ${ADD_JVM} \
->      ${ADD_OTHER} \
->      ${ANGSTROM_EXTRA_INSTALL}"
-> diff --git a/recipes/images/x11-office-image.bb b/recipes/images/x11-office-image.bb
-> index ecbc8a0..6d0d306 100644
-> --- a/recipes/images/x11-office-image.bb
-> +++ b/recipes/images/x11-office-image.bb
-> @@ -3,7 +3,7 @@
->  ANGSTROM_EXTRA_INSTALL += " \
->  			  " 
->  XSERVER ?= "xserver-kdrive-fbdev"
-> -SPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
-> +BOOTSPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
->  
->  export IMAGE_BASENAME = "x11-office-image"
->  
-> @@ -22,7 +22,7 @@ IMAGE_INSTALL = "\
->      claws-mail claws-mail claws-plugin-mailmbox claws-plugin-rssyl \
->      midori minimo \
->      gphoto2 \
-> -    ${SPLASH} \
-> +    ${BOOTSPLASH} \
->      ${ANGSTROM_EXTRA_INSTALL}"
->  
->  IMAGE_PREPROCESS_COMMAND = "create_etc_timestamp"
-> diff --git a/recipes/images/x11-pimlico-image.bb b/recipes/images/x11-pimlico-image.bb
-> index cb8e78d..32ec989 100644
-> --- a/recipes/images/x11-pimlico-image.bb
-> +++ b/recipes/images/x11-pimlico-image.bb
-> @@ -3,7 +3,7 @@
->  ANGSTROM_EXTRA_INSTALL += " \
->  			  " 
->  XSERVER ?= "xserver-kdrive-fbdev"
-> -SPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
-> +BOOTSPLASH ?= ' ${@base_contains("MACHINE_FEATURES", "screen", "psplash-angstrom", "",d)}'
->  
->  export IMAGE_BASENAME = "x11-pimlico-image"
->  
-> @@ -17,7 +17,7 @@ IMAGE_INSTALL = "\
->      kernel-modules \
->      hal \
->      angstrom-ohand-task-pim \
-> -    ${SPLASH} \
-> +    ${BOOTSPLASH} \
->      ${ANGSTROM_EXTRA_INSTALL}"
->  
->  IMAGE_PREPROCESS_COMMAND = "create_etc_timestamp"
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLTuBlMkyGM64RGpERAggfAJ4jsCjTf4LCqo57KrfzmCBmNxVT5ACeLeyn
-qndQqKaZAyTOeRoig0+OoOc=
-=yuDJ
------END PGP SIGNATURE-----
 
 
 
