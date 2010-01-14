@@ -1,26 +1,38 @@
-Received: from bay0-omc4-s1.bay0.hotmail.com ([65.54.190.203])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <salehusman@hotmail.com>) id 1NVRJq-0000if-Qc
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NVRLq-0000pw-MQ for openembedded-devel@lists.openembedded.org;
+	Thu, 14 Jan 2010 16:11:13 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NVRJj-0001y1-31
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jan 2010 16:09:11 +0100
-Received: from BAY127-W12 ([65.54.190.199]) by bay0-omc4-s1.bay0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 14 Jan 2010 07:06:54 -0800
-Message-ID: <BAY127-W124C37647E3E094EB4CEB6D86A0@phx.gbl>
-X-Originating-IP: [203.82.49.5]
-From: saleh usman <salehusman@hotmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-Date: Thu, 14 Jan 2010 20:06:54 +0500
-Importance: Normal
-MIME-Version: 1.0
-X-OriginalArrivalTime: 14 Jan 2010 15:06:54.0676 (UTC)
-	FILETIME=[35796140:01CA952B]
-X-SA-Exim-Connect-IP: 65.54.190.203
-X-SA-Exim-Mail-From: salehusman@hotmail.com
+	Thu, 14 Jan 2010 16:08:59 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Jan 2010 16:08:59 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Jan 2010 16:08:59 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 14 Jan 2010 16:08:36 +0100
+Message-ID: <hinc1j$ess$1@ger.gmane.org>
+References: <hihuv8$b6u$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100112 Shredder/3.0.2pre
+In-Reply-To: <hihuv8$b6u$1@ger.gmane.org>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: console-image
+Subject: Re: [RFC][PATCH] Move udev cache creation after checkroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,37 +46,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jan 2010 15:09:11 -0000
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 14 Jan 2010 15:11:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+It received 2 Acks, no NAKs, works well in the field: it's applied now
+
+On 12-01-10 14:54, Koen Kooi wrote:
+> Hi,
+> 
+> What's your opinion on attached (untested) patch? If there's some
+> consensus that this is a step in the right direction I'll create a
+> working & tested patch to commit.
+> 
+> Nota bene: I'm not going to discuss the merits of udev caching, only the
+> impact of this patch to the current situation.
+> 
+> regards,
+> 
+> Koen
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLTzN0MkyGM64RGpERAj0SAJ9zMcapZJRhN5WqngZ5Xqse9q+jJwCeMTR8
+UUtNtGO21HZL99oyBYKQ8ug=
+=LmQG
+-----END PGP SIGNATURE-----
 
 
-But I've a basic linux system runing on my board then still I've any need o=
-f bitbaiking=20
-console-iamge?
-if not then what procedure I should adopt for porting  ossie.
-can bitbaking only ossie related files will work or any other way?
-
-
-saleh
-
-
-On 01/14/2010 09:46 AM=2C saleh usman wrote:
->
-> What console-image actually does.There is a little information about it i=
-n openembedded manual.
-
-Read the bb file. Basically=2C it is an image that provides a basic linux=20
-system with most of the familiar command line utilities.
-
-Philip
-
-> Saleh
->   		 	 		 	   		 =20
-_________________________________________________________________
-Windows Live Hotmail: Your friends can get your Facebook updates=2C right f=
-rom Hotmail=AE.
-http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/so=
-cial-network-basics.aspx?ocid=3DPID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_4:092=
-009=
 
