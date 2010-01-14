@@ -1,38 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NVRLq-0000pw-MQ for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jan 2010 16:11:13 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NVRJj-0001y1-31
+	(envelope-from <holger+oe@freyther.de>) id 1NVRNc-0000x5-Jy
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jan 2010 16:08:59 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jan 2010 16:08:59 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Thu, 14 Jan 2010 16:13:03 +0100
+Received: from tamarin.localnet (host-88-217-163-202.customer.m-online.net
+	[88.217.163.202])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 7DD841B10C02
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jan 2010 16:08:59 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 14 Jan 2010 15:08:56 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 14 Jan 2010 16:08:36 +0100
-Message-ID: <hinc1j$ess$1@ger.gmane.org>
-References: <hihuv8$b6u$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100112 Shredder/3.0.2pre
-In-Reply-To: <hihuv8$b6u$1@ger.gmane.org>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Thu, 14 Jan 2010 16:10:47 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <alpine.LFD.2.00.1001140946280.2804@localhost>
+In-Reply-To: <alpine.LFD.2.00.1001140946280.2804@localhost>
+MIME-Version: 1.0
+Message-Id: <201001141610.47415.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC][PATCH] Move udev cache creation after checkroot
+Subject: Re: OE/bitbake and python 3?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,41 +34,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jan 2010 15:11:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 14 Jan 2010 15:13:03 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thursday 14 January 2010 15:47:35 Robert P. J. Day wrote:
+>   as i'm currently playing with python 3 but also digging my way thru
+> bitbake, are there any obvious incompatibilities between bitbake/OE
+> and python 3?  i'm assuming there is absolutely no guarantee that
+> bitbake/OE will run under python 3.
 
-It received 2 Acks, no NAKs, works well in the field: it's applied now
-
-On 12-01-10 14:54, Koen Kooi wrote:
-> Hi,
-> 
-> What's your opinion on attached (untested) patch? If there's some
-> consensus that this is a step in the right direction I'll create a
-> working & tested patch to commit.
-> 
-> Nota bene: I'm not going to discuss the merits of udev caching, only the
-> impact of this patch to the current situation.
-> 
-> regards,
-> 
-> Koen
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLTzN0MkyGM64RGpERAj0SAJ9zMcapZJRhN5WqngZ5Xqse9q+jJwCeMTR8
-UUtNtGO21HZL99oyBYKQ8ug=
-=LmQG
------END PGP SIGNATURE-----
+I think we are using print >> file, STRING in a couple of places. What would be 
+interesting is to use the Python3 converter and to look at the diff of what was
+changed...
 
 
 
