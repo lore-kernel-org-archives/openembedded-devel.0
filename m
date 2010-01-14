@@ -1,43 +1,23 @@
-Received: from mail-qy0-f176.google.com ([209.85.221.176])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NVQ9C-0005rX-Pe
+	(envelope-from <philip@balister.org>) id 1NVQAM-0000oE-Op
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jan 2010 14:54:06 +0100
-Received: by qyk6 with SMTP id 6so11571658qyk.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jan 2010 05:51:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:to:subject
-	:references:date:mime-version:content-transfer-encoding:from
-	:organization:message-id:in-reply-to:user-agent;
-	bh=HUKCFhFz9yJVOkC72DZANBy8lGPng+419Ft+DUt5wZw=;
-	b=GI8OFJENytVyYWkp4sI7lPh94PTb2T9uA/KlyoGkRznT5fP2crPDyaECZbaTB+g3PF
-	mhrNCIQe6pwIfodP8PlvuIKxjg8xPMNcjVkIpMsBpBe+T1f3wYtuK9kcvxl4NUO9sF2L
-	5wRnQVKjACnj20bMMLuE3s7/AcXAMtONYXQmM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:to:subject:references:date:mime-version
-	:content-transfer-encoding:from:organization:message-id:in-reply-to
-	:user-agent;
-	b=ZBUSbb5yBY63cjqLmPZE6A1wXJnmErcviETk6j+EUmcM/myNQlg1i1wjNMywlQXYWR
-	nn59KoTrV1l56Sd6biGn/DLVd0o9dvD8tYCe1p5qXPQt1SeUhiSNPHuhkhu/4W4DUM4V
-	XIEEhm1MRuCOHyIsVQj5sqiTMLz6tAfdPW7II=
-Received: by 10.229.102.165 with SMTP id g37mr485410qco.65.1263477111345;
-	Thu, 14 Jan 2010 05:51:51 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.162.69.75])
-	by mx.google.com with ESMTPS id 4sm147893ywi.54.2010.01.14.05.51.46
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 14 Jan 2010 05:51:50 -0800 (PST)
+	Thu, 14 Jan 2010 14:55:18 +0100
+Received: (qmail 20747 invoked by uid 1003); 14 Jan 2010 13:53:02 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 14 Jan 2010 13:53:02 -0000
+Message-ID: <4B4F21BD.9080901@balister.org>
+Date: Thu, 14 Jan 2010 08:53:01 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1263421337.3575.3.camel@dax.rpnet.com>
-Date: Thu, 14 Jan 2010 21:51:38 +0800
-MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Organization: Gulessoft, Inc
-Message-ID: <op.u6izgcdsmn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <1263421337.3575.3.camel@dax.rpnet.com>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.221.176
-X-SA-Exim-Mail-From: camelguo@gmail.com
+	<ac9c93b11001140102j36e07ca9u7cb9ddc5a9770cd4@mail.gmail.com>
+In-Reply-To: <ac9c93b11001140102j36e07ca9u7cb9ddc5a9770cd4@mail.gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: TSC Meeting 7/1/2010
@@ -54,43 +34,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jan 2010 13:54:08 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Thu, 14 Jan 2010 13:55:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-=E5=9C=A8 Thu, 14 Jan 2010 06:22:17 +0800=EF=BC=8CRichard Purdie <rpurdi=
-e@rpsys.net>  =
+On 01/14/2010 04:02 AM, Frans Meulenbroeks wrote:
 
-=E5=86=99=E9=81=93:
+>> Commit messages were mentioned. It should be clear from reading the
+>> commit message what the change applies to and why its necessary. The TSC
+>> will start naming and shaming people making lousy commit messages and
+>> reserve the right to impose sanctions against repeat offenders.
+>
+> I agree that we want good commit messages.
+>
+> Some remarks though:
+>
+> Before publicly naming and shaming people, I would suggest discussing
+> it with the offender in private email or on irc.
+> Naming and shaming might drive people away from oe.
+>
+> I suggest that when someone gets commit rights (s)he is explicity
+> reminded of http://wiki.openembedded.net/index.php/Commit_Policy and
+> http://wiki.openembedded.net/index.php/Commit_log_example
+>
+> I suggest to review the rules;. E.g. this one:
+> # This should all be on one line and you should leave an empty line
+> before any detailed commit information.
+> Nice, but if you use git commit and enter your message empty lines are removed.
+>
+> Also i suggest an additional rule that commit messages should be polite.
+> E.g. no snide remarks on someone who made an earlier patch or on the
+> source package or on the code itself.
 
-> The QA issues are not something the TSC can really "rule" on. Yes
-> testing is good but we have no hardware or human resources we can assi=
-gn
-> to this. Where a regression is identified as being from a particular
-> commit, it is expected the regression should be fixed though.
+The commit messages problem has been an on going issue. For some reason, 
+there seems to be a never ending series of commits with not very good 
+messages.
 
-The first goal of QA could be making sure that every (machine, distro,  =
+People, when you are working with new contributors, encourage them to 
+start out using good commit messages so the the problems Frans is 
+describing do not crop up.
 
-libc) combinations with default configuration will be built smoothly. In=
-  =
+Project specific branches should also strive to follow the commit 
+message form so that changes can easily be merged into the main OE repo.
 
-fact, I am trying to test them.
-
-To achieve this goal, we don't need lots of human resources but several =
- =
-
-computers. We can develop a automation test Mechanism just like auttest =
- =
-
-using by linux kernel developing.
-
-Thanks a lot!
-
--- =
-
-Guo Hongruan, Embedded Linux Consultant
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
+Philip
 
 
