@@ -1,38 +1,46 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f212.google.com ([209.85.220.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NVUTN-0005IA-Sr for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jan 2010 19:31:13 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NVUR6-0006Dv-Nv
+	(envelope-from <raj.khem@gmail.com>) id 1NVVmr-00059X-GW
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jan 2010 19:28:48 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jan 2010 19:28:48 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Thu, 14 Jan 2010 20:55:24 +0100
+Received: by fxm4 with SMTP id 4so21366117fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jan 2010 19:28:48 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 14 Jan 2010 11:53:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=A9rWgk4sGEB4mQ1T3MqO1lnr9RPzQvtzXrzfJiVw1lk=;
+	b=wJNZnVGQfy4c5Cl/oMCyf9Mp3bza3GXjc1lXm5xxmYEXnRH5J/jmzp4auxca4AdY03
+	ipKM2W6KFbOG08esdn4SOgVftvYZ38tjsSk+8E9tnPKrMvGocIfh0+qOldo+9bFtK7FR
+	UzDhOxyKl3A1MhY6aSgqUDDo+g2Xq5SZvekQQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=DVF4+JZwCWEa3o70TBruewylg/LtsPnKypcPUlVxOP2lX1GKpm97azdSok+vau5sSa
+	/mURT7D0TI/Nd7LedtJqj7pHM+87gEzyjkvjsKm/dpTA9UIjlzMF/vQSCBsJIQO/zhDn
+	cpIJl+B51hgd1WiME2raOD98YQFzkeNSVg+ko=
+Received: by 10.223.75.136 with SMTP id y8mr1556951faj.69.1263498789692;
+	Thu, 14 Jan 2010 11:53:09 -0800 (PST)
+Received: from gmail.com ([72.14.240.164])
+	by mx.google.com with ESMTPS id 21sm1350114fks.37.2010.01.14.11.53.07
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 14 Jan 2010 11:53:08 -0800 (PST)
+Date: Thu, 14 Jan 2010 11:53:01 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 14 Jan 2010 19:27:55 +0100
-Message-ID: <hinnna$sc1$1@ger.gmane.org>
-References: <alpine.LFD.2.00.1001140943220.2609@localhost>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100112 Shredder/3.0.2pre
-In-Reply-To: <alpine.LFD.2.00.1001140943220.2609@localhost>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100114195301.GA3529@gmail.com>
+References: <> <1263455739-13595-1-git-send-email-camelguo@gmail.com>
+	<201001141014.53764.marcin@juszkiewicz.com.pl>
+	<op.u6imubdtmn1qzu@guohr-laptop-ubuntu>
+MIME-Version: 1.0
+In-Reply-To: <op.u6imubdtmn1qzu@guohr-laptop-ubuntu>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.212
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: current state of OE dev branch?
+Subject: Re: [PATCH] Support building all project in one directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,35 +54,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jan 2010 18:31:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 14 Jan 2010 19:55:24 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On (14/01/10 17:19), Guo Hongruan wrote:
+> After changing this way, the native tools can be shared with
+> different buildings.
 
-On 14-01-10 15:45, Robert P. J. Day wrote:
-> 
->   later today, i'll take another shot at building the BB-demo-image.
-> based on whatever gets "git pull"ed at the time, is there any
-> still-known breakage?  in my case, for f12 since i know full well that
-> other distros sometimes have no problem.
-> 
->   before i try to build, i'll clean e2fsprogs, mplayer and ffmpeg,
-> which were the packages causing so much grief lately.  thanks.
+They get shared even now. I have my TMPDIR = /scratch/oe/build and
+DEPLOY_DIR = ${TMPDIR}/deploy/${LIBC}
 
-I'll push a patch for the mplayer addrinfo stuff later today.
+I share the native tools all the time
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLT2IrMkyGM64RGpERAiA6AJwK6Up4smr4U6JNg844q9lo1LEJagCfR/Nk
-mFipSNvFjbcpbI4hYQnYVlE=
-=J2G0
------END PGP SIGNATURE-----
-
+-Khem
 
 
