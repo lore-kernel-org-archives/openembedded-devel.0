@@ -1,24 +1,44 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from qw-out-1920.google.com ([74.125.92.145])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NVLpJ-0007n8-TC
+	(envelope-from <camelguo@gmail.com>) id 1NVLtf-0007I5-3f
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jan 2010 10:17:17 +0100
-Received: (qmail 2040 invoked by uid 813007); 14 Jan 2010 09:15:04 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 14 Jan 2010 09:15:04 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	Thu, 14 Jan 2010 10:21:46 +0100
+Received: by qw-out-1920.google.com with SMTP id 14so629789qwa.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Jan 2010 01:19:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:content-type:to:subject
+	:references:date:mime-version:content-transfer-encoding:from
+	:organization:message-id:in-reply-to:user-agent;
+	bh=Iqnhmmu+RFMnfjrWzTZzfKFvPy7My7i0KjwNqWrfCNs=;
+	b=wU3WlPjUJ7UuvZdsO9r7SfJrakw5MsZWDsHk0yLuVsU5x7B7DB6riD4HotRPJuKpwp
+	tHSZXEBX4yYb1+KYs5WWCmTFUgbNPydY3s1WbMpDos/eA7WeuFCviueMH8iG/1d9wc6A
+	lPRI/+GrTXV35j38h+oRp+L4JupiKEpFFhAD0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=content-type:to:subject:references:date:mime-version
+	:content-transfer-encoding:from:organization:message-id:in-reply-to
+	:user-agent;
+	b=JyoFemZ78srSdX48l2sp5QU6nG1pk6mT5N7vf59ZcbpLmusHc5K0x0MMpa8Y5Inbs3
+	ArFoj3KIzSTJV/JJAWFDAS/onYV5fPdTW84VAVCJBKbIE1yJjLxA89nEglNYa5V4selL
+	ucIygzIt2aMZNj2dEi2Sev5xYZG+Sng43XHTM=
+Received: by 10.220.47.214 with SMTP id o22mr377118vcf.54.1263460773370;
+	Thu, 14 Jan 2010 01:19:33 -0800 (PST)
+Received: from guohr-laptop-ubuntu ([123.162.69.75])
+	by mx.google.com with ESMTPS id 7sm72236ywf.55.2010.01.14.01.19.30
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 14 Jan 2010 01:19:32 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Jan 2010 10:14:53 +0100
-User-Agent: KMail/1.12.4 (Linux/2.6.33-rc2-00268-g45d28b0; KDE/4.3.4; x86_64; ;
-	)
 References: <> <1263455739-13595-1-git-send-email-camelguo@gmail.com>
-In-Reply-To: <1263455739-13595-1-git-send-email-camelguo@gmail.com>
+	<201001141014.53764.marcin@juszkiewicz.com.pl>
+Date: Thu, 14 Jan 2010 17:19:22 +0800
 MIME-Version: 1.0
-Message-Id: <201001141014.53764.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u6imubdtmn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <201001141014.53764.marcin@juszkiewicz.com.pl>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 74.125.92.145
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [PATCH] Support building all project in one directory
@@ -35,28 +55,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jan 2010 09:17:17 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 14 Jan 2010 09:21:46 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: Quoted-Printable
 
-Dnia czwartek, 14 stycznia 2010 o 08:55:39 Guo Hongruan napisa=C5=82(a):
-> * Append ${LIBC} to CACHE, STAMP, WORKDIR, STAGING_DIR and CROSS_DIR
->  defination, so that package building with different libc will not bother
->  each other.
+After changing this way, the native tools can be shared with different  =
 
-How does it differ from TMPDIR =3D "tmp/${LIBC}/" setting in local.conf? En=
-d=20
-result is the same and you do not force all developers to restart their bui=
-lds=20
-from scratch.
+buildings.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+=E5=9C=A8 Thu, 14 Jan 2010 17:14:53 +0800=EF=BC=8CMarcin Juszkiewicz  =
+
+<marcin@juszkiewicz.com.pl> =E5=86=99=E9=81=93:
+
+> Dnia czwartek, 14 stycznia 2010 o 08:55:39 Guo Hongruan napisa=C5=82(a=
+):
+>> * Append ${LIBC} to CACHE, STAMP, WORKDIR, STAGING_DIR and CROSS_DIR
+>>  defination, so that package building with different libc will not  =
+
+>> bother
+>>  each other.
+>
+> How does it differ from TMPDIR =3D "tmp/${LIBC}/" setting in local.con=
+f?  =
+
+> End
+> result is the same and you do not force all developers to restart thei=
+r  =
+
+> builds
+> from scratch.
+>
+> Regards,
 
 
+-- =
+
+Guo Hongruan, Embedded Linux Consultant
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
 
