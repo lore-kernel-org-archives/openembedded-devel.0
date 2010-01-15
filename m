@@ -1,28 +1,38 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from mail-iw0-f202.google.com ([209.85.223.202])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NVfn4-0003Gq-Eh
+	(envelope-from <raj.khem@gmail.com>) id 1NVg1a-0003NS-Ui
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jan 2010 07:36:17 +0100
-Received: (qmail 17721 invoked by uid 813007); 15 Jan 2010 06:34:04 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 15 Jan 2010 06:34:04 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Jan 2010 07:33:59 +0100
-User-Agent: KMail/1.12.4 (Linux/2.6.33-rc2-00268-g45d28b0; KDE/4.3.4; x86_64; ;
-	)
-References: <> <20100114195301.GA3529@gmail.com>
-	<op.u6jv0uycmn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <op.u6jv0uycmn1qzu@guohr-laptop-ubuntu>
+	Fri, 15 Jan 2010 07:51:18 +0100
+Received: by iwn40 with SMTP id 40so351174iwn.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Jan 2010 22:49:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=Aocc/Jm60hM8C3x2GfQpKFDZ4CqJoNu+MTctXdadAo8=;
+	b=qN4oey0PFpl0uOB3SZTfbzfrAW9vKhPBnJsO/2SgWQPHFqnMH9HZMPQTnYve2nq8Sn
+	OXMFKzL/8ZHS7absA/zlM9DRKpir2+dJuaJtbDj3TA+qvZ99Z9bYyZWnOm52paAIXotX
+	9DyhTRI5F674MR03Z5OUBtPDggbD71TSwoyVw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=gqOnTQPV0/vbS/Poxz2602BetGQGWFEwTfb3mmqbmf53g835G6ddywthlxjwCqqzVb
+	8mql4daul4jp3yEmlnUyAae7KDCvV80+OnL66+3s29auFwd6LUI9ueU4F5IiaSToYypp
+	1THYCqVvF8buf9ryiGYqR7731rQCYyrUsV+Uk=
 MIME-Version: 1.0
-Message-Id: <201001150733.59792.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Received: by 10.231.147.210 with SMTP id m18mr1944628ibv.48.1263538142149; 
+	Thu, 14 Jan 2010 22:49:02 -0800 (PST)
+In-Reply-To: <1263507455.3757.37.camel@gnutoo-desktop>
+References: <1263507455.3757.37.camel@gnutoo-desktop>
+Date: Thu, 14 Jan 2010 22:49:02 -0800
+Message-ID: <19c1b8a91001142249r1301da16h6abc63071ce9acc4@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.223.202
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Support building all project in one directory
+Subject: Re: illume-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,43 +46,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jan 2010 06:36:17 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 15 Jan 2010 06:51:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Dnia pi=C4=85tek, 15 stycznia 2010 o 02:35:13 Guo Hongruan napisa=C5=82(a):
-> =E5=9C=A8 Fri, 15 Jan 2010 03:53:01 +0800=EF=BC=8CKhem Raj <raj.khem@gmai=
-l.com> =E5=86=99=E9=81=93:
-> > On (14/01/10 17:19), Guo Hongruan wrote:
-> >> After changing this way, the native tools can be shared with
-> >> different buildings.
-> >
-> > They get shared even now. I have my TMPDIR =3D /scratch/oe/build and
-> > DEPLOY_DIR =3D ${TMPDIR}/deploy/${LIBC}
-> >
-> > I share the native tools all the time
-=20
-> This way, the packages built in ${TMPDIR}/work/ will bother each other. It
-> is obvious that a binary package built based on uclibc is different with
-> the same one built base on glibc. So I think it's better to classify them
-> using ${LIBC}.
+On Thu, Jan 14, 2010 at 2:17 PM, GNUtoo <GNUtoo@no-log.org> wrote:
+> hi,
+> every time I build the illume image I've the following failures:
+>
+>
+> First failure:
+> --------------
+> The first failure is about libefso and its deps,it has missing includes
+> and so it fails,long time ago I tried to fix it but at a point I
+> abandonned,so is it ok to remove the following from illume-image:
 
-As long as you do build for uclibc and glibc/eglibc in one TMPDIR they are=
-=20
-fine due to different TARGET_SYS. Problem starts when you want to share gli=
-bc=20
-and eglibc builds as they use same TARGET_SYS. And thats when you need=20
-something to separate TMPDIR. But as I wrote before you can alter name of=20
-directories in your local.conf without changing them for rest of our users.
+Remove or not its up to you. But the failure can be fixed easily of you just add
+#include <stdio.h>
 
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+to efso-dict-helper.c
 
 
