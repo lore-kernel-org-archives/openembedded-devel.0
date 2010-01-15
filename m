@@ -1,25 +1,28 @@
-Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1NVbOh-0003n4-Du
+Received: from smtpauth13.prod.mesa1.secureserver.net ([64.202.165.37])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1NVdIL-0002ZQ-Ru
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jan 2010 02:54:50 +0100
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 87D851660566; Thu, 14 Jan 2010 18:52:36 -0700 (MST)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 430E7166055E;
-	Thu, 14 Jan 2010 18:52:35 -0700 (MST)
-Message-ID: <4B4FCA62.4020909@mlbassoc.com>
-Date: Thu, 14 Jan 2010 18:52:34 -0700
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.3a1pre) Gecko/20091228 Shredder/3.1a1pre
+	Fri, 15 Jan 2010 04:56:25 +0100
+Received: (qmail 5120 invoked from network); 15 Jan 2010 03:47:29 -0000
+Received: from unknown (209.242.7.187)
+	by smtpauth13.prod.mesa1.secureserver.net (64.202.165.37) with ESMTP;
+	15 Jan 2010 03:47:28 -0000
+Message-ID: <4B4FE54D.3070402@mwester.net>
+Date: Thu, 14 Jan 2010 21:47:25 -0600
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23 Mnenhy/0.7.6.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 76.76.67.137
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+References: <>
+	<1263455739-13595-1-git-send-email-camelguo@gmail.com>	<201001141014.53764.marcin@juszkiewicz.com.pl>	<op.u6imubdtmn1qzu@guohr-laptop-ubuntu>	<20100114195301.GA3529@gmail.com>
+	<op.u6jv0uycmn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <op.u6jv0uycmn1qzu@guohr-laptop-ubuntu>
+X-SA-Exim-Connect-IP: 64.202.165.37
+X-SA-Exim-Mail-From: mike@mwester.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: FireFox font problem
+Subject: Re: [PATCH] Support building all project in one directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,23 +36,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jan 2010 01:54:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 15 Jan 2010 03:56:25 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-I'm running the latest (development) BeagleBoard image.  I can't
-seem to get FireFox to render fonts correctly.  If you visit this
-page http://www.w3schools.com/css/css_font.asp, it shows the
-various font families, etc.  However, when I run it on the
-BeagleBoard, all I get is the default font, whatever that may
-be.
+Guo Hongruan wrote:
+> After applying my patch, all everything built based on uclibc will be
+> placed in some directories different with glibc,eglibc. The stamps will
+> be placed in ${TMPDIR}/stamps/${LIBC}, the package data will be placed
+> in ${TMPDIR}/pkgdata/${LIBC} and so on. So you can see, when I tried to
+> build lots of projects (with different libc), their data will never
+> bother each other. In you way, we must select different TMPDIR for
+> different libc, that are very convenient for incremental building by QA.
 
-Any ideas?
+But most -- in fact all except perhaps yourself and a few of the OE core
+team don't build with different LIBCs in the same TMPDIR.  So all that
+your patch does for the overwhelming number of users of OE is add
+additional directory levels to an already complicated directory
+structure, and provides them with absolutely no benefit whatsoever.
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+At the very least, you really should provide a means to selectively
+enable this -- although I still don't see why it makes sense to support
+multiple LIBCs in the same TMPDIR.
+
+-Mike (mwester)
 
 
