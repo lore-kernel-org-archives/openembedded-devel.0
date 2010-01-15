@@ -1,27 +1,42 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from mail-pz0-f192.google.com ([209.85.222.192])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1NVkXF-0000Ip-Tx
+	(envelope-from <camelguo@gmail.com>) id 1NVlRz-0004iq-B2
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jan 2010 12:40:16 +0100
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id CF4421D36079; Fri, 15 Jan 2010 12:38:01 +0100 (CET)
-Date: Fri, 15 Jan 2010 12:38:01 +0100
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100115113801.GA18793@ibawizard.net>
-References: <1263504944-19914-1-git-send-email-christian.rueb@gmx.net>
-	<201001150930.06815.christian.rueb@gmx.net>
-	<hipb02$a6m$1@ger.gmane.org>
-	<201001151203.38856.christian.rueb@gmx.net>
+	Fri, 15 Jan 2010 13:38:54 +0100
+Received: by pzk30 with SMTP id 30so552921pzk.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Jan 2010 04:36:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:content-type:subject:date:to
+	:mime-version:content-transfer-encoding:from:organization:message-id
+	:user-agent; bh=OJXPU8GMCTZjxd8hb5iBCBaYTBrMrdZzvy42gJ4BSkU=;
+	b=XxagUVnOhBKdToscz6Og2kibCGia/FUtvEmO4p2jarIcud/aEaHewgc9AZUvfBgI9r
+	09qVjr32nFdSfu3ahG1pZZYUcSUbqXSSrM3gfjfYBtDLhZ1wdb6q/x9JQ7sctaZ2ggwT
+	a0YdtqSrx3L72NPsqwwP9eOH/vzBGe5mTL3R4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=content-type:subject:date:to:mime-version:content-transfer-encoding
+	:from:organization:message-id:user-agent;
+	b=NrxKJkFoOGdUS5f/eMrOwiHfZv9nP2qPefi+zJUoqH4F76bTPVKHj+D9DEqN8C5qiC
+	ooWuTAav2p8OQMu4PY+T0tEfaengWfafeAHmETEsGdBMv75UVe0HXdt6RQg69nGCHA0O
+	PF5jmXynFdQWWj2KRYtSALhL5HZj28r5wJJlI=
+Received: by 10.142.61.19 with SMTP id j19mr1605964wfa.184.1263558994658;
+	Fri, 15 Jan 2010 04:36:34 -0800 (PST)
+Received: from guohr-laptop-ubuntu ([123.54.101.24])
+	by mx.google.com with ESMTPS id 20sm1378492pzk.9.2010.01.15.04.36.31
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 15 Jan 2010 04:36:34 -0800 (PST)
+Date: Fri, 15 Jan 2010 20:36:22 +0800
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
-In-Reply-To: <201001151203.38856.christian.rueb@gmx.net>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u6kqmwfcmn1qzu@guohr-laptop-ubuntu>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.222.192
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] wpa-gui: add version 0.6.9 (Qt4 based)
+Subject: what rwwork_stampfixing_eventhandler is used for?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,29 +50,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jan 2010 11:40:17 -0000
-Content-Type: text/plain; charset=iso-8859-2
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 15 Jan 2010 12:38:54 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: 7bit
 
-Christian R=FCb <christian.rueb@gmx.net> [2010-01-15 12:03:38]:
+Hi guys,
+   I can not figure out what what rwwork_stampfixing_eventhandler is used  
+for. But I think it does something unreasonable. I built an OE project and  
+all files in openembedded directory have not changed at all, the next  
+building should do nothing but report:
+NOTE: Tasks Summary: Attempted 65 tasks of which 65 didn't need to be  
+rerun and 0 failed.
+and exit. But the fact is that the rwwork_stampsfixing_eventhandler  
+removes some stamps files and force lots of packages to rebuild even  
+though nothing changed at all.
 
-> > > On Friday, 15. January 2010 09:22:28 Koen Kooi wrote:
-> > Apart from it not being in git-format-patch format, yes.
->=20
-> Actually I used git format-patch (with option -p to not generate stats =
-- do
-> you want stats) to create the patch...
+    After I applied the following patch, the behavior is what I expected.  
+Who can give some information about this handler?
 
-But I think, that Koen meant it isn't in format he can push. Would be goo=
-d to
-read [1], [2] and search throught mailing list archives for other patches=
- as
-example. And it's missing Signed-off line.
+Thanks a lot!
 
--- ynezz
 
-1. http://wiki.openembedded.net/index.php/GitPhraseBook#Commit_Message
-2. http://wiki.openembedded.org/index.php/Commit_Policy
+diff --git a/classes/rm_work.bbclass b/classes/rm_work.bbclass
+index a53d12b..1335395 100644
+--- a/classes/rm_work.bbclass
++++ b/classes/rm_work.bbclass
+@@ -32,19 +32,3 @@ do_rm_work_all () {
+  do_rm_work_all[recrdeptask] = "do_rm_work"
+  addtask rm_work_all after do_rm_work
+
+-
+-addhandler rmwork_stampfixing_eventhandler
+-python rmwork_stampfixing_eventhandler() {
+-    if bb.event.getName(e) == "StampUpdate":
+-        for (fn, task) in e.targets:
+-            if task == 'rm_work_all':
+-                continue
+-            stamp = "%s.do_rm_work" % e.stampPrefix[fn]
+-            if os.path.exists(stamp):
+-                dir = "%s.*" % e.stampPrefix[fn]
+-                bb.note("Removing stamps: " + dir)
+-                os.system('rm -f '+ dir)
+-
+-    return NotHandled
+-}
+-
+
+
+-- 
+Guo Hongruan, Embedded Linux Consultant
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
 
