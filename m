@@ -1,22 +1,32 @@
-Received: from gateway-2929.mvista.com ([206.112.117.47])
+Received: from mail.gmx.net ([213.165.64.20])
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <clarson@mvista.com>) id 1NVqZ2-00013a-Re
+	(envelope-from <christian.rueb@gmx.net>) id 1NVqaZ-0001AT-8s
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jan 2010 19:06:42 +0100
-Received: from localhost.localdomain (foul.az.mvista.com [10.50.1.75])
-	by hermes.mvista.com (Postfix) with ESMTP id D944E1DBA0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jan 2010 09:45:24 -0800 (PST)
-From: Chris Larson <clarson@mvista.com>
+	Fri, 15 Jan 2010 19:08:06 +0100
+Received: (qmail invoked by alias); 15 Jan 2010 18:05:50 -0000
+Received: from p5B0ABEC8.dip.t-dialin.net (EHLO crmobile01.localnet)
+	[91.10.190.200]
+	by mail.gmx.net (mp008) with SMTP; 15 Jan 2010 19:05:50 +0100
+X-Authenticated: #19296456
+X-Provags-ID: V01U2FsdGVkX1+6noIf9Q66WpU+LSSd3upsJ1aj+xAjaZQKuGYnzz
+	wsm/lv7VvVzoYj
+From: Christian =?iso-8859-2?q?R=FCb?= <christian.rueb@gmx.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Jan 2010 10:36:58 -0700
-Message-Id: <1263577018-9627-1-git-send-email-clarson@mvista.com>
-X-Mailer: git-send-email 1.6.4.339.g527d
-X-SA-Exim-Connect-IP: 206.112.117.47
-X-SA-Exim-Mail-From: clarson@mvista.com
+Date: Fri, 15 Jan 2010 19:05:44 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.32-trunk-686; KDE/4.3.4; i686; ; )
+References: <1263504944-19914-1-git-send-email-christian.rueb@gmx.net>
+	<201001151203.38856.christian.rueb@gmx.net>
+	<20100115113801.GA18793@ibawizard.net>
+In-Reply-To: <20100115113801.GA18793@ibawizard.net>
+MIME-Version: 1.0
+Message-Id: <201001151905.44889.christian.rueb@gmx.net>
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.64000000000000001
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: christian.rueb@gmx.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] base.bbclass: in base_contains, check for var existance before using it
+Subject: Re: [PATCH] wpa-gui: add version 0.6.9 (Qt4 based)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -30,48 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jan 2010 18:06:42 -0000
+X-List-Received-Date: Fri, 15 Jan 2010 18:08:06 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 
-From: Brian Pomerantz <bapper@mvista.com>
+Am Friday, 15. January 2010 schrieb Petr =A9tetiar:
+> Christian R=FCb <christian.rueb@gmx.net> [2010-01-15 12:03:38]:
+>=20
+> > > > On Friday, 15. January 2010 09:22:28 Koen Kooi wrote:
+> > > Apart from it not being in git-format-patch format, yes.
+> >=20
+> > Actually I used git format-patch (with option -p to not generate stats =
+=2D do
+> > you want stats) to create the patch...
+>=20
+> But I think, that Koen meant it isn't in format he can push. Would be goo=
+d to
+> read [1], [2] and search throught mailing list archives for other patches=
+ as
+> example. And it's missing Signed-off line.
+>=20
+> -- ynezz
+>=20
+> 1. http://wiki.openembedded.net/index.php/GitPhraseBook#Commit_Message
+> 2. http://wiki.openembedded.org/index.php/Commit_Policy
 
-When using base_contains() to check for a string in a variable for a,
-if the variable is not defined an exception occurs.  By checking the
-existance of the variable and returning false if it isn't there,
-a value can be checked for a variable regardless of whether or not it
-is defined.
+Thanks for this. I will prepare a better commit message for the patch. I ha=
+ve already made a new one with git format-patch.
+I cleaned the tree afterwards and tried to apply my patch, it does work but=
+ complains about many whitespace errors, also a build afterwards worked.
+The whitespace errors come from the patches within the patch. Is this OK, o=
+r shall/can I do anything about this before submitting?
 
-Signed-off-by: Brian Pomerantz <bapper@mvista.com>
-Signed-off-by: Chris Larson <clarson@mvista.com>
----
- classes/base.bbclass |    7 +++++--
- 1 files changed, 5 insertions(+), 2 deletions(-)
-
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index 384a67d..f67773a 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -226,14 +226,17 @@ def base_version_less_or_equal(variable, checkvalue, truevalue, falsevalue, d):
-         return falsevalue
- 
- def base_contains(variable, checkvalues, truevalue, falsevalue, d):
-+	val = bb.data.getVar(variable,d,1)
-+	if not val:
-+		return falsevalue
- 	matches = 0
- 	if type(checkvalues).__name__ == "str":
- 		checkvalues = [checkvalues]
- 	for value in checkvalues:
--		if bb.data.getVar(variable,d,1).find(value) != -1:	
-+		if val.find(value) != -1:
- 			matches = matches + 1
- 	if matches == len(checkvalues):
--		return truevalue		
-+		return truevalue
- 	return falsevalue
- 
- def base_both_contain(variable1, variable2, checkvalue, d):
--- 
-1.6.4.339.g527d
-
+Cheers,
+ Christian
 
 
