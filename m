@@ -1,49 +1,30 @@
-Received: from mail-gx0-f215.google.com ([209.85.217.215])
+Received: from vms173015pub.verizon.net ([206.46.173.15])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NVb80-0003PB-Dy
+	(envelope-from <denis@denix.org>) id 1NVbFC-0003Za-Au
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jan 2010 02:37:35 +0100
-Received: by gxk7 with SMTP id 7so158020gxk.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Jan 2010 17:35:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:to:subject
-	:references:date:mime-version:content-transfer-encoding:from
-	:organization:message-id:in-reply-to:user-agent;
-	bh=45c7vCQFD9atQOOaHkkNByCmCPKuVIHh4bwFc5XrEr0=;
-	b=GvDOwr5M0rhBjprb0m5twq1K97TqKApcHX0WOCYw5wBI+ddAjDBLdT1OwBHhcegE+q
-	iJZteIqgDzrEb3It5FTvbB63tOEH1gNebhywCMUYAZzB5gVjUnQjEEfQj6wcmll8bHab
-	hWn8wxN0sfxSgZodrMAVBBd+aZysRgYC68524=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:to:subject:references:date:mime-version
-	:content-transfer-encoding:from:organization:message-id:in-reply-to
-	:user-agent;
-	b=aW52sb5V7iTe0Y12PYEC3R0DVteg/pwCYHriQQNn1rQSCnfyc0NITrBDVPfcsFXTOL
-	eEBB1jEkA+MjzzN47Bj1/OTiCuyTZED14cKCMNMgSRnkwhUuSXSUyBp7ODIUTHKo81ZE
-	jPLVHPUGDfOi0eXKEGmSanJ4NfUqiKaLoN77M=
-Received: by 10.101.180.9 with SMTP id h9mr3100773anp.187.1263519320291;
-	Thu, 14 Jan 2010 17:35:20 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.162.69.75])
-	by mx.google.com with ESMTPS id 4sm478717ywd.29.2010.01.14.17.35.17
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 14 Jan 2010 17:35:19 -0800 (PST)
+	Fri, 15 Jan 2010 02:45:01 +0100
+Received: from gandalf.denix.org ([unknown] [71.255.235.232])
+	by vms173015.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0KW900B0IM2LRWA0@vms173015.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	14 Jan 2010 19:42:22 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 64D3714AF60; Thu,
+	14 Jan 2010 20:42:21 -0500 (EST)
+Date: Thu, 14 Jan 2010 20:42:21 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-References: <> <1263455739-13595-1-git-send-email-camelguo@gmail.com>
-	<201001141014.53764.marcin@juszkiewicz.com.pl>
-	<op.u6imubdtmn1qzu@guohr-laptop-ubuntu>
-	<20100114195301.GA3529@gmail.com>
-Date: Fri, 15 Jan 2010 09:35:13 +0800
-MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Organization: Gulessoft, Inc
-Message-ID: <op.u6jv0uycmn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <20100114195301.GA3529@gmail.com>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.217.215
-X-SA-Exim-Mail-From: camelguo@gmail.com
+Message-id: <20100115014221.GA9872@denix.org>
+References: <1263421337.3575.3.camel@dax.rpnet.com>
+	<ac9c93b11001140102j36e07ca9u7cb9ddc5a9770cd4@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <ac9c93b11001140102j36e07ca9u7cb9ddc5a9770cd4@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.15
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Support building all project in one directory
+Subject: Re: TSC Meeting 7/1/2010
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,75 +38,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jan 2010 01:37:35 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Fri, 15 Jan 2010 01:45:01 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-=E5=9C=A8 Fri, 15 Jan 2010 03:53:01 +0800=EF=BC=8CKhem Raj <raj.khem@gma=
-il.com> =E5=86=99=E9=81=93:
+On Thu, Jan 14, 2010 at 10:02:57AM +0100, Frans Meulenbroeks wrote:
+> I suggest to review the rules;. E.g. this one:
+> # This should all be on one line and you should leave an empty line
+> before any detailed commit information.
+> Nice, but if you use git commit and enter your message empty lines are removed.
 
-> On (14/01/10 17:19), Guo Hongruan wrote:
->> After changing this way, the native tools can be shared with
->> different buildings.
->
-> They get shared even now. I have my TMPDIR =3D /scratch/oe/build and
-> DEPLOY_DIR =3D ${TMPDIR}/deploy/${LIBC}
->
-> I share the native tools all the time
+Not really. "git format-patch" and "git am" use the empty line separation to 
+determine, what becomes patch subject and what is patch description in the 
+body. So, the above rule/requirement is very correct. More on the topic:
 
-This way, the packages built in ${TMPDIR}/work/ will bother each other. =
-It  =
+http://progit.org/book/ch5-2.html#commit_guidelines
 
-is obvious that a binary package built based on uclibc is different with=
-  =
-
-the same one built base on glibc. So I think it's better to classify the=
-m  =
-
-using ${LIBC}.
-
-After applying my patch, all everything built based on uclibc will be  =
-
-placed in some directories different with glibc,eglibc. The stamps will =
-be  =
-
-placed in ${TMPDIR}/stamps/${LIBC}, the package data will be placed in  =
-
-${TMPDIR}/pkgdata/${LIBC} and so on. So you can see, when I tried to bui=
-ld  =
-
-lots of projects (with different libc), their data will never bother eac=
-h  =
-
-other. In you way, we must select different TMPDIR for different libc,  =
-
-that are very convenient for incremental building by QA.
-
-And more, the native tools (quilt-native, qemu-native) are completely li=
-bc  =
-
-independent, so they could be shared with projects with different libc. =
- =
-
-After applying the patch, native tools are shared. It will save my  =
-
-building machine lots of time on building native tools.
-
->
-> -Khem
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
-
-
-
--- =
-
-Guo Hongruan, Embedded Linux Consultant
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
+-- 
+Denys
 
 
