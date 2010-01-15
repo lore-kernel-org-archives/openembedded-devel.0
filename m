@@ -1,36 +1,27 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NVk5I-0001sX-2g
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1NVkXF-0000Ip-Tx
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jan 2010 12:11:23 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NVk3B-0006ca-1d for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jan 2010 06:09:09 -0500
-Date: Fri, 15 Jan 2010 06:08:25 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.1001150607250.13816@localhost>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Fri, 15 Jan 2010 12:40:16 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id CF4421D36079; Fri, 15 Jan 2010 12:38:01 +0100 (CET)
+Date: Fri, 15 Jan 2010 12:38:01 +0100
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100115113801.GA18793@ibawizard.net>
+References: <1263504944-19914-1-git-send-email-christian.rueb@gmx.net>
+	<201001150930.06815.christian.rueb@gmx.net>
+	<hipb02$a6m$1@ger.gmane.org>
+	<201001151203.38856.christian.rueb@gmx.net>
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+In-Reply-To: <201001151203.38856.christian.rueb@gmx.net>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: "gnome-games" build definitely broken in dev branch
+Subject: Re: [PATCH] wpa-gui: add version 0.6.9 (Qt4 based)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,27 +35,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jan 2010 11:11:23 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Fri, 15 Jan 2010 11:40:17 -0000
+Content-Type: text/plain; charset=iso-8859-2
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+Christian R=FCb <christian.rueb@gmx.net> [2010-01-15 12:03:38]:
 
-  i've posted the entirety of the log file here:
+> > > On Friday, 15. January 2010 09:22:28 Koen Kooi wrote:
+> > Apart from it not being in git-format-patch format, yes.
+>=20
+> Actually I used git format-patch (with option -p to not generate stats =
+- do
+> you want stats) to create the patch...
 
-http://pastebin.com/mcaa647b
+But I think, that Koen meant it isn't in format he can push. Would be goo=
+d to
+read [1], [2] and search throught mailing list archives for other patches=
+ as
+example. And it's missing Signed-off line.
 
-i guess i can look into how that tinderbox thing works for future bug
-submissions if that's the preferred way to do it.
+-- ynezz
 
-rday
---
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+1. http://wiki.openembedded.net/index.php/GitPhraseBook#Commit_Message
+2. http://wiki.openembedded.org/index.php/Commit_Policy
 
 
