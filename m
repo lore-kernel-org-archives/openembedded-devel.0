@@ -1,17 +1,33 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from mail-px0-f179.google.com ([209.85.216.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NVlrB-0007aB-M7
+	(envelope-from <camelguo@gmail.com>) id 1NVly2-0008Dp-Iy
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jan 2010 14:04:56 +0100
-Received: from 88-110-78-150.dynamic.dsl.as9105.com ([88.110.78.150]
-	helo=[192.168.2.155])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NVlp5-00063H-5v
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jan 2010 13:02:43 +0000
-From: Phil Blundell <philb@gnu.org>
+	Fri, 15 Jan 2010 14:12:01 +0100
+Received: by pxi9 with SMTP id 9so476700pxi.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Jan 2010 05:09:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:content-type:to:subject
+	:references:date:mime-version:content-transfer-encoding:from
+	:organization:message-id:in-reply-to:user-agent;
+	bh=5FpEKxGZB5G9lnXVYy8bHOBQK4kjCAjPVxbK+tvVfgc=;
+	b=lUmzNp4LUVxL2nx/rjAo+jx6/5M7Qo8YBZmPF6oOwC15MGckuwClvKvIcMMpVHzq+Q
+	7w1Ob+u9u1IgS5b5+BqQ9DiDIE2Vod702A+ffENxuez0YkXNuu68YsxLPSQ0/3MKzv6b
+	j31fBFgKymqszBclbcAX/IJdoAPrlZ95eulqU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=content-type:to:subject:references:date:mime-version
+	:content-transfer-encoding:from:organization:message-id:in-reply-to
+	:user-agent;
+	b=amVgzpnhUScpnHU+w7kHgzd4XhxEfN+Yrh7F8lGx23dUS/GmU0mVYJpkx3u3Kp6ZRM
+	cmJJyDmOHDq9SOhv579IjZO+msUFhLL12iYif+KsYWaHX28AUxrgDdJrsQE5FLJ2S6sn
+	7KkiXdNgRwkSQiY9j/MtPR/vO54q0U/Uo5sOo=
+Received: by 10.143.25.40 with SMTP id c40mr1543203wfj.265.1263560985712;
+	Fri, 15 Jan 2010 05:09:45 -0800 (PST)
+Received: from guohr-laptop-ubuntu ([123.54.101.24])
+	by mx.google.com with ESMTPS id 22sm1383580pzk.10.2010.01.15.05.09.42
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 15 Jan 2010 05:09:45 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <op.u6krmehqmn1qzu@guohr-laptop-ubuntu>
 References: <> <1263455739-13595-1-git-send-email-camelguo@gmail.com>
 	<201001141014.53764.marcin@juszkiewicz.com.pl>
 	<op.u6imubdtmn1qzu@guohr-laptop-ubuntu>
@@ -24,12 +40,16 @@ References: <> <1263455739-13595-1-git-send-email-camelguo@gmail.com>
 	<op.u6kl4xh4mn1qzu@guohr-laptop-ubuntu>
 	<1263559808.457.327.camel@lenovo.internal.reciva.com>
 	<op.u6krmehqmn1qzu@guohr-laptop-ubuntu>
-Date: Fri, 15 Jan 2010 13:02:39 +0000
-Message-ID: <1263560559.457.336.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+	<1263560559.457.336.camel@lenovo.internal.reciva.com>
+Date: Fri, 15 Jan 2010 21:09:35 +0800
+MIME-Version: 1.0
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u6kr59g7mn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <1263560559.457.336.camel@lenovo.internal.reciva.com>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.216.179
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [PATCH] Support building all project in one directory
@@ -46,25 +66,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jan 2010 13:04:56 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 15 Jan 2010 13:12:01 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: Quoted-Printable
 
-On Fri, 2010-01-15 at 20:57 +0800, Guo Hongruan wrote:
-> In theory, mixing mutiple DISTROs in one TMPDIR should be fine too, unless  
-> the package recipes use the DISTRO as OVERRIDE.
+=E5=9C=A8 Fri, 15 Jan 2010 21:02:39 +0800=EF=BC=8CPhil Blundell <philb@g=
+nu.org> =E5=86=99=E9=81=93:
 
-Several package recipes do indeed use the DISTRO as an override, but
-even if this were not the case it would still not be safe to mix
-multiple DISTROs in a single TMPDIR.  
+> On Fri, 2010-01-15 at 20:57 +0800, Guo Hongruan wrote:
+>> In theory, mixing mutiple DISTROs in one TMPDIR should be fine too,  =
 
-As I said before, the DISTRO configurations might be quite incompatible
-in any number of ways: for example, they might be using entirely
-different ABIs, or packaging systems, or binary formats, or package
-naming conventions, or filesystem layouts.
+>> unless
+>> the package recipes use the DISTRO as OVERRIDE.
+>
+> Several package recipes do indeed use the DISTRO as an override, but
+> even if this were not the case it would still not be safe to mix
+> multiple DISTROs in a single TMPDIR.
+>
+> As I said before, the DISTRO configurations might be quite incompatibl=
+e
+> in any number of ways: for example, they might be using entirely
+> different ABIs, or packaging systems, or binary formats, or package
+> naming conventions, or filesystem layouts.
 
-p.
+Yes, You are right, they are some questions we must consider before  =
+
+continue.
+
+>
+> p.
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
 
 
+
+-- =
+
+Guo Hongruan, Embedded Linux Consultant
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
 
