@@ -1,58 +1,33 @@
-Received: from mail-px0-f179.google.com ([209.85.216.179])
+Received: from smtp-out05a.alice.it ([85.33.3.5])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NVly2-0008Dp-Iy
+	(envelope-from <GNUtoo@no-log.org>) id 1NVm5W-000592-9q
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jan 2010 14:12:01 +0100
-Received: by pxi9 with SMTP id 9so476700pxi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jan 2010 05:09:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:to:subject
-	:references:date:mime-version:content-transfer-encoding:from
-	:organization:message-id:in-reply-to:user-agent;
-	bh=5FpEKxGZB5G9lnXVYy8bHOBQK4kjCAjPVxbK+tvVfgc=;
-	b=lUmzNp4LUVxL2nx/rjAo+jx6/5M7Qo8YBZmPF6oOwC15MGckuwClvKvIcMMpVHzq+Q
-	7w1Ob+u9u1IgS5b5+BqQ9DiDIE2Vod702A+ffENxuez0YkXNuu68YsxLPSQ0/3MKzv6b
-	j31fBFgKymqszBclbcAX/IJdoAPrlZ95eulqU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:to:subject:references:date:mime-version
-	:content-transfer-encoding:from:organization:message-id:in-reply-to
-	:user-agent;
-	b=amVgzpnhUScpnHU+w7kHgzd4XhxEfN+Yrh7F8lGx23dUS/GmU0mVYJpkx3u3Kp6ZRM
-	cmJJyDmOHDq9SOhv579IjZO+msUFhLL12iYif+KsYWaHX28AUxrgDdJrsQE5FLJ2S6sn
-	7KkiXdNgRwkSQiY9j/MtPR/vO54q0U/Uo5sOo=
-Received: by 10.143.25.40 with SMTP id c40mr1543203wfj.265.1263560985712;
-	Fri, 15 Jan 2010 05:09:45 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.54.101.24])
-	by mx.google.com with ESMTPS id 22sm1383580pzk.10.2010.01.15.05.09.42
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 15 Jan 2010 05:09:45 -0800 (PST)
+	Fri, 15 Jan 2010 14:19:45 +0100
+Received: from FBCMMO03.fbc.local ([192.168.68.197]) by smtp-OUT05A.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 15 Jan 2010 14:17:29 +0100
+Received: from FBCMCL01B04.fbc.local ([192.168.69.85]) by FBCMMO03.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 15 Jan 2010 14:17:28 +0100
+Received: from localhost.localdomain ([79.7.143.47]) by FBCMCL01B04.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 15 Jan 2010 14:17:28 +0100
+Date: Fri, 15 Jan 2010 13:17:29 +0000
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-References: <> <1263455739-13595-1-git-send-email-camelguo@gmail.com>
-	<201001141014.53764.marcin@juszkiewicz.com.pl>
-	<op.u6imubdtmn1qzu@guohr-laptop-ubuntu>
-	<20100114195301.GA3529@gmail.com>
-	<op.u6jv0uycmn1qzu@guohr-laptop-ubuntu> <4B4FE54D.3070402@mwester.net>
-	<op.u6kherjdmn1qzu@guohr-laptop-ubuntu>
-	<1263549399.457.313.camel@lenovo.internal.reciva.com>
-	<op.u6klcvzcmn1qzu@guohr-laptop-ubuntu>
-	<1263552396.457.318.camel@lenovo.internal.reciva.com>
-	<op.u6kl4xh4mn1qzu@guohr-laptop-ubuntu>
-	<1263559808.457.327.camel@lenovo.internal.reciva.com>
-	<op.u6krmehqmn1qzu@guohr-laptop-ubuntu>
-	<1263560559.457.336.camel@lenovo.internal.reciva.com>
-Date: Fri, 15 Jan 2010 21:09:35 +0800
-MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Organization: Gulessoft, Inc
-Message-ID: <op.u6kr59g7mn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <1263560559.457.336.camel@lenovo.internal.reciva.com>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.216.179
-X-SA-Exim-Mail-From: camelguo@gmail.com
+Message-ID: <20100115131729.64b2f17e@no-log.org>
+In-Reply-To: <19c1b8a91001142249r1301da16h6abc63071ce9acc4@mail.gmail.com>
+References: <1263507455.3757.37.camel@gnutoo-desktop>
+	<19c1b8a91001142249r1301da16h6abc63071ce9acc4@mail.gmail.com>
+X-Mailer: Claws Mail 3.6.1 (GTK+ 2.18.3; i686-angstrom-linux-gnu)
+Mime-Version: 1.0
+X-OriginalArrivalTime: 15 Jan 2010 13:17:28.0481 (UTC)
+	FILETIME=[16214910:01CA95E5]
+X-SA-Exim-Connect-IP: 85.33.3.5
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Support building all project in one directory
+Subject: Re: illume-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -66,50 +41,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jan 2010 13:12:01 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Fri, 15 Jan 2010 13:19:45 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-=E5=9C=A8 Fri, 15 Jan 2010 21:02:39 +0800=EF=BC=8CPhil Blundell <philb@g=
-nu.org> =E5=86=99=E9=81=93:
+On Thu, 14 Jan 2010 22:49:02 -0800
+Khem Raj <raj.khem@gmail.com> wrote:
 
-> On Fri, 2010-01-15 at 20:57 +0800, Guo Hongruan wrote:
->> In theory, mixing mutiple DISTROs in one TMPDIR should be fine too,  =
+> But the failure can be fixed easily of you just add
+> #include <stdio.h>
+It also needs #include <stdio.h>
+That's not the problem I had,because that part can easely be fixed
+The problem was related to enlightenment includes
+I retried and it couldn't find includes like:
+Efreet.h,Efreet_Mime.h and Efreet_Trash.h that is to say:
+/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/include/Elementary.h:81:21:
+error: Efreet.h: No such file or directory
+/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/include/Elementary.h:82:26:
+error: Efreet_Mime.h: No such file or directory
+/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/include/Elementary.h:83:27:
+error: Efreet_Trash.h: No such file or directory
 
->> unless
->> the package recipes use the DISTRO as OVERRIDE.
->
-> Several package recipes do indeed use the DISTRO as an override, but
-> even if this were not the case it would still not be safe to mix
-> multiple DISTROs in a single TMPDIR.
->
-> As I said before, the DISTRO configurations might be quite incompatibl=
-e
-> in any number of ways: for example, they might be using entirely
-> different ABIs, or packaging systems, or binary formats, or package
-> naming conventions, or filesystem layouts.
+they live
+in /home/embedded/oetmp/staging/armv6-angstrom-linux-gnueabi/usr/include/efreet
+in my system...
 
-Yes, You are right, they are some questions we must consider before  =
+and a quick grep show:
+grep -i efreet config*
+config.log:pkg_cv_ELEMENTARY_CFLAGS='-I/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/include/elementary
+-I/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/include/efreet 
+and it is propagated into the Makefile:
+grep -i efreet Makefile*
+Makefile:ELEMENTARY_CFLAGS =
+-I/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/include/elementary
+-I/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/include/efreet
 
-continue.
+Strange that it doesn't work...
 
->
-> p.
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
+If there is a quick fix for that or if someone fix it it would be great
+but I still think that it should be removed from the image as someone
+may not want a phone image(or else there is a fix: putting an override
+for the phone machine feature,it could be doable because images are
+machine-specific.)
 
-
-
--- =
-
-Guo Hongruan, Embedded Linux Consultant
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
+Denis
 
 
