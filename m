@@ -1,29 +1,49 @@
-Received: from smtp-out01.alice.it ([85.33.2.12])
+Received: from mail-gx0-f215.google.com ([209.85.217.215])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1NVY3p-0007sO-H5
+	(envelope-from <camelguo@gmail.com>) id 1NVb80-0003PB-Dy
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 14 Jan 2010 23:21:04 +0100
-Received: from FBCMMO05.fbc.local ([192.168.184.136]) by smtp-out01.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 14 Jan 2010 23:18:49 +0100
-Received: from FBCMCL01B03.fbc.local ([192.168.69.84]) by FBCMMO05.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 14 Jan 2010 23:17:39 +0100
-Received: from [192.168.1.116] ([79.7.143.47]) by FBCMCL01B03.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Thu, 14 Jan 2010 23:17:38 +0100
-From: GNUtoo <GNUtoo@no-log.org>
+	Fri, 15 Jan 2010 02:37:35 +0100
+Received: by gxk7 with SMTP id 7so158020gxk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Jan 2010 17:35:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:content-type:to:subject
+	:references:date:mime-version:content-transfer-encoding:from
+	:organization:message-id:in-reply-to:user-agent;
+	bh=45c7vCQFD9atQOOaHkkNByCmCPKuVIHh4bwFc5XrEr0=;
+	b=GvDOwr5M0rhBjprb0m5twq1K97TqKApcHX0WOCYw5wBI+ddAjDBLdT1OwBHhcegE+q
+	iJZteIqgDzrEb3It5FTvbB63tOEH1gNebhywCMUYAZzB5gVjUnQjEEfQj6wcmll8bHab
+	hWn8wxN0sfxSgZodrMAVBBd+aZysRgYC68524=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=content-type:to:subject:references:date:mime-version
+	:content-transfer-encoding:from:organization:message-id:in-reply-to
+	:user-agent;
+	b=aW52sb5V7iTe0Y12PYEC3R0DVteg/pwCYHriQQNn1rQSCnfyc0NITrBDVPfcsFXTOL
+	eEBB1jEkA+MjzzN47Bj1/OTiCuyTZED14cKCMNMgSRnkwhUuSXSUyBp7ODIUTHKo81ZE
+	jPLVHPUGDfOi0eXKEGmSanJ4NfUqiKaLoN77M=
+Received: by 10.101.180.9 with SMTP id h9mr3100773anp.187.1263519320291;
+	Thu, 14 Jan 2010 17:35:20 -0800 (PST)
+Received: from guohr-laptop-ubuntu ([123.162.69.75])
+	by mx.google.com with ESMTPS id 4sm478717ywd.29.2010.01.14.17.35.17
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 14 Jan 2010 17:35:19 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Jan 2010 23:17:35 +0100
-Message-Id: <1263507455.3757.37.camel@gnutoo-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-OriginalArrivalTime: 14 Jan 2010 22:17:38.0982 (UTC)
-	FILETIME=[61E18460:01CA9567]
-X-SA-Exim-Connect-IP: 85.33.2.12
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+References: <> <1263455739-13595-1-git-send-email-camelguo@gmail.com>
+	<201001141014.53764.marcin@juszkiewicz.com.pl>
+	<op.u6imubdtmn1qzu@guohr-laptop-ubuntu>
+	<20100114195301.GA3529@gmail.com>
+Date: Fri, 15 Jan 2010 09:35:13 +0800
+MIME-Version: 1.0
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u6jv0uycmn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <20100114195301.GA3529@gmail.com>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.217.215
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: illume-image
+Subject: Re: [PATCH] Support building all project in one directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,276 +57,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Jan 2010 22:21:05 -0000
-X-Groupsio-MsgNum: 15723
-Content-Type: multipart/mixed; boundary="=-7XhkNR95YOxh7KYTsak3"
+X-List-Received-Date: Fri, 15 Jan 2010 01:37:35 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: Quoted-Printable
 
---=-7XhkNR95YOxh7KYTsak3
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+=E5=9C=A8 Fri, 15 Jan 2010 03:53:01 +0800=EF=BC=8CKhem Raj <raj.khem@gma=
+il.com> =E5=86=99=E9=81=93:
 
-hi,
-every time I build the illume image I've the following failures:
+> On (14/01/10 17:19), Guo Hongruan wrote:
+>> After changing this way, the native tools can be shared with
+>> different buildings.
+>
+> They get shared even now. I have my TMPDIR =3D /scratch/oe/build and
+> DEPLOY_DIR =3D ${TMPDIR}/deploy/${LIBC}
+>
+> I share the native tools all the time
 
+This way, the packages built in ${TMPDIR}/work/ will bother each other. =
+It  =
 
-First failure:
---------------
-The first failure is about libefso and its deps,it has missing includes
-and so it fails,long time ago I tried to fix it but at a point I
-abandonned,so is it ok to remove the following from illume-image:
+is obvious that a binary package built based on uclibc is different with=
+  =
 
-*libefso
-*essential-dialer
-*elementary-sms
+the same one built base on glibc. So I think it's better to classify the=
+m  =
 
-By the way I'm not doing an image for a phone,my target is the bug
-device.
+using ${LIBC}.
 
-here's svn info on a recently(today) svn checkout
-$ svn info
-Path: .
-URL: http://svn.om.vptt.ch/trunk/libefso
-Repository Root: http://svn.om.vptt.ch
-Repository UUID: 757e9fe0-9496-417e-b309-215f0fa43bb9
-Revision: 194
-Node Kind: directory
-Schedule: normal
-Last Changed Author: thseiler
-Last Changed Rev: 176
-Last Changed Date: 2009-03-01 22:12:43 +0100 (Sun, 01 Mar 2009)
+After applying my patch, all everything built based on uclibc will be  =
 
-First Question:
-----------
-does anyone object if I remove:
-libefso
-essential-dialer
-elementary-sms
-from illume-image
-?
+placed in some directories different with glibc,eglibc. The stamps will =
+be  =
 
-Next error:
-----------------
-Collected errors:
-* Cannot find package gst-plugin-modplug.
+placed in ${TMPDIR}/stamps/${LIBC}, the package data will be placed in  =
 
-so I did the following:
-$ wget
-http://www.angstrom-distribution.org/unstable/feed/armv6/gstreamer/gst-plugin-modplug_0.10.6-r2.2_armv6.ipk
+${TMPDIR}/pkgdata/${LIBC} and so on. So you can see, when I tried to bui=
+ld  =
 
-$ mkdir modplug
-$ cd modplug
-$ ar x ../ gst-plugin-modplug_0.10.6-r2.2_armv6.ipk
-$ tar xvzf control.tar.gz
-$ cat control
-Package: gst-plugin-modplug
-Version: 0.10.6-r2.2
-Description: GStreamer plugin for modplug
-Section: multimedia
-Priority: optional
-Maintainer: Angstrom Developers <angstrom-distro-devel@linuxtogo.org>
-License: LGPL
-Architecture: armv6
-OE: gst-plugins-bad
-Homepage: http://www.gstreamer.net/
-Depends: gstreamer (>= 0.10.22), libgobject-2.0-0 (>= 2.20.0),
-libgmodule-2.0-0 (>= 2.20.0), libgthread-2.0-0 (>= 2.20.0), libc6 (>=
-2.6.1), libxml2 (>= 2.7.2), libglib-2.0-0 (>= 2.20.0), libstdc++6 (>=
-4.3.3), libgcc1 (>= 4.3.3)
-Source:
-http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-0.10.6.tar.bz2 file://vorbisenc.h file://vorbisdec.h file://gst-plugins-directfb-fix.patch;patch=1;pnum=2 file://ivorbis-thumb.patch;patch=1
+lots of projects (with different libc), their data will never bother eac=
+h  =
 
-note the patches
-so back into the gstreamer dir in oe I did:
-~/oe/org.openembedded.dev/recipes/gstreamer $ grep
-file://ivorbis-thumb.patch *
-gst-plugins-bad_0.10.11.bb:
-file://ivorbis-thumb.patch;patch=1"
-gst-plugins-bad_0.10.12.bb:
-file://ivorbis-thumb.patch;patch=1"
-gst-plugins-bad_0.10.6.bb:
-file://ivorbis-thumb.patch;patch=1"
-gst-plugins-bad_0.10.9.bb:
-file://ivorbis-thumb.patch;patch=1"
+other. In you way, we must select different TMPDIR for different libc,  =
 
-so bad was the one supposing to build it.
+that are very convenient for incremental building by QA.
 
-also(useless output removed):
-$ tar tvzf data.tar.gz 
--rwxr-xr-x root/root    229860 2009-05-15
-16:33 ./usr/lib/gstreamer-0.10/libgstmodplug.so
+And more, the native tools (quilt-native, qemu-native) are completely li=
+bc  =
 
-And no libgstmodplug.so in my workdir
+independent, so they could be shared with projects with different libc. =
+ =
 
-we could also remove it,but I'm not sure it's a good idea.
+After applying the patch, native tools are shared. It will save my  =
 
-Denis
+building machine lots of time on building native tools.
+
+>
+> -Khem
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
 
 
 
---=-7XhkNR95YOxh7KYTsak3
-Content-Disposition: attachment; filename="log.do_compile.15386"
-Content-Type: text/plain; name="log.do_compile.15386"; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-- =
 
-NOTE: make
-Making all in src
-make[1]: Entering directory `/home/embedded/oetmp_bug/work/armv6-angstrom-l=
-inux-gnueabi/libefso-0.0.1+svnr194-r0/libefso/src'
-Making all in lib
-make[2]: Entering directory `/home/embedded/oetmp_bug/work/armv6-angstrom-l=
-inux-gnueabi/libefso-0.0.1+svnr194-r0/libefso/src/lib'
-/bin/sh ../../arm-angstrom-linux-gnueabi-libtool --tag=3DCC   --mode=3Dcomp=
-ile ccache arm-angstrom-linux-gnueabi-gcc -march=3Darmv6j -mtune=3Darm1136j=
-f-s -mfpu=3Dvfp -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb -DPACKAGE=
-_NAME=3D\"libefso\" -DPACKAGE_TARNAME=3D\"libefso\" -DPACKAGE_VERSION=3D\"0=
-.0.1\" -DPACKAGE_STRING=3D\"libefso\ 0.0.1\" -DPACKAGE_BUGREPORT=3D\"thomas=
-.seiler@swisscom.com\" -DPACKAGE=3D\"libefso\" -DVERSION=3D\"0.0.1\" -DSTDC=
-_HEADERS=3D1 -DHAVE_SYS_TYPES_H=3D1 -DHAVE_SYS_STAT_H=3D1 -DHAVE_STDLIB_H=
-=3D1 -DHAVE_STRING_H=3D1 -DHAVE_MEMORY_H=3D1 -DHAVE_STRINGS_H=3D1 -DHAVE_IN=
-TTYPES_H=3D1 -DHAVE_STDINT_H=3D1 -DHAVE_UNISTD_H=3D1 -DHAVE_DLFCN_H=3D1 -DL=
-T_OBJDIR=3D\".libs/\" -I. -I/home/embedded/oetmp_bug/staging/armv6-angstrom=
--linux-gnueabi/usr/include/glib-2.0 -I/home/embedded/oetmp_bug/staging/armv=
-6-angstrom-linux-gnueabi/usr/lib/glib-2.0/include -I/home/embedded/oetmp_bu=
-g/staging/armv6-angstrom-linux-gnueabi/usr/include/eina-0 -I/home/embedded/=
-oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/include/eina-0/eina -I/h=
-ome/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/include/dbu=
-s-1.0 -I/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/l=
-ib/dbus-1.0/include    -isystem/home/embedded/oetmp_bug/staging/armv6-angst=
-rom-linux-gnueabi/usr/include -Wall -g -isystem/home/embedded/oetmp_bug/sta=
-ging/armv6-angstrom-linux-gnueabi/usr/include -fexpensive-optimizations -fr=
-ename-registers -fomit-frame-pointer -O2 -ggdb3 -MT efso.lo -MD -MP -MF .de=
-ps/efso.Tpo -c -o efso.lo efso.c
-arm-angstrom-linux-gnueabi-libtool: compile:  ccache arm-angstrom-linux-gnu=
-eabi-gcc -march=3Darmv6j -mtune=3Darm1136jf-s -mfpu=3Dvfp -mfloat-abi=3Dsof=
-tfp -mthumb-interwork -mno-thumb -DPACKAGE_NAME=3D\"libefso\" -DPACKAGE_TAR=
-NAME=3D\"libefso\" -DPACKAGE_VERSION=3D\"0.0.1\" "-DPACKAGE_STRING=3D\"libe=
-fso 0.0.1\"" -DPACKAGE_BUGREPORT=3D\"thomas.seiler@swisscom.com\" -DPACKAGE=
-=3D\"libefso\" -DVERSION=3D\"0.0.1\" -DSTDC_HEADERS=3D1 -DHAVE_SYS_TYPES_H=
-=3D1 -DHAVE_SYS_STAT_H=3D1 -DHAVE_STDLIB_H=3D1 -DHAVE_STRING_H=3D1 -DHAVE_M=
-EMORY_H=3D1 -DHAVE_STRINGS_H=3D1 -DHAVE_INTTYPES_H=3D1 -DHAVE_STDINT_H=3D1 =
--DHAVE_UNISTD_H=3D1 -DHAVE_DLFCN_H=3D1 -DLT_OBJDIR=3D\".libs/\" -I. -I/home=
-/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/include/glib-2=
-.0 -I/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/lib/=
-glib-2.0/include -I/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gn=
-ueabi/usr/include/eina-0 -I/home/embedded/oetmp_bug/staging/armv6-angstrom-=
-linux-gnueabi/usr/include/eina-0/eina -I/home/embedded/oetmp_bug/staging/ar=
-mv6-angstrom-linux-gnueabi/usr/include/dbus-1.0 -I/home/embedded/oetmp_bug/=
-staging/armv6-angstrom-linux-gnueabi/usr/lib/dbus-1.0/include -isystem/home=
-/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/include -Wall =
--g -isystem/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/us=
-r/include -fexpensive-optimizations -frename-registers -fomit-frame-pointer=
- -O2 -ggdb3 -MT efso.lo -MD -MP -MF .deps/efso.Tpo -c efso.c  -fPIC -DPIC -=
-o .libs/efso.o
-efso.c: In function 'efso_init':
-efso.c:11: warning: implicit declaration of function 'printf'
-efso.c:11: warning: incompatible implicit declaration of built-in function =
-'printf'
-efso.c: In function 'efso_shutdown':
-efso.c:26: warning: incompatible implicit declaration of built-in function =
-'printf'
-efso.c: In function 'efso_get':
-efso.c:95: warning: incompatible implicit declaration of built-in function =
-'printf'
-arm-angstrom-linux-gnueabi-libtool: compile:  ccache arm-angstrom-linux-gnu=
-eabi-gcc -march=3Darmv6j -mtune=3Darm1136jf-s -mfpu=3Dvfp -mfloat-abi=3Dsof=
-tfp -mthumb-interwork -mno-thumb -DPACKAGE_NAME=3D\"libefso\" -DPACKAGE_TAR=
-NAME=3D\"libefso\" -DPACKAGE_VERSION=3D\"0.0.1\" "-DPACKAGE_STRING=3D\"libe=
-fso 0.0.1\"" -DPACKAGE_BUGREPORT=3D\"thomas.seiler@swisscom.com\" -DPACKAGE=
-=3D\"libefso\" -DVERSION=3D\"0.0.1\" -DSTDC_HEADERS=3D1 -DHAVE_SYS_TYPES_H=
-=3D1 -DHAVE_SYS_STAT_H=3D1 -DHAVE_STDLIB_H=3D1 -DHAVE_STRING_H=3D1 -DHAVE_M=
-EMORY_H=3D1 -DHAVE_STRINGS_H=3D1 -DHAVE_INTTYPES_H=3D1 -DHAVE_STDINT_H=3D1 =
--DHAVE_UNISTD_H=3D1 -DHAVE_DLFCN_H=3D1 -DLT_OBJDIR=3D\".libs/\" -I. -I/home=
-/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/include/glib-2=
-.0 -I/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/lib/=
-glib-2.0/include -I/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gn=
-ueabi/usr/include/eina-0 -I/home/embedded/oetmp_bug/staging/armv6-angstrom-=
-linux-gnueabi/usr/include/eina-0/eina -I/home/embedded/oetmp_bug/staging/ar=
-mv6-angstrom-linux-gnueabi/usr/include/dbus-1.0 -I/home/embedded/oetmp_bug/=
-staging/armv6-angstrom-linux-gnueabi/usr/lib/dbus-1.0/include -isystem/home=
-/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/include -Wall =
--g -isystem/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/us=
-r/include -fexpensive-optimizations -frename-registers -fomit-frame-pointer=
- -O2 -ggdb3 -MT efso.lo -MD -MP -MF .deps/efso.Tpo -c efso.c -o efso.o >/de=
-v/null 2>&1
-mv -f .deps/efso.Tpo .deps/efso.Plo
-/bin/sh ../../arm-angstrom-linux-gnueabi-libtool --tag=3DCC   --mode=3Dcomp=
-ile ccache arm-angstrom-linux-gnueabi-gcc -march=3Darmv6j -mtune=3Darm1136j=
-f-s -mfpu=3Dvfp -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb -DPACKAGE=
-_NAME=3D\"libefso\" -DPACKAGE_TARNAME=3D\"libefso\" -DPACKAGE_VERSION=3D\"0=
-.0.1\" -DPACKAGE_STRING=3D\"libefso\ 0.0.1\" -DPACKAGE_BUGREPORT=3D\"thomas=
-.seiler@swisscom.com\" -DPACKAGE=3D\"libefso\" -DVERSION=3D\"0.0.1\" -DSTDC=
-_HEADERS=3D1 -DHAVE_SYS_TYPES_H=3D1 -DHAVE_SYS_STAT_H=3D1 -DHAVE_STDLIB_H=
-=3D1 -DHAVE_STRING_H=3D1 -DHAVE_MEMORY_H=3D1 -DHAVE_STRINGS_H=3D1 -DHAVE_IN=
-TTYPES_H=3D1 -DHAVE_STDINT_H=3D1 -DHAVE_UNISTD_H=3D1 -DHAVE_DLFCN_H=3D1 -DL=
-T_OBJDIR=3D\".libs/\" -I. -I/home/embedded/oetmp_bug/staging/armv6-angstrom=
--linux-gnueabi/usr/include/glib-2.0 -I/home/embedded/oetmp_bug/staging/armv=
-6-angstrom-linux-gnueabi/usr/lib/glib-2.0/include -I/home/embedded/oetmp_bu=
-g/staging/armv6-angstrom-linux-gnueabi/usr/include/eina-0 -I/home/embedded/=
-oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/include/eina-0/eina -I/h=
-ome/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/include/dbu=
-s-1.0 -I/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/l=
-ib/dbus-1.0/include    -isystem/home/embedded/oetmp_bug/staging/armv6-angst=
-rom-linux-gnueabi/usr/include -Wall -g -isystem/home/embedded/oetmp_bug/sta=
-ging/armv6-angstrom-linux-gnueabi/usr/include -fexpensive-optimizations -fr=
-ename-registers -fomit-frame-pointer -O2 -ggdb3 -MT efso-dict-helper.lo -MD=
- -MP -MF .deps/efso-dict-helper.Tpo -c -o efso-dict-helper.lo efso-dict-hel=
-per.c
-arm-angstrom-linux-gnueabi-libtool: compile:  ccache arm-angstrom-linux-gnu=
-eabi-gcc -march=3Darmv6j -mtune=3Darm1136jf-s -mfpu=3Dvfp -mfloat-abi=3Dsof=
-tfp -mthumb-interwork -mno-thumb -DPACKAGE_NAME=3D\"libefso\" -DPACKAGE_TAR=
-NAME=3D\"libefso\" -DPACKAGE_VERSION=3D\"0.0.1\" "-DPACKAGE_STRING=3D\"libe=
-fso 0.0.1\"" -DPACKAGE_BUGREPORT=3D\"thomas.seiler@swisscom.com\" -DPACKAGE=
-=3D\"libefso\" -DVERSION=3D\"0.0.1\" -DSTDC_HEADERS=3D1 -DHAVE_SYS_TYPES_H=
-=3D1 -DHAVE_SYS_STAT_H=3D1 -DHAVE_STDLIB_H=3D1 -DHAVE_STRING_H=3D1 -DHAVE_M=
-EMORY_H=3D1 -DHAVE_STRINGS_H=3D1 -DHAVE_INTTYPES_H=3D1 -DHAVE_STDINT_H=3D1 =
--DHAVE_UNISTD_H=3D1 -DHAVE_DLFCN_H=3D1 -DLT_OBJDIR=3D\".libs/\" -I. -I/home=
-/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/include/glib-2=
-.0 -I/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/lib/=
-glib-2.0/include -I/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gn=
-ueabi/usr/include/eina-0 -I/home/embedded/oetmp_bug/staging/armv6-angstrom-=
-linux-gnueabi/usr/include/eina-0/eina -I/home/embedded/oetmp_bug/staging/ar=
-mv6-angstrom-linux-gnueabi/usr/include/dbus-1.0 -I/home/embedded/oetmp_bug/=
-staging/armv6-angstrom-linux-gnueabi/usr/lib/dbus-1.0/include -isystem/home=
-/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/usr/include -Wall =
--g -isystem/home/embedded/oetmp_bug/staging/armv6-angstrom-linux-gnueabi/us=
-r/include -fexpensive-optimizations -frename-registers -fomit-frame-pointer=
- -O2 -ggdb3 -MT efso-dict-helper.lo -MD -MP -MF .deps/efso-dict-helper.Tpo =
--c efso-dict-helper.c  -fPIC -DPIC -o .libs/efso-dict-helper.o
-efso-dict-helper.c: In function 'efso_dict_has_entry':
-efso-dict-helper.c:181: warning: implicit declaration of function 'perror'
-efso-dict-helper.c: In function 'efso_dict_print':
-efso-dict-helper.c:220: warning: implicit declaration of function 'printf'
-efso-dict-helper.c:220: warning: incompatible implicit declaration of built=
--in function 'printf'
-efso-dict-helper.c: In function 'efso_get_string_array':
-efso-dict-helper.c:295: warning: implicit declaration of function 'fprintf'
-efso-dict-helper.c:295: warning: incompatible implicit declaration of built=
--in function 'fprintf'
-efso-dict-helper.c:295: error: 'stderr' undeclared (first use in this funct=
-ion)
-efso-dict-helper.c:295: error: (Each undeclared identifier is reported only=
- once
-efso-dict-helper.c:295: error: for each function it appears in.)
-efso-dict-helper.c:310: warning: incompatible implicit declaration of built=
--in function 'fprintf'
-efso-dict-helper.c:320: warning: incompatible implicit declaration of built=
--in function 'fprintf'
-efso-dict-helper.c:327: warning: incompatible implicit declaration of built=
--in function 'printf'
-efso-dict-helper.c: In function '_efso_dict_map':
-efso-dict-helper.c:473: warning: incompatible implicit declaration of built=
--in function 'fprintf'
-efso-dict-helper.c:473: error: 'stderr' undeclared (first use in this funct=
-ion)
-efso-dict-helper.c:480: warning: incompatible implicit declaration of built=
--in function 'fprintf'
-make[2]: *** [efso-dict-helper.lo] Error 1
-make[2]: Leaving directory `/home/embedded/oetmp_bug/work/armv6-angstrom-li=
-nux-gnueabi/libefso-0.0.1+svnr194-r0/libefso/src/lib'
-make[1]: *** [all-recursive] Error 1
-make[1]: Leaving directory `/home/embedded/oetmp_bug/work/armv6-angstrom-li=
-nux-gnueabi/libefso-0.0.1+svnr194-r0/libefso/src'
-make: *** [all-recursive] Error 1
-FATAL: oe_runmake failed
+Guo Hongruan, Embedded Linux Consultant
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
---=-7XhkNR95YOxh7KYTsak3--
+
