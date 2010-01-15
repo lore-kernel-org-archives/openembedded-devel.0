@@ -1,32 +1,21 @@
-Received: from mail.gmx.net ([213.165.64.20])
+Received: from gateway-2929.mvista.com ([206.112.117.47])
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <christian.rueb@gmx.net>) id 1NVqaZ-0001AT-8s
+	(envelope-from <clarson@mvista.com>) id 1NVr6g-0001aY-AS
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jan 2010 19:08:06 +0100
-Received: (qmail invoked by alias); 15 Jan 2010 18:05:50 -0000
-Received: from p5B0ABEC8.dip.t-dialin.net (EHLO crmobile01.localnet)
-	[91.10.190.200]
-	by mail.gmx.net (mp008) with SMTP; 15 Jan 2010 19:05:50 +0100
-X-Authenticated: #19296456
-X-Provags-ID: V01U2FsdGVkX1+6noIf9Q66WpU+LSSd3upsJ1aj+xAjaZQKuGYnzz
-	wsm/lv7VvVzoYj
-From: Christian =?iso-8859-2?q?R=FCb?= <christian.rueb@gmx.net>
+	Fri, 15 Jan 2010 19:41:18 +0100
+Received: from localhost.localdomain (foul.az.mvista.com [10.50.1.75])
+	by hermes.mvista.com (Postfix) with ESMTP
+	id 1E3591DBA5; Fri, 15 Jan 2010 10:38:59 -0800 (PST)
+From: Chris Larson <clarson@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Jan 2010 19:05:44 +0100
-User-Agent: KMail/1.12.4 (Linux/2.6.32-trunk-686; KDE/4.3.4; i686; ; )
-References: <1263504944-19914-1-git-send-email-christian.rueb@gmx.net>
-	<201001151203.38856.christian.rueb@gmx.net>
-	<20100115113801.GA18793@ibawizard.net>
-In-Reply-To: <20100115113801.GA18793@ibawizard.net>
-MIME-Version: 1.0
-Message-Id: <201001151905.44889.christian.rueb@gmx.net>
-X-Y-GMX-Trusted: 0
-X-FuHaFi: 0.64000000000000001
-X-SA-Exim-Connect-IP: 213.165.64.20
-X-SA-Exim-Mail-From: christian.rueb@gmx.net
+Date: Fri, 15 Jan 2010 11:30:33 -0700
+Message-Id: <1263580233-3494-1-git-send-email-clarson@mvista.com>
+X-Mailer: git-send-email 1.6.4.339.g527d
+X-SA-Exim-Connect-IP: 206.112.117.47
+X-SA-Exim-Mail-From: clarson@mvista.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] wpa-gui: add version 0.6.9 (Qt4 based)
+Subject: [PATCH] base.bbclass: use bb.utils.*_sum instead of calling md5/sha sum commands
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,40 +29,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jan 2010 18:08:06 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 15 Jan 2010 18:41:18 -0000
 
-Am Friday, 15. January 2010 schrieb Petr =A9tetiar:
-> Christian R=FCb <christian.rueb@gmx.net> [2010-01-15 12:03:38]:
->=20
-> > > > On Friday, 15. January 2010 09:22:28 Koen Kooi wrote:
-> > > Apart from it not being in git-format-patch format, yes.
-> >=20
-> > Actually I used git format-patch (with option -p to not generate stats =
-=2D do
-> > you want stats) to create the patch...
->=20
-> But I think, that Koen meant it isn't in format he can push. Would be goo=
-d to
-> read [1], [2] and search throught mailing list archives for other patches=
- as
-> example. And it's missing Signed-off line.
->=20
-> -- ynezz
->=20
-> 1. http://wiki.openembedded.net/index.php/GitPhraseBook#Commit_Message
-> 2. http://wiki.openembedded.org/index.php/Commit_Policy
+From: Ross Burton <ross@openedhand.com>
 
-Thanks for this. I will prepare a better commit message for the patch. I ha=
-ve already made a new one with git format-patch.
-I cleaned the tree afterwards and tried to apply my patch, it does work but=
- complains about many whitespace errors, also a build afterwards worked.
-The whitespace errors come from the patches within the patch. Is this OK, o=
-r shall/can I do anything about this before submitting?
+Patch courtesy the Poky project.
 
-Cheers,
- Christian
+Signed-off-by: Chris Larson <clarson@mvista.com>
+---
+ classes/base.bbclass |   27 +++++++++++++++------------
+ 1 files changed, 15 insertions(+), 12 deletions(-)
+
+diff --git a/classes/base.bbclass b/classes/base.bbclass
+index 96164d4..dc56282 100644
+--- a/classes/base.bbclass
++++ b/classes/base.bbclass
+@@ -122,23 +122,26 @@ def base_chk_file_vars(parser, localpath, params, data):
+         raise Exception("The path does not exist '%s'" % localpath)
+ 
+     if want_md5sum:
+-        try:
+-	    md5pipe = os.popen('PATH=%s md5sum %s' % (bb.data.getVar('PATH', data, True), localpath))
+-            md5data = (md5pipe.readline().split() or [ "" ])[0]
+-            md5pipe.close()
+-        except OSError, e:
+-            raise Exception("Executing md5sum failed")
++        md5data = bb.utils.md5_file(localpath)
++
+         if want_md5sum != md5data:
+             bb.note("The MD5Sums did not match. Wanted: '%s' and Got: '%s'" % (want_md5sum, md5data))
+             raise Exception("MD5 Sums do not match. Wanted: '%s' Got: '%s'" % (want_md5sum, md5data))
+ 
+     if want_sha256sum:
+-        try:
+-            shapipe = os.popen('PATH=%s oe_sha256sum %s' % (bb.data.getVar('PATH', data, True), localpath))
+-            sha256data = (shapipe.readline().split() or [ "" ])[0]
+-            shapipe.close()
+-        except OSError, e:
+-            raise Exception("Executing shasum failed")
++        shadata = bb.utils.sha256_file(localpath)
++
++        # sha256_file() can return None if we are running on Python 2.4 (hashlib is
++        # 2.5 onwards, sha in 2.4 is 160-bit only), so check for this and call the
++        # standalone shasum binary if required.
++        if shadata is None:
++            try:
++                shapipe = os.popen('PATH=%s oe_sha256sum %s' % (bb.data.getVar('PATH', data, True), localpath))
++                shadata = (shapipe.readline().split() or [ "" ])[0]
++                shapipe.close()
++            except OSError:
++                raise Exception("Executing shasum failed, please build shasum-native")
++
+         if want_sha256sum != sha256data:
+             bb.note("The SHA256Sums did not match. Wanted: '%s' and Got: '%s'" % (want_sha256sum, sha256data))
+             raise Exception("SHA256 Sums do not match. Wanted: '%s' Got: '%s'" % (want_sha256sum, sha256data))
+-- 
+1.6.4.339.g527d
+
 
 
