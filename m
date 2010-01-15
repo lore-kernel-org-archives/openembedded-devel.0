@@ -1,42 +1,36 @@
-Received: from mail-pz0-f192.google.com ([209.85.222.192])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NVlRz-0004iq-B2
+	(envelope-from <philb@gnu.org>) id 1NVlf5-00009r-J6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 15 Jan 2010 13:38:54 +0100
-Received: by pzk30 with SMTP id 30so552921pzk.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Jan 2010 04:36:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:subject:date:to
-	:mime-version:content-transfer-encoding:from:organization:message-id
-	:user-agent; bh=OJXPU8GMCTZjxd8hb5iBCBaYTBrMrdZzvy42gJ4BSkU=;
-	b=XxagUVnOhBKdToscz6Og2kibCGia/FUtvEmO4p2jarIcud/aEaHewgc9AZUvfBgI9r
-	09qVjr32nFdSfu3ahG1pZZYUcSUbqXSSrM3gfjfYBtDLhZ1wdb6q/x9JQ7sctaZ2ggwT
-	a0YdtqSrx3L72NPsqwwP9eOH/vzBGe5mTL3R4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:subject:date:to:mime-version:content-transfer-encoding
-	:from:organization:message-id:user-agent;
-	b=NrxKJkFoOGdUS5f/eMrOwiHfZv9nP2qPefi+zJUoqH4F76bTPVKHj+D9DEqN8C5qiC
-	ooWuTAav2p8OQMu4PY+T0tEfaengWfafeAHmETEsGdBMv75UVe0HXdt6RQg69nGCHA0O
-	PF5jmXynFdQWWj2KRYtSALhL5HZj28r5wJJlI=
-Received: by 10.142.61.19 with SMTP id j19mr1605964wfa.184.1263558994658;
-	Fri, 15 Jan 2010 04:36:34 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.54.101.24])
-	by mx.google.com with ESMTPS id 20sm1378492pzk.9.2010.01.15.04.36.31
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 15 Jan 2010 04:36:34 -0800 (PST)
-Date: Fri, 15 Jan 2010 20:36:22 +0800
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Organization: Gulessoft, Inc
-Message-ID: <op.u6kqmwfcmn1qzu@guohr-laptop-ubuntu>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.222.192
-X-SA-Exim-Mail-From: camelguo@gmail.com
+	Fri, 15 Jan 2010 13:52:26 +0100
+Received: from 88-110-78-150.dynamic.dsl.as9105.com ([88.110.78.150]
+	helo=[192.168.2.155])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NVlcz-0005nT-3z
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 15 Jan 2010 12:50:13 +0000
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <op.u6kl4xh4mn1qzu@guohr-laptop-ubuntu>
+References: <> <1263455739-13595-1-git-send-email-camelguo@gmail.com>
+	<201001141014.53764.marcin@juszkiewicz.com.pl>
+	<op.u6imubdtmn1qzu@guohr-laptop-ubuntu>
+	<20100114195301.GA3529@gmail.com>
+	<op.u6jv0uycmn1qzu@guohr-laptop-ubuntu> <4B4FE54D.3070402@mwester.net>
+	<op.u6kherjdmn1qzu@guohr-laptop-ubuntu>
+	<1263549399.457.313.camel@lenovo.internal.reciva.com>
+	<op.u6klcvzcmn1qzu@guohr-laptop-ubuntu>
+	<1263552396.457.318.camel@lenovo.internal.reciva.com>
+	<op.u6kl4xh4mn1qzu@guohr-laptop-ubuntu>
+Date: Fri, 15 Jan 2010 12:50:08 +0000
+Message-ID: <1263559808.457.327.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: what rwwork_stampfixing_eventhandler is used for?
+Subject: Re: [PATCH] Support building all project in one directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,57 +44,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Jan 2010 12:38:54 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+X-List-Received-Date: Fri, 15 Jan 2010 12:52:27 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Hi guys,
-   I can not figure out what what rwwork_stampfixing_eventhandler is used  
-for. But I think it does something unreasonable. I built an OE project and  
-all files in openembedded directory have not changed at all, the next  
-building should do nothing but report:
-NOTE: Tasks Summary: Attempted 65 tasks of which 65 didn't need to be  
-rerun and 0 failed.
-and exit. But the fact is that the rwwork_stampsfixing_eventhandler  
-removes some stamps files and force lots of packages to rebuild even  
-though nothing changed at all.
+On Fri, 2010-01-15 at 18:59 +0800, Guo Hongruan wrote:
+> In fact, I just mixer multiple machines in a single TMPDIR with different  
+> libcs. Hope I am lucky  :)
 
-    After I applied the following patch, the behavior is what I expected.  
-Who can give some information about this handler?
+Yes, mixing multiple MACHINEs in one TMPDIR is fine.
 
-Thanks a lot!
+p.
 
 
-diff --git a/classes/rm_work.bbclass b/classes/rm_work.bbclass
-index a53d12b..1335395 100644
---- a/classes/rm_work.bbclass
-+++ b/classes/rm_work.bbclass
-@@ -32,19 +32,3 @@ do_rm_work_all () {
-  do_rm_work_all[recrdeptask] = "do_rm_work"
-  addtask rm_work_all after do_rm_work
-
--
--addhandler rmwork_stampfixing_eventhandler
--python rmwork_stampfixing_eventhandler() {
--    if bb.event.getName(e) == "StampUpdate":
--        for (fn, task) in e.targets:
--            if task == 'rm_work_all':
--                continue
--            stamp = "%s.do_rm_work" % e.stampPrefix[fn]
--            if os.path.exists(stamp):
--                dir = "%s.*" % e.stampPrefix[fn]
--                bb.note("Removing stamps: " + dir)
--                os.system('rm -f '+ dir)
--
--    return NotHandled
--}
--
-
-
--- 
-Guo Hongruan, Embedded Linux Consultant
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
 
 
