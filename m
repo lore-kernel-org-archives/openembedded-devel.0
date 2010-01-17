@@ -1,41 +1,24 @@
-Received: from mail-fx0-f212.google.com ([209.85.220.212])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NWYQO-0003fh-1H
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 17:56:31 +0100
-Received: by fxm4 with SMTP id 4so180303fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 08:54:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=HuPUu1nwQ6au6lvlgDWNGHVLw6AvV8texn7wfx5HJDo=;
-	b=AhtnC/fQ6Uw3t/H1j8kAPhkI7dE4srN+lQZFPfAI6XnlgOYOsnwdidNZSsK01JzOTw
-	2N0jDoF1GZuPcNa19zTXl+BBP+porGee5G/HDhCugK4/gboI6yt919o/udAFqUpDI+vA
-	FSSV401f/kBImJra6IX1ff3Gw0g7hjBkHQlNk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=nUWDTAC2Rw3duoRXSEMvTKN6L0mOBQ7DsBilahnvpnj5mgRRgwWRo5EXfnaEVkBsXS
-	+e3AQR45ZoB9lMK/SwEX+2S6N4UFe83tD6pS96mpdNkiq5tzTSRwt0z+ekkNgit1b06W
-	yHoh/T4qyrYsGBCy/vjAn0Avius7gvLzo4q9M=
-Received: by 10.223.76.137 with SMTP id c9mr577496fak.76.1263747254364;
-	Sun, 17 Jan 2010 08:54:14 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 15sm1760266fxm.6.2010.01.17.08.54.13
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 17 Jan 2010 08:54:13 -0800 (PST)
-Date: Sun, 17 Jan 2010 17:54:04 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NWYTY-00069x-Ic for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 17:59:47 +0100
+Received: from g225080206.adsl.alicedsl.de ([92.225.80.206]
+	helo=[192.168.178.25])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NWYRR-0001zc-0K for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 16:57:33 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100117165403.GP30938@jama>
-References: <alpine.LFD.2.00.1001171141210.11393@localhost>
-MIME-Version: 1.0
 In-Reply-To: <alpine.LFD.2.00.1001171141210.11393@localhost>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.212
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+References: <alpine.LFD.2.00.1001171141210.11393@localhost>
+Date: Sun, 17 Jan 2010 17:57:30 +0100
+Message-ID: <1263747450.3210.50.camel@mattotaupa.wohnung.familie-menzel.net>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: beagleboard-demo-image, and the evil that is "gnome-games"
@@ -52,24 +35,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 16:56:31 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 17 Jan 2010 16:59:47 -0000
+X-Groupsio-MsgNum: 15803
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-J5SSHEDd+IIT1f4aq9ri"
 
-On Sun, Jan 17, 2010 at 11:47:06AM -0500, Robert P. J. Day wrote:
->   it seems counter-productive to allow a single games package to put
-> the brakes on an entire build.
+--=-J5SSHEDd+IIT1f4aq9ri
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Maybe you want to build with -k?
+Am Sonntag, den 17.01.2010, 11:47 -0500 schrieb Robert P. J. Day:
 
-If there is some build problem in games package, then it should be
-fixed, not silenced by whole task removal.
+[=E2=80=A6]
 
-Regards,
+>   a suggestion -- until the issue with gnome-games is resolved, why
+> not just remove its inclusion from the bb-demo-image task?  i'm being
+> quite serious -- it's obviously not a critical package, and if it's
+> the only thing keeping people from building and testing the OE dev
+> branch for the beagleboard, take it out so folks can get back to
+> testing.
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+[=E2=80=A6]
+
+In my opinion that would not be the right way to tackle this issue.
+
+Just enter a new bug report in OE=E2=80=99s bugtracker [1], attach a diff p=
+eople
+can apply *locally* to remove the dependency on `gnome-games`, reference
+the report in a reply to this thread and close the report when the issue
+is fixed.
 
 
+Thanks,
+
+Paul
+
+
+[1] http://bugs.openembedded.net/
+
+--=-J5SSHEDd+IIT1f4aq9ri
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAktTQXoACgkQPX1aK2wOHViTnwCghvnBAyX4bZeiMu69u9JhSzkE
+8V8Anjw40MDFg7CQry1/8znYf/mVHnDz
+=8WJg
+-----END PGP SIGNATURE-----
+
+--=-J5SSHEDd+IIT1f4aq9ri--
