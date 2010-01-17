@@ -1,35 +1,40 @@
-Received: from ey-out-1920.google.com ([74.125.78.145])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1NWVnr-0001Or-DI
+	(envelope-from <rpjday@crashcourse.ca>) id 1NWWXY-0006Pn-1k
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 15:08:34 +0100
-Received: by ey-out-1920.google.com with SMTP id 13so419541eye.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 06:06:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=4ew/WQfhIa0qGmim6aB43nPfoVnI9a6jEF9UlIBVPK8=;
-	b=lWbigNZij671Nzb2FuU7zQY4RfV7DnmFzIZ/r1DswINUeojiVACf3RY9iUnMHk9M1T
-	7T5C3+cj8StAAPsU63gx6+yw/m06DpmHl9KhLvCH+6S5a7bgno57f/ph1sBpSkDFUVli
-	1P3PEC614WU8Ed5T/63F7fd/lcuxFtjDQ+XdM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=f59WR5qazBXkmbdI5H9Bmmy7rzWisZNgBjW/WqTs6rzC/vDn4QBv2XXzGCTt2TVjt8
-	lVFjb9zQaNfFQoc7QZxYUeecYfuC8Qzb7sEepwUt9dqD9kE6E53sZu/cq/pnOTgqxept
-	gW3U4XOmFhyMhQZ8iVdCBBQMv5IGk+xO2AzIE=
-MIME-Version: 1.0
-Received: by 10.213.37.211 with SMTP id y19mr151915ebd.23.1263737179806; Sun, 
-	17 Jan 2010 06:06:19 -0800 (PST)
-Date: Sun, 17 Jan 2010 15:06:19 +0100
-Message-ID: <d1b08f941001170606w13dcfc0ey341da93deb94c7b8@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Sun, 17 Jan 2010 15:55:47 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NWWVO-0008K8-8P for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 09:53:30 -0500
+Date: Sun, 17 Jan 2010 09:52:45 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.78.145
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+In-Reply-To: <201001171146.46952.holger+oe@freyther.de>
+Message-ID: <alpine.LFD.2.00.1001170948220.8641@localhost>
+References: <alpine.LFD.2.00.1001161439340.13406@localhost>
+	<hitlc7$fes$1@ger.gmane.org>
+	<alpine.LFD.2.00.1001170254190.2736@localhost>
+	<201001171146.46952.holger+oe@freyther.de>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [RFC] Zaurus: make updater.sh obsolete for poodle, clamshells and 	tosa
+Subject: Re: what's the purpose of tarballs in the OE repo?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,42 +48,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 14:08:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 17 Jan 2010 14:55:47 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Reading the post about gnu-tar I remember we talked about a new way to
-install 2.6 kernels and images on Zaurus.
+On Sun, 17 Jan 2010, Holger Hans Peter Freyther wrote:
 
-Well, there are very good reasons to make this now obsolete:
-- we can flash from console (2.6 userspace)
-- we have a different image-layout (kernel in /boot), thus we can boot
-from every hd partition
-- we can create jffs2 images (see Narcissus) and flash these from
-console, without striping the legacy headers. We can even have 2
-images in nand
+> On Sunday 17 January 2010 08:55:18 Robert P. J. Day wrote:
+>
+> >   good plan, i'll take a look at that later today, thanks.
+>
+> thanks for the work you have put into this.
 
-My idea would be:
+  not a big deal, i noticed that a couple people have already replied
+that they have ideas for how to move some tarballs out of the OE repo.
 
--refactor updater.sh and flash only kernels
--provide an updater script
+  i'm well aware that, very occasionally, there are special
+circumstances which require that actual content be added to the repo,
+but in cases like that, it might be useful to add a README file to the
+appropriate recipes directory explaining those circumstances.
 
-An example of the commands on c7x0 (see
-http://www.h5.dion.ne.jp/~rimemoon/zaurus/pic/nandmap.jpg):
+  not only would that prevent confusion but, sometime down the road,
+someone examining that README file might realize, "hey, those special
+circumstances don't apply anymore, we can finally do a proper download
+here!", and submit a patch for it.
 
-Kernel:
-nandlogical /dev/mtd1 WRITE 0x0E0000 0x140000 zImage.bin
+  or something like that.
 
-Rootfs:
-flash_eraseall -j /dev/mtd2
-nandwrite /dev/mtd2 rootfs.jffs2
+rday
+--
 
-Optionally:
-flash_eraseall -j /dev/mtd3
-nandwrite /dev/mtd3 rootfs.jffs2
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
 
+            Linux Consulting, Training and Kernel Pedantry.
 
-Better ideas?
-
-Andrea
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
