@@ -1,35 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mta5.brinkster.com ([65.182.109.74])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NWZbX-0006yR-Lv for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 19:12:06 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NWZZN-0001fL-7i
+	(envelope-from <John.Willis@Distant-earth.com>) id 1NWa0s-0003eO-Kk
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 19:09:49 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 19:09:49 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Sun, 17 Jan 2010 19:38:18 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mta5.brinkster.com (Postfix) with ESMTP id 1FBEA2C03E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 19:09:49 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 17 Jan 2010 19:09:28 +0100
-Message-ID: <hivjon$vmv$1@ger.gmane.org>
+	Sun, 17 Jan 2010 13:27:59 -0500 (EST)
+X-Virus-Scanned: amavisd-new at 
+Received: from mta5.brinkster.com ([127.0.0.1])
+	by localhost (mta5.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id YehRYAiuPdkU
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Jan 2010 13:27:53 -0500 (EST)
+Received: from MareImbrium (82-46-19-72.cable.ubr02.bath.blueyonder.co.uk
+	[82.46.19.72])
+	by mta5.brinkster.com (Postfix) with ESMTP id 0A5BF2C02D6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Jan 2010 13:27:52 -0500 (EST)
+From: "John Willis" <John.Willis@Distant-earth.com>
+To: <openembedded-devel@lists.openembedded.org>
 References: <alpine.LFD.2.00.1001171141210.11393@localhost>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100113 Shredder/3.0.2pre
-In-Reply-To: <alpine.LFD.2.00.1001171141210.11393@localhost>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	<hivjon$vmv$1@ger.gmane.org>
+In-Reply-To: <hivjon$vmv$1@ger.gmane.org>
+Date: Sun, 17 Jan 2010 18:27:33 -0000
+Message-ID: <009501ca97a2$bd9bc940$38d35bc0$@Willis@Distant-earth.com>
+MIME-Version: 1.0
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: AcqXoGnaiUP+4XDdSMOCJsSvKb3lJgAAQ8/Q
+X-SA-Exim-Connect-IP: 65.182.109.74
+X-SA-Exim-Mail-From: John.Willis@Distant-earth.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: beagleboard-demo-image, and the evil that is "gnome-games"
@@ -46,52 +46,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 18:12:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 17 Jan 2010 18:38:18 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Language: en-us
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+> >   that package was the final obstacle to getting a BB-demo-image
+> > build.  other packages that were failing -- e2fsprogs, mplayer --
+> > have recently been fixed, leaving gnome-games as the sole remaining
+> > cause of build grief.
+> >
+> >   a suggestion -- until the issue with gnome-games is resolved, why
+> > not just remove its inclusion from the bb-demo-image task?  i'm being
+> > quite serious -- it's obviously not a critical package, and if it's
+> > the only thing keeping people from building and testing the OE dev
+> > branch for the beagleboard, take it out so folks can get back to
+> > testing.
 
-On 17-01-10 17:47, Robert P. J. Day wrote:
-> 
->   given that (on my fedora 12 system, anyway), the gnome-games package
-> has been unbuildable for weeks now, i finally threw in the towel,
-> removed the reference to it from the beagleboard task, and can now
-> build beagleboard-demo-image.
-> 
->   that package was the final obstacle to getting a BB-demo-image
-> build.  other packages that were failing -- e2fsprogs, mplayer --
-> have recently been fixed, leaving gnome-games as the sole remaining
-> cause of build grief.
-> 
->   a suggestion -- until the issue with gnome-games is resolved, why
-> not just remove its inclusion from the bb-demo-image task?  i'm being
-> quite serious -- it's obviously not a critical package, and if it's
-> the only thing keeping people from building and testing the OE dev
-> branch for the beagleboard, take it out so folks can get back to
-> testing.
-> 
->   it seems counter-productive to allow a single games package to put
-> the brakes on an entire build.
+Just to chip in on this,
 
-And I have yet to reproduce a single build failure with that recipe, and
-I build beagleboard-demo-image daily.
+I build 3 or 4 images daily that feature gnome-games (inc. bb-demo) on
+several build hosts (ok, none are Fedora based, mostly DEB based setups). 
 
-It seems counter-productive remove everything that might fail for a
-handfull of people. I remember busybox triggering an OOM on Philip's
-build machine not too long ago :)
+Can't say I have had any build issues with gnome-games on any of those
+setups (gnome-system-tools is my nemesis today and that's no in bb-demo
+;-)).
 
-regards,
+I personally don't favour taking packages out of an image if there are build
+issues on a small subset of systems. I think Phil (or someone else) suggest
+you consider contributing your build logs to OESTATS/TinderBox
+(http://wiki.openembedded.net/index.php/How_do_I_send_automatic_success_and_
+failure_reports) at least with that setup you leave a reference the failing
+logs in bug reports/mails so people can have a look into all the gory
+details :).
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Cheers,
 
-iD8DBQFLU1JYMkyGM64RGpERAn4XAJoCqmAwDzr1fBf0pGW60RXB+NN+OgCgu5bn
-FTEb3qMBUBqRwppKqhYm0TY=
-=B0Ix
------END PGP SIGNATURE-----
+John
+
+
 
 
 
