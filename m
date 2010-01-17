@@ -1,28 +1,29 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from smtp5-g21.free.fr ([212.27.42.5])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NWczH-0006Z4-40 for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 22:48:50 +0100
-Received: from g225080206.adsl.alicedsl.de ([92.225.80.206]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NWcx9-0004ns-Lb for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 21:46:35 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <eric@eukrea.com>) id 1NWd2w-00008B-Jj
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 22:52:37 +0100
+Received: from smtp5-g21.free.fr (localhost [127.0.0.1])
+	by smtp5-g21.free.fr (Postfix) with ESMTP id 0A636D48047
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Jan 2010 22:50:20 +0100 (CET)
+Received: from localhost.localdomain (tal33-2-82-228-175-43.fbx.proxad.net
+	[82.228.175.43])
+	by smtp5-g21.free.fr (Postfix) with ESMTP id 11309D48085
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Jan 2010 22:50:17 +0100 (CET)
+From: Eric Benard <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hivpa7$hib$3@ger.gmane.org>
-References: <alpine.LFD.2.00.1001170412460.4070@localhost>
-	<hivpa7$hib$3@ger.gmane.org>
-Date: Sun, 17 Jan 2010 22:46:34 +0100
-Message-ID: <1263764794.5353.33.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Sun, 17 Jan 2010 22:50:17 +0100
+Message-Id: <1263765017-12302-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+In-Reply-To: <1263763723.5353.16.camel@mattotaupa.wohnung.familie-menzel.net>
+References: <1263763723.5353.16.camel@mattotaupa.wohnung.familie-menzel.net>
+X-SA-Exim-Connect-IP: 212.27.42.5
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: move marvell firmware tarballs out of OE repo?
+Subject: [PATCH] usermanual : update note about PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,76 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 21:48:50 -0000
-X-Groupsio-MsgNum: 15827
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-vommvWmDvqllVhWjpZ4m"
+X-List-Received-Date: Sun, 17 Jan 2010 21:52:38 -0000
 
---=-vommvWmDvqllVhWjpZ4m
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+quoting Koen Kooi : Please don't set variables to the current default
+value, but leave them out. We had tons of problems with vars getting
+copy/paste where the default changed and we had to manually fix those
+(e.g. efl.bbclass still pokes needlessly at PACKAGES).
 
-Am Sonntag, den 17.01.2010, 20:44 +0100 schrieb Rolf Leggewie:
-> Robert P. J. Day wrote:
-> >   (this is the first in a small number of postings to clarify the
-> > purpose of some tarballs in the OE dev repository
->=20
-> DUDE!
->=20
-> Why are you again wasting everybody's time?  I thought you wanted to use
-> git log yourself to find out and then targeting the relevant people in a
-> focused fashion instead of flooding the list with this junk?
+Signed-off-by: Eric Benard <eric@eukrea.com>
+---
+ docs/usermanual/chapters/recipes.xml |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-(Very polite! ;-))
-
-If you look at his other messages you will see that this was probably
-not Robert=E2=80=99s intention and that he did his best.
-
-> BTW, re your suggestion to add READMEs.  Well, I guess that is fine.
-> But for people who aren't too lazy to use "git log --find-copies-harder"
-> the answers are often right there.
-
-(Again not a nice implication.)
-
-Anyways looking at the relevant commit
-
-        $ git log --follow recipes/firmwares/marvell-gspi-fw/9.70.3-p37.tar=
-.gz
-        commit 7ea3026aa3c216f9943711771e9245b2b6ff7c84
-        Author: Marcin Juszkiewicz <marcin@buglabs.net>
-        Date:   Thu Apr 23 14:01:35 2009 +0200
-       =20
-            marvel-gspi-fw: added firmware for WiFi bugmodule
-           =20
-            This is firmware for not-yet-released-into-sales wifi/bt bugmod=
-ule.
-
-it does not explicitly say, why the firmware cannot be made public
-somewhere or if it ever will be available.
-
-Having =E2=80=9Cperfect=E2=80=9D commit messages in OE seems to still be a =
-current
-topic, so having a README file is certainly an idea I support at least
-for the files the commit messages can not be changed anymore. This would
-definitely help me and lower the barrier/learning curve to get to know
-OE.
+diff --git a/docs/usermanual/chapters/recipes.xml b/docs/usermanual/chapters/recipes.xml
+index cad1d80..30364c0 100644
+--- a/docs/usermanual/chapters/recipes.xml
++++ b/docs/usermanual/chapters/recipes.xml
+@@ -323,9 +323,9 @@ mv fixed.recipe.bb myrecipe.bb</screen></para>
+     then the default value of "r0" is used.</para>
+ 
+     <para><note>
+-        <para>It is good practice to always define PR in your recipes, even
+-        for the <emphasis>"r0"</emphasis> release, so that when editing the
+-        recipe it is clear that the PR number needs to be updated.</para>
++        <para>As PR is set to "r0" as a default, it must not be defined at the
++        creation of the recipe. When editing the recipe for the first time, the
++        PR variable must be defined to "r1".</para>
+ 
+         <para>You should always increment PR when modifying a recipe.
+         Sometimes this can be avoided if the change will have no effect on the
+-- 
+1.6.3.3
 
 
-Thanks,
 
-Paul
-
---=-vommvWmDvqllVhWjpZ4m
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktThTkACgkQPX1aK2wOHVj9sACfW25RZ03O6Rs2VbIH3ym3elO5
-2ncAni7N/xLlLUlHq/gJMPVjnCi9Yjhm
-=e/eT
------END PGP SIGNATURE-----
-
---=-vommvWmDvqllVhWjpZ4m--
