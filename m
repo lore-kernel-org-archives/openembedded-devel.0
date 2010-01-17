@@ -1,24 +1,20 @@
 Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NWWXY-0006Pn-1k
+	(envelope-from <rpjday@crashcourse.ca>) id 1NWYKC-0003Vw-Qq
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 15:55:47 +0100
+	Sun, 17 Jan 2010 17:50:07 +0100
 Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
 	([99.235.241.187] helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NWWVO-0008K8-8P for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 09:53:30 -0500
-Date: Sun, 17 Jan 2010 09:52:45 -0500 (EST)
+	id 1NWYI3-0007kK-VZ for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 11:47:52 -0500
+Date: Sun, 17 Jan 2010 11:47:06 -0500 (EST)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@localhost
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201001171146.46952.holger+oe@freyther.de>
-Message-ID: <alpine.LFD.2.00.1001170948220.8641@localhost>
-References: <alpine.LFD.2.00.1001161439340.13406@localhost>
-	<hitlc7$fes$1@ger.gmane.org>
-	<alpine.LFD.2.00.1001170254190.2736@localhost>
-	<201001171146.46952.holger+oe@freyther.de>
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.00.1001171141210.11393@localhost>
 User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
 X-AntiAbuse: This header was added to track abuse,
@@ -34,7 +30,7 @@ X-SA-Exim-Connect-IP: 64.235.106.9
 X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: what's the purpose of tarballs in the OE repo?
+Subject: beagleboard-demo-image, and the evil that is "gnome-games"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,31 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 14:55:47 -0000
+X-List-Received-Date: Sun, 17 Jan 2010 16:50:08 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Sun, 17 Jan 2010, Holger Hans Peter Freyther wrote:
 
-> On Sunday 17 January 2010 08:55:18 Robert P. J. Day wrote:
->
-> >   good plan, i'll take a look at that later today, thanks.
->
-> thanks for the work you have put into this.
+  given that (on my fedora 12 system, anyway), the gnome-games package
+has been unbuildable for weeks now, i finally threw in the towel,
+removed the reference to it from the beagleboard task, and can now
+build beagleboard-demo-image.
 
-  not a big deal, i noticed that a couple people have already replied
-that they have ideas for how to move some tarballs out of the OE repo.
+  that package was the final obstacle to getting a BB-demo-image
+build.  other packages that were failing -- e2fsprogs, mplayer --
+have recently been fixed, leaving gnome-games as the sole remaining
+cause of build grief.
 
-  i'm well aware that, very occasionally, there are special
-circumstances which require that actual content be added to the repo,
-but in cases like that, it might be useful to add a README file to the
-appropriate recipes directory explaining those circumstances.
+  a suggestion -- until the issue with gnome-games is resolved, why
+not just remove its inclusion from the bb-demo-image task?  i'm being
+quite serious -- it's obviously not a critical package, and if it's
+the only thing keeping people from building and testing the OE dev
+branch for the beagleboard, take it out so folks can get back to
+testing.
 
-  not only would that prevent confusion but, sometime down the road,
-someone examining that README file might realize, "hey, those special
-circumstances don't apply anymore, we can finally do a proper download
-here!", and submit a patch for it.
-
-  or something like that.
+  it seems counter-productive to allow a single games package to put
+the brakes on an entire build.
 
 rday
 --
