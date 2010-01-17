@@ -1,29 +1,41 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from mail-pz0-f185.google.com ([209.85.222.185])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NWUdZ-000261-B6
+	(envelope-from <camelguo@gmail.com>) id 1NWUw7-0007h5-GV
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 13:53:52 +0100
-Received: from 88-110-78-150.dynamic.dsl.as9105.com ([88.110.78.150]
-	helo=[192.168.2.155])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NWUbR-0002XJ-Mg
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 12:51:37 +0000
-From: Phil Blundell <philb@gnu.org>
+	Sun, 17 Jan 2010 14:13:02 +0100
+Received: by pzk15 with SMTP id 15so1602515pzk.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Jan 2010 05:10:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=lpb+sO5m3NZSaSlZVmIf1EMzU9AizMOhuT4lQ7UGur8=;
+	b=o2cwQCtyWGnzys4Mn7TwDjIyrEQQBrEScNuC4Kdb7JBlzdaqo0Ey09Ho4yi0OBhgnq
+	sSSHIoVwnaw6/8UBdpwqyrYvcljlP74rcdCNlofDJZuF8brcUO1JWelv5kkXQ3SxJvaa
+	8SooXKhT9juSRYEkGc9bHFbLcAt8rApxxiC+U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=iJdYsvGAKIPkRRqRidv7W+HWTth9ot0O4eF+9W6x7eIFAos40K7XxaDHn3BMLqfdqE
+	96Jxt+b9C+nekrd9XtsddGEgUDZHZEmxbBEydADuWUJ7oZops5eLeflzgAUn3lzAIXGE
+	DP5FUGSsDmKAtVoZi5JOvZalwN4Kf+qw3PN8Y=
+Received: by 10.143.25.19 with SMTP id c19mr3364615wfj.87.1263733845040;
+	Sun, 17 Jan 2010 05:10:45 -0800 (PST)
+Received: from localhost ([123.54.105.23])
+	by mx.google.com with ESMTPS id 21sm3342447pzk.3.2010.01.17.05.10.42
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 17 Jan 2010 05:10:44 -0800 (PST)
+From: Guo Hongruan <camelguo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1263732383.3210.27.camel@mattotaupa.wohnung.familie-menzel.net>
-References: <alpine.LFD.2.00.1001161439340.13406@localhost>
-	<1263721506.1889.2.camel@Nokia-N900-42-11>
-	<1263732383.3210.27.camel@mattotaupa.wohnung.familie-menzel.net>
-Date: Sun, 17 Jan 2010 12:51:33 +0000
-Message-ID: <1263732693.457.910.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+Date: Sun, 17 Jan 2010 21:10:18 +0800
+Message-Id: <1263733818-32111-1-git-send-email-camelguo@gmail.com>
+X-Mailer: git-send-email 1.5.4.3
+In-Reply-To: <>
+References: <>
+X-SA-Exim-Connect-IP: 209.85.222.185
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: =?UTF-8?B?UmU6IFtPVF0gV2hhdCBkb2VzIMK7T2RwLsKrIHN0YW5kIGZvcj8gKHdhczogT2RwLjogd2hhdCdzIHRoZSBwdXJwb3NlIG9mIHRhcmJhbGxzIGluIHRoZSBPRSByZXBvPyk=?=
+Subject: [PATCH] Set preferred glibc to 2.10.1 in conf/distro/micro.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,36 +49,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 12:53:52 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 17 Jan 2010 13:13:03 -0000
 
-I guess he has fallen victim to something along the lines of:
+* the preferred version of binutils of conf/distro/micro.conf is 2.19.51
+* the preferred version of glibc is 2.6.1 which is defined in sane-toolchain.inc
+* the ld produced by binutils-2.19.51 reports that it can not find the __begin symbol when linking with glibc-2.6.1
 
-https://bugs.maemo.org/show_bug.cgi?id=3D6541
+Signed-off-by: Guo Hongruan <camelguo@gmail.com>
+---
+ conf/distro/micro.conf |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-Bx
-
-On Sun, 2010-01-17 at 13:46 +0100, Paul Menzel wrote:
-> Dear Marcin,
->=20
->=20
-> what dose =C2=BBOdp.=C2=AB stand for?
->=20
-> Overall development plan? Is it on that list [1].
->=20
->=20
-> Thanks,
->=20
-> Paul
->=20
->=20
-> [1] http://acronyms.thefreedictionary.com/Outline+Development+Plan
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+diff --git a/conf/distro/micro.conf b/conf/distro/micro.conf
+index d9fc595..9885425 100644
+--- a/conf/distro/micro.conf
++++ b/conf/distro/micro.conf
+@@ -62,6 +62,8 @@ MACHINE_KERNEL_VERSION = "2.6"
+ #############################################################################
+ LIBC ?= "eglibc"
+ PREFERRED_BINUTILS = "2.19.51"
++PREFERRED_VERSION_glibc             ?= "2.10.1"
++PREFERRED_VERSION_glibc-initial     ?= "2.10.1"
+ PREFERRED_ARM_INSTRUCTION_SET ?= "thumb"
+ require conf/distro/include/sane-toolchain.inc
+ 
+-- 
+1.5.4.3
 
 
 
