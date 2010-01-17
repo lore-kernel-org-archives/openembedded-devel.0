@@ -1,36 +1,44 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail-fx0-f212.google.com ([209.85.220.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NWYKC-0003Vw-Qq
+	(envelope-from <martin.jansa@gmail.com>) id 1NWYQO-0003fh-1H
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 17:50:07 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NWYI3-0007kK-VZ for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 11:47:52 -0500
-Date: Sun, 17 Jan 2010 11:47:06 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.1001171141210.11393@localhost>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Sun, 17 Jan 2010 17:56:31 +0100
+Received: by fxm4 with SMTP id 4so180303fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Jan 2010 08:54:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=HuPUu1nwQ6au6lvlgDWNGHVLw6AvV8texn7wfx5HJDo=;
+	b=AhtnC/fQ6Uw3t/H1j8kAPhkI7dE4srN+lQZFPfAI6XnlgOYOsnwdidNZSsK01JzOTw
+	2N0jDoF1GZuPcNa19zTXl+BBP+porGee5G/HDhCugK4/gboI6yt919o/udAFqUpDI+vA
+	FSSV401f/kBImJra6IX1ff3Gw0g7hjBkHQlNk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=nUWDTAC2Rw3duoRXSEMvTKN6L0mOBQ7DsBilahnvpnj5mgRRgwWRo5EXfnaEVkBsXS
+	+e3AQR45ZoB9lMK/SwEX+2S6N4UFe83tD6pS96mpdNkiq5tzTSRwt0z+ekkNgit1b06W
+	yHoh/T4qyrYsGBCy/vjAn0Avius7gvLzo4q9M=
+Received: by 10.223.76.137 with SMTP id c9mr577496fak.76.1263747254364;
+	Sun, 17 Jan 2010 08:54:14 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 15sm1760266fxm.6.2010.01.17.08.54.13
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 17 Jan 2010 08:54:13 -0800 (PST)
+Date: Sun, 17 Jan 2010 17:54:04 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100117165403.GP30938@jama>
+References: <alpine.LFD.2.00.1001171141210.11393@localhost>
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+In-Reply-To: <alpine.LFD.2.00.1001171141210.11393@localhost>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.212
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: beagleboard-demo-image, and the evil that is "gnome-games"
+Subject: Re: beagleboard-demo-image, and the evil that is "gnome-games"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,40 +52,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 16:50:08 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sun, 17 Jan 2010 16:56:31 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
+On Sun, Jan 17, 2010 at 11:47:06AM -0500, Robert P. J. Day wrote:
+>   it seems counter-productive to allow a single games package to put
+> the brakes on an entire build.
 
-  given that (on my fedora 12 system, anyway), the gnome-games package
-has been unbuildable for weeks now, i finally threw in the towel,
-removed the reference to it from the beagleboard task, and can now
-build beagleboard-demo-image.
+Maybe you want to build with -k?
 
-  that package was the final obstacle to getting a BB-demo-image
-build.  other packages that were failing -- e2fsprogs, mplayer --
-have recently been fixed, leaving gnome-games as the sole remaining
-cause of build grief.
+If there is some build problem in games package, then it should be
+fixed, not silenced by whole task removal.
 
-  a suggestion -- until the issue with gnome-games is resolved, why
-not just remove its inclusion from the bb-demo-image task?  i'm being
-quite serious -- it's obviously not a critical package, and if it's
-the only thing keeping people from building and testing the OE dev
-branch for the beagleboard, take it out so folks can get back to
-testing.
+Regards,
 
-  it seems counter-productive to allow a single games package to put
-the brakes on an entire build.
-
-rday
---
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
