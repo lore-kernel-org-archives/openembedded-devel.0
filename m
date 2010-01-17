@@ -1,38 +1,27 @@
-Received: from mta5.brinkster.com ([65.182.109.74])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <John.Willis@Distant-earth.com>) id 1NWa0s-0003eO-Kk
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NWab3-0004On-MC
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 19:38:18 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mta5.brinkster.com (Postfix) with ESMTP id 1FBEA2C03E1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 13:27:59 -0500 (EST)
-X-Virus-Scanned: amavisd-new at 
-Received: from mta5.brinkster.com ([127.0.0.1])
-	by localhost (mta5.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id YehRYAiuPdkU
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 13:27:53 -0500 (EST)
-Received: from MareImbrium (82-46-19-72.cable.ubr02.bath.blueyonder.co.uk
-	[82.46.19.72])
-	by mta5.brinkster.com (Postfix) with ESMTP id 0A5BF2C02D6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 13:27:52 -0500 (EST)
-From: "John Willis" <John.Willis@Distant-earth.com>
-To: <openembedded-devel@lists.openembedded.org>
-References: <alpine.LFD.2.00.1001171141210.11393@localhost>
-	<hivjon$vmv$1@ger.gmane.org>
-In-Reply-To: <hivjon$vmv$1@ger.gmane.org>
-Date: Sun, 17 Jan 2010 18:27:33 -0000
-Message-ID: <009501ca97a2$bd9bc940$38d35bc0$@Willis@Distant-earth.com>
+	Sun, 17 Jan 2010 20:15:41 +0100
+Received: (qmail 11562 invoked by uid 813007); 17 Jan 2010 19:13:25 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 17 Jan 2010 19:13:25 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 17 Jan 2010 20:13:05 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-rc2-00268-g45d28b0; KDE/4.3.4; x86_64; ;
+	)
+References: <d1b08f941001170606w13dcfc0ey341da93deb94c7b8@mail.gmail.com>
+In-Reply-To: <d1b08f941001170606w13dcfc0ey341da93deb94c7b8@mail.gmail.com>
 MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook 12.0
-Thread-Index: AcqXoGnaiUP+4XDdSMOCJsSvKb3lJgAAQ8/Q
-X-SA-Exim-Connect-IP: 65.182.109.74
-X-SA-Exim-Mail-From: John.Willis@Distant-earth.com
+Message-Id: <201001172013.06010.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: beagleboard-demo-image, and the evil that is "gnome-games"
+Subject: Re: [RFC] Zaurus: make updater.sh obsolete for poodle, clamshells and 	tosa
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,45 +35,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 18:38:18 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Language: en-us
+X-List-Received-Date: Sun, 17 Jan 2010 19:15:41 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-> >   that package was the final obstacle to getting a BB-demo-image
-> > build.  other packages that were failing -- e2fsprogs, mplayer --
-> > have recently been fixed, leaving gnome-games as the sole remaining
-> > cause of build grief.
-> >
-> >   a suggestion -- until the issue with gnome-games is resolved, why
-> > not just remove its inclusion from the bb-demo-image task?  i'm being
-> > quite serious -- it's obviously not a critical package, and if it's
-> > the only thing keeping people from building and testing the OE dev
-> > branch for the beagleboard, take it out so folks can get back to
-> > testing.
+Dnia niedziela, 17 stycznia 2010 o 15:06:19 Andrea Adami napisa=C5=82(a):
+> Reading the post about gnu-tar I remember we talked about a new way to
+> install 2.6 kernels and images on Zaurus.
 
-Just to chip in on this,
+Any way is good but I hope that there still be a way to install OE build=20
+results on SharpROM based Zaurus.
+=20
+> Well, there are very good reasons to make this now obsolete:
+> - we can flash from console (2.6 userspace)
+> - we have a different image-layout (kernel in /boot), thus we can boot
+> from every hd partition
+> - we can create jffs2 images (see Narcissus) and flash these from
+> console, without striping the legacy headers. We can even have 2
+> images in nand
+=20
+> My idea would be:
+>=20
+> -refactor updater.sh and flash only kernels
+> -provide an updater script
 
-I build 3 or 4 images daily that feature gnome-games (inc. bb-demo) on
-several build hosts (ok, none are Fedora based, mostly DEB based setups). 
+What about this (note that I do not track kexecboot work):
 
-Can't say I have had any build issues with gnome-games on any of those
-setups (gnome-system-tools is my nemesis today and that's no in bb-demo
-;-)).
+=2D make updater.sh which will flash kexecboot kernel and reboot
+=2D let kexecboot initramfs checks for CARD/sysupdate.sh
+=2D CARD/sysupdate.sh will update rootfs/kernel etc and reboot
 
-I personally don't favour taking packages out of an image if there are build
-issues on a small subset of systems. I think Phil (or someone else) suggest
-you consider contributing your build logs to OESTATS/TinderBox
-(http://wiki.openembedded.net/index.php/How_do_I_send_automatic_success_and_
-failure_reports) at least with that setup you leave a reference the failing
-logs in bug reports/mails so people can have a look into all the gory
-details :).
-
-Cheers,
-
-John
-
+sysupdate.sh name is chosen to allow updater.sh (for crappy bootloader) and=
+=20
+real update script to be on same card. This way you can update any Zaurus=20
+nevermind what kind of OS it had before. And as kexecboot kernel will have =
+our=20
+nand split table inside anything can be done in sysupdate.sh script (format=
+ing=20
+/ and /home for example or installing them from card images etc).
+=20
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
 
 
