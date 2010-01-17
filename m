@@ -1,31 +1,27 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NWUKW-0001H6-Hq
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 13:34:11 +0100
-Received: from 88-110-78-150.dynamic.dsl.as9105.com ([88.110.78.150]
-	helo=[192.168.2.155])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NWUIO-0002FG-2U
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 12:31:56 +0000
-From: Phil Blundell <philb@gnu.org>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NWUV7-0001ie-Fx for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 13:45:08 +0100
+Received: from f053033218.adsl.alicedsl.de ([78.53.33.218]
+	helo=[192.168.178.25])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NWUSz-0002Rd-Cf for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 12:42:53 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <op.u6oempf0mn1qzu@guohr-laptop-ubuntu>
-References: <> <1263698541-9726-1-git-send-email-camelguo@gmail.com>
-	<1263726023.457.897.camel@lenovo.internal.reciva.com>
-	<op.u6ob5ohzmn1qzu@guohr-laptop-ubuntu>
-	<1263729318.457.901.camel@lenovo.internal.reciva.com>
-	<op.u6oempf0mn1qzu@guohr-laptop-ubuntu>
-Date: Sun, 17 Jan 2010 12:31:50 +0000
-Message-ID: <1263731511.457.907.camel@lenovo.internal.reciva.com>
+In-Reply-To: <alpine.LFD.2.00.1001170426100.4163@localhost>
+References: <alpine.LFD.2.00.1001170426100.4163@localhost>
+Date: Sun, 17 Jan 2010 13:42:52 +0100
+Message-ID: <1263732172.3210.24.camel@mattotaupa.wohnung.familie-menzel.net>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Change the prefer binutils of micro.conf from 2.19.51 to 2.18
+Subject: [OT] Git: show commits belonging to renamed/moved files (was: why qpealarmclockapplet-1.0.9/missing-files.tar.gz in OE repo?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,33 +35,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 12:34:11 -0000
+X-List-Received-Date: Sun, 17 Jan 2010 12:45:08 -0000
+X-Groupsio-MsgNum: 15793
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-S6hSMB8mtnWESDQ0msCT"
+
+--=-S6hSMB8mtnWESDQ0msCT
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, 2010-01-17 at 20:07 +0800, Guo Hongruan wrote:
-> I set LIBC=glibc in shell environment.
+Am Sonntag, den 17.01.2010, 04:29 -0500 schrieb Robert P. J. Day:
+> $ git log recipes/qpealarmclock/qpealarmclockapplet-1.0.9/missing-files.t=
+ar.gz
+> commit 709c4d66e0b107ca606941b988bad717c0b45d9b
+> Author: Denys Dmytriyenko <denis@denix.org>
+> Date:   Tue Mar 17 14:32:59 2009 -0400
+>=20
+>     rename packages/ to recipes/ per earlier agreement
+>=20
+>     See links below for more details:
+>     http://thread.gmane.org/gmane.comp.handhelds.openembedded/21326
+>     http://thread.gmane.org/gmane.comp.handhelds.openembedded/21816
+>=20
+>     Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+>     ... snip ...
 
-Okay.  In that case, you are going off-piste to some extent and there is
-certainly no guarantee that the default DISTRO config will be suitable.
-The settings within micro.conf are designed to be internally consistent,
-i.e. the toolchain is intended to work with the selected version of
-eglibc but there are no promises about other C libraries.
+Just for your information.
 
-So, to that extent, I don't really consider it a bug in micro that glibc
-2.6.1 is unbuildable.  If we can fix the glibc build without breaking
-anything else then that would be fine, but this has to take second place
-to ensuring that the default configuration goes on working correctly.
-
-> Yes, I think so. Several days ago, I submitted a patch to update glibc to  
-> 2.10 in conf/distro/include/sane-toolchain.inc, but was rejected and the  
-> reason was that it may break other buildings and had not full tested.
-
-If you would like to make a patch to set the glibc version to 2.10 for
-micro only (i.e. put a suitable PREFERRED_VERSION in micro.conf) then I
-will happily apply it.
-
-p.
+        $ git help log
+        [=E2=80=A6]
+               --follow
+                   Continue listing the history of a file beyond
+        renames.
+        [=E2=80=A6]
 
 
+Thanks,
 
+Paul
+
+--=-S6hSMB8mtnWESDQ0msCT
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAktTBcsACgkQPX1aK2wOHVjNfwCePviNm1kq4ff39DXWppfh7dsa
+MDIAnRBHX6IGp0S3CDFkAWBiR+cy2mlm
+=8/lv
+-----END PGP SIGNATURE-----
+
+--=-S6hSMB8mtnWESDQ0msCT--
