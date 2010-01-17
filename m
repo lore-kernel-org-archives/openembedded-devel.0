@@ -1,26 +1,28 @@
-Received: from smtp1.cybercity.dk ([212.242.43.251])
-	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <sgh@sgh.dk>)
-	id 1NWchj-0004b2-6w for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 22:30:42 +0100
-Received: from natla.sgh.dk (0x4dd5bf76.adsl.cybercity.dk [77.213.191.118])
-	by smtp1.cybercity.dk (Postfix) with ESMTP id 8A2AF5868DD
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 22:31:27 +0100 (CET)
-Received: from phoenix.localnet (phoenix.local [192.168.0.226])
-	by natla.sgh.dk (Postfix) with ESMTP id 540B47D00E
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 23:18:22 +0100 (CET)
-From: =?iso-8859-1?q?S=F8ren_Holm?= <sgh@sgh.dk>
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NWci0-0004bU-Bj for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 22:30:59 +0100
+Received: from g225080206.adsl.alicedsl.de ([92.225.80.206]
+	helo=[192.168.178.25])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NWcfs-0007g1-Tz for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 21:28:45 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Jan 2010 22:28:26 +0100
-User-Agent: KMail/1.12.4 (Linux/2.6.33-020633rc4-generic; KDE/4.3.4; i686; ; )
-MIME-Version: 1.0
-Message-Id: <201001172228.26477.sgh@sgh.dk>
-X-SA-Exim-Connect-IP: 212.242.43.251
-X-SA-Exim-Mail-From: sgh@sgh.dk
+In-Reply-To: <hivtt3$v2r$1@ger.gmane.org>
+References: <1263760344-26105-1-git-send-email-eric@eukrea.com>
+	<hivtt3$v2r$1@ger.gmane.org>
+Date: Sun, 17 Jan 2010 22:28:43 +0100
+Message-ID: <1263763723.5353.16.camel@mattotaupa.wohnung.familie-menzel.net>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Mesa packages and TLS
+Subject: Re: [PATCH] barebox: Add recipe for this new bootloader
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,27 +36,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 21:30:42 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Sun, 17 Jan 2010 21:30:59 -0000
+X-Groupsio-MsgNum: 15824
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-qutq+o04vdV/9c8KkzsL"
+
+--=-qutq+o04vdV/9c8KkzsL
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi
+Am Sonntag, den 17.01.2010, 22:02 +0100 schrieb Koen Kooi:
+> On 17-01-10 21:32, Eric Benard wrote:
+> > * barebox is "a bootloader that inherits the best of U-Boot and the
+> Linux kernel"
+> > * add recipe for v2009.12.0 (last stable)
+> > * add recipe for git repository
+> >=20
+> > Signed-off-by: Eric Benard <eric@eukrea.com>
+>=20
+> > +++ b/recipes/barebox/barebox_2009.12.bb
+> > @@ -0,0 +1,15 @@
+>=20
+>=20
+> > +PR =3D "r0"
+>=20
+> > +++ b/recipes/barebox/barebox_git.bb
+> > @@ -0,0 +1,10 @@
+>=20
+> > +PR =3D "r0"
+>=20
+> Please don't set variables to the current default value, but leave
+> them
+> out. We had tons of problems with vars getting copy/paste where the
+> default changed and we had to manually fix those (e.g. efl.bbclass
+> still
+> pokes needlessly at PACKAGES).
+>=20
+> Setting PR is relatively minor, but lets stay consistent :)=20
 
-After I startet using mesa >=3D7.4 at lest the mesa-packages actually compi=
-les. Which is=20
-good. Nevertheless there still are problems. Apparently the TLS support whi=
-ch is currently=20
-disables on uclibc targets is also broken on glibc. At lest I get the follo=
-wing when=20
-running glxgears.
+Could someone please change this in the manual please [1].
 
-/usr/lib/dri/swrast_dri.so: undefined symbol: _glapi_tls_Context)
-
-Removing the line "inherit glx-use-tls" in mesa-common.inc makes software-r=
-endering work=20
-again.
-
-/S=F8ren Holm
+=C2=BBIt is good practice to always define PR in your recipes, even for the
+"r0" release, so that when editing the recipe it is clear that the PR
+number needs to be updated.=C2=AB
 
 
+Thanks,
+
+Paul
+
+
+[1] http://docs.openembedded.org/usermanual/html/recipes_versioning.html
+
+--=-qutq+o04vdV/9c8KkzsL
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAktTgQsACgkQPX1aK2wOHVgzJACfZy8PlakGHT/varSPJJp6inEX
+C0AAniGFw9la4SjI+7Vnw0NeDJ16Rkwh
+=J544
+-----END PGP SIGNATURE-----
+
+--=-qutq+o04vdV/9c8KkzsL--
