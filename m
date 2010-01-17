@@ -1,27 +1,29 @@
-Received: from smtpauth01.prod.mesa1.secureserver.net ([64.202.165.181])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <mike@mwester.net>) id 1NWeES-0004YQ-Ju
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Jan 2010 00:08:35 +0100
-Received: (qmail 24462 invoked from network); 17 Jan 2010 23:06:17 -0000
-Received: from unknown (209.242.7.187)
-	by smtpauth01.prod.mesa1.secureserver.net (64.202.165.181) with ESMTP;
-	17 Jan 2010 23:06:17 -0000
-Message-ID: <4B5397E0.8010505@mwester.net>
-Date: Sun, 17 Jan 2010 17:06:08 -0600
-From: Mike Westerhof <mike@mwester.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23 Mnenhy/0.7.6.0
-MIME-Version: 1.0
+Received: from smtp1.cybercity.dk ([212.242.43.251])
+	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <sgh@sgh.dk>)
+	id 1NWerK-0004lq-3u for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Jan 2010 00:48:45 +0100
+Received: from natla.sgh.dk (0x4dd5bf76.adsl.cybercity.dk [77.213.191.118])
+	by smtp1.cybercity.dk (Postfix) with ESMTP id 615DC58689C
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Jan 2010 00:49:30 +0100 (CET)
+Received: from phoenix.localnet (phoenix.local [192.168.0.226])
+	by natla.sgh.dk (Postfix) with ESMTP id CF7C395100
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Jan 2010 01:36:25 +0100 (CET)
+From: =?iso-8859-15?q?S=F8ren_Holm?= <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-References: <1263760344-26105-1-git-send-email-eric@eukrea.com>	<hivtt3$v2r$1@ger.gmane.org>	<1263763723.5353.16.camel@mattotaupa.wohnung.familie-menzel.net>
-	<ac9c93b11001171353p358c02a4k90cb3dd70240bc58@mail.gmail.com>
-In-Reply-To: <ac9c93b11001171353p358c02a4k90cb3dd70240bc58@mail.gmail.com>
-X-SA-Exim-Connect-IP: 64.202.165.181
-X-SA-Exim-Mail-From: mike@mwester.net
+Date: Mon, 18 Jan 2010 00:46:29 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-020633rc4-generic; KDE/4.3.4; i686; ; )
+References: <201001172228.26477.sgh@sgh.dk>
+	<Pine.LNX.4.64.1001171801430.12229@juice.ott.cti.com>
+In-Reply-To: <Pine.LNX.4.64.1001171801430.12229@juice.ott.cti.com>
+MIME-Version: 1.0
+Message-Id: <201001180046.29318.sgh@sgh.dk>
+X-SA-Exim-Connect-IP: 212.242.43.251
+X-SA-Exim-Mail-From: sgh@sgh.dk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] barebox: Add recipe for this new bootloader
+Subject: Re: Mesa packages and TLS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,37 +37,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 23:08:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 17 Jan 2010 23:48:45 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-15"
+Content-Transfer-Encoding: quoted-printable
 
-Frans Meulenbroeks wrote:
-> 2010/1/17 Paul Menzel <paulepanter@users.sourceforge.net>:
->> Am Sonntag, den 17.01.2010, 22:02 +0100 schrieb Koen Kooi:
+Mandag 18 januar 2010 00:02:58 skrev Michael Smith:
+>=20
+> What MACHINE and DISTRO are you using? Which glibc version?
+>=20
+> Mike
 
->>> Please don't set variables to the current default value, but leave
->>> them
->>> out. We had tons of problems with vars getting copy/paste where the
->>> default changed and we had to manually fix those (e.g. efl.bbclass
->>> still
->>> pokes needlessly at PACKAGES).
->>>
->>> Setting PR is relatively minor, but lets stay consistent :)
->> Could someone please change this in the manual please [1].
->>
->> »It is good practice to always define PR in your recipes, even for the
->> "r0" release, so that when editing the recipe it is clear that the PR
->> number needs to be updated.«
->>
-> Personally I'm in favour of the above good practice.
-> I suggest to keep PR = "r0" in recipes
-> 
-> Frans
+i686
+angstrom.2008.1=20
+glibc must be 2.9 since I have not enforced anythin else.
 
-+1 on this.   The PR is such a common variable to set, and as Koen
-observes setting it to zero is relatively minor.  I feel that its
-presence in a recipe may help avoid the "forgot to bump PR" problems.
-
--Mike (mwester)
+/S=F8ren
 
 
