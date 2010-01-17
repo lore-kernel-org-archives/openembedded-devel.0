@@ -1,39 +1,31 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from smtpfb1-g21.free.fr ([212.27.42.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NWbep-0002sB-5j
+	(envelope-from <eric@eukrea.com>) id 1NWbyZ-0008Pm-4e
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 21:23:38 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NWbcf-0005GZ-O3 for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 15:21:22 -0500
-Date: Sun, 17 Jan 2010 15:20:34 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
+	Sun, 17 Jan 2010 21:44:02 +0100
+Received: from smtp4-g21.free.fr (smtp4-g21.free.fr [212.27.42.4])
+	by smtpfb1-g21.free.fr (Postfix) with ESMTP id 762AD2D754
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Jan 2010 21:32:47 +0100 (CET)
+Received: from smtp4-g21.free.fr (localhost [127.0.0.1])
+	by smtp4-g21.free.fr (Postfix) with ESMTP id 983C44C8107
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Jan 2010 21:32:43 +0100 (CET)
+Received: from localhost.localdomain (pac33-2-82-240-38-71.fbx.proxad.net
+	[82.240.38.71])
+	by smtp4-g21.free.fr (Postfix) with ESMTP id 9C3674C81E9
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Jan 2010 21:32:40 +0100 (CET)
+From: Eric Benard <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <009501ca97a2$bd9bc940$38d35bc0$@Willis@Distant-earth.com>
-Message-ID: <alpine.LFD.2.00.1001171511300.7174@localhost>
-References: <alpine.LFD.2.00.1001171141210.11393@localhost>
-	<hivjon$vmv$1@ger.gmane.org>
-	<009501ca97a2$bd9bc940$38d35bc0$@Willis@Distant-earth.com>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+Date: Sun, 17 Jan 2010 21:32:24 +0100
+Message-Id: <1263760344-26105-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.0.4
+X-SA-Exim-Connect-IP: 212.27.42.9
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: beagleboard-demo-image, and the evil that is "gnome-games"
+Subject: [PATCH] barebox: Add recipe for this new bootloader
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,49 +39,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 20:23:38 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sun, 17 Jan 2010 20:44:02 -0000
 
-On Sun, 17 Jan 2010, John Willis wrote:
+* barebox is "a bootloader that inherits the best of U-Boot and the Linux kernel"
+* add recipe for v2009.12.0 (last stable)
+* add recipe for git repository
 
-> I personally don't favour taking packages out of an image if there
-> are build issues on a small subset of systems. I think Phil (or
-> someone else) suggest you consider contributing your build logs to
-> OESTATS/TinderBox
-> (http://wiki.openembedded.net/index.php/How_do_I_send_automatic_success_and_
-> failure_reports) at least with that setup you leave a reference the
-> failing logs in bug reports/mails so people can have a look into all
-> the gory details :).
+Signed-off-by: Eric Benard <eric@eukrea.com>
+---
+ recipes/barebox/barebox.inc        |   49 ++++++++++++++++++++++++++++++++++++
+ recipes/barebox/barebox_2009.12.bb |   15 +++++++++++
+ recipes/barebox/barebox_git.bb     |   10 +++++++
+ 3 files changed, 74 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/barebox/barebox.inc
+ create mode 100644 recipes/barebox/barebox_2009.12.bb
+ create mode 100644 recipes/barebox/barebox_git.bb
 
-  in fact, on friday, i posted to this list that gnome-games was
-broken under my environment, and also left a link to the full log file
-contents here:
+diff --git a/recipes/barebox/barebox.inc b/recipes/barebox/barebox.inc
+new file mode 100644
+index 0000000..b3def2a
+--- /dev/null
++++ b/recipes/barebox/barebox.inc
+@@ -0,0 +1,49 @@
++DESCRIPTION = "Barebox - a bootloader that inherits the best of U-Boot and the Linux kernel"
++HOMEPAGE = "http://www.barebox.org/"
++SECTION = "bootloaders"
++PRIORITY = "optional"
++LICENSE = "GPL"
++PROVIDES = "virtual/bootloader"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++inherit kernel-arch
++
++EXTRA_OEMAKE = "CROSS_COMPILE=${TARGET_PREFIX}"
++
++BAREBOX_MACHINE ?= "${MACHINE}_defconfig"
++BAREBOX_BINARY ?= "barebox.bin"
++BAREBOX_IMAGE ?= "barebox-${MACHINE}-${PV}-${PR}.bin"
++BAREBOX_SYMLINK ?= "barebox-${MACHINE}.bin"
++
++INSANE_SKIP_${PN} = True
++
++do_configure_prepend() {
++	   cp ${WORKDIR}/defconfig ${S}/.config
++	   oe_runmake oldconfig
++}
++
++do_compile () {
++	   unset LDFLAGS
++	   unset CFLAGS
++	   unset CPPFLAGS
++	   oe_runmake all
++}
++
++do_deploy () {
++	  install -d ${DEPLOY_DIR_IMAGE}
++	  install ${S}/${BAREBOX_BINARY} ${DEPLOY_DIR_IMAGE}/${BAREBOX_IMAGE}
++	  package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${BAREBOX_IMAGE}
++
++	  cd ${DEPLOY_DIR_IMAGE}
++	  rm -f ${BAREBOX_SYMLINK}
++	  ln -sf ${BAREBOX_IMAGE} ${BAREBOX_SYMLINK}
++	  package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${BAREBOX_SYMLINK}
++}
++do_deploy[dirs] = "${S}"
++addtask deploy before do_build after do_compile
++
++do_stage() {
++	   install -d ${STAGING_BINDIR_NATIVE}
++	   install -m 755 scripts/mkimage ${STAGING_BINDIR_NATIVE}/
++}
+diff --git a/recipes/barebox/barebox_2009.12.bb b/recipes/barebox/barebox_2009.12.bb
+new file mode 100644
+index 0000000..2977429
+--- /dev/null
++++ b/recipes/barebox/barebox_2009.12.bb
+@@ -0,0 +1,15 @@
++require barebox.inc
++
++PR = "r0"
++
++DEFAULT_PREFERENCE = "-1"
++
++BAREBOX_REVISION ?= "0"
++
++S = "${WORKDIR}/barebox-${PV}.${BAREBOX_REVISION}"
++
++SRC_URI = "http://barebox.org/download/barebox-${PV}.${BAREBOX_REVISION}.tar.bz2;name=barebox-${PV}.${BAREBOX_REVISION} \
++	   file://defconfig"
++
++SRC_URI[barebox-2009.12.0.md5sum] = "d1aefe17cfd72affec766617b42dfb78"
++SRC_URI[barebox-2009.12.0.sha256sum] = "0ccd59898289652f4bebd8282737a771729d84886195221c781df08f81a837ef"
+diff --git a/recipes/barebox/barebox_git.bb b/recipes/barebox/barebox_git.bb
+new file mode 100644
+index 0000000..8f9e322
+--- /dev/null
++++ b/recipes/barebox/barebox_git.bb
+@@ -0,0 +1,10 @@
++require barebox.inc
++
++PR = "r0"
++
++FILESPATHPKG =. "barebox-git:"
++
++SRC_URI = "git://git.pengutronix.de/git/barebox.git;protocol=git \
++	   file://defconfig"
++
++S = "${WORKDIR}/git"
+-- 
+1.6.0.4
 
-  http://pastebin.com/mcaa647b
-
-so anyone was free to see that.  and so far (unless i'm mistaken), in
-the midst of all the feedback, the one thing i haven't read is anyone
-saying, "hmmmm, you're right, there seems to be a problem."
-
-  for over a month now, i've reported this, i've described my build
-environment in detail, and i've made the contents of the build log
-file publicly available.  at this point, i've given up on this package
-and removed it from my bb-demo-image build because i just don't care
-about it anymore.  if it ever gets fixed, by all means, let me know.
-but please stop whining that i just haven't jumped through enough
-hoops to suit some people.
-
-rday
---
-
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
 
 
