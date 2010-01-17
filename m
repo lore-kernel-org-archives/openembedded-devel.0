@@ -1,41 +1,38 @@
-Received: from mail-pw0-f53.google.com ([209.85.160.53])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NWLl8-0005N7-TY
+	(envelope-from <rpjday@crashcourse.ca>) id 1NWQ1a-0007Kp-IV
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 04:25:06 +0100
-Received: by pwi4 with SMTP id 4so1066094pwi.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Jan 2010 19:22:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=51or37yqARFZVcNetd5C7GQjQkaH86LCtkEk2qAZpII=;
-	b=FDo72nkswgulQdihWHAIURPsPS+5ksjdwuwHxJ2osZXsfXGv6P1heBb3Esze0CpO50
-	NbO0ivNPGK6qUJim7w2+0XJPc8kdGwYJHi3sCiGpggS/mSbb8hQhQ/UdRj+5v4X65eKj
-	ZuccQ9IZ3iloKkVasPRRAGJsggfpyeuDRDkt8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=FlI4pCPLsKI2iLzVMK8SqFDFZVgKZoekTY6EZODrtF6aa5zVZ2gEtLnxQEp0HZvDQg
-	EyD7dKbuYhb3c6tft4s2QE/SMrU4yc7+RkpVTzMaQUaX6Gk4t8Ui4R1xao9jQcMrqD4h
-	N8XC16VmtAuOSS3GtYTJyRkZw9HQSJry9Vq64=
-Received: by 10.142.8.21 with SMTP id 21mr2989548wfh.324.1263698568713;
-	Sat, 16 Jan 2010 19:22:48 -0800 (PST)
-Received: from localhost ([123.54.101.24])
-	by mx.google.com with ESMTPS id 22sm2895402pzk.6.2010.01.16.19.22.45
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 16 Jan 2010 19:22:47 -0800 (PST)
-From: Guo Hongruan <camelguo@gmail.com>
+	Sun, 17 Jan 2010 08:58:21 +0100
+Received: from cpe00195b4acfae-cm001adea99f3e.cpe.net.cable.rogers.com
+	([99.235.244.96] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NWPzR-0007Zq-5Y for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 02:56:05 -0500
+Date: Sun, 17 Jan 2010 02:55:18 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Jan 2010 11:22:21 +0800
-Message-Id: <1263698541-9726-1-git-send-email-camelguo@gmail.com>
-X-Mailer: git-send-email 1.5.4.3
-In-Reply-To: <>
-References: <>
-X-SA-Exim-Connect-IP: 209.85.160.53
-X-SA-Exim-Mail-From: camelguo@gmail.com
+In-Reply-To: <hitlc7$fes$1@ger.gmane.org>
+Message-ID: <alpine.LFD.2.00.1001170254190.2736@localhost>
+References: <alpine.LFD.2.00.1001161439340.13406@localhost>
+	<hitlc7$fes$1@ger.gmane.org>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] Change the prefer binutils of micro.conf from 2.19.51 to 2.18
+Subject: Re: what's the purpose of tarballs in the OE repo?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,30 +46,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 03:25:06 -0000
+X-List-Received-Date: Sun, 17 Jan 2010 07:58:21 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-* the previous default version of binutils (2.19.51) in micro.conf cause the default version of glibc failed to build
+On Sun, 17 Jan 2010, Rolf Leggewie wrote:
 
-Signed-off-by: Guo Hongruan <camelguo@gmail.com>
----
- conf/distro/micro.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+> Robert P. J. Day wrote:
+> >   following up on a thread from the bitbake dev ML, what is the
+> > purpose of actual tarballs in the OE dev repository?
+>
+> best way to find out is probably to do a "git log
+> --finde-copies-harder" on the files in question and asking the
+> committers directly is probably the best way to find out.
+>
+> If they have otherwise no home on the net, I'm sure we can provide
+> hosting somewhere.
 
-diff --git a/conf/distro/micro.conf b/conf/distro/micro.conf
-index d9fc595..4991620 100644
---- a/conf/distro/micro.conf
-+++ b/conf/distro/micro.conf
-@@ -61,7 +61,7 @@ MACHINE_KERNEL_VERSION = "2.6"
- # TOOLCHAIN
- #############################################################################
- LIBC ?= "eglibc"
--PREFERRED_BINUTILS = "2.19.51"
-+PREFERRED_BINUTILS = "2.18"
- PREFERRED_ARM_INSTRUCTION_SET ?= "thumb"
- require conf/distro/include/sane-toolchain.inc
- 
--- 
-1.5.4.3
+  good plan, i'll take a look at that later today, thanks.
 
+rday
+--
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
