@@ -1,34 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NWbZj-0007Bt-LO for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 21:18:22 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NWbXa-0006p0-6q
+	(envelope-from <rpjday@crashcourse.ca>) id 1NWbep-0002sB-5j
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 21:16:06 +0100
-Received: from p5b3b24db.dip.t-dialin.net ([91.59.36.219])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 21:16:06 +0100
-Received: from no2spam by p5b3b24db.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 21:16:06 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 17 Jan 2010 21:23:38 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NWbcf-0005GZ-O3 for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 15:21:22 -0500
+Date: Sun, 17 Jan 2010 15:20:34 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sun, 17 Jan 2010 21:15:43 +0100
-Message-ID: <hivr5f$n4h$1@ger.gmane.org>
-References: <alpine.LFD.2.00.1001171141210.11393@localhost>	<hivjon$vmv$1@ger.gmane.org>	<37208.8112672374$1263753418@news.gmane.org>	<hivp9n$hib$2@ger.gmane.org>
-	<alpine.LFD.2.00.1001171506240.28300@localhost>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b24db.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-In-Reply-To: <alpine.LFD.2.00.1001171506240.28300@localhost>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+In-Reply-To: <009501ca97a2$bd9bc940$38d35bc0$@Willis@Distant-earth.com>
+Message-ID: <alpine.LFD.2.00.1001171511300.7174@localhost>
+References: <alpine.LFD.2.00.1001171141210.11393@localhost>
+	<hivjon$vmv$1@ger.gmane.org>
+	<009501ca97a2$bd9bc940$38d35bc0$@Willis@Distant-earth.com>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: beagleboard-demo-image, and the evil that is "gnome-games"
@@ -45,16 +47,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 20:18:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 17 Jan 2010 20:23:38 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Robert P. J. Day wrote:
->   since you apparently weren't paying attention
+On Sun, 17 Jan 2010, John Willis wrote:
 
-alright.  Bye bye, then.
+> I personally don't favour taking packages out of an image if there
+> are build issues on a small subset of systems. I think Phil (or
+> someone else) suggest you consider contributing your build logs to
+> OESTATS/TinderBox
+> (http://wiki.openembedded.net/index.php/How_do_I_send_automatic_success_and_
+> failure_reports) at least with that setup you leave a reference the
+> failing logs in bug reports/mails so people can have a look into all
+> the gory details :).
 
-I never thought I'd need to use the killfile on this list...
+  in fact, on friday, i posted to this list that gnome-games was
+broken under my environment, and also left a link to the full log file
+contents here:
 
+  http://pastebin.com/mcaa647b
+
+so anyone was free to see that.  and so far (unless i'm mistaken), in
+the midst of all the feedback, the one thing i haven't read is anyone
+saying, "hmmmm, you're right, there seems to be a problem."
+
+  for over a month now, i've reported this, i've described my build
+environment in detail, and i've made the contents of the build log
+file publicly available.  at this point, i've given up on this package
+and removed it from my bb-demo-image build because i just don't care
+about it anymore.  if it ever gets fixed, by all means, let me know.
+but please stop whining that i just haven't jumped through enough
+hoops to suit some people.
+
+rday
+--
+
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
