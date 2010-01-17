@@ -1,19 +1,19 @@
 Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NWRKr-0002RU-T6
+	(envelope-from <rpjday@crashcourse.ca>) id 1NWRNo-0002cS-AI
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 10:22:21 +0100
+	Sun, 17 Jan 2010 10:25:23 +0100
 Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
 	([99.235.241.187] helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NWRIh-0003H5-5H; Sun, 17 Jan 2010 04:20:03 -0500
-Date: Sun, 17 Jan 2010 04:19:20 -0500 (EST)
+	id 1NWRLb-0004At-VO; Sun, 17 Jan 2010 04:23:06 -0500
+Date: Sun, 17 Jan 2010 04:22:18 -0500 (EST)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@localhost
 To: OpenEmbedded Development mailing list
 	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.1001170417380.4070@localhost>
+Message-ID: <alpine.LFD.2.00.1001170419370.4163@localhost>
 User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
 X-AntiAbuse: This header was added to track abuse,
@@ -29,8 +29,7 @@ X-SA-Exim-Connect-IP: 64.235.106.9
 X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: k-kooi@ti.com
-Subject: x-loader tarball in OE dev repo
+Subject: sgalib tarball in OE dev repo not downloadable?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,25 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 09:22:21 -0000
+X-List-Received-Date: Sun, 17 Jan 2010 09:25:23 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
-$ git log recipes/x-load/files/x-loader-03.00.00.01.tar.gz
-commit 7937ed35de6218a955a63d9ce61d992532fdc5e0
-Author: Koen Kooi <k-kooi@ti.com>
-Date:   Wed Sep 9 12:27:50 2009 +0200
+$ git log recipes/sgalib/sgalib-0.1.0/sgalib-0.1.0.tar.gz
+commit 6df5a87a7013aabd1432ec47f9274e25d79975f5
+Author: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+Date:   Mon Oct 26 20:21:04 2009 +0100
 
-    x-load: add omap3517-evm support
-
-    * 1.41 still has the volatile bugs when compiled with non CSL stuff
-
-$
-
-  is the appropriate x-loader source not downloadable from somewhere?
+    sgalib: NHK-15 library for userspace access to graphics acceleration
 
 rday
 --
+
 
 ========================================================================
 Robert P. J. Day                               Waterloo, Ontario, CANADA
