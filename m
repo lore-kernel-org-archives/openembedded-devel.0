@@ -1,31 +1,31 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NWbAY-0002oz-21 for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 20:52:21 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NWb8P-00065J-2I
+	id 1NWbFP-0002yV-Io for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 20:57:22 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NWbDE-0007na-Mw
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 20:50:05 +0100
+	Sun, 17 Jan 2010 20:55:04 +0100
 Received: from p5b3b24db.dip.t-dialin.net ([91.59.36.219])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 20:50:05 +0100
+	Sun, 17 Jan 2010 20:55:04 +0100
 Received: from no2spam by p5b3b24db.dip.t-dialin.net with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 20:50:05 +0100
+	Sun, 17 Jan 2010 20:55:04 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sun, 17 Jan 2010 20:43:51 +0100
-Message-ID: <hivp9n$hib$2@ger.gmane.org>
+Date: Sun, 17 Jan 2010 20:43:40 +0100
+Message-ID: <hivp9e$hmv$1@ger.gmane.org>
 References: <alpine.LFD.2.00.1001171141210.11393@localhost>	<hivjon$vmv$1@ger.gmane.org>
-	<37208.8112672374$1263753418@news.gmane.org>
+	<alpine.LFD.2.00.1001171405480.23608@localhost>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: p5b3b24db.dip.t-dialin.net
 User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-In-Reply-To: <37208.8112672374$1263753418@news.gmane.org>
+In-Reply-To: <alpine.LFD.2.00.1001171405480.23608@localhost>
 Sender: news <news@ger.gmane.org>
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -45,24 +45,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 19:52:21 -0000
+X-List-Received-Date: Sun, 17 Jan 2010 19:57:22 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-John Willis wrote:
-> I think Phil (or someone else) suggest
-> you consider contributing your build logs to OESTATS/TinderBox
-> (http://wiki.openembedded.net/index.php/How_do_I_send_automatic_success_and_
-> failure_reports) at least with that setup you leave a reference the failing
-> logs in bug reports/mails so people can have a look into all the gory
-> details :).
+Robert P. J. Day wrote:
+>   as it stands now, anyone who runs fedora 12 has been unable to build
+> a BB-demo-image for weeks now, and you've lost all that potential
+> testing.  and no, i *don't* care to hear from people who are happy to
+> tell me that it builds just fine on their debian or ubuntu or gentoo
 
-But this is Robert who seems to be allergic to taking sensible
-suggestions but prefers head-through-the-wall approach.
+If I were you, I would have done two things in that situation
 
-- doesn't use git -log
-- doesn't use tinderbox
-- doesn't use the bug tracker
+1) investigate why Fedora fails and possibly shoot fedora a bug ticket
+2) switch distro ;-)  (virtulbox exists if everything else fails)
+
+But again, this being your nature apparently, you love that
+head-against-wall feeling.
+
+I mean, seriously, what do you expect?  Do you even have an idea how
+long other people wait to get their stuff fixed?
 
 
 
