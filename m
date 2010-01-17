@@ -1,36 +1,29 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NWRHa-0002E6-8X
+Received: from mail.gmx.net ([213.165.64.20])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <s_buschmann@gmx.de>) id 1NWRIf-0002H8-KV
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 10:18:58 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NWRFD-00031P-Ut; Sun, 17 Jan 2010 04:16:28 -0500
-Date: Sun, 17 Jan 2010 04:15:42 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.1001170412460.4070@localhost>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Sun, 17 Jan 2010 10:20:04 +0100
+Received: (qmail invoked by alias); 17 Jan 2010 09:11:08 -0000
+Received: from brln-4dbaafcd.pool.mediaWays.net (EHLO [192.168.178.176])
+	[77.186.175.205]
+	by mail.gmx.net (mp037) with SMTP; 17 Jan 2010 10:11:08 +0100
+X-Authenticated: #1404922
+X-Provags-ID: V01U2FsdGVkX1/gPRFP+3rgVfrA15BBHA+jmyUOm45afTd4NzOQIr
+	JJf4YlPZRw03p9
+Message-ID: <4B52D42D.9020103@gmx.de>
+Date: Sun, 17 Jan 2010 10:11:09 +0100
+From: Stefan Buschmann <s_buschmann@gmx.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.1.5) Gecko/20091204 Thunderbird/3.0
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+To: openembedded-devel@lists.openembedded.org
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.70999999999999996
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: s_buschmann@gmx.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: marcin@buglabs.net
-Subject: move marvell firmware tarballs out of OE repo?
+Subject: changing system configuration in a customized image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,32 +37,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 09:18:58 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sun, 17 Jan 2010 09:20:04 -0000
+Content-Type: text/plain; charset=ISO-8859-15; format=flowed
+Content-Transfer-Encoding: 7bit
 
+Hi all!
 
-  (this is the first in a small number of postings to clarify the
-purpose of some tarballs in the OE dev repository, and whether they
-could be moved elsewhere.)
+I'm using a customized image of SHR that includes some additional 
+packages I like to have installed automatically as well as a package 
+that should include the changes to the system configuration that I need. 
+It would just be nice to have this done automatically rather than having 
+to tweak the system by hand every time I build and install a new image 
+on the device.
 
-  the tarballs:
+So e.g. I would like to change configuration files and execute some 
+commands:
+- Add a system user
+- Install customized version of '/etc/samba/smb.conf'
+- Set samba password via 'smbpasswd'
 
-./recipes/firmwares/marvell-gspi-fw/9.70.3-p37.tar.gz
-./recipes/firmwares/marvell-sdio-fw/9.70.3-p37.tar.gz
+I think I can't simply run those commands via install or staging task, 
+because I wouldn't be able to run something like 'smbpasswd' there. So I 
+figure the way to go would be to add a configuration script which runs 
+only on the first system start, that can modify the configuration files 
+and run the necessary commands.
 
-  are these not downloadable from somewhere, or could they be moved
-into an OE repo?
+So is this the right approach? How can I add such a script? I tried to 
+find out by looking into e.g. the recipe for 'alsa' but didn't find a 
+clue there. Also I'm making my way through the OpenEmbedded User Manual 
+but couldn't find it there either.
 
-rday
---
+Thanks,
 
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
+Stefan
 
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
 
 
