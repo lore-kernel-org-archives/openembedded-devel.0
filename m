@@ -1,45 +1,40 @@
-Received: from mail-fx0-f212.google.com ([209.85.220.212])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay4mail@gmail.com>) id 1NWbIj-0003Cf-6o
+	(envelope-from <rpjday@crashcourse.ca>) id 1NWbTb-0003TR-0f
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 21:00:48 +0100
-Received: by fxm4 with SMTP id 4so266397fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 11:58:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:user-agent:references:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:message-id;
-	bh=3NLmlwd8CucrHEEIhJWPrR/HaboiG6jQZUnZgH0pjV0=;
-	b=HOJCPwKb+zPHMySGaTNchWk7mr90WXrEcwm49Q6+Ff0aygNDPmfgPkr6nuD+ATwezF
-	V7OpsIjd64nHEDwXkzqYcBwJ/KRvSy/WeulYF7VZiKU/EwsTlZRPBAQgO0vRI9perJrV
-	a5E66BhxtySh9QyhLtNoOPyUPFYCRII5LAmZk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:message-id;
-	b=rtbB9z59oC/EqaidbstONmGW7yPrwfv5synw9xOylWJ+4BqLeD8dtzJdnyy4KtaD0j
-	YlnAWs2IhtMnAIBNkKO2wz5Ys3HuG/YOISogRi9dJSzGJ4TWCJkN4Q5fHgUdvjIvfyzh
-	y0cAMOqPrIVId4sm08Emr9PtYuub7/bZlFLJE=
-Received: by 10.223.3.81 with SMTP id 17mr6209688fam.102.1263758311488;
-	Sun, 17 Jan 2010 11:58:31 -0800 (PST)
-Received: from is.home (95-29-176-93.broadband.corbina.ru [95.29.176.93])
-	by mx.google.com with ESMTPS id 13sm1839726fxm.9.2010.01.17.11.58.29
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 17 Jan 2010 11:58:30 -0800 (PST)
-From: Yuri Bushmelev <jay4mail@gmail.com>
+	Sun, 17 Jan 2010 21:12:02 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NWbRS-0004ON-DK for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 15:09:46 -0500
+Date: Sun, 17 Jan 2010 15:09:01 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Jan 2010 22:58:25 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.30-std-def-alt15; KDE/4.3.4; i686; ; )
-References: <d1b08f941001170606w13dcfc0ey341da93deb94c7b8@mail.gmail.com>
-	<201001172013.06010.marcin@juszkiewicz.com.pl>
-In-Reply-To: <201001172013.06010.marcin@juszkiewicz.com.pl>
+In-Reply-To: <hivp9n$hib$2@ger.gmane.org>
+Message-ID: <alpine.LFD.2.00.1001171506240.28300@localhost>
+References: <alpine.LFD.2.00.1001171141210.11393@localhost>
+	<hivjon$vmv$1@ger.gmane.org>
+	<37208.8112672374$1263753418@news.gmane.org>
+	<hivp9n$hib$2@ger.gmane.org>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
-Message-Id: <201001172258.25258.jay4mail@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.220.212
-X-SA-Exim-Mail-From: jay4mail@gmail.com
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] Zaurus: make updater.sh obsolete for poodle, clamshells and 	tosa
+Subject: Re: beagleboard-demo-image, and the evil that is "gnome-games"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,48 +48,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 20:00:48 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 17 Jan 2010 20:12:02 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Hello!
-> Dnia niedziela, 17 stycznia 2010 o 15:06:19 Andrea Adami napisa=C5=82(a):
-> > Reading the post about gnu-tar I remember we talked about a new way to
-> > install 2.6 kernels and images on Zaurus.
->=20
-> Any way is good but I hope that there still be a way to install OE build
-> results on SharpROM based Zaurus.
+On Sun, 17 Jan 2010, Rolf Leggewie wrote:
 
-You can boot old 2.4 based ROM's with kexecboot too. I have reports of=20
-success booting of Cacko e.g.
+> John Willis wrote:
+> > I think Phil (or someone else) suggest
+> > you consider contributing your build logs to OESTATS/TinderBox
+> > (http://wiki.openembedded.net/index.php/How_do_I_send_automatic_success_and_
+> > failure_reports) at least with that setup you leave a reference the failing
+> > logs in bug reports/mails so people can have a look into all the gory
+> > details :).
+>
+> But this is Robert who seems to be allergic to taking sensible
+> suggestions but prefers head-through-the-wall approach.
+>
+> - doesn't use git -log
+> - doesn't use tinderbox
+> - doesn't use the bug tracker
 
-> What about this (note that I do not track kexecboot work):
->=20
-> - make updater.sh which will flash kexecboot kernel and reboot
-> - let kexecboot initramfs checks for CARD/sysupdate.sh
-> - CARD/sysupdate.sh will update rootfs/kernel etc and reboot
->=20
-> sysupdate.sh name is chosen to allow updater.sh (for crappy bootloader)
->  and real update script to be on same card. This way you can update any
->  Zaurus nevermind what kind of OS it had before. And as kexecboot kernel
->  will have our nand split table inside anything can be done in
->  sysupdate.sh script (formating / and /home for example or installing
->  them from card images etc).
+  since you apparently weren't paying attention, let me refresh your
+memory that i pointed out the breakage problem with gnome-games a
+month ago, at which point the breakage was *confirmed* by someone
+else, and there was a suggestion that a newer version was already
+being queued to deal with it.  at that point, i think i'm within my
+rights to assume that a fix is in the works and i just have to be
+patient.
 
-We should not update kernel while using kexecboot. We can only update distr=
-o=20
-(rootfs with kernel inside) in NAND.
-I'm not sure that we have too much ordinary users who will flash to NAND=20
-instead of external SD/CF. Advanced user can boot from console-image from S=
-D=20
-and 'flash' by hands according to some README/wiki instructions. Or we can=
-=20
-provide special NAND-installer image for this.
+  a month later, nothing's happened.
 
-But anyway having something like legacy-updater.bb is good idea.
+rday
+--
 
-=2D-=20
-Yuri Bushmelev
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
