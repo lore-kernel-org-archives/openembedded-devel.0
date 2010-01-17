@@ -1,29 +1,41 @@
-Received: from smtp5-g21.free.fr ([212.27.42.5])
+Received: from mail-yx0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1NWd2w-00008B-Jj
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NWd5Z-0000GR-VZ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 22:52:37 +0100
-Received: from smtp5-g21.free.fr (localhost [127.0.0.1])
-	by smtp5-g21.free.fr (Postfix) with ESMTP id 0A636D48047
+	Sun, 17 Jan 2010 22:55:21 +0100
+Received: by yxe5 with SMTP id 5so720341yxe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 22:50:20 +0100 (CET)
-Received: from localhost.localdomain (tal33-2-82-228-175-43.fbx.proxad.net
-	[82.228.175.43])
-	by smtp5-g21.free.fr (Postfix) with ESMTP id 11309D48085
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 22:50:17 +0100 (CET)
-From: Eric Benard <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Jan 2010 22:50:17 +0100
-Message-Id: <1263765017-12302-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
+	Sun, 17 Jan 2010 13:53:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=YPTtsOUddzNL4WLO1zyN8GZtVnP8qO8HvgW67b5zvfY=;
+	b=GhUzto2YDzNCawRzTeMaJKuLGXp3xj+VBPTg5yai2qBM6qeJf7AdQ4EE5Mud66mesr
+	daIZEuuMylZ6u54F6ZKNFgDmfPjJXIskkdzbNiTLLFU4SXi9DlwNqH72Crb+ZOAuyK58
+	PJjql+Gj0FqYyzdpcsBlnCLUjmouKxejXJeEI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=AkwCkbSFFDa8gixGwTevWTdzXaSPPSL6hjBhbeeZTakfKytP4BPBSq51gW+PJNLEZw
+	JDqWI7KqitLdc7xqQJVsLZRIAQCQZgjmoyRNLipBt+QXZNeI2O1EC7i2SShPlH394h3J
+	0erJRtoNDBu/5U2B7xXwkI9qaU0bZUVGmKcSQ=
+MIME-Version: 1.0
+Received: by 10.101.185.26 with SMTP id m26mr8291294anp.129.1263765183782; 
+	Sun, 17 Jan 2010 13:53:03 -0800 (PST)
 In-Reply-To: <1263763723.5353.16.camel@mattotaupa.wohnung.familie-menzel.net>
-References: <1263763723.5353.16.camel@mattotaupa.wohnung.familie-menzel.net>
-X-SA-Exim-Connect-IP: 212.27.42.5
-X-SA-Exim-Mail-From: eric@eukrea.com
+References: <1263760344-26105-1-git-send-email-eric@eukrea.com>
+	<hivtt3$v2r$1@ger.gmane.org>
+	<1263763723.5353.16.camel@mattotaupa.wohnung.familie-menzel.net>
+Date: Sun, 17 Jan 2010 22:53:03 +0100
+Message-ID: <ac9c93b11001171353p358c02a4k90cb3dd70240bc58@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] usermanual : update note about PR
+Subject: Re: [PATCH] barebox: Add recipe for this new bootloader
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,37 +49,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 21:52:38 -0000
+X-List-Received-Date: Sun, 17 Jan 2010 21:55:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-quoting Koen Kooi : Please don't set variables to the current default
-value, but leave them out. We had tons of problems with vars getting
-copy/paste where the default changed and we had to manually fix those
-(e.g. efl.bbclass still pokes needlessly at PACKAGES).
+2010/1/17 Paul Menzel <paulepanter@users.sourceforge.net>:
+> Am Sonntag, den 17.01.2010, 22:02 +0100 schrieb Koen Kooi:
+>> On 17-01-10 21:32, Eric Benard wrote:
+>> > * barebox is "a bootloader that inherits the best of U-Boot and the
+>> Linux kernel"
+>> > * add recipe for v2009.12.0 (last stable)
+>> > * add recipe for git repository
+>> >
+>> > Signed-off-by: Eric Benard <eric@eukrea.com>
+>>
+>> > +++ b/recipes/barebox/barebox_2009.12.bb
+>> > @@ -0,0 +1,15 @@
+>>
+>>
+>> > +PR =3D "r0"
+>>
+>> > +++ b/recipes/barebox/barebox_git.bb
+>> > @@ -0,0 +1,10 @@
+>>
+>> > +PR =3D "r0"
+>>
+>> Please don't set variables to the current default value, but leave
+>> them
+>> out. We had tons of problems with vars getting copy/paste where the
+>> default changed and we had to manually fix those (e.g. efl.bbclass
+>> still
+>> pokes needlessly at PACKAGES).
+>>
+>> Setting PR is relatively minor, but lets stay consistent :)
+>
+> Could someone please change this in the manual please [1].
+>
+> =BBIt is good practice to always define PR in your recipes, even for the
+> "r0" release, so that when editing the recipe it is clear that the PR
+> number needs to be updated.=AB
+>
+Personally I'm in favour of the above good practice.
+I suggest to keep PR =3D "r0" in recipes
 
-Signed-off-by: Eric Benard <eric@eukrea.com>
----
- docs/usermanual/chapters/recipes.xml |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/docs/usermanual/chapters/recipes.xml b/docs/usermanual/chapters/recipes.xml
-index cad1d80..30364c0 100644
---- a/docs/usermanual/chapters/recipes.xml
-+++ b/docs/usermanual/chapters/recipes.xml
-@@ -323,9 +323,9 @@ mv fixed.recipe.bb myrecipe.bb</screen></para>
-     then the default value of "r0" is used.</para>
- 
-     <para><note>
--        <para>It is good practice to always define PR in your recipes, even
--        for the <emphasis>"r0"</emphasis> release, so that when editing the
--        recipe it is clear that the PR number needs to be updated.</para>
-+        <para>As PR is set to "r0" as a default, it must not be defined at the
-+        creation of the recipe. When editing the recipe for the first time, the
-+        PR variable must be defined to "r1".</para>
- 
-         <para>You should always increment PR when modifying a recipe.
-         Sometimes this can be avoided if the change will have no effect on the
--- 
-1.6.3.3
-
+Frans
 
 
