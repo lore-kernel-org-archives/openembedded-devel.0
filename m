@@ -1,25 +1,36 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NWEby-0001St-KL
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NWIz9-0002As-0n for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 01:27:22 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NWIx0-00037H-B8
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Jan 2010 20:47:09 +0100
-Received: from 88-110-78-150.dynamic.dsl.as9105.com ([88.110.78.150]
-	helo=[192.168.2.155])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NWEZq-0002XG-5d
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 16 Jan 2010 19:44:54 +0000
-From: Phil Blundell <philb@gnu.org>
+	Sun, 17 Jan 2010 01:25:06 +0100
+Received: from p5b3b21cc.dip.t-dialin.net ([91.59.33.204])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Jan 2010 01:25:06 +0100
+Received: from no2spam by p5b3b21cc.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Jan 2010 01:25:06 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 16 Jan 2010 19:44:49 +0000
-Message-ID: <1263671089.457.791.camel@lenovo.internal.reciva.com>
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Sun, 17 Jan 2010 01:24:38 +0100
+Message-ID: <hitlc7$fes$1@ger.gmane.org>
+References: <alpine.LFD.2.00.1001161439340.13406@localhost>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5b3b21cc.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <alpine.LFD.2.00.1001161439340.13406@localhost>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: FOSDEM
+Subject: Re: what's the purpose of tarballs in the OE repo?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,17 +44,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Jan 2010 19:47:09 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 17 Jan 2010 00:27:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-If you're attending FOSDEM this year and would like to get together with
-other OE folks, please feel free to add your name to the wiki page:
+Robert P. J. Day wrote:
+>   following up on a thread from the bitbake dev ML, what is the
+> purpose of actual tarballs in the OE dev repository?
 
-http://wiki.openembedded.org/index.php/Fosdem_2010
+best way to find out is probably to do a "git log --finde-copies-harder"
+on the files in question and asking the committers directly is probably
+the best way to find out.
 
-p.
-
+If they have otherwise no home on the net, I'm sure we can provide
+hosting somewhere.
 
 
 
