@@ -1,26 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NWYng-0000WR-Ii for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 18:20:36 +0100
-Received: from g225080206.adsl.alicedsl.de ([92.225.80.206]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NWYlZ-0004NC-8o for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 17:18:21 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NWZbX-0006yR-Lv for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 19:12:06 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NWZZN-0001fL-7i
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 19:09:49 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Jan 2010 19:09:49 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Jan 2010 19:09:49 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <alpine.LFD.2.00.1001171200010.16324@localhost>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 17 Jan 2010 19:09:28 +0100
+Message-ID: <hivjon$vmv$1@ger.gmane.org>
 References: <alpine.LFD.2.00.1001171141210.11393@localhost>
-	<20100117165403.GP30938@jama>
-	<alpine.LFD.2.00.1001171200010.16324@localhost>
-Date: Sun, 17 Jan 2010 18:18:19 +0100
-Message-ID: <1263748699.3210.56.camel@mattotaupa.wohnung.familie-menzel.net>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100113 Shredder/3.0.2pre
+In-Reply-To: <alpine.LFD.2.00.1001171141210.11393@localhost>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: beagleboard-demo-image, and the evil that is "gnome-games"
@@ -37,62 +46,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 17:20:36 -0000
-X-Groupsio-MsgNum: 15805
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-3Gly/4j4CkUZ9XLbCegB"
+X-List-Received-Date: Sun, 17 Jan 2010 18:12:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-3Gly/4j4CkUZ9XLbCegB
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am Sonntag, den 17.01.2010, 12:06 -0500 schrieb Robert P. J. Day:
-> On Sun, 17 Jan 2010, Martin Jansa wrote:
-> > On Sun, Jan 17, 2010 at 11:47:06AM -0500, Robert P. J. Day wrote:
-> > >   it seems counter-productive to allow a single games package to put
-> > > the brakes on an entire build.
-> >
-> > Maybe you want to build with -k?
-> >
-> > If there is some build problem in games package, then it should be
-> > fixed, not silenced by whole task removal.
->=20
->   i've reported the breakage related to gnome-games before:
->=20
-> http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg=
-02124.html
->=20
-> note in that posting that philip balister appears to confirm the
-> problem, and there's a reference to someone else who is working with
-> an update that might solve the problem.
->=20
->   that was a *month* ago, and things are still broken.  if there's a
-> fix, then it should be applied.  if there isn't, then the reference to
-> gnome-games should be removed.  allowing a single broken package
-> that's been broken for over a month to be the single obstacle to a
-> successful build would seem to be entirely counter-productive.
+On 17-01-10 17:47, Robert P. J. Day wrote:
+> 
+>   given that (on my fedora 12 system, anyway), the gnome-games package
+> has been unbuildable for weeks now, i finally threw in the towel,
+> removed the reference to it from the beagleboard task, and can now
+> build beagleboard-demo-image.
+> 
+>   that package was the final obstacle to getting a BB-demo-image
+> build.  other packages that were failing -- e2fsprogs, mplayer --
+> have recently been fixed, leaving gnome-games as the sole remaining
+> cause of build grief.
+> 
+>   a suggestion -- until the issue with gnome-games is resolved, why
+> not just remove its inclusion from the bb-demo-image task?  i'm being
+> quite serious -- it's obviously not a critical package, and if it's
+> the only thing keeping people from building and testing the OE dev
+> branch for the beagleboard, take it out so folks can get back to
+> testing.
+> 
+>   it seems counter-productive to allow a single games package to put
+> the brakes on an entire build.
 
-As written, I think you should enter this in the bugtracker where it
-will not get forgotten. You can also publish your diff to make it easier
-for others.
+And I have yet to reproduce a single build failure with that recipe, and
+I build beagleboard-demo-image daily.
 
-And lastly people can always use the online rootfs builder [1].=20
+It seems counter-productive remove everything that might fail for a
+handfull of people. I remember busybox triggering an OOM on Philip's
+build machine not too long ago :)
 
+regards,
 
-[1] http://www.angstrom-distribution.org/online-rootfs-builder-moved-=C3=A5=
-ngstr=C3=B6m-domain
-
---=-3Gly/4j4CkUZ9XLbCegB
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAktTRlsACgkQPX1aK2wOHVgOGwCgjPKLpIbcxbik62TTEhMbc966
-zf4An2hUiPEPv1Q4C7zku/FtGUsOGgNc
-=zhgJ
+iD8DBQFLU1JYMkyGM64RGpERAn4XAJoCqmAwDzr1fBf0pGW60RXB+NN+OgCgu5bn
+FTEb3qMBUBqRwppKqhYm0TY=
+=B0Ix
 -----END PGP SIGNATURE-----
 
---=-3Gly/4j4CkUZ9XLbCegB--
+
+
