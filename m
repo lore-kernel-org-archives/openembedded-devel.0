@@ -1,38 +1,47 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-pw0-f53.google.com ([209.85.160.53])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NWT10-0000D7-0B for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 12:09:57 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NWSyq-0001fV-Jn
+	(envelope-from <camelguo@gmail.com>) id 1NWT7K-0005gE-Se
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 12:07:40 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 12:07:40 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Sun, 17 Jan 2010 12:16:30 +0100
+Received: by pwi4 with SMTP id 4so1169026pwi.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 12:07:40 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 17 Jan 2010 03:14:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:content-type:to:subject
+	:references:date:mime-version:content-transfer-encoding:from
+	:organization:message-id:in-reply-to:user-agent;
+	bh=B5lZBh6kZnmBeWWy3oYz6ER9dCu0Rqj2FTTl9LL37+8=;
+	b=ofdr3GcB0ymgFBq3ejHmsgv5p8XPbFsa4wM3C4jeDzwOU84o41XN66O9qhFvNwWO6T
+	09ykoEqCXd20TAea+hhnAFW372r1YXHzDL+zptlTsvq2Lo6tpqtTTGlGZBhG84nxgme2
+	uItupUfgc2FI8lFiewA9DbQirTGMljoz0Qt+I=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=content-type:to:subject:references:date:mime-version
+	:content-transfer-encoding:from:organization:message-id:in-reply-to
+	:user-agent;
+	b=F9NYPh/qp1kTC3CBoBAAys+E9KkOXZdHqSUUnbWJA7iVI0nWHK2FZbW6ONCN24ftZ7
+	ozjyuXPBjK/kvjiLSN0hfrzsKsOmD+dlDJf7dPSPMM5Emt9Cdmy2/yf2sNCrToQxcx4u
+	qxe+eeFIyay5XOzozMrM+/uF3ZUNpIrnZ+snA=
+Received: by 10.141.108.11 with SMTP id k11mr3399125rvm.237.1263726852448;
+	Sun, 17 Jan 2010 03:14:12 -0800 (PST)
+Received: from guohr-laptop-ubuntu ([123.54.105.23])
+	by mx.google.com with ESMTPS id 21sm3238925pzk.7.2010.01.17.03.14.09
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 17 Jan 2010 03:14:11 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 17 Jan 2010 12:07:19 +0100
-Message-ID: <hiur16$olo$1@ger.gmane.org>
-References: <alpine.LFD.2.00.1001170417380.4070@localhost>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100113 Shredder/3.0.2pre
-In-Reply-To: <alpine.LFD.2.00.1001170417380.4070@localhost>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <> <1263698541-9726-1-git-send-email-camelguo@gmail.com>
+	<1263726023.457.897.camel@lenovo.internal.reciva.com>
+Date: Sun, 17 Jan 2010 19:14:02 +0800
+MIME-Version: 1.0
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u6ob5ohzmn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <1263726023.457.897.camel@lenovo.internal.reciva.com>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.160.53
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: x-loader tarball in OE dev repo
+Subject: Re: [PATCH] Change the prefer binutils of micro.conf from 2.19.51 to 2.18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,42 +55,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 11:09:57 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 17 Jan 2010 11:16:30 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: Quoted-Printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+=E5=9C=A8 Sun, 17 Jan 2010 19:00:23 +0800=EF=BC=8CPhil Blundell <philb@g=
+nu.org> =E5=86=99=E9=81=93:
 
-On 17-01-10 10:19, Robert P. J. Day wrote:
-> 
-> $ git log recipes/x-load/files/x-loader-03.00.00.01.tar.gz
-> commit 7937ed35de6218a955a63d9ce61d992532fdc5e0
-> Author: Koen Kooi <k-kooi@ti.com>
-> Date:   Wed Sep 9 12:27:50 2009 +0200
-> 
->     x-load: add omap3517-evm support
-> 
->     * 1.41 still has the volatile bugs when compiled with non CSL stuff
-> 
-> $
-> 
->   is the appropriate x-loader source not downloadable from somewhere?
+> On Sun, 2010-01-17 at 11:22 +0800, Guo Hongruan wrote:
+>> * the previous default version of binutils (2.19.51) in micro.conf  =
 
-Internal TI clearcase doesn't qualify as "somewhere", would it? We're
-working on getting a git tree available externally, but for the time
-being it's freely availably from the 'net.
+>> cause the default version of glibc failed to build
+>>
+>> Signed-off-by: Guo Hongruan <camelguo@gmail.com>
+>>
+>> -PREFERRED_BINUTILS =3D "2.19.51"
+>> +PREFERRED_BINUTILS =3D "2.18"
+>
+> No, this is not acceptable.  Moving binutils forwards to 2.20{.1} woul=
+d
+> probably be OK, but going back to 2.18 is no good since that version
+> does not work correctly with Thumb code.
 
-regards,
+the toolchain setting in micro.conf is incompatible, which caused this  =
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+problem. For the preferred version of glibc is 2.6.1 which is set in  =
 
-iD8DBQFLUu9nMkyGM64RGpERAmp7AJ99GF/Bx4pJ/aSZD8yfvvTM6ZBLrQCcCUaZ
-EKi5ZvVfddXjYoTIvFs+dCE=
-=tRXn
------END PGP SIGNATURE-----
+conf/distro/include/sane-toolchain.inc, I think it is better to change t=
+he  =
 
+binutils preferred version which is set in conf/distro/micro.conf.
+
+see http://bugs.openembedded.org/show_bug.cgi?id=3D5365 to get to know w=
+hat  =
+
+I have tried.
+
+
+>
+> What is the specific problem you are experiencing with glibc?
+
+When building glibc-2.6.1 with bintuils-2.19.51, the linker report the  =
+
+following error
+
+/opt/testslave/oe_oe_inc_nightly_glibc/build/tmp/work/i686-oe-linux/glib=
+c-2.6.1-r35.0/build-i686-oe-linux/elf/librtld.os:  =
+
+In function `_dl_start':
+rtld.c:(.text+0xac5): undefined reference to `_begin'
+/opt/testslave/oe_oe_inc_nightly_glibc/build/tmp/cross/i686/lib/gcc/i686=
+-oe-linux/4.4.2/../../../../i686-oe-linux/bin/ld:  =
+
+/opt/testslave/oe_oe_inc_nightly_glibc/build/tmp/work/i686-oe-linux/glib=
+c-2.6.1-r35.0/build-i686-oe-linux/elf/librtld.os:  =
+
+relocation R_386_GOTOFF against undefined hidden symbol `_begin' can not=
+  =
+
+be used when making a shared object
+/opt/testslave/oe_oe_inc_nightly_glibc/build/tmp/cross/i686/lib/gcc/i686=
+-oe-linux/4.4.2/../../../../i686-oe-linux/bin/ld:  =
+
+final link failed: Bad value
+collect2: ld returned 1 exit status
+
+See http://tinderbox.openembedded.net/packages/427429/ for more detailed=
+  =
+
+information
+
+>
+> p.
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
+
+
+
+-- =
+
+Guo Hongruan, Embedded Linux Consultant
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
 
