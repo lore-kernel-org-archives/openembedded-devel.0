@@ -1,24 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NWYTY-00069x-Ic for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 17:59:47 +0100
-Received: from g225080206.adsl.alicedsl.de ([92.225.80.206]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NWYRR-0001zc-0K for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 16:57:33 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <rpjday@crashcourse.ca>) id 1NWYdQ-0001m6-3X
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 18:09:59 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NWYbH-0000Ue-Rf for openembedded-devel@lists.openembedded.org;
+	Sun, 17 Jan 2010 12:07:43 -0500
+Date: Sun, 17 Jan 2010 12:06:59 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <alpine.LFD.2.00.1001171141210.11393@localhost>
+In-Reply-To: <20100117165403.GP30938@jama>
+Message-ID: <alpine.LFD.2.00.1001171200010.16324@localhost>
 References: <alpine.LFD.2.00.1001171141210.11393@localhost>
-Date: Sun, 17 Jan 2010 17:57:30 +0100
-Message-ID: <1263747450.3210.50.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	<20100117165403.GP30938@jama>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: beagleboard-demo-image, and the evil that is "gnome-games"
@@ -35,55 +46,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 16:59:47 -0000
-X-Groupsio-MsgNum: 15803
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-J5SSHEDd+IIT1f4aq9ri"
+X-List-Received-Date: Sun, 17 Jan 2010 17:09:59 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
---=-J5SSHEDd+IIT1f4aq9ri
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Sun, 17 Jan 2010, Martin Jansa wrote:
 
-Am Sonntag, den 17.01.2010, 11:47 -0500 schrieb Robert P. J. Day:
+> On Sun, Jan 17, 2010 at 11:47:06AM -0500, Robert P. J. Day wrote:
+> >   it seems counter-productive to allow a single games package to put
+> > the brakes on an entire build.
+>
+> Maybe you want to build with -k?
+>
+> If there is some build problem in games package, then it should be
+> fixed, not silenced by whole task removal.
 
-[=E2=80=A6]
+  i've reported the breakage related to gnome-games before:
 
->   a suggestion -- until the issue with gnome-games is resolved, why
-> not just remove its inclusion from the bb-demo-image task?  i'm being
-> quite serious -- it's obviously not a critical package, and if it's
-> the only thing keeping people from building and testing the OE dev
-> branch for the beagleboard, take it out so folks can get back to
-> testing.
+http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg02124.html
 
-[=E2=80=A6]
+note in that posting that philip balister appears to confirm the
+problem, and there's a reference to someone else who is working with
+an update that might solve the problem.
 
-In my opinion that would not be the right way to tackle this issue.
+  that was a *month* ago, and things are still broken.  if there's a
+fix, then it should be applied.  if there isn't, then the reference to
+gnome-games should be removed.  allowing a single broken package
+that's been broken for over a month to be the single obstacle to a
+successful build would seem to be entirely counter-productive.
 
-Just enter a new bug report in OE=E2=80=99s bugtracker [1], attach a diff p=
-eople
-can apply *locally* to remove the dependency on `gnome-games`, reference
-the report in a reply to this thread and close the report when the issue
-is fixed.
+rday
+--
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
-Thanks,
-
-Paul
-
-
-[1] http://bugs.openembedded.net/
-
---=-J5SSHEDd+IIT1f4aq9ri
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktTQXoACgkQPX1aK2wOHViTnwCghvnBAyX4bZeiMu69u9JhSzkE
-8V8Anjw40MDFg7CQry1/8znYf/mVHnDz
-=8WJg
------END PGP SIGNATURE-----
-
---=-J5SSHEDd+IIT1f4aq9ri--
