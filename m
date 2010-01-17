@@ -1,44 +1,26 @@
-Received: from mail-fx0-f215.google.com ([209.85.220.215])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay4mail@gmail.com>) id 1NWSbY-0003R8-HY
+	(envelope-from <holger+oe@freyther.de>) id 1NWSgM-0003ar-WC
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 17 Jan 2010 11:43:39 +0100
-Received: by fxm7 with SMTP id 7so530991fxm.28
+	Sun, 17 Jan 2010 11:48:38 +0100
+Received: from tamarin.localnet (123-192-180-176.dynamic.kbronet.com.tw
+	[123.192.180.176])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 159831B10C02
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Jan 2010 02:41:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:user-agent:references:in-reply-to:mime-version:content-type
-	:content-transfer-encoding:message-id;
-	bh=3num1uqB0oJ8aSWUP5TEXUNTtNlxoVYu4KX1RbcPr4w=;
-	b=MBI+2UkkylXXd6/MdlNzQYCtuM5wjgxOv5mTqEUDrNzBVrQ5hpLJkUOYyRmhfLE+KR
-	IEA+U+9yl+K1vwEViOPer5iy22Drht9rSAyACQbdtxjDa/LV0Ol3kKzvPnwQO6kQwHrO
-	/X9HqaAoN86DHBclr/WGC6Mv2gmEqKpmDgnec=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:user-agent:references:in-reply-to:mime-version
-	:content-type:content-transfer-encoding:message-id;
-	b=lriXsAdVUsI5p/wnjkWwonaX9G0AHZ4r5WVf0tixjn352LmgrTIaVEzHttu4/kJFMX
-	T4xkVO3wpDX3i6c74gqKu4aFiIEbDkphGy21osCTyRtdrvpFB5b4xrx2tcYsvXWJRjAf
-	vTYbE6T2YVR+2PxHjFnflI5xZ0x+QQueFGAaE=
-Received: by 10.223.4.214 with SMTP id 22mr5700090fas.34.1263724883160;
-	Sun, 17 Jan 2010 02:41:23 -0800 (PST)
-Received: from is.home (95-29-176-93.broadband.corbina.ru [95.29.176.93])
-	by mx.google.com with ESMTPS id 14sm1499142fxm.11.2010.01.17.02.41.20
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 17 Jan 2010 02:41:21 -0800 (PST)
-From: Yuri Bushmelev <jay4mail@gmail.com>
+	Sun, 17 Jan 2010 10:44:41 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Jan 2010 13:39:57 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.30-std-def-alt15; KDE/4.3.4; i686; ; )
-References: <alpine.LFD.2.00.1001170430200.4163@localhost>
-In-Reply-To: <alpine.LFD.2.00.1001170430200.4163@localhost>
+Date: Sun, 17 Jan 2010 11:46:11 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <> <1263698541-9726-1-git-send-email-camelguo@gmail.com>
+In-Reply-To: <1263698541-9726-1-git-send-email-camelguo@gmail.com>
 MIME-Version: 1.0
-Message-Id: <201001171339.57694.jay4mail@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.220.215
-X-SA-Exim-Mail-From: jay4mail@gmail.com
+Message-Id: <201001171146.11900.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: why is zaurus-utils "gnu.tar.gz" in OE dev repo?
+Subject: Re: [PATCH] Change the prefer binutils of micro.conf from 2.19.51 to 2.18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,29 +34,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Jan 2010 10:43:39 -0000
+X-List-Received-Date: Sun, 17 Jan 2010 10:48:38 -0000
 Content-Type: Text/Plain;
   charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-Hello!
-> $ git log recipes/zaurus-utils/files/gnu-tar.gz
-> commit 5a7e0f0eb265c98248ffd23d4801d1e0c1af031b
-> Author: Andrea Adami <andrea.adami@gmail.com>
-> Date:   Wed Aug 12 00:09:31 2009 +0200
-> 
->     zaurus-utils: create a common container for the various Zaurus tools
-> 
->  can that tarball not be moved somewhere and downloaded?
-> 
-> http://projects.linuxtogo.org/pipermail/openembedded-commits/2009-August/
-> 030396.html
+On Sunday 17 January 2010 04:22:21 Guo Hongruan wrote:
+> * the previous default version of binutils (2.19.51) in micro.conf cause
+>  the default version of glibc failed to build
 
-IMHO, we can host it on LTG zaurus project page 
-(zaurus.projects.linuxtogo.org) right after DNS will be fixed (ping to 
-florian again) :)
 
--- 
-Yuri Bushmelev
+In which way? Link error? missing symbols? bad relocations? Your commit 
+message should indicate what the problem is, e.g. when someone else updates 
+binutils he should be able to verify that your problem does not exist in 
+2.19.52.
+
+
+So a good message should include:
+	- The configuration you are building for (not only micro but also the machine)
+	- The actual error you have seen
+	- A indication that it is caused by binutils.
+
+z.
 
 
