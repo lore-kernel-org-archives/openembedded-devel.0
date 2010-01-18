@@ -1,48 +1,45 @@
 Received: from mail-fx0-f212.google.com ([209.85.220.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NWxVh-0000wH-Ra
+	(envelope-from <raj.khem@gmail.com>) id 1NWxnK-0003wQ-3m
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Jan 2010 20:43:40 +0100
-Received: by fxm4 with SMTP id 4so1139425fxm.12
+	Mon, 18 Jan 2010 21:01:53 +0100
+Received: by fxm4 with SMTP id 4so1156260fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jan 2010 11:41:23 -0800 (PST)
+	Mon, 18 Jan 2010 11:59:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=qhwRu5IRMlCGzCFEEuqkA2K/xyBve4x4dIs4mDYdR84=;
-	b=mVJaOoZ2fS6OS71iWOD6sHSu3b5Ts748nl2jRQNHuR62mgE/dj3ZXifpuE2K4cWoJo
-	75Erz9cLejkYEi8w4rsAbLR8sxFQelX5q37nss9OBoTzRT1O82+O7YlV/RyCaoILEVY0
-	7Mxm4p7XyRAeFwSVtG5xqimT0uUxmndHJIC6U=
+	:in-reply-to:user-agent;
+	bh=jfF6Ep0vZ5FOkSeMPkxxxK/Hd3tmtPvoRm6MGDa+/AA=;
+	b=q3VDFrPWBUFd4AqAIRN/Q3NBzfDbPxnq0c0BEC7peUz6okOj4vPsKjCfnHqg0NHLNR
+	BI3RQhMGd4FHAJO6ofP61DTNzUY9le03etBbbu329uPUmUcTmFid45NMG+/44o9nEp8K
+	IinwjAO0emnI3KIdgdEnrdvkFJL6d8UwjhjAE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=Xc28anNQtj7Nfy5c+AVNpOjpAxBGu4gIh9D+E1L6EFeO9uyvEb/d8Hnfz9MrTCYLtJ
-	//rxDP2L23tAJ6cmBFlFWCXHRhN1tDiaMVyL9E1HbIeKqEwiA1I0y42qzYi+yUWsgOXw
-	YVA9uZq6Kvpb8UsWarbBYyo1mjhdJHNm+LAqE=
-Received: by 10.87.46.24 with SMTP id y24mr338949fgj.1.1263843683296;
-	Mon, 18 Jan 2010 11:41:23 -0800 (PST)
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=O/k4nqWto293P+fh/SQEcM70raXBfparEAephaHAuZb2DgVgAHsQJgY2kJIrgEMJC/
+	c5Yo+apk5iioeJZXeOBB+NJq6so5DOEFy60tn9OrI0pKYJrI3nsyKrCoykZti4Ingq+h
+	OOLWkCYYL0k5sFlJC5rMrFzPL4wgLhPML6sh8=
+Received: by 10.102.207.1 with SMTP id e1mr3327245mug.100.1263844775566;
+	Mon, 18 Jan 2010 11:59:35 -0800 (PST)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id 3sm11663626fge.16.2010.01.18.11.41.20
+	by mx.google.com with ESMTPS id y6sm19555725mug.31.2010.01.18.11.59.32
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 18 Jan 2010 11:41:22 -0800 (PST)
-Date: Mon, 18 Jan 2010 11:41:37 -0800
+	Mon, 18 Jan 2010 11:59:34 -0800 (PST)
+Date: Mon, 18 Jan 2010 11:59:49 -0800
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100118194137.GA31712@gmail.com>
-References: <> <1263733818-32111-1-git-send-email-camelguo@gmail.com>
-	<201001171430.39964.holger+oe@freyther.de>
-	<op.u6oir0rqmn1qzu@guohr-laptop-ubuntu>
+Message-ID: <20100118195949.GB31712@gmail.com>
+References: <1263577018-9627-1-git-send-email-clarson@mvista.com>
 MIME-Version: 1.0
-In-Reply-To: <op.u6oir0rqmn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <1263577018-9627-1-git-send-email-clarson@mvista.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 209.85.220.212
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Set preferred glibc to 2.10.1 in conf/distro/micro.conf
+Subject: Re: [PATCH] base.bbclass: in base_contains, check for var existance before using it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,61 +53,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jan 2010 19:43:40 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Mon, 18 Jan 2010 20:01:53 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 
-On (17/01/10 21:37), Guo Hongruan wrote:
-> 在 Sun, 17 Jan 2010 21:30:39 +0800，Holger Hans Peter Freyther
-> <holger+oe@freyther.de> 写道:
+On (15/01/10 10:36), Chris Larson wrote:
+> From: Brian Pomerantz <bapper@mvista.com>
 > 
-> >On Sunday 17 January 2010 14:10:18 Guo Hongruan wrote:
-> >>* the preferred version of binutils of conf/distro/micro.conf is 2.19.51
-> >>* the preferred version of glibc is 2.6.1 which is defined in
-> >> sane-toolchain.inc * the ld produced by binutils-2.19.51
-> >>reports that it
-> >> can not find the __begin symbol when linking with glibc-2.6.1
-> >
-> >It would be really great if you could start to read emails too.
-> >
-> >So now we now two ways to cure the symptoms but we have no idea about the
-> >underlying root cause.
-> >
-> >Is it too much to ask what the actual error is? The __begin
-> >reminds me of a
-> >bug in the linker script Khem was pointing out?
+> When using base_contains() to check for a string in a variable for a,
+> if the variable is not defined an exception occurs.  By checking the
+> existance of the variable and returning false if it isn't there,
+> a value can be checked for a variable regardless of whether or not it
+> is defined.
 > 
-> 
-> I guess you are using latest binutils. There has been changes in ld
-> which surfaced this issue. So either you could switch back to using
-> older binutils like 2.18 or something. Or you could also port the patch
-> recipes/glibc/glibc-2.9/glibc-2.9-use-_begin.patch
-> 
-> That's the cause of the building failure. I think it is better to
-> use the newer version of glibc that to port the patch to glibc-2.6.1
+> Signed-off-by: Brian Pomerantz <bapper@mvista.com>
+> Signed-off-by: Chris Larson <clarson@mvista.com>
 
-It takes quite a bit to validate a toolchain (gcc/binutils/libc) before
-it is pushed as default preference. Dont use sword to kill a
-fly. You could very well backport the one patch and keep using 2.6.1
-if you want to upgrade make sure that its stable enough and tested
-enough on some common architecuture/machines but as eglibc is default
-libc for micro I wouldnt worry too much for glibc as it might not hit
-all users of micro.
+Acked-by: Khem Raj <raj.khem@gmail.com>
+
+
+> ---
+>  classes/base.bbclass |    7 +++++--
+>  1 files changed, 5 insertions(+), 2 deletions(-)
 > 
-> 
-> >
-> >_______________________________________________
-> >Openembedded-devel mailing list
-> >Openembedded-devel@lists.openembedded.org
-> >http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-> 
+> diff --git a/classes/base.bbclass b/classes/base.bbclass
+> index 384a67d..f67773a 100644
+> --- a/classes/base.bbclass
+> +++ b/classes/base.bbclass
+> @@ -226,14 +226,17 @@ def base_version_less_or_equal(variable, checkvalue, truevalue, falsevalue, d):
+>          return falsevalue
+>  
+>  def base_contains(variable, checkvalues, truevalue, falsevalue, d):
+> +	val = bb.data.getVar(variable,d,1)
+> +	if not val:
+> +		return falsevalue
+>  	matches = 0
+>  	if type(checkvalues).__name__ == "str":
+>  		checkvalues = [checkvalues]
+>  	for value in checkvalues:
+> -		if bb.data.getVar(variable,d,1).find(value) != -1:	
+> +		if val.find(value) != -1:
+>  			matches = matches + 1
+>  	if matches == len(checkvalues):
+> -		return truevalue		
+> +		return truevalue
+>  	return falsevalue
+>  
+>  def base_both_contain(variable1, variable2, checkvalue, d):
 > -- 
-> Guo Hongruan, Embedded Linux Consultant
-> Skype: camelguo
-> Twitter: camelguo
-> http://www.gulessoft.com
+> 1.6.4.339.g527d
+> 
 > 
 > _______________________________________________
 > Openembedded-devel mailing list
