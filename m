@@ -1,27 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NWo9s-0003oQ-PW for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Jan 2010 10:44:32 +0100
-Received: from f053034131.adsl.alicedsl.de ([78.53.34.131]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NWo7k-0005b3-NZ for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Jan 2010 09:42:16 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from pasmtpb.tele.dk ([80.160.77.98])
+	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <sgh@sgh.dk>)
+	id 1NWpFc-0005P4-7o for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Jan 2010 11:54:31 +0100
+Received: from mail.mikrofyn.com (cpe.ge-0-2-0-951.faaqnqu1.customer.tele.dk
+	[93.167.193.22])
+	by pasmtpB.tele.dk (Postfix) with ESMTP id D60B4E30492
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Jan 2010 11:21:30 +0100 (CET)
+Received: from koontz.localnet ([10.0.1.94]) by mail.mikrofyn.com with
+	Microsoft SMTPSVC(6.0.3790.3959); Mon, 18 Jan 2010 11:22:04 +0100
+From: =?iso-8859-1?q?S=F8ren_Holm?= <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1263806158.3589.19.camel@balakrishnan-desktop>
-References: <1263806158.3589.19.camel@balakrishnan-desktop>
-Date: Mon, 18 Jan 2010 10:42:15 +0100
-Message-ID: <1263807735.3530.11.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Mon, 18 Jan 2010 11:21:29 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-020633rc4-generic; KDE/4.3.4; i686; ; )
+References: <201001172228.26477.sgh@sgh.dk> <201001180046.29318.sgh@sgh.dk>
+	<Pine.LNX.4.64.1001171912530.12229@juice.ott.cti.com>
+In-Reply-To: <Pine.LNX.4.64.1001171912530.12229@juice.ott.cti.com>
+MIME-Version: 1.0
+Message-Id: <201001181121.29393.sgh@sgh.dk>
+X-OriginalArrivalTime: 18 Jan 2010 10:22:04.0140 (UTC)
+	FILETIME=[145F8AC0:01CA9828]
+X-SA-Exim-Connect-IP: 80.160.77.98
+X-SA-Exim-Mail-From: sgh@sgh.dk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] regulus: Adding pxa270 based machine
+Subject: Re: Mesa packages and TLS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,45 +38,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jan 2010 09:44:32 -0000
-X-Groupsio-MsgNum: 15845
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-w9G1zH3WdDBSpXEV2BWA"
-
---=-w9G1zH3WdDBSpXEV2BWA
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 18 Jan 2010 10:54:31 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-Am Montag, den 18.01.2010, 14:45 +0530 schrieb balakrishnan:
-> Regulus is pxa270 based machine, is to be reviewed and added to oe tree.
-> Attached patches are used to create u-boot, kernel and demo-image for
-> regulus machine.
+Mandag 18 januar 2010 01:16:26 skrev Michael Smith:
+>=20
+> Which version of xserver-xorg? It also inherits glx-use-tls, so
+> _glapi_tls_Context should be there if you've rebuilt since August 24.
+>=20
 
-I think your patches miss a =C2=BBSigned-off-by=C2=AB-line to get included =
-[1].
-You can add =C2=BB-s=C2=AB to =C2=BBgit commit=C2=AB or =C2=BBgit format-pa=
-tch=C2=AB to get this
-appended automatically.
+The ensure that stuff is not changing we have based us on
+OE commit eb0805d926c8cf4c1f48d21ee9402786c3209df9
+
+bitbake -i tells me=20
+xserver-xorg_1.7.3.bb
+
+=2D-=20
+Mvh./ Best regards
+
+S=F8ren Holm
+
+Software developer=20
+
+MIKROFYN A/S
+Bondovej 16
+DK - 5250 Odense SV
+
+E-mail: soeren.holm@mikrofyn.com =20
+Web:    www.mikrofyn.com=20
+Phone:  +45 6617 0716
+Mobile: +45 4212 9477
+=46ax:    +45 6617 0785
 
 
-Thanks,
-
-Paul
-
-
-[1] http://wiki.openembedded.net/index.php/Commit_Policy
-
---=-w9G1zH3WdDBSpXEV2BWA
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktULPYACgkQPX1aK2wOHVg9RQCggSVfa8UlikWAcTTsNlh8jQ0q
-kVUAn0UGSEN6V19FxyvZHEnxIog5MKu2
-=ZMKK
------END PGP SIGNATURE-----
-
---=-w9G1zH3WdDBSpXEV2BWA--
