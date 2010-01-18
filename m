@@ -1,33 +1,36 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1NWvIW-0000WA-5Z
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NWvP0-00014x-BO for openembedded-devel@lists.openembedded.org;
+	Mon, 18 Jan 2010 18:28:37 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NWvMp-0002X2-5A
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Jan 2010 18:21:55 +0100
-Received: from hiob.intern.dresearch.de (unknown [10.32.0.138])
-	by mail.dresearch.de (Postfix) with ESMTP id B8C6F4912B3
+	Mon, 18 Jan 2010 18:26:19 +0100
+Received: from p5b3b31e6.dip.t-dialin.net ([91.59.49.230])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Jan 2010 18:26:19 +0100
+Received: from no2spam by p5b3b31e6.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Jan 2010 18:19:38 +0100 (CET)
-Received: from exchange.intern.dresearch.de ([10.32.1.40]) by
-	hiob.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 18 Jan 2010 18:22:17 +0100
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Mon, 18 Jan 2010 11:57:42 +0100
-Message-ID: <4B543EAB.7070705@dresearch.de>
-Date: Mon, 18 Jan 2010 11:57:47 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
-MIME-Version: 1.0
+	Mon, 18 Jan 2010 18:26:19 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4AF1A5E2.3020002@dresearch.de><alpine.LFD.2.00.0911050322460.17459@localhost><4AF29AFC.8030804@dresearch.de>
-	<20100112120616.GA19826@zlo.nu>
-In-Reply-To: <20100112120616.GA19826@zlo.nu>
-X-OriginalArrivalTime: 18 Jan 2010 10:57:43.0043 (UTC)
-	FILETIME=[0F423D30:01CA982D]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@DResearch.DE
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Mon, 18 Jan 2010 18:25:51 +0100
+Message-ID: <hj25j2$g0p$1@ger.gmane.org>
+References: <4B52D42D.9020103@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5b3b31e6.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <4B52D42D.9020103@gmx.de>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: qemu again :(
+Subject: Re: changing system configuration in a customized image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,21 +44,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jan 2010 17:21:55 -0000
+X-List-Received-Date: Mon, 18 Jan 2010 17:28:37 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Marc Olzheim wrote:
-> I have the same problem on Ubuntu 9.10 (karmic).
-> When I pass -r 2.6.18 or lower to qemu though, the qemu hangs itself and
-> will never finish. With -r 2.6.19 and up, it gives me the "mmap: No such
-> device or address" message.
-> 
-> Did you find a solution in the mean time ?
+Stefan Buschmann wrote:
+> I'm using a customized image of SHR that includes some additional 
+> packages I like to have installed automatically as well as a package 
+> that should include the changes to the system configuration that I need. 
 
-No, sorry. Problem is still pending.  :(
-
-Steffen
+I'd be very interested in something like this as well but haven't cooked
+up a solution, yet.  My thoughts were leaning towards creation of a
+package that includes the necessary files and does some customization in
+postinst.
 
 
 
