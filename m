@@ -1,31 +1,31 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from vms173013pub.verizon.net ([206.46.173.13])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1NWlkb-00068L-2i
+	(envelope-from <denis@denix.org>) id 1NWlmY-0006Cw-F9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 18 Jan 2010 08:10:16 +0100
+	Mon, 18 Jan 2010 08:12:17 +0100
 Received: from gandalf.denix.org ([unknown] [71.255.235.232])
-	by vms173005.mailsrvcs.net
+	by vms173013.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0KWF00ILJL59SQE2@vms173005.mailsrvcs.net> for
+	2009)) with ESMTPA id <0KWF00MS4L87V0K5@vms173013.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Mon,
-	18 Jan 2010 01:07:58 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3376E14AF60; Mon,
-	18 Jan 2010 02:07:57 -0500 (EST)
-Date: Mon, 18 Jan 2010 02:07:57 -0500
+	18 Jan 2010 01:09:49 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id AF37A14AF60; Mon,
+	18 Jan 2010 02:09:43 -0500 (EST)
+Date: Mon, 18 Jan 2010 02:09:43 -0500
 From: Denys Dmytriyenko <denis@denix.org>
 To: "Robert P. J. Day" <rpjday@crashcourse.ca>
-Message-id: <20100118070757.GA25542@denix.org>
-References: <alpine.LFD.2.00.1001170426100.4163@localhost>
+Message-id: <20100118070943.GB25542@denix.org>
+References: <alpine.LFD.2.00.1001170437060.4706@localhost>
 MIME-version: 1.0
-In-reply-to: <alpine.LFD.2.00.1001170426100.4163@localhost>
+In-reply-to: <alpine.LFD.2.00.1001170437060.4706@localhost>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.5
+X-SA-Exim-Connect-IP: 206.46.173.13
 X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Cc: OpenEmbedded Development mailing list
 	<openembedded-devel@lists.openembedded.org>
-Subject: Re: why qpealarmclockapplet-1.0.9/missing-files.tar.gz in OE repo?
+Subject: Re: does supertux-smallsize-data.tar.bz2 tarball need to be in OE	repo?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,13 +39,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Jan 2010 07:10:16 -0000
+X-List-Received-Date: Mon, 18 Jan 2010 07:12:17 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Sun, Jan 17, 2010 at 04:29:22AM -0500, Robert P. J. Day wrote:
+On Sun, Jan 17, 2010 at 04:39:29AM -0500, Robert P. J. Day wrote:
 > 
-> $ git log recipes/qpealarmclock/qpealarmclockapplet-1.0.9/missing-files.tar.gz
+> $ git log recipes/supertux/files/supertux-smallsize-data.tar.bz2
 > commit 709c4d66e0b107ca606941b988bad717c0b45d9b
 > Author: Denys Dmytriyenko <denis@denix.org>
 > Date:   Tue Mar 17 14:32:59 2009 -0400
@@ -58,16 +58,10 @@ On Sun, Jan 17, 2010 at 04:29:22AM -0500, Robert P. J. Day wrote:
 > 
 >     Signed-off-by: Denys Dmytriyenko <denis@denix.org>
 >     ... snip ...
-> 
-> it would seem that you can download "missing-files.tar.gz" from here:
-> 
-> http://downloads.openmoko.org/developer/build/openembedded/packages/qpealarmclock/qpealarmclockapplet-1.0.9/
-> 
-> rather than keeping it in the repo.
 
-Please use --follow flag to track renames:
+And same comment about using --follow here:
 
-$ git log --follow recipes/qpealarmclock/qpealarmclockapplet-1.0.9/missing-files.tar.gz
+$ git log --follow recipes/supertux/files/supertux-smallsize-data.tar.bz2
 
 commit 709c4d66e0b107ca606941b988bad717c0b45d9b
 Author: Denys Dmytriyenko <denis@denix.org>
@@ -75,11 +69,13 @@ Date:   Tue Mar 17 14:32:59 2009 -0400
 
     rename packages/ to recipes/ per earlier agreement
 
-commit d5d23d6428b7ea36bc88ab0216f46fa5fc8675d4
-Author: Marcin Juszkiewicz <hrw@openembedded.org>
-Date:   Wed Jan 18 10:52:07 2006 +0000
+commit a96a64e4975b8e3100904f902bd3b24f521210fb
+Author: Paul Sokolovsky <pmiscml@gmail.com>
+Date:   Thu Jan 17 13:02:45 2008 +0000
 
-    qpealarmclock: updated to 1.0.9 and added it's clock applet - close #536
+    supertux-qvga 0.1.3: Add QVGA port of SperTux, based on GP2X port.
+    * Original GP2X port by Ingo Arndt.
+    * Data conversion preparation and script by myself.
 
 -- 
 Denys
