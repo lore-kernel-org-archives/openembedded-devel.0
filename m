@@ -1,30 +1,26 @@
-Received: from pasmtpb.tele.dk ([80.160.77.98])
-	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <sgh@sgh.dk>)
-	id 1NXEVF-0000uG-Es for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 14:52:20 +0100
-Received: from mail.mikrofyn.com (cpe.ge-0-2-0-951.faaqnqu1.customer.tele.dk
-	[93.167.193.22])
-	by pasmtpB.tele.dk (Postfix) with ESMTP id 6692BE30A10
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 14:49:34 +0100 (CET)
-Received: from koontz.localnet ([10.0.1.94]) by mail.mikrofyn.com with
-	Microsoft SMTPSVC(6.0.3790.3959); Tue, 19 Jan 2010 14:50:07 +0100
-From: =?iso-8859-1?q?S=F8ren_Holm?= <sgh@sgh.dk>
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1NXEXu-00013O-Jq
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Jan 2010 14:55:05 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id 24BF31D3607A; Tue, 19 Jan 2010 14:52:46 +0100 (CET)
+Date: Tue, 19 Jan 2010 14:52:45 +0100
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Jan 2010 14:49:31 +0100
-User-Agent: KMail/1.12.4 (Linux/2.6.33-020633rc4-generic; KDE/4.3.4; i686; ; )
-References: <1263904767-23489-1-git-send-email-sgh@sgh.dk>
-	<1263908226.10980.105.camel@mattotaupa.wohnung.familie-menzel.net>
-In-Reply-To: <1263908226.10980.105.camel@mattotaupa.wohnung.familie-menzel.net>
+Message-ID: <20100119135245.GF18793@ibawizard.net>
+References: <4B54F654.4000500@atmel.com> <4B55B26C.5040706@gmail.com>
+	<1263907954.9743.4.camel@mill.internal.reciva.com>
+	<4B55B823.8070606@gmail.com>
 MIME-Version: 1.0
-Message-Id: <201001191449.31769.sgh@sgh.dk>
-X-OriginalArrivalTime: 19 Jan 2010 13:50:07.0468 (UTC)
-	FILETIME=[4F6DFAC0:01CA990E]
-X-SA-Exim-Connect-IP: 80.160.77.98
-X-SA-Exim-Mail-From: sgh@sgh.dk
+In-Reply-To: <4B55B823.8070606@gmail.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Make perl-native_* depend on make-native.
+Subject: Re: Angstrom: x11-gpe-image : Calibration of Screen ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,27 +34,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2010 13:52:20 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 19 Jan 2010 13:55:05 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Tirsdag 19 januar 2010 14:37:06 skrev Paul Menzel:
->=20
-> Please read [1] and especially =BBInclude a Signed-off-by:=AB (also possi=
-ble
-> in a reply to this message). What error gets fixed with your patch.
-> `perl-native_*` seem such needed packages, that it is strange nobody
-> else experienced this.
+Marco Cavallini <koansoftware@gmail.com> [2010-01-19 14:48:19]:
 
-Apparently make-native is not in the dependency tree of perl-native.
-Therefore the compilation fails.
+> actually I am trying to use xinput_calibrator
+> http://www.freedesktop.org/wiki/Software/xinput_calibrator
+> 
+> It looks a quite raw application and comes without autotools
+> configuration making it hard to transform into an OE recipe.
 
-Sorry. I did not notice perl.inc
+I have OE recipe for it, can send it to you later today.
 
-=2D-=20
-Mvh./ Best regards
-
-S=F8ren Holm
+-- ynezz
 
 
