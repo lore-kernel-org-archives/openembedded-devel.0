@@ -1,31 +1,38 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-gx0-f227.google.com ([209.85.217.227])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NX1tq-00030G-Du for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 01:24:53 +0100
-Received: from f053034131.adsl.alicedsl.de ([78.53.34.131]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NX1rh-0000py-Ne for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 00:22:37 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NX8SS-0005bB-Tb
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Jan 2010 08:25:04 +0100
+Received: by gxk27 with SMTP id 27so3340385gxk.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Jan 2010 23:22:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=eDVBUoCjNqs0DHsanPj+scsl3o0qxqQnVZ9sKnXb4Rw=;
+	b=lpoRe57RYQqgxAbfr11NZJNmVPUOKZ9XaGwLCK5J96pcIsjz+Ui9zZeBSVPn9UJt6e
+	E5bV3mf5RTAJHR+ZBbDq88G9/0v3d8/0PS5h2XzdfSmnJTu/VzP9OytMgAPsZkO2rVQq
+	N8lCStgXy3qCkknPS8JI1uTJSKYdxaj0CU/1E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=T09g2XAUDOv1hbx4eGZrYlmvuZhUYog+DT3gva03dMe0UDUmkX+lm9akMaDmgdmjVn
+	Aw4OvaJbm4a9zxy4CXsOeF71Bqi6pQ7/IZYka6IcUCzAiSI0TDtoCet+nBUSjktj4J1r
+	Azp9kNojSWZXG/YtmCldyucDKnUBMPgmFP1tQ=
+MIME-Version: 1.0
+Received: by 10.100.220.6 with SMTP id s6mr10904993ang.140.1263885765324; Mon, 
+	18 Jan 2010 23:22:45 -0800 (PST)
+In-Reply-To: <4B54F75F.9030005@atmel.com>
+References: <4B54F75F.9030005@atmel.com>
+Date: Tue, 19 Jan 2010 08:22:45 +0100
+Message-ID: <ac9c93b11001182322s22a265b8xe206298af0c387c4@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1260719131.3110.26.camel@mattotaupa.wohnung.familie-menzel.net>
-References: <1260618520.3373.23.camel@mattotaupa.wohnung.familie-menzel.net>
-	<20091212173311.GA3730@rhein.zuhause.netz>
-	<1260711980.3110.21.camel@mattotaupa.wohnung.familie-menzel.net>
-	<20091213141849.GG17995@ibawizard.net>
-	<1260719131.3110.26.camel@mattotaupa.wohnung.familie-menzel.net>
-Date: Tue, 19 Jan 2010 01:22:36 +0100
-Message-ID: <1263860556.3438.40.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.217.227
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Setting environment variables in recipes and fixing upstream the right way to cross compile? (was: package VDR for OE)
+Subject: Re: Getting a cursor
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,88 +46,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2010 00:24:53 -0000
-X-Groupsio-MsgNum: 15863
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-g3twZRYdQiySeYUT6Poz"
+X-List-Received-Date: Tue, 19 Jan 2010 07:25:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-g3twZRYdQiySeYUT6Poz
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+2010/1/19 Ulf Samuelsson <ulf.samuelsson@atmel.com>:
+> Anyone got an idea how to get a cursor as default?
+> Googling, I have seen that /usr/share/icons/xcursor-transparent/cursors
+> all point at a transparent cursor abd that I can generate new cursors
+> using xcursorgen.
+> I guess I can also copy some cursors from a desktop, but If
+> I want to have cursor on by default, is there a magic setting somewhere?
 
-Am Sonntag, den 13.12.2009, 16:45 +0100 schrieb Paul Menzel:
-> Am Sonntag, den 13.12.2009, 15:18 +0100 schrieb Petr =C5=A0tetiar:
-> > Paul Menzel <paulepanter@users.sourceforge.net> [2009-12-13 14:46:20]:
->=20
-> [=E2=80=A6]
->=20
-> > Maybe, it's because you don't have STAGING_INCDIR variable available in
-> > do_compile() step. If I were you, I would grep for STAGING_INCDIR varia=
-ble in
-> > other recipes: grep -R STAGING_INCDIR recipes/* and you should get idea=
- how to
-> > use it. Hint, change :
-> >=20
-> > INCLUDES =3D -I${STAGING_INCDIR}freetype2
-> >=20
-> > to=20
-> >=20
-> > INCLUDES =3D ${CFLAGS}
-> >=20
-> > and in your recipe do:
-> >=20
-> > CFLAGS_append  +=3D " -I${STAGING_INCDIR}/freetype2"
->=20
-> Great. That worked.
->=20
-> > > Furthermore is there a better way for upstream to set things up so th=
-at
-> > > no patching is needed? Or is autotools needed for this?
->=20
-> I am still asking if upstream could change something to make the
-> Makefile cross compilable by default.
+I suggest you take your question to e.g. an X11 mailing list.
+This is not OE development related.
 
-How should the upstream Makefile be changed to be easily cross
-compilable. Is my following suggestion correct?
+Thank you.
 
-The problem is to find the FreeType headers we have to tell the compiler
-where there are, because they are in the subdirectory `freetype` under=20
-`${STAGING_INCDIR}/freetype2`.
-
-Therefore change upstream Makefile to
-
-        -INCLUDES =3D /usr/include/freetype2`
-        +INCLUDES ?=3D /usr/include/freetype2`
-
-and export `INCLUDES` [1] in the recipe.
-
-        export INCLUDES =3D ${STAGING_INCDIR}/freetype2
-
-Would that be preferable to patching `Makefile` in OE and using
-`CFLAGS_append`? Maybe other distributions would profit too if upstream
-made this change? If yes, I could prepare a patch.
-
-[=E2=80=A6]
+Frans
 
 
-Thanks,
-
-Paul
-
-
-[1] http://docs.openembedded.org/usermanual/html/recipes_syntax.html
-
---=-g3twZRYdQiySeYUT6Poz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktU+0sACgkQPX1aK2wOHVidcACeNs8FSdltSTt8QTMkB0k9INWp
-md8An1Vl3nIRdy6JTisHiKqacFgozVGF
-=OF3d
------END PGP SIGNATURE-----
-
---=-g3twZRYdQiySeYUT6Poz--
