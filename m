@@ -1,37 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NXLZG-0004u8-Dm for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 22:24:57 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NXLWv-00021C-0B
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 22:22:29 +0100
-Received: from p5b3b3140.dip.t-dialin.net ([91.59.49.64])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 22:22:28 +0100
-Received: from no2spam by p5b3b3140.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+Received: from smtp1.cybercity.dk ([212.242.43.251])
+	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <sgh@sgh.dk>)
+	id 1NXLgG-00056p-R4 for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Jan 2010 22:32:12 +0100
+Received: from natla.sgh.dk (0x4dd5bf76.adsl.cybercity.dk [77.213.191.118])
+	by smtp1.cybercity.dk (Postfix) with ESMTP id 6D5C358681A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 22:22:28 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 19 Jan 2010 22:32:55 +0100 (CET)
+Received: from phoenix.localnet (phoenix.local [192.168.0.226])
+	by natla.sgh.dk (Postfix) with ESMTP id 665826337
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Jan 2010 23:22:25 +0100 (CET)
+From: =?iso-8859-1?q?S=F8ren_Holm?= <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Tue, 19 Jan 2010 22:21:42 +0100
-Message-ID: <hj57p6$8p9$1@ger.gmane.org>
-References: <hj5604g6@ger.gmane.org>
-	<1263935073-12359-1-git-send-email-ynezz@true.cz>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b3140.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-In-Reply-To: <1263935073-12359-1-git-send-email-ynezz@true.cz>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Tue, 19 Jan 2010 22:29:53 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.32-02063204-generic; KDE/4.3.4; i686; ; )
+References: <1263904767-23489-1-git-send-email-sgh@sgh.dk>
+	<4B55B7E7.70205@mwester.net> <hj566c$1g6$2@ger.gmane.org>
+In-Reply-To: <hj566c$1g6$2@ger.gmane.org>
+MIME-Version: 1.0
+Message-Id: <201001192229.53778.sgh@sgh.dk>
+X-SA-Exim-Connect-IP: 212.242.43.251
+X-SA-Exim-Mail-From: sgh@sgh.dk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH v2] xinput_calibrator: switch to autotools
+Subject: Re: [PATCH] Make perl-native_* depend on make-native.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,21 +37,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2010 21:24:57 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 19 Jan 2010 21:32:12 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Petr Štetiar wrote:
-> Signed-off-by: Petr Štetiar <ynezz@true.cz>
-> ---
->  ...01-switch-to-autotools-based-build-system.patch |  162 ++++++++++++++++++++
->  .../use-proper-compiler.patch                      |   20 ---
->  .../xinput-calibrator/xinput-calibrator_0.5.0.bb   |    7 +-
->  3 files changed, 166 insertions(+), 23 deletions(-)
->  create mode 100644 recipes/xinput-calibrator/xinput-calibrator-0.5.0/0001-switch-to-autotools-based-build-system.patch
->  delete mode 100644 recipes/xinput-calibrator/xinput-calibrator-0.5.0/use-proper-compiler.patch
+Tirsdag 19 januar 2010 21:54:35 skrev Rolf Leggewie:
+> Mike Westerhof wrote:
+> > everything!  I wonder if we can just add a note to the appropriate wiki
+> > that in addition to gcc, you need to have make installed on the host.
 
-please actually test your patches next time
+I guess it was just me over exadurating the thing. It turned out that=20
+"rm -rf tmp" solved it for me. Apparently stuff breaks quite easy when
+debugging recipes.
 
+Sorry for the inconvinience, and thanks for the effort from all of you.
+
+/S=F8ren Holm
 
 
