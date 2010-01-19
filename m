@@ -1,36 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NXEPQ-0000VW-CW for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 14:46:19 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NXENF-0007wI-Kd
+Received: from smtpauth20.prod.mesa1.secureserver.net ([64.202.165.36])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1NXESo-0000el-Dm
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 14:44:01 +0100
-Received: from p5b3b3140.dip.t-dialin.net ([91.59.49.64])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 14:44:01 +0100
-Received: from no2spam by p5b3b3140.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 14:44:01 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 19 Jan 2010 14:49:49 +0100
+Received: (qmail 18049 invoked from network); 19 Jan 2010 13:47:30 -0000
+Received: from unknown (209.242.7.187)
+	by smtpauth20.prod.mesa1.secureserver.net (64.202.165.36) with ESMTP;
+	19 Jan 2010 13:47:30 -0000
+Message-ID: <4B55B7E7.70205@mwester.net>
+Date: Tue, 19 Jan 2010 07:47:19 -0600
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23 Mnenhy/0.7.6.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Tue, 19 Jan 2010 14:43:39 +0100
-Message-ID: <hj4cub$1v8$1@ger.gmane.org>
-References: <4B557210.4000700@gmx.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b3140.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-In-Reply-To: <4B557210.4000700@gmx.net>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <1263904767-23489-1-git-send-email-sgh@sgh.dk>
+In-Reply-To: <1263904767-23489-1-git-send-email-sgh@sgh.dk>
+X-SA-Exim-Connect-IP: 64.202.165.36
+X-SA-Exim-Mail-From: mike@mwester.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: OpenEmbedded @ FOSDEM2010
+Cc: =?UTF-8?B?U8O4cmVuIEhvbG0=?= <sh@mikrofyn.com>
+Subject: Re: [PATCH] Make perl-native_* depend on make-native.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,18 +35,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2010 13:46:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 19 Jan 2010 13:49:49 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Robert Schuster wrote:
-> 2010-02-06 OpenEmbedded at FOSDEM'10[0] - We have a booth at Europe's
-> finest F/OSS event. See you in Brussels!
+sgh@sgh.dk wrote:
 
-Done
+> -DEPENDS = "virtual/db-native gdbm-native"
+> +DEPENDS = "virtual/db-native gdbm-native make-native"
 
-But I found it a bit strange to release a news item with a date in the
-future.  But apparently, that's the way it's been done so far.
+I don't doubt that perl needs make to build -- but then, so does
+everything!  I wonder if we can just add a note to the appropriate wiki
+that in addition to gcc, you need to have make installed on the host.
+But then, how did OE get to building perl without make in the first place?
 
+-Mike (mwester)
 
 
