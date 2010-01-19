@@ -1,25 +1,31 @@
-Received: from gateway-2929.mvista.com ([206.112.117.47])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <clarson@mvista.com>) id 1NXMGw-0004xv-A2
+Received: from proxy1.bredband.net ([195.54.101.71])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1NXNBf-0002zm-D6
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 23:10:05 +0100
-Received: from [10.50.1.165] (unknown [10.50.1.165])
-	by hermes.mvista.com (Postfix) with ESMTP id 381141D89C
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 14:07:45 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1077)
-From: Christopher Larson <clarson@mvista.com>
-In-Reply-To: <1263938187-20935-1-git-send-email-clarson@mvista.com>
-Date: Tue, 19 Jan 2010 15:07:44 -0700
-Message-Id: <285A50B1-2FB3-4BF7-BC79-C964C6A13ECF@mvista.com>
-References: <1263938187-20935-1-git-send-email-clarson@mvista.com>
+	Wed, 20 Jan 2010 00:08:42 +0100
+Received: from ipb1.telenor.se (195.54.127.164) by proxy1.bredband.net
+	(7.3.140.3)
+	id 4AD3E1C0027B1DEB for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Jan 2010 00:06:23 +0100
+X-SMTPAUTH-B2: 
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: ApwOAKbJVUtT4zqIPGdsb2JhbAAIm24BAQEBN7xJhDME
+X-IronPort-AV: E=Sophos;i="4.49,307,1262559600"; d="scan'208";a="27837131"
+Received: from c-883ae353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.224]) ([83.227.58.136])
+	by ipb1.telenor.se with ESMTP; 20 Jan 2010 00:06:23 +0100
+Message-ID: <4B563AED.6020504@atmel.com>
+Date: Wed, 20 Jan 2010 00:06:21 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1077)
-X-SA-Exim-Connect-IP: 206.112.117.47
-X-SA-Exim-Mail-From: clarson@mvista.com
+X-SA-Exim-Connect-IP: 195.54.101.71
+X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] image, rootfs_ipk: implement IMAGE_FEATURES
+Subject: [PATCH] Build fbv with JPEG and PNG enabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,216 +39,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2010 22:10:06 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 19 Jan 2010 23:08:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Jan 19, 2010, at 2:56 PM, Chris Larson wrote:
->=20
-> This adds the ability to include groups of packages in an image.  It =
-is
-> similar in concept to the IMAGE_FEATURES used in Poky, but here we use
-> IMAGE_FEATURE_<feature> and IMAGE_FEATURE_<feature>_OPTIONAL, rather =
-than
-> base_contains calls.
->=20
-> Initially defined groups:
-> base - the packages requested via IMAGE_INSTALL & IMAGE_VARS
-> dbg - debug packages
-> dev - development packages
-> doc - documentation packages (of limited use at the moment due to =
-task.bbclass)
-> vmlinux - kernel debugging packages (just kernel-vmlinux at the =
-moment)
->=20
-> To add one of these to an image, you can either append to =
-IMAGE_FEATURES or override IMAGE_FEATURES.
->=20
-> Examples:
-> IMAGE_FEATURES_append =3D " dbg"
->=20
-> IMAGE_FEATURES =3D "base dbg vmlinux"
->=20
-> To add a new package group:
-> IMAGE_FEATURE_myfeature =3D "gstreamer python pulseaudio"
->=20
-> Signed-off-by: Chris Larson <clarson@mvista.com>
-> ---
-> classes/image.bbclass      |  100 =
-+++++++++++++++++++++++++++++++++++++++++++-
-> classes/rootfs_ipk.bbclass |    2 +-
-> 2 files changed, 99 insertions(+), 3 deletions(-)
->=20
-> diff --git a/classes/image.bbclass b/classes/image.bbclass
-> index 9dce609..fa7cc9e 100644
-> --- a/classes/image.bbclass
-> +++ b/classes/image.bbclass
-> @@ -28,11 +28,10 @@ ${IMAGE_DEV_MANAGER} \
-> ${IMAGE_INIT_MANAGER} \
-> ${IMAGE_LOGIN_MANAGER} "
->=20
-> -RDEPENDS +=3D "${IMAGE_INSTALL} ${IMAGE_BOOT}"
-> +RDEPENDS +=3D "${__PACKAGE_INSTALL}"
->=20
-> # "export IMAGE_BASENAME" not supported at this time
-> IMAGE_BASENAME[export] =3D "1"
-> -export PACKAGE_INSTALL ?=3D "${IMAGE_INSTALL} ${IMAGE_BOOT}"
->=20
-> # We need to recursively follow RDEPENDS and RRECOMMENDS for images
-> do_rootfs[recrdeptask] +=3D "do_deploy do_populate_staging"
-> @@ -60,6 +59,7 @@ python () {
->     bb.data.setVarFlag('do_rootfs', 'depends', deps, d)
->=20
->     runtime_mapping_rename("PACKAGE_INSTALL", d)
-> +    runtime_mapping_rename("PACKAGE_INSTALL_ATTEMPTONLY", d)
-> }
->=20
-> #
-> @@ -106,6 +106,102 @@ IMAGE_LINGUAS ?=3D "de-de fr-fr en-gb"
->=20
-> LINGUAS_INSTALL =3D "${@" ".join(map(lambda s: "locale-base-%s" % s, =
-bb.data.getVar('IMAGE_LINGUAS', d, 1).split()))}"
->=20
-> +def __pkgmap(d):
-> +    from os import listdir
-> +    from os.path import isdir, join, dirname
-> +
-> +    os =3D d.getVar("TARGET_OS", True)
-> +    vendor =3D d.getVar("TARGET_VENDOR", True)
-> +    basedir =3D dirname(d.getVar("PKGDATA_DIR", True))
-> +
-> +    dirs =3D ("%s%s-%s" % (arch, vendor, os)
-> +            for arch in d.getVar("PACKAGE_ARCHS", True).split())
-> +
-> +    for pkgdatadir in (join(basedir, sys) for sys in dirs):
-> +        try:
-> +            files =3D listdir(pkgdatadir)
-> +        except OSError:
-> +            continue
-> +
-> +        for pn in filter(lambda f: not isdir(join(pkgdatadir, f)), =
-files):
-> +            try:
-> +                pkgdata =3D read_pkgdatafile(join(pkgdatadir, pn))
-> +            except OSError:
-> +                continue
-> +
-> +            for pkg in pkgdata["PACKAGES"].split():
-> +                yield pkg, pn
-> +
-> +def pkgmap(d):
-> +    pkgmap_data =3D d.getVar("__pkgmap_data", False)
-> +    if pkgmap_data is None:
-> +        pkgmap_data =3D dict(__pkgmap(d))
-> +        d.setVar("__pkgmap_data", pkgmap_data)
-> +
-> +    return pkgmap_data
-> +
-> +def recipename(pkg, d):
-> +    return pkgmap(d).get(pkg)
-> +
-> +def pkgjoin(l):
-> +    return ' '.join(set(l))
-> +
-> +def pkgsplit(var, d):
-> +    return (d.getVar(var, True) or "").split()
-> +
-> +def __packages(features, d):
-> +    for feature in features:
-> +        for pkg in pkgsplit('IMAGE_FEATURE_%s' % feature, d):
-> +            yield pkg
-> +
-> +def required_packages(features, d):
-> +    for pkg in __packages((f for f in features if not =
-d.getVar("IMAGE_FEATURE_%s_OPTIONAL" % f, True)), d):
-> +        yield pkg
-> +
-> +def optional_packages(features, d):
-> +    for pkg in __packages((f for f in features if =
-d.getVar("IMAGE_FEATURE_%s_OPTIONAL" % f, True)), d):
-> +        yield pkg
-> +
-> +def active_packages(features, d):
-> +    from itertools import chain
-> +
-> +    for pkg in chain(required_packages(features, d), =
-optional_packages(features, d)):
-> +        yield pkg
-> +
-> +def active_recipes(features, d):
-> +    for pkg in active_packages(features, d):
-> +        recipe =3D recipename(pkg, d)
-> +        if recipe:
-> +            yield recipe
-> +
-> +def image_features_noextras(d):
-> +    for f in d.getVar("IMAGE_FEATURES", True).split():
-> +        if not f in ('dbg', 'dev', 'doc'):
-> +            yield f
-> +
-> +def dbg_packages(d):
-> +    from itertools import chain
-> +
-> +    features =3D image_features_noextras(d)
-> +    return pkgjoin("%s-dbg" % pkg for pkg in =
-chain(active_packages(features, d), active_recipes(features, d)))
-> +
-> +__PACKAGE_INSTALL =3D "${@' =
-'.join(required_packages(d.getVar('IMAGE_FEATURES', True).split(), d))}"
-> +PACKAGE_INSTALL =3D "${__PACKAGE_INSTALL}"
-> +PACKAGE_INSTALL_ATTEMPTONLY =3D "${@' =
-'.join(optional_packages(d.getVar('IMAGE_FEATURES', True).split(), d))}"
-> +
-> +IMAGE_FEATURES ?=3D "base"
-> +
-> +# Define our default available image features
-> +IMAGE_FEATURE_base =3D "${IMAGE_INSTALL} ${IMAGE_VARS}"
-> +IMAGE_FEATURE_vmlinux =3D "kernel-vmlinux"
-> +
-> +IMAGE_FEATURE_dbg =3D "${@dbg_packages(d)}"
-> +IMAGE_FEATURE_dbg_OPTIONAL =3D "1"
-> +IMAGE_FEATURE_dev =3D "${@pkgjoin('%s-dev' % pn for pn in =
-active_recipes(image_features_noextras(d), d))}"
-> +IMAGE_FEATURE_dev_OPTIONAL =3D "1"
-> +IMAGE_FEATURE_doc =3D "${@pkgjoin('%s-doc' % pn for pn in =
-active_recipes(image_features_noextras(d), d))}"
-> +IMAGE_FEATURE_doc_OPTIONAL =3D "1"
-> +
-> do_rootfs[nostamp] =3D "1"
-> do_rootfs[dirs] =3D "${TOPDIR}"
-> do_build[nostamp] =3D "1"
-> diff --git a/classes/rootfs_ipk.bbclass b/classes/rootfs_ipk.bbclass
-> index 16dd511..66bd7aa 100644
-> --- a/classes/rootfs_ipk.bbclass
-> +++ b/classes/rootfs_ipk.bbclass
-> @@ -23,7 +23,7 @@ BAD_RECOMMENDATIONS ?=3D ""
-> IPKG_VARIANT ?=3D "opkg"
->=20
-> RDEPENDS_append =3D " ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", =
-"none", "", "${IPKG_VARIANT} opkg-collateral", d)}"
-> -PACKAGE_INSTALL_append =3D " =
-${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", =
-"${IPKG_VARIANT} opkg-collateral", d)}"
-> +IMAGE_INSTALL_append =3D " =
-${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", =
-"${IPKG_VARIANT} opkg-collateral", d)}"
->=20
-> fakeroot rootfs_ipk_do_rootfs () {
-> 	set -x
-> --=20
-> 1.6.6
->=20
+Build fbv with jpeg and png enabled
 
-Erm, forgot to fix the IMAGE_VARS vs IMAGE_BOOT thing.  Well, you get =
-the idea :)
---=20
-Chris Larson
-Software Engineer
-MontaVista Software, Inc.
-Work: 480-517-5031
-Home: 480-963-2636
-Email: clarson AT mvista DOT com
-Email: clarson AT kergoth DOT com
+Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+---
+ recipes/fbv/fbv-1.0b/fbv-1.0b.patch |   12 ++++++++++++
+ recipes/fbv/fbv_1.0b.bb             |   23 +++++++++++++++--------
+ 2 files changed, 27 insertions(+), 8 deletions(-)
+ create mode 100644 recipes/fbv/fbv-1.0b/fbv-1.0b.patch
+
+diff --git a/recipes/fbv/fbv-1.0b/fbv-1.0b.patch
+b/recipes/fbv/fbv-1.0b/fbv-1.0b.patch
+new file mode 100644
+index 0000000..6fbd1fb
+--- /dev/null
++++ b/recipes/fbv/fbv-1.0b/fbv-1.0b.patch
+@@ -0,0 +1,12 @@
++diff -urN fbv-1.0b-0rig/Makefile fbv-1.0b/Makefile
++--- fbv-1.0b-0rig/Makefile	2009-08-20 00:33:58.000000000 +0200
+++++ fbv-1.0b/Makefile	2009-08-20 00:34:16.000000000 +0200
++@@ -12,7 +12,7 @@
++ OBJECTS	= ${SOURCES:.c=.o}
++
++ OUT	= fbv
++-#LIBS	= -lungif -L/usr/X11R6/lib -ljpeg -lpng
+++LIBS	= -L/usr/lib -ljpeg -lpng #-lungif
++
++ all: $(OUT)
++ 	@echo Build DONE.
+diff --git a/recipes/fbv/fbv_1.0b.bb b/recipes/fbv/fbv_1.0b.bb
+index 04c7066..4a5bd6b 100644
+--- a/recipes/fbv/fbv_1.0b.bb
++++ b/recipes/fbv/fbv_1.0b.bb
+@@ -1,25 +1,32 @@
+ DESCRIPTION = "Frame Buffer Viewer"
+ LICENSE = "GPL"
+-DEPENDS = "libpng"
++DEPENDS = "libpng jpeg"
+ PR = "r1"
+
+ SRC_URI = "http://s-tech.elsat.net.pl/fbv/fbv-1.0b.tar.gz \
+-	   file://cross_compile.patch;patch=1"
++	file://cross_compile.patch;patch=1 \
++	file://fbv-1.0b.patch;patch=1 \
++	"
++
++#inherit autotools
+
+ do_configure() {
+-	CC="${CC}" ./configure --without-libungif --without-bmp \
+-		--without-libjpeg
++	CC="${CC}" ./configure --without-libungif
+ }
+
+ do_compile() {
+ 	oe_runmake CFLAGS="-O2 -Wall -D_GNU_SOURCE -D__KERNEL_STRICT_NAMES" \
+ 		CC="${CC}"
+ }
++
+ do_install() {
+ 	install -d ${D}${bindir}
+-        install -m 0755 fbv ${D}${bindir}
++	install -m 0755 fbv ${D}${bindir}
+
+-        # man
+-        install -d ${D}${mandir}/man1/
+-        install -m 0644 fbv.1 ${D}${mandir}/man1/fbv.1
++# man
++#	install -d ${D}${mandir}/man1/
++#	install -m 0644 fbv.1 ${D}${mandir}/man1/fbv.1
+ }
++
++PACKAGES = "fbv"
++
+-- 
+1.6.0.2
+-- 
+Best Regards
+Ulf Samuelsson
 
 
 
