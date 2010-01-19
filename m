@@ -1,26 +1,37 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1NXLJS-000306-8U
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NXLZG-0004u8-Dm for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Jan 2010 22:24:57 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NXLWv-00021C-0B
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 22:08:37 +0100
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id 794CA1D3607A; Tue, 19 Jan 2010 22:06:16 +0100 (CET)
-Date: Tue, 19 Jan 2010 22:06:16 +0100
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+	Tue, 19 Jan 2010 22:22:29 +0100
+Received: from p5b3b3140.dip.t-dialin.net ([91.59.49.64])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Jan 2010 22:22:28 +0100
+Received: from no2spam by p5b3b3140.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Jan 2010 22:22:28 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100119210616.GH18793@ibawizard.net>
-References: <20100119135245.GF18793@ibawizard.net>
-	<1263926326-31162-1-git-send-email-ynezz@true.cz>
-	<hj5604$1g6$1@ger.gmane.org> <20100119205933.GG18793@ibawizard.net>
-MIME-Version: 1.0
-In-Reply-To: <20100119205933.GG18793@ibawizard.net>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Tue, 19 Jan 2010 22:21:42 +0100
+Message-ID: <hj57p6$8p9$1@ger.gmane.org>
+References: <hj5604g6@ger.gmane.org>
+	<1263935073-12359-1-git-send-email-ynezz@true.cz>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5b3b3140.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <1263935073-12359-1-git-send-email-ynezz@true.cz>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] xinput_calibrator: switch to autotools
+Subject: Re: [PATCH v2] xinput_calibrator: switch to autotools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,38 +45,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2010 21:08:37 -0000
-Content-Type: text/plain; charset=iso-8859-2
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 19 Jan 2010 21:24:57 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Petr =A9tetiar <ynezz@true.cz> [2010-01-19 21:59:33]:
+Petr Štetiar wrote:
+> Signed-off-by: Petr Štetiar <ynezz@true.cz>
+> ---
+>  ...01-switch-to-autotools-based-build-system.patch |  162 ++++++++++++++++++++
+>  .../use-proper-compiler.patch                      |   20 ---
+>  .../xinput-calibrator/xinput-calibrator_0.5.0.bb   |    7 +-
+>  3 files changed, 166 insertions(+), 23 deletions(-)
+>  create mode 100644 recipes/xinput-calibrator/xinput-calibrator-0.5.0/0001-switch-to-autotools-based-build-system.patch
+>  delete mode 100644 recipes/xinput-calibrator/xinput-calibrator-0.5.0/use-proper-compiler.patch
 
-> Rolf Leggewie <no2spam@nospam.arcornews.de> [2010-01-19 21:51:16]:
->=20
-> > Petr =A9tetiar wrote:
-> > > Signed-off-by: Petr =A9tetiar <ynezz@true.cz>
-> > > ---
-> > >  ...01-switch-to-autotools-based-build-system.patch |  162 ++++++++=
-++++++++++++
-> > >  .../use-proper-compiler.patch                      |   20 ---
-> > >  .../xinput-calibrator/xinput-calibrator_0.5.0.bb   |    7 +-
-> > >  3 files changed, 166 insertions(+), 23 deletions(-)
-> > >  create mode 100644 recipes/xinput-calibrator/xinput-calibrator-0.5=
-.0/0001-switch-to-autotools-based-build-system.patch
-> > >  delete mode 100644 recipes/xinput-calibrator/xinput-calibrator-0.5=
-.0/use-proper-compiler.patch
-> >=20
-> > something's wrong with that patch.  I can't apply it locally :-(
->=20
-> Hi,
->=20
-> please can you tell me the reason, error message? Thanks.
+please actually test your patches next time
 
-Found it and send v2 of this patch. Sorry for the noise, but it was done =
-against my
-private branch :(
-
--- ynezz
 
 
