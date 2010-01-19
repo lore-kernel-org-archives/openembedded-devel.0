@@ -1,33 +1,33 @@
 Received: from mail-bw0-f226.google.com ([209.85.218.226])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <d.vinokuroff@gmail.com>) id 1NXHEG-0003nu-BM
+	(envelope-from <d.vinokuroff@gmail.com>) id 1NXHEO-0003nu-OQ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 17:46:59 +0100
-Received: by bwz26 with SMTP id 26so2910639bwz.27
+	Tue, 19 Jan 2010 17:47:07 +0100
+Received: by mail-bw0-f226.google.com with SMTP id 26so2910639bwz.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 08:44:41 -0800 (PST)
+	Tue, 19 Jan 2010 08:44:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from
 	:user-agent:mime-version:to:subject:content-type
 	:content-transfer-encoding;
 	bh=tmqsQJ5h/ZlRp8bxl8yhjwApMvidO+LK0JRrhwEcaGo=;
-	b=qDCk5Abo6FtkR5KwKfNdRFkw4MXUaCIca1zX7wN/hSBLJo8NhbJINtyOH+w2Hd23x6
-	qCyU8op7jCfoF/3IuI6IBgo5mNWh8BBdpvnKpAK9YiqEDL0HtaRb9MQwA5+sz8MTW0K/
-	GhdTiTNiPQYHLhX8Y5R1mFGjp79Ij8YcVvVw4=
+	b=MLEvGUdC3BxeMg9Q2b5jL4VcD1N6LL9ZSb4qBTTr1bUUNC1k+IE4XG4s0tr1xB2HWk
+	LQf0P/FoFNHsmvQfnYZQ4sH3ssjQSC2CZmkMsY7FUDXhqBEtVEBZVO5tfgp3jGxhkl82
+	oGvgrxhDDPzXI/FzKBMlmxeNIAb61IwOB8ANo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:user-agent:mime-version:to:subject
 	:content-type:content-transfer-encoding;
-	b=G8+aYJMLccE4Zp4WO5m3PH4lj8IQTT1ImXkchmt7K4GKmZYPPdSw78yy+8CLMMH1bz
-	7X9DIt7Zdg/JRzqjumyDvWGRmhhWuTwlJrQN0MbJ+eAAL6G42DYDwWNXpHBYWFgiBEj7
-	n02qQK+xiB3PVE0GwbjjHEwt1nNt3nvIJglX8=
-Received: by 10.204.18.16 with SMTP id u16mr1316992bka.72.1263919480644;
-	Tue, 19 Jan 2010 08:44:40 -0800 (PST)
+	b=sIv20tPe2hFniflGfKIsYBm0e9ho3l4yz09KqwpISPJ2sHiq2tleaiNHy3UhvUKO0s
+	dWLdEH+SU6G1pN8JQ2RvY+wploXMXB6hYhFH/h8rC8DDjOGY4CpxKgcgE8t73IA/mGqB
+	7EXC6stpU4I6aLgISl8AG7AYzTKfuugHElqHw=
+Received: by 10.204.36.214 with SMTP id u22mr676630bkd.76.1263919491780;
+	Tue, 19 Jan 2010 08:44:51 -0800 (PST)
 Received: from ?192.168.0.100? ([92.255.150.233])
-	by mx.google.com with ESMTPS id 16sm1143744bwz.3.2010.01.19.08.44.37
+	by mx.google.com with ESMTPS id 16sm1138090bwz.15.2010.01.19.08.44.50
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 19 Jan 2010 08:44:39 -0800 (PST)
-Message-ID: <4B55E174.2030208@gmail.com>
-Date: Tue, 19 Jan 2010 21:44:36 +0500
+	Tue, 19 Jan 2010 08:44:51 -0800 (PST)
+Message-ID: <4B55E183.3090408@gmail.com>
+Date: Tue, 19 Jan 2010 21:44:51 +0500
 From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
 	rv:1.9.1.8pre) Gecko/20100104 Shredder/3.0.1pre
@@ -51,7 +51,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2010 16:47:00 -0000
+X-List-Received-Date: Tue, 19 Jan 2010 16:47:08 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
