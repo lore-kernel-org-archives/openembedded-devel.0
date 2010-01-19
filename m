@@ -1,37 +1,43 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from mail-bw0-f226.google.com ([209.85.218.226])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1NXFFU-0000Nt-Pr
+	(envelope-from <d.vinokuroff@gmail.com>) id 1NXHEG-0003nu-BM
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 15:40:07 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 8ED132C820
+	Tue, 19 Jan 2010 17:46:59 +0100
+Received: by bwz26 with SMTP id 26so2910639bwz.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 14:34:54 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id W0HcAdsseA1v
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 14:34:50 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 2489D2C7D5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 14:34:49 +0000 (UTC)
-Message-ID: <4B55C3E1.2070505@gmail.com>
-Date: Tue, 19 Jan 2010 15:38:25 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	Tue, 19 Jan 2010 08:44:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=tmqsQJ5h/ZlRp8bxl8yhjwApMvidO+LK0JRrhwEcaGo=;
+	b=qDCk5Abo6FtkR5KwKfNdRFkw4MXUaCIca1zX7wN/hSBLJo8NhbJINtyOH+w2Hd23x6
+	qCyU8op7jCfoF/3IuI6IBgo5mNWh8BBdpvnKpAK9YiqEDL0HtaRb9MQwA5+sz8MTW0K/
+	GhdTiTNiPQYHLhX8Y5R1mFGjp79Ij8YcVvVw4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=G8+aYJMLccE4Zp4WO5m3PH4lj8IQTT1ImXkchmt7K4GKmZYPPdSw78yy+8CLMMH1bz
+	7X9DIt7Zdg/JRzqjumyDvWGRmhhWuTwlJrQN0MbJ+eAAL6G42DYDwWNXpHBYWFgiBEj7
+	n02qQK+xiB3PVE0GwbjjHEwt1nNt3nvIJglX8=
+Received: by 10.204.18.16 with SMTP id u16mr1316992bka.72.1263919480644;
+	Tue, 19 Jan 2010 08:44:40 -0800 (PST)
+Received: from ?192.168.0.100? ([92.255.150.233])
+	by mx.google.com with ESMTPS id 16sm1143744bwz.3.2010.01.19.08.44.37
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 19 Jan 2010 08:44:39 -0800 (PST)
+Message-ID: <4B55E174.2030208@gmail.com>
+Date: Tue, 19 Jan 2010 21:44:36 +0500
+From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.8pre) Gecko/20100104 Shredder/3.0.1pre
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4B54F654.4000500@atmel.com>
-	<4B55B26C.5040706@gmail.com>	<023001ca9911$809fa3c0$81deeb40$@Willis@Distant-earth.com>
-	<023d01ca9913$3cddd600$b6998200$@Willis@Distant-earth.com>
-In-Reply-To: <023d01ca9913$3cddd600$b6998200$@Willis@Distant-earth.com>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+X-SA-Exim-Connect-IP: 209.85.218.226
+X-SA-Exim-Mail-From: d.vinokuroff@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Angstrom: x11-gpe-image : Calibration of Screen ?
+Subject: How to choose locales?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,40 +51,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2010 14:40:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 19 Jan 2010 16:47:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-John Willis ha scritto, Il 19/01/2010 15:25:
->> I started to work on a fresh reimplementation of that code to return
->> calibration information that could be fed into either xinput evtouch o=
-r
->> xinput evdev (if you use a recent version of either driver that
->> supports calibration for TS devices). I never finished the
->> reimplementation work so a lot of the code is still the original un-
->> credited code.
->=20
-> Typical,
->=20
-> All the funky work in http://www.freedesktop.org/wiki/Software/xinput_c=
-alibrator make any 2bit hacky code rather irrelevant. Time to get xinput_=
-calibrator into OE :).=20
->=20
-> Thanks for the pointers to this app guys.
->=20
+Hello,
 
-John,
-I appreciated your comment about it because looks like a general-purpose
-calibration tool useful with any kind of recent xorg server.
+How can I choose locales, generated to /usr/lib/locale? Tried to set:
+ENABLE_BINARY_LOCALE_GENERATION = "1"
+GLIBC_GENERATE_LOCALES = "en_US.ISO_646.BASIC"
 
-Let's wait Petr (ynezz) recipe and I am going to send back my results ;-)
+but still de_DE,  en_GB,  fr_FR in locales dir of image tarball. 
+'bitbake -e' says that vars are exactly as I set it.
 
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-   Atmel third party certified consultant
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
+Am I setting right variables?
+
+Thanks
+
+-- 
+Best Regards,
+Dmitry Vinokurov
+<d.vinokuroff@gmail.com>
+
 
 
