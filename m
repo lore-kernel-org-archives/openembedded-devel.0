@@ -1,40 +1,36 @@
-Received: from mail-gx0-f227.google.com ([209.85.217.227])
+Received: from dan.rpsys.net ([93.97.175.187])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NXEoe-0006Ii-L6
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 15:12:23 +0100
-Received: by gxk27 with SMTP id 27so3582498gxk.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 06:10:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=TiaeBkGCshRqvRG0kXC/NgKPIYzt16s+tpNPHNfNTD0=;
-	b=HYO+uxHC2lEIRg2B3GylgBhctNBoM5cR57p9F8sUlLZMqiew/pOEWlNOFmE8fYthzV
-	hSMz5tmrstkvDbIofGuhJU8FAJBFekfW5c2EXcMHtpl/I0S5r9AGxu5LI4zJVIRi4yDq
-	dBVgy8t4bIaqlKe13EuiYMFFdX4rJdKAsvlgY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Fme0WTqL6/xOj4ILRELPSVyAwsTBnk52rP1uTQLUirzPzpF2VoC3dEIgBrmCb9gbvC
-	rgL/Z+7Pwds1lf1QEbqHxy1WR+1FOwzujgDcwjNGXaRr5AOawJKxhsNyds9xuZ8MgRke
-	hDuFV+5uqkzJLic8YUjsdDAyzP3WhAO38NisA=
-MIME-Version: 1.0
-Received: by 10.101.160.12 with SMTP id m12mr11731421ano.69.1263910204808; 
-	Tue, 19 Jan 2010 06:10:04 -0800 (PST)
-In-Reply-To: <201001191449.31769.sgh@sgh.dk>
-References: <1263904767-23489-1-git-send-email-sgh@sgh.dk>
-	<1263908226.10980.105.camel@mattotaupa.wohnung.familie-menzel.net>
-	<201001191449.31769.sgh@sgh.dk>
-Date: Tue, 19 Jan 2010 15:10:04 +0100
-Message-ID: <ac9c93b11001190610jb3e754chf7d7ddfabead206@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.217.227
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+	(envelope-from <rpurdie@rpsys.net>) id 1NXErB-0007el-6q
+	for openembedded-devel@openembedded.org; Tue, 19 Jan 2010 15:15:00 +0100
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	o0JE8L04024511; Tue, 19 Jan 2010 14:08:21 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id 76UysgmSyfwu; Tue, 19 Jan 2010 14:08:21 +0000 (GMT)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	o0JE8GJ3024498
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
+	Tue, 19 Jan 2010 14:08:17 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Chris Larson <kergoth@gmail.com>
+In-Reply-To: <1263856469.26227.155.camel@dax.rpnet.com>
+References: <1263852540.26227.133.camel@dax.rpnet.com>
+	<b6ebd0a51001181417v3d5486f3l243927a7aeb7dae2@mail.gmail.com>
+	<1263856469.26227.155.camel@dax.rpnet.com>
+Date: Tue, 19 Jan 2010 14:12:58 +0000
+Message-Id: <1263910378.26227.167.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Make perl-native_* depend on make-native.
+Cc: openembedded-devel <openembedded-devel@openembedded.org>,
+	bitbake-dev <bitbake-dev@lists.berlios.de>
+Subject: Re: [Bitbake-dev] bitbake 'events' - How to fix the	current	problems?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,25 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2010 14:12:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 19 Jan 2010 14:15:00 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Some comments on this issue (having discussed this with sgh on irc)
+On Mon, 2010-01-18 at 23:14 +0000, Richard Purdie wrote:
+> For worker -> server its not desirable to transfer the datastore.
+> Event
+> handlers in the metadata happen in the server's process space just like
+> parsing so passing the datastore to them isn't an issue. Passing to the
+> UIs is a different process space and passing the datastore is not
+> desirable.
+> 
+> If we ditch the datastore, the core code is going to be a lot simpler as
+> the objects will just work with the standard serialization.
+> 
+> We could just make this an internal change by changing the parameters of
+> the fire() call to pass the datastore and then pass this on as
+> event.data to the metadata handlers, manually inserting it into the
+> objects when wanted.
 
-- apparently for sgh things did not work because make was missing. Not
-sure where it was missing as he wrote that he had make installed
-- perl definitely needs make. Note that it is perl-native we are talking about.
-- for me things build without having make-native. There is no
-make-native in my i686 work dir. and no make program in cross or
-staging
-- the wiki says (in the getting started page) that you should have
-make in your path "GNU extensions to tools are often required. Symlink
-GNU patch, make, and cp (from fileutils), chmod, sed, find, tar, awk
-into your OE development path. "
-- when aiming for a self contained system there is a point for having
-a make-native (just like we have e.g. gcc-native) (and yeah, I know
-this gives a bootstrap problem but that also exists for gcc)
+FWIW this is now done in bitbake master. The IPC between the workers and
+the server is implemented and working well too which avoids a whole raft
+of problems.
 
-Frans
+I think I'm going to switch Poky to bitbake master soon and drop 1.8
+there - we're getting much closer to the 1.10 release, just need to look
+at those parsing changes and fix a BBCLASSEXTEND issue.
+
+Cheers,
+
+Richard
+
 
 
