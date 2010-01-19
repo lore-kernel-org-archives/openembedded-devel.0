@@ -1,35 +1,36 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1NXE5P-0004OE-QP
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NXEDj-0004dM-66 for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Jan 2010 14:34:14 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NXEBT-0002ul-Sq
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 14:25:38 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 9194A2C820
+	Tue, 19 Jan 2010 14:31:51 +0100
+Received: from p5b3b3140.dip.t-dialin.net ([91.59.49.64])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Jan 2010 14:31:51 +0100
+Received: from no2spam by p5b3b3140.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 13:20:25 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ORyedOIDyTRw
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 13:20:21 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 1F0352C7D5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 13:20:20 +0000 (UTC)
-Message-ID: <4B55B26C.5040706@gmail.com>
-Date: Tue, 19 Jan 2010 14:23:56 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Tue, 19 Jan 2010 14:31:51 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4B54F654.4000500@atmel.com>
-In-Reply-To: <4B54F654.4000500@atmel.com>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Tue, 19 Jan 2010 14:31:30 +0100
+Message-ID: <hj4c7h$umh$1@ger.gmane.org>
+References: <1263904767-23489-1-git-send-email-sgh@sgh.dk>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5b3b3140.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <1263904767-23489-1-git-send-email-sgh@sgh.dk>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Angstrom: x11-gpe-image : Calibration of Screen ?
+Subject: Re: [PATCH] Make perl-native_* depend on make-native.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,48 +44,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2010 13:25:39 -0000
+X-List-Received-Date: Tue, 19 Jan 2010 13:34:14 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Ulf Samuelsson ha scritto, Il 19/01/2010 01:01:
-> This was discussed early autumn and apparently there was a conflict
-> between different libraries + X Windows versions, so it could not be do=
-ne.
->=20
-> Any news here?
->=20
+sgh@sgh.dk wrote:
+>  recipes/perl/perl-native_5.8.4.bb |    2 +-
+>  recipes/perl/perl-native_5.8.7.bb |    2 +-
+>  recipes/perl/perl-native_5.8.8.bb |    2 +-
+>  3 files changed, 3 insertions(+), 3 deletions(-)
 
-No (really good) news,
-but I'm currently working on this.
-I tried to enable touchscreen calibration without success.
-
-I built Xorg version Xorg-1.7.3 configured with --enable-xcalibrate
-but I didn't get this extension in my Xorg, so when I try to call xtscal
-I always get this error:
- # xtscal
- XCALIBRATE extension missing: Success
-
-I debugged a bit the following packages: xtscal_0.6.3,
-libxcalibrate_git, libxext_1.1.1
-
-Temporary conclusion is that xtscal is no longer usable because the
-xcalibrate extension is only implemented for kdrive.
-Possible options are to use kdrive (hopefully not) or find another way
-to calibrate our touchscreen.
-I am working on a new way to calibrate the screen in the xorg (not
-kdrive) way.
-
-Any hints or help would be greatly appreciated.
-
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-   Atmel third party certified consultant
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
-
+I suggest to change this in perl.inc instead.
 
 
 
