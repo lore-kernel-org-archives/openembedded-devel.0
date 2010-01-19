@@ -1,27 +1,36 @@
-Received: from smtpauth20.prod.mesa1.secureserver.net ([64.202.165.36])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <mike@mwester.net>) id 1NXESo-0000el-Dm
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <koansoftware@gmail.com>) id 1NXESz-0000fD-Uz
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 14:49:49 +0100
-Received: (qmail 18049 invoked from network); 19 Jan 2010 13:47:30 -0000
-Received: from unknown (209.242.7.187)
-	by smtpauth20.prod.mesa1.secureserver.net (64.202.165.36) with ESMTP;
-	19 Jan 2010 13:47:30 -0000
-Message-ID: <4B55B7E7.70205@mwester.net>
-Date: Tue, 19 Jan 2010 07:47:19 -0600
-From: Mike Westerhof <mike@mwester.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23 Mnenhy/0.7.6.0
+	Tue, 19 Jan 2010 14:50:01 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id CD4152C820
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Jan 2010 13:44:48 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id AnHnqgYrqBz7
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Jan 2010 13:44:44 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id E00892C7D5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Jan 2010 13:44:43 +0000 (UTC)
+Message-ID: <4B55B823.8070606@gmail.com>
+Date: Tue, 19 Jan 2010 14:48:19 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1263904767-23489-1-git-send-email-sgh@sgh.dk>
-In-Reply-To: <1263904767-23489-1-git-send-email-sgh@sgh.dk>
-X-SA-Exim-Connect-IP: 64.202.165.36
-X-SA-Exim-Mail-From: mike@mwester.net
+References: <4B54F654.4000500@atmel.com> <4B55B26C.5040706@gmail.com>
+	<1263907954.9743.4.camel@mill.internal.reciva.com>
+In-Reply-To: <1263907954.9743.4.camel@mill.internal.reciva.com>
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: =?UTF-8?B?U8O4cmVuIEhvbG0=?= <sh@mikrofyn.com>
-Subject: Re: [PATCH] Make perl-native_* depend on make-native.
+Subject: Re: Angstrom: x11-gpe-image : Calibration of Screen ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,20 +44,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2010 13:49:49 -0000
+X-List-Received-Date: Tue, 19 Jan 2010 13:50:01 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-sgh@sgh.dk wrote:
+Phil Blundell ha scritto, Il 19/01/2010 14:32:
+> On Tue, 2010-01-19 at 14:23 +0100, Marco Cavallini wrote:
+>> Temporary conclusion is that xtscal is no longer usable because the
+>> xcalibrate extension is only implemented for kdrive.
+>> Possible options are to use kdrive (hopefully not) or find another way
+>> to calibrate our touchscreen.
+>> I am working on a new way to calibrate the screen in the xorg (not
+>> kdrive) way.
+>=20
+> Can you not simply repair XCALIBRATE in the xorg server?  I don't think
+> there's anything wrong with the wire protocol, and it seems a bit
+> excessive to invent a completely new way of doing calibration just
+> because that code isn't currently working.
+>=20
+> p.
+> _______________________________________________
 
-> -DEPENDS = "virtual/db-native gdbm-native"
-> +DEPENDS = "virtual/db-native gdbm-native make-native"
 
-I don't doubt that perl needs make to build -- but then, so does
-everything!  I wonder if we can just add a note to the appropriate wiki
-that in addition to gcc, you need to have make installed on the host.
-But then, how did OE get to building perl without make in the first place?
+Phil,
+actually I am trying to use xinput_calibrator
+http://www.freedesktop.org/wiki/Software/xinput_calibrator
 
--Mike (mwester)
+It looks a quite raw application and comes without autotools
+configuration making it hard to transform into an OE recipe.
+
+OTOH I could dig further into xorg, but both ways looks quite hard to me
+due to my poor experience with xorg mechanics.
+
+Any hints and help would be greatly appreciated.
+
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+   Atmel third party certified consultant
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
+
+
+
 
 
