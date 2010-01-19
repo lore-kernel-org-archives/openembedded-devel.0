@@ -1,36 +1,38 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from gate.tarent.de ([212.79.178.249] helo=ugs.tarent.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NX9K6-0006EU-QB
+	(envelope-from <thebohemian@gmx.net>) id 1NX9oE-0001pb-F2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 09:20:30 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NX9Hv-0002O1-Q0 for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 03:18:11 -0500
-Date: Tue, 19 Jan 2010 03:17:26 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.00.1001190305430.13206@localhost>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Tue, 19 Jan 2010 09:51:37 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id 698CC4000778E
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Jan 2010 09:49:19 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id 582A94000C571
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Jan 2010 09:49:19 +0100 (CET)
+X-Virus-Scanned: by amavisd-new-2.4.2 (20060627) (Debian) at tarent.de
+Received: from ugs.tarent.de ([127.0.0.1])
+	by localhost (ugs.tarent.de [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 4CzXzx2HrCuD
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Jan 2010 09:49:19 +0100 (CET)
+Received: from [192.168.4.51] (entw2.tarent.buero [192.168.4.51])
+	by ugs.tarent.de (Postfix) with ESMTP id 28F4B4000778E
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Jan 2010 09:49:19 +0100 (CET)
+Message-ID: <4B557210.4000700@gmx.net>
+Date: Tue, 19 Jan 2010 09:49:20 +0100
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 0.95.7
+X-SA-Exim-Connect-IP: 212.79.178.249
+X-SA-Exim-Mail-From: thebohemian@gmx.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: tinderbox, bug reports and a freshly-broken mplayer
+Subject: OpenEmbedded @ FOSDEM2010
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,86 +46,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2010 08:20:30 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Tue, 19 Jan 2010 08:51:37 -0000
+X-Groupsio-MsgNum: 15869
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enigCE45851D7EB52BEF2DCF9616"
+
+--------------enigCE45851D7EB52BEF2DCF9616
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+someone with the neccessary privileges should at the following item to
+the news section of our Wiki:
+
+2010-02-06 OpenEmbedded at FOSDEM'10[0] - We have a booth at Europe's
+finest F/OSS event. See you in Brussels!
+
+And this brings me to another question: Do we want to invite people to
+our pre-FOSDEM meeting?
+
+Possible news entry:
+
+2010-02-05 Have a beer with OpenEmbedded developers before FOSDEM
+starts! Informal gathering in a pub/bar/restaurant - details:
+FOSDEM2010WikiPageWhichNeedsToBeCreatedThen
+
+All the best et au revoir en Bruxelles! :-)
+Robert
+
+[0] - http://fosdem.org
 
 
-  in order to keep the peace, i'm more than willing to file actual OE
-bug reports for breakage i discover when building.  specifically, i'm
-almost always trying to build beagleboard-demo-image on my up-to-date
-fedora system, which seems to be a relatively unpopular working system
-for most people here (except for philip b.), so i'm getting used to
-running into breakage that no one else is seeing -- it's just a fact
-of life.
+--------------enigCE45851D7EB52BEF2DCF9616
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
-  ignoring gnome-games for now, after a recent "git pull" on the OE
-dev branch, the "mplayer" package now no longer builds.  from the git
-log, i can see:
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-=====
+iEYEARECAAYFAktVchAACgkQG9cfwmwwEtpGrgCdEBON5HWfCdnKhWZpke6WuHRV
+IT4AnR3Ho5st1R3Uz4FInDoi2V9NRiTU
+=O6nN
+-----END PGP SIGNATURE-----
 
-commit 33c882b663a1dd229d0ebcb187648838d0164795
-Author: Koen Kooi <koen@openembedded.org>
-Date:   Sun Jan 17 14:52:44 2010 +0100
-
-    mplayer: bump SRCREV for some more ARM fixes
-
-diff --git a/recipes/mplayer/mplayer_svn.bb
-b/recipes/mplayer/mplayer_svn.bb
-index 58a4bc7..d3fc2f7 100644
---- a/recipes/mplayer/mplayer_svn.bb
-+++ b/recipes/mplayer/mplayer_svn.bb
-@@ -15,7 +15,7 @@ SRC_URI =
-"svn://svn.mplayerhq.hu/mplayer;module=trunk \
-           file://fix-addrinfo.patch;patch=1;maxrev=30302 \
- "
-
--SRCREV = "30247"
-+SRCREV = "30345"
- SRC_URI_append_armv7a = " \
-                file://omapfb.patch;patch=1 \
-           file://vo_omapfb.c \
-
-=====
-
-  if i "git reset" to the commit just before that, it builds fine;
-ergo, that seems to be the commit that broke it.  a wild guess is that
-the "maxrev" parameters are the cause, given that at least one now
-falls below the requested svn revision, causing an essential patch to
-no longer be applied, but that's just a guess until i look more
-closely.
-
-  the tail end of the log file:
-
-fmt-conversion.c
-fmt-conversion.c:28: error: 'PIX_FMT_RGB32' undeclared here (not in a function)
-fmt-conversion.c:30: error: 'PIX_FMT_RGB565' undeclared here (not in a function)
-fmt-conversion.c:31: error: 'PIX_FMT_RGB555' undeclared here (not in a function)
-fmt-conversion.c:40: error: 'PIX_FMT_BGR32' undeclared here (not in a function)
-fmt-conversion.c:42: error: 'PIX_FMT_BGR565' undeclared here (not in a function)
-fmt-conversion.c:43: error: 'PIX_FMT_BGR555' undeclared here (not in a function)
-make: *** [fmt-conversion.o] Error 1
-FATAL: oe_runmake failed
-
-
-  so ... i can file this over at http://bugs.openembedded.net/ if
-that's the way to go.  but others were talking about this tinderbox
-thing, which i've never used.  a quick glance suggests it's a more
-formal, automated way of doing regular builds.  would that be
-appropriate for me, if it's understood i'm always building on the same
-distro?  feel free to point me at a quick intro, or i'll just file a
-regular bug if that's the way to go.
-
-rday
---
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
-
-
+--------------enigCE45851D7EB52BEF2DCF9616--
