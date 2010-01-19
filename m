@@ -1,37 +1,29 @@
-Received: from mta5.brinkster.com ([65.182.109.74])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <John.Willis@Distant-earth.com>) id 1NXAqZ-0002dN-T1
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 10:58:07 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mta5.brinkster.com (Postfix) with ESMTP id 395442C0618
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 04:55:44 -0500 (EST)
-X-Virus-Scanned: amavisd-new at 
-Received: from mta5.brinkster.com ([127.0.0.1])
-	by localhost (mta5.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id jhAQbGmL5yPj
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 04:55:40 -0500 (EST)
-Received: from MareImbrium (82-46-19-72.cable.ubr02.bath.blueyonder.co.uk
-	[82.46.19.72])
-	by mta5.brinkster.com (Postfix) with ESMTP id 88EB82C0F69
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 04:55:39 -0500 (EST)
-From: "John Willis" <John.Willis@Distant-earth.com>
-To: <openembedded-devel@lists.openembedded.org>
-References: <alpine.LFD.2.00.1001190305430.13206@localhost>
-In-Reply-To: <alpine.LFD.2.00.1001190305430.13206@localhost>
-Date: Tue, 19 Jan 2010 09:55:17 -0000
-Message-ID: <01e501ca98ed$823fa280$86bee780$@Willis@Distant-earth.com>
-MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook 12.0
-Thread-Index: AcqY4A6wdKBHrgPrSoCYjS+Rzqei3QACR/Fg
-X-SA-Exim-Connect-IP: 65.182.109.74
-X-SA-Exim-Mail-From: John.Willis@Distant-earth.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NXAsL-0002nc-C0 for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Jan 2010 10:59:56 +0100
+Received: from f053039068.adsl.alicedsl.de ([78.53.39.68]
+	helo=[192.168.178.25])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NXAqC-0004RU-9p for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Jan 2010 09:57:40 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1263059728.14620.64.camel@mattotaupa.wohnung.familie-menzel.net>
+References: <1263047335.14620.17.camel@mattotaupa.wohnung.familie-menzel.net>
+	<hia7oe$i01$1@ger.gmane.org>
+	<1263059728.14620.64.camel@mattotaupa.wohnung.familie-menzel.net>
+Date: Tue, 19 Jan 2010 10:57:38 +0100
+Message-ID: <1263895058.10980.39.camel@mattotaupa.wohnung.familie-menzel.net>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: tinderbox, bug reports and a freshly-broken mplayer
+Subject: Re: [PATCH] vdr: Put common information in separate file and require it in the recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,84 +37,581 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2010 09:58:07 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Language: en-us
+X-List-Received-Date: Tue, 19 Jan 2010 09:59:56 -0000
+X-Groupsio-MsgNum: 15873
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-GaDHHhrjafNiBCq4pX83"
 
-Robert,
+--=-GaDHHhrjafNiBCq4pX83
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
->   in order to keep the peace, i'm more than willing to file actual OE
-> bug reports for breakage i discover when building.  specifically, i'm
-> almost always trying to build beagleboard-demo-image on my up-to-date
-> fedora system, which seems to be a relatively unpopular working system
-> for most people here (except for philip b.), so i'm getting used to
-> running into breakage that no one else is seeing -- it's just a fact
-> of life.
-> 
->   ignoring gnome-games for now, after a recent "git pull" on the OE
-> dev branch, the "mplayer" package now no longer builds.  from the git
-> log, i can see:
+Am Samstag, den 09.01.2010, 18:55 +0100 schrieb Paul Menzel:
 
-<snip>
+[=E2=80=A6]
 
-On the gnome-games front, I have been messing with gnome-games packages for
-something else (unrelated to the BB-demo image). I can mail you a few BB's
-to try if you want but none of it is working 100% yet (newer versions of
-gnome-games introduce requirements for OpenGL/Clutter etc. and that opens a
-whole world of pain).
+> From e11277dcc623c00101a81d657d4c8b6fd0b11ed3 Mon Sep 17 00:00:00 2001
+> From: Paul Menzel <paulepanter@users.sourceforge.net>
+> Date: Sat, 9 Jan 2010 12:11:40 +0100
+> Subject: [PATCH 1/2] vdr: Put common information in separate file and req=
+uire it in the recipe.
+> MIME-Version: 1.0
+> Content-Type: text/plain; charset=3DUTF-8
+> Content-Transfer-Encoding: 8bit
+>=20
+> =E2=80=A2 Some information in a recipe apply to all versions of a program=
+. Factor them out into an extra file and include/require this in each recip=
+e as seen in a lot of other programs/packages/recipes in OE.
+>=20
+> =E2=80=A2 VDR=E2=80=99s plugins often change and therefore put patches to=
+ them in version dependent folder.
+>=20
+> This hopefully lessens the effort to add new versions.
+>=20
+> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> ---
+>  recipes/vdr/files/linkerflags.patch      |  186 ------------------------=
+------
+>  recipes/vdr/vdr-1.7.10/linkerflags.patch |  186 ++++++++++++++++++++++++=
+++++++
+>  recipes/vdr/vdr.inc                      |    8 ++
+>  recipes/vdr/vdr_1.7.10.bb                |   13 +--
+>  4 files changed, 197 insertions(+), 196 deletions(-)
+>  delete mode 100644 recipes/vdr/files/linkerflags.patch
+>  create mode 100644 recipes/vdr/vdr-1.7.10/linkerflags.patch
+>  create mode 100644 recipes/vdr/vdr.inc
+>=20
+> diff --git a/recipes/vdr/files/linkerflags.patch b/recipes/vdr/files/link=
+erflags.patch
+> deleted file mode 100644
+> index 63c4477..0000000
+> --- a/recipes/vdr/files/linkerflags.patch
+> +++ /dev/null
+> @@ -1,186 +0,0 @@
+> -Index: vdr-1.7.10/Makefile
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- vdr-1.7.10.orig/Makefile   2010-01-07 22:01:54.000000000 +0100
+> -+++ vdr-1.7.10/Makefile        2010-01-07 22:02:32.167165564 +0100
+> -@@ -20,7 +20,7 @@
+> - MANDIR   =3D $(PREFIX)/share/man
+> - BINDIR   =3D $(PREFIX)/bin
+> - LOCDIR   =3D ./locale
+> --LIBS     =3D -ljpeg -lpthread -ldl -lcap -lrt -lfreetype -lfontconfig
+> -+LIBS     =3D -ljpeg -lpthread -ldl -lcap -lrt -lfreetype -lfontconfig $=
+{LDFLAGS}
+> - INCLUDES =3D ${CFLAGS}
+> -=20
+> - PLUGINDIR=3D ./PLUGINS
+> -Index: vdr-1.7.10/PLUGINS/src/hello/Makefile
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- vdr-1.7.10.orig/PLUGINS/src/hello/Makefile 2010-01-07 22:01:07.00000=
+0000 +0100
+> -+++ vdr-1.7.10/PLUGINS/src/hello/Makefile      2010-01-07 22:02:02.24049=
+6954 +0100
+> -@@ -19,6 +19,7 @@
+> -=20
+> - CXX      ?=3D g++
+> - CXXFLAGS ?=3D -fPIC -g -O2 -Wall -Woverloaded-virtual -Wno-parentheses
+> -+LIBS     ?=3D ${LDFLAGS}
+> -=20
+> - ### The directory environment:
+> -=20
+> -@@ -95,7 +96,7 @@
+> - ### Targets:
+> -=20
+> - libvdr-$(PLUGIN).so: $(OBJS)
+> --      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@
+> -+      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@ $(LIBS)
+> -       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> -=20
+> - dist: clean
+> -Index: vdr-1.7.10/PLUGINS/src/osddemo/Makefile
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- vdr-1.7.10.orig/PLUGINS/src/osddemo/Makefile       2010-01-07 22:01:=
+07.000000000 +0100
+> -+++ vdr-1.7.10/PLUGINS/src/osddemo/Makefile    2010-01-07 22:02:02.24049=
+6954 +0100
+> -@@ -17,6 +17,7 @@
+> -=20
+> - CXX      ?=3D g++
+> - CXXFLAGS ?=3D -fPIC -g -O2 -Wall -Woverloaded-virtual -Wno-parentheses
+> -+LIBS     ?=3D ${LDFLAGS}
+> -=20
+> - ### The directory environment:
+> -=20
+> -@@ -68,7 +69,7 @@
+> - ### Targets:
+> -=20
+> - libvdr-$(PLUGIN).so: $(OBJS)
+> --      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@
+> -+      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@ $(LIBS)
+> -       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> -=20
+> - dist: clean
+> -Index: vdr-1.7.10/PLUGINS/src/pictures/Makefile
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- vdr-1.7.10.orig/PLUGINS/src/pictures/Makefile      2010-01-07 22:01:=
+07.000000000 +0100
+> -+++ vdr-1.7.10/PLUGINS/src/pictures/Makefile   2010-01-07 22:02:02.24049=
+6954 +0100
+> -@@ -19,6 +19,7 @@
+> -=20
+> - CXX      ?=3D g++
+> - CXXFLAGS ?=3D -fPIC -g -O2 -Wall -Woverloaded-virtual -Wno-parentheses
+> -+LIBS     ?=3D ${LDFLAGS}
+> -=20
+> - ### The directory environment:
+> -=20
+> -@@ -95,7 +96,7 @@
+> - ### Targets:
+> -=20
+> - libvdr-$(PLUGIN).so: $(OBJS)
+> --      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@
+> -+      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@ $(LIBS)
+> -       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> -=20
+> - dist: clean
+> -Index: vdr-1.7.10/PLUGINS/src/servicedemo/Makefile
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- vdr-1.7.10.orig/PLUGINS/src/servicedemo/Makefile   2010-01-07 22:01:=
+07.000000000 +0100
+> -+++ vdr-1.7.10/PLUGINS/src/servicedemo/Makefile        2010-01-07 22:02:=
+02.240496954 +0100
+> -@@ -19,6 +19,7 @@
+> -=20
+> - CXX      ?=3D g++
+> - CXXFLAGS ?=3D -fPIC -g -O2 -Wall -Woverloaded-virtual -Wno-parentheses
+> -+LIBS     ?=3D ${LDFLAGS}
+> -=20
+> - ### The directory environment:
+> -=20
+> -@@ -70,11 +71,11 @@
+> - ### Targets:
+> -=20
+> - libvdr-$(PLUGIN1).so: $(PLUGIN1).o
+> --      $(CXX) $(CXXFLAGS) -shared $(PLUGIN1).o -o $@
+> -+      $(CXX) $(CXXFLAGS) -shared $(PLUGIN1).o -o $@ $(LIBS)
+> -       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> -=20
+> - libvdr-$(PLUGIN2).so: $(PLUGIN2).o
+> --      $(CXX) $(CXXFLAGS) -shared $(PLUGIN2).o -o $@
+> -+      $(CXX) $(CXXFLAGS) -shared $(PLUGIN2).o -o $@ $(LIBS)
+> -       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> -=20
+> - dist: clean
+> -Index: vdr-1.7.10/PLUGINS/src/skincurses/Makefile
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- vdr-1.7.10.orig/PLUGINS/src/skincurses/Makefile    2010-01-07 22:01:=
+07.000000000 +0100
+> -+++ vdr-1.7.10/PLUGINS/src/skincurses/Makefile 2010-01-07 22:02:02.24049=
+6954 +0100
+> -@@ -19,6 +19,7 @@
+> -=20
+> - CXX      ?=3D g++
+> - CXXFLAGS ?=3D -fPIC -g -O2 -Wall -Woverloaded-virtual -Wno-parentheses
+> -+LIBS     ?=3D ${LDFLAGS}
+> -=20
+> - ### The directory environment:
+> -=20
+> -@@ -95,7 +96,7 @@
+> - ### Targets:
+> -=20
+> - libvdr-$(PLUGIN).so: $(OBJS)
+> --      $(CXX) $(CXXFLAGS) -shared $(OBJS) -lncursesw -o $@
+> -+      $(CXX) $(CXXFLAGS) -shared $(OBJS) -lncursesw -o $@ $(LIBS)
+> -       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> -=20
+> - dist: clean
+> -Index: vdr-1.7.10/PLUGINS/src/sky/Makefile
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- vdr-1.7.10.orig/PLUGINS/src/sky/Makefile   2010-01-07 22:01:07.00000=
+0000 +0100
+> -+++ vdr-1.7.10/PLUGINS/src/sky/Makefile        2010-01-07 22:02:02.24049=
+6954 +0100
+> -@@ -17,6 +17,7 @@
+> -=20
+> - CXX      ?=3D g++
+> - CXXFLAGS ?=3D -fPIC -g -O2 -Wall -Woverloaded-virtual -Wno-parentheses
+> -+LIBS     ?=3D ${LDFLAGS}
+> -=20
+> - ### The directory environment:
+> -=20
+> -@@ -68,7 +69,7 @@
+> - ### Targets:
+> -=20
+> - libvdr-$(PLUGIN).so: $(OBJS)
+> --      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@
+> -+      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@ $(LIBS)
+> -       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> -=20
+> - dist: clean
+> -Index: vdr-1.7.10/PLUGINS/src/status/Makefile
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- vdr-1.7.10.orig/PLUGINS/src/status/Makefile        2010-01-07 22:01:=
+07.000000000 +0100
+> -+++ vdr-1.7.10/PLUGINS/src/status/Makefile     2010-01-07 22:02:02.24049=
+6954 +0100
+> -@@ -17,6 +17,7 @@
+> -=20
+> - CXX      ?=3D g++
+> - CXXFLAGS ?=3D -fPIC -g -O2 -Wall -Woverloaded-virtual -Wno-parentheses
+> -+LIBS     ?=3D ${LDFLAGS}
+> -=20
+> - ### The directory environment:
+> -=20
+> -@@ -68,7 +69,7 @@
+> - ### Targets:
+> -=20
+> - libvdr-$(PLUGIN).so: $(OBJS)
+> --      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@
+> -+      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@ $(LIBS)
+> -       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> -=20
+> - dist: clean
+> -Index: vdr-1.7.10/PLUGINS/src/svdrpdemo/Makefile
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- vdr-1.7.10.orig/PLUGINS/src/svdrpdemo/Makefile     2010-01-07 22:01:=
+07.000000000 +0100
+> -+++ vdr-1.7.10/PLUGINS/src/svdrpdemo/Makefile  2010-01-07 22:02:02.24049=
+6954 +0100
+> -@@ -17,6 +17,7 @@
+> -=20
+> - CXX      ?=3D g++
+> - CXXFLAGS ?=3D -fPIC -g -O2 -Wall -Woverloaded-virtual -Wno-parentheses
+> -+LIBS     ?=3D ${LDFLAGS}
+> -=20
+> - ### The directory environment:
+> -=20
+> -@@ -68,7 +69,7 @@
+> - ### Targets:
+> -=20
+> - libvdr-$(PLUGIN).so: $(OBJS)
+> --      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@
+> -+      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@ $(LIBS)
+> -       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> -=20
+> - dist: clean
+> diff --git a/recipes/vdr/vdr-1.7.10/linkerflags.patch b/recipes/vdr/vdr-1=
+.7.10/linkerflags.patch
+> new file mode 100644
+> index 0000000..63c4477
+> --- /dev/null
+> +++ b/recipes/vdr/vdr-1.7.10/linkerflags.patch
+> @@ -0,0 +1,186 @@
+> +Index: vdr-1.7.10/Makefile
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- vdr-1.7.10.orig/Makefile   2010-01-07 22:01:54.000000000 +0100
+> ++++ vdr-1.7.10/Makefile        2010-01-07 22:02:32.167165564 +0100
+> +@@ -20,7 +20,7 @@
+> + MANDIR   =3D $(PREFIX)/share/man
+> + BINDIR   =3D $(PREFIX)/bin
+> + LOCDIR   =3D ./locale
+> +-LIBS     =3D -ljpeg -lpthread -ldl -lcap -lrt -lfreetype -lfontconfig
+> ++LIBS     =3D -ljpeg -lpthread -ldl -lcap -lrt -lfreetype -lfontconfig $=
+{LDFLAGS}
+> + INCLUDES =3D ${CFLAGS}
+> +=20
+> + PLUGINDIR=3D ./PLUGINS
+> +Index: vdr-1.7.10/PLUGINS/src/hello/Makefile
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- vdr-1.7.10.orig/PLUGINS/src/hello/Makefile 2010-01-07 22:01:07.00000=
+0000 +0100
+> ++++ vdr-1.7.10/PLUGINS/src/hello/Makefile      2010-01-07 22:02:02.24049=
+6954 +0100
+> +@@ -19,6 +19,7 @@
+> +=20
+> + CXX      ?=3D g++
+> + CXXFLAGS ?=3D -fPIC -g -O2 -Wall -Woverloaded-virtual -Wno-parentheses
+> ++LIBS     ?=3D ${LDFLAGS}
+> +=20
+> + ### The directory environment:
+> +=20
+> +@@ -95,7 +96,7 @@
+> + ### Targets:
+> +=20
+> + libvdr-$(PLUGIN).so: $(OBJS)
+> +-      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@
+> ++      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@ $(LIBS)
+> +       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> +=20
+> + dist: clean
+> +Index: vdr-1.7.10/PLUGINS/src/osddemo/Makefile
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- vdr-1.7.10.orig/PLUGINS/src/osddemo/Makefile       2010-01-07 22:01:=
+07.000000000 +0100
+> ++++ vdr-1.7.10/PLUGINS/src/osddemo/Makefile    2010-01-07 22:02:02.24049=
+6954 +0100
+> +@@ -17,6 +17,7 @@
+> +=20
+> + CXX      ?=3D g++
+> + CXXFLAGS ?=3D -fPIC -g -O2 -Wall -Woverloaded-virtual -Wno-parentheses
+> ++LIBS     ?=3D ${LDFLAGS}
+> +=20
+> + ### The directory environment:
+> +=20
+> +@@ -68,7 +69,7 @@
+> + ### Targets:
+> +=20
+> + libvdr-$(PLUGIN).so: $(OBJS)
+> +-      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@
+> ++      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@ $(LIBS)
+> +       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> +=20
+> + dist: clean
+> +Index: vdr-1.7.10/PLUGINS/src/pictures/Makefile
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- vdr-1.7.10.orig/PLUGINS/src/pictures/Makefile      2010-01-07 22:01:=
+07.000000000 +0100
+> ++++ vdr-1.7.10/PLUGINS/src/pictures/Makefile   2010-01-07 22:02:02.24049=
+6954 +0100
+> +@@ -19,6 +19,7 @@
+> +=20
+> + CXX      ?=3D g++
+> + CXXFLAGS ?=3D -fPIC -g -O2 -Wall -Woverloaded-virtual -Wno-parentheses
+> ++LIBS     ?=3D ${LDFLAGS}
+> +=20
+> + ### The directory environment:
+> +=20
+> +@@ -95,7 +96,7 @@
+> + ### Targets:
+> +=20
+> + libvdr-$(PLUGIN).so: $(OBJS)
+> +-      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@
+> ++      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@ $(LIBS)
+> +       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> +=20
+> + dist: clean
+> +Index: vdr-1.7.10/PLUGINS/src/servicedemo/Makefile
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- vdr-1.7.10.orig/PLUGINS/src/servicedemo/Makefile   2010-01-07 22:01:=
+07.000000000 +0100
+> ++++ vdr-1.7.10/PLUGINS/src/servicedemo/Makefile        2010-01-07 22:02:=
+02.240496954 +0100
+> +@@ -19,6 +19,7 @@
+> +=20
+> + CXX      ?=3D g++
+> + CXXFLAGS ?=3D -fPIC -g -O2 -Wall -Woverloaded-virtual -Wno-parentheses
+> ++LIBS     ?=3D ${LDFLAGS}
+> +=20
+> + ### The directory environment:
+> +=20
+> +@@ -70,11 +71,11 @@
+> + ### Targets:
+> +=20
+> + libvdr-$(PLUGIN1).so: $(PLUGIN1).o
+> +-      $(CXX) $(CXXFLAGS) -shared $(PLUGIN1).o -o $@
+> ++      $(CXX) $(CXXFLAGS) -shared $(PLUGIN1).o -o $@ $(LIBS)
+> +       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> +=20
+> + libvdr-$(PLUGIN2).so: $(PLUGIN2).o
+> +-      $(CXX) $(CXXFLAGS) -shared $(PLUGIN2).o -o $@
+> ++      $(CXX) $(CXXFLAGS) -shared $(PLUGIN2).o -o $@ $(LIBS)
+> +       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> +=20
+> + dist: clean
+> +Index: vdr-1.7.10/PLUGINS/src/skincurses/Makefile
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- vdr-1.7.10.orig/PLUGINS/src/skincurses/Makefile    2010-01-07 22:01:=
+07.000000000 +0100
+> ++++ vdr-1.7.10/PLUGINS/src/skincurses/Makefile 2010-01-07 22:02:02.24049=
+6954 +0100
+> +@@ -19,6 +19,7 @@
+> +=20
+> + CXX      ?=3D g++
+> + CXXFLAGS ?=3D -fPIC -g -O2 -Wall -Woverloaded-virtual -Wno-parentheses
+> ++LIBS     ?=3D ${LDFLAGS}
+> +=20
+> + ### The directory environment:
+> +=20
+> +@@ -95,7 +96,7 @@
+> + ### Targets:
+> +=20
+> + libvdr-$(PLUGIN).so: $(OBJS)
+> +-      $(CXX) $(CXXFLAGS) -shared $(OBJS) -lncursesw -o $@
+> ++      $(CXX) $(CXXFLAGS) -shared $(OBJS) -lncursesw -o $@ $(LIBS)
+> +       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> +=20
+> + dist: clean
+> +Index: vdr-1.7.10/PLUGINS/src/sky/Makefile
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- vdr-1.7.10.orig/PLUGINS/src/sky/Makefile   2010-01-07 22:01:07.00000=
+0000 +0100
+> ++++ vdr-1.7.10/PLUGINS/src/sky/Makefile        2010-01-07 22:02:02.24049=
+6954 +0100
+> +@@ -17,6 +17,7 @@
+> +=20
+> + CXX      ?=3D g++
+> + CXXFLAGS ?=3D -fPIC -g -O2 -Wall -Woverloaded-virtual -Wno-parentheses
+> ++LIBS     ?=3D ${LDFLAGS}
+> +=20
+> + ### The directory environment:
+> +=20
+> +@@ -68,7 +69,7 @@
+> + ### Targets:
+> +=20
+> + libvdr-$(PLUGIN).so: $(OBJS)
+> +-      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@
+> ++      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@ $(LIBS)
+> +       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> +=20
+> + dist: clean
+> +Index: vdr-1.7.10/PLUGINS/src/status/Makefile
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- vdr-1.7.10.orig/PLUGINS/src/status/Makefile        2010-01-07 22:01:=
+07.000000000 +0100
+> ++++ vdr-1.7.10/PLUGINS/src/status/Makefile     2010-01-07 22:02:02.24049=
+6954 +0100
+> +@@ -17,6 +17,7 @@
+> +=20
+> + CXX      ?=3D g++
+> + CXXFLAGS ?=3D -fPIC -g -O2 -Wall -Woverloaded-virtual -Wno-parentheses
+> ++LIBS     ?=3D ${LDFLAGS}
+> +=20
+> + ### The directory environment:
+> +=20
+> +@@ -68,7 +69,7 @@
+> + ### Targets:
+> +=20
+> + libvdr-$(PLUGIN).so: $(OBJS)
+> +-      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@
+> ++      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@ $(LIBS)
+> +       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> +=20
+> + dist: clean
+> +Index: vdr-1.7.10/PLUGINS/src/svdrpdemo/Makefile
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +--- vdr-1.7.10.orig/PLUGINS/src/svdrpdemo/Makefile     2010-01-07 22:01:=
+07.000000000 +0100
+> ++++ vdr-1.7.10/PLUGINS/src/svdrpdemo/Makefile  2010-01-07 22:02:02.24049=
+6954 +0100
+> +@@ -17,6 +17,7 @@
+> +=20
+> + CXX      ?=3D g++
+> + CXXFLAGS ?=3D -fPIC -g -O2 -Wall -Woverloaded-virtual -Wno-parentheses
+> ++LIBS     ?=3D ${LDFLAGS}
+> +=20
+> + ### The directory environment:
+> +=20
+> +@@ -68,7 +69,7 @@
+> + ### Targets:
+> +=20
+> + libvdr-$(PLUGIN).so: $(OBJS)
+> +-      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@
+> ++      $(CXX) $(CXXFLAGS) -shared $(OBJS) -o $@ $(LIBS)
+> +       @cp --remove-destination $@ $(LIBDIR)/$@.$(APIVERSION)
+> +=20
+> + dist: clean
+> diff --git a/recipes/vdr/vdr.inc b/recipes/vdr/vdr.inc
+> new file mode 100644
+> index 0000000..2e8cf40
+> --- /dev/null
+> +++ b/recipes/vdr/vdr.inc
+> @@ -0,0 +1,8 @@
+> +DESCRIPTION =3D "Video Disk Recorder (VDR) is a digital sat-receiver pro=
+gram using Linux and DVB technologies. It allows one to record MPEG2 stream=
+s, as well as output the stream to TV. It is also possible to watch DVDs (h=
+ardware accelerated) with some comfort and use an IR remote control."
+> +AUTHOR =3D "Klaus Schmidinger"
+> +LICENSE =3D "GPLv2"
+> +HOMEPAGE =3D "http://www.tvdr.de"
+> +
+> +DEPENDS =3D "fontconfig freetype gettext libcap jpeg virtual/libintl"
+> +
+> +SRC_URI =3D "ftp://ftp.tvdr.de/vdr/Developer/${P}.tar.bz2"
+> diff --git a/recipes/vdr/vdr_1.7.10.bb b/recipes/vdr/vdr_1.7.10.bb
+> index a8fa82c..69ca012 100644
+> --- a/recipes/vdr/vdr_1.7.10.bb
+> +++ b/recipes/vdr/vdr_1.7.10.bb
+> @@ -1,13 +1,7 @@
+> -DESCRIPTION =3D "Video Disk Recorder (VDR) is a digital sat-receiver pro=
+gram using Linux and DVB technologies. It allows one to record MPEG2 stream=
+s, as well as output the stream to TV. It is also possible to watch DVDs (h=
+ardware accelerated) with some comfort and use an IR remote control."
+> -AUTHOR =3D "Klaus Schmidinger"
+> -LICENSE =3D "GPLv2"
+> -HOMEPAGE =3D "http://www.tvdr.de"
+> +require vdr.inc
+>  PR =3D "r2"
+> =20
+> -DEPENDS =3D "fontconfig freetype gettext libcap jpeg virtual/libintl"
+> -
+> -SRC_URI =3D "ftp://ftp.tvdr.de/vdr/Developer/${P}.tar.bz2 \
+> -           file://fixpaths.patch;patch=3D1 \
+> +SRC_URI +=3D " file://fixpaths.patch;patch=3D1 \
+>             file://cplusplus.patch;patch=3D1 \
+>             file://disable_plugin.patch;patch=3D1 \
+>             file://linkerflags.patch;patch=3D1 \
+> @@ -27,7 +21,7 @@ do_install () {
+>                   'VIDEODIR=3D/var/lib/vdr/video' \
+>                   'PLUGINLIBDIR=3D${PLUGINDIR}' \
+>                   'LOCDIR=3D${datadir}/locale' \
+> -                 install=20
+> +                 install
+>  }
+> =20
+>  PACKAGES_DYNAMIC +=3D "vdr-plugin-*"
+> @@ -39,4 +33,3 @@ python populate_packages_prepend () {
+> =20
+>  FILES_${PN} =3D "${bindir}/* /var/lib/vdr/conf/* ${sysconfdir}/*"
+>  FILES_${PN}-dbg +=3D "${PLUGINDIR}/.debug/*"
+> -
+> --=20
+> 1.6.5.7=20
 
->   if i "git reset" to the commit just before that, it builds fine;
-> ergo, that seems to be the commit that broke it.  a wild guess is that
-> the "maxrev" parameters are the cause, given that at least one now
-> falls below the requested svn revision, causing an essential patch to
-> no longer be applied, but that's just a guess until i look more
-> closely.
-
-<snip>
-
-If you have a hunch on the patch then give it a go, or drop down the SRCREV
-for a few days until someone else can get around to fixing the issue, I
-suspect this bug will be seen widely (in fact I reproduced it on my setup
-with a fresh pull of mplayer_svn.bb on a Ubuntu build host yesterday). Your
-hunch seems good but I have no time to personally look at this now.
-
->   so ... i can file this over at http://bugs.openembedded.net/ if
-> that's the way to go.  but others were talking about this tinderbox
-> thing, which i've never used.  a quick glance suggests it's a more
-> formal, automated way of doing regular builds.  would that be
-> appropriate for me, if it's understood i'm always building on the same
-> distro?  feel free to point me at a quick intro, or i'll just file a
-> regular bug if that's the way to go.
-
-Let's be honest, you're never going to go too far wrong raising a bug report
-;).
-
-As for TinderBox, I did include some links in an earlier mail 
-
-"I think Phil (or someone else) suggest you consider contributing your build
-logs to OESTATS/TinderBox
-(http://wiki.openembedded.net/index.php/How_do_I_send_automatic_success_and_
-failure_reports) at least with that setup you leave a reference the failing
-logs in bug reports/mails so people can have a look into all the gory
-details :)." 
-
-It only takes a few minor changes to your local.conf and all your build logs
-and build status are automatically uploaded to the server. This makes
-diagnosing build issues/collective debugging etc. that little bit easier as
-anyone can go to http://tinderbox.openembedded.org/builders/<your_nick> and
-see what your builds and failures and dig into the logs. If you worried
-about personal info. being uploaded then check into oestats-client.bbclass
-to see what is happening under the hood.
-
-To prove a point this is a link to the failed mplayer build I did yesterday
-(http://tinderbox.openembedded.org/packages/431300/).
-
-Regards,
-
-John
+Could someone please commit this patch.
 
 
+Thanks,
 
+Paul
 
+--=-GaDHHhrjafNiBCq4pX83
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAktVghIACgkQPX1aK2wOHVhvcQCfdGiH8JqQPQ8QDSd5XTIRc2rR
+/QcAnA0y8fcMqfpKQKStUTEgvvtfZ0jQ
+=nVuy
+-----END PGP SIGNATURE-----
+
+--=-GaDHHhrjafNiBCq4pX83--
