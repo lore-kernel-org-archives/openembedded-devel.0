@@ -1,25 +1,38 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NXBmD-0007Bx-Vc for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 11:57:41 +0100
-Received: from f053039068.adsl.alicedsl.de ([78.53.39.68]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NXBk5-0001zB-4y for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 10:55:25 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <rpjday@crashcourse.ca>) id 1NXCh1-0007Dx-KG
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Jan 2010 12:56:22 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NXCer-0005x7-0o for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Jan 2010 06:54:05 -0500
+Date: Tue, 19 Jan 2010 06:53:19 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Jan 2010 11:55:23 +0100
-Message-ID: <1263898523.10980.76.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+In-Reply-To: <01e501ca98ed$823fa280$86bee780$@Willis@Distant-earth.com>
+Message-ID: <alpine.LFD.2.00.1001190647010.20935@localhost>
+References: <alpine.LFD.2.00.1001190305430.13206@localhost>
+	<01e501ca98ed$823fa280$86bee780$@Willis@Distant-earth.com>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: =?UTF-8?B?W1JGQ11bQU5OT1VOQ0VdIFZEUiBhdmFpbGFibGUgYXMgcGFja2FnZSBpbiBPcGVuRW1iZWRkZWQgYW5kIGluIMOFbmdzdHLDtm0=?=
+Subject: Re: tinderbox, bug reports and a freshly-broken mplayer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,86 +46,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2010 10:57:41 -0000
-X-Groupsio-MsgNum: 15874
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-SoPAyN+/XujTO7CEHBNS"
+X-List-Received-Date: Tue, 19 Jan 2010 11:56:23 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
---=-SoPAyN+/XujTO7CEHBNS
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Tue, 19 Jan 2010, John Willis wrote:
 
-Dear OE developers,
+> rpjday wrote:
 
+> >   ignoring gnome-games for now, after a recent "git pull" on the
+> > OE dev branch, the "mplayer" package now no longer builds.  from
+> > the git log, i can see:
+>
+> <snip>
+>
+> On the gnome-games front, I have been messing with gnome-games
+> packages for something else (unrelated to the BB-demo image). I can
+> mail you a few BB's to try if you want but none of it is working
+> 100% yet (newer versions of gnome-games introduce requirements for
+> OpenGL/Clutter etc. and that opens a whole world of pain).
 
-I like to make an announcement on the VDR list. Could you please check
-my draft for it, that I did not mess up any terminology (framework,
-distribution) and that I gave correct credit to everyone.
+  i'm going to ignore that package for the foreseeable future -- it
+contains nothing I'm interested in and, yes, it does indeed bring a
+whole world of pain.  movin' on ...
 
-If you would change something to promote OpenEmbedded or the embedded
-world better or from a different point of view please tell me.
+  regarding the current breakage of mplayer which seems to be the
+result of this commit:
 
+commit 33c882b663a1dd229d0ebcb187648838d0164795
+Author: Koen Kooi <koen@openembedded.org>
+Date:   Sun Jan 17 14:52:44 2010 +0100
 
-Thanks and sorry to bother you with this,
+    mplayer: bump SRCREV for some more ARM fixes
 
-Paul
+diff --git a/recipes/mplayer/mplayer_svn.bb
+b/recipes/mplayer/mplayer_svn.bb
+index 58a4bc7..d3fc2f7 100644
+--- a/recipes/mplayer/mplayer_svn.bb
++++ b/recipes/mplayer/mplayer_svn.bb
+@@ -15,7 +15,7 @@ SRC_URI =
+"svn://svn.mplayerhq.hu/mplayer;module=trunk \
+           file://fix-addrinfo.patch;patch=1;maxrev=30302 \
+ "
 
----
-Dear VDR users,
-
-
-VDR 1.7.10 is now also available as a package in OpenEmbedded (OE), a
-build framework for embedded Linux [1][2]. I thank Henning Heinold who
-did most of the work to get VDR included and the OE developers to answer
-my questions on the openembedded-devel mailing list [3].
-
-Around 30 hours ago, Koen Kooi added VDR also to =C3=85ngstr=C3=B6m [4][5][=
-6], a
-distribution using OE heavily.
-
-With `opkg install vdr` it is now as easy as on other systems to install
-VDR and get it running on embedded devices which because of their energy
-efficiency and form factors, e. g. BeagleBoard [7], are predestined for
-use as a server.
-
-The next steps are going to be to improve the packaging in OE and to
-send some patches to upstream VDR to adapt it for cross compilation [8].
-
-As always especially the developers do not have much time, so help with
-testing and writing patches is very welcomed.
-
-Instructions will also be posted in the VDR Wiki [9] on how to get this
-running.
+-SRCREV = "30247"
++SRCREV = "30345"
+ SRC_URI_append_armv7a = " \
+                file://omapfb.patch;patch=1 \
+           file://vo_omapfb.c \
 
 
-Thanks again to everyone and happy testing,
+> >   if i "git reset" to the commit just before that, it builds fine;
+> > ergo, that seems to be the commit that broke it.  a wild guess is
+> > that the "maxrev" parameters are the cause, given that at least
+> > one now falls below the requested svn revision, causing an
+> > essential patch to no longer be applied, but that's just a guess
+> > until i look more closely.
+>
+> <snip>
+>
+> If you have a hunch on the patch then give it a go, or drop down the
+> SRCREV for a few days until someone else can get around to fixing
+> the issue, I suspect this bug will be seen widely (in fact I
+> reproduced it on my setup with a fresh pull of mplayer_svn.bb on a
+> Ubuntu build host yesterday). Your hunch seems good but I have no
+> time to personally look at this now.
 
-Paul
+  neither do i, other commitments for the day.  nice to see that
+you've already seen that as well.  makes me believe i am not alone.
+:-)
 
 
-[1] http://www.openembedded.org/
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/vdr/
-[3] http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-[4] http://www.angstrom-distribution.org/
-[5] http://www.angstrom-distribution.org/repo/?pkgname=3Dvdr
-[6] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Ddfa0d36=
-cac88fd6f3a451cc7bc9433629f4a2df00
-[7] http://beagleboard.org/
-[8] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-January/01=
-6213.html
-[9] http://www.linuxtv.org/vdrwiki/index.php/Main_Page
+> As for TinderBox, I did include some links in an earlier mail
+>
+> "I think Phil (or someone else) suggest you consider contributing your build
+> logs to OESTATS/TinderBox
+> (http://wiki.openembedded.net/index.php/How_do_I_send_automatic_success_and_
+> failure_reports) at least with that setup you leave a reference the failing
+> logs in bug reports/mails so people can have a look into all the gory
+> details :)."
+>
+> It only takes a few minor changes to your local.conf and all your build logs
+> and build status are automatically uploaded to the server. This makes
+> diagnosing build issues/collective debugging etc. that little bit easier as
+> anyone can go to http://tinderbox.openembedded.org/builders/<your_nick> and
+> see what your builds and failures and dig into the logs. If you worried
+> about personal info. being uploaded then check into oestats-client.bbclass
+> to see what is happening under the hood.
+>
+> To prove a point this is a link to the failed mplayer build I did yesterday
+> (http://tinderbox.openembedded.org/packages/431300/).
 
---=-SoPAyN+/XujTO7CEHBNS
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
+  thanks, i'll dig into this after today.  for now, i'll just drop the
+SRCREV on mplayer to get a working build and watch the logs.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+rday
+--
 
-iEYEABECAAYFAktVj5sACgkQPX1aK2wOHVgDEwCeMpEI5U0sGOGK8IdwzpIZgjWC
-SXMAnifhegpMBiO6go03Ohu4jUXEY7mm
-=tq6u
------END PGP SIGNATURE-----
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
 
---=-SoPAyN+/XujTO7CEHBNS--
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
+
+
