@@ -1,32 +1,27 @@
-Received: from smtp1.irobot.com ([206.83.81.187])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <awozniak@irobot.com>) id 1NXNG2-0003D9-Pl
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jan 2010 00:13:13 +0100
-X-AuditID: 0a460614-b7b17ae0000057de-e5-4b563877f837
-Received: from webmail.irobot.com (Unknown_Domain [10.70.6.12])
-	by smtp1.irobot.com (Symantec Brightmail Gateway) with SMTP id
-	4E.01.22494.778365B4; Tue, 19 Jan 2010 17:55:51 -0500 (EST)
-Received: from fever2.wardrobe.irobot.com ([192.168.163.187]) by
-	webmail.irobot.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 19 Jan 2010 17:55:51 -0500
-Received: from [192.168.69.89] ([192.168.69.89]) by fever2.wardrobe.irobot.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 19 Jan 2010 17:55:08 -0500
-Message-ID: <4B56384B.10402@irobot.com>
-Date: Tue, 19 Jan 2010 14:55:07 -0800
-From: Adam Wozniak <awozniak@irobot.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NXNUD-0003dP-JA for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Jan 2010 00:27:52 +0100
+Received: from f053039068.adsl.alicedsl.de ([78.53.39.68]
+	helo=[192.168.178.25])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NXNS4-00059E-5u for openembedded-devel@lists.openembedded.org;
+	Tue, 19 Jan 2010 23:25:36 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 19 Jan 2010 22:55:08.0640 (UTC)
-	FILETIME=[72D8D600:01CA995A]
-X-Brightmail-Tracker: AAAAAA==
-X-SA-Exim-Connect-IP: 206.83.81.187
-X-SA-Exim-Mail-From: awozniak@irobot.com
+In-Reply-To: <4B563AED.6020504@atmel.com>
+References: <4B563AED.6020504@atmel.com>
+Date: Wed, 20 Jan 2010 00:25:34 +0100
+Message-ID: <1263943534.3181.19.camel@mattotaupa.wohnung.familie-menzel.net>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] added new recipe for olsrd_0.5.6-r8
+Subject: Re: [PATCH] Build fbv with JPEG and PNG enabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,110 +35,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2010 23:13:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 19 Jan 2010 23:27:52 -0000
+X-Groupsio-MsgNum: 15913
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-BgKNM62O6ScBT0NZUkHh"
 
-The latest release version of olsrd is 0.5.6-r8
+--=-BgKNM62O6ScBT0NZUkHh
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Adam Wozniak <awozniak@irobot.com>
----
- .../olsrd/files/olsrd-0.5.6-unbreak-makefile.patch |   59 
-++++++++++++++++++++
- recipes/olsrd/olsrd_0.5.6-r8.bb                    |    6 ++
- 2 files changed, 65 insertions(+), 0 deletions(-)
- create mode 100644 recipes/olsrd/files/olsrd-0.5.6-unbreak-makefile.patch
- create mode 100644 recipes/olsrd/olsrd_0.5.6-r8.bb
+Am Mittwoch, den 20.01.2010, 00:06 +0100 schrieb Ulf Samuelsson:
+> Build fbv with jpeg and png enabled
+>=20
+> Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+> ---
+>  recipes/fbv/fbv-1.0b/fbv-1.0b.patch |   12 ++++++++++++
+>  recipes/fbv/fbv_1.0b.bb             |   23 +++++++++++++++--------
+>  2 files changed, 27 insertions(+), 8 deletions(-)
+>  create mode 100644 recipes/fbv/fbv-1.0b/fbv-1.0b.patch
+>=20
+> diff --git a/recipes/fbv/fbv-1.0b/fbv-1.0b.patch
+> b/recipes/fbv/fbv-1.0b/fbv-1.0b.patch
+> new file mode 100644
+> index 0000000..6fbd1fb
+> --- /dev/null
+> +++ b/recipes/fbv/fbv-1.0b/fbv-1.0b.patch
+> @@ -0,0 +1,12 @@
+> +diff -urN fbv-1.0b-0rig/Makefile fbv-1.0b/Makefile
+> +--- fbv-1.0b-0rig/Makefile	2009-08-20 00:33:58.000000000 +0200
+> ++++ fbv-1.0b/Makefile	2009-08-20 00:34:16.000000000 +0200
+> +@@ -12,7 +12,7 @@
+> + OBJECTS	=3D ${SOURCES:.c=3D.o}
+> +
+> + OUT	=3D fbv
+> +-#LIBS	=3D -lungif -L/usr/X11R6/lib -ljpeg -lpng
+> ++LIBS	=3D -L/usr/lib -ljpeg -lpng #-lungif
+> +
+> + all: $(OUT)
+> + 	@echo Build DONE.
+> diff --git a/recipes/fbv/fbv_1.0b.bb b/recipes/fbv/fbv_1.0b.bb
+> index 04c7066..4a5bd6b 100644
+> --- a/recipes/fbv/fbv_1.0b.bb
+> +++ b/recipes/fbv/fbv_1.0b.bb
+> @@ -1,25 +1,32 @@
+>  DESCRIPTION =3D "Frame Buffer Viewer"
+>  LICENSE =3D "GPL"
+> -DEPENDS =3D "libpng"
+> +DEPENDS =3D "libpng jpeg"
+>  PR =3D "r1"
 
-diff --git a/recipes/olsrd/files/olsrd-0.5.6-unbreak-makefile.patch 
-b/recipes/olsrd/files/olsrd-0.5.6-unbreak-makefile.patch
-new file mode 100644
-index 0000000..479448d
---- /dev/null
-+++ b/recipes/olsrd/files/olsrd-0.5.6-unbreak-makefile.patch
-@@ -0,0 +1,59 @@
-+--- a/Makefile    2010-01-19 14:01:15.264703049 -0800
-++++ b/Makefile    2010-01-19 14:10:38.765700100 -0800
-+@@ -103,9 +103,8 @@ uberclean:    clean clean_libs
-+ install: install_olsrd
-+
-+ install_bin:
-+-        mkdir -p $(SBINDIR)
-+-        install -m 755 $(EXENAME) $(SBINDIR)
-+-        $(STRIP) $(SBINDIR)/$(EXENAME)
-++        mkdir -p $(INSTALL_PREFIX)$(SBINDIR)
-++        install -m 755 $(EXENAME) $(INSTALL_PREFIX)$(SBINDIR)
-+
-+ install_olsrd:    install_bin
-+         @echo ========= C O N F I G U R A T I O N - F I L E ============
-+@@ -117,17 +116,16 @@ install_olsrd:    install_bin
-+         @echo per default.
-+         @echo can be found at files/olsrd.conf.default.lq
-+         @echo ==========================================================
-+-        mkdir -p $(ETCDIR)
-+-        -cp -i files/olsrd.conf.default.lq $(CFGFILE)
-++        mkdir -p $(INSTALL_PREFIX)$(ETCDIR)
-+         @echo -------------------------------------------
-+         @echo Edit $(CFGFILE) before running olsrd!!
-+         @echo -------------------------------------------
-+         @echo Installing manpages $(EXENAME)\(8\) and $(CFGNAME)\(5\)
-+ ifneq ($(MANDIR),)
-+-        mkdir -p $(MANDIR)/man8/
-+-        cp files/olsrd.8.gz $(MANDIR)/man8/$(EXENAME).8.gz
-+-        mkdir -p $(MANDIR)/man5/
-+-        cp files/olsrd.conf.5.gz $(MANDIR)/man5/$(CFGNAME).5.gz
-++        mkdir -p $(INSTALL_PREFIX)$(MANDIR)/man8/
-++        cp files/olsrd.8.gz 
-$(INSTALL_PREFIX)$(MANDIR)/man8/$(EXENAME).8.gz
-++        mkdir -p $(INSTALL_PREFIX)$(MANDIR)/man5/
-++        cp files/olsrd.conf.5.gz 
-$(INSTALL_PREFIX)$(MANDIR)/man5/$(CFGNAME).5.gz
-+ endif
-+
-+ tags:
-+@@ -160,10 +158,10 @@ endif
-+ endif
-+
-+ libs:
-+-        set -e;for dir in $(SUBDIRS);do $(MAKECMD) -C lib/$$dir 
-LIBDIR=$(LIBDIR);done
-++        set -e;for dir in $(SUBDIRS);do $(MAKECMD) -C lib/$$dir 
-LIBDIR=$(INSTALL_PREFIX)$(LIBDIR);done
-+
-+ libs_clean clean_libs:
-+-        -for dir in $(SUBDIRS);do $(MAKECMD) -C lib/$$dir 
-LIBDIR=$(LIBDIR) clean;done
-++        -for dir in $(SUBDIRS);do $(MAKECMD) -C lib/$$dir 
-LIBDIR=$(INSTALL_PREFIX)$(LIBDIR) clean;done
-+ ifeq ($(OS), win32)
-+         -rm -f lib/pgraph/olsrd_pgraph.dll
-+         -rm -f lib/txtinfo/olsrd_txtinfo.dll
-+@@ -174,7 +172,7 @@ ifeq ($(OS), win32)
-+ endif
-+
-+ libs_install install_libs:
-+-        set -e;for dir in $(SUBDIRS);do $(MAKECMD) -C lib/$$dir 
-LIBDIR=$(LIBDIR) install;done
-++        set -e;for dir in $(SUBDIRS);do $(MAKECMD) -C lib/$$dir 
-LIBDIR=$(INSTALL_PREFIX)$(LIBDIR) install;done
-+
-+ httpinfo:
-+         $(MAKECMD) -C lib/httpinfo clean
-diff --git a/recipes/olsrd/olsrd_0.5.6-r8.bb 
-b/recipes/olsrd/olsrd_0.5.6-r8.bb
-new file mode 100644
-index 0000000..366474c
---- /dev/null
-+++ b/recipes/olsrd/olsrd_0.5.6-r8.bb
-@@ -0,0 +1,6 @@
-+require olsrd.inc
-+
-+PR = "r2"
-+
-+SRC_URI += "file://olsrd-0.5.6-unbreak-makefile.patch;patch=1"
-+
--- 
-1.6.3.3
+Should not this be increased because of the changed `DEPENDS`? Why is
+`PR` not just a number?
+
+>  SRC_URI =3D "http://s-tech.elsat.net.pl/fbv/fbv-1.0b.tar.gz \
+> -	   file://cross_compile.patch;patch=3D1"
+> +	file://cross_compile.patch;patch=3D1 \
+> +	file://fbv-1.0b.patch;patch=3D1 \
+> +	"
+> +
+> +#inherit autotools
+
+Please do not comment out code. Everything is under versioning control.
+
+>  do_configure() {
+> -	CC=3D"${CC}" ./configure --without-libungif --without-bmp \
+> -		--without-libjpeg
+> +	CC=3D"${CC}" ./configure --without-libungif
+>  }
+>=20
+>  do_compile() {
+>  	oe_runmake CFLAGS=3D"-O2 -Wall -D_GNU_SOURCE -D__KERNEL_STRICT_NAMES" \
+>  		CC=3D"${CC}"
+>  }
+> +
+>  do_install() {
+>  	install -d ${D}${bindir}
+> -        install -m 0755 fbv ${D}${bindir}
+> +	install -m 0755 fbv ${D}${bindir}
+
+What changed?
+
+> -        # man
+> -        install -d ${D}${mandir}/man1/
+> -        install -m 0644 fbv.1 ${D}${mandir}/man1/fbv.1
+> +# man
+> +#	install -d ${D}${mandir}/man1/
+> +#	install -m 0644 fbv.1 ${D}${mandir}/man1/fbv.1
+>  }
+
+Why did you disable this? If it is not needed, please do it in a
+separate patch or at least mention it in the commit message.
+
+> +
+> +PACKAGES =3D "fbv"
+> +
 
 
+Thanks,
 
+Paul
+
+--=-BgKNM62O6ScBT0NZUkHh
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAktWP24ACgkQPX1aK2wOHVgCJQCeJEHAWpftl3EOil1nsAedRBfl
+6S0AmwVK6xarlrz9KaUQVtZ1rZugP6Xu
+=RVcm
+-----END PGP SIGNATURE-----
+
+--=-BgKNM62O6ScBT0NZUkHh--
