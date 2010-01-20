@@ -1,35 +1,37 @@
-Received: from ns.penguin.cz ([84.21.108.25])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1NXeED-0007XS-Q6
+	(envelope-from <rpjday@crashcourse.ca>) id 1NXen8-0002ir-NW
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jan 2010 18:20:28 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id E2D871417193
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jan 2010 18:20:33 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Wty4yfkgErk2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jan 2010 18:20:33 +0100 (CET)
-Received: from [10.20.1.86] (nat.scz.novell.com [213.151.88.252])
-	by ns.penguin.cz (Postfix) with ESMTP id C10B31417184
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jan 2010 18:20:33 +0100 (CET)
-From: Stanislav Brabec <utx@penguin.cz>
+	Wed, 20 Jan 2010 18:56:33 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NXekx-0008Kb-U0 for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Jan 2010 12:54:16 -0500
+Date: Wed, 20 Jan 2010 12:53:26 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4B54F75F.9030005@atmel.com>
-References: <4B54F75F.9030005@atmel.com>
-Date: Wed, 20 Jan 2010 18:18:09 +0100
-Message-Id: <1264007889.4003.207.camel@hammer.suse.cz>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.0 
-X-SA-Exim-Connect-IP: 84.21.108.25
-X-SA-Exim-Mail-From: utx@penguin.cz
+In-Reply-To: <4B5676D4.1080106@balister.org>
+Message-ID: <alpine.LFD.2.00.1001201252430.25238@localhost>
+References: <4B5676D4.1080106@balister.org>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Getting a cursor
+Subject: Re: gnome-games builds again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,30 +45,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jan 2010 17:20:28 -0000
-Content-Type: text/plain; charset="ISO-8859-2"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 20 Jan 2010 17:56:34 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Ulf Samuelsson wrote:
-> Anyone got an idea how to get a cursor as default?
-> Googling, I have seen that /usr/share/icons/xcursor-transparent/cursors
-> all point at a transparent cursor abd that I can generate new cursors
-> using xcursorgen.
-> I guess I can also copy some cursors from a desktop, but If
-> I want to have cursor on by default, is there a magic setting somewhere?
+On Tue, 19 Jan 2010, Philip Balister wrote:
 
-This is the trick that works for me in GPE:
+> Henning tracked down a problem in the libsdl sdl.m4 macro and pushed a fix.
+> gnome-games builds on my F11 box now. Still having issues with mkubifs though
+> :)
 
-mkdir -p ~/.icons/default
-echo "Inherits=xcursor-transparent" >>~/.icons/default/index.theme
+  by the way, where is mkubifs coming from?  i see no such recipe in
+the dev branch.  am i just looking in the wrong place?
 
-But it is not ideal. I would like to see it disable while using
-touchscreen or keyboard and enabled while using mouse, touchpad or mouse
-keys.
+rday
+--
 
--- 
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
 
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
