@@ -1,45 +1,26 @@
-Received: from mail-bw0-f226.google.com ([209.85.218.226])
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <d.vinokuroff@gmail.com>) id 1NXVGY-0002h5-F4
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1NXVYZ-0003BS-SA
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jan 2010 08:46:17 +0100
-Received: by bwz26 with SMTP id 26so15113bwz.27
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 23:43:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=/ZghX3ahQlubk2gjVs+YuLAMUoB10AsFRgZLxYqv8Zs=;
-	b=GNhTmZ3oor+9fekBhSSI3TEPTS5irjr4c1QVVZssGIfcax/zvJpqLgrWs4Y4MnlkMN
-	S2HudA/Tv1yrHHSVGhH7PxfFG+Xh+gx0giY1lukpOrVEPOoKlltQebiXEjef2GVLSpik
-	umolGEJN991hWpj672DGynI04UnHTdrVh0vsw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=t7r/5x7bnCSWr+Ad6GAlpWNPgTSdF+ehumFl6XgH2QC5n6tlGo0izN1+SjPMVxRzV7
-	3XV54IbmKd8axYfAWHtq38bAoElMJyiue1rqjwlE0mQkTGgKl01nBnvKdViX9MuE/OZw
-	NkVuYOMTGl8Eixk0ZgZcxCge+9le2hk8jJtFc=
-Received: by 10.204.33.20 with SMTP id f20mr1946250bkd.196.1263973438073;
-	Tue, 19 Jan 2010 23:43:58 -0800 (PST)
-Received: from ?192.168.0.100? ([94.180.15.197])
-	by mx.google.com with ESMTPS id 16sm1417543bwz.3.2010.01.19.23.43.56
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 19 Jan 2010 23:43:57 -0800 (PST)
-Message-ID: <4B56B43C.1010909@gmail.com>
-Date: Wed, 20 Jan 2010 12:43:56 +0500
-From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.8pre) Gecko/20100104 Shredder/3.0.1pre
-MIME-Version: 1.0
+	Wed, 20 Jan 2010 09:04:54 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id 649091D3607A; Wed, 20 Jan 2010 09:02:35 +0100 (CET)
+Date: Wed, 20 Jan 2010 09:02:35 +0100
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-References: <4B55E183.3090408@gmail.com>
-In-Reply-To: <4B55E183.3090408@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.218.226
-X-SA-Exim-Mail-From: d.vinokuroff@gmail.com
+Message-ID: <20100120080235.GI18793@ibawizard.net>
+References: <hj5604g6@ger.gmane.org>
+	<1263935073-12359-1-git-send-email-ynezz@true.cz>
+	<201001200756.02141.marcin@juszkiewicz.com.pl>
+MIME-Version: 1.0
+In-Reply-To: <201001200756.02141.marcin@juszkiewicz.com.pl>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: How to choose locales?
+Subject: Re: [PATCH v2] xinput_calibrator: switch to autotools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,33 +34,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jan 2010 07:46:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 20 Jan 2010 08:04:55 -0000
+Content-Type: text/plain; charset=iso-8859-2
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I should set IMAGE_LINGUAS = "en-us" in image recipe. Now it's only 
-en_US in locale dir, as I want.
+Marcin Juszkiewicz <marcin@juszkiewicz.com.pl> [2010-01-20 07:56:01]:
 
-P.S.: sorry for double post, thunderbird error.
+> Dnia wtorek, 19 stycznia 2010 o 22:04:33 Petr =A9tetiar napisa=B3(a):
+> > Signed-off-by: Petr =A9tetiar <ynezz@true.cz>
+>=20
+> imported, build tested, acked, pushed
 
-On 19.01.2010 21:44 Dmitry Vinokurov wrote:
-> Hello,
->
-> How can I choose locales, generated to /usr/lib/locale? Tried to set:
-> ENABLE_BINARY_LOCALE_GENERATION = "1"
-> GLIBC_GENERATE_LOCALES = "en_US.ISO_646.BASIC"
->
-> but still de_DE,  en_GB,  fr_FR in locales dir of image tarball. 
-> 'bitbake -e' says that vars are exactly as I set it.
->
-> Am I setting right variables?
->
-> Thanks
->
--- 
-Best Regards,
-Dmitry Vinokurov
-<d.vinokuroff@gmail.com>
+Thanks.
 
+Now it builds and packages only X11 frontend and I see no reason to
+build/package gtkmm frontend if they're almost the same. Well gtkmm one d=
+rags
+in gtkmm dependency. Or do you think, that we need both frontends package=
+d?
+
+-- ynezz
 
 
