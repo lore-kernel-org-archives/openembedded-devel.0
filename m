@@ -1,44 +1,46 @@
-Received: from mail-fx0-f212.google.com ([209.85.220.212])
+Received: from fg-out-1718.google.com ([72.14.220.157])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NXZho-0002WN-13
+	(envelope-from <martin.jansa@gmail.com>) id 1NXZho-0002Wu-Q7
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jan 2010 13:30:43 +0100
-Received: by fxm4 with SMTP id 4so2829771fxm.12
+	Wed, 20 Jan 2010 13:30:44 +0100
+Received: by fg-out-1718.google.com with SMTP id 19so637153fgg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jan 2010 04:28:24 -0800 (PST)
+	Wed, 20 Jan 2010 04:28:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=g52AEOWJeXohOmmM4Hv+k8cdxRdJ2vLN4/gGtYYzhqw=;
-	b=stQrW10VpgvLcVru2TYdly8TVVhXCkSgKZmNC2P7t4+mZ3Bh7YERAStBqGjzT1wFB2
-	1NqlBU3yovqyXD1XUUVjhOz7v7+qKPris1nhzgLR5fkDqQRaftFCxVF4uOmHJn3CXx7O
-	cgVhR3VI/lH/ES9L7ywRpjNt28OjwzFq/hlx4=
+	bh=FClytyNu7MA073fLv42OB2xLA+XXo4P5lMUgLTHjUcc=;
+	b=QOY6ezTwV4u3nJ7uTm7mqW1Ryfqu/1sPN0w1jmphiL6aFobjSq2J99sRhODQLg+IUl
+	hscg0vXNL6dmcAeacAS44joblYEW/1n3adSQ5R0NapYUIKNQTFE7du/0wDtALvLgEqYY
+	VU36KQtwu+pmr0g68KVB3fBlmYd+9btGZ+Tqg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=qRknD1NySAMLUx5e2vJl09p7ua3aDfMSc2JWnwfkMwnpkxWgQGQnnYvT7Kt0+m6ulS
-	FpeXLC0SfjRrgbPcdM7twq6926YWuGcZJE4yAanez02vfjjM81muzzFAU098zCiJyx3Q
-	IwTq04TeuXxvyuos4/+EN/KYaHIe0YigeZq+E=
-Received: by 10.223.14.20 with SMTP id e20mr3146424faa.16.1263990504305;
-	Wed, 20 Jan 2010 04:28:24 -0800 (PST)
+	b=wJlQHBQwmv80yMTbMOsWH5DQDtIXidviw5DzBX6w3YKYnVLt9DsZKh+oOfHFwtyZZe
+	izwpRny0YHv44iA9XQE6zQ6+3fuV9cWterCkYzUhLohYsmpGOKcWa3vC0f8KL/Hzj50G
+	bcIlKvAI4sz9eZAJnntPLphBfVQyjptlms9PE=
+Received: by 10.87.21.36 with SMTP id y36mr75857fgi.17.1263990506868;
+	Wed, 20 Jan 2010 04:28:26 -0800 (PST)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 16sm3151049fxm.4.2010.01.20.04.28.23
+	by mx.google.com with ESMTPS id 16sm3161756fxm.8.2010.01.20.04.28.25
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 20 Jan 2010 04:28:23 -0800 (PST)
+	Wed, 20 Jan 2010 04:28:26 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Jan 2010 13:27:56 +0100
-Message-Id: <1263990478-28107-5-git-send-email-Martin.Jansa@gmail.com>
+Date: Wed, 20 Jan 2010 13:27:58 +0100
+Message-Id: <1263990478-28107-7-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.6.6
-In-Reply-To: <1263990478-28107-4-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1263990478-28107-6-git-send-email-Martin.Jansa@gmail.com>
 References: <1263990478-28107-1-git-send-email-Martin.Jansa@gmail.com>
 	<1263990478-28107-2-git-send-email-Martin.Jansa@gmail.com>
 	<1263990478-28107-3-git-send-email-Martin.Jansa@gmail.com>
 	<1263990478-28107-4-git-send-email-Martin.Jansa@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.220.212
+	<1263990478-28107-5-git-send-email-Martin.Jansa@gmail.com>
+	<1263990478-28107-6-git-send-email-Martin.Jansa@gmail.com>
+X-SA-Exim-Connect-IP: 72.14.220.157
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 4/6] pixman: add version 0.17.4 with neon patches
+Subject: [PATCH 6/6] xorg: update recipes to latest releases 2010-01-18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,1021 +54,380 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jan 2010 12:30:43 -0000
+X-List-Received-Date: Wed, 20 Jan 2010 12:30:44 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...Dropped-delegation-support-for-pixman_blt.patch |  356 ++++++++++++++++++++
- ...0002-Test-program-for-pixman_blt-function.patch |  178 ++++++++++
- ...mplementation-of-pixman_blt-with-overlapp.patch |  114 +++++++
- ...of-overlapping-src-dst-for-pixman_blt_mmx.patch |   91 +++++
- ...f-overlapping-src-dst-for-pixman_blt_sse2.patch |   91 +++++
- ...f-overlapping-src-dst-for-pixman_blt_neon.patch |   94 +++++
- recipes/xorg-lib/pixman_0.17.4.bb                  |   29 ++
- 7 files changed, 953 insertions(+), 0 deletions(-)
- create mode 100644 recipes/xorg-lib/pixman-0.17.4/0001-Dropped-delegation-support-for-pixman_blt.patch
- create mode 100644 recipes/xorg-lib/pixman-0.17.4/0002-Test-program-for-pixman_blt-function.patch
- create mode 100644 recipes/xorg-lib/pixman-0.17.4/0003-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
- create mode 100644 recipes/xorg-lib/pixman-0.17.4/0004-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch
- create mode 100644 recipes/xorg-lib/pixman-0.17.4/0005-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch
- create mode 100644 recipes/xorg-lib/pixman-0.17.4/0006-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch
- create mode 100644 recipes/xorg-lib/pixman_0.17.4.bb
+ .../include/preferred-xorg-versions-live.inc       |   29 ++++++++---------
+ recipes/dri/libdrm_2.4.17.bb                       |   16 +++++++++
+ recipes/xorg-app/xvidtune_1.0.2.bb                 |    6 +++
+ recipes/xorg-driver/xf86-video-intel_2.10.0.bb     |    5 +++
+ recipes/xorg-driver/xf86-video-vesa_2.3.0.bb       |    2 +
+ recipes/xorg-driver/xf86-video-vmware_10.16.9.bb   |    6 +++
+ .../libx11-1.3.3/x11_disable_makekeys.patch        |   23 ++++++++++++++
+ recipes/xorg-lib/libx11-native_1.3.3.bb            |   10 ++++++
+ recipes/xorg-lib/libx11_1.3.3.bb                   |   33 ++++++++++++++++++++
+ recipes/xorg-proto/dri2proto_2.2.bb                |    3 ++
+ recipes/xorg-proto/glproto_1.4.11.bb               |    4 ++
+ recipes/xorg-util/util-macros-native_1.5.0.bb      |    7 ++++
+ recipes/xorg-util/util-macros_1.5.0.bb             |    6 +++
+ ...ack-assume-pixman-supports-overlapped-blt.patch |   14 ++++++++
+ recipes/xorg-xserver/xserver-xorg_1.7.4.bb         |   25 +++++++++++++++
+ 15 files changed, 173 insertions(+), 16 deletions(-)
+ create mode 100644 recipes/dri/libdrm_2.4.17.bb
+ create mode 100644 recipes/xorg-app/xvidtune_1.0.2.bb
+ create mode 100644 recipes/xorg-driver/xf86-video-intel_2.10.0.bb
+ create mode 100644 recipes/xorg-driver/xf86-video-vesa_2.3.0.bb
+ create mode 100644 recipes/xorg-driver/xf86-video-vmware_10.16.9.bb
+ create mode 100644 recipes/xorg-lib/libx11-1.3.3/x11_disable_makekeys.patch
+ create mode 100644 recipes/xorg-lib/libx11-native_1.3.3.bb
+ create mode 100644 recipes/xorg-lib/libx11_1.3.3.bb
+ create mode 100644 recipes/xorg-proto/dri2proto_2.2.bb
+ create mode 100644 recipes/xorg-proto/glproto_1.4.11.bb
+ create mode 100644 recipes/xorg-util/util-macros-native_1.5.0.bb
+ create mode 100644 recipes/xorg-util/util-macros_1.5.0.bb
+ create mode 100644 recipes/xorg-xserver/xserver-xorg-1.7.4/hack-assume-pixman-supports-overlapped-blt.patch
+ create mode 100644 recipes/xorg-xserver/xserver-xorg_1.7.4.bb
 
-diff --git a/recipes/xorg-lib/pixman-0.17.4/0001-Dropped-delegation-support-for-pixman_blt.patch b/recipes/xorg-lib/pixman-0.17.4/0001-Dropped-delegation-support-for-pixman_blt.patch
+diff --git a/conf/distro/include/preferred-xorg-versions-live.inc b/conf/distro/include/preferred-xorg-versions-live.inc
+index bea2b41..65e94fa 100644
+--- a/conf/distro/include/preferred-xorg-versions-live.inc
++++ b/conf/distro/include/preferred-xorg-versions-live.inc
+@@ -1,4 +1,4 @@
+-#Thu Dec 31 14:54:51 CET 2009
++#Mon Jan 18 14:00:56 CET 2010
+ #app
+ PREFERRED_VERSION_appres ?= "1.0.2"
+ PREFERRED_VERSION_bdftopcf ?= "1.0.2"
+@@ -98,7 +98,7 @@ PREFERRED_VERSION_xsetroot ?= "1.0.3"
+ PREFERRED_VERSION_xsm ?= "1.0.1"
+ PREFERRED_VERSION_xstdcmap ?= "1.0.1"
+ PREFERRED_VERSION_xtrap ?= "1.0.2"
+-PREFERRED_VERSION_xvidtune ?= "1.0.1"
++PREFERRED_VERSION_xvidtune ?= "1.0.2"
+ PREFERRED_VERSION_xvinfo ?= "1.1.0"
+ PREFERRED_VERSION_xwd ?= "1.0.3"
+ PREFERRED_VERSION_xwininfo ?= "1.0.5"
+@@ -156,8 +156,7 @@ PREFERRED_VERSION_xf86-video-i740 ?= "1.3.2"
+ PREFERRED_VERSION_xf86-video-i810 ?= "1.7.4"
+ PREFERRED_VERSION_xf86-video-impact ?= "0.2.0"
+ PREFERRED_VERSION_xf86-video-imstt ?= "1.1.0"
+-#PREFERRED_VERSION_xf86-video-intel ?= "2.9.99.902"
+-PREFERRED_VERSION_xf86-video-intel ?= "2.9.1"
++PREFERRED_VERSION_xf86-video-intel ?= "2.10.0"
+ PREFERRED_VERSION_xf86-video-mach64 ?= "6.8.2"
+ PREFERRED_VERSION_xf86-video-mga ?= "1.9.100"
+ PREFERRED_VERSION_xf86-video-neomagic ?= "1.2.4"
+@@ -187,11 +186,10 @@ PREFERRED_VERSION_xf86-video-trident ?= "1.3.3"
+ PREFERRED_VERSION_xf86-video-tseng ?= "1.2.3"
+ PREFERRED_VERSION_xf86-video-v4l ?= "0.2.0"
+ PREFERRED_VERSION_xf86-video-vermilion ?= "1.0.1"
+-PREFERRED_VERSION_xf86-video-vesa ?= "2.2.1"
++PREFERRED_VERSION_xf86-video-vesa ?= "2.3.0"
+ PREFERRED_VERSION_xf86-video-vga ?= "4.1.0"
+ PREFERRED_VERSION_xf86-video-via ?= "0.2.2"
+-#PREFERRED_VERSION_xf86-video-vmware ?= "10.16.9"
+-PREFERRED_VERSION_xf86-video-vmware ?= "10.16.8"
++PREFERRED_VERSION_xf86-video-vmware ?= "10.16.9"
+ PREFERRED_VERSION_xf86-video-voodoo ?= "1.2.3"
+ PREFERRED_VERSION_xf86-video-wsfb ?= "0.3.0"
+ PREFERRED_VERSION_xf86-video-xgi ?= "1.5.1"
+@@ -244,8 +242,8 @@ PREFERRED_VERSION_libice-native ?= "1.0.6"
+ PREFERRED_VERSION_libsm ?= "1.1.1"
+ PREFERRED_VERSION_libsm-native ?= "1.1.1"
+ PREFERRED_VERSION_libwindowswm ?= "1.0.1"
+-PREFERRED_VERSION_libx11 ?= "1.3.2"
+-PREFERRED_VERSION_libx11-native ?= "1.3.2"
++PREFERRED_VERSION_libx11 ?= "1.3.3"
++PREFERRED_VERSION_libx11-native ?= "1.3.3"
+ PREFERRED_VERSION_libxscrnsaver ?= "1.2.0"
+ PREFERRED_VERSION_libxtrap ?= "1.0.0"
+ PREFERRED_VERSION_libxau ?= "1.0.5"
+@@ -294,8 +292,7 @@ PREFERRED_VERSION_libpciaccess ?= "0.11.0"
+ PREFERRED_VERSION_libxkbfile ?= "1.0.6"
+ PREFERRED_VERSION_libxkbfile-native ?= "1.0.6"
+ PREFERRED_VERSION_libxkbui ?= "1.0.2"
+-#PREFERRED_VERSION_pixman ?= "0.17.2"
+-PREFERRED_VERSION_pixman ?= "0.16.2"
++PREFERRED_VERSION_pixman ?= "0.17.4"
+ PREFERRED_VERSION_xtrans ?= "1.2.5"
+ PREFERRED_VERSION_xtrans-native ?= "1.2.5"
+ #proto
+@@ -305,7 +302,7 @@ PREFERRED_VERSION_bigreqsproto-native ?= "1.1.0"
+ PREFERRED_VERSION_compositeproto ?= "0.4.1"
+ PREFERRED_VERSION_damageproto ?= "1.2.0"
+ PREFERRED_VERSION_dmxproto ?= "2.3"
+-PREFERRED_VERSION_dri2proto ?= "2.1"
++PREFERRED_VERSION_dri2proto ?= "2.2"
+ PREFERRED_VERSION_evieext ?= "1.1.0"
+ PREFERRED_VERSION_fixesproto ?= "4.1.1"
+ PREFERRED_VERSION_fixesproto-native ?= "4.1.1"
+@@ -313,7 +310,7 @@ PREFERRED_VERSION_fontcacheproto ?= "0.1.3"
+ PREFERRED_VERSION_fontcacheproto-native ?= "0.1.3"
+ PREFERRED_VERSION_fontsproto ?= "2.1.0"
+ PREFERRED_VERSION_fontsproto-native ?= "2.1.0"
+-PREFERRED_VERSION_glproto ?= "1.4.10"
++PREFERRED_VERSION_glproto ?= "1.4.11"
+ PREFERRED_VERSION_inputproto ?= "2.0"
+ PREFERRED_VERSION_inputproto-native ?= "2.0"
+ PREFERRED_VERSION_kbproto ?= "1.0.4"
+@@ -349,9 +346,9 @@ PREFERRED_VERSION_imake ?= "1.0.2"
+ PREFERRED_VERSION_lndir ?= "1.0.1"
+ PREFERRED_VERSION_makedepend ?= "1.0.2"
+ PREFERRED_VERSION_makedepend-native ?= "1.0.2"
+-PREFERRED_VERSION_util-macros ?= "1.4.1"
+-PREFERRED_VERSION_util-macros-native ?= "1.4.1"
++PREFERRED_VERSION_util-macros ?= "1.5.0"
++PREFERRED_VERSION_util-macros-native ?= "1.5.0"
+ PREFERRED_VERSION_xorg-cf-files ?= "1.0.3"
+ #xserver
+ #PREFERRED_VERSION_xserver-xorg ?= "1.7.99.2"
+-PREFERRED_VERSION_xserver-xorg ?= "1.7.3"
++PREFERRED_VERSION_xserver-xorg ?= "1.7.4"
+diff --git a/recipes/dri/libdrm_2.4.17.bb b/recipes/dri/libdrm_2.4.17.bb
 new file mode 100644
-index 0000000..d52ee35
+index 0000000..4f2af1e
 --- /dev/null
-+++ b/recipes/xorg-lib/pixman-0.17.4/0001-Dropped-delegation-support-for-pixman_blt.patch
-@@ -0,0 +1,356 @@
-+From c4ce33821e2340ff95e30fce5758013287172d52 Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Wed, 21 Oct 2009 23:48:43 +0000
-+Subject: Dropped delegation support for 'pixman_blt'
++++ b/recipes/dri/libdrm_2.4.17.bb
+@@ -0,0 +1,16 @@
++SECTION = "x11/base"
++DEPENDS = "libpthread-stubs"
++LICENSE = "MIT"
++SRC_URI = "http://dri.freedesktop.org/libdrm/libdrm-${PV}.tar.bz2"
++PROVIDES = "drm"
++PR = "r1"
 +
-+Function 'pixman_blt' is too simple and hardly needs any
-+delegation. This reduces call overhead somewhat. The saving
-+is minor, but every little bit helps.
-+---
-+diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
-+index efeabeb..c8c5579 100644
-+--- a/pixman/pixman-arm-neon.c
-++++ b/pixman/pixman-arm-neon.c
-+@@ -470,35 +470,6 @@ arm_neon_composite (pixman_implementation_t *imp,
-+ }
-+ 
-+ static pixman_bool_t
-+-arm_neon_blt (pixman_implementation_t *imp,
-+-              uint32_t *               src_bits,
-+-              uint32_t *               dst_bits,
-+-              int                      src_stride,
-+-              int                      dst_stride,
-+-              int                      src_bpp,
-+-              int                      dst_bpp,
-+-              int                      src_x,
-+-              int                      src_y,
-+-              int                      dst_x,
-+-              int                      dst_y,
-+-              int                      width,
-+-              int                      height)
-+-{
-+-    if (!pixman_blt_neon (
-+-            src_bits, dst_bits, src_stride, dst_stride, src_bpp, dst_bpp,
-+-            src_x, src_y, dst_x, dst_y, width, height))
-+-
-+-    {
-+-	return _pixman_implementation_blt (
-+-	    imp->delegate,
-+-	    src_bits, dst_bits, src_stride, dst_stride, src_bpp, dst_bpp,
-+-	    src_x, src_y, dst_x, dst_y, width, height);
-+-    }
-+-
-+-    return TRUE;
-+-}
-+-
-+-static pixman_bool_t
-+ arm_neon_fill (pixman_implementation_t *imp,
-+                uint32_t *               bits,
-+                int                      stride,
-+@@ -556,7 +527,7 @@ _pixman_implementation_create_arm_neon (void)
-+     imp->combine_32[PIXMAN_OP_ADD] = neon_combine_add_u;
-+ 
-+     imp->composite = arm_neon_composite;
-+-    imp->blt = arm_neon_blt;
-++    imp->blt = pixman_blt_neon;
-+     imp->fill = arm_neon_fill;
-+ 
-+     return imp;
-+diff --git a/pixman/pixman-arm-simd.c b/pixman/pixman-arm-simd.c
-+index 4795246..11c5f1b 100644
-+--- a/pixman/pixman-arm-simd.c
-++++ b/pixman/pixman-arm-simd.c
-+@@ -480,6 +480,7 @@ _pixman_implementation_create_arm_simd (void)
-+     pixman_implementation_t *imp = _pixman_implementation_create (general);
-+ 
-+     imp->composite = arm_simd_composite;
-++    imp->blt = general->blt;
-+ 
-+     return imp;
-+ }
-+diff --git a/pixman/pixman-fast-path.c b/pixman/pixman-fast-path.c
-+index 75a0c1e..8da6b1f 100644
-+--- a/pixman/pixman-fast-path.c
-++++ b/pixman/pixman-fast-path.c
-+@@ -1690,6 +1690,7 @@ _pixman_implementation_create_fast_path (void)
-+     pixman_implementation_t *imp = _pixman_implementation_create (general);
-+ 
-+     imp->composite = fast_path_composite;
-++    imp->blt = general->blt;
-+     imp->fill = fast_path_fill;
-+ 
-+     return imp;
-+diff --git a/pixman/pixman-general.c b/pixman/pixman-general.c
-+index c96a3f9..c3f96f9 100644
-+--- a/pixman/pixman-general.c
-++++ b/pixman/pixman-general.c
-+@@ -286,8 +286,7 @@ general_composite (pixman_implementation_t * imp,
-+ }
-+ 
-+ static pixman_bool_t
-+-general_blt (pixman_implementation_t *imp,
-+-             uint32_t *               src_bits,
-++general_blt (uint32_t *               src_bits,
-+              uint32_t *               dst_bits,
-+              int                      src_stride,
-+              int                      dst_stride,
-+diff --git a/pixman/pixman-implementation.c b/pixman/pixman-implementation.c
-+index 6488332..0520e36 100644
-+--- a/pixman/pixman-implementation.c
-++++ b/pixman/pixman-implementation.c
-+@@ -100,27 +100,6 @@ delegate_combine_64_ca (pixman_implementation_t * imp,
-+ }
-+ 
-+ static pixman_bool_t
-+-delegate_blt (pixman_implementation_t * imp,
-+-              uint32_t *                src_bits,
-+-              uint32_t *                dst_bits,
-+-              int                       src_stride,
-+-              int                       dst_stride,
-+-              int                       src_bpp,
-+-              int                       dst_bpp,
-+-              int                       src_x,
-+-              int                       src_y,
-+-              int                       dst_x,
-+-              int                       dst_y,
-+-              int                       width,
-+-              int                       height)
-+-{
-+-    return _pixman_implementation_blt (
-+-	imp->delegate, src_bits, dst_bits, src_stride, dst_stride,
-+-	src_bpp, dst_bpp, src_x, src_y, dst_x, dst_y,
-+-	width, height);
-+-}
-+-
-+-static pixman_bool_t
-+ delegate_fill (pixman_implementation_t *imp,
-+                uint32_t *               bits,
-+                int                      stride,
-+@@ -153,7 +132,7 @@ _pixman_implementation_create (pixman_implementation_t *delegate)
-+     /* Fill out function pointers with ones that just delegate
-+      */
-+     imp->composite = delegate_composite;
-+-    imp->blt = delegate_blt;
-++    imp->blt = NULL;
-+     imp->fill = delegate_fill;
-+ 
-+     for (i = 0; i < PIXMAN_N_OPERATORS; ++i)
-+@@ -233,26 +212,6 @@ _pixman_implementation_composite (pixman_implementation_t * imp,
-+ }
-+ 
-+ pixman_bool_t
-+-_pixman_implementation_blt (pixman_implementation_t * imp,
-+-                            uint32_t *                src_bits,
-+-                            uint32_t *                dst_bits,
-+-                            int                       src_stride,
-+-                            int                       dst_stride,
-+-                            int                       src_bpp,
-+-                            int                       dst_bpp,
-+-                            int                       src_x,
-+-                            int                       src_y,
-+-                            int                       dst_x,
-+-                            int                       dst_y,
-+-                            int                       width,
-+-                            int                       height)
-+-{
-+-    return (*imp->blt) (imp, src_bits, dst_bits, src_stride, dst_stride,
-+-			src_bpp, dst_bpp, src_x, src_y, dst_x, dst_y,
-+-			width, height);
-+-}
-+-
-+-pixman_bool_t
-+ _pixman_implementation_fill (pixman_implementation_t *imp,
-+                              uint32_t *               bits,
-+                              int                      stride,
-+diff --git a/pixman/pixman-mmx.c b/pixman/pixman-mmx.c
-+index b1591d9..a3080b6 100644
-+--- a/pixman/pixman-mmx.c
-++++ b/pixman/pixman-mmx.c
-+@@ -3318,35 +3318,6 @@ mmx_composite (pixman_implementation_t *imp,
-+ }
-+ 
-+ static pixman_bool_t
-+-mmx_blt (pixman_implementation_t *imp,
-+-         uint32_t *               src_bits,
-+-         uint32_t *               dst_bits,
-+-         int                      src_stride,
-+-         int                      dst_stride,
-+-         int                      src_bpp,
-+-         int                      dst_bpp,
-+-         int                      src_x,
-+-         int                      src_y,
-+-         int                      dst_x,
-+-         int                      dst_y,
-+-         int                      width,
-+-         int                      height)
-+-{
-+-    if (!pixman_blt_mmx (
-+-            src_bits, dst_bits, src_stride, dst_stride, src_bpp, dst_bpp,
-+-            src_x, src_y, dst_x, dst_y, width, height))
-+-
-+-    {
-+-	return _pixman_implementation_blt (
-+-	    imp->delegate,
-+-	    src_bits, dst_bits, src_stride, dst_stride, src_bpp, dst_bpp,
-+-	    src_x, src_y, dst_x, dst_y, width, height);
-+-    }
-+-
-+-    return TRUE;
-+-}
-+-
-+-static pixman_bool_t
-+ mmx_fill (pixman_implementation_t *imp,
-+           uint32_t *               bits,
-+           int                      stride,
-+@@ -3397,7 +3368,7 @@ _pixman_implementation_create_mmx (void)
-+     imp->combine_32_ca[PIXMAN_OP_ADD] = mmx_combine_add_ca;
-+ 
-+     imp->composite = mmx_composite;
-+-    imp->blt = mmx_blt;
-++    imp->blt = pixman_blt_mmx;
-+     imp->fill = mmx_fill;
-+ 
-+     return imp;
-+diff --git a/pixman/pixman-private.h b/pixman/pixman-private.h
-+index c99f2a2..209cba4 100644
-+--- a/pixman/pixman-private.h
-++++ b/pixman/pixman-private.h
-+@@ -399,8 +399,7 @@ typedef void (*pixman_composite_func_t) (pixman_implementation_t *imp,
-+ 					 int32_t                  dest_y,
-+ 					 int32_t                  width,
-+ 					 int32_t                  height);
-+-typedef pixman_bool_t (*pixman_blt_func_t) (pixman_implementation_t *imp,
-+-					    uint32_t *               src_bits,
-++typedef pixman_bool_t (*pixman_blt_func_t) (uint32_t *               src_bits,
-+ 					    uint32_t *               dst_bits,
-+ 					    int                      src_stride,
-+ 					    int                      dst_stride,
-+diff --git a/pixman/pixman-sse2.c b/pixman/pixman-sse2.c
-+index 1f8aa6e..8c2e114 100644
-+--- a/pixman/pixman-sse2.c
-++++ b/pixman/pixman-sse2.c
-+@@ -5893,8 +5893,7 @@ sse2_composite (pixman_implementation_t *imp,
-+ __attribute__((__force_align_arg_pointer__))
-+ #endif
-+ static pixman_bool_t
-+-sse2_blt (pixman_implementation_t *imp,
-+-          uint32_t *               src_bits,
-++sse2_blt (uint32_t *               src_bits,
-+           uint32_t *               dst_bits,
-+           int                      src_stride,
-+           int                      dst_stride,
-+@@ -5907,18 +5906,9 @@ sse2_blt (pixman_implementation_t *imp,
-+           int                      width,
-+           int                      height)
-+ {
-+-    if (!pixman_blt_sse2 (
-++    return pixman_blt_sse2 (
-+             src_bits, dst_bits, src_stride, dst_stride, src_bpp, dst_bpp,
-+-            src_x, src_y, dst_x, dst_y, width, height))
-+-
-+-    {
-+-	return _pixman_implementation_blt (
-+-	    imp->delegate,
-+-	    src_bits, dst_bits, src_stride, dst_stride, src_bpp, dst_bpp,
-+-	    src_x, src_y, dst_x, dst_y, width, height);
-+-    }
-+-
-+-    return TRUE;
-++            src_x, src_y, dst_x, dst_y, width, height);
-+ }
-+ 
-+ #if defined(__GNUC__) && !defined(__x86_64__) && !defined(__amd64__)
-+diff --git a/pixman/pixman-vmx.c b/pixman/pixman-vmx.c
-+index 06325a7..e31bcb3 100644
-+--- a/pixman/pixman-vmx.c
-++++ b/pixman/pixman-vmx.c
-+@@ -1615,6 +1615,8 @@ _pixman_implementation_create_vmx (void)
-+ 
-+     /* Set up function pointers */
-+ 
-++    imp->blt = fast->blt;
-++
-+     imp->combine_32[PIXMAN_OP_OVER] = vmx_combine_over_u;
-+     imp->combine_32[PIXMAN_OP_OVER_REVERSE] = vmx_combine_over_reverse_u;
-+     imp->combine_32[PIXMAN_OP_IN] = vmx_combine_in_u;
-+diff --git a/pixman/pixman.c b/pixman/pixman.c
-+index 0edd967..07ad767 100644
-+--- a/pixman/pixman.c
-++++ b/pixman/pixman.c
-+@@ -57,6 +57,22 @@ static const optimized_operator_info_t optimized_operators[] =
-+ 
-+ static pixman_implementation_t *imp;
-+ 
-++static pixman_bool_t
-++pixman_blt_stub (uint32_t *src_bits,
-++                 uint32_t *dst_bits,
-++                 int       src_stride,
-++                 int       dst_stride,
-++                 int       src_bpp,
-++                 int       dst_bpp,
-++                 int       src_x,
-++                 int       src_y,
-++                 int       dst_x,
-++                 int       dst_y,
-++                 int       width,
-++                 int       height);
-++
-++static pixman_blt_func_t pixman_blt_imp = pixman_blt_stub;
-++
-+ /*
-+  * Check if the current operator could be optimized
-+  */
-+@@ -216,6 +232,31 @@ pixman_image_composite (pixman_op_t      op,
-+ 	unapply_workaround (dest, dest_bits, dest_dx, dest_dy);
-+ }
-+ 
-++static pixman_bool_t
-++pixman_blt_stub (uint32_t *src_bits,
-++                 uint32_t *dst_bits,
-++                 int       src_stride,
-++                 int       dst_stride,
-++                 int       src_bpp,
-++                 int       dst_bpp,
-++                 int       src_x,
-++                 int       src_y,
-++                 int       dst_x,
-++                 int       dst_y,
-++                 int       width,
-++                 int       height)
-++{
-++    if (!imp)
-++	imp = _pixman_choose_implementation ();
-++
-++    pixman_blt_imp = imp->blt;
-++    return pixman_blt_imp (src_bits, dst_bits, src_stride, dst_stride,
-++                           src_bpp, dst_bpp,
-++                           src_x, src_y,
-++                           dst_x, dst_y,
-++                           width, height);
-++}
-++
-+ PIXMAN_EXPORT pixman_bool_t
-+ pixman_blt (uint32_t *src_bits,
-+             uint32_t *dst_bits,
-+@@ -230,14 +271,11 @@ pixman_blt (uint32_t *src_bits,
-+             int       width,
-+             int       height)
-+ {
-+-    if (!imp)
-+-	imp = _pixman_choose_implementation ();
-+-
-+-    return _pixman_implementation_blt (imp, src_bits, dst_bits, src_stride, dst_stride,
-+-                                       src_bpp, dst_bpp,
-+-                                       src_x, src_y,
-+-                                       dst_x, dst_y,
-+-                                       width, height);
-++    return pixman_blt_imp (src_bits, dst_bits, src_stride, dst_stride,
-++                           src_bpp, dst_bpp,
-++                           src_x, src_y,
-++                           dst_x, dst_y,
-++                           width, height);
-+ }
-+ 
-+ PIXMAN_EXPORT pixman_bool_t
-+--
-+cgit v0.8.3-6-g21f6
-diff --git a/recipes/xorg-lib/pixman-0.17.4/0002-Test-program-for-pixman_blt-function.patch b/recipes/xorg-lib/pixman-0.17.4/0002-Test-program-for-pixman_blt-function.patch
++inherit autotools pkgconfig
++
++do_stage() {
++	autotools_stage_all
++}
++
++PACKAGES =+ "${PN}-intel"
++
++FILES_${PN}-intel = "${libdir}/libdrm_intel.so.*"
+diff --git a/recipes/xorg-app/xvidtune_1.0.2.bb b/recipes/xorg-app/xvidtune_1.0.2.bb
 new file mode 100644
-index 0000000..ba62b88
+index 0000000..bfab14a
 --- /dev/null
-+++ b/recipes/xorg-lib/pixman-0.17.4/0002-Test-program-for-pixman_blt-function.patch
-@@ -0,0 +1,178 @@
-+From 364406e03f9651aacb1bc684de6c00a27f9df66d Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Mon, 19 Oct 2009 20:32:55 +0300
-+Subject: [PATCH 2/6] Test program for pixman_blt function
++++ b/recipes/xorg-app/xvidtune_1.0.2.bb
+@@ -0,0 +1,6 @@
++require xorg-app-common.inc
++PE = "1"
 +
-+It can do some basic correctness tests and also check whether
-+overlapping of source and destination images is supported.
-+---
-+ test/Makefile.am           |    2 +
-+ test/overlapped-blt-test.c |  136 ++++++++++++++++++++++++++++++++++++++++++++
-+ 2 files changed, 138 insertions(+), 0 deletions(-)
-+ create mode 100644 test/overlapped-blt-test.c
++DEPENDS += " libxaw libxxf86vm libxt"
 +
-+diff --git a/test/Makefile.am b/test/Makefile.am
-+index 89d32e9..40c305f 100644
-+--- a/test/Makefile.am
-++++ b/test/Makefile.am
-+@@ -6,6 +6,7 @@
-+ 	fetch-test		\
-+ 	oob-test		\
-+ 	window-test		\
-++	overlapped-blt-test     \
-+ 	trap-crasher		\
-+ 	alphamap		\
-+ 	blitters-test		\
-+@@ -18,6 +19,7 @@
-+ trap_crasher_LDADD = $(TEST_LDADD)
-+ oob_test_LDADD = $(TEST_LDADD)
-+ window_test_LDADD = $(TEST_LDADD)
-++overlapped_blt_test_LDADD = $(TEST_LDADD)
-+ 
-+ blitters_test_LDADD = $(TEST_LDADD)
-+ blitters_test_SOURCES = blitters-test.c utils.c utils.h
-+diff --git a/test/overlapped-blt-test.c b/test/overlapped-blt-test.c
-+new file mode 100644
-+index 0000000..95fbc54
-+--- /dev/null
-++++ b/test/overlapped-blt-test.c
-+@@ -0,0 +1,136 @@
-++/*
-++ * A small test program which can check whether pixman_blt function
-++ * can support overlapping of source and destination images.
-++ * Efficient blit with overlapping is useful for scrolling.
-++ */
-++
-++#include <stdint.h>
-++#include <stdio.h>
-++#include <stdlib.h>
-++#include <string.h>
-++#include "pixman.h"
-++
-++/* reference implementation (slow) */
-++static void
-++trivial_copy8_2d (
-++    uint8_t *dst, int dst_stride,
-++    uint8_t *src, int src_stride,
-++    int dx, int dy, int sx, int sy,
-++    int w, int h)
-++{
-++    int x, y;
-++    uint8_t *tmp = malloc (src_stride * (sy + h));
-++    memcpy (tmp, src, src_stride * (sy + h));
-++    for (y = 0; y < h; y++)
-++    {
-++	for (x = 0; x < w; x++)
-++	{
-++	    *(dst + (dy + y) * dst_stride + dx + x) =
-++				*(tmp + (sy + y) * src_stride + sx + x);
-++	}
-++    }
-++    free (tmp);
-++}
-++
-++static void
-++trivial_copy_2d (
-++    uint8_t *dst, int dst_stride,
-++    uint8_t *src, int src_stride,
-++    int dx, int dy, int sx, int sy,
-++    int w, int h, int bpp)
-++{
-++    trivial_copy8_2d (dst, dst_stride, src, src_stride,
-++	dx * (bpp / 8), dy, sx * (bpp / 8), sy, w * (bpp / 8), h);
-++}
-++
-++/* now the test itself */
-++
-++#define ST_UNSUPPORTED		1
-++#define ST_NORMAL_BUG		2
-++#define ST_OVERLAPPED_BUG	4
-++
-++#define MAX_SIZE_X		64
-++#define MAX_SIZE_Y		64
-++
-++static void print_result(int bpp, int flags)
-++{
-++    printf("bpp=%d, supported=%d, normal_ok=%d, overlapped_ok=%d\n",
-++	bpp,
-++	!(flags & ST_UNSUPPORTED),
-++	!(flags & ST_NORMAL_BUG),
-++	!(flags & ST_OVERLAPPED_BUG));
-++}
-++
-++int main()
-++{
-++    int c = 100000, r;
-++    int bpp_st[33] = {0};
-++    srand(0);
-++    while (c-- > 0)
-++    {
-++	uint8_t *src1, *src2, *src3;
-++	int i;
-++	int sizex = rand() % MAX_SIZE_X + 1;
-++	int sizey = rand() % MAX_SIZE_Y + 1;
-++	int sx = rand() % sizex;
-++	int sy = rand() % sizey;
-++	int dx = rand() % sizex;
-++	int dy = rand() % sizey;
-++	int w = rand() % sizex;
-++	int h = rand() % sizex;
-++	int bpp = 8 * (1 << (rand() % 3));
-++	int stride_delta = rand() % 8;
-++	int bufsize;
-++	if ((sizex + stride_delta) % 4)
-++	    stride_delta += 4 - ((sizex + stride_delta) % 4);
-++	bufsize = (sizex + stride_delta) * sizey * bpp / 8;
-++	src1 = malloc (bufsize);
-++	src2 = malloc (bufsize);
-++	src3 = malloc (bufsize);
-++	for (i = 0; i < bufsize; i++)
-++	    src1[i] = rand();
-++	memcpy (src2, src1, bufsize);
-++	memcpy (src3, src1, bufsize);
-++	if (sx + w > sizex)
-++	    w = sizex - sx;
-++	if (dx + w > sizex)
-++	    w = sizex - dx;
-++	if (sy + h > sizey)
-++	    h = sizey - sy;
-++	if (dy + h > sizey)
-++	    h = sizey - dy;
-++	/* get reference result */
-++	trivial_copy_2d (src1, (sizex + stride_delta) * bpp / 8,
-++	                 src1, (sizex + stride_delta) * bpp / 8,
-++	                 dx, dy, sx, sy, w, h, bpp);
-++	/* check nonoverlapped pixman result */
-++	r = pixman_blt ((uint32_t *)src3, (uint32_t *)src2,
-++	                (sizex + stride_delta) * bpp / 8 / 4,
-++	                (sizex + stride_delta) * bpp / 8 / 4,
-++	                bpp, bpp, sx, sy, dx, dy, w, h);
-++	if (!r)
-++	    bpp_st[bpp] |= ST_UNSUPPORTED;
-++	if (memcmp (src1, src2, bufsize) != 0)
-++	    bpp_st[bpp] |= ST_NORMAL_BUG;
-++	/* check overlapped pixman result */
-++	r = pixman_blt ((uint32_t *)src3, (uint32_t *)src3,
-++	                (sizex + stride_delta) * bpp / 8 / 4,
-++	                (sizex + stride_delta) * bpp / 8 / 4,
-++	                bpp, bpp, sx, sy, dx, dy, w, h);
-++	if (!r)
-++	    bpp_st[bpp] |= ST_UNSUPPORTED;
-++	if (memcmp (src1, src3, bufsize) != 0)
-++	    bpp_st[bpp] |= ST_OVERLAPPED_BUG;
-++	/* free buffers */
-++	free (src1);
-++	free (src2);
-++	free (src3);
-++    }
-++
-++    /* report results */
-++    print_result (8, bpp_st[8]);
-++    print_result (16, bpp_st[16]);
-++    print_result (32, bpp_st[32]);
-++
-++    return 0;
-++}
-+-- 
-+1.6.2.4
-+
-diff --git a/recipes/xorg-lib/pixman-0.17.4/0003-Generic-C-implementation-of-pixman_blt-with-overlapp.patch b/recipes/xorg-lib/pixman-0.17.4/0003-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
++FILES_${PN} += " ${datadir}/X11/app-defaults/Xvidtune "
+diff --git a/recipes/xorg-driver/xf86-video-intel_2.10.0.bb b/recipes/xorg-driver/xf86-video-intel_2.10.0.bb
 new file mode 100644
-index 0000000..25ce7ee
+index 0000000..eed1fcb
 --- /dev/null
-+++ b/recipes/xorg-lib/pixman-0.17.4/0003-Generic-C-implementation-of-pixman_blt-with-overlapp.patch
-@@ -0,0 +1,114 @@
-+From c29c9fa826b7112156fd6150b5f1564227935c05 Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Thu, 22 Oct 2009 05:27:33 +0300
-+Subject: [PATCH 3/6] Generic C implementation of pixman_blt with overlapping support
++++ b/recipes/xorg-driver/xf86-video-intel_2.10.0.bb
+@@ -0,0 +1,5 @@
++require xorg-driver-video.inc
 +
-+Uses memcpy/memmove functions to copy pixels, can handle the
-+case when both source and destination areas are in the same
-+image (this is useful for scrolling).
++DESCRIPTION = "X.Org X server -- Intel i8xx, i9xx display driver"
++DEPENDS += " virtual/libx11 libxvmc drm xf86driproto"
++PE = "1"
+diff --git a/recipes/xorg-driver/xf86-video-vesa_2.3.0.bb b/recipes/xorg-driver/xf86-video-vesa_2.3.0.bb
+new file mode 100644
+index 0000000..c2b6b76
+--- /dev/null
++++ b/recipes/xorg-driver/xf86-video-vesa_2.3.0.bb
+@@ -0,0 +1,2 @@
++require xorg-driver-video.inc
++PE = "1"
+diff --git a/recipes/xorg-driver/xf86-video-vmware_10.16.9.bb b/recipes/xorg-driver/xf86-video-vmware_10.16.9.bb
+new file mode 100644
+index 0000000..994b8b6
+--- /dev/null
++++ b/recipes/xorg-driver/xf86-video-vmware_10.16.9.bb
+@@ -0,0 +1,6 @@
++require xorg-driver-video.inc
++PE = "1"
 +
-+It is assumed that copying direction is only important when
-+using the same image for both source and destination (and
-+src_stride == dst_stride). Copying direction is undefined
-+for the images with different source and destination stride
-+which happen to be in the overlapped areas (but this is an
-+unrealistic case anyway).
-+---
-+ pixman/pixman-general.c |   21 ++++++++++++++++++---
-+ pixman/pixman-private.h |   43 +++++++++++++++++++++++++++++++++++++++++++
-+ 2 files changed, 61 insertions(+), 3 deletions(-)
++#DESCRIPTION = ""
 +
-+diff --git a/pixman/pixman-general.c b/pixman/pixman-general.c
-+index c96a3f9..d71a299 100644
-+--- a/pixman/pixman-general.c
-++++ b/pixman/pixman-general.c
-+@@ -300,9 +300,24 @@ general_blt (pixman_implementation_t *imp,
-+              int                      width,
-+              int                      height)
-+ {
-+-    /* We can't blit unless we have sse2 or mmx */
++DEPENDS += " xineramaproto xf86miscproto drm xf86driproto"
+diff --git a/recipes/xorg-lib/libx11-1.3.3/x11_disable_makekeys.patch b/recipes/xorg-lib/libx11-1.3.3/x11_disable_makekeys.patch
+new file mode 100644
+index 0000000..5d0a24c
+--- /dev/null
++++ b/recipes/xorg-lib/libx11-1.3.3/x11_disable_makekeys.patch
+@@ -0,0 +1,23 @@
++diff -uNr libX11-1.3.3.orig/src/util/Makefile.am libX11-1.3.3/src/util/Makefile.am
++--- libX11-1.3.3.orig/src/util/Makefile.am	2010-01-15 02:11:36.000000000 +0100
+++++ libX11-1.3.3/src/util/Makefile.am	2010-01-18 14:48:27.000000000 +0100
++@@ -1,19 +1 @@
 +-
-+-    return FALSE;
-++    uint8_t *dst_bytes = (uint8_t *)dst_bits;
-++    uint8_t *src_bytes = (uint8_t *)src_bits;
-++    int bpp;
-++
-++    if (src_bpp != dst_bpp || src_bpp & 7)
-++	return FALSE;
-++
-++    bpp = src_bpp >> 3;
-++    width *= bpp;
-++    src_stride *= 4;
-++    dst_stride *= 4;
-++    pixman_blt_helper (src_bytes + src_y * src_stride + src_x * bpp,
-++                       dst_bytes + dst_y * dst_stride + dst_x * bpp,
-++                       src_stride,
-++                       dst_stride,
-++                       width,
-++                       height);
-++    return TRUE;
-+ }
-+ 
-+ static pixman_bool_t
-+diff --git a/pixman/pixman-private.h b/pixman/pixman-private.h
-+index 5000f91..8c5d4fd 100644
-+--- a/pixman/pixman-private.h
-++++ b/pixman/pixman-private.h
-+@@ -10,6 +10,7 @@
-+ 
-+ #include "pixman.h"
-+ #include <time.h>
-++#include <string.h>
-+ #include <assert.h>
-+ 
-+ #include "pixman-compiler.h"
-+@@ -794,4 +795,46 @@ void pixman_timer_register (pixman_timer_t *timer);
-+ 
-+ #endif /* PIXMAN_TIMERS */
-+ 
-++/* a helper function, can blit 8-bit images with src/dst overlapping support */
-++static inline void
-++pixman_blt_helper (uint8_t *src_bytes,
-++                   uint8_t *dst_bytes,
-++                   int      src_stride,
-++                   int      dst_stride,
-++                   int      width,
-++                   int      height)
-++{
-++    /*
-++     * The second part of this check is not strictly needed, but it prevents
-++     * unnecessary upside-down processing of areas which belong to different
-++     * images. Upside-down processing can be slower with fixed-distance-ahead
-++     * prefetch and perceived as having more tearing.
-++     */
-++    if (src_bytes < dst_bytes + width &&
-++	src_bytes + src_stride * height > dst_bytes)
-++    {
-++	src_bytes += src_stride * height - src_stride;
-++	dst_bytes += dst_stride * height - dst_stride;
-++	dst_stride = -dst_stride;
-++	src_stride = -src_stride;
-++	/* Horizontal scrolling to the left needs memmove */
-++	if (src_bytes + width > dst_bytes)
-++	{
-++	    while (--height >= 0)
-++	    {
-++		memmove (dst_bytes, src_bytes, width);
-++		dst_bytes += dst_stride;
-++		src_bytes += src_stride;
-++	    }
-++	    return;
-++	}
-++    }
-++    while (--height >= 0)
-++    {
-++	memcpy (dst_bytes, src_bytes, width);
-++	dst_bytes += dst_stride;
-++	src_bytes += src_stride;
-++    }
-++}
-++
-+ #endif /* PIXMAN_PRIVATE_H */
-+-- 
-+1.6.2.4
-+
-diff --git a/recipes/xorg-lib/pixman-0.17.4/0004-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch b/recipes/xorg-lib/pixman-0.17.4/0004-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch
++-noinst_PROGRAMS=makekeys
++-
++-makekeys_CFLAGS=$(X11_CFLAGS)
++-
++-CC = @CC_FOR_BUILD@
++-
++ EXTRA_DIST = mkks.sh
++-
++-if LINT
++-# Check source code with tools like lint & sparse
++-
++-ALL_LINT_FLAGS=$(LINT_FLAGS) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
++-		$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS)
++-
++-lint:
++-	$(LINT) $(ALL_LINT_FLAGS) makekeys.c
++-
++-endif LINT
+diff --git a/recipes/xorg-lib/libx11-native_1.3.3.bb b/recipes/xorg-lib/libx11-native_1.3.3.bb
 new file mode 100644
-index 0000000..74c7b45
+index 0000000..98fe79f
 --- /dev/null
-+++ b/recipes/xorg-lib/pixman-0.17.4/0004-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch
-@@ -0,0 +1,91 @@
-+From 7ca32542c957ff308a6ca7e3715e6552a65ae395 Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Thu, 22 Oct 2009 05:45:47 +0300
-+Subject: [PATCH 4/6] Support of overlapping src/dst for pixman_blt_mmx
++++ b/recipes/xorg-lib/libx11-native_1.3.3.bb
+@@ -0,0 +1,10 @@
++require libx11_${PV}.bb
 +
-+---
-+ pixman/pixman-mmx.c |   55 +++++++++++++++++++++++++++++---------------------
-+ 1 files changed, 32 insertions(+), 23 deletions(-)
++SRC_URI += "file://dolt-fix.patch;patch=1"
 +
-+diff --git a/pixman/pixman-mmx.c b/pixman/pixman-mmx.c
-+index 819e3a0..dcccadb 100644
-+--- a/pixman/pixman-mmx.c
-++++ b/pixman/pixman-mmx.c
-+@@ -3002,34 +3002,43 @@ pixman_blt_mmx (uint32_t *src_bits,
-+ {
-+     uint8_t *   src_bytes;
-+     uint8_t *   dst_bytes;
-+-    int byte_width;
-++    int         bpp;
-+ 
-+-    if (src_bpp != dst_bpp)
-++    if (src_bpp != dst_bpp || src_bpp & 7)
-+ 	return FALSE;
-+ 
-+-    if (src_bpp == 16)
-+-    {
-+-	src_stride = src_stride * (int) sizeof (uint32_t) / 2;
-+-	dst_stride = dst_stride * (int) sizeof (uint32_t) / 2;
-+-	src_bytes = (uint8_t *)(((uint16_t *)src_bits) + src_stride * (src_y) + (src_x));
-+-	dst_bytes = (uint8_t *)(((uint16_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
-+-	byte_width = 2 * width;
-+-	src_stride *= 2;
-+-	dst_stride *= 2;
-+-    }
-+-    else if (src_bpp == 32)
-++    bpp = src_bpp >> 3;
-++    width *= bpp;
-++    src_stride *= 4;
-++    dst_stride *= 4;
-++    src_bytes = (uint8_t *)src_bits + src_y * src_stride + src_x * bpp;
-++    dst_bytes = (uint8_t *)dst_bits + dst_y * dst_stride + dst_x * bpp;
-++
-++    if (src_bpp != 16 && src_bpp != 32)
++FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/libx11"
++
++DEPENDS = "xproto-native xextproto-native libxau-native xtrans-native libxdmcp-native xcmiscproto-native xf86bigfontproto-native kbproto-native inputproto-native bigreqsproto-native util-macros-native"
++PROVIDES = ""
++
++inherit native
+diff --git a/recipes/xorg-lib/libx11_1.3.3.bb b/recipes/xorg-lib/libx11_1.3.3.bb
+new file mode 100644
+index 0000000..8858a09
+--- /dev/null
++++ b/recipes/xorg-lib/libx11_1.3.3.bb
+@@ -0,0 +1,33 @@
++require xorg-lib-common.inc
++
++DESCRIPTION = "Base X libs."
++DEPENDS += "bigreqsproto xproto xextproto xtrans libxau xcmiscproto \
++            libxdmcp xf86bigfontproto kbproto inputproto xproto-native"
++PROVIDES = "virtual/libx11"
++PE = "1"
++PR = "r3"
++
++XORG_PN = "libX11"
++
++SRC_URI += "file://x11_disable_makekeys.patch;patch=1 \
++#            file://dolt-fix.patch;patch=1 \
++#            file://keysymdef_include.patch;patch=1 \
++"
++
++EXTRA_OECONF += "--without-xcb --with-keysymdef=${STAGING_INCDIR}/X11/keysymdef.h"
++
++do_compile() {
++	(
++		unset CC LD CXX CCLD CFLAGS CPPFLAGS LDFLAGS CXXFLAGS
++		cd src/util; 
++		mv makekeys.c.orig makekeys.c || true
++		touch makekeys-makekeys.o ; ${BUILD_CC} ${BUILD_CFLAGS} -I${STAGING_INCDIR_NATIVE} makekeys.c -o makekeys
++		# mv to stop it getting rebuilt
++		mv makekeys.c makekeys.c.orig
++		cd ../../
++	) || exit 1
++	oe_runmake
++}
++
++FILES_${PN} += "${datadir}/X11/XKeysymDB ${datadir}/X11/XErrorDB ${libdir}/X11/Xcms.txt"
++FILES_${PN}-locale += "${datadir}/X11/locale ${libdir}/X11/locale"
+diff --git a/recipes/xorg-proto/dri2proto_2.2.bb b/recipes/xorg-proto/dri2proto_2.2.bb
+new file mode 100644
+index 0000000..a0e1fd3
+--- /dev/null
++++ b/recipes/xorg-proto/dri2proto_2.2.bb
+@@ -0,0 +1,3 @@
++DESCRIPTION = "DRI2 extension headers"
++
++require xorg-proto-common.inc
+diff --git a/recipes/xorg-proto/glproto_1.4.11.bb b/recipes/xorg-proto/glproto_1.4.11.bb
+new file mode 100644
+index 0000000..9f09fff
+--- /dev/null
++++ b/recipes/xorg-proto/glproto_1.4.11.bb
+@@ -0,0 +1,4 @@
++require xorg-proto-common.inc
++
++PR = "r1"
++PE = "1"
+diff --git a/recipes/xorg-util/util-macros-native_1.5.0.bb b/recipes/xorg-util/util-macros-native_1.5.0.bb
+new file mode 100644
+index 0000000..618e78f
+--- /dev/null
++++ b/recipes/xorg-util/util-macros-native_1.5.0.bb
+@@ -0,0 +1,7 @@
++require util-macros_${PV}.bb
++
++inherit native
++
++XORG_PN = "util-macros"
++
++S = "${WORKDIR}/util-macros-${PV}"
+diff --git a/recipes/xorg-util/util-macros_1.5.0.bb b/recipes/xorg-util/util-macros_1.5.0.bb
+new file mode 100644
+index 0000000..4775fc6
+--- /dev/null
++++ b/recipes/xorg-util/util-macros_1.5.0.bb
+@@ -0,0 +1,6 @@
++require xorg-util-common.inc
++
++DESCRIPTION = "X autotools macros"
++PE = "1"
++
++ALLOW_EMPTY = "1"
+diff --git a/recipes/xorg-xserver/xserver-xorg-1.7.4/hack-assume-pixman-supports-overlapped-blt.patch b/recipes/xorg-xserver/xserver-xorg-1.7.4/hack-assume-pixman-supports-overlapped-blt.patch
+new file mode 100644
+index 0000000..a947582
+--- /dev/null
++++ b/recipes/xorg-xserver/xserver-xorg-1.7.4/hack-assume-pixman-supports-overlapped-blt.patch
+@@ -0,0 +1,14 @@
++diff --git a/fb/fbcopy.c b/fb/fbcopy.c
++index 07eb663..ba394b7 100644
++--- a/fb/fbcopy.c
+++++ b/fb/fbcopy.c
++@@ -91,8 +91,7 @@ fbCopyNtoN (DrawablePtr	pSrcDrawable,
++     while (nbox--)
 +     {
-+-	src_stride = src_stride * (int) sizeof (uint32_t) / 4;
-+-	dst_stride = dst_stride * (int) sizeof (uint32_t) / 4;
-+-	src_bytes = (uint8_t *)(((uint32_t *)src_bits) + src_stride * (src_y) + (src_x));
-+-	dst_bytes = (uint8_t *)(((uint32_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
-+-	byte_width = 4 * width;
-+-	src_stride *= 4;
-+-	dst_stride *= 4;
-++	pixman_blt_helper (src_bytes, dst_bytes, src_stride, dst_stride,
-++	                   width, height);
-++	return TRUE;
-+     }
-+-    else
-++
-++    if (src_bytes < dst_bytes && src_bytes + src_stride * height > dst_bytes)
-+     {
-+-	return FALSE;
-++	src_bytes += src_stride * height - src_stride;
-++	dst_bytes += dst_stride * height - dst_stride;
-++	dst_stride = -dst_stride;
-++	src_stride = -src_stride;
-++
-++	if (src_bytes + width > dst_bytes)
-++	{
-++	    /* TODO: reverse scanline copy using MMX */
-++	    while (--height >= 0)
-++	    {
-++		memmove (dst_bytes, src_bytes, width);
-++		dst_bytes += dst_stride;
-++		src_bytes += src_stride;
-++	    }
-++	    return TRUE;
-++	}
-+     }
-+ 
-+     while (height--)
-+@@ -3039,7 +3048,7 @@ pixman_blt_mmx (uint32_t *src_bits,
-+ 	uint8_t *d = dst_bytes;
-+ 	src_bytes += src_stride;
-+ 	dst_bytes += dst_stride;
-+-	w = byte_width;
-++	w = width;
-+ 
-+ 	while (w >= 2 && ((unsigned long)d & 3))
++ #ifndef FB_ACCESS_WRAPPER /* pixman_blt() doesn't support accessors yet */
++-	if (pm == FB_ALLONES && alu == GXcopy && !reverse &&
++-	    !upsidedown)
+++	if (pm == FB_ALLONES && alu == GXcopy)
 + 	{
-+-- 
-+1.6.2.4
-+
-diff --git a/recipes/xorg-lib/pixman-0.17.4/0005-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch b/recipes/xorg-lib/pixman-0.17.4/0005-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch
++ 	    if (!pixman_blt ((uint32_t *)src, (uint32_t *)dst, srcStride, dstStride, srcBpp, dstBpp,
++ 			     (pbox->x1 + dx + srcXoff),
+diff --git a/recipes/xorg-xserver/xserver-xorg_1.7.4.bb b/recipes/xorg-xserver/xserver-xorg_1.7.4.bb
 new file mode 100644
-index 0000000..3704fbf
+index 0000000..18b540b
 --- /dev/null
-+++ b/recipes/xorg-lib/pixman-0.17.4/0005-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch
-@@ -0,0 +1,91 @@
-+From edc80b41c6480b7c80ec5f7c835c92b2debb3774 Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Thu, 22 Oct 2009 05:45:54 +0300
-+Subject: [PATCH 5/6] Support of overlapping src/dst for pixman_blt_sse2
++++ b/recipes/xorg-xserver/xserver-xorg_1.7.4.bb
+@@ -0,0 +1,25 @@
++require xorg-xserver-common.inc
 +
-+---
-+ pixman/pixman-sse2.c |   55 +++++++++++++++++++++++++++++--------------------
-+ 1 files changed, 32 insertions(+), 23 deletions(-)
++DESCRIPTION = "the X.Org X server"
++DEPENDS += "pixman libpciaccess openssl dri2proto glproto xorg-minimal-fonts"
++PE = "2"
 +
-+diff --git a/pixman/pixman-sse2.c b/pixman/pixman-sse2.c
-+index 78b0ad1..b84636b 100644
-+--- a/pixman/pixman-sse2.c
-++++ b/pixman/pixman-sse2.c
-+@@ -5300,34 +5300,43 @@ pixman_blt_sse2 (uint32_t *src_bits,
-+ {
-+     uint8_t *   src_bytes;
-+     uint8_t *   dst_bytes;
-+-    int byte_width;
-++    int         bpp;
-+ 
-+-    if (src_bpp != dst_bpp)
-++    if (src_bpp != dst_bpp || src_bpp & 7)
-+ 	return FALSE;
-+ 
-+-    if (src_bpp == 16)
-+-    {
-+-	src_stride = src_stride * (int) sizeof (uint32_t) / 2;
-+-	dst_stride = dst_stride * (int) sizeof (uint32_t) / 2;
-+-	src_bytes =(uint8_t *)(((uint16_t *)src_bits) + src_stride * (src_y) + (src_x));
-+-	dst_bytes = (uint8_t *)(((uint16_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
-+-	byte_width = 2 * width;
-+-	src_stride *= 2;
-+-	dst_stride *= 2;
-+-    }
-+-    else if (src_bpp == 32)
-++    bpp = src_bpp >> 3;
-++    width *= bpp;
-++    src_stride *= 4;
-++    dst_stride *= 4;
-++    src_bytes = (uint8_t *)src_bits + src_y * src_stride + src_x * bpp;
-++    dst_bytes = (uint8_t *)dst_bits + dst_y * dst_stride + dst_x * bpp;
-++
-++    if (src_bpp != 16 && src_bpp != 32)
-+     {
-+-	src_stride = src_stride * (int) sizeof (uint32_t) / 4;
-+-	dst_stride = dst_stride * (int) sizeof (uint32_t) / 4;
-+-	src_bytes = (uint8_t *)(((uint32_t *)src_bits) + src_stride * (src_y) + (src_x));
-+-	dst_bytes = (uint8_t *)(((uint32_t *)dst_bits) + dst_stride * (dst_y) + (dst_x));
-+-	byte_width = 4 * width;
-+-	src_stride *= 4;
-+-	dst_stride *= 4;
-++	pixman_blt_helper (src_bytes, dst_bytes, src_stride, dst_stride,
-++	                   width, height);
-++	return TRUE;
-+     }
-+-    else
-++
-++    if (src_bytes < dst_bytes && src_bytes + src_stride * height > dst_bytes)
-+     {
-+-	return FALSE;
-++	src_bytes += src_stride * height - src_stride;
-++	dst_bytes += dst_stride * height - dst_stride;
-++	dst_stride = -dst_stride;
-++	src_stride = -src_stride;
-++
-++	if (src_bytes + width > dst_bytes)
-++	{
-++	    /* TODO: reverse scanline copy using SSE2 */
-++	    while (--height >= 0)
-++	    {
-++		memmove (dst_bytes, src_bytes, width);
-++		dst_bytes += dst_stride;
-++		src_bytes += src_stride;
-++	    }
-++	    return TRUE;
-++	}
-+     }
-+ 
-+     cache_prefetch ((__m128i*)src_bytes);
-+@@ -5340,7 +5349,7 @@ pixman_blt_sse2 (uint32_t *src_bits,
-+ 	uint8_t *d = dst_bytes;
-+ 	src_bytes += src_stride;
-+ 	dst_bytes += dst_stride;
-+-	w = byte_width;
-++	w = width;
-+ 
-+ 	cache_prefetch_next ((__m128i*)s);
-+ 	cache_prefetch_next ((__m128i*)d);
-+-- 
-+1.6.2.4
++SRC_URI += "file://sysroot_fix.patch;patch=1 \
++            file://dolt-fix-1.7.0.patch;patch=1 \
++            file://randr-support-1.7.0.patch;patch=1 \
++           "
 +
-diff --git a/recipes/xorg-lib/pixman-0.17.4/0006-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch b/recipes/xorg-lib/pixman-0.17.4/0006-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch
-new file mode 100644
-index 0000000..7c22483
---- /dev/null
-+++ b/recipes/xorg-lib/pixman-0.17.4/0006-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch
-@@ -0,0 +1,94 @@
-+From 86870ff530b5e435034bd80207e5758466d96cff Mon Sep 17 00:00:00 2001
-+From: Siarhei Siamashka <siarhei.siamashka@nokia.com>
-+Date: Wed, 18 Nov 2009 06:08:48 +0200
-+Subject: [PATCH 6/6] Support of overlapping src/dst for pixman_blt_neon
++SRC_URI_append_angstrom = " file://hack-assume-pixman-supports-overlapped-blt.patch;patch=1"
++SRC_URI_append_shr = " file://hack-assume-pixman-supports-overlapped-blt.patch;patch=1"
 +
-+---
-+ pixman/pixman-arm-neon.c |   63 ++++++++++++++++++++++++++++++++++++++-------
-+ 1 files changed, 53 insertions(+), 10 deletions(-)
++do_install_prepend() {
++        mkdir -p ${D}/${libdir}/X11/fonts
++}
 +
-+diff --git a/pixman/pixman-arm-neon.c b/pixman/pixman-arm-neon.c
-+index 495fda4..c632ff5 100644
-+--- a/pixman/pixman-arm-neon.c
-++++ b/pixman/pixman-arm-neon.c
-+@@ -357,26 +357,66 @@
-+                  int       width,
-+                  int       height)
-+ {
-+-    if (src_bpp != dst_bpp)
-++    uint8_t *   src_bytes;
-++    uint8_t *   dst_bytes;
-++    int         bpp;
-++
-++    if (src_bpp != dst_bpp || src_bpp & 7)
-+ 	return FALSE;
-+ 
-++    bpp = src_bpp >> 3;
-++    width *= bpp;
-++    src_stride *= 4;
-++    dst_stride *= 4;
-++    src_bytes = (uint8_t *)src_bits + src_y * src_stride + src_x * bpp;
-++    dst_bytes = (uint8_t *)dst_bits + dst_y * dst_stride + dst_x * bpp;
-++
-++    if (src_bpp != 16 && src_bpp != 32)
-++    {
-++	pixman_blt_helper (src_bytes, dst_bytes, src_stride, dst_stride,
-++	                   width, height);
-++	return TRUE;
-++    }
-++
-++    if (src_bytes < dst_bytes && src_bytes + src_stride * height > dst_bytes)
-++    {
-++	src_bytes += src_stride * height - src_stride;
-++	dst_bytes += dst_stride * height - dst_stride;
-++	dst_stride = -dst_stride;
-++	src_stride = -src_stride;
-++
-++	if (src_bytes + width > dst_bytes)
-++	{
-++	    /* TODO: reverse scanline copy using NEON */
-++	    while (--height >= 0)
-++	    {
-++		memmove (dst_bytes, src_bytes, width);
-++		dst_bytes += dst_stride;
-++		src_bytes += src_stride;
-++	    }
-++	    return TRUE;
-++	}
-++    }
-++
-+     switch (src_bpp)
-+     {
-+     case 16:
-+ 	pixman_composite_src_0565_0565_asm_neon (
-+-		width, height,
-+-		(uint16_t *)(((char *) dst_bits) +
-+-		dst_y * dst_stride * 4 + dst_x * 2), dst_stride * 2,
-+-		(uint16_t *)(((char *) src_bits) +
-+-		src_y * src_stride * 4 + src_x * 2), src_stride * 2);
-++		width >> 1,
-++		height,
-++		(uint16_t *) dst_bytes,
-++		dst_stride >> 1,
-++		(uint16_t *) src_bytes,
-++		src_stride >> 1);
-+ 	return TRUE;
-+     case 32:
-+ 	pixman_composite_src_8888_8888_asm_neon (
-+-		width, height,
-+-		(uint32_t *)(((char *) dst_bits) +
-+-		dst_y * dst_stride * 4 + dst_x * 4), dst_stride,
-+-		(uint32_t *)(((char *) src_bits) +
-+-		src_y * src_stride * 4 + src_x * 4), src_stride);
-++		width >> 2,
-++		height,
-++		(uint32_t *) dst_bytes,
-++		dst_stride >> 2,
-++		(uint32_t *) src_bytes,
-++		src_stride >> 2);
-+ 	return TRUE;
-+     default:
-+ 	return FALSE;
-+-- 
-+1.6.2.4
++# The NVidia driver requires Xinerama support in the X server. Ion uses it.
++XINERAMA = "${@['--disable-xinerama','--enable-xinerama'][bb.data.getVar('MACHINE',d) in ['ion']]}"
 +
-diff --git a/recipes/xorg-lib/pixman_0.17.4.bb b/recipes/xorg-lib/pixman_0.17.4.bb
-new file mode 100644
-index 0000000..b648219
---- /dev/null
-+++ b/recipes/xorg-lib/pixman_0.17.4.bb
-@@ -0,0 +1,29 @@
-+SECTION = "libs"
-+PRIORITY = "optional"
-+DESCRIPTION = "Low-level pixel manipulation library."
-+LICENSE = "X11"
++EXTRA_OECONF += " --enable-config-hal ${XINERAMA} --disable-kdrive --disable-xephyr --disable-xsdl --disable-xfake --disable-xfbdev --disable-dmx"
++EXTRA_OECONF += " --disable-glx-tls --enable-dri2 --disable-unit-tests "
 +
-+DEFAULT_PREFERENCE = "-1"
-+DEFAULT_PREFERENCE_angstrom = "1"
-+DEFAULT_PREFERENCE_shr = "1"
-+
-+BBCLASSEXTEND="native"
-+
-+SRC_URI = "http://cairographics.org/releases/pixman-${PV}.tar.gz \
-+           file://0001-Dropped-delegation-support-for-pixman_blt.patch;patch=1 \
-+           file://0002-Test-program-for-pixman_blt-function.patch;patch=1 \
-+           file://0003-Generic-C-implementation-of-pixman_blt-with-overlapp.patch;patch=1 \
-+           file://0004-Support-of-overlapping-src-dst-for-pixman_blt_mmx.patch;patch=1 \
-+           file://0005-Support-of-overlapping-src-dst-for-pixman_blt_sse2.patch;patch=1 \
-+           file://0006-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch;patch=1 \
-+          "
-+
-+inherit autotools_stage
-+
-+NEON = " --disable-arm-neon "
-+NEON_armv7a = ""
-+
-+EXTRA_OECONF = "${NEON}"
-+
-+AUTOTOOLS_STAGE_PKGCONFIG = "1"
-+
++export LDFLAGS += " -ldl "
 -- 
 1.6.6
 
