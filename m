@@ -1,37 +1,38 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail-gx0-f227.google.com ([209.85.217.227])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NXen8-0002ir-NW
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NXiRp-0000Ty-5T
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jan 2010 18:56:33 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NXekx-0008Kb-U0 for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jan 2010 12:54:16 -0500
-Date: Wed, 20 Jan 2010 12:53:26 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4B5676D4.1080106@balister.org>
-Message-ID: <alpine.LFD.2.00.1001201252430.25238@localhost>
-References: <4B5676D4.1080106@balister.org>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Wed, 20 Jan 2010 22:50:48 +0100
+Received: by gxk27 with SMTP id 27so371062gxk.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Jan 2010 13:48:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=/gjr99mk5PWZ4tjadmfuWKPXmZIfy3FN+X6qgXO9C8k=;
+	b=YrpzKMNAHkdII1/I9SUIGkPE9d6y1YWYlurkuUR7kUxnBMO1kHK0iKmrQK2DZGOHBP
+	44MuMGO26QpIftnpapSCddoTjUTXqRyVWIHDemCxsetTP8f5X1XUN+BCbJGwwbF3er6G
+	YHVAACoGdLPBUgIpHdB75RLz3A7rd7QQrv930=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=D6rYULybfvuvW64XeY15kMHCxBr7DD07zA+xrnSC+YlDpq6K0mzxwZDSUML/SvurhU
+	2qrP+6u/NudJUOO98beAO9GE0UT/6/AwK/+fGzycnSxEvNtvqqZwlSweDj5lvkDQuEUR
+	mZa3FvAwpat5h/OPa3fuD2wJd4iEPJRkreM38=
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+Received: by 10.101.138.5 with SMTP id q5mr808594ann.158.1264024107989; Wed, 
+	20 Jan 2010 13:48:27 -0800 (PST)
+In-Reply-To: <fca63bcf1001200825q63ec4375w8d2a6f35359284c0@mail.gmail.com>
+References: <fca63bcf1001200825q63ec4375w8d2a6f35359284c0@mail.gmail.com>
+Date: Wed, 20 Jan 2010 22:48:27 +0100
+Message-ID: <ac9c93b11001201348s5238e4e7h7b775e4aacd61fdf@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.217.227
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: gnome-games builds again
+Subject: Re: libxml-perl (new recipe) problems (make test)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,28 +46,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jan 2010 17:56:34 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 20 Jan 2010 21:50:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, 19 Jan 2010, Philip Balister wrote:
+2010/1/20 Michael Lippautz <michael.lippautz@gmail.com>:
+> Hi all,
+>
+> Since oe was missing an libxml-perl module I tried to it myself. After
+> looking at some other modules, I created the recipe attached.
+>
+> The problem is that Makefile.PL failes because of some dynamic loading error.
+>
+> | Can't load 'blib/arch/auto/Conftest/Conftest.so' for module
+> Conftest: blib/arch/auto/Conftest/Conftest.so: wrong ELF class:
+> ELFCLASS32 at /home/mlippautz/oe/tmp/staging/x86_64-linux/usr/lib/perl/5.8.8/DynaLoader.pm
+> line 230.
+>
+> I can't think of why conftest should become a 32 bit (?) library. I am
+> using 64bit gentoo as my workstation and the oe tree also contains
+> x64_64 stagings dirs.
+>
+> regards,
+> Michael
 
-> Henning tracked down a problem in the libsdl sdl.m4 macro and pushed a fix.
-> gnome-games builds on my F11 box now. Still having issues with mkubifs though
-> :)
+Michael,
 
-  by the way, where is mkubifs coming from?  i see no such recipe in
-the dev branch.  am i just looking in the wrong place?
+Thanks for your contribution.
+I have no idea why things fail for you. Might be because you need the
+native package too.
 
-rday
---
+But the real bad news is that the recipe already exist (in unstable that is)
+It is in recipes/perl/libxml-libxml-perl_1.70.bb
 
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
+Actually this one looks very identical to yours.
+And wrt the name: the convention is that all perl lib recipe and as
+name start with lib then followed by the name in lower case foolowed
+by -perl and the verison number..
+Hence XML-LibXML will be in libxml-libxml-perl_1.70.bb.
 
-            Linux Consulting, Training and Kernel Pedantry.
+I hope the existence of the recipe does not disappoint you. If you
+want to have a stab at another perl module feel free to try to make a
+perl recipe for Tk.
+Here's a starter, but it had some issues that I forgot about:
 
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+libtk-perl_804.028.bb
+
+DESCRIPTION = "Tk - An overview of an Object Oriented Tk8 extension for perl5"
+SECTION = "libs"
+LICENSE = "Unknown"
+PR = "r0"
+
+SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SR/SREZIC/Tk-${PV}.tar.gz"
+
+S = "${WORKDIR}/Tk-${PV}"
+
+inherit cpan
+
+BBCLASSEXTEND="native"
+
+
+Best regards & have fun!
+Frans.
 
 
