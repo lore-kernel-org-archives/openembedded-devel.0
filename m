@@ -1,39 +1,35 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail-bw0-f220.google.com ([209.85.218.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NXcs7-0000Yn-79
+	(envelope-from <michael.lippautz@gmail.com>) id 1NXdPS-0006kI-SM
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jan 2010 16:53:35 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NXcpv-00047W-0R for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jan 2010 10:51:15 -0500
-Date: Wed, 20 Jan 2010 10:50:29 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4B56F684.7050108@balister.org>
-Message-ID: <alpine.LFD.2.00.1001201049300.22711@localhost>
-References: <4B5676D4.1080106@balister.org>
-	<alpine.LFD.2.00.1001200229430.10329@localhost>
-	<4B56F684.7050108@balister.org>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Wed, 20 Jan 2010 17:28:01 +0100
+Received: by bwz20 with SMTP id 20so243862bwz.14
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Jan 2010 08:25:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=lCgFhaZHa4IZfA+6yChRztk+3VxolhbjW2KeWTkVWLM=;
+	b=icnLPTWTYghv0sogqS7OV0uCkCXhEbPgZlVW7etJG7znVcTj/pLCFPdnWd/hTh3HC4
+	KN7+RXZNg95220D8SoFwlep5U4SpfZdzLuuxVSbdnwjuI7V9V5oRSNmP9nnVT9xiAJcy
+	6jqyKYCycK9u0VuWRIlnofgaoumkmRUCo0Y44=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=dLTUonJEwqW5E2VP5AC4KzHPFO/rtPmGO9nmTitKJdm5FR3iFQWVjr323nfv4/CcPF
+	lKbUVMrXgSzW6DYvpSGANT72XomoQxv2KFGj3tpLCsy6q0WHb0JWc+k0tLw/Ycgw3jV+
+	CN0Z8l2XdG37ihZERIT9UUAoAr860cBJlrCKA=
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+Received: by 10.204.32.72 with SMTP id b8mr86783bkd.203.1264004740169; Wed, 20 
+	Jan 2010 08:25:40 -0800 (PST)
+Date: Wed, 20 Jan 2010 17:25:40 +0100
+Message-ID: <fca63bcf1001200825q63ec4375w8d2a6f35359284c0@mail.gmail.com>
+From: Michael Lippautz <michael.lippautz@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.218.220
+X-SA-Exim-Mail-From: michael.lippautz@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: gnome-games builds again
+Subject: libxml-perl (new recipe) problems (make test)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,42 +43,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jan 2010 15:53:35 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 20 Jan 2010 16:28:02 -0000
+X-Groupsio-MsgNum: 15938
+Content-Type: multipart/mixed; boundary=0003255528ce8840ec047d9b092d
 
-On Wed, 20 Jan 2010, Philip Balister wrote:
+--0003255528ce8840ec047d9b092d
+Content-Type: text/plain; charset=ISO-8859-1
 
-> On 01/20/2010 02:30 AM, Robert P. J. Day wrote:
-> > On Tue, 19 Jan 2010, Philip Balister wrote:
-> >
-> > > Henning tracked down a problem in the libsdl sdl.m4 macro and pushed a
-> > > fix.
-> > > gnome-games builds on my F11 box now. Still having issues with mkubifs
-> > > though
-> > > :)
-> >
-> >    whoo hoo!  i can confirm that gnome-games finally builds on my
-> > f12 system.  i'll check the git log to see what fixed it, i'm
-> > definitely curious as to what it was that allowed it to build on
-> > any other distro but fedora.
->
-> It looked like (from what Henning said) that the sdl.m4 macron ran
-> sdl-config from the build machine, so if you installed sdl on the
-> build machine you were in trouble.
+Hi all,
 
-  and that's exactly what was happening here -- i had SDL-devel
-installed, which provided a native sdl-config.
+Since oe was missing an libxml-perl module I tried to it myself. After
+looking at some other modules, I created the recipe attached.
 
-rday
---
+The problem is that Makefile.PL failes because of some dynamic loading error.
 
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
+| Can't load 'blib/arch/auto/Conftest/Conftest.so' for module
+Conftest: blib/arch/auto/Conftest/Conftest.so: wrong ELF class:
+ELFCLASS32 at /home/mlippautz/oe/tmp/staging/x86_64-linux/usr/lib/perl/5.8.8/DynaLoader.pm
+line 230.
 
-            Linux Consulting, Training and Kernel Pedantry.
+I can't think of why conftest should become a 32 bit (?) library. I am
+using 64bit gentoo as my workstation and the oe tree also contains
+x64_64 stagings dirs.
 
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+regards,
+Michael
 
+--0003255528ce8840ec047d9b092d
+Content-Type: application/octet-stream; name="libxml-perl_1.70.bb"
+Content-Disposition: attachment; filename="libxml-perl_1.70.bb"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_g4obnjeb0
 
+REVTQ1JJUFRJT04gPSAiWE1ML0xpYlhNTCIKU0VDVElPTiA9ICJsaWJzIgpMSUNFTlNFID0gIiIK
+UFIgPSAicjAiCgpERVBFTkRTKz0ibGlieG1sMiBsaWJ4bWwyLW5hdGl2ZSIKClNSQ19VUkkgPSAi
+aHR0cDovL3NlYXJjaC5jcGFuLm9yZy9DUEFOL2F1dGhvcnMvaWQvUC9QQS9QQUpBUy9YTUwtTGli
+WE1MLSR7UFZ9LnRhci5nejtuYW1lPWxpYnhtbCIKClNSQ19VUklbbGlieG1sLm1kNXN1bV0gPSAi
+MzNkNDI5NGY3MDhlMjBjMjk4Y2ZlNTM0ZDExNjY4NDQiClNSQ19VUklbbGlieG1sLnNoYTI1NnN1
+bV0gPSAiNTNlNmNmMDY3NzJiYTlkODUwNTVkYzZlNDQ4OGRiZDg3NmQyMzc2ZTQ4ZWYzNTc4ZmE3
+MzI0NmVlOThiM2JhMCIKClMgPSAiJHtXT1JLRElSfS9YTUwtTGliWE1MLSR7UFZ9IgoKRVhUUkFf
+Q1BBTkZMQUdTID0gIkRFQlVHPTEgSU5DPS1JJHtTVEFHSU5HX0xJQkRJUn0gTElCUz0tTCR7U1RB
+R0lOR19MSUJESVJ9IgoKaW5oZXJpdCBjcGFuCgo=
+
+--0003255528ce8840ec047d9b092d--
