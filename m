@@ -1,28 +1,37 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NXUWf-0000qF-4e
+	(envelope-from <rpjday@crashcourse.ca>) id 1NXV4e-0001go-9Y
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jan 2010 07:58:52 +0100
-Received: (qmail 31159 invoked by uid 813007); 20 Jan 2010 06:56:35 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 20 Jan 2010 06:56:35 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	Wed, 20 Jan 2010 08:33:59 +0100
+Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.241.187] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NXV2T-0005yQ-1O for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Jan 2010 02:31:41 -0500
+Date: Wed, 20 Jan 2010 02:30:52 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Jan 2010 07:56:01 +0100
-User-Agent: KMail/1.12.4 (Linux/2.6.33-rc2-00268-g45d28b0; KDE/4.3.4; x86_64; ;
-	)
-References: <hj5604g6@ger.gmane.org>
-	<1263935073-12359-1-git-send-email-ynezz@true.cz>
-In-Reply-To: <1263935073-12359-1-git-send-email-ynezz@true.cz>
+In-Reply-To: <4B5676D4.1080106@balister.org>
+Message-ID: <alpine.LFD.2.00.1001200229430.10329@localhost>
+References: <4B5676D4.1080106@balister.org>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
-Message-Id: <201001200756.02141.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH v2] xinput_calibrator: switch to autotools
+Subject: Re: gnome-games builds again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,24 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jan 2010 06:58:52 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 20 Jan 2010 07:33:59 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Dnia wtorek, 19 stycznia 2010 o 22:04:33 Petr =C5=A0tetiar napisa=C5=82(a):
-> Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
+On Tue, 19 Jan 2010, Philip Balister wrote:
 
-imported, build tested, acked, pushed
+> Henning tracked down a problem in the libsdl sdl.m4 macro and pushed a fix.
+> gnome-games builds on my F11 box now. Still having issues with mkubifs though
+> :)
 
-Thanks Petr for this patch.
+  whoo hoo!  i can confirm that gnome-games finally builds on my f12
+system.  i'll check the git log to see what fixed it, i'm definitely
+curious as to what it was that allowed it to build on any other distro
+but fedora.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+  all that's left now is mplayer.
 
+rday
+--
 
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
