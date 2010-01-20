@@ -1,31 +1,23 @@
-Received: from proxy3.bredband.net ([195.54.101.73])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1NXOH0-0000C5-LP
+	(envelope-from <philip@balister.org>) id 1NXRB3-0007UD-1s
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jan 2010 01:18:17 +0100
-Received: from ipb2.telenor.se (195.54.127.165) by proxy3.bredband.net
-	(7.3.140.3)
-	id 4AD3E1BA026C578A for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jan 2010 01:15:59 +0100
-X-SMTPAUTH-B2: 
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: ApwOANLZVUtT4zqIPGdsb2JhbAAIm24BAQEBN7wchDME
-X-IronPort-AV: E=Sophos;i="4.49,307,1262559600"; d="scan'208";a="27841346"
-Received: from c-883ae353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.224]) ([83.227.58.136])
-	by ipb2.telenor.se with ESMTP; 20 Jan 2010 01:15:59 +0100
-Message-ID: <4B564B3D.7020108@atmel.com>
-Date: Wed, 20 Jan 2010 01:15:57 +0100
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Organization: Atmel Nordic AB
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	Wed, 20 Jan 2010 04:24:20 +0100
+Received: (qmail 13169 invoked by uid 1003); 20 Jan 2010 03:21:59 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 20 Jan 2010 03:21:58 -0000
+Message-ID: <4B5676D4.1080106@balister.org>
+Date: Tue, 19 Jan 2010 22:21:56 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 195.54.101.73
-X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH v2] Enable bmp and JPEG files for fbv
+Subject: gnome-games builds again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,90 +31,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jan 2010 00:18:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 20 Jan 2010 03:24:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Enable bmp and JPEG files for fbv
+Henning tracked down a problem in the libsdl sdl.m4 macro and pushed a 
+fix. gnome-games builds on my F11 box now. Still having issues with 
+mkubifs though :)
 
-Previously only supported PNG.
-Ungif still not supported
-Remove unneccesary whitespace
-Do not install manuals to target
-
-Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
----
- recipes/fbv/fbv-1.0b/fbv-1.0b.patch |   12 ++++++++++++
- recipes/fbv/fbv_1.0b.bb             |   21 +++++++++++----------
- 2 files changed, 23 insertions(+), 10 deletions(-)
- create mode 100644 recipes/fbv/fbv-1.0b/fbv-1.0b.patch
-
-diff --git a/recipes/fbv/fbv-1.0b/fbv-1.0b.patch
-b/recipes/fbv/fbv-1.0b/fbv-1.0b.patch
-new file mode 100644
-index 0000000..6fbd1fb
---- /dev/null
-+++ b/recipes/fbv/fbv-1.0b/fbv-1.0b.patch
-@@ -0,0 +1,12 @@
-+diff -urN fbv-1.0b-0rig/Makefile fbv-1.0b/Makefile
-+--- fbv-1.0b-0rig/Makefile	2009-08-20 00:33:58.000000000 +0200
-++++ fbv-1.0b/Makefile	2009-08-20 00:34:16.000000000 +0200
-+@@ -12,7 +12,7 @@
-+ OBJECTS	= ${SOURCES:.c=.o}
-+
-+ OUT	= fbv
-+-#LIBS	= -lungif -L/usr/X11R6/lib -ljpeg -lpng
-++LIBS	= -L/usr/lib -ljpeg -lpng #-lungif
-+
-+ all: $(OUT)
-+ 	@echo Build DONE.
-diff --git a/recipes/fbv/fbv_1.0b.bb b/recipes/fbv/fbv_1.0b.bb
-index 04c7066..e593eb4 100644
---- a/recipes/fbv/fbv_1.0b.bb
-+++ b/recipes/fbv/fbv_1.0b.bb
-@@ -1,25 +1,26 @@
- DESCRIPTION = "Frame Buffer Viewer"
- LICENSE = "GPL"
--DEPENDS = "libpng"
--PR = "r1"
-+DEPENDS = "libpng jpeg"
-+PR = "r2"
-
- SRC_URI = "http://s-tech.elsat.net.pl/fbv/fbv-1.0b.tar.gz \
--	   file://cross_compile.patch;patch=1"
-+	file://cross_compile.patch;patch=1 \
-+	file://fbv-1.0b.patch;patch=1 \
-+	"
-
- do_configure() {
--	CC="${CC}" ./configure --without-libungif --without-bmp \
--		--without-libjpeg
-+	CC="${CC}" ./configure --without-libungif
- }
-
- do_compile() {
- 	oe_runmake CFLAGS="-O2 -Wall -D_GNU_SOURCE -D__KERNEL_STRICT_NAMES" \
- 		CC="${CC}"
- }
-+
- do_install() {
- 	install -d ${D}${bindir}
--        install -m 0755 fbv ${D}${bindir}
--
--        # man
--        install -d ${D}${mandir}/man1/
--        install -m 0644 fbv.1 ${D}${mandir}/man1/fbv.1
-+	install -m 0755 fbv ${D}${bindir}
- }
-+
-+PACKAGES = "fbv"
-+
--- 
-1.6.0.2
-
--- 
-Best Regards
-Ulf Samuelsson
-
+Philip
 
 
