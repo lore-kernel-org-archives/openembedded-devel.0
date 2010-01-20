@@ -1,37 +1,45 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail-bw0-f226.google.com ([209.85.218.226])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NXV4e-0001go-9Y
+	(envelope-from <d.vinokuroff@gmail.com>) id 1NXVGY-0002h5-F4
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jan 2010 08:33:59 +0100
-Received: from cpe002129687b04-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.241.187] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NXV2T-0005yQ-1O for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jan 2010 02:31:41 -0500
-Date: Wed, 20 Jan 2010 02:30:52 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4B5676D4.1080106@balister.org>
-Message-ID: <alpine.LFD.2.00.1001200229430.10329@localhost>
-References: <4B5676D4.1080106@balister.org>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+	Wed, 20 Jan 2010 08:46:17 +0100
+Received: by bwz26 with SMTP id 26so15113bwz.27
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Jan 2010 23:43:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:references:in-reply-to
+	:content-type:content-transfer-encoding;
+	bh=/ZghX3ahQlubk2gjVs+YuLAMUoB10AsFRgZLxYqv8Zs=;
+	b=GNhTmZ3oor+9fekBhSSI3TEPTS5irjr4c1QVVZssGIfcax/zvJpqLgrWs4Y4MnlkMN
+	S2HudA/Tv1yrHHSVGhH7PxfFG+Xh+gx0giY1lukpOrVEPOoKlltQebiXEjef2GVLSpik
+	umolGEJN991hWpj672DGynI04UnHTdrVh0vsw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=t7r/5x7bnCSWr+Ad6GAlpWNPgTSdF+ehumFl6XgH2QC5n6tlGo0izN1+SjPMVxRzV7
+	3XV54IbmKd8axYfAWHtq38bAoElMJyiue1rqjwlE0mQkTGgKl01nBnvKdViX9MuE/OZw
+	NkVuYOMTGl8Eixk0ZgZcxCge+9le2hk8jJtFc=
+Received: by 10.204.33.20 with SMTP id f20mr1946250bkd.196.1263973438073;
+	Tue, 19 Jan 2010 23:43:58 -0800 (PST)
+Received: from ?192.168.0.100? ([94.180.15.197])
+	by mx.google.com with ESMTPS id 16sm1417543bwz.3.2010.01.19.23.43.56
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 19 Jan 2010 23:43:57 -0800 (PST)
+Message-ID: <4B56B43C.1010909@gmail.com>
+Date: Wed, 20 Jan 2010 12:43:56 +0500
+From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.8pre) Gecko/20100104 Shredder/3.0.1pre
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+To: openembedded-devel@lists.openembedded.org
+References: <4B55E183.3090408@gmail.com>
+In-Reply-To: <4B55E183.3090408@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.218.226
+X-SA-Exim-Mail-From: d.vinokuroff@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: gnome-games builds again
+Subject: Re: How to choose locales?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,32 +53,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jan 2010 07:33:59 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 20 Jan 2010 07:46:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, 19 Jan 2010, Philip Balister wrote:
+I should set IMAGE_LINGUAS = "en-us" in image recipe. Now it's only 
+en_US in locale dir, as I want.
 
-> Henning tracked down a problem in the libsdl sdl.m4 macro and pushed a fix.
-> gnome-games builds on my F11 box now. Still having issues with mkubifs though
-> :)
+P.S.: sorry for double post, thunderbird error.
 
-  whoo hoo!  i can confirm that gnome-games finally builds on my f12
-system.  i'll check the git log to see what fixed it, i'm definitely
-curious as to what it was that allowed it to build on any other distro
-but fedora.
+On 19.01.2010 21:44 Dmitry Vinokurov wrote:
+> Hello,
+>
+> How can I choose locales, generated to /usr/lib/locale? Tried to set:
+> ENABLE_BINARY_LOCALE_GENERATION = "1"
+> GLIBC_GENERATE_LOCALES = "en_US.ISO_646.BASIC"
+>
+> but still de_DE,  en_GB,  fr_FR in locales dir of image tarball. 
+> 'bitbake -e' says that vars are exactly as I set it.
+>
+> Am I setting right variables?
+>
+> Thanks
+>
+-- 
+Best Regards,
+Dmitry Vinokurov
+<d.vinokuroff@gmail.com>
 
-  all that's left now is mplayer.
-
-rday
---
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
 
 
