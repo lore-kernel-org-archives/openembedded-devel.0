@@ -1,27 +1,24 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from out4.bezeqint.net ([192.115.188.213])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1NXVxb-00017g-9o
+	(envelope-from <boaz@segol.net>) id 1NXW7j-0001LL-It
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jan 2010 09:30:46 +0100
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id 5A5D71D3607A; Wed, 20 Jan 2010 09:28:27 +0100 (CET)
-Date: Wed, 20 Jan 2010 09:28:27 +0100
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+	Wed, 20 Jan 2010 09:41:14 +0100
+Received: from [192.168.1.107] (bzq-109-67-29-87.red.bezeqint.net
+	[109.67.29.87])
+	by out4.bezeqint.net (Postfix) with ESMTPA id CD93AB0980E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Jan 2010 10:17:46 +0200 (IST)
+From: boaz <boaz@segol.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100120082827.GJ18793@ibawizard.net>
-References: <hj5604g6@ger.gmane.org>
-	<1263935073-12359-1-git-send-email-ynezz@true.cz>
-	<201001200756.02141.marcin@juszkiewicz.com.pl>
-	<4B56B9F5.9060204@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <4B56B9F5.9060204@gmail.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+Date: Wed, 20 Jan 2010 10:33:16 +0200
+Message-Id: <1263976396.5407.3.camel@laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 192.115.188.213
+X-SA-Exim-Mail-From: boaz@segol.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH v2] xinput_calibrator: switch to autotools
+Subject: glibc_2.9.bb QA error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,22 +32,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Jan 2010 08:30:46 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 20 Jan 2010 08:41:14 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Marco Cavallini <koansoftware@gmail.com> [2010-01-20 09:08:21]:
+Hi,
 
-> Marcin Juszkiewicz ha scritto, Il 20/01/2010 07:56:
-> 
-> > imported, build tested, acked, pushed
-> 
-> are you sure it was pushed?
+I am not able to get my bitbake to work.
+It is complaining about glibc_2.9 Any idea how to fix it?
 
-Indeed, but in the temp[1] branch :-)
+NOTE: Running task 1509 of 2067 (ID:
+303, /home/usr/OE/oe-dev/recipes/linux-libc-headers/linux-libc-headers_2.6.23.bb, do_package)
+NOTE: Running task 1510 of 2067 (ID:
+159, /home/usr/OE/oe-dev/recipes/glibc/glibc_2.9.bb, do_package)
+NOTE: generation of binary locales disabled. this may break i18n!
+NOTE: the following files were installed but not shipped in any package:
+NOTE:   /etc/rpc
+NOTE: Multiple libraries (libnss_nisplus.so.2, libnss_nis.so.2,
+libnss_hesiod.so.2) found, but LEAD_SONAME 'libc.so' doesn't match any
+of them
+NOTE: package glibc-dbg skipped
+ERROR: QA Issue with nscd: No GNU_HASH in the elf binary:
+'/home/usr/OE/Temp/work/armv5te-none-linux-gnueabi/glibc-2.9-r35.2/install/nscd/usr/sbin/nscd'
+ERROR: QA run found fatal errors. Please consider fixing them.
+ERROR: Error in
+executing: /home/usr/OE/oe-dev/recipes/glibc/glibc_2.9.bb
+ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
+ERROR: Printing the environment of the function
+ERROR: Error in
+executing: /home/usr/OE/oe-dev/recipes/glibc/glibc_2.9.bb
+ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
+ERROR: Printing the environment of the function
+ERROR: Error in
+executing: /home/usr/OE/oe-dev/recipes/glibc/glibc_2.9.bb
+ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
+ERROR: Printing the environment of the function
+ERROR: Error in
+executing: /home/usr/OE/oe-dev/recipes/glibc/glibc_2.9.bb
+ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
+ERROR: Printing the environment of the function
+ERROR: Build of /home/usr/OE/oe-dev/recipes/glibc/glibc_2.9.bb
+do_package failed
+ERROR: Task 159 (/home/usr/OE/oe-dev/recipes/glibc/glibc_2.9.bb,
+do_package) failed
+NOTE: Tasks Summary: Attempted 1509 tasks of which 1366 didn't need to
+be rerun and 1 failed.
+ERROR: '/home/usr/OE/oe-dev/recipes/glibc/glibc_2.9.bb' failed
 
-1. http://lists.linuxtogo.org/pipermail/openembedded-commits/2010-January/041115.html
+BR
+Boaz
 
--- ynezz
 
 
