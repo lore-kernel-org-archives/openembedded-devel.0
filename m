@@ -1,28 +1,31 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from proxy3.bredband.net ([195.54.101.73])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NXNXA-0003kK-R3 for openembedded-devel@lists.openembedded.org;
-	Wed, 20 Jan 2010 00:30:55 +0100
-Received: from f053039068.adsl.alicedsl.de ([78.53.39.68]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NXNV1-0005H8-M7 for openembedded-devel@lists.openembedded.org;
-	Tue, 19 Jan 2010 23:28:39 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1NXOH0-0000C5-LP
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Jan 2010 01:18:17 +0100
+Received: from ipb2.telenor.se (195.54.127.165) by proxy3.bredband.net
+	(7.3.140.3)
+	id 4AD3E1BA026C578A for openembedded-devel@lists.openembedded.org;
+	Wed, 20 Jan 2010 01:15:59 +0100
+X-SMTPAUTH-B2: 
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: ApwOANLZVUtT4zqIPGdsb2JhbAAIm24BAQEBN7wchDME
+X-IronPort-AV: E=Sophos;i="4.49,307,1262559600"; d="scan'208";a="27841346"
+Received: from c-883ae353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.224]) ([83.227.58.136])
+	by ipb2.telenor.se with ESMTP; 20 Jan 2010 01:15:59 +0100
+Message-ID: <4B564B3D.7020108@atmel.com>
+Date: Wed, 20 Jan 2010 01:15:57 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1263943534.3181.19.camel@mattotaupa.wohnung.familie-menzel.net>
-References: <4B563AED.6020504@atmel.com>
-	<1263943534.3181.19.camel@mattotaupa.wohnung.familie-menzel.net>
-Date: Wed, 20 Jan 2010 00:28:37 +0100
-Message-ID: <1263943717.3181.20.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 195.54.101.73
+X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Build fbv with JPEG and PNG enabled
+Subject: [PATCH v2] Enable bmp and JPEG files for fbv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,126 +39,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Jan 2010 23:30:55 -0000
-X-Groupsio-MsgNum: 15914
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-9gpHlWmh4zwFOGO2ccmF"
+X-List-Received-Date: Wed, 20 Jan 2010 00:18:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---=-9gpHlWmh4zwFOGO2ccmF
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Enable bmp and JPEG files for fbv
 
-Am Mittwoch, den 20.01.2010, 00:25 +0100 schrieb Paul Menzel:
-> Am Mittwoch, den 20.01.2010, 00:06 +0100 schrieb Ulf Samuelsson:
-> > Build fbv with jpeg and png enabled
-> >=20
-> > Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-> > ---
-> >  recipes/fbv/fbv-1.0b/fbv-1.0b.patch |   12 ++++++++++++
-> >  recipes/fbv/fbv_1.0b.bb             |   23 +++++++++++++++--------
-> >  2 files changed, 27 insertions(+), 8 deletions(-)
-> >  create mode 100644 recipes/fbv/fbv-1.0b/fbv-1.0b.patch
-> >=20
-> > diff --git a/recipes/fbv/fbv-1.0b/fbv-1.0b.patch
-> > b/recipes/fbv/fbv-1.0b/fbv-1.0b.patch
-> > new file mode 100644
-> > index 0000000..6fbd1fb
-> > --- /dev/null
-> > +++ b/recipes/fbv/fbv-1.0b/fbv-1.0b.patch
-> > @@ -0,0 +1,12 @@
-> > +diff -urN fbv-1.0b-0rig/Makefile fbv-1.0b/Makefile
-> > +--- fbv-1.0b-0rig/Makefile	2009-08-20 00:33:58.000000000 +0200
-> > ++++ fbv-1.0b/Makefile	2009-08-20 00:34:16.000000000 +0200
-> > +@@ -12,7 +12,7 @@
-> > + OBJECTS	=3D ${SOURCES:.c=3D.o}
-> > +
-> > + OUT	=3D fbv
-> > +-#LIBS	=3D -lungif -L/usr/X11R6/lib -ljpeg -lpng
-> > ++LIBS	=3D -L/usr/lib -ljpeg -lpng #-lungif
-> > +
-> > + all: $(OUT)
-> > + 	@echo Build DONE.
-> > diff --git a/recipes/fbv/fbv_1.0b.bb b/recipes/fbv/fbv_1.0b.bb
-> > index 04c7066..4a5bd6b 100644
-> > --- a/recipes/fbv/fbv_1.0b.bb
-> > +++ b/recipes/fbv/fbv_1.0b.bb
-> > @@ -1,25 +1,32 @@
-> >  DESCRIPTION =3D "Frame Buffer Viewer"
-> >  LICENSE =3D "GPL"
-> > -DEPENDS =3D "libpng"
-> > +DEPENDS =3D "libpng jpeg"
-> >  PR =3D "r1"
->=20
-> Should not this be increased because of the changed `DEPENDS`? Why is
-> `PR` not just a number?
+Previously only supported PNG.
+Ungif still not supported
+Remove unneccesary whitespace
+Do not install manuals to target
 
-Sorry, please ignore that second question. It is late!
+Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+---
+ recipes/fbv/fbv-1.0b/fbv-1.0b.patch |   12 ++++++++++++
+ recipes/fbv/fbv_1.0b.bb             |   21 +++++++++++----------
+ 2 files changed, 23 insertions(+), 10 deletions(-)
+ create mode 100644 recipes/fbv/fbv-1.0b/fbv-1.0b.patch
 
-> >  SRC_URI =3D "http://s-tech.elsat.net.pl/fbv/fbv-1.0b.tar.gz \
-> > -	   file://cross_compile.patch;patch=3D1"
-> > +	file://cross_compile.patch;patch=3D1 \
-> > +	file://fbv-1.0b.patch;patch=3D1 \
-> > +	"
-> > +
-> > +#inherit autotools
->=20
-> Please do not comment out code. Everything is under versioning control.
->=20
-> >  do_configure() {
-> > -	CC=3D"${CC}" ./configure --without-libungif --without-bmp \
-> > -		--without-libjpeg
-> > +	CC=3D"${CC}" ./configure --without-libungif
-> >  }
-> >=20
-> >  do_compile() {
-> >  	oe_runmake CFLAGS=3D"-O2 -Wall -D_GNU_SOURCE -D__KERNEL_STRICT_NAMES"=
- \
-> >  		CC=3D"${CC}"
-> >  }
-> > +
-> >  do_install() {
-> >  	install -d ${D}${bindir}
-> > -        install -m 0755 fbv ${D}${bindir}
-> > +	install -m 0755 fbv ${D}${bindir}
->=20
-> What changed?
->=20
-> > -        # man
-> > -        install -d ${D}${mandir}/man1/
-> > -        install -m 0644 fbv.1 ${D}${mandir}/man1/fbv.1
-> > +# man
-> > +#	install -d ${D}${mandir}/man1/
-> > +#	install -m 0644 fbv.1 ${D}${mandir}/man1/fbv.1
-> >  }
->=20
-> Why did you disable this? If it is not needed, please do it in a
-> separate patch or at least mention it in the commit message.
->=20
-> > +
-> > +PACKAGES =3D "fbv"
-> > +
->=20
->=20
-> Thanks,
->=20
-> Paul
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+diff --git a/recipes/fbv/fbv-1.0b/fbv-1.0b.patch
+b/recipes/fbv/fbv-1.0b/fbv-1.0b.patch
+new file mode 100644
+index 0000000..6fbd1fb
+--- /dev/null
++++ b/recipes/fbv/fbv-1.0b/fbv-1.0b.patch
+@@ -0,0 +1,12 @@
++diff -urN fbv-1.0b-0rig/Makefile fbv-1.0b/Makefile
++--- fbv-1.0b-0rig/Makefile	2009-08-20 00:33:58.000000000 +0200
+++++ fbv-1.0b/Makefile	2009-08-20 00:34:16.000000000 +0200
++@@ -12,7 +12,7 @@
++ OBJECTS	= ${SOURCES:.c=.o}
++
++ OUT	= fbv
++-#LIBS	= -lungif -L/usr/X11R6/lib -ljpeg -lpng
+++LIBS	= -L/usr/lib -ljpeg -lpng #-lungif
++
++ all: $(OUT)
++ 	@echo Build DONE.
+diff --git a/recipes/fbv/fbv_1.0b.bb b/recipes/fbv/fbv_1.0b.bb
+index 04c7066..e593eb4 100644
+--- a/recipes/fbv/fbv_1.0b.bb
++++ b/recipes/fbv/fbv_1.0b.bb
+@@ -1,25 +1,26 @@
+ DESCRIPTION = "Frame Buffer Viewer"
+ LICENSE = "GPL"
+-DEPENDS = "libpng"
+-PR = "r1"
++DEPENDS = "libpng jpeg"
++PR = "r2"
+
+ SRC_URI = "http://s-tech.elsat.net.pl/fbv/fbv-1.0b.tar.gz \
+-	   file://cross_compile.patch;patch=1"
++	file://cross_compile.patch;patch=1 \
++	file://fbv-1.0b.patch;patch=1 \
++	"
+
+ do_configure() {
+-	CC="${CC}" ./configure --without-libungif --without-bmp \
+-		--without-libjpeg
++	CC="${CC}" ./configure --without-libungif
+ }
+
+ do_compile() {
+ 	oe_runmake CFLAGS="-O2 -Wall -D_GNU_SOURCE -D__KERNEL_STRICT_NAMES" \
+ 		CC="${CC}"
+ }
++
+ do_install() {
+ 	install -d ${D}${bindir}
+-        install -m 0755 fbv ${D}${bindir}
+-
+-        # man
+-        install -d ${D}${mandir}/man1/
+-        install -m 0644 fbv.1 ${D}${mandir}/man1/fbv.1
++	install -m 0755 fbv ${D}${bindir}
+ }
++
++PACKAGES = "fbv"
++
+-- 
+1.6.0.2
+
+-- 
+Best Regards
+Ulf Samuelsson
 
 
---=-9gpHlWmh4zwFOGO2ccmF
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktWQCUACgkQPX1aK2wOHVj3kACfWhaNmqkYICrz/yL9eiNs/uIU
-InIAnROT/UNTcjKCEgu+eSY06X2Eqfxn
-=c8du
------END PGP SIGNATURE-----
-
---=-9gpHlWmh4zwFOGO2ccmF--
