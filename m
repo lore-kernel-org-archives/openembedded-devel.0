@@ -1,37 +1,47 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from fg-out-1718.google.com ([72.14.220.158])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NY6Ec-0007a2-UR for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 00:14:46 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NY6CO-0002A7-31
+	(envelope-from <raj.khem@gmail.com>) id 1NY6NS-0006Gu-1n
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 00:12:24 +0100
-Received: from p5b3b3748.dip.t-dialin.net ([91.59.55.72])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2010 00:12:24 +0100
-Received: from no2spam by p5b3b3748.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Fri, 22 Jan 2010 00:23:53 +0100
+Received: by fg-out-1718.google.com with SMTP id 19so259827fgg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2010 00:12:24 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 21 Jan 2010 15:21:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=Bndk6NLZSgPjfCBeEb3zs4WQtrNqcOPfFrse9VH32LA=;
+	b=khnbNFb2HCHt9a9TuEy+yTw4aHJk8Vu4LTo0mq4PFO/eV2u/hIDVR/8ZY+jtFXyrRw
+	8lAiyDKB5+lq7+t5O7v/zZtXZqJly0UJfs9JkxX3WpJ8PpH8lA9m54pUkLBLQ2GMdGHc
+	NF8zxwvvwd6pHvy+LDa3ZVKmNDAwB5YuFzOOw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=f/k5oUXgQyZ5dWzEKtl3tY99pQweWSPcbGz5y8bP1iruJhx6AM0FFiorSPRVvBQKWk
+	rIfxVEXZ3pM2mqTuPEf7KQsmqyArk03pCO3fxt37MhDNVMEcQQ5omyTZIbvt500Jbi0y
+	xzhs9thf6B74MT7QTUy6vzQsBKCvWHpvF/JA8=
+Received: by 10.87.76.30 with SMTP id d30mr3587122fgl.6.1264116094737;
+	Thu, 21 Jan 2010 15:21:34 -0800 (PST)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 12sm25421684fgg.22.2010.01.21.15.21.31
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 21 Jan 2010 15:21:33 -0800 (PST)
+Date: Thu, 21 Jan 2010 15:22:10 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Fri, 22 Jan 2010 00:11:54 +0100
-Message-ID: <hjan00$419$1@ger.gmane.org>
-References: <1264067024.3695.14.camel@mattotaupa.wohnung.familie-menzel.net>	<201001211102.11252.holger+oe@freyther.de>	<883120D4-C490-4713-B872-F02376E88CEE@vanille-media.de>	<hj9giu$mfp$1@ger.gmane.org>
-	<1264111223.7697.31.camel@utx.utx.cz>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b3748.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-In-Reply-To: <1264111223.7697.31.camel@utx.utx.cz>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100121232210.GB11015@gmail.com>
+References: <op.u6vw72i1mn1qzu@guohr-laptop-ubuntu>
+	<19c1b8a91001211410y19908564h7fe9aca3f81317ab@mail.gmail.com>
+	<4B58D410.2020100@techsol.ca>
+MIME-Version: 1.0
+In-Reply-To: <4B58D410.2020100@techsol.ca>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 72.14.220.158
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Getting patches committed
+Subject: Re: I realy think we should upgrade PREFERRED_VERSION_glibc to 2.9 in conf/distro/include/sane-toolchain.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,35 +55,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2010 23:14:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Jan 2010 23:23:53 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Stanislav Brabec wrote:
-> org.openembedded.open (or .staging or .public)
-
-funny thing.  I was discussing something like this with RP just when you
-sent this mail.  It's not as straightforward as it may sound, though.
-First of all, I think we'd need several, possibly unlimited number of
-FFA branches.  Second, RP and I agreed that security implications are a
-concern if we allow commit access completely uninhibited.
-
->> OE needs a stronger community culture.  Too many devs are just contempt
->> with "my stuff works fine for me".
+On (21/01/10 14:24), Dallas Foley wrote:
+> Khem Raj wrote:
+> >On Thu, Jan 21, 2010 at 5:32 AM, Guo Hongruan <camelguo@gmail.com> wrote:
+> >>Hi guys,
+> >> I think we should upgrade PREFERRED_VERSION_glibc from 2.6 to 2.9 in
+> >>conf/distro/include/sane-toolchain.inc. The reasons are:
 > 
-> Not as easy as it sounds. OE is a heterogeneous environment. Knowing
-> that things may break on some platform need non-trivial knowledge.
+> Although I haven't tried a build from scratch in a few weeks or so,
+> I have one known problem with glibc 2.9. I wonder if it's just me or
+> not. glibc 2.6.1 always works. On my armv4t board gpe-mini-browser2
+> always seg faults. I've tried different gcc and binutils
+> combinations. However, glibc 2.9 on armv5te (imx) or armv7a (omap)
+> work fine for me.
 
-If things are non-trivial, they should be reviewed.  If a committer is
-unsure, when in doubt, go for a review.
+You could try to backport armv4t-interworking.patch from eglibc/files
+that should help you will getting 2.9 up on armv4t. This patch is
+applied to 2.10.1 may be moving to 2.10.1 would be better than 2.9
+IMO
 
-I'm talking of things like new bb recipes that can really do no harm
-unless someone explicitly builds them.  There are still a number of them
-in the bug tracker that are 2, 3 or even more years old.  There really
-is no excuse for that IMHO, not even "I'm not interested in the recipe
-in question".  Recently, I closed a significant number of tickets with
-recipes that had been reinvented and committed by somebody else in the
-meantime.  What a waste of time on both sides
-
+-Khem
 
 
