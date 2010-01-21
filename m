@@ -1,23 +1,34 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1NXvym-00060a-D8
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NXw0C-00066c-PE for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Jan 2010 13:19:11 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NXvy0-0003tf-7u
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jan 2010 13:17:43 +0100
-Received: (qmail 22706 invoked by uid 1003); 21 Jan 2010 12:15:22 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 21 Jan 2010 12:15:22 -0000
-Message-ID: <4B584559.1090704@balister.org>
-Date: Thu, 21 Jan 2010 07:15:21 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
-MIME-Version: 1.0
+	Thu, 21 Jan 2010 13:16:52 +0100
+Received: from p5b3b3748.dip.t-dialin.net ([91.59.55.72])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Jan 2010 13:16:52 +0100
+Received: from no2spam by p5b3b3748.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Jan 2010 13:16:52 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Thu, 21 Jan 2010 13:16:26 +0100
+Message-ID: <hj9giu$mfp$1@ger.gmane.org>
 References: <1264067024.3695.14.camel@mattotaupa.wohnung.familie-menzel.net>	<201001211102.11252.holger+oe@freyther.de>
 	<883120D4-C490-4713-B872-F02376E88CEE@vanille-media.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5b3b3748.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 In-Reply-To: <883120D4-C490-4713-B872-F02376E88CEE@vanille-media.de>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Getting patches committed
@@ -34,40 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2010 12:17:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 21 Jan 2010 12:19:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 01/21/2010 05:20 AM, Dr. Michael Lauer wrote:
-> Am 21.01.2010 um 11:02 schrieb Holger Hans Peter Freyther:
->
->>>
->>> 2. Is there a way to have a staging branch where all patches are
->>> committed to, which have not been reviewed for let us say one week, to
->>> get more testing and before they go into the dev branch? Maybe it is
->>> easier for people to at least test build such a branch?
->>
->> Would you be interested in creating such a branch for us? I assume it is
->> certainly easier to git cherry-pick a patch than to download the mbox and use
->> git am..
->
+Dr. Michael Lauer wrote:
 > I fully agree. I'm neither using patchwork nor do I find patches on the list a good idea.
 > I'd welcome for-oe-upstream trees that would contain patches that -- if good -- we could
 > just pull from.
 
-I actually like patches on the list, because it makes me aware of how is 
-doing work and keeps me aware of the kinds of things people without 
-commit access are interested in. Also, it gives people with commit 
-access a forum for changes they would like reviewed.
+Yes, me too would prefer to pull another branch from somewhere and
+cherry-pick from it over other solutions.
 
-I am not opposed to someone creating a git branch or branches created 
-from list patches, but do not want to see the patches disappear from the 
-list.
+I have two questions.
 
-If the patch that was sent to the list comes from git-send-patch (I hope 
-I hve that correct) there is a script contrib/patchwork/git-am.sh that 
-makes it really easy to apply the patch.
+1) is it possible to host such a free-for-all branch somewhere?
+2) although generally not a good idea, would it be possible to rebase
+   this branch frequently so that the unapplied patches always come
+   up first in "git log"?
 
-Philip
+OE needs a stronger community culture.  Too many devs are just contempt
+with "my stuff works fine for me".
+
 
 
