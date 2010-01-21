@@ -1,32 +1,47 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from mail-fx0-f228.google.com ([209.85.220.228])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NY5wz-0004X5-LV
+	(envelope-from <raj.khem@gmail.com>) id 1NY68t-0004wf-W1
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jan 2010 23:56:35 +0100
-Received: from 88-109-44-56.dynamic.dsl.as9105.com ([88.109.44.56]
-	helo=[192.168.2.155])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NY5ue-0000Tu-Ua
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jan 2010 22:54:06 +0000
-From: Phil Blundell <philb@gnu.org>
+	Fri, 22 Jan 2010 00:08:51 +0100
+Received: by fxm28 with SMTP id 28so617799fxm.26
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Jan 2010 15:06:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=AL4O5UbkWYlMLhmiZ80n/5k6GUdWv+JEDmwAuKvyEho=;
+	b=bCH3HrYa0Okk9TzvmstIpzMnRLh24EQ28EMcTSEnTGBfNMIPKiPGN8KhvJm89E3Deu
+	Hoe4uJKkW4dvLHMb7aj76bKAeHUTfP8vdtAHK6dlkcGknLGRlmLeEI2vk820IBxXiagA
+	b3pBARu6pWe8BTAHJF+isvbWzRHELtDEOcsrY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=qtW+lHasGKu3V0X8rCRBAyg4/ZwkbiZptd4An6BAr9BocRLChSXr84mtkGYKdnycN3
+	rdUMbXB9aG8x7uDhS0XPu2cVXx67Etx2msbyeaOioj7Y+3u4QzsLfwBtc8XBVIcvjeV4
+	2YAjP6gq0YvrNQGfb4NFpHQmVwc3Vb2B+y9xU=
+Received: by 10.87.42.33 with SMTP id u33mr3594207fgj.8.1264115190844;
+	Thu, 21 Jan 2010 15:06:30 -0800 (PST)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id l12sm4934518fgb.0.2010.01.21.15.06.28
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 21 Jan 2010 15:06:29 -0800 (PST)
+Date: Thu, 21 Jan 2010 15:07:03 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hj21vd$32h$1@ger.gmane.org>
+Message-ID: <20100121230703.GA11015@gmail.com>
 References: <1263760344-26105-1-git-send-email-eric@eukrea.com>
-	<hivtt3$v2r$1@ger.gmane.org>
-	<1263763723.5353.16.camel@mattotaupa.wohnung.familie-menzel.net>
-	<hj09k8$km$1@ger.gmane.org>
-	<1263820243.3675.560.camel@mill.internal.reciva.com>
-	<1263824896.26227.112.camel@dax.rpnet.com> <hj21vd$32h$1@ger.gmane.org>
-Date: Thu, 21 Jan 2010 22:53:34 +0000
-Message-ID: <1264114415.457.1069.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+	<4B5619BC.4020308@eukrea.com>
+MIME-Version: 1.0
+In-Reply-To: <4B5619BC.4020308@eukrea.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.228
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: include default PR or not (was: [PATCH] barebox: Add recipe for this new bootloader)
+Subject: Re: [PATCH] barebox: Add recipe for this new bootloader
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,53 +55,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2010 22:56:35 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Jan 2010 23:08:51 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Mon, 2010-01-18 at 17:24 +0100, Rolf Leggewie wrote:
-> Richard Purdie wrote:
-> > On Mon, 2010-01-18 at 13:10 +0000, Phil Blundell wrote:
-> [...]
-> >> only way we will get a definitive answer would be to have the TSC hand
-> >> down a judgement on the matter.
-> > 
-> > That would seem sensible if only to lay this matter to rest once and for
-> > all! It would also be good to test the TSC processes...
+On (19/01/10 21:44), Eric Bénard wrote:
+> Hi,
 > 
-> I would think this is too minor for the TSC to bother.  But if you want
-> to take it on, why should I object?  It does take up bandwidth on this
-> list from time to time, so much is true.  Personally, I don't think the
-> best option would be to rule in favor of one or the other faction,
-> because that's what it would be seen for.  I don't think the TSC can
-> really win and resolve this issue.
+> Le 17/01/2010 21:32, Eric Benard a écrit :
+> >* barebox is "a bootloader that inherits the best of U-Boot and the Linux kernel"
+> >* add recipe for v2009.12.0 (last stable)
+> >* add recipe for git repository
+> >
+> appart from the comment from Koen I didn't receive any comment
+> concerning this recipes.
+> Does this mean they are OK and can be pushed upstream by someone
+> with commit access ?
 
-I'm not entirely sure what point you are making about it being
-undesirable for the TSC to "rule in favour of one or the other faction".
-One of the primary roles of the TSC is to resolve or adjudicate disputes
-between developers and, since such disputes are often binary issues by
-their nature, it seems likely that in a lot of cases this is going to
-boil down to having the TSC accept the viewpoint of one party and reject
-the viewpoint of the other.  It would certainly be a shame for the TSC
-to shy away from making a decision just because it might be seen to
-agree with one group and disagree with another.
+thanks. I applied the patch
 
-A large part of the reason for having the TSC in the first place was to
-establish a group of people who were empowered (and, indeed, obliged) to
-make decisions, and I think this is a fairly good example of a situation
-where simply having a decision of some kind is more important than the
-detail of what exactly that decision is.  
-
-This particular issue is clearly somewhat trivial and, whichever
-viewpoint prevails, the impact in the real world is going to be fairly
-small.  But it has cropped up on this list several times now and it
-seems equally clear that, so long as it remains unresolved, it will
-continue to waste everybody's time and contributors will continue to be
-baffled as to what exactly they should put in their patches in order to
-get them applied.
-
-p.
-
-
+> 
+> Thanks,
+> Eric
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
