@@ -1,39 +1,32 @@
-Received: from mail-iw0-f203.google.com ([209.85.223.203])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NY5qH-0004F6-E2
+	(envelope-from <philb@gnu.org>) id 1NY5wz-0004X5-LV
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jan 2010 23:49:36 +0100
-Received: by iwn41 with SMTP id 41so454201iwn.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jan 2010 14:47:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=D6EvxuhMmWDSYcPg2mYwD92vHzpNfrD3Pf9qL3W4b90=;
-	b=dbZp0t3wQoOtBMbNWjnTGlPEH8QKbpcL3poXBRiVJKpu4YoOefuJRuvCAoQWXHSO5l
-	nge9n1jymLU/HKdIBjfedQMfy4liGzQ4pcCE9wXixSn2NwiwqwrosEQVzIrl82oj76tY
-	jrg+ie/24E4Bqt5XNoku9VvLkEDOY40/ffuQc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=vdRozcWCl9cZTEDtq7XHRqGTzQBHVm4WTekIa1qfNryUlYWmrOzUiuvxhRRy/LQXWu
-	85nUecYtwLvwqdqEfFvqLyqq12gDD+pzLSCZO2JF0zLppAjo/hqak2lrFd1KhcOnsQde
-	Lf9ogIl5Ip+bpktxi04eJklH2FPiw3KDvt/jY=
-MIME-Version: 1.0
-Received: by 10.231.153.69 with SMTP id j5mr3410794ibw.33.1264114035532; Thu, 
-	21 Jan 2010 14:47:15 -0800 (PST)
-In-Reply-To: <4B56384B.10402@irobot.com>
-References: <4B56384B.10402@irobot.com>
-Date: Thu, 21 Jan 2010 14:47:15 -0800
-Message-ID: <19c1b8a91001211447w4892750et4414587220a70e4b@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 21 Jan 2010 23:56:35 +0100
+Received: from 88-109-44-56.dynamic.dsl.as9105.com ([88.109.44.56]
+	helo=[192.168.2.155])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NY5ue-0000Tu-Ua
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Jan 2010 22:54:06 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.203
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+In-Reply-To: <hj21vd$32h$1@ger.gmane.org>
+References: <1263760344-26105-1-git-send-email-eric@eukrea.com>
+	<hivtt3$v2r$1@ger.gmane.org>
+	<1263763723.5353.16.camel@mattotaupa.wohnung.familie-menzel.net>
+	<hj09k8$km$1@ger.gmane.org>
+	<1263820243.3675.560.camel@mill.internal.reciva.com>
+	<1263824896.26227.112.camel@dax.rpnet.com> <hj21vd$32h$1@ger.gmane.org>
+Date: Thu, 21 Jan 2010 22:53:34 +0000
+Message-ID: <1264114415.457.1069.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] added new recipe for olsrd_0.5.6-r8
+Subject: Re: include default PR or not (was: [PATCH] barebox: Add recipe for this new bootloader)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,130 +40,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2010 22:49:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 21 Jan 2010 22:56:35 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jan 19, 2010 at 2:55 PM, Adam Wozniak <awozniak@irobot.com> wrote:
-> The latest release version of olsrd is 0.5.6-r8
->
-> Signed-off-by: Adam Wozniak <awozniak@irobot.com>
-> ---
-> .../olsrd/files/olsrd-0.5.6-unbreak-makefile.patch | =A0 59
-> ++++++++++++++++++++
-> recipes/olsrd/olsrd_0.5.6-r8.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =
-=A0 =A06 ++
-> 2 files changed, 65 insertions(+), 0 deletions(-)
-> create mode 100644 recipes/olsrd/files/olsrd-0.5.6-unbreak-makefile.patch
-> create mode 100644 recipes/olsrd/olsrd_0.5.6-r8.bb
->
-> diff --git a/recipes/olsrd/files/olsrd-0.5.6-unbreak-makefile.patch
-> b/recipes/olsrd/files/olsrd-0.5.6-unbreak-makefile.patch
-> new file mode 100644
-> index 0000000..479448d
-> --- /dev/null
-> +++ b/recipes/olsrd/files/olsrd-0.5.6-unbreak-makefile.patch
-> @@ -0,0 +1,59 @@
-> +--- a/Makefile =A0 =A02010-01-19 14:01:15.264703049 -0800
-> ++++ b/Makefile =A0 =A02010-01-19 14:10:38.765700100 -0800
-> +@@ -103,9 +103,8 @@ uberclean: =A0 =A0clean clean_libs
-> + install: install_olsrd
-> +
-> + install_bin:
-> +- =A0 =A0 =A0 =A0mkdir -p $(SBINDIR)
-> +- =A0 =A0 =A0 =A0install -m 755 $(EXENAME) $(SBINDIR)
-> +- =A0 =A0 =A0 =A0$(STRIP) $(SBINDIR)/$(EXENAME)
-> ++ =A0 =A0 =A0 =A0mkdir -p $(INSTALL_PREFIX)$(SBINDIR)
-> ++ =A0 =A0 =A0 =A0install -m 755 $(EXENAME) $(INSTALL_PREFIX)$(SBINDIR)
-> +
-> + install_olsrd: =A0 =A0install_bin
-> + =A0 =A0 =A0 =A0 @echo =3D=3D=3D=3D=3D=3D=3D=3D=3D C O N F I G U R A T I=
- O N - F I L E =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +@@ -117,17 +116,16 @@ install_olsrd: =A0 =A0install_bin
-> + =A0 =A0 =A0 =A0 @echo per default.
-> + =A0 =A0 =A0 =A0 @echo can be found at files/olsrd.conf.default.lq
-> + =A0 =A0 =A0 =A0 @echo =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +- =A0 =A0 =A0 =A0mkdir -p $(ETCDIR)
-> +- =A0 =A0 =A0 =A0-cp -i files/olsrd.conf.default.lq $(CFGFILE)
-> ++ =A0 =A0 =A0 =A0mkdir -p $(INSTALL_PREFIX)$(ETCDIR)
-> + =A0 =A0 =A0 =A0 @echo -------------------------------------------
-> + =A0 =A0 =A0 =A0 @echo Edit $(CFGFILE) before running olsrd!!
-> + =A0 =A0 =A0 =A0 @echo -------------------------------------------
-> + =A0 =A0 =A0 =A0 @echo Installing manpages $(EXENAME)\(8\) and $(CFGNAME=
-)\(5\)
-> + ifneq ($(MANDIR),)
-> +- =A0 =A0 =A0 =A0mkdir -p $(MANDIR)/man8/
-> +- =A0 =A0 =A0 =A0cp files/olsrd.8.gz $(MANDIR)/man8/$(EXENAME).8.gz
-> +- =A0 =A0 =A0 =A0mkdir -p $(MANDIR)/man5/
-> +- =A0 =A0 =A0 =A0cp files/olsrd.conf.5.gz $(MANDIR)/man5/$(CFGNAME).5.gz
-> ++ =A0 =A0 =A0 =A0mkdir -p $(INSTALL_PREFIX)$(MANDIR)/man8/
-> ++ =A0 =A0 =A0 =A0cp files/olsrd.8.gz
-> $(INSTALL_PREFIX)$(MANDIR)/man8/$(EXENAME).8.gz
-> ++ =A0 =A0 =A0 =A0mkdir -p $(INSTALL_PREFIX)$(MANDIR)/man5/
-> ++ =A0 =A0 =A0 =A0cp files/olsrd.conf.5.gz
-> $(INSTALL_PREFIX)$(MANDIR)/man5/$(CFGNAME).5.gz
-> + endif
-> +
-> + tags:
-> +@@ -160,10 +158,10 @@ endif
-> + endif
-> +
-> + libs:
-> +- =A0 =A0 =A0 =A0set -e;for dir in $(SUBDIRS);do $(MAKECMD) -C lib/$$dir
-> LIBDIR=3D$(LIBDIR);done
-> ++ =A0 =A0 =A0 =A0set -e;for dir in $(SUBDIRS);do $(MAKECMD) -C lib/$$dir
-> LIBDIR=3D$(INSTALL_PREFIX)$(LIBDIR);done
-> +
-> + libs_clean clean_libs:
-> +- =A0 =A0 =A0 =A0-for dir in $(SUBDIRS);do $(MAKECMD) -C lib/$$dir LIBDI=
-R=3D$(LIBDIR)
-> clean;done
-> ++ =A0 =A0 =A0 =A0-for dir in $(SUBDIRS);do $(MAKECMD) -C lib/$$dir
-> LIBDIR=3D$(INSTALL_PREFIX)$(LIBDIR) clean;done
-> + ifeq ($(OS), win32)
-> + =A0 =A0 =A0 =A0 -rm -f lib/pgraph/olsrd_pgraph.dll
-> + =A0 =A0 =A0 =A0 -rm -f lib/txtinfo/olsrd_txtinfo.dll
-> +@@ -174,7 +172,7 @@ ifeq ($(OS), win32)
-> + endif
-> +
-> + libs_install install_libs:
-> +- =A0 =A0 =A0 =A0set -e;for dir in $(SUBDIRS);do $(MAKECMD) -C lib/$$dir
-> LIBDIR=3D$(LIBDIR) install;done
-> ++ =A0 =A0 =A0 =A0set -e;for dir in $(SUBDIRS);do $(MAKECMD) -C lib/$$dir
-> LIBDIR=3D$(INSTALL_PREFIX)$(LIBDIR) install;done
-> +
-> + httpinfo:
-> + =A0 =A0 =A0 =A0 $(MAKECMD) -C lib/httpinfo clean
-> diff --git a/recipes/olsrd/olsrd_0.5.6-r8.bb
-> b/recipes/olsrd/olsrd_0.5.6-r8.bb
-> new file mode 100644
-> index 0000000..366474c
-> --- /dev/null
-> +++ b/recipes/olsrd/olsrd_0.5.6-r8.bb
-> @@ -0,0 +1,6 @@
-> +require olsrd.inc
-> +
-> +PR =3D "r2"
-> +
-> +SRC_URI +=3D "file://olsrd-0.5.6-unbreak-makefile.patch;patch=3D1"
-> +
-> --
-> 1.6.3.3
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+On Mon, 2010-01-18 at 17:24 +0100, Rolf Leggewie wrote:
+> Richard Purdie wrote:
+> > On Mon, 2010-01-18 at 13:10 +0000, Phil Blundell wrote:
+> [...]
+> >> only way we will get a definitive answer would be to have the TSC hand
+> >> down a judgement on the matter.
+> > 
+> > That would seem sensible if only to lay this matter to rest once and for
+> > all! It would also be good to test the TSC processes...
+> 
+> I would think this is too minor for the TSC to bother.  But if you want
+> to take it on, why should I object?  It does take up bandwidth on this
+> list from time to time, so much is true.  Personally, I don't think the
+> best option would be to rule in favor of one or the other faction,
+> because that's what it would be seen for.  I don't think the TSC can
+> really win and resolve this issue.
 
-this patch seems corrupt. Please resend it without line wrapping (
-teach your mail client not to muck with patches)
-best is to use git format-patch and git send-email combo
+I'm not entirely sure what point you are making about it being
+undesirable for the TSC to "rule in favour of one or the other faction".
+One of the primary roles of the TSC is to resolve or adjudicate disputes
+between developers and, since such disputes are often binary issues by
+their nature, it seems likely that in a lot of cases this is going to
+boil down to having the TSC accept the viewpoint of one party and reject
+the viewpoint of the other.  It would certainly be a shame for the TSC
+to shy away from making a decision just because it might be seen to
+agree with one group and disagree with another.
 
-Thx
--Khem
+A large part of the reason for having the TSC in the first place was to
+establish a group of people who were empowered (and, indeed, obliged) to
+make decisions, and I think this is a fairly good example of a situation
+where simply having a decision of some kind is more important than the
+detail of what exactly that decision is.  
+
+This particular issue is clearly somewhat trivial and, whichever
+viewpoint prevails, the impact in the real world is going to be fairly
+small.  But it has cropped up on this list several times now and it
+seems equally clear that, so long as it remains unresolved, it will
+continue to waste everybody's time and contributors will continue to be
+baffled as to what exactly they should put in their patches in order to
+get them applied.
+
+p.
+
+
 
 
