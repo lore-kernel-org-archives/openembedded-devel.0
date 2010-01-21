@@ -1,47 +1,38 @@
-Received: from mail-gx0-f227.google.com ([209.85.217.227])
+Received: from mail-fx0-f228.google.com ([209.85.220.228])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NXnSQ-0004yL-L9
+	(envelope-from <martin.jansa@gmail.com>) id 1NXqz9-0004U7-BS
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jan 2010 04:11:45 +0100
-Received: by gxk27 with SMTP id 27so603025gxk.7
+	Thu, 21 Jan 2010 07:57:46 +0100
+Received: by fxm28 with SMTP id 28so4125707fxm.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jan 2010 19:09:25 -0800 (PST)
+	Wed, 20 Jan 2010 22:55:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:to:subject
-	:references:date:mime-version:content-transfer-encoding:from
-	:organization:message-id:in-reply-to:user-agent;
-	bh=w3ULh9ZuVFRG8R3a6GYiIQuYRT3bogzGrDiitCqxDOQ=;
-	b=t2hdEXK+AJIiAJgS8+08Tireu74n5bGrdaMRj06EQur+gKzON2sQFse2BZhh4yHfZD
-	T+xHZU9JyeMoFr+e/Ma/4hv1EcK0JjpvuzJXIo2X95aNL7Nl+v4b/1iz07A18NRoC4pX
-	Zisy9DPYAX49iMAHLJqu6zqdtXIbD6vtNm0MU=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=/4Cx1ooXdq9DOJjrlSGBhS+4Rl6+x0kb8A50tw0zneo=;
+	b=tZ/SLO61tjkPlkNrw1jPziR3imuneGUE1DTzts0vyO7ttWXeTRAMOUH93y7UI5K94A
+	OHlMAXgkTWzdbJ1WpXpK1dkLEMhOXbldQFD/9Wwr8HOWEbnIDE+lm4jvDDiKYkNLxNZs
+	ie0g6J6slRYPOdVCnvVN8QHymXrcEd2lH4xCA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:to:subject:references:date:mime-version
-	:content-transfer-encoding:from:organization:message-id:in-reply-to
-	:user-agent;
-	b=v2iPYKACNqn5v3sykXqXZM7mc4Rm12NM8hEQ8T+/ui+zRV39DndEDudfnM7WrPoIFt
-	b3YCNfqNeQOgTqS9RHZ92/0trBjx6TJoM1cl8NFUtVy19lIxIejAdv3XJs1Yu2HMQvj5
-	gjjo2+W7nahvWwZ3W/7Tzsmmd7ok2BjZLokXo=
-Received: by 10.151.58.8 with SMTP id l8mr1331438ybk.59.1264043365812;
-	Wed, 20 Jan 2010 19:09:25 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.54.100.209])
-	by mx.google.com with ESMTPS id 8sm199070yxg.42.2010.01.20.19.09.22
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 20 Jan 2010 19:09:25 -0800 (PST)
-To: "Guo Hongruan" <camelguo@gmail.com>, openembeded-devel
-	<openembedded-devel@lists.openembedded.org>
-References: <op.u6u35hgwmn1qzu@guohr-laptop-ubuntu>
-Date: Thu, 21 Jan 2010 11:09:17 +0800
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=gQGzx60qM7HRK/UN0xoo2T314WDm4hwhyMoRhcIT7epbzIe0YlxBJ+9Osofhw+n+oT
+	DHeeucD1XkbUoS9GFSoIaGRBPIxfA7My5wIG2mniqJxlLFZDktseewT284+1Eha9Fzq+
+	LDEYurLALS/9pT4+FBN3t56CGy1X99VL1tX1o=
 MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Organization: Gulessoft, Inc
-Message-ID: <op.u6u4dr18mn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <op.u6u35hgwmn1qzu@guohr-laptop-ubuntu>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.217.227
-X-SA-Exim-Mail-From: camelguo@gmail.com
+Received: by 10.223.5.90 with SMTP id 26mr999413fau.59.1264056926705; Wed, 20 
+	Jan 2010 22:55:26 -0800 (PST)
+In-Reply-To: <1263990478-28107-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1263990478-28107-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 21 Jan 2010 07:55:26 +0100
+Message-ID: <141020e31001202255q5be48fe9j3ca8ae6dc140432b@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.220.228
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: circular dependency on do_package and do_deploy in recipes/linux/linux-storcenter_2.6.27.7.bb
+Subject: Re: Xorg upgrade and libpixman removal
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,61 +46,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2010 03:11:46 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: Quoted-Printable
+X-List-Received-Date: Thu, 21 Jan 2010 06:57:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-the same question exists in
-
-recipes/linux/gumstix-linux.inc|72| addtask deploy before do_package aft=
-er  =
-
-do_install
-
-which may cause circular dependency too.
-
-=E5=9C=A8 Thu, 21 Jan 2010 11:04:19 +0800=EF=BC=8CGuo Hongruan <camelguo=
-@gmail.com> =E5=86=99=E9=81=93:
-
-> Hi guys,
->    I build my openembedded project using the following setting:
-> MACHINE=3Dstorcenter
-> DISTRO=3Dmicro
-> LIBC=3Deglibc
+On Wed, Jan 20, 2010 at 1:27 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Hi,
 >
->    But the build failed to execute due to the following error:
-> ERROR: Task  =
-
-> /media/work-disk/testslave/oe_gss_inc_change_allinone/build/../openemb=
-edded/recipes/linux/linux-storcenter_2.6.27.7.bb  =
-
-> (do_package) has circular dependency on  =
-
-> /media/work-disk/testslave/oe_gss_inc_change_allinone/build/../openemb=
-edded/recipes/linux/linux-storcenter_2.6.27.7.bb  =
-
-> (do_deploy)
->    I guess that it is caused by the following line in  =
-
-> linux-storcenter_2.6.27.7.bb:
-> addtask deploy before do_package after do_install
-> because the kernel has defined the dependency in kernel.bbclass
-> 554 addtask deploy before do_build after do_package
-> So, do_package and do_deploy causes the circular dependency.
+> libpixman-native and pixman "conflicts"
 >
-> I think it can be solved just remove the addtask in  =
-
-> linux-storcenter_2.6.27.7.bb. Am I right?
+> It ends like this (libpixman-native is 0.10.0):
+> arm-oe-linux-gnueabi-libtool: link: cannot find the library
+> `/home/projects/OE/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/lib/libpixman-1.la'
+> or unhandled argument
+> `/home/projects/OE/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/lib/libpixman-1.la'
 >
-> Thanks a lot
->
+> It can be resolved by rebuilding both in right order, but libpixman was
+> used only in cairo-native, so I moved libpixman to obsolete and added
+> pixman-native to normal pixman recipes (Koen agreed that libpixman can be
+> removed)
 
+Old pixman and xorg upgrade pushed,
 
--- =
+pixman_0.17.4 waiting for test on arm7..
 
-Guo Hongruan, Embedded Linux Consultant
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
+> Can someone test NEON on armv7?
+> especially pixman-0.17.4/0006-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch,
+> because it was partially included upstream and I'm not following it as close as I should :).
 
 
