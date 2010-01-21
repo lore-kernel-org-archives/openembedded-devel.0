@@ -1,25 +1,25 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NXtc0-0007Ic-Dp for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jan 2010 10:46:03 +0100
-Received: from f053040193.adsl.alicedsl.de ([78.53.40.193]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NXtZp-0000PJ-LN for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jan 2010 09:43:45 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <holger+oe@freyther.de>) id 1NXtu8-00071P-Vl
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Jan 2010 11:04:48 +0100
+Received: from tamarin.localnet (unknown [211.40.35.125])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id C27E21B10C02
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Jan 2010 10:01:07 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Jan 2010 10:43:44 +0100
-Message-ID: <1264067024.3695.14.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Thu, 21 Jan 2010 11:02:11 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <1264067024.3695.14.camel@mattotaupa.wohnung.familie-menzel.net>
+In-Reply-To: <1264067024.3695.14.camel@mattotaupa.wohnung.familie-menzel.net>
+MIME-Version: 1.0
+Message-Id: <201001211102.11252.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Getting patches committed
+Subject: Re: Getting patches committed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,62 +33,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2010 09:46:03 -0000
-X-Groupsio-MsgNum: 15951
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-Xb7lyDcnTZLdWOzrRrF2"
+X-List-Received-Date: Thu, 21 Jan 2010 10:04:48 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-15"
+Content-Transfer-Encoding: 7bit
 
---=-Xb7lyDcnTZLdWOzrRrF2
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Thursday 21 January 2010 10:43:44 Paul Menzel wrote:
 
-Dear OE developers,
+> 
+> So now my question is, is there a temporary reason for this lack of time
+> by developers or is that a fundamental problem so a solution is needed?
 
+I don't think this is temporary.
 
-during the last week (or two) I have the feeling that a lot of patches
-are send to the list by developers with no commit access and they are
-not reviewed, commented or committed.
+> 
+> 1. It looks like nobody of the developers is using Patchwork yet. It
+> looks like everybody can register an account and update the statuses. Is
+> there a demand for it? Maybe we can find some non-developers (including
+> me) volunteering to do this?
 
-I am well aware that you all have better or more important things to do.
-But the problem is you are the only one who can commit this stuff.
-
-There is also Patchwork, where you can see what patches are sitting on
-the list.
-
-So now my question is, is there a temporary reason for this lack of time
-by developers or is that a fundamental problem so a solution is needed?
-
-1. It looks like nobody of the developers is using Patchwork yet. It
-looks like everybody can register an account and update the statuses. Is
-there a demand for it? Maybe we can find some non-developers (including
-me) volunteering to do this?
-
-2. Is there a way to have a staging branch where all patches are
-committed to, which have not been reviewed for let us say one week, to
-get more testing and before they go into the dev branch? Maybe it is
-easier for people to at least test build such a branch?
-
-Sorry if I made wrong assumptions and there is no problem at all.
+I could need a hand keeping it updated. E.g. I was busy the last weeks and 
+couldn't remove items from the page and now we are up to three pages of data.
 
 
-Thanks,
+> 
+> 2. Is there a way to have a staging branch where all patches are
+> committed to, which have not been reviewed for let us say one week, to
+> get more testing and before they go into the dev branch? Maybe it is
+> easier for people to at least test build such a branch?
 
-Paul
+Would you be interested in creating such a branch for us? I assume it is 
+certainly easier to git cherry-pick a patch than to download the mbox and use 
+git am..
 
 
-[1] http://patchwork.openembedded.org/project/openembedded/list/
-
---=-Xb7lyDcnTZLdWOzrRrF2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktYIckACgkQPX1aK2wOHVghGgCeNJRjE6fsDVVoTd5pgnVBmrZM
-nMoAn1yQ4DKgLgFvKad4OQDCxwmsZYP+
-=bYdk
------END PGP SIGNATURE-----
-
---=-Xb7lyDcnTZLdWOzrRrF2--
