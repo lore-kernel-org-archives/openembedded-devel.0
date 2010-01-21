@@ -1,27 +1,33 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1NXuBH-0001sD-Is
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jan 2010 11:22:30 +0100
-Received: from [192.168.1.8] (dialbs-092-079-168-007.static.arcor-ip.net
-	[92.79.168.7])
-	by drlauer-research.com (Postfix) with ESMTP id A88DD58412A
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jan 2010 12:12:06 +0100 (CET)
-Mime-Version: 1.0 (Apple Message framework v1077)
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-In-Reply-To: <201001211102.11252.holger+oe@freyther.de>
-Date: Thu, 21 Jan 2010 11:20:13 +0100
-Message-Id: <883120D4-C490-4713-B872-F02376E88CEE@vanille-media.de>
-References: <1264067024.3695.14.camel@mattotaupa.wohnung.familie-menzel.net>
-	<201001211102.11252.holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1077)
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+Received: from dan.rpsys.net ([93.97.175.187])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NXuON-0003dS-EH
+	for openembedded-devel@openembedded.org; Thu, 21 Jan 2010 11:36:02 +0100
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	o0LATM40024083; Thu, 21 Jan 2010 10:29:22 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id q0rO2r5uic-W; Thu, 21 Jan 2010 10:29:22 +0000 (GMT)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	o0LATGLY024077
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
+	Thu, 21 Jan 2010 10:29:18 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Martin Jansa <martin.jansa@gmail.com>
+In-Reply-To: <1252881838-19764-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1252881838-19764-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Thu, 21 Jan 2010 10:34:13 +0000
+Message-Id: <1264070053.11679.12.camel@dax.rpnet.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Getting patches committed
+Cc: openembedded-devel@openembedded.org, bitbake-dev@lists.berlios.de
+Subject: Re: [Bitbake-dev] [PATCH] Allow % as wildcard in the end of	PREFERRED_VERSION_pkg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,32 +41,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2010 10:22:30 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 21 Jan 2010 10:36:02 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Am 21.01.2010 um 11:02 schrieb Holger Hans Peter Freyther:
+On Mon, 2009-09-14 at 00:43 +0200, Martin Jansa wrote:
+> ---
+>  lib/bb/providers.py |   13 ++++++++++++-
+>  1 files changed, 12 insertions(+), 1 deletions(-)
+> 
+> diff --git a/lib/bb/providers.py b/lib/bb/providers.py
+> index 8970fb3..feaee52 100644
+> --- a/lib/bb/providers.py
+> +++ b/lib/bb/providers.py
+> @@ -63,7 +63,18 @@ def sortPriorities(pn, dataCache, pkg_pn = None):
+>  
+>      return tmp_pn
+>  
+> +def isPreferredVersion(pe, pv, pr, preferred_e, preferred_v, preferred_r):
+> +    """
+> +    Check if the version pe,pv,pr is the preferred one.
+> +    If there is preferred version defined and ends with '%', then pv has to start with that version after removing the '%' in the end,
+> +    """
+>  
+> +    if (pv == preferred_v or (preferred_v != None and preferred_v.endswith('%') and pv.startswith(preferred_v[:len(preferred_v)-1]))):
+> +        if (pr == preferred_r or preferred_r == None):
+> +            if (pe == preferred_e or preferred_e == None):
+> +                return true
+> +    return false
+> +    
+>  def findPreferredProvider(pn, cfgData, dataCache, pkg_pn = None, item = None):
+>      """
+>      Find the first provider in pkg_pn with a PREFERRED_VERSION set.
+> @@ -96,7 +107,7 @@ def findPreferredProvider(pn, cfgData, dataCache, pkg_pn = None, item = None):
+>          for file_set in pkg_pn:
+>              for f in file_set:
+>                  pe,pv,pr = dataCache.pkg_pepvpr[f]
+> -                if preferred_v == pv and (preferred_r == pr or preferred_r == None) and (preferred_e == pe or preferred_e == None):
+> +                if isPreferredVersion(pe,pv,pr,preferred_e,preferred_v,preferred_r):
+>                      preferred_file = f
+>                      preferred_ver = (pe, pv, pr)
+>                      break
 
->>=20
->> 2. Is there a way to have a staging branch where all patches are
->> committed to, which have not been reviewed for let us say one week, =
-to
->> get more testing and before they go into the dev branch? Maybe it is
->> easier for people to at least test build such a branch?
->=20
-> Would you be interested in creating such a branch for us? I assume it =
-is=20
-> certainly easier to git cherry-pick a patch than to download the mbox =
-and use=20
-> git am..
+This has been applied to bitbake master, thanks!
 
-I fully agree. I'm neither using patchwork nor do I find patches on the =
-list a good idea.
-I'd welcome for-oe-upstream trees that would contain patches that -- if =
-good -- we could
-just pull from.
-
-:M:
+Richard
 
 
 
