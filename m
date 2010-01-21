@@ -1,22 +1,24 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NXtu8-00071P-Vl
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mickey@vanille-media.de>) id 1NXuBH-0001sD-Is
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jan 2010 11:04:48 +0100
-Received: from tamarin.localnet (unknown [211.40.35.125])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id C27E21B10C02
+	Thu, 21 Jan 2010 11:22:30 +0100
+Received: from [192.168.1.8] (dialbs-092-079-168-007.static.arcor-ip.net
+	[92.79.168.7])
+	by drlauer-research.com (Postfix) with ESMTP id A88DD58412A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jan 2010 10:01:07 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Jan 2010 11:02:11 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+	Thu, 21 Jan 2010 12:12:06 +0100 (CET)
+Mime-Version: 1.0 (Apple Message framework v1077)
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+In-Reply-To: <201001211102.11252.holger+oe@freyther.de>
+Date: Thu, 21 Jan 2010 11:20:13 +0100
+Message-Id: <883120D4-C490-4713-B872-F02376E88CEE@vanille-media.de>
 References: <1264067024.3695.14.camel@mattotaupa.wohnung.familie-menzel.net>
-In-Reply-To: <1264067024.3695.14.camel@mattotaupa.wohnung.familie-menzel.net>
-MIME-Version: 1.0
-Message-Id: <201001211102.11252.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+	<201001211102.11252.holger+oe@freyther.de>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.1077)
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Getting patches committed
@@ -33,37 +35,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2010 10:04:48 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-15"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Jan 2010 10:22:30 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On Thursday 21 January 2010 10:43:44 Paul Menzel wrote:
+Am 21.01.2010 um 11:02 schrieb Holger Hans Peter Freyther:
 
-> 
-> So now my question is, is there a temporary reason for this lack of time
-> by developers or is that a fundamental problem so a solution is needed?
+>>=20
+>> 2. Is there a way to have a staging branch where all patches are
+>> committed to, which have not been reviewed for let us say one week, =
+to
+>> get more testing and before they go into the dev branch? Maybe it is
+>> easier for people to at least test build such a branch?
+>=20
+> Would you be interested in creating such a branch for us? I assume it =
+is=20
+> certainly easier to git cherry-pick a patch than to download the mbox =
+and use=20
+> git am..
 
-I don't think this is temporary.
+I fully agree. I'm neither using patchwork nor do I find patches on the =
+list a good idea.
+I'd welcome for-oe-upstream trees that would contain patches that -- if =
+good -- we could
+just pull from.
 
-> 
-> 1. It looks like nobody of the developers is using Patchwork yet. It
-> looks like everybody can register an account and update the statuses. Is
-> there a demand for it? Maybe we can find some non-developers (including
-> me) volunteering to do this?
+:M:
 
-I could need a hand keeping it updated. E.g. I was busy the last weeks and 
-couldn't remove items from the page and now we are up to three pages of data.
-
-
-> 
-> 2. Is there a way to have a staging branch where all patches are
-> committed to, which have not been reviewed for let us say one week, to
-> get more testing and before they go into the dev branch? Maybe it is
-> easier for people to at least test build such a branch?
-
-Would you be interested in creating such a branch for us? I assume it is 
-certainly easier to git cherry-pick a patch than to download the mbox and use 
-git am..
 
 
