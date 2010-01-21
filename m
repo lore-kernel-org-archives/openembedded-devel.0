@@ -1,41 +1,45 @@
-Received: from mail-yw0-f195.google.com ([209.85.211.195])
+Received: from mail-bw0-f217.google.com ([209.85.218.217])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NXsFK-0006Tu-15
+	(envelope-from <d.vinokuroff@gmail.com>) id 1NXtLN-0000k8-5g
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jan 2010 09:18:33 +0100
-Received: by ywh33 with SMTP id 33so525138ywh.16
+	Thu, 21 Jan 2010 10:28:52 +0100
+Received: by bwz9 with SMTP id 9so4801687bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jan 2010 00:16:12 -0800 (PST)
+	Thu, 21 Jan 2010 01:26:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=N+2dIuzWE3FbFqMxd8CwA4/iRu8tXppxWckXFoxk4ng=;
-	b=a7AGyQp4ua5JFwFX8Qz80kHvEQnNgc1vEygm1FjQd/s94nJtHlZBfeJxwyxCVnt76o
-	ebyCVNzsvA3ieDGP4VIDIL9D/JFvm6XTfrIuCxSMGcGeihdLMVYb9fMKLX15pNm7Y8SW
-	c3BdLKsIYbyXrhpJcuA1PIj5sjkHJNPxeB2Xw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:references:in-reply-to
 	:content-type:content-transfer-encoding;
-	b=KX04UJqtuafpTSimaZIKtWVWqiLlp4JBRmVgVm3YHvoNzJBoz4SrlSnjKpKqXd4kXw
-	kP1olNVYGZsAqUCUh7Mpkyi7/Q+W8vcztu81GITfimxwORH4rcI/HvbIVIRnTN9HrnVW
-	PkYLNMzRnkUDU33lLPGQb4W2AFqfBcxUTeYnY=
+	bh=n3Vs0c4kFQTqyp8aRkj8GARer6mDtgUVW8X0Xsk/RmY=;
+	b=po1SpSiNjf6Xo4jgv7yWcwN8fpAIpxmW/2W1geXe/SzBWDh02xejNBLIDDKwY1U7h/
+	okrbVr7Yo/sv/fZ7+N6O3Q010OkyyO7+jdz6Ch89FpDLSRLHxnXh2q668wlFoGR/j/W0
+	eEXNNJgHX/FI+yapTfeQXHJ0oHv+f82OOQvEo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=JG2/dXTR5rUa/8Cz+TAf+rXSWsegNFAeROg9f0LSzBqEb/vdB3wZCki25ksnXibhj5
+	Bqh4TkHERO0dgAtVdmLCzARNvYOZ/XA786flW3AvdA2w8XZniBlAP5ar6+KrgnhPvtGl
+	RdWdLRnEKT+eNsr63nQGNxkeRMwNd2/bASV1E=
+Received: by 10.204.9.151 with SMTP id l23mr613946bkl.76.1264065989991;
+	Thu, 21 Jan 2010 01:26:29 -0800 (PST)
+Received: from ?192.168.0.100? ([92.255.149.140])
+	by mx.google.com with ESMTPS id 14sm345570bwz.9.2010.01.21.01.26.28
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 21 Jan 2010 01:26:29 -0800 (PST)
+Message-ID: <4B581DC1.9000902@gmail.com>
+Date: Thu, 21 Jan 2010 14:26:25 +0500
+From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.8pre) Gecko/20100104 Shredder/3.0.1pre
 MIME-Version: 1.0
-Received: by 10.101.213.34 with SMTP id p34mr610265anq.1.1264061772695; Thu, 
-	21 Jan 2010 00:16:12 -0800 (PST)
-In-Reply-To: <fca63bcf1001201424y14e75773je8d2a340317913c4@mail.gmail.com>
-References: <fca63bcf1001200825q63ec4375w8d2a6f35359284c0@mail.gmail.com>
-	<ac9c93b11001201348s5238e4e7h7b775e4aacd61fdf@mail.gmail.com>
-	<fca63bcf1001201424y14e75773je8d2a340317913c4@mail.gmail.com>
-Date: Thu, 21 Jan 2010 09:16:12 +0100
-Message-ID: <ac9c93b11001210016m76a07fg45b6a10249df28ac@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.195
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <4B5808EE.9010909@gmail.com>
+In-Reply-To: <4B5808EE.9010909@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: d.vinokuroff@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: libxml-perl (new recipe) problems (make test)
+Subject: Re: Serial console problem: Id "S0" respawning too fast
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,104 +53,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2010 08:18:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 21 Jan 2010 09:28:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/1/20 Michael Lippautz <michael.lippautz@gmail.com>:
-> Actually, I need the perl module for some embedded work I am doing,
-> and was wondering about it not being in the tree.
+Looked at SERIAL_CONSOLE variable values in different machine conf 
+files, added '-L' option to getty string in inittab:
+S0:2345:respawn:/sbin/getty -L 115200 ttyS0
+
+Now login and shell works fine.
+
+On 21.01.2010 12:57 Dmitry Vinokurov wrote:
+> Hello,
 >
-> Now, I can't find it (working on .dev branch). What do you mean with unst=
-able?
-
-If you are at the dev head you are definitely at the bleeding edge.
-If you download binary packages there are two feeds.
-One is the unstable feed which closely follows the head of the dev branch
-The other one is the stable feed which is as it says more stable (at
-the expense of some things not being there or being added later)
-
+> I want to set up board only with serial console interface (no tty0).
 >
-> I have already search for it in the git logs but can't find an entry
-> containing =A0'libxml-libxml-...'. Maybe someone can provide me a link?
-
-OUCH.
-You got me.
-When I saw your email I checked my own tree and there it was.
-However if I look at
-http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/perl
-it is not there.
-
-Guess I also had some issues with it and did not commit it, but left
-the recipe to complete it later and got sidetracked to something else
-and forgot about it.
-(I needed it to build some xmltv grabbers but not he one for my
-country that's why it ended up on the backburner).
-
-Wrt your recipe:
-you definitely want to add BBCLASSEXTEND=3D"native" to the bottom of it.
-Also the dependencies need to be added:
-
-See http://deps.cpantesters.org/?module=3DXML::LibXML;perl=3Dlatest
-
-Neither XML::Sax nor XML::NamespaceSupport exist (unless they are
-added by someone very recently), so guess you need to add these first.
-
-Feel free to contact me if you have questions or want a review or so
-(trough private mail or the list or on irc (I am eFfeM on #oe)
-
-Frans
-
+> Kernel bootargs: console=ttyS0,115200n81 root=/dev/nfs rw 
+> nfsroot=192.168.0.100:/srv/nfs/armrfs ip=dhcp init=/sbin/init
 >
-> Thx in advance!
+> Inittab has only one getty line: S0:2345:respawn:/sbin/getty 115200 ttyS0
 >
-> 2010/1/20 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
->> Michael,
->>
->> Thanks for your contribution.
->> I have no idea why things fail for you. Might be because you need the
->> native package too.
->>
->> But the real bad news is that the recipe already exist (in unstable that=
- is)
->> It is in recipes/perl/libxml-libxml-perl_1.70.bb
->>
->> Actually this one looks very identical to yours.
->> And wrt the name: the convention is that all perl lib recipe and as
->> name start with lib then followed by the name in lower case foolowed
->> by -perl and the verison number..
->> Hence XML-LibXML will be in libxml-libxml-perl_1.70.bb.
->>
->> I hope the existence of the recipe does not disappoint you. If you
->> want to have a stab at another perl module feel free to try to make a
->> perl recipe for Tk.
->> Here's a starter, but it had some issues that I forgot about:
->>
->> libtk-perl_804.028.bb
->>
->> DESCRIPTION =3D "Tk - An overview of an Object Oriented Tk8 extension fo=
-r perl5"
->> SECTION =3D "libs"
->> LICENSE =3D "Unknown"
->> PR =3D "r0"
->>
->> SRC_URI =3D "http://search.cpan.org/CPAN/authors/id/S/SR/SREZIC/Tk-${PV}=
-.tar.gz"
->>
->> S =3D "${WORKDIR}/Tk-${PV}"
->>
->> inherit cpan
->>
->> BBCLASSEXTEND=3D"native"
->>
->>
->> Best regards & have fun!
->> Frans.
+> I can see boot log, but it is really hard to login. And even if I 
+> could login, it's impossible to execute any commands, shell dies and 
+> login message appear again. Here is log of what usually happen:
+> ------------------------------------------------
+> OpenEmbedded Linux phy3250 ttyS0
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> minimal .dev-snapshot-20100119 phy3250 ttyS0
 >
+> phy3250 login: root
+> O
+> O
+> O
+> OpenEmbedded Linux phy3250 ttyS0
+>
+> minimal .dev-snapshot-20100119 phy3250 ttyS0
+>
+> phy3250 login: r
+> OpenEmbedded Linux phy3250 ttyS0
+>
+> minimal .dev-snapshot-20100119 phy3250 ttyS0
+>
+> phy3250 login: root
+> O
+> O
+> INIT: Id "S0" respawning too fast: dis
+> INIT: no more processes left in this r
+>
+> O
+> O
+> O
+> O
+> O
+> O
+> O
+> O
+> O
+> INIT: Id "S0" respawning too fast: dis
+>
+> O
+> O
+> O
+> O
+> O
+> O
+> O
+> O
+> O
+> INIT: Id "S0" respawning too fast: dis
+> ------------------------------------------------
+>
+> Tried to decrease baudrate to 38400 -- same trouble. Really don't know 
+> what to do with it. Maybe I miss some kernel or getty options or 
+> something else?
+>
+
+-- 
+Best Regards,
+Dmitry Vinokurov
+<d.vinokuroff@gmail.com>
+
 
 
