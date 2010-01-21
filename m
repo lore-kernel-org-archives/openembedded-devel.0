@@ -1,42 +1,26 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NXvqt-0005qb-Em
+	(envelope-from <philip@balister.org>) id 1NXvym-00060a-D8
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jan 2010 13:09:34 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NXvog-0000qD-QB
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jan 2010 12:07:14 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1NXvog-0002tD-K8
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jan 2010 12:07:14 +0000
-From: Phil Blundell <philb@gnu.org>
+	Thu, 21 Jan 2010 13:17:43 +0100
+Received: (qmail 22706 invoked by uid 1003); 21 Jan 2010 12:15:22 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 21 Jan 2010 12:15:22 -0000
+Message-ID: <4B584559.1090704@balister.org>
+Date: Thu, 21 Jan 2010 07:15:21 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ec1f3d401001210353j1802eb6am9d931438e3db1302@mail.gmail.com>
-References: <ec1f3d400911270337wbbbcae8gab291075d242c9d9@mail.gmail.com>
-	<19c1b8a90912092118o54903eb4v4044e2c1191617c8@mail.gmail.com>
-	<ec1f3d400912100300l42da9902wee299ca7bd27e6bb@mail.gmail.com>
-	<19c1b8a90912100944g4b405319v6e121ebf03449f0b@mail.gmail.com>
-	<ec1f3d400912110347x365c0873i9d03b58d02cbf735@mail.gmail.com>
-	<19c1b8a90912110925k5e8063b7wdc160af7eb29fb2a@mail.gmail.com>
-	<ec1f3d401001050143o2cdfb989x119ea3dd6352f4ed@mail.gmail.com>
-	<19c1b8a91001050954m5f002c66s7a282c1382a2dcea@mail.gmail.com>
-	<ec1f3d401001200350g9fb8480h1ed53a8ee4a90e0@mail.gmail.com>
-	<19c1b8a91001201656g6fd1751bvc2a478b2d4c9ef8c@mail.gmail.com>
-	<ec1f3d401001210353j1802eb6am9d931438e3db1302@mail.gmail.com>
-Date: Thu, 21 Jan 2010 12:07:11 +0000
-Message-ID: <1264075631.9743.178.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+References: <1264067024.3695.14.camel@mattotaupa.wohnung.familie-menzel.net>	<201001211102.11252.holger+oe@freyther.de>
+	<883120D4-C490-4713-B872-F02376E88CEE@vanille-media.de>
+In-Reply-To: <883120D4-C490-4713-B872-F02376E88CEE@vanille-media.de>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: cortex-a9 build failure at glibc
+Subject: Re: Getting patches committed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,27 +34,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2010 12:09:34 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 21 Jan 2010 12:17:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, 2010-01-21 at 17:23 +0530, RK Raggit wrote:
-> VFS: Mounted root (ext2 filesystem).
-> Freeing init memory: 92K
-> |=C3=BCxsh (1): undefined instruction: pc=3D4000673c
-> Code: 1a000002 e594e060 e35e0000 1a0001d0 (ed5b0b23)
-> I see the same error when init=3Dlinuxrc and when init=3D/bin/sh. It look=
-s like
-> some shared library linked to busybox might be causing the problem. I nee=
-d
-> to debug further.
+On 01/21/2010 05:20 AM, Dr. Michael Lauer wrote:
+> Am 21.01.2010 um 11:02 schrieb Holger Hans Peter Freyther:
+>
+>>>
+>>> 2. Is there a way to have a staging branch where all patches are
+>>> committed to, which have not been reviewed for let us say one week, to
+>>> get more testing and before they go into the dev branch? Maybe it is
+>>> easier for people to at least test build such a branch?
+>>
+>> Would you be interested in creating such a branch for us? I assume it is
+>> certainly easier to git cherry-pick a patch than to download the mbox and use
+>> git am..
+>
+> I fully agree. I'm neither using patchwork nor do I find patches on the list a good idea.
+> I'd welcome for-oe-upstream trees that would contain patches that -- if good -- we could
+> just pull from.
 
-That instruction is "ldcl 11, cr0, [fp, #-140]", which looks like a VFP
-double precision instruction.  Do you have floating point hardware on
-your platform, and is it enabled in the kernel?
+I actually like patches on the list, because it makes me aware of how is 
+doing work and keeps me aware of the kinds of things people without 
+commit access are interested in. Also, it gives people with commit 
+access a forum for changes they would like reviewed.
 
-p.
+I am not opposed to someone creating a git branch or branches created 
+from list patches, but do not want to see the patches disappear from the 
+list.
 
+If the patch that was sent to the list comes from git-send-patch (I hope 
+I hve that correct) there is a script contrib/patchwork/git-am.sh that 
+makes it really easy to apply the patch.
 
+Philip
 
 
