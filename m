@@ -1,28 +1,22 @@
-Received: from mail-pw0-f53.google.com ([209.85.160.53])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rk.raggit@gmail.com>) id 1NXvdq-0003uT-BV
+	(envelope-from <philb@gnu.org>) id 1NXvqt-0005qb-Em
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jan 2010 12:56:05 +0100
-Received: by pwi4 with SMTP id 4so3807544pwi.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jan 2010 03:53:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=tCZZ+Dy/7RSJ3QRCYHS6bbAaxbb2+DN/pCEr9FLWj3M=;
-	b=Ft9dw5WYpPUSavewO0T02PFU7kI7gbUM4Mdq8JJVTXyHrMSmaUxkMQhEDjFj6TilX6
-	V2Ow4gPeZB/RUaEK2yKW4lSi4/kQ4XMHD1J6zjHhznlLOPlZ/aAepADmkCVyYk+jaVnl
-	FN7Blnl7J1hGVbpwWLVFeUZUJydK2/DHbchDY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=tReMzwzIRkJDIFaWd4nX8Ontoq5Aundu2XJ5bvx2dgXVcPfEyASjmKx5Vp+zQJUw5L
-	nLKaDDiZaazwr/YrDGQREshD90z6TnIStHbJSD8sdrbt+IoloI/zHccyrD7l0mM1/ExK
-	BdW/78TYdViblhTx6l1FEHyqv8RuV2343r9TY=
-MIME-Version: 1.0
-Received: by 10.141.22.20 with SMTP id z20mr987785rvi.23.1264074824633; Thu, 
-	21 Jan 2010 03:53:44 -0800 (PST)
-In-Reply-To: <19c1b8a91001201656g6fd1751bvc2a478b2d4c9ef8c@mail.gmail.com>
+	Thu, 21 Jan 2010 13:09:34 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NXvog-0000qD-QB
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Jan 2010 12:07:14 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1NXvog-0002tD-K8
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Jan 2010 12:07:14 +0000
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <ec1f3d401001210353j1802eb6am9d931438e3db1302@mail.gmail.com>
 References: <ec1f3d400911270337wbbbcae8gab291075d242c9d9@mail.gmail.com>
 	<19c1b8a90912092118o54903eb4v4044e2c1191617c8@mail.gmail.com>
 	<ec1f3d400912100300l42da9902wee299ca7bd27e6bb@mail.gmail.com>
@@ -33,15 +27,15 @@ References: <ec1f3d400911270337wbbbcae8gab291075d242c9d9@mail.gmail.com>
 	<19c1b8a91001050954m5f002c66s7a282c1382a2dcea@mail.gmail.com>
 	<ec1f3d401001200350g9fb8480h1ed53a8ee4a90e0@mail.gmail.com>
 	<19c1b8a91001201656g6fd1751bvc2a478b2d4c9ef8c@mail.gmail.com>
-Date: Thu, 21 Jan 2010 17:23:44 +0530
-Message-ID: <ec1f3d401001210353j1802eb6am9d931438e3db1302@mail.gmail.com>
-From: RK Raggit <rk.raggit@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.53
-X-SA-Exim-Mail-From: rk.raggit@gmail.com
+	<ec1f3d401001210353j1802eb6am9d931438e3db1302@mail.gmail.com>
+Date: Thu, 21 Jan 2010 12:07:11 +0000
+Message-ID: <1264075631.9743.178.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: cortex-a9 build failure at glibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -56,25 +50,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2010 11:56:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 21 Jan 2010 12:09:34 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-> you can boot into static dash and then debug the dynamic loading problem.
-> or you could build kernel with debug support and enable debug user_debug=
-=3D-1
-> on kernel commandline if there are any crashes it should print them.
->
-> i enabled user_debug and see this on console -
+On Thu, 2010-01-21 at 17:23 +0530, RK Raggit wrote:
+> VFS: Mounted root (ext2 filesystem).
+> Freeing init memory: 92K
+> |=C3=BCxsh (1): undefined instruction: pc=3D4000673c
+> Code: 1a000002 e594e060 e35e0000 1a0001d0 (ed5b0b23)
+> I see the same error when init=3Dlinuxrc and when init=3D/bin/sh. It look=
+s like
+> some shared library linked to busybox might be causing the problem. I nee=
+d
+> to debug further.
 
-VFS: Mounted root (ext2 filesystem).
-Freeing init memory: 92K
-|=FCxsh (1): undefined instruction: pc=3D4000673c
-Code: 1a000002 e594e060 e35e0000 1a0001d0 (ed5b0b23)
-I see the same error when init=3Dlinuxrc and when init=3D/bin/sh. It looks =
-like
-some shared library linked to busybox might be causing the problem. I need
-to debug further.
+That instruction is "ldcl 11, cr0, [fp, #-140]", which looks like a VFP
+double precision instruction.  Do you have floating point hardware on
+your platform, and is it enabled in the kernel?
 
---RK
+p.
+
+
+
 
