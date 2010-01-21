@@ -1,33 +1,48 @@
-Received: from dan.rpsys.net ([93.97.175.187])
+Received: from mail-pw0-f53.google.com ([209.85.160.53])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NXuON-0003dS-EH
-	for openembedded-devel@openembedded.org; Thu, 21 Jan 2010 11:36:02 +0100
-Received: from localhost (dan.rpsys.net [127.0.0.1])
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	o0LATM40024083; Thu, 21 Jan 2010 10:29:22 GMT
-X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
-Received: from dan.rpsys.net ([127.0.0.1])
-	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
-	with LMTP id q0rO2r5uic-W; Thu, 21 Jan 2010 10:29:22 +0000 (GMT)
-Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
-	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
-	o0LATGLY024077
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT);
-	Thu, 21 Jan 2010 10:29:18 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: Martin Jansa <martin.jansa@gmail.com>
-In-Reply-To: <1252881838-19764-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1252881838-19764-1-git-send-email-Martin.Jansa@gmail.com>
-Date: Thu, 21 Jan 2010 10:34:13 +0000
-Message-Id: <1264070053.11679.12.camel@dax.rpnet.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.22.3.1 
-X-SA-Exim-Connect-IP: 93.97.175.187
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	(envelope-from <rk.raggit@gmail.com>) id 1NXvdq-0003uT-BV
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 21 Jan 2010 12:56:05 +0100
+Received: by pwi4 with SMTP id 4so3807544pwi.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Jan 2010 03:53:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=tCZZ+Dy/7RSJ3QRCYHS6bbAaxbb2+DN/pCEr9FLWj3M=;
+	b=Ft9dw5WYpPUSavewO0T02PFU7kI7gbUM4Mdq8JJVTXyHrMSmaUxkMQhEDjFj6TilX6
+	V2Ow4gPeZB/RUaEK2yKW4lSi4/kQ4XMHD1J6zjHhznlLOPlZ/aAepADmkCVyYk+jaVnl
+	FN7Blnl7J1hGVbpwWLVFeUZUJydK2/DHbchDY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=tReMzwzIRkJDIFaWd4nX8Ontoq5Aundu2XJ5bvx2dgXVcPfEyASjmKx5Vp+zQJUw5L
+	nLKaDDiZaazwr/YrDGQREshD90z6TnIStHbJSD8sdrbt+IoloI/zHccyrD7l0mM1/ExK
+	BdW/78TYdViblhTx6l1FEHyqv8RuV2343r9TY=
+MIME-Version: 1.0
+Received: by 10.141.22.20 with SMTP id z20mr987785rvi.23.1264074824633; Thu, 
+	21 Jan 2010 03:53:44 -0800 (PST)
+In-Reply-To: <19c1b8a91001201656g6fd1751bvc2a478b2d4c9ef8c@mail.gmail.com>
+References: <ec1f3d400911270337wbbbcae8gab291075d242c9d9@mail.gmail.com>
+	<19c1b8a90912092118o54903eb4v4044e2c1191617c8@mail.gmail.com>
+	<ec1f3d400912100300l42da9902wee299ca7bd27e6bb@mail.gmail.com>
+	<19c1b8a90912100944g4b405319v6e121ebf03449f0b@mail.gmail.com>
+	<ec1f3d400912110347x365c0873i9d03b58d02cbf735@mail.gmail.com>
+	<19c1b8a90912110925k5e8063b7wdc160af7eb29fb2a@mail.gmail.com>
+	<ec1f3d401001050143o2cdfb989x119ea3dd6352f4ed@mail.gmail.com>
+	<19c1b8a91001050954m5f002c66s7a282c1382a2dcea@mail.gmail.com>
+	<ec1f3d401001200350g9fb8480h1ed53a8ee4a90e0@mail.gmail.com>
+	<19c1b8a91001201656g6fd1751bvc2a478b2d4c9ef8c@mail.gmail.com>
+Date: Thu, 21 Jan 2010 17:23:44 +0530
+Message-ID: <ec1f3d401001210353j1802eb6am9d931438e3db1302@mail.gmail.com>
+From: RK Raggit <rk.raggit@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.53
+X-SA-Exim-Mail-From: rk.raggit@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-devel@openembedded.org, bitbake-dev@lists.berlios.de
-Subject: Re: [Bitbake-dev] [PATCH] Allow % as wildcard in the end of	PREFERRED_VERSION_pkg
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: cortex-a9 build failure at glibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,51 +56,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2010 10:36:02 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Jan 2010 11:56:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 2009-09-14 at 00:43 +0200, Martin Jansa wrote:
-> ---
->  lib/bb/providers.py |   13 ++++++++++++-
->  1 files changed, 12 insertions(+), 1 deletions(-)
-> 
-> diff --git a/lib/bb/providers.py b/lib/bb/providers.py
-> index 8970fb3..feaee52 100644
-> --- a/lib/bb/providers.py
-> +++ b/lib/bb/providers.py
-> @@ -63,7 +63,18 @@ def sortPriorities(pn, dataCache, pkg_pn = None):
->  
->      return tmp_pn
->  
-> +def isPreferredVersion(pe, pv, pr, preferred_e, preferred_v, preferred_r):
-> +    """
-> +    Check if the version pe,pv,pr is the preferred one.
-> +    If there is preferred version defined and ends with '%', then pv has to start with that version after removing the '%' in the end,
-> +    """
->  
-> +    if (pv == preferred_v or (preferred_v != None and preferred_v.endswith('%') and pv.startswith(preferred_v[:len(preferred_v)-1]))):
-> +        if (pr == preferred_r or preferred_r == None):
-> +            if (pe == preferred_e or preferred_e == None):
-> +                return true
-> +    return false
-> +    
->  def findPreferredProvider(pn, cfgData, dataCache, pkg_pn = None, item = None):
->      """
->      Find the first provider in pkg_pn with a PREFERRED_VERSION set.
-> @@ -96,7 +107,7 @@ def findPreferredProvider(pn, cfgData, dataCache, pkg_pn = None, item = None):
->          for file_set in pkg_pn:
->              for f in file_set:
->                  pe,pv,pr = dataCache.pkg_pepvpr[f]
-> -                if preferred_v == pv and (preferred_r == pr or preferred_r == None) and (preferred_e == pe or preferred_e == None):
-> +                if isPreferredVersion(pe,pv,pr,preferred_e,preferred_v,preferred_r):
->                      preferred_file = f
->                      preferred_ver = (pe, pv, pr)
->                      break
+> you can boot into static dash and then debug the dynamic loading problem.
+> or you could build kernel with debug support and enable debug user_debug=
+=3D-1
+> on kernel commandline if there are any crashes it should print them.
+>
+> i enabled user_debug and see this on console -
 
-This has been applied to bitbake master, thanks!
+VFS: Mounted root (ext2 filesystem).
+Freeing init memory: 92K
+|=FCxsh (1): undefined instruction: pc=3D4000673c
+Code: 1a000002 e594e060 e35e0000 1a0001d0 (ed5b0b23)
+I see the same error when init=3Dlinuxrc and when init=3D/bin/sh. It looks =
+like
+some shared library linked to busybox might be causing the problem. I need
+to debug further.
 
-Richard
-
-
+--RK
 
