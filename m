@@ -1,38 +1,43 @@
-Received: from mail-fx0-f228.google.com ([209.85.220.228])
+Received: from mail-bw0-f217.google.com ([209.85.218.217])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NXqz9-0004U7-BS
+	(envelope-from <d.vinokuroff@gmail.com>) id 1NXrxK-0003Wy-VL
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jan 2010 07:57:46 +0100
-Received: by fxm28 with SMTP id 28so4125707fxm.26
+	Thu, 21 Jan 2010 08:59:58 +0100
+Received: by bwz9 with SMTP id 9so4751887bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Jan 2010 22:55:26 -0800 (PST)
+	Wed, 20 Jan 2010 23:57:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=/4Cx1ooXdq9DOJjrlSGBhS+4Rl6+x0kb8A50tw0zneo=;
-	b=tZ/SLO61tjkPlkNrw1jPziR3imuneGUE1DTzts0vyO7ttWXeTRAMOUH93y7UI5K94A
-	OHlMAXgkTWzdbJ1WpXpK1dkLEMhOXbldQFD/9Wwr8HOWEbnIDE+lm4jvDDiKYkNLxNZs
-	ie0g6J6slRYPOdVCnvVN8QHymXrcEd2lH4xCA=
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=d8NaePp+zQcYyvl2QdGMpOrkHRQZXbFGTvjZNw6tqFY=;
+	b=WDqphKV8dhkrgciw2gh88N8yDHyGFlZn2vMeCqHLL+9RMRWufYJ29Md5S4evXLzvE9
+	gl8JxjweCUIwfWGEe0jRuK0Uj+adNjqgARYOLf3bri/5LUy2IRgEyL62XIbOqDyIVs0K
+	uI0AdeCXlYPfI13DSLmYVCXm+g+E5IpoxOYNk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=gQGzx60qM7HRK/UN0xoo2T314WDm4hwhyMoRhcIT7epbzIe0YlxBJ+9Osofhw+n+oT
-	DHeeucD1XkbUoS9GFSoIaGRBPIxfA7My5wIG2mniqJxlLFZDktseewT284+1Eha9Fzq+
-	LDEYurLALS/9pT4+FBN3t56CGy1X99VL1tX1o=
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=b2Fwbzh6uC//bWGH9pFcXRMeyCKn2/+eA0B0S6Y8sR42JAbdmncX17QOgSI3ZgiNjD
+	PVcMC8nperhONQYVTsawWR144Fn8FxQIQbCh6o7ae2/PfqZEk0wgc8rHvpUWVdMS7c9B
+	kABUYBPH823A+duMYhqpfJy7UpN39Y509EKtE=
+Received: by 10.204.34.212 with SMTP id m20mr560448bkd.55.1264060658423;
+	Wed, 20 Jan 2010 23:57:38 -0800 (PST)
+Received: from ?192.168.0.100? ([92.255.149.140])
+	by mx.google.com with ESMTPS id 13sm315076bwz.6.2010.01.20.23.57.37
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 20 Jan 2010 23:57:37 -0800 (PST)
+Message-ID: <4B5808EE.9010909@gmail.com>
+Date: Thu, 21 Jan 2010 12:57:34 +0500
+From: Dmitry Vinokurov <d.vinokuroff@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.8pre) Gecko/20100104 Shredder/3.0.1pre
 MIME-Version: 1.0
-Received: by 10.223.5.90 with SMTP id 26mr999413fau.59.1264056926705; Wed, 20 
-	Jan 2010 22:55:26 -0800 (PST)
-In-Reply-To: <1263990478-28107-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1263990478-28107-1-git-send-email-Martin.Jansa@gmail.com>
-Date: Thu, 21 Jan 2010 07:55:26 +0100
-Message-ID: <141020e31001202255q5be48fe9j3ca8ae6dc140432b@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.228
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Connect-IP: 209.85.218.217
+X-SA-Exim-Mail-From: d.vinokuroff@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Xorg upgrade and libpixman removal
+Subject: Serial console problem: Id "S0" respawning too fast
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,31 +51,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2010 06:57:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 21 Jan 2010 07:59:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jan 20, 2010 at 1:27 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Hi,
->
-> libpixman-native and pixman "conflicts"
->
-> It ends like this (libpixman-native is 0.10.0):
-> arm-oe-linux-gnueabi-libtool: link: cannot find the library
-> `/home/projects/OE/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/lib/libpixman-1.la'
-> or unhandled argument
-> `/home/projects/OE/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/lib/libpixman-1.la'
->
-> It can be resolved by rebuilding both in right order, but libpixman was
-> used only in cairo-native, so I moved libpixman to obsolete and added
-> pixman-native to normal pixman recipes (Koen agreed that libpixman can be
-> removed)
+Hello,
 
-Old pixman and xorg upgrade pushed,
+I want to set up board only with serial console interface (no tty0).
 
-pixman_0.17.4 waiting for test on arm7..
+Kernel bootargs: console=ttyS0,115200n81 root=/dev/nfs rw 
+nfsroot=192.168.0.100:/srv/nfs/armrfs ip=dhcp init=/sbin/init
 
-> Can someone test NEON on armv7?
-> especially pixman-0.17.4/0006-Support-of-overlapping-src-dst-for-pixman_blt_neon.patch,
-> because it was partially included upstream and I'm not following it as close as I should :).
+Inittab has only one getty line: S0:2345:respawn:/sbin/getty 115200 ttyS0
+
+I can see boot log, but it is really hard to login. And even if I could 
+login, it's impossible to execute any commands, shell dies and login 
+message appear again. Here is log of what usually happen:
+------------------------------------------------
+OpenEmbedded Linux phy3250 ttyS0
+
+minimal .dev-snapshot-20100119 phy3250 ttyS0
+
+phy3250 login: root
+O
+O
+O
+OpenEmbedded Linux phy3250 ttyS0
+
+minimal .dev-snapshot-20100119 phy3250 ttyS0
+
+phy3250 login: r
+OpenEmbedded Linux phy3250 ttyS0
+
+minimal .dev-snapshot-20100119 phy3250 ttyS0
+
+phy3250 login: root
+O
+O
+INIT: Id "S0" respawning too fast: dis
+INIT: no more processes left in this r
+
+O
+O
+O
+O
+O
+O
+O
+O
+O
+INIT: Id "S0" respawning too fast: dis
+
+O
+O
+O
+O
+O
+O
+O
+O
+O
+INIT: Id "S0" respawning too fast: dis
+------------------------------------------------
+
+Tried to decrease baudrate to 38400 -- same trouble. Really don't know 
+what to do with it. Maybe I miss some kernel or getty options or 
+something else?
+
+-- 
+Best Regards,
+Dmitry Vinokurov
+<d.vinokuroff@gmail.com>
+
 
 
