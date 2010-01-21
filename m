@@ -1,47 +1,37 @@
-Received: from mail-fx0-f228.google.com ([209.85.220.228])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NY68t-0004wf-W1
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NY6Ec-0007a2-UR for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Jan 2010 00:14:46 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NY6CO-0002A7-31
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 00:08:51 +0100
-Received: by fxm28 with SMTP id 28so617799fxm.26
+	Fri, 22 Jan 2010 00:12:24 +0100
+Received: from p5b3b3748.dip.t-dialin.net ([91.59.55.72])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Jan 2010 00:12:24 +0100
+Received: from no2spam by p5b3b3748.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jan 2010 15:06:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=AL4O5UbkWYlMLhmiZ80n/5k6GUdWv+JEDmwAuKvyEho=;
-	b=bCH3HrYa0Okk9TzvmstIpzMnRLh24EQ28EMcTSEnTGBfNMIPKiPGN8KhvJm89E3Deu
-	Hoe4uJKkW4dvLHMb7aj76bKAeHUTfP8vdtAHK6dlkcGknLGRlmLeEI2vk820IBxXiagA
-	b3pBARu6pWe8BTAHJF+isvbWzRHELtDEOcsrY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=qtW+lHasGKu3V0X8rCRBAyg4/ZwkbiZptd4An6BAr9BocRLChSXr84mtkGYKdnycN3
-	rdUMbXB9aG8x7uDhS0XPu2cVXx67Etx2msbyeaOioj7Y+3u4QzsLfwBtc8XBVIcvjeV4
-	2YAjP6gq0YvrNQGfb4NFpHQmVwc3Vb2B+y9xU=
-Received: by 10.87.42.33 with SMTP id u33mr3594207fgj.8.1264115190844;
-	Thu, 21 Jan 2010 15:06:30 -0800 (PST)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id l12sm4934518fgb.0.2010.01.21.15.06.28
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 21 Jan 2010 15:06:29 -0800 (PST)
-Date: Thu, 21 Jan 2010 15:07:03 -0800
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 22 Jan 2010 00:12:24 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100121230703.GA11015@gmail.com>
-References: <1263760344-26105-1-git-send-email-eric@eukrea.com>
-	<4B5619BC.4020308@eukrea.com>
-MIME-Version: 1.0
-In-Reply-To: <4B5619BC.4020308@eukrea.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.228
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Fri, 22 Jan 2010 00:11:54 +0100
+Message-ID: <hjan00$419$1@ger.gmane.org>
+References: <1264067024.3695.14.camel@mattotaupa.wohnung.familie-menzel.net>	<201001211102.11252.holger+oe@freyther.de>	<883120D4-C490-4713-B872-F02376E88CEE@vanille-media.de>	<hj9giu$mfp$1@ger.gmane.org>
+	<1264111223.7697.31.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5b3b3748.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <1264111223.7697.31.camel@utx.utx.cz>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] barebox: Add recipe for this new bootloader
+Subject: Re: Getting patches committed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,33 +45,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2010 23:08:51 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 21 Jan 2010 23:14:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On (19/01/10 21:44), Eric Bénard wrote:
-> Hi,
-> 
-> Le 17/01/2010 21:32, Eric Benard a écrit :
-> >* barebox is "a bootloader that inherits the best of U-Boot and the Linux kernel"
-> >* add recipe for v2009.12.0 (last stable)
-> >* add recipe for git repository
-> >
-> appart from the comment from Koen I didn't receive any comment
-> concerning this recipes.
-> Does this mean they are OK and can be pushed upstream by someone
-> with commit access ?
+Stanislav Brabec wrote:
+> org.openembedded.open (or .staging or .public)
 
-thanks. I applied the patch
+funny thing.  I was discussing something like this with RP just when you
+sent this mail.  It's not as straightforward as it may sound, though.
+First of all, I think we'd need several, possibly unlimited number of
+FFA branches.  Second, RP and I agreed that security implications are a
+concern if we allow commit access completely uninhibited.
 
+>> OE needs a stronger community culture.  Too many devs are just contempt
+>> with "my stuff works fine for me".
 > 
-> Thanks,
-> Eric
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Not as easy as it sounds. OE is a heterogeneous environment. Knowing
+> that things may break on some platform need non-trivial knowledge.
+
+If things are non-trivial, they should be reviewed.  If a committer is
+unsure, when in doubt, go for a review.
+
+I'm talking of things like new bb recipes that can really do no harm
+unless someone explicitly builds them.  There are still a number of them
+in the bug tracker that are 2, 3 or even more years old.  There really
+is no excuse for that IMHO, not even "I'm not interested in the recipe
+in question".  Recently, I closed a significant number of tickets with
+recipes that had been reinvented and committed by somebody else in the
+meantime.  What a waste of time on both sides
+
 
 
