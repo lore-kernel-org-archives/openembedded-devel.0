@@ -1,38 +1,36 @@
-Received: from mail-yx0-f175.google.com ([209.85.210.175])
+Received: from hsp-52.hspserver.com ([85.197.80.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NXwGr-0007tX-DL
+	(envelope-from <ml@vdm-design.de>) id 1NXwJ8-0007zq-OO
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jan 2010 13:36:24 +0100
-Received: by yxe5 with SMTP id 5so3891929yxe.24
+	Thu, 21 Jan 2010 13:38:45 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by hsp-52.hspserver.com (Postfix) with ESMTP id CEC61A2C393
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jan 2010 04:34:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=TGYuXMisRmwfXshtjshW+LweYspN/6FTXNY3uW1e0J0=;
-	b=kcquA6odXAIoD69pAweyLgvmx5V29Sc4nKsbuWAaXsU6jhCE6odaPeJtFwiWMVd3gp
-	lCIMIHz70z1NtIQTdzKWzwyWmQip/lGlk51mjZm/Tso+uyQSVpHEpOQkrY1bLN7Fvkth
-	Yfhjql6i0giXr2TBldk29mC4TKNIbkanEpABI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=jiw1Ys34SIva7gmioeYpPV8dFuNNynwcf6Lsq7N2rluMGkct2EHRz58BPOzib6Oge5
-	RQGjA2znypU9GcpW1kvAk6rM46aW9lo1Vt7Cwx3fSIurbIZcTvj/T8BlYnwmQAJuYzR+
-	ggu4ML+PREnwJFcPoLkCjYoOH0e7f0NELGB9Y=
-MIME-Version: 1.0
-Received: by 10.101.179.23 with SMTP id g23mr1767943anp.171.1264077244056; 
-	Thu, 21 Jan 2010 04:34:04 -0800 (PST)
-In-Reply-To: <hj9giu$mfp$1@ger.gmane.org>
-References: <1264067024.3695.14.camel@mattotaupa.wohnung.familie-menzel.net>
-	<201001211102.11252.holger+oe@freyther.de>
-	<883120D4-C490-4713-B872-F02376E88CEE@vanille-media.de>
-	<hj9giu$mfp$1@ger.gmane.org>
-Date: Thu, 21 Jan 2010 13:34:04 +0100
-Message-ID: <ac9c93b11001210434x572ca8fduef87174d1c75a41f@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Thu, 21 Jan 2010 13:36:28 +0100 (CET)
+Received: from hsp-52.hspserver.com ([127.0.0.1])
+	by localhost (hsp-52.hspserver.com [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id kmooeAg-+DEr
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Jan 2010 13:36:28 +0100 (CET)
+Received: from tomboy.localnet (pD9E166E2.dip.t-dialin.net [217.225.102.226])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by hsp-52.hspserver.com (Postfix) with ESMTP id 08BA2A2C390
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Jan 2010 13:36:28 +0100 (CET)
+From: Thomas Zimmermann <ml@vdm-design.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Thu, 21 Jan 2010 13:36:27 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.32-4.slh.2-sidux-amd64; KDE/4.3.4; x86_64; ;
+	)
+References: <1264067024.3695.14.camel@mattotaupa.wohnung.familie-menzel.net>
+	<883120D4-C490-4713-B872-F02376E88CEE@vanille-media.de>
+	<4B584559.1090704@balister.org>
+In-Reply-To: <4B584559.1090704@balister.org>
+MIME-Version: 1.0
+Message-Id: <201001211336.27857.ml@vdm-design.de>
+X-SA-Exim-Connect-IP: 85.197.80.179
+X-SA-Exim-Mail-From: ml@vdm-design.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Getting patches committed
@@ -49,26 +47,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2010 12:36:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 21 Jan 2010 12:38:45 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Even if there is a git branch there needs to be a mail to the list
-describing that the git should be pulled. With that there should be a
-description on what has changed.
-And basically I fear that we are just shifting the problem.
-If no one picks up the patches from the list, what makes you guys
-think that once they are in a git they get added.
+Am Donnerstag 21 Januar 2010 13:15:21 schrieb Philip Balister:
+> On 01/21/2010 05:20 AM, Dr. Michael Lauer wrote:
+> > Am 21.01.2010 um 11:02 schrieb Holger Hans Peter Freyther:
+> >>> 2. Is there a way to have a staging branch where all patches are
+> >>> committed to, which have not been reviewed for let us say one week, to
+> >>> get more testing and before they go into the dev branch? Maybe it is
+> >>> easier for people to at least test build such a branch?
+> >>
+> >> Would you be interested in creating such a branch for us? I assume it is
+> >> certainly easier to git cherry-pick a patch than to download the mbox
+> >> and use git am..
+> >
+> > I fully agree. I'm neither using patchwork nor do I find patches on the
+> > list a good idea. I'd welcome for-oe-upstream trees that would contain
+> > patches that -- if good -- we could just pull from.
+> 
+> I actually like patches on the list, because it makes me aware of how is
+> doing work and keeps me aware of the kinds of things people without
+> commit access are interested in. Also, it gives people with commit
+> access a forum for changes they would like reviewed.
+> 
+> I am not opposed to someone creating a git branch or branches created
+> from list patches, but do not want to see the patches disappear from the
+> list.
+> 
+> If the patch that was sent to the list comes from git-send-patch (I hope
+> I hve that correct) there is a script contrib/patchwork/git-am.sh that
+> makes it really easy to apply the patch.
+> 
+> Philip
 
-One of the problems with patches (and probably also with git) is who
-picks them up.
-If someone is sent to the list and it is related to something that I
-am knowledgeable in, I'll try to look into it.
-If not, I tend to avoid, first of all because of the burden (i feel
-that before committing I need to compile it and if possible do some
-basic testing, which is tough if it is not really something I have the
-knowledge or hw for), and secondly because someone who feels more
-attached with the area is also working on it.
+I'm one of those without commit rights :)
+And i think the problem is, that nobody feels responsible for the patches on 
+patchwork. I know this situation from SHR patchwork, when you don't ask 
+someone directly to commit a patch from patchwork, nobody will do it.
+That's the only way it really works currently.
+I have 4 people with commit rights i can ask, so i have no problems but others 
+probably doesn't know someone...
 
-Frans
+I think a sort of moderator for patchwork is needed, that assosiats patches to 
+the maintainer.
+
+Thomas
 
 
