@@ -1,42 +1,26 @@
-Received: from mail-pz0-f189.google.com ([209.85.222.189])
+Received: from bay0-omc4-s23.bay0.hotmail.com ([65.54.190.225])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NXxBP-0000AH-5s
+	(envelope-from <salehusman@hotmail.com>) id 1NXy7D-0003VO-OP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 21 Jan 2010 14:34:50 +0100
-Received: by pzk27 with SMTP id 27so4633575pzk.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jan 2010 05:32:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:subject:date:to
-	:mime-version:content-transfer-encoding:from:organization:message-id
-	:user-agent; bh=o/Xus1XsD0O4maQcEJ210Z3xQXXf5iOSm2mwk7jVSAE=;
-	b=lkFLHT80wUJhe78hk3hYw/deaQiKRJ+gaSAU4zcqI01o/EWL8I9vkT4w/BLRCVv+1U
-	sk+VrXJfshDg4LIpJQ/s7kCADqJEyqc4B+NVFUMdjNxtsgmua/DxNxIwwkDAUxB+kJJt
-	xpS78X0rU7zL38Ju43HXbWnchl8weQn5EDzj8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:subject:date:to:mime-version:content-transfer-encoding
-	:from:organization:message-id:user-agent;
-	b=MQJLkWhZ119eTTJB66OC0Qt28IDcZQ5PX6hASxIk4PtyED0ZywvQPsLHdl+D4YfqPD
-	JfWoqONNxEikmWVPyyORTqjj3tajsMrcPflMH/z//HirgwV5Su68AP5W47kdnosf7vK2
-	lY6JaPI2kFjAgrzpeueJsfeeKeVPkRixc3TrE=
-Received: by 10.143.20.19 with SMTP id x19mr15622wfi.231.1264080749219;
-	Thu, 21 Jan 2010 05:32:29 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.54.100.209])
-	by mx.google.com with ESMTPS id 22sm1078368pzk.10.2010.01.21.05.32.26
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 21 Jan 2010 05:32:28 -0800 (PST)
-Date: Thu, 21 Jan 2010 21:32:16 +0800
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+	Thu, 21 Jan 2010 15:34:35 +0100
+Received: from BAY127-W5 ([65.54.190.199]) by bay0-omc4-s23.bay0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 21 Jan 2010 06:31:10 -0800
+Message-ID: <BAY127-W59B276E6FE9342A67201CD8630@phx.gbl>
+X-Originating-IP: [203.82.49.5]
+From: saleh usman <salehusman@hotmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Date: Thu, 21 Jan 2010 19:31:10 +0500
+Importance: Normal
 MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Organization: Gulessoft, Inc
-Message-ID: <op.u6vw72i1mn1qzu@guohr-laptop-ubuntu>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.222.189
-X-SA-Exim-Mail-From: camelguo@gmail.com
+X-OriginalArrivalTime: 21 Jan 2010 14:31:10.0728 (UTC)
+	FILETIME=[60792080:01CA9AA6]
+X-SA-Exim-Connect-IP: 65.54.190.225
+X-SA-Exim-Mail-From: salehusman@hotmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: I realy think we should upgrade PREFERRED_VERSION_glibc to 2.9 in conf/distro/include/sane-toolchain.inc
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: problem in building console-iamge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,49 +34,232 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Jan 2010 13:34:50 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Jan 2010 14:34:35 -0000
+X-Groupsio-MsgNum: 15970
+Content-Type: multipart/mixed;
+	boundary="_6f66f845-2d07-4d3c-84ee-aa8f26f80b02_"
 
-Hi guys,
-   I think we should upgrade PREFERRED_VERSION_glibc from 2.6 to 2.9 in  
-conf/distro/include/sane-toolchain.inc. The reasons are:
-
-1. Most of distributions have upgraded their preferred glibc to 2.9 long  
-time ago.
-conf/distro/angstrom-2008.1.conf:PREFERRED_VERSION_glibc 		?= "2.9"
-conf/distro/angstrom-2008.1.conf:PREFERRED_VERSION_glibc-initial 	?= "2.9"
-conf/distro/jlime-2009.1.conf:PREFERRED_VERSION_glibc-initial = "2.9"
-conf/distro/jlime-2009.1.conf:PREFERRED_VERSION_glibc = "2.9"
-conf/distro/kaeilos.conf:PREFERRED_VERSION_glibc 		?= "2.9"
-conf/distro/kaeilos.conf:PREFERRED_VERSION_glibc-initial 	?= "2.9"
-
- from the above, you can get to know that most distributions have upgraded  
-their preferred glibc to 2.9 from 2008 ago.
-
-Of course, there are still some distributions which uses old glibc. The  
-only reason I guess is that we have not updated them for a long time. (for  
- from tinderbox, you can get to know that these distributions have not been  
-built for a long time)
+--_6f66f845-2d07-4d3c-84ee-aa8f26f80b02_
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
 
-2. from tinderbox, you can see that the glibc-2.9 is well-tested, no  
-glibc-2.6
-http://tinderbox.openembedded.net/packages/?name=glibc&page=1
+I've built console-image without adding the following lines in local.conf
 
- from the above link, you can get to know that the glibc-2.9 not  
-glibc-2.6.1 has had most testing.
+ file and it has been built successfully.Now when I've added these lines it=
+ is
 
-3. the last reason is that I have built some projects with glibc-2.6,  
-unless with the old binutils, the glibc-2.6 always failed to build.
-
-So, I think it is the time to upgrade PREFERRED_VERSION_glibc to 2.9 in  
-sane-toolchian.inc
-
--- 
-Guo Hongruan, Embedded Linux Consultant
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
+giving  error.Attached is local.conf file.
 
 
+
+ ANGSTROM_EXTRA_INSTALL =3D " screen oprofile ossie-fm-from-file "
+
+BBFILES =3D "/oe/org.openembedded.dev/packages/*/*.bb  /oe/ossie_collection=
+/packages/*/*.bb"
+
+BBFILE_COLLECTIONS =3D "upstream ossie"
+
+BBFILE_PATTERN_upstream =3D "^/oe/org.openembedded.dev/packages"
+
+BBFILE_PRIORITY_upstream =3D "5"
+
+BBFILE_PATTERN_ossie =3D "^/oe/ossie/packages"
+
+BBFILE_PRIORITY_ossie =3D "10"
+
+Where oe is directory in which I've placed openembedded.
+
+
+
+ Terminal window is showing following error.
+
+
+
+[saleh@localhost ~]$ bitbake console-image
+
+NOTE: Out of date cache found=2C rebuilding...
+
+NOTE: Handling BitBake files: \ (0014/0014) [100 %]
+
+NOTE: Parsing finished. 0 cached=2C 14 parsed=2C 0 skipped=2C 0 masked.
+
+ ERROR: Nothing PROVIDES 'console-image'
+
+=20
+I've set the BBPATH environment variable as following.
+ export BBPATH=3D/oe/build:/oe/openembedded:/oe/ossie_collection
+ where oe is directory in which I've placed openembedded and ossie_collecti=
+on  directory.
+
+Actuall I've dowloaded files from
+http://trac.geekisp.com/opensdr/browser/OE/ossie_collection and placed
+them in a directory named ossie_collection.
+ How this line will be interpretted
+ /oe/org.openembedded.dev/packages/*/*.bb
+ weather it is a link from which bitbake will download files or it
+is pointing to a directory which should be already existing in oe
+directory
+
+I
+ Plz help me in moving forward.
+ Saleh
+
+ 		 	   		 =20
+_________________________________________________________________
+Keep your friends updated=97even when you=92re not signed in.
+http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/so=
+cial-network-basics.aspx?ocid=3DPID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_5:092=
+010=
+
+--_6f66f845-2d07-4d3c-84ee-aa8f26f80b02_
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="local.conf"
+
+IwojIE9wZW5FbWJlZGRlZCBsb2NhbCBjb25maWd1cmF0aW9uIGZpbGUgKHNhbXBsZSkKIwojIFBs
+ZWFzZSB2aXNpdCB0aGUgV2lraSBhdCBodHRwOi8vb3BlbmVtYmVkZGVkLm9yZy8gZm9yIG1vcmUg
+aW5mby4KIwojCiMgQmUgU1VSRSB0byByZWFkIHRoaXMgZmlsZSBpbiBpdHMgZW50aXJldHkgYW5k
+IHRoZSBHZXR0aW5nU3RhcnRlZCBwYWdlIG9uIHRoZQojIHdpa2kgYmVmb3JlIHByb2NlZWRpbmcu
+CiMKIyBPbmNlIHlvdSBoYXZlIGRvbmUgdGhhdCwgcmVtb3ZlIHRoZSBsaW5lIGF0IHRoZSBlbmQg
+b2YgdGhpcwojIGZpbGUgYW5kIGJ1aWxkIGF3YXkuCiMgCiMgV0FSTklORzogbGluZXMgc3RhcnRp
+bmcgd2l0aCBhIHNwYWNlICgnICcpIHdpbGwgcmVzdWx0IGluIHBhcnNlIGZhaWx1cmVzLgojIFJl
+bW92ZSAnIyAnIGZyb20gY29tbWVudGVkIGxpbmVzIHRvIGFjdGl2YXRlIHRoZW0uCiMKIyBOT1RF
+OiBEbyBOT1QgdXNlICRIT01FIGluIHlvdXIgcGF0aHMsIEJpdEJha2UgZG9lcyBOT1QgZXhwYW5k
+IH4gZm9yIHlvdS4gIElmIHlvdQojIG11c3QgaGF2ZSBwYXRocyByZWxhdGl2ZSB0byB5b3VyIGhv
+bWVkaXIgdXNlICR7SE9NRX0gKG5vdGUgdGhlIHt9J3MgdGhlcmUKIyB5b3UgTVVTVCBoYXZlIHRo
+ZW0gZm9yIHRoZSB2YXJpYWJsZSBleHBhbnNpb24gdG8gYmUgZG9uZSBieSBCaXRCYWtlKS4gIFlv
+dXIKIyBwYXRocyBzaG91bGQgYWxsIGJlIGFic29sdXRlIHBhdGhzIChUaGV5IHNob3VsZCBhbGwg
+c3RhcnQgd2l0aCBhIC8gYWZ0ZXIKIyBleHBhbnNpb24uICBTdHVmZiBsaWtlIHN0YXJ0aW5nIHdp
+dGggJHtIT01FfSBvciAke1RPUERJUn0gaXMgb2spLgoKIyBVc2UgdGhpcyB0byBzcGVjaWZ5IHdo
+ZXJlIEJpdEJha2Ugc2hvdWxkIHBsYWNlIHRoZSBkb3dubG9hZGVkIHNvdXJjZXMgaW50bwpETF9E
+SVIgPSAiL29lL29wZW5lbWJlZGRlZC9zb3VyY2VzIgoKIyBEZWxldGUgdGhlIGxpbmUgYmVsb3cu
+IFRoZW4gc3BlY2lmeSB3aGljaCAuYmIgZmlsZXMgdG8gY29uc2lkZXIgZm9yCiMgeW91ciBidWls
+ZC4gVHlwaWNhbGx5IHRoaXMgd2lsbCBiZSBzb21ldGhpbmcgbGlrZSBCQkZJTEVTID0gIi9wYXRo
+L3RvL29wZW5lbWJlZGRlZC9yZWNpcGVzLyovKi5iYiIKQkJGSUxFUyA9ICIvb2Uvb3BlbmVtYmVk
+ZGVkL3JlY2lwZXMvKi8qLmJiIgoKIyBVc2UgdGhlIEJCTUFTSyBiZWxvdyB0byBpbnN0cnVjdCBC
+aXRCYWtlIHRvIF9OT1RfIGNvbnNpZGVyIHNvbWUgLmJiIGZpbGVzCiMgVGhpcyBpcyBhIHJlZ3Vs
+YXJ5IGV4cHJlc3Npb24sIHNvIGJlIHN1cmUgdG8gZ2V0IHlvdXIgcGFyZW50aGVzaXMgYmFsYW5j
+ZWQuCkJCTUFTSyA9ICIiCgojIFVuY29tbWVudCB0aGlzIGlmIHlvdSB3YW50IHRvIHVzZSBhIHBy
+ZWJ1aWx0IHRvb2xjaGFpbi4gWW91IHdpbGwgbmVlZCB0bwojIHByb3ZpZGUgcGFja2FnZXMgZm9y
+IHRvb2xjaGFpbiBhbmQgYWRkaXRpb25hbCBsaWJyYXJpZXMgeW91cnNlbGYuIFlvdSBhbHNvCiMg
+aGF2ZSB0byBzZXQgUEFUSCBpbiB5b3VyIGVudmlyb25tZW50IHRvIG1ha2Ugc3VyZSBCaXRCYWtl
+IGZpbmRzIGFkZGl0aW9uYWwgYmluYXJpZXMuCiMgQVNTVU1FX1BST1ZJREVEICs9ICJ2aXJ0dWFs
+LyR7VEFSR0VUX1BSRUZJWH1nY2MgdmlydHVhbC9saWJjIgoKIyBVbmNvbW1lbnQgdGhpcyBpZiB5
+b3UncmUgYnVpbGRpbmcgZm9yIGFuIGFyY2ggdGhhdCB1c2VzIGVtdWxhdGVkIGxvY2FsZSAKIyBn
+ZW5lcmF0aW9uIHVuZGVyIHFlbXUgKG1haW5seSBhcm0gZ2xpYmMpIGFuZCBoYXZlIGFuIGV4dGVy
+bmFsIGdjYyAzLnggY29tcGlsZXIKIyB0aGF0IE9FIHJlY29nbmlzZXMuIFRoaXMgd2lsbCBtZWFu
+IHRoZSBnY2MtbmF0aXZlIGJ1aWxkIGlzIHNraXBwZWQsIHNwZWVkaW5nIAojIGJ1aWxkcyB1cC4K
+IyBBU1NVTUVfUFJPVklERUQgKz0gImdjYzMtbmF0aXZlIgoKIyBVbmNvbW1lbnQgdGhpcyBpZiB5
+b3UgYXJlIGJ1aWxkaW5nIExpbnV4IDIuNCBFbWJlZGl4IGtlcm5lbHMuCiMgaS5lLiBvcGVuemF1
+cnVzLXNhLTIuNC4xOCBhbmQgb3BlbnphdXJ1cy1weGEtMi40LjE4IC0gYW5kIGRvbid0IGZvcmdl
+dAojIHRvIHJlbmFtZSB0aGUgYmluYXJpZXMgYXMgaW5zdHJ1Y3RlZCBpbiB0aGUgV2lraS4KIyBN
+b3N0IHVzZXJzIGRvIG5vdCBuZWVkIHRoaXMgYW55bW9yZSB0aGFua2Z1bGx5IQojIEFTU1VNRV9Q
+Uk9WSURFRCArPSAidmlydHVhbC9hcm0tbGludXgtZ2NjLTIuOTUiCgojIFNlbGVjdCBiZXR3ZWVu
+IG11bHRpcGxlIGFsdGVybmF0aXZlIHByb3ZpZGVycywgaWYgbW9yZSB0aGFuIG9uZSBpcyBlbGln
+aWJsZS4KUFJFRkVSUkVEX1BST1ZJREVSUyA9ICJ2aXJ0dWFsL3F0ZTpxdGUgdmlydHVhbC9saWJx
+cGU6bGlicXBlLW9waWUiClBSRUZFUlJFRF9QUk9WSURFUlMgKz0gIiB2aXJ0dWFsL2xpYnNkbDps
+aWJzZGwteDExIgpQUkVGRVJSRURfUFJPVklERVJTICs9ICIgdmlydHVhbC8ke1RBUkdFVF9QUkVG
+SVh9Z2NjLWluaXRpYWw6Z2NjLWNyb3NzLWluaXRpYWwiClBSRUZFUlJFRF9QUk9WSURFUlMgKz0g
+IiB2aXJ0dWFsLyR7VEFSR0VUX1BSRUZJWH1nY2MtaW50ZXJtZWRpYXRlOmdjYy1jcm9zcy1pbnRl
+cm1lZGlhdGUiClBSRUZFUlJFRF9QUk9WSURFUlMgKz0gIiB2aXJ0dWFsLyR7VEFSR0VUX1BSRUZJ
+WH1nY2M6Z2NjLWNyb3NzIgpQUkVGRVJSRURfUFJPVklERVJTICs9ICIgdmlydHVhbC8ke1RBUkdF
+VF9QUkVGSVh9ZysrOmdjYy1jcm9zcyIKCiMgVW5jb21tZW50IHRoaXMgdG8gc3BlY2lmeSB3aGVy
+ZSBCaXRCYWtlIHNob3VsZCBjcmVhdGUgaXRzIHRlbXBvcmFyeSBmaWxlcy4KIyBOb3RlIHRoYXQg
+YSBmdWxsIGJ1aWxkIG9mIGV2ZXJ5dGhpbmcgaW4gT3BlbkVtYmVkZGVkIHdpbGwgdGFrZSBHaWdh
+Qnl0ZXMgb2YgaGFyZAojIGRpc2sgc3BhY2UsIHNvIG1ha2Ugc3VyZSB0byBmcmVlIGVub3VnaCBz
+cGFjZS4gVGhlIGRlZmF1bHQgVE1QRElSIGlzCiMgPGJ1aWxkIGRpcmVjdG9yeT4vdG1wCiMgRG9u
+J3QgdXNlIHN5bWxpbmtzIGluIGluIHRoZSBwYXRoIHRvIGF2b2lkIHByb2JsZW1zCiNUTVBESVIg
+PSAvb2UvYnVpbGQKCiMgVW5jb21tZW50IHRoaXMgdG8gc3BlY2lmeSBhIG1hY2hpbmUgdG8gYnVp
+bGQgZm9yLiBTZWUgdGhlIGNvbmYgZGlyZWN0b3J5CiMgZm9yIG1hY2hpbmVzIGN1cnJlbnRseSBr
+bm93biB0byBPcGVuRW1iZWRkZWQuIFRoaXMgd2lsbCBhdXRvbWF0aWNhbGx5IHRha2UgY2FyZQoj
+IG9mIFRBUkdFVF9BUkNICk1BQ0hJTkUgPSAiZG02NDQ2LWV2bSIKCiMgVXNlIHRoaXMgdG8gc3Bl
+Y2lmeSB0aGUgdGFyZ2V0IGFyY2hpdGVjdHVyZS4gTm90ZSB0aGF0IHRoaXMgaXMgb25seQojIG5l
+ZWRlZCB3aGVuIGJ1aWxkaW5nIGZvciBhIG1hY2hpbmUgbm90IGtub3duIHRvIE9wZW5FbWJlZGRl
+ZC4gQmV0dGVyIHVzZQojIHRoZSBNQUNISU5FIGF0dHJpYnV0ZSAoc2VlIGFib3ZlKQojVEFSR0VU
+X0FSQ0ggPSAiYXJtIgoKIyBVc2UgdGhpcyB0byBzcGVjaWZ5IHRoZSB0YXJnZXQgb3BlcmF0aW5n
+IHN5c3RlbS4gIFRoZSBkZWZhdWx0IGlzICJsaW51eCIsCiMgZm9yIGEgbm9ybWFsIGxpbnV4IHN5
+c3RlbSB3aXRoIGdsaWJjLiBTZXQgdGhpcyB0byAibGludXgtdWNsaWJjIiBpZiB5b3Ugd2FudAoj
+IHRvIGJ1aWxkIGEgdWNsaWJjIGJhc2VkIHN5c3RlbS4KIyBOb3JtYWxseSB0aGUgRElTVFJPIG9m
+IHlvdXIgY2hvb3Npbmcgd2lsbCB0YWtlIGNhcmUgb2YgdGhpcyAKIyBUQVJHRVRfT1MgPSAibGlu
+dXgiCiMgVEFSR0VUX09TID0gImxpbnV4LXVjbGliYyIKCiMgVW5jb21tZW50IHRoaXMgdG8gc2Vs
+ZWN0IGEgZGlzdHJpYnV0aW9uIHBvbGljeS4gU2VlIHRoZSBjb25mIGRpcmVjdG9yeQojIGZvciBk
+aXN0cmlidXRpb25zIGN1cnJlbnRseSBrbm93biB0byBPcGVuRW1iZWRkZWQuCiMgQWx0aG91Z2gg
+aXQgbm8gbG9uZ2VyIGNvbnRhaW4gdmVyc2lvbiBudW1iZXIgaW4gdGhlIChmaWxlLSluYW1lCiMg
+b3BlbnphdXJ1cy11bnN0YWJsZSBpcyBhIHNvIGNhbGxlZCAidmVyc2lvbmVkIiAgZGlzdHJvLCBp
+LmUuIHRoZXkgCiMgZXhwbGljaXRlbHkgc2VsZWN0IHNwZWNpZmljIHZlcnNpb25zIG9mIHZhcmlv
+dXMgcGFja2FnZXMuCiMgU3RheSBhd2F5IGZyb20gdW52ZXJzaW9uZWQgZGlzdHJvcyB1bmxlc3Mg
+eW91IHJlYWxseSBrbm93IHdoYXQgeW91IGFyZSBkb2luZwpESVNUUk8gPSAiYW5nc3Ryb20tMjAw
+OC4xIgoKIyBTbyBmYXIsIGFuZ3N0cm9tLmNvbmYgc2V0cyBFTkFCTEVfQklOQVJZX0xPQ0FMRV9H
+RU5FUkFUSU9OCiMgdG8gZ2VuZXJhdGUgYmluYXJ5IGxvY2FsZSBwYWNrYWdlcyBhdCBidWlsZCB0
+aW1lIHVzaW5nIHFlbXUtbmF0aXZlIGFuZAojIHRoZXJlYnkgZ3VhcmFudGVlIGkxOG4gc3VwcG9y
+dCBvbiBhbGwgZGV2aWNlcy4gSWYgeW91ciBidWlsZCBicmVha3Mgb24gCiMgcWVtdS1uYXRpdmUg
+Y29uc2lkZXIgZGlzYWJsaW5nIEVOQUJMRV9CSU5BUllfTE9DQUxFX0dFTkVSQVRJT04gKG5vdGUg
+dGhhdAojIHRoaXMgYnJlYWtzIGkxOG4gb24gZGV2aWNlcyB3aXRoIGxlc3MgdGhhbiAxMjhNQiBS
+QU0pIG9yIGluc3RhbGxpbmcKIyBhIHdvcmtpbmcgdGhpcmQtcGFydHkgcWVtdSAoZS5nLiBwcm92
+aWRlZCBieSB5b3VyIGRpc3RyaWJ1dGlvbikgYW5kCiMgYWRkaW5nIHFlbXUtbmF0aXZlIHRvIEFT
+U1VNRV9QUk9WSURFRC4gQ2F2ZWF0IGVtcHRvciwgc2luY2UgdGhpcmQtcGFydHkKIyBxZW11cyBs
+YWNrIHBhdGNoZXMgbmVlZGVkIHRvIHdvcmsgd2l0aCB2YXJpb3VzIE9FIHRhcmdldHMuCiMgRU5B
+QkxFX0JJTkFSWV9MT0NBTEVfR0VORVJBVElPTiA9ICIwIgojIEFTU1VNRV9QUk9WSURFRCArPSAi
+cWVtdS1uYXRpdmUiCgojIElmIEVOQUJMRV9CSU5BUllfTE9DQUxFX0dFTkVSQVRJT04gaXMgc2V0
+IHRvICIxIiwgeW91IGNhbiBsaW1pdCBsb2NhbGVzCiMgZ2VuZXJhdGVkIHRvIHRoZSBsaXN0IHBy
+b3ZpZGVkIGJ5IEdMSUJDX0dFTkVSQVRFX0xPQ0FMRVMuIFRoaXMgaXMgaHVnZQojIHRpbWUtc2F2
+aW9yIGZvciBkZXZlbG9wbWVudGFsIGJ1aWxkcy4gRm9ybWF0OiBsaXN0IG9mIGxvY2FsZS5lbmNv
+ZGluZyBwYWlycwojIHdpdGggc3BhY2VzIGFzIHNlcGFyYXRvcnMuCiMgR0xJQkNfR0VORVJBVEVf
+TE9DQUxFUyA9ICJlbl9VUy5VVEYtOCBlbl9HQi5VVEYtOCBkZV9ERS5VVEYtOCIKCiMgVW5jb21t
+ZW50IHRoaXMgdG8gc2VsZWN0IGEgcGFydGljdWxhciBtYWpvciBrZXJuZWwgdmVyc2lvbiBpZiB0
+aGUgTUFDSElORSBzZXR0aW5nCiMgc3VwcG9ydHMgbW9yZSB0aGFuIG9uZSBtYWpvciBrZXJuZWwg
+dmVyc2lvbi4gQ3VycmVudGx5IHRoaXMgaXMgc3Vwb3J0ZWQgYnkgdGhlCiMgZm9sbG93aW5nIE1B
+Q0hJTkUgdHlwZXM6IHBvb2RsZSwgdG9zYSBhbmQgc2ltcGFkLgojIE1BQ0hJTkVfS0VSTkVMX1ZF
+UlNJT04gPSAiMi42IgoKIyBVbmNvbW1lbnQgb25lIG9mIHRoZXNlIHRvIGJ1aWxkIHBhY2thZ2Vz
+IGR1cmluZyB0aGUgYnVpbGQgcHJvY2Vzcy4KIyBUaGlzIGlzIGRvbmUgYXV0b21hdGljYWxseSBp
+ZiB5b3Ugc2V0IERJU1RSTyAoc2VlIGFib3ZlKQojIElOSEVSSVQgPSAicGFja2FnZV9pcGsiCiMg
+SU5IRVJJVCA9ICJwYWNrYWdlX3RhciIKCiMgQWRkIHRoZSByZXF1aXJlZCBpbWFnZSBmaWxlIHN5
+c3RlbSB0eXBlcyBiZWxvdy4gVmFsaWQgYXJlIAojIGpmZnMyLCB0YXIoLmd6fGJ6MiksIGNwaW8o
+Lmd6KSwgY3JhbWZzLCBleHQyKC5neiksIGV4dDMoLmd6KQojIHNxdWFzaGZzLCBzcXVhc2hmcy1s
+em1hCklNQUdFX0ZTVFlQRVMgPSAiamZmczIgdGFyIgoKIyBVbmNvbW1lbnQgdGhpcyBpZiB5b3Ug
+d2FudCB0byBrZWVwIHRoZSB0ZW1wb3Jhcnkgcm9vdGZzCiMgZGlyZXRvcnksIHRoaXMgY2FuIGJl
+IHVzZWZ1bCBkdXJpbmcgZGV2ZWxvcG1lbnQuCiMgKE5vdGUgdGhhdCB0aGlzIHJvb3RmcyBpcyBO
+T1QgdXN1YWJsZSBhcyBORlMgZXhwb3J0LikKIyBJTUFHRV9LRUVQUk9PVEZTID0gIjEiCgojIFVu
+Y29tbWVudCB0aGlzIHRvIGRpc2FibGUgdGhlIHBhcnNlIGNhY2hlIChub3QgcmVjb21tZW5kZWQp
+LgojIENBQ0hFID0gIiIKCiMgVW5jb21tZW50IHRoaXMgaWYgeW91IHdhbnQgQml0QmFrZSB0byBl
+bWl0IGRlYnVnZ2luZyBvdXRwdXQKIyBCQkRFQlVHID0gInllcyIKCiMgVW5jb21tZW50IHRoZXNl
+IHR3byBpZiB5b3Ugd2FudCBCaXRCYWtlIHRvIGJ1aWxkIGltYWdlcyB1c2VmdWwgZm9yIGRlYnVn
+Z2luZy4gCiMgTm90ZSB0aGF0IElOSElCSVRfUEFDS0FHRV9TVFJJUCBuZWVkcyBhIHBhY2thZ2Ug
+Zm9ybWF0IHRvIGJlIGRlZmluZWQuCiMgQWxzbyBub3RlIHRoYXQgT0Ugbm93IHByb2R1Y2VzIC1k
+YmcgcGFja2FnZXMgd2hpY2ggY29udGFpbiBkZWJ1Z2dpbmcgc3ltYm9scy4KIyBERUJVR19CVUlM
+RCA9ICIxIgojIElOSElCSVRfUEFDS0FHRV9TVFJJUCA9ICIxIgoKIyBVbmNvbW1lbnQgdGhlc2Ug
+dG8gYnVpbGQgYSBwYWNrYWdlIHN1Y2ggdGhhdCB5b3UgY2FuIHVzZSBncHJvZiB0byBwcm9maWxl
+IGl0LgojIE5PVEU6IFRoaXMgd2lsbCBvbmx5IHdvcmsgd2l0aCAnbGludXgnIHRhcmdldHMsIG5v
+dAojICdsaW51eC11Y2xpYmMnLCBhcyB1Q2xpYmMgZG9lc24ndCBwcm92aWRlIHRoZSBuZWNlc3Nh
+cnkKIyBvYmplY3QgZmlsZXMuICBBbHNvLCBkb24ndCBidWlsZCBnbGliYyBpdHNlbGYgd2l0aCB0
+aGVzZQojIGZsYWdzLCBvciBpdCdsbCBmYWlsIHRvIGJ1aWxkLgojCiMgUFJPRklMRV9PUFRJTUla
+QVRJT04gPSAiLXBnIgojIFNFTEVDVEVEX09QVElNSVpBVElPTiA9ICIke1BST0ZJTEVfT1BUSU1J
+WkFUSU9OfSIKIyBMREZMQUdTID0rICItcGciCgojIFVuY29tbWVudCB0aGlzIHRvIGVuYWJsZSBw
+YXJhbGxlbCBtYWtlLgojIFRoaXMgYWxsb3dzIG1ha2UgdG8gc3Bhd24gbXV0bGlwbGUgcHJvY2Vz
+c2VzIHRvIHRha2UgYWR2YW50YWdlIG9mIG11bHRpcGxlIAojIHByb2Nlc3NvcnMuIFVzZWZ1bCBv
+biBTTVAgbWFjaGluZXMuIFRoaXMgbWF5IGJyZWFrIHNvbWUgcGFja2FnZXMgLSB3ZSdyZQojIGlu
+IHRoZSBwcm9jZXNzIG9mIG1hcmtpbmcgdGhlc2Ugc28gbGV0IHVzIGtub3cgaWYgeW91IGZpbmQg
+YW55LgojIFBBUkFMTEVMX01BS0UgPSAiLWogNCIKCiMgVW5jb21tZW50IHRvIHJ1biBtdWx0aXBs
+ZSBiaXRiYWtlIHRocmVhZHMgaW4gcGFyYWxsZWwuCiMgQml0YmFrZSBjYW4gZG8gbXVsdGlwbGUg
+am9icyBpbiBwYXJhbGxlbDogSXRzIGEgZ29vZCBpZGVhIG1ha2UgdXNlIG9mIAojIGFsbCBhdmFp
+bGFibGUgcmVzb3VyY2VzOiBlLmcuIHRvIGRvd25sb2FkIHNvdXJjZXMgd2hpbGUgc29tZSBvdGhl
+cgojIHBpZWNlIG9mIHNvZnR3YXJlIGlzIGNvbXBpbGVkLgojIEJCX05VTUJFUl9USFJFQURTID0g
+IjIiCgojIFVuY29tbWVudCB0aGlzIGlmIHlvdSB3YW50IEJpdEJha2UgdG8gZW1pdCB0aGUgbG9n
+IGlmIGEgYnVpbGQgZmFpbHMuCkJCSU5DTFVERUxPR1MgPSAieWVzIgoKIyBTcGVjaWZpZXMgYSBs
+b2NhdGlvbiB0byBzZWFyY2ggZm9yIHByZS1nZW5lcmF0ZWQgdGFyYmFsbHMgd2hlbiBmZXRjaGlu
+ZwojIGEgY3ZzOi8vIFVSSS4gT3V0Y29tbWVudCB0aGlzLCBpZiB5b3UgYWx3YXlzIHdhbnQgdG8g
+cHVsbCBkaXJlY3RseSBmcm9tIENWUy4KI0NWU19UQVJCQUxMX1NUQVNIID0gIiIKCiMgVW5jb21t
+ZW50IHRoaXMgaWYgeW91IHdhbnQgdG8gaW5zdGFsbCBzaGFyZWQgbGlicmFyaWVzIGRpcmVjdGx5
+IHVuZGVyIHRoZWlyIFNPTkFNRSwKIyByYXRoZXIgdGhhbiBpbnN0YWxsaW5nIGFzIHRoZSBmdWxs
+IHZlcnNpb24gYW5kIHN5bWxpbmtpbmcgdG8gdGhlIFNPTkFNRS4KIyBQQUNLQUdFX1NOQVBfTElC
+X1NZTUxJTktTID0gIjEiCgojIEVESVQgVEhJUyBGSUxFIGFuZCB0aGVuIHJlbW92ZSB0aGUgbGlu
+ZSBiZWxvdyBiZWZvcmUgdXNpbmchCkFOR1NUUk9NX0VYVFJBX0lOU1RBTEwgPSAiIHNjcmVlbiBv
+cHJvZmlsZSBvc3NpZS1mbS1mcm9tLWZpbGUgIgoKQkJGSUxFUyA9ICIvb2Uvb3JnLm9wZW5lbWJl
+ZGRlZC5kZXYvcGFja2FnZXMvKi8qLmJiIC9vZS9vc3NpZV9jb2xsZWN0aW9uL3BhY2thZ2VzLyov
+Ki5iYiIKCkJCRklMRV9DT0xMRUNUSU9OUyA9ICJ1cHN0cmVhbSBvc3NpZSIKCkJCRklMRV9QQVRU
+RVJOX3Vwc3RyZWFtID0gIl4vb2Uvb3JnLm9wZW5lbWJlZGRlZC5kZXYvcGFja2FnZXMiCkJCRklM
+RV9QUklPUklUWV91cHN0cmVhbSA9ICI1IgoKQkJGSUxFX1BBVFRFUk5fb3NzaWUgPSAiXi9vZS9v
+c3NpZS9wYWNrYWdlcyIKQkJGSUxFX1BSSU9SSVRZX29zc2llID0gIjEwIgoK
+
+--_6f66f845-2d07-4d3c-84ee-aa8f26f80b02_--
