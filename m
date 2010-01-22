@@ -1,29 +1,27 @@
-Received: from exchsrvr.syntech-fuelmaster.com ([199.44.250.2]
-	helo=courier.syntech-fuelmaster.com)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mbutsch@syntech-fuelmaster.com>) id 1NYQJh-0007dq-On
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 21:41:20 +0100
-Received: from Courier.syntech.org ([fe80::f1e9:ec58:2caf:f234]) by
-	Courier.syntech.org ([fe80::f1e9:ec58:2caf:f234%14]) with mapi;
-	Fri, 22 Jan 2010 15:37:17 -0500
-From: Mark Butsch <mbutsch@syntech-fuelmaster.com>
-To: "'openembedded-devel@lists.openembedded.org'"
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 22 Jan 2010 15:37:16 -0500
-Thread-Topic: Difficulties building java
-Thread-Index: Acqbor/NGqla6ki6QEO4T6qxI4Ua7g==
-Message-ID: <6C2434209962DC46B88345CA85C334A28596C7F9D3@Courier.syntech.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 199.44.250.2
-X-SA-Exim-Mail-From: mbutsch@syntech-fuelmaster.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NYRNe-0000DA-KT for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Jan 2010 22:49:29 +0100
+Received: from g225141051.adsl.alicedsl.de ([92.225.141.51]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NYRLS-0004UO-Mf for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Jan 2010 21:47:10 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <6C2434209962DC46B88345CA85C334A28596C7F9D3@Courier.syntech.org>
+References: <6C2434209962DC46B88345CA85C334A28596C7F9D3@Courier.syntech.org>
+Date: Fri, 22 Jan 2010 22:47:08 +0100
+Message-ID: <1264196828.26541.14.camel@mattotaupa.wohnung.familie-menzel.net>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Difficulties building java
+Subject: Re: Difficulties building java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,60 +35,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2010 20:41:21 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 22 Jan 2010 21:49:29 -0000
+X-Groupsio-MsgNum: 16043
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-bcXD2ksUH0uJrfwXsjMN"
+
+--=-bcXD2ksUH0uJrfwXsjMN
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hello,
-
-I am trying to build java under OE and I am having some difficulties. I hav=
-e used the wiki page to get me as far as I am, but I am stuck.
-
-I have an x86 64-bit build machine, using the Angstrom distro, my target is=
- generic i686.
-
-From the wiki, I am have the following in my conf/machine file:
-
------
-PREFERRED_PROVIDER_virtual/java-initial =3D "cacao-initial"
-PREFFERED_VERSION_cacao-initial =3D "0.98"
-
-PREFERRED_PROVIDER_virtual/java-native =3D "cacao-native"
-PREFFERED_VERSION_cacao-native =3D "0.99.3"
-
-#PREFERRED_PROVIDER_virtual/javac-native =3D "ecj-bootstrap-native"
-# I switched to openjdk because I encountered errors with ecj-bootstrap
-#
-PREFFERED_VERSION_libecj-bootstrap =3D "3.4"
-PREFERRED_PROVIDER_virtual/javac-native =3D "openjdk-javac-native"
-
-PREFERRED_PROVIDER_classpath =3D "classpath"
-PREFFERED_VERSION_classpath-initial =3D "0.93"
-PREFFERED_VERSION_classpath-native =3D "0.97.2"
-
-PREFERRED_PROVIDER_swt3.4-gtk =3D "swt3.4-gtk"
-
-PREFFERED_VERSION_cacao=3D "0.99.4"
-PREFFERED_VERSION_classpath=3D "0.98"
------
-
-The error I am stuck at currently is:
-
-ERROR: Build of /home/oe/openembedded/recipes/classpath/classpath_0.98.bb d=
-o_configure failed
-
-From the log.do_configure file:
-
-checking if ecj -warn:-deprecation,serial,unusedImport works... yes
-checking if java works... configure: error: The Java compiler ecj -warn:-de=
-precation,serial,unusedIm
-port failed (see config.log, check the CLASSPATH?)
-FATAL: oe_runconf failed
-
-Any suggestions would be greatly appreciated.
-
-Mark
+Dear Mark,
 
 
+Am Freitag, den 22.01.2010, 15:37 -0500 schrieb Mark Butsch:
 
+[=E2=80=A6]
+
+> The error I am stuck at currently is:
+>=20
+> ERROR: Build of /home/oe/openembedded/recipes/classpath/classpath_0.98.bb=
+ do_configure failed
+>=20
+> >From the log.do_configure file:
+>=20
+> checking if ecj -warn:-deprecation,serial,unusedImport works... yes
+> checking if java works... configure: error: The Java compiler ecj -warn:-=
+deprecation,serial,unusedIm
+> port failed (see config.log, check the CLASSPATH?)
+> FATAL: oe_runconf failed
+
+I have no idea, but can find this mentioned `config.log` and look if
+anything interesting is in there?
+
+
+Thanks,
+
+Paul
+
+--=-bcXD2ksUH0uJrfwXsjMN
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAktaHNwACgkQPX1aK2wOHVjDNwCaAqQAa9UbVhGKAZ6qN/OByriv
+Ow8An2eD4OPKB0+dAS/SucJbthcuX7gE
+=dlab
+-----END PGP SIGNATURE-----
+
+--=-bcXD2ksUH0uJrfwXsjMN--
