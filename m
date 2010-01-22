@@ -1,27 +1,41 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from fg-out-1718.google.com ([72.14.220.156])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NYRNe-0000DA-KT for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 22:49:29 +0100
-Received: from g225141051.adsl.alicedsl.de ([92.225.141.51]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NYRLS-0004UO-Mf for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 21:47:10 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <michael.lippautz@gmail.com>) id 1NYRYj-0000YY-J6
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Jan 2010 23:00:56 +0100
+Received: by fg-out-1718.google.com with SMTP id 19so641512fgg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Jan 2010 13:58:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=eJXHdxacgTm2Df209XMf57sBSrXYQYPzx+EH3ld7TxU=;
+	b=LgSbg7E8mmuPNSZbiXXnHn6c7unB2pBKlkPN/cPjowf5sVgk5TMjpJ7iq/QVoge6EE
+	vSGQEhJHTBiIX59sZ/lyPaH5j0dnTCFYi6WClM9cqJ7asa01PJKrqS9AfZTaCKsq6iaQ
+	JNqGaRIBSs/AQgGDoz11V+3KLUHjh40vPZlf4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=FSzCTv5L898BWVvTl7/VEwib+yN5IMNRZ3l0ofdGc55TRVLjiL4bsB3e7it4zELyzX
+	btwAtGi9nyB19CDbj6ZYbMSFnrwAzhAlMLiYehj26KRAaBcyysLauSX8DmI0+fDcsdb8
+	QUoKU81FGLyPTvo7EvKN6rQXhNIpVDAlAzx8A=
+Received: by 10.102.206.30 with SMTP id d30mr1830676mug.99.1264197517603;
+	Fri, 22 Jan 2010 13:58:37 -0800 (PST)
+Received: from localhost.localdomain ([188.45.31.245])
+	by mx.google.com with ESMTPS id j10sm10781871muh.13.2010.01.22.13.58.35
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 22 Jan 2010 13:58:36 -0800 (PST)
+From: Michael Lippautz <michael.lippautz@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <6C2434209962DC46B88345CA85C334A28596C7F9D3@Courier.syntech.org>
-References: <6C2434209962DC46B88345CA85C334A28596C7F9D3@Courier.syntech.org>
-Date: Fri, 22 Jan 2010 22:47:08 +0100
-Message-ID: <1264196828.26541.14.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Fri, 22 Jan 2010 22:58:47 +0100
+Message-Id: <1264197527-25414-1-git-send-email-michael.lippautz@gmail.com>
+X-Mailer: git-send-email 1.6.4.4
+In-Reply-To: <n>
+References: <n>
+X-SA-Exim-Connect-IP: 72.14.220.156
+X-SA-Exim-Mail-From: michael.lippautz@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Difficulties building java
+Subject: [PATCH 1/2] gpsd: Prepare recipe and inc for version bump
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,54 +49,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2010 21:49:29 -0000
-X-Groupsio-MsgNum: 16043
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-bcXD2ksUH0uJrfwXsjMN"
-
---=-bcXD2ksUH0uJrfwXsjMN
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Dear Mark,
+X-List-Received-Date: Fri, 22 Jan 2010 22:00:56 -0000
 
 
-Am Freitag, den 22.01.2010, 15:37 -0500 schrieb Mark Butsch:
+Signed-off-by: Michael Lippautz <michael.lippautz@gmail.com>
+---
+ recipes/gpsd/gpsd.inc     |    9 ++++++---
+ recipes/gpsd/gpsd_2.38.bb |    4 +++-
+ 2 files changed, 9 insertions(+), 4 deletions(-)
 
-[=E2=80=A6]
+diff --git a/recipes/gpsd/gpsd.inc b/recipes/gpsd/gpsd.inc
+index a917fbe..5efbe2a 100644
+--- a/recipes/gpsd/gpsd.inc
++++ b/recipes/gpsd/gpsd.inc
+@@ -5,12 +5,14 @@ LICENSE = "GPL"
+ DEPENDS = "dbus-glib ncurses python"
+ PROVIDES = "virtual/gpsd"
+ 
++INC_PR = "r0"
++
+ EXTRA_OECONF = "--x-includes=${STAGING_INCDIR}/X11 \
+                 --x-libraries=${STAGING_LIBDIR} \
+                 --enable-dbus \
+-                --enable-python"
++"
+ 
+-SRC_URI = "http://download.berlios.de/gpsd/gpsd-${PV}.tar.gz \
++SRC_URI = "http://download.berlios.de/gpsd/gpsd-${PV}.tar.gz;name=gpsd \
+            file://gpsd-default \
+            file://gps-hardware \
+            file://gpsd"
+@@ -28,6 +30,8 @@ LDFLAGS += "-L${STAGING_LIBDIR} -lm"
+ export STAGING_INCDIR
+ export STAGING_LIBDIR
+ 
++TARGET_CC_ARCH += "${LDFLAGS}"
++
+ do_compile_prepend() {
+     export BUILD_SYS="${BUILD_SYS}"
+     export HOST_SYS="${HOST_SYS}"
+@@ -41,7 +45,6 @@ do_install_prepend() {
+ 
+ do_install_append() {
+         install -d ${D}/${sysconfdir}/init.d
+-        install -d ${D}/dev
+         install -m 0755 ${WORKDIR}/gpsd ${D}/${sysconfdir}/init.d/
+         install -m 0755 ${WORKDIR}/gps-hardware ${D}/${sysconfdir}/init.d/gps-hardware.default
+         install -d ${D}/${sysconfdir}/default
+diff --git a/recipes/gpsd/gpsd_2.38.bb b/recipes/gpsd/gpsd_2.38.bb
+index 06a5fe7..7c7a477 100644
+--- a/recipes/gpsd/gpsd_2.38.bb
++++ b/recipes/gpsd/gpsd_2.38.bb
+@@ -1,5 +1,7 @@
+ require gpsd.inc
+ 
+-PR = "r2"
++PR = "${INC_PR}.1"
+ # make attempts to link gpspacket.so without waiting for all compiler tasks:
+ PARALLEL_MAKE = ""
++
++EXTRA_OECONF += " --enable-python "
+-- 
+1.6.4.4
 
-> The error I am stuck at currently is:
->=20
-> ERROR: Build of /home/oe/openembedded/recipes/classpath/classpath_0.98.bb=
- do_configure failed
->=20
-> >From the log.do_configure file:
->=20
-> checking if ecj -warn:-deprecation,serial,unusedImport works... yes
-> checking if java works... configure: error: The Java compiler ecj -warn:-=
-deprecation,serial,unusedIm
-> port failed (see config.log, check the CLASSPATH?)
-> FATAL: oe_runconf failed
-
-I have no idea, but can find this mentioned `config.log` and look if
-anything interesting is in there?
 
 
-Thanks,
-
-Paul
-
---=-bcXD2ksUH0uJrfwXsjMN
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktaHNwACgkQPX1aK2wOHVjDNwCaAqQAa9UbVhGKAZ6qN/OByriv
-Ow8An2eD4OPKB0+dAS/SucJbthcuX7gE
-=dlab
------END PGP SIGNATURE-----
-
---=-bcXD2ksUH0uJrfwXsjMN--
