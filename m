@@ -1,27 +1,25 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NYEMu-0006gH-Jt
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NYEwX-0006w1-EJ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 08:55:51 +0100
-Received: from tamarin.localnet (123-192-163-227.dynamic.kbronet.com.tw
-	[123.192.163.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 37E5B1B10C04
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2010 07:52:16 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Fri, 22 Jan 2010 09:32:40 +0100
+Received: (qmail 1994 invoked by uid 813007); 22 Jan 2010 08:30:21 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO localhost.localdomain)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 22 Jan 2010 08:30:21 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Jan 2010 08:53:13 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <1264067024.3695.14.camel@mattotaupa.wohnung.familie-menzel.net>
-	<hjan00$419$1@ger.gmane.org> <1264119214.7697.73.camel@utx.utx.cz>
-In-Reply-To: <1264119214.7697.73.camel@utx.utx.cz>
-MIME-Version: 1.0
-Message-Id: <201001220853.13287.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Date: Fri, 22 Jan 2010 09:30:16 +0100
+Message-Id: <1264149016-18488-1-git-send-email-marcin@juszkiewicz.com.pl>
+X-Mailer: git-send-email 1.6.6
+In-Reply-To: <19c1b8a91001212252u260f854enc50a9cc8f44099b4@mail.gmail.com>
+References: <19c1b8a91001212252u260f854enc50a9cc8f44099b4@mail.gmail.com>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Getting patches committed
+Subject: [PATCH] ruby-native: fix building with gcc 4.4.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,24 +33,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2010 07:55:51 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 22 Jan 2010 08:32:40 -0000
 
-On Friday 22 January 2010 01:13:34 Stanislav Brabec wrote:
+From: Marcin Juszkiewicz <marcin@buglabs.net>
 
-> Well, and OE probably has vulnerable software.
-> 
-> For example CVE-2008-1372 was present in bzip2 for more than a year:
-> Full disclosure date: 10/17/2008
-> Fixed in OE: 01/10/2010
+Looks like gcc 4.4.x do not like the way Ruby programmers used
+preprocessor.
 
-Yupp... that was something that bothered me at Openmoko. I tried to talk 
-Julian into writing a script to go through the debian security uploads and 
-compare that with versions we have in OE...
+This change is not present in .dev due to different versions of Ruby.
 
-yet another topic to take care of.
-	z.
+Signed-off-by: Marcin Juszkiewicz <marcin@buglabs.net>
+---
+ recipes/ruby/files/gcc44.patch    |   19 +++++++++++++++++++
+ recipes/ruby/ruby-native_1.8.5.bb |    5 +++++
+ 2 files changed, 24 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/ruby/files/gcc44.patch
+
+diff --git a/recipes/ruby/files/gcc44.patch b/recipes/ruby/files/gcc44.patch
+new file mode 100644
+index 0000000..dc5a608
+--- /dev/null
++++ b/recipes/ruby/files/gcc44.patch
+@@ -0,0 +1,19 @@
++---
++ math.c |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++--- ruby-1.8.5.orig/math.c
+++++ ruby-1.8.5/math.c
++@@ -32,11 +32,11 @@ domain_check(x, msg)
++ 	    rb_sys_fail(msg);
++ 	}
++ 	if (isnan(x)) {
++ #if defined(EDOM)
++ 	    errno = EDOM;
++-#elif define(ERANGE)
+++#elif defined(ERANGE)
++ 	    errno = ERANGE;
++ #endif
++ 	    continue;
++ 	}
++ 	break;
+diff --git a/recipes/ruby/ruby-native_1.8.5.bb b/recipes/ruby/ruby-native_1.8.5.bb
+index e4d2a33..f35363d 100644
+--- a/recipes/ruby/ruby-native_1.8.5.bb
++++ b/recipes/ruby/ruby-native_1.8.5.bb
+@@ -1,2 +1,7 @@
+ require ruby.inc
+ inherit native
++
++PR = "r1"
++
++SRC_URI += " file://gcc44.patch;patch=1 "
++
+-- 
+1.6.6
+
+
+
 
 
