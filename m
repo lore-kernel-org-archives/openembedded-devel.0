@@ -1,42 +1,39 @@
-Received: from mail-gx0-f227.google.com ([209.85.217.227])
+Received: from mail-iw0-f203.google.com ([209.85.223.203])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NYDVZ-0006Wv-C2
+	(envelope-from <raj.khem@gmail.com>) id 1NYDbZ-0005aB-Nr
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 08:00:45 +0100
-Received: by gxk27 with SMTP id 27so829466gxk.7
+	Fri, 22 Jan 2010 08:06:56 +0100
+Received: by iwn41 with SMTP id 41so733100iwn.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Jan 2010 22:58:18 -0800 (PST)
+	Thu, 21 Jan 2010 23:04:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:subject:date:to
-	:mime-version:content-transfer-encoding:from:organization:message-id
-	:user-agent; bh=abAHgp0D+akFpUv4kD5ajoU1vKdV+6HblFdqk/Emd1Q=;
-	b=jMtxlSYCdpTlj1UhmDqEogqGFBoMFYAPkzFWoAy9mo9Fbpp3BqsbWO5YXMXNCb/3Ne
-	dVKWxEdK8GkCZKGSwlBDvDiAQAX+hw7uG5A53RbBAKjt/2DJFqj62fZIn/+w3KzjEbur
-	YLe0wwoN8R2cGZ/dxeveN8O2CqO97WzhmJcfU=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=OjhaZYyJVijU289iNXJjF4oXgCf7IGPd8VNIXWsd+HQ=;
+	b=HvIQ9qCXZxRpLxPFyGFDZXzGmVKCO99jL5wqxQ3q2YAB8+ESgrbVxLDb4qs4jEjaGh
+	tCZvQZsDlYO3HNC9MpSiLrD28Td7GuLvOeHW86P4MUP07NQ1ymKUDh12em3eY3GMrPiM
+	qb2UMx+Yt0Wlm2pXjEpI6mi1skR2JLVzesud8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:subject:date:to:mime-version:content-transfer-encoding
-	:from:organization:message-id:user-agent;
-	b=XZU5Bfg6u1FQl+q6XSP7d+h2ACxb16xu8+xUbj5YlEDGMW6yBEL1xslU6ZjFglcgyN
-	HA8+I6Bx0KgidtgJSImtufP+x2K16/SpF1Ms1AyyQpMPjSTitu2kPazg4K0pfTA85WKT
-	iSIWdNYTuPLRDmawEMzE8KHt2tJmHUa9s+tIw=
-Received: by 10.100.243.37 with SMTP id q37mr3302265anh.164.1264143498758;
-	Thu, 21 Jan 2010 22:58:18 -0800 (PST)
-Received: from guohr-laptop-ubuntu ([123.162.71.84])
-	by mx.google.com with ESMTPS id 4sm701781ywg.13.2010.01.21.22.58.14
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 21 Jan 2010 22:58:18 -0800 (PST)
-Date: Fri, 22 Jan 2010 14:58:06 +0800
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=fU2MycTxtXvf2sys/NdJIFhtT7h8VtsZkavnizNXrAibCsDWaZBFDDVmchaHPnPECP
+	IWcZvoDFiJogy5NsmmNJ3P7eSf1FhW+LdlbzWyJaMPWuBPc84NjnGYVtpwG+/22GFfUL
+	D7K9nx1Agz6TqY1KlhmCepFJd4vN3IzJNkt18=
 MIME-Version: 1.0
-From: "Guo Hongruan" <camelguo@gmail.com>
-Organization: Gulessoft, Inc
-Message-ID: <op.u6w9m4x2mn1qzu@guohr-laptop-ubuntu>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.217.227
-X-SA-Exim-Mail-From: camelguo@gmail.com
+Received: by 10.231.148.194 with SMTP id q2mr3976209ibv.97.1264143875733; Thu, 
+	21 Jan 2010 23:04:35 -0800 (PST)
+In-Reply-To: <op.u6w9m4x2mn1qzu@guohr-laptop-ubuntu>
+References: <op.u6w9m4x2mn1qzu@guohr-laptop-ubuntu>
+Date: Thu, 21 Jan 2010 23:04:35 -0800
+Message-ID: <19c1b8a91001212304l1bb94efdr81be0ea00b973118@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.223.203
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: how to generate files in site directory
+Subject: Re: how to generate files in site directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,21 +47,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2010 07:00:45 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 22 Jan 2010 07:06:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hi guys,
-   I am trying to build an openembedded project for sparc machine. But I  
-found the file for spare in site directory are not complete at all. I want  
-to know whether or not there is some standard method to generate site file  
-or I must write it by hand.
+On Thu, Jan 21, 2010 at 10:58 PM, Guo Hongruan <camelguo@gmail.com> wrote:
+> Hi guys,
+> =A0I am trying to build an openembedded project for sparc machine. But I =
+found
+> the file for spare in site directory are not complete at all. I want to k=
+now
+> whether or not there is some standard method to generate site file or I m=
+ust
+> write it by hand.
 
-Thanks a lot!
--- 
-Guo Hongruan, Embedded Linux Consultant
-Skype: camelguo
-Twitter: camelguo
-http://www.gulessoft.com
+you can start with a copy of closest architecture.as (A bad idea but)
+a starting point.
+you should check for the values in there if they are really whats
+desired/available on sparc.
+
+
+>
+> Thanks a lot!
+> --
+> Guo Hongruan, Embedded Linux Consultant
+> Skype: camelguo
+> Twitter: camelguo
+> http://www.gulessoft.com
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
