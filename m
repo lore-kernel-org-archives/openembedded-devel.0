@@ -1,28 +1,25 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NYJHp-0000zE-JE for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 14:10:56 +0100
-Received: from f053040144.adsl.alicedsl.de ([78.53.40.144]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NYJFd-0008Rd-UQ for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 13:08:38 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <philip@balister.org>) id 1NYJTa-0001GF-5q
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Jan 2010 14:23:05 +0100
+Received: (qmail 12609 invoked by uid 1003); 22 Jan 2010 13:20:43 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 22 Jan 2010 13:20:43 -0000
+Message-ID: <4B59A628.2070602@balister.org>
+Date: Fri, 22 Jan 2010 08:20:40 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <loom.20100122T100408-864@post.gmane.org>
-References: <4B564B3D.7020108@atmel.com>
-	<loom.20100122T100408-864@post.gmane.org>
-Date: Fri, 22 Jan 2010 14:08:36 +0100
-Message-ID: <1264165716.3307.23.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+References: <n> <1264154671-29704-1-git-send-email-michael.lippautz@gmail.com>
+In-Reply-To: <1264154671-29704-1-git-send-email-michael.lippautz@gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH v2] Enable bmp and JPEG files for fbv
+Subject: Re: [PATCH 2/2] libxml2: Add catalog and docbook support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,45 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2010 13:10:56 -0000
-X-Groupsio-MsgNum: 16024
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-VLTMuAv/O0ZQj4haPKUh"
+X-List-Received-Date: Fri, 22 Jan 2010 13:23:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---=-VLTMuAv/O0ZQj4haPKUh
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 01/22/2010 05:04 AM, Michael Lippautz wrote:
+> * Adds catalog and docbook support, which is needed for
+>    libxml-libxml-perl recipe.
+> ---
+>   recipes/libxml/libxml2.inc |    2 +-
+>   1 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/libxml/libxml2.inc b/recipes/libxml/libxml2.inc
+> index bc31123..44e6f82 100644
+> --- a/recipes/libxml/libxml2.inc
+> +++ b/recipes/libxml/libxml2.inc
+> @@ -9,7 +9,7 @@ PR = "r1"
+>
+>   inherit autotools pkgconfig binconfig
+>
+> -EXTRA_OECONF = "--without-python --without-debug --without-legacy --without-catalog --without-docbook --with-c14n"
+> +EXTRA_OECONF = "--without-python --without-debug --without-legacy --with-catalog --with-docbook --with-c14n"
 
-Am Freitag, den 22.01.2010, 09:05 +0000 schrieb Graeme Gregory:
-> Ulf Samuelsson <ulf.samuelsson <at> atmel.com> writes:
->=20
-> > +PACKAGES =3D "fbv"
->=20
-> NAK
->=20
-> PACKAGES is never set in a recipe only added to.
+Does this change any of the recipes DEPENDS?
 
-More information seems to available in the user manual [1].
+Philip
 
 
-Thanks,
-
-Paul
-
-
-[1] http://docs.openembedded.org/usermanual/html/recipes_packages.html
-
---=-VLTMuAv/O0ZQj4haPKUh
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktZo1QACgkQPX1aK2wOHViyQQCdFoNqEwT5hO32pdnSgcI9T0Vv
-M8EAn1g1XRCbVHWfM9ZL/7koCllLKl7U
-=mZGS
------END PGP SIGNATURE-----
-
---=-VLTMuAv/O0ZQj4haPKUh--
