@@ -1,26 +1,38 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-yw0-f178.google.com ([209.85.211.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1NYL6t-0002Xz-Tj
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NYLA8-0002gv-QN
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 16:07:47 +0100
-Received: (qmail 11379 invoked by uid 1003); 22 Jan 2010 15:05:24 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 22 Jan 2010 15:05:24 -0000
-Message-ID: <4B59BEB2.6080805@balister.org>
-Date: Fri, 22 Jan 2010 10:05:22 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
+	Fri, 22 Jan 2010 16:11:07 +0100
+Received: by ywh8 with SMTP id 8so1155706ywh.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Jan 2010 07:08:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=0l/8yUcRTj2RJeCDt/YK9QgJ/8HNfk0EJW/8IjBCo/Q=;
+	b=Ri1Bk4FUf/FtIT8KK9ttZuPpKJfJjhiEZ37wQZ6AfNGWk6Z3QFWUQt7WLMQLxRSMgm
+	r3yshxwU9g7pI3ADOph8lH9wSY5+P8Tb8EL8NisdNZ55DUAU/9gNstVW6y/O6ImYor22
+	Vbksya+RfYvUV+FUViRpggeyIsmUbnBP05w0s=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=FvzgtAUPokWmf4Smiyd4yJm8j1/+eL9WovwgtZzmBROBtKE5k+eqt81rWN77HHAb0K
+	gjUhA6xlSoLwS0h57K4LYfgxMtPoK4G3pEBL7p6HRb3NJQJlT9npjWRitYWbGlGjVNoC
+	4WWlzLt0Fuc4aUeRD93A1sQWlz8/DkBg7J3tA=
 MIME-Version: 1.0
+Received: by 10.101.105.30 with SMTP id h30mr3936141anm.225.1264172926408; 
+	Fri, 22 Jan 2010 07:08:46 -0800 (PST)
+In-Reply-To: <201001221539.21722.christopher.lang@acurana.de>
+References: <201001221539.21722.christopher.lang@acurana.de>
+Date: Fri, 22 Jan 2010 16:08:46 +0100
+Message-ID: <ac9c93b11001220708tc984a38v8f9312c0bab5decf@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <19c1b8a91001212252u260f854enc50a9cc8f44099b4@mail.gmail.com>
-	<1264149016-18488-1-git-send-email-marcin@juszkiewicz.com.pl>
-In-Reply-To: <1264149016-18488-1-git-send-email-marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+X-SA-Exim-Connect-IP: 209.85.211.178
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] ruby-native: fix building with gcc 4.4.x
+Subject: Re: New Recipe: xmlto-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,65 +46,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2010 15:07:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 22 Jan 2010 15:11:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 01/22/2010 03:30 AM, Marcin Juszkiewicz wrote:
-> From: Marcin Juszkiewicz<marcin@buglabs.net>
+2010/1/22 Christopher Lang <christopher.lang@acurana.de>:
 >
-> Looks like gcc 4.4.x do not like the way Ruby programmers used
-> preprocessor.
+> Hi,
 >
-> This change is not present in .dev due to different versions of Ruby.
+> please find enclosed a new recipe: xmlto.
+> Checksums attached too.
 >
-> Signed-off-by: Marcin Juszkiewicz<marcin@buglabs.net>
+> Tested with OE from Jan 11 on Opensuse 11 building for machine "x86",
+> distro "minimal".
+>
+> Checked with oe-stylize.py.
+>
+> Chris
+>
+> http://www.acurana.de/
 
-Acked-by: Philip Balister <philip@balister.org>
+Please provide the recipe as an inline patch, much easier to review.
+And why are you giving recipes for two versions???
 
-
-> ---
->   recipes/ruby/files/gcc44.patch    |   19 +++++++++++++++++++
->   recipes/ruby/ruby-native_1.8.5.bb |    5 +++++
->   2 files changed, 24 insertions(+), 0 deletions(-)
->   create mode 100644 recipes/ruby/files/gcc44.patch
+Frans (who does not even know what xmlto is supposed to do)
 >
-> diff --git a/recipes/ruby/files/gcc44.patch b/recipes/ruby/files/gcc44.patch
-> new file mode 100644
-> index 0000000..dc5a608
-> --- /dev/null
-> +++ b/recipes/ruby/files/gcc44.patch
-> @@ -0,0 +1,19 @@
-> +---
-> + math.c |    2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +--- ruby-1.8.5.orig/math.c
-> ++++ ruby-1.8.5/math.c
-> +@@ -32,11 +32,11 @@ domain_check(x, msg)
-> + 	    rb_sys_fail(msg);
-> + 	}
-> + 	if (isnan(x)) {
-> + #if defined(EDOM)
-> + 	    errno = EDOM;
-> +-#elif define(ERANGE)
-> ++#elif defined(ERANGE)
-> + 	    errno = ERANGE;
-> + #endif
-> + 	    continue;
-> + 	}
-> + 	break;
-> diff --git a/recipes/ruby/ruby-native_1.8.5.bb b/recipes/ruby/ruby-native_1.8.5.bb
-> index e4d2a33..f35363d 100644
-> --- a/recipes/ruby/ruby-native_1.8.5.bb
-> +++ b/recipes/ruby/ruby-native_1.8.5.bb
-> @@ -1,2 +1,7 @@
->   require ruby.inc
->   inherit native
-> +
-> +PR = "r1"
-> +
-> +SRC_URI += " file://gcc44.patch;patch=1 "
-> +
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
