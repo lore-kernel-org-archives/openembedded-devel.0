@@ -1,41 +1,47 @@
 Received: from mail-iw0-f175.google.com ([209.85.223.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NYM6p-0003G5-Kv
+	(envelope-from <raj.khem@gmail.com>) id 1NYMAR-0000Mv-Ui
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 17:11:47 +0100
-Received: by iwn5 with SMTP id 5so1078207iwn.24
+	Fri, 22 Jan 2010 17:15:31 +0100
+Received: by iwn5 with SMTP id 5so1081459iwn.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2010 08:09:25 -0800 (PST)
+	Fri, 22 Jan 2010 08:13:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=I5cUyt3Pk6l5mSvFwNeee2EmL9ZYIZ7AI8FnEmux7hU=;
-	b=HdUmEJCMDlt/4NLZqgRR/iaY3jb5qs9rLZbfRrUsIFemQ9QEuD6Bj204q6EBwG3TrL
-	zoo9QHkdg44avSDYtV/2nHJjCwJPWNWgg2tVAo13iPPYFV9k2JiiAtAXkE2tymchpKj6
-	JolfnEuYfp0VmKhQ/ajXOyxoAnr/5VUMDSU70=
+	bh=5dyNRb8dFGWQukWtJSlE5EFFM+BCP3yoKJPCaSDt39I=;
+	b=JSoQ+clpLV0zPyEk3Sj9atuUFk6WTzkWtMFNA9U5i4xnLhNEpWeldbDRggKaN/g8QZ
+	ZpsBHy1NwOaXzWf/+CbhJ6h4VmM4hauSsCWHXOm2vVePMq99fmTYhe+hjY7vVh68jyaC
+	l18ZKLArSlLD2fuEaEgjMUXNI5cDU20KhiCok=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=mJvqA94UPaa+J3FSOGLhgaPpkmIfeV0zL3WpJn9CXtx50PP6A1cUKTlOY5AWbXud98
-	rHKXuTtGMlCaanvvQiJ+8vVGMcjcSjjBddr/cxVgbQgE87ADLIIDBgzTWz/MFHQx81fe
-	ANGFo48FfY9yBpgntgKFR5SbVOPn5S4n8cawQ=
+	b=GnXg9qJF/nL+LmEq3gyh9CdTYSR5uoKkPwAoeo8Tvpn0BgAF1yl+bL74N5RfCMiR/r
+	PlENDva9tUrm3IpL2tnKCRZ2JlIhpUEkacGSwOLgMOaHTqJTWG4AXlN9j+jkUzS5Jp41
+	Zv6sQselXYGshxc8Uozm+s6sf6m4FmLOmM5Gg=
 MIME-Version: 1.0
-Received: by 10.231.144.81 with SMTP id y17mr3232724ibu.99.1264176565157; Fri, 
-	22 Jan 2010 08:09:25 -0800 (PST)
-In-Reply-To: <4B59BEB2.6080805@balister.org>
-References: <19c1b8a91001212252u260f854enc50a9cc8f44099b4@mail.gmail.com>
-	<1264149016-18488-1-git-send-email-marcin@juszkiewicz.com.pl>
-	<4B59BEB2.6080805@balister.org>
-Date: Fri, 22 Jan 2010 08:09:25 -0800
-Message-ID: <19c1b8a91001220809u3289d168x576eee65344334d6@mail.gmail.com>
+Received: by 10.231.161.69 with SMTP id q5mr3196058ibx.57.1264176789521; Fri, 
+	22 Jan 2010 08:13:09 -0800 (PST)
+In-Reply-To: <ac9c93b11001212352s479136d7ge27afe3433afe5c2@mail.gmail.com>
+References: <1263760344-26105-1-git-send-email-eric@eukrea.com>
+	<hivtt3$v2r$1@ger.gmane.org>
+	<1263763723.5353.16.camel@mattotaupa.wohnung.familie-menzel.net>
+	<hj09k8$km$1@ger.gmane.org>
+	<1263820243.3675.560.camel@mill.internal.reciva.com>
+	<1263824896.26227.112.camel@dax.rpnet.com>
+	<hj21vd$32h$1@ger.gmane.org>
+	<1264114415.457.1069.camel@lenovo.internal.reciva.com>
+	<ac9c93b11001212352s479136d7ge27afe3433afe5c2@mail.gmail.com>
+Date: Fri, 22 Jan 2010 08:13:09 -0800
+Message-ID: <19c1b8a91001220813w46f8888ewcffb90df590bda93@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.223.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] ruby-native: fix building with gcc 4.4.x
+Subject: Re: include default PR or not (was: [PATCH] barebox: Add recipe for this new bootloader)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,73 +55,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2010 16:11:48 -0000
+X-List-Received-Date: Fri, 22 Jan 2010 16:15:31 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 22, 2010 at 7:05 AM, Philip Balister <philip@balister.org> wrot=
-e:
-> On 01/22/2010 03:30 AM, Marcin Juszkiewicz wrote:
+On Thu, Jan 21, 2010 at 11:52 PM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> 2010/1/21 Phil Blundell <philb@gnu.org>:
+>> On Mon, 2010-01-18 at 17:24 +0100, Rolf Leggewie wrote:
+>>> Richard Purdie wrote:
+>>> > On Mon, 2010-01-18 at 13:10 +0000, Phil Blundell wrote:
+>>> [...]
+>>> >> only way we will get a definitive answer would be to have the TSC ha=
+nd
+>>> >> down a judgement on the matter.
+>>> >
+>>> > That would seem sensible if only to lay this matter to rest once and =
+for
+>>> > all! It would also be good to test the TSC processes...
+>>>
+>>> I would think this is too minor for the TSC to bother. =A0But if you wa=
+nt
+>>> to take it on, why should I object? =A0It does take up bandwidth on thi=
+s
+>>> list from time to time, so much is true. =A0Personally, I don't think t=
+he
+>>> best option would be to rule in favor of one or the other faction,
+>>> because that's what it would be seen for. =A0I don't think the TSC can
+>>> really win and resolve this issue.
 >>
->> From: Marcin Juszkiewicz<marcin@buglabs.net>
->>
->> Looks like gcc 4.4.x do not like the way Ruby programmers used
->> preprocessor.
->>
->> This change is not present in .dev due to different versions of Ruby.
->>
->> Signed-off-by: Marcin Juszkiewicz<marcin@buglabs.net>
+>> I'm not entirely sure what point you are making about it being
+>> undesirable for the TSC to "rule in favour of one or the other faction".
+>> One of the primary roles of the TSC is to resolve or adjudicate disputes
+>> between developers and, since such disputes are often binary issues by
+>> their nature, it seems likely that in a lot of cases this is going to
+>> boil down to having the TSC accept the viewpoint of one party and reject
+>> the viewpoint of the other. =A0It would certainly be a shame for the TSC
+>> to shy away from making a decision just because it might be seen to
+>> agree with one group and disagree with another.
 >
-> Acked-by: Philip Balister <philip@balister.org>
+> Actually the # of options for TSC are somewhat bigger.
+> A decision could be that X is the required way of working and !X is not o=
+k
+> However, it can also be weakened into making X is the preferred way
+> and !X less desirable (without forbidding it)
+> And there is still the option to leave X as a personal preference to
+> the developer.
 >
+> For PR, guess my suggestion would be to have PR=3D"r0" as preferred and
+> not having PR as less desirabe.
+> But if you make a change bumping PR (or adding PR=3D"r1", if no PR
+> exists) is required.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+IMO Letting PR=3Dr0 is better because it does help people in remembering
+to bump PR when they make the first change after r0
+afterall 0 is also a number so it does convey some information in the recip=
+e.
+
 >
->> ---
->> =A0recipes/ruby/files/gcc44.patch =A0 =A0| =A0 19 +++++++++++++++++++
->> =A0recipes/ruby/ruby-native_1.8.5.bb | =A0 =A05 +++++
->> =A02 files changed, 24 insertions(+), 0 deletions(-)
->> =A0create mode 100644 recipes/ruby/files/gcc44.patch
+> Frans
 >>
->> diff --git a/recipes/ruby/files/gcc44.patch
->> b/recipes/ruby/files/gcc44.patch
->> new file mode 100644
->> index 0000000..dc5a608
->> --- /dev/null
->> +++ b/recipes/ruby/files/gcc44.patch
->> @@ -0,0 +1,19 @@
->> +---
->> + math.c | =A0 =A02 +-
->> + 1 file changed, 1 insertion(+), 1 deletion(-)
->> +
->> +--- ruby-1.8.5.orig/math.c
->> ++++ ruby-1.8.5/math.c
->> +@@ -32,11 +32,11 @@ domain_check(x, msg)
->> + =A0 =A0 =A0 =A0 =A0 rb_sys_fail(msg);
->> + =A0 =A0 =A0 }
->> + =A0 =A0 =A0 if (isnan(x)) {
->> + #if defined(EDOM)
->> + =A0 =A0 =A0 =A0 =A0 errno =3D EDOM;
->> +-#elif define(ERANGE)
->> ++#elif defined(ERANGE)
->> + =A0 =A0 =A0 =A0 =A0 errno =3D ERANGE;
->> + #endif
->> + =A0 =A0 =A0 =A0 =A0 continue;
->> + =A0 =A0 =A0 }
->> + =A0 =A0 =A0 break;
->> diff --git a/recipes/ruby/ruby-native_1.8.5.bb
->> b/recipes/ruby/ruby-native_1.8.5.bb
->> index e4d2a33..f35363d 100644
->> --- a/recipes/ruby/ruby-native_1.8.5.bb
->> +++ b/recipes/ruby/ruby-native_1.8.5.bb
->> @@ -1,2 +1,7 @@
->> =A0require ruby.inc
->> =A0inherit native
->> +
->> +PR =3D "r1"
->> +
->> +SRC_URI +=3D " file://gcc44.patch;patch=3D1 "
->> +
+>> A large part of the reason for having the TSC in the first place was to
+>> establish a group of people who were empowered (and, indeed, obliged) to
+>> make decisions, and I think this is a fairly good example of a situation
+>> where simply having a decision of some kind is more important than the
+>> detail of what exactly that decision is.
+>>
+>> This particular issue is clearly somewhat trivial and, whichever
+>> viewpoint prevails, the impact in the real world is going to be fairly
+>> small. =A0But it has cropped up on this list several times now and it
+>> seems equally clear that, so long as it remains unresolved, it will
+>> continue to waste everybody's time and contributors will continue to be
+>> baffled as to what exactly they should put in their patches in order to
+>> get them applied.
+>>
+>> p.
+>>
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
