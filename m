@@ -1,42 +1,40 @@
 Received: from mail-ew0-f213.google.com ([209.85.219.213])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1NYGXf-0000Zy-KQ
+	(envelope-from <lgirdwood@gmail.com>) id 1NYGof-0002UI-VB
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 11:15:06 +0100
-Received: by ewy5 with SMTP id 5so1088627ewy.12
+	Fri, 22 Jan 2010 11:32:41 +0100
+Received: by ewy5 with SMTP id 5so1103764ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2010 02:12:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=vRogfllMSos4ef03voD5Z1PPRfH0l/+gqrZOcoc3Fxc=;
-	b=xqVPcIRVXKpzo8bldq6MUa0htm4Vu53dj3M3mBWu+Gy0mgzIgJHBBf6v0HaWv4O1gh
-	37Ie1WMgmzyxRvtXqLYa6yo4td2ucmuRS2GbPVrYtczPzMxD77Wx6BpQ/FjHHKtPf/5f
-	L6AIq0mbaE0Ecr4KxyZh3TpDs96dfEJ02qvtM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=YQDQmdX5t0SZdmclZvnT083ml75ZcBpAMCZeiljq/rIb21WbOhCEgREmnWx9G78Jw7
-	1ZTvPIoJ8eIfnyNKtijwFLuH61XTzzSlHvEBFp1cBMCuXbMYzEGWgCnRfOR8O/DVcC7M
-	1ZZBkbA1E/BX86S3DsImh3D81rhhqsZTRH/rI=
-MIME-Version: 1.0
-Received: by 10.213.39.206 with SMTP id h14mr3612457ebe.97.1264155165933; Fri, 
-	22 Jan 2010 02:12:45 -0800 (PST)
-In-Reply-To: <d1b08f941001171559w5ae011a6u61715d0fd236046@mail.gmail.com>
-References: <d1b08f941001170606w13dcfc0ey341da93deb94c7b8@mail.gmail.com>
-	<201001172013.06010.marcin@juszkiewicz.com.pl>
-	<201001172258.25258.jay4mail@gmail.com>
-	<d1b08f941001171559w5ae011a6u61715d0fd236046@mail.gmail.com>
-Date: Fri, 22 Jan 2010 11:12:45 +0100
-Message-ID: <d1b08f941001220212v588c5f9bvbf2a149660a86898@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
-	Zaurus PDA developers list <zaurus-devel@lists.linuxtogo.org>
+	Fri, 22 Jan 2010 02:30:20 -0800 (PST)
+Received: by 10.213.109.88 with SMTP id i24mr3520887ebp.22.1264156219837;
+	Fri, 22 Jan 2010 02:30:19 -0800 (PST)
+Received: from ?10.200.221.6? (host81-136-218-57.in-addr.btopenworld.com
+	[81.136.218.57])
+	by mx.google.com with ESMTPS id 10sm3115321eyd.37.2010.01.22.02.30.17
+	(version=SSLv3 cipher=RC4-MD5); Fri, 22 Jan 2010 02:30:18 -0800 (PST)
+From: Liam Girdwood <lrg@slimlogic.co.uk>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <ec1f3d401001212332i6062141ej86abe243cd7858d4@mail.gmail.com>
+References: <ec1f3d400911270337wbbbcae8gab291075d242c9d9@mail.gmail.com>
+	<19c1b8a90912100944g4b405319v6e121ebf03449f0b@mail.gmail.com>
+	<ec1f3d400912110347x365c0873i9d03b58d02cbf735@mail.gmail.com>
+	<19c1b8a90912110925k5e8063b7wdc160af7eb29fb2a@mail.gmail.com>
+	<ec1f3d401001050143o2cdfb989x119ea3dd6352f4ed@mail.gmail.com>
+	<19c1b8a91001050954m5f002c66s7a282c1382a2dcea@mail.gmail.com>
+	<ec1f3d401001200350g9fb8480h1ed53a8ee4a90e0@mail.gmail.com>
+	<19c1b8a91001201656g6fd1751bvc2a478b2d4c9ef8c@mail.gmail.com>
+	<ec1f3d401001210353j1802eb6am9d931438e3db1302@mail.gmail.com>
+	<1264075631.9743.178.camel@mill.internal.reciva.com>
+	<ec1f3d401001212332i6062141ej86abe243cd7858d4@mail.gmail.com>
+Date: Fri, 22 Jan 2010 10:30:16 +0000
+Message-ID: <1264156216.3094.87.camel@odin>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
 X-SA-Exim-Connect-IP: 209.85.219.213
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+X-SA-Exim-Mail-From: lgirdwood@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] Zaurus: make updater.sh obsolete for poodle, clamshells and tosa
+Subject: Re: cortex-a9 build failure at glibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,31 +48,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2010 10:15:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 22 Jan 2010 10:32:41 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Again about that Sharp headers...I tried to see why these were
-necessary long ago:
+On Fri, 2010-01-22 at 13:02 +0530, RK Raggit wrote:
+> > That instruction is "ldcl 11, cr0, [fp, #-140]", which looks like a VFP
+> > double precision instruction.  Do you have floating point hardware on
+> > your platform, and is it enabled in the kernel?
+> >
+> > p.
+> >
+> >
+> 
+> You are right Phil. I have a Neon FPU but it was disabled in the kernel
+> configuration.I am able to boot and get a shell now.
+> 
 
-Reading here  http://www.oesf.org/index.php?title=C3000_Device_Specifics#Creation_of_a_new_initrd_for_the_SL-C3000
-it seems there was even an header appended to the kernel, not only one
-header prepended to the initrd.
+Fwiw, I now have a console image building for cortex-a9 using glibc
+instead of eglibc with the following conf :-
 
-I suspect we have already broken the compatibility with original
-layout (Version and Master version blocks)... so I'd go ahead
-simplifying the script!
+gcc -> 4.4.2
+binutils -> 2.20
+glibc ->2.10.1
 
-Regards
+I've pushed it here if anyone is interested :-
 
-Andrea
+http://git.slimlogic.co.uk/cgi-bin/cgit.cgi/oe.git/log/?h=omap4
 
+Liam
 
-P.S. about flashing the kernel (on clamshells, not collie)
-nandlogical /dev/mtd1 WRITE 0x0E0000 0x140000 zImage.bin
-vs
-nandlogical /dev/mtd1 WRITE 0x0E0000 0x13C000 zImage.bin
-
-What are these 0x4000 = 16KiB between kernel1 and kernel2?
-( http://www.h5.dion.ne.jp/~rimemoon/zaurus/memo_006.htm )
 
 
