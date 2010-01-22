@@ -1,41 +1,42 @@
-Received: from mail-fx0-f212.google.com ([209.85.220.212])
+Received: from mail-ew0-f213.google.com ([209.85.219.213])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.lippautz@gmail.com>) id 1NYGPQ-0000Lq-97
+	(envelope-from <andrea.adami@gmail.com>) id 1NYGXf-0000Zy-KQ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 11:06:35 +0100
-Received: by fxm4 with SMTP id 4so992882fxm.12
+	Fri, 22 Jan 2010 11:15:06 +0100
+Received: by ewy5 with SMTP id 5so1088627ewy.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2010 02:04:14 -0800 (PST)
+	Fri, 22 Jan 2010 02:12:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=o/nURN4svFzpO3tBvmAudkYT8Z3EjaC+TcvHSbIwido=;
-	b=p8hpLJcd3Yce0q3tk8oK8OmKxeHIaguTWR4v84koIzJPqAtmNC1ExfHStJmJz7Ds0d
-	aJnxXaZPV+e4h1MjHJDioJ6HcsZ4jRQsvqveo3YdBl6z7NrM2+p6CVx752fvCzCjGErT
-	NXQQYYCW+dgpnC9LXET8TIw/EhupuPpo52EfY=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=vRogfllMSos4ef03voD5Z1PPRfH0l/+gqrZOcoc3Fxc=;
+	b=xqVPcIRVXKpzo8bldq6MUa0htm4Vu53dj3M3mBWu+Gy0mgzIgJHBBf6v0HaWv4O1gh
+	37Ie1WMgmzyxRvtXqLYa6yo4td2ucmuRS2GbPVrYtczPzMxD77Wx6BpQ/FjHHKtPf/5f
+	L6AIq0mbaE0Ecr4KxyZh3TpDs96dfEJ02qvtM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=NWV3me4SsE/TYd5Si8KfdjqgMfXlqJalgu/KUkkmV2IZtAXa+f+BiPEFwoBwOHCcO2
-	bp2TsLo2mE3oT6qSU/wToererUyrtxaosExiSKEkuRRU3dcBK9xbZC9Fs/zlJHKyP2yD
-	xVn+w4C4MDb1TsmEP+PknHRFA+Wc2EX4lR/m0=
-Received: by 10.223.19.200 with SMTP id c8mr2696030fab.55.1264154653862;
-	Fri, 22 Jan 2010 02:04:13 -0800 (PST)
-Received: from localhost.localdomain (mk090152164068.a1.net [90.152.164.68])
-	by mx.google.com with ESMTPS id 22sm2620995fkq.54.2010.01.22.02.04.11
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 22 Jan 2010 02:04:13 -0800 (PST)
-From: Michael Lippautz <michael.lippautz@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Jan 2010 11:04:31 +0100
-Message-Id: <1264154671-29704-1-git-send-email-michael.lippautz@gmail.com>
-X-Mailer: git-send-email 1.6.4.4
-In-Reply-To: <n>
-References: <n>
-X-SA-Exim-Connect-IP: 209.85.220.212
-X-SA-Exim-Mail-From: michael.lippautz@gmail.com
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=YQDQmdX5t0SZdmclZvnT083ml75ZcBpAMCZeiljq/rIb21WbOhCEgREmnWx9G78Jw7
+	1ZTvPIoJ8eIfnyNKtijwFLuH61XTzzSlHvEBFp1cBMCuXbMYzEGWgCnRfOR8O/DVcC7M
+	1ZZBkbA1E/BX86S3DsImh3D81rhhqsZTRH/rI=
+MIME-Version: 1.0
+Received: by 10.213.39.206 with SMTP id h14mr3612457ebe.97.1264155165933; Fri, 
+	22 Jan 2010 02:12:45 -0800 (PST)
+In-Reply-To: <d1b08f941001171559w5ae011a6u61715d0fd236046@mail.gmail.com>
+References: <d1b08f941001170606w13dcfc0ey341da93deb94c7b8@mail.gmail.com>
+	<201001172013.06010.marcin@juszkiewicz.com.pl>
+	<201001172258.25258.jay4mail@gmail.com>
+	<d1b08f941001171559w5ae011a6u61715d0fd236046@mail.gmail.com>
+Date: Fri, 22 Jan 2010 11:12:45 +0100
+Message-ID: <d1b08f941001220212v588c5f9bvbf2a149660a86898@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	Zaurus PDA developers list <zaurus-devel@lists.linuxtogo.org>
+X-SA-Exim-Connect-IP: 209.85.219.213
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 2/2] libxml2: Add catalog and docbook support
+Subject: Re: [RFC] Zaurus: make updater.sh obsolete for poodle, clamshells and tosa
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,29 +50,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2010 10:06:35 -0000
+X-List-Received-Date: Fri, 22 Jan 2010 10:15:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* Adds catalog and docbook support, which is needed for
-  libxml-libxml-perl recipe.
----
- recipes/libxml/libxml2.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Again about that Sharp headers...I tried to see why these were
+necessary long ago:
 
-diff --git a/recipes/libxml/libxml2.inc b/recipes/libxml/libxml2.inc
-index bc31123..44e6f82 100644
---- a/recipes/libxml/libxml2.inc
-+++ b/recipes/libxml/libxml2.inc
-@@ -9,7 +9,7 @@ PR = "r1"
- 
- inherit autotools pkgconfig binconfig
- 
--EXTRA_OECONF = "--without-python --without-debug --without-legacy --without-catalog --without-docbook --with-c14n"
-+EXTRA_OECONF = "--without-python --without-debug --without-legacy --with-catalog --with-docbook --with-c14n"
- 
- export LDFLAGS += "-ldl"
- 
--- 
-1.6.4.4
+Reading here  http://www.oesf.org/index.php?title=C3000_Device_Specifics#Creation_of_a_new_initrd_for_the_SL-C3000
+it seems there was even an header appended to the kernel, not only one
+header prepended to the initrd.
 
+I suspect we have already broken the compatibility with original
+layout (Version and Master version blocks)... so I'd go ahead
+simplifying the script!
+
+Regards
+
+Andrea
+
+
+P.S. about flashing the kernel (on clamshells, not collie)
+nandlogical /dev/mtd1 WRITE 0x0E0000 0x140000 zImage.bin
+vs
+nandlogical /dev/mtd1 WRITE 0x0E0000 0x13C000 zImage.bin
+
+What are these 0x4000 = 16KiB between kernel1 and kernel2?
+( http://www.h5.dion.ne.jp/~rimemoon/zaurus/memo_006.htm )
 
 
