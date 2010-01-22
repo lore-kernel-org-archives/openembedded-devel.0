@@ -1,27 +1,38 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NYKtN-0005Bx-Mi for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 15:53:48 +0100
-Received: from f053040144.adsl.alicedsl.de ([78.53.40.144]
-	helo=[192.168.178.25])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NYKrC-0005KV-2K for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 14:51:30 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NYKvS-0005Km-MT for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Jan 2010 15:55:57 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NYKtD-0001oX-AT
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 22 Jan 2010 15:53:35 +0100
+Received: from p5b3b3b76.dip.t-dialin.net ([91.59.59.118])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Jan 2010 15:53:35 +0100
+Received: from no2spam by p5b3b3b76.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Jan 2010 15:53:35 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201001221544.26770.christopher.lang@acurana.de>
-References: <201001221544.26770.christopher.lang@acurana.de>
-Date: Fri, 22 Jan 2010 15:51:28 +0100
-Message-ID: <1264171888.14275.7.camel@mattotaupa.wohnung.familie-menzel.net>
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Fri, 22 Jan 2010 15:53:06 +0100
+Message-ID: <hjce4p$nsr$1@ger.gmane.org>
+References: <1264067024.3695.14.camel@mattotaupa.wohnung.familie-menzel.net>	<201001211102.11252.holger+oe@freyther.de>	<883120D4-C490-4713-B872-F02376E88CEE@vanille-media.de>	<hj9giu$mfp$1@ger.gmane.org>
+	<1264111223.7697.31.camel@utx.utx.cz>	<hjan00$419$1@ger.gmane.org>
+	<20100122114443.GL18793@ibawizard.net>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5b3b3b76.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <20100122114443.GL18793@ibawizard.net>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: New Recipe: svgalib
+Subject: Re: Getting patches committed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,53 +46,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2010 14:53:48 -0000
-X-Groupsio-MsgNum: 16027
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-zuDIYZbSivRFQhPvg+jn"
+X-List-Received-Date: Fri, 22 Jan 2010 14:55:57 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---=-zuDIYZbSivRFQhPvg+jn
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Petr Štetiar wrote:
+> What's wrong with public Git hostings?
 
-Dear Christopher,
-
-
-Am Freitag, den 22.01.2010, 15:44 +0100 schrieb Christopher Lang:
-> and another one, old but sometimes quite useful: svgalib
-> Checksums attached.
->=20
-> Tested with OE from Jan 11 on Opensuse 11 building for machine "x86",=20
-> distro "minimal".
->=20
-> Checked with oe-stylize.py.
-
-could you please send this as patch created with `git format-patch` and
-a commit message. The requirements (Signed-off-by, etc.) are described
-in [1].
-
-You would ease the lives of the developers significantly, since review
-(no decompress) and committing the patch is much easier.
+Nothing.  In fact, it would be preferred for various reasons.  But I
+haven't yet found anything that works the way I was envisioning this to
+work.  The mob branch concept of repo.or.cz comes close.  But it's just
+one branch, I'd prefer to have several.
 
 
-Thanks,
 
-Paul
-
-
-[1] http://wiki.openembedded.net/index.php/Commit_Policy
-
---=-zuDIYZbSivRFQhPvg+jn
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktZu2kACgkQPX1aK2wOHVhb9ACfUO0kZl1gf8ut7+wxT5BlUXqW
-CM0AmgLs+UvNNbKkGljb4AwJCCDeUTB1
-=yFkt
------END PGP SIGNATURE-----
-
---=-zuDIYZbSivRFQhPvg+jn--
