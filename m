@@ -1,28 +1,23 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NY9Rz-00047g-0C
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NYDBp-0004mK-Bw
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 03:40:46 +0100
-Received: from tamarin.localnet (123-192-163-227.dynamic.kbronet.com.tw
-	[123.192.163.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 4CF761B10C02;
-	Fri, 22 Jan 2010 02:37:09 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Fri, 22 Jan 2010 07:40:20 +0100
+Received: (qmail 5907 invoked by uid 813007); 22 Jan 2010 06:38:01 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO localhost.localdomain)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 22 Jan 2010 06:38:01 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Jan 2010 11:30:04 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <1264067024.3695.14.camel@mattotaupa.wohnung.familie-menzel.net>
-	<201001211102.11252.holger+oe@freyther.de>
-	<883120D4-C490-4713-B872-F02376E88CEE@vanille-media.de>
-In-Reply-To: <883120D4-C490-4713-B872-F02376E88CEE@vanille-media.de>
-MIME-Version: 1.0
-Message-Id: <201001211130.04522.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Date: Fri, 22 Jan 2010 07:37:55 +0100
+Message-Id: <1264142275-17415-1-git-send-email-marcin@juszkiewicz.com.pl>
+X-Mailer: git-send-email 1.6.6
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: "Dr. Michael Lauer" <mickey@vanille-media.de>
-Subject: Re: Getting patches committed
+Subject: [STABLE][PATCH] ruby-native: fix building with gcc 4.4.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,30 +31,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2010 02:40:46 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 22 Jan 2010 06:40:20 -0000
 
-On Thursday 21 January 2010 11:20:13 Dr. Michael Lauer wrote:
-> Am 21.01.2010 um 11:02 schrieb Holger Hans Peter Freyther:
-> >> 2. Is there a way to have a staging branch where all patches are
-> >> committed to, which have not been reviewed for let us say one week, to
-> >> get more testing and before they go into the dev branch? Maybe it is
-> >> easier for people to at least test build such a branch?
-> >
-> > Would you be interested in creating such a branch for us? I assume it is
-> > certainly easier to git cherry-pick a patch than to download the mbox and
-> > use git am..
-> 
-> I fully agree. I'm neither using patchwork nor do I find patches on the
->  list a good idea. I'd welcome for-oe-upstream trees that would contain
->  patches that -- if good -- we could just pull from.
+From: Marcin Juszkiewicz <marcin@buglabs.net>
 
-I do like patches on the mailinglist. One thing we could try are the merge 
-requests on gitorious? This way we can comment on the patches in a webui and 
-they get automatically merged if we like it.
+Looks like gcc 4.4.x do not like the way Ruby programmers used
+preprocessor.
 
-z.
+This change is not present in .dev due to different versions of Ruby.
+
+Signed-off-by: Marcin Juszkiewicz <marcin@buglabs.net>
+---
+ recipes/ruby/files/gcc44.patch    |   23 +++++++++++++++++++++++
+ recipes/ruby/ruby-native_1.8.5.bb |    5 +++++
+ 2 files changed, 28 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/ruby/files/gcc44.patch
+
+diff --git a/recipes/ruby/files/gcc44.patch b/recipes/ruby/files/gcc44.patch
+new file mode 100644
+index 0000000..b8f8ee4
+--- /dev/null
++++ b/recipes/ruby/files/gcc44.patch
+@@ -0,0 +1,23 @@
++---
++ math.c |    4 +++-
++ 1 file changed, 3 insertions(+), 1 deletion(-)
++
++--- ruby-1.8.5.orig/math.c
+++++ ruby-1.8.5/math.c
++@@ -32,13 +32,15 @@ domain_check(x, msg)
++ 	    rb_sys_fail(msg);
++ 	}
++ 	if (isnan(x)) {
++ #if defined(EDOM)
++ 	    errno = EDOM;
++-#elif define(ERANGE)
+++#else
+++#if define(ERANGE)
++ 	    errno = ERANGE;
++ #endif
+++#endif
++ 	    continue;
++ 	}
++ 	break;
++     }
++ }
+diff --git a/recipes/ruby/ruby-native_1.8.5.bb b/recipes/ruby/ruby-native_1.8.5.bb
+index e4d2a33..f35363d 100644
+--- a/recipes/ruby/ruby-native_1.8.5.bb
++++ b/recipes/ruby/ruby-native_1.8.5.bb
+@@ -1,2 +1,7 @@
+ require ruby.inc
+ inherit native
++
++PR = "r1"
++
++SRC_URI += " file://gcc44.patch;patch=1 "
++
+-- 
+1.6.6
+
+
+
 
 
