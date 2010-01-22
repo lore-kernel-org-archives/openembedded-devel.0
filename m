@@ -1,40 +1,30 @@
-Received: from mail-ew0-f213.google.com ([209.85.219.213])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <lgirdwood@gmail.com>) id 1NYGof-0002UI-VB
+	(envelope-from <sledz@DResearch.DE>) id 1NYHKr-0004FG-Cx
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 11:32:41 +0100
-Received: by ewy5 with SMTP id 5so1103764ewy.12
+	Fri, 22 Jan 2010 12:05:56 +0100
+Received: from hiob.intern.dresearch.de (unknown [10.32.0.138])
+	by mail.dresearch.de (Postfix) with ESMTP id 085A949127F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2010 02:30:20 -0800 (PST)
-Received: by 10.213.109.88 with SMTP id i24mr3520887ebp.22.1264156219837;
-	Fri, 22 Jan 2010 02:30:19 -0800 (PST)
-Received: from ?10.200.221.6? (host81-136-218-57.in-addr.btopenworld.com
-	[81.136.218.57])
-	by mx.google.com with ESMTPS id 10sm3115321eyd.37.2010.01.22.02.30.17
-	(version=SSLv3 cipher=RC4-MD5); Fri, 22 Jan 2010 02:30:18 -0800 (PST)
-From: Liam Girdwood <lrg@slimlogic.co.uk>
+	Fri, 22 Jan 2010 12:03:38 +0100 (CET)
+Received: from exchange.intern.dresearch.de ([10.32.1.40]) by
+	hiob.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 22 Jan 2010 12:06:25 +0100
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Fri, 22 Jan 2010 12:03:50 +0100
+Message-ID: <4B598603.4080603@dresearch.de>
+Date: Fri, 22 Jan 2010 12:03:31 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ec1f3d401001212332i6062141ej86abe243cd7858d4@mail.gmail.com>
-References: <ec1f3d400911270337wbbbcae8gab291075d242c9d9@mail.gmail.com>
-	<19c1b8a90912100944g4b405319v6e121ebf03449f0b@mail.gmail.com>
-	<ec1f3d400912110347x365c0873i9d03b58d02cbf735@mail.gmail.com>
-	<19c1b8a90912110925k5e8063b7wdc160af7eb29fb2a@mail.gmail.com>
-	<ec1f3d401001050143o2cdfb989x119ea3dd6352f4ed@mail.gmail.com>
-	<19c1b8a91001050954m5f002c66s7a282c1382a2dcea@mail.gmail.com>
-	<ec1f3d401001200350g9fb8480h1ed53a8ee4a90e0@mail.gmail.com>
-	<19c1b8a91001201656g6fd1751bvc2a478b2d4c9ef8c@mail.gmail.com>
-	<ec1f3d401001210353j1802eb6am9d931438e3db1302@mail.gmail.com>
-	<1264075631.9743.178.camel@mill.internal.reciva.com>
-	<ec1f3d401001212332i6062141ej86abe243cd7858d4@mail.gmail.com>
-Date: Fri, 22 Jan 2010 10:30:16 +0000
-Message-ID: <1264156216.3094.87.camel@odin>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 209.85.219.213
-X-SA-Exim-Mail-From: lgirdwood@gmail.com
+X-OriginalArrivalTime: 22 Jan 2010 11:03:51.0043 (UTC)
+	FILETIME=[94419530:01CA9B52]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: cortex-a9 build failure at glibc
+Subject: package for kernel module devel?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,35 +38,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2010 10:32:41 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 22 Jan 2010 11:05:56 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2010-01-22 at 13:02 +0530, RK Raggit wrote:
-> > That instruction is "ldcl 11, cr0, [fp, #-140]", which looks like a VFP
-> > double precision instruction.  Do you have floating point hardware on
-> > your platform, and is it enabled in the kernel?
-> >
-> > p.
-> >
-> >
-> 
-> You are right Phil. I have a Neon FPU but it was disabled in the kernel
-> configuration.I am able to boot and get a shell now.
-> 
+Our team is developing new kernel modules for our machine. For fast
+development cycles it would be very helpful to be able to compile the
+modules at the machine itself.
 
-Fwiw, I now have a console image building for cortex-a9 using glibc
-instead of eglibc with the following conf :-
+By installing task-native-sdk & Co. nearly all needed stuff is
+available but i miss the linux kernel headers and the corresponding
+link to them (/lib/modules/x.x.x.x/build). :(
 
-gcc -> 4.4.2
-binutils -> 2.20
-glibc ->2.10.1
+Does a package exist for this (or for the complete kernel sources)?
 
-I've pushed it here if anyone is interested :-
-
-http://git.slimlogic.co.uk/cgi-bin/cgit.cgi/oe.git/log/?h=omap4
-
-Liam
+Steffen
 
 
 
