@@ -1,34 +1,35 @@
-Received: from mail-yw0-f178.google.com ([209.85.211.178])
+Received: from mail-yx0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NYLA8-0002gv-QN
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NYLGc-0002rx-6V
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 16:11:07 +0100
-Received: by ywh8 with SMTP id 8so1155706ywh.3
+	Fri, 22 Jan 2010 16:17:49 +0100
+Received: by yxe5 with SMTP id 5so1028610yxe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2010 07:08:46 -0800 (PST)
+	Fri, 22 Jan 2010 07:15:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type;
-	bh=0l/8yUcRTj2RJeCDt/YK9QgJ/8HNfk0EJW/8IjBCo/Q=;
-	b=Ri1Bk4FUf/FtIT8KK9ttZuPpKJfJjhiEZ37wQZ6AfNGWk6Z3QFWUQt7WLMQLxRSMgm
-	r3yshxwU9g7pI3ADOph8lH9wSY5+P8Tb8EL8NisdNZ55DUAU/9gNstVW6y/O6ImYor22
-	Vbksya+RfYvUV+FUViRpggeyIsmUbnBP05w0s=
+	bh=AOdjS7h5jg7LXSOkb85xRAFNblFU9H2Iwt6zq1KIFcQ=;
+	b=GIU33RQQTsftviUf21g0xQnMXGXDN+YwVthniM0ZFxrwJVlZxEa5BB0hSnRNx//f9n
+	f4yTUkQ3OZC4IM+zxSrR0wfK7MRCYhaJ7TxPYn/0AbhnBYFLwKTvghjjNbrTakKlHmBf
+	t2SGq6OYEy5dwrE2iQ1jjC4AWZF5dCpLrkq4M=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=FvzgtAUPokWmf4Smiyd4yJm8j1/+eL9WovwgtZzmBROBtKE5k+eqt81rWN77HHAb0K
-	gjUhA6xlSoLwS0h57K4LYfgxMtPoK4G3pEBL7p6HRb3NJQJlT9npjWRitYWbGlGjVNoC
-	4WWlzLt0Fuc4aUeRD93A1sQWlz8/DkBg7J3tA=
+	b=x3x67t9lRIX93OwrPa9r+Md/iE4DzpAKIRimltP1FjVAqe5MdARASxIS2QVBkHqTiW
+	WY/KYEEeBPVb328HH5/311RKR0/oMN27PBEhWmP6c+RaK4CZt+i4Vtso13jYFFkDSstj
+	zVUL+ie/360SqY353sXP2mrUnQ7pyn5FPOJWQ=
 MIME-Version: 1.0
-Received: by 10.101.105.30 with SMTP id h30mr3936141anm.225.1264172926408; 
-	Fri, 22 Jan 2010 07:08:46 -0800 (PST)
-In-Reply-To: <201001221539.21722.christopher.lang@acurana.de>
+Received: by 10.100.235.26 with SMTP id i26mr4040949anh.126.1264173327776; 
+	Fri, 22 Jan 2010 07:15:27 -0800 (PST)
+In-Reply-To: <ac9c93b11001220708tc984a38v8f9312c0bab5decf@mail.gmail.com>
 References: <201001221539.21722.christopher.lang@acurana.de>
-Date: Fri, 22 Jan 2010 16:08:46 +0100
-Message-ID: <ac9c93b11001220708tc984a38v8f9312c0bab5decf@mail.gmail.com>
+	<ac9c93b11001220708tc984a38v8f9312c0bab5decf@mail.gmail.com>
+Date: Fri, 22 Jan 2010 16:15:27 +0100
+Message-ID: <ac9c93b11001220715l2724a221n6bc5cb46480ecb67@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.178
+X-SA-Exim-Connect-IP: 209.85.210.175
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
@@ -46,36 +47,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2010 15:11:08 -0000
+X-List-Received-Date: Fri, 22 Jan 2010 15:17:49 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2010/1/22 Christopher Lang <christopher.lang@acurana.de>:
+2010/1/22 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+> 2010/1/22 Christopher Lang <christopher.lang@acurana.de>:
+>>
+>> Hi,
+>>
+>> please find enclosed a new recipe: xmlto.
+>> Checksums attached too.
+>>
+>> Tested with OE from Jan 11 on Opensuse 11 building for machine "x86",
+>> distro "minimal".
+>>
+>> Checked with oe-stylize.py.
+>>
+>> Chris
+>>
+>> http://www.acurana.de/
 >
-> Hi,
+> Please provide the recipe as an inline patch, much easier to review.
+> And why are you giving recipes for two versions???
 >
-> please find enclosed a new recipe: xmlto.
-> Checksums attached too.
->
-> Tested with OE from Jan 11 on Opensuse 11 building for machine "x86",
-> distro "minimal".
->
-> Checked with oe-stylize.py.
->
-> Chris
->
-> http://www.acurana.de/
+> Frans (who does not even know what xmlto is supposed to do)
 
-Please provide the recipe as an inline patch, much easier to review.
-And why are you giving recipes for two versions???
-
-Frans (who does not even know what xmlto is supposed to do)
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+Forgot one thing: why is this native-only. Who uses this?
 
 
