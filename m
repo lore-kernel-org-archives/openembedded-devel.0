@@ -1,27 +1,41 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from mail-yx0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NYF3l-0006xm-CE
+	(envelope-from <camelguo@gmail.com>) id 1NYFLk-0001hb-Oj
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 09:40:10 +0100
-Received: (qmail 22698 invoked by uid 813007); 22 Jan 2010 08:37:49 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 22 Jan 2010 08:37:49 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	Fri, 22 Jan 2010 09:58:43 +0100
+Received: by yxe5 with SMTP id 5so792729yxe.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Jan 2010 00:56:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=OJcRsvJD4gVALGQIW4YOYoNecSnGXVXGbr593Q4F7gs=;
+	b=IYOg5NZdZ00Oeusf4i6s1nJP9i7Kczmu8KwYelSnW4Ys31ACe4YGBX1RfDgzghqs3T
+	/bb1kjktP3ngl1X8LzCb9rsViLHJ498yKc1ppRp28s+rouviHUzsXhjuMkR4hWvitLHu
+	e7NUaBCgtf4RQl1GzhG1UOGCzx8BNHOi7N7/E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=IsPPfyeVO56V6p9TonF6C1BUL8ZuO3SctXaHNKPm8qK7x05KCzmnWEA8U1oQ8+A/7z
+	fvYm+nBp1HMrxZaKVOId1f2jQePLrdHZlO9+NbdFFoz0blj8ubKVOcoF4bWFk3Z0pZra
+	WYN637alTH58BZFTYXRC/cNnmFtjQMc9UDi2U=
+Received: by 10.101.141.33 with SMTP id t33mr3362980ann.218.1264150582754;
+	Fri, 22 Jan 2010 00:56:22 -0800 (PST)
+Received: from localhost ([123.162.71.84])
+	by mx.google.com with ESMTPS id 22sm731194ywh.30.2010.01.22.00.56.19
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 22 Jan 2010 00:56:22 -0800 (PST)
+From: Guo Hongruan <camelguo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Jan 2010 09:37:43 +0100
-User-Agent: KMail/1.12.4 (Linux/2.6.33-rc2-00268-g45d28b0; KDE/4.3.4; x86_64; ;
-	)
-References: <op.u6w8vggrmn1qzu@guohr-laptop-ubuntu>
-In-Reply-To: <op.u6w8vggrmn1qzu@guohr-laptop-ubuntu>
-MIME-Version: 1.0
-Message-Id: <201001220937.43964.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Date: Fri, 22 Jan 2010 16:55:56 +0800
+Message-Id: <1264150556-8147-1-git-send-email-camelguo@gmail.com>
+X-Mailer: git-send-email 1.5.4.3
+In-Reply-To: <>
+References: <>
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: why PREFERRED_PROVIDER_virtual/kernel in conf/machine/sun4cdm.conf does not work
+Subject: [PATCH] Fix a bug of COMPATIBLE_HOST defination in linux-sun4cdm_*.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,43 +49,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2010 08:40:10 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 22 Jan 2010 08:58:44 -0000
 
-Dnia pi=C4=85tek, 22 stycznia 2010 o 07:41:30 Guo Hongruan napisa=C5=82(a):
-> Hi guys,
->    I tried to build an openembedded project with the following setting:
-> MACHINE=3Dsun4cdm  DISTRO=3Dmicro LIBC=3Deglibc
-> But I noticed the following warning message after parsing the bb files:
->=20
-> NOTE: multiple providers are available for virtual/kernel (linux-palmpre,
-> linux-rt, gumstix-kernel, linux);
-> NOTE: consider defining PREFERRED_PROVIDER_virtual/kernel
+* Correct the defination of COMPATIBLE_HOST in linux-sun4cdm_2.4.26.bb and linux-sun4cdm_2.6.8.1.bb, the previous defination causes linux-sun4cdm never been selected.
+---
+ recipes/linux/linux-sun4cdm_2.4.26.bb  |    2 +-
+ recipes/linux/linux-sun4cdm_2.6.8.1.bb |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-> My question is:
-> In the conf/machine/sun4cdm.conf, there is the defination of
-> PREFFERRED_PROVIDER_virtual/kernel, see the following line:
-> REFERRED_PROVIDER_virtual/kernel =3D "linux-sun4cdm"
-> Why did it not work at all?
->=20
-> Anyone can give me some hints?
-
-edit recipes/linux/linux-sun4cdm_2.6.8.1.bb and remove COMPATIBLE_HOST line=
-=2E=20
-Due to changes it is no longer sparc-linux when you do build for sparc arch=
-=2E=20
-This line can be exchanged with (more proper one):
-
-COMPATIBLE_MACHINE =3D "sun4cdm"
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+diff --git a/recipes/linux/linux-sun4cdm_2.4.26.bb b/recipes/linux/linux-sun4cdm_2.4.26.bb
+index 52b3ecb..78a64d7 100644
+--- a/recipes/linux/linux-sun4cdm_2.4.26.bb
++++ b/recipes/linux/linux-sun4cdm_2.4.26.bb
+@@ -10,7 +10,7 @@ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.4/linux-${PV}.tar.bz2 \
+            file://defconfig"
+ S = "${WORKDIR}/linux-${PV}"
+ 
+-COMPATIBLE_HOST = 'sparc-linux'
++COMPATIBLE_HOST = 'sparc.*-linux'
+ 
+ inherit kernel
+ 
+diff --git a/recipes/linux/linux-sun4cdm_2.6.8.1.bb b/recipes/linux/linux-sun4cdm_2.6.8.1.bb
+index 4058390..7b097a1 100644
+--- a/recipes/linux/linux-sun4cdm_2.6.8.1.bb
++++ b/recipes/linux/linux-sun4cdm_2.6.8.1.bb
+@@ -7,7 +7,7 @@ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
+            file://sun4c_defconfig"
+ S = "${WORKDIR}/linux-${PV}"
+ 
+-COMPATIBLE_HOST = 'sparc-linux'
++COMPATIBLE_HOST = 'sparc.*-linux'
+ 
+ inherit kernel
+ 
+-- 
+1.5.4.3
 
 
 
