@@ -1,30 +1,28 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1NYHKr-0004FG-Cx
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1NYHyg-0001Kt-D6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 12:05:56 +0100
-Received: from hiob.intern.dresearch.de (unknown [10.32.0.138])
-	by mail.dresearch.de (Postfix) with ESMTP id 085A949127F
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2010 12:03:38 +0100 (CET)
-Received: from exchange.intern.dresearch.de ([10.32.1.40]) by
-	hiob.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 22 Jan 2010 12:06:25 +0100
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Fri, 22 Jan 2010 12:03:50 +0100
-Message-ID: <4B598603.4080603@dresearch.de>
-Date: Fri, 22 Jan 2010 12:03:31 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
-MIME-Version: 1.0
+	Fri, 22 Jan 2010 12:47:05 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id CDDFD1D3607A; Fri, 22 Jan 2010 12:44:43 +0100 (CET)
+Date: Fri, 22 Jan 2010 12:44:43 +0100
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 22 Jan 2010 11:03:51.0043 (UTC)
-	FILETIME=[94419530:01CA9B52]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@DResearch.DE
+Message-ID: <20100122114443.GL18793@ibawizard.net>
+References: <1264067024.3695.14.camel@mattotaupa.wohnung.familie-menzel.net>
+	<201001211102.11252.holger+oe@freyther.de>
+	<883120D4-C490-4713-B872-F02376E88CEE@vanille-media.de>
+	<hj9giu$mfp$1@ger.gmane.org> <1264111223.7697.31.camel@utx.utx.cz>
+	<hjan00$419$1@ger.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <hjan00$419$1@ger.gmane.org>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: package for kernel module devel?
+Subject: Re: Getting patches committed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,21 +36,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2010 11:05:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 22 Jan 2010 11:47:05 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Our team is developing new kernel modules for our machine. For fast
-development cycles it would be very helpful to be able to compile the
-modules at the machine itself.
+Rolf Leggewie <no2spam@nospam.arcornews.de> [2010-01-22 00:11:54]:
 
-By installing task-native-sdk & Co. nearly all needed stuff is
-available but i miss the linux kernel headers and the corresponding
-link to them (/lib/modules/x.x.x.x/build). :(
+> Stanislav Brabec wrote:
+> > org.openembedded.open (or .staging or .public)
+> 
+> funny thing.  I was discussing something like this with RP just when you
+> sent this mail.  It's not as straightforward as it may sound, though.
+> First of all, I think we'd need several, possibly unlimited number of
+> FFA branches.  Second, RP and I agreed that security implications are a
+> concern if we allow commit access completely uninhibited.
 
-Does a package exist for this (or for the complete kernel sources)?
+What's wrong with public Git hostings? Everyone can create one on
+Git(orious|hub) or repo.or.cz. OE isn't that big as Linux kernel yet, so the
+size of the repo shouldn't be problem for a free hosting.
 
-Steffen
-
+-- ynezz
 
 
