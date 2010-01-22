@@ -1,33 +1,33 @@
 Received: from fg-out-1718.google.com ([72.14.220.156])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.lippautz@gmail.com>) id 1NYRYj-0000YY-J6
+	(envelope-from <michael.lippautz@gmail.com>) id 1NYRZ4-0000YY-VP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Jan 2010 23:00:56 +0100
+	Fri, 22 Jan 2010 23:01:18 +0100
 Received: by fg-out-1718.google.com with SMTP id 19so641512fgg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Jan 2010 13:58:37 -0800 (PST)
+	Fri, 22 Jan 2010 13:58:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=eJXHdxacgTm2Df209XMf57sBSrXYQYPzx+EH3ld7TxU=;
-	b=LgSbg7E8mmuPNSZbiXXnHn6c7unB2pBKlkPN/cPjowf5sVgk5TMjpJ7iq/QVoge6EE
-	vSGQEhJHTBiIX59sZ/lyPaH5j0dnTCFYi6WClM9cqJ7asa01PJKrqS9AfZTaCKsq6iaQ
-	JNqGaRIBSs/AQgGDoz11V+3KLUHjh40vPZlf4=
+	bh=ibARdDaUm/oLCZs834k6bRhQ62gLIWmEsg01aVNTjVY=;
+	b=nhk2Cu9VK64seuKW7PP/E0rSb0VD26eJ/JcnenEMUPBLNGcHOiRrTF4P/VABOH1qp8
+	Cjgg46oc0XSVC03boEIxOlR2HqXE2Vb17CFYI9t9VxPEDKVlMzS1YYI6YLmgiVw1+ioJ
+	MaX6fZLKUQqovtyGuu8k/A6WsmPTh0PmQqET4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=FSzCTv5L898BWVvTl7/VEwib+yN5IMNRZ3l0ofdGc55TRVLjiL4bsB3e7it4zELyzX
-	btwAtGi9nyB19CDbj6ZYbMSFnrwAzhAlMLiYehj26KRAaBcyysLauSX8DmI0+fDcsdb8
-	QUoKU81FGLyPTvo7EvKN6rQXhNIpVDAlAzx8A=
-Received: by 10.102.206.30 with SMTP id d30mr1830676mug.99.1264197517603;
-	Fri, 22 Jan 2010 13:58:37 -0800 (PST)
+	b=ONJA+giCjUt2tLlW+fFIE7SAtRQsMpiRg5mU44TPJzyVHwbCC11+f0K/UDBdYFamxh
+	T7WDMV6PCArBklORneVceWfihGg4sTOSFR6Ns7VeReIUumaxd+FLgpQ1wYmuWe8TvyN9
+	YHnHLcl4D+drTrjJA1umrWqDhe5ryrKdFsSsc=
+Received: by 10.102.207.15 with SMTP id e15mr1839959mug.87.1264197539366;
+	Fri, 22 Jan 2010 13:58:59 -0800 (PST)
 Received: from localhost.localdomain ([188.45.31.245])
-	by mx.google.com with ESMTPS id j10sm10781871muh.13.2010.01.22.13.58.35
+	by mx.google.com with ESMTPS id y2sm10888455mug.40.2010.01.22.13.58.56
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 22 Jan 2010 13:58:36 -0800 (PST)
+	Fri, 22 Jan 2010 13:58:58 -0800 (PST)
 From: Michael Lippautz <michael.lippautz@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Jan 2010 22:58:47 +0100
-Message-Id: <1264197527-25414-1-git-send-email-michael.lippautz@gmail.com>
+Date: Fri, 22 Jan 2010 22:59:16 +0100
+Message-Id: <1264197556-25468-1-git-send-email-michael.lippautz@gmail.com>
 X-Mailer: git-send-email 1.6.4.4
 In-Reply-To: <n>
 References: <n>
@@ -35,7 +35,7 @@ X-SA-Exim-Connect-IP: 72.14.220.156
 X-SA-Exim-Mail-From: michael.lippautz@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 1/2] gpsd: Prepare recipe and inc for version bump
+Subject: [PATCH 2/2] gpsd: Version bump to 2.90
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,66 +49,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Jan 2010 22:00:56 -0000
+X-List-Received-Date: Fri, 22 Jan 2010 22:01:18 -0000
 
 
 Signed-off-by: Michael Lippautz <michael.lippautz@gmail.com>
 ---
- recipes/gpsd/gpsd.inc     |    9 ++++++---
- recipes/gpsd/gpsd_2.38.bb |    4 +++-
- 2 files changed, 9 insertions(+), 4 deletions(-)
+ recipes/gpsd/files/libtool.patch |   14 ++++++++++++++
+ recipes/gpsd/gpsd_2.90.bb        |    7 +++++++
+ 2 files changed, 21 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/gpsd/files/libtool.patch
+ create mode 100644 recipes/gpsd/gpsd_2.90.bb
 
-diff --git a/recipes/gpsd/gpsd.inc b/recipes/gpsd/gpsd.inc
-index a917fbe..5efbe2a 100644
---- a/recipes/gpsd/gpsd.inc
-+++ b/recipes/gpsd/gpsd.inc
-@@ -5,12 +5,14 @@ LICENSE = "GPL"
- DEPENDS = "dbus-glib ncurses python"
- PROVIDES = "virtual/gpsd"
- 
-+INC_PR = "r0"
+diff --git a/recipes/gpsd/files/libtool.patch b/recipes/gpsd/files/libtool.patch
+new file mode 100644
+index 0000000..37a7557
+--- /dev/null
++++ b/recipes/gpsd/files/libtool.patch
+@@ -0,0 +1,14 @@
++--- a/Makefile.am	2010-01-22 21:27:04.000000000 +0100
+++++ b/Makefile.am	2010-01-22 21:27:43.000000000 +0100
++@@ -225,9 +225,9 @@
++ # Warning: This overrides autoconf's normal link-line generatyion process
++ if LIBGPSMM_ENABLE
++ libgps_la_SOURCES += libgpsmm.cpp
++-libgps_la_LINK = /bin/sh ./libtool --tag=CXX --mode=link g++ $(libgps_la_LDFLAGS) -o $@
+++libgps_la_LINK = $(LIBTOOL) --tag=CXX --mode=link g++ $(libgps_la_LDFLAGS) -o $@
++ else
++-libgps_la_LINK = /bin/sh ./libtool --tag=CC --mode=link gcc $(libgps_la_LDFLAGS) -o $@
+++libgps_la_LINK = $(LIBTOOL) --tag=CC --mode=link gcc $(libgps_la_LDFLAGS) -o $@
++ endif
++ 
++ nodist_libgps_la_SOURCES = packet_names.h ais_json.i
+diff --git a/recipes/gpsd/gpsd_2.90.bb b/recipes/gpsd/gpsd_2.90.bb
+new file mode 100644
+index 0000000..c0fa92e
+--- /dev/null
++++ b/recipes/gpsd/gpsd_2.90.bb
+@@ -0,0 +1,7 @@
++require gpsd.inc
 +
- EXTRA_OECONF = "--x-includes=${STAGING_INCDIR}/X11 \
-                 --x-libraries=${STAGING_LIBDIR} \
-                 --enable-dbus \
--                --enable-python"
-+"
- 
--SRC_URI = "http://download.berlios.de/gpsd/gpsd-${PV}.tar.gz \
-+SRC_URI = "http://download.berlios.de/gpsd/gpsd-${PV}.tar.gz;name=gpsd \
-            file://gpsd-default \
-            file://gps-hardware \
-            file://gpsd"
-@@ -28,6 +30,8 @@ LDFLAGS += "-L${STAGING_LIBDIR} -lm"
- export STAGING_INCDIR
- export STAGING_LIBDIR
- 
-+TARGET_CC_ARCH += "${LDFLAGS}"
++SRC_URI += "file://libtool.patch;patch=1"
++SRC_URI[gpsd.md5sum] = "a23c728b8734c542d559c485857238d2"
++SRC_URI[gpsd.sha256sum] = "8c81461266fc95aae6519ec996d7e4f4801fb5a02dbcc7a5d1c130bf7fe0cd53"
 +
- do_compile_prepend() {
-     export BUILD_SYS="${BUILD_SYS}"
-     export HOST_SYS="${HOST_SYS}"
-@@ -41,7 +45,6 @@ do_install_prepend() {
- 
- do_install_append() {
-         install -d ${D}/${sysconfdir}/init.d
--        install -d ${D}/dev
-         install -m 0755 ${WORKDIR}/gpsd ${D}/${sysconfdir}/init.d/
-         install -m 0755 ${WORKDIR}/gps-hardware ${D}/${sysconfdir}/init.d/gps-hardware.default
-         install -d ${D}/${sysconfdir}/default
-diff --git a/recipes/gpsd/gpsd_2.38.bb b/recipes/gpsd/gpsd_2.38.bb
-index 06a5fe7..7c7a477 100644
---- a/recipes/gpsd/gpsd_2.38.bb
-+++ b/recipes/gpsd/gpsd_2.38.bb
-@@ -1,5 +1,7 @@
- require gpsd.inc
- 
--PR = "r2"
-+PR = "${INC_PR}.1"
- # make attempts to link gpspacket.so without waiting for all compiler tasks:
- PARALLEL_MAKE = ""
-+
-+EXTRA_OECONF += " --enable-python "
++PR = "${INC_PR}.0"
 -- 
 1.6.4.4
 
