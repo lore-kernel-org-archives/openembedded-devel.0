@@ -1,36 +1,26 @@
-Received: from asmtpout027.mac.com ([17.148.16.102])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1NYlsr-0007n6-Qz
+Received: from ironport2-out.teksavvy.com ([206.248.154.183]
+	helo=ironport2-out.pppoe.ca) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <josh@slashdev.ca>) id 1NYltC-0007nj-Es
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 20:43:05 +0100
-MIME-version: 1.0
-Received: from [87.201.169.25] by asmtp027.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KWP00BKSTAU6410@asmtp027.mac.com> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	23 Jan 2010 11:40:12 -0800 (PST)
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
-	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
-	adjust=0
-	reason=mlx engine=5.0.0-0908210000 definitions=main-1001230168
-From: Elvis Dowson <elvis.dowson@mac.com>
-Date: Sat, 23 Jan 2010 23:40:04 +0400
-In-reply-to: <1264258263.21187.26.camel@mattotaupa.wohnung.familie-menzel.net>
+	Sat, 23 Jan 2010 20:43:25 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: Am8BACPfWktFpYYS/2dsb2JhbAAI1X6EOwSKTg
+X-IronPort-AV: E=Sophos;i="4.49,330,1262581200"; d="scan'208";a="54425187"
+Received: from 69-165-134-18.dsl.teksavvy.com (HELO [192.168.1.10])
+	([69.165.134.18])
+	by ironport2-out.pppoe.ca with ESMTP; 23 Jan 2010 14:39:57 -0500
+Message-ID: <4B5B51BD.3020006@slashdev.ca>
+Date: Sat, 23 Jan 2010 14:45:01 -0500
+From: Josh Kropf <josh@slashdev.ca>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.5) Gecko/20091215 Shredder/3.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1263888104.2678.15.camel@ubuntu-desktop>
-	<C305642D-75E5-4B97-8A14-65BE8A867E53@mac.com>
-	<BD272887-5F72-4B99-B9E9-0C8D1451426F@mac.com>
-	<201001231357.53005.holger+oe@freyther.de>
-	<6A97E73D-E10B-4CC2-B239-1AB8FC2AC47B@mac.com>
-	<1264258263.21187.26.camel@mattotaupa.wohnung.familie-menzel.net>
-Message-id: <9677BF84-35AD-4661-BEB1-B272680AE61A@mac.com>
-X-Mailer: Apple Mail (2.1077)
-X-SA-Exim-Connect-IP: 17.148.16.102
-X-SA-Exim-Mail-From: elvis.dowson@mac.com
+X-SA-Exim-Connect-IP: 206.248.154.183
+X-SA-Exim-Mail-From: josh@slashdev.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Bitbake build error on Fedora 12 x86 64-bit
+Subject: python-lang causing Alignment trap and Segfault
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,23 +34,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 19:43:05 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7BIT
+X-List-Received-Date: Sat, 23 Jan 2010 19:43:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+I've compiled an image for my mini2440 board (armv4t) from the 
+stable/2009 branch in git using angstrom distribution.
 
-On Jan 23, 2010, at 6:51 PM, Paul Menzel wrote:
-> 
-> You used Git to get BitBake. The needed commands you used are not
-> documented on OpenEmbedded.org. The reason is that it is officially
-> recommended by OE to use the tarballs.
+One of the python packages I need depends on python-lang but I'm finding 
+that python segfaults when python-lang is installed.  The kernel logs 
+the following before the segfault:
 
-Oh, okay!! Most of the people who use bitbake for overo development always pull from the latest sources. Perhaps that is why we endup getting so many problems once in a while. 
+Alignment trap: python (2303) PC=0x403f007c Instr=0x28001c05 
+Address=0xffffffff FSR 0x813
 
-When I search for a solution to the os problem, I found that it was fixed in the latest release of bitbake in the git repository.
+Removing python-lang package makes python work again.
 
-Best regards,
+Just wondering if anyone has run into this problem or has some pointers 
+on debugging this.
 
-Elvis
+Thanks,
+- Josh
+
 
