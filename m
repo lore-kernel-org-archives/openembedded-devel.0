@@ -1,25 +1,27 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NYmHW-00027D-VU for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 21:08:34 +0100
-Received: from e178248110.adsl.alicedsl.de ([85.178.248.110]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NYmFK-0007mM-I0 for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 20:06:14 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 23 Jan 2010 21:06:13 +0100
-Message-ID: <1264277173.3738.74.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mickey@vanille-media.de>) id 1NYmKl-0002Fc-Ac
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jan 2010 21:11:54 +0100
+Received: from [192.168.0.100] (ip-81-210-243-67.unitymediagroup.de
+	[81.210.243.67])
+	by drlauer-research.com (Postfix) with ESMTP id 150F55841A9
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 23 Jan 2010 22:01:41 +0100 (CET)
+Message-Id: <4FB2ADE2-A098-464D-9022-E1844CDDB2DF@vanille-media.de>
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <4B5B51BD.3020006@slashdev.ca>
+X-Mailer: iPhone Mail (7D11)
+Mime-Version: 1.0 (iPhone Mail 7D11)
+Date: Sat, 23 Jan 2010 21:09:43 +0100
+References: <4B5B51BD.3020006@slashdev.ca>
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Official policy to list checksums
+Subject: Re: python-lang causing Alignment trap and Segfault
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,50 +35,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 20:08:34 -0000
-X-Groupsio-MsgNum: 16115
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-C5NYHU8NlnLG0qqhmIWz"
+X-List-Received-Date: Sat, 23 Jan 2010 20:11:54 -0000
+Content-Type: text/plain;
+	charset=us-ascii;
+	format=flowed;
+	delsp=yes
+Content-Transfer-Encoding: 7bit
 
---=-C5NYHU8NlnLG0qqhmIWz
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Try running python -v to find out exactly which module is triggering  
+that.
 
-Dear OE hackers,
+Cheers,
+
+:M:
+
+Am 23.01.2010 um 20:45 schrieb Josh Kropf <josh@slashdev.ca>:
+
+> I've compiled an image for my mini2440 board (armv4t) from the  
+> stable/2009 branch in git using angstrom distribution.
+>
+> One of the python packages I need depends on python-lang but I'm  
+> finding that python segfaults when python-lang is installed.  The  
+> kernel logs the following before the segfault:
+>
+> Alignment trap: python (2303) PC=0x403f007c Instr=0x28001c05  
+> Address=0xffffffff FSR 0x813
+>
+> Removing python-lang package makes python work again.
+>
+> Just wondering if anyone has run into this problem or has some  
+> pointers on debugging this.
+>
+> Thanks,
+> - Josh
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
-does [1] still describe the official policy to add checksums? Or is
-putting them into the recipes preferred nowadays?
-
-For example
-
-        SRC_URI[whois.md5sum] =3D "18d74a07d711262b75f04a1c319bc833"
-        SRC_URI[whois.sha256sum] =3D "fb13316c09ff9f98bd9af659d0789c9a09b97=
-757f5c6c3dbfbc790250d5c5abc"
-
-from [2].
-
-
-Thanks,
-
-Paul
-
-
-[1] http://wiki.openembedded.net/index.php/Checksums
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D310b2cd=
-8919a13280b445537893c109b66c5275c
-
---=-C5NYHU8NlnLG0qqhmIWz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktbVrQACgkQPX1aK2wOHVg7jACfdnV1zT1XclfOMeP6lawIjVRk
-d68An0W1+1e9Ju+Mb+r6ljv5MWRJ7GOH
-=GcgE
------END PGP SIGNATURE-----
-
---=-C5NYHU8NlnLG0qqhmIWz--
