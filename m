@@ -1,26 +1,41 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-yx0-f175.google.com ([209.85.210.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NYcIr-0007qO-4N
+	(envelope-from <camelguo@gmail.com>) id 1NYcSB-00081J-Jp
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 10:29:16 +0100
-Received: from tamarin.localnet (123-192-163-227.dynamic.kbronet.com.tw
-	[123.192.163.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 2D7D51B10C02
+	Sat, 23 Jan 2010 10:38:55 +0100
+Received: by yxe5 with SMTP id 5so1645073yxe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Jan 2010 09:25:45 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Sat, 23 Jan 2010 01:36:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=Kr+jsta9bDn3LiG/zEKajlmejcJa+YevNxqJuc9jeig=;
+	b=wqHJqwFHH49L8/kZFewWuQeNPAo8hcjjz5HCOzW7jUzINkaId63Fv5J6JJNhHZ8JMw
+	WjRf76W+fi68el9QJ2dKP6T/2Ie9/qn+m3JZN2z4xFydySCN+fBeGz5Egxnt5VdY0cYX
+	cGzmSSV/9BrekwVWT1QZ8ig17s9AN5mKx7MNE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=KT5Pa3hlm6lhpspoPYiybW9U7SLynN5Mginybyp5qpPMPjg11lDiOnkrLLZbn/ILGG
+	Gk1tVplrJiWm50DpCfeR4zT2hszLFiWh3mApsKTxjYEYEcJBreH+DViBkN0IIhc46DNp
+	Nt4bDiL3exOPztPGGLbUx8Wlh5Vm0e4NF7C0o=
+Received: by 10.101.106.19 with SMTP id i19mr5162406anm.186.1264239392666;
+	Sat, 23 Jan 2010 01:36:32 -0800 (PST)
+Received: from localhost ([123.162.71.84])
+	by mx.google.com with ESMTPS id 5sm1104130ywd.42.2010.01.23.01.36.29
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 23 Jan 2010 01:36:31 -0800 (PST)
+From: Guo Hongruan <camelguo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 23 Jan 2010 10:26:37 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <201001230943.24210.holger+oe@freyther.de>
-In-Reply-To: <201001230943.24210.holger+oe@freyther.de>
-MIME-Version: 1.0
-Message-Id: <201001231026.37518.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Date: Sat, 23 Jan 2010 17:36:07 +0800
+Message-Id: <1264239367-26057-1-git-send-email-camelguo@gmail.com>
+X-Mailer: git-send-email 1.5.4.3
+In-Reply-To: <>
+References: <>
+X-SA-Exim-Connect-IP: 209.85.210.175
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Patchwork Workflow improvement
+Subject: [PATCH] linux-storcenter: fix circular dependency between do_package and do_deploy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,83 +49,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 09:29:16 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-15"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 23 Jan 2010 09:38:55 -0000
 
-On Saturday 23 January 2010 09:43:24 Holger Hans Peter Freyther wrote:
-> Hi All,
+* 'addtask deploy' sentence in linux-storcenter_2.6.27.7.bb conflicts with the same one in kernel.bbclass and causes circular dependency between do_package and do_deploy
 
-these urls fail to apply. It would be cool if people would help with the 
-following randomized algorithm:
+Signed-off-by: Guo Hongruan <camelguo@gmail.com>
+---
+ recipes/linux/linux-storcenter_2.6.27.7.bb |    2 --
+ 1 files changed, 0 insertions(+), 2 deletions(-)
 
-Pick a given number between 0 to 138 and then work on a block of 10 times.
+diff --git a/recipes/linux/linux-storcenter_2.6.27.7.bb b/recipes/linux/linux-storcenter_2.6.27.7.bb
+index b403cda..e842ab7 100644
+--- a/recipes/linux/linux-storcenter_2.6.27.7.bb
++++ b/recipes/linux/linux-storcenter_2.6.27.7.bb
+@@ -53,5 +53,3 @@ do_deploy() {
+ }
+ 
+ do_deploy[dirs] = "${S}"
+-
+-addtask deploy before do_package after do_install
+-- 
+1.5.4.3
 
-1.) Open the URL in the browser
-2.) Check if the patch was applied
-2.1) If it was applied, close the report
-2.2) If it was not applied, and the patch makes sense, send a follow
-       up mail to the author and defer the current patch
-2.3) If it was not applied, and the patch does not make sense,
-       just close the bug as rejected..
-
-please help
-
-
-# 139 patches failed to apply.
-http://patchwork.openembedded.org/patch/454
-http://patchwork.openembedded.org/patch/650
-http://patchwork.openembedded.org/patch/651
-http://patchwork.openembedded.org/patch/691
-http://patchwork.openembedded.org/patch/714
-http://patchwork.openembedded.org/patch/727
-http://patchwork.openembedded.org/patch/729
-http://patchwork.openembedded.org/patch/740
-http://patchwork.openembedded.org/patch/743
-http://patchwork.openembedded.org/patch/746
-http://patchwork.openembedded.org/patch/750
-http://patchwork.openembedded.org/patch/753
-http://patchwork.openembedded.org/patch/770
-http://patchwork.openembedded.org/patch/773
-http://patchwork.openembedded.org/patch/890
-http://patchwork.openembedded.org/patch/893
-http://patchwork.openembedded.org/patch/902
-http://patchwork.openembedded.org/patch/940
-http://patchwork.openembedded.org/patch/942
-http://patchwork.openembedded.org/patch/949
-http://patchwork.openembedded.org/patch/959
-http://patchwork.openembedded.org/patch/960
-http://patchwork.openembedded.org/patch/972
-http://patchwork.openembedded.org/patch/986
-http://patchwork.openembedded.org/patch/988
-http://patchwork.openembedded.org/patch/989
-http://patchwork.openembedded.org/patch/994
-http://patchwork.openembedded.org/patch/1000
-http://patchwork.openembedded.org/patch/1004
-http://patchwork.openembedded.org/patch/1005
-http://patchwork.openembedded.org/patch/1007
-http://patchwork.openembedded.org/patch/1008
-http://patchwork.openembedded.org/patch/1016
-http://patchwork.openembedded.org/patch/1020
-http://patchwork.openembedded.org/patch/1021
-http://patchwork.openembedded.org/patch/1022
-http://patchwork.openembedded.org/patch/1023
-http://patchwork.openembedded.org/patch/1024
-http://patchwork.openembedded.org/patch/1030
-http://patchwork.openembedded.org/patch/1043
-http://patchwork.openembedded.org/patch/1036
-http://patchwork.openembedded.org/patch/1046
-http://patchwork.openembedded.org/patch/1041
-http://patchwork.openembedded.org/patch/1048
-http://patchwork.openembedded.org/patch/1056
-http://patchwork.openembedded.org/patch/1064
-http://patchwork.openembedded.org/patch/1066
-http://patchwork.openembedded.org/patch/1067
-http://patchwork.openembedded.org/patch/1074
-http://patchwork.openembedded.org/patch/1078
-http://patchwork.openembedded.org/patch/1082
-http://patchwork.openembedded.org/patch/1083
-http://patchwork.openembedded.org/patch/1089
 
 
