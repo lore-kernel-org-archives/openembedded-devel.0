@@ -1,39 +1,39 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NYggd-0006OE-W3 for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 15:10:07 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NYgeP-0006cA-PJ
+	id 1NYgnk-0006Zn-Dm for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jan 2010 15:17:27 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NYglU-0000YV-98
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 15:07:45 +0100
+	Sat, 23 Jan 2010 15:15:04 +0100
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Jan 2010 15:07:45 +0100
+	Sat, 23 Jan 2010 15:15:04 +0100
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Jan 2010 15:07:45 +0100
+	Sat, 23 Jan 2010 15:15:04 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 23 Jan 2010 15:07:21 +0100
-Message-ID: <hjevqo$lld$1@ger.gmane.org>
-References: <1264197527-25414-1-git-send-email-michael.lippautz@gmail.com>	<hjejvh$m65$2@ger.gmane.org>
-	<fca63bcf1001230308h463416adwb48db9a5bc295618@mail.gmail.com>
+Date: Sat, 23 Jan 2010 15:10:31 +0100
+Message-ID: <hjf00m$lld$2@ger.gmane.org>
+References: <201001230943.24210.holger+oe@freyther.de>	<hjejrf$m65$1@ger.gmane.org>
+	<1264249142.3630.41.camel@mattotaupa.wohnung.familie-menzel.net>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.7) Gecko/20100113 Shredder/3.0.2pre
-In-Reply-To: <fca63bcf1001230308h463416adwb48db9a5bc295618@mail.gmail.com>
+In-Reply-To: <1264249142.3630.41.camel@mattotaupa.wohnung.familie-menzel.net>
 X-Enigmail-Version: 1.0
 Sender: news <news@ger.gmane.org>
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 1/2] gpsd: Prepare recipe and inc for version bump
+Subject: Re: New state for patches not complying with commit policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,124 +47,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 14:10:07 -0000
+X-List-Received-Date: Sat, 23 Jan 2010 14:17:27 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 23-01-10 12:08, Michael Lippautz wrote:
-> Since a few parts of the .inc are quite confusing I didn't want to
-> touch it too much.
+On 23-01-10 13:19, Paul Menzel wrote:
+> Am Samstag, den 23.01.2010, 11:42 +0100 schrieb Koen Kooi:
+>> On 23-01-10 09:43, Holger Hans Peter Freyther wrote:
+>>> right now I'm writing a Qt 4.6 based application that might help us
+>> a bit with 
+>>> the patchwork queue.
+>>>
+>>> The idea of the script is to have two things at the end:
+>>>       1.) a branch with all the patches that applied and that can be published
+>>>       2.) a list of patches that don't apply.
+>>>
+>>>
+>>> What people are supposed to:
+>>>
+>>> 1.) Cherry pick from the branch
+>>> 2.) Send updated patches, close the reports on patchwork...
+>>
+>> I think people that apply those patches to oe.dev should fix up the
+>> commit message as well. The stack Khem pushed this week is just
+>> awfull.
+>>
+>> I guess we should flag patches with bad commit messages as 'rejected' in
+>> pw ASAP. We can weed out most of them by reject anything that lacks a
+>> ':' in the subject line.
 > 
-> Ofc we can start gpsd using a control socket.
+> I am just getting into Patchwork [1][2], so I am sorry if I miss the
+> obvious.
 > 
-> How should we then solve the problem concerning the different devices?
-> We would still need an init script that adds gps hardware to gpsd via
-> the socket and additional packages for different devices providing a
-> hardware file (containing the path) ?
+> If it is possible, I suggest to add a new state (»Rejected – Commit
+> Policy«) for patches not complying with the commit policy [3]?
 
-I have no strong opinion on that, it's just that machine specific
-initscripts (vs machine specific /etc/default/foo) are just evil :)
+We can add that easily, we did the same for the 'applied' state.
 
-> I am open for suggestions since an I really want to update this.
-> (Future gpsd will remove the current API to provide additional gps
-> devices support)
+> As a bonus an automatically answer is sent to the message with the patch
+> to the list with the following content, which is just a draft/suggestion
+> of course.
 
-My remarks had nothing to do with your patch (which looks fine, btw), it
-just triggered a memory about *#(@*(@ gpsd-conf.
+I'm unsure if we can do that. Patchwork does support sending emails, but
+I left it disabled since I suck at email stuff.
+If someone knows how to make patchwork do that we can consider turning
+such a feature on.
 
 regards,
 
 Koen
-
-
-> Regards,
-> Michael
-> 
-> 2010/1/23 Koen Kooi <k.kooi@student.utwente.nl>:
-> Speaking of GPSD, should we make the default config use a control socket
-> instead of hardcoding ttyS3?
-> 
-> regards,
-> 
-> Koen
-> 
-> On 22-01-10 22:58, Michael Lippautz wrote:
->>>>
->>>> Signed-off-by: Michael Lippautz <michael.lippautz@gmail.com>
->>>> ---
->>>>  recipes/gpsd/gpsd.inc     |    9 ++++++---
->>>>  recipes/gpsd/gpsd_2.38.bb |    4 +++-
->>>>  2 files changed, 9 insertions(+), 4 deletions(-)
->>>>
->>>> diff --git a/recipes/gpsd/gpsd.inc b/recipes/gpsd/gpsd.inc
->>>> index a917fbe..5efbe2a 100644
->>>> --- a/recipes/gpsd/gpsd.inc
->>>> +++ b/recipes/gpsd/gpsd.inc
->>>> @@ -5,12 +5,14 @@ LICENSE = "GPL"
->>>>  DEPENDS = "dbus-glib ncurses python"
->>>>  PROVIDES = "virtual/gpsd"
->>>>
->>>> +INC_PR = "r0"
->>>> +
->>>>  EXTRA_OECONF = "--x-includes=${STAGING_INCDIR}/X11 \
->>>>                  --x-libraries=${STAGING_LIBDIR} \
->>>>                  --enable-dbus \
->>>> -                --enable-python"
->>>> +"
->>>>
->>>> -SRC_URI = "http://download.berlios.de/gpsd/gpsd-${PV}.tar.gz \
->>>> +SRC_URI = "http://download.berlios.de/gpsd/gpsd-${PV}.tar.gz;name=gpsd \
->>>>             file://gpsd-default \
->>>>             file://gps-hardware \
->>>>             file://gpsd"
->>>> @@ -28,6 +30,8 @@ LDFLAGS += "-L${STAGING_LIBDIR} -lm"
->>>>  export STAGING_INCDIR
->>>>  export STAGING_LIBDIR
->>>>
->>>> +TARGET_CC_ARCH += "${LDFLAGS}"
->>>> +
->>>>  do_compile_prepend() {
->>>>      export BUILD_SYS="${BUILD_SYS}"
->>>>      export HOST_SYS="${HOST_SYS}"
->>>> @@ -41,7 +45,6 @@ do_install_prepend() {
->>>>
->>>>  do_install_append() {
->>>>          install -d ${D}/${sysconfdir}/init.d
->>>> -        install -d ${D}/dev
->>>>          install -m 0755 ${WORKDIR}/gpsd ${D}/${sysconfdir}/init.d/
->>>>          install -m 0755 ${WORKDIR}/gps-hardware ${D}/${sysconfdir}/init.d/gps-hardware.default
->>>>          install -d ${D}/${sysconfdir}/default
->>>> diff --git a/recipes/gpsd/gpsd_2.38.bb b/recipes/gpsd/gpsd_2.38.bb
->>>> index 06a5fe7..7c7a477 100644
->>>> --- a/recipes/gpsd/gpsd_2.38.bb
->>>> +++ b/recipes/gpsd/gpsd_2.38.bb
->>>> @@ -1,5 +1,7 @@
->>>>  require gpsd.inc
->>>>
->>>> -PR = "r2"
->>>> +PR = "${INC_PR}.1"
->>>>  # make attempts to link gpspacket.so without waiting for all compiler tasks:
->>>>  PARALLEL_MAKE = ""
->>>> +
->>>> +EXTRA_OECONF += " --enable-python "
-> 
->>
->>
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
-
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFLWwKZMkyGM64RGpERAi5bAJ9oNZzwy8Jrl03IovVdD4Bqw2tIkQCgsW4+
-jq/K97DHKqK4b05yJv+if34=
-=33vV
+iD8DBQFLWwNXMkyGM64RGpERAp59AJ476WIGYubuaxiqdmQ4yl4r+z2EWgCeOGqM
+6D0qHrY1hvikflj9fpVLXAk=
+=VKyT
 -----END PGP SIGNATURE-----
 
 
