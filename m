@@ -1,38 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from asmtpout027.mac.com ([17.148.16.102])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NYlpw-0007fO-UA for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 20:40:03 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NYlng-0005Sv-Aw
+	(envelope-from <elvis.dowson@mac.com>) id 1NYlsr-0007n6-Qz
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 20:37:40 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Jan 2010 20:37:40 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Jan 2010 20:37:40 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat, 23 Jan 2010 20:43:05 +0100
+MIME-version: 1.0
+Received: from [87.201.169.25] by asmtp027.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KWP00BKSTAU6410@asmtp027.mac.com> for
+	openembedded-devel@lists.openembedded.org; Sat,
+	23 Jan 2010 11:40:12 -0800 (PST)
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
+	adjust=0
+	reason=mlx engine=5.0.0-0908210000 definitions=main-1001230168
+From: Elvis Dowson <elvis.dowson@mac.com>
+Date: Sat, 23 Jan 2010 23:40:04 +0400
+In-reply-to: <1264258263.21187.26.camel@mattotaupa.wohnung.familie-menzel.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 23 Jan 2010 20:37:19 +0100
-Message-ID: <hjfj5e$kei$1@ger.gmane.org>
-References: <1264273402-29910-1-git-send-email-john@soundmetrics.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100113 Shredder/3.0.2pre
-In-Reply-To: <1264273402-29910-1-git-send-email-john@soundmetrics.com>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <1263888104.2678.15.camel@ubuntu-desktop>
+	<C305642D-75E5-4B97-8A14-65BE8A867E53@mac.com>
+	<BD272887-5F72-4B99-B9E9-0C8D1451426F@mac.com>
+	<201001231357.53005.holger+oe@freyther.de>
+	<6A97E73D-E10B-4CC2-B239-1AB8FC2AC47B@mac.com>
+	<1264258263.21187.26.camel@mattotaupa.wohnung.familie-menzel.net>
+Message-id: <9677BF84-35AD-4661-BEB1-B272680AE61A@mac.com>
+X-Mailer: Apple Mail (2.1077)
+X-SA-Exim-Connect-IP: 17.148.16.102
+X-SA-Exim-Mail-From: elvis.dowson@mac.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] socat: Add version 1.7.1.2
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Bitbake build error on Fedora 12 x86 64-bit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,35 +44,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 19:40:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 23 Jan 2010 19:43:05 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7BIT
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-On 23-01-10 20:03, John Faith wrote:
+On Jan 23, 2010, at 6:51 PM, Paul Menzel wrote:
+> 
+> You used Git to get BitBake. The needed commands you used are not
+> documented on OpenEmbedded.org. The reason is that it is officially
+> recommended by OE to use the tarballs.
 
-> +do_configure() {
-> +	# Override this function to avoid autoconf/automake/aclocal/autoheader
-> +	# since config.h.in gets recreated.
-> +	(cd ${S} && gnu-configize) || die "failure in running gnu-configize"
-> +	oe_runconf
+Oh, okay!! Most of the people who use bitbake for overo development always pull from the latest sources. Perhaps that is why we endup getting so many problems once in a while. 
 
-Isn't the whole point of autotools_do_configure to recreate such files?
-When config.h.in triggers an errror it's usually a case of people
-abusing aclocal.m4.
+When I search for a solution to the os problem, I found that it was fixed in the latest release of bitbake in the git repository.
 
-regards,
+Best regards,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLW0/vMkyGM64RGpERAhQiAJ4u5TIrT1f/0b6088k89eL/0sb5VACdHL2O
-E+c5kZe4tr84wj7kBN5VIDk=
-=ebYT
------END PGP SIGNATURE-----
-
-
+Elvis
 
