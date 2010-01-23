@@ -1,39 +1,25 @@
-Received: from mail-iw0-f175.google.com ([209.85.223.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NYpV7-00031e-5R
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jan 2010 00:34:48 +0100
-Received: by iwn5 with SMTP id 5so759441iwn.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Jan 2010 15:32:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=aDwqaMs1FjKiqss3aQ+VIlS513yBOc1+MF8c8xWbLAI=;
-	b=RLSnzmP9Hj0ZK0jHkHGIbMU56rmjNHWkJQcQ3wRAwPygyP7vE8LEh/r+Ai7uOON8k0
-	0X6QZYlZ5mo3HGKBvUle1eOPTpHiW2zTvZXqIc2z9ovuFb9YbYn1zoPyT+xyRAXOfMg1
-	w6eKrN84wO6d0KjO1SwphJq9f52k2Er12vDj8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=XOGskORfo3FsZXj4INHjTjMSp20dlRh4/SmDB1UIph/9sYeL2yZj5dLFKmO4e7Uk/o
-	cle8f8X5xDmTo3LC9UgS6p1qrJmXoS1oDXvceCn5xsnqdM38f0ncOoXFVrpuIIU4gQkZ
-	YmUoWdGEjo9K1roq/k3czMPmQ/K6bKWL+qHqg=
-MIME-Version: 1.0
-Received: by 10.231.160.205 with SMTP id o13mr5731449ibx.13.1264289545658; 
-	Sat, 23 Jan 2010 15:32:25 -0800 (PST)
-In-Reply-To: <op.u6zcpxd7mn1qzu@guohr-laptop-ubuntu>
-References: <op.u6zcpxd7mn1qzu@guohr-laptop-ubuntu>
-Date: Sat, 23 Jan 2010 15:32:25 -0800
-Message-ID: <19c1b8a91001231532y27421c4fk33b7b2d961bc16cc@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NYpZO-0003AA-Ay for openembedded-devel@lists.openembedded.org;
+	Sun, 24 Jan 2010 00:39:13 +0100
+Received: from e178248110.adsl.alicedsl.de ([85.178.248.110]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NYpXB-0005jL-N2 for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jan 2010 23:36:53 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Sun, 24 Jan 2010 00:36:52 +0100
+Message-ID: <1264289812.3738.265.camel@mattotaupa.wohnung.familie-menzel.net>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: undefined reference to `_restfpr_14_x' in gcc-4.4.2/libgcc/../gcc/unwind.inc:307 when building ppc603e
+Subject: [RFC] Perfect(?) workflow for patches.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,75 +33,140 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 23:34:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 23 Jan 2010 23:39:13 -0000
+X-Groupsio-MsgNum: 16130
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-zzojwY/m/7HB+93V/7xB"
+
+--=-zzojwY/m/7HB+93V/7xB
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jan 23, 2010 at 1:59 AM, Guo Hongruan <camelguo@gmail.com> wrote:
-> Hi guys,
-> =A0I am trying to building openembedded with the following configuration.
-> MACHINE=3Dstorcenter
-> DISTRO=3Dmicro
-> LIBC=3Deglibc
-> But I met the following error when compiling eglibc-2_10:
->
-> =A0/media/work-disk/testslave/oe_gss_inc_change_allinone/build/tmp/cross/=
-eglibc/ppc603e/lib/gcc/powerpc-oe-linux/4.4.2/libgcc_eh.a(unwind-dw2.o):
-> In function `_Unwind_Backtrace':
-> |
-> /media/work-disk/testslave/oe_gss_inc_change_allinone/build/tmp/work/egli=
-bc/ppc603e-oe-linux/gcc-cross-intermediate-4.4.2-r2.1/gcc-4.4.2/libgcc/../g=
-cc/unwind.inc:307:
-> undefined reference to `_restfpr_14_x'
-> | collect2: ld returned 1 exit status
-> | make[2]: ***
-> [/media/work-disk/testslave/oe_gss_inc_change_allinone/build/tmp/work/egl=
-ibc/ppc603e-oe-linux/eglibc-2.10-r8.6/build-powerpc-oe-linux/elf/sln]
-> Error 1
-> | make[2]: *** Waiting for unfinished jobs....
-> |
-> /media/work-disk/testslave/oe_gss_inc_change_allinone/build/tmp/cross/egl=
-ibc/ppc603e/lib/gcc/powerpc-oe-linux/4.4.2/libgcc_eh.a(unwind-dw2.o):
-> In function `_Unwind_Backtrace':
-> |
-> /media/work-disk/testslave/oe_gss_inc_change_allinone/build/tmp/work/egli=
-bc/ppc603e-oe-linux/gcc-cross-intermediate-4.4.2-r2.1/gcc-4.4.2/libgcc/../g=
-cc/unwind.inc:307:
-> undefined reference to `_restfpr_14_x'
-> | collect2: ld returned 1 exit status
-> | make[2]: ***
-> [/media/work-disk/testslave/oe_gss_inc_change_allinone/build/tmp/work/egl=
-ibc/ppc603e-oe-linux/eglibc-2.10-r8.6/build-powerpc-oe-linux/elf/ldconfig]
-> Error 1
->
-> anyone has met the same question before?
-
-Coincidently, I am seeing similar but not same type of error since
-yesterday when I started to do qemu ppc work. I have a half cooked
-patch
-which still does not work yet.
-
-> Is it caused by the incorrect toolchain set?
-
-probably some gcc misconfiguration. What options are passed to gcc
-configure and eglibc configure can you post them plz.
-
-> Is there anyone who has ever built toolchain for powerpc successfully?
->
-
-> Thanks a lot!
->
->
-> --
-> Guo Hongruan, Embedded Linux Consultant
-> Skype: camelguo
-> Twitter: camelguo
-> http://www.gulessoft.com
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Dear OE users,
 
 
+I hope this is the my last message to this list for tonight.
+
+In the last few days good discussion was going on this list about
+patches, their review and committing them. That it will not be
+forgotten, I try to outline the workflow and after discussion I would
+like to put it into the Wiki. Any suggestion for the name for this page?
+=C2=BBPatch workflow=C2=AB?
+
+Git hooks [4] were not mentioned in the discussion on the list. I added
+them anyways. ;-) It is important to note that every clone has its own
+hooks. The hooks can be put under revision control but they have to be
+manually included in the Git setup.
+
+So here we go.
+
+1. A makes a change to OE and wants to get it included.
+  a) A should use Git.
+  b) Adhere to commit policy [1], styleguide [2] (tool (`oe-stylize.py`)
+available [3]), rebase against remote branch.
+  c) Send the patch to the mailing list. Preferred way is `git
+send-email`. Sending it as an attachment. Additionally Git tree can be
+publishing on the net.
+
+> b) could be automated using Git hooks checking for Signed-off-by-line
+> (although that can be added later in `git format-patch`), running
+> `oe-stylize.py`) and check for example for spelling mistakes [5].
+
+2. Thinks done by OE infrastructure.
+  a) Message sent to the list.
+  b) Patchwork is picking the patch up.
+  c) If this patch is an iteration (see 5 a)), Patchwork should detect
+this and mark the old patch as =C2=BBSuperseded=C2=AB.
+
+> I do not know if this is possible. I will ask the Patchwork hackers
+> about it. If not this could be done using a Git hook at least when the
+> final patch is pushed by someone with commit rights (see 4).
+
+  d) If b) is possible it could be tried to commit the patch
+automatically to a staging branch.
+    + If the patch applies could be automatically tested.
+      Failure: Automatically (`pwclient` [6]) change the state in
+Patchwork to =C2=BBDoes not apply=C2=AB and sent message to list (including
+author).
+    - Security implications. Evil people could for example sent a patch
+too big. ikiwiki offers something similar [7].
+
+3. Review
+  a) Reviewing without applying. Answering directly to the list and
+change the state in Patchwork.
+
+> A way is missing to easily retrieve the Patchwork ID.
+
+  b) Reviewer get the patch either using saving the message sent with
+`git send-email`, save the attachment, retrieve it from Patchwork
+(`pwclient`, `pw-am.sh` [8]) and (if not happened already) apply it
+using `git am file`. A pre-applypatch hook checks again for the things
+in 1. b) and a post-applypatch hook sets the patchwork state to =C2=BBUnder
+Review=C2=AB. After review a reply is sent back to the list and the Patchwo=
+rk
+state changed appropriately. A =C2=BBReviewed-by=C2=AB or =C2=BBAcked-by=C2=
+=AB line can be
+added. (Or just =C2=BBSigned-off-by=C2=AB?)
+
+> I have not found out yet, if the hooks can be made dependent on a
+> branch, so that applying the patch to a branch (i. e. accepted) can
+> trigger a certain hook. If not it should be scriptable to set the
+> appropriate state (=C2=BBAccepted=C2=AB, =C2=BBRejected=C2=AB) [9].
+
+     If the reviewer has a question to the patch should the Patchwork
+state be changed to =C2=BBDeferred=C2=AB?
+
+4. Commit (if not go to 5.)
+  a) If the reviewer has commit access and accepts the patch, s/he can
+push it. A hook then changes the Patchwork state to =C2=BBApplied=C2=AB wit=
+h the
+appropriate commit id and archived(?).
+
+     Furthermore should a message be send to the list that the patch has
+been committed?
+
+5. Reject.
+  a) The original author (or someone) else incorporates the comments and
+publishes a new patch with its iteration in the subject `[PATCH v4]`
+(`git format-patch --subject-prefix=3D`PATCH v4`) and maybe a short
+description of the changes of the iteration in the commit message.
+  b) Go to 1..
+
+
+Sorry for this long message. Maybe a schematic diagram should be made
+out of this. I hope figuring this out will improve OE=E2=80=99s code qualit=
+y a
+bit and be a good reference to point new developers to.
+
+
+Thanks,
+
+Paul
+
+
+[1] http://wiki.openembedded.net/index.php/Commit_Policy
+[2] http://wiki.openembedded.net/index.php/Styleguide
+[3] http://wiki.openembedded.net/index.php/Styleguide#Style_Checking_tools
+[4] http://benjamin-meyer.blogspot.com/2008/10/git-hooks.html
+[5] http://github.com/Arora/arora/tree/master/git_hooks/
+[6] http://patchwork.openembedded.org/help/pwclient/
+[7] http://ikiwiki.info/tips/untrusted_git_push/
+[8] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/contrib/patchwo=
+rk/pw-am.sh
+[9] http://lists.ozlabs.org/pipermail/patchwork/attachments/20091006/13e234=
+0a/attachment.asc
+
+--=-zzojwY/m/7HB+93V/7xB
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAktbiBQACgkQPX1aK2wOHVjmtACaA6PgrhWbi1Y8YlFzBFbTvvcC
+gRIAnRCREliY1OAGy4fGa9HFWZ3aSn5P
+=O8SJ
+-----END PGP SIGNATURE-----
+
+--=-zzojwY/m/7HB+93V/7xB--
