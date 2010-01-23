@@ -1,28 +1,26 @@
-Received: from qmta02.westchester.pa.hmc1.comcast.net ([76.96.53.9])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <john@soundmetrics.com>) id 1NYoYV-0002sy-Nu
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 23:34:14 +0100
-Received: from omta02.westchester.pa.hmc1.comcast.net ([76.96.53.7])
-	by qmta02.westchester.pa.hmc1.comcast.net with comcast
-	id ZANP1d00909Ku2s09AXtmy; Sat, 23 Jan 2010 22:31:53 +0000
-Received: from [192.168.10.133] ([75.147.191.205])
-	by omta02.westchester.pa.hmc1.comcast.net with bizsmtp
-	id ZAXs1d0014SLwm302AXtGR; Sat, 23 Jan 2010 22:31:53 +0000
-Message-ID: <4B5B78D9.5060809@soundmetrics.com>
-Date: Sat, 23 Jan 2010 14:31:53 -0800
-From: John Faith <john@soundmetrics.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.1.22) Gecko/20090605 SeaMonkey/1.1.17
-	(Ubuntu-1.1.17+nobinonly-0ubuntu1)
-MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NYouR-0002BJ-02 for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jan 2010 23:56:54 +0100
+Received: from e178248110.adsl.alicedsl.de ([85.178.248.110]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NYosE-0002DG-5b for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jan 2010 22:54:34 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4B5B78D9.5060809@soundmetrics.com>
 References: <1264273402-29910-1-git-send-email-john@soundmetrics.com>
 	<1264276434.3738.53.camel@mattotaupa.wohnung.familie-menzel.net>
-In-Reply-To: <1264276434.3738.53.camel@mattotaupa.wohnung.familie-menzel.net>
-X-SA-Exim-Connect-IP: 76.96.53.9
-X-SA-Exim-Mail-From: john@soundmetrics.com
+	<4B5B78D9.5060809@soundmetrics.com>
+Date: Sat, 23 Jan 2010 23:54:32 +0100
+Message-ID: <1264287272.3738.222.camel@mattotaupa.wohnung.familie-menzel.net>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [PATCH] socat: Add version 1.7.1.2
@@ -39,101 +37,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 22:34:15 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 23 Jan 2010 22:56:54 -0000
+X-Groupsio-MsgNum: 16127
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-IxegBBpBU7W4cXw+hWZ7"
 
-Paul Menzel wrote:
-> Am Samstag, den 23.01.2010, 11:03 -0800 schrieb John Faith:
->   
->> ..
->>     
->
-> Thank you for your patch.
->
-> 1. Applying your patch gives me warnings.
->
->         $ git am /tmp/\[oe\]_\[PATCH\]_socat\:_Add_version_1.7.1.2 
->         Applying: socat: Add version 1.7.1.2
->         /srv/filme/oe/openembedded/.git/rebase-apply/patch:29: trailing whitespace.
->          
->         /srv/filme/oe/openembedded/.git/rebase-apply/patch:38: trailing whitespace.
->          
->         /srv/filme/oe/openembedded/.git/rebase-apply/patch:46: trailing whitespace.
->          
->         /srv/filme/oe/openembedded/.git/rebase-apply/patch:54: trailing whitespace.
->          
->         /srv/filme/oe/openembedded/.git/rebase-apply/patch:60: space before tab in indent.
->          	IF_IP6    ("ipv6only",	&opt_ipv6_v6only)
->         warning: squelched 13 whitespace errors
->         warning: 18 lines add whitespace errors.
->   
+--=-IxegBBpBU7W4cXw+hWZ7
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-There are space-tabs in the original source file so I'm not sure how to 
-remove those.  The other trailing whitespace I see is might be an 
-artifact from diff which I used to create 
-files/socat-1.7.1.2-cross.patch; I can remove those manually.
+Am Samstag, den 23.01.2010, 14:31 -0800 schrieb John Faith:
+> Paul Menzel wrote:
 
-> ...
->> diff --git a/recipes/socat/socat_1.7.1.2.bb b/recipes/socat/socat_1.7.1.2.bb
->> new file mode 100644
->> index 0000000..5bbb421
->> --- /dev/null
->> +++ b/recipes/socat/socat_1.7.1.2.bb
->> @@ -0,0 +1,23 @@
->> +SECTION = "console/network"
->> +DEPENDS = "openssl readline"
->> +DESCRIPTION = "Socat is a relay for bidirectional data \
->> +transfer between two independent data channels."
->> +LICENSE = "GPL"
->> +PR = "r1"
->>     
->
-> You can start with `r0` I think.
->   
-Ok.
->   
->> +
->> +SRC_URI = "http://www.dest-unreach.org/socat/download/socat-1.7.1.2.tar.bz2 \
->>     
->
-> Can we do this more generic: `…/download/${P}.tar.bz2`.
->   
-Ok.
->> +           file://socat-1.7.1.2-cross.patch;patch=1 "
->> +
->> +inherit autotools
->> +
->> +do_configure() {
->> +	# Override this function to avoid autoconf/automake/aclocal/autoheader
->> +	# since config.h.in gets recreated.
->> +	(cd ${S} && gnu-configize) || die "failure in running gnu-configize"
->> +	oe_runconf
->> +}
->> +
->> +do_install_prepend () {
->> +	mkdir -p ${D}${bindir}
->> +	install -d ${D}${bindir} ${D}${mandir}/man1
->> +}
->>     
->
-> 2. I cannot build your patch because checksums are missing [1].
->   
-Ok, I'll add this.
-> 3. Looking at the difference between `socat_1.3.2.1.bb` and
-> `socat_1.7.1.2.bb` there is not much. Could you factor that out into an
-> include file e. g. unify this?
->   
-I'd rather not potentially break v 1.3 and would prefer not to change this.
-> Please fix this up and resend with `[PATCH v2]` in the subject line and
-> a note in the commit message.
->   
-git send-email really doesn't want to put "[PATCH v2]" in the mail 
-subject even when I specify --subject on the command line.  Could you 
-point me to the trick to do this?
+[=E2=80=A6]
+
+> > Please fix this up and resend with `[PATCH v2]` in the subject line and
+> > a note in the commit message.
+> >  =20
+> git send-email really doesn't want to put "[PATCH v2]" in the mail=20
+> subject even when I specify --subject on the command line.
+
+`git help send-email` says that this just kicks in when `--compose` is
+specified too.
+
+> Could you point me to the trick to do this?
+
+Good question. The subject seems to be set when you do `git
+format-patch`. There you have an option `--subject-prefix`. So
+`--subject-prefix=3D"PATCH v2"` should do the trick.
+
+As you can see in [1] some people also briefly note what changed in the
+patch revisions. But that is optional I think.
+
 
 Thanks,
-John
+
+Paul
 
 
+[1] http://sourceforge.net/mailarchive/forum.php?thread_name=3D1264014090-1=
+8814-1-git-send-email-luca%40luca-barbieri.com&forum_name=3Ddri-devel
+    (Different style of subject. ;-))
 
+--=-IxegBBpBU7W4cXw+hWZ7
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAktbfigACgkQPX1aK2wOHVgYHwCfaqs+S+20Dsju4TCMi3JdfTM4
+f+sAoIr2iRD5BT8pG/fPjm821XkVFL9g
+=O1JJ
+-----END PGP SIGNATURE-----
+
+--=-IxegBBpBU7W4cXw+hWZ7--
