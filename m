@@ -1,38 +1,25 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NYnJT-0005Ra-Uv for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 22:14:39 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NYnHE-0006KL-Sw
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 22:12:16 +0100
-Received: from p5b3b35f1.dip.t-dialin.net ([91.59.53.241])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Jan 2010 22:12:16 +0100
-Received: from no2spam by p5b3b35f1.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Jan 2010 22:12:16 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NYnRv-0005i2-Kq for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jan 2010 22:23:22 +0100
+Received: from e178248110.adsl.alicedsl.de ([85.178.248.110]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NYnPj-0003IN-3n for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jan 2010 21:21:03 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sat, 23 Jan 2010 22:11:55 +0100
-Message-ID: <hjfon5$59s$1@ger.gmane.org>
-References: <1263760344-26105-1-git-send-email-eric@eukrea.com>	<hivtt3$v2r$1@ger.gmane.org>	<1263763723.5353.16.camel@mattotaupa.wohnung.familie-menzel.net>	<hj09k8$km$1@ger.gmane.org>	<1263820243.3675.560.camel@mill.internal.reciva.com>	<1263824896.26227.112.camel@dax.rpnet.com>
-	<hj21vd$32h$1@ger.gmane.org>
-	<1264114415.457.1069.camel@lenovo.internal.reciva.com>
+Date: Sat, 23 Jan 2010 22:21:01 +0100
+Message-ID: <1264281661.3738.150.camel@mattotaupa.wohnung.familie-menzel.net>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b35f1.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-In-Reply-To: <1264114415.457.1069.camel@lenovo.internal.reciva.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: include default PR or not
+Subject: How to best handle different build configurations (local.conf)?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,20 +33,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 21:14:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 23 Jan 2010 21:23:23 -0000
+X-Groupsio-MsgNum: 16121
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-+JGGLTdygYqYYXp1Bz++"
 
-Phil Blundell wrote:
-> I'm not entirely sure what point you are making about it being
-> undesirable for the TSC to "rule in favour of one or the other faction".
+--=-+JGGLTdygYqYYXp1Bz++
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I'm not advocating for the TSC to take a soft stance for fear of
-confrontation.  But why have a rule about something that isn't really so
-important?  If we follow down the path of letting the TSC decide even
-over silly things like PR, I'm afraid two things will happen.  One is
-the TSC will become overloaded and two OE will become a bureaucratic,
-no-fun hell.  Not sure that would be an improvement.
+Dear OE hackers,
 
 
+I imagine you juggle with different configurations for BitBake day in,
+day out to specify different compiler versions or to build different
+distributions. Could you please tell me what proofed to be the best
+approach?
 
+My requirements are that rebuilding everything should be avoided and
+space should not be wasted.
+
+I am using the setup described for =C3=85ngstr=C3=B6m [1] (local.conf [2]).
+
+If I understood that correctly `local.conf` is the place where all this
+happens.
+
+Reading `bitbake -h` I did not find an option to specify a path to
+`local.conf`.
+
+In the `source-me.txt` [3] from [1] `PKGDIR` gets set to
+`{OETREE}/build/` which is entered later on, but I could neither find a
+reference for it in the BitBake user manual nor in the OE repository. So
+it must be specific to this script.
+
+To save the already build files for other platforms one should change
+`TMPDIR` to a separate directory for each config.
+
+        # Set TMPDIR instead of defaulting it to $pwd/tmp
+        TMPDIR =3D "${OETREE}/${DISTRO}-dev"
+
+1. So is the solution to have a directory with an adapted
+`conf/local.conf` below which one enters before building a different
+configuration?
+2. Is there advantage to but this in a separate Git repository and
+switch the branch to build a different configuration?
+3. Or do you just set the environment variables yourself?
+
+That is not so much work, but if you do it regularly pretty bothersome.
+
+
+Thanks,
+
+Paul
+
+
+[1] http://www.angstrom-distribution.org/building-angstrom
+[2] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/contrib/angstro=
+m/local.conf
+[3] http://www.angstrom-distribution.org/files/source-me.txt
+[4] http://bitbake.berlios.de/manual/
+
+--=-+JGGLTdygYqYYXp1Bz++
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAktbaD0ACgkQPX1aK2wOHViGcACffRyvCEH/oEIuY/4yyRh0Rg+m
+fsQAn1+s3docsZZvz5k8eQbv4LpWSKmr
+=xvSY
+-----END PGP SIGNATURE-----
+
+--=-+JGGLTdygYqYYXp1Bz++--
