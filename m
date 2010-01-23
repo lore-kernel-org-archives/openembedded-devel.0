@@ -1,28 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-gx0-f215.google.com ([209.85.217.215])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NYezP-00054p-TU for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 13:21:22 +0100
-Received: from f053033135.adsl.alicedsl.de ([78.53.33.135]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NYexD-0007bE-Qs for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 12:19:03 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NYfB4-00080d-VN
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jan 2010 13:33:26 +0100
+Received: by gxk7 with SMTP id 7so2477232gxk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 23 Jan 2010 04:31:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=bh1mssp+hHBdb4cms4sA0gqN8ViCmY4RjVQVl3MyQKY=;
+	b=LmK0dzV7JkN3ACaQLpfIdi4LV72c1lO1DrOeeZR3+B9ECYRLKJL5ysp2N5d4jTRe/l
+	hWNxJZZWfffZiWjfsccNAw6pDgRfrP4IP2J8W2Zv1lxNTYZGOE+xxR20Ch/cr2JF4R8e
+	WJQ1FlWsp/rrptEZRAFFQmF2JXgNogrF1adf8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=e/1TvlNjzjVw7VYYbd0iBI15m5URMbQWJSB5aiVi58cIdWjjJ8FXwkged+g+c/YdWf
+	T2bFU1tUgmgTZIltVrCwU3b+e4M5bKgAreDykAzvv/7d/8DDep15A2hdALSL98nWpPOU
+	6JYjRsgikgdfCDxfEcKlJyrXru/FrgHxVxlQs=
+MIME-Version: 1.0
+Received: by 10.101.105.30 with SMTP id h30mr5299601anm.225.1264249863927; 
+	Sat, 23 Jan 2010 04:31:03 -0800 (PST)
+Date: Sat, 23 Jan 2010 13:31:03 +0100
+Message-ID: <ac9c93b11001230431s6a9dc637y370ad9999d82c83@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hjejrf$m65$1@ger.gmane.org>
-References: <201001230943.24210.holger+oe@freyther.de>
-	<hjejrf$m65$1@ger.gmane.org>
-Date: Sat, 23 Jan 2010 13:19:02 +0100
-Message-ID: <1264249142.3630.41.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.217.215
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: New state for patches not complying with commit policy (was: Patchwork Workflow improvement)
+Subject: packaged staging fails in do_deploy for kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,90 +43,196 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 12:21:23 -0000
-X-Groupsio-MsgNum: 16083
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-lpyhYa2QrksOg196UG3m"
+X-List-Received-Date: Sat, 23 Jan 2010 12:33:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-lpyhYa2QrksOg196UG3m
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+I decided to give packaged staging a try.
+(more or less) following the instructions on
+http://marcin.juszkiewicz.com.pl/2008/07/01/packaged-staging-and-what-it-gives/
 
-Am Samstag, den 23.01.2010, 11:42 +0100 schrieb Koen Kooi:
-> On 23-01-10 09:43, Holger Hans Peter Freyther wrote:
-> > right now I'm writing a Qt 4.6 based application that might help us
-> a bit with=20
-> > the patchwork queue.
-> >=20
-> > The idea of the script is to have two things at the end:
-> >       1.) a branch with all the patches that applied and that can be pu=
-blished
-> >       2.) a list of patches that don't apply.
-> >=20
-> >=20
-> > What people are supposed to:
-> >=20
-> > 1.) Cherry pick from the branch
-> > 2.) Send updated patches, close the reports on patchwork...
->=20
-> I think people that apply those patches to oe.dev should fix up the
-> commit message as well. The stack Khem pushed this week is just
-> awfull.
->=20
-> I guess we should flag patches with bad commit messages as 'rejected' in
-> pw ASAP. We can weed out most of them by reject anything that lacks a
-> ':' in the subject line.
+distribution angstrom (dev head)
+machine: beagleboard.
 
-I am just getting into Patchwork [1][2], so I am sorry if I miss the
-obvious.
+I set the DEPLOY_DIR_PSTAGE to outside tmp. (packaged-staging is
+already inherited by default in Angstrom).
 
-If it is possible, I suggest to add a new state (=C2=BBRejected =E2=80=93 C=
-ommit
-Policy=C2=AB) for patches not complying with the commit policy [3]?
+rm tmp; bitbake console-image
+great, few hours later everything is rebuild. now the final proof.
+mv tmp tmp.bak; bitbake console-image
 
-As a bonus an automatically answer is sent to the message with the patch
-to the list with the following content, which is just a draft/suggestion
-of course.
+And lo-and-behold things are fetched from pstage.
+Until suddenly after 20 minutes:
+
+NOTE: Running task 2352 of 2433 (ID: 538,
+/home/frans/oe/openembedded/recipes/linux/linux-omap_2.6.29.bb,
+do_deploy)
+ERROR: function do_deploy failed
+
+Bummer.
+
+Log file for deploy has just a single line: install: cannot stat
+`arch/arm/boot/uImage': No such file or directory
+There is also a log.staging_helper.11952 but that one is empty.
+and there is a dir git adjacent to temp in the work dir which is also empty.
 
 
-        Dear patch author,
-       =20
-       =20
-        thank you for your patch. Unfortunately we had to reject it
-        because it does not comply with our commit policy [3].
-       =20
-        It would be great if you could resend your patch with this issue
-        fixed so that we can review and commit it as soon as possible.
-       =20
-       =20
-        Thank you,
-       =20
-        OpenEmbedded people
+The uImage file exists in staging:
+staging/beagleboard-angstrom-linux-gnueabi/kernel/arch/arm/boot/uImage
+staging/beagleboard-angstrom-linux-gnueabi/kernel/arch/arm/boot/.uImage.cmd
+staging/beagleboard-angstrom-linux-gnueabi/kernel/uImage
+
+and do_deploy says:
+do_deploy() {
+        install -d /home/frans/oe/tmp_angstrom/deploy/glibc/images/beagleboard
+        install -m 0644 arch/arm/boot/uImage
+/home/frans/oe/tmp_angstrom/deploy/glibc/images/beagleboard/uImage-2.6.29-r51-beagleboard.bin
+        package_stagefile_shell
+/home/frans/oe/tmp_angstrom/deploy/glibc/images/beagleboard/uImage-2.6.29-r51-beagleboard.bin
+
+        if [ -d
+"/home/frans/oe/tmp_angstrom/work/beagleboard-angstrom-linux-gnueabi/linux-omap-2.6.29-r51/package/lib"
+]; then
+                fakeroot tar -cvzf
+/home/frans/oe/tmp_angstrom/deploy/glibc/images/beagleboard/modules-2.6.29-r51-beagleboard.tgz
+-C /home/frans/oe/tmp_angstrom/work/beagleboard-angstrom-linux-gnueabi/linux-omap-2.6.29-r51/package
+lib
+        fi
+
+        cd /home/frans/oe/tmp_angstrom/deploy/glibc/images/beagleboard
+        rm -f uImage-beagleboard.bin
+        ln -sf uImage-2.6.29-r51-beagleboard.bin uImage-beagleboard.bin
+        package_stagefile_shell
+/home/frans/oe/tmp_angstrom/deploy/glibc/images/beagleboard/uImage-beagleboard.bin
+
+}
 
 
-Is there a way to automate this?
+which of course fails on the install -m as  $arch/arm/boot/uImage does
+not exist in work
+
+the code is from kernel.bbclass.
+
+do_deploy() {
+        install -d ${DEPLOY_DIR_IMAGE}
+        install -m 0644 ${KERNEL_OUTPUT}
+${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
+        package_stagefile_shell
+${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
+
+        if [ -d "${PKGD}/lib" ]; then
+                fakeroot tar -cvzf
+${DEPLOY_DIR_IMAGE}/${MODULES_IMAGE_BASE_NAME}.tgz -C ${PKGD} lib
+        fi
+
+        cd ${DEPLOY_DIR_IMAGE}
+        rm -f ${KERNEL_IMAGE_SYMLINK_NAME}.bin
+        ln -sf ${KERNEL_IMAGE_BASE_NAME}.bin ${KERNEL_IMAGE_SYMLINK_NAME}.bin
+        package_stagefile_shell
+${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_SYMLINK_NAME}.bin
+}
+
+Not really an idea how to fix this. Any expert with an opinion?
+
+next steps:
+after that I did a bitbake -cclean virtual/kernel and got several
+messages of the type:
+ * Package staging-strace-armv7a-angstrom-linux-gnueabi version
+4.5.14-r9 has no architecture specified, defaulting to i686-linux.
+which also seem odd to me.
+
+after cleaning the kernel I tried to rebuild console-image. The kernel
+compiles but the system fails when building the rootfs:
+
+From work/beagleboard-angstrom-linux-gnueabi/console-image-1.0-r0/temp/log.do_rootfs.28400
+ * Cannot find package task-base.
+ * Cannot find package psplash-angstrom.
+ * Cannot find package psplash-zap.
+ * Cannot find package task-base-extended.
+ * Cannot find package initscripts.
+ * Cannot find package udev.
+ * Cannot find package sysvinit.
+ * Cannot find package sysvinit-pidof.
+ * Cannot find package tinylogin.
+ * Cannot find package opkg-nogpg-nocurl.
+ * Cannot find package angstrom-feed-configs.
+ * Cannot find package opkg-collateral.
+
+task-base did run staging-helper. I did not dig into the others
+
+Did a bitbake -cclean for the packages listed above, but got new failures.
+See below.
+
+That is where I gave up. Suggestions are welcome!
+
+Frans
+
+PS: logs are also sent to tinderbox (as eFfeM)
+
+log_check: Using
+/home/frans/oe/tmp_angstrom/work/beagleboard-angstrom-linux-gnueabi/console-image-1.0-r0/temp/log.do_rootfs.32140
+as logfile
+log_check: There were error messages in the logfile
+log_check: Matched keyword: [Cannot find package]
+         *  task-boot *  libgcc1 (>= 4.3.3) *  libc6 (>= 2.9) *
+util-linux-ng-mount *  util-linux-ng-umount *
+angstrom-libc-fixup-hack *  dropbear *  sysfsutils *
+module-init-tools *  apm *  apmd *  alsa-utils-alsactl *
+alsa-utils-alsamixer *  update-modules *  update-modules *
+update-modules *  update-modules *  update-modules *  usbutils *
+update-modules *  portmap *  update-modules *  update-modules *  ppp *
+ ppp-dialin *  update-modules *  update-modules *  update-modules *
+update-modules *  update-modules *
+ * Cannot find package task-base.
+ * ERROR: Cannot satisfy the following dependencies for psplash-angstrom:
+         *  makedevs *  libc6 (>= 2.9) *  update-rc.d *  libc6 (>= 2.9) *
+ * Cannot find package psplash-angstrom.
+ * ERROR: Cannot satisfy the following dependencies for psplash-zap:
+         *  update-rc.d *
+ * Cannot find package psplash-zap.
+ * ERROR: Cannot satisfy the following dependencies for task-base-extended:
+         *  wireless-tools *  wpa-supplicant *  blueprobe *  bluez4 *
+ * Cannot find package task-base-extended.
+ * ERROR: Cannot satisfy the following dependencies for udev:
+         *  libc6 (>= 2.9) *  update-rc.d *  libc6 (>= 2.9) *  libc6 (>= 2.9) *
+ * Cannot find package udev.
+ * ERROR: Cannot satisfy the following dependencies for sysvinit:
+         *  libc6 (>= 2.9) *  libc6 (>= 2.9) *
+ * Cannot find package sysvinit.
+ * ERROR: Cannot satisfy the following dependencies for tinylogin:
+         *  libc6 (>= 2.9) *
+ * Cannot find package tinylogin.
++ export D=/home/frans/oe/tmp_angstrom/rootfs/console-image
+
+log_check: There were error messages in the logfile
+log_check: Matched keyword: [Cannot satisfy the following dependencies]
+Collected errors:
+ * ERROR: Cannot satisfy the following dependencies for task-base:
+         *  task-boot *  libgcc1 (>= 4.3.3) *  libc6 (>= 2.9) *
+util-linux-ng-mount *  util-linux-ng-umount *
+angstrom-libc-fixup-hack *  dropbear *  sysfsutils *
+module-init-tools *  apm *  apmd *  alsa-utils-alsactl *
+alsa-utils-alsamixer *  update-modules *  update-modules *
+update-modules *  update-modules *  update-modules *  usbutils *
+update-modules *  portmap *  update-modules *  update-modules *  ppp *
+ ppp-dialin *  update-modules *  update-modules *  update-modules *
+update-modules *  update-modules *
+ * Cannot find package task-base.
+ * ERROR: Cannot satisfy the following dependencies for psplash-angstrom:
+         *  makedevs *  libc6 (>= 2.9) *  update-rc.d *  libc6 (>= 2.9) *
+ * Cannot find package psplash-angstrom.
+ * ERROR: Cannot satisfy the following dependencies for psplash-zap:
+         *  update-rc.d *
+ * Cannot find package psplash-zap.
+ * ERROR: Cannot satisfy the following dependencies for task-base-extended:
+         *  wireless-tools *  wpa-supplicant *  blueprobe *  bluez4 *
+ * Cannot find package task-base-extended.
+ * ERROR: Cannot satisfy the following dependencies for udev:
+         *  libc6 (>= 2.9) *  update-rc.d *  libc6 (>= 2.9) *  libc6 (>= 2.9) *
+ * Cannot find package udev.
+ * ERROR: Cannot satisfy the following dependencies for sysvinit:
+         *  libc6 (>= 2.9) *  libc6 (>= 2.9) *
+ * Cannot find package sysvinit.
+ * ERROR: Cannot satisfy the following dependencies for tinylogin:
+         *  libc6 (>= 2.9) *
 
 
-Thanks,
-
-Paul
-
-
-[1] http://patchwork.openembedded.org/
-[2] http://ozlabs.org/~jk/projects/patchwork/
-[3] http://wiki.openembedded.net/index.php/Commit_Policy
-
---=-lpyhYa2QrksOg196UG3m
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEUEABECAAYFAkta6TUACgkQPX1aK2wOHVj0ygCdF/axSgBTQu0zEjZoeBRJv2nV
-u1kAmPezF9GxX7oyfDhujTqa9+WrNEU=
-=ph8S
------END PGP SIGNATURE-----
-
---=-lpyhYa2QrksOg196UG3m--
