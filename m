@@ -1,31 +1,39 @@
-Received: from smtp-out112.alice.it ([85.37.17.112])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1NYkFF-0003KA-9s
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NYkKV-0003bU-Jl for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jan 2010 19:03:30 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NYkIB-0003Ae-VY
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 18:58:04 +0100
-Received: from FBCMMO03.fbc.local ([192.168.68.197]) by smtp-out112.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 23 Jan 2010 18:55:42 +0100
-Received: from FBCMCL01B06.fbc.local ([192.168.69.87]) by FBCMMO03.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 23 Jan 2010 18:55:42 +0100
-Received: from [192.168.1.116] ([80.117.36.21]) by FBCMCL01B06.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Sat, 23 Jan 2010 18:55:42 +0100
-From: gnutoo <GNUtoo@no-log.org>
+	Sat, 23 Jan 2010 19:01:03 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 23 Jan 2010 19:01:03 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 23 Jan 2010 19:01:03 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hinc1j$ess$1@ger.gmane.org>
-References: <hihuv8$b6u$1@ger.gmane.org>  <hinc1j$ess$1@ger.gmane.org>
-Date: Sat, 23 Jan 2010 18:55:39 +0100
-Message-Id: <1264269339.3738.1.camel@gnutoo-desktop>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 23 Jan 2010 19:00:42 +0100
+Message-ID: <hjfdg9$4lv$1@ger.gmane.org>
+References: <201001230943.24210.holger+oe@freyther.de>	<hjejrf$m65$1@ger.gmane.org>	<1264249142.3630.41.camel@mattotaupa.wohnung.familie-menzel.net>
+	<1264263068.9974.14.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-OriginalArrivalTime: 23 Jan 2010 17:55:42.0879 (UTC)
-	FILETIME=[481242F0:01CA9C55]
-X-SA-Exim-Connect-IP: 85.37.17.112
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100113 Shredder/3.0.2pre
+In-Reply-To: <1264263068.9974.14.camel@lenovo.internal.reciva.com>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC][PATCH] Move udev cache creation after checkroot
+Subject: Re: New state for patches not complying with commit policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,35 +47,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 17:58:04 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 23 Jan 2010 18:03:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, 2010-01-14 at 16:08 +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 23-01-10 17:11, Phil Blundell wrote:
+> On Sat, 2010-01-23 at 13:19 +0100, Paul Menzel wrote:
+>> If it is possible, I suggest to add a new state (»Rejected – Commit
+>> Policy«) for patches not complying with the commit policy [3]?
 > 
-> It received 2 Acks, no NAKs, works well in the field: it's applied now
-> 
-> On 12-01-10 14:54, Koen Kooi wrote:
-> > Hi,
-> > 
-> > What's your opinion on attached (untested) patch? If there's some
-> > consensus that this is a step in the right direction I'll create a
-> > working & tested patch to commit.
-> > 
-> > Nota bene: I'm not going to discuss the merits of udev caching, only the
-> > impact of this patch to the current situation.
-> > 
-> > regards,
-> > 
-> > Koen
-I tested it today(sorry for testing late)
-And boot still hang with udev + ro
-maybe it fixes a different issue then
+> If the patch is basically correct then it seems a little bit officious
+> to reject it purely because it fails to conform to the commit policy in
+> some way.  Most of the issues listed in the policy are easy enough to
+> fix up when applying the patch, after all.
 
-Denis.
+And yet OE developers aren't fixing those up (latest example: the patch
+stack Khem pushed last week), however easy it may be.
 
+Maybe it's a case of sampling bias since I only inspect bad commits, but
+in any case, the commit message of the commits that end up in .dev needs
+to get improved.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLWzlJMkyGM64RGpERAvyDAKCE7pBD3krfl2wBN4GvYi59Wi+g8wCeLNmA
+Wg9qotVtOlkyOtLgSkhTrPQ=
+=ar+b
+-----END PGP SIGNATURE-----
 
 
 
