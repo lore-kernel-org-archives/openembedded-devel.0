@@ -1,28 +1,38 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NYdJa-0005iu-3B for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 11:34:05 +0100
-Received: from f053033135.adsl.alicedsl.de ([78.53.33.135]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NYdHN-0007xn-Fy for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 10:31:45 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NYdUn-0005yj-0K for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jan 2010 11:45:40 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NYdSZ-00046p-1q
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jan 2010 11:43:19 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 23 Jan 2010 11:43:19 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 23 Jan 2010 11:43:19 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hhvu64$40s$1@ger.gmane.org>
-References: <1262697583.3209.23.camel@mattotaupa.wohnung.familie-menzel.net>
-	<hhvu64$40s$1@ger.gmane.org>
-Date: Sat, 23 Jan 2010 11:31:43 +0100
-Message-ID: <1264242703.3630.18.camel@mattotaupa.wohnung.familie-menzel.net>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 23 Jan 2010 11:42:56 +0100
+Message-ID: <hjejrf$m65$1@ger.gmane.org>
+References: <201001230943.24210.holger+oe@freyther.de>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100113 Shredder/3.0.2pre
+In-Reply-To: <201001230943.24210.holger+oe@freyther.de>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 1/1] Update unavailable whois 4.5.25 to available version 4.7.30.
+Subject: Re: Patchwork Workflow improvement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,45 +46,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 10:34:05 -0000
-X-Groupsio-MsgNum: 16072
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-8zgnHEAHdmm0F1y5hJIw"
+X-List-Received-Date: Sat, 23 Jan 2010 10:45:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-8zgnHEAHdmm0F1y5hJIw
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am Dienstag, den 05.01.2010, 18:50 +0100 schrieb Rolf Leggewie:
-> Paul Menzel wrote:
-> > I noticed that whois cannot be build since the sources are not availabl=
-e
-> > anymore.
->=20
-> Thank you for informing us of the problem.  I have published the sources
-> for whois on the OE sources mirror now.  I think that is the preferred
-> solution.
+On 23-01-10 09:43, Holger Hans Peter Freyther wrote:
+> Hi All,
+> 
+> right now I'm writing a Qt 4.6 based application that might help us a bit with 
+> the patchwork queue.
+> 
+> The idea of the script is to have two things at the end:
+> 	1.) a branch with all the patches that applied and that can be published
+> 	2.) a list of patches that don't apply.
+> 
+> 
+> What people are supposed to:
+> 
+> 1.) Cherry pick from the branch
+> 2.) Send updated patches, close the reports on patchwork...
 
-A late thank you.
+I think people that apply those patches to oe.dev should fix up the
+commit message as well. The stack Khem pushed this week is just awfull.
 
-Just for the record. Khem Raj wrote and committed a recipe for version
-5.0.0 [1].
+I guess we should flag patches with bad commit messages as 'rejected' in
+pw ASAP. We can weed out most of them by reject anything that lacks a
+':' in the subject line.
 
+regards,
 
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D310b2cd=
-8919a13280b445537893c109b66c5275c
-
---=-8zgnHEAHdmm0F1y5hJIw
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAkta0A8ACgkQPX1aK2wOHVjmHQCZAWL9AFg2YLHqrzVStLdNYSpL
-7dQAnial93p60ECb3NuRqRuQuReO6jdc
-=yqEM
+iD8DBQFLWtKwMkyGM64RGpERAgSAAJ4y0iproyWSH/ojheSFN40fdj16NgCfRfj3
+rD4D/FAM3X5NeYdEUTRsbDQ=
+=4N5e
 -----END PGP SIGNATURE-----
 
---=-8zgnHEAHdmm0F1y5hJIw--
+
+
