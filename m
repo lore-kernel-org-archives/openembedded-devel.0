@@ -1,30 +1,31 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from smtp-out112.alice.it ([85.37.17.112])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NYjH2-0000A2-8M for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 17:55:51 +0100
-Received: from g225137047.adsl.alicedsl.de ([92.225.137.47]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NYjEp-0008AP-Ta for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 16:53:32 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <GNUtoo@no-log.org>) id 1NYkFF-0003KA-9s
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jan 2010 18:58:04 +0100
+Received: from FBCMMO03.fbc.local ([192.168.68.197]) by smtp-out112.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 23 Jan 2010 18:55:42 +0100
+Received: from FBCMCL01B06.fbc.local ([192.168.69.87]) by FBCMMO03.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 23 Jan 2010 18:55:42 +0100
+Received: from [192.168.1.116] ([80.117.36.21]) by FBCMCL01B06.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Sat, 23 Jan 2010 18:55:42 +0100
+From: gnutoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201001231746.01739.holger+oe@freyther.de>
-References: <201001230943.24210.holger+oe@freyther.de>
-	<201001231056.17675.holger+oe@freyther.de>
-	<1264258385.21187.29.camel@mattotaupa.wohnung.familie-menzel.net>
-	<201001231746.01739.holger+oe@freyther.de>
-Date: Sat, 23 Jan 2010 17:53:40 +0100
-Message-ID: <1264265620.32767.19.camel@mattotaupa.wohnung.familie-menzel.net>
+In-Reply-To: <hinc1j$ess$1@ger.gmane.org>
+References: <hihuv8$b6u$1@ger.gmane.org>  <hinc1j$ess$1@ger.gmane.org>
+Date: Sat, 23 Jan 2010 18:55:39 +0100
+Message-Id: <1264269339.3738.1.camel@gnutoo-desktop>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Mailer: Evolution 2.26.1 
+X-OriginalArrivalTime: 23 Jan 2010 17:55:42.0879 (UTC)
+	FILETIME=[481242F0:01CA9C55]
+X-SA-Exim-Connect-IP: 85.37.17.112
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: pwclient (was: Patchwork Workflow improvement)
+Subject: Re: [RFC][PATCH] Move udev cache creation after checkroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,68 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 16:55:51 -0000
-X-Groupsio-MsgNum: 16104
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-8MwV4HZaHwKY16vJjue+"
+X-List-Received-Date: Sat, 23 Jan 2010 17:58:04 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
---=-8MwV4HZaHwKY16vJjue+
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Thu, 2010-01-14 at 16:08 +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> It received 2 Acks, no NAKs, works well in the field: it's applied now
+> 
+> On 12-01-10 14:54, Koen Kooi wrote:
+> > Hi,
+> > 
+> > What's your opinion on attached (untested) patch? If there's some
+> > consensus that this is a step in the right direction I'll create a
+> > working & tested patch to commit.
+> > 
+> > Nota bene: I'm not going to discuss the merits of udev caching, only the
+> > impact of this patch to the current situation.
+> > 
+> > regards,
+> > 
+> > Koen
+I tested it today(sorry for testing late)
+And boot still hang with udev + ro
+maybe it fixes a different issue then
 
-Am Samstag, den 23.01.2010, 17:46 +0100 schrieb Holger Hans Peter
-Freyther:
-> On Saturday 23 January 2010 15:53:05 Paul Menzel wrote:
-> > Dear Holger,
->=20
-> > > I also have a new version of the
-> > > program I use attached... I will probably switch it to use pwclient i=
-n
-> > > the future.
-> >=20
-> > Thank you for your effort and bringing up `pwclient`. It is so sad, tha=
-t
-> > there exists a lot of tools and stuff one does not know about which
-> > could safe work and time for oneself. I wonder why others projects did
-> > not face the same problems yet. Probably every project or developers
-> > wrote her/his own scripts (as OE did with `pw-am.sh`) and everyone
-> > reinvents the wheel.
->=20
-> Well, I remembered that pwclient exists, so I went to the patchwork websi=
-te at=20
-> ozlabs.org but I could not find any reference to the tools (or the XML RP=
-C=20
-> API). It was just a matter that writing my version was faster than the ti=
-me I=20
-> would have to spent searching... :(.
-
-It seems to be available at [1] and in the Patchwork Git repository
-under `apps/patchwork/bin`.
-
-> I will probably give up on my version and now look into pw-am.sh.
-
-If the only problem was that you could not find `pwclient` I hope we can
-improve `pwclient`.
+Denis.
 
 
-Thanks,
-
-Paul
 
 
-[1] http://patchwork.ozlabs.org/help/pwclient/
-
---=-8MwV4HZaHwKY16vJjue+
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktbKZMACgkQPX1aK2wOHVgMZQCeO/ViWx0go8hCH/d3fSztKx8O
-ar8AnRFFFkQoLiTGdRT0eUjn01qL/ViZ
-=3eRw
------END PGP SIGNATURE-----
-
---=-8MwV4HZaHwKY16vJjue+--
