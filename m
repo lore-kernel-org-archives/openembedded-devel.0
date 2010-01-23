@@ -1,27 +1,32 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from asmtpout027.mac.com ([17.148.16.102])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NYeH1-0004uu-Tu for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 12:35:30 +0100
-Received: from f053033135.adsl.alicedsl.de ([78.53.33.135]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NYeEp-0004LA-JV for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 11:33:11 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <elvis.dowson@mac.com>) id 1NYewi-0004I7-4a
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jan 2010 13:18:35 +0100
+MIME-version: 1.0
+Received: from [87.201.169.253] by asmtp027.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KWP00DTA5YUWQ00@asmtp027.mac.com> for
+	openembedded-devel@lists.openembedded.org; Sat,
+	23 Jan 2010 03:16:10 -0800 (PST)
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
+	adjust=0
+	reason=mlx engine=5.0.0-0908210000 definitions=main-1001230038
+From: Elvis Dowson <elvis.dowson@mac.com>
+In-reply-to: <4B55FC07.3080504@paulwilsonconsulting.com>
+Date: Sat, 23 Jan 2010 15:16:04 +0400
+Message-id: <C305642D-75E5-4B97-8A14-65BE8A867E53@mac.com>
+References: <1263888104.2678.15.camel@ubuntu-desktop>
+	<1263888546.2678.17.camel@ubuntu-desktop>
+	<4B55FC07.3080504@paulwilsonconsulting.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <BAY127-W22DDA85C96A4A7D6F4C18ED8610@phx.gbl>
-References: <BAY127-W22DDA85C96A4A7D6F4C18ED8610@phx.gbl>
-Date: Sat, 23 Jan 2010 12:33:10 +0100
-Message-ID: <1264246390.3630.26.camel@mattotaupa.wohnung.familie-menzel.net>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Mailer: Apple Mail (2.1077)
+X-SA-Exim-Connect-IP: 17.148.16.102
+X-SA-Exim-Mail-From: elvis.dowson@mac.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Problem in building console-image
+Subject: Bitbake build error on Fedora 12 x86 64-bit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,85 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 11:35:31 -0000
-X-Groupsio-MsgNum: 16081
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-u26nn/GCdUW+8HyA/ifT"
+X-List-Received-Date: Sat, 23 Jan 2010 12:18:35 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=us-ascii
 
---=-u26nn/GCdUW+8HyA/ifT
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi,
+                  I get the following error when attempting to build overo on Fedora 12 x86 64-bit version. 
 
-Dear Saleh,
+Can you tell me how you can resolve this?
 
+bitbake omap3-console-image
 
-please follow the netiquette (subject, quoting, etc.) [1]. Otherwise you
-will make life hard for the developers to answer you.
+Traceback (most recent call last):
+  File "/tool/overo-oe/bitbake/bin/bitbake", line 143, in <module>
+    main()
+  File "/tool/overo-oe/bitbake/bin/bitbake", line 123, in main
+    cooker.parseConfiguration()
+  File "/tool/overo-oe/bitbake/lib/bb/cooker.py", line 68, in parseConfiguration
+    self.parseConfigurationFile( os.path.join( "conf", "bitbake.conf" ) )
+  File "/tool/overo-oe/bitbake/lib/bb/cooker.py", line 404, in parseConfigurationFile
+    bb.event.fire(bb.event.ConfigParsed(self.configuration.data))
+  File "/tool/overo-oe/bitbake/lib/bb/event.py", line 67, in fire
+    if tmpHandler(event) == Handled:
+  File "tmpHandler(e)", line 4, in tmpHandler
+  File "<bb>", line 18, in check_sanity
+NameError: global name 'os' is not defined
 
-Am Samstag, den 23.01.2010, 15:54 +0500 schrieb saleh usman:
-> How I can solve this problem? any solution? guidance? tutorial?Plz
-> help me in moving forword.
+Best regards,
 
-Unfortunately it is not visible that you even tried to figure out what
-the others told you. Please ask specific questions next time!
-
->>>>BBFILES =3D "/oe/org.openembedded.dev/packages/*/*.bb  /oe/ossie_collec=
-tion/packages/*/*.bb"
-> This seems wrong
->=20
-> >>>>NOTE: Handling BitBake files: \ (0014/0014) [100 %]
-> In fact you get just 14 items...
->=20
-> >>Dunno about ossie, but in openembedded we moved from 'packages' to 'rec=
-ipes'.
->=20
-> >>>>I've built console-image without adding the following lines in local.=
-conf
->=20
->  file and it has been built successfully.Now when I've added these lines =
-it is
->=20
-> giving  error.Attached is local.conf file.
->=20
-> >> >>ANGSTROM_EXTRA_INSTALL =3D " screen oprofile ossie-fm-from-file "
->=20
-> BBFILES =3D "/oe/org.openembedded.dev/packages/*/*.bb  /oe/ossie_collecti=
-on/packages/*/*.bb"
->=20
-> BBFILE_COLLECTIONS =3D "upstream ossie"
->=20
-> BBFILE_PATTERN_upstream =3D "^/oe/org.openembedded.dev/packages"
->=20
-> BBFILE_PRIORITY_upstream =3D "5"
->=20
-> BBFILE_PATTERN_ossie =3D "^/oe/ossie/packages"
->=20
-> BBFILE_PRIORITY_ossie =3D "10"
-
-As the others answered already, BitBake is not finding your recipes
-(just 14). And the reason is according to the others that the directory
-was renamed. So please replace all occurrences of =C2=BBpackages=C2=AB to
-=C2=BBrecipes=C2=AB in `local.conf`.
+Elvis Dowson
 
 
-Thanks,
-
-Paul
-
-
-[1] http://en.opensuse.org/OpenSUSE_mailing_list_netiquette
-
---=-u26nn/GCdUW+8HyA/ifT
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkta3nUACgkQPX1aK2wOHVhU+wCfb8bUnpLkBadk0Dx9APal8Lhr
-9v8AnRchkCwvO/i7uqVSb41MU1fwKTlv
-=qofI
------END PGP SIGNATURE-----
-
---=-u26nn/GCdUW+8HyA/ifT--
