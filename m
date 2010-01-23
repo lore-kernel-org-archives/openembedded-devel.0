@@ -1,48 +1,24 @@
-Received: from mail-pz0-f176.google.com ([209.85.222.176])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rk.raggit@gmail.com>) id 1NYba9-00015j-HR
+	(envelope-from <holger+oe@freyther.de>) id 1NYbd2-0004xs-VG
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 09:43:06 +0100
-Received: by pzk6 with SMTP id 6so116271pzk.3
+	Sat, 23 Jan 2010 09:46:04 +0100
+Received: from tamarin.localnet (123-192-163-227.dynamic.kbronet.com.tw
+	[123.192.163.227])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id A15081B10C02
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Jan 2010 00:40:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=TiuLdPcHvGCKsv2Ft6lZnx5Eb4a17SW+N0J35IQnjw4=;
-	b=MffeZLLUyrR+7eWtLQRWWWGWzWqbNTcUyYylsTncAuFJRXxzji6PBBkO8QbkfcFnHg
-	N6tannhGg7L6oIAFGDVozWTT/CSTKJ6OuLZ3JwiGQyZXzI8nd1Lw5X4yf36k1Rw+yFk+
-	VOUBOA0mmfSzpQncBmIJyV2y/MGx4qHNaFGDE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=ht9QgSQ2G8OcEK+Lgh4sMeu+f2vhdpMTlNI/RDawWuedoLF94cgLVQ8BQqY22+nBnx
-	ATKdou9Wjt3re/KbQjvStJD6LZMvK4paHYlvDU2GgcV/AWQl5m3oa1kN9JdlGA4SWzOu
-	k4nUBLyNcvyWVGXX9ClWeckEDkqCvcDaa4pUs=
-MIME-Version: 1.0
-Received: by 10.141.13.10 with SMTP id q10mr980849rvi.50.1264236042331; Sat, 
-	23 Jan 2010 00:40:42 -0800 (PST)
-In-Reply-To: <1264151160.457.1101.camel@lenovo.internal.reciva.com>
-References: <ec1f3d400911270337wbbbcae8gab291075d242c9d9@mail.gmail.com>
-	<19c1b8a90912110925k5e8063b7wdc160af7eb29fb2a@mail.gmail.com>
-	<ec1f3d401001050143o2cdfb989x119ea3dd6352f4ed@mail.gmail.com>
-	<19c1b8a91001050954m5f002c66s7a282c1382a2dcea@mail.gmail.com>
-	<ec1f3d401001200350g9fb8480h1ed53a8ee4a90e0@mail.gmail.com>
-	<19c1b8a91001201656g6fd1751bvc2a478b2d4c9ef8c@mail.gmail.com>
-	<ec1f3d401001210353j1802eb6am9d931438e3db1302@mail.gmail.com>
-	<1264075631.9743.178.camel@mill.internal.reciva.com>
-	<ec1f3d401001212332i6062141ej86abe243cd7858d4@mail.gmail.com>
-	<1264151160.457.1101.camel@lenovo.internal.reciva.com>
-Date: Sat, 23 Jan 2010 14:10:42 +0530
-Message-ID: <ec1f3d401001230040p6e160fcna71f9feb337728b5@mail.gmail.com>
-From: RK Raggit <rk.raggit@gmail.com>
+	Sat, 23 Jan 2010 08:42:31 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.222.176
-X-SA-Exim-Mail-From: rk.raggit@gmail.com
+Date: Sat, 23 Jan 2010 09:43:24 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+MIME-Version: 1.0
+Message-Id: <201001230943.24210.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: cortex-a9 build failure at glibc
+Subject: Patchwork Workflow improvement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,37 +32,160 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 08:43:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 23 Jan 2010 08:46:04 -0000
+X-Groupsio-MsgNum: 16053
+Content-Type: Multipart/Mixed;
+  boundary="Boundary-00=_sarWLFB0AT3MASW"
 
->
-> You're right, 0x4000673c does look like a shared library address, and is
-> not particularly illuminating unless you have access to the binary for
-> the library in question (which, obviously, I don't in this case).
->
-> However, the next line of your crash dump contains the opcode sequence
-> around that address:
->
-> Code: 1a000002 e594e060 e35e0000 1a0001d0 (ed5b0b23)
->
-> The instruction in brackets is the actual one at which the fault
-> occurred.  So, armed with that opcode 0xed5b0b23, you can then just feed
-> it into the disassembler and see what happens.
->
-> The GNU tools don't actually have a direct equivalent to the ADS
-> "disass" program, so the easiest way to convert the opcode into an
-> instruction is along the lines of:
->
-> $ arm-linux-as
-> .word 0xed5b0b23
-> ^D
-> $ arm-linux-objdump -d a.out
->
->
+--Boundary-00=_sarWLFB0AT3MASW
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Great. got it !
+Hi All,
 
-Thanks Khem and Phil for your great support.
+right now I'm writing a Qt 4.6 based application that might help us a bit with 
+the patchwork queue.
 
---RK
+The idea of the script is to have two things at the end:
+	1.) a branch with all the patches that applied and that can be published
+	2.) a list of patches that don't apply.
 
+
+What people are supposed to:
+
+1.) Cherry pick from the branch
+2.) Send updated patches, close the reports on patchwork...
+
+
+
+The current version is able to download the information of all pending 
+patches, the next thing is to do is to apply them and keep track of the 
+result...
+
+
+
+--Boundary-00=_sarWLFB0AT3MASW
+Content-Type: text/x-c++src;
+  charset="UTF-8";
+  name="main.cc"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename="main.cc"
+
+/*
+ * Copyright (C) 2010 Holger Hans Peter Freyther
+ *
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY APPLE COMPUTER, INC. ``AS IS'' AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL APPLE COMPUTER, INC. OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
+ * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+#include <QApplication>
+#include <QWebFrame>
+#include <QWebElement>
+#include <QWebPage>
+
+class Worker : public QObject {
+    Q_OBJECT
+public:
+    Worker()
+        : m_currentPage(1)
+    {
+        m_page = new QWebPage(this);
+        connect(m_page, SIGNAL(loadFinished(bool)), SLOT(loadFinished(bool)));
+    }
+
+    void start()
+    {
+        qWarning("Trying to download page %d from patchwork", m_currentPage);
+        QUrl url("http://patchwork.openembedded.org/project/openembedded/list/?order=date&page=" + QByteArray::number(m_currentPage));
+        m_page->mainFrame()->load(url);
+    }
+
+    void startNext()
+    {
+        ++m_currentPage;
+        start();
+    }
+
+    void handleCurrentPatch(QWebElement patch)
+    {
+        QWebElement link = patch.findFirst("a");
+        QList<QWebElement> table = patch.findAll("td").toList();
+        QString date, author, state;
+
+        if (table.size() == 5) {
+            date = table[1].toPlainText();
+            author = table[2].toPlainText();
+            state = table[4].toPlainText();
+        }
+
+        qWarning("\tDate: %s Author: '%s' State: %s '%s'", qPrintable(date), qPrintable(author), qPrintable(state), qPrintable(link.toPlainText()));
+    }
+
+    // query for all patches..
+    void handleCurrentPage()
+    {
+        QWebElementCollection patches = m_page->mainFrame()->findAllElements("tr[id*=patch_row]");
+        foreach(QWebElement element, patches)
+            handleCurrentPatch(element);
+    }
+
+public Q_SLOTS:
+    void loadFinished(bool result)
+    {
+        // Verify that we got the page we wanted
+        QWebElement currentPage = m_page->mainFrame()->findFirstElement("span[title='Current Page']");
+        if (currentPage.isNull()) {
+            qWarning("Failed to find the current page.");
+            return QApplication::exit(-1);
+        }
+        int currentPageNo = currentPage.toPlainText().toInt();
+        if (currentPageNo != m_currentPage) {
+            qWarning("The end was reached.");
+            return QApplication::exit(0);
+        }
+
+        qWarning("Finished the download of page %d with status: %d", m_currentPage, result);
+        handleCurrentPage();
+
+        startNext();
+    }
+
+private:
+    QWebPage* m_page;
+    int m_currentPage;
+};
+
+int main(int argc, char **argv)
+{
+    QApplication app(argc, argv);
+
+    Worker worker;
+    worker.start();
+    app.exec();
+}
+
+#include "main.moc"
+
+--Boundary-00=_sarWLFB0AT3MASW--
