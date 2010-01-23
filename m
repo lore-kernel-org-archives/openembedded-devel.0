@@ -1,26 +1,33 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from asmtpout023.mac.com ([17.148.16.98])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1NYgnq-0006Zx-B2
+	(envelope-from <elvis.dowson@mac.com>) id 1NYgx3-0006tb-6P
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 15:17:33 +0100
-Received: (qmail 28315 invoked by uid 1003); 23 Jan 2010 14:15:10 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 23 Jan 2010 14:15:10 -0000
-Message-ID: <4B5B046C.2000808@balister.org>
-Date: Sat, 23 Jan 2010 09:15:08 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
-MIME-Version: 1.0
+	Sat, 23 Jan 2010 15:27:04 +0100
+MIME-version: 1.0
+Received: from [87.201.169.253] by asmtp023.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KWP00K8BBWWQ700@asmtp023.mac.com> for
+	openembedded-devel@lists.openembedded.org; Sat,
+	23 Jan 2010 05:24:35 -0800 (PST)
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
+	adjust=0
+	reason=mlx engine=5.0.0-0908210000 definitions=main-1001230074
+From: Elvis Dowson <elvis.dowson@mac.com>
+In-reply-to: <201001231357.53005.holger+oe@freyther.de>
+Date: Sat, 23 Jan 2010 17:24:30 +0400
+Message-id: <6A97E73D-E10B-4CC2-B239-1AB8FC2AC47B@mac.com>
+References: <1263888104.2678.15.camel@ubuntu-desktop>
+	<C305642D-75E5-4B97-8A14-65BE8A867E53@mac.com>
+	<BD272887-5F72-4B99-B9E9-0C8D1451426F@mac.com>
+	<201001231357.53005.holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-References: <4B56384B.10402@irobot.com>	<19c1b8a91001211447w4892750et4414587220a70e4b@mail.gmail.com>
-	<4B5A333D.2090400@irobot.com>
-In-Reply-To: <4B5A333D.2090400@irobot.com>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+X-Mailer: Apple Mail (2.1077)
+X-SA-Exim-Connect-IP: 17.148.16.98
+X-SA-Exim-Mail-From: elvis.dowson@mac.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] added new recipe for olsrd_0.5.6-r8
+Subject: Re: Bitbake build error on Fedora 12 x86 64-bit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,42 +41,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 14:17:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 23 Jan 2010 14:27:04 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=us-ascii
 
-Adam,
+Hi Hans,
 
-I did get one of your attachments to apply, I did see a number of files 
-that were installed but not packaged? Do you see this? Does the package 
-built from the recipe work? I'll try and post the list tomorrow.
+On Jan 23, 2010, at 4:57 PM, Holger Hans Peter Freyther wrote:
 
-Philip
+> This is why you should not be able to find your git commands in the documentation on 
+> OpenEmbedded.org
 
+Not quite sure I follow what you're trying to say ... I won't be able to find my git commands ? 
 
-On 01/22/2010 06:22 PM, Adam Wozniak wrote:
-> Sorry, I've tried and tried, but I can't get send-email to work (network
-> config settings which are completely out of my control). Please try this
-> attachment.
->
-> Khem Raj wrote:
->> this patch seems corrupt. Please resend it without line wrapping (
->> teach your mail client not to muck with patches)
->> best is to use git format-patch and git send-email combo
->>
->> Thx
->> -Khem
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+BTW, I keep documenting every step, and then share it back with the Overo community. Right now experimenting with 64-bit linux platform for trying to speed up the overo-oe builds.
+
+Best regards,
+
+Elvis Dowson
 
 
