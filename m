@@ -1,40 +1,36 @@
 Received: from mail-fx0-f212.google.com ([209.85.220.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Na3qi-0002lS-7H
+	(envelope-from <dp@xora.org.uk>) id 1Na6oS-0006Rk-Mq
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Jan 2010 10:06:11 +0100
-Received: by fxm4 with SMTP id 4so5603935fxm.12
+	Wed, 27 Jan 2010 13:16:03 +0100
+Received: by fxm4 with SMTP id 4so5758082fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jan 2010 01:03:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=EAk1/OR2MXuxk6+sDg0hogObhZ+RIrt2qX7EYuTmd2M=;
-	b=A4CJUi5vctrbd/uZYsWQ2KxBv6BMSSItesma8Q0kBKeDeSFuFfvy6JIo/fAKujZ6CV
-	5MdEBOY1by1x4vlIHpCqs3V7SWxb5r4ykhjEc6ILH1hNhbu3NHiDk+oo+RlcraFYaZ6Y
-	RxNmnbfZmSieaA43YiBYtYxJJ7Ew3hEuagPrs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=Stwtf5frQqJAjSY/CsHydeSCH/GDD3pfTmc9DGgb4k5i0I9bMrboQOehvcr+ztEEoN
-	018LCZN3R+9Mi1zVIX1WmncfRCbUZBs4nFZb+s5r7DnDNtFTJ7q2fiTk2zvu8dNoT+Et
-	ts9Z0DawghhTRzT5PCHuRjUz7fHtOhO7pVGSA=
-MIME-Version: 1.0
-Received: by 10.223.73.82 with SMTP id p18mr5938935faj.34.1264583019225; Wed, 
-	27 Jan 2010 01:03:39 -0800 (PST)
-In-Reply-To: <E1NZW8K-0006jm-0Z@melo.openembedded.org>
-References: <E1NZW8K-0006jm-0Z@melo.openembedded.org>
-Date: Wed, 27 Jan 2010 10:03:39 +0100
-Message-ID: <141020e31001270103l4e84271ao184bdea0b19f7a01@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 27 Jan 2010 04:13:39 -0800 (PST)
+Received: by 10.223.143.68 with SMTP id t4mr9876318fau.98.1264594418959;
+	Wed, 27 Jan 2010 04:13:38 -0800 (PST)
+Received: from xora-build.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by mx.google.com with ESMTPS id g28sm9409244fkg.38.2010.01.27.04.13.36
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 27 Jan 2010 04:13:37 -0800 (PST)
+Received: by xora-build.xora.org.uk (Postfix, from userid 500)
+	id 4F7E3472FF; Sat, 23 Jan 2010 12:39:57 +0000 (GMT)
+Date: Sat, 23 Jan 2010 12:39:57 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100123123957.GA2545@xora-build.xora.org.uk>
+References: <1263888104.2678.15.camel@ubuntu-desktop>
+	<1263888546.2678.17.camel@ubuntu-desktop>
+	<4B55FC07.3080504@paulwilsonconsulting.com>
+	<C305642D-75E5-4B97-8A14-65BE8A867E53@mac.com>
+MIME-Version: 1.0
+In-Reply-To: <C305642D-75E5-4B97-8A14-65BE8A867E53@mac.com>
+User-Agent: Mutt/1.5.20 (2009-08-17)
 X-SA-Exim-Connect-IP: 209.85.220.212
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-commits@openembedded.org
-Subject: Re: [oe-commits] Graeme Gregory : glib-2.0_2.22.4.bb : add new version totally clean recipe
+Subject: Re: Bitbake build error on Fedora 12 x86 64-bit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,65 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jan 2010 09:06:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 27 Jan 2010 12:16:03 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Mon, Jan 25, 2010 at 10:06 PM, git version control
-<git@git.openembedded.org> wrote:
-> Commit: 267bedfed32b4488a66f7d6af88665e06261082c
-> URL: =A0 =A0http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcomm=
-it;h=3D267bedfed32b4488a66f7d6af88665e06261082c
->
-> glib-2.0_2.22.4.bb : add new version totally clean recipe
->
-> The glib-2.0 recipe seemed to have gained a lot of un-needed extras and
-> was also out of date for BBCLASSEXTEND and staging. So this is a minimali=
-sed
-> new version.
+On Sat, Jan 23, 2010 at 03:16:04PM +0400, Elvis Dowson wrote:
+> Hi,
+>                   I get the following error when attempting to build overo on Fedora 12 x86 64-bit version. 
+> 
+> Can you tell me how you can resolve this?
+> 
+> bitbake omap3-console-image
+> 
+> Traceback (most recent call last):
+>   File "/tool/overo-oe/bitbake/bin/bitbake", line 143, in <module>
+>     main()
+>   File "/tool/overo-oe/bitbake/bin/bitbake", line 123, in main
+>     cooker.parseConfiguration()
+>   File "/tool/overo-oe/bitbake/lib/bb/cooker.py", line 68, in parseConfiguration
+>     self.parseConfigurationFile( os.path.join( "conf", "bitbake.conf" ) )
+>   File "/tool/overo-oe/bitbake/lib/bb/cooker.py", line 404, in parseConfigurationFile
+>     bb.event.fire(bb.event.ConfigParsed(self.configuration.data))
+>   File "/tool/overo-oe/bitbake/lib/bb/event.py", line 67, in fire
+>     if tmpHandler(event) == Handled:
+>   File "tmpHandler(e)", line 4, in tmpHandler
+>   File "<bb>", line 18, in check_sanity
+> NameError: global name 'os' is not defined
+> 
 
-Hi,
+That is almost certainly caused by not using the latest bitbake.
 
-yesterday I did rebuild from scratch and noticed that
-obexpush-1.0.0-r6 is failing with this version.
+Graeme
 
-It's because it's looking for glibconfig.h only in
-staging/armv4t-oe-linux-gnueabi/usr/include/glib-2.0 and this file is
-with this version available only in
-staging/armv4t-oe-linux-gnueabi/usr/lib/glib-2.0/include
-
-with 2.22.4
-bitbake@jama ~/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/include/g=
-lib-2.0
-$ diff . ../../lib/glib-2.0/include/
-Only in .: gio
-Only in .: glib
-Only in ../../lib/glib-2.0/include/: glibconfig.h
-Only in .: glib.h
-Only in .: glib-object.h
-Only in .: gmodule.h
-Only in .: gobject
-
-with 2.22.1
-bitbake@jama ~/tmpdir-dev/staging/armv5te-angstrom-linux-gnueabi/usr/includ=
-e/glib-2.0
-$ diff -rq . ../../lib/glib-2.0/include/
-Only in .: gio
-Only in .: glib
-Only in .: glib.h
-Only in .: glib-object.h
-Only in .: gmodule.h
-Only in .: gobject
-
-
-Just to make sure where it should be fixed..
-Adding -I in obexpush recipe is easy enough as GLIBINC is exported
-from recipe and glib-config is not used.
-export GLIBINC =3D "-I${STAGING_INCDIR}/glib-2.0
--I${STAGING_LIBDIR}/glib-2.0/include"
-
-but maybe glibconfig.h will be needed in other recipes too.
-
-Regards,
 
 
