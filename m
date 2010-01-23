@@ -1,42 +1,27 @@
-Received: from mail-bw0-f217.google.com ([209.85.218.217])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.lippautz@gmail.com>) id 1NYm0j-0001UB-OK
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 20:51:12 +0100
-Received: by bwz9 with SMTP id 9so1740388bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Jan 2010 11:48:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=pIMDAXlpnbryxQhJHZ2BjoWFPT9i765tRFnN0ocKLTs=;
-	b=d24pYfykQsi2pZYaM3k3TpsHLKQmYuJlbzu8ZYqpFP1zo6DUC+T+ZkUQUysHJGCuTJ
-	3OWXBon4vKH71kJ5VD7kWTzDQLxOWVG3BfvKLCVYPZH8brZK9AcXsJUHizZhGVhYkuVT
-	yl3tyW5JOnfA8txFAmEKANG80V0B+mO+vkNFo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=lPUzNPlzmaGltR2sUP/ryQN3vDZGSnBLrbmxnzGG8GnozjPZnGcswzGfpXgENrHb8d
-	goFl4ysc2ckUtRYl/eVLnoAqgGnmklrcXycxySK70Px0DcWzMlLlt5jeMIdxCDvCOUve
-	QPPmmxu9W2J2Yc2h2CA28O/tjtPqQiys7QPTs=
-MIME-Version: 1.0
-Received: by 10.204.11.15 with SMTP id r15mr1048969bkr.40.1264276131013; Sat, 
-	23 Jan 2010 11:48:51 -0800 (PST)
-In-Reply-To: <hjevqo$lld$1@ger.gmane.org>
-References: <1264197527-25414-1-git-send-email-michael.lippautz@gmail.com>
-	<hjejvh$m65$2@ger.gmane.org>
-	<fca63bcf1001230308h463416adwb48db9a5bc295618@mail.gmail.com>
-	<hjevqo$lld$1@ger.gmane.org>
-Date: Sat, 23 Jan 2010 20:48:50 +0100
-Message-ID: <fca63bcf1001231148r53784c6dhb6691e1611e88184@mail.gmail.com>
-From: Michael Lippautz <michael.lippautz@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NYm5c-0001eY-9L for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jan 2010 20:56:15 +0100
+Received: from e178248110.adsl.alicedsl.de ([85.178.248.110]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NYm3P-0005n4-Kw for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jan 2010 19:53:55 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.217
-X-SA-Exim-Mail-From: michael.lippautz@gmail.com
+In-Reply-To: <1264273402-29910-1-git-send-email-john@soundmetrics.com>
+References: <1264273402-29910-1-git-send-email-john@soundmetrics.com>
+Date: Sat, 23 Jan 2010 20:53:54 +0100
+Message-ID: <1264276434.3738.53.camel@mattotaupa.wohnung.familie-menzel.net>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 1/2] gpsd: Prepare recipe and inc for version bump
+Subject: Re: [PATCH] socat: Add version 1.7.1.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,147 +35,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 19:51:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 23 Jan 2010 19:56:15 -0000
+X-Groupsio-MsgNum: 16113
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-UDVHlvJFmgBWjFi0be97"
+
+--=-UDVHlvJFmgBWjFi0be97
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-So maybe you should not submit the patch...
+Am Samstag, den 23.01.2010, 11:03 -0800 schrieb John Faith:
+> Allow socat 1.7.1.2 to cross build.  In configure.in, the 4th value in
+> AC_TRY_RUN() gives a default value for cross build environments since
+> a test program cannot be run on the build system.  There are 2 places
+> where AC_MSG_RESULT() is used instead of a default value which seems
+> to result in code like "#define CRDLY_SHIFT" which breaks preprocessor
+> checks like "#if CRDLY_SHIFT >=3D 0".
+>=20
+> The patch gives default values in configure and configure.in for cross
+> compiling and checks were added in the affected source.
+>=20
+> Signed-off-by: John Faith <john@soundmetrics.com>
 
-I would create the recipe as gpsd started up in init.d using a control
-socket. But from there on i don't know how machine/gps-device specific
-options should be integrated. Should they be packed into a new recipe,
-i.e. gpsd-device-....? And if, how if not thorugh defaults or init.d?
+Thank you for your patch.
 
-regards,
-Michael
+1. Applying your patch gives me warnings.
 
-2010/1/23 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 23-01-10 12:08, Michael Lippautz wrote:
->> Since a few parts of the .inc are quite confusing I didn't want to
->> touch it too much.
->>
->> Ofc we can start gpsd using a control socket.
->>
->> How should we then solve the problem concerning the different devices?
->> We would still need an init script that adds gps hardware to gpsd via
->> the socket and additional packages for different devices providing a
->> hardware file (containing the path) ?
->
-> I have no strong opinion on that, it's just that machine specific
-> initscripts (vs machine specific /etc/default/foo) are just evil :)
->
->> I am open for suggestions since an I really want to update this.
->> (Future gpsd will remove the current API to provide additional gps
->> devices support)
->
-> My remarks had nothing to do with your patch (which looks fine, btw), it
-> just triggered a memory about *#(@*(@ gpsd-conf.
->
-> regards,
->
-> Koen
->
->
->> Regards,
->> Michael
->>
->> 2010/1/23 Koen Kooi <k.kooi@student.utwente.nl>:
->> Speaking of GPSD, should we make the default config use a control socket
->> instead of hardcoding ttyS3?
->>
->> regards,
->>
->> Koen
->>
->> On 22-01-10 22:58, Michael Lippautz wrote:
->>>>>
->>>>> Signed-off-by: Michael Lippautz <michael.lippautz@gmail.com>
->>>>> ---
->>>>> =A0recipes/gpsd/gpsd.inc =A0 =A0 | =A0 =A09 ++++++---
->>>>> =A0recipes/gpsd/gpsd_2.38.bb | =A0 =A04 +++-
->>>>> =A02 files changed, 9 insertions(+), 4 deletions(-)
->>>>>
->>>>> diff --git a/recipes/gpsd/gpsd.inc b/recipes/gpsd/gpsd.inc
->>>>> index a917fbe..5efbe2a 100644
->>>>> --- a/recipes/gpsd/gpsd.inc
->>>>> +++ b/recipes/gpsd/gpsd.inc
->>>>> @@ -5,12 +5,14 @@ LICENSE =3D "GPL"
->>>>> =A0DEPENDS =3D "dbus-glib ncurses python"
->>>>> =A0PROVIDES =3D "virtual/gpsd"
->>>>>
->>>>> +INC_PR =3D "r0"
->>>>> +
->>>>> =A0EXTRA_OECONF =3D "--x-includes=3D${STAGING_INCDIR}/X11 \
->>>>> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--x-libraries=3D${STAGING_LIBDIR} =
-\
->>>>> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-dbus \
->>>>> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--enable-python"
->>>>> +"
->>>>>
->>>>> -SRC_URI =3D "http://download.berlios.de/gpsd/gpsd-${PV}.tar.gz \
->>>>> +SRC_URI =3D "http://download.berlios.de/gpsd/gpsd-${PV}.tar.gz;name=
-=3Dgpsd \
->>>>> =A0 =A0 =A0 =A0 =A0 =A0 file://gpsd-default \
->>>>> =A0 =A0 =A0 =A0 =A0 =A0 file://gps-hardware \
->>>>> =A0 =A0 =A0 =A0 =A0 =A0 file://gpsd"
->>>>> @@ -28,6 +30,8 @@ LDFLAGS +=3D "-L${STAGING_LIBDIR} -lm"
->>>>> =A0export STAGING_INCDIR
->>>>> =A0export STAGING_LIBDIR
->>>>>
->>>>> +TARGET_CC_ARCH +=3D "${LDFLAGS}"
->>>>> +
->>>>> =A0do_compile_prepend() {
->>>>> =A0 =A0 =A0export BUILD_SYS=3D"${BUILD_SYS}"
->>>>> =A0 =A0 =A0export HOST_SYS=3D"${HOST_SYS}"
->>>>> @@ -41,7 +45,6 @@ do_install_prepend() {
->>>>>
->>>>> =A0do_install_append() {
->>>>> =A0 =A0 =A0 =A0 =A0install -d ${D}/${sysconfdir}/init.d
->>>>> - =A0 =A0 =A0 =A0install -d ${D}/dev
->>>>> =A0 =A0 =A0 =A0 =A0install -m 0755 ${WORKDIR}/gpsd ${D}/${sysconfdir}=
-/init.d/
->>>>> =A0 =A0 =A0 =A0 =A0install -m 0755 ${WORKDIR}/gps-hardware ${D}/${sys=
-confdir}/init.d/gps-hardware.default
->>>>> =A0 =A0 =A0 =A0 =A0install -d ${D}/${sysconfdir}/default
->>>>> diff --git a/recipes/gpsd/gpsd_2.38.bb b/recipes/gpsd/gpsd_2.38.bb
->>>>> index 06a5fe7..7c7a477 100644
->>>>> --- a/recipes/gpsd/gpsd_2.38.bb
->>>>> +++ b/recipes/gpsd/gpsd_2.38.bb
->>>>> @@ -1,5 +1,7 @@
->>>>> =A0require gpsd.inc
->>>>>
->>>>> -PR =3D "r2"
->>>>> +PR =3D "${INC_PR}.1"
->>>>> =A0# make attempts to link gpspacket.so without waiting for all compi=
-ler tasks:
->>>>> =A0PARALLEL_MAKE =3D ""
->>>>> +
->>>>> +EXTRA_OECONF +=3D " --enable-python "
->>
->>>
->>>
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFLWwKZMkyGM64RGpERAi5bAJ9oNZzwy8Jrl03IovVdD4Bqw2tIkQCgsW4+
-> jq/K97DHKqK4b05yJv+if34=3D
-> =3D33vV
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+        $ git am /tmp/\[oe\]_\[PATCH\]_socat\:_Add_version_1.7.1.2=20
+        Applying: socat: Add version 1.7.1.2
+        /srv/filme/oe/openembedded/.git/rebase-apply/patch:29: trailing whi=
+tespace.
+        =20
+        /srv/filme/oe/openembedded/.git/rebase-apply/patch:38: trailing whi=
+tespace.
+        =20
+        /srv/filme/oe/openembedded/.git/rebase-apply/patch:46: trailing whi=
+tespace.
+        =20
+        /srv/filme/oe/openembedded/.git/rebase-apply/patch:54: trailing whi=
+tespace.
+        =20
+        /srv/filme/oe/openembedded/.git/rebase-apply/patch:60: space before=
+ tab in indent.
+         	IF_IP6    ("ipv6only",	&opt_ipv6_v6only)
+        warning: squelched 13 whitespace errors
+        warning: 18 lines add whitespace errors.
+
+> ---
+>  recipes/socat/files/socat-1.7.1.2-cross.patch |   98 +++++++++++++++++++=
+++++++
+>  recipes/socat/socat_1.7.1.2.bb                |   23 ++++++
+>  2 files changed, 121 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/socat/files/socat-1.7.1.2-cross.patch
+>  create mode 100644 recipes/socat/socat_1.7.1.2.bb
+>=20
+> diff --git a/recipes/socat/files/socat-1.7.1.2-cross.patch b/recipes/soca=
+t/files/socat-1.7.1.2-cross.patch
+
+[ =E2=80=A6 I do not no autotools.]
+
+> diff --git a/recipes/socat/socat_1.7.1.2.bb b/recipes/socat/socat_1.7.1.2=
+.bb
+> new file mode 100644
+> index 0000000..5bbb421
+> --- /dev/null
+> +++ b/recipes/socat/socat_1.7.1.2.bb
+> @@ -0,0 +1,23 @@
+> +SECTION =3D "console/network"
+> +DEPENDS =3D "openssl readline"
+> +DESCRIPTION =3D "Socat is a relay for bidirectional data \
+> +transfer between two independent data channels."
+> +LICENSE =3D "GPL"
+> +PR =3D "r1"
+
+You can start with `r0` I think.
+
+> +
+> +SRC_URI =3D "http://www.dest-unreach.org/socat/download/socat-1.7.1.2.ta=
+r.bz2 \
+
+Can we do this more generic: `=E2=80=A6/download/${P}.tar.bz2`.
+
+> +           file://socat-1.7.1.2-cross.patch;patch=3D1 "
+> +
+> +inherit autotools
+> +
+> +do_configure() {
+> +	# Override this function to avoid autoconf/automake/aclocal/autoheader
+> +	# since config.h.in gets recreated.
+> +	(cd ${S} && gnu-configize) || die "failure in running gnu-configize"
+> +	oe_runconf
+> +}
+> +
+> +do_install_prepend () {
+> +	mkdir -p ${D}${bindir}
+> +	install -d ${D}${bindir} ${D}${mandir}/man1
+> +}
+
+2. I cannot build your patch because checksums are missing [1].
+3. Looking at the difference between `socat_1.3.2.1.bb` and
+`socat_1.7.1.2.bb` there is not much. Could you factor that out into an
+include file e. g. unify this?
+
+Please fix this up and resend with `[PATCH v2]` in the subject line and
+a note in the commit message.
 
 
+Thanks,
+
+Paul
+
+
+[1] http://wiki.openembedded.net/index.php/Checksums
+
+--=-UDVHlvJFmgBWjFi0be97
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAktbU8wACgkQPX1aK2wOHVhyXQCgi5KJDmXKntkmbvcdXnGp2iXY
+2FAAn3nuUJ/jllMxdT0g6TuDYYZQdgZM
+=8E+D
+-----END PGP SIGNATURE-----
+
+--=-UDVHlvJFmgBWjFi0be97--
