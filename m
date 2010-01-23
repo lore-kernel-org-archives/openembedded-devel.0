@@ -1,34 +1,38 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NYn6D-0002x5-4K for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 22:00:56 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NYn3y-000348-S3
+	id 1NYnJT-0005Ra-Uv for openembedded-devel@lists.openembedded.org;
+	Sat, 23 Jan 2010 22:14:39 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NYnHE-0006KL-Sw
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 21:58:34 +0100
+	Sat, 23 Jan 2010 22:12:16 +0100
 Received: from p5b3b35f1.dip.t-dialin.net ([91.59.53.241])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Jan 2010 21:58:34 +0100
+	Sat, 23 Jan 2010 22:12:16 +0100
 Received: from no2spam by p5b3b35f1.dip.t-dialin.net with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Jan 2010 21:58:34 +0100
+	Sat, 23 Jan 2010 22:12:16 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sat, 23 Jan 2010 21:58:04 +0100
-Message-ID: <hjfnt5$2sh$1@ger.gmane.org>
+Date: Sat, 23 Jan 2010 22:11:55 +0100
+Message-ID: <hjfon5$59s$1@ger.gmane.org>
+References: <1263760344-26105-1-git-send-email-eric@eukrea.com>	<hivtt3$v2r$1@ger.gmane.org>	<1263763723.5353.16.camel@mattotaupa.wohnung.familie-menzel.net>	<hj09k8$km$1@ger.gmane.org>	<1263820243.3675.560.camel@mill.internal.reciva.com>	<1263824896.26227.112.camel@dax.rpnet.com>
+	<hj21vd$32h$1@ger.gmane.org>
+	<1264114415.457.1069.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
 X-Gmane-NNTP-Posting-Host: p5b3b35f1.dip.t-dialin.net
 User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <1264114415.457.1069.camel@lenovo.internal.reciva.com>
 Sender: news <news@ger.gmane.org>
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] classes/distutils-common-base.bbclass redefines FILES_${PN}-dbg
+Subject: Re: include default PR or not
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,65 +46,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 21:00:56 -0000
-Content-Type: multipart/mixed; boundary="------------090509010509060100020304"
-
---------------090509010509060100020304
+X-List-Received-Date: Sat, 23 Jan 2010 21:14:40 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hello,
+Phil Blundell wrote:
+> I'm not entirely sure what point you are making about it being
+> undesirable for the TSC to "rule in favour of one or the other faction".
 
-classes/distutils-common-base.bbclass redefines instead of appends to
-the list of files to include in the debug packages.  I have verified the
-problem and the proper fix taking the rpm recipe as an example.
-
-The attached patch possibly changes the contents of dependant packages.
- There are a number of them, so I don't think it's practical to bump PR
-for all of them.  Distro maintainers should bump distro PR or something.
- I'm not aware of an elegant solution in OE to deal with this.
-
-$ rgrep distutils recipes/ -l|wc -l
-233
-
-Regards
-
-Rolf
-
---------------090509010509060100020304
-Content-Type: text/x-patch;
- name="0001-distutils-common-base-fix-definition-of-FILES_-PN.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
- filename*0="0001-distutils-common-base-fix-definition-of-FILES_-PN.patch"
-
-From 025e057f58edd7f1ba9854b38cf15b4967d64910 Mon Sep 17 00:00:00 2001
-From: Rolf Leggewie <oe-devel@rolf.leggewie.biz>
-Date: Sat, 23 Jan 2010 21:24:39 +0100
-Subject: [PATCH] distutils-common-base: fix definition of FILES_${PN}-dbg
-
-* use += instead of =
-  this appends new file paths to include instead of replacing the
-  current definition
----
- classes/distutils-common-base.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/classes/distutils-common-base.bbclass b/classes/distutils-common-base.bbclass
-index 01bf9ea..87578b7 100644
---- a/classes/distutils-common-base.bbclass
-+++ b/classes/distutils-common-base.bbclass
-@@ -23,7 +23,7 @@ FILES_${PN}-dev += "\
-   ${libdir}/pkgconfig \
-   ${libdir}/${PYTHON_DIR}/site-packages/*.la \
- "
--FILES_${PN}-dbg = "\
-+FILES_${PN}-dbg += "\
-   ${libdir}/${PYTHON_DIR}/site-packages/.debug \
-   ${libdir}/${PYTHON_DIR}/site-packages/*/.debug \
-   ${libdir}/${PYTHON_DIR}/site-packages/*/*/.debug \
--- 
-1.5.4.3
+I'm not advocating for the TSC to take a soft stance for fear of
+confrontation.  But why have a rule about something that isn't really so
+important?  If we follow down the path of letting the TSC decide even
+over silly things like PR, I'm afraid two things will happen.  One is
+the TSC will become overloaded and two OE will become a bureaucratic,
+no-fun hell.  Not sure that would be an improvement.
 
 
---------------090509010509060100020304--
+
