@@ -1,39 +1,37 @@
-Received: from smtprelay0176.hostedemail.com ([216.40.44.176]
-	helo=smtprelay.hostedemail.com)
+Received: from mail-iw0-f175.google.com ([209.85.223.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paul@paulwilsonconsulting.com>) id 1NYYz1-0005Zd-42
+	(envelope-from <raj.khem@gmail.com>) id 1NYaM7-0001dO-4c
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 23 Jan 2010 06:56:34 +0100
-Received: from smtprelay.hostedemail.com (ff-bigip1 [10.5.19.254])
-	by smtpgrave03.hostedemail.com (Postfix) with ESMTP id E73081BE0CF5
+	Sat, 23 Jan 2010 08:24:30 +0100
+Received: by iwn5 with SMTP id 5so379078iwn.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 18:38:08 +0000 (UTC)
-Received: from filter.hostedemail.com (ff-bigip1 [10.5.19.254])
-	by smtprelay02.hostedemail.com (Postfix) with SMTP id 570E5116BE9E
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 18:38:07 +0000 (UTC)
-X-Panda: scanned!
-X-Session-Marker: 7061756C407061756C77696C736F6E636F6E73756C74696E672E636F6D
-X-Filterd-Recvd-Size: 1370
-Received: from [192.168.3.50] (xplr-ts-v10-208-114-133-133.barrettxplore.com
-	[208.114.133.133])
-	(Authenticated sender: paul@paulwilsonconsulting.com)
-	by omf01.hostedemail.com (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Jan 2010 18:38:01 +0000 (UTC)
-Message-ID: <4B55FC07.3080504@paulwilsonconsulting.com>
-Date: Tue, 19 Jan 2010 11:37:59 -0700
-From: Paul Wilson <paul@paulwilsonconsulting.com>
-Organization: Paul Wilson Consulting
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US;
-	rv:1.9.1.5) Gecko/20091204 Thunderbird/3.0
+	Fri, 22 Jan 2010 23:22:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=kMbe7Dncs59zBl3PfU2ypiKfWS3VaGRXDEhrRActySY=;
+	b=DWvUw7sc9vO6jZ82FLz3+fetQQpnNBIYwdIzvPg6ch0R4xf4921i9C91lCzlUp0x+3
+	CqhGExAppTN8uwPp3mMIE8Rq4yVYqemPk1tzML47RSOebReHEX5/emhKX1Gj8e7E6Pbt
+	okN6IP+uuCQHvCuBlUsLorYKVIAfgyLZMxaAY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=OOJjDLwSXboh8KWTtfeogVF8hFjBArmMEMF484w785KhoLwqhdV5pavEm0pXyAjLL/
+	ouXbA9LkorB6MFPWo2Gjbkqtg8/fbxTXY10h1CHMkStqTjE+kdCkKXi5WhyiQ/hPssPx
+	kiQGNRkP7U/IMiEza4kpKtNIkJTjKq20fQNfs=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.231.167.4 with SMTP id o4mr280906iby.66.1264231328181; Fri, 22 
+	Jan 2010 23:22:08 -0800 (PST)
+In-Reply-To: <4B55FC07.3080504@paulwilsonconsulting.com>
 References: <1263888104.2678.15.camel@ubuntu-desktop>
 	<1263888546.2678.17.camel@ubuntu-desktop>
-In-Reply-To: <1263888546.2678.17.camel@ubuntu-desktop>
-X-SA-Exim-Connect-IP: 216.40.44.176
-X-SA-Exim-Mail-From: paul@paulwilsonconsulting.com
+	<4B55FC07.3080504@paulwilsonconsulting.com>
+Date: Fri, 22 Jan 2010 23:22:08 -0800
+Message-ID: <19c1b8a91001222322h78e8ad84r2f0ee43a3766aea5@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.223.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: git pull
@@ -50,30 +48,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Jan 2010 05:56:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 23 Jan 2010 07:24:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-I am having the same problem as Robin. Any suggestions?
+On Tue, Jan 19, 2010 at 10:37 AM, Paul Wilson
+<paul@paulwilsonconsulting.com> wrote:
+> I am having the same problem as Robin. Any suggestions?
 
-Paul
+read the wiki
+http://wiki.openembedded.net/index.php/GitPhraseBook#Upgrading_your_data_.28lurking.29
 
-
-On 19/01/2010 1:09 AM, robin wrote:
-> One more input, When i use
-> git pull
-> Already up-to-date.
 >
-> and when i use
-> git pull --rebase
-> recipes/ti/ti-xdctools-native_3.15.01.59.bb: needs update
-> recipes/ti/ti-xdctools.inc: needs update
-> refusing to pull with rebase: your working tree is not up-to-date
+> Paul
 >
-> what is the correct command ?
 >
-> Robin
->    
+> On 19/01/2010 1:09 AM, robin wrote:
+>>
+>> One more input, When i use
+>> git pull
+>> Already up-to-date.
+>>
+>> and when i use
+>> git pull --rebase
+>> recipes/ti/ti-xdctools-native_3.15.01.59.bb: needs update
+>> recipes/ti/ti-xdctools.inc: needs update
+>> refusing to pull with rebase: your working tree is not up-to-date
+>>
+>> what is the correct command ?
+>>
+>> Robin
+>>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
 
