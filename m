@@ -1,37 +1,37 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NZ5TX-0001D8-70 for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jan 2010 17:38:14 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NZ5RH-0006hr-8m
+	(envelope-from <rpjday@crashcourse.ca>) id 1NZ5ew-0008DA-PA
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jan 2010 17:35:51 +0100
-Received: from p5b3b1abd.dip.t-dialin.net ([91.59.26.189])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jan 2010 17:35:51 +0100
-Received: from no2spam by p5b3b1abd.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jan 2010 17:35:51 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sun, 24 Jan 2010 17:35:27 +0100
-Message-ID: <hjhssf$55g$1@ger.gmane.org>
-References: <201001241235.23795.holger+oe@freyther.de>	<hjhfid$tqo$1@ger.gmane.org>	<4B5C6D35.1030002@nospam.arcornews.de>
-	<hjhs7a$3oc$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b1abd.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-In-Reply-To: <hjhs7a$3oc$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	Sun, 24 Jan 2010 17:50:02 +0100
+Received: from cpe00e0b8e80755-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.244.198] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NZ5ch-0007lx-U3 for openembedded-devel@lists.openembedded.org;
+	Sun, 24 Jan 2010 11:47:40 -0500
+Date: Sun, 24 Jan 2010 11:46:48 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Developer <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <687C35F4-E7DC-4898-907F-8C1CE8890887@mac.com>
+Message-ID: <alpine.LFD.2.00.1001241145320.16223@localhost>
+References: <687C35F4-E7DC-4898-907F-8C1CE8890887@mac.com>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Request to revert latest devicekit patch
+Subject: Re: Build failure module-init-tools-cross_3.2.2.bb on Fedora 12 x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,19 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jan 2010 16:38:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 24 Jan 2010 16:50:02 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Koen Kooi wrote:
-> My preference would be to do as the commit message says and add the
-> missing recipe to OE, that would be a better way forward than breaking
-> one or the other.
+On Sun, 24 Jan 2010, Elvis Dowson wrote:
 
-Yes, I absolutely agree.
+> Hi,
+>        I am trying to build the overo-oe development environment on
+> a new Fedora 12 x86_64 virtual machine image. I am trying to build
+> omap3-console-image.
 
-The question is who will do it.  As I indicated in my earlier mail, I
-think it's best if David-John and Holger agree to a plan of action here.
+  what branch are you working from that has that as a target?  i have
+no such task on the OE dev branch.
 
+rday
+--
+
+========================================================================
+Robert P. J. Day                              Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
