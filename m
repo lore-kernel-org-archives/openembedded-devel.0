@@ -1,37 +1,33 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from ppsw-6.csi.cam.ac.uk ([131.111.8.136])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NZ4pr-0001Tf-Ka for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jan 2010 16:57:14 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NZ4nb-0002zL-Qb
+	(envelope-from <jic23@cam.ac.uk>) id 1NZ57R-0001x8-0y
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jan 2010 16:54:51 +0100
-Received: from p5b3b1abd.dip.t-dialin.net ([91.59.26.189])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jan 2010 16:54:51 +0100
-Received: from no2spam by p5b3b1abd.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jan 2010 16:54:51 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 24 Jan 2010 17:15:24 +0100
+X-Cam-AntiVirus: no malware found
+X-Cam-SpamDetails: not scanned
+X-Cam-ScannerInfo: http://www.cam.ac.uk/cs/email/scanner/
+Received: from arcturus.eng.cam.ac.uk ([129.169.154.73]:35435)
+	by ppsw-6.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.156]:25)
+	with esmtpsa (PLAIN:jic23) (TLSv1:DHE-RSA-AES256-SHA:256)
+	id 1NZ4kG-0005Zd-KA (Exim 4.70) for
+	openembedded-devel@lists.openembedded.org
+	(return-path <jic23@cam.ac.uk>); Sun, 24 Jan 2010 15:51:24 +0000
+Message-ID: <4B5C6CD5.9090401@cam.ac.uk>
+Date: Sun, 24 Jan 2010 15:52:53 +0000
+From: Jonathan Cameron <jic23@cam.ac.uk>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.5) Gecko/20100109 Thunderbird/3.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Sun, 24 Jan 2010 16:54:29 +0100
-Message-ID: <4B5C6D35.1030002@nospam.arcornews.de>
-References: <201001241235.23795.holger+oe@freyther.de>
-	<hjhfid$tqo$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b1abd.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-In-Reply-To: <hjhfid$tqo$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <4AF1DA56.3070605@cam.ac.uk>
+	<201001241045.48809.holger+oe@freyther.de>
+In-Reply-To: <201001241045.48809.holger+oe@freyther.de>
+X-Enigmail-Version: 1.0
+X-SA-Exim-Connect-IP: 131.111.8.136
+X-SA-Exim-Mail-From: jic23@cam.ac.uk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Request to revert latest devicekit patch
+Subject: Re: [PATCH] Linux-2.6.32-rc6 + IMote2 platform support.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,37 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jan 2010 15:57:14 -0000
+X-List-Received-Date: Sun, 24 Jan 2010 16:15:24 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> On 24-01-10 12:35, Holger Hans Peter Freyther wrote:
->> Can anyone ack the revert please?
+On 01/24/10 09:45, Holger Hans Peter Freyther wrote:
+> On Wednesday 04 November 2009 20:47:34 Jonathan Cameron wrote:
+>> Signed-off-by: Jonathan Cameron <jic23@cam.ac.uk>
+>> ---
+>> Reasons for release candidate:
 > 
-> The commit says:
+> Hi Jonathan,
 > 
-> Note: Another (maybe better) fix would be to package up docbook-xsl but
-> that is overkill for these two recipes.
+> are these patches still up for review?
+Hi Holger,
+ 
+In theory, but I should probably refresh them somewhat before
+wasting your time.  They have probably rotted somewhat
+and a lot of the kernel patches etc have now merged!
 
-To introduce something new that patch breaks something for somebody else
-that was previously working.  I thought it was commonly accepted that
-it's then the author's (and possibly the committer's) responsibility to
-come up with something better to fix this regression.
+Things are a bit nuts at the moment, so may be a week or so
+before I do so though (or if I'm really lucky one of the other
+users of the patch set might do it ;)
 
-> Wouldn't that be a better option than introducing a regression?
+Thanks
 
-The regression was introduced with the patch.  Not by reverting it.
-
-A revert gets my ACK if this bothers Holger enough in his workflow.  I
-would suggest Holger and David-John should talk about a time-frame in
-which David-John can cook up a proper patch.  Based on this information
-a decision should be made if a revert is necessary in the meantime or
-not.  I trust Holger's judgment here.
-
-
-PS: David-John, the whole discussion is at
-http://thread.gmane.org/gmane.comp.handhelds.openembedded/29524
-
+Jonathan
 
 
