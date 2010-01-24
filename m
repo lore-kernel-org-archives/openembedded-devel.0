@@ -1,25 +1,37 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mta1.brinkster.com ([65.182.109.70])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NZ730-0005pX-Hn for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jan 2010 19:18:57 +0100
-Received: from g229060220.adsl.alicedsl.de ([92.229.60.220]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NZ70n-0000MW-Co for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jan 2010 18:16:37 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 24 Jan 2010 19:16:35 +0100
-Message-ID: <1264356995.3663.11.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	(envelope-from <John.Willis@Distant-earth.com>) id 1NZ7Jw-0001nG-NR
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 24 Jan 2010 19:36:28 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mta1.brinkster.com (Postfix) with ESMTP id 1BB4B380A86
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 24 Jan 2010 13:26:49 -0500 (EST)
+X-Virus-Scanned: amavisd-new at 
+Received: from mta1.brinkster.com ([127.0.0.1])
+	by localhost (mta1.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id sb7hduyVKMns
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 24 Jan 2010 13:26:44 -0500 (EST)
+Received: from MareImbrium (unknown [82.46.19.72])
+	by mta1.brinkster.com (Postfix) with ESMTP id 7A0F3380C67
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 24 Jan 2010 13:26:43 -0500 (EST)
+From: "John Willis" <John.Willis@Distant-earth.com>
+To: <openembedded-devel@lists.openembedded.org>
+References: <201001241235.23795.holger+oe@freyther.de>	<hjhfid$tqo$1@ger.gmane.org>	<4B5C6D35.1030002@nospam.arcornews.de>	<hjhs7a$3oc$1@ger.gmane.org>
+	<hjhssf$55g$1@ger.gmane.org>
+In-Reply-To: <hjhssf$55g$1@ger.gmane.org>
+Date: Sun, 24 Jan 2010 18:26:33 -0000
+Message-ID: <01a901ca9d22$c508d620$4f1a8260$@Willis@Distant-earth.com>
+MIME-Version: 1.0
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-index: AcqdE2xGF5U/v4fURM6UR2mF5d0t5AADwAzw
+X-SA-Exim-Connect-IP: 65.182.109.70
+X-SA-Exim-Mail-From: John.Willis@Distant-earth.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [server] Which Patchwork do we run?
+Subject: Re: Request to revert latest devicekit patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,86 +45,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jan 2010 18:18:57 -0000
-X-Groupsio-MsgNum: 16179
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-zLJF0zYJAnV07BWCkvWo"
+X-List-Received-Date: Sun, 24 Jan 2010 18:36:28 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-us
 
---=-zLJF0zYJAnV07BWCkvWo
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Rolf,
 
-Dear OE administrators,
+Replying to your mail on-list.
+
+As the author of said patch if people want it reverted go ahead. It has my
+ACK.
+
+> Koen Kooi wrote:
+> > On 24-01-10 12:35, Holger Hans Peter Freyther wrote:
+> >> Can anyone ack the revert please?
+> >
+> > The commit says:
+> >
+> > Note: Another (maybe better) fix would be to package up docbook-xsl
+> but
+> > that is overkill for these two recipes.
+> 
+> To introduce something new that patch breaks something for somebody
+> else
+> that was previously working.  I thought it was commonly accepted that
+> it's then the author's (and possibly the committer's) responsibility to
+> come up with something better to fix this regression.
+> 
+> > Wouldn't that be a better option than introducing a regression?
+> 
+> The regression was introduced with the patch.  Not by reverting it.
+> 
+> A revert gets my ACK if this bothers Holger enough in his workflow.  I
+> would suggest Holger and David-John should talk about a time-frame in
+> which David-John can cook up a proper patch.  Based on this information
+> a decision should be made if a revert is necessary in the meantime or
+> not.  I trust Holger's judgment here.
+> 
+> 
+> PS: David-John, the whole discussion is at
+> http://thread.gmane.org/gmane.comp.handhelds.openembedded/29524
+
+As I stated in the original patch the correct fix is to sort out the
+docbook-xsl packages but that was not something I had any intention at the
+time to tackle (limited OE dev time and a seemingly infinite TODO list). I
+may be able to look at it in the near future but as for being the best man
+for the job, that I am not so sure about.
+
+The sole reason for the patch was to fix a build failure on systems where
+the host system docbook-xsl stuff was not available (or desired). 
+
+Reverting the -nonet will reintroduce dependencies on components being
+installed on the host system outside OE but if that is fine then go for the
+revert. I understood (at the time, this is back in October) that depending
+on host items outside oe's -native was a 'very bad thing' (tm) ;). Maybe
+worse than requiring an internet connection but I am not the person to judge
+that. 
+
+I'll leave it to core OE devs to decide what is the lesser of 2 evils in
+this case.
+
+Regards,
+
+John
 
 
-before I want to contact the Patchwork guys about some issues I am
-seeing, what version do we run.
-
-It does not seem to be up to date judging from the differences in
-`pwclient`.=20
-
-        $ diff -u patchwork/apps/patchwork/bin/pwclient /usr/local/bin/pwcl=
-ient=20
-        --- patchwork/apps/patchwork/bin/pwclient	2010-01-24 19:12:26.00000=
-0000 +0100
-        +++ /usr/local/bin/pwclient	2010-01-23 22:30:53.000000000 +0100
-        @@ -285,14 +285,8 @@
-             if not success:
-                 sys.stderr.write("Patch not updated\n")
-        =20
-        -def patch_id_from_hash(rpc, project, hash):
-        -    try:
-        -        patch =3D rpc.patch_get_by_project_hash(project, hash)
-        -    except xmlrpclib.Fault:
-        -        # the server may not have the newer patch_get_by_project_h=
-ash function,
-        -        # so fall back to hash-only.
-        -        patch =3D rpc.patch_get_by_hash(hash)
-        -
-        +def patch_id_from_hash(rpc, hash):
-        +    patch =3D rpc.patch_get_by_hash(hash)
-             if patch =3D=3D {}:
-                 return None
-        =20
-        @@ -388,9 +382,9 @@
-        =20
-             patch_id =3D None
-             if hash_str:
-        -        patch_id =3D patch_id_from_hash(rpc, project_str, hash_str=
-)
-        +        patch_id =3D patch_id_from_hash(rpc, hash_str)
-                 if patch_id is None:
-        -            sys.stderr.write("No patch has the hash provided\n")
-        +            sys.stderr.write("No patch has the hash provided")
-                     sys.exit(1)
-        =20
-        =20
-        @@ -414,7 +408,7 @@
-        =20
-                 s =3D rpc.patch_get_mbox(patch_id)
-                 if len(s) > 0:
-        -            print unicode(s).encode("utf-8")
-        +            print s
-        =20
-             elif action =3D=3D 'get' or action =3D=3D 'save':
-                 try:
 
 
-Thanks a lot,
-
-Paul
-
---=-zLJF0zYJAnV07BWCkvWo
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktcjoMACgkQPX1aK2wOHVjWXgCfTl2rtNvX5W8JLaY8Nh80p7qs
-Rm0An3wfayMcC/1XZW9HhR4WRlTTEOBj
-=TNAs
------END PGP SIGNATURE-----
-
---=-zLJF0zYJAnV07BWCkvWo--
