@@ -1,36 +1,35 @@
-Received: from asmtpout025.mac.com ([17.148.16.100])
+Received: from mail-ew0-f212.google.com ([209.85.219.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1NZ8Zu-0000xe-2H
+	(envelope-from <andrea.adami@gmail.com>) id 1NZBL3-0005pW-CV
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jan 2010 20:57:01 +0100
-MIME-version: 1.0
-Received: from [87.201.169.25] by asmtp025.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KWR00A01LUOCX10@asmtp025.mac.com> for
-	openembedded-devel@lists.openembedded.org; Sun,
-	24 Jan 2010 10:54:35 -0800 (PST)
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
-	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
-	adjust=0
-	reason=mlx engine=5.0.0-0908210000 definitions=main-1001240109
-From: Elvis Dowson <elvis.dowson@mac.com>
-In-reply-to: <alpine.LFD.2.00.1001241235020.2367@localhost>
-Date: Sun, 24 Jan 2010 22:54:20 +0400
-Message-id: <00AC3969-39B6-4A3D-8927-D913353C69C6@mac.com>
-References: <687C35F4-E7DC-4898-907F-8C1CE8890887@mac.com>
-	<9210BA9D-8420-46C3-BDD6-CEE4E853B42F@mac.com>
-	<20100124154357.GG15943@jama>
-	<1F9F6029-E5F8-4B85-967C-7FB2C110CFCE@mac.com>
-	<alpine.LFD.2.00.1001241235020.2367@localhost>
-To: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-Mailer: Apple Mail (2.1077)
-X-SA-Exim-Connect-IP: 17.148.16.100
-X-SA-Exim-Mail-From: elvis.dowson@mac.com
+	Sun, 24 Jan 2010 23:53:52 +0100
+Received: by ewy4 with SMTP id 4so3560487ewy.27
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 24 Jan 2010 14:51:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=K8xf0ovG+rua+K5KfDQEm/ig/IB3CuJB/j5itEK765g=;
+	b=jFStMwSJW7UnoQZntmDeGT49l8w1L4qfibeUPguHaalKPn4F+B8WAQfSIOPzBZ2ZDx
+	gnJlsPGDPvuos0NDcvCaD7800xn5cIVJXW0gbuWdgte1FXRv62yEElJJJ8Ny0NiHNpyY
+	asSN5qLx6iOk74zRyZwZf3mEKWVhBDiYy7OjI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=Q0yIXllKY8qKHjzmWxamMxyjyhU7q0BO0P/hbATaKhrrThsOPFqOjKFrAZgZfLOr/a
+	kh6BQ8Kz4pViuw+ARV3pvXZSn35Rv3osGK3q6j8ZvzkqD4B4Pu8LeuLG4q/ahNlj8XZK
+	LexDSlBrGLsIFL9fqQQWCkRx6AorJ8lqqvATY=
+MIME-Version: 1.0
+Received: by 10.213.0.209 with SMTP id 17mr1605098ebc.89.1264373486951; Sun, 
+	24 Jan 2010 14:51:26 -0800 (PST)
+Date: Sun, 24 Jan 2010 23:51:26 +0100
+Message-ID: <d1b08f941001241451m316d86ecpa46640e907479c63@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.219.212
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: OpenEmbedded Developer <openembedded-devel@lists.openembedded.org>
-Subject: Technote Overo-031: How to setup a development environment for the Overo platform using a Fedora-12 x86 64-bit VMware image
+Subject: QA: Fixes needed by console-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,345 +43,344 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jan 2010 19:57:01 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
-
-Hi Robert,
-                 =20
-On Jan 24, 2010, at 9:36 PM, Robert P. J. Day wrote:
->=20
->  once upon a time, i wrote much the same:
->=20
-> http://www.crashcourse.ca/wiki/index.php/Angstrom
->=20
-> perhaps we should exchange notes to come up with a single complete
-> set.
-
-I really like documenting stuff. I end up working on so many different =
-things, that I tend to forget stuff after a few weeks, so I make sure I =
-document each and every step. And of course share all that back with the =
-community. :-)
-
-Here's what I've written so far.=20
-
-Note that there are still some un-resolved errors, such as psyco not =
-working for 64-bit environment, and that for android development, I =
-think I will need to use sun-jdk-1.5.0
-
-Overview
-
-This document describes how to setup a development environment for the =
-Overo platform using a Fedora-12 x86 64-bit VMware image.
-
-Procedure
-
-Step 01.00: Install Fedora 10 into a VMware image.
-
-Ensure that you install the following packages
-	- development-libraries
-	- development-tools
-
-Create a new user group called =91developers=92.=20
-
-Change the primary group for all developers to the =91developers=92 =
-group, e.g. for user =91elvis=92, change the primary group to =
-=91developers=92.
-
-Step 02.00: Enable root login.
-
-Step 02.01: Login as a regular user
-
-$ su
-# vi /etc/pam.d/gdm
-
-Click =91A=92 and remove user!=3Droot from the following line
-
-auth required pam_succeed_if.so user!=3Droot quiet
-
-Click Esc and then type the following command :wq!
-
-Now modify the gdm-password file
-
-# vi /etc/pam.d/gdm-password
-
-Click =91A=92 and remove user!=3Droot from the following line
-
-auth required pam_succeed_if.so user!=3Droot quiet
-
-Click Esc and then type the following command :wq!
-
-Step 02.03: Modify /etc/sysctl.conf to make vm.mmap_min_addr =3D 0.
-
-# vi /etc/sysctl.conf
-
-Add the following line to the sysctl.conf file
-vm.mmap_min_addr =3D 0
-
-Step 02.03: Relogin as root
-
-
-Step 03.00: Install the vmware tools
-
-$ su
-# cd Download/vmware-tools-distrib
-# ./vmware-install.pl
-
-You can run the VMware Tools by invoking the following command:
-
-# /usr/bin/vmware-toolbox
-
-To enable advanced X features
-=20
-1. Manually start /user/bin/vmware-user
-2. Log out and log back into your desktop session
-3. Restart your X session
-
-
-Step 04.00: Install Sun JDK 1.5 (optional, only required for android =
-development, not yet validated)
-
-$ su
-# cd Downloads/jdk-5u12-linux-i586
-# ./jdk-5u12-linux-i586-rpm.bin
-
-
-Step 05.00: Install Psyco JIT compiler (skip this step, doesn't work for =
-64-bits yet)
-
-Step 05.01: Download Psyco JIT compiler sources from svn
-
-$ svn co http://codespeak.net/svn/psyco/dist/ psyco-dist
-
-Step 05.02: Run the python installation script as a super user=20
-
-$ su python setup.py install
-
-
-Step 06.00: Download, build and install kermit
-
-$ cd /tool
-$ wget ftp://www.columbia.edu/kermit/test/tar/x.tar.gz
-$ tar zxvf x.tar.gz
-$ cd ckermit-9.0
-$ make linux
-$ su
-# make install
-
-This will install kermit in /usr/local/bin/
-
-Set the permissions for /dev/ttyUSB0, so that a developer can access the =
-Overo USB console.
-
-$ su
-# chgrp developers /dev/ttyUSB0
-
-
-Step 07.00: Setup the Overo build environment
-
-Step 07.01: Check out the OpenEmbedded build system.
-
-$ cd /tool
-$ mkdir overo-oe
-$ cd overo-oe
-$ git clone git://gitorious.org/gumstix-oe/mainline.git =
-org.openembedded.dev
-$ cd org.openembedded.dev
-$ git checkout --track -b overo origin/overo
-
-Step 07.02: Checkout BitBake.
-
-$ cd /tool/overo-oe
-$ git clone git://git.openembedded.org/bitbake.git
-$ cd bitbake
-$ git checkout -b 1.8 --track origin/1.8
-$ cd ..
-
-
-Step 07.03: Creating the OE configuration files and profile.
-
-We now will create a profile script and the configuration files required =
-to tailor OE to our needs.
-
-To make this a somewhat easier task, there is a template for the =
-required files in the openembedded installation we just did.
-
-Copy these files to your overo-oe directory:
-
-$ cp -r org.openembedded.dev/contrib/gumstix/build .
-
-If you have followed the example installation and placed the build =
-system in overo-oe in your home directory, you are now ready to proceed =
-to the next step. If you have installed the build system in a different =
-location you will need to edit overo-oe/build/profile and change the =
-definition of OVEROTOP as appropriate.
-
-
-Step 07.04: Setup source code caching.
-
-As part of the build process OpenEmbedded downloads source code tarballs =
-for the linux kernel, compiler, and other software packages.=20
-
-By default this source code cache will be placed in overo-oe/sources. If =
-you would like this cache to be located elsewhere, now is the time to =
-edit build/conf/site.conf and set DL_DIR as appropriate.
-
-For example, if you would like to cache the sources in =
-/usr/share/sources, perform the following steps:
-
-Add new group for cache management and add operating user to this group.
-
-$ sudo groupadd oe
-$ sudo usermod -a -G oe {your_username}
-
-Next make source code storing directory and set owner and permission =
-appropriately.
-
-$ sudo mkdir /usr/share/sources
-$ sudo chgrp oe /usr/share/sources
-$ sudo chmod 0775 /usr/share/sources
-$ sudo chmod ug+s /usr/share/sources
-
-Edit the buid/conf/site.conf and set DL_DIR to /usr/share/sources as =
-follows:
-
-DL_DIR =3D "/usr/share/sources"
-
-Step 07.05: Improve build performance by modifying site.conf to use =
-multiple cores
-
-Edit build/conf/site.conf
-
-PARALLEL_MAKE =3D "-j 6"
-BB_NUMBER_THREADS =3D "6"
-
-Step 07.06: Reduce disk space usage by modifying local.conf=20
-
-If you don't need OE to keep around the package source files (and other =
-work files), you can add the following entry to your local.conf:
-
-INHERIT +=3D "rm_work"
-
-This will significantly reduce the amount of disk space used.
-
-Step 07.07: Modify your .bashrc file.
-
-# .bashrc
-
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
-fi
-
-# User specific aliases and functions
-
-#
-# Environment setup for java
-#
-
-export JAVA_HOME=3D"/usr/java/jdk1.5.0_12"
-export PATH=3D"${JAVA_HOME}/bin:$PATH"
-
-#
-# end java setup
-#
-
-
-#
-# Environment setup for oe
-#
-
-export BB_ENV_EXTRAWHITE=3D"MACHINE DISTRO ANGSTROM_MODE OVEROTOP =
-OEBRANCH USERBRANCH"
-
-export OVEROTOP=3D"/tool/overo-oe"
-export OEBRANCH=3D"${OVEROTOP}/org.openembedded.dev"
-export USERBRANCH=3D"${OVEROTOP}/user.collection"
-
-export CROSSCOMPILER=3D"armv7a"
-export =
-PATH=3D"${OVEROTOP}/bitbake/bin:${OVEROTOP}/tmp/cross/${CROSSCOMPILER}/bin=
-:$PATH"
-export BBPATH=3D"${OVEROTOP}/build:${USERBRANCH}:${OEBRANCH}"
-
-umask 0002
-
-#
-# end oe setup
-#
-
-#
-# Environment setup for android
-#
-
-export REPOTOP=3D"/tool/script"
-export ANDROID_JAVA_HOME=3D$JAVA_HOME
-export ANDROID_TOP=3D"/tool/android"
-export ANDROID_HOST=3D"linux-x86"
-export ANDROID_HOST_TOOLS=3D"${ANDROID_TOP}/out/host/${ANDROID_HOST}/bin"
-export PATH=3D"${REPOTOP}:${ANDROID_HOST_TOOLS}:$PATH"
-
-#
-# end android setup
-#
-
-
-Step 08.00: Install additional packages required by BitBake.
-
-$ su
-# yum install help2man
-# yum install texi2html
-
-
-Step 09.00: Install additional packages required by Fedora 12 x86 =
-64-bit.
-
-$ su
-# yum install glibc-static
-# =20
-
-
-Step 10.00: Build a basic kernel and a non-gui root file system image in =
-one step using the following command
-
-$ bitbake omap3-console-image
-$ bitbake x-load
-$ bitbake u-boot-omap3
-
-Additional bitbake recipies can be found in =
-org.openembedded.dev/packages/image
-
-$ bitbake omap3-desktop-image
-$ bitbake omap3-udesktop-image
-
-If BitBake complains about the mmap_min_addr not being set to 0, type =
-the following :
-
-$ su
-# echo =930=94 > /proc/sys/vm/mmap_min_addr
-
-Step 11.00: Update the org.openembedded.dev sources at regular intervals =
-by typing the following command
-
-$ cd org.openembedded.dev
-$ git pull
-
-
-Related Topics
-
-None
-
-Related Links
-
-01. How to install OpenEmbedded and Bitbake - PIXHAWK.
-
-02. Quick Command Reference for OE - PIXHAWK.
-
-03. Git cheat sheet - Zack Rusin.
-
-
-Best regards,
-
-Elvis
+X-List-Received-Date: Sun, 24 Jan 2010 22:53:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+
+Hello,
+
+I post here some bits of the log of console-image: my understanding is
+we should convert asap the packages using legacy do_stage.
+Most of these exhibit the   cp: cannot stat `...*': No such file or
+directory issue.
+Others have just bad packaging, not logged by our QA checks. Some are
+heavy recipes so I let the work to the senior devs :)
+
+Fixes are available here:   http://git.pokylinux.org/cgit.cgi/poky/log/
+
+Regards
+Andrea
+
+
+andrea@mizar /oe/build $ time bitbake console-image
+NOTE: Handling BitBake files: - (0350/7994) [ 4 %]__builtin__:8:
+DeprecationWarning: the sets module is deprecated
+
+NOTE: Running task 42 of 4025 (ID: 222,
+/oe/org.openembedded.dev/recipes/coreutils/coreutils-native_7.2.bb,
+do_patch)
+NOTE: Applying patch 'coreutils-7.2-fix-sort-segfault.patch'
+(../org.openembedded.dev/recipes/coreutils/coreutils-7.2/coreutils-7.2-fix-sort-segfault.patch)
+NOTE: self._current is None
+NOTE: patches is [{'remote':
+'file://coreutils-7.2-fix-sort-segfault.patch', 'strippath': '1',
+'file': '/oe/org.openembedded.dev/recipes/coreutils/coreutils-7.2/coreutils-7.2-fix-sort-segfault.patch',
+'filemd5': '325209586106c662267b1bc3d64921fa'}]
+NOTE: applying patch {'remote':
+'file://coreutils-7.2-fix-sort-segfault.patch', 'strippath': '1',
+'file': '/oe/org.openembedded.dev/recipes/coreutils/coreutils-7.2/coreutils-7.2-fix-sort-segfault.patch',
+'filemd5': '325209586106c662267b1bc3d64921fa'}
+NOTE: Running task 43 of 4025 (ID: 223,
+/oe/org.openembedded.dev/recipes/coreutils/coreutils-native_7.2.bb,
+do_configure)
+NOTE: Running task 44 of 4025 (ID: 45,
+/oe/org.openembedded.dev/recipes/quilt/quilt-native_0.48.bb,
+do_unpack)
+NOTE: Unpacking ../sources/quilt-0.48.tar.gz to
+tmp/work/i686-linux/quilt-native-0.48-r0/
+NOTE: Running task 45 of 4025 (ID: 46,
+/oe/org.openembedded.dev/recipes/quilt/quilt-native_0.48.bb, do_patch)
+NOTE: Applying patch 'install.patch'
+(../org.openembedded.dev/recipes/quilt/quilt-0.48/install.patch)
+NOTE: self._current is None
+NOTE: patches is [{'remote': 'file://install.patch', 'strippath': '1',
+'file': '/oe/org.openembedded.dev/recipes/quilt/quilt-0.48/install.patch',
+'filemd5': 'd18e682e0d69b48a0314af5a420f9f8a'}]
+NOTE: applying patch {'remote': 'file://install.patch', 'strippath':
+'1', 'file': '/oe/org.openembedded.dev/recipes/quilt/quilt-0.48/install.patch',
+'filemd5': 'd18e682e0d69b48a0314af5a420f9f8a'}
+NOTE: Running task 46 of 4025 (ID: 55,
+/oe/org.openembedded.dev/recipes/quilt/quilt-native_0.48.bb,
+do_distribute_sources)
+
+
+NOTE: Running task 126 of 4025 (ID: 51,
+/oe/org.openembedded.dev/recipes/quilt/quilt-native_0.48.bb,
+do_populate_staging)
+cp: cannot stat
+`/oe/build/tmp/work/i686-linux/quilt-native-0.48-r0/sysroot-destdir//oe/build/tmp/*':
+No such file or directory
+NOTE: Running task 127 of 4025 (ID: 54,
+/oe/org.openembedded.dev/recipes/quilt/quilt-native_0.48.bb,
+do_package)
+
+
+NOTE: Running task 694 of 4025 (ID: 1317,
+/oe/org.openembedded.dev/recipes/openssl/openssl-native_0.9.8j.bb,
+do_package)
+cp: cannot stat
+`/oe/build/tmp/work/i686-linux/openssl-native-0.9.8j-r11.1/image/*':
+No such file or directory
+NOTE: Running task 695 of 4025 (ID: 1807,
+/oe/org.openembedded.dev/recipes/ncurses/ncurses_5.4.bb, do_configure)
+
+
+NOTE: Legacy staging mode for
+/oe/org.openembedded.dev/recipes/libxml/libxml2-native_2.7.3.bb
+NOTE: Running task 874 of 4025 (ID: 3886,
+/oe/org.openembedded.dev/recipes/libxml/libxml2-native_2.7.3.bb,
+do_package)
+cp: cannot stat
+`/oe/build/tmp/work/i686-linux/libxml2-native-2.7.3-r0/image/*': No
+such file or directory
+
+
+NOTE: Running task 1687 of 4025 (ID: 1771,
+/oe/org.openembedded.dev/recipes/gnutls/gnutls_2.4.2.bb, do_compile)
+NOTE: the following files were installed but not shipped in any package:
+NOTE:   /etc/rpc
+NOTE: Multiple libraries (libnss_hesiod.so.2, libnss_nis.so.2,
+libnss_nisplus.so.2) found, but LEAD_SONAME 'libc.so' doesn't match
+any of them
+NOTE: Couldn't find shared library provider for libgcc_s.so.1
+NOTE: package glibc-dbg skipped
+NOTE: Running task 1688 of 4025 (ID: 1772,
+/oe/org.openembedded.dev/recipes/gnutls/gnutls_2.4.2.bb, do_install)
+
+
+Packaged contents of glibc-gconv-ibm855 into
+/oe/build/tmp/deploy/glibc/ipk/armv5te/glibc-gconv-ibm855_2.9-r35.3.5_armv5te.ipk
+Packaged contents of glibc-gconv-tis-620 into
+/oe/build/tmp/deploy/glibc/ipk/armv5te/glibc-gconv-tis-620_2.9-r35.3.5_armv5te.ipk
+Packaged contents of glibc-gconv-iso8859-5 into
+/oe/build/tmp/deploy/glibc/ipk/armv5te/glibc-gconv-iso8859-5_2.9-r35.3.5_armv5te.ipk
+NOTE: the following files were installed but not shipped in any package:
+NOTE:   /usr/lib/libudev.so
+NOTE:   /usr/lib/libvolume_id.so
+NOTE:   /usr/lib/pkgconfig/libudev.pc
+NOTE:   /usr/lib/pkgconfig/libvolume_id.pc
+Packaged contents of glibc-gconv-viscii into
+/oe/build/tmp/deploy/glibc/ipk/armv5te/glibc-gconv-viscii_2.9-r35.3.5_armv5te.ipk
+
+
+Packaged contents of glibc-gconv-ibm9066 into
+/oe/build/tmp/deploy/glibc/ipk/armv5te/glibc-gconv-ibm9066_2.9-r35.3.5_armv5te.ipk
+NOTE: the following files were installed but not shipped in any package:
+NOTE:   /usr/share/getopt/getopt-parse.bash
+NOTE:   /usr/share/getopt/getopt-test.tcsh
+NOTE:   /usr/share/getopt/getopt-parse.tcsh
+NOTE:   /usr/share/getopt/getopt-test.bash
+NOTE: util-linux-ng contains dangling symlink to /usr/sbin/shutdown
+NOTE: util-linux-ng contains dangling symlink to /usr/sbin/shutdown
+NOTE: util-linux-ng contains dangling symlink to /usr/sbin/shutdown
+NOTE: util-linux-ng contains dangling symlink to /usr/sbin/shutdown
+NOTE: util-linux-ng contains dangling symlink to /usr/sbin/shutdown
+NOTE: util-linux-ng contains dangling symlink to /usr/sbin/shutdown
+Packaged contents of glibc-gconv-ibm1162 into
+/oe/build/tmp/deploy/glibc/ipk/armv5te/glibc-gconv-ibm1162_2.9-r35.3.5_armv5te.ipk
+
+
+Packaged contents of glibc-charmap-jis-c6229-1984-kana into
+/oe/build/tmp/deploy/glibc/ipk/armv5te/glibc-charmap-jis-c6229-1984-kana_2.9-r35.3.5_armv5te.ipk
+NOTE: the following files were installed but not shipped in any package:
+NOTE:   /usr/share/gdb/auto-load/usr/lib/libgobject-2.0.so.0.2200.1-gdb.py
+NOTE:   /usr/share/gdb/auto-load/usr/lib/libglib-2.0.so.0.2200.1-gdb.py
+Packaged contents of glibc-charmap-jis-c6229-1984-hand into
+/oe/build/tmp/deploy/glibc/ipk/armv5te/glibc-charmap-jis-c6229-1984-hand_2.9-r35.3.5_armv5te.ipk
+
+
+Packaged contents of glibc-binary-localedata-sk-sk into
+/oe/build/tmp/deploy/glibc/ipk/armv5te/glibc-binary-localedata-sk-sk_2.9-r35.3.5_armv5te.ipk
+NOTE: the following files were installed but not shipped in any package:
+NOTE:   /usr/lib/security/.debug/pam_keyinit.so
+NOTE:   /usr/lib/security/.debug/pam_stress.so
+NOTE:   /usr/lib/security/.debug/pam_faildelay.so
+NOTE:   /usr/lib/security/.debug/pam_timestamp.so
+NOTE:   /usr/lib/security/.debug/pam_env.so
+NOTE:   /usr/lib/security/.debug/pam_localuser.so
+NOTE:   /usr/lib/security/.debug/pam_lastlog.so
+NOTE:   /usr/lib/security/.debug/pam_xauth.so
+NOTE:   /usr/lib/security/.debug/pam_rhosts.so
+NOTE:   /usr/lib/security/.debug/pam_debug.so
+NOTE:   /usr/lib/security/.debug/pam_deny.so
+NOTE:   /usr/lib/security/.debug/pam_echo.so
+NOTE:   /usr/lib/security/.debug/pam_listfile.so
+NOTE:   /usr/lib/security/.debug/pam_warn.so
+NOTE:   /usr/lib/security/.debug/pam_loginuid.so
+NOTE:   /usr/lib/security/.debug/pam_rootok.so
+NOTE:   /usr/lib/security/.debug/pam_securetty.so
+NOTE:   /usr/lib/security/.debug/pam_issue.so
+NOTE:   /usr/lib/security/.debug/pam_limits.so
+NOTE:   /usr/lib/security/.debug/pam_mkhomedir.so
+NOTE:   /usr/lib/security/.debug/pam_wheel.so
+NOTE:   /usr/lib/security/.debug/pam_succeed_if.so
+NOTE:   /usr/lib/security/.debug/pam_tally2.so
+NOTE:   /usr/lib/security/.debug/pam_tally.so
+NOTE:   /usr/lib/security/.debug/pam_time.so
+NOTE:   /usr/lib/security/.debug/pam_namespace.so
+NOTE:   /usr/lib/security/.debug/pam_access.so
+NOTE:   /usr/lib/security/.debug/pam_permit.so
+NOTE:   /usr/lib/security/.debug/pam_pwhistory.so
+NOTE:   /usr/lib/security/.debug/pam_nologin.so
+NOTE:   /usr/lib/security/.debug/pam_unix.so
+NOTE:   /usr/lib/security/.debug/pam_mail.so
+NOTE:   /usr/lib/security/.debug/pam_filter.so
+NOTE:   /usr/lib/security/.debug/pam_exec.so
+NOTE:   /usr/lib/security/.debug/pam_group.so
+NOTE:   /usr/lib/security/.debug/pam_shells.so
+NOTE:   /usr/lib/security/.debug/pam_motd.so
+NOTE:   /usr/lib/security/.debug/pam_ftp.so
+NOTE:   /usr/lib/security/.debug/pam_umask.so
+NOTE:   /usr/lib/security/pam_filter/.debug/upperLOWER
+Packaged contents of glibc-binary-localedata-ku-tr into
+/oe/build/tmp/deploy/glibc/ipk/armv5te/glibc-binary-localedata-ku-tr_2.9-r35.3.5_armv5te.ipk
+
+
+Packaged contents of glibc-binary-localedata-es-cr into
+/oe/build/tmp/deploy/glibc/ipk/armv5te/glibc-binary-localedata-es-cr_2.9-r35.3.5_armv5te.ipk
+NOTE: the following files were installed but not shipped in any package:
+NOTE:   /lib/modules/2.6.26/modules.order
+Packaged contents of glibc-binary-localedata-fur-it into
+/oe/build/tmp/deploy/glibc/ipk/armv5te/glibc-binary-localedata-fur-it_2.9-r35.3.5_armv5te.ipk
+
+
+Packaged contents of kernel-module-snd-page-alloc into
+/oe/build/tmp/deploy/glibc/ipk/c7x0/kernel-module-snd-page-alloc_2.6.26-r12.5_c7x0.ipk
+NOTE: Multiple libraries (libpolkit-dbus.so.2, libpolkit.so.2,
+libpolkit-grant.so.2) found and LEAD_SONAME not defined
+Packaged contents of kernel-module-snd-mixer-oss into
+/oe/build/tmp/deploy/glibc/ipk/c7x0/kernel-module-snd-mixer-oss_2.6.26-r12.5_c7x0.ipk
+
+
+Packaged contents of kernel-module-zaurus into
+/oe/build/tmp/deploy/glibc/ipk/c7x0/kernel-module-zaurus_2.6.26-r12.5_c7x0.ipk
+NOTE: the following files were installed but not shipped in any package:
+NOTE:   /usr/share/common-lisp/source/gpg-error/gpg-error-package.lisp
+NOTE:   /usr/share/common-lisp/source/gpg-error/gpg-error-codes.lisp
+NOTE:   /usr/share/common-lisp/source/gpg-error/gpg-error.asd
+NOTE:   /usr/share/common-lisp/source/gpg-error/gpg-error.lisp
+Packaged contents of kernel-module-pegasus into
+/oe/build/tmp/deploy/glibc/ipk/c7x0/kernel-module-pegasus_2.6.26-r12.5_c7x0.ipk
+
+
+NOTE: Running task 2120 of 4025 (ID: 3715,
+/oe/org.openembedded.dev/recipes/tcltk/tcl-native_8.4.19.bb,
+do_package)
+cp: cannot stat
+`/oe/build/tmp/work/i686-linux/tcl-native-8.4.19-r4/image/*': No such
+file or directory
+NOTE: Running task 2121 of 4025 (ID: 1029,
+/oe/org.openembedded.dev/recipes/avahi/avahi_0.6.25.bb,
+do_populate_staging)
+
+
+NOTE: Running task 2560 of 4025 (ID: 1907,
+/oe/org.openembedded.dev/recipes/libusb/libusb-compat_0.1.2.bb,
+do_qa_staging)
+NOTE: Multiple libraries (libgstreamer-0.10.so.0,
+libgstdataprotocol-0.10.so.0, libgstbase-0.10.so.0,
+libgstcheck-0.10.so.0, libgstcontroller-0.10.so.0,
+libgstnet-0.10.so.0) found and LEAD_SONAME not defined
+NOTE: Running task 2561 of 4025 (ID: 1898,
+/oe/org.openembedded.dev/recipes/libusb/libusb-compat_0.1.2.bb,
+do_build)
+
+
+NOTE: Unpacking ../org.openembedded.dev/recipes/opkg/files/configure
+to tmp/work/i686-linux/opkg-native-0.1.6+svnr446-r19/
+NOTE: Running task 2684 of 4025 (ID: 84,
+/oe/org.openembedded.dev/recipes/opkg/opkg-native_svn.bb, do_patch)
+NOTE: Patch 'opkg_unarchive.patch' applies to earlier revisions
+NOTE: Patch 'opkg-intercept-cleanup.patch' applies to earlier revisions
+NOTE: Patch 'opkg-libdir.patch' applies to earlier revisions
+NOTE: Running task 2685 of 4025 (ID: 85,
+/oe/org.openembedded.dev/recipes/opkg/opkg-native_svn.bb,
+do_configure)
+
+
+NOTE: Running task 2854 of 4025 (ID: 183,
+/oe/org.openembedded.dev/recipes/kexecboot/linux-kexecboot_2.6.26.bb,
+do_compile)
+NOTE: the following files were installed but not shipped in any package:
+NOTE:   /usr/lib/ssl/openssl.cnf
+NOTE:   /usr/lib/ssl/misc/CA.pl
+NOTE:   /usr/lib/ssl/misc/CA.sh
+NOTE: Running task 2855 of 4025 (ID: 1724,
+/oe/org.openembedded.dev/recipes/openssl/openssl_0.9.8j.bb,
+do_package_write_ipk)
+
+
+NOTE: Applying patch 'pppoatm-makefile.patch'
+(../org.openembedded.dev/recipes/ppp/ppp-2.4.3/pppoatm-makefile.patch)
+NOTE: Applying patch 'enable-ipv6.patch'
+(../org.openembedded.dev/recipes/ppp/ppp-2.4.3/enable-ipv6.patch)
+NOTE: Multiple libraries (libnss_mdns6_minimal.so.2,
+libnss_mdns4.so.2, libnss_mdns4_minimal.so.2, libnss_mdns6.so.2,
+libnss_mdns_minimal.so.2, libnss_mdns.so.2) found and LEAD_SONAME not
+defined
+NOTE: Applying patch 'makefile-remove-hard-usr-reference.patch'
+(../org.openembedded.dev/recipes/ppp/ppp-2.4.3/makefile-remove-hard-usr-reference.patch)
+
+
+NOTE: Running task 2926 of 4025 (ID: 384,
+/oe/org.openembedded.dev/recipes/sysvinit/sysvinit_2.86.bb,
+do_distribute_sources)
+NOTE: sysvinit-utils contains dangling symlink to /usr/bin/last
+NOTE: sysvinit contains dangling symlink to /sbin/halt
+NOTE: sysvinit contains dangling symlink to /sbin/init
+NOTE: sysvinit contains dangling symlink to /sbin/halt
+NOTE: Running task 2927 of 4025 (ID: 381, /oe/org.openembedded.dev/
+
+
+NOTE: Running task 3061 of 4025 (ID: 801,
+/oe/org.openembedded.dev/recipes/tasks/task-boot.bb, do_package)
+cp: cannot stat
+`/oe/build/tmp/work/c7x0-angstrom-linux-gnueabi/task-boot-1.0-r52/image/*':
+No such file or directory
+NOTE: Running task 3062 of 4025 (ID: 802,
+/oe/org.openembedded.dev/recipes/tasks/task-boot.bb,
+do_distribute_sources)
+
+
+NOTE: Running task 3367 of 4025 (ID: 2137,
+/oe/org.openembedded.dev/recipes/base-files/base-files_3.0.14.bb,
+do_package)
+NOTE: base-files contains dangling symlink to /media/net
+NOTE: base-files contains dangling symlink to /media/cf
+NOTE: base-files contains dangling symlink to /media/ram
+NOTE: base-files contains dangling symlink to /media/card
+NOTE: Running task 3368 of 4025 (ID: 2134,
+/oe/org.openembedded.dev/recipes/base-files/base-files_3.0.14.bb,
+do_populate_staging)
+
+
+NOTE: Running task 3439 of 4025 (ID: 288,
+/oe/org.openembedded.dev/recipes/tasks/task-base.bb, do_package)
+cp: cannot stat
+`/oe/build/tmp/work/c7x0-angstrom-linux-gnueabi/task-base-1.0-r87/image/*':
+No such file or directory
+NOTE: Running task 3440 of 4025 (ID: 309,
+/oe/org.openembedded.dev/recipes/psplash/psplash-angstrom_svn.bb,
+do_package_stage_all)
+
+
+NOTE: Running task 3852 of 4025 (ID: 573,
+/oe/org.openembedded.dev/recipes/angstrom/angstrom-libc-fixup-hack.bb,
+do_package)
+cp: cannot stat
+`/oe/build/tmp/work/all-angstrom-linux-gnueabi/angstrom-libc-fixup-hack-1.0-r0/image/*':
+No such file or directory
+NOTE: Running task 3853 of 4025 (ID: 596,
+/oe/org.openembedded.dev/recipes/portmap/portmap_6.0.bb, do_rm_work)
+
+
+NOTE: Running task 3979 of 4025 (ID: 211,
+/oe/org.openembedded.dev/recipes/sharp-binary-only/sharp-flash-header-c700.bb,
+do_package)
+cp: cannot stat
+`/oe/build/tmp/work/c7x0-angstrom-linux-gnueabi/sharp-flash-header-c700-1.0-r0/image/*':
+No such file or directory
+NOTE: Running task 3980 of 4025 (ID: 208,
+/oe/org.openembedded.dev/recipes/sharp-binary-only/sharp-flash-header-c700.bb,
+do_populate_staging)
 
 
