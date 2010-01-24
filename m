@@ -1,29 +1,26 @@
-Received: from vms173013pub.verizon.net ([206.46.173.13])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1NYwaa-0008Tw-6o
+	(envelope-from <holger+oe@freyther.de>) id 1NYz54-0002ZH-AS
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jan 2010 08:08:55 +0100
-Received: from gandalf.denix.org ([unknown] [71.255.235.232])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0KWQ0003NP22IQV3@vms173013.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sun,
-	24 Jan 2010 01:06:15 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3828B14AF60; Sun,
-	24 Jan 2010 02:06:02 -0500 (EST)
-Date: Sun, 24 Jan 2010 02:06:02 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Sun, 24 Jan 2010 10:48:35 +0100
+Received: from tamarin.localnet (123-192-163-227.dynamic.kbronet.com.tw
+	[123.192.163.227])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id D47DF1B10C02
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 24 Jan 2010 09:45:04 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100124070602.GA8642@denix.org>
-References: <1264277173.3738.74.camel@mattotaupa.wohnung.familie-menzel.net>
-MIME-version: 1.0
-In-reply-to: <1264277173.3738.74.camel@mattotaupa.wohnung.familie-menzel.net>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.13
-X-SA-Exim-Mail-From: denis@denix.org
+Date: Sun, 24 Jan 2010 10:45:48 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <4AF1DA56.3070605@cam.ac.uk>
+In-Reply-To: <4AF1DA56.3070605@cam.ac.uk>
+MIME-Version: 1.0
+Message-Id: <201001241045.48809.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Official policy to list checksums
+Subject: Re: [PATCH] Linux-2.6.32-rc6 + IMote2 platform support.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,28 +34,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jan 2010 07:08:55 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sun, 24 Jan 2010 09:48:35 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Sat, Jan 23, 2010 at 09:06:13PM +0100, Paul Menzel wrote:
-> does [1] still describe the official policy to add checksums? Or is
+On Wednesday 04 November 2009 20:47:34 Jonathan Cameron wrote:
+> Signed-off-by: Jonathan Cameron <jic23@cam.ac.uk>
+> ---
+> Reasons for release candidate:
 
-No
+Hi Jonathan,
 
-> putting them into the recipes preferred nowadays?
-
-Yes
-
-> For example
-> 
->         SRC_URI[whois.md5sum] = "18d74a07d711262b75f04a1c319bc833"
->         SRC_URI[whois.sha256sum] = "fb13316c09ff9f98bd9af659d0789c9a09b97757f5c6c3dbfbc790250d5c5abc"
-
-Please read "Death by checksums" thread here:
-http://thread.gmane.org/gmane.comp.handhelds.openembedded/27465
-
--- 
-Denys
+are these patches still up for review?
 
 
