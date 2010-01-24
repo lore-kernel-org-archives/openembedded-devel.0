@@ -1,39 +1,37 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NZ4hs-0001B2-Ve
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NZ4pr-0001Tf-Ka for openembedded-devel@lists.openembedded.org;
+	Sun, 24 Jan 2010 16:57:14 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NZ4nb-0002zL-Qb
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jan 2010 16:49:00 +0100
-Received: from cpe00e0b8e80755-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.244.198] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NZ4fe-0002mA-Rq for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jan 2010 10:46:38 -0500
-Date: Sun, 24 Jan 2010 10:45:47 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
+	Sun, 24 Jan 2010 16:54:51 +0100
+Received: from p5b3b1abd.dip.t-dialin.net ([91.59.26.189])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 24 Jan 2010 16:54:51 +0100
+Received: from no2spam by p5b3b1abd.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 24 Jan 2010 16:54:51 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100124154357.GG15943@jama>
-Message-ID: <alpine.LFD.2.00.1001241044240.14413@localhost>
-References: <687C35F4-E7DC-4898-907F-8C1CE8890887@mac.com>
-	<9210BA9D-8420-46C3-BDD6-CEE4E853B42F@mac.com>
-	<20100124154357.GG15943@jama>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Sun, 24 Jan 2010 16:54:29 +0100
+Message-ID: <4B5C6D35.1030002@nospam.arcornews.de>
+References: <201001241235.23795.holger+oe@freyther.de>
+	<hjhfid$tqo$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5b3b1abd.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <hjhfid$tqo$1@ger.gmane.org>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Build failure module-init-tools-cross_3.2.2.bb on Fedora 12 x86_64
+Subject: Re: Request to revert latest devicekit patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,45 +45,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jan 2010 15:49:00 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sun, 24 Jan 2010 15:57:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Sun, 24 Jan 2010, Martin Jansa wrote:
+Koen Kooi wrote:
+> On 24-01-10 12:35, Holger Hans Peter Freyther wrote:
+>> Can anyone ack the revert please?
+> 
+> The commit says:
+> 
+> Note: Another (maybe better) fix would be to package up docbook-xsl but
+> that is overkill for these two recipes.
 
-> On Sun, Jan 24, 2010 at 07:37:36PM +0400, Elvis Dowson wrote:
-> > Hi,
->
-> Hi
->
-> > | /usr/bin/ld: cannot find -lc
-> > | collect2: ld returned 1 exit status
-> > | make: *** [insmod.static] Error 1
->
-> Thomas White had the same problem and reported that:
->
-> in F12 there's a separate package for glibc static linking ok, after
-> installing the static package, it works
->
-> Not sure if it's correct fix (I would expect that static libc should
-> be in staging already for module-init-tools-cross), but you can give
-> it a try.
+To introduce something new that patch breaks something for somebody else
+that was previously working.  I thought it was commonly accepted that
+it's then the author's (and possibly the committer's) responsibility to
+come up with something better to fix this regression.
 
-  i'm guessing that's it:
+> Wouldn't that be a better option than introducing a regression?
 
-  # yum install glibc-static
+The regression was introduced with the patch.  Not by reverting it.
 
-given that i run f12, i ran across that issue some time back.
+A revert gets my ACK if this bothers Holger enough in his workflow.  I
+would suggest Holger and David-John should talk about a time-frame in
+which David-John can cook up a proper patch.  Based on this information
+a decision should be made if a revert is necessary in the meantime or
+not.  I trust Holger's judgment here.
 
-rday
---
 
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
+PS: David-John, the whole discussion is at
+http://thread.gmane.org/gmane.comp.handhelds.openembedded/29524
 
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
 
 
