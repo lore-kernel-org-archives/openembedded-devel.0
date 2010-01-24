@@ -1,37 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NZ0Rl-0004YZ-Qx for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jan 2010 12:16:04 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NZ0PU-0006X9-Fb
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jan 2010 12:13:40 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jan 2010 12:13:40 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jan 2010 12:13:40 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NZ0ct-0008JC-Vh for openembedded-devel@lists.openembedded.org;
+	Sun, 24 Jan 2010 12:27:35 +0100
+Received: from g229060220.adsl.alicedsl.de ([92.229.60.220]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NZ0ag-00008D-RB for openembedded-devel@lists.openembedded.org;
+	Sun, 24 Jan 2010 11:25:14 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 24 Jan 2010 12:13:13 +0100
-Message-ID: <hjha08$fk9$1@ger.gmane.org>
-References: <1264277173.3738.74.camel@mattotaupa.wohnung.familie-menzel.net>	<20100124070602.GA8642@denix.org>
-	<hjh7f3$6v0$2@ger.gmane.org>
+In-Reply-To: <hjha08$fk9$1@ger.gmane.org>
+References: <1264277173.3738.74.camel@mattotaupa.wohnung.familie-menzel.net>
+	<20100124070602.GA8642@denix.org> <hjh7f3$6v0$2@ger.gmane.org>
 	<ac9c93b11001240308h1550d966p9224974e89679819@mail.gmail.com>
+	<hjha08$fk9$1@ger.gmane.org>
+Date: Sun, 24 Jan 2010 12:25:21 +0100
+Message-ID: <1264332321.3810.52.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100113 Shredder/3.0.2pre
-In-Reply-To: <ac9c93b11001240308h1550d966p9224974e89679819@mail.gmail.com>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Official policy to list checksums
@@ -48,43 +38,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jan 2010 11:16:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 24 Jan 2010 11:27:35 -0000
+X-Groupsio-MsgNum: 16150
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-3svgLb7x4Qtj60e99ILM"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-3svgLb7x4Qtj60e99ILM
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 24-01-10 12:08, Frans Meulenbroeks wrote:
->> With checksums.ini it's a matter of:
->>
->> either
->>
->> cat /OE/tmp/checksums.ini >> conf/checksums.ini ; python
->> contrib/source-checker/oe-checksum-sorter -i conf/checksums.ini
-> 
-> What I do is have a local script in my openebedded dir which just does:
-> 
-> #!/bin/bash
-> git checkout conf/checksums.ini ; cat ../tmp/checksums.ini
-> conf/checksums.ini >tmp_sums
-> python contrib/source-checker/oe-checksums-sorter.py tmp_sums
->> conf/checksums.ini
-> rm tmp_sums
+Am Sonntag, den 24.01.2010, 12:13 +0100 schrieb Koen Kooi:
+> the sorter now understands '-i', so it can sort the file 'in place',
+> which avoids the need for the tmp_sums file.
 
-the sorter now understands '-i', so it can sort the file 'in place',
-which avoids the need for the tmp_sums file.
+I updated the Wiki page [1].
 
-regards,
 
-Koen
+Thanks,
+
+Paul
+
+
+[1] http://wiki.openembedded.net/index.php?title=3DChecksums&diff=3Dprev&ol=
+did=3D2161
+
+--=-3svgLb7x4Qtj60e99ILM
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-iD8DBQFLXCtJMkyGM64RGpERAgfOAJ4zZKncAHHmugLycj0rAvQIP/cqwACcDOWE
-i8JTIN1qKu6d58rbQ1e+iUw=
-=iDcD
+iEYEABECAAYFAktcLiAACgkQPX1aK2wOHVhCMQCfQw92j9qh5JFwhXHaFJkziHU/
+tm0AniudqsvOUwnvgcyJEbTot4D+mViR
+=XAjE
 -----END PGP SIGNATURE-----
 
-
-
+--=-3svgLb7x4Qtj60e99ILM--
