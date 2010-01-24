@@ -1,39 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NYzlm-0003KF-5I for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jan 2010 11:32:41 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NYzjX-0005Lo-8A
+	(envelope-from <holger+oe@freyther.de>) id 1NYzta-0004jc-02
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jan 2010 11:30:19 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jan 2010 11:30:19 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Sun, 24 Jan 2010 11:40:45 +0100
+Received: from tamarin.localnet (123-192-163-227.dynamic.kbronet.com.tw
+	[123.192.163.227])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 56EDB1B10C02
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jan 2010 11:30:19 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 24 Jan 2010 10:37:18 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 24 Jan 2010 11:29:56 +0100
-Message-ID: <hjh7f3$6v0$2@ger.gmane.org>
-References: <1264277173.3738.74.camel@mattotaupa.wohnung.familie-menzel.net>
-	<20100124070602.GA8642@denix.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100113 Shredder/3.0.2pre
-In-Reply-To: <20100124070602.GA8642@denix.org>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Sun, 24 Jan 2010 11:38:01 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <n> <20100122222101.GC2074@gmail.com>
+	<1264242681.10526.2.camel@becca>
+In-Reply-To: <1264242681.10526.2.camel@becca>
+MIME-Version: 1.0
+Message-Id: <201001241138.01795.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Official policy to list checksums
+Subject: Re: [PATCH 1/2] gpsd: Prepare recipe and inc for version bump
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,54 +35,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jan 2010 10:32:41 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 24 Jan 2010 10:40:46 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Saturday 23 January 2010 11:31:21 Michael Lippautz wrote:
 
-On 24-01-10 08:06, Denys Dmytriyenko wrote:
-> On Sat, Jan 23, 2010 at 09:06:13PM +0100, Paul Menzel wrote:
->> does [1] still describe the official policy to add checksums? Or is
-> 
-> No
-> 
->> putting them into the recipes preferred nowadays?
-> 
-> Yes
+> -SRC_URI = "http://download.berlios.de/gpsd/gpsd-${PV}.tar.gz \
+> +SRC_URI = "http://download.berlios.de/gpsd/gpsd-${PV}.tar.gz;name=gpsd
+> \
 
-I think not! The new format:
+Hi,
+your mailer has wrapped this line making it impossible to to apply the patch. 
+It would be nice if you could send a final patch without line wrapping.
 
-* is not documented
-* it has no tools to autogenerate it
-* has not been agreed on in any way.
-
-As an experiment I tried to use it for a branch at work and I
-*absolutely* hate the workflow needed for the new format.
-
-With checksums.ini it's a matter of:
-
-either
-
-cat /OE/tmp/checksums.ini >> conf/checksums.ini ; python
-contrib/source-checker/oe-checksum-sorter -i conf/checksums.ini
-
-or
-
-Verbatimly copy/paste the *output* OE gives you into conf/checksums.ini.
-
-These concerns have been raised time after time and still haven't been
-addressed, so for now:
-
-checksums.ini is the way to go
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLXCEkMkyGM64RGpERAsSuAKCL8RKc/w03gNou79d3HXJbf8wqtACgnkrn
-0jZ/RL/sSIoBxyLT4vGaMdc=
-=K1O3
------END PGP SIGNATURE-----
-
+thanks a lot
+	zecke
 
 
