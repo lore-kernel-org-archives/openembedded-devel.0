@@ -1,29 +1,39 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-gx0-f215.google.com ([209.85.217.215])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NZ0Ad-0008D9-2g for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jan 2010 11:58:22 +0100
-Received: from g229060220.adsl.alicedsl.de ([92.229.60.220]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NZ08P-0004RA-SB for openembedded-devel@lists.openembedded.org;
-	Sun, 24 Jan 2010 10:56:02 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NZ0N1-0001sK-US
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 24 Jan 2010 12:11:11 +0100
+Received: by gxk7 with SMTP id 7so3481462gxk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 24 Jan 2010 03:08:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=ZyQqMPMtZCQuttBdazbBEHqwESA1W4+IQPs2o6a6nNo=;
+	b=L5vwKEXOg5VMXflwz8GrHgRiS0XqL2Zuwm+/I5VcJA+QdaSzYJxBhAh/5i8BW5+fx1
+	ZJl5F0FKcMAK3lZ0fIMdDQ2qli9Gnqv1D+K+JPVL20e2WYzwQXAqNCZpe/fei7iZ6Dx3
+	Jzb26z1aQTA8fLA3oz0JzXjYS76YP+8oeyCe0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=BavQircc+K2os4gKUl+UAQbCIh47nDdLSY9UAS41Zf/lI02hDGLJHoe+cWR2L7X/kd
+	1Cto6luLMUA4jl3N5aEDI2eK/WevMrQhtY1qobeI9lYYx80tzTgLJmkQ12BwqSKyIVj8
+	dR+e7wTcPJGTIbJ0HfdCclJZ1F5DVnooCyazo=
+MIME-Version: 1.0
+Received: by 10.101.147.24 with SMTP id z24mr2179588ann.150.1264331328100; 
+	Sun, 24 Jan 2010 03:08:48 -0800 (PST)
+In-Reply-To: <hjh7f3$6v0$2@ger.gmane.org>
+References: <1264277173.3738.74.camel@mattotaupa.wohnung.familie-menzel.net>
+	<20100124070602.GA8642@denix.org> <hjh7f3$6v0$2@ger.gmane.org>
+Date: Sun, 24 Jan 2010 12:08:48 +0100
+Message-ID: <ac9c93b11001240308h1550d966p9224974e89679819@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201001241138.01795.holger+oe@freyther.de>
-References: <n> <20100122222101.GC2074@gmail.com>
-	<1264242681.10526.2.camel@becca>
-	<201001241138.01795.holger+oe@freyther.de>
-Date: Sun, 24 Jan 2010 11:56:09 +0100
-Message-ID: <1264330569.3810.44.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.217.215
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 1/2] gpsd: Prepare recipe and inc for version bump
+Subject: Re: Official policy to list checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,55 +47,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Jan 2010 10:58:22 -0000
-X-Groupsio-MsgNum: 16146
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-Jycf4on71ZNeJUykQ/Fu"
+X-List-Received-Date: Sun, 24 Jan 2010 11:11:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-Jycf4on71ZNeJUykQ/Fu
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Am Sonntag, den 24.01.2010, 11:38 +0100 schrieb Holger Hans Peter Freyther:
-> On Saturday 23 January 2010 11:31:21 Michael Lippautz wrote:
->=20
-> > -SRC_URI =3D "http://download.berlios.de/gpsd/gpsd-${PV}.tar.gz \
-> > +SRC_URI =3D "http://download.berlios.de/gpsd/gpsd-${PV}.tar.gz;name=3D=
-gpsd
-> > \
+> With checksums.ini it's a matter of:
 >
-> your mailer has wrapped this line making it impossible to to apply the pa=
-tch.=20
-> It would be nice if you could send a final patch without line wrapping.
+> either
+>
+> cat /OE/tmp/checksums.ini >> conf/checksums.ini ; python
+> contrib/source-checker/oe-checksum-sorter -i conf/checksums.ini
 
-Michael, you could also shorten that line using =C2=BB=E2=80=A6${P}=C2=AB [=
-1].
+What I do is have a local script in my openebedded dir which just does:
 
-        P: The package name and versions separated by a hyphen.
-       =20
-        P =3D "${PN}-${PV}"
-        For the strace_4.5.14.bb recipe the P variable would be set to
-        "strace-4.5.14".
+#!/bin/bash
+git checkout conf/checksums.ini ; cat ../tmp/checksums.ini
+conf/checksums.ini >tmp_sums
+python contrib/source-checker/oe-checksums-sorter.py tmp_sums
+>conf/checksums.ini
+rm tmp_sums
+
+after that when adding if the # of lines added is different from what
+I expect (typically I expect 4 for one new entry) I verify while
+adding.
+
+Pretty straightforward.
+Actually maybe I should even extend the script by doing a git pull
+--rebase first and invoke git add -i after that (because typically I
+add the checksum when I want to commit a new recipe).
+
+Frans
 
 
-Thanks,
-
-Paul
-
-
-[1] http://docs.openembedded.org/usermanual/html/recipes_versioning.html
-
---=-Jycf4on71ZNeJUykQ/Fu
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktcJ0kACgkQPX1aK2wOHVhI+ACdE7FIt9AybMbYx4E1/8lT5Odp
-thEAoIbjn3vZyeRsMQ+mIw4RLU4LV4Qd
-=pu72
------END PGP SIGNATURE-----
-
---=-Jycf4on71ZNeJUykQ/Fu--
