@@ -1,39 +1,30 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NZKCl-0006j7-Ia for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 09:21:54 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NZKAU-0000Qv-Hk
+Received: from static-92-33-14-100.sme.bredbandsbolaget.se ([92.33.14.100]
+	helo=mailhost.lundinova.se) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <johan.hovold@lundinova.se>) id 1NZKDx-00089X-Lz
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 09:19:30 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jan 2010 09:19:30 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Mon, 25 Jan 2010 09:23:08 +0100
+Received: from pi (unknown [10.240.22.2])
+	by mailhost.lundinova.se (Postfix) with ESMTP id 686F5B94006
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jan 2010 09:19:30 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 25 Jan 2010 09:20:45 +0100 (CET)
+Received: from johan by pi with local (Exim 4.69) (envelope-from <johan@pi>)
+	id 1NZKBh-0003Z9-CG for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Jan 2010 09:20:45 +0100
+Date: Mon, 25 Jan 2010 09:20:45 +0100
+From: Johan Hovold <johan.hovold@lundinova.se>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 25 Jan 2010 09:19:07 +0100
-Message-ID: <hjjk5q$rmc$1@ger.gmane.org>
-References: <1264277173.3738.74.camel@mattotaupa.wohnung.familie-menzel.net>	<20100124070602.GA8642@denix.org>
-	<hjh7f3$6v0$2@ger.gmane.org> <20100125015636.GA9855@denix.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100113 Shredder/3.0.2pre
-In-Reply-To: <20100125015636.GA9855@denix.org>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100125082045.GA12322@lundinova.se>
+References: <4B54F75F.9030005@atmel.com>
+	<1264007889.4003.207.camel@hammer.suse.cz>
+MIME-Version: 1.0
+In-Reply-To: <1264007889.4003.207.camel@hammer.suse.cz>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Sender: <johan.hovold@lundinova.se>
+X-SA-Exim-Connect-IP: 92.33.14.100
+X-SA-Exim-Mail-From: johan.hovold@lundinova.se
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Official policy to list checksums
+Subject: Re: Getting a cursor
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,55 +38,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2010 08:21:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 25 Jan 2010 08:23:08 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 25-01-10 02:56, Denys Dmytriyenko wrote:
-> On Sun, Jan 24, 2010 at 11:29:56AM +0100, Koen Kooi wrote:
->> On 24-01-10 08:06, Denys Dmytriyenko wrote:
->>> On Sat, Jan 23, 2010 at 09:06:13PM +0100, Paul Menzel wrote:
->>>> does [1] still describe the official policy to add checksums? Or is
->>>
->>> No
->>>
->>>> putting them into the recipes preferred nowadays?
->>>
->>> Yes
->>
->> I think not! The new format:
->>
->> * is not documented
+On Wed, Jan 20, 2010 at 06:18:09PM +0100, Stanislav Brabec wrote:
+> Ulf Samuelsson wrote:
+> > Anyone got an idea how to get a cursor as default?
+> > Googling, I have seen that /usr/share/icons/xcursor-transparent/cursors
+> > all point at a transparent cursor abd that I can generate new cursors
+> > using xcursorgen.
+> > I guess I can also copy some cursors from a desktop, but If
+> > I want to have cursor on by default, is there a magic setting somewhere?
 > 
-> I think there were plenty of emails describing the new format. Need to put it 
-> all in a Wiki page, agree.
-
->> * it has no tools to autogenerate it
+> This is the trick that works for me in GPE:
 > 
-> Give me few minutes - I'll send something to address this point.
+> mkdir -p ~/.icons/default
+> echo "Inherits=xcursor-transparent" >>~/.icons/default/index.theme
 > 
->> * has not been agreed on in any way.
-> 
-> Actually, specifying checksums in corresponding recipes was agreed on during 
-> the OEDEM in November. Using additional variable flags in base.bbclass was 
-> added by Phil, since bitbake cannot handle SHA256 sums in SRC_URI. Although, 
-> Richard mentioned he'd like to get it implemented in bitbake at some point:
-> http://thread.gmane.org/gmane.comp.sysutils.bitbake.devel/1089/focus=1115
+> But it is not ideal. I would like to see it disable while using
+> touchscreen or keyboard and enabled while using mouse, touchpad or mouse
+> keys.
 
-Ah yes, stuff agreed at OEDEM, I see. I also remember that nearly
-everything that was 'agreed' there got dis-agreed on the mailinglist here.
-And I also remember that I said that to be consistent sane-srcrevs
-should cease to exist as well :)
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+As someone already pointed out you can change the use_cursor setting for
+matchbox. The default value however depends on whether your
+MACHINE_FEATURES contains "touchscreen" or not.
 
-iD8DBQFLXVP7MkyGM64RGpERAuV7AJ9ReCKJDujV+1VS0IErq+Ne5sUF/ACdGYID
-3/0DqfPuC8O5KmvQORdsipw=
-=ukSY
------END PGP SIGNATURE-----
+/Johan
 
 
 
