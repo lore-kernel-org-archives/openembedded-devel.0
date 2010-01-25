@@ -1,36 +1,28 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NZCbo-0005hR-Vj for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 01:15:16 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NZCZZ-0005sa-1H
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 01:12:53 +0100
-Received: from p5b3b1abd.dip.t-dialin.net ([91.59.26.189])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jan 2010 01:12:53 +0100
-Received: from no2spam by p5b3b1abd.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jan 2010 01:12:53 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NZChN-0005vK-9q for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Jan 2010 01:21:00 +0100
+Received: from g225083136.adsl.alicedsl.de ([92.225.83.136]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NZCf9-0005ek-Jl for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Jan 2010 00:18:39 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Mon, 25 Jan 2010 01:12:36 +0100
-Message-ID: <hjinll$1lh$1@ger.gmane.org>
-References: <d1b08f941001241451m316d86ecpa46640e907479c63@mail.gmail.com>
+In-Reply-To: <4B5CD15C.3090107@balister.org>
+References: <1264331348.3810.51.camel@mattotaupa>
+	<4B5CD15C.3090107@balister.org>
+Date: Mon, 25 Jan 2010 01:18:38 +0100
+Message-ID: <1264378718.3663.96.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b1abd.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-In-Reply-To: <d1b08f941001241451m316d86ecpa46640e907479c63@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: QA: Fixes needed by console-image
+Subject: Re: Signed-off-by, Reviewed-by, Acked-by by person reviewing committing a patch.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,16 +36,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2010 00:15:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 25 Jan 2010 00:21:00 -0000
+X-Groupsio-MsgNum: 16186
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-D6+wUWFZKL6kPStJPWAk"
 
-Andrea Adami wrote:
-> I post here some bits of the log of console-image: my understanding is
-> we should convert asap the packages using legacy do_stage.
+--=-D6+wUWFZKL6kPStJPWAk
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Where do we have an explanation of legacy do_stage for dummies?  And
-where is an example of how to fix this?
+Am Sonntag, den 24.01.2010, 18:01 -0500 schrieb Philip Balister:
+> On 01/24/2010 06:09 AM, Paul Menzel wrote:
+
+[=E2=80=A6]
+
+> > Could the committer please add his Signed-off-by-line to the commit
+> > message. I guess you can tweak `git log` to print out the committer too
+> > =E2=80=93 Gitk is displaying it. =E2=80=93, but I guess using `git am -=
+s` should do the
+> > trick equally.
+>=20
+> the script in contrib/patchwork does this for you also :)
+
+I missed the subject in the message a bit. Is this written down as a
+policy somewhere?
 
 
+Thanks,
 
+Paul
+
+--=-D6+wUWFZKL6kPStJPWAk
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAktc414ACgkQPX1aK2wOHVhUngCfcitUGU0QSLY4yCGU+5LozanQ
+yjkAn2ucgfzrYFaM6v7h06bbdAk9+sin
+=VdTf
+-----END PGP SIGNATURE-----
+
+--=-D6+wUWFZKL6kPStJPWAk--
