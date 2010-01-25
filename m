@@ -1,28 +1,30 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from vms173009pub.verizon.net ([206.46.173.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NZChN-0005vK-9q for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 01:21:00 +0100
-Received: from g225083136.adsl.alicedsl.de ([92.225.83.136]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NZCf9-0005ek-Jl for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 00:18:39 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <denis@denix.org>) id 1NZEEU-0004M9-NW
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Jan 2010 02:59:17 +0100
+Received: from gandalf.denix.org ([unknown] [71.255.235.232])
+	by vms173009.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0KWS002PN5ECF291@vms173009.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	24 Jan 2010 19:56:44 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 1C83814AF60; Sun,
+	24 Jan 2010 20:56:36 -0500 (EST)
+Date: Sun, 24 Jan 2010 20:56:36 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4B5CD15C.3090107@balister.org>
-References: <1264331348.3810.51.camel@mattotaupa>
-	<4B5CD15C.3090107@balister.org>
-Date: Mon, 25 Jan 2010 01:18:38 +0100
-Message-ID: <1264378718.3663.96.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Message-id: <20100125015636.GA9855@denix.org>
+References: <1264277173.3738.74.camel@mattotaupa.wohnung.familie-menzel.net>
+	<20100124070602.GA8642@denix.org> <hjh7f3$6v0$2@ger.gmane.org>
+MIME-version: 1.0
+In-reply-to: <hjh7f3$6v0$2@ger.gmane.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.9
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Signed-off-by, Reviewed-by, Acked-by by person reviewing committing a patch.
+Subject: Re: Official policy to list checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,47 +38,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2010 00:21:00 -0000
-X-Groupsio-MsgNum: 16186
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-D6+wUWFZKL6kPStJPWAk"
+X-List-Received-Date: Mon, 25 Jan 2010 01:59:18 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
---=-D6+wUWFZKL6kPStJPWAk
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Sun, Jan 24, 2010 at 11:29:56AM +0100, Koen Kooi wrote:
+> On 24-01-10 08:06, Denys Dmytriyenko wrote:
+> > On Sat, Jan 23, 2010 at 09:06:13PM +0100, Paul Menzel wrote:
+> >> does [1] still describe the official policy to add checksums? Or is
+> > 
+> > No
+> > 
+> >> putting them into the recipes preferred nowadays?
+> > 
+> > Yes
+> 
+> I think not! The new format:
+> 
+> * is not documented
 
-Am Sonntag, den 24.01.2010, 18:01 -0500 schrieb Philip Balister:
-> On 01/24/2010 06:09 AM, Paul Menzel wrote:
+I think there were plenty of emails describing the new format. Need to put it 
+all in a Wiki page, agree.
 
-[=E2=80=A6]
+> * it has no tools to autogenerate it
 
-> > Could the committer please add his Signed-off-by-line to the commit
-> > message. I guess you can tweak `git log` to print out the committer too
-> > =E2=80=93 Gitk is displaying it. =E2=80=93, but I guess using `git am -=
-s` should do the
-> > trick equally.
->=20
-> the script in contrib/patchwork does this for you also :)
+Give me few minutes - I'll send something to address this point.
 
-I missed the subject in the message a bit. Is this written down as a
-policy somewhere?
+> * has not been agreed on in any way.
+
+Actually, specifying checksums in corresponding recipes was agreed on during 
+the OEDEM in November. Using additional variable flags in base.bbclass was 
+added by Phil, since bitbake cannot handle SHA256 sums in SRC_URI. Although, 
+Richard mentioned he'd like to get it implemented in bitbake at some point:
+http://thread.gmane.org/gmane.comp.sysutils.bitbake.devel/1089/focus=1115
+
+> As an experiment I tried to use it for a branch at work and I
+> *absolutely* hate the workflow needed for the new format.
+
+You should have warned me! :) I thought you completely switched to the new 
+method and liked it... :)
+
+-- 
+Denys
 
 
-Thanks,
-
-Paul
-
---=-D6+wUWFZKL6kPStJPWAk
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktc414ACgkQPX1aK2wOHVhUngCfcitUGU0QSLY4yCGU+5LozanQ
-yjkAn2ucgfzrYFaM6v7h06bbdAk9+sin
-=VdTf
------END PGP SIGNATURE-----
-
---=-D6+wUWFZKL6kPStJPWAk--
