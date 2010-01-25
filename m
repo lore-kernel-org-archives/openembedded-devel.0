@@ -1,46 +1,31 @@
-Received: from mail-yw0-f178.google.com ([209.85.211.178])
+Received: from vms173019pub.verizon.net ([206.46.173.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NZKTe-0002RB-Sq
+	(envelope-from <denis@denix.org>) id 1NZKaJ-0000iw-Ij
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 09:39:23 +0100
-Received: by ywh8 with SMTP id 8so965207ywh.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jan 2010 00:36:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=DOuXrMCqYRDywVmEzzO0ORTeE5oByDUd9h4IaYbNsSk=;
-	b=J+SYUCfu1+xItWcLGmN7jgIM1srnDRWEQekRwznnzKM/kBtpM+xOq6ZIotG5RD1muK
-	+UggRrRdIOl3ZDri8BPNeiBdb1b79LC2d5UWhbX1l+cvxJLk28RexOB2SvGvnIoNF+SS
-	eVR666E+KooR8+bdYJYQwJM3kkVwkRoZMdwUY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=pfe7V5jnE0KjpS+coXVJqcoYyACn9k8tn+5uAJORj/XDf+CA3K3M8pziTYenor8ydN
-	JOEpLiVsHFh+jGOQ1Ahr+YicSoU7QXNOfNwv9CMCh30BaDvfFDp1Ba9cmqkWkIVrot7K
-	DorIJIdUv97DxwlIJDoXwYTsEiqT8PvmhJHaQ=
-Received: by 10.150.47.31 with SMTP id u31mr6167827ybu.334.1264408614859;
-	Mon, 25 Jan 2010 00:36:54 -0800 (PST)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id 7sm1641577ywc.36.2010.01.25.00.36.53
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 25 Jan 2010 00:36:54 -0800 (PST)
-Date: Mon, 25 Jan 2010 00:37:12 -0800
-From: Khem Raj <raj.khem@gmail.com>
+	Mon, 25 Jan 2010 09:46:14 +0100
+Received: from gandalf.denix.org ([unknown] [71.255.235.232])
+	by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0KWS00IP4O8SR8D0@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	25 Jan 2010 02:43:40 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3B8B414AF60; Mon,
+	25 Jan 2010 03:43:40 -0500 (EST)
+Date: Mon, 25 Jan 2010 03:43:40 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100125083712.GB26355@gmail.com>
-References: <20100125081044.GA26355@gmail.com>
-	<ac9c93b11001250015h1a8c325fk1eb13229924c40b8@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <ac9c93b11001250015h1a8c325fk1eb13229924c40b8@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.211.178
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Message-id: <20100125084340.GA18489@denix.org>
+References: <1264277173.3738.74.camel@mattotaupa.wohnung.familie-menzel.net>
+	<20100124070602.GA8642@denix.org> <hjh7f3$6v0$2@ger.gmane.org>
+	<20100125015636.GA9855@denix.org> <hjjk5q$rmc$1@ger.gmane.org>
+MIME-version: 1.0
+In-reply-to: <hjjk5q$rmc$1@ger.gmane.org>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.19
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] Remove gcc configure option --enable-target-optspace for powerpc
+Subject: Re: Official policy to list checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,45 +39,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2010 08:39:25 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 25 Jan 2010 08:46:14 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On (25/01/10 09:15), Frans Meulenbroeks wrote:
-> 2010/1/25 Khem Raj <raj.khem@gmail.com>:
-> > Hi
-> >
-> > I have run into a problem where compiling libgcc with -Os for powerpc SPE
-> > targets caused some symols like _restgpr_Y_x to be referenced in
-> > libgcc_s.so.1 due to gcc generating them for out-of-line prologues which
-> > happens with Os. But these symbols are defined in libgcc.a so when linking
-> > a shared library which uses libgcc we get errors from linker complaining
-> > that DSO is accessing a hidden symbol from libgcc.a which is a static
-> > archive.
-> >
-> > I thought we could remove --enable-target-optspace. In general it is only
-> > used to compiling the gcc libraries e.g. libgcc libstdc++ etc. in OE
-> > context so its not of a much hit on space usage if we let this option go
-> > which would mean that these libraries would be compiled with -O2
-> >
-> > I propose to remove this option for all powerpc and we can still leave it
-> > in for other architectures.
-> >
-> > Does this sound reasonable ?
+On Mon, Jan 25, 2010 at 09:19:07AM +0100, Koen Kooi wrote:
+> >> * it has no tools to autogenerate it
+> > 
+> > Give me few minutes - I'll send something to address this point.
+
+Do you have any feedback on the patch I sent? Does it make things any better?
+
+> >> * has not been agreed on in any way.
+> > 
+> > Actually, specifying checksums in corresponding recipes was agreed on during 
+> > the OEDEM in November. Using additional variable flags in base.bbclass was 
+> > added by Phil, since bitbake cannot handle SHA256 sums in SRC_URI. Although, 
+> > Richard mentioned he'd like to get it implemented in bitbake at some point:
+> > http://thread.gmane.org/gmane.comp.sysutils.bitbake.devel/1089/focus=1115
 > 
-> What about just removing the option when building libgcc for ppc ?
+> Ah yes, stuff agreed at OEDEM, I see. I also remember that nearly
+> everything that was 'agreed' there got dis-agreed on the mailinglist here.
+> And I also remember that I said that to be consistent sane-srcrevs
+> should cease to exist as well :)
 
-Yes its possible I guess although wont be as straight forward plus I did
-not want to muck with gcc configury when we have options to control it.
+This way we won't get anywhere... :) I thought (maybe I'm wrong) everybody 
+agrees at least with the fact that central checksums.ini is not the best 
+approach. Keeping checksums in the metadata inside SRC_URI seemed like a 
+viable solution. Are there any fundamental flaws with this method, besides 
+lacking some tools?
+BTW, I agree with you on the sane-srcrevs topic, if it's any consolation... :)
 
-
-
-> 
-> Frans
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- 
+Denys
 
 
