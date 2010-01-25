@@ -1,30 +1,29 @@
 Received: from vms173009pub.verizon.net ([206.46.173.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1NZEEU-0004M9-NW
+	(envelope-from <denis@denix.org>) id 1NZEHt-0004ZG-IV
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 02:59:17 +0100
+	Mon, 25 Jan 2010 03:02:48 +0100
 Received: from gandalf.denix.org ([unknown] [71.255.235.232])
 	by vms173009.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0KWS002PN5ECF291@vms173009.mailsrvcs.net> for
+	2009)) with ESMTPA id <0KWS00H8U5KJS5C1@vms173009.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Sun,
-	24 Jan 2010 19:56:44 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 1C83814AF60; Sun,
-	24 Jan 2010 20:56:36 -0500 (EST)
-Date: Sun, 24 Jan 2010 20:56:36 -0500
+	24 Jan 2010 20:00:20 -0600 (CST)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 3B0CF14AF60; Sun,
+	24 Jan 2010 21:00:19 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100125015636.GA9855@denix.org>
-References: <1264277173.3738.74.camel@mattotaupa.wohnung.familie-menzel.net>
-	<20100124070602.GA8642@denix.org> <hjh7f3$6v0$2@ger.gmane.org>
-MIME-version: 1.0
-In-reply-to: <hjh7f3$6v0$2@ger.gmane.org>
-User-Agent: Mutt/1.5.16 (2007-06-09)
+Date: Sun, 24 Jan 2010 20:59:44 -0500
+Message-id: <1264384785-30439-2-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.6.3.3
+In-reply-to: <20100125015636.GA9855@denix.org>
+References: <20100125015636.GA9855@denix.org>
 X-SA-Exim-Connect-IP: 206.46.173.9
 X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Official policy to list checksums
+Subject: [PATCH 1/2] base.bbclass: pre-create SRC_URI checksums to include in the recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,47 +37,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2010 01:59:18 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 25 Jan 2010 02:02:49 -0000
 
-On Sun, Jan 24, 2010 at 11:29:56AM +0100, Koen Kooi wrote:
-> On 24-01-10 08:06, Denys Dmytriyenko wrote:
-> > On Sat, Jan 23, 2010 at 09:06:13PM +0100, Paul Menzel wrote:
-> >> does [1] still describe the official policy to add checksums? Or is
-> > 
-> > No
-> > 
-> >> putting them into the recipes preferred nowadays?
-> > 
-> > Yes
-> 
-> I think not! The new format:
-> 
-> * is not documented
+Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+---
+ classes/base.bbclass |   18 ++++++++++++++++++
+ 1 files changed, 18 insertions(+), 0 deletions(-)
 
-I think there were plenty of emails describing the new format. Need to put it 
-all in a Wiki page, agree.
-
-> * it has no tools to autogenerate it
-
-Give me few minutes - I'll send something to address this point.
-
-> * has not been agreed on in any way.
-
-Actually, specifying checksums in corresponding recipes was agreed on during 
-the OEDEM in November. Using additional variable flags in base.bbclass was 
-added by Phil, since bitbake cannot handle SHA256 sums in SRC_URI. Although, 
-Richard mentioned he'd like to get it implemented in bitbake at some point:
-http://thread.gmane.org/gmane.comp.sysutils.bitbake.devel/1089/focus=1115
-
-> As an experiment I tried to use it for a branch at work and I
-> *absolutely* hate the workflow needed for the new format.
-
-You should have warned me! :) I thought you completely switched to the new 
-method and liked it... :)
-
+diff --git a/classes/base.bbclass b/classes/base.bbclass
+index 384a67d..8465286 100644
+--- a/classes/base.bbclass
++++ b/classes/base.bbclass
+@@ -151,9 +151,27 @@ def base_chk_file(parser, pn, pv, src_uri, localpath, data):
+         
+         file.write("[%s]\nmd5=%s\nsha256=%s\n\n" % (src_uri, md5data, shadata))
+         file.close()
++
++        from string import maketrans
++        trtable = maketrans("", "")
++        uname = src_uri.split("/")[-1].translate(trtable, "-+._")
++
++        try:
++            ufile = open("%s/%s.sum" % (bb.data.getVar("TMPDIR", data, 1), uname), "wt")
++        except:
++            return False
++
++        if not ufile:
++            raise Exception("Creating %s.sum failed" % uname)
++
++        ufile.write("SRC_URI = \"%s;name=%s\"\nSRC_URI[%s.md5sum] = \"%s\"\nSRC_URI[%s.sha256sum] = \"%s\"\n" % (src_uri, uname, uname, md5data, uname, shadata))
++        ufile.close()
++
+         if not bb.data.getVar("OE_STRICT_CHECKSUMS",data, True):
+             bb.note("This package has no entry in checksums.ini, please add one")
+             bb.note("\n[%s]\nmd5=%s\nsha256=%s" % (src_uri, md5data, shadata))
++            bb.note("This package has no checksums in corresponding recipe, please add")
++            bb.note("SRC_URI = \"%s;name=%s\"\nSRC_URI[%s.md5sum] = \"%s\"\nSRC_URI[%s.sha256sum] = \"%s\"\n" % (src_uri, uname, uname, md5data, uname, shadata))
+             return True
+         else:
+             bb.note("Missing checksum")
 -- 
-Denys
+1.6.3.3
+
 
 
