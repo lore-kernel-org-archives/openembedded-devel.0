@@ -1,38 +1,39 @@
-Received: from mail-yw0-f178.google.com ([209.85.211.178])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NZK8a-0006UE-Hn
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NZKCl-0006j7-Ia for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Jan 2010 09:21:54 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NZKAU-0000Qv-Hk
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 09:17:35 +0100
-Received: by ywh8 with SMTP id 8so956395ywh.3
+	Mon, 25 Jan 2010 09:19:30 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Jan 2010 09:19:30 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jan 2010 00:15:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=+7G+xZrIpJd7vdJoWTUBgVs/LKmm/Qq+SfO4oy+S6vs=;
-	b=cxuYRDSyZqVZ2uQ8+Bmo24nOG5UCN4uC2HlIN8D64Qjbefxus9wDpByZNge38hkiaS
-	VF5+UoqWgDIU84rAHlkbcY3MmAAkK9Jqu+BfrDzPUNQHJZjNMUZEEtW/rPIt8SHoGrR3
-	IZBVvutd/SWD9gxZoivnmxP/yAWWCzW6ISubk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=w2UNLweNsiwf24SLzH036tg3ggGRZwCCK5HM0yG84lidbBFxDpmNrXCPaYDI6tuGrp
-	BuxFQJVibMcajKe/GEO/mhjoGyI4bJVGAhdYuS4BChumwIpZY4ui5rRIc2VNmSmaq+hL
-	QCxMcW9pvYXX6QyAlYYE8wr/eKBBaSadXnlW8=
-MIME-Version: 1.0
-Received: by 10.101.138.20 with SMTP id q20mr7376785ann.160.1264407312124; 
-	Mon, 25 Jan 2010 00:15:12 -0800 (PST)
-In-Reply-To: <20100125081044.GA26355@gmail.com>
-References: <20100125081044.GA26355@gmail.com>
-Date: Mon, 25 Jan 2010 09:15:12 +0100
-Message-ID: <ac9c93b11001250015h1a8c325fk1eb13229924c40b8@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 25 Jan 2010 09:19:30 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.178
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 25 Jan 2010 09:19:07 +0100
+Message-ID: <hjjk5q$rmc$1@ger.gmane.org>
+References: <1264277173.3738.74.camel@mattotaupa.wohnung.familie-menzel.net>	<20100124070602.GA8642@denix.org>
+	<hjh7f3$6v0$2@ger.gmane.org> <20100125015636.GA9855@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100113 Shredder/3.0.2pre
+In-Reply-To: <20100125015636.GA9855@denix.org>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] Remove gcc configure option --enable-target-optspace for powerpc
+Subject: Re: Official policy to list checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,32 +47,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2010 08:17:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 25 Jan 2010 08:21:54 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/1/25 Khem Raj <raj.khem@gmail.com>:
-> Hi
->
-> I have run into a problem where compiling libgcc with -Os for powerpc SPE
-> targets caused some symols like _restgpr_Y_x to be referenced in
-> libgcc_s.so.1 due to gcc generating them for out-of-line prologues which
-> happens with Os. But these symbols are defined in libgcc.a so when linking
-> a shared library which uses libgcc we get errors from linker complaining
-> that DSO is accessing a hidden symbol from libgcc.a which is a static
-> archive.
->
-> I thought we could remove --enable-target-optspace. In general it is only
-> used to compiling the gcc libraries e.g. libgcc libstdc++ etc. in OE
-> context so its not of a much hit on space usage if we let this option go
-> which would mean that these libraries would be compiled with -O2
->
-> I propose to remove this option for all powerpc and we can still leave it
-> in for other architectures.
->
-> Does this sound reasonable ?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-What about just removing the option when building libgcc for ppc ?
+On 25-01-10 02:56, Denys Dmytriyenko wrote:
+> On Sun, Jan 24, 2010 at 11:29:56AM +0100, Koen Kooi wrote:
+>> On 24-01-10 08:06, Denys Dmytriyenko wrote:
+>>> On Sat, Jan 23, 2010 at 09:06:13PM +0100, Paul Menzel wrote:
+>>>> does [1] still describe the official policy to add checksums? Or is
+>>>
+>>> No
+>>>
+>>>> putting them into the recipes preferred nowadays?
+>>>
+>>> Yes
+>>
+>> I think not! The new format:
+>>
+>> * is not documented
+> 
+> I think there were plenty of emails describing the new format. Need to put it 
+> all in a Wiki page, agree.
 
-Frans
+>> * it has no tools to autogenerate it
+> 
+> Give me few minutes - I'll send something to address this point.
+> 
+>> * has not been agreed on in any way.
+> 
+> Actually, specifying checksums in corresponding recipes was agreed on during 
+> the OEDEM in November. Using additional variable flags in base.bbclass was 
+> added by Phil, since bitbake cannot handle SHA256 sums in SRC_URI. Although, 
+> Richard mentioned he'd like to get it implemented in bitbake at some point:
+> http://thread.gmane.org/gmane.comp.sysutils.bitbake.devel/1089/focus=1115
+
+Ah yes, stuff agreed at OEDEM, I see. I also remember that nearly
+everything that was 'agreed' there got dis-agreed on the mailinglist here.
+And I also remember that I said that to be consistent sane-srcrevs
+should cease to exist as well :)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLXVP7MkyGM64RGpERAuV7AJ9ReCKJDujV+1VS0IErq+Ne5sUF/ACdGYID
+3/0DqfPuC8O5KmvQORdsipw=
+=ukSY
+-----END PGP SIGNATURE-----
+
 
 
