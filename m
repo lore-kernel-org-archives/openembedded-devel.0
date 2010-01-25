@@ -1,29 +1,28 @@
-Received: from vms173015pub.verizon.net ([206.46.173.15])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1NZEIH-0004Zt-Bn
+	(envelope-from <holger+oe@freyther.de>) id 1NZF0C-0003iQ-As
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 03:03:12 +0100
-Received: from gandalf.denix.org ([unknown] [71.255.235.232])
-	by vms173015.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0KWS00BQS5KJWH76@vms173015.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sun,
-	24 Jan 2010 20:00:25 -0600 (CST)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 30A0814AF55; Sun,
-	24 Jan 2010 21:00:19 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
+	Mon, 25 Jan 2010 03:48:35 +0100
+Received: from tamarin.localnet (123-192-163-227.dynamic.kbronet.com.tw
+	[123.192.163.227])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 460D01B10C02
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Jan 2010 02:45:11 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 24 Jan 2010 20:59:43 -0500
-Message-id: <1264384785-30439-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.6.3.3
-In-reply-to: <20100125015636.GA9855@denix.org>
-References: <20100125015636.GA9855@denix.org>
-X-SA-Exim-Connect-IP: 206.46.173.15
-X-SA-Exim-Mail-From: denis@denix.org
+Date: Mon, 25 Jan 2010 03:45:51 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <1263888104.2678.15.camel@ubuntu-desktop>
+	<201001241610.24013.holger+oe@freyther.de>
+	<alpine.LFD.2.00.1001241029400.13981@localhost>
+In-Reply-To: <alpine.LFD.2.00.1001241029400.13981@localhost>
+MIME-Version: 1.0
+Message-Id: <201001250345.51424.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 0/2] simplify switch to new SRC_URI-based checksums
+Subject: Re: Bitbake build error on Fedora 12 x86 64-bit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,22 +36,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2010 02:03:13 -0000
+X-List-Received-Date: Mon, 25 Jan 2010 02:48:35 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-The first patch adds the code to pre-generate SRC_URI-based checksums in
-TMPDIR, allowing easy addition of those checksums in the recipe with
-minimal editing.
+On Sunday 24 January 2010 16:34:43 Robert P. J. Day wrote:
 
-The second patch removes the old code to generate missing checksums.ini
-entries - can be applied later, once the switch to the new method is
-complete and proven.
+> > On the other hand I agree totally agree that more testers the
+> > better, but IMO this would also mean that they follow the low volume
+> > bitbake-dev mailinglist, to get information like the svn->git
+> > switch, branches and such?!
+> 
+>   i'm currently updating the bitbake manual (yes, you should be
+> nervous) and i noticed that there is nothing early on about how to
+> *get* bitbake.  so i'm going to add a short section, suggesting first
+> to use the latest official tarball (explaining where to get it),
+> followed by a section for more advanced users on how to check it out,
+> with the appropriate cautions.
 
-Denys Dmytriyenko (2):
-  base.bbclass: pre-create SRC_URI checksums to include in the recipe
-  base.bbclass: don't pre-generate checksums.ini entries any longer
-
- classes/base.bbclass |   23 ++++++++++++++---------
- 1 files changed, 14 insertions(+), 9 deletions(-)
-
+Thanks a lot for doing this update.
 
 
