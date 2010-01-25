@@ -1,40 +1,39 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ew0-f212.google.com ([209.85.219.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NZLi2-0004g1-UM for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 10:58:18 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NZLfm-0007l4-84
+	(envelope-from <andrea.adami@gmail.com>) id 1NZLie-0004hH-Uh
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 10:55:54 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jan 2010 10:55:54 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Mon, 25 Jan 2010 10:58:55 +0100
+Received: by ewy4 with SMTP id 4so3959413ewy.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jan 2010 10:55:54 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 25 Jan 2010 01:56:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=njcOR2jEhxN8hFM4QP5FwCeK6MTeKxy3nahAlKMIFlE=;
+	b=U05ExOCVHow3GrNTNKh4FZdw0LNduBrnSFL0JiIfrJMs86f16AdT1CL6M2Ega0ATJ9
+	xvfhfZjhqacT8+wuOoDBoQ9/c5NYWWXEjGgVg0QxjlBPGV+XN8TsNXGMlZQMY0YqhXnP
+	5hEDJwrO8z5HtsunErHLVtjtXdwhTVzXB+fZY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=kl2S3Eachp3/Yw4LaJeZu2Mz42rMfoTNL5X+kWqUO95iZr7kbL6YEy2nUOynCRvEBr
+	nW0sWYjBaF9DxrFy/mfDDwgJ+dpQh85tFHFo4WQ6ala2v73NVTcVp3bn6L8jHbG5Do2E
+	+euqSkCxNfaoaQrBv/U2+8eERIfwWPYkqsaL8=
+MIME-Version: 1.0
+Received: by 10.213.0.209 with SMTP id 17mr2210435ebc.89.1264413392972; Mon, 
+	25 Jan 2010 01:56:32 -0800 (PST)
+In-Reply-To: <hjinll$1lh$1@ger.gmane.org>
+References: <d1b08f941001241451m316d86ecpa46640e907479c63@mail.gmail.com>
+	<hjinll$1lh$1@ger.gmane.org>
+Date: Mon, 25 Jan 2010 10:56:32 +0100
+Message-ID: <d1b08f941001250156x6bc37cb2j15446495121b2e84@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 25 Jan 2010 10:55:23 +0100
-Message-ID: <hjjpqa$dgo$1@ger.gmane.org>
-References: <1264277173.3738.74.camel@mattotaupa.wohnung.familie-menzel.net>	<20100124070602.GA8642@denix.org>
-	<hjh7f3$6v0$2@ger.gmane.org>	<20100125015636.GA9855@denix.org>
-	<hjjk5q$rmc$1@ger.gmane.org> <20100125084340.GA18489@denix.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100113 Shredder/3.0.2pre
-In-Reply-To: <20100125084340.GA18489@denix.org>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.219.212
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Official policy to list checksums
+Subject: Re: QA: Fixes needed by console-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,83 +47,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2010 09:58:18 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 25 Jan 2010 09:58:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+The matter was introduced here: [oe] Staging - time to end the current mess?
 
-On 25-01-10 09:43, Denys Dmytriyenko wrote:
-> On Mon, Jan 25, 2010 at 09:19:07AM +0100, Koen Kooi wrote:
->>>> * it has no tools to autogenerate it
->>>
->>> Give me few minutes - I'll send something to address this point.
-> 
-> Do you have any feedback on the patch I sent? Does it make things any better?
+http://projects.linuxtogo.org/pipermail/openembedded-devel/2009-November/014333.html
 
-It seems to automate things a bit more, but I haven't tested them yet.
-
-> 
->>>> * has not been agreed on in any way.
->>>
->>> Actually, specifying checksums in corresponding recipes was agreed on during 
->>> the OEDEM in November. Using additional variable flags in base.bbclass was 
->>> added by Phil, since bitbake cannot handle SHA256 sums in SRC_URI. Although, 
->>> Richard mentioned he'd like to get it implemented in bitbake at some point:
->>> http://thread.gmane.org/gmane.comp.sysutils.bitbake.devel/1089/focus=1115
->>
->> Ah yes, stuff agreed at OEDEM, I see. I also remember that nearly
->> everything that was 'agreed' there got dis-agreed on the mailinglist here.
->> And I also remember that I said that to be consistent sane-srcrevs
->> should cease to exist as well :)
-> 
-> This way we won't get anywhere... :) I thought (maybe I'm wrong) everybody 
-> agrees at least with the fact that central checksums.ini is not the best 
-> approach.
-
-It's not the best approach in a perfect world, but with the current
-state of OE it is the best (or least bad) of the options out there.
-
-> Keeping checksums in the metadata inside SRC_URI seemed like a 
-> viable solution.
-
-Yes, but there wasn't any agreement on this. The only thing that came
-out of this is that Phil coded some stuff and committed it.
-
-What started all this was that some people found using checksums.ini too
-hard. We can argue about that, but anyway. Now we seem to end up with a
-system that's actually harder to use (at least without your patches)
-*and* is lacking the most basic docs. It's not in the wiki nor in the
-in-tree docs.
-
-> Are there any fundamental flaws with this method, besides 
-> lacking some tools?
-
-Complete lack of docs, e.g. what does the 'name' do? And why are people
-doing http://foo.com/bar.c;name=tarball?
-
-In ti/staging I've been giving them all unique names. Do I need to do
-that? I 'name' even needed? I don't know and I suspect everyone minus
-Phil doesn't either.
-
-> BTW, I agree with you on the sane-srcrevs topic, if it's any consolation... :)
-
-Good :) I want to be able to 'move' recipes between overlays and having
-the checksums in the recipe itself is a step in the right direction,
-having SRCREVs in the recipes themselves would be even better.
-
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLXWqLMkyGM64RGpERAlHHAJ0ZrH+Q7vBIrxmQNbN1CpdETpRIEgCdGFSM
-HoAqu5kPJ+8AEhruFIEq9Jg=
-=hF0z
------END PGP SIGNATURE-----
-
+Andrea
 
 
