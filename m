@@ -1,28 +1,40 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NZLp7-0006Uj-0K
+	(envelope-from <rpjday@crashcourse.ca>) id 1NZNV4-0007jw-Aj
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 11:05:36 +0100
-Received: from tamarin.localnet (123-192-163-227.dynamic.kbronet.com.tw
-	[123.192.163.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 37A8D1B10C02
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jan 2010 10:02:12 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Mon, 25 Jan 2010 12:53:01 +0100
+Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
+	([174.113.191.234] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NZNSp-0005hD-4u for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Jan 2010 06:50:39 -0500
+Date: Mon, 25 Jan 2010 06:49:36 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Jan 2010 11:02:50 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <4B56384B.10402@irobot.com>
-	<19c1b8a91001211447w4892750et4414587220a70e4b@mail.gmail.com>
-	<4B5A333D.2090400@irobot.com>
-In-Reply-To: <4B5A333D.2090400@irobot.com>
+In-Reply-To: <201001250345.51424.holger+oe@freyther.de>
+Message-ID: <alpine.LFD.2.00.1001250647330.3439@localhost>
+References: <1263888104.2678.15.camel@ubuntu-desktop>
+	<201001241610.24013.holger+oe@freyther.de>
+	<alpine.LFD.2.00.1001241029400.13981@localhost>
+	<201001250345.51424.holger+oe@freyther.de>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
-Message-Id: <201001251102.50572.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] added new recipe for olsrd_0.5.6-r8
+Subject: Re: Bitbake build error on Fedora 12 x86 64-bit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,22 +48,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2010 10:05:36 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-15"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 25 Jan 2010 11:53:01 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Saturday 23 January 2010 00:22:37 Adam Wozniak wrote:
-> Sorry, I've tried and tried, but I can't get send-email to work (network
-> config settings which are completely out of my control).  Please try
-> this attachment.
-> 
+On Mon, 25 Jan 2010, Holger Hans Peter Freyther wrote:
 
-The upstream version number of "olsrd_0.5.6-r8" is a bit unfortunate. Is that 
-revision or release candidate 8? This also means that the generated OE package 
-will be something like olsrd-0.5.6-r8-rX".
+> On Sunday 24 January 2010 16:34:43 Robert P. J. Day wrote:
+>
+> > > On the other hand I agree totally agree that more testers the
+> > > better, but IMO this would also mean that they follow the low
+> > > volume bitbake-dev mailinglist, to get information like the
+> > > svn->git switch, branches and such?!
+> >
+> >   i'm currently updating the bitbake manual (yes, you should be
+> > nervous) and i noticed that there is nothing early on about how to
+> > *get* bitbake.  so i'm going to add a short section, suggesting
+> > first to use the latest official tarball (explaining where to get
+> > it), followed by a section for more advanced users on how to check
+> > it out, with the appropriate cautions.
+>
+> Thanks a lot for doing this update.
 
-In case it is the release version it is probably fine but just a little bit 
-awkward, in case of rc we would have a small problem.
+  still working on it, but a question.  a while back, i observed that
+one of the OE branches (stable/2009?) came with bitbake built in,
+while the other i work with (dev) did not.  or was it the other way
+around?  and there was some confusion as to why the situation would be
+different between the two branches.
+
+  can i document that, no matter what branch one is working with, the
+proper approach is to download bitbake separately and make sure that's
+the one that's being invoked.  (i might add a short side note that
+some branches came with bitbake built in, but users should *not* take
+advantage of that.)
+
+  does that sound reasonable?
+
+rday
+--
+
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
