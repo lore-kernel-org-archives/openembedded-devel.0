@@ -1,36 +1,44 @@
-Received: from mail-iw0-f197.google.com ([209.85.223.197])
+Received: from mail-yw0-f178.google.com ([209.85.211.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NZIbD-0006DS-8w
+	(envelope-from <camelguo@gmail.com>) id 1NZIfa-0007gw-Tq
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 07:39:03 +0100
-Received: by iwn35 with SMTP id 35so1030567iwn.4
+	Mon, 25 Jan 2010 07:43:34 +0100
+Received: by ywh8 with SMTP id 8so916810ywh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Jan 2010 22:36:38 -0800 (PST)
+	Sun, 24 Jan 2010 22:41:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=q/1y8/m7FPmdvANJ6oypc6fAju85wCYhwDJH8+/hc1w=;
-	b=EC2228ENSa93wMXWn8qI7viRTG7uiYZFHWBn2dt/lZ39lGXiZXPjuWLnq0ZibtZ7rm
-	u0s4u+w9IUQJb1mKgYX6gnGvvlORkIDfP7/uyn+dfKtY8k5D9E9tD6/5ZG60w62AmOvn
-	ACEGDddP+JpniHZYl0CM9Yo8BHzA4kikRFQ7g=
+	h=domainkey-signature:received:received:content-type:to:subject
+	:references:date:mime-version:content-transfer-encoding:from
+	:organization:message-id:in-reply-to:user-agent;
+	bh=a2NLCeNcuGITE2fVffdOnmaxUA37TNovRVV3grXGOFY=;
+	b=KJOEVX56lTCCDX/+Cs+S4ynBRIxdGeULSKyPtJj+vfNITmXDKoXqQ9PoUGMXtsTgD6
+	CjF1TmSxrGT3eleqhTvAwwZpw038BvydA77/CpNbTxKPGBJJ7EnmLUd0rXhjItSnF85V
+	FE4AfUJc+0TBKpSzT4s3+5oS6Be9OwBZkjYeU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=peill0k2c8/RHb8ksUamfNLDxhBwNgJUikGx+IX/HMADUI7QNGZwOksXRCFXVO3NhQ
-	0U/qQ7+CptTe//ALPn5XyrzDjoz2cRhSxNXiPmBDD69GqsuyFi5Sn7/HGTD4R8Ul1BSp
-	tKbteYdkD/cSk8fWwPqNbzTbFQTBZarZ4nc1M=
-MIME-Version: 1.0
-Received: by 10.231.151.207 with SMTP id d15mr2508071ibw.44.1264401398769; 
-	Sun, 24 Jan 2010 22:36:38 -0800 (PST)
-In-Reply-To: <op.u60m9axmmn1qzu@guohr-laptop-ubuntu>
-References: <op.u60m9axmmn1qzu@guohr-laptop-ubuntu>
-Date: Sun, 24 Jan 2010 22:36:38 -0800
-Message-ID: <19c1b8a91001242236w53852eb2s8ef6dfbeb0ac57e3@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	h=content-type:to:subject:references:date:mime-version
+	:content-transfer-encoding:from:organization:message-id:in-reply-to
+	:user-agent;
+	b=M1QpXIKWqLefy4C0Y3WQ4PGHmK1nDzyQlb3SxKoAbQznKhNFG3A6Dv19AAi8V75PaW
+	t+QB8+Wi0tyX996djQnkYKQRiQ1whNL4oDEFb8JBlE9tx+Ki1digXD0buPbas6VWrpXH
+	C5mcguXfhRk58tfm/ax1OBhfwJ6LklxojLcxg=
+Received: by 10.101.129.31 with SMTP id g31mr7258520ann.153.1264401669392;
+	Sun, 24 Jan 2010 22:41:09 -0800 (PST)
+Received: from guohr-laptop-ubuntu ([123.162.71.84])
+	by mx.google.com with ESMTPS id 22sm1637772ywh.0.2010.01.24.22.41.05
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 24 Jan 2010 22:41:08 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.197
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <op.u60m9axmmn1qzu@guohr-laptop-ubuntu>
+	<19c1b8a91001242236w53852eb2s8ef6dfbeb0ac57e3@mail.gmail.com>
+Date: Mon, 25 Jan 2010 14:40:58 +0800
+MIME-Version: 1.0
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u62suaqlmn1qzu@guohr-laptop-ubuntu>
+In-Reply-To: <19c1b8a91001242236w53852eb2s8ef6dfbeb0ac57e3@mail.gmail.com>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.211.178
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: linux-titan-sh4-2.6.21: offset to unaligned destination error when compiling linux-titan-sh4 kernel
@@ -47,41 +55,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2010 06:39:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 25 Jan 2010 06:43:34 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: Quoted-Printable
 
-On Sat, Jan 23, 2010 at 6:45 PM, Guo Hongruan <camelguo@gmail.com> wrote:
-> Hi guys:
-> =A0I tried to compile openembedded using the following configuration:
-> MACHINE=3Dtitan
-> DISTRO=3Dmicro
-> LIBC=3Deglibc
-> =A0When compiling linux kernel. I met the lots of errors like below:
-> | =A0 CC =A0 =A0 =A0lib/random32.o
-> | {standard input}: Assembler messages:
-> | {standard input}:460: Error: offset to unaligned destination
-> | make[2]: *** [net/802/psnap.o] Error 1
->
-> Has anyone ever built kernel for titan machine successfully?
+=E5=9C=A8 Mon, 25 Jan 2010 14:36:38 +0800=EF=BC=8CKhem Raj <raj.khem@gma=
+il.com> =E5=86=99=E9=81=93:
 
-I have only tried toolchain builds which worked. Care to provide a preproce=
-ssed
-file in  a   bug report ?
+>>
+>> Has anyone ever built kernel for titan machine successfully?
+> I have only tried toolchain builds which worked. Care to provide a  =
 
->
-> Thanks a lot!
->
-> --
-> Guo Hongruan, Embedded Linux Consultant
-> Skype: camelguo
-> Twitter: camelguo
-> http://www.gulessoft.co
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> preprocessed
+> file in  a   bug report ?
+
+Yes, Of course. Could you give me your local.conf? I have not found a  =
+
+workable setting (MACHINE, DISTRO and LIBC combination) for titan.
+
+Thanks a lot!
+
+-- =
+
+Guo Hongruan, Embedded Linux Consultant
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
 
