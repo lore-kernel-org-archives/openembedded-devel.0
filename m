@@ -1,39 +1,28 @@
-Received: from mail-ew0-f212.google.com ([209.85.219.212])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1NZLie-0004hH-Uh
+	(envelope-from <holger+oe@freyther.de>) id 1NZLp7-0006Uj-0K
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 10:58:55 +0100
-Received: by ewy4 with SMTP id 4so3959413ewy.27
+	Mon, 25 Jan 2010 11:05:36 +0100
+Received: from tamarin.localnet (123-192-163-227.dynamic.kbronet.com.tw
+	[123.192.163.227])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 37A8D1B10C02
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jan 2010 01:56:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=njcOR2jEhxN8hFM4QP5FwCeK6MTeKxy3nahAlKMIFlE=;
-	b=U05ExOCVHow3GrNTNKh4FZdw0LNduBrnSFL0JiIfrJMs86f16AdT1CL6M2Ega0ATJ9
-	xvfhfZjhqacT8+wuOoDBoQ9/c5NYWWXEjGgVg0QxjlBPGV+XN8TsNXGMlZQMY0YqhXnP
-	5hEDJwrO8z5HtsunErHLVtjtXdwhTVzXB+fZY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=kl2S3Eachp3/Yw4LaJeZu2Mz42rMfoTNL5X+kWqUO95iZr7kbL6YEy2nUOynCRvEBr
-	nW0sWYjBaF9DxrFy/mfDDwgJ+dpQh85tFHFo4WQ6ala2v73NVTcVp3bn6L8jHbG5Do2E
-	+euqSkCxNfaoaQrBv/U2+8eERIfwWPYkqsaL8=
-MIME-Version: 1.0
-Received: by 10.213.0.209 with SMTP id 17mr2210435ebc.89.1264413392972; Mon, 
-	25 Jan 2010 01:56:32 -0800 (PST)
-In-Reply-To: <hjinll$1lh$1@ger.gmane.org>
-References: <d1b08f941001241451m316d86ecpa46640e907479c63@mail.gmail.com>
-	<hjinll$1lh$1@ger.gmane.org>
-Date: Mon, 25 Jan 2010 10:56:32 +0100
-Message-ID: <d1b08f941001250156x6bc37cb2j15446495121b2e84@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Mon, 25 Jan 2010 10:02:12 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.212
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+Date: Mon, 25 Jan 2010 11:02:50 +0100
+User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
+References: <4B56384B.10402@irobot.com>
+	<19c1b8a91001211447w4892750et4414587220a70e4b@mail.gmail.com>
+	<4B5A333D.2090400@irobot.com>
+In-Reply-To: <4B5A333D.2090400@irobot.com>
+MIME-Version: 1.0
+Message-Id: <201001251102.50572.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: QA: Fixes needed by console-image
+Subject: Re: [PATCH] added new recipe for olsrd_0.5.6-r8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,13 +36,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2010 09:58:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 25 Jan 2010 10:05:36 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-15"
+Content-Transfer-Encoding: 7bit
 
-The matter was introduced here: [oe] Staging - time to end the current mess?
+On Saturday 23 January 2010 00:22:37 Adam Wozniak wrote:
+> Sorry, I've tried and tried, but I can't get send-email to work (network
+> config settings which are completely out of my control).  Please try
+> this attachment.
+> 
 
-http://projects.linuxtogo.org/pipermail/openembedded-devel/2009-November/014333.html
+The upstream version number of "olsrd_0.5.6-r8" is a bit unfortunate. Is that 
+revision or release candidate 8? This also means that the generated OE package 
+will be something like olsrd-0.5.6-r8-rX".
 
-Andrea
+In case it is the release version it is probably fine but just a little bit 
+awkward, in case of rc we would have a small problem.
 
 
