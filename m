@@ -1,41 +1,39 @@
-Received: from fg-out-1718.google.com ([72.14.220.157])
+Received: from mail-px0-f179.google.com ([209.85.216.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.lippautz@gmail.com>) id 1NZO05-0001hj-9A
+	(envelope-from <eballetbo@gmail.com>) id 1NZOC3-0006KJ-58
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 13:25:17 +0100
-Received: by fg-out-1718.google.com with SMTP id 16so164891fgg.6
+	Mon, 25 Jan 2010 13:37:26 +0100
+Received: by pxi9 with SMTP id 9so2479608pxi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jan 2010 04:22:43 -0800 (PST)
+	Mon, 25 Jan 2010 04:35:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=1PwqVkLsNsglc7bbQlyAUBug/+sIROmWIur/FFNNG14=;
-	b=uxKl1CAXuw5F/cAej3vh4S1Fxg80M8lvZUF/+wX57Jr85DshGTk+RcR6+OD3qXVQkL
-	9TMe4dOAzDUeKCWE0r6l3z05r/eQt6ARfmIsRxpucRv9X9GB+0Ls7AsbscH9HiQV15uI
-	j/NCardvE0Zg4S1AbNds91MLPeS6qoh6BKNmY=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=syYl9Ax2DkbPnckDg0vQiBhWrn0KJYinPItWepzmU34=;
+	b=Ft4T9W3Rt5yWWbjQF7VzKv7FoH24UFtpX/iUBY6L8jAov9UFKVe1RUwtPKhHUwmVLU
+	llX7XDGclblrI/pNljr6YOYLbdiDCEkrZfSSrJt084AXsTvx0D1KIBIRusFe+3td7xNF
+	YsTgoIZq2XFyALUoqNneZlvWn3CzQEPV3hs5w=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=A+rfHMxNvWrkQgFMI/mDXFrJ4odYWFV86YEQmZpVP4/2JLHBGALKqDPYG1egPbT0E0
-	DD8vrZtpgzeOPG+n5XUvQinfQ0YDOeFlzP2djmKQITpZne/YT73C3Ozs5OhSGmMj7qdT
-	2j6IJVXLdCxfSZFw+R7wOyCMRtms2VAXGb+WE=
-Received: by 10.103.125.19 with SMTP id c19mr3305273mun.114.1264422163105;
-	Mon, 25 Jan 2010 04:22:43 -0800 (PST)
-Received: from localhost.localdomain ([188.45.23.202])
-	by mx.google.com with ESMTPS id i5sm20297052mue.25.2010.01.25.04.22.40
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 25 Jan 2010 04:22:42 -0800 (PST)
-From: Michael Lippautz <michael.lippautz@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=BMCKnIEBtF3nC2TZZCmk64K3PF/6Z1olV0yBM1a2n2qJmkVoJLRLXBCZEe5EuRKZrn
+	MGPmRlEVe7S5QHTw6zJJ7Y2h/P9Qm6FNtnupH/G9i/tcxIuqvO5dt5YBnlsn9zo8W1Nv
+	Fr9TvXY58QtjwlIN7VT39lh2CzMG7qEDqZ4jI=
+MIME-Version: 1.0
+Received: by 10.140.180.5 with SMTP id c5mr4648993rvf.270.1264422894708; Mon, 
+	25 Jan 2010 04:34:54 -0800 (PST)
+In-Reply-To: <1264422161-15538-1-git-send-email-michael.lippautz@gmail.com>
+References: <1264422161-15538-1-git-send-email-michael.lippautz@gmail.com>
+Date: Mon, 25 Jan 2010 13:34:54 +0100
+Message-ID: <70c9a9111001250434t784988d1t430800038ce6bc2d@mail.gmail.com>
+From: =?UTF-8?Q?Enric_Balletb=C3=B2_i_Serra?= <eballetbo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Jan 2010 13:22:41 +0100
-Message-Id: <1264422161-15538-1-git-send-email-michael.lippautz@gmail.com>
-X-Mailer: git-send-email 1.6.4.4
-In-Reply-To: <n>
-References: <n>
-X-SA-Exim-Connect-IP: 72.14.220.157
-X-SA-Exim-Mail-From: michael.lippautz@gmail.com
+X-SA-Exim-Connect-IP: 209.85.216.179
+X-SA-Exim-Mail-From: eballetbo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] libertas-firmware: Add recipe for libertas firmware.
+Subject: Re: [PATCH] libertas-firmware: Add recipe for libertas firmware.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,41 +47,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2010 12:25:17 -0000
+X-List-Received-Date: Mon, 25 Jan 2010 12:37:26 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-* Libertas firmware is used by kernel module libertas_sdio, which
-  enables wifi on IGEPv2 boards.
----
- .../libertas-firmware/libertas-firmware_9.70.3.bb  |   18 ++++++++++++++++++
- 1 files changed, 18 insertions(+), 0 deletions(-)
- create mode 100644 recipes/libertas-firmware/libertas-firmware_9.70.3.bb
+Hello,
 
-diff --git a/recipes/libertas-firmware/libertas-firmware_9.70.3.bb b/recipes/libertas-firmware/libertas-firmware_9.70.3.bb
-new file mode 100644
-index 0000000..022115d
---- /dev/null
-+++ b/recipes/libertas-firmware/libertas-firmware_9.70.3.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "Firmware for the libertas_sdio kernel module used by IGEPv2 board"
-+LICENSE = "GPL"
-+PR = "r0"
-+
-+SRC_URI = "http://extranet.marvell.com/drivers/files/SD-8686-LINUX26-SYSKT-9.70.3.p24-26409.P45-GPL.zip;name=firmware"
-+SRC_URI[firmware.md5sum] = "f43e3f4d7fd913e3063309f4cdacc0f7"
-+SRC_URI[firmware.sha256sum] = "b1f954d6beef91ad1713e6fe505fa7fe66fb6bbcb8e6d18cf700b4374cb358b8"
-+
-+S = "${WORKDIR}"
-+
-+do_install() {
-+    tar -xvf ${S}/SD-8686-FEDORA26FC6-SYSKT-GPL-9.70.3.p24-26409.P45.tar
-+    install -d ${D}/${base_libdir}/firmware
-+    install -m 0644 ${S}/FwImage/sd8686.bin ${D}/${base_libdir}/firmware/
-+    install -m 0644 ${S}/FwImage/helper_sd.bin ${D}/${base_libdir}/firmware/sd8686_helper.bin
-+}
-+
-+FILES_${PN} = "${base_libdir}/firmware/*"
--- 
-1.6.4.4
+I think similar recipe exist yet
+(recipes/firmwares/marvell-sdio-fw_9.70.3-p37.bb) so why not use this
+?
 
+Regards,
+
+Enric
+
+2010/1/25 Michael Lippautz <michael.lippautz@gmail.com>:
+> * Libertas firmware is used by kernel module libertas_sdio, which
+> =C2=A0enables wifi on IGEPv2 boards.
+> ---
+> =C2=A0.../libertas-firmware/libertas-firmware_9.70.3.bb =C2=A0| =C2=A0 18=
+ ++++++++++++++++++
+> =C2=A01 files changed, 18 insertions(+), 0 deletions(-)
+> =C2=A0create mode 100644 recipes/libertas-firmware/libertas-firmware_9.70=
+.3.bb
+>
+> diff --git a/recipes/libertas-firmware/libertas-firmware_9.70.3.bb b/reci=
+pes/libertas-firmware/libertas-firmware_9.70.3.bb
+> new file mode 100644
+> index 0000000..022115d
+> --- /dev/null
+> +++ b/recipes/libertas-firmware/libertas-firmware_9.70.3.bb
+> @@ -0,0 +1,18 @@
+> +DESCRIPTION =3D "Firmware for the libertas_sdio kernel module used by IG=
+EPv2 board"
+> +LICENSE =3D "GPL"
+> +PR =3D "r0"
+> +
+> +SRC_URI =3D "http://extranet.marvell.com/drivers/files/SD-8686-LINUX26-S=
+YSKT-9.70.3.p24-26409.P45-GPL.zip;name=3Dfirmware"
+> +SRC_URI[firmware.md5sum] =3D "f43e3f4d7fd913e3063309f4cdacc0f7"
+> +SRC_URI[firmware.sha256sum] =3D "b1f954d6beef91ad1713e6fe505fa7fe66fb6bb=
+cb8e6d18cf700b4374cb358b8"
+> +
+> +S =3D "${WORKDIR}"
+> +
+> +do_install() {
+> + =C2=A0 =C2=A0tar -xvf ${S}/SD-8686-FEDORA26FC6-SYSKT-GPL-9.70.3.p24-264=
+09.P45.tar
+> + =C2=A0 =C2=A0install -d ${D}/${base_libdir}/firmware
+> + =C2=A0 =C2=A0install -m 0644 ${S}/FwImage/sd8686.bin ${D}/${base_libdir=
+}/firmware/
+> + =C2=A0 =C2=A0install -m 0644 ${S}/FwImage/helper_sd.bin ${D}/${base_lib=
+dir}/firmware/sd8686_helper.bin
+> +}
+> +
+> +FILES_${PN} =3D "${base_libdir}/firmware/*"
+> --
+> 1.6.4.4
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
