@@ -1,36 +1,36 @@
 Received: from mail-fx0-f212.google.com ([209.85.220.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1Na6oS-0006Rk-Mq
+	(envelope-from <dp@xora.org.uk>) id 1Na6oV-0006Ro-MY
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Jan 2010 13:16:03 +0100
-Received: by fxm4 with SMTP id 4so5758082fxm.12
+	Wed, 27 Jan 2010 13:16:06 +0100
+Received: by fxm4 with SMTP id 4so5758119fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jan 2010 04:13:39 -0800 (PST)
-Received: by 10.223.143.68 with SMTP id t4mr9876318fau.98.1264594418959;
-	Wed, 27 Jan 2010 04:13:38 -0800 (PST)
+	Wed, 27 Jan 2010 04:13:42 -0800 (PST)
+Received: by 10.223.5.23 with SMTP id 23mr9936270fat.53.1264594421475;
+	Wed, 27 Jan 2010 04:13:41 -0800 (PST)
 Received: from xora-build.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
 	[188.220.34.37])
-	by mx.google.com with ESMTPS id g28sm9409244fkg.38.2010.01.27.04.13.36
+	by mx.google.com with ESMTPS id d13sm9457072fka.47.2010.01.27.04.13.39
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 27 Jan 2010 04:13:37 -0800 (PST)
+	Wed, 27 Jan 2010 04:13:40 -0800 (PST)
 Received: by xora-build.xora.org.uk (Postfix, from userid 500)
-	id 4F7E3472FF; Sat, 23 Jan 2010 12:39:57 +0000 (GMT)
-Date: Sat, 23 Jan 2010 12:39:57 +0000
+	id 4A39F41402; Mon, 25 Jan 2010 08:52:46 +0000 (GMT)
+Date: Mon, 25 Jan 2010 08:52:46 +0000
 From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100123123957.GA2545@xora-build.xora.org.uk>
-References: <1263888104.2678.15.camel@ubuntu-desktop>
-	<1263888546.2678.17.camel@ubuntu-desktop>
-	<4B55FC07.3080504@paulwilsonconsulting.com>
-	<C305642D-75E5-4B97-8A14-65BE8A867E53@mac.com>
+Message-ID: <20100125085246.GA2670@xora-build.xora.org.uk>
+References: <1264277173.3738.74.camel@mattotaupa.wohnung.familie-menzel.net>
+	<20100124070602.GA8642@denix.org> <hjh7f3$6v0$2@ger.gmane.org>
+	<20100125015636.GA9855@denix.org> <hjjk5q$rmc$1@ger.gmane.org>
+	<20100125084340.GA18489@denix.org>
 MIME-Version: 1.0
-In-Reply-To: <C305642D-75E5-4B97-8A14-65BE8A867E53@mac.com>
+In-Reply-To: <20100125084340.GA18489@denix.org>
 User-Agent: Mutt/1.5.20 (2009-08-17)
 X-SA-Exim-Connect-IP: 209.85.220.212
 X-SA-Exim-Mail-From: dp@xora.org.uk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Bitbake build error on Fedora 12 x86 64-bit
+Subject: Re: Official policy to list checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,35 +44,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jan 2010 12:16:03 -0000
+X-List-Received-Date: Wed, 27 Jan 2010 12:16:07 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Sat, Jan 23, 2010 at 03:16:04PM +0400, Elvis Dowson wrote:
-> Hi,
->                   I get the following error when attempting to build overo on Fedora 12 x86 64-bit version. 
-> 
-> Can you tell me how you can resolve this?
-> 
-> bitbake omap3-console-image
-> 
-> Traceback (most recent call last):
->   File "/tool/overo-oe/bitbake/bin/bitbake", line 143, in <module>
->     main()
->   File "/tool/overo-oe/bitbake/bin/bitbake", line 123, in main
->     cooker.parseConfiguration()
->   File "/tool/overo-oe/bitbake/lib/bb/cooker.py", line 68, in parseConfiguration
->     self.parseConfigurationFile( os.path.join( "conf", "bitbake.conf" ) )
->   File "/tool/overo-oe/bitbake/lib/bb/cooker.py", line 404, in parseConfigurationFile
->     bb.event.fire(bb.event.ConfigParsed(self.configuration.data))
->   File "/tool/overo-oe/bitbake/lib/bb/event.py", line 67, in fire
->     if tmpHandler(event) == Handled:
->   File "tmpHandler(e)", line 4, in tmpHandler
->   File "<bb>", line 18, in check_sanity
-> NameError: global name 'os' is not defined
-> 
+On Mon, Jan 25, 2010 at 03:43:40AM -0500, Denys Dmytriyenko wrote:
+> This way we won't get anywhere... :) I thought (maybe I'm wrong) everybody 
+> agrees at least with the fact that central checksums.ini is not the best 
+> approach. Keeping checksums in the metadata inside SRC_URI seemed like a 
+> viable solution. Are there any fundamental flaws with this method, besides 
+> lacking some tools?
 
-That is almost certainly caused by not using the latest bitbake.
+I dont think there is any fundamental flaws, but there is still quite
+a lot of cleanup work. Patches like
+
+http://www.xora.org.uk/cgi-bin/cgit.cgi/openembedded/commit/?h=xora/gnome-update&id=d2074190e711eb70a0bd26d2ac5b89b4988044b5
+
+Will need to be applied in some places.
 
 Graeme
 
