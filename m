@@ -1,38 +1,38 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-yw0-f178.google.com ([209.85.211.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NZK6j-0006Nj-LL for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 09:15:40 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NZK4T-0007G8-A6
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NZK8a-0006UE-Hn
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 09:13:17 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jan 2010 09:13:17 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	Mon, 25 Jan 2010 09:17:35 +0100
+Received: by ywh8 with SMTP id 8so956395ywh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jan 2010 09:13:17 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 25 Jan 2010 00:15:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=+7G+xZrIpJd7vdJoWTUBgVs/LKmm/Qq+SfO4oy+S6vs=;
+	b=cxuYRDSyZqVZ2uQ8+Bmo24nOG5UCN4uC2HlIN8D64Qjbefxus9wDpByZNge38hkiaS
+	VF5+UoqWgDIU84rAHlkbcY3MmAAkK9Jqu+BfrDzPUNQHJZjNMUZEEtW/rPIt8SHoGrR3
+	IZBVvutd/SWD9gxZoivnmxP/yAWWCzW6ISubk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=w2UNLweNsiwf24SLzH036tg3ggGRZwCCK5HM0yG84lidbBFxDpmNrXCPaYDI6tuGrp
+	BuxFQJVibMcajKe/GEO/mhjoGyI4bJVGAhdYuS4BChumwIpZY4ui5rRIc2VNmSmaq+hL
+	QCxMcW9pvYXX6QyAlYYE8wr/eKBBaSadXnlW8=
+MIME-Version: 1.0
+Received: by 10.101.138.20 with SMTP id q20mr7376785ann.160.1264407312124; 
+	Mon, 25 Jan 2010 00:15:12 -0800 (PST)
+In-Reply-To: <20100125081044.GA26355@gmail.com>
+References: <20100125081044.GA26355@gmail.com>
+Date: Mon, 25 Jan 2010 09:15:12 +0100
+Message-ID: <ac9c93b11001250015h1a8c325fk1eb13229924c40b8@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 25 Jan 2010 09:12:48 +0100
-Message-ID: <hjjjq0$r8l$1@ger.gmane.org>
-References: <1264356995.3663.11.camel@mattotaupa>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100113 Shredder/3.0.2pre
-In-Reply-To: <1264356995.3663.11.camel@mattotaupa>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.211.178
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [server] Which Patchwork do we run?
+Subject: Re: [RFC] Remove gcc configure option --enable-target-optspace for powerpc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,104 +46,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2010 08:15:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 25 Jan 2010 08:17:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+2010/1/25 Khem Raj <raj.khem@gmail.com>:
+> Hi
+>
+> I have run into a problem where compiling libgcc with -Os for powerpc SPE
+> targets caused some symols like _restgpr_Y_x to be referenced in
+> libgcc_s.so.1 due to gcc generating them for out-of-line prologues which
+> happens with Os. But these symbols are defined in libgcc.a so when linking
+> a shared library which uses libgcc we get errors from linker complaining
+> that DSO is accessing a hidden symbol from libgcc.a which is a static
+> archive.
+>
+> I thought we could remove --enable-target-optspace. In general it is only
+> used to compiling the gcc libraries e.g. libgcc libstdc++ etc. in OE
+> context so its not of a much hit on space usage if we let this option go
+> which would mean that these libraries would be compiled with -O2
+>
+> I propose to remove this option for all powerpc and we can still leave it
+> in for other architectures.
+>
+> Does this sound reasonable ?
 
-On 24-01-10 19:16, Paul Menzel wrote:
-> Dear OE administrators,
-> 
-> 
-> before I want to contact the Patchwork guys about some issues I am
-> seeing, what version do we run.
+What about just removing the option when building libgcc for ppc ?
 
-Yesterday we were running this:
-
-- From e7b2910d415f9bbba3cd7b7ab1b720bce54a86c6 Mon Sep 17 00:00:00 2001
-From: Jeremy Kerr <jk@ozlabs.org>
-Date: Fri, 27 Feb 2009 17:31:02 +1100
-Subject: [PATCH] docs: remove completed todo items
-
-And now we are running:
-
-- From d5edf740c9c2c31fa60c757aa8d66e1dedbab74a Mon Sep 17 00:00:00 2001
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-Date: Sun, 24 Jan 2010 21:06:57 +0100
-Subject: [PATCH] pwclient get: fix for handling messages encoded in UTF-8
-
-regards,
-
-Koen
-
-
-> 
-> It does not seem to be up to date judging from the differences in
-> `pwclient`. 
-> 
->         $ diff -u patchwork/apps/patchwork/bin/pwclient /usr/local/bin/pwclient 
->         --- patchwork/apps/patchwork/bin/pwclient	2010-01-24 19:12:26.000000000 +0100
->         +++ /usr/local/bin/pwclient	2010-01-23 22:30:53.000000000 +0100
->         @@ -285,14 +285,8 @@
->              if not success:
->                  sys.stderr.write("Patch not updated\n")
->          
->         -def patch_id_from_hash(rpc, project, hash):
->         -    try:
->         -        patch = rpc.patch_get_by_project_hash(project, hash)
->         -    except xmlrpclib.Fault:
->         -        # the server may not have the newer patch_get_by_project_hash function,
->         -        # so fall back to hash-only.
->         -        patch = rpc.patch_get_by_hash(hash)
->         -
->         +def patch_id_from_hash(rpc, hash):
->         +    patch = rpc.patch_get_by_hash(hash)
->              if patch == {}:
->                  return None
->          
->         @@ -388,9 +382,9 @@
->          
->              patch_id = None
->              if hash_str:
->         -        patch_id = patch_id_from_hash(rpc, project_str, hash_str)
->         +        patch_id = patch_id_from_hash(rpc, hash_str)
->                  if patch_id is None:
->         -            sys.stderr.write("No patch has the hash provided\n")
->         +            sys.stderr.write("No patch has the hash provided")
->                      sys.exit(1)
->          
->          
->         @@ -414,7 +408,7 @@
->          
->                  s = rpc.patch_get_mbox(patch_id)
->                  if len(s) > 0:
->         -            print unicode(s).encode("utf-8")
->         +            print s
->          
->              elif action == 'get' or action == 'save':
->                  try:
-> 
-> 
-> Thanks a lot,
-> 
-> Paul
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLXVJ/MkyGM64RGpERAqbIAKCR8HLXrSEbA6lnyjF4DTGNsbaIXwCfW1QR
-x47sBzhJC6hqkSdVntpHmf0=
-=26tU
------END PGP SIGNATURE-----
-
+Frans
 
 
