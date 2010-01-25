@@ -1,34 +1,28 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NZQ5K-0005E4-3O
+	(envelope-from <Sebastian@SSpaeth.de>) id 1NZQV0-0008RY-Cp
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 15:38:37 +0100
-Received: from cpe00e0b8e80755-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.244.198] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NZQ34-000250-LJ for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 09:36:14 -0500
-Date: Mon, 25 Jan 2010 09:35:20 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+	Mon, 25 Jan 2010 16:05:09 +0100
+Received: from homiemail-a13.g.dreamhost.com (caiajhbdcahe.dreamhost.com
+	[208.97.132.74])
+	by hapkido.dreamhost.com (Postfix) with ESMTP id 0FFA417C1B7
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Jan 2010 07:02:46 -0800 (PST)
+Received: from sspaeth.de (unknown [84.55.198.58])
+	by homiemail-a13.g.dreamhost.com (Postfix) with ESMTPA id D18D86A806F; 
+	Mon, 25 Jan 2010 07:02:38 -0800 (PST)
+Received: by sspaeth.de (sSMTP sendmail emulation);
+	Mon, 25 Jan 2010 16:02:35 +0100
+From: "Sebastian Spaeth" <Sebastian@SSpaeth.de>
+To: openembedded-devel@lists.openembedded.org,
+	Openembedded Discussion <openembedded-devel@lists.openembedded.org>
 In-Reply-To: <BAY127-W22F0F525D60D5F6AD43D37D85F0@phx.gbl>
-Message-ID: <alpine.LFD.2.00.1001250935080.2587@localhost>
 References: <BAY127-W22F0F525D60D5F6AD43D37D85F0@phx.gbl>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
+Date: Mon, 25 Jan 2010 16:02:34 +0100
+Message-ID: <87aaw22po5.fsf@SSpaeth.de>
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+X-SA-Exim-Connect-IP: 66.33.216.122
+X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Erorr in bitbaking console-image
@@ -45,32 +39,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2010 14:38:37 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Mon, 25 Jan 2010 15:05:09 -0000
+Content-Type: text/plain; charset=us-ascii
 
-On Mon, 25 Jan 2010, saleh usman wrote:
+On Mon, 25 Jan 2010 19:25:09 +0500, saleh usman <salehusman@hotmail.com> wrote:
 
->
-> Hi I am building console-image but I am getting error while ding this.Terminal window  is looking like below.
->
-> [saleh@localhost ~]$ export PATH=/oe/bitbake/bin:$PATH
-> [saleh@localhost ~]$ export BBPATH=/oe/build:/oe/openembedded:/oe/ossie_collection
 > [saleh@localhost ~]$ bitbake console-iamge
-> NOTE: Handling BitBake files: | (7648/7648) [100 %]
-> NOTE: Parsing finished. 7041 cached, 300 parsed, 307 skipped, 0 masked.
-> ERROR: Nothing PROVIDES 'console-iamge'
-                                   ^^^^^
+> Plz help me in removing this error.
 
-rday
---
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+Oh come on. Why don't you start checking your commands for obvious typos
+for a start.
 
 
