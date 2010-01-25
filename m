@@ -1,37 +1,36 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1NZNV4-0007jw-Aj
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NZNtz-0003Kl-QQ for openembedded-devel@lists.openembedded.org;
+	Mon, 25 Jan 2010 13:18:46 +0100
+Received: from list by lo.gmane.org with local (Exim 4.50) id 1NZNrj-0002DS-Oo
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 12:53:01 +0100
-Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
-	([174.113.191.234] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1NZNSp-0005hD-4u for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 06:50:39 -0500
-Date: Mon, 25 Jan 2010 06:49:36 -0500 (EST)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost
+	Mon, 25 Jan 2010 13:16:23 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Jan 2010 13:16:23 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Jan 2010 13:16:23 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201001250345.51424.holger+oe@freyther.de>
-Message-ID: <alpine.LFD.2.00.1001250647330.3439@localhost>
-References: <1263888104.2678.15.camel@ubuntu-desktop>
-	<201001241610.24013.holger+oe@freyther.de>
-	<alpine.LFD.2.00.1001241029400.13981@localhost>
-	<201001250345.51424.holger+oe@freyther.de>
-User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 25 Jan 2010 13:15:54 +0100
+Message-ID: <hjk21o$8m0$1@ger.gmane.org>
+References: <1263888104.2678.15.camel@ubuntu-desktop>	<201001241610.24013.holger+oe@freyther.de>	<alpine.LFD.2.00.1001241029400.13981@localhost>	<201001250345.51424.holger+oe@freyther.de>
+	<alpine.LFD.2.00.1001250647330.3439@localhost>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100113 Shredder/3.0.2pre
+In-Reply-To: <alpine.LFD.2.00.1001250647330.3439@localhost>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Bitbake build error on Fedora 12 x86 64-bit
@@ -48,52 +47,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2010 11:53:01 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Mon, 25 Jan 2010 12:18:48 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, 25 Jan 2010, Holger Hans Peter Freyther wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> On Sunday 24 January 2010 16:34:43 Robert P. J. Day wrote:
->
-> > > On the other hand I agree totally agree that more testers the
-> > > better, but IMO this would also mean that they follow the low
-> > > volume bitbake-dev mailinglist, to get information like the
-> > > svn->git switch, branches and such?!
-> >
-> >   i'm currently updating the bitbake manual (yes, you should be
-> > nervous) and i noticed that there is nothing early on about how to
-> > *get* bitbake.  so i'm going to add a short section, suggesting
-> > first to use the latest official tarball (explaining where to get
-> > it), followed by a section for more advanced users on how to check
-> > it out, with the appropriate cautions.
->
-> Thanks a lot for doing this update.
+On 25-01-10 12:49, Robert P. J. Day wrote:
+> On Mon, 25 Jan 2010, Holger Hans Peter Freyther wrote:
+> 
+>> On Sunday 24 January 2010 16:34:43 Robert P. J. Day wrote:
+>>
+>>>> On the other hand I agree totally agree that more testers the
+>>>> better, but IMO this would also mean that they follow the low
+>>>> volume bitbake-dev mailinglist, to get information like the
+>>>> svn->git switch, branches and such?!
+>>>
+>>>   i'm currently updating the bitbake manual (yes, you should be
+>>> nervous) and i noticed that there is nothing early on about how to
+>>> *get* bitbake.  so i'm going to add a short section, suggesting
+>>> first to use the latest official tarball (explaining where to get
+>>> it), followed by a section for more advanced users on how to check
+>>> it out, with the appropriate cautions.
+>>
+>> Thanks a lot for doing this update.
+> 
+>   still working on it, but a question.  a while back, i observed that
+> one of the OE branches (stable/2009?) came with bitbake built in,
+> while the other i work with (dev) did not.  or was it the other way
+> around?  and there was some confusion as to why the situation would be
+> different between the two branches.
+> 
+>   can i document that, no matter what branch one is working with, the
+> proper approach is to download bitbake separately and make sure that's
+> the one that's being invoked.  (i might add a short side note that
+> some branches came with bitbake built in, but users should *not* take
+> advantage of that.)
+> 
+>   does that sound reasonable?
 
-  still working on it, but a question.  a while back, i observed that
-one of the OE branches (stable/2009?) came with bitbake built in,
-while the other i work with (dev) did not.  or was it the other way
-around?  and there was some confusion as to why the situation would be
-different between the two branches.
+*If* is has bitbake builtin, users should use that one, as it is certain
+that bitbake will match the metadata. You can opt to choose to install a
+bitbake yourself, but then it's up to you to make sure bitbake and OE match.
+Since stable/2009 is a long term branch we decided to put bitbake in
+there to remove at least on point of failure.
 
-  can i document that, no matter what branch one is working with, the
-proper approach is to download bitbake separately and make sure that's
-the one that's being invoked.  (i might add a short side note that
-some branches came with bitbake built in, but users should *not* take
-advantage of that.)
+regards,
 
-  does that sound reasonable?
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-rday
---
+iD8DBQFLXYt5MkyGM64RGpERAjcZAJ9/EskJ5wwW6yvdkzOXlRBCerbYyACfdOM4
+HmGTgPTWrbAexAZv9zpXhqI=
+=Tz1I
+-----END PGP SIGNATURE-----
 
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
 
 
