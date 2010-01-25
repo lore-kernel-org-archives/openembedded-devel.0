@@ -1,28 +1,29 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from vms173003pub.verizon.net ([206.46.173.3])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NZF0C-0003iQ-As
+	(envelope-from <denis@denix.org>) id 1NZFES-00047o-MQ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 25 Jan 2010 03:48:35 +0100
-Received: from tamarin.localnet (123-192-163-227.dynamic.kbronet.com.tw
-	[123.192.163.227])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 460D01B10C02
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Jan 2010 02:45:11 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Mon, 25 Jan 2010 04:03:19 +0100
+Received: from gandalf.denix.org ([unknown] [71.255.235.232])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0KWS00HAD5KJBRM4@vms173003.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	24 Jan 2010 20:00:32 -0600 (CST)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 3CF9614AF64; Sun,
+	24 Jan 2010 21:00:19 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Jan 2010 03:45:51 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <1263888104.2678.15.camel@ubuntu-desktop>
-	<201001241610.24013.holger+oe@freyther.de>
-	<alpine.LFD.2.00.1001241029400.13981@localhost>
-In-Reply-To: <alpine.LFD.2.00.1001241029400.13981@localhost>
-MIME-Version: 1.0
-Message-Id: <201001250345.51424.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Date: Sun, 24 Jan 2010 20:59:45 -0500
+Message-id: <1264384785-30439-3-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.6.3.3
+In-reply-to: <20100125015636.GA9855@denix.org>
+References: <20100125015636.GA9855@denix.org>
+X-SA-Exim-Connect-IP: 206.46.173.3
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Bitbake build error on Fedora 12 x86 64-bit
+Subject: [PATCH 2/2] base.bbclass: don't pre-generate checksums.ini entries any longer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,25 +37,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Jan 2010 02:48:35 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 25 Jan 2010 03:03:19 -0000
 
-On Sunday 24 January 2010 16:34:43 Robert P. J. Day wrote:
+Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+---
+ classes/base.bbclass |   15 +--------------
+ 1 files changed, 1 insertions(+), 14 deletions(-)
 
-> > On the other hand I agree totally agree that more testers the
-> > better, but IMO this would also mean that they follow the low volume
-> > bitbake-dev mailinglist, to get information like the svn->git
-> > switch, branches and such?!
-> 
->   i'm currently updating the bitbake manual (yes, you should be
-> nervous) and i noticed that there is nothing early on about how to
-> *get* bitbake.  so i'm going to add a short section, suggesting first
-> to use the latest official tarball (explaining where to get it),
-> followed by a section for more advanced users on how to check it out,
-> with the appropriate cautions.
+diff --git a/classes/base.bbclass b/classes/base.bbclass
+index 8465286..8e14636 100644
+--- a/classes/base.bbclass
++++ b/classes/base.bbclass
+@@ -140,18 +140,7 @@ def base_chk_file(parser, pn, pv, src_uri, localpath, data):
+     except OSError:
+         raise Exception("Executing shasum failed")
+ 
+-    if no_checksum == True:	# we do not have conf/checksums.ini entry
+-        try:
+-            file = open("%s/checksums.ini" % bb.data.getVar("TMPDIR", data, 1), "a")
+-        except:
+-            return False
+-
+-        if not file:
+-            raise Exception("Creating checksums.ini failed")
+-        
+-        file.write("[%s]\nmd5=%s\nsha256=%s\n\n" % (src_uri, md5data, shadata))
+-        file.close()
+-
++    if no_checksum == True:	# we do not have SRC_URI checksums
+         from string import maketrans
+         trtable = maketrans("", "")
+         uname = src_uri.split("/")[-1].translate(trtable, "-+._")
+@@ -168,8 +157,6 @@ def base_chk_file(parser, pn, pv, src_uri, localpath, data):
+         ufile.close()
+ 
+         if not bb.data.getVar("OE_STRICT_CHECKSUMS",data, True):
+-            bb.note("This package has no entry in checksums.ini, please add one")
+-            bb.note("\n[%s]\nmd5=%s\nsha256=%s" % (src_uri, md5data, shadata))
+             bb.note("This package has no checksums in corresponding recipe, please add")
+             bb.note("SRC_URI = \"%s;name=%s\"\nSRC_URI[%s.md5sum] = \"%s\"\nSRC_URI[%s.sha256sum] = \"%s\"\n" % (src_uri, uname, uname, md5data, uname, shadata))
+             return True
+-- 
+1.6.3.3
 
-Thanks a lot for doing this update.
 
 
