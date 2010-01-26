@@ -1,42 +1,40 @@
-Received: from mail-pz0-f192.google.com ([209.85.222.192])
+Received: from mail-gx0-f215.google.com ([209.85.217.215])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1NZsp4-0007cV-Bc
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NZtIk-0004f8-AE
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Jan 2010 22:19:47 +0100
-Received: by pzk30 with SMTP id 30so3724671pzk.24
+	Tue, 26 Jan 2010 22:50:25 +0100
+Received: by gxk7 with SMTP id 7so6217059gxk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jan 2010 13:17:20 -0800 (PST)
+	Tue, 26 Jan 2010 13:48:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to
-	:content-type; bh=gSdaLYUAO6dIc/oGiWnDlBAIeTuZRDy5/PbiQU9tViE=;
-	b=nToVUEYo25B45hAAoGcEwSXwHGMCObrn+mlo2DVn/MJ51yFp5lqyiJukg4SyLdMPLL
-	5vuo6GdOY3QQ9ewjWWHZtuiIAk5MfRmN4RmDO2u0oaGdu9SZChq0IlN+ADvSO7cNPaED
-	55Sf/pNU9xfD+RnxCRH6tknIW2zumWYkLHYGQ=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=FRkgqWig+S32ozWmI/j64uHnXxpUKjGQiiCXhnZO6V0=;
+	b=orhzXcLf9jJ0COBj/25XVhnrbvp0P5kGL1P+AkBGNpu4y4aUSLXBG1x9IRMiCvZXJd
+	uhNpj6RgcF2enTKHVx3vhLBpiPWM4XU1CIudac//6FibCo6+2P9C1H+VOC/ccUmpXCae
+	37wOwvyqmXmFMbgnUVALOS6ytp5zPVypMiPmQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=i+xzbxqQa9KYa0G9EOEQSU42fcyj9JVUI4qq1TqP8wqpRIqZlZGXJmFefBxVVlMh8w
-	u1CpGGSx7nvlQidcfZ5tD0c0eH8s7tZmUUxOIoJomCAfTKA30nWfvBlmrebKl5Sd5dCV
-	bwpUDs3riwlA5lAWodpwizecADnULW2N1fmuM=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=U6U6lPZNlrH4FXs8TOP1G1Gn0SXaMkFnYtUBexmLpt/321iVhYTFhKhDYyew3vJB0Z
+	UiJ0qqsyD35KZKrIYLyiUIQjfMa1VhDZvqK2UxY7HJWJz4EJzzNkRpKazPPvHWXPS/G2
+	m4AU8OSItUuq4iYJM37BcLgNFxlY/pCk+FjXo=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.143.21.9 with SMTP id y9mr5826898wfi.229.1264540640157; Tue, 
-	26 Jan 2010 13:17:20 -0800 (PST)
-In-Reply-To: <201001241148.25185.holger+oe@freyther.de>
-References: <1263931267-18470-1-git-send-email-clarson@mvista.com> 
-	<201001241148.25185.holger+oe@freyther.de>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 26 Jan 2010 14:17:00 -0700
-X-Google-Sender-Auth: 20066277ee312c86
-Message-ID: <b6ebd0a51001261317l2b3d4332ncd88f1cc555ea7c0@mail.gmail.com>
+Received: by 10.100.244.21 with SMTP id r21mr10856375anh.92.1264542479940; 
+	Tue, 26 Jan 2010 13:47:59 -0800 (PST)
+In-Reply-To: <d1b08f941001230513j5c017493s19838533588f33bc@mail.gmail.com>
+References: <ac9c93b11001230431s6a9dc637y370ad9999d82c83@mail.gmail.com>
+	<d1b08f941001230513j5c017493s19838533588f33bc@mail.gmail.com>
+Date: Tue, 26 Jan 2010 22:47:59 +0100
+Message-ID: <ac9c93b11001261347x7a5f5bc3h9651448f9e9b0b49@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.222.192
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 209.85.217.215
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] base.bbclass: add 'any' and 'all' functions.
+Subject: Re: packaged staging fails in do_deploy for kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,32 +48,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jan 2010 21:19:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 26 Jan 2010 21:50:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jan 24, 2010 at 3:48 AM, Holger Hans Peter Freyther <
-holger+oe@freyther.de <holger%2Boe@freyther.de>> wrote:
+2010/1/23 Andrea Adami <andrea.adami@gmail.com>:
+>> I set the DEPLOY_DIR_PSTAGE to outside tmp. (packaged-staging is
+>> already inherited by default in Angstrom).
+> Then you incurr in that infamous issue:
+> http://blog.denix.org/2008/09/getting-even-more-dangerous-with-pstage.htm=
+l
 
-> On Tuesday 19 January 2010 21:01:07 Chris Larson wrote:
-> > Python 2.5+ has these functions built-in, but we don't yet require 2.5+.
-> >
+This seems like a good patch to me.
+Any particular reason why it is not applied?
+
 >
-> do we use all/any in the metadata? or is MVista using? If the answer is yes
-> then... I'm acking the patch.
+>
+>> Not really an idea how to fix this. Any expert with an opinion?
+> See above link.
+>
+>> =A0* Package staging-strace-armv7a-angstrom-linux-gnueabi version
+>> 4.5.14-r9 has no architecture specified, defaulting to i686-linux.
+>> which also seem odd to me.
+> Yes, this leads to subsequent failures during rebuild from pstage.
+> See e.g. udev and machine-specific staging-packages have wrong arch too.
+
+Yes, but how to get rid of it?
+>
+>> That is where I gave up. Suggestions are welcome!
+> The good news are that RP, kergoth and Tartarus are aware of the issue :)
+> Still, it seems this is a low-priority task...
+>
+> Regards
+>
+> Andrea
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
-We don't yet.  I've used it in some classes and .inc files in MVL6 that I
-plan on pushing to OE.  They're much more useful than you'd think.  As an
-example, I had some code where I had a list of path prefixes which were
-allowed, and wanted to check a filename against them:
-
-if any(path.startswith(prefix + "/") for prefix in allowedpaths):
--- 
-Chris Larson
-clarson at kergoth dot com
-clarson at mvista dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Software Engineer
-MontaVista Software, Inc.
 
