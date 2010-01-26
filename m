@@ -1,26 +1,36 @@
-Received: from bay0-omc4-s16.bay0.hotmail.com ([65.54.190.218])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <salehusman@hotmail.com>) id 1NZm4b-0001i8-9C
+	(envelope-from <rpjday@crashcourse.ca>) id 1NZnfG-0002D6-IF
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Jan 2010 15:07:20 +0100
-Received: from BAY127-W11 ([65.54.190.199]) by bay0-omc4-s16.bay0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 26 Jan 2010 06:03:52 -0800
-Message-ID: <BAY127-W110508746AEAFBE1D276CAD85E0@phx.gbl>
-X-Originating-IP: [203.82.49.5]
-From: saleh usman <salehusman@hotmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-Date: Tue, 26 Jan 2010 19:03:51 +0500
-Importance: Normal
+	Tue, 26 Jan 2010 16:49:17 +0100
+Received: from cpe00e0b8e80755-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.244.198] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1NZncy-0006QK-Fd for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Jan 2010 10:46:52 -0500
+Date: Tue, 26 Jan 2010 10:45:55 -0500 (EST)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.LFD.2.00.1001261044100.23556@localhost>
+User-Agent: Alpine 2.00 (LFD 1167 2008-08-23)
 MIME-Version: 1.0
-X-OriginalArrivalTime: 26 Jan 2010 14:03:52.0025 (UTC)
-	FILETIME=[63CBA490:01CA9E90]
-X-SA-Exim-Connect-IP: 65.54.190.218
-X-SA-Exim-Mail-From: salehusman@hotmail.com
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: bitbaking ossie-image
+Subject: yee ha ... i can build beagleboard-demo-image from dev on f12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,51 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jan 2010 14:07:20 -0000
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 26 Jan 2010 15:49:18 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
-Hello=20
-I am trying  bitbake ossie-image but it is showing error of missing some de=
-pendency.How to solve this problem where to find this dependency?
+  seriously, for the first time in months, i can bitbake
+beagleboard-demo-image on my fedora 12 system without hacking any of
+the .bb files.
 
-Terminal window is looking like this.=20
+  the build hasn't finished, but it's into the final "do_rootfs"
+stage and that generally means it's a good build.  whew.  might be
+time to tag this baby just in case.
 
-[saleh@localhost ~]$ bitbake ossie-image
-NOTE: Handling BitBake files: \ (1324/7634) [17 %]
-NOTE: Angstrom DOES NOT support libiconv because the glibc builtin iconv re=
-placement is used
-NOTE: Angstrom DOES NOT support libiconv because the glibc builtin iconv re=
-placement is used
-NOTE: Handling BitBake files: | (2305/7634) [30 %]
-NOTE: Angstrom DOES NOT support bluez-libs because bluez-libs 3.x has been =
-replaced by bluez4
-NOTE: Handling BitBake files: / (2307/7634) [30 %]
-NOTE: Angstrom DOES NOT support bluez-libs because bluez-libs 3.x has been =
-replaced by bluez4
-NOTE: Angstrom DOES NOT support bluez-utils because bluez-utils 3.x has bee=
-n replaced by bluez4
-NOTE: Handling BitBake files: - (2320/7634) [30 %]
-NOTE: Angstrom DOES NOT support bluez-libs because bluez-libs 3.x has been =
-replaced by bluez4
-NOTE: Handling BitBake files: / (2325/7634) [30 %]
-NOTE: Angstrom DOES NOT support bluez-utils because bluez-utils 3.x has bee=
-n replaced by bluez4
-NOTE: Handling BitBake files: / (7634/7634) [100 %]
-NOTE: Parsing finished. 0 cached=2C 7327 parsed=2C 307 skipped=2C 0 masked.
-NOTE: Resolving any missing task queue dependencies
-ERROR: Required build target 'ossie-image' has no buildable providers.
-Missing or unbuildable dependency chain was: ['ossie-image'=2C 'task-ossie'=
-]
+rday
+--
 
-Saleh
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
 
- 		 	   		 =20
-_________________________________________________________________
-Windows Live: Friends get your Flickr=2C Yelp=2C and Digg updates when they=
- e-mail you.
-http://www.microsoft.com/middleeast/windows/windowslive/see-it-in-action/so=
-cial-network-basics.aspx?ocid=3DPID23461::T:WLMTAGL:ON:WL:en-xm:SI_SB_3:092=
-010=
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
+
 
