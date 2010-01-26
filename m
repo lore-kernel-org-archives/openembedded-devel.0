@@ -1,38 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NZg4K-0004az-G5 for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Jan 2010 08:42:39 +0100
-Received: from list by lo.gmane.org with local (Exim 4.50) id 1NZg22-0000vE-VQ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Jan 2010 08:40:14 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jan 2010 08:40:14 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jan 2010 08:40:14 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NZie9-0002zV-MR for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Jan 2010 11:27:48 +0100
+Received: from f053039019.adsl.alicedsl.de ([78.53.39.19]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NZibu-00077j-Ih for openembedded-devel@lists.openembedded.org;
+	Tue, 26 Jan 2010 10:25:26 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 26 Jan 2010 08:39:53 +0100
-Message-ID: <hjm689$6ab$1@ger.gmane.org>
-References: <1264450250.3984.19.camel@mattotaupa>
+In-Reply-To: <20100113110257.GA3243@gmail.com>
+References: <1263109998.16109.11.camel@mattotaupa.wohnung.familie-menzel.net>
+	<20100110123923.GB6363@rhein.zuhause.netz>
+	<1263156477.3423.6.camel@mattotaupa.wohnung.familie-menzel.net>
+	<1263249767.3308.236.camel@mattotaupa.wohnung.familie-menzel.net>
+	<1263296160.20557.136.camel@mattotaupa.wohnung.familie-menzel.net>
+	<20100113102738.GA15906@gmail.com>
+	<1263379487.3228.23.camel@mattotaupa.wohnung.familie-menzel.net>
+	<20100113110257.GA3243@gmail.com>
+Date: Tue, 26 Jan 2010 11:25:24 +0100
+Message-ID: <1264501524.3709.13.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100113 Shredder/3.0.2pre
-In-Reply-To: <1264450250.3984.19.camel@mattotaupa>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [10a1258] hal 0.5.14+git: teach linux devices.c about 'input.touchscreen'
+Subject: Re: [vdr] TARGET_CXXFLAGS do not include CXX_FLAGS from Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,45 +42,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jan 2010 07:42:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 26 Jan 2010 10:27:48 -0000
+X-Groupsio-MsgNum: 16233
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-YUvPAbdYDHQTWgtwai3B"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-YUvPAbdYDHQTWgtwai3B
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 25-01-10 21:10, Paul Menzel wrote:
-> Dear Koen,
-> 
-> 
-> do you plan to get this upstream? Were all your touchscreens not
-> recognized or just a certain one?
+Am Mittwoch, den 13.01.2010, 03:02 -0800 schrieb Khem Raj:
 
-Hal doesn't know about touchscreens only about touchpads. I need to
-decode RPs magic bitmask in our udev rules to come up with a proper key.
-Once I have the proper key I can try to get it upstream, but HAL is a
-dead project and we should look into udev-extras.
+[=E2=80=A6]
 
-> In [1] it says regarding touch*pads*
-> 
->         Keying on ABS_PRESSURE is
->         definitely not correct as some touchpads to not report it and many
->         touchscreens do. Is this on 32 or 64 bit kernels? What about userspace?
-> 
-> so I wonder that no one else reported this on the HAL list.
+> > > > Looking at `run.do_install.28829` I cannot see find the `-fPIC` in
+> > > > there. So my question is, why is it not included. Is it because of =
+=C2=BB?=3D=C2=AB?
+> > > > How do I get it included?
+> > >=20
+> > > you could do CXXFLAGS_append =3D ... in the recipe.
+> >=20
+> > Is that the recommended behavior?=20
+>=20
+> yes.
 
-Most likely because no-one is using touchscreens managed by HAL.
+I just tried your suggestion. The problem is, that `-fPIC` is just need
+during `do_install` since strangely that is when the plugins get
+compiled.
 
-regards,
+        do_install () {
+              oe_runmake 'DESTDIR=3D${D}' \
+                         'PREFIX=3D${prefix}' \
+                         'CONFDIR=3D${sysconfdir}/vdr' \
+                         'VIDEODIR=3D/var/lib/vdr/video' \
+                         'PLUGINLIBDIR=3D${PLUGINDIR}' \
+                         'LOCDIR=3D${datadir}/locale' \
+                         install
+        }
 
-Koen
+Using `CXXFLAGS_append =3D " -fPIC` in `do_install` gives me this error.
+
+        + do_install
+        + CXXFLAGS_append +=3D ' -fPIC'
+        /srv/filme/oe/tangstrom-dev/work/armv7a-angstrom-linux-gnueabi/vdr-=
+1.7.10-r3/temp/run.do_install.17984: line 540: CXXFLAGS_append: command not=
+ found
+        ERROR: function do_install failed
+
+Adding `-fPIC` to the global `CXXFLAGS` is not desired, since the main
+binary should not be compiled with this flag.
+
+What solution is recommended in such a situation besides patching the
+Makefiles? Add 'CXXFLAGS+=3D${CXXFLAGS}' to `oe_runmake`?
+
+[=E2=80=A6]
+
+
+Thanks,
+
+Paul
+
+--=-YUvPAbdYDHQTWgtwai3B
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-iD8DBQFLXpxJMkyGM64RGpERAp6uAKCPq/vq4gVozO+XK6iWHd1bCfmf/gCfcXuP
-fou3djGkE7fzDDP7yZe4E/w=
-=ehpf
+iEYEABECAAYFAktewxMACgkQPX1aK2wOHVh01wCeKjA/2NRbrisRtrD4k9cUwNJ2
+oEMAn0XDeiUrpQWO7HnkB4mORcnQfteS
+=EFQ+
 -----END PGP SIGNATURE-----
 
-
-
+--=-YUvPAbdYDHQTWgtwai3B--
