@@ -1,38 +1,42 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-pz0-f192.google.com ([209.85.222.192])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NZsdM-0003kU-5H
+	(envelope-from <kergoth@gmail.com>) id 1NZsp4-0007cV-Bc
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Jan 2010 22:07:39 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NZsb3-0005Zg-QM from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 26 Jan 2010 13:05:13 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 26 Jan 2010 13:05:13 -0800
-Received: from 172.30.80.228 ([172.30.80.228]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Tue, 26 Jan 2010 21:04:56 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	26 Jan 2010 14:04:56 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Tue, 26 Jan 2010 22:19:47 +0100
+Received: by pzk30 with SMTP id 30so3724671pzk.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Jan 2010 13:17:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:from:date:x-google-sender-auth:message-id:subject:to
+	:content-type; bh=gSdaLYUAO6dIc/oGiWnDlBAIeTuZRDy5/PbiQU9tViE=;
+	b=nToVUEYo25B45hAAoGcEwSXwHGMCObrn+mlo2DVn/MJ51yFp5lqyiJukg4SyLdMPLL
+	5vuo6GdOY3QQ9ewjWWHZtuiIAk5MfRmN4RmDO2u0oaGdu9SZChq0IlN+ADvSO7cNPaED
+	55Sf/pNU9xfD+RnxCRH6tknIW2zumWYkLHYGQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=i+xzbxqQa9KYa0G9EOEQSU42fcyj9JVUI4qq1TqP8wqpRIqZlZGXJmFefBxVVlMh8w
+	u1CpGGSx7nvlQidcfZ5tD0c0eH8s7tZmUUxOIoJomCAfTKA30nWfvBlmrebKl5Sd5dCV
+	bwpUDs3riwlA5lAWodpwizecADnULW2N1fmuM=
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.143.21.9 with SMTP id y9mr5826898wfi.229.1264540640157; Tue, 
+	26 Jan 2010 13:17:20 -0800 (PST)
+In-Reply-To: <201001241148.25185.holger+oe@freyther.de>
+References: <1263931267-18470-1-git-send-email-clarson@mvista.com> 
+	<201001241148.25185.holger+oe@freyther.de>
+From: Chris Larson <clarson@kergoth.com>
+Date: Tue, 26 Jan 2010 14:17:00 -0700
+X-Google-Sender-Auth: 20066277ee312c86
+Message-ID: <b6ebd0a51001261317l2b3d4332ncd88f1cc555ea7c0@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1263980224.3384.9.camel@mattotaupa.wohnung.familie-menzel.net>
-References: <4B564B3D.7020108@atmel.com>
-	<1263980224.3384.9.camel@mattotaupa.wohnung.familie-menzel.net>
-Organization: Mentor Graphics Corporation
-Date: Tue, 26 Jan 2010 14:04:56 -0700
-Message-Id: <1264539896.4283.13.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-OriginalArrivalTime: 26 Jan 2010 21:05:13.0395 (UTC)
-	FILETIME=[40AA9030:01CA9ECB]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.222.192
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH v2] Enable bmp and JPEG files for fbv
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] base.bbclass: add 'any' and 'all' functions.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,38 +50,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Jan 2010 21:07:39 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 26 Jan 2010 21:19:48 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, 2010-01-20 at 10:37 +0100, Paul Menzel wrote:
-> Am Mittwoch, den 20.01.2010, 01:15 +0100 schrieb Ulf Samuelsson:
-> > Enable bmp and JPEG files for fbv
-> > 
-> > Previously only supported PNG.
-> > Ungif still not supported.
-> 
-> Not supported or just not enabled?
-> 
-> One last question. Does anyone know why this support was not enabled in
-> the first place? Not needed back then, not working, size constrains?
-> 
->         $ git log --follow recipes/fbv/fbv_1.0b.bb 
->         commit 0bdb7654c8a9b9850db27e5f6b4a746fb1083ed1
->         Author: Tom Rini <trini@embeddedalley.com>
->         Date:   Thu Apr 23 15:07:52 2009 -0400
->         
->             fbv: Add a framebuffer-based png viewer.
->             bmp/gif is supported but disabled.
+On Sun, Jan 24, 2010 at 3:48 AM, Holger Hans Peter Freyther <
+holger+oe@freyther.de <holger%2Boe@freyther.de>> wrote:
 
-<Insert USE_FLAGS rant here>
+> On Tuesday 19 January 2010 21:01:07 Chris Larson wrote:
+> > Python 2.5+ has these functions built-in, but we don't yet require 2.5+.
+> >
+>
+> do we use all/any in the metadata? or is MVista using? If the answer is yes
+> then... I'm acking the patch.
+>
 
-Didn't need bmp/jpeg support in the use case I added fbv for (testing
-the fb driver easily) and didn't have jpeg/bmp support being pulled in
-otherwise.
+We don't yet.  I've used it in some classes and .inc files in MVL6 that I
+plan on pushing to OE.  They're much more useful than you'd think.  As an
+example, I had some code where I had a list of path prefixes which were
+allowed, and wanted to check a filename against them:
 
+if any(path.startswith(prefix + "/") for prefix in allowedpaths):
 -- 
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
-
+Chris Larson
+clarson at kergoth dot com
+clarson at mvista dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Software Engineer
+MontaVista Software, Inc.
 
