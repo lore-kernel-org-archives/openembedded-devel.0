@@ -1,41 +1,32 @@
-Received: from mail-pw0-f53.google.com ([209.85.160.53])
+Received: from moutng.kundenserver.de ([212.227.17.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1NaCGI-0004yT-2v
+	(envelope-from <Dirk@Do13.de>) id 1NaCWd-0003j0-1V
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Jan 2010 19:05:09 +0100
-Received: by pwi4 with SMTP id 4so3897239pwi.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jan 2010 10:02:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to
-	:content-type; bh=aHk2jEgaP0AEthHeelNSmCTVmD+Nt+waTrlw17rkFfY=;
-	b=OwjZYSei4wpbsnAkeQk+HpQq4/yvB00/BewwtvZun+fj7wCxUqocHAPLtv5O5U9uxj
-	V2TY4wdPKsIAcTJ64gHPP/PvOS6UC+D8s92FLC4zlvzy9A5nNJM5ykzgdyRxFpku69+6
-	WVeP1616oZB2z0XM80AC/I0qfvpUmwPBE2byY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=ZxRlIPh78t2sYxl8EIizxOyuo3HBqEj1lN+laQKYJa9Vki0aST0+bQ1phcOY5KGNsl
-	q6r7gl9teFwrNluLdNsoGKE+g13ZGjwdVvpZ8k1z7rxfgVJBwl4Axpile0V0tqWLaRaJ
-	+Bdg3mD4RswuL0Nkd8/TwDHPN+A4wIEdJPBAk=
+	Wed, 27 Jan 2010 19:22:02 +0100
+Received: from mail.opfer.lan (do13.in-dsl.de [217.197.85.204])
+	by mrelayeu.kundenserver.de (node=mrbap2) with ESMTP (Nemesis)
+	id 0LqWMz-1OEBl62x2v-00dy45; Wed, 27 Jan 2010 18:55:34 +0100
+Received: from [192.168.2.27] by mail.opfer.lan with esmtpa (Exim 4.69)
+	(envelope-from <Dirk@Do13.de>) id 1NaC6w-0003kM-IC
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 27 Jan 2010 18:55:32 +0100
+Message-ID: <4B607E23.1010601@Do13.de>
+Date: Wed, 27 Jan 2010 18:55:47 +0100
+From: Dirk Opfer <Dirk@Do13.de>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.142.59.9 with SMTP id h9mr4984035wfa.91.1264615363090; Wed, 27 
-	Jan 2010 10:02:43 -0800 (PST)
-In-Reply-To: <1264615116-13972-1-git-send-email-ynezz@true.cz>
-References: <1264615116-13972-1-git-send-email-ynezz@true.cz>
-From: Chris Larson <clarson@kergoth.com>
-Date: Wed, 27 Jan 2010 11:02:23 -0700
-X-Google-Sender-Auth: 448b82ed12b00c6a
-Message-ID: <b6ebd0a51001271002i7f6b608la2503c4884673387@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.53
-X-SA-Exim-Mail-From: kergoth@gmail.com
+References: <1264578737-7573-1-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1264578737-7573-1-git-send-email-raj.khem@gmail.com>
+X-Scan-Signature: f702a406fef555483c4e078c87bec76d
+X-Provags-ID: V01U2FsdGVkX1/MrQqYAb3NDIzKsr5Jsbvx2iEPc9sdf8aVs0f
+	hMbzQooshM5xpqJsF/hvHKcOSkXHjKtMwow25nTSM1K9k9X5fR
+	b0qtXXXQnJfdzVzVcYZKB8VudxBOuvC
+X-SA-Exim-Connect-IP: 212.227.17.9
+X-SA-Exim-Mail-From: Dirk@Do13.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [RFC][PATCH] udev: get rid of 'timestamp in the future' tar messages
+Subject: Re: [PATCH] gcc-configure-common.inc: Disable	--enable-target-optspace for *-*-linux-gnuspe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,40 +40,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jan 2010 18:05:09 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 27 Jan 2010 18:22:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jan 27, 2010 at 10:58 AM, Petr =C5=A0tetiar <ynezz@true.cz> wrote:
+Khem Raj schrieb:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  recipes/gcc/gcc-configure-common.inc |    9 ++++++++-
+>  1 files changed, 8 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/gcc/gcc-configure-common.inc b/recipes/gcc/gcc-configure-common.inc
+> index ee6c0e7..7a15562 100644
+> --- a/recipes/gcc/gcc-configure-common.inc
+> +++ b/recipes/gcc/gcc-configure-common.inc
+> @@ -16,6 +16,13 @@ OBJC_nylon ?= ""
+>  OBJC_mips ?= ""
+>  OBJC_mipsel ?= ""
+>  OBJC ?= ",objc"
+> +# disable --enable-target-optspace for powerpc SPE
+> +# at -Os libgcc.so.1 creates references into
+> +# hidden symbols in libgcc.a which linker complains
+> +# when linking shared libraries further in the build like (gnutls)
+> +
+> +OPTSPACE_linux-gnuspe ?= ""
+> +OPTSPACE ?= "--enable-target-optspace"
+>  
+>  # gcc 3.x expects 'f77', 4.0 expects 'f95', 4.1 and 4.2 expect 'fortran'
+>  FORTRAN ?= ",f77"
+> @@ -27,7 +34,6 @@ EXTRA_OECONF_PATHS ?= ""
+>  EXTRA_OECONF = "${@['--enable-clocale=generic', ''][bb.data.getVar('USE_NLS', d, 1) != 'no']} \
+>                  --with-gnu-ld \
+>                  --enable-shared \
+> -                --enable-target-optspace \
+>                  --enable-languages=${LANGUAGES} \
+>                  --enable-threads=posix \
+>                  --enable-multilib \
+> @@ -36,6 +42,7 @@ EXTRA_OECONF = "${@['--enable-clocale=generic', ''][bb.data.getVar('USE_NLS', d,
+>                  --enable-symvers=gnu \
+>                  --enable-libstdcxx-pch \
+>                  --program-prefix=${TARGET_PREFIX} \
+> +                ${OPTSPACE} \
+>                  ${EXTRA_OECONF_BASE} \
+>                  ${EXTRA_OECONF_FPU} \
+>                  ${EXTRA_OECONF_PATHS} \
+>   
+Builds a gcc 4.4.2 based toolchain without problems
 
-> This patch tries to get rid of spew of the useless tar messages durring
-> boot
-> process on machines without RTC, such as the Beagleboard. Example:
->
-> Please wait: booting...
-> Starting udev
-> tar: dev/.udev/uevent_seqnum: time stamp 1970-01-01 01:00:21 is
-> 14.122497521 s in the future
-> tar: dev/.udev/rules.d: time stamp 1970-01-01 01:00:07 is 0.119201623 s i=
-n
-> the future
-> tar: dev/.udev/db/\x2fdevices\x2fvirtual\x2fblock\x2fram9: time stamp
-> 1970-01-01 01:00:22 is 15.118713341 s in the future
->
-> [ more then 100 similar lines cutted off]
->
-> Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
->
+Acked-by: Dirk Opfer <Dirk@do13.de>
 
-Looks good to me, we have a similar patch in MVL6.
+Thanks,
+Dirk
 
-Acked-by: Chris Larson <clarson@mvista.com>
---=20
-Chris Larson
-clarson at kergoth dot com
-clarson at mvista dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Software Engineer
-MontaVista Software, Inc.
+
 
