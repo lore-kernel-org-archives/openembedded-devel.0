@@ -1,29 +1,40 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-gx0-f217.google.com ([209.85.217.217])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NZvQh-0001HM-0M for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Jan 2010 01:06:46 +0100
-Received: from g225142131.adsl.alicedsl.de ([92.225.142.131]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NZvOR-0008Iq-TU for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Jan 2010 00:04:24 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <raj.khem@gmail.com>) id 1Na2ju-0000VJ-6j
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 27 Jan 2010 08:55:05 +0100
+Received: by gxk9 with SMTP id 9so8542838gxk.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 26 Jan 2010 23:52:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=a90Ov3UJq4dVUBE+vYmME7JzsGg2GzinVvkyzHuF2gU=;
+	b=swvfCJS3FUZf4C1cVE0HO9yg9AHv/c+yFmd3KakWLNzSWlcph8bV0ecUNGLWAt9/yE
+	2+7+5aF1t4xj0cZELtdyRR5hqWjCvqptbEqQr6fkZwzkkE9W7BYindqRRwFG1pT169te
+	ZWBg65eQS4212qwAPRSm4pvR5Y+hOzCM86XB4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=Ed9KPaPp8SA6NyPnMDvhjR/Lwd/ZHYuOkXl3mMn3r+G8aWAMNQJ8dJ6Hn1eTji8m/A
+	gG6DyEn8BJZf343lrvFvsP1VENqrFnK7bszIDKSvOIv9xx46H3ogS3P691MLO8fKfnLs
+	9+cSt292xCtXSz2nJj1pgQZuT7JCYG9dFDTCo=
+Received: by 10.150.251.41 with SMTP id y41mr12053524ybh.247.1264578758755;
+	Tue, 26 Jan 2010 23:52:38 -0800 (PST)
+Received: from localhost (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 35sm2321351yxh.33.2010.01.26.23.52.37
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 26 Jan 2010 23:52:38 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <d66caabb1001261547m781b97c2re570281be80ca2eb@mail.gmail.com>
-References: <d66caabb1001261452n7b43aaa4tdcf049e4b575d64d@mail.gmail.com>
-	<1264547979.26996.20.camel@mattotaupa>
-	<d66caabb1001261547m781b97c2re570281be80ca2eb@mail.gmail.com>
-Date: Wed, 27 Jan 2010 01:04:21 +0100
-Message-ID: <1264550661.26996.30.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Tue, 26 Jan 2010 23:52:17 -0800
+Message-Id: <1264578737-7573-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.6.5
+X-SA-Exim-Connect-IP: 209.85.217.217
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Request for Help : Porting linux to custom x86 (AMD SC520) board
+Subject: [PATCH] gcc-configure-common.inc: Disable --enable-target-optspace for *-*-linux-gnuspe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,114 +48,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jan 2010 00:06:46 -0000
-X-Groupsio-MsgNum: 16248
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-fBoXjXvwtkkBScIQasDh"
+X-List-Received-Date: Wed, 27 Jan 2010 07:55:05 -0000
 
---=-fBoXjXvwtkkBScIQasDh
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes/gcc/gcc-configure-common.inc |    9 ++++++++-
+ 1 files changed, 8 insertions(+), 1 deletions(-)
 
-Am Mittwoch, den 27.01.2010, 10:47 +1100 schrieb Graeme Russ:
-> On Wed, Jan 27, 2010 at 10:19 AM, Paul Menzel
-> <paulepanter@users.sourceforge.net> wrote:
-> > Am Mittwoch, den 27.01.2010, 09:52 +1100 schrieb Graeme Russ:
-> >
-> > [=E2=80=A6]
-> >
-> >> To date, I have been doing a lot of work getting a functionaly stable
-> >> boot loader up and running. I ended up choosing U-Boot because it
-> >> appeared to be the most open of all mature boot loaders.
-> >
-> > coreboot also seems to support some boards with the AMD SC520 [1].
->=20
-> Thanks, I will have a look but I think Coreboot is geared more towards
-> a BIOS replacement for mainstream PC motherboards? I am working an a
-> real embedded (custom) board.
-
-As far as I know that does not matter since it has to be ported to every
-chipset and board nonetheless. Coreboot just initializes the hardware
-and then gives control to a so cold payload. That can be the Linux
-kernel, Filo (a bootloader based on GRUB), SeaBIOS (which implements
-traditional BIOS calls(?)/interrupts), Memtest86+ and so on.
-
-Maybe you can just try to build coreboot with some payload using Kconfig
-(just introduced) for a board with this chipset or which is similar to
-yours and try to flash it using Flashrom [2] for example. (Only if you
-are able to recover.) Start it and see how far it goes.
-
-If you have question just ask on the mailing list or join the IRC
-channel where the developers hang around.
-
-> >> U-Boot had a
-> >> very old and incomplete x86 / sc520 port which I have put a lot of
-> >> work into maturing and stabalising. Nearly all of this work to date
-> >> has been fed back into the U-Boot source (you can track my progress on
-> >> their mailing list). I am now at the point where I feel confident that
-> >> U-Boot can launch a Linux kernel.
-> >>
-> >> The problem is - I don't know how to proceed. It looks like PPC and
-> >> ARM have very strong embedded followings and there is a lot of
-> >> information out there for people that want to get an embedded kernel
-> >> running on these platforms. x86 seems to be a very poor cousin.
-> >>
-> >> So far, I have cloned the 2.6.33 linux kernel Git repository and
-> >> configured and compiled the kernel.
-> >
-> > Where does Linux stop if you try to boot it?
->=20
-> I haven't actually attempted to boot the kernel yet - mostly because
-> I don't really know how. I have confirmed in U-Boot the ability to
-> execute a stand-alone application loaded at a given address in
-> memory (U-Boot has a 'Hello World' example that I have managed to
-> get running). The problem is, U-Boot runs in x86 protected mode, so
-> I would assume U-Boot needs to drop out of protected mode before
-> starting up the kernel in order to allow the kernel to setup the
-> descriptor tables as required.
->=20
-> >
-> >> I think my first question is about how to get hardware information
-> >> (RAM layout etc) to the Kernel. It looks like the initial U-Boot
-> >> implementation setup a very basic BIOS which emulated part of the
-> >> traditional PC BIOS. Surely there is a better way to do this. Is the
-> >> Simple Firmware Interface an option?
-> >>
-> >> Any help would be greatly appreciated.
-> >
-> > Sorry I cannot help further. Should not the guys on the U-Boot list kno=
-w
-> > more about how to get U-Boot and Linux running on a x86 system?
->=20
-> I have asked this same question on the U-Boot mailing list. Unfortunately=
-,
-> U-Boot has more traditionally been geared towards PPC and ARM. The only
-> person I know of that ever got U-Boot to boot an x86 kernel has not been
-> active on the U-Boot mailing list for a number of years.
-
-Thank you for your detailed response. Unfortunately I do not know
-anything about this stuff and now I know a little more.
+diff --git a/recipes/gcc/gcc-configure-common.inc b/recipes/gcc/gcc-configure-common.inc
+index ee6c0e7..7a15562 100644
+--- a/recipes/gcc/gcc-configure-common.inc
++++ b/recipes/gcc/gcc-configure-common.inc
+@@ -16,6 +16,13 @@ OBJC_nylon ?= ""
+ OBJC_mips ?= ""
+ OBJC_mipsel ?= ""
+ OBJC ?= ",objc"
++# disable --enable-target-optspace for powerpc SPE
++# at -Os libgcc.so.1 creates references into
++# hidden symbols in libgcc.a which linker complains
++# when linking shared libraries further in the build like (gnutls)
++
++OPTSPACE_linux-gnuspe ?= ""
++OPTSPACE ?= "--enable-target-optspace"
+ 
+ # gcc 3.x expects 'f77', 4.0 expects 'f95', 4.1 and 4.2 expect 'fortran'
+ FORTRAN ?= ",f77"
+@@ -27,7 +34,6 @@ EXTRA_OECONF_PATHS ?= ""
+ EXTRA_OECONF = "${@['--enable-clocale=generic', ''][bb.data.getVar('USE_NLS', d, 1) != 'no']} \
+                 --with-gnu-ld \
+                 --enable-shared \
+-                --enable-target-optspace \
+                 --enable-languages=${LANGUAGES} \
+                 --enable-threads=posix \
+                 --enable-multilib \
+@@ -36,6 +42,7 @@ EXTRA_OECONF = "${@['--enable-clocale=generic', ''][bb.data.getVar('USE_NLS', d,
+                 --enable-symvers=gnu \
+                 --enable-libstdcxx-pch \
+                 --program-prefix=${TARGET_PREFIX} \
++                ${OPTSPACE} \
+                 ${EXTRA_OECONF_BASE} \
+                 ${EXTRA_OECONF_FPU} \
+                 ${EXTRA_OECONF_PATHS} \
+-- 
+1.6.5
 
 
-Thanks,
 
-Paul
-
-
-> > [1] http://www.coreboot.org/Supported_Motherboards
-[2] http://www.flashrom.org/Flashrom
-
---=-fBoXjXvwtkkBScIQasDh
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktfgwUACgkQPX1aK2wOHViR4gCggSEtZfWqApkVsdWcoHBNPpNw
-9GYAn3Hi40rVCZoETabf1/vUR7ReUjk+
-=3i6p
------END PGP SIGNATURE-----
-
---=-fBoXjXvwtkkBScIQasDh--
