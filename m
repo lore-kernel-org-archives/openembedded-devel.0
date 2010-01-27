@@ -1,40 +1,40 @@
-Received: from mail-gx0-f217.google.com ([209.85.217.217])
+Received: from mail-fx0-f212.google.com ([209.85.220.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Na2ju-0000VJ-6j
+	(envelope-from <martin.jansa@gmail.com>) id 1Na3qi-0002lS-7H
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 27 Jan 2010 08:55:05 +0100
-Received: by gxk9 with SMTP id 9so8542838gxk.8
+	Wed, 27 Jan 2010 10:06:11 +0100
+Received: by fxm4 with SMTP id 4so5603935fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Jan 2010 23:52:40 -0800 (PST)
+	Wed, 27 Jan 2010 01:03:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=a90Ov3UJq4dVUBE+vYmME7JzsGg2GzinVvkyzHuF2gU=;
-	b=swvfCJS3FUZf4C1cVE0HO9yg9AHv/c+yFmd3KakWLNzSWlcph8bV0ecUNGLWAt9/yE
-	2+7+5aF1t4xj0cZELtdyRR5hqWjCvqptbEqQr6fkZwzkkE9W7BYindqRRwFG1pT169te
-	ZWBg65eQS4212qwAPRSm4pvR5Y+hOzCM86XB4=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=EAk1/OR2MXuxk6+sDg0hogObhZ+RIrt2qX7EYuTmd2M=;
+	b=A4CJUi5vctrbd/uZYsWQ2KxBv6BMSSItesma8Q0kBKeDeSFuFfvy6JIo/fAKujZ6CV
+	5MdEBOY1by1x4vlIHpCqs3V7SWxb5r4ykhjEc6ILH1hNhbu3NHiDk+oo+RlcraFYaZ6Y
+	RxNmnbfZmSieaA43YiBYtYxJJ7Ew3hEuagPrs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=Ed9KPaPp8SA6NyPnMDvhjR/Lwd/ZHYuOkXl3mMn3r+G8aWAMNQJ8dJ6Hn1eTji8m/A
-	gG6DyEn8BJZf343lrvFvsP1VENqrFnK7bszIDKSvOIv9xx46H3ogS3P691MLO8fKfnLs
-	9+cSt292xCtXSz2nJj1pgQZuT7JCYG9dFDTCo=
-Received: by 10.150.251.41 with SMTP id y41mr12053524ybh.247.1264578758755;
-	Tue, 26 Jan 2010 23:52:38 -0800 (PST)
-Received: from localhost (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id 35sm2321351yxh.33.2010.01.26.23.52.37
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 26 Jan 2010 23:52:38 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=Stwtf5frQqJAjSY/CsHydeSCH/GDD3pfTmc9DGgb4k5i0I9bMrboQOehvcr+ztEEoN
+	018LCZN3R+9Mi1zVIX1WmncfRCbUZBs4nFZb+s5r7DnDNtFTJ7q2fiTk2zvu8dNoT+Et
+	ts9Z0DawghhTRzT5PCHuRjUz7fHtOhO7pVGSA=
+MIME-Version: 1.0
+Received: by 10.223.73.82 with SMTP id p18mr5938935faj.34.1264583019225; Wed, 
+	27 Jan 2010 01:03:39 -0800 (PST)
+In-Reply-To: <E1NZW8K-0006jm-0Z@melo.openembedded.org>
+References: <E1NZW8K-0006jm-0Z@melo.openembedded.org>
+Date: Wed, 27 Jan 2010 10:03:39 +0100
+Message-ID: <141020e31001270103l4e84271ao184bdea0b19f7a01@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 Jan 2010 23:52:17 -0800
-Message-Id: <1264578737-7573-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.6.5
-X-SA-Exim-Connect-IP: 209.85.217.217
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.220.212
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] gcc-configure-common.inc: Disable --enable-target-optspace for *-*-linux-gnuspe.
+Cc: openembedded-commits@openembedded.org
+Subject: Re: [oe-commits] Graeme Gregory : glib-2.0_2.22.4.bb : add new version totally clean recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,49 +48,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Jan 2010 07:55:05 -0000
+X-List-Received-Date: Wed, 27 Jan 2010 09:06:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes/gcc/gcc-configure-common.inc |    9 ++++++++-
- 1 files changed, 8 insertions(+), 1 deletions(-)
+On Mon, Jan 25, 2010 at 10:06 PM, git version control
+<git@git.openembedded.org> wrote:
+> Commit: 267bedfed32b4488a66f7d6af88665e06261082c
+> URL: =A0 =A0http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcomm=
+it;h=3D267bedfed32b4488a66f7d6af88665e06261082c
+>
+> glib-2.0_2.22.4.bb : add new version totally clean recipe
+>
+> The glib-2.0 recipe seemed to have gained a lot of un-needed extras and
+> was also out of date for BBCLASSEXTEND and staging. So this is a minimali=
+sed
+> new version.
 
-diff --git a/recipes/gcc/gcc-configure-common.inc b/recipes/gcc/gcc-configure-common.inc
-index ee6c0e7..7a15562 100644
---- a/recipes/gcc/gcc-configure-common.inc
-+++ b/recipes/gcc/gcc-configure-common.inc
-@@ -16,6 +16,13 @@ OBJC_nylon ?= ""
- OBJC_mips ?= ""
- OBJC_mipsel ?= ""
- OBJC ?= ",objc"
-+# disable --enable-target-optspace for powerpc SPE
-+# at -Os libgcc.so.1 creates references into
-+# hidden symbols in libgcc.a which linker complains
-+# when linking shared libraries further in the build like (gnutls)
-+
-+OPTSPACE_linux-gnuspe ?= ""
-+OPTSPACE ?= "--enable-target-optspace"
- 
- # gcc 3.x expects 'f77', 4.0 expects 'f95', 4.1 and 4.2 expect 'fortran'
- FORTRAN ?= ",f77"
-@@ -27,7 +34,6 @@ EXTRA_OECONF_PATHS ?= ""
- EXTRA_OECONF = "${@['--enable-clocale=generic', ''][bb.data.getVar('USE_NLS', d, 1) != 'no']} \
-                 --with-gnu-ld \
-                 --enable-shared \
--                --enable-target-optspace \
-                 --enable-languages=${LANGUAGES} \
-                 --enable-threads=posix \
-                 --enable-multilib \
-@@ -36,6 +42,7 @@ EXTRA_OECONF = "${@['--enable-clocale=generic', ''][bb.data.getVar('USE_NLS', d,
-                 --enable-symvers=gnu \
-                 --enable-libstdcxx-pch \
-                 --program-prefix=${TARGET_PREFIX} \
-+                ${OPTSPACE} \
-                 ${EXTRA_OECONF_BASE} \
-                 ${EXTRA_OECONF_FPU} \
-                 ${EXTRA_OECONF_PATHS} \
--- 
-1.6.5
+Hi,
 
+yesterday I did rebuild from scratch and noticed that
+obexpush-1.0.0-r6 is failing with this version.
+
+It's because it's looking for glibconfig.h only in
+staging/armv4t-oe-linux-gnueabi/usr/include/glib-2.0 and this file is
+with this version available only in
+staging/armv4t-oe-linux-gnueabi/usr/lib/glib-2.0/include
+
+with 2.22.4
+bitbake@jama ~/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/include/g=
+lib-2.0
+$ diff . ../../lib/glib-2.0/include/
+Only in .: gio
+Only in .: glib
+Only in ../../lib/glib-2.0/include/: glibconfig.h
+Only in .: glib.h
+Only in .: glib-object.h
+Only in .: gmodule.h
+Only in .: gobject
+
+with 2.22.1
+bitbake@jama ~/tmpdir-dev/staging/armv5te-angstrom-linux-gnueabi/usr/includ=
+e/glib-2.0
+$ diff -rq . ../../lib/glib-2.0/include/
+Only in .: gio
+Only in .: glib
+Only in .: glib.h
+Only in .: glib-object.h
+Only in .: gmodule.h
+Only in .: gobject
+
+
+Just to make sure where it should be fixed..
+Adding -I in obexpush recipe is easy enough as GLIBINC is exported
+from recipe and glib-config is not used.
+export GLIBINC =3D "-I${STAGING_INCDIR}/glib-2.0
+-I${STAGING_LIBDIR}/glib-2.0/include"
+
+but maybe glibconfig.h will be needed in other recipes too.
+
+Regards,
 
 
