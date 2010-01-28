@@ -1,23 +1,43 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from ey-out-1920.google.com ([74.125.78.148])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1Nacsc-0000RF-Pg
-	for openembedded-devel@openembedded.org; Thu, 28 Jan 2010 23:30:29 +0100
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id 950FE1D3607A; Thu, 28 Jan 2010 23:28:00 +0100 (CET)
-Date: Thu, 28 Jan 2010 23:28:00 +0100
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100128222800.GF24852@ibawizard.net>
-References: <1264711964-25127-1-git-send-email-ynezz@true.cz>
+	(envelope-from <andrea.adami@gmail.com>) id 1NadEG-0000Xa-4M
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 28 Jan 2010 23:52:51 +0100
+Received: by ey-out-1920.google.com with SMTP id 13so278248eye.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Jan 2010 14:50:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=lcotl2PxPAkEU5DcJ0HEZvGqiwIm0eMUSs0myQImE5o=;
+	b=ggm/LsCRG2NyQPFGIu/nyWrw83Vf8LTBdZQeO6fqYBtBYQpsv3ObPxUDmrExmvxDuj
+	q1otDOjircA9pe2Y2PbUccJlxon2MecOUXzKlEmGhoLbpsqQ18EBFNqLMj5VN5OjPO/F
+	guGMKxVjIuqP3/PqSuKeXpd5TbQ3UBJmgnFQg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=kD9wpcsI0B5N+3qJ4jrHGsViqPywdmghUuDIx2+9E3YJB4kpBO2CMyyo8mo3VBCGK6
+	qCHuCCnISH0hI92OxUiZNALoY2OSdHKcYPN1sX3TpFrpGSkj9ayFIAZWM1zquxdz8jqU
+	WW6n2Aeo3aQXj11oELEIQulZceX3wOCxiHBoI=
 MIME-Version: 1.0
-In-Reply-To: <1264711964-25127-1-git-send-email-ynezz@true.cz>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+Received: by 10.213.50.67 with SMTP id y3mr5188080ebf.31.1264719026850; Thu, 
+	28 Jan 2010 14:50:26 -0800 (PST)
+In-Reply-To: <hjceds$nsr$2@ger.gmane.org>
+References: <d1b08f941001170606w13dcfc0ey341da93deb94c7b8@mail.gmail.com>
+	<201001172013.06010.marcin@juszkiewicz.com.pl>
+	<201001172258.25258.jay4mail@gmail.com>
+	<d1b08f941001171559w5ae011a6u61715d0fd236046@mail.gmail.com>
+	<d1b08f941001220212v588c5f9bvbf2a149660a86898@mail.gmail.com>
+	<hjceds$nsr$2@ger.gmane.org>
+Date: Thu, 28 Jan 2010 23:50:26 +0100
+Message-ID: <d1b08f941001281450o3dc53131je7168dbfbca9c1c8@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.78.148
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] ecore-svn: fix NULL pointer dereference
+Subject: Re: [RFC] Zaurus: make updater.sh obsolete for poodle, clamshells and tosa
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,23 +51,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jan 2010 22:30:29 -0000
-Content-Type: text/plain; charset=iso-8859-2
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 28 Jan 2010 22:52:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Petr =A9tetiar <ynezz@true.cz> [2010-01-28 21:52:44]:
+Just for sanity I repeat here the command for c7x0:
 
-> This patch fixes NULL pointer dereference in exquisite triggered 5 time=
-s
-> during each boot and causes flood of this annoying messages:
+nandlogical /dev/mtd1 WRITE 0xE0000 0x13C0000 zImage.bin
 
-Ok, got in touch with developers, so it's fixed upstream[1]. Sorry for th=
-e
-noise.
+I'm still dubious about the extra space at the end of mtd1...after checksums?
 
--- ynezz
-
-1. http://trac.enlightenment.org/e/changeset/45673
+Andrea
 
 
