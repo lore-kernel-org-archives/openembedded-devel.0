@@ -1,27 +1,39 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from mail-ew0-f213.google.com ([209.85.219.213])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NacKE-0005j8-OX
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NacNE-0006q2-T8
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jan 2010 22:54:58 +0100
-Received: from 88-109-44-56.dynamic.dsl.as9105.com ([88.109.44.56]
-	helo=[192.168.2.155])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NacHv-0005KB-FZ
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jan 2010 21:52:31 +0000
-From: Phil Blundell <philb@gnu.org>
+	Thu, 28 Jan 2010 22:58:03 +0100
+Received: by ewy5 with SMTP id 5so739339ewy.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Jan 2010 13:55:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=bn3xq46n1oL2JJGyDh2o/1lyGfj2KkOJGBpe2n6m8HY=;
+	b=hmkz9aldLZccqjg8bGkdkvNzzUZrI7b9rtFP+Xcd3aYn94pbSu686zKHwctUZwjmRB
+	0KJVORYFCJyikcJIsIL/cPucPXDdCUeEL8DMUi5CJwToLRSr50M8+4uVcqfv3Q0mdvAa
+	4mu2aejv0jH3i0bIytUqB7WLgh0/nRoTZ9kus=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=IhAv24jav9YlVTd6hE+gT27SVZufUNnI02rIikI0OerFpM+8eCNd1KLMWLscPdbIqP
+	ezfwlayMPuluYfFdXFVE6Ah47kplZe/2lKfXEpv8lTT0NUD+PK9cIIXi5n+42pr2a9C1
+	vWqzqJGFJECByZgyBazi2KYJ1BI35wktSVUSI=
+Received: by 10.216.90.138 with SMTP id e10mr1811084wef.150.1264715737887;
+	Thu, 28 Jan 2010 13:55:37 -0800 (PST)
+Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
+	by mx.google.com with ESMTPS id 5sm32469eyf.2.2010.01.28.13.55.33
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 28 Jan 2010 13:55:33 -0800 (PST)
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100128200049.GA4958@gmail.com>
-References: <20100128200049.GA4958@gmail.com>
-Date: Thu, 28 Jan 2010 21:52:10 +0000
-Message-ID: <1264715530.9974.436.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+Date: Thu, 28 Jan 2010 22:55:28 +0100
+Message-Id: <1264715728-860-1-git-send-email-fransmeulenbroeks@gmail.com>
+X-Mailer: git-send-email 1.6.4.2
+X-SA-Exim-Connect-IP: 209.85.219.213
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: update hook for git to check push commit message
+Subject: [PATCH] kernel.bbclass only install image in do_deploy if not installing from packaged staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,52 +47,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jan 2010 21:54:58 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 28 Jan 2010 21:58:04 -0000
 
-On Thu, 2010-01-28 at 12:00 -0800, Khem Raj wrote:
-> Attached is a small hook for updates that are pushed into repo.
-> Right now it only checks the first line of the commit and expects
-> module: summary
+install -m 0644 ${KERNEL_OUTPUT} ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
+expandds to
+install -m 0644 arch/arm/boot/uImage .../deploy/glibc/images/beagleboard/uImage-2.6.29-r51-beagleboard.bin
+but of course arch/arm/boot/uImage does not exist since we are using packaged staging so we get
+the error:
+install: cannot stat `arch/arm/boot/uImage': No such file or directory
+This patch only installs if not using packaged staging
+---
+ classes/kernel.bbclass                  |    4 +++-
+ recipes/perl/perl-5.8.8/firsttime.patch |   15 +++++++++++++++
+ recipes/perl/perl-native_5.8.8.bb       |    3 ++-
+ recipes/perl/perl_5.8.8.bb              |    3 ++-
+ 4 files changed, 22 insertions(+), 3 deletions(-)
+ create mode 100644 recipes/perl/perl-5.8.8/firsttime.patch
 
-I'm not really in favour of applying the commit message policy quite
-that harshly.  The wiki page that you linked to doesn't really seem to
-support this kind of check: the actual guidance it gives about checkin
-messages is:
-
-* Have a clear commit message (example):
-    - The first line of commit is a summary of the changes.
-    - The first line should start with the name of the recipe the change affects.
-    - The rest of the message should give more details on the change as appropriate.
-    - Mention the affected bug numbers if appropriate.
-    - Give credit where credit is due. If you commit someone else's work more or 
-      less verbatim, you should use git commit --author $mail-of-author. If pulling
-      changes from somewhere like Poky or OpenMoko there is no problem with that
-      but mention where the changes came from.
-    - Include a Signed-off-by: line indicating the change has valid certificate 
-      of origin as per the Linux kernel
-
-... which is nowhere near as prescriptive as the rule that you seem to
-be implementing in your script.  Also, the wiki page has an explicit
-statement that "[these] rules are not hard fast rules", which would
-suggest that even such guidance as it does provide is not intended to be
-taken too dogmatically. 
-
-Personally I think that the current situation of the TSC applying
-pressure to those people who seem to be chronically unable to write
-suitable checkin comments is a perfectly fine way of solving the
-problem.
-
-On a technical level, I think you could probably do without the sed
-subprocess, and "summary = rev.split(1)" doesn't look quite right
-either.
-
-p.
-
-
-p.
-
+diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+index 53ea252..fa48a43 100644
+--- a/classes/kernel.bbclass
++++ b/classes/kernel.bbclass
+@@ -537,7 +537,9 @@ MODULES_IMAGE_BASE_NAME ?= modules-${PV}-${PR}-${MACHINE}
+ 
+ do_deploy() {
+ 	install -d ${DEPLOY_DIR_IMAGE}
+-	install -m 0644 ${KERNEL_OUTPUT} ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
++	if [ "$PSTAGING_ACTIVE" = "0" ]; then
++	    install -m 0644 ${KERNEL_OUTPUT} ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
++	fi
+ 	package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
+ 
+ 	if [ -d "${PKGD}/lib" ]; then
+diff --git a/recipes/perl/perl-5.8.8/firsttime.patch b/recipes/perl/perl-5.8.8/firsttime.patch
+new file mode 100644
+index 0000000..bd09589
+--- /dev/null
++++ b/recipes/perl/perl-5.8.8/firsttime.patch
+@@ -0,0 +1,15 @@
++Index: perl-5.8.8/lib/CPAN/FirstTime.pm
++===================================================================
++--- perl-5.8.8.orig/lib/CPAN/FirstTime.pm
+++++ perl-5.8.8/lib/CPAN/FirstTime.pm
++@@ -68,9 +68,7 @@ dialog anytime later by typing 'o conf i
++ 
++ ];
++ 
++-    my $manual_conf =
++-	ExtUtils::MakeMaker::prompt("Are you ready for manual configuration?",
++-				    "yes");
+++    my $manual_conf = "no";
++     my $fastread;
++     {
++       local $^W;
+diff --git a/recipes/perl/perl-native_5.8.8.bb b/recipes/perl/perl-native_5.8.8.bb
+index 60a5cf5..a9c66e8 100644
+--- a/recipes/perl/perl-native_5.8.8.bb
++++ b/recipes/perl/perl-native_5.8.8.bb
+@@ -15,7 +15,8 @@ SRC_URI = "http://ftp.funet.fi/pub/CPAN/src/perl-${PV}.tar.gz \
+            file://native-no-gdbminc.patch;patch=1 \
+            file://native-perlinc.patch;patch=1 \
+            file://makedepend-dash.patch;patch=1 \
+-           file://asm-pageh-fix.patch;patch=1"
++           file://asm-pageh-fix.patch;patch=1 \
++           file://firsttime.patch;patch=1"
+ 
+ S = "${WORKDIR}/perl-${PV}"
+ 
+diff --git a/recipes/perl/perl_5.8.8.bb b/recipes/perl/perl_5.8.8.bb
+index edd3a83..200e70c 100644
+--- a/recipes/perl/perl_5.8.8.bb
++++ b/recipes/perl/perl_5.8.8.bb
+@@ -5,7 +5,7 @@ LICENSE = "Artistic|GPL"
+ PRIORITY = "optional"
+ # We need gnugrep (for -I)
+ DEPENDS = "virtual/db perl-native grep-native"
+-PR = "r31"
++PR = "r32"
+ 
+ # Major part of version
+ PVM = "5.8"
+@@ -30,6 +30,7 @@ SRC_URI = "ftp://ftp.funet.fi/pub/CPAN/src/perl-${PV}.tar.gz \
+         file://64_debian_enc2xs_inc.patch;patch=1 \
+         file://asm-pageh-fix.patch;patch=1 \
+         file://shared-ldflags.patch;patch=1 \
++        file://firsttime.patch;patch=1 \
+         file://config.sh \
+         file://config.sh-32 \
+         file://config.sh-32-le \
+-- 
+1.6.4.2
 
 
 
