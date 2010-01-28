@@ -1,39 +1,39 @@
-Received: from mail-ew0-f213.google.com ([209.85.219.213])
+Received: from mail-yw0-f195.google.com ([209.85.211.195])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NacfQ-0006Yt-Cs
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NachD-00007d-7F
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jan 2010 23:16:51 +0100
-Received: by ewy5 with SMTP id 5so756679ewy.12
+	Thu, 28 Jan 2010 23:18:42 +0100
+Received: by ywh33 with SMTP id 33so1220285ywh.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jan 2010 14:14:25 -0800 (PST)
+	Thu, 28 Jan 2010 14:16:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=Dp2NZQINOCghYDthcMuqjl4HM55uKqeOkmMK/XEf9SQ=;
-	b=RKCbYNT+/ydOjbHdTsw69t1ugQmOwPbsqSjoEvoJ5VW36M3I7T0IQ+aq82Ee64L68G
-	RsHdk7avyBXHwOkt2uKVTrKy0DMavPpzygRqafCigAjEJQ38JxCHxR1qhrZJJyvWKpad
-	gk25Ee95+2KHZEx7NUMMhqrll6qEmbHvAedK8=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=oQX0japK+KPhFwhXY3QuYM6vgVB3RVeJwH3WuQ+vAak=;
+	b=TMN31zWCqKXIVdnOB5E9x5b5Z6t3SbUl+fjfyIpsQNH6yCqtIuaPgWyIXiTvvya6gx
+	klvpRc3toemDE7aUnbVpPAiZF5XWtQrtcYqNaIwQbYNwuA870i50l+wZZzzuDc70Z8LI
+	+JRuG40xiDKKS8WlRW7u8XBn0oCp8JE1jgf7w=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=rkg4/NtxKwhZtq8vrBrVC1RbQf7aRxEsiWskeJQY58zHpt1KqoD/R501MgeDgWO7MU
-	kFOk/UAHvx7mNumGfCK9QvyGsGRPULsr6Toa8Mb2tpbuOw5kP140QDwJi4pInASNO+p0
-	lNOlB59mJ9zANT81g1WF7zUbC8auZNxqbnAss=
-Received: by 10.213.1.130 with SMTP id 2mr448825ebf.85.1264716865425;
-	Thu, 28 Jan 2010 14:14:25 -0800 (PST)
-Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
-	by mx.google.com with ESMTPS id 7sm2727713eyg.9.2010.01.28.14.14.23
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 28 Jan 2010 14:14:24 -0800 (PST)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=WYwixTlH85IczoilkwmMj6sSLgTkCMNfZVewj+Ag0gDQLJOTi/qd/id3+YkVzttqdU
+	L3rfUTjXdnb4FsYozIkGI3qPrWPQIs6LgMYW8bhKLPJZZratV/zoSD09IPjV3jPBCJ3R
+	NiH4zqAlyZx2hG8Ojh/kW6YTesSYQnJnsdcP8=
+MIME-Version: 1.0
+Received: by 10.101.130.35 with SMTP id h35mr951021ann.109.1264716975678; Thu, 
+	28 Jan 2010 14:16:15 -0800 (PST)
+In-Reply-To: <1264716847-1311-1-git-send-email-fransmeulenbroeks@gmail.com>
+References: <1264716847-1311-1-git-send-email-fransmeulenbroeks@gmail.com>
+Date: Thu, 28 Jan 2010 23:16:15 +0100
+Message-ID: <ac9c93b11001281416s527924b3qc1c70aee15f93771@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 28 Jan 2010 23:14:07 +0100
-Message-Id: <1264716847-1311-1-git-send-email-fransmeulenbroeks@gmail.com>
-X-Mailer: git-send-email 1.6.4.2
-X-SA-Exim-Connect-IP: 209.85.219.213
+X-SA-Exim-Connect-IP: 209.85.211.195
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] kernel.bbclass only install image in do_deploy if not installing from packaged staging
+Subject: Re: [PATCH] kernel.bbclass only install image in do_deploy if not installing from packaged staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,36 +47,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jan 2010 22:16:51 -0000
+X-List-Received-Date: Thu, 28 Jan 2010 22:18:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-install -m 0644 ${KERNEL_OUTPUT} ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
-expands to
-install -m 0644 arch/arm/boot/uImage .../deploy/glibc/images/beagleboard/uImage-2.6.29-r51-beagleboard.bin
-but of course arch/arm/boot/uImage does not exist since we are using packaged staging so we get
-the error:
-install: cannot stat `arch/arm/boot/uImage': No such file or directory
-This patch only installs if not using packaged staging
----
- classes/kernel.bbclass |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+2010/1/28 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+> install -m 0644 ${KERNEL_OUTPUT} ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_=
+NAME}.bin
+> expands to
+> install -m 0644 arch/arm/boot/uImage .../deploy/glibc/images/beagleboard/=
+uImage-2.6.29-r51-beagleboard.bin
+> but of course arch/arm/boot/uImage does not exist since we are using pack=
+aged staging so we get
+> the error:
+> install: cannot stat `arch/arm/boot/uImage': No such file or directory
+> This patch only installs if not using packaged staging
+> ---
+> =A0classes/kernel.bbclass | =A0 =A04 +++-
+> =A01 files changed, 3 insertions(+), 1 deletions(-)
+>
+> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+> index 53ea252..fa48a43 100644
+> --- a/classes/kernel.bbclass
+> +++ b/classes/kernel.bbclass
+> @@ -537,7 +537,9 @@ MODULES_IMAGE_BASE_NAME ?=3D modules-${PV}-${PR}-${MA=
+CHINE}
+>
+> =A0do_deploy() {
+> =A0 =A0 =A0 =A0install -d ${DEPLOY_DIR_IMAGE}
+> - =A0 =A0 =A0 install -m 0644 ${KERNEL_OUTPUT} ${DEPLOY_DIR_IMAGE}/${KERN=
+EL_IMAGE_BASE_NAME}.bin
+> + =A0 =A0 =A0 if [ "$PSTAGING_ACTIVE" =3D "0" ]; then
+> + =A0 =A0 =A0 =A0 =A0 install -m 0644 ${KERNEL_OUTPUT} ${DEPLOY_DIR_IMAGE=
+}/${KERNEL_IMAGE_BASE_NAME}.bin
+> + =A0 =A0 =A0 fi
+> =A0 =A0 =A0 =A0package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE=
+_BASE_NAME}.bin
+>
+> =A0 =A0 =A0 =A0if [ -d "${PKGD}/lib" ]; then
+> --
+> 1.6.4.2
+>
+>
 
-diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-index 53ea252..fa48a43 100644
---- a/classes/kernel.bbclass
-+++ b/classes/kernel.bbclass
-@@ -537,7 +537,9 @@ MODULES_IMAGE_BASE_NAME ?= modules-${PV}-${PR}-${MACHINE}
- 
- do_deploy() {
- 	install -d ${DEPLOY_DIR_IMAGE}
--	install -m 0644 ${KERNEL_OUTPUT} ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
-+	if [ "$PSTAGING_ACTIVE" = "0" ]; then
-+	    install -m 0644 ${KERNEL_OUTPUT} ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
-+	fi
- 	package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
- 
- 	if [ -d "${PKGD}/lib" ]; then
--- 
-1.6.4.2
+This patch supersedes the first one, which had junk added.
+Kudo's to the people in #oe who helped me getting this into a proper submis=
+sion.
 
+Frans
 
 
