@@ -1,40 +1,42 @@
-Received: from smtp3.mundo-r.com ([212.51.32.191] helo=smtp2.mundo-r.com)
+Received: from mail-fx0-f214.google.com ([209.85.220.214])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjaquez@igalia.com>) id 1NaSXs-0003Xe-Fu
+	(envelope-from <raj.khem@gmail.com>) id 1NaaaL-0000d2-SI
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jan 2010 12:28:23 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AgsFACcCYUtbdWOb/2dsb2JhbACBNNdphDwE
-X-IronPort-AV: E=Sophos;i="4.49,359,1262559600"; d="scan'208";a="581204152"
-Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
-	([91.117.99.155])
-	by smtp2.mundo-r.com with ESMTP; 28 Jan 2010 12:24:56 +0100
-Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
-	by fanzine.igalia.com with esmtps 
-	(Cipher TLS1.0:DHE_RSA_3DES_EDE_CBC_SHA1:24) (Exim)
-	id 1NaSUZ-0004k5-Fg for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jan 2010 12:24:55 +0100
-Received: from ip148.dynamic.igalia.com ([192.168.10.148]
-	helo=lit.local.igalia.com) by mail.igalia.com with esmtp 
-	(Cipher TLSv1:DES-CBC3-SHA:168) (Exim) id 1NaSUY-0002NO-00
+	Thu, 28 Jan 2010 21:03:28 +0100
+Received: by fxm6 with SMTP id 6so871790fxm.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jan 2010 12:24:55 +0100
-Received: from vjaquez by lit.local.igalia.com with local (Exim 4.71)
-	(envelope-from <vjaquez@igalia.com>) id 1NaSUH-0001xX-Kq
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jan 2010 12:24:37 +0100
-Date: Thu, 28 Jan 2010 12:24:37 +0100
-From: =?iso-8859-1?Q?V=EDctor_M=2E_J=E1quez_L=2E?= <vjaquez@igalia.com>
+	Thu, 28 Jan 2010 12:01:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:user-agent;
+	bh=nky+k8L1Cd8eV7ovj4EjLbvnUlgnks1UUHsg0kcCrzk=;
+	b=nq9+obJM+lT5gnfuLhLrStgPOvvMWEvc1m1s3XXr1CPFxY8rQyHuWU/4ewvsK+f4LY
+	4GcIfoWsx5P8C8vl5hqO291HJwlotJG6gCURPHu6BX6/9eKonlGMs14yKGnh9o1kb8Zn
+	LAeFP0vtjbC+l6R0dYMIm1Z08aJT06up3CG0Y=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=suyDjKHbjq9EQ6ZS+l+HJ5p9ev80qb9u6BddwMxNlMmm2Mg9V+dL0X36nCPSD9mEPp
+	O0q+pvNbPYjiMFdUFtVayka0FybOjWDz1BXDnaMeZtJOI9TPeTcdNy/gVQbsjK3lHPck
+	sr5T7yA071fmfUZ1TtZKd1zTjh/AG4kEbArGg=
+Received: by 10.87.68.15 with SMTP id v15mr277322fgk.64.1264708863007;
+	Thu, 28 Jan 2010 12:01:03 -0800 (PST)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 3sm2459396fge.11.2010.01.28.12.01.00
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 28 Jan 2010 12:01:01 -0800 (PST)
+Date: Thu, 28 Jan 2010 12:00:49 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100128112437.GB14524@lit.local.igalia.com>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100128200049.GA4958@gmail.com>
 MIME-Version: 1.0
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 212.51.32.191
-X-SA-Exim-Mail-From: vjaquez@igalia.com
+X-SA-Exim-Connect-IP: 209.85.220.214
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: recipies for dsp code
+Subject: update hook for git to check push commit message
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,18 +50,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jan 2010 11:28:23 -0000
+X-List-Received-Date: Thu, 28 Jan 2010 20:03:29 -0000
+X-Groupsio-MsgNum: 16273
+Content-Type: multipart/mixed; boundary="T4sUOijqQbZv57TR"
+Content-Disposition: inline
+
+--T4sUOijqQbZv57TR
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hi,
+Hi
 
-I've been playing with my own OE overlay for the beagleboard[1]. But I want to
-be able to build binaries for the DSP also.
+Attached is a small hook for updates that are pushed into repo.
+Right now it only checks the first line of the commit and expects
+module: summary
 
-Can you point me out any examples of recipes and local configurations for
-using simultaneously another toolchain?
+I have not tested it at all
 
-1. http://gitorious.org/vjaquez-beagleboard/marmita
+Comments ?
+
+Thanks
+-Khem
 
 
+
+--T4sUOijqQbZv57TR
+Content-Type: text/x-python; charset=us-ascii
+Content-Disposition: attachment; filename="update.py"
+
+#!/usr/bin/env python
+# usage update.py <oldrev> <newrev>
+# currently it only checks for first line of the commit message
+# which should look like e.g
+# uclibc: <pretty summary>
+
+import sys,os
+from subprocess import *
+oldrev = sys.argv[1]
+newrev = sys.argv[2]
+user = os.getenv('USER')
+def ErrorOut(message):
+    print "Please reformat the message per guidelines on http://wiki.openembedded.org/index.php/Commit_Policy"
+    print "A sample is at http://wiki.openembedded.org/index.php/Commit_log_example"
+    print "\nFaulty Commit Message:\n\n ", message
+    sys.exit(1)
+
+p = os.popen("git rev-list %s...%s" %(oldrev, newrev))
+missed_revs = p.read()
+for r in missed_revs.split():
+    m1 = Popen(["git", "cat-file", "commit", r],stdout=PIPE)
+    m2 = Popen(["sed", "1,/^$/d"], stdin=m1.stdout, stdout=PIPE)
+    rev = m2.communicate()[0]
+    first_word = rev.split()[0];
+    if first_word[-1] is ':':
+	print "Your message is not formatted according to commit poilicy"
+	ErrorOut(rev)
+    summary = rev.split(1)
+    if summary is "":
+	print "Commit Message does not have summary line"
+	ErrorOut(rev)
+
+--T4sUOijqQbZv57TR--
