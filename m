@@ -1,39 +1,40 @@
-Received: from mail-ew0-f213.google.com ([209.85.219.213])
+Received: from mail-yx0-f180.google.com ([209.85.210.180])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NacNE-0006q2-T8
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NacST-00077d-7U
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jan 2010 22:58:03 +0100
-Received: by ewy5 with SMTP id 5so739339ewy.12
+	Thu, 28 Jan 2010 23:03:28 +0100
+Received: by yxe10 with SMTP id 10so1087309yxe.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jan 2010 13:55:38 -0800 (PST)
+	Thu, 28 Jan 2010 14:01:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=bn3xq46n1oL2JJGyDh2o/1lyGfj2KkOJGBpe2n6m8HY=;
-	b=hmkz9aldLZccqjg8bGkdkvNzzUZrI7b9rtFP+Xcd3aYn94pbSu686zKHwctUZwjmRB
-	0KJVORYFCJyikcJIsIL/cPucPXDdCUeEL8DMUi5CJwToLRSr50M8+4uVcqfv3Q0mdvAa
-	4mu2aejv0jH3i0bIytUqB7WLgh0/nRoTZ9kus=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=1cFBDXAA8+ySEaN4yOe2tfvngXC5OKNrKYO3QhFCs40=;
+	b=nLOCC178r141+nu7g5kW0PPHSTUdZUu/W8Gl94ilDfPQLzchS9Pdu9UVqgENQfAQF0
+	9zL+RRlBkLUwwBWQPfgafXoMn3CeOHMQUfb+p9MAAPTOAfpbA3TBc0pTWeW8DxuDOvAX
+	7yd+zX16vtWyQuLr1jCJtXyU7wo31VZnxFp/c=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=IhAv24jav9YlVTd6hE+gT27SVZufUNnI02rIikI0OerFpM+8eCNd1KLMWLscPdbIqP
-	ezfwlayMPuluYfFdXFVE6Ah47kplZe/2lKfXEpv8lTT0NUD+PK9cIIXi5n+42pr2a9C1
-	vWqzqJGFJECByZgyBazi2KYJ1BI35wktSVUSI=
-Received: by 10.216.90.138 with SMTP id e10mr1811084wef.150.1264715737887;
-	Thu, 28 Jan 2010 13:55:37 -0800 (PST)
-Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
-	by mx.google.com with ESMTPS id 5sm32469eyf.2.2010.01.28.13.55.33
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 28 Jan 2010 13:55:33 -0800 (PST)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=xsgnzCKB+rDduZiGpq6ANwI5CPqTMt+EH2EXQBSVVkaQ/a0K8VMZsCDFjvnO0WOBj+
+	VSFG8ntws9s9ssbWuL30m9/dUc9PGfCftk0vgESYeUv1/dlQ7xT5d2o1YtQXgQAhveHQ
+	W0/nbjFpaEtOreSp5EjoIlcYKKJdj+ZalKcVU=
+MIME-Version: 1.0
+Received: by 10.101.142.14 with SMTP id u14mr1891758ann.244.1264716061751; 
+	Thu, 28 Jan 2010 14:01:01 -0800 (PST)
+In-Reply-To: <1264715530.9974.436.camel@lenovo.internal.reciva.com>
+References: <20100128200049.GA4958@gmail.com>
+	<1264715530.9974.436.camel@lenovo.internal.reciva.com>
+Date: Thu, 28 Jan 2010 23:01:01 +0100
+Message-ID: <ac9c93b11001281401l3b7d20dfoff45632461802c37@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 28 Jan 2010 22:55:28 +0100
-Message-Id: <1264715728-860-1-git-send-email-fransmeulenbroeks@gmail.com>
-X-Mailer: git-send-email 1.6.4.2
-X-SA-Exim-Connect-IP: 209.85.219.213
+X-SA-Exim-Connect-IP: 209.85.210.180
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] kernel.bbclass only install image in do_deploy if not installing from packaged staging
+Subject: Re: update hook for git to check push commit message
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,96 +48,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jan 2010 21:58:04 -0000
+X-List-Received-Date: Thu, 28 Jan 2010 22:03:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-install -m 0644 ${KERNEL_OUTPUT} ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
-expandds to
-install -m 0644 arch/arm/boot/uImage .../deploy/glibc/images/beagleboard/uImage-2.6.29-r51-beagleboard.bin
-but of course arch/arm/boot/uImage does not exist since we are using packaged staging so we get
-the error:
-install: cannot stat `arch/arm/boot/uImage': No such file or directory
-This patch only installs if not using packaged staging
----
- classes/kernel.bbclass                  |    4 +++-
- recipes/perl/perl-5.8.8/firsttime.patch |   15 +++++++++++++++
- recipes/perl/perl-native_5.8.8.bb       |    3 ++-
- recipes/perl/perl_5.8.8.bb              |    3 ++-
- 4 files changed, 22 insertions(+), 3 deletions(-)
- create mode 100644 recipes/perl/perl-5.8.8/firsttime.patch
+2010/1/28 Phil Blundell <philb@gnu.org>:
+> On Thu, 2010-01-28 at 12:00 -0800, Khem Raj wrote:
+>> Attached is a small hook for updates that are pushed into repo.
+>> Right now it only checks the first line of the commit and expects
+>> module: summary
+>
+> I'm not really in favour of applying the commit message policy quite
+> that harshly. =A0The wiki page that you linked to doesn't really seem to
+> support this kind of check: the actual guidance it gives about checkin
+> messages is:
+>
+> * Have a clear commit message (example):
+> =A0 =A0- The first line of commit is a summary of the changes.
+> =A0 =A0- The first line should start with the name of the recipe the chan=
+ge affects.
 
-diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-index 53ea252..fa48a43 100644
---- a/classes/kernel.bbclass
-+++ b/classes/kernel.bbclass
-@@ -537,7 +537,9 @@ MODULES_IMAGE_BASE_NAME ?= modules-${PV}-${PR}-${MACHINE}
- 
- do_deploy() {
- 	install -d ${DEPLOY_DIR_IMAGE}
--	install -m 0644 ${KERNEL_OUTPUT} ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
-+	if [ "$PSTAGING_ACTIVE" = "0" ]; then
-+	    install -m 0644 ${KERNEL_OUTPUT} ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
-+	fi
- 	package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}.bin
- 
- 	if [ -d "${PKGD}/lib" ]; then
-diff --git a/recipes/perl/perl-5.8.8/firsttime.patch b/recipes/perl/perl-5.8.8/firsttime.patch
-new file mode 100644
-index 0000000..bd09589
---- /dev/null
-+++ b/recipes/perl/perl-5.8.8/firsttime.patch
-@@ -0,0 +1,15 @@
-+Index: perl-5.8.8/lib/CPAN/FirstTime.pm
-+===================================================================
-+--- perl-5.8.8.orig/lib/CPAN/FirstTime.pm
-++++ perl-5.8.8/lib/CPAN/FirstTime.pm
-+@@ -68,9 +68,7 @@ dialog anytime later by typing 'o conf i
-+ 
-+ ];
-+ 
-+-    my $manual_conf =
-+-	ExtUtils::MakeMaker::prompt("Are you ready for manual configuration?",
-+-				    "yes");
-++    my $manual_conf = "no";
-+     my $fastread;
-+     {
-+       local $^W;
-diff --git a/recipes/perl/perl-native_5.8.8.bb b/recipes/perl/perl-native_5.8.8.bb
-index 60a5cf5..a9c66e8 100644
---- a/recipes/perl/perl-native_5.8.8.bb
-+++ b/recipes/perl/perl-native_5.8.8.bb
-@@ -15,7 +15,8 @@ SRC_URI = "http://ftp.funet.fi/pub/CPAN/src/perl-${PV}.tar.gz \
-            file://native-no-gdbminc.patch;patch=1 \
-            file://native-perlinc.patch;patch=1 \
-            file://makedepend-dash.patch;patch=1 \
--           file://asm-pageh-fix.patch;patch=1"
-+           file://asm-pageh-fix.patch;patch=1 \
-+           file://firsttime.patch;patch=1"
- 
- S = "${WORKDIR}/perl-${PV}"
- 
-diff --git a/recipes/perl/perl_5.8.8.bb b/recipes/perl/perl_5.8.8.bb
-index edd3a83..200e70c 100644
---- a/recipes/perl/perl_5.8.8.bb
-+++ b/recipes/perl/perl_5.8.8.bb
-@@ -5,7 +5,7 @@ LICENSE = "Artistic|GPL"
- PRIORITY = "optional"
- # We need gnugrep (for -I)
- DEPENDS = "virtual/db perl-native grep-native"
--PR = "r31"
-+PR = "r32"
- 
- # Major part of version
- PVM = "5.8"
-@@ -30,6 +30,7 @@ SRC_URI = "ftp://ftp.funet.fi/pub/CPAN/src/perl-${PV}.tar.gz \
-         file://64_debian_enc2xs_inc.patch;patch=1 \
-         file://asm-pageh-fix.patch;patch=1 \
-         file://shared-ldflags.patch;patch=1 \
-+        file://firsttime.patch;patch=1 \
-         file://config.sh \
-         file://config.sh-32 \
-         file://config.sh-32-le \
--- 
-1.6.4.2
+What if a commit is not about a recipe but e.g. about a class file
+and what if a commit changes multiple recipes ? (i had this one once
+when eliminating lots of perl native recipes replacing them with
+BBCLASSEXTEND=3D"native")
+This was a pain editing already. I think I would have stopped doing it
+if I had to commit each individual patch
 
+> =A0 =A0- The rest of the message should give more details on the change a=
+s appropriate.
+> =A0 =A0- Mention the affected bug numbers if appropriate.
+> =A0 =A0- Give credit where credit is due. If you commit someone else's wo=
+rk more or
+> =A0 =A0 =A0less verbatim, you should use git commit --author $mail-of-aut=
+hor. If pulling
+> =A0 =A0 =A0changes from somewhere like Poky or OpenMoko there is no probl=
+em with that
+> =A0 =A0 =A0but mention where the changes came from.
+> =A0 =A0- Include a Signed-off-by: line indicating the change has valid ce=
+rtificate
+> =A0 =A0 =A0of origin as per the Linux kernel
+
+Not sure if we can influence the template that you get with git commit
+but I would surely like to learn if one way or another I can add a
+Signed-off-by lne automatically
+
+>
+> ... which is nowhere near as prescriptive as the rule that you seem to
+> be implementing in your script. =A0Also, the wiki page has an explicit
+> statement that "[these] rules are not hard fast rules", which would
+> suggest that even such guidance as it does provide is not intended to be
+> taken too dogmatically.
+>
+> Personally I think that the current situation of the TSC applying
+> pressure to those people who seem to be chronically unable to write
+> suitable checkin comments is a perfectly fine way of solving the
+> problem.
+
+Agree
+
+FM
+
+>
+> On a technical level, I think you could probably do without the sed
+> subprocess, and "summary =3D rev.split(1)" doesn't look quite right
+> either.
+>
+> p.
+>
+>
+> p.
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
