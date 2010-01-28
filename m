@@ -1,40 +1,41 @@
-Received: from mail-yw0-f195.google.com ([209.85.211.195])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hvontres@gmail.com>) id 1NaMHm-0003fx-IW
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1NaSDE-00028v-Mr
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jan 2010 05:47:21 +0100
-Received: by ywh33 with SMTP id 33so339728ywh.16
+	Thu, 28 Jan 2010 12:07:04 +0100
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id B0960110009A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Jan 2010 20:44:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=DbCMxmheeoF6UswsL/ESidbWPjdcdjwzVhaCy4gv28s=;
-	b=xbo6rZSqWJwElYMgLEwMJT6CwybdMSlsfa8b3oexP+eBY7ypVehxaCKATQZtpT7SdG
-	6QWoXg8vp0ge+FCuH9GWV3Vi2DzyDHZ9BVRriRle1IihCg5vjCNIvr/De++e9EveTcPl
-	z1kqY15LSmxA+s1Vq32dYdCqh8D3AKUCZTUoc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=WuE28FxPfvnNQUxn3D1ZL+j3cHxXVsy7g0jWbgCfKg8uihxXYvRoIWdfrCAsfkB5Gw
-	BB4FO4eGWN33EWQ/XecKPgHIe7p5BZl5KT+fgpX/XMVzUOxzdomAU1jX742o8DgGB3sd
-	OGFDuDzAar7fI0CoQWCe8mv5gRXJaRlykpO2A=
-Received: by 10.151.1.19 with SMTP id d19mr7309694ybi.189.1264653895538;
-	Wed, 27 Jan 2010 20:44:55 -0800 (PST)
-Received: from localhost (adsl-75-7-226-176.dsl.sndg02.sbcglobal.net
-	[75.7.226.176])
-	by mx.google.com with ESMTPS id 4sm217607ywg.13.2010.01.27.20.44.54
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 27 Jan 2010 20:44:54 -0800 (PST)
-From: Henry von Tresckow <hvontres@gmail.com>
+	Thu, 28 Jan 2010 12:04:39 +0100 (CET)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 40D401100094
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Jan 2010 12:04:39 +0100 (CET)
+Received: from rhein.familie-heinold.de (f052238210.adsl.alicedsl.de
+	[78.52.238.210]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Jan 2010 12:04:39 +0100 (CET)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 880DE3C0C3; Thu, 28 Jan 2010 12:04:38 +0100 (CET)
+Date: Thu, 28 Jan 2010 12:04:38 +0100
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Jan 2010 20:44:44 -0800
-Message-Id: <1264653884-16351-1-git-send-email-hvontres@gmail.com>
-X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 209.85.211.195
-X-SA-Exim-Mail-From: hvontres@gmail.com
+Message-ID: <20100128110438.GA18170@rhein.zuhause.netz>
+References: <6C2434209962DC46B88345CA85C334A28596C7F9D3@Courier.syntech.org>
+	<1264196828.26541.14.camel@mattotaupa.wohnung.familie-menzel.net>
+	<6C2434209962DC46B88345CA85C334A28596C7FB21@Courier.syntech.org>
+MIME-Version: 1.0
+In-Reply-To: <6C2434209962DC46B88345CA85C334A28596C7FB21@Courier.syntech.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] initramfs-kexecboot-image : Unset FEED_DEPLOYDIR_BASE_URI to allow builds with local feeds
+Subject: Re: Difficulties building java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,28 +49,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jan 2010 04:47:21 -0000
+X-List-Received-Date: Thu, 28 Jan 2010 11:07:04 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Having FEED_DEPLOYDIR_BASE_URI set in local.conf was causing recipie to not build
+On Wed, Jan 27, 2010 at 04:49:13PM -0500, Mark Butsch wrote:
+> I forgot to mention that I am using "stable/2009" branch.
 
-Signed-off-by: Henry von Tresckow <hvontres@gmail.com>
----
- recipes/kexecboot/initramfs-kexecboot-image.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Hm seems stable branch is not in the right shape for java stuff.
+> 
+> I have been trying different combinations of PREFERRED_PROVIDERS and VERSIONS with no success.
+> 
+> I searched my openembedded email archive and found someone had a similar error back in June of 2009,
+> But there was no solution posted.
+> 
+> I also found a wiki article that described using the Jalimo-Overlay to build OpenJDK, but I haven't had any
+> Success with it either.
+> Is the Jalimo-Overlay required to build Java in OE or only in certain cases?
 
-diff --git a/recipes/kexecboot/initramfs-kexecboot-image.bb b/recipes/kexecboot/initramfs-kexecboot-image.bb
-index 890287d..285640d 100644
---- a/recipes/kexecboot/initramfs-kexecboot-image.bb
-+++ b/recipes/kexecboot/initramfs-kexecboot-image.bb
-@@ -23,5 +23,5 @@ IMAGE_LOGIN_MANAGER = ""
- IMAGE_INIT_MANAGER = ""
- IMAGE_INITSCRIPTS = ""
- IMAGE_DEV_MANAGER = ""
--
-+FEED_DEPLOYDIR_BASE_URI = ""
- inherit image
--- 
-1.6.3.3
+Only the openjdk recipes are left in the jalimo svn all other was merged into dev. So you might need
+a checkout before this merge for the stable oe branch to work.
+> 
+> Still confused,
+> 
+> Mark
 
+Sorry,
+
+we dont have yet the time to work on the stable branch to get java into shape.
+
+Bye Henning
 
 
