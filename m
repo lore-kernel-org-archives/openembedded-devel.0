@@ -1,41 +1,40 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from smtp3.mundo-r.com ([212.51.32.191] helo=smtp2.mundo-r.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1NaSDE-00028v-Mr
+	(envelope-from <vjaquez@igalia.com>) id 1NaSXs-0003Xe-Fu
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jan 2010 12:07:04 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id B0960110009A
+	Thu, 28 Jan 2010 12:28:23 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AgsFACcCYUtbdWOb/2dsb2JhbACBNNdphDwE
+X-IronPort-AV: E=Sophos;i="4.49,359,1262559600"; d="scan'208";a="581204152"
+Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
+	([91.117.99.155])
+	by smtp2.mundo-r.com with ESMTP; 28 Jan 2010 12:24:56 +0100
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+	by fanzine.igalia.com with esmtps 
+	(Cipher TLS1.0:DHE_RSA_3DES_EDE_CBC_SHA1:24) (Exim)
+	id 1NaSUZ-0004k5-Fg for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Jan 2010 12:24:55 +0100
+Received: from ip148.dynamic.igalia.com ([192.168.10.148]
+	helo=lit.local.igalia.com) by mail.igalia.com with esmtp 
+	(Cipher TLSv1:DES-CBC3-SHA:168) (Exim) id 1NaSUY-0002NO-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jan 2010 12:04:39 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 40D401100094
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jan 2010 12:04:39 +0100 (CET)
-Received: from rhein.familie-heinold.de (f052238210.adsl.alicedsl.de
-	[78.52.238.210]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Jan 2010 12:04:39 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 880DE3C0C3; Thu, 28 Jan 2010 12:04:38 +0100 (CET)
-Date: Thu, 28 Jan 2010 12:04:38 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Thu, 28 Jan 2010 12:24:55 +0100
+Received: from vjaquez by lit.local.igalia.com with local (Exim 4.71)
+	(envelope-from <vjaquez@igalia.com>) id 1NaSUH-0001xX-Kq
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 28 Jan 2010 12:24:37 +0100
+Date: Thu, 28 Jan 2010 12:24:37 +0100
+From: =?iso-8859-1?Q?V=EDctor_M=2E_J=E1quez_L=2E?= <vjaquez@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100128110438.GA18170@rhein.zuhause.netz>
-References: <6C2434209962DC46B88345CA85C334A28596C7F9D3@Courier.syntech.org>
-	<1264196828.26541.14.camel@mattotaupa.wohnung.familie-menzel.net>
-	<6C2434209962DC46B88345CA85C334A28596C7FB21@Courier.syntech.org>
+Message-ID: <20100128112437.GB14524@lit.local.igalia.com>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-In-Reply-To: <6C2434209962DC46B88345CA85C334A28596C7FB21@Courier.syntech.org>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+X-SA-Exim-Connect-IP: 212.51.32.191
+X-SA-Exim-Mail-From: vjaquez@igalia.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Difficulties building java
+Subject: recipies for dsp code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,35 +48,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Jan 2010 11:07:04 -0000
+X-List-Received-Date: Thu, 28 Jan 2010 11:28:23 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Wed, Jan 27, 2010 at 04:49:13PM -0500, Mark Butsch wrote:
-> I forgot to mention that I am using "stable/2009" branch.
+Hi,
 
-Hm seems stable branch is not in the right shape for java stuff.
-> 
-> I have been trying different combinations of PREFERRED_PROVIDERS and VERSIONS with no success.
-> 
-> I searched my openembedded email archive and found someone had a similar error back in June of 2009,
-> But there was no solution posted.
-> 
-> I also found a wiki article that described using the Jalimo-Overlay to build OpenJDK, but I haven't had any
-> Success with it either.
-> Is the Jalimo-Overlay required to build Java in OE or only in certain cases?
+I've been playing with my own OE overlay for the beagleboard[1]. But I want to
+be able to build binaries for the DSP also.
 
-Only the openjdk recipes are left in the jalimo svn all other was merged into dev. So you might need
-a checkout before this merge for the stable oe branch to work.
-> 
-> Still confused,
-> 
-> Mark
+Can you point me out any examples of recipes and local configurations for
+using simultaneously another toolchain?
 
-Sorry,
-
-we dont have yet the time to work on the stable branch to get java into shape.
-
-Bye Henning
+1. http://gitorious.org/vjaquez-beagleboard/marmita
 
 
