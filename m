@@ -1,36 +1,26 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NaeUq-0002n1-79
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jan 2010 01:14:04 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NaeSW-0007KX-2c from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 28 Jan 2010 16:11:36 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 28 Jan 2010 16:11:35 -0800
-Received: from 172.30.80.228 ([172.30.80.228]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Fri, 29 Jan 2010 00:10:40 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	28 Jan 2010 17:10:39 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Naeiv-0005I8-Fv for openembedded-devel@lists.openembedded.org;
+	Fri, 29 Jan 2010 01:28:36 +0100
+Received: from f053036137.adsl.alicedsl.de ([78.53.36.137]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Naege-0001Tn-HR for openembedded-devel@lists.openembedded.org;
+	Fri, 29 Jan 2010 00:26:12 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <b6ebd0a51001281522u2f7007efr5a306a9e33bbf2bc@mail.gmail.com>
+In-Reply-To: <ac9c93b11001281401l3b7d20dfoff45632461802c37@mail.gmail.com>
 References: <20100128200049.GA4958@gmail.com>
-	<1264719585.17979.5.camel@trini-m4400>
-	<b6ebd0a51001281522u2f7007efr5a306a9e33bbf2bc@mail.gmail.com>
-Organization: Mentor Graphics Corporation
-Date: Thu, 28 Jan 2010 17:10:39 -0700
-Message-Id: <1264723839.17979.6.camel@trini-m4400>
+	<1264715530.9974.436.camel@lenovo.internal.reciva.com>
+	<ac9c93b11001281401l3b7d20dfoff45632461802c37@mail.gmail.com>
+Date: Fri, 29 Jan 2010 01:26:10 +0100
+Message-ID: <1264724770.17517.19.camel@mattotaupa>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-OriginalArrivalTime: 29 Jan 2010 00:11:35.0579 (UTC)
-	FILETIME=[9E97EEB0:01CAA077]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: update hook for git to check push commit message
@@ -47,44 +37,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jan 2010 00:14:04 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 29 Jan 2010 00:28:36 -0000
+X-Groupsio-MsgNum: 16288
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-NZvCvuCv401gw/xC1pet"
 
-On Thu, 2010-01-28 at 16:22 -0700, Chris Larson wrote:
-> On Thu, Jan 28, 2010 at 3:59 PM, Tom Rini <tom_rini@mentor.com> wrote:
-> 
-> > On Thu, 2010-01-28 at 12:00 -0800, Khem Raj wrote:
-> > > Hi
-> > >
-> > > Attached is a small hook for updates that are pushed into repo.
-> > > Right now it only checks the first line of the commit and expects
-> > > module: summary
-> >
-> > Is there any way to force the commit to happen, even if the script
-> > doesn't like it?  Can the script edit the commit message, even?  ie if
-> > there's no git commit --ignore-prehook type option, could it see if the
-> > first line is FORCE or something, edit that out and commit?  This will
-> > catch the poorly formed commit messages without being a big burden on
-> > people doing things that don't fit well into the "module: summary" model
-> > (that said, lib*-perl-native: Convert to BBCLASSEXTEND as a first line
-> > makes sense to me).
-> >
-> 
-> My worry with editing a commit at push time is, the user's local repository
-> now no longer matches upstream.  One would hope a rebase would intelligently
-> handle it, but from a configuration management perspective I don't think
-> modifying commits behind the user's back is a very sane thing.
-> 
-> Now, if you did this locally at commit time rather than push time, I think
-> that would be less crazy, but unfortunately a clone can't bring along hooks
-> :\
+--=-NZvCvuCv401gw/xC1pet
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Ah, I forgot it would be on the server side and I don't see a way to
-force the push if a hook fails.
+Am Donnerstag, den 28.01.2010, 23:01 +0100 schrieb Frans Meulenbroeks:
+> 2010/1/28 Phil Blundell <philb@gnu.org>:
 
--- 
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+[=E2=80=A6]
+
+> >    - Include a Signed-off-by: line indicating the change has valid cert=
+ificate
+> >      of origin as per the Linux kernel
+>=20
+> Not sure if we can influence the template that you get with git commit
+> but I would surely like to learn if one way or another I can add a
+> Signed-off-by lne automatically
+
+	$ git commit -s
+
+[=E2=80=A6]
 
 
+Thanks,
+
+Paul
+
+--=-NZvCvuCv401gw/xC1pet
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAktiKyIACgkQPX1aK2wOHVh+twCeI1XkOfshUtbsHeGwJSl11dXz
+pC4An268I38/5ze/Vse2z4jq2mnkB7aP
+=8E74
+-----END PGP SIGNATURE-----
+
+--=-NZvCvuCv401gw/xC1pet--
