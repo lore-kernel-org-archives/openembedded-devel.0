@@ -1,40 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from exchsrvr.syntech-fuelmaster.com ([199.44.250.2]
+	helo=courier.syntech-fuelmaster.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NatSi-0002i7-7p for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jan 2010 17:12:51 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NatQ6-0007Tb-47 for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jan 2010 17:10:06 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jan 2010 17:10:06 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jan 2010 17:10:06 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 29 Jan 2010 17:05:49 +0100
-Message-ID: <hjv10s$rvb$2@ger.gmane.org>
-References: <E1Naol0-0001BB-G8@melo.openembedded.org>
-	<94415AF6-0778-4FAA-8EBD-D61FB655B9F3@vanille-media.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100113 Shredder/3.0.2pre
-In-Reply-To: <94415AF6-0778-4FAA-8EBD-D61FB655B9F3@vanille-media.de>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <mbutsch@syntech-fuelmaster.com>) id 1Naxxp-0003wF-BA
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 29 Jan 2010 22:01:16 +0100
+Received: from Courier.syntech.org ([fe80::f1e9:ec58:2caf:f234]) by
+	Courier.syntech.org ([fe80::f1e9:ec58:2caf:f234%14]) with mapi;
+	Fri, 29 Jan 2010 15:58:41 -0500
+From: Mark Butsch <mbutsch@syntech-fuelmaster.com>
+To: "'openembedded-devel@lists.openembedded.org'"
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 29 Jan 2010 15:58:39 -0500
+Thread-Topic: [oe] Difficulties building java
+Thread-Index: AcqgCdf/V+wxqH98SN6VADFrAhH0fgBGqpMw
+Message-ID: <6C2434209962DC46B88345CA85C334A28596C7FBC4@Courier.syntech.org>
+References: <6C2434209962DC46B88345CA85C334A28596C7F9D3@Courier.syntech.org>
+	<1264196828.26541.14.camel@mattotaupa.wohnung.familie-menzel.net>
+	<6C2434209962DC46B88345CA85C334A28596C7FB21@Courier.syntech.org>
+	<20100128110438.GA18170@rhein.zuhause.netz>
+In-Reply-To: <20100128110438.GA18170@rhein.zuhause.netz>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 199.44.250.2
+X-SA-Exim-Mail-From: mbutsch@syntech-fuelmaster.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [oe-commits] Koen Kooi : mplayer svn: make SRCREV go backwards to fix audio and dvd playback
+Subject: Re: Difficulties building java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,40 +42,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jan 2010 16:12:51 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 29 Jan 2010 21:01:17 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+on Thursday, January 28, 2010 6:05 AM, Henning Heinold wrote:
 
-On 29-01-10 16:44, Dr. Michael Lauer wrote:
-> 
-> Am 29.01.2010 um 12:11 schrieb git version control:
-> 
->> Module: openembedded.git
->> Branch: org.openembedded.dev
->> Commit: a9e2573fd6764685720bc5532370bad2c039d9be
->> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=a9e2573fd6764685720bc5532370bad2c039d9be
->>
->> Author: Koen Kooi <koen@openembedded.org>
->> Date:   Fri Jan 29 11:53:32 2010 +0100
->>
->> mplayer svn: make SRCREV go backwards to fix audio and dvd playback
->>
->> * bisecting to the offending commits is nigh impossible since mplayer doesn't compile for about 70% of the affected revision range :(
-> 
-> What about bumping PE?
+> On Wed, Jan 27, 2010 at 04:49:13PM -0500, Mark Butsch wrote:
+> > I forgot to mention that I am using "stable/2009" branch.
+>
+> Hm seems stable branch is not in the right shape for java stuff.
+> >=20
+> > I have been trying different combinations of PREFERRED_PROVIDERS and VE=
+RSIONS with no success.
+> >=20
+> > I searched my openembedded email archive and found someone had a simila=
+r error back in June of 2009,
+> > But there was no solution posted.
+> >=20
+> > I also found a wiki article that described using the Jalimo-Overlay to =
+build OpenJDK, but I haven't had any
+> > Success with it either.
+> > Is the Jalimo-Overlay required to build Java in OE or only in certain c=
+ases?
+>
+> Only the openjdk recipes are left in the jalimo svn all other was merged =
+into dev. So you might need
+> a checkout before this merge for the stable oe branch to work.
+> >=20
+> > Still confused,
+> >=20
+> > Mark
+>
+> Sorry,
+>
+> we dont have yet the time to work on the stable branch to get java into s=
+hape.
+>
+> Bye Henning
 
-That would involve bumping PE for all other mplayer recipes as well,
-which I think is a bit too much
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Well, I switched over to using the "org.openembedded.dev" branch and did a =
+"git pull" to make sure it was
+Up to date.
 
-iD8DBQFLYwddMkyGM64RGpERAjVDAKCVdln4Mt4zszZowQgiZHg1qyoZ2gCff0/D
-qlNV58tC7nMj9psd140nCF0=
-=iYuj
------END PGP SIGNATURE-----
+I still get the same error when building "classpath". From the log.do_confi=
+gure file:
+-----
+configure: WARNING: I have to compile Test.class from scratch
+checking for ecj... ecj -warn:-deprecation,serial,unusedImport
+checking if ecj -warn:-deprecation,serial,unusedImport is a version of gcj.=
+.. directory does not exist: --version
+checking if ecj -warn:-deprecation,serial,unusedImport works... yes
+checking if java works... configure: error: The Java compiler ecj -warn:-de=
+precation,serial,unusedImport failed=20
+   (see config.log, check the CLASSPATH?)
+FATAL: oe_runconf failed
+--------
 
+I am using the following:
+
+PREFERRED_PROVIDER_virtual/java-initial =3D "cacao-initial"
+PREFFERED_VERSION_cacao-initial =3D "0.98"
+
+PREFERRED_PROVIDER_virtual/java-native =3D "cacao-native"
+PREFFERED_VERSION_cacao-native =3D "0.99.3"
+
+PREFERRED_PROVIDER_virtual/javac-native =3D "ecj-bootstrap-native"
+PREFFERED_VERSION_libecj-bootstrap =3D "3.4"
+
+PREFERRED_PROVIDER_classpath =3D "classpath"
+PREFFERED_VERSION_classpath-initial =3D "0.93"
+PREFFERED_VERSION_classpath-native =3D "0.97.2"
+
+PREFERRED_PROVIDER_swt3.4-gtk =3D "swt3.4-gtk"
+
+PREFFERED_VERSION_cacao=3D "0.99.4"
+PREFFERED_VERSION_classpath=3D "0.98"
+
+Are these a good combination? I am building on an x86-64 machine for i686 t=
+arget with Angstrom as my distro.
+
+Suggestions on what to try/investigate?
+
+Thanks in advance,
+
+Mark
 
 
