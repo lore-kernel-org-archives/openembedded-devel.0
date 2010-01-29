@@ -1,27 +1,42 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from mail-pz0-f192.google.com ([209.85.222.192])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NaosZ-0000Ya-Jy
+	(envelope-from <kergoth@gmail.com>) id 1Narzl-0006Wj-Hj
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jan 2010 12:19:14 +0100
-Received: (qmail 26141 invoked by uid 813007); 29 Jan 2010 11:16:49 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 29 Jan 2010 11:16:49 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Jan 2010 12:16:42 +0100
-User-Agent: KMail/1.12.4 (Linux/2.6.33-rc5-00011-gf6760aa; KDE/4.3.4; x86_64; ;
-	)
-References: <4B557210.4000700@gmx.net>
-In-Reply-To: <4B557210.4000700@gmx.net>
+	Fri, 29 Jan 2010 15:38:52 +0100
+Received: by pzk30 with SMTP id 30so1528841pzk.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 29 Jan 2010 06:36:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:from:date:x-google-sender-auth:message-id:subject:to
+	:content-type; bh=cPPep+B3muQy/34jJWq8NwaYWjCH4f3H+SoRb27LTLI=;
+	b=p8A1CxuUWXnohjV6kqKN3NCzyM3bdQBiwxZKKFO2QHVndNvSEZb2uKr6fEJis8ZjMN
+	1sbzHr+cS2aBdRj0MG+naczwbVlapPjV+xvXIN4GtddEIyU6csF0GIrmS1F28u8xYuZh
+	YKa4NH5GxAi8YlTDHOrr8m8IIufCY8OGDCKxs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=gDhHruyFqHJkoFU3HxqHmJeLRh9vog+5G48nOT65MZwLL1JfUSJfhDbfAbzdiP/6Av
+	q/ETQO7QFWjsHvKg/y7kwnetoszhNY9725KOB8p/gWMPNbfdGW/jUllRyKSab5AEysqd
+	On6MMRbGzFSbTlaOQjB9KN8G6BWyYraqi6azA=
 MIME-Version: 1.0
-Message-Id: <201001291216.43416.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Sender: kergoth@gmail.com
+Received: by 10.142.151.23 with SMTP id y23mr615211wfd.269.1264775785111; Fri, 
+	29 Jan 2010 06:36:25 -0800 (PST)
+In-Reply-To: <hjud6i$77n$1@ger.gmane.org>
+References: <1264759676-23841-1-git-send-email-michael.lippautz@gmail.com> 
+	<hjud6i$77n$1@ger.gmane.org>
+From: Chris Larson <clarson@kergoth.com>
+Date: Fri, 29 Jan 2010 07:36:05 -0700
+X-Google-Sender-Auth: 70392c3f002733ea
+Message-ID: <b6ebd0a51001290636m11f0e72o7ab2f24918944e31@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.222.192
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: OpenEmbedded @ FOSDEM2010
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] libdbd-sqlite-perl: New recipe for SQLite DBI interface driver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,28 +50,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jan 2010 11:19:16 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 29 Jan 2010 14:38:52 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Dnia wtorek, 19 stycznia 2010 o 09:49:20 Robert Schuster napisa=B3(a):
-=20
-> And this brings me to another question: Do we want to invite people to
-> our pre-FOSDEM meeting?
+On Fri, Jan 29, 2010 at 3:27 AM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
 
-What kind of meeting before FOSDEM?
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 29-01-10 11:07, Michael Lippautz wrote:
+> > ---
+> >  recipes/perl/libdbd-sqlite-perl_1.29.bb |   29
+> +++++++++++++++++++++++++++++
+> >  1 files changed, 29 insertions(+), 0 deletions(-)
+> >  create mode 100644 recipes/perl/libdbd-sqlite-perl_1.29.bb
+> >
+> > diff --git a/recipes/perl/libdbd-sqlite-perl_1.29.bb b/recipes/perl/
+> libdbd-sqlite-perl_1.29.bb
+> > new file mode 100644
+> > index 0000000..10fe73a
+> > --- /dev/null
+> > +++ b/recipes/perl/libdbd-sqlite-perl_1.29.bb
+> > @@ -0,0 +1,29 @@
+> > +DESCRIPTION = "PERL database interface driver for the SQLite database."
+> > +SECTION = "libs"
+> > +LICENSE = "Artistic|GPL"
+> > +DEPENDS = "libdbi-perl-native"
+> > +RDEPENDS = "libdbi-perl \
+>
+> That should be RDEPENDS_${PN}
+>
+> We did have a script somewhere to check for things like that, does
+> anyone know where that went?
+>
 
-And other thing: can someone create some kind of OE badges? We were unnamed=
-=20
-each event or had something created adhoc at place...
+Here's one option:
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
-
+INHERIT += "recipe_sanity"
+bitbake -c recipe_sanity libdbd-sqlite-perl
+-- 
+Chris Larson
+clarson at kergoth dot com
+clarson at mvista dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Software Engineer
+MontaVista Software, Inc.
 
