@@ -1,39 +1,28 @@
-Received: from mail-yx0-f180.google.com ([209.85.210.180])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NaysW-0008P8-V4
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jan 2010 22:59:52 +0100
-Received: by yxe10 with SMTP id 10so2265507yxe.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jan 2010 13:57:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=JBtKihUL9oxV0XrU5Hliq2jn4L705Woews3i0YSrwbc=;
-	b=NIBbxrTXZY5lT6Rj4S+lYFwtW50Exw5AJqKO3ylfissiYITemitwfd6moRErvrR2fr
-	CCHgg3lUyGxHcVFXHZPvkLORTKsVaqU3vWG/hboTtCpBFdPVPZ6gKU1d8XPiBf7BCsEV
-	jsuwetEd9VLvu3jl0h3eqYA8MLxTVvasr+Xl8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Q6ugc1qsrNFRXi34wbNbdRSa7qxy1sOI/9zVB4zEO7vKXqIqrrkw6rMe2fLTNYPL/t
-	JK3hOgQ8BcVXcweK+w3ltEF5PHdL8P2SlC01lX8H+fl6+yL3pRhjyHj8A4cpGKimdAS7
-	4gGq2kIO8tvFXocFzsp0beiXvbfQ+18thyBoQ=
-MIME-Version: 1.0
-Received: by 10.101.214.31 with SMTP id r31mr1940996anq.30.1264802242301; Fri, 
-	29 Jan 2010 13:57:22 -0800 (PST)
-In-Reply-To: <1264289812.3738.265.camel@mattotaupa.wohnung.familie-menzel.net>
-References: <1264289812.3738.265.camel@mattotaupa.wohnung.familie-menzel.net>
-Date: Fri, 29 Jan 2010 22:57:22 +0100
-Message-ID: <ac9c93b11001291357qce6ea6eka4a7e3726ab041@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Nazal-0003ef-JI for openembedded-devel@lists.openembedded.org;
+	Fri, 29 Jan 2010 23:45:34 +0100
+Received: from g229062211.adsl.alicedsl.de ([92.229.62.211]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NazYT-0001E3-RE for openembedded-devel@lists.openembedded.org;
+	Fri, 29 Jan 2010 22:43:10 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.180
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <ac9c93b11001291357qce6ea6eka4a7e3726ab041@mail.gmail.com>
+References: <1264289812.3738.265.camel@mattotaupa.wohnung.familie-menzel.net>
+	<ac9c93b11001291357qce6ea6eka4a7e3726ab041@mail.gmail.com>
+Date: Fri, 29 Jan 2010 23:43:17 +0100
+Message-ID: <1264804997.3715.15.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] Perfect(?) workflow for patches.
+Subject: Tools for Patchwork: `pw-am.sh` and `pwclient` (was: [RFC] Perfect(?) workflow for patches.)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,22 +36,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jan 2010 21:59:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 29 Jan 2010 22:45:34 -0000
+X-Groupsio-MsgNum: 16305
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-s6Z138KmLJ6ifSCkXUJo"
+
+--=-s6Z138KmLJ6ifSCkXUJo
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-2010/1/24 Paul Menzel <paulepanter@users.sourceforge.net>:
-?
->
-> 4. Commit (if not go to 5.)
-> =A0a) If the reviewer has commit access and accepts the patch, s/he can
-> push it. A hook then changes the Patchwork state to =BBApplied=AB with th=
-e
-> appropriate commit id and archived(?).
+Am Freitag, den 29.01.2010, 22:57 +0100 schrieb Frans Meulenbroeks:
+> 2010/1/24 Paul Menzel <paulepanter@users.sourceforge.net>:
+> ?
+> >
+> > 4. Commit (if not go to 5.)
+> >  a) If the reviewer has commit access and accepts the patch, s/he can
+> > push it. A hook then changes the Patchwork state to =C2=BBApplied=C2=AB=
+ with the
+> > appropriate commit id and archived(?).
+>=20
+> What is the best way to commit a patch from patchwork?
 
-What is the best way to commit a patch from patchwork?
-I've peeked at pwclient, but ended up with python errors.
+If the patch is inlined, i. e. you can use the mbox-message for `git
+am`, then you can use `contrib/patchwork/pw-am.sh` to get the mbox-file
+from Patchwork and it is automatically committed using `git am`.
 
-FM
+If the patch has a different format, you can also use the links in the
+web interface or `pwclient get`.
+
+> I've peeked at pwclient, but ended up with python errors.
+
+Do you have the latest revision? There were some UTF-8 related problems.
+Can you post your errors?
 
 
+Thanks,
+
+Paul
+
+--=-s6Z138KmLJ6ifSCkXUJo
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAktjZIQACgkQPX1aK2wOHVjwvwCfY1Q+ZQVUc9XooAPnRAgscX9M
+O5EAn1E9KYHixRHF27CWHoJF57U7f1gz
+=766O
+-----END PGP SIGNATURE-----
+
+--=-s6Z138KmLJ6ifSCkXUJo--
