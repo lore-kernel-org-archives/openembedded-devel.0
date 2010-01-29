@@ -1,26 +1,43 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-yx0-f180.google.com ([209.85.210.180])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Naeiv-0005I8-Fv for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jan 2010 01:28:36 +0100
-Received: from f053036137.adsl.alicedsl.de ([78.53.36.137]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Naege-0001Tn-HR for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jan 2010 00:26:12 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <raj.khem@gmail.com>) id 1NafjR-0004dc-0Y
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 29 Jan 2010 02:33:12 +0100
+Received: by yxe10 with SMTP id 10so1249703yxe.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Jan 2010 17:30:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=Hhvw3ROXo0o99oBHAsSdnLo0VC+NxfYXsUM3lP/dveo=;
+	b=ZzJld5eOgdJsdfYn3NzjeOY28KJ3ZsfsXFSooVPA57w7NIDFegwZQOe3bKtznL7I7x
+	THjn3lF6vejDMScYljaW2fRQGZmmE45H6HhpL8F82TPL1CgxsJgsBEhp4VT+Etpygz7t
+	6nhYtH3ezVCBw6IevEdXARSoRoegCqKRqdBtE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=Hi6xmDLbX2HPZwy7wbTt/LBTPuQRdpTOVkGdyKpx2xx7lqimpkxeiykWaAnCHvb/C0
+	CUS9ZuhF3nTObI+a+nunU4Z+EtKSWB+t/xFScdG8agMtUTWsodYUjN53h4S/TU4SZQgj
+	K0InHkrJNL9fONeFagK4gOnUVunTtjUDgI5o0=
+Received: by 10.150.4.26 with SMTP id 26mr839877ybd.0.1264728645377;
+	Thu, 28 Jan 2010 17:30:45 -0800 (PST)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 23sm537798yxe.0.2010.01.28.17.30.43
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 28 Jan 2010 17:30:44 -0800 (PST)
+Date: Thu, 28 Jan 2010 17:30:29 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ac9c93b11001281401l3b7d20dfoff45632461802c37@mail.gmail.com>
+Message-ID: <20100129013029.GA6136@gmail.com>
 References: <20100128200049.GA4958@gmail.com>
 	<1264715530.9974.436.camel@lenovo.internal.reciva.com>
-	<ac9c93b11001281401l3b7d20dfoff45632461802c37@mail.gmail.com>
-Date: Fri, 29 Jan 2010 01:26:10 +0100
-Message-ID: <1264724770.17517.19.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+MIME-Version: 1.0
+In-Reply-To: <1264715530.9974.436.camel@lenovo.internal.reciva.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.210.180
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: update hook for git to check push commit message
@@ -37,48 +54,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jan 2010 00:28:36 -0000
-X-Groupsio-MsgNum: 16288
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-NZvCvuCv401gw/xC1pet"
+X-List-Received-Date: Fri, 29 Jan 2010 01:33:12 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---=-NZvCvuCv401gw/xC1pet
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On (28/01/10 21:52), Phil Blundell wrote:
+> On Thu, 2010-01-28 at 12:00 -0800, Khem Raj wrote:
+> > Attached is a small hook for updates that are pushed into repo.
+> > Right now it only checks the first line of the commit and expects
+> > module: summary
+> 
+> I'm not really in favour of applying the commit message policy quite
+> that harshly.  The wiki page that you linked to doesn't really seem to
+> support this kind of check: the actual guidance it gives about checkin
+> messages is:
 
-Am Donnerstag, den 28.01.2010, 23:01 +0100 schrieb Frans Meulenbroeks:
-> 2010/1/28 Phil Blundell <philb@gnu.org>:
+Thats true. However I have seen many devs complain about the module:
+summary. That was my motivation. 
 
-[=E2=80=A6]
+> 
+> * Have a clear commit message (example):
+>     - The first line of commit is a summary of the changes.
+>     - The first line should start with the name of the recipe the change affects.
+>     - The rest of the message should give more details on the change as appropriate.
+>     - Mention the affected bug numbers if appropriate.
+>     - Give credit where credit is due. If you commit someone else's work more or 
+>       less verbatim, you should use git commit --author $mail-of-author. If pulling
+>       changes from somewhere like Poky or OpenMoko there is no problem with that
+>       but mention where the changes came from.
+>     - Include a Signed-off-by: line indicating the change has valid certificate 
+>       of origin as per the Linux kernel
+> 
+> ... which is nowhere near as prescriptive as the rule that you seem to
+> be implementing in your script.  Also, the wiki page has an explicit
+> statement that "[these] rules are not hard fast rules", which would
+> suggest that even such guidance as it does provide is not intended to be
+> taken too dogmatically. 
+> 
+> Personally I think that the current situation of the TSC applying
+> pressure to those people who seem to be chronically unable to write
+> suitable checkin comments is a perfectly fine way of solving the
+> problem.
 
-> >    - Include a Signed-off-by: line indicating the change has valid cert=
-ificate
-> >      of origin as per the Linux kernel
->=20
-> Not sure if we can influence the template that you get with git commit
-> but I would surely like to learn if one way or another I can add a
-> Signed-off-by lne automatically
+Probably it could help developers to check the commit messages on their own
+by making this as post commit or pre push hook of some sort in their clones .git/hooks
 
-	$ git commit -s
+> 
+> On a technical level, I think you could probably do without the sed
+> subprocess, and "summary = rev.split(1)" doesn't look quite right
+> either.
 
-[=E2=80=A6]
+true. I could have got it if I have tested it. The check for : should also
+be inverted.
 
 
-Thanks,
 
-Paul
-
---=-NZvCvuCv401gw/xC1pet
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktiKyIACgkQPX1aK2wOHVh+twCeI1XkOfshUtbsHeGwJSl11dXz
-pC4An268I38/5ze/Vse2z4jq2mnkB7aP
-=8E74
------END PGP SIGNATURE-----
-
---=-NZvCvuCv401gw/xC1pet--
