@@ -1,39 +1,27 @@
-Received: from mail-bw0-f209.google.com ([209.85.218.209])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.lippautz@gmail.com>) id 1NaoGw-00073j-1p
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NaosZ-0000Ya-Jy
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 29 Jan 2010 11:40:21 +0100
-Received: by bwz1 with SMTP id 1so792896bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Jan 2010 02:37:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=1poCltsgjmYjzfBp6trHDrg7i7X+LSQelNoIqxf8/sA=;
-	b=U1LGGOXWMnY8yR96KHig0fFbU2s81n1Q36Oaz9pnR5bO7GW5MRwqSoyfhQ3lCnR5yP
-	j0eH20+TyY+zO159Xtt6/W7Y38+K3j00ZQhYC1rE3q7rcn+UYJv+nT0Ki0fXRnZuRNpw
-	nJU+vbzuNYIiwXpflTRjVytGnhHRQz28zxd28=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=ScuvIXIgf9DfKdvkzHoCWnTpdk7ZAGFEk8x7Mm+EqRlkv5VDxhHdExQlW4vFlHpMfy
-	eP/cKThaExtEQ5Kk8oheVN2Mc9jf7GYgNh6MZlOkcjIbzKw2n1etZIGIPaV3BWQb6Cq+
-	TGYzwehKXaqYJMSno0j4OZjOMK0VLapn8RgvY=
-MIME-Version: 1.0
-Received: by 10.204.9.134 with SMTP id l6mr364047bkl.83.1264761474544; Fri, 29 
-	Jan 2010 02:37:54 -0800 (PST)
-In-Reply-To: <hjud6i$77n$1@ger.gmane.org>
-References: <1264759676-23841-1-git-send-email-michael.lippautz@gmail.com>
-	<hjud6i$77n$1@ger.gmane.org>
-Date: Fri, 29 Jan 2010 11:37:54 +0100
-Message-ID: <fca63bcf1001290237h587a2f21s41245c8ea593cca0@mail.gmail.com>
-From: Michael Lippautz <michael.lippautz@gmail.com>
+	Fri, 29 Jan 2010 12:19:14 +0100
+Received: (qmail 26141 invoked by uid 813007); 29 Jan 2010 11:16:49 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 29 Jan 2010 11:16:49 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.209
-X-SA-Exim-Mail-From: michael.lippautz@gmail.com
+Date: Fri, 29 Jan 2010 12:16:42 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-rc5-00011-gf6760aa; KDE/4.3.4; x86_64; ;
+	)
+References: <4B557210.4000700@gmx.net>
+In-Reply-To: <4B557210.4000700@gmx.net>
+MIME-Version: 1.0
+Message-Id: <201001291216.43416.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] libdbd-sqlite-perl: New recipe for SQLite DBI interface driver
+Subject: Re: OpenEmbedded @ FOSDEM2010
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,20 +35,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Jan 2010 10:40:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 29 Jan 2010 11:19:16 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 
-2010/1/29 Koen Kooi <k.kooi@student.utwente.nl>:
->
-> That should be RDEPENDS_${PN}
->
-> We did have a script somewhere to check for things like that, does
-> anyone know where that went?
-> And can someone more knowledgable about perl than me push these patches
-> (after fixups)?
+Dnia wtorek, 19 stycznia 2010 o 09:49:20 Robert Schuster napisa=B3(a):
+=20
+> And this brings me to another question: Do we want to invite people to
+> our pre-FOSDEM meeting?
 
-Just looked up the deps at CPAN and added them. Additionally some core
-modules were needed that were not mentioned by CPAN (locale.pm), so
-manually added them to the list.
+What kind of meeting before FOSDEM?
+
+And other thing: can someone create some kind of OE badges? We were unnamed=
+=20
+each event or had something created adhoc at place...
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
