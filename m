@@ -1,31 +1,37 @@
-Received: from smtp-out04.alice.it ([85.37.17.100])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1NbK0p-0007qF-MO
+	(envelope-from <Tom_Rini@mentor.com>) id 1NbKjQ-0005Qm-Tx
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Jan 2010 21:33:50 +0100
-Received: from FBCMMO05.fbc.local ([192.168.184.136]) by smtp-out04.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 30 Jan 2010 21:30:19 +0100
-Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO05.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 30 Jan 2010 21:27:08 +0100
-Received: from [192.168.1.116] ([95.244.130.46]) by FBCMCL01B07.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Sat, 30 Jan 2010 21:27:07 +0100
-From: GNUtoo <GNUtoo@no-log.org>
+	Sat, 30 Jan 2010 22:19:56 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1NbKh4-0006La-OL from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 30 Jan 2010 13:17:26 -0800
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Sat, 30 Jan 2010 13:17:26 -0800
+Received: from 172.30.80.215 ([172.30.80.215]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Sat, 30 Jan 2010 21:08:14 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	30 Jan 2010 14:08:15 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1264615116-13972-1-git-send-email-ynezz@true.cz>
-References: <1264615116-13972-1-git-send-email-ynezz@true.cz>
-Date: Fri, 29 Jan 2010 15:44:29 +0100
-Message-Id: <1264776269.7864.0.camel@gnutoo-desktop>
+In-Reply-To: <E1Nat3b-0004cf-RY@melo.openembedded.org>
+References: <E1Nat3b-0004cf-RY@melo.openembedded.org>
+Organization: Mentor Graphics Corporation
+Date: Sat, 30 Jan 2010 14:08:14 -0700
+Message-Id: <1264885694.4951.9.camel@trini-m4400>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.26.1 
-X-OriginalArrivalTime: 30 Jan 2010 20:27:07.0525 (UTC)
-	FILETIME=[97D57B50:01CAA1EA]
-X-SA-Exim-Connect-IP: 85.37.17.100
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+X-OriginalArrivalTime: 30 Jan 2010 21:17:26.0274 (UTC)
+	FILETIME=[9F260620:01CAA1F1]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC][PATCH] udev: get rid of 'timestamp in the future' tar messages
+Subject: Re: [oe-commits] Philip Balister : task-sdk-native: Convert to use an inc file for the basic native sdk.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,28 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Jan 2010 20:33:50 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 30 Jan 2010 21:19:56 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Wed, 2010-01-27 at 18:58 +0100, Petr =C5=A0tetiar wrote:
-> This patch tries to get rid of spew of the useless tar messages durring b=
-oot
-> process on machines without RTC, such as the Beagleboard. Example:
->=20
-> Please wait: booting...
-> Starting udev
-> tar: dev/.udev/uevent_seqnum: time stamp 1970-01-01 01:00:21 is 14.122497=
-521 s in the future
-> tar: dev/.udev/rules.d: time stamp 1970-01-01 01:00:07 is 0.119201623 s i=
-n the future
-> tar: dev/.udev/db/\x2fdevices\x2fvirtual\x2fblock\x2fram9: time stamp 197=
-0-01-01 01:00:22 is 15.118713341 s in the future
->=20
-> [ more then 100 similar lines cutted off]
-Nice,I had the issue with the bug device.
-Denis.
+On Fri, 2010-01-29 at 15:46 +0000, git version control wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: cd149ebbd44ee4cc91f1c44d39a4105bc95f2cdc
+> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=cd149ebbd44ee4cc91f1c44d39a4105bc95f2cdc
+> 
+> Author: Philip Balister <philip@balister.org>
+> Date:   Fri Jan 29 10:45:22 2010 -0500
+> 
+> task-sdk-native: Convert to use an inc file for the basic native sdk.
 
+Curious, why?  The first thing that came to mind would be
+task-native-sdk-qte or something, but that would be handled by RDEP on
+task-sdk-native.
 
+-- 
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
