@@ -1,43 +1,39 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1NbEsv-0000b0-CN
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Jan 2010 16:05:20 +0100
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id D80B9110009A
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NbFCr-0000YV-Ub for openembedded-devel@lists.openembedded.org;
+	Sat, 30 Jan 2010 16:25:57 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NbFAY-0004J7-Cb for openembedded-devel@lists.openembedded.org;
+	Sat, 30 Jan 2010 16:23:30 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 30 Jan 2010 16:23:30 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Jan 2010 16:02:54 +0100 (CET)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 4EF661100093
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Jan 2010 16:02:54 +0100 (CET)
-Received: from rhein.familie-heinold.de (f052238199.adsl.alicedsl.de
-	[78.52.238.199]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Jan 2010 16:02:54 +0100 (CET)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 6DE193C0C3; Sat, 30 Jan 2010 16:02:53 +0100 (CET)
-Date: Sat, 30 Jan 2010 16:02:53 +0100
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Sat, 30 Jan 2010 16:23:30 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100130150252.GA3740@rhein.zuhause.netz>
-References: <6C2434209962DC46B88345CA85C334A28596C7F9D3@Courier.syntech.org>
-	<1264196828.26541.14.camel@mattotaupa.wohnung.familie-menzel.net>
-	<6C2434209962DC46B88345CA85C334A28596C7FB21@Courier.syntech.org>
-	<20100128110438.GA18170@rhein.zuhause.netz>
-	<6C2434209962DC46B88345CA85C334A28596C7FBC4@Courier.syntech.org>
-MIME-Version: 1.0
-In-Reply-To: <6C2434209962DC46B88345CA85C334A28596C7FBC4@Courier.syntech.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 30 Jan 2010 16:23:06 +0100
+Message-ID: <hk1iso$j38$1@ger.gmane.org>
+References: <ac9c93b11001300235y22a60e82qf35d712b8323807d@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100114 Shredder/3.0.2pre
+In-Reply-To: <ac9c93b11001300235y22a60e82qf35d712b8323807d@mail.gmail.com>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Difficulties building java
+Subject: Re: {RFC] console-image.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,43 +47,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Jan 2010 15:05:20 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 30 Jan 2010 15:25:57 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, Jan 29, 2010 at 03:58:39PM -0500, Mark Butsch wrote:
-> I am using the following:
-> 
-> PREFERRED_PROVIDER_virtual/java-initial = "cacao-initial"
-> PREFFERED_VERSION_cacao-initial = "0.98"
-> 
-> PREFERRED_PROVIDER_virtual/java-native = "cacao-native"
-> PREFFERED_VERSION_cacao-native = "0.99.3"
-> 
-> PREFERRED_PROVIDER_virtual/javac-native = "ecj-bootstrap-native"
-> PREFFERED_VERSION_libecj-bootstrap = "3.4"
-> 
-> PREFERRED_PROVIDER_classpath = "classpath"
-> PREFFERED_VERSION_classpath-initial = "0.93"
-> PREFFERED_VERSION_classpath-native = "0.97.2"
-> 
-> PREFERRED_PROVIDER_swt3.4-gtk = "swt3.4-gtk"
-> 
-> PREFFERED_VERSION_cacao= "0.99.4"
-> PREFFERED_VERSION_classpath= "0.98"
-> 
-> Are these a good combination? I am building on an x86-64 machine for i686 target with Angstrom as my distro.
-> 
-> Suggestions on what to try/investigate?
-> 
-> Thanks in advance,
-> 
-> Mark
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Hi Mark,
+On 30-01-10 11:35, Frans Meulenbroeks wrote:
+> Today I bumped into console-image and noticed the following:
+> 
+> IMAGE_INSTALL = "task-base \
+>             ${ANGSTROM_EXTRA_INSTALL} \
+>             ${SPLASH} \
+>             ${ZZAPSPLASH} \
+> 
+> Wouldn't it be cleaner to rename ANGSTROM_EXTRA_INSTALL to e.g.
+> DISTRO_EXTRA_INSTALL ?
+> This under the assumption that console-image is a distro independent recipe.
+> 
+> Or, in case this is an angstrom specific recipe shouldn't it be better
+> named angstrom-console-image ?
+> 
+> your views are appreciated :-)
 
-sorry but cacao dont work this well these days, please use jamvm for java-native and java-inital.
+I vote for leaving it as it is, it gives some credit to where it
+originated from. The image name already has been forcefully renamed to
+strip out 'angstrom' so lets keep at least this bit of heritage.
+Besides, who's going to fix all users of ANGSTROM_EXTRA_INSTALL?
 
-Bye Henning
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLZE7ZMkyGM64RGpERAjNMAJ4i4uyZeQFuJ+HDtqa8dbMXXxsWWQCfY0p8
+3IiVq82EW/8VVA3bWWjraxg=
+=R852
+-----END PGP SIGNATURE-----
+
 
 
