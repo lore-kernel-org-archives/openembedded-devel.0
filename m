@@ -1,35 +1,37 @@
-Received: from mail-yx0-f180.google.com ([209.85.210.180])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NbAiQ-0003ZN-2Z
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Jan 2010 11:38:13 +0100
-Received: by yxe10 with SMTP id 10so2565996yxe.12
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NbAtz-0006nB-Cc for openembedded-devel@lists.openembedded.org;
+	Sat, 30 Jan 2010 11:50:11 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NbArf-0003f1-PR for openembedded-devel@lists.openembedded.org;
+	Sat, 30 Jan 2010 11:47:43 +0100
+Received: from p5b3b39de.dip.t-dialin.net ([91.59.57.222])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 30 Jan 2010 11:47:43 +0100
+Received: from no2spam by p5b3b39de.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Jan 2010 02:35:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=JqFlLRhfllZo+b4y473dsjoQWtLq9C9EJEjqBE3sIZI=;
-	b=QJztYKRUSVgL262tWenhbBqks4z8ShZ9D7+8Of14WpNb16ejkOvKYUU6QM5mGDrsGG
-	c4Z9jCQEKIumoAWd40dKqjo14QvEK1eGZL7pY8ywD3O7hCdEnfVe0uzEN3tdC7y8Gd3Z
-	7ps3ppwlpADeKTddOB14E9F8kEm08r9bdjf7M=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=fvtymd+2hI8557rt5SStYFC7IpoQbBvJu8JSQmWMLyOnaJp5zs4nqALMyIUSBS/7ux
-	6+k9c9OiO6lwtIzwk5HhJW6Rc9Jn1MFcC0n3x9pd8Q9n2Iqn5zjgZ0pCeGBiVEJF+x6Q
-	Ebwj6QyEUEcV8cGHIKXX6ojwo/92RMyyv/Y9o=
-MIME-Version: 1.0
-Received: by 10.101.132.14 with SMTP id j14mr2464511ann.58.1264847745239; Sat, 
-	30 Jan 2010 02:35:45 -0800 (PST)
-Date: Sat, 30 Jan 2010 11:35:45 +0100
-Message-ID: <ac9c93b11001300235y22a60e82qf35d712b8323807d@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sat, 30 Jan 2010 11:47:43 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.180
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Sat, 30 Jan 2010 11:47:19 +0100
+Message-ID: <hk12nm$sdo$1@ger.gmane.org>
+References: <ac9c93b11001300235y22a60e82qf35d712b8323807d@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5b3b39de.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <ac9c93b11001300235y22a60e82qf35d712b8323807d@mail.gmail.com>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: {RFC] console-image.bb
+Subject: Re: {RFC] console-image.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,25 +45,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Jan 2010 10:38:13 -0000
+X-List-Received-Date: Sat, 30 Jan 2010 10:50:11 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Today I bumped into console-image and noticed the following:
+Frans Meulenbroeks wrote:
+> Wouldn't it be cleaner to rename ANGSTROM_EXTRA_INSTALL to e.g.
+> DISTRO_EXTRA_INSTALL ?
 
-IMAGE_INSTALL = "task-base \
-            ${ANGSTROM_EXTRA_INSTALL} \
-            ${SPLASH} \
-            ${ZZAPSPLASH} \
+This has been discussed before, but not changed.  I think it made sense
+back then and I think it makes sense now.
 
-Wouldn't it be cleaner to rename ANGSTROM_EXTRA_INSTALL to e.g.
-DISTRO_EXTRA_INSTALL ?
-This under the assumption that console-image is a distro independent recipe.
+I believe there is even a better name than DISTRO_EXTRA_INSTALL to be
+found for the variable.  Maybe IMAGE_EXTRA_INSTALL?
 
-Or, in case this is an angstrom specific recipe shouldn't it be better
-named angstrom-console-image ?
-
-your views are appreciated :-)
-
-Frans
 
 
