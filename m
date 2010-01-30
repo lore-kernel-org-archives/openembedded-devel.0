@@ -1,24 +1,26 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1NbEEw-0007ew-8I
-	for openembedded-devel@openembedded.org; Sat, 30 Jan 2010 15:24:01 +0100
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id A96A71D3607A; Sat, 30 Jan 2010 15:21:32 +0100 (CET)
-Date: Sat, 30 Jan 2010 15:21:32 +0100
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
-To: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
-Message-ID: <20100130142132.GH24852@ibawizard.net>
-References: <1264861174-31574-1-git-send-email-ynezz@true.cz>
+	(envelope-from <philip@balister.org>) id 1NbEJy-0008Os-Ss
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 30 Jan 2010 15:29:14 +0100
+Received: (qmail 9219 invoked by uid 1003); 30 Jan 2010 14:26:44 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 30 Jan 2010 14:26:44 -0000
+Message-ID: <4B6441A3.9060600@balister.org>
+Date: Sat, 30 Jan 2010 09:26:43 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.5) Gecko/20091209 Fedora/3.0-3.fc11 Thunderbird/3.0
 MIME-Version: 1.0
-In-Reply-To: <1264861174-31574-1-git-send-email-ynezz@true.cz>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+To: openembedded-devel@lists.openembedded.org
+References: <ac9c93b11001300235y22a60e82qf35d712b8323807d@mail.gmail.com>
+	<hk12nm$sdo$1@ger.gmane.org>
+In-Reply-To: <hk12nm$sdo$1@ger.gmane.org>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-devel@openembedded.org
-Subject: Re: [PATCH] sane-srcrevs: bump EFL_SRCREV a bit to get few fixes
+Subject: Re: {RFC] console-image.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,17 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Jan 2010 14:24:01 -0000
-Content-Type: text/plain; charset=iso-8859-2
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 30 Jan 2010 14:29:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Petr =A9tetiar <ynezz@true.cz> [2010-01-30 15:19:34]:
+On 01/30/2010 05:47 AM, Rolf Leggewie wrote:
+> Frans Meulenbroeks wrote:
+>> Wouldn't it be cleaner to rename ANGSTROM_EXTRA_INSTALL to e.g.
+>> DISTRO_EXTRA_INSTALL ?
+>
+> This has been discussed before, but not changed.  I think it made sense
+> back then and I think it makes sense now.
+>
+> I believe there is even a better name than DISTRO_EXTRA_INSTALL to be
+> found for the variable.  Maybe IMAGE_EXTRA_INSTALL?
 
-> For details pls visit http://trac.enlightenment.org/e/timeline
+I also like IMAGE_EXTRA_INSTALL. Distro's shouldn't be customizing 
+images using this variable :)
 
-I've tested this patch on Beagleboard and seems like it's ok.
+The problem with this var is it means one persons console-image is not 
+equal to anothers, but I am fine with this. I regularly use this 
+variable to insert extra packages into an image for testing purposes.
 
--- ynezz
+Philip
 
 
