@@ -1,37 +1,45 @@
-Received: from mail-iw0-f180.google.com ([209.85.223.180])
+Received: from mail-pz0-f171.google.com ([209.85.222.171])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NbSKG-00057n-7L
+	(envelope-from <camelguo@gmail.com>) id 1NbSU0-0005PV-Fj
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 31 Jan 2010 06:26:27 +0100
-Received: by iwn10 with SMTP id 10so1049438iwn.22
+	Sun, 31 Jan 2010 06:36:34 +0100
+Received: by pzk1 with SMTP id 1so3726063pzk.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Jan 2010 21:23:58 -0800 (PST)
+	Sat, 30 Jan 2010 21:34:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=aMZajiGdmIGQZ/dWrCH93Qc2WdNggJGW7SVaddWIBTs=;
-	b=euos3MUaHOU5s8Uwf6yqPHtQvG5xCfLqkuhhNYle8fS/3u5xFLaz+bo6kU8XqFNwQN
-	0Pu81MLaW0TVcP4Kiac3fzSxhgPVD3MmpP0GtmKukWAFfWZlNu9ixGqxKwG+f2sq7sO5
-	96/ybUiZONGCfOs9HW3hql0bpOP2kRGjq06hw=
+	h=domainkey-signature:received:received:content-type:to:subject
+	:references:date:mime-version:content-transfer-encoding:from
+	:organization:message-id:in-reply-to:user-agent;
+	bh=dh1DRopc7xcbWBXzsNIaZfk3j0TUx7X0Ync24/MQfUo=;
+	b=t9TXlMxLJ8CwYLbRAcpVBWBS5mfUjzAwCMchZYYypD8wvXwKp+b5qnyaySGU2fcSl+
+	1fzL55Vs5d+TojFS5fTnXD62pSs5umObZfTNW0OFB7WWbjEScocrpNh8ezfBOpbt7qWs
+	vOjGUixX40nzpX9tZrm8MIM1aXlEgSDkye864=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=nXt0oh2DEJ/tgocvwXUeeIVushTcmvaS2udiwFBZsUnm12jxTn22OZ5pCp24Yrwobp
-	Udl1vZSUX/QI4UrXW05mU6Qmj9+OnXmGI6dgigEW8szG3DXuaA4aECfbJRrr1Z7XiPPQ
-	YOhwSi37REBM4qPd978LD8JROFKUSHwcRrWSA=
-MIME-Version: 1.0
-Received: by 10.231.151.197 with SMTP id d5mr4298062ibw.73.1264915438738; Sat, 
-	30 Jan 2010 21:23:58 -0800 (PST)
-In-Reply-To: <201001310516.14421.holger+oe@freyther.de>
-References: <op.u7dnj4v0mn1qzu@camelguo> <op.u7do2cw1mn1qzu@camelguo>
-	<op.u7dpieeymn1qzu@camelguo>
-	<201001310516.14421.holger+oe@freyther.de>
-Date: Sat, 30 Jan 2010 21:23:58 -0800
-Message-ID: <19c1b8a91001302123te743d1fna73e7d8cc666971c@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	h=content-type:to:subject:references:date:mime-version
+	:content-transfer-encoding:from:organization:message-id:in-reply-to
+	:user-agent;
+	b=bfXqoz7Q52FlMY/qwciNcTTi+6CEhK44FGIg0zrUyqLd5jFZR6K/m3WJS2+V2tZXO/
+	U50Z0X1A9vyA4N4DmAZBcrtkHrvzk1HVnvEgXjHFf6w5AYAKYo33tUFamGHGozbTEFwI
+	MhgC7Z7AtBA54QyxJYNn4lWAWZtg2UbsfjiSA=
+Received: by 10.141.13.6 with SMTP id q6mr1975388rvi.146.1264916042521;
+	Sat, 30 Jan 2010 21:34:02 -0800 (PST)
+Received: from camelguo ([123.54.107.86])
+	by mx.google.com with ESMTPS id 22sm3220489pzk.2.2010.01.30.21.33.59
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 30 Jan 2010 21:34:01 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.180
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <op.u7dnj4v0mn1qzu@camelguo> <op.u7do2cw1mn1qzu@camelguo>
+	<op.u7dpieeymn1qzu@camelguo> <201001310516.14421.holger+oe@freyther.de>
+	<19c1b8a91001302123te743d1fna73e7d8cc666971c@mail.gmail.com>
+Date: Sun, 31 Jan 2010 13:33:52 +0800
+MIME-Version: 1.0
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u7dtqqb0mn1qzu@camelguo>
+In-Reply-To: <19c1b8a91001302123te743d1fna73e7d8cc666971c@mail.gmail.com>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.222.171
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: building u-boot - git failed
@@ -48,31 +56,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Jan 2010 05:26:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 31 Jan 2010 05:36:34 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
+Content-Transfer-Encoding: Quoted-Printable
 
-On Sat, Jan 30, 2010 at 8:16 PM, Holger Hans Peter Freyther
-<holger+oe@freyther.de> wrote:
-> On Sunday 31 January 2010 05:02:28 Guo Hongruan wrote:
->> I think I got the answer, see
->> http://git.denx.de/?p=u-boot.git;a=commitdiff;h=f865fcbbb35851e75fee9c3a3fa
->> 8e0f71d9e6463
->>
->> adding the following patch to u-boot recipe can solve this problem.
->
-> Please create a patch that can be applied to the OE tree.
+=E5=9C=A8 Sun, 31 Jan 2010 13:23:58 +0800=EF=BC=8CKhem Raj <raj.khem@gma=
+il.com> =E5=86=99=E9=81=93:
 
-couple of months back I was hitting this error for beaglebord and had
-the same patch in my local repo but never pushed it
+>> Please create a patch that can be applied to the OE tree.
+> couple of months back I was hitting this error for beaglebord and had
+> the same patch in my local repo but never pushed it
+
+Please push it.
 
 
->
-> thanks
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+-- =
+
+Guo Hongruan, Embedded Linux Consultant
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
 
