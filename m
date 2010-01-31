@@ -1,47 +1,42 @@
-Received: from mail-pz0-f177.google.com ([209.85.222.177])
+Received: from mail-px0-f179.google.com ([209.85.216.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NbTEc-00073t-Km
+	(envelope-from <camelguo@gmail.com>) id 1NbTI8-0007BE-RE
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 31 Jan 2010 07:24:41 +0100
-Received: by pzk7 with SMTP id 7so3138911pzk.12
+	Sun, 31 Jan 2010 07:28:20 +0100
+Received: by pxi9 with SMTP id 9so2972252pxi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Jan 2010 22:22:13 -0800 (PST)
+	Sat, 30 Jan 2010 22:25:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:content-type:to:subject
-	:references:mime-version:content-transfer-encoding:from:organization
-	:date:message-id:in-reply-to:user-agent;
-	bh=FabmW8VpuKXMfH8Vpz2A9zze153YguZ7+wZ7awX4JG8=;
-	b=N8et92SXWGJxAt6CPa25JI6rpqAQ/9OYdjiakkT6SW/dr2l/T8kCcIec1pRlzodj02
-	tNUwpG3FfIBCG8+HuDMcWMbfe53Es4Aeu1i6MQKSFpYkePh5wrpjZsQhWXfqitBRLJZv
-	ZC7P5h010LmOz9vg7j8bwtmlvG0KDidUEzvFU=
+	h=domainkey-signature:received:received:content-type:subject:date:to
+	:mime-version:content-transfer-encoding:from:organization:message-id
+	:user-agent; bh=MmPIKXBYsl5ayuH9Ejrj57K36YWk4q8a3fJU/hUaDSs=;
+	b=r/nSOYl6/QGP+hYVsSr5IB+hq3yZ0CsWcsrnPoVVCx3Iv2o/5olpHFBepYf/3LvwfK
+	EMwPRwp2OdaITjhPsvmV3fGPByuiS3AjBAg4KfdqRFLHzHjuKq7O0Wv0C//aZUkT/Kqb
+	dEmeEIvyzG2/DW6+4MuEIhcj0ZjTlxu7NKuRQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=content-type:to:subject:references:mime-version
-	:content-transfer-encoding:from:organization:date:message-id
-	:in-reply-to:user-agent;
-	b=SDzFFKM7/KdsMny1V2K9WvxZzJUUe7MBiDEboRHg1oiNALE5N2PDgNmcliCs6G2J0y
-	rOzhXn8xixXPTmPWnpSVYiFpUgA+lVPVAL6NSkVeHU9hYF8Q4EHLN2pCBL6wBzxhFuhH
-	9qkShrUalzE4prxL6YEcHpV8NdbsItd7/iWg8=
-Received: by 10.143.154.6 with SMTP id g6mr1996943wfo.162.1264918932849;
-	Sat, 30 Jan 2010 22:22:12 -0800 (PST)
+	h=content-type:subject:date:to:mime-version:content-transfer-encoding
+	:from:organization:message-id:user-agent;
+	b=vCxUjmwPUk0HF00JqBvt0D/ZcyLTIJ0LrQG0DVK38bC2vDNE3QMkk7Ac5B9m4wmcnI
+	79C3cXKTSYX/6V2FQccYV7vlvWwcftu9TCtgBFCX+omfKOR+tC2SVmZGt5Pt9tZRl9MV
+	Ey6mkWtY5Wx/fCuqf9MWFZhvswETxjW7/Ww0g=
+Received: by 10.141.91.10 with SMTP id t10mr2036079rvl.127.1264919150905;
+	Sat, 30 Jan 2010 22:25:50 -0800 (PST)
 Received: from camelguo ([123.54.107.86])
-	by mx.google.com with ESMTPS id 20sm555830pzk.5.2010.01.30.22.22.10
+	by mx.google.com with ESMTPS id 21sm3271583pzk.3.2010.01.30.22.25.48
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 30 Jan 2010 22:22:12 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <op.u7dmmldamn1qzu@camelguo> <op.u7dt8jyhmn1qzu@camelguo>
-	<op.u7dus8qwmn1qzu@camelguo> <201001310714.09989.holger+oe@freyther.de>
+	Sat, 30 Jan 2010 22:25:50 -0800 (PST)
+Date: Sun, 31 Jan 2010 14:25:42 +0800
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
 From: "Guo Hongruan" <camelguo@gmail.com>
 Organization: Gulessoft, Inc
-Date: Sun, 31 Jan 2010 14:22:03 +0800
-Message-ID: <op.u7dvy1vrmn1qzu@camelguo>
-In-Reply-To: <201001310714.09989.holger+oe@freyther.de>
+Message-ID: <op.u7dv44vqmn1qzu@camelguo>
 User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.222.177
+X-SA-Exim-Connect-IP: 209.85.216.179
 X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: building piccontrol - 0.4 failed due to lack of liblua5.1.a
+Subject: circular dependency when building linux_2.6.25.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,47 +50,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Jan 2010 06:24:42 -0000
+X-List-Received-Date: Sun, 31 Jan 2010 06:28:20 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
-Content-Transfer-Encoding: Quoted-Printable
+Content-Transfer-Encoding: 7bit
 
-OK, no problem
+Hi guys,
+   I tried to build openembedded with the following configration in my  
+local.conf
+MACHIN=at91-l9260
+DISTRO=micro
+LIBC=glibc
 
-=E5=9C=A8 Sun, 31 Jan 2010 14:14:09 +0800=EF=BC=8CHolger Hans Peter Frey=
-ther  =
+But I failed to start building and met the following error:
+ERROR: Unbuildable tasks were found.
+These are usually caused by circular dependencies and any circular  
+dependency chains found will be printed below. Increase the debug level to  
+see a list of unbuildable tasks.
 
-<holger+oe@freyther.de> =E5=86=99=E9=81=93:
+Identifying dependency loops (this may take a short while)...
 
-> On Sunday 31 January 2010 06:56:58 Guo Hongruan wrote:
->> =E5=9C=A8 Sun, 31 Jan 2010 13:44:33 +0800=EF=BC=8CGuo Hongruan <camel=
-guo@gmail.com>  =
+ERROR:
+Dependency loop #1 found:
+   Task 384 (/opt/workdir/oe/openembedded/recipes/linux/linux_2.6.25.bb,  
+do_deploy) (depends: set([388, 108, 390]))
+   Task 389 (/opt/workdir/oe/openembedded/recipes/linux/linux_2.6.25.bb,  
+do_compulab_image) (depends: set([384]))
+   Task 388 (/opt/workdir/oe/openembedded/recipes/linux/linux_2.6.25.bb,  
+do_package) (depends: set([160, 144, 770, 389, 390, 32, 754, 176, 786,  
+1014, 982, 998, 380]))
 
->> =E5=86=99=E9=81=93:
->
->>     20 LDFLAGS +=3D " ${STAGING_LIBDIR}/liblua5.1.a -lpthread -lm -ld=
-l "
->
-> Okay,
-> care to write a patch with a proper commit message and a Signed-off-by=
-  =
+It seems that the linux_2.6.25.bb recipe causes dependency loops.
 
-> line?
->
-> PS: In the long run the lua recipe should install the .pc and we shoul=
-d  =
+Thanks a lot!
 
-> link
-> with pkg-config --libs lua5.1
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
-
-
-
--- =
-
+-- 
 Guo Hongruan, Embedded Linux Consultant
 Skype: camelguo
 Twitter: camelguo
