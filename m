@@ -1,40 +1,40 @@
 Received: from mail-pz0-f177.google.com ([209.85.222.177])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NbSd2-00067s-0V
+	(envelope-from <camelguo@gmail.com>) id 1NbSeL-0006C7-5L
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 31 Jan 2010 06:45:51 +0100
-Received: by pzk7 with SMTP id 7so3122973pzk.12
+	Sun, 31 Jan 2010 06:47:12 +0100
+Received: by pzk7 with SMTP id 7so3123518pzk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Jan 2010 21:43:22 -0800 (PST)
+	Sat, 30 Jan 2010 21:44:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:content-type:to:subject
 	:references:date:mime-version:content-transfer-encoding:from
 	:organization:message-id:in-reply-to:user-agent;
-	bh=7hdzZ9z4WX+fLi+lmi+NdhxktvNK+/o6j8KNF9syKWs=;
-	b=icc0FpyuMqUlxJFfGDBe+6XRKbsYMHUuwUh3x+ymErWPoUYgyMmdVCXkyR2hbDqKRz
-	zdRalXksfbxRdM4ukwkB28ceaiOKBUaAXl4iY57KeDBlr229EgRKJJ1TrU2a6wBlflWK
-	79Xx+S8gr/mN6Zn0DgBFJLfuPLAN5DIAu2RjQ=
+	bh=xCchEb7T3KucK3BWO3UfVKm1AgQcnFEC9NGrgL0ZPdA=;
+	b=v6ec2japjy2h8drcxPSwQopVsqhrNxhajuVgylxNfiULYIM273KOQMSfyDgfE4HPx1
+	u/+M+IJIUwkjok7GJl0fR3Wo9erot05BihJkNom/s/z68OdeY6BdQDpWRqhIYyIUir9f
+	MhyqvW1j/K8iYpdkpFetdlX3VbjtjitBTKsQA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=content-type:to:subject:references:date:mime-version
 	:content-transfer-encoding:from:organization:message-id:in-reply-to
 	:user-agent;
-	b=rMlrthb8sjnExTZRcoBfCDnpJ+BiYvYkjZSv4DaMA0uUQtfTOunV/05V7np6M9OabA
-	2+6Z3pgoybqrlv6XOehB9wcMV0FFYcuWR4EyRA6Cm62GyjU2ztyBxZIxTvwr01oy3tzZ
-	MtochRyPRGrSiCkhMuGEVfg7/+24sKhoCjFuU=
-Received: by 10.142.118.20 with SMTP id q20mr1977266wfc.135.1264916602123;
-	Sat, 30 Jan 2010 21:43:22 -0800 (PST)
+	b=RB8PSlsywb0xwtenxoBo2Cg2H9JA8bDcZxL+b2K4J68mdiPLtb+UMnchAD+NYz1mba
+	EyNRSSyB1nqI2PU0Bu57PVFelDXi/EQmMCXSjmpaNQNNKL+IW4d/GyZtgZMz5qHPlFKa
+	G5aSFhq9BwkJve8P4JD2CaumJ3LQ8EG4LWekY=
+Received: by 10.141.214.39 with SMTP id r39mr1967299rvq.278.1264916683324;
+	Sat, 30 Jan 2010 21:44:43 -0800 (PST)
 Received: from camelguo ([123.54.107.86])
-	by mx.google.com with ESMTPS id 22sm3224763pzk.6.2010.01.30.21.43.19
+	by mx.google.com with ESMTPS id 21sm3225705pzk.7.2010.01.30.21.44.40
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 30 Jan 2010 21:43:21 -0800 (PST)
+	Sat, 30 Jan 2010 21:44:42 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
 References: <op.u7dmmldamn1qzu@camelguo>
 	<19c1b8a91001302122x5cde3628xd57639405a862736@mail.gmail.com>
-Date: Sun, 31 Jan 2010 13:43:11 +0800
+Date: Sun, 31 Jan 2010 13:44:33 +0800
 MIME-Version: 1.0
 From: "Guo Hongruan" <camelguo@gmail.com>
 Organization: Gulessoft, Inc
-Message-ID: <op.u7dt591lmn1qzu@camelguo>
+Message-ID: <op.u7dt8jyhmn1qzu@camelguo>
 In-Reply-To: <19c1b8a91001302122x5cde3628xd57639405a862736@mail.gmail.com>
 User-Agent: Opera Mail/10.10 (Linux)
 X-SA-Exim-Connect-IP: 209.85.222.177
@@ -55,7 +55,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Jan 2010 05:45:51 -0000
+X-List-Received-Date: Sun, 31 Jan 2010 05:47:12 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
 Content-Transfer-Encoding: Quoted-Printable
 
@@ -65,7 +65,12 @@ il.com> =E5=86=99=E9=81=93:
 > in your build tree check where liblua5.1.a is installed and then
 > go from there.
 
-No, I can not find liblua5.1.a on my build directory.
+instead of liblue5.1.a, I found libua.a on my build tree. Maybe it is th=
+e  =
+
+cause of the error.
+
+./armv5te-oe-linux-gnueabi/lib/liblua.a
 
 -- =
 
