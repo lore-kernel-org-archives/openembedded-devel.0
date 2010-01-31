@@ -1,48 +1,47 @@
-Received: from mail-pz0-f171.google.com ([209.85.222.171])
+Received: from mail-pz0-f177.google.com ([209.85.222.177])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NbSU0-0005PV-Fj
+	(envelope-from <camelguo@gmail.com>) id 1NbSd2-00067s-0V
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 31 Jan 2010 06:36:34 +0100
-Received: by pzk1 with SMTP id 1so3726063pzk.16
+	Sun, 31 Jan 2010 06:45:51 +0100
+Received: by pzk7 with SMTP id 7so3122973pzk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Jan 2010 21:34:02 -0800 (PST)
+	Sat, 30 Jan 2010 21:43:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:content-type:to:subject
 	:references:date:mime-version:content-transfer-encoding:from
 	:organization:message-id:in-reply-to:user-agent;
-	bh=dh1DRopc7xcbWBXzsNIaZfk3j0TUx7X0Ync24/MQfUo=;
-	b=t9TXlMxLJ8CwYLbRAcpVBWBS5mfUjzAwCMchZYYypD8wvXwKp+b5qnyaySGU2fcSl+
-	1fzL55Vs5d+TojFS5fTnXD62pSs5umObZfTNW0OFB7WWbjEScocrpNh8ezfBOpbt7qWs
-	vOjGUixX40nzpX9tZrm8MIM1aXlEgSDkye864=
+	bh=7hdzZ9z4WX+fLi+lmi+NdhxktvNK+/o6j8KNF9syKWs=;
+	b=icc0FpyuMqUlxJFfGDBe+6XRKbsYMHUuwUh3x+ymErWPoUYgyMmdVCXkyR2hbDqKRz
+	zdRalXksfbxRdM4ukwkB28ceaiOKBUaAXl4iY57KeDBlr229EgRKJJ1TrU2a6wBlflWK
+	79Xx+S8gr/mN6Zn0DgBFJLfuPLAN5DIAu2RjQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=content-type:to:subject:references:date:mime-version
 	:content-transfer-encoding:from:organization:message-id:in-reply-to
 	:user-agent;
-	b=bfXqoz7Q52FlMY/qwciNcTTi+6CEhK44FGIg0zrUyqLd5jFZR6K/m3WJS2+V2tZXO/
-	U50Z0X1A9vyA4N4DmAZBcrtkHrvzk1HVnvEgXjHFf6w5AYAKYo33tUFamGHGozbTEFwI
-	MhgC7Z7AtBA54QyxJYNn4lWAWZtg2UbsfjiSA=
-Received: by 10.141.13.6 with SMTP id q6mr1975388rvi.146.1264916042521;
-	Sat, 30 Jan 2010 21:34:02 -0800 (PST)
+	b=rMlrthb8sjnExTZRcoBfCDnpJ+BiYvYkjZSv4DaMA0uUQtfTOunV/05V7np6M9OabA
+	2+6Z3pgoybqrlv6XOehB9wcMV0FFYcuWR4EyRA6Cm62GyjU2ztyBxZIxTvwr01oy3tzZ
+	MtochRyPRGrSiCkhMuGEVfg7/+24sKhoCjFuU=
+Received: by 10.142.118.20 with SMTP id q20mr1977266wfc.135.1264916602123;
+	Sat, 30 Jan 2010 21:43:22 -0800 (PST)
 Received: from camelguo ([123.54.107.86])
-	by mx.google.com with ESMTPS id 22sm3220489pzk.2.2010.01.30.21.33.59
+	by mx.google.com with ESMTPS id 22sm3224763pzk.6.2010.01.30.21.43.19
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 30 Jan 2010 21:34:01 -0800 (PST)
+	Sat, 30 Jan 2010 21:43:21 -0800 (PST)
 To: openembedded-devel@lists.openembedded.org
-References: <op.u7dnj4v0mn1qzu@camelguo> <op.u7do2cw1mn1qzu@camelguo>
-	<op.u7dpieeymn1qzu@camelguo> <201001310516.14421.holger+oe@freyther.de>
-	<19c1b8a91001302123te743d1fna73e7d8cc666971c@mail.gmail.com>
-Date: Sun, 31 Jan 2010 13:33:52 +0800
+References: <op.u7dmmldamn1qzu@camelguo>
+	<19c1b8a91001302122x5cde3628xd57639405a862736@mail.gmail.com>
+Date: Sun, 31 Jan 2010 13:43:11 +0800
 MIME-Version: 1.0
 From: "Guo Hongruan" <camelguo@gmail.com>
 Organization: Gulessoft, Inc
-Message-ID: <op.u7dtqqb0mn1qzu@camelguo>
-In-Reply-To: <19c1b8a91001302123te743d1fna73e7d8cc666971c@mail.gmail.com>
+Message-ID: <op.u7dt591lmn1qzu@camelguo>
+In-Reply-To: <19c1b8a91001302122x5cde3628xd57639405a862736@mail.gmail.com>
 User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.222.171
+X-SA-Exim-Connect-IP: 209.85.222.177
 X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: building u-boot - git failed
+Subject: Re: building piccontrol - 0.4 failed due to lack of liblua5.1.a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,19 +55,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Jan 2010 05:36:34 -0000
+X-List-Received-Date: Sun, 31 Jan 2010 05:45:51 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
 Content-Transfer-Encoding: Quoted-Printable
 
-=E5=9C=A8 Sun, 31 Jan 2010 13:23:58 +0800=EF=BC=8CKhem Raj <raj.khem@gma=
+=E5=9C=A8 Sun, 31 Jan 2010 13:22:16 +0800=EF=BC=8CKhem Raj <raj.khem@gma=
 il.com> =E5=86=99=E9=81=93:
 
->> Please create a patch that can be applied to the OE tree.
-> couple of months back I was hitting this error for beaglebord and had
-> the same patch in my local repo but never pushed it
+> in your build tree check where liblua5.1.a is installed and then
+> go from there.
 
-Please push it.
-
+No, I can not find liblua5.1.a on my build directory.
 
 -- =
 
