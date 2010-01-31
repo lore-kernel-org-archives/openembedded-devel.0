@@ -1,31 +1,44 @@
-Received: from smtp-out01.alice.it ([85.33.2.12])
+Received: from mail-pz0-f191.google.com ([209.85.222.191])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1NbM2K-0005HR-Ax
+	(envelope-from <camelguo@gmail.com>) id 1NbQ69-0002U7-8n
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 30 Jan 2010 23:43:31 +0100
-Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-out01.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 30 Jan 2010 23:41:01 +0100
-Received: from FBCMCL01B02.fbc.local ([192.168.69.83]) by FBCMMO02.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 30 Jan 2010 23:41:01 +0100
-Received: from [192.168.1.116] ([95.244.130.46]) by FBCMCL01B02.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Sat, 30 Jan 2010 23:41:02 +0100
-From: GNUtoo <GNUtoo@no-log.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4B598603.4080603@dresearch.de>
-References: <4B598603.4080603@dresearch.de>
-Date: Sat, 30 Jan 2010 23:40:50 +0100
-Message-Id: <1264891250.3912.12.camel@gnutoo-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-OriginalArrivalTime: 30 Jan 2010 22:41:02.0252 (UTC)
-	FILETIME=[4CE786C0:01CAA1FD]
-X-SA-Exim-Connect-IP: 85.33.2.12
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+	Sun, 31 Jan 2010 04:03:44 +0100
+Received: by pzk29 with SMTP id 29so3152274pzk.17
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 30 Jan 2010 19:01:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:content-type:subject:date:to
+	:cc:mime-version:content-transfer-encoding:from:organization
+	:message-id:user-agent;
+	bh=5zPTFl78WwUeEffNiYdZgYRd3MKKI+FB1dllLlpMQdE=;
+	b=MbBp2a90r9r5HlBIGASpMyTe7Q18une9mf+E4+3oUekzaX13lPdWOsVWbsZyMJM6hj
+	ueV2F3+eyUVDzy3PjnJR/M0fpoUXZLxYp4Bea3zOwb4vxO5j/CcTkEZciqDget2d/zYv
+	/cZHTYPVXgs4J1uRaNn2368hqsgRQBFi4joj4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=content-type:subject:date:to:cc:mime-version
+	:content-transfer-encoding:from:organization:message-id:user-agent;
+	b=XLUnpvvDU+B2jC8BEMdRabx49hQH/cC/rc6ZjKRm981c9P0S5BzASlHXU5azVN+xmC
+	CRNzW/czjJFA2AsKt++W/LM95INeKF72Hn8zKXsFSckeq2hQhgDa/Qr22gXH9hiV5rC4
+	DahvSGQCGc/qQWhWgXzyZduy0vmK/0HBEKg50=
+Received: by 10.114.163.19 with SMTP id l19mr1875438wae.170.1264906875236;
+	Sat, 30 Jan 2010 19:01:15 -0800 (PST)
+Received: from camelguo ([123.54.107.86])
+	by mx.google.com with ESMTPS id 23sm3128429pzk.12.2010.01.30.19.01.11
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 30 Jan 2010 19:01:14 -0800 (PST)
+Date: Sun, 31 Jan 2010 11:01:05 +0800
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+MIME-Version: 1.0
+From: "Guo Hongruan" <camelguo@gmail.com>
+Organization: Gulessoft, Inc
+Message-ID: <op.u7dmmldamn1qzu@camelguo>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 209.85.222.191
+X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: package for kernel module devel?
+Cc: tim.ellis@foonas.org
+Subject: building piccontrol - 0.4 failed due to lack of liblua5.1.a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,48 +52,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Jan 2010 22:43:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 31 Jan 2010 03:03:44 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2010-01-22 at 12:03 +0100, Steffen Sledz wrote:
-> Our team is developing new kernel modules for our machine. For fast
-> development cycles it would be very helpful to be able to compile the
-> modules at the machine itself.
-> 
-> By installing task-native-sdk & Co. nearly all needed stuff is
-> available but i miss the linux kernel headers and the corresponding
-> link to them (/lib/modules/x.x.x.x/build). :(
-> 
-> Does a package exist for this (or for the complete kernel sources)?
-> 
-> Steffen
-I am not aware of a package which install /lib/modules/x.x.x.x/build 
-(It may exist)
-but there are other possibilities:
+Hi guys,
+   I tried to build MACHINE=tsx09 DISTRO=micro LIBC=glibc, but failed when  
+building picontrol. The error is the following:
 
-With the build on an external build machine:
---------------------------------------------
-*build the kernel on a build machine and tftpboot the kernel(if the
-bootloader permits it) which would boot on a NFS share which would
-contain the modules
-*Variants: simply use a NFS share for the external modules and boot your
-kernel normally
+NOTE: make -j 4 -e MAKEFLAGS=
+ccache arm-oe-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s  
+-mthumb-interwork -mthumb  
+-isystem/media/work-disk/workdir/arm-926ejs-test/staging/armv5te-oe-linux-gnueabi/include  
+-fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2   
+-I/media/work-disk/workdir/arm-926ejs-test/staging/armv5te-oe-linux-gnueabi/include/lua5.1  
+-isystem/media/work-disk/workdir/arm-926ejs-test/staging/armv5te-oe-linux-gnueabi/include   
+-c -o piccontrol.o piccontrol.c
+ccache arm-oe-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s  
+-mthumb-interwork -mthumb  
+-isystem/media/work-disk/workdir/arm-926ejs-test/staging/armv5te-oe-linux-gnueabi/include  
+-fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2   
+-I/media/work-disk/workdir/arm-926ejs-test/staging/armv5te-oe-linux-gnueabi/include/lua5.1  
+-isystem/media/work-disk/workdir/arm-926ejs-test/staging/armv5te-oe-linux-gnueabi/include   
+-c -o ts209.o ts209.c
+ccache arm-oe-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s  
+-mthumb-interwork -mthumb  
+-isystem/media/work-disk/workdir/arm-926ejs-test/staging/armv5te-oe-linux-gnueabi/include  
+-fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2   
+-I/media/work-disk/workdir/arm-926ejs-test/staging/armv5te-oe-linux-gnueabi/include/lua5.1  
+-isystem/media/work-disk/workdir/arm-926ejs-test/staging/armv5te-oe-linux-gnueabi/include   
+-c -o evdev.o evdev.c
+ccache arm-oe-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s  
+-mthumb-interwork -mthumb -o piccontrol piccontrol.o ts209.o evdev.o  
+-L/media/work-disk/workdir/arm-926ejs-test/staging/armv5te-oe-linux-gnueabi/lib  
+-Wl,-rpath-link,/media/work-disk/workdir/arm-926ejs-test/staging/armv5te-oe-linux-gnueabi/lib  
+-Wl,-O1 -Wl,--hash-style=gnu   
+/media/work-disk/workdir/arm-926ejs-test/staging/armv5te-oe-linux-gnueabi/lib/liblua5.1.a  
+-lpthread -lm -ldl
+arm-oe-linux-gnueabi-gcc:  
+/media/work-disk/workdir/arm-926ejs-test/staging/armv5te-oe-linux-gnueabi/lib/liblua5.1.a:  
+No such file or directory
 
-Make the target machine build the kernel modules(would be slow,could be
-some ram usage issues depending on your machine speed and ram quantity
-and usage):
---------------------------------------------------
-*according to my distro:
-lrwxrwxrwx. 1 root root 21 2009-09-16 19:52 build
--> /usr/src/linux-2.6.31
-so that simply points to the entire source of the kernel...
-So simply add a simlink that point to the sources
-(the sources could be on your local storage device or could be an NFS
-share...)
+for more information, please see the following url:
+http://tinderbox.openembedded.net/packages/451539/
 
-Denis.
+Is there anyone who can give me some information?
 
+Thanks a lot!
 
+-- 
+Guo Hongruan, Embedded Linux Consultant
+Skype: camelguo
+Twitter: camelguo
+http://www.gulessoft.com
 
 
