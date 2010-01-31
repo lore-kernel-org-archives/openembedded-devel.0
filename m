@@ -1,39 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NbVnd-0004Uu-Vk for openembedded-devel@lists.openembedded.org;
-	Sun, 31 Jan 2010 10:09:01 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NbVlJ-0001LK-Nr for openembedded-devel@lists.openembedded.org;
-	Sun, 31 Jan 2010 10:06:33 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Jan 2010 10:06:33 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Jan 2010 10:06:33 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1NbWF0-0002fR-Gg
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 31 Jan 2010 10:37:17 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id 31D0D1D3607A; Sun, 31 Jan 2010 10:34:49 +0100 (CET)
+Date: Sun, 31 Jan 2010 10:34:49 +0100
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 31 Jan 2010 10:06:13 +0100
-Message-ID: <hk3h64$uib$1@ger.gmane.org>
-References: <4B598603.4080603@dresearch.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100114 Shredder/3.0.2pre
-In-Reply-To: <4B598603.4080603@dresearch.de>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100131093448.GI24852@ibawizard.net>
+References: <op.u7dmmldamn1qzu@camelguo>
+	<19c1b8a91001302122x5cde3628xd57639405a862736@mail.gmail.com>
+	<op.u7dt8jyhmn1qzu@camelguo> <op.u7dus8qwmn1qzu@camelguo>
+MIME-Version: 1.0
+In-Reply-To: <op.u7dus8qwmn1qzu@camelguo>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: package for kernel module devel?
+Subject: Re: building piccontrol - 0.4 failed due to lack of	liblua5.1.a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,47 +34,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Jan 2010 09:09:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 31 Jan 2010 09:37:17 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Guo Hongruan <camelguo@gmail.com> [2010-01-31 13:56:58]:
 
-On 22-01-10 12:03, Steffen Sledz wrote:
-> Our team is developing new kernel modules for our machine. For fast
-> development cycles it would be very helpful to be able to compile the
-> modules at the machine itself.
-> 
-> By installing task-native-sdk & Co. nearly all needed stuff is
-> available but i miss the linux kernel headers and the corresponding
-> link to them (/lib/modules/x.x.x.x/build). :(
-> 
-> Does a package exist for this (or for the complete kernel sources)?
+> 2. but piccoontrol_0.4.bb tries to link liblua5.1.a, which name is  
+> liblua.a.
+>    20 LDFLAGS += " ${STAGING_LIBDIR}/liblua5.1.a -lpthread -lm -ldl "
+>
+> changing piccontrol_0.4.bb may correct the error.
 
+I think, that correct way of fixing it would be to fix Lua recipe to install
+as liblua5.1.a. Maybe creating pkgconfig for Lua would help also.
 
-The easiest way to do that would be to add something like this to
-kernel.bbclass:
-
-do_install() {
-
-..
-
-oe_runmake headers_install INSTALL_HDR_PATH=${D}${exec_prefix} ARCH=$ARCH
-}
-
-And package those up.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLZUgFMkyGM64RGpERApq9AKCP3ImgTzjNcM3Z8+R/9UhhbrMnVgCfYW3k
-tYs4OES4EbonVmi8cuCVpYs=
-=Bl/6
------END PGP SIGNATURE-----
-
+-- ynezz
 
 
