@@ -1,42 +1,42 @@
-Received: from mail-px0-f179.google.com ([209.85.216.179])
+Received: from mail-pz0-f177.google.com ([209.85.222.177])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NbTI8-0007BE-RE
+	(envelope-from <camelguo@gmail.com>) id 1NbTk3-0002pe-JC
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 31 Jan 2010 07:28:20 +0100
-Received: by pxi9 with SMTP id 9so2972252pxi.24
+	Sun, 31 Jan 2010 07:57:10 +0100
+Received: by pzk7 with SMTP id 7so3151353pzk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Jan 2010 22:25:51 -0800 (PST)
+	Sat, 30 Jan 2010 22:54:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:content-type:subject:date:to
 	:mime-version:content-transfer-encoding:from:organization:message-id
-	:user-agent; bh=MmPIKXBYsl5ayuH9Ejrj57K36YWk4q8a3fJU/hUaDSs=;
-	b=r/nSOYl6/QGP+hYVsSr5IB+hq3yZ0CsWcsrnPoVVCx3Iv2o/5olpHFBepYf/3LvwfK
-	EMwPRwp2OdaITjhPsvmV3fGPByuiS3AjBAg4KfdqRFLHzHjuKq7O0Wv0C//aZUkT/Kqb
-	dEmeEIvyzG2/DW6+4MuEIhcj0ZjTlxu7NKuRQ=
+	:user-agent; bh=KiLSXmrhECiMcrAkPsJXtY5osZmZibrWeYZS+kHZW0w=;
+	b=p4dL6LDbQLUIkzvIXWz2FDbLSmnFShgdmF5UKXb7BonyFU17uho6bA9oszAC1tA5cN
+	nOjAQvzU6pWLli4lCbfUeNCn9JOLH9CRIN8hT0pMPSFMqu1O3IRR9nGnFh0TESM6MEFe
+	N4sAfyc1nuh017pFpi+qJpu8vkbE8NjcnS1LU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=content-type:subject:date:to:mime-version:content-transfer-encoding
 	:from:organization:message-id:user-agent;
-	b=vCxUjmwPUk0HF00JqBvt0D/ZcyLTIJ0LrQG0DVK38bC2vDNE3QMkk7Ac5B9m4wmcnI
-	79C3cXKTSYX/6V2FQccYV7vlvWwcftu9TCtgBFCX+omfKOR+tC2SVmZGt5Pt9tZRl9MV
-	Ey6mkWtY5Wx/fCuqf9MWFZhvswETxjW7/Ww0g=
-Received: by 10.141.91.10 with SMTP id t10mr2036079rvl.127.1264919150905;
-	Sat, 30 Jan 2010 22:25:50 -0800 (PST)
+	b=P9ioen2kL6uDVIcwks6ohd/tOAMc+CCBFtZpa31fRDMCu2KyncjWRstUfhxuESyOuE
+	03eQCRmyMz+BAlBzjlYlyMN7MhGIOD1MPlWFYNfg+Es9raUJAnwSfWDwdawH/LExfJjZ
+	Ij2KMwSAQaJaS3GLCLbdA+d9pGJODsQsGV4t8=
+Received: by 10.142.119.20 with SMTP id r20mr2039162wfc.96.1264920881511;
+	Sat, 30 Jan 2010 22:54:41 -0800 (PST)
 Received: from camelguo ([123.54.107.86])
-	by mx.google.com with ESMTPS id 21sm3271583pzk.3.2010.01.30.22.25.48
+	by mx.google.com with ESMTPS id 23sm3259927pzk.8.2010.01.30.22.54.38
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 30 Jan 2010 22:25:50 -0800 (PST)
-Date: Sun, 31 Jan 2010 14:25:42 +0800
+	Sat, 30 Jan 2010 22:54:40 -0800 (PST)
+Date: Sun, 31 Jan 2010 14:54:32 +0800
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>
 MIME-Version: 1.0
 From: "Guo Hongruan" <camelguo@gmail.com>
 Organization: Gulessoft, Inc
-Message-ID: <op.u7dv44vqmn1qzu@camelguo>
+Message-ID: <op.u7dxg6szmn1qzu@camelguo>
 User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 209.85.216.179
+X-SA-Exim-Connect-IP: 209.85.222.177
 X-SA-Exim-Mail-From: camelguo@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: circular dependency when building linux_2.6.25.bb
+Subject: building chumby-kernel_2.6.16-chumby-1.2.bb failed due to arm-linux-ar: command not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,38 +50,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Jan 2010 06:28:20 -0000
+X-List-Received-Date: Sun, 31 Jan 2010 06:57:10 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed; delsp=yes
 Content-Transfer-Encoding: 7bit
 
 Hi guys,
-   I tried to build openembedded with the following configration in my  
+   I tried to build openembedded with the following configuration in my  
 local.conf
-MACHIN=at91-l9260
+MACHINE=chumby
 DISTRO=micro
 LIBC=glibc
+But when building chumby-kernel-2.6.16-chumby, I met an error with the  
+following information:
 
-But I failed to start building and met the following error:
-ERROR: Unbuildable tasks were found.
-These are usually caused by circular dependencies and any circular  
-dependency chains found will be printed below. Increase the debug level to  
-see a list of unbuildable tasks.
+| make[1]: `include/asm-arm/mach-types.h' is up to date.
+|   CHK     usr/initramfs_list
+|   CHK     include/linux/compile.h
+|   LD      sound/arm/built-in.o
+| /bin/sh: arm-linux-ar: command not found
 
-Identifying dependency loops (this may take a short while)...
+for more detailed information, please see
+http://tinderbox.openembedded.net/packages/451662/
 
-ERROR:
-Dependency loop #1 found:
-   Task 384 (/opt/workdir/oe/openembedded/recipes/linux/linux_2.6.25.bb,  
-do_deploy) (depends: set([388, 108, 390]))
-   Task 389 (/opt/workdir/oe/openembedded/recipes/linux/linux_2.6.25.bb,  
-do_compulab_image) (depends: set([384]))
-   Task 388 (/opt/workdir/oe/openembedded/recipes/linux/linux_2.6.25.bb,  
-do_package) (depends: set([160, 144, 770, 389, 390, 32, 754, 176, 786,  
-1014, 982, 998, 380]))
-
-It seems that the linux_2.6.25.bb recipe causes dependency loops.
-
-Thanks a lot!
+It seems that the ar used to build kernel is incorrect. It should be  
+arm-oe-linux-gnueabi-ar not arm-linux-ar
 
 -- 
 Guo Hongruan, Embedded Linux Consultant
