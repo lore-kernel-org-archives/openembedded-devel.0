@@ -1,39 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nc5cj-00076E-Bh for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Feb 2010 00:24:08 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nc5aN-0007sy-MC for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Feb 2010 00:21:39 +0100
-Received: from p5b3b2d4e.dip.t-dialin.net ([91.59.45.78])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Feb 2010 00:21:39 +0100
-Received: from no2spam by p5b3b2d4e.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1Nc5q7-00078E-Ik
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Feb 2010 00:37:58 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o11N7p9f005284
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Feb 2010 00:21:39 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 1 Feb 2010 23:07:51 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 04829-08 for <openembedded-devel@lists.openembedded.org>;
+	Mon,  1 Feb 2010 23:07:47 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o11N7kqj005278
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 1 Feb 2010 23:07:46 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Tue, 02 Feb 2010 00:21:09 +0100
-Message-ID: <hk7nl6$rik$1@ger.gmane.org>
-References: <d1b08f941001170606w13dcfc0ey341da93deb94c7b8@mail.gmail.com>	<201001172013.06010.marcin@juszkiewicz.com.pl>	<201001172258.25258.jay4mail@gmail.com>	<d1b08f941001171559w5ae011a6u61715d0fd236046@mail.gmail.com>	<d1b08f941001220212v588c5f9bvbf2a149660a86898@mail.gmail.com>	<hjceds$nsr$2@ger.gmane.org>	<d1b08f941001281450o3dc53131je7168dbfbca9c1c8@mail.gmail.com>	<d1b08f941002011024p60f08708xbb56a3293fe73dba@mail.gmail.com>
-	<d1b08f941002011357y4285709w44dbed0b4e2c4b87@mail.gmail.com>
+In-Reply-To: <ac9c93b11001300418t644f9b92h926dbae7a232b339@mail.gmail.com>
+References: <ac9c93b11001300418t644f9b92h926dbae7a232b339@mail.gmail.com>
+Date: Mon, 01 Feb 2010 23:07:43 +0000
+Message-ID: <1265065663.3159.8.camel@rex>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b2d4e.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-In-Reply-To: <d1b08f941002011357y4285709w44dbed0b4e2c4b87@mail.gmail.com>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.2 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: zaurus-devel@lists.linuxtogo.org
-Subject: Re: [RFC] Zaurus: make updater.sh obsolete for poodle, clamshells and tosa
+Subject: Re: packaged staging issue; additional packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,14 +44,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Feb 2010 23:24:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 01 Feb 2010 23:37:58 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Andrea Adami wrote:
-> I'd like just a couple of tests on spitz and tosa, then I'd push.
+On Sat, 2010-01-30 at 13:18 +0100, Frans Meulenbroeks wrote:
+> I seem to have found an issue with packaged staging.
+> I'll try to describe the problem, but maybe my understanding is not
+> 100% so bear with me in that case
+[...]
+> I've focused myself on this one:
+> 
+>  * opkg_install_cmd: Cannot install package udev.
+>  * satisfy_dependencies_for: Cannot satisfy the following dependencies
+> for sysvinit:
+>  * satisfy_dependencies_for:    sysvinit-inittab *
+>  * opkg_install_cmd: Cannot install package sysvinit.
+> 
+> What seems to be the case here is the following:
+> sysvinit bb file contains the following:
+> 
+> RDEPENDS_${PN} = "${PN}-inittab"
+> 
+> PACKAGES =+ "bootlogd ${PN}-inittab"
+> FILES_bootlogd = "/etc/init.d/bootlogd /etc/init.d/stop-bootlogd
+> /etc/rc?.d/S*bootlogd /sbin/bootlogd"
+> FILES_${PN}-inittab = "${sysconfdir}/inittab"
+> 
+> So it generates the sysvinit-inittab package and RDEPENDS on it.
+> 
+> If I search for inittab in my work/sysvinit dir I get:
+> ./inittab
+> ./sysvinit-2.86/man/inittab.5
+> ./staging-pkg/staging/armv7a-angstrom-linux-gnueabi/usr/share/man/man5/inittab.5
+> ./staging-pkg/pkgdata/beagleboard-angstrom-linux-gnueabi/runtime/sysvinit-inittab
+> ./staging-pkg/pkgdata/beagleboard-angstrom-linux-gnueabi/runtime/sysvinit-inittab.packaged
+> ./sysroot-destdir/home/frans/oe/tmp_angstrom/staging/armv7a-angstrom-linux-gnueabi/usr/share/man/man5/inittab.5
+> ./packages-split/sysvinit-inittab
+> ./packages-split/sysvinit-inittab/etc
+> ./packages-split/sysvinit-inittab/etc/inittab
+> ./packages-split/sysvinit-doc/usr/share/man/man5/inittab.5
+> ./package/etc/inittab
+> ./package/usr/share/man/man5/inittab.5
+> ./image/etc/inittab
+> ./image/usr/share/man/man5/inittab.5
+> 
+> So the file inittab does not end up in packaged staging.
+> 
+> It seems to me that packaged-staging.bbclass needs some work and that
+> something like staging_packager needs to be involved for all packages
+> in a recipe.
+> Howeever, implementing this is beyond my python capabilities and also
+> beyond my understanding of the build system.
+> 
+> Is my analysis correct?
+> Can someone implement something or provide some guidance?
 
-If you let me know what and how to test, I can test the collie, too.
+inittab is a false lead but you're heading in the right direction. The
+staging package should contain a sysvinit-inittab*.ipk. Whilst I only
+have a Poky build handy, I see:
+
+find -name sysvinit-inittab*
+./packages-split/sysvinit-inittab
+./staging-pkg/deploy/ipk/netbook/sysvinit-inittab_2.86-r32_netbook.ipk
+./staging-pkg/pkgdata/netbook-poky-linux/runtime/sysvinit-inittab
+./staging-pkg/pkgdata/netbook-poky-linux/runtime/sysvinit-inittab.packaged
+
+The key line being:
+
+./staging-pkg/deploy/ipk/netbook/sysvinit-inittab_2.86-r32_netbook.ipk
+
+If something like that file isn't there, something in OE's package
+staging is broken.
+
+Cheers,
+
+Richard
+
 
 
 
