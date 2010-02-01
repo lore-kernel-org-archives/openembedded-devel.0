@@ -1,25 +1,27 @@
-Received: from smtp7.myhsphere.biz ([204.10.105.69] helo=mail9.myhsphere.biz)
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <balakrishnan@e-consystems.com>) id 1Nbt0W-0001cK-N2
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Nbt85-0004Wg-Gx
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Feb 2010 10:55:51 +0100
-Received: (qmail 10376 invoked by uid 399); 1 Feb 2010 09:53:19 -0000
-Received: from dsl-tn-dynamic-018.247.164.122.airtelbroadband.in (HELO
-	?192.168.1.8?) (balakrishnan@e-consystems.com@122.164.247.18)
-	by mail9.myhsphere.biz with ESMTPAM; 1 Feb 2010 09:53:19 -0000
-X-Originating-IP: 122.164.247.18
-X-Sender: balakrishnan@e-consystems.com
-From: balakrishnan <balakrishnan@e-consystems.com>
+	Mon, 01 Feb 2010 11:03:40 +0100
+Received: (qmail 5863 invoked by uid 813007); 1 Feb 2010 10:01:13 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 1 Feb 2010 10:01:13 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 01 Feb 2010 15:23:22 +0530
-Message-Id: <1265018002.32037.22.camel@balakrishnan-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-SA-Exim-Connect-IP: 204.10.105.69
-X-SA-Exim-Mail-From: balakrishnan@e-consystems.com
+Date: Mon, 1 Feb 2010 11:00:54 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-rc5-00011-gf6760aa; KDE/4.3.4; x86_64; ;
+	)
+References: <> <1265015418-8090-1-git-send-email-camelguo@gmail.com>
+In-Reply-To: <1265015418-8090-1-git-send-email-camelguo@gmail.com>
+MIME-Version: 1.0
+Message-Id: <201002011100.55371.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Angstrom - Touchscreen enable?
+Subject: Re: [PATCH] chumby-kernel: add a patch to remove hard setting CROSS_COMPILE from Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,30 +35,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Feb 2010 09:55:52 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 01 Feb 2010 10:03:40 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
-   I am building "stable/2009" angstrom-distro branch in open embedded.
-What is my problem is I am not able to enable 'touch screen'. I have
-added "touchscreen" value in MACHINE_FEATURES variable also.
-My configuration details is
+Dnia poniedzia=C5=82ek, 1 lutego 2010 o 10:10:18 Guo Hongruan napisa=C5=82(=
+a):
+> * linux-2.6.16-chumby-1.2.tar.gz set CROSS_COMPILE as arm-linux- hardly.
+> * It causes the AR used to compile chumby-kernel is arm-linux-, but it
+>  should be set dynamically * according CROSS_COMPILE passed by openembedd=
+ed
+>=20
+> Signed-off-by: Guo Hongruan <camelguo@gmail.com>
 
-PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-XSERVER = "xserver-xorg \
-           xf86-input-evdev \
-           xf86-input-mouse \
-           xf86-video-fbdev \
-           xf86-input-keyboard"
-MACHINE_FEATURES = "kernel26 usbgadget usbhost vfat alsa touchscreen"
+pushed
 
-1.How to enable touch screen in "xserver-xorg" configuration?.
-2.If it enabled in "xserver-kdrive" only, then why?
-3.tslib packages is not getting installed to rootfs?
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-With Regards
-J.Balakrishnan
 
 
 
