@@ -1,27 +1,37 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Nbt85-0004Wg-Gx
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Feb 2010 11:03:40 +0100
-Received: (qmail 5863 invoked by uid 813007); 1 Feb 2010 10:01:13 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 1 Feb 2010 10:01:13 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NbupC-0006Wo-2v for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Feb 2010 12:52:17 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nbumq-0000o0-5i for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Feb 2010 12:49:48 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Feb 2010 12:49:48 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Feb 2010 12:49:48 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 1 Feb 2010 11:00:54 +0100
-User-Agent: KMail/1.12.4 (Linux/2.6.33-rc5-00011-gf6760aa; KDE/4.3.4; x86_64; ;
-	)
-References: <> <1265015418-8090-1-git-send-email-camelguo@gmail.com>
-In-Reply-To: <1265015418-8090-1-git-send-email-camelguo@gmail.com>
-MIME-Version: 1.0
-Message-Id: <201002011100.55371.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 01 Feb 2010 12:49:26 +0100
+Message-ID: <hk6f44$s7d$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100114 Shredder/3.0.2pre
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] chumby-kernel: add a patch to remove hard setting CROSS_COMPILE from Makefile
+Subject: Revert "conf/machine/jornada7xx.conf : Use EABI"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,28 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Feb 2010 10:03:40 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 01 Feb 2010 11:52:17 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Dnia poniedzia=C5=82ek, 1 lutego 2010 o 10:10:18 Guo Hongruan napisa=C5=82(=
-a):
-> * linux-2.6.16-chumby-1.2.tar.gz set CROSS_COMPILE as arm-linux- hardly.
-> * It causes the AR used to compile chumby-kernel is arm-linux-, but it
->  should be set dynamically * according CROSS_COMPILE passed by openembedd=
-ed
->=20
-> Signed-off-by: Guo Hongruan <camelguo@gmail.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-pushed
+Hi,
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+As the revert message states:
 
+TARGET_OS does explicitly NOT belong in a machine.conf, it belongs in a
+distro.conf
+
+I wanted to stop crap like this from gaining any google juice and people
+copy/pasting it.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLZr/GMkyGM64RGpERAjkoAKC6BwLEcquh8M+HXJhbcb6Attv7jgCfV9lU
+IN9lakPhmCBKJ2wCoqREDCs=
+=wUtk
+-----END PGP SIGNATURE-----
 
 
 
