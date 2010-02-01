@@ -1,35 +1,45 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from mail-ew0-f212.google.com ([209.85.219.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1NbzYa-00052V-Qg
+	(envelope-from <andrea.adami@gmail.com>) id 1Nc0zT-00008w-Iv
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Feb 2010 17:55:28 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 2D8642C817
+	Mon, 01 Feb 2010 19:27:18 +0100
+Received: by ewy4 with SMTP id 4so558862ewy.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Feb 2010 16:49:33 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6RUv809p5+a4
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Feb 2010 16:49:29 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id A315F2C7D5
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Feb 2010 16:49:28 +0000 (UTC)
-Message-ID: <4B6706E3.3030003@gmail.com>
-Date: Mon, 01 Feb 2010 17:52:51 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	Mon, 01 Feb 2010 10:24:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=lu7gnI44Ot+EWPKxXY6Pslh36pz50KcmYsvpBZKX/7k=;
+	b=GFYEjPSTOrMKNtDbJwV6BBgbSajRh0zOT69ukID9GfSitjsIOZc4YyXTZoR6OXNz1A
+	pJKuPkb2NwP8YuXg3Hf1AyDAhcNIy1OEWP8gxnDOo6sLg38LxBKgtaCYSn6D3+MNkaKa
+	8Eg1e8twz34ArHxw8wIol5FAEK1MdVhVD1mwE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Udn+pChBXU7EWevHrjlTXd8UlV5IFmhqIkZXh6ITR0lNr+2cS08bQmuht/r5wn6gUY
+	w7dNo9pQrlcMxOtH4a3Y0ZO+GEyi17sWlPdJz4ovKHnbjNlhdNimoJk7xMTWTrW4bw3e
+	XWPX1534KkoxeaBIMW83RowKR3lc488ts8bco=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1265018002.32037.22.camel@balakrishnan-desktop>
-In-Reply-To: <1265018002.32037.22.camel@balakrishnan-desktop>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+Received: by 10.213.97.28 with SMTP id j28mr3532744ebn.82.1265048688039; Mon, 
+	01 Feb 2010 10:24:48 -0800 (PST)
+In-Reply-To: <d1b08f941001281450o3dc53131je7168dbfbca9c1c8@mail.gmail.com>
+References: <d1b08f941001170606w13dcfc0ey341da93deb94c7b8@mail.gmail.com>
+	<201001172013.06010.marcin@juszkiewicz.com.pl>
+	<201001172258.25258.jay4mail@gmail.com>
+	<d1b08f941001171559w5ae011a6u61715d0fd236046@mail.gmail.com>
+	<d1b08f941001220212v588c5f9bvbf2a149660a86898@mail.gmail.com>
+	<hjceds$nsr$2@ger.gmane.org>
+	<d1b08f941001281450o3dc53131je7168dbfbca9c1c8@mail.gmail.com>
+Date: Mon, 1 Feb 2010 19:24:48 +0100
+Message-ID: <d1b08f941002011024p60f08708xbb56a3293fe73dba@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	Zaurus PDA developers list <zaurus-devel@lists.linuxtogo.org>
+X-SA-Exim-Connect-IP: 209.85.219.212
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Angstrom - Touchscreen enable?
+Subject: Re: [RFC] Zaurus: make updater.sh obsolete for poodle, clamshells and tosa
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,55 +53,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Feb 2010 16:55:28 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 01 Feb 2010 18:27:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-balakrishnan ha scritto, Il 01/02/2010 10:53:
-> Hi,
->    I am building "stable/2009" angstrom-distro branch in open embedded.
-> What is my problem is I am not able to enable 'touch screen'. I have
-> added "touchscreen" value in MACHINE_FEATURES variable also.
-> My configuration details is
->=20
-> PREFERRED_PROVIDER_virtual/xserver =3D "xserver-xorg"
-> XSERVER =3D "xserver-xorg \
->            xf86-input-evdev \
->            xf86-input-mouse \
->            xf86-video-fbdev \
->            xf86-input-keyboard"
-> MACHINE_FEATURES =3D "kernel26 usbgadget usbhost vfat alsa touchscreen"
->=20
-> 1.How to enable touch screen in "xserver-xorg" configuration?.
-> 2.If it enabled in "xserver-kdrive" only, then why?
-> 3.tslib packages is not getting installed to rootfs?
->=20
-> With Regards
-> J.Balakrishnan
->=20
+Again on this:
+
+chatting with Eric about the pxa-linking-bug-r1 patch, it seems it is
+needed because of a bug in updater.sh:
+
+Same was reported here:
+http://www.oesf.org/index.php?title=SL-C3000_Updater_Script
+
+				## Bug in Sharp bit
+				## original line...
+				## /sbin/nandlogical $LOGOCAL_MTD WRITE $ADDR $DATASIZE $TMPDATA >
+/dev/null 2>&1
+				## didn't use correctly determined block size
+				## cause problems for other kernels
+				/sbin/nandlogical $LOGOCAL_MTD WRITE $ADDR $TMPSIZE $TMPDATA >
+/dev/null 2>&1
+				ADDR=`expr $ADDR + $TMPSIZE`
+			fi
 
 
-Hi,
-I am currently working on xinput-calibrator integration into
-OpenEmbedded (so consequently into Angstrom and KaeilOS)
-http://www.angstrom-distribution.org/
-http://www.kaeilos.com/ (mantained by me)
+OpenEmbedded updater.sh still has the 'wrong' line...
 
-Both these two distributions uses xserver-xorg rather than the old
-xserver-kdrive, so please try enabling xinput-calibrator in your image
-recipe in order to include xinput-calibrator_0.5.0.bb
+Opinions?
 
-Please let me know how is it working on your side, posting here, in IRC
-#oe or by private mail.
-
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-   Atmel third party certified consultant
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
-
-
+Andrea
 
 
