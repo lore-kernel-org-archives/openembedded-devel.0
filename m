@@ -1,43 +1,35 @@
-Received: from mail-fx0-f212.google.com ([209.85.220.212])
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Nbyvb-0006S4-G8
+	(envelope-from <koansoftware@gmail.com>) id 1NbzYa-00052V-Qg
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Feb 2010 17:15:10 +0100
-Received: by fxm4 with SMTP id 4so242295fxm.12
+	Mon, 01 Feb 2010 17:55:28 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 2D8642C817
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Feb 2010 08:12:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	bh=Hxzf1ZtLTsdFJiXqd+6gYukbZgw9IuSoBenQYOdpKsg=;
-	b=egCc4s9DKImLejmZ5m1xnt4SeSPynb2jLDOSzzFgmaDr2doLBFaXbW9L+O0hENWX86
-	vuHyuNAafi5h01zeS8sEpijrMII4Deb11fjFRMRKwXj92Pi8LymFROAdayEy1YRuXL/T
-	Gruv7Er4wpwNx9TrbzM0pnhYFfquwfWVvRog0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=oEvaHDGzp5wsYGcKfu6uGC6og2vUU/jI2B9WOrBQ/GwDHiAYbz/TtY4jmRucyHKk7U
-	yQ5aSAt1s+yz2g2s7kYzClgdGxaMN4U01P3RB0PL8PxfJ4LzuE7tbltuQZQX7sJiUfli
-	+Zzv8GJNMF6gYowjEi/aQ1N3S9Wos+DS1EotY=
+	Mon,  1 Feb 2010 16:49:33 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 6RUv809p5+a4
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  1 Feb 2010 16:49:29 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id A315F2C7D5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  1 Feb 2010 16:49:28 +0000 (UTC)
+Message-ID: <4B6706E3.3030003@gmail.com>
+Date: Mon, 01 Feb 2010 17:52:51 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.165.72 with SMTP id w8mr733012hbd.8.1265040761286; Mon, 01 
-	Feb 2010 08:12:41 -0800 (PST)
-In-Reply-To: <1265028954.3777.317.camel@mill.internal.reciva.com>
-References: <1265011036-9086-1-git-send-email-raj.khem@gmail.com>
-	<1265028954.3777.317.camel@mill.internal.reciva.com>
-Date: Mon, 1 Feb 2010 14:12:41 -0200
-X-Google-Sender-Auth: b4fd49af955733ff
-Message-ID: <be7a9f3d1002010812id8428d8x4176503e98f23501@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.212
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+References: <1265018002.32037.22.camel@balakrishnan-desktop>
+In-Reply-To: <1265018002.32037.22.camel@balakrishnan-desktop>
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH][RFC] gcc: Restructure package creation.
+Subject: Re: Angstrom - Touchscreen enable?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,34 +43,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Feb 2010 16:15:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 01 Feb 2010 16:55:28 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Hello,
+balakrishnan ha scritto, Il 01/02/2010 10:53:
+> Hi,
+>    I am building "stable/2009" angstrom-distro branch in open embedded.
+> What is my problem is I am not able to enable 'touch screen'. I have
+> added "touchscreen" value in MACHINE_FEATURES variable also.
+> My configuration details is
+>=20
+> PREFERRED_PROVIDER_virtual/xserver =3D "xserver-xorg"
+> XSERVER =3D "xserver-xorg \
+>            xf86-input-evdev \
+>            xf86-input-mouse \
+>            xf86-video-fbdev \
+>            xf86-input-keyboard"
+> MACHINE_FEATURES =3D "kernel26 usbgadget usbhost vfat alsa touchscreen"
+>=20
+> 1.How to enable touch screen in "xserver-xorg" configuration?.
+> 2.If it enabled in "xserver-kdrive" only, then why?
+> 3.tslib packages is not getting installed to rootfs?
+>=20
+> With Regards
+> J.Balakrishnan
+>=20
 
-On Mon, Feb 1, 2010 at 10:55 AM, Phil Blundell <philb@gnu.org> wrote:
-> I think it might be better to unbundle the libraries from gcc{-cross}
-> altogether, and put them in a new recipe called gcc-runtime or
-> something. =A0Having them built as part of gcc-cross seems to cause a
-> certain level of headache for people who are using external toolchains;
-> this happens already with libgcc and libstdc++, and I suspect your patch
-> will cause the same issues to start popping up with the other libraries.
 
-Indeed; for a outsider the gcc-cross looks like the really basic stuff
-needed; not libraries and like.
+Hi,
+I am currently working on xinput-calibrator integration into
+OpenEmbedded (so consequently into Angstrom and KaeilOS)
+http://www.angstrom-distribution.org/
+http://www.kaeilos.com/ (mantained by me)
 
-> Or, even better, put the different language runtimes in separate recipes
-> so that folks who want to use Fortran can build those libraries without
-> everybody else needing to do so.
+Both these two distributions uses xserver-xorg rather than the old
+xserver-kdrive, so please try enabling xinput-calibrator in your image
+recipe in order to include xinput-calibrator_0.5.0.bb
 
-That would be really nice and could speedup the building time a bit.
+Please let me know how is it working on your side, posting here, in IRC
+#oe or by private mail.
 
-Cheers,
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+   Atmel third party certified consultant
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
 
---=20
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+
 
 
