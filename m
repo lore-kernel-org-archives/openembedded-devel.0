@@ -1,45 +1,26 @@
-Received: from mail-ew0-f212.google.com ([209.85.219.212])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1Nc0zT-00008w-Iv
+	(envelope-from <philip@balister.org>) id 1Nc2Of-0007GI-15
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Feb 2010 19:27:18 +0100
-Received: by ewy4 with SMTP id 4so558862ewy.27
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Feb 2010 10:24:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=lu7gnI44Ot+EWPKxXY6Pslh36pz50KcmYsvpBZKX/7k=;
-	b=GFYEjPSTOrMKNtDbJwV6BBgbSajRh0zOT69ukID9GfSitjsIOZc4YyXTZoR6OXNz1A
-	pJKuPkb2NwP8YuXg3Hf1AyDAhcNIy1OEWP8gxnDOo6sLg38LxBKgtaCYSn6D3+MNkaKa
-	8Eg1e8twz34ArHxw8wIol5FAEK1MdVhVD1mwE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Udn+pChBXU7EWevHrjlTXd8UlV5IFmhqIkZXh6ITR0lNr+2cS08bQmuht/r5wn6gUY
-	w7dNo9pQrlcMxOtH4a3Y0ZO+GEyi17sWlPdJz4ovKHnbjNlhdNimoJk7xMTWTrW4bw3e
-	XWPX1534KkoxeaBIMW83RowKR3lc488ts8bco=
+	Mon, 01 Feb 2010 20:57:24 +0100
+Received: (qmail 32066 invoked by uid 1003); 1 Feb 2010 19:54:52 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 1 Feb 2010 19:54:52 -0000
+Message-ID: <4B67318A.4050005@balister.org>
+Date: Mon, 01 Feb 2010 14:54:50 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.7) Gecko/20100120 Fedora/3.0.1-1.fc11 Thunderbird/3.0.1
 MIME-Version: 1.0
-Received: by 10.213.97.28 with SMTP id j28mr3532744ebn.82.1265048688039; Mon, 
-	01 Feb 2010 10:24:48 -0800 (PST)
-In-Reply-To: <d1b08f941001281450o3dc53131je7168dbfbca9c1c8@mail.gmail.com>
-References: <d1b08f941001170606w13dcfc0ey341da93deb94c7b8@mail.gmail.com>
-	<201001172013.06010.marcin@juszkiewicz.com.pl>
-	<201001172258.25258.jay4mail@gmail.com>
-	<d1b08f941001171559w5ae011a6u61715d0fd236046@mail.gmail.com>
-	<d1b08f941001220212v588c5f9bvbf2a149660a86898@mail.gmail.com>
-	<hjceds$nsr$2@ger.gmane.org>
-	<d1b08f941001281450o3dc53131je7168dbfbca9c1c8@mail.gmail.com>
-Date: Mon, 1 Feb 2010 19:24:48 +0100
-Message-ID: <d1b08f941002011024p60f08708xbb56a3293fe73dba@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
-	Zaurus PDA developers list <zaurus-devel@lists.linuxtogo.org>
-X-SA-Exim-Connect-IP: 209.85.219.212
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <E1Nat3b-0004cf-RY@melo.openembedded.org>
+	<1264885694.4951.9.camel@trini-m4400>
+In-Reply-To: <1264885694.4951.9.camel@trini-m4400>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC] Zaurus: make updater.sh obsolete for poodle, clamshells and tosa
+Subject: Re: [oe-commits] Philip Balister : task-sdk-native: Convert to use an inc file for the basic native sdk.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,33 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Feb 2010 18:27:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 01 Feb 2010 19:57:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Again on this:
+On 01/30/2010 04:08 PM, Tom Rini wrote:
+> On Fri, 2010-01-29 at 15:46 +0000, git version control wrote:
+>> Module: openembedded.git
+>> Branch: org.openembedded.dev
+>> Commit: cd149ebbd44ee4cc91f1c44d39a4105bc95f2cdc
+>> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=cd149ebbd44ee4cc91f1c44d39a4105bc95f2cdc
+>>
+>> Author: Philip Balister<philip@balister.org>
+>> Date:   Fri Jan 29 10:45:22 2010 -0500
+>>
+>> task-sdk-native: Convert to use an inc file for the basic native sdk.
+>
+> Curious, why?  The first thing that came to mind would be
+> task-native-sdk-qte or something, but that would be handled by RDEP on
+> task-sdk-native.
+>
 
-chatting with Eric about the pxa-linking-bug-r1 patch, it seems it is
-needed because of a bug in updater.sh:
+Both approaches work. Since the end result is an empty ipk with only a 
+control file to suck in the needed packages, the end result is the same.
 
-Same was reported here:
-http://www.oesf.org/index.php?title=SL-C3000_Updater_Script
+Basically, I came up with the inc approach before I figured out what you 
+suggest :)
 
-				## Bug in Sharp bit
-				## original line...
-				## /sbin/nandlogical $LOGOCAL_MTD WRITE $ADDR $DATASIZE $TMPDATA >
-/dev/null 2>&1
-				## didn't use correctly determined block size
-				## cause problems for other kernels
-				/sbin/nandlogical $LOGOCAL_MTD WRITE $ADDR $TMPSIZE $TMPDATA >
-/dev/null 2>&1
-				ADDR=`expr $ADDR + $TMPSIZE`
-			fi
-
-
-OpenEmbedded updater.sh still has the 'wrong' line...
-
-Opinions?
-
-Andrea
+Philip
 
 
