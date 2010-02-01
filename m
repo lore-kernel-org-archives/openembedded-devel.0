@@ -1,41 +1,27 @@
-Received: from mail-yx0-f178.google.com ([209.85.210.178])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <camelguo@gmail.com>) id 1NbsLI-0002TN-Oe
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NbsTz-0002f6-RU
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Feb 2010 10:13:15 +0100
-Received: by yxe8 with SMTP id 8so3739123yxe.17
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Feb 2010 01:10:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=Yxi6FrLzkHCmFhICPDiiYvFV5i9A98ZwDb9ylSxH0V4=;
-	b=h1zzWtrR9hg9VB280F0pDqUMnjkV7JiQ6aNAkUeRAaczb7dx7DvR7UaKau8L7S8y6E
-	us7jK221SatBGjaKvhLavTVGW7q6NICo0YZ2lVzLCBuKxdl7nayCd8PmegBcNFkej2jp
-	AP953dk8gz/BNLa4EaflprNEMsQRJmzNxpS0Y=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=hMiYvHu6lCO6uHf8YXMQxZdMJagniSnrGKteYXTTY8dVgS0ZO+aXH0sU+AoNgsVMRZ
-	Xxmf79jlfpFm6IEloAdn8eO6ONd+9KXoWa0bst3k04HTaNe6hvhnMQ3qv/6xtjsr6ono
-	CZGH3aJYvi8mnFxQSD3MtiCkXDmh5PUqEA2js=
-Received: by 10.101.7.29 with SMTP id k29mr4850304ani.12.1265015446436;
-	Mon, 01 Feb 2010 01:10:46 -0800 (PST)
-Received: from localhost ([123.162.69.234])
-	by mx.google.com with ESMTPS id 7sm1680714ywf.55.2010.02.01.01.10.43
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 01 Feb 2010 01:10:45 -0800 (PST)
-From: Guo Hongruan <camelguo@gmail.com>
+	Mon, 01 Feb 2010 10:22:15 +0100
+Received: (qmail 7141 invoked by uid 813007); 1 Feb 2010 09:19:47 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 1 Feb 2010 09:19:47 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  1 Feb 2010 17:10:18 +0800
-Message-Id: <1265015418-8090-1-git-send-email-camelguo@gmail.com>
-X-Mailer: git-send-email 1.5.4.3
-In-Reply-To: <>
-References: <>
-X-SA-Exim-Connect-IP: 209.85.210.178
-X-SA-Exim-Mail-From: camelguo@gmail.com
+Date: Mon, 1 Feb 2010 10:19:10 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-rc5-00011-gf6760aa; KDE/4.3.4; x86_64; ;
+	)
+References: <op.u7dydnc4mn1qzu@camelguo>
+In-Reply-To: <op.u7dydnc4mn1qzu@camelguo>
+MIME-Version: 1.0
+Message-Id: <201002011019.29557.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] chumby-kernel: add a patch to remove hard setting CROSS_COMPILE from Makefile
+Subject: Re: failed to apply oxnas.diff when building linux_2.6.24.bb for oxnas machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,57 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Feb 2010 09:13:16 -0000
+X-List-Received-Date: Mon, 01 Feb 2010 09:22:15 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-* linux-2.6.16-chumby-1.2.tar.gz set CROSS_COMPILE as arm-linux- hardly.
-* It causes the AR used to compile chumby-kernel is arm-linux-, but it should be set dynamically
-* according CROSS_COMPILE passed by openembedded
+Dnia niedziela, 31 stycznia 2010 o 08:14:01 Guo Hongruan napisa=C5=82(a):
+> Hi guys,
+>    I tried to building openembedded with the following configuration in my
+> local.conf:
+> MACHINE=3Doxnas
+> DISTRO=3Dmicro
+> LIBC=3Dglibc
+> But when building linux_2.6.24 for oxnas, the oxnas.diff can not be
+> applied to the kernel with plenty of hunks failed.
 
-Signed-off-by: Guo Hongruan <camelguo@gmail.com>
----
- ...akefile-remove-hard-setting-CROSS_COMPILE.patch |   18 ++++++++++++++++++
- recipes/linux/chumby-kernel_2.6.16-chumby-1.2.bb   |    1 +
- 2 files changed, 19 insertions(+), 0 deletions(-)
- create mode 100644 recipes/linux/chumby-kernel/Makefile-remove-hard-setting-CROSS_COMPILE.patch
+Please prepare patch which will remove oxnas support from this recipe. It i=
+s=20
+not building since October and Steffen wrote:
 
-diff --git a/recipes/linux/chumby-kernel/Makefile-remove-hard-setting-CROSS_COMPILE.patch b/recipes/linux/chumby-kernel/Makefile-remove-hard-setting-CROSS_COMPILE.patch
-new file mode 100644
-index 0000000..9a0be9a
---- /dev/null
-+++ b/recipes/linux/chumby-kernel/Makefile-remove-hard-setting-CROSS_COMPILE.patch
-@@ -0,0 +1,18 @@
-+Makefile: remove hard setting CROSS_COMPILE
-+
-+* linux-2.6.16-chumby-1.2.tar.gz set CROSS_COMPILE as arm-linux- hardly
-+* It causes the AR used to compiling linux kernel is arm-linux-ar, which doesn't exist in openembedded at all
-+Index: linux-2.6.16/Makefile
-+===================================================================
-+--- linux-2.6.16.orig/Makefile	2010-02-01 16:19:36.000000000 +0800
-++++ linux-2.6.16/Makefile	2010-02-01 16:20:02.000000000 +0800
-+@@ -173,8 +173,7 @@
-+ # Note: Some architectures assign CROSS_COMPILE in their arch/*/Makefile
-+ 
-+ ARCH		?= $(SUBARCH)
-+-#CROSS_COMPILE	?=
-+-CROSS_COMPILE = arm-linux-
-++CROSS_COMPILE	?=
-+ 
-+ # Architecture as present in compile.h
-+ UTS_MACHINE := $(ARCH)
-diff --git a/recipes/linux/chumby-kernel_2.6.16-chumby-1.2.bb b/recipes/linux/chumby-kernel_2.6.16-chumby-1.2.bb
-index b6cdf48..4967c1e 100644
---- a/recipes/linux/chumby-kernel_2.6.16-chumby-1.2.bb
-+++ b/recipes/linux/chumby-kernel_2.6.16-chumby-1.2.bb
-@@ -9,6 +9,7 @@ SRC_URI = "http://files.chumby.com/source/ironforge/build396/linux-2.6.16-chumby
-            http://files.chumby.com/source/ironforge/build396/align.pl \
-            file://chumby-override-cmdline.patch;patch=1 \
-            file://disable-fbchanging.patch;patch=1 \
-+           file://Makefile-remove-hard-setting-CROSS_COMPILE.patch;patch=1 \
-            file://defconfig \
-            "
- 
--- 
-1.5.4.3
+>> hipox is my job. oxnas too, but may be we can finish the support for thi=
+s.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
 
 
 
