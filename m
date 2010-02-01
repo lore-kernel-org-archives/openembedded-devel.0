@@ -1,36 +1,23 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.emacinc.com ([63.245.244.68])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nc3OA-0000Fe-97 for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Feb 2010 22:00:57 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nc3Ln-0003M0-8D for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Feb 2010 21:58:27 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Feb 2010 21:58:27 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Feb 2010 21:58:27 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <tstratman@emacinc.com>) id 1Nc3XH-0004JJ-3k
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Feb 2010 22:10:22 +0100
+Received: from [63.245.244.67] (helo=emac081.emacinc.com)
+	by mail.emacinc.com with esmtp (Exim 4.50) id 1Nc3Uk-0008Nf-FG
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Feb 2010 15:07:49 -0600
+From: Travis Stratman <tstratman@emacinc.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 01 Feb 2010 21:57:59 +0100
-Message-ID: <hk7f8l$ps8$1@ger.gmane.org>
+In-Reply-To: <hk7f8l$ps8$1@ger.gmane.org>
 References: <1265057295.4267.170.camel@cheeto.emacinc.com>
+	<hk7f8l$ps8$1@ger.gmane.org>
+Date: Mon, 01 Feb 2010 15:07:32 -0600
+Message-Id: <1265058452.4267.175.camel@cheeto.emacinc.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100114 Shredder/3.0.2pre
-In-Reply-To: <1265057295.4267.170.camel@cheeto.emacinc.com>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.6.3 
+X-SA-Exim-Connect-IP: 63.245.244.68
+X-SA-Exim-Mail-From: tstratman@emacinc.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Qt4 embedded not populating staging
@@ -47,42 +34,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Feb 2010 21:00:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 01 Feb 2010 21:10:22 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Mon, 2010-02-01 at 21:57 +0100, Koen Kooi wrote:
 
-On 01-02-10 21:48, Travis Stratman wrote:
-> Hello,
-> 
-> I recently built version 4.6.0 of Qt embedded and noticed that it does
-> not populate the host staging directory. Comparing the newest qt4.inc
-> from the dev branch with the version that I was previously using, I
-> notice that the do_stage() has been removed. Does anyone know what the
-> reason for this was?
+> Yes, .dev has a new style staging that reuses do_install for staging
 
-Yes, .dev has a new style staging that reuses do_install for staging
+Good to know. I'm sure that this will save me a lot of confusion.
 
-> Note that I'm using the stable branch but I pulled the Qt4 scripts from
-> the dev branch into my local bb recipes and made some minor changes so
-> that I could build 4.6.0, so its possible that I introduced the issue
-> during this process.
+Thanks,
 
-That is indeed the case. You can't move over new-style recipes to
-stable/2009 anymore with some extra work.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLZ0BXMkyGM64RGpERAkD0AJ9m3P6fHCfKbE99hoDlQxjPJYnwVQCeOYdU
-n/Qi9BgerGIdLVegA1tPPtM=
-=NIOt
------END PGP SIGNATURE-----
+TAS
 
 
 
