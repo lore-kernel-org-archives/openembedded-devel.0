@@ -1,29 +1,25 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from smtp7.myhsphere.biz ([204.10.105.69] helo=mail9.myhsphere.biz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NcEdp-0005hC-N9
+	(envelope-from <balakrishnan@e-consystems.com>) id 1NcFFm-0002xC-Bc
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Feb 2010 10:01:52 +0100
-Received: from [85.210.8.8] (helo=[192.168.2.155])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NcEbT-0001IR-VZ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Feb 2010 08:59:24 +0000
-From: Phil Blundell <philb@gnu.org>
+	Tue, 02 Feb 2010 10:41:05 +0100
+Received: (qmail 1050 invoked by uid 399); 2 Feb 2010 09:38:29 -0000
+Received: from dsl-tn-dynamic-018.247.164.122.airtelbroadband.in (HELO
+	?192.168.1.8?) (balakrishnan@e-consystems.com@122.164.247.18)
+	by mail9.myhsphere.biz with ESMTPAM; 2 Feb 2010 09:38:29 -0000
+X-Originating-IP: 122.164.247.18
+X-Sender: balakrishnan@e-consystems.com
+From: balakrishnan <balakrishnan@e-consystems.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1265065479.4255.32.camel@trini-m4400>
-References: <1265011036-9086-1-git-send-email-raj.khem@gmail.com>
-	<1265028954.3777.317.camel@mill.internal.reciva.com>
-	<1265065479.4255.32.camel@trini-m4400>
-Date: Tue, 02 Feb 2010 08:59:16 +0000
-Message-ID: <1265101156.9974.1089.camel@lenovo.internal.reciva.com>
+Date: Tue, 02 Feb 2010 15:08:27 +0530
+Message-Id: <1265103507.19185.8.camel@balakrishnan-desktop>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-Broken-Reverse-DNS: no host name found for IP address 85.210.8.8
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Mailer: Evolution 2.26.1 
+X-SA-Exim-Connect-IP: 204.10.105.69
+X-SA-Exim-Mail-From: balakrishnan@e-consystems.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH][RFC] gcc: Restructure package creation.
+Subject: [PATCH] regulus: Adding pxa270 based machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,27 +33,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Feb 2010 09:01:52 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 02 Feb 2010 09:41:05 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2010-02-01 at 17:04 -0600, Tom Rini wrote:
-> Well, isn't that exposing problems that exist today, rather than adding
-> new ones (ie the problem is that an unexpected (OE-built) libfoo is
-> used) ?
+Dear OE,
+       I have mailed four patches to OE dev list on last month regarding
+"pxa270 based machine" inclusion in OE(stable/2009). Can I have status
+of my patches?
 
-The problem is more that, if you use an external toolchain and don't
-build gcc-cross at all, you end up getting unresolved dependencies at
-rootfs population time because no libgcc package at all has been
-generated.
-
-For libstdc++ I suspect it would be even worse because no dependencies
-will even be generated if the package doesn't exist: in this case you
-won't get a build error of any kind, you'll just find that no binaries
-in your rootfs will run because libstdc++.so.6 is missing.
-
-p.
-
+With Regards
+J.Balakrishnan
 
 
 
