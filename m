@@ -1,26 +1,38 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1NcJ0M-0002zz-0C
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Feb 2010 14:41:25 +0100
-Received: (qmail 4446 invoked by uid 1003); 2 Feb 2010 13:38:54 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 2 Feb 2010 13:38:54 -0000
-Message-ID: <4B682AEC.7000607@balister.org>
-Date: Tue, 02 Feb 2010 08:38:52 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.7) Gecko/20100120 Fedora/3.0.1-1.fc11 Thunderbird/3.0.1
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NcJ1C-00033s-TG for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Feb 2010 14:42:17 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NcIyr-0001Ic-53 for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Feb 2010 14:39:49 +0100
+Received: from p5b3b3af8.dip.t-dialin.net ([91.59.58.248])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Feb 2010 14:39:49 +0100
+Received: from no2spam by p5b3b3af8.dip.t-dialin.net with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Feb 2010 14:39:49 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1265103507.19185.8.camel@balakrishnan-desktop>
-	<201002021059.52148.holger+oe@freyther.de>
-In-Reply-To: <201002021059.52148.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Tue, 02 Feb 2010 14:39:24 +0100
+Message-ID: <hk99ub$elu$1@ger.gmane.org>
+References: <4B375060.8010607@gmx.net> <4B66E16B.4090201@gremlin.it>
+	<4B67F39D.6030903@kernelconcepts.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: p5b3b3af8.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <4B67F39D.6030903@kernelconcepts.de>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] regulus: Adding pxa270 based machine
+Subject: Re: OpenEmbedded stand at FOSDEM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,42 +46,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Feb 2010 13:41:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 02 Feb 2010 13:42:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 02/02/2010 04:59 AM, Holger Hans Peter Freyther wrote:
-> On Tuesday 02 February 2010 10:38:27 balakrishnan wrote:
->> Dear OE,
->>         I have mailed four patches to OE dev list on last month regarding
->> "pxa270 based machine" inclusion in OE(stable/2009). Can I have status
->> of my patches?
->
-> Two things,
-> I think one of the stable/2009 rules is that it needs to be in dev first and
-> will be backported then. So you would have to prepare your changes to .dev and
-> then ask for stable review.
+someone should bring lots of power extensions
 
-I don't thinnk that is a hard rule, especially since you can now commit 
-stuff to dev that will not work in stable. However, committing the 
-machine definition to dev is a good idea so that the machine is 
-supported for users of both branches.
-
-Philip
-
->
-> The other weird part is that I have not seen your patches on patchwork. Now
-> going through the archive I see your patches and they seem to be fine.
->
-> z.
->
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
