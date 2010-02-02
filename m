@@ -1,20 +1,21 @@
 Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1NcIs2-0002lV-Ux
+	(envelope-from <philip@balister.org>) id 1NcJ0M-0002zz-0C
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Feb 2010 14:32:50 +0100
-Received: (qmail 24643 invoked by uid 1003); 2 Feb 2010 13:30:19 -0000
+	Tue, 02 Feb 2010 14:41:25 +0100
+Received: (qmail 4446 invoked by uid 1003); 2 Feb 2010 13:38:54 -0000
 Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 2 Feb 2010 13:30:18 -0000
-Message-ID: <4B6828E9.6090304@balister.org>
-Date: Tue, 02 Feb 2010 08:30:17 -0500
+	by mail.geekisp.com with SMTP; 2 Feb 2010 13:38:54 -0000
+Message-ID: <4B682AEC.7000607@balister.org>
+Date: Tue, 02 Feb 2010 08:38:52 -0500
 From: Philip Balister <philip@balister.org>
 User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
 	rv:1.9.1.7) Gecko/20100120 Fedora/3.0.1-1.fc11 Thunderbird/3.0.1
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <1265103507.19185.8.camel@balakrishnan-desktop>
-In-Reply-To: <1265103507.19185.8.camel@balakrishnan-desktop>
+	<201002021059.52148.holger+oe@freyther.de>
+In-Reply-To: <201002021059.52148.holger+oe@freyther.de>
 X-SA-Exim-Connect-IP: 216.168.135.169
 X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
@@ -33,26 +34,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Feb 2010 13:32:50 -0000
+X-List-Received-Date: Tue, 02 Feb 2010 13:41:25 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 02/02/2010 04:38 AM, balakrishnan wrote:
-> Dear OE,
->         I have mailed four patches to OE dev list on last month regarding
-> "pxa270 based machine" inclusion in OE(stable/2009). Can I have status
-> of my patches?
+On 02/02/2010 04:59 AM, Holger Hans Peter Freyther wrote:
+> On Tuesday 02 February 2010 10:38:27 balakrishnan wrote:
+>> Dear OE,
+>>         I have mailed four patches to OE dev list on last month regarding
+>> "pxa270 based machine" inclusion in OE(stable/2009). Can I have status
+>> of my patches?
+>
+> Two things,
+> I think one of the stable/2009 rules is that it needs to be in dev first and
+> will be backported then. So you would have to prepare your changes to .dev and
+> then ask for stable review.
 
-Can you post links or patch numbers so we can look at them in patchwork?
-
-http://patchwork.openembedded.org
+I don't thinnk that is a hard rule, especially since you can now commit 
+stuff to dev that will not work in stable. However, committing the 
+machine definition to dev is a good idea so that the machine is 
+supported for users of both branches.
 
 Philip
 
-
 >
-> With Regards
-> J.Balakrishnan
+> The other weird part is that I have not seen your patches on patchwork. Now
+> going through the archive I see your patches and they seem to be fine.
+>
+> z.
+>
+>
 >
 >
 > _______________________________________________
