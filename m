@@ -1,39 +1,39 @@
-Received: from mail-px0-f179.google.com ([209.85.216.179])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vivektambakad@gmail.com>) id 1Ncboy-0005MU-6y
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Feb 2010 10:46:55 +0100
-Received: by pxi9 with SMTP id 9so1161425pxi.24
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ncbtp-0005ag-5d for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Feb 2010 10:51:56 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NcbrQ-0005u8-O3 for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Feb 2010 10:49:24 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Feb 2010 10:49:24 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Feb 2010 01:44:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=TA/Q9tPxc/X1vW3dsFyyhxyL7jSNo38wuiGE/C/gKcM=;
-	b=u8mOMsbwokALMLBR6oLip7JJGfBhWCPCrnAxdvTPOrBYYigY7s/5cU2CQsy2H5mQRw
-	BRP9D2hzawulQxqtUd+kyAi1fOmpd9Ol3dcVMRJygslXWxfIV2TVKwx1Aav65sIgqKKb
-	ljBqdi5oQ8Yo3GmSiGn0xizSHU2AjBJyjDh5w=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=XtGxdkxBr/562v0xaluYSPuwN6iwLv+r0jgUWgeA3hXpDMhdl/uuR8DH98cD3wGu6U
-	EEnF2LHtX7KRVI6M5BcPM/bxJbb6ubgWXcesDn8zlsBPV0tMEHT8dnXaQjgFXv6qwW8D
-	aXbIzo/NU7Fq4xK6SMT7OwU1QTVvRF6hL46Q8=
-MIME-Version: 1.0
-Received: by 10.114.3.2 with SMTP id 2mr4876414wac.156.1265190263651; Wed, 03 
-	Feb 2010 01:44:23 -0800 (PST)
-In-Reply-To: <mailman.775.1265186732.14961.openembedded-devel@lists.openembedded.org>
-References: <mailman.775.1265186732.14961.openembedded-devel@lists.openembedded.org>
-Date: Wed, 3 Feb 2010 15:14:23 +0530
-Message-ID: <ad82c8891002030144n2e661145xebf2601c0730503e@mail.gmail.com>
-From: vivek tambakad <vivektambakad@gmail.com>
+	Wed, 03 Feb 2010 10:49:24 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.179
-X-SA-Exim-Mail-From: vivektambakad@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 03 Feb 2010 10:49:14 +0100
+Message-ID: <hkbgqo$tsh$1@ger.gmane.org>
+References: <1265189276.5591.40.camel@mattotaupa>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100114 Shredder/3.0.2pre
+In-Reply-To: <1265189276.5591.40.camel@mattotaupa>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Openembedded-devel Digest, Vol 43, Issue 10
+Subject: =?UTF-8?B?UmU6IEFzdXMgRWVlIFBDIDcwMSA0RywgcGVyZm9ybWFuY2UgYW5kIGluY2x1c2lvbiBpbnRvIMOFbmdzdHLDtm0=?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,19 +47,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2010 09:46:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 03 Feb 2010 09:51:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi Dennis,
-              The only thing i tested is trying following command  : *hexdump
-/dev/input/touchscreen0* from the console of EM-X270 and i touch the
-touchscreen with pointer for a couple times.  And i got output of hexdump
-only after touching the touchscreen.I am actually accessing console of
-Em-X270 through hyper terminal or minicom(115200 baud rate).
-I don't no it is with tslib or Xserver, i am facing problem. I am quite new
-to this.
-Please provide me a details about testing my driver with tslib test utils.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-with regards
-vivek tambakad
+On 03-02-10 10:27, Paul Menzel wrote:
+> Dear Denis and OE developers,
+> 
+> 
+> Denis committed support for Asus Eee PC 701 4G [2] some days ago [1].
+> 
+> 1. Denis, could tell us something about the performance of OE on this
+> netbook compared to the distribution you ran on there before.
+> 
+> 2. Is it possible to include this machine in the Ångström online builder
+> [3]?
+
+Send a patch similar to:
+
+http://dominion.thruhere.net/git/cgit.cgi/narcissus/commit/?id=8243155c50f374891aa9cbbcd599fbb05c2e94bf
+
+or
+
+http://dominion.thruhere.net/git/cgit.cgi/narcissus/commit/?id=5e24796d02056fc2858a2d2de2808cb5a2483b8f
+
+or
+
+http://dominion.thruhere.net/git/cgit.cgi/narcissus/commit/?id=b86a40518724768556f017de2b4da13b7d9c147b
+
+And it'll get added.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLaUaaMkyGM64RGpERAnKaAJ9Ro+NfzDF908QCoYTX3376CZi/2gCbBAU7
+SLkviTU/w6G1ZUyxjQxH54M=
+=TJpd
+-----END PGP SIGNATURE-----
+
+
 
