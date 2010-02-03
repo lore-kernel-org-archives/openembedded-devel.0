@@ -1,40 +1,33 @@
-Received: from mail-gx0-f215.google.com ([209.85.217.215])
+Received: from qw-out-1920.google.com ([74.125.92.149])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NckET-0005Ge-7E
+	(envelope-from <dp@xora.org.uk>) id 1NckS2-0007SE-Vf
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Feb 2010 19:45:48 +0100
-Received: by gxk7 with SMTP id 7so1746349gxk.12
+	Wed, 03 Feb 2010 19:59:50 +0100
+Received: by qw-out-1920.google.com with SMTP id 5so15090qwf.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Feb 2010 10:43:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=SNAGCJ/SEaVr7jWa9WmQbUwoz+HZFWZ7kMOqeurWZtg=;
-	b=QAQOpH2HIJ70fWDxHCpBQDVnThZiREqGTW97w7B6kEk+wWW18/J+pOK/5od+t1/R7J
-	IIt6UBPDPqH/in0XAbjeYAWWHzqWUComMbUk17abMGUZfC6JSlQvdLFOkLa7NxEXyUKZ
-	GEAwHbo8iX9xY0gMEecpUBUZAi8xLcso/K/lo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=NSUV1vPTkaeILv3OdMv4dQvsTuGmf9Q8/DGwWVpQVJ856Ic7qAjJC03+58jQ1o3xbF
-	GSotWAF0QaUvdsOrP31Usnq+jpeDlwWBbp/emvXYDFfacIvrrclvL8hC1dogBqGO1QRZ
-	KDEf39Gr/pGwYQR1FHZawoK2eCHYHdwwe6aSM=
-MIME-Version: 1.0
-Received: by 10.100.40.8 with SMTP id n8mr10692780ann.121.1265222593958; Wed, 
-	03 Feb 2010 10:43:13 -0800 (PST)
-In-Reply-To: <ac9c93b11002012357k2f7a920dqd800db05beab0664@mail.gmail.com>
-References: <ac9c93b11001300418t644f9b92h926dbae7a232b339@mail.gmail.com>
-	<1265065663.3159.8.camel@rex>
-	<ac9c93b11002012357k2f7a920dqd800db05beab0664@mail.gmail.com>
-Date: Wed, 3 Feb 2010 19:43:12 +0100
-Message-ID: <ac9c93b11002031043t12281789q1d48891e35f12a74@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 03 Feb 2010 10:57:20 -0800 (PST)
+Received: by 10.229.55.69 with SMTP id t5mr7393qcg.34.1265223440558;
+	Wed, 03 Feb 2010 10:57:20 -0800 (PST)
+Received: from xora-build.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by mx.google.com with ESMTPS id 29sm83037970vws.3.2010.02.03.10.57.18
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 03 Feb 2010 10:57:19 -0800 (PST)
+Received: by xora-build.xora.org.uk (Postfix, from userid 500)
+	id A2BCB4159E; Wed,  3 Feb 2010 18:57:15 +0000 (GMT)
+Date: Wed, 3 Feb 2010 18:57:15 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.217.215
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20100203185715.GA31312@xora-build.xora.org.uk>
+References: <1265221914.4267.273.camel@cheeto.emacinc.com>
+MIME-Version: 1.0
+In-Reply-To: <1265221914.4267.273.camel@cheeto.emacinc.com>
+User-Agent: Mutt/1.5.20 (2009-08-17)
+X-SA-Exim-Connect-IP: 74.125.92.149
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: packaged staging issue; additional packages
+Subject: Re: re-run install task without cleaning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,19 +41,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2010 18:45:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 03 Feb 2010 18:59:50 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Found it; fixed it; tested it; pushed it;
+On Wed, Feb 03, 2010 at 12:31:54PM -0600, Travis Stratman wrote:
+> Hello,
+> 
+> I have been working with Qt embedded and I want to make a subtle change
+> to the bitbake script that will only affect the install task (which now
+> completes successfully). Normally when I do something like this I just
+> clean and build the whole thing over again to get bitbake to use the new
+> install task. Just doing a '-c install' won't work because the previous
+> build completed successfully.
+> 
+> Because Qt takes about 2 hours to compile, I'm hoping that there is some
+> trick that I am not aware of where I can change and re-run the install
+> task (and all subsequent tasks) without rebuilding the whole package.
+> 
+> Any suggestions?
+> 
+bitbake blah -c install -f
 
-Root case was that packaged-staging.bbclass was not updated when
-DISTRO_PR was introduced.
-This caused the generation of pathnames which were missing the
-DISTRO_PR part. Fixed it by adding + "${DISTRO_PR}" to the places
-involved.
+Graeme
 
-Kudos to RP for pointing me to the proper direction.
-
-FM
 
 
