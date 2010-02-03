@@ -1,39 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from bay0-omc4-s6.bay0.hotmail.com ([65.54.190.208])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NcgVo-00067A-PX for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Feb 2010 15:47:28 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NcgTQ-000685-Du for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Feb 2010 15:44:56 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Feb 2010 15:44:56 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Feb 2010 15:44:56 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 03 Feb 2010 15:43:52 +0100
-Message-ID: <hkc237$4de$1@ger.gmane.org>
-References: <1497161523.3479291265205781088.JavaMail.root@sz0154a.westchester.pa.mail.comcast.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100114 Shredder/3.0.2pre
-In-Reply-To: <1497161523.3479291265205781088.JavaMail.root@sz0154a.westchester.pa.mail.comcast.net>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <salehusman@hotmail.com>) id 1NcgaU-000213-DU
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Feb 2010 15:52:18 +0100
+Received: from BAY127-W19 ([65.54.190.199]) by bay0-omc4-s6.bay0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 3 Feb 2010 06:49:41 -0800
+Message-ID: <BAY127-W196CB49757D93B154DD129D8560@phx.gbl>
+X-Originating-IP: [203.82.49.5]
+From: saleh usman <salehusman@hotmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>,
+	<sledz@dresearch.de>
+Date: Wed, 3 Feb 2010 19:49:41 +0500
+Importance: Normal
+MIME-Version: 1.0
+X-OriginalArrivalTime: 03 Feb 2010 14:49:41.0020 (UTC)
+	FILETIME=[1DA0FDC0:01CAA4E0]
+X-SA-Exim-Connect-IP: 65.54.190.208
+X-SA-Exim-Mail-From: salehusman@hotmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: EABI pain and frustration!
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: problem in bitbaking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,30 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2010 14:47:28 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 03-02-10 15:03, pspreadborough@comcast.net wrote:
-> 
-> My 2.6.29 kernel is built with the CodeSourcery arm-2009q3-67-arm-none-linux-gnueabi 
-> compiler and has the EABI and OABI_COMPAT config options enabled. Using this kernel 
-> I can boot my SA1110 iPaq into a OABI ramfs with no problems, however if I build a 
-> "HelloWorld" executable with the same compiler and try and run it I get an "Illegal Instruction" 
-> error. I build the test program using static linking, select the correct machine type and tune 
-> options but to no avail, I always get the illegal instruction. 
-
-Which MACHINE and DISTRO are you using in OE? And also: why CSL?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLaYuoMkyGM64RGpERAiBXAJ9EKxw1hWGKcmJGo5LlEsDmHYJ/wACfZ1Id
-3Jz3mIP5xiMAez+V8l63TQ0=
-=aaua
------END PGP SIGNATURE-----
+X-List-Received-Date: Wed, 03 Feb 2010 14:52:18 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
 
+If it is a problem of automake/automake. then how can I solve it.Actually I=
+ am unable to diagnose these kinds of problems.Is there any tutorial/docume=
+ntation other than openembedded user manual which can give me better unders=
+tanding of all of this process.
+plz help me in resolving this error.
+Saleh
+
+>Steffen Sledz <sledz <at> dresearch.de> writes:
+
+>> saleh usman wrote:
+> > I am building ossie-image in openembedded using bitbake command but
+> > it is giving error of not finding boost_filesystem library.
+> > What exactly is this error.Plz guide me.
+>>saleh
+=20
+> Since today i see a similar problem when doing a clean bitbake of
+> glib-2.0. It seems to be a problem with automake/automake. :(
+>=20
+> Steffen
+=20
+
+ 		 	   		 =20
+_________________________________________________________________
+Hotmail: Free=2C trusted and rich email service.
+https://signup.live.com/signup.aspx?id=3D60969=
 
