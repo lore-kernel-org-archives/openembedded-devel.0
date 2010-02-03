@@ -1,40 +1,39 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from relay04.stack.nl ([131.155.140.107] helo=mx1.stack.nl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NccnP-0007iZ-Ub for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Feb 2010 11:49:23 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nccl2-00042L-FP for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Feb 2010 11:46:52 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Feb 2010 11:46:52 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <ruud@il.fontys.nl>) id 1Nccp6-0008SL-7j
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Feb 2010 11:51:07 +0100
+Received: by mx1.stack.nl (Postfix, from userid 65534)
+	id C73B41DD636; Wed,  3 Feb 2010 11:48:33 +0100 (CET)
+Received: from mail.il.fontys.nl (mail.il.fontys.nl
+	[IPv6:2001:4128:1000:1000::7])
+	(using TLSv1 with cipher ADH-CAMELLIA256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailhost.stack.nl (Postfix) with ESMTPS id A8B681DD635
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Feb 2010 11:46:52 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed,  3 Feb 2010 11:48:31 +0100 (CET)
+Received: by mail.il.fontys.nl (Postfix, from userid 1004)
+	id 7D4601146F; Wed,  3 Feb 2010 11:48:31 +0100 (CET)
+Received: from charm.il.fontys.nl (charm.il.fontys.nl
+	[IPv6:2001:4128:1000:1000::34])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(Client did not present a certificate)
+	by mail.il.fontys.nl (Postfix) with ESMTPS id 7B55111453
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Feb 2010 11:48:29 +0100 (CET)
+Received: by charm.il.fontys.nl (Postfix, from userid 1838)
+	id 4093B412B; Wed,  3 Feb 2010 11:48:29 +0100 (CET)
+Date: Wed, 3 Feb 2010 11:48:29 +0100
+From: Ruud Althuizen <ruud@il.fontys.nl>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 03 Feb 2010 11:46:28 +0100
-Message-ID: <hkbk63$aak$1@ger.gmane.org>
-References: <4B557210.4000700@gmx.net> <4B694D6D.8000900@gmx.net>
-	<hkbj4v$5qf$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100114 Shredder/3.0.2pre
-In-Reply-To: <hkbj4v$5qf$1@ger.gmane.org>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100203104829.GL17820@il.fontys.nl>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 131.155.140.107
+X-SA-Exim-Mail-From: ruud@il.fontys.nl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: OpenEmbedded @ FOSDEM2010
+Subject: New machine: Embedded Artists LPC3250
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,38 +47,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2010 10:49:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 03 Feb 2010 10:51:07 -0000
+X-Groupsio-MsgNum: 16421
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="aznLbwQ42o7LEaqN"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--aznLbwQ42o7LEaqN
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 03-02-10 11:28, Rolf Leggewie wrote:
-> Robert Schuster wrote:
->> I will think of the power extensions
-> 
-> great!
-> 
-> Didn't Belgium have some oddities regarding their electrical plugs?
+Hello,
 
-They might be using the french style portruding ground pin, so check
-that your bulky euro plug has a hole to accomodate that. If Belgium is
-using the french style ones, of course.
+In the attached patches there is a machine config and kernel recipe for the
+LPC3250 based Embedded Artists development board.
 
-Wikipedia seems to think so:
-http://en.wikipedia.org/wiki/AC_power_plugs_and_sockets#Type_E
+If you have any suggestions for the attached patches, please give them so I
+can fix it.
 
-regards,
+--=20
+Greetings,
+Ruud Althuizen
 
-Koen
+--aznLbwQ42o7LEaqN
+Content-Type: application/pgp-signature
+Content-Disposition: inline
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.9 (FreeBSD)
 
-iD8DBQFLaVQEMkyGM64RGpERAh6tAJoDh3F2shSJja7NzNiteL5b80hK8QCfbpyG
-G0pJ7jv6AQzr/cVnfHv+yco=
-=BS4j
+iEYEARECAAYFAktpVH0ACgkQkqncCMFskRVzQACfeixpy/a4VokWp55R+nEWOftv
+f5UAn2ZvM4GSo3MxCmBmpq2r5IbZJiyr
+=wEv8
 -----END PGP SIGNATURE-----
 
-
-
+--aznLbwQ42o7LEaqN--
