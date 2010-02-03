@@ -1,27 +1,40 @@
-Received: from alpha.vfshosting.net ([75.125.193.18])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gremlin@gremlin.it>) id 1Ncce6-0006XN-4l
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Feb 2010 11:39:45 +0100
-X-ClientAddr: 127.0.0.1
-Received: from sesha.loc (localhost.localdomain [127.0.0.1])
-	by alpha.vfshosting.net (8.13.8/8.13.8) with ESMTP id o13AbAJi013509
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NccnP-0007iZ-Ub for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Feb 2010 11:49:23 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nccl2-00042L-FP for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Feb 2010 11:46:52 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Feb 2010 11:46:52 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 3 Feb 2010 11:37:11 +0100
-Message-ID: <4B6951D5.8050801@gremlin.it>
-Date: Wed, 03 Feb 2010 11:37:09 +0100
-From: Alessandro GARDICH <gremlin@gremlin.it>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090825)
-MIME-Version: 1.0
+	Wed, 03 Feb 2010 11:46:52 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4B375060.8010607@gmx.net>	<4B66E16B.4090201@gremlin.it>	<4B67F39D.6030903@kernelconcepts.de>	<4B67F570.4040404@gremlin.it>
-	<4B695159.7030607@kernelconcepts.de>
-In-Reply-To: <4B695159.7030607@kernelconcepts.de>
-X-SA-Exim-Connect-IP: 75.125.193.18
-X-SA-Exim-Mail-From: gremlin@gremlin.it
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 03 Feb 2010 11:46:28 +0100
+Message-ID: <hkbk63$aak$1@ger.gmane.org>
+References: <4B557210.4000700@gmx.net> <4B694D6D.8000900@gmx.net>
+	<hkbj4v$5qf$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100114 Shredder/3.0.2pre
+In-Reply-To: <hkbj4v$5qf$1@ger.gmane.org>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: OpenEmbedded stand at FOSDEM
+Subject: Re: OpenEmbedded @ FOSDEM2010
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,50 +48,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2010 10:39:45 -0000
-Content-Type: text/plain; charset=us-ascii; format=flowed
+X-List-Received-Date: Wed, 03 Feb 2010 10:49:23 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Florian Boor wrote:
-> Hi!
->
-> Alessandro GARDICH schrieb:
->   
->> well device I have :
->> - SheevaPlug
->> - Atmel NGW100
->> - BeagleBoard from EVB (blue color)
->>     
->
-> Ok great! Then I will focus on different looking devices.
->
->   
->> at now only SheevaPlug isn't running OE build distro ...
->>     
->
-> Oh that's something we should be able to fix :-)
->
->   
->> I can't carry with me monitor.
->>     
->
-> Do we need one? I will have my laptop with me so that we can show OE in action.
->
-> Greetings
->
-> Florian
->
->   
-a monitor could be useful only to show beagle board in action ...
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
--- 
- /-------------------------------------------------------------\
-|           Alessandro Gardich : gremlin@gremlin.it             |
- >-------------------------------------------------------------<
-|  I never saw a wild thing sorry for itself.                   |
-|  A small bird will drop frozen dead from a bough              |
-|  without ever having felt sorry for itself.                   |
- \-------------------------------------------------------------/
+On 03-02-10 11:28, Rolf Leggewie wrote:
+> Robert Schuster wrote:
+>> I will think of the power extensions
+> 
+> great!
+> 
+> Didn't Belgium have some oddities regarding their electrical plugs?
+
+They might be using the french style portruding ground pin, so check
+that your bulky euro plug has a hole to accomodate that. If Belgium is
+using the french style ones, of course.
+
+Wikipedia seems to think so:
+http://en.wikipedia.org/wiki/AC_power_plugs_and_sockets#Type_E
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLaVQEMkyGM64RGpERAh6tAJoDh3F2shSJja7NzNiteL5b80hK8QCfbpyG
+G0pJ7jv6AQzr/cVnfHv+yco=
+=BS4j
+-----END PGP SIGNATURE-----
 
 
 
