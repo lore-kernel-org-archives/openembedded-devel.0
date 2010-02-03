@@ -1,22 +1,23 @@
 Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1NccXN-0006Ci-KR
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1Nccbz-0006Px-MF
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Feb 2010 11:32:48 +0100
+	Wed, 03 Feb 2010 11:37:34 +0100
 Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
 	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1NccVv-00089u-Vs
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1NccaY-0008Bz-S2
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Feb 2010 11:31:16 +0100
-Message-ID: <4B695036.3070306@kernelconcepts.de>
-Date: Wed, 03 Feb 2010 11:30:14 +0100
+	Wed, 03 Feb 2010 11:36:02 +0100
+Message-ID: <4B695159.7030607@kernelconcepts.de>
+Date: Wed, 03 Feb 2010 11:35:05 +0100
 From: Florian Boor <florian.boor@kernelconcepts.de>
 User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4B375060.8010607@gmx.net> <4B66E16B.4090201@gremlin.it>
-	<4B6884BF.1080908@atmel.com>
-In-Reply-To: <4B6884BF.1080908@atmel.com>
+References: <4B375060.8010607@gmx.net>
+	<4B66E16B.4090201@gremlin.it>	<4B67F39D.6030903@kernelconcepts.de>
+	<4B67F570.4040404@gremlin.it>
+In-Reply-To: <4B67F570.4040404@gremlin.it>
 X-Enigmail-Version: 0.95.7
 X-SA-Exim-Connect-IP: 212.60.202.196
 X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
@@ -36,23 +37,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2010 10:32:48 -0000
+X-List-Received-Date: Wed, 03 Feb 2010 10:37:35 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
 Hi!
 
-Ulf Samuelsson schrieb:
-> Alessandro GARDICH skrev:
-> I am planning to bring an AT91SAM9G45 running OpenEmbedded.
-> The stuff I checked in recently needs to be updated.
+Alessandro GARDICH schrieb:
+> well device I have :
+> - SheevaPlug
+> - Atmel NGW100
+> - BeagleBoard from EVB (blue color)
 
-Very good - do you think it would be a good idea to bring a AT91SAM9G10-EK as well?
+Ok great! Then I will focus on different looking devices.
 
-> Will repeat last years raffle for a AT91SAM9M10 kit - hot of the press!
-> in the Embedded Room so that should attract visitors to the booth.
+> at now only SheevaPlug isn't running OE build distro ...
 
-That's a great idea!
+Oh that's something we should be able to fix :-)
+
+> I can't carry with me monitor.
+
+Do we need one? I will have my laptop with me so that we can show OE in action.
 
 Greetings
 
