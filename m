@@ -1,40 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gx0-f215.google.com ([209.85.217.215])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NckBN-00058l-G5 for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Feb 2010 19:42:36 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nck91-0001IY-2K for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Feb 2010 19:40:07 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Feb 2010 19:40:07 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NckET-0005Ge-7E
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Feb 2010 19:45:48 +0100
+Received: by gxk7 with SMTP id 7so1746349gxk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Feb 2010 19:40:07 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 03 Feb 2010 10:43:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=SNAGCJ/SEaVr7jWa9WmQbUwoz+HZFWZ7kMOqeurWZtg=;
+	b=QAQOpH2HIJ70fWDxHCpBQDVnThZiREqGTW97w7B6kEk+wWW18/J+pOK/5od+t1/R7J
+	IIt6UBPDPqH/in0XAbjeYAWWHzqWUComMbUk17abMGUZfC6JSlQvdLFOkLa7NxEXyUKZ
+	GEAwHbo8iX9xY0gMEecpUBUZAi8xLcso/K/lo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=NSUV1vPTkaeILv3OdMv4dQvsTuGmf9Q8/DGwWVpQVJ856Ic7qAjJC03+58jQ1o3xbF
+	GSotWAF0QaUvdsOrP31Usnq+jpeDlwWBbp/emvXYDFfacIvrrclvL8hC1dogBqGO1QRZ
+	KDEf39Gr/pGwYQR1FHZawoK2eCHYHdwwe6aSM=
+MIME-Version: 1.0
+Received: by 10.100.40.8 with SMTP id n8mr10692780ann.121.1265222593958; Wed, 
+	03 Feb 2010 10:43:13 -0800 (PST)
+In-Reply-To: <ac9c93b11002012357k2f7a920dqd800db05beab0664@mail.gmail.com>
+References: <ac9c93b11001300418t644f9b92h926dbae7a232b339@mail.gmail.com>
+	<1265065663.3159.8.camel@rex>
+	<ac9c93b11002012357k2f7a920dqd800db05beab0664@mail.gmail.com>
+Date: Wed, 3 Feb 2010 19:43:12 +0100
+Message-ID: <ac9c93b11002031043t12281789q1d48891e35f12a74@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 03 Feb 2010 19:39:03 +0100
-Message-ID: <hkcfs6$rqa$2@ger.gmane.org>
-References: <1525882292.3655251265221536810.JavaMail.root@sz0154a.westchester.pa.mail.comcast.net>
-	<1545347019.3660521265221974750.JavaMail.root@sz0154a.westchester.pa.mail.comcast.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100114 Shredder/3.0.2pre
-In-Reply-To: <1545347019.3660521265221974750.JavaMail.root@sz0154a.westchester.pa.mail.comcast.net>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.217.215
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: EABI pain and frustration!
+Subject: Re: packaged staging issue; additional packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,29 +48,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2010 18:42:36 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 03 Feb 2010 18:45:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Found it; fixed it; tested it; pushed it;
 
-On 03-02-10 19:32, pspreadborough@comcast.net wrote:
-> 
-> I'm working from the Angstrom distribution. 
-> 
-> I'm using the arm-2009q3-67-arm-none-linux-gnueabi compiler
+Root case was that packaged-staging.bbclass was not updated when
+DISTRO_PR was introduced.
+This caused the generation of pathnames which were missing the
+DISTRO_PR part. Fixed it by adding + "${DISTRO_PR}" to the places
+involved.
 
-Why not use the default compiler for angstrom, that supports eabi on
-strongarm for a while now:
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=ee961dd30c417911edae2a0ba025e73c5a96958b
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Kudos to RP for pointing me to the proper direction.
 
-iD8DBQFLacLHMkyGM64RGpERAkhJAKC2AhLXMJvkoeZL/Z3jE7ScIdB5PACgnvGH
-YN0hP0ylyKluyZjJkTVL89E=
-=R2bj
------END PGP SIGNATURE-----
-
+FM
 
 
