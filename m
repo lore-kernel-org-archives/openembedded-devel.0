@@ -1,39 +1,40 @@
-Received: from mail-yw0-f195.google.com ([209.85.211.195])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dennis.yxun@gmail.com>) id 1NcZbD-0006ub-Ig
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Feb 2010 08:24:34 +0100
-Received: by ywh33 with SMTP id 33so993916ywh.16
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NcarY-0000Ge-T9 for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Feb 2010 09:45:31 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NcapC-0005cz-Uc for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Feb 2010 09:43:02 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Feb 2010 09:43:02 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Feb 2010 23:22:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=c/DnahY9TkVt90Ml3qNDcTFGCSgUoibLjko7txckNec=;
-	b=CwbBR/sbDKyBaXR4HVnPC4t8RVGx1CdQKCvy3CDFgdopuoQWSFgIpLw5JxHCtnaB5z
-	ibyZuZH+cUgwj2hjDihIbs06ihao03ayY8hEVKK0BYQUqfYgLL5W1QB/5DYBrXFEiVzO
-	0OqiVPI8WRBNzqXdWfiZPZsYNymrNujSW8OyY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=ILabyyRaYQmV83QB+gDf+HqMyCrbXEwt0XT24etbJIs0Zedb4q0IDudPoZiFWqMrcH
-	NAZ+Tad1FluNwhKG+zmWefrB37HznrTzy7LbuO7fUQLjaeS+l7S4fJV9K0P1thGo34Z/
-	eF8CJ9GIC3RlVlhlbMWozFHmhfVEQJYCJA6zc=
-MIME-Version: 1.0
-Received: by 10.150.63.15 with SMTP id l15mr9805950yba.250.1265181723491; Tue, 
-	02 Feb 2010 23:22:03 -0800 (PST)
-In-Reply-To: <ad82c8891002022244ic33360do6596413f17d95972@mail.gmail.com>
-References: <ad82c8891002022244ic33360do6596413f17d95972@mail.gmail.com>
-Date: Wed, 3 Feb 2010 15:22:03 +0800
-Message-ID: <7b09df4c1002022322o657c4135i698130baf5ff4fcb@mail.gmail.com>
-From: "Dennis.Yxun" <dennis.yxun@gmail.com>
+	Wed, 03 Feb 2010 09:43:02 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.195
-X-SA-Exim-Mail-From: dennis.yxun@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 03 Feb 2010 09:42:43 +0100
+Message-ID: <hkbcu2$h8r$1@ger.gmane.org>
+References: <1265103507.19185.8.camel@balakrishnan-desktop>	<201002021059.52148.holger+oe@freyther.de>
+	<1265148573.29062.10.camel@mattotaupa>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100114 Shredder/3.0.2pre
+In-Reply-To: <1265148573.29062.10.camel@mattotaupa>
+X-Enigmail-Version: 1.0
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Touchscreen is not working in compulab Em-x270
+Subject: Re: [PATCH] regulus: Adding pxa270 based machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,31 +48,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2010 07:24:34 -0000
+X-List-Received-Date: Wed, 03 Feb 2010 08:45:32 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi vivek:
-    Have you ever tried tslib test utils to verified your driver?
-    You have to narrow down your problem, kernel space, tslib, Xserver..
-Or just configuration problem...
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Dennis
+On 02-02-10 23:09, Paul Menzel wrote:
+> Am Dienstag, den 02.02.2010, 10:59 +0100 schrieb Holger Hans Peter
+> Freyther:
+>> On Tuesday 02 February 2010 10:38:27 balakrishnan wrote:
+>>> Dear OE,
+>>>        I have mailed four patches to OE dev list on last month regarding
+>>> "pxa270 based machine" inclusion in OE(stable/2009). Can I have status
+>>> of my patches?
+> 
+> […]
+> 
+>> The other weird part is that I have not seen your patches on patchwork.
+> 
+> That is indeed strange. I did also not find them.
+> 
+>         $ ./pwclient search -w balakris
+>         Patches submitted by bala krishnan
+>         <balakrishnan@e-consystems.com>:
+>         ID    State        Name
+>         --    -----        ----
+> 
+> I there a log file for Patchwork with error messages, why a message was
+> not parsed?
 
-On Wed, Feb 3, 2010 at 2:44 PM, vivek tambakad <vivektambakad@gmail.com>wrote:
+When debugging that a bit earlier it turned out that gmail (which we use
+as the dummy patchwork subscriber) was tagging things as spam. I didn't
+look into a solution since this rarely happens.
 
-> Hi,
->       I have ported x11-image onto the compulab Em-x270 board, but
-> touchscreen is not working.
-> The touchscreen kernel modules are present and i think there is problem in
-> user space.I tried following command:
-> *export TSLIB_TSDEVICE**=/dev/input/touchscreen0*
->  Please guide me in solving this issue.
->
-> with regards
-> vivek tambakad
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLaTcDMkyGM64RGpERAqMJAJ0REmE/TR7Xh4awqUrDeUQSEfPaPwCeJPPJ
+KrLqxWK1/s4+HqjIuIt9/qs=
+=Kwkh
+-----END PGP SIGNATURE-----
+
+
 
