@@ -1,25 +1,39 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-px0-f179.google.com ([209.85.216.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NcbZ1-0005BJ-4V for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Feb 2010 10:30:27 +0100
-Received: from f053035053.adsl.alicedsl.de ([78.53.35.53]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NcbWf-0004TY-SJ for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Feb 2010 09:27:57 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <vivektambakad@gmail.com>) id 1Ncboy-0005MU-6y
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Feb 2010 10:46:55 +0100
+Received: by pxi9 with SMTP id 9so1161425pxi.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Feb 2010 01:44:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=TA/Q9tPxc/X1vW3dsFyyhxyL7jSNo38wuiGE/C/gKcM=;
+	b=u8mOMsbwokALMLBR6oLip7JJGfBhWCPCrnAxdvTPOrBYYigY7s/5cU2CQsy2H5mQRw
+	BRP9D2hzawulQxqtUd+kyAi1fOmpd9Ol3dcVMRJygslXWxfIV2TVKwx1Aav65sIgqKKb
+	ljBqdi5oQ8Yo3GmSiGn0xizSHU2AjBJyjDh5w=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=XtGxdkxBr/562v0xaluYSPuwN6iwLv+r0jgUWgeA3hXpDMhdl/uuR8DH98cD3wGu6U
+	EEnF2LHtX7KRVI6M5BcPM/bxJbb6ubgWXcesDn8zlsBPV0tMEHT8dnXaQjgFXv6qwW8D
+	aXbIzo/NU7Fq4xK6SMT7OwU1QTVvRF6hL46Q8=
+MIME-Version: 1.0
+Received: by 10.114.3.2 with SMTP id 2mr4876414wac.156.1265190263651; Wed, 03 
+	Feb 2010 01:44:23 -0800 (PST)
+In-Reply-To: <mailman.775.1265186732.14961.openembedded-devel@lists.openembedded.org>
+References: <mailman.775.1265186732.14961.openembedded-devel@lists.openembedded.org>
+Date: Wed, 3 Feb 2010 15:14:23 +0530
+Message-ID: <ad82c8891002030144n2e661145xebf2601c0730503e@mail.gmail.com>
+From: vivek tambakad <vivektambakad@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 03 Feb 2010 10:27:56 +0100
-Message-ID: <1265189276.5591.40.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.216.179
+X-SA-Exim-Mail-From: vivektambakad@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: =?UTF-8?B?QXN1cyBFZWUgUEMgNzAxIDRHLCBwZXJmb3JtYW5jZSBhbmQgaW5jbHVzaW9uIGludG8gw4VuZ3N0csO2bQ==?=
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Openembedded-devel Digest, Vol 43, Issue 10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,49 +47,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2010 09:30:27 -0000
-X-Groupsio-MsgNum: 16412
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-W5XlLfRxoh2Th1nEa9SV"
+X-List-Received-Date: Wed, 03 Feb 2010 09:46:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-W5XlLfRxoh2Th1nEa9SV
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi Dennis,
+              The only thing i tested is trying following command  : *hexdump
+/dev/input/touchscreen0* from the console of EM-X270 and i touch the
+touchscreen with pointer for a couple times.  And i got output of hexdump
+only after touching the touchscreen.I am actually accessing console of
+Em-X270 through hyper terminal or minicom(115200 baud rate).
+I don't no it is with tslib or Xserver, i am facing problem. I am quite new
+to this.
+Please provide me a details about testing my driver with tslib test utils.
 
-Dear Denis and OE developers,
+with regards
+vivek tambakad
 
-
-Denis committed support for Asus Eee PC 701 4G [2] some days ago [1].
-
-1. Denis, could tell us something about the performance of OE on this
-netbook compared to the distribution you ran on there before.
-
-2. Is it possible to include this machine in the =C3=85ngstr=C3=B6m online =
-builder
-[3]?
-
-
-Thanks,
-
-Paul
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D7a338c4=
-b1e2d8dacb19155cae1f62c4f4ba8bbfe
-[2] http://en.wikipedia.org/wiki/ASUS_Eee_PC
-[3] http://www.angstrom-distribution.org/narcissus/#machinedialog
-
---=-W5XlLfRxoh2Th1nEa9SV
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAktpQZsACgkQPX1aK2wOHVgOPwCfYz9d4DdhhtWjoTcc+TU8Ofe/
-4hUAnis0pEQEklGLeVAb+hU0QGeX19PB
-=a6kT
------END PGP SIGNATURE-----
-
---=-W5XlLfRxoh2Th1nEa9SV--
