@@ -1,39 +1,30 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ncbtp-0005ag-5d for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Feb 2010 10:51:56 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NcbrQ-0005u8-O3 for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Feb 2010 10:49:24 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Feb 2010 10:49:24 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Feb 2010 10:49:24 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from mail.gmx.net ([213.165.64.20])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thebohemian@gmx.net>) id 1NccLs-0006VA-M7
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Feb 2010 11:20:55 +0100
+Received: (qmail invoked by alias); 03 Feb 2010 10:18:25 -0000
+Received: from gate.tarent.de (EHLO [172.17.0.215]) [212.79.178.249]
+	by mail.gmx.net (mp003) with SMTP; 03 Feb 2010 11:18:25 +0100
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+DkUh9xOSDnct3v5izuItdFEHYiqC0HjXeP9c1lq
+	qmBW9V4KqReZro
+Message-ID: <4B694D6D.8000900@gmx.net>
+Date: Wed, 03 Feb 2010 11:18:21 +0100
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 03 Feb 2010 10:49:14 +0100
-Message-ID: <hkbgqo$tsh$1@ger.gmane.org>
-References: <1265189276.5591.40.camel@mattotaupa>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100114 Shredder/3.0.2pre
-In-Reply-To: <1265189276.5591.40.camel@mattotaupa>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <4B557210.4000700@gmx.net>
+In-Reply-To: <4B557210.4000700@gmx.net>
+X-Enigmail-Version: 0.95.7
+X-Y-GMX-Trusted: 0
+X-FuHaFi: 0.63
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: thebohemian@gmx.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: =?UTF-8?B?UmU6IEFzdXMgRWVlIFBDIDcwMSA0RywgcGVyZm9ybWFuY2UgYW5kIGluY2x1c2lvbiBpbnRvIMOFbmdzdHLDtm0=?=
+Subject: Re: OpenEmbedded @ FOSDEM2010
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,49 +38,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Feb 2010 09:51:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 03 Feb 2010 10:20:55 -0000
+X-Groupsio-MsgNum: 16415
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig04A3BE62B71206EBC71365FF"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--------------enig04A3BE62B71206EBC71365FF
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
 
-On 03-02-10 10:27, Paul Menzel wrote:
-> Dear Denis and OE developers,
-> 
-> 
-> Denis committed support for Asus Eee PC 701 4G [2] some days ago [1].
-> 
-> 1. Denis, could tell us something about the performance of OE on this
-> netbook compared to the distribution you ran on there before.
-> 
-> 2. Is it possible to include this machine in the Ångström online builder
-> [3]?
+Hi all,
+I will think of the power extensions and also try to organise something
+that we can put on the table.
 
-Send a patch similar to:
+See you on Friday!
+Robert
 
-http://dominion.thruhere.net/git/cgit.cgi/narcissus/commit/?id=8243155c50f374891aa9cbbcd599fbb05c2e94bf
+Robert Schuster schrieb:
+> Hi,
+> someone with the neccessary privileges should at the following item to
+> the news section of our Wiki:
+>=20
+> 2010-02-06 OpenEmbedded at FOSDEM'10[0] - We have a booth at Europe's
+> finest F/OSS event. See you in Brussels!
+>=20
+> And this brings me to another question: Do we want to invite people to
+> our pre-FOSDEM meeting?
+>=20
+> Possible news entry:
+>=20
+> 2010-02-05 Have a beer with OpenEmbedded developers before FOSDEM
+> starts! Informal gathering in a pub/bar/restaurant - details:
+> FOSDEM2010WikiPageWhichNeedsToBeCreatedThen
+>=20
+> All the best et au revoir en Bruxelles! :-)
+> Robert
+>=20
+> [0] - http://fosdem.org
+>=20
+>=20
+>=20
+> -----------------------------------------------------------------------=
+-
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-or
 
-http://dominion.thruhere.net/git/cgit.cgi/narcissus/commit/?id=5e24796d02056fc2858a2d2de2808cb5a2483b8f
 
-or
+--------------enig04A3BE62B71206EBC71365FF
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
-http://dominion.thruhere.net/git/cgit.cgi/narcissus/commit/?id=b86a40518724768556f017de2b4da13b7d9c147b
-
-And it'll get added.
-
-regards,
-
-Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.9 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
 
-iD8DBQFLaUaaMkyGM64RGpERAnKaAJ9Ro+NfzDF908QCoYTX3376CZi/2gCbBAU7
-SLkviTU/w6G1ZUyxjQxH54M=
-=TJpd
+iEYEARECAAYFAktpTXAACgkQG9cfwmwwEtqJaACfQvnJ7IjWBIBMRfxug3h2H5Vk
+V6wAn0JDdy4655eIRrSz3LQcws25UAJr
+=vilq
 -----END PGP SIGNATURE-----
 
-
-
+--------------enig04A3BE62B71206EBC71365FF--
