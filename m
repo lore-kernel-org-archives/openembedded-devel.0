@@ -1,29 +1,36 @@
-Received: from pne-smtpout1-sn2.hy.skanova.net ([81.228.8.83])
+Received: from mail-pz0-f184.google.com ([209.85.222.184])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1NcRnR-0003iB-Vy
+	(envelope-from <vivektambakad@gmail.com>) id 1NcZ18-00069I-W0
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Feb 2010 00:04:41 +0100
-Received: from [10.175.196.247] (213.67.40.57) by
-	pne-smtpout1-sn2.hy.skanova.net (7.3.140.3) (authenticated as
-	u82406562)
-	id 4B5C66860014E5B9 for openembedded-devel@lists.openembedded.org;
-	Wed, 3 Feb 2010 00:02:10 +0100
-Message-ID: <4B68A0E1.6030503@atmel.com>
-Date: Tue, 02 Feb 2010 23:02:09 +0100
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Organization: Atmel Nordic AB
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	Wed, 03 Feb 2010 07:47:18 +0100
+Received: by pzk14 with SMTP id 14so959260pzk.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Feb 2010 22:44:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=K/huw9tYeuGxa8DwJhks1xyM9pxLw4llx2pHmA6JLV4=;
+	b=w0wH9mq6g3p3nbOS6645SoWqG/tAxvzZDSTXSFyzzJFyIQd/BCOM2FvOdE37LQgqr7
+	pGmNGGz1kODODKaXf3lAhUx1M5lUcJtcJXwvNR7do/8/WrbttS2r+1Ksb/3B41bKBnJv
+	CtGU2uKMFWvrOH6RrSu8t2S3vnb9tFn5bWwsc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=SMuh0UDxcDQ7Vx4WALiW5MjuLxTp8TXr2Jp97mNt6cAwBXYtrIPxPhp+1OcovN+iL4
+	X5w60Ol2D+EviNrWBSTNBk6P9hUKxoYed3XYZwQf9OzSuZoqHhpIX6pXFvXn515SIrLx
+	6cNXccF9Wjxk+zrok5SV//tGhBeeGsv5faWCg=
 MIME-Version: 1.0
+Received: by 10.114.251.18 with SMTP id y18mr4822189wah.51.1265179486631; Tue, 
+	02 Feb 2010 22:44:46 -0800 (PST)
+Date: Wed, 3 Feb 2010 12:14:45 +0530
+Message-ID: <ad82c8891002022244ic33360do6596413f17d95972@mail.gmail.com>
+From: vivek tambakad <vivektambakad@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4B375060.8010607@gmx.net>
-	<4B66E16B.4090201@gremlin.it>	<4B6884BF.1080908@atmel.com>
-	<4B688DAF.2060507@balister.org>
-In-Reply-To: <4B688DAF.2060507@balister.org>
-X-SA-Exim-Connect-IP: 81.228.8.83
-X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
+X-SA-Exim-Connect-IP: 209.85.222.184
+X-SA-Exim-Mail-From: vivektambakad@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: OpenEmbedded stand at FOSDEM
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Touchscreen is not working in compulab Em-x270
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,34 +44,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Feb 2010 23:04:41 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 03 Feb 2010 06:47:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
+Hi,
+       I have ported x11-image onto the compulab Em-x270 board, but
+touchscreen is not working.
+The touchscreen kernel modules are present and i think there is problem in
+user space.I tried following command:
+*export TSLIB_TSDEVICE**=/dev/input/touchscreen0*
+ Please guide me in solving this issue.
 
-> 
-> Ulf,
-> 
-> Can you make sure your commit messages look like:
-> 
-> http://wiki.openembedded.net/index.php/Commit_log_example
-> 
-> Also check your patches do not get word wrapped. If they get into
-> patchwork in a form that can be applied with git-am, it is much much
-> easier for us to commit them.
-> 
-> Philip
-> 
-
-
-Thanks, I realized they were not ideal when they popped up in the
-changelist.
-I will check this page before any more updates.
-
-
--- 
-Best Regards
-Ulf Samuelsson
-
-
+with regards
+vivek tambakad
 
