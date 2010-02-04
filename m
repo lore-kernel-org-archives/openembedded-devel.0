@@ -1,39 +1,41 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-yx0-f171.google.com ([209.85.210.171])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NcwVr-0006wl-SR for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Feb 2010 08:52:35 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NcwTU-0006wY-Kv for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Feb 2010 08:50:04 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Feb 2010 08:50:04 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NcwZq-0003zd-4f
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 04 Feb 2010 08:56:41 +0100
+Received: by yxe1 with SMTP id 1so2067870yxe.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Feb 2010 08:50:04 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 03 Feb 2010 23:54:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=B8RneeuPPe3Cf2ilJs3pdmcsR4dQ1GzOK8h86Z20CPE=;
+	b=A4Qp5vYDsuAZqAip5A6ZiVgw9CTok+tgk0DLvkHbeKoMZAKc9TkkuUHeXCKCtz/cGh
+	byFm4xRly5pwI3wZR8fVShXFUxSQmDG2oXIN1nVNKZptciR8egxGsYs5XzbUNfSlel/W
+	cqLyKaSwm5pH4m29bwE3nEyRONvqWCFFq8Tzc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=bYecstH5j20oClZPvJr8+Sf+YL5fUyDfTUt/xsujmU5caMUi5MU60G4S4g/vQTT01I
+	TeQr+a4wjesSXfNmM6tF1I2RCUrm+r3BRCUUXCMjbOc9SyxFN9mxhCACmdGXFjuD7ZXJ
+	Xm1EFuwJr5E14khaXmxqWyaCPvalAYKUtdoSw=
+MIME-Version: 1.0
+Received: by 10.101.170.12 with SMTP id x12mr900679ano.127.1265270049205; Wed, 
+	03 Feb 2010 23:54:09 -0800 (PST)
+In-Reply-To: <hkdu2c$cfg$1@ger.gmane.org>
+References: <1265189276.5591.40.camel@mattotaupa>
+	<ac9c93b11002031422t18df39f6m77de57c50241227@mail.gmail.com>
+	<hkdu2c$cfg$1@ger.gmane.org>
+Date: Thu, 4 Feb 2010 08:54:09 +0100
+Message-ID: <ac9c93b11002032354i1f48758ao25a0f5df038c49a8@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 04 Feb 2010 08:48:32 +0100
-Message-ID: <hkdu4f$cfg$2@ger.gmane.org>
-References: <1265260718.5077.9.camel@balakrishnan-desktop>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100114 Shredder/3.0.2pre
-In-Reply-To: <1265260718.5077.9.camel@balakrishnan-desktop>
-X-Enigmail-Version: 1.0
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.210.171
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] regulus: Adding pxa270 based machine
+Subject: =?UTF-8?B?UmU6IEFzdXMgRWVlIFBDIDcwMSA0RywgcGVyZm9ybWFuY2UgYW5kIGluY2x1c2lvbiBpbnRvIMOFbmdzdHLDtm0=?=
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,26 +49,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Feb 2010 07:52:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 04 Feb 2010 07:56:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+2010/2/4 Koen Kooi <k.kooi@student.utwente.nl>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 03-02-10 23:22, Frans Meulenbroeks wrote:
+>> 2010/2/3 Paul Menzel <paulepanter@users.sourceforge.net>:
+>>> Dear Denis and OE developers,
+>>>
+>>>
+>>> Denis committed support for Asus Eee PC 701 4G [2] some days ago [1].
+>>>
+>>> 1. Denis, could tell us something about the performance of OE on this
+>>> netbook compared to the distribution you ran on there before.
+>>>
+>>> 2. Is it possible to include this machine in the =C5ngstr=F6m online bu=
+ilder
+>>> [3]?
+>>>
+>>
+>> Here is a patch for narcissus
+>> Sorry that it is an attachment but had to beat gmails line wrapping.
+>>
+>> Koen, can you review and apply if ok?
+>
+> Applied with one small changes (unstable/*.ipk -> configs/unstable/*.ipk)=
+.
 
-On 04-02-10 06:18, balakrishnan wrote:
+Ouch, overlooked that one. Guess it was too late when I made it.
 
-> Whether I need to resend my patches?
-> I have did my changes in stable/2009.
+BTW the eeepc 701 did not build out of the box for me (libx11), that
+has been fixed and pushed too.
 
-You will need to re-do them for .dev and resend
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLanvQMkyGM64RGpERApc5AKCZvlnLpn3Ynaa1MXs3U7cmo5RyIQCggS/P
-W4h09psiqgLK4xhR3l5rQKY=
-=mqma
------END PGP SIGNATURE-----
-
+Frans
 
 
