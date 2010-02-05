@@ -1,28 +1,28 @@
-Received: from qmta02.westchester.pa.mail.comcast.net ([76.96.62.24])
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pspreadborough@comcast.net>) id 1NdOKk-0003ip-6L
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1NdOYp-0007Yq-C7
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Feb 2010 14:34:57 +0100
-Received: from omta07.westchester.pa.mail.comcast.net ([76.96.62.59])
-	by qmta02.westchester.pa.mail.comcast.net with comcast
-	id eCcj1d0051GhbT852DXQxg; Fri, 05 Feb 2010 13:31:24 +0000
-Received: from sz0154.wc.mail.comcast.net ([76.96.58.220])
-	by omta07.westchester.pa.mail.comcast.net with comcast
-	id eDXQ1d0034l5d103TDXQf6; Fri, 05 Feb 2010 13:31:24 +0000
-Date: Fri, 5 Feb 2010 13:31:24 +0000 (UTC)
-From: pspreadborough@comcast.net
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <766862422.46211265376684071.JavaMail.root@sz0154a.westchester.pa.mail.comcast.net>
-In-Reply-To: <4B6C0F0D.8030308@vollmann.ch>
+	Fri, 05 Feb 2010 14:49:30 +0100
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1NdOXe-0007dD-9E
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Feb 2010 14:48:14 +0100
+Message-ID: <4B6C2156.6080005@kernelconcepts.de>
+Date: Fri, 05 Feb 2010 14:47:02 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-X-Originating-IP: [76.24.64.15]
-X-Mailer: Zimbra 5.0.19_GA_3172.RHEL5_64 (ZimbraWebClient - FF3.0
-	(Mac)/5.0.19_GA_3177.RHEL5_64)
-X-SA-Exim-Connect-IP: 76.96.62.24
-X-SA-Exim-Mail-From: pspreadborough@comcast.net
+To: openembedded-devel@lists.openembedded.org
+References: <4B375060.8010607@gmx.net>	<4B66E16B.4090201@gremlin.it>	<4B6884BF.1080908@atmel.com>	<4B695036.3070306@kernelconcepts.de>
+	<4B6B144F.6030202@atmel.com>
+In-Reply-To: <4B6B144F.6030202@atmel.com>
+X-Enigmail-Version: 0.95.7
+X-SA-Exim-Connect-IP: 212.60.202.196
+X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: EABI pain and frustration!
+Subject: Re: OpenEmbedded stand at FOSDEM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,29 +36,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Feb 2010 13:34:57 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Fri, 05 Feb 2010 13:49:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
+Hi,
 
------ "Detlef Vollmann" <dv@vollmann.ch> wrote:
+Ulf Samuelsson schrieb:
 
-> On 02/03/10 15:03, pspreadborough@comcast.net wrote:
-> > My 2.6.29 kernel is built with the CodeSourcery
-> arm-2009q3-67-arm-none-linux-gnueabi 
-> > compiler and has the EABI and OABI_COMPAT config options enabled.
-> Using this kernel 
-> > I can boot my SA1110 iPaq into a OABI ramfs with no problems,
-> however if I build a 
-> > "HelloWorld" executable with the same compiler and try and run it I
-> get an "Illegal Instruction" 
-> > error. I build the test program using static linking, select the
-> correct machine type and tune 
-> > options but to no avail, I always get the illegal instruction. 
-> Just checking: are you sure this is an EABI/OABI problem and not a
-> Thumb code problem?
+> The SAM9G10 is basically a SAM9261S with fixed LCD to do
+> RGB instead of BGRI. I never bothered to get one anyway.
+> 
+> The SAM9G45 is a completely different beast
+> with DDR2, High Speed USB, dual busses (unlike SAM9263,
+> it has real high throughput on both), and in its
+> SAM9M10 variety it has H/W support for Video Decoding
+> H.263/4, MPEG-2,MPEG-4, JPEG etc.
 
-I don't think so as I have the no-thumb compiler option enabled.
+hmm... pretty cool, that's something I would like to test some time :-)
 
+Greetings
+
+Florian
+
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
