@@ -1,36 +1,27 @@
-Received: from smtp-relay1.palm.com ([63.80.53.70])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <prvs=Michael.Morrell=645426946@palm.com>)
-	id 1NdErP-0000gI-JB for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Feb 2010 04:28:04 +0100
-X-IronPort-AV: E=Sophos;i="4.49,409,1262592000"; d="scan'208";a="23808640"
-Received: from unknown (HELO mailhost01.palm.com) ([148.92.223.30])
-	by smtp-relay1.palm.com with ESMTP; 04 Feb 2010 19:24:22 -0800
-Received: from ushqwmh02.palm1.palmone.com (ushqwmh02.palm1.palmone.com
-	[148.92.223.143])
-	by mailhost01.palm.com (8.13.6+Sun/8.12.10) with ESMTP id
-	o153OLdD013613 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 4 Feb 2010 19:24:22 -0800 (PST)
-Received: from ushqwmb02.palm1.palmone.com ([148.92.223.121]) by
-	ushqwmh02.palm1.palmone.com ([148.92.223.143]) with mapi;
-	Thu, 4 Feb 2010 19:24:22 -0800
-From: Michael Morrell <Michael.Morrell@palm.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 4 Feb 2010 19:24:20 -0800
-Thread-Topic: Issues with .list files
-Thread-Index: AcqmErSiU6Hu+QlKSvm4G6MrO4moyQ==
-Message-ID: <D15778FFF6A6CA4FAF01B8D2C3780300499DAE1590@ushqwmb02.palm1.palmone.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 63.80.53.70
-X-SA-Exim-Mail-From: prvs=Michael.Morrell=645426946@palm.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NdIyI-0007bk-G7 for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Feb 2010 08:51:25 +0100
+Received: from f053041045.adsl.alicedsl.de ([78.53.41.45]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NdIvv-0005YW-4O for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Feb 2010 07:48:55 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4B6B4EBC.1030906@theforce.com.au>
+References: <4B6B4EBC.1030906@theforce.com.au>
+Date: Fri, 05 Feb 2010 08:48:52 +0100
+Message-ID: <1265356132.3907.12.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Issues with .list files
+Subject: Re: mtr
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,34 +35,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Feb 2010 03:28:04 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Fri, 05 Feb 2010 07:51:25 -0000
+X-Groupsio-MsgNum: 16471
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-oPEprXNtaR+o4QwSgaDs"
+
+--=-oPEprXNtaR+o4QwSgaDs
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-If I understand the algorithm in package_do_shlibs correctly, each package =
-creates a .list file which is a list of all the shared libraries provided b=
-y that package.  It also generates a list of all the libraries that it need=
-s and looks for those in .list files created by other packages so it can cr=
-eate a runtime dependency against that package.
+Dear Grahame,
 
-The way it looks for .list files is to simply scan all *.list files in the =
-directory.  This has two problems that I can see.
 
-First, it is inefficient.  It should only have to look through .list files =
-creates by packages created by bb files which were DEPENDed on by this bb f=
-ile.
+Am Freitag, den 05.02.2010, 09:48 +1100 schrieb Grahame Jordan:
+> Cannot bitbake mtr. It is set to PV=3D0.65.
 
-Second, when a bitbake run is done with lots of parallelism, it is possible=
- that it tries to open a nonexistent .list file (it was there when it did t=
-he os.listdir call, but that package later removed it before it recreates i=
-t), causing a crash here.  We are seeing such crashes reasonably often.
+can you please post the error message and the log files?
 
-Before I try to fix this on my own, I wanted to get some opinions on the be=
-st way to handle this.
+> mtr-0.75 compiles and installs OK.
+> Can this be set to PV=3D0.75 and the mtr_0.75.bb file created in the
+> org.openembedded.dev branch?
+
+How did you compile mtr-0.75? Did you just change the version number?
+Could you send in a patch for it please?
+
 
 Thanks,
 
-  Michael
+Paul
 
+--=-oPEprXNtaR+o4QwSgaDs
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAktrzWQACgkQPX1aK2wOHVjzuwCcDCcVtGVoq2PItnutv4ouFL5T
+S6sAni2mC81fxqdDEI7WqAv6gDomtH2w
+=OGED
+-----END PGP SIGNATURE-----
+
+--=-oPEprXNtaR+o4QwSgaDs--
