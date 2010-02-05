@@ -1,32 +1,27 @@
-Received: from eu1sys200aog101.obsmtp.com ([207.126.144.111])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <jgrant@vml.com>) id 1NdU1i-0004wN-8r
+Received: from mail.emacinc.com ([63.245.244.68])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <tstratman@emacinc.com>) id 1NdV4i-00007V-AB
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Feb 2010 20:39:41 +0100
-Received: from source ([208.7.47.154]) (using TLSv1) by
-	eu1sys200aob101.postini.com ([207.126.147.11]) with SMTP
-	ID DSNKS2xzZogz/ehzPt9k6hG+WcdIiCRmZCpg@postini.com;
-	Fri, 05 Feb 2010 19:37:10 UTC
-Received: from Exchange.VML.LAN ([fe80::810e:ec00:d8da:fc48]) by vmle2kcas1
-	([172.16.128.154]) with mapi; Fri, 5 Feb 2010 13:29:02 -0600
-From: Jeremy Grant <jgrant@vml.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 5 Feb 2010 13:28:59 -0600
-Thread-Topic: Working with OEMs
-Thread-Index: AcqmmXb9PxWRa0pIO0+Zp+Pd7mLKNg==
-Message-ID: <C791CD9B.22735%jgrant@vml.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-X-SA-Exim-Connect-IP: 207.126.144.111
-X-SA-Exim-Mail-From: jgrant@vml.com
+	Fri, 05 Feb 2010 21:46:51 +0100
+Received: from [63.245.244.67] (helo=emac081.emacinc.com)
+	by mail.emacinc.com with esmtp (Exim 4.50) id 1NdV21-0004Ol-OA
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Feb 2010 14:44:08 -0600
+From: Travis Stratman <tstratman@emacinc.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <19c1b8a91002051000r69e645bey7395aa912d38e172@mail.gmail.com>
+References: <1497161523.3479291265205781088.JavaMail.root@sz0154a.westchester.pa.mail.comcast.net>
+	<4B6C0F0D.8030308@vollmann.ch>
+	<19c1b8a91002051000r69e645bey7395aa912d38e172@mail.gmail.com>
+Date: Fri, 05 Feb 2010 14:43:58 -0600
+Message-Id: <1265402638.4267.384.camel@cheeto.emacinc.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.6.3 
+X-SA-Exim-Connect-IP: 63.245.244.68
+X-SA-Exim-Mail-From: tstratman@emacinc.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Working with OEMs
+Subject: Re: EABI pain and frustration!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,52 +35,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Feb 2010 19:39:41 -0000
-Content-Language: en
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Fri, 05 Feb 2010 20:46:51 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-   I am currently working on project that we are planning on using
-   openembedded.  We will be using 6 ereader devices initially from 2
-   different manufactures.  One of the manufactures already uses open
-   embedded the other is not.  We are needing to explain to the other OEM
-   why they should be uses open embedded to build the images used on the
-   devices so that all devices are consistent and can pull from one feed
-   source for updates.
-   Here are a few of the requirements I have right now:
-   Must use qt-embedded 4.6.x
-   Would be nice if it can uses arora-e
-   I have a few question on what I should be doing.
-   Should I create my own distribution based on angstrom or just create
-   and image with preferred-versions for the ereaders and used angstrom as
-   the distro?
-   What suggestions does anyone have on working with the OEM that does not
-   uses OE already to help them see why using OE would be beneficial to
-   them?  I find information on why developers and distribution
-   maintainers should uses OE but not much information on how an OEM could
-   create machine.conf to be used with OE or use OE.  I may just have not
-   found the correct presentation or blog that has the information I am
-   looking for.
-   Thanks for any help you can give.
-   Jeremy Grant
-   VML | Lead Systems Administrator
-   2020 Baltimore, Kansas City, MO 64108
-   office: +1.816.218.1956
-   fax: +1.816.472.5234
-   mobile: +1.913.636.1112
-   email: [1]jgrant@vml.com
+On Fri, 2010-02-05 at 10:00 -0800, Khem Raj wrote:
+> On Fri, Feb 5, 2010 at 4:29 AM, Detlef Vollmann <dv@vollmann.ch> wrote:
+> > On 02/03/10 15:03, pspreadborough@comcast.net wrote:
+> >>
+> >> My 2.6.29 kernel is built with the CodeSourcery
+> >> arm-2009q3-67-arm-none-linux-gnueabi compiler and has the EABI and
+> >> OABI_COMPAT config options enabled. Using this kernel I can boot my SA1110
+> >> iPaq into a OABI ramfs with no problems, however if I build a "HelloWorld"
+> >> executable with the same compiler and try and run it I get an "Illegal
+> >> Instruction" error. I build the test program using static linking, select
+> >> the correct machine type and tune options but to no avail, I always get the
+> >> illegal instruction.
+> 
+> You need gcc 4.4 to get EABI working on ARMv4 and there are additional patches
+> to gcc on top of gcc 4.4 see
+> gcc-armv4-pass-fix-v4bx-to-ld.patch for gcc in OE. So as Koen suggested earlier
+> if you try with OE compiler you might have better chance of getting it
+> to work as many
+> OE devs have tried it.
+> btw. are you passing march=armv4 to the compiler when doing the compile ?
 
-   Before you print, please think about the environment.
-   Confidentiality Statement This transmission is confidential and
-   intended solely for the party to whom it is addressed. If the reader of
-   this email is not the intended recipient, you are hereby notified that
-   it may contain privileged, confidential and trade secret information,
-   and that any dissemination, distribution, copying or use of the
-   information in this transmission is strictly prohibited. If you have
-   received this transmission in error, please immediately notify the
-   sender at the email address above, and delete all copies of it from
-   your computer.
+From my understanding of this issue he has an OABI rootfs and is trying
+to run an EABI executable on top of it. This just doesn't work period
+AFAIK; the kernel can boot either OABI or EABI with the compatibility
+flags config'd in, but all of the binaries on the filesystem must match.
 
-References
+I'll have to look into the patch that you referenced above because I
+have been using EABI (built through OE) for both the kernel and
+filesystem with armv4t for a few years now. First w/ GCC 4.1.1 and now
+with 4.2.4 and I've never run into issues. Does the issue only manifest
+in certain situations?
 
-   1. file://localhost/tmp/jgrant@vml.com
+Thanks,
+
+TAS
+
+
+
 
