@@ -1,34 +1,38 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1NdOzv-0000nQ-Hl
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Feb 2010 15:17:30 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 64CCF646818
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NdP4q-0000xt-Li for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Feb 2010 15:22:35 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NdP2T-00026T-4F for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Feb 2010 15:20:05 +0100
+Received: from APoitiers-259-1-11-185.w90-55.abo.wanadoo.fr ([90.55.6.185])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 05 Feb 2010 15:20:05 +0100
+Received: from bruno.chatignoux0016 by
+	APoitiers-259-1-11-185.w90-55.abo.wanadoo.fr with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Feb 2010 09:14:58 -0500 (EST)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 09277-07 for <openembedded-devel@lists.openembedded.org>; 
-	Fri,  5 Feb 2010 09:14:58 -0500 (EST)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 1DFFF6464F9
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Feb 2010 09:14:58 -0500 (EST)
-Message-ID: <4B6C27E2.8040701@cbnco.com>
-Date: Fri, 05 Feb 2010 09:14:58 -0500
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090812)
-MIME-Version: 1.0
+	Fri, 05 Feb 2010 15:20:05 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <D15778FFF6A6CA4FAF01B8D2C3780300499DAE1590@ushqwmb02.palm1.palmone.com>
-In-Reply-To: <D15778FFF6A6CA4FAF01B8D2C3780300499DAE1590@ushqwmb02.palm1.palmone.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+From: Bruno Chatignoux <bruno.chatignoux0016@orange.fr>
+Date: Fri, 5 Feb 2010 09:00:11 +0000 (UTC)
+Message-ID: <loom.20100205T094106-828@post.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 90.55.6.185 (Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.1.7) Gecko/20100106 Ubuntu/9.10 (karmic) Firefox/3.5.7)
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Issues with .list files
+Subject: problem using modphp_5.1.6-r3.5_armv7a > signal Segmentation fault (11)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,22 +46,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Feb 2010 14:17:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 05 Feb 2010 14:22:35 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Michael Morrell wrote:
+Hello
 
-> Second, when a bitbake run is done with lots of parallelism, it is
-> possible that it tries to open a nonexistent .list file (it was there
-> when it did the os.listdir call, but that package later removed it
-> before it recreates it), causing a crash here.  We are seeing such
-> crashes reasonably often.
+I compile modphp_5.1.6-r3.5_armv7a i don't have error.
+I use the default configuration for modphp_5.1.6-r3.5.
 
-Yeah, package_do_shlibs() in package.bbclass should probably write to a 
-temp file and then link it into place. Right now it just removes and 
-rewrites.
+I use  apache2_2.2.14-r1.5_armv7a (Apache/2.2.14 (Unix) mod_ssl/2.2.14
+OpenSSL/0.9.8j PHP/5.1.6 configured)
 
-Mike
+
+When i open script  php
+
+<?php
+phpinfo();
+?>
+
+I have an blank screen and in the apache error log i have :
+
+     [notice] child pid 2115 exit signal Segmentation fault (11)  
+
+
+I download the packet r3.1 (modphp_5.1.6-r3.1_armv7a.ipk) and install it ..
+now my phpinfo() it's work.
+
+I don't have the modphp_5.1.6.bb (r3.1)...
+
+
+I want to resolve this problem.
+I want to compile this package.
+I want to activate in php mySQL.
+
+It is somebody has already met this problem ?
+
+Thank for your answers
+Bruno
+
+
+
+
+
+
+
+
+
 
 
