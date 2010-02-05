@@ -1,29 +1,38 @@
-Received: from mail.emacinc.com ([63.245.244.68])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tstratman@emacinc.com>) id 1NdX5s-0007rN-CN
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Feb 2010 23:56:12 +0100
-Received: from [63.245.244.67] (helo=emac081.emacinc.com)
-	by mail.emacinc.com with esmtp (Exim 4.50) id 1NdX3C-0005H7-Ct
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Feb 2010 16:53:29 -0600
-From: Travis Stratman <tstratman@emacinc.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NdXah-00060o-2A for openembedded-devel@lists.openembedded.org;
+	Sat, 06 Feb 2010 00:28:02 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NdXYH-00080t-8R for openembedded-devel@lists.openembedded.org;
+	Sat, 06 Feb 2010 00:25:29 +0100
+Received: from s207-6-220-230.bc.hsia.telus.net ([207.6.220.230])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 06 Feb 2010 00:25:29 +0100
+Received: from dfoley by s207-6-220-230.bc.hsia.telus.net with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 06 Feb 2010 00:25:29 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <19c1b8a91002051341m3465d125hcaa15fcfac08f10@mail.gmail.com>
-References: <1497161523.3479291265205781088.JavaMail.root@sz0154a.westchester.pa.mail.comcast.net>
-	<4B6C0F0D.8030308@vollmann.ch>
-	<19c1b8a91002051000r69e645bey7395aa912d38e172@mail.gmail.com>
-	<1265402638.4267.384.camel@cheeto.emacinc.com>
-	<19c1b8a91002051341m3465d125hcaa15fcfac08f10@mail.gmail.com>
-Date: Fri, 05 Feb 2010 16:53:19 -0600
-Message-Id: <1265410399.4267.412.camel@cheeto.emacinc.com>
+From: Dallas Foley <dfoley@techsol.ca>
+Date: Fri, 05 Feb 2010 15:25:07 -0800
+Message-ID: <4B6CA8D3.6050806@techsol.ca>
+References: <E1NTDIp-00055S-0r@melo.openembedded.org>	<20100112140326.GC10781@jama>
+	<hihvso$eon$1@ger.gmane.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.6.3 
-X-SA-Exim-Connect-IP: 63.245.244.68
-X-SA-Exim-Mail-From: tstratman@emacinc.com
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s207-6-220-230.bc.hsia.telus.net
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <hihvso$eon$1@ger.gmane.org>
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: EABI pain and frustration!
+Subject: Re: Koen Kooi : xserver-xorg 1.7.3: fix regression where hal was disabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,54 +46,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Feb 2010 22:56:12 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 05 Feb 2010 23:28:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2010-02-05 at 13:41 -0800, Khem Raj wrote:
-> On Fri, Feb 5, 2010 at 12:43 PM, Travis Stratman <tstratman@emacinc.com> wrote:
-> > On Fri, 2010-02-05 at 10:00 -0800, Khem Raj wrote:
-> >> On Fri, Feb 5, 2010 at 4:29 AM, Detlef Vollmann <dv@vollmann.ch> wrote:
-> >> > On 02/03/10 15:03, pspreadborough@comcast.net wrote:
-> >> >>
-> >> >> My 2.6.29 kernel is built with the CodeSourcery
-> >> >> arm-2009q3-67-arm-none-linux-gnueabi compiler and has the EABI and
-> >> >> OABI_COMPAT config options enabled. Using this kernel I can boot my SA1110
-> >> >> iPaq into a OABI ramfs with no problems, however if I build a "HelloWorld"
-> >> >> executable with the same compiler and try and run it I get an "Illegal
-> >> >> Instruction" error. I build the test program using static linking, select
-> >> >> the correct machine type and tune options but to no avail, I always get the
-> >> >> illegal instruction.
-> >>
-> >> You need gcc 4.4 to get EABI working on ARMv4 and there are additional patches
-> >> to gcc on top of gcc 4.4 see
-> >> gcc-armv4-pass-fix-v4bx-to-ld.patch for gcc in OE. So as Koen suggested earlier
-> >> if you try with OE compiler you might have better chance of getting it
-> >> to work as many
-> >> OE devs have tried it.
-> >> btw. are you passing march=armv4 to the compiler when doing the compile ?
-> >
-> > >From my understanding of this issue he has an OABI rootfs and is trying
-> > to run an EABI executable on top of it. This just doesn't work period
-> > AFAIK; the kernel can boot either OABI or EABI with the compatibility
-> > flags config'd in, but all of the binaries on the filesystem must match.
-> >
-> > I'll have to look into the patch that you referenced above because I
-> > have been using EABI (built through OE) for both the kernel and
-> > filesystem with armv4t for a few years now. First w/ GCC 4.1.1 and now
-> > with 4.2.4 and I've never run into issues. Does the issue only manifest
-> > in certain situations?
+Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
-> Well you said armv4t thats a whole different story than armv4 (without
-> 't') for EABI
-> AFAICT SA1110 is based on ARMv4 not ARMv4t.
+> On 12-01-10 15:03, Martin Jansa wrote:
+>> On Fri, Jan 08, 2010 at 11:46:51AM +0000, git version control wrote:
+>>> Module: openembedded.git
+>>> Branch: org.openembedded.dev
+>>> Commit: 3a9b352acba24c78b562d8dc6527b774cbb86041
+>>> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=3a9b352acba24c78b562d8dc6527b774cbb86041
+>>>
+>>> Author: Koen Kooi <koen@openembedded.org>
+>>> Date:   Fri Jan  8 12:44:47 2010 +0100
+>>>
+>>> xserver-xorg 1.7.3: fix regression where hal was disabled
+>>>
+>>> * this fixes the "my touchscreen isn't working anymore" bug
+>> Thanks,
+>>
+>> can we add hal conditionaly as XINERAMA is?
+>> Maybe for both om-gta01, om-gta02?
+>>
+>> We have input configuration in xorg.conf and with hal for input
+>> detection deprecated by xorg devs I guess we won't change that before
+>> 1.8 xserver (maybe with deviceKit or something else).
+> 
+> AIUI you can do --enable-udev to get udev based device handling (aka
+> "The Future") working, but that would involve one of the OE devs
+> expanding the current touchscreen0 udev rule.
+> - --enable hal and --enable-udev are mutually exclusive, though.
+> 
+>> Before this change hal could be removed from om-gta*
+>>
+>> I'm also willing to accept that we also need hal from reasons I don't know
+>> about yet..
+> 
+> e.g. people wanting to use xf86-input-tslib on gta0X, like me :)
 
-You are correct, my mistake.
+Xorg 1.7.3 and 1.7.4 seems to get stuck somewhere for me when logging out.
+If I "--disable-config-hal" and put my touchscreen info back in xorg.conf then 
+my touchscreen is Ok. Anyone else have this problem with touch screens or is it 
+  just isolated to me ?
 
-Thanks,
-
-TAS
-
+> 
+> regards,
+> 
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+> 
+> iD8DBQFLTILZMkyGM64RGpERAv0+AKCKBN96oE8Yvx1/dK7/y0lG82oMOgCfcgpx
+> CHftf+HCW1kH9SHY1aKb9gI=
+> =bmXf
+> -----END PGP SIGNATURE-----
 
 
 
