@@ -1,38 +1,28 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from qmta02.westchester.pa.mail.comcast.net ([76.96.62.24])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NdXah-00060o-2A for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Feb 2010 00:28:02 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NdXYH-00080t-8R for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Feb 2010 00:25:29 +0100
-Received: from s207-6-220-230.bc.hsia.telus.net ([207.6.220.230])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Feb 2010 00:25:29 +0100
-Received: from dfoley by s207-6-220-230.bc.hsia.telus.net with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Feb 2010 00:25:29 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <pspreadborough@comcast.net>) id 1NdZe6-0000pW-DF
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 06 Feb 2010 02:39:42 +0100
+Received: from omta02.westchester.pa.mail.comcast.net ([76.96.62.19])
+	by qmta02.westchester.pa.mail.comcast.net with comcast
+	id eDs41d0070QuhwU52Rd8v2; Sat, 06 Feb 2010 01:37:08 +0000
+Received: from sz0154.wc.mail.comcast.net ([76.96.58.220])
+	by omta02.westchester.pa.mail.comcast.net with comcast
+	id eRd81d00A4l5d103NRd8MP; Sat, 06 Feb 2010 01:37:08 +0000
+Date: Sat, 6 Feb 2010 01:37:08 +0000 (UTC)
+From: pspreadborough@comcast.net
 To: openembedded-devel@lists.openembedded.org
-From: Dallas Foley <dfoley@techsol.ca>
-Date: Fri, 05 Feb 2010 15:25:07 -0800
-Message-ID: <4B6CA8D3.6050806@techsol.ca>
-References: <E1NTDIp-00055S-0r@melo.openembedded.org>	<20100112140326.GC10781@jama>
-	<hihvso$eon$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s207-6-220-230.bc.hsia.telus.net
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-In-Reply-To: <hihvso$eon$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <1464457259.415721265420228467.JavaMail.root@sz0154a.westchester.pa.mail.comcast.net>
+In-Reply-To: <1444973837.415081265420091001.JavaMail.root@sz0154a.westchester.pa.mail.comcast.net>
+MIME-Version: 1.0
+X-Originating-IP: [76.24.64.15]
+X-Mailer: Zimbra 5.0.19_GA_3172.RHEL5_64 (ZimbraWebClient - FF3.0
+	(Linux)/5.0.19_GA_3177.RHEL5_64)
+X-SA-Exim-Connect-IP: 76.96.62.24
+X-SA-Exim-Mail-From: pspreadborough@comcast.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Koen Kooi : xserver-xorg 1.7.3: fix regression where hal was disabled
+Subject: Re: EABI pain and frustration!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,64 +36,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Feb 2010 23:28:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 06 Feb 2010 01:39:43 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> On 12-01-10 15:03, Martin Jansa wrote:
->> On Fri, Jan 08, 2010 at 11:46:51AM +0000, git version control wrote:
->>> Module: openembedded.git
->>> Branch: org.openembedded.dev
->>> Commit: 3a9b352acba24c78b562d8dc6527b774cbb86041
->>> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=3a9b352acba24c78b562d8dc6527b774cbb86041
->>>
->>> Author: Koen Kooi <koen@openembedded.org>
->>> Date:   Fri Jan  8 12:44:47 2010 +0100
->>>
->>> xserver-xorg 1.7.3: fix regression where hal was disabled
->>>
->>> * this fixes the "my touchscreen isn't working anymore" bug
->> Thanks,
->>
->> can we add hal conditionaly as XINERAMA is?
->> Maybe for both om-gta01, om-gta02?
->>
->> We have input configuration in xorg.conf and with hal for input
->> detection deprecated by xorg devs I guess we won't change that before
->> 1.8 xserver (maybe with deviceKit or something else).
-> 
-> AIUI you can do --enable-udev to get udev based device handling (aka
-> "The Future") working, but that would involve one of the OE devs
-> expanding the current touchscreen0 udev rule.
-> - --enable hal and --enable-udev are mutually exclusive, though.
-> 
->> Before this change hal could be removed from om-gta*
->>
->> I'm also willing to accept that we also need hal from reasons I don't know
->> about yet..
-> 
-> e.g. people wanting to use xf86-input-tslib on gta0X, like me :)
 
-Xorg 1.7.3 and 1.7.4 seems to get stuck somewhere for me when logging out.
-If I "--disable-config-hal" and put my touchscreen info back in xorg.conf then 
-my touchscreen is Ok. Anyone else have this problem with touch screens or is it 
-  just isolated to me ?
+----- "Travis Stratman" <tstratman@emacinc.com> wrote: 
+> On Fri, 2010-02-05 at 13:41 -0800, Khem Raj wrote: 
+> > On Fri, Feb 5, 2010 at 12:43 PM, Travis Stratman <tstratman@emacinc.com> wrote: 
+> > > On Fri, 2010-02-05 at 10:00 -0800, Khem Raj wrote: 
+> > >> On Fri, Feb 5, 2010 at 4:29 AM, Detlef Vollmann <dv@vollmann.ch> wrote: 
+> > >> > On 02/03/10 15:03, pspreadborough@comcast.net wrote: 
+> > >> >> 
+> > >> >> My 2.6.29 kernel is built with the CodeSourcery 
+> > >> >> arm-2009q3-67-arm-none-linux-gnueabi compiler and has the EABI and 
+> > >> >> OABI_COMPAT config options enabled. Using this kernel I can boot my SA1110 
+> > >> >> iPaq into a OABI ramfs with no problems, however if I build a "HelloWorld" 
+> > >> >> executable with the same compiler and try and run it I get an "Illegal 
+> > >> >> Instruction" error. I build the test program using static linking, select 
+> > >> >> the correct machine type and tune options but to no avail, I always get the 
+> > >> >> illegal instruction. 
+> > >> 
+> > >> You need gcc 4.4 to get EABI working on ARMv4 and there are additional patches 
+> > >> to gcc on top of gcc 4.4 see 
+> > >> gcc-armv4-pass-fix-v4bx-to-ld.patch for gcc in OE. So as Koen suggested earlier 
+> > >> if you try with OE compiler you might have better chance of getting it 
+> > >> to work as many 
+> > >> OE devs have tried it. 
+> > >> btw. are you passing march=armv4 to the compiler when doing the compile ? 
+> > > 
+> > > >From my understanding of this issue he has an OABI rootfs and is trying 
+> > > to run an EABI executable on top of it. This just doesn't work period 
+> > > AFAIK; the kernel can boot either OABI or EABI with the compatibility 
+> > > flags config'd in, but all of the binaries on the filesystem must match. 
+> > > 
+> > > I'll have to look into the patch that you referenced above because I 
+> > > have been using EABI (built through OE) for both the kernel and 
+> > > filesystem with armv4t for a few years now. First w/ GCC 4.1.1 and now 
+> > > with 4.2.4 and I've never run into issues. Does the issue only manifest 
+> > > in certain situations? 
+> > 
+> > Well you said armv4t thats a whole different story than armv4 (without 
+> > 't') for EABI 
+> > AFAICT SA1110 is based on ARMv4 not ARMv4t. 
+> 
+> You are correct, my mistake. 
 
-> 
-> regards,
-> 
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> 
-> iD8DBQFLTILZMkyGM64RGpERAv0+AKCKBN96oE8Yvx1/dK7/y0lG82oMOgCfcgpx
-> CHftf+HCW1kH9SHY1aKb9gI=
-> =bmXf
-> -----END PGP SIGNATURE-----
+I have built a EABI rootfs but I get a kernel panic when it attempts
+to run init, hence my attempts to verify my EABI executables on a OABI 
+fs.
+
+Perhaps it's time for me to try the OE EABI compiler. Can you advise me 
+on which OE recipes to use for this?
+
+Regards,
+
+Pete 
 
 
 
