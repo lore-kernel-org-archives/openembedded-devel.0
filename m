@@ -1,39 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ndfha-0004tq-KV for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Feb 2010 09:07:50 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NdffA-0002Lg-7b for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Feb 2010 09:05:08 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Feb 2010 09:05:08 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Feb 2010 09:05:08 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <philb@gnu.org>) id 1Ndiy0-0001AV-0X
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 06 Feb 2010 12:36:51 +0100
+Received: from localhost ([127.0.0.1])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1Ndiva-0007e6-M9
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 06 Feb 2010 11:34:18 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 06 Feb 2010 09:04:46 +0100
-Message-ID: <hkj7qt$183$1@ger.gmane.org>
-References: <20100206062304.GC25236@denix.org>
+In-Reply-To: <D15778FFF6A6CA4FAF01B8D2C3780300499DAE1590@ushqwmb02.palm1.palmone.com>
+References: <D15778FFF6A6CA4FAF01B8D2C3780300499DAE1590@ushqwmb02.palm1.palmone.com>
+Date: Sat, 06 Feb 2010 11:31:18 +0000
+Message-ID: <1265455878.5019.8.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100130 Shredder/3.0.2pre
-In-Reply-To: <20100206062304.GC25236@denix.org>
-X-Enigmail-Version: 1.0.1
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Angstrom on Archos 5IT
+Subject: Re: Issues with .list files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,41 +34,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Feb 2010 08:07:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 06 Feb 2010 11:36:51 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 06-02-10 07:23, Denys Dmytriyenko wrote:
-> Angstrom on Archos 5IT:
+On Thu, 2010-02-04 at 19:24 -0800, Michael Morrell wrote:
+> If I understand the algorithm in package_do_shlibs correctly, each package creates a .list file which is a list of all the shared libraries provided by that package.  It also generates a list of all the libraries that it needs and looks for those in .list files created by other packages so it can create a runtime dependency against that package.
 > 
-> http://www.archos.com/products/imt/archos_5it/dualoslinux.html
+> The way it looks for .list files is to simply scan all *.list files in the directory.  This has two problems that I can see.
+> 
+> First, it is inefficient.  It should only have to look through .list files creates by packages created by bb files which were DEPENDed on by this bb file.
 
-The first batch is already in:
+That's an interesting point.  I think this probably is true, although it
+would lead to some issues with packages that currently have incomplete
+DEPENDS (or which rely on the historically-transitive behaviour of
+DEPENDS for correct operation); there are probably quite a lot of these.
+If you're going to make this change then I think you would also need to
+change the current "couldn't find shlib provider for..." warning into a
+fatal error.
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=1fa0831219bd3fe19e07005b35d370a7d45689e3
+Do you have any feel for how much time would actually be saved by
+eliminating the unnecessary scan of other .list files?
 
-Feel free to add in the updated (e.g. the 2.6.27 kernel).
+> Second, when a bitbake run is done with lots of parallelism, it is possible that it tries to open a nonexistent .list file (it was there when it did the os.listdir call, but that package later removed it before it recreates it), causing a crash here.  We are seeing such crashes reasonably often.
 
-This is one of the few examples where a company is a better opensource
-citizen than the "open source" commuity around their devices.
+This one is definitely just a bug (and, I think, unrelated to the first
+issue).  Any time you create or modify a file in a live part of staging,
+it needs to be done atomically and it sounds like package.bbclass is
+currently failing to do that.  Feel free to make a patch, or I can look
+at this instead if you want.
 
-If only those openoas dudes weren't so hellbent on keeping their fixes
-to themselves and pushed them back to angstrom and OE :(
+p.
 
-So, GPE dudes, if you want lots of fixes for GPE software, go through
-http://dev.openaos.org/browser/trunk/openembedded/build/openaos
-
-I've tried contacting the openaos people, but no response whatsoever :(
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLbSKeMkyGM64RGpERAmv1AKCzkePkV9V34UFdFpVjBfAHrkx3vQCeOp/U
-1E4POwdO9G7EYRGloVMCH8I=
-=SBae
------END PGP SIGNATURE-----
 
 
 
