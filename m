@@ -1,27 +1,39 @@
-Received: from vms173009pub.verizon.net ([206.46.173.9])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Nde7I-0004Kf-9d
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Feb 2010 07:26:07 +0100
-Received: from gandalf.denix.org ([unknown] [71.251.51.225])
-	by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0KXE00H9KPQHMH42@vms173009.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	06 Feb 2010 00:23:05 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id EDDF214AF60; Sat,
-	06 Feb 2010 01:23:04 -0500 (EST)
-Date: Sat, 06 Feb 2010 01:23:04 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NdfXj-0004MU-Ho for openembedded-devel@lists.openembedded.org;
+	Sat, 06 Feb 2010 08:57:30 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NdfVL-0006Y6-I1 for openembedded-devel@lists.openembedded.org;
+	Sat, 06 Feb 2010 08:54:59 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 06 Feb 2010 08:54:59 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 06 Feb 2010 08:54:59 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100206062304.GC25236@denix.org>
-MIME-version: 1.0
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.9
-X-SA-Exim-Mail-From: denis@denix.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 06 Feb 2010 08:54:38 +0100
+Message-ID: <hkj77t$v3b$1@ger.gmane.org>
+References: <D15778FFF6A6CA4FAF01B8D2C3780300499DAE1659@ushqwmb02.palm1.palmone.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100130 Shredder/3.0.2pre
+In-Reply-To: <D15778FFF6A6CA4FAF01B8D2C3780300499DAE1659@ushqwmb02.palm1.palmone.com>
+X-Enigmail-Version: 1.0.1
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Angstrom on Archos 5IT
+Subject: Re: Issues with .list files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,12 +47,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Feb 2010 06:26:07 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sat, 06 Feb 2010 07:57:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Angstrom on Archos 5IT:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-http://www.archos.com/products/imt/archos_5it/dualoslinux.html
+On 05-02-10 19:12, Michael Morrell wrote:
+>>>> Ehm, no. If it did that you'd get missing shlibs in lots of cases. OE
+>>>> won't error out, but you're stabbing users of the packages in the eye
+>>>> since they get stuck with the mess.
+>  
+> IMO, the missing shlib message should be fatal.  
+
+See, that's a lot better than "silently" failing and creating known
+broken packages.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLbSA+MkyGM64RGpERAvAoAKCiJYOMRDoh4CIxVo4s/M8OapsUzQCeI9Ww
+ijzHy7MZefNUU+czwUCbfrM=
+=Zlbn
+-----END PGP SIGNATURE-----
+
 
 
