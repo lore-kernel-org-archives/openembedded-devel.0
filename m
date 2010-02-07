@@ -1,30 +1,29 @@
 Received: from mail-ew0-f212.google.com ([209.85.219.212])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1Ndtp0-0007EO-Pc
+	(envelope-from <andrea.adami@gmail.com>) id 1Nduts-0001cr-2i
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Feb 2010 00:12:17 +0100
-Received: by ewy4 with SMTP id 4so98358ewy.27
+	Sun, 07 Feb 2010 01:21:23 +0100
+Received: by ewy4 with SMTP id 4so117958ewy.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Feb 2010 15:09:44 -0800 (PST)
+	Sat, 06 Feb 2010 16:18:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type;
-	bh=6S0bbcosbcG3yF0F45xXyp9L/UkxZC7o6RiCDQ5pgdY=;
-	b=UzGLIb+2Rw/izlnodxeBsCNUoWHHzlIk7mSbG9ITJ345AH3Pel0tIyjzc+FwPVLv78
-	f8LrNMFO93GduGKtCSuh+6GTt/4t88uU5xw7PxzjQUSa5T/9EgGHBexxAov9HA9nsazZ
-	PfaSAuCxHDkNTUIihr+3uSo7pCJU/QEI5LkHs=
+	bh=uYvyVqdXyR/YXc3Q9Kh2194CjO6PuX0qe8P8s9f+z3E=;
+	b=FpFR6K/NeU/YuwPlI5HYESVKxIyLZTTJbqAhmeOy+EYqi8T+XNboMgHZGN0FjoFwOM
+	zDTo211hZokSdOpIUxEib0i7soHbvq/dVcAcueJ/S4aJA5ejQZCXAPIzevtllQ8yra4i
+	Wl8Xg5VphT6KZcaFQ6koqZgjl1BRITP/F3o0M=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=CFh4bZXKU/uyspEfbEJn4VmooqNGjtYZ2NLOPB0INLukw4bqiEeQ0QSNbKySu6R4ZY
-	0sw4MplISMGqAFpQBpFd6aQ2ZS85RrAyIeIv+eyvdWlKLxeeEywpwcBvaQmRNEIxe37F
-	bBqNCtAbiS9yR+bQ4lmR5ccYylaZ1UYSqwhUw=
+	b=FbXw+IiKX8DJO0ZGztSWFHimUfPDBqzTqHBcKO3ebgCHkqtpLoGnOihOvHJhGPDmxp
+	Eea7uML/+TbDKqiO3cYfjp9FU/6gNH0hR6LejwyR8aSBPAvdO7SjahLk/OEs3Xmyrs2T
+	lUicrkH7Fd9B7HhgR0CZJBdA6QR4VM6UBH9sM=
 MIME-Version: 1.0
-Received: by 10.213.109.140 with SMTP id j12mr854015ebp.84.1265497784278; Sat, 
-	06 Feb 2010 15:09:44 -0800 (PST)
-In-Reply-To: <20100201234729.GB2493@xora-build.xora.org.uk>
+Received: by 10.213.0.212 with SMTP id 20mr2288835ebc.41.1265501929269; Sat, 
+	06 Feb 2010 16:18:49 -0800 (PST)
+In-Reply-To: <d1b08f941002061509y424103c3sa00e993c0deb485e@mail.gmail.com>
 References: <d1b08f941001170606w13dcfc0ey341da93deb94c7b8@mail.gmail.com>
-	<201001172258.25258.jay4mail@gmail.com>
 	<d1b08f941001171559w5ae011a6u61715d0fd236046@mail.gmail.com>
 	<d1b08f941001220212v588c5f9bvbf2a149660a86898@mail.gmail.com>
 	<hjceds$nsr$2@ger.gmane.org>
@@ -33,10 +32,12 @@ References: <d1b08f941001170606w13dcfc0ey341da93deb94c7b8@mail.gmail.com>
 	<d1b08f941002011357y4285709w44dbed0b4e2c4b87@mail.gmail.com>
 	<hk7nl6$rik$1@ger.gmane.org>
 	<20100201234729.GB2493@xora-build.xora.org.uk>
-Date: Sun, 7 Feb 2010 00:09:44 +0100
-Message-ID: <d1b08f941002061509y424103c3sa00e993c0deb485e@mail.gmail.com>
+	<d1b08f941002061509y424103c3sa00e993c0deb485e@mail.gmail.com>
+Date: Sun, 7 Feb 2010 01:18:49 +0100
+Message-ID: <d1b08f941002061618i53d87452r826beee6da0b4a08@mail.gmail.com>
 From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
+To: openembedded-devel@lists.openembedded.org, 
+	zaurus-devel@lists.linuxtogo.com
 X-SA-Exim-Connect-IP: 209.85.219.212
 X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
@@ -55,27 +56,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Feb 2010 23:12:18 -0000
+X-List-Received-Date: Sun, 07 Feb 2010 00:21:23 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Ok, I committed the fix to updater.sh, now bumped to r24.
-Painfully enough, I got mixed reports about unsuccessfull flashing
-(no reboot) with the latest 2.6.33-rc6 lzma-compressed kernels on C700
-and C1000:
+On Sun, Feb 7, 2010 at 12:09 AM, Andrea Adami <andrea.adami@gmail.com> wrote:
+> Ok, I committed the fix to updater.sh, now bumped to r24.
 
-C5600 ?
-
-C700 KO
-C750 OK
-C860 OK
-C1000 KO
-C3000 OK
-C3100 ?
-C3200 OK
-6000* ?
-
-Pls help testing missing models.
-Thx
+I forgot to say, this change only affects c7x0 models. Akita and Spitz
+have own nandlogical routines.
 
 Andrea
 
