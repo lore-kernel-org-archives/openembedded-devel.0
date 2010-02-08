@@ -1,40 +1,41 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iw0-f183.google.com ([209.85.223.183])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NeFNv-00056H-1H for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Feb 2010 23:13:46 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NeFLV-0000jZ-Oz for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Feb 2010 23:11:13 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Feb 2010 23:11:13 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1NeJSz-0000Jm-2T
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Feb 2010 03:35:16 +0100
+Received: by iwn13 with SMTP id 13so4532497iwn.25
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Feb 2010 23:11:13 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 07 Feb 2010 18:32:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=bUcqTsPreRAnWyfRfUORmU+N44fyUeyBm4CR+ILzTfE=;
+	b=D3ZCV998ECo9obeKBBrlA7K8csOuLhQ4zyA2eNDntNnxY8yxABAZsOzbwucRYbMt5B
+	vVH8a4CyVFUGVijhfVZesNTeMytqQbbOfdti+9qzCabL7pwg3YLx6dc0K7yd3ZJPnJ68
+	PXZtsXVRoft16APu04YKg4kbzdOLbS/bI7MTo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Go1AEra2YtegJ2TNRzDmCv/kxMUlyvF360uPHz0TIijmJvdGd7kpd2qNQJCbGKBsvm
+	6dAUDE8Vm24VHklkyHlqmU25wU7yYlc8SS5PGvo1Z4J3T7LELn5keO/u5N9Y1EvoZSJa
+	aT89lhrUaTHEBPJYn6ulIVLkK3MQr80KZ026k=
+MIME-Version: 1.0
+Received: by 10.231.150.142 with SMTP id y14mr2926893ibv.32.1265596360797; 
+	Sun, 07 Feb 2010 18:32:40 -0800 (PST)
+In-Reply-To: <4B6F3274.2010508@theforce.com.au>
+References: <4B6B4EBC.1030906@theforce.com.au>
+	<1265356132.3907.12.camel@mattotaupa>
+	<4B6F3274.2010508@theforce.com.au>
+Date: Sun, 7 Feb 2010 18:32:40 -0800
+Message-ID: <19c1b8a91002071832u5d5c3efcxf5bc2a572cfb1e1a@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 07 Feb 2010 23:10:52 +0100
-Message-ID: <hkndpa$d3j$1@ger.gmane.org>
-References: <1264620764-22806-1-git-send-email-ynezz@true.cz>	<hkn3ds$ci0$1@ger.gmane.org>
-	<20100207204235.GT24852@ibawizard.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100130 Shredder/3.0.2pre
-In-Reply-To: <20100207204235.GT24852@ibawizard.net>
-X-Enigmail-Version: 1.0.1
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.223.183
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] rt2x00: new recipe for rt3070 version 2.1.2.0
+Subject: Re: mtr
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,58 +49,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Feb 2010 22:13:46 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 08 Feb 2010 02:35:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Sun, Feb 7, 2010 at 1:36 PM, Grahame Jordan <gbj@theforce.com.au> wrote:
+> =A0 Hi Paul,
+>
+> Cannot bitbake mtr. It is set to PV=3D0.65.
+>
+>
+> can you please post the error message and the log files?
+>
+>
+>
+> =A0 | checking for floor in -lm... yes
+> =A0 | checking for socket... yes
+> =A0 | checking for gethostbyname... yes
+> =A0 | checking for seteuid... yes
+> =A0 | checking for res_mkquery... no
+> =A0 | checking for res_mkquery in -lbind... no
+> =A0 | checking for res_mkquery in -lresolv... no
+> =A0 | configure: error: No resolver library found
 
-On 07-02-10 21:42, Petr Štetiar wrote:
-> Koen Kooi <k.kooi@student.utwente.nl> [2010-02-07 20:14:05]:
-> 
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 27-01-10 20:32, Petr Štetiar wrote:
->>> This patch adds support for rt3070 kernel driver, used for example by the new
->>> Belkin F6D4050v2 USB WiFi stick.
->>
->> How does this differ from recipes/ralink/rt3070_2.1.1.0.bb and why is it
->> in another directory?
-> 
-> Hm, looks like I overlooked this recipe:( I've seen rt61 and rt73 recipes in
-> rt2x00 (was searching for packages starting with 'rt') dir and I thought, that
-> this dir is appropriate for my recipe also.  Anyway rt3070 is called 3070, but
-> it's 2870 with some mods, you can see outputs of 2870 in dmesg, even config
-> file is called RT2870sta.dat, it's a weird driver but the only option.
-> 
-> There's a difference in my recipe also, I create empty RT2870sta.dat file,
-> because I was unable to get it working with it (what a driver reading config
-> files from userspace) and I use it with iwconfig successfully.
-> 
-> There's a bug[1] for it and probably can be closed, patch[2] which can be
-> discarded also. And FYI the direct links at Ralink's site don't work
-> anymore(you've to agree with GNU/GPL EULA :D before downloading it), so I
-> kindly asked Laibsch if he could mirror it on OE.
-> 
-> So, should I prepare a patch which will move recipes from rt2x00 dir to ralink
-> dir and move my recipe there(newer version)? Thanks for you time reviewing my
-> patch.
+are you using uclibc ? if yes then you can get along this error by adding
+UCLIBC_HAS_LIBRESOLV_STUB=3Dy to uClibc.distro file. If its glibc/eglibc th=
+en
+there should be some issue with the configure test of mtr.
 
-I have no strong opinion on that, I would only like to keep the wifi of
-my touchbook working :)
+Thx
 
-regards,
+-Khem
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFLbzpsMkyGM64RGpERAuweAJsGhuhaZsCgEQquAg12Y9S3VEuQMgCfVXWx
-w5x8t7ISW1SOH9Yj0r6vtr0=
-=PZcN
------END PGP SIGNATURE-----
-
+> =A0 org.openembedded.dev/conf/distro/include/preferred-om-2008-versions.i=
+nc
+> =A0 Thanks
+> =A0 Grahame
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
