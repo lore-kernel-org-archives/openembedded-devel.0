@@ -1,42 +1,23 @@
-Received: from mail-fx0-f227.google.com ([209.85.220.227])
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1NeYyh-0004Ey-8L
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Feb 2010 20:09:02 +0100
-Received: by fxm27 with SMTP id 27so995674fxm.27
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Feb 2010 11:06:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:from:to:cc:subject
-	:date:message-id:x-mailer;
-	bh=CV9LBoJqIWk4Iibc9+5rDM1PGglYDez9xu/FoenBO5c=;
-	b=Tt5fg+p5Nh073Y4dXxvLarlxntfOt3kIoXnA5shaLcfNAmU4v6XMD1ZshV8R6zu5aA
-	MAFcGAHzPBNAFPeXfVQuElXswZZ4HQtcJ01zavIAnt2Q5fJYD7/Y258CoXkPEoDhjZSJ
-	SwYL17G2WT/ffDvZcNIdxzOyMQYUbEBlZfmvE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=SE5zASR7/9D/GZqa/F3FcLVnJz/nt/A+DTiqqhGjsideqcFdHTvVjxYA3A6BLxUbx4
-	3gkyoyUl3G0c//3e9lZXwCjHyGbuujz7RAZRLnf4b8CxiN0qzF4BgDqeIWB/vVDX9wvO
-	8mkiNvWCZsnG5E4pRHiWt5LbTLtVD34Ql8tSs=
-Received: by 10.223.14.15 with SMTP id e15mr8417419faa.57.1265655985577;
-	Mon, 08 Feb 2010 11:06:25 -0800 (PST)
-Received: from s42.loc ([84.119.103.202])
-	by mx.google.com with ESMTPS id p9sm7028887fkb.44.2010.02.08.11.06.24
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 08 Feb 2010 11:06:24 -0800 (PST)
-Received: from cow by s42.loc with local (Exim 4.71)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1NeYxo-0003DO-Cd; Mon, 08 Feb 2010 20:08:04 +0100
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+	(envelope-from <ynezz@true.cz>) id 1NeZf0-0008CP-IK
+	for openembedded-devel@openembedded.org; Mon, 08 Feb 2010 20:52:45 +0100
+Received: from localhost.localdomain (localhost [127.0.0.1])
+	by mengele.ibawizard.net (Postfix) with ESMTP id E9F461D36079;
+	Mon,  8 Feb 2010 20:50:07 +0100 (CET)
+From: =?utf-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Feb 2010 20:07:57 +0100
-Message-Id: <1265656077-12327-1-git-send-email-rep.dot.nop@gmail.com>
-X-Mailer: git-send-email 1.6.5
-X-SA-Exim-Connect-IP: 209.85.220.227
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+Date: Mon,  8 Feb 2010 20:50:12 +0100
+Message-Id: <1265658612-19262-1-git-send-email-ynezz@true.cz>
+X-Mailer: git-send-email 1.6.0.4
+MIME-Version: 1.0
+References: <20100208173821.GA24852@ibawizard.net>
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@true.cz
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] gmp: use GNU_MIRROR
+Subject: [PATCH] mc 4.6.2: fix do_configure error on missing config.rpath
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,28 +31,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Feb 2010 19:09:02 -0000
+X-List-Received-Date: Mon, 08 Feb 2010 19:52:45 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+This patch fixes configure error, complaining about missing config.rpath =
+file
+which gets deleted by autofoo in recipe, so to avoid error bellow we crea=
+te
+empty file, making configure happy.
+
+configure.ac:104: required file `config/config.rpath' not found
+[...snip...]
+autoreconf: automake failed with exit status: 1
+FATAL: autoreconf execution failed.
+
+Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
 ---
- recipes/gmp/gmp.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes/mc/mc_4.6.2.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/gmp/gmp.inc b/recipes/gmp/gmp.inc
-index 71ea128..3771e80 100644
---- a/recipes/gmp/gmp.inc
-+++ b/recipes/gmp/gmp.inc
-@@ -3,7 +3,7 @@ DESCRIPTION = "GNU multiprecision arithmetic library"
- HOMEPAGE = "http://www.swox.com/gmp/"
- LICENSE = "GPL LGPL"
- 
--SRC_URI = "ftp://ftp.gnu.org/gnu/gmp/gmp-${PV}.tar.bz2 \
-+SRC_URI = "${GNU_MIRROR}/gmp/gmp-${PV}.tar.bz2 \
- 	   file://configure.patch;patch=1 \
- 	   file://amd64.patch;patch=1"
- 
--- 
-1.6.5
+diff --git a/recipes/mc/mc_4.6.2.bb b/recipes/mc/mc_4.6.2.bb
+index 387187d..3eb6bf3 100644
+--- a/recipes/mc/mc_4.6.2.bb
++++ b/recipes/mc/mc_4.6.2.bb
+@@ -1,5 +1,5 @@
+ require mc.inc
+-PR =3D "r4"
++PR =3D "r5"
+ HOMEPAGE =3D "http://www.midnight-commander.org/"
+=20
+ # most of these fixes were copied from openSUSE Factory.
+@@ -86,4 +86,6 @@ AUTOFOO=3D"config.guess config.rpath config.sub depcomp=
+ install-sh missing mkinsta
+          for i in ${AUTOFOO}; do
+            rm config/${i}
+          done
++         # raises error if it's not found
++         touch config/config.rpath
+ }
+--=20
+1.6.0.4
 
 
 
