@@ -1,26 +1,38 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from ey-out-1920.google.com ([74.125.78.147])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1NeXbT-0007J8-9f
+	(envelope-from <dp@xora.org.uk>) id 1NeXd4-0001dp-Su
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Feb 2010 18:40:58 +0100
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id 7F2821D360E2; Mon,  8 Feb 2010 18:38:21 +0100 (CET)
-Date: Mon, 8 Feb 2010 18:38:21 +0100
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+	Mon, 08 Feb 2010 18:42:37 +0100
+Received: by ey-out-1920.google.com with SMTP id 13so1169471eye.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 08 Feb 2010 09:40:05 -0800 (PST)
+Received: by 10.213.97.28 with SMTP id j28mr4123932ebn.82.1265650804813;
+	Mon, 08 Feb 2010 09:40:04 -0800 (PST)
+Received: from xora-build.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by mx.google.com with ESMTPS id 5sm12135530eyh.24.2010.02.08.09.40.01
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 08 Feb 2010 09:40:02 -0800 (PST)
+Received: by xora-build.xora.org.uk (Postfix, from userid 500)
+	id 8B0D84013A; Mon,  8 Feb 2010 17:40:00 +0000 (GMT)
+Date: Mon, 8 Feb 2010 17:40:00 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100208173821.GA24852@ibawizard.net>
-References: <4B701EA0.5090304@dresearch.de>
-	<20100208154050.GZ24852@ibawizard.net>
-	<4B7039F6.60108@dresearch.de>
+Message-ID: <20100208173959.GI26844@xora-build.xora.org.uk>
+References: <hkm5j4$fib$2@ger.gmane.org>
+	<ac9c93b11002070821x6d5ac559sd8bb519b902b0af0@mail.gmail.com>
+	<hkmqif$i2t$1@ger.gmane.org>
+	<ac9c93b11002080525l4399ea54h23d387c8ce2f9024@mail.gmail.com>
+	<hkp46v$tv8$1@ger.gmane.org>
+	<18e217241002080927h1a4009acodd66ec735a64d31a@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <4B7039F6.60108@dresearch.de>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+In-Reply-To: <18e217241002080927h1a4009acodd66ec735a64d31a@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-08-17)
+X-SA-Exim-Connect-IP: 74.125.78.147
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: configure failes for mc-4.6.2-r4
+Subject: Re: TSC meeting minutes 20100204
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,38 +46,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Feb 2010 17:40:58 -0000
-Content-Type: text/plain; charset=iso-8859-2
+X-List-Received-Date: Mon, 08 Feb 2010 17:42:38 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-Steffen Sledz <sledz@dresearch.de> [2010-02-08 17:21:10]:
+On Mon, Feb 08, 2010 at 09:27:34AM -0800, C Michael Sundius wrote:
+> I, too, am still a little unclear  regarding how the new style staging
+> works. Are you saying that we are able now to simply remove the do_stage()
+> function and bitbake will somehow just know which files are intended to be
+> staged from the install.. what if a [say header] file that was not
+> previously "installed" is required by a dependent recipe?
+> 
+Your do_install should already be doing everything to make sure all needed
+headers are installed. Otherwise builds on your target device wont work.
 
-> Petr =A9tetiar wrote:
-> > Steffen Sledz <sledz@dresearch.de> [2010-02-08 15:24:32]:
-> >=20
-> >> Is anybody familar with autotools able to fix this?
-> >> | configure.ac:104: required file `config/config.rpath' not found
-> >=20
-> > You mean something like 'touch config.rpath' ? :)
->=20
-> Maybe. But when and where?  ;-)
->=20
-> I've no idea how to patch the recipe to let it run succesfully.
+This change means that package-dev packages and staging should effetively
+be identical to build against. If there is a missing header library or
+anything else then improve the do_install()
 
-Something like that?
+Graeme
 
-diff --git a/recipes/mc/mc_4.6.2.bb b/recipes/mc/mc_4.6.2.bb
-index 387187d..0ceda89 100644
---- a/recipes/mc/mc_4.6.2.bb
-+++ b/recipes/mc/mc_4.6.2.bb
-@@ -86,4 +86,6 @@ AUTOFOO=3D"config.guess config.rpath config.sub depcomp
-install-sh missing mkinsta
-          for i in ${AUTOFOO}; do
-            rm config/${i}
-          done
-+         # raises error if it's not found
-+         touch config/config.rpath
- }
 
 
