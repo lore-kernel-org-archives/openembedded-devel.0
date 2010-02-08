@@ -1,27 +1,35 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NeSGV-0005nC-5L
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NeSur-0000IO-Nh
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Feb 2010 12:58:58 +0100
-Received: from tamarin.localnet (dsl-62-220-14-162.berlikomm.net
-	[62.220.14.162])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 3D27D1B10C79
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Feb 2010 11:56:33 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 8 Feb 2010 12:56:20 +0100
-User-Agent: KMail/1.12.2 (Linux/2.6.31; KDE/4.3.2; i686; ; )
-References: <000001caa883$7bdd6710$73983530$@in> <hkohno$vbt$1@ger.gmane.org>
-	<000b01caa8b3$54add050$fe0970f0$@in>
-In-Reply-To: <000b01caa8b3$54add050$fe0970f0$@in>
-MIME-Version: 1.0
-Message-Id: <201002081256.20834.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+	Mon, 08 Feb 2010 13:40:40 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o18Cc4bk021584;
+	Mon, 8 Feb 2010 12:38:04 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 21427-04; Mon,  8 Feb 2010 12:38:00 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o18Cbttb021578
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Mon, 8 Feb 2010 12:37:56 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: C Michael Sundius <msundius@sundius.com>
+In-Reply-To: <18e217241002051031l4aac7560vb78618cf63d027be@mail.gmail.com>
+References: <18e217241002031259o46bb47f1md0f00da47d055b62@mail.gmail.com>
+	<18e217241002051031l4aac7560vb78618cf63d027be@mail.gmail.com>
+Date: Mon, 08 Feb 2010 12:37:54 +0000
+Message-ID: <1265632674.24683.4.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Facing problem while building Angstrom Image with help of openembedded
+Cc: bitbake-dev@lists.berlios.de, openembedded-devel@lists.openembedded.org
+Subject: Re: [Bitbake-dev] [RFC] BB_STAMP_BLACKLIST
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,28 +43,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Feb 2010 11:58:58 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 08 Feb 2010 12:40:41 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Monday 08 February 2010 12:39:10 Tejas wrote:
-> Hi All,
-> 	I have resolved problems of host name and temporary failure names by
-> modifying following file.
-> /etc/wgetrc and added http_proxy and ftp_proxy to my proxy setting.
+On Fri, 2010-02-05 at 10:31 -0800, C Michael Sundius wrote:
+> I sent this to the bitbake-dev list but thought that the discussion
+> would be useful to others in the wider OE world... 
 > 
-> 	After that bitbaking has been started but stuck up on checksum of 2
-> packages. Log is as followed.
-> 
-> 	Try to help me out to resolve it.
+> Also I'm realizing that maybe I should have called it a Request For
+> Comment :]
 
-Hi Tejas,
+I like the idea and I think you're not the only person who'll find it
+useful. I'll probably merge the patch, I just need to find a few minutes
+to check the code out properly :)
 
-is it possible to talk to your supervisor? I feel sorry for who ever is paying 
-you.
+Cheers,
 
-z.
+Richard
 
 
 
