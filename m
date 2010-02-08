@@ -1,23 +1,31 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from smtp-out01.alice.it ([85.33.2.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@true.cz>) id 1NeZf0-0008CP-IK
-	for openembedded-devel@openembedded.org; Mon, 08 Feb 2010 20:52:45 +0100
-Received: from localhost.localdomain (localhost [127.0.0.1])
-	by mengele.ibawizard.net (Postfix) with ESMTP id E9F461D36079;
-	Mon,  8 Feb 2010 20:50:07 +0100 (CET)
-From: =?utf-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
+	(envelope-from <GNUtoo@no-log.org>) id 1NeacD-0005lZ-Im
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 08 Feb 2010 21:53:56 +0100
+Received: from FBCMMO05.fbc.local ([192.168.184.136]) by smtp-out01.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 8 Feb 2010 21:51:19 +0100
+Received: from FBCMCL01B05.fbc.local ([192.168.69.86]) by FBCMMO05.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 8 Feb 2010 21:50:50 +0100
+Received: from [192.168.1.116] ([79.54.158.78]) by FBCMCL01B05.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Mon, 8 Feb 2010 21:50:48 +0100
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Feb 2010 20:50:12 +0100
-Message-Id: <1265658612-19262-1-git-send-email-ynezz@true.cz>
-X-Mailer: git-send-email 1.6.0.4
-MIME-Version: 1.0
-References: <20100208173821.GA24852@ibawizard.net>
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@true.cz
+In-Reply-To: <4B701EA0.5090304@dresearch.de>
+References: <4B701EA0.5090304@dresearch.de>
+Date: Mon, 08 Feb 2010 21:50:42 +0100
+Message-Id: <1265662242.3736.26.camel@gnutoo-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-OriginalArrivalTime: 08 Feb 2010 20:50:48.0744 (UTC)
+	FILETIME=[64AA0A80:01CAA900]
+X-SA-Exim-Connect-IP: 85.33.2.12
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] mc 4.6.2: fix do_configure error on missing config.rpath
+Subject: Re: configure failes for mc-4.6.2-r4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,47 +39,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Feb 2010 19:52:45 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 08 Feb 2010 20:53:56 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-This patch fixes configure error, complaining about missing config.rpath =
-file
-which gets deleted by autofoo in recipe, so to avoid error bellow we crea=
-te
-empty file, making configure happy.
+On Mon, 2010-02-08 at 15:24 +0100, Steffen Sledz wrote:
+> Is anybody familar with autotools able to fix this?
+> 
+> ERROR: function do_configure failed
+> ERROR: log data follows (/home/DRESEARCH/sledz/work/HydraIP/OE/tmp.5/work/armv5te-angstrom-linux-gnueabi/mc-4.6.2-r4/temp/log.do_configure.3914)
+> | automake (GNU automake) 1.10.2
+> | Copyright (C) 2008 Free Software Foundation, Inc.
+> | License GPLv2+: GNU GPL version 2 or later <http://gnu.org/licenses/gpl.html>
+> | This is free software: you are free to change and redistribute it.
+> | There is NO WARRANTY, to the extent permitted by law.
+> |
+> | Written by Tom Tromey <tromey@redhat.com>
+> |        and Alexandre Duret-Lutz <adl@gnu.org>.
+> | AUTOV is 1.10
+> | NOTE: Executing autoreconf --verbose --install --force --exclude=autopoint -I /home/DRESEARCH/sledz/work/HydraIP/OE/tmp.5/work/armv5te-angstrom-linux-gnueabi/mc-4.6.2-r4/mc-4.6.2/m4/ -I/home/DRESEARCH/sledz/work/HydraIP/OE/tmp.5/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal-1.10 -I /home/DRESEARCH/sledz/work/HydraIP/OE/tmp.5/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal
+> | autoreconf: Entering directory `.'
+> | autoreconf: running: aclocal -I /home/DRESEARCH/sledz/work/HydraIP/OE/tmp.5/work/armv5te-angstrom-linux-gnueabi/mc-4.6.2-r4/mc-4.6.2/m4/ -I /home/DRESEARCH/sledz/work/HydraIP/OE/tmp.5/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal-1.10 -I /home/DRESEARCH/sledz/work/HydraIP/OE/tmp.5/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal --force -I m4
+> | autoreconf: configure.ac: tracing
+> | autoreconf: configure.ac: adding subdirectory vfs/samba to autoreconf
+> | autoreconf: Entering directory `vfs/samba'
+> | autoreconf: configure.ac: not using Gettext
+> | autoreconf: configure.ac: not using aclocal
+> | autoreconf: configure.ac: not using Libtool
+> | autoreconf: running: /home/DRESEARCH/sledz/work/HydraIP/OE/tmp.5/staging/i686-linux/usr/bin/autoconf --include=/home/DRESEARCH/sledz/work/HydraIP/OE/tmp.5/work/armv5te-angstrom-linux-gnueabi/mc-4.6.2-r4/mc-4.6.2/m4/ --include=/home/DRESEARCH/sledz/work/HydraIP/OE/tmp.5/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal-1.10 --include=/home/DRESEARCH/sledz/work/HydraIP/OE/tmp.5/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal --force --warnings=cross
+> | autoreconf: running: /home/DRESEARCH/sledz/work/HydraIP/OE/tmp.5/staging/i686-linux/usr/bin/autoheader --include=/home/DRESEARCH/sledz/work/HydraIP/OE/tmp.5/work/armv5te-angstrom-linux-gnueabi/mc-4.6.2-r4/mc-4.6.2/m4/ --include=/home/DRESEARCH/sledz/work/HydraIP/OE/tmp.5/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal-1.10 --include=/home/DRESEARCH/sledz/work/HydraIP/OE/tmp.5/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal --force --warnings=cross
+> | autoreconf: configure.ac: not using Automake
+> | autoreconf: running: gnu-configize
+> | autoreconf: Leaving directory `vfs/samba'
+> | autoreconf: running: automake --foreign --add-missing --copy --force-missing --warnings=cross
+> | automake: unknown warning category `cross'
+> | configure.ac:104: required file `config/config.rpath' not found
+> | configure.ac:10: installing `config/install-sh'
+> | configure.ac:10: installing `config/missing'
+> | configure.ac:104: installing `config/mkinstalldirs'
+> | edit/Makefile.am: installing `config/depcomp'
+> | autoreconf: automake failed with exit status: 1
+> | FATAL: autoreconf execution failed.
+I think you have to look in configure.ac at line 104
+It will give you the part that is making this problem.
+I had a similar problem with an enlightenment thing(not yet commited...I
+just came back from fosdem)
+I had to gettextize before configuring to make it work.
 
-configure.ac:104: required file `config/config.rpath' not found
-[...snip...]
-autoreconf: automake failed with exit status: 1
-FATAL: autoreconf execution failed.
+Denis
 
-Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
----
- recipes/mc/mc_4.6.2.bb |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
-
-diff --git a/recipes/mc/mc_4.6.2.bb b/recipes/mc/mc_4.6.2.bb
-index 387187d..3eb6bf3 100644
---- a/recipes/mc/mc_4.6.2.bb
-+++ b/recipes/mc/mc_4.6.2.bb
-@@ -1,5 +1,5 @@
- require mc.inc
--PR =3D "r4"
-+PR =3D "r5"
- HOMEPAGE =3D "http://www.midnight-commander.org/"
-=20
- # most of these fixes were copied from openSUSE Factory.
-@@ -86,4 +86,6 @@ AUTOFOO=3D"config.guess config.rpath config.sub depcomp=
- install-sh missing mkinsta
-          for i in ${AUTOFOO}; do
-            rm config/${i}
-          done
-+         # raises error if it's not found
-+         touch config/config.rpath
- }
---=20
-1.6.0.4
 
 
 
