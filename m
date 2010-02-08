@@ -1,32 +1,35 @@
-Received: from qw-out-1920.google.com ([74.125.92.147])
+Received: from mail-yx0-f180.google.com ([209.85.210.180])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msundius@sundius.com>) id 1NeXkA-0007ea-9w
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NeYKO-00065x-1k
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Feb 2010 18:49:57 +0100
-Received: by qw-out-1920.google.com with SMTP id 5so527116qwf.36
+	Mon, 08 Feb 2010 19:27:23 +0100
+Received: by yxe10 with SMTP id 10so5544976yxe.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Feb 2010 09:47:22 -0800 (PST)
+	Mon, 08 Feb 2010 10:24:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=qdfqSZ2ly180SERLigpaRvkOAWme890tpt856LDL9dw=;
+	b=pKyJX9YD1GQpZT3tpqFAq8TR3/wQqvgVqucG3OfyVi1jZLFedS2KWNcjip0kVgmIYb
+	t+CFUPBBT/n9ubR6leh+hBo9Q4h7KYvtI6ahHtWGwXVeuJ/iP8jSGU9t5QM2E8sayK9k
+	FL8B6sJD/G13CgwyKfL73wpFfSNOBCZl5GHUU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=fGfEt7GZe5cq+Ak4qlx53Vr+wDJDeS4fC3Jik1jCshKgWDZxvTTEMn7+3pqTcF7WAg
+	xFmh7B4dZPnQwK/q5urQvePtl9f0SNKSqPiOsGH9+V/T2ozjZcc+oYpEIhC/rWQarK+8
+	gTwUYeh7igc5C7U0I5CkGzjBTi0w3PTbElzYY=
 MIME-Version: 1.0
-Received: by 10.142.118.6 with SMTP id q6mr514812wfc.27.1265651241536; Mon, 08 
-	Feb 2010 09:47:21 -0800 (PST)
-In-Reply-To: <20100208173959.GI26844@xora-build.xora.org.uk>
-References: <hkm5j4$fib$2@ger.gmane.org>
-	<ac9c93b11002070821x6d5ac559sd8bb519b902b0af0@mail.gmail.com>
-	<hkmqif$i2t$1@ger.gmane.org>
-	<ac9c93b11002080525l4399ea54h23d387c8ce2f9024@mail.gmail.com>
-	<hkp46v$tv8$1@ger.gmane.org>
-	<18e217241002080927h1a4009acodd66ec735a64d31a@mail.gmail.com>
-	<20100208173959.GI26844@xora-build.xora.org.uk>
-Date: Mon, 8 Feb 2010 09:47:21 -0800
-Message-ID: <18e217241002080947t10149749q5a40117c2f051470@mail.gmail.com>
-From: C Michael Sundius <msundius@sundius.com>
+Received: by 10.101.159.31 with SMTP id l31mr8827568ano.80.1265653485611; Mon, 
+	08 Feb 2010 10:24:45 -0800 (PST)
+Date: Mon, 8 Feb 2010 19:24:45 +0100
+Message-ID: <ac9c93b11002081024v1276e622r47cd54f966f28efc@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.92.147
-X-SA-Exim-Mail-From: msundius@sundius.com
+X-SA-Exim-Connect-IP: 209.85.210.180
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: TSC meeting minutes 20100204
+Subject: fosdem pics
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,30 +43,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Feb 2010 17:49:58 -0000
+X-List-Received-Date: Mon, 08 Feb 2010 18:27:23 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, Feb 8, 2010 at 9:40 AM, Graeme Gregory <dp@xora.org.uk> wrote:
+Hi all,
 
-> On Mon, Feb 08, 2010 at 09:27:34AM -0800, C Michael Sundius wrote:
-> > I, too, am still a little unclear  regarding how the new style staging
-> > works. Are you saying that we are able now to simply remove the
-> do_stage()
-> > function and bitbake will somehow just know which files are intended to
-> be
-> > staged from the install.. what if a [say header] file that was not
-> > previously "installed" is required by a dependent recipe?
-> >
-> Your do_install should already be doing everything to make sure all needed
-> headers are installed. Otherwise builds on your target device wont work.
->
-> This change means that package-dev packages and staging should effetively
-> be identical to build against. If there is a missing header library or
-> anything else then improve the do_install()
->
-> Graeme
->
-> OK, yea, that makes sense.. thank you.
+Made a few pics @ fosdem. They can be found at
+http://picasaweb.google.com/fransmeulenbroeks/Fosdem2010?authkey=Gv1sRgCPfSh7qcjv2siQE#
+(and Tanenbaum is a little bit dark, my flash is not too powerful).
 
-mike
+Frans
+
 
