@@ -1,41 +1,36 @@
-Received: from mail-iw0-f183.google.com ([209.85.223.183])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NeJSz-0000Jm-2T
+Received: from smtp105.biz.mail.in2.yahoo.com ([203.104.19.14])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <tejas@picus.in>) id 1NeMiV-0005dU-K4
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Feb 2010 03:35:16 +0100
-Received: by iwn13 with SMTP id 13so4532497iwn.25
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Feb 2010 18:32:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=bUcqTsPreRAnWyfRfUORmU+N44fyUeyBm4CR+ILzTfE=;
-	b=D3ZCV998ECo9obeKBBrlA7K8csOuLhQ4zyA2eNDntNnxY8yxABAZsOzbwucRYbMt5B
-	vVH8a4CyVFUGVijhfVZesNTeMytqQbbOfdti+9qzCabL7pwg3YLx6dc0K7yd3ZJPnJ68
-	PXZtsXVRoft16APu04YKg4kbzdOLbS/bI7MTo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Go1AEra2YtegJ2TNRzDmCv/kxMUlyvF360uPHz0TIijmJvdGd7kpd2qNQJCbGKBsvm
-	6dAUDE8Vm24VHklkyHlqmU25wU7yYlc8SS5PGvo1Z4J3T7LELn5keO/u5N9Y1EvoZSJa
-	aT89lhrUaTHEBPJYn6ulIVLkK3MQr80KZ026k=
+	Mon, 08 Feb 2010 07:03:31 +0100
+Received: (qmail 20647 invoked from network); 8 Feb 2010 05:54:15 -0000
+Received: from 106.74.116.100.hathway.com (tejas@116.74.106.100 with login)
+	by smtp105.biz.mail.in2.yahoo.com with SMTP;
+	08 Feb 2010 11:24:15 +0530 IST
+X-Yahoo-SMTP: vL6ZkSyswBA8eZdwmFTvr8l2__OJ14.9dJSX
+X-YMail-OSG: 5iREXjsVM1k8k2o.06benyzsY9btWbd4W7r58aCFO5_HBKIkKKgIsW7qRBuBGjGCQ9UqCN8lLgGIZmXUNLXk5vU6kpNR5s3v8MT9incbDn2lsUDdicfFS7R.hoQuH62uGHOcEMDx15sbcdAWseLk.cAGC7QdHIujs4RYZcwcXkD94PNWiBqr1usmjYxvPdQbzijtJJp4WLZbKSoUgh0aSkiQjiSca8LO.BoHsBshw5ifkC1ecJqqGASa7xIhDFw-
+X-Yahoo-Newman-Property: ymail-3
+From: "Tejas" <tejas@picus.in>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 8 Feb 2010 11:26:40 +0530
+Message-ID: <000001caa883$7bdd6710$73983530$@in>
 MIME-Version: 1.0
-Received: by 10.231.150.142 with SMTP id y14mr2926893ibv.32.1265596360797; 
-	Sun, 07 Feb 2010 18:32:40 -0800 (PST)
-In-Reply-To: <4B6F3274.2010508@theforce.com.au>
-References: <4B6B4EBC.1030906@theforce.com.au>
-	<1265356132.3907.12.camel@mattotaupa>
-	<4B6F3274.2010508@theforce.com.au>
-Date: Sun, 7 Feb 2010 18:32:40 -0800
-Message-ID: <19c1b8a91002071832u5d5c3efcxf5bc2a572cfb1e1a@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.183
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: Acqog3rQohcXJzjgT8abr90LM8tO3w==
+x-cr-hashedpuzzle: pss= AIox ALrS CkPv CwtR DcXr EyC5 FUbL FipQ FmBT GF5T GnYg
+	HMzG H3vr ICEm IMp2; 1;
+	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnAA==;
+	Sosha1_v1; 7; {18659444-050D-4D50-9F77-64FDB19FC5AE};
+	dABlAGoAYQBzAEAAcABpAGMAdQBzAC4AaQBuAA==;
+	Mon, 08 Feb 2010 05:56:38 GMT;
+	RgBhAGMAaQBuAGcAIABwAHIAbwBiAGwAZQBtACAAdwBoAGkAbABlACAAYgB1AGkAbABkAGkAbgBnACAAQQBuAGcAcwB0AHIAbwBtACAASQBtAGEAZwBlACAAdwBpAHQAaAAgAGgAZQBsAHAAIABvAGYAIABvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAA=
+x-cr-puzzleid: {18659444-050D-4D50-9F77-64FDB19FC5AE}
+X-SA-Exim-Connect-IP: 203.104.19.14
+X-SA-Exim-Mail-From: tejas@picus.in
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: mtr
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Facing problem while building Angstrom Image with help of openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,47 +44,357 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Feb 2010 02:35:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 08 Feb 2010 06:03:31 -0000
+Content-Language: en-us
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-On Sun, Feb 7, 2010 at 1:36 PM, Grahame Jordan <gbj@theforce.com.au> wrote:
-> =A0 Hi Paul,
->
-> Cannot bitbake mtr. It is set to PV=3D0.65.
->
->
-> can you please post the error message and the log files?
->
->
->
-> =A0 | checking for floor in -lm... yes
-> =A0 | checking for socket... yes
-> =A0 | checking for gethostbyname... yes
-> =A0 | checking for seteuid... yes
-> =A0 | checking for res_mkquery... no
-> =A0 | checking for res_mkquery in -lbind... no
-> =A0 | checking for res_mkquery in -lresolv... no
-> =A0 | configure: error: No resolver library found
+Hi All,
 
-are you using uclibc ? if yes then you can get along this error by adding
-UCLIBC_HAS_LIBRESOLV_STUB=3Dy to uClibc.distro file. If its glibc/eglibc th=
-en
-there should be some issue with the configure test of mtr.
+               I am following followed link to build angstrom image for
+beagle board.
 
-Thx
+ 
 
--Khem
+http://www.angstrom-distribution.org/building-angstrom
 
+ 
 
-> =A0 org.openembedded.dev/conf/distro/include/preferred-om-2008-versions.i=
-nc
-> =A0 Thanks
-> =A0 Grahame
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+               But at some how I am not getting success. I have attached my
+log file herewith. Please help me to resolve it.
+
+ 
+
+[neelam@Fedora openembedded]$ MACHINE=beagleboard  bitbake base-image
+
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it to
+increase performance.
+
+NOTE: Handling BitBake files: \ (6701/6701) [100 %]
+
+NOTE: Parsing finished. 6414 cached, 0 parsed, 287 skipped, 0 masked.
+
+NOTE: Cache is clean, not saving.
+
+NOTE: Resolving any missing task queue dependencies
+
+NOTE: preferred version git of u-boot not available (for item u-boot)
+
+NOTE: preferred version git of u-boot not available (for item u-boot)
+
+NOTE: Preparing runqueue
+
+NOTE: Executing runqueue
+
+NOTE: Running task 38 of 2946 (ID: 166,
+/home/neelam/tejas_work/oe/openembedded/recipes/coreutils/coreutils-native_7
+.2.bb, do_fetch)
+
+NOTE: Running task 40 of 2946 (ID: 39,
+/home/neelam/tejas_work/oe/openembedded/recipes/quilt/quilt-native_0.46.bb,
+do_fetch)
+
+NOTE: Running task 42 of 2946 (ID: 1107,
+/home/neelam/tejas_work/oe/openembedded/recipes/gnu-config/gnu-config-native
+_20050701.bb, do_fetch)
+
+NOTE: Running task 44 of 2946 (ID: 1794,
+/home/neelam/tejas_work/oe/openembedded/recipes/m4/m4-native_1.4.12.bb,
+do_fetch)
+
+NOTE: fetch ftp://ftp.gnu.org/gnu/coreutils/coreutils-7.2.tar.gz
+
+NOTE: fetch
+http://download.savannah.gnu.org/releases/quilt/quilt-0.46.tar.gz
+
+--2010-02-08 11:21:49--
+ftp://ftp.gnu.org/gnu/coreutils/coreutils-7.2.tar.gz
+
+           => `/home/neelam/tejas_work/oe/downloads/coreutils-7.2.tar.gz'
+
+Resolving ftp.gnu.org... --2010-02-08 11:21:49--
+http://download.savannah.gnu.org/releases/quilt/quilt-0.46.tar.gz
+
+Resolving download.savannah.gnu.org... NOTE: fetch
+http://www.angstrom-distribution.org/unstable/sources/config_cvs.sv.gnu.org_
+_20050701.tar.gz
+
+--2010-02-08 11:21:49--
+http://www.angstrom-distribution.org/unstable/sources/config_cvs.sv.gnu.org_
+_20050701.tar.gz
+
+Resolving www.angstrom-distribution.org... NOTE: fetch
+ftp://ftp.gnu.org/gnu/m4/m4-1.4.12.tar.gz
+
+--2010-02-08 11:21:49--  ftp://ftp.gnu.org/gnu/m4/m4-1.4.12.tar.gz
+
+           => `/home/neelam/tejas_work/oe/downloads/m4-1.4.12.tar.gz'
+
+Resolving ftp.gnu.org... failed: Temporary failure in name resolution.
+
+wget: unable to resolve host address `ftp.gnu.org'
+
+NOTE: fetch ftp://mirrors.kernel.org/gnu/coreutils/coreutils-7.2.tar.gz
+
+failed: Temporary failure in name resolution.
+
+wget: unable to resolve host address `download.savannah.gnu.org'
+
+NOTE: fetch
+http://www.angstrom-distribution.org/unstable/sources/quilt-0.46.tar.gz
+
+failed: Temporary failure in name resolution.
+
+wget: unable to resolve host address `www.angstrom-distribution.org'
+
+--2010-02-08 11:22:09--
+ftp://mirrors.kernel.org/gnu/coreutils/coreutils-7.2.tar.gz
+
+           => `/home/neelam/tejas_work/oe/downloads/coreutils-7.2.tar.gz'
+
+Resolving mirrors.kernel.org... NOTE: Fetch
+cvs://anonymous@cvs.sv.gnu.org/cvsroot/config;module=config;method=pserver;d
+ate=20050701
+
+--2010-02-08 11:22:09--
+http://www.angstrom-distribution.org/unstable/sources/quilt-0.46.tar.gz
+
+Resolving www.angstrom-distribution.org... failed: Temporary failure in name
+resolution.
+
+wget: unable to resolve host address `ftp.gnu.org'
+
+NOTE: fetch ftp://mirrors.kernel.org/gnu/m4/m4-1.4.12.tar.gz
+
+--2010-02-08 11:22:09--  ftp://mirrors.kernel.org/gnu/m4/m4-1.4.12.tar.gz
+
+           => `/home/neelam/tejas_work/oe/downloads/m4-1.4.12.tar.gz'
+
+Resolving mirrors.kernel.org... failed: Temporary failure in name
+resolution.
+
+wget: unable to resolve host address `mirrors.kernel.org'
+
+failed: Temporary failure in name resolution.
+
+wget: unable to resolve host address `www.angstrom-distribution.org'
+
+NOTE: fetch ftp://ftp.matrix.com.br/pub/gnu/coreutils/coreutils-7.2.tar.gz
+
+NOTE: Task failed: Fetch failed:
+http://download.savannah.gnu.org/releases/quilt/quilt-0.46.tar.gz
+
+ERROR: TaskFailed event exception, aborting
+
+ERROR: Build of
+/home/neelam/tejas_work/oe/openembedded/recipes/quilt/quilt-native_0.46.bb
+do_fetch failed
+
+--2010-02-08 11:22:29--
+ftp://ftp.matrix.com.br/pub/gnu/coreutils/coreutils-7.2.tar.gz
+
+           => `/home/neelam/tejas_work/oe/downloads/coreutils-7.2.tar.gz'
+
+Resolving ftp.matrix.com.br... Unknown host cvs.sv.gnu.org.
+
+NOTE: Task failed: Fetch failed: config
+
+ERROR: TaskFailed event exception, aborting
+
+ERROR: Build of
+/home/neelam/tejas_work/oe/openembedded/recipes/gnu-config/gnu-config-native
+_20050701.bb do_fetch failed
+
+failed: Temporary failure in name resolution.
+
+wget: unable to resolve host address `mirrors.kernel.org'
+
+NOTE: fetch ftp://ftp.matrix.com.br/pub/gnu/m4/m4-1.4.12.tar.gz
+
+--2010-02-08 11:22:29--  ftp://ftp.matrix.com.br/pub/gnu/m4/m4-1.4.12.tar.gz
+
+           => `/home/neelam/tejas_work/oe/downloads/m4-1.4.12.tar.gz'
+
+Resolving ftp.matrix.com.br... ERROR: Task 39
+(/home/neelam/tejas_work/oe/openembedded/recipes/quilt/quilt-native_0.46.bb,
+do_fetch) failed
+
+NOTE: Waiting for 3 active tasks to finish
+
+NOTE: 1:
+/home/neelam/tejas_work/oe/openembedded/recipes/gnu-config/gnu-config-native
+_20050701.bb, do_fetch (32456)
+
+NOTE: 2:
+/home/neelam/tejas_work/oe/openembedded/recipes/m4/m4-native_1.4.12.bb,
+do_fetch (32457)
+
+NOTE: 3:
+/home/neelam/tejas_work/oe/openembedded/recipes/coreutils/coreutils-native_7
+.2.bb, do_fetch (32454)
+
+ERROR: Task 1107
+(/home/neelam/tejas_work/oe/openembedded/recipes/gnu-config/gnu-config-nativ
+e_20050701.bb, do_fetch) failed
+
+NOTE: Waiting for 2 active tasks to finish
+
+NOTE: 1:
+/home/neelam/tejas_work/oe/openembedded/recipes/m4/m4-native_1.4.12.bb,
+do_fetch (32457)
+
+NOTE: 2:
+/home/neelam/tejas_work/oe/openembedded/recipes/coreutils/coreutils-native_7
+.2.bb, do_fetch (32454)
+
+failed: Temporary failure in name resolution.
+
+wget: unable to resolve host address `ftp.matrix.com.br'
+
+NOTE: fetch ftp://ftp.cs.ubc.ca/mirror2/gnu/coreutils/coreutils-7.2.tar.gz
+
+--2010-02-08 11:22:49--
+ftp://ftp.cs.ubc.ca/mirror2/gnu/coreutils/coreutils-7.2.tar.gz
+
+           => `/home/neelam/tejas_work/oe/downloads/coreutils-7.2.tar.gz'
+
+Resolving ftp.cs.ubc.ca... failed: Temporary failure in name resolution.
+
+wget: unable to resolve host address `ftp.matrix.com.br'
+
+NOTE: fetch ftp://ftp.cs.ubc.ca/mirror2/gnu/m4/m4-1.4.12.tar.gz
+
+--2010-02-08 11:22:49--  ftp://ftp.cs.ubc.ca/mirror2/gnu/m4/m4-1.4.12.tar.gz
+
+           => `/home/neelam/tejas_work/oe/downloads/m4-1.4.12.tar.gz'
+
+Resolving ftp.cs.ubc.ca... failed: Temporary failure in name resolution.
+
+wget: unable to resolve host address `ftp.cs.ubc.ca'
+
+NOTE: fetch ftp://sunsite.ust.hk/pub/gnu/coreutils/coreutils-7.2.tar.gz
+
+--2010-02-08 11:23:09--
+ftp://sunsite.ust.hk/pub/gnu/coreutils/coreutils-7.2.tar.gz
+
+           => `/home/neelam/tejas_work/oe/downloads/coreutils-7.2.tar.gz'
+
+Resolving sunsite.ust.hk... failed: Temporary failure in name resolution.
+
+wget: unable to resolve host address `ftp.cs.ubc.ca'
+
+NOTE: fetch ftp://sunsite.ust.hk/pub/gnu/m4/m4-1.4.12.tar.gz
+
+--2010-02-08 11:23:09--  ftp://sunsite.ust.hk/pub/gnu/m4/m4-1.4.12.tar.gz
+
+           => `/home/neelam/tejas_work/oe/downloads/m4-1.4.12.tar.gz'
+
+Resolving sunsite.ust.hk... failed: Temporary failure in name resolution.
+
+wget: unable to resolve host address `sunsite.ust.hk'
+
+NOTE: fetch ftp://ftp.ayamura.org/pub/gnu/coreutils/coreutils-7.2.tar.gz
+
+--2010-02-08 11:23:29--
+ftp://ftp.ayamura.org/pub/gnu/coreutils/coreutils-7.2.tar.gz
+
+           => `/home/neelam/tejas_work/oe/downloads/coreutils-7.2.tar.gz'
+
+Resolving ftp.ayamura.org... failed: Temporary failure in name resolution.
+
+wget: unable to resolve host address `sunsite.ust.hk'
+
+NOTE: fetch ftp://ftp.ayamura.org/pub/gnu/m4/m4-1.4.12.tar.gz
+
+--2010-02-08 11:23:29--  ftp://ftp.ayamura.org/pub/gnu/m4/m4-1.4.12.tar.gz
+
+           => `/home/neelam/tejas_work/oe/downloads/m4-1.4.12.tar.gz'
+
+Resolving ftp.ayamura.org... failed: Temporary failure in name resolution.
+
+wget: unable to resolve host address `ftp.ayamura.org'
+
+NOTE: fetch
+http://www.angstrom-distribution.org/unstable/sources/coreutils-7.2.tar.gz
+
+--2010-02-08 11:23:49--
+http://www.angstrom-distribution.org/unstable/sources/coreutils-7.2.tar.gz
+
+Resolving www.angstrom-distribution.org... failed: Temporary failure in name
+resolution.
+
+wget: unable to resolve host address `ftp.ayamura.org'
+
+NOTE: fetch
+http://www.angstrom-distribution.org/unstable/sources/m4-1.4.12.tar.gz
+
+--2010-02-08 11:23:49--
+http://www.angstrom-distribution.org/unstable/sources/m4-1.4.12.tar.gz
+
+Resolving www.angstrom-distribution.org... failed: Temporary failure in name
+resolution.
+
+wget: unable to resolve host address `www.angstrom-distribution.org'
+
+NOTE: Task failed: Fetch failed:
+ftp://ftp.gnu.org/gnu/coreutils/coreutils-7.2.tar.gz
+
+ERROR: TaskFailed event exception, aborting
+
+ERROR: Build of
+/home/neelam/tejas_work/oe/openembedded/recipes/coreutils/coreutils-native_7
+.2.bb do_fetch failed
+
+failed: Temporary failure in name resolution.
+
+wget: unable to resolve host address `www.angstrom-distribution.org'
+
+NOTE: Task failed: Fetch failed: ftp://ftp.gnu.org/gnu/m4/m4-1.4.12.tar.gz
+
+ERROR: TaskFailed event exception, aborting
+
+ERROR: Build of
+/home/neelam/tejas_work/oe/openembedded/recipes/m4/m4-native_1.4.12.bb
+do_fetch failed
+
+ERROR: Task 166
+(/home/neelam/tejas_work/oe/openembedded/recipes/coreutils/coreutils-native_
+7.2.bb, do_fetch) failed
+
+NOTE: Waiting for 1 active tasks to finish
+
+NOTE: 1:
+/home/neelam/tejas_work/oe/openembedded/recipes/m4/m4-native_1.4.12.bb,
+do_fetch (32457)
+
+ERROR: Task 1794
+(/home/neelam/tejas_work/oe/openembedded/recipes/m4/m4-native_1.4.12.bb,
+do_fetch) failed
+
+NOTE: Tasks Summary: Attempted 40 tasks of which 40 didn't need to be rerun
+and 4 failed.
+
+ERROR:
+'/home/neelam/tejas_work/oe/openembedded/recipes/quilt/quilt-native_0.46.bb'
+failed
+
+ERROR:
+'/home/neelam/tejas_work/oe/openembedded/recipes/gnu-config/gnu-config-nativ
+e_20050701.bb' failed
+
+ERROR:
+'/home/neelam/tejas_work/oe/openembedded/recipes/coreutils/coreutils-native_
+7.2.bb' failed
+
+ERROR:
+'/home/neelam/tejas_work/oe/openembedded/recipes/m4/m4-native_1.4.12.bb'
+failed
+
+[neelam@Fedora openembedded]$
+
+ 
+
+-Tejas.
 
 
