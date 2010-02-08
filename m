@@ -1,35 +1,26 @@
-Received: from mail-yx0-f180.google.com ([209.85.210.180])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NeYKO-00065x-1k
+	(envelope-from <philip@balister.org>) id 1NeYWp-0001TQ-68
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Feb 2010 19:27:23 +0100
-Received: by yxe10 with SMTP id 10so5544976yxe.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Feb 2010 10:24:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=qdfqSZ2ly180SERLigpaRvkOAWme890tpt856LDL9dw=;
-	b=pKyJX9YD1GQpZT3tpqFAq8TR3/wQqvgVqucG3OfyVi1jZLFedS2KWNcjip0kVgmIYb
-	t+CFUPBBT/n9ubR6leh+hBo9Q4h7KYvtI6ahHtWGwXVeuJ/iP8jSGU9t5QM2E8sayK9k
-	FL8B6sJD/G13CgwyKfL73wpFfSNOBCZl5GHUU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=fGfEt7GZe5cq+Ak4qlx53Vr+wDJDeS4fC3Jik1jCshKgWDZxvTTEMn7+3pqTcF7WAg
-	xFmh7B4dZPnQwK/q5urQvePtl9f0SNKSqPiOsGH9+V/T2ozjZcc+oYpEIhC/rWQarK+8
-	gTwUYeh7igc5C7U0I5CkGzjBTi0w3PTbElzYY=
+	Mon, 08 Feb 2010 19:40:16 +0100
+Received: (qmail 11949 invoked by uid 1003); 8 Feb 2010 18:37:37 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 8 Feb 2010 18:37:37 -0000
+Message-ID: <4B7059EF.8020607@balister.org>
+Date: Mon, 08 Feb 2010 13:37:35 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.7) Gecko/20100120 Fedora/3.0.1-1.fc11 Thunderbird/3.0.1
 MIME-Version: 1.0
-Received: by 10.101.159.31 with SMTP id l31mr8827568ano.80.1265653485611; Mon, 
-	08 Feb 2010 10:24:45 -0800 (PST)
-Date: Mon, 8 Feb 2010 19:24:45 +0100
-Message-ID: <ac9c93b11002081024v1276e622r47cd54f966f28efc@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.180
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <C791CD9B.22735%jgrant@vml.com>
+	<18e217241002080848t193add2drd5603d0c252ee509@mail.gmail.com>
+In-Reply-To: <18e217241002080848t193add2drd5603d0c252ee509@mail.gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: fosdem pics
+Subject: Re: Working with OEMs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,15 +34,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Feb 2010 18:27:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 08 Feb 2010 18:40:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi all,
+On 02/08/2010 11:48 AM, C Michael Sundius wrote:
+> - I find it a bit dishartening that Holger does not recommend you to use OE
+> for software development. One of the main reasons we were in search for a
+> comprehensive build system was so that we could offer a consistent means of
+> buliding our entire distribution to all developers and Configurtion Mgmt,
+> Testing, Release teams alike with out everyone having to be an expert with
+> all parts of the system (and all different build tools that had cropped up
+> in the different locations we have engineers - india, US east coast, west
+> coast). It *is* difficult to make it work for devlopers and build teams
+> alike, but having a consistent means building software is a huge step
+> creating a really great build system. Further if people are discouraged from
+> using OE as a tool for developers, then it will never get any better and
+> this hole of support in OE will not be filled.
 
-Made a few pics @ fosdem. They can be found at
-http://picasaweb.google.com/fransmeulenbroeks/Fosdem2010?authkey=Gv1sRgCPfSh7qcjv2siQE#
-(and Tanenbaum is a little bit dark, my flash is not too powerful).
+Another way of looking at Holder's response is that we feel we could do 
+a better job of supporting people using OE to do software development. 
+There are certainly ways to use OE to do SW development.
 
-Frans
+I would really like to see us look at improving the experience for 
+people doing sw dev for OE based distributions.
+
+Philip
 
 
