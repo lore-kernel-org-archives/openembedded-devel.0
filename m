@@ -1,50 +1,33 @@
-Received: from mail-fx0-f225.google.com ([209.85.220.225])
+Received: from relay1.mail.masterhost.ru ([83.222.23.61])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NewQ2-0001Fl-RD
+	(envelope-from <roman@khimov.ru>) id 1Nex4b-0000iQ-39
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 21:10:49 +0100
-Received: by fxm25 with SMTP id 25so6274564fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Feb 2010 12:08:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=VxNUqxNLaP/ms6ZkhGiaCyDixywHFtAyrmNFPwKnJ5g=;
-	b=VEH9vSoneFZRZvxv9+OmRuDCI3Sfg2f+emp44eJ3D50C5JtpcMy5aIc8R1/hFYnK5n
-	qdt+nhINtrGx/C8jI95m3SMJtVw2Rql8pwSxxYmk1+GT6ePmhjTEEApplxpLT7kXx9f1
-	Pe02RnW8oeKe8+VJLkOu22XTzHrH+DYZLMtf8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=SUWe/5zI9VrJrOzAQK6PheX1a//fbzcVpgMIwPQrhwFYnDyx2wYwYDiVPoaVa9VuMC
-	mLgo99JuQEe+GnFfnYB6gIy/nuPeQ9Lb5J8CTIYxbyy5AVuHr3QtMawM6yxuXWiZYu5n
-	Bvyu2HIjNuy2CCjoE0t7fUeP9Y+dDW9YyU7w8=
-Received: by 10.86.6.23 with SMTP id 23mr1152367fgf.16.1265746093931;
-	Tue, 09 Feb 2010 12:08:13 -0800 (PST)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id 12sm7763339fgg.12.2010.02.09.12.08.11
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 09 Feb 2010 12:08:12 -0800 (PST)
-Date: Tue, 9 Feb 2010 12:08:04 -0800
-From: Khem Raj <raj.khem@gmail.com>
+	Tue, 09 Feb 2010 21:52:44 +0100
+Received: from [UNAVAILABLE] ([93.100.16.104] helo=mate.localnet)
+	by relay1.mail.masterhost.ru with esmtp 
+	envelope from <roman@khimov.ru> authenticated with rik@osrc.info
+	message id 1Nev9r-00069i-Sp
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Feb 2010 21:50:01 +0300
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100209200804.GA3142@gmail.com>
-References: <1265247822-20734-1-git-send-email-denis@denix.org>
-	<1265302671.25338.57.camel@conroy-linux>
-	<20100204172234.GA5641@denix.org>
-	<1265306225.26642.3.camel@trini-m4400>
-	<1265461459.5019.20.camel@lenovo.internal.reciva.com>
-	<1265655603.16517.13.camel@trini-m4400>
+From: Roman I Khimov <roman@khimov.ru>
+Date: Tue, 9 Feb 2010 21:48:48 +0300
 MIME-Version: 1.0
-In-Reply-To: <1265655603.16517.13.camel@trini-m4400>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.225
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Message-Id: <201002092148.55115.roman@khimov.ru>
+X-SpamTest-Envelope-From: roman@khimov.ru
+X-SpamTest-Group-ID: 00000000
+X-SpamTest-Info: Profiles 12102 [Feb 9 2010]
+X-SpamTest-Info: {DNSBL Rate: low}
+X-SpamTest-Method: none
+X-SpamTest-Rate: 20
+X-SpamTest-Status: Not detected
+X-SpamTest-Status-Extended: not_detected
+X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
+X-SA-Exim-Connect-IP: 83.222.23.61
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC][PATCH] meta-toolchain: make SDK relocatable by using $SDK_PATH var in env setup script
+Subject: Re: initramfs image with secondary cramfs inside
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,64 +41,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Feb 2010 20:10:49 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 09 Feb 2010 20:52:44 -0000
+X-Groupsio-MsgNum: 16609
+Content-Type: multipart/signed; boundary="nextPart16025061.0JSXXxAOtz";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-On (08/02/10 12:00), Tom Rini wrote:
-> On Sat, 2010-02-06 at 13:04 +0000, Phil Blundell wrote:
-> > On Thu, 2010-02-04 at 11:57 -0600, Tom Rini wrote:
-> > > On Thu, 2010-02-04 at 12:22 -0500, Denys Dmytriyenko wrote:
-> > > > On Thu, Feb 04, 2010 at 11:57:51AM -0500, Chris Conroy wrote:
-> > > > > Does this really make the SDK relocatable? I thought there were still
-> > > > > major issues with relocating GCC.
-> > > > 
-> > > > GCC built from OE may still have relocation problems - haven't checked lately.
-> > > > But it doesn't mean that's the only use case scenario... There is also 
-> > > > external toolchain option, as well as building SDK without the toolchain.
-> > > > Both of those cases were tested with the above change for several months now.
-> > > 
-> > > The hard part is that in some distributions you will have libmpfr.so &
-> > > co if you have a host gcc, and on some you won't.  That in turn makes
-> > > gcc relocatable or not.  Everything else is handleable via --sysroot=.
-> > 
-> > What exactly is the problem with libmpfr?  I would have thought you
-> > could just ship libmpfr.so.6 inside the sysroot and link gcc against
-> > that local copy (via -rpath $ORIGIN...), without using the system
-> > library at all.
-> 
-> I hesitate to say this, since I haven't fully poked the other side of
-> the equation, but..  With $ORIGIN, you need I think 3 levels of
-> checking-back since cc1 (& others) need libmpfr.  That, mixed with just
-> how ugly the $ORIGIN stuff gets for gcc, is the problem.  Why you don't
-> always see the problem is that Ubuntu uses libmpfr.so for its gcc,
-> RHEL4Usomething (half I haven't checked into personally and so hesitate)
-> seems to not.
-> 
-> For gcc-cross-sdk, this isn't so much of an issue.  For gcc-cross and
-> $ORIGIN it gets ugly, but solvable.
+--nextPart16025061.0JSXXxAOtz
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-I think the prerequisites of gcc libmpfr, libgmp and libmpc from 4.5
-onwards are probably not used by 
-any other tools we stage for host so it would be safer to build them inside
-gcc tree and link in statically and only create runtime deps on the
-libraries that always exist like libc. This will have better chance of
-relocation. We just need to untar these libraries in top of gcc src tree
-and it will use cofigure and use it. But this only solves gcc issue 
-for other host/cross packages which depend upon libs from staging we still
-need a solution. 
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 09 =D1=84=D0=B5=D0=B2=D1=80=D0=
+=B0=D0=BB=D1=8F 2010 03:37:21 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 John Van Horne=
+ (vanhorj)=20
+=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> My approach to this was to have a recipe for the cramfs image and
+> a recipe for the initramfs image, and to list the cramfs image as a
+> dependency of the initramfs recipe. Both of these recipes inherit the
+> image class. However, running bitbake on the initramfs recipe fails
+> because the cramfs do_rootfs and do_deploy_to tasks have not run.=20
 
--Khem
+See this:
+http://article.gmane.org/gmane.comp.handhelds.openembedded/22164
 
+and this (starting with "23 Jul 00:24 Richard Purdie"):
+http://thread.gmane.org/gmane.comp.handhelds.openembedded/25382
 
-> 
-> -- 
-> Tom Rini <tom_rini@mentor.com>
-> Mentor Graphics Corporation
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+the first one was reverted after discussion in second thread so, in short, =
+you=20
+have to do something like this in your initramfs:
 
+do_rootfs[depends] +=3D "cramfs_image:do_rootfs"
 
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+
+--nextPart16025061.0JSXXxAOtz
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAktxrhcACgkQXJ70z+XgVcPA3gCgz8VpamndlvCQsteyZfDlM4LU
+SNoAoJQRuj9EiziU96HRBZZqKnKuep/M
+=lAxB
+-----END PGP SIGNATURE-----
+
+--nextPart16025061.0JSXXxAOtz--
