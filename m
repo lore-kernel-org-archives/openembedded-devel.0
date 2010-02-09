@@ -1,35 +1,22 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1NemE4-0004b6-MB
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 10:17:47 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id E9C912C7FD
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Feb 2010 09:11:33 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id zji5BXIFVNhJ
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Feb 2010 09:11:30 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id ACEEF2C7D5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Feb 2010 09:11:29 +0000 (UTC)
-Message-ID: <4B71279A.8080904@gmail.com>
-Date: Tue, 09 Feb 2010 10:15:06 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1NemNX-00056f-SK
+	for openembedded-devel@openembedded.org; Tue, 09 Feb 2010 10:27:34 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id 431B41D360E2; Tue,  9 Feb 2010 10:24:59 +0100 (CET)
+From: =?utf-8?q?Petr=20=C5=A0tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
-References: <ac9c93b11002081024v1276e622r47cd54f966f28efc@mail.gmail.com>
-In-Reply-To: <ac9c93b11002081024v1276e622r47cd54f966f28efc@mail.gmail.com>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+Date: Tue,  9 Feb 2010 10:24:58 +0100
+Message-Id: <1265707499-32190-1-git-send-email-ynezz@true.cz>
+X-Mailer: git-send-email 1.5.6.5
+MIME-Version: 1.0
+References: <201002091003.19947.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: fosdem pics
+Subject: [PATCH v2] linux 2.6.24: moving ts72xx to 2.6.27 as default kernel so change DEFAULT_PREFERENCE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,21 +30,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Feb 2010 09:17:47 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Feb 2010 09:27:35 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Frans Meulenbroeks ha scritto, Il 08/02/2010 19:24:
-> Hi all,
-> 
-> Made a few pics @ fosdem. They can be found at
-> http://picasaweb.google.com/fransmeulenbroeks/Fosdem2010?authkey=Gv1sRgCPfSh7qcjv2siQE#
-> (and Tanenbaum is a little bit dark, my flash is not too powerful).
-> 
-> Frans
+Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
+---
+ recipes/linux/linux_2.6.24.bb |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
 
-Thank you
+diff --git a/recipes/linux/linux_2.6.24.bb b/recipes/linux/linux_2.6.24.b=
+b
+index 31a8a04..8d53999 100644
+--- a/recipes/linux/linux_2.6.24.bb
++++ b/recipes/linux/linux_2.6.24.bb
+@@ -7,7 +7,6 @@ DEFAULT_PREFERENCE_mpc8313e-rdb =3D "1"
+ DEFAULT_PREFERENCE_simpad =3D "1"
+ DEFAULT_PREFERENCE_atngw100 =3D "1"
+ DEFAULT_PREFERENCE_at32stk1000 =3D "1"
+-DEFAULT_PREFERENCE_ts72xx =3D "1"
+ DEFAULT_PREFERENCE_hipox =3D "1"
+ DEFAULT_PREFERENCE_cs-e9302 =3D "1"
+ DEFAULT_PREFERENCE_smartq5 =3D "1"
+--=20
+1.5.6.5
 
-/marco (mckoan)
 
 
