@@ -1,24 +1,29 @@
-Received: from us194mx009.tycoelectronics.net ([198.175.154.211])
+Received: from smtp-out108.alice.it ([85.37.17.108])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay.snyder@tycoelectronics.com>) id 1NesCf-0007U3-K3
+	(envelope-from <GNUtoo@no-log.org>) id 1Nettc-00023a-Px
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 16:40:44 +0100
-Received: from [163.241.71.52] (163.241.71.52) by
-	us194mx009.tycoelectronics.net (163.241.185.250) with Microsoft SMTP
-	Server id 8.1.393.1; Tue, 9 Feb 2010 10:38:07 -0500
-Message-ID: <4B718115.1010104@tycoelectronics.com>
-Date: Tue, 9 Feb 2010 10:36:53 -0500
-From: Jay Snyder <jay.snyder@tycoelectronics.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <mailman.1729.1265722552.14961.openembedded-devel@lists.openembedded.org>
-In-Reply-To: <mailman.1729.1265722552.14961.openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 198.175.154.211
-X-SA-Exim-Mail-From: jay.snyder@tycoelectronics.com
+	Tue, 09 Feb 2010 18:29:11 +0100
+Received: from FBCMMO01.fbc.local ([192.168.68.195]) by smtp-out108.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 9 Feb 2010 18:25:32 +0100
+Received: from FBCMCL01B03.fbc.local ([192.168.69.84]) by FBCMMO01.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 9 Feb 2010 18:25:30 +0100
+Received: from [192.168.1.116] ([79.21.48.56]) by FBCMCL01B03.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Tue, 9 Feb 2010 18:25:29 +0100
+From: GNUtoo <GNUtoo@no-log.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 09 Feb 2010 18:25:22 +0100
+Message-Id: <1265736322.3731.23.camel@gnutoo-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-OriginalArrivalTime: 09 Feb 2010 17:25:30.0121 (UTC)
+	FILETIME=[E09B1790:01CAA9AC]
+X-SA-Exim-Connect-IP: 85.37.17.108
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: error trying to build parted 1.8.8 : configure.ac:173: error: AC_REQUIRE: circular dependency of AC_GNU_SOURCE
+Subject: oe's GDB 7.0 doesn't load symbols for me(csl does)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,100 +37,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Feb 2010 15:40:44 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+X-List-Received-Date: Tue, 09 Feb 2010 17:29:12 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-I'm trying to build parted 1.8.8 on OE:
+Hi,
+Here's my setup:
+
+htcdream.conf
+shr.conf
+org.openembedded.dev branch at afc0667965549d0ac1cc5cd93a30c2aa8e47dc28
+bitbake gdb-cross
+
+I did the following:
+the following 3 devices are implicated:
+*1 build laptop
+*1 desktop
+*1 htcdream
+The htcdream is connected to the desktop which is on the same network
+than the laptop.
+
+Openssh(not dropbear) is runing on the htcdream.
+ 
+So I do that on the target:
+gdbserver 127.0.0.1:8022 Xorg
+
+And that on the desktop:
+iptables -t nat -A PREROUTING -p tcp --dport 22 -i wlan0 -j DNAT --to
+192.168.0.202:22
+
+And that on the laptop:
+# sshfs root@desktop:/ /mnt/NFS
+# source
+~/oetmp/deploy/addons/arm-oe-linux-gnueabi-shr-htcdream-devshell
+# ./arm-oe-linux-gnueabi-gdb
+[OE::arm-oe-linux-gnueabi-shr-htcdream]:~$ arm-oe-linux-gnueabi-gdb
+GNU gdb (GDB) 7.0
+Copyright (C) 2009 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later
+<http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show
+copying"
+and "show warranty" for details.
+This GDB was configured as "--host=i686-linux
+--target=arm-oe-linux-gnueabi".
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+(gdb) set sysroot /mnt/NFS
+(gdb) file /mnt/NFS/usr/bin/Xorg 
+Reading symbols from /mnt/NFS/usr/bin/Xorg...Reading symbols
+from /mnt/NFS/usr/bin/.debug/Xorg...done.
+(no debugging symbols found)...done.
 
 
-NOTE: Running task 551 of 565 (ID: 3, 
-/home/oe/2009-12-04/openembedded/recipes/parted/parted_1.8.8.bb, do_unpack)
-NOTE: Running task 552 of 565 (ID: 13, 
-/home/oe/2009-12-04/openembedded/recipes/parted/parted_1.8.8.bb, 
-do_distribute_sources)
-NOTE: Unpacking ../downloads/parted-1.8.8.tar.gz to 
-tmp/work/i686-angstrom-linux/parted-1.8.8-r2/                            
-NOTE: Running task 553 of 565 (ID: 4, 
-/home/oe/2009-12-04/openembedded/recipes/parted/parted_1.8.8.bb, 
-do_patch)             
-NOTE: Applying patch 'use_llseek_syscall.patch' 
-(../2009-12-04/openembedded/recipes/parted/files/use_llseek_syscall.patch)    
+And on my desktop with codesourcey:
 
-NOTE: Applying patch 'parted-1.8.x.patch' 
-(../2009-12-04/openembedded/recipes/parted/files/parted-1.8.x.patch)                
+# sshfs root@desktop:/mnt/embedded_rootfs
+# cd .../arm-2009q3/bin
+# ./arm-none-linux-gnueabi-gdb
+GNU gdb (Sourcery G++ Lite 2009q3-67) 6.8.50.20090630-cvs
+Copyright (C) 2009 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later
+<http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show
+copying"
+and "show warranty" for details.
+This GDB was configured as "--host=i686-pc-linux-gnu
+--target=arm-none-linux-gnueabi".
+For bug reporting instructions, please see:
+<https://support.codesourcery.com/GNUToolchain/>.
+(gdb) set sysroot /mnt/embedded_rootfs/
+(gdb) file /mnt/embedded_rootfs/usr/bin/Xorg 
+Reading symbols from /mnt/embedded_rootfs/usr/bin/Xorg...Reading symbols
+from /mnt/embedded_rootfs/usr/bin/.debug/Xorg...done.
+done.
 
-NOTE: Running task 554 of 565 (ID: 5, 
-/home/oe/2009-12-04/openembedded/recipes/parted/parted_1.8.8.bb, 
-do_configure)         
-ERROR: function do_configure 
-failed                                                                                           
+Note that codesourcey corrupt the frames but not the oe gdb
+so oe's gdb is usable...in assembly...
 
-ERROR: log data follows 
-(/home/oe/build/tmp/work/i686-angstrom-linux/parted-1.8.8-r2/temp/log.do_configure.24731)             
+Denis.
 
-| automake (GNU automake) 
-1.10.2                                                                                              
 
-| Copyright (C) 2008 Free Software Foundation, 
-Inc.                                                                           
 
-| License GPLv2+: GNU GPL version 2 or later 
-<http://gnu.org/licenses/gpl.html>                                               
-
-| This is free software: you are free to change and redistribute 
-it.                                                         
-| There is NO WARRANTY, to the extent permitted by 
-law.                                                                      
-|                                                                                                                             
-
-| Written by Tom Tromey 
-<tromey@redhat.com>                                                                                   
-
-|        and Alexandre Duret-Lutz 
-<adl@gnu.org>.                                                                              
-
-| AUTOV is 
-1.10                                                                                                               
-
-| NOTE: Executing autoreconf --verbose --install --force 
---exclude=autopoint -I 
-/home/oe/build/tmp/work/i686-angstrom-linux/parted-1.8.8-r2/parted-1.8.8/m4/ 
--I/home/oe/build/tmp/staging/i686-angstrom-linux/usr/share/aclocal-1.10 
--I /home/oe/build/tmp/staging/i686-angstrom-linux/usr/share/aclocal
-| autoreconf: Entering directory `.'
-| autoreconf: running: aclocal -I 
-/home/oe/build/tmp/work/i686-angstrom-linux/parted-1.8.8-r2/parted-1.8.8/m4/ 
--I /home/oe/build/tmp/staging/i686-angstrom-linux/usr/share/aclocal-1.10 
--I /home/oe/build/tmp/staging/i686-angstrom-linux/usr/share/aclocal 
---force -I m4
-| configure.ac:173: error: AC_REQUIRE: circular dependency of AC_GNU_SOURCE
-| 
-/home/oe/build/tmp/work/i686-angstrom-linux/parted-1.8.8-r2/parted-1.8.8/m4/extensions.m4:19: 
-AC_USE_SYSTEM_EXTENSIONS is expanded from...
-| ../../lib/autoconf/specific.m4:332: AC_GNU_SOURCE is expanded from...
-| 
-/home/oe/build/tmp/work/i686-angstrom-linux/parted-1.8.8-r2/parted-1.8.8/m4/gnulib-comp.m4:23: 
-gl_EARLY is expanded from...
-| configure.ac:173: the top level
-| autom4te: /home/oe/build/tmp/staging/x86_64-linux/usr/bin/m4 failed 
-with exit status: 1
-| aclocal: autom4te failed with exit status: 1
-| autoreconf: aclocal failed with exit status: 1
-| FATAL: autoreconf execution failed.
-NOTE: Task failed: 
-/home/oe/build/tmp/work/i686-angstrom-linux/parted-1.8.8-r2/temp/log.do_configure.24731
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of 
-/home/oe/2009-12-04/openembedded/recipes/parted/parted_1.8.8.bb 
-do_configure failed
-ERROR: Task 5 
-(/home/oe/2009-12-04/openembedded/recipes/parted/parted_1.8.8.bb, 
-do_configure) failed
-NOTE: Tasks Summary: Attempted 553 tasks of which 548 didn't need to be 
-rerun and 1 failed.
-ERROR: '/home/oe/2009-12-04/openembedded/recipes/parted/parted_1.8.8.bb' 
-failed
 
 
 
