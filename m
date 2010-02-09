@@ -1,41 +1,41 @@
-Received: from fmmailgate03.web.de ([217.72.192.234])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tux-master@web.de>) id 1NeoOR-0000GP-MM
+	(envelope-from <philb@gnu.org>) id 1Neodh-0000fq-Va
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 12:36:38 +0100
-Received: from smtp07.web.de (fmsmtp07.dlan.cinetic.de [172.20.5.215])
-	by fmmailgate03.web.de (Postfix) with ESMTP id 41FB913D5D743
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Feb 2010 12:34:03 +0100 (CET)
-Received: from [79.215.2.96] (helo=merkur.sol.de)
-	by smtp07.web.de with asmtp (TLSv1:AES256-SHA:256)
-	(WEB.DE 4.110 #314) id 1NeoLz-0001fI-00
+	Tue, 09 Feb 2010 12:52:25 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NeobF-0008WV-Vt
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 12:34:03 +0100
-Received: from jens by merkur.sol.de with local (Exim 4.69)
-	(envelope-from <tux-master@web.de>) id 1Neo8y-0002X6-Ro
+	Tue, 09 Feb 2010 11:49:50 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1NeobF-0007GD-Lc
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 12:20:37 +0100
-Date: Tue, 9 Feb 2010 12:20:36 +0100
-From: Jens Seidel <jensseidel@users.sf.net>
+	Tue, 09 Feb 2010 11:49:49 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100209112033.GA9723@merkur.sol.de>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <4B701EA0.5090304@dresearch.de>
-	<20100208163520.GA7674@merkur.sol.de>
-	<4B713BA2.7020404@dresearch.de>
-MIME-Version: 1.0
-In-Reply-To: <4B713BA2.7020404@dresearch.de>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Sender: tux-master@web.de
-X-Sender: tux-master@web.de
-X-Provags-ID: V01U2FsdGVkX19WwwUsg013c9VUwo4P4Eodq8UKCMV0zIsuyjC/
-	Z/h9n0QetxeAfBz4vDpsr+b3I5M4lBqeX6IWTGCYqt95FDHy57 qOs0DPD38=
-X-SA-Exim-Connect-IP: 217.72.192.234
-X-SA-Exim-Mail-From: tux-master@web.de
+In-Reply-To: <1265663673-16312-10-git-send-email-rep.dot.nop@gmail.com>
+References: <1265663673-16312-1-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-2-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-3-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-4-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-5-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-6-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-7-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-8-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-9-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-10-git-send-email-rep.dot.nop@gmail.com>
+Date: Tue, 09 Feb 2010 11:49:46 +0000
+Message-ID: <1265716186.3777.625.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: configure failes for mc-4.6.2-r4
+Subject: Re: [PATCH 09/12] flex: remove version specifics from generic inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,26 +49,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Feb 2010 11:36:38 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 09 Feb 2010 11:52:25 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Tue, Feb 09, 2010 at 11:40:34AM +0100, Steffen Sledz wrote:
-> Jens Seidel wrote:
-> >> ERROR: function do_configure failed
-> >> ERROR: log data follows (/home/DRESEARCH/sledz/work/HydraIP/OE/tmp.5/work/armv5te-angstrom-linux-gnueabi/mc-4.6.2-r4/temp/log.do_configure.3914)
-> >> | NOTE: Executing autoreconf --verbose --install --force --exclude=autopoint
-> > I wonder about the "not using Gettext" but the problem is probably
-> > "--exclude=autopoint".
-> 
-> Sounds good. Can you try to create a patch?
+On Mon, 2010-02-08 at 22:14 +0100, Bernhard Reutner-Fischer wrote:
+> Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+> ---
+>  recipes/flex/flex-native_2.5.31.bb |    4 ++--
+>  recipes/flex/flex.inc              |    3 ---
+>  recipes/flex/flex_2.5.31.bb        |    5 ++++-
+>  3 files changed, 6 insertions(+), 6 deletions(-)
 
-I'm capable of it especially releated to autotools+gettext and git. But to
-be honest I never used bitbake up to now and I'm just lurking on this
-list because I own an OpenMoko mobile which distribution uses OpenEmbedded  :-)
+Thanks for the patch.  I checked this in.
 
-I will try my best but I cannot promise anything ...
+p.
 
-Jens
+
 
 
