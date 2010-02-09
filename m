@@ -1,41 +1,30 @@
-Received: from fmmailgate03.web.de ([217.72.192.234])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tux-master@web.de>) id 1NenAC-0006Eb-FL
+	(envelope-from <sledz@DResearch.DE>) id 1NenYJ-000200-Fk
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 11:17:51 +0100
-Received: from smtp07.web.de (fmsmtp07.dlan.cinetic.de [172.20.5.215])
-	by fmmailgate03.web.de (Postfix) with ESMTP id 0B79E13D5A444
+	Tue, 09 Feb 2010 11:42:46 +0100
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 15E68491274
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Feb 2010 10:51:26 +0100 (CET)
-Received: from [79.215.2.96] (helo=merkur.sol.de)
-	by smtp07.web.de with asmtp (TLSv1:AES256-SHA:256)
-	(WEB.DE 4.110 #314) id 1Nemkf-0006pA-00
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 10:51:25 +0100
-Received: from jens by merkur.sol.de with local (Exim 4.69)
-	(envelope-from <tux-master@web.de>) id 1NemXg-0002Nm-MO
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 10:38:01 +0100
-Date: Tue, 9 Feb 2010 10:38:00 +0100
-From: Jens Seidel <jensseidel@users.sf.net>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100209093757.GB9094@merkur.sol.de>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1265663673-16312-1-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-2-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-3-git-send-email-rep.dot.nop@gmail.com>
+	Tue,  9 Feb 2010 11:40:13 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Tue, 9 Feb 2010 11:41:07 +0100
+Message-ID: <4B713BA2.7020404@dresearch.de>
+Date: Tue, 09 Feb 2010 11:40:34 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
 MIME-Version: 1.0
-In-Reply-To: <1265663673-16312-3-git-send-email-rep.dot.nop@gmail.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Sender: tux-master@web.de
-X-Sender: tux-master@web.de
-X-Provags-ID: V01U2FsdGVkX196eZQ6WNVK5O0Uh4zxN1XaFeQ2dAC4buKVDcgR
-	8RHdKSRdjSzn+yVhLHyeV+4o+2W0E6Vf6w6apmKcpArOttqE6F Z/zHwF7QA=
-X-SA-Exim-Connect-IP: 217.72.192.234
-X-SA-Exim-Mail-From: tux-master@web.de
+To: openembedded-devel@lists.openembedded.org
+References: <4B701EA0.5090304@dresearch.de>
+	<20100208163520.GA7674@merkur.sol.de>
+In-Reply-To: <20100208163520.GA7674@merkur.sol.de>
+X-OriginalArrivalTime: 09 Feb 2010 10:41:08.0022 (UTC)
+	FILETIME=[63449560:01CAA974]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 02/12] some more !getopt_long fixes
+Subject: Re: configure failes for mc-4.6.2-r4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,20 +38,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Feb 2010 10:17:51 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 09 Feb 2010 10:42:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Mon, Feb 08, 2010 at 10:14:23PM +0100, Bernhard Reutner-Fischer wrote:
-> -                if [ "$VERBOSE" != no ]
-> +                if [ "$VERBOSE" != "no" ]
+Jens Seidel wrote:
+>> ERROR: function do_configure failed
+>> ERROR: log data follows (/home/DRESEARCH/sledz/work/HydraIP/OE/tmp.5/work/armv5te-angstrom-linux-gnueabi/mc-4.6.2-r4/temp/log.do_configure.3914)
+>> | NOTE: Executing autoreconf --verbose --install --force --exclude=autopoint
+> 
+>> | autoreconf: configure.ac: not using Gettext
+> 
+>> | configure.ac:104: required file `config/config.rpath' not found
+> 
+> As far as I remember config/config.rpath is added by autopoint which
+> provides translation support. I call in my scripts
+> $ autopoint --force
+> after
+> $ autoreconf --force --install -I config
+> 
+> I wonder about the "not using Gettext" but the problem is probably
+> "--exclude=autopoint".
 
-I don't see any need for this change. Why doesn't the commit message does
-not explain why it was done?
+Sounds good. Can you try to create a patch?
 
-I assume it is a stylistic change only and should that's why committed
-separately (with a different commit log), right?
+Steffen
 
-Jens
 
 
