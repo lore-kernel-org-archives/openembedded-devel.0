@@ -1,40 +1,49 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1Ned7h-0004FA-OP
+Received: from sj-iport-5.cisco.com ([171.68.10.87])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <vanhorj@cisco.com>) id 1NeeA0-00038m-UV
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 00:34:36 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o18NW17B014760
+	Tue, 09 Feb 2010 01:41:04 +0100
+Authentication-Results: sj-iport-5.cisco.com;
+	dkim=neutral (message not signed) header.i=none
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AikFAL88cEurRN+J/2dsb2JhbACBaAO+D5dchFQE
+X-IronPort-AV: E=Sophos;i="4.49,432,1262563200"; 
+	d="scan'208,217";a="147803565"
+Received: from sj-core-3.cisco.com ([171.68.223.137])
+	by sj-iport-5.cisco.com with ESMTP; 09 Feb 2010 00:37:22 +0000
+Received: from xbh-rcd-301.cisco.com (xbh-rcd-301.cisco.com [72.163.63.8])
+	by sj-core-3.cisco.com (8.13.8/8.14.3) with ESMTP id o190bMCU018849
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 8 Feb 2010 23:32:01 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 14432-02 for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Feb 2010 23:31:57 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o18NVtdp014748
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 8 Feb 2010 23:31:55 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100204190730.GB5641@denix.org>
-References: <1265247822-20734-1-git-send-email-denis@denix.org>
-	<1265302671.25338.57.camel@conroy-linux>
-	<20100204172234.GA5641@denix.org>
-	<1265308970.13632.6.camel@conroy-linux>
-	<20100204190730.GB5641@denix.org>
-Date: Mon, 08 Feb 2010 23:31:53 +0000
-Message-ID: <1265671913.26725.374.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	Tue, 9 Feb 2010 00:37:22 GMT
+Received: from xmb-rcd-209.cisco.com ([72.163.62.216]) by
+	xbh-rcd-301.cisco.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 8 Feb 2010 18:37:22 -0600
+x-mimeole: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+x-cr-hashedpuzzle: A1oX BLbV B1Er DmWh Dwrc Fdnd Ffcb FvaM FzeC GKYt HJDl IHcH
+	I16E I/Zf JK74 KDbO; 1;
+	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnAA==;
+	Sosha1_v1; 7; {2ED0F495-09E5-4247-8A68-091955D9245C};
+	dgBhAG4AaABvAHIAagBAAGMAaQBzAGMAbwAuAGMAbwBtAA==;
+	Tue, 09 Feb 2010 00:37:21 GMT;
+	aQBuAGkAdAByAGEAbQBmAHMAIABpAG0AYQBnAGUAIAB3AGkAdABoACAAcwBlAGMAbwBuAGQAYQByAHkAIABjAHIAYQBtAGYAcwAgAGkAbgBzAGkAZABlAA==
+x-cr-puzzleid: {2ED0F495-09E5-4247-8A68-091955D9245C}
+Date: Mon, 8 Feb 2010 18:37:21 -0600
+Message-ID: <89CD81306A03F24FAEA2177A341C2C613B8764@XMB-RCD-209.cisco.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: initramfs image with secondary cramfs inside
+Thread-Index: AcqpIApx8T1cqYfISMOrVlMc0K6tEQ==
+From: "John Van Horne (vanhorj)" <vanhorj@cisco.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 09 Feb 2010 00:37:22.0460 (UTC)
+	FILETIME=[0B267DC0:01CAA920]
+X-SA-Exim-Connect-IP: 171.68.10.87
+X-SA-Exim-Mail-From: vanhorj@cisco.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC][PATCH] meta-toolchain: make SDK relocatable by	using $SDK_PATH var in env setup script
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: initramfs image with secondary cramfs inside
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,50 +57,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Feb 2010 23:34:37 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Feb 2010 00:41:04 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2010-02-04 at 14:07 -0500, Denys Dmytriyenko wrote:
-> On Thu, Feb 04, 2010 at 01:42:50PM -0500, Chris Conroy wrote:
-> > On Thu, 2010-02-04 at 12:22 -0500, Denys Dmytriyenko wrote:
-> > > First of all, they are the same. Check conf/bitbake.conf:
-> > > 
-> > > SDKPATH = "${SDK_PATH}"
-> > > 
-> > > Second, ask RP why he introduced SDKPATH, when we had SDK_PATH for years (my 
-> > > guess - that's what is used in Poky, so makes porting changes easier):
-> > Fair enough, but saying 'ask RP' doesn't justify away the fact that
-> > having these two variables is confusing. If they really are the same,
-> > then one should be removed. If one shouldn't be removed, then there is
-> > some difference that should probably be documented. It's just a matter
-> > of consistency/readability.
-> 
-> All I was trying to say is that, while it's a valid question, it is out of 
-> scope of this patch. I don't want to mix 2 things in one patch (if we decide 
-> to remove one of SDKPATH/SDK_PATH). And it would still be good to hear RP's 
-> rationale.
+The system I'm working on boots up with an initramfs image which
+contains a very minimal file system. During the boot process, a second
+file system image, in cramfs format, is mounted and used as the root
+file system. Does anyone have any experience using OE to build such an
+image? My approach to this was to have a recipe for the cramfs image and
+a recipe for the initramfs image, and to list the cramfs image as a
+dependency of the initramfs recipe. Both of these recipes inherit the
+image class. However, running bitbake on the initramfs recipe fails
+because the cramfs do_rootfs and do_deploy_to tasks have not run. After
+running bitbake with debug info turned on, it seems that the initramfs
+recipe depends upon the do_populate_stage task of cramfs, but not
+do_rootfs and do_deploy_to. Could anyone offer any insight into why this
+is?
 
-As best I remember, historically, there was SDK_PREFIX. When we created
-the SDK_ variables, this conflicted with things like TARGET_PREFIX,
-HOST_PREFIX and BUILD_PREFIX so it had to be renamed. OE went with
-SDK_PATH, Poky went with SDKPATH. When I merged a load of toolchain
-stuff between the two, I think I realised halfway through a merge there
-was a problem and inserted that variable to make sure everything worked.
-I'm sure I intended to clean it up at some point but never got around to
-it.
+=20
 
-In summary, one needs to go. 
+Thanks
 
-I have a preference for not having an underscore in the name as SDKPATH
-does something different to the other SDK_*, TARGET_*, HOST_* and
-BUILD_* variables and does not have a counterpart.
-
-Cheers,
-
-Richard
-
-
-
+-John
 
 
