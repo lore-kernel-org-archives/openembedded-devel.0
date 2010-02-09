@@ -1,40 +1,29 @@
-Received: from fmmailgate02.web.de ([217.72.192.227])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tux-master@web.de>) id 1NelxZ-000830-Qg
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Nem32-0001wm-4B
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 10:00:44 +0100
-Received: from smtp05.web.de (fmsmtp05.dlan.cinetic.de [172.20.4.166])
-	by fmmailgate02.web.de (Postfix) with ESMTP id 7050214D5C1A6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Feb 2010 09:58:09 +0100 (CET)
-Received: from [79.215.2.96] (helo=merkur.sol.de)
-	by smtp05.web.de with asmtp (TLSv1:AES256-SHA:256)
-	(WEB.DE 4.110 #314) id 1Nelv7-0004pA-00
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 09:58:09 +0100
-Received: from jens by merkur.sol.de with local (Exim 4.69)
-	(envelope-from <tux-master@web.de>) id 1Neli6-0002N4-SR
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 09:44:43 +0100
-Date: Tue, 9 Feb 2010 09:44:42 +0100
-From: Jens Seidel <jensseidel@users.sf.net>
+	Tue, 09 Feb 2010 10:06:23 +0100
+Received: (qmail 11537 invoked by uid 813007); 9 Feb 2010 09:03:49 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 9 Feb 2010 09:03:49 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100209084441.GA9094@merkur.sol.de>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <20100208173821.GA24852@ibawizard.net>
-	<1265658612-19262-1-git-send-email-ynezz@true.cz>
+Date: Tue, 9 Feb 2010 10:03:19 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-rc5-00011-gf6760aa; KDE/4.3.4; x86_64; ;
+	)
+References: <1265676216-9722-1-git-send-email-ynezz@true.cz>
+	<1265676216-9722-2-git-send-email-ynezz@true.cz>
+	<1265676216-9722-3-git-send-email-ynezz@true.cz>
+In-Reply-To: <1265676216-9722-3-git-send-email-ynezz@true.cz>
 MIME-Version: 1.0
-In-Reply-To: <1265658612-19262-1-git-send-email-ynezz@true.cz>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Sender: tux-master@web.de
-X-Sender: tux-master@web.de
-X-Provags-ID: V01U2FsdGVkX1+Jfkt6pz91RzKDrLvX0nZIZbdcWWcD7dkH4cNL
-	ecw73+ullEYh0BRsUwusmyPrjeulD90tcFrjyar6MtNC2qJHF7 5WIwF6TPQ=
-X-SA-Exim-Connect-IP: 217.72.192.227
-X-SA-Exim-Mail-From: tux-master@web.de
+Message-Id: <201002091003.19947.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] mc 4.6.2: fix do_configure error on missing	config.rpath
+Subject: Re: [PATCH] linux 2.6.24: moving ts72xx to 2.6.27 as default kernel so change DEFAULT_PREFERENCE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,44 +37,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Feb 2010 09:00:44 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Tue, 09 Feb 2010 09:06:23 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 08, 2010 at 08:50:12PM +0100, Petr =C5=A0tetiar wrote:
-> This patch fixes configure error, complaining about missing config.rpat=
-h file
-> which gets deleted by autofoo in recipe, so to avoid error bellow we cr=
-eate
-> empty file, making configure happy.
+Dnia wtorek, 9 lutego 2010 o 01:43:32 Petr =C5=A0tetiar napisa=C5=82(a):
+> Signed-off-by: Petr =C5=A0tetiar <ynezz@true.cz>
+> ---
+>  recipes/linux/linux_2.6.24.bb |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/recipes/linux/linux_2.6.24.bb b/recipes/linux/linux_2.6.24.bb
+> index 31a8a04..9aca4c7 100644
+> --- a/recipes/linux/linux_2.6.24.bb
+> +++ b/recipes/linux/linux_2.6.24.bb
+> @@ -7,12 +7,12 @@ DEFAULT_PREFERENCE_mpc8313e-rdb =3D "1"
+>  DEFAULT_PREFERENCE_simpad =3D "1"
+>  DEFAULT_PREFERENCE_atngw100 =3D "1"
+>  DEFAULT_PREFERENCE_at32stk1000 =3D "1"
+> -DEFAULT_PREFERENCE_ts72xx =3D "1"
+> +DEFAULT_PREFERENCE_ts72xx =3D "-1"
+
+Just drop DEF_PREF, do not set it to default value.
+
+> -PR =3D "r34"
+> +PR =3D "r35"
+
+Do not bump kernel PR if you do not use it anymore. This part should go to=
 =20
-> configure.ac:104: required file `config/config.rpath' not found
-> [...snip...]
-> autoreconf: automake failed with exit status: 1
-> FATAL: autoreconf execution failed.
+previous patch as it changes patches.
 
-> @@ -86,4 +86,6 @@ AUTOFOO=3D"config.guess config.rpath config.sub depco=
-mp install-sh missing mkinsta
->           for i in ${AUTOFOO}; do
->             rm config/${i}
->           done
-> +         # raises error if it's not found
-> +         touch config/config.rpath
->  }
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Mhm, and you know that this patch is right? If config.rpath is called it =
-is
-expected that it sets a few variables such as shlibext (normally to "so")=
-,
-libext ("a") but this does not happen with an empty config.rpath. This pa=
-tch
-may indeed fix the current error but what about support for all platforms=
-?
-I would ship a proper file instead of a faked one and I mentioned that e.=
-g.
-autopoint creates this file ...
 
-Jens
 
 
