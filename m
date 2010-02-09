@@ -1,29 +1,28 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-px0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Nez4z-0003d0-RW for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Feb 2010 00:01:16 +0100
-Received: from f053032124.adsl.alicedsl.de ([78.53.32.124]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Nez2Y-0002DJ-Lf for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 22:58:42 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <msundius@sundius.com>) id 1Nez7a-0003kB-IW
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Feb 2010 00:03:59 +0100
+Received: by pxi5 with SMTP id 5so190234pxi.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 09 Feb 2010 15:01:17 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.143.26.39 with SMTP id d39mr307917wfj.33.1265756476412; Tue, 
+	09 Feb 2010 15:01:16 -0800 (PST)
+In-Reply-To: <4B71D7F0.6070706@cbnco.com>
+References: <C791CD9B.22735%jgrant@vml.com>
+	<18e217241002080848t193add2drd5603d0c252ee509@mail.gmail.com>
+	<4B71D7F0.6070706@cbnco.com>
+Date: Tue, 9 Feb 2010 15:01:16 -0800
+Message-ID: <18e217241002091501q3cc2dcbek17e3ad35ecfa0c9c@mail.gmail.com>
+From: C Michael Sundius <msundius@sundius.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4B71815C.6050208@dresearch.de>
-References: <4B7145A5.70808@dresearch.de>
-	<1265716784.16488.1.camel@mattotaupa>	<4B716090.2090104@dresearch.de>
-	<20100209132913.GC24852@ibawizard.net> <4B71815C.6050208@dresearch.de>
-Date: Tue, 09 Feb 2010 23:58:40 +0100
-Message-ID: <1265756320.17045.26.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: msundius@sundius.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: confused by netbase/udev
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Working with OEMs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,127 +36,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Feb 2010 23:01:24 -0000
-X-Groupsio-MsgNum: 16618
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-mVGvNg27XGtUquAhlduq"
+X-List-Received-Date: Tue, 09 Feb 2010 23:03:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-mVGvNg27XGtUquAhlduq
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Tue, Feb 9, 2010 at 1:47 PM, Michael Smith <msmith@cbnco.com> wrote:
 
-Am Dienstag, den 09.02.2010, 16:38 +0100 schrieb Steffen Sledz:
-> Petr =C5=A0tetiar wrote:
-> > man 5 interfaces?
+> C Michael Sundius wrote:
+>
+>> Further, I wonder if there are others out there who also feel
+>> this way? My understanding is that Monta Vista is using OE; are there
+>> voices
+>> on this list from MV or others that use OE for creating a consistent means
+>> of building for developers and Config/Release Managers? If so, what are
+>> your
+>> tricks and complaints with respect to this issue.
+>>
+>
+> Hi Mike,
+>
+> I'm using COLLECTIONS, the srctree and gitver classes, plus amend.inc. I
+> think all of the above come from Chris at MV. It's about three billion times
+> better than the custom build system we had before.
+>
+> We have four trees:
+>
+> - public: playground for new recipes before submitting to OE; also,
+> amend.inc's to tweak packaging behaviour or configure flags.
+> - private: recipes to build closed-source drivers from our suppliers;
+> - oe: full org.openembedded.dev;
+> - proj: git repos for internal projects get cloned here, and added to
+> COLLECTIONS with wildcards
+>
 
-[=E2=80=A6]
-
-> OK, i try to solve one problem after the other. Let's accept that
-> every new USB-NIC gets a new name for now (using a pool of interface name=
-s).
->=20
-> I've tried to create a /etc/network/interfaces which fits my wishes:
->=20
-> ------------->snip<----------------
-> # /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
->=20
-> # the loopback interface
-> auto lo
-> iface lo inet loopback
->=20
-> # interfaces to bring up at boot time
-> auto eth0
->=20
-> # the onboard NIC
-> iface eth0 inet dhcp
->=20
-> # interfaces to bring up when hotplugging
-> allow-hotplug eth1 eth2 eth3 eth4 eth5 eth6 eth7 eth8
->=20
-> # additional USB-NIC's
-> iface eth1 inet dhcp
-> iface eth2 inet dhcp
-> iface eth3 inet dhcp
-> iface eth4 inet dhcp
-> iface eth5 inet dhcp
-> iface eth6 inet dhcp
-> iface eth7 inet dhcp
-> iface eth8 inet dhcp
-> ------------->snip<----------------
->=20
-> This works fine when hotplugging, but the USB-NIC is not recognised
-> when connected while booting up. :(
-
-Did you test this with both USB-NICs?
-
-> I tried to change the one line responsible for that to
->=20
->   auto eth0 eth1 eth2 eth3 eth4 eth5 eth6 eth7 eth8
->=20
-> This works better but leads to dirty errors messages while booting
-> and shutdown for disconnected interfaces:
->=20
-> boot:
-> eth1: unknown interface: No such device
-> eth2: unknown interface: No such device
-> eth3: unknown interface: No such device
-> eth4: unknown interface: No such device
-> eth5: unknown interface: No such device
-> eth6: unknown interface: No such device
-> eth7: unknown interface: No such device
-> eth8: unknown interface: No such device
->=20
-> shutdown:
-> Deconfiguring network interfaces... cat: /var/run/udhcpc.eth0.pid: No suc=
-h file or directory
-> cat: /var/run/udhcpc.eth1.pid: No such file or directory
-> eth1: unknown interface: No such device
-> cat: /var/run/udhcpc.eth2.pid: No such file or directory
-> eth2: unknown interface: No such device
-> cat: /var/run/udhcpc.eth3.pid: No such file or directory
-> eth3: unknown interface: No such device
-> cat: /var/run/udhcpc.eth4.pid: No such file or directory
-> eth4: unknown interface: No such device
-> cat: /var/run/udhcpc.eth5.pid: No such file or directory
-> eth5: unknown interface: No such device
-> cat: /var/run/udhcpc.eth6.pid: No such file or directory
-> eth6: unknown interface: No such device
-> cat: /var/run/udhcpc.eth7.pid: No such file or directory
-> eth7: unknown interface: No such device
-> cat: /var/run/udhcpc.eth8.pid: No such file or directory
-> eth8: unknown interface: No such device
-> done.
->=20
-> I'm not really happy with that. :(
-
-How are your boot/init scripts activate the interfaces, i. e. what
-options to they pass to `ifup`?
-
-I still suggest to use a daemon as NetworkManager which as far as I know
-compensate this flaw of udev and `/e/n/i` which were created when a
-system had no dynamically added (non-wifi) NICs.
-
-Although I must admit that I find a use case that someone is changing
-the NICs not very common. Normally you get one and always use that
-device with this one. And if you change it you normally only have to
-edit `/e/n/i` once since from now on you will use the new device.
+we used just two collections:
+openembedded:  a trimmed down openembedded tree with just the recipes that
+we use
+local: just like your "private"
 
 
-Thanks,
+> Building the internal projects with OE means they barely even need to be
+> cross-compile aware. All they need is a simple Makefile, and a git tag to
+> set the package version. It's way easier than writing a one-off build system
+> for each project.
+>
+> The only problem is that bitbake takes forever to start up: COLLECTIONS
+> causes a re-exec of Python, I think, and there are about 8,000 recipes in
+> the tree. But we get around it by passing in a specific recipe file with -b.
+>
+> this is why we only use a trimmed down version of the OE tree. our
+developers would completely revolt if we had to parse all 20k recipes... I
+think its really 20k...
 
-Paul
+this is easier for building, but makes it harder to sync with the main tree.
 
---=-mVGvNg27XGtUquAhlduq
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+ but I'm thinking that maybe I'll just create a file with a list of the
+recipes (or just the recipe dirs) that I can used to build my BBFILES list
+with. That way I'll be able to keep the whole oe tree..
 
-iEYEABECAAYFAktx6KAACgkQPX1aK2wOHVgaOwCfdXnLoKwfAGEZdhj7DHLwgAxe
-yuEAoIko6q6cz+NQgt9zHWk+quM3KlNJ
-=JM8c
------END PGP SIGNATURE-----
+We do not use git here :[ we used something call Synergy CCM (I had never
+heard of it before either, but I guess its a company owned by IBM... its not
+very friendly) ,  anyhow there is no fetcher currently supported. I see that
+we will likely need to write our own fetcher so that we can enforce
+versioning better.
 
---=-mVGvNg27XGtUquAhlduq--
+we've, however, really actually been very successful by creating a class
+that adds a task before the patch task.. it just sets up a symlink to the
+checked out version of the code... its simple and I'm sure we could do
+something fancier, but it wroks really well... it just means that we need to
+pair the baseline of the OE repo w/ the source code repo.
+
+-----------------
+
+I have not used the srctree class, though I noticed it a while back and have
+not had time to check out what it is or how it works.. (Now I guess I have
+to go and educate myself...). Also not aware of the amend.inc file
+
+-----------------
+
+we've had long discussions about how to reconsile our software versions (for
+proprietery code) and the recipe versions since they don't really follow the
+version - revision way of doing things that OE uses. This has been difficult
+one, I'd like to push them to be better with versioning, but infact we need
+to have a real fetcher for our source control software before we can enforce
+which version is built by each recipe.
+
+---------
+
+Finally, our drivers and applications teams just condensed their nicly
+modularized recipes into just two recipes because intra recipe dependency
+checking was not working (i.e. when you rebuild one recipe its dependant
+recipes should rerun, but don't). I finally provided them a solution but
+they had already created monster recipes for all of their source code :}
+
+
+
+> For release management, I have a class that creates a list of the .deb
+> packages that would have gone into an image, and a script that checks them
+> into the right place in CVS. If you use Angstrom I think you get the same
+> list for free every time you build an image. The class just saves me from
+> waiting for rootfs to run.
+>
+
+we use lots of magic that puts the image in a form that can be installed on
+the box. this is done in the image-postprocessing function (theres a hook
+for this in the image class, forget what its called). we don't really track
+the individual packages.. just the image since we never allow installing
+individual packages the box.
+
+ thanks for your comments.
+
