@@ -1,29 +1,35 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NemBz-0004RI-P5
+	(envelope-from <koansoftware@gmail.com>) id 1NemE4-0004b6-MB
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 10:15:38 +0100
-Received: from [85.210.8.8] (helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1Nem9W-0006nb-OP
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 09:13:02 +0000
-From: Phil Blundell <philb@gnu.org>
+	Tue, 09 Feb 2010 10:17:47 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id E9C912C7FD
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  9 Feb 2010 09:11:33 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id zji5BXIFVNhJ
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  9 Feb 2010 09:11:30 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id ACEEF2C7D5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  9 Feb 2010 09:11:29 +0000 (UTC)
+Message-ID: <4B71279A.8080904@gmail.com>
+Date: Tue, 09 Feb 2010 10:15:06 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1265676216-9722-3-git-send-email-ynezz@true.cz>
-References: <1265676216-9722-1-git-send-email-ynezz@true.cz>
-	<1265676216-9722-2-git-send-email-ynezz@true.cz>
-	<1265676216-9722-3-git-send-email-ynezz@true.cz>
-Date: Tue, 09 Feb 2010 09:13:01 +0000
-Message-ID: <1265706781.6761.19.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-Broken-Reverse-DNS: no host name found for IP address 85.210.8.8
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+References: <ac9c93b11002081024v1276e622r47cd54f966f28efc@mail.gmail.com>
+In-Reply-To: <ac9c93b11002081024v1276e622r47cd54f966f28efc@mail.gmail.com>
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] linux 2.6.24: moving ts72xx to 2.6.27 as default kernel so change DEFAULT_PREFERENCE
+Subject: Re: fosdem pics
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,34 +43,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Feb 2010 09:15:38 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 09 Feb 2010 09:17:47 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, 2010-02-09 at 01:43 +0100, Petr =C5=A0tetiar wrote:
-> -DEFAULT_PREFERENCE_ts72xx =3D "1"
-> +DEFAULT_PREFERENCE_ts72xx =3D "-1"
->  DEFAULT_PREFERENCE_hipox =3D "1"
->  DEFAULT_PREFERENCE_cs-e9302 =3D "1"
->  DEFAULT_PREFERENCE_smartq5 =3D "1"
-> =20
-> -PR =3D "r34"
-> +PR =3D "r35"
+Frans Meulenbroeks ha scritto, Il 08/02/2010 19:24:
+> Hi all,
+> 
+> Made a few pics @ fosdem. They can be found at
+> http://picasaweb.google.com/fransmeulenbroeks/Fosdem2010?authkey=Gv1sRgCPfSh7qcjv2siQE#
+> (and Tanenbaum is a little bit dark, my flash is not too powerful).
+> 
+> Frans
 
-There's no need to increment PR if the only thing you are changing is
-DEFAULT_PREFERENCE.  In general, you need to increment PR if (and only
-if) your change would cause the output from the recipe to be different
-from what it was before.  Changes that just affect whether or not the
-recipe is built at all, and don't have any impact on the result of the
-build, do not require a new PR.
+Thank you
 
-Not that bumping PR unnecessarily is all that big a deal, of course, but
-it does cause a certain amount of avoidable churn and annoyance for
-other users of the recipe.  It is best not to do it when you don't have
-to.
-
-p.
-
-
+/marco (mckoan)
 
 
