@@ -1,38 +1,29 @@
-Received: from mail-ww0-f47.google.com ([74.125.82.47])
+Received: from vms173017pub.verizon.net ([206.46.173.17])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1NexS5-00080U-3y
+	(envelope-from <denis@denix.org>) id 1Nexna-0006Uh-Nw
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 22:17:00 +0100
-Received: by wwi14 with SMTP id 14so266583wwi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Feb 2010 13:14:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=U77OY5saiqpb2t02VcC49MLQYwpW3bybHt92R1eLeNg=;
-	b=TjyDZ+eTn23AZI7smgIfkHPr7k7YFROQizM99i7Q79TVPR1zPN2BcWc8tnpKilla18
-	QR/Tw6USEe5/AhtRoAG3mD4lqRvBlL1szGWIYUtQP0tgdFb+x27b9U57O7Xu/8cDc0Wm
-	O9r3HTXFblR6AQvKENXLddBObCtONTiwmekEg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=NTcBr91LdX+ndXNycvtTOV1vxAMg7YXY/OKfJg26KAt4GldXEa6rfVGFEfUa8hazKj
-	CA49IAAsFwCQERfPgXJ+Y5Q2UIsFU5Y16njWSaxJGZiNJ8jQo3FtzK9aP7Y2fldlebfs
-	Rbbfu7GNMN3USqrVo/nieFOCyXGv4dSOjP0rE=
-MIME-Version: 1.0
-Received: by 10.216.88.195 with SMTP id a45mr1438553wef.63.1265750063993; Tue, 
-	09 Feb 2010 13:14:23 -0800 (PST)
-In-Reply-To: <4B7145A5.70808@dresearch.de>
-References: <4B7145A5.70808@dresearch.de>
-Date: Tue, 9 Feb 2010 16:14:23 -0500
-Message-ID: <f96d234e1002091314n6d8d1698pc1ce00c269dc3feb@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	Tue, 09 Feb 2010 22:39:13 +0100
+Received: from gandalf.denix.org ([unknown] [71.251.51.225])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0KXL00FZ2G0LXTP8@vms173017.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	09 Feb 2010 15:36:26 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3550614AF60; Tue,
+	09 Feb 2010 16:36:21 -0500 (EST)
+Date: Tue, 09 Feb 2010 16:36:21 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.47
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+Message-id: <20100209213621.GE20644@denix.org>
+References: <1265738131.3731.27.camel@gnutoo-desktop>
+MIME-version: 1.0
+In-reply-to: <1265738131.3731.27.camel@gnutoo-desktop>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.17
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: confused by netbase/udev
+Subject: Re: gdb sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,24 +37,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Feb 2010 21:17:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 09 Feb 2010 21:39:14 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Tue, Feb 9, 2010 at 6:23 AM, Steffen Sledz <sledz@dresearch.de> wrote:
-> I'm a bit confused about netbase and udev use im Angstrom.
->
-> Here's what i see:
->
-> I connect an USB-NIC.
->
-> /etc/udev/rules.d/70-persistent-net.rules is created:
+On Tue, Feb 09, 2010 at 06:55:31PM +0100, GNUtoo wrote:
+> hi,in the gdb series here's the sdk:
+> 
+> ldd .../oetmp/work/i686-armv6-novfp-sdk-oe-linux-gnueabi/gdb-cross-sdk-7.0-r0/image/
+> usr/local/shr/arm/bin/arm-oe-linux-gnueabi-gdb
+> 	linux-gate.so.1 =>  (0xb80df000)
+> 	libncurses.so.5
+> => /home/embedded/oetmp_shr-merge_htcdream/staging/i686-linux/usr/lib/libncurses.so.5 (0xb8099000)
+> 	libz.so.1
+> => /home/embedded/oetmp_shr-merge_htcdream/staging/i686-linux/usr/lib/libz.so.1 (0xb8085000)
+> 	libm.so.6 => /lib/libm.so.6 (0xb802c000)
+> 	libpython2.6.so.1.0
+> => /home/embedded/oetmp_shr-merge_htcdream/staging/i686-linux/usr/lib/libpython2.6.so.1.0 (0xb7eb8000)
+> 	libexpat.so.0
+> => /home/embedded/oetmp_shr-merge_htcdream/staging/i686-linux/usr/lib/libexpat.so.0 (0xb7e92000)
+> 	libc.so.6 => /lib/libc.so.6 (0xb7d58000)
+> 	/lib/ld-linux.so.2 (0xb80e0000)
+> 	libpthread.so.0 => /lib/libpthread.so.0 (0xb7d40000)
+> 	libdl.so.2 => /lib/libdl.so.2 (0xb7d3c000)
+> 	libutil.so.1 => /lib/libutil.so.1 (0xb7d38000)
+> 
+> Note the libexpat...
+> I've libexpat.so.1 in all my systems.
+> 
+> Moreover bitbaking gdb-cross-sdk produced some ipk...and no tarball...
 
-I ended up just removing the following files from my build, and now it
-works as I expect -- the first USB NIC is always eth0, etc.
+SDK tarball is produced by meta-toolchain/meta-toolchain-* recipes.
 
-70-persistent-net.rules
-75-persistent-net-generator.rules
-
-Cliff
+-- 
+Denys
 
 
