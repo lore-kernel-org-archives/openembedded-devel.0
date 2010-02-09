@@ -1,26 +1,22 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from ibawizard.net
+	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Neq0q-000661-4O
+	(envelope-from <ynezz@mengele.ibawizard.net>) id 1NeqBv-0003xd-MA
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 14:20:23 +0100
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 672E849127F
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Feb 2010 14:17:48 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Tue, 9 Feb 2010 14:18:43 +0100
-Message-ID: <4B716090.2090104@dresearch.de>
-Date: Tue, 09 Feb 2010 14:18:08 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
-MIME-Version: 1.0
+	Tue, 09 Feb 2010 14:31:50 +0100
+Received: by mengele.ibawizard.net (Postfix, from userid 1002)
+	id 9D5661D360E2; Tue,  9 Feb 2010 14:29:13 +0100 (CET)
+Date: Tue, 9 Feb 2010 14:29:13 +0100
+From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100209132913.GC24852@ibawizard.net>
 References: <4B7145A5.70808@dresearch.de> <1265716784.16488.1.camel@mattotaupa>
-In-Reply-To: <1265716784.16488.1.camel@mattotaupa>
-X-OriginalArrivalTime: 09 Feb 2010 13:18:43.0694 (UTC)
-	FILETIME=[6749A0E0:01CAA98A]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@DResearch.DE
+	<4B716090.2090104@dresearch.de>
+MIME-Version: 1.0
+In-Reply-To: <4B716090.2090104@dresearch.de>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 82.208.49.253
+X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: confused by netbase/udev
@@ -37,39 +33,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Feb 2010 13:20:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Feb 2010 13:31:50 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Paul Menzel wrote:
->> And here's what i like to see:
->> * Connect an USB-NIC should result in an DHCP-configured interface.
+Steffen Sledz <sledz@dresearch.de> [2010-02-09 14:18:08]:
+
+>  # Wired or wireless interfaces
+>  auto eth0
+>  iface eth0 inet dhcp
+>  iface eth1 inet dhcp
 > 
-> Do you have it configured somewhere (for example in [2])? If not you can
-> use a daemon like NetworkManager.
-> ...
-> [2] /etc/network/interfaces
+> But i'm not sure what this part means (especially what means 'auto'
+> here. Where can i found some documentation about the content of this
+> config file. The busybox and ifup/ifdown manpages are not very helpful
+> here. :(
 
-It's the Angstrom standard configuration containing e.g.
+man 5 interfaces?
 
- # Wired or wireless interfaces
- auto eth0
- iface eth0 inet dhcp
- iface eth1 inet dhcp
+Quote:
 
-But i'm not sure what this part means (especially what means 'auto'
-here. Where can i found some documentation about the content of this
-config file. The busybox and ifup/ifdown manpages are not very helpful
-here. :(
+" lines beginning with the word "auto" are used to identify the physical
+interfaces to be brought up when ifup is run with  the  -a  option.   (This
+option  is  used  by  the  system  boot scripts.)  Physical interface names
+should follow the word "auto" on the same line.  There can be multiple "auto"
+stanzas.  ifup brings the named interfaces up in the order listed.  "
 
-And another problem is the mentioned naming. If every connected
-USB-NIC gets a new name i cannot refer to it in this config file.
+> And another problem is the mentioned naming. If every connected
+> USB-NIC gets a new name i cannot refer to it in this config file.
 
-> I hope that helps.
+You can get unique name/symlink using udev rule.
 
-Just a tiny bit.  ;-)
-
-Steffen
-
+-- ynezz
 
 
