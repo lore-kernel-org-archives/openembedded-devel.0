@@ -1,35 +1,29 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1Nexy4-0006pA-Ln
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 22:50:04 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id CA8014BCA6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Feb 2010 16:47:28 -0500 (EST)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 24087-09 for <openembedded-devel@lists.openembedded.org>; 
-	Tue,  9 Feb 2010 16:47:28 -0500 (EST)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 9FA0D4BC8D
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Feb 2010 16:47:28 -0500 (EST)
-Message-ID: <4B71D7F0.6070706@cbnco.com>
-Date: Tue, 09 Feb 2010 16:47:28 -0500
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090812)
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Nez4z-0003d0-RW for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Feb 2010 00:01:16 +0100
+Received: from f053032124.adsl.alicedsl.de ([78.53.32.124]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Nez2Y-0002DJ-Lf for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Feb 2010 22:58:42 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <C791CD9B.22735%jgrant@vml.com>
-	<18e217241002080848t193add2drd5603d0c252ee509@mail.gmail.com>
-In-Reply-To: <18e217241002080848t193add2drd5603d0c252ee509@mail.gmail.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+In-Reply-To: <4B71815C.6050208@dresearch.de>
+References: <4B7145A5.70808@dresearch.de>
+	<1265716784.16488.1.camel@mattotaupa>	<4B716090.2090104@dresearch.de>
+	<20100209132913.GC24852@ibawizard.net> <4B71815C.6050208@dresearch.de>
+Date: Tue, 09 Feb 2010 23:58:40 +0100
+Message-ID: <1265756320.17045.26.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Working with OEMs
+Subject: Re: confused by netbase/udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,48 +37,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Feb 2010 21:50:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Feb 2010 23:01:24 -0000
+X-Groupsio-MsgNum: 16618
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-mVGvNg27XGtUquAhlduq"
 
-C Michael Sundius wrote:
-> Further, I wonder if there are others out there who also feel
-> this way? My understanding is that Monta Vista is using OE; are there voices
-> on this list from MV or others that use OE for creating a consistent means
-> of building for developers and Config/Release Managers? If so, what are your
-> tricks and complaints with respect to this issue.
+--=-mVGvNg27XGtUquAhlduq
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Mike,
+Am Dienstag, den 09.02.2010, 16:38 +0100 schrieb Steffen Sledz:
+> Petr =C5=A0tetiar wrote:
+> > man 5 interfaces?
 
-I'm using COLLECTIONS, the srctree and gitver classes, plus amend.inc. I 
-think all of the above come from Chris at MV. It's about three billion 
-times better than the custom build system we had before.
+[=E2=80=A6]
 
-We have four trees:
+> OK, i try to solve one problem after the other. Let's accept that
+> every new USB-NIC gets a new name for now (using a pool of interface name=
+s).
+>=20
+> I've tried to create a /etc/network/interfaces which fits my wishes:
+>=20
+> ------------->snip<----------------
+> # /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
+>=20
+> # the loopback interface
+> auto lo
+> iface lo inet loopback
+>=20
+> # interfaces to bring up at boot time
+> auto eth0
+>=20
+> # the onboard NIC
+> iface eth0 inet dhcp
+>=20
+> # interfaces to bring up when hotplugging
+> allow-hotplug eth1 eth2 eth3 eth4 eth5 eth6 eth7 eth8
+>=20
+> # additional USB-NIC's
+> iface eth1 inet dhcp
+> iface eth2 inet dhcp
+> iface eth3 inet dhcp
+> iface eth4 inet dhcp
+> iface eth5 inet dhcp
+> iface eth6 inet dhcp
+> iface eth7 inet dhcp
+> iface eth8 inet dhcp
+> ------------->snip<----------------
+>=20
+> This works fine when hotplugging, but the USB-NIC is not recognised
+> when connected while booting up. :(
 
-- public: playground for new recipes before submitting to OE; also, 
-amend.inc's to tweak packaging behaviour or configure flags.
-- private: recipes to build closed-source drivers from our suppliers;
-- oe: full org.openembedded.dev;
-- proj: git repos for internal projects get cloned here, and added to 
-COLLECTIONS with wildcards
+Did you test this with both USB-NICs?
 
-Building the internal projects with OE means they barely even need to be 
-cross-compile aware. All they need is a simple Makefile, and a git tag 
-to set the package version. It's way easier than writing a one-off build 
-system for each project.
+> I tried to change the one line responsible for that to
+>=20
+>   auto eth0 eth1 eth2 eth3 eth4 eth5 eth6 eth7 eth8
+>=20
+> This works better but leads to dirty errors messages while booting
+> and shutdown for disconnected interfaces:
+>=20
+> boot:
+> eth1: unknown interface: No such device
+> eth2: unknown interface: No such device
+> eth3: unknown interface: No such device
+> eth4: unknown interface: No such device
+> eth5: unknown interface: No such device
+> eth6: unknown interface: No such device
+> eth7: unknown interface: No such device
+> eth8: unknown interface: No such device
+>=20
+> shutdown:
+> Deconfiguring network interfaces... cat: /var/run/udhcpc.eth0.pid: No suc=
+h file or directory
+> cat: /var/run/udhcpc.eth1.pid: No such file or directory
+> eth1: unknown interface: No such device
+> cat: /var/run/udhcpc.eth2.pid: No such file or directory
+> eth2: unknown interface: No such device
+> cat: /var/run/udhcpc.eth3.pid: No such file or directory
+> eth3: unknown interface: No such device
+> cat: /var/run/udhcpc.eth4.pid: No such file or directory
+> eth4: unknown interface: No such device
+> cat: /var/run/udhcpc.eth5.pid: No such file or directory
+> eth5: unknown interface: No such device
+> cat: /var/run/udhcpc.eth6.pid: No such file or directory
+> eth6: unknown interface: No such device
+> cat: /var/run/udhcpc.eth7.pid: No such file or directory
+> eth7: unknown interface: No such device
+> cat: /var/run/udhcpc.eth8.pid: No such file or directory
+> eth8: unknown interface: No such device
+> done.
+>=20
+> I'm not really happy with that. :(
 
-The only problem is that bitbake takes forever to start up: COLLECTIONS 
-causes a re-exec of Python, I think, and there are about 8,000 recipes 
-in the tree. But we get around it by passing in a specific recipe file 
-with -b.
+How are your boot/init scripts activate the interfaces, i. e. what
+options to they pass to `ifup`?
 
-For release management, I have a class that creates a list of the .deb 
-packages that would have gone into an image, and a script that checks 
-them into the right place in CVS. If you use Angstrom I think you get 
-the same list for free every time you build an image. The class just 
-saves me from waiting for rootfs to run.
+I still suggest to use a daemon as NetworkManager which as far as I know
+compensate this flaw of udev and `/e/n/i` which were created when a
+system had no dynamically added (non-wifi) NICs.
 
-Mike
+Although I must admit that I find a use case that someone is changing
+the NICs not very common. Normally you get one and always use that
+device with this one. And if you change it you normally only have to
+edit `/e/n/i` once since from now on you will use the new device.
 
 
+Thanks,
+
+Paul
+
+--=-mVGvNg27XGtUquAhlduq
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAktx6KAACgkQPX1aK2wOHVgaOwCfdXnLoKwfAGEZdhj7DHLwgAxe
+yuEAoIko6q6cz+NQgt9zHWk+quM3KlNJ
+=JM8c
+-----END PGP SIGNATURE-----
+
+--=-mVGvNg27XGtUquAhlduq--
