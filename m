@@ -1,34 +1,40 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from fmmailgate02.web.de ([217.72.192.227])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NelwK-0007qC-W4
+	(envelope-from <tux-master@web.de>) id 1NelxZ-000830-Qg
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 09:59:28 +0100
-Received: from [85.210.8.8] (helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1Neltt-0006ZP-9L
+	Tue, 09 Feb 2010 10:00:44 +0100
+Received: from smtp05.web.de (fmsmtp05.dlan.cinetic.de [172.20.4.166])
+	by fmmailgate02.web.de (Postfix) with ESMTP id 7050214D5C1A6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  9 Feb 2010 09:58:09 +0100 (CET)
+Received: from [79.215.2.96] (helo=merkur.sol.de)
+	by smtp05.web.de with asmtp (TLSv1:AES256-SHA:256)
+	(WEB.DE 4.110 #314) id 1Nelv7-0004pA-00
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Feb 2010 08:56:53 +0000
-From: Phil Blundell <philb@gnu.org>
+	Tue, 09 Feb 2010 09:58:09 +0100
+Received: from jens by merkur.sol.de with local (Exim 4.69)
+	(envelope-from <tux-master@web.de>) id 1Neli6-0002N4-SR
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Feb 2010 09:44:43 +0100
+Date: Tue, 9 Feb 2010 09:44:42 +0100
+From: Jens Seidel <jensseidel@users.sf.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100209085019.GA1663@mx.loc>
-References: <1265663673-16312-1-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-2-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-3-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-4-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-5-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-6-git-send-email-rep.dot.nop@gmail.com>
-	<1265666186.6761.3.camel@lenovo.internal.reciva.com>
-	<20100209085019.GA1663@mx.loc>
-Date: Tue, 09 Feb 2010 08:56:50 +0000
-Message-ID: <1265705811.6761.7.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-Broken-Reverse-DNS: no host name found for IP address 85.210.8.8
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+Message-ID: <20100209084441.GA9094@merkur.sol.de>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <20100208173821.GA24852@ibawizard.net>
+	<1265658612-19262-1-git-send-email-ynezz@true.cz>
+MIME-Version: 1.0
+In-Reply-To: <1265658612-19262-1-git-send-email-ynezz@true.cz>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Sender: tux-master@web.de
+X-Sender: tux-master@web.de
+X-Provags-ID: V01U2FsdGVkX1+Jfkt6pz91RzKDrLvX0nZIZbdcWWcD7dkH4cNL
+	ecw73+ullEYh0BRsUwusmyPrjeulD90tcFrjyar6MtNC2qJHF7 5WIwF6TPQ=
+X-SA-Exim-Connect-IP: 217.72.192.227
+X-SA-Exim-Mail-From: tux-master@web.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 05/12] no need to set LD nowadays
+Subject: Re: [PATCH] mc 4.6.2: fix do_configure error on missing	config.rpath
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,26 +48,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Feb 2010 08:59:28 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Feb 2010 09:00:44 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, 2010-02-09 at 09:50 +0100, Bernhard Reutner-Fischer wrote:
-> It seems that the .dev tree has 1.2.1, 1.2.2, 1.3.1 still in there but
-> i, personally would strongly advise against using those (same for the
-> standalone tinylogin, but that's a different thing and not relevant
-> right now).
+On Mon, Feb 08, 2010 at 08:50:12PM +0100, Petr =C5=A0tetiar wrote:
+> This patch fixes configure error, complaining about missing config.rpat=
+h file
+> which gets deleted by autofoo in recipe, so to avoid error bellow we cr=
+eate
+> empty file, making configure happy.
+=20
+> configure.ac:104: required file `config/config.rpath' not found
+> [...snip...]
+> autoreconf: automake failed with exit status: 1
+> FATAL: autoreconf execution failed.
 
-As long as those versions are there, I don't think it would be
-acceptable to check in a patch to busybox.inc which would delete them.
-Leaving the ${LD} setting as a comment doesn't really help with that.
+> @@ -86,4 +86,6 @@ AUTOFOO=3D"config.guess config.rpath config.sub depco=
+mp install-sh missing mkinsta
+>           for i in ${AUTOFOO}; do
+>             rm config/${i}
+>           done
+> +         # raises error if it's not found
+> +         touch config/config.rpath
+>  }
 
-If you wanted to generate a new patch which added the ${LD} setting to
-the individual recipes that still require it, and simultaneously delete
-it from busybox.inc, then I think that would be fine. 
+Mhm, and you know that this patch is right? If config.rpath is called it =
+is
+expected that it sets a few variables such as shlibext (normally to "so")=
+,
+libext ("a") but this does not happen with an empty config.rpath. This pa=
+tch
+may indeed fix the current error but what about support for all platforms=
+?
+I would ship a proper file instead of a faked one and I mentioned that e.=
+g.
+autopoint creates this file ...
 
-p.
-
-
+Jens
 
 
