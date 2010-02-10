@@ -1,42 +1,50 @@
 Received: from mail-fx0-f225.google.com ([209.85.220.225])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1NfJI5-0003n9-Kd
+	(envelope-from <rep.dot.nop@gmail.com>) id 1NfJr2-0003iE-Mp
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Feb 2010 21:36:08 +0100
-Received: by fxm25 with SMTP id 25so425032fxm.12
+	Wed, 10 Feb 2010 22:12:15 +0100
+Received: by fxm25 with SMTP id 25so460552fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Feb 2010 12:33:32 -0800 (PST)
+	Wed, 10 Feb 2010 13:09:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:from:to:cc:subject
-	:date:message-id:x-mailer;
-	bh=53HGSRiXWanZeuxAgFc9SVQ7jotp64PLFeOpj8HHYbY=;
-	b=LgSezrejUZ8Aph8AEZFKrkgC1/lw4qlL14lu7HWMCcJnwrNoQEV4ueB8yktfJpGC07
-	V8a9kTtZnmo+me71ZzoVgA5P8dvxjUdxFSX0rsrTG7GtOfuehVGCQd1XEgRm3JdPbs4L
-	Xnfe75G08vWkcEIipsxLH3P8ka5quZsE2F9W0=
+	h=domainkey-signature:received:received:received:date:from:to:cc
+	:subject:message-id:references:mime-version:content-type
+	:content-disposition:in-reply-to:user-agent;
+	bh=g28SfGP3v1/n1iVbHg4oTLuMgcUJ+AucM+OeaC+yPGk=;
+	b=Wb8uOLyPas0VZrwdipIBsYx4y/itNsMviPrq+kgUR4np1H5SeFS7utt0fToL4ZdTvn
+	atcxxbl/xMDf++hZ2FG6xovsFpIp8lsaVVLFG21SltJGKbyC5sAcEQEbyMS2a6Qg42RK
+	ZAeeejzI6/DGv1DHr5xtTTZXUen67mYl35mp8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=L0MuZ3zJLwGC8S/x1Kdcakn7ixB4M88qrYmLncIA7pa4cMZs6b0HkK/fmNdv6eDqOj
-	piEZTDlkBA7MfQlziBV/YH7e8RAb+FYsVuuKbXCJNoWNUqox2M9jU0xCLMGWU8ghCTHb
-	8hmrKe8tBiR5CibMaxu0bKBxP2/wvZe9l4mfw=
-Received: by 10.223.100.214 with SMTP id z22mr908788fan.104.1265834010015;
-	Wed, 10 Feb 2010 12:33:30 -0800 (PST)
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=hplKpfbJZk8G8DcUBvJbTe84kx5xSvhbwgIPKUE4qSSjzvH8BcTSKCuYCeylsZU1XT
+	5AE2TBZYrkqAEBFMsO0gOzfbPGXYUw/1DGjO3Qpl3KhqMEIhOXW0qfAp0QRpjgdqGgSV
+	SCte3+J9ke+8JMRLuFOInv4h2YoV5o87H+krY=
+Received: by 10.223.2.76 with SMTP id 12mr967754fai.62.1265836178940;
+	Wed, 10 Feb 2010 13:09:38 -0800 (PST)
 Received: from s42.loc ([84.119.103.202])
-	by mx.google.com with ESMTPS id d13sm2636032fka.47.2010.02.10.12.33.28
+	by mx.google.com with ESMTPS id 22sm2688822fkq.54.2010.02.10.13.09.35
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 10 Feb 2010 12:33:28 -0800 (PST)
+	Wed, 10 Feb 2010 13:09:35 -0800 (PST)
 Received: from cow by s42.loc with local (Exim 4.71)
 	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1NfJHe-0005O2-Fl; Wed, 10 Feb 2010 21:35:38 +0100
+	id 1NfJqb-0005dJ-IM; Wed, 10 Feb 2010 22:11:45 +0100
+Date: Wed, 10 Feb 2010 22:11:45 +0100
 From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Feb 2010 21:35:34 +0100
-Message-Id: <1265834134-20675-1-git-send-email-rep.dot.nop@gmail.com>
-X-Mailer: git-send-email 1.6.5
+Message-ID: <20100210211145.GD10632@mx.loc>
+References: <1265663673-16312-1-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-2-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-3-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-4-git-send-email-rep.dot.nop@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1265663673-16312-4-git-send-email-rep.dot.nop@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 209.85.220.225
 X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] busybox: wget accept and ignore --no-check-certificate
+Subject: Re: [PATCH 03/12] osso-application-installer: nonworking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,49 +58,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Feb 2010 20:36:08 -0000
+X-List-Received-Date: Wed, 10 Feb 2010 21:12:15 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-needed for self-hosting; applied to upstream
+On Mon, Feb 08, 2010 at 10:14:24PM +0100, Bernhard Reutner-Fischer wrote:
+>osso-application-installer depends on nonworking hildon-lgpl
 
-Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
----
- .../0000-wget-no-check-certificate.patch           |   12 ++++++++++++
- recipes/busybox/busybox_1.15.3.bb                  |    1 +
- 2 files changed, 13 insertions(+), 0 deletions(-)
- create mode 100644 recipes/busybox/busybox-1.15.3/0000-wget-no-check-certificate.patch
+I hereby withdraw this 'bitbake help' hinting on 'world' prompted but
+severely misguided attempt from september to get that world straight.
+Sorry and cheers,
+Bernhard
 
-diff --git a/recipes/busybox/busybox-1.15.3/0000-wget-no-check-certificate.patch b/recipes/busybox/busybox-1.15.3/0000-wget-no-check-certificate.patch
-new file mode 100644
-index 0000000..c737f17
---- /dev/null
-+++ b/recipes/busybox/busybox-1.15.3/0000-wget-no-check-certificate.patch
-@@ -0,0 +1,12 @@
-+diff --git a/networking/wget.c b/networking/wget.c
-+index 9d813dc..09edd67 100644
-+--- a/networking/wget.c
-++++ b/networking/wget.c
-+@@ -546,6 +546,7 @@ int wget_main(int argc UNUSED_PARAM, char **argv)
-+ 		"passive-ftp\0"      No_argument       "\xff"
-+ 		"header\0"           Required_argument "\xfe"
-+ 		"post-data\0"        Required_argument "\xfd"
-++		"no-check-certificate\0" No_argument   "\xfc"
-+ 		;
-+ #endif
-+ 
-diff --git a/recipes/busybox/busybox_1.15.3.bb b/recipes/busybox/busybox_1.15.3.bb
-index b638f9c..1e1aa1e 100644
---- a/recipes/busybox/busybox_1.15.3.bb
-+++ b/recipes/busybox/busybox_1.15.3.bb
-@@ -9,6 +9,7 @@ SRC_URI = "\
-   file://B921600.patch;patch=1 \
-   file://get_header_tar.patch;patch=1 \
-   file://busybox-appletlib-dependency.patch;patch=1 \
-+  file://0000-wget-no-check-certificate.patch;patch=1 \
-   file://find-touchscreen.sh \
-   file://busybox-cron \
-   file://busybox-httpd \
--- 
-1.6.5
-
+PS: +1 for teaching bitbake to emit sensible targets within reach.. :/
 
 
