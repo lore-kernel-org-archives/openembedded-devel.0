@@ -1,30 +1,27 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1NfCYF-0005x7-Q9
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1NfEH3-0005qH-Rz
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Feb 2010 14:24:22 +0100
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 58948491283
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Feb 2010 14:21:48 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Wed, 10 Feb 2010 14:22:46 +0100
-Message-ID: <4B72B2EB.2080708@dresearch.de>
-Date: Wed, 10 Feb 2010 14:21:47 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+	Wed, 10 Feb 2010 16:14:45 +0100
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1NfEGT-0006Ky-Rt
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Feb 2010 16:14:05 +0100
+Message-ID: <4B72CCC9.3040203@kernelconcepts.de>
+Date: Wed, 10 Feb 2010 16:12:09 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4B716436.6040301@dresearch.de>
-	<1265784508-19281-1-git-send-email-sledz@dresearch.de>
-In-Reply-To: <1265784508-19281-1-git-send-email-sledz@dresearch.de>
-X-OriginalArrivalTime: 10 Feb 2010 13:22:46.0710 (UTC)
-	FILETIME=[228CAD60:01CAAA54]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@DResearch.DE
+References: <20100206062304.GC25236@denix.org> <hkj7qt$183$1@ger.gmane.org>
+In-Reply-To: <hkj7qt$183$1@ger.gmane.org>
+X-Enigmail-Version: 0.95.7
+X-SA-Exim-Connect-IP: 212.60.202.196
+X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] vala-dbus-binding-tool-0.1.3: new recipe
+Subject: Re: Angstrom on Archos 5IT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,21 +35,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Feb 2010 13:24:22 -0000
-Content-Type: text/plain; charset=ISO-8859-15
+X-List-Received-Date: Wed, 10 Feb 2010 15:14:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Steffen Sledz write:
-> Creates gobject interfaces out of DBus XML specifications.
-> 
-> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
-> ...
+Hi all!
 
-I miss this patch in the patchwork queue. :(
+Koen Kooi schrieb:
+> If only those openoas dudes weren't so hellbent on keeping their fixes
+> to themselves and pushed them back to angstrom and OE :(
 
-My mistake?
+Not actively pushing things is not a reason for an impolite reaction. Please
+keep in mind that these people are potential contributors.
 
-Steffen
+> So, GPE dudes, if you want lots of fixes for GPE software, go through
+> http://dev.openaos.org/browser/trunk/openembedded/build/openaos
 
+Good to see fixes for improving the quality of GPE based images. These have been
+neglected way too much.
+
+> I've tried contacting the openaos people, but no response whatsoever :(
+
+I tried the same but didn't notice any problems. Just take a look into #openpma
+at freenode.net.
+
+Greetings
+
+Florian
+
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
