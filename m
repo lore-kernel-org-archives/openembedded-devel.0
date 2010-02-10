@@ -1,30 +1,50 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail-bw0-f226.google.com ([209.85.218.226])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Nf7GS-0003t7-Nt
+	(envelope-from <rep.dot.nop@gmail.com>) id 1Nf8M4-0002Td-8q
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Feb 2010 08:45:39 +0100
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 9373D491283
+	Wed, 10 Feb 2010 09:55:31 +0100
+Received: by bwz26 with SMTP id 26so956912bwz.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Feb 2010 08:43:05 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Wed, 10 Feb 2010 08:44:03 +0100
-Message-ID: <4B726388.7070109@dresearch.de>
-Date: Wed, 10 Feb 2010 08:43:04 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
-MIME-Version: 1.0
+	Wed, 10 Feb 2010 00:52:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=anxYcNaqSTTtzxvJ716ch5N3K4d14kJU7AR2F8ZnZ5Y=;
+	b=qTx+WgQXJqGLtmBc1yT0qm79Oxy/E++Soi8NnZvA0MH36bKWT5sZ96AgLOv70bLjpe
+	BT4XdXOGJlyVFb5SS50/cS7gcu5dqhfcjLq0QaDOYqZw7d6kryTIFUEQWiKqfVT0OxrX
+	ADWaSnWmyRhlbhT62CP8KIuk2GePv/h+c9LcA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=YgZ63M6oeMf6C/C+rYSMIAKh+2Bk2WiHCTnI0e6PI0FnbcBbWlJGA6uAu9JTeApXVZ
+	25orCUuvp02kiDunI1Ez2PF5NMj3r2lTSgmLEenaPl0TvimSdOpzpOtOmbiyJSuJZxgo
+	JRKiKXfvMLHybNIc1CQhiq7Y4n2cRmbBsfFSY=
+Received: by 10.204.160.147 with SMTP id n19mr630823bkx.182.1265791974858;
+	Wed, 10 Feb 2010 00:52:54 -0800 (PST)
+Received: from s42.loc ([84.119.103.202])
+	by mx.google.com with ESMTPS id 13sm422715bwz.10.2010.02.10.00.52.53
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 10 Feb 2010 00:52:53 -0800 (PST)
+Received: from cow by s42.loc with local (Exim 4.71)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1Nf8LY-0000aw-BJ; Wed, 10 Feb 2010 09:54:56 +0100
+Date: Wed, 10 Feb 2010 09:54:56 +0100
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4B7145A5.70808@dresearch.de>
-	<f96d234e1002091314n6d8d1698pc1ce00c269dc3feb@mail.gmail.com>
-In-Reply-To: <f96d234e1002091314n6d8d1698pc1ce00c269dc3feb@mail.gmail.com>
-X-OriginalArrivalTime: 10 Feb 2010 07:44:03.0194 (UTC)
-	FILETIME=[D0CA3DA0:01CAAA24]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@DResearch.DE
+Message-ID: <20100210085456.GB2239@mx.loc>
+References: <1265663673-16312-1-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-2-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-3-git-send-email-rep.dot.nop@gmail.com>
+	<20100209093757.GB9094@merkur.sol.de>
+MIME-Version: 1.0
+In-Reply-To: <20100209093757.GB9094@merkur.sol.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.218.226
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: confused by netbase/udev
+Subject: Re: [PATCH 02/12] some more !getopt_long fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,27 +58,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Feb 2010 07:45:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 10 Feb 2010 08:55:31 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Cliff Brake wrote:
-> I ended up just removing the following files from my build, and now it
-> works as I expect -- the first USB NIC is always eth0, etc.
-> 
-> 70-persistent-net.rules
-> 75-persistent-net-generator.rules
+On Tue, Feb 09, 2010 at 10:38:00AM +0100, Jens Seidel wrote:
+>On Mon, Feb 08, 2010 at 10:14:23PM +0100, Bernhard Reutner-Fischer wrote:
+>> -                if [ "$VERBOSE" != no ]
+>> +                if [ "$VERBOSE" != "no" ]
+>
+>I don't see any need for this change. Why doesn't the commit message does
+>not explain why it was done?
+>
+>I assume it is a stylistic change only and should that's why committed
+>separately (with a different commit log), right?
 
-I believe that's what we want.
-
-BTW, what's the best way to remove them from the build? Something like
-this in udev_141.bb?
-
-do_install_append_hipox() {
- rm -f {D}${sysconfdir}/udev/rules.d/75-persistent-net-generator.rules
-}
-
-Steffen
-
+Yes, it is a stylistic change only and could be committed separately.
+I'll factor them out and resend.
 
 
