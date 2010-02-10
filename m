@@ -1,30 +1,43 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from relay04.stack.nl ([131.155.140.107] helo=mx1.stack.nl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Nf6mz-0004Ri-44
+	(envelope-from <ruud@il.fontys.nl>) id 1Nf6ul-0001lA-21
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Feb 2010 08:15:12 +0100
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 09FC4491283;
-	Wed, 10 Feb 2010 08:12:38 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Wed, 10 Feb 2010 08:13:35 +0100
-Message-ID: <4B725C64.6070109@dresearch.de>
-Date: Wed, 10 Feb 2010 08:12:36 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
-MIME-Version: 1.0
+	Wed, 10 Feb 2010 08:23:14 +0100
+Received: by mx1.stack.nl (Postfix, from userid 65534)
+	id 915BD1DD733; Wed, 10 Feb 2010 08:20:38 +0100 (CET)
+Received: from mail.il.fontys.nl (mail.il.fontys.nl
+	[IPv6:2001:4128:1000:1000::7])
+	(using TLSv1 with cipher ADH-CAMELLIA256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailhost.stack.nl (Postfix) with ESMTPS id 682DD1DD68A
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Feb 2010 08:20:36 +0100 (CET)
+Received: by mail.il.fontys.nl (Postfix, from userid 1004)
+	id 0F4F111472; Wed, 10 Feb 2010 08:20:35 +0100 (CET)
+Received: from charm.il.fontys.nl (charm.il.fontys.nl
+	[IPv6:2001:4128:1000:1000::34])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(Client did not present a certificate)
+	by mail.il.fontys.nl (Postfix) with ESMTPS id 1196411453
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Feb 2010 08:20:34 +0100 (CET)
+Received: by charm.il.fontys.nl (Postfix, from userid 1838)
+	id A64B1412B; Wed, 10 Feb 2010 08:20:33 +0100 (CET)
+Date: Wed, 10 Feb 2010 08:20:33 +0100
+From: Ruud Althuizen <ruud@il.fontys.nl>
 To: openembedded-devel@lists.openembedded.org
-References: <4B716436.6040301@dresearch.de>
-	<1265784508-19281-1-git-send-email-sledz@dresearch.de>
-In-Reply-To: <1265784508-19281-1-git-send-email-sledz@dresearch.de>
-X-OriginalArrivalTime: 10 Feb 2010 07:13:35.0491 (UTC)
-	FILETIME=[8F64E530:01CAAA20]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@DResearch.DE
+Message-ID: <20100210072033.GF1638@il.fontys.nl>
+References: <20100203104829.GL17820@il.fontys.nl>
+	<1265195232.5591.75.camel@mattotaupa>
+	<20100203111649.GN17820@il.fontys.nl>
+MIME-Version: 1.0
+In-Reply-To: <20100203111649.GN17820@il.fontys.nl>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 131.155.140.107
+X-SA-Exim-Mail-From: ruud@il.fontys.nl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: mickey@vanille-media.de
-Subject: Re: [PATCH] vala-dbus-binding-tool-0.1.3: new recipe
+Subject: Re: New machine: Embedded Artists LPC3250
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,17 +51,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Feb 2010 07:15:12 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 10 Feb 2010 07:23:14 -0000
+X-Groupsio-MsgNum: 16625
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="iVCmgExH7+hIHJ1A"
+Content-Disposition: inline
 
-After sending my suggestion for a patch i've detected that there
-exists a vala-dbus-binding-tool-native_git recipe below
-recipes/freesmartphone.
+--iVCmgExH7+hIHJ1A
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Shouldn't we join both in recipes/vala-dbus-binding-tool?
+Hello,
 
-Steffen
+On Wed 03 Feb 2010 12:16 PM, Ruud Althuizen wrote:
+> On Wed 03 Feb 2010 12:07 PM, Paul Menzel wrote:
+> > Am Mittwoch, den 03.02.2010, 11:48 +0100 schrieb Ruud Althuizen:
+> > > In the attached patches there is a machine config and kernel recipe f=
+or the
+> > > LPC3250 based Embedded Artists development board.
+> > >=20
+> > > If you have any suggestions for the attached patches, please give the=
+m so I
+> > > can fix it.
+> >=20
+> > Please attach them. ;-)
+> Ah, now I remember that mutt discards attachments when forwarding :/.
+So, it's been a week now. And not even an reply. Any chance of this getting
+into the dev tree?
 
+--=20
+Kind regards,
+Ruud Althuizen
 
+--iVCmgExH7+hIHJ1A
+Content-Type: application/pgp-signature
+Content-Disposition: inline
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (FreeBSD)
+
+iEYEARECAAYFAktyXkEACgkQkqncCMFskRVY0gCeO7PMzC7DJanHH+7iCmo2EgG7
+GQEAn0M4VvVZ8kPk4XE+Bo8sV4AIYkNd
+=oB7i
+-----END PGP SIGNATURE-----
+
+--iVCmgExH7+hIHJ1A--
