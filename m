@@ -1,40 +1,44 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from dan.rpsys.net ([93.97.175.187])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NfEIZ-0005wP-Ap for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Feb 2010 16:16:18 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NfEG3-00031S-Ba for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Feb 2010 16:13:39 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Feb 2010 16:13:39 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <rpurdie@rpsys.net>) id 1NfEsJ-00033f-Nm
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Feb 2010 16:53:14 +0100
+Received: from localhost (dan.rpsys.net [127.0.0.1])
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	o1AFjxLO024887 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Feb 2010 15:45:59 GMT
+X-Virus-Scanned: Debian amavisd-new at dan.rpsys.net
+Received: from dan.rpsys.net ([127.0.0.1])
+	by localhost (dan.rpsys.net [127.0.0.1]) (amavisd-new, port 10024)
+	with LMTP id Uij8JfwF8xFi
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Feb 2010 16:13:39 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 10 Feb 2010 15:45:59 +0000 (GMT)
+Received: from [192.168.1.3] (tim [93.97.173.237]) (authenticated bits=0)
+	by dan.rpsys.net (8.14.2/8.14.2/Debian-2build1) with ESMTP id
+	o1AFjtD6024864
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Feb 2010 15:45:57 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 10 Feb 2010 16:13:15 +0100
-Message-ID: <hkuie9$cjg$1@ger.gmane.org>
-References: <1263990478-28107-1-git-send-email-Martin.Jansa@gmail.com>	<1263990478-28107-2-git-send-email-Martin.Jansa@gmail.com>	<1263990478-28107-3-git-send-email-Martin.Jansa@gmail.com>	<1263990478-28107-4-git-send-email-Martin.Jansa@gmail.com>	<1263990478-28107-5-git-send-email-Martin.Jansa@gmail.com>	<hkgqat$53c$1@ger.gmane.org>
-	<20100210131122.GB3378@jama>
+In-Reply-To: <1265751396.6312.15.camel@trini-m4400>
+References: <1265247822-20734-1-git-send-email-denis@denix.org>
+	<1265302671.25338.57.camel@conroy-linux>
+	<20100204172234.GA5641@denix.org>
+	<1265306225.26642.3.camel@trini-m4400>
+	<1265461459.5019.20.camel@lenovo.internal.reciva.com>
+	<1265655603.16517.13.camel@trini-m4400>
+	<20100209200804.GA3142@gmail.com>
+	<1265751396.6312.15.camel@trini-m4400>
+Date: Wed, 10 Feb 2010 15:50:38 +0000
+Message-Id: <1265817038.9956.1.camel@dax.rpnet.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100130 Shredder/3.0.2pre
-In-Reply-To: <20100210131122.GB3378@jama>
-X-Enigmail-Version: 1.0.1
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.22.3.1 
+X-SA-Exim-Connect-IP: 93.97.175.187
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 4/6] pixman: add version 0.17.4 with neon patches
+Subject: Re: [RFC][PATCH] meta-toolchain: make SDK relocatable by	using $SDK_PATH var in env setup script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,49 +52,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Feb 2010 15:16:18 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 10 Feb 2010 15:53:15 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Tue, 2010-02-09 at 14:36 -0700, Tom Rini wrote:
+> On Tue, 2010-02-09 at 12:08 -0800, Khem Raj wrote:
+> > On (08/02/10 12:00), Tom Rini wrote:
+> > I think the prerequisites of gcc libmpfr, libgmp and libmpc from 4.5
+> > onwards are probably not used by 
+> > any other tools we stage for host so it would be safer to build them inside
+> > gcc tree and link in statically and only create runtime deps on the
+> > libraries that always exist like libc. This will have better chance of
+> > relocation. We just need to untar these libraries in top of gcc src tree
+> > and it will use cofigure and use it. But this only solves gcc issue 
+> > for other host/cross packages which depend upon libs from staging we still
+> > need a solution. 
+> 
+> I was thinking that too.  Phil, can you try on your toolchain branch to
+> do this? :)
 
-Yes, that's the error
+Another generic solution I'm wondering about is postprocessing the
+cross/native binaries with chrpath. This has the benefits of no horrible
+shell quoting and its generic.
 
-On 10-02-10 14:11, Martin Jansa wrote:
-> On Fri, Feb 05, 2010 at 11:02:07AM +0100, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> This one fails to build for armv7a with some weird libtool problem
-> 
-> Does that error look like:
-> 
-> /bin/sh ../arm-oe-linux-gnueabi-libtool --tag=CC   --mode=link arm-oe-linux-gnueabi-gcc -march=armv4t -mtune=arm920t -mthumb-interwork -mthumb  -isystem/home/projects/OE/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -Wall -fno-strict-aliasing -fvisibility=hidden  -L/home/projects/OE/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/lib -Wl,-rpath-link,/home/projects/OE/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=gnu -o gradient-test gradient-test.o gtk-utils.o -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0 -lpangocairo-1.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lgmodule-2.0 -lglib-2.0   -L.. ../pixman/libpixman-1.la
-> arm-oe-linux-gnueabi-libtool: link: cannot find the library `/home/projects/OE/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/lib/libpixman-1.la' or unhandled argument `/home/projects/OE/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/lib/libpixman-1.la'
-> make[2]: Leaving directory `/home/projects/OE/tmpdir-dev-shr/work/armv4t-oe-linux-gnueabi/pixman-0.17.4-r1/pixman-0.17.4/test'
-> 
-> If yes than it's because
-> -lpangocairo-1.0 -lcairo from GTK_LIBS have /home/projects/OE/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/lib/libpixman-1.la 
-> in their own .la files and this way it creates circular dependency, which fails when armv4t-oe-linux-gnueabi/usr/lib/libpixman-1.la
-> is removed during upgrade.
-> 
-> Removing those 2 libs from GTK_LIBS works as well as removing libpixman-1.la reference from their staged .la files.
-> 
-> Please advise how to fix it properly.
-> 
-> BTW: this is not new issue with 0.17.4, I had that before (and tried to resolve it with latest cleanup of old libpixman-native recipes)
-> 
-> Regards,
-> 
+I might even be tempted to try this soon...
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Cheers,
 
-iD8DBQFLcs0LMkyGM64RGpERAmPbAKC7cTwWXilKLuleYVJINLVBikRuJACgjsD2
-BFemPUDJUefDUXm4yJajLRI=
-=BNDk
------END PGP SIGNATURE-----
+Richard
 
 
 
