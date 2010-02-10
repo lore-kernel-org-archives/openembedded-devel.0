@@ -1,50 +1,37 @@
-Received: from mail-fx0-f225.google.com ([209.85.220.225])
+Received: from mta9.brinkster.com ([65.182.109.78])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1NfJr2-0003iE-Mp
+	(envelope-from <John.Willis@Distant-earth.com>) id 1NfJwu-0003vH-3y
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Feb 2010 22:12:15 +0100
-Received: by fxm25 with SMTP id 25so460552fxm.12
+	Wed, 10 Feb 2010 22:18:19 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mta9.brinkster.com (Postfix) with ESMTP id A1B6D248075
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Feb 2010 13:09:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:cc
-	:subject:message-id:references:mime-version:content-type
-	:content-disposition:in-reply-to:user-agent;
-	bh=g28SfGP3v1/n1iVbHg4oTLuMgcUJ+AucM+OeaC+yPGk=;
-	b=Wb8uOLyPas0VZrwdipIBsYx4y/itNsMviPrq+kgUR4np1H5SeFS7utt0fToL4ZdTvn
-	atcxxbl/xMDf++hZ2FG6xovsFpIp8lsaVVLFG21SltJGKbyC5sAcEQEbyMS2a6Qg42RK
-	ZAeeejzI6/DGv1DHr5xtTTZXUen67mYl35mp8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=hplKpfbJZk8G8DcUBvJbTe84kx5xSvhbwgIPKUE4qSSjzvH8BcTSKCuYCeylsZU1XT
-	5AE2TBZYrkqAEBFMsO0gOzfbPGXYUw/1DGjO3Qpl3KhqMEIhOXW0qfAp0QRpjgdqGgSV
-	SCte3+J9ke+8JMRLuFOInv4h2YoV5o87H+krY=
-Received: by 10.223.2.76 with SMTP id 12mr967754fai.62.1265836178940;
-	Wed, 10 Feb 2010 13:09:38 -0800 (PST)
-Received: from s42.loc ([84.119.103.202])
-	by mx.google.com with ESMTPS id 22sm2688822fkq.54.2010.02.10.13.09.35
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 10 Feb 2010 13:09:35 -0800 (PST)
-Received: from cow by s42.loc with local (Exim 4.71)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1NfJqb-0005dJ-IM; Wed, 10 Feb 2010 22:11:45 +0100
-Date: Wed, 10 Feb 2010 22:11:45 +0100
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100210211145.GD10632@mx.loc>
-References: <1265663673-16312-1-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-2-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-3-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-4-git-send-email-rep.dot.nop@gmail.com>
+	Wed, 10 Feb 2010 16:06:14 -0500 (EST)
+X-Virus-Scanned: amavisd-new at 
+Received: from mta9.brinkster.com ([127.0.0.1])
+	by localhost (mta9.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 6dpKhxUwGmnd
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Feb 2010 16:06:10 -0500 (EST)
+Received: from MareImbrium (cpc1-bath2-0-0-cust327.aztw.cable.virginmedia.com
+	[82.46.19.72])
+	by mta9.brinkster.com (Postfix) with ESMTP id 9F831493F38
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Feb 2010 16:06:09 -0500 (EST)
+From: "John Willis" <John.Willis@Distant-earth.com>
+To: <openembedded-devel@lists.openembedded.org>
+References: <B5065796495AFE4CA0A151FCB7BAE0120423EDC2B7@s-zera-ex01.zera.local>
+In-Reply-To: <B5065796495AFE4CA0A151FCB7BAE0120423EDC2B7@s-zera-ex01.zera.local>
+Date: Wed, 10 Feb 2010 21:05:59 -0000
+Message-ID: <001001caaa94$d93632d0$8ba29870$@Willis@Distant-earth.com>
 MIME-Version: 1.0
-In-Reply-To: <1265663673-16312-4-git-send-email-rep.dot.nop@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.225
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: Acqqj2QGqQXu97fIS82SPRbJG8v0UAAA16fA
+X-SA-Exim-Connect-IP: 65.182.109.78
+X-SA-Exim-Mail-From: John.Willis@Distant-earth.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 03/12] osso-application-installer: nonworking
+Subject: Re: xfwm4 themes from xfwm4-themes are not packed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,18 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Feb 2010 21:12:15 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 10 Feb 2010 21:18:19 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-us
 
-On Mon, Feb 08, 2010 at 10:14:24PM +0100, Bernhard Reutner-Fischer wrote:
->osso-application-installer depends on nonworking hildon-lgpl
+Dear Andreas,
 
-I hereby withdraw this 'bitbake help' hinting on 'world' prompted but
-severely misguided attempt from september to get that world straight.
-Sorry and cheers,
-Bernhard
+> I created a recipe for xfce/xfwm4/slim. After everything working fine
+> so far, I tried to make it more colorful and check the xfwm4-themes.
+> Doing so, I had to realize that all the themes coming from xfwm4-
+> themes(-4.6.0) are not packed and are not found in rootfs
+> /usr/share/themes. The themes included in xfwm4 can be found.
 
-PS: +1 for teaching bitbake to emit sensible targets within reach.. :/
+Most of the Xfce 4.6.* work was done by myself and while I have not
+encountered any issues with the themes for the Xfce Window Manager I can see
+after reviewing the recipes that there is some room for improvement in the
+xfwm4-themes recipe (your quite right, it's not working as it should and is
+also not very clever).
+
+Leave this with me for a few days and I'll get things cleaned up and
+submitted for inclusion in OpenEmbedded.
+
+Regards,
+
+John Willis
+
+
 
 
