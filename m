@@ -1,32 +1,23 @@
-Received: from smtp-out04.alice.it ([85.37.17.100])
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1Nf9RB-0004Fx-Br
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Feb 2010 11:04:53 +0100
-Received: from FBCMMO04.fbc.local ([192.168.184.135]) by smtp-out04.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 10 Feb 2010 11:02:14 +0100
-Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO04.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 10 Feb 2010 11:02:05 +0100
-Received: from [192.168.1.116] ([79.21.48.56]) by FBCMCL01B07.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Wed, 10 Feb 2010 11:02:05 +0100
-From: GNUtoo <GNUtoo@no-log.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100209213621.GE20644@denix.org>
-References: <1265738131.3731.27.camel@gnutoo-desktop>
-	<20100209213621.GE20644@denix.org>
-Date: Wed, 10 Feb 2010 11:02:01 +0100
-Message-Id: <1265796121.11891.0.camel@gnutoo-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-OriginalArrivalTime: 10 Feb 2010 10:02:05.0623 (UTC)
-	FILETIME=[19809C70:01CAAA38]
-X-SA-Exim-Connect-IP: 85.37.17.100
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1NfAww-0008FJ-0P
+	for openembedded-devel@openembedded.org; Wed, 10 Feb 2010 12:41:45 +0100
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1NfAwL-0004mw-IL
+	for openembedded-devel@openembedded.org; Wed, 10 Feb 2010 12:41:05 +0100
+Message-ID: <4B729ADE.1090009@kernelconcepts.de>
+Date: Wed, 10 Feb 2010 12:39:10 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Enigmail-Version: 0.95.7
+X-SA-Exim-Connect-IP: 212.60.202.196
+X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: gdb sdk
+Subject: FOSDEM - a short summary
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,15 +31,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Feb 2010 10:04:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 10 Feb 2010 11:41:45 -0000
+Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2010-02-09 at 16:36 -0500, Denys Dmytriyenko wrote:
-> SDK tarball is produced by meta-toolchain/meta-toolchain-* recipes.
-Thanks a lot.
-Denis.
+Hi all!
+
+I wrote a short summary about OE at FOSDEM and 'spiced' it with a few photos.
+http://fl0rian.wordpress.com/2010/02/09/fosdem-2010/
+
+Many thanks to everyone who helped at the OE booth!
 
 
+Greetings
+
+Florian
+
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
