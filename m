@@ -1,27 +1,40 @@
-Received: from mail.kernelconcepts.de ([212.60.202.196])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1NfEH3-0005qH-Rz
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Feb 2010 16:14:45 +0100
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1NfEGT-0006Ky-Rt
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Feb 2010 16:14:05 +0100
-Message-ID: <4B72CCC9.3040203@kernelconcepts.de>
-Date: Wed, 10 Feb 2010 16:12:09 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NfEIZ-0005wP-Ap for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Feb 2010 16:16:18 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NfEG3-00031S-Ba for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Feb 2010 16:13:39 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Feb 2010 16:13:39 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Feb 2010 16:13:39 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <20100206062304.GC25236@denix.org> <hkj7qt$183$1@ger.gmane.org>
-In-Reply-To: <hkj7qt$183$1@ger.gmane.org>
-X-Enigmail-Version: 0.95.7
-X-SA-Exim-Connect-IP: 212.60.202.196
-X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 10 Feb 2010 16:13:15 +0100
+Message-ID: <hkuie9$cjg$1@ger.gmane.org>
+References: <1263990478-28107-1-git-send-email-Martin.Jansa@gmail.com>	<1263990478-28107-2-git-send-email-Martin.Jansa@gmail.com>	<1263990478-28107-3-git-send-email-Martin.Jansa@gmail.com>	<1263990478-28107-4-git-send-email-Martin.Jansa@gmail.com>	<1263990478-28107-5-git-send-email-Martin.Jansa@gmail.com>	<hkgqat$53c$1@ger.gmane.org>
+	<20100210131122.GB3378@jama>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100130 Shredder/3.0.2pre
+In-Reply-To: <20100210131122.GB3378@jama>
+X-Enigmail-Version: 1.0.1
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Angstrom on Archos 5IT
+Subject: Re: [PATCH 4/6] pixman: add version 0.17.4 with neon patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,40 +48,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Feb 2010 15:14:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 10 Feb 2010 15:16:18 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi all!
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Koen Kooi schrieb:
-> If only those openoas dudes weren't so hellbent on keeping their fixes
-> to themselves and pushed them back to angstrom and OE :(
+Yes, that's the error
 
-Not actively pushing things is not a reason for an impolite reaction. Please
-keep in mind that these people are potential contributors.
+On 10-02-10 14:11, Martin Jansa wrote:
+> On Fri, Feb 05, 2010 at 11:02:07AM +0100, Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> This one fails to build for armv7a with some weird libtool problem
+> 
+> Does that error look like:
+> 
+> /bin/sh ../arm-oe-linux-gnueabi-libtool --tag=CC   --mode=link arm-oe-linux-gnueabi-gcc -march=armv4t -mtune=arm920t -mthumb-interwork -mthumb  -isystem/home/projects/OE/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -Wall -fno-strict-aliasing -fvisibility=hidden  -L/home/projects/OE/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/lib -Wl,-rpath-link,/home/projects/OE/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=gnu -o gradient-test gradient-test.o gtk-utils.o -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lgio-2.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0 -lpangocairo-1.0 -lcairo -lpango-1.0 -lfreetype -lfontconfig -lgobject-2.0 -lgmodule-2.0 -lglib-2.0   -L.. ../pixman/libpixman-1.la
+> arm-oe-linux-gnueabi-libtool: link: cannot find the library `/home/projects/OE/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/lib/libpixman-1.la' or unhandled argument `/home/projects/OE/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/lib/libpixman-1.la'
+> make[2]: Leaving directory `/home/projects/OE/tmpdir-dev-shr/work/armv4t-oe-linux-gnueabi/pixman-0.17.4-r1/pixman-0.17.4/test'
+> 
+> If yes than it's because
+> -lpangocairo-1.0 -lcairo from GTK_LIBS have /home/projects/OE/tmpdir-dev-shr/staging/armv4t-oe-linux-gnueabi/usr/lib/libpixman-1.la 
+> in their own .la files and this way it creates circular dependency, which fails when armv4t-oe-linux-gnueabi/usr/lib/libpixman-1.la
+> is removed during upgrade.
+> 
+> Removing those 2 libs from GTK_LIBS works as well as removing libpixman-1.la reference from their staged .la files.
+> 
+> Please advise how to fix it properly.
+> 
+> BTW: this is not new issue with 0.17.4, I had that before (and tried to resolve it with latest cleanup of old libpixman-native recipes)
+> 
+> Regards,
+> 
 
-> So, GPE dudes, if you want lots of fixes for GPE software, go through
-> http://dev.openaos.org/browser/trunk/openembedded/build/openaos
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Good to see fixes for improving the quality of GPE based images. These have been
-neglected way too much.
+iD8DBQFLcs0LMkyGM64RGpERAmPbAKC7cTwWXilKLuleYVJINLVBikRuJACgjsD2
+BFemPUDJUefDUXm4yJajLRI=
+=BNDk
+-----END PGP SIGNATURE-----
 
-> I've tried contacting the openaos people, but no response whatsoever :(
-
-I tried the same but didn't notice any problems. Just take a look into #openpma
-at freenode.net.
-
-Greetings
-
-Florian
-
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
 
 
