@@ -1,22 +1,14 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NfHc0-0005YZ-RQ
+	(envelope-from <philb@gnu.org>) id 1NfHk0-0007EJ-6D
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Feb 2010 19:48:36 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NfHZW-0007LT-1H from Tom_Rini@mentor.com 
+	Wed, 10 Feb 2010 19:56:51 +0100
+Received: from [85.210.8.8] (helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NfHhW-0001NV-NM
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Feb 2010 10:45:58 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 10 Feb 2010 10:45:57 -0800
-Received: from 172.30.80.244 ([172.30.80.244]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Wed, 10 Feb 2010 18:45:56 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	10 Feb 2010 11:45:53 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Wed, 10 Feb 2010 18:54:14 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <1265817038.9956.1.camel@dax.rpnet.com>
 References: <1265247822-20734-1-git-send-email-denis@denix.org>
@@ -28,18 +20,16 @@ References: <1265247822-20734-1-git-send-email-denis@denix.org>
 	<20100209200804.GA3142@gmail.com>
 	<1265751396.6312.15.camel@trini-m4400>
 	<1265817038.9956.1.camel@dax.rpnet.com>
-Organization: Mentor Graphics Corporation
-Date: Wed, 10 Feb 2010 11:45:53 -0700
-Message-Id: <1265827553.6312.182.camel@trini-m4400>
+Date: Wed, 10 Feb 2010 18:54:13 +0000
+Message-ID: <1265828053.6761.142.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-OriginalArrivalTime: 10 Feb 2010 18:45:57.0665 (UTC)
-	FILETIME=[48759910:01CAAA81]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-Mailer: Evolution 2.28.1 
+X-Broken-Reverse-DNS: no host name found for IP address 85.210.8.8
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [RFC][PATCH] meta-toolchain: make SDK relocatable by using $SDK_PATH var in env setup script
+Subject: Re: [RFC][PATCH] meta-toolchain: make SDK relocatable by	using $SDK_PATH var in env setup script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,8 +43,8 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Feb 2010 18:48:36 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 10 Feb 2010 18:56:51 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
 On Wed, 2010-02-10 at 15:50 +0000, Richard Purdie wrote:
@@ -78,12 +68,13 @@ On Wed, 2010-02-10 at 15:50 +0000, Richard Purdie wrote:
 > cross/native binaries with chrpath. This has the benefits of no horrible
 > shell quoting and its generic.
 
-This might be nice for relocating packaged staging, more-so than SDK
-(depending on what you need / want your SDK to be able to do without
-OE...)
+Yeah, either that or wrapping the binaries in something (either a binayr
+or just a shell script) which invokes the dynamic linker with an
+appropriate library path.  That would also handle your situation where
+you have a custom ld.so as well.
 
--- 
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+p.
+
+
 
 
