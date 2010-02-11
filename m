@@ -1,38 +1,25 @@
-Received: from mta6.brinkster.com ([65.182.109.75])
+Received: from outbound.icp-qv1-irony-out5.iinet.net.au ([203.59.1.105])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <John.Willis@Distant-earth.com>) id 1NfYIa-0001A5-TT
+	(envelope-from <gbj@theforce.com.au>) id 1NfYWh-0007zH-NP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Feb 2010 13:37:40 +0100
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mta6.brinkster.com (Postfix) with ESMTP id 90A878CB83
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Feb 2010 07:29:02 -0500 (EST)
-X-Virus-Scanned: amavisd-new at 
-Received: from mta6.brinkster.com ([127.0.0.1])
-	by localhost (mta6.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Njsnica6rpX7
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Feb 2010 07:28:58 -0500 (EST)
-Received: from MareImbrium (cpc1-bath2-0-0-cust327.aztw.cable.virginmedia.com
-	[82.46.19.72])
-	by mta6.brinkster.com (Postfix) with ESMTP id 2BB498CB66
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Feb 2010 07:28:57 -0500 (EST)
-From: "John Willis" <John.Willis@Distant-earth.com>
-To: <openembedded-devel@lists.openembedded.org>
-References: <B5065796495AFE4CA0A151FCB7BAE0120423EDC2B7@s-zera-ex01.zera.local>
-	<001001caaa94$d93632d0$8ba29870$@Willis@Distant-earth.com>
-In-Reply-To: <001001caaa94$d93632d0$8ba29870$@Willis@Distant-earth.com>
-Date: Thu, 11 Feb 2010 12:28:44 -0000
-Message-ID: <008001caab15$c1fe4590$45fad0b0$@Willis@Distant-earth.com>
+	Thu, 11 Feb 2010 13:52:15 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: ApEBAIyLc0t8lJcQ/2dsb2JhbAAH2QWEVgQ
+X-IronPort-AV: E=Sophos;i="4.49,451,1262534400"; d="scan'208";a="100645705"
+Received: from unknown (HELO [10.1.1.8]) ([124.148.151.16])
+	by outbound.icp-qv1-irony-out5.iinet.net.au with ESMTP;
+	11 Feb 2010 20:46:29 +0800
+Message-ID: <4B73FC24.9060807@theforce.com.au>
+Date: Thu, 11 Feb 2010 23:46:28 +1100
+From: Grahame Jordan <gbj@theforce.com.au>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook 12.0
-Thread-Index: Acqqj2QGqQXu97fIS82SPRbJG8v0UAAA16fAACBuf0A=
-X-SA-Exim-Connect-IP: 65.182.109.75
-X-SA-Exim-Mail-From: John.Willis@Distant-earth.com
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 203.59.1.105
+X-SA-Exim-Mail-From: gbj@theforce.com.au
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: xfwm4 themes from xfwm4-themes are not packed
+Subject: omap3-desktop-image fails baking 'news'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,50 +33,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Feb 2010 12:37:40 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Thu, 11 Feb 2010 12:52:15 -0000
+Content-Type: multipart/mixed; boundary="------------020707050408010007060405"
+
+--------------020707050408010007060405
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Language: en-us
 
-Dear Andreas,
+Hi,
 
-> > I created a recipe for xfce/xfwm4/slim. After everything working fine
-> > so far, I tried to make it more colorful and check the xfwm4-themes.
-> > Doing so, I had to realize that all the themes coming from xfwm4-
-> > themes(-4.6.0) are not packed and are not found in rootfs
-> > /usr/share/themes. The themes included in xfwm4 can be found.
-> 
-> Most of the Xfce 4.6.* work was done by myself and while I have not
-> encountered any issues with the themes for the Xfce Window Manager I
-> can see
-> after reviewing the recipes that there is some room for improvement in
-> the
-> xfwm4-themes recipe (your quite right, it's not working as it should
-> and is
-> also not very clever).
+After git pull I could not build e17/news on Ubuntu 9.04
+Found this on:
+http://old.nabble.com/omap3-desktop-image-fails-baking-'news'-td27323561.html
+applied changes and it now compiles OK.
 
-To follow up on this I have done some quick refactoring of
-recipes/xfce-base/xfwm4-themes_4.6.0.bb and published the results to my tree
-at
-http://git.openpandora.org/cgi-bin/gitweb.cgi?p=openembedded.git;a=shortlog;
-h=op.openembedded.dev (Your already familiar with the OP trees so I assume
-you will have no issues cherry picking off the commit).
+Please review/apply attached patch
 
-The package now packs up all 80+ :-o XFWM4 extra themes correctly and also
-creates a xfwm4-themes meta package that depends on all the themes. 
+Thanks
 
-This means that you can now add any one of the 80 odd themes to your image
-explicitly or (better) just add xfwm4-themes to your image to have it drag
-in every extra theme that is not part of the xfwm4 core package.
-
-If you could test this and report back I would appreciate it, assuming all
-looks ok I'll request this patch is pushed into OE mainline.
-
-Regards,
-
-John
+Grahame Jordan
 
 
+--------------020707050408010007060405
+Content-Type: text/x-patch;
+ name="AM_GNU_GETTEXT_po.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename="AM_GNU_GETTEXT_po.patch"
+
+diff --git a/recipes/e17/news_svn.bb b/recipes/e17/news_svn.bb
+index c72fbb5..644d2e9 100644
+--- a/recipes/e17/news_svn.bb
++++ b/recipes/e17/news_svn.bb
+@@ -1,12 +1,13 @@
+ LICENSE = "MIT"
+ PV = "0.1.0+svnr${SRCPV}"
+ 
++PR = "r4"
++
+ require e-module.inc
+ 
+ do_configure_prepend() {
+-	sed -i -e /po/d configure.ac 
++	sed -i -e /po/d -e /AM_GNU_GETTEXT/d configure.ac 
+ 	sed -i -e s:\ po::g Makefile.am
++	touch ${S}/config.rpath
+ }
+ 
+-
+-
 
 
+--------------020707050408010007060405--
