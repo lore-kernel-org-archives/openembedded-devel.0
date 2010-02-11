@@ -1,47 +1,36 @@
-Received: from mail-fx0-f225.google.com ([209.85.220.225])
+Received: from vms173003pub.verizon.net ([206.46.173.3])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NfUl8-00066l-Jj
+	(envelope-from <denis@denix.org>) id 1NfV1H-0000qo-4k
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Feb 2010 09:50:53 +0100
-Received: by fxm25 with SMTP id 25so836354fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Feb 2010 00:48:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=B9aq9tR/45hZq5qv6zCGOS21wyf7wHaCLEiu7psw6Jw=;
-	b=a1BRB0SZYUgPitCt729ci5j9ndWtJqh8NMSSlsOG7TG+ZLG9Go2c1jKej1d2H8vwfe
-	+gpCbmBD+NCYFcKqfRrsUfMlFQwkaIwomurTKQ2BzlLAD6k8xg2IDf91EbtLxOp96oOj
-	eWqRtpnKgxRdk82df7NZ+Q3zXg9vGYv4uIkxc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=NZarLWCSb6BdBz79uPfzDdcEuKdFhsic/RSMUnWY8/lHrb8lMsHGLtZLnRWM9scVPf
-	3IUENIi/WXa6+RQMwVJOupZf+0eIa4akigZqLrU0HvMf0kppnikZ0o2aOG6+AZrNcM/R
-	uV3CdxpRG1eCKcSTT+MfZ4lWF7V7CYfWlx+PU=
-Received: by 10.223.6.150 with SMTP id 22mr1853289faz.12.1265878096438;
-	Thu, 11 Feb 2010 00:48:16 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 13sm1030919fxm.13.2010.02.11.00.48.15
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 11 Feb 2010 00:48:15 -0800 (PST)
-Date: Thu, 11 Feb 2010 09:47:57 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Steffen Sledz <sledz@dresearch.de>
-Message-ID: <20100211084757.GE3378@jama>
-References: <4B716436.6040301@dresearch.de>
-	<1265784508-19281-1-git-send-email-sledz@dresearch.de>
-	<4B73C297.70709@dresearch.de>
-MIME-Version: 1.0
-In-Reply-To: <4B73C297.70709@dresearch.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.225
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+	Thu, 11 Feb 2010 10:07:35 +0100
+Received: from gandalf.denix.org ([unknown] [71.251.51.225])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0KXO007L76JQ4Z86@vms173003.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	11 Feb 2010 03:04:44 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0485714AF60; Thu,
+	11 Feb 2010 04:04:37 -0500 (EST)
+Date: Thu, 11 Feb 2010 04:04:37 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20100211090437.GA17089@denix.org>
+References: <1265663673-16312-1-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-2-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-3-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-4-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-5-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-6-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-7-git-send-email-rep.dot.nop@gmail.com>
+	<1265663673-16312-8-git-send-email-rep.dot.nop@gmail.com>
+MIME-version: 1.0
+In-reply-to: <1265663673-16312-8-git-send-email-rep.dot.nop@gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.3
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] vala-dbus-binding-tool-0.1.3: new recipe
+Subject: Re: [PATCH 07/12] Document proxy setup in local.conf.sample
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,32 +44,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Feb 2010 08:50:53 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 11 Feb 2010 09:07:35 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Thu, Feb 11, 2010 at 09:40:55AM +0100, Steffen Sledz wrote:
-> Steffen Sledz wrote:
-> > Creates gobject interfaces out of DBus XML specifications.
-> > 
-> > Signed-off-by: Steffen Sledz <sledz@dresearch.de>
-> > ...
-> 
-> No objections? So i will push this patch soon.
-> 
-> Steffen
+On Mon, Feb 08, 2010 at 10:14:28PM +0100, Bernhard Reutner-Fischer wrote:
+> diff --git a/conf/local.conf.sample b/conf/local.conf.sample
+> index 643ae0b..e7c4559 100644
+> --- a/conf/local.conf.sample
+> +++ b/conf/local.conf.sample
+> @@ -30,6 +30,9 @@ BBFILES := "${@bb.fatal('Edit your conf/local.conf: BBFILES')}"
+>  # This is a regulary expression, so be sure to get your parenthesis balanced.
+>  BBMASK = ""
+>  
+> +# Proxy settings:
+> +# BB_ENV_EXTRAWHITE="http_proxy ftp_proxy no_proxy"
 
-I expect that you would move it to freesmartphone directory as is:
-recipes/freesmartphone/vala-dbus-binding-tool-native_git.bb
+I'm sorry to inform you, but that won't work with the standard bitbake! Which 
+uses own HTTP_PROXY, FTP_PROXY, HTTP_PROXY_IGNORE and FTP_PROXY_IGNORE vars.
 
-Even better if you can use BBCLASSEXTEND="native" to merge those 2
-recipes together.
+I tried to persuade RP to change that back to standard http_proxy, ftp_proxy 
+and no_proxy to no avail[1].
 
-Regards,
+Because of that I had to keep my own version of bitbake[2] with the necessary 
+patches for my users - check the top 4 patches in that tree. Although, 
+GIT_PROXY_COMMAND one is already in the bitbake master...
+
+And looks like Khem has already pushed the above change though...
+
+[1] http://thread.gmane.org/gmane.comp.handhelds.openembedded/19716
+[2] http://arago-project.org/git/?p=arago-bitbake.git;a=shortlog;h=refs/heads/next
 
 -- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+Denys
 
 
