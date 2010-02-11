@@ -1,36 +1,46 @@
-Received: from mail-fx0-f227.google.com ([209.85.220.227])
+Received: from fg-out-1718.google.com ([72.14.220.157])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NfbZu-0005yI-5x
+	(envelope-from <martin.jansa@gmail.com>) id 1NfbcT-00067s-WC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Feb 2010 17:07:45 +0100
-Received: by fxm27 with SMTP id 27so238920fxm.27
+	Thu, 11 Feb 2010 17:10:25 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so384362fge.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Feb 2010 08:05:07 -0800 (PST)
+	Thu, 11 Feb 2010 08:07:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=6M1NInWhicPgnIOFa5VnQ+LFfvtqpimaSQKOAfVFQNM=;
-	b=T0oS68zDG8cViJfQv6vGm9HasRznaPz2VA9QuTTumPiWHVyViFaoGD162V5cUgvkRD
-	Je76yi+hyJVFSxRmbtjN0Pzy7dkk5EL00VWaKh3o8vg4rEVczxtAxPciNtBDKWwR0rIO
-	nYsSyJk5qVWX0KA4g+nQfkaZJKJoScv7mgUKc=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=N8JpMneZCbqVUs/oCFnWooHclOj0KrPLLYIVVpFCR88=;
+	b=jZb3SIslGOPSTSR7l7Avy2aaTG0sxoS/ZmU+axwtgCjkpfcUDhAQGn7tD7mHVQ2b49
+	yhqAe4/wLMURjFjZrSUjNXnqVyJquvyKvcfhSKYf/YEJU1JufgGK6q2asaB4ogBCkqrc
+	2V8sojZbs/9+VWxKzsUJng8wvUP/RzJwzzjy8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=ePydbJ73jqtwgYYw6CAh5/jWUbf2je0pt72IiefiUTm9tH17WB+9H7oSiORmq06J86
-	AbzUywj8MTGKOiXznyyiBYd9LSzgB/Loxnx7SlDA6PJ6FZq0Jn7kp2HYu4I7fgmzPZ9t
-	f2WEZ7RuMLAvjKqUuelrWvr1uyjELa7cTlcWw=
-MIME-Version: 1.0
-Received: by 10.223.3.196 with SMTP id 4mr34971fao.63.1265904306045; Thu, 11 
-	Feb 2010 08:05:06 -0800 (PST)
-Date: Thu, 11 Feb 2010 17:05:05 +0100
-Message-ID: <141020e31002110805je37961ey5739a551b65f3980@mail.gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=efPQlkafftbfUH2FydLqLdmHn/tGThsIf9OiA900l97ZuzToXrGiQ3knMddT9Tsw+a
+	OdfX4pDHhBOhYdHleQ0rb8DejS/RoDI+UXQLPtd6F6FwzeiuVllpUitSsPwcXtkmVqRW
+	L4NYl8HFNT6JMxkViGfXRVaBUyNWi5uJJzWF4=
+Received: by 10.87.76.6 with SMTP id d6mr536155fgl.71.1265904469426;
+	Thu, 11 Feb 2010 08:07:49 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 14sm1255455fxm.3.2010.02.11.08.07.46
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 11 Feb 2010 08:07:46 -0800 (PST)
+Date: Thu, 11 Feb 2010 17:07:24 +0100
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.227
+Message-ID: <20100211160724.GB5364@jama>
+References: <22B019BE-6BD8-4748-A263-54A1CB919CA4@vanille-media.de>
+	<1265903466-22758-1-git-send-email-sledz@dresearch.de>
+	<1265903466-22758-2-git-send-email-sledz@dresearch.de>
+MIME-Version: 1.0
+In-Reply-To: <1265903466-22758-2-git-send-email-sledz@dresearch.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 72.14.220.157
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [RFC] Moving old broken EFL stuff to obsoleted Was: [oe-commits] Koen Kooi : efl: bump SRCREV for comp fixes
+Subject: Re: [PATCH 2/2] vala-dbus-binding-tool: relocate native recipe from freesmartphone subdir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,91 +54,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Feb 2010 16:07:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 11 Feb 2010 16:10:25 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi,
-based on "removing recipes" policy:
-http://wiki.openembedded.net/index.php/Upgrading_packages
+On Thu, Feb 11, 2010 at 04:51:06PM +0100, Steffen Sledz wrote:
+> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+> ---
+>  .../vala-dbus-binding-tool-native_git.bb           |   10 ----------
+>  .../vala-dbus-binding-tool-native_git.bb           |   10 ++++++++++
+>  2 files changed, 10 insertions(+), 10 deletions(-)
+>  delete mode 100644 recipes/freesmartphone/vala-dbus-binding-tool-native_git.bb
+>  create mode 100644 recipes/vala-dbus-binding-tool/vala-dbus-binding-tool-native_git.bb
 
-Has moving to obsoleted as strict rules as removing? I expect that
-many builders have obsoleted directory outside BBMASK and thus
-ignoring that.
+Why not use that non-native package or at least that new .inc file or
+ideally BBCLASSEXTENDS?
 
-Today I asked for include that patch I pushed to oe.dev for epsilon
-build on #edevelop.
-
-16:33:46 < k-s> JaMa: epsilon is dead, avoid it
-16:33:56 < k-s> JaMa: it's not about just compile errors, but structural er=
-rors
-16:34:19 < k-s> i know distros tend to like to keep cruft because "it
-is already there", but in this case, just drop it
-16:36:04 < k-s> canola is known to depend on it and etk, but at least
-epsilon there is a patch to replace it with ethumb
-16:38:41 < k-s> well, replacing with ethumb should be simple
-16:38:43 < k-s> the apis are similar
-16:40:57 < JaMa> k-s:
-http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg03=
-583.html
-16:41:50 < JaMa> k-s: that omview in particular wasn't touched for
-ages and I'm not in touch with previous developer.. so I was hoping
-for simple patch for epsilon or drop omview
-16:42:24 < k-s> drop omview
-16:42:38 < k-s> okra was changing ephoto to be more embedded-friendly
-16:42:53 < k-s> JaMa: you may want to ask okra some help and replace
-omview with ephoto
-
-EFL is developing pretty fast and avoiding bumping EFL_SRCREV because
-some old cruft nobody is using anymore is really pity.
-
-I understand that checking if something is used somewhere is damn hard
-to check - for distros outside tree as policy also says.
-
-What's the right compromise?
-
-(I personally tend to like removal as nobody can already check all
-versions agains all versions while building world)
-
-Kind regards,
-
->> efl: bump SRCREV for comp fixes
->> -EFL_SRCREV ?=3D "45765"
->> +EFL_SRCREV ?=3D "45902"
->
-> With this revision epsilon started to fail (python-epsilon was failing
-> before too).
-> http://tinderbox.openembedded.net/packages/epsilon/
-> http://tinderbox.openembedded.net/packages/python-epsilon/
->
-> I asked upstream devs on #edevel for simple fix and they said, that
-> epsilon is so unsupported that they would rather move it from OLD/ to
-> BROKEN/.
->
-> What's right way to handle that in OE?
-> Is it worth maintaining epsilon alive in oe.dev and asking upstream to
-> include patches for epsilon or can we move epsilon + apps depending on
-> it to obsoleted?
->
-> We cannot bump ecore, because of epsilon which is pity. If we move
-> epsilon to recipes/obsoleted then there is few apps still using that:
-> e17/exhibit_svn.bb:DEPENDS =3D "evas ecore epsilon edje eet etk efreet"
-> efl1/epdf/fix-plugin-path-check.patch: =A0 =A0requirements=3D"$requiremen=
-ts
-> epsilon imlib2"
-> efl1/epsilon_svn.bb:FILES_${PN}-thumbd =3D "${bindir}/epsilon
-> ${bindir}/epsilon_thumbd"
-> efl1/esmart_svn.bb:DEPENDS =3D "evas ecore edje imlib2 epsilon libtool"
-> efl1/ewl_svn.bb:DEPENDS =3D "evas ecore edje emotion efreet epsilon"
-> omview/omview_svn.bb:DEPENDS +=3D " evas ewl epsilon"
-> python/python-epsilon_svn.bb:DEPENDS +=3D "epsilon python-ecore"
-> tasks/task-efl.bb: =A0epsilon \
-> tasks/task-openmoko-feed.bb: =A0eet evas ecore embryo epsilon edje
-> efreet emotion epdf \
-> tasks/task-python-efl-examples.bb: =A0python-epsilon-examples \
-> tasks/task-python-efl.bb: =A0python-epsilon \
->
-> Regards,
->
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
