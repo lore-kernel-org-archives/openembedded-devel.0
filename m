@@ -1,25 +1,40 @@
-Received: from outbound.icp-qv1-irony-out5.iinet.net.au ([203.59.1.105])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gbj@theforce.com.au>) id 1NfYWh-0007zH-NP
+	(envelope-from <philb@gnu.org>) id 1NfYa3-0003Pv-0Z
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Feb 2010 13:52:15 +0100
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: ApEBAIyLc0t8lJcQ/2dsb2JhbAAH2QWEVgQ
-X-IronPort-AV: E=Sophos;i="4.49,451,1262534400"; d="scan'208";a="100645705"
-Received: from unknown (HELO [10.1.1.8]) ([124.148.151.16])
-	by outbound.icp-qv1-irony-out5.iinet.net.au with ESMTP;
-	11 Feb 2010 20:46:29 +0800
-Message-ID: <4B73FC24.9060807@theforce.com.au>
-Date: Thu, 11 Feb 2010 23:46:28 +1100
-From: Grahame Jordan <gbj@theforce.com.au>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Thu, 11 Feb 2010 13:55:42 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NfYXZ-0004c6-DY
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Feb 2010 12:53:05 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1NfYXZ-0005O5-6x
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Feb 2010 12:53:05 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 203.59.1.105
-X-SA-Exim-Mail-From: gbj@theforce.com.au
+In-Reply-To: <1265832780-19939-9-git-send-email-rep.dot.nop@gmail.com>
+References: <1265832780-19939-1-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-2-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-3-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-4-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-5-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-6-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-7-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-8-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-9-git-send-email-rep.dot.nop@gmail.com>
+Date: Thu, 11 Feb 2010 12:53:01 +0000
+Message-ID: <1265892781.3777.1050.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: omap3-desktop-image fails baking 'news'
+Subject: Re: [PATCH 8/8] xz: add xz package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,55 +48,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Feb 2010 12:52:15 -0000
-Content-Type: multipart/mixed; boundary="------------020707050408010007060405"
-
---------------020707050408010007060405
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 11 Feb 2010 12:55:42 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Hi,
+On Wed, 2010-02-10 at 21:13 +0100, Bernhard Reutner-Fischer wrote:
+> xz is the lzma successor
+> tested with automake-1.11.1, autoconf-2.65
 
-After git pull I could not build e17/news on Ubuntu 9.04
-Found this on:
-http://old.nabble.com/omap3-desktop-image-fails-baking-'news'-td27323561.html
-applied changes and it now compiles OK.
+Thanks for the patch.  I think this could use a little cleanup before it
+is committed, though; please see below.
 
-Please review/apply attached patch
+> index 0000000..bc5e9ff
+> --- /dev/null
+> +++ b/recipes/xz/xz-native.inc
+> @@ -0,0 +1,2 @@
+> +inherit native
+> +require xz_${PV}.bb
 
-Thanks
+You could consider using BBCLASSEXTEND to eliminate the need for this
+separate recipe.
 
-Grahame Jordan
+> diff --git a/recipes/xz/xz-native_4.999.9beta.bb b/recipes/xz/xz-native_4.999.9beta.bb
+> new file mode 100644
+> index 0000000..c4f0da9
+> --- /dev/null
+> +++ b/recipes/xz/xz-native_4.999.9beta.bb
+> @@ -0,0 +1,3 @@
+> +PV = "4.999.9beta"
+> +
+> +require xz-native.inc
+
+Is it necessary to set PV here?  I would have thought base.bbclass would
+infer that same value from the filename.
+
+> diff --git a/recipes/xz/xz-native_git.bb b/recipes/xz/xz-native_git.bb
+> new file mode 100644
+> index 0000000..006b9d7
+> --- /dev/null
+> +++ b/recipes/xz/xz-native_git.bb
+> @@ -0,0 +1,7 @@
+> +# XZ_BASE should be the latest released version of xz.
+> +# It can be set in the distro file.
+> +#XZ_BASE ?= "4.999.9"
+> +#SRCREV = "HEAD"
+> +#PV = "${XZ_BASE}+gitr${SRCREV}"
+
+Please don't leave this sort of stuff commented out in the file.  If
+it's not needed, just delete those lines.
+
+> +#FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/xz-${PV}"
+
+Likewise for that.
+
+> --- /dev/null
+> +++ b/recipes/xz/xz_4.999.9beta.bb
+> @@ -0,0 +1,8 @@
+> +PV = "4.999.9beta"
+
+See above regarding PV.
+
+> +
+> +require xz.inc
+> +PR = "${INC_PR}.0"
+> +SRC_URI = "http://tukaani.org/xz/xz-${PV}.tar.bz2;name=xz"
+
+Wouldn't that SRC_URI be better in the .inc file?  Presumably this is
+the correct URI for everything except the _git version.
+
+> +SRC_URI[xz.md5sum] = "cc4044fcc073b8bcf3164d1d0df82161"
+> +SRC_URI[xz.sha256sum] = "330312c4397608d8b7be362cc7edbfeafa6101614bc2164d816ea767656aa15c"
+> +EXTRA_OECONF = "--enable-shared"
+
+Likewise for that EXTRA_OECONF, I would have thought that would also
+belong in the .inc really.
+
+p.
 
 
---------------020707050408010007060405
-Content-Type: text/x-patch;
- name="AM_GNU_GETTEXT_po.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline;
- filename="AM_GNU_GETTEXT_po.patch"
-
-diff --git a/recipes/e17/news_svn.bb b/recipes/e17/news_svn.bb
-index c72fbb5..644d2e9 100644
---- a/recipes/e17/news_svn.bb
-+++ b/recipes/e17/news_svn.bb
-@@ -1,12 +1,13 @@
- LICENSE = "MIT"
- PV = "0.1.0+svnr${SRCPV}"
- 
-+PR = "r4"
-+
- require e-module.inc
- 
- do_configure_prepend() {
--	sed -i -e /po/d configure.ac 
-+	sed -i -e /po/d -e /AM_GNU_GETTEXT/d configure.ac 
- 	sed -i -e s:\ po::g Makefile.am
-+	touch ${S}/config.rpath
- }
- 
--
--
 
 
---------------020707050408010007060405--
