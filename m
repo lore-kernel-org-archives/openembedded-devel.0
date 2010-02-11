@@ -1,33 +1,31 @@
-Received: from mail.gmx.net ([213.165.64.20])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <Schnitzeltony@gmx.de>) id 1NfaYp-0008CB-QK
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <sledz@DResearch.DE>) id 1NfbMT-0001jX-S0
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Feb 2010 16:02:34 +0100
-Received: (qmail 26078 invoked by uid 0); 11 Feb 2010 14:59:57 -0000
-Received: from 62.225.102.139 by www078.gmx.net with HTTP;
-	Thu, 11 Feb 2010 15:59:54 +0100 (CET)
-Date: Thu, 11 Feb 2010 15:59:55 +0100
-From: =?iso-8859-1?Q?=22Andreas_M=FCller=22?= <Schnitzeltony@gmx.de>
-In-Reply-To: <008001caab15$c1fe4590$45fad0b0$@Willis@Distant-earth.com>
-Message-ID: <20100211145955.234260@gmx.net>
-MIME-Version: 1.0
-References: <B5065796495AFE4CA0A151FCB7BAE0120423EDC2B7@s-zera-ex01.zera.local>
-	<001001caaa94$d93632d0$8ba29870$@Willis@Distant-earth.com>
-	<008001caab15$c1fe4590$45fad0b0$@Willis@Distant-earth.com>
+	Thu, 11 Feb 2010 16:53:52 +0100
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 8B2DD491283
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Feb 2010 16:51:17 +0100 (CET)
+Received: from mobil-400-586.intern.dresearch.de ([10.32.11.62]) by
+	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 11 Feb 2010 16:52:19 +0100
+Received: by mobil-400-586.intern.dresearch.de (Postfix, from userid 1000)
+	id 32B402C8EB; Thu, 11 Feb 2010 16:51:17 +0100 (CET)
+From: Steffen Sledz <sledz@dresearch.de>
 To: openembedded-devel@lists.openembedded.org
-X-Authenticated: #62780362
-X-Flags: 0001
-X-Mailer: WWW-Mail 6100 (Global Message Exchange)
-X-Priority: 3
-X-Provags-ID: V01U2FsdGVkX1//NmBs0WH/pnf6rB19/x+UR5M3ITCMlCGwMcA+bM
-	hl3HK1PbqwX5OWCka8mISjRLxb0IGJqIcuUw== 
-X-GMX-UID: XylGeLNsPTR+Fv3AjDEwGhQ5c2tpZEvM
-X-FuHaFi: 0.56999999999999995
-X-SA-Exim-Connect-IP: 213.165.64.20
-X-SA-Exim-Mail-From: Schnitzeltony@gmx.de
+Date: Thu, 11 Feb 2010 16:51:05 +0100
+Message-Id: <1265903466-22758-1-git-send-email-sledz@dresearch.de>
+X-Mailer: git-send-email 1.6.4.2
+In-Reply-To: <22B019BE-6BD8-4748-A263-54A1CB919CA4@vanille-media.de>
+References: <22B019BE-6BD8-4748-A263-54A1CB919CA4@vanille-media.de>
+X-OriginalArrivalTime: 11 Feb 2010 15:52:19.0319 (UTC)
+	FILETIME=[310DE870:01CAAB32]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: xfwm4 themes from xfwm4-themes are not packed
+Subject: [PATCH 1/2] vala-dbus-binding-tool-0.1.3: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,76 +39,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Feb 2010 15:02:35 -0000
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 11 Feb 2010 15:53:53 -0000
 
-Dear John,
+Creates gobject interfaces out of DBus XML specifications.
 
-I got your new recipe and did bake
+Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+---
+ conf/checksums.ini                                 |    4 ++++
+ .../vala-dbus-binding-tool.inc                     |   10 ++++++++++
+ .../vala-dbus-binding-tool_0.1.3.bb                |    2 ++
+ 3 files changed, 16 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/vala-dbus-binding-tool/vala-dbus-binding-tool.inc
+ create mode 100644 recipes/vala-dbus-binding-tool/vala-dbus-binding-tool_0.1.3.bb
 
-- with xfwm4-themes -> OK all themes could be found on target
-- with specific xfwm4-theme-* -> OK only the selected themes appear in rootfs
-- (minor issue & related to xfwm4 I think) with xfwm4-theme-foo: No complain..
-
-Thanks a lot for quick mending!
-
-Andreas
-
--------- Original-Nachricht --------
-> Datum: Thu, 11 Feb 2010 12:28:44 -0000
-> Von: "John Willis" <John.Willis@Distant-earth.com>
-> An: openembedded-devel@lists.openembedded.org
-> Betreff: Re: [oe] xfwm4 themes from xfwm4-themes are not packed
-
-> Dear Andreas,
-> 
-> > > I created a recipe for xfce/xfwm4/slim. After everything working fine
-> > > so far, I tried to make it more colorful and check the xfwm4-themes.
-> > > Doing so, I had to realize that all the themes coming from xfwm4-
-> > > themes(-4.6.0) are not packed and are not found in rootfs
-> > > /usr/share/themes. The themes included in xfwm4 can be found.
-> > 
-> > Most of the Xfce 4.6.* work was done by myself and while I have not
-> > encountered any issues with the themes for the Xfce Window Manager I
-> > can see
-> > after reviewing the recipes that there is some room for improvement in
-> > the
-> > xfwm4-themes recipe (your quite right, it's not working as it should
-> > and is
-> > also not very clever).
-> 
-> To follow up on this I have done some quick refactoring of
-> recipes/xfce-base/xfwm4-themes_4.6.0.bb and published the results to my
-> tree
-> at
-> http://git.openpandora.org/cgi-bin/gitweb.cgi?p=openembedded.git;a=shortlog;
-> h=op.openembedded.dev (Your already familiar with the OP trees so I assume
-> you will have no issues cherry picking off the commit).
-> 
-> The package now packs up all 80+ :-o XFWM4 extra themes correctly and also
-> creates a xfwm4-themes meta package that depends on all the themes. 
-> 
-> This means that you can now add any one of the 80 odd themes to your image
-> explicitly or (better) just add xfwm4-themes to your image to have it drag
-> in every extra theme that is not part of the xfwm4 core package.
-> 
-> If you could test this and report back I would appreciate it, assuming all
-> looks ok I'll request this patch is pushed into OE mainline.
-> 
-> Regards,
-> 
-> John
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index bf1bb73..e7ab0cf 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -27790,6 +27790,10 @@ sha256=46805e1c19707de043820a1474a8b3775ea3b698a0b539eabd7b86f0f3ad888a
+ md5=f2f8b2914361db599fd6392ec27f7042
+ sha256=a71d59cfed750ff402fece5e7d4b656caf3377d5a6bfe5339894f1b13769d58d
+ 
++[http://www.freesmartphone.org/sources/vala-dbus-binding-tool-0.1.3.tar.bz2]
++md5=8f92d071d34c218dc163760aaabaed41
++sha256=120db21e8902d12d571cabc4973e343b4308a48873ffb112f84a9f8b75571ad7
++
+ [http://www.valgrind.org/downloads/valgrind-3.2.1.tar.bz2]
+ md5=9407d33961186814cef0e6ecedfd6318
+ sha256=7f9a15d7be16ca03a0912191e8d55a486bf69690e11bb76ccece3eaff3730a33
+diff --git a/recipes/vala-dbus-binding-tool/vala-dbus-binding-tool.inc b/recipes/vala-dbus-binding-tool/vala-dbus-binding-tool.inc
+new file mode 100644
+index 0000000..a4385aa
+--- /dev/null
++++ b/recipes/vala-dbus-binding-tool/vala-dbus-binding-tool.inc
+@@ -0,0 +1,10 @@
++DESCRIPTION = "Creates gobject interfaces out of DBus XML specifications."
++SECTION = "devel"
++DEPENDS = "glib-2.0 libgee libxml2 dbus vala"
++HOMEPAGE = "http://www.freesmartphone.org/index.php/Implementations/vala-dbus-binding-tool"
++LICENSE = "GPL"
++INC_PR = "r1"
++
++SRC_URI = "http://www.freesmartphone.org/sources/vala-dbus-binding-tool-${PV}.tar.bz2"
++
++inherit autotools_stage
+diff --git a/recipes/vala-dbus-binding-tool/vala-dbus-binding-tool_0.1.3.bb b/recipes/vala-dbus-binding-tool/vala-dbus-binding-tool_0.1.3.bb
+new file mode 100644
+index 0000000..4f696b5
+--- /dev/null
++++ b/recipes/vala-dbus-binding-tool/vala-dbus-binding-tool_0.1.3.bb
+@@ -0,0 +1,2 @@
++require vala-dbus-binding-tool.inc
++PR = "${INC_PR}.0"
 -- 
-GRATIS für alle GMX-Mitglieder: Die maxdome Movie-FLAT!
-Jetzt freischalten unter http://portal.gmx.net/de/go/maxdome01
+1.6.4.2
+
 
 
