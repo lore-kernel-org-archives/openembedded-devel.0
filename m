@@ -1,27 +1,38 @@
-Received: from vms173009pub.verizon.net ([206.46.173.9])
+Received: from mta7.brinkster.com ([65.182.109.86])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1NfVeU-0000A2-Is
+	(envelope-from <John.Willis@Distant-earth.com>) id 1NfVoe-0000Om-Bv
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Feb 2010 10:48:05 +0100
-Received: from gandalf.denix.org ([unknown] [71.251.51.225])
-	by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0KXO009PV8FO4I95@vms173009.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	11 Feb 2010 03:45:25 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 9F2B514AF60; Thu,
-	11 Feb 2010 04:45:24 -0500 (EST)
-Date: Thu, 11 Feb 2010 04:45:24 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20100211094524.GB17089@denix.org>
-MIME-version: 1.0
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.9
-X-SA-Exim-Mail-From: denis@denix.org
+	Thu, 11 Feb 2010 10:58:35 +0100
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mta7.brinkster.com (Postfix) with ESMTP id ADF1E6DCA97
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Feb 2010 04:50:35 -0500 (EST)
+X-Virus-Scanned: amavisd-new at 
+Received: from mta7.brinkster.com ([127.0.0.1])
+	by localhost (mta7.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Ght6B1h3dhgp
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Feb 2010 04:50:30 -0500 (EST)
+Received: from MareImbrium (cpc1-bath2-0-0-cust327.aztw.cable.virginmedia.com
+	[82.46.19.72])
+	by mta7.brinkster.com (Postfix) with ESMTP id 142F46DC836
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Feb 2010 04:50:29 -0500 (EST)
+From: "John Willis" <John.Willis@Distant-earth.com>
+To: <openembedded-devel@lists.openembedded.org>
+References: <B5065796495AFE4CA0A151FCB7BAE0120423EDC2B7@s-zera-ex01.zera.local>	<001001caaa94$d93632d0$8ba29870$@Willis@Distant-earth.com>
+	<B5065796495AFE4CA0A151FCB7BAE0120423EDC2DA@s-zera-ex01.zera.local>
+In-Reply-To: <B5065796495AFE4CA0A151FCB7BAE0120423EDC2DA@s-zera-ex01.zera.local>
+Date: Thu, 11 Feb 2010 09:50:18 -0000
+Message-ID: <005a01caaaff$9fbff3e0$df3fdba0$@Willis@Distant-earth.com>
+MIME-Version: 1.0
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: AcqqllTIUGHa9KlmT8anmoJ45RIzGgAWNqGgAAPW2ZA=
+X-SA-Exim-Connect-IP: 65.182.109.86
+X-SA-Exim-Mail-From: John.Willis@Distant-earth.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Race condition in packaged staging?
+Subject: Re: xfwm4 themes from xfwm4-themes are not packed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,45 +46,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Feb 2010 09:48:05 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 11 Feb 2010 09:58:36 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-us
 
-Hi,
+Dear Andreas,
 
-I've been seeing some strange breaks in my builds from time to time since the 
-introduction of new style staging. It doesn't happen often, but when it does, 
-I usually see a message from "tar" complaining about the archive being changed 
-on the fly, which comes from the kernel during it's do_package_stage task, 
-staging_packager function. The simplest workaround was to disable parallel 
-build and parallel bitbake execution (PARALLEL_MAKE and BB_NUMBER_THREADS).
-I usually never had time to investigate further.
+> While you are working on that (you offered support -> I ask for more :-
+> ):
 
-Today I received a slightly different message, which gave me some pointers 
-towards a possible race condition in packaged staging, when multiple bitbake 
-threads are trying to execute relative tasks and have a conflict:
+The SLiM recipes you grabbed are also mine ;) (I am the main OE/Angstrom dev
+for OpenPandora).
+ 
+> How about adding recipes for slim also? I stole the recipe&patches from
+> git://git.openpandora.org/openpandoraoe.git. The only modifications to
+> get it work was
+> 1. Add sessreg in my recipe (although it is part RDEPEND within
+> slim_1.3.1.bb ?)
+ 
+Those recipes need more work (there are a few nasty bugs in SLiM not passing
+in the session variable correctly that makes a mess of xinitrc session
+selection). I need to take some time to look at them.
 
-NOTE: Running task 1372 of 1377 (ID: 980, /OE/arago/recipes/ti/ti-dmai_svn.bb, do_package_write)
-NOTE: Running task 1373 of 1377 (ID: 18, /OE/arago/recipes/images/arago-dvsdk-image.bb, do_package_update_index_ipk)
-NOTE: Running task 1374 of 1377 (ID: 982, /OE/arago/recipes/ti/ti-dmai_svn.bb, do_package_stage)
-ERROR: function staging_packager failed
-ERROR: log data follows (/OE/arago-tmp/work/omap3evm-none-linux-gnueabi/ti-dmai-1_1.0+svnr423-r51e/temp/log.staging_packager.13580)
-| mkdir: cannot create directory `/OE/arago-deploy/pstage/angstromglibc/IPKG_BUILD.13587': File exists
-NOTE: Task failed: /OE/arago-tmp/work/omap3evm-none-linux-gnueabi/ti-dmai-1_1.0+svnr423-r51e/temp/log.staging_packager.13580
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /OE/arago/recipes/ti/ti-dmai_svn.bb do_package_stage failed
-ERROR: Task 982 (/OE/arago/recipes/ti/ti-dmai_svn.bb, do_package_stage) failed
-NOTE: Waiting for 1 active tasks to finish
-NOTE: 1: /OE/arago/recipes/images/arago-dvsdk-image.bb, do_package_update_index_ipk (13566)
-NOTE: Tasks Summary: Attempted 1372 tasks of which 549 didn't need to be rerun and 1 failed.
-ERROR: '/OE/arago/recipes/ti/ti-dmai_svn.bb' failed
+That's the sole reason they are not proposed for OE yet and are sitting in
+my 'OpenPandora hacky stuff' overlay tree ;-).
 
-Hopefully this helps somebody more familiar with the subject (don't want to 
-bother RP, but it's his creation :)) easily identify the culprit and fix it, 
-either by adding a lock or something similar... :) I hate to not use the full 
-power of my 4 cores and run everything in one thread. Thanks.
+> 2. On the target I need to cp /etc/xdg/xfce4/xinitrc
+> /home/<LoginUser>/.xinitrc. I wanted to modify the recipe in that way
+> that login_cmd links directly to the file /etc/xdg/xfce4/xinitrc but...
 
--- 
-Denys
+For 2 take a look at recipes/pandora-system/pandora-skel.bb in the same
+repository. That's how we install a .xinitrc for all users on the
+OpenPandora (making use of /etc/skel).
+
+Regards,
+
+John
+
+
 
 
