@@ -1,29 +1,39 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NfZbj-0000RK-Ar for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Feb 2010 15:01:30 +0100
-Received: from f053041034.adsl.alicedsl.de ([78.53.41.34]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NfZZG-0006td-RR for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Feb 2010 13:58:55 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NfZiD-0006da-Da for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Feb 2010 15:08:12 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NfZfk-0005ts-A4 for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Feb 2010 15:05:36 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Feb 2010 15:05:36 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Feb 2010 15:05:36 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4B74038D.3070301@dresearch.de>
-References: <4B716436.6040301@dresearch.de>
-	<1265784508-19281-1-git-send-email-sledz@dresearch.de>
-	<4B72B2EB.2080708@dresearch.de>  <4B74038D.3070301@dresearch.de>
-Date: Thu, 11 Feb 2010 14:58:53 +0100
-Message-ID: <1265896733.3944.86.camel@mattotaupa>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 11 Feb 2010 15:05:13 +0100
+Message-ID: <hl12qo$meo$1@ger.gmane.org>
+References: <4B73FC24.9060807@theforce.com.au>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100130 Shredder/3.0.2pre
+In-Reply-To: <4B73FC24.9060807@theforce.com.au>
+X-Enigmail-Version: 1.0.1
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] vala-dbus-binding-tool-0.1.3: new recipe
+Subject: Re: omap3-desktop-image fails baking 'news'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,43 +47,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Feb 2010 14:01:30 -0000
-X-Groupsio-MsgNum: 16684
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-dlJY1JFNOrPZBaIgfgJm"
+X-List-Received-Date: Thu, 11 Feb 2010 14:08:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-dlJY1JFNOrPZBaIgfgJm
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am Donnerstag, den 11.02.2010, 14:18 +0100 schrieb Steffen Sledz:
-> Steffen Sledz wrote:
-> > I miss this patch in the patchwork queue. :(
-> >=20
-> > My mistake?
->=20
-> Ping!
->=20
-> I want to send another patch and i don't like to make a mistake a
-> second time (if there was one ;-) ).
+On 11-02-10 13:46, Grahame Jordan wrote:
+> Hi,
+> 
+> After git pull I could not build e17/news on Ubuntu 9.04
+> Found this on:
+> http://old.nabble.com/omap3-desktop-image-fails-baking-'news'-td27323561.html
+> 
+> applied changes and it now compiles OK.
 
-It might be related to the spam filtering of Google Mail [1].
+Since this is caused by skipping out autopoint, wouldn't it be better to
+run autopoint instead of patching stuff?
 
+regards,
 
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-February/0=
-16997.html
-
---=-dlJY1JFNOrPZBaIgfgJm
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAkt0DRwACgkQPX1aK2wOHVgmcACdEBlThRjK2bLSIoWHNGk+Sto7
-Uc4An1EeoC84cAocxcrLv58H/TIH5qLA
-=W5tE
+iD8DBQFLdA6ZMkyGM64RGpERArsbAKC6FLO2BAqnkANnZartRfw16WdIfACdHtLd
+8K8BO//S/0bh2u4nJK8smbU=
+=WgPi
 -----END PGP SIGNATURE-----
 
---=-dlJY1JFNOrPZBaIgfgJm--
+
+
