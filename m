@@ -1,33 +1,47 @@
-Received: from mail2.zera.de ([62.225.102.139])
+Received: from mail-fx0-f225.google.com ([209.85.220.225])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <a.mueller@zera.de>) id 1NfUge-0005u4-41
+	(envelope-from <martin.jansa@gmail.com>) id 1NfUl8-00066l-Jj
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Feb 2010 09:46:15 +0100
-Received: from s-zera-ex01.zera.local ([192.168.7.1]) by
-	s-zera-ex01.zera.local ([192.168.7.1]) with mapi;
-	Thu, 11 Feb 2010 09:43:30 +0100
-From: =?iso-8859-1?Q?M=FCller=2C_Andreas?= <a.mueller@zera.de>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 11 Feb 2010 09:43:28 +0100
-Thread-Topic: [oe] xfwm4 themes from xfwm4-themes are not packed
-Thread-Index: Acqq9fbfm8j/tBSoR2uJsyL428HinAAABXQA
-Message-ID: <B5065796495AFE4CA0A151FCB7BAE0120423EDC2DE@s-zera-ex01.zera.local>
-References: <B5065796495AFE4CA0A151FCB7BAE0120423EDC2B7@s-zera-ex01.zera.local>
-	<001001caaa94$d93632d0$8ba29870$@Willis@Distant-earth.com>
-	<B5065796495AFE4CA0A151FCB7BAE0120423EDC2DA@s-zera-ex01.zera.local>
-	<hl0fnq$nio$2@ger.gmane.org>
-In-Reply-To: <hl0fnq$nio$2@ger.gmane.org>
-Accept-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: de-DE
+	Thu, 11 Feb 2010 09:50:53 +0100
+Received: by fxm25 with SMTP id 25so836354fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Feb 2010 00:48:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:cc:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=B9aq9tR/45hZq5qv6zCGOS21wyf7wHaCLEiu7psw6Jw=;
+	b=a1BRB0SZYUgPitCt729ci5j9ndWtJqh8NMSSlsOG7TG+ZLG9Go2c1jKej1d2H8vwfe
+	+gpCbmBD+NCYFcKqfRrsUfMlFQwkaIwomurTKQ2BzlLAD6k8xg2IDf91EbtLxOp96oOj
+	eWqRtpnKgxRdk82df7NZ+Q3zXg9vGYv4uIkxc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=NZarLWCSb6BdBz79uPfzDdcEuKdFhsic/RSMUnWY8/lHrb8lMsHGLtZLnRWM9scVPf
+	3IUENIi/WXa6+RQMwVJOupZf+0eIa4akigZqLrU0HvMf0kppnikZ0o2aOG6+AZrNcM/R
+	uV3CdxpRG1eCKcSTT+MfZ4lWF7V7CYfWlx+PU=
+Received: by 10.223.6.150 with SMTP id 22mr1853289faz.12.1265878096438;
+	Thu, 11 Feb 2010 00:48:16 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 13sm1030919fxm.13.2010.02.11.00.48.15
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 11 Feb 2010 00:48:15 -0800 (PST)
+Date: Thu, 11 Feb 2010 09:47:57 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: Steffen Sledz <sledz@dresearch.de>
+Message-ID: <20100211084757.GE3378@jama>
+References: <4B716436.6040301@dresearch.de>
+	<1265784508-19281-1-git-send-email-sledz@dresearch.de>
+	<4B73C297.70709@dresearch.de>
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 62.225.102.139
-X-SA-Exim-Mail-From: a.mueller@zera.de
+In-Reply-To: <4B73C297.70709@dresearch.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.225
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: xfwm4 themes from xfwm4-themes are not packed
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] vala-dbus-binding-tool-0.1.3: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,71 +55,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Feb 2010 08:46:15 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 11 Feb 2010 08:50:53 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Koen
+On Thu, Feb 11, 2010 at 09:40:55AM +0100, Steffen Sledz wrote:
+> Steffen Sledz wrote:
+> > Creates gobject interfaces out of DBus XML specifications.
+> > 
+> > Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+> > ...
+> 
+> No objections? So i will push this patch soon.
+> 
+> Steffen
 
-I did but for some reason it is not copied after adduser..
+I expect that you would move it to freesmartphone directory as is:
+recipes/freesmartphone/vala-dbus-binding-tool-native_git.bb
 
-Regards
+Even better if you can use BBCLASSEXTEND="native" to merge those 2
+recipes together.
 
-Andreas
+Regards,
 
------Urspr=FCngliche Nachricht-----
-Von: Koen Kooi [mailto:k.kooi@student.utwente.nl]
-Gesendet: Donnerstag, 11. Februar 2010 09:39
-An: openembedded-devel@lists.openembedded.org
-Betreff: Re: [oe] xfwm4 themes from xfwm4-themes are not packed
-
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 11-02-10 09:29, M=FCller, Andreas wrote:
-> Hi John,
->
-> Thanks for support.
->
-> While you are working on that (you offered support -> I ask for more :-):
->
-> How about adding recipes for slim also? I stole the recipe&patches from g=
-it://git.openpandora.org/openpandoraoe.git. The only modifications to get i=
-t work was
-> 1. Add sessreg in my recipe (although it is part RDEPEND within slim_1.3.=
-1.bb ?)
-> 2. On the target I need to cp /etc/xdg/xfce4/xinitrc /home/<LoginUser>/.x=
-initrc. I wanted to modify the recipe in that way that login_cmd links dire=
-ctly to the file /etc/xdg/xfce4/xinitrc but...
-
-For 2. you should be able to add said .xinitrc to /etc/skel/ so every
-new user will get it.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLc8I7MkyGM64RGpERAh78AKCDE0xaPt8VA3gZ3DnpZTS2pfMN4gCgk4ks
-bBEGtoLUfNKfvYpylH7Yb90=3D
-=3DODO+
------END PGP SIGNATURE-----
-
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-http://www.zera.de
-
-ZERA  GmbH, Hauptstrasse 392, 53639 Koenigswinter
-Geschaeftsfuehrer:  Dr. Prosper Suwelack, Rainer Otto
-Sitz der Gesellschaft:  Koenigswinter; Handelsregister HRB  7073
-Registergericht: Amtsgericht Siegburg.
-
------------------------------------------------------------------
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
