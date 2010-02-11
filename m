@@ -1,46 +1,35 @@
-Received: from fg-out-1718.google.com ([72.14.220.157])
+Received: from mail-yx0-f178.google.com ([209.85.210.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NfbcT-00067s-WC
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Nfe2Q-0008Cc-4B
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Feb 2010 17:10:25 +0100
-Received: by fg-out-1718.google.com with SMTP id 22so384362fge.6
+	Thu, 11 Feb 2010 19:45:21 +0100
+Received: by yxe8 with SMTP id 8so1517133yxe.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Feb 2010 08:07:49 -0800 (PST)
+	Thu, 11 Feb 2010 10:42:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=N8JpMneZCbqVUs/oCFnWooHclOj0KrPLLYIVVpFCR88=;
-	b=jZb3SIslGOPSTSR7l7Avy2aaTG0sxoS/ZmU+axwtgCjkpfcUDhAQGn7tD7mHVQ2b49
-	yhqAe4/wLMURjFjZrSUjNXnqVyJquvyKvcfhSKYf/YEJU1JufgGK6q2asaB4ogBCkqrc
-	2V8sojZbs/9+VWxKzsUJng8wvUP/RzJwzzjy8=
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=kSjk6ZREY2auvEBr7ETatjJQVBRv4EH1lXBb9Djln+o=;
+	b=f383dOmf2Kzwp8I00VlO9TERD5Fjv3XbEe+dcqxcopl7jWNScpux6yb3lGtbcH3dAg
+	m9i6LU1olkLeqYy1nP7y7qrL2R8kynVfWflm2lXpAzBjTPHn4kbFbAzrFb8zVwJYywMV
+	YWa/UPHRfQyTONlCoEPQuXqiRi6nXrw7TQEik=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=efPQlkafftbfUH2FydLqLdmHn/tGThsIf9OiA900l97ZuzToXrGiQ3knMddT9Tsw+a
-	OdfX4pDHhBOhYdHleQ0rb8DejS/RoDI+UXQLPtd6F6FwzeiuVllpUitSsPwcXtkmVqRW
-	L4NYl8HFNT6JMxkViGfXRVaBUyNWi5uJJzWF4=
-Received: by 10.87.76.6 with SMTP id d6mr536155fgl.71.1265904469426;
-	Thu, 11 Feb 2010 08:07:49 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 14sm1255455fxm.3.2010.02.11.08.07.46
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 11 Feb 2010 08:07:46 -0800 (PST)
-Date: Thu, 11 Feb 2010 17:07:24 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100211160724.GB5364@jama>
-References: <22B019BE-6BD8-4748-A263-54A1CB919CA4@vanille-media.de>
-	<1265903466-22758-1-git-send-email-sledz@dresearch.de>
-	<1265903466-22758-2-git-send-email-sledz@dresearch.de>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=djBD3jWUlQl8sSNYgAJZC5VMbX5waJ4jhjwdtDP8GtjiGsbYCi09rgPS+41eCNzRRQ
+	+PEU5R2ABtiNKteCrnAH0nl7TysLTZfr5N/lW2lX4bEFLfSU5RYYQaMiMqS3oWvZ5D8L
+	DTrBU+NQninrFY3Hatm13m7za2aRMmIHz+rIo=
 MIME-Version: 1.0
-In-Reply-To: <1265903466-22758-2-git-send-email-sledz@dresearch.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 72.14.220.157
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.101.195.38 with SMTP id x38mr423349anp.135.1265913762755; Thu, 
+	11 Feb 2010 10:42:42 -0800 (PST)
+Date: Thu, 11 Feb 2010 19:42:42 +0100
+Message-ID: <ac9c93b11002111042j540f846y40cc8cfa83518a1f@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.210.178
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 2/2] vala-dbus-binding-tool: relocate native recipe from freesmartphone subdir
+Subject: xfce46-image: missing packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,25 +43,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Feb 2010 16:10:25 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 11 Feb 2010 18:45:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, Feb 11, 2010 at 04:51:06PM +0100, Steffen Sledz wrote:
-> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
-> ---
->  .../vala-dbus-binding-tool-native_git.bb           |   10 ----------
->  .../vala-dbus-binding-tool-native_git.bb           |   10 ++++++++++
->  2 files changed, 10 insertions(+), 10 deletions(-)
->  delete mode 100644 recipes/freesmartphone/vala-dbus-binding-tool-native_git.bb
->  create mode 100644 recipes/vala-dbus-binding-tool/vala-dbus-binding-tool-native_git.bb
+I tired building xfce46-image (for eee701, but I doubt if that makes a
+differeence).
+However somehow the resulting rootfs is incomplete.
+It does not contain xinit.
+Also I have Xvesa but no X and no symlink to X.
+Guess something is missing but no idea what exactly.
+Anyone an idea what the best way to fix is and where to add it?
 
-Why not use that non-native package or at least that new .inc file or
-ideally BBCLASSEXTENDS?
-
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+Thanks, Frans
 
 
