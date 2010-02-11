@@ -1,36 +1,27 @@
-Received: from vms173003pub.verizon.net ([206.46.173.3])
+Received: from vms173009pub.verizon.net ([206.46.173.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1NfV1H-0000qo-4k
+	(envelope-from <denis@denix.org>) id 1NfVeU-0000A2-Is
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Feb 2010 10:07:35 +0100
+	Thu, 11 Feb 2010 10:48:05 +0100
 Received: from gandalf.denix.org ([unknown] [71.251.51.225])
-	by vms173003.mailsrvcs.net
+	by vms173009.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0KXO007L76JQ4Z86@vms173003.mailsrvcs.net> for
+	2009)) with ESMTPA id <0KXO009PV8FO4I95@vms173009.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Thu,
-	11 Feb 2010 03:04:44 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0485714AF60; Thu,
-	11 Feb 2010 04:04:37 -0500 (EST)
-Date: Thu, 11 Feb 2010 04:04:37 -0500
+	11 Feb 2010 03:45:25 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 9F2B514AF60; Thu,
+	11 Feb 2010 04:45:24 -0500 (EST)
+Date: Thu, 11 Feb 2010 04:45:24 -0500
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100211090437.GA17089@denix.org>
-References: <1265663673-16312-1-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-2-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-3-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-4-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-5-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-6-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-7-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-8-git-send-email-rep.dot.nop@gmail.com>
+Message-id: <20100211094524.GB17089@denix.org>
 MIME-version: 1.0
-In-reply-to: <1265663673-16312-8-git-send-email-rep.dot.nop@gmail.com>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.3
+X-SA-Exim-Connect-IP: 206.46.173.9
 X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 07/12] Document proxy setup in local.conf.sample
+Subject: Race condition in packaged staging?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,36 +35,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Feb 2010 09:07:35 -0000
+X-List-Received-Date: Thu, 11 Feb 2010 09:48:05 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Mon, Feb 08, 2010 at 10:14:28PM +0100, Bernhard Reutner-Fischer wrote:
-> diff --git a/conf/local.conf.sample b/conf/local.conf.sample
-> index 643ae0b..e7c4559 100644
-> --- a/conf/local.conf.sample
-> +++ b/conf/local.conf.sample
-> @@ -30,6 +30,9 @@ BBFILES := "${@bb.fatal('Edit your conf/local.conf: BBFILES')}"
->  # This is a regulary expression, so be sure to get your parenthesis balanced.
->  BBMASK = ""
->  
-> +# Proxy settings:
-> +# BB_ENV_EXTRAWHITE="http_proxy ftp_proxy no_proxy"
+Hi,
 
-I'm sorry to inform you, but that won't work with the standard bitbake! Which 
-uses own HTTP_PROXY, FTP_PROXY, HTTP_PROXY_IGNORE and FTP_PROXY_IGNORE vars.
+I've been seeing some strange breaks in my builds from time to time since the 
+introduction of new style staging. It doesn't happen often, but when it does, 
+I usually see a message from "tar" complaining about the archive being changed 
+on the fly, which comes from the kernel during it's do_package_stage task, 
+staging_packager function. The simplest workaround was to disable parallel 
+build and parallel bitbake execution (PARALLEL_MAKE and BB_NUMBER_THREADS).
+I usually never had time to investigate further.
 
-I tried to persuade RP to change that back to standard http_proxy, ftp_proxy 
-and no_proxy to no avail[1].
+Today I received a slightly different message, which gave me some pointers 
+towards a possible race condition in packaged staging, when multiple bitbake 
+threads are trying to execute relative tasks and have a conflict:
 
-Because of that I had to keep my own version of bitbake[2] with the necessary 
-patches for my users - check the top 4 patches in that tree. Although, 
-GIT_PROXY_COMMAND one is already in the bitbake master...
+NOTE: Running task 1372 of 1377 (ID: 980, /OE/arago/recipes/ti/ti-dmai_svn.bb, do_package_write)
+NOTE: Running task 1373 of 1377 (ID: 18, /OE/arago/recipes/images/arago-dvsdk-image.bb, do_package_update_index_ipk)
+NOTE: Running task 1374 of 1377 (ID: 982, /OE/arago/recipes/ti/ti-dmai_svn.bb, do_package_stage)
+ERROR: function staging_packager failed
+ERROR: log data follows (/OE/arago-tmp/work/omap3evm-none-linux-gnueabi/ti-dmai-1_1.0+svnr423-r51e/temp/log.staging_packager.13580)
+| mkdir: cannot create directory `/OE/arago-deploy/pstage/angstromglibc/IPKG_BUILD.13587': File exists
+NOTE: Task failed: /OE/arago-tmp/work/omap3evm-none-linux-gnueabi/ti-dmai-1_1.0+svnr423-r51e/temp/log.staging_packager.13580
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /OE/arago/recipes/ti/ti-dmai_svn.bb do_package_stage failed
+ERROR: Task 982 (/OE/arago/recipes/ti/ti-dmai_svn.bb, do_package_stage) failed
+NOTE: Waiting for 1 active tasks to finish
+NOTE: 1: /OE/arago/recipes/images/arago-dvsdk-image.bb, do_package_update_index_ipk (13566)
+NOTE: Tasks Summary: Attempted 1372 tasks of which 549 didn't need to be rerun and 1 failed.
+ERROR: '/OE/arago/recipes/ti/ti-dmai_svn.bb' failed
 
-And looks like Khem has already pushed the above change though...
-
-[1] http://thread.gmane.org/gmane.comp.handhelds.openembedded/19716
-[2] http://arago-project.org/git/?p=arago-bitbake.git;a=shortlog;h=refs/heads/next
+Hopefully this helps somebody more familiar with the subject (don't want to 
+bother RP, but it's his creation :)) easily identify the culprit and fix it, 
+either by adding a lock or something similar... :) I hate to not use the full 
+power of my 4 cores and run everything in one thread. Thanks.
 
 -- 
 Denys
