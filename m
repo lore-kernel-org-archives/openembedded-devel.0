@@ -1,27 +1,38 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from mail-yx0-f178.google.com ([209.85.210.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1NfpzR-0005nr-AZ
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NfqqL-0002ho-Ge
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Feb 2010 08:31:04 +0100
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id 690861D360E2; Fri, 12 Feb 2010 08:28:26 +0100 (CET)
-Date: Fri, 12 Feb 2010 08:28:26 +0100
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100212072826.GN24852@ibawizard.net>
-References: <1265676216-9722-1-git-send-email-ynezz@true.cz>
-	<1265676216-9722-2-git-send-email-ynezz@true.cz>
-	<1265676216-9722-3-git-send-email-ynezz@true.cz>
-	<201002091003.19947.marcin@juszkiewicz.com.pl>
+	Fri, 12 Feb 2010 09:25:44 +0100
+Received: by yxe8 with SMTP id 8so2158043yxe.17
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Feb 2010 00:23:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=gj7eoOH4pj4sKXwEWxLWfggxmeWwREVdMsOkjxkePLs=;
+	b=d4qjFJZ+9vVh6/S7Yf2R6kotQb/WNiJ/l/RrwDQFc7HNL6DNgjHWKtAh1NF3d0jQtd
+	vpFVCYifv4f2ZPP4hhPyA54luxIjaP5sZBmvQB8T8bTQdtr5ZTWN4ZHaerAUf8ZSOzmC
+	3CL6ws0k4kIcYS4O7iWaQMwySHmJFw+POPBJY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=WZEB0bqU0z+Ba6difgM0oYF2vniiiVrGDcRbMOaS2ZXE2/Gv+HuTk3h043Hks5feC/
+	D6xMZ0GW0t+tqunxkyLWOb4TVYTjg+xVzj8p8Hgm7KsvCfz2wfhFDdqO57RxqSxuCdeM
+	LXWA7ldXSUCdRue/zVWWPjUpDS4G65c37M1jY=
 MIME-Version: 1.0
-In-Reply-To: <201002091003.19947.marcin@juszkiewicz.com.pl>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+Received: by 10.100.224.19 with SMTP id w19mr1372448ang.208.1265962985853; 
+	Fri, 12 Feb 2010 00:23:05 -0800 (PST)
+In-Reply-To: <b8e1ecc81002111744u4e9c2d84xc5cc1e3d2d1b3a0d@mail.gmail.com>
+References: <b8e1ecc81002111744u4e9c2d84xc5cc1e3d2d1b3a0d@mail.gmail.com>
+Date: Fri, 12 Feb 2010 09:23:05 +0100
+Message-ID: <ac9c93b11002120023mcdab5e1w2694d06e7f48368e@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.210.178
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] linux 2.6.24: moving ts72xx to 2.6.27 as default	kernel so change DEFAULT_PREFERENCE
+Subject: Re: busybox* Fix URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,31 +46,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Feb 2010 07:31:08 -0000
-Content-Type: text/plain; charset=iso-8859-2
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 12 Feb 2010 08:25:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Marcin Juszkiewicz <marcin@juszkiewicz.com.pl> [2010-02-09 10:03:19]:
+2010/2/12 Marcos Amorim <marcosmamorim@gmail.com>:
+> Hi All,
+>
+> I suggest move SRC_URI from all busybox_${PV}.bb for busybox.inc, but i dont
+> really if is possible.
 
-> Dnia wtorek, 9 lutego 2010 o 01:43:32 Petr =A9tetiar napisa=B3(a):
-> > -DEFAULT_PREFERENCE_ts72xx =3D "1"
-> > +DEFAULT_PREFERENCE_ts72xx =3D "-1"
->=20
-> Just drop DEF_PREF, do not set it to default value.
->=20
-> > -PR =3D "r34"
-> > +PR =3D "r35"
->=20
-> Do not bump kernel PR if you do not use it anymore. This part should go=
- to=20
-> previous patch as it changes patches.
+Then I suggest you apply your own patch and test
 
-Hi,
-
-is second version ok for you? If so, would you mind to commit it pls? :-)=
- Thanks.
-
--- ynezz
+>
+>
+> Thanks,
+>
+>
+> Marcos Amorim
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
