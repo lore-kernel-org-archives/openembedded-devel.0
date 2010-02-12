@@ -1,29 +1,32 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NfxKk-00029k-P2
+	(envelope-from <jmahonin@cbnco.com>) id 1Nfxtn-0002Cd-LX
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Feb 2010 16:21:33 +0100
-Received: (qmail 17947 invoked by uid 813007); 12 Feb 2010 15:18:57 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 12 Feb 2010 15:18:57 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 12 Feb 2010 16:18:43 +0100
-User-Agent: KMail/1.12.4 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.3.4; x86_64; ;
-	)
-References: <1265986283-28972-1-git-send-email-marcin@juszkiewicz.com.pl>
-	<1265986283-28972-3-git-send-email-marcin@juszkiewicz.com.pl>
-	<hl3qnh$blr$2@ger.gmane.org>
-In-Reply-To: <hl3qnh$blr$2@ger.gmane.org>
+	Fri, 12 Feb 2010 16:57:46 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 78E4A64FE67
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Feb 2010 10:47:45 -0500 (EST)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 13266-10 for <openembedded-devel@lists.openembedded.org>; 
+	Fri, 12 Feb 2010 10:47:45 -0500 (EST)
+Received: from [172.20.22.81] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 329CB64F6CB
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Feb 2010 10:47:45 -0500 (EST)
+Message-ID: <4B75781F.4000202@cbnco.com>
+Date: Fri, 12 Feb 2010 10:47:43 -0500
+From: Josh Mahonin <jmahonin@cbnco.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-Message-Id: <201002121618.44935.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+To: openembedded-devel@lists.openembedded.org
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: jmahonin@cbnco.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 2/2] util-linux-ng: provide libblkid/libuuid/fsck
+Subject: [RFC] package.bbclass and aggressive library stripping
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,22 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Feb 2010 15:21:34 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 12 Feb 2010 15:57:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Dnia pi=C4=85tek, 12 lutego 2010 o 16:05:23 Koen Kooi napisa=C5=82(a):
-> I'm not really fond of the PACKAGES_DYNAMIC bit, but:
-=20
-It was already present in recipe ;D
+Hi all,
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+I was attempting to use GDB on an OE build, but was given various
+warnings about threads being disabled.  I've traced the problem to
+package.bbclass stripping out necessary symbols in 'libpthread.so.0',
+referenced as section 6 in http://sourceware.org/gdb/wiki/FAQ
 
+I'm admittedly using an out of date OE checkout, but the problem still
+appears to be present in trunk as well.  Is it better to create a
+special case in package.bbclass just for libpthread, or should a
+blacklist be created for other potentially affected libraries as well?
 
+Regards,
+
+Josh
 
 
