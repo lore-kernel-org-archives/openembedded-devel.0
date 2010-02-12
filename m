@@ -1,39 +1,45 @@
-Received: from mail-yw0-f185.google.com ([209.85.211.185])
+Received: from relay04.stack.nl ([131.155.140.107] helo=mx1.stack.nl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Nfqyf-0000Hg-0d
+	(envelope-from <ruud@il.fontys.nl>) id 1NfrKf-0000cn-MO
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Feb 2010 09:34:20 +0100
-Received: by ywh15 with SMTP id 15so2040279ywh.5
+	Fri, 12 Feb 2010 09:57:04 +0100
+Received: by mx1.stack.nl (Postfix, from userid 65534)
+	id AB2F81DD72F; Fri, 12 Feb 2010 09:54:28 +0100 (CET)
+Received: from mail.il.fontys.nl (mail.il.fontys.nl
+	[IPv6:2001:4128:1000:1000::7])
+	(using TLSv1 with cipher ADH-CAMELLIA256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailhost.stack.nl (Postfix) with ESMTPS id 762A31DD642
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Feb 2010 00:31:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=Su5FbdkwPvxRpvHKYsItEA39SzH2J6SCaFcInEwPAvo=;
-	b=qMRlhT0bXvB0VDAtCRHgwkZcq8rGZAaBqQyzMC4GpPYhDQAGCLsCp2CEx7/e8jo4H7
-	o00hmBuGwteWj44FxSrXDlegDCugmIcgFPQB8Bpkoj35zuTiD2mfpi4QNwhzD4E3lIy1
-	1/Pcv2ZGOlUcU0bv80a3iDzmVds/xUsvfHIJ4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=dTlWm/wHCHl5l/4L1ocTpmpXmt6b4qt3YRtK5/2TI6mtMnoLNT9Wxs0sQ2+43qvz1m
-	5jSEYH41Su9Hd6SUU1HyNOBrvQgrEzCLYvd3VLnjFDpL2gU+dc9Wo9tFVQlOYPyfcj8y
-	wAZi5mzkpyQf4meXflsaIrEzQsmdeRcr9JSNk=
-MIME-Version: 1.0
-Received: by 10.101.192.18 with SMTP id u18mr1536577anp.75.1265963501313; Fri, 
-	12 Feb 2010 00:31:41 -0800 (PST)
-In-Reply-To: <f4e6dc971002111503m1d0be8v46d23ff0a1e796b2@mail.gmail.com>
-References: <f4e6dc971002111503m1d0be8v46d23ff0a1e796b2@mail.gmail.com>
-Date: Fri, 12 Feb 2010 09:31:41 +0100
-Message-ID: <ac9c93b11002120031y6c352ccci36ca405ca4da95bb@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Fri, 12 Feb 2010 09:54:26 +0100 (CET)
+Received: by mail.il.fontys.nl (Postfix, from userid 1004)
+	id 3C1131147E; Fri, 12 Feb 2010 09:54:26 +0100 (CET)
+Received: from charm.il.fontys.nl (charm.il.fontys.nl
+	[IPv6:2001:4128:1000:1000::34])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(Client did not present a certificate)
+	by mail.il.fontys.nl (Postfix) with ESMTPS id EB3F911459
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Feb 2010 09:54:14 +0100 (CET)
+Received: by charm.il.fontys.nl (Postfix, from userid 1838)
+	id 99FC240B5; Fri, 12 Feb 2010 09:54:14 +0100 (CET)
+Date: Fri, 12 Feb 2010 09:54:14 +0100
+From: Ruud Althuizen <ruud@il.fontys.nl>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.185
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20100212085414.GG1638@il.fontys.nl>
+References: <20100203104829.GL17820@il.fontys.nl>
+	<1265195232.5591.75.camel@mattotaupa>
+	<20100203111649.GN17820@il.fontys.nl>
+	<20100210072033.GF1638@il.fontys.nl>
+	<ac9c93b11002092333s3a90d623xd6234e392d84925d@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <ac9c93b11002092333s3a90d623xd6234e392d84925d@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 131.155.140.107
+X-SA-Exim-Mail-From: ruud@il.fontys.nl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Recent update to modphp segfaults
+Subject: Re: New machine: Embedded Artists LPC3250
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,40 +53,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Feb 2010 08:34:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 12 Feb 2010 08:57:04 -0000
+X-Groupsio-MsgNum: 16705
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="xA/XKXTdy9G3iaIz"
+Content-Disposition: inline
+
+--xA/XKXTdy9G3iaIz
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-2010/2/12  <openembedded@status.e4ward.com>:
-> Hello all.
->
-> I am using OpenEmbedded with my Gumstix Overo. I am attempting to put
-> Apache2 and PHP on there. I tried to build Apache2-2.2.14, and it
-> broke on the configure step saying that some checks can't be done
-> while cross compiling. Rather than figure that out, I was pressed for
-> time and simply used Apache2-2.2.3 instead. That worked fine.
->
-> I recently pulled new updates, and I tried Apache-2.2.14 again. It
-> built! I was happy about that, but then when I tried to get it working
-> with modphp, the Apache2 error log had a bunch of lines like "[notice]
-> child pid xxxx exit signal Segmentation fault (11)". So I decided to
-> try Apache2-2.2.3 again (just in case) and I have the same problem. So
-> my only conclusion is that, although the package version and release
-> version of modphp remained the same, it was updated (when I had it
-> working correctly there was no /etc/apache2/modules.d/ directory; now
-> there is). Is it now broken? I'm not quite sure what the issue is; any
-> advice would be welcome!
->
-> =A0 =A0Thanks!
->
-> =A0 =A0 =A0 =A0 Kyle Fazzari
-
-It is quite possible that you are running out of memory.
-Kill some processes and try again (or set up swap space).
-
-Btw, you might want to have a look at lighttpd.
-apache is a PITA
-
-Frans
+On Wed 10 Feb 2010 08:33 AM, Frans Meulenbroeks wrote:
+> 2010/2/10 Ruud Althuizen <ruud@il.fontys.nl>:
+> > On Wed 03 Feb 2010 12:16 PM, Ruud Althuizen wrote:
+> >> On Wed 03 Feb 2010 12:07 PM, Paul Menzel wrote:
+> >> > Am Mittwoch, den 03.02.2010, 11:48 +0100 schrieb Ruud Althuizen:
+> >> > > In the attached patches there is a machine config and kernel recip=
+e for the
+> >> > > LPC3250 based Embedded Artists development board.
+> >> > >
+> >> > > If you have any suggestions for the attached patches, please give =
+them so I
+> >> > > can fix it.
+> >> >
+> >> > Please attach them. ;-)
+> >> Ah, now I remember that mutt discards attachments when forwarding :/.
+> > So, it's been a week now. And not even an reply. Any chance of this get=
+ting
+> > into the dev tree?
+>=20
+> I just skimmed over it.
+> First impression is ok, and as this will not break anything else, I
+> have no problems getting it added.
+I just found out about the patch queue and that my patch is added[1]. The
+problem is though that I attached _patches_. Both patches are useless on
+their own. The new kernel recipe contains all the patches for the board to
+be able to boot.
 
 
+1: http://patchwork.openembedded.org/patch/1541/
+
+--=20
+Kind regards,
+Ruud Althuizen
+
+--xA/XKXTdy9G3iaIz
+Content-Type: application/pgp-signature
+Content-Disposition: inline
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (FreeBSD)
+
+iEYEARECAAYFAkt1FzUACgkQkqncCMFskRUjWQCZAa6LfEhZgkWFAYfPZ1Q50o5e
+yJ8An3hOJD32ofnu9reYtmMhlHtck6xV
+=SMP7
+-----END PGP SIGNATURE-----
+
+--xA/XKXTdy9G3iaIz--
