@@ -1,39 +1,46 @@
-Received: from mail-iw0-f182.google.com ([209.85.223.182])
+Received: from mail-yx0-f178.google.com ([209.85.210.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Ng20O-00053B-W0
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ng3Ns-0001fD-SP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Feb 2010 21:20:52 +0100
-Received: by iwn12 with SMTP id 12so3016801iwn.26
+	Fri, 12 Feb 2010 22:49:12 +0100
+Received: by yxe8 with SMTP id 8so2829445yxe.17
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Feb 2010 12:18:13 -0800 (PST)
+	Fri, 12 Feb 2010 13:46:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=Ji2Un87gwRo8ZZEL/1jGo7CBVcvwPF/NaHzr/1C20Ao=;
-	b=GPYAYPksRbTfETgc9ruQsbKz3FfupHIpwnsO6NVwkbqBnuSWtQdlOqIdS0d2cy7LwI
-	uYyf8JrbjXLLx6AYSjDRI6k/Xjmw8/sWFECMcdux4HdVJxUbM5Wtq86t2vD2LrSispxI
-	G+yE/eH0RmupLmPYcsbV4fnuKu9eFLQpot3lE=
+	bh=8ADvXysNaw3Vlsk94DLtbqo6QApboYbYJqYvssBUC0k=;
+	b=XMXKS2xssCnfWjy5Te0WM1jFhzrDB5sWuNEQZaL618+WAZK9WBtDxiyzll0So6GuyP
+	xCuL3AO/3cv19S/9Awt7JopI6cY5UaHUJxiqZi0BUF+Fd9wRTBo1MebypeWJfwO2AOmd
+	n5PvYn/fikJMcB4dnvqRM2BnNHc3kBAHm4U5g=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=w58WrFoyF1K0FsiUvpIE9SdLU8Hr5GzOwXXCz9QHKOXW6x/PZ3DUSJWDO8Y6DpDC3n
-	a+uW1+cD2Pbugd6vyEE9qNTsRu5tMWJk6LnI4w833Gv7EAinD7QvPBCLM2CMlcMD9vQG
-	XlYSZrWJQZJJe2/9bAXljlsIBM3bI2zPU7ATo=
+	b=aN77BdPybs474eBAzv4qVB8zZsKHpaVGZXu8/o37R0CX+ArNhuAyzFw1U4BQWJeIHJ
+	bVKourXMrzkP5QwZwHNaBa383elkfU5X/ju4APaflZwL3/Ufy+RqnIdI+ELJYmIVlTOB
+	kAinAWAMXC5/7deepNUzsClXJ/Ie8lvsjyMZ8=
 MIME-Version: 1.0
-Received: by 10.231.167.4 with SMTP id o4mr15427iby.66.1266005892998; Fri, 12 
-	Feb 2010 12:18:12 -0800 (PST)
-In-Reply-To: <1265979953-4327-1-git-send-email-ml@vdm-design.de>
-References: <1265979953-4327-1-git-send-email-ml@vdm-design.de>
-Date: Fri, 12 Feb 2010 12:18:12 -0800
-Message-ID: <19c1b8a91002121218q3ab4aaa2h7bd8ea01724e9a26@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+Received: by 10.101.132.8 with SMTP id j8mr2984280ann.44.1266011192741; Fri, 
+	12 Feb 2010 13:46:32 -0800 (PST)
+In-Reply-To: <20100212194114.GH1638@il.fontys.nl>
+References: <20100203104829.GL17820@il.fontys.nl>
+	<1265195232.5591.75.camel@mattotaupa>
+	<20100203111649.GN17820@il.fontys.nl>
+	<20100210072033.GF1638@il.fontys.nl>
+	<ac9c93b11002092333s3a90d623xd6234e392d84925d@mail.gmail.com>
+	<20100212085414.GG1638@il.fontys.nl>
+	<ac9c93b11002121033s6b25910fj87fbe29373cf6870@mail.gmail.com>
+	<20100212194114.GH1638@il.fontys.nl>
+Date: Fri, 12 Feb 2010 22:46:32 +0100
+Message-ID: <ac9c93b11002121346l6cf2b82s59b71ebaa8849123@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.182
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.210.178
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] eglibc:
+Subject: Re: New machine: Embedded Artists LPC3250
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,68 +54,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Feb 2010 20:20:52 -0000
+X-List-Received-Date: Fri, 12 Feb 2010 21:49:12 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 12, 2010 at 5:05 AM, Thomas Zimmermann <ml@vdm-design.de> wrote=
-:
-> * ldd has shebang #!/bin/bash: so add bash RDEPNDS
-> * add libpthread_nonshared.a to eglibc-dev, needed for building
-> =A0multithreaded apps on the device
+2010/2/12 Ruud Althuizen <ruud@il.fontys.nl>:
+> On Fri 12 Feb 2010 07:33 PM, Frans Meulenbroeks wrote:
+>> Ruud, can you resend your patch.
+>> I wanted to apply it, but you've submitted two patches and the text in
+>> the first one reads:
+>>
+>> This is a kernel recipe for the LPC32XX (LPC3250) based Embedded Artists
+>> development board. It uses public patches provided by NXP and Embedded
+>> Artists. The other two patches provide drivers for the PWM capabilities
+>> and fix one NXP patch.
+>>
+>> (and there are 4 files in the patch).
+>> In order not to make an error I wanted to verify what exactly need to
+>> be patched.
+> 0001-linux-ea3250-New-recipe.patch:
+> =A0 =A0 =A0 =A0Kernel recipe, defconfig and 2 extra patches (included in =
+git-patch)
+> =A0 =A0 =A0 =A0to fix update5 and make it possible to use the PWM pins.
+>
+> 0002-ea3250.conf-New-machine-config.patch:
+> =A0 =A0 =A0 =A0Machine config (depends on kernel) and updated checksums.i=
+ni
 
-patch is ok.
+Patch applied.
 
-> ---
-> =A0recipes/eglibc/eglibc-package.bbclass | =A0 =A03 ++-
-> =A0recipes/eglibc/eglibc.inc =A0 =A0 =A0 =A0 =A0 =A0 | =A0 =A02 +-
-> =A02 files changed, 3 insertions(+), 2 deletions(-)
->
-> diff --git a/recipes/eglibc/eglibc-package.bbclass b/recipes/eglibc/eglib=
-c-package.bbclass
-> index fcaba47..7187363 100644
-> --- a/recipes/eglibc/eglibc-package.bbclass
-> +++ b/recipes/eglibc/eglibc-package.bbclass
-> @@ -45,10 +45,11 @@ libc_baselibs =3D "${base_libdir}/libcrypt*.so.* ${ba=
-se_libdir}/libcrypt-*.so ${ba
->
-> =A0FILES_${PN} =3D "${libc_baselibs} ${libexecdir}/* ${@base_conditional(=
-'USE_LDCONFIG', '1', '${base_sbindir}/ldconfig', '', d)}"
-> =A0FILES_ldd =3D "${bindir}/ldd"
-> +RDEPENDS_ldd =3D "bash"
-> =A0FILES_libsegfault =3D "${base_libdir}/libSegFault*"
-> =A0FILES_eglibc-extra-nss =3D "${base_libdir}/libnss*"
-> =A0FILES_sln =3D "/sbin/sln"
-> -FILES_eglibc-dev_append =3D " ${libdir}/*.o ${bindir}/rpcgen ${libdir}/l=
-ibc_nonshared.a"
-> +FILES_eglibc-dev_append =3D " ${libdir}/*.o ${bindir}/rpcgen ${libdir}/l=
-ibc_nonshared.a ${libdir}/libpthread_nonshared.a"
-> =A0FILES_nscd =3D "${sbindir}/nscd*"
-> =A0FILES_eglibc-utils =3D "${bindir}/* ${sbindir}/*"
-> =A0FILES_eglibc-gconv =3D "${libdir}/gconv/*"
-> diff --git a/recipes/eglibc/eglibc.inc b/recipes/eglibc/eglibc.inc
-> index 356b838..5c06ae6 100644
-> --- a/recipes/eglibc/eglibc.inc
-> +++ b/recipes/eglibc/eglibc.inc
-> @@ -3,7 +3,7 @@ HOMEPAGE =3D "http://www.eglibc.org/home"
-> =A0SECTION =3D "libs"
-> =A0PRIORITY =3D "required"
-> =A0LICENSE =3D "LGPL"
-> -INC_PR =3D "r8"
-> +INC_PR =3D "r9"
-> =A0# nptl needs unwind support in gcc, which can't be built without glibc=
-.
-> =A0DEPENDS =3D "virtual/${TARGET_PREFIX}gcc-intermediate linux-libc-heade=
-rs"
-> =A0#this leads to circular deps, so lets not add it yet
-> --
-> 1.6.6.1
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Ruud, thanks for the patch.
+Please verify that everything is ok in the archive.
+
+Frans
 
 
