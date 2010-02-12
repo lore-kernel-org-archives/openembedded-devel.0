@@ -1,43 +1,36 @@
-Received: from c.e4ward.com ([207.192.69.154])
+Received: from mail-fx0-f227.google.com ([209.85.220.227])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <28440@gmail.com.bounce.e4ward.com>)
-	id 1NfieR-00044T-Fz for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Feb 2010 00:40:54 +0100
-Received: from localhost ([127.0.0.1] helo=c.e4ward.com)
-	by c.e4ward.com with esmtp (Exim 4.69) id 1Nfi4d-0007Ol-HA
+	(envelope-from <marcosmamorim@gmail.com>) id 1NfkcD-00049B-Rp
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Feb 2010 18:03:51 -0500
-Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
-	[209.85.211.193]) by c.e4ward.com;
-	Thu, 11 Feb 2010 18:03:51 -0500 (EST)
-Received: by ywh31 with SMTP id 31so1767597ywh.27 for
-	<openembedded--devel-lists.openembedded.org-openembedded-status.e4ward.com-100211-a2df-5@reply.e4ward.com>;
-	Thu, 11 Feb 2010 15:03:23 -0800 (PST)
+	Fri, 12 Feb 2010 02:46:45 +0100
+Received: by fxm27 with SMTP id 27so793124fxm.27
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Feb 2010 17:44:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:date:message-id:subject
 	:from:to:content-type;
-	bh=Zjz5hnbmc3CU15UyV8X9vrLdX/6egR/Vn0cmneci9os=;
-	b=esv0cBiKKu9iBy+mqr5gRJYGgxy4gk4VsejAXdopUaxdd7IY3QyM+gKXnRe07uyJUa
-	NqC+68/W3M46S6X9s2DrSnaXthgiZNbrFdNCC3wYPJLpKVa8tmd01GDzabkzgjz4qJte
-	UjO21+lTeDAICKY4S4AlCuegrlk0+5Qs3VoX4=
+	bh=oDueCvh26VyjbTsOOzEZWf6prRywmdlY+0ALYAE6fpQ=;
+	b=mnlC/iaiB3F454X3dnNlHYmV5UJTJTbJqgQFQ1zvm+0Pmrv/cWhS4TDlPkue2s36gQ
+	+qbAfW0Ux+udsQKGwlhmI6KOc6popjlqRQOjT4ziXjo/ULnNZwiXMFq0t3QVR1YvhtAf
+	2T3+pFj/Y25y0OAqHA2PWeRwMYMeSxFjI3On0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=dYOCayEOagVCsyUUzTg+jT9M/U3smtSRuzOq3ncwlAuhlyu/Jleu9JQGhHdo+SZL5i
-	vNJntWA/84VEZza5VCOkiSS2BNUsF/dDNhDSo8IsSArbyCSgf9dm2GX7Cf/SdFa3qyNP
-	iWrIoKZn46vaPfBoqsS5bc00/UcYufm/Aijcg=
+	b=NEhlHC3qcW/7UUhrJF5KeLUXIGRLKnDgHx/oyMJt2ajvNmL6oLaKlHKj0jXn4zjKL4
+	xjlIHdKL/+qVjH6yTABpX76kI3W1DvYTcTJfr/fM6rfI9Noj4/c3DlZ40nNwk0Q4/8IR
+	3qLGALGFmVzN8RcvSZnDD/Yo/Ov/hZGoVn5gs=
 MIME-Version: 1.0
-Received: by 10.151.89.20 with SMTP id r20mr1210869ybl.311.1265929403474; Thu, 
-	11 Feb 2010 15:03:23 -0800 (PST)
-Date: Thu, 11 Feb 2010 15:03:23 -0800
-Message-ID: <f4e6dc971002111503m1d0be8v46d23ff0a1e796b2@mail.gmail.com>
-From: <openembedded@status.e4ward.com>
-To: openembedded-devel@lists.openembedded.org
-X-e4ward-RCPT: openembedded--devel-lists.openembedded.org-openembedded-status.e4ward.com-100211-a2df-5@reply.e4ward.com
-X-SA-Exim-Connect-IP: 207.192.69.154
-X-SA-Exim-Mail-From: 28440@gmail.com.bounce.e4ward.com
+Received: by 10.223.132.209 with SMTP id c17mr781195fat.37.1265939044965; Thu, 
+	11 Feb 2010 17:44:04 -0800 (PST)
+Date: Thu, 11 Feb 2010 23:44:04 -0200
+Message-ID: <b8e1ecc81002111744u4e9c2d84xc5cc1e3d2d1b3a0d@mail.gmail.com>
+From: Marcos Amorim <marcosmamorim@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.220.227
+X-SA-Exim-Mail-From: marcosmamorim@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Recent update to modphp segfaults
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: busybox* Fix URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,30 +44,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Feb 2010 23:40:54 -0000
+X-List-Received-Date: Fri, 12 Feb 2010 01:46:45 -0000
+X-Groupsio-MsgNum: 16700
+Content-Type: multipart/mixed; boundary=0023545bd49c151e8a047f5d67a7
+
+--0023545bd49c151e8a047f5d67a7
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hello all.
+Hi All,
 
-I am using OpenEmbedded with my Gumstix Overo. I am attempting to put
-Apache2 and PHP on there. I tried to build Apache2-2.2.14, and it
-broke on the configure step saying that some checks can't be done
-while cross compiling. Rather than figure that out, I was pressed for
-time and simply used Apache2-2.2.3 instead. That worked fine.
-
-I recently pulled new updates, and I tried Apache-2.2.14 again. It
-built! I was happy about that, but then when I tried to get it working
-with modphp, the Apache2 error log had a bunch of lines like "[notice]
-child pid xxxx exit signal Segmentation fault (11)". So I decided to
-try Apache2-2.2.3 again (just in case) and I have the same problem. So
-my only conclusion is that, although the package version and release
-version of modphp remained the same, it was updated (when I had it
-working correctly there was no /etc/apache2/modules.d/ directory; now
-there is). Is it now broken? I'm not quite sure what the issue is; any
-advice would be welcome!
-
-    Thanks!
-
-         Kyle Fazzari
+I suggest move SRC_URI from all busybox_${PV}.bb for busybox.inc, but i dont
+really if is possible.
 
 
+Thanks,
+
+
+Marcos Amorim
+
+--0023545bd49c151e8a047f5d67a7
+Content-Type: text/x-patch; charset=US-ASCII; name="0001-busybox-Fix-URI.patch"
+Content-Disposition: attachment; filename="0001-busybox-Fix-URI.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_g5kbian81
+
+RnJvbSBmOTA0YjMxMGI5ZDIwOTM0NDdhNjhmODMxYWE5YWZhYzVhMDJjODdmIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBNYXJjb3MgQW1vcmltIDxtYXJjb3NtYW1vcmltQGdtYWlsLmNv
+bT4KRGF0ZTogVGh1LCAxMSBGZWIgMjAxMCAyMToyMTowMiAtMDIwMApTdWJqZWN0OiBbUEFUQ0hd
+IGJ1c3lib3gqOiBGaXggVVJJCgotLS0KIGNvbmYvY2hlY2tzdW1zLmluaSAgICAgICAgICAgICAg
+ICB8ICAgMTYgKysrKysrKysrKysrKysrKwogcmVjaXBlcy9idXN5Ym94L2J1c3lib3guaW5jICAg
+ICAgIHwgICAgMiArLQogcmVjaXBlcy9idXN5Ym94L2J1c3lib3hfMS4xMS4zLmJiIHwgICAgMiAr
+LQogcmVjaXBlcy9idXN5Ym94L2J1c3lib3hfMS4xMy4yLmJiIHwgICAgMiArLQogcmVjaXBlcy9i
+dXN5Ym94L2J1c3lib3hfMS43LjIuYmIgIHwgICAgMiArLQogcmVjaXBlcy9idXN5Ym94L2J1c3li
+b3hfMS45LjIuYmIgIHwgICAgMiArLQogNiBmaWxlcyBjaGFuZ2VkLCAyMSBpbnNlcnRpb25zKCsp
+LCA1IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2NvbmYvY2hlY2tzdW1zLmluaSBiL2NvbmYv
+Y2hlY2tzdW1zLmluaQppbmRleCBhOGM4MjYzLi5lMGQwYThiIDEwMDY0NAotLS0gYS9jb25mL2No
+ZWNrc3Vtcy5pbmkKKysrIGIvY29uZi9jaGVja3N1bXMuaW5pCkBAIC0zMzQyLDYgKzMzNDIsMTAg
+QEAgc2hhMjU2PWNmMzk1N2I0NTQ4ZGYwNTFjZDA5NzFkMTc5Y2I5MmRjMGZjYWIzODM5OTc3ZGRi
+NzBhYWU4MWMxNGNkMDRiMDMKIG1kNT1kMTEzZjI3NzdlNGY1MDhmYWE4YjY3NGVjZTg3YTM3Ygog
+c2hhMjU2PWYyYjQzMzI3MGYyMmFhZDg2ZjYxY2VmNjFkOTUzMzhhYWE2M2RiZTJmOTQ2OGI5ZWQ1
+ZGVmZDFjMDFjOTY0NWYKIAorW2h0dHA6Ly93d3cuYnVzeWJveC5uZXQvZG93bmxvYWRzL2J1c3li
+b3gtMS4xMS4zLnRhci5iejJdCittZDU9NDM1NWFkOGJiNTdjZTNiMzlhZDgyNzU2NmMxYTZkYTMK
+K3NoYTI1Nj02ZDM1ZmRhNjY4OTg4YzA2ZjhjMjJlNmUyMGZlNjk1MWVjODMxMDgxNjlkZjZiOGMw
+YmFkOTk4NzI1NzdjNzg0CisKIFtodHRwOi8vYnVzeWJveC5uZXQvZG93bmxvYWRzL2ZpeGVzLTEu
+MTMuMi9idXN5Ym94LTEuMTMuMi1kZXBtb2QucGF0Y2hdCiBtZDU9N2M5ZGZiNWRjZDY2YTFkNmU4
+MzdlNzJhZDBjYjA1ZDQKIHNoYTI1Nj0zNWUzODU0NTk5YTA3NGNlMWI0Nzg3MmFiMWI5N2E2MjVl
+ZDdkMWFiMzM0NWI5MThmN2Y2MDUyNGY1ZTM5MGM1CkBAIC0zMzY2LDYgKzMzNzAsMTAgQEAgc2hh
+MjU2PTk0MjdmYTliNDVmM2MzMjJiZjRmZTI0NjNjOTljOTcyZTZhZTAzZGY2MzA4OTliMzhiZTRm
+MjkxMzM3MDhhMGUKIG1kNT1hZWI1MjYxMDhmMTNiOTFjMDJiMTE1YzhkODZmOTY1OQogc2hhMjU2
+PTAzZmM5ZGJkYzZmNDRhZmQyZGE1NWMwYWIzNjY0NmQyZDA2MzcwOGNjMzVmM2Y0NTY5YjkxM2Iw
+NjRmMTFkODMKIAorW2h0dHA6Ly93d3cuYnVzeWJveC5uZXQvZG93bmxvYWRzL2J1c3lib3gtMS4x
+My4yLnRhci5iejJdCittZDU9OWUyYTYwNGQxOGJlZjIxOWE1YTZiZjNhY2Y3OGI5ZTEKK3NoYTI1
+Nj05Mjc3NzQ0MDhiZDk4MmRkMjQ2ZmI3MTZiYjJlNjQ2YWIwNzA4Y2UzMjFiNDJjNWUyNzFkYzk4
+YzFmNWQxZGM4CisKIFtodHRwOi8vd3d3LmJ1c3lib3gubmV0L2Rvd25sb2Fkcy9idXN5Ym94LTEu
+MTQuMy50YXIuZ3pdCiBtZDU9ZGZiMTk3YjhkZTI2MGZmMjg0ZjcyMjJlZDIzNjE0ZmUKIHNoYTI1
+Nj1iNWEwYzc2ZDQxNGNjYTk3ZmIyMTYyMmE1ZDA5ZmE1YTU4ZjU5ODkwZjVjOWNlNGY4Yjg1MWM0
+ZThiNzNhMTYzCkBAIC0zNDAyLDYgKzM0MTAsMTAgQEAgc2hhMjU2PWY0NGMzYzJkN2Q5YjNmYzhh
+NWY5ZmI2YWM1ODdhZTQxNzBkMjUxNWQ3MmY5ZTc2ZGViOGMwNzFjZTk4NDdhYmUKIG1kNT0zNGM3
+NmRjNTUwMDRkOGQ1ZGNlYTg4NGUwZTk5YmMyMQogc2hhMjU2PWUwZWI3ZDU5YmE5OTZhNTg2MDg5
+OTk5OThhZDYzMGM2N2I5M2MwNWFmNGVhZmVhMjk3NzBjNDgzOWMwZTU0NjEKIAorW2h0dHA6Ly93
+d3cuYnVzeWJveC5uZXQvZG93bmxvYWRzL2J1c3lib3gtMS43LjIudGFyLmJ6Ml0KK21kNT1jOTFl
+Yzk3NTZlMjAwMDA3M2E5ZGQ4ZmE5ZmMzZjg5ZQorc2hhMjU2PTgzYzRjYzgxMzEyNGE0M2YxM2Uy
+ZWJiODNjZWE5ZGE5OTA5ZDYzODkxYjgyNGJmNGJjNzAwNmYwNTY3ZGI3Y2YKKwogW2h0dHA6Ly93
+d3cuYnVzeWJveC5uZXQvZG93bmxvYWRzL2J1c3lib3gtMS44LjIudGFyLmd6XQogbWQ1PTEyODUx
+ZjQ4NDRiY2RhNzhlZjRiYTkxNjhlMTZjYzU2CiBzaGEyNTY9MzQwMGJmODM3ZDIxNGFkYzg1MjJk
+MWU3OGJhZTkzNmMwYzJjZGUyMTI3YWIxZWUwOTU1ODdiOTQ2YTZiNTEzMQpAQCAtMzQxOCw2ICsz
+NDMwLDEwIEBAIHNoYTI1Nj03MjIwNzFiMTRhYmE3N2NlNmUyYTgzNjA4YjJhZTRkNGRhYjMxOGQ3
+ZjMzOWQ4M2U2YzE3MTk4ODZiMjFhZWQ5CiBtZDU9YjMxZTRkMTY0OGRmOTI1OWUyNDI2ODM5YmMw
+NjcwMzgKIHNoYTI1Nj05YmZjMzRhYTgxMDRjYWJhOWMwZjA4OWFhYjkwODcwMGZmNGFkNzZjMmI3
+Y2E2ZDVmNGM5M2Q4NDIwNDFiMWE3CiAKK1todHRwOi8vd3d3LmJ1c3lib3gubmV0L2Rvd25sb2Fk
+cy9idXN5Ym94LTEuOS4yLnRhci5iejJdCittZDU9N2UyNmM1NjAxMmRkNTgxMTI1MWMyZjg3Nzg2
+YjlhNzcKK3NoYTI1Nj1hMTRjYTExMDQyNDI5NTM2NzI4MDdmNWI1MjIzZGU1NjE1YzIzN2EyNzE0
+MGYzNmQ2MjViMzA2N2RhYWYxMWRjCisKIFtodHRwOi8vZG93bmxvYWRzLnNvdXJjZWZvcmdlLm5l
+dC9idmkvYnZpLTEuMy4xLnNyYy50YXIuZ3pdCiBtZDU9YjlkNzdjNTdiZGEyZTAxOTIwN2ExODc0
+ZDliYjRkZWEKIHNoYTI1Nj1jOTRkYmZhMjkzY2JjNjFiODU3MWQwMjVlOTBmZDFmMDZhMzRmOGQ0
+ZTViMTFhNTk4NTZiZmMxZjEzMDE0ZGUzCmRpZmYgLS1naXQgYS9yZWNpcGVzL2J1c3lib3gvYnVz
+eWJveC5pbmMgYi9yZWNpcGVzL2J1c3lib3gvYnVzeWJveC5pbmMKaW5kZXggYWNmNDdmMi4uOGNh
+ODY0MSAxMDA2NDQKLS0tIGEvcmVjaXBlcy9idXN5Ym94L2J1c3lib3guaW5jCisrKyBiL3JlY2lw
+ZXMvYnVzeWJveC9idXN5Ym94LmluYwpAQCAtMTIsNyArMTIsNyBAQCBTRUNUSU9OID0gImJhc2Ui
+CiBQUklPUklUWSA9ICJyZXF1aXJlZCIKIAogU1JDX1VSSSA9ICJcCi0gIGh0dHA6Ly93d3cuYnVz
+eWJveC5uZXQvZG93bmxvYWRzL2J1c3lib3gtJHtQVn0udGFyLmd6IFwKKyAgaHR0cDovL3d3dy5i
+dXN5Ym94Lm5ldC9kb3dubG9hZHMvYnVzeWJveC0ke1BWfS50YXIuYnoyIFwKICAgZmlsZTovL2J1
+c3lib3gtY3JvbiBcCiAgIGZpbGU6Ly9idXN5Ym94LWh0dHBkIFwKICAgZmlsZTovL2J1c3lib3gt
+dWRoY3BkIFwKZGlmZiAtLWdpdCBhL3JlY2lwZXMvYnVzeWJveC9idXN5Ym94XzEuMTEuMy5iYiBi
+L3JlY2lwZXMvYnVzeWJveC9idXN5Ym94XzEuMTEuMy5iYgppbmRleCBiZDAzYWE4Li5mNWE3YWI3
+IDEwMDY0NAotLS0gYS9yZWNpcGVzL2J1c3lib3gvYnVzeWJveF8xLjExLjMuYmIKKysrIGIvcmVj
+aXBlcy9idXN5Ym94L2J1c3lib3hfMS4xMS4zLmJiCkBAIC0yLDcgKzIsNyBAQCByZXF1aXJlIGJ1
+c3lib3guaW5jCiBQUiA9ICJyMTUiCiAKIFNSQ19VUkkgPSAiXAotICBodHRwOi8vd3d3LmJ1c3li
+b3gubmV0L2Rvd25sb2Fkcy9idXN5Ym94LSR7UFZ9LnRhci5neiBcCisgIGh0dHA6Ly93d3cuYnVz
+eWJveC5uZXQvZG93bmxvYWRzL2J1c3lib3gtJHtQVn0udGFyLmJ6MiBcCiAgIFwKICAgZmlsZTov
+L3VkaGNwc2NyaXB0LnBhdGNoO3BhdGNoPTEgXAogICBmaWxlOi8vQjkyMTYwMC5wYXRjaDtwYXRj
+aD0xIFwKZGlmZiAtLWdpdCBhL3JlY2lwZXMvYnVzeWJveC9idXN5Ym94XzEuMTMuMi5iYiBiL3Jl
+Y2lwZXMvYnVzeWJveC9idXN5Ym94XzEuMTMuMi5iYgppbmRleCA2MDJlNzgyLi41NTZlOWRjIDEw
+MDY0NAotLS0gYS9yZWNpcGVzL2J1c3lib3gvYnVzeWJveF8xLjEzLjIuYmIKKysrIGIvcmVjaXBl
+cy9idXN5Ym94L2J1c3lib3hfMS4xMy4yLmJiCkBAIC0yLDcgKzIsNyBAQCByZXF1aXJlIGJ1c3li
+b3guaW5jCiBQUiA9ICJyMTgiCiAKIFNSQ19VUkkgPSAiXAotICBodHRwOi8vd3d3LmJ1c3lib3gu
+bmV0L2Rvd25sb2Fkcy9idXN5Ym94LSR7UFZ9LnRhci5neiBcCisgIGh0dHA6Ly93d3cuYnVzeWJv
+eC5uZXQvZG93bmxvYWRzL2J1c3lib3gtJHtQVn0udGFyLmJ6MiBcCiAgIGZpbGU6Ly9idXN5Ym94
+LTEuMTMuMi1hd2sucGF0Y2g7cGF0Y2g9MSBcCiAgIGZpbGU6Ly9idXN5Ym94LTEuMTMuMi1kZXBt
+b2QucGF0Y2g7cGF0Y2g9MSBcCiAgIGZpbGU6Ly9idXN5Ym94LTEuMTMuMi1pbml0LnBhdGNoO3Bh
+dGNoPTEgXApkaWZmIC0tZ2l0IGEvcmVjaXBlcy9idXN5Ym94L2J1c3lib3hfMS43LjIuYmIgYi9y
+ZWNpcGVzL2J1c3lib3gvYnVzeWJveF8xLjcuMi5iYgppbmRleCA4N2QzMzZiLi4wY2NiNGY5IDEw
+MDY0NAotLS0gYS9yZWNpcGVzL2J1c3lib3gvYnVzeWJveF8xLjcuMi5iYgorKysgYi9yZWNpcGVz
+L2J1c3lib3gvYnVzeWJveF8xLjcuMi5iYgpAQCAtMSw3ICsxLDcgQEAKIHJlcXVpcmUgYnVzeWJv
+eC5pbmMKIFBSID0gInIxMyIKIAotU1JDX1VSSSA9ICJodHRwOi8vd3d3LmJ1c3lib3gubmV0L2Rv
+d25sb2Fkcy9idXN5Ym94LSR7UFZ9LnRhci5neiBcCitTUkNfVVJJID0gImh0dHA6Ly93d3cuYnVz
+eWJveC5uZXQvZG93bmxvYWRzL2J1c3lib3gtJHtQVn0udGFyLmJ6MiBcCiAgICAgICAgICAgIGZp
+bGU6Ly9idXN5Ym94LWNyb24gXAogICAgICAgICAgICBmaWxlOi8vYnVzeWJveC1odHRwZCBcCiAg
+ICAgICAgICAgIGZpbGU6Ly9idXN5Ym94LXVkaGNwZCBcCmRpZmYgLS1naXQgYS9yZWNpcGVzL2J1
+c3lib3gvYnVzeWJveF8xLjkuMi5iYiBiL3JlY2lwZXMvYnVzeWJveC9idXN5Ym94XzEuOS4yLmJi
+CmluZGV4IGU5YWE4MjAuLjc0ZjU0NTEgMTAwNjQ0Ci0tLSBhL3JlY2lwZXMvYnVzeWJveC9idXN5
+Ym94XzEuOS4yLmJiCisrKyBiL3JlY2lwZXMvYnVzeWJveC9idXN5Ym94XzEuOS4yLmJiCkBAIC0x
+LDcgKzEsNyBAQAogcmVxdWlyZSBidXN5Ym94LmluYwogUFIgPSAicjYiCiAKLVNSQ19VUkkgPSAi
+aHR0cDovL3d3dy5idXN5Ym94Lm5ldC9kb3dubG9hZHMvYnVzeWJveC0ke1BWfS50YXIuZ3ogXAor
+U1JDX1VSSSA9ICJodHRwOi8vd3d3LmJ1c3lib3gubmV0L2Rvd25sb2Fkcy9idXN5Ym94LSR7UFZ9
+LnRhci5iejIgXAogICAgICAgICAgICBmaWxlOi8vdWRoY3BzY3JpcHQucGF0Y2g7cGF0Y2g9MSBc
+CiAgICAgICAgICAgIGZpbGU6Ly9hZGR1c2VyLWxvbmdvcHMucGF0Y2g7cGF0Y2g9MSBcCiAgICAg
+ICAgICAgIGZpbGU6Ly9zb3J0LXotbnVsLnBhdGNoO3BhdGNoPTE7c3RhdHVzPXVwc3RyZWFtIFwK
+LS0gCjEuNi4zLjMKCg==
+
+--0023545bd49c151e8a047f5d67a7--
