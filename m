@@ -1,43 +1,25 @@
-Received: from mail-yw0-f176.google.com ([209.85.211.176])
+Received: from qmta11.emeryville.ca.mail.comcast.net ([76.96.27.211])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ng0Mk-0002Uz-Pe
+	(envelope-from <enelson1000@comcast.net>) id 1Ng0X5-00087p-Mo
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Feb 2010 19:35:49 +0100
-Received: by ywh6 with SMTP id 6so2426308ywh.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Feb 2010 10:33:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=kSXY72Je18f/MKUDzSCDnzV9jzqh+Y/1RkvYzaLNszA=;
-	b=eOJ7A63Yv9Q2Li2Ex9o1uWYiF5AChlbttOUXy0OzBmdEzDyMoEjVpoGCZZDMDrFBFN
-	a0gIhZJvAO+46UeLCtMIvCulgULkSF/nOsMDtyYb/IfDiDLHdPvlA8PqBqf3nBHc1n+u
-	oleFezCqhISZag5+Xl2vjc4m1+BjYGPJJJGMA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Lyd8x8rhAcR7iIkWh+P7afVPzmpAk+MKr43hhOrdkWDqilfKOoFWBxWkjlrrl/AxmF
-	2zeNfnZOgzCEoG1nrDxHbu5gtwHSMUm/v5iIXtT2DnGat44kAWqYHDrHvGBbfzcjHe67
-	+W0eKlOpqV18e/iX964PqE9TCcbQajsmgdZy0=
-MIME-Version: 1.0
-Received: by 10.101.211.37 with SMTP id n37mr2575582anq.82.1265999590296; Fri, 
-	12 Feb 2010 10:33:10 -0800 (PST)
-In-Reply-To: <20100212085414.GG1638@il.fontys.nl>
-References: <20100203104829.GL17820@il.fontys.nl>
-	<1265195232.5591.75.camel@mattotaupa>
-	<20100203111649.GN17820@il.fontys.nl>
-	<20100210072033.GF1638@il.fontys.nl>
-	<ac9c93b11002092333s3a90d623xd6234e392d84925d@mail.gmail.com>
-	<20100212085414.GG1638@il.fontys.nl>
-Date: Fri, 12 Feb 2010 19:33:10 +0100
-Message-ID: <ac9c93b11002121033s6b25910fj87fbe29373cf6870@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Fri, 12 Feb 2010 19:46:31 +0100
+Received: from omta11.emeryville.ca.mail.comcast.net ([76.96.30.36])
+	by qmta11.emeryville.ca.mail.comcast.net with comcast
+	id h4aT1d00C0mlR8UAB6gMcU; Fri, 12 Feb 2010 18:40:21 +0000
+Received: from [192.168.1.217] ([173.13.189.149])
+	by omta11.emeryville.ca.mail.comcast.net with comcast
+	id h6ip1d0063DqXwV8X6ipLN; Fri, 12 Feb 2010 18:42:49 +0000
+From: ed <enelson1000@comcast.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.176
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Fri, 12 Feb 2010 10:42:47 -0800
+Message-Id: <1266000167.3645.9.camel@ed-hp-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-SA-Exim-Connect-IP: 76.96.27.211
+X-SA-Exim-Mail-From: enelson1000@comcast.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: New machine: Embedded Artists LPC3250
+Subject: Python-sip message in build log
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,51 +33,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Feb 2010 18:35:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 12 Feb 2010 18:46:31 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-2010/2/12 Ruud Althuizen <ruud@il.fontys.nl>:
-> On Wed 10 Feb 2010 08:33 AM, Frans Meulenbroeks wrote:
->> 2010/2/10 Ruud Althuizen <ruud@il.fontys.nl>:
->> > On Wed 03 Feb 2010 12:16 PM, Ruud Althuizen wrote:
->> >> On Wed 03 Feb 2010 12:07 PM, Paul Menzel wrote:
->> >> > Am Mittwoch, den 03.02.2010, 11:48 +0100 schrieb Ruud Althuizen:
->> >> > > In the attached patches there is a machine config and kernel recipe for the
->> >> > > LPC3250 based Embedded Artists development board.
->> >> > >
->> >> > > If you have any suggestions for the attached patches, please give them so I
->> >> > > can fix it.
->> >> >
->> >> > Please attach them. ;-)
->> >> Ah, now I remember that mutt discards attachments when forwarding :/.
->> > So, it's been a week now. And not even an reply. Any chance of this getting
->> > into the dev tree?
->>
->> I just skimmed over it.
->> First impression is ok, and as this will not break anything else, I
->> have no problems getting it added.
-> I just found out about the patch queue and that my patch is added[1]. The
-> problem is though that I attached _patches_. Both patches are useless on
-> their own. The new kernel recipe contains all the patches for the board to
-> be able to boot.
->
->
-> 1: http://patchwork.openembedded.org/patch/1541/
->
+I am building an image for mini2440 which includes qt4-embedded and
+pyqt.  The image built with no errors.  When I try and run a pyqt
+program on the mini2440 it complains that SIP is not installed.
 
-Ruud, can you resend your patch.
-I wanted to apply it, but you've submitted two patches and the text in
-the first one reads:
+Looking at the build log file I see the following.  Is this a problem?
 
-This is a kernel recipe for the LPC32XX (LPC3250) based Embedded Artists
-development board. It uses public patches provided by NXP and Embedded
-Artists. The other two patches provide drivers for the PWM capabilities
-and fix one NXP patch.
+===============================
 
-(and there are 4 files in the patch).
-In order not to make an error I wanted to verify what exactly need to
-be patched.
+NOTE: Running task 1326 of 2849 (ID:
+1532, /home/ed/mini2440/OE/openembedded/recipes/python/python-sip_4.7.9.bb, do_setscene)
+NOTE: <type 'exceptions.TypeError'>:exceptions must be classes or
+instances, not str while evaluating:
+${@python_dir(d)}
+NOTE: <type 'exceptions.TypeError'>:exceptions must be classes or
+instances, not str while evaluating:
+	install -d ${D}${libdir}/${PYTHON_DIR}/site-packages/
+	install -m 0755 libsip.so.1.0.0
+${D}${libdir}/${PYTHON_DIR}/site-packages/sip.so
 
-FM
+NOTE: <type 'exceptions.TypeError'>:exceptions must be classes or
+instances, not str while evaluating:
+${@python_dir(d)}
+NOTE: <type 'exceptions.TypeError'>:exceptions must be classes or
+instances, not str while evaluating:
+	install -d ${STAGING_LIBDIR_NATIVE}/${PYTHON_DIR}/site-packages/
+	# sipconfig.py sipdistutils.py
+	install -m 0644 sip.h ${STAGING_INCDIR}/sip.h
+
+NOTE: <type 'exceptions.TypeError'>:exceptions must be classes or
+instances, not str while evaluating:
+${@python_dir(d)}
+NOTE: <type 'exceptions.TypeError'>:exceptions must be classes or
+instances, not str while evaluating:
+  TEMPLATE=lib                          CONFIG=console
+DESTDIR=                          VERSION=1.0.0
+TARGET=sip                          DEFINES=SIP_QT_SUPPORT
+INCLUDEPATH+=.                          INCLUDEPATH+=
+${STAGING_INCDIR}/${PYTHON_DIR}                          INCLUDEPATH+=
+${STAGING_INCDIR}
+NOTE: <type 'exceptions.TypeError'>:exceptions must be classes or
+instances, not str while evaluating:
+	case ${QMAKESPEC} in
+	*linux-oe-g++|*linux-uclibc-oe-g++|*linux-gnueabi-oe-g++|
+*linux-uclibcgnueabi-oe-g++)
+		;;
+	*-oe-g++)
+		die Unsupported target ${TARGET_OS} for oe-g++ qmake spec
+		;;
+	*)
+		oenote Searching for qmake spec file
+		paths="${QMAKE_MKSPEC_PATH}/qws/${TARGET_OS}-${TARGET_ARCH}-g++"
+		paths="${QMAKE_MKSPEC_PATH}/${TARGET_OS}-g++ $paths"
+
+		if (echo "${TARGET_ARCH}"|grep -q 'i.86'); then
+			paths="${QMAKE_MKSPEC_PATH}/qws/${TARGET_OS}-x86-g++ $paths"
+		fi
+		for i in $paths; do
+			if test -e $i; then
+				export QMAKESPEC=$i
+				break
+			fi
+		done
+		;;
+	esac
+
+	oenote "using qmake spec in ${QMAKESPEC}, using profiles
+'${QMAKE_PROFILES}'"
+
+	if [ -z "${QMAKE_PROFILES}" ]; then
+		PROFILES="`ls *.pro`"
+	else
+		PROFILES="${QMAKE_PROFILES}"
+	fi
+
+	if [ -z "$PROFILES" ]; then
+		die "QMAKE_PROFILES not set and no profiles found in $PWD"
+        fi
+
+	if [ ! -z "${EXTRA_QMAKEVARS_POST}" ]; then
+		AFTER="-after"
+		QMAKE_VARSUBST_POST="${EXTRA_QMAKEVARS_POST}"
+		oenote "qmake postvar substitution: ${EXTRA_QMAKEVARS_POST}"
+	fi
+
+	if [ ! -z "${EXTRA_QMAKEVARS_PRE}" ]; then
+		QMAKE_VARSUBST_PRE="${EXTRA_QMAKEVARS_PRE}"
+		oenote "qmake prevar substitution: ${EXTRA_QMAKEVARS_PRE}"
+	fi
+
+#oenote "Calling '${OE_QMAKE_QMAKE} -makefile -spec ${QMAKESPEC} -o
+Makefile $QMAKE_VARSUBST_PRE $AFTER $PROFILES $QMAKE_VARSUBST_POST'"
+	unset QMAKESPEC || true
+	${OE_QMAKE_QMAKE} -makefile -spec ${QMAKESPEC} -o Makefile
+$QMAKE_VARSUBST_PRE $AFTER $PROFILES $QMAKE_VARSUBST_POST || die "Error
+calling ${OE_QMAKE_QMAKE} on $PROFILES"
+
+NOTE: Running task 1327 of 2849 (ID:
+1533, /home/ed/mini2440/OE/openembedded/recipes/python/python-sip_4.7.9.bb, do_fetch)
+
+=====================================
+
+
+
 
 
