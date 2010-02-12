@@ -1,46 +1,40 @@
-Received: from mail-yx0-f178.google.com ([209.85.210.178])
+Received: from mail-yw0-f176.google.com ([209.85.211.176])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ng3Ns-0001fD-SP
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ng3Uu-0004dY-6u
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Feb 2010 22:49:12 +0100
-Received: by yxe8 with SMTP id 8so2829445yxe.17
+	Fri, 12 Feb 2010 22:56:28 +0100
+Received: by ywh6 with SMTP id 6so2605174ywh.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Feb 2010 13:46:32 -0800 (PST)
+	Fri, 12 Feb 2010 13:53:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=8ADvXysNaw3Vlsk94DLtbqo6QApboYbYJqYvssBUC0k=;
-	b=XMXKS2xssCnfWjy5Te0WM1jFhzrDB5sWuNEQZaL618+WAZK9WBtDxiyzll0So6GuyP
-	xCuL3AO/3cv19S/9Awt7JopI6cY5UaHUJxiqZi0BUF+Fd9wRTBo1MebypeWJfwO2AOmd
-	n5PvYn/fikJMcB4dnvqRM2BnNHc3kBAHm4U5g=
+	bh=IxgFs6tQJ4B831OKLi4bMpSJ/rjaOotrlb8BgFKcE/g=;
+	b=f8PmGuThf9J2Ifq95WCdU2a/GCadQmE6PYIGutuHgFXHfU9HO0Y+Nyw+PkYVGFgBL1
+	b059/2QZspyRh3VSf7Uox0A/K895iCPf7rR9AeYa8c5fOV+OCP2n9FFf2CP8qf7k5U0e
+	aYIoeQEUpX3QSaV+pV8SA+RNDuk60QeDOhMdc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=aN77BdPybs474eBAzv4qVB8zZsKHpaVGZXu8/o37R0CX+ArNhuAyzFw1U4BQWJeIHJ
-	bVKourXMrzkP5QwZwHNaBa383elkfU5X/ju4APaflZwL3/Ufy+RqnIdI+ELJYmIVlTOB
-	kAinAWAMXC5/7deepNUzsClXJ/Ie8lvsjyMZ8=
+	b=EXHF22kMClKidjByx6DiAjK9UWfPYbh8LmMpF0n0b2GSUjmTNmKshi8sLGBfUIRlZr
+	YX2hVLBbU2rhwg6jbAW5XnsIgl08KKvvFqpAT1qCkNijSnySZQtI2CjyjsVuoeHMOPjb
+	2Uyw/8ClLC7RX4GKZ2UTX0WMGu1Yk3ljynjY0=
 MIME-Version: 1.0
-Received: by 10.101.132.8 with SMTP id j8mr2984280ann.44.1266011192741; Fri, 
-	12 Feb 2010 13:46:32 -0800 (PST)
-In-Reply-To: <20100212194114.GH1638@il.fontys.nl>
-References: <20100203104829.GL17820@il.fontys.nl>
-	<1265195232.5591.75.camel@mattotaupa>
-	<20100203111649.GN17820@il.fontys.nl>
-	<20100210072033.GF1638@il.fontys.nl>
-	<ac9c93b11002092333s3a90d623xd6234e392d84925d@mail.gmail.com>
-	<20100212085414.GG1638@il.fontys.nl>
-	<ac9c93b11002121033s6b25910fj87fbe29373cf6870@mail.gmail.com>
-	<20100212194114.GH1638@il.fontys.nl>
-Date: Fri, 12 Feb 2010 22:46:32 +0100
-Message-ID: <ac9c93b11002121346l6cf2b82s59b71ebaa8849123@mail.gmail.com>
+Received: by 10.101.154.22 with SMTP id g22mr3000173ano.51.1266011628025; Fri, 
+	12 Feb 2010 13:53:48 -0800 (PST)
+In-Reply-To: <1266002916-32059-2-git-send-email-GNUtoo@no-log.org>
+References: <1266002916-32059-1-git-send-email-GNUtoo@no-log.org>
+	<1266002916-32059-2-git-send-email-GNUtoo@no-log.org>
+Date: Fri, 12 Feb 2010 22:53:47 +0100
+Message-ID: <ac9c93b11002121353p3aeb67dbofddccc27e3368408@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.178
+X-SA-Exim-Connect-IP: 209.85.211.176
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: New machine: Embedded Artists LPC3250
+Subject: Re: [PATCH] autotools.bbclass fix issue with native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,38 +48,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Feb 2010 21:49:12 -0000
+X-List-Received-Date: Fri, 12 Feb 2010 21:56:28 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/2/12 Ruud Althuizen <ruud@il.fontys.nl>:
-> On Fri 12 Feb 2010 07:33 PM, Frans Meulenbroeks wrote:
->> Ruud, can you resend your patch.
->> I wanted to apply it, but you've submitted two patches and the text in
->> the first one reads:
->>
->> This is a kernel recipe for the LPC32XX (LPC3250) based Embedded Artists
->> development board. It uses public patches provided by NXP and Embedded
->> Artists. The other two patches provide drivers for the PWM capabilities
->> and fix one NXP patch.
->>
->> (and there are 4 files in the patch).
->> In order not to make an error I wanted to verify what exactly need to
->> be patched.
-> 0001-linux-ea3250-New-recipe.patch:
-> =A0 =A0 =A0 =A0Kernel recipe, defconfig and 2 extra patches (included in =
-git-patch)
-> =A0 =A0 =A0 =A0to fix update5 and make it possible to use the PWM pins.
+2010/2/12 Denis 'Gnutoo' Carikli <GNUtoo@no-log.org>:
+> STAGING_DIR_HOST is "" when using native bbclass:
+> native.bbclass:STAGING_DIR_HOST =3D ""
+> But in autotools.bbclass there is:
+> =A0sed -i -e s:${STAGING_DIR_HOST}::g $i
+> which result in the following code in run.autotools_prepackage_lamangler
+> =A0sed -i -e s:::g $i
+> which makes libxml2-native fail like this:
+> =A0| sed: -e expression #1, char 0: no previous regular expression
 >
-> 0002-ea3250.conf-New-machine-config.patch:
-> =A0 =A0 =A0 =A0Machine config (depends on kernel) and updated checksums.i=
-ni
+> I discussed it on IRC:
+> Feb 11 17:41:29 <RP> =A0 =A0GNUtoo: We should only be doing that is STAGI=
+NG_DIR_HOST isn't empty I guess
+>
+> So I made a temporary fix which only workarround,because some issues pers=
+ist:
+> Feb 11 17:41:02 <pb_> =A0 RP: heh, I wonder whether paths with colons in =
+would be considered valid :-}
+>
+> Signed-off-by: Denis 'Gnutoo' Carikli <GNUtoo@no-log.org>
+> ---
+> =A0classes/autotools.bbclass | =A0 =A05 ++++-
+> =A01 files changed, 4 insertions(+), 1 deletions(-)
+>
+> diff --git a/classes/autotools.bbclass b/classes/autotools.bbclass
+> index 1ea4b6f..daa0deb 100644
+> --- a/classes/autotools.bbclass
+> +++ b/classes/autotools.bbclass
+> @@ -152,7 +152,10 @@ autotools_prepackage_lamangler () {
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 sed -i -e s:${CROSS_DIR}/${HOST_SYS}::g $=
+i
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 sed -i -e s:${CROSS_DIR}::g $i
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 sed -i -e s:${STAGING_LIBDIR}:${libdir}:g=
+ $i
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0sed -i -e s:${STAGING_DIR_HOST}::g $i
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0#TODO: needs better handling of native
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0if [ -n "${STAGING_DIR_HOST}" ]; then
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0sed -i -e s:${STAGING_DI=
+R_HOST}::g $i
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0fi
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 sed -i -e s:${STAGING_DIR}::g $i
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 sed -i -e s:${S}::g $i
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 sed -i -e s:${T}::g $i
 
-Patch applied.
+With some hesitation:
+Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
-Ruud, thanks for the patch.
-Please verify that everything is ok in the archive.
+The hesitation mainly concerns the #TODO comment. I don't really find
+it explanatory, personally I'd say remove the whole comment.
 
-Frans
+FM
 
 
