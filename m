@@ -1,50 +1,56 @@
-Received: from relay02.stack.nl
-	([131.155.140.104] helo=mx1.stack.nl ident=postfix)
+Received: from mail-fx0-f226.google.com ([209.85.220.226])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ruud@il.fontys.nl>) id 1NgKTS-0003Oa-3m
+	(envelope-from <rep.dot.nop@gmail.com>) id 1NgKdf-0003ds-F1
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Feb 2010 17:04:05 +0100
-Received: by mx1.stack.nl (Postfix, from userid 65534)
-	id BA7E235A85F; Sat, 13 Feb 2010 17:01:26 +0100 (CET)
-Received: from mail.il.fontys.nl (mail.il.fontys.nl
-	[IPv6:2001:4128:1000:1000::7])
-	(using TLSv1 with cipher ADH-CAMELLIA256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailhost.stack.nl (Postfix) with ESMTPS id A52EA35A840
+	Sat, 13 Feb 2010 17:14:38 +0100
+Received: by fxm26 with SMTP id 26so3488287fxm.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Feb 2010 17:01:24 +0100 (CET)
-Received: by mail.il.fontys.nl (Postfix, from userid 1004)
-	id 4CD9711526; Sat, 13 Feb 2010 17:01:24 +0100 (CET)
-Received: from charm.il.fontys.nl (charm.il.fontys.nl
-	[IPv6:2001:4128:1000:1000::34])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(Client did not present a certificate)
-	by mail.il.fontys.nl (Postfix) with ESMTPS id 6A96611505
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Feb 2010 17:01:22 +0100 (CET)
-Received: by charm.il.fontys.nl (Postfix, from userid 1838)
-	id 2E808412B; Sat, 13 Feb 2010 17:01:22 +0100 (CET)
-Date: Sat, 13 Feb 2010 17:01:22 +0100
-From: Ruud Althuizen <ruud@il.fontys.nl>
+	Sat, 13 Feb 2010 08:11:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=f4Oseo1qO2dCq0w5pgXfQpDOPlxRtTEP2yg9vHoduW0=;
+	b=H7M3DdJtMm6WK5qE/VLlaE6L4W33pflILwJWzmFBoDPoa89/HauYB1WMPYbv4tHAXX
+	Nm7q88C8kGEGE38ogBCVCfOdcC+g13uobNWCQmiZijrZ8i/aMKL+/0Otv0owoouB4H0B
+	/FzM3t+VmQBwOUtgqnvdVhmRC18mFb+sB1+Ks=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=FPpFoWrQiriKvvc9W7JSmB4UGe7sVVRW8MmyVZqTESVWk/2C+TrSrPqxDg/unr8DYq
+	LC1h5FPXHpljEyCOWi7wU79R95zh5S/k7hfObEl19F4cFWFMroiYt+9YXLUTg8rYS7HY
+	jauxX8zsG4v0W2Dxal5/dhIL+wgOppNisvUxc=
+Received: by 10.223.2.216 with SMTP id 24mr3264411fak.72.1266077519231;
+	Sat, 13 Feb 2010 08:11:59 -0800 (PST)
+Received: from s42.loc ([84.119.103.202])
+	by mx.google.com with ESMTPS id z15sm7370753fkz.36.2010.02.13.08.11.58
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 13 Feb 2010 08:11:58 -0800 (PST)
+Received: from cow by s42.loc with local (Exim 4.71)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1NgKdt-00063E-HQ; Sat, 13 Feb 2010 17:14:49 +0100
+Date: Sat, 13 Feb 2010 17:14:49 +0100
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100213160121.GK1638@il.fontys.nl>
-References: <20100203104829.GL17820@il.fontys.nl>
-	<1265195232.5591.75.camel@mattotaupa>
-	<20100203111649.GN17820@il.fontys.nl>
-	<20100210072033.GF1638@il.fontys.nl>
-	<ac9c93b11002092333s3a90d623xd6234e392d84925d@mail.gmail.com>
-	<20100212085414.GG1638@il.fontys.nl>
-	<ac9c93b11002121033s6b25910fj87fbe29373cf6870@mail.gmail.com>
-	<20100212194114.GH1638@il.fontys.nl>
-	<ac9c93b11002121346l6cf2b82s59b71ebaa8849123@mail.gmail.com>
+Message-ID: <20100213161449.GD30265@mx.loc>
+References: <1265832780-19939-2-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-3-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-4-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-5-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-6-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-7-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-8-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-9-git-send-email-rep.dot.nop@gmail.com>
+	<1265892781.3777.1050.camel@mill.internal.reciva.com>
+	<20100213125146.GJ10632@mx.loc>
 MIME-Version: 1.0
-In-Reply-To: <ac9c93b11002121346l6cf2b82s59b71ebaa8849123@mail.gmail.com>
+In-Reply-To: <20100213125146.GJ10632@mx.loc>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 131.155.140.104
-X-SA-Exim-Mail-From: ruud@il.fontys.nl
+X-SA-Exim-Connect-IP: 209.85.220.226
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: New machine: Embedded Artists LPC3250
+Subject: BBCLASSEXTEND canadian?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,63 +64,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Feb 2010 16:04:05 -0000
-X-Groupsio-MsgNum: 16755
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="cN519qCC4CN1mUcX"
+X-List-Received-Date: Sat, 13 Feb 2010 16:14:38 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
---cN519qCC4CN1mUcX
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sat, Feb 13, 2010 at 01:51:46PM +0100, Bernhard Reutner-Fischer wrote:
+>On Thu, Feb 11, 2010 at 12:53:01PM +0000, Phil Blundell wrote:
+>>On Wed, 2010-02-10 at 21:13 +0100, Bernhard Reutner-Fischer wrote:
+>>> index 0000000..bc5e9ff
+>>> --- /dev/null
+>>> +++ b/recipes/xz/xz-native.inc
+>>> @@ -0,0 +1,2 @@
+>>> +inherit native
+>>> +require xz_${PV}.bb
+>>
+>>You could consider using BBCLASSEXTEND to eliminate the need for this
+>>separate recipe.
+>
+>Thanks for that, good thing. This will trim down alot on the number of
+>recipes in the tree!
 
-On Fri 12 Feb 2010 10:46 PM, Frans Meulenbroeks wrote:
-> 2010/2/12 Ruud Althuizen <ruud@il.fontys.nl>:
-> > On Fri 12 Feb 2010 07:33 PM, Frans Meulenbroeks wrote:
-> >> Ruud, can you resend your patch.
-> >> I wanted to apply it, but you've submitted two patches and the text in
-> >> the first one reads:
-> >>
-> >> This is a kernel recipe for the LPC32XX (LPC3250) based Embedded Artis=
-ts
-> >> development board. It uses public patches provided by NXP and Embedded
-> >> Artists. The other two patches provide drivers for the PWM capabilities
-> >> and fix one NXP patch.
-> >>
-> >> (and there are 4 files in the patch).
-> >> In order not to make an error I wanted to verify what exactly need to
-> >> be patched.
-> > 0001-linux-ea3250-New-recipe.patch:
-> > =C2=A0 =C2=A0 =C2=A0 =C2=A0Kernel recipe, defconfig and 2 extra patches=
- (included in git-patch)
-> > =C2=A0 =C2=A0 =C2=A0 =C2=A0to fix update5 and make it possible to use t=
-he PWM pins.
-> >
-> > 0002-ea3250.conf-New-machine-config.patch:
-> > =C2=A0 =C2=A0 =C2=A0 =C2=A0Machine config (depends on kernel) and updat=
-ed checksums.ini
->=20
-> Patch applied.
->=20
-> Ruud, thanks for the patch.
-> Please verify that everything is ok in the archive.
-Looks oke, thanks :).
+AFAICS BBCLASSEXTEND does not take canadian into account ATM, so i could
+convert mpfr without pain but gmp-canadian on darwin (at least 4.2.4 is
+mentioned in there) will/would break AFAICT, is that correct?
 
---=20
-Kind regards,
-Ruud Althuizen
 
---cN519qCC4CN1mUcX
-Content-Type: application/pgp-signature
-Content-Disposition: inline
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (FreeBSD)
-
-iEYEARECAAYFAkt2zNAACgkQkqncCMFskRVj4ACfTQN5+oZRlY7L6g5LAtMh0R0N
-eK4Anj8StgFS/LHDfeiIbF82jNg82B0h
-=sQ/d
------END PGP SIGNATURE-----
-
---cN519qCC4CN1mUcX--
