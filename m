@@ -1,42 +1,37 @@
-Received: from mail-fx0-f226.google.com ([209.85.220.226])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <lamiaposta71@gmail.com>) id 1NgMB7-0001Ws-Iz
+	(envelope-from <philb@gnu.org>) id 1NgN3i-0005x5-TE
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Feb 2010 18:53:16 +0100
-Received: by fxm26 with SMTP id 26so3551253fxm.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Feb 2010 09:50:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=3p8tA11WsnlP1Fcqj+dqFsM/t0+NVg5yajWFxZQJDBU=;
-	b=GSg4U69QpXAg8v3r/7Exq1zIMqIEhZcGeYMzHKRMtruBWn6QEDqI5eS79lM+k3TdJG
-	2SsxuR/ChTJQdeCfYNYDmpINmRQQQKVer46CNgTsFG8Bcb6+lwBCXdP1IET+GAv63P1A
-	PUs3qjmv9vGTEEEn+A2cRRdCgit6Ka6aqY5R4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=sMCDdtqYDOrb9Wc0vy57IG4qgcbwHzkcbXNukdNIcpr3mQwwwuW34H+1mPtcK+D/lh
-	zR1i2YjjtrvBSm4k+tlm1djnTkZPk3Un7zXfUQ1LJscKtEdxWMWl6cAbUqb1PkX4Bvwz
-	VLnrxxio3EMel5lftp8fRMAbCcyNOsgBZu2b4=
-MIME-Version: 1.0
-Received: by 10.223.17.80 with SMTP id r16mr2653698faa.28.1266083433408; Sat, 
-	13 Feb 2010 09:50:33 -0800 (PST)
-In-Reply-To: <b6ebd0a51002130757p5125ce53h999263dfcd45c66d@mail.gmail.com>
-References: <ac9c93b11002130655p454b5931od630b58e995772a1@mail.gmail.com>
-	<ade1bdc1002130717v2573bd35m165c6c887ca408e3@mail.gmail.com>
-	<ac9c93b11002130725h19c5ee93t867da2d889811a9f@mail.gmail.com>
-	<ade1bdc1002130752j4e773410s2ace075b90fbb206@mail.gmail.com>
-	<b6ebd0a51002130757p5125ce53h999263dfcd45c66d@mail.gmail.com>
-Date: Sat, 13 Feb 2010 18:50:33 +0100
-Message-ID: <ade1bdc1002130950ua50546dre8063f4dbb5e3118@mail.gmail.com>
-From: Raffaele Recalcati <lamiaposta71@gmail.com>
+	Sat, 13 Feb 2010 19:49:41 +0100
+Received: from [85.210.8.8] (helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NgN1B-00013n-7B
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 13 Feb 2010 18:47:03 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.226
-X-SA-Exim-Mail-From: lamiaposta71@gmail.com
+In-Reply-To: <20100213143725.GP10632@mx.loc>
+References: <1265832780-19939-3-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-4-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-5-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-6-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-7-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-8-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-9-git-send-email-rep.dot.nop@gmail.com>
+	<1265892781.3777.1050.camel@mill.internal.reciva.com>
+	<20100213125146.GJ10632@mx.loc>
+	<1266067169.5437.18.camel@lenovo.internal.reciva.com>
+	<20100213143725.GP10632@mx.loc>
+Date: Sat, 13 Feb 2010 18:46:59 +0000
+Message-ID: <1266086819.5437.25.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-Broken-Reverse-DNS: no host name found for IP address 85.210.8.8
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: {RFC} rootfs directory path
+Subject: Re: [PATCH 8/8] xz: add xz package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,59 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Feb 2010 17:53:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 13 Feb 2010 18:49:42 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hi Chris,
+On Sat, 2010-02-13 at 15:37 +0100, Bernhard Reutner-Fischer wrote:
+> But that would clash with _git, wouldn't it, unless, and only if this
+> exact sequence would be used:
+> .inc:=S ?= ${WORKDIR}/xz-${PV}
+> .inc:=SRC_URI=http
+> 0815.bb:PV=0814+0815foo
+> 0815.bb:require .inc
+> 0815.bb:SRC_URI+=patch1
+> git.bb:S=${WORKDIR}/git
+> git.bb:require .inc
+> git.bb:SRC_URI=git
 
-> Given that the rootfs dir used in the image creation process is of limited,
-> if any, use, it makes most sense to just put it under the WORKDIR of the
-> recipe.
->
-> IMAGE_ROOTFS = "${WORKDIR}/rootfs"
+It would be more traditional to set S with a hard assignment in the .inc
+file, and simply override it (the same as SRC_URI) in the _git.bb file.
+But, essentially, yes, what you are describing there is basically what
+you'd have to do.  There is plenty of precedent in OE for the general
+approach of using an .inc file to set generic defaults and then allowing
+particular .bb files to override the parts they don't want.
 
-Reading again this thread I remind one of my OE setup problems.
-Due to my little experience I keep two #OE_HOME dir for each project,
-one for stable/2009, and the other for dev branch, in order to make
-comparisons.
-If inthesame#OE_HOME builds are really possible (different from
-parallel) I'll have one OE_HOME for dev branch , and the other for
-stable one.
+I'll have a look at your git checkout issue later today.
 
-product1stable + product2stable + product3stable --> OE_HOME=oe_stable
-product1dev + product2dev + product3dev --> OE_HOME=oe_dev
-
-Anyway, I'll have to be able to backup some situation
-(recipes+downloads at least) --> by now I'm using rsync.
-
-I'm afraid of cache invalidation when I pass from product1 to product2.
-I know that complete cache invalidation is necessary when eabi version changes.
-I guess that if I do git pull maybe I don't have cache invalidation.
-
------
-Maybe be there is a good book about this setup?
-
-Thx
-Raffaele
+p.
 
 
-> --
-> Chris Larson
-> clarson at kergoth dot com
-> clarson at mvista dot com
-> Founder - BitBake, OpenEmbedded, OpenZaurus
-> Maintainer - Tslib
-> Software Engineer
-> MontaVista Software, Inc.
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-
-
--- 
-www.opensurf.it
 
 
