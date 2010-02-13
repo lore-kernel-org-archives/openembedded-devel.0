@@ -1,37 +1,35 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from smtp-out04.alice.it ([85.37.17.100])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NgN3i-0005x5-TE
+	(envelope-from <ospite@studenti.unina.it>) id 1NgNnQ-0006OF-3x
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Feb 2010 19:49:41 +0100
-Received: from [85.210.8.8] (helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NgN1B-00013n-7B
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Feb 2010 18:47:03 +0000
-From: Phil Blundell <philb@gnu.org>
+	Sat, 13 Feb 2010 20:36:55 +0100
+Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-out04.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 13 Feb 2010 20:33:12 +0100
+Received: from FBCMCL01B04.fbc.local ([192.168.69.85]) by FBCMMO02.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 13 Feb 2010 20:33:12 +0100
+Received: from badebec ([87.3.148.156]) by FBCMCL01B04.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Sat, 13 Feb 2010 20:33:12 +0100
+Received: by badebec with local (Exim 4.71)
+	(envelope-from <ospite@studenti.unina.it>)
+	id 1NgNjo-00047o-Ru; Sat, 13 Feb 2010 20:33:08 +0100
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100213143725.GP10632@mx.loc>
-References: <1265832780-19939-3-git-send-email-rep.dot.nop@gmail.com>
-	<1265832780-19939-4-git-send-email-rep.dot.nop@gmail.com>
-	<1265832780-19939-5-git-send-email-rep.dot.nop@gmail.com>
-	<1265832780-19939-6-git-send-email-rep.dot.nop@gmail.com>
-	<1265832780-19939-7-git-send-email-rep.dot.nop@gmail.com>
-	<1265832780-19939-8-git-send-email-rep.dot.nop@gmail.com>
-	<1265832780-19939-9-git-send-email-rep.dot.nop@gmail.com>
-	<1265892781.3777.1050.camel@mill.internal.reciva.com>
-	<20100213125146.GJ10632@mx.loc>
-	<1266067169.5437.18.camel@lenovo.internal.reciva.com>
-	<20100213143725.GP10632@mx.loc>
-Date: Sat, 13 Feb 2010 18:46:59 +0000
-Message-ID: <1266086819.5437.25.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-Broken-Reverse-DNS: no host name found for IP address 85.210.8.8
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+Date: Sat, 13 Feb 2010 20:32:37 +0100
+Message-Id: <1266089557-15538-1-git-send-email-ospite@studenti.unina.it>
+X-Mailer: git-send-email 1.6.6.2
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+X-OriginalArrivalTime: 13 Feb 2010 19:33:12.0404 (UTC)
+	FILETIME=[6155B140:01CAACE3]
+X-SA-Exim-Connect-IP: 85.37.17.100
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 8/8] xz: add xz package
+Subject: [PATCH] meta-toolchain: Run rmdir only if empty dirs are actually found.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,33 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Feb 2010 18:49:42 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 13 Feb 2010 19:36:55 -0000
 
-On Sat, 2010-02-13 at 15:37 +0100, Bernhard Reutner-Fischer wrote:
-> But that would clash with _git, wouldn't it, unless, and only if this
-> exact sequence would be used:
-> .inc:=S ?= ${WORKDIR}/xz-${PV}
-> .inc:=SRC_URI=http
-> 0815.bb:PV=0814+0815foo
-> 0815.bb:require .inc
-> 0815.bb:SRC_URI+=patch1
-> git.bb:S=${WORKDIR}/git
-> git.bb:require .inc
-> git.bb:SRC_URI=git
+Prevent a failure in do_populate_sdk when there are no empty
+directories:
+  /bin/rmdir: missing operand
+  Try `/bin/rmdir --help' for more information.
 
-It would be more traditional to set S with a hard assignment in the .inc
-file, and simply override it (the same as SRC_URI) in the _git.bb file.
-But, essentially, yes, what you are describing there is basically what
-you'd have to do.  There is plenty of precedent in OE for the general
-approach of using an .inc file to set generic defaults and then allowing
-particular .bb files to override the parts they don't want.
+See also http://tinderbox.openembedded.net/packages/478437/
 
-I'll have a look at your git checkout issue later today.
+Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+---
+ recipes/meta/meta-toolchain.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-p.
-
+diff --git a/recipes/meta/meta-toolchain.bb b/recipes/meta/meta-toolchain.bb
+index a8c27ec..3169425 100644
+--- a/recipes/meta/meta-toolchain.bb
++++ b/recipes/meta/meta-toolchain.bb
+@@ -67,7 +67,7 @@ do_populate_sdk() {
+ 	rm -Rf ${SDK_OUTPUT}/usr/lib
+ 
+ 	# Clean up empty directories from excluded packages
+-	find ${SDK_OUTPUT} -depth -type d -empty -print0 | xargs -0 /bin/rmdir
++	find ${SDK_OUTPUT} -depth -type d -empty -print0 | xargs -r0 /bin/rmdir
+ 
+ 	install -d ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/${sysconfdir}
+ 	install -m 0644 ${IPKGCONF_TARGET} ${IPKGCONF_SDK} ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/${sysconfdir}/
+-- 
+1.6.6.2
 
 
 
