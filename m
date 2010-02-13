@@ -1,38 +1,47 @@
-Received: from mail-fx0-f226.google.com ([209.85.220.226])
+Received: from mail-bw0-f224.google.com ([209.85.218.224])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <lamiaposta71@gmail.com>) id 1NgJmy-0001eN-24
+	(envelope-from <rep.dot.nop@gmail.com>) id 1NgJox-0001mD-RT
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Feb 2010 16:20:11 +0100
-Received: by fxm26 with SMTP id 26so3454214fxm.13
+	Sat, 13 Feb 2010 16:22:14 +0100
+Received: by bwz24 with SMTP id 24so1470244bwz.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Feb 2010 07:17:32 -0800 (PST)
+	Sat, 13 Feb 2010 07:19:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=tqxQzkreWL4FJEogM8tmk9/lcgaGxzAMs/Jh87+fZ9M=;
-	b=t6/VJZkKPbV7c0lFj0uSuDlnY43GrXYQQflO+lF2oIE6PN/k1CJIb1Mx8Y4eab8G05
-	KcwZXZwdS+MLf7GTHWC/0+6+maVoftezoH5ci/2+56CDyjWdZsG0vrztVa4DUlJvjxJ/
-	IX2yZiXw+Ecb/fy5qgECEA9ltW4x5O18cH3I4=
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=QV+eWSVs1oHrqhiCL70I8iTdRDBn/uLhbKtlwrqvu/U=;
+	b=sbb0fYWzsr1+mfg7IC6rl3zTat8GGe2bWtpqAQ1gmyIhgEJycA2ZT+TCGhWBk2eP3O
+	0M2XEV1pE5QL8aJcO/g9vILEogBm2NGuQOO4lT6t+Y2Id5wabXr56DCviNttWZGL3ArX
+	EMXneiWxjBxpB13G3BuOVfOwqhqEIpOYXuO2M=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=HA8WJXjfFvb0qVMVZS39hPV6dLs42L3paeYWp5+faKAxFm/ykyqetUKE6YTtNziRJ7
-	wVipo5SyRY45TcTjoacud7Yir9fytcD2tNhav3zaIAdmJns3K8NisIHbU5YKqMbpOtoA
-	IaVamxdSTRfWNccICAO3nGbkJIhRVpibPAIvw=
-MIME-Version: 1.0
-Received: by 10.223.17.80 with SMTP id r16mr2510976faa.28.1266074251773; Sat, 
-	13 Feb 2010 07:17:31 -0800 (PST)
-In-Reply-To: <ac9c93b11002130655p454b5931od630b58e995772a1@mail.gmail.com>
-References: <ac9c93b11002130655p454b5931od630b58e995772a1@mail.gmail.com>
-Date: Sat, 13 Feb 2010 16:17:31 +0100
-Message-ID: <ade1bdc1002130717v2573bd35m165c6c887ca408e3@mail.gmail.com>
-From: Raffaele Recalcati <lamiaposta71@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=W9kYJGIOx5wUyfSA2pQDm72SOQwkhEK3B5VoZ4/0yGYb3qVE7kDHiQEPJRC2qI0X8t
+	V/j8L8a9Zm7tY0/WBxpPobP4PWP1Sx8r2Oymgbxqy/F7mKxBfS31ZWcBXODEE4ua5AMw
+	Fuh/wz4bdsW+Tq6LntrIXNav9cH+EbCpVM9R0=
+Received: by 10.204.16.83 with SMTP id n19mr1813174bka.96.1266074374722;
+	Sat, 13 Feb 2010 07:19:34 -0800 (PST)
+Received: from s42.loc ([84.119.103.202])
+	by mx.google.com with ESMTPS id 15sm1955263bwz.0.2010.02.13.07.19.33
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 13 Feb 2010 07:19:33 -0800 (PST)
+Received: from cow by s42.loc with local (Exim 4.71)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1NgJp8-0007qc-Sz; Sat, 13 Feb 2010 16:22:22 +0100
+Date: Sat, 13 Feb 2010 16:22:22 +0100
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.226
-X-SA-Exim-Mail-From: lamiaposta71@gmail.com
+Message-ID: <20100213152222.GA30029@mx.loc>
+References: <b8e1ecc81002111744u4e9c2d84xc5cc1e3d2d1b3a0d@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <b8e1ecc81002111744u4e9c2d84xc5cc1e3d2d1b3a0d@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.218.224
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: {RFC} rootfs directory path
+Subject: Re: busybox* Fix URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,45 +55,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Feb 2010 15:20:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 13 Feb 2010 15:22:15 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi Frans,
-
-2010/2/13 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
-> Currently the rootfs ends up in ${TMPDIR}/work/rootfs/console-image
-> (at least if I bake console-image).
-> When dealing with multiple systems and either doing a parallel build
-> or keep the rootfs that could lead to inconsistent/faulty situations.
-> Shouldn't the dir be something like
-> ${TMPDIR}/work/rootfs/$DISTRO}-${MACHINE}/console-image or so
-> (or maybe $DISTRO/$MACHINE or the other way around).
+On Thu, Feb 11, 2010 at 11:44:04PM -0200, Marcos Amorim wrote:
+>Hi All,
 >
-> How do you feel about it (and what would be the preferred path?)
+>I suggest move SRC_URI from all busybox_${PV}.bb for busybox.inc, but i dont
+>really if is possible.
 
-My settings for rootfs are:
-${TMPDIR}/deploy/glibc/images/${MACHINE}
-
-so the problem on deploy is not present I think, but I'm not an OE
-expert and maybe some staging or other intermediare files can give the
-problem you have.
-
-If I'm wrong please ignore my information.
-
-Raffaele
-
->
-> Frans
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-
-
--- 
-www.opensurf.it
+The patch posted here:
+http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-February/017232.html
+uses tar.bz2 and switches to new-style checksums. Please use that one
+and
+http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-February/017231.html
+instead.
 
 
