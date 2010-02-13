@@ -1,33 +1,28 @@
-Received: from smtp-out108.alice.it ([85.37.17.108])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1Ng4gg-0007zX-Di
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NgAZQ-0002lm-LK
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Feb 2010 00:12:42 +0100
-Received: from FBCMMO05.fbc.local ([192.168.184.136]) by smtp-out108.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 13 Feb 2010 00:10:00 +0100
-Received: from FBCMCL01B04.fbc.local ([192.168.69.85]) by FBCMMO05.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 13 Feb 2010 00:10:00 +0100
-Received: from [192.168.1.116] ([79.17.136.227]) by FBCMCL01B04.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Sat, 13 Feb 2010 00:10:00 +0100
-From: GNUtoo <GNUtoo@no-log.org>
+	Sat, 13 Feb 2010 06:29:35 +0100
+Received: (qmail 2073 invoked by uid 813007); 13 Feb 2010 05:26:58 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 13 Feb 2010 05:26:58 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ac9c93b11002121353p3aeb67dbofddccc27e3368408@mail.gmail.com>
-References: <1266002916-32059-1-git-send-email-GNUtoo@no-log.org>
-	<1266002916-32059-2-git-send-email-GNUtoo@no-log.org>
-	<ac9c93b11002121353p3aeb67dbofddccc27e3368408@mail.gmail.com>
-Date: Sat, 13 Feb 2010 00:09:56 +0100
-Message-Id: <1266016196.4593.0.camel@gnutoo-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-OriginalArrivalTime: 12 Feb 2010 23:10:00.0616 (UTC)
-	FILETIME=[806B9280:01CAAC38]
-X-SA-Exim-Connect-IP: 85.37.17.108
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+Date: Sat, 13 Feb 2010 06:26:45 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.3.4; x86_64; ;
+	)
+References: <1265986283-28972-1-git-send-email-marcin@juszkiewicz.com.pl>
+	<19c1b8a91002121215i747bfc79h7a209241dc928996@mail.gmail.com>
+In-Reply-To: <19c1b8a91002121215i747bfc79h7a209241dc928996@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201002130626.46030.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] autotools.bbclass fix issue with native
+Subject: Re: Patches to solve libblkid/libuuid version problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,17 +36,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Feb 2010 23:12:42 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 13 Feb 2010 05:29:35 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-> > +                #TODO: needs better handling of native
-> The hesitation mainly concerns the #TODO comment. I don't really find
-> it explanatory, personally I'd say remove the whole comment.
-Ok I'll remove the comment.
-Thanks a lot
+Dnia pi=C4=85tek, 12 lutego 2010 o 21:15:47 Khem Raj napisa=C5=82(a):
+> May be the versions of e2fsprogs and util-linux-ng  should be paired.
+> like version x of util-linux-ng goes with version y of e2fsprogs
 
-Denis.
+e2fsprogs 1.41.x should work with util-linux-ng 2.1x - no idea about 1.38=20
+version but it probably not used now by distros
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
 
 
