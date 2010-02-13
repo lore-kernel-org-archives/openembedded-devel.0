@@ -1,42 +1,38 @@
 Received: from mail-fx0-f226.google.com ([209.85.220.226])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <lamiaposta71@gmail.com>) id 1NgJel-000752-Ow
+	(envelope-from <lamiaposta71@gmail.com>) id 1NgJmy-0001eN-24
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Feb 2010 16:11:42 +0100
-Received: by fxm26 with SMTP id 26so3449038fxm.13
+	Sat, 13 Feb 2010 16:20:11 +0100
+Received: by fxm26 with SMTP id 26so3454214fxm.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Feb 2010 07:09:03 -0800 (PST)
+	Sat, 13 Feb 2010 07:17:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=7siyc4cKC8hs/CNOiBJJVsElO365BYxeyO9FIZ/3ufI=;
-	b=xGsXbXWDV3BNFffgD6kDRCPKXBbRlyss2krXAby2WJSoniLHC0diYZ2ST+I9j+rYfR
-	Gn0rJJhi3r8rorHFA3cUXEFKf0a+pC7EHgAuL27Zwd4euWHauO3v08VXHSgof6DrPd6H
-	sd7K6JLQBr8RiLpMBwP0jC1h4WiRSquv6ti40=
+	:date:message-id:subject:from:to:content-type;
+	bh=tqxQzkreWL4FJEogM8tmk9/lcgaGxzAMs/Jh87+fZ9M=;
+	b=t6/VJZkKPbV7c0lFj0uSuDlnY43GrXYQQflO+lF2oIE6PN/k1CJIb1Mx8Y4eab8G05
+	KcwZXZwdS+MLf7GTHWC/0+6+maVoftezoH5ci/2+56CDyjWdZsG0vrztVa4DUlJvjxJ/
+	IX2yZiXw+Ecb/fy5qgECEA9ltW4x5O18cH3I4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=MKFrcfLH8FD+v17WRXmYJ6q3tUHq/135OwTZfadiPELxKWMctjEQrtbXHB6GC6O1bQ
-	rCfDkJzwIXjFBqAsOI3WHeYZFOy++nJDR3XU4w/1Gl6PJ0m6KQWxYlky4a2qjV4w3lFR
-	mhxystdxamdZWjAZU4rK0kQ4+hHCbkDeuyatk=
+	:content-type;
+	b=HA8WJXjfFvb0qVMVZS39hPV6dLs42L3paeYWp5+faKAxFm/ykyqetUKE6YTtNziRJ7
+	wVipo5SyRY45TcTjoacud7Yir9fytcD2tNhav3zaIAdmJns3K8NisIHbU5YKqMbpOtoA
+	IaVamxdSTRfWNccICAO3nGbkJIhRVpibPAIvw=
 MIME-Version: 1.0
-Received: by 10.223.15.21 with SMTP id i21mr1402886faa.58.1266073743702; Sat, 
-	13 Feb 2010 07:09:03 -0800 (PST)
-In-Reply-To: <20100213122301.GD5364@jama>
-References: <ade1bdc1002130107q6e83bca2sd57391ca539ef6a4@mail.gmail.com>
-	<1266053054.4218.3.camel@mattotaupa>
-	<ade1bdc1002130211o51733308vc79df05ee449cb0d@mail.gmail.com>
-	<20100213122301.GD5364@jama>
-Date: Sat, 13 Feb 2010 16:09:03 +0100
-Message-ID: <ade1bdc1002130709y151ea4d1o27f587d67a06ba3a@mail.gmail.com>
+Received: by 10.223.17.80 with SMTP id r16mr2510976faa.28.1266074251773; Sat, 
+	13 Feb 2010 07:17:31 -0800 (PST)
+In-Reply-To: <ac9c93b11002130655p454b5931od630b58e995772a1@mail.gmail.com>
+References: <ac9c93b11002130655p454b5931od630b58e995772a1@mail.gmail.com>
+Date: Sat, 13 Feb 2010 16:17:31 +0100
+Message-ID: <ade1bdc1002130717v2573bd35m165c6c887ca408e3@mail.gmail.com>
 From: Raffaele Recalcati <lamiaposta71@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.220.226
 X-SA-Exim-Mail-From: lamiaposta71@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: git and ssh and kernel development
+Subject: Re: {RFC} rootfs directory path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,57 +46,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Feb 2010 15:11:42 -0000
+X-List-Received-Date: Sat, 13 Feb 2010 15:20:11 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-Dear Martin,
-thx for comprehension.
+Hi Frans,
 
-Sometimes, for lack of experience, I ask something ...
-My Linux embedded experience is quite well, I suppose, but, in OE and
-so on, is very small.
-I'm improving it.
+2010/2/13 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+> Currently the rootfs ends up in ${TMPDIR}/work/rootfs/console-image
+> (at least if I bake console-image).
+> When dealing with multiple systems and either doing a parallel build
+> or keep the rootfs that could lead to inconsistent/faulty situations.
+> Shouldn't the dir be something like
+> ${TMPDIR}/work/rootfs/$DISTRO}-${MACHINE}/console-image or so
+> (or maybe $DISTRO/$MACHINE or the other way around).
+>
+> How do you feel about it (and what would be the preferred path?)
+
+My settings for rootfs are:
+${TMPDIR}/deploy/glibc/images/${MACHINE}
+
+so the problem on deploy is not present I think, but I'm not an OE
+expert and maybe some staging or other intermediare files can give the
+problem you have.
+
+If I'm wrong please ignore my information.
+
+Raffaele
 
 >
-> If you're asking what to put in SRC_URI in recipe it doesn't look stupid
-> to me :).
-
-yes, this is the point.
-
-
-> I don't know how to use git+ssh in bitbake (especially with password), I
-> would expect something like
-> SRC_URI=3D"git://user@ipaddress/pathtogit;protocol=3Dssh;branch=3Dmaster"
-> but you've to check if that's supported at least with key
-> authentization"
-
-I'll it with keygen. I had a problem to do it, but I'll fix it.
-
->
-> 2nd question is easier
-> SRC_URI =3D "file:///home/projects/pathtogit/secretProject"
-> and you would probably need to adjust S variable too
-> S =3D "${WORKDIR}/secretProject"
-
-SRC_URI =3D "file:///app/opt/sources/linux-2.6-bt270"
-
-NOTE: Unpacking ..
-It's running.
-
->
->
-> And you don't want to commit either version to public OE repo, right?
-
-This project can be maybe free, but first is better if I ask to my company.
-
->
-> Regards,
->
-> --
-> uin:136542059 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0jid:Martin.Jansa@gmail.com
-> Jansa Martin =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 sip:jamasip@voip.wengo.fr
-> JaMa
+> Frans
 >
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -108,10 +82,9 @@ This project can be maybe free, but first is better if I ask to my company.
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
-Thx.
 
 
---=20
+-- 
 www.opensurf.it
 
 
