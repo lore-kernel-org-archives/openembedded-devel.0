@@ -1,47 +1,56 @@
-Received: from mail-fx0-f226.google.com ([209.85.220.226])
+Received: from mail-bw0-f224.google.com ([209.85.218.224])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NgH4n-000509-Kc
+	(envelope-from <rep.dot.nop@gmail.com>) id 1NgHTD-0008Ht-CK
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Feb 2010 13:26:24 +0100
-Received: by fxm26 with SMTP id 26so3354684fxm.13
+	Sat, 13 Feb 2010 13:51:38 +0100
+Received: by bwz24 with SMTP id 24so1415432bwz.29
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Feb 2010 04:23:45 -0800 (PST)
+	Sat, 13 Feb 2010 04:48:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
+	h=domainkey-signature:received:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=N1fLrTqEDXbscbGUvQHYVpz86A5LJTGsN8D3GUtex54=;
-	b=nlkk7Djx2lwkka4wg0yX0ozCF2a9xT2Hx76Cr5kKJcuYEv71+/JsuWpB9m1GwNTY6r
-	MAlAdq8Xg0xzPKs+yUTeUHGDdBODruyj4deRpZagZNJGwm5aVOgVIBMKFXhvnOKwwhqV
-	V7Q0iRCbcz6N1SW6jcvdfgoD8JszgYO6edRJ4=
+	:in-reply-to:user-agent;
+	bh=AWY2LVNk93vGVTQDZn9yaC73eQKfi48Nz4zdCQEfZDw=;
+	b=xDvKER2AzYFnuyvH74CrLWMVWSDlg7WQrnKBkRHlQthE0iXgCEWBQlbgzW67Jz6ir2
+	/8rKmZn1AmQpxG3mbLxBTBKPs2OJGSygeX2x02nS0xlldZvN4Yzo44M25XJ6Qnz8lQLs
+	GnsEnZHxYiSSUSc7pfZ8iBz89ak3oFZ5MP6mA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=iwV04poxnA6VJgcOoqF897l27eXi6FPk7MOjGtRS1KuyPkCtnMfQRbvYATSHFh7hfr
-	MDfg7OfVRZxFVs1m15huWqfRkikr7AOBt/qmMGjWlF+cEMzCDyMAz+2u42wn8M0EyOE2
-	ySMFfjziouG5cSQDAipZ2adLWPSmeO2gwxHLU=
-Received: by 10.87.15.29 with SMTP id s29mr4863502fgi.34.1266063825638;
-	Sat, 13 Feb 2010 04:23:45 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 14sm2197278fxm.3.2010.02.13.04.23.44
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=HoxNbwZPDc3AxG/iYOBXnlfol9EVYEEjksjYwewnUYsttq2GEhwPVDtvouPLvhFdA0
+	B7a3oqABcWK224Py1VKkTKERVjjzIXqvsQQyCKuFT01frjJntaZSIUsv2Y0CHALxPLgH
+	RxIcC/dtgbvsuTAVdSpUa05yAd5vBhgEFkpH0=
+Received: by 10.204.36.71 with SMTP id s7mr1661347bkd.171.1266065339342;
+	Sat, 13 Feb 2010 04:48:59 -0800 (PST)
+Received: from s42.loc ([84.119.103.202])
+	by mx.google.com with ESMTPS id 15sm1921144bwz.0.2010.02.13.04.48.57
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 13 Feb 2010 04:23:44 -0800 (PST)
-Date: Sat, 13 Feb 2010 13:23:01 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sat, 13 Feb 2010 04:48:58 -0800 (PST)
+Received: from cow by s42.loc with local (Exim 4.71)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1NgHTO-0001q6-4X; Sat, 13 Feb 2010 13:51:46 +0100
+Date: Sat, 13 Feb 2010 13:51:46 +0100
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100213122301.GD5364@jama>
-References: <ade1bdc1002130107q6e83bca2sd57391ca539ef6a4@mail.gmail.com>
-	<1266053054.4218.3.camel@mattotaupa>
-	<ade1bdc1002130211o51733308vc79df05ee449cb0d@mail.gmail.com>
+Message-ID: <20100213125146.GJ10632@mx.loc>
+References: <1265832780-19939-1-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-2-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-3-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-4-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-5-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-6-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-7-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-8-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-9-git-send-email-rep.dot.nop@gmail.com>
+	<1265892781.3777.1050.camel@mill.internal.reciva.com>
 MIME-Version: 1.0
-In-Reply-To: <ade1bdc1002130211o51733308vc79df05ee449cb0d@mail.gmail.com>
+In-Reply-To: <1265892781.3777.1050.camel@mill.internal.reciva.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.226
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Connect-IP: 209.85.218.224
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: git and ssh and kernel development
+Subject: Re: [PATCH 8/8] xz: add xz package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,62 +64,173 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Feb 2010 12:26:24 -0000
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Sat, 13 Feb 2010 12:51:38 -0000
+X-Groupsio-MsgNum: 16742
+Content-Type: multipart/mixed; boundary="jRHKVT23PllUwdXP"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 
-On Sat, Feb 13, 2010 at 11:11:23AM +0100, Raffaele Recalcati wrote:
-> Dear Paul,
-> 
-> 2010/2/13 Paul Menzel <paulepanter@users.sourceforge.net>:
-> > Dear Raffaele,
-> >
-> >
-> > Am Samstag, den 13.02.2010, 10:07 +0100 schrieb Raffaele Recalcati:
-> >> I have a git mirror of the kernel.
-> >> How to fetch from it in ssh .
-> >> ssh://user@ipaddress/pathtogit;protocol=git;branch=master
-> >> but ssh has password  ..
-> >>
-> >> Second question: if pathtogit is a dir on my pc where I'm developing
-> >> what is the syntax?
-> >
-> > I think this is the wrong list you are asking this question. Please ask
-> > on the Git list, but before you should read the documentation which is
-> > quite elaborate for Git as far as I know and should cover your
-> > questions.
-> >
-> > If you do ask the question on the Git list or solve the problem please
-> > answer to this thread with the appropriate links.
-> 
-> I'm sorry.
-> It was a stupid question.
-> I'll be very careful in the future!
-> :)
+--jRHKVT23PllUwdXP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-If you're asking what to put in SRC_URI in recipe it doesn't look stupid
-to me :).
+On Thu, Feb 11, 2010 at 12:53:01PM +0000, Phil Blundell wrote:
+>On Wed, 2010-02-10 at 21:13 +0100, Bernhard Reutner-Fischer wrote:
+>> xz is the lzma successor
+>> tested with automake-1.11.1, autoconf-2.65
+>
+>Thanks for the patch.  I think this could use a little cleanup before it
+>is committed, though; please see below.
 
-I don't know how to use git+ssh in bitbake (especially with password), I
-would expect something like
-SRC_URI="git://user@ipaddress/pathtogit;protocol=ssh;branch=master"
-but you've to check if that's supported at least with key
-authentization"
+I flagged it as RFC in the summary, so yes, like the summary said, still
+needs love..
+>
+>> index 0000000..bc5e9ff
+>> --- /dev/null
+>> +++ b/recipes/xz/xz-native.inc
+>> @@ -0,0 +1,2 @@
+>> +inherit native
+>> +require xz_${PV}.bb
+>
+>You could consider using BBCLASSEXTEND to eliminate the need for this
+>separate recipe.
 
-2nd question is easier
-SRC_URI = "file:///home/projects/pathtogit/secretProject"
-and you would probably need to adjust S variable too
-S = "${WORKDIR}/secretProject"
+Thanks for that, good thing. This will trim down alot on the number of
+recipes in the tree!
+>
+>> diff --git a/recipes/xz/xz-native_4.999.9beta.bb b/recipes/xz/xz-native_4.999.9beta.bb
+>> new file mode 100644
+>> index 0000000..c4f0da9
+>> --- /dev/null
+>> +++ b/recipes/xz/xz-native_4.999.9beta.bb
+>> @@ -0,0 +1,3 @@
+>> +PV = "4.999.9beta"
+>> +
+>> +require xz-native.inc
+>
+>Is it necessary to set PV here?  I would have thought base.bbclass would
+>infer that same value from the filename.
 
+It was needed since above xz-native.inc had
+require xz_${PV}.inc
+in it, and if i didn't set PV before it, it defaulted to 1.0, breaking
+horribly for obvious reasons. BBCLASSEXTEND nullifies this. Ditched.
+>
+>> diff --git a/recipes/xz/xz-native_git.bb b/recipes/xz/xz-native_git.bb
+>> new file mode 100644
+>> index 0000000..006b9d7
+>> --- /dev/null
+>> +++ b/recipes/xz/xz-native_git.bb
+>> @@ -0,0 +1,7 @@
+>> +# XZ_BASE should be the latest released version of xz.
+>> +# It can be set in the distro file.
+>> +#XZ_BASE ?= "4.999.9"
+>> +#SRCREV = "HEAD"
+>> +#PV = "${XZ_BASE}+gitr${SRCREV}"
+>
+>Please don't leave this sort of stuff commented out in the file.  If
+>it's not needed, just delete those lines.
 
-And you don't want to commit either version to public OE repo, right?
+dropped.
+>
+>> +#FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/xz-${PV}"
+>
+>Likewise for that.
 
-Regards,
+ditto (RFC..)
+>
+>> --- /dev/null
+>> +++ b/recipes/xz/xz_4.999.9beta.bb
+>> @@ -0,0 +1,8 @@
+>> +PV = "4.999.9beta"
+>
+>See above regarding PV.
+>
+>> +
+>> +require xz.inc
+>> +PR = "${INC_PR}.0"
+>> +SRC_URI = "http://tukaani.org/xz/xz-${PV}.tar.bz2;name=xz"
+>
+>Wouldn't that SRC_URI be better in the .inc file?  Presumably this is
+>the correct URI for everything except the _git version.
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+It would indeed. Can i somehow say
+file1: SRC="http:://one.ext/one.tar.xz"
+       SRC[md5sum]=md5
+       SRC[sha256sum]=sha256
+       or, perhaps it's the basename if there was no ;name=
+       SRC[one.tar.xz.md5sum]=md5
+       SRC[one.tar.xz.sha256sum]=sha256
+file2: SRC="git://two"
+inc: FOO_SRC ?= SRC
+     SRC_URI += FOO_SRC
 
+?
+>
+>> +SRC_URI[xz.md5sum] = "cc4044fcc073b8bcf3164d1d0df82161"
+>> +SRC_URI[xz.sha256sum] = "330312c4397608d8b7be362cc7edbfeafa6101614bc2164d816ea767656aa15c"
+>> +EXTRA_OECONF = "--enable-shared"
+>
+>Likewise for that EXTRA_OECONF, I would have thought that would also
+>belong in the .inc really.
 
+the EXTRA_OECONF can. Done.
+Revised patch is attached, but:
+it works for the 4.999beta9 version (literally, since that's how
+upstream calls the tarball; Is this a problem with the version-naming
+like Koon indicates?) but not if you
+PREFERRED_VERSION_xz = "git"
+PREFERRED_VERSION_xz-native = "git"
+and then bake xz-native:
+NOTE: Task failed: Fetch failed: [snip]; git read-tree 1 failed with
+signal 128, output:
+fatal: Not a valid object name 1
+
+since: $ ls -a ../sources/git/ctrl.tukaani.org.xz.git/
+.  ..  1  .git
+
+"1" ?!
+
+--jRHKVT23PllUwdXP
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment; filename="0007-xz-add-xz-package.00b.patch"
+
+diff --git a/recipes/xz/xz.inc b/recipes/xz/xz.inc
+new file mode 100644
+index 0000000..cc4f966
+--- /dev/null
++++ b/recipes/xz/xz.inc
+@@ -0,0 +1,9 @@
++DESCRIPTION = "XZ Utils is free general-purpose data compression software with high compression ratio.  XZ Utils are the successor to LZMA Utils."
++SECTION = "console/utils"
++LICENSE = "Public Domain"
++INC_PR = "r0"
++S ?= "${WORKDIR}/xz-${PV}"
++EXTRA_OECONF = "--enable-shared"
++BBCLASSEXTEND = "native"
++
++inherit autotools
+diff --git a/recipes/xz/xz_4.999.9beta.bb b/recipes/xz/xz_4.999.9beta.bb
+new file mode 100644
+index 0000000..8733023
+--- /dev/null
++++ b/recipes/xz/xz_4.999.9beta.bb
+@@ -0,0 +1,5 @@
++require xz.inc
++PR = "${INC_PR}.0"
++SRC_URI = "http://tukaani.org/xz/xz-${PV}.tar.bz2;name=xz"
++SRC_URI[xz.md5sum] = "cc4044fcc073b8bcf3164d1d0df82161"
++SRC_URI[xz.sha256sum] = "330312c4397608d8b7be362cc7edbfeafa6101614bc2164d816ea767656aa15c"
+diff --git a/recipes/xz/xz_git.bb b/recipes/xz/xz_git.bb
+new file mode 100644
+index 0000000..8950a08
+--- /dev/null
++++ b/recipes/xz/xz_git.bb
+@@ -0,0 +1,6 @@
++S = "${WORKDIR}/git"
++require xz.inc
++PV = "git"
++PR = "${INC_PR}.0"
++SRC_URI = "git://ctrl.tukaani.org/xz.git;branch=master;protocol=git"
++DEFAULT_PREFERENCE = "-1"
+
+--jRHKVT23PllUwdXP--
