@@ -1,35 +1,27 @@
-Received: from mail-fx0-f226.google.com ([209.85.220.226])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <lamiaposta71@gmail.com>) id 1NgE0U-0003ll-8L
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Feb 2010 10:09:45 +0100
-Received: by fxm26 with SMTP id 26so3255681fxm.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Feb 2010 01:07:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=7NLHvynktntRT/O/OzShxgvW+5fC5HqbF5EMFdk51Dc=;
-	b=tTaEwHQuvBk7XaORC97p7wgiyduBKtT5+9KJqpQNWUfRxz1thRWJoY4Uo1L3kIiX2b
-	7MIsuvRK5lxHCpWIHp9rJvxX69TtegXl2sRGgSTDV8vxkIgOBLfjeXBzTYzeTn1W7oHl
-	WQG5r+jJeY0SVsIi5EyR0dE/w0nzJcDwHwteU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=Nt64DG5ZCHcgADNgQJfblreiKMCF19obT70JGP+D6TQf0WvCxv4wAwNM4Dc1RSSb/h
-	8yZ7HCks90KVvKMfyhGxQ2Oz0aFz1Lg/nhGb4q6xLltqFJXQzcOKOioMPy/OZkUNN3Mf
-	lQk4NkkKRUylfhOU3QQqYyUNuULPKFC+S1WqA=
-MIME-Version: 1.0
-Received: by 10.223.81.89 with SMTP id w25mr2910435fak.25.1266052026473; Sat, 
-	13 Feb 2010 01:07:06 -0800 (PST)
-Date: Sat, 13 Feb 2010 10:07:06 +0100
-Message-ID: <ade1bdc1002130107q6e83bca2sd57391ca539ef6a4@mail.gmail.com>
-From: Raffaele Recalcati <lamiaposta71@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NgEH5-0004L8-1b for openembedded-devel@lists.openembedded.org;
+	Sat, 13 Feb 2010 10:26:54 +0100
+Received: from f053036025.adsl.alicedsl.de ([78.53.36.25]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NgEEa-0001XZ-SO for openembedded-devel@lists.openembedded.org;
+	Sat, 13 Feb 2010 09:24:17 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.226
-X-SA-Exim-Mail-From: lamiaposta71@gmail.com
+In-Reply-To: <ade1bdc1002130107q6e83bca2sd57391ca539ef6a4@mail.gmail.com>
+References: <ade1bdc1002130107q6e83bca2sd57391ca539ef6a4@mail.gmail.com>
+Date: Sat, 13 Feb 2010 10:24:14 +0100
+Message-ID: <1266053054.4218.3.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: git and ssh and kernel development
+Subject: Re: git and ssh and kernel development
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,21 +35,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Feb 2010 09:09:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 13 Feb 2010 09:26:54 -0000
+X-Groupsio-MsgNum: 16738
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-QRsC0+IFRp70bq33eJZN"
 
-Hi all,
-I have a git mirror of the kernel.
-How to fetch from it in ssh .
-ssh://user@ipaddress/pathtogit;protocol=git;branch=master
-but ssh has password  ..
+--=-QRsC0+IFRp70bq33eJZN
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Second question: if pathtogit is a dir on my pc where I'm developing
-what is the syntax?
-
-Thx
-
--- 
-www.opensurf.it
+Dear Raffaele,
 
 
+Am Samstag, den 13.02.2010, 10:07 +0100 schrieb Raffaele Recalcati:
+> I have a git mirror of the kernel.
+> How to fetch from it in ssh .
+> ssh://user@ipaddress/pathtogit;protocol=3Dgit;branch=3Dmaster
+> but ssh has password  ..
+>=20
+> Second question: if pathtogit is a dir on my pc where I'm developing
+> what is the syntax?
+
+I think this is the wrong list you are asking this question. Please ask
+on the Git list, but before you should read the documentation which is
+quite elaborate for Git as far as I know and should cover your
+questions.
+
+If you do ask the question on the Git list or solve the problem please
+answer to this thread with the appropriate links.
+
+
+Thanks,
+
+Paul
+
+--=-QRsC0+IFRp70bq33eJZN
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEUEABECAAYFAkt2b7gACgkQPX1aK2wOHVimSQCYxFGGK9nOdRuA5XhbRLFIQZ4h
+NACfcex28/9h3M2Zjp1uzTO00VeRIL8=
+=5UG6
+-----END PGP SIGNATURE-----
+
+--=-QRsC0+IFRp70bq33eJZN--
