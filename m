@@ -1,30 +1,35 @@
-Received: from vms173003pub.verizon.net ([206.46.173.3])
+Received: from smtp-out01.alice.it ([85.33.2.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1NgOku-0008Tj-V7
+	(envelope-from <ospite@studenti.unina.it>) id 1Ngc0V-0005Vf-P1
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Feb 2010 21:38:24 +0100
-Received: from gandalf.denix.org ([unknown] [71.251.51.225])
-	by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0KXS0023ARUL2C19@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	13 Feb 2010 14:35:21 -0600 (CST)
-Received: from vienms0046 (unknown [213.185.186.253])
-	by gandalf.denix.org (Postfix) with ESMTPA id 540D614AF55; Sat,
-	13 Feb 2010 15:35:08 -0500 (EST)
-Date: Sat, 13 Feb 2010 20:34:54 +0000
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: "Antonio Ospite" <ospite@studenti.unina.it> ,
-	openembedded-devel@lists.openembedded.org
-MIME-version: 1.0
-X-Priority: 3
-Message-id: <20100213203508.540D614AF55@gandalf.denix.org>
-X-SA-Exim-Connect-IP: 206.46.173.3
-X-SA-Exim-Mail-From: denis@denix.org
+	Sun, 14 Feb 2010 11:47:22 +0100
+Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-out01.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sun, 14 Feb 2010 11:43:37 +0100
+Received: from FBCMCL01B06.fbc.local ([192.168.69.87]) by FBCMMO02.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sun, 14 Feb 2010 11:43:38 +0100
+Received: from badebec ([87.3.192.228]) by FBCMCL01B06.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Sun, 14 Feb 2010 11:43:37 +0100
+Received: by badebec with local (Exim 4.71)
+	(envelope-from <ospite@studenti.unina.it>)
+	id 1Ngbwt-0001Oz-KG; Sun, 14 Feb 2010 11:43:35 +0100
+From: Antonio Ospite <ospite@studenti.unina.it>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 14 Feb 2010 11:43:22 +0100
+Message-Id: <1266144202-5360-1-git-send-email-ospite@studenti.unina.it>
+X-Mailer: git-send-email 1.6.6.2
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+X-OriginalArrivalTime: 14 Feb 2010 10:43:37.0353 (UTC)
+	FILETIME=[90576F90:01CAAD62]
+X-SA-Exim-Connect-IP: 85.33.2.12
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] meta-toolchain: Run rmdir only if empty dirs are actually found.
+Subject: [PATCH] Update tzdata_2009s to tzdata_2009u
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,50 +43,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Feb 2010 20:38:24 -0000
-Content-type: multipart/mixed;
-	boundary="----_=_0x976594127cd5cf65e349dd567cc64df1_=_----"
+X-List-Received-Date: Sun, 14 Feb 2010 10:47:22 -0000
 
-------_=_0x976594127cd5cf65e349dd567cc64df1_=_----
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+The archive for tzdata_2009s is not available at $SRC_URI anymore.
 
-> Prevent a failure in do_populate_sdk when there are no empty
-> directories:
->=C2=A0 =C2=A0 /bin/rmdir: missing operand
->=C2=A0 =C2=A0 Try `/bin/rmdir --help' for more information.
->
-> See also http://tinderbox.openembedded.net/packages/478437/
->
-> Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
-Acked-by: Denys Dmytriyenko <denis@denix.org>
-> ---
->=C2=A0 recipes/meta/meta-toolchain.bb |=C2=A0 =C2=A0 =C2=A0 2 +-
->=C2=A0 1 files changed, 1 insertions(+), 1 deletions(-)
->
-> diff --git a/recipes/meta/meta-toolchain.bb b/recipes/meta/meta-toolc=
-hain.bb
-> index a8c27ec..3169425 100644
-> --- a/recipes/meta/meta-toolchain.bb
-> +++ b/recipes/meta/meta-toolchain.bb
-> @@ -67,7 +67,7 @@ do_populate_sdk() {
->=C2=A0 =C2=A0=C2=A0=C2=A0 rm -Rf ${SDK_OUTPUT}/usr/lib
->=C2=A0
->=C2=A0 =C2=A0=C2=A0=C2=A0 # Clean up empty directories from excluded p=
-ackages
-> -=C2=A0=C2=A0=C2=A0 find ${SDK_OUTPUT} -depth -type d -empty -print0 =
-| xargs -0 /bin/rmdir
-> +=C2=A0=C2=A0=C2=A0 find ${SDK_OUTPUT} -depth -type d -empty -print0 =
-| xargs -r0 /bin/rmdir
->=C2=A0
->=C2=A0 =C2=A0=C2=A0=C2=A0 install -d ${SDK_OUTPUT}/${SDKPATH}/${TARGET=
-_SYS}/${sysconfdir}
->=C2=A0 =C2=A0=C2=A0=C2=A0 install -m 0644 ${IPKGCONF_TARGET} ${IPKGCON=
-F_SDK}
-> ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/${sysconfdir}/
-> --
-> 1.6.6.2
->
+Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+---
+ .../tzdata/{tzdata_2009s.bb => tzdata_2009u.bb}    |    0
+ 1 files changed, 0 insertions(+), 0 deletions(-)
+ rename recipes/tzdata/{tzdata_2009s.bb => tzdata_2009u.bb} (100%)
 
-------_=_0x976594127cd5cf65e349dd567cc64df1_=_------
+diff --git a/recipes/tzdata/tzdata_2009s.bb b/recipes/tzdata/tzdata_2009u.bb
+similarity index 100%
+rename from recipes/tzdata/tzdata_2009s.bb
+rename to recipes/tzdata/tzdata_2009u.bb
+-- 
+1.6.6.2
+
+
+
