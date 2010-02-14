@@ -1,31 +1,24 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from dd20204.kasserver.com ([85.13.140.93])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Ngi3q-00029r-4i for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Feb 2010 18:15:14 +0100
-Received: from f053033040.adsl.alicedsl.de ([78.53.33.40]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Ngi1L-0002ic-54 for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Feb 2010 17:12:35 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <fca63bcf1002140837i631f5d62kb8b7481e7d266c1b@mail.gmail.com>
-References: <20100213203508.540D614AF55@gandalf.denix.org>
-	<20100214130905.GD5979@excalibur.local>
-	<1266162635.5009.42.camel@mattotaupa>
-	<20100214161328.GE5979@excalibur.local>
-	<fca63bcf1002140837i631f5d62kb8b7481e7d266c1b@mail.gmail.com>
-Date: Sun, 14 Feb 2010 18:12:33 +0100
-Message-ID: <1266167553.5009.45.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	(envelope-from <bernhard.guillon@opensimpad.org>) id 1NgiOM-0002YK-5B
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 14 Feb 2010 18:36:25 +0100
+Received: from dd20204.kasserver.com (kasmail3.kasserver.com [85.13.143.1])
+	by dd20204.kasserver.com (Postfix) with SMTP id 2B1D61817E775
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 14 Feb 2010 18:33:45 +0100 (CET)
+In-Reply-To: <20100214170414.GG30265@mx.loc>
+from: bernhard.guillon@opensimpad.org
+to: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+X-SenderIP: 95.90.75.53
+Message-Id: <20100214173347.2B1D61817E775@dd20204.kasserver.com>
+Date: Sun, 14 Feb 2010 18:33:45 +0100 (CET)
+X-SA-Exim-Connect-IP: 85.13.140.93
+X-SA-Exim-Mail-From: bernhard.guillon@opensimpad.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Update state in Patchwork. (was: [PATCH] meta-toolchain: Run rmdir only if empty dirs are actually found.)
+Subject: Re: = ? UTF-8 ? B ? Ww== ? =oe= ? UTF-8 ? B ? XQ== ? = How to sane replace a path in a pkgconfig file ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,60 +32,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Feb 2010 17:15:14 -0000
-X-Groupsio-MsgNum: 16770
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-HFxikCpZzdhOd8YG76K4"
-
---=-HFxikCpZzdhOd8YG76K4
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 14 Feb 2010 17:36:25 -0000
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-Am Sonntag, den 14.02.2010, 17:37 +0100 schrieb Michael Lippautz:
-> >> 2. Update the state.
-> >
-> > How? The webinterface does not offer my the functionality to change the=
- state. I
-> > guess it is because I'm not in the right group or have otherwise not en=
-ough
-> > permissions in patchwork. As I just registered the account today it cou=
-ld be
-> > that I'm to late in the game to get updated with the rights in the last=
- batch.
-> > :)
->
-> I think you have to add the email address, the patch has been sent
-> from, to your account at [1].
+> On Sun, Feb 14, 2010 at 03:23:09PM +0100, bernhard.guillon@opensimpad.o=
+rg wrote:
+> >Hi all,
+> >currently I am working on fixing blackbox. I had to add a lot of inclu=
+des to fix compiler errors.
 >=20
-> (Atleast then I could update the status of MY patches that have been
-> rejected/applied by others.)
+> I have an import of the CVS tree here, fyi:
+> http://git.busybox.net/~aldot/git/blackboxwm/
+> http://git.busybox.net/~aldot/git/bbkeys/
+>=20
+> There were a couple of debian's patches applied (still by brad), i'd
+> recommend to use all blackbox-0.70.1..master patches and base off that.
+>=20
 
-I did not have do this as far as I can remember (there is just my own
-address there). I just had to activate/confirm my account per email. Now
-I have the options to change the state if I choose a patch from the list
-[2].
+Hi,
+thanks for the hint, the debian patch for the includes looks like mine so=
+ I will use the debian patch for updating the recipe :)
 
-Does it work with `pwclient` for you?
+But my problem is not the compiler errors but openembeddeds pkgconfig cla=
+ss.
+When will pkgconfig be called? Before or after do_stage()? What is the ri=
+ght function to place the code of replacing  the wrong path of the pkgcon=
+fig file? The original package does it in do_stage() but it seems at leas=
+t on my build system that pkgconfig class is called after do_stage().=20
+Also is it safe to just replace the path in pkgconfig files in do_install=
+_prepend()? Because then there is no file with the build path.=20
+
+So I need a function which gets called after pkgconfig class?
+
+Best regards
+Bernhard Guillon
 
 
-Thanks,
-
-Paul
 
 
-[2] http://patchwork.openembedded.org/project/openembedded/list/
 
---=-HFxikCpZzdhOd8YG76K4
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkt4LwEACgkQPX1aK2wOHVjbhQCffbkBivzQpfyE5rtn3r++33UW
-39oAmwa3S2GdIgwZcWJFgd+8Z4G/g9wy
-=5OWA
------END PGP SIGNATURE-----
-
---=-HFxikCpZzdhOd8YG76K4--
