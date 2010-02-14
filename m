@@ -1,37 +1,21 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from dd20204.kasserver.com ([85.13.140.93])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ngl0B-0003c7-R4 for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Feb 2010 21:23:38 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ngkxf-0004wW-IS for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Feb 2010 21:20:59 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Feb 2010 21:20:59 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <bernhard.guillon@opensimpad.org>) id 1NglHR-0005Js-Oo
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 14 Feb 2010 21:41:28 +0100
+Received: from dd20204.kasserver.com (kasmail3.kasserver.com [85.13.143.1])
+	by dd20204.kasserver.com (Postfix) with SMTP id 3C855185B3BD2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Feb 2010 21:20:59 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 14 Feb 2010 21:20:44 +0100
-Message-ID: <hl9luq$dgl$1@ger.gmane.org>
-References: <20100214170414.GG30265@mx.loc>	<20100214173347.2B1D61817E775@dd20204.kasserver.com>
-	<20100214183759.GH30265@mx.loc>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100204 Shredder/3.0.2pre
-In-Reply-To: <20100214183759.GH30265@mx.loc>
-X-Enigmail-Version: 1.0.1
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	Sun, 14 Feb 2010 21:38:51 +0100 (CET)
+In-Reply-To: <hl9luq$dgl$1@ger.gmane.org>
+from: bernhard.guillon@opensimpad.org
+to: openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+X-SenderIP: 95.90.75.53
+Message-Id: <20100214203851.3C855185B3BD2@dd20204.kasserver.com>
+Date: Sun, 14 Feb 2010 21:38:51 +0100 (CET)
+X-SA-Exim-Connect-IP: 85.13.140.93
+X-SA-Exim-Mail-From: bernhard.guillon@opensimpad.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: = ? UTF-8 ? B ? Ww== ? =oe= ? UTF-8 ? B ? XQ== ? = How to sane replace a path in a pkgconfig file ?
@@ -48,37 +32,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Feb 2010 20:23:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 14 Feb 2010 20:41:28 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+> > classes/pkgconfig.bbclass suggests that .pc are fixed up in
+> > do_install_prepend() (why does the efl class duplicate this, btw?)
+> > and that this depends on stage.
+>=20
+> Because the efl classes suck, they also override things like PACKAGES.
+> With new-style staging and the current state of e svn we should be able
+> to get rid of that crap altogether.
+>=20
+> That reminds me, I wanted to add
+>=20
+> do_configure_prepend() {
+> 	 autopoint
+> }
+>=20
+> to those clase to make the modules build again.
 
-On 14-02-10 19:37, Bernhard Reutner-Fischer wrote:
+I found the problem for blackbox. The path is in -rlink-path and this is =
+currently ignored by pkgconfig.bbclass.
 
-> classes/pkgconfig.bbclass suggests that .pc are fixed up in
-> do_install_prepend() (why does the efl class duplicate this, btw?)
-> and that this depends on stage.
+This fixed it on my system but I have no clue if this is a good idea at a=
+ll :D
 
-Because the efl classes suck, they also override things like PACKAGES.
-With new-style staging and the current state of e svn we should be able
-to get rid of that crap altogether.
+diff --git a/classes/pkgconfig.bbclass b/classes/pkgconfig.bbclass
+index f3d9371..1da508f 100644
+--- a/classes/pkgconfig.bbclass
++++ b/classes/pkgconfig.bbclass
+@@ -3,7 +3,7 @@ DEPENDS_prepend =3D "pkgconfig-native "
+ do_install_prepend () {
+=20
+ for i in `find ${S}/ -name "*.pc" -type f` ; do=20
+-            sed -i -e 's:-L${STAGING_LIBDIR}::g' -e 's:-I${STAGING_INCDI=
+R}::g' $i
++            sed -i -e 's:-L${STAGING_LIBDIR}::g' -e 's:-I${STAGING_INCDI=
+R}::g' -e 's:-rpath-link,${STAGING_LIBDIR}::g' $i
+         done
+ }
 
-That reminds me, I wanted to add
 
-do_configure_prepend() {
-	autopoint
-}
+Should I prepare a proper patch for pkgconfig.bbclass and send it to the =
+list or is this approach the wrong way?
 
-to those clase to make the modules build again.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Best regards
+Bernhard Guillon
 
-iD8DBQFLeFscMkyGM64RGpERAi25AKCtuADXMEd569iE9OeUE6Yc6kXfTQCdEw2b
-35Qg7/ZldiOSulSB71Pbo44=
-=kiKn
------END PGP SIGNATURE-----
+
 
 
 
