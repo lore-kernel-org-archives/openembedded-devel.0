@@ -1,41 +1,47 @@
-Received: from mail-bw0-f219.google.com ([209.85.218.219])
+Received: from mail-fx0-f225.google.com ([209.85.220.225])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.lippautz@gmail.com>) id 1NghVt-0002Q4-IC
+	(envelope-from <rep.dot.nop@gmail.com>) id 1Nghsp-0006T4-5S
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Feb 2010 17:40:08 +0100
-Received: by bwz19 with SMTP id 19so2936735bwz.28
+	Sun, 14 Feb 2010 18:03:50 +0100
+Received: by fxm25 with SMTP id 25so2191412fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Feb 2010 08:37:28 -0800 (PST)
+	Sun, 14 Feb 2010 09:01:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=Py1oawiu+yA2QJzpDtMCBBEpdnvWPy35wEk527QWE9c=;
-	b=BM7uVz9ymRBcnCgNe3OySNeYwT9wGjbfbaQOyj5XiKPg4/W86ALT4EakNNzNjXEVoJ
-	POom9xrBNUiFDQLwzw7YRvS3LAtKfIUcWldXC4LUNCgPonWGSdgtXMAGfYqbNhyLQUAO
-	FtY6HIXDB20C7ioM9cD3rW2044JGIQzO5aIuM=
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=PxysodYPYoWjwNu0A4i2/uAw4JPgq2ZmlYZIj4ybeyI=;
+	b=wc46vzIjJqF6i3S9BtosTuzN/MG33aJU5hEyPnL0xq7QezWYpYgmTCbkakyLX5m1kg
+	nDwVHPx+PP2cBhH/HDSxN9bvZw5G4ofxBB8inXBFB26gj0yb9Hzg1g6CIXY0T+pLwWD5
+	iekS1DRvATI+Zs8cb4FotlaBkTJs6ywvS7e34=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=hmd8Gm14hrwn+ahgdvkCQYIdDh9yCLGt5/9iRYUHpClDom2Gy/lfGxcqGJnPTU51zN
-	kwudxtx9rm2VGndoLKbOxcGgCJubM1PAVkyem6F2Ok944F9wQ+05UjoxHoEfwGxog46X
-	czFLNxllC1JYtPzC0l7S9lvHw5KSFxp9exPow=
-MIME-Version: 1.0
-Received: by 10.204.14.86 with SMTP id f22mr2512633bka.107.1266165448300; Sun, 
-	14 Feb 2010 08:37:28 -0800 (PST)
-In-Reply-To: <20100214161328.GE5979@excalibur.local>
-References: <20100213203508.540D614AF55@gandalf.denix.org>
-	<20100214130905.GD5979@excalibur.local>
-	<1266162635.5009.42.camel@mattotaupa>
-	<20100214161328.GE5979@excalibur.local>
-Date: Sun, 14 Feb 2010 17:37:28 +0100
-Message-ID: <fca63bcf1002140837i631f5d62kb8b7481e7d266c1b@mail.gmail.com>
-From: Michael Lippautz <michael.lippautz@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=hBbPMMhcWL1olQ5xoK1HTAJn58VOSQCoIy7okoPhUUiRV6nAKLD3sdgZYH0tGicG5t
+	NV8n4hIS4ES9LWTaajz5geapCjSuf7CVdaXwVjfGITGAM2ary0FK/ePDQNbdc3BXSGIx
+	RoXVtJlhfc9Uf2rvXnbcV65SmUkbAFomker8U=
+Received: by 10.223.143.71 with SMTP id t7mr4669872fau.38.1266166870143;
+	Sun, 14 Feb 2010 09:01:10 -0800 (PST)
+Received: from s42.loc ([84.119.103.202])
+	by mx.google.com with ESMTPS id 22sm8680767fkq.54.2010.02.14.09.01.09
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 14 Feb 2010 09:01:09 -0800 (PST)
+Received: from cow by s42.loc with local (Exim 4.71)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1NghtH-0004tH-0h; Sun, 14 Feb 2010 18:04:15 +0100
+Date: Sun, 14 Feb 2010 18:04:14 +0100
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.219
-X-SA-Exim-Mail-From: michael.lippautz@gmail.com
+Message-ID: <20100214170414.GG30265@mx.loc>
+References: <20100214142309.52217185B3BB9@dd20204.kasserver.com>
+MIME-Version: 1.0
+In-Reply-To: <20100214142309.52217185B3BB9@dd20204.kasserver.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.225
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Update state in Patchwork. (was: [PATCH] meta-toolchain: Run rmdir only if empty dirs are actually found.)
+Subject: Re: How to sane replace a path in a pkgconfig file ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,29 +55,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Feb 2010 16:40:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 14 Feb 2010 17:03:50 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
->> 2. Update the state.
->
-> How? The webinterface does not offer my the functionality to change the state. I
-> guess it is because I'm not in the right group or have otherwise not enough
-> permissions in patchwork. As I just registered the account today it could be
-> that I'm to late in the game to get updated with the rights in the last batch.
-> :)
->
-> regards
-> Stefan Schmidt
+On Sun, Feb 14, 2010 at 03:23:09PM +0100, bernhard.guillon@opensimpad.org wrote:
+>Hi all,
+>currently I am working on fixing blackbox. I had to add a lot of includes to fix compiler errors.
 
-I think you have to add the email address, the patch has been sent
-from, to your account at [1].
+I have an import of the CVS tree here, fyi:
+http://git.busybox.net/~aldot/git/blackboxwm/
+http://git.busybox.net/~aldot/git/bbkeys/
 
-(Atleast then I could update the status of MY patches that have been
-rejected/applied by others.)
+There were a couple of debian's patches applied (still by brad), i'd
+recommend to use all blackbox-0.70.1..master patches and base off that.
 
-Regards,
-Michael
-
-[1] http://patchwork.openembedded.org/user/
+HTH,
 
 
