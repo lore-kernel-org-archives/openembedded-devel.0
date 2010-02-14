@@ -1,47 +1,31 @@
-Received: from mail-fx0-f225.google.com ([209.85.220.225])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1Nghsp-0006T4-5S
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Feb 2010 18:03:50 +0100
-Received: by fxm25 with SMTP id 25so2191412fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Feb 2010 09:01:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=PxysodYPYoWjwNu0A4i2/uAw4JPgq2ZmlYZIj4ybeyI=;
-	b=wc46vzIjJqF6i3S9BtosTuzN/MG33aJU5hEyPnL0xq7QezWYpYgmTCbkakyLX5m1kg
-	nDwVHPx+PP2cBhH/HDSxN9bvZw5G4ofxBB8inXBFB26gj0yb9Hzg1g6CIXY0T+pLwWD5
-	iekS1DRvATI+Zs8cb4FotlaBkTJs6ywvS7e34=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=hBbPMMhcWL1olQ5xoK1HTAJn58VOSQCoIy7okoPhUUiRV6nAKLD3sdgZYH0tGicG5t
-	NV8n4hIS4ES9LWTaajz5geapCjSuf7CVdaXwVjfGITGAM2ary0FK/ePDQNbdc3BXSGIx
-	RoXVtJlhfc9Uf2rvXnbcV65SmUkbAFomker8U=
-Received: by 10.223.143.71 with SMTP id t7mr4669872fau.38.1266166870143;
-	Sun, 14 Feb 2010 09:01:10 -0800 (PST)
-Received: from s42.loc ([84.119.103.202])
-	by mx.google.com with ESMTPS id 22sm8680767fkq.54.2010.02.14.09.01.09
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 14 Feb 2010 09:01:09 -0800 (PST)
-Received: from cow by s42.loc with local (Exim 4.71)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1NghtH-0004tH-0h; Sun, 14 Feb 2010 18:04:15 +0100
-Date: Sun, 14 Feb 2010 18:04:14 +0100
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Ngi3q-00029r-4i for openembedded-devel@lists.openembedded.org;
+	Sun, 14 Feb 2010 18:15:14 +0100
+Received: from f053033040.adsl.alicedsl.de ([78.53.33.40]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Ngi1L-0002ic-54 for openembedded-devel@lists.openembedded.org;
+	Sun, 14 Feb 2010 17:12:35 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100214170414.GG30265@mx.loc>
-References: <20100214142309.52217185B3BB9@dd20204.kasserver.com>
-MIME-Version: 1.0
-In-Reply-To: <20100214142309.52217185B3BB9@dd20204.kasserver.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.225
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+In-Reply-To: <fca63bcf1002140837i631f5d62kb8b7481e7d266c1b@mail.gmail.com>
+References: <20100213203508.540D614AF55@gandalf.denix.org>
+	<20100214130905.GD5979@excalibur.local>
+	<1266162635.5009.42.camel@mattotaupa>
+	<20100214161328.GE5979@excalibur.local>
+	<fca63bcf1002140837i631f5d62kb8b7481e7d266c1b@mail.gmail.com>
+Date: Sun, 14 Feb 2010 18:12:33 +0100
+Message-ID: <1266167553.5009.45.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: How to sane replace a path in a pkgconfig file ?
+Subject: Re: Update state in Patchwork. (was: [PATCH] meta-toolchain: Run rmdir only if empty dirs are actually found.)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,21 +39,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Feb 2010 17:03:50 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 14 Feb 2010 17:15:14 -0000
+X-Groupsio-MsgNum: 16770
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-HFxikCpZzdhOd8YG76K4"
 
-On Sun, Feb 14, 2010 at 03:23:09PM +0100, bernhard.guillon@opensimpad.org wrote:
->Hi all,
->currently I am working on fixing blackbox. I had to add a lot of includes to fix compiler errors.
+--=-HFxikCpZzdhOd8YG76K4
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I have an import of the CVS tree here, fyi:
-http://git.busybox.net/~aldot/git/blackboxwm/
-http://git.busybox.net/~aldot/git/bbkeys/
+Am Sonntag, den 14.02.2010, 17:37 +0100 schrieb Michael Lippautz:
+> >> 2. Update the state.
+> >
+> > How? The webinterface does not offer my the functionality to change the=
+ state. I
+> > guess it is because I'm not in the right group or have otherwise not en=
+ough
+> > permissions in patchwork. As I just registered the account today it cou=
+ld be
+> > that I'm to late in the game to get updated with the rights in the last=
+ batch.
+> > :)
+>
+> I think you have to add the email address, the patch has been sent
+> from, to your account at [1].
+>=20
+> (Atleast then I could update the status of MY patches that have been
+> rejected/applied by others.)
 
-There were a couple of debian's patches applied (still by brad), i'd
-recommend to use all blackbox-0.70.1..master patches and base off that.
+I did not have do this as far as I can remember (there is just my own
+address there). I just had to activate/confirm my account per email. Now
+I have the options to change the state if I choose a patch from the list
+[2].
 
-HTH,
+Does it work with `pwclient` for you?
 
 
+Thanks,
+
+Paul
+
+
+[2] http://patchwork.openembedded.org/project/openembedded/list/
+
+--=-HFxikCpZzdhOd8YG76K4
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkt4LwEACgkQPX1aK2wOHVjbhQCffbkBivzQpfyE5rtn3r++33UW
+39oAmwa3S2GdIgwZcWJFgd+8Z4G/g9wy
+=5OWA
+-----END PGP SIGNATURE-----
+
+--=-HFxikCpZzdhOd8YG76K4--
