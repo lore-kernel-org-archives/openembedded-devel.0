@@ -1,23 +1,28 @@
-Received: from dd20204.kasserver.com ([85.13.140.93])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <bernhard.guillon@opensimpad.org>) id 1NgfmK-00065E-Ua
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Feb 2010 15:49:00 +0100
-Received: from dd20204.kasserver.com (kasmail1.kasserver.com [85.13.137.172])
-	by dd20204.kasserver.com (Postfix) with SMTP id 52217185B3BB9
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Feb 2010 15:23:09 +0100 (CET)
-from: bernhard.guillon@opensimpad.org
-to: openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-X-SenderIP: 95.90.75.53
-Message-Id: <20100214142309.52217185B3BB9@dd20204.kasserver.com>
-Date: Sun, 14 Feb 2010 15:23:09 +0100 (CET)
-X-SA-Exim-Connect-IP: 85.13.140.93
-X-SA-Exim-Mail-From: bernhard.guillon@opensimpad.org
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NggmV-0004hY-Oc for openembedded-devel@lists.openembedded.org;
+	Sun, 14 Feb 2010 16:53:14 +0100
+Received: from f053033040.adsl.alicedsl.de ([78.53.33.40]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Nggk0-00080L-P0 for openembedded-devel@lists.openembedded.org;
+	Sun, 14 Feb 2010 15:50:36 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20100214130905.GD5979@excalibur.local>
+References: <20100213203508.540D614AF55@gandalf.denix.org>
+	<20100214130905.GD5979@excalibur.local>
+Date: Sun, 14 Feb 2010 16:50:35 +0100
+Message-ID: <1266162635.5009.42.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: How to sane replace a path in a pkgconfig file ?
+Subject: Update state in Patchwork. (was: [PATCH] meta-toolchain: Run rmdir only if empty dirs are actually found.)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -31,49 +36,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Feb 2010 14:49:00 -0000
-Content-Type: text/plain; charset="utf-8"
+X-List-Received-Date: Sun, 14 Feb 2010 15:53:14 -0000
+X-Groupsio-MsgNum: 16766
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-cuebXla2by8/ZeSKesCu"
+
+--=-cuebXla2by8/ZeSKesCu
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi all,
-currently I am working on fixing blackbox. I had to add a lot of includes=
- to fix compiler errors.
-After fixing the compiler errors I came over a sed error of the recipe. s=
-ed was not able to find the pc file but the recipe inherits pkgconfig.
-
-----snipped of blackbox_0.70.1.bb----
-#fix path of pc file
-do_install_append() {
-        sed -i s#${STAGING_LIBDIR}#${libdir}#g ${D}/${libdir}/pkgconfig/l=
-ibbt.pc
-}
-
-do_stage () {
-        sed -i s#${STAGING_LIBDIR}#${libdir}#g ${STAGING_LIBDIR}/pkgconfi=
-g/libbt.pc
-}
-
-It looks like the pkgconfig class is called after do_stage()?  What is th=
-e right place to replace the wrong path in the libbt.pc file?
-
-I changed the above to this:
-
-#fix path of pc file
-do_install_prepend() {
-        sed -i s#${STAGING_LIBDIR}#${libdir}#g ${S}/lib/libbt.pc
-}
-
-But I am not sure if this is safe! Is there any place where the original =
-path in the pkconfig file is needed? With my approach this file would hav=
-e the wrong path inside.
-
-What do you think about it? I am looking forward to any advice :)
-
-Best regards
-Bernhard Guillon
+Dear Stefan,
 
 
+Am Sonntag, den 14.02.2010, 14:09 +0100 schrieb Stefan Schmidt:
+> On Sat, 2010-02-13 at 20:34, Denys Dmytriyenko wrote:
+> > > Prevent a failure in do_populate_sdk when there are no empty
+> > > directories:
+> > >    /bin/rmdir: missing operand
+> > >    Try `/bin/rmdir --help' for more information.
+> > >
+> > > See also http://tinderbox.openembedded.net/packages/478437/
+> > >
+> > > Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+> > Acked-by: Denys Dmytriyenko <denis@denix.org>
+>=20
+> Acked and pushed. Now I need to find out how to update patchwork with the=
+ new
+> status...
+
+1. Register an account at [1].
+2. Update the state.
+
+a) Use the Web interface.
+b) Use pwclient [2] and set it up with your account details and do the
+following.=20
+
+    $ pwclient update -s applied -c <commit-ref> <ID>
 
 
+Thanks,
+
+Paul
 
 
+[1] http://patchwork.openembedded.org/project/openembedded/list/
+[2] http://patchwork.openembedded.org/project/openembedded/ (at the bottom)
+
+--=-cuebXla2by8/ZeSKesCu
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkt4G8oACgkQPX1aK2wOHVj6+wCggMMqevvSz6Y1L83m6MyAwdcn
+sr8AnA6Qxz1EbKuNioG7KlE2KvF1SFVm
+=4xE/
+-----END PGP SIGNATURE-----
+
+--=-cuebXla2by8/ZeSKesCu--
