@@ -1,48 +1,25 @@
-Received: from mail-bw0-f219.google.com ([209.85.218.219])
+Received: from qmta07.emeryville.ca.mail.comcast.net ([76.96.30.64])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1NgjLY-0000JH-1X
+	(envelope-from <enelson1000@comcast.net>) id 1NgkPD-0002CE-9i
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Feb 2010 19:37:35 +0100
-Received: by bwz19 with SMTP id 19so2984486bwz.28
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Feb 2010 10:34:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=OcsWpOqAxdWy681jc+tlvDR1oKIGRXOanRw4tFSvwis=;
-	b=nqr8vVpbgs0xubctf2XSWpkr5WZr3gSfWDJQfRTAZMilDgtQSW4nsnVQhcD7sDbIRE
-	xiBJLs6yk/U7uYMI9c6JXJGjJOwXsI6JeHMH2DmqI5/whsV4SPLjiT5qcXiRjxTMeVFB
-	2oxtzQ35dft5R5jC/hMdoxG02mmEU1KDDPaoE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Xr2xgaB3iTr+5XuUccMZ98rUMTvReXy3RX70y0TkrP2ZwkbIrwq9pxoTWrKG0s/0Iw
-	+tSawLrevWi7yskxbvYd+e+IiD3CXrRriIJitmV5ojw0B/S3RInz8ag8uey4EN+fLVqi
-	J9ix3kIQ8AqZPyCZtsHUOyXJ5iCVw2ACxrc1s=
-Received: by 10.204.35.79 with SMTP id o15mr927470bkd.106.1266172493525;
-	Sun, 14 Feb 2010 10:34:53 -0800 (PST)
-Received: from s42.loc ([84.119.103.202])
-	by mx.google.com with ESMTPS id 15sm2316094bwz.12.2010.02.14.10.34.52
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 14 Feb 2010 10:34:52 -0800 (PST)
-Received: from cow by s42.loc with local (Exim 4.71)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1NgjLz-0006uo-OA; Sun, 14 Feb 2010 19:37:59 +0100
-Date: Sun, 14 Feb 2010 19:37:59 +0100
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+	Sun, 14 Feb 2010 20:45:26 +0100
+Received: from omta10.emeryville.ca.mail.comcast.net ([76.96.30.28])
+	by qmta07.emeryville.ca.mail.comcast.net with comcast
+	id hvJ01d0050cQ2SLA7vhiip; Sun, 14 Feb 2010 19:41:42 +0000
+Received: from [192.168.1.100] ([67.188.141.116])
+	by omta10.emeryville.ca.mail.comcast.net with comcast
+	id hvhg1d0052WszPn8WvhhfP; Sun, 14 Feb 2010 19:41:41 +0000
+From: ed <enelson1000@comcast.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100214183759.GH30265@mx.loc>
-References: <20100214170414.GG30265@mx.loc>
-	<20100214173347.2B1D61817E775@dd20204.kasserver.com>
-MIME-Version: 1.0
-In-Reply-To: <20100214173347.2B1D61817E775@dd20204.kasserver.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.218.219
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+Date: Sun, 14 Feb 2010 11:41:39 -0800
+Message-Id: <1266176499.12424.6.camel@ed-hp-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-SA-Exim-Connect-IP: 76.96.30.64
+X-SA-Exim-Mail-From: enelson1000@comcast.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: = ? UTF-8 ? B ? Ww== ? =oe= ? UTF-8 ? B ? XQ== ? = How to sane replace a path in a pkgconfig file ?
+Subject: shared-mime-info-native-0.51 do_compile failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,47 +33,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Feb 2010 18:37:35 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 14 Feb 2010 19:45:26 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Sun, Feb 14, 2010 at 06:33:45PM +0100, bernhard.guillon@opensimpad.org wrote:
->> On Sun, Feb 14, 2010 at 03:23:09PM +0100, bernhard.guillon@opensimpad.org wrote:
->> >Hi all,
->> >currently I am working on fixing blackbox. I had to add a lot of includes to fix compiler errors.
->> 
->> I have an import of the CVS tree here, fyi:
->> http://git.busybox.net/~aldot/git/blackboxwm/
->> http://git.busybox.net/~aldot/git/bbkeys/
->> 
->> There were a couple of debian's patches applied (still by brad), i'd
->> recommend to use all blackbox-0.70.1..master patches and base off that.
->> 
->
->Hi,
->thanks for the hint, the debian patch for the includes looks like mine so I will use the debian patch for updating the recipe :)
->
->But my problem is not the compiler errors but openembeddeds pkgconfig class.
+Trying to build image for mini2440 and get the following error.
 
-I'm aware of that but unfortunately i can't help you with the pkgconfig class.
+NOTE: Running task 694 of 2862 (ID:
+1434, /home/ed/mini2440/OE/openembedded/recipes/shared-mime-info/shared-mime-info-native_0.51.bb, do_compile)
+ERROR: function do_compile failed
+ERROR: log data follows
+(/home/ed/mini2440/OE/build/tmp/work/i686-linux/shared-mime-info-native-0.51-r0/temp/log.do_compile.11554)
+| NOTE: make
+| Making check in po
+| make[1]: Entering directory
+`/home/ed/mini2440/OE/build/tmp/work/i686-linux/shared-mime-info-native-0.51-r0/shared-mime-info-0.51/po'
+| rm -f missing notexist
+|
+srcdir=. /home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/bin/intltool-update -m
+| if [ -r missing -o -r notexist ]; then \
+| 	  exit 1; \
+| 	fi
+| make[1]: Leaving directory
+`/home/ed/mini2440/OE/build/tmp/work/i686-linux/shared-mime-info-native-0.51-r0/shared-mime-info-0.51/po'
+| make[1]: Entering directory
+`/home/ed/mini2440/OE/build/tmp/work/i686-linux/shared-mime-info-native-0.51-r0/shared-mime-info-0.51'
+| ccache gcc
+-I/home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/include/libxml2
+-I/home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/include/glib-2.0
+-I/home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/lib/glib-2.0/include   -isystem/home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/include -O2 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wwrite-strings  -L/home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/lib -Wl,-rpath-link,/home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/lib -Wl,-rpath,/home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/lib -Wl,-O1 -o update-mime-database update_mime_database-update-mime-database.o -L/home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/lib -lxml2 -lglib-2.0
+| /home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/lib/libxml2.so:
+undefined reference to `gzopen64'
+| collect2: ld returned 1 exit status
+| make[1]: *** [update-mime-database] Error 1
+| make[1]: Leaving directory
+`/home/ed/mini2440/OE/build/tmp/work/i686-linux/shared-mime-info-native-0.51-r0/shared-mime-info-0.51'
+| make: *** [check-recursive] Error 1
+| FATAL: oe_runmake failed
+NOTE: Task
+failed: /home/ed/mini2440/OE/build/tmp/work/i686-linux/shared-mime-info-native-0.51-r0/temp/log.do_compile.11554
+ERROR: TaskFailed event exception, aborting
+ERROR: Build
+of /home/ed/mini2440/OE/openembedded/recipes/shared-mime-info/shared-mime-info-native_0.51.bb do_compile failed
+ERROR: Task 1434
+(/home/ed/mini2440/OE/openembedded/recipes/shared-mime-info/shared-mime-info-native_0.51.bb, do_compile) failed
+NOTE: Tasks Summary: Attempted 693 tasks of which 674 didn't need to be
+rerun and 1 failed.
+ERROR:
+'/home/ed/mini2440/OE/openembedded/recipes/shared-mime-info/shared-mime-info-native_0.51.bb' failed
 
->When will pkgconfig be called? Before or after do_stage()? What is the right function to place the code of replacing  the wrong path of the pkgconfig file? The original package does it in do_stage() but it seems at least on my build system that pkgconfig class is called after do_stage(). 
+==============================
+Says it has undefined gzopen64
+But gzopen64 is apparently there.
+ed ~/mini2440/OE/build/tmp/staging/i686-linux/usr/lib:$: strings
+libxml2.so |grep gzopen64
+gzopen64
+ed ~/mini2440/OE/build/tmp/staging/i686-linux/usr/lib:$: objdump -T
+libxml2.so |grep gzopen64
+00000000      DF *UND*	00000000              gzopen64
 
-classes/pkgconfig.bbclass suggests that .pc are fixed up in
-do_install_prepend() (why does the efl class duplicate this, btw?)
-and that this depends on stage.
 
-btw.. someone should
-sed -i -e s/vw/w/ docs/usermanual/reference/class_pkgconfig.xml
+Any ideas?  
 
->Also is it safe to just replace the path in pkgconfig files in do_install_prepend()? Because then there is no file with the build path. 
->
->So I need a function which gets called after pkgconfig class?
 
-I'd try to remove that explicit .pc handling from blackbox and see what
-happens and start from there (i.e. don't know yet).
 
-cheers,
-Bernhard
 
 
