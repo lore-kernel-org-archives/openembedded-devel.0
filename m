@@ -1,33 +1,38 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-bw0-f219.google.com ([209.85.218.219])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Ngh8t-0000ex-DG
+	(envelope-from <michael.lippautz@gmail.com>) id 1NghVt-0002Q4-IC
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Feb 2010 17:16:22 +0100
-Received: from p5b037fca.dip.t-dialin.net ([91.3.127.202] helo=excalibur)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1Ngh6C-00032y-S1 by authid <stefan@sostec.de> with cram_md5
+	Sun, 14 Feb 2010 17:40:08 +0100
+Received: by bwz19 with SMTP id 19so2936735bwz.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Feb 2010 17:13:44 +0100
-Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>) id 1Ngh69-0001bV-5W
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Feb 2010 17:13:30 +0100
-Date: Sun, 14 Feb 2010 17:13:28 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100214161328.GE5979@excalibur.local>
+	Sun, 14 Feb 2010 08:37:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=Py1oawiu+yA2QJzpDtMCBBEpdnvWPy35wEk527QWE9c=;
+	b=BM7uVz9ymRBcnCgNe3OySNeYwT9wGjbfbaQOyj5XiKPg4/W86ALT4EakNNzNjXEVoJ
+	POom9xrBNUiFDQLwzw7YRvS3LAtKfIUcWldXC4LUNCgPonWGSdgtXMAGfYqbNhyLQUAO
+	FtY6HIXDB20C7ioM9cD3rW2044JGIQzO5aIuM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=hmd8Gm14hrwn+ahgdvkCQYIdDh9yCLGt5/9iRYUHpClDom2Gy/lfGxcqGJnPTU51zN
+	kwudxtx9rm2VGndoLKbOxcGgCJubM1PAVkyem6F2Ok944F9wQ+05UjoxHoEfwGxog46X
+	czFLNxllC1JYtPzC0l7S9lvHw5KSFxp9exPow=
+MIME-Version: 1.0
+Received: by 10.204.14.86 with SMTP id f22mr2512633bka.107.1266165448300; Sun, 
+	14 Feb 2010 08:37:28 -0800 (PST)
+In-Reply-To: <20100214161328.GE5979@excalibur.local>
 References: <20100213203508.540D614AF55@gandalf.denix.org>
 	<20100214130905.GD5979@excalibur.local>
 	<1266162635.5009.42.camel@mattotaupa>
-MIME-Version: 1.0
-In-Reply-To: <1266162635.5009.42.camel@mattotaupa>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+	<20100214161328.GE5979@excalibur.local>
+Date: Sun, 14 Feb 2010 17:37:28 +0100
+Message-ID: <fca63bcf1002140837i631f5d62kb8b7481e7d266c1b@mail.gmail.com>
+From: Michael Lippautz <michael.lippautz@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.218.219
+X-SA-Exim-Mail-From: michael.lippautz@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Update state in Patchwork. (was: [PATCH] meta-toolchain: Run rmdir only if empty dirs are actually found.)
@@ -44,66 +49,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Feb 2010 16:16:24 -0000
-X-Groupsio-MsgNum: 16767
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="oC1+HKm2/end4ao3"
-Content-Disposition: inline
+X-List-Received-Date: Sun, 14 Feb 2010 16:40:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---oC1+HKm2/end4ao3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+>> 2. Update the state.
+>
+> How? The webinterface does not offer my the functionality to change the state. I
+> guess it is because I'm not in the right group or have otherwise not enough
+> permissions in patchwork. As I just registered the account today it could be
+> that I'm to late in the game to get updated with the rights in the last batch.
+> :)
+>
+> regards
+> Stefan Schmidt
 
-Hello.
+I think you have to add the email address, the patch has been sent
+from, to your account at [1].
 
-On Sun, 2010-02-14 at 16:50, Paul Menzel wrote:
->=20
-> Am Sonntag, den 14.02.2010, 14:09 +0100 schrieb Stefan Schmidt:
-> > On Sat, 2010-02-13 at 20:34, Denys Dmytriyenko wrote:
-> > > > Prevent a failure in do_populate_sdk when there are no empty
-> > > > directories:
-> > > >    /bin/rmdir: missing operand
-> > > >    Try `/bin/rmdir --help' for more information.
-> > > >
-> > > > See also http://tinderbox.openembedded.net/packages/478437/
-> > > >
-> > > > Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
-> > > Acked-by: Denys Dmytriyenko <denis@denix.org>
-> >=20
-> > Acked and pushed. Now I need to find out how to update patchwork with t=
-he new
-> > status...
->=20
-> 1. Register an account at [1].
+(Atleast then I could update the status of MY patches that have been
+rejected/applied by others.)
 
-Already done.
+Regards,
+Michael
 
-> 2. Update the state.
+[1] http://patchwork.openembedded.org/user/
 
-How? The webinterface does not offer my the functionality to change the sta=
-te. I
-guess it is because I'm not in the right group or have otherwise not enough
-permissions in patchwork. As I just registered the account today it could be
-that I'm to late in the game to get updated with the rights in the last bat=
-ch.
-:)
 
-regards
-Stefan Schmidt
-
---oC1+HKm2/end4ao3
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: http://www.datenfreihafen.org/contact.html
-
-iEYEARECAAYFAkt4ISgACgkQbNSsvd31FmW7zwCfYMLpohfX4NBqtwV0nTewZppN
-i5EAoKeYZhFxJnID7wXU2k5r7qO2HYjF
-=KBAM
------END PGP SIGNATURE-----
-
---oC1+HKm2/end4ao3--
