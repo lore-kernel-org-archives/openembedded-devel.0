@@ -1,37 +1,37 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NgxXm-0002z8-70
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Feb 2010 10:47:09 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1F9iSMu008377
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ngy0a-0004Kk-4R for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Feb 2010 11:16:55 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ngxy3-0001wD-8w for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Feb 2010 11:14:15 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Feb 2010 11:14:15 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2010 09:44:28 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 07967-08 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2010 09:44:24 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1F9iMaT008371
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2010 09:44:23 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Mon, 15 Feb 2010 11:14:15 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1266182728.5437.31.camel@lenovo.internal.reciva.com>
-References: <20100214203851.3C855185B3BD2@dd20204.kasserver.com>
-	<1266182728.5437.31.camel@lenovo.internal.reciva.com>
-Date: Mon, 15 Feb 2010 09:44:21 +0000
-Message-ID: <1266227061.6436.3.camel@rex>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 15 Feb 2010 11:13:51 +0100
+Message-ID: <hlb6ov$s5c$1@ger.gmane.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100204 Shredder/3.0.2pre
+X-Enigmail-Version: 1.0.1
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: = ? UTF-8 ? B ? Ww== ? =oe= ? UTF-8 ? B ? XQ== ? = How to sane replace a path in a pkgconfig file ?
+Subject: [RFC] set PYTHONPATH inside distutils-base.bbclass instead of distutils.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,33 +45,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2010 09:47:09 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 15 Feb 2010 10:16:55 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2010-02-14 at 21:25 +0000, Phil Blundell wrote:
-> On Sun, 2010-02-14 at 21:38 +0100, bernhard.guillon@opensimpad.org
-> wrote:
-> >  for i in `find ${S}/ -name "*.pc" -type f` ; do 
-> > -            sed -i -e 's:-L${STAGING_LIBDIR}::g' -e 's:-I${STAGING_INCDIR}::g' $i
-> > +            sed -i -e 's:-L${STAGING_LIBDIR}::g' -e 's:-I${STAGING_INCDIR}::g' -e 's:-rpath-link,${STAGING_LIBDIR}::g' $i
-> >          done
-> 
-> That probably is a reasonable thing to do, but you might want to filter
-> out the preceding "-Wl," as well.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Note its pkgconfig we're talking about here which should never be
-putting this stuff in its .pc files in the first place as it has some
-understanding of sysroots. Usually if these things are creeping in, its
-due to dependencies being added as via its expanded cflags/libs lines
-rather than as a true dependency.
+Hi,
 
-I'm not sure how it copes with --rpath-link though. If that is breaking,
-we should consider fixing pkgconfig itself.
+I had a problem with building python-pygobject-native last week which
+was due to this bit in m4/python.m4
 
-Cheers,
+if test -x "$PYTHON-config"; then
+PYTHON_INCLUDES=`$PYTHON-config --includes 2>/dev/null`
+else
+PYTHON_INCLUDES="-I${py_prefix}/include/python${PYTHON_VERSION}"
+if test "$py_prefix" != "$py_exec_prefix"; then
+  PYTHON_INCLUDES="$PYTHON_INCLUDES
+- -I${py_exec_prefix}/include/python${PYTHON_VERSION}"
+>fi
+fi
 
-Richard
+$PYTHON-config exists in staging and needs HOST_SYS, BUILDSYS,
+STAGING_LIBDIR and STAGING_INCDIR exported to work.
+
+But after instrumenting python.m4 a bit I get this when running
+python-config:
+
+Traceback (most recent call last):
+  File "/OE/angstrom-dev/staging/x86_64-linux/usr/bin/python-config",
+line 26, in <module>
+    pyver = sysconfig.get_config_var('VERSION')
+  File "/usr/lib/python2.5/distutils/sysconfig.py", line 541, in
+get_config_var
+    return get_config_vars().get(name)
+  File "/usr/lib/python2.5/distutils/sysconfig.py", line 499, in
+get_config_vars
+    func()
+  File "/usr/lib/python2.5/distutils/sysconfig.py", line 351, in _init_posix
+    filename = get_makefile_filename()
+  File "/usr/lib/python2.5/distutils/sysconfig.py", line 210, in
+get_makefile_filename
+    return os.path.join(lib_dir, "config" + (sys.pydebug and "_d" or
+""), "Makefile")AttributeError: 'module' object has no attribute 'pydebug'
+
+Which means it's using the distutils on my buildhost instead of the
+proper one in staging.
+
+OE is doing this:
+
+export
+PYTHONPATH=/OE/bitbake:/OE/bitbake/lib:/OE/bitbake-git/bin:/usr/lib/python2.5:/usr/lib/python2.5/plat-linux2:/usr/lib/python2.5/lib-tk:/usr/lib/python2.5/lib-dynload:/usr/local/lib/python2.5/site-packages:/usr/lib/python2.5/site-packages:/usr/lib/python2.5/site-packages/Numeric:/usr/lib/python2.5/site-packages/PIL:/usr/lib/pymodules/python2.5:/usr/lib/pymodules/python2.5/gtk-2.0
+
+So I added this to the recipe:
+
+do_configure_prepend() {
+       unset PYTHONPATH
+}
+
+And everything started working again.
+
+So my question is:
+
+Can we set PYTHONPATH inside distutils-base.bbclass instead of
+distutils.bbclass or just plain unset it?
+
+regards,
+
+Koen
+
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLeR5fMkyGM64RGpERApuWAJ4zzAKv7lVLPc9JIVJaBvul/ZGN2ACgmBH7
+zA6ShA0i6mutv5+rCEncno8=
+=48js
+-----END PGP SIGNATURE-----
 
 
 
