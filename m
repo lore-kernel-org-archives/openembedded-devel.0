@@ -1,41 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f210.google.com ([209.85.220.210])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nh5xQ-0005oU-VF for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Feb 2010 19:46:12 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nh5uu-0005d9-0Q for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Feb 2010 19:43:32 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2010 19:43:31 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <aalonso00@gmail.com>) id 1Nh68N-0004kF-E8
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Feb 2010 19:57:30 +0100
+Received: by fxm2 with SMTP id 2so2222913fxm.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2010 19:43:31 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 15 Feb 2010 10:54:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=F9EFLEUni+aAWQftNgbYYmJ6hYBDFe2Lk74vVzjlKaA=;
+	b=dHsas134+1tY4ElsuZuFpBWaOQyn0cA+wAOps0y39VQGMO7FyIVTsa973AQhbNehh1
+	SjKl8yWXl9P4v+Fdli58hE5IPR4vX2qxvhLhKEliDVK+cTFWOm3/tKuJM+g87mJcatHd
+	pnelz5+9VhI37K2QFNZYkv7ZdNnGVbquvF9P8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=eDOqHkmJwcBTOfxvPa+mbjYk/9n7X9NXT2okgLCIy2zKLt3kMYCWNpSYJJ2jiyeFTQ
+	YLkvRDsZnrNEDC7q21AjiSQwakwSHsgMUnQzraC/1vKGFTydKbBG3jAbDangs8PzZnk2
+	mui4Fz5PDQVwxnveZxObiBYNxr0dTFGMVBfww=
+MIME-Version: 1.0
+Received: by 10.223.77.66 with SMTP id f2mr6389443fak.84.1266260089075; Mon, 
+	15 Feb 2010 10:54:49 -0800 (PST)
+In-Reply-To: <4B798EEF.6000503@balister.org>
+References: <1266255767-4031-1-git-send-email-aalonso00@gmail.com>
+	<4B798EEF.6000503@balister.org>
+Date: Mon, 15 Feb 2010 12:54:48 -0600
+Message-ID: <d1ded4381002151054xd9a4fb7r822e2d6ae4daeff0@mail.gmail.com>
+From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 15 Feb 2010 19:43:06 +0100
-Message-ID: <hlc4jp$cfc$1@ger.gmane.org>
-References: <20100214135613.GF5364@jama>
-	<4B79673B.50108@balister.org>	<ac9c93b11002150859i4aa5ee7eid6a648d95fa25d6c@mail.gmail.com>
-	<20100215171952.GA3233@jama>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100204 Shredder/3.0.2pre
-In-Reply-To: <20100215171952.GA3233@jama>
-X-Enigmail-Version: 1.0.1
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.220.210
+X-SA-Exim-Mail-From: aalonso00@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Using bitbake in minimal chroot environment
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] add xilinx ml507 machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,78 +48,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2010 18:46:12 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 15 Feb 2010 18:57:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Oops didn't know about the commit guide lines.
 
-On 15-02-10 18:19, Martin Jansa wrote:
-> On Mon, Feb 15, 2010 at 05:59:39PM +0100, Frans Meulenbroeks wrote:
->>>> I'm just thinking about using bitbake only in minimalistic chroot.
-> 
-> Already rebuilding in new chroot :).
-> 
->>>>
->>>> What are advantages/disadvantages?
->>>>
->>>> How I see it:
->>>>
->>>> Advantages:
->>>> 1) more secure (I started to use separate user for bitbake, when I
->>>>    started to play with bitbake master instead release - because that
->>>>    warning it said), but chroot is even better.
->>>> 2) less problems when autotools pick some header or lib from buildhost
->>>>    instead of staging
->>>> 3) easier to check, that -native package is missing for some important
->>>>    lib
->>>>
->>>> Disadvantages:
->>>> 1) Few more MB for building environment (extra libc, gcc, binutils, git,
->>>>    svn, sh, etc. installed in chroot
+Actually I haven't found a guideline my self but some of the things that are
+needed to
+support xilinx dev board are:
+
+Linux kernel recipe with the ability to specify to build a simpleImage so we
+can program the fpga with a Jtag
+u-boot recipe to preserve the u-boot elf image this also in early developing
+stage for programing the fpga.
+
+All hardware changes performed in the fpga must generate a new device
+tree descriptor using Xilinx XPS tool  and should be replaced in the Linux
+kernel and u-boot (actually some peripheral address in xparameters.h) to
+match with the fpga hardware model.
+
+I'm also going to crate a repository with my hardware project to make
+available the hardware model (bitstream) used as target reference; and post
+on my blog how I'm trying to use OE with the ml507 target platform.
+
+
+
+
+
+
+
+On Mon, Feb 15, 2010 at 12:14 PM, Philip Balister <philip@balister.org>wrote:
+
+> Can you make the commit log examples look like this:
+>
+> http://wiki.openembedded.net/index.php/Commit_log_example
+>
+> Do you know of any guides that could help me test this on my ml403? I would
+> love to test this stuff!
+>
+> Philip
+>
+>
+> On 02/15/2010 09:42 AM, Adrian Alonso wrote:
+>
+>> From: aalonso<aalonso00@gmail.com>
 >>
->> If they are on the same filesystem you could use hard links and save those MBs.
-> 
-> Not so big problem for me, so I used mount --bind for dirs I want to
-> share (ie /usr/portage as I'm using gentoo) and it took only about
-> 100MB.. so not a big deal
-> 
->>>> 2) More administrative to keep chroot system updated
->>>> 3) harder to check, that autotools won't pick something from buildhost
->>>>    in normal environment before pushing new version/recipe (ie I won't
->>>>    have SDL libs installed in chroot, but everybody else will and maybe
->>>>    build will fail for them after I push some recipe.
->>>
->>> I see this as a good thing :)
-> 
-> The last point? Well it's good for me (less issues) but if I push some
-> recipe failing for 99% other builders just because they have pretty
-> standard libs on their systems, then I should be blamed for pushing
-> crappy recipe :).
-> 
->> Seems a good plan to me, please keep us posted.
->> (actually I've been considering building in a minimalistic VM)
-> 
-> Well VM would be much slower.. 
+>> ---
+>>  conf/machine/include/tune-ppc440.inc |    2 +-
+>>  conf/machine/xilinx-ml507.conf       |   33
+>> +++++++++++++++++++++++++++++++++
+>>  2 files changed, 34 insertions(+), 1 deletions(-)
+>>  create mode 100644 conf/machine/xilinx-ml507.conf
+>>
+>> diff --git a/conf/machine/include/tune-ppc440.inc
+>> b/conf/machine/include/tune-ppc440.inc
+>> index feca186..6a56bfa 100644
+>> --- a/conf/machine/include/tune-ppc440.inc
+>> +++ b/conf/machine/include/tune-ppc440.inc
+>> @@ -1,4 +1,4 @@
+>>  TARGET_CC_ARCH = "-mcpu=440"
+>>  BASE_PACKAGE_ARCH = "ppc440"
+>>  FEED_ARCH = "ppc440"
+>> -PACKAGE_EXTRA_ARCHS += "ppc440e"
+>> +PACKAGE_EXTRA_ARCHS += "ppc440"
+>> diff --git a/conf/machine/xilinx-ml507.conf
+>> b/conf/machine/xilinx-ml507.conf
+>> new file mode 100644
+>> index 0000000..c376cfe
+>> --- /dev/null
+>> +++ b/conf/machine/xilinx-ml507.conf
+>> @@ -0,0 +1,33 @@
+>> +# Copyright (C) 2010, Adrian Alonso<aalonso00@gmail.com>
+>> +# Released under the MIT license (see packages/COPYING)
+>> +#@TYPE: Machine
+>> +#@Name: Xilinx ML507 FPGA Development Platform
+>> +#@DESCRIPTION: Machine configuration for Xilinx ML507
+>> +
+>> +TARGET_ARCH = "powerpc"
+>> +TARGET_CPU = "440"
+>> +TARGET_FPU = "soft"
+>> +#tune for the 440 cpu
+>> +require conf/machine/include/tune-ppc440.inc
+>> +
+>> +#ASSUME_PROVIDED += "virtual/kernel"
+>> +PREFERRED_PROVIDER_virtual/kernel = "linux"
+>> +
+>> +KERNEL_IMAGETYPE = "uImage"
+>> +
+>> +MACHINE_FEATURES = "kernel26 ext2 usbhost udev"
+>> +MACHINE_EXTRA_RECOMMENDS = "kernel-modules"
+>> +
+>> +UBOOT_ARCH = "ppc"
+>> +UBOOT_MACHINE = "ml507_defconfig"
+>> +
+>> +# Xilinx EDK override paramater definitions for xilinx-bsp
+>> +# Include in your local.conf
+>> +# XILINX_BSP_PATH = "complete path for Xilinx EDK project"
+>> +# XILINX_BOARD = "ml507"
+>> +
+>> +# Don't use tty1
+>> +USE_VT = "0"
+>> +SERIAL_CONSOLE = "115200 ttyS0"
+>> +
+>> +
+>>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-On a recent intel/amd cpu VMs I can't measure much difference between VM
-and non-vm builds.
-My main buildmachine at work is an ubuntu 8.04LTS vm running under
-windows XP. The only major speedup I can get building in a native
-install would be using 64bit, since the VM is 32 bit, but it does expose
-both CPU cores :)
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLeZW6MkyGM64RGpERAtFOAJ9hOQA/80gWA5pzQQW9vZ34Kcmy7ACgh6vV
-zSccfttlBkf/RDcRCiYQMqg=
-=ID01
------END PGP SIGNATURE-----
 
 
+-- 
+Saludos
+Adrian Alonso
+http://aalonso.wordpress.com
 
