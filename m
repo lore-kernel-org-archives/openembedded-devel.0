@@ -1,37 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ngy0a-0004Kk-4R for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Feb 2010 11:16:55 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ngxy3-0001wD-8w for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Feb 2010 11:14:15 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2010 11:14:15 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <sledz@DResearch.DE>) id 1NgzT0-0007Si-5x
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Feb 2010 12:50:21 +0100
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id CE00D4912A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2010 11:14:15 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 15 Feb 2010 12:47:41 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Mon, 15 Feb 2010 11:24:33 +0100
+Message-ID: <4B7920DA.8000302@dresearch.de>
+Date: Mon, 15 Feb 2010 11:24:26 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 15 Feb 2010 11:13:51 +0100
-Message-ID: <hlb6ov$s5c$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100204 Shredder/3.0.2pre
-X-Enigmail-Version: 1.0.1
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <4B74FE59.9050001@dresearch.de>
+In-Reply-To: <4B74FE59.9050001@dresearch.de>
+X-OriginalArrivalTime: 15 Feb 2010 10:24:33.0611 (UTC)
+	FILETIME=[110801B0:01CAAE29]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [RFC] set PYTHONPATH inside distutils-base.bbclass instead of distutils.bbclass
+Subject: Re: Miss patches in patch queue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,85 +37,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2010 10:16:55 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 15 Feb 2010 11:50:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Steffen Sledz wrote:
+> As mentioned in thread
+> <http://thread.gmane.org/gmane.comp.handhelds.openembedded/29964> i
+> miss all the patches i sent according to this thread in the patch
+> queue.  :(
+> 
+> Is this a mistake of mine or is there a patchwork problem?
 
-Hi,
-
-I had a problem with building python-pygobject-native last week which
-was due to this bit in m4/python.m4
-
-if test -x "$PYTHON-config"; then
-PYTHON_INCLUDES=`$PYTHON-config --includes 2>/dev/null`
-else
-PYTHON_INCLUDES="-I${py_prefix}/include/python${PYTHON_VERSION}"
-if test "$py_prefix" != "$py_exec_prefix"; then
-  PYTHON_INCLUDES="$PYTHON_INCLUDES
-- -I${py_exec_prefix}/include/python${PYTHON_VERSION}"
->fi
-fi
-
-$PYTHON-config exists in staging and needs HOST_SYS, BUILDSYS,
-STAGING_LIBDIR and STAGING_INCDIR exported to work.
-
-But after instrumenting python.m4 a bit I get this when running
-python-config:
-
-Traceback (most recent call last):
-  File "/OE/angstrom-dev/staging/x86_64-linux/usr/bin/python-config",
-line 26, in <module>
-    pyver = sysconfig.get_config_var('VERSION')
-  File "/usr/lib/python2.5/distutils/sysconfig.py", line 541, in
-get_config_var
-    return get_config_vars().get(name)
-  File "/usr/lib/python2.5/distutils/sysconfig.py", line 499, in
-get_config_vars
-    func()
-  File "/usr/lib/python2.5/distutils/sysconfig.py", line 351, in _init_posix
-    filename = get_makefile_filename()
-  File "/usr/lib/python2.5/distutils/sysconfig.py", line 210, in
-get_makefile_filename
-    return os.path.join(lib_dir, "config" + (sys.pydebug and "_d" or
-""), "Makefile")AttributeError: 'module' object has no attribute 'pydebug'
-
-Which means it's using the distutils on my buildhost instead of the
-proper one in staging.
-
-OE is doing this:
-
-export
-PYTHONPATH=/OE/bitbake:/OE/bitbake/lib:/OE/bitbake-git/bin:/usr/lib/python2.5:/usr/lib/python2.5/plat-linux2:/usr/lib/python2.5/lib-tk:/usr/lib/python2.5/lib-dynload:/usr/local/lib/python2.5/site-packages:/usr/lib/python2.5/site-packages:/usr/lib/python2.5/site-packages/Numeric:/usr/lib/python2.5/site-packages/PIL:/usr/lib/pymodules/python2.5:/usr/lib/pymodules/python2.5/gtk-2.0
-
-So I added this to the recipe:
-
-do_configure_prepend() {
-       unset PYTHONPATH
-}
-
-And everything started working again.
-
-So my question is:
-
-Can we set PYTHONPATH inside distutils-base.bbclass instead of
-distutils.bbclass or just plain unset it?
-
-regards,
-
-Koen
-
-
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLeR5fMkyGM64RGpERApuWAJ4zzAKv7lVLPc9JIVJaBvul/ZGN2ACgmBH7
-zA6ShA0i6mutv5+rCEncno8=
-=48js
------END PGP SIGNATURE-----
+Ping
 
 
 
