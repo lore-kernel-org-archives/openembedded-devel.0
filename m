@@ -1,47 +1,25 @@
-Received: from mail-fx0-f210.google.com ([209.85.220.210])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Nh5TV-0004xy-LC
+	(envelope-from <philip@balister.org>) id 1Nh5V2-0006X5-GJ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Feb 2010 19:15:16 +0100
-Received: by fxm2 with SMTP id 2so2175297fxm.27
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2010 10:12:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=8iulYVBL9trRwpzaJzrpAhjHAhSydNe+EDVszyQSK6k=;
-	b=IyyC5yh/8VOEzyHbfeDmSPDWvOlgN1JXMjwHf9ZLsPZAbBimVkQVZbXeTUbTqtm+cp
-	VpjhdDjSUYAvvAYZqjQw4TumA8H4b0bKLONQ103v5VuA545vZt+reyywi1MzULnE36cB
-	EZRIbWeMRBdcJrVJQq0FLFikpyvzf9VPlxzRQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=pEYfRHr3BTaN9IO4IktuRnT/G6X7gO4B87ELqRu5qKdX/NsjTbN1JRJ7+4N7OuLTSa
-	jUS4pKzQabLTX9+K4r20NHLU2TY6sA/fDYzUCIMG+xkwiP5gGVs18MkT8oG5Uct77zJ5
-	rFZMMmJe9LTdmAWSvBBi75si46VcBspI/BUh4=
-Received: by 10.223.143.70 with SMTP id t6mr6312125fau.101.1266257555694;
-	Mon, 15 Feb 2010 10:12:35 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 14sm3128606fxm.7.2010.02.15.10.12.34
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 15 Feb 2010 10:12:34 -0800 (PST)
-Date: Mon, 15 Feb 2010 19:12:32 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100215181232.GB3233@jama>
-References: <20100214135613.GF5364@jama> <4B79673B.50108@balister.org>
-	<ac9c93b11002150859i4aa5ee7eid6a648d95fa25d6c@mail.gmail.com>
-	<20100215171952.GA3233@jama>
-	<ac9c93b11002150957r4e9bc0e6tbeb56e62c94e89b0@mail.gmail.com>
+	Mon, 15 Feb 2010 19:16:51 +0100
+Received: (qmail 31756 invoked by uid 1003); 15 Feb 2010 18:14:09 -0000
+Received: from localhost (HELO ?192.168.1.182?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 15 Feb 2010 18:14:09 -0000
+Message-ID: <4B798EEF.6000503@balister.org>
+Date: Mon, 15 Feb 2010 10:14:07 -0800
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.7) Gecko/20100120 Fedora/3.0.1-1.fc11 Thunderbird/3.0.1
 MIME-Version: 1.0
-In-Reply-To: <ac9c93b11002150957r4e9bc0e6tbeb56e62c94e89b0@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.210
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <1266255767-4031-1-git-send-email-aalonso00@gmail.com>
+In-Reply-To: <1266255767-4031-1-git-send-email-aalonso00@gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Using bitbake in minimal chroot environment
+Subject: Re: [PATCH] add xilinx ml507 machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,37 +33,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2010 18:15:16 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 15 Feb 2010 18:16:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Feb 15, 2010 at 06:57:22PM +0100, Frans Meulenbroeks wrote:
-> Someone else told me the same today.
-> What exactly causes this? I would expect I/O to be the differentiating
-> factor as memory access and executing instructions should take the
-> same time, shouldn't it?
+Can you make the commit log examples look like this:
 
-AFAIK virtualized I/O is slowest part of virtualized world and building
-with bitbake is IMHO mostly about I/O.
+http://wiki.openembedded.net/index.php/Commit_log_example
 
-I'm running my gentoo system upgrades as well as all bitbake builds
-(workdirs) on raid0 - strip over 3 SATA2 disks (before that I was using
-huge tmpfs in RAM for workdirs - but that's not usable ie for OO.org
-build :))
+Do you know of any guides that could help me test this on my ml403? I 
+would love to test this stuff!
 
-And with chroot I can use it without any problem (just updated path in
-already used mount --bind).
+Philip
 
-Also for running it from VM I would need to update host kernel from time
-to time, on the other side sharing kernel with my running system didn't
-create any OE related issue (except that sanity check for mmap with 
-2.6.33+ - which is already fixed)
-
-Regards,
-
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+On 02/15/2010 09:42 AM, Adrian Alonso wrote:
+> From: aalonso<aalonso00@gmail.com>
+>
+> ---
+>   conf/machine/include/tune-ppc440.inc |    2 +-
+>   conf/machine/xilinx-ml507.conf       |   33 +++++++++++++++++++++++++++++++++
+>   2 files changed, 34 insertions(+), 1 deletions(-)
+>   create mode 100644 conf/machine/xilinx-ml507.conf
+>
+> diff --git a/conf/machine/include/tune-ppc440.inc b/conf/machine/include/tune-ppc440.inc
+> index feca186..6a56bfa 100644
+> --- a/conf/machine/include/tune-ppc440.inc
+> +++ b/conf/machine/include/tune-ppc440.inc
+> @@ -1,4 +1,4 @@
+>   TARGET_CC_ARCH = "-mcpu=440"
+>   BASE_PACKAGE_ARCH = "ppc440"
+>   FEED_ARCH = "ppc440"
+> -PACKAGE_EXTRA_ARCHS += "ppc440e"
+> +PACKAGE_EXTRA_ARCHS += "ppc440"
+> diff --git a/conf/machine/xilinx-ml507.conf b/conf/machine/xilinx-ml507.conf
+> new file mode 100644
+> index 0000000..c376cfe
+> --- /dev/null
+> +++ b/conf/machine/xilinx-ml507.conf
+> @@ -0,0 +1,33 @@
+> +# Copyright (C) 2010, Adrian Alonso<aalonso00@gmail.com>
+> +# Released under the MIT license (see packages/COPYING)
+> +#@TYPE: Machine
+> +#@Name: Xilinx ML507 FPGA Development Platform
+> +#@DESCRIPTION: Machine configuration for Xilinx ML507
+> +
+> +TARGET_ARCH = "powerpc"
+> +TARGET_CPU = "440"
+> +TARGET_FPU = "soft"
+> +#tune for the 440 cpu
+> +require conf/machine/include/tune-ppc440.inc
+> +
+> +#ASSUME_PROVIDED += "virtual/kernel"
+> +PREFERRED_PROVIDER_virtual/kernel = "linux"
+> +
+> +KERNEL_IMAGETYPE = "uImage"
+> +
+> +MACHINE_FEATURES = "kernel26 ext2 usbhost udev"
+> +MACHINE_EXTRA_RECOMMENDS = "kernel-modules"
+> +
+> +UBOOT_ARCH = "ppc"
+> +UBOOT_MACHINE = "ml507_defconfig"
+> +
+> +# Xilinx EDK override paramater definitions for xilinx-bsp
+> +# Include in your local.conf
+> +# XILINX_BSP_PATH = "complete path for Xilinx EDK project"
+> +# XILINX_BOARD = "ml507"
+> +
+> +# Don't use tty1
+> +USE_VT = "0"
+> +SERIAL_CONSOLE = "115200 ttyS0"
+> +
+> +
 
 
