@@ -1,40 +1,24 @@
-Received: from mail-fx0-f210.google.com ([209.85.220.210])
+Received: from [65.126.90.84] (helo=mail.multitech.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1Nh68N-0004kF-E8
+	(envelope-from <jgilles@multitech.com>) id 1Nh6nE-0002bO-Pu
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Feb 2010 19:57:30 +0100
-Received: by fxm2 with SMTP id 2so2222913fxm.27
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2010 10:54:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=F9EFLEUni+aAWQftNgbYYmJ6hYBDFe2Lk74vVzjlKaA=;
-	b=dHsas134+1tY4ElsuZuFpBWaOQyn0cA+wAOps0y39VQGMO7FyIVTsa973AQhbNehh1
-	SjKl8yWXl9P4v+Fdli58hE5IPR4vX2qxvhLhKEliDVK+cTFWOm3/tKuJM+g87mJcatHd
-	pnelz5+9VhI37K2QFNZYkv7ZdNnGVbquvF9P8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=eDOqHkmJwcBTOfxvPa+mbjYk/9n7X9NXT2okgLCIy2zKLt3kMYCWNpSYJJ2jiyeFTQ
-	YLkvRDsZnrNEDC7q21AjiSQwakwSHsgMUnQzraC/1vKGFTydKbBG3jAbDangs8PzZnk2
-	mui4Fz5PDQVwxnveZxObiBYNxr0dTFGMVBfww=
-MIME-Version: 1.0
-Received: by 10.223.77.66 with SMTP id f2mr6389443fak.84.1266260089075; Mon, 
-	15 Feb 2010 10:54:49 -0800 (PST)
-In-Reply-To: <4B798EEF.6000503@balister.org>
-References: <1266255767-4031-1-git-send-email-aalonso00@gmail.com>
-	<4B798EEF.6000503@balister.org>
-Date: Mon, 15 Feb 2010 12:54:48 -0600
-Message-ID: <d1ded4381002151054xd9a4fb7r822e2d6ae4daeff0@mail.gmail.com>
-From: Adrian Alonso <aalonso00@gmail.com>
+	Mon, 15 Feb 2010 20:39:43 +0100
+X-Ninja-AntiSpoofing: spoofed
+Received: from [192.168.52.197] ([192.168.52.197]) by mail.multitech.com with
+	Microsoft SMTPSVC(5.0.2195.6713); Mon, 15 Feb 2010 13:35:46 -0600
+From: Jesse Gilles <jgilles@multitech.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.210
-X-SA-Exim-Mail-From: aalonso00@gmail.com
+Date: Mon, 15 Feb 2010 13:35:58 -0600
+Message-Id: <1266262558.32499.31.camel@jjg-linux>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-OriginalArrivalTime: 15 Feb 2010 19:35:46.0051 (UTC)
+	FILETIME=[11BDDD30:01CAAE76]
+X-SA-Exim-Connect-IP: 65.126.90.84
+X-SA-Exim-Mail-From: jgilles@multitech.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] add xilinx ml507 machine
+Subject: [PATCH 1/2] python: fix SSL for 2.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,121 +32,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2010 18:57:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 15 Feb 2010 19:39:44 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-Oops didn't know about the commit guide lines.
+Hi all,
 
-Actually I haven't found a guideline my self but some of the things that are
-needed to
-support xilinx dev board are:
+I am new to the mailing list and I have a couple of patches to
+contribute.
 
-Linux kernel recipe with the ability to specify to build a simpleImage so we
-can program the fpga with a Jtag
-u-boot recipe to preserve the u-boot elf image this also in early developing
-stage for programing the fpga.
+This fixes SSL support for python 2.6.  Looks like the python module for
+SSL was missing from the package.
 
-All hardware changes performed in the fpga must generate a new device
-tree descriptor using Xilinx XPS tool  and should be replaced in the Linux
-kernel and u-boot (actually some peripheral address in xparameters.h) to
-match with the fpga hardware model.
+Thanks,
+Jesse
 
-I'm also going to crate a repository with my hardware project to make
-available the hardware model (bitstream) used as target reference; and post
-on my blog how I'm trying to use OE with the ml507 target platform.
+* Add SSL module to build -- fixes "import ssl"
 
-
-
-
-
-
-
-On Mon, Feb 15, 2010 at 12:14 PM, Philip Balister <philip@balister.org>wrote:
-
-> Can you make the commit log examples look like this:
->
-> http://wiki.openembedded.net/index.php/Commit_log_example
->
-> Do you know of any guides that could help me test this on my ml403? I would
-> love to test this stuff!
->
-> Philip
->
->
-> On 02/15/2010 09:42 AM, Adrian Alonso wrote:
->
->> From: aalonso<aalonso00@gmail.com>
->>
->> ---
->>  conf/machine/include/tune-ppc440.inc |    2 +-
->>  conf/machine/xilinx-ml507.conf       |   33
->> +++++++++++++++++++++++++++++++++
->>  2 files changed, 34 insertions(+), 1 deletions(-)
->>  create mode 100644 conf/machine/xilinx-ml507.conf
->>
->> diff --git a/conf/machine/include/tune-ppc440.inc
->> b/conf/machine/include/tune-ppc440.inc
->> index feca186..6a56bfa 100644
->> --- a/conf/machine/include/tune-ppc440.inc
->> +++ b/conf/machine/include/tune-ppc440.inc
->> @@ -1,4 +1,4 @@
->>  TARGET_CC_ARCH = "-mcpu=440"
->>  BASE_PACKAGE_ARCH = "ppc440"
->>  FEED_ARCH = "ppc440"
->> -PACKAGE_EXTRA_ARCHS += "ppc440e"
->> +PACKAGE_EXTRA_ARCHS += "ppc440"
->> diff --git a/conf/machine/xilinx-ml507.conf
->> b/conf/machine/xilinx-ml507.conf
->> new file mode 100644
->> index 0000000..c376cfe
->> --- /dev/null
->> +++ b/conf/machine/xilinx-ml507.conf
->> @@ -0,0 +1,33 @@
->> +# Copyright (C) 2010, Adrian Alonso<aalonso00@gmail.com>
->> +# Released under the MIT license (see packages/COPYING)
->> +#@TYPE: Machine
->> +#@Name: Xilinx ML507 FPGA Development Platform
->> +#@DESCRIPTION: Machine configuration for Xilinx ML507
->> +
->> +TARGET_ARCH = "powerpc"
->> +TARGET_CPU = "440"
->> +TARGET_FPU = "soft"
->> +#tune for the 440 cpu
->> +require conf/machine/include/tune-ppc440.inc
->> +
->> +#ASSUME_PROVIDED += "virtual/kernel"
->> +PREFERRED_PROVIDER_virtual/kernel = "linux"
->> +
->> +KERNEL_IMAGETYPE = "uImage"
->> +
->> +MACHINE_FEATURES = "kernel26 ext2 usbhost udev"
->> +MACHINE_EXTRA_RECOMMENDS = "kernel-modules"
->> +
->> +UBOOT_ARCH = "ppc"
->> +UBOOT_MACHINE = "ml507_defconfig"
->> +
->> +# Xilinx EDK override paramater definitions for xilinx-bsp
->> +# Include in your local.conf
->> +# XILINX_BSP_PATH = "complete path for Xilinx EDK project"
->> +# XILINX_BOARD = "ml507"
->> +
->> +# Don't use tty1
->> +USE_VT = "0"
->> +SERIAL_CONSOLE = "115200 ttyS0"
->> +
->> +
->>
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/contrib/python/generate-manifest-2.6.py b/contrib/python/generate-manifest-2.6.py
+index fe0e385..890d1c0 100755
+--- a/contrib/python/generate-manifest-2.6.py
++++ b/contrib/python/generate-manifest-2.6.py
+@@ -248,7 +248,7 @@ if __name__ == "__main__":
+ 
+     m.addPackage( "python-io", "Python Low-Level I/O", "python-core python-math",
+     "lib-dynload/_socket.so lib-dynload/_ssl.so lib-dynload/select.so lib-dynload/termios.so lib-dynload/cStringIO.so " +
+-    "pipes.* socket.* tempfile.* StringIO.* " )
++    "pipes.* socket.* ssl.* tempfile.* StringIO.* " )
+ 
+     m.addPackage( "python-json", "Python JSON Support", "python-core python-math python-re",
+     "json" ) # package
+diff --git a/recipes/python/python-2.6-manifest.inc b/recipes/python/python-2.6-manifest.inc
+index cee12c8..188ee31 100644
+--- a/recipes/python/python-2.6-manifest.inc
++++ b/recipes/python/python-2.6-manifest.inc
+@@ -51,7 +51,7 @@ FILES_python-core="${libdir}/python2.6/__future__.* ${libdir}/python2.6/_abcoll.
+ 
+ DESCRIPTION_python-io="Python Low-Level I/O"
+ RDEPENDS_python-io="python-core python-math"
+-FILES_python-io="${libdir}/python2.6/lib-dynload/_socket.so ${libdir}/python2.6/lib-dynload/_ssl.so ${libdir}/python2.6/lib-dynload/select.so ${libdir}/python2.6/lib-dynload/termios.so ${libdir}/python2.6/lib-dynload/cStringIO.so ${libdir}/python2.6/pipes.* ${libdir}/python2.6/socket.* ${libdir}/python2.6/tempfile.* ${libdir}/python2.6/StringIO.* "
++FILES_python-io="${libdir}/python2.6/lib-dynload/_socket.so ${libdir}/python2.6/lib-dynload/_ssl.so ${libdir}/python2.6/lib-dynload/select.so ${libdir}/python2.6/lib-dynload/termios.so ${libdir}/python2.6/lib-dynload/cStringIO.so ${libdir}/python2.6/pipes.* ${libdir}/python2.6/socket.* ${libdir}/python2.6/ssl.* ${libdir}/python2.6/tempfile.* ${libdir}/python2.6/StringIO.* "
+ 
+ DESCRIPTION_python-compiler="Python Compiler Support"
+ RDEPENDS_python-compiler="python-core"
+diff --git a/recipes/python/python.inc b/recipes/python/python.inc
+index 7e61f79..aff18db 100644
+--- a/recipes/python/python.inc
++++ b/recipes/python/python.inc
+@@ -4,7 +4,7 @@ LICENSE = "PSF"
+ SECTION = "devel/python"
+ PRIORITY = "optional"
+ # bump this on every change in contrib/python/generate-manifest-2.6.py
+-INC_PR = "ml8"
++INC_PR = "ml9"
+ 
+ DEFAULT_PREFERENCE = "-26"
+ 	
 
 
-
--- 
-Saludos
-Adrian Alonso
-http://aalonso.wordpress.com
 
