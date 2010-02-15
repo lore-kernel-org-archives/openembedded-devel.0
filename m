@@ -1,37 +1,40 @@
-Received: from vms173011pub.verizon.net ([206.46.173.11])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Nh7Ny-000582-T6
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Feb 2010 21:17:42 +0100
-Received: from gandalf.denix.org ([unknown] [71.251.51.225])
-	by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0KXW0006IG8EL1MC@vms173011.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	15 Feb 2010 14:14:44 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 7867C14AF60; Mon,
-	15 Feb 2010 15:14:38 -0500 (EST)
-Date: Mon, 15 Feb 2010 15:14:38 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nh7Xh-0005LO-Lh for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Feb 2010 21:27:44 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nh7VB-0005bj-4K for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Feb 2010 21:25:05 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Feb 2010 21:25:05 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Feb 2010 21:25:05 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100215201438.GB14442@denix.org>
-References: <1265663673-16312-1-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-2-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-3-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-4-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-5-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-6-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-7-git-send-email-rep.dot.nop@gmail.com>
-	<1265663673-16312-8-git-send-email-rep.dot.nop@gmail.com>
-	<20100211090437.GA17089@denix.org> <20100213120820.GH10632@mx.loc>
-MIME-version: 1.0
-In-reply-to: <20100213120820.GH10632@mx.loc>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.11
-X-SA-Exim-Mail-From: denis@denix.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 15 Feb 2010 21:23:33 +0100
+Message-ID: <hlcag3$ae$1@ger.gmane.org>
+References: <openembedded-devel@lists.openembedded.org>
+	<1266264914-7069-1-git-send-email-aalonso00@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100204 Shredder/3.0.2pre
+In-Reply-To: <1266264914-7069-1-git-send-email-aalonso00@gmail.com>
+X-Enigmail-Version: 1.0.1
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 07/12] Document proxy setup in local.conf.sample
+Subject: Re: [PATCH] linux.inc: add device tree for xilinx ml507 Signed-off-by: aalonso <aalonso00@gmail.com>
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,59 +48,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2010 20:17:42 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 15 Feb 2010 20:27:44 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Sat, Feb 13, 2010 at 01:08:20PM +0100, Bernhard Reutner-Fischer wrote:
-> On Thu, Feb 11, 2010 at 04:04:37AM -0500, Denys Dmytriyenko wrote:
-> >On Mon, Feb 08, 2010 at 10:14:28PM +0100, Bernhard Reutner-Fischer wrote:
-> >> diff --git a/conf/local.conf.sample b/conf/local.conf.sample
-> >> index 643ae0b..e7c4559 100644
-> >> --- a/conf/local.conf.sample
-> >> +++ b/conf/local.conf.sample
-> >> @@ -30,6 +30,9 @@ BBFILES := "${@bb.fatal('Edit your conf/local.conf: BBFILES')}"
-> >>  # This is a regulary expression, so be sure to get your parenthesis balanced.
-> >>  BBMASK = ""
-> >>  
-> >> +# Proxy settings:
-> >> +# BB_ENV_EXTRAWHITE="http_proxy ftp_proxy no_proxy"
-> >
-> >I'm sorry to inform you, but that won't work with the standard bitbake! Which 
-> >uses own HTTP_PROXY, FTP_PROXY, HTTP_PROXY_IGNORE and FTP_PROXY_IGNORE vars.
-> >
-> >I tried to persuade RP to change that back to standard http_proxy, ftp_proxy 
-> >and no_proxy to no avail[1].
-> >
-> >Because of that I had to keep my own version of bitbake[2] with the necessary 
-> >patches for my users - check the top 4 patches in that tree. Although, 
-> >GIT_PROXY_COMMAND one is already in the bitbake master...
-> >
-> >And looks like Khem has already pushed the above change though...
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hi!
+
+It seems you fell victim to the "git needs blank line between summarry
+and body" maffia and git put everything in the subject line. Could you
+regenerate and resend please?
+
+regards,
+
+Koen
+
+On 15-02-10 21:15, aalonso wrote:
+> ---
+>  recipes/linux/linux.inc |    1 +
+>  1 files changed, 1 insertions(+), 0 deletions(-)
 > 
-> drats, you're right. I was erroneously checking against a patched bitbake.
-> 
-> khem, i'm very sorry for my sloppiness! Please
-> revert 3f602f72f0936ef773aa4767636d41bb82ecf3b0 :
+> diff --git a/recipes/linux/linux.inc b/recipes/linux/linux.inc
+> index 7405c08..b562657 100644
+> --- a/recipes/linux/linux.inc
+> +++ b/recipes/linux/linux.inc
+> @@ -38,6 +38,7 @@ KERNEL_DEVICETREE_mpc8313e-rdb = "arch/${ARCH}/boot/dts/mpc8313erdb.dts"
+>  KERNEL_DEVICETREE_mpc8315e-rdb = "arch/${ARCH}/boot/dts/mpc8315erdb.dts"
+>  KERNEL_DEVICETREE_mpc8323e-rdb = "arch/${ARCH}/boot/dts/mpc832x_rdb.dts"
+>  KERNEL_DEVICETREE_sequoia = "arch/${ARCH}/boot/dts/sequoia.dts"
+> +KERNEL_DEVICETREE_xilinx-ml507 = "arch/${ARCH}/boot/dts/virtex440-ml507.dts"
+>  
+>  KERNEL_DEVICETREE_FLAGS = "-R 8 -S 0x3000"
+>  
 
-Reverted.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-> ---8<---
-> Unfortunately bitbake master allegedly uses the non-standard
-> {HT,F}TP_PROXY{,_IGNORE} config variables instead of the established
-> http_proxy, ftp_proxy, no_proxy environment variables.
-> ---8<---
-> lynx has a good description for these, and especially a sane rule
-> for no_proxy (with domain.tld:port csv entries) which works very well
-> for me in practise, FYI.
-> http://lynx.isc.org/lynx2.8.5/lynx2-8-5/lynx_help/keystrokes/environments.html#proxy
-> 
-> Sorry for the wrong patch and thanks, Denys, for mentioning this!
-> >
-> >[1] http://thread.gmane.org/gmane.comp.handhelds.openembedded/19716
-> >[2] http://arago-project.org/git/?p=arago-bitbake.git;a=shortlog;h=refs/heads/next
+iD8DBQFLea1FMkyGM64RGpERArh3AKCLPoXbnPAhfNAVo+RFo0ybG906IACfeuaP
+4Raof8c0plbGFLXVlU1jTxs=
+=TIcr
+-----END PGP SIGNATURE-----
 
--- 
-Denys
 
 
