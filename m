@@ -1,40 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from vms173017pub.verizon.net ([206.46.173.17])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nh7Xh-0005LO-Lh for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Feb 2010 21:27:44 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nh7VB-0005bj-4K for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Feb 2010 21:25:05 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2010 21:25:05 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2010 21:25:05 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <denis@denix.org>) id 1Nh7hc-0006q6-Mr
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Feb 2010 21:37:59 +0100
+Received: from gandalf.denix.org ([unknown] [71.251.51.225])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0KXW001S1H6ED7W2@vms173017.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	15 Feb 2010 14:35:07 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 01B4F14AF60; Mon,
+	15 Feb 2010 15:35:01 -0500 (EST)
+Date: Mon, 15 Feb 2010 15:35:01 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 15 Feb 2010 21:23:33 +0100
-Message-ID: <hlcag3$ae$1@ger.gmane.org>
-References: <openembedded-devel@lists.openembedded.org>
-	<1266264914-7069-1-git-send-email-aalonso00@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.7) Gecko/20100204 Shredder/3.0.2pre
-In-Reply-To: <1266264914-7069-1-git-send-email-aalonso00@gmail.com>
-X-Enigmail-Version: 1.0.1
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-id: <20100215203501.GC14442@denix.org>
+References: <1266176499.12424.6.camel@ed-hp-laptop>
+MIME-version: 1.0
+In-reply-to: <1266176499.12424.6.camel@ed-hp-laptop>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.17
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] linux.inc: add device tree for xilinx ml507 Signed-off-by: aalonso <aalonso00@gmail.com>
+Subject: Re: shared-mime-info-native-0.51 do_compile failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,48 +37,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2010 20:27:44 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 15 Feb 2010 20:38:00 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Hi!
-
-It seems you fell victim to the "git needs blank line between summarry
-and body" maffia and git put everything in the subject line. Could you
-regenerate and resend please?
-
-regards,
-
-Koen
-
-On 15-02-10 21:15, aalonso wrote:
-> ---
->  recipes/linux/linux.inc |    1 +
->  1 files changed, 1 insertions(+), 0 deletions(-)
+On Sun, Feb 14, 2010 at 11:41:39AM -0800, ed wrote:
+> Trying to build image for mini2440 and get the following error.
 > 
-> diff --git a/recipes/linux/linux.inc b/recipes/linux/linux.inc
-> index 7405c08..b562657 100644
-> --- a/recipes/linux/linux.inc
-> +++ b/recipes/linux/linux.inc
-> @@ -38,6 +38,7 @@ KERNEL_DEVICETREE_mpc8313e-rdb = "arch/${ARCH}/boot/dts/mpc8313erdb.dts"
->  KERNEL_DEVICETREE_mpc8315e-rdb = "arch/${ARCH}/boot/dts/mpc8315erdb.dts"
->  KERNEL_DEVICETREE_mpc8323e-rdb = "arch/${ARCH}/boot/dts/mpc832x_rdb.dts"
->  KERNEL_DEVICETREE_sequoia = "arch/${ARCH}/boot/dts/sequoia.dts"
-> +KERNEL_DEVICETREE_xilinx-ml507 = "arch/${ARCH}/boot/dts/virtex440-ml507.dts"
->  
->  KERNEL_DEVICETREE_FLAGS = "-R 8 -S 0x3000"
->  
+> NOTE: Running task 694 of 2862 (ID:
+> 1434, /home/ed/mini2440/OE/openembedded/recipes/shared-mime-info/shared-mime-info-native_0.51.bb, do_compile)
+> ERROR: function do_compile failed
+> ERROR: log data follows
+> (/home/ed/mini2440/OE/build/tmp/work/i686-linux/shared-mime-info-native-0.51-r0/temp/log.do_compile.11554)
+> | NOTE: make
+> | Making check in po
+> | make[1]: Entering directory
+> `/home/ed/mini2440/OE/build/tmp/work/i686-linux/shared-mime-info-native-0.51-r0/shared-mime-info-0.51/po'
+> | rm -f missing notexist
+> |
+> srcdir=. /home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/bin/intltool-update -m
+> | if [ -r missing -o -r notexist ]; then \
+> | 	  exit 1; \
+> | 	fi
+> | make[1]: Leaving directory
+> `/home/ed/mini2440/OE/build/tmp/work/i686-linux/shared-mime-info-native-0.51-r0/shared-mime-info-0.51/po'
+> | make[1]: Entering directory
+> `/home/ed/mini2440/OE/build/tmp/work/i686-linux/shared-mime-info-native-0.51-r0/shared-mime-info-0.51'
+> | ccache gcc
+> -I/home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/include/libxml2
+> -I/home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/include/glib-2.0
+> -I/home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/lib/glib-2.0/include   -isystem/home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/include -O2 -Wall -Wstrict-prototypes -Wmissing-prototypes -Wwrite-strings  -L/home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/lib -Wl,-rpath-link,/home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/lib -Wl,-rpath,/home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/lib -Wl,-O1 -o update-mime-database update_mime_database-update-mime-database.o -L/home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/lib -lxml2 -lglib-2.0
+> | /home/ed/mini2440/OE/build/tmp/staging/i686-linux/usr/lib/libxml2.so:
+> undefined reference to `gzopen64'
+> | collect2: ld returned 1 exit status
+> | make[1]: *** [update-mime-database] Error 1
+> | make[1]: Leaving directory
+> `/home/ed/mini2440/OE/build/tmp/work/i686-linux/shared-mime-info-native-0.51-r0/shared-mime-info-0.51'
+> | make: *** [check-recursive] Error 1
+> | FATAL: oe_runmake failed
+> NOTE: Task
+> failed: /home/ed/mini2440/OE/build/tmp/work/i686-linux/shared-mime-info-native-0.51-r0/temp/log.do_compile.11554
+> ERROR: TaskFailed event exception, aborting
+> ERROR: Build
+> of /home/ed/mini2440/OE/openembedded/recipes/shared-mime-info/shared-mime-info-native_0.51.bb do_compile failed
+> ERROR: Task 1434
+> (/home/ed/mini2440/OE/openembedded/recipes/shared-mime-info/shared-mime-info-native_0.51.bb, do_compile) failed
+> NOTE: Tasks Summary: Attempted 693 tasks of which 674 didn't need to be
+> rerun and 1 failed.
+> ERROR:
+> '/home/ed/mini2440/OE/openembedded/recipes/shared-mime-info/shared-mime-info-native_0.51.bb' failed
+> 
+> ==============================
+> Says it has undefined gzopen64
+> But gzopen64 is apparently there.
+> ed ~/mini2440/OE/build/tmp/staging/i686-linux/usr/lib:$: strings
+> libxml2.so |grep gzopen64
+> gzopen64
+> ed ~/mini2440/OE/build/tmp/staging/i686-linux/usr/lib:$: objdump -T
+> libxml2.so |grep gzopen64
+> 00000000      DF *UND*	00000000              gzopen64
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Actually, it clearly says it's *UND*efined in this context... :) As gzopen*() 
+is provided by libz - looks like it may be trying to link against your host 
+lib...
 
-iD8DBQFLea1FMkyGM64RGpERArh3AKCLPoXbnPAhfNAVo+RFo0ybG906IACfeuaP
-4Raof8c0plbGFLXVlU1jTxs=
-=TIcr
------END PGP SIGNATURE-----
-
+-- 
+Denys
 
 
