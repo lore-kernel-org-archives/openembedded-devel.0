@@ -1,25 +1,45 @@
-Received: from smtpauth20.prod.mesa1.secureserver.net ([64.202.165.36])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <mike@mwester.net>) id 1Nh5dY-0002hb-SR
+Received: from mail-fx0-f210.google.com ([209.85.220.210])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <martin.jansa@gmail.com>) id 1Nh5qJ-0002jH-94
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Feb 2010 19:25:40 +0100
-Received: (qmail 7706 invoked from network); 15 Feb 2010 18:22:57 -0000
-Received: from unknown (209.242.7.187)
-	by smtpauth20.prod.mesa1.secureserver.net (64.202.165.36) with ESMTP;
-	15 Feb 2010 18:22:57 -0000
-Message-ID: <4B799100.7090203@mwester.net>
-Date: Mon, 15 Feb 2010 12:22:56 -0600
-From: Mike Westerhof <mike@mwester.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23 Mnenhy/0.7.6.0
-MIME-Version: 1.0
+	Mon, 15 Feb 2010 19:38:50 +0100
+Received: by fxm2 with SMTP id 2so2201881fxm.27
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Feb 2010 10:36:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=bEXyfwIDFTjnHa18pnl52kNrCrn8tSkvh/2VWOgWY6s=;
+	b=xDhN5Cle8wmgyPcQZFuzzZxNHYM2fVuHp3a+oPCW+qKdAODc0CYC+tsHq4G63q9ytX
+	T115/z2C/1s0hito6WvjJj8BFknn5WUzh8Fom9xAukhikZT9oFBNsLTa/dLfeFXTe/Vb
+	me2AIooAlY061XUjrxkX7vAqHACCNBkrbKFns=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=DzEmXExeP9X2JBP3iMcFQeJRcBpuDvobOStmBHghPMIh5LRql2gM99swYRFiod+7rl
+	dIKVP+xqwzBEYcto0JGcFxFIim67KvuzPN52UIgFFc9dhK1mEnEvH7ap5UKC6ceQx/Ve
+	PN5UxYx7S0cgfzFi7QwDQ4d7f1xjlVAW8DmwI=
+Received: by 10.223.7.69 with SMTP id c5mr6536749fac.14.1266258969373;
+	Mon, 15 Feb 2010 10:36:09 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 15sm3128974fxm.6.2010.02.15.10.36.06
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 15 Feb 2010 10:36:07 -0800 (PST)
+Date: Mon, 15 Feb 2010 19:36:04 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20100214135613.GF5364@jama>
-	<4B79673B.50108@balister.org>	<ac9c93b11002150859i4aa5ee7eid6a648d95fa25d6c@mail.gmail.com>	<20100215171952.GA3233@jama>
+Message-ID: <20100215183604.GC3233@jama>
+References: <20100214135613.GF5364@jama> <4B79673B.50108@balister.org>
+	<ac9c93b11002150859i4aa5ee7eid6a648d95fa25d6c@mail.gmail.com>
+	<20100215171952.GA3233@jama>
 	<ac9c93b11002150957r4e9bc0e6tbeb56e62c94e89b0@mail.gmail.com>
-In-Reply-To: <ac9c93b11002150957r4e9bc0e6tbeb56e62c94e89b0@mail.gmail.com>
-X-SA-Exim-Connect-IP: 64.202.165.36
-X-SA-Exim-Mail-From: mike@mwester.net
+	<4B799100.7090203@mwester.net>
+MIME-Version: 1.0
+In-Reply-To: <4B799100.7090203@mwester.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.210
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: Using bitbake in minimal chroot environment
@@ -36,39 +56,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2010 18:25:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 15 Feb 2010 18:38:50 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Frans Meulenbroeks wrote:
-> 2010/2/15 Martin Jansa <martin.jansa@gmail.com>:
->>> Seems a good plan to me, please keep us posted.
->>> (actually I've been considering building in a minimalistic VM)
->> Well VM would be much slower..
-> 
-> Someone else told me the same today.
-> What exactly causes this? I would expect I/O to be the differentiating
-> factor as memory access and executing instructions should take the
-> same time, shouldn't it?
+On Mon, Feb 15, 2010 at 12:22:56PM -0600, Mike Westerhof wrote:
+> So my conclusion is that I/O is not the bottleneck for my OE builds, and
+> that's the only area where a VM is significantly different in terms of
+> performance (at least how I use VMs; perhaps other builds may observe
+> differences).
 
-I build in a VM often, and the difference is not very significant.  In
-fact, I can't measure the difference in building SlugOS using the wall
-clock.
+Interesting!
 
-I also tried placing all of my TMPDIR on a tmpfs on my 8GB RAM system,
-and building SlugOS -- again, no difference compared to the normal SATA
-hard drive for TMPDIR.
+out of curiosity, how many threads were you using for that test? 
+I'm using:
+PARALLEL_MAKE="-j4"
+BB_NUMBER_THREADS = "2"
+for builds with my 1x AMD Phenom workstation at home and I would expect
+even more I/O with more concurrent threads.
 
-So my conclusion is that I/O is not the bottleneck for my OE builds, and
-that's the only area where a VM is significantly different in terms of
-performance (at least how I use VMs; perhaps other builds may observe
-differences).
+I didn't perform any sophisticated benchmark, but when I was using tmpfs
+I compared build times with genlop/qlop gentoo utility which shows
+history of all performed builds with time it used. So I've seen
+significant speedup when switched from single-drive to tmpfs, then not
+so significant slowdown when switched from tmpfs to raid0. But then I
+didn't recheck diff between single-drive builds and raid0 (because
+versions built were usually quite different)
 
-Before I ended up on my current contract, which locks me away behind
-draconian firewalls, I used to take my autobuilder on the road with me
-as a VM, building SlugOS and several of the OpenMoko distros -- I
-heartily recommend that solution!
+Kind regards,
 
--Mike (mwester)
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
