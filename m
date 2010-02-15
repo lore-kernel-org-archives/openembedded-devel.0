@@ -1,34 +1,39 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Nh844-0002uP-Cu
+	(envelope-from <Tom_Rini@mentor.com>) id 1Nh96P-0007IF-Tf
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Feb 2010 22:01:11 +0100
-Received: from p5b034cb8.dip.t-dialin.net ([91.3.76.184] helo=excalibur)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1Nh81P-00017g-06 by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2010 21:58:32 +0100
-Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>) id 1Nh81O-0002nX-57
+	Mon, 15 Feb 2010 23:07:41 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1Nh93q-0002nQ-7p from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Feb 2010 21:58:22 +0100
-Date: Mon, 15 Feb 2010 21:58:22 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Mon, 15 Feb 2010 14:04:58 -0800
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 15 Feb 2010 14:04:58 -0800
+Received: from 172.30.80.33 ([172.30.80.33]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Mon, 15 Feb 2010 22:04:37 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	15 Feb 2010 15:04:37 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100215205822.GB4637@excalibur.local>
-References: <200910291536.26049.pieterg@gmx.com>
-MIME-Version: 1.0
-In-Reply-To: <200910291536.26049.pieterg@gmx.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+In-Reply-To: <hlc4jp$cfc$1@ger.gmane.org>
+References: <20100214135613.GF5364@jama> <4B79673B.50108@balister.org>
+	<ac9c93b11002150859i4aa5ee7eid6a648d95fa25d6c@mail.gmail.com>
+	<20100215171952.GA3233@jama>  <hlc4jp$cfc$1@ger.gmane.org>
+Organization: Mentor Graphics Corporation
+Date: Mon, 15 Feb 2010 15:04:37 -0700
+Message-ID: <1266271477.31865.4.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 15 Feb 2010 22:04:58.0066 (UTC)
+	FILETIME=[E98EF320:01CAAE8A]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] netkit-base: fix building with gcc4
+Subject: Re: Using bitbake in minimal chroot environment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,50 +47,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2010 21:01:13 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 15 Feb 2010 22:07:41 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hello.
+On Mon, 2010-02-15 at 19:43 +0100, Koen Kooi wrote:
 
-Sorry for the late reply. I was going to test and apply your patch, but it is
-line wrapped and I failed fixing it up by hand.
+[snip]
+> On a recent intel/amd cpu VMs I can't measure much difference between VM
+> and non-vm builds.
+> My main buildmachine at work is an ubuntu 8.04LTS vm running under
+> windows XP. The only major speedup I can get building in a native
+> install would be using 64bit, since the VM is 32 bit, but it does expose
+> both CPU cores :)
 
-On Thu, 2009-10-29 at 15:36, pieterg wrote:
-> ---
-> 
-> I guess nobody has been using netkit-base for a while, it needs the 
-> following patch to allow it to be built with gcc 4.x.x.
-> 
->  recipes/netkit-base/netkit-base-0.17/gcc4.patch |   12 ++++++++++++
->  recipes/netkit-base/netkit-base_0.17.bb         |    3 ++-
->  2 files changed, 14 insertions(+), 1 deletions(-)
->  create mode 100644 recipes/netkit-base/netkit-base-0.17/gcc4.patch
-> 
-> diff --git a/recipes/netkit-base/netkit-base-0.17/gcc4.patch 
-> b/recipes/netkit-base/netkit-base-0.17/gcc4.patch
-> new file mode 100644
-> index 0000000..0a332a8
-> --- /dev/null
-> +++ b/recipes/netkit-base/netkit-base-0.17/gcc4.patch
-> @@ -0,0 +1,12 @@
-> +diff -dur netkit-base-0.17-p/inetd/servtab.c 
-> netkit-base-0.17/inetd/servtab.c
+What are you (and everyone else saying it's fine) running the VM with?
+I've got people reporting just unusable build times inside VMs on what
+should be reasonable hardware.  That said, I've profiled some builds and
+seen that IO is not a bottleneck (stuff like waiting for virtual/libc to
+stage and gcc-cross to get populated is).
 
-Here
-
-> +--- netkit-base-0.17-p/inetd/servtab.c	2000-07-22 22:20:50.000000000 +0200
-> ++++ netkit-base-0.17/inetd/servtab.c	2005-10-19 04:04:33.000000000 +0200
-> +@@ -771,7 +771,7 @@
-> + 			return;
-> + 		}
-> + 		
-> +-#define SWAP(type, a, b) {type c=(type)a; (type)a=(type)b; 
-> (type)b=(type)c;}
-
-Here, and more to come.
-
-regards
-Stefan Schmidt
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
