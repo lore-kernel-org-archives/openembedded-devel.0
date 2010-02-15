@@ -1,39 +1,39 @@
-Received: from mail-fx0-f210.google.com ([209.85.220.210])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Nh152-0000S9-1C
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Feb 2010 14:33:43 +0100
-Received: by fxm2 with SMTP id 2so1804147fxm.27
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nh1O4-0007wN-K0 for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Feb 2010 14:53:23 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nh1LV-0008DD-Gz for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Feb 2010 14:50:41 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Feb 2010 14:50:41 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Feb 2010 05:31:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=7c+3CymMbKjybMYNNBwrbsWnvekA9jCHi1C6JToFtfM=;
-	b=Lrgak4UeRyxZMjX8gSeajst1t7135jPH/ENPo361jJ3SndQAFdB7MbIQfIujqZXhKl
-	VPbH0GMJ3iAY2MpM/sGbcnGG//AZC/9V6f9xx3AWfMUA0MOAKZaQoSfH9nK0vEd8ldbG
-	GJ2Emqu9yxf6P79DclyPYm+ervJyKqvmSDwHM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=S3dJUyR6lxWjPIkST7BhJRtbyt8VwZRyH0RdUBvtm0LiX2yx0y+rV5pgHPdqS1BbWi
-	cALdT91dpQ35BK/Ts2nJWFysp8OoMa6Yp1KvLWCJodLqrnJMsBwFwsTHFiYVNwaWwcP1
-	KBiPSFG4VxFDp6Tj3dPwvQqd1knXHi9bNLucw=
-MIME-Version: 1.0
-Received: by 10.223.15.21 with SMTP id i21mr3997507faa.58.1266240662129; Mon, 
-	15 Feb 2010 05:31:02 -0800 (PST)
-In-Reply-To: <1266231291-18711-1-git-send-email-sledz@dresearch.de>
-References: <20100213132656.GE5364@jama>
-	<1266231291-18711-1-git-send-email-sledz@dresearch.de>
-Date: Mon, 15 Feb 2010 14:31:01 +0100
-Message-ID: <141020e31002150531s11663cc1q561cb1e7c7c51287@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 15 Feb 2010 14:50:41 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.210
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 15 Feb 2010 14:50:12 +0100
+Message-ID: <hlbjej$5i7$1@ger.gmane.org>
+References: <hlb6ov$s5c$1@ger.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.7) Gecko/20100204 Shredder/3.0.2pre
+In-Reply-To: <hlb6ov$s5c$1@ger.gmane.org>
+X-Enigmail-Version: 1.0.1
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] vala-dbus-binding-tool: (mostly) new recipe
+Subject: Re: [RFC] set PYTHONPATH inside distutils-base.bbclass instead of distutils.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,44 +47,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2010 13:33:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 15 Feb 2010 13:53:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Feb 15, 2010 at 11:54 AM, Steffen Sledz <sledz@dresearch.de> wrote:
-> --- a/recipes/freesmartphone/vala-dbus-binding-tool-native_git.bb
-> -DEPENDS = "vala-native libgee-native intltool-native libxml2-native"
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> diff --git a/recipes/vala-dbus-binding-tool/vala-dbus-binding-tool.inc b/recipes/vala-dbus-binding-tool/vala-dbus-binding-tool.inc
-> +DEPENDS = "vala libgee libxml2 intltool-native"
+After some discussion with Richard I committed this:
 
-Pushed with small changes:
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=fd4a161b6095f5b6f83d50d4d979000399944260
 
-1) SRC_URI moved to .inc as suggested before
-2) checksums moved to recipe
-3) updated PV in git recipe
+That seems to solve the sympoms I'm seeing, but the underlying problem
+is still present.
 
-Thanks for patch!
 
-BTW: I noticed a bit strange DEPENDS, why is there depend on
-intltool-native? and other depends non-native?
+On 15-02-10 11:13, Koen Kooi wrote:
+> Hi,
+> 
+> I had a problem with building python-pygobject-native last week which
+> was due to this bit in m4/python.m4
+> 
+> if test -x "$PYTHON-config"; then
+> PYTHON_INCLUDES=`$PYTHON-config --includes 2>/dev/null`
+> else
+> PYTHON_INCLUDES="-I${py_prefix}/include/python${PYTHON_VERSION}"
+> if test "$py_prefix" != "$py_exec_prefix"; then
+>   PYTHON_INCLUDES="$PYTHON_INCLUDES
+> -I${py_exec_prefix}/include/python${PYTHON_VERSION}"
+>> fi
+> fi
+> 
+> $PYTHON-config exists in staging and needs HOST_SYS, BUILDSYS,
+> STAGING_LIBDIR and STAGING_INCDIR exported to work.
+> 
+> But after instrumenting python.m4 a bit I get this when running
+> python-config:
+> 
+> Traceback (most recent call last):
+>   File "/OE/angstrom-dev/staging/x86_64-linux/usr/bin/python-config",
+> line 26, in <module>
+>     pyver = sysconfig.get_config_var('VERSION')
+>   File "/usr/lib/python2.5/distutils/sysconfig.py", line 541, in
+> get_config_var
+>     return get_config_vars().get(name)
+>   File "/usr/lib/python2.5/distutils/sysconfig.py", line 499, in
+> get_config_vars
+>     func()
+>   File "/usr/lib/python2.5/distutils/sysconfig.py", line 351, in _init_posix
+>     filename = get_makefile_filename()
+>   File "/usr/lib/python2.5/distutils/sysconfig.py", line 210, in
+> get_makefile_filename
+>     return os.path.join(lib_dir, "config" + (sys.pydebug and "_d" or
+> ""), "Makefile")AttributeError: 'module' object has no attribute 'pydebug'
+> 
+> Which means it's using the distutils on my buildhost instead of the
+> proper one in staging.
+> 
+> OE is doing this:
+> 
+> export
+> PYTHONPATH=/OE/bitbake:/OE/bitbake/lib:/OE/bitbake-git/bin:/usr/lib/python2.5:/usr/lib/python2.5/plat-linux2:/usr/lib/python2.5/lib-tk:/usr/lib/python2.5/lib-dynload:/usr/local/lib/python2.5/site-packages:/usr/lib/python2.5/site-packages:/usr/lib/python2.5/site-packages/Numeric:/usr/lib/python2.5/site-packages/PIL:/usr/lib/pymodules/python2.5:/usr/lib/pymodules/python2.5/gtk-2.0
+> 
+> So I added this to the recipe:
+> 
+> do_configure_prepend() {
+>        unset PYTHONPATH
+> }
+> 
+> And everything started working again.
+> 
+> So my question is:
+> 
+> Can we set PYTHONPATH inside distutils-base.bbclass instead of
+> distutils.bbclass or just plain unset it?
+> 
+> regards,
+> 
+> Koen
+> 
+> 
+> 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-it is expanded like this:
--native:
-DEPENDS="autoconf-native automake-native libtool-native
-gnu-config-native shasum-native coreutils-native autoconf-native
-automake-native libtool-native gnu-config-native shasum-native
-coreutils-native vala-native libgee-native libxml2-native
-intltool-native"
+iD8DBQFLeVEUMkyGM64RGpERAkhlAJ9OiETWdhQeDNIjCmlxDiF2nwW4UQCfWLL6
+02mZF8nFVpFFDJe7xvxHyHY=
+=rfuo
+-----END PGP SIGNATURE-----
 
-non-native:
-DEPENDS="autoconf-native automake-native libtool-native libtool-cross
-gnu-config-native shasum-native coreutils-native
-virtual/arm-oe-linux-gnueabi-gcc virtual/libc  vala libgee libxml2
-intltool-native"
-
-I'm not saying it's wrong, just curious how bitbake deals with
-changing DEPENDS while parsing BBCLASSEXTENDS = "native".
-
-Regards,
 
 
