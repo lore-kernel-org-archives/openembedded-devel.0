@@ -1,26 +1,34 @@
-Received: from [65.126.90.84] (helo=mail.multitech.com)
+Received: from vms173007pub.verizon.net ([206.46.173.7])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jgilles@multitech.com>) id 1Nh6vt-00056a-Hh
+	(envelope-from <denis@denix.org>) id 1Nh77T-0005Ve-KF
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Feb 2010 20:48:40 +0100
-X-Ninja-AntiSpoofing: spoofed
-Received: from [192.168.52.197] ([192.168.52.197]) by mail.multitech.com with
-	Microsoft SMTPSVC(5.0.2195.6713); Mon, 15 Feb 2010 13:45:45 -0600
-From: Jesse Gilles <jgilles@multitech.com>
+	Mon, 15 Feb 2010 21:00:38 +0100
+Received: from gandalf.denix.org ([unknown] [71.251.51.225])
+	by vms173007.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0KXW00B2GFG96410@vms173007.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	15 Feb 2010 13:57:46 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 9BD7114AF60; Mon,
+	15 Feb 2010 14:57:45 -0500 (EST)
+Date: Mon, 15 Feb 2010 14:57:45 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1266262558.32499.31.camel@jjg-linux>
-References: <1266262558.32499.31.camel@jjg-linux>
-Date: Mon, 15 Feb 2010 13:45:58 -0600
-Message-Id: <1266263158.32499.37.camel@jjg-linux>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-OriginalArrivalTime: 15 Feb 2010 19:45:45.0988 (UTC)
-	FILETIME=[7754FC40:01CAAE77]
-X-SA-Exim-Connect-IP: 65.126.90.84
-X-SA-Exim-Mail-From: jgilles@multitech.com
+Message-id: <20100215195745.GA14442@denix.org>
+References: <20100213203508.540D614AF55@gandalf.denix.org>
+	<20100214130905.GD5979@excalibur.local>
+	<1266162635.5009.42.camel@mattotaupa>
+	<20100214161328.GE5979@excalibur.local>
+	<fca63bcf1002140837i631f5d62kb8b7481e7d266c1b@mail.gmail.com>
+	<1266167553.5009.45.camel@mattotaupa>
+MIME-version: 1.0
+In-reply-to: <1266167553.5009.45.camel@mattotaupa>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.7
+X-SA-Exim-Mail-From: denis@denix.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 2/2] ruby: fix 1.8.7-p248 compile
+Subject: Re: Update state in Patchwork. (was: [PATCH] meta-toolchain:	Run rmdir only if empty dirs are actually found.)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,104 +42,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2010 19:48:41 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 15 Feb 2010 20:00:38 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-* Update ruby library path so extensions needing mkmf can build and
-  find the right ruby headers.  Fixes building of ext/dl.
+On Sun, Feb 14, 2010 at 06:12:33PM +0100, Paul Menzel wrote:
+> Am Sonntag, den 14.02.2010, 17:37 +0100 schrieb Michael Lippautz:
+> > >> 2. Update the state.
+> > >
+> > > How? The webinterface does not offer my the functionality to change the state. I
+> > > guess it is because I'm not in the right group or have otherwise not enough
+> > > permissions in patchwork. As I just registered the account today it could be
+> > > that I'm to late in the game to get updated with the rights in the last batch.
+> > > :)
+> >
+> > I think you have to add the email address, the patch has been sent
+> > from, to your account at [1].
+> > 
+> > (Atleast then I could update the status of MY patches that have been
+> > rejected/applied by others.)
+> 
+> I did not have do this as far as I can remember (there is just my own
+> address there). I just had to activate/confirm my account per email. Now
+> I have the options to change the state if I choose a patch from the list
+> [2].
 
-diff --git a/recipes/ruby/files/extmk.patch b/recipes/ruby/files/extmk.patch
-new file mode 100644
-index 0000000..8b68450
---- /dev/null
-+++ b/recipes/ruby/files/extmk.patch
-@@ -0,0 +1,13 @@
-+diff -ru ruby-1.8.7-p248.orig/ext/extmk.rb ruby-1.8.7-p248/ext/extmk.rb
-+--- ruby-1.8.7-p248.orig/ext/extmk.rb	2009-12-24 03:01:58.000000000 -0600
-++++ ruby-1.8.7-p248/ext/extmk.rb	2010-02-12 15:55:27.370061558 -0600
-+@@ -354,8 +354,8 @@
-+   $ruby = '$(topdir)/miniruby' + EXEEXT
-+ end
-+ $ruby << " -I'$(topdir)'"
-++$ruby << " -I'$(top_srcdir)/lib'"
-+ unless CROSS_COMPILING
-+-  $ruby << " -I'$(top_srcdir)/lib'"
-+   $ruby << " -I'$(extout)/$(arch)' -I'$(extout)/common'" if $extout
-+   $ruby << " -I./- -I'$(top_srcdir)/ext' -rpurelib.rb"
-+   ENV["RUBYLIB"] = "-"
-diff --git a/recipes/ruby/ruby_1.8.7-p248.bb b/recipes/ruby/ruby_1.8.7-p248.bb
-index 8d95373..827327b 100644
---- a/recipes/ruby/ruby_1.8.7-p248.bb
-+++ b/recipes/ruby/ruby_1.8.7-p248.bb
-@@ -2,6 +2,7 @@ require ruby.inc
- DEPENDS = "ruby-native zlib openssl"
- SRC_URI = "ftp://ftp.ruby-lang.org/pub/ruby/${SHRT_VER}/ruby-${PV}.tar.gz \
-            file://extmk_run.patch;patch=1 \
-+           file://extmk.patch;patch=1 \
- "
- FILES_${PN}-dbg += "${libdir}/ruby/1.8/*/.debug \
-                     ${libdir}/ruby/1.8/*/*/.debug"
+Ask admins to enable proper permissions for your account and/or add you to the 
+right group. Please don't add someone else's email addresses to your account.
 
-On Mon, 2010-02-15 at 13:35 -0600, Jesse Gilles wrote:
-> Hi all,
-> 
-> I am new to the mailing list and I have a couple of patches to
-> contribute.
-> 
-> This fixes SSL support for python 2.6.  Looks like the python module for
-> SSL was missing from the package.
-> 
-> Thanks,
-> Jesse
-> 
-> * Add SSL module to build -- fixes "import ssl"
-> 
-> diff --git a/contrib/python/generate-manifest-2.6.py b/contrib/python/generate-manifest-2.6.py
-> index fe0e385..890d1c0 100755
-> --- a/contrib/python/generate-manifest-2.6.py
-> +++ b/contrib/python/generate-manifest-2.6.py
-> @@ -248,7 +248,7 @@ if __name__ == "__main__":
->  
->      m.addPackage( "python-io", "Python Low-Level I/O", "python-core python-math",
->      "lib-dynload/_socket.so lib-dynload/_ssl.so lib-dynload/select.so lib-dynload/termios.so lib-dynload/cStringIO.so " +
-> -    "pipes.* socket.* tempfile.* StringIO.* " )
-> +    "pipes.* socket.* ssl.* tempfile.* StringIO.* " )
->  
->      m.addPackage( "python-json", "Python JSON Support", "python-core python-math python-re",
->      "json" ) # package
-> diff --git a/recipes/python/python-2.6-manifest.inc b/recipes/python/python-2.6-manifest.inc
-> index cee12c8..188ee31 100644
-> --- a/recipes/python/python-2.6-manifest.inc
-> +++ b/recipes/python/python-2.6-manifest.inc
-> @@ -51,7 +51,7 @@ FILES_python-core="${libdir}/python2.6/__future__.* ${libdir}/python2.6/_abcoll.
->  
->  DESCRIPTION_python-io="Python Low-Level I/O"
->  RDEPENDS_python-io="python-core python-math"
-> -FILES_python-io="${libdir}/python2.6/lib-dynload/_socket.so ${libdir}/python2.6/lib-dynload/_ssl.so ${libdir}/python2.6/lib-dynload/select.so ${libdir}/python2.6/lib-dynload/termios.so ${libdir}/python2.6/lib-dynload/cStringIO.so ${libdir}/python2.6/pipes.* ${libdir}/python2.6/socket.* ${libdir}/python2.6/tempfile.* ${libdir}/python2.6/StringIO.* "
-> +FILES_python-io="${libdir}/python2.6/lib-dynload/_socket.so ${libdir}/python2.6/lib-dynload/_ssl.so ${libdir}/python2.6/lib-dynload/select.so ${libdir}/python2.6/lib-dynload/termios.so ${libdir}/python2.6/lib-dynload/cStringIO.so ${libdir}/python2.6/pipes.* ${libdir}/python2.6/socket.* ${libdir}/python2.6/ssl.* ${libdir}/python2.6/tempfile.* ${libdir}/python2.6/StringIO.* "
->  
->  DESCRIPTION_python-compiler="Python Compiler Support"
->  RDEPENDS_python-compiler="python-core"
-> diff --git a/recipes/python/python.inc b/recipes/python/python.inc
-> index 7e61f79..aff18db 100644
-> --- a/recipes/python/python.inc
-> +++ b/recipes/python/python.inc
-> @@ -4,7 +4,7 @@ LICENSE = "PSF"
->  SECTION = "devel/python"
->  PRIORITY = "optional"
->  # bump this on every change in contrib/python/generate-manifest-2.6.py
-> -INC_PR = "ml8"
-> +INC_PR = "ml9"
->  
->  DEFAULT_PREFERENCE = "-26"
->  	
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+-- 
+Denys
 
 
