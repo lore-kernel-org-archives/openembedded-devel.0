@@ -1,27 +1,47 @@
-Received: from [148.204.65.238] (helo=localhost.localdomain)
+Received: from mail-fx0-f210.google.com ([209.85.220.210])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso@localhost.localdomain>) id 1Nh5Oi-0007qo-Cr
+	(envelope-from <martin.jansa@gmail.com>) id 1Nh5TV-0004xy-LC
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Feb 2010 19:10:19 +0100
-Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by localhost.localdomain (8.14.3/8.14.3) with ESMTP id o1FHhXQd004103; 
-	Mon, 15 Feb 2010 11:43:33 -0600
-Received: (from aalonso@localhost)
-	by localhost.localdomain (8.14.3/8.14.3/Submit) id o1FHhXv8004102;
-	Mon, 15 Feb 2010 11:43:33 -0600
-From: Adrian Alonso <aalonso00@gmail.com>
+	Mon, 15 Feb 2010 19:15:16 +0100
+Received: by fxm2 with SMTP id 2so2175297fxm.27
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Feb 2010 10:12:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=8iulYVBL9trRwpzaJzrpAhjHAhSydNe+EDVszyQSK6k=;
+	b=IyyC5yh/8VOEzyHbfeDmSPDWvOlgN1JXMjwHf9ZLsPZAbBimVkQVZbXeTUbTqtm+cp
+	VpjhdDjSUYAvvAYZqjQw4TumA8H4b0bKLONQ103v5VuA545vZt+reyywi1MzULnE36cB
+	EZRIbWeMRBdcJrVJQq0FLFikpyvzf9VPlxzRQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=pEYfRHr3BTaN9IO4IktuRnT/G6X7gO4B87ELqRu5qKdX/NsjTbN1JRJ7+4N7OuLTSa
+	jUS4pKzQabLTX9+K4r20NHLU2TY6sA/fDYzUCIMG+xkwiP5gGVs18MkT8oG5Uct77zJ5
+	rFZMMmJe9LTdmAWSvBBi75si46VcBspI/BUh4=
+Received: by 10.223.143.70 with SMTP id t6mr6312125fau.101.1266257555694;
+	Mon, 15 Feb 2010 10:12:35 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 14sm3128606fxm.7.2010.02.15.10.12.34
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 15 Feb 2010 10:12:34 -0800 (PST)
+Date: Mon, 15 Feb 2010 19:12:32 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Feb 2010 11:42:47 -0600
-Message-Id: <1266255767-4031-3-git-send-email-aalonso00@gmail.com>
-X-Mailer: git-send-email 1.6.6
-In-Reply-To: <1266255767-4031-2-git-send-email-aalonso00@gmail.com>
-References: <1266255767-4031-1-git-send-email-aalonso00@gmail.com>
-	<1266255767-4031-2-git-send-email-aalonso00@gmail.com>
-X-SA-Exim-Connect-IP: 148.204.65.238
-X-SA-Exim-Mail-From: aalonso@localhost.localdomain
+Message-ID: <20100215181232.GB3233@jama>
+References: <20100214135613.GF5364@jama> <4B79673B.50108@balister.org>
+	<ac9c93b11002150859i4aa5ee7eid6a648d95fa25d6c@mail.gmail.com>
+	<20100215171952.GA3233@jama>
+	<ac9c93b11002150957r4e9bc0e6tbeb56e62c94e89b0@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <ac9c93b11002150957r4e9bc0e6tbeb56e62c94e89b0@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.210
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] ml507 xilinx bsp update
+Subject: Re: Using bitbake in minimal chroot environment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,98 +55,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Feb 2010 18:10:22 -0000
+X-List-Received-Date: Mon, 15 Feb 2010 18:15:16 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-From: aalonso <aalonso00@gmail.com>
+On Mon, Feb 15, 2010 at 06:57:22PM +0100, Frans Meulenbroeks wrote:
+> Someone else told me the same today.
+> What exactly causes this? I would expect I/O to be the differentiating
+> factor as memory access and executing instructions should take the
+> same time, shouldn't it?
 
----
- classes/xilinx-bsp.bbclass |   56 +++++++++++++++++++++----------------------
- 1 files changed, 27 insertions(+), 29 deletions(-)
+AFAIK virtualized I/O is slowest part of virtualized world and building
+with bitbake is IMHO mostly about I/O.
 
-diff --git a/classes/xilinx-bsp.bbclass b/classes/xilinx-bsp.bbclass
-index f657e5b..c719b3b 100644
---- a/classes/xilinx-bsp.bbclass
-+++ b/classes/xilinx-bsp.bbclass
-@@ -3,7 +3,7 @@
- #
- #This class handles all the intricasies of getting the required files from the 
- #ISE/EDK/project to the kernel and prepare the kernel for compilation.
--#The Xilinx EDK supports 2 different architectures : PowerPC (ppc 405) and Microblaze
-+#The Xilinx EDK supports 2 different architectures : PowerPC (ppc 405,440) and Microblaze
- #Only the PowerPC BSP has been tested so far
- #For this to work correctly you need to add XILINX_BSP_PATH and XILINX_BOARD to your 
- #local.conf
-@@ -12,42 +12,40 @@
- #
- #Currently supported boards
- #Xilinx ML403
-+#Xilinx ML507
- #More to come soon ;)
- 
- do_configure_prepend() {
- 
--
- #first check that the XILINX_BSP_PATH and XILINX_BOARD have been defined in local.conf
--if [ -z "${XILINX_BSP_PATH}" ]; then
--   oefatal "XILINX_BSP_PATH not defined ! Exiting..."
--   exit 1
--
--else
--   if [ -z "${XILINX_BOARD}" ]; then
--      oefatal "XILINX_BOARD not defined ! Exiting"
--      exit 1
--   fi
--
--fi
- #now depending on the board type and arch do what is nessesary
- 
--case "${XILINX_BOARD}" in
--     ML403)
--        oenote "ML403 board setup"
--        cp -pPR ${XILINX_BSP_PATH}/ppc405_0/libsrc/linux_2_6_v1_00_a/linux/arch/ppc/platforms/4xx/xparameters/xparameters_ml40x.h \
-+if [ -n "${XILINX_BSP_PATH}" ]; then
-+	case "${XILINX_BOARD}" in
-+		ml403 | ML403)
-+			oenote "ML403 board setup"
-+			cp -pPR ${XILINX_BSP_PATH}/ppc405_0/libsrc/linux_2_6_v1_00_a/linux/arch/ppc/platforms/4xx/xparameters/xparameters_ml40x.h \
-                 ${S}/arch/ppc/platforms/4xx/xparameters/xparameters_ml403.h
--     ;;
--
--     *    ) 
--      oefatal "! Unknow Xilinx board ! Exiting..."
--      exit 1
--     ;;
--esac               
--
-+		;;
-+		ml507 | ML507)
-+			oenote "Xilinx ML507 board setup"
-+			dts=`find "${XILINX_BSP_PATH}" -name *.dts -print`
-+			if [ -n "$dts" ]; then
-+				oenote "Replacing device tree with ${dts}"
-+				cp -pP ${dts} ${S}/arch/powerpc/boot/dts/virtex440-ml507.dts
-+			else
-+				oenote "Device tree not found in project dir"
-+			fi
-+		;;
-+		*) 
-+			oefatal "! Unknow Xilinx board ! Exit ..."
-+			exit 1
-+		;;
-+	esac               
-+else
-+	oefatal "XILINX_BSP_PATH not defined ! Exit"
-+	exit 1
-+fi
- 
- }
- 
--
--
--
--
+I'm running my gentoo system upgrades as well as all bitbake builds
+(workdirs) on raid0 - strip over 3 SATA2 disks (before that I was using
+huge tmpfs in RAM for workdirs - but that's not usable ie for OO.org
+build :))
+
+And with chroot I can use it without any problem (just updated path in
+already used mount --bind).
+
+Also for running it from VM I would need to update host kernel from time
+to time, on the other side sharing kernel with my running system didn't
+create any OE related issue (except that sanity check for mmap with 
+2.6.33+ - which is already fixed)
+
+Regards,
+
 -- 
-1.6.6
-
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
