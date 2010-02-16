@@ -1,35 +1,34 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1NhLor-0006zM-BM
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NhLwO-0005Vm-FK
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Feb 2010 12:42:24 +0100
-Received: from w1215.wlan.rz.tu-bs.de ([134.169.204.199] helo=excalibur)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1NhLmB-0004Kl-DJ by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Feb 2010 12:39:45 +0100
-Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>) id 1NhLmA-0001Jq-RS
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Feb 2010 12:39:34 +0100
-Date: Tue, 16 Feb 2010 12:39:34 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Tue, 16 Feb 2010 12:50:11 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1GBlTFh023843;
+	Tue, 16 Feb 2010 11:47:29 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 23470-08; Tue, 16 Feb 2010 11:47:25 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1GBlKGu023837
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Tue, 16 Feb 2010 11:47:20 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100216113934.GB4012@excalibur.local>
-References: <1257250214.22826.88.camel@nvc0624> <hcp7pt$ne9$1@ger.gmane.org>
-	<1257255345.13860.0.camel@nvc0624>
-MIME-Version: 1.0
-In-Reply-To: <1257255345.13860.0.camel@nvc0624>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+In-Reply-To: <4B7A7E6B.20508@gmail.com>
+References: <1266316492.6436.127.camel@rex>  <4B7A7E6B.20508@gmail.com>
+Date: Tue, 16 Feb 2010 11:47:19 +0000
+Message-ID: <1266320839.6436.132.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] suite of utilities for programming Xilinx FPGAs, CPLDs, and EEPROMs
+Cc: bitbake-dev@lists.berlios.de
+Subject: Re: RFC: Improve our default conf file setup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,62 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Feb 2010 11:42:24 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 16 Feb 2010 11:50:12 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hello.
+On Tue, 2010-02-16 at 12:15 +0100, Marco Cavallini wrote:
+> I agree with this proposal, also beacuse I have been doing an intensive
+> use of overlays.
+> But I'd prefer a single configuration file containing everything rather
+> than a myriad of small ones.
 
-Sorry for the delay. Just found that one in patchwork.
+The trouble with this is that it doesn't let us escape from the current
+local.conf situation.
 
-On Tue, 2009-11-03 at 14:35, Jaap de Jong wrote:
-> Updated.
-> Much simpeler now...
+The idea in the proposal is that each file has a specific purpose and
+associates the data with the appropriate place. E.g. an overlay is in
+the best position to know whether it has extra .bb files, .conf files,
+site files and so on. A build directory is in the best position to know
+which overlays should be included for a given build and so on.
 
-Nearly there.
+Cheers,
 
-> Suite of utilities for programming Xilinx FPGAs, CPLDs, and EEPROMs
+Richard
 
-Please prefix the message with the recipe name. Makes it easier to read commit
-logs and understand about which recipe they are. Like:
-
-xc3sprog: Add suite of ...
-
-> ---
->  recipes/xc3sprog/xc3sprog_411.bb |   15 +++++++++++++++
->  1 files changed, 15 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/xc3sprog/xc3sprog_411.bb
-> 
-> diff --git a/recipes/xc3sprog/xc3sprog_411.bb b/recipes/xc3sprog/xc3sprog_411.bb
-> new file mode 100644
-> index 0000000..0ffc4dc
-> --- /dev/null
-> +++ b/recipes/xc3sprog/xc3sprog_411.bb
-> @@ -0,0 +1,15 @@
-> +# xc3sprog build file
-> +LICENSE="GPL"
-> +DESCRIPTION="suite of utilities for programming Xilinx FPGAs, CPLDs, and EEPROMs"
-
-Nitpick. Please start with uppercase.
-
-> +HOMEPAGE="http://sourceforge.net/projects/xc3sprog"
-> +
-> +DEPENDS += "libftdi"
-> +
-> +SRC_URI = "svn://xc3sprog.svn.sourceforge.net/svnroot/xc3sprog;proto=https;module=trunk" 
-> +SRCREV = ${PV}
-> +
-> +S="${WORKDIR}/trunk"
-> +PR = "r0"
-> +
-> +inherit cmake
-
-To sort the the lines in the recipe to look more like others in the repo you can
-run it through contrib/oe-stylize.py
-
-If you care to resend the updated patch I'm going to test and apply it.
-
-regards
-Stefan Schmidt
 
 
