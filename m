@@ -1,42 +1,38 @@
-Received: from mail-px0-f173.google.com ([209.85.216.173])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1NhOGt-0002RK-LM
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NhPWO-0003Wi-AP
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Feb 2010 15:19:30 +0100
-Received: by pxi3 with SMTP id 3so2597544pxi.28
+	Tue, 16 Feb 2010 16:39:38 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1GFarsp025534
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Feb 2010 06:16:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to
-	:content-type; bh=u5q6JaEmBv4lMu0UQElJHM5QHJcZB/Im18BH6BiJMEw=;
-	b=JYEhXk/WIieL+wlbBYt5/9isS+vhNSCGkgLIHhgiHfBFVLwV4qzAtgQsoyKtOnBg/q
-	DJWMXCd6tiG0RZ9RrScqrUOjy1YA4yAw1aVp8e4lLqfJR69Bcx6FIfcsCFy3DqKnMKsm
-	AUJrUTv+kttKTUfhzdn0LS4R0Dm8Tp+qjiFQM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=Pjojtqlmzu+N84Pgi4xQP66ft0CrxM6u5lZqNlyqYsgVvHgHksyCYexgKpgDmU9jmV
-	cTVxgp/0+CYiKnTb8xdfyBsQ+ZCEksVIdkRe1v5yMxCGhFmobCQSflR6i8ju02waFvet
-	8ngED3RxDAl+zR8h/WKcl4bYw7Tkdl0z/9wEs=
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.142.60.12 with SMTP id i12mr4346958wfa.66.1266329808120; Tue, 
-	16 Feb 2010 06:16:48 -0800 (PST)
-In-Reply-To: <1266320987.6436.135.camel@rex>
-References: <1266316492.6436.127.camel@rex>
-	<ac9c93b11002160258m2ddee8absd0510adad4179c6d@mail.gmail.com> 
-	<1266320987.6436.135.camel@rex>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 16 Feb 2010 07:16:28 -0700
-X-Google-Sender-Auth: 6cbfd2958ef8d159
-Message-ID: <b6ebd0a51002160616m462683b3nd2f4b17524395ddf@mail.gmail.com>
+	Tue, 16 Feb 2010 15:36:53 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 25434-03 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Feb 2010 15:36:49 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1GFajNN025528
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Feb 2010 15:36:46 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.173
-X-SA-Exim-Mail-From: kergoth@gmail.com
+In-Reply-To: <b6ebd0a51002160616m462683b3nd2f4b17524395ddf@mail.gmail.com>
+References: <1266316492.6436.127.camel@rex>
+	<ac9c93b11002160258m2ddee8absd0510adad4179c6d@mail.gmail.com>
+	<1266320987.6436.135.camel@rex>
+	<b6ebd0a51002160616m462683b3nd2f4b17524395ddf@mail.gmail.com>
+Date: Tue, 16 Feb 2010 15:36:44 +0000
+Message-ID: <1266334604.6436.159.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: RFC: Improve our default conf file setup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -51,43 +47,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Feb 2010 14:19:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 16 Feb 2010 15:39:38 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Tue, Feb 16, 2010 at 4:49 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
+On Tue, 2010-02-16 at 07:16 -0700, Chris Larson wrote:
+> On Tue, Feb 16, 2010 at 4:49 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> 
+> > On Tue, 2010-02-16 at 11:58 +0100, Frans Meulenbroeks wrote:
+> > > Sounds quite nice.
+> > > Didn't study the class code, but it would be nice if within layer.conf
+> > > I could use a relative path, which then is turned into an absolute
+> > > path when the layer.conf file is read
+> >
+> > This is what the LAYERDIR variable gives us.
+> >
+> > Having relative paths would lose all context outside the layer.conf
+> > file. We could hardcode a list of variables that needed to be processed
+> > and so on but LAYERDIR removes all that complexity whilst still letting
+> > you move things around.
+> >
+> > > That means layer.conf can become very standard wrt BBPATH etc. and you
+> > > can even move layers around.
+> >
+> > You should be able to do that with my proposal, the only file that would
+> > need changing is bblayers.conf, not the layers themselves.
+> 
+> Can you explain what the use case is for needing this much control?  I find
+> it unlikely that it would be problematic to simply add each layer as a full
+> path to a list of layers in a single file, and leave it at that (i.e.
+> bblayers.conf).  If site files aren't in the layer, they won't be used.  If
+> recipes aren't around, they won't be used.  It seems a bit silly if every
+> layer.conf ends up being a copy of every other layer.conf.  And this sort of
+> blind copying tends to lead to problems and cruft (just look at distros that
+> copy angstrom).
 
-> On Tue, 2010-02-16 at 11:58 +0100, Frans Meulenbroeks wrote:
-> > Sounds quite nice.
-> > Didn't study the class code, but it would be nice if within layer.conf
-> > I could use a relative path, which then is turned into an absolute
-> > path when the layer.conf file is read
->
-> This is what the LAYERDIR variable gives us.
->
-> Having relative paths would lose all context outside the layer.conf
-> file. We could hardcode a list of variables that needed to be processed
-> and so on but LAYERDIR removes all that complexity whilst still letting
-> you move things around.
->
-> > That means layer.conf can become very standard wrt BBPATH etc. and you
-> > can even move layers around.
->
-> You should be able to do that with my proposal, the only file that would
-> need changing is bblayers.conf, not the layers themselves.
->
+Several reasons:
 
-Can you explain what the use case is for needing this much control?  I find
-it unlikely that it would be problematic to simply add each layer as a full
-path to a list of layers in a single file, and leave it at that (i.e.
-bblayers.conf).  If site files aren't in the layer, they won't be used.  If
-recipes aren't around, they won't be used.  It seems a bit silly if every
-layer.conf ends up being a copy of every other layer.conf.  And this sort of
-blind copying tends to lead to problems and cruft (just look at distros that
-copy angstrom).
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+a) I like the idea of a given overlay shipping with a description in
+some form of what it contains. Its intuitive.
+b) I don't want to hardcode behaviour in bitbake (see c/d)
+c) Are recipes in a recipes or a packages directory?
+d) How deep are the paths to the .bb files?
+e) What priority are assigned to the layers?
+f) Should a given layer append or prepend to BBPATH? 
+
+It also means that if we add some kind of new functionality we have to
+update bitbake to add the appropriate variables, or add horrible
+anonymous methods to poke around BBLAYERS.
+
+When the alternative is a single .conf file describing a layer, I know
+which I prefer even if most might be two lines of boilerplate.
+
+I was also thinking of your recursive bitbake 'abomination' ;-). With
+this new functionality, its possible some code in one of the layers
+could check ahead and checkout other layers if it noticed they were
+missing. We'd need some additional code for that but its an idea in the
+back of my mind.
+
+Cheers,
+
+Richard
+
+
+
 
