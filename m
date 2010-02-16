@@ -1,24 +1,27 @@
 Received: from [148.204.65.238] (helo=localhost.localdomain)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso@localhost.localdomain>) id 1NhQGt-0007Hy-Rg
+	(envelope-from <aalonso@localhost.localdomain>) id 1NhQH3-0007I6-Hu
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Feb 2010 17:27:39 +0100
+	Tue, 16 Feb 2010 17:27:48 +0100
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by localhost.localdomain (8.14.3/8.14.3) with ESMTP id o1GGWWFo002477; 
-	Tue, 16 Feb 2010 10:32:32 -0600
+	by localhost.localdomain (8.14.3/8.14.3) with ESMTP id o1GGWjsj002485; 
+	Tue, 16 Feb 2010 10:32:45 -0600
 Received: (from aalonso@localhost)
-	by localhost.localdomain (8.14.3/8.14.3/Submit) id o1GGWV8l002475;
-	Tue, 16 Feb 2010 10:32:31 -0600
+	by localhost.localdomain (8.14.3/8.14.3/Submit) id o1GGWjWD002484;
+	Tue, 16 Feb 2010 10:32:45 -0600
 From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Feb 2010 10:32:07 -0600
-Message-Id: <1266337930-2440-1-git-send-email-aalonso00@gmail.com>
+Date: Tue, 16 Feb 2010 10:32:09 -0600
+Message-Id: <1266337930-2440-3-git-send-email-aalonso00@gmail.com>
 X-Mailer: git-send-email 1.6.6
+In-Reply-To: <1266337930-2440-2-git-send-email-aalonso00@gmail.com>
+References: <1266337930-2440-1-git-send-email-aalonso00@gmail.com>
+	<1266337930-2440-2-git-send-email-aalonso00@gmail.com>
 X-SA-Exim-Connect-IP: 148.204.65.238
 X-SA-Exim-Mail-From: aalonso@localhost.localdomain
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH 1/4] tune-ppc440.inc: add ppc440 to PACKAGE_EXTRA_ARCHS
+Subject: [PATCH 3/4] linux.inc: add device tree for xilinx ml507
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,23 +35,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Feb 2010 16:27:39 -0000
+X-List-Received-Date: Tue, 16 Feb 2010 16:27:49 -0000
 
 Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
 ---
- conf/machine/include/tune-ppc440.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes/linux/linux.inc |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/conf/machine/include/tune-ppc440.inc b/conf/machine/include/tune-ppc440.inc
-index feca186..0c41db4 100644
---- a/conf/machine/include/tune-ppc440.inc
-+++ b/conf/machine/include/tune-ppc440.inc
-@@ -1,4 +1,4 @@
- TARGET_CC_ARCH = "-mcpu=440"
- BASE_PACKAGE_ARCH = "ppc440"
- FEED_ARCH = "ppc440"
--PACKAGE_EXTRA_ARCHS += "ppc440e"
-+PACKAGE_EXTRA_ARCHS += "ppc440 ppc440e"
+diff --git a/recipes/linux/linux.inc b/recipes/linux/linux.inc
+index 7405c08..b562657 100644
+--- a/recipes/linux/linux.inc
++++ b/recipes/linux/linux.inc
+@@ -38,6 +38,7 @@ KERNEL_DEVICETREE_mpc8313e-rdb = "arch/${ARCH}/boot/dts/mpc8313erdb.dts"
+ KERNEL_DEVICETREE_mpc8315e-rdb = "arch/${ARCH}/boot/dts/mpc8315erdb.dts"
+ KERNEL_DEVICETREE_mpc8323e-rdb = "arch/${ARCH}/boot/dts/mpc832x_rdb.dts"
+ KERNEL_DEVICETREE_sequoia = "arch/${ARCH}/boot/dts/sequoia.dts"
++KERNEL_DEVICETREE_xilinx-ml507 = "arch/${ARCH}/boot/dts/virtex440-ml507.dts"
+ 
+ KERNEL_DEVICETREE_FLAGS = "-R 8 -S 0x3000"
+ 
 -- 
 1.6.6
 
