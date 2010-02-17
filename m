@@ -1,38 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NholJ-0001jP-Uh for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Feb 2010 19:36:41 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nhoih-0006tt-FH for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Feb 2010 19:33:55 +0100
-Received: from p5b3b189d.dip.t-dialin.net ([91.59.24.157])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Feb 2010 19:33:55 +0100
-Received: from no2spam by p5b3b189d.dip.t-dialin.net with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <stefan@datenfreihafen.org>) id 1NholX-0001lN-Ic
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Feb 2010 19:36:54 +0100
+Received: from p5b036531.dip.t-dialin.net ([91.3.101.49] helo=excalibur)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1Nhoiq-0007sZ-Nc by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Feb 2010 19:33:55 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 17 Feb 2010 19:34:14 +0100
+Received: from stefan by excalibur with local (Exim 4.71)
+	(envelope-from <stefan@excalibur.local>) id 1Nhoip-0005Ob-Ea
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Feb 2010 19:34:03 +0100
+Date: Wed, 17 Feb 2010 19:34:03 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-From: Rolf Leggewie <no2spam@nospam.arcornews.de>
-Date: Wed, 17 Feb 2010 19:33:23 +0100
-Message-ID: <hlhcpu$nn$1@ger.gmane.org>
-References: <ac9c93b11001300235y22a60e82qf35d712b8323807d@mail.gmail.com>	<hk12nm$sdo$1@ger.gmane.org>
-	<hlhc1p$t19$1@ger.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: p5b3b189d.dip.t-dialin.net
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-In-Reply-To: <hlhc1p$t19$1@ger.gmane.org>
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100217183403.GA18358@excalibur.local>
+References: <1266337930-2440-1-git-send-email-aalonso00@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1266337930-2440-1-git-send-email-aalonso00@gmail.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: {RFC] console-image.bb
+Subject: Re: [PATCH 1/4] tune-ppc440.inc: add ppc440 to PACKAGE_EXTRA_ARCHS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,27 +42,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Feb 2010 18:36:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 17 Feb 2010 18:36:54 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Koen Kooi wrote:
-> of all the ways to solve it, you just had to go out of your way to annoy
-> people.
+Hello.
 
-I thought that was your specialty.  Everybody agreed on this, except
-you, for IMHO very incomprehensible reasons.
+On Tue, 2010-02-16 at 10:32, Adrian Alonso wrote:
+> Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
 
-Now, people are going out of their way to please you little princess,
-address your silly concerns and you're still not satisfied.
+Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
 
-First, you complain about the image not having the angstrom- prefix
-anymore.  Now, when that's reinstated you complain again and revert a
-meaningful patch back to before its broken state.  Maybe it's time to
-check your mental state?
+I've compile tested all four patches here and they work fine. Before applying
+I would like to get an ACK from one of our PowerPC guys.
 
-I hope OE can soon find a way to finally end your dictatorship ways.  OE
-has been held hostage to you and Angstrom for far too long.
-
+regards
+Stefan Schmidt
 
 
