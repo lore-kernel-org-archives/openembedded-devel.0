@@ -1,34 +1,32 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NhoYt-0004wW-Ch for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Feb 2010 19:23:50 +0100
+	id 1NholJ-0001jP-Uh for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Feb 2010 19:36:41 +0100
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NhoWI-0006Id-Tz for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Feb 2010 19:21:06 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	id 1Nhoih-0006tt-FH for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Feb 2010 19:33:55 +0100
+Received: from p5b3b189d.dip.t-dialin.net ([91.59.24.157])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Feb 2010 19:21:06 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	Wed, 17 Feb 2010 19:33:55 +0100
+Received: from no2spam by p5b3b189d.dip.t-dialin.net with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Feb 2010 19:21:06 +0100
+	Wed, 17 Feb 2010 19:33:55 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 17 Feb 2010 19:20:43 +0100
-Message-ID: <hlhc1p$t19$1@ger.gmane.org>
-References: <ac9c93b11001300235y22a60e82qf35d712b8323807d@mail.gmail.com>
-	<hk12nm$sdo$1@ger.gmane.org>
+From: Rolf Leggewie <no2spam@nospam.arcornews.de>
+Date: Wed, 17 Feb 2010 19:33:23 +0100
+Message-ID: <hlhcpu$nn$1@ger.gmane.org>
+References: <ac9c93b11001300235y22a60e82qf35d712b8323807d@mail.gmail.com>	<hk12nm$sdo$1@ger.gmane.org>
+	<hlhc1p$t19$1@ger.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100212 Shredder/3.0.2pre
-In-Reply-To: <hk12nm$sdo$1@ger.gmane.org>
-X-Enigmail-Version: 1.0.1
+X-Gmane-NNTP-Posting-Host: p5b3b189d.dip.t-dialin.net
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+In-Reply-To: <hlhc1p$t19$1@ger.gmane.org>
 Sender: news <news@ger.gmane.org>
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -48,39 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Feb 2010 18:23:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 17 Feb 2010 18:36:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Koen Kooi wrote:
+> of all the ways to solve it, you just had to go out of your way to annoy
+> people.
 
-On 30-01-10 11:47, Rolf Leggewie wrote:
-> Frans Meulenbroeks wrote:
->> Wouldn't it be cleaner to rename ANGSTROM_EXTRA_INSTALL to e.g.
->> DISTRO_EXTRA_INSTALL ?
-> 
-> This has been discussed before, but not changed.  I think it made sense
-> back then and I think it makes sense now.
-> 
-> I believe there is even a better name than DISTRO_EXTRA_INSTALL to be
-> found for the variable.  Maybe IMAGE_EXTRA_INSTALL?
+I thought that was your specialty.  Everybody agreed on this, except
+you, for IMHO very incomprehensible reasons.
 
-of all the ways to solve it, you just had to go out of your way to annoy
-people.
+Now, people are going out of their way to please you little princess,
+address your silly concerns and you're still not satisfied.
 
-A simple IMAGE_EXTRA_INSTALL += ANGSTROM_EXTRA_INSTALL would have done
-the job, but no, lets create more work for people, break existing docs
-and especially ignore what the maintainer of the recipes said.
+First, you complain about the image not having the angstrom- prefix
+anymore.  Now, when that's reinstated you complain again and revert a
+meaningful patch back to before its broken state.  Maybe it's time to
+check your mental state?
 
-Way to go
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLfDN7MkyGM64RGpERAk0eAKCxLVowYlE4h9ls/kmdCcbj4uZesACfZxa0
-VPWpTNi7tN+GxEfF/BYBf5Q=
-=0Idf
------END PGP SIGNATURE-----
+I hope OE can soon find a way to finally end your dictatorship ways.  OE
+has been held hostage to you and Angstrom for far too long.
 
 
 
