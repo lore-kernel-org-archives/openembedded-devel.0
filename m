@@ -1,38 +1,43 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-pz0-f184.google.com ([209.85.222.184])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NhWvh-0001O5-U0
+	(envelope-from <kergoth@gmail.com>) id 1NhYHH-0007wL-1R
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Feb 2010 00:34:13 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NhWt7-0002AE-6D from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Feb 2010 15:31:29 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 16 Feb 2010 15:31:28 -0800
-Received: from 172.30.80.33 ([172.30.80.33]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Tue, 16 Feb 2010 23:30:57 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	16 Feb 2010 16:30:56 -0700
-From: Tom Rini <tom_rini@mentor.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ac9c93b11002160039j717d1611wbdd1d2fac220dd55@mail.gmail.com>
-References: <b6ebd0a51002151538o524cdf17s228535e93b28d4d4@mail.gmail.com>
+	Wed, 17 Feb 2010 02:00:34 +0100
+Received: by pzk14 with SMTP id 14so7687223pzk.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Feb 2010 16:57:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:from:date:x-google-sender-auth:message-id:subject:to
+	:content-type; bh=LWv85ZidpOcItuAEuctnboh1rWFnr0yr8KM/eevFcq8=;
+	b=AoBYIwICDmYrN/AaZkD4cvxcn9fLTXErjcyBB9Ie1oScYAlszM3gdRIQuW1tXOPcKG
+	k4XyfS18yLkxMmbgbcQ4n6T6blKsfZIdeOwsBFJhWZ94n3eANHpLXdeBThl0GaousZAH
+	XOdPJgkODCsLHOma99UBOLmWxwIKJ3S/3A+8M=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=QCwIg8Z5rDUgdu15AzMwvwTHGKvxo533Uf63QHu07AhTs2MxSxd7wfM+VnqEdS6eZ+
+	1HAWbxpzAIngrj7NYy9Xk4hCevlLzLDAcWNdbAmAMsUgWluDOE5YwKWDMG9M/qKUJdHu
+	DDX6j8G5NQlgPkRHGQN1worWltETH1AG23pjo=
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.142.249.29 with SMTP id w29mr4880380wfh.163.1266368271102; 
+	Tue, 16 Feb 2010 16:57:51 -0800 (PST)
+In-Reply-To: <1266363056.31865.68.camel@trini-m4400>
+References: <b6ebd0a51002151538o524cdf17s228535e93b28d4d4@mail.gmail.com> 
 	<hldk2b$5tt$2@ger.gmane.org>
-	<ac9c93b11002160039j717d1611wbdd1d2fac220dd55@mail.gmail.com>
-Organization: Mentor Graphics Corporation
-Date: Tue, 16 Feb 2010 16:30:56 -0700
-Message-ID: <1266363056.31865.68.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 16 Feb 2010 23:31:28.0459 (UTC)
-	FILETIME=[29AFD1B0:01CAAF60]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+	<ac9c93b11002160039j717d1611wbdd1d2fac220dd55@mail.gmail.com> 
+	<1266363056.31865.68.camel@trini-m4400>
+From: Chris Larson <clarson@kergoth.com>
+Date: Tue, 16 Feb 2010 17:57:31 -0700
+X-Google-Sender-Auth: e6aa94a2a6a89b13
+Message-ID: <b6ebd0a51002161657o788910ferd49f4106cde6a91e@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.222.184
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Cleanup / janitors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -47,60 +52,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Feb 2010 23:34:13 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 17 Feb 2010 01:00:34 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Tue, 2010-02-16 at 09:39 +0100, Frans Meulenbroeks wrote:
-> 2010/2/16 Koen Kooi <k.kooi@student.utwente.nl>:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
+On Tue, Feb 16, 2010 at 4:30 PM, Tom Rini <tom_rini@mentor.com> wrote:
+
+> On Tue, 2010-02-16 at 09:39 +0100, Frans Meulenbroeks wrote:
+> > 2010/2/16 Koen Kooi <k.kooi@student.utwente.nl>:
+> > > -----BEGIN PGP SIGNED MESSAGE-----
+> > > Hash: SHA1
+> > >
+> > > On 16-02-10 00:38, Chris Larson wrote:
+> > >> Greetings all,
+> > >>
+> > >> Per discussion in the TSC meeting this month, I'm sending out this
+> email as
+> > >> a probe.  Would anyone on the list benefit from a "janitors" type
+> project,
+> > >> to outline and document specific cleanup tasks and how they should be
+> done?
+> > >> There are many tasks that need doing which involve editing of large
+> amounts
+> > >> of files in relatively simple ways, and I suspect, but am not yet
+> certain,
+> > >> that there are a group of individuals who wish to contribute to the
+> project,
+> > >> but are new enough that they don't feel confident diving into anything
+> > >> invasive.  This sort of a task could be a starting point for that sort
+> of
+> > >> individual.  Thoughts?  Anyone out there in that camp currently that
+> would
+> > >> benefit from something like this?
+> > >
+> > > The first project that comes to mind is converting simple recipes (e.g.
+> > > not perl) to new style staging. It's a fairly simple job that has a
+> huge
+> > > impact.
 > >
-> > On 16-02-10 00:38, Chris Larson wrote:
-> >> Greetings all,
-> >>
-> >> Per discussion in the TSC meeting this month, I'm sending out this ema=
-il as
-> >> a probe.  Would anyone on the list benefit from a "janitors" type proj=
-ect,
-> >> to outline and document specific cleanup tasks and how they should be =
-done?
-> >> There are many tasks that need doing which involve editing of large am=
-ounts
-> >> of files in relatively simple ways, and I suspect, but am not yet cert=
-ain,
-> >> that there are a group of individuals who wish to contribute to the pr=
-oject,
-> >> but are new enough that they don't feel confident diving into anything
-> >> invasive.  This sort of a task could be a starting point for that sort=
- of
-> >> individual.  Thoughts?  Anyone out there in that camp currently that w=
-ould
-> >> benefit from something like this?
-> >
-> > The first project that comes to mind is converting simple recipes (e.g.
-> > not perl) to new style staging. It's a fairly simple job that has a hug=
-e
-> > impact.
->=20
-> Problem is to do that reliable.
+> > Problem is to do that reliable.
+>
+> Isn't that a document it right, for Janitors problem?  ie:
+> 1. Build recipe foo, with packaged-staging, your resuling pstage file
+> is ..../foo_VERSION...ipk.  Copy this somewhere safe.
+> 2. Modify recipe foo to use new style
+> 3. -c clean foo, build again.
+> 4. Examine contents of old and new pstaging file.  If the contents are
+> the same (and say, diff rather than just checking names, so that any
+> munging is caught), good to go!  If not ...
+>
+> The idea behind janitors is that there's tasks that can be explained and
+> people can pick up and do, but there's some manual intervention and
+> checking.  So, if someone fleshed out the above a little more, that
+> should be enough for a legacy staging task.
 
-Isn't that a document it right, for Janitors problem?  ie:
-1. Build recipe foo, with packaged-staging, your resuling pstage file
-is ..../foo_VERSION...ipk.  Copy this somewhere safe.
-2. Modify recipe foo to use new style
-3. -c clean foo, build again.
-4. Examine contents of old and new pstaging file.  If the contents are
-the same (and say, diff rather than just checking names, so that any
-munging is caught), good to go!  If not ...
 
-The idea behind janitors is that there's tasks that can be explained and
-people can pick up and do, but there's some manual intervention and
-checking.  So, if someone fleshed out the above a little more, that
-should be enough for a legacy staging task.
-
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
-
+Exactly, yes.  The expectation is these are things that may require a
+certain amount of manual work.  If they didn't, we could write a sed script
+and call it done.  The thread seems to have gotten quickly sidetracked into
+the particular details of this one task.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
