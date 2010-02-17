@@ -1,41 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f210.google.com ([209.85.220.210])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NhpNF-0001y1-BX for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Feb 2010 20:15:52 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NhpKe-0002mK-Mo for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Feb 2010 20:13:08 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Feb 2010 20:13:08 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <aalonso00@gmail.com>) id 1NhpaT-0007Pw-41
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Feb 2010 20:29:33 +0100
+Received: by fxm2 with SMTP id 2so1613200fxm.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Feb 2010 20:13:08 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 17 Feb 2010 11:26:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=HI80An7ZB2zljJQmRJMJN86fsD5Xli+5nKv44bfwqBU=;
+	b=B+7rdZlSeYDDpRflEe7X/3ftsSGFxdAb4vLmLG6Q/eugoaUckgI8Qf7ahn/Hz35auZ
+	kC73BmfaMINAJZOJUiGtcRSu9Jm+3ZvP77zzJCg5lxiQ7W9QNeCe6jJtIBhSefoLMBbP
+	Kz+67ERkei9Olxyzhkrdy1uhCbb/uw0fHhQ7Q=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=adu59Z0dg8SaSh3iTBBq1fu2BHGagdzRW2W3ugmsCRn/JqXtyNqNONrViDqpvAvm8R
+	hTqEBTlfYpg3HC9oNDzDukZFHYKabsifD3d4r+n2lWxjrF9sYlptjMT4sg0vyyXa2XUj
+	Vq3dnKxX6z4qw1tSfraGpNSlT+e6J/e3w/PBM=
+MIME-Version: 1.0
+Received: by 10.223.73.82 with SMTP id p18mr10320546faj.34.1266434809379; Wed, 
+	17 Feb 2010 11:26:49 -0800 (PST)
+In-Reply-To: <20100217183403.GA18358@excalibur.local>
+References: <1266337930-2440-1-git-send-email-aalonso00@gmail.com>
+	<20100217183403.GA18358@excalibur.local>
+Date: Wed, 17 Feb 2010 13:26:49 -0600
+Message-ID: <d1ded4381002171126l3f4866f7sc45cc7a94ae43bd0@mail.gmail.com>
+From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 17 Feb 2010 20:12:12 +0100
-Message-ID: <hlhf2a$aei$1@ger.gmane.org>
-References: <ac9c93b11001300235y22a60e82qf35d712b8323807d@mail.gmail.com>	<hk12nm$sdo$1@ger.gmane.org>
-	<hlhc1p$t19$1@ger.gmane.org>
-	<ac9c93b11002171058o7f48b417yee87d06da09c7577@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100212 Shredder/3.0.2pre
-In-Reply-To: <ac9c93b11002171058o7f48b417yee87d06da09c7577@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.220.210
+X-SA-Exim-Mail-From: aalonso00@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: {RFC] console-image.bb
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH 1/4] tune-ppc440.inc: add ppc440 to PACKAGE_EXTRA_ARCHS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,85 +48,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Feb 2010 19:15:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 17 Feb 2010 19:29:33 -0000
+X-Groupsio-MsgNum: 16875
+Content-Type: multipart/mixed; boundary=0015174c0f3ef1be1e047fd0d4c4
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--0015174c0f3ef1be1e047fd0d4c4
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 17-02-10 19:58, Frans Meulenbroeks wrote:
-> 2010/2/17 Koen Kooi <k.kooi@student.utwente.nl>:
-> On 30-01-10 11:47, Rolf Leggewie wrote:
->>>> Frans Meulenbroeks wrote:
->>>>> Wouldn't it be cleaner to rename ANGSTROM_EXTRA_INSTALL to e.g.
->>>>> DISTRO_EXTRA_INSTALL ?
->>>>
->>>> This has been discussed before, but not changed.  I think it made sense
->>>> back then and I think it makes sense now.
->>>>
->>>> I believe there is even a better name than DISTRO_EXTRA_INSTALL to be
->>>> found for the variable.  Maybe IMAGE_EXTRA_INSTALL?
-> 
-> of all the ways to solve it, you just had to go out of your way to annoy
-> people.
-> 
->> I BEG YOUR PARDON
-> 
->> I did not make the change, actually I have not even seen it. I think
->> you owe me an apology for this.
->> I also would like to get the opinion of the TSC on the above accusation.
+Hi,
 
-Please pay attention, I responded to rolfs mail, not yours
+I just found an error on one recipe xilinx-ml507.conf is in the line where
+it defines the u-boot
+target machine, running `bitbake console-image` completes without showing
+any error, instead
+it should warn or return an error since there's no valid configuration
+target.
 
-> 
-> A simple IMAGE_EXTRA_INSTALL += ANGSTROM_EXTRA_INSTALL would have done
-> the job, but no, lets create more work for people, break existing docs
-> and especially ignore what the maintainer of the recipes said.
-> 
-> Way to go
-> 
->> FYI: I popped a question three weeks ago.
->> Today Rolf asked me about the status in #oe.
->> As you can see above 4 people (Rolf, Mickey, Phil and me were in
->> favour of the proposal. In irc mckoan also backed the proposal.
->> There was one person opposed to it: you.
+Attached is the proper patch, also I send it to dev mail list.
 
-And funnily enough I'm the maintainer, so I get the final say.
 
->> Rolf asked whether he could make the change. As I was about to leave I
->> agreed that he made the change.
+On Wed, Feb 17, 2010 at 12:34 PM, Stefan Schmidt
+<stefan@datenfreihafen.org>wrote:
 
-IRC isn't worth anything when it comes to decision making.
-
->> If you want it to be an angstrom recipe, please name it as such (or,
->> even better: start your own angstrom tree or branch).
-
-There are multiple things wrong with the commit:
-
-1) it silently changes the outcome of 'bitbake console-image' if you
-have ANGSTROM_EXTRA_INSTALL set
-
-2) It doesn't mention in the commit message that 1) happens
-
-3) It invalidates docs without any hint
-
-4) It wasn't discussed on the mailinglist, but on a medium where I'm not
-present
-
-5) the maintainer of the recipe wasn't informed of the change
-
-With this change it seems angstrom developers have to update docs, deal
-with user complaints, update sample config files, etc, etc, just because
-Rolf jumped the gun. I find that unacceptable.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD4DBQFLfD+MMkyGM64RGpERAsHcAJ0TvgFEzIULXdGV3vTl1MdduSDDugCY3VgD
-Ut2LwB0i1AH9GMz7YedxjA==
-=F5i2
------END PGP SIGNATURE-----
+> Hello.
+>
+> On Tue, 2010-02-16 at 10:32, Adrian Alonso wrote:
+> > Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
+>
+> Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
+>
+> I've compile tested all four patches here and they work fine. Before
+> applying
+> I would like to get an ACK from one of our PowerPC guys.
+>
+> regards
+> Stefan Schmidt
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
 
+-- 
+Saludos
+Adrian Alonso
+http://aalonso.wordpress.com
+
+--0015174c0f3ef1be1e047fd0d4c4
+Content-Type: text/x-patch; charset=US-ASCII; 
+	name="0001-xilinx-ml507.conf-fix-u-boot-config-file.patch"
+Content-Disposition: attachment; 
+	filename="0001-xilinx-ml507.conf-fix-u-boot-config-file.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_g5siqoie0
+
+RnJvbSAyYjQ3MDcyNWNkYTAzM2ExYjdlODE0YjU3YjI2MjAxNWI5YjcxZTRjIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBBZHJpYW4gQWxvbnNvIDxhYWxvbnNvMDBAZ21haWwuY29tPgpE
+YXRlOiBUdWUsIDE2IEZlYiAyMDEwIDIyOjM4OjM5IC0wNjAwClN1YmplY3Q6IFtQQVRDSF0geGls
+aW54LW1sNTA3LmNvbmY6IGZpeCB1LWJvb3QgY29uZmlnIGZpbGUKClNpZ25lZC1vZmYtYnk6IEFk
+cmlhbiBBbG9uc28gPGFhbG9uc28wMEBnbWFpbC5jb20+Ci0tLQogY29uZi9tYWNoaW5lL3hpbGlu
+eC1tbDUwNy5jb25mIHwgICAgMiArLQogMSBmaWxlcyBjaGFuZ2VkLCAxIGluc2VydGlvbnMoKyks
+IDEgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvY29uZi9tYWNoaW5lL3hpbGlueC1tbDUwNy5j
+b25mIGIvY29uZi9tYWNoaW5lL3hpbGlueC1tbDUwNy5jb25mCmluZGV4IDYxOTQ0NjkuLmIyNDQ4
+ZTMgMTAwNjQ0Ci0tLSBhL2NvbmYvbWFjaGluZS94aWxpbngtbWw1MDcuY29uZgorKysgYi9jb25m
+L21hY2hpbmUveGlsaW54LW1sNTA3LmNvbmYKQEAgLTE5LDcgKzE5LDcgQEAgTUFDSElORV9GRUFU
+VVJFUyA9ICJrZXJuZWwyNiBleHQyIHVzYmhvc3QgdWRldiIKIE1BQ0hJTkVfRVhUUkFfUkVDT01N
+RU5EUyA9ICJrZXJuZWwtbW9kdWxlcyIKIAogVUJPT1RfQVJDSCA9ICJwcGMiCi1VQk9PVF9NQUNI
+SU5FID0gIm1sNTA3X2RlZmNvbmZpZyIKK1VCT09UX01BQ0hJTkUgPSAibWw1MDdfY29uZmlnIgog
+CiAjIFhpbGlueCBFREsgb3ZlcnJpZGUgaGFyZHdhcmUgIGRlZmluaXRpb25zIGZvciB4aWxpbngt
+YnNwCiAjIEluY2x1ZGUgaW4geW91ciBsb2NhbC5jb25mCi0tIAoxLjYuNgoK
+
+--0015174c0f3ef1be1e047fd0d4c4--
