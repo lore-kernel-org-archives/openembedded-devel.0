@@ -1,41 +1,44 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1Ni6lm-0007qW-6c
+Received: from mail-px0-f175.google.com ([209.85.216.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <kergoth@gmail.com>) id 1Ni93a-0007Be-Ff
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Feb 2010 14:50:21 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1IDlbAR016478
+	Thu, 18 Feb 2010 17:16:53 +0100
+Received: by pxi5 with SMTP id 5so5423800pxi.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2010 13:47:37 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 16364-02 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2010 13:47:29 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1IDlMB6016472
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2010 13:47:24 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Thu, 18 Feb 2010 08:14:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:from:date:x-google-sender-auth:message-id:subject:to
+	:content-type; bh=RvLyTMn4Bt9mOSwUx1WrZDadtmtbOpv/Wz0Hn7b0fV4=;
+	b=xhkCzKvYed4J+ERivAC3U9WA48eD/1wJnvFpfk6LibfdaHGJ81SvurL2JXpx7Yt/Jl
+	ZGahr0wjnPp2mF7qtX31llkuWuFKgtb52L+VIVQt46ynZ19UuwqqtSnhrRQUjzmabPH+
+	XQoGarIHKm9tioft960d0ulC3w2irkUr5gmh4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=ZHv24nuIMxiXUl1f0w+YKRimSCObhkSIH4hctq61O0n3ElP5C4ZJw+CBtHYMvIJOgm
+	ULLeio9whrCbqx1PoXuDqReJq+9QRxOzGdu8MfDCU43FWDwYXAI5qG6S50bic+jFCwDY
+	ylXpe0ac9ManWkblr8MPLTnlWMs5jYB0t/aAQ=
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.143.25.1 with SMTP id c1mr6250595wfj.17.1266509649142; Thu, 18 
+	Feb 2010 08:14:09 -0800 (PST)
+In-Reply-To: <201002181009.07359.marcin@juszkiewicz.com.pl>
+References: <1266316492.6436.127.camel@rex>
+	<b6ebd0a51002160616m462683b3nd2f4b17524395ddf@mail.gmail.com> 
+	<1266334604.6436.159.camel@rex>
+	<201002181009.07359.marcin@juszkiewicz.com.pl>
+From: Chris Larson <clarson@kergoth.com>
+Date: Thu, 18 Feb 2010 09:13:49 -0700
+X-Google-Sender-Auth: 456380112ec88e00
+Message-ID: <b6ebd0a51002180813q171a3d41kef83d708f4ba6eea@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hljcc1$h8g$1@ger.gmane.org>
-References: <ac9c93b11001300235y22a60e82qf35d712b8323807d@mail.gmail.com>
-	<hk12nm$sdo$1@ger.gmane.org>	<hlhc1p$t19$1@ger.gmane.org>
-	<ac9c93b11002171058o7f48b417yee87d06da09c7577@mail.gmail.com>
-	<hlhf2a$aei$1@ger.gmane.org>
-	<ac9c93b11002180118m1512bc71sa6eb91624e83263e@mail.gmail.com>
-	<hlj21d$fdf$1@ger.gmane.org>  <hljcc1$h8g$1@ger.gmane.org>
-Date: Thu, 18 Feb 2010 13:47:20 +0000
-Message-ID: <1266500840.6436.925.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: {RFC] console-image.bb
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: RFC: Improve our default conf file setup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,49 +52,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Feb 2010 13:50:23 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 18 Feb 2010 16:16:53 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2010-02-18 at 13:38 +0100, Rolf Leggewie wrote:
-> Koen Kooi wrote:
-> > It hasn't suddenly appeared, and furthermore console-image is widely
-> > used enough to label it 'core'
-> 
-> nonsense, another of your ad-hoc rules
-> 
-> BTW, why have you not replied to Mickey? What he quotes apparently was
-> made an official rule (although the doc team was never asked to include
-> it in the wiki AFAICT).
-> 
-> It's always the same pattern with you.  At least you're consistent in
-> your inconsistency.
-> 
-> > And non-angstrom people created angstrom-named new recipes without any
-> > approval from angstrom developers is just plain rude.
-> 
-> you're a nut case, plain and simple.
+On Thu, Feb 18, 2010 at 2:09 AM, Marcin Juszkiewicz <
+marcin@juszkiewicz.com.pl> wrote:
 
-Do you think this is really helping your case here?
+> Dnia wtorek, 16 lutego 2010 o 16:36:44 Richard Purdie napisa=C5=82(a):
+>
+>
+> > c) Are recipes in a recipes or a packages directory?
+> > d) How deep are the paths to the .bb files?
+>
+> BBFILES +=3D "layer-top-dir" and BitBake will traverse subdirs and collec=
+t
+> all
+> recipes from there. Never mind are they in recipes/ packages/ stuff/ or
+> other
+> dir. It is working for quite long time now.
+>
 
-I hope we can agree that no, personal insults are not going to help.
-
-I don't care who started it, I don't care who said what first and this
-is not a kindergarten, even if some people want to act like it is.
-
-We have a problem, that much is clear. The TSC and the e.V. itself are
-looking at it. Rightly or wrongly we have people in different timezones
-and this is going to take time.
-
-I'm going to ask that those groups be given the time and space to do
-their jobs.
-
-Until they've done that can everyone please try and calm down before
-this blows out of all proportion.
-
-Cheers,
-
-Richard
+Yeah, exactly.  And of course, you can utilize BBMASK to exclude obsolete,
+etc.
 
 
+> e) What priority are assigned to the layers?
+
+ Priorities looks easy when you look at numbers. But problem arrives when
+> you
+> want layer3 to have higher priority then layer2 and they are not connecte=
+d.
+>
+> > f) Should a given layer append or prepend to BBPATH?
+>
+> Those two are important. I remember situation with BugLabs r1.4 overlays
+> when
+> I had to recreate BBPATH to get proper order of overlays.
+>
+
+With COLLECTIONS (and BBLAYERS could work similarly), all the overlay
+priorities and bbpath ordering are automatically determined based on the
+order of entries in the variable.  Documented as highest-to-lowest.
+
+Note that I'm not necessarily arguing against the use of a per-layer
+configuration file, as this seems like it would be quite useful, but I
+question the need for the boilerplate.
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
