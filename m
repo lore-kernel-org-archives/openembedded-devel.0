@@ -1,34 +1,30 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from smtp-out01.alice.it ([85.33.2.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1NiCVN-00017N-0j
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Feb 2010 20:57:48 +0100
-Received: from p5b0362c6.dip.t-dialin.net ([91.3.98.198] helo=excalibur)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1NiCSl-0001uG-JI by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2010 20:55:06 +0100
-Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>) id 1NiCSk-0002jr-K8
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Feb 2010 20:55:02 +0100
-Date: Thu, 18 Feb 2010 20:55:02 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	(envelope-from <GNUtoo@no-log.org>) id 1NiDJo-0001Mb-Hv
+	for openembedded-devel@openembedded.org; Thu, 18 Feb 2010 21:49:55 +0100
+Received: from FBCMMO03.fbc.local ([192.168.68.197]) by smtp-out01.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 18 Feb 2010 21:46:07 +0100
+Received: from FBCMCL01B09.fbc.local ([192.168.171.26]) by FBCMMO03.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 18 Feb 2010 21:46:07 +0100
+Received: from localhost.localdomain ([80.117.36.203]) by
+	FBCMCL01B09.fbc.local with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 18 Feb 2010 21:46:06 +0100
+From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100218195502.GA6823@excalibur.local>
-References: <1266435248-17054-1-git-send-email-aalonso00@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1266435248-17054-1-git-send-email-aalonso00@gmail.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+Date: Thu, 18 Feb 2010 21:45:45 +0100
+Message-Id: <1266525946-8354-1-git-send-email-GNUtoo@no-log.org>
+X-Mailer: git-send-email 1.6.4.4
+In-Reply-To: <E1Ngbii-0008Ch-On@melo.openembedded.org>
+References: <E1Ngbii-0008Ch-On@melo.openembedded.org>
+X-OriginalArrivalTime: 18 Feb 2010 20:46:06.0404 (UTC)
+	FILETIME=[6481E040:01CAB0DB]
+X-SA-Exim-Connect-IP: 85.33.2.12
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] xilinx-ml507.conf: fix u-boot config file
+Subject: Re: [oe-commits] Koen Kooi : gnome-doc-utils: skip generation of docs to avoid weird python error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,25 +38,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Feb 2010 19:57:48 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 18 Feb 2010 20:49:55 -0000
 
-Hello.
 
-On Wed, 2010-02-17 at 13:34, Adrian Alonso wrote:
-> Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
+Hi,
+Was your issue related to python not finding libxml2.py?
+If so does this patch fixes better your issue?
+I had it in queue and didn't push it yet because I wasn't exactly
+ shure on why it fixed it(see commit message for better explanations).
 
-Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
+Denis.
 
-Applied on top of the oether and compile tested. (BTW, is this machine something
-like a successor of the ML310? Eventually I did some work on this in a lab at
-university to learn about software hardware co-design. :))
 
-I'll wait 2-3 days more for feedback that the PowerPC guys may have and push
-them all afterwards if no problems arise.
-
-regards
-Stefan Schmidt
 
 
