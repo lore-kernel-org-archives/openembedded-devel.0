@@ -1,29 +1,40 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Ni2Qk-0007Hg-HA
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Feb 2010 10:12:21 +0100
-Received: (qmail 25983 invoked by uid 813007); 18 Feb 2010 09:09:40 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 18 Feb 2010 09:09:40 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ni2R6-0007I3-8Z for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Feb 2010 10:12:43 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ni2OX-0007dO-1o for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Feb 2010 10:10:01 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Feb 2010 10:10:01 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Feb 2010 10:10:01 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Feb 2010 10:09:06 +0100
-User-Agent: KMail/1.12.4 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.3.4; x86_64; ;
-	)
-References: <1266316492.6436.127.camel@rex>
-	<b6ebd0a51002160616m462683b3nd2f4b17524395ddf@mail.gmail.com>
-	<1266334604.6436.159.camel@rex>
-In-Reply-To: <1266334604.6436.159.camel@rex>
-MIME-Version: 1.0
-Message-Id: <201002181009.07359.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 18 Feb 2010 10:09:40 +0100
+Message-ID: <hlj04i$926$1@ger.gmane.org>
+References: <E1Nhfko-0005KL-8Z@melo.openembedded.org>	<1266437931.5691.30.camel@trini-m4400>
+	<hlhmn0$5c2$1@ger.gmane.org> <1266443018.5691.42.camel@trini-m4400>
+Mime-Version: 1.0
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100212 Shredder/3.0.2pre
+In-Reply-To: <1266443018.5691.42.camel@trini-m4400>
+X-Enigmail-Version: 1.0.1
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: RFC: Improve our default conf file setup
+Subject: Re: [oe-commits] Koen Kooi : opkg-native: bump to r522 to get a fix to remove duplicate messages from do_rootfs logs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,41 +48,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Feb 2010 09:12:22 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 18 Feb 2010 09:12:43 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Dnia wtorek, 16 lutego 2010 o 16:36:44 Richard Purdie napisa=C5=82(a):
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
+On 17-02-10 22:43, Tom Rini wrote:
+> On Wed, 2010-02-17 at 22:22 +0100, Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 17-02-10 21:18, Tom Rini wrote:
+>>> On Wed, 2010-02-17 at 08:59 +0000, git version control wrote:
+>>>> Module: openembedded.git
+>>>> Branch: org.openembedded.dev
+>>>> Commit: 74501117c261f743c76ae3c2988cbcfdc141cf3a
+>>>> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=74501117c261f743c76ae3c2988cbcfdc141cf3a
+>>>>
+>>>> Author: Koen Kooi <koen@openembedded.org>
+>>>> Date:   Tue Feb 16 13:08:53 2010 +0100
+>>>>
+>>>> opkg-native: bump to r522 to get a fix to remove duplicate messages from do_rootfs logs
+>>>
+>>> I'd like to RFC that we do something like:
+>>> OPKGREV ?= "522"
+>>> SRCREV_pn-opkg ?= "${OPKGREV}"
+>>> SRCREV_pn-opkg-native ?= "${OPKGREV}"
+>>> SRCREV_pn-opkg-sdk ?= "${OPKGREV}"
+>>>
+>>> And if -nogpg or what have you is broken, it either gets fixed or the
+>>> distribution takes advantage of that ?=. 
+>>
+>> I haven't been able to properly test a target opkg yet, so no bump for
+>> that. Unless people would like broken opkg binaries on their target ;)
+> 
+> Seriously tho, this isn't the first or fifth time the revs have gotten
+> wildly out of sync.  I'm suggesting that we want to keep them together,
+> intentionally.  We don't say we have different versions of gcc or bison
+> between native and target.  This is possibly even more important to make
+> sure all of the operations are right, all around.
 
-> c) Are recipes in a recipes or a packages directory?
-> d) How deep are the paths to the .bb files?
+Testing various things on target (upgrading >500 packages on one,
+installing >1k packages on another) seems to show no (new) errors. I'll
+do some more testing and bump the rev if things look OK.
 
-BBFILES +=3D "layer-top-dir" and BitBake will traverse subdirs and collect =
-all=20
-recipes from there. Never mind are they in recipes/ packages/ stuff/ or oth=
-er=20
-dir. It is working for quite long time now.
+regards,
 
-> e) What priority are assigned to the layers?
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Priorities looks easy when you look at numbers. But problem arrives when yo=
-u=20
-want layer3 to have higher priority then layer2 and they are not connected.
-
-> f) Should a given layer append or prepend to BBPATH?=20
-
-Those two are important. I remember situation with BugLabs r1.4 overlays wh=
-en=20
-I had to recreate BBPATH to get proper order of overlays.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+iD8DBQFLfQPTMkyGM64RGpERAvu/AJ9S6DSMrLKrO4BNlRhU4/n4gCGcTQCfRLOw
+P88zmIMjuH0spzxXj3meKGA=
+=gnRq
+-----END PGP SIGNATURE-----
 
 
 
