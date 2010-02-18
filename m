@@ -1,40 +1,41 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-yx0-f171.google.com ([209.85.210.171])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ni2R6-0007I3-8Z for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Feb 2010 10:12:43 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ni2OX-0007dO-1o for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Feb 2010 10:10:01 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2010 10:10:01 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ni2Z1-00067n-8p
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Feb 2010 10:20:54 +0100
+Received: by yxe1 with SMTP id 1so539995yxe.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2010 10:10:01 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 18 Feb 2010 01:18:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=tZKCWo5UBhtMxT3PISIkXBaHrqEosvkJU6oA27BwCvA=;
+	b=j6enC3zVjvDXI1nUwprs1vMexdhFd24/GoU8b2Yxtn4eegKm6I+qwzpuwSMMHncrhD
+	iVw5HvHhbo44biUgjJCQllcQDuAT/OeRI/RxapaCIDZcjuUjtchL5+SF2TA/fa+IB9tQ
+	mGjzZ2+wr5D8cZti0MK/R4YZPGrwjHhZuVZ6w=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=J/50qylRFE/os7E4+gUS1YeAKx5QRp7ia0zr6d/cXZGuwAUypvPrJrkeCbo0vrRm6K
+	wsTJnDpPcm//bjM65lQ9EAMHW3f71UoWnSp9jmqxXkCk/csQ8uetZ89UnZpoVEVoeTlC
+	7GAGBAsrISizDo7m+e3+N6TQIimcbuFkHc0RU=
+MIME-Version: 1.0
+Received: by 10.100.27.37 with SMTP id a37mr5250296ana.163.1266484690481; Thu, 
+	18 Feb 2010 01:18:10 -0800 (PST)
+In-Reply-To: <hlhf2a$aei$1@ger.gmane.org>
+References: <ac9c93b11001300235y22a60e82qf35d712b8323807d@mail.gmail.com>
+	<hk12nm$sdo$1@ger.gmane.org> <hlhc1p$t19$1@ger.gmane.org>
+	<ac9c93b11002171058o7f48b417yee87d06da09c7577@mail.gmail.com>
+	<hlhf2a$aei$1@ger.gmane.org>
+Date: Thu, 18 Feb 2010 10:18:10 +0100
+Message-ID: <ac9c93b11002180118m1512bc71sa6eb91624e83263e@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 18 Feb 2010 10:09:40 +0100
-Message-ID: <hlj04i$926$1@ger.gmane.org>
-References: <E1Nhfko-0005KL-8Z@melo.openembedded.org>	<1266437931.5691.30.camel@trini-m4400>
-	<hlhmn0$5c2$1@ger.gmane.org> <1266443018.5691.42.camel@trini-m4400>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100212 Shredder/3.0.2pre
-In-Reply-To: <1266443018.5691.42.camel@trini-m4400>
-X-Enigmail-Version: 1.0.1
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.210.171
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [oe-commits] Koen Kooi : opkg-native: bump to r522 to get a fix to remove duplicate messages from do_rootfs logs
+Subject: Re: {RFC] console-image.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,62 +49,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Feb 2010 09:12:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 18 Feb 2010 09:20:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+2010/2/17 Koen Kooi <k.kooi@student.utwente.nl>:
 
-On 17-02-10 22:43, Tom Rini wrote:
-> On Wed, 2010-02-17 at 22:22 +0100, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 17-02-10 21:18, Tom Rini wrote:
->>> On Wed, 2010-02-17 at 08:59 +0000, git version control wrote:
->>>> Module: openembedded.git
->>>> Branch: org.openembedded.dev
->>>> Commit: 74501117c261f743c76ae3c2988cbcfdc141cf3a
->>>> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=74501117c261f743c76ae3c2988cbcfdc141cf3a
->>>>
->>>> Author: Koen Kooi <koen@openembedded.org>
->>>> Date:   Tue Feb 16 13:08:53 2010 +0100
->>>>
->>>> opkg-native: bump to r522 to get a fix to remove duplicate messages from do_rootfs logs
->>>
->>> I'd like to RFC that we do something like:
->>> OPKGREV ?= "522"
->>> SRCREV_pn-opkg ?= "${OPKGREV}"
->>> SRCREV_pn-opkg-native ?= "${OPKGREV}"
->>> SRCREV_pn-opkg-sdk ?= "${OPKGREV}"
->>>
->>> And if -nogpg or what have you is broken, it either gets fixed or the
->>> distribution takes advantage of that ?=. 
->>
->> I haven't been able to properly test a target opkg yet, so no bump for
->> that. Unless people would like broken opkg binaries on their target ;)
-> 
-> Seriously tho, this isn't the first or fifth time the revs have gotten
-> wildly out of sync.  I'm suggesting that we want to keep them together,
-> intentionally.  We don't say we have different versions of gcc or bison
-> between native and target.  This is possibly even more important to make
-> sure all of the operations are right, all around.
+>>> FYI: I popped a question three weeks ago.
+>>> Today Rolf asked me about the status in #oe.
+>>> As you can see above 4 people (Rolf, Mickey, Phil and me were in
+>>> favour of the proposal. In irc mckoan also backed the proposal.
+>>> There was one person opposed to it: you.
+>
+> And funnily enough I'm the maintainer, so I get the final say.
 
-Testing various things on target (upgrading >500 packages on one,
-installing >1k packages on another) seems to show no (new) errors. I'll
-do some more testing and bump the rev if things look OK.
+Still wondering what makes you the maintainer.
 
-regards,
+git log does not mention any changes for this file by you (apart from
+yesterdays revert):
+See http://cgit.openembedded.org/cgit.cgi/openembedded/log/recipes/images/console-base-image.bb
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Btw in the commit message you write
+"If you're touching a recipe at least make sure the creator/maintainer
+agrees with your changes."
 
-iD8DBQFLfQPTMkyGM64RGpERAvu/AJ9S6DSMrLKrO4BNlRhU4/n4gCGcTQCfRLOw
-P88zmIMjuH0spzxXj3meKGA=
-=gnRq
------END PGP SIGNATURE-----
+How come this "rule" suddenly appears. I have never heard about this
+rule, and frankly speaking I have not seen this kind of respect from
+you when changing other peoples' recipes.
 
+Frans.
 
 
