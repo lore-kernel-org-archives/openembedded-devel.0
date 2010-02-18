@@ -1,40 +1,37 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1Ni9kV-0000vp-F5
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Feb 2010 18:01:14 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1IGwVXO019451
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2010 16:58:31 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 18936-09 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2010 16:58:26 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1IGwPvm019445
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2010 16:58:25 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NiA0Y-00040E-Q2 for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Feb 2010 18:17:49 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ni9xx-0000nS-Mo for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Feb 2010 18:15:05 +0100
+Received: from 66.55.57.157 ([66.55.57.157])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Feb 2010 18:15:05 +0100
+Received: from ben by 66.55.57.157 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Feb 2010 18:15:05 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <b6ebd0a51002180813q171a3d41kef83d708f4ba6eea@mail.gmail.com>
-References: <1266316492.6436.127.camel@rex>
-	<b6ebd0a51002160616m462683b3nd2f4b17524395ddf@mail.gmail.com>
-	<1266334604.6436.159.camel@rex>
-	<201002181009.07359.marcin@juszkiewicz.com.pl>
-	<b6ebd0a51002180813q171a3d41kef83d708f4ba6eea@mail.gmail.com>
-Date: Thu, 18 Feb 2010 16:58:23 +0000
-Message-ID: <1266512303.6436.1199.camel@rex>
+From: Ben Udall <ben@ontargetenterprises.com>
+Date: Thu, 18 Feb 2010 17:10:52 +0000 (UTC)
+Message-ID: <loom.20100218T175943-125@post.gmane.org>
+References: <4B73FC24.9060807@theforce.com.au> <hl12qo$meo$1@ger.gmane.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-Complaints-To: usenet@ger.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 66.55.57.157 (Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.9.1.7) Gecko/20091221 Firefox/3.5.7)
+Sender: news <news@ger.gmane.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: RFC: Improve our default conf file setup
+Subject: Re: omap3-desktop-image fails baking 'news'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,32 +45,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Feb 2010 17:01:14 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 18 Feb 2010 17:17:50 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2010-02-18 at 09:13 -0700, Chris Larson wrote:
-> With COLLECTIONS (and BBLAYERS could work similarly), all the overlay
-> priorities and bbpath ordering are automatically determined based on the
-> order of entries in the variable.  Documented as highest-to-lowest.
+Koen Kooi <k.kooi <at> student.utwente.nl> writes:
+
 > 
-> Note that I'm not necessarily arguing against the use of a per-layer
-> configuration file, as this seems like it would be quite useful, but I
-> question the need for the boilerplate.
+> 
+> On 11-02-10 13:46, Grahame Jordan wrote:
+> > Hi,
+> > 
+> > After git pull I could not build e17/news on Ubuntu 9.04
+> > Found this on:
+> > http://old.nabble.com/omap3-desktop-image-fails-baking-'news'-td27323561.html
+> > 
+> > applied changes and it now compiles OK.
+> 
+> Since this is caused by skipping out autopoint, wouldn't it be better to
+> run autopoint instead of patching stuff?
+> 
+> regards,
+> 
+> Koen
+> 
 
-Its certainly possible to put defaults in which would handle the
-"standard" case. My main dislike is having to hardcode behaviour and
-variable handing into bitbake in that case. 
+I'm having the same issue building omap3-desktop-image and followed the same
+instructions that Grahame did, which did allow it to compile.
 
-The idea that adding an empty layer.conf file breaks a previously
-working overlay seems counter intuitive too...
+It looks like you're saying there's a better way to solve this with autopoint,
+however, not being very familiar with the tools here I'm not sure what the right
+way to implement this is.
 
-Cheers,
+Making a guess that the sed commands in the do_configure_prepend portion of the
+recipe were trying to work around the lack of autopoint, I pulled them out and
+replaced them with autopoint.
 
-Richard
+do_configure_prepend() {
+    autopoint
+}
 
+This seems to work as news now builds without error.  However, I'm unsure if
+this was the right way to go about it and if there might be some unintended side
+effects.
 
-
+-Ben Udall
 
 
 
