@@ -1,48 +1,29 @@
-Received: from mail-fx0-f225.google.com ([209.85.220.225])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Ni27h-0001mO-PT
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Ni2Qk-0007Hg-HA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Feb 2010 09:52:41 +0100
-Received: by fxm25 with SMTP id 25so311464fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2010 00:49:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=Pz1ygoLYa6R3mex3/Q3sFMplbEmkIz1gPqZ3LoGXdts=;
-	b=lFOsEqRp+8IgFWc1rwb+oNof/8/T7CIkumza25Rd2kuDhH3ViJQIWeZXe+zEeV64fi
-	nGO6xIdHka2L8bcDi/L2FD3XKhOVLW2FZ39nEHeL4JLmGVZL7FiIwlOlD/xgPSRSzx1n
-	AIuP/K8wIqRTUlUXQUIY/KvY2gR6zMB/OYvGc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=MectcjMVx/aW6pImg+gGxQw5y7+ajYeFJ3wtwty6hGVMPySImsEs3XDQAIcazPWyHJ
-	2PJt91GUt54HUJtslcmoa71k5hPsdIsXujOf6zWsNDbsvZrU3es38h8jnIoookO4fCyt
-	YPFVvJoFMe7ILco4zS2Zp1Oo6es/yq1+Z8Zyo=
-Received: by 10.223.26.216 with SMTP id f24mr1070957fac.20.1266482997298;
-	Thu, 18 Feb 2010 00:49:57 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 13sm4573897fxm.13.2010.02.18.00.49.55
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 18 Feb 2010 00:49:55 -0800 (PST)
-Date: Thu, 18 Feb 2010 09:49:32 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 18 Feb 2010 10:12:21 +0100
+Received: (qmail 25983 invoked by uid 813007); 18 Feb 2010 09:09:40 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 18 Feb 2010 09:09:40 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100218084932.GM3233@jama>
-References: <E1Nhfko-0005L8-Mc@melo.openembedded.org>
-	<20100217104816.GJ3233@jama> <hlgk42$774$1@ger.gmane.org>
-	<201002172046.30607.holger+oe@freyther.de>
-	<hlhhfs$ik1$1@ger.gmane.org>
+Date: Thu, 18 Feb 2010 10:09:06 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.3.4; x86_64; ;
+	)
+References: <1266316492.6436.127.camel@rex>
+	<b6ebd0a51002160616m462683b3nd2f4b17524395ddf@mail.gmail.com>
+	<1266334604.6436.159.camel@rex>
+In-Reply-To: <1266334604.6436.159.camel@rex>
 MIME-Version: 1.0
-In-Reply-To: <hlhhfs$ik1$1@ger.gmane.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.225
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Message-Id: <201002181009.07359.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Jeremy =?iso-8859-1?Q?Lain=E9?= <jeremy.laine@m4x.org>
-Subject: Re: Koen Kooi : qt4: add 4.6.2
+Subject: Re: RFC: Improve our default conf file setup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,61 +37,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Feb 2010 08:52:41 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 18 Feb 2010 09:12:22 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 17, 2010 at 08:53:34PM +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> On 17-02-10 20:46, Holger Hans Peter Freyther wrote:
-> > On Wednesday 17 February 2010 12:32:20 Koen Kooi wrote:
-> > for me.. but if it's right way, then it should be
-> >>> integrated to .inc files instead.
+Dnia wtorek, 16 lutego 2010 o 16:36:44 Richard Purdie napisa=C5=82(a):
 
-Thanks for ACKs :).
 
-I guess that part for integrating to .inc is left for me..
+> c) Are recipes in a recipes or a packages directory?
+> d) How deep are the paths to the .bb files?
 
-But I've seen that -L -I configure params used in non-native .inc
-already, so it should be safe.
+BBFILES +=3D "layer-top-dir" and BitBake will traverse subdirs and collect =
+all=20
+recipes from there. Never mind are they in recipes/ packages/ stuff/ or oth=
+er=20
+dir. It is working for quite long time now.
 
-Do you remember why LFLAGS was introduced? patch is from 4.3.3/4.5 and I
-guess it's not needed anymore at least for any 4.6*.
+> e) What priority are assigned to the layers?
 
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=8f61b0343b6c56644fdaa8fa3e84e1c29d3f47b9
+Priorities looks easy when you look at numbers. But problem arrives when yo=
+u=20
+want layer3 to have higher priority then layer2 and they are not connected.
 
-I would drop it from 4.6 and let in 4.3 and 4.5 as I'm not
-really looking forward for rebuilding all of them.
+> f) Should a given layer append or prepend to BBPATH?=20
 
-Regards,
+Those two are important. I remember situation with BugLabs r1.4 overlays wh=
+en=20
+I had to recreate BBPATH to get proper order of overlays.
 
-> >>
-> >> Your patch looks good to me, but I'd like zecke to comment on it. Holger?
-> > 
-> > Can't hurt..
-> > 
-> > Acked-by: Holger Hans Peter Freyther <zecke@selfish.org>
-> 
-> Acked-by: Koen Kooi <koen@openembedded.org>
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> 
-> iD8DBQFLfEk+MkyGM64RGpERAlK/AKCYaiWxXnDLcIsd61mlXzR/kMBV6ACeJ3Bf
-> wgQMARXWGwbflsBAs5VxkPY=
-> =qnz/
-> -----END PGP SIGNATURE-----
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+
 
 
