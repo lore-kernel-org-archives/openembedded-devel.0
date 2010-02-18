@@ -1,25 +1,34 @@
-Received: from qmta07.emeryville.ca.mail.comcast.net ([76.96.30.64])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enelson1000@comcast.net>) id 1NiA7e-0006Gb-4r
+	(envelope-from <stefan@datenfreihafen.org>) id 1NiCVN-00017N-0j
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Feb 2010 18:25:09 +0100
-Received: from omta09.emeryville.ca.mail.comcast.net ([76.96.30.20])
-	by qmta07.emeryville.ca.mail.comcast.net with comcast
-	id jUfM1d0080S2fkCA7VNRw2; Thu, 18 Feb 2010 17:22:25 +0000
-Received: from [192.168.1.100] ([173.13.189.149])
-	by omta09.emeryville.ca.mail.comcast.net with comcast
-	id jVNP1d00E3DqXwV8VVNPwj; Thu, 18 Feb 2010 17:22:24 +0000
-From: ed <enelson1000@comcast.net>
+	Thu, 18 Feb 2010 20:57:48 +0100
+Received: from p5b0362c6.dip.t-dialin.net ([91.3.98.198] helo=excalibur)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1NiCSl-0001uG-JI by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Feb 2010 20:55:06 +0100
+Received: from stefan by excalibur with local (Exim 4.71)
+	(envelope-from <stefan@excalibur.local>) id 1NiCSk-0002jr-K8
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Feb 2010 20:55:02 +0100
+Date: Thu, 18 Feb 2010 20:55:02 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Feb 2010 09:22:21 -0800
-Message-Id: <1266513741.3907.23.camel@ed-hp-laptop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-SA-Exim-Connect-IP: 76.96.30.64
-X-SA-Exim-Mail-From: enelson1000@comcast.net
+Message-ID: <20100218195502.GA6823@excalibur.local>
+References: <1266435248-17054-1-git-send-email-aalonso00@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1266435248-17054-1-git-send-email-aalonso00@gmail.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: python-sip_4.7.9 recipe question
+Subject: Re: [PATCH] xilinx-ml507.conf: fix u-boot config file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,51 +42,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Feb 2010 17:25:09 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 18 Feb 2010 19:57:48 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I am trying to build pyqt for the mini2440.  The image I built completed
-with no errors but am having problems when I try and run a simple python
-program using pyqt.  The first thing I found was that 
-sip.so was not packaged in rootfs image.  So I looked at the
-python-sip_4.7.9.bb recipe which requires python-sip.inc.
+Hello.
 
-python.-sip.inc looks like it does all the work.
+On Wed, 2010-02-17 at 13:34, Adrian Alonso wrote:
+> Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
 
-The log file shows it does all the build tasks. 
-1. do_setscene - It complains about the following:
+Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
 
-NOTE: <type 'exceptions.TypeError'>:exceptions must be classes or
-instances, not str while evaluating:
-${@python_dir(d)}
-NOTE: <type 'exceptions.TypeError'>:exceptions must be classes or
-instances, not str while evaluating:
-	install -d ${D}${libdir}/${PYTHON_DIR}/site-packages/
-	install -m 0755 libsip.so.1.0.0
-${D}${libdir}/${PYTHON_DIR}/site-packages/sip.so
+Applied on top of the oether and compile tested. (BTW, is this machine something
+like a successor of the ML310? Eventually I did some work on this in a lab at
+university to learn about software hardware co-design. :))
 
-2.  All the other tasks run with no complaints.
+I'll wait 2-3 days more for feedback that the PowerPC guys may have and push
+them all afterwards if no problems arise.
 
-I find sip.so file in the install and image directories.
-tmp/work/armv4t-angstrom-linux-gnueabi/python-sip-4.7.9-ml0
-    /install/python-sip/usr/lib/python2.6/site-packages/
-
-tmp/work/armv4t-angstrom-linux-gnueabi/python-sip-4.7.9-ml0
-    /image/usr/lib/python2.6/site-packages
-
-In the staging-pkg  I see the following.
-tmp/work/armv4t-angstrom-linux-gnueabi/python-sip-4.7.9-ml0
-    /staging-pkg/staging/armv4t-angstrom-linux-gnueabi/shlibs/
-    python-sip.list ===> contains libsip.so.1
-    python-sip.ver ==> contains 4.7.9
-
-So my questions are:
-1. Why didn't sip.so end up in my rootfs?
-2. Do I also need libsip.so.1 in my rootfs?
-
-Thanks
-Ed
-
+regards
+Stefan Schmidt
 
 
