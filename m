@@ -1,41 +1,28 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ni4I4-0001hw-HJ for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Feb 2010 12:11:31 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ni4FV-0003VF-RW for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Feb 2010 12:08:49 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2010 12:08:49 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Feb 2010 12:08:49 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <sledz@DResearch.DE>) id 1Ni4IG-0001iH-22
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Feb 2010 12:11:43 +0100
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id E38E9491287;
+	Thu, 18 Feb 2010 12:09:01 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Thu, 18 Feb 2010 12:09:24 +0100
+Message-ID: <4B7D1FD3.8050703@dresearch.de>
+Date: Thu, 18 Feb 2010 12:09:07 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 18 Feb 2010 12:08:28 +0100
-Message-ID: <hlj73b$v9k$1@ger.gmane.org>
-References: <ac9c93b11001300235y22a60e82qf35d712b8323807d@mail.gmail.com>	<hk12nm$sdo$1@ger.gmane.org>
-	<hlhc1p$t19$1@ger.gmane.org>	<ac9c93b11002171058o7f48b417yee87d06da09c7577@mail.gmail.com>	<hlhf2a$aei$1@ger.gmane.org>	<ac9c93b11002180118m1512bc71sa6eb91624e83263e@mail.gmail.com>	<hlj21d$fdf$1@ger.gmane.org>
-	<ac9c93b11002180211p73d24d7dv4359a61dee5a6c4e@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@ger.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100212 Shredder/3.0.2pre
-In-Reply-To: <ac9c93b11002180211p73d24d7dv4359a61dee5a6c4e@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-Sender: news <news@ger.gmane.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <4B7A40BD.7070805@dresearch.de>
+In-Reply-To: <4B7A40BD.7070805@dresearch.de>
+X-OriginalArrivalTime: 18 Feb 2010 11:09:24.0142 (UTC)
+	FILETIME=[D3F3B4E0:01CAB08A]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: {RFC] console-image.bb
+Subject: Re: intltool/autotools problem?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,53 +36,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Feb 2010 11:11:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 18 Feb 2010 11:11:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 18-02-10 11:11, Frans Meulenbroeks wrote:
-> 2010/2/18 Koen Kooi <k.kooi@student.utwente.nl>:
-> On 18-02-10 10:18, Frans Meulenbroeks wrote:
->>>> 2010/2/17 Koen Kooi <k.kooi@student.utwente.nl>:
->>>>
->>>>>>> FYI: I popped a question three weeks ago.
->>>>>>> Today Rolf asked me about the status in #oe.
->>>>>>> As you can see above 4 people (Rolf, Mickey, Phil and me were in
->>>>>>> favour of the proposal. In irc mckoan also backed the proposal.
->>>>>>> There was one person opposed to it: you.
->>>>>
->>>>> And funnily enough I'm the maintainer, so I get the final say.
->>>>
->>>> Still wondering what makes you the maintainer.
->>>>
->>>> git log does not mention any changes for this file by you (apart from
->>>> yesterdays revert):
->>>> See http://cgit.openembedded.org/cgit.cgi/openembedded/log/recipes/images/console-base-image.bb
+> ERROR: function do_configure failed
+> ERROR: log data follows (/home/sledz/work/HydraIP/OE/tmp.5/work/armv5te-angstrom-linux-gnueabi/vala-dbus-binding-tool-0.1.3-r1.0/temp/log.do_configure.18882)
+> | automake (GNU automake) 1.10.2
+> | Copyright (C) 2008 Free Software Foundation, Inc.
+> | License GPLv2+: GNU GPL version 2 or later <http://gnu.org/licenses/gpl.html>
+> | This is free software: you are free to change and redistribute it.
+> | There is NO WARRANTY, to the extent permitted by law.
+> |
+> | Written by Tom Tromey <tromey@redhat.com>
+> |        and Alexandre Duret-Lutz <adl@gnu.org>.
+> | AUTOV is 1.10
+> | NOTE: Executing glib-gettextize --force --copy
+> | Copying file mkinstalldirs
+> | Copying file po/Makefile.in.in
+> |
+> | Please add the files
+> |   codeset.m4 gettext.m4 glibc21.m4 iconv.m4 isc-posix.m4 lcmessage.m4
+> |   progtest.m4
+> | from the /home/sledz/work/HydraIP/OE/tmp.5/staging/i686-linux/usr/share/aclocal directory to your autoconf macro directory
+> | or directly to your aclocal.m4 file.
+> | You will also need config.guess and config.sub, which you can get from
+> | ftp://ftp.gnu.org/pub/gnu/config/.
+> |
+> | NOTE: Executing intltoolize --copy --force --automake
+> | /home/sledz/work/HydraIP/OE/tmp.5/work/armv5te-angstrom-linux-gnueabi/vala-dbus-binding-tool-0.1.3-r1.0/temp/run.do_configure.18882: line 305: intltoolize: command not found
+> NOTE: Task failed: /home/sledz/work/HydraIP/OE/tmp.5/work/armv5te-angstrom-linux-gnueabi/vala-dbus-binding-tool-0.1.3-r1.0/temp/log.do_configure.18882
 > 
-> Git doesn't track renames properly, using the parent of the
-> packages->recipes commit:
-> 
-> http://cgit.openembedded.org/cgit.cgi/openembedded/log/packages/images/console-image.bb?id=fa6cd5a3b993f16c27de4ff82b42684516d433ba
-> 
->> The parent is http://cgit.openembedded.org/cgit.cgi/openembedded/log/packages/images/console-base-image.bb
->> we're talking about console-base-image here.
+> Maybe this is a bug autotools_stage and this dependency should be generated
+> automatically like autoconf-native, automake-native, and libtool-native?
 
-No, we are not talking about console-base-image, read the subject of
-this mail: "Re: [oe] {RFC] console-image.bb"
+Ping!
 
-Try doing 'git log --follow recipes/images/console-image.bb' in your OE
-checkout and see the ancestry of console-image for the past 3.5 years.
+I think we have a general problem here. It seem's that some other recipes fail on the same cause, e.g. mc (see <http://thread.gmane.org/gmane.comp.handhelds.openembedded/29901>).
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLfR+sMkyGM64RGpERAohgAKCd3wFWYQNGAUKQs3DNAGZuSpSqegCffcar
-DIYf1a3TDpSf/Uh5KsEhrpc=
-=uB87
------END PGP SIGNATURE-----
+Steffen
 
 
 
