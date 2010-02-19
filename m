@@ -1,39 +1,31 @@
 Received: from hsp-52.hspserver.com ([85.197.80.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ml@vdm-design.de>) id 1NiNNx-0000Qa-0x
+	(envelope-from <ml@vdm-design.de>) id 1NiOf9-0000DZ-2S
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Feb 2010 08:34:52 +0100
+	Fri, 19 Feb 2010 09:56:42 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by hsp-52.hspserver.com (Postfix) with ESMTP id 14FC5A2C3AB
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2010 08:32:10 +0100 (CET)
+	by hsp-52.hspserver.com (Postfix) with ESMTP id 0AED6A2C3AA;
+	Fri, 19 Feb 2010 09:54:00 +0100 (CET)
 Received: from hsp-52.hspserver.com ([127.0.0.1])
 	by localhost (hsp-52.hspserver.com [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id 9CchBlkNAqQC
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2010 08:32:07 +0100 (CET)
-Received: from tomboy.localnet (pD9E141BE.dip.t-dialin.net [217.225.65.190])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by hsp-52.hspserver.com (Postfix) with ESMTP id 87144A2C3A7
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2010 08:32:07 +0100 (CET)
+	port 10024)
+	with ESMTP id uYYqvbFx1GYu; Fri, 19 Feb 2010 09:53:59 +0100 (CET)
+Received: from localhost.localdomain (pD9E141BE.dip.t-dialin.net
+	[217.225.65.190])
+	by hsp-52.hspserver.com (Postfix) with ESMTP id 2F231A2C3AB;
+	Fri, 19 Feb 2010 09:53:59 +0100 (CET)
 From: Thomas Zimmermann <ml@vdm-design.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 Feb 2010 08:32:06 +0100
-User-Agent: KMail/1.12.4 (Linux/2.6.32-8.slh.2-sidux-amd64; KDE/4.3.4; x86_64; ;
-	)
+Date: Fri, 19 Feb 2010 09:53:38 +0100
+Message-Id: <1266569618-8001-1-git-send-email-ml@vdm-design.de>
+X-Mailer: git-send-email 1.7.0
+In-Reply-To: <1265979953-4327-1-git-send-email-ml@vdm-design.de>
 References: <1265979953-4327-1-git-send-email-ml@vdm-design.de>
-	<hl9u05$48d$1@ger.gmane.org>
-	<19c1b8a91002181628w7a30333an148bc00cb687ca36@mail.gmail.com>
-In-Reply-To: <19c1b8a91002181628w7a30333an148bc00cb687ca36@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <201002190832.06903.ml@vdm-design.de>
 X-SA-Exim-Connect-IP: 85.197.80.179
 X-SA-Exim-Mail-From: ml@vdm-design.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] eglibc:
+Subject: [PATCH] eglibc: unbash ldd and add libpthread_nonshared.a to -dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,55 +39,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Feb 2010 07:34:52 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 19 Feb 2010 08:56:42 -0000
 
-Am Freitag 19 Februar 2010 01:28:57 schrieb Khem Raj:
-> On Sun, Feb 14, 2010 at 2:37 PM, Koen Kooi <k.kooi@student.utwente.nl> 
-wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> >
-> > On 14-02-10 23:33, Florian Boor wrote:
-> >> Hi,
-> >>
-> >> Thomas Zimmermann schrieb:
-> >>> * ldd has shebang #!/bin/bash: so add bash RDEPNDS
-> >>
-> >> last time I checked it worked with the Busybox built-in shell as well. I
-> >> wonder if it would be a good idea to verify this and patch ldd for our
-> >> purposes.
-> >
-> > like this:
-> > http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/glibc/gli
-> >bc-2.4/ldd-unbash.patch ?
-> 
-> or patch posted in http://sourceware.org/bugzilla/show_bug.cgi?id=832
-> it lets it work as it is if shell is bash.
-> 
-> Thx
-> 
-> -Khem
-I tried ldd today with busyboy and it was enough to replace just the shebang:
+* replace shebang of ldd by /bin/sh, so ldd doesn't depend on bash
+  anymore. Tested with busybox sh.
+* added to do_configure_prepend because do_patch is only a python function
+* add libpthread_nonshared.a to eglibc-dev. Now it's possible to
+  compile multithreaded applications on the device.
+---
+ recipes/eglibc/eglibc-package.bbclass |    6 +++++-
+ recipes/eglibc/eglibc.inc             |    2 +-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
 
---- /usr/bin/ldd        Fri Feb 19 08:27:44 2010
-+++ /usr/bin/ldd        Fri Feb 19 08:27:51 2010
-@@ -1,4 +1,4 @@
--#! /bin/bash
-+#! /bin/sh
- # Copyright (C) 1996-2008, 2009 Free Software Foundation, Inc.
- # This file is part of the GNU C Library.
+diff --git a/recipes/eglibc/eglibc-package.bbclass b/recipes/eglibc/eglibc-package.bbclass
+index fcaba47..3c33f93 100644
+--- a/recipes/eglibc/eglibc-package.bbclass
++++ b/recipes/eglibc/eglibc-package.bbclass
+@@ -48,7 +48,7 @@ FILES_ldd = "${bindir}/ldd"
+ FILES_libsegfault = "${base_libdir}/libSegFault*"
+ FILES_eglibc-extra-nss = "${base_libdir}/libnss*"
+ FILES_sln = "/sbin/sln"
+-FILES_eglibc-dev_append = " ${libdir}/*.o ${bindir}/rpcgen ${libdir}/libc_nonshared.a"
++FILES_eglibc-dev_append = " ${libdir}/*.o ${bindir}/rpcgen ${libdir}/libc_nonshared.a ${libdir}/libpthread_nonshared.a"
+ FILES_nscd = "${sbindir}/nscd*"
+ FILES_eglibc-utils = "${bindir}/* ${sbindir}/*"
+ FILES_eglibc-gconv = "${libdir}/gconv/*"
+@@ -76,6 +76,10 @@ EXTRA_OECONF += "${@get_eglibc_fpu_setting(bb, d)}"
+ 
+ OVERRIDES_append = ":${TARGET_ARCH}-${TARGET_OS}"
+ 
++do_configure_prepend() {
++        sed -e "s#@BASH@#/bin/sh#" -i ${S}/elf/ldd.bash.in
++}
++
+ do_install() {
+ 	oe_runmake install_root=${D} install
+ 	for r in ${rpcsvc}; do
+diff --git a/recipes/eglibc/eglibc.inc b/recipes/eglibc/eglibc.inc
+index 356b838..5c06ae6 100644
+--- a/recipes/eglibc/eglibc.inc
++++ b/recipes/eglibc/eglibc.inc
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.eglibc.org/home"
+ SECTION = "libs"
+ PRIORITY = "required"
+ LICENSE = "LGPL"
+-INC_PR = "r8"
++INC_PR = "r9"
+ # nptl needs unwind support in gcc, which can't be built without glibc.
+ DEPENDS = "virtual/${TARGET_PREFIX}gcc-intermediate linux-libc-headers"
+ #this leads to circular deps, so lets not add it yet
+-- 
+1.7.0
 
-I think this is because we have in eglibc:
-
-if x=`set -o` && test "$x" != "${x#*pipefail}" && set -o pipefail ; then
-
-and the second term fails, so set -o pipefail is never executed.
-
-I will resend this patch.
-
-Thomas
 
 
