@@ -1,35 +1,40 @@
-Received: from smtp-out05a.alice.it ([85.33.3.5])
+Received: from mail-fx0-f220.google.com ([209.85.220.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1NiQFv-0001aX-AD
+	(envelope-from <aalonso00@gmail.com>) id 1NiUwc-0008Ri-Cz
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Feb 2010 11:38:46 +0100
-Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-OUT05A.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 19 Feb 2010 11:34:59 +0100
-Received: from FBCMCL01B09.fbc.local ([192.168.171.26]) by FBCMMO02.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 19 Feb 2010 11:34:58 +0100
-Received: from badebec ([82.60.124.222]) by FBCMCL01B09.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Fri, 19 Feb 2010 11:34:58 +0100
-Received: by badebec with local (Exim 4.71)
-	(envelope-from <ospite@studenti.unina.it>)
-	id 1NiQCF-0003NG-KZ; Fri, 19 Feb 2010 11:34:55 +0100
-From: Antonio Ospite <ospite@studenti.unina.it>
+	Fri, 19 Feb 2010 16:39:09 +0100
+Received: by fxm20 with SMTP id 20so203121fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Feb 2010 07:36:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=L9hstixFfDJ+ahpe2YufRPTAESmdfe56ueLyUP43Rlk=;
+	b=ip5YxVRLOx0F8jlBX49Cl6AnU3ifJlyeaPmWuHq+94n1H5sccULgkXHIqlgY9uDc/o
+	oAY2fTwPjqBOzk4svorLv6ViZFYNZu/UFJzv/0dMup68m+OJiKquEVzmOH8hOkBBq4wu
+	z2BLY9ps/YJe7nQzN2PVZhVAMKVTKrpbpQN20=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=B5OZx1rohwV9CEJoOMerizheiNlKcfzpUHzwrRpAvxPqOET0tWbZHfKPLJQ0BLZLB1
+	IKtYezTMabwuZ0g41ZZXu7HGUTPX0lNudQ2ErsMlV9uZVSBcU/lSuSRDq80C8UKBOwFv
+	RMc3od+neF+qZFGCSBWggWelAj1Ur97vo9DwA=
+MIME-Version: 1.0
+Received: by 10.223.143.71 with SMTP id t7mr6806163fau.38.1266593785089; Fri, 
+	19 Feb 2010 07:36:25 -0800 (PST)
+In-Reply-To: <20100218195502.GA6823@excalibur.local>
+References: <1266435248-17054-1-git-send-email-aalonso00@gmail.com>
+	<20100218195502.GA6823@excalibur.local>
+Date: Fri, 19 Feb 2010 09:36:25 -0600
+Message-ID: <d1ded4381002190736v2718e87ve7878e134b35ff38@mail.gmail.com>
+From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 Feb 2010 11:34:49 +0100
-Message-Id: <1266575689-12944-1-git-send-email-ospite@studenti.unina.it>
-X-Mailer: git-send-email 1.7.0
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-X-OriginalArrivalTime: 19 Feb 2010 10:34:58.0490 (UTC)
-	FILETIME=[2F23F9A0:01CAB14F]
-X-SA-Exim-Connect-IP: 85.33.3.5
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+X-SA-Exim-Connect-IP: 209.85.220.220
+X-SA-Exim-Mail-From: aalonso00@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] meta-toolchain: Show the host system in toolchain archive name
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] xilinx-ml507.conf: fix u-boot config file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,34 +48,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Feb 2010 10:38:46 -0000
+X-List-Received-Date: Fri, 19 Feb 2010 15:39:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
----
-In canadian-sdk.bb ${SDK_SYS} is used as a prefix but I find more logical to
-put it just before the target system info.
+Yes the ML507 board is similar to the ML310 the only main difference is the
+processor version
+ppc440 - ppc405 since they share the same bus processor (PLB) chances are
+that hardware designs
+can be reused with minimal changes to be supported by the Linux kernel.
+At my lab university we are working on hardware/software co-design but we
+wan't to get rid off
+xilinx linux bsp since they are based on old kernel version and have a
+considerable cost, that's way we consider
+OE as flexible infrastructure that can be reused to make easier the
+co-design process.
 
-Regards,
-   Antonio
 
- recipes/meta/meta-toolchain.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+On Thu, Feb 18, 2010 at 1:55 PM, Stefan Schmidt
+<stefan@datenfreihafen.org>wrote:
 
-diff --git a/recipes/meta/meta-toolchain.bb b/recipes/meta/meta-toolchain.bb
-index 3169425..574ecac 100644
---- a/recipes/meta/meta-toolchain.bb
-+++ b/recipes/meta/meta-toolchain.bb
-@@ -17,7 +17,7 @@ TOOLCHAIN_TARGET_TASK ?= "task-sdk-bare"
- TOOLCHAIN_TARGET_EXCLUDE ?= ""
- FEED_ARCH ?= "${TARGET_ARCH}"
- SDK_SUFFIX = "toolchain"
--TOOLCHAIN_OUTPUTNAME ?= "${DISTRO}-${DISTRO_VERSION}-${FEED_ARCH}-${TARGET_OS}-${SDK_SUFFIX}"
-+TOOLCHAIN_OUTPUTNAME ?= "${DISTRO}-${DISTRO_VERSION}-${SDK_SYS}-${FEED_ARCH}-${TARGET_OS}-${SDK_SUFFIX}"
- 
- RDEPENDS = "${TOOLCHAIN_TARGET_TASK} ${TOOLCHAIN_HOST_TASK}"
- 
+> Hello.
+>
+> On Wed, 2010-02-17 at 13:34, Adrian Alonso wrote:
+> > Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
+>
+> Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
+>
+> Applied on top of the oether and compile tested. (BTW, is this machine
+> something
+> like a successor of the ML310? Eventually I did some work on this in a lab
+> at
+> university to learn about software hardware co-design. :))
+>
+> I'll wait 2-3 days more for feedback that the PowerPC guys may have and
+> push
+> them all afterwards if no problems arise.
+>
+> regards
+> Stefan Schmidt
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
+
 -- 
-1.6.6.2
-
-
+Saludos
+Adrian Alonso
+http://aalonso.wordpress.com
 
