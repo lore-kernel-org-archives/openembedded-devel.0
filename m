@@ -1,39 +1,42 @@
-Received: from mail-iw0-f180.google.com ([209.85.223.180])
+Received: from mail-gx0-f224.google.com ([209.85.217.224])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NiXbB-0001D9-UY
+	(envelope-from <kergoth@gmail.com>) id 1NiXvy-0005nI-IC
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Feb 2010 19:29:13 +0100
-Received: by iwn10 with SMTP id 10so944436iwn.16
+	Fri, 19 Feb 2010 19:50:41 +0100
+Received: by gxk24 with SMTP id 24so399817gxk.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Feb 2010 10:26:27 -0800 (PST)
+	Fri, 19 Feb 2010 10:47:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=RUeeP9hBf9lKaJuw1KnrBoWSWxT96QlftsRK8oYai30=;
-	b=uuvu/mLEbLS1qUEHBPwuLbVNgtdFWfJvheZrwQc+w3YDxjruYKMs+6VWllWKdyvof4
-	hJeHf3+R3mla6itNyEw/CzA8ejWTihFg3G064Uy4UOX0++FNaMLLavk+GFL6OiDjeNRw
-	fxOx++9Sjim0cRM01sqWhxuegBc9ToJ6gj9Qs=
+	h=domainkey-signature:received:received:sender:from:to:cc:subject
+	:date:message-id:x-mailer;
+	bh=/6WqBzgIiuIrudctvhZXg21vw6hLPeKVX8CYOoSm2/E=;
+	b=nda9/IhWreOKYJJB7VtrqYKc61VjkrpnE88/3jnSlB755TzgedFJEn7kly4x+7ZG2J
+	qXYYDc7SuUgmR4fdsm4xYjRfIqaTUT9t15FFmYxbJIa5L7jMYqvyx7hpFnyZSMtfM2a5
+	ZavVW9IGYwh3Yakic04srtJWATma+bhLNMpo4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=ML1zHZaK/RbpMCcSRzjnI7as/0wXgSmF0tzExsiiGJte2lVVpF5dn2vTMMQ+WgQmyO
-	T1LKGo+6uQ7TSIOm41pr7+r4NGHpaRn6XIodqAiULZ+nPaA6RpwxfzqgHliX0pU6X8co
-	9bNKYqtHjXCi3pnQytRWr59wmIlVyNNSmitd0=
-MIME-Version: 1.0
-Received: by 10.231.168.133 with SMTP id u5mr1852923iby.29.1266603987550; Fri, 
-	19 Feb 2010 10:26:27 -0800 (PST)
-In-Reply-To: <1266337930-2440-1-git-send-email-aalonso00@gmail.com>
-References: <1266337930-2440-1-git-send-email-aalonso00@gmail.com>
-Date: Fri, 19 Feb 2010 10:26:27 -0800
-Message-ID: <19c1b8a91002191026p3b06577ay9375f944daa661c1@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=NTrJFfF7kP27Q1gyAnI47lek0gAb//0OW34rqqffxLr+xDUMc5w1PHD6x2XDA9cMj2
+	mGLZjJUdzEEmFNTQDOwvhdwpUV+0faCnUbDUW1Smx2c7x/Cg8FcZBuwAdeocPfZyjvvS
+	84llDlMKIEU4dvpeXKZ6FCDnI1ftnHimJGY8A=
+Received: by 10.101.167.28 with SMTP id u28mr3551026ano.237.1266605276553;
+	Fri, 19 Feb 2010 10:47:56 -0800 (PST)
+Received: from localhost.localdomain (ip24-251-170-95.ph.ph.cox.net
+	[24.251.170.95])
+	by mx.google.com with ESMTPS id 8sm173051ywg.50.2010.02.19.10.47.54
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 19 Feb 2010 10:47:55 -0800 (PST)
+Sender: Chris Larson <kergoth@gmail.com>
+From: Chris Larson <clarson@kergoth.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.180
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Fri, 19 Feb 2010 11:47:48 -0700
+Message-Id: <1266605268-5957-1-git-send-email-clarson@kergoth.com>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 209.85.217.224
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH 1/4] tune-ppc440.inc: add ppc440 to PACKAGE_EXTRA_ARCHS
+Cc: Chris Larson <chris_larson@mentor.com>
+Subject: [PATCH] package.bbclass: when running 'file', be explicit about the path to the magic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,46 +50,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Feb 2010 18:29:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 19 Feb 2010 18:50:41 -0000
 
-On Tue, Feb 16, 2010 at 8:32 AM, Adrian Alonso <aalonso00@gmail.com> wrote:
-> Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
-> ---
-> =A0conf/machine/include/tune-ppc440.inc | =A0 =A02 +-
-> =A01 files changed, 1 insertions(+), 1 deletions(-)
->
-> diff --git a/conf/machine/include/tune-ppc440.inc b/conf/machine/include/=
-tune-ppc440.inc
-> index feca186..0c41db4 100644
-> --- a/conf/machine/include/tune-ppc440.inc
-> +++ b/conf/machine/include/tune-ppc440.inc
-> @@ -1,4 +1,4 @@
-> =A0TARGET_CC_ARCH =3D "-mcpu=3D440"
-> =A0BASE_PACKAGE_ARCH =3D "ppc440"
-> =A0FEED_ARCH =3D "ppc440"
-> -PACKAGE_EXTRA_ARCHS +=3D "ppc440e"
-> +PACKAGE_EXTRA_ARCHS +=3D "ppc440 ppc440e"
+From: Tom Rini <tom_rini@mentor.com>
 
+This works around one relocation issue.
 
-I wonder why this would be needed, I would think that PACKAGE_ARCHS
-consists of PACKAGE_EXTRA_ARCHS and PACKAGE_ARCH (which is default
-arch constructed from  BASE_PACKAGE_ARCH)
-if that was the case then ppc440 would be added to supported archs
-list already but it seems there is a disconnect between PACKAGE_ARCH
-and  PACKAGE_ARCHS I am not sure if it
-is deliberate or an oversight. If it is an oversight then it should be
-fixed in bitbake.conf and that would avoid this patch.
+Signed-off-by: Tom Rini <tom_rini@mentor.com>
+Signed-off-by: Chris Larson <chris_larson@mentor.com>
+---
+ classes/package.bbclass |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
-> --
-> 1.6.6
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/classes/package.bbclass b/classes/package.bbclass
+index 062f782..72c9053 100644
+--- a/classes/package.bbclass
++++ b/classes/package.bbclass
+@@ -155,11 +155,12 @@ def runstrip(file, d):
+     import commands, stat
+ 
+     pathprefix = "export PATH=%s; " % bb.data.getVar('PATH', d, True)
++    magicfile = "%s/file/magic" % bb.data.getVar('STAGING_DATADIR_NATIVE', d, True) 
+ 
+-    ret, result = commands.getstatusoutput("%sfile '%s'" % (pathprefix, file))
++    ret, result = commands.getstatusoutput("%sfile -m %s '%s'" % (pathprefix, magicfile, file))
+ 
+     if ret:
+-        bb.error("runstrip: 'file %s' failed (forced strip)" % file)
++        bb.error("runstrip: 'file -m %s %s' failed (forced strip)" % (magicfile, file))
+ 
+     if "not stripped" not in result:
+         bb.debug(1, "runstrip: skip %s" % file)
+-- 
+1.6.3.3
+
 
 
