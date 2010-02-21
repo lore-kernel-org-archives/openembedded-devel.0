@@ -1,42 +1,44 @@
 Received: from mail-fx0-f216.google.com ([209.85.220.216])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1NjDm2-00024f-6I
+	(envelope-from <rep.dot.nop@gmail.com>) id 1NjEpR-0007Ej-0u
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 21 Feb 2010 16:31:13 +0100
-Received: by fxm8 with SMTP id 8so1610138fxm.28
+	Sun, 21 Feb 2010 17:38:48 +0100
+Received: by fxm8 with SMTP id 8so1646707fxm.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Feb 2010 07:28:27 -0800 (PST)
+	Sun, 21 Feb 2010 08:36:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:from:to:cc:subject
-	:date:message-id:x-mailer;
-	bh=5J4iexi4dVIIdSgQ4sZ2Q4SjU4wtD+h9m0cHo6NnrIo=;
-	b=emX1RFxuc4In/PrSROOX3mdj/Or9KmdlDTfDaMVnyRV7SfAymAnaggvH5/iTfZ2/YG
-	erRy8qqHfaDLUZZrd7lvw5GJWUOajHvjVk1HwXZXni09OmIJIQqJnAgaVdnRzqrX2HXK
-	pcEtRtLCV6BdqYqLGOCEpoPfZd2wfrC0UzBJc=
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:user-agent;
+	bh=wLsK/X/B8W0AIhJ+d8EXmH0sjssNPlpFMmw+YwfOi9Y=;
+	b=xFLtsPOgIIsj1gDTjh+Xs8NMhKK2YmUtXT/t4kRgyLwdd2xRZXn2yCTtxDu0Byc7xL
+	dHUmJIW7mCs8kWwlbVPdoPT5D70+9nw09r67kv9XNEwgBCld1zyaujjQKcs4EHqaAx5W
+	DCVxni8TR9XAQoYz0COoj0EPiYD+KkMlaO8bI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=svjKoBOM/RltchhYiMsiddD6gR0bNmmSVXlKtrtRNIBEdiw/GySjvP7d37EdIRUGG+
-	GS4r2CDZKy4N5cAorvACGGmGeSwIms8rjzHLPZ7xqBvLl/OvWB806vHeCVIgWsEH38n5
-	CY6Rcxg09RnY0Ir4jLXH3OPgEfq351w4xT/tc=
-Received: by 10.223.63.20 with SMTP id z20mr3642549fah.98.1266766106246;
-	Sun, 21 Feb 2010 07:28:26 -0800 (PST)
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=oZBeauHO+nT99VTqy/tVpk05doxWkcEEwC0Q2PVv4v4VY4E6xVYRZtuWvNyChOhPNZ
+	AOCwLHa5i2c5iZa2DvuSHPj0bIeHzSSPs1qiWZgvECbOLU+uO8fBSGx9DkIJ+6WEdaHZ
+	Uz51x+5ETkyfitWwTzwS0M51t/xqiGmPe2Uic=
+Received: by 10.223.143.71 with SMTP id t7mr2369491fau.38.1266770162052;
+	Sun, 21 Feb 2010 08:36:02 -0800 (PST)
 Received: from s42.loc ([84.119.103.202])
-	by mx.google.com with ESMTPS id y15sm3221240fkd.38.2010.02.21.07.28.25
+	by mx.google.com with ESMTPS id 19sm3308720fkr.46.2010.02.21.08.36.01
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 21 Feb 2010 07:28:25 -0800 (PST)
+	Sun, 21 Feb 2010 08:36:01 -0800 (PST)
 Received: from cow by s42.loc with local (Exim 4.71)
 	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1NjDo0-0007Y9-Gl; Sun, 21 Feb 2010 16:33:12 +0100
+	id 1NjErR-00084y-0j; Sun, 21 Feb 2010 17:40:49 +0100
+Date: Sun, 21 Feb 2010 17:40:48 +0100
 From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 Feb 2010 16:33:10 +0100
-Message-Id: <1266766390-28915-1-git-send-email-rep.dot.nop@gmail.com>
-X-Mailer: git-send-email 1.6.6.1
+Message-ID: <20100221164048.GU30265@mx.loc>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 209.85.220.216
 X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] bison: split inttypes*.m4 into separate patch
+Subject: [BBCLASSEXTEND BUG?] Not taking virtual:native provider into account?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,209 +52,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Feb 2010 15:31:13 -0000
+X-List-Received-Date: Sun, 21 Feb 2010 16:38:48 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-..to avoid conflicts with bison-2.4.1
+Hi,
 
-Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
----
- recipes/bison/bison_2.0.bb         |    4 ++-
- recipes/bison/bison_2.3.bb         |    4 ++-
- recipes/bison/files/inttypes.patch |   70 ++++++++++++++++++++++++++++++++++++
- recipes/bison/files/m4.patch       |   65 ---------------------------------
- 4 files changed, 76 insertions(+), 67 deletions(-)
- create mode 100644 recipes/bison/files/inttypes.patch
+I'm using bitbake 641e6cf3ec3ab4d26929cf4d2a3704ff07eed4d6 (current
+HEAD) on HEAD of oe.
 
-diff --git a/recipes/bison/bison_2.0.bb b/recipes/bison/bison_2.0.bb
-index edf549f..db3db31 100644
---- a/recipes/bison/bison_2.0.bb
-+++ b/recipes/bison/bison_2.0.bb
-@@ -5,6 +5,8 @@ SECTION = "devel"
- PRIORITY = "optional"
- 
- SRC_URI = "${GNU_MIRROR}/bison/bison-${PV}.tar.gz \
--	   file://m4.patch;patch=1"
-+	   file://m4.patch;patch=1 \
-+	   file://inttypes.patch;patch=1 \
-+	  "
- 
- inherit autotools
-diff --git a/recipes/bison/bison_2.3.bb b/recipes/bison/bison_2.3.bb
-index 729756b..66e5d58 100644
---- a/recipes/bison/bison_2.3.bb
-+++ b/recipes/bison/bison_2.3.bb
-@@ -7,7 +7,9 @@ PRIORITY = "optional"
- PR = "r1"
- 
- SRC_URI = "${GNU_MIRROR}/bison/bison-${PV}.tar.gz \
--	   file://m4.patch;patch=1"
-+	   file://m4.patch;patch=1 \
-+	   file://inttypes.patch;patch=1 \
-+	  "
- 
- inherit autotools
- 
-diff --git a/recipes/bison/files/inttypes.patch b/recipes/bison/files/inttypes.patch
-new file mode 100644
-index 0000000..e583241
---- /dev/null
-+++ b/recipes/bison/files/inttypes.patch
-@@ -0,0 +1,70 @@
-+
-+#
-+# Patch managed by http://www.mn-logistik.de/unsupported/pxa250/patcher
-+#
-+
-+--- /dev/null
-++++ bison-1.875/m4/inttypes-pri.m4
-+@@ -0,0 +1,32 @@
-++# inttypes-pri.m4 serial 1 (gettext-0.11.4)
-++dnl Copyright (C) 1997-2002 Free Software Foundation, Inc.
-++dnl This file is free software, distributed under the terms of the GNU
-++dnl General Public License.  As a special exception to the GNU General
-++dnl Public License, this file may be distributed as part of a program
-++dnl that contains a configuration script generated by Autoconf, under
-++dnl the same distribution terms as the rest of that program.
-++
-++dnl From Bruno Haible.
-++
-++# Define PRI_MACROS_BROKEN if <inttypes.h> exists and defines the PRI*
-++# macros to non-string values.  This is the case on AIX 4.3.3.
-++
-++AC_DEFUN([gt_INTTYPES_PRI],
-++[
-++  AC_REQUIRE([gt_HEADER_INTTYPES_H])
-++  if test $gt_cv_header_inttypes_h = yes; then
-++    AC_CACHE_CHECK([whether the inttypes.h PRIxNN macros are broken],
-++      gt_cv_inttypes_pri_broken,
-++      [
-++        AC_TRY_COMPILE([#include <inttypes.h>
-++#ifdef PRId32
-++char *p = PRId32;
-++#endif
-++], [], gt_cv_inttypes_pri_broken=no, gt_cv_inttypes_pri_broken=yes)
-++      ])
-++  fi
-++  if test "$gt_cv_inttypes_pri_broken" = yes; then
-++    AC_DEFINE_UNQUOTED(PRI_MACROS_BROKEN, 1,
-++      [Define if <inttypes.h> exists and defines unusable PRI* macros.])
-++  fi
-++])
-+--- /dev/null
-++++ bison-1.875/m4/inttypes.m4
-+@@ -0,0 +1,27 @@
-++# inttypes.m4 serial 1 (gettext-0.11.4)
-++dnl Copyright (C) 1997-2002 Free Software Foundation, Inc.
-++dnl This file is free software, distributed under the terms of the GNU
-++dnl General Public License.  As a special exception to the GNU General
-++dnl Public License, this file may be distributed as part of a program
-++dnl that contains a configuration script generated by Autoconf, under
-++dnl the same distribution terms as the rest of that program.
-++
-++dnl From Paul Eggert.
-++
-++# Define HAVE_INTTYPES_H if <inttypes.h> exists and doesn't clash with
-++# <sys/types.h>.
-++
-++AC_DEFUN([gt_HEADER_INTTYPES_H],
-++[
-++  AC_CACHE_CHECK([for inttypes.h], gt_cv_header_inttypes_h,
-++  [
-++    AC_TRY_COMPILE(
-++      [#include <sys/types.h>
-++#include <inttypes.h>],
-++      [], gt_cv_header_inttypes_h=yes, gt_cv_header_inttypes_h=no)
-++  ])
-++  if test $gt_cv_header_inttypes_h = yes; then
-++    AC_DEFINE_UNQUOTED(HAVE_INTTYPES_H, 1,
-++      [Define if <inttypes.h> exists and doesn't clash with <sys/types.h>.])
-++  fi
-++])
-diff --git a/recipes/bison/files/m4.patch b/recipes/bison/files/m4.patch
-index b62fe89..b060532 100644
---- a/recipes/bison/files/m4.patch
-+++ b/recipes/bison/files/m4.patch
-@@ -4,41 +4,6 @@
- #
- 
- --- /dev/null
--+++ bison-1.875/m4/inttypes-pri.m4
--@@ -0,0 +1,32 @@
--+# inttypes-pri.m4 serial 1 (gettext-0.11.4)
--+dnl Copyright (C) 1997-2002 Free Software Foundation, Inc.
--+dnl This file is free software, distributed under the terms of the GNU
--+dnl General Public License.  As a special exception to the GNU General
--+dnl Public License, this file may be distributed as part of a program
--+dnl that contains a configuration script generated by Autoconf, under
--+dnl the same distribution terms as the rest of that program.
--+
--+dnl From Bruno Haible.
--+
--+# Define PRI_MACROS_BROKEN if <inttypes.h> exists and defines the PRI*
--+# macros to non-string values.  This is the case on AIX 4.3.3.
--+
--+AC_DEFUN([gt_INTTYPES_PRI],
--+[
--+  AC_REQUIRE([gt_HEADER_INTTYPES_H])
--+  if test $gt_cv_header_inttypes_h = yes; then
--+    AC_CACHE_CHECK([whether the inttypes.h PRIxNN macros are broken],
--+      gt_cv_inttypes_pri_broken,
--+      [
--+        AC_TRY_COMPILE([#include <inttypes.h>
--+#ifdef PRId32
--+char *p = PRId32;
--+#endif
--+], [], gt_cv_inttypes_pri_broken=no, gt_cv_inttypes_pri_broken=yes)
--+      ])
--+  fi
--+  if test "$gt_cv_inttypes_pri_broken" = yes; then
--+    AC_DEFINE_UNQUOTED(PRI_MACROS_BROKEN, 1,
--+      [Define if <inttypes.h> exists and defines unusable PRI* macros.])
--+  fi
--+])
----- /dev/null
- +++ bison-1.875/m4/lcmessage.m4
- @@ -0,0 +1,32 @@
- +# lcmessage.m4 serial 3 (gettext-0.11.3)
-@@ -529,36 +494,6 @@
- +  rm -f conf.glibtest
- +])
- --- /dev/null
--+++ bison-1.875/m4/inttypes.m4
--@@ -0,0 +1,27 @@
--+# inttypes.m4 serial 1 (gettext-0.11.4)
--+dnl Copyright (C) 1997-2002 Free Software Foundation, Inc.
--+dnl This file is free software, distributed under the terms of the GNU
--+dnl General Public License.  As a special exception to the GNU General
--+dnl Public License, this file may be distributed as part of a program
--+dnl that contains a configuration script generated by Autoconf, under
--+dnl the same distribution terms as the rest of that program.
--+
--+dnl From Paul Eggert.
--+
--+# Define HAVE_INTTYPES_H if <inttypes.h> exists and doesn't clash with
--+# <sys/types.h>.
--+
--+AC_DEFUN([gt_HEADER_INTTYPES_H],
--+[
--+  AC_CACHE_CHECK([for inttypes.h], gt_cv_header_inttypes_h,
--+  [
--+    AC_TRY_COMPILE(
--+      [#include <sys/types.h>
--+#include <inttypes.h>],
--+      [], gt_cv_header_inttypes_h=yes, gt_cv_header_inttypes_h=no)
--+  ])
--+  if test $gt_cv_header_inttypes_h = yes; then
--+    AC_DEFINE_UNQUOTED(HAVE_INTTYPES_H, 1,
--+      [Define if <inttypes.h> exists and doesn't clash with <sys/types.h>.])
--+  fi
--+])
----- /dev/null
- +++ bison-1.875/m4/isc-posix.m4
- @@ -0,0 +1,26 @@
- +# isc-posix.m4 serial 2 (gettext-0.11.2)
--- 
-1.6.6
+I'm adding:
+$ cat recipes/git/git_1.7.0.bb 
+require git.inc
+SRC_URI[git.md5sum] = "c7553b73e2156d187ece6ba936ae30ab"
+SRC_URI[git.sha256sum] = "a61e863944381c4f8231841f678f41f56b634bebca486a61005b35e5bcbb7c79"
+DEPENDS = "openssl curl zlib expat"
+RDEPENDS = "perl perl-module-file-path cpio findutils sed"
+PR = "r0"
+FILES_${PN}-dbg += "${libexecdir}/git-core/.debug"
+BBCLASSEXTEND = "native"
 
+(and add ";name=git" to the .tar in git.inc's SRC_URI)
+and bake git-native and see:
+DEBUG: adding .../recipes/git/git-native_1.6.0.4.bb to satisfy git-native
+instead of
+DEBUG: adding virtual:native:.../recipes/git/git_1.7.0.bb to satisfy git-native
+which i get if i rm git-native_*
+
+Assuming that the aboce recipe is correct in principle, this somehow
+sounds like BBCLASSEXTEND'ed virtual:native never make it into
+providers. What am i doing wrong?
+
+thanks and cheers,
+Bernhard
 
 
