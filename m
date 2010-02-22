@@ -1,24 +1,52 @@
-Received: from mail-pz0-f180.google.com ([209.85.222.180])
+Received: from mail-bw0-f213.google.com ([209.85.218.213])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msundius@sundius.com>) id 1Njgon-000423-84
+	(envelope-from <rep.dot.nop@gmail.com>) id 1Njgzq-0005BU-QT
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Feb 2010 23:32:00 +0100
-Received: by pzk10 with SMTP id 10so335220pzk.12
+	Mon, 22 Feb 2010 23:43:25 +0100
+Received: by bwz5 with SMTP id 5so2021595bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2010 14:29:12 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.143.26.4 with SMTP id d4mr947195wfj.232.1266877752150; Mon, 22 
-	Feb 2010 14:29:12 -0800 (PST)
-Date: Mon, 22 Feb 2010 14:29:12 -0800
-Message-ID: <18e217241002221429m1939c786u52da4672f626ca07@mail.gmail.com>
-From: C Michael Sundius <msundius@sundius.com>
+	Mon, 22 Feb 2010 14:40:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=YBJVV1ZZMUx3BIpc9xkUooL2bgspPpZBoCodnrpeCkA=;
+	b=Syp/luTVYP3hzzLlPvkgfajwFAZUu6KTAqbZzHxpqeHvbw1j5LzfMotgjLS4YGrLLJ
+	C6ZieduIHByN+1FfjaxEQiTlrY0rFTpYvYo3NAUgEu9B38rE4pmBPqNPn1QsywhfI0ZV
+	EVNFpjpl5dxlph0shtsUWbnfv2jaXx2PtlsuE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=uerX5piVvwl9NAyrsQfaPaoiIRRsR6m2Ge7BJgs431ESJ4WwwvpJMkOnLRpNW+IL2w
+	SiNI50AenF6kVGdFFNrbFwVPtO5YqJWlqmFSFZbmd90fMXtU6OjiFpdF3YsIV+R7vN+i
+	SDr6dm3v6z+AANkTLz5Rq0exCAh3XxZt1rJlI=
+Received: by 10.204.132.131 with SMTP id b3mr1697778bkt.135.1266878438626;
+	Mon, 22 Feb 2010 14:40:38 -0800 (PST)
+Received: from s42.loc ([84.119.103.202])
+	by mx.google.com with ESMTPS id 14sm1416411bwz.2.2010.02.22.14.40.37
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 22 Feb 2010 14:40:37 -0800 (PST)
+Received: from cow by s42.loc with local (Exim 4.71)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1Njh27-0003hy-Kh; Mon, 22 Feb 2010 23:45:43 +0100
+Date: Mon, 22 Feb 2010 23:45:43 +0100
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.222.180
-X-SA-Exim-Mail-From: msundius@sundius.com
+Message-ID: <20100222224543.GD30265@mx.loc>
+References: <1266766352-28786-1-git-send-email-rep.dot.nop@gmail.com>
+	<20100222162424.GA27420@denix.org>
+	<1266857709.14566.348.camel@mill.internal.reciva.com>
+	<b6ebd0a51002220906p53b3b3b2h5257ebca50d6227c@mail.gmail.com>
+	<20100222181754.GB24049@jama> <20100222194159.GZ30265@mx.loc>
+	<20100222214335.GB30265@mx.loc> <20100222220621.GB27420@denix.org>
+MIME-Version: 1.0
+In-Reply-To: <20100222220621.GB27420@denix.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.218.213
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: using initramfs with openembedded.
+Subject: Re: [PATCH] git: add SRC_URI name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -32,24 +60,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Feb 2010 22:32:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 22 Feb 2010 22:43:26 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-We'd like to put our initial boottime file system into the initramfs in the
-kernel. But we also need to build some separate drivers to put into that
-filesystem image.
+On Mon, Feb 22, 2010 at 05:06:21PM -0500, Denys Dmytriyenko wrote:
 
-Of course we can't build those drivers without the kernel staging dir
-populated. (which doesn't happen until after the build of the kernel).
+>> Not using "archive" as Martin likes as default, but uri%d, but
+>
+>For multiple SRC_URIs, using uri1/uri2 can be more confusing and may be not 
+>much better than looking up real names in .inc file...
 
-Has anyone run into this problem? how did you solve it? do I need to stage
-the headerfiles and config info before the kernel build?
+ok, so let's drop that superfluous .note and the url%d handling.
+Other opinions?
 
-maybe this problem is solved some other way.. I haven't really tried this so
-I'm just speculating here.
-
-If anyone has some experience with this it would be great to hear how to go
-about this. thanks for you help
-
-Mike
 
