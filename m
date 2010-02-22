@@ -1,44 +1,38 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1NjbmL-0004py-9I
+	(envelope-from <Tom_Rini@mentor.com>) id 1NjbvG-0005gG-L9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Feb 2010 18:09:08 +0100
-Received: by pwi5 with SMTP id 5so2675342pwi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2010 09:06:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	bh=qDuwRkeQbEXLJX528lk7lgxwb3u0kB0v2O9AaaVmphs=;
-	b=Ba2NxxltGD0dE7pXpUGasovsgTG7kyZb3EQXoyM3xhIkjieH0b9L1vB2QvcAMGCvP6
-	v81DG3Lpnhg1DyBD2iQWUPQag9pEpYBuQaELeUZtdi95/A8N70qJSJdc8vivZawwmSvT
-	tnt+XvHQiV5H8FQ7TCWcfd33EMnQkx0h/zDNY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	b=hXkgTeJQT3dazJ0mTfcN6vKJJyOZEV/FOLM/Ft4z9i5i6TkmS3p+Pdrs2mWRBu5KSw
-	8XsFHbFyD8GDFst/6f3uEQBgD+Zkd4P8lTaUzCUj1cYWhantXB6Xt7e70huV/Q3nrqdT
-	iSujL3rKXAoauZIe5MIas7OPu4yO99YCuJGHQ=
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.142.6.13 with SMTP id 13mr635327wff.39.1266858380259; Mon, 22 
-	Feb 2010 09:06:20 -0800 (PST)
-In-Reply-To: <1266857709.14566.348.camel@mill.internal.reciva.com>
-References: <1266766352-28786-1-git-send-email-rep.dot.nop@gmail.com> 
-	<20100222162424.GA27420@denix.org>
-	<1266857709.14566.348.camel@mill.internal.reciva.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 22 Feb 2010 10:06:00 -0700
-X-Google-Sender-Auth: 095fe0eab423ac37
-Message-ID: <b6ebd0a51002220906p53b3b3b2h5257ebca50d6227c@mail.gmail.com>
+	Mon, 22 Feb 2010 18:18:23 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1Njbsb-0007en-6P from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Feb 2010 09:15:33 -0800
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 22 Feb 2010 09:15:32 -0800
+Received: from 172.30.80.10 ([172.30.80.10]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Mon, 22 Feb 2010 17:15:13 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	22 Feb 2010 10:15:12 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+In-Reply-To: <20100222131040.GW30265@mx.loc>
+References: <20100221164048.GU30265@mx.loc> <1266842451.1714.8.camel@rex>
+	<20100222131040.GW30265@mx.loc>
+Organization: Mentor Graphics Corporation
+Date: Mon, 22 Feb 2010 10:15:12 -0700
+Message-ID: <1266858912.18176.16.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 22 Feb 2010 17:15:32.0499 (UTC)
+	FILETIME=[A3C3F630:01CAB3E2]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] git: add SRC_URI name
+Subject: Re: [BBCLASSEXTEND BUG?] Not taking virtual:native provider into account?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,51 +46,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Feb 2010 17:09:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 22 Feb 2010 17:18:24 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 22, 2010 at 9:55 AM, Phil Blundell <philb@gnu.org> wrote:
-> On Mon, 2010-02-22 at 11:24 -0500, Denys Dmytriyenko wrote:
->> On Sun, Feb 21, 2010 at 04:32:32PM +0100, Bernhard Reutner-Fischer wrote=
-:
->> > Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
->> > ---
->> > =C2=A0recipes/git/git.inc | =C2=A0 =C2=A02 +-
->> > =C2=A01 files changed, 1 insertions(+), 1 deletions(-)
->> >
->> > diff --git a/recipes/git/git.inc b/recipes/git/git.inc
->> > index 644e159..fd7b708 100644
->> > --- a/recipes/git/git.inc
->> > +++ b/recipes/git/git.inc
->> > @@ -2,7 +2,7 @@ DESCRIPTION =3D "The git revision control system used =
-by the Linux kernel develope
->> > =C2=A0SECTION =3D "console/utils"
->> > =C2=A0LICENSE =3D "GPL"
->> >
->> > -SRC_URI =3D "http://www.kernel.org/pub/software/scm/git/git-${PV}.tar=
-.bz2"
->> > +SRC_URI =3D "http://www.kernel.org/pub/software/scm/git/git-${PV}.tar=
-.bz2;name=3Dgit"
->>
->> Is there a patch to add checksums in corresponding recipes to use the na=
-me? Or
->> what is the purpose of adding one?
->
-> I guess the idea is to make it possible for new recipes (which use
-> this .inc file) to include their own checksums. =C2=A0Seems like a reason=
-able
-> enough plan even if the old recipes are not converted.
+On Mon, 2010-02-22 at 14:10 +0100, Bernhard Reutner-Fischer wrote:
+> On Mon, Feb 22, 2010 at 12:40:51PM +0000, Richard Purdie wrote:
+> >On Sun, 2010-02-21 at 17:40 +0100, Bernhard Reutner-Fischer wrote:
+> >> Hi,
+> >>=20
+> >> I'm using bitbake 641e6cf3ec3ab4d26929cf4d2a3704ff07eed4d6 (current
+> >> HEAD) on HEAD of oe.
+> >>=20
+> >> I'm adding:
+> >> $ cat recipes/git/git_1.7.0.bb=20
+> >> require git.inc
+> >> SRC_URI[git.md5sum] =3D "c7553b73e2156d187ece6ba936ae30ab"
+> >> SRC_URI[git.sha256sum] =3D "a61e863944381c4f8231841f678f41f56b634bebca=
+486a61005b35e5bcbb7c79"
+> >> DEPENDS =3D "openssl curl zlib expat"
+> >> RDEPENDS =3D "perl perl-module-file-path cpio findutils sed"
+> >> PR =3D "r0"
+> >> FILES_${PN}-dbg +=3D "${libexecdir}/git-core/.debug"
+> >> BBCLASSEXTEND =3D "native"
+> >>=20
+> >> (and add ";name=3Dgit" to the .tar in git.inc's SRC_URI)
+> >> and bake git-native and see:
+> >> DEBUG: adding .../recipes/git/git-native_1.6.0.4.bb to satisfy git-nat=
+ive
+> >> instead of
+> >> DEBUG: adding virtual:native:.../recipes/git/git_1.7.0.bb to satisfy g=
+it-native
+> >> which i get if i rm git-native_*
+> >>=20
+> >> Assuming that the aboce recipe is correct in principle, this somehow
+> >> sounds like BBCLASSEXTEND'ed virtual:native never make it into
+> >> providers. What am i doing wrong?
+> >
+> >If a real git-native_xyz.bb exists it will be preferred to the
+> >BBCLASSEXTEND version.
+>=20
+> Even if the BBCLASSEXTENDed version is higher than the
+> git-native_0.bb's? That doesn't sound too handy for i'd need to also
+> touch the old version :(
+>=20
+> $ ls -1 recipes/git/*bb
+> recipes/git/git_1.6.0.4.bb
+> recipes/git/git_1.7.0.bb
+> recipes/git/git-native_1.6.0.4.bb
+>=20
+> >I'm not sure why you'd want two versions?
+>=20
+> For this git package i wouldn't want to, but there are alot of packages
+> that have numerous (legacy) versions used by some distros. I'd rather
+> not update all old recipes just because i happen to add a new,
+> cleaned-up version of a package. What do you think?
 
-Has anyone thought about programmatically injecting a name to the
-first tarball/zip in the SRC_URI if no sources have that name yet?  It
-seems like adding a name to the primary tarball is becoming common
-boilerplate, and the common case is for that to be the first source.
+Well, if we convert them all, that reduces the number of files to parse,
+which is a good thing, yes?
+
 --=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
