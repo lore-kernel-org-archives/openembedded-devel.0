@@ -1,34 +1,25 @@
-Received: from mail-fx0-f220.google.com ([209.85.220.220])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1Njqxt-0004id-8b
+	(envelope-from <holger+oe@freyther.de>) id 1NjrMi-0001f7-5O
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 10:22:04 +0100
-Received: by fxm20 with SMTP id 20so3270331fxm.12
+	Tue, 23 Feb 2010 10:47:43 +0100
+Received: from tamarin.localnet (siminn-int-gw.on-waves.com [157.157.59.158])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 3D9A11B10C79
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2010 01:19:17 -0800 (PST)
-Received: by 10.223.100.214 with SMTP id z22mr6250268fan.104.1266916756629;
-	Tue, 23 Feb 2010 01:19:16 -0800 (PST)
-Received: from xora-eee.xora.org.uk (188-220-38-49.zone11.bethere.co.uk
-	[188.220.38.49])
-	by mx.google.com with ESMTPS id 26sm6746273fks.52.2010.02.23.01.19.15
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 23 Feb 2010 01:19:15 -0800 (PST)
-Received: by xora-eee.xora.org.uk (Postfix, from userid 500)
-	id 88C3F21470; Tue, 23 Feb 2010 09:19:54 +0000 (GMT)
-Date: Tue, 23 Feb 2010 09:19:54 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Tue, 23 Feb 2010 09:46:19 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100223091954.GA3050@xora-eee.xora.org.uk>
-References: <18e217241002221429m1939c786u52da4672f626ca07@mail.gmail.com>
-	<hm05ln$2cr$1@dough.gmane.org>
+Date: Mon, 22 Feb 2010 23:53:33 +0100
+User-Agent: KMail/1.13.0 (Linux/2.6.33-rc8; KDE/4.4.0; i686; ; )
+References: <72281.30342.qm@web110216.mail.gq1.yahoo.com>
+In-Reply-To: <72281.30342.qm@web110216.mail.gq1.yahoo.com>
 MIME-Version: 1.0
-In-Reply-To: <hm05ln$2cr$1@dough.gmane.org>
-User-Agent: Mutt/1.5.20 (2009-08-17)
-X-SA-Exim-Connect-IP: 209.85.220.220
-X-SA-Exim-Mail-From: dp@xora.org.uk
+Message-Id: <201002222353.33619.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: using initramfs with openembedded.
+Subject: Re: bitbake failed in base-image and other images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,39 +33,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 09:22:04 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 23 Feb 2010 09:47:43 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Tue, Feb 23, 2010 at 10:03:51AM +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+On Monday 22 February 2010 16:25:06 Kaijun Tang wrote:
+> Hi, I always failed to bitbake images like
+
+If you want to have others help you, you need to supply enough context. It 
+should include some of the following stuff:
+	- Explain the config you have (e.g. MACHINE, DISTRO...)
+	- Explain which version of the OE metadata you have
+	- Explain what you are trying to build...
+	- Explain how it fails and how you expect it should do stuff
+
 > 
-> On 22-02-10 23:29, C Michael Sundius wrote:
-> > We'd like to put our initial boottime file system into the initramfs in the
-> > kernel. But we also need to build some separate drivers to put into that
-> > filesystem image.
-> > 
-> > Of course we can't build those drivers without the kernel staging dir
-> > populated. (which doesn't happen until after the build of the kernel).
-> > 
-> > Has anyone run into this problem? how did you solve it? do I need to stage
-> > the headerfiles and config info before the kernel build?
-> > 
-> > maybe this problem is solved some other way.. I haven't really tried this so
-> > I'm just speculating here.
-> > 
-> > If anyone has some experience with this it would be great to hear how to go
-> > about this. thanks for you help
-> 
-> The common way right now is to use 2 kernel recipes. Not an optimal
-> situation, but it will get you there.
-> 
+> /home/tang/Project/OE/build/tmp/cross/armv7a/arm-angstrom-linux-gnueabi
+> /bin/as:unrecognized option '-Qy'
 
-I think it should be possible to write an initramfs.bbclass and use
-BBCLASSEXTEND to make it simpler.
+This normally indicates a host (x86) and target mismatch. E.g. you are trying 
+to compile for x86 with your ARM compiler...
 
-Graeme
-
+z.
 
 
