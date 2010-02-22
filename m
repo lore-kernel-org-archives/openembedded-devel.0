@@ -1,42 +1,33 @@
-Received: from mail-bw0-f213.google.com ([209.85.218.213])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.lippautz@gmail.com>) id 1NjbaH-0002Qf-9V
+	(envelope-from <philb@gnu.org>) id 1Njbba-0002Wj-0A
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Feb 2010 17:56:40 +0100
-Received: by bwz5 with SMTP id 5so1708603bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2010 08:53:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=OPnpC2yti2VmhkN9W+1S6RMzJmMCcZw58V+LHG/bPj8=;
-	b=oKFWyai8lh4BAc3XRi1BpdTjIl6ZJnyW57bPNvPlKksg7gQmCqWCFTpAL6CS8kBCJT
-	HGsUvxiNrHbPRALFyC5PqDlqaKupYi6Jxaw7MWq7Au8bACYvF4uz/Y5U39DEB0gutaM8
-	jXuz8oUg4ZZVBmjY407mjBWB3/nJP3w15dYIs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=lFuTX65310SVi8CIN7iv69k0dLKNJO7sQ753n0hTHzbpvfSvmEtPV7rkIz2TuJUCoI
-	Eb/rZwuxDHZmtKWUeWDUp0XrUmd3jv7Gfxk6yVVumqQxNA8lu0FoiV8bHSpzMc5w131n
-	XtOeMQMTEIyKPQUOUB5buj6Qx1TKcbCwbDwa4=
-Received: by 10.204.49.82 with SMTP id u18mr2300321bkf.74.1266857633069;
-	Mon, 22 Feb 2010 08:53:53 -0800 (PST)
-Received: from localhost.localdomain (85-127-52-58.dynamic.xdsl-line.inode.at
-	[85.127.52.58])
-	by mx.google.com with ESMTPS id 14sm1214184bwz.10.2010.02.22.08.53.51
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 22 Feb 2010 08:53:52 -0800 (PST)
-From: Michael Lippautz <michael.lippautz@gmail.com>
+	Mon, 22 Feb 2010 17:58:01 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NjbYw-0002Rz-5a
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Feb 2010 16:55:15 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1NjbYv-0004Fi-Gq
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Feb 2010 16:55:13 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Feb 2010 17:54:10 +0100
-Message-Id: <1266857650-5557-1-git-send-email-michael.lippautz@gmail.com>
-X-Mailer: git-send-email 1.6.4.4
-In-Reply-To: <n>
-References: <n>
-X-SA-Exim-Connect-IP: 209.85.218.213
-X-SA-Exim-Mail-From: michael.lippautz@gmail.com
+In-Reply-To: <20100222162424.GA27420@denix.org>
+References: <1266766352-28786-1-git-send-email-rep.dot.nop@gmail.com>
+	<20100222162424.GA27420@denix.org>
+Date: Mon, 22 Feb 2010 16:55:09 +0000
+Message-ID: <1266857709.14566.348.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: [PATCH] python-setuptools: Version bump to 0.6c11
+Subject: Re: [PATCH] git: add SRC_URI name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,72 +41,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Feb 2010 16:56:40 -0000
+X-List-Received-Date: Mon, 22 Feb 2010 16:58:01 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-* Adds python module 'pkg_resources'.
+On Mon, 2010-02-22 at 11:24 -0500, Denys Dmytriyenko wrote:
+> On Sun, Feb 21, 2010 at 04:32:32PM +0100, Bernhard Reutner-Fischer wrote:
+> > Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+> > ---
+> >  recipes/git/git.inc |    2 +-
+> >  1 files changed, 1 insertions(+), 1 deletions(-)
+> > 
+> > diff --git a/recipes/git/git.inc b/recipes/git/git.inc
+> > index 644e159..fd7b708 100644
+> > --- a/recipes/git/git.inc
+> > +++ b/recipes/git/git.inc
+> > @@ -2,7 +2,7 @@ DESCRIPTION = "The git revision control system used by the Linux kernel develope
+> >  SECTION = "console/utils"
+> >  LICENSE = "GPL"
+> >  
+> > -SRC_URI = "http://www.kernel.org/pub/software/scm/git/git-${PV}.tar.bz2"
+> > +SRC_URI = "http://www.kernel.org/pub/software/scm/git/git-${PV}.tar.bz2;name=git"
+> 
+> Is there a patch to add checksums in corresponding recipes to use the name? Or 
+> what is the purpose of adding one?
 
-Signed-off-by: Michael Lippautz <michael.lippautz@gmail.com>
----
- .../python-setuptools/fix-log-usage-0.6c11.patch   |   18 ++++++++++++++++
- recipes/python/python-setuptools_0.6c11.bb         |   22 ++++++++++++++++++++
- 2 files changed, 40 insertions(+), 0 deletions(-)
- create mode 100644 recipes/python/python-setuptools/fix-log-usage-0.6c11.patch
- create mode 100644 recipes/python/python-setuptools_0.6c11.bb
+I guess the idea is to make it possible for new recipes (which use
+this .inc file) to include their own checksums.  Seems like a reasonable
+enough plan even if the old recipes are not converted.
 
-diff --git a/recipes/python/python-setuptools/fix-log-usage-0.6c11.patch b/recipes/python/python-setuptools/fix-log-usage-0.6c11.patch
-new file mode 100644
-index 0000000..b860700
---- /dev/null
-+++ b/recipes/python/python-setuptools/fix-log-usage-0.6c11.patch
-@@ -0,0 +1,18 @@
-+--- a/setuptools/command/sdist.py	2010-02-22 14:57:56.000000000 +0100
-++++ b/setuptools/command/sdist.py	2010-02-22 14:57:31.000000000 +0100
-+@@ -1,6 +1,5 @@
-+ from distutils.command.sdist import sdist as _sdist
-+ from distutils.util import convert_path
-+-from distutils import log
-+ from glob import glob
-+ import os, re, sys, pkg_resources
-+ 
-+@@ -94,7 +93,7 @@
-+         try: svnver = int(data.splitlines()[0])
-+         except: pass
-+         if svnver<8:
-+-            log.warn("unrecognized .svn/entries format in %s", dirname)
-++            print("unrecognized .svn/entries format in %s", dirname)
-+             return           
-+         for record in map(str.splitlines, data.split('\n\x0c\n')[1:]):
-+             if not record or len(record)>=6 and record[5]=="delete":
-diff --git a/recipes/python/python-setuptools_0.6c11.bb b/recipes/python/python-setuptools_0.6c11.bb
-new file mode 100644
-index 0000000..bccafa4
---- /dev/null
-+++ b/recipes/python/python-setuptools_0.6c11.bb
-@@ -0,0 +1,22 @@
-+DESCRIPTION = "Download, build, install, upgrade, and uninstall Python packages"
-+HOMEPAGE = "http://cheeseshop.python.org/pypi/setuptools"
-+SECTION = "devel/python"
-+PRIORITY = "optional"
-+LICENSE = "MIT"
-+DEPENDS_${PN}-native = "python-native"
-+RDEPENDS_${PN} = "python-distutils python-compression"
-+PR = "ml3"
-+
-+SRC_URI = "\
-+  http://cheeseshop.python.org/packages/source/s/setuptools/${SRCNAME}-${PV}.tar.gz;name=setuptools \
-+  file://fix-log-usage-0.6c11.patch;patch=1 \
-+"
-+SRC_URI[setuptools.md5sum] = "7df2a529a074f613b509fb44feefe74e"
-+SRC_URI[setuptools.sha256sum] = "630fea9b726320b73ee3ca6ff61732cb32675b0389be658080fe46383b87a1d3"
-+
-+SRCNAME = "setuptools"
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+inherit distutils
-+
-+BBCLASSEXTEND = "native"
--- 
-1.6.4.4
+p.
+
 
 
 
