@@ -1,40 +1,42 @@
-Received: from mail-fx0-f220.google.com ([209.85.220.220])
+Received: from mail-bw0-f213.google.com ([209.85.218.213])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1NjbPB-0004Sr-N0
+	(envelope-from <michael.lippautz@gmail.com>) id 1NjbaH-0002Qf-9V
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Feb 2010 17:45:13 +0100
-Received: by fxm20 with SMTP id 20so2502508fxm.12
+	Mon, 22 Feb 2010 17:56:40 +0100
+Received: by bwz5 with SMTP id 5so1708603bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2010 08:42:26 -0800 (PST)
+	Mon, 22 Feb 2010 08:53:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=lDgvWHwxP4c/yDOd858oEKvnFR2ywMWmb91gU0Uffg0=;
-	b=GzMU9LOndj18T7dMe5CcCTn3EGQiVozlL7K1ucSmzz3SN2pEFWEGM5Zh4PMINn94OY
-	l62S0JNDiwHGV9/++6gZaFR1vaOVQDCuoehu1qn/oJ3WbqO0SzTgZ9wmrSJdKyBsH1mf
-	3WIbZ+Z8nQIWYJlEA8M9jesuiFhkNr0sNzQzY=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=OPnpC2yti2VmhkN9W+1S6RMzJmMCcZw58V+LHG/bPj8=;
+	b=oKFWyai8lh4BAc3XRi1BpdTjIl6ZJnyW57bPNvPlKksg7gQmCqWCFTpAL6CS8kBCJT
+	HGsUvxiNrHbPRALFyC5PqDlqaKupYi6Jxaw7MWq7Au8bACYvF4uz/Y5U39DEB0gutaM8
+	jXuz8oUg4ZZVBmjY407mjBWB3/nJP3w15dYIs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=BBW9btj30ePtz1bzpqvI4oPoKHRZiJobRGbVHVQy8VV2R+lsZCW4ti2oxC+6zr2djF
-	fw0y1W90GfeQf/tQ1KyoWeSGAMp+JXg7i/0FO/UqRWThn6eAaxXCMDPxVQUHWauukZDW
-	uYbdUlNinKfz96SR7fXuOvO0AbxxVz9aTouYA=
-MIME-Version: 1.0
-Received: by 10.223.132.202 with SMTP id c10mr4316261fat.47.1266856945607; 
-	Mon, 22 Feb 2010 08:42:25 -0800 (PST)
-In-Reply-To: <19c1b8a91002191026p3b06577ay9375f944daa661c1@mail.gmail.com>
-References: <1266337930-2440-1-git-send-email-aalonso00@gmail.com>
-	<19c1b8a91002191026p3b06577ay9375f944daa661c1@mail.gmail.com>
-Date: Mon, 22 Feb 2010 10:42:25 -0600
-Message-ID: <d1ded4381002220842u273237eaudac13d3ddc460da6@mail.gmail.com>
-From: Adrian Alonso <aalonso00@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=lFuTX65310SVi8CIN7iv69k0dLKNJO7sQ753n0hTHzbpvfSvmEtPV7rkIz2TuJUCoI
+	Eb/rZwuxDHZmtKWUeWDUp0XrUmd3jv7Gfxk6yVVumqQxNA8lu0FoiV8bHSpzMc5w131n
+	XtOeMQMTEIyKPQUOUB5buj6Qx1TKcbCwbDwa4=
+Received: by 10.204.49.82 with SMTP id u18mr2300321bkf.74.1266857633069;
+	Mon, 22 Feb 2010 08:53:53 -0800 (PST)
+Received: from localhost.localdomain (85-127-52-58.dynamic.xdsl-line.inode.at
+	[85.127.52.58])
+	by mx.google.com with ESMTPS id 14sm1214184bwz.10.2010.02.22.08.53.51
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 22 Feb 2010 08:53:52 -0800 (PST)
+From: Michael Lippautz <michael.lippautz@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.220
-X-SA-Exim-Mail-From: aalonso00@gmail.com
+Date: Mon, 22 Feb 2010 17:54:10 +0100
+Message-Id: <1266857650-5557-1-git-send-email-michael.lippautz@gmail.com>
+X-Mailer: git-send-email 1.6.4.4
+In-Reply-To: <n>
+References: <n>
+X-SA-Exim-Connect-IP: 209.85.218.213
+X-SA-Exim-Mail-From: michael.lippautz@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH 1/4] tune-ppc440.inc: add ppc440 to PACKAGE_EXTRA_ARCHS
+Subject: [PATCH] python-setuptools: Version bump to 0.6c11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,82 +50,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Feb 2010 16:45:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 22 Feb 2010 16:56:40 -0000
 
-Hi Khem,
+* Adds python module 'pkg_resources'.
 
-If I omit the inclusion of the target arch `ppc440` in  PACKAGE_EXTRA_ARCHS
-the final image build
-fails [1], I been looking on bitbake internals to tray to solve this as you
-mention but I'm still clueless
-on how to handle it;
+Signed-off-by: Michael Lippautz <michael.lippautz@gmail.com>
+---
+ .../python-setuptools/fix-log-usage-0.6c11.patch   |   18 ++++++++++++++++
+ recipes/python/python-setuptools_0.6c11.bb         |   22 ++++++++++++++++++++
+ 2 files changed, 40 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/python/python-setuptools/fix-log-usage-0.6c11.patch
+ create mode 100644 recipes/python/python-setuptools_0.6c11.bb
 
-My local.conf
----------------------
-MACHINE = "xilinx-ml507"
-TARGET_ARCH = "powerpc"
-TARGET_OS = "linux"
-DISTRO = "angstrom-2008.1"
-
-[1] http://pastebin.com/m4f649914
-
-Regards.
-
-On Fri, Feb 19, 2010 at 12:26 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> On Tue, Feb 16, 2010 at 8:32 AM, Adrian Alonso <aalonso00@gmail.com>
-> wrote:
-> > Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
-> > ---
-> >  conf/machine/include/tune-ppc440.inc |    2 +-
-> >  1 files changed, 1 insertions(+), 1 deletions(-)
-> >
-> > diff --git a/conf/machine/include/tune-ppc440.inc
-> b/conf/machine/include/tune-ppc440.inc
-> > index feca186..0c41db4 100644
-> > --- a/conf/machine/include/tune-ppc440.inc
->
-
-
-> > +++ b/conf/machine/include/tune-ppc440.inc
-> > @@ -1,4 +1,4 @@
-> >  TARGET_CC_ARCH = "-mcpu=440"
-> >  BASE_PACKAGE_ARCH = "ppc440"
-> >  FEED_ARCH = "ppc440"
-> > -PACKAGE_EXTRA_ARCHS += "ppc440e"
-> > +PACKAGE_EXTRA_ARCHS += "ppc440 ppc440e"
->
->
-> I wonder why this would be needed, I would think that PACKAGE_ARCHS
-> consists of PACKAGE_EXTRA_ARCHS and PACKAGE_ARCH (which is default
-> arch constructed from  BASE_PACKAGE_ARCH)
-> if that was the case then ppc440 would be added to supported archs
-> list already but it seems there is a disconnect between PACKAGE_ARCH
-> and  PACKAGE_ARCHS I am not sure if it
-> is deliberate or an oversight. If it is an oversight then it should be
-> fixed in bitbake.conf and that would avoid this patch.
->
-> > --
-> > 1.6.6
-> >
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-
-
+diff --git a/recipes/python/python-setuptools/fix-log-usage-0.6c11.patch b/recipes/python/python-setuptools/fix-log-usage-0.6c11.patch
+new file mode 100644
+index 0000000..b860700
+--- /dev/null
++++ b/recipes/python/python-setuptools/fix-log-usage-0.6c11.patch
+@@ -0,0 +1,18 @@
++--- a/setuptools/command/sdist.py	2010-02-22 14:57:56.000000000 +0100
+++++ b/setuptools/command/sdist.py	2010-02-22 14:57:31.000000000 +0100
++@@ -1,6 +1,5 @@
++ from distutils.command.sdist import sdist as _sdist
++ from distutils.util import convert_path
++-from distutils import log
++ from glob import glob
++ import os, re, sys, pkg_resources
++ 
++@@ -94,7 +93,7 @@
++         try: svnver = int(data.splitlines()[0])
++         except: pass
++         if svnver<8:
++-            log.warn("unrecognized .svn/entries format in %s", dirname)
+++            print("unrecognized .svn/entries format in %s", dirname)
++             return           
++         for record in map(str.splitlines, data.split('\n\x0c\n')[1:]):
++             if not record or len(record)>=6 and record[5]=="delete":
+diff --git a/recipes/python/python-setuptools_0.6c11.bb b/recipes/python/python-setuptools_0.6c11.bb
+new file mode 100644
+index 0000000..bccafa4
+--- /dev/null
++++ b/recipes/python/python-setuptools_0.6c11.bb
+@@ -0,0 +1,22 @@
++DESCRIPTION = "Download, build, install, upgrade, and uninstall Python packages"
++HOMEPAGE = "http://cheeseshop.python.org/pypi/setuptools"
++SECTION = "devel/python"
++PRIORITY = "optional"
++LICENSE = "MIT"
++DEPENDS_${PN}-native = "python-native"
++RDEPENDS_${PN} = "python-distutils python-compression"
++PR = "ml3"
++
++SRC_URI = "\
++  http://cheeseshop.python.org/packages/source/s/setuptools/${SRCNAME}-${PV}.tar.gz;name=setuptools \
++  file://fix-log-usage-0.6c11.patch;patch=1 \
++"
++SRC_URI[setuptools.md5sum] = "7df2a529a074f613b509fb44feefe74e"
++SRC_URI[setuptools.sha256sum] = "630fea9b726320b73ee3ca6ff61732cb32675b0389be658080fe46383b87a1d3"
++
++SRCNAME = "setuptools"
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
++inherit distutils
++
++BBCLASSEXTEND = "native"
 -- 
-Saludos
-Adrian Alonso
-http://aalonso.wordpress.com
+1.6.4.4
+
+
 
