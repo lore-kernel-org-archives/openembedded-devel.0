@@ -1,35 +1,39 @@
-Received: from mail-bw0-f213.google.com ([209.85.218.213])
+Received: from mail-iw0-f179.google.com ([209.85.223.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.lippautz@gmail.com>) id 1NjxlI-0006ap-4h
+	(envelope-from <cliff.brake@gmail.com>) id 1NjyDN-0003up-PG
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 17:37:31 +0100
-Received: by bwz5 with SMTP id 5so2608111bwz.12
+	Tue, 23 Feb 2010 18:06:32 +0100
+Received: by iwn9 with SMTP id 9so3485574iwn.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2010 08:34:43 -0800 (PST)
+	Tue, 23 Feb 2010 09:03:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=kfa4OhQLgm3OHozX4BJMyxgqNaIx6wIngyqQ21mEOJQ=;
-	b=OhWqLWtuJMLxVoLXgSrsaJuHATPCXBYBf5ayOeonYGoivinUQL26AvB1WpgIqNLrgp
-	HTxxvrIC9i9ZY+JXguGcqxuwPFo/+M00lV4SkN0Lcr9bpjBY9vZcEkfMulXPyclQQu5C
-	OkuLaPYUOJrZPksNK2vRSyntAw9QupZpyPK7c=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=JwBBxJ5vBY5g1vfTAr1ic4bU++0hTw9/5KtEWRxxLlY=;
+	b=BBSC58fEog9TeBMualAFduhvvk4V/fecmOaxVhiLUEs7xU3CbEjkhKsiVEawVrNzRh
+	DyxLrvIgl5BFQPR68uPQpbkm2gOVkdDp7CnVZ2FkWHghYRxDq4LEwVV1GK+CU7xcd0wl
+	FBpW1uySMjG6AcfhOzQ/N0zS8RjkYfuALC6Ac=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=sdHYsFEQESaiOHfAYqdrpqxUQRl6jzM90NDNyyvhxyOmzD5lpVm3flefg2TBq/5CK+
-	Gp5x797qojjJX6eRrAB/tvGsqQpFNI17P49ClLOfUO0PpyxbDVNkEXiuzltnjXpaMKlU
-	56TqBdDfjIkcJ5Uuvttl/xP/j20fKnSWV3CoY=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=gaJYw7HUpDPpkxd7hwiWYChX1PBIysoO0wu3EC51PIxCOu3lg2ph2oL+FggyNcqAUV
+	4J7b3R26nyAsEUaByydQRFRn/b+Sg8xRbqS0AySiDjsz+XwA3BIwpZ35+iYqFPx+3MjB
+	p9KS4B9OALOOnj6EuCcDAG3EeuAU7J8SqDUT0=
 MIME-Version: 1.0
-Received: by 10.204.150.81 with SMTP id x17mr2328342bkv.200.1266942882884; 
-	Tue, 23 Feb 2010 08:34:42 -0800 (PST)
-Date: Tue, 23 Feb 2010 17:34:42 +0100
-Message-ID: <fca63bcf1002230834x47b602abt1b3d12bb96622cac@mail.gmail.com>
-From: Michael Lippautz <michael.lippautz@gmail.com>
-To: OE Mailinglist <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.218.213
-X-SA-Exim-Mail-From: michael.lippautz@gmail.com
+Received: by 10.231.148.9 with SMTP id n9mr684306ibv.81.1266944624078; Tue, 23 
+	Feb 2010 09:03:44 -0800 (PST)
+In-Reply-To: <201002102228.49805.holger+oe@freyther.de>
+References: <f96d234e1002091310h6eb4f93ei67068714adadd017@mail.gmail.com>
+	<201002102228.49805.holger+oe@freyther.de>
+Date: Tue, 23 Feb 2010 12:03:43 -0500
+Message-ID: <f96d234e1002230903j24d67bcauca7714045a8d7c77@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.223.179
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: {RFC} gpsd
+Subject: Re: OE weekly changelog 2010-02-01 to 2010-02-08
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,33 +47,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 16:37:31 -0000
+X-List-Received-Date: Tue, 23 Feb 2010 17:06:33 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hej,
+On Wed, Feb 10, 2010 at 4:28 PM, Holger Hans Peter Freyther
+<holger+oe@freyther.de> wrote:
+> On Tuesday 09 February 2010 22:10:40 Cliff Brake wrote:
+>> OE weekly changelog 2010-02-01 to 2010-02-08
+>
+> Hi Cliff,
+>
+> do you think having the output of `git shortlog holger/staging-branch` in the
+> weekly changelog would be a nice addition?
 
-Since i rely on gpsd for my day-to-day work I did (or at least try to)
-bump the version and get things a bit more right. (hopefully)
+Added to the script, thanks.
 
-I bumped the recipe to 2.90 making the following changes:
-
-* Removed board related stuff from the main recipe (I know there are
-overrides, but I don't think the GPS device on a board has to do
-something with gpsd itself.)
-* Therefore added a recipe for the om-gta01 board. (couldn't test)
-* Added udev support for gpsd. (hotplugging tested and working)
-* Modified the init script so hardware could either
-manually/update-alternatives added to /etc/default/gpsd file OR
-  added by a separate recipe using the established socket. (tested and working)
-
-I could successfully test gpsd 2.90 running via initscript and udev
-using u-blox 4 and 5 devices.
-Python bindings do also work, despite the fact the the API has
-slightly changed (as stated at the gpsd homepage)
-
-Patches are sent separately. I hope they are readable.
-
-Regards,
-Michael
+Cliff
 
 
