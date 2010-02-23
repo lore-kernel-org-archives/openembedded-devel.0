@@ -1,28 +1,25 @@
-Received: from mail.kernelconcepts.de ([212.60.202.196])
+Received: from us194mx009.tycoelectronics.net ([198.175.154.211])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1NjtdJ-0003z7-S6
+	(envelope-from <jay.snyder@tycoelectronics.com>) id 1NjvBB-00044o-6Y
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 13:13:00 +0100
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1Njtcv-0002TS-T3
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 13:12:33 +0100
-Message-ID: <4B83C5A8.20002@kernelconcepts.de>
-Date: Tue, 23 Feb 2010 13:10:16 +0100
-From: Florian Boor <florian.boor@kernelconcepts.de>
+	Tue, 23 Feb 2010 14:52:04 +0100
+Received: from [163.241.71.52] (163.241.71.52) by
+	us194mx009.tycoelectronics.net (163.241.185.250) with Microsoft SMTP
+	Server id 8.1.393.1; Tue, 23 Feb 2010 08:49:15 -0500
+Message-ID: <4B83DBDD.7020004@tycoelectronics.com>
+Date: Tue, 23 Feb 2010 08:45:01 -0500
+From: Jay Snyder <jay.snyder@tycoelectronics.com>
 User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <E1Nhfko-0005KL-8Z@melo.openembedded.org>	<1266437931.5691.30.camel@trini-m4400>
-	<hlhmn0$5c2$1@ger.gmane.org>
-In-Reply-To: <hlhmn0$5c2$1@ger.gmane.org>
-X-Enigmail-Version: 0.95.7
-X-SA-Exim-Connect-IP: 212.60.202.196
-X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
+To: <openembedded-devel@lists.openembedded.org>
+References: <mailman.5.1266922802.8892.openembedded-devel@lists.openembedded.org>
+In-Reply-To: <mailman.5.1266922802.8892.openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 198.175.154.211
+X-SA-Exim-Mail-From: jay.snyder@tycoelectronics.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [oe-commits] Koen Kooi : opkg-native: bump to r522 to get a fix to remove duplicate messages from do_rootfs logs
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Openembedded-devel Digest, Vol 43, Issue 99
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,29 +33,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 12:13:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 23 Feb 2010 13:52:04 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi,
+>
+>
+> The most easy way to turn it off is to not build with GNU HASH style, 
+> This can
+> be made by not using "--hash-style=SOMETHING" in the LDFLAGS.
+>
+> The GNU HASH is not a security mechanism but a dynamic linker 
+> optimization to
+> be able to resolve symbols faster.
+>
+> It was added later as the feature is not that old. Everything I do 
+> build is
+> building fine, so in case you see an "awful" lot of breakage it would 
+> be nice
+> if you could clarify this.
+>
+I'll post details next time I run into it.     Your solution above 
+doesn't fix the problem, as the error the OE build system complaining 
+about binaries NOT having the GNU Hash.      There are many packages 
+that do not pass the "--hash-style" option from the bitbake configure 
+task down to all their makefiles.    I'd have to go back through my 
+local copies of recipes that I've patched to see which ones that I've 
+had to do "CCFLAGS += ${LDFLAGS}" fix to.   In some cases, I needed to 
+put patches in for Makefile.ac files.     Due to the current time crunch 
+that I'm in on my current project, I will not have time for several 
+weeks to go back through these changes.     It is my  intention to 
+submit these patches for inclusion in OE when I have time (if someone 
+else hasn't already).
 
-Koen Kooi schrieb:
-> Personally, I want sanesrcrev.inc to die and put the revs in the recipes
-> where they belong.
-
-I agree - there is not much use in keeping some random package related
-information in different files. That's like if we would collect the license
-information or the source URI for all packages in a single file :)
-
-Greetings
-
-Florian
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+Thank you,
+Jay
 
 
