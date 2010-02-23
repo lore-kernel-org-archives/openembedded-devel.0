@@ -1,39 +1,37 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Nk1yI-0003gj-AP
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1Nk28Y-0000YF-8n
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 22:07:13 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1Nk1vc-0005PS-Pe from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 13:04:24 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 23 Feb 2010 13:04:24 -0800
-Received: from 172.30.80.81 ([172.30.80.81]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Tue, 23 Feb 2010 21:04:23 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	23 Feb 2010 14:04:23 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Tue, 23 Feb 2010 22:17:49 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1NLF1c1031813
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Feb 2010 21:15:01 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 27464-08 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Feb 2010 21:14:57 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1NLErFo031801
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Feb 2010 21:14:54 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100223205716.GC27420@denix.org>
-References: <1266950939-3302-1-git-send-email-clarson@kergoth.com>
-	<20100223205716.GC27420@denix.org>
-Organization: Mentor Graphics Corporation
-Date: Tue, 23 Feb 2010 14:04:22 -0700
-Message-ID: <1266959062.18176.73.camel@trini-m4400>
+In-Reply-To: <1266958592.18176.72.camel@trini-m4400>
+References: <1266887211-31228-1-git-send-email-clarson@kergoth.com>
+	<1266958592.18176.72.camel@trini-m4400>
+Date: Tue, 23 Feb 2010 21:14:51 +0000
+Message-ID: <1266959691.1714.522.camel@rex>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 23 Feb 2010 21:04:24.0630 (UTC)
-	FILETIME=[C72A9D60:01CAB4CB]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-Mailer: Evolution 2.28.2 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Chris Larson <chris_larson@mentor.com>
-Subject: Re: [PATCH] kernel.bbclass: Stage the raw zImage and modules tarball for inclusion in pstage
+Subject: Re: [PATCH] insane: check for .debug as a path component, not part of the path string
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,66 +45,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 21:07:13 -0000
+X-List-Received-Date: Tue, 23 Feb 2010 21:17:49 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Tue, 2010-02-23 at 15:57 -0500, Denys Dmytriyenko wrote:
-> On Tue, Feb 23, 2010 at 11:48:59AM -0700, Chris Larson wrote:
-> > From: Tom Rini <tom_rini@mentor.com>
->=20
-> How is it different from [1]? Or is it meant to be pushed to stable/2009?
-> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D8dc84=
-badb1d772f5953492c4022c1f644c4fe278
+On Tue, 2010-02-23 at 13:56 -0700, Tom Rini wrote:
+> On Mon, 2010-02-22 at 18:06 -0700, an unknown sender wrote:
+> > From: Chris Larson <chris_larson at mentor.com>
+> > 
+> > Signed-off-by: Chris Larson <chris_larson at mentor.com>
+> 
+> Acked-by: Tom Rini <tom_rini@mentor.com>
+Acked-by: Richard Purdie <rpurdie@linux.intel.com>
 
-Isn't.  Chris just missed me forgetting about the 2 ack policy for
-bbclass files and just doing it.
-
-> > Signed-off-by: Tom Rini <tom_rini@mentor.com>
-> > Signed-off-by: Chris Larson <chris_larson@mentor.com>
 > > ---
-> >  classes/kernel.bbclass |    2 ++
-> >  1 files changed, 2 insertions(+), 0 deletions(-)
-> >=20
-> > diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-> > index 83530b5..8121339 100644
-> > --- a/classes/kernel.bbclass
-> > +++ b/classes/kernel.bbclass
-> > @@ -536,10 +536,12 @@ MODULES_IMAGE_BASE_NAME ?=3D modules-${PV}-${PR}-=
-${MACHINE}
-> >  do_deploy() {
-> >  	install -d ${DEPLOY_DIR_IMAGE}
-> >  	install -m 0644 ${KERNEL_OUTPUT} ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_B=
-ASE_NAME}.bin
-> > +	package_stagefile_shell ${S}/${KERNEL_OUTPUT}
-> >  	package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGE_BASE_NAME}=
-.bin
-> > =20
-> >  	if [ -d "${PKGD}/lib" ]; then
-> >  		fakeroot tar -cvzf ${DEPLOY_DIR_IMAGE}/${MODULES_IMAGE_BASE_NAME}.tg=
-z -C ${PKGD} lib
-> > +		package_stagefile_shell ${DEPLOY_DIR_IMAGE}/${MODULES_IMAGE_BASE_NAM=
-E}.tgz
-> >  	fi
-> > =20
-> >  	cd ${DEPLOY_DIR_IMAGE}
-> > --=20
-> > 1.6.3.3
-> >=20
-> >=20
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >  classes/insane.bbclass |    2 +-
+> >  1 files changed, 1 insertions(+), 1 deletions(-)
+> > 
+> > diff --git a/classes/insane.bbclass b/classes/insane.bbclass
+> > index 804caf0..c2e8d9c 100644
+> > --- a/classes/insane.bbclass
+> > +++ b/classes/insane.bbclass
+> > @@ -279,7 +279,7 @@ def package_qa_check_dbg(path, name,d, elf):
+> >      sane = True
+> >  
+> >      if not "-dbg" in name:
+> > -        if '.debug' in path:
+> > +        if '.debug' in path.split(os.path.sep):
+> >              error_msg = "non debug package contains .debug directory: %s path %s" % \
+> >                       (name, package_qa_clean_path(path,d))
+> >              sane = package_qa_handle_error(3, error_msg, name, path, d)
+> 
+> 
 
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
 
 
