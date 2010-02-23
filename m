@@ -1,40 +1,37 @@
-Received: from mail-iw0-f179.google.com ([209.85.223.179])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1Nk1ds-00006G-Tl
+	(envelope-from <Tom_Rini@mentor.com>) id 1Nk1qi-0003Gk-2G
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 21:46:08 +0100
-Received: by iwn9 with SMTP id 9so3703455iwn.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2010 12:43:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=a+QshypUBJCWyFDZZpYekE/rMmsOH/KiBZ5iSgws+6k=;
-	b=oYkVQ7WT1qqCeUhZX2GBICgoBzjFr/AAPFI2GCTe6faWAomIhhPZcjL5lXWJADZmXv
-	nMMFw3OBiYAvunqhsKAYZpN9worldEvfUS1bfL/qam64qYBoJ1yuUndCffJizzh5uS4P
-	1FrM+n0NN3PBWHXH/3Vxe9ZMLEJ18/iFErujE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=PpELHBCy/FVuYlZuizQGJMkvVzoYLs6BodexdTuqoDHr7Ec7dDopjiZmDAmHvDwluO
-	jSK0f2pb/ZpfNb9rvBz6jpugs99pRy/iHBziexJJYWQMkwt9SJHKlgU0dfB2CQ2pTlLa
-	7OZN3bV2ppQoC/n+u8KhEu7d2e79skZF6ydKM=
-MIME-Version: 1.0
-Received: by 10.231.157.83 with SMTP id a19mr626152ibx.41.1266957799262; Tue, 
-	23 Feb 2010 12:43:19 -0800 (PST)
-In-Reply-To: <19c1b8a91002231036u46b1b35andf9fb71345805669@mail.gmail.com>
-References: <f96d234e1002230827y25028493l7f25ab05b6fbac76@mail.gmail.com>
-	<19c1b8a91002231036u46b1b35andf9fb71345805669@mail.gmail.com>
-Date: Tue, 23 Feb 2010 15:43:18 -0500
-Message-ID: <f96d234e1002231243h1e75af62g90d490aa792fbe96@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	Tue, 23 Feb 2010 21:59:23 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1Nk1o2-0004FI-Fs from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Feb 2010 12:56:34 -0800
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 23 Feb 2010 12:56:34 -0800
+Received: from 172.30.80.81 ([172.30.80.81]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Tue, 23 Feb 2010 20:56:33 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	23 Feb 2010 13:56:33 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.179
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+In-Reply-To: <1266887211-31228-1-git-send-email-clarson@kergoth.com>
+References: <1266887211-31228-1-git-send-email-clarson@kergoth.com>
+Organization: Mentor Graphics Corporation
+Date: Tue, 23 Feb 2010 13:56:32 -0700
+Message-ID: <1266958592.18176.72.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 23 Feb 2010 20:56:34.0311 (UTC)
+	FILETIME=[AED5A170:01CAB4CA]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: gettext native failure
+Subject: Re: [PATCH] insane: check for .debug as a path component, not part of the path string
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,71 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 20:46:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 23 Feb 2010 20:59:23 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 23, 2010 at 1:36 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Tue, Feb 23, 2010 at 8:27 AM, Cliff Brake <cliff.brake@gmail.com> wrot=
-e:
->> make[4]: Entering directory
->> `/scratch/oe/oe-from-scratch/tmp/work/x86_64-linux/gettext-native-0.17-r=
-5/gettext-0.17/gettext-tools/src'
->> =E2=88=98 /bin/sh ../x86_64-linux-libtool --tag=3DCC =C2=A0 --mode=3Dlin=
-k gcc
->> -std=3Dgnu99 =C2=A0-isystem/scratch/oe/oe-from-scratch/tmp/staging/x86_6=
-4-linux/usr/include
->> -O2 -g =C2=A0-L/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/=
-lib
->> -Wl,-rpath-link,/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr=
-/lib
->> -Wl,-rpath,/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/lib
->> -Wl,-O1 -o msgcmp msgcmp-msgcmp.o libgettextsrc.la
->> =E2=88=98 x86_64-linux-libtool: link: gcc -std=3Dgnu99
->> -isystem/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/include
->> -O2 -g -Wl,-rpath-link
->> -Wl,/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/lib
->> -Wl,-rpath -Wl,/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/=
-lib
->> -Wl,-O1 -o .libs/msgcmp msgcmp-msgcmp.o
->> -L/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/lib
->> ./.libs/libgettextsrc.so
->> /scratch/oe/oe-from-scratch/tmp/work/x86_64-linux/gettext-native-0.17-r5=
-/gettext-0.17/gettext-tools/gnulib-lib/.libs/libgettextlib.so
->> /usr/lib/libcroco-0.6.so /usr/lib/libglib-2.0.so -lncurses -lc
->> -Wl,-rpath -Wl,/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/=
-lib
->> =E2=88=98 /usr/lib64/libxml2.so.2: undefined reference to `gzopen64'
->> =E2=88=98 collect2: ld returned 1 exit status
->>
->> http://bugs.openembedded.org/show_bug.cgi?id=3D2679
->>
->> http://bugs.openembedded.org/show_bug.cgi?id=3D5139
->>
->> Looks like a classic case of using the staging libz, but libxml2 from
->> the host. =C2=A0It appears that libxml2 cannot be built in OE until gett=
-ext
->> is built. =C2=A0Any thoughts on this one?
->
->
-> http://patchwork.openembedded.org/patch/185/
->
-> and then more detailed explanation is here
-> http://article.gmane.org/gmane.comp.handhelds.openembedded/22700/match=3D=
-libxml2
->
-> IIRC when I tested it. It was not happening with gcc 4.4.x
-> Which version of gcc do you have on your build box.
+On Mon, 2010-02-22 at 18:06 -0700, an unknown sender wrote:
+> From: Chris Larson <chris_larson at mentor.com>
+>=20
+> Signed-off-by: Chris Larson <chris_larson at mentor.com>
 
-cbrake@happy:/scratch/oe/oe-testing$ gcc --version
-gcc (Ubuntu 4.4.1-4ubuntu9) 4.4.1
-Copyright (C) 2009 Free Software Foundation, Inc.
-This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Acked-by: Tom Rini <tom_rini@mentor.com>
 
-I read through your links, but those are for building libxml2.  I'm
-still trying to build gettext.
+> ---
+>  classes/insane.bbclass |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/classes/insane.bbclass b/classes/insane.bbclass
+> index 804caf0..c2e8d9c 100644
+> --- a/classes/insane.bbclass
+> +++ b/classes/insane.bbclass
+> @@ -279,7 +279,7 @@ def package_qa_check_dbg(path, name,d, elf):
+>      sane =3D True
+> =20
+>      if not "-dbg" in name:
+> -        if '.debug' in path:
+> +        if '.debug' in path.split(os.path.sep):
+>              error_msg =3D "non debug package contains .debug directory: =
+%s path %s" % \
+>                       (name, package_qa_clean_path(path,d))
+>              sane =3D package_qa_handle_error(3, error_msg, name, path, d=
+)
 
-Cliff
+
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
