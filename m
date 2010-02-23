@@ -1,31 +1,28 @@
-Received: from smtp-out26.alice.it ([85.33.2.26])
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1NjtVK-0003k1-9J
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1NjtdJ-0003z7-S6
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 13:04:45 +0100
-Received: from FBCMMO01.fbc.local ([192.168.68.195]) by smtp-out26.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 23 Feb 2010 13:00:56 +0100
-Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO01.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 23 Feb 2010 13:00:55 +0100
-Received: from [192.168.1.116] ([79.54.13.49]) by FBCMCL01B07.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Tue, 23 Feb 2010 13:00:55 +0100
-From: GNUtoo <GNUtoo@no-log.org>
+	Tue, 23 Feb 2010 13:13:00 +0100
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1Njtcv-0002TS-T3
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Feb 2010 13:12:33 +0100
+Message-ID: <4B83C5A8.20002@kernelconcepts.de>
+Date: Tue, 23 Feb 2010 13:10:16 +0100
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <a1da1e5e1002230103k33369a5j2be39f66400aab8c@mail.gmail.com>
-References: <a1da1e5e1002230103k33369a5j2be39f66400aab8c@mail.gmail.com>
-Date: Tue, 23 Feb 2010 13:00:51 +0100
-Message-Id: <1266926451.3759.12.camel@gnutoo-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-OriginalArrivalTime: 23 Feb 2010 12:00:55.0644 (UTC)
-	FILETIME=[DAB239C0:01CAB47F]
-X-SA-Exim-Connect-IP: 85.33.2.26
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+References: <E1Nhfko-0005KL-8Z@melo.openembedded.org>	<1266437931.5691.30.camel@trini-m4400>
+	<hlhmn0$5c2$1@ger.gmane.org>
+In-Reply-To: <hlhmn0$5c2$1@ger.gmane.org>
+X-Enigmail-Version: 0.95.7
+X-SA-Exim-Connect-IP: 212.60.202.196
+X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Linux on Nokia 5800
+Subject: Re: [oe-commits] Koen Kooi : opkg-native: bump to r522 to get a fix to remove duplicate messages from do_rootfs logs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,57 +36,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 12:04:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 23 Feb 2010 12:13:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2010-02-23 at 01:03 -0800, KaruppuSwamy T wrote:
-> I have installed openembedded to get familiar with embedded linux development.
-> I have some good experience in building the linux from scratch (lfs)
-> and using gentoo for some time.
-> 
-> To play with real hardware, I have got my wife's Nokia 5800 which
-> seems to be a crap for day to day use. So I am dedicating this mobile
-> for my embedded linux play.
-> 
-> Please let me know how to start with it to develop an image for
-> Nokia 5800. How to target (customize) the arm build for this device?
-> It seems to be Nokia 5800 is based on ARM11 processor. My aim is not
-> to run a Mobile app in it, instead a linux distro.
-According to the specs I found, it runs symbian
-I am not aware of a symbian bootloader like haret(maybe it exists)
-So...
-If you can't find one you will have to develop a bootloader
-Then you need to find the exact cpu/soc model.
-If there is a port of the linux kenrel for it,you could use it but you
-will need drivers.
-Finding the serial port or jtag would help a lot since you won't
-necessary see something on the screen at first.
-Most of the time that requires disassembling the phone and soldering.
-A big issue would also be the lack of documentation,you would need to do
-reverse-engineering and so write something like haret which also does
-reverse engineering.
+Hi,
 
-All that is too much time consuming,so maybe choose a better model which
-already runs some sort of linux kernel.
-The time spent on writing drivers and adapting the kernel depends on:
-*the recentness of your kernel(you want a recent kernel)
-*the fact that you have proprietary drivers or not
-*the fact that the kernel is standard or not(I'm thinking about android)
-*the completeness of the port
+Koen Kooi schrieb:
+> Personally, I want sanesrcrev.inc to die and put the revs in the recipes
+> where they belong.
 
-So:
-*or use qemuarm target or something like this(there are also some x86
-targets)
-*or buy some hardware that is supported...
-Some devices like the nanonote(I don't know the state of openembedded
-support,but runs GNU/Linux) or the sheevaplug(should be well suported)
-don't cost a lot,and it will save you a lot of time and frustration.
+I agree - there is not much use in keeping some random package related
+information in different files. That's like if we would collect the license
+information or the source URI for all packages in a single file :)
 
-Denis.
+Greetings
 
+Florian
 
-
-
+-- 
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
