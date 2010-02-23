@@ -1,36 +1,38 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vivektambakad@gmail.com>) id 1NjosL-0006RM-Pz
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 08:08:12 +0100
-Received: by gyd5 with SMTP id 5so244517gyd.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Njqj7-0007eP-I5 for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Feb 2010 10:06:49 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NjqgU-0004o3-By for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Feb 2010 10:04:02 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Feb 2010 10:04:02 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2010 23:05:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=CkKklDpVg6Ag2KDPBTxDokMwEGH8hqaNLU/Cyhq3veU=;
-	b=Uaec8muEGrSYnb/6mnuLXjgpwMZVbTulLzdsBl5lBTDsYGwcSwhrjK58zME+i52hL8
-	xs1hG7g0e+Za7CHAr33AcRLtHzvRrt48aGzqf1bPbkXE8rjnrSx7oLHDgrrD/eNWE/Oy
-	bGUZubvhG051CV1Q+aG89tNHOLDcDAN0bfsz0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=p2nvg/3N9SrW6ksKzuszwBHYfnRYgxyMkmIPMnOktJQNfQoyVGknYArGPK0TGt9wbc
-	WxZnhLMGYOhuuWsSbaFi1COaTwn8fxNel4oMb+LzneyLQcspArN9BRQltNqz4Yl/fHBz
-	vkxxOLPrfBOYmYGn/1xIe9/VVlnwAgxXjNb4w=
-MIME-Version: 1.0
-Received: by 10.90.40.17 with SMTP id n17mr5594474agn.3.1266908724403; Mon, 22 
-	Feb 2010 23:05:24 -0800 (PST)
-Date: Tue, 23 Feb 2010 12:35:22 +0530
-Message-ID: <ad82c8891002222305g5bbcae45te6a4836c83717076@mail.gmail.com>
-From: vivek tambakad <vivektambakad@gmail.com>
+	Tue, 23 Feb 2010 10:04:02 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: vivektambakad@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 23 Feb 2010 10:03:51 +0100
+Message-ID: <hm05ln$2cr$1@dough.gmane.org>
+References: <18e217241002221429m1939c786u52da4672f626ca07@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100219 Shredder/3.0.3pre
+In-Reply-To: <18e217241002221429m1939c786u52da4672f626ca07@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: ERROR: Please set the 'PERSISTENT_DIR' or 'CACHE' variable
+Subject: Re: using initramfs with openembedded.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,20 +46,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 07:08:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 23 Feb 2010 09:06:49 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi,
-          I am building "bitbake x11-image". I get following error
-ERROR: Please set the 'PERSISTENT_DIR' or 'CACHE' variable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I have set path correctly and infact build x11-image previously.
-I installed some packages "php5 php5-cli php5-mysql mysql-server php-pear
-php-db openssh-server" for
-asterisk  application. Is the above installed packages create any conflict
-with openembedded.
-I am getting this error after installing these packages.
+On 22-02-10 23:29, C Michael Sundius wrote:
+> We'd like to put our initial boottime file system into the initramfs in the
+> kernel. But we also need to build some separate drivers to put into that
+> filesystem image.
+> 
+> Of course we can't build those drivers without the kernel staging dir
+> populated. (which doesn't happen until after the build of the kernel).
+> 
+> Has anyone run into this problem? how did you solve it? do I need to stage
+> the headerfiles and config info before the kernel build?
+> 
+> maybe this problem is solved some other way.. I haven't really tried this so
+> I'm just speculating here.
+> 
+> If anyone has some experience with this it would be great to hear how to go
+> about this. thanks for you help
 
-with regards
-vivek tambakad
+The common way right now is to use 2 kernel recipes. Not an optimal
+situation, but it will get you there.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLg5n3MkyGM64RGpERAt6HAJ95plgifYy7yqC6mjovarzuokEPjwCgg0R1
+d8Lfns4Aq/S9rwyV930RjME=
+=2fyI
+-----END PGP SIGNATURE-----
+
+
 
