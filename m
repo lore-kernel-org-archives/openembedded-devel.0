@@ -1,44 +1,40 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1Njz1q-0008A1-4Z
+Received: from mail-iw0-f179.google.com ([209.85.223.179])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1NjzI0-0006oa-Kg
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 18:58:41 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1NHtrfE024625
+	Tue, 23 Feb 2010 19:15:23 +0100
+Received: by iwn9 with SMTP id 9so3555329iwn.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2010 17:55:53 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 24165-09 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2010 17:55:49 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1NHtj4R024619
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2010 17:55:46 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Tue, 23 Feb 2010 10:12:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=Vlyo+7SBxflGLuYt6x27tQR23gZeKgE2QurLpaHKOAg=;
+	b=W4SP9jumCS4E8TfnNEwtwivJ5odFpghJo2IQ+bdwMqVL6WtmpOAsOxQc6PBa3NuQaf
+	uaMnDMIjrlYA/12Dx/qlM2cD+cWp5CJ+0gBXtd2Xy0TrVV0L9zQbNfNDq0DZZvjuCTjr
+	/CjAPxGPHqGz2gz+ROfwejSjnXIMaKFv5tPzk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Z1F3xjiKmYCVo+sD9Q5AC+wPp1uYKeSe9vRUkgTbCBp4bfJLy29Ou4FJiNOU1s1snr
+	sQSEyEn7SVjv6RP3nNHtFZla7Aa/n/uYxBrbLo+9swwl2WV11FpLF/4+AJUqQBoVnQpW
+	EKaY7og8J9+f0uH1Pu6MU+Y4zUzBjZJsNOzs0=
+MIME-Version: 1.0
+Received: by 10.231.153.1 with SMTP id i1mr1317920ibw.35.1266948750083; Tue, 
+	23 Feb 2010 10:12:30 -0800 (PST)
+In-Reply-To: <4B83DD5C.8050408@tycoelectronics.com>
+References: <mailman.5.1266922802.8892.openembedded-devel@lists.openembedded.org>
+	<4B83DD5C.8050408@tycoelectronics.com>
+Date: Tue, 23 Feb 2010 10:12:30 -0800
+Message-ID: <19c1b8a91002231012g3fc28e18ib2999dc5963208a3@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <b6ebd0a51002201719jc6e694fudbd3eaacb47df0b2@mail.gmail.com>
-References: <1266316492.6436.127.camel@rex>
-	<b6ebd0a51002160616m462683b3nd2f4b17524395ddf@mail.gmail.com>
-	<1266334604.6436.159.camel@rex>
-	<201002181009.07359.marcin@juszkiewicz.com.pl>
-	<b6ebd0a51002180813q171a3d41kef83d708f4ba6eea@mail.gmail.com>
-	<1266512303.6436.1199.camel@rex>
-	<b6ebd0a51002191739r245abeafq23de526308a29bab@mail.gmail.com>
-	<1266706695.2134.23.camel@dax.rpnet.com>
-	<b6ebd0a51002201719jc6e694fudbd3eaacb47df0b2@mail.gmail.com>
-Date: Tue, 23 Feb 2010 17:55:43 +0000
-Message-ID: <1266947743.1714.521.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-SA-Exim-Connect-IP: 209.85.223.179
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: RFC: Improve our default conf file setup
+Subject: Re: How to build g++ to run on target?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,78 +48,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 17:58:41 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Feb 2010 18:15:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, 2010-02-20 at 18:19 -0700, Chris Larson wrote:
-> > I disagree but its pointless to take this further and spoil what
-> > otherwise is a useful patch, we'll just add the default behaviour you
-> > describe.
-> 
-> I see a few problems here.  First, there's more to a notion of priority than
-> just 'prepend' and 'append'.  It's unlikely that a given layer will either
-> way to override everything else, or be overridden by everything else.
+On Tue, Feb 23, 2010 at 5:51 AM, Jay Snyder
+<jay.snyder@tycoelectronics.com> wrote:
+> I was able to build gcc for installation directly onto the OE target with
+> "bitbake gcc". =A0 =A0 "bitbake g++" gives me "nothing provides g++".
+>
+> What is the magic bitbake command to provide this?
 
-I assume s/way/want/ above?
+you already have built g++ when you bitbaked gcc recipe. You can look
+under your ipk directory for the resulting package for g++
+a recipe can build multiple packages
 
-I agree there is more to it than that but you're arguing for a simple
-default case which is just "prepend" or "append" effectively. I expect
-most layers do want to override the preceding layer.
-
->  Second, the final resulting BBPATH will end up depending upon ordering
-> anyway, because the prepend/appends will be applied based on the order of
-> the parsing of the bblayer.conf files.
-
-Most likely BBPATH and optionally BBFILE_COLLECTIONS will be appended or
-prepended to which seems reasonable and BBFILES it doesn't matter.
-
->   Third, you seem to be retaining the
-> separation between configuration file / class priority (BBPATH) and
-> collection priority (BBFILE_COLLECTIONS, priority number).  Users see a
-> layer/overlay/collection as a single entity, not two components whose
-> interactions with everyone else may vary.
-
-Well, the default case where there is no layer.conf file just needs to
-become more complex and append to BBFILE_COLLECTIONS too then. You're
-the one arguing for it :).
-
-The default case should make them function as one I agree but where
-there is a layer.conf I'd argue its up to that file to setup the righr
-variables.
-
-> If you're going to use a priority numbering scheme or something similar,
-> defined by the layer, then everything should obey it, in my opinion, and
-> BBPATH_prepend/append is not sufficient to reflect that priority scheme.
-
-I propose no numbering scheme, just a convention for priorities e.g.:
-
-Core metadata: 100
-Supplementary metadata: 500
-User metadata: 1000
-
-So a user overlay would override supplementary metadata and so on
-(assuming I have my numbers going the right way, I never can remember).
-
-
-Take a step back again - we want a system where each overlay contains
-data about what it contains and sets up bitbake's variables and any OE
-specific variables to match the setup. The layer.conf in this case does
-that well.
-
-What it does badly is let the conf files know about each other so they
-can fight over who does what, or let that be controlled from the
-bblayers.conf file other than through ordering the BBLAYERS variable.
-I'm open to ideas on how to work this better but think what I'm
-proposing has ways of meeting all real world use cases?
-
-Better ideas more than welcome!
-
-Cheers,
-
-Richard
-
-
-
+>
+> Thank you,
+> Jay Snyder
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
