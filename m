@@ -1,44 +1,43 @@
-Received: from mail-fx0-f220.google.com ([209.85.220.220])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1Nk1GJ-0007GX-Be
+	(envelope-from <kergoth@gmail.com>) id 1Nk1LM-0001xS-HK
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 21:21:46 +0100
-Received: by fxm20 with SMTP id 20so3925641fxm.12
+	Tue, 23 Feb 2010 21:26:59 +0100
+Received: by pwi5 with SMTP id 5so3910773pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2010 12:18:58 -0800 (PST)
+	Tue, 23 Feb 2010 12:24:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type; bh=n2gNqjPBoHjLPceJKvQS/QvLCagy7M2a+jaZeORBbBI=;
-	b=SZuCb0YMfF9Hn4JJHcyFwnR0mhDcZc3wIeFJ5psEF5WaqgIPZLRv1KM2zgzrKy5Emn
-	nkYnIHgrVtE+AmNeSPmSwFtyZif9CSN+uk02cDDRzP6Y13xS9+B8uawmYdCS1kHpAhj7
-	OdzSUrjjKVJiOEyQHt0I7wk+4My33ubhhFxpA=
+	:references:from:date:x-google-sender-auth:message-id:subject:to
+	:content-type; bh=SdUF8p5pRmgTjGm5E2aeUTv9YKwqTgYIssUynhFnZHU=;
+	b=eEz7+7k/JMhOoAEUDUWpX7zyMkOVCP9Qw6hbM7XixD8/pIRJKIiJwHJjJWV/DXcFs4
+	mIHpXNsTIUqhxL0pZ3I9IL0royENAT0RMCwT6nH/OQ1rYlb2Z/dNX6XtnloGbCe7iPj9
+	4jD8av0vJ8bE0Sa8/TJFGiEvgLg6ct7XdpvH0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	b=RL9MlJk6X2nKoy22WU1Sjlx4kMUICrUg04Yi4seAAVPuomhK1MzVe8IlwIQ8cXu9aU
-	c0nJz8LrDZr6wBridhWKzVKJQLgJw/r8AbvlofgqAWX6gdAFa3OouvD8yC9CgpRIjmBh
-	uiildHaBe7nZuGbs6T/wde4VLVzQqsTCrN/IA=
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=lLgzB5MINVXX00TchJBVHnPxedos1xhuxgRTLhXzDRHlpEwTGMtv5SgdN3yw+G2/M7
+	niOJXk9MG2UDDPzzjbsAZgu7SfgB+6c9Ebk7B5hNHqhHmrNu2QuIoA0l+OSAjlIg9Obp
+	0BXnhoIptBOX29G3xo28Cqfa3US9sAn7jbHjc=
 MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.180.19 with SMTP id f19mr11416hbg.35.1266956338371; Tue, 
-	23 Feb 2010 12:18:58 -0800 (PST)
-In-Reply-To: <1266955969.18176.59.camel@trini-m4400>
-References: <be7a9f3d1002231055n5783b939j7d7d75081efdaa2a@mail.gmail.com>
-	<1266953000.18176.52.camel@trini-m4400>
-	<be7a9f3d1002231141y2fde23afn787781d354f5ead@mail.gmail.com>
-	<1266955969.18176.59.camel@trini-m4400>
-Date: Tue, 23 Feb 2010 17:18:58 -0300
-X-Google-Sender-Auth: db29e5463c957c76
-Message-ID: <be7a9f3d1002231218g19c58eefiad8260dd9551e559@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
+Sender: kergoth@gmail.com
+Received: by 10.142.6.13 with SMTP id 13mr1605002wff.39.1266956650162; Tue, 23 
+	Feb 2010 12:24:10 -0800 (PST)
+In-Reply-To: <1266956079.18176.61.camel@trini-m4400>
+References: <1266951776.18176.47.camel@trini-m4400>
+	<19c1b8a91002231151g6fbe4a1ck97668729e5cc69d6@mail.gmail.com> 
+	<1266956079.18176.61.camel@trini-m4400>
+From: Chris Larson <clarson@kergoth.com>
+Date: Tue, 23 Feb 2010 13:23:50 -0700
+X-Google-Sender-Auth: cb8e0d1beab06360
+Message-ID: <b6ebd0a51002231223x524dbb06o86b5e9c8b5129668@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.220
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Kernel image stagging [was Re: [PATCH] kernel.bbclass: Stage the raw zImage and modules tarball for inclusion in pstage
+Subject: Re: [PATCH] Fix busybox SUID support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,36 +51,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 20:21:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 23 Feb 2010 20:27:00 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hello,
+On Tue, Feb 23, 2010 at 1:14 PM, Tom Rini <tom_rini@mentor.com> wrote:
 
-On Tue, Feb 23, 2010 at 5:12 PM, Tom Rini <tom_rini@mentor.com> wrote:
-
-> As a use case, I configure for beagleboard.  I bitbake console-image.  I
-> stick console-image.tar.bz2 onto partition 2 of my SD card.  I grab my
-> kernel from where? and stick it onto partition 1 so that I can put it
-> into the beagleboard and mmc init;run loaduimage;run mmcboot.
+> On Tue, 2010-02-23 at 11:51 -0800, Khem Raj wrote:
+> > On Tue, Feb 23, 2010 at 11:02 AM, Tom Rini <tom_rini@mentor.com> wrote:
+> > > I was about to just push this and I noticed that a number of
+> > > distributions (SlugOS, Angstrom, Kaelios, micro) currently set
+> > > FEATURE_SUID=y, but it's not actually install SUID.  And since I recall
+> > > some way-back-when's of "busybox SUID is dangerous / crap!", I thought
+> > > it best to post the patch first and let folks speak up / ask me to drop
+> > > FEATURE_SUID=y when I do this.  So, here's the patch:
+> > >
+> > > diff --git a/recipes/busybox/busybox.inc b/recipes/busybox/busybox.inc
+> > > index 5f52850..b165d0f 100644
+> > > --- a/recipes/busybox/busybox.inc
+> > > +++ b/recipes/busybox/busybox.inc
+> > > @@ -11,7 +11,7 @@ LICENSE = "GPL"
+> > >  SECTION = "base"
+> > >  PRIORITY = "required"
+> > >
+> > > -INC_PR = "r24"
+> > > +INC_PR = "r25"
+> > >
+> > >  SRC_URI = "\
+> > >   file://busybox-cron \
+> > > @@ -96,7 +96,11 @@ do_install () {
+> > >        # Install /bin/busybox, and the /bin/sh link so the postinst
+> script
+> > >        # can run. Let update-alternatives handle the rest.
+> > >        install -d ${D}${base_bindir}
+> > > -       install -m 0755 ${S}/busybox ${D}${base_bindir}
+> > > +       if grep -q "CONFIG_FEATURE_SUID=y" ${WORKDIR}/defconfig; then
+> >
+> > may be you should grep it in ${S}/.config because thats what defconfig
+> > turns into finally
+> > and used by busybox build.
 >
+> I'd be fine doing a follow-up to clean them all up, but today
+> busybox.inc does all of its checks to ${WORKDIR}/defconfig.
+>
+> > > +               install -m 4755 ${S}/busybox ${D}${base_bindir}
+> >
+> > what does 4755 translate to ? (curiosity)
+>
+> 4 is suid (2 is sgid, 1 is i forget the name but what you stick on /tmp
+> & such).
 
-I see your point and I'm not saying we shouldn't have the kernel available
-somewhere. We need it somewhere.
 
-However I disable when it is copied to deploy; in my opinion it ought to be
-done at rootfs creation so it will _always_ have a {z,bz,u}Image available
-in deploy dir.
-
-Just try:
-
-bitbake console-image (works)
-rm $DEPLOY_DIR
-bitbake console-image (fails)
-
-and this is wrong IMO.
-
+Sticky :)
 -- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
