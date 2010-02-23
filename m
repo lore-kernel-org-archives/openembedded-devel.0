@@ -1,52 +1,42 @@
-Received: from mail-bw0-f213.google.com ([209.85.218.213])
+Received: from mail-qy0-f192.google.com ([209.85.221.192])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1Njgzq-0005BU-QT
+	(envelope-from <kergoth@gmail.com>) id 1NjjHU-0007LX-M4
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Feb 2010 23:43:25 +0100
-Received: by bwz5 with SMTP id 5so2021595bwz.12
+	Tue, 23 Feb 2010 02:09:47 +0100
+Received: by qyk30 with SMTP id 30so3827694qyk.23
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2010 14:40:38 -0800 (PST)
+	Mon, 22 Feb 2010 17:07:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=YBJVV1ZZMUx3BIpc9xkUooL2bgspPpZBoCodnrpeCkA=;
-	b=Syp/luTVYP3hzzLlPvkgfajwFAZUu6KTAqbZzHxpqeHvbw1j5LzfMotgjLS4YGrLLJ
-	C6ZieduIHByN+1FfjaxEQiTlrY0rFTpYvYo3NAUgEu9B38rE4pmBPqNPn1QsywhfI0ZV
-	EVNFpjpl5dxlph0shtsUWbnfv2jaXx2PtlsuE=
+	h=domainkey-signature:received:received:sender:from:to:cc:subject
+	:date:message-id:x-mailer;
+	bh=M/c4yA6jXpm1qvPfNGzkkHc9ADIQhTRToLTi6DvcgIM=;
+	b=b1CPkygB7rlVyHLy795Fmj28rGRsvze1gNTY5eMj4LzhJINplZHHc25Vcvb26mOUqL
+	Dgpoj47Y4shGbmdRqSpkRf7Ak6YE5dE2e+LL6WMX33ogedBfnPZT8dhpYv4TKlsFjWwO
+	bbSgJ5lfbqeEjbkH/mew/H8eJzQsgcXs6n6VI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=uerX5piVvwl9NAyrsQfaPaoiIRRsR6m2Ge7BJgs431ESJ4WwwvpJMkOnLRpNW+IL2w
-	SiNI50AenF6kVGdFFNrbFwVPtO5YqJWlqmFSFZbmd90fMXtU6OjiFpdF3YsIV+R7vN+i
-	SDr6dm3v6z+AANkTLz5Rq0exCAh3XxZt1rJlI=
-Received: by 10.204.132.131 with SMTP id b3mr1697778bkt.135.1266878438626;
-	Mon, 22 Feb 2010 14:40:38 -0800 (PST)
-Received: from s42.loc ([84.119.103.202])
-	by mx.google.com with ESMTPS id 14sm1416411bwz.2.2010.02.22.14.40.37
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=Pc4KqRvrGMfKe4C6Ctj4clcj0lpfyeDD17M3s0+0fst881F+jshbsn7iqYnNb30umi
+	XbcL0bg6KM8FxUP9t2KdCOmybk8LPLUMFadQox12L7WI4qL+R50LNw2GtfajNJLGfmX1
+	0wyWzBjIenTpUSvfRwmKQuzFiTRPa6B1Hq8XU=
+Received: by 10.224.5.72 with SMTP id 8mr315106qau.96.1266887219704;
+	Mon, 22 Feb 2010 17:06:59 -0800 (PST)
+Received: from localhost.localdomain (ip24-251-170-95.ph.ph.cox.net
+	[24.251.170.95])
+	by mx.google.com with ESMTPS id 20sm3120418qyk.1.2010.02.22.17.06.57
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 22 Feb 2010 14:40:37 -0800 (PST)
-Received: from cow by s42.loc with local (Exim 4.71)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1Njh27-0003hy-Kh; Mon, 22 Feb 2010 23:45:43 +0100
-Date: Mon, 22 Feb 2010 23:45:43 +0100
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+	Mon, 22 Feb 2010 17:06:58 -0800 (PST)
+Sender: Chris Larson <kergoth@gmail.com>
+From: Chris Larson <clarson@kergoth.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100222224543.GD30265@mx.loc>
-References: <1266766352-28786-1-git-send-email-rep.dot.nop@gmail.com>
-	<20100222162424.GA27420@denix.org>
-	<1266857709.14566.348.camel@mill.internal.reciva.com>
-	<b6ebd0a51002220906p53b3b3b2h5257ebca50d6227c@mail.gmail.com>
-	<20100222181754.GB24049@jama> <20100222194159.GZ30265@mx.loc>
-	<20100222214335.GB30265@mx.loc> <20100222220621.GB27420@denix.org>
-MIME-Version: 1.0
-In-Reply-To: <20100222220621.GB27420@denix.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.218.213
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+Date: Mon, 22 Feb 2010 18:06:51 -0700
+Message-Id: <1266887211-31228-1-git-send-email-clarson@kergoth.com>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 209.85.221.192
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] git: add SRC_URI name
+Cc: Chris Larson <chris_larson@mentor.com>
+Subject: [PATCH] insane: check for .debug as a path component, not part of the path string
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,18 +50,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Feb 2010 22:43:26 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 23 Feb 2010 01:09:47 -0000
 
-On Mon, Feb 22, 2010 at 05:06:21PM -0500, Denys Dmytriyenko wrote:
+From: Chris Larson <chris_larson@mentor.com>
 
->> Not using "archive" as Martin likes as default, but uri%d, but
->
->For multiple SRC_URIs, using uri1/uri2 can be more confusing and may be not 
->much better than looking up real names in .inc file...
+Signed-off-by: Chris Larson <chris_larson@mentor.com>
+---
+ classes/insane.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-ok, so let's drop that superfluous .note and the url%d handling.
-Other opinions?
+diff --git a/classes/insane.bbclass b/classes/insane.bbclass
+index 804caf0..c2e8d9c 100644
+--- a/classes/insane.bbclass
++++ b/classes/insane.bbclass
+@@ -279,7 +279,7 @@ def package_qa_check_dbg(path, name,d, elf):
+     sane = True
+ 
+     if not "-dbg" in name:
+-        if '.debug' in path:
++        if '.debug' in path.split(os.path.sep):
+             error_msg = "non debug package contains .debug directory: %s path %s" % \
+                      (name, package_qa_clean_path(path,d))
+             sane = package_qa_handle_error(3, error_msg, name, path, d)
+-- 
+1.6.3.3
+
 
 
