@@ -1,44 +1,35 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1Nk01F-0007kY-VN
+	(envelope-from <Tom_Rini@mentor.com>) id 1Nk04r-0007vz-9x
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 20:02:09 +0100
-Received: by pvf33 with SMTP id 33so442966pvf.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2010 10:59:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to
-	:content-type; bh=tIf0UGS8BbhbxgRzIEq4Q7h1+izonlka7EkGAKLFdcA=;
-	b=mtAEeRUges38ilBLwinzTmQ1QDqdRTsUwF/i8W5Im4jBwUd3V6xiKk21jVUl78xasr
-	gzmTTBNYaEyhjaGuF3Z/FnMTCU8v/BCP+L3wCARxQD7kI42YkxFR17Oo7zGevrmmOsZY
-	OOZqOr4gS7JmFeJsOxpGbmx8YO8WgtcYvW9GA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=F4AIGwHZzrtHXnLY34jeRLZ7koQx1dEHnAPShGUANPnVUkjBws2T/G+y6XIMPhxtcB
-	1ho9eoPhHFFun1K3UZuKJ3kre6Gbkh9wIUGMoJhrXsjsX1B5vFt9SyNbOgun3bchZ4iM
-	+wUJX2p452KBSwj6e3Hh+nsdFbdGeQ868WcsA=
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.142.55.11 with SMTP id d11mr5132928wfa.1.1266951560201; Tue, 
-	23 Feb 2010 10:59:20 -0800 (PST)
-In-Reply-To: <19c1b8a91002231039s1f790d4aqb4d6c1b61deb7837@mail.gmail.com>
-References: <mailman.3988.1266916925.14961.openembedded-devel@lists.openembedded.org>
-	<4B83DC88.7070705@tycoelectronics.com>
-	<19c1b8a91002231015l1847354cle068bda32347bd29@mail.gmail.com> 
-	<b6ebd0a51002231019h1d5f8b04q3af0b5300444ddc2@mail.gmail.com> 
-	<19c1b8a91002231039s1f790d4aqb4d6c1b61deb7837@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 23 Feb 2010 11:59:00 -0700
-X-Google-Sender-Auth: c0056660198ba6fc
-Message-ID: <b6ebd0a51002231059n7ff9408cn363689076479baaa@mail.gmail.com>
+	Tue, 23 Feb 2010 20:05:52 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1Nk02B-0001w6-EK from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Feb 2010 11:03:03 -0800
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 23 Feb 2010 11:03:02 -0800
+Received: from 172.30.80.81 ([172.30.80.81]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Tue, 23 Feb 2010 19:03:02 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	23 Feb 2010 12:03:01 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Organization: Mentor Graphics Corporation
+Date: Tue, 23 Feb 2010 12:02:56 -0700
+Message-ID: <1266951776.18176.47.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 23 Feb 2010 19:03:02.0888 (UTC)
+	FILETIME=[D2E8F680:01CAB4BA]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Openembedded-devel Digest, Vol 43, Issue 98
+Subject: [PATCH] Fix busybox SUID support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,32 +43,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 19:02:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 23 Feb 2010 19:05:52 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 23, 2010 at 11:39 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Tue, Feb 23, 2010 at 10:19 AM, Chris Larson <clarson@kergoth.com> wrote:
->> It's worth noting here that TARGET_CC_ARCH += "${LDFLAGS}" is a hack,
->> not an ideal solution.
->
-> right.
->
-> The preferred way of solving this is
->> reviewing the buildsystem in question to determine how best to make it
->> obey all of our bitbake variables, rather than injecting one into
->> another that it happens to already obey.
->
-> We (OE) are the one's who will suffer this most because other
-> distributions force gcc to implicitly
-> emit this option while invoking linker so they bypass the problem in
-> bulk of packages.
+I was about to just push this and I noticed that a number of
+distributions (SlugOS, Angstrom, Kaelios, micro) currently set
+FEATURE_SUID=3Dy, but it's not actually install SUID.  And since I recall
+some way-back-when's of "busybox SUID is dangerous / crap!", I thought
+it best to post the patch first and let folks speak up / ask me to drop
+FEATURE_SUID=3Dy when I do this.  So, here's the patch:
 
-Ah, I didn't realize that, thanks for the info :)
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+diff --git a/recipes/busybox/busybox.inc b/recipes/busybox/busybox.inc
+index 5f52850..b165d0f 100644
+--- a/recipes/busybox/busybox.inc
++++ b/recipes/busybox/busybox.inc
+@@ -11,7 +11,7 @@ LICENSE =3D "GPL"
+ SECTION =3D "base"
+ PRIORITY =3D "required"
+=20
+-INC_PR =3D "r24"
++INC_PR =3D "r25"
+=20
+ SRC_URI =3D "\
+   file://busybox-cron \
+@@ -96,7 +96,11 @@ do_install () {
+ 	# Install /bin/busybox, and the /bin/sh link so the postinst script
+ 	# can run. Let update-alternatives handle the rest.
+ 	install -d ${D}${base_bindir}
+-	install -m 0755 ${S}/busybox ${D}${base_bindir}
++	if grep -q "CONFIG_FEATURE_SUID=3Dy" ${WORKDIR}/defconfig; then
++		install -m 4755 ${S}/busybox ${D}${base_bindir}
++	else
++		install -m 0755 ${S}/busybox ${D}${base_bindir}
++	fi
+ 	ln -sf busybox ${D}${base_bindir}/sh
+=20
+ 	if grep -q "CONFIG_SYSLOGD=3Dy" ${WORKDIR}/defconfig; then
+
+
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
