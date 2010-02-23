@@ -1,38 +1,39 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iw0-f179.google.com ([209.85.223.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Nk3ny-00074O-5Q
+	(envelope-from <raj.khem@gmail.com>) id 1Nk3uu-0007Gx-JE
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Feb 2010 00:04:42 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1Nk3lH-0002XL-Mc from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 15:01:51 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 23 Feb 2010 15:01:51 -0800
-Received: from 172.30.80.81 ([172.30.80.81]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Tue, 23 Feb 2010 23:01:50 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	23 Feb 2010 16:01:50 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Wed, 24 Feb 2010 00:11:51 +0100
+Received: by iwn9 with SMTP id 9so3828916iwn.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Feb 2010 15:09:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=L7QLcClzKhpDPuwPcmgubH6w7BAXt/sEZe9upccSgOk=;
+	b=n0aJ5ioVv/NUkjm2Xhjs0LBbqXuxCUNZtNFK8btuI61u7NMzsbzMIzFbkah2kYYzOh
+	RjrIpm53ocuVU44zgAJhcSULsDnOG72gYOdu61fDEzVoIDnqJbwz6JDzzi/eHKXqL0oS
+	us4jlhfNQJgkNfcv07pXYIpyeL2CFQpWbXzhg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=MaZ2wX2MBiK8mEPZqfmEofN0+H9BCBsPUojzMIf8IdcwPdXlufAogT14sbo5yiYUT1
+	IcrjPxTJZLfxJktNXPYg8LMe+5ohu0pdTXcMRJX2OY8WpgZABiTzXqTmDeVvmDdg9vxH
+	RB/BGzTX5iO4TgKjiUDAXDciETCcHdpkYcb9w=
+MIME-Version: 1.0
+Received: by 10.231.151.207 with SMTP id d15mr1272082ibw.44.1266966542880; 
+	Tue, 23 Feb 2010 15:09:02 -0800 (PST)
+In-Reply-To: <4B8458A7.40807@balister.org>
+References: <mailman.5.1266922802.8892.openembedded-devel@lists.openembedded.org>
+	<4B83DD5C.8050408@tycoelectronics.com> <4B8458A7.40807@balister.org>
+Date: Tue, 23 Feb 2010 15:09:02 -0800
+Message-ID: <19c1b8a91002231509v4a7d870dia190e9aa2c0f6739@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1266965542.2555.14.camel@andromeda>
-References: <1266951776.18176.47.camel@trini-m4400>
-	<1266965542.2555.14.camel@andromeda>
-Organization: Mentor Graphics Corporation
-Date: Tue, 23 Feb 2010 16:01:50 -0700
-Message-ID: <1266966110.18176.222.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 23 Feb 2010 23:01:51.0434 (UTC)
-	FILETIME=[2F6392A0:01CAB4DC]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.223.179
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Fix busybox SUID support
+Subject: Re: How to build g++ to run on target?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,22 +47,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 23:04:42 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 23 Feb 2010 23:11:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, 2010-02-23 at 23:52 +0100, Michael 'Mickey' Lauer wrote:
+On Tue, Feb 23, 2010 at 2:37 PM, Philip Balister <philip@balister.org> wrote:
+> On 02/23/2010 05:51 AM, Jay Snyder wrote:
+>>
+>> I was able to build gcc for installation directly onto the OE target
+>> with "bitbake gcc". "bitbake g++" gives me "nothing provides g++".
+>>
+>> What is the magic bitbake command to provide this?
+>
+> bitbake task-sdk-native, and install task-native-sdk. Anyone know why the
+> task creates a package with different name?
 
-> Ah, finally someone does something about it. Next step would be to dump
-> tinylogin which is known broken and use busyboxes login utilities
-> instead.
+may be because
 
-Not wanting to open that can of worms up just yet, yes, this will let
-distros opt in to that kind of thing (I hit this because of 'su' the
-other day..).
+task-sdk-native.bb:RPROVIDES_${PN} = "task-native-sdk"
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+>
+> Philip
+>
+>
+>>
+>> Thank you,
+>> Jay Snyder
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
