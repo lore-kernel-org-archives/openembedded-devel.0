@@ -1,23 +1,35 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1Nk3df-0005NC-10
+Received: from relay1.mentorg.com ([192.94.38.131])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <Tom_Rini@mentor.com>) id 1Nk3ny-00074O-5Q
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 23:54:02 +0100
-Received: from [192.168.1.2] (e180132182.adsl.alicedsl.de [85.180.132.182])
-	by drlauer-research.com (Postfix) with ESMTP id D758D584195
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Feb 2010 00:45:59 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Wed, 24 Feb 2010 00:04:42 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1Nk3lH-0002XL-Mc from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Feb 2010 15:01:51 -0800
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 23 Feb 2010 15:01:51 -0800
+Received: from 172.30.80.81 ([172.30.80.81]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Tue, 23 Feb 2010 23:01:50 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	23 Feb 2010 16:01:50 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1266951776.18176.47.camel@trini-m4400>
+In-Reply-To: <1266965542.2555.14.camel@andromeda>
 References: <1266951776.18176.47.camel@trini-m4400>
-Organization: Vanille-Media
-Date: Tue, 23 Feb 2010 23:52:22 +0100
-Message-ID: <1266965542.2555.14.camel@andromeda>
+	<1266965542.2555.14.camel@andromeda>
+Organization: Mentor Graphics Corporation
+Date: Tue, 23 Feb 2010 16:01:50 -0700
+Message-ID: <1266966110.18176.222.camel@trini-m4400>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+X-OriginalArrivalTime: 23 Feb 2010 23:01:51.0434 (UTC)
+	FILETIME=[2F6392A0:01CAB4DC]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
 Subject: Re: [PATCH] Fix busybox SUID support
@@ -34,20 +46,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 22:54:02 -0000
+X-List-Received-Date: Tue, 23 Feb 2010 23:04:42 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-Ah, finally someone does something about it. Next step would be to dump
-tinylogin which is known broken and use busyboxes login utilities
-instead.
+On Tue, 2010-02-23 at 23:52 +0100, Michael 'Mickey' Lauer wrote:
 
-Great work, Tom.
+> Ah, finally someone does something about it. Next step would be to dump
+> tinylogin which is known broken and use busyboxes login utilities
+> instead.
 
-:M:
+Not wanting to open that can of worms up just yet, yes, this will let
+distros opt in to that kind of thing (I hit this because of 'su' the
+other day..).
 
-
-
-
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
