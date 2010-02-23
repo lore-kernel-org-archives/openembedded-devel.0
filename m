@@ -1,41 +1,40 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iw0-f179.google.com ([209.85.223.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Nk1QO-0002NJ-0O
+	(envelope-from <cliff.brake@gmail.com>) id 1Nk1ds-00006G-Tl
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 21:32:11 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1Nk1Ni-0007ip-4z from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 12:29:22 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 23 Feb 2010 12:29:21 -0800
-Received: from 172.30.80.81 ([172.30.80.81]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Tue, 23 Feb 2010 20:29:21 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	23 Feb 2010 13:29:20 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Tue, 23 Feb 2010 21:46:08 +0100
+Received: by iwn9 with SMTP id 9so3703455iwn.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Feb 2010 12:43:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=a+QshypUBJCWyFDZZpYekE/rMmsOH/KiBZ5iSgws+6k=;
+	b=oYkVQ7WT1qqCeUhZX2GBICgoBzjFr/AAPFI2GCTe6faWAomIhhPZcjL5lXWJADZmXv
+	nMMFw3OBiYAvunqhsKAYZpN9worldEvfUS1bfL/qam64qYBoJ1yuUndCffJizzh5uS4P
+	1FrM+n0NN3PBWHXH/3Vxe9ZMLEJ18/iFErujE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=PpELHBCy/FVuYlZuizQGJMkvVzoYLs6BodexdTuqoDHr7Ec7dDopjiZmDAmHvDwluO
+	jSK0f2pb/ZpfNb9rvBz6jpugs99pRy/iHBziexJJYWQMkwt9SJHKlgU0dfB2CQ2pTlLa
+	7OZN3bV2ppQoC/n+u8KhEu7d2e79skZF6ydKM=
+MIME-Version: 1.0
+Received: by 10.231.157.83 with SMTP id a19mr626152ibx.41.1266957799262; Tue, 
+	23 Feb 2010 12:43:19 -0800 (PST)
+In-Reply-To: <19c1b8a91002231036u46b1b35andf9fb71345805669@mail.gmail.com>
+References: <f96d234e1002230827y25028493l7f25ab05b6fbac76@mail.gmail.com>
+	<19c1b8a91002231036u46b1b35andf9fb71345805669@mail.gmail.com>
+Date: Tue, 23 Feb 2010 15:43:18 -0500
+Message-ID: <f96d234e1002231243h1e75af62g90d490aa792fbe96@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <be7a9f3d1002231218g19c58eefiad8260dd9551e559@mail.gmail.com>
-References: <be7a9f3d1002231055n5783b939j7d7d75081efdaa2a@mail.gmail.com>
-	<1266953000.18176.52.camel@trini-m4400>
-	<be7a9f3d1002231141y2fde23afn787781d354f5ead@mail.gmail.com>
-	<1266955969.18176.59.camel@trini-m4400>
-	<be7a9f3d1002231218g19c58eefiad8260dd9551e559@mail.gmail.com>
-Organization: Mentor Graphics Corporation
-Date: Tue, 23 Feb 2010 13:29:20 -0700
-Message-ID: <1266956960.18176.68.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 23 Feb 2010 20:29:21.0537 (UTC)
-	FILETIME=[E1A01710:01CAB4C6]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.223.179
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Kernel image stagging [was Re: [PATCH] kernel.bbclass: Stage the raw zImage and modules tarball for inclusion in pstage
+Subject: Re: gettext native failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,49 +48,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 20:32:11 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 23 Feb 2010 20:46:08 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, 2010-02-23 at 17:18 -0300, Otavio Salvador wrote:
-> Hello,
->=20
-> On Tue, Feb 23, 2010 at 5:12 PM, Tom Rini <tom_rini@mentor.com> wrote:
->=20
-> > As a use case, I configure for beagleboard.  I bitbake console-image.  =
-I
-> > stick console-image.tar.bz2 onto partition 2 of my SD card.  I grab my
-> > kernel from where? and stick it onto partition 1 so that I can put it
-> > into the beagleboard and mmc init;run loaduimage;run mmcboot.
-> >
->=20
-> I see your point and I'm not saying we shouldn't have the kernel availabl=
-e
-> somewhere. We need it somewhere.
->=20
-> However I disable when it is copied to deploy; in my opinion it ought to =
-be
-> done at rootfs creation so it will _always_ have a {z,bz,u}Image availabl=
-e
-> in deploy dir.
->=20
-> Just try:
->=20
-> bitbake console-image (works)
-> rm $DEPLOY_DIR
-> bitbake console-image (fails)
->=20
-> and this is wrong IMO.
+On Tue, Feb 23, 2010 at 1:36 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Tue, Feb 23, 2010 at 8:27 AM, Cliff Brake <cliff.brake@gmail.com> wrot=
+e:
+>> make[4]: Entering directory
+>> `/scratch/oe/oe-from-scratch/tmp/work/x86_64-linux/gettext-native-0.17-r=
+5/gettext-0.17/gettext-tools/src'
+>> =E2=88=98 /bin/sh ../x86_64-linux-libtool --tag=3DCC =C2=A0 --mode=3Dlin=
+k gcc
+>> -std=3Dgnu99 =C2=A0-isystem/scratch/oe/oe-from-scratch/tmp/staging/x86_6=
+4-linux/usr/include
+>> -O2 -g =C2=A0-L/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/=
+lib
+>> -Wl,-rpath-link,/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr=
+/lib
+>> -Wl,-rpath,/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/lib
+>> -Wl,-O1 -o msgcmp msgcmp-msgcmp.o libgettextsrc.la
+>> =E2=88=98 x86_64-linux-libtool: link: gcc -std=3Dgnu99
+>> -isystem/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/include
+>> -O2 -g -Wl,-rpath-link
+>> -Wl,/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/lib
+>> -Wl,-rpath -Wl,/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/=
+lib
+>> -Wl,-O1 -o .libs/msgcmp msgcmp-msgcmp.o
+>> -L/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/lib
+>> ./.libs/libgettextsrc.so
+>> /scratch/oe/oe-from-scratch/tmp/work/x86_64-linux/gettext-native-0.17-r5=
+/gettext-0.17/gettext-tools/gnulib-lib/.libs/libgettextlib.so
+>> /usr/lib/libcroco-0.6.so /usr/lib/libglib-2.0.so -lncurses -lc
+>> -Wl,-rpath -Wl,/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/=
+lib
+>> =E2=88=98 /usr/lib64/libxml2.so.2: undefined reference to `gzopen64'
+>> =E2=88=98 collect2: ld returned 1 exit status
+>>
+>> http://bugs.openembedded.org/show_bug.cgi?id=3D2679
+>>
+>> http://bugs.openembedded.org/show_bug.cgi?id=3D5139
+>>
+>> Looks like a classic case of using the staging libz, but libxml2 from
+>> the host. =C2=A0It appears that libxml2 cannot be built in OE until gett=
+ext
+>> is built. =C2=A0Any thoughts on this one?
+>
+>
+> http://patchwork.openembedded.org/patch/185/
+>
+> and then more detailed explanation is here
+> http://article.gmane.org/gmane.comp.handhelds.openembedded/22700/match=3D=
+libxml2
+>
+> IIRC when I tested it. It was not happening with gcc 4.4.x
+> Which version of gcc do you have on your build box.
 
-No, it works today since I was bad (and forgot the policy about getting
-acks) and just fixed it.  That said, I'll admit I'm not 100% sure that
-everything is correct in other cases.  We've caught the uImage case, but
-I'm thinking device trees are probably broken.  So, a PoC patch to get
-image.bbclass to do something sane to DEPLOY_DIR would be fine with me,
-if I don't get to it first ;)
+cbrake@happy:/scratch/oe/oe-testing$ gcc --version
+gcc (Ubuntu 4.4.1-4ubuntu9) 4.4.1
+Copyright (C) 2009 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+I read through your links, but those are for building libxml2.  I'm
+still trying to build gettext.
+
+Cliff
 
 
