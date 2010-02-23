@@ -1,28 +1,36 @@
-Received: from qmta09.emeryville.ca.mail.comcast.net ([76.96.30.96])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enelson1000@comcast.net>) id 1Njl1T-0003wI-7g
+	(envelope-from <vivektambakad@gmail.com>) id 1NjosL-0006RM-Pz
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 04:01:22 +0100
-Received: from omta14.emeryville.ca.mail.comcast.net ([76.96.30.60])
-	by qmta09.emeryville.ca.mail.comcast.net with comcast
-	id lBDt1d00A1HpZEsA9ExZSU; Tue, 23 Feb 2010 02:57:33 +0000
-Received: from [192.168.1.100] ([67.188.141.116])
-	by omta14.emeryville.ca.mail.comcast.net with comcast
-	id lExY1d0012WszPn8aExYl4; Tue, 23 Feb 2010 02:57:32 +0000
-From: ed <enelson1000@comcast.net>
+	Tue, 23 Feb 2010 08:08:12 +0100
+Received: by gyd5 with SMTP id 5so244517gyd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Feb 2010 23:05:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=CkKklDpVg6Ag2KDPBTxDokMwEGH8hqaNLU/Cyhq3veU=;
+	b=Uaec8muEGrSYnb/6mnuLXjgpwMZVbTulLzdsBl5lBTDsYGwcSwhrjK58zME+i52hL8
+	xs1hG7g0e+Za7CHAr33AcRLtHzvRrt48aGzqf1bPbkXE8rjnrSx7oLHDgrrD/eNWE/Oy
+	bGUZubvhG051CV1Q+aG89tNHOLDcDAN0bfsz0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=p2nvg/3N9SrW6ksKzuszwBHYfnRYgxyMkmIPMnOktJQNfQoyVGknYArGPK0TGt9wbc
+	WxZnhLMGYOhuuWsSbaFi1COaTwn8fxNel4oMb+LzneyLQcspArN9BRQltNqz4Yl/fHBz
+	vkxxOLPrfBOYmYGn/1xIe9/VVlnwAgxXjNb4w=
+MIME-Version: 1.0
+Received: by 10.90.40.17 with SMTP id n17mr5594474agn.3.1266908724403; Mon, 22 
+	Feb 2010 23:05:24 -0800 (PST)
+Date: Tue, 23 Feb 2010 12:35:22 +0530
+Message-ID: <ad82c8891002222305g5bbcae45te6a4836c83717076@mail.gmail.com>
+From: vivek tambakad <vivektambakad@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4567769F-93FC-4075-A26B-4FA46347D404@vanille-media.de>
-References: <1266800050.3758.47.camel@ed-hp-laptop>
-	<4567769F-93FC-4075-A26B-4FA46347D404@vanille-media.de>
-Date: Mon, 22 Feb 2010 18:57:30 -0800
-Message-Id: <1266893850.3653.2.camel@ed-hp-laptop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-SA-Exim-Connect-IP: 76.96.30.96
-X-SA-Exim-Mail-From: enelson1000@comcast.net
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: vivektambakad@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Can I use python-pyqt_4.4.3.bb with qt4-embedded_4.4.3.bb
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: ERROR: Please set the 'PERSISTENT_DIR' or 'CACHE' variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,33 +44,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 03:01:22 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Feb 2010 07:08:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, 2010-02-22 at 11:10 +0100, Dr. Michael Lauer wrote:
-> You need to try that. For some years I used to maintain the embedded support of PyQt after Phil Thompson
-> stopped supporting it. I used that a lot in my Zaurus projects, however I'm no longer interested in that.
-> Chances are you have to catch up with a large number of changes in Qt/E.
-> 
-> Good speed,
-> 
-> :M:
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Hi,
+          I am building "bitbake x11-image". I get following error
+ERROR: Please set the 'PERSISTENT_DIR' or 'CACHE' variable
 
-Michael
+I have set path correctly and infact build x11-image previously.
+I installed some packages "php5 php5-cli php5-mysql mysql-server php-pear
+php-db openssh-server" for
+asterisk  application. Is the above installed packages create any conflict
+with openembedded.
+I am getting this error after installing these packages.
 
-Do you remember what version of Python you were using the last time you
-used pyqt.
-
-Thanks
-ed
-
-
-
+with regards
+vivek tambakad
 
