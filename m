@@ -1,26 +1,31 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from smtp-out26.alice.it ([85.33.2.26])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NjrMi-0001f6-4S
+	(envelope-from <GNUtoo@no-log.org>) id 1NjtVK-0003k1-9J
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 10:47:43 +0100
-Received: from tamarin.localnet (siminn-int-gw.on-waves.com [157.157.59.158])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id E7F3F1B10C02
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2010 09:46:18 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Tue, 23 Feb 2010 13:04:45 +0100
+Received: from FBCMMO01.fbc.local ([192.168.68.195]) by smtp-out26.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 23 Feb 2010 13:00:56 +0100
+Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO01.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 23 Feb 2010 13:00:55 +0100
+Received: from [192.168.1.116] ([79.54.13.49]) by FBCMCL01B07.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Tue, 23 Feb 2010 13:00:55 +0100
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Feb 2010 23:50:39 +0100
-User-Agent: KMail/1.13.0 (Linux/2.6.33-rc8; KDE/4.4.0; i686; ; )
-References: <mailman.3892.1266855314.14961.openembedded-devel@lists.openembedded.org>
-	<4B82D6E0.7030005@tycoelectronics.com>
-In-Reply-To: <4B82D6E0.7030005@tycoelectronics.com>
-MIME-Version: 1.0
-Message-Id: <201002222350.39544.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+In-Reply-To: <a1da1e5e1002230103k33369a5j2be39f66400aab8c@mail.gmail.com>
+References: <a1da1e5e1002230103k33369a5j2be39f66400aab8c@mail.gmail.com>
+Date: Tue, 23 Feb 2010 13:00:51 +0100
+Message-Id: <1266926451.3759.12.camel@gnutoo-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-OriginalArrivalTime: 23 Feb 2010 12:00:55.0644 (UTC)
+	FILETIME=[DAB239C0:01CAB47F]
+X-SA-Exim-Connect-IP: 85.33.2.26
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Build GCC QA Issue: with objc: No GNU_HASH in the elf binary: '/home/oe/build/tmp/work/i686-angstrom-linux/gcc-4.3.3-r10.1/packages-split/objc/usr/lib/libobjc.so.2.0.0'
+Subject: Re: Linux on Nokia 5800
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,27 +39,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 09:47:43 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Tue, 23 Feb 2010 12:04:45 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On Monday 22 February 2010 20:11:28 Jay Snyder wrote:
+On Tue, 2010-02-23 at 01:03 -0800, KaruppuSwamy T wrote:
+> I have installed openembedded to get familiar with embedded linux development.
+> I have some good experience in building the linux from scratch (lfs)
+> and using gentoo for some time.
+> 
+> To play with real hardware, I have got my wife's Nokia 5800 which
+> seems to be a crap for day to day use. So I am dedicating this mobile
+> for my embedded linux play.
+> 
+> Please let me know how to start with it to develop an image for
+> Nokia 5800. How to target (customize) the arm build for this device?
+> It seems to be Nokia 5800 is based on ARM11 processor. My aim is not
+> to run a Mobile app in it, instead a linux distro.
+According to the specs I found, it runs symbian
+I am not aware of a symbian bootloader like haret(maybe it exists)
+So...
+If you can't find one you will have to develop a bootloader
+Then you need to find the exact cpu/soc model.
+If there is a port of the linux kenrel for it,you could use it but you
+will need drivers.
+Finding the serial port or jtag would help a lot since you won't
+necessary see something on the screen at first.
+Most of the time that requires disassembling the phone and soldering.
+A big issue would also be the lack of documentation,you would need to do
+reverse-engineering and so write something like haret which also does
+reverse engineering.
 
-> Is there any way to configure OE to ingore the QA stuff?     The
-> GNU_HASH is not required for a working executable is it?
+All that is too much time consuming,so maybe choose a better model which
+already runs some sort of linux kernel.
+The time spent on writing drivers and adapting the kernel depends on:
+*the recentness of your kernel(you want a recent kernel)
+*the fact that you have proprietary drivers or not
+*the fact that the kernel is standard or not(I'm thinking about android)
+*the completeness of the port
+
+So:
+*or use qemuarm target or something like this(there are also some x86
+targets)
+*or buy some hardware that is supported...
+Some devices like the nanonote(I don't know the state of openembedded
+support,but runs GNU/Linux) or the sheevaplug(should be well suported)
+don't cost a lot,and it will save you a lot of time and frustration.
+
+Denis.
 
 
-The most easy way to turn it off is to not build with GNU HASH style, This can 
-be made by not using "--hash-style=SOMETHING" in the LDFLAGS.
 
-The GNU HASH is not a security mechanism but a dynamic linker optimization to 
-be able to resolve symbols faster.
 
-It was added later as the feature is not that old. Everything I do build is 
-building fine, so in case you see an "awful" lot of breakage it would be nice 
-if you could clarify this.
-
-z.
 
 
