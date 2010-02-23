@@ -1,38 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iw0-f179.google.com ([209.85.223.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Njqj7-0007eP-I5 for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 10:06:49 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NjqgU-0004o3-By for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 10:04:02 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2010 10:04:02 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <karuppuswamy@gmail.com>) id 1NjqjE-0007eb-9t
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Feb 2010 10:06:55 +0100
+Received: by iwn9 with SMTP id 9so3139453iwn.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2010 10:04:02 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 23 Feb 2010 01:04:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:from:date:message-id
+	:subject:to:content-type;
+	bh=oNkDiOOtvjPOsIg+PPGuGWjrOv/4F1A33jg1oL/RLBk=;
+	b=NOYaNd9ps7mdhBFB13tuML95Gv9IaCfUw76KFaG3Wwjq55a1UX8wNxuA0ls7GL7hun
+	Py9yKsjnB08xDxkvIQ6eEIXSBXs11nGzb/UOAUAbtwgvJtgNwELKUF72eIJ3p/wAFhN3
+	EUqpdDG//hO+g5yVaPPA0phcDCNsxwPdgK8Go=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=gctIKB+YV5hF2E3P6VCzegrH+ohtGG4+K/TvricXdaWsonkcHdL/S7R4p9g9gteprC
+	YkdPGP/1bturUH7KHhq0kZlGr6rK3wqP5zTSA1EsAatJ991DewFyM8wMCRNT/gT0k7JJ
+	5DxQ1BLwWNrqG8uNAfsCymc6fDRtRlEFJoKrk=
+MIME-Version: 1.0
+Received: by 10.231.153.69 with SMTP id j5mr857268ibw.33.1266915847133; Tue, 
+	23 Feb 2010 01:04:07 -0800 (PST)
+From: KaruppuSwamy T <karuppuswamy@gmail.com>
+Date: Tue, 23 Feb 2010 01:03:47 -0800
+Message-ID: <a1da1e5e1002230103k33369a5j2be39f66400aab8c@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 23 Feb 2010 10:03:51 +0100
-Message-ID: <hm05ln$2cr$1@dough.gmane.org>
-References: <18e217241002221429m1939c786u52da4672f626ca07@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100219 Shredder/3.0.3pre
-In-Reply-To: <18e217241002221429m1939c786u52da4672f626ca07@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.223.179
+X-SA-Exim-Mail-From: karuppuswamy@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: using initramfs with openembedded.
+Subject: Linux on Nokia 5800
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,43 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 09:06:49 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Feb 2010 09:06:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+I have installed openembedded to get familiar with embedded linux development.
+I have some good experience in building the linux from scratch (lfs)
+and using gentoo for some time.
 
-On 22-02-10 23:29, C Michael Sundius wrote:
-> We'd like to put our initial boottime file system into the initramfs in the
-> kernel. But we also need to build some separate drivers to put into that
-> filesystem image.
-> 
-> Of course we can't build those drivers without the kernel staging dir
-> populated. (which doesn't happen until after the build of the kernel).
-> 
-> Has anyone run into this problem? how did you solve it? do I need to stage
-> the headerfiles and config info before the kernel build?
-> 
-> maybe this problem is solved some other way.. I haven't really tried this so
-> I'm just speculating here.
-> 
-> If anyone has some experience with this it would be great to hear how to go
-> about this. thanks for you help
+To play with real hardware, I have got my wife's Nokia 5800 which
+seems to be a crap for day to day use. So I am dedicating this mobile
+for my embedded linux play.
 
-The common way right now is to use 2 kernel recipes. Not an optimal
-situation, but it will get you there.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLg5n3MkyGM64RGpERAt6HAJ95plgifYy7yqC6mjovarzuokEPjwCgg0R1
-d8Lfns4Aq/S9rwyV930RjME=
-=2fyI
------END PGP SIGNATURE-----
-
+Please let me know how to start with it to develop an image for
+Nokia 5800. How to target (customize) the arm build for this device?
+It seems to be Nokia 5800 is based on ARM11 processor. My aim is not
+to run a Mobile app in it, instead a linux distro.
 
 
