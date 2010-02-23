@@ -1,42 +1,28 @@
-Received: from mail-qy0-f192.google.com ([209.85.221.192])
+Received: from qmta09.emeryville.ca.mail.comcast.net ([76.96.30.96])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1NjjHU-0007LX-M4
+	(envelope-from <enelson1000@comcast.net>) id 1Njl1T-0003wI-7g
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 02:09:47 +0100
-Received: by qyk30 with SMTP id 30so3827694qyk.23
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Feb 2010 17:07:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:from:to:cc:subject
-	:date:message-id:x-mailer;
-	bh=M/c4yA6jXpm1qvPfNGzkkHc9ADIQhTRToLTi6DvcgIM=;
-	b=b1CPkygB7rlVyHLy795Fmj28rGRsvze1gNTY5eMj4LzhJINplZHHc25Vcvb26mOUqL
-	Dgpoj47Y4shGbmdRqSpkRf7Ak6YE5dE2e+LL6WMX33ogedBfnPZT8dhpYv4TKlsFjWwO
-	bbSgJ5lfbqeEjbkH/mew/H8eJzQsgcXs6n6VI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	b=Pc4KqRvrGMfKe4C6Ctj4clcj0lpfyeDD17M3s0+0fst881F+jshbsn7iqYnNb30umi
-	XbcL0bg6KM8FxUP9t2KdCOmybk8LPLUMFadQox12L7WI4qL+R50LNw2GtfajNJLGfmX1
-	0wyWzBjIenTpUSvfRwmKQuzFiTRPa6B1Hq8XU=
-Received: by 10.224.5.72 with SMTP id 8mr315106qau.96.1266887219704;
-	Mon, 22 Feb 2010 17:06:59 -0800 (PST)
-Received: from localhost.localdomain (ip24-251-170-95.ph.ph.cox.net
-	[24.251.170.95])
-	by mx.google.com with ESMTPS id 20sm3120418qyk.1.2010.02.22.17.06.57
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 22 Feb 2010 17:06:58 -0800 (PST)
-Sender: Chris Larson <kergoth@gmail.com>
-From: Chris Larson <clarson@kergoth.com>
+	Tue, 23 Feb 2010 04:01:22 +0100
+Received: from omta14.emeryville.ca.mail.comcast.net ([76.96.30.60])
+	by qmta09.emeryville.ca.mail.comcast.net with comcast
+	id lBDt1d00A1HpZEsA9ExZSU; Tue, 23 Feb 2010 02:57:33 +0000
+Received: from [192.168.1.100] ([67.188.141.116])
+	by omta14.emeryville.ca.mail.comcast.net with comcast
+	id lExY1d0012WszPn8aExYl4; Tue, 23 Feb 2010 02:57:32 +0000
+From: ed <enelson1000@comcast.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Feb 2010 18:06:51 -0700
-Message-Id: <1266887211-31228-1-git-send-email-clarson@kergoth.com>
-X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 209.85.221.192
-X-SA-Exim-Mail-From: kergoth@gmail.com
+In-Reply-To: <4567769F-93FC-4075-A26B-4FA46347D404@vanille-media.de>
+References: <1266800050.3758.47.camel@ed-hp-laptop>
+	<4567769F-93FC-4075-A26B-4FA46347D404@vanille-media.de>
+Date: Mon, 22 Feb 2010 18:57:30 -0800
+Message-Id: <1266893850.3653.2.camel@ed-hp-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-SA-Exim-Connect-IP: 76.96.30.96
+X-SA-Exim-Mail-From: enelson1000@comcast.net
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Cc: Chris Larson <chris_larson@mentor.com>
-Subject: [PATCH] insane: check for .debug as a path component, not part of the path string
+Subject: Re: Can I use python-pyqt_4.4.3.bb with qt4-embedded_4.4.3.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,30 +36,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 01:09:47 -0000
+X-List-Received-Date: Tue, 23 Feb 2010 03:01:22 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-From: Chris Larson <chris_larson@mentor.com>
+On Mon, 2010-02-22 at 11:10 +0100, Dr. Michael Lauer wrote:
+> You need to try that. For some years I used to maintain the embedded support of PyQt after Phil Thompson
+> stopped supporting it. I used that a lot in my Zaurus projects, however I'm no longer interested in that.
+> Chances are you have to catch up with a large number of changes in Qt/E.
+> 
+> Good speed,
+> 
+> :M:
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Signed-off-by: Chris Larson <chris_larson@mentor.com>
----
- classes/insane.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Michael
 
-diff --git a/classes/insane.bbclass b/classes/insane.bbclass
-index 804caf0..c2e8d9c 100644
---- a/classes/insane.bbclass
-+++ b/classes/insane.bbclass
-@@ -279,7 +279,7 @@ def package_qa_check_dbg(path, name,d, elf):
-     sane = True
- 
-     if not "-dbg" in name:
--        if '.debug' in path:
-+        if '.debug' in path.split(os.path.sep):
-             error_msg = "non debug package contains .debug directory: %s path %s" % \
-                      (name, package_qa_clean_path(path,d))
-             sane = package_qa_handle_error(3, error_msg, name, path, d)
--- 
-1.6.3.3
+Do you remember what version of Python you were using the last time you
+used pyqt.
+
+Thanks
+ed
+
 
 
 
