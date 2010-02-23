@@ -1,29 +1,27 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1Nk2QD-0002UE-MN
-	for Openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 22:36:05 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 159012CA11;
-	Tue, 23 Feb 2010 21:29:08 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ZwfPdVQFX2TX; Tue, 23 Feb 2010 21:29:04 +0000 (UTC)
-Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
-	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTPSA id 8813C2C81E;
-	Tue, 23 Feb 2010 21:29:03 +0000 (UTC)
-Message-ID: <4B84499B.2010800@gmail.com>
-Date: Tue, 23 Feb 2010 22:33:15 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
-To: Openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+	(envelope-from <philb@gnu.org>) id 1Nk2UL-0004Av-NZ
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Feb 2010 22:40:34 +0100
+Received: from 88-110-39-162.dynamic.dsl.as9105.com ([88.110.39.162]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1Nk2Ri-0008L3-4o
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Feb 2010 21:37:34 +0000
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1266951776.18176.47.camel@trini-m4400>
+References: <1266951776.18176.47.camel@trini-m4400>
+Date: Tue, 23 Feb 2010 21:37:32 +0000
+Message-ID: <1266961052.5437.255.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Error: eggdbus_0.6.bb do_configure failed
+Subject: Re: [PATCH] Fix busybox SUID support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,21 +35,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 21:36:05 -0000
-Content-Type: text/plain; charset=ISO-8859-15
+X-List-Received-Date: Tue, 23 Feb 2010 21:40:35 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Hi,
-maybe I'm wrong but looks like after latest patches to dbus Angstrom
-doesn't build with eggdbus_0.6.bb do_configure failed.
-Where is dbus-bus-introspect.xml now ?
-Anybody is successfully building x11-image (or similar) recently?
+On Tue, 2010-02-23 at 12:02 -0700, Tom Rini wrote:
+> +	if grep -q "CONFIG_FEATURE_SUID=y" ${WORKDIR}/defconfig; then
+> +		install -m 4755 ${S}/busybox ${D}${base_bindir}
+> +	else
+> +		install -m 0755 ${S}/busybox ${D}${base_bindir}
+> +	fi
 
-http://pastebin.com/NEuN3JCE
+Looks good to me.
 
-TIA
+p.
 
-/marco
 
 
 
