@@ -1,37 +1,29 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1Nk28Y-0000YF-8n
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Feb 2010 22:17:49 +0100
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <koansoftware@gmail.com>) id 1Nk2QD-0002UE-MN
+	for Openembedded-devel@lists.openembedded.org;
+	Tue, 23 Feb 2010 22:36:05 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1NLF1c1031813
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2010 21:15:01 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 27464-08 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2010 21:14:57 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1NLErFo031801
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2010 21:14:54 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1266958592.18176.72.camel@trini-m4400>
-References: <1266887211-31228-1-git-send-email-clarson@kergoth.com>
-	<1266958592.18176.72.camel@trini-m4400>
-Date: Tue, 23 Feb 2010 21:14:51 +0000
-Message-ID: <1266959691.1714.522.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	by wiki.koala.it (Postfix) with ESMTP id 159012CA11;
+	Tue, 23 Feb 2010 21:29:08 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ZwfPdVQFX2TX; Tue, 23 Feb 2010 21:29:04 +0000 (UTC)
+Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
+	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTPSA id 8813C2C81E;
+	Tue, 23 Feb 2010 21:29:03 +0000 (UTC)
+Message-ID: <4B84499B.2010800@gmail.com>
+Date: Tue, 23 Feb 2010 22:33:15 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: KOAN sas - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
+To: Openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] insane: check for .debug as a path component, not part of the path string
+Subject: Error: eggdbus_0.6.bb do_configure failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,39 +37,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Feb 2010 21:17:49 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 23 Feb 2010 21:36:05 -0000
+Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2010-02-23 at 13:56 -0700, Tom Rini wrote:
-> On Mon, 2010-02-22 at 18:06 -0700, an unknown sender wrote:
-> > From: Chris Larson <chris_larson at mentor.com>
-> > 
-> > Signed-off-by: Chris Larson <chris_larson at mentor.com>
-> 
-> Acked-by: Tom Rini <tom_rini@mentor.com>
-Acked-by: Richard Purdie <rpurdie@linux.intel.com>
+Hi,
+maybe I'm wrong but looks like after latest patches to dbus Angstrom
+doesn't build with eggdbus_0.6.bb do_configure failed.
+Where is dbus-bus-introspect.xml now ?
+Anybody is successfully building x11-image (or similar) recently?
 
-> > ---
-> >  classes/insane.bbclass |    2 +-
-> >  1 files changed, 1 insertions(+), 1 deletions(-)
-> > 
-> > diff --git a/classes/insane.bbclass b/classes/insane.bbclass
-> > index 804caf0..c2e8d9c 100644
-> > --- a/classes/insane.bbclass
-> > +++ b/classes/insane.bbclass
-> > @@ -279,7 +279,7 @@ def package_qa_check_dbg(path, name,d, elf):
-> >      sane = True
-> >  
-> >      if not "-dbg" in name:
-> > -        if '.debug' in path:
-> > +        if '.debug' in path.split(os.path.sep):
-> >              error_msg = "non debug package contains .debug directory: %s path %s" % \
-> >                       (name, package_qa_clean_path(path,d))
-> >              sane = package_qa_handle_error(3, error_msg, name, path, d)
-> 
-> 
+http://pastebin.com/NEuN3JCE
 
+TIA
+
+/marco
 
 
 
