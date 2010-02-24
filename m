@@ -1,32 +1,35 @@
-Received: from exprod5og107.obsmtp.com ([64.18.0.184])
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martyn.welch@ge.com>) id 1NkHWI-0008S1-80
+	(envelope-from <koansoftware@gmail.com>) id 1NkHok-0002BL-3L
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Feb 2010 14:43:21 +0100
-Received: from source ([4.78.218.129]) (using TLSv1) by
-	exprod5ob107.postini.com ([64.18.4.12]) with SMTP
-	ID DSNKS4UsUVqf3XkSbos/afW9YoPyDQZYW7fJ@postini.com;
-	Wed, 24 Feb 2010 05:40:35 PST
-Received: from unknown (HELO cinmlip01.e2k.ad.ge.com) ([3.159.213.48])
-	by Cinmlip09.e2k.ad.ge.com with ESMTP; 24 Feb 2010 03:54:11 -0500
-Received: from es-j7s4d2j.amer.consind.ge.com (HELO [3.138.54.92])
-	([3.138.54.92])
-	by cinmlip01.e2k.ad.ge.com with ESMTP; 24 Feb 2010 03:54:07 -0500
-Message-ID: <4B84E9E5.8060903@ge.com>
-Date: Wed, 24 Feb 2010 08:57:09 +0000
-From: Martyn Welch <martyn.welch@ge.com>
+	Wed, 24 Feb 2010 15:02:25 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id B17D02CA11
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Feb 2010 13:55:26 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id At3d0ckvXDat
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Feb 2010 13:55:22 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id B8AF62C81E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Feb 2010 13:55:21 +0000 (UTC)
+Message-ID: <4B8530C2.20708@gmail.com>
+Date: Wed, 24 Feb 2010 14:59:30 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
 User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <mailman.5.1266922802.8892.openembedded-devel@lists.openembedded.org>	<4B83DD5C.8050408@tycoelectronics.com>
-	<4B8458A7.40807@balister.org>	<19c1b8a91002231509v4a7d870dia190e9aa2c0f6739@mail.gmail.com>	<4B847891.7030706@balister.org>
-	<1266973598.18176.366.camel@trini-m4400>
-In-Reply-To: <1266973598.18176.366.camel@trini-m4400>
-X-SA-Exim-Connect-IP: 64.18.0.184
-X-SA-Exim-Mail-From: martyn.welch@ge.com
+References: <201002241118467818011@tom.com>
+In-Reply-To: <201002241118467818011@tom.com>
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: How to build g++ to run on target?
+Subject: Re: dbus postinst failed.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,46 +43,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Feb 2010 13:43:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 24 Feb 2010 14:02:25 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Tom Rini wrote:
-> On Tue, 2010-02-23 at 16:53 -0800, Philip Balister wrote:
->   
->> On 02/23/2010 03:09 PM, Khem Raj wrote:
->>     
->>> On Tue, Feb 23, 2010 at 2:37 PM, Philip Balister<philip@balister.org>  wrote:
->>>       
->>>> On 02/23/2010 05:51 AM, Jay Snyder wrote:
->>>>         
->>>>> I was able to build gcc for installation directly onto the OE target
->>>>> with "bitbake gcc". "bitbake g++" gives me "nothing provides g++".
->>>>>
->>>>> What is the magic bitbake command to provide this?
->>>>>           
->>>> bitbake task-sdk-native, and install task-native-sdk. Anyone know why the
->>>> task creates a package with different name?
->>>>         
->>> may be because
->>>
->>> task-sdk-native.bb:RPROVIDES_${PN} = "task-native-sdk"
->>>       
->> I know that :) I am curious why the renaming.
->>     
->
-> And if perhaps we couldn't get a different name altogether?  'native'
-> has a meaning normally that's not what it means here.
-> task-on-device-sdk is a bit wordy, but avoids 'native'.  Of course,
-> 'native development' also has a meaning too.. RPROVIDES perhaps?  Or is
-> that just the worst of both worlds.
-"target"?
+Readon Shaw ha scritto, Il 24/02/2010 04:18:
+> it report that messagebox is not a regular user while my image is booting. 
+> after tracing, i found that dbus package's postinst script was not executed.
+> the log shows that "offline root mode: not running dbus-1.postinst"
+> in order that adduser command in the .postinst file have no effect.
+> 
+> how to solve that? is it a bug?
+> 
 
--- 
-Martyn Welch (Principal Software Engineer)   |   Registered in England and
-GE Intelligent Platforms                     |   Wales (3828642) at 100
-T +44(0)127322748                            |   Barbirolli Square, Manchester,
-E martyn.welch@ge.com                        |   M2 3AB  VAT:GB 927559189
+Please post error log to clarify the problem.
+BTW this problem should has been solved last night by 'denix'
 
+Cheers
+/marco
 
 
