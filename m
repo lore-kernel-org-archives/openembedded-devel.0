@@ -1,26 +1,27 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1NkAfe-0004na-Iy
+	(envelope-from <sledz@DResearch.DE>) id 1NkCKe-0000GA-NU
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Feb 2010 07:24:33 +0100
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id 7239F1D360F6; Wed, 24 Feb 2010 07:21:45 +0100 (CET)
-Date: Wed, 24 Feb 2010 07:21:45 +0100
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100224062145.GE24852@ibawizard.net>
-References: <mailman.3988.1266916925.14961.openembedded-devel@lists.openembedded.org>
-	<4B83DC88.7070705@tycoelectronics.com>
-	<hm0qff$9v8$1@dough.gmane.org> <4B84589E.1060209@balister.org>
+	Wed, 24 Feb 2010 09:10:59 +0100
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 7A7D0491264
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Feb 2010 09:08:13 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Wed, 24 Feb 2010 09:08:53 +0100
+Message-ID: <4B84DE66.4080602@dresearch.de>
+Date: Wed, 24 Feb 2010 09:08:06 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
 MIME-Version: 1.0
-In-Reply-To: <4B84589E.1060209@balister.org>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+To: openembedded-devel@lists.openembedded.org
+X-OriginalArrivalTime: 24 Feb 2010 08:08:53.0596 (UTC)
+	FILETIME=[9AEC09C0:01CAB528]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: reply to digest mails, was: Re: Openembedded-devel	Digest, Vol 43, Issue 98
+Subject: Angstrom, udev, and kernel version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,24 +35,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Feb 2010 06:24:33 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 24 Feb 2010 08:10:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Philip Balister <philip@balister.org> [2010-02-23 14:37:18]:
+Since Angstrom updated to udev_151 we've a big problem.
 
-> On 02/23/2010 06:58 AM, Koen Kooi wrote:
->>
->> If it turns out tha that is too hard for people we can consider turning
->> off digests.
->
-> I tend to delete emails with the subject only containing digest info.  
-> I'm sure there are a few people who need the digests and no sense making  
-> life harder for them because of the actions of a few people.
+udevd started from within /etc/init.d/udev crashes with
 
-Maybe it would be more friendly to learn mailman rejecting emails with
-"Digest" in subject...
+/sbin/udevd -d --debug
+1266997931.250494 [297] udev_monitor_new_from_netlink: error getting socket: Invalid argument error initializing netlink socket
+1266997931.250718 [297] main: error initializing netlink socket
 
--- ynezz
+Searching the internet for this error i found some hints that this udev version requires at least linux 2.6.27. Unfortunately we are forced to use 2.6.24 because of special driver/machine support for hipox. :(
+
+Is there a way to rollback to udev_141 for hipox machine?
+
+Or is there a backport patch available for 2.6.24 to support udev_151?
+
+Steffen
+
 
 
