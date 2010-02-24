@@ -1,53 +1,29 @@
-Received: from mail-bw0-f213.google.com ([209.85.218.213])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1NkKpw-000501-Pj
+Received: from ironport2-out.teksavvy.com ([206.248.154.183]
+	helo=ironport2-out.pppoe.ca) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <josh@slashdev.ca>) id 1NkLSR-0004wC-AH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Feb 2010 18:15:58 +0100
-Received: by bwz5 with SMTP id 5so3549208bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Feb 2010 09:13:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=kRSwufqy3Q2BKk4Mwwc4mIugxtmdMfdleT4DySw0O7c=;
-	b=wYVBcM2zTISnKvq9Y4TczAoJTxyOuAOeGyRzJCy5ogWl4oqfpNKv2diifIbfWH0Kkz
-	Per2/1fO81NLYog94sLidA3FQ1fYA2yLbRP4KI7sZcCynLfUtvBJs+tuSamYlbLbvCgx
-	zagOCAn3InUlCpry5f2o3uNng3/Pfo1GUIIao=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Z2aP3F2O8RylEenI04Hi9kGRdcYVSe/W4wbxfd9DF5/Oy3Dk5ossw5nMelIxpKnDI3
-	iYqb+ofJK3gP5p+OFUP9RrM75ayi1k9LyusRdEtSj35Sx6jCFM6hIj7++HL81v2fk5mY
-	cbm/doEfbaC9uYqMvRnKu7X3iYhcom/sdL/BE=
-Received: by 10.204.156.22 with SMTP id u22mr67168bkw.24.1267031583014;
-	Wed, 24 Feb 2010 09:13:03 -0800 (PST)
-Received: from s42.loc ([84.119.103.202])
-	by mx.google.com with ESMTPS id 14sm2812929bwz.14.2010.02.24.09.13.00
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 24 Feb 2010 09:13:01 -0800 (PST)
-Received: from cow by s42.loc with local (Exim 4.71)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1NkKsa-0005en-1P; Wed, 24 Feb 2010 18:18:32 +0100
-Date: Wed, 24 Feb 2010 18:18:32 +0100
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100224171832.GA20737@mx.loc>
-References: <1266766352-28786-1-git-send-email-rep.dot.nop@gmail.com>
-	<20100222162424.GA27420@denix.org>
-	<1266857709.14566.348.camel@mill.internal.reciva.com>
-	<b6ebd0a51002220906p53b3b3b2h5257ebca50d6227c@mail.gmail.com>
-	<20100222181754.GB24049@jama> <20100222194159.GZ30265@mx.loc>
-	<20100222214335.GB30265@mx.loc> <20100222220621.GB27420@denix.org>
-	<20100222224543.GD30265@mx.loc>
+	Wed, 24 Feb 2010 18:55:38 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: ApEBAA/2hEtFpaLh/2dsb2JhbAAH2FKEcgSDFoJ/hHA
+X-IronPort-AV: E=Sophos;i="4.49,533,1262581200"; d="scan'208";a="56675716"
+Received: from 69-165-162-225.dsl.teksavvy.com (HELO [192.168.1.10])
+	([69.165.162.225])
+	by ironport2-out.pppoe.ca with ESMTP; 24 Feb 2010 12:52:48 -0500
+Message-ID: <4B856948.6070704@slashdev.ca>
+Date: Wed, 24 Feb 2010 13:00:40 -0500
+From: Josh Kropf <josh@slashdev.ca>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.7) Gecko/20100120 Shredder/3.0.1
 MIME-Version: 1.0
-In-Reply-To: <20100222224543.GD30265@mx.loc>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.218.213
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <4B5B51BD.3020006@slashdev.ca>	<4FB2ADE2-A098-464D-9022-E1844CDDB2DF@vanille-media.de>
+	<4B5B5A49.3090902@slashdev.ca>
+In-Reply-To: <4B5B5A49.3090902@slashdev.ca>
+X-SA-Exim-Connect-IP: 206.248.154.183
+X-SA-Exim-Mail-From: josh@slashdev.ca
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] git: add SRC_URI name
+Subject: Re: python-lang causing Alignment trap and Segfault
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,93 +37,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Feb 2010 17:15:59 -0000
-X-Groupsio-MsgNum: 17039
-Content-Type: multipart/mixed; boundary="RnlQjJ0d97Da+TV1"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 24 Feb 2010 17:55:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---RnlQjJ0d97Da+TV1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Just wanted to update the list on this issue.
 
-On Mon, Feb 22, 2010 at 11:45:43PM +0100, Bernhard Reutner-Fischer wrote:
->On Mon, Feb 22, 2010 at 05:06:21PM -0500, Denys Dmytriyenko wrote:
+I have no idea why, but after removing the readline.so file (from 
+/usr/lib/python2.6/lib-dynload/) python no longer segfaults on startup.
+
+On 01/23/2010 03:21 PM, Josh Kropf wrote:
+> Looks like the atexit module
 >
->>> Not using "archive" as Martin likes as default, but uri%d, but
+> root@mini2440:~# python -v
+> [snip]
+> # /usr/lib/python2.6/atexit.pyo matches /usr/lib/python2.6/atexit.py
+> import atexit # precompiled from /usr/lib/python2.6/atexit.pAlignment 
+> trap: python (2329) PC=0x403f007c Instr=0x28001c05 Address=0xffffffff 
+> FSR 0x813
+> yo
+>
+>
+>
+> On 01/23/2010 03:09 PM, Dr. Michael Lauer wrote:
+>> Try running python -v to find out exactly which module is triggering 
+>> that.
 >>
->>For multiple SRC_URIs, using uri1/uri2 can be more confusing and may be not 
->>much better than looking up real names in .inc file...
+>> Cheers,
+>>
+>> :M:
+>>
+>> Am 23.01.2010 um 20:45 schrieb Josh Kropf <josh@slashdev.ca>:
+>>
+>>> I've compiled an image for my mini2440 board (armv4t) from the 
+>>> stable/2009 branch in git using angstrom distribution.
+>>>
+>>> One of the python packages I need depends on python-lang but I'm 
+>>> finding that python segfaults when python-lang is installed.  The 
+>>> kernel logs the following before the segfault:
+>>>
+>>> Alignment trap: python (2303) PC=0x403f007c Instr=0x28001c05 
+>>> Address=0xffffffff FSR 0x813
+>>>
+>>> Removing python-lang package makes python work again.
+>>>
+>>> Just wondering if anyone has run into this problem or has some 
+>>> pointers on debugging this.
+>>>
+>>> Thanks,
+>>> - Josh
+>>>
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
->ok, so let's drop that superfluous .note and the url%d handling.
->Other opinions?
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-I'm using this now, fwiw.
 
-cheers,
-
---RnlQjJ0d97Da+TV1
-Content-Type: text/x-diff; charset=us-ascii
-Content-Disposition: attachment; filename="default-sum_for_first_uri.01.patch"
-
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index c8ee722..0b0a2d8 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -61,10 +61,14 @@ def base_chk_file_vars(parser, localpath, params, data):
-         name = params["name"]
-     except KeyError:
-         return False
--    flagName = "%s.md5sum" % name
--    want_md5sum = bb.data.getVarFlag("SRC_URI", flagName, data)
--    flagName = "%s.sha256sum" % name
--    want_sha256sum = bb.data.getVarFlag("SRC_URI", flagName, data)
-+    if name:
-+        md5flag = "%s.md5sum" % name
-+        sha256flag = "%s.sha256sum" % name
-+    else:
-+        md5flag = "md5sum"
-+        sha256flag = "sha256sum"
-+    want_md5sum = bb.data.getVarFlag("SRC_URI", md5flag, data)
-+    want_sha256sum = bb.data.getVarFlag("SRC_URI", sha256flag, data)
- 
-     if (want_sha256sum == None and want_md5sum == None):
-         # no checksums to check, nothing to do
-@@ -702,12 +706,18 @@ python base_do_fetch() {
- 	pn = bb.data.getVar('PN', d, True)
- 
- 	# Check each URI
-+	first_uri = True
- 	for url in src_uri.split():
- 		localpath = bb.data.expand(bb.fetch.localpath(url, localdata), localdata)
- 		(type,host,path,_,_,params) = bb.decodeurl(url)
- 		uri = "%s://%s%s" % (type,host,path)
- 		try:
- 			if type in [ "http", "https", "ftp", "ftps" ]:
-+				# We provide a default shortcut of plain [] for the first fetch uri
-+				# Explicit names in any uri overrides this default.
-+				if not "name" in params and first_uri:
-+					first_uri = False
-+					params["name"] = ""
- 				if not (base_chk_file_vars(parser, localpath, params, d) or base_chk_file(parser, pn, pv,uri, localpath, d)):
- 					if not bb.data.getVar("OE_ALLOW_INSECURE_DOWNLOADS", d, True):
- 						bb.fatal("%s-%s: %s has no checksum defined, cannot check archive integrity" % (pn,pv,uri))
-diff --git a/docs/usermanual/reference/var_src_uri.xml b/docs/usermanual/reference/var_src_uri.xml
-index a35e1ee..7b51b56 100644
---- a/docs/usermanual/reference/var_src_uri.xml
-+++ b/docs/usermanual/reference/var_src_uri.xml
-@@ -29,7 +29,12 @@
-   be used in preference to retrieving a new version . Any source that is
-   retrieved from a remote URI will be stored in the download source directory
-   and an appropriate md5 sum generated and stored alongside it.</para>
--
-+  <para>Checksums for http/https/ftp/ftps uris are stored in each recipe in
-+  the form of<screen>SRC_URI[md5sum] = &quot;9a7a11ffd52d9c4553ea8c0134a6fa86&quot;
-+SRC_URI[sha256sum] = &quot;36bdb85c97b39ac604bc58cb7857ee08295242c78a12848ef8a31701921b9434&quot;</screen>
-+  for the first remote SRC_URI that has <emphasis>no</emphasis> explicit <command>name=foo</command>
-+  associated with it. Following <emphasis>unnamed</emphasis> SRC_URIs without
-+  a checksum will throw errors.</para>
-   <para>Each URI supports a set of additional options. These options are
-   tag/value pairs of the form <command>"a=b"</command> and are semi-colon
-   separated from each other and from the URI. The follow examples shows two
-
---RnlQjJ0d97Da+TV1--
