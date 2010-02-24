@@ -1,31 +1,48 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from mail-fx0-f220.google.com ([209.85.220.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NkOOB-0006VB-Ce
+	(envelope-from <martin.jansa@gmail.com>) id 1NkOOj-0006Xz-6x
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Feb 2010 22:03:24 +0100
-Received: from 88-110-39-162.dynamic.dsl.as9105.com ([88.110.39.162]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NkOLS-0006a6-PY
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Feb 2010 21:00:37 +0000
-From: Phil Blundell <philb@gnu.org>
+	Wed, 24 Feb 2010 22:03:57 +0100
+Received: by fxm20 with SMTP id 20so5146036fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Feb 2010 13:01:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=ZYtlBLfty/8wxHyT527PxLjT9ZT/oqL8YAbHjnqf4jU=;
+	b=SYt5/j16cXSarGN4064a2LnLdGgPhkYduUmd1NevDiKezElm4pBgMb21KULeF96JR2
+	OI6L60cPBCZiswUnqUAnj0WWayD2zA/l3Aryq3AL1sf1AC/s136431MMcf60cRBUpDtR
+	6qVx04yhiogiTpME0JGr4TRhlyi6Iuuxb47Hs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=AciimtaWMIngp/jvzLdhouomFsy2DdPtRwhmDx1AF5PDfU+Uec74ssF2xGhEbzNbee
+	JvIMZKwQiIyXZeeQcXTXIM+F1KBNAbZQ7rJXT7dDWrEwJ93Y0Tk8IipNKMtdzqqRsYX2
+	q2iQ0QWdF0MZvlRqd9NGqDXTUnVIGExvEacxE=
+Received: by 10.223.110.29 with SMTP id l29mr311525fap.64.1267045265427;
+	Wed, 24 Feb 2010 13:01:05 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 13sm3762622fxm.6.2010.02.24.13.01.04
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 24 Feb 2010 13:01:05 -0800 (PST)
+Date: Wed, 24 Feb 2010 22:01:22 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1267044772-10182-1-git-send-email-denis@denix.org>
-References: <1267044772-10182-1-git-send-email-denis@denix.org>
-Date: Wed, 24 Feb 2010 21:00:17 +0000
-Message-ID: <1267045217.5437.326.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+Message-ID: <20100224210122.GD29105@jama>
+References: <201002242139.55093.ml@vdm-design.de>
+MIME-Version: 1.0
+In-Reply-To: <201002242139.55093.ml@vdm-design.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.220
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.7 required=5.0 tests=SPF_SOFTFAIL autolearn=no
+X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] rootfs_ipk.bbclass: fix BAD_RECOMMENDATIONS
+Subject: Re: Commit access
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,19 +56,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Feb 2010 21:03:24 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 24 Feb 2010 21:03:57 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, 2010-02-24 at 15:52 -0500, Denys Dmytriyenko wrote:
-> New opkg requires full and correct package name, version, revision and
-> architecture to be specified when requiring de-installation of a package.
-> Collect that info from opkg-info.
+On Wed, Feb 24, 2010 at 09:39:55PM +0100, Thomas Zimmermann wrote:
+> Hi all OE developers,
+> I am politely asking if it would be possible to allow me OE commit access.
+> 
+> Till now already 50 patches from me went into oe.dev. They were mostly 
+> commited by Martin Jansa and Klaus Kurzmann. But now i think it would less 
+> annoying for them if i could commit them directly.
 
-This seems like a bug in opkg.  Would it not be better to fix it there?
+I can confirm that Thomas's patches I reviewed were always good quality, 
+so definitely yes from me.
 
-p.
++1
 
-
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
