@@ -1,38 +1,30 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NkG2H-0004aA-GX for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Feb 2010 13:08:17 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NkFzd-0004RS-56 for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Feb 2010 13:05:29 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Feb 2010 13:05:29 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+Received: from cnsmtpr2.tom.com ([218.30.111.152] helo=tom.com)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <xydarcher@tom.com>) id 1NkGGJ-0008WP-51
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Feb 2010 13:22:46 +0100
+Received: from china-53198c1e9 (unknown [172.24.192.61])
+	by cnapp52 (Coremail) with SMTP id kMsXtZ6ahEubLZAF.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Feb 2010 13:05:29 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 24 Feb 2010 13:05:17 +0100
-Message-ID: <hm34lt$oph$1@dough.gmane.org>
-References: <4B84DE66.4080602@dresearch.de>
+	Wed, 24 Feb 2010 11:18:54 +0800 (CST)
+X-Originating-IP: [172.24.192.61]
+Received: from china-53198c1e9([125.71.228.74])
+	by cnapp31.tom.com(KBAS Gateway 2.1 2.127s39f(2009-08-22)) with ESMTP
+	id local10450.1266981534 for
+	<openembedded-devel@lists.openembedded.org>; 
+	Wed, 24 Feb 2010 11:18:54 +0800 (CST)
+X-Original-AuthLogin: xydarcher@tom.com
+Date: Wed, 24 Feb 2010 11:18:47 +0800
+From: "Readon Shaw" <xydarcher@tom.com>
+To: "openembedded-devel" <openembedded-devel@lists.openembedded.org>
+Message-ID: <201002241118467818011@tom.com>
+X-mailer: Foxmail 6, 15, 201, 22 [cn]
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100219 Shredder/3.0.3pre
-In-Reply-To: <4B84DE66.4080602@dresearch.de>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 218.30.111.152
+X-SA-Exim-Mail-From: xydarcher@tom.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: Angstrom, udev, and kernel version
+Subject: dbus postinst failed.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,26 +38,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Feb 2010 12:08:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 24 Feb 2010 12:22:46 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+it report that messagebox is not a regular user while my image is booting. 
+after tracing, i found that dbus package's postinst script was not executed.
+the log shows that "offline root mode: not running dbus-1.postinst"
+in order that adduser command in the .postinst file have no effect.
 
-On 24-02-10 09:08, Steffen Sledz wrote:
-> Since Angstrom updated to udev_151 we've a big problem.
+how to solve that? is it a bug?
 
-And I must point out that the move to 151 has been discussed quite well
-on the angstrom mailinglist:
-http://thread.gmane.org/gmane.linux.distributions.angstrom.devel/4109
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLhRX9MkyGM64RGpERAi80AKCzX11Lelk/yIfaV+eh/h8/Cc1gegCgjKeh
-HPuSFJxwHnDVNSEi5krNKAk=
-=cchR
------END PGP SIGNATURE-----
 
 
 
