@@ -1,41 +1,38 @@
-Received: from mail-iw0-f179.google.com ([209.85.223.179])
+Received: from ca-lin-mx01.artesis.be ([193.191.129.207])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1NkI2f-0004JD-HM
+	(envelope-from <glenn.ergeerts@artesis.be>) id 1NkIRc-00008f-K7
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Feb 2010 15:16:48 +0100
-Received: by iwn9 with SMTP id 9so4370360iwn.3
+	Wed, 24 Feb 2010 15:42:35 +0100
+Received: from ca-win-cas02.artesis.be (ca-win-cas02.artesis.be [10.3.3.2])
+	by ca-lin-mx01.artesis.be (Postfix) with ESMTP id D91043F883E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Feb 2010 06:13:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=A0S2s9kZHerztiPBqZsuEmWzU3g99hI3xOnNcPXiVTw=;
-	b=b65OHh/lbPG540Q9Bu5HxI7j0BlkWzzuby+cFuuN40hzH3TWZwpmQMSzOdb0csMbDm
-	iHNYj2TQvEIJLhpBJ777iGhSUrXtNgX0L7KEvJW/Ae/JYiTevK3X05cuSY7ZNQxVw3yJ
-	CAAyg96k1HY/Uxwy50yZQtvSPMEyyO2VCngLw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=IDX4z6niwSiScq2k7I82kxBIGVZQv+AS3JYshmBHjrKvgl2GuXx/lWsXc/J+vCmrYk
-	oKwccGZ4ZpDTJpF/rUxJlvXJORFj2J6UHcjeMGPT6hisEXWaWaSaP/JEL99UcFogyf0u
-	Fas/7UQR0TdUBm/F65qfjBIX62sUArfcdtPK8=
+	Wed, 24 Feb 2010 15:39:42 +0100 (CET)
+Received: from ca-win-mbs02.artesis.be ([::1]) by ca-win-cas02.artesis.be
+	([::1]) with mapi; Wed, 24 Feb 2010 15:39:42 +0100
+From: Ergeerts Glenn <glenn.ergeerts@artesis.be>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 24 Feb 2010 15:39:44 +0100
+Thread-Topic: ccid recipe configure problem
+Thread-Index: Acq1XzUKPgl3o6N9Rb6ovir1TOtl6g==
+Message-ID: <5429EF528F02C34281C8573452C749431AC0B972E2@ca-win-mbs02.artesis.be>
+Accept-Language: en-US, nl-BE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US, nl-BE
 MIME-Version: 1.0
-Received: by 10.231.146.79 with SMTP id g15mr74718ibv.49.1267020838761; Wed, 
-	24 Feb 2010 06:13:58 -0800 (PST)
-In-Reply-To: <19c1b8a91002231910y3b44f0ecuc8992499c1a4086@mail.gmail.com>
-References: <f96d234e1002230827y25028493l7f25ab05b6fbac76@mail.gmail.com>
-	<19c1b8a91002231036u46b1b35andf9fb71345805669@mail.gmail.com>
-	<f96d234e1002231243h1e75af62g90d490aa792fbe96@mail.gmail.com>
-	<19c1b8a91002231910y3b44f0ecuc8992499c1a4086@mail.gmail.com>
-Date: Wed, 24 Feb 2010 09:13:58 -0500
-Message-ID: <f96d234e1002240613i75bfab0byfcabe9aa6737dc6a@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.179
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+X-Artesis-MailScanner-Watermark: 1267627184.98899@sN7TObhr0PtcEPjZe5aVjQ
+X-MailScanner-ID: D91043F883E.471E5
+X-Artesis-MailScanner: This message is clean
+X-Artesis-MailScanner-SpamCheck: not spam, SpamAssassin (not cached,
+	score=-4.321, required 4, autolearn=not spam, ALL_TRUSTED -1.80,
+	AWL 0.08, BAYES_00 -2.60)
+X-Artesis-MailScanner-From: glenn.ergeerts@artesis.be
+X-SA-Exim-Connect-IP: 193.191.129.207
+X-SA-Exim-Mail-From: glenn.ergeerts@artesis.be
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: gettext native failure
+Subject: ccid recipe configure problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,45 +46,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Feb 2010 14:16:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 24 Feb 2010 14:42:35 -0000
+Content-Language: nl-NL
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 23, 2010 at 10:10 PM, Khem Raj <raj.khem@gmail.com> wrote:
->
-> I see. gettext requires libxml2 at buildtime therefore adding
-> libxml2-native to DEPENDS
-> should solve this. libxml2-native should not depend on gettext-native
-> if it does then its a bug.
->
-> Dependency chain which pulls in gettext-native is
->
-> insane.bbclass -> desktop-file-utils-native -> glib-2.0-native -> gettext-native
->
-> so my guess is that it has not yet built libxml2-native when it starts
-> to build gettext-native and defaults to whatever is on the build
-> system due to parallel'ness of bitbake
+Hi,
 
-Thanks.  I had a mental block thinking linxml2-native depended on
-gettext, but it was the parallel build that was getting it build
-first.  The following patch fixes it:
+I'm trying to build the ccid recipe (from here http://cgit.openembedded.org=
+/cgit.cgi/openembedded/tree/recipes/ccid?id=3D709c4d66e0b107ca606941b988bad=
+717c0b45d9b).
+This gives me the following problem during the configure step:
 
-diff --git a/recipes/gettext/gettext_0.17.bb b/recipes/gettext/gettext_0.17.bb
-index 2f7faa7..fbb479a 100644
---- a/recipes/gettext/gettext_0.17.bb
-+++ b/recipes/gettext/gettext_0.17.bb
-@@ -4,7 +4,7 @@ SECTION = "libs"
- LICENSE = "GPLv3"
- PR = "r5"
- DEPENDS = "gettext-native virtual/libiconv ncurses expat"
--DEPENDS_virtclass-native = ""
-+DEPENDS_virtclass-native = "libxml2-native"
- PROVIDES = "virtual/libintl"
- PROVIDES_virtclass-native = ""
- RCONFLICTS_gettext-libintl = "proxy-libintl"
+| NOTE: Running /home/glenn/projects/OpenEmbedded/Branch/v1.0.8.0-1oksoluti=
+ons/build/tmp/work/armv5te-angstrom-linux/ccid-1.3.8-r0/ccid-1.3.8/configur=
+e                     --build=3Di686-linux                 --host=3Darm-ang=
+strom-linux               --target=3Darm-angstrom-linux                    =
+ --prefix=3D/usr                   --exec_prefix=3D/usr              --bind=
+ir=3D/usr/bin                  --sbindir=3D/usr/sbin                     --=
+libexecdir=3D/usr/libexec               --datadir=3D/usr/share             =
+       --sysconfdir=3D/etc         --sharedstatedir=3D/usr/com             =
+   --localstatedir=3D/var                    --libdir=3D/usr/lib           =
+    --includedir=3D/usr/include               --oldincludedir=3D/usr/includ=
+e               --infodir=3D/usr/share/info               --mandir=3D/usr/s=
+hare/man                     --enable-udev               ...
 
-Are there any objections to pushing this change?  Do I need acks for this?
+<snip>
+
+| checking ifdhandler.h usability... no
+| checking ifdhandler.h presence... no
+| checking for ifdhandler.h... no
+| configure: error: ifdhandler.h not found, install pcsc-lite 1.3.3 or late=
+r, or use ./configure PCSC_CFLAGS=3D...
+| FATAL: oe_runconf failed
+
+ifdhandler.h should be provided by pcsc-lite. The bitbake build for pcsc-li=
+te worked and the file exists at the following places:
+
+$ find -name ifdhandler.h
+./build/tmp/work/armv5te-angstrom-linux/ccid-1.3.8-r0/ccid-1.3.8/MacOSX/ifd=
+handler.h
+./build/tmp/work/armv5te-angstrom-linux/pcsc-lite-1.5.2-r0/install/pcsc-lit=
+e-dev/usr/include/PCSC/ifdhandler.h
+./build/tmp/work/armv5te-angstrom-linux/pcsc-lite-1.5.2-r0/pcsc-lite-1.5.2/=
+src/PCSC/ifdhandler.h
+./build/tmp/work/armv5te-angstrom-linux/pcsc-lite-1.5.2-r0/image/usr/includ=
+e/PCSC/ifdhandler.h
+
+The question is: why does the configure of ccid not find this file?
+
+I tried to fix this by adding PCSC_CFLAGS to EXTRA_OECONF, which fixed this=
+ error but this got me to the next error:
+
+| checking for SCardEstablishContext... configure: error:=20
+| SCardEstablishContext() not found, install pcsc-lite 1.2.9-beta9 or=20
+| later,or use PCSC_LIBS=3D...  ./configure
+| FATAL: oe_runconf failed
+
+To fix this I also added PCSC_LIBS to EXTRA_OECONF like this:
+
+EXTRA_OECONF =3D "--enable-udev \
+                --enable-usbdropdir=3D${D}/usr/lib/pcsc/drivers/ \
+                PCSC_CFLAGS=3D-I${S}/../../pcsc-lite-1.5.2-r0/image/usr/inc=
+lude/PCSC/ \
+                PCSC_LIBS=3D\"-L${S}/../../pcsc-lite-1.5.2-r0/image/usr/lib=
+ -lpcsclite\" \
+                "
+(probably this is not the best way but I was trying to be pragmatic..) Runn=
+ing this gives the following error:
+
+| NOTE: Running /home/glenn/projects/OpenEmbedded/Branch/v1.0.8.0-1oksoluti=
+ons/build/tmp/work/armv5te-angstrom-linux/ccid-1.3.8-r0/ccid-1.3.8/configur=
+e                     --build=3Di686-linux                 --host=3Darm-ang=
+strom-linux               --target=3Darm-angstrom-linux                    =
+ --prefix=3D/usr                   --exec_prefix=3D/usr              --bind=
+ir=3D/usr/bin                  --sbindir=3D/usr/sbin                     --=
+libexecdir=3D/usr/libexec               --datadir=3D/usr/share             =
+       --sysconfdir=3D/etc         --sharedstatedir=3D/usr/com             =
+   --localstatedir=3D/var                    --libdir=3D/usr/lib           =
+    --includedir=3D/usr/include               --oldincludedir=3D/usr/includ=
+e               --infodir=3D/usr/share/info               --mandir=3D/usr/s=
+hare/man                     --enable-udev           --enable-usbdropdir=3D=
+/home/glenn/projects/OpenEmbedded/Branch/v1.0.8.0-1oksolutions/build/tmp/wo=
+rk/armv5te-angstrom-linux/ccid-1.3.8-r0/image/usr/lib/pcsc/drivers/        =
+         PCSC_CFLAGS=3D-I/home/glenn/projects/OpenEmbedded/Branch/v1.0.8.0-=
+1oksolutions/build/tmp/work/armv5te-angstrom-linux/ccid-1.3.8-r0/ccid-1.3.8=
+/../../pcsc-lite-1.5.2-r0/image/usr/include/PCSC/               PCSC_LIBS=
+=3D"-L/home/glenn/projects/OpenEmbedded/Branch/v1.0.8.0-1oksolutions/build/=
+tmp/work/armv5te-angstrom-linux/ccid-1.3.8-r0/ccid-1.3.8/../../pcsc-lite-1.=
+5.2-r0/image/usr/lib -lpcsclite"                    ...
+| configure: error: unrecognized option: -lpcsclite"
+| Try `/home/glenn/projects/OpenEmbedded/Branch/v1.0.8.0-1oksolutions/build=
+/tmp/work/armv5te-angstrom-linux/ccid-1.3.8-r0/ccid-1.3.8/configure --help'=
+ for more information.
+| FATAL: oe_runconf failed
+
+For some reason configure is confused with the quotes. I tried different co=
+mbinations (not escaping them, using single quotes,..) but I can't get it w=
+orking.
+So as an openembedded newbie I am stuck now.. Does anyone know how to fix t=
+his issue?
 
 Thanks,
-Cliff
+Glenn
+
 
 
