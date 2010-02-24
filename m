@@ -1,36 +1,31 @@
-Received: from vms173019pub.verizon.net ([206.46.173.19])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1NkOML-0006Om-2R
+	(envelope-from <philb@gnu.org>) id 1NkOOB-0006VB-Ce
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Feb 2010 22:01:33 +0100
-Received: from gandalf.denix.org ([unknown] [71.251.51.225])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0KYD00A7I69UVEEA@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	24 Feb 2010 14:58:43 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 73FE414AF60; Wed,
-	24 Feb 2010 15:58:42 -0500 (EST)
-Date: Wed, 24 Feb 2010 15:58:42 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <6ec4247d0911181455g6399eeeci38db4e9b727886d@mail.gmail.com>
+	Wed, 24 Feb 2010 22:03:24 +0100
+Received: from 88-110-39-162.dynamic.dsl.as9105.com ([88.110.39.162]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NkOLS-0006a6-PY
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Feb 2010 21:00:37 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100224205842.GC9601@denix.org>
-MIME-version: 1.0
-References: <4B03CBF0.5010000@SSpaeth.de> <4B03CDD9.1010202@SSpaeth.de>
-	<6ec4247d0911181320o1aae5e21o2f6a8038daff6173@mail.gmail.com>
-	<1258582348.25369.689.camel@lenovo.internal.reciva.com>
-	<6ec4247d0911181455g6399eeeci38db4e9b727886d@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.19
-X-SA-Exim-Mail-From: denis@denix.org
+In-Reply-To: <1267044772-10182-1-git-send-email-denis@denix.org>
+References: <1267044772-10182-1-git-send-email-denis@denix.org>
+Date: Wed, 24 Feb 2010 21:00:17 +0000
+Message-ID: <1267045217.5437.326.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
+X-Spam-Status: No, score=0.7 required=5.0 tests=SPF_SOFTFAIL autolearn=no
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: BAD_RECOMMENDATIONS is broken (opkg issue)
+Subject: Re: [PATCH] rootfs_ipk.bbclass: fix BAD_RECOMMENDATIONS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,31 +39,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Feb 2010 21:01:33 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-transfer-encoding: QUOTED-PRINTABLE
-Content-disposition: inline
+X-List-Received-Date: Wed, 24 Feb 2010 21:03:24 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Thu, Nov 19, 2009 at 09:25:06AM +1030, Graham Gower wrote:
-> 2009/11/19 Phil Blundell <philb@gnu.org>:
-> >
-> > It's meant to be handled by this chunk of code, and I'm fairly su=
-re that
-> > this used to work reliably. =A0Has that part of opkg changed rece=
-ntly?
->=20
-> Nope, no changes there. And no particularly invasive changes up to =
-r240.
->=20
-> I have some minor worries that
-> http://code.google.com/p/opkg/source/detail?r=3D328 will have some =
-non
-> obvious fallout. (Obviously not the issue here though)
+On Wed, 2010-02-24 at 15:52 -0500, Denys Dmytriyenko wrote:
+> New opkg requires full and correct package name, version, revision and
+> architecture to be specified when requiring de-installation of a package.
+> Collect that info from opkg-info.
 
-FYI, http://thread.gmane.org/gmane.comp.handhelds.openembedded/30417
+This seems like a bug in opkg.  Would it not be better to fix it there?
 
---=20
-Denys
+p.
+
 
 
 
