@@ -1,25 +1,23 @@
-Received: from vms173019pub.verizon.net ([206.46.173.19])
+Received: from vms173003pub.verizon.net ([206.46.173.3])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1NkO9x-0006rz-QI
+	(envelope-from <denis@denix.org>) id 1NkOHE-0001Ma-Gn
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Feb 2010 21:48:42 +0100
+	Wed, 24 Feb 2010 21:56:13 +0100
 Received: from gandalf.denix.org ([unknown] [71.251.51.225])
-	by vms173019.mailsrvcs.net
+	by vms173003.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0KYD007AR5O320B6@vms173019.mailsrvcs.net> for
+	2009)) with ESMTPA id <0KYD0055O60AGFL4@vms173003.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Wed,
-	24 Feb 2010 14:45:45 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id A8A9014AF60; Wed,
-	24 Feb 2010 15:45:38 -0500 (EST)
-Date: Wed, 24 Feb 2010 15:45:38 -0500
+	24 Feb 2010 14:53:01 -0600 (CST)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id 279ED14AF55; Wed,
+	24 Feb 2010 15:52:58 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100224204538.GB9601@denix.org>
-References: <201002242139.55093.ml@vdm-design.de>
-MIME-version: 1.0
-In-reply-to: <201002242139.55093.ml@vdm-design.de>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.19
+Date: Wed, 24 Feb 2010 15:52:52 -0500
+Message-id: <1267044772-10182-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 206.46.173.3
 X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -27,7 +25,7 @@ X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Commit access
+Subject: [PATCH] rootfs_ipk.bbclass: fix BAD_RECOMMENDATIONS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,23 +39,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Feb 2010 20:48:42 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 24 Feb 2010 20:56:13 -0000
 
-On Wed, Feb 24, 2010 at 09:39:55PM +0100, Thomas Zimmermann wrote:
-> Hi all OE developers,
-> I am politely asking if it would be possible to allow me OE commit access.
-> 
-> Till now already 50 patches from me went into oe.dev. They were mostly 
-> commited by Martin Jansa and Klaus Kurzmann. But now i think it would less 
-> annoying for them if i could commit them directly.
+New opkg requires full and correct package name, version, revision and
+architecture to be specified when requiring de-installation of a package.
+Collect that info from opkg-info.
 
-Your previous patches looked sane to me.
+Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+---
+ classes/rootfs_ipk.bbclass |   15 +++++++++------
+ 1 files changed, 9 insertions(+), 6 deletions(-)
 
-+1
-
+diff --git a/classes/rootfs_ipk.bbclass b/classes/rootfs_ipk.bbclass
+index 38d6121..c32e4e3 100644
+--- a/classes/rootfs_ipk.bbclass
++++ b/classes/rootfs_ipk.bbclass
+@@ -36,16 +36,19 @@ fakeroot rootfs_ipk_do_rootfs () {
+ 	mkdir -p ${IMAGE_ROOTFS}${libdir}/opkg/
+ 
+ 	STATUS=${IMAGE_ROOTFS}${libdir}/opkg/status
++
++	opkg-cl ${IPKG_ARGS} update
++
+ 	# prime the status file with bits that we don't want
+ 	for i in ${BAD_RECOMMENDATIONS}; do
+-		echo "Package: $i" >> $STATUS
+-		echo "Architecture: ${TARGET_ARCH}" >> $STATUS
+-		echo "Status: deinstall ok not-installed" >> $STATUS
+-		echo >> $STATUS
++		infln="`opkg-cl ${IPKG_ARGS} info $i | grep -e '^Package:' -e '^Architecture:' -e '^Version:'`"
++		if [ ! -z "$infln" ]; then
++			echo "$infln" >> $STATUS
++			echo "Status: deinstall ok not-installed" >> $STATUS
++			echo >> $STATUS
++		fi
+ 	done
+ 
+-	opkg-cl ${IPKG_ARGS} update
+-
+ 	# Uclibc builds don't provide this stuff...
+ 	if [ x${TARGET_OS} = "xlinux" ] || [ x${TARGET_OS} = "xlinux-gnueabi" ] ; then 
+ 		if [ ! -z "${LINGUAS_INSTALL}" ]; then
 -- 
-Denys
+1.6.3.3
+
 
 
