@@ -1,41 +1,45 @@
 Received: from mail-iw0-f179.google.com ([209.85.223.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Nk7gs-0008A2-Gq
+	(envelope-from <raj.khem@gmail.com>) id 1Nk8UL-0004rc-A0
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Feb 2010 04:13:37 +0100
-Received: by iwn9 with SMTP id 9so3991859iwn.3
+	Wed, 24 Feb 2010 05:04:44 +0100
+Received: by iwn9 with SMTP id 9so4024442iwn.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Feb 2010 19:10:49 -0800 (PST)
+	Tue, 23 Feb 2010 20:01:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=0vr1mVSoWPvMVSYDr0jelW3Lf9kNY/IX4NIZouK6cX8=;
-	b=RSp8MhFB3HdgPSWbUTW7XlDIppqqgnIbDrEHv1IacAiR/whe0tkvKV3DkzjC2sUKtE
-	z5jPT0BMHTLs0LOvK057VvmEMTA3pftO3ooE4Qwr/0OFOZBl1qgNLE+t5U/HUzSVHPJn
-	MXhj20ve/u2TZveY9y94+W/vMQVBqJKWspK/8=
+	bh=5Z5M9HBMRwiEPe+nhVp2piheWgQQ2kCgtdlS0PpPR1U=;
+	b=rlyJFsGKNAWtoPix0tgTB1YWA8lyntyWyppXnN+roAhDdDIMT8fqgwOu3X2uLhRb0w
+	LJYPi4AIBSbWo9WH5u8iHmr8BZDxYep0uBE9GnbNZKVsZxrLfqhJbPk1ovkoZImr/8wQ
+	XdujVyeYlZTCGJszwk6/gcVFa8qQTadXf4lsM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=DRQjsSI7JEyHVsH9gp6qfTvK/WXCiphqX1js7oiT1l71bGYIL39HYxwiFTTWN+6Dkr
-	6FKwVx0QjFteAWsxH5F8qbkm6WvUsWo+yG6FMXnAr55Bu5otrTlSlE3nWlBsWasE16x8
-	Y3u6ji5+ttZL9U8WbxYLNA6F3Ajus4zfe0J2Y=
+	b=p+ECvJUVIojh229qwYtgVDIuuGk0ydKuc6IlJfGdb9OFRlSp4Co9htXLJ+QnF8CSbp
+	XC+LEYls0kmc0BsuoY3MfNHDlMfsjwDt10C+Uak5xx0HTGLaQo5IiaaHXJiYb7XiDdcL
+	9Yk76QkCxm0ya269E3nS3SOLL4uENyqCvwvIk=
 MIME-Version: 1.0
-Received: by 10.231.152.75 with SMTP id f11mr1062861ibw.50.1266981048647; Tue, 
-	23 Feb 2010 19:10:48 -0800 (PST)
-In-Reply-To: <f96d234e1002231243h1e75af62g90d490aa792fbe96@mail.gmail.com>
-References: <f96d234e1002230827y25028493l7f25ab05b6fbac76@mail.gmail.com>
-	<19c1b8a91002231036u46b1b35andf9fb71345805669@mail.gmail.com>
-	<f96d234e1002231243h1e75af62g90d490aa792fbe96@mail.gmail.com>
-Date: Tue, 23 Feb 2010 19:10:48 -0800
-Message-ID: <19c1b8a91002231910y3b44f0ecuc8992499c1a4086@mail.gmail.com>
+Received: by 10.231.145.206 with SMTP id e14mr1660475ibv.10.1266984114953; 
+	Tue, 23 Feb 2010 20:01:54 -0800 (PST)
+In-Reply-To: <20100224030833.GD27420@denix.org>
+References: <mailman.5.1266922802.8892.openembedded-devel@lists.openembedded.org>
+	<4B83DD5C.8050408@tycoelectronics.com> <4B8458A7.40807@balister.org>
+	<19c1b8a91002231509v4a7d870dia190e9aa2c0f6739@mail.gmail.com>
+	<4B847891.7030706@balister.org>
+	<1266973598.18176.366.camel@trini-m4400>
+	<19c1b8a91002231833v44b6ce07r22f9ea33c073f8dd@mail.gmail.com>
+	<20100224030833.GD27420@denix.org>
+Date: Tue, 23 Feb 2010 20:01:54 -0800
+Message-ID: <19c1b8a91002232001r17a422aeg9f8d0ffbc2246f9c@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.223.179
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: gettext native failure
+Subject: Re: How to build g++ to run on target?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,92 +53,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Feb 2010 03:13:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 24 Feb 2010 04:04:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 23, 2010 at 12:43 PM, Cliff Brake <cliff.brake@gmail.com> wrote=
-:
-> On Tue, Feb 23, 2010 at 1:36 PM, Khem Raj <raj.khem@gmail.com> wrote:
->> On Tue, Feb 23, 2010 at 8:27 AM, Cliff Brake <cliff.brake@gmail.com> wro=
-te:
->>> make[4]: Entering directory
->>> `/scratch/oe/oe-from-scratch/tmp/work/x86_64-linux/gettext-native-0.17-=
-r5/gettext-0.17/gettext-tools/src'
->>> =E2=88=98 /bin/sh ../x86_64-linux-libtool --tag=3DCC =C2=A0 --mode=3Dli=
-nk gcc
->>> -std=3Dgnu99 =C2=A0-isystem/scratch/oe/oe-from-scratch/tmp/staging/x86_=
-64-linux/usr/include
->>> -O2 -g =C2=A0-L/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr=
-/lib
->>> -Wl,-rpath-link,/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/us=
-r/lib
->>> -Wl,-rpath,/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/lib
->>> -Wl,-O1 -o msgcmp msgcmp-msgcmp.o libgettextsrc.la
->>> =E2=88=98 x86_64-linux-libtool: link: gcc -std=3Dgnu99
->>> -isystem/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/includ=
-e
->>> -O2 -g -Wl,-rpath-link
->>> -Wl,/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/lib
->>> -Wl,-rpath -Wl,/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr=
-/lib
->>> -Wl,-O1 -o .libs/msgcmp msgcmp-msgcmp.o
->>> -L/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr/lib
->>> ./.libs/libgettextsrc.so
->>> /scratch/oe/oe-from-scratch/tmp/work/x86_64-linux/gettext-native-0.17-r=
-5/gettext-0.17/gettext-tools/gnulib-lib/.libs/libgettextlib.so
->>> /usr/lib/libcroco-0.6.so /usr/lib/libglib-2.0.so -lncurses -lc
->>> -Wl,-rpath -Wl,/scratch/oe/oe-from-scratch/tmp/staging/x86_64-linux/usr=
-/lib
->>> =E2=88=98 /usr/lib64/libxml2.so.2: undefined reference to `gzopen64'
->>> =E2=88=98 collect2: ld returned 1 exit status
->>>
->>> http://bugs.openembedded.org/show_bug.cgi?id=3D2679
->>>
->>> http://bugs.openembedded.org/show_bug.cgi?id=3D5139
->>>
->>> Looks like a classic case of using the staging libz, but libxml2 from
->>> the host. =C2=A0It appears that libxml2 cannot be built in OE until get=
-text
->>> is built. =C2=A0Any thoughts on this one?
+On Tue, Feb 23, 2010 at 7:08 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> On Tue, Feb 23, 2010 at 06:33:43PM -0800, Khem Raj wrote:
+>> On Tue, Feb 23, 2010 at 5:06 PM, Tom Rini <tom_rini@mentor.com> wrote:
+>> > On Tue, 2010-02-23 at 16:53 -0800, Philip Balister wrote:
+>> >>
+>> >> On 02/23/2010 03:09 PM, Khem Raj wrote:
+>> >> > On Tue, Feb 23, 2010 at 2:37 PM, Philip Balister<philip@balister.or=
+g> =A0wrote:
+>> >> >> On 02/23/2010 05:51 AM, Jay Snyder wrote:
+>> >> >>>
+>> >> >>> I was able to build gcc for installation directly onto the OE tar=
+get
+>> >> >>> with "bitbake gcc". "bitbake g++" gives me "nothing provides g++"=
+.
+>> >> >>>
+>> >> >>> What is the magic bitbake command to provide this?
+>> >> >>
+>> >> >> bitbake task-sdk-native, and install task-native-sdk. Anyone know =
+why the
+>> >> >> task creates a package with different name?
+>> >> >
+>> >> > may be because
+>> >> >
+>> >> > task-sdk-native.bb:RPROVIDES_${PN} =3D "task-native-sdk"
+>> >>
+>> >> I know that :) I am curious why the renaming.
+>> >
+>> > And if perhaps we couldn't get a different name altogether? =A0'native=
+'
+>> > has a meaning normally that's not what it means here.
+>> > task-on-device-sdk is a bit wordy, but avoids 'native'. =A0Of course,
+>> > 'native development' also has a meaning too.. RPROVIDES perhaps? =A0Or=
+ is
+>> > that just the worst of both worlds..
 >>
->>
->> http://patchwork.openembedded.org/patch/185/
->>
->> and then more detailed explanation is here
->> http://article.gmane.org/gmane.comp.handhelds.openembedded/22700/match=
-=3Dlibxml2
->>
->> IIRC when I tested it. It was not happening with gcc 4.4.x
->> Which version of gcc do you have on your build box.
+>> yeah thats a good point. although native is not as bad but in context
+>> of OE we already
+>> assigned native to something that this task does not do. So using someth=
+ing like
+>> what you suggest or task-target-sdk would be nice.
 >
-> cbrake@happy:/scratch/oe/oe-testing$ gcc --version
-> gcc (Ubuntu 4.4.1-4ubuntu9) 4.4.1
-> Copyright (C) 2009 Free Software Foundation, Inc.
-> This is free software; see the source for copying conditions. =C2=A0There=
- is NO
-> warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOS=
-E.
->
-> I read through your links, but those are for building libxml2. =C2=A0I'm
-> still trying to build gettext.
+> Speaking of which, a collegue of mine was suggesting exactly the opposite=
+ -
+> "native" should be used exactly for this type of naming, when it's native
+> development (regardless of whether it's on a target or on a host), and OE=
+'s
+> use of "native" is wrong and should be "host" instead, i.e. "pkgname-host=
+" :)
+> I know it's a historical naming and cannot be changed easily...
 
-I see. gettext requires libxml2 at buildtime therefore adding
-libxml2-native to DEPENDS
-should solve this. libxml2-native should not depend on gettext-native
-if it does then its a bug.
-
-Dependency chain which pulls in gettext-native is
-
-insane.bbclass -> desktop-file-utils-native -> glib-2.0-native -> gettext-n=
-ative
-
-so my guess is that it has not yet built libxml2-native when it starts
-to build gettext-native and defaults to whatever is on the build
-system due to parallel'ness of bitbake
+yes if I was to start fresh I would do it this way but as I said before OE =
+uses
+native to denote something else as of now. If we were to change conventions=
+ then
+I would certainly use the more common naming as you mentioned.
 
 >
-> Cliff
+>
+>> to answer the original question I think RDEPEND was added for fixing
+>> upgrade channels on existing systems.
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
