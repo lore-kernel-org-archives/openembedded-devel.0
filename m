@@ -1,43 +1,40 @@
-Received: from mail-iw0-f179.google.com ([209.85.223.179])
+Received: from mail-fx0-f220.google.com ([209.85.220.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NkMY7-0003B7-KE
+	(envelope-from <martin.jansa@gmail.com>) id 1NkMrH-0005Op-SQ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Feb 2010 20:05:36 +0100
-Received: by iwn9 with SMTP id 9so4646962iwn.3
+	Wed, 24 Feb 2010 20:25:22 +0100
+Received: by fxm20 with SMTP id 20so5047100fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Feb 2010 11:02:45 -0800 (PST)
+	Wed, 24 Feb 2010 11:22:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=YoK1ueEIL8PuhNqu0ScnHQWeXIModocQaTQuwbhFeE0=;
-	b=LXbOcBCiijfe36vvhkEYoOm06rqTN42TxSL+WCImHHm/uVZ2L8i6hqhY8pT7SWHVM8
-	Cf5OlIumuHejHNh381B14Nd8GjeecI5Qw7gweyu+NkdgpBZ60gA9JBFg+2uCu3CM7Hzl
-	JTjQb/RxFzwJsqawV1rV+324yyBdyOH8XnqUw=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=taiE5W+qUQVePmzcXnEyQci1HgOyTDmxI+lxSNDxUqs=;
+	b=JpGSsz1wDgQl01aBVsUma6fTP6meFlGH+A2G2BMuiMPeiL9UaCCSRugf35DUmgEpjT
+	xjdH4ckn8wLTPJyua30uwaxoZnfAQPMZRttLw92g9N6xb0FcsoNjiouXvSgNazMZKDrq
+	rfPYPgYrh1pSvlHnUkpNyxqE4pkYBrjfacffo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=NKRqPDTBJ42YsMAs5NgDOI7UPnB0SpAe7P0PyldBTgLUVLBH61tK3HJ0JrnWclKUSL
-	kXsJZ9CNWb6O1+rJ+ncP2C+euSBDuCS0R1lDXolBVa3uetkaHe0VwhGCAAYkKSpNWisC
-	XiBK0UVayNKJH2UUP9C2YSEy6wnky6fKn1sVE=
-MIME-Version: 1.0
-Received: by 10.231.150.2 with SMTP id w2mr352977ibv.90.1267038165287; Wed, 24 
-	Feb 2010 11:02:45 -0800 (PST)
-In-Reply-To: <f96d234e1002240613i75bfab0byfcabe9aa6737dc6a@mail.gmail.com>
-References: <f96d234e1002230827y25028493l7f25ab05b6fbac76@mail.gmail.com>
-	<19c1b8a91002231036u46b1b35andf9fb71345805669@mail.gmail.com>
-	<f96d234e1002231243h1e75af62g90d490aa792fbe96@mail.gmail.com>
-	<19c1b8a91002231910y3b44f0ecuc8992499c1a4086@mail.gmail.com>
-	<f96d234e1002240613i75bfab0byfcabe9aa6737dc6a@mail.gmail.com>
-Date: Wed, 24 Feb 2010 11:02:45 -0800
-Message-ID: <19c1b8a91002241102s2e8c9e9bm27efd0f4846f2a0a@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=Gtkosus2zlwgqjsvVZSDQ1/VjuHozUMymvJ8+av7DiFMtAkLOw8HsqXjbHz/SShcWj
+	ihMJ3IIQ/zgf26BKCwIbqB4aQEv/XWXmYbpZ9/CjBSHY2dC1lNtOxCdywPtYUOJARwW0
+	S4sEm3SsHwMMTRqRvqM6wKtRceN8AtDbN9UvY=
+Received: by 10.223.92.142 with SMTP id r14mr178100fam.93.1267039351311;
+	Wed, 24 Feb 2010 11:22:31 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 14sm3662306fxm.1.2010.02.24.11.22.30
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 24 Feb 2010 11:22:30 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.179
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Wed, 24 Feb 2010 20:22:47 +0100
+Message-Id: <1267039367-8677-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.0
+X-SA-Exim-Connect-IP: 209.85.220.220
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: gettext native failure
+Cc: Koen Kooi <k.kooi@student.utwente.nl>
+Subject: [PATCH] testlab.bbclass: use opkg.conf from staging, always specify tmp_dir in opkg-cl call with -t parameter
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,61 +48,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Feb 2010 19:05:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 24 Feb 2010 19:25:23 -0000
 
-On Wed, Feb 24, 2010 at 6:13 AM, Cliff Brake <cliff.brake@gmail.com> wrote:
-> On Tue, Feb 23, 2010 at 10:10 PM, Khem Raj <raj.khem@gmail.com> wrote:
->>
->> I see. gettext requires libxml2 at buildtime therefore adding
->> libxml2-native to DEPENDS
->> should solve this. libxml2-native should not depend on gettext-native
->> if it does then its a bug.
->>
->> Dependency chain which pulls in gettext-native is
->>
->> insane.bbclass -> desktop-file-utils-native -> glib-2.0-native -> gettex=
-t-native
->>
->> so my guess is that it has not yet built libxml2-native when it starts
->> to build gettext-native and defaults to whatever is on the build
->> system due to parallel'ness of bitbake
->
-> Thanks. =A0I had a mental block thinking linxml2-native depended on
-> gettext, but it was the parallel build that was getting it build
-> first. =A0The following patch fixes it:
->
-> diff --git a/recipes/gettext/gettext_0.17.bb b/recipes/gettext/gettext_0.=
-17.bb
-> index 2f7faa7..fbb479a 100644
-> --- a/recipes/gettext/gettext_0.17.bb
-> +++ b/recipes/gettext/gettext_0.17.bb
-> @@ -4,7 +4,7 @@ SECTION =3D "libs"
-> =A0LICENSE =3D "GPLv3"
-> =A0PR =3D "r5"
-> =A0DEPENDS =3D "gettext-native virtual/libiconv ncurses expat"
-> -DEPENDS_virtclass-native =3D ""
-> +DEPENDS_virtclass-native =3D "libxml2-native"
-> =A0PROVIDES =3D "virtual/libintl"
-> =A0PROVIDES_virtclass-native =3D ""
-> =A0RCONFLICTS_gettext-libintl =3D "proxy-libintl"
->
-> Are there any objections to pushing this change? =A0Do I need acks for th=
-is?
+* Use opkg.conf from staging in the same way as do_rootfs does
+* When option tmp_dir is used in opkg.conf installed on rootfs then it's
+  used also in do_rootfs call and points to probably non-existent directory
+  on buildhost like /var/lib/opkg/tmp.
+* The value of tmp_dir from rootfs is used even with another config file
+  specified with -c parameter
+* Before this, it was using default value (/tmp) on buildhost, now it will use
+  own "${IMAGE_ROOTFS}-tmp" and remove it after do_rootfs finish
+  (usually already empty inside, cleaned by opkg itself)
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ classes/testlab.bbclass |   13 +++++++++----
+ 1 files changed, 9 insertions(+), 4 deletions(-)
 
-just in case
+diff --git a/classes/testlab.bbclass b/classes/testlab.bbclass
+index fc923c5..e6c9c8e 100644
+--- a/classes/testlab.bbclass
++++ b/classes/testlab.bbclass
+@@ -24,26 +24,31 @@
+ do_testlab() {
+ if [ -e  ${IMAGE_ROOTFS}/etc/opkg ] && [ "${ONLINE_PACKAGE_MANAGEMENT}" = "full" ] ; then
+ 
++	IPKG_TMP_DIR="${IMAGE_ROOTFS}-tmp"
++	IPKG_ARGS="-f ${STAGING_ETCDIR_NATIVE}/opkg.conf -o ${IMAGE_ROOTFS} -t ${IPKG_TMP_DIR}"
++
+ 	TESTLAB_DIR="${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-testlab"
+         mkdir -p ${TESTLAB_DIR}/
++        mkdir -p ${IPKG_TMP_DIR}/
+ 	ls -laR ${IMAGE_ROOTFS} > ${TESTLAB_DIR}/files-in-image.txt 	
+      
+ 	echo > ${TESTLAB_DIR}/installed-packages.txt
+ 	echo -e "digraph depends {\n    node [shape=plaintext]" > ${TESTLAB_DIR}/depends.dot
+ 
+-	for pkg in $(opkg-cl -f ${IMAGE_ROOTFS}/etc/opkg -o ${IMAGE_ROOTFS} list_installed | awk '{print $1}') ; do 
+-		opkg-cl -f ${IMAGE_ROOTFS}/etc/opkg -o ${IMAGE_ROOTFS} info $pkg | awk '/Package/ {printf $2"_"} /Version/ {printf $2"_"} /Archi/ {print $2".ipk"}'  >> ${TESTLAB_DIR}/installed-packages.txt
++	for pkg in $(opkg-cl ${IPKG_ARGS} list_installed | awk '{print $1}') ; do 
++		opkg-cl ${IPKG_ARGS} info $pkg | awk '/Package/ {printf $2"_"} /Version/ {printf $2"_"} /Archi/ {print $2".ipk"}'  >> ${TESTLAB_DIR}/installed-packages.txt
+ 
+-    		for depends in $(opkg-cl -f ${IMAGE_ROOTFS}/etc/opkg -o  ${IMAGE_ROOTFS} info $pkg | grep Depends) ; do 
++    		for depends in $(opkg-cl ${IPKG_ARGS} info $pkg | grep Depends) ; do 
+         		echo "$pkg OPP $depends;" | grep -v "(" | grep -v ")" | grep -v Depends | sed -e 's:,::g' -e 's:-:_:g' -e 's:\.:_:g' -e 's:+::g' |sed 's:OPP:->:g' >> ${TESTLAB_DIR}/depends.dot
+     		done
+     		
+-		for recommends in $(opkg-cl -f ${IMAGE_ROOTFS}/etc/opkg -o ${IMAGE_ROOTFS} info $pkg | grep Recom) ; do
++		for recommends in $(opkg-cl ${IPKG_ARGS} info $pkg | grep Recom) ; do
+         		echo "$pkg OPP $recommends [style=dotted];" | grep -v "(" | grep -v ")" | grep -v Recom | sed -e 's:,::g' -e 's:-:_:g' -e 's:\.:_:g' -e 's:+::g' |sed 's:OPP:->:g' >> ${TESTLAB_DIR}/depends.dot
+     		done
+ 	done
+ 
+ 	echo "}" >>  ${TESTLAB_DIR}/depends.dot
++	rm -rf ${IPKG_TMP_DIR}
+ 	
+ 	grep -v kernel_2 ${TESTLAB_DIR}/depends.dot | grep -v kernel_image > ${TESTLAB_DIR}/depends-nokernel.dot
+ 	grep -v libc6 ${TESTLAB_DIR}/depends-nokernel.dot | grep -v libgcc > ${TESTLAB_DIR}/depends-nokernel-nolibc.dot
+-- 
+1.7.0
 
->
-> Thanks,
-> Cliff
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
