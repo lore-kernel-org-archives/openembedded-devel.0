@@ -1,27 +1,38 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NkEOS-0002i8-Sc
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Feb 2010 11:23:04 +0100
-Received: (qmail 27797 invoked by uid 813007); 24 Feb 2010 10:20:17 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 24 Feb 2010 10:20:17 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NkFQa-0006Rs-QP for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Feb 2010 12:29:19 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NkFNx-00077i-0n for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Feb 2010 12:26:33 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Feb 2010 12:26:33 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Feb 2010 12:26:33 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Feb 2010 11:19:16 +0100
-User-Agent: KMail/1.12.4 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.3.4; x86_64; ;
-	)
-References: <1266951776.18176.47.camel@trini-m4400>
-In-Reply-To: <1266951776.18176.47.camel@trini-m4400>
-MIME-Version: 1.0
-Message-Id: <201002241119.20053.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 24 Feb 2010 12:26:17 +0100
+Message-ID: <hm32cp$h8m$1@dough.gmane.org>
+References: <4B84DE66.4080602@dresearch.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100219 Shredder/3.0.3pre
+In-Reply-To: <4B84DE66.4080602@dresearch.de>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: No (on linuxtogo.org); Unknown failure
-Subject: Re: [PATCH] Fix busybox SUID support
+Subject: Re: Angstrom, udev, and kernel version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,52 +46,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Feb 2010 10:23:04 -0000
-X-Groupsio-MsgNum: 17030
-Content-Type: multipart/signed; boundary="nextPart3278864.PpuGi2WGuW";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Wed, 24 Feb 2010 11:29:20 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
---nextPart3278864.PpuGi2WGuW
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Dnia wtorek, 23 lutego 2010 o 20:02:56 Tom Rini napisa=C5=82(a):
-> I was about to just push this and I noticed that a number of
-> distributions (SlugOS, Angstrom, Kaelios, micro) currently set
-> FEATURE_SUID=3Dy, but it's not actually install SUID.  And since I recall
-> some way-back-when's of "busybox SUID is dangerous / crap!", I thought
-> it best to post the patch first and let folks speak up / ask me to drop
-> FEATURE_SUID=3Dy when I do this.  So, here's the patch:
+On 24-02-10 09:08, Steffen Sledz wrote:
+> Since Angstrom updated to udev_151 we've a big problem.
+> 
+> udevd started from within /etc/init.d/udev crashes with
+> 
+> /sbin/udevd -d --debug
+> 1266997931.250494 [297] udev_monitor_new_from_netlink: error getting socket: Invalid argument error initializing netlink socket
+> 1266997931.250718 [297] main: error initializing netlink socket
+> 
+> Searching the internet for this error i found some hints that this udev version requires at least linux 2.6.27.
 
-Ok, but does not it require /etc/something to list which applets are allowe=
-d=20
-to be suid and which are not?=20
+2.6.27 is only required for signalfd, your error seems to be about a
+missing networking option in defconfig.
 
-Hm. checked sources. with FEATURE_SUID suid will be active only for "cronta=
-b,=20
-dnsd, findfs, ipcrm, ipcs, login, passwd, ping, su, traceroute, vlock"=20
-commands. /etc/busybox.conf is CONFIG_FEATURE_SUID_CONFIG option.
+regards,
 
-Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
---nextPart3278864.PpuGi2WGuW
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAkuE/SQACgkQeQ6MlGH/2qt3jACfaJFyLhsC4rVmbeaKawot885H
-ZFUAnRQ9AsgfUfT1/r7W6wH7MAeamhIx
-=2HI7
+iD8DBQFLhQzZMkyGM64RGpERAm8mAJ9Pvr7u2nSlcYkVHHAdWip/9nDMlACguCY0
+kLlW+yEjNxs8bNL1UcetVzY=
+=4/IV
 -----END PGP SIGNATURE-----
 
---nextPart3278864.PpuGi2WGuW--
+
+
