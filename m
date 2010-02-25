@@ -1,40 +1,39 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-iw0-f179.google.com ([209.85.223.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vivektambakad@gmail.com>) id 1Nkf9m-00007G-Dc
+	(envelope-from <cliff.brake@gmail.com>) id 1NkfXn-0004HY-VC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Feb 2010 15:57:43 +0100
-Received: by gwaa20 with SMTP id a20so2105876gwa.6
+	Thu, 25 Feb 2010 16:22:32 +0100
+Received: by iwn9 with SMTP id 9so5439295iwn.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Feb 2010 06:54:51 -0800 (PST)
+	Thu, 25 Feb 2010 07:19:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:date:message-id:subject
 	:from:to:content-type;
-	bh=AQ5pMR6afpiJoqLD6Z02xc5ybiljpXmUTQo3Rkp8Tx0=;
-	b=lih8YD3+owuHLgUB89LEk5Pw9JO7v867emjMu9WMvHMpJHyaDgpSMPczgCL+GJn1LV
-	ZqfuAwjNUshSSZoxWIslGk8qBf/NyZZ07uQEghKFA/MdlSE35QpQOVL/G1MpC0CnAVOF
-	Z/hnndXC5Xqt3TzLkvOyFeass8DPNQfgSHcj0=
+	bh=3XlQWIOvwtlCfWsHFR6RhtB8WV2ClnuNyaQwO1Wm4Xk=;
+	b=wcQo8euyTSTYbh3fqHXw93VvUk8CRusQOWDWN7yrwiVEoVSisFT9xtdHh8h5fOcE55
+	I55/dZgU9AJ4Y/xzrTPeCVC5Rv4BxF8lK1AzlSPjVMM1kDj3C6ZPrtOjIeUMQ7tqftsb
+	rAmuvdA8g1XE7u2sNAAusP9/YZ54SOLacqGn0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=qHQ3LqEh4hv9xwHfxN9Kjnbazp9l3f6MVn/K6t8hZuCZy/Q+rK0WhF2ydhulgaVZ34
-	UJGXQI/Kl/7AGldpGFYDag2/2hwLPx4KF/pbjolfp71LbBXRVojvc9Lord/KBvnhWz8E
-	VeIOFFioHWEVe0kXtlAEsIaX6oWm52q6Fy+YE=
+	b=njUVuYycz4eQ85W/ImwVAo23hM08uT6LwPP/rMCO5knvUgt/+Rd2K/sALwpmlQsTfZ
+	Yh6C6a6v61LVauGgIARvuC4vPxI+lZzwawbhaF2Te7erFn32ywa+krh+aEbYx4wTDJ/U
+	zE8S37tGJamBifeWwwc7qSJe+cPPu8AfD3Hz8=
 MIME-Version: 1.0
-Received: by 10.90.40.17 with SMTP id n17mr88384agn.3.1267109679137; Thu, 25 
-	Feb 2010 06:54:39 -0800 (PST)
-Date: Thu, 25 Feb 2010 20:24:38 +0530
-Message-ID: <ad82c8891002250654r42248855x6b0a871b6b9acee1@mail.gmail.com>
-From: vivek tambakad <vivektambakad@gmail.com>
+Received: by 10.231.191.147 with SMTP id dm19mr143969ibb.86.1267111179805; 
+	Thu, 25 Feb 2010 07:19:39 -0800 (PST)
+Date: Thu, 25 Feb 2010 10:19:39 -0500
+Message-ID: <f96d234e1002250719v2c996ba4kd631051f29cba633@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: vivektambakad@gmail.com
+X-SA-Exim-Connect-IP: 209.85.223.179
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=HTML_MESSAGE,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Error while building minimo web browser
+Subject: make explosion while building attr
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,41 +47,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Feb 2010 14:57:43 -0000
+X-List-Received-Date: Thu, 25 Feb 2010 15:22:32 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hi.
-      I am building minimo web browser for compulab Em-x270 board.
-It is giving  following error while building "bitbake minimo"
+Has anyone seen anything like this:
 
-me/vivek/development/em-x270/stuff/build/oetmp/staging/armv5te-angstrom-linux-gnueabi/usr/include/orbit-2.0
--I/home/vivek/development/em-x270/stuff/build/oetmp/staging/armv5te-angstrom-linux-gnueabi/usr/include/dbus-1.0
--I/home/vivek/development/em-x270/stuff/build/oetmp/staging/armv5te-angstrom-linux-gnueabi/usr/lib/dbus-1.0/include
--I/home/vivek/development/em-x270/stuff/build/oetmp/staging/armv5te-angstrom-linux-gnueabi/usr/include/glib-2.0
--I/home/vivek/development/em-x270/stuff/build/oetmp/staging/armv5te-angstrom-linux-gnueabi/usr/lib/glib-2.0/include
-*| checking MOZ_GCONF_LIBS...   -lgconf-2 -lglib-2.0
-| checking for libgnome-2.0 >= 2.0... configure: error: iconv() not found.
-Cannot enable native uconv support.
-| *** Fix above errors and then restart with               "make -f
-client.mk build"
-| make: *** [configure] Error 1
-| FATAL: oe_runmake failed*
-NOTE: Task failed:
-/home/vivek/development/em-x270/stuff/build/oetmp/work/armv5te-angstrom-linux-gnueabi/minimo-1_0.02+cvs20070626-r1/temp/log.do_configure.9520
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/home/vivek/development/em-x270/stuff//openembedded/recipes/mozilla/
-minimo_cvs.bb do_configure failed
-ERROR: Task 5
-(/home/vivek/development/em-x270/stuff//openembedded/recipes/mozilla/
-minimo_cvs.bb, do_configure) failed
-NOTE: Tasks Summary: Attempted 1710 tasks of which 1710 didn't need to be
-rerun and 1 failed.
-ERROR: '/home/vivek/development/em-x270/stuff//openembedded/recipes/mozilla/
-minimo_cvs.bb' failed
+http://bec-systems.com/oe/attr_make_explosion.txt
 
-Please help me in building minimo web browser.
+setup:
+org.openembedded.dev
+beagleboard machine
+64-bit Ubuntu workstation
+PARALLEL_MAKE = "-j 4"
+BB_NUMBER_THREADS = "4"
 
-with regards
-vivek tambakad
+It runs my workstation out of memory and is downright annoying!
+
+Thanks,
+Cliff
+
 
