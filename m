@@ -1,45 +1,45 @@
-Received: from mail-iw0-f184.google.com ([209.85.223.184])
+Received: from mail-fx0-f220.google.com ([209.85.220.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1NkduX-0007ih-AC
+	(envelope-from <michael.lippautz@gmail.com>) id 1NkeM4-0000ZO-2F
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Feb 2010 14:37:54 +0100
-Received: by iwn14 with SMTP id 14so5154676iwn.12
+	Thu, 25 Feb 2010 15:06:23 +0100
+Received: by fxm20 with SMTP id 20so5823688fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Feb 2010 05:35:02 -0800 (PST)
+	Thu, 25 Feb 2010 06:03:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=ZuQ1HdLCllDsr5dkhsIzLV7DyaGI1x88phGP0/ImPP4=;
-	b=VuRd8dFgjkDw03u+axx0Q0oiJj2hx7vsH5sOfkdErBTA9Pg5yDtMqsEfjwdEIMdTff
-	iUjrERbdnqCok3NghkEF0c08dYSCHjkvZvn7CToDkfxwsJJWHyreD0L+GJdKyxOYBokw
-	JXQV2j2+BCq9aPASY5laugf8SH7dodwWn0fyE=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=Uh5RKlDw06tushwNtIBmB7/dKj29JgLHPFfskQu71/Q=;
+	b=AUQlk//6gCzFyqJMiTkzjmdB1r+NQaXqpjr+VrIepzjnMQrWnlFHjkuwk4+DzpCiGb
+	np5oUYC1lzbf3nh7p5k89iOieu5bXhUnWpvwRB++p0ly/V0L7TcjyFvD24fn/9m0+2vD
+	d0fZCn/16JM7YQyy1t6I+o0n5Wulo0S+2uu6A=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=xtqReNlyBWMrkABj5v6hTFv0ulgwBg1H4yi6FHGQ+Lk+zmEoboKgfqlrEVjOR7ho3u
-	Q+O013rxKm/nGmCgQT5K6mq3X5jhz6dryAnXAQpV6B19IXhZLtQ3Opmr1ldZZwgz2n79
-	GKHrbUtAG5je6DAR44sr0vz0YPMVxl/5aeuLI=
-MIME-Version: 1.0
-Received: by 10.231.191.131 with SMTP id dm3mr132335ibb.45.1267104899888; Thu, 
-	25 Feb 2010 05:34:59 -0800 (PST)
-In-Reply-To: <1266947342.18176.32.camel@trini-m4400>
-References: <f96d234e1002091310h6eb4f93ei67068714adadd017@mail.gmail.com>
-	<201002102228.49805.holger+oe@freyther.de>
-	<f96d234e1002230903j24d67bcauca7714045a8d7c77@mail.gmail.com>
-	<1266947342.18176.32.camel@trini-m4400>
-Date: Thu, 25 Feb 2010 08:34:59 -0500
-Message-ID: <f96d234e1002250534x153c3757rb2a560b8936b72c1@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=gyrx+uz1zAvPSaCEH1mO+KkKhcItwq3O24HDmuorxQHqTAFJ9ECiWE/1c1DG6/9r/O
+	Fmaj7aeGgI4kNdyqlZj7mQQwRBmyBRKkjIbHlB+0oS/z4NbkvVYnPpUzeaIG6Qfr+o6e
+	CyvAnnc/6KcywMMbgcrqU9N1gGKX/4+fW0Grc=
+Received: by 10.102.211.34 with SMTP id j34mr908252mug.5.1267106609716;
+	Thu, 25 Feb 2010 06:03:29 -0800 (PST)
+Received: from localhost.localdomain ([62.218.44.194])
+	by mx.google.com with ESMTPS id b9sm14554564mug.24.2010.02.25.06.03.28
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 25 Feb 2010 06:03:29 -0800 (PST)
+From: Michael Lippautz <michael.lippautz@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.184
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+Date: Thu, 25 Feb 2010 15:03:49 +0100
+Message-Id: <1267106629-4897-1-git-send-email-michael.lippautz@gmail.com>
+X-Mailer: git-send-email 1.6.4.4
+In-Reply-To: <n>
+References: <n>
+X-SA-Exim-Connect-IP: 209.85.220.220
+X-SA-Exim-Mail-From: michael.lippautz@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE weekly changelog 2010-02-01 to 2010-02-08
+Subject: [PATCH] libyaml: Bump version to 0.1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,34 +53,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Feb 2010 13:37:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 25 Feb 2010 14:06:25 -0000
 
-On Tue, Feb 23, 2010 at 12:49 PM, Tom Rini <tom_rini@mentor.com> wrote:
-> On Tue, 2010-02-23 at 12:03 -0500, Cliff Brake wrote:
->> On Wed, Feb 10, 2010 at 4:28 PM, Holger Hans Peter Freyther
->> <holger+oe@freyther.de> wrote:
->> > On Tuesday 09 February 2010 22:10:40 Cliff Brake wrote:
->> >> OE weekly changelog 2010-02-01 to 2010-02-08
->> >
->> > Hi Cliff,
->> >
->> > do you think having the output of `git shortlog holger/staging-branch` in the
->> > weekly changelog would be a nice addition?
->>
->> Added to the script, thanks.
->
-> I kinda meant to say this earlier, and not to pick on holger, really,
-> but how about we make the script take a few params and let everyone /
-> anyone cron what they like (going where appropriate) so the shr folks
-> can log their branches and so on.
+* Additionally fix staging
+---
+ recipes/libyaml/libyaml_0.1.3.bb |   13 +++++++++++++
+ 1 files changed, 13 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/libyaml/libyaml_0.1.3.bb
 
-Good idea, done.  If anyone wants their branch included in the weekly
-changelog report, then please add to:
+diff --git a/recipes/libyaml/libyaml_0.1.3.bb b/recipes/libyaml/libyaml_0.1.3.bb
+new file mode 100644
+index 0000000..6c53db1
+--- /dev/null
++++ b/recipes/libyaml/libyaml_0.1.3.bb
+@@ -0,0 +1,13 @@
++DESCRIPTION = "LibYAML is a YAML parser and emitter written in C."
++HOMEPAGE = "http://pyyaml.org/wiki/LibYAML"
++SECTION = "libs/devel"
++LICENSE = "MIT"
++PR="r0"
++
++SRC_URI = "http://pyyaml.org/download/libyaml/yaml-${PV}.tar.gz;name=libyaml"
++SRC_URI[libyaml.md5sum] = "b8ab9064e8e0330423fe640de76608cd"
++SRC_URI[libyaml.sha256sum] = "a8bbad7e5250b3735126b7e3bd9f6fce9db19d6be7cc13abad17a24b59ec144a"
++
++S = "${WORKDIR}/yaml-${PV}"
++
++inherit autotools
+-- 
+1.6.4.4
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/tree/contrib/weekly-changelog-report.sh
-
-Thanks,
-Cliff
 
 
