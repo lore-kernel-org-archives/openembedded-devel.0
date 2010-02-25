@@ -1,35 +1,50 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NkQUL-00067P-RE
+	(envelope-from <Tom_Rini@mentor.com>) id 1NkRxo-0003nt-KC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Feb 2010 00:17:54 +0100
-Received: from 88-110-39-162.dynamic.dsl.as9105.com ([88.110.39.162]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NkQRf-0007jG-US
+	Thu, 25 Feb 2010 01:52:25 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1NkRv7-0006As-N6 from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Feb 2010 23:15:08 +0000
-From: Phil Blundell <philb@gnu.org>
+	Wed, 24 Feb 2010 16:49:37 -0800
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Wed, 24 Feb 2010 16:49:37 -0800
+Received: from 172.30.80.81 ([172.30.80.81]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Thu, 25 Feb 2010 00:49:36 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	24 Feb 2010 17:49:35 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100224230629.GA8672@denix.org>
-References: <1267044772-10182-1-git-send-email-denis@denix.org>
-	<1267045217.5437.326.camel@lenovo.internal.reciva.com>
-	<6ec4247d1002241348i6dd2db32ifb3f9482287d91bd@mail.gmail.com>
-	<1267048766.5437.330.camel@lenovo.internal.reciva.com>
-	<20100224230629.GA8672@denix.org>
-Date: Wed, 24 Feb 2010 23:15:06 +0000
-Message-ID: <1267053306.5437.334.camel@lenovo.internal.reciva.com>
+In-Reply-To: <20100213161449.GD30265@mx.loc>
+References: <1265832780-19939-2-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-3-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-4-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-5-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-6-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-7-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-8-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-9-git-send-email-rep.dot.nop@gmail.com>
+	<1265892781.3777.1050.camel@mill.internal.reciva.com>
+	<20100213125146.GJ10632@mx.loc>  <20100213161449.GD30265@mx.loc>
+Organization: Mentor Graphics Corporation
+Date: Wed, 24 Feb 2010 17:49:35 -0700
+Message-ID: <1267058975.18176.527.camel@trini-m4400>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+X-OriginalArrivalTime: 25 Feb 2010 00:49:37.0517 (UTC)
+	FILETIME=[67E349D0:01CAB5B4]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.7 required=5.0 tests=SPF_SOFTFAIL autolearn=no
+X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] rootfs_ipk.bbclass: fix BAD_RECOMMENDATIONS
+Subject: Re: BBCLASSEXTEND canadian?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,31 +58,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Feb 2010 23:17:54 -0000
+X-List-Received-Date: Thu, 25 Feb 2010 00:52:26 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, 2010-02-24 at 18:06 -0500, Denys Dmytriyenko wrote:
-> The thing is, those SW_xx flags are not preserved anyway - the status file is 
-> primed with BAD_RECOMMENDATIONS (Status: deinstall), but later gets 
-> overwritten by the list of only installed packages. Of course, "deinstall" 
-> packages are being skipped, but they are not preserved in the status file for 
-> later use...
+On Sat, 2010-02-13 at 17:14 +0100, Bernhard Reutner-Fischer wrote:
+> On Sat, Feb 13, 2010 at 01:51:46PM +0100, Bernhard Reutner-Fischer wrote:
+> >On Thu, Feb 11, 2010 at 12:53:01PM +0000, Phil Blundell wrote:
+> >>On Wed, 2010-02-10 at 21:13 +0100, Bernhard Reutner-Fischer wrote:
+> >>> index 0000000..bc5e9ff
+> >>> --- /dev/null
+> >>> +++ b/recipes/xz/xz-native.inc
+> >>> @@ -0,0 +1,2 @@
+> >>> +inherit native
+> >>> +require xz_${PV}.bb
+> >>
+> >>You could consider using BBCLASSEXTEND to eliminate the need for this
+> >>separate recipe.
+> >
+> >Thanks for that, good thing. This will trim down alot on the number of
+> >recipes in the tree!
+>=20
+> AFAICS BBCLASSEXTEND does not take canadian into account ATM, so i could
+> convert mpfr without pain but gmp-canadian on darwin (at least 4.2.4 is
+> mentioned in there) will/would break AFAICT, is that correct?
 
-Ah.  If that's happening then that is also a bug.  Are you saying that
-opkg basically throws away anything that isn't SS_INSTALLED when it
-writes out the status file?  That is definitely no good: it ought to
-preserve all the SW_xx values that are set in the status file,
-essentially indefinitely.
+Since I didn't see a reply... at current, yes BBLCASSEXTEND only covers
+-native (and not -cross, -cross-sdk/-sdk nor -canadian*).
 
-> But, on the other hand, if there are multiple versions of the package
-> present in the deploy/feed, then it will, probably, deinstall one
-> version and install another one, which is not the correct behavior.
-
-Yeah, that would also be pretty broken.
-
-p.
-
-
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
