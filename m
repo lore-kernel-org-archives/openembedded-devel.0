@@ -1,35 +1,40 @@
-Received: from fg-out-1718.google.com ([72.14.220.155])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen@dominion.thruhere.net>) id 1NkYnM-0002Q2-3A
+Received: from smtp105.biz.mail.in2.yahoo.com ([203.104.19.14])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <tejas@picus.in>) id 1NkZIy-0000Uf-7Z
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Feb 2010 09:10:05 +0100
-Received: by fg-out-1718.google.com with SMTP id l26so60028fgb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Feb 2010 00:07:20 -0800 (PST)
-Received: by 10.87.63.3 with SMTP id q3mr1586382fgk.53.1267085240088;
-	Thu, 25 Feb 2010 00:07:20 -0800 (PST)
-Received: from ?172.20.0.255? (s55917625.adsl.wanadoo.nl [85.145.118.37])
-	by mx.google.com with ESMTPS id 16sm4083508fxm.15.2010.02.25.00.07.18
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 25 Feb 2010 00:07:19 -0800 (PST)
-Mime-Version: 1.0 (Apple Message framework v1077)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <1267039367-8677-1-git-send-email-Martin.Jansa@gmail.com>
-Date: Thu, 25 Feb 2010 09:07:16 +0100
-Message-Id: <7502B74B-0D2B-4460-9564-56C58E8A8909@dominion.thruhere.net>
-References: <1267039367-8677-1-git-send-email-Martin.Jansa@gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Mailer: Apple Mail (2.1077)
-X-SA-Exim-Connect-IP: 72.14.220.155
-X-SA-Exim-Mail-From: koen@dominion.thruhere.net
+	Thu, 25 Feb 2010 09:42:51 +0100
+Received: (qmail 41143 invoked from network); 25 Feb 2010 08:39:56 -0000
+Received: from 106.74.116.28.hathway.com (tejas@116.74.106.28 with login)
+	by smtp105.biz.mail.in2.yahoo.com with SMTP;
+	25 Feb 2010 14:09:55 +0530 IST
+X-Yahoo-SMTP: vL6ZkSyswBA8eZdwmFTvr8l2__OJ14.9dJSX
+X-YMail-OSG: dkZrGoAVM1nFWRovJ9scF7SDk6FqXbR0Byf_dQsFK2OFwtCvw47klszAroNNSeiDLhFw5A8wVFYxhjeo0q8beEktoOBDtMC.ex4LORBbRHVbDGs.FQUa658iKbY3WlkAYq.JMiBqXsDUQwQKwtPo3OubP7NGuff_23ZpsvZCvK3KCDkXU9ROoeX3l4gfHsEzBMVF.nHCMlsN1u6k7YMgKnb36OUCsQdqAIL6bTts.OZGMTTXLp1CEull
+X-Yahoo-Newman-Property: ymail-3
+From: "Tejas" <tejas@picus.in>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 25 Feb 2010 14:12:19 +0530
+Message-ID: <000001cab5f6$70c966f0$525c34d0$@in>
+MIME-Version: 1.0
+X-Mailer: Microsoft Office Outlook 12.0
+Thread-Index: Acq19m94LdiHygNJQJ+yIaEg2gu4UQ==
+x-cr-hashedpuzzle: dmg= ACoG A5zE BM9D BwQT CCOY Dlxl ECo0 E6x1 FZbB FfUk G4tz
+	JC8d JTB4 J1dN J97N; 1;
+	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnAA==;
+	Sosha1_v1; 7; {7DCAEAFE-E590-4D46-8A86-3CA28D28DE59};
+	dABlAGoAYQBzAEAAcABpAGMAdQBzAC4AaQBuAA==;
+	Thu, 25 Feb 2010 08:42:17 GMT;
+	RgBhAGMAaQBuAGcAIABwAHIAbwBiAGwAZQBtACAAdABvACAAYgB1AGkAbABkACAAdABvAHQAZQBtAA==
+x-cr-puzzleid: {7DCAEAFE-E590-4D46-8A86-3CA28D28DE59}
+X-SA-Exim-Connect-IP: 203.104.19.14
+X-SA-Exim-Mail-From: tejas@picus.in
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
-X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
-	version=3.2.5
+X-Spam-Level: *
+X-Spam-Status: No, score=1.5 required=5.0 tests=HTML_MESSAGE, UNPARSEABLE_RELAY,
+	WEIRD_PORT autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] testlab.bbclass: use opkg.conf from staging, always specify tmp_dir in opkg-cl call with -t parameter
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Facing problem to build totem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,98 +48,236 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Feb 2010 08:10:05 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 25 Feb 2010 08:42:51 -0000
+Content-Language: en-us
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Acked--by: Koen Kooi <koen@openembedded.org>
+Hello All,
 
+               I am facing problem to build totem movie player for beagle
+board. When I run bitbake totem , it downloads all necessary packages and
+complete all tasks except configuring of totem. The log is as followed.
 
-Op 24 feb 2010, om 20:22 heeft Martin Jansa het volgende geschreven:
+ 
 
-> * Use opkg.conf from staging in the same way as do_rootfs does
-> * When option tmp_dir is used in opkg.conf installed on rootfs then =
-it's
->  used also in do_rootfs call and points to probably non-existent =
-directory
->  on buildhost like /var/lib/opkg/tmp.
-> * The value of tmp_dir from rootfs is used even with another config =
-file
->  specified with -c parameter
-> * Before this, it was using default value (/tmp) on buildhost, now it =
-will use
->  own "${IMAGE_ROOTFS}-tmp" and remove it after do_rootfs finish
->  (usually already empty inside, cleaned by opkg itself)
->=20
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
-> classes/testlab.bbclass |   13 +++++++++----
-> 1 files changed, 9 insertions(+), 4 deletions(-)
->=20
-> diff --git a/classes/testlab.bbclass b/classes/testlab.bbclass
-> index fc923c5..e6c9c8e 100644
-> --- a/classes/testlab.bbclass
-> +++ b/classes/testlab.bbclass
-> @@ -24,26 +24,31 @@
-> do_testlab() {
-> if [ -e  ${IMAGE_ROOTFS}/etc/opkg ] && [ =
-"${ONLINE_PACKAGE_MANAGEMENT}" =3D "full" ] ; then
->=20
-> +	IPKG_TMP_DIR=3D"${IMAGE_ROOTFS}-tmp"
-> +	IPKG_ARGS=3D"-f ${STAGING_ETCDIR_NATIVE}/opkg.conf -o =
-${IMAGE_ROOTFS} -t ${IPKG_TMP_DIR}"
-> +
-> 	TESTLAB_DIR=3D"${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-testlab"
->         mkdir -p ${TESTLAB_DIR}/
-> +        mkdir -p ${IPKG_TMP_DIR}/
-> 	ls -laR ${IMAGE_ROOTFS} > ${TESTLAB_DIR}/files-in-image.txt =09
->=20
-> 	echo > ${TESTLAB_DIR}/installed-packages.txt
-> 	echo -e "digraph depends {\n    node [shape=3Dplaintext]" > =
-${TESTLAB_DIR}/depends.dot
->=20
-> -	for pkg in $(opkg-cl -f ${IMAGE_ROOTFS}/etc/opkg -o =
-${IMAGE_ROOTFS} list_installed | awk '{print $1}') ; do=20
-> -		opkg-cl -f ${IMAGE_ROOTFS}/etc/opkg -o ${IMAGE_ROOTFS} =
-info $pkg | awk '/Package/ {printf $2"_"} /Version/ {printf $2"_"} =
-/Archi/ {print $2".ipk"}'  >> ${TESTLAB_DIR}/installed-packages.txt
-> +	for pkg in $(opkg-cl ${IPKG_ARGS} list_installed | awk '{print =
-$1}') ; do=20
-> +		opkg-cl ${IPKG_ARGS} info $pkg | awk '/Package/ {printf =
-$2"_"} /Version/ {printf $2"_"} /Archi/ {print $2".ipk"}'  >> =
-${TESTLAB_DIR}/installed-packages.txt
->=20
-> -    		for depends in $(opkg-cl -f ${IMAGE_ROOTFS}/etc/opkg -o  =
-${IMAGE_ROOTFS} info $pkg | grep Depends) ; do=20
-> +    		for depends in $(opkg-cl ${IPKG_ARGS} info $pkg | grep =
-Depends) ; do=20
->         		echo "$pkg OPP $depends;" | grep -v "(" | grep =
--v ")" | grep -v Depends | sed -e 's:,::g' -e 's:-:_:g' -e 's:\.:_:g' -e =
-'s:+::g' |sed 's:OPP:->:g' >> ${TESTLAB_DIR}/depends.dot
->     		done
->     	=09
-> -		for recommends in $(opkg-cl -f ${IMAGE_ROOTFS}/etc/opkg =
--o ${IMAGE_ROOTFS} info $pkg | grep Recom) ; do
-> +		for recommends in $(opkg-cl ${IPKG_ARGS} info $pkg | =
-grep Recom) ; do
->         		echo "$pkg OPP $recommends [style=3Ddotted];" | =
-grep -v "(" | grep -v ")" | grep -v Recom | sed -e 's:,::g' -e 's:-:_:g' =
--e 's:\.:_:g' -e 's:+::g' |sed 's:OPP:->:g' >> =
-${TESTLAB_DIR}/depends.dot
->     		done
-> 	done
->=20
-> 	echo "}" >>  ${TESTLAB_DIR}/depends.dot
-> +	rm -rf ${IPKG_TMP_DIR}
-> =09
-> 	grep -v kernel_2 ${TESTLAB_DIR}/depends.dot | grep -v =
-kernel_image > ${TESTLAB_DIR}/depends-nokernel.dot
-> 	grep -v libc6 ${TESTLAB_DIR}/depends-nokernel.dot | grep -v =
-libgcc > ${TESTLAB_DIR}/depends-nokernel-nolibc.dot
-> --=20
-> 1.7.0
->=20
->=20
+NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it to
+increase performance.
 
+NOTE: Handling BitBake files: \ (6701/6701) [100 %]
+
+NOTE: Parsing finished. 6414 cached, 0 parsed, 287 skipped, 0 masked.
+
+NOTE: Cache is clean, not saving.
+
+NOTE: Resolving any missing task queue dependencies
+
+NOTE: Preparing runqueue
+
+NOTE: Executing runqueue
+
+NOTE: Running task 1614 of 2327 (ID: 5,
+/home/neelam/tejas_work/oe/openembedded/recipes/totem/totem_2.24.2.bb,
+do_configure)
+
+ERROR: function do_configure failed
+
+ERROR: see log in
+/home/neelam/tejas_work/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/t
+otem-2.24.2-r0/temp/log.do_configure.15367
+
+NOTE: Task failed:
+/home/neelam/tejas_work/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/t
+otem-2.24.2-r0/temp/log.do_configure.15367
+
+ERROR: TaskFailed event exception, aborting
+
+ERROR: Build of
+/home/neelam/tejas_work/oe/openembedded/recipes/totem/totem_2.24.2.bb
+do_configure failed
+
+ERROR: Task 5
+(/home/neelam/tejas_work/oe/openembedded/recipes/totem/totem_2.24.2.bb,
+do_configure) failed
+
+NOTE: Tasks Summary: Attempted 2315 tasks of which 2315 didn't need to be
+rerun and 1 failed.
+
+ERROR:
+'/home/neelam/tejas_work/oe/openembedded/recipes/totem/totem_2.24.2.bb'
+failed
+
+ 
+
+               The log file of log.do_configure.15367 is as followed.
+
+ 
+
+/home/neelam/tejas_work/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/t
+otem-2.24.2-r0/temp/log.do_configure.15367
+
+ 
+
+automake (GNU automake) 1.10.2
+
+Copyright (C) 2008 Free Software Foundation, Inc.
+
+License GPLv2+: GNU GPL version 2 or later
+<http://gnu.org/licenses/gpl.html>
+
+This is free software: you are free to change and redistribute it.
+
+There is NO WARRANTY, to the extent permitted by law.
+
+ 
+
+Written by Tom Tromey <tromey@redhat.com>
+
+       and Alexandre Duret-Lutz <adl@gnu.org>.
+
+AUTOV is 1.10
+
+NOTE: Executing glib-gettextize --force --copy
+
+Copying file mkinstalldirs
+
+Copying file po/Makefile.in.in
+
+ 
+
+Please add the files
+
+  codeset.m4 gettext.m4 glibc21.m4 iconv.m4 isc-posix.m4 lcmessage.m4
+
+  progtest.m4
+
+from the
+/home/neelam/tejas_work/oe/angstrom-dev/staging/i686-linux/usr/share/aclocal
+directory to your autoconf macro directory
+
+or directly to your aclocal.m4 file.
+
+You will also need config.guess and config.sub, which you can get from
+
+ftp://ftp.gnu.org/pub/gnu/config/.
+
+ 
+
+NOTE: Executing intltoolize --copy --force --automake
+
+NOTE: Executing autoreconf --verbose --install --force --exclude=autopoint
+-I/home/neelam/tejas_work/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnue
+abi/usr/share/aclocal-1.10 -I /hom
+e/neelam/tejas_work/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/us
+r/share/aclocal
+
+Use of uninitialized value in formline at
+/home/neelam/tejas_work/oe/angstrom-dev/staging/i686-linux/usr/bin/automake
+line 7641.
+
+Use of uninitialized value in formline at
+/home/neelam/tejas_work/oe/angstrom-dev/staging/i686-linux/usr/bin/automake
+line 7641.
+
+autoreconf: Entering directory `.'
+
+autoreconf: configure.in: not using Gettext
+
+autoreconf: running: aclocal -I
+/home/neelam/tejas_work/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueab
+i/usr/share/aclocal-1.10 -I
+/home/neelam/tejas_work/oe/angstrom-dev/staging/a
+rmv7a-angstrom-linux-gnueabi/usr/share/aclocal --force
+
+/home/neelam/tejas_work/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueab
+i/usr/share/aclocal/libpcap.m4:923: warning: underquoted definition of
+AC_LBL_LINUX_TPACKET_AUXDATA_TP_VLAN_T    CI
+
+/home/neelam/tejas_work/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueab
+i/usr/share/aclocal/libpcap.m4:923:   run info '(automake)Extending aclocal'
+
+/home/neelam/tejas_work/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueab
+i/usr/share/aclocal/libpcap.m4:923:   or see
+http://sources.redhat.com/automake/automake.html#Extending-acloc    al
+
+autoreconf: configure.in: tracing
+
+autoreconf: running: libtoolize --copy --force
+
+libtoolize: putting auxiliary files in `.'.
+
+libtoolize: copying file `./ltmain.sh'
+
+libtoolize: Consider adding `AC_CONFIG_MACRO_DIR([m4])' to configure.in and
+
+libtoolize: rerunning libtoolize, to keep the correct libtool macros
+in-tree.
+
+libtoolize: Consider adding `-I m4' to ACLOCAL_AMFLAGS in Makefile.am.
+
+/home/neelam/tejas_work/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueab
+i/usr/share/aclocal/libpcap.m4:923: warning: underquoted definition of
+AC_LBL_LINUX_TPACKET_AUXDATA_TP_VLAN_TCI
+
+/home/neelam/tejas_work/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueab
+i/usr/share/aclocal/libpcap.m4:923:   run info '(automake)Extending aclocal'
+
+/home/neelam/tejas_work/oe/angstrom-dev/staging/armv7a-angstrom-linux-gnueab
+i/usr/share/aclocal/libpcap.m4:923:   or see
+http://sources.redhat.com/automake/automake.html#Extending-acloc    al
+
+autoreconf: running:
+/home/neelam/tejas_work/oe/angstrom-dev/staging/i686-linux/usr/bin/autoconf
+--include=/home/neelam/tejas_work/oe/angstrom-dev/staging/armv7a-angstrom-li
+nux-gnueabi/    usr/share/aclocal-1.10
+--include=/home/neelam/tejas_work/oe/angstrom-dev/staging/armv7a-angstrom-li
+nux-gnueabi/usr/share/aclocal --force --warnings=cross
+
+autoreconf: running:
+/home/neelam/tejas_work/oe/angstrom-dev/staging/i686-linux/usr/bin/autoheade
+r
+--include=/home/neelam/tejas_work/oe/angstrom-dev/staging/armv7a-angstrom-li
+nux-gnueab    i/usr/share/aclocal-1.10
+--include=/home/neelam/tejas_work/oe/angstrom-dev/staging/armv7a-angstrom-li
+nux-gnueabi/usr/share/aclocal --force --warnings=cross
+
+autoreconf: running: automake --foreign --add-missing --copy --force-missing
+--warnings=cross
+
+automake: unknown warning category `cross'
+
+configure.in:27: installing `./config.guess'
+
+configure.in:27: installing `./config.sub'
+
+gnome-doc-utils.make:63: HAVE_GNOME_DOC_UTILS does not appear in
+AM_CONDITIONAL
+
+help/Makefile.am:1:   `gnome-doc-utils.make' included from here
+
+gnome-doc-utils.make:133: ENABLE_SK does not appear in AM_CONDITIONAL
+
+help/Makefile.am:1:   `gnome-doc-utils.make' included from here
+
+gnome-doc-utils.make:182: ENABLE_SK does not appear in AM_CONDITIONAL
+
+help/Makefile.am:1:   `gnome-doc-utils.make' included from here
+
+autoreconf: automake failed with exit status: 1
+
+FATAL: autoreconf execution failed.
+
+ 
+
+ 
+
+               Before building totem, I have already built base-image for
+beagle board and it was successful. If anywhere I am wrong, please guide me
+and correct me.
+
+ 
+
+-Tejas.
 
 
