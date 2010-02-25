@@ -1,45 +1,50 @@
-Received: from mail-fx0-f220.google.com ([209.85.220.220])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.lippautz@gmail.com>) id 1Nkarc-0007tX-1O
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NkbB2-00062t-4g
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Feb 2010 11:22:40 +0100
-Received: by fxm20 with SMTP id 20so5622712fxm.12
+	Thu, 25 Feb 2010 11:42:40 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1PAds1a025248
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Feb 2010 02:19:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=yzBBXgblp0J/m+HjU6rfFhhPSdSHU3uFrPKh10O0XuI=;
-	b=kGdqp7wl7x41nB2/zexJtOdUkeYQhBxAQeU6N/ebHCoSoAIgv6UXwZLOM0If3D5TSE
-	SpxMp5r47m4PyYJQcFZz/Xf1/4ZHo4W26YqmtoODqFaKgwMuUfxBmYwoo14soUZmhgeF
-	eebfM9sxNjwdgsyhAMVXu8ES1Q79QH1mchUcY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=GryPGeS0bQDwaYJU7F5dIBaQ6EFuytmX4XJl83eL2RBu+vKHYFxrte42MNTJcY/Scz
-	KYdGWGjwo97Tobt4I8cKqcRksTPJp3BSw7P7EZE1SSTbHV3rEEwxgG2VzrsysCYNrhBV
-	+vCo1QAYcaSHOemFYRkZ7LBDftAosZYu7N+Q0=
-Received: by 10.102.214.19 with SMTP id m19mr652589mug.96.1267093189868;
-	Thu, 25 Feb 2010 02:19:49 -0800 (PST)
-Received: from localhost.localdomain ([62.218.44.194])
-	by mx.google.com with ESMTPS id y6sm13486165mug.20.2010.02.25.02.19.49
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 25 Feb 2010 02:19:49 -0800 (PST)
-From: Michael Lippautz <michael.lippautz@gmail.com>
+	Thu, 25 Feb 2010 10:39:54 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 25167-02 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Feb 2010 10:39:50 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o1PAdnLC025242
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Feb 2010 10:39:50 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Feb 2010 11:20:09 +0100
-Message-Id: <1267093209-25115-1-git-send-email-michael.lippautz@gmail.com>
-X-Mailer: git-send-email 1.6.4.4
-In-Reply-To: <n>
-References: <n>
-X-SA-Exim-Connect-IP: 209.85.220.220
-X-SA-Exim-Mail-From: michael.lippautz@gmail.com
+In-Reply-To: <1267058975.18176.527.camel@trini-m4400>
+References: <1265832780-19939-2-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-3-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-4-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-5-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-6-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-7-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-8-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-9-git-send-email-rep.dot.nop@gmail.com>
+	<1265892781.3777.1050.camel@mill.internal.reciva.com>
+	<20100213125146.GJ10632@mx.loc>  <20100213161449.GD30265@mx.loc>
+	<1267058975.18176.527.camel@trini-m4400>
+Date: Thu, 25 Feb 2010 10:39:48 +0000
+Message-ID: <1267094388.4243.1.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
-X-Spam-Level: 
-X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
-	version=3.2.5
+X-Spam-Level: *
+X-Spam-Status: No, score=1.7 required=5.0 tests=RDNS_DYNAMIC,TVD_RCVD_IP
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] gdal: Move to new staging
+Subject: Re: BBCLASSEXTEND canadian?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,36 +58,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Feb 2010 10:22:40 -0000
+X-List-Received-Date: Thu, 25 Feb 2010 10:42:40 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
----
- recipes/gdal/gdal_1.5.2.bb |    7 +------
- 1 files changed, 1 insertions(+), 6 deletions(-)
+On Wed, 2010-02-24 at 17:49 -0700, Tom Rini wrote:
+> On Sat, 2010-02-13 at 17:14 +0100, Bernhard Reutner-Fischer wrote:
+> > On Sat, Feb 13, 2010 at 01:51:46PM +0100, Bernhard Reutner-Fischer wrote:
+> > >On Thu, Feb 11, 2010 at 12:53:01PM +0000, Phil Blundell wrote:
+> > >>On Wed, 2010-02-10 at 21:13 +0100, Bernhard Reutner-Fischer wrote:
+> > >>> index 0000000..bc5e9ff
+> > >>> --- /dev/null
+> > >>> +++ b/recipes/xz/xz-native.inc
+> > >>> @@ -0,0 +1,2 @@
+> > >>> +inherit native
+> > >>> +require xz_${PV}.bb
+> > >>
+> > >>You could consider using BBCLASSEXTEND to eliminate the need for this
+> > >>separate recipe.
+> > >
+> > >Thanks for that, good thing. This will trim down alot on the number of
+> > >recipes in the tree!
+> > 
+> > AFAICS BBCLASSEXTEND does not take canadian into account ATM, so i could
+> > convert mpfr without pain but gmp-canadian on darwin (at least 4.2.4 is
+> > mentioned in there) will/would break AFAICT, is that correct?
+> 
+> Since I didn't see a reply... at current, yes BBLCASSEXTEND only covers
+> -native (and not -cross, -cross-sdk/-sdk nor -canadian*).
 
-diff --git a/recipes/gdal/gdal_1.5.2.bb b/recipes/gdal/gdal_1.5.2.bb
-index a92e40f..f76ba57 100644
---- a/recipes/gdal/gdal_1.5.2.bb
-+++ b/recipes/gdal/gdal_1.5.2.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "GDAL is a translator library for raster geospatial data formats"
- HOMEPAGE = "http://www.gdal.org/"
- LICENSE = "MIT"
- DEPENDS = "proj-4 sqlite3 zlib jpeg libpng tiff giflib curl jasper expat"
--PR = "r2"
-+PR = "r3"
- 
- SRC_URI = "http://www.gdal.org/dl/${P}.tar.gz \
- 	   file://gdal_config.patch;patch=1 \
-@@ -33,8 +33,3 @@ FILES_${PN}-dev += "${datadir}"
- do_compile() {
-         oe_runmake default
- }
--
--do_stage() {
--        autotools_stage_all
--}	
--
--- 
-1.6.4.4
+BBCLASSEXTEND covers -native and -nativesdk
+
+The -cross, -crosssdk, -canadian-cross and other combinations usually
+have too many differences to be worth the effort although it would be
+possible to make them work.
+
+Cheers,
+
+Richard
+
+
+
 
 
 
