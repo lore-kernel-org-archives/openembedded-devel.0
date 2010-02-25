@@ -1,43 +1,45 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f220.google.com ([209.85.220.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NkZNF-0000gi-3T for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Feb 2010 09:47:10 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NkZKY-0001qh-7A for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Feb 2010 09:44:22 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Feb 2010 09:44:22 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <michael.lippautz@gmail.com>) id 1Nkarc-0007tX-1O
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 25 Feb 2010 11:22:40 +0100
+Received: by fxm20 with SMTP id 20so5622712fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Feb 2010 09:44:22 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 25 Feb 2010 02:19:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=yzBBXgblp0J/m+HjU6rfFhhPSdSHU3uFrPKh10O0XuI=;
+	b=kGdqp7wl7x41nB2/zexJtOdUkeYQhBxAQeU6N/ebHCoSoAIgv6UXwZLOM0If3D5TSE
+	SpxMp5r47m4PyYJQcFZz/Xf1/4ZHo4W26YqmtoODqFaKgwMuUfxBmYwoo14soUZmhgeF
+	eebfM9sxNjwdgsyhAMVXu8ES1Q79QH1mchUcY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=GryPGeS0bQDwaYJU7F5dIBaQ6EFuytmX4XJl83eL2RBu+vKHYFxrte42MNTJcY/Scz
+	KYdGWGjwo97Tobt4I8cKqcRksTPJp3BSw7P7EZE1SSTbHV3rEEwxgG2VzrsysCYNrhBV
+	+vCo1QAYcaSHOemFYRkZ7LBDftAosZYu7N+Q0=
+Received: by 10.102.214.19 with SMTP id m19mr652589mug.96.1267093189868;
+	Thu, 25 Feb 2010 02:19:49 -0800 (PST)
+Received: from localhost.localdomain ([62.218.44.194])
+	by mx.google.com with ESMTPS id y6sm13486165mug.20.2010.02.25.02.19.49
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 25 Feb 2010 02:19:49 -0800 (PST)
+From: Michael Lippautz <michael.lippautz@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 25 Feb 2010 09:44:09 +0100
-Message-ID: <hm5d8q$6c7$1@dough.gmane.org>
-References: <4B84DE66.4080602@dresearch.de> <hm32cp$h8m$1@dough.gmane.org>
-	<4B862F8F.4050001@dresearch.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100219 Shredder/3.0.3pre
-In-Reply-To: <4B862F8F.4050001@dresearch.de>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Thu, 25 Feb 2010 11:20:09 +0100
+Message-Id: <1267093209-25115-1-git-send-email-michael.lippautz@gmail.com>
+X-Mailer: git-send-email 1.6.4.4
+In-Reply-To: <n>
+References: <n>
+X-SA-Exim-Connect-IP: 209.85.220.220
+X-SA-Exim-Mail-From: michael.lippautz@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_HELO_PASS,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Angstrom, udev, and kernel version
+Subject: [PATCH] gdal: Move to new staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,43 +53,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Feb 2010 08:47:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 25 Feb 2010 10:22:40 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+---
+ recipes/gdal/gdal_1.5.2.bb |    7 +------
+ 1 files changed, 1 insertions(+), 6 deletions(-)
 
-On 25-02-10 09:06, Steffen Sledz wrote:
-> Koen Kooi wrote:
->>> udevd started from within /etc/init.d/udev crashes with
->>>
->>> /sbin/udevd -d --debug
->>> 1266997931.250494 [297] udev_monitor_new_from_netlink: error getting socket: Invalid argument error initializing netlink socket
->>> 1266997931.250718 [297] main: error initializing netlink socket
->>>
->>> Searching the internet for this error i found some hints that this udev version requires at least linux 2.6.27.
->>
->> 2.6.27 is only required for signalfd, your error seems to be about a
->> missing networking option in defconfig.
-> 
-> Any hints, how we can isolate this problem?
-
-The README in the udev source should have a fairly complete summary of
-needed kernel options. If you use angstrom or shr linux.inc will set
-them all except CONFIG_NET. So you could try rebuilding your kernel and
-see if it works then. If not, compare your .config with the udev readme.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLhjhZMkyGM64RGpERAgVGAJ9UsDHvNhMSZ1Uis6z6Zbg8gwohswCgpN/t
-G89BmgNucXDjiBjtlCVJjmw=
-=q11y
------END PGP SIGNATURE-----
+diff --git a/recipes/gdal/gdal_1.5.2.bb b/recipes/gdal/gdal_1.5.2.bb
+index a92e40f..f76ba57 100644
+--- a/recipes/gdal/gdal_1.5.2.bb
++++ b/recipes/gdal/gdal_1.5.2.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "GDAL is a translator library for raster geospatial data formats"
+ HOMEPAGE = "http://www.gdal.org/"
+ LICENSE = "MIT"
+ DEPENDS = "proj-4 sqlite3 zlib jpeg libpng tiff giflib curl jasper expat"
+-PR = "r2"
++PR = "r3"
+ 
+ SRC_URI = "http://www.gdal.org/dl/${P}.tar.gz \
+ 	   file://gdal_config.patch;patch=1 \
+@@ -33,8 +33,3 @@ FILES_${PN}-dev += "${datadir}"
+ do_compile() {
+         oe_runmake default
+ }
+-
+-do_stage() {
+-        autotools_stage_all
+-}	
+-
+-- 
+1.6.4.4
 
 
 
