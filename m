@@ -1,37 +1,41 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msundius@sundius.com>) id 1NkiKc-0000j5-ES
+	(envelope-from <Tom_Rini@mentor.com>) id 1NkiV1-0000x6-Ov
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Feb 2010 19:21:03 +0100
-Received: by pvf33 with SMTP id 33so1244619pvf.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Feb 2010 10:18:15 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.142.74.19 with SMTP id w19mr775783wfa.125.1267121895071; Thu, 
-	25 Feb 2010 10:18:15 -0800 (PST)
-In-Reply-To: <1267118467.18176.533.camel@trini-m4400>
-References: <1265832780-19939-2-git-send-email-rep.dot.nop@gmail.com>
-	<1265832780-19939-7-git-send-email-rep.dot.nop@gmail.com>
-	<1265832780-19939-8-git-send-email-rep.dot.nop@gmail.com>
-	<1265832780-19939-9-git-send-email-rep.dot.nop@gmail.com>
-	<1265892781.3777.1050.camel@mill.internal.reciva.com>
-	<20100213125146.GJ10632@mx.loc> <20100213161449.GD30265@mx.loc>
-	<1267058975.18176.527.camel@trini-m4400> <1267094388.4243.1.camel@rex>
-	<1267118467.18176.533.camel@trini-m4400>
-Date: Thu, 25 Feb 2010 10:18:15 -0800
-Message-ID: <18e217241002251018r77ddbb68qf440a711868a6318@mail.gmail.com>
-From: C Michael Sundius <msundius@sundius.com>
+	Thu, 25 Feb 2010 19:31:48 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1NkiSK-0001l8-0W from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 25 Feb 2010 10:29:00 -0800
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Thu, 25 Feb 2010 10:28:59 -0800
+Received: from 172.30.80.81 ([172.30.80.81]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Thu, 25 Feb 2010 18:28:58 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	25 Feb 2010 11:28:56 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: msundius@sundius.com
+In-Reply-To: <1250738680-20274-1-git-send-email-clarson@mvista.com>
+References: <1250738680-20274-1-git-send-email-clarson@mvista.com>
+Organization: Mentor Graphics Corporation
+Date: Thu, 25 Feb 2010 11:28:56 -0700
+Message-ID: <1267122536.18176.535.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 25 Feb 2010 18:28:59.0858 (UTC)
+	FILETIME=[65FED320:01CAB648]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=HTML_MESSAGE autolearn=ham
+X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: BBCLASSEXTEND canadian?
+Subject: Re: cross.bbclass: keep TARGET_SYS & TARGET_PREFIX independent.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,9 +49,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Feb 2010 18:21:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 25 Feb 2010 18:31:48 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-can someone explain what BBCLASSEXTEND does... sorry for the rookie
-question.
+On Wed, 2009-08-19 at 17:24 +0000, Christopher Larson wrote:
+> Signed-off-by: Chris Larson <clarson@mvista.com>
+> Acked-by: Michael Smith <msmith@cbnco.com>
+
+Acked-by: Tom Rini <tom_rini@mentor.com>
+
+>=20
+> ---
+> classes/cross.bbclass |    5 +++++
+>  1 files changed, 5 insertions(+), 0 deletions(-)
+>=20
+> diff --git a/classes/cross.bbclass b/classes/cross.bbclass
+> index 7debde6..72a0fb7 100644
+> --- a/classes/cross.bbclass
+> +++ b/classes/cross.bbclass
+> @@ -2,6 +2,11 @@
+>  # no need for them to be a direct target of 'world'
+>  EXCLUDE_FROM_WORLD =3D "1"
+> =20
+> +# In order to keep TARGET_PREFIX decoupled from TARGET_SYS, let's force =
+the
+> +# binary names to match the former, rather than relying on autoconf's im=
+plicit
+> +# prefixing based on the latter.
+> +EXTRA_OECONF_append =3D " --program-prefix=3D${TARGET_PREFIX}"
+> +
+>  # Save PACKAGE_ARCH before changing HOST_ARCH
+>  OLD_PACKAGE_ARCH :=3D "${PACKAGE_ARCH}"
+>  PACKAGE_ARCH =3D "${OLD_PACKAGE_ARCH}"
+
+
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
+
 
