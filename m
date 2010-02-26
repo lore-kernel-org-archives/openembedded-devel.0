@@ -1,32 +1,33 @@
-Received: from qmta13.emeryville.ca.mail.comcast.net ([76.96.27.243])
+Received: from vms173013pub.verizon.net ([206.46.173.13])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enelson1000@comcast.net>) id 1Nl6bZ-0002SJ-DN
+	(envelope-from <denis@denix.org>) id 1Nl6gm-0007NY-SN
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Feb 2010 21:16:14 +0100
-Received: from omta22.emeryville.ca.mail.comcast.net ([76.96.30.89])
-	by qmta13.emeryville.ca.mail.comcast.net with comcast
-	id mic81d0061vN32cADkCLKt; Fri, 26 Feb 2010 20:12:20 +0000
-Received: from [192.168.1.101] ([173.13.189.149])
-	by omta22.emeryville.ca.mail.comcast.net with comcast
-	id mkEv1d0083DqXwV8ikEvsH; Fri, 26 Feb 2010 20:14:56 +0000
-Message-ID: <4B882B15.60902@comcast.net>
-Date: Fri, 26 Feb 2010 12:12:05 -0800
-From: Ed Nelson <enelson1000@comcast.net>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
-MIME-Version: 1.0
+	Fri, 26 Feb 2010 21:21:37 +0100
+Received: from gandalf.denix.org ([unknown] [71.251.51.225])
+	by vms173013.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0KYG00EGOTSBVZ60@vms173013.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	26 Feb 2010 14:19:28 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 64A5B14AF60; Fri,
+	26 Feb 2010 15:18:20 -0500 (EST)
+Date: Fri, 26 Feb 2010 15:18:20 -0500
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1266176499.12424.6.camel@ed-hp-laptop>
-	<20100226195002.GC25079@gmail.com>
-In-Reply-To: <20100226195002.GC25079@gmail.com>
-X-SA-Exim-Connect-IP: 76.96.27.243
-X-SA-Exim-Mail-From: enelson1000@comcast.net
+Message-id: <20100226201820.GC15391@denix.org>
+References: <fca63bcf1002261053s33343b5r7a79495dce1a9118@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <fca63bcf1002261053s33343b5r7a79495dce1a9118@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.13
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
+X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: shared-mime-info-native-0.51 do_compile failure
+Subject: Re: Commit access
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,59 +41,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2010 20:16:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 26 Feb 2010 20:21:37 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Khem Raj wrote:
-> On (14/02/10 11:41), ed wrote:
->   
->> Trying to build image for mini2440 and get the following error.
->>     
->  ==============================
->   
->> Says it has undefined gzopen64
->> But gzopen64 is apparently there.
->> ed ~/mini2440/OE/build/tmp/staging/i686-linux/usr/lib:$: strings
->> libxml2.so |grep gzopen64
->> gzopen64
->> ed ~/mini2440/OE/build/tmp/staging/i686-linux/usr/lib:$: objdump -T
->> libxml2.so |grep gzopen64
->> 00000000      DF *UND*	00000000              gzopen64
->>
->>
->> Any ideas?  
->>     
->
-> It must be using libxml from host and libz from your native staging. 
-> So either use both from host or both from staging. Mixing can cause this
-> problem.
->
-> Do you have any of zlib-native or libxml2-native in your local.conf as
-> ASSUME_PROVIDED ?
->
->   
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>     
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->   
-I ended up modifying  libxml12-native.inc file and added 
---with-zlib=${STAGING_INCDIR}/zlib.h to EXTRA_OECONF.
-Looked at your email response to Cliff Brake "gettext native failure" on 
-2/23/2010.
-Not sure if this was the correct way to fix it but it solved my problem.
+On Fri, Feb 26, 2010 at 07:53:04PM +0100, Michael Lippautz wrote:
+> Hej all (again),
+> 
+> I am hereby asking, if I can get commit access to OE.
+> 
+> (Don't want to go on peoples nerves using irc all the time ;p)
+> 
+> Some patches: http://cgit.openembedded.org/cgit.cgi/openembedded/log/?qt=author&q=michael+lippautz
+> I am currently mostly interested (work related) into
+> perl/python/webaccess and gps related stuff.
 
-Thanks
-Ed
+Michael's patches look good to me in general.
++1 from me.
+
+-- 
+Denys
 
 
