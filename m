@@ -1,48 +1,37 @@
-Received: from mail-fx0-f220.google.com ([209.85.220.220])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Nl3on-0003Ub-Gt
+	(envelope-from <Tom_Rini@mentor.com>) id 1Nl3sj-0005ss-GJ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Feb 2010 18:17:38 +0100
-Received: by fxm20 with SMTP id 20so297134fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2010 09:14:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=oZwTtTXzLjfoscTU45zq2dkvcmDn6IneGmeEQamdFf8=;
-	b=jiYTiXLT7wsfHrgHoJ6DcO7JRT6eCh6knqdqVqMzXaCChVs1zuQMosAtWBXI77nSBh
-	j4+fAhBXOe6/B/n7wnwSh0EQfSoC1YpD1aYPRpkB2m3eaidcsXpRFoaQihhR98cWesWJ
-	HU2PP/wfzDi3tU6rkzj74SKX0p6eqveSFlMi4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=JrTtokvif9bWo38WfhMi2p3oX+7U9D8HLPNyPplvENAnVEfh0DTY7TCFKJtVFDg20c
-	ZViFm09hPhyinVe12y7Jm05rJjDdOP/dUnn164fff3uYfDbd23zUPMHdEHY3qdE4t7te
-	uyO6mLQYyr4tsnMhdOCCqM2T7RGOrUUEyv/5Q=
-Received: by 10.223.58.20 with SMTP id e20mr820901fah.96.1267204490284;
-	Fri, 26 Feb 2010 09:14:50 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 15sm264758fxm.8.2010.02.26.09.14.42
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 26 Feb 2010 09:14:45 -0800 (PST)
-Date: Fri, 26 Feb 2010 18:14:47 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 26 Feb 2010 18:21:42 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1Nl3q1-0004XR-Bn from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Feb 2010 09:18:53 -0800
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Fri, 26 Feb 2010 09:18:52 -0800
+Received: from 172.30.80.81 ([172.30.80.81]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Fri, 26 Feb 2010 17:18:52 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	26 Feb 2010 10:18:49 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100226171447.GC3206@jama>
+In-Reply-To: <1267202357-8614-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1267202357-8614-1-git-send-email-Martin.Jansa@gmail.com>
-	<201002261754.25997.marcin@juszkiewicz.com.pl>
-	<1267204061.18176.561.camel@trini-m4400>
-MIME-Version: 1.0
-In-Reply-To: <1267204061.18176.561.camel@trini-m4400>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.220
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Organization: Mentor Graphics Corporation
+Date: Fri, 26 Feb 2010 10:18:49 -0700
+Message-ID: <1267204729.18176.572.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 26 Feb 2010 17:18:52.0969 (UTC)
+	FILETIME=[C4E84190:01CAB707]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: Generating slightly different images for different IMAGE_FSTYPES
@@ -59,43 +48,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2010 17:17:39 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 26 Feb 2010 17:21:43 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 26, 2010 at 10:07:41AM -0700, Tom Rini wrote:
-> On Fri, 2010-02-26 at 17:54 +0100, Marcin Juszkiewicz wrote:
-> > Dnia piątek, 26 lutego 2010 o 17:39:16 Martin Jansa napisał(a):
-> > 
-> > > We're slowly stripping packages not really needed, but it would be
-> > > nice to remove whole /boot with kernel-image.
-> > 
-> > > Is there better way to solve it or should we try harder to save space
-> > >  somewhere else?
-> > 
-> > Learn about ROOTFS_POSTPROCESS_COMMAND variable present in 
-> > classes/rootfs_*.bbclass files. You can use it to launch your function after 
-> > rootfs is populated.
-> > 
-> > So for example your shr-lite-image has drop_kernel_from_boot function in which 
-> > you check "MACHINE==om-gta01" and if it is then "rm -rf /boot/uImage". After 
-> > your function all normal ext2/ubifs/jffs2/tarball images will be created 
-> > without kernel in them.
-> 
-> Or (as there's a number of ways to do this):
-> PACKAGE_REMOVE = "kernel-image-*"
-> ROOTFS_POSTPROCESS_COMMAND_om-gta01 += "opkg-cl ${IPKG_ARGS}
-> -force-depends \
->                                 remove ${PACKAGE_REMOVE};"
+On Fri, 2010-02-26 at 17:39 +0100, Martin Jansa wrote:
+> Hi,
+>=20
+> on om-gta01 we had problem that even our minimal image
+> shr-lite-image is too big for its 64MB NAND chip
+>=20
+> We're slowly stripping packages not really needed, but it would be=20
+> nice to remove whole /boot with kernel-image.
+>=20
+> Problem is that when we're booting on gta01, than /boot/uImage is used so=
+=20
+> it should be installed in .tar.gz image. But when booting from NAND, then
+> kernel is usually in different NAND partition and /boot on rootfs partiti=
+on
+> is useless.
+>=20
+> In patch is what I used now to generate images like this, but it's not op=
+timal at all
+> 1) It copies whole rootfs 3 times if you have all jffs2/ubi/ubifs in FSTY=
+PES,=20
+>    instead just once for -no-boot version (it's possible ie if we expect =
+certain order=20
+>    of making FSTYPES or prepare -no-boot always with normal rootfs and do=
+n't remove it
+> 2) task-base still depends on kernel-image and I don't see how to easily =
+remove that=20
+>    dependency, without defining different image recipe and building it se=
+parately.=20
+>    So with next kernel upgrade user will get new kernel-image which will =
+probably fail
+>    to install because of lack of space.
 
-This removes it from ALL FSTYPEs... not just jffs2/ubi/ubifs
+Here's one more thing you could try.  Assuming U-Boot, apparently you
+can have it load a kernel from jffs2 or ubifs, so rework flash layout a
+little bit and load /boot/uImage.
 
-Regards,
-
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
