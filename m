@@ -1,51 +1,32 @@
-Received: from fg-out-1718.google.com ([72.14.220.153])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Nl5aC-00063V-IW
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Nl5bU-0000am-BA
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Feb 2010 20:10:40 +0100
-Received: by fg-out-1718.google.com with SMTP id e21so86382fga.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2010 11:07:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=tGicZlB5a8TEkTy1SsW/Md0ldKnNdGnrUgN1cDtCsq0=;
-	b=tqZEfJWe+PWF4AvrvcFPdbXYXpYAC9Bz3zn8K/1G7U5g2BYwD0c8tBBr1KXiVRrCwD
-	0vHBeRdrXhwspcXzgYcxTKIbvx+HzE7jfZj6zKGr2pSPoVLNs1ZX0aGmlsKYKH1fOTO4
-	H7J1JhMHwKc/513gRAz9uFqrQnuic43n9Hdks=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=NYpSL0mFuaAteWcBtfyyGFW1AXAomcElFNJH6RPP08QSpCpiERmBgzbkGizVnJilfh
-	McP/In0R93pE1+mdilfGtIRBk/j8lsUuyQXjfFCrW2y7WS/Wng+zI8MDshmhqfOiqXN1
-	NoAgDsYQKyOtPyl5aCKjp685Bc1zBLCKgQ3k0=
-Received: by 10.87.58.19 with SMTP id l19mr1650632fgk.43.1267211275315;
-	Fri, 26 Feb 2010 11:07:55 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 15sm355494fxm.12.2010.02.26.11.07.54
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 26 Feb 2010 11:07:54 -0800 (PST)
-Date: Fri, 26 Feb 2010 20:07:59 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 26 Feb 2010 20:12:12 +0100
+Received: (qmail 30235 invoked by uid 813007); 26 Feb 2010 19:09:14 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 26 Feb 2010 19:09:14 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100226190759.GF3206@jama>
-References: <1267202357-8614-1-git-send-email-Martin.Jansa@gmail.com>
-	<201002261754.25997.marcin@juszkiewicz.com.pl>
-	<1267204061.18176.561.camel@trini-m4400>
-	<20100226184854.GA15391@denix.org>
+Date: Fri, 26 Feb 2010 20:08:04 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.3.4; x86_64; ;
+	)
+References: <201002261318.46211.marcin@juszkiewicz.com.pl>
+	<1267208548-769-1-git-send-email-Bernhard.Guillon@opensimpad.org>
+In-Reply-To: <1267208548-769-1-git-send-email-Bernhard.Guillon@opensimpad.org>
 MIME-Version: 1.0
-In-Reply-To: <20100226184854.GA15391@denix.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 72.14.220.153
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Message-Id: <201002262008.07926.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Generating slightly different images for different IMAGE_FSTYPES
+Subject: Re: [PATCH] linux: atngw100 - add bridge module to defconfig, bump PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,70 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2010 19:10:40 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 26 Feb 2010 19:12:12 -0000
+X-Groupsio-MsgNum: 17115
+Content-Type: multipart/signed; boundary="nextPart5664093.luFILz6Sab";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-On Fri, Feb 26, 2010 at 01:48:54PM -0500, Denys Dmytriyenko wrote:
-> On Fri, Feb 26, 2010 at 10:07:41AM -0700, Tom Rini wrote:
-> > On Fri, 2010-02-26 at 17:54 +0100, Marcin Juszkiewicz wrote:
-> > > Dnia pi??tek, 26 lutego 2010 o 17:39:16 Martin Jansa napisa??(a):
-> > > 
-> > > > We're slowly stripping packages not really needed, but it would be
-> > > > nice to remove whole /boot with kernel-image.
-> > > 
-> > > > Is there better way to solve it or should we try harder to save space
-> > > >  somewhere else?
-> > > 
-> > > Learn about ROOTFS_POSTPROCESS_COMMAND variable present in 
-> > > classes/rootfs_*.bbclass files. You can use it to launch your function after 
-> > > rootfs is populated.
-> > > 
-> > > So for example your shr-lite-image has drop_kernel_from_boot function in which 
-> > > you check "MACHINE==om-gta01" and if it is then "rm -rf /boot/uImage". After 
-> > > your function all normal ext2/ubifs/jffs2/tarball images will be created 
-> > > without kernel in them.
-> > 
-> > Or (as there's a number of ways to do this):
-> > PACKAGE_REMOVE = "kernel-image-*"
-> > ROOTFS_POSTPROCESS_COMMAND_om-gta01 += "opkg-cl ${IPKG_ARGS}
-> > -force-depends \
-> >                                 remove ${PACKAGE_REMOVE};"
-> 
-> This worked for me:
-> 
-> RDEPENDS_kernel-base = ""
-> 
-> 
-> As kernel.bbclass suggests the following:
-> 
-> # Allow machines to override this dependency if kernel image files are
-> # not wanted in images as standard
-> RDEPENDS_kernel-base ?= "kernel-image"
+--nextPart5664093.luFILz6Sab
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-That's also for ALL fstypes of that image.
+Dnia pi=C4=85tek, 26 lutego 2010 o 19:22:28 Bernhard.Guillon@opensimpad.org=
+=20
+napisa=C5=82(a):
+> From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
+>=20
+>=20
+> Signed-off-by: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
 
-> > > > Problem is that when we're booting on gta01, than /boot/uImage is used
-> > > > so it should be installed in .tar.gz image.
+Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 
-ahh I'm missing "booting from uSD on gta01".
+Pushed.
 
-So once more and hopefully better:
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-so with rootfs in NAND, kernel from different NAND partition is used
-(and is ignored in /boot on its jffs2/ubi/ubifs rootfs).
+--nextPart5664093.luFILz6Sab
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
-with rootfs on some uSD partition, then kernel is used from /boot/uImage
-on the same partition
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-User can choose which rootfs is booting with every reboot and I don't
-want to force every user to modify/reflash bootloader.
+iEYEABECAAYFAkuIHBQACgkQeQ6MlGH/2qtIzwCcC98+oSgjG8FC+nBSKTyBHFgF
+npYAnjOij/+TJqWEnVlH5OD1NMv7LEca
+=u6OT
+-----END PGP SIGNATURE-----
 
-Regards,
-
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
-
-
+--nextPart5664093.luFILz6Sab--
