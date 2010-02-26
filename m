@@ -1,31 +1,32 @@
-Received: from mail-pz0-f194.google.com ([209.85.222.194])
+Received: from asmtpout029.mac.com ([17.148.16.104])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msundius@sundius.com>) id 1Nl6jt-0000q1-0k
+	(envelope-from <elvis.dowson@mac.com>) id 1Nl6p6-0005Qn-5N
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Feb 2010 21:24:45 +0100
-Received: by pzk32 with SMTP id 32so335189pzk.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2010 12:21:56 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.142.59.6 with SMTP id h6mr478622wfa.330.1267215716788; Fri, 26 
-	Feb 2010 12:21:56 -0800 (PST)
-In-Reply-To: <hm93de$tnt$1@dough.gmane.org>
-References: <1266951776.18176.47.camel@trini-m4400>
-	<4B87EC32.6030807@mwester.net> <hm93de$tnt$1@dough.gmane.org>
-Date: Fri, 26 Feb 2010 12:21:56 -0800
-Message-ID: <18e217241002261221u5f43eaebn19a52e6b86a22c00@mail.gmail.com>
-From: C Michael Sundius <msundius@sundius.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.222.194
-X-SA-Exim-Mail-From: msundius@sundius.com
+	Fri, 26 Feb 2010 21:30:09 +0100
+MIME-version: 1.0
+Received: from [87.201.169.61] by asmtp029.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0KYG00H4WRDARZ80@asmtp029.mac.com> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	26 Feb 2010 11:27:17 -0800 (PST)
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
+	adjust=0
+	reason=mlx engine=5.0.0-0908210000 definitions=main-1002260119
+From: Elvis Dowson <elvis.dowson@mac.com>
+Date: Fri, 26 Feb 2010 23:27:03 +0400
+Message-id: <1F44AB42-C908-4F2C-B4DB-689EC72B79BC@mac.com>
+To: OpenEmbedded Developer <openembedded-devel@lists.openembedded.org>
+X-Mailer: Apple Mail (2.1077)
+X-SA-Exim-Connect-IP: 17.148.16.104
+X-SA-Exim-Mail-From: elvis.dowson@mac.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=HTML_MESSAGE autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.0 required=5.0 tests=RCVD_IN_DNSWL_LOW,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] Fix busybox SUID support
+Subject: OpenGL v1.3 recipe for TI OMAP 3503 gumstix Overo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,40 +40,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2010 20:24:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 26 Feb 2010 20:30:09 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=us-ascii
 
-On Fri, Feb 26, 2010 at 10:20 AM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
+Hi,
+        Would anyone happen to know which OE recipe would allow me to include the classic OpenGL v1.3 library? I just want a software only OpenGL rendering context. 
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 26-02-10 16:43, Mike Westerhof wrote:
-> > Tom Rini wrote:
-> >> I was about to just push this and I noticed that a number of
-> >> distributions (SlugOS, Angstrom, Kaelios, micro) currently set
-> >> FEATURE_SUID=y, but it's not actually install SUID.  And since I recall
-> >> some way-back-when's of "busybox SUID is dangerous / crap!", I thought
-> >> it best to post the patch first and let folks speak up / ask me to drop
-> >> FEATURE_SUID=y when I do this.  So, here's the patch:
-> >
-> > In the case of SlugOS, this was deliberate -- the thinking was that we
-> > would let the user decide if they wanted to run busybox SUID after
-> > installation.  In retrospect, that actually led to more problems than
-> > good, so this change gets an ACK from me (albeit late - sorry for the
-> > delay!)
->
-> The same logic was applied to angstrom "let users sort it out", but I
-> think this patch is a better way to go.
->
->
-just to give you a heads up, we're currently working on a patch to busybox
-(and well have an OE recipe for it too) which will allow us to currently
-create two busybox executables: busybox-suid and busybox-nsuid. this way we
-can have the best of both worlds. maintain suid for programs that really
-require it while keeping the likes of ls and cat safe for the masses...
+Best regards,
 
-once its through our internal review, we'll send it out.
+Elvis
 
-mike
 
