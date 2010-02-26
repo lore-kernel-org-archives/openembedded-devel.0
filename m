@@ -1,50 +1,51 @@
-Received: from fg-out-1718.google.com ([72.14.220.159])
+Received: from fg-out-1718.google.com ([72.14.220.153])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Nl5WO-0002AJ-NN
+	(envelope-from <martin.jansa@gmail.com>) id 1Nl5aC-00063V-IW
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Feb 2010 20:06:49 +0100
-Received: by fg-out-1718.google.com with SMTP id e21so85283fga.6
+	Fri, 26 Feb 2010 20:10:40 +0100
+Received: by fg-out-1718.google.com with SMTP id e21so86382fga.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2010 11:03:59 -0800 (PST)
+	Fri, 26 Feb 2010 11:07:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=KakkLBGU2tOQY1MjQwJlOjgXKtnrANEGfJ2fL111plU=;
-	b=jTdc36wzMiS9/sMqJL+nabFaCY5lf8Ot1UfkmX/VHbhWE27p9+uN6wKMBzOfpAhwuL
-	lXgurZgPyoU7SK3adytVJoklT/c1dGsGRkkc3h2718gdVvWgigVZ2p+mYLIk8EMVEc4s
-	PlZmMVqsTvSmYgcmQQIUZLyeeDNJJGn1JtQvM=
+	bh=tGicZlB5a8TEkTy1SsW/Md0ldKnNdGnrUgN1cDtCsq0=;
+	b=tqZEfJWe+PWF4AvrvcFPdbXYXpYAC9Bz3zn8K/1G7U5g2BYwD0c8tBBr1KXiVRrCwD
+	0vHBeRdrXhwspcXzgYcxTKIbvx+HzE7jfZj6zKGr2pSPoVLNs1ZX0aGmlsKYKH1fOTO4
+	H7J1JhMHwKc/513gRAz9uFqrQnuic43n9Hdks=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=eBnXLbO6Thr2hle+06yVrn/0h+nQbX1A/2UcGVqy8hzCJ7pk+rppq8Op/qdSSb0OPd
-	CgCqa9fn3S29wkD4+UNAM7XXPWN72OAIpSBieko0McGKOyU5g58jGpAbJGheoaCcN3+7
-	WUWVWhg1NzZO8K9jWkmAcleVQJbpirUR1pcyU=
-Received: by 10.102.235.24 with SMTP id i24mr615674muh.46.1267211039421;
-	Fri, 26 Feb 2010 11:03:59 -0800 (PST)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id b9sm2065916mug.24.2010.02.26.11.03.56
+	b=NYpSL0mFuaAteWcBtfyyGFW1AXAomcElFNJH6RPP08QSpCpiERmBgzbkGizVnJilfh
+	McP/In0R93pE1+mdilfGtIRBk/j8lsUuyQXjfFCrW2y7WS/Wng+zI8MDshmhqfOiqXN1
+	NoAgDsYQKyOtPyl5aCKjp685Bc1zBLCKgQ3k0=
+Received: by 10.87.58.19 with SMTP id l19mr1650632fgk.43.1267211275315;
+	Fri, 26 Feb 2010 11:07:55 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 15sm355494fxm.12.2010.02.26.11.07.54
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 26 Feb 2010 11:03:58 -0800 (PST)
-Date: Fri, 26 Feb 2010 11:02:26 -0800
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 26 Feb 2010 11:07:54 -0800 (PST)
+Date: Fri, 26 Feb 2010 20:07:59 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100226190226.GA25079@gmail.com>
-References: <4B74FE59.9050001@dresearch.de>
- <4B7920DA.8000302@dresearch.de>
+Message-ID: <20100226190759.GF3206@jama>
+References: <1267202357-8614-1-git-send-email-Martin.Jansa@gmail.com>
+	<201002261754.25997.marcin@juszkiewicz.com.pl>
+	<1267204061.18176.561.camel@trini-m4400>
+	<20100226184854.GA15391@denix.org>
 MIME-Version: 1.0
-In-Reply-To: <4B7920DA.8000302@dresearch.de>
+In-Reply-To: <20100226184854.GA15391@denix.org>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 72.14.220.159
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 72.14.220.153
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Miss patches in patch queue
+Subject: Re: Generating slightly different images for different IMAGE_FSTYPES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,30 +59,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2010 19:06:49 -0000
+X-List-Received-Date: Fri, 26 Feb 2010 19:10:40 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (15/02/10 11:24), Steffen Sledz wrote:
-> Steffen Sledz wrote:
-> > As mentioned in thread
-> > <http://thread.gmane.org/gmane.comp.handhelds.openembedded/29964> i
-> > miss all the patches i sent according to this thread in the patch
-> > queue.  :(
+On Fri, Feb 26, 2010 at 01:48:54PM -0500, Denys Dmytriyenko wrote:
+> On Fri, Feb 26, 2010 at 10:07:41AM -0700, Tom Rini wrote:
+> > On Fri, 2010-02-26 at 17:54 +0100, Marcin Juszkiewicz wrote:
+> > > Dnia pi??tek, 26 lutego 2010 o 17:39:16 Martin Jansa napisa??(a):
+> > > 
+> > > > We're slowly stripping packages not really needed, but it would be
+> > > > nice to remove whole /boot with kernel-image.
+> > > 
+> > > > Is there better way to solve it or should we try harder to save space
+> > > >  somewhere else?
+> > > 
+> > > Learn about ROOTFS_POSTPROCESS_COMMAND variable present in 
+> > > classes/rootfs_*.bbclass files. You can use it to launch your function after 
+> > > rootfs is populated.
+> > > 
+> > > So for example your shr-lite-image has drop_kernel_from_boot function in which 
+> > > you check "MACHINE==om-gta01" and if it is then "rm -rf /boot/uImage". After 
+> > > your function all normal ext2/ubifs/jffs2/tarball images will be created 
+> > > without kernel in them.
 > > 
-> > Is this a mistake of mine or is there a patchwork problem?
+> > Or (as there's a number of ways to do this):
+> > PACKAGE_REMOVE = "kernel-image-*"
+> > ROOTFS_POSTPROCESS_COMMAND_om-gta01 += "opkg-cl ${IPKG_ARGS}
+> > -force-depends \
+> >                                 remove ${PACKAGE_REMOVE};"
 > 
-> Ping
+> This worked for me:
+> 
+> RDEPENDS_kernel-base = ""
+> 
+> 
+> As kernel.bbclass suggests the following:
+> 
+> # Allow machines to override this dependency if kernel image files are
+> # not wanted in images as standard
+> RDEPENDS_kernel-base ?= "kernel-image"
 
-Strange. If they got applied then you may not see them in the list
-otherwise patchwork might have gone AWOL when you sent them. 
+That's also for ALL fstypes of that image.
 
--Khem
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> > > > Problem is that when we're booting on gta01, than /boot/uImage is used
+> > > > so it should be installed in .tar.gz image.
+
+ahh I'm missing "booting from uSD on gta01".
+
+So once more and hopefully better:
+
+so with rootfs in NAND, kernel from different NAND partition is used
+(and is ignored in /boot on its jffs2/ubi/ubifs rootfs).
+
+with rootfs on some uSD partition, then kernel is used from /boot/uImage
+on the same partition
+
+User can choose which rootfs is booting with every reboot and I don't
+want to force every user to modify/reflash bootloader.
+
+Regards,
+
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
