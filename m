@@ -1,29 +1,40 @@
-Received: from dd20204.kasserver.com ([85.13.140.93])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1Nl4y4-000421-ON
+	(envelope-from <Tom_Rini@mentor.com>) id 1Nl5Es-0005NQ-4F
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Feb 2010 19:31:17 +0100
-Received: from [192.168.1.141] (95-90-75-53-dynip.superkabel.de [95.90.75.53])
-	by dd20204.kasserver.com (Postfix) with ESMTP id E8CC2184A3AF2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2010 19:28:31 +0100 (CET)
-Message-ID: <4B8812CC.9030001@opensimpad.org>
-Date: Fri, 26 Feb 2010 19:28:28 +0100
-From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Fri, 26 Feb 2010 19:48:42 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1Nl5C9-0007Ji-JZ from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Feb 2010 10:45:49 -0800
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Fri, 26 Feb 2010 10:45:49 -0800
+Received: from 172.30.80.81 ([172.30.80.81]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Fri, 26 Feb 2010 18:45:47 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	26 Feb 2010 11:45:44 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1267186167-28814-1-git-send-email-Bernhard.Guillon@opensimpad.org>
-	<201002261318.46211.marcin@juszkiewicz.com.pl>
-In-Reply-To: <201002261318.46211.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 85.13.140.93
-X-SA-Exim-Mail-From: Bernhard.Guillon@opensimpad.org
+In-Reply-To: <hm8ggf$j65$1@dough.gmane.org>
+References: <4B87B283.20009@atmel.com>  <hm8ggf$j65$1@dough.gmane.org>
+Organization: Mentor Graphics Corporation
+Date: Fri, 26 Feb 2010 11:45:44 -0700
+Message-ID: <1267209944.18176.575.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 26 Feb 2010 18:45:49.0148 (UTC)
+	FILETIME=[E9FE01C0:01CAB713]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=0.1 required=5.0 tests=AWL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] linux-2.6.29: atngw100 - add bridge module to	defconfig, bump PR
+Subject: Re: RFC; Building multiple u-boot images for a single board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,26 +48,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2010 18:31:17 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 26 Feb 2010 18:48:42 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Marcin Juszkiewicz wrote:
-> Can you merge all things into recipes/linux/linux/atngw100/defconfig? It was 
-> generated with 2.6.29 kernel and I would like to be able to use this 
-> configuration with 2.6.30-33 kernels as well.
->
->   
-Ok, done :) (sent patch the list)
+On Fri, 2010-02-26 at 13:57 +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> On 26-02-10 12:37, Ulf Samuelsson wrote:
+> > If you want to support multiple boot memories, you have to
+> > have multiple boards in the conf/machine directory
+> >=20
+> > I currently testing a change to at91bootstrap, where a defconfig
+> > is not provided by openembedded.
+> > Instead you provide a list of defconfig's in your machine description:
+> >=20
+> > I.E: in conf/machien/at91sam9g45ek.conf you have:
+> >=20
+> > AT91BOOTSTRAP_BOARD =3D "at91sam9g45df at91sam9g45ek at91sam9g45nf"
+> >=20
+> > when at91bootstrap is built it will loop through all the boards.
+> > and build three versions.
+> >=20
+> > I think it would make sense to do the same for u-boot,
+> > so that you can build u-boot for several configurations.
+>=20
+> Not about u-boot, but slightly related:
+>=20
+> I need something similar for uImages due to hardware limitations
+> (daughtercards requiring conflicting pinmux) and I have created this for
+> kernel builds:
+>=20
+> http://dominion.thruhere.net/git/cgit.cgi/openembedded/tree/recipes/linux=
+/multi-kernel.inc?h=3Dti/staging
+>=20
+> It's working nicely for my usecase (validate hardware configs with
+> multiple kernels, validate software with only one kernel).
 
-> I cannot test this on device now.
->
->   
+That indeed looks useful.  Any chance it'll go in soon?  Or what's left
+to cleanup before it can?  Aside from some shellfile for pstaging that
+is.
 
-I tested it on my device. It will hopefully get an IDS soon.
-
-Best regards
-Bernhard Guillon
-
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
