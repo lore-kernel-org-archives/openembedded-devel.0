@@ -1,49 +1,29 @@
-Received: from mail-fx0-f220.google.com ([209.85.220.220])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Nl6GU-0007h1-T9
+	(envelope-from <holger+oe@freyther.de>) id 1Nl6PD-00082O-SX
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Feb 2010 20:54:27 +0100
-Received: by fxm20 with SMTP id 20so449287fxm.12
+	Fri, 26 Feb 2010 21:03:26 +0100
+Received: from tamarin.localnet (unknown [92.116.223.162])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id DB09E1B10C02
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2010 11:51:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=pCLKGucVZt9K0EdzDZ2+FXf+LijMXomA21BxVkMyZFw=;
-	b=do7q595ejPvOc4QDhAi7790Cs2nxTu//sHylBFmhpSmwZqXgtB/CzEgBsEsNa/21rR
-	2TH89iKeRYWaHQ8Ds25JjB3ZXSJp0Dtzp4wGIwYTrMT49+iFxJ2t6HpCZK0OH+J5yD/4
-	eXeuYbdeRTZGUL+OgzmYXczTlJvxtlthjxJhw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=KntD2SVZehop1xMw/dVuBIQOsw4woT9N3YR12y1ZXqfJ0frAVO19LnYkeFSNGb/d/6
-	FS+LVmNN5ltZix0DeO1dhRFvhsqdTVTGJskvLjsra80hW1y+UNuIiO7MCJL+vwA22OCv
-	rVweFSTI3a61Wj7xyAnCv5XVpEa+H3QiKriJQ=
-Received: by 10.223.15.133 with SMTP id k5mr1099113faa.39.1267213892877;
-	Fri, 26 Feb 2010 11:51:32 -0800 (PST)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id 15sm388687fxm.12.2010.02.26.11.51.30
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 26 Feb 2010 11:51:31 -0800 (PST)
-Date: Fri, 26 Feb 2010 11:50:02 -0800
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 26 Feb 2010 20:02:15 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100226195002.GC25079@gmail.com>
-References: <1266176499.12424.6.camel@ed-hp-laptop>
+Date: Fri, 26 Feb 2010 21:00:19 +0100
+User-Agent: KMail/1.13.0 (Linux/2.6.33-rc8; KDE/4.4.0; i686; ; )
+References: <201001230827.49805.holger+oe@freyther.de>
+In-Reply-To: <201001230827.49805.holger+oe@freyther.de>
 MIME-Version: 1.0
-In-Reply-To: <1266176499.12424.6.camel@ed-hp-laptop>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.220
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Message-Id: <201002262100.19410.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
+X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: shared-mime-info-native-0.51 do_compile failure
+Subject: Re: OpenEmbedded and known security issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,39 +37,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2010 19:54:27 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 26 Feb 2010 20:03:26 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On (14/02/10 11:41), ed wrote:
-> Trying to build image for mini2440 and get the following error.
- ==============================
-> Says it has undefined gzopen64
-> But gzopen64 is apparently there.
-> ed ~/mini2440/OE/build/tmp/staging/i686-linux/usr/lib:$: strings
-> libxml2.so |grep gzopen64
-> gzopen64
-> ed ~/mini2440/OE/build/tmp/staging/i686-linux/usr/lib:$: objdump -T
-> libxml2.so |grep gzopen64
-> 00000000      DF *UND*	00000000              gzopen64
-> 
-> 
-> Any ideas?  
+On Saturday 23 January 2010 08:27:49 Holger Hans Peter Freyther wrote:
 
-It must be using libxml from host and libz from your native staging. 
-So either use both from host or both from staging. Mixing can cause this
-problem.
+> 2.) The second mode of the script is to compare installed versions with the
+> list of known vulnerabilities...
+> 
+> 
+> Now here comes the idea... Hack OE or bitbake to compare the PN to the PN
+> of the database and the PV to the PV of known vulnerabilities.. and then
+> mention a problem while parsing and then quit.
 
-Do you have any of zlib-native or libxml2-native in your local.conf as
-ASSUME_PROVIDED ?
+Hi,
+I will try to hack something tomorrow on my flight to iceland... So we do have
 
-> 
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+1.) auditfile.tbz from FreeBSD (of course this will not help us with busg in 
+udev and linux specific things)
+2.) I use the output of bitbake -s
+3.) I create a file that claims when a FreeBSD issue was fixed (the PR we did)
+
+
+i try to merge that all with python and spit out a list of vulnerable software 
+in our tree...
+
+
+z.
 
 
