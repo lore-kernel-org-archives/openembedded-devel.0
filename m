@@ -1,30 +1,51 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from mail-fx0-f220.google.com ([209.85.220.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1Nl8vx-0004a8-Kr
+	(envelope-from <rep.dot.nop@gmail.com>) id 1Nl9DT-0000Zk-N5
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Feb 2010 23:45:22 +0100
-Received: from 88-110-39-162.dynamic.dsl.as9105.com ([88.110.39.162]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1Nl8tE-0005aL-S2
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Feb 2010 22:42:33 +0000
-From: Phil Blundell <philb@gnu.org>
+	Sat, 27 Feb 2010 00:03:28 +0100
+Received: by fxm20 with SMTP id 20so600492fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Feb 2010 15:00:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=nv3fc90EyOi5Dji0wioZLlond1C3EW71rDCP03LezoM=;
+	b=TIPfa43SaToPcTECoJOEv0572TmRJLimnGr6IMWW7aW64uwqJ5FwMEjNPqc44B51NO
+	BplORZA3C0wIXx6FvgzFazHl+Zmhe+oQJWAsREqMihzUF4WKXG7qk+mpCBDmmW4BBWjU
+	K8uHWzehBwL4zgJ0RckZRhr44IBO8PKmi9QL0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=UxH8n/xxkIEgo6MHWuu/ncbs55drv4japwtKl9FgoT0IewlVhFtF0yJ/5Fi9V0YO6P
+	lCQxYbUmHz67klN096Gge16yk4WFtczV5tYc6KKNdOLShyvKtdn8YWISSggj+UMQOgpq
+	RFNrYOBsyV1LUW+QoV2fKqt166W0tYN0wQJRQ=
+Received: by 10.223.164.165 with SMTP id e37mr1349846fay.43.1267225240163;
+	Fri, 26 Feb 2010 15:00:40 -0800 (PST)
+Received: from s42.loc ([84.119.103.202])
+	by mx.google.com with ESMTPS id 12sm1118068fks.50.2010.02.26.15.00.39
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 26 Feb 2010 15:00:39 -0800 (PST)
+Received: from cow by s42.loc with local (Exim 4.71)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1Nl9Gd-0000RO-9g; Sat, 27 Feb 2010 00:06:43 +0100
+Date: Sat, 27 Feb 2010 00:06:43 +0100
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100226222650.GG30265@mx.loc>
+Message-ID: <20100226230643.GH30265@mx.loc>
 References: <1266951776.18176.47.camel@trini-m4400>
 	<4B87EC32.6030807@mwester.net> <hm93de$tnt$1@dough.gmane.org>
 	<18e217241002261221u5f43eaebn19a52e6b86a22c00@mail.gmail.com>
 	<20100226222650.GG30265@mx.loc>
-Date: Fri, 26 Feb 2010 22:42:30 +0000
-Message-ID: <1267224150.5437.435.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+	<1267224150.5437.435.camel@lenovo.internal.reciva.com>
+MIME-Version: 1.0
+In-Reply-To: <1267224150.5437.435.camel@lenovo.internal.reciva.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.220
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.7 required=5.0 tests=SPF_SOFTFAIL autolearn=no
+X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -42,55 +63,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2010 22:45:22 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 26 Feb 2010 23:03:28 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Fri, 2010-02-26 at 23:26 +0100, Bernhard Reutner-Fischer wrote:
-> SUID_DROP applets do just that before the individual applet_main is called,
-> i.e. drops privs. But whatever..
-> If you really think you want to build the thing twice then i'd try
-> FEATURE_SHARED_BUSYBOX, fyi.
-> $ size 0_lib/{busybox,libbusybox.so.1.17.0.git}
->    text	   data	    bss	    dec	    hex	filename
->    1379	    520	     16	   1915	    77b	0_lib/busybox
->  339569	   6705	   8552	 354826	  56a0a	0_lib/libbusybox.so.1.17.0.git
-> 
-> duplicating 2k is better than duplicating all the innocent rest, but maybe
-> that's just me..
+On Fri, Feb 26, 2010 at 10:42:30PM +0000, Phil Blundell wrote:
 
-Whether this is a good idea or not rather depends on what you're trying
-to protect against.  The threat scenarios for a setuid busybox basically
-fall into two categories:
+>If you're primarily worried about case (a) then building two copies of
+>the frontend which share a common libbusybox, one setuid and one not,
+>probably is a reasonable thing to do.  However, as you say, busybox does
+>already have a fairly robust mechanism in place for dropping privs when
+>they are not wanted by a particular applet and hence the threat from
+>this side seems to be quite low anyway.
 
-a) user invokes an applet which shouldn't be setuid, but busybox fails
-(for whatever reason) to drop its privs and allows the applet to run in
-root context
+Yes, and that's what i've read into Michaels mail that this was what he
+was primarily concerned about, but rereading him he didn't actually say
+that. My apologies.
+>
+>If you are primarily worried about case (b) then the easiest way to
+>mitigate the threat is to reduce the amount of code which is linked in
 
-b) user invokes an applet which is intended to be setuid, busybox
-correctly retains the elevated privs while running it, but there is some
-bug or vulnerability in the code which causes unwanted results
-
-If you're primarily worried about case (a) then building two copies of
-the frontend which share a common libbusybox, one setuid and one not,
-probably is a reasonable thing to do.  However, as you say, busybox does
-already have a fairly robust mechanism in place for dropping privs when
-they are not wanted by a particular applet and hence the threat from
-this side seems to be quite low anyway.
-
-If you are primarily worried about case (b) then the easiest way to
-mitigate the threat is to reduce the amount of code which is linked in
-to the setuid binary (either statically or dynamically) and hence the
-amount of code that you need to audit for security hazards.  In that
-situation, linking with a shared libbusybox would not help, since you
-still have essentially the whole of busybox to worry about and you might
-as well just stick with a single large binary.  Instead you would be
-better off making a minimal, standalone busybox binary which contained
-the bare minimum of code that was required to fulfil its setuid
-functions.
-
-p.
-
-
+indeed
 
 
