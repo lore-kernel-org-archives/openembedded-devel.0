@@ -1,53 +1,44 @@
-Received: from mail-fx0-f220.google.com ([209.85.220.220])
+Received: from mail-bw0-f213.google.com ([209.85.218.213])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Nl45t-00032f-Pk
+	(envelope-from <michael.lippautz@gmail.com>) id 1Nl4Gf-0003Si-PQ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Feb 2010 18:35:19 +0100
-Received: by fxm20 with SMTP id 20so315133fxm.12
+	Fri, 26 Feb 2010 18:46:30 +0100
+Received: by bwz5 with SMTP id 5so282991bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2010 09:32:30 -0800 (PST)
+	Fri, 26 Feb 2010 09:43:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=oBPufYkSNp1Y9iINVMocF3yCmjfY3UavYvFLb54uDfg=;
-	b=JJoioEvc+oND20zb3vCaPmlTURsI2R5VTVocIU+fY453RWXyjFPCFQCB1thSOmBvaw
-	Cf7sL+tdEw/ikcjAa7o01clneSYPael60pF/Dp79CtRx77g8zeaJv9nobVB4M2Vf3QXt
-	t314gD8exsn9cVesRVyQ+048EIv/GmNmpmvnc=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=vSDqfvB0/3sySvUhEchnYDmjsg/c3gawcfVz4S1v/Hw=;
+	b=mU7/pyoHfJCaBIbX1W/hkSYtCLQYIuFNvgE/gw004Uny41LDzE5q/OsLcRUx56sqtj
+	g9VHX+5+C/LCyfZiVyxmIoH5lWO+B/nXJx1nHPf4nQYCz5zrvRtqQh+E/MU5NvyA7pJT
+	xdMz44EuVo3WnjT2W4M7Qky0+5x8acy1WoXxo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=mpc3UAmdQNSgdZisSTIe3Xc4CexTiSiwkoWzriC25SoVuC7GuO38Sws9PGNFSPapYw
-	GKAjZfZ8bmhqInLGccgK35FD/Ra8cgJZJsXiuTHleFxLYQWSKF2UsS0/6U0b/La0o3IM
-	tCtlUxEU5YjlDnNeRIL8WFE2lRsaJZfhvknA8=
-Received: by 10.87.73.15 with SMTP id a15mr1418422fgl.50.1267205550720;
-	Fri, 26 Feb 2010 09:32:30 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 15sm278913fxm.12.2010.02.26.09.32.29
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=UM9oZfWsNfo3Fgvzs7EBLIZo8i5pPUbAYP44bjdj+ysXbMZA0Ap+Nl9EsGbjRozqH3
+	FJ0lyKApzJ6NtlGEvv9fDrWu+Ub3JVEiRgt4W32HuBEV6/UANhpy9JkttSLc0qicD4wD
+	Ar1Plo1bxjJ/XZTL/49XtBRKwK9anprejhnNo=
+Received: by 10.204.38.71 with SMTP id a7mr498537bke.159.1267206218549;
+	Fri, 26 Feb 2010 09:43:38 -0800 (PST)
+Received: from localhost.localdomain
+	(85-127-150-205.dynamic.xdsl-line.inode.at [85.127.150.205])
+	by mx.google.com with ESMTPS id 13sm208116bwz.11.2010.02.26.09.43.37
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 26 Feb 2010 09:32:29 -0800 (PST)
-Date: Fri, 26 Feb 2010 18:32:34 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 26 Feb 2010 09:43:38 -0800 (PST)
+From: Michael Lippautz <michael.lippautz@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100226173234.GD3206@jama>
-References: <1267202357-8614-1-git-send-email-Martin.Jansa@gmail.com>
-	<201002261754.25997.marcin@juszkiewicz.com.pl>
-	<1267204061.18176.561.camel@trini-m4400>
-	<20100226171447.GC3206@jama>
-	<1267204808.18176.573.camel@trini-m4400>
-MIME-Version: 1.0
-In-Reply-To: <1267204808.18176.573.camel@trini-m4400>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.220
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Date: Fri, 26 Feb 2010 18:44:02 +0100
+Message-Id: <1267206242-705-1-git-send-email-michael.lippautz@gmail.com>
+X-Mailer: git-send-email 1.6.4.4
+X-SA-Exim-Connect-IP: 209.85.218.213
+X-SA-Exim-Mail-From: michael.lippautz@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Generating slightly different images for different IMAGE_FSTYPES
+Subject: [PATCH] gpsd-device-config: Adds new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,74 +52,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2010 17:35:19 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 26 Feb 2010 17:46:30 -0000
 
-On Fri, Feb 26, 2010 at 10:20:08AM -0700, Tom Rini wrote:
-> On Fri, 2010-02-26 at 18:14 +0100, Martin Jansa wrote:
-> > On Fri, Feb 26, 2010 at 10:07:41AM -0700, Tom Rini wrote:
-> > > On Fri, 2010-02-26 at 17:54 +0100, Marcin Juszkiewicz wrote:
-> > > > Dnia piątek, 26 lutego 2010 o 17:39:16 Martin Jansa napisał(a):
-> > > > 
-> > > > > We're slowly stripping packages not really needed, but it would be
-> > > > > nice to remove whole /boot with kernel-image.
-> > > > 
-> > > > > Is there better way to solve it or should we try harder to save space
-> > > > >  somewhere else?
-> > > > 
-> > > > Learn about ROOTFS_POSTPROCESS_COMMAND variable present in 
-> > > > classes/rootfs_*.bbclass files. You can use it to launch your function after 
-> > > > rootfs is populated.
-> > > > 
-> > > > So for example your shr-lite-image has drop_kernel_from_boot function in which 
-> > > > you check "MACHINE==om-gta01" and if it is then "rm -rf /boot/uImage". After 
-> > > > your function all normal ext2/ubifs/jffs2/tarball images will be created 
-> > > > without kernel in them.
-> > > 
-> > > Or (as there's a number of ways to do this):
-> > > PACKAGE_REMOVE = "kernel-image-*"
-> > > ROOTFS_POSTPROCESS_COMMAND_om-gta01 += "opkg-cl ${IPKG_ARGS}
-> > > -force-depends \
-> > >                                 remove ${PACKAGE_REMOVE};"
-> > 
-> > This removes it from ALL FSTYPEs... not just jffs2/ubi/ubifs
-> 
-> I would strongly argue (especially after my last email) that you either
-> always want a kernel in your rootfs, because it's actually booted from,
-> or you never do and it's just wasting space (and just not critically so
-> on other devices).
+* Reintegrates machine specific gps configuration using overrides
+  (formerly specified in the main gpsd recipe)
+---
+ recipes/gpsd/gpsd-device-config_0.bb |   31 +++++++++++++++++++++++++++++++
+ 1 files changed, 31 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/gpsd/gpsd-device-config_0.bb
 
-OK so more info:
-
-Qi (alternative bootloader) usually used on om-gta02 (because it safer
-to reflash it there with u-boot still as fail-safe in NOR)
-looks for kernel on first partitions on uSD in /boot, then it loads
-kernel from specified (different than rootfs) partition in nand and pass
-right rootfs params. Qi doesn't read jffs2 (because nobody really needed
-it so much to implement it).
-
-u-boot env shipped with device by default looks for kernel in nand and
-in menu is option to load kernel from first small fat32 partition on uSD
-and rootfs in second partition.
-
-I know that I can change flash layout/u-boot env (and I would do it on
-my om-gta01 if I had one :)), but I'm trying to make smaller images
-without forcing gta users to mess with their bootloader/flash layout.
-
-As I don't even have gta01 (gta02 has bigger flash), than I can say that 
-I'll wait for someone else to do it, or someone can sort out which icons 
-are not realy needed in image and remove them instead of unused kernel
-(which is as useless as not used icons but harder to remove).
-
-Kind regards,
-
-I really appreciate your comments/advise (if it looks different).
-
+diff --git a/recipes/gpsd/gpsd-device-config_0.bb b/recipes/gpsd/gpsd-device-config_0.bb
+new file mode 100644
+index 0000000..1691c2e
+--- /dev/null
++++ b/recipes/gpsd/gpsd-device-config_0.bb
+@@ -0,0 +1,31 @@
++DESCRIPTION = "Configuration for machine specific gps devices"
++SECTION = "console/network"
++PRIORITY = "optional"
++LICENSE = "GPL"
++RDEPENDS_${PN} = "gpsd"
++PR = "r0"
++
++SRC_URI_append_om-gta01 = " \
++                        file://restart_gllin.sh \
++                        file://gpsd-default \
++                        file://gps-hardware \
++"
++
++do_install_append_om-gta01() {
++    install -d ${D}${sysconfdir}/apm/resume.d
++    install -m 755 ${WORKDIR}/om-gta01/restart_gllin.sh ${D}/${sysconfdir}/apm/resume.d
++    install -d ${D}${sysconfdir}/init.d
++    install -m 755 ${WORKDIR}/om-gta01/gps-hardware ${D}${sysconfdir}/init.d
++    install -d ${D}/${sysconfdir}/default
++    install -m 0644 ${WORKDIR}/om-gta01/gpsd-default ${D}/${sysconfdir}/default/gpsd.default
++}
++
++pkg_postinst_append_om-gta01() {
++    update-alternatives --install ${sysconfdir}/default/gpsd gpsd-defaults ${sysconfdir}/default/gpsd.default 50
++}
++
++pkg_postrm_append_om-gta01() {	
++    update-alternatives --remove gpsd-defaults ${sysconfdir}/default/gpsd.default	
++}
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
 -- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+1.6.4.4
+
 
 
