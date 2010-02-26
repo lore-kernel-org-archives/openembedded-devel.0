@@ -1,34 +1,50 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from fg-out-1718.google.com ([72.14.220.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Nl5Lv-00086V-8R
+	(envelope-from <raj.khem@gmail.com>) id 1Nl5WO-0002AJ-NN
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Feb 2010 19:56:00 +0100
-Received: from gandalf.denix.org ([unknown] [71.251.51.225])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0KYG0062QPSHZR8H@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	26 Feb 2010 12:53:06 -0600 (CST)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 769F014AF60; Fri,
-	26 Feb 2010 13:53:05 -0500 (EST)
-Date: Fri, 26 Feb 2010 13:53:05 -0500
-From: Denys Dmytriyenko <denis@denix.org>
+	Fri, 26 Feb 2010 20:06:49 +0100
+Received: by fg-out-1718.google.com with SMTP id e21so85283fga.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Feb 2010 11:03:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=KakkLBGU2tOQY1MjQwJlOjgXKtnrANEGfJ2fL111plU=;
+	b=jTdc36wzMiS9/sMqJL+nabFaCY5lf8Ot1UfkmX/VHbhWE27p9+uN6wKMBzOfpAhwuL
+	lXgurZgPyoU7SK3adytVJoklT/c1dGsGRkkc3h2718gdVvWgigVZ2p+mYLIk8EMVEc4s
+	PlZmMVqsTvSmYgcmQQIUZLyeeDNJJGn1JtQvM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=eBnXLbO6Thr2hle+06yVrn/0h+nQbX1A/2UcGVqy8hzCJ7pk+rppq8Op/qdSSb0OPd
+	CgCqa9fn3S29wkD4+UNAM7XXPWN72OAIpSBieko0McGKOyU5g58jGpAbJGheoaCcN3+7
+	WUWVWhg1NzZO8K9jWkmAcleVQJbpirUR1pcyU=
+Received: by 10.102.235.24 with SMTP id i24mr615674muh.46.1267211039421;
+	Fri, 26 Feb 2010 11:03:59 -0800 (PST)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id b9sm2065916mug.24.2010.02.26.11.03.56
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 26 Feb 2010 11:03:58 -0800 (PST)
+Date: Fri, 26 Feb 2010 11:02:26 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100226185305.GB15391@denix.org>
-References: <4B87B283.20009@atmel.com> <hm8ggf$j65$1@dough.gmane.org>
-	<1267209944.18176.575.camel@trini-m4400>
-MIME-version: 1.0
-In-reply-to: <1267209944.18176.575.camel@trini-m4400>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.5
-X-SA-Exim-Mail-From: denis@denix.org
+Message-ID: <20100226190226.GA25079@gmail.com>
+References: <4B74FE59.9050001@dresearch.de>
+ <4B7920DA.8000302@dresearch.de>
+MIME-Version: 1.0
+In-Reply-To: <4B7920DA.8000302@dresearch.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 72.14.220.159
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
+X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: RFC; Building multiple u-boot images for a single board
+Subject: Re: Miss patches in patch queue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,55 +58,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2010 18:56:00 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 26 Feb 2010 19:06:49 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Fri, Feb 26, 2010 at 11:45:44AM -0700, Tom Rini wrote:
-> On Fri, 2010-02-26 at 13:57 +0100, Koen Kooi wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
+On (15/02/10 11:24), Steffen Sledz wrote:
+> Steffen Sledz wrote:
+> > As mentioned in thread
+> > <http://thread.gmane.org/gmane.comp.handhelds.openembedded/29964> i
+> > miss all the patches i sent according to this thread in the patch
+> > queue.  :(
 > > 
-> > On 26-02-10 12:37, Ulf Samuelsson wrote:
-> > > If you want to support multiple boot memories, you have to
-> > > have multiple boards in the conf/machine directory
-> > > 
-> > > I currently testing a change to at91bootstrap, where a defconfig
-> > > is not provided by openembedded.
-> > > Instead you provide a list of defconfig's in your machine description:
-> > > 
-> > > I.E: in conf/machien/at91sam9g45ek.conf you have:
-> > > 
-> > > AT91BOOTSTRAP_BOARD = "at91sam9g45df at91sam9g45ek at91sam9g45nf"
-> > > 
-> > > when at91bootstrap is built it will loop through all the boards.
-> > > and build three versions.
-> > > 
-> > > I think it would make sense to do the same for u-boot,
-> > > so that you can build u-boot for several configurations.
-> > 
-> > Not about u-boot, but slightly related:
-> > 
-> > I need something similar for uImages due to hardware limitations
-> > (daughtercards requiring conflicting pinmux) and I have created this for
-> > kernel builds:
-> > 
-> > http://dominion.thruhere.net/git/cgit.cgi/openembedded/tree/recipes/linux/multi-kernel.inc?h=ti/staging
-> > 
-> > It's working nicely for my usecase (validate hardware configs with
-> > multiple kernels, validate software with only one kernel).
+> > Is this a mistake of mine or is there a patchwork problem?
 > 
-> That indeed looks useful.  Any chance it'll go in soon?  Or what's left
-> to cleanup before it can?  Aside from some shellfile for pstaging that
-> is.
+> Ping
 
-It is also being used in Arago. Hope to see it merged to oe-dev soon! :)
+Strange. If they got applied then you may not see them in the list
+otherwise patchwork might have gone AWOL when you sent them. 
 
-I need to seriosly look into package_stagefile_shell, as it breaks my setup 
-with DEPLOY_DIR outside of TMPDIR - there are some wrong assumptions in that 
-function... :(
-
--- 
-Denys
+-Khem
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
