@@ -1,35 +1,37 @@
-Received: from fg-out-1718.google.com ([72.14.220.153])
+Received: from fg-out-1718.google.com ([72.14.220.158])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Nl3GM-00039K-2D
+	(envelope-from <martin.jansa@gmail.com>) id 1Nl3GS-0003Ef-Tv
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Feb 2010 17:42:03 +0100
-Received: by fg-out-1718.google.com with SMTP id e21so41273fga.6
+	Fri, 26 Feb 2010 17:42:11 +0100
+Received: by fg-out-1718.google.com with SMTP id l26so541638fgb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2010 08:39:17 -0800 (PST)
+	Fri, 26 Feb 2010 08:39:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:subject:date
-	:message-id:x-mailer;
-	bh=EyrB73g6+NuPmeyuc4c79W6HFJyQMhA6oyFbBH2EkFU=;
-	b=ub3LypMs2osVZrcRJx3ABGZZxoIJCvL7cJ2SzJ1b3lA7UF3+gvtuUWGO4ld9Vm8KKN
-	DaO2Q9nV/Gng8q2BpLuRnl2iF3DEr9dv+t2D/ngLnjtHKp1rcthyHEFyidHV0QdFu+IS
-	pAR972WE2XnIQ0COonzuUykox8rJQuNz1dCRE=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=GbVTohz/fijBOgrKwo73K3uynC1IgUuXLm2o/5Xz8W8=;
+	b=u4UMUX6CF3babW2FOFEXgyRzM808I0g3KT+UphEapb/Qg36bSn2RBBKAd72frORr+Q
+	Opr4T1znWAxUeAsIZu5iKOgsGdszThIOj4E3DAZdsDxVybG0qdTPE8+Lzc0sOL80Pel1
+	pxqpFxKReay7N8IbZ2BKgtoas2mG1xiuuyLJo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:subject:date:message-id:x-mailer;
-	b=GgCM9NEfp5Lg57jz3GlinZIPn9ORzmEpgtiv/7vYQJw6JcwgmXsvD447AeqCVkDGuD
-	41f4oNBlnogZqhTUhbUvlI0V+gBP8B0ZKu4A1c4IF/jk9vEm3ftSGhCMU7niAMHInRia
-	xUn3fZtOR3Tlro4F9mGOYzcu/mgjmY6AO/Iy0=
-Received: by 10.87.51.9 with SMTP id d9mr1316012fgk.35.1267202356937;
-	Fri, 26 Feb 2010 08:39:16 -0800 (PST)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=s7no2zErcBJilmN31Cf8xb0ITUDjkBMqz12SyYp3VtjyouaGS5G3jdylE/7yeVAuwP
+	s2/YpKeXyq7/+sN19IuBGAOcfrMrDNLv/JueyEjwP99HHIVVkP6zRAU965VBjWKMwKLn
+	NKol/igwhmHd4gLy1t+YO2eeoqwhJl82yIR3s=
+Received: by 10.87.62.28 with SMTP id p28mr1277794fgk.55.1267202361337;
+	Fri, 26 Feb 2010 08:39:21 -0800 (PST)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 13sm234028fxm.14.2010.02.26.08.39.15
+	by mx.google.com with ESMTPS id 16sm236156fxm.7.2010.02.26.08.39.19
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 26 Feb 2010 08:39:15 -0800 (PST)
+	Fri, 26 Feb 2010 08:39:19 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Feb 2010 17:39:16 +0100
-Message-Id: <1267202357-8614-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Fri, 26 Feb 2010 17:39:17 +0100
+Message-Id: <1267202357-8614-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.0
-X-SA-Exim-Connect-IP: 72.14.220.153
+In-Reply-To: <1267202357-8614-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1267202357-8614-1-git-send-email-Martin.Jansa@gmail.com>
+X-SA-Exim-Connect-IP: 72.14.220.158
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -37,7 +39,7 @@ X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Generating slightly different images for different IMAGE_FSTYPES
+Subject: [PATCH] om-gta01: remove /boot directory from jffs2/ubi/ubifs images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,31 +53,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2010 16:42:03 -0000
+X-List-Received-Date: Fri, 26 Feb 2010 16:42:11 -0000
 
-Hi,
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ conf/machine/om-gta01.conf |    5 +++++
+ 1 files changed, 5 insertions(+), 0 deletions(-)
 
-on om-gta01 we had problem that even our minimal image
-shr-lite-image is too big for its 64MB NAND chip
-
-We're slowly stripping packages not really needed, but it would be 
-nice to remove whole /boot with kernel-image.
-
-Problem is that when we're booting on gta01, than /boot/uImage is used so 
-it should be installed in .tar.gz image. But when booting from NAND, then
-kernel is usually in different NAND partition and /boot on rootfs partition
-is useless.
-
-In patch is what I used now to generate images like this, but it's not optimal at all
-1) It copies whole rootfs 3 times if you have all jffs2/ubi/ubifs in FSTYPES, 
-   instead just once for -no-boot version (it's possible ie if we expect certain order 
-   of making FSTYPES or prepare -no-boot always with normal rootfs and don't remove it
-2) task-base still depends on kernel-image and I don't see how to easily remove that 
-   dependency, without defining different image recipe and building it separately. 
-   So with next kernel upgrade user will get new kernel-image which will probably fail
-   to install because of lack of space.
-
-Is there better way to solve it or should we try harder to save space somewhere else?
+diff --git a/conf/machine/om-gta01.conf b/conf/machine/om-gta01.conf
+index ccd2b7a..578e90c 100644
+--- a/conf/machine/om-gta01.conf
++++ b/conf/machine/om-gta01.conf
+@@ -57,6 +57,11 @@ ROOT_FLASH_SIZE = "60"
+ 
+ IMAGE_FSTYPES += "tar.gz jffs2 ubi"
+ 
++# We don't want /boot directory in jffs2/ubi/ubifs images
++IMAGE_CMD_jffs2 = "cp -ra ${IMAGE_ROOTFS} ${IMAGE_ROOTFS}-no-boot && rm -rf ${IMAGE_ROOTFS}-no-boot/boot && mkfs.jffs2 -x lzo --root=${IMAGE_ROOTFS}-no-boot --faketime --output=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.jffs2 ${EXTRA_IMAGECMD} && rm -rf ${IMAGE_ROOTFS}-no-boot"
++IMAGE_CMD_ubi = "cp -ra ${IMAGE_ROOTFS} ${IMAGE_ROOTFS}-no-boot && rm -rf ${IMAGE_ROOTFS}-no-boot/boot && echo \[ubifs\] > ubinize.cfg ; echo mode=ubi >> ubinize.cfg ; echo image=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubifs >> ubinize.cfg ; echo vol_id=0 >> ubinize.cfg ; echo vol_type=dynamic >> ubinize.cfg ; echo vol_name=${UBI_VOLNAME} >> ubinize.cfg ; echo vol_flags=autoresize >> ubinize.cfg;mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubifs ${MKUBIFS_ARGS} && ubinize -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ${UBINIZE_ARGS} ubinize.cfg && rm -rf ${IMAGE_ROOTFS}-no-boot"
++IMAGE_CMD_ubifs = "cp -ra ${IMAGE_ROOTFS} ${IMAGE_ROOTFS}-no-boot && rm -rf ${IMAGE_ROOTFS}-no-boot/boot && mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img ${MKUBIFS_ARGS} && rm -rf ${IMAGE_ROOTFS}-no-boot"
++
+ # extra jffs2 tweaks
+ EXTRA_IMAGECMD_jffs2 = "--little-endian --eraseblock=0x20000 --pagesize=0x800 \
+   --no-cleanmarkers --pad -n ; sumtool --eraseblock=0x20000 --no-cleanmarkers \
+-- 
+1.7.0
 
 
 
