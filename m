@@ -1,42 +1,30 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NkzoH-0000n0-4N for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Feb 2010 14:00:54 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nkzlc-0000aC-0J for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Feb 2010 13:58:04 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2010 13:58:03 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2010 13:58:03 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from p3plsmtpa01-02.prod.phx3.secureserver.net ([72.167.82.82])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1Nl2VD-0004AL-3V
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Feb 2010 16:53:20 +0100
+Received: (qmail 22740 invoked from network); 26 Feb 2010 15:43:51 -0000
+Received: from unknown (209.242.7.187)
+	by p3plsmtpa01-02.prod.phx3.secureserver.net (72.167.82.82) with ESMTP;
+	26 Feb 2010 15:43:51 -0000
+Message-ID: <4B87EC32.6030807@mwester.net>
+Date: Fri, 26 Feb 2010 09:43:46 -0600
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23 Mnenhy/0.7.6.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 26 Feb 2010 13:57:51 +0100
-Message-ID: <hm8ggf$j65$1@dough.gmane.org>
-References: <4B87B283.20009@atmel.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100219 Shredder/3.0.3pre
-In-Reply-To: <4B87B283.20009@atmel.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <1266951776.18176.47.camel@trini-m4400>
+In-Reply-To: <1266951776.18176.47.camel@trini-m4400>
+X-SA-Exim-Connect-IP: 72.167.82.82
+X-SA-Exim-Mail-From: mike@mwester.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_HELO_PASS,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: RFC; Building multiple u-boot images for a single board
+Subject: Re: [PATCH] Fix busybox SUID support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,52 +38,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2010 13:00:54 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 26 Feb 2010 15:53:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Tom Rini wrote:
+> I was about to just push this and I noticed that a number of
+> distributions (SlugOS, Angstrom, Kaelios, micro) currently set
+> FEATURE_SUID=y, but it's not actually install SUID.  And since I recall
+> some way-back-when's of "busybox SUID is dangerous / crap!", I thought
+> it best to post the patch first and let folks speak up / ask me to drop
+> FEATURE_SUID=y when I do this.  So, here's the patch:
 
-On 26-02-10 12:37, Ulf Samuelsson wrote:
-> If you want to support multiple boot memories, you have to
-> have multiple boards in the conf/machine directory
-> 
-> I currently testing a change to at91bootstrap, where a defconfig
-> is not provided by openembedded.
-> Instead you provide a list of defconfig's in your machine description:
-> 
-> I.E: in conf/machien/at91sam9g45ek.conf you have:
-> 
-> AT91BOOTSTRAP_BOARD = "at91sam9g45df at91sam9g45ek at91sam9g45nf"
-> 
-> when at91bootstrap is built it will loop through all the boards.
-> and build three versions.
-> 
-> I think it would make sense to do the same for u-boot,
-> so that you can build u-boot for several configurations.
+In the case of SlugOS, this was deliberate -- the thinking was that we
+would let the user decide if they wanted to run busybox SUID after
+installation.  In retrospect, that actually led to more problems than
+good, so this change gets an ACK from me (albeit late - sorry for the
+delay!)
 
-Not about u-boot, but slightly related:
++1
 
-I need something similar for uImages due to hardware limitations
-(daughtercards requiring conflicting pinmux) and I have created this for
-kernel builds:
-
-http://dominion.thruhere.net/git/cgit.cgi/openembedded/tree/recipes/linux/multi-kernel.inc?h=ti/staging
-
-It's working nicely for my usecase (validate hardware configs with
-multiple kernels, validate software with only one kernel).
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLh8VOMkyGM64RGpERAi62AKCMoAAQyfLYmsU9NfD7+MI7o3m4bwCdHqS6
-Ub+2N46Sd2Q/t+nHlfzjDE8=
-=9/62
------END PGP SIGNATURE-----
-
+-Mike
 
 
