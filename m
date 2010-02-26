@@ -1,43 +1,26 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from dd20204.kasserver.com ([85.13.140.93])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nl4rX-0001F0-Vu for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Feb 2010 19:24:33 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nl4oM-0001ry-F3 for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Feb 2010 19:21:14 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2010 19:21:14 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2010 19:21:14 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <Bernhard.Guillon@opensimpad.org>) id 1Nl4sB-0004Le-6S
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Feb 2010 19:25:15 +0100
+Received: from localhost (95-90-75-53-dynip.superkabel.de [95.90.75.53])
+	by dd20204.kasserver.com (Postfix) with ESMTP id 0079D184A3AF8;
+	Fri, 26 Feb 2010 19:22:25 +0100 (CET)
+From: Bernhard.Guillon@opensimpad.org
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 26 Feb 2010 19:20:30 +0100
-Message-ID: <hm93de$tnt$1@dough.gmane.org>
-References: <1266951776.18176.47.camel@trini-m4400>
-	<4B87EC32.6030807@mwester.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100219 Shredder/3.0.3pre
-In-Reply-To: <4B87EC32.6030807@mwester.net>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Fri, 26 Feb 2010 19:22:28 +0100
+Message-Id: <1267208548-769-1-git-send-email-Bernhard.Guillon@opensimpad.org>
+X-Mailer: git-send-email 1.6.3.3
+In-Reply-To: <201002261318.46211.marcin@juszkiewicz.com.pl>
+References: <201002261318.46211.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 85.13.140.93
+X-SA-Exim-Mail-From: Bernhard.Guillon@opensimpad.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_HELO_PASS,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=0.2 required=5.0 tests=AWL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Fix busybox SUID support
+Subject: [PATCH] linux: atngw100 - add bridge module to defconfig, bump PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,41 +34,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2010 18:24:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 26 Feb 2010 18:25:15 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 26-02-10 16:43, Mike Westerhof wrote:
-> Tom Rini wrote:
->> I was about to just push this and I noticed that a number of
->> distributions (SlugOS, Angstrom, Kaelios, micro) currently set
->> FEATURE_SUID=y, but it's not actually install SUID.  And since I recall
->> some way-back-when's of "busybox SUID is dangerous / crap!", I thought
->> it best to post the patch first and let folks speak up / ask me to drop
->> FEATURE_SUID=y when I do this.  So, here's the patch:
-> 
-> In the case of SlugOS, this was deliberate -- the thinking was that we
-> would let the user decide if they wanted to run busybox SUID after
-> installation.  In retrospect, that actually led to more problems than
-> good, so this change gets an ACK from me (albeit late - sorry for the
-> delay!)
-
-The same logic was applied to angstrom "let users sort it out", but I
-think this patch is a better way to go.
-
-Acked-by: Koen Kooi <koen@openembedded.org>
+From: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
 
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Signed-off-by: Bernhard Guillon <Bernhard.Guillon@opensimpad.org>
+---
+ recipes/linux/linux/atngw100/defconfig |    2 +-
+ recipes/linux/linux_2.6.29.bb          |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-iD8DBQFLiBDuMkyGM64RGpERAj1iAJ92l81A14+d1zbGez1GZ1B2wtsxRgCdE5oP
-sYCctrQ1jucxDfR0R4PMMf8=
-=Bi6n
------END PGP SIGNATURE-----
+diff --git a/recipes/linux/linux/atngw100/defconfig b/recipes/linux/linux/atngw100/defconfig
+index 489d094..b54fca1 100644
+--- a/recipes/linux/linux/atngw100/defconfig
++++ b/recipes/linux/linux/atngw100/defconfig
+@@ -489,7 +489,7 @@ CONFIG_IP6_NF_RAW=m
+ # CONFIG_IP_SCTP is not set
+ # CONFIG_TIPC is not set
+ # CONFIG_ATM is not set
+-# CONFIG_BRIDGE is not set
++CONFIG_BRIDGE=m
+ # CONFIG_NET_DSA is not set
+ # CONFIG_VLAN_8021Q is not set
+ # CONFIG_DECNET is not set
+diff --git a/recipes/linux/linux_2.6.29.bb b/recipes/linux/linux_2.6.29.bb
+index 240faf2..33f0eda 100644
+--- a/recipes/linux/linux_2.6.29.bb
++++ b/recipes/linux/linux_2.6.29.bb
+@@ -1,6 +1,6 @@
+ require linux.inc
+ 
+-PR = "r10"
++PR = "r11"
+ 
+ S = "${WORKDIR}/linux-2.6.29"
+ 
+-- 
+1.6.3.3
 
 
 
