@@ -1,37 +1,43 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from fg-out-1718.google.com ([72.14.220.155])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NlQPH-0004MQ-Ph
+	(envelope-from <martin.jansa@gmail.com>) id 1NlQep-0002y9-D1
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Feb 2010 18:24:53 +0100
-Received: by gyd5 with SMTP id 5so548405gyd.6
+	Sat, 27 Feb 2010 18:40:51 +0100
+Received: by fg-out-1718.google.com with SMTP id e21so269618fga.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Feb 2010 09:21:59 -0800 (PST)
+	Sat, 27 Feb 2010 09:38:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=tTH2S51Yie67H6L3kV9qwugBcpOBesda54k/SMeGtu4=;
-	b=LauOsS3F88oe9cDxfKm7Z2u4ouaC9YEw45HtZ5OAzbzU8j9Gf00EKiio6AqkJTvz7N
-	N7eZtWZSzsCMIQb8ah/zWZ3zMVO/SivxeMe25WsxGmBRea/c6UlliioY5wtOUSXZvqgh
-	XSsUyXP8jfnTGLqq8/v9n8w9r1/Ts+Zn4M2Sk=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=mMQMGaLec2l5BruADZJhqvvl+AX8AdM398N3m99rNbo=;
+	b=NX5gkRu6coAJxwaKtwqklbnz2zJ7j6e4mNwmNuG3237+9GV1udaZJAIE6EdaD56ftG
+	pxhh8X6EflZhfK3IBD902qnH5LdNC1iDGIs8Pih7ozhKzSzjvKuuas75RwBvpWapBmQA
+	TdkR+gGtzVLnGTuOZm0GGx+SqhOVZ+SYWgSVg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=H48Fpo4nhRQv7OeurjWtQLkgulEBxCimVMb0FPVYcyedFz6Lk8m99IDNWgxogjmCw1
-	4ygUg2JUs9AE1xwKkhsbj5mOqZxAtu9l7IcIEHgKRjUVr/lb2CS58mg7rjwl3AKSqdHW
-	OtwNNhZlurdgQY/E+QdR4ebaXUwMheZToPf/E=
-MIME-Version: 1.0
-Received: by 10.101.195.29 with SMTP id x29mr2955508anp.93.1267291319026; Sat, 
-	27 Feb 2010 09:21:59 -0800 (PST)
-In-Reply-To: <20100227165600.GD30145@xora-desktop.xora.org.uk>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=eKlN8pIBn1TLQLmdedUyweqf2OFpomO2OQ+V/g/iU2DkqAcMqLzLVgJnA6YXSOoRSc
+	eQr3umCA3zLr883Eesv7iAQ1hm6cY4jPLTXygPl/sknMiOWFHVjFe669lkACzIZaxdT5
+	hGrZsZCJBW6zupK3xv1u5Rzl4P8xQTQFDidLc=
+Received: by 10.87.76.9 with SMTP id d9mr1470324fgl.71.1267292285253;
+	Sat, 27 Feb 2010 09:38:05 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 15sm977048fxm.8.2010.02.27.09.38.04
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 27 Feb 2010 09:38:04 -0800 (PST)
+Date: Sat, 27 Feb 2010 18:38:14 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100227173814.GI3206@jama>
 References: <ac9c93b11002270725t46beb56dx5c4dc63c0f6485ca@mail.gmail.com>
 	<20100227165600.GD30145@xora-desktop.xora.org.uk>
-Date: Sat, 27 Feb 2010 18:21:58 +0100
-Message-ID: <ac9c93b11002270921rb738980ye29c6fd93913107a@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+	<ac9c93b11002270921rb738980ye29c6fd93913107a@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <ac9c93b11002270921rb738980ye29c6fd93913107a@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 72.14.220.155
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
@@ -52,76 +58,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Feb 2010 17:24:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 27 Feb 2010 17:40:52 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2010/2/27 Graeme Gregory <dp@xora.org.uk>:
-> On Sat, Feb 27, 2010 at 04:25:27PM +0100, Frans Meulenbroeks wrote:
->> Dear all,
->>
->> I =A0think some restructuring is needed wrt distro's and images
->> I did some counting and we currently have 32 distro's (ls
->> conf/distro/*.conf | wc
->> There are a few semi-dups (micro, minimal and oplinux have regular and
->> uclibc versions, angstrom has angstrom-2008.1-legacy.conf =A0and
->> angstrom-2008.1.conf, slugos has slugos, slugos-native and ucslugc)
->>
->> also we have 94 images (ls recipes/images/*.bb | wc)
->> For some of these it is quite obvious for which distro's they are.
->> Mostly because they are prefixed with the distro name (e.g.nylon,
->> slugos, openmoko)
->> but for several others it is less clear. grep -i -l angstromg
->> recipes/images/*.bb | wc gives 30 but not all of them are angstrom
->> specific.
->> E.g. nas-server-image.bb mentions angstrom in the comment but is
->> distro agnostic.
->>
->> Also sometimes the names are confusing. We have a minimal distro but
->> minimal-image.bb is not an image for the minimal distro, but is an
->> angstrom image.
->>
->> My proposal is to create distro specific subdirs and move all images
->> from a distro to that specific subdir
->> That makes it more insightful what belongs to what.
->>
->> (alternatively if creating an additional level within images is
->> considered to be "not a good thing" we could either create directories
->> like images_${distro} or maybe even just ${distro} where a distro can
->> keep its stuff).
->> (or yet alteratively we could prefix the distro specific images with
->> the name of the distro)
->>
->> Your opinion is appreciated (and please do express your preference (if
->> any) for an option (ofc keep-as-is is also possible) or coin another
->> option)
->>
->
-> NAK on creating extra levels.
->
-> Changing the level where recipes are held is not an option do to the way
-> you tell bitbake how to find them.
->
-> BBFILES =3D "${OE}/org.openembedded.dev/recipes/*/*.bb"
+On Sat, Feb 27, 2010 at 06:21:58PM +0100, Frans Meulenbroeks wrote:
+> 2010/2/27 Graeme Gregory <dp@xora.org.uk>:
+> > On Sat, Feb 27, 2010 at 04:25:27PM +0100, Frans Meulenbroeks wrote:
+> >> Dear all,
+> One could do:
+> BBFILES = "${OE}/org.openembedded.dev/recipes/*/${DISTRO}/*.bb"
+> BBFILES += "${OE}/org.openembedded.dev/recipes/*/*.bb"
 
-One could do:
-BBFILES =3D "${OE}/org.openembedded.dev/recipes/*/${DISTRO}/*.bb"
-BBFILES +=3D "${OE}/org.openembedded.dev/recipes/*/*.bb"
->
-> The other option, angstrom images used to be in recipes/angstrom and we
-> were asked to move them out so other distros can use them. Id be quite
-> happy with them to return to angstrom/ as it seems they are not useful
-> to other distros anyway.
+images directory doesn't look so messy to me as some other directories
+and also image recipes are usually quite easy to read/understand, so
+I'm not sure why they need to be moved.
 
-Well my main concern is that the current names are kinda misleading.
-I got interested in minimal (the distro) but noticed minimal-image is
-not for minimal distro (as I had hoped for).
-Moving the recipe to the angstrom dir makes things a little bit
-cleaner, but does not resolve the name conflict
+> > The other option, angstrom images used to be in recipes/angstrom and we
+> > were asked to move them out so other distros can use them. Id be quite
+> > happy with them to return to angstrom/ as it seems they are not useful
+> > to other distros anyway.
+> 
+> (and on a personal note: maybe 25+ angstrom recipes is a little bit
+> overkill, are these all actually used? )
 
-(and on a personal note: maybe 25+ angstrom recipes is a little bit
-overkill, are these all actually used? )
+even 25+ images seems more usefull to me than ie 19 mesa recipes and 17x
+pixman (I already moved few and all libpixman to obsolete).
 
-Frans
+So from my point of view, image recipes doesn't need so much maintenance
+as just pulls some subset of packages, why should someone remove them?
+
+On the other side, additional patches are usually added only to latest,
+most used recipe (where they are usually also tested) and older recipes
+are just getting dust.
+
+Hmm I'm already a bit off-topic, but nobody replied to my "Policy for moving
+ older versions to obsolete" :/.
+
+Regards,
+
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
