@@ -1,55 +1,43 @@
-Received: from mail-fx0-f220.google.com ([209.85.220.220])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1Nl9DT-0000Zk-N5
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NlKs0-0005nT-LF
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Feb 2010 00:03:28 +0100
-Received: by fxm20 with SMTP id 20so600492fxm.12
+	Sat, 27 Feb 2010 12:30:09 +0100
+Received: by gyd5 with SMTP id 5so473179gyd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Feb 2010 15:00:40 -0800 (PST)
+	Sat, 27 Feb 2010 03:27:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=nv3fc90EyOi5Dji0wioZLlond1C3EW71rDCP03LezoM=;
-	b=TIPfa43SaToPcTECoJOEv0572TmRJLimnGr6IMWW7aW64uwqJ5FwMEjNPqc44B51NO
-	BplORZA3C0wIXx6FvgzFazHl+Zmhe+oQJWAsREqMihzUF4WKXG7qk+mpCBDmmW4BBWjU
-	K8uHWzehBwL4zgJ0RckZRhr44IBO8PKmi9QL0=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=qxFItzfTXQRudy1zoJZMa5c/d0oDmFTYVdtHO7DdfHk=;
+	b=XuNrI8jOYlEKzJi4Bf5bugP8Nz6iXxqqgQ3hDW21gFCA54vNoSnbmXbNnXDymfDXJQ
+	BR5MOxSsLn4RFgcQWWcw3v6+GshoGrTADvoex7PWB4i57w9fumwIlMbdnmTENWIzxGL0
+	U/gwgAHKK4zrg0c/MCCfzoo0k+i8Zh1+rOCww=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=UxH8n/xxkIEgo6MHWuu/ncbs55drv4japwtKl9FgoT0IewlVhFtF0yJ/5Fi9V0YO6P
-	lCQxYbUmHz67klN096Gge16yk4WFtczV5tYc6KKNdOLShyvKtdn8YWISSggj+UMQOgpq
-	RFNrYOBsyV1LUW+QoV2fKqt166W0tYN0wQJRQ=
-Received: by 10.223.164.165 with SMTP id e37mr1349846fay.43.1267225240163;
-	Fri, 26 Feb 2010 15:00:40 -0800 (PST)
-Received: from s42.loc ([84.119.103.202])
-	by mx.google.com with ESMTPS id 12sm1118068fks.50.2010.02.26.15.00.39
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 26 Feb 2010 15:00:39 -0800 (PST)
-Received: from cow by s42.loc with local (Exim 4.71)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1Nl9Gd-0000RO-9g; Sat, 27 Feb 2010 00:06:43 +0100
-Date: Sat, 27 Feb 2010 00:06:43 +0100
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100226230643.GH30265@mx.loc>
-References: <1266951776.18176.47.camel@trini-m4400>
-	<4B87EC32.6030807@mwester.net> <hm93de$tnt$1@dough.gmane.org>
-	<18e217241002261221u5f43eaebn19a52e6b86a22c00@mail.gmail.com>
-	<20100226222650.GG30265@mx.loc>
-	<1267224150.5437.435.camel@lenovo.internal.reciva.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=ROJ5KP7XaC6EwPedj9ORVTfXtUjkGJZXVHhWFsnFV3l0t5AIsH9gp+lSvJQSVs5yVK
+	8zlc+xnX42DpFCGMbRiFg5u0bHAFo/8sb5iXidXozBHKHLyPq10HL+/leyh2V8jrTd3g
+	Gl6VupGYwwmEl+vIy/7Z8EZRLMLNzPX506H2U=
 MIME-Version: 1.0
-In-Reply-To: <1267224150.5437.435.camel@lenovo.internal.reciva.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.220
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+Received: by 10.101.180.21 with SMTP id h21mr2540432anp.26.1267270036135; Sat, 
+	27 Feb 2010 03:27:16 -0800 (PST)
+In-Reply-To: <f96d234e1002261320r320c5458q8a006f699714d257@mail.gmail.com>
+References: <fca63bcf1002261053s33343b5r7a79495dce1a9118@mail.gmail.com>
+	<f96d234e1002261320r320c5458q8a006f699714d257@mail.gmail.com>
+Date: Sat, 27 Feb 2010 12:27:16 +0100
+Message-ID: <ac9c93b11002270327v799b7e4coa271aaa2d6f8bf9b@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Fix busybox SUID support
+Subject: Re: Commit access
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -63,26 +51,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Feb 2010 23:03:28 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 27 Feb 2010 11:30:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, Feb 26, 2010 at 10:42:30PM +0000, Phil Blundell wrote:
-
->If you're primarily worried about case (a) then building two copies of
->the frontend which share a common libbusybox, one setuid and one not,
->probably is a reasonable thing to do.  However, as you say, busybox does
->already have a fairly robust mechanism in place for dropping privs when
->they are not wanted by a particular applet and hence the threat from
->this side seems to be quite low anyway.
-
-Yes, and that's what i've read into Michaels mail that this was what he
-was primarily concerned about, but rereading him he didn't actually say
-that. My apologies.
+2010/2/26 Cliff Brake <cliff.brake@gmail.com>:
+> Michael,
 >
->If you are primarily worried about case (b) then the easiest way to
->mitigate the threat is to reduce the amount of code which is linked in
+> read: http://wiki.openembedded.net/index.php/New_Dev and send me your key.
+>
+> Thanks,
+> Cliff
+>
+> On Fri, Feb 26, 2010 at 1:53 PM, Michael Lippautz
+> <michael.lippautz@gmail.com> wrote:
+>> Hej all (again),
+>>
+>> I am hereby asking, if I can get commit access to OE.
+>>
+>> (Don't want to go on peoples nerves using irc all the time ;p)
+>>
+>> Some patches: http://cgit.openembedded.org/cgit.cgi/openembedded/log/?qt=author&q=michael+lippautz
+>> I am currently mostly interested (work related) into
+>> perl/python/webaccess and gps related stuff.
+>>
+>> Regards,
+>> Michael
 
-indeed
+Fully agree.
+Michael, welcome aboard.
+
+FM
 
 
