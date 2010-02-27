@@ -1,30 +1,28 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1NlT2V-00005O-RG
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <philb@gnu.org>) id 1NlTbX-0003Zh-Ke
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Feb 2010 21:13:29 +0100
-Received: from [192.168.1.2] (e180137157.adsl.alicedsl.de [85.180.137.157])
-	by drlauer-research.com (Postfix) with ESMTP id F2611584160
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Feb 2010 22:05:44 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Sat, 27 Feb 2010 21:49:40 +0100
+Received: from 88-110-39-162.dynamic.dsl.as9105.com ([88.110.39.162]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NlTYo-0007Z3-Lt
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 27 Feb 2010 20:46:50 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ac9c93b11002271101t795ebe64y7d116ea3af9eea7e@mail.gmail.com>
+In-Reply-To: <20100227165600.GD30145@xora-desktop.xora.org.uk>
 References: <ac9c93b11002270725t46beb56dx5c4dc63c0f6485ca@mail.gmail.com>
-	<201002271904.22479.marcin@juszkiewicz.com.pl>
-	<ac9c93b11002271040i221bdb10o22cad1cf1551b6fb@mail.gmail.com>
-	<201002271945.18454.marcin@juszkiewicz.com.pl>
-	<ac9c93b11002271101t795ebe64y7d116ea3af9eea7e@mail.gmail.com>
-Organization: Vanille-Media
-Date: Sat, 27 Feb 2010 21:11:05 +0100
-Message-ID: <1267301465.3263.11.camel@andromeda>
+	<20100227165600.GD30145@xora-desktop.xora.org.uk>
+Date: Sat, 27 Feb 2010 20:46:47 +0000
+Message-ID: <1267303607.5437.446.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
+X-Spam-Status: No, score=0.7 required=5.0 tests=SPF_SOFTFAIL autolearn=no
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -42,41 +40,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Feb 2010 20:13:29 -0000
+X-List-Received-Date: Sat, 27 Feb 2010 20:49:40 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Am Samstag, den 27.02.2010, 20:01 +0100 schrieb Frans Meulenbroeks:
-> 2010/2/27 Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>:
-> > Dnia sobota, 27 lutego 2010 o 19:40:32 Frans Meulenbroeks napisa=C5=82=
-(a):
-> >
-> >> I just wanted to suggest a more sensible and clear naming scheme and
-> >> clean up a little bit, but apparently this is not appreciated :-(
-> >
-> >> (and yes, I also think it makes sense to remove old orphaned unused
-> >> 5-year-old recipes, but guess I'm alone here too).
-> >
-> > The problem is that we do not know who uses them. We can remove ones =
-which no
-> > one is using or alter them in any way - thats why we are using SCM so=
- users
-> > can revert any change.
-> >
-> >> Guess I'd better not propose to remove some of those 26 (yes,
-> >> twenty-six!) glib recipes (or 8 abiword recipes )
-> >
-> > Oh cleanups... Too much things to get cleaned, reorganized etc :(
-> >
-> Yes and this was a small proposal towards it, but I feel it is not
-> really appreciated, so I suggest to forget about it.
-> I'll just move on to activities that I feel are more appreciated.
+On Sat, 2010-02-27 at 16:56 +0000, Graeme Gregory wrote:
+> NAK on creating extra levels.
+> 
+> Changing the level where recipes are held is not an option do to the way
+> you tell bitbake how to find them.
+> 
+> BBFILES = "${OE}/org.openembedded.dev/recipes/*/*.bb"
 
-Fwiw, I think it's a good idea and would support that. We have a very
-conservative majority in OE though ;)
+Is that really such a big deal?  We seemed to manage to switch BBFILES
+from /packages/ to /recipes/ without any major casualties, and I would
+have thought that adding an extra level in there would be equally
+straightforward.  Or of course, even better, the distro-specific recipes
+could go in an overlay which the distro config would select.
 
---=20
-:M:
+p.
+
 
 
 
