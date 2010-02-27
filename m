@@ -1,43 +1,26 @@
-Received: from fg-out-1718.google.com ([72.14.220.155])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NlQep-0002y9-D1
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NlR5P-0006jy-PC
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Feb 2010 18:40:51 +0100
-Received: by fg-out-1718.google.com with SMTP id e21so269618fga.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Feb 2010 09:38:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=mMQMGaLec2l5BruADZJhqvvl+AX8AdM398N3m99rNbo=;
-	b=NX5gkRu6coAJxwaKtwqklbnz2zJ7j6e4mNwmNuG3237+9GV1udaZJAIE6EdaD56ftG
-	pxhh8X6EflZhfK3IBD902qnH5LdNC1iDGIs8Pih7ozhKzSzjvKuuas75RwBvpWapBmQA
-	TdkR+gGtzVLnGTuOZm0GGx+SqhOVZ+SYWgSVg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=eKlN8pIBn1TLQLmdedUyweqf2OFpomO2OQ+V/g/iU2DkqAcMqLzLVgJnA6YXSOoRSc
-	eQr3umCA3zLr883Eesv7iAQ1hm6cY4jPLTXygPl/sknMiOWFHVjFe669lkACzIZaxdT5
-	hGrZsZCJBW6zupK3xv1u5Rzl4P8xQTQFDidLc=
-Received: by 10.87.76.9 with SMTP id d9mr1470324fgl.71.1267292285253;
-	Sat, 27 Feb 2010 09:38:05 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 15sm977048fxm.8.2010.02.27.09.38.04
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 27 Feb 2010 09:38:04 -0800 (PST)
-Date: Sat, 27 Feb 2010 18:38:14 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sat, 27 Feb 2010 19:08:24 +0100
+Received: (qmail 24674 invoked by uid 813007); 27 Feb 2010 18:05:33 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 27 Feb 2010 18:05:33 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100227173814.GI3206@jama>
+Date: Sat, 27 Feb 2010 19:04:21 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.3.4; x86_64; ;
+	)
 References: <ac9c93b11002270725t46beb56dx5c4dc63c0f6485ca@mail.gmail.com>
 	<20100227165600.GD30145@xora-desktop.xora.org.uk>
 	<ac9c93b11002270921rb738980ye29c6fd93913107a@mail.gmail.com>
-MIME-Version: 1.0
 In-Reply-To: <ac9c93b11002270921rb738980ye29c6fd93913107a@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 72.14.220.155
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+MIME-Version: 1.0
+Message-Id: <201002271904.22479.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
@@ -58,48 +41,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Feb 2010 17:40:52 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 27 Feb 2010 18:08:24 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Feb 27, 2010 at 06:21:58PM +0100, Frans Meulenbroeks wrote:
-> 2010/2/27 Graeme Gregory <dp@xora.org.uk>:
-> > On Sat, Feb 27, 2010 at 04:25:27PM +0100, Frans Meulenbroeks wrote:
-> >> Dear all,
+Dnia sobota, 27 lutego 2010 o 18:21:58 Frans Meulenbroeks napisa=C5=82(a):
 > One could do:
-> BBFILES = "${OE}/org.openembedded.dev/recipes/*/${DISTRO}/*.bb"
-> BBFILES += "${OE}/org.openembedded.dev/recipes/*/*.bb"
+> BBFILES =3D "${OE}/org.openembedded.dev/recipes/*/${DISTRO}/*.bb"
+> BBFILES +=3D "${OE}/org.openembedded.dev/recipes/*/*.bb"
+=20
+BBFILES =3D "${OE}/org.openembedded.dev/recipes/" is supported since I do n=
+ot=20
+remember when.
 
-images directory doesn't look so messy to me as some other directories
-and also image recipes are usually quite easy to read/understand, so
-I'm not sure why they need to be moved.
+Making extra levels in recipes/ dir was discussed so many times that it mak=
+es=20
+me sad when I see yet another discussion about it which will change nothing.
 
-> > The other option, angstrom images used to be in recipes/angstrom and we
-> > were asked to move them out so other distros can use them. Id be quite
-> > happy with them to return to angstrom/ as it seems they are not useful
-> > to other distros anyway.
-> 
-> (and on a personal note: maybe 25+ angstrom recipes is a little bit
-> overkill, are these all actually used? )
+Images/ directory never had sensible naming. "angstrom-gnome-image" is smal=
+ler=20
+then "angstrom-x-image", x11-image is another version of gpe-image (content=
+ is=20
+other but result is same - user lands in GPE + Matchbox v1). If you want to=
+=20
+have kind of order there then start creating "frans-really-minimal", "frans-
+basic-x11-without-gtk-but-small-as-possible", "frans-x11-gpe-mb1", "frans-x=
+11-
+gnome" etc images.=20
 
-even 25+ images seems more usefull to me than ie 19 mesa recipes and 17x
-pixman (I already moved few and all libpixman to obsolete).
+This directory is dump of recipes created by many developers, some of them =
+are=20
+probably 5-6 years old. There are many recipes for images outside of our=20
+repository (like bug-image-production for example or those which generate 1=
+GB=20
+sized rootfs from Montavista). I have on disk image recipe which generate=20
+package which I use to generate final image. Etc, ETc, ETC...
 
-So from my point of view, image recipes doesn't need so much maintenance
-as just pulls some subset of packages, why should someone remove them?
+So generally I am against moving recipes which mention angstrom to=20
+recipes/angstrom/ just because they contain 'angstrom' word inside. If I wi=
+ll=20
+push "umbaumba-magic-image" recipe will you opt for moving it to=20
+recipes/umbaumba just because I wrote it for my internal-no-one-saw-it-and-
+who-knows-does-it-exists-at-all distribution?
 
-On the other side, additional patches are usually added only to latest,
-most used recipe (where they are usually also tested) and older recipes
-are just getting dust.
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Hmm I'm already a bit off-topic, but nobody replied to my "Policy for moving
- older versions to obsolete" :/.
 
-Regards,
-
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
 
 
