@@ -1,35 +1,38 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1NlPjH-00089k-4Z
+	(envelope-from <dp@xora.org.uk>) id 1NlQ5c-0007M3-9S
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Feb 2010 17:41:28 +0100
+	Sat, 27 Feb 2010 18:04:34 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 541162CA11
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 2878DA500D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Feb 2010 16:34:18 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id PxSZh7oVOK+j
+	Sat, 27 Feb 2010 16:56:10 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id VLvoXNZN8Zr7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Feb 2010 16:34:14 +0000 (UTC)
-Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
-	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTPSA id 01DCC2C81E
+	Sat, 27 Feb 2010 16:56:09 +0000 (GMT)
+Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 49E22A500B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Feb 2010 16:34:13 +0000 (UTC)
-Message-ID: <4B894A8D.3020307@gmail.com>
-Date: Sat, 27 Feb 2010 17:38:37 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Sat, 27 Feb 2010 16:56:08 +0000 (GMT)
+Received: by xora-desktop.xora.org.uk (Postfix, from userid 500)
+	id BC76424521; Sat, 27 Feb 2010 16:56:00 +0000 (GMT)
+Date: Sat, 27 Feb 2010 16:56:00 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100227165600.GD30145@xora-desktop.xora.org.uk>
 References: <ac9c93b11002270725t46beb56dx5c4dc63c0f6485ca@mail.gmail.com>
+MIME-Version: 1.0
 In-Reply-To: <ac9c93b11002270725t46beb56dx5c4dc63c0f6485ca@mail.gmail.com>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+User-Agent: Mutt/1.5.20 (2009-08-17)
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
-X-Spam-Level: *
-X-Spam-Status: No, score=1.2 required=5.0 tests=SPF_NEUTRAL autolearn=no
+X-Spam-Level: 
+X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -47,11 +50,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Feb 2010 16:41:28 -0000
+X-List-Received-Date: Sat, 27 Feb 2010 17:04:34 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Frans Meulenbroeks ha scritto, Il 27/02/2010 16:25:
+On Sat, Feb 27, 2010 at 04:25:27PM +0100, Frans Meulenbroeks wrote:
 > Dear all,
 > 
 > I  think some restructuring is needed wrt distro's and images
@@ -79,9 +82,31 @@ Frans Meulenbroeks ha scritto, Il 27/02/2010 16:25:
 > from a distro to that specific subdir
 > That makes it more insightful what belongs to what.
 > 
+> (alternatively if creating an additional level within images is
+> considered to be "not a good thing" we could either create directories
+> like images_${distro} or maybe even just ${distro} where a distro can
+> keep its stuff).
+> (or yet alteratively we could prefix the distro specific images with
+> the name of the distro)
+> 
+> Your opinion is appreciated (and please do express your preference (if
+> any) for an option (ofc keep-as-is is also possible) or coin another
+> option)
+> 
 
-+1 from me
+NAK on creating extra levels.
 
-/marco
+Changing the level where recipes are held is not an option do to the way
+you tell bitbake how to find them.
+
+BBFILES = "${OE}/org.openembedded.dev/recipes/*/*.bb"
+
+The other option, angstrom images used to be in recipes/angstrom and we
+were asked to move them out so other distros can use them. Id be quite
+happy with them to return to angstrom/ as it seems they are not useful
+to other distros anyway.
+
+Graeme
+
 
 
