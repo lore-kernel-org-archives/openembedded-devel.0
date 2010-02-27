@@ -1,35 +1,31 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-yw0-f171.google.com ([209.85.211.171])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NlKs0-0005nT-LF
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NlOaW-0006Da-Fl
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Feb 2010 12:30:09 +0100
-Received: by gyd5 with SMTP id 5so473179gyd.6
+	Sat, 27 Feb 2010 16:28:21 +0100
+Received: by ywh1 with SMTP id 1so499698ywh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Feb 2010 03:27:16 -0800 (PST)
+	Sat, 27 Feb 2010 07:25:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=qxFItzfTXQRudy1zoJZMa5c/d0oDmFTYVdtHO7DdfHk=;
-	b=XuNrI8jOYlEKzJi4Bf5bugP8Nz6iXxqqgQ3hDW21gFCA54vNoSnbmXbNnXDymfDXJQ
-	BR5MOxSsLn4RFgcQWWcw3v6+GshoGrTADvoex7PWB4i57w9fumwIlMbdnmTENWIzxGL0
-	U/gwgAHKK4zrg0c/MCCfzoo0k+i8Zh1+rOCww=
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=V8KXbkYsHt2rV5ndKdGWKsb1+C4JzjPWCn6uNaHX/EA=;
+	b=cRe14ZXtvb5P4zXAR6cgU99UC7kcAvogU0LzDTt17IrJdkbLVmg0Sxmrz/KDG6GUAu
+	R72RPOKAZ2HvCjEvyM+OZ23vROoDfw6I17kR7rrlsU3ZkmOuhnQiqu6DgG/Umw1rFgxw
+	kWDekDHpRjNxe8V+P6Oe+jVFuEgJBV/8qBojg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=ROJ5KP7XaC6EwPedj9ORVTfXtUjkGJZXVHhWFsnFV3l0t5AIsH9gp+lSvJQSVs5yVK
-	8zlc+xnX42DpFCGMbRiFg5u0bHAFo/8sb5iXidXozBHKHLyPq10HL+/leyh2V8jrTd3g
-	Gl6VupGYwwmEl+vIy/7Z8EZRLMLNzPX506H2U=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=aShDuZ7jAM2qz4nSRzUIYwBTvfmaOF9tgwDlyiFG2kUsbzYvazjM4wraFuIAiXbKxN
+	HtUUPfgAC1TbIAOMcNMcbxD103KUpxbI/wQJ0vg1o85WMuQh86QPQf11TuyXMfQRt/MV
+	7JXQen3tux01AkA14ba/7I2huY9qN8HJg+TtY=
 MIME-Version: 1.0
-Received: by 10.101.180.21 with SMTP id h21mr2540432anp.26.1267270036135; Sat, 
-	27 Feb 2010 03:27:16 -0800 (PST)
-In-Reply-To: <f96d234e1002261320r320c5458q8a006f699714d257@mail.gmail.com>
-References: <fca63bcf1002261053s33343b5r7a79495dce1a9118@mail.gmail.com>
-	<f96d234e1002261320r320c5458q8a006f699714d257@mail.gmail.com>
-Date: Sat, 27 Feb 2010 12:27:16 +0100
-Message-ID: <ac9c93b11002270327v799b7e4coa271aaa2d6f8bf9b@mail.gmail.com>
+Received: by 10.100.245.38 with SMTP id s38mr346849anh.197.1267284327549; Sat, 
+	27 Feb 2010 07:25:27 -0800 (PST)
+Date: Sat, 27 Feb 2010 16:25:27 +0100
+Message-ID: <ac9c93b11002270725t46beb56dx5c4dc63c0f6485ca@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Connect-IP: 209.85.211.171
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -37,7 +33,7 @@ X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Commit access
+Subject: [RFC] recipes/images/${distro}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,35 +47,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Feb 2010 11:30:09 -0000
+X-List-Received-Date: Sat, 27 Feb 2010 15:28:22 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2010/2/26 Cliff Brake <cliff.brake@gmail.com>:
-> Michael,
->
-> read: http://wiki.openembedded.net/index.php/New_Dev and send me your key.
->
-> Thanks,
-> Cliff
->
-> On Fri, Feb 26, 2010 at 1:53 PM, Michael Lippautz
-> <michael.lippautz@gmail.com> wrote:
->> Hej all (again),
->>
->> I am hereby asking, if I can get commit access to OE.
->>
->> (Don't want to go on peoples nerves using irc all the time ;p)
->>
->> Some patches: http://cgit.openembedded.org/cgit.cgi/openembedded/log/?qt=author&q=michael+lippautz
->> I am currently mostly interested (work related) into
->> perl/python/webaccess and gps related stuff.
->>
->> Regards,
->> Michael
+Dear all,
 
-Fully agree.
-Michael, welcome aboard.
+I  think some restructuring is needed wrt distro's and images
+I did some counting and we currently have 32 distro's (ls
+conf/distro/*.conf | wc
+There are a few semi-dups (micro, minimal and oplinux have regular and
+uclibc versions, angstrom has angstrom-2008.1-legacy.conf  and
+angstrom-2008.1.conf, slugos has slugos, slugos-native and ucslugc)
 
-FM
+also we have 94 images (ls recipes/images/*.bb | wc)
+For some of these it is quite obvious for which distro's they are.
+Mostly because they are prefixed with the distro name (e.g.nylon,
+slugos, openmoko)
+but for several others it is less clear. grep -i -l angstromg
+recipes/images/*.bb | wc gives 30 but not all of them are angstrom
+specific.
+E.g. nas-server-image.bb mentions angstrom in the comment but is
+distro agnostic.
+
+Also sometimes the names are confusing. We have a minimal distro but
+minimal-image.bb is not an image for the minimal distro, but is an
+angstrom image.
+
+My proposal is to create distro specific subdirs and move all images
+from a distro to that specific subdir
+That makes it more insightful what belongs to what.
+
+(alternatively if creating an additional level within images is
+considered to be "not a good thing" we could either create directories
+like images_${distro} or maybe even just ${distro} where a distro can
+keep its stuff).
+(or yet alteratively we could prefix the distro specific images with
+the name of the distro)
+
+Your opinion is appreciated (and please do express your preference (if
+any) for an option (ofc keep-as-is is also possible) or coin another
+option)
+
+Frans.
 
 
