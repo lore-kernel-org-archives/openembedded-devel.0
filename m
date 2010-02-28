@@ -1,39 +1,41 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NlUOG-00005F-Ps
+	(envelope-from <dp@xora.org.uk>) id 1NlZyL-00084E-HF
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Feb 2010 22:40:01 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NlULW-0002D7-2s from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Feb 2010 13:37:10 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Sat, 27 Feb 2010 13:37:09 -0800
-Received: from 172.30.80.81 ([172.30.80.81]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Sat, 27 Feb 2010 21:27:55 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	27 Feb 2010 14:27:51 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Sun, 28 Feb 2010 04:37:37 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 7EAA9A5011
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Feb 2010 03:34:50 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id lp8atqvi9mLp
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Feb 2010 03:34:47 +0000 (GMT)
+Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 75B3AA5005
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Feb 2010 03:34:47 +0000 (GMT)
+Received: by xora-desktop.xora.org.uk (Postfix, from userid 500)
+	id 198EF24548; Sun, 28 Feb 2010 03:34:39 +0000 (GMT)
+Date: Sun, 28 Feb 2010 03:34:39 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1267303607.5437.446.camel@lenovo.internal.reciva.com>
+Message-ID: <20100228033438.GE30145@xora-desktop.xora.org.uk>
 References: <ac9c93b11002270725t46beb56dx5c4dc63c0f6485ca@mail.gmail.com>
 	<20100227165600.GD30145@xora-desktop.xora.org.uk>
 	<1267303607.5437.446.camel@lenovo.internal.reciva.com>
-Organization: Mentor Graphics Corporation
-Date: Sat, 27 Feb 2010 14:27:51 -0700
-Message-ID: <1267306071.9295.1.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 27 Feb 2010 21:37:09.0641 (UTC)
-	FILETIME=[040E7F90:01CAB7F5]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+MIME-Version: 1.0
+In-Reply-To: <1267303607.5437.446.camel@lenovo.internal.reciva.com>
+User-Agent: Mutt/1.5.20 (2009-08-17)
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [RFC] recipes/images/${distro}
@@ -50,34 +52,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Feb 2010 21:40:02 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 28 Feb 2010 03:37:38 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sat, 2010-02-27 at 20:46 +0000, Phil Blundell wrote:
+On Sat, Feb 27, 2010 at 08:46:47PM +0000, Phil Blundell wrote:
 > On Sat, 2010-02-27 at 16:56 +0000, Graeme Gregory wrote:
 > > NAK on creating extra levels.
-> >=20
-> > Changing the level where recipes are held is not an option do to the wa=
-y
+> > 
+> > Changing the level where recipes are held is not an option do to the way
 > > you tell bitbake how to find them.
-> >=20
-> > BBFILES =3D "${OE}/org.openembedded.dev/recipes/*/*.bb"
->=20
+> > 
+> > BBFILES = "${OE}/org.openembedded.dev/recipes/*/*.bb"
+> 
 > Is that really such a big deal?  We seemed to manage to switch BBFILES
 > from /packages/ to /recipes/ without any major casualties, and I would
 > have thought that adding an extra level in there would be equally
 > straightforward.  Or of course, even better, the distro-specific recipes
 > could go in an overlay which the distro config would select.
+> 
+I have been talking about using overlays for distros at every OE meetup
+since kergoth made it easy to do. So I fully support that idea.
 
-I think you've just hit on a potentially great idea.  Say that
-'openembedded' supports 'micro' and 'minimal' as two example
-distributions.  Move everyone else into their own distro overlay.  The
-only problem with this, perhaps, is easily adding the distro overlay
-itself into the right env vars. :(
+Graeme
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
 
 
