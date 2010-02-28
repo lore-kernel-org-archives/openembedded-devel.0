@@ -1,46 +1,30 @@
-Received: from mail-yw0-f171.google.com ([209.85.211.171])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Nlpof-0001ta-Pq
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mickey@vanille-media.de>) id 1NlqpX-0004RK-Tm
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Feb 2010 21:32:46 +0100
-Received: by ywh1 with SMTP id 1so815624ywh.3
+	Sun, 28 Feb 2010 22:37:40 +0100
+Received: from [192.168.1.2] (e180134197.adsl.alicedsl.de [85.180.134.197])
+	by drlauer-research.com (Postfix) with ESMTP id A284C584132
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Feb 2010 12:29:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=mGw4RnDr/0DM+PnnpyG/g5SwKJig+BOo8bPjB8Y8SB8=;
-	b=R08Ats+FddhjtRBqoX8GfN1wgZk83LGVL4FnsBu20utM1/sqIbuSzDC5a5TzuD14Tn
-	aaJdEJJJS9xkZ0VTi66vso3ejS7IVN4Km2rcW710mJm9pAdRm4rKC51IyQe15E9TWYtQ
-	5aoJ4BpKibkpUjIMtUKUCsp36rnLs50xM7dEE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=mnXQWc1a5wf/aiWwVKl00ijKYCtikMez+RLvOOhB1ZQh+LMFbx0D3wRNwxi2gbKN6t
-	uqjR8foFWgA95ir4fAxBfnmjhq40knym4vj161BKysSoG24MAR31+sl7TuSKxEcKPJzj
-	zXy9GPegHMHg7pua1mjmSDkDO9wo8k225T48Q=
-MIME-Version: 1.0
-Received: by 10.101.90.7 with SMTP id s7mr4586403anl.176.1267388992041; Sun, 
-	28 Feb 2010 12:29:52 -0800 (PST)
-In-Reply-To: <hmeii7$q7e$1@dough.gmane.org>
-References: <ac9c93b11002270725t46beb56dx5c4dc63c0f6485ca@mail.gmail.com>
-	<20100227165600.GD30145@xora-desktop.xora.org.uk>
-	<1267303607.5437.446.camel@lenovo.internal.reciva.com>
-	<1267306071.9295.1.camel@trini-m4400> <hmeii7$q7e$1@dough.gmane.org>
-Date: Sun, 28 Feb 2010 21:29:51 +0100
-Message-ID: <ac9c93b11002281229j6ffb2960p559a0f7d7f2b957d@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sun, 28 Feb 2010 23:30:01 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.171
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <ac9c93b11002281139g6963e753w970c97002611c78c@mail.gmail.com>
+References: <ac9c93b11002281139g6963e753w970c97002611c78c@mail.gmail.com>
+Organization: Vanille-Media
+Date: Sun, 28 Feb 2010 22:35:28 +0100
+Message-ID: <1267392928.13054.1.camel@andromeda>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
+X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] recipes/images/${distro}
+Subject: Re: [RFC} glib-2.0 cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,71 +38,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Feb 2010 20:32:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 28 Feb 2010 21:37:40 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-2010/2/28 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 27-02-10 22:27, Tom Rini wrote:
->> On Sat, 2010-02-27 at 20:46 +0000, Phil Blundell wrote:
->>> On Sat, 2010-02-27 at 16:56 +0000, Graeme Gregory wrote:
->>>> NAK on creating extra levels.
->>>>
->>>> Changing the level where recipes are held is not an option do to the w=
-ay
->>>> you tell bitbake how to find them.
->>>>
->>>> BBFILES =3D "${OE}/org.openembedded.dev/recipes/*/*.bb"
->>>
->>> Is that really such a big deal? =A0We seemed to manage to switch BBFILE=
-S
->>> from /packages/ to /recipes/ without any major casualties, and I would
->>> have thought that adding an extra level in there would be equally
->>> straightforward. =A0Or of course, even better, the distro-specific reci=
-pes
->>> could go in an overlay which the distro config would select.
->>
->> I think you've just hit on a potentially great idea. =A0Say that
->> 'openembedded' supports 'micro' and 'minimal' as two example
->> distributions. =A0Move everyone else into their own distro overlay. =A0T=
-he
->> only problem with this, perhaps, is easily adding the distro overlay
->> itself into the right env vars. :(
->
-> Move every distro out of OE, that way people need to set the overlays
-> correctly.
->
-> This does mean that we abandon the "sharing" aspect that started OE
-> since every little "improvement" will be done in the distro overlay
-> instead of OE.
+Am Sonntag, den 28.02.2010, 20:39 +0100 schrieb Frans Meulenbroeks:
+> We have 26 glib-2.0 recipes (and 8 native ones). (see ls below)
+> Only a few versions are used (see also the grep below)
+> 
+> for glib-2.0:
+> "2.12.12"
+> "2.16.4"
+> "2.18.3"
+> "2.20.3"
+> "2.22.1"
+> "2.22.4"
+> "2.6.4"
+> "2.8.6"
+> 
+> for glib-2.0-native:
+> "2.16.1"
+> "2.18.0"
+> "2.22.1"
+> "2.22.4"
+> 
+> Both include the last two versions
+> Proposal is to remove all versions that are not used.
+> 
+> How do people feel about this?
 
-I would expect that most of the recipes would be in the common area
-(at least that is what I would encourage)
-If people add fixes in their own overlay only, they also cannot
-benefit any more from the improvements from others, so there is some
-advantage to sharing too.
+Sounds good to me, althoug I'd recommend not removing them but just
+moving them out of sight, i.e. in an 'old' folder. That way we could
+please both the lets-keep-everything-no-matter-how-rotten and also the
+lets-strive-for-few-high-quality recipes.
 
-FM
->
-> Maybe the u-boot custodian model would make sense for that type of scenar=
-io.
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFLis2HMkyGM64RGpERAgR2AJ9/q3Xc9iYXzOnmE1DOvameXej0dACeO8eN
-> 3CVU85QKVuinvK4wmN0c+lk=3D
-> =3Dq0y3
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Cheers,
+
+-- 
+:M:
+
 
 
