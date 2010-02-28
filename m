@@ -1,35 +1,38 @@
-Received: from mail-gx0-f213.google.com ([209.85.217.213])
+Received: from mail-yw0-f171.google.com ([209.85.211.171])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NlplO-0001jl-VD
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Nlpof-0001ta-Pq
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Feb 2010 21:29:19 +0100
-Received: by gxk5 with SMTP id 5so966289gxk.6
+	Sun, 28 Feb 2010 21:32:46 +0100
+Received: by ywh1 with SMTP id 1so815624ywh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Feb 2010 12:26:29 -0800 (PST)
+	Sun, 28 Feb 2010 12:29:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=b66FzcxbJmD/COGdao80Fg178f5d+wB516AM7cFrZm0=;
-	b=TrjMEOv7jFTjIA2jdOXOH1mtYrbTfShG/HJC0Y2hjhZ0CxmSJrDYpajkCepB3GaPxt
-	LK9UEAwfre/n20AGu+WzD3S7EXMty7ERuAGIPpVFDn/xSQmi6OJaGb8D3mJkQxZYOuRk
-	QMac3lQ8PTtbNpf25HAgW3thqFwQFqORFG2Ao=
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=mGw4RnDr/0DM+PnnpyG/g5SwKJig+BOo8bPjB8Y8SB8=;
+	b=R08Ats+FddhjtRBqoX8GfN1wgZk83LGVL4FnsBu20utM1/sqIbuSzDC5a5TzuD14Tn
+	aaJdEJJJS9xkZ0VTi66vso3ejS7IVN4Km2rcW710mJm9pAdRm4rKC51IyQe15E9TWYtQ
+	5aoJ4BpKibkpUjIMtUKUCsp36rnLs50xM7dEE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=e+Ritqvm1k2WBdKfyXGb0xOcOnKq3TBHeFlYBo7/aNAuaDXl06XISPFwqnCibRsLIO
-	6YTkLgAsI4bMVrcuLSYvytzvqnjqoVkV2XlRK+3V4VnJJx/NER7wqJG7iEAYhXZnjdGy
-	SX0I2NxEGHmkK3aImCUUcJjmJbIy4Xioc6Bu8=
+	:content-type:content-transfer-encoding;
+	b=mnXQWc1a5wf/aiWwVKl00ijKYCtikMez+RLvOOhB1ZQh+LMFbx0D3wRNwxi2gbKN6t
+	uqjR8foFWgA95ir4fAxBfnmjhq40knym4vj161BKysSoG24MAR31+sl7TuSKxEcKPJzj
+	zXy9GPegHMHg7pua1mjmSDkDO9wo8k225T48Q=
 MIME-Version: 1.0
-Received: by 10.100.235.38 with SMTP id i38mr4587273anh.178.1267388789422; 
-	Sun, 28 Feb 2010 12:26:29 -0800 (PST)
-In-Reply-To: <hmeia3$p6c$1@dough.gmane.org>
-References: <ac9c93b11002281139g6963e753w970c97002611c78c@mail.gmail.com>
-	<hmeia3$p6c$1@dough.gmane.org>
-Date: Sun, 28 Feb 2010 21:26:29 +0100
-Message-ID: <ac9c93b11002281226w3b73d9ebo6c3169dedd1b74c5@mail.gmail.com>
+Received: by 10.101.90.7 with SMTP id s7mr4586403anl.176.1267388992041; Sun, 
+	28 Feb 2010 12:29:52 -0800 (PST)
+In-Reply-To: <hmeii7$q7e$1@dough.gmane.org>
+References: <ac9c93b11002270725t46beb56dx5c4dc63c0f6485ca@mail.gmail.com>
+	<20100227165600.GD30145@xora-desktop.xora.org.uk>
+	<1267303607.5437.446.camel@lenovo.internal.reciva.com>
+	<1267306071.9295.1.camel@trini-m4400> <hmeii7$q7e$1@dough.gmane.org>
+Date: Sun, 28 Feb 2010 21:29:51 +0100
+Message-ID: <ac9c93b11002281229j6ffb2960p559a0f7d7f2b957d@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.217.213
+X-SA-Exim-Connect-IP: 209.85.211.171
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -37,7 +40,7 @@ X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC} glib-2.0 cleanup
+Subject: Re: [RFC] recipes/images/${distro}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,75 +54,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Feb 2010 20:29:19 -0000
+X-List-Received-Date: Sun, 28 Feb 2010 20:32:46 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
 2010/2/28 Koen Kooi <k.kooi@student.utwente.nl>:
 > -----BEGIN PGP SIGNED MESSAGE-----
 > Hash: SHA1
 >
-> How do you know that some versions aren't used at all? Did you check all
-> external overlays?
-
-No. I have no access to them.
-But if someone decides to pin an old version in an external overlay,
-then I think it is their responsibility to also keep a copy of that
-recipe.
-And note that they are not gone, they are still in the git if someone
-needs them.
-
-Btw if external overlays are a concern then we should never ever
-delete a recipe.
+> On 27-02-10 22:27, Tom Rini wrote:
+>> On Sat, 2010-02-27 at 20:46 +0000, Phil Blundell wrote:
+>>> On Sat, 2010-02-27 at 16:56 +0000, Graeme Gregory wrote:
+>>>> NAK on creating extra levels.
+>>>>
+>>>> Changing the level where recipes are held is not an option do to the w=
+ay
+>>>> you tell bitbake how to find them.
+>>>>
+>>>> BBFILES =3D "${OE}/org.openembedded.dev/recipes/*/*.bb"
+>>>
+>>> Is that really such a big deal? =A0We seemed to manage to switch BBFILE=
+S
+>>> from /packages/ to /recipes/ without any major casualties, and I would
+>>> have thought that adding an extra level in there would be equally
+>>> straightforward. =A0Or of course, even better, the distro-specific reci=
+pes
+>>> could go in an overlay which the distro config would select.
+>>
+>> I think you've just hit on a potentially great idea. =A0Say that
+>> 'openembedded' supports 'micro' and 'minimal' as two example
+>> distributions. =A0Move everyone else into their own distro overlay. =A0T=
+he
+>> only problem with this, perhaps, is easily adding the distro overlay
+>> itself into the right env vars. :(
 >
-> But more importantly, what harm do the recipes do to you? Does it offend
-> you that there are 26 recipes?
-
-Somewhat yes. Frankly I don't see a use for 26 recipes for all kind of
-different versions, some of which are very outdated.
-
-And as you can see from my other message, this is just the tip of the iceberg.
-We have about 8000 recipes, but less than 5000 unique ones.
-By having less recipes, the parsing time decreases too
-(and I am quite aware that there might be some variants needed for some recipes)
-
-And of course with the unused recipes also a lot of outdated patches
-go so it will also free some storage space (my recipes directory is
-almost 500 M, not that dramatic, but still)
-
+> Move every distro out of OE, that way people need to set the overlays
+> correctly.
 >
-> What are you trying to accomplish?
+> This does mean that we abandon the "sharing" aspect that started OE
+> since every little "improvement" will be done in the distro overlay
+> instead of OE.
+
+I would expect that most of the recipes would be in the common area
+(at least that is what I would encourage)
+If people add fixes in their own overlay only, they also cannot
+benefit any more from the improvements from others, so there is some
+advantage to sharing too.
+
+FM
 >
-> If a recipe isn't doing any harm, just leave it alone. Deleting recipes
-> just to please someones sense of aesthetics is the wrong thing to do.
-
-Your opinion has been noted.
-
+> Maybe the u-boot custodian model would make sense for that type of scenar=
+io.
 >
-> What would be a lot better is to fix the latest version for each minor
-> release to use things like new style staging, bbclassextend, etc and
-> *after* that clean up ask to remove the recipes that weren't updated.
-> That way there is a recipe for each minor version so we can check
-> regressions quite easily. But the real bonus is that the remaining
-> recipes are of good quality. Your proposal doesn't address any QA
-> concerns, it just makes the mess a bit smaller
-
-By removing unused versions at least it is clear which recipes need to
-be improved and focus can go to those versions.
-But if you feel that things like new style staging and bbclassextend
-have priority, be my guest.
-
-(actually I found the proposed procedure to convert to new style
-staging so cumbersome and time consuming that I gave up on it).
-
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
 >
-> And even then I would rather move recipe + associated patches to
-> obsolete than delete it. When we start doing tarball releases
-> recipes/obsolete will be a lot more important than it is now.
-
-I'm unaware of plans to do tarball releases (and actually I am not too
-sure that it is useful; if you want to, you can download a tarball
-from git at every point in time).
-
-Frans
+> iD8DBQFLis2HMkyGM64RGpERAgR2AJ9/q3Xc9iYXzOnmE1DOvameXej0dACeO8eN
+> 3CVU85QKVuinvK4wmN0c+lk=3D
+> =3Dq0y3
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
