@@ -1,42 +1,39 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NlpHf-0003lA-Qu for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Feb 2010 20:58:39 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NlpEy-00032Y-Um for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Feb 2010 20:55:48 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Feb 2010 20:55:48 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NlpNS-00042P-Ln
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 28 Feb 2010 21:04:35 +0100
+Received: by gyd5 with SMTP id 5so829335gyd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Feb 2010 20:55:48 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 28 Feb 2010 12:01:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=OikcsfgxfPRx2eZbUNHxg3HhkGAoeZUAA9pZR6WICwg=;
+	b=xBJ+n6CjzrMJkot2DKTeW+9RnI+WccxewFH8LAlUoy9szmKm3gP54QurRdqJ5w8FUs
+	6yUQ5FsXR3KT8LdZIiWM86shMoYC3txPR6Nd9KppN0LHKXzh1A+NAU3vZzeKqFFYSxQQ
+	o9Ytmkj7eGKKCWglka/c8BlbOrW29nZgtZ/xI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=gLCX/k2vAlHMmnp2WY0UEWGbukQhMsS7xvKd2aa5IEiUVs1y9guWBZBvSyoG7wgGGp
+	Vx+a3xq3fmyAoSo+iFII40jMHXsWiOZhPEnhJ3ghOVvHW5ZjN4sPDvz2uq2Ml8TTEs0x
+	UsnBtAvks/AwlntR2uQnHEs38w6B0XvJK1fOM=
+MIME-Version: 1.0
+Received: by 10.101.135.35 with SMTP id m35mr4511366ann.193.1267387305131; 
+	Sun, 28 Feb 2010 12:01:45 -0800 (PST)
+Date: Sun, 28 Feb 2010 21:01:45 +0100
+Message-ID: <ac9c93b11002281201j44a861e1saa803be9f338ee10@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 28 Feb 2010 20:55:37 +0100
-Message-ID: <hmehnp$n57$1@dough.gmane.org>
-References: <1267383448-7009-1-git-send-email-ospite@studenti.unina.it>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100219 Shredder/3.0.3pre
-In-Reply-To: <1267383448-7009-1-git-send-email-ospite@studenti.unina.it>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_HELO_PASS,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] ezx: Use pulseaudio 0.9.15
+Subject: [RFC] duplicate recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,46 +47,155 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Feb 2010 19:58:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 28 Feb 2010 20:04:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Below is a list of all recipes that have 5 or more versions.
+Guess a lot of these are deadwood.
+Proposal is to do some cleaning for these.
 
-On 28-02-10 19:57, Antonio Ospite wrote:
-> Pulseaudio versions newer than 0.9.15 don't build on ezx machines (and
-> presumably on any armv5te), stick to this version until the problem is
-> handled upstream and a patch is available.
-> 
-> Cfr: http://bugs.openembedded.org/show_bug.cgi?id=5404
-> 
-> Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
-> ---
->  conf/machine/include/motorola-ezx-base.inc |    1 +
->  1 files changed, 1 insertions(+), 0 deletions(-)
-> 
-> diff --git a/conf/machine/include/motorola-ezx-base.inc b/conf/machine/include/motorola-ezx-base.inc
-> index 75c0f42..4d17211 100644
-> --- a/conf/machine/include/motorola-ezx-base.inc
-> +++ b/conf/machine/include/motorola-ezx-base.inc
-> @@ -2,6 +2,7 @@ TARGET_ARCH = "arm"
->  
->  PREFERRED_PROVIDER_xserver = "xserver-kdrive"
->  PREFERRED_PROVIDER_virtual/kernel ?= "openezx-kernel"
-> +PREFERRED_VERSION_pulseaudio = "0.9.15"
+Probably the best scenario is to remove all versions which
+- are not the latest version
+- are not  pinned with  PREFERRED_VERSION  in conf/distro/*
+- do not have the largest DEFAULT_PREFERENCE
 
-NAK: machines have no business setting versions (except for kernels and
-even that is debatable).
+What do people feel about this?
 
-If it doesn't build, fix your distro.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Frans.
 
-iD8DBQFLiso5MkyGM64RGpERAlimAKCeTk+/aznFhmSWt+jrrARo3pU7/ACfbTVe
-23RWoqCv4bOfPPRzj/0fKfg=
-=v16E
------END PGP SIGNATURE-----
-
+     26 glib-2.0/glib-2.0
+     26 gcc/gcc-cross
+     25 gcc/gcc-cross-intermediate
+     25 gcc/gcc-cross-initial
+     25 gcc/gcc
+     24 linux/linux
+     22 binutils/binutils-cross
+     22 binutils/binutils
+     18 gcc/gcc-cross-sdk
+     16 glibc/glibc
+     15 xserver-common/xserver-common
+     14 linux-libc-headers/linux-libc-headers
+     14 gtk+/gtk+
+     14 binutils/binutils-cross-sdk
+     13 xorg-lib/pixman
+     12 u-boot/u-boot
+     12 mozilla/firefox
+     11 networkmanager/networkmanager
+     11 gtk-webcore/midori
+     11 glibc/glibc-initial
+     10 xorg-xserver/xserver-xorg
+     10 xorg-driver/xf86-input-evdev
+     10 transmission/transmission
+     10 pango/pango
+     10 linux/linux-omap1
+     10 connman/connman
+     10 cairo/cairo
+     10 bluez/bluez4
+      9 xorg-xserver/xserver-kdrive
+      9 xorg-lib/libx11
+      9 xorg-app/xinit
+      9 rxvt-unicode/rxvt-unicode
+      9 freetype/freetype
+      9 evince/evince
+      9 busybox/busybox
+      8 xorg-lib/libx11-native
+      8 xorg-driver/xf86-video-nv
+      8 wpa-supplicant/wpa-supplicant
+      8 telepathy/empathy
+      8 nautilus/nautilus
+      8 matchbox-panel/matchbox-panel
+      8 linux/linux-ixp4xx
+      8 libgpepimc/libgpepimc
+      8 intltool/intltool
+      8 gpe-todo/gpe-todo
+      8 gpe-mini-browser/gpe-mini-browser
+      8 gpe-clock/gpe-clock
+      8 gnome/libgsf
+      8 gnome/libgnomeui
+      8 gnome/libgnome
+      8 gnome/gnome-keyring
+      8 gnome/gnome-desktop
+      8 glib-2.0/glib-2.0-native
+      8 gimp/gimp
+      8 directfb/directfb
+      8 apt/apt
+      8 alsa/alsa-utils
+      8 alsa/alsa-lib
+      8 abiword/abiword
+      7 xorg-util/util-macros-native
+      7 xorg-util/util-macros
+      7 xorg-proto/inputproto
+      7 xorg-lib/xtrans
+      7 xorg-lib/libxfont
+      7 xorg-driver/xf86-video-geode
+      7 xorg-driver/xf86-input-mouse
+      7 udev/udev
+      7 uclibc/uclibc-initial
+      7 uclibc/uclibc
+      7 pulseaudio/pulseaudio
+      7 openvpn/openvpn
+      7 openssh/openssh
+      7 minilite/minilite
+      7 mesa/mesa
+      7 lirc/lirc-modules
+      7 linux/linux-omap
+      7 linux/linux-handhelds-2.6
+      7 libtool/libtool
+      7 libeventdb/libeventdb
+      7 intltool/intltool-native
+      7 hal/hal
+      7 gphoto2/gphoto2
+      7 gpe-what/gpe-what
+      7 gpe-ownerinfo/gpe-ownerinfo
+      7 gpe-conf/gpe-conf
+      7 gpe-bluetooth/gpe-bluetooth
+      7 gnome/libsoup-2.4
+      7 gnome/gnome-panel
+      7 gnome/gnome-menus
+      7 gnome/epiphany
+      7 e2fsprogs-libs/e2fsprogs-libs
+      7 avahi/avahi
+      6 xorg-proto/xproto-native
+      6 xorg-proto/xproto
+      6 xorg-lib/libxi
+      6 xorg-driver/xf86-video-vmware
+      6 xorg-driver/xf86-video-i128
+      6 xorg-driver/xf86-video-ati
+      6 xorg-driver/xf86-input-keyboard
+      6 xorg-app/xdm
+      6 xcb/xcb-proto
+      6 xcb/libxcb
+      6 tzdata/tzdata
+      6 scummvm/scummvm
+      6 poppler/poppler
+      6 patchutils/patchutils
+      6 mesa/mesa-dri
+      6 libxsettings-client/libxsettings-client
+      6 libtool/libtool-native
+      6 libtool/libtool-cross
+      6 libtododb/libtododb
+      6 libgpevtype/libgpevtype
+      6 libglade/libglade
+      6 kexecboot/linux-kexecboot
+      6 hal/hal-info
+      6 gphoto2/libgphoto2
+      6 gpephone/gpe-applauncher
+      6 gpe-filemanager/gpe-filemanager
+      6 gnome/libgnomecanvas
+      6 gnash/gnash
+      6 gdb/gdb-cross
+      6 gdb/gdb
+      6 freetype/freetype-native
+      6 fontconfig/fontconfig
+      6 ekiga/ptlib
+      6 ekiga/opal
+      6 ekiga/ekiga
+      6 dri/libdrm
+      6 devio/devio-native
+      6 devio/devio
+      6 asterisk/asterisk
+      6 apt/apt-native
+      6 acpid/acpid
+      6 abiword/abiword-plugins
 
 
