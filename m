@@ -1,31 +1,42 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1NlrI6-0008II-4v
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <dp@xora.org.uk>) id 1NlrOa-0008V2-W5
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Feb 2010 23:07:14 +0100
-Received: from [192.168.1.2] (e180134197.adsl.alicedsl.de [85.180.134.197])
-	by drlauer-research.com (Postfix) with ESMTP id 07362584132
+	Sun, 28 Feb 2010 23:13:54 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id D9B63A5014
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Feb 2010 23:59:32 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Sun, 28 Feb 2010 22:11:04 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id kTMz5r9ObPvb
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Feb 2010 22:11:03 +0000 (GMT)
+Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id B50ABA5010
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Feb 2010 22:11:03 +0000 (GMT)
+Received: by xora-desktop.xora.org.uk (Postfix, from userid 500)
+	id 7859724538; Sun, 28 Feb 2010 22:10:56 +0000 (GMT)
+Date: Sun, 28 Feb 2010 22:10:56 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4B8AE4F8.1000906@balister.org>
-References: <1267383448-7009-1-git-send-email-ospite@studenti.unina.it>
-	<hmehnp$n57$1@dough.gmane.org>  <4B8AE4F8.1000906@balister.org>
-Organization: Vanille-Media
-Date: Sun, 28 Feb 2010 23:04:58 +0100
-Message-ID: <1267394698.13054.5.camel@andromeda>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+Message-ID: <20100228221056.GG30145@xora-desktop.xora.org.uk>
+References: <ac9c93b11002281201j44a861e1saa803be9f338ee10@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <ac9c93b11002281201j44a861e1saa803be9f338ee10@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-08-17)
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] ezx: Use pulseaudio 0.9.15
+Subject: Re: [RFC] duplicate recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,55 +50,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Feb 2010 22:07:14 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 28 Feb 2010 22:13:54 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Am Sonntag, den 28.02.2010, 16:49 -0500 schrieb Philip Balister:
-> On 02/28/2010 02:55 PM, Koen Kooi wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> >
-> > On 28-02-10 19:57, Antonio Ospite wrote:
-> >> Pulseaudio versions newer than 0.9.15 don't build on ezx machines (and
-> >> presumably on any armv5te), stick to this version until the problem is
-> >> handled upstream and a patch is available.
-> >>
-> >> Cfr: http://bugs.openembedded.org/show_bug.cgi?id=5404
-> >>
-> >> Signed-off-by: Antonio Ospite<ospite@studenti.unina.it>
-> >> ---
-> >>   conf/machine/include/motorola-ezx-base.inc |    1 +
-> >>   1 files changed, 1 insertions(+), 0 deletions(-)
-> >>
-> >> diff --git a/conf/machine/include/motorola-ezx-base.inc b/conf/machine/include/motorola-ezx-base.inc
-> >> index 75c0f42..4d17211 100644
-> >> --- a/conf/machine/include/motorola-ezx-base.inc
-> >> +++ b/conf/machine/include/motorola-ezx-base.inc
-> >> @@ -2,6 +2,7 @@ TARGET_ARCH = "arm"
-> >>
-> >>   PREFERRED_PROVIDER_xserver = "xserver-kdrive"
-> >>   PREFERRED_PROVIDER_virtual/kernel ?= "openezx-kernel"
-> >> +PREFERRED_VERSION_pulseaudio = "0.9.15"
-> >
-> > NAK: machines have no business setting versions (except for kernels and
-> > even that is debatable).
-> >
-> > If it doesn't build, fix your distro.
+On Sun, Feb 28, 2010 at 09:01:45PM +0100, Frans Meulenbroeks wrote:
+> Below is a list of all recipes that have 5 or more versions.
+> Guess a lot of these are deadwood.
+> Proposal is to do some cleaning for these.
 > 
-> I'm with Koen here, machines may be used by other distros so forcing 
-> revision selection for recipes (other than directly impact the machine) 
-> has no business in machine files.
+> Probably the best scenario is to remove all versions which
+> - are not the latest version
+> - are not  pinned with  PREFERRED_VERSION  in conf/distro/*
+> - do not have the largest DEFAULT_PREFERENCE
+> 
+> What do people feel about this?
+> 
+If you search back in the list this question is asked once every 6 months
+ago and the discussion always ends the same. We dont need to blindly delete
+old recipes.
 
-Of course one could argue that there is a bug in the OE recipes metadata
-rather than the distro, since the pulseaudio recipes are known broken
-for certain architectures -- however they don't contain any blacklisting
-or whitelisting except for om-gta01/om-gta02 which I added when I became
-aware of the problem. Antonio, lets just blacklist the broken versions
-for the machines you're interested in.
+Now on to important issues.
 
-:M:
+If people are looking for something to keep them busy then there are two
+important tasks that need to be completed in OE one of them saves hours
+on build times, the other makes parsing quicker.
 
+Convert as many -native recipes to BBCLASSEXTEND as possible. Poky has lots
+of them done already so this is as simple as copy and test.
+
+Convert recipes to new staging. There have been numerous posts on the list
+lately detailing how to do this. This one saves hours in build time.
+
+Graeme
 
 
 
