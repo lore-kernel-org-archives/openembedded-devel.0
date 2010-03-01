@@ -1,40 +1,39 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Nm9bM-0007FU-0m
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NmBQ9-00079J-64
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 18:40:20 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1Nm9Ya-0002of-Tm from Tom_Rini@mentor.com ;
-	Mon, 01 Mar 2010 09:37:24 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Mon, 1 Mar 2010 09:37:24 -0800
-Received: from 172.30.80.137 ([172.30.80.137]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Mon,  1 Mar 2010 17:36:32 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	01 Mar 2010 10:36:31 -0700
-From: Tom Rini <tom_rini@mentor.com>
-To: Antonio Ospite <ospite@studenti.unina.it>
-In-Reply-To: <1266575689-12944-1-git-send-email-ospite@studenti.unina.it>
-References: <1266575689-12944-1-git-send-email-ospite@studenti.unina.it>
-Organization: Mentor Graphics Corporation
-Date: Mon, 01 Mar 2010 10:36:31 -0700
-Message-ID: <1267464991.9295.397.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 01 Mar 2010 17:37:24.0389 (UTC)
-	FILETIME=[DA9ABD50:01CAB965]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+	Mon, 01 Mar 2010 20:36:50 +0100
+Received: by gyd5 with SMTP id 5so1276893gyd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Mar 2010 11:33:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=2p28j1CTpzCJgtPLZAR8V6dpAxf9Xj58+Hf2jAfDypM=;
+	b=LxUVAtLZGKm+nprOQVShfLJR9pSeu1br0gyHKJQSE6clklKnoI4xD74yE9dr/WBTwl
+	KfkzJiemhmmdKw3JXVvCsp397r+A7LcjsXABCsgQOkhQMpD3LSBH1b2ke8GBgv7ZEl2h
+	7MTWsGM5BJcpc9z9HkXcYJ5n91eVq70RyBags=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=jYwA5Qf6aFHZYnFQJRkzj88cwtbv1H+yw9aNDdUNC7Xg05rsKIB4mHc25r/VvQ9VC3
+	t4cn4UAjhZ9I7/02gIayZIwKXvsvlykkuVUgVZwzzqqYvhpDaJqrpWAT405eYKdNuJpo
+	qxNS2+2TPZr7UlAcQBcQ3Z2ABdnekSIesmx8w=
+MIME-Version: 1.0
+Received: by 10.101.175.31 with SMTP id c31mr6952054anp.99.1267472038738; Mon, 
+	01 Mar 2010 11:33:58 -0800 (PST)
+Date: Mon, 1 Mar 2010 20:33:58 +0100
+Message-ID: <ac9c93b11003011133wa0f4e3bqe7af69ead4d7eec6@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: meta-toolchain: Show the host system in toolchain archive name
+Subject: {TSC] request to discuss items.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,47 +47,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Mar 2010 17:40:20 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 01 Mar 2010 19:36:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, 2010-02-19 at 00:34 +0000, Antonio Ospite wrote:
-> Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
->=20
-> ---
-> In canadian-sdk.bb ${SDK_SYS} is used as a prefix but I find more logical=
- to
-> put it just before the target system info.
+As we have (as far as I know) no procedure to table issues for the
+TSC, I'm proposing two issues for the TSC:
 
-Pushed, thanks.
+1) the location of distro specific files
+2) how to handle legacy recipes that are not used by any known distro
 
->=20
-> Regards,
->    Antonio
->=20
->  recipes/meta/meta-toolchain.bb |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
->=20
-> diff --git a/recipes/meta/meta-toolchain.bb b/recipes/meta/meta-toolchain=
-.bb
-> index 3169425..574ecac 100644
-> --- a/recipes/meta/meta-toolchain.bb
-> +++ b/recipes/meta/meta-toolchain.bb
-> @@ -17,7 +17,7 @@ TOOLCHAIN_TARGET_TASK ?=3D "task-sdk-bare"
->  TOOLCHAIN_TARGET_EXCLUDE ?=3D ""
->  FEED_ARCH ?=3D "${TARGET_ARCH}"
->  SDK_SUFFIX =3D "toolchain"
-> -TOOLCHAIN_OUTPUTNAME ?=3D "${DISTRO}-${DISTRO_VERSION}-${FEED_ARCH}-${TA=
-RGET_OS}-${SDK_SUFFIX}"
-> +TOOLCHAIN_OUTPUTNAME ?=3D "${DISTRO}-${DISTRO_VERSION}-${SDK_SYS}-${FEED=
-_ARCH}-${TARGET_OS}-${SDK_SUFFIX}"
-> =20
->  RDEPENDS =3D "${TOOLCHAIN_TARGET_TASK} ${TOOLCHAIN_HOST_TASK}"
-> =20
+Both have been discussed on this list, and several options have been coined
+E.g. for 1) dedicated directories, overlays or retain the current solution
+And for 2) an overlay, and "obsolete" directory, retain the current
+solution and remove the recipes.
 
+May I ask the TSC to provide a verdict on these.
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+Thanks alot,
+Frans
 
 
