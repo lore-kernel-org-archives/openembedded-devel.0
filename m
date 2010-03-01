@@ -1,39 +1,43 @@
-Received: from mail-yx0-f203.google.com ([209.85.210.203])
+Received: from smtp-out30.alice.it ([85.33.2.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NmDBu-0002FZ-Rm
+	(envelope-from <ospite@studenti.unina.it>) id 1NmDIu-0003Ao-3P
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 22:30:15 +0100
-Received: by yxe41 with SMTP id 41so1223413yxe.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Mar 2010 13:27:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=1zRPaG8v+gNwxEL5cEa6f4LEYqfHsbUQQxUkwrzZTLo=;
-	b=qVDHJldXeKdV6dVmHcRaAJ4oXm0pC3eMXk7zzBhm8idk+PZ07sFbi7LB1nfdZY5Jxj
-	VQA32Ip0LOrmH4Ng68Xb3GezwDrOzEMymn0xMHYcB/0jS9cPHwos6fij6Erz8tdoyzog
-	PHNLARKuOgXVMpLu+28V2kNiHvHgvLy4X8nWI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=C938AB0QA2VCrYcjEO43YaCwVhkM0wIaFA/fOcbyGfQ4cgf8EtgEoTWfdo+HteJUSN
-	gFZcnpbsDG7s7L7gG7Yw4zQiY85qwZ0Fa/VklcmCTbHDx5Dp0D5Rxlx/+ktuFhugVllG
-	Dm6mWk5GI4WueP/JVidqngoJgGiErjZai9MAI=
-MIME-Version: 1.0
-Received: by 10.101.39.2 with SMTP id r2mr3231277anj.67.1267478844121; Mon, 01 
-	Mar 2010 13:27:24 -0800 (PST)
-Date: Mon, 1 Mar 2010 22:27:24 +0100
-Message-ID: <ac9c93b11003011327v1ee75303p334cf298ff8516b7@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.203
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+	Mon, 01 Mar 2010 22:37:33 +0100
+Received: from FBCMMO01.fbc.local ([192.168.68.195]) by smtp-out30.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 1 Mar 2010 22:33:35 +0100
+Received: from FBCMCL01B08.fbc.local ([192.168.171.46]) by FBCMMO01.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 1 Mar 2010 22:33:33 +0100
+Received: from badebec ([87.3.28.51]) by FBCMCL01B08.fbc.local with Microsoft
+	SMTPSVC(6.0.3790.3959); Mon, 1 Mar 2010 22:33:33 +0100
+Date: Mon, 1 Mar 2010 22:33:20 +0100
+From: Antonio Ospite <ospite@studenti.unina.it>
+To: Tom Rini <tom_rini@mentor.com>
+Message-Id: <20100301223320.9d48c325.ospite@studenti.unina.it>
+In-Reply-To: <1267477680.4739.225.camel@trini-m4400>
+References: <1266575689-12944-1-git-send-email-ospite@studenti.unina.it>
+	<1267464991.9295.397.camel@trini-m4400>
+	<20100301214153.a74a73f6.ospite@studenti.unina.it>
+	<1267477680.4739.225.camel@trini-m4400>
+X-Mailer: Sylpheed 3.0.0 (GTK+ 2.18.7; i486-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+Mime-Version: 1.0
+X-OriginalArrivalTime: 01 Mar 2010 21:33:33.0652 (UTC)
+	FILETIME=[D824B140:01CAB986]
+X-SA-Exim-Connect-IP: 85.33.2.30
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
+X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] remove unused svn-updates.dpatch files
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: meta-toolchain: Show the host system in toolchain archive name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,46 +51,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Mar 2010 21:30:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 01 Mar 2010 21:37:33 -0000
+X-Groupsio-MsgNum: 17208
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Mon__1_Mar_2010_22_33_20_+0100_a.XTGYdo8ye405TV"
 
-2010/3/1 Denys Dmytriyenko <denis@denix.org>:
-> On Mon, Mar 01, 2010 at 08:10:31AM +1030, Graham Gower wrote:
+--Signature=_Mon__1_Mar_2010_22_33_20_+0100_a.XTGYdo8ye405TV
+Content-Type: text/plain; charset=US-ASCII
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->> What should offend you more is stuff like this:
->>
->> [grg@rak gcc]$ pwd
->> /home/grg/oe/openembedded/recipes/gcc
->> [grg@rak gcc]$ find . -name svn-updates.dpatch -exec ls -l {} \;
->> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->> ./gcc-4.4.2/debian/svn-updates.dpatch
->> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->> ./gcc-4.4.1/debian/svn-updates.dpatch
->> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->> ./gcc-4.3.1/debian/svn-updates.dpatch
->> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->> ./gcc-4.3.3/debian/svn-updates.dpatch
->> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->> ./gcc-4.3.4/debian/svn-updates.dpatch
->> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->> ./gcc-svn/debian/svn-updates.dpatch
->> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->> ./gcc-4.3.2/debian/svn-updates.dpatch
->> [grg@rak gcc]$ grep svn-updates *
->> [grg@rak gcc]$
->
-> So, there is 125 MB wasted right there... Thanks for the heads up! :)
+On Mon, 01 Mar 2010 14:08:00 -0700
+Tom Rini <tom_rini@mentor.com> wrote:
 
-Checked it and the 4.4.[12] and gcc-svn versions are gone.
-the gcc-4.3.[1-4] versions are still there but seem unused:
+> On Mon, 2010-03-01 at 21:41 +0100, Antonio Ospite wrote:
+> > On Mon, 01 Mar 2010 10:36:31 -0700
+> > Tom Rini <tom_rini@mentor.com> wrote:
+> >=20
+> > > On Fri, 2010-02-19 at 00:34 +0000, Antonio Ospite wrote:
+> > > > Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+> > > >=20
+> > > > ---
+> > > > In canadian-sdk.bb ${SDK_SYS} is used as a prefix but I find more l=
+ogical to
+> > > > put it just before the target system info.
+> > >=20
+> > > Pushed, thanks.
+> > >=20
+> >=20
+> > You pushed v1, really not a big deal :)
+>=20
+> Bah... Not my day.  Was it just commit message that changed?
 
-frans@linux-suse:~/oe/openembedded/recipes/gcc> grep -r svn-updates.dpatch .
-frans@linux-suse:~/oe/openembedded/recipes/gcc>
+Yep, don't worry :)
 
-Howvever as gcc is quite core, I'd rather verify first that it is ok
-to remove them
-(or can someone with more gcc knowledge remove)
+Regards,
+   Antonio
 
-Frans.
+--=20
+Antonio Ospite
+http://ao2.it
 
+PGP public key ID: 0x4553B001
 
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
+
+--Signature=_Mon__1_Mar_2010_22_33_20_+0100_a.XTGYdo8ye405TV
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEARECAAYFAkuMMqAACgkQ5xr2akVTsAGbqwCeP9L+cGOBJjV9HePsr7w0AmN9
+7OcAn3f87OkFNQFrPMBgTy3qAzDfTVrg
+=b4mw
+-----END PGP SIGNATURE-----
+
+--Signature=_Mon__1_Mar_2010_22_33_20_+0100_a.XTGYdo8ye405TV--
