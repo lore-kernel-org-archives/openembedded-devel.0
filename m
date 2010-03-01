@@ -1,36 +1,36 @@
-Received: from mail-iw0-f180.google.com ([209.85.223.180])
+Received: from mail-yw0-f171.google.com ([209.85.211.171])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NmDOq-0001kl-Ni
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NmDPs-0001oZ-3w
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 22:43:40 +0100
-Received: by iwn10 with SMTP id 10so2640187iwn.16
+	Mon, 01 Mar 2010 22:44:44 +0100
+Received: by ywh1 with SMTP id 1so1315638ywh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Mar 2010 13:40:46 -0800 (PST)
+	Mon, 01 Mar 2010 13:41:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type;
-	bh=k7uqqvSoIddP1as9eQvchtn12e+B6BmJgPnWy/IwtcM=;
-	b=qHh/aEOgMftYGuquN7G1tefOOsHTT2A4APU62hOm/VwOf6NZnov55gWrf/ASjZCBjW
-	k11NIbz5naXRSInhgG3A8+1oR+wZQPKaDQ5gPiHDa57x4Kk0LRs5GSutgiw5RBKX9WsI
-	Un7gEmz4Y2tOj+lByhPsZo7H2iZNFPJKXN/co=
+	bh=lpeMX7JKMfC5XGiv1AMGDvN9m6c3cCApRtHClcPXUl8=;
+	b=dadJG0iRLdL76j5R+gUgUdMybivq0Q1uWKiFhdVTxBpDHv/2i9PYFNWbnmo3TK3/2w
+	851HaWZK8HJt4OPxjc395Xztu147ff73An3UT310xLZ5R6oaIBtF9mYLyIKne4/r6PDu
+	my9hfsXYTO/WIt/3ndh0iZyN9e70no6H5FepQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=BErDmP1/VXrvGfTJov2rYnHrs4J8LARwOLxYxC6kDTUZX1i8IKypN0mhaxaeAQbQ4W
-	1su92jCNPJ9Olk6l5LAG1UEk7rYiTwgxicmZj5dJ4IlUsJyPjHvZAV/2Iti1Y5QF1Vf4
-	RT0rQ9nmuGLqDa1+I5pteLV3NxzfYWrlz2g7Q=
+	b=THpHgkodoMdMi5OoYUjYHjvKP+zznZBUM+NtcXbootAUCp3NBFcQ9G5PuPrRDUegbr
+	WK1iaD30U6ZTFFyMFuOYXlI0Lj0hUG+5TmrcPamNEiMRC2FPb7J8ouFOCsXiWvWEP0XQ
+	f6jsetjFw+53fdAljfdIMlg+h0DW9CyDdLrvA=
 MIME-Version: 1.0
-Received: by 10.231.146.134 with SMTP id h6mr495898ibv.16.1267479645583; Mon, 
-	01 Mar 2010 13:40:45 -0800 (PST)
+Received: by 10.101.195.29 with SMTP id x29mr7224102anp.93.1267479709552; Mon, 
+	01 Mar 2010 13:41:49 -0800 (PST)
 In-Reply-To: <6ec4247d1003011335w5fb01238o4fa7551b96c57406@mail.gmail.com>
 References: <ac9c93b11003011327v1ee75303p334cf298ff8516b7@mail.gmail.com>
 	<6ec4247d1003011335w5fb01238o4fa7551b96c57406@mail.gmail.com>
-Date: Mon, 1 Mar 2010 13:40:45 -0800
-Message-ID: <19c1b8a91003011340o15052b15td7d1dcbbb2e2bfe9@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 1 Mar 2010 22:41:49 +0100
+Message-ID: <ac9c93b11003011341r61a90746y9e111bccea038650@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.180
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.211.171
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
@@ -51,10 +51,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Mar 2010 21:43:41 -0000
+X-List-Received-Date: Mon, 01 Mar 2010 21:44:44 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, Mar 1, 2010 at 1:35 PM, Graham Gower <graham.gower@gmail.com> wrote:
+2010/3/1 Graham Gower <graham.gower@gmail.com>:
 > On 2 March 2010 07:57, Frans Meulenbroeks <fransmeulenbroeks@gmail.com> wrote:
 >> 2010/3/1 Denys Dmytriyenko <denis@denix.org>:
 >>> On Mon, Mar 01, 2010 at 08:10:31AM +1030, Graham Gower wrote:
@@ -103,15 +103,41 @@ On Mon, Mar 1, 2010 at 1:35 PM, Graham Gower <graham.gower@gmail.com> wrote:
 >
 > Perhaps there are other patches in the debian directories that are also unused?
 >
+> -Graham
 
-yes I did clean few of later releases but not older ones. From cloning
-point it does not reduce anything
-because the files will be there in repo but I cleaned up later
-versions because for adding recipes for newer releases from here on
-copying patch directories will save us adding unused new files.
+Some of them definitely are:
 
-Thanks
+I picked a random example:
+./gcc-4.3.2/debian/hurd-changes.dpatch
 
--Khem
+frans@linux-suse:~/oe/openembedded/recipes/gcc> grep -r hurd-changes.dpatch .
+frans@linux-suse:~/oe/openembedded/recipes/gcc>
+
+Actually I suspect that almost all files in the debian dirs are deadweight:
+frans@linux-suse:~/oe/openembedded/recipes/gcc> grep debian *
+gcc-4.3.1.inc:    file://debian/arm-unbreak-eabi-armv4t.dpatch;patch=1 \
+gcc-4.3.1.inc:	file://debian/libstdc++-pic.dpatch;patch=1;pnum=0 \
+gcc-4.3.1.inc:	file://debian/gcc-ice-hack.dpatch;patch=1;pnum=0 \
+gcc-4.3.1.inc:	file://debian/pr30961.dpatch;patch=1;pnum=0 \
+gcc-4.3.2.inc:    file://debian/arm-unbreak-eabi-armv4t.dpatch;patch=1 \
+gcc-4.3.2.inc:	file://debian/libstdc++-pic.dpatch;patch=1;pnum=0 \
+gcc-4.3.2.inc:	file://debian/gcc-ice-hack.dpatch;patch=1;pnum=0 \
+gcc-4.3.2.inc:	file://debian/pr30961.dpatch;patch=1;pnum=0 \
+gcc-4.3.3.inc:	file://debian/arm-unbreak-eabi-armv4t.dpatch;patch=1 \
+gcc-4.3.3.inc:	file://debian/libstdc++-pic.dpatch;patch=1;pnum=0 \
+gcc-4.3.3.inc:	file://debian/gcc-ice-hack.dpatch;patch=1;pnum=0 \
+gcc-4.3.3.inc:	file://debian/pr30961.dpatch;patch=1;pnum=0 \
+gcc-4.3.4.inc:	file://debian/arm-unbreak-eabi-armv4t.dpatch;patch=1 \
+gcc-4.3.4.inc:	file://debian/libstdc++-pic.dpatch;patch=1;pnum=0 \
+gcc-4.3.4.inc:	file://debian/gcc-ice-hack.dpatch;patch=1;pnum=0 \
+gcc-4.3.4.inc:	file://debian/pr30961.dpatch;patch=1;pnum=0 \
+frans@linux-suse:~/oe/openembedded/recipes/gcc>
+
+So we use 4 of them.
+and e.g. gcc-4.3.4/debian has 85 files in it:
+frans@linux-suse:~/oe/openembedded/recipes/gcc> ls gcc-4.3.4/debian | wc
+     85      85    1873
+
+Frans
 
 
