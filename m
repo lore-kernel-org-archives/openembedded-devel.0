@@ -1,33 +1,42 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1Nm8At-0000XR-AQ
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 17:08:56 +0100
-Received: from [192.168.1.4] (dialbs-092-079-168-007.static.arcor-ip.net
-	[92.79.168.7])
-	by drlauer-research.com (Postfix) with ESMTP id 299BD58438E;
-	Mon,  1 Mar 2010 18:01:16 +0100 (CET)
-Mime-Version: 1.0 (Apple Message framework v1077)
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-In-Reply-To: <20100301165444.82e3fa2e.ospite@studenti.unina.it>
-Date: Mon, 1 Mar 2010 17:06:02 +0100
-Message-Id: <364696FC-E268-4E09-9E41-1059F5FD932D@vanille-media.de>
-References: <1267383448-7009-1-git-send-email-ospite@studenti.unina.it>
-	<hmehnp$n57$1@dough.gmane.org> <4B8AE4F8.1000906@balister.org>
-	<1267394698.13054.5.camel@andromeda>
-	<20100301165444.82e3fa2e.ospite@studenti.unina.it>
-To: Antonio Ospite <ospite@studenti.unina.it>
-X-Mailer: Apple Mail (2.1077)
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nm8Mj-0003N6-76 for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Mar 2010 17:21:10 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nm8Jz-0006cC-CB for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Mar 2010 17:18:15 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Mar 2010 17:18:15 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Mar 2010 17:18:15 +0100
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 01 Mar 2010 17:17:59 +0100
+Message-ID: <hmgpbo$l0e$1@dough.gmane.org>
+References: <20100301144040.GB12022@jama>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100219 Shredder/3.0.3pre
+In-Reply-To: <20100301144040.GB12022@jama>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_HELO_PASS,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] ezx: Use pulseaudio 0.9.15
+Subject: Re: Should be xserver-xorg MACHINE_ARCH?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,68 +50,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Mar 2010 16:08:56 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 01 Mar 2010 16:21:10 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi Antonio,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> Be patient but my knowledge of OE is still limited, the point here is
-> that distros can override PREFERRED_VERSIONs set in machine files, =
-isn't
-> it?
+On 01-03-10 15:40, Martin Jansa wrote:
+> Today I was checking why building om-gta01 and om-gta02 in same tmpdir
+> fails with this error:
+> 
+>  * satisfy_dependencies_for: Cannot satisfy the following dependencies for task-shr-minimal-x:
+>  *      libdrm (>= 2.4.18+gitr4565+b5aec2bd3df736216e86eae28e278172d3ba3362) *  libdrm (>= 2.4.18+gitr4565+b5aec2bd3df736216e86eae28e278172d3ba3362) *  libdrm (>= 2.4.18+gitr4565+b5aec2bd3df736216e86eae28e278172d3ba3362) *
+> 
+> first I noticed that task-shr-minimal.bb was missing
+> PACKAGE_ARCH = "${MACHINE_ARCH}"
+> after I moved some machine specific depends there (from shr-image.inc).
+> 
+> But even after that setting PACKAGE_ARCH right, I have this error and I think 
+> it's because xserver-xorg was built first for om-gta02 with virtual/libgl 
+> provider set to mesa-dri (_git.bb version used) and resulting .ipk has armv4t
+> arch, even when it was built with machine specific virtual/libgl provider and
+> libdrm version also specific for om-gta02 (om-gta01 will use 2.4.18 release instead,
+> because it doesn't need glamo specific patches from libdrm_git.bb)
+> 
+> What is right solution? Set xserver-xorg arch to MACHINE_ARCH (as virtual/libgl is
+> usually decided based on target machine). Or force om-gta01 to use mesa-dri (I already
+> did) and also libdrm from git repo with glamo patches (because upstream git repo and 
+> glamo repo has different SRCREV so switching to libdrm_git.bb won't help).
 
-Machines should not limit versions, only providers; distros and local =
-configurations are
-the ones supposed to specify versions. Then again, this assumption =
-relies on the
-"default" configuration being working, which -- in case of pulseaudio -- =
-it obviously
-is not.
+Part of the solution is to stop making mesa machine specific when no
+machine specific are in use (e.g. using swrast).
 
->> Of course one could argue that there is a bug in the OE recipes =
-metadata
->> rather than the distro, since the pulseaudio recipes are known broken
->> for certain architectures -- however they don't contain any =
-blacklisting
->> or whitelisting except for om-gta01/om-gta02 which I added when I =
-became
->> aware of the problem. Antonio, lets just blacklist the broken =
-versions
->> for the machines you're interested in.
->>=20
->> :M:
->=20
-> I can well add DEFAULT_PREFERENCE_om-a780 =3D "-1"
-> in both pulseaudio_0.9.21.bb and pulseaudio_0.9.19.bb
-> Is that what you mean Mickey?
+The next step would be to add some magic to the xserver-xorg recipes to
+make it ${MACHINE_ARCH} only when mesa is ${MACHINE_ARCH}.
 
-Yes.
+regards,
 
-> Way better than my solution but still a bit hackish.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Not necessarily. It would be better if we could limit it for armv4(t) =
-and armv5(t),
-however we don't have such fine granular overrides, hence we need to =
-blacklist
-on machine basis.
+iD8DBQFLi+i3MkyGM64RGpERAgioAJ92mWsOlQQ2wBp9WlMT15RYpRsgzwCaAv7J
+Jwg7AvYkE0LPsLpZshPMLlw=
+=J9CM
+-----END PGP SIGNATURE-----
 
-> If that's OK for you, it'll be fine with me as well.
-
-:)
-
-> About fixing distro, isn't 'minimal' supposed to build all the latest
-> recipes? If so a  conf/distro/include/preferred-minimal-versions.inc
-> would not have much sense if we can't set preference rules per
-> machines (or archs).
-
-We can set preference rules per machine or arch, however the general
-consensus is that this is being done in the distro or local conf.
-
-Yes that codifies machine knowledge in distro and may have to be =
-revisited,
-but at least it has been our working style until now.
-
-:M:=
 
 
