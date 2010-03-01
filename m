@@ -1,29 +1,42 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1NmCmo-0003dG-JD
+	(envelope-from <Tom_Rini@mentor.com>) id 1NmCtD-0007pu-Up
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 22:04:23 +0100
-Received: (qmail 31727 invoked by uid 1003); 1 Mar 2010 21:01:26 -0000
-Received: from localhost (HELO ?192.168.0.157?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 1 Mar 2010 21:01:26 -0000
-Message-ID: <4B8C2B1B.40604@balister.org>
-Date: Mon, 01 Mar 2010 16:01:15 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.7) Gecko/20100120 Fedora/3.0.1-1.fc11 Thunderbird/3.0.1
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <ac9c93b11003011133wa0f4e3bqe7af69ead4d7eec6@mail.gmail.com>
-In-Reply-To: <ac9c93b11003011133wa0f4e3bqe7af69ead4d7eec6@mail.gmail.com>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+	Mon, 01 Mar 2010 22:11:00 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1NmCqS-0005wx-7a from Tom_Rini@mentor.com ;
+	Mon, 01 Mar 2010 13:08:04 -0800
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 1 Mar 2010 13:08:03 -0800
+Received: from 172.30.80.137 ([172.30.80.137]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Mon,  1 Mar 2010 21:08:01 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	01 Mar 2010 14:08:01 -0700
+From: Tom Rini <tom_rini@mentor.com>
+To: Antonio Ospite <ospite@studenti.unina.it>
+In-Reply-To: <20100301214153.a74a73f6.ospite@studenti.unina.it>
+References: <1266575689-12944-1-git-send-email-ospite@studenti.unina.it>
+	<1267464991.9295.397.camel@trini-m4400>
+	<20100301214153.a74a73f6.ospite@studenti.unina.it>
+Organization: Mentor Graphics Corporation
+Date: Mon, 01 Mar 2010 14:08:00 -0700
+Message-ID: <1267477680.4739.225.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 01 Mar 2010 21:08:03.0707 (UTC)
+	FILETIME=[48399CB0:01CAB983]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: {TSC] request to discuss items.
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: meta-toolchain: Show the host system in toolchain archive name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,44 +50,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Mar 2010 21:04:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 01 Mar 2010 21:11:00 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 03/01/2010 02:33 PM, Frans Meulenbroeks wrote:
-> As we have (as far as I know) no procedure to table issues for the
-> TSC, I'm proposing two issues for the TSC:
+On Mon, 2010-03-01 at 21:41 +0100, Antonio Ospite wrote:
+> On Mon, 01 Mar 2010 10:36:31 -0700
+> Tom Rini <tom_rini@mentor.com> wrote:
+>=20
+> > On Fri, 2010-02-19 at 00:34 +0000, Antonio Ospite wrote:
+> > > Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+> > >=20
+> > > ---
+> > > In canadian-sdk.bb ${SDK_SYS} is used as a prefix but I find more log=
+ical to
+> > > put it just before the target system info.
+> >=20
+> > Pushed, thanks.
+> >=20
+>=20
+> You pushed v1, really not a big deal :)
 
- > 1) the location of distro specific files
+Bah... Not my day.  Was it just commit message that changed?
 
-This is a little premature ... There is a good discussion going on about 
-this at the moment. It takes time for the community to draw a conclusion 
-on matters like this.
 
-> 2) how to handle legacy recipes that are not used by any known distro
-
-I'd note that this issue has come up before, and the consensus is no 
-major shuffling of recipes for aesthetic reasons. I don't see any 
-changes that would change the conclusion this time. I believe all of the 
-TSC members are already involved in the on list discussion.
-
-Philip
-
->
-> Both have been discussed on this list, and several options have been coined
-> E.g. for 1) dedicated directories, overlays or retain the current solution
-> And for 2) an overlay, and "obsolete" directory, retain the current
-> solution and remove the recipes.
->
-> May I ask the TSC to provide a verdict on these.
->
-> Thanks alot,
-> Frans
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
