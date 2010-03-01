@@ -1,38 +1,39 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-yx0-f203.google.com ([209.85.210.203])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NmD40-00024n-DA
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NmDBu-0002FZ-Rm
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 22:22:05 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NmD1F-0007HG-JB from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 13:19:13 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Mon, 1 Mar 2010 13:19:11 -0800
-Received: from 172.30.80.137 ([172.30.80.137]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Mon,  1 Mar 2010 21:18:29 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	01 Mar 2010 14:18:28 -0700
-From: Tom Rini <tom_rini@mentor.com>
-To: oe-devel <openembedded-devel@lists.openembedded.org>
-Organization: Mentor Graphics Corporation
-Date: Mon, 01 Mar 2010 14:18:28 -0700
-Message-ID: <1267478308.4739.245.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 01 Mar 2010 21:19:11.0971 (UTC)
-	FILETIME=[D68A9B30:01CAB984]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+	Mon, 01 Mar 2010 22:30:15 +0100
+Received: by yxe41 with SMTP id 41so1223413yxe.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Mar 2010 13:27:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=1zRPaG8v+gNwxEL5cEa6f4LEYqfHsbUQQxUkwrzZTLo=;
+	b=qVDHJldXeKdV6dVmHcRaAJ4oXm0pC3eMXk7zzBhm8idk+PZ07sFbi7LB1nfdZY5Jxj
+	VQA32Ip0LOrmH4Ng68Xb3GezwDrOzEMymn0xMHYcB/0jS9cPHwos6fij6Erz8tdoyzog
+	PHNLARKuOgXVMpLu+28V2kNiHvHgvLy4X8nWI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=C938AB0QA2VCrYcjEO43YaCwVhkM0wIaFA/fOcbyGfQ4cgf8EtgEoTWfdo+HteJUSN
+	gFZcnpbsDG7s7L7gG7Yw4zQiY85qwZ0Fa/VklcmCTbHDx5Dp0D5Rxlx/+ktuFhugVllG
+	Dm6mWk5GI4WueP/JVidqngoJgGiErjZai9MAI=
+MIME-Version: 1.0
+Received: by 10.101.39.2 with SMTP id r2mr3231277anj.67.1267478844121; Mon, 01 
+	Mar 2010 13:27:24 -0800 (PST)
+Date: Mon, 1 Mar 2010 22:27:24 +0100
+Message-ID: <ac9c93b11003011327v1ee75303p334cf298ff8516b7@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.210.203
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.1 required=5.0 tests=AWL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH, RFC] Cleanup / update QEMU related checks
+Subject: [RFC] remove unused svn-updates.dpatch files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,85 +47,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Mar 2010 21:22:05 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 01 Mar 2010 21:30:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-First, we should be performing qemu-native related checks not on ARM,
-but on ENABLE_BINARY_LOCALE_GENERATION (for both the ARM but no
-generation and not ARM but generation) cases.  This clarifies what we do
-in the first sub-check (aside: When can qemu-0.9.x die?).  This changes
-the assume provided check to make sure that at least 'qemu' exists
-(afaict this will exist for distribution packages as well as from-source
-ones where we might not have qemu-arm, if the developer isn't doing arm)
-using the standard check.  Finally (how I wrote it, not how it's in the
-patch), correct (grammar and content) the comment about what GCC
-versions are allowed.  My fault initially for not noticing the gcc
-3.3.x / 3.2.x stuff in the list.
+2010/3/1 Denys Dmytriyenko <denis@denix.org>:
+> On Mon, Mar 01, 2010 at 08:10:31AM +1030, Graham Gower wrote:
 
-Signed-off-by: Tom Rini <tom_rini@mentor.com>
+>> What should offend you more is stuff like this:
+>>
+>> [grg@rak gcc]$ pwd
+>> /home/grg/oe/openembedded/recipes/gcc
+>> [grg@rak gcc]$ find . -name svn-updates.dpatch -exec ls -l {} \;
+>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
+>> ./gcc-4.4.2/debian/svn-updates.dpatch
+>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
+>> ./gcc-4.4.1/debian/svn-updates.dpatch
+>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
+>> ./gcc-4.3.1/debian/svn-updates.dpatch
+>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
+>> ./gcc-4.3.3/debian/svn-updates.dpatch
+>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
+>> ./gcc-4.3.4/debian/svn-updates.dpatch
+>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
+>> ./gcc-svn/debian/svn-updates.dpatch
+>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
+>> ./gcc-4.3.2/debian/svn-updates.dpatch
+>> [grg@rak gcc]$ grep svn-updates *
+>> [grg@rak gcc]$
+>
+> So, there is 125 MB wasted right there... Thanks for the heads up! :)
 
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index 990e75e..eeff262 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -1333,16 +1333,15 @@ def check_app_exists(app, d):
- 	return len(which(path, app)) !=3D 0
-=20
- def check_gcc3(data):
--	# Primarly used by qemu to make sure we have a workable gcc-3.4.x.
--	# Start by checking for the program name as we build it, was not
--	# all host-provided gcc-3.4's will work.
--
-+	# Primarly used by qemu to make sure we have a workable gcc-3.x.
-+	# Start by checking for the program name as we build it as there
-+	# are some distribtuion provided gcc-3.x's that will not work.
- 	gcc3_versions =3D 'gcc-3.4.6 gcc-3.4.4 gcc34 gcc-3.4 gcc-3.4.7 gcc-3.3
-gcc33 gcc-3.3.6 gcc-3.2 gcc32'
-=20
- 	for gcc3 in gcc3_versions.split():
- 		if check_app_exists(gcc3, data):
- 			return gcc3
--=09
-+
- 	return False
-=20
- # Patch handling
-diff --git a/classes/sanity.bbclass b/classes/sanity.bbclass
-index b66c9a9..a78e8ed 100644
---- a/classes/sanity.bbclass
-+++ b/classes/sanity.bbclass
-@@ -83,8 +83,10 @@ def check_sanity(e):
-=20
- 	required_utilities =3D "patch help2man diffstat texi2html makeinfo cvs
-svn bzip2 tar gzip gawk md5sum"
-=20
--	if data.getVar('TARGET_ARCH', e.data, True) =3D=3D "arm":
--		# qemu-native needs gcc 3.x
-+	# If we'll be running qemu, perform some sanity checks
-+	if data.getVar('ENABLE_BINARY_LOCALE_GENERATION', e.data, True):
-+		# Some versions of qemu-native needs gcc 3.x.  Do a special
-+		# check here to allow for host 'gcc' is 3.x.
- 		if "qemu-native" not in assume_provided and "gcc3-native" in
-assume_provided:
- 			gcc_version =3D commands.getoutput("${BUILD_PREFIX}gcc --version |
-head -n 1 | cut -f 3 -d ' '")
-=20
-@@ -93,8 +95,7 @@ def check_sanity(e):
- 				missing =3D missing + "gcc-3.x (needed for qemu-native),"
-=20
- 		if "qemu-native" in assume_provided:
--			if not check_app_exists("qemu-arm", e.data):
--				messages =3D messages + "qemu-native was in ASSUME_PROVIDED but the
-QEMU binaries (qemu-arm) can't be found in PATH"
-+			required_utilities +=3D "qemu"
-=20
- 		try:
- 			if os.path.exists("/proc/sys/vm/mmap_min_addr"):
+Checked it and the 4.4.[12] and gcc-svn versions are gone.
+the gcc-4.3.[1-4] versions are still there but seem unused:
 
+frans@linux-suse:~/oe/openembedded/recipes/gcc> grep -r svn-updates.dpatch .
+frans@linux-suse:~/oe/openembedded/recipes/gcc>
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+Howvever as gcc is quite core, I'd rather verify first that it is ok
+to remove them
+(or can someone with more gcc knowledge remove)
+
+Frans.
 
 
