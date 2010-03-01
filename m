@@ -1,39 +1,41 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from smtp-out04.alice.it ([85.37.17.100])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NmBQ9-00079J-64
+	(envelope-from <ospite@studenti.unina.it>) id 1NmCUG-0000VG-Dl
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 20:36:50 +0100
-Received: by gyd5 with SMTP id 5so1276893gyd.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Mar 2010 11:33:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=2p28j1CTpzCJgtPLZAR8V6dpAxf9Xj58+Hf2jAfDypM=;
-	b=LxUVAtLZGKm+nprOQVShfLJR9pSeu1br0gyHKJQSE6clklKnoI4xD74yE9dr/WBTwl
-	KfkzJiemhmmdKw3JXVvCsp397r+A7LcjsXABCsgQOkhQMpD3LSBH1b2ke8GBgv7ZEl2h
-	7MTWsGM5BJcpc9z9HkXcYJ5n91eVq70RyBags=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=jYwA5Qf6aFHZYnFQJRkzj88cwtbv1H+yw9aNDdUNC7Xg05rsKIB4mHc25r/VvQ9VC3
-	t4cn4UAjhZ9I7/02gIayZIwKXvsvlykkuVUgVZwzzqqYvhpDaJqrpWAT405eYKdNuJpo
-	qxNS2+2TPZr7UlAcQBcQ3Z2ABdnekSIesmx8w=
-MIME-Version: 1.0
-Received: by 10.101.175.31 with SMTP id c31mr6952054anp.99.1267472038738; Mon, 
-	01 Mar 2010 11:33:58 -0800 (PST)
-Date: Mon, 1 Mar 2010 20:33:58 +0100
-Message-ID: <ac9c93b11003011133wa0f4e3bqe7af69ead4d7eec6@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+	Mon, 01 Mar 2010 21:45:13 +0100
+Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-out04.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 1 Mar 2010 21:42:18 +0100
+Received: from FBCMCL01B04.fbc.local ([192.168.69.85]) by FBCMMO02.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 1 Mar 2010 21:42:16 +0100
+Received: from badebec ([87.3.28.51]) by FBCMCL01B04.fbc.local with Microsoft
+	SMTPSVC(6.0.3790.3959); Mon, 1 Mar 2010 21:42:12 +0100
+Date: Mon, 1 Mar 2010 21:41:53 +0100
+From: Antonio Ospite <ospite@studenti.unina.it>
+To: Tom Rini <tom_rini@mentor.com>
+Message-Id: <20100301214153.a74a73f6.ospite@studenti.unina.it>
+In-Reply-To: <1267464991.9295.397.camel@trini-m4400>
+References: <1266575689-12944-1-git-send-email-ospite@studenti.unina.it>
+	<1267464991.9295.397.camel@trini-m4400>
+X-Mailer: Sylpheed 3.0.0 (GTK+ 2.18.7; i486-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+Mime-Version: 1.0
+X-OriginalArrivalTime: 01 Mar 2010 20:42:12.0526 (UTC)
+	FILETIME=[ABA62CE0:01CAB97F]
+X-SA-Exim-Connect-IP: 85.37.17.100
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
+X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: {TSC] request to discuss items.
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: meta-toolchain: Show the host system in toolchain archive name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,23 +49,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Mar 2010 19:36:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 01 Mar 2010 20:45:13 -0000
+X-Groupsio-MsgNum: 17202
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Mon__1_Mar_2010_21_41_53_+0100_tDJmFM.lxL7_l7qU"
 
-As we have (as far as I know) no procedure to table issues for the
-TSC, I'm proposing two issues for the TSC:
+--Signature=_Mon__1_Mar_2010_21_41_53_+0100_tDJmFM.lxL7_l7qU
+Content-Type: text/plain; charset=US-ASCII
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-1) the location of distro specific files
-2) how to handle legacy recipes that are not used by any known distro
+On Mon, 01 Mar 2010 10:36:31 -0700
+Tom Rini <tom_rini@mentor.com> wrote:
 
-Both have been discussed on this list, and several options have been coined
-E.g. for 1) dedicated directories, overlays or retain the current solution
-And for 2) an overlay, and "obsolete" directory, retain the current
-solution and remove the recipes.
+> On Fri, 2010-02-19 at 00:34 +0000, Antonio Ospite wrote:
+> > Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+> >=20
+> > ---
+> > In canadian-sdk.bb ${SDK_SYS} is used as a prefix but I find more logic=
+al to
+> > put it just before the target system info.
+>=20
+> Pushed, thanks.
+>=20
 
-May I ask the TSC to provide a verdict on these.
+You pushed v1, really not a big deal :)
 
-Thanks alot,
-Frans
+Many thanks,
+   Antonio
 
+--=20
+Antonio Ospite
+http://ao2.it
 
+PGP public key ID: 0x4553B001
+
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
+
+--Signature=_Mon__1_Mar_2010_21_41_53_+0100_tDJmFM.lxL7_l7qU
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEARECAAYFAkuMJpEACgkQ5xr2akVTsAElLgCdGwQhGYnFJnAamUTsJC9EcM3C
+busAoI1oOo9sudEehH9vv2ou7B9ikq4p
+=sbXv
+-----END PGP SIGNATURE-----
+
+--Signature=_Mon__1_Mar_2010_21_41_53_+0100_tDJmFM.lxL7_l7qU--
