@@ -1,41 +1,43 @@
-Received: from smtp-out04.alice.it ([85.37.17.100])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1NmCUG-0000VG-Dl
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NmCfL-00072p-4p
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 21:45:13 +0100
-Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-out04.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 1 Mar 2010 21:42:18 +0100
-Received: from FBCMCL01B04.fbc.local ([192.168.69.85]) by FBCMMO02.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 1 Mar 2010 21:42:16 +0100
-Received: from badebec ([87.3.28.51]) by FBCMCL01B04.fbc.local with Microsoft
-	SMTPSVC(6.0.3790.3959); Mon, 1 Mar 2010 21:42:12 +0100
-Date: Mon, 1 Mar 2010 21:41:53 +0100
-From: Antonio Ospite <ospite@studenti.unina.it>
-To: Tom Rini <tom_rini@mentor.com>
-Message-Id: <20100301214153.a74a73f6.ospite@studenti.unina.it>
-In-Reply-To: <1267464991.9295.397.camel@trini-m4400>
-References: <1266575689-12944-1-git-send-email-ospite@studenti.unina.it>
-	<1267464991.9295.397.camel@trini-m4400>
-X-Mailer: Sylpheed 3.0.0 (GTK+ 2.18.7; i486-pc-linux-gnu)
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+	Mon, 01 Mar 2010 21:56:35 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o21Krjn6013990
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 1 Mar 2010 20:53:45 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 13618-05 for <openembedded-devel@lists.openembedded.org>;
+	Mon,  1 Mar 2010 20:53:34 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o21KrVVA013984
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 1 Mar 2010 20:53:32 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20100228033438.GE30145@xora-desktop.xora.org.uk>
+References: <ac9c93b11002270725t46beb56dx5c4dc63c0f6485ca@mail.gmail.com>
+	<20100227165600.GD30145@xora-desktop.xora.org.uk>
+	<1267303607.5437.446.camel@lenovo.internal.reciva.com>
+	<20100228033438.GE30145@xora-desktop.xora.org.uk>
+Date: Mon, 01 Mar 2010 20:53:29 +0000
+Message-ID: <1267476809.15923.31.camel@rex>
 Mime-Version: 1.0
-X-OriginalArrivalTime: 01 Mar 2010 20:42:12.0526 (UTC)
-	FILETIME=[ABA62CE0:01CAB97F]
-X-SA-Exim-Connect-IP: 85.37.17.100
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+X-Mailer: Evolution 2.28.2 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
-X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
-	version=3.2.5
+X-Spam-Level: *
+X-Spam-Status: No, score=1.7 required=5.0 tests=RDNS_DYNAMIC,TVD_RCVD_IP
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: meta-toolchain: Show the host system in toolchain archive name
+Subject: Re: [RFC] recipes/images/${distro}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,57 +51,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Mar 2010 20:45:13 -0000
-X-Groupsio-MsgNum: 17202
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg="PGP-SHA1";
-	boundary="Signature=_Mon__1_Mar_2010_21_41_53_+0100_tDJmFM.lxL7_l7qU"
+X-List-Received-Date: Mon, 01 Mar 2010 20:56:35 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
---Signature=_Mon__1_Mar_2010_21_41_53_+0100_tDJmFM.lxL7_l7qU
-Content-Type: text/plain; charset=US-ASCII
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sun, 2010-02-28 at 03:34 +0000, Graeme Gregory wrote:
+> On Sat, Feb 27, 2010 at 08:46:47PM +0000, Phil Blundell wrote:
+> > On Sat, 2010-02-27 at 16:56 +0000, Graeme Gregory wrote:
+> > > NAK on creating extra levels.
+> > > 
+> > > Changing the level where recipes are held is not an option do to the way
+> > > you tell bitbake how to find them.
+> > > 
+> > > BBFILES = "${OE}/org.openembedded.dev/recipes/*/*.bb"
+> > 
+> > Is that really such a big deal?  We seemed to manage to switch BBFILES
+> > from /packages/ to /recipes/ without any major casualties, and I would
+> > have thought that adding an extra level in there would be equally
+> > straightforward.  Or of course, even better, the distro-specific recipes
+> > could go in an overlay which the distro config would select.
+> > 
+> I have been talking about using overlays for distros at every OE meetup
+> since kergoth made it easy to do. So I fully support that idea.
 
-On Mon, 01 Mar 2010 10:36:31 -0700
-Tom Rini <tom_rini@mentor.com> wrote:
+My layers suggestion for bitbake would make it much easier to enable
+this kind of thing for end users too...
 
-> On Fri, 2010-02-19 at 00:34 +0000, Antonio Ospite wrote:
-> > Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
-> >=20
-> > ---
-> > In canadian-sdk.bb ${SDK_SYS} is used as a prefix but I find more logic=
-al to
-> > put it just before the target system info.
->=20
-> Pushed, thanks.
->=20
+Perhaps this would get people testing bitbake master? :)
 
-You pushed v1, really not a big deal :)
+Cheers,
 
-Many thanks,
-   Antonio
+Richard
 
---=20
-Antonio Ospite
-http://ao2.it
 
-PGP public key ID: 0x4553B001
 
-A: Because it messes up the order in which people normally read text.
-   See http://en.wikipedia.org/wiki/Posting_style
-Q: Why is top-posting such a bad thing?
-A: Top-posting.
-Q: What is the most annoying thing in e-mail?
-
---Signature=_Mon__1_Mar_2010_21_41_53_+0100_tDJmFM.lxL7_l7qU
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEARECAAYFAkuMJpEACgkQ5xr2akVTsAElLgCdGwQhGYnFJnAamUTsJC9EcM3C
-busAoI1oOo9sudEehH9vv2ou7B9ikq4p
-=sbXv
------END PGP SIGNATURE-----
-
---Signature=_Mon__1_Mar_2010_21_41_53_+0100_tDJmFM.lxL7_l7qU--
