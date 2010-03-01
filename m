@@ -1,42 +1,42 @@
-Received: from mail-pz0-f184.google.com ([209.85.222.184])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1NmDJc-0005qQ-2B
+	(envelope-from <andrea.adami@gmail.com>) id 1NmDLa-0006Bg-U7
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 22:38:16 +0100
-Received: by pzk14 with SMTP id 14so3814397pzk.28
+	Mon, 01 Mar 2010 22:40:15 +0100
+Received: by pwi5 with SMTP id 5so1916290pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Mar 2010 13:35:21 -0800 (PST)
+	Mon, 01 Mar 2010 13:37:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type;
-	bh=9yGi7m9yTHGRdLyklsi7EH/GnTbVha9Gz10L3R5DDdo=;
-	b=RnvNUVzoyoalc1NiaAp7gC0eI1AopXZRiUnSAbN6PeAdeQg3aHGN7nU+V+cV/PD++J
-	LYeP3Kv2wsd6uHqDHZfAAhiTa2xQVvY+JRVhyyrEhKwvWhV/ac4/gs8nZxx27tbjO8DH
-	Z3Dqo8pr/PuWOJlLSCyIM85MwhY8lvYRK06uM=
+	bh=2SFKtWIbXWQP0oGfcDf7FahswSVby3XIKQok2huVDuU=;
+	b=HpQT33nfDqJ0+0btsVFrnVrLOzEZQiUUrPQVCwBCYkycZxXjFS9YmuWj98WLGvj9/I
+	2F22ZNQkHeulii8pydH6to3K7UXKsyd2nDos1BExrvbPa3ucTrVAJ+MGrL733SElAq7l
+	9BoLJpmyTkWLAlgnz3XzqiJfKg6JnTw1JhgDw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=XXej5Nrt3wKax9FKDIZ0tB7Az+p432V5mECFx27AWJdmfpne80N3Z+8ROoQL2hAU1n
-	n/zBcPKEC9BH6EQ5TP0w0stOrxy8+Z3lJxUCdZJUWz5F8WPFMh10/bt8fSYAtaTOzYbs
-	1oi15qi3bvwXSbG7szhnBdxSOGu1c1vinqx6c=
+	b=LSgb8f+oK5WYd6LcdApbaOWvWrbjAGffe7Bgj9/92kKrP6roiZyOprucyquRau0Ugx
+	/UP3jnxuN9vaRHpcMPkfIStYVfe4HaasWxazUyyy2Ja3kNaDhQdBU3OEGCQQ3eSbxmnE
+	pQbt7Lw9Uq1Vci2HfYYmIvkXqfAl/hWXm3HQ4=
 MIME-Version: 1.0
-Received: by 10.143.25.1 with SMTP id c1mr2809588wfj.17.1267479320978; Mon, 01 
-	Mar 2010 13:35:20 -0800 (PST)
-In-Reply-To: <ac9c93b11003011327v1ee75303p334cf298ff8516b7@mail.gmail.com>
-References: <ac9c93b11003011327v1ee75303p334cf298ff8516b7@mail.gmail.com>
-Date: Tue, 2 Mar 2010 08:05:20 +1030
-Message-ID: <6ec4247d1003011335w5fb01238o4fa7551b96c57406@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+Received: by 10.141.2.4 with SMTP id e4mr2810289rvi.192.1267479444027; Mon, 01 
+	Mar 2010 13:37:24 -0800 (PST)
+In-Reply-To: <E1Nm0HI-0004Qt-Pn@melo.openembedded.org>
+References: <E1Nm0HI-0004Qt-Pn@melo.openembedded.org>
+Date: Mon, 1 Mar 2010 22:37:23 +0100
+Message-ID: <d1b08f941003011337i15e21dcx340cef502c2ea151@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.222.184
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] remove unused svn-updates.dpatch files
+Subject: Re: [oe-commits] Koen Kooi : angstrom: sync pango and pango-native versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,57 +50,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Mar 2010 21:38:16 -0000
+X-List-Received-Date: Mon, 01 Mar 2010 21:40:15 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On 2 March 2010 07:57, Frans Meulenbroeks <fransmeulenbroeks@gmail.com> wrote:
-> 2010/3/1 Denys Dmytriyenko <denis@denix.org>:
->> On Mon, Mar 01, 2010 at 08:10:31AM +1030, Graham Gower wrote:
->
->>> What should offend you more is stuff like this:
->>>
->>> [grg@rak gcc]$ pwd
->>> /home/grg/oe/openembedded/recipes/gcc
->>> [grg@rak gcc]$ find . -name svn-updates.dpatch -exec ls -l {} \;
->>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->>> ./gcc-4.4.2/debian/svn-updates.dpatch
->>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->>> ./gcc-4.4.1/debian/svn-updates.dpatch
->>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->>> ./gcc-4.3.1/debian/svn-updates.dpatch
->>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->>> ./gcc-4.3.3/debian/svn-updates.dpatch
->>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->>> ./gcc-4.3.4/debian/svn-updates.dpatch
->>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->>> ./gcc-svn/debian/svn-updates.dpatch
->>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->>> ./gcc-4.3.2/debian/svn-updates.dpatch
->>> [grg@rak gcc]$ grep svn-updates *
->>> [grg@rak gcc]$
->>
->> So, there is 125 MB wasted right there... Thanks for the heads up! :)
->
-> Checked it and the 4.4.[12] and gcc-svn versions are gone.
-> the gcc-4.3.[1-4] versions are still there but seem unused:
->
-> frans@linux-suse:~/oe/openembedded/recipes/gcc> grep -r svn-updates.dpatch .
-> frans@linux-suse:~/oe/openembedded/recipes/gcc>
->
-> Howvever as gcc is quite core, I'd rather verify first that it is ok
-> to remove them
-> (or can someone with more gcc knowledge remove)
->
-> Frans.
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Thx, but after this patch I see
 
-Perhaps there are other patches in the debian directories that are also unused?
+NOTE: preferred version 1.24.4 of pango-native not available (for item
+pango-module-basic-x)
+NOTE: preferred version 1.24.4 of pango-native not available (for item
+pango-module-basic-fc)
+NOTE: preferred version 1.24.4 of pango-native not available (for item
+pango-native)
 
--Graham
+Andrea
 
 
