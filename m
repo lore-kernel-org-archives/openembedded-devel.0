@@ -1,40 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nm25C-00006r-Cx for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 10:38:38 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nm22U-0000Do-G1 for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 10:35:46 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Mar 2010 10:35:46 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <dp@xora.org.uk>) id 1Nm2EV-0004WF-IO
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Mar 2010 10:48:11 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 76432A5014
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Mar 2010 10:35:46 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon,  1 Mar 2010 09:45:22 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id 0jdz8ejfGVPT
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  1 Mar 2010 09:45:22 +0000 (GMT)
+Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 21D27A5010
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  1 Mar 2010 09:45:22 +0000 (GMT)
+Received: by xora-desktop.xora.org.uk (Postfix, from userid 500)
+	id 480BC24548; Mon,  1 Mar 2010 09:45:15 +0000 (GMT)
+Date: Mon, 1 Mar 2010 09:45:15 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 01 Mar 2010 10:35:36 +0100
-Message-ID: <hmg1p8$suj$1@dough.gmane.org>
+Message-ID: <20100301094515.GI30145@xora-desktop.xora.org.uk>
 References: <1266605268-5957-1-git-send-email-clarson@kergoth.com>
-	<hmg0mh$ou0$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100219 Shredder/3.0.3pre
-In-Reply-To: <hmg0mh$ou0$1@dough.gmane.org>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	<hmg0mh$ou0$1@dough.gmane.org> <hmg1p8$suj$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <hmg1p8$suj$1@dough.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-08-17)
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_HELO_PASS,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] package.bbclass: when running 'file', be explicit about the path to the magic
@@ -51,79 +51,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Mar 2010 09:38:38 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 01 Mar 2010 09:48:12 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Mon, Mar 01, 2010 at 10:35:36AM +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> I think I know what's happening.
+> 
+> On my (debian) buildhost I have file 4.26. (Re)building file-native 5.04
+> gives me:
+> 
+> ./staging/x86_64-linux/usr/share/misc/magic.mgc
+> 
+> Graeme has file 5.03 on his buildhost and has
+> 
+> ./staging/x86_64-linux/usr/share/file/magic
+> 
+> So it seems that the buildhost contamination also affects file-native :(
+> 
+Its not contamination, its just simply that file 5.XX moved its magic
+file to /usr/share/misc/
 
-I think I know what's happening.
+Im still building 4.21 for some reason so dont see this.
 
-On my (debian) buildhost I have file 4.26. (Re)building file-native 5.04
-gives me:
-
-./staging/x86_64-linux/usr/share/misc/magic.mgc
-
-Graeme has file 5.03 on his buildhost and has
-
-./staging/x86_64-linux/usr/share/file/magic
-
-So it seems that the buildhost contamination also affects file-native :(
-
-regards,
-
-Koen
-
-On 01-03-10 10:17, Koen Kooi wrote:
-> Hi,
-> 
-> I don't have 'file/' in STAGING_DATADIR_NATIVE so I now have lots of
-> unstripped stuff (150MB libxul.so). Could you please add an extra check
-> to see if file/magic exists?
-> 
-> regards,
-> 
-> Koen
-> 
-> On 19-02-10 19:47, Chris Larson wrote:
->> From: Tom Rini <tom_rini@mentor.com>
-> 
->> This works around one relocation issue.
-> 
->> Signed-off-by: Tom Rini <tom_rini@mentor.com>
->> Signed-off-by: Chris Larson <chris_larson@mentor.com>
->> ---
->>  classes/package.bbclass |    5 +++--
->>  1 files changed, 3 insertions(+), 2 deletions(-)
-> 
->> diff --git a/classes/package.bbclass b/classes/package.bbclass
->> index 062f782..72c9053 100644
->> --- a/classes/package.bbclass
->> +++ b/classes/package.bbclass
->> @@ -155,11 +155,12 @@ def runstrip(file, d):
->>      import commands, stat
-> 
->>      pathprefix = "export PATH=%s; " % bb.data.getVar('PATH', d, True)
->> +    magicfile = "%s/file/magic" % bb.data.getVar('STAGING_DATADIR_NATIVE', d, True) 
-> 
->> -    ret, result = commands.getstatusoutput("%sfile '%s'" % (pathprefix, file))
->> +    ret, result = commands.getstatusoutput("%sfile -m %s '%s'" % (pathprefix, magicfile, file))
-> 
->>      if ret:
->> -        bb.error("runstrip: 'file %s' failed (forced strip)" % file)
->> +        bb.error("runstrip: 'file -m %s %s' failed (forced strip)" % (magicfile, file))
-> 
->>      if "not stripped" not in result:
->>          bb.debug(1, "runstrip: skip %s" % file)
-> 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLi4poMkyGM64RGpERAjszAJ9OFI03ODoZTYp40teNRyKwkK38uQCdGlo6
-5QfkyN8ldZ/E67X8ETrxtb8=
-=X6Dm
------END PGP SIGNATURE-----
+Graeme
 
 
 
