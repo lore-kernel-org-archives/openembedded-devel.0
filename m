@@ -1,43 +1,29 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NmCfL-00072p-4p
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <philip@balister.org>) id 1NmCmo-0003dG-JD
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 21:56:35 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o21Krjn6013990
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 1 Mar 2010 20:53:45 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 13618-05 for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 Mar 2010 20:53:34 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o21KrVVA013984
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 1 Mar 2010 20:53:32 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Mon, 01 Mar 2010 22:04:23 +0100
+Received: (qmail 31727 invoked by uid 1003); 1 Mar 2010 21:01:26 -0000
+Received: from localhost (HELO ?192.168.0.157?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 1 Mar 2010 21:01:26 -0000
+Message-ID: <4B8C2B1B.40604@balister.org>
+Date: Mon, 01 Mar 2010 16:01:15 -0500
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.7) Gecko/20100120 Fedora/3.0.1-1.fc11 Thunderbird/3.0.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100228033438.GE30145@xora-desktop.xora.org.uk>
-References: <ac9c93b11002270725t46beb56dx5c4dc63c0f6485ca@mail.gmail.com>
-	<20100227165600.GD30145@xora-desktop.xora.org.uk>
-	<1267303607.5437.446.camel@lenovo.internal.reciva.com>
-	<20100228033438.GE30145@xora-desktop.xora.org.uk>
-Date: Mon, 01 Mar 2010 20:53:29 +0000
-Message-ID: <1267476809.15923.31.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+References: <ac9c93b11003011133wa0f4e3bqe7af69ead4d7eec6@mail.gmail.com>
+In-Reply-To: <ac9c93b11003011133wa0f4e3bqe7af69ead4d7eec6@mail.gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
-X-Spam-Level: *
-X-Spam-Status: No, score=1.7 required=5.0 tests=RDNS_DYNAMIC,TVD_RCVD_IP
-	autolearn=no version=3.2.5
+X-Spam-Level: 
+X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] recipes/images/${distro}
+Subject: Re: {TSC] request to discuss items.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,37 +37,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Mar 2010 20:56:35 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 01 Mar 2010 21:04:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2010-02-28 at 03:34 +0000, Graeme Gregory wrote:
-> On Sat, Feb 27, 2010 at 08:46:47PM +0000, Phil Blundell wrote:
-> > On Sat, 2010-02-27 at 16:56 +0000, Graeme Gregory wrote:
-> > > NAK on creating extra levels.
-> > > 
-> > > Changing the level where recipes are held is not an option do to the way
-> > > you tell bitbake how to find them.
-> > > 
-> > > BBFILES = "${OE}/org.openembedded.dev/recipes/*/*.bb"
-> > 
-> > Is that really such a big deal?  We seemed to manage to switch BBFILES
-> > from /packages/ to /recipes/ without any major casualties, and I would
-> > have thought that adding an extra level in there would be equally
-> > straightforward.  Or of course, even better, the distro-specific recipes
-> > could go in an overlay which the distro config would select.
-> > 
-> I have been talking about using overlays for distros at every OE meetup
-> since kergoth made it easy to do. So I fully support that idea.
+On 03/01/2010 02:33 PM, Frans Meulenbroeks wrote:
+> As we have (as far as I know) no procedure to table issues for the
+> TSC, I'm proposing two issues for the TSC:
 
-My layers suggestion for bitbake would make it much easier to enable
-this kind of thing for end users too...
+ > 1) the location of distro specific files
 
-Perhaps this would get people testing bitbake master? :)
+This is a little premature ... There is a good discussion going on about 
+this at the moment. It takes time for the community to draw a conclusion 
+on matters like this.
 
-Cheers,
+> 2) how to handle legacy recipes that are not used by any known distro
 
-Richard
+I'd note that this issue has come up before, and the consensus is no 
+major shuffling of recipes for aesthetic reasons. I don't see any 
+changes that would change the conclusion this time. I believe all of the 
+TSC members are already involved in the on list discussion.
 
+Philip
+
+>
+> Both have been discussed on this list, and several options have been coined
+> E.g. for 1) dedicated directories, overlays or retain the current solution
+> And for 2) an overlay, and "obsolete" directory, retain the current
+> solution and remove the recipes.
+>
+> May I ask the TSC to provide a verdict on these.
+>
+> Thanks alot,
+> Frans
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
