@@ -1,40 +1,47 @@
-Received: from smtp-out05a.alice.it ([85.33.3.5])
+Received: from mail-iw0-f180.google.com ([209.85.223.180])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1NmEH3-0007QN-O8
+	(envelope-from <raj.khem@gmail.com>) id 1NmETk-00018W-3l
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 23:39:41 +0100
-Received: from FBCMMO04.fbc.local ([7.168.68.254]) by smtp-OUT05A.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 1 Mar 2010 23:36:45 +0100
-Received: from FBCMCL01B08.fbc.local ([192.168.171.46]) by FBCMMO04.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 1 Mar 2010 23:35:48 +0100
-Received: from badebec ([87.3.28.51]) by FBCMCL01B08.fbc.local with Microsoft
-	SMTPSVC(6.0.3790.3959); Mon, 1 Mar 2010 23:35:48 +0100
-Date: Mon, 1 Mar 2010 23:35:37 +0100
-From: Antonio Ospite <ospite@studenti.unina.it>
+	Mon, 01 Mar 2010 23:52:59 +0100
+Received: by iwn10 with SMTP id 10so2708316iwn.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Mar 2010 14:49:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=aQ2Lx+CUC6fsPW3pGCtqNZlm9kADMalwheC/TGSq1q0=;
+	b=txd2Ifhwe+9t2FW/rlKak1gPh9G9asZEVRQ80uWMsUmPii4Ls887r880cw+m3qzD1y
+	4nyHjQMhJ1G+TqiyJ+XBsq6tI9KRuPrvZLW4JjvpeafF8vRoU3FWuD5oujRjqndU+Pwa
+	Nhw+hlXXhk8JkQXJHW30bXZaZZShm9kL3scIc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=tXpcCt2mbZTZ+OFcRt2QmnHA0Z6+wGf0DRxwWlyS+4ZZaBzJ8fO779SiDavP5hJDR8
+	PH5CiZc76Ykpiuz/s1DOFuCfTs+3qKWv7B8FqPtnVgVcKaxK9jrTIqjqWgbcwgWM62/z
+	+sUq8vnm7gyklKHadycUIw/kVsuxWW+iiQrqw=
+MIME-Version: 1.0
+Received: by 10.231.167.204 with SMTP id r12mr324040iby.31.1267483793118; Mon, 
+	01 Mar 2010 14:49:53 -0800 (PST)
+In-Reply-To: <b6ebd0a51003011434j12eeb427u9dd959f23795b642@mail.gmail.com>
+References: <ac9c93b11002281139g6963e753w970c97002611c78c@mail.gmail.com>
+	<1267392928.13054.1.camel@andromeda>
+	<19c1b8a91003011411p420a449dw3c03d03c6f5cec9a@mail.gmail.com>
+	<20100301223055.GF15391@denix.org>
+	<b6ebd0a51003011434j12eeb427u9dd959f23795b642@mail.gmail.com>
+Date: Mon, 1 Mar 2010 14:49:53 -0800
+Message-ID: <19c1b8a91003011449i33db116dud9d181e5bc78d5c5@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20100301233537.dc587174.ospite@studenti.unina.it>
-In-Reply-To: <19c1b8a91003011414p3610b861k136ea412526bff19@mail.gmail.com>
-References: <1267381940-6598-1-git-send-email-ospite@studenti.unina.it>
-	<19c1b8a91003011414p3610b861k136ea412526bff19@mail.gmail.com>
-X-Mailer: Sylpheed 3.0.0 (GTK+ 2.18.7; i486-pc-linux-gnu)
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-Mime-Version: 1.0
-X-OriginalArrivalTime: 01 Mar 2010 22:35:48.0708 (UTC)
-	FILETIME=[8A690240:01CAB98F]
-X-SA-Exim-Connect-IP: 85.33.3.5
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+X-SA-Exim-Connect-IP: 209.85.223.180
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
-X-Spam-Level: *
-X-Spam-Status: No, score=1.6 required=5.0 tests=AWL,RCVD_ILLEGAL_IP
-	autolearn=no version=3.2.5
+X-Spam-Level: 
+X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC, PATCH] distros: prettier notation for dev snapshots version strings
+Subject: Re: [RFC} glib-2.0 cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,61 +55,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Mar 2010 22:39:42 -0000
-X-Groupsio-MsgNum: 17225
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg="PGP-SHA1";
-	boundary="Signature=_Mon__1_Mar_2010_23_35_37_+0100_zypAukEU4hTfX8cl"
-
---Signature=_Mon__1_Mar_2010_23_35_37_+0100_zypAukEU4hTfX8cl
+X-List-Received-Date: Mon, 01 Mar 2010 22:52:59 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, 1 Mar 2010 14:14:13 -0800
-Khem Raj <raj.khem@gmail.com> wrote:
+On Mon, Mar 1, 2010 at 2:34 PM, Chris Larson <clarson@kergoth.com> wrote:
+> On Mon, Mar 1, 2010 at 3:30 PM, Denys Dmytriyenko <denis@denix.org> wrote=
+:
+>
+>> On Mon, Mar 01, 2010 at 02:11:54PM -0800, Khem Raj wrote:
+>> > On Sun, Feb 28, 2010 at 1:35 PM, Michael 'Mickey' Lauer
+>> > <mickey@vanille-media.de> wrote:
+>> > > Am Sonntag, den 28.02.2010, 20:39 +0100 schrieb Frans Meulenbroeks:
+>> > >> We have 26 glib-2.0 recipes (and 8 native ones). (see ls below)
+>> > >> Only a few versions are used (see also the grep below)
+>> > >>
+>> > >> for glib-2.0:
+>> > >> "2.12.12"
+>> > >> "2.16.4"
+>> > >> "2.18.3"
+>> > >> "2.20.3"
+>> > >> "2.22.1"
+>> > >> "2.22.4"
+>> > >> "2.6.4"
+>> > >> "2.8.6"
+>> > >>
+>> > >> for glib-2.0-native:
+>> > >> "2.16.1"
+>> > >> "2.18.0"
+>> > >> "2.22.1"
+>> > >> "2.22.4"
+>> > >>
+>> > >> Both include the last two versions
+>> > >> Proposal is to remove all versions that are not used.
+>> > >>
+>> > >> How do people feel about this?
+>> > >
+>> > > Sounds good to me, althoug I'd recommend not removing them but just
+>> > > moving them out of sight, i.e. in an 'old' folder. That way we could
+>> > > please both the lets-keep-everything-no-matter-how-rotten and also t=
+he
+>> > > lets-strive-for-few-high-quality recipes.
+>> > >
+>> >
+>> > FWIW I like the idea of having 'obsolete' recipes so moving them to
+>> > recipes/obsolete may not be so bad.
+>>
+>> +1 on this one, since we already have recipes/obsolete in BBMASK by defa=
+ult
+>> and it will reduce parse time for obsoleted recipes. And git-mv does a n=
+ice
+>> enough job of preserving commit history...
+>
+>
+> To clarify, git-mv is no different than a git rm + git add. =A0It's the
+> analysis tools like git diff-tree/log that know how to identify a copy/mo=
+ve
+> in a commit. =A0:)
 
-> On Sun, Feb 28, 2010 at 10:32 AM, Antonio Ospite
-> <ospite@studenti.unina.it> wrote:
-> > Make archives names look a little better. Compare the current:
-> > =A0minimal-.dev-snapshot-20100216-i686-linux-armv5te-linux-gnueabi-tool=
-chain.tar.bz2
-> > to the proposed:
-> > =A0minimal-dev.snapshot.20100216-i686-linux-armv5te-linux-gnueabi-toolc=
-hain.tar.bz2
->=20
-> may be just getting rid of that '-.' and using just '-' would be enough ?
-> is there any advantage of using . over -
+
+so git mv will also increase our repo size then ?
+
+> --
+> Christopher Larson
+> clarson at kergoth dot com
+> Founder - BitBake, OpenEmbedded, OpenZaurus
+> Maintainer - Tslib
+> Senior Software Engineer, Mentor Graphics
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
-I thought that using some dot-notation would make more clear both that
-the string indicates a _version_ and that it is a single field on its
-own.
 
-Regards,
-   Antonio
-
---=20
-Antonio Ospite
-http://ao2.it
-
-PGP public key ID: 0x4553B001
-
-A: Because it messes up the order in which people normally read text.
-   See http://en.wikipedia.org/wiki/Posting_style
-Q: Why is top-posting such a bad thing?
-A: Top-posting.
-Q: What is the most annoying thing in e-mail?
-
---Signature=_Mon__1_Mar_2010_23_35_37_+0100_zypAukEU4hTfX8cl
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEARECAAYFAkuMQToACgkQ5xr2akVTsAHbSQCgrcXkR4JiIj7rGl+INseJ1bZo
-KxUAoIHASJnwweLebNvAiwltV8MuAZqj
-=PVSN
------END PGP SIGNATURE-----
-
---Signature=_Mon__1_Mar_2010_23_35_37_+0100_zypAukEU4hTfX8cl--
