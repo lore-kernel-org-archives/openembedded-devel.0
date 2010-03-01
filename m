@@ -1,43 +1,43 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-iw0-f180.google.com ([209.85.223.180])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NmDLo-0007vF-VG
+	(envelope-from <raj.khem@gmail.com>) id 1NmDOq-0001kl-Ni
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 22:40:43 +0100
-Received: by gwj17 with SMTP id 17so177689gwj.6
+	Mon, 01 Mar 2010 22:43:40 +0100
+Received: by iwn10 with SMTP id 10so2640187iwn.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Mar 2010 13:37:38 -0800 (PST)
+	Mon, 01 Mar 2010 13:40:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type;
-	bh=cgcUBGZYBGRjTuRx+oki8DGwn9/jidL6ZER1t/wQtNc=;
-	b=mLQLoU6SU1g3h1GP8lJTZg+wpWF0+pTOB85/Da2O3xLcXQqWiuEvEaFVycPflOyONm
-	urBGypudY1tb5kwx4qAhkmz2UeDwKutWFI5aEqsoR6yZjM0vYOthIBPrYSECmw9PAuf0
-	aAC9kC0paWmKSAsE1wwg3pvAhRKMTDUgvVMpc=
+	bh=k7uqqvSoIddP1as9eQvchtn12e+B6BmJgPnWy/IwtcM=;
+	b=qHh/aEOgMftYGuquN7G1tefOOsHTT2A4APU62hOm/VwOf6NZnov55gWrf/ASjZCBjW
+	k11NIbz5naXRSInhgG3A8+1oR+wZQPKaDQ5gPiHDa57x4Kk0LRs5GSutgiw5RBKX9WsI
+	Un7gEmz4Y2tOj+lByhPsZo7H2iZNFPJKXN/co=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=fxkTfPNc/uxqQy0SViACJksBkJG26CPiU5WrM0sobjyWa2xLvjsqgCU12vhJhTFDLT
-	GHAYSF1HrSsbgZDZ+dr0dWS3aSYvj5RpqfHAXBvGn+QtL86WZlHdMyqSCSzJq9f+RGlx
-	O+wY97O/T3xlivNn8Ps5Txr9M3WNWE2fnlw0M=
+	b=BErDmP1/VXrvGfTJov2rYnHrs4J8LARwOLxYxC6kDTUZX1i8IKypN0mhaxaeAQbQ4W
+	1su92jCNPJ9Olk6l5LAG1UEk7rYiTwgxicmZj5dJ4IlUsJyPjHvZAV/2Iti1Y5QF1Vf4
+	RT0rQ9nmuGLqDa1+I5pteLV3NxzfYWrlz2g7Q=
 MIME-Version: 1.0
-Received: by 10.100.235.24 with SMTP id i24mr7152887anh.155.1267479458469; 
-	Mon, 01 Mar 2010 13:37:38 -0800 (PST)
-In-Reply-To: <4B8C2B1B.40604@balister.org>
-References: <ac9c93b11003011133wa0f4e3bqe7af69ead4d7eec6@mail.gmail.com>
-	<4B8C2B1B.40604@balister.org>
-Date: Mon, 1 Mar 2010 22:37:38 +0100
-Message-ID: <ac9c93b11003011337g5405fe11rcb7d138ae2f854f2@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.231.146.134 with SMTP id h6mr495898ibv.16.1267479645583; Mon, 
+	01 Mar 2010 13:40:45 -0800 (PST)
+In-Reply-To: <6ec4247d1003011335w5fb01238o4fa7551b96c57406@mail.gmail.com>
+References: <ac9c93b11003011327v1ee75303p334cf298ff8516b7@mail.gmail.com>
+	<6ec4247d1003011335w5fb01238o4fa7551b96c57406@mail.gmail.com>
+Date: Mon, 1 Mar 2010 13:40:45 -0800
+Message-ID: <19c1b8a91003011340o15052b15td7d1dcbbb2e2bfe9@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.223.180
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: {TSC] request to discuss items.
+Subject: Re: [RFC] remove unused svn-updates.dpatch files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,61 +51,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Mar 2010 21:40:43 -0000
+X-List-Received-Date: Mon, 01 Mar 2010 21:43:41 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2010/3/1 Philip Balister <philip@balister.org>:
-> On 03/01/2010 02:33 PM, Frans Meulenbroeks wrote:
+On Mon, Mar 1, 2010 at 1:35 PM, Graham Gower <graham.gower@gmail.com> wrote:
+> On 2 March 2010 07:57, Frans Meulenbroeks <fransmeulenbroeks@gmail.com> wrote:
+>> 2010/3/1 Denys Dmytriyenko <denis@denix.org>:
+>>> On Mon, Mar 01, 2010 at 08:10:31AM +1030, Graham Gower wrote:
 >>
->> As we have (as far as I know) no procedure to table issues for the
->> TSC, I'm proposing two issues for the TSC:
->
->> 1) the location of distro specific files
->
-> This is a little premature ... There is a good discussion going on about
-> this at the moment. It takes time for the community to draw a conclusion on
-> matters like this.
-
-I thought most arguments were brought up, and it is clear there is no consensus.
-actually I'm not sure when the next TSC meeting is, but afaik it is
-perfectly ok to move it to the one after that.
-Guess a TSC decision will be needed at some point as I don't think
-there will be consensus.
->
->> 2) how to handle legacy recipes that are not used by any known distro
->
-> I'd note that this issue has come up before, and the consensus is no major
-> shuffling of recipes for aesthetic reasons. I don't see any changes that
-> would change the conclusion this time. I believe all of the TSC members are
-> already involved in the on list discussion.
-
-The overlay mechanism is better supported now, so could act as a help.
-And I know that at least one TSC member feels that moving e.g. to an
-obsolete dir is a good plan (so guess the consensus is not there any
-more).
-But again if we feel the discusion has not settled yet and not all
-arguments are on the table it can be moved to e.g. the meeting after
-the next one.
-
-Frans.
-
-(ps: I object that the change is purely aesthetic; it improves the
-parse time, reduces disk space somewhat and imho improves
-maintainability).
->
-> Philip
->
+>>>> What should offend you more is stuff like this:
+>>>>
+>>>> [grg@rak gcc]$ pwd
+>>>> /home/grg/oe/openembedded/recipes/gcc
+>>>> [grg@rak gcc]$ find . -name svn-updates.dpatch -exec ls -l {} \;
+>>>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
+>>>> ./gcc-4.4.2/debian/svn-updates.dpatch
+>>>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
+>>>> ./gcc-4.4.1/debian/svn-updates.dpatch
+>>>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
+>>>> ./gcc-4.3.1/debian/svn-updates.dpatch
+>>>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
+>>>> ./gcc-4.3.3/debian/svn-updates.dpatch
+>>>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
+>>>> ./gcc-4.3.4/debian/svn-updates.dpatch
+>>>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
+>>>> ./gcc-svn/debian/svn-updates.dpatch
+>>>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
+>>>> ./gcc-4.3.2/debian/svn-updates.dpatch
+>>>> [grg@rak gcc]$ grep svn-updates *
+>>>> [grg@rak gcc]$
+>>>
+>>> So, there is 125 MB wasted right there... Thanks for the heads up! :)
 >>
->> Both have been discussed on this list, and several options have been
->> coined
->> E.g. for 1) dedicated directories, overlays or retain the current solution
->> And for 2) an overlay, and "obsolete" directory, retain the current
->> solution and remove the recipes.
+>> Checked it and the 4.4.[12] and gcc-svn versions are gone.
+>> the gcc-4.3.[1-4] versions are still there but seem unused:
 >>
->> May I ask the TSC to provide a verdict on these.
+>> frans@linux-suse:~/oe/openembedded/recipes/gcc> grep -r svn-updates.dpatch .
+>> frans@linux-suse:~/oe/openembedded/recipes/gcc>
 >>
->> Thanks alot,
->> Frans
+>> Howvever as gcc is quite core, I'd rather verify first that it is ok
+>> to remove them
+>> (or can someone with more gcc knowledge remove)
+>>
+>> Frans.
 >>
 >> _______________________________________________
 >> Openembedded-devel mailing list
@@ -113,10 +101,17 @@ maintainability).
 >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >>
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Perhaps there are other patches in the debian directories that are also unused?
 >
+
+yes I did clean few of later releases but not older ones. From cloning
+point it does not reduce anything
+because the files will be there in repo but I cleaned up later
+versions because for adding recipes for newer releases from here on
+copying patch directories will save us adding unused new files.
+
+Thanks
+
+-Khem
 
 
