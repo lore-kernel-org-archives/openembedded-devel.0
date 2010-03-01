@@ -1,43 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nm0Cg-0001tp-Eh for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 08:38:16 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nm09y-0007VY-UX for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 08:35:22 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Mar 2010 08:35:22 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Mar 2010 08:35:22 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Nm1CP-0000wk-EG
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Mar 2010 09:42:01 +0100
+Received: (qmail 10983 invoked by uid 813007); 1 Mar 2010 08:39:09 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 1 Mar 2010 08:39:09 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 01 Mar 2010 08:35:09 +0100
-Message-ID: <hmfqnd$7an$1@dough.gmane.org>
-References: <E1NlqMw-0004yw-KS@melo.openembedded.org>
-	<1267396888.9295.30.camel@trini-m4400>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100219 Shredder/3.0.3pre
-In-Reply-To: <1267396888.9295.30.camel@trini-m4400>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Mon, 1 Mar 2010 09:39:05 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.3.4; x86_64; ;
+	)
+References: <1267383448-7009-1-git-send-email-ospite@studenti.unina.it>
+	<hmehnp$n57$1@dough.gmane.org>
+In-Reply-To: <hmehnp$n57$1@dough.gmane.org>
+MIME-Version: 1.0
+Message-Id: <201003010939.06161.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_HELO_PASS,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Graeme Gregory : firefox_3.6.bb : add new version, convert to new staging
+Subject: Re: [PATCH] ezx: Use pulseaudio 0.9.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,41 +40,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Mar 2010 07:38:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 01 Mar 2010 08:42:02 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Dnia niedziela, 28 lutego 2010 o 20:55:37 Koen Kooi napisa=C5=82(a):
+> > diff --git a/conf/machine/include/motorola-ezx-base.inc
+> > b/conf/machine/include/motorola-ezx-base.inc index 75c0f42..4d17211
+> > 100644
+> > --- a/conf/machine/include/motorola-ezx-base.inc
+> > +++ b/conf/machine/include/motorola-ezx-base.inc
+> > @@ -2,6 +2,7 @@ TARGET_ARCH =3D "arm"
+> >
+> >  PREFERRED_PROVIDER_xserver =3D "xserver-kdrive"
+> >  PREFERRED_PROVIDER_virtual/kernel ?=3D "openezx-kernel"
+> > +PREFERRED_VERSION_pulseaudio =3D "0.9.15"
+>=20
+> NAK: machines have no business setting versions (except for kernels and
+> even that is debatable).
+>=20
+> If it doesn't build, fix your distro.
 
-On 28-02-10 23:41, Tom Rini wrote:
-> On Sun, 2010-02-28 at 21:08 +0000, git version control wrote:
->> Module: openembedded.git
->> Branch: org.openembedded.dev
->> Commit: 0ca0394c94028b941603b2d6f7264d3eaaed5a98
->> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=0ca0394c94028b941603b2d6f7264d3eaaed5a98
->>
->> Author: Graeme Gregory <dp@xora.org.uk>
->> Date:   Sun Feb 28 21:07:28 2010 +0000
->>
->> firefox_3.6.bb : add new version, convert to new staging
-> 
-> Do we still honestly need PARALLEL_MAKE = "" ?
-> 
+Agreed with Koen - what if my Umbaumba distro really, really require other=
+=20
+version of pulseaudio because using 0.9.15 makes device explode? Ok, it is =
+a=20
+bit hardcode description but it is to show that machines should not set any=
+=20
+versions.
 
-The firefox hg version I tested in december still needed it, haven't
-tried 3.6.
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLi24tMkyGM64RGpERAvzdAJ0SZh7jYqswv750jUWqFWtAf1sR0gCdHi86
-stNIB+ugfvyLvi+PdF59FRg=
-=6a45
------END PGP SIGNATURE-----
 
 
 
