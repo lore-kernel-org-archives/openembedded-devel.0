@@ -1,44 +1,46 @@
-Received: from mail-yx0-f203.google.com ([209.85.210.203])
+Received: from mail-iw0-f184.google.com ([209.85.223.184])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NmDSf-00020o-0j
+	(envelope-from <raj.khem@gmail.com>) id 1NmDcp-0002JO-Gx
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 22:47:37 +0100
-Received: by yxe41 with SMTP id 41so1230412yxe.24
+	Mon, 01 Mar 2010 22:58:08 +0100
+Received: by iwn14 with SMTP id 14so2718178iwn.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Mar 2010 13:44:42 -0800 (PST)
+	Mon, 01 Mar 2010 13:55:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=/vCEhrgFSwqWoqAxWce06Omk3b1X1N0o1wFOykwIHmc=;
-	b=o2qTZ//nPEzikWth20eEW4mzrXP1igltsqaugZxSRTGNTUh5uOCZ5va9CHpGxjM4FF
-	lKhe9vHToBMZvUjVwKM2AT38UJ2rZgvGFoEpzy046dXUPiZJt5CMwRB08h8b4JW9CaXF
-	R89gjQCpOlj4mzCaVBCkPYpbNTHKRsnZespoo=
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=fiLcusI+AChPIhVEa8GBoT+qBDsSbctWKTfpmAmMB2E=;
+	b=iW6Ja4ETc9lMRry89utwiwhdW+plgvxDkhgusK8h5XIhngIDdjjUoz25urOnMKhjCB
+	gJpTQdYwdNuJeLJJHyZPChamKj8sD/9V5IqS5P4x8kiwFIadDEBdq/Pr57PJcWEJkPDG
+	HmAf61SET8VQNap3Mj9CmT30nEn75AxF4JN70=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=xl1PMGC68RNfSqAdE1U69E8W6GCuhFXWDDNDtvAT49sa30a+O0FGOkyygTKFktO1DN
-	Ui85QY3Wczt5w7yBbFKLMZrswAQP99el64iFQB58LsJlgk20kI0DLLGAOCF4yWmkfyUg
-	xd0ae/9ZgrrK60H3sAMl+3tazokFuQgk9hO4Y=
+	:content-type:content-transfer-encoding;
+	b=FKL3phK7/IQdyPCMCD51sOKTM7GmpT9bqOsSg1urWNTy0Mym5dwmlmzzMZdqv7OzBV
+	H/NmBCqhF8CPheFLn9wa/Ub9thwGpxD6gvM4zwzSYC5n8DaJgLXigf/H1eYLyGOc3ohp
+	Rxsvc7ytqNvpd/RNuV0LG4OguQ3/q6PU73QGw=
 MIME-Version: 1.0
-Received: by 10.101.90.7 with SMTP id s7mr7176124anl.176.1267479881216; Mon, 
-	01 Mar 2010 13:44:41 -0800 (PST)
-In-Reply-To: <19c1b8a91003011340o15052b15td7d1dcbbb2e2bfe9@mail.gmail.com>
-References: <ac9c93b11003011327v1ee75303p334cf298ff8516b7@mail.gmail.com>
-	<6ec4247d1003011335w5fb01238o4fa7551b96c57406@mail.gmail.com>
-	<19c1b8a91003011340o15052b15td7d1dcbbb2e2bfe9@mail.gmail.com>
-Date: Mon, 1 Mar 2010 22:44:41 +0100
-Message-ID: <ac9c93b11003011344r5a7cce08t6e5d8f6884ca0c5f@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.231.153.1 with SMTP id i1mr76804ibw.35.1267480512835; Mon, 01 
+	Mar 2010 13:55:12 -0800 (PST)
+In-Reply-To: <1267479800.4739.271.camel@trini-m4400>
+References: <E1NlqMw-0004yw-KS@melo.openembedded.org>
+	<1267396888.9295.30.camel@trini-m4400> <hmfqnd$7an$1@dough.gmane.org>
+	<19c1b8a91003011337m5870f0c2w7bc347f0ffe2c06e@mail.gmail.com>
+	<1267479800.4739.271.camel@trini-m4400>
+Date: Mon, 1 Mar 2010 13:55:12 -0800
+Message-ID: <19c1b8a91003011355r5035cecbx6002fbe27b9cfdb6@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.203
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.223.184
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] remove unused svn-updates.dpatch files
+Subject: Re: [oe-commits] Graeme Gregory : firefox_3.6.bb : add new version, convert to new staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,71 +54,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Mar 2010 21:47:37 -0000
+X-List-Received-Date: Mon, 01 Mar 2010 21:58:08 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-2010/3/1 Khem Raj <raj.khem@gmail.com>:
-> On Mon, Mar 1, 2010 at 1:35 PM, Graham Gower <graham.gower@gmail.com> wrote:
->> On 2 March 2010 07:57, Frans Meulenbroeks <fransmeulenbroeks@gmail.com> wrote:
->>> 2010/3/1 Denys Dmytriyenko <denis@denix.org>:
->>>> On Mon, Mar 01, 2010 at 08:10:31AM +1030, Graham Gower wrote:
->>>
->>>>> What should offend you more is stuff like this:
->>>>>
->>>>> [grg@rak gcc]$ pwd
->>>>> /home/grg/oe/openembedded/recipes/gcc
->>>>> [grg@rak gcc]$ find . -name svn-updates.dpatch -exec ls -l {} \;
->>>>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->>>>> ./gcc-4.4.2/debian/svn-updates.dpatch
->>>>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->>>>> ./gcc-4.4.1/debian/svn-updates.dpatch
->>>>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->>>>> ./gcc-4.3.1/debian/svn-updates.dpatch
->>>>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->>>>> ./gcc-4.3.3/debian/svn-updates.dpatch
->>>>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->>>>> ./gcc-4.3.4/debian/svn-updates.dpatch
->>>>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->>>>> ./gcc-svn/debian/svn-updates.dpatch
->>>>> -rw-r--r-- 1 grg users 17668056 2009-11-15 12:59
->>>>> ./gcc-4.3.2/debian/svn-updates.dpatch
->>>>> [grg@rak gcc]$ grep svn-updates *
->>>>> [grg@rak gcc]$
->>>>
->>>> So, there is 125 MB wasted right there... Thanks for the heads up! :)
->>>
->>> Checked it and the 4.4.[12] and gcc-svn versions are gone.
->>> the gcc-4.3.[1-4] versions are still there but seem unused:
->>>
->>> frans@linux-suse:~/oe/openembedded/recipes/gcc> grep -r svn-updates.dpatch .
->>> frans@linux-suse:~/oe/openembedded/recipes/gcc>
->>>
->>> Howvever as gcc is quite core, I'd rather verify first that it is ok
->>> to remove them
->>> (or can someone with more gcc knowledge remove)
->>>
->>> Frans.
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>
+On Mon, Mar 1, 2010 at 1:43 PM, Tom Rini <tom_rini@mentor.com> wrote:
+> On Mon, 2010-03-01 at 13:37 -0800, Khem Raj wrote:
+>> On Sun, Feb 28, 2010 at 11:35 PM, Koen Kooi <k.kooi@student.utwente.nl> =
+wrote:
+>> > -----BEGIN PGP SIGNED MESSAGE-----
+>> > Hash: SHA1
+>> >
+>> > On 28-02-10 23:41, Tom Rini wrote:
+>> >> On Sun, 2010-02-28 at 21:08 +0000, git version control wrote:
+>> >>> Module: openembedded.git
+>> >>> Branch: org.openembedded.dev
+>> >>> Commit: 0ca0394c94028b941603b2d6f7264d3eaaed5a98
+>> >>> URL: =A0 =A0http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=
+=3Dcommit;h=3D0ca0394c94028b941603b2d6f7264d3eaaed5a98
+>> >>>
+>> >>> Author: Graeme Gregory <dp@xora.org.uk>
+>> >>> Date: =A0 Sun Feb 28 21:07:28 2010 +0000
+>> >>>
+>> >>> firefox_3.6.bb : add new version, convert to new staging
+>> >>
+>> >> Do we still honestly need PARALLEL_MAKE =3D "" ?
+>> >>
+>> >
+>> > The firefox hg version I tested in december still needed it, haven't
+>> > tried 3.6.
 >>
->> Perhaps there are other patches in the debian directories that are also unused?
+>> >From Firefox FAQ
 >>
+>> you have to add the -j option to .mozconfig file like this
+>> mk_add_options MOZ_MAKE_FLAGS=3D-jN
+>>
+>>
+>> Parallel building with -j4 and -j8 seems to work well.
 >
-> yes I did clean few of later releases but not older ones. From cloning
-> point it does not reduce anything
-> because the files will be there in repo but I cleaned up later
-> versions because for adding recipes for newer releases from here on
-> copying patch directories will save us adding unused new files.
+> Since you've tested it, patch please? :)
+
+yeah but it was on OE build system that I used for it so I don't
+something handy for OE and my work horse machine has a dead hard disk
+these days.
+
 >
-> Thanks
+> --
+> Tom Rini <tom_rini@mentor.com>
+> Mentor Graphics Corporation
 >
-Are you in favor of cleaning up 4.3.* too?
-Although it does not help from cloning point it does not clutter the
-dir and distract people from the real patches.
-FM
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
