@@ -1,31 +1,40 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1Nm8jy-0004FA-7P
+	(envelope-from <Tom_Rini@mentor.com>) id 1Nm9bM-0007FU-0m
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 17:45:07 +0100
-Received: (qmail 13328 invoked by uid 1003); 1 Mar 2010 16:42:14 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 1 Mar 2010 16:42:14 -0000
-Message-ID: <4B8BEE62.2090809@balister.org>
-Date: Mon, 01 Mar 2010 11:42:10 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.7) Gecko/20100120 Fedora/3.0.1-1.fc11 Thunderbird/3.0.1
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <ac9c93b11002270725t46beb56dx5c4dc63c0f6485ca@mail.gmail.com>	<20100227165600.GD30145@xora-desktop.xora.org.uk>	<1267303607.5437.446.camel@lenovo.internal.reciva.com>	<1267306071.9295.1.camel@trini-m4400>
-	<hmeii7$q7e$1@dough.gmane.org>
-	<1267459505.9295.107.camel@trini-m4400>
-In-Reply-To: <1267459505.9295.107.camel@trini-m4400>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+	Mon, 01 Mar 2010 18:40:20 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1Nm9Ya-0002of-Tm from Tom_Rini@mentor.com ;
+	Mon, 01 Mar 2010 09:37:24 -0800
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 1 Mar 2010 09:37:24 -0800
+Received: from 172.30.80.137 ([172.30.80.137]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Mon,  1 Mar 2010 17:36:32 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	01 Mar 2010 10:36:31 -0700
+From: Tom Rini <tom_rini@mentor.com>
+To: Antonio Ospite <ospite@studenti.unina.it>
+In-Reply-To: <1266575689-12944-1-git-send-email-ospite@studenti.unina.it>
+References: <1266575689-12944-1-git-send-email-ospite@studenti.unina.it>
+Organization: Mentor Graphics Corporation
+Date: Mon, 01 Mar 2010 10:36:31 -0700
+Message-ID: <1267464991.9295.397.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 01 Mar 2010 17:37:24.0389 (UTC)
+	FILETIME=[DA9ABD50:01CAB965]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=none autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] recipes/images/${distro}
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: meta-toolchain: Show the host system in toolchain archive name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,67 +48,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Mar 2010 16:45:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 01 Mar 2010 17:40:20 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 03/01/2010 11:05 AM, Tom Rini wrote:
-> On Sun, 2010-02-28 at 21:09 +0100, k.kooia wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 27-02-10 22:27, Tom Rini wrote:
->>> On Sat, 2010-02-27 at 20:46 +0000, Phil Blundell wrote:
->>>> On Sat, 2010-02-27 at 16:56 +0000, Graeme Gregory wrote:
->>>>> NAK on creating extra levels.
->>>>>
->>>>> Changing the level where recipes are held is not an option do to the way
->>>>> you tell bitbake how to find them.
->>>>>
->>>>> BBFILES = "${OE}/org.openembedded.dev/recipes/*/*.bb"
->>>>
->>>> Is that really such a big deal?  We seemed to manage to switch BBFILES
->>>> from /packages/ to /recipes/ without any major casualties, and I would
->>>> have thought that adding an extra level in there would be equally
->>>> straightforward.  Or of course, even better, the distro-specific recipes
->>>> could go in an overlay which the distro config would select.
->>>
->>> I think you've just hit on a potentially great idea.  Say that
->>> 'openembedded' supports 'micro' and 'minimal' as two example
->>> distributions.  Move everyone else into their own distro overlay.  The
->>> only problem with this, perhaps, is easily adding the distro overlay
->>> itself into the right env vars. :(
->>
->> Move every distro out of OE, that way people need to set the overlays
->> correctly.
->>
->> This does mean that we abandon the "sharing" aspect that started OE
->> since every little "improvement" will be done in the distro overlay
->> instead of OE.
->
-> Outside of the OE repo, no.  Outside of "conf/" yes.  And yes, this
-> would require some re-org, perhaps.  Or perhaps not (and we make
-> something like contrib/ but, I don't know, I suck at naming).  And yes,
-> with an updated local.conf.sample, getting the overlay stuff right is
-> trivial.
->
-> But yes, not generically done at all improvements would end up in the
-> distro overlay until someone wanted to fix it generically.
->
-> Think of it this way, it would also make it easier to show how to make a
-> "custom Angstrom" the right way, rather than cp
-> conf/distro/angstrom-2008.1.conf conf/distro/mydistro.conf which I have
-> gathered would be a good thing.
+On Fri, 2010-02-19 at 00:34 +0000, Antonio Ospite wrote:
+> Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+>=20
+> ---
+> In canadian-sdk.bb ${SDK_SYS} is used as a prefix but I find more logical=
+ to
+> put it just before the target system info.
 
-I am also in the all or nothing camp. If we leave any distro specific 
-data in the OE repository, people will continue to copy it and start 
-committing it back. Also, by leaving one or two distros in tree, people 
-will use them as test cases and catch issues that will impact the out of 
-tree distros.
+Pushed, thanks.
 
-Although there may be some short term pain, I believe this will have 
-long term benefits for the project.
+>=20
+> Regards,
+>    Antonio
+>=20
+>  recipes/meta/meta-toolchain.bb |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/recipes/meta/meta-toolchain.bb b/recipes/meta/meta-toolchain=
+.bb
+> index 3169425..574ecac 100644
+> --- a/recipes/meta/meta-toolchain.bb
+> +++ b/recipes/meta/meta-toolchain.bb
+> @@ -17,7 +17,7 @@ TOOLCHAIN_TARGET_TASK ?=3D "task-sdk-bare"
+>  TOOLCHAIN_TARGET_EXCLUDE ?=3D ""
+>  FEED_ARCH ?=3D "${TARGET_ARCH}"
+>  SDK_SUFFIX =3D "toolchain"
+> -TOOLCHAIN_OUTPUTNAME ?=3D "${DISTRO}-${DISTRO_VERSION}-${FEED_ARCH}-${TA=
+RGET_OS}-${SDK_SUFFIX}"
+> +TOOLCHAIN_OUTPUTNAME ?=3D "${DISTRO}-${DISTRO_VERSION}-${SDK_SYS}-${FEED=
+_ARCH}-${TARGET_OS}-${SDK_SUFFIX}"
+> =20
+>  RDEPENDS =3D "${TOOLCHAIN_TARGET_TASK} ${TOOLCHAIN_HOST_TASK}"
+> =20
 
-Philip
+
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
