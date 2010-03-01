@@ -1,32 +1,42 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Nm1CP-0000wk-EG
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 01 Mar 2010 09:42:01 +0100
-Received: (qmail 10983 invoked by uid 813007); 1 Mar 2010 08:39:09 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 1 Mar 2010 08:39:09 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nm1nL-0008E9-Qu for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Mar 2010 10:20:12 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nm1kb-0006zK-Gn for openembedded-devel@lists.openembedded.org;
+	Mon, 01 Mar 2010 10:17:17 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Mar 2010 10:17:17 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 Mar 2010 10:17:17 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 1 Mar 2010 09:39:05 +0100
-User-Agent: KMail/1.12.4 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.3.4; x86_64; ;
-	)
-References: <1267383448-7009-1-git-send-email-ospite@studenti.unina.it>
-	<hmehnp$n57$1@dough.gmane.org>
-In-Reply-To: <hmehnp$n57$1@dough.gmane.org>
-MIME-Version: 1.0
-Message-Id: <201003010939.06161.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 01 Mar 2010 10:17:05 +0100
+Message-ID: <hmg0mh$ou0$1@dough.gmane.org>
+References: <1266605268-5957-1-git-send-email-clarson@kergoth.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100219 Shredder/3.0.3pre
+In-Reply-To: <1266605268-5957-1-git-send-email-clarson@kergoth.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_HELO_PASS,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] ezx: Use pulseaudio 0.9.15
+Subject: Re: [PATCH] package.bbclass: when running 'file', be explicit about the path to the magic
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,42 +50,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 Mar 2010 08:42:02 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 01 Mar 2010 09:20:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Dnia niedziela, 28 lutego 2010 o 20:55:37 Koen Kooi napisa=C5=82(a):
-> > diff --git a/conf/machine/include/motorola-ezx-base.inc
-> > b/conf/machine/include/motorola-ezx-base.inc index 75c0f42..4d17211
-> > 100644
-> > --- a/conf/machine/include/motorola-ezx-base.inc
-> > +++ b/conf/machine/include/motorola-ezx-base.inc
-> > @@ -2,6 +2,7 @@ TARGET_ARCH =3D "arm"
-> >
-> >  PREFERRED_PROVIDER_xserver =3D "xserver-kdrive"
-> >  PREFERRED_PROVIDER_virtual/kernel ?=3D "openezx-kernel"
-> > +PREFERRED_VERSION_pulseaudio =3D "0.9.15"
->=20
-> NAK: machines have no business setting versions (except for kernels and
-> even that is debatable).
->=20
-> If it doesn't build, fix your distro.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Agreed with Koen - what if my Umbaumba distro really, really require other=
-=20
-version of pulseaudio because using 0.9.15 makes device explode? Ok, it is =
-a=20
-bit hardcode description but it is to show that machines should not set any=
-=20
-versions.
+Hi,
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+I don't have 'file/' in STAGING_DATADIR_NATIVE so I now have lots of
+unstripped stuff (150MB libxul.so). Could you please add an extra check
+to see if file/magic exists?
 
+regards,
+
+Koen
+
+On 19-02-10 19:47, Chris Larson wrote:
+> From: Tom Rini <tom_rini@mentor.com>
+> 
+> This works around one relocation issue.
+> 
+> Signed-off-by: Tom Rini <tom_rini@mentor.com>
+> Signed-off-by: Chris Larson <chris_larson@mentor.com>
+> ---
+>  classes/package.bbclass |    5 +++--
+>  1 files changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/classes/package.bbclass b/classes/package.bbclass
+> index 062f782..72c9053 100644
+> --- a/classes/package.bbclass
+> +++ b/classes/package.bbclass
+> @@ -155,11 +155,12 @@ def runstrip(file, d):
+>      import commands, stat
+>  
+>      pathprefix = "export PATH=%s; " % bb.data.getVar('PATH', d, True)
+> +    magicfile = "%s/file/magic" % bb.data.getVar('STAGING_DATADIR_NATIVE', d, True) 
+>  
+> -    ret, result = commands.getstatusoutput("%sfile '%s'" % (pathprefix, file))
+> +    ret, result = commands.getstatusoutput("%sfile -m %s '%s'" % (pathprefix, magicfile, file))
+>  
+>      if ret:
+> -        bb.error("runstrip: 'file %s' failed (forced strip)" % file)
+> +        bb.error("runstrip: 'file -m %s %s' failed (forced strip)" % (magicfile, file))
+>  
+>      if "not stripped" not in result:
+>          bb.debug(1, "runstrip: skip %s" % file)
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLi4YRMkyGM64RGpERAoPBAKCdNJV1xR2zZTGU6XSn/jHIDfrNCQCbBFWS
+DrZI2u7qsGPg1ABHQh4loHU=
+=spj2
+-----END PGP SIGNATURE-----
 
 
 
