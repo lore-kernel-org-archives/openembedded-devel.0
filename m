@@ -1,35 +1,44 @@
-Received: from office.altell.ru ([80.246.246.162])
+Received: from mail-fx0-f220.google.com ([209.85.220.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1NmOnf-0003ki-TQ
+	(envelope-from <martin.jansa@gmail.com>) id 1NmOut-00005D-FG
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Mar 2010 10:54:01 +0100
-Received: from keemun.localnet (unknown [192.168.1.125])
-	by mail.altell.local (Postfix) with ESMTPS id EFDC86854F
+	Tue, 02 Mar 2010 11:01:33 +0100
+Received: by fxm20 with SMTP id 20so60003fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 Mar 2010 12:49:07 +0300 (MSK)
-From: Roman Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 2 Mar 2010 12:50:41 +0300
-User-Agent: KMail/1.12.2 (Linux/2.6.31.8-0.1-desktop; KDE/4.3.1; x86_64; ; )
-References: <1267478308.4739.245.camel@trini-m4400>
-	<201003021236.04862.khimov@altell.ru>
-	<201003021042.51552.marcin@juszkiewicz.com.pl>
-In-Reply-To: <201003021042.51552.marcin@juszkiewicz.com.pl>
+	Tue, 02 Mar 2010 01:58:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=wZs3XB4TbCsS+CSMsPxCCkjiyhhgbSP1V1KKHP5Hd1k=;
+	b=cr3Mj4APBaKcCtSY3xrlPOfzUlZUYcnkWXXF1NW8ZPu/2dskFhRBrrNmfg53ZQhDaM
+	QgVl8rDPM6VMMNDIHizjIXSk7fHR1WYFgVVk81wxNJXIuucdec57xR+fRy0KxyOrc09P
+	pMvML1KsxMzdF45oysK9d76LGJlRIX5Jz4KBw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=NQsxRbxyOxPcyDFBLGIoF/9Bbv1CN81w+p+/NU4rL24ZRl7ikt7cr/z83j19avQW67
+	YBT6DxyK5+8G5XXvQH7/LzK+Pe7rO0jGvYv0Z2o9On/G6tyhFv6wHDa4YX5+x2ZheK0F
+	zXo32CPvWrf3tEiTJl72PtJaaOaFznrCoiEgY=
 MIME-Version: 1.0
-Message-Id: <201003021250.41664.khimov@altell.ru>
-X-Altell-MailScanner-ID: EFDC86854F.D8782
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: khimov@altell.ru
+Received: by 10.223.57.133 with SMTP id c5mr6466277fah.11.1267523916886; Tue, 
+	02 Mar 2010 01:58:36 -0800 (PST)
+In-Reply-To: <141020e31002090250k2b14f4a4w35b2322952665a46@mail.gmail.com>
+References: <E1Ne4Jc-0005sN-7y@melo.openembedded.org>
+	<141020e31002090250k2b14f4a4w35b2322952665a46@mail.gmail.com>
+Date: Tue, 2 Mar 2010 10:58:36 +0100
+Message-ID: <141020e31003020158v13adec5erae7d6cd6f9ee7fa5@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.220.220
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-0.0 required=5.0 tests=SPF_PASS autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH, RFC] Cleanup / update QEMU related checks
+Subject: Re: [oe-commits] Koen Kooi : efl: bump SRCREV for comp fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,24 +52,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Mar 2010 09:54:01 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 02 Mar 2010 10:01:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0JLRgtC+0YDQvdC40LogMDIg0LzQsNGA0YLQsCAy
-MDEwIDEyOjQyOjUwINCw0LLRgtC+0YAgTWFyY2luIEp1c3praWV3aWN6IArQvdCw0L/QuNGB0LDQ
-uzoKPiBEbmlhIHd0b3JlaywgMiBtYXJjYSAyMDEwIG8gMTA6MzY6MDQgUm9tYW4gS2hpbW92IG5h
-cGlzYcWCKGEpOgo+ID4g0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0JLRgtC+0YDQvdC40Log
-MDIg0LzQsNGA0YLQsCAyMDEwIDAwOjE4OjI4INCw0LLRgtC+0YAgVG9tIFJpbmkg0L3QsNC/0LjR
-gdCw0Ls6Cj4gPiA+IChhc2lkZTogV2hlbiBjYW4gcWVtdS0wLjkueCBkaWU/KS4KPiA+Cj4gPiBJ
-TUhPLCBpdCBqdXN0IGFib3V0IHRpbWUgdG8ga2lsbCBpdCwgYWxtb3N0IGEgeWVhciBwYXN0IHNp
-bmNlIDAuMTAueAo+ID4gaW50cm9kdWN0aW9uIGFuZCB3aXRoIGFsbCB0aG9zZSBjaGFuZ2VzIDAu
-OS54IGlzIG5vdCB3b3JraW5nIHByb3Blcmx5IGZvcgo+ID4gbG9jYWxlIGdlbmVyYXRpb24gYW55
-d2F5Lgo+IAo+IEkgdGhpbmsgdGhhdCB3ZSBuZWVkIHRvIHVwZ3JhZGUgdG8gcWVtdSAwLjEyLngg
-YW5kIGtpbGwgYWxsIHByZXZpb3VzCj4gIHZlcnNpb25zLgoKSU1ITywgYWRkaW5nIDAuMTIueCwg
-a2lsbGluZyAwLjkueCBhbmQgbGVhdmluZyAwLjEwLnggZm9yIHNvbWUgdHJhbnNpdGlvbiB0aW1l
-IAppcyBhIGJpdCBiZXR0ZXIuIElmIG5vIG9uZSBpcyBpbiBhIGh1cnJ5IGZvciB0aGF0LCBJJ2xs
-IHRyeSB0byBjb29rIHVwIHNvbWUgCnBhdGNoZXMgdGhpcyB3ZWVrLgo=
+On Tue, Feb 9, 2010 at 11:50 AM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> With this revision epsilon started to fail (python-epsilon was failing
+> before too).
+> http://tinderbox.openembedded.net/packages/epsilon/
+> http://tinderbox.openembedded.net/packages/python-epsilon/
+>
+> I asked upstream devs on #edevel for simple fix and they said, that
+> epsilon is so unsupported that they would rather move it from OLD/ to
+> BROKEN/.
+
+Hi,
+
+This was included in the end
+http://trac.enlightenment.org/e/changeset/46111
+
+But now there is another deprecation and by default Ecore_data si gone:
+http://trac.enlightenment.org/e/changeset/46543
+
+So what would be OE way to handle?
+1) enable Ecore_data to build etk/epsilon ok (for a while before
+something else broke it again)
+2) move etk/epsilon + depending apps to obsolete dir (list of apps
+from previous e-mail + check if they really still depends on it or
+it's just DEPENDS relict).
+
+I prefer 2) and if there is somebody who really needs etk/epsilon then
+he probably wants also older EFL_SRCREV for his obsolete app.
+
+Regards,
+
+> What's right way to handle that in OE?
+> Is it worth maintaining epsilon alive in oe.dev and asking upstream to
+> include patches for epsilon or can we move epsilon + apps depending on
+> it to obsoleted?
+>
+> We cannot bump ecore, because of epsilon which is pity. If we move
+> epsilon to recipes/obsoleted then there is few apps still using that:
+> e17/exhibit_svn.bb:DEPENDS =3D "evas ecore epsilon edje eet etk efreet"
+> efl1/epdf/fix-plugin-path-check.patch: =A0 =A0requirements=3D"$requiremen=
+ts
+> epsilon imlib2"
+> efl1/epsilon_svn.bb:FILES_${PN}-thumbd =3D "${bindir}/epsilon
+> ${bindir}/epsilon_thumbd"
+> efl1/esmart_svn.bb:DEPENDS =3D "evas ecore edje imlib2 epsilon libtool"
+> efl1/ewl_svn.bb:DEPENDS =3D "evas ecore edje emotion efreet epsilon"
+> omview/omview_svn.bb:DEPENDS +=3D " evas ewl epsilon"
+> python/python-epsilon_svn.bb:DEPENDS +=3D "epsilon python-ecore"
+> tasks/task-efl.bb: =A0epsilon \
+> tasks/task-openmoko-feed.bb: =A0eet evas ecore embryo epsilon edje
+> efreet emotion epdf \
+> tasks/task-python-efl-examples.bb: =A0python-epsilon-examples \
+> tasks/task-python-efl.bb: =A0python-epsilon \
 
 
