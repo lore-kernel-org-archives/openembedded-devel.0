@@ -1,42 +1,43 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp-out30.alice.it ([85.33.2.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NmTZu-00049P-E4 for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Mar 2010 16:00:12 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NmTX9-00039y-Ly for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Mar 2010 15:57:15 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Mar 2010 15:57:15 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Mar 2010 15:57:15 +0100
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 02 Mar 2010 15:57:00 +0100
-Message-ID: <hmj8vs$m1u$1@dough.gmane.org>
-References: <BAY127-W1205B0845E793D5B4B70C3D83B0@phx.gbl>
+	(envelope-from <ospite@studenti.unina.it>) id 1NmUB3-000161-QK
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Mar 2010 16:38:34 +0100
+Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-out30.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 2 Mar 2010 16:35:38 +0100
+Received: from FBCMCL01B09.fbc.local ([192.168.171.26]) by FBCMMO02.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 2 Mar 2010 16:35:38 +0100
+Received: from badebec ([87.6.141.74]) by FBCMCL01B09.fbc.local with Microsoft
+	SMTPSVC(6.0.3790.3959); Tue, 2 Mar 2010 16:35:37 +0100
+Date: Tue, 2 Mar 2010 16:35:27 +0100
+From: Antonio Ospite <ospite@studenti.unina.it>
+To: Khem Raj <raj.khem@gmail.com>
+Message-Id: <20100302163527.e6a1c9b3.ospite@studenti.unina.it>
+In-Reply-To: <19c1b8a91003011507o83cf215k8da55bbadbae8b4c@mail.gmail.com>
+References: <1267381940-6598-1-git-send-email-ospite@studenti.unina.it>
+	<19c1b8a91003011414p3610b861k136ea412526bff19@mail.gmail.com>
+	<20100301233537.dc587174.ospite@studenti.unina.it>
+	<19c1b8a91003011507o83cf215k8da55bbadbae8b4c@mail.gmail.com>
+X-Mailer: Sylpheed 3.0.0 (GTK+ 2.18.7; i486-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
-In-Reply-To: <BAY127-W1205B0845E793D5B4B70C3D83B0@phx.gbl>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-OriginalArrivalTime: 02 Mar 2010 15:35:37.0513 (UTC)
+	FILETIME=[01C7B190:01CABA1E]
+X-SA-Exim-Connect-IP: 85.33.2.30
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Boost library problem
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [RFC, PATCH] distros: prettier notation for dev snapshots version strings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,315 +51,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Mar 2010 15:00:12 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 02 Mar 2010 15:38:39 -0000
+X-Groupsio-MsgNum: 17252
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Tue__2_Mar_2010_16_35_28_+0100_1TrdIfaykChXsqVO"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--Signature=_Tue__2_Mar_2010_16_35_28_+0100_1TrdIfaykChXsqVO
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Mon, 1 Mar 2010 15:07:53 -0800
+Khem Raj <raj.khem@gmail.com> wrote:
 
-I suspect it's called boost_filesystem-mt in OE and you'll need to ask
-the ossie guys to updated their autofoo to have option to specify the
-name. If they already have such an option, bug them to update their
-recipes :)
+> On Mon, Mar 1, 2010 at 2:35 PM, Antonio Ospite <ospite@studenti.unina.it>=
+ wrote:
+> > On Mon, 1 Mar 2010 14:14:13 -0800
+> > Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> >> On Sun, Feb 28, 2010 at 10:32 AM, Antonio Ospite
+> >> <ospite@studenti.unina.it> wrote:
+> >> > Make archives names look a little better. Compare the current:
+> >> > =A0minimal-.dev-snapshot-20100216-i686-linux-armv5te-linux-gnueabi-t=
+oolchain.tar.bz2
+> >> > to the proposed:
+> >> > =A0minimal-dev.snapshot.20100216-i686-linux-armv5te-linux-gnueabi-to=
+olchain.tar.bz2
+> >>
+> >> may be just getting rid of that '-.' and using just '-' would be enoug=
+h ?
+> >> is there any advantage of using . over -
+> >>
+> >
+> > I thought that using some dot-notation would make more clear both that
+> > the string indicates a _version_ and that it is a single field on its
+> > own.
+>=20
+> if there a post processing tool that would benefit  from this  then I
+> would say its fine.
+>=20
 
-regards,
+Not that I know of. The benefit is mainly aesthetic.
 
-Koen
+Regards,
+   Antonio
 
-On 02-03-10 15:23, saleh usman wrote:
-> 
-> Hi 
-> I am getting an error of boost library while bitbaking an image.OE can not find boost file system library.Terminal log shows this error as
-> | configure: error: cannot find boost_filesystem library.
-> 
-> Image is of ossie and I am unable to resolve this problem.How I can get rid of this error.Kindly guide me.
-> Saleh
-> 
-> Terminal log is looking like as follows.
-> 
-> [saleh@localhost ~]$ bitbake ossie-image
-> NOTE: Handling BitBake files: - (7660/7660) [100 %]
-> NOTE: Parsing finished. 7053 cached, 300 parsed, 307 skipped, 0 masked.
-> NOTE: Resolving any missing task queue dependencies
-> NOTE: Preparing runqueue
-> NOTE: Executing runqueue
-> NOTE: Running task 1224 of 2992 (ID: 1133, /oe/ossie_collection/recipes/ossie-libraries/ossie-cf_svn.bb, do_configure)
-> ERROR: function do_configure failed
-> ERROR:
-> log data follows
-> (/home/saleh/tmp/work/armv5te-angstrom-linux-gnueabi/ossie-cf-0.0.0+svnr247-r1/temp/log.do_configure.3404)
-> | automake (GNU automake) 1.10.2
-> | Copyright (C) 2008 Free Software Foundation, Inc.
-> | License GPLv2+: GNU GPL version 2 or later <http://gnu.org/licenses/gpl.html>
-> | This is free software: you are free to change and redistribute it.
-> | There is NO WARRANTY, to the extent permitted by law.
-> | 
-> | Written by Tom Tromey <tromey@redhat.com>
-> |        and Alexandre Duret-Lutz <adl@gnu.org>.
-> | AUTOV is 1.10
-> |
-> NOTE: Executing autoreconf --verbose --install --force
-> --exclude=autopoint
-> -I/home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal-1.10
-> -I
-> /home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal
-> | autoreconf: Entering directory `.'
-> | autoreconf: configure.ac: not using Gettext
-> |
-> autoreconf: running: aclocal -I
-> /home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal-1.10
-> -I
-> /home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal
-> --force
-> |
-> /home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:923:
-> warning: underquoted definition of
-> AC_LBL_LINUX_TPACKET_AUXDATA_TP_VLAN_TCI
-> |
-> /home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:923:  
-> run info '(automake)Extending aclocal'
-> |
-> /home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:923:  
-> or see
-> http://sources.redhat.com/automake/automake.html#Extending-aclocal
-> | autoreconf: configure.ac: tracing
-> | autoreconf: running: libtoolize --copy --force
-> | libtoolize: putting auxiliary files in `.'.
-> | libtoolize: copying file `./ltmain.sh'
-> | libtoolize: Consider adding `AC_CONFIG_MACRO_DIR([m4])' to configure.ac and
-> | libtoolize: rerunning libtoolize, to keep the correct libtool macros in-tree.
-> | libtoolize: Consider adding `-I m4' to ACLOCAL_AMFLAGS in Makefile.am.
-> |
-> /home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:923:
-> warning: underquoted definition of
-> AC_LBL_LINUX_TPACKET_AUXDATA_TP_VLAN_TCI
-> |
-> /home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:923:  
-> run info '(automake)Extending aclocal'
-> |
-> /home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/libpcap.m4:923:  
-> or see
-> http://sources.redhat.com/automake/automake.html#Extending-aclocal
-> |
-> autoreconf: running:
-> /home/saleh/tmp/staging/i686-linux/usr/bin/autoconf
-> --include=/home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal-1.10
-> --include=/home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal
-> --force --warnings=cross
-> | autoreconf: configure.ac: not using Autoheader
-> | autoreconf: running: automake --foreign --add-missing --copy --force-missing --warnings=cross
-> | automake: unknown warning category `cross'
-> | autoreconf: running: gnu-configize
-> | autoreconf: Leaving directory `.'
-> |
-> NOTE: Running
-> /home/saleh/tmp/work/armv5te-angstrom-linux-gnueabi/ossie-cf-0.0.0+svnr247-r1/trunk/configure              
-> --build=i686-linux             
-> --host=arm-angstrom-linux-gnueabi              
-> --target=arm-angstrom-linux-gnueabi     --prefix=/usr                  
-> --exec_prefix=/usr              --bindir=/usr/bin              
-> --sbindir=/usr/sbin                    
-> --libexecdir=/usr/libexec              
-> --datadir=/usr/share                    --sysconfdir=/etc     
-> --sharedstatedir=/com                   
-> --localstatedir=/var                   --libdir=/usr/lib               
-> --includedir=/usr/include              
-> --oldincludedir=/usr/include                   
-> --infodir=/usr/share/info             
-> --mandir=/usr/share/man                     
-> --with-omniorb=/home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/bin/..
-> IDL=/home/saleh/tmp/staging/i686-linux/usr/bin/omniidl                    
-> ...
-> | configure: WARNING: unrecognized options: --with-omniorb
-> | configure: loading site script /oe/openembedded/site/endian-little
-> | configure: loading site script /oe/openembedded/site/common-linux
-> | configure: loading site script /oe/openembedded/site/common-glibc
-> | configure: loading site script /oe/openembedded/site/arm-common
-> | configure: loading site script /oe/openembedded/site/arm-linux
-> | configure: loading site script /oe/openembedded/site/common
-> | configure: loading site script /oe/openembedded/site/common
-> | checking for a BSD-compatible install... /usr/bin/install -c
-> | checking whether build environment is sane... yes
-> | checking for a thread-safe mkdir -p... /bin/mkdir -p
-> | checking for gawk... gawk
-> | checking whether make sets $(MAKE)... yes
-> | checking for arm-angstrom-linux-gnueabi-strip... arm-angstrom-linux-gnueabi-strip
-> | checking for C++ compiler default output file name... a.out
-> | checking whether the C++ compiler works... yes
-> | checking whether we are cross compiling... yes
-> | checking for suffix of executables...
-> | checking for suffix of object files... o
-> | checking whether we are using the GNU C++ compiler... yes
-> |
-> checking whether ccache arm-angstrom-linux-gnueabi-g++ -march=armv5te
-> -mtune=arm926ej-s -mthumb-interwork -mno-thumb accepts -g... yes
-> | checking for style of include used by make... GNU
-> |
-> checking dependency style of ccache arm-angstrom-linux-gnueabi-g++
-> -march=armv5te -mtune=arm926ej-s -mthumb-interwork -mno-thumb... gcc3
-> | checking for a BSD-compatible install... /usr/bin/install -c
-> | checking whether make sets $(MAKE)... (cached) yes
-> | checking build system type... i686-pc-linux-gnu
-> | checking host system type... arm-angstrom-linux-gnueabi
-> |
-> checking for arm-angstrom-linux-gnueabi-gcc... ccache
-> arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s
-> -mthumb-interwork -mno-thumb
-> | checking whether we are using the GNU C compiler... yes
-> |
-> checking whether ccache arm-angstrom-linux-gnueabi-gcc -march=armv5te
-> -mtune=arm926ej-s -mthumb-interwork -mno-thumb accepts -g... yes
-> |
-> checking for ccache arm-angstrom-linux-gnueabi-gcc -march=armv5te
-> -mtune=arm926ej-s -mthumb-interwork -mno-thumb option to accept ISO
-> C89... none needed
-> | checking dependency style of ccache
-> arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s
-> -mthumb-interwork -mno-thumb... gcc3
-> | checking for a sed that does not truncate output... /bin/sed
-> | checking for grep that handles long lines and -e... /bin/grep
-> | checking for egrep... /bin/grep -E
-> | checking for fgrep... /bin/grep -F
-> |
-> checking for ld used by ccache arm-angstrom-linux-gnueabi-gcc
-> -march=armv5te -mtune=arm926ej-s -mthumb-interwork -mno-thumb...
-> arm-angstrom-linux-gnueabi-ld
-> | checking if the linker (arm-angstrom-linux-gnueabi-ld) is GNU ld... yes
-> | checking for BSD- or MS-compatible name lister (nm)... arm-angstrom-linux-gnueabi-nm
-> | checking the name lister (arm-angstrom-linux-gnueabi-nm) interface... BSD nm
-> | checking whether ln -s works... yes
-> | checking the maximum length of command line arguments... 98304
-> | checking whether the shell understands some XSI constructs... yes
-> | checking whether the shell understands "+="... yes
-> | checking for arm-angstrom-linux-gnueabi-ld option to reload object files... -r
-> | checking for arm-angstrom-linux-gnueabi-objdump... arm-angstrom-linux-gnueabi-objdump
-> | checking how to recognize dependent libraries... pass_all
-> | checking for arm-angstrom-linux-gnueabi-ar... arm-angstrom-linux-gnueabi-ar
-> | checking for arm-angstrom-linux-gnueabi-strip... (cached) arm-angstrom-linux-gnueabi-strip
-> | checking for arm-angstrom-linux-gnueabi-ranlib... arm-angstrom-linux-gnueabi-ranlib
-> |
-> checking command to parse arm-angstrom-linux-gnueabi-nm output from
-> ccache arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s
-> -mthumb-interwork -mno-thumb object... ok
-> | checking how to run the C preprocessor... arm-angstrom-linux-gnueabi-gcc -E
-> | checking for ANSI C header files... yes
-> | checking for sys/types.h... yes
-> | checking for sys/stat.h... yes
-> | checking for stdlib.h... yes
-> | checking for string.h... yes
-> | checking for memory.h... yes
-> | checking for strings.h... yes
-> | checking for inttypes.h... yes
-> | checking for stdint.h... yes
-> | checking for unistd.h... yes
-> | checking for dlfcn.h... yes
-> | checking whether we are using the GNU C++ compiler... (cached) yes
-> |
-> checking whether ccache arm-angstrom-linux-gnueabi-g++ -march=armv5te
-> -mtune=arm926ej-s -mthumb-interwork -mno-thumb accepts -g... (cached)
-> yes
-> | checking dependency style of ccache
-> arm-angstrom-linux-gnueabi-g++ -march=armv5te -mtune=arm926ej-s
-> -mthumb-interwork -mno-thumb... (cached) gcc3
-> | checking how to run
-> the C++ preprocessor... ccache arm-angstrom-linux-gnueabi-g++
-> -march=armv5te -mtune=arm926ej-s -mthumb-interwork -mno-thumb -E
-> | checking for objdir... .libs
-> |
-> checking if ccache arm-angstrom-linux-gnueabi-gcc -march=armv5te
-> -mtune=arm926ej-s -mthumb-interwork -mno-thumb supports -fno-rtti
-> -fno-exceptions... no
-> | checking for ccache
-> arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s
-> -mthumb-interwork -mno-thumb option to produce PIC... -fPIC -DPIC
-> |
-> checking if ccache arm-angstrom-linux-gnueabi-gcc -march=armv5te
-> -mtune=arm926ej-s -mthumb-interwork -mno-thumb PIC flag -fPIC -DPIC
-> works... yes
-> | checking if ccache arm-angstrom-linux-gnueabi-gcc
-> -march=armv5te -mtune=arm926ej-s -mthumb-interwork -mno-thumb static
-> flag -static works... yes
-> | checking if ccache
-> arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s
-> -mthumb-interwork -mno-thumb supports -c -o file.o... yes
-> | checking
-> if ccache arm-angstrom-linux-gnueabi-gcc -march=armv5te
-> -mtune=arm926ej-s -mthumb-interwork -mno-thumb supports -c -o file.o...
-> (cached) yes
-> | checking whether the ccache
-> arm-angstrom-linux-gnueabi-gcc -march=armv5te -mtune=arm926ej-s
-> -mthumb-interwork -mno-thumb linker (arm-angstrom-linux-gnueabi-ld)
-> supports shared libraries... yes
-> | checking whether -lc should be explicitly linked in... no
-> | checking dynamic linker characteristics... GNU/Linux ld.so
-> | checking how to hardcode library paths into programs... immediate
-> | checking whether stripping libraries is possible... yes
-> | checking if libtool supports shared libraries... yes
-> | checking whether to build shared libraries... yes
-> | checking whether to build static libraries... yes
-> |
-> checking for ld used by ccache arm-angstrom-linux-gnueabi-g++
-> -march=armv5te -mtune=arm926ej-s -mthumb-interwork -mno-thumb...
-> arm-angstrom-linux-gnueabi-ld
-> | checking if the linker (arm-angstrom-linux-gnueabi-ld) is GNU ld... yes
-> |
-> checking whether the ccache arm-angstrom-linux-gnueabi-g++
-> -march=armv5te -mtune=arm926ej-s -mthumb-interwork -mno-thumb linker
-> (arm-angstrom-linux-gnueabi-ld) supports shared libraries... yes
-> |
-> checking for ccache arm-angstrom-linux-gnueabi-g++ -march=armv5te
-> -mtune=arm926ej-s -mthumb-interwork -mno-thumb option to produce PIC...
-> -fPIC -DPIC
-> | checking if ccache arm-angstrom-linux-gnueabi-g++
-> -march=armv5te -mtune=arm926ej-s -mthumb-interwork -mno-thumb PIC flag
-> -fPIC -DPIC works... yes
-> | checking if ccache
-> arm-angstrom-linux-gnueabi-g++ -march=armv5te -mtune=arm926ej-s
-> -mthumb-interwork -mno-thumb static flag -static works... yes
-> |
-> checking if ccache arm-angstrom-linux-gnueabi-g++ -march=armv5te
-> -mtune=arm926ej-s -mthumb-interwork -mno-thumb supports -c -o file.o...
-> yes
-> | checking if ccache arm-angstrom-linux-gnueabi-g++
-> -march=armv5te -mtune=arm926ej-s -mthumb-interwork -mno-thumb supports
-> -c -o file.o... (cached) yes
-> | checking whether the ccache
-> arm-angstrom-linux-gnueabi-g++ -march=armv5te -mtune=arm926ej-s
-> -mthumb-interwork -mno-thumb linker (arm-angstrom-linux-gnueabi-ld)
-> supports shared libraries... yes
-> | checking dynamic linker characteristics... GNU/Linux ld.so
-> | checking how to hardcode library paths into programs... immediate
-> | checking for main in -lomniORB4... yes
-> | checking omniORB4/CORBA.h usability... yes
-> | checking omniORB4/CORBA.h presence... yes
-> | checking for omniORB4/CORBA.h... yes
-> | checking for omniidl... /home/saleh/tmp/staging/i686-linux/usr/bin/omniidl
-> | checking boost/filesystem/operations.hpp usability... yes
-> | checking boost/filesystem/operations.hpp presence... yes
-> | checking for boost/filesystem/operations.hpp... yes
-> | checking for main in -lboost_filesystem... no
-> | configure: error: cannot find boost_filesystem library.
-> | FATAL: oe_runconf failed
-> NOTE: Task failed: /home/saleh/tmp/work/armv5te-angstrom-linux-gnueabi/ossie-cf-0.0.0+svnr247-r1/temp/log.do_configure.3404
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of /oe/ossie_collection/recipes/ossie-libraries/ossie-cf_svn.bb do_configure failed
-> ERROR: Task 1133 (/oe/ossie_collection/recipes/ossie-libraries/ossie-cf_svn.bb, do_configure) failed
-> NOTE: Tasks Summary: Attempted 1223 tasks of which 1223 didn't need to be rerun and 1 failed.
-> ERROR: '/oe/ossie_collection/recipes/ossie-libraries/ossie-cf_svn.bb' failed 		 	   		  
-> _________________________________________________________________
-> Hotmail: Trusted email with Microsoft’s powerful SPAM protection.
-> https://signup.live.com/signup.aspx?id=60969
+--=20
+Antonio Ospite
+http://ao2.it
+
+PGP public key ID: 0x4553B001
+
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
+
+--Signature=_Tue__2_Mar_2010_16_35_28_+0100_1TrdIfaykChXsqVO
+Content-Type: application/pgp-signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-iD8DBQFLjSc8MkyGM64RGpERAl1vAJ9bqgbolTJGUM3k1Jdk10a+zcPfaQCghWYj
-he8sVtCk1LlLIKnxmEwtTwk=
-=I7S7
+iEYEARECAAYFAkuNMEAACgkQ5xr2akVTsAHaegCePVlu3XE51MEpLbPBOkeux2/A
+nTIAn0P3RebD/DevcgtTKpZ1tgbw5r/Q
+=huuu
 -----END PGP SIGNATURE-----
 
-
-
+--Signature=_Tue__2_Mar_2010_16_35_28_+0100_1TrdIfaykChXsqVO--
