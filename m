@@ -1,45 +1,49 @@
-Received: from mail-gx0-f213.google.com ([209.85.217.213])
+Received: from mail-fx0-f220.google.com ([209.85.220.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NmRJJ-000640-SS
+	(envelope-from <martin.jansa@gmail.com>) id 1NmSsn-0005BP-Om
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Mar 2010 13:34:50 +0100
-Received: by gxk5 with SMTP id 5so84067gxk.6
+	Tue, 02 Mar 2010 15:15:38 +0100
+Received: by fxm20 with SMTP id 20so302546fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Mar 2010 04:31:59 -0800 (PST)
+	Tue, 02 Mar 2010 06:12:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=wa3IYqk86EpQThLCRzOEvcavdWrngDh2bisnAhTv8J8=;
-	b=C4f1yYHcbScNTYxwZx2xB1LeY8JaHZWh3gl6q6/mbOKytxXGp/u/Z7O5qOz1VqRD3O
-	bsTesYr6cEojAnW6pl+rSOuGa2kVzbQyF89E7ovuTERhr3ASnz5Gp07YbCxYpBQr7ubc
-	I3BPXVZFgopHiJSTLYIL3EdH34YUs0OHHqFw0=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=SwFrgkAFv1fw2jaKxRDMDGVRBifBdJxauVxJdjf0QTk=;
+	b=c3ho/t+FE2cGZImwzLeYhx4HsGTX223Y1qMg90bdNJnBmoLeFYja/cYe9Fn6zUfQ84
+	yazjF91QYMLMsujt5WyN++WLxV6kPJVOZu7QmDRM5+J5Du5iAKnYEigpJTFC3+Co3TE6
+	RDwtMzAQdCF0/nCvw1r+Uyy4SUIm7emuNmpY8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=SSaY+ZMbr0N89+CRO6BCZ+nclzkHhZNq13mGWy+rr5gTeE8aKroMMebBFgQVaxnfRm
-	tFv1TKFYFR5Dh1AfHPLOvgJheu8jkVSuC7Ncboa2E7t3UZ8wtIp0qfF/gpAMGkrz7U+2
-	PrdQeLIBR4qp0daKRS7+lCmsPBW+HivvHyc8o=
-MIME-Version: 1.0
-Received: by 10.100.54.5 with SMTP id c5mr475923ana.81.1267533118699; Tue, 02 
-	Mar 2010 04:31:58 -0800 (PST)
-In-Reply-To: <hmivei$h8j$2@dough.gmane.org>
-References: <E1Nm0HI-0004Qt-Pn@melo.openembedded.org>
-	<d1b08f941003011337i15e21dcx340cef502c2ea151@mail.gmail.com>
-	<201003012255.35738.holger+oe@freyther.de>
-	<hmivei$h8j$2@dough.gmane.org>
-Date: Tue, 2 Mar 2010 13:31:58 +0100
-Message-ID: <ac9c93b11003020431r7b571732ycadb9f6a897f471f@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=fxcj2qEvKAIpnstv00kJU9iLeTjvzqf05FpUppUIuAfvxeSnSbbMIoBSxQ6dsiSecf
+	zoCHurPBGg9TkjSGaTsHImIwetzuw1S7FlO7Wv4KDZZMsKTk+cRkDN5AcRc3jlP0SbRE
+	aTuWZGKAFKwbaCS1cPlAcw5jNpP9rk4oH/fcI=
+Received: by 10.87.45.20 with SMTP id x20mr9678032fgj.63.1267539163132;
+	Tue, 02 Mar 2010 06:12:43 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 16sm2890978fxm.11.2010.03.02.06.12.41
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 02 Mar 2010 06:12:41 -0800 (PST)
+Date: Tue, 2 Mar 2010 15:13:06 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.217.213
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20100302141306.GF3206@jama>
+References: <20100301152627.GT3206@jama>
+	<201003011651.37372.holger+oe@freyther.de>
+MIME-Version: 1.0
+In-Reply-To: <201003011651.37372.holger+oe@freyther.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.220
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Koen Kooi : angstrom: sync pango and pango-native versions
+Subject: Re: Building ubi/ubifs images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,29 +57,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Mar 2010 12:34:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 02 Mar 2010 14:15:38 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2010/3/2 Koen Kooi <k.kooi@student.utwente.nl>:
+On Mon, Mar 01, 2010 at 04:51:37PM +0100, Holger Hans Peter Freyther wrote:
+> On Monday 01 March 2010 16:26:27 Martin Jansa wrote:
+> 
+> > NOTE: Running task 7195 of 7198 (ID: 10,
+> > /home/shr/shr-unstable/openembedded/recipes/images/shr-lite-image.bb,
+> > do_rootfs) *** glibc detected *** mkfs.ubifs: double free or corruption
+> > (!prev): 0x000000000060d0c0 *** ======= Backtrace: =========
+> > /lib/libc.so.6[0x2b4e55501948]
+> > /lib/libc.so.6(cfree+0x76)[0x2b4e55503a56]
+> > mkfs.ubifs[0x403bc4]
+> > mkfs.ubifs[0x4050ca]
+> > /lib/libc.so.6(__libc_start_main+0xe6)[0x2b4e554ac1a6]
+> >
+> 
+> In general it might be nice to build mkfs.ubifs with debug information and 
+> send the backtrace upstream and ask for help to resolve the issue?
 
-> This commit also shows that using BBCLASSEXTEND isn't so hard, more
-> people should try to convert their recipes to it instead of deleting them :)
+Hi,
 
-The recipes I feel responsible for all use BBCLASSEXTEND and new
-staging, thank you.
-It are the orphaned recipes that are not converted.
+so I guess I'm not the only one..
 
-And personally I don't think bashing people will motivate them to
-spend time on those issues.
+Sent upstream
+http://lists.infradead.org/pipermail/linux-mtd/2010-March/029271.html
 
-Frans (who thinks that having 26 variants of a recipe most of which
-are unused and unmaintained is not quite to be considered
-"professional" either).
+Regards,
 
-Frans
-
-> regards,
->
-> Koen
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
