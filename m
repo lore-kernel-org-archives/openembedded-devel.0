@@ -1,39 +1,50 @@
-Received: from relay1.mail.masterhost.ru ([83.222.23.61])
+Received: from mail-bw0-f213.google.com ([209.85.218.213])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1NmXaB-0003dM-5d
+	(envelope-from <raj.khem@gmail.com>) id 1NmXxm-0004Ar-CD
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Mar 2010 20:16:43 +0100
-Received: from [UNAVAILABLE] ([93.100.16.104] helo=mate.localnet)
-	by relay1.mail.masterhost.ru with esmtp 
-	envelope from <roman@khimov.ru> authenticated with rik@osrc.info
-	message id 1NmXXP-0002YD-KX
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Mar 2010 22:13:48 +0300
-From: Roman I Khimov <roman@khimov.ru>
+	Tue, 02 Mar 2010 20:41:08 +0100
+Received: by bwz5 with SMTP id 5so539028bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Mar 2010 11:38:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=sA1+OuM7ZgHBlKyAMrBtk/gtQk1c0TEbdAfnwlagtv4=;
+	b=EjeHVy4UdW2NfZG86RzVj5P4cy/YxzkQAbsuLoXWwG+y7lJzA5OQeQqqogoWv7lplu
+	0UPVu3OJ5HhY25uoxQT7ejGOHnGvqIlyu5FILyWfeENfMf16fSqwtT0hZnhkS+8CV0ti
+	tnpKqsrdoA0OhvnTjm1jfsee8k711jGKZyrEc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=XNGk/KMKiKJYPCqQokIHeYMftmuC0W13/ntD17Wzj9iDCNxskNfMGW+thEnZjMIr+T
+	SQA56vOjSDkNq8N2N9y1vp9lHbp7UqQguVKAg/U1twtHN0gbjCXw/taiEeidnkzgYB2+
+	tnapY/Y0b11XLcRD84+TzuEMuOvOpUJQA0gtw=
+Received: by 10.204.25.132 with SMTP id z4mr1057556bkb.84.1267558690981;
+	Tue, 02 Mar 2010 11:38:10 -0800 (PST)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 15sm3140782bwz.0.2010.03.02.11.38.08
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 02 Mar 2010 11:38:10 -0800 (PST)
+Date: Tue, 2 Mar 2010 11:36:18 -0800
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 2 Mar 2010 22:11:45 +0300
-User-Agent: KMail/1.12.2 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.1; x86_64; ; )
+Message-ID: <20100302193618.GA31433@gmail.com>
 References: <1267478308.4739.245.camel@trini-m4400>
 	<201003021042.51552.marcin@juszkiewicz.com.pl>
 	<20100302182829.GA31371@gmail.com>
-In-Reply-To: <20100302182829.GA31371@gmail.com>
+	<201003022211.54572.roman@khimov.ru>
 MIME-Version: 1.0
-Message-Id: <201003022211.54572.roman@khimov.ru>
-X-SpamTest-Envelope-From: roman@khimov.ru
-X-SpamTest-Group-ID: 00000000
-X-SpamTest-Info: Profiles 12466 [Mar 2 2010]
-X-SpamTest-Info: {DNSBL Rate: low}
-X-SpamTest-Method: none
-X-SpamTest-Rate: 20
-X-SpamTest-Status: Not detected
-X-SpamTest-Status-Extended: not_detected
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
-X-SA-Exim-Connect-IP: 83.222.23.61
-X-SA-Exim-Mail-From: roman@khimov.ru
+In-Reply-To: <201003022211.54572.roman@khimov.ru>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.218.213
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH, RFC] Cleanup / update QEMU related checks
@@ -50,44 +61,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Mar 2010 19:16:43 -0000
-X-Groupsio-MsgNum: 17260
-Content-Type: multipart/signed; boundary="nextPart3485078.vszyxz0nut";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 02 Mar 2010 19:41:08 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
---nextPart3485078.vszyxz0nut
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: base64
+On (02/03/10 22:11), Roman I Khimov wrote:
+> В сообщении от Вторник 02 марта 2010 21:28:29 автор Khem Raj написал:
+> > On (02/03/10 10:42), Marcin Juszkiewicz wrote:
+> > > Dnia wtorek, 2 marca 2010 o 10:36:04 Roman Khimov napisał(a):
+> > > > В сообщении от Вторник 02 марта 2010 00:18:28 автор Tom Rini написал:
+> > > > > (aside: When can qemu-0.9.x die?).
+> > > >
+> > > > IMHO, it just about time to kill it, almost a year past since 0.10.x
+> > > > introduction and with all those changes 0.9.x is not working properly
+> > > > for locale generation anyway.
+> > >
+> > > I think that we need to upgrade to qemu 0.12.x and kill all previous
+> > > versions.
+> > 
+> > Does .12 still need gcc 3.4.x ? or can it use gcc 4.x
+> 
+> 0.10.x already builds with gcc 4.x.
+thx for info. last time I build .11 with gcc 4.4 it poo poo'ed on me so I thougt it
+still needs 3.4
 
-0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0JLRgtC+0YDQvdC40LogMDIg0LzQsNGA0YLQsCAy
-MDEwIDIxOjI4OjI5INCw0LLRgtC+0YAgS2hlbSBSYWog0L3QsNC/0LjRgdCw0Ls6Cj4gT24gKDAy
-LzAzLzEwIDEwOjQyKSwgTWFyY2luIEp1c3praWV3aWN6IHdyb3RlOgo+ID4gRG5pYSB3dG9yZWss
-IDIgbWFyY2EgMjAxMCBvIDEwOjM2OjA0IFJvbWFuIEtoaW1vdiBuYXBpc2HFgihhKToKPiA+ID4g
-0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0JLRgtC+0YDQvdC40LogMDIg0LzQsNGA0YLQsCAy
-MDEwIDAwOjE4OjI4INCw0LLRgtC+0YAgVG9tIFJpbmkg0L3QsNC/0LjRgdCw0Ls6Cj4gPiA+ID4g
-KGFzaWRlOiBXaGVuIGNhbiBxZW11LTAuOS54IGRpZT8pLgo+ID4gPgo+ID4gPiBJTUhPLCBpdCBq
-dXN0IGFib3V0IHRpbWUgdG8ga2lsbCBpdCwgYWxtb3N0IGEgeWVhciBwYXN0IHNpbmNlIDAuMTAu
-eAo+ID4gPiBpbnRyb2R1Y3Rpb24gYW5kIHdpdGggYWxsIHRob3NlIGNoYW5nZXMgMC45LnggaXMg
-bm90IHdvcmtpbmcgcHJvcGVybHkKPiA+ID4gZm9yIGxvY2FsZSBnZW5lcmF0aW9uIGFueXdheS4K
-PiA+Cj4gPiBJIHRoaW5rIHRoYXQgd2UgbmVlZCB0byB1cGdyYWRlIHRvIHFlbXUgMC4xMi54IGFu
-ZCBraWxsIGFsbCBwcmV2aW91cwo+ID4gdmVyc2lvbnMuCj4gCj4gRG9lcyAuMTIgc3RpbGwgbmVl
-ZCBnY2MgMy40LnggPyBvciBjYW4gaXQgdXNlIGdjYyA0LngKCjAuMTAueCBhbHJlYWR5IGJ1aWxk
-cyB3aXRoIGdjYyA0LnguCgotLSAKIGh0dHA6Ly9yb21hbi5raGltb3YucnUKbWFpbHRvOiByb21h
-bkBraGltb3YucnUKZ3BnIC0ta2V5c2VydmVyIGhrcDovL3N1YmtleXMucGdwLm5ldCAtLXJlY3Yt
-a2V5cyAweEU1RTA1NUMzCg==
 
---nextPart3485078.vszyxz0nut
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+> 
+> -- 
+>  http://roman.khimov.ru
+> mailto: roman@khimov.ru
+> gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
 
-iEYEABECAAYFAkuNYvoACgkQXJ70z+XgVcOqAgCfUYjimZLJxFhXmHDoosoFY1T1
-wDYAoNz3YL4qn1Mg0KkhAveKR5nIpIE3
-=1ZpB
------END PGP SIGNATURE-----
 
---nextPart3485078.vszyxz0nut--
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+
