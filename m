@@ -1,46 +1,37 @@
-Received: from mail-px0-f178.google.com ([209.85.216.178])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1NmFXY-0001Nz-4m
+	(envelope-from <Tom_Rini@mentor.com>) id 1NmHzQ-0004hC-Gx
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Mar 2010 01:00:44 +0100
-Received: by pxi8 with SMTP id 8so818224pxi.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 01 Mar 2010 15:57:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to
-	:content-type; bh=WKnz8xxSjfOXFJtAFS3WJ99ZrSZimS16SWsxwj5oodg=;
-	b=Ra5p8MXyumZiBoX+6ifb2oZqTkR2J5N85Y6qa8MMY7SMacyR4gTX+HVrCU8J+xbMZt
-	RiO1t4eDOeVvoi9ljX8drUhL9vb0oHmXl68bficxiTIvjVqx1KRjfYIG/8VW1mR9xQs1
-	27HnEHKSqX6KLrtRK9nTLn8oH87poUyExJ4Vw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=AjxPCigT+h4MnUHGg5iWMH/RlLvuH+q9c6/XPdfZI62kehTPnaaUKrvsFnLI91donW
-	6J2NvDBLz6hSUzc3jK7Z/jvdgYNiRQctRasWlCNFZzaZNc1SN5/pugwgGTtynzNBruGz
-	QyqRiCv9EUNnNkDgTKE2aBahUT41xdVxXkBKM=
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.143.25.27 with SMTP id c27mr2997092wfj.249.1267487873233; Mon, 
-	01 Mar 2010 15:57:53 -0800 (PST)
-In-Reply-To: <20100301222252.GE15391@denix.org>
-References: <1267478308.4739.245.camel@trini-m4400>
-	<20100301222252.GE15391@denix.org>
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 1 Mar 2010 16:57:33 -0700
-X-Google-Sender-Auth: e1bcbf01ce7348a3
-Message-ID: <b6ebd0a51003011557q53930ddax5fac9e9828560fbd@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.178
-X-SA-Exim-Mail-From: kergoth@gmail.com
+	Tue, 02 Mar 2010 03:37:44 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1NmHwf-0006jV-LY from Tom_Rini@mentor.com ;
+	Mon, 01 Mar 2010 18:34:49 -0800
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 1 Mar 2010 18:34:49 -0800
+Received: from 172.30.80.137 ([172.30.80.137]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Tue,  2 Mar 2010 02:34:36 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	01 Mar 2010 19:34:35 -0700
+From: Tom Rini <tom_rini@mentor.com>
+To: oe-devel <openembedded-devel@lists.openembedded.org>
+Organization: Mentor Graphics Corporation
+Date: Mon, 01 Mar 2010 19:34:35 -0700
+Message-ID: <1267497275.4739.292.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 02 Mar 2010 02:34:49.0302 (UTC)
+	FILETIME=[EE11FF60:01CAB9B0]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=HTML_MESSAGE,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=0.0 required=5.0 tests=AWL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH, RFC] Cleanup / update QEMU related checks
+Subject: [PATCH] Add eglibc-pic, resync eglibc-dev with glibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,41 +45,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Mar 2010 00:00:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 02 Mar 2010 02:37:44 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 1, 2010 at 3:22 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+eglibc-package.bbclass: Add eglibc-pic, resync eglibc-dev with glibc
 
-> On Mon, Mar 01, 2010 at 02:18:28PM -0700, Tom Rini wrote:
-> > First, we should be performing qemu-native related checks not on ARM,
-> > but on ENABLE_BINARY_LOCALE_GENERATION (for both the ARM but no
-> > generation and not ARM but generation) cases.  This clarifies what we do
-> > in the first sub-check (aside: When can qemu-0.9.x die?).  This changes
-> > the assume provided check to make sure that at least 'qemu' exists
-> > (afaict this will exist for distribution packages as well as from-source
-> > ones where we might not have qemu-arm, if the developer isn't doing arm)
-> > using the standard check.  Finally (how I wrote it, not how it's in the
-> > patch), correct (grammar and content) the comment about what GCC
-> > versions are allowed.  My fault initially for not noticing the gcc
-> > 3.3.x / 3.2.x stuff in the list.
->
-> Heh, I have a local similar change to avoid unnecessary QEMU sanity check,
-> when not doing binary locale generation. I wanted to push it later, but
-> your
-> fix looks better :)
->
-> > Signed-off-by: Tom Rini <tom_rini@mentor.com>
->
-> Acked-by: Denys Dmytriyenko <denis@denix.org>
->
+Resync what goes into eglibc-dev based on what we have in glibc-dev.
+This includes zoneinfo and picking up the reset of the static libraries
+(many are missed otherwise and static linking in SDKs fails).  We add in
+a eglibc-pic package to catch all of the pic stuff (some of which would
+otherwise be caught in -dev).
 
-Looks sane to me.
+Will bump PRs when I push this.
 
-Acked-by: Chris Larson <chris_larson@mentor.com>
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Signed-off-by: Tom Rini <tom_rini@mentor.com>
+
+diff --git a/recipes/eglibc/eglibc-package.bbclass
+b/recipes/eglibc/eglibc-package.bbclass
+index 3c33f93..9c660b4 100644
+--- a/recipes/eglibc/eglibc-package.bbclass
++++ b/recipes/eglibc/eglibc-package.bbclass
+@@ -29,11 +29,12 @@ BINARY_LOCALE_ARCHES ?=3D "arm.* i[3-6]86 x86_64
+powerpc"
+ # Set this to zero if you don't want ldconfig in the output package
+ USE_LDCONFIG ?=3D "1"
+=20
+-PACKAGES =3D "eglibc-dbg eglibc catchsegv sln nscd ldd localedef
+eglibc-utils eglibc-dev eglibc-doc eglibc-locale libsegfault
+eglibc-extra-nss eglibc-thread-db eglibc-pcprofile"
++PACKAGES =3D "eglibc-dbg eglibc catchsegv sln nscd ldd localedef
+eglibc-utils eglibc-pic eglibc-dev eglibc-doc eglibc-locale libcidn
+libmemusage libsegfault eglibc-extra-nss eglibc-thread-db
+eglibc-pcprofile"
+ PACKAGES_DYNAMIC =3D "glibc-gconv-* glibc-charmap-* glibc-localedata-*
+glibc-binary-localedata-* eglibc-gconv-* eglibc-charmap-*
+eglibc-localedata-* eglibc-binary-localedata-* locale-base-*"
+=20
+ RPROVIDES_eglibc =3D "glibc"
+ RPROVIDES_eglibc-utils =3D "glibc-utils"
++RPROVIDES_eglibc-pic =3D "glibc-pic"
+ RPROVIDES_eglibc-dev =3D "glibc-dev"
+ RPROVIDES_eglibc-doc =3D "glibc-doc"
+ RPROVIDES_eglibc-locale =3D "glibc-locale"
+@@ -43,12 +44,16 @@ RPROVIDES_eglibc-pcprofile =3D "glibc-pcprofile"
+ RPROVIDES_eglibc-dbg =3D "glibc-dbg"
+ libc_baselibs =3D "${base_libdir}/libcrypt*.so.*
+${base_libdir}/libcrypt-*.so ${base_libdir}/libc*.so.*
+${base_libdir}/libc*.so ${base_libdir}/libm*.so.*
+${base_libdir}/libm-*.so ${base_libdir}/ld*.so.* ${base_libdir}/ld-*.so
+${base_libdir}/libpthread*.so.* ${base_libdir}/libpthread-*.so
+${base_libdir}/libresolv*.so.* ${base_libdir}/libresolv-*.so
+${base_libdir}/librt*.so.* ${base_libdir}/librt-*.so
+${base_libdir}/libutil*.so.* ${base_libdir}/libutil-*.so
+${base_libdir}/libnsl*.so.* ${base_libdir}/libnsl-*.so
+${base_libdir}/libnss_files*.so.* ${base_libdir}/libnss_files-*.so
+${base_libdir}/libnss_compat*.so.* ${base_libdir}/libnss_compat-*.so
+${base_libdir}/libnss_dns*.so.* ${base_libdir}/libnss_dns-*.so
+${base_libdir}/libdl*.so.* ${base_libdir}/libdl-*.so
+${base_libdir}/libanl*.so.* ${base_libdir}/libanl-*.so
+${base_libdir}/libBrokenLocale*.so.*
+${base_libdir}/libBrokenLocale-*.so"
+=20
+-FILES_${PN} =3D "${libc_baselibs} ${libexecdir}/*
+${@base_conditional('USE_LDCONFIG', '1', '${base_sbindir}/ldconfig', '',
+d)}"
++FILES_${PN} =3D "${libc_baselibs} ${libexecdir}/* ${datadir}/zoneinfo
+${@base_conditional('USE_LDCONFIG', '1', '${base_sbindir}/ldconfig', '',
+d)}"
+ FILES_ldd =3D "${bindir}/ldd"
+ FILES_libsegfault =3D "${base_libdir}/libSegFault*"
++FILES_libcidn =3D "${base_libdir}/libcidn*.so"
++FILES_libmemusage =3D "${base_libdir}/libmemusage.so"
+ FILES_eglibc-extra-nss =3D "${base_libdir}/libnss*"
+ FILES_sln =3D "/sbin/sln"
+-FILES_eglibc-dev_append =3D " ${libdir}/*.o ${bindir}/rpcgen
+${libdir}/libc_nonshared.a ${libdir}/libpthread_nonshared.a"
++FILES_eglibc-pic =3D "${libdir}/*_pic.a ${libdir}/*_pic.map
+${libdir}/libc_pic/"
++FILES_eglibc-dev_append +=3D "${bindir}/rpcgen ${libdir}/*.a \
++	${base_libdir}/*.a ${base_libdir}/*.o ${datadir}/aclocal"
+ FILES_nscd =3D "${sbindir}/nscd*"
+ FILES_eglibc-utils =3D "${bindir}/* ${sbindir}/*"
+ FILES_eglibc-gconv =3D "${libdir}/gconv/*"
+@@ -95,7 +100,6 @@ do_install() {
+ 		mv ${WORKDIR}/SUPPORTED.tmp ${WORKDIR}/SUPPORTED
+ 	done
+ 	rm -f ${D}/etc/rpc
+-	rm -rf ${D}${datadir}/zoneinfo
+ 	rm -rf ${D}${libexecdir}/getconf
+ }
+=20
+
+
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
+
 
