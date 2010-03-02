@@ -1,47 +1,51 @@
 Received: from mail-fx0-f220.google.com ([209.85.220.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1NmYx8-0008I6-3U
+	(envelope-from <martin.jansa@gmail.com>) id 1NmYyZ-0008On-It
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Mar 2010 21:44:31 +0100
-Received: by fxm20 with SMTP id 20so705308fxm.12
+	Tue, 02 Mar 2010 21:46:00 +0100
+Received: by fxm20 with SMTP id 20so706806fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Mar 2010 12:41:35 -0800 (PST)
+	Tue, 02 Mar 2010 12:43:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=GGnDg2x9s40JIHNGzSDS5oHjN8cBwVHN94oUR4E0ahk=;
-	b=jMm6CNk2YsyNEuQ47V+RBYgB7cmoua719ewtLHA3f7EqwQbpbtnCbVsucaEPl+5wen
-	DHJp4HEY0abak3RWxhxM4sYeOS5uTGMKy1PewPOfYcs9OnzU9SFLP2hy1FCywYZytMEN
-	pkaLsc0UXi1cZRK+v7fEV0xc95i2GKSA0E9FY=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=yn/5aLDY3K2jXpwmiZc8eSB7WRI8RohbpDGcSf7cmR8=;
+	b=OApGeBQ8OA4WAp5hPzkCUb0oj+kjqodJsGUzr1aef0YO0cB/m3vkl+3WfHgYG/hsaS
+	eQdy5qCf5hzPJYrEo+WT0evy4KutHOLypQI61LEHxEwccFKExFallHHryFmkXymal7F2
+	gdUksi4Hz8dzo7m+t6wPkPn+kIOsaAlEzHUk8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=WBHseHejWR3n8JDmNLXaECK+tsGVEAkHNMJBQa3z1YQYzR4btqA/dvJbg5CViu2lRS
-	fzcnj6AQ8xhPXj4I2rv5OLMQFOzfGnyMGVIrCTixivk4KAVsf80Il7yOAwBnShL3haaN
-	HSmj5KewYu49RFjOe1ClZRs3h19EWg0FKdNHk=
-MIME-Version: 1.0
-Received: by 10.223.5.211 with SMTP id 19mr7285327faw.63.1267562495271; Tue, 
-	02 Mar 2010 12:41:35 -0800 (PST)
-In-Reply-To: <20100302182926.GA28081@excalibur.local>
-References: <1266337930-2440-1-git-send-email-aalonso00@gmail.com>
-	<19c1b8a91002191026p3b06577ay9375f944daa661c1@mail.gmail.com>
-	<20100302105623.GA28921@excalibur.local>
-	<hmivaf$h8j$1@dough.gmane.org>
-	<20100302182926.GA28081@excalibur.local>
-Date: Tue, 2 Mar 2010 14:41:34 -0600
-Message-ID: <d1ded4381003021241n25c2aefdybc182003bbb88cb6@mail.gmail.com>
-From: Adrian Alonso <aalonso00@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=VsN5sPw2CbxlzTN/9pY/R0jiOoMhgZ/JybAytGw16Kf3zkq+kADLF44tyDF0N9YgK/
+	mV0mSQXaF7z+9KnsxNOZBgpCIpU88gB6mYIJHLirwuFs1IC/c1wobBoCxAMQzNtHd7Hw
+	SmM8k7/EKW919HPFT0VSe7DAknxXjWdhAUhPw=
+Received: by 10.87.11.34 with SMTP id o34mr10622685fgi.26.1267562584842;
+	Tue, 02 Mar 2010 12:43:04 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 13sm3173193fxm.6.2010.03.02.12.43.00
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 02 Mar 2010 12:43:00 -0800 (PST)
+Date: Tue, 2 Mar 2010 21:43:27 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100302204327.GI3206@jama>
+References: <E1Nm0HI-0004Qt-Pn@melo.openembedded.org>
+	<d1b08f941003011337i15e21dcx340cef502c2ea151@mail.gmail.com>
+	<201003012255.35738.holger+oe@freyther.de>
+	<hmivei$h8j$2@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <hmivei$h8j$2@dough.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 209.85.220.220
-X-SA-Exim-Mail-From: aalonso00@gmail.com
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: PACKAGE_ARCH in PACKAGE_ARCHS needed? (bitbake.conf) was: [PATCH 1/4] tune-ppc440.inc: add ppc440 to PACKAGE_EXTRA_ARCHS
+Subject: Re: [oe-commits] Koen Kooi : angstrom: sync pango and pango-native versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,109 +59,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Mar 2010 20:44:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 02 Mar 2010 20:46:00 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Ok, I was looking in this issue, but this helps a lot :)
-I'm going to rework the patches since I have more changes in machine config
-file
-that solves some problems when I was trying to boot on the target as soon I
-get them right
-I will send them.
+On Tue, Mar 02, 2010 at 01:14:10PM +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> On 01-03-10 22:55, Holger Hans Peter Freyther wrote:
+> > On Monday 01 March 2010 22:37:23 Andrea Adami wrote:
+> >> Thx, but after this patch I see
+> >>
+> >> NOTE: preferred version 1.24.4 of pango-native not available (for item
+> >> pango-module-basic-x)
+> >> NOTE: preferred version 1.24.4 of pango-native not available (for item
+> >> pango-module-basic-fc)
+> >> NOTE: preferred version 1.24.4 of pango-native not available (for item
+> >> pango-native)
+> > 
+> > mea culpa, I asked koen to bump it.. and he blindly did. The fix should be to 
+> > add a pango-native of that version.
+> 
+> Yes, my bad! I had an extension to pango.inc sitting in my tree that I
+> didn't commit yet, but it's in now:
+> 
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=f45f0d3495aba36aafc286d25f96d5bd9a82c7d9
+> 
+> This commit also shows that using BBCLASSEXTEND isn't so hard, more
+> people should try to convert their recipes to it instead of deleting them :)
+> 
+> regards,
+> 
+> Koen
 
-Regards
-Adrian Alonso
+Thanks Koen!
 
-On Tue, Mar 2, 2010 at 12:29 PM, Stefan Schmidt
-<stefan@datenfreihafen.org>wrote:
+small issue:
+the same .inc is also used from
+pango-native_1.22.0.bb -> pango_1.22.0.bb -> pango.inc
 
-> Hello.
->
-> On Tue, 2010-03-02 at 13:11, Koen Kooi wrote:
-> > On 02-03-10 11:56, Stefan Schmidt wrote:
-> > >
-> > > On Fri, 2010-02-19 at 10:26, Khem Raj wrote:
-> > >> On Tue, Feb 16, 2010 at 8:32 AM, Adrian Alonso <aalonso00@gmail.com>
-> wrote:
-> > >>> Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
-> > >>> ---
-> > >>>  conf/machine/include/tune-ppc440.inc |    2 +-
-> > >>>  1 files changed, 1 insertions(+), 1 deletions(-)
-> > >>>
-> > >>> diff --git a/conf/machine/include/tune-ppc440.inc
-> b/conf/machine/include/tune-ppc440.inc
-> > >>> index feca186..0c41db4 100644
-> > >>> --- a/conf/machine/include/tune-ppc440.inc
-> > >>> +++ b/conf/machine/include/tune-ppc440.inc
-> > >>> @@ -1,4 +1,4 @@
-> > >>>  TARGET_CC_ARCH = "-mcpu=440"
-> > >>>  BASE_PACKAGE_ARCH = "ppc440"
-> > >>>  FEED_ARCH = "ppc440"
-> > >>> -PACKAGE_EXTRA_ARCHS += "ppc440e"
-> > >>> +PACKAGE_EXTRA_ARCHS += "ppc440 ppc440e"
-> > >>
-> > >>
-> > >> I wonder why this would be needed, I would think that PACKAGE_ARCHS
-> > >> consists of PACKAGE_EXTRA_ARCHS and PACKAGE_ARCH (which is default
-> > >> arch constructed from  BASE_PACKAGE_ARCH)
-> > >> if that was the case then ppc440 would be added to supported archs
-> > >> list already but it seems there is a disconnect between PACKAGE_ARCH
-> > >> and  PACKAGE_ARCHS I am not sure if it
-> > >> is deliberate or an oversight. If it is an oversight then it should be
-> > >> fixed in bitbake.conf and that would avoid this patch.
-> > >
-> > > Can somebody with more insight in bitbake.conf give us some insight
-> here?
-> > >
-> > > Right now bitbake.conf does not include PACKAGE_ARCH in PACKAGE_ARCHS.
-> > >
-> > > PACKAGE_ARCHS = "all any noarch ${TARGET_ARCH} ${PACKAGE_EXTRA_ARCHS}
-> ${MACHINE}"
-> > >
-> > > If it should stay this way, would Adrian's patch be ok? I would rather
-> get his
-> > > contributions in then having them sit to long around. Need to keep
-> people
-> > > motivated. :)
-> >
-> > The patch is OK, but for clarity we should change existing contructs
-> like:
-> >
-> > FEED_ARCH = "armv7a"
-> > PACKAGE_EXTRA_ARCHS += "armv4 armv4t armv5te armv6 armv7 armv7a"
-> > BASE_PACKAGE_ARCH = "armv7a"
-> >
-> > to
-> >
-> > BASE_PACKAGE_ARCH = "armv7a"
-> > FEED_ARCH = "${BASE_PACKAGE_ARCH}"
-> > PACKAGE_EXTRA_ARCHS += "armv4 armv4t armv5te armv6 armv7
-> > ${BASE_PACKAGE_ARCH}"
-> >
-> > So the patch in question would become:
-> >
-> > - -PACKAGE_EXTRA_ARCHS += "ppc440e"
-> > +PACKAGE_EXTRA_ARCHS += "${BASE_PACKAGE_ARCH} ppc440e"
->
-> Sounds good to me. Adrian, can you please rework your patch, test it and
-> submit
-> this onw again?
->
-> I'll pick it up with the other patches and push it into the tree.
->
-> regards
-> Stefan Schmidt
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+So then it creates native-native and says
+NOTE: multiple providers are available for pango-native (pango-native,
+pango-native-native);
+NOTE: consider defining PREFERRED_PROVIDER_pango-native
 
+I guess that git rm -r pango-native_1.22.0.bb pango-native-1.22.0
+is right sollution in this case but didn't checked it.
 
+Regards,
 
 -- 
-Saludos
-Adrian Alonso
-http://aalonso.wordpress.com
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
+
 
