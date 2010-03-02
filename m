@@ -1,41 +1,36 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from vms173015pub.verizon.net ([206.46.173.15])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NmV2X-0000nd-Gw
+	(envelope-from <denis@denix.org>) id 1NmV4Y-0000tz-Lq
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Mar 2010 17:33:46 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NmUzl-0000LE-IP from Tom_Rini@mentor.com ;
-	Tue, 02 Mar 2010 08:30:53 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 2 Mar 2010 08:30:53 -0800
-Received: from 172.30.80.137 ([172.30.80.137]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Tue,  2 Mar 2010 16:29:56 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	02 Mar 2010 09:29:55 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Tue, 02 Mar 2010 17:35:51 +0100
+Received: from gandalf.denix.org ([unknown] [71.251.51.225])
+	by vms173015.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0KYN00E30XXZHFA0@vms173015.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	02 Mar 2010 10:32:28 -0600 (CST)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5FC5014AF60; Tue,
+	02 Mar 2010 11:32:23 -0500 (EST)
+Date: Tue, 02 Mar 2010 11:32:23 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+In-reply-to: <201003021250.41664.khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1267525286.14566.774.camel@mill.internal.reciva.com>
-References: <1267497275.4739.292.camel@trini-m4400>
-	<1267525286.14566.774.camel@mill.internal.reciva.com>
-Organization: Mentor Graphics Corporation
-Date: Tue, 02 Mar 2010 09:29:55 -0700
-Message-ID: <1267547395.4739.303.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 02 Mar 2010 16:30:53.0333 (UTC)
-	FILETIME=[BA29AC50:01CABA25]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Message-id: <20100302163223.GG15391@denix.org>
+MIME-version: 1.0
+References: <1267478308.4739.245.camel@trini-m4400>
+	<201003021236.04862.khimov@altell.ru>
+	<201003021042.51552.marcin@juszkiewicz.com.pl>
+	<201003021250.41664.khimov@altell.ru>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.15
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add eglibc-pic, resync eglibc-dev with glibc
+Subject: Re: [PATCH, RFC] Cleanup / update QEMU related checks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,29 +44,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Mar 2010 16:33:47 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 02 Mar 2010 16:35:51 -0000
+Content-type: text/plain; charset=koi8-r
+Content-transfer-encoding: QUOTED-PRINTABLE
+Content-disposition: inline
 
-On Tue, 2010-03-02 at 10:21 +0000, Phil Blundell wrote:
-> On Mon, 2010-03-01 at 19:34 -0700, Tom Rini wrote:
-> > eglibc-package.bbclass: Add eglibc-pic, resync eglibc-dev with glibc
+On Tue, Mar 02, 2010 at 12:50:41PM +0300, Roman Khimov wrote:
+> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F7=D4=CF=D2=CE=C9=CB 02 =
+=CD=C1=D2=D4=C1 2010 12:42:50 =C1=D7=D4=CF=D2 Marcin Juszkiewicz=20
+> =CE=C1=D0=C9=D3=C1=CC:
+> > Dnia wtorek, 2 marca 2010 o 10:36:04 Roman Khimov napisa??(a):
+> > > =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F7=D4=CF=D2=CE=C9=CB 02=
+ =CD=C1=D2=D4=C1 2010 00:18:28 =C1=D7=D4=CF=D2 Tom Rini =CE=C1=D0=
+=C9=D3=C1=CC:
+> > > > (aside: When can qemu-0.9.x die?).
+> > >
+> > > IMHO, it just about time to kill it, almost a year past since 0=
+.10.x
+> > > introduction and with all those changes 0.9.x is not working pr=
+operly for
+> > > locale generation anyway.
 > >=20
-> > Resync what goes into eglibc-dev based on what we have in glibc-dev.
-> > This includes zoneinfo and picking up the reset of the static libraries
-> > (many are missed otherwise and static linking in SDKs fails).  We add i=
-n
-> > a eglibc-pic package to catch all of the pic stuff (some of which would
-> > otherwise be caught in -dev).
+> > I think that we need to upgrade to qemu 0.12.x and kill all previ=
+ous
+> >  versions.
 >=20
-> It is a bit of a shame that eglibc doesn't reuse more of the glibc
-> packaging logic, as opposed to having its own copies of everything.  I
-> wonder if there is a way that this could be improved.
+> IMHO, adding 0.12.x, killing 0.9.x and leaving 0.10.x for some tran=
+sition time=20
+> is a bit better. If no one is in a hurry for that, I'll try to cook=
+ up some=20
+> patches this week.
 
-Khem said no as he plans for eglibc to look more uclibc-like, roughly.
+Thanks a lot! As we've been talking about killing 0.9.x for some time=
+ now w/o=20
+much progress...
 
 --=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+Denys
+
 
 
