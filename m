@@ -1,36 +1,39 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NmPH3-0002Dh-2J
+	(envelope-from <stefan@datenfreihafen.org>) id 1NmPop-0004cT-3Q
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Mar 2010 11:24:22 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NmPEI-0006wJ-Jc
+	Tue, 02 Mar 2010 11:59:27 +0100
+Received: from w0779.wlan.rz.tu-bs.de ([134.169.203.17] helo=excalibur)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1NmPm4-0007pv-28 by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 02 Mar 2010 11:56:26 +0100
+Received: from stefan by excalibur with local (Exim 4.71)
+	(envelope-from <stefan@excalibur.local>) id 1NmPm3-0007b0-90
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Mar 2010 10:21:30 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1NmPEI-0004cO-58
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Mar 2010 10:21:30 +0000
-From: Phil Blundell <philb@gnu.org>
+	Tue, 02 Mar 2010 11:56:23 +0100
+Date: Tue, 2 Mar 2010 11:56:23 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1267497275.4739.292.camel@trini-m4400>
-References: <1267497275.4739.292.camel@trini-m4400>
-Date: Tue, 02 Mar 2010 10:21:26 +0000
-Message-ID: <1267525286.14566.774.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+Message-ID: <20100302105623.GA28921@excalibur.local>
+References: <1266337930-2440-1-git-send-email-aalonso00@gmail.com>
+	<19c1b8a91002191026p3b06577ay9375f944daa661c1@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <19c1b8a91002191026p3b06577ay9375f944daa661c1@mail.gmail.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add eglibc-pic, resync eglibc-dev with glibc
+Subject: Re: PACKAGE_ARCH in PACKAGE_ARCHS needed? (bitbake.conf) was: [PATCH 1/4] tune-ppc440.inc: add ppc440 to PACKAGE_EXTRA_ARCHS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,25 +47,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Mar 2010 10:24:22 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 02 Mar 2010 10:59:27 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Mon, 2010-03-01 at 19:34 -0700, Tom Rini wrote:
-> eglibc-package.bbclass: Add eglibc-pic, resync eglibc-dev with glibc
+Hello.
+
+On Fri, 2010-02-19 at 10:26, Khem Raj wrote:
+> On Tue, Feb 16, 2010 at 8:32 AM, Adrian Alonso <aalonso00@gmail.com> wrote:
+> > Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
+> > ---
+> >  conf/machine/include/tune-ppc440.inc |    2 +-
+> >  1 files changed, 1 insertions(+), 1 deletions(-)
+> >
+> > diff --git a/conf/machine/include/tune-ppc440.inc b/conf/machine/include/tune-ppc440.inc
+> > index feca186..0c41db4 100644
+> > --- a/conf/machine/include/tune-ppc440.inc
+> > +++ b/conf/machine/include/tune-ppc440.inc
+> > @@ -1,4 +1,4 @@
+> >  TARGET_CC_ARCH = "-mcpu=440"
+> >  BASE_PACKAGE_ARCH = "ppc440"
+> >  FEED_ARCH = "ppc440"
+> > -PACKAGE_EXTRA_ARCHS += "ppc440e"
+> > +PACKAGE_EXTRA_ARCHS += "ppc440 ppc440e"
 > 
-> Resync what goes into eglibc-dev based on what we have in glibc-dev.
-> This includes zoneinfo and picking up the reset of the static libraries
-> (many are missed otherwise and static linking in SDKs fails).  We add in
-> a eglibc-pic package to catch all of the pic stuff (some of which would
-> otherwise be caught in -dev).
+> 
+> I wonder why this would be needed, I would think that PACKAGE_ARCHS
+> consists of PACKAGE_EXTRA_ARCHS and PACKAGE_ARCH (which is default
+> arch constructed from  BASE_PACKAGE_ARCH)
+> if that was the case then ppc440 would be added to supported archs
+> list already but it seems there is a disconnect between PACKAGE_ARCH
+> and  PACKAGE_ARCHS I am not sure if it
+> is deliberate or an oversight. If it is an oversight then it should be
+> fixed in bitbake.conf and that would avoid this patch.
 
-It is a bit of a shame that eglibc doesn't reuse more of the glibc
-packaging logic, as opposed to having its own copies of everything.  I
-wonder if there is a way that this could be improved.
+Can somebody with more insight in bitbake.conf give us some insight here?
 
-p.
+Right now bitbake.conf does not include PACKAGE_ARCH in PACKAGE_ARCHS.
 
+PACKAGE_ARCHS = "all any noarch ${TARGET_ARCH} ${PACKAGE_EXTRA_ARCHS} ${MACHINE}"
 
+If it should stay this way, would Adrian's patch be ok? I would rather get his
+contributions in then having them sit to long around. Need to keep people
+motivated. :)
+
+regards
+Stefan Schmidt
 
 
