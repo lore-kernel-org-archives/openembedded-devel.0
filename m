@@ -1,53 +1,47 @@
-Received: from mail-bw0-f213.google.com ([209.85.218.213])
+Received: from mail-fx0-f220.google.com ([209.85.220.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NmXxm-0004Ar-CD
+	(envelope-from <aalonso00@gmail.com>) id 1NmYx8-0008I6-3U
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Mar 2010 20:41:08 +0100
-Received: by bwz5 with SMTP id 5so539028bwz.12
+	Tue, 02 Mar 2010 21:44:31 +0100
+Received: by fxm20 with SMTP id 20so705308fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Mar 2010 11:38:11 -0800 (PST)
+	Tue, 02 Mar 2010 12:41:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=sA1+OuM7ZgHBlKyAMrBtk/gtQk1c0TEbdAfnwlagtv4=;
-	b=EjeHVy4UdW2NfZG86RzVj5P4cy/YxzkQAbsuLoXWwG+y7lJzA5OQeQqqogoWv7lplu
-	0UPVu3OJ5HhY25uoxQT7ejGOHnGvqIlyu5FILyWfeENfMf16fSqwtT0hZnhkS+8CV0ti
-	tnpKqsrdoA0OhvnTjm1jfsee8k711jGKZyrEc=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=GGnDg2x9s40JIHNGzSDS5oHjN8cBwVHN94oUR4E0ahk=;
+	b=jMm6CNk2YsyNEuQ47V+RBYgB7cmoua719ewtLHA3f7EqwQbpbtnCbVsucaEPl+5wen
+	DHJp4HEY0abak3RWxhxM4sYeOS5uTGMKy1PewPOfYcs9OnzU9SFLP2hy1FCywYZytMEN
+	pkaLsc0UXi1cZRK+v7fEV0xc95i2GKSA0E9FY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=XNGk/KMKiKJYPCqQokIHeYMftmuC0W13/ntD17Wzj9iDCNxskNfMGW+thEnZjMIr+T
-	SQA56vOjSDkNq8N2N9y1vp9lHbp7UqQguVKAg/U1twtHN0gbjCXw/taiEeidnkzgYB2+
-	tnapY/Y0b11XLcRD84+TzuEMuOvOpUJQA0gtw=
-Received: by 10.204.25.132 with SMTP id z4mr1057556bkb.84.1267558690981;
-	Tue, 02 Mar 2010 11:38:10 -0800 (PST)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id 15sm3140782bwz.0.2010.03.02.11.38.08
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 02 Mar 2010 11:38:10 -0800 (PST)
-Date: Tue, 2 Mar 2010 11:36:18 -0800
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100302193618.GA31433@gmail.com>
-References: <1267478308.4739.245.camel@trini-m4400>
-	<201003021042.51552.marcin@juszkiewicz.com.pl>
-	<20100302182829.GA31371@gmail.com>
-	<201003022211.54572.roman@khimov.ru>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=WBHseHejWR3n8JDmNLXaECK+tsGVEAkHNMJBQa3z1YQYzR4btqA/dvJbg5CViu2lRS
+	fzcnj6AQ8xhPXj4I2rv5OLMQFOzfGnyMGVIrCTixivk4KAVsf80Il7yOAwBnShL3haaN
+	HSmj5KewYu49RFjOe1ClZRs3h19EWg0FKdNHk=
 MIME-Version: 1.0
-In-Reply-To: <201003022211.54572.roman@khimov.ru>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.218.213
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Received: by 10.223.5.211 with SMTP id 19mr7285327faw.63.1267562495271; Tue, 
+	02 Mar 2010 12:41:35 -0800 (PST)
+In-Reply-To: <20100302182926.GA28081@excalibur.local>
+References: <1266337930-2440-1-git-send-email-aalonso00@gmail.com>
+	<19c1b8a91002191026p3b06577ay9375f944daa661c1@mail.gmail.com>
+	<20100302105623.GA28921@excalibur.local>
+	<hmivaf$h8j$1@dough.gmane.org>
+	<20100302182926.GA28081@excalibur.local>
+Date: Tue, 2 Mar 2010 14:41:34 -0600
+Message-ID: <d1ded4381003021241n25c2aefdybc182003bbb88cb6@mail.gmail.com>
+From: Adrian Alonso <aalonso00@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.220.220
+X-SA-Exim-Mail-From: aalonso00@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH, RFC] Cleanup / update QEMU related checks
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: PACKAGE_ARCH in PACKAGE_ARCHS needed? (bitbake.conf) was: [PATCH 1/4] tune-ppc440.inc: add ppc440 to PACKAGE_EXTRA_ARCHS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,44 +55,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Mar 2010 19:41:08 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 02 Mar 2010 20:44:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On (02/03/10 22:11), Roman I Khimov wrote:
-> В сообщении от Вторник 02 марта 2010 21:28:29 автор Khem Raj написал:
-> > On (02/03/10 10:42), Marcin Juszkiewicz wrote:
-> > > Dnia wtorek, 2 marca 2010 o 10:36:04 Roman Khimov napisał(a):
-> > > > В сообщении от Вторник 02 марта 2010 00:18:28 автор Tom Rini написал:
-> > > > > (aside: When can qemu-0.9.x die?).
-> > > >
-> > > > IMHO, it just about time to kill it, almost a year past since 0.10.x
-> > > > introduction and with all those changes 0.9.x is not working properly
-> > > > for locale generation anyway.
+Ok, I was looking in this issue, but this helps a lot :)
+I'm going to rework the patches since I have more changes in machine config
+file
+that solves some problems when I was trying to boot on the target as soon I
+get them right
+I will send them.
+
+Regards
+Adrian Alonso
+
+On Tue, Mar 2, 2010 at 12:29 PM, Stefan Schmidt
+<stefan@datenfreihafen.org>wrote:
+
+> Hello.
+>
+> On Tue, 2010-03-02 at 13:11, Koen Kooi wrote:
+> > On 02-03-10 11:56, Stefan Schmidt wrote:
 > > >
-> > > I think that we need to upgrade to qemu 0.12.x and kill all previous
-> > > versions.
-> > 
-> > Does .12 still need gcc 3.4.x ? or can it use gcc 4.x
-> 
-> 0.10.x already builds with gcc 4.x.
-thx for info. last time I build .11 with gcc 4.4 it poo poo'ed on me so I thougt it
-still needs 3.4
-
-
-> 
-> -- 
->  http://roman.khimov.ru
-> mailto: roman@khimov.ru
-> gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
-
-
-
+> > > On Fri, 2010-02-19 at 10:26, Khem Raj wrote:
+> > >> On Tue, Feb 16, 2010 at 8:32 AM, Adrian Alonso <aalonso00@gmail.com>
+> wrote:
+> > >>> Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
+> > >>> ---
+> > >>>  conf/machine/include/tune-ppc440.inc |    2 +-
+> > >>>  1 files changed, 1 insertions(+), 1 deletions(-)
+> > >>>
+> > >>> diff --git a/conf/machine/include/tune-ppc440.inc
+> b/conf/machine/include/tune-ppc440.inc
+> > >>> index feca186..0c41db4 100644
+> > >>> --- a/conf/machine/include/tune-ppc440.inc
+> > >>> +++ b/conf/machine/include/tune-ppc440.inc
+> > >>> @@ -1,4 +1,4 @@
+> > >>>  TARGET_CC_ARCH = "-mcpu=440"
+> > >>>  BASE_PACKAGE_ARCH = "ppc440"
+> > >>>  FEED_ARCH = "ppc440"
+> > >>> -PACKAGE_EXTRA_ARCHS += "ppc440e"
+> > >>> +PACKAGE_EXTRA_ARCHS += "ppc440 ppc440e"
+> > >>
+> > >>
+> > >> I wonder why this would be needed, I would think that PACKAGE_ARCHS
+> > >> consists of PACKAGE_EXTRA_ARCHS and PACKAGE_ARCH (which is default
+> > >> arch constructed from  BASE_PACKAGE_ARCH)
+> > >> if that was the case then ppc440 would be added to supported archs
+> > >> list already but it seems there is a disconnect between PACKAGE_ARCH
+> > >> and  PACKAGE_ARCHS I am not sure if it
+> > >> is deliberate or an oversight. If it is an oversight then it should be
+> > >> fixed in bitbake.conf and that would avoid this patch.
+> > >
+> > > Can somebody with more insight in bitbake.conf give us some insight
+> here?
+> > >
+> > > Right now bitbake.conf does not include PACKAGE_ARCH in PACKAGE_ARCHS.
+> > >
+> > > PACKAGE_ARCHS = "all any noarch ${TARGET_ARCH} ${PACKAGE_EXTRA_ARCHS}
+> ${MACHINE}"
+> > >
+> > > If it should stay this way, would Adrian's patch be ok? I would rather
+> get his
+> > > contributions in then having them sit to long around. Need to keep
+> people
+> > > motivated. :)
+> >
+> > The patch is OK, but for clarity we should change existing contructs
+> like:
+> >
+> > FEED_ARCH = "armv7a"
+> > PACKAGE_EXTRA_ARCHS += "armv4 armv4t armv5te armv6 armv7 armv7a"
+> > BASE_PACKAGE_ARCH = "armv7a"
+> >
+> > to
+> >
+> > BASE_PACKAGE_ARCH = "armv7a"
+> > FEED_ARCH = "${BASE_PACKAGE_ARCH}"
+> > PACKAGE_EXTRA_ARCHS += "armv4 armv4t armv5te armv6 armv7
+> > ${BASE_PACKAGE_ARCH}"
+> >
+> > So the patch in question would become:
+> >
+> > - -PACKAGE_EXTRA_ARCHS += "ppc440e"
+> > +PACKAGE_EXTRA_ARCHS += "${BASE_PACKAGE_ARCH} ppc440e"
+>
+> Sounds good to me. Adrian, can you please rework your patch, test it and
+> submit
+> this onw again?
+>
+> I'll pick it up with the other patches and push it into the tree.
+>
+> regards
+> Stefan Schmidt
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
+
+-- 
+Saludos
+Adrian Alonso
+http://aalonso.wordpress.com
 
