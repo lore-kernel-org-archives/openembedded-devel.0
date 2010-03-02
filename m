@@ -1,43 +1,43 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NmR08-0003M0-4t for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Mar 2010 13:15:01 +0100
+	id 1NmR2t-0003SR-Ub for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Mar 2010 13:18:07 +0100
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NmQxO-0001ZT-Pg for openembedded-devel@lists.openembedded.org;
-	Tue, 02 Mar 2010 13:12:10 +0100
+	id 1NmR0B-0002iy-Aa for openembedded-devel@lists.openembedded.org;
+	Tue, 02 Mar 2010 13:15:03 +0100
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Mar 2010 13:12:10 +0100
+	Tue, 02 Mar 2010 13:15:03 +0100
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Mar 2010 13:12:10 +0100
+	Tue, 02 Mar 2010 13:15:03 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 02 Mar 2010 13:11:58 +0100
-Message-ID: <hmivaf$h8j$1@dough.gmane.org>
-References: <1266337930-2440-1-git-send-email-aalonso00@gmail.com>	<19c1b8a91002191026p3b06577ay9375f944daa661c1@mail.gmail.com>
-	<20100302105623.GA28921@excalibur.local>
+Date: Tue, 02 Mar 2010 13:14:10 +0100
+Message-ID: <hmivei$h8j$2@dough.gmane.org>
+References: <E1Nm0HI-0004Qt-Pn@melo.openembedded.org>	<d1b08f941003011337i15e21dcx340cef502c2ea151@mail.gmail.com>
+	<201003012255.35738.holger+oe@freyther.de>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.8) Gecko/20100219 Shredder/3.0.3pre
-In-Reply-To: <20100302105623.GA28921@excalibur.local>
+In-Reply-To: <201003012255.35738.holger+oe@freyther.de>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: PACKAGE_ARCH in PACKAGE_ARCHS needed? (bitbake.conf) was: [PATCH 1/4] tune-ppc440.inc: add ppc440 to PACKAGE_EXTRA_ARCHS
+Subject: Re: [oe-commits] Koen Kooi : angstrom: sync pango and pango-native versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,87 +51,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 Mar 2010 12:15:01 -0000
+X-List-Received-Date: Tue, 02 Mar 2010 12:18:10 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 02-03-10 11:56, Stefan Schmidt wrote:
-> Hello.
-> 
-> On Fri, 2010-02-19 at 10:26, Khem Raj wrote:
->> On Tue, Feb 16, 2010 at 8:32 AM, Adrian Alonso <aalonso00@gmail.com> wrote:
->>> Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
->>> ---
->>>  conf/machine/include/tune-ppc440.inc |    2 +-
->>>  1 files changed, 1 insertions(+), 1 deletions(-)
->>>
->>> diff --git a/conf/machine/include/tune-ppc440.inc b/conf/machine/include/tune-ppc440.inc
->>> index feca186..0c41db4 100644
->>> --- a/conf/machine/include/tune-ppc440.inc
->>> +++ b/conf/machine/include/tune-ppc440.inc
->>> @@ -1,4 +1,4 @@
->>>  TARGET_CC_ARCH = "-mcpu=440"
->>>  BASE_PACKAGE_ARCH = "ppc440"
->>>  FEED_ARCH = "ppc440"
->>> -PACKAGE_EXTRA_ARCHS += "ppc440e"
->>> +PACKAGE_EXTRA_ARCHS += "ppc440 ppc440e"
+On 01-03-10 22:55, Holger Hans Peter Freyther wrote:
+> On Monday 01 March 2010 22:37:23 Andrea Adami wrote:
+>> Thx, but after this patch I see
 >>
->>
->> I wonder why this would be needed, I would think that PACKAGE_ARCHS
->> consists of PACKAGE_EXTRA_ARCHS and PACKAGE_ARCH (which is default
->> arch constructed from  BASE_PACKAGE_ARCH)
->> if that was the case then ppc440 would be added to supported archs
->> list already but it seems there is a disconnect between PACKAGE_ARCH
->> and  PACKAGE_ARCHS I am not sure if it
->> is deliberate or an oversight. If it is an oversight then it should be
->> fixed in bitbake.conf and that would avoid this patch.
+>> NOTE: preferred version 1.24.4 of pango-native not available (for item
+>> pango-module-basic-x)
+>> NOTE: preferred version 1.24.4 of pango-native not available (for item
+>> pango-module-basic-fc)
+>> NOTE: preferred version 1.24.4 of pango-native not available (for item
+>> pango-native)
 > 
-> Can somebody with more insight in bitbake.conf give us some insight here?
-> 
-> Right now bitbake.conf does not include PACKAGE_ARCH in PACKAGE_ARCHS.
-> 
-> PACKAGE_ARCHS = "all any noarch ${TARGET_ARCH} ${PACKAGE_EXTRA_ARCHS} ${MACHINE}"
-> 
-> If it should stay this way, would Adrian's patch be ok? I would rather get his
-> contributions in then having them sit to long around. Need to keep people
-> motivated. :)
+> mea culpa, I asked koen to bump it.. and he blindly did. The fix should be to 
+> add a pango-native of that version.
 
-The patch is OK, but for clarity we should change existing contructs like:
+Yes, my bad! I had an extension to pango.inc sitting in my tree that I
+didn't commit yet, but it's in now:
 
-FEED_ARCH = "armv7a"
-PACKAGE_EXTRA_ARCHS += "armv4 armv4t armv5te armv6 armv7 armv7a"
-BASE_PACKAGE_ARCH = "armv7a"
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=f45f0d3495aba36aafc286d25f96d5bd9a82c7d9
 
-to
-
-BASE_PACKAGE_ARCH = "armv7a"
-FEED_ARCH = "${BASE_PACKAGE_ARCH}"
-PACKAGE_EXTRA_ARCHS += "armv4 armv4t armv5te armv6 armv7
-${BASE_PACKAGE_ARCH}"
-
-So the patch in question would become:
-
-- -PACKAGE_EXTRA_ARCHS += "ppc440e"
-+PACKAGE_EXTRA_ARCHS += "${BASE_PACKAGE_ARCH} ppc440e"
-
-Does that clarify the situation?
+This commit also shows that using BBCLASSEXTEND isn't so hard, more
+people should try to convert their recipes to it instead of deleting them :)
 
 regards,
 
 Koen
 
-PS: bonus points for the person that spots the missing arch in the
-cortex-a8 example
-
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFLjQCOMkyGM64RGpERAl42AKCuoPRI8gqMgp0SFtT5uYZsRtkgCgCeJ3iz
-T/QmrHoo8dnoZmVfVGvuQio=
-=jx83
+iD8DBQFLjQESMkyGM64RGpERAnZ8AJ9f5JBAbVWKBoXTMoFcQnoKxjebKwCgmEXM
+Y23trJujDcvD+Q29BaPN0vQ=
+=euTe
 -----END PGP SIGNATURE-----
 
 
