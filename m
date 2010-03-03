@@ -1,40 +1,44 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1Nmsez-0006gh-7N
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <dp@xora.org.uk>) id 1Nmt2u-0005TZ-7C
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Mar 2010 18:47:03 +0100
+	Wed, 03 Mar 2010 19:11:45 +0100
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o23HiAeh020736
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 195382C97A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 3 Mar 2010 17:44:10 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 20394-08 for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Mar 2010 17:43:54 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o23HhpIk020730
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Wed,  3 Mar 2010 18:08:54 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id 91xdr5tsjSJ3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 3 Mar 2010 17:43:52 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Wed,  3 Mar 2010 18:08:51 +0000 (GMT)
+Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 5CDD92C979
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Mar 2010 18:08:51 +0000 (GMT)
+Received: by xora-desktop.xora.org.uk (Postfix, from userid 500)
+	id 6589A21732; Wed,  3 Mar 2010 18:08:51 +0000 (GMT)
+Date: Wed, 3 Mar 2010 18:08:51 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <b6ebd0a51003030909u58f72751u19f5b3caab614450@mail.gmail.com>
-References: <b6ebd0a51003030909u58f72751u19f5b3caab614450@mail.gmail.com>
-Date: Wed, 03 Mar 2010 17:43:49 +0000
-Message-ID: <1267638229.2259.147.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Message-ID: <20100303180851.GC2493@xora-desktop.xora.org.uk>
+References: <1267633819.4739.343.camel@trini-m4400>
+	<hmm5pb$est$1@dough.gmane.org>
+	<1267637587.4739.345.camel@trini-m4400>
+MIME-Version: 1.0
+In-Reply-To: <1267637587.4739.345.camel@trini-m4400>
+User-Agent: Mutt/1.5.20 (2009-08-17)
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.0 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Initial Proposal for Packaged Staging Revamp (was [RFC] Make some big changes right after next stable)
+Subject: Re: [RFC] Make some big changes right after next stable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,98 +52,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Mar 2010 17:47:03 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 03 Mar 2010 18:11:45 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, 2010-03-03 at 10:09 -0700, Chris Larson wrote:
-> Proposal for the Revamp of "Packaged Staging"
+On Wed, Mar 03, 2010 at 10:33:07AM -0700, Tom Rini wrote:
+> Note that I'm not talking about "small" things like removing legacy
+> staging stuff (which is good!) I'm talking about things with the
+> potential to leave stuff non-building until stumbled upon.  Hence the
+> idea we do merge this into dev shortly after the next stable.
 > 
-> Goals:
-> - Simple implementation
-> - Managed staging area
-> - "Build" from cached/prebuilt binaries
-> - Reduce behavioral differences between the prebuilt and from scratch cases
-> - Intrinsic to the system, no longer opt-in
+I think you are approaching things backwards.
 
-I had to smile when I read this as you make it sound this isn't the
-direction packaged-staging is already moving in :). The things you
-describe are all things I've had in mind, just the practicalities of the
-real world mean we're not there yet.
+Develop this to the point of working enough other people can start to test it
+in a feature branch.
 
-Basically when you describe is what I also want to see packaged staging
-and OE in general doing. You're right to point out that what we're
-trying to achieve is beyond the scope of plain "put staging under the
-control of a package manager".
+Tag org.openembedded.dev then merge this work into .dev
 
-Where we might differ how exactly to do it technically. I really dislike
-some of the way packaged-staging works but its all done that way for a
-reason. The reasons most likely become apparent when you try and find an
-alternative to what it does.
+Anyone in the future can use the tag to get back to a "stable" point.
 
-> I would like to propose an alternative to the current implementation, which
-> I believe will aleviate some headaches (for example, those caused by the
-> stagefile bits, which is more functionality that slips beyond the original
-> intent of package managed staging), make it easier to add more traceability
-> to the builds, reduce behavioral differences between the use of cached
-> binaries and building from scratch, and should help to prepare for some
-> possible moves in the future.
-> 
-> To summarize, I propose the creation of an archive/package which acts as the
-> primary artifact to come out of the build of a recipe.
-
-My view on this is a kind of hybrid. Firstly, we need to adopt some kind
-checksum system which represent staging packages. If the checksum
-doesn't match what we want, the staging package is invalid.
-
-Secondly, I agree we need to capture all output of a task we do that
-already, just badly. I like the idea of creating structures under
-WORKDIR where these things are put, like the output of do_install, the
-output of do_package (split up do_install and some package data) as well
-as the output of the package generation step. 
-
-Your usecase is too focused on your specific problems and on do_install
-though. Why is do_install special? I'd go one step further and allow the
-"staging package" output of a recipe to be multiple packages each one
-representing a task.
-
-We could go as far as mandating only output under WORKDIR should be made
-(in specified directories per task). bitbake could then have a
-postprocessing task defined which looks at an output directory and
-generates a corresponding "staging" package and also applies it to a
-core sysroot directory / wherever.
-
-So, if you build an rpm based image, it sees all the package_write_rpm
-prebuilds and just makes sure they're installed, nothing else. This
-approach seems extensible and generic, things which serve us well.
-
-The pitfalls of this are (random brainstorming):
-
-1. Stamp file handling - needs a total rethink really. Not sure how to 
-   do it but I have given it thought before.
-2. staging package covering tmpdir - we did this to cover pkgdata, 
-   cross, stamps, deploy as well as staging.
-
-   I like pb_'s idea of merging cross into the native sysroot and that 
-   would remove one reason for using tmpdir, not the sysroot. We'd also 
-   need to ensure packages only write to one sysroot. Not possible with 
-   the gcc recipe for example.
-
-   Stamp handling may be handled with 1. above. 
-
-   pkgdata/deploy? Above ideas may help...
-
-3. Optional packages staging - should be made mandatory to simplify code
-4. Logistics of doing it. We can't even get packaged staging merged 
-   into OE :(
-
-So yes, I'd support the idea but the devil is in the details as always.
-
-Cheers,
-
-Richard
-
-
+Graeme
 
 
 
