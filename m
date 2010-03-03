@@ -1,39 +1,42 @@
 Received: from mail-iw0-f180.google.com ([209.85.223.180])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vandana.vuthoo@gmail.com>) id 1NmgdD-0003aE-Gw
+	(envelope-from <raj.khem@gmail.com>) id 1NmiO0-0000G4-Ay
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Mar 2010 05:56:24 +0100
-Received: by iwn10 with SMTP id 10so985411iwn.16
+	Wed, 03 Mar 2010 07:48:52 +0100
+Received: by iwn10 with SMTP id 10so1046681iwn.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Mar 2010 20:53:31 -0800 (PST)
+	Tue, 02 Mar 2010 22:45:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=mGeh7QzubBlnMY9m5nA56L1HR5bTaeERZDfDNkMH8zg=;
-	b=xSD8OrPf4UReZIEPQ3Alwso0/RwFwI6y8J/ur0u88cG/1jYy1U7BCdCdDWcBFv29cq
-	ITyRpXEgEGILwMWFDc/8J2KxvdPp+v2MyTJAZ743JibZCZhZqcXuZ/nHU7SCQvxltdCn
-	h0Q3HoOMcGT1FGjKl/XweGzxUzh2Lc5AY0FnY=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=eLrIDqK2JerXr0ugX2tkkK5i5G9z9qmBNemoXKJzMME=;
+	b=QX0o7i6DDZ2gWYPyDhJXr/EaUMV1djToMbtE+y3095kXHS4c+0Nsp6pAoCu4+bLcc9
+	9/af1LRTOteNyXa0mu5E0SZ/mYTMPzERphAoYxNqV+cp/HPlhl076TqCDQyQcM5Szr5r
+	NQ+sbKDlYhbnt3yFjUVaYV6UipOrruVvhsbIs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=ChvXHVTNNapvgVTkUAmyX9tiPCQ7OkoLQsN9DXJgCN64sHwpww7zGdbly/9I18weAk
-	1EH8h5+qXFvWz5wUs1CnMnvgq7Qt3egPwe/kPtLPJblKrf/Z4NZ2bQTB1p/9BvEMFJEY
-	EK0/nZehddX3xVgtpA8lkCkNN6AZhXw4pRFdE=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=LMpDrUNTiBOZyS/b8aZLSUgpR5WPWSqn4eyDfW78HTEBzBnntVz+xGeY1NlJnAN1br
+	eigWSYW7cF88etrXSwlGblfLbgHedCYF7nlidLAT41CypYHPnagAVXrbRLYxJHBMN5AN
+	ib6QcFlTUnGQqn1qIE03+uX5jwaNoBSwIXH1g=
 MIME-Version: 1.0
-Received: by 10.231.159.207 with SMTP id k15mr544491ibx.75.1267592010924; Tue, 
-	02 Mar 2010 20:53:30 -0800 (PST)
-Date: Wed, 3 Mar 2010 10:23:30 +0530
-Message-ID: <2b288bf1003022053g2dbca134s20b172e94911060e@mail.gmail.com>
-From: Vandana Vuthoo <vandana.vuthoo@gmail.com>
+Received: by 10.231.170.14 with SMTP id b14mr545236ibz.26.1267598756537; Tue, 
+	02 Mar 2010 22:45:56 -0800 (PST)
+In-Reply-To: <2b288bf1003022053g2dbca134s20b172e94911060e@mail.gmail.com>
+References: <2b288bf1003022053g2dbca134s20b172e94911060e@mail.gmail.com>
+Date: Tue, 2 Mar 2010 22:45:56 -0800
+Message-ID: <19c1b8a91003022245w4efed14cs61d162040ea36149@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.223.180
-X-SA-Exim-Mail-From: vandana.vuthoo@gmail.com
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: locale support in OE
+Subject: Re: locale support in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,13 +50,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Mar 2010 04:56:24 -0000
+X-List-Received-Date: Wed, 03 Mar 2010 06:48:52 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
-I need to know how to add diff locale supports in OE, I tried
-IMAGE_LINGAUS but it is not working for me.
-Regards,
-Vandana
+On Tue, Mar 2, 2010 at 8:53 PM, Vandana Vuthoo <vandana.vuthoo@gmail.com> wrote:
+> Hi,
+> I need to know how to add diff locale supports in OE, I tried
+> IMAGE_LINGAUS but it is not working for me.
+
+if you used same as above then there is a typo it should be something like
+IMAGE_LINGUAS = "en-us"
+
+
+> Regards,
+> Vandana
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
