@@ -1,48 +1,40 @@
-Received: from mail-fx0-f220.google.com ([209.85.220.220])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NmksO-0000QR-Fa
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1Nml0H-0001l5-7d
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Mar 2010 10:28:25 +0100
-Received: by fxm20 with SMTP id 20so1178144fxm.12
+	Wed, 03 Mar 2010 10:36:41 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o239XbUE016090
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Mar 2010 01:25:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=L6A5230Mu/Wg54Jj06MpIvZ4+PDsF2YzjyFEpk8Thl4=;
-	b=jhzEPhsQpW/u3r925AnaYiU/qAlkfT80UY3N8Qsk1fgF9wVwdTbA6ZbJQjv/hOLdF/
-	GKICYk04j/G8Yc1Lx6J872lqb7pecKJAjqtrWrqySUbm+hpdDADhCVfCcnGK/uAN09Tv
-	K6WYdytJQYVE8SHXJsyj5+nQ34YPRhcR3nEM4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=X8kQ/Qf5TIKc5ujd41LnG8JF08MT2FPugkyAyR3N4z2jTtHb6rUVlldWpOr7sm47i1
-	LsYbXoppqJTWYFW6oJzgjuTgrokxDbJuDd8ChUJGST5IB1rE7+juSB/5N/lt45VeVGK2
-	vqVcU8yP3Ump2DcexWGyBZBK0KzZQ8Egmk8jw=
-Received: by 10.87.70.28 with SMTP id x28mr2713977fgk.51.1267608329329;
-	Wed, 03 Mar 2010 01:25:29 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 15sm3495159fxm.8.2010.03.03.01.25.27
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 03 Mar 2010 01:25:28 -0800 (PST)
-Date: Wed, 3 Mar 2010 10:25:57 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 3 Mar 2010 09:33:38 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 15947-03 for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Mar 2010 09:33:25 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o239XMSY016084
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 3 Mar 2010 09:33:25 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100303092557.GK3206@jama>
-References: <E1NmW1P-0001Ed-Un@melo.openembedded.org>
-MIME-Version: 1.0
-In-Reply-To: <E1NmW1P-0001Ed-Un@melo.openembedded.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.220
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+In-Reply-To: <hml6l5$oj0$1@dough.gmane.org>
+References: <hml6l5$oj0$1@dough.gmane.org>
+Date: Wed, 03 Mar 2010 09:33:20 +0000
+Message-ID: <1267608800.22890.1.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=0.6 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Tom Rini : qemu: Perform our sanity checks based on ENABLE_BINARY_LOCALE_GENERATION
+Subject: Re: DL_DIR on nfs mount -> lockfile mayhem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,46 +48,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Mar 2010 09:28:25 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 03 Mar 2010 09:36:41 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 02, 2010 at 05:36:39PM +0000, git version control wrote:
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: 31e93854259130e20a4e08c9d803c34edc4b447e
-> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=31e93854259130e20a4e08c9d803c34edc4b447e
+On Wed, 2010-03-03 at 09:29 +0100, Koen Kooi wrote:
+> One of my coworkers ran out of diskspace again and decided to move his
+> DL_DIR to the filer and access it over NFS. Now do_fetch just hangs for
+> nearly everything and we can get it to continue after removing the
+> lockfiles in DL_DIR manually, but that's not a good solution.
 > 
-> Author: Tom Rini <tom_rini@mentor.com>
-> Date:   Mon Mar  1 11:18:28 2010 +0000
+> I don't touch NFS with a bargepole, but my coworker insists it's a valid
+> use-case :) So, is DL_DIR on nfs supported and if so, any clues why it
+> could break with lockfiles?
 > 
-> qemu: Perform our sanity checks based on ENABLE_BINARY_LOCALE_GENERATION
-> 
->  		if "qemu-native" in assume_provided:
-> -			if not check_app_exists("qemu-arm", e.data):
-> -				messages = messages + "qemu-native was in ASSUME_PROVIDED but the QEMU binaries (qemu-arm) can't be found in PATH"
-> +			required_utilities += "qemu"
+> This is with bitbake 1.8 from git.
 
-Hi,
+I ran bitbake with DL_DIR on nfs for a long time without issue. I
+suspect something in their NFS setup is broken, maybe the part lockfile
+handling part (lockd?). Do the syslogs say anything interesting?
 
-You need space before qemu, because it's hard to find following missing
-utilities: md5sumqemu :).
+Cheers,
 
-Also I'm not really happy from qemu-arm -> qemu change, as my qemu-kvm
-built in gentoo with USE flags only for what I need
+Richard
 
-USE="aio -alsa -bluetooth -curl -esd -fdt -gnutls -hardened -kvm-trace -ncurses -pulseaudio -qemu-ifup% -sasl -sdl -static -vde"
-QEMU_SOFTMMU_TARGETS="arm -cris -i386 -m68k -microblaze -mips -mips64 -mips64el -mipsel -ppc -ppc64 -ppcemb -sh4 -sh4eb -sparc -sparc64 -x86_64"
-QEMU_USER_TARGETS="arm armeb -alpha -cris -i386 -m68k -microblaze -mips -mipsel -ppc -ppc64 -ppc64abi32 -sh4 -sh4eb -sparc -sparc32plus -sparc64 -x86_64"
-
-then qemu binary is not built, but qemu-arm which AFAIK is used for 
-binary locale generation is available.
-
-Regards,
-
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
 
 
