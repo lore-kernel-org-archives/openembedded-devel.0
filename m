@@ -1,40 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NmtAs-0001kZ-C6 for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Mar 2010 19:19:59 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nmt87-0007CG-Uv for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Mar 2010 19:17:07 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Mar 2010 19:17:07 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mickey@vanille-media.de>) id 1NmtCb-0002jv-5c
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Mar 2010 19:21:45 +0100
+Received: from [192.168.1.5] (e180141032.adsl.alicedsl.de [85.180.141.32])
+	by drlauer-research.com (Postfix) with ESMTP id 9792158413C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Mar 2010 19:17:07 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed,  3 Mar 2010 19:19:03 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 03 Mar 2010 19:16:50 +0100
-Message-ID: <hmm92i$r30$1@dough.gmane.org>
-References: <1267633819.4739.343.camel@trini-m4400>	<hmm5pb$est$1@dough.gmane.org>	<1267637587.4739.345.camel@trini-m4400>
-	<20100303180851.GC2493@xora-desktop.xora.org.uk>
+In-Reply-To: <1267633819.4739.343.camel@trini-m4400>
+References: <1267633819.4739.343.camel@trini-m4400>
+Organization: Vanille-Media
+Date: Wed, 03 Mar 2010 19:18:50 +0100
+Message-ID: <1267640330.21528.6.camel@andromeda>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
-In-Reply-To: <20100303180851.GC2493@xora-desktop.xora.org.uk>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [RFC] Make some big changes right after next stable
@@ -51,37 +38,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Mar 2010 18:19:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 03 Mar 2010 18:21:46 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 03-03-10 19:08, Graeme Gregory wrote:
-> On Wed, Mar 03, 2010 at 10:33:07AM -0700, Tom Rini wrote:
->> Note that I'm not talking about "small" things like removing legacy
->> staging stuff (which is good!) I'm talking about things with the
->> potential to leave stuff non-building until stumbled upon.  Hence the
->> idea we do merge this into dev shortly after the next stable.
->>
-> I think you are approaching things backwards.
+Am Mittwoch, den 03.03.2010, 09:30 -0700 schrieb Tom Rini:
+> As many people know, there's a lot of "odd" internal things that OE
+> does, that if we had it to do over, we would do differently.  What I
+> would like to propose is that in time for the next stable branch we:
+> 1: Define a set of DISTROs/MACHINEs/build targets that need to stay
+> working
+> 2: In a separate branch (per big change), get one of these big, going to
+> leave some stuff broken changes
+> 3: Define / document what needs to be done before these branches can be
+> merged back (something like #1 is working still, and if applicable a
+> guide to the common problems/how to fix people are going to run into).
 > 
-> Develop this to the point of working enough other people can start to test it
-> in a feature branch.
+> What I'm getting at is that this would let us do things like rework the
+> "this is where we place things that we build other recipes with" concept
+> so that sysroot just works (and otherwise makes more sense again).  Or
+> "let us have more consistency in build with compared to what could end
+> up on device".  And so on.
 > 
-> Tag org.openembedded.dev then merge this work into .dev
-> 
-> Anyone in the future can use the tag to get back to a "stable" point.
+> What do people think?  And what would people work on?
 
-That's what I wanted to say, but Graeme put it way better :)
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+I think that's a very good idea. Phil wanted to branch off a new stable
+branch lately, so we can coordinate the right point of time with him.
 
-iD8DBQFLjqeSMkyGM64RGpERAmvHAJ4q4v5Ig/lnD2UaW7ffx3R6T1AFdwCeIJcI
-bJ9NE/LbnxvZfMzuuvjqAv8=
-=rTPS
------END PGP SIGNATURE-----
+I'd revamp EFL packaging, which is somewhat inflexible, and take a look
+at bringing the Python recipes up to par.
+
+Cheers,
+
+-- 
+:M:
 
 
 
