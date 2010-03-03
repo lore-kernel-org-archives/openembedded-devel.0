@@ -1,42 +1,40 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NmsUY-0006ZG-QR
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1Nmsez-0006gh-7N
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Mar 2010 18:36:18 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NmsRl-0003uu-VP from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Mar 2010 09:33:22 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 3 Mar 2010 09:33:20 -0800
-Received: from 172.30.80.138 ([172.30.80.138]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Wed,  3 Mar 2010 17:33:08 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	03 Mar 2010 10:33:07 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Wed, 03 Mar 2010 18:47:03 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o23HiAeh020736
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 3 Mar 2010 17:44:10 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 20394-08 for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Mar 2010 17:43:54 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o23HhpIk020730
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 3 Mar 2010 17:43:52 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hmm5pb$est$1@dough.gmane.org>
-References: <1267633819.4739.343.camel@trini-m4400>
-	<hmm5pb$est$1@dough.gmane.org>
-Organization: Mentor Graphics Corporation
-Date: Wed, 03 Mar 2010 10:33:07 -0700
-Message-ID: <1267637587.4739.345.camel@trini-m4400>
+In-Reply-To: <b6ebd0a51003030909u58f72751u19f5b3caab614450@mail.gmail.com>
+References: <b6ebd0a51003030909u58f72751u19f5b3caab614450@mail.gmail.com>
+Date: Wed, 03 Mar 2010 17:43:49 +0000
+Message-ID: <1267638229.2259.147.camel@rex>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 03 Mar 2010 17:33:20.0198 (UTC)
-	FILETIME=[9DE1A660:01CABAF7]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=0.0 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Make some big changes right after next stable
+Subject: Re: [RFC] Initial Proposal for Packaged Staging Revamp (was [RFC] Make some big changes right after next stable)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,52 +48,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Mar 2010 17:36:20 -0000
+X-List-Received-Date: Wed, 03 Mar 2010 17:47:03 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Wed, 2010-03-03 at 18:20 +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> On 03-03-10 17:30, Tom Rini wrote:
-> > Hey all,
-> >=20
-> > I'd like to see some comments on the following idea.
-> >=20
-> > As many people know, there's a lot of "odd" internal things that OE
-> > does, that if we had it to do over, we would do differently.  What I
-> > would like to propose is that in time for the next stable branch we:
-> > 1: Define a set of DISTROs/MACHINEs/build targets that need to stay
-> > working
-> > 2: In a separate branch (per big change), get one of these big, going t=
-o
-> > leave some stuff broken changes
-> > 3: Define / document what needs to be done before these branches can be
-> > merged back (something like #1 is working still, and if applicable a
-> > guide to the common problems/how to fix people are going to run into).
-> >=20
-> > What I'm getting at is that this would let us do things like rework the
-> > "this is where we place things that we build other recipes with" concep=
-t
-> > so that sysroot just works (and otherwise makes more sense again).  Or
-> > "let us have more consistency in build with compared to what could end
-> > up on device".  And so on.
-> >=20
-> > What do people think?  And what would people work on?
->=20
-> I don't think we need to wait for a next stable to happen. I personally
-> think a new stable branch can only happen after all legacy staging has
-> been eradicated. And when people not using the stable branches stop
-> spreading FUD about them.
+On Wed, 2010-03-03 at 10:09 -0700, Chris Larson wrote:
+> Proposal for the Revamp of "Packaged Staging"
+> 
+> Goals:
+> - Simple implementation
+> - Managed staging area
+> - "Build" from cached/prebuilt binaries
+> - Reduce behavioral differences between the prebuilt and from scratch cases
+> - Intrinsic to the system, no longer opt-in
 
-Note that I'm not talking about "small" things like removing legacy
-staging stuff (which is good!) I'm talking about things with the
-potential to leave stuff non-building until stumbled upon.  Hence the
-idea we do merge this into dev shortly after the next stable.
+I had to smile when I read this as you make it sound this isn't the
+direction packaged-staging is already moving in :). The things you
+describe are all things I've had in mind, just the practicalities of the
+real world mean we're not there yet.
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+Basically when you describe is what I also want to see packaged staging
+and OE in general doing. You're right to point out that what we're
+trying to achieve is beyond the scope of plain "put staging under the
+control of a package manager".
+
+Where we might differ how exactly to do it technically. I really dislike
+some of the way packaged-staging works but its all done that way for a
+reason. The reasons most likely become apparent when you try and find an
+alternative to what it does.
+
+> I would like to propose an alternative to the current implementation, which
+> I believe will aleviate some headaches (for example, those caused by the
+> stagefile bits, which is more functionality that slips beyond the original
+> intent of package managed staging), make it easier to add more traceability
+> to the builds, reduce behavioral differences between the use of cached
+> binaries and building from scratch, and should help to prepare for some
+> possible moves in the future.
+> 
+> To summarize, I propose the creation of an archive/package which acts as the
+> primary artifact to come out of the build of a recipe.
+
+My view on this is a kind of hybrid. Firstly, we need to adopt some kind
+checksum system which represent staging packages. If the checksum
+doesn't match what we want, the staging package is invalid.
+
+Secondly, I agree we need to capture all output of a task we do that
+already, just badly. I like the idea of creating structures under
+WORKDIR where these things are put, like the output of do_install, the
+output of do_package (split up do_install and some package data) as well
+as the output of the package generation step. 
+
+Your usecase is too focused on your specific problems and on do_install
+though. Why is do_install special? I'd go one step further and allow the
+"staging package" output of a recipe to be multiple packages each one
+representing a task.
+
+We could go as far as mandating only output under WORKDIR should be made
+(in specified directories per task). bitbake could then have a
+postprocessing task defined which looks at an output directory and
+generates a corresponding "staging" package and also applies it to a
+core sysroot directory / wherever.
+
+So, if you build an rpm based image, it sees all the package_write_rpm
+prebuilds and just makes sure they're installed, nothing else. This
+approach seems extensible and generic, things which serve us well.
+
+The pitfalls of this are (random brainstorming):
+
+1. Stamp file handling - needs a total rethink really. Not sure how to 
+   do it but I have given it thought before.
+2. staging package covering tmpdir - we did this to cover pkgdata, 
+   cross, stamps, deploy as well as staging.
+
+   I like pb_'s idea of merging cross into the native sysroot and that 
+   would remove one reason for using tmpdir, not the sysroot. We'd also 
+   need to ensure packages only write to one sysroot. Not possible with 
+   the gcc recipe for example.
+
+   Stamp handling may be handled with 1. above. 
+
+   pkgdata/deploy? Above ideas may help...
+
+3. Optional packages staging - should be made mandatory to simplify code
+4. Logistics of doing it. We can't even get packaged staging merged 
+   into OE :(
+
+So yes, I'd support the idea but the devil is in the details as always.
+
+Cheers,
+
+Richard
+
+
+
 
 
