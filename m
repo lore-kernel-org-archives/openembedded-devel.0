@@ -1,49 +1,39 @@
-Received: from mail-fx0-f220.google.com ([209.85.220.220])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <otavio.salvador@gmail.com>) id 1NmoHF-0002Rk-QE
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NmoLI-000754-SQ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Mar 2010 14:06:29 +0100
-Received: by fxm20 with SMTP id 20so1380947fxm.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Mar 2010 05:03:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:message-id:subject:from:to
-	:content-type; bh=+C83lzNz1sRTpZfYFf9VXeobCMREZ1fSnQ8Ih9RT9vk=;
-	b=nvppqFgI509XNnC+CmysfG/0nHdrf9wCPvMVuWcPlNmwe2nml+FYIF32MrRghL1V3v
-	M171UAlXKyArPLBxcKtf7Q3jIntxzgf6fdQSPWUFLgwojK3DwfqhdpDKyAQweJvakS3l
-	WHEZh8FIzN5mt5NB0WBLGI7Pp+wsYmij7Ac0c=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type;
-	b=vr2/pUiqiPiYxigAXXwkEplYadV3VslcpVMG0gaabv7exOv9Ic72t6rsJzV5gvF436
-	9diH4W0V39JRyTynzCcUgsA45wB8Y60MfPa07GKqdbqJzlxwUyvcGeLzD5a1SRWZbFzG
-	YQBJ0M1fTy+u6bZggk5mik3gp2s7yMu/Fg3G8=
-MIME-Version: 1.0
-Sender: otavio.salvador@gmail.com
-Received: by 10.239.154.204 with SMTP id f12mr741457hbc.153.1267621400174; 
-	Wed, 03 Mar 2010 05:03:20 -0800 (PST)
-In-Reply-To: <ac9c93b11002271040i221bdb10o22cad1cf1551b6fb@mail.gmail.com>
-References: <ac9c93b11002270725t46beb56dx5c4dc63c0f6485ca@mail.gmail.com>
-	<20100227165600.GD30145@xora-desktop.xora.org.uk>
-	<ac9c93b11002270921rb738980ye29c6fd93913107a@mail.gmail.com>
-	<201002271904.22479.marcin@juszkiewicz.com.pl>
-	<ac9c93b11002271040i221bdb10o22cad1cf1551b6fb@mail.gmail.com>
-Date: Wed, 3 Mar 2010 10:03:19 -0300
-X-Google-Sender-Auth: 12430b186da9d0cd
-Message-ID: <be7a9f3d1003030503oaa0927byc87b25720c227b8c@mail.gmail.com>
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.220
-X-SA-Exim-Mail-From: otavio.salvador@gmail.com
+	Wed, 03 Mar 2010 14:10:29 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o23D7VU2017872;
+	Wed, 3 Mar 2010 13:07:31 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 17364-09; Wed,  3 Mar 2010 13:07:16 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o23D7CbW017866
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Wed, 3 Mar 2010 13:07:12 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Martin Jansa <martin.jansa@gmail.com>
+In-Reply-To: <141020e31003030454i59ed2d9fpcc32ac4ec1b65c0c@mail.gmail.com>
+References: <1267218939-6086-1-git-send-email-Martin.Jansa@gmail.com>
+	<141020e31003030454i59ed2d9fpcc32ac4ec1b65c0c@mail.gmail.com>
+Date: Wed, 03 Mar 2010 13:07:11 +0000
+Message-ID: <1267621631.2259.19.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [RFC] recipes/images/${distro}
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] package_ipk.bbclass DON'T PUSH THIS, but PLEASE read it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,28 +47,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Mar 2010 13:06:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 03 Mar 2010 13:10:29 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hello,
+On Wed, 2010-03-03 at 13:54 +0100, Martin Jansa wrote:
+> On Fri, Feb 26, 2010 at 10:15 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> > There is quite common error about non-existent lockfile path
+> >
+> > I've seen that everytime when recipe changes ARCH (ie when removed machine specific config)
+> > and package is no longer in tmp/work/om-gta01.. but tmp/work/armv4t.., then whole build works
+> > ok, but in the end it's looking for lockfile in right directory but in wrong arch dir.
+> >
+> > Today I've seen similar error from mwester:
+> > 18:10:59 < mwester> ERROR: Error, lockfile path does not exist!: /u/slug/slugos/tmp/work/armv5teb-linux-gnueabi/gpsd-2.39-r0/packages-split
+> 
+> ping?
+> 
+> I think this is quite big bug as wrong vars can be used in more places
+> and create bigger problems than missing lockfile path.
+> 
+> At least please point me to example why we need collapsed subpackage
+> data in global scope.
+> 
+> RP: sorry for adding you to CC directly, but you would probably know,
+> if the variable name collapsing fuction from Poky:
+> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=634c76d02e5796f5e908b6d6a79dcfef6f8af3d1
+> should be somewhere in this code path.
 
-2010/2/27 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Its a serious bug I agree but a very hard one to fix. The correct fix is
+to have staging under full control of a packaging system, then when you
+clean packages, all the right bits are actually removed.
 
-> (and yes, I also think it makes sense to remove old orphaned unused
-> 5-year-old recipes, but guess I'm alone here too).
->
+In that sense this is no better or worse than the other 101 ways you can
+break staging.
 
-You're not alone. :-)
+So in summary, no easy fix, we need to fix the big general problem -
+packaged staging needs to be on by default and used by everything. Only
+then will we nail all these problems.
 
-This makes metadata processing faster, easier testing since we ought to deal
-with less versions, increase possibility of merging of patches in upstream
-since they'd be more up to date and so on.
+Cheers,
 
-IMO if someone wants a non-changing distro, stable is there for it. dev
-ought to be clean.
+Richard
 
--- 
-Otavio Salvador                  O.S. Systems
-E-mail: otavio@ossystems.com.br  http://www.ossystems.com.br
-Mobile: +55 53 9981-7854         http://projetos.ossystems.com.br
+
+
+
+
 
