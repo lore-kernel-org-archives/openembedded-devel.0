@@ -1,44 +1,42 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-pz0-f196.google.com ([209.85.222.196])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Nmud9-0000gs-W8
+	(envelope-from <graham.gower@gmail.com>) id 1NmwHg-00043D-1o
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Mar 2010 20:53:16 +0100
-Received: by gyd5 with SMTP id 5so723923gyd.6
+	Wed, 03 Mar 2010 22:39:16 +0100
+Received: by pzk34 with SMTP id 34so1360864pzk.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Mar 2010 11:50:24 -0800 (PST)
+	Wed, 03 Mar 2010 13:36:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type;
-	bh=E375HdTuUVnGZT3JnE66fVJZNmyKXjo8YSblSbc8haY=;
-	b=PzlW9Rr0hat32GruE/42tTBULOHYheHdPoD/LXoiP1xnedPMNQ6ydcL4adCRN6Zsvx
-	cSr5kgVLA43AwI9xNOXeibGPPPcwCWHzNdrfj99iXmcfQbwlBX/Wo4qY5dxJuhnbZhB0
-	qNCW0iVjiotwI3AUoj8THp376jwGpd9qxADCI=
+	bh=RSSBeilgne9D1wA7jBvBnLVaZZaZfjSXVyNY1Oa8c+A=;
+	b=vT4lYYGAWcH7VrUblH5yYgF5j3YXo6ziuE77ClU+WMHVZ1CKnnyJE938hH+lW9JIji
+	PQz+xcmD4puwUIxUDDhxEMKlTPdLCrI1eA1tOJDmY82mFN79GZJ6SOJitRx4lSkazDwN
+	bH/gzjGLJz99TJzMIncprgc6QgPkfIy6KeTuc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=Ri9QJlFF1aukSuWRYnFxLcKGf3Qmssq8aAzct5GYJPYQeYYeEOQPFfZVZ50kOx62+n
-	1O8zZwQk2yR1D0Vqoa7ppSxgTeBuTm6A1TosH9abrEzLcKGfl0rruU1xGvxpjcBKq4aw
-	g24DkTMxCzA9gnm+PAqtWgpOmZG+JyrRB9Zfw=
+	b=nnXcxDISHQ9gVAPWAIISlV8QDTgZMKJ54Ur51a7TMOKrRY1RiSlAc5/GrmeV0jZznO
+	Y2vjQ4lemchK28AqeYN+pqXTVgZ/UV7YwDU/NTuxnPR+mcp5MSk9x83A9MPzLW8s+i04
+	36/gGtZ1ETJA/lm86ErmuRUWoHOME2kdABRMw=
 MIME-Version: 1.0
-Received: by 10.101.206.1 with SMTP id i1mr3023143anq.80.1267645823769; Wed, 
-	03 Mar 2010 11:50:23 -0800 (PST)
-In-Reply-To: <b6ebd0a51003031028q1b948bb4y2e40d734252f0fb6@mail.gmail.com>
-References: <b6ebd0a51003030909u58f72751u19f5b3caab614450@mail.gmail.com>
-	<1267638229.2259.147.camel@rex>
-	<b6ebd0a51003031028q1b948bb4y2e40d734252f0fb6@mail.gmail.com>
-Date: Wed, 3 Mar 2010 20:50:23 +0100
-Message-ID: <ac9c93b11003031150x39cebeb7i92454d98c627f8c0@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.142.55.18 with SMTP id d18mr4795112wfa.29.1267652179314; Wed, 
+	03 Mar 2010 13:36:19 -0800 (PST)
+In-Reply-To: <hml6l5$oj0$1@dough.gmane.org>
+References: <hml6l5$oj0$1@dough.gmane.org>
+Date: Thu, 4 Mar 2010 08:06:19 +1030
+Message-ID: <6ec4247d1003031336t6e6c4c74tff38b528264a420d@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.222.196
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Initial Proposal for Packaged Staging Revamp (was [RFC] Make some big changes right after next stable)
+Subject: Re: DL_DIR on nfs mount -> lockfile mayhem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,81 +50,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Mar 2010 19:53:16 -0000
+X-List-Received-Date: Wed, 03 Mar 2010 21:39:16 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Tom: +1 for the initiative
+On 3 March 2010 18:59, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Hi,
+>
+> One of my coworkers ran out of diskspace again and decided to move his
+> DL_DIR to the filer and access it over NFS. Now do_fetch just hangs for
+> nearly everything and we can get it to continue after removing the
+> lockfiles in DL_DIR manually, but that's not a good solution.
+>
+> I don't touch NFS with a bargepole, but my coworker insists it's a valid
+> use-case :) So, is DL_DIR on nfs supported and if so, any clues why it
+> could break with lockfiles?
+>
+> This is with bitbake 1.8 from git.
+>
+> regards,
+>
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFLjh3kMkyGM64RGpERAqZ0AJ9JlIjYNNApPue9ik+LsH4HBF1ACACfWsEi
+> CC1SVf3BR0QtLsMyOakTKA0=
+> =lGCK
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-Having had my share of trouble with packaged staging and as a result
-from that having fixed a bug or what, I do welcome the idea of
-improving it.
+What is the nfs server running and what are your mount options? I've
+seen odd behaviour with applications using sqlite (e.g. firefox) on
+some nfs mounts: http://www.sqlite.org/faq.html#q5
 
-Wrt to the ideas & discussion above:
-I consider the output from do-install as being the most important.
-That is the deliverable of the package. Staging intermediate steps to
-me seems less useful.
-However if it is decided to do that, please consider making it
-optional. I don't think I appreciate having staged packages with all
-the intermediate object files.
-Also if something changes typically all of the package needs to be
-rebuild. E.g. if a provider changes it could be that configure gives a
-different result, so there is no point in keeping that.
+Does the problem go away when the filesystem is mounted -onolock ?
 
-Wrt the stamps: I think the current stamps are useful when it comes to
-deciding what is build and what has to be rebuild (e.g. if do_compile
-fails).
-For packaged staging it would be nice if one could also put them on a
-feed so others could build prebuild packages (if they desire).
-(this could also be internal in e.g. a company).
-The current time-based stamps are not too handy here as they might
-cause problems due to clock skew between systems and people mixing up
-local time and GMT etc.
-
-Instead of the current stamps a signature could be better.
-A very simplistic proposal would be to use the chain of the child
-signatures followed by the PR of the package (only the digit part, not
-the r)
-Basically in the end this delivers a sequence of all PR values of all
-underlying recipes. If an underlying recipe is bumped the signature
-generated while parsing does not match any more and dependent packages
-need to be rebuild.
-
-Unfortunately things are probably not that simple. We might need to
-decide on ordering of packaged (the way they appear in DEPENDS?
-Alphabetically by package name?
-Also I can imagine that signatures (especially for images become very long).
-We might be able to use a hash function to reduce the size of the
-signatures and only store the hash.
-
-What I am not sure of is whether it is desirable to build a package
-that you do not want to be staged (or not yet).
-One of the issues I am facing every once in a while is that I modified
-a recipe, bumped PR, but in the end the change turns out not to be
-good and I want to revert my work.
-Guess it might be nice to be able to inhibit the staging of recipes
-that are not yet commited (maybe user configable in e.g. local.conf)
-
-BTW in the past I've been pondering about another scenario: give each
-package its own subdir in staging and control which packages are
-actually used through -I and -L flags.
-That would avoid that one has to unpack a lot of packages.
-(I'm assuming that we want to start with an empty staging when a build
-starts; and that it is being popluated as needed; otherwise you can
-still inadvertedly pick up remains from another package, but I am
-fearing the performance penalty; I can imagine that it makes sense to
-have some core packages always present (e.g. libc).
-
-Thinking of it, do we also want to apply this for native, or should we
-assume that native always contains all native packages (so implictly
-making all recipes depend on all -native recipes).
-After all native is the build environment.
-
-guess there are plenty of things I overlooked and forgot. I'll add if
-new things pop up.
-
-Frans
-
-PS: if desired I am willing to contribute, but note that my pythonese
-is marginal.
+-Graham
 
 
