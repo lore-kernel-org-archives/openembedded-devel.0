@@ -1,41 +1,40 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1Nmt2u-0005TZ-7C
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Mar 2010 19:11:45 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 195382C97A
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NmtAs-0001kZ-C6 for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Mar 2010 19:19:59 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nmt87-0007CG-Uv for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Mar 2010 19:17:07 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Mar 2010 19:17:07 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Mar 2010 18:08:54 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id 91xdr5tsjSJ3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Mar 2010 18:08:51 +0000 (GMT)
-Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 5CDD92C979
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Mar 2010 18:08:51 +0000 (GMT)
-Received: by xora-desktop.xora.org.uk (Postfix, from userid 500)
-	id 6589A21732; Wed,  3 Mar 2010 18:08:51 +0000 (GMT)
-Date: Wed, 3 Mar 2010 18:08:51 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Wed, 03 Mar 2010 19:17:07 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100303180851.GC2493@xora-desktop.xora.org.uk>
-References: <1267633819.4739.343.camel@trini-m4400>
-	<hmm5pb$est$1@dough.gmane.org>
-	<1267637587.4739.345.camel@trini-m4400>
-MIME-Version: 1.0
-In-Reply-To: <1267637587.4739.345.camel@trini-m4400>
-User-Agent: Mutt/1.5.20 (2009-08-17)
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 03 Mar 2010 19:16:50 +0100
+Message-ID: <hmm92i$r30$1@dough.gmane.org>
+References: <1267633819.4739.343.camel@trini-m4400>	<hmm5pb$est$1@dough.gmane.org>	<1267637587.4739.345.camel@trini-m4400>
+	<20100303180851.GC2493@xora-desktop.xora.org.uk>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
+In-Reply-To: <20100303180851.GC2493@xora-desktop.xora.org.uk>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [RFC] Make some big changes right after next stable
@@ -52,26 +51,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Mar 2010 18:11:45 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 03 Mar 2010 18:19:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, Mar 03, 2010 at 10:33:07AM -0700, Tom Rini wrote:
-> Note that I'm not talking about "small" things like removing legacy
-> staging stuff (which is good!) I'm talking about things with the
-> potential to leave stuff non-building until stumbled upon.  Hence the
-> idea we do merge this into dev shortly after the next stable.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 03-03-10 19:08, Graeme Gregory wrote:
+> On Wed, Mar 03, 2010 at 10:33:07AM -0700, Tom Rini wrote:
+>> Note that I'm not talking about "small" things like removing legacy
+>> staging stuff (which is good!) I'm talking about things with the
+>> potential to leave stuff non-building until stumbled upon.  Hence the
+>> idea we do merge this into dev shortly after the next stable.
+>>
+> I think you are approaching things backwards.
 > 
-I think you are approaching things backwards.
+> Develop this to the point of working enough other people can start to test it
+> in a feature branch.
+> 
+> Tag org.openembedded.dev then merge this work into .dev
+> 
+> Anyone in the future can use the tag to get back to a "stable" point.
 
-Develop this to the point of working enough other people can start to test it
-in a feature branch.
+That's what I wanted to say, but Graeme put it way better :)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Tag org.openembedded.dev then merge this work into .dev
-
-Anyone in the future can use the tag to get back to a "stable" point.
-
-Graeme
+iD8DBQFLjqeSMkyGM64RGpERAmvHAJ4q4v5Ig/lnD2UaW7ffx3R6T1AFdwCeIJcI
+bJ9NE/LbnxvZfMzuuvjqAv8=
+=rTPS
+-----END PGP SIGNATURE-----
 
 
 
