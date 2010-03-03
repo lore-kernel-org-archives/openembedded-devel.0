@@ -1,50 +1,41 @@
-Received: from mail-fx0-f220.google.com ([209.85.220.220])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Nmohv-0007N2-Bv
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NmoyV-0007mW-Je
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Mar 2010 14:33:51 +0100
-Received: by fxm20 with SMTP id 20so1408941fxm.12
+	Wed, 03 Mar 2010 14:51:08 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o23Dm4FJ018227
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Mar 2010 05:30:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=CKNt+ZIVAulwZcfrB5P6F8ahZehY/e/tovl4ZB7Gy0E=;
-	b=DKiE6ssd0ELJ8r+hHcidnRDHeASOV8c0Lxhwct7jpdVm3UvWqsXtwCreYwrGy9B/YX
-	h5E9WpZ5n9FrMDF473FSO1adV7pHIbg38RnPnGO4aQE9DzK24XrToPrrH+Z8qVmrQ4LT
-	tksSAg5tm4zr1Mk8Wb9FOaRez3onbahFh2VNM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=Lj4d7KNZaV6bKi1LtPeWUuULBaWzo2OkC3Muf6TPkIVE2o4aNkgaghTxI1JpULiwRm
-	toQNgKASsfQatKxOVb7Wf13rDBOEyyYnsKCDcftvPFIHJplI4jLKspREitUIAnWv6J+Z
-	AzO70IIqnD5XVtI6BgQlBtZi/y3Z/o6/yEM6c=
-Received: by 10.87.74.5 with SMTP id b5mr49291fgl.62.1267623056037;
-	Wed, 03 Mar 2010 05:30:56 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 15sm3621312fxm.8.2010.03.03.05.30.51
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 03 Mar 2010 05:30:52 -0800 (PST)
-Date: Wed, 3 Mar 2010 14:31:22 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Wed, 3 Mar 2010 13:48:04 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 17897-07 for <openembedded-devel@lists.openembedded.org>;
+	Wed,  3 Mar 2010 13:47:49 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o23DlirE018221
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 3 Mar 2010 13:47:45 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100303133122.GN3206@jama>
-References: <1267622195-13602-1-git-send-email-ospite@studenti.unina.it>
-	<ac9c93b11003030520k1ba50c5fp6879caa5acb36e5c@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <ac9c93b11003030520k1ba50c5fp6879caa5acb36e5c@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.220
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+In-Reply-To: <ac9c93b11003030459h499fa3ban6f6884910ef785a@mail.gmail.com>
+References: <1267616149.2259.4.camel@rex>
+	<ac9c93b11003030459h499fa3ban6f6884910ef785a@mail.gmail.com>
+Date: Wed, 03 Mar 2010 13:47:42 +0000
+Message-ID: <1267624062.2259.58.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=0.1 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] sanity.bbclass: Fix a typo in required_utilities.
+Subject: Re: TSC Meeting 2010/03/02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,51 +49,145 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Mar 2010 13:33:51 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 03 Mar 2010 13:51:08 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Wed, Mar 03, 2010 at 02:20:52PM +0100, Frans Meulenbroeks wrote:
-> 2010/3/3 Antonio Ospite <ospite@studenti.unina.it>:
-> > A missing space in required_utilities makes OE ask to install md5sumsqemu.
-> > Prepend the needed whitespace when appending to required_utilities.
+On Wed, 2010-03-03 at 13:59 +0100, Frans Meulenbroeks wrote:
+> 2010/3/3 Richard Purdie <rpurdie@rpsys.net>:
+> > Developer Effort
+> > ================
 > >
-> > Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
-> > ---
-> >  classes/sanity.bbclass |    2 +-
-> >  1 files changed, 1 insertions(+), 1 deletions(-)
-> >
-> > diff --git a/classes/sanity.bbclass b/classes/sanity.bbclass
-> > index a78e8ed..ad5389e 100644
-> > --- a/classes/sanity.bbclass
-> > +++ b/classes/sanity.bbclass
-> > @@ -95,7 +95,7 @@ def check_sanity(e):
-> >                                missing = missing + "gcc-3.x (needed for qemu-native),"
-> >
-> >                if "qemu-native" in assume_provided:
-> > -                       required_utilities += "qemu"
-> > +                       required_utilities += " qemu"
-> >
-> >                try:
-> >                        if os.path.exists("/proc/sys/vm/mmap_min_addr"):
-> > --
-> > 1.7.0
-> >
-> >
+> > Rather than discussions such as the above, how about injecting that
+> > energy into adopting the new staging, BBCLASSEXTEND and -nativesdk code?
 > 
-> Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+> Ehm. there was already a similar remark in the recent pango thread
+> (angstrom: sync pango and pango-native versions)
+> 
+> I'd say the tone in that email and in the two lines above does not
+> really meet the 'be considerate" and 'be respectful' as described in
+> the ubuntu code of conduct.
 
-What about that qemu-arm -> qemu change?
-http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg04276.html
+The wording could perhaps be better but I don't think its bad enough
+that it falls foul of the CoC.
 
-Should I build unused qemu to make it with ASSUME_PROVIDED happy?
+The TSC fully appreciates the work people put into OE and is just
+frustrated so much energy gets lost on what amount to relatively minor
+issues where there are many other things that need work.
 
-Regards,
+Put things into context - is whether a variable name has the word
+angstrom in the name really a massive insurmountable problem stopping
+people from using OE?
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+> Also note that most of the work is done by
+> volunteers/hobbyists/whatever you want to name them.
+> I feel it is not really for the TSC (or for me) to say what others
+> should do. Suggestions could be made but I think it could be worded
+> more polite.
+
+The above is simply a suggestion. The TSC in no way controls what
+volunteers/hobbyists/employees/companies or anyone else working on OE
+actually works on. We can make a suggestion of where we feel effort
+would be well spent which is what the above states.
+
+No matter how many policies, groups or anything else we put into place
+this is an open source project which by the nature anyone is free to do
+pretty much anything. This can and does lead to friction at times and
+people do have strong opinions which there are no plans to censor. What
+we do need to stop is the personal attack side of things. "Attacking"
+someone's proposal on technical grounds is perfectly fair game IMO as
+long as it has a constructive and/or reasoned basis. The one thing it
+should never be is personal.
+
+> And wrt the new staging/BBCLASSEXTEND/nativesdk topic:
+> In my opinion it is useful to clean up the existing recipes (or move
+> them to 'obsolete' or whatever).
+> That way less recipes need to be adopted, and no energy is wasted on
+> adopting legacy recipes.
+> (apart from the fact that having lots of recipes for lots of variants
+> does not really give a professional and mature impression).
+
+Legacy recipes are a source of contention. We're bad at tracking who
+needs them and why. There some some factions of OE who'd like to never
+see any recipe deleted and there are some who feel any old recipe should
+be removed.
+
+We do have a problem in that the people who use old recipes use them as
+they don't like change and the staging changes are change and hence we
+either don't convert them (and hence never complete the transition we
+*need* to make) or we convert them and cause those people pain anyway.
+
+I could see a case for having a mass clear out of old recipes in OE to
+get the new staging changes in. Anyone wanting old versions could either
+add them back specifically (converted), make sure they were converted by
+a deadline or use an older tree. Someone would have to take an effort
+like that on, announce it and lead it but I suspect it could actually be
+made to work. It will need some time commitment though, any
+volunteers? :)
+
+> BTW: The recipes I feel responsible for are all converted to both new
+> staging and BBCLASSEXTEND.
+
+Great, thanks for doing that!
+
+> I have considered converting some of the others to new staging.
+> Actually I even started it, but soon stopped with it for the following
+> reasons:
+> - the actual verification process is fairly cumbersome. (5) diff the 2
+> packaged-staging recipes (which I read as packaged-staging packages as
+> there are no packaged-staging recipes) is imho a pita)
+
+It would be better to have some kind of automated way of doing this I
+agree. Its technically possible, just nobody has found the time needed
+to implement it. We're all volunteers as you point out.
+
+> - i have no idea what recipes are actually used and worthwhile my effort
+
+Ultimately its desirable to convert everything.
+
+> - some people seem to be picky if you touch their recipes (although
+> some are a lot less considerate when it comes to recipes of others :-(
+> )
+
+There are ways of handling this (RFC the patches, delay the commit for a
+few days. If no answer, then make the changes).
+
+> Together for me that has lead to the conclusion that this is work with
+> low satisfaction and high chance of getting negative feedback (e.g.
+> because despite your efforts something breaks, or because by accident
+> you step on someones toes), and that I'd better work on something
+> else.
+
+Well, we all feel like this at times. If I took all the negative stuff I
+see about my work to heart, I'd not be doing it. Hopefully people do
+feel some of the things I've done are some kind of benefit to OE. I have
+broken things before, I probably will again despite my best efforts but
+its how you deal with these things the people ultimately judge you on.
+
+I have yet to see a "thank you for helping set up the TSC, getting
+involved in the nastiest arguments OE has and putting your neck on the
+line all the time email" and don't expect one either. I doubt the e.V.
+board has either but for the record I do appreciate what they do and am
+trying to do my bit through the TSC.
+
+> PS: and wrt the remark "we have been discussed this before and the
+> conclusion then was...": great, but if you do not document those
+> decisions they will pop up every once in a while (e.g. by someone who
+> is not aware of the decision; e.g. I for me, was unaware that angstrom
+> initially had its own directory).
+
+Document where? How? Do you document the outcome of every email
+discussion you have on the OE list? It was a "decision" that came about
+as the result of an email discussion on this mailing list, nothing more,
+nothing less. Volunteers doing this would be very welcome...
+
+Cheers,
+
+Richard
+
+
+
+
+
 
 
