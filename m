@@ -1,33 +1,39 @@
-Received: from mail-qy0-f178.google.com ([209.85.221.178])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jesmith@kaon.com>) id 1NmrLu-00005w-9T
+	(envelope-from <Tom_Rini@mentor.com>) id 1NmrVs-0000Nw-4H
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Mar 2010 17:23:15 +0100
-Received: by qyk8 with SMTP id 8so959578qyk.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Mar 2010 08:20:22 -0800 (PST)
-Received: by 10.224.29.75 with SMTP id p11mr19805qac.167.1267633209123;
-	Wed, 03 Mar 2010 08:20:09 -0800 (PST)
-Received: from ?10.10.0.195? (216-230-77-82.client.cypresscom.net
-	[216.230.77.82])
-	by mx.google.com with ESMTPS id 8sm1848848yxg.24.2010.03.03.08.20.08
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 03 Mar 2010 08:20:08 -0800 (PST)
-From: Joshua Smith <jesmith@kaon.com>
-Date: Wed, 3 Mar 2010 11:20:06 -0500
-Message-Id: <B22FA4FC-2DB7-49E8-AB09-3FF8FC3D36D9@kaon.com>
-To: openembedded-devel@lists.openembedded.org
-Mime-Version: 1.0 (Apple Message framework v1077)
-X-Mailer: Apple Mail (2.1077)
-X-SA-Exim-Connect-IP: 209.85.221.178
-X-SA-Exim-Mail-From: jesmith@kaon.com
+	Wed, 03 Mar 2010 17:33:32 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1NmrT5-0003XH-TA from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 03 Mar 2010 08:30:39 -0800
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Wed, 3 Mar 2010 08:30:39 -0800
+Received: from 172.30.80.138 ([172.30.80.138]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Wed,  3 Mar 2010 16:30:21 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	03 Mar 2010 09:30:19 -0700
+From: Tom Rini <tom_rini@mentor.com>
+To: oe-devel <openembedded-devel@lists.openembedded.org>
+Organization: Mentor Graphics Corporation
+Date: Wed, 03 Mar 2010 09:30:19 -0700
+Message-ID: <1267633819.4739.343.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 03 Mar 2010 16:30:39.0309 (UTC)
+	FILETIME=[DC3787D0:01CABAEE]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Trying and Failing to enable Java with GCC 4.3.3
+Subject: [RFC] Make some big changes right after next stable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,47 +47,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Mar 2010 16:23:15 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 03 Mar 2010 16:33:32 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hello,
+Hey all,
 
-I'm new to OE.  I'm trying to get GCJ compiled for the TouchBook (an =
-ARM-based tablet).  After some searching and trial-and-error, I figured =
-out that I need to add:
+I'd like to see some comments on the following idea.
 
-JAVA_arm =3D ",java" to recipies/gcc-4.3.3.inc
+As many people know, there's a lot of "odd" internal things that OE
+does, that if we had it to do over, we would do differently.  What I
+would like to propose is that in time for the next stable branch we:
+1: Define a set of DISTROs/MACHINEs/build targets that need to stay
+working
+2: In a separate branch (per big change), get one of these big, going to
+leave some stuff broken changes
+3: Define / document what needs to be done before these branches can be
+merged back (something like #1 is working still, and if applicable a
+guide to the common problems/how to fix people are going to run into).
 
-But now I'm getting an error when it tries to build gcc-cross-4.3.3:
+What I'm getting at is that this would let us do things like rework the
+"this is where we place things that we build other recipes with" concept
+so that sysroot just works (and otherwise makes more sense again).  Or
+"let us have more consistency in build with compared to what could end
+up on device".  And so on.
 
-make[4]: Entering directory =
-`/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-4.3.3-r7.1/gcc=
--4.3.3/build.i686-linux.arm-angstrom-linux-gnueabi/64/zlib'
-make[4]: *** No rule to make target `all'.  Stop.
-make[4]: Leaving directory =
-`/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-4.3.3-r7.1/gcc=
--4.3.3/build.i686-linux.arm-angstrom-linux-gnueabi/64/zlib'
-make[3]: *** [multi-do] Error 1
-make[3]: Leaving directory =
-`/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-4.3.3-r7.1/gcc=
--4.3.3/build.i686-linux.arm-angstrom-linux-gnueabi/zlib'
-make[2]: *** [all-multi] Error 2
-make[2]: Leaving directory =
-`/OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-4.3.3-r7.1/gcc=
--4.3.3/build.i686-linux.arm-angstrom-linux-gnueabi/zlib'
-make[1]: *** [all-zlib] Error 2
+What do people think?  And what would people work on?
 
-(I can give you more of the log if it would help, but this is the first =
-error)
-
-I can see why adding Java would cause GCC to need zlib when maybe it =
-didn't before.  But I don't know what to change to get zlib configured =
-as part of the gcc build process.
-
-Help?
-
--Joshua Smith
-
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
