@@ -1,32 +1,37 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Nn8no-0008V3-25
+Received: from 64.mail-out.ovh.net ([91.121.185.65])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1Nn9BG-0003A6-Lx
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Mar 2010 12:01:16 +0100
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 0604D491278
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Mar 2010 11:58:20 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	Thu, 04 Mar 2010 12:25:39 +0100
+Received: (qmail 27427 invoked by uid 503); 4 Mar 2010 11:20:17 -0000
+Received: from b9.ovh.net (HELO mail32.ha.ovh.net) (213.186.33.59)
+	by 64.mail-out.ovh.net with SMTP; 4 Mar 2010 11:20:17 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 4 Mar 2010 11:15:57 -0000
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 4 Mar 2010 11:15:55 -0000
+Message-ID: <4B8F966B.40707@eukrea.com>
+Date: Thu, 04 Mar 2010 12:15:55 +0100
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.1.8) Gecko/20100216 Thunderbird/3.0.2
 MIME-Version: 1.0
-Date: Thu, 4 Mar 2010 11:58:51 +0100
-Message-ID: <DB561678F08F554EB0D9F21B70E268A505AE79@exchange.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: Where are my patches?
-Thread-Index: Acq7iayYdHPg8J5cRimvMsJYiLSitg==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@DResearch.DE
+To: openembedded-devel@lists.openembedded.org
+References: <4B8F84F7.10806@fqingenieria.es>
+In-Reply-To: <4B8F84F7.10806@fqingenieria.es>
+X-Ovh-Tracer-Id: 10838756929351757129
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.65
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Where are my patches?
+Subject: Re: I.MX25 and OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,20 +45,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Mar 2010 11:01:16 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 04 Mar 2010 11:25:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
+Hi Jaume,
 
-Once again i miss a patch proposal of mine in the patch queue. :(
+Le 04/03/2010 11:01, FQ | Jaume Ribot a écrit :
+> Just a question: Is somebody working in any port of OE to an I.MX25
+> Freescale platform. As I can see, some people has been porting this
+> processor to the kernel mainline, but don't know if any recipe/s exist
+> or are under development.
+>
+you can check the tx25 machine which is based on i.MX25 :
+conf/machine/tx25.conf
 
-It is this one: =
-<http://thread.gmane.org/gmane.comp.handhelds.openembedded/30654/focus=3D=
-30656>
+Eric
 
-Is there something wrong with it? Am i somehow blacklistet?
-
-Steffen
 
