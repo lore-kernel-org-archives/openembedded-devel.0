@@ -1,40 +1,50 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NnCp8-00078E-6U
+Received: from fg-out-1718.google.com ([72.14.220.156])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <martin.jansa@gmail.com>) id 1NnEmB-0001mK-OJ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Mar 2010 16:18:50 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o24FFvkK032382
+	Thu, 04 Mar 2010 18:23:56 +0100
+Received: by fg-out-1718.google.com with SMTP id 22so671121fge.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 4 Mar 2010 15:15:57 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 32209-02-3 for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Mar 2010 15:15:38 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o24FAksH032128
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 4 Mar 2010 15:10:47 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Thu, 04 Mar 2010 09:21:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=X26nnt1/SblSAhF7JVhN9yId8JWDPSSqsJdwOEs/ao8=;
+	b=TsIsBNT+jV3swimBAKPo/gmTJAu1atqR0PImB90pXeuAWXj+y7PDIaFOgxxYUYVCEM
+	J22HZyc26DiUsBhRVR+yINwWQbn8CqODiULKc2pKHRQ/JHbmuJ7PRtCZcseQfd7yltxo
+	4az6z7O3qoeOcoomSFAtHXnxPvP6B4MT0l7Iw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=HylxN8tlrzFmIiCGAvekWdaEwVPD0KY0W1QZ7U79e2ZVnuVuLeTnfvyN0oRQxijG/F
+	AJeAQw9nVSmqoSQTKerP+KKqRMrG9qVhUS3aG6NnnMSLF6lNiGSUVU5DtrmQB5DXmB5W
+	UWd9weMRFWEURJzt/gkyOjy7ThegVjNkV/lAI=
+Received: by 10.87.74.8 with SMTP id b8mr771113fgl.31.1267723265382;
+	Thu, 04 Mar 2010 09:21:05 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 15sm541106fxm.0.2010.03.04.09.21.00
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 04 Mar 2010 09:21:01 -0800 (PST)
+Date: Thu, 4 Mar 2010 18:21:37 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1267633819.4739.343.camel@trini-m4400>
-References: <1267633819.4739.343.camel@trini-m4400>
-Date: Thu, 04 Mar 2010 10:18:39 +0000
-Message-ID: <1267697919.2259.247.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Message-ID: <20100304172137.GE31945@jama>
+References: <1267218939-6086-1-git-send-email-Martin.Jansa@gmail.com>
+	<141020e31003030454i59ed2d9fpcc32ac4ec1b65c0c@mail.gmail.com>
+	<1267621631.2259.19.camel@rex> <20100303191937.GQ3206@jama>
+MIME-Version: 1.0
+In-Reply-To: <20100303191937.GQ3206@jama>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 72.14.220.156
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.1 required=5.0 tests=AWL,BAYES_00,
-	DATE_IN_PAST_03_06, RDNS_DYNAMIC, TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Make some big changes right after next stable
+Subject: Re: [PATCH] package_ipk.bbclass DON'T PUSH THIS, but PLEASE read it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,47 +58,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Mar 2010 15:18:50 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 04 Mar 2010 17:23:56 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, 2010-03-03 at 09:30 -0700, Tom Rini wrote:
-> As many people know, there's a lot of "odd" internal things that OE
-> does, that if we had it to do over, we would do differently.  What I
-> would like to propose is that in time for the next stable branch we:
-> 1: Define a set of DISTROs/MACHINEs/build targets that need to stay
-> working
-
-It was commented at OEDEM that it would be nice to have this magic list.
-We still don't have one though.
-
-> 2: In a separate branch (per big change), get one of these big, going to
-> leave some stuff broken changes
-> 3: Define / document what needs to be done before these branches can be
-> merged back (something like #1 is working still, and if applicable a
-> guide to the common problems/how to fix people are going to run into).
-
-It makes sense.
-
-> What I'm getting at is that this would let us do things like rework the
-> "this is where we place things that we build other recipes with" concept
-> so that sysroot just works (and otherwise makes more sense again).  Or
-> "let us have more consistency in build with compared to what could end
-> up on device".  And so on.
+On Wed, Mar 03, 2010 at 08:19:37PM +0100, Martin Jansa wrote:
+> On Wed, Mar 03, 2010 at 01:07:11PM +0000, Richard Purdie wrote:
+> > Its a serious bug I agree but a very hard one to fix. The correct fix is
+> > to have staging under full control of a packaging system, then when you
+> > clean packages, all the right bits are actually removed.
+> > 
+> > In that sense this is no better or worse than the other 101 ways you can
+> > break staging.
 > 
-> What do people think?  And what would people work on?
+> Fair enough, thanks for reply.
+> 
+> > So in summary, no easy fix, we need to fix the big general problem -
+> > packaged staging needs to be on by default and used by everything. Only
+> > then will we nail all these problems.
+> 
+> So I'll continue to use 
+> find tmp/pkgdata -name ${PN}\* -exec rm -rf {} \;
+> when I see non-existent lockfile path.
+> 
+> Or maybe try this little patch and watch what will break:
+> diff --git a/classes/packagedata.bbclass b/classes/packagedata.bbclass
+> index 86f18a9..e38ff3c 100644
+> --- a/classes/packagedata.bbclass
+> +++ b/classes/packagedata.bbclass
+> @@ -56,7 +56,8 @@ python read_subpackage_metadata () {
+>         for pkg in bb.data.getVar('PACKAGES', d, 1).split():
+>                 sdata = read_subpkgdata(pkg, d)
+>                 for key in sdata.keys():
+> -                       bb.data.setVar(key, sdata[key], d)
+> +                       if bb.data.getVar(key, d, None) == None:
+> +                               bb.data.setVar(key, sdata[key], d)
+>  }
 
-This is the problem, it would be you taking this on, you'd be the person
-who needed to fix things, then you would get to merge back. I don't
-think we have enough people around that people would volunteer to fix
-branches like that.
+First thing broken is 
+inherit update-alternatives in sysvinit
+which didn't set init link in postinst and my image didn't boot, so now
+I agree that it's harder than it seems and that "patch" was really bad
+idea.
 
-But by all means prove me wrong.
+Regards,
 
-Cheers,
-
-Richard
-
-
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
