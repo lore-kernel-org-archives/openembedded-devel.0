@@ -1,30 +1,45 @@
-Received: from 3a.49.1343.static.theplanet.com
-	([67.19.73.58] helo=pug.o-hand.com ident=postfix)
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <josh@linux.intel.com>) id 1NnFgT-0000RP-1I
+	(envelope-from <kergoth@gmail.com>) id 1NnGz7-00010a-M9
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Mar 2010 19:22:09 +0100
-Received: from [10.250.128.186] (unknown [158.43.2.102])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by pug.o-hand.com (Postfix) with ESMTP id EB8CD12EC332
+	Thu, 04 Mar 2010 20:45:30 +0100
+Received: by pwi5 with SMTP id 5so1739153pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Mar 2010 12:17:02 -0600 (CST)
-From: Joshua Lock <josh@linux.intel.com>
+	Thu, 04 Mar 2010 11:42:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:from:date:x-google-sender-auth:message-id:subject:to
+	:content-type; bh=eBI5d4sCN+IJVYAhHFh+kvz8YAu/N+FwzLDimPy0qtM=;
+	b=iwtj/61TLC06ZiGzRqpqbZoIOIcEkY1UkWoH2duoTlsp9XusqngIXAzMoWMRzps7om
+	8nvXXSd7MRwpXjXjGXztFPw7w/yBcx/RbUdLj/oGCsA0/3Vf8+mWChJw4dp1yxeIcuMR
+	sBUbYTFcZ/XxsL9RtvV62sOWkjNtDWAzGbBmc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=MORvUlR4fZXQLzQF8Cj5dvkw35an0mZp2u8O7PnZSyl9nXodIpXc7PL6RHvsIonTWY
+	ehhKpZAYwqhWfwXpPaq3MwNiY6ZSGkU5DPomw198o2d9fa3TxXWMK/x3119JZBGWP7rQ
+	15keYRgfPwgypkVXeFabCJxgTuKVF9omliLC0=
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.142.209.10 with SMTP id h10mr3335691wfg.278.1267731752167; 
+	Thu, 04 Mar 2010 11:42:32 -0800 (PST)
+In-Reply-To: <1267725265.28881.9.camel@localhost.localdomain>
+References: <1267725265.28881.9.camel@localhost.localdomain>
+From: Chris Larson <clarson@kergoth.com>
+Date: Thu, 4 Mar 2010 13:42:12 -0600
+X-Google-Sender-Auth: 845a543f47c4a356
+Message-ID: <b6ebd0a51003041142n1e407a7elc8e16bcf57d0d9c5@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 04 Mar 2010 17:54:25 +0000
-Message-ID: <1267725265.28881.9.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 (2.28.2-1.fc12) 
-X-SA-Exim-Connect-IP: 67.19.73.58
-X-SA-Exim-Mail-From: josh@linux.intel.com
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] Fix packaged staging for cross packages
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] Fix packaged staging for cross packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,73 +53,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Mar 2010 18:22:09 -0000
-X-Groupsio-MsgNum: 17334
-Content-Type: multipart/mixed; boundary="=-ED8c/mSXHi4+IPyE/+6f"
+X-List-Received-Date: Thu, 04 Mar 2010 19:45:30 -0000
+Content-Type: text/plain; charset=UTF-8
 
---=-ED8c/mSXHi4+IPyE/+6f
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+It looks like this does fix the problem, and good job in spotting the
+problem, but this fix assumes that the basename of CROSS_DIR is
+BASE_PACKAGE_ARCH.  If that ever changes for whatever reason, it will break.
+ I'd suggest instead changing it to continue to copy the contents of the
+dir, but to change the destination to match the destination used in the
+postamble (${PSTAGE_TMPDIR_STAGE}/cross/${BASE_PACKAGE_ARCH}).
 
-Hi,
+On Thu, Mar 4, 2010 at 11:54 AM, Joshua Lock <josh@linux.intel.com> wrote:
 
-While working on packaged staging in Poky I noticed that cross packages
-where being incorrectly packaged.
+> Hi,
+>
+> While working on packaged staging in Poky I noticed that cross packages
+> where being incorrectly packaged.
+>
+> After spending quite some time to track down the issue and fix it I
+> committed a patch to Poky master[1] to fix it.
+>
+> Attached is a copy of the patch for packages-staging.bbclass against
+> oe.dev.
+>
+> Regards,
+> Joshua
+>
+> 1.
+> http://git.pokylinux.org/cgit.cgi/poky/commit/?id=538087d2036d9dd319e3a22aaa2f62e5a5285c55
+> --
+> Joshua Lock
+>        Intel Open Source Technology Centre
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
-After spending quite some time to track down the issue and fix it I
-committed a patch to Poky master[1] to fix it.
 
-Attached is a copy of the patch for packages-staging.bbclass against
-oe.dev.
-
-Regards,
-Joshua
-
-1.http://git.pokylinux.org/cgit.cgi/poky/commit/?id=538087d2036d9dd319e3a22aaa2f62e5a5285c55
 -- 
-Joshua Lock
-        Intel Open Source Technology Centre
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
---=-ED8c/mSXHi4+IPyE/+6f
-Content-Disposition: attachment; filename="0001-packaged-staging-Fix-packagaging-of-cross-packages.patch"
-Content-Type: text/x-patch; name="0001-packaged-staging-Fix-packagaging-of-cross-packages.patch"; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-
-From 76d07ab28c304f1b827ef9b7f8adda22599c67ec Mon Sep 17 00:00:00 2001
-From: Joshua Lock <josh@linux.intel.com>
-Date: Thu, 4 Mar 2010 17:47:33 +0000
-Subject: [PATCH] packaged-staging: Fix packagaging of cross packages
-
-packagedstaging_fastpath() was only copying the contents of CROSS_DIR to
-PSTAGE_TMPDIR resulting in the folders contents being packaged and then
-installed incorrectly at the top level of CROSS_DIR rather than in HOST_ARCH
-specific sub directories.
-
-This patch fixes that issue by copying the directory and its contents rather
-than just the directory contents.
-
-Signed-off-by: Joshua Lock <josh@linux.intel.com>
----
- classes/packaged-staging.bbclass |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
-
-diff --git a/classes/packaged-staging.bbclass b/classes/packaged-staging.bbclass
-index 1ede25c..1cf30e2 100644
---- a/classes/packaged-staging.bbclass
-+++ b/classes/packaged-staging.bbclass
-@@ -289,7 +289,9 @@ packagedstaging_fastpath () {
- 		mkdir -p ${PSTAGE_TMPDIR_STAGE}/staging/
- 		mkdir -p ${PSTAGE_TMPDIR_STAGE}/cross/
- 		cp -fpPR ${SYSROOT_DESTDIR}${STAGING_DIR}/* ${PSTAGE_TMPDIR_STAGE}/staging/ || /bin/true
--		cp -fpPR ${SYSROOT_DESTDIR}${CROSS_DIR}/* ${PSTAGE_TMPDIR_STAGE}/cross/ || /bin/true
-+                # CROSS_DIR is just the HOST_ARCH specific stuff and a sub
-+                # directory of cross so copy it *and* its contents
-+		cp -fpPR ${SYSROOT_DESTDIR}${CROSS_DIR} ${PSTAGE_TMPDIR_STAGE}/cross/ || /bin/true
- 	fi
- }
- 
--- 
-1.6.6.1
-
-
---=-ED8c/mSXHi4+IPyE/+6f--
