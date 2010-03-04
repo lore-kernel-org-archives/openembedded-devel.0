@@ -1,43 +1,32 @@
-Received: from mail-ew0-f216.google.com ([209.85.219.216])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickael.chazaux@gmail.com>) id 1Nn8Fe-0001XY-NZ
+	(envelope-from <sledz@DResearch.DE>) id 1Nn8no-0008V3-25
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Mar 2010 11:25:55 +0100
-Received: by ewy8 with SMTP id 8so1454011ewy.12
+	Thu, 04 Mar 2010 12:01:16 +0100
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 0604D491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Mar 2010 02:23:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=s0UpLubaDXVW/Rkt/+9SP4TMLI7AyNhRhHJnruOnHyo=;
-	b=u/4InaGuWXYdbyenW4/ES1kLE3Oy6/yVNxTfp23osuZ7D86NiwhXtf2SopY+yFNmjN
-	eJk76bQIvKHYMpoD6ldpYW0iWM+gpo5NniJOmS7WdrH1ohgw3CmBDkARmlw3/0H+Woyf
-	O1A/wsTXHAwXt5yaCxX49NDuHSvlpBgKdxPCA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=kL+rkmfGmM83H43v3SxmkE3h4UMY+eNZAeIvvKSwpJNSDysaW01nq4Kr5lsTKvs9Ta
-	e9mKvu2BvGD8itno/Xwevqork6iVl/GMCrzg/sb7I6CizDpRIUm8qp+/dpZG6imfR0vI
-	lepJ7s8vBFoX65q2dqIRgN46grq9tjlC7fOnw=
+	Thu,  4 Mar 2010 11:58:20 +0100 (CET)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Received: by 10.213.109.201 with SMTP id k9mr3202880ebp.95.1267698182514; Thu, 
-	04 Mar 2010 02:23:02 -0800 (PST)
-In-Reply-To: <4B8F84F7.10806@fqingenieria.es>
-References: <4B8F84F7.10806@fqingenieria.es>
-Date: Thu, 4 Mar 2010 11:23:02 +0100
-Message-ID: <bc36f8ed1003040223i5a3bf1car97ced08a4bdf8afe@mail.gmail.com>
-From: Mickael Chazaux <mickael.chazaux@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.216
-X-SA-Exim-Mail-From: mickael.chazaux@gmail.com
+Date: Thu, 4 Mar 2010 11:58:51 +0100
+Message-ID: <DB561678F08F554EB0D9F21B70E268A505AE79@exchange.intern.dresearch.de>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: Where are my patches?
+Thread-Index: Acq7iayYdHPg8J5cRimvMsJYiLSitg==
+From: "Sledz, Steffen" <sledz@DResearch.DE>
+To: <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: I.MX25 and OE
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Where are my patches?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,28 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Mar 2010 10:25:55 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 04 Mar 2010 11:01:16 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
 
-> Just a question: Is somebody working in any port of OE to an I.MX25
-> Freescale platform. As I can see, some people has been porting this
-> processor to the kernel mainline, but don't know if any recipe/s exist or
-> are under development.
->
+Once again i miss a patch proposal of mine in the patch queue. :(
 
-I am about to start working on adding the mx25pdk support to
-OpenEmbedded. I will start this job in a few days.
+It is this one: =
+<http://thread.gmane.org/gmane.comp.handhelds.openembedded/30654/focus=3D=
+30656>
 
-Regards,
+Is there something wrong with it? Am i somehow blacklistet?
 
-Mickael
-
-Adeneo Embedded - Adetel Group
-2, chemin du Ruisseau
-69134 ECULLY - FRANCE
-T=C3=A9l. : +33 (0)4 72 18 08 40 - Fax : +33 (0)4 72 18 08 41
-
+Steffen
 
