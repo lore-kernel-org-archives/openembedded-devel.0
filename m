@@ -1,42 +1,29 @@
-Received: from mail-pz0-f196.google.com ([209.85.222.196])
+Received: from smtp7.myhsphere.biz ([204.10.105.69] helo=mail9.myhsphere.biz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1NmwHg-00043D-1o
+	(envelope-from <balakrishnan@e-consystems.com>) id 1Nn2mM-0002nn-Fs
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 03 Mar 2010 22:39:16 +0100
-Received: by pzk34 with SMTP id 34so1360864pzk.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Mar 2010 13:36:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=RSSBeilgne9D1wA7jBvBnLVaZZaZfjSXVyNY1Oa8c+A=;
-	b=vT4lYYGAWcH7VrUblH5yYgF5j3YXo6ziuE77ClU+WMHVZ1CKnnyJE938hH+lW9JIji
-	PQz+xcmD4puwUIxUDDhxEMKlTPdLCrI1eA1tOJDmY82mFN79GZJ6SOJitRx4lSkazDwN
-	bH/gzjGLJz99TJzMIncprgc6QgPkfIy6KeTuc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=nnXcxDISHQ9gVAPWAIISlV8QDTgZMKJ54Ur51a7TMOKrRY1RiSlAc5/GrmeV0jZznO
-	Y2vjQ4lemchK28AqeYN+pqXTVgZ/UV7YwDU/NTuxnPR+mcp5MSk9x83A9MPzLW8s+i04
-	36/gGtZ1ETJA/lm86ErmuRUWoHOME2kdABRMw=
-MIME-Version: 1.0
-Received: by 10.142.55.18 with SMTP id d18mr4795112wfa.29.1267652179314; Wed, 
-	03 Mar 2010 13:36:19 -0800 (PST)
-In-Reply-To: <hml6l5$oj0$1@dough.gmane.org>
-References: <hml6l5$oj0$1@dough.gmane.org>
-Date: Thu, 4 Mar 2010 08:06:19 +1030
-Message-ID: <6ec4247d1003031336t6e6c4c74tff38b528264a420d@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+	Thu, 04 Mar 2010 05:35:31 +0100
+Received: (qmail 27909 invoked by uid 399); 4 Mar 2010 04:32:23 -0000
+Received: from dsl-tn-dynamic-209.251.164.122.airtelbroadband.in (HELO
+	?192.168.1.4?) (balakrishnan@e-consystems.com@122.164.251.209)
+	by mail9.myhsphere.biz with ESMTPAM; 4 Mar 2010 04:32:23 -0000
+X-Originating-IP: 122.164.251.209
+X-Sender: balakrishnan@e-consystems.com
+From: balakrishnan <balakrishnan@e-consystems.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.222.196
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+Date: Thu, 04 Mar 2010 10:02:21 +0530
+Message-Id: <1267677141.3495.24.camel@balakrishnan-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-SA-Exim-Connect-IP: 204.10.105.69
+X-SA-Exim-Mail-From: balakrishnan@e-consystems.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: DL_DIR on nfs mount -> lockfile mayhem
+Subject: Xserver problem...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,50 +37,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Mar 2010 21:39:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 04 Mar 2010 04:35:31 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On 3 March 2010 18:59, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Hi,
->
-> One of my coworkers ran out of diskspace again and decided to move his
-> DL_DIR to the filer and access it over NFS. Now do_fetch just hangs for
-> nearly everything and we can get it to continue after removing the
-> lockfiles in DL_DIR manually, but that's not a good solution.
->
-> I don't touch NFS with a bargepole, but my coworker insists it's a valid
-> use-case :) So, is DL_DIR on nfs supported and if so, any clues why it
-> could break with lockfiles?
->
-> This is with bitbake 1.8 from git.
->
-> regards,
->
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFLjh3kMkyGM64RGpERAqZ0AJ9JlIjYNNApPue9ik+LsH4HBF1ACACfWsEi
-> CC1SVf3BR0QtLsMyOakTKA0=
-> =lGCK
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Hi,
+I am using Angstrom OS for my pxa270 based board, which is build by
+Stable/2009 branch. In this, Xserver is running perperly on  240x320 and
+640x480 resolution, but while running 480x272 resolution lcd 4.3" it
+making problem. How can I  resolve this.
 
-What is the nfs server running and what are your mount options? I've
-seen odd behaviour with applications using sqlite (e.g. firefox) on
-some nfs mounts: http://www.sqlite.org/faq.html#q5
+Version      :     xserver-kdrive-1_1.4.0.90-r5
+Branch       :     Stable/2009
 
-Does the problem go away when the filesystem is mounted -onolock ?
+Error log are,
+/*****************************************/
+root@regulus:~# Xfbdev -br -pn  -mouse tslib -hide-cursor :0 -noreset
+Warning: mode not found, using default
+error: Invalid argument
 
--Graham
+Fatal server error:
+no screens found
+root@regulus:~#
+/*****************************************/
+
+With Regards
+J.Balakrishnan.
+
 
 
