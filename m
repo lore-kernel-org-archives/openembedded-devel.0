@@ -1,37 +1,30 @@
-Received: from mail-qy0-f188.google.com ([209.85.221.188])
+Received: from bay0-omc4-s16.bay0.hotmail.com ([65.54.190.218])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jesmith@kaon.com>) id 1NnCHf-0002GZ-CG
+	(envelope-from <salehusman@hotmail.com>) id 1NnCMl-0005KI-Kg
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Mar 2010 15:44:19 +0100
-Received: by qyk26 with SMTP id 26so1691644qyk.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Mar 2010 06:41:22 -0800 (PST)
-Received: by 10.224.98.140 with SMTP id q12mr2022300qan.287.1267713679074;
-	Thu, 04 Mar 2010 06:41:19 -0800 (PST)
-Received: from [10.10.0.195] (216-230-77-82.client.cypresscom.net
-	[216.230.77.82])
-	by mx.google.com with ESMTPS id 8sm220095yxb.43.2010.03.04.06.41.17
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 04 Mar 2010 06:41:18 -0800 (PST)
-From: Joshua Smith <jesmith@kaon.com>
-Mime-Version: 1.0 (Apple Message framework v1077)
-Date: Thu, 4 Mar 2010 09:41:16 -0500
-In-Reply-To: <19c1b8a91003032123t4e402cb0u8db75a6862dca799@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-References: <B22FA4FC-2DB7-49E8-AB09-3FF8FC3D36D9@kaon.com>
-	<4CF74675-86F3-45C9-A837-5D5A3489F2A5@kaon.com>
-	<19c1b8a91003032123t4e402cb0u8db75a6862dca799@mail.gmail.com>
-Message-Id: <0209FF33-B31E-4779-B339-F0D678A6A075@kaon.com>
-X-Mailer: Apple Mail (2.1077)
-X-SA-Exim-Connect-IP: 209.85.221.188
-X-SA-Exim-Mail-From: jesmith@kaon.com
+	Thu, 04 Mar 2010 15:49:38 +0100
+Received: from BAY127-W15 ([65.54.190.199]) by bay0-omc4-s16.bay0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 4 Mar 2010 06:46:32 -0800
+Message-ID: <BAY127-W15AE83F66AE4F794A88917D8390@phx.gbl>
+X-Originating-IP: [203.82.49.5]
+From: saleh usman <salehusman@hotmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Date: Thu, 4 Mar 2010 19:46:32 +0500
+Importance: Normal
+MIME-Version: 1.0
+X-OriginalArrivalTime: 04 Mar 2010 14:46:32.0514 (UTC)
+	FILETIME=[7B400220:01CABBA9]
+X-SA-Exim-Connect-IP: 65.54.190.218
+X-SA-Exim-Mail-From: salehusman@hotmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,
-	MIME_QP_LONG_LINE autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	RCVD_IN_SORBS_WEB,SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Trying and Failing to enable Java with GCC 4.3.3
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: boost library issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,276 +38,335 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Mar 2010 14:44:19 -0000
-X-Groupsio-MsgNum: 17328
-Content-Type: multipart/mixed; boundary=Apple-Mail-14--503815610
-
---Apple-Mail-14--503815610
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
-
-Oh, sorry about that.  I've attached the do_configure log for gcc_cross.  D=
-oesn't look too helpful to me, but what do I know?  If you meant some other=
- configure log, let me know!
-
-In case it helps: before trying to build gcj inside OE, I was trying to bu=
-ild a native GCC compiler on the target machine (TouchBook, based on the Be=
-agleboard), and I got this same error when I tried configuring with --disab=
-le-shared (with --enabled-shared I had other problems).
-
-Thanks.
-
--Joshua
-
-On Mar 4, 2010, at 12:23 AM, Khem Raj wrote:
-
-> On Wed, Mar 3, 2010 at 9:19 AM, Joshua Smith <jesmith@kaon.com> wrote:
->> Update: I dug around in the log files and I think I have a more root ca=
-use of this error.
->>=20
->> configure: error: Link tests are not allowed after GCC_NO_EXECUTABLES.
->>=20
->> I've attached the whole log of the failing build.
->>=20
->> Any hints?
->>=20
->> On Mar 3, 2010, at 11:20 AM, Joshua Smith wrote:
->>=20
->>> Hello,
->>>=20
->>> I'm new to OE.  I'm trying to get GCJ compiled for the TouchBook (an A=
-RM-based tablet).  After some searching and trial-and-error, I figured out =
-that I need to add:
->>>=20
->>> JAVA_arm =3D ",java" to recipies/gcc-4.3.3.inc
->>>=20
->>> But now I'm getting an error when it tries to build gcc-cross-4.3.3:
->>>=20
->>> make[4]: Entering directory `/OE/build/tmp/work/armv7a-angstrom-linux-=
-gnueabi/gcc-cross-4.3.3-r7.1/gcc-4.3.3/build.i686-linux.arm-angstrom-linux-=
-gnueabi/64/zlib'
->>> make[4]: *** No rule to make target `all'.  Stop.
->>> make[4]: Leaving directory `/OE/build/tmp/work/armv7a-angstrom-linux-g=
-nueabi/gcc-cross-4.3.3-r7.1/gcc-4.3.3/build.i686-linux.arm-angstrom-linux-g=
-nueabi/64/zlib'
->>> make[3]: *** [multi-do] Error 1
->>> make[3]: Leaving directory `/OE/build/tmp/work/armv7a-angstrom-linux-g=
-nueabi/gcc-cross-4.3.3-r7.1/gcc-4.3.3/build.i686-linux.arm-angstrom-linux-g=
-nueabi/zlib'
->>> make[2]: *** [all-multi] Error 2
->>> make[2]: Leaving directory `/OE/build/tmp/work/armv7a-angstrom-linux-g=
-nueabi/gcc-cross-4.3.3-r7.1/gcc-4.3.3/build.i686-linux.arm-angstrom-linux-g=
-nueabi/zlib'
->>> make[1]: *** [all-zlib] Error 2
->>>=20
->>> (I can give you more of the log if it would help, but this is the firs=
-t error)
->>>=20
->>> I can see why adding Java would cause GCC to need zlib when maybe it d=
-idn't before.  But I don't know what to change to get zlib configured as pa=
-rt of the gcc build process.
->=20
-> for configure errors its better to post config.log which is generated
-> in the build tree. Thats where we can find the cause of error.
-> do_compile log wont help.
->=20
->=20
->>>=20
->>> Help?
->>>=20
->>> -Joshua Smith
->>>=20
->>=20
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>=20
->>=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
-
-
---Apple-Mail-14--503815610
-Content-Disposition: attachment;
-	filename=log.do_configure.17055
-Content-Type: application/octet-stream;
-	name="log.do_configure.17055"
+X-List-Received-Date: Thu, 04 Mar 2010 14:49:39 -0000
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-NOTE: Running /OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-4.=
-3.3-r7.1/gcc-4.3.3/configure 		    --build=3Di686-linux 		    --host=3Di686=
--linux 		    --target=3Darm-angstrom-linux-gnueabi 		    --prefix=3D/OE/bui=
-ld/tmp/cross/armv7a 		    --exec_prefix=3D/OE/build/tmp/cross/armv7a 		    =
---bindir=3D/OE/build/tmp/cross/armv7a/bin 		    --sbindir=3D/OE/build/tmp/c=
-ross/armv7a/bin 		    --libexecdir=3D/OE/build/tmp/cross/armv7a/libexec 		 =
-   --datadir=3D/OE/build/tmp/cross/armv7a/share 		    --sysconfdir=3D/OE/bu=
-ild/tmp/cross/armv7a/etc 		    --sharedstatedir=3D/OE/build/tmp/cross/armv7=
-a/com 		    --localstatedir=3D/OE/build/tmp/cross/armv7a/var 		    --libdir=
-=3D/OE/build/tmp/cross/armv7a/lib 		    --includedir=3D/OE/build/tmp/cross/=
-armv7a/include 		    --oldincludedir=3D/OE/build/tmp/cross/armv7a/include 	=
-	    --infodir=3D/OE/build/tmp/cross/armv7a/share/info 		    --mandir=3D/OE=
-/build/tmp/cross/armv7a/share/man 			                 --with-gnu-ld        =
-         --enable-shared                 --enable-target-optspace          =
-       --enable-languages=3Dc,c++,objc,fortran,java                 --enabl=
-e-threads=3Dposix                 --enable-multilib                 --enabl=
-e-c99                 --enable-long-long                 --enable-symvers=
-=3Dgnu                 --enable-libstdcxx-pch                 --program-pre=
-fix=3Darm-angstrom-linux-gnueabi-                   --enable-cheaders=3Dc_s=
-td --enable-libssp --disable-bootstrap --disable-libgomp --disable-libmudfl=
-ap                                  --with-local-prefix=3D/OE/build/tmp/sta=
-ging/armv7a-angstrom-linux-gnueabi/usr 		      --with-gxx-include-dir=3D/OE=
-/build/tmp/staging/armv7a-angstrom-linux-gnueabi//usr/include/c++          =
-             --with-sysroot=3D/OE/build/tmp/staging/armv7a-angstrom-linux-g=
-nueabi                       --with-build-sysroot=3D/OE/build/tmp/staging/a=
-rmv7a-angstrom-linux-gnueabi   --enable-cheaders=3Dc_std --disable-libunwin=
-d-exceptions --with-mpfr=3D/OE/build/tmp/staging/i686-linux/usr --enable-__=
-cxa_atexit 		    ...
-configure: loading site script /OE/ai.openembedded.dev/site/endian-little
-configure: loading site script /OE/ai.openembedded.dev/site/common-linux
-configure: loading site script /OE/ai.openembedded.dev/site/common-glibc
-configure: loading site script /OE/ai.openembedded.dev/site/ix86-common
-configure: loading site script /OE/ai.openembedded.dev/site/common
-configure: loading site script /OE/ai.openembedded.dev/site/common
-configure: loading site script /OE/ai.openembedded.dev/site/endian-little
-configure: loading site script /OE/ai.openembedded.dev/site/common-linux
-configure: loading site script /OE/ai.openembedded.dev/site/common-glibc
-configure: loading site script /OE/ai.openembedded.dev/site/ix86-common
-configure: loading site script /OE/ai.openembedded.dev/site/common
-configure: loading site script /OE/ai.openembedded.dev/site/common
-checking build system type... i686-pc-linux-gnu
-checking host system type... i686-pc-linux-gnu
-checking target system type... arm-angstrom-linux-gnueabi
-checking for a BSD-compatible install... /usr/bin/install -c
-checking whether ln works... yes
-checking whether ln -s works... yes
-checking for i686-linux-gcc... gcc=20
-checking for C compiler default output file name... a.out
-checking whether the C compiler works... yes
-checking whether we are cross compiling... no
-checking for suffix of executables...=20
-checking for suffix of object files... o
-checking whether we are using the GNU C compiler... yes
-checking whether gcc  accepts -g... yes
-checking for gcc  option to accept ANSI C... none needed
-checking for i686-linux-g++... g++
-checking whether we are using the GNU C++ compiler... yes
-checking whether g++ accepts -g... yes
-checking for i686-linux-gnatbind... no
-checking for gnatbind... no
-checking for i686-linux-gnatmake... no
-checking for gnatmake... no
-checking whether compiler driver understands Ada... no
-checking how to compare bootstrapped objects... cmp --ignore-initial=3D16 $=
-$f1 $$f2
-checking for correct version of gmp.h... yes
-checking for correct version of mpfr.h... yes
-The following languages will be built: c,c++,fortran,java,objc
-*** This configuration is not supported in the following subdirectories:
-     target-libobjc target-libada gnattools target-libgomp target-libmudfla=
-p
-    (Any other directories should still work fine.)
-checking for bison... bison -y
-checking for bison... bison
-checking for gm4... no
-checking for gnum4... no
-checking for m4... m4
-checking for flex... flex
-checking for flex... flex
-checking for makeinfo... makeinfo
-checking for expect... no
-checking for runtest... no
-checking for ar... (cached) ar
-checking for i686-linux-ar... (cached) ar
-checking for as... (cached) as
-checking for i686-linux-as... (cached) as
-checking for i686-linux-dlltool... no
-checking for dlltool... no
-checking for ld... (cached) ld
-checking for i686-linux-ld... (cached) ld
-checking for i686-linux-lipo... no
-checking for lipo... no
-checking for nm... (cached) nm
-checking for i686-linux-nm... (cached) nm
-checking for ranlib... (cached) ranlib
-checking for i686-linux-ranlib... (cached) ranlib
-checking for strip... (cached) strip
-checking for i686-linux-strip... (cached) strip
-checking for i686-linux-windres... no
-checking for windres... no
-checking for i686-linux-windmc... no
-checking for windmc... no
-checking for objcopy... (cached) objcopy
-checking for i686-linux-objcopy... (cached) objcopy
-checking for objdump... (cached) objdump
-checking for i686-linux-objdump... (cached) objdump
-checking for cc... (cached)  arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-=
-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp
-checking for gcc... (cached)  arm-angstrom-linux-gnueabi-gcc -march=3Darmv7=
--a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp
-checking for arm-angstrom-linux-gnueabi-c++... no
-checking for arm-angstrom-linux-gnueabi-g++... no
-checking for arm-angstrom-linux-gnueabi-cxx... no
-checking for arm-angstrom-linux-gnueabi-gxx... no
-checking for arm-angstrom-linux-gnueabi-gcc... arm-angstrom-linux-gnueabi-g=
-cc
-checking for arm-angstrom-linux-gnueabi-gcj... no
-checking for arm-angstrom-linux-gnueabi-gfortran... no
-checking for ar... /OE/build/tmp/cross/armv7a/arm-angstrom-linux-gnueabi/bi=
-n/ar
-checking for as... /OE/build/tmp/cross/armv7a/arm-angstrom-linux-gnueabi/bi=
-n/as
-checking for dlltool... no
-checking for arm-angstrom-linux-gnueabi-dlltool... no
-checking for ld... /OE/build/tmp/cross/armv7a/arm-angstrom-linux-gnueabi/bi=
-n/ld
-checking for lipo... no
-checking for arm-angstrom-linux-gnueabi-lipo... no
-checking for nm... /OE/build/tmp/cross/armv7a/arm-angstrom-linux-gnueabi/bi=
-n/nm
-checking for objdump... /OE/build/tmp/cross/armv7a/arm-angstrom-linux-gnuea=
-bi/bin/objdump
-checking for ranlib... /OE/build/tmp/cross/armv7a/arm-angstrom-linux-gnueab=
-i/bin/ranlib
-checking for strip... /OE/build/tmp/cross/armv7a/arm-angstrom-linux-gnueabi=
-/bin/strip
-checking for windres... no
-checking for arm-angstrom-linux-gnueabi-windres... no
-checking for windmc... no
-checking for arm-angstrom-linux-gnueabi-windmc... no
-checking where to find the target ar... pre-installed in /OE/build/tmp/cros=
-s/armv7a/arm-angstrom-linux-gnueabi/bin
-checking where to find the target as... pre-installed in /OE/build/tmp/cros=
-s/armv7a/arm-angstrom-linux-gnueabi/bin
-checking where to find the target cc... just compiled
-checking where to find the target c++... just compiled
-checking where to find the target c++ for libstdc++... just compiled
-checking where to find the target dlltool... pre-installed
-checking where to find the target gcc... just compiled
-checking where to find the target gcj... just compiled
-checking where to find the target gfortran... just compiled
-checking where to find the target ld... pre-installed in /OE/build/tmp/cros=
-s/armv7a/arm-angstrom-linux-gnueabi/bin
-checking where to find the target lipo... pre-installed
-checking where to find the target nm... pre-installed in /OE/build/tmp/cros=
-s/armv7a/arm-angstrom-linux-gnueabi/bin
-checking where to find the target objdump... pre-installed in /OE/build/tmp=
-/cross/armv7a/arm-angstrom-linux-gnueabi/bin
-checking where to find the target ranlib... pre-installed in /OE/build/tmp/=
-cross/armv7a/arm-angstrom-linux-gnueabi/bin
-checking where to find the target strip... pre-installed in /OE/build/tmp/c=
-ross/armv7a/arm-angstrom-linux-gnueabi/bin
-checking where to find the target windres... pre-installed
-checking where to find the target windmc... pre-installed
-checking whether to enable maintainer-specific portions of Makefiles... no
-checking whether -fkeep-inline-functions is supported... yes
-configure: creating ./config.status
-config.status: creating Makefile
 
---Apple-Mail-14--503815610--
+
+
+Hi=20
+I am getting an error of
+boost library while bitbaking an image.OE can not find boost file
+system library.Terminal log shows this error as
+| configure: error: cannot find boost_filesystem library.
+
+Image is of ossie and I am unable to resolve this problem.I already discuss=
+ed it with some people and it was told that ossie recipes are not updated.I=
+f that's problem which ossie recipes I need to update and how can I update =
+.Any guidance? link? webpage?
+
+Saleh
+
+Terminal log is looking like as follows.
+
+[saleh@localhost ~]$ bitbake ossie-image
+NOTE: Handling BitBake files: - (7660/7660) [100 %]
+NOTE: Parsing finished. 7053 cached=2C 300 parsed=2C 307 skipped=2C 0 maske=
+d.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 1224 of 2992 (ID: 1133=2C /oe/ossie_collection/recipes/o=
+ssie-libraries/ossie-cf_svn.bb=2C do_configure)
+ERROR: function do_configure failed
+ERROR:
+log data follows
+(/home/saleh/tmp/work/armv5te-angstrom-linux-gnueabi/ossie-cf-0.0.0+svnr247=
+-r1/temp/log.do_configure.3404)
+| automake (GNU automake) 1.10.2
+| Copyright (C) 2008 Free Software Foundation=2C Inc.
+| License GPLv2+: GNU GPL version 2 or later <http://gnu.org/licenses/gpl.h=
+tml>
+| This is free software: you are free to change and redistribute it.
+| There is NO WARRANTY=2C to the extent permitted by law.
+|=20
+| Written by Tom Tromey <tromey@redhat.com>
+|        and Alexandre Duret-Lutz <adl@gnu.org>.
+| AUTOV is 1.10
+|
+NOTE: Executing autoreconf --verbose --install --force
+--exclude=3Dautopoint
+-I/home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal-=
+1.10
+-I
+/home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal
+| autoreconf: Entering directory `.'
+| autoreconf: configure.ac: not using Gettext
+|
+autoreconf: running: aclocal -I
+/home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal-1.=
+10
+-I
+/home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal
+--force
+|
+/home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/li=
+bpcap.m4:923:
+warning: underquoted definition of
+AC_LBL_LINUX_TPACKET_AUXDATA_TP_VLAN_TCI
+|
+/home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/li=
+bpcap.m4:923: =20
+run info '(automake)Extending aclocal'
+|
+/home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/li=
+bpcap.m4:923: =20
+or see
+http://sources.redhat.com/automake/automake.html#Extending-aclocal
+| autoreconf: configure.ac: tracing
+| autoreconf: running: libtoolize --copy --force
+| libtoolize: putting auxiliary files in `.'.
+| libtoolize: copying file `./ltmain.sh'
+| libtoolize: Consider adding `AC_CONFIG_MACRO_DIR([m4])' to configure.ac a=
+nd
+| libtoolize: rerunning libtoolize=2C to keep the correct libtool macros in=
+-tree.
+| libtoolize: Consider adding `-I m4' to ACLOCAL_AMFLAGS in Makefile.am.
+|
+/home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/li=
+bpcap.m4:923:
+warning: underquoted definition of
+AC_LBL_LINUX_TPACKET_AUXDATA_TP_VLAN_TCI
+|
+/home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/li=
+bpcap.m4:923: =20
+run info '(automake)Extending aclocal'
+|
+/home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/share/aclocal/li=
+bpcap.m4:923: =20
+or see
+http://sources.redhat.com/automake/automake.html#Extending-aclocal
+|
+autoreconf: running:
+/home/saleh/tmp/staging/i686-linux/usr/bin/autoconf
+--include=3D/home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/shar=
+e/aclocal-1.10
+--include=3D/home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/shar=
+e/aclocal
+--force --warnings=3Dcross
+| autoreconf: configure.ac: not using Autoheader
+| autoreconf: running: automake --foreign --add-missing --copy --force-miss=
+ing --warnings=3Dcross
+| automake: unknown warning category `cross'
+| autoreconf: running: gnu-configize
+| autoreconf: Leaving directory `.'
+|
+NOTE: Running
+/home/saleh/tmp/work/armv5te-angstrom-linux-gnueabi/ossie-cf-0.0.0+svnr247-=
+r1/trunk/configure             =20
+--build=3Di686-linux            =20
+--host=3Darm-angstrom-linux-gnueabi             =20
+--target=3Darm-angstrom-linux-gnueabi     --prefix=3D/usr                 =
+=20
+--exec_prefix=3D/usr              --bindir=3D/usr/bin             =20
+--sbindir=3D/usr/sbin                   =20
+--libexecdir=3D/usr/libexec             =20
+--datadir=3D/usr/share                    --sysconfdir=3D/etc    =20
+--sharedstatedir=3D/com                  =20
+--localstatedir=3D/var                   --libdir=3D/usr/lib              =
+=20
+--includedir=3D/usr/include             =20
+--oldincludedir=3D/usr/include                  =20
+--infodir=3D/usr/share/info            =20
+--mandir=3D/usr/share/man                    =20
+--with-omniorb=3D/home/saleh/tmp/staging/armv5te-angstrom-linux-gnueabi/usr=
+/bin/..
+IDL=3D/home/saleh/tmp/staging/i686-linux/usr/bin/omniidl                   =
+=20
+...
+| configure: WARNING: unrecognized options: --with-omniorb
+| configure: loading site script /oe/openembedded/site/endian-little
+| configure: loading site script /oe/openembedded/site/common-linux
+| configure: loading site script /oe/openembedded/site/common-glibc
+| configure: loading site script /oe/openembedded/site/arm-common
+| configure: loading site script /oe/openembedded/site/arm-linux
+| configure: loading site script /oe/openembedded/site/common
+| configure: loading site script /oe/openembedded/site/common
+| checking for a BSD-compatible install... /usr/bin/install -c
+| checking whether build environment is sane... yes
+| checking for a thread-safe mkdir -p... /bin/mkdir -p
+| checking for gawk... gawk
+| checking whether make sets $(MAKE)... yes
+| checking for arm-angstrom-linux-gnueabi-strip... arm-angstrom-linux-gnuea=
+bi-strip
+| checking for C++ compiler default output file name... a.out
+| checking whether the C++ compiler works... yes
+| checking whether we are cross compiling... yes
+| checking for suffix of executables...
+| checking for suffix of object files... o
+| checking whether we are using the GNU C++ compiler... yes
+|
+checking whether ccache arm-angstrom-linux-gnueabi-g++ -march=3Darmv5te
+-mtune=3Darm926ej-s -mthumb-interwork -mno-thumb accepts -g... yes
+| checking for style of include used by make... GNU
+|
+checking dependency style of ccache arm-angstrom-linux-gnueabi-g++
+-march=3Darmv5te -mtune=3Darm926ej-s -mthumb-interwork -mno-thumb... gcc3
+| checking for a BSD-compatible install... /usr/bin/install -c
+| checking whether make sets $(MAKE)... (cached) yes
+| checking build system type... i686-pc-linux-gnu
+| checking host system type... arm-angstrom-linux-gnueabi
+|
+checking for arm-angstrom-linux-gnueabi-gcc... ccache
+arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te -mtune=3Darm926ej-s
+-mthumb-interwork -mno-thumb
+| checking whether we are using the GNU C compiler... yes
+|
+checking whether ccache arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te
+-mtune=3Darm926ej-s -mthumb-interwork -mno-thumb accepts -g... yes
+|
+checking for ccache arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te
+-mtune=3Darm926ej-s -mthumb-interwork -mno-thumb option to accept ISO
+C89... none needed
+| checking dependency style of ccache
+arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te -mtune=3Darm926ej-s
+-mthumb-interwork -mno-thumb... gcc3
+| checking for a sed that does not truncate output... /bin/sed
+| checking for grep that handles long lines and -e... /bin/grep
+| checking for egrep... /bin/grep -E
+| checking for fgrep... /bin/grep -F
+|
+checking for ld used by ccache arm-angstrom-linux-gnueabi-gcc
+-march=3Darmv5te -mtune=3Darm926ej-s -mthumb-interwork -mno-thumb...
+arm-angstrom-linux-gnueabi-ld
+| checking if the linker (arm-angstrom-linux-gnueabi-ld) is GNU ld... yes
+| checking for BSD- or MS-compatible name lister (nm)... arm-angstrom-linux=
+-gnueabi-nm
+| checking the name lister (arm-angstrom-linux-gnueabi-nm) interface... BSD=
+ nm
+| checking whether ln -s works... yes
+| checking the maximum length of command line arguments... 98304
+| checking whether the shell understands some XSI constructs... yes
+| checking whether the shell understands "+=3D"... yes
+| checking for arm-angstrom-linux-gnueabi-ld option to reload object files.=
+.. -r
+| checking for arm-angstrom-linux-gnueabi-objdump... arm-angstrom-linux-gnu=
+eabi-objdump
+| checking how to recognize dependent libraries... pass_all
+| checking for arm-angstrom-linux-gnueabi-ar... arm-angstrom-linux-gnueabi-=
+ar
+| checking for arm-angstrom-linux-gnueabi-strip... (cached) arm-angstrom-li=
+nux-gnueabi-strip
+| checking for arm-angstrom-linux-gnueabi-ranlib... arm-angstrom-linux-gnue=
+abi-ranlib
+|
+checking command to parse arm-angstrom-linux-gnueabi-nm output from
+ccache arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te -mtune=3Darm926ej-s
+-mthumb-interwork -mno-thumb object... ok
+| checking how to run the C preprocessor... arm-angstrom-linux-gnueabi-gcc =
+-E
+| checking for ANSI C header files... yes
+| checking for sys/types.h... yes
+| checking for sys/stat.h... yes
+| checking for stdlib.h... yes
+| checking for string.h... yes
+| checking for memory.h... yes
+| checking for strings.h... yes
+| checking for inttypes.h... yes
+| checking for stdint.h... yes
+| checking for unistd.h... yes
+| checking for dlfcn.h... yes
+| checking whether we are using the GNU C++ compiler... (cached) yes
+|
+checking whether ccache arm-angstrom-linux-gnueabi-g++ -march=3Darmv5te
+-mtune=3Darm926ej-s -mthumb-interwork -mno-thumb accepts -g... (cached)
+yes
+| checking dependency style of ccache
+arm-angstrom-linux-gnueabi-g++ -march=3Darmv5te -mtune=3Darm926ej-s
+-mthumb-interwork -mno-thumb... (cached) gcc3
+| checking how to run
+the C++ preprocessor... ccache arm-angstrom-linux-gnueabi-g++
+-march=3Darmv5te -mtune=3Darm926ej-s -mthumb-interwork -mno-thumb -E
+| checking for objdir... .libs
+|
+checking if ccache arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te
+-mtune=3Darm926ej-s -mthumb-interwork -mno-thumb supports -fno-rtti
+-fno-exceptions... no
+| checking for ccache
+arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te -mtune=3Darm926ej-s
+-mthumb-interwork -mno-thumb option to produce PIC... -fPIC -DPIC
+|
+checking if ccache arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te
+-mtune=3Darm926ej-s -mthumb-interwork -mno-thumb PIC flag -fPIC -DPIC
+works... yes
+| checking if ccache arm-angstrom-linux-gnueabi-gcc
+-march=3Darmv5te -mtune=3Darm926ej-s -mthumb-interwork -mno-thumb static
+flag -static works... yes
+| checking if ccache
+arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te -mtune=3Darm926ej-s
+-mthumb-interwork -mno-thumb supports -c -o file.o... yes
+| checking
+if ccache arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te
+-mtune=3Darm926ej-s -mthumb-interwork -mno-thumb supports -c -o file.o...
+(cached) yes
+| checking whether the ccache
+arm-angstrom-linux-gnueabi-gcc -march=3Darmv5te -mtune=3Darm926ej-s
+-mthumb-interwork -mno-thumb linker (arm-angstrom-linux-gnueabi-ld)
+supports shared libraries... yes
+| checking whether -lc should be explicitly linked in... no
+| checking dynamic linker characteristics... GNU/Linux ld.so
+| checking how to hardcode library paths into programs... immediate
+| checking whether stripping libraries is possible... yes
+| checking if libtool supports shared libraries... yes
+| checking whether to build shared libraries... yes
+| checking whether to build static libraries... yes
+|
+checking for ld used by ccache arm-angstrom-linux-gnueabi-g++
+-march=3Darmv5te -mtune=3Darm926ej-s -mthumb-interwork -mno-thumb...
+arm-angstrom-linux-gnueabi-ld
+| checking if the linker (arm-angstrom-linux-gnueabi-ld) is GNU ld... yes
+|
+checking whether the ccache arm-angstrom-linux-gnueabi-g++
+-march=3Darmv5te -mtune=3Darm926ej-s -mthumb-interwork -mno-thumb linker
+(arm-angstrom-linux-gnueabi-ld) supports shared libraries... yes
+|
+checking for ccache arm-angstrom-linux-gnueabi-g++ -march=3Darmv5te
+-mtune=3Darm926ej-s -mthumb-interwork -mno-thumb option to produce PIC...
+-fPIC -DPIC
+| checking if ccache arm-angstrom-linux-gnueabi-g++
+-march=3Darmv5te -mtune=3Darm926ej-s -mthumb-interwork -mno-thumb PIC flag
+-fPIC -DPIC works... yes
+| checking if ccache
+arm-angstrom-linux-gnueabi-g++ -march=3Darmv5te -mtune=3Darm926ej-s
+-mthumb-interwork -mno-thumb static flag -static works... yes
+|
+checking if ccache arm-angstrom-linux-gnueabi-g++ -march=3Darmv5te
+-mtune=3Darm926ej-s -mthumb-interwork -mno-thumb supports -c -o file.o...
+yes
+| checking if ccache arm-angstrom-linux-gnueabi-g++
+-march=3Darmv5te -mtune=3Darm926ej-s -mthumb-interwork -mno-thumb supports
+-c -o file.o... (cached) yes
+| checking whether the ccache
+arm-angstrom-linux-gnueabi-g++ -march=3Darmv5te -mtune=3Darm926ej-s
+-mthumb-interwork -mno-thumb linker (arm-angstrom-linux-gnueabi-ld)
+supports shared libraries... yes
+| checking dynamic linker characteristics... GNU/Linux ld.so
+| checking how to hardcode library paths into programs... immediate
+| checking for main in -lomniORB4... yes
+| checking omniORB4/CORBA.h usability... yes
+| checking omniORB4/CORBA.h presence... yes
+| checking for omniORB4/CORBA.h... yes
+| checking for omniidl... /home/saleh/tmp/staging/i686-linux/usr/bin/omniid=
+l
+| checking boost/filesystem/operations.hpp usability... yes
+| checking boost/filesystem/operations.hpp presence... yes
+| checking for boost/filesystem/operations.hpp... yes
+| checking for main in -lboost_filesystem... no
+| configure: error: cannot find boost_filesystem library.
+| FATAL: oe_runconf failed
+NOTE: Task failed: /home/saleh/tmp/work/armv5te-angstrom-linux-gnueabi/ossi=
+e-cf-0.0.0+svnr247-r1/temp/log.do_configure.3404
+ERROR: TaskFailed event exception=2C aborting
+ERROR: Build of /oe/ossie_collection/recipes/ossie-libraries/ossie-cf_svn.b=
+b do_configure failed
+ERROR: Task 1133 (/oe/ossie_collection/recipes/ossie-libraries/ossie-cf_svn=
+.bb=2C do_configure) failed
+NOTE: Tasks Summary: Attempted 1223 tasks of which 1223 didn't need to be r=
+erun and 1 failed.
+ERROR: '/oe/ossie_collection/recipes/ossie-libraries/ossie-cf_svn.bb' faile=
+d 		 	   		 =20
+_________________________________________________________________
+Hotmail: Powerful Free email with security by Microsoft.
+https://signup.live.com/signup.aspx?id=3D60969=
+
