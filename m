@@ -1,35 +1,37 @@
-Received: from asmtpout023.mac.com ([17.148.16.98])
+Received: from mail-qy0-f188.google.com ([209.85.221.188])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1NnCGI-0006EW-Bk
+	(envelope-from <jesmith@kaon.com>) id 1NnCHf-0002GZ-CG
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Mar 2010 15:42:56 +0100
-MIME-version: 1.0
-Received: from [87.201.169.110] by asmtp023.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0KYR00DALI25T250@asmtp023.mac.com> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	04 Mar 2010 06:39:57 -0800 (PST)
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
-	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
-	adjust=0
-	reason=mlx engine=5.0.0-0908210000 definitions=main-1003040099
-From: Elvis Dowson <elvis.dowson@mac.com>
-Date: Thu, 04 Mar 2010 18:39:33 +0400
-In-reply-to: <930003.70932.qm@web110214.mail.gq1.yahoo.com>
+	Thu, 04 Mar 2010 15:44:19 +0100
+Received: by qyk26 with SMTP id 26so1691644qyk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Mar 2010 06:41:22 -0800 (PST)
+Received: by 10.224.98.140 with SMTP id q12mr2022300qan.287.1267713679074;
+	Thu, 04 Mar 2010 06:41:19 -0800 (PST)
+Received: from [10.10.0.195] (216-230-77-82.client.cypresscom.net
+	[216.230.77.82])
+	by mx.google.com with ESMTPS id 8sm220095yxb.43.2010.03.04.06.41.17
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 04 Mar 2010 06:41:18 -0800 (PST)
+From: Joshua Smith <jesmith@kaon.com>
+Mime-Version: 1.0 (Apple Message framework v1077)
+Date: Thu, 4 Mar 2010 09:41:16 -0500
+In-Reply-To: <19c1b8a91003032123t4e402cb0u8db75a6862dca799@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <930003.70932.qm@web110214.mail.gq1.yahoo.com>
-Message-id: <30D126FB-B70F-4E4F-9A79-3164583C495F@mac.com>
+References: <B22FA4FC-2DB7-49E8-AB09-3FF8FC3D36D9@kaon.com>
+	<4CF74675-86F3-45C9-A837-5D5A3489F2A5@kaon.com>
+	<19c1b8a91003032123t4e402cb0u8db75a6862dca799@mail.gmail.com>
+Message-Id: <0209FF33-B31E-4779-B339-F0D678A6A075@kaon.com>
 X-Mailer: Apple Mail (2.1077)
-X-SA-Exim-Connect-IP: 17.148.16.98
-X-SA-Exim-Mail-From: elvis.dowson@mac.com
+X-SA-Exim-Connect-IP: 209.85.221.188
+X-SA-Exim-Mail-From: jesmith@kaon.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,
+	MIME_QP_LONG_LINE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: beagleboard-demo-image compiling errors in Fedora 12
+Subject: Re: Trying and Failing to enable Java with GCC 4.3.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,367 +45,276 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Mar 2010 14:42:56 -0000
-Content-Type: text/plain; charset=windows-1252
+X-List-Received-Date: Thu, 04 Mar 2010 14:44:19 -0000
+X-Groupsio-MsgNum: 17328
+Content-Type: multipart/mixed; boundary=Apple-Mail-14--503815610
+
+--Apple-Mail-14--503815610
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+Oh, sorry about that.  I've attached the do_configure log for gcc_cross.  D=
+oesn't look too helpful to me, but what do I know?  If you meant some other=
+ configure log, let me know!
+
+In case it helps: before trying to build gcj inside OE, I was trying to bu=
+ild a native GCC compiler on the target machine (TouchBook, based on the Be=
+agleboard), and I got this same error when I tried configuring with --disab=
+le-shared (with --enabled-shared I had other problems).
+
+Thanks.
+
+-Joshua
+
+On Mar 4, 2010, at 12:23 AM, Khem Raj wrote:
+
+> On Wed, Mar 3, 2010 at 9:19 AM, Joshua Smith <jesmith@kaon.com> wrote:
+>> Update: I dug around in the log files and I think I have a more root ca=
+use of this error.
+>>=20
+>> configure: error: Link tests are not allowed after GCC_NO_EXECUTABLES.
+>>=20
+>> I've attached the whole log of the failing build.
+>>=20
+>> Any hints?
+>>=20
+>> On Mar 3, 2010, at 11:20 AM, Joshua Smith wrote:
+>>=20
+>>> Hello,
+>>>=20
+>>> I'm new to OE.  I'm trying to get GCJ compiled for the TouchBook (an A=
+RM-based tablet).  After some searching and trial-and-error, I figured out =
+that I need to add:
+>>>=20
+>>> JAVA_arm =3D ",java" to recipies/gcc-4.3.3.inc
+>>>=20
+>>> But now I'm getting an error when it tries to build gcc-cross-4.3.3:
+>>>=20
+>>> make[4]: Entering directory `/OE/build/tmp/work/armv7a-angstrom-linux-=
+gnueabi/gcc-cross-4.3.3-r7.1/gcc-4.3.3/build.i686-linux.arm-angstrom-linux-=
+gnueabi/64/zlib'
+>>> make[4]: *** No rule to make target `all'.  Stop.
+>>> make[4]: Leaving directory `/OE/build/tmp/work/armv7a-angstrom-linux-g=
+nueabi/gcc-cross-4.3.3-r7.1/gcc-4.3.3/build.i686-linux.arm-angstrom-linux-g=
+nueabi/64/zlib'
+>>> make[3]: *** [multi-do] Error 1
+>>> make[3]: Leaving directory `/OE/build/tmp/work/armv7a-angstrom-linux-g=
+nueabi/gcc-cross-4.3.3-r7.1/gcc-4.3.3/build.i686-linux.arm-angstrom-linux-g=
+nueabi/zlib'
+>>> make[2]: *** [all-multi] Error 2
+>>> make[2]: Leaving directory `/OE/build/tmp/work/armv7a-angstrom-linux-g=
+nueabi/gcc-cross-4.3.3-r7.1/gcc-4.3.3/build.i686-linux.arm-angstrom-linux-g=
+nueabi/zlib'
+>>> make[1]: *** [all-zlib] Error 2
+>>>=20
+>>> (I can give you more of the log if it would help, but this is the firs=
+t error)
+>>>=20
+>>> I can see why adding Java would cause GCC to need zlib when maybe it d=
+idn't before.  But I don't know what to change to get zlib configured as pa=
+rt of the gcc build process.
+>=20
+> for configure errors its better to post config.log which is generated
+> in the build tree. Thats where we can find the cause of error.
+> do_compile log wont help.
+>=20
+>=20
+>>>=20
+>>> Help?
+>>>=20
+>>> -Joshua Smith
+>>>=20
+>>=20
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>=20
+>>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+
+
+--Apple-Mail-14--503815610
+Content-Disposition: attachment;
+	filename=log.do_configure.17055
+Content-Type: application/octet-stream;
+	name="log.do_configure.17055"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Kai,
-                I have resolve the build issued for Fedora 12 x86 64-bit =
-for the Overo, should work the same for the beagle board.
-
-Best regards,
-
-Elvis Dowson
-
-Technote Overo-031: How to setup a development environment for the Overo =
-platform using a Fedora-12 x86 64-bit VMware image
-
-Overview
-
-This document describes how to setup a development environment for the =
-Overo platform using a Fedora-12 x86 64-bit VMware image.
-
-Procedure
-
-Step 01.00: Install Fedora 12 x86 64-bit into a VMware image.
-
-Ensure that you install the following packages
-	- development-libraries
-	- development-tools
-
-Create a new user group called =91developers=92.=20
-
-Change the primary group for all developers to the =91developers=92 =
-group, e.g. for user =91elvis=92, change the primary group to =
-=91developers=92.
-
-Step 02.00: Enable root login.
-
-Step 02.01: Login as a regular user
-
-$ su
-# vi /etc/pam.d/gdm
-
-Click =91A=92 and remove user!=3Droot from the following line
-
-auth required pam_succeed_if.so user!=3Droot quiet
-
-Click Esc and then type the following command :wq!
-
-Now modify the gdm-password file
-
-# vi /etc/pam.d/gdm-password
-
-Click =91A=92 and remove user!=3Droot from the following line
-
-auth required pam_succeed_if.so user!=3Droot quiet
-
-Click Esc and then type the following command :wq!
-
-Step 02.03: Modify /etc/sysctl.conf to make vm.mmap_min_addr =3D 0.
-
-# vi /etc/sysctl.conf
-
-Add the following line to the sysctl.conf file
-vm.mmap_min_addr =3D 0
-
-Step 02.03: Relogin as root
-
-
-Step 03.00: Install the vmware tools
-
-$ su
-# cd Download/vmware-tools-distrib
-# ./vmware-install.pl
-
-You can run the VMware Tools by invoking the following command:
-
-# /usr/bin/vmware-toolbox
-
-To enable advanced X features
-=20
-1. Manually start /user/bin/vmware-user
-2. Log out and log back into your desktop session
-3. Restart your X session
-
-
-Step 04.00: Install Sun JDK 1.5 update 12 64-bit (optional, only =
-required for android development, not yet validated)
-
-$ cd Downloads/
-$ ./jdk-1_5_0_12-linux-amd64.bin
-
-Move the extracted jdk files to a common tools folders
-
-$ mv -f jdk1.5.0_12* /tool/java
-
-When running the java command, Fedora will prefer to use OpenJDK, in =
-order to use Sun Java use the alternatives command:
-
-$ sudo /usr/sbin/alternatives --install /usr/bin/java java =
-/tool/java/jdk1.5.0_12/bin/java 20000
-$ java -version
-java version "1.5.0_12"
-Java(TM) 2 Runtime Environment, Standard Edition (build 1.5.0_12-b04)
-Java HotSpot(TM) 64-Bit Server VM (build 1.5.0_12-b04, mixed mode)
-
-If you wish update the JDK package, simply delete the =
-/tool/java/jdk1.5.0_12 directory and copy the newer download to =
-/tool/java. You do NOT have to re-run alternatives those settings should =
-remain intact
-
-
-Step 05.00: Install Psyco JIT compiler (skip this step, doesn't work for =
-64-bits yet)
-
-Step 05.01: Download Psyco JIT compiler sources from svn
-
-$ svn co http://codespeak.net/svn/psyco/dist/ psyco-dist
-
-Step 05.02: Run the python installation script as a super user=20
-
-$ su python setup.py install
-
-
-Step 06.00: Download, build and install kermit
-
-$ cd /tool
-$ wget ftp://www.columbia.edu/kermit/test/tar/x.tar.gz
-$ tar zxvf x.tar.gz
-$ cd ckermit-9.0
-$ make linux
-$ su
-# make install
-
-This will install kermit in /usr/local/bin/
-
-Set the permissions for /dev/ttyUSB0, so that a developer can access the =
-Overo USB console.
-
-$ su
-# chgrp developers /dev/ttyUSB0
-
-
-Step 07.00: Setup the Overo build environment
-
-Step 07.01: Check out the OpenEmbedded build system.
-
-$ cd /tool
-$ mkdir overo-oe
-$ cd overo-oe
-$ git clone git://gitorious.org/gumstix-oe/mainline.git =
-org.openembedded.dev
-$ cd org.openembedded.dev
-$ git checkout --track -b overo origin/overo
-
-Step 07.02: Checkout BitBake.
-
-$ cd /tool/overo-oe
-$ git clone git://git.openembedded.org/bitbake.git
-$ cd bitbake
-$ git checkout -b 1.8 --track origin/1.8
-$ cd ..
-
-
-Step 07.03: Creating the OE configuration files and profile.
-
-We now will create a profile script and the configuration files required =
-to tailor OE to our needs.
-
-To make this a somewhat easier task, there is a template for the =
-required files in the openembedded installation we just did.
-
-Copy these files to your overo-oe directory:
-
-$ cp -r org.openembedded.dev/contrib/gumstix/build .
-
-If you have followed the example installation and placed the build =
-system in overo-oe in your home directory, you are now ready to proceed =
-to the next step. If you have installed the build system in a different =
-location you will need to edit overo-oe/build/profile and change the =
-definition of OVEROTOP as appropriate.
-
-
-Step 07.04: Setup source code caching.
-
-As part of the build process OpenEmbedded downloads source code tarballs =
-for the linux kernel, compiler, and other software packages.=20
-
-By default this source code cache will be placed in overo-oe/sources. If =
-you would like this cache to be located elsewhere, now is the time to =
-edit build/conf/site.conf and set DL_DIR as appropriate.
-
-For example, if you would like to cache the sources in =
-/usr/share/sources, perform the following steps:
-
-Add new group for cache management and add operating user to this group.
-
-$ sudo groupadd oe
-$ sudo usermod -a -G oe {your_username}
-
-Next make source code storing directory and set owner and permission =
-appropriately.
-
-$ sudo mkdir /usr/share/sources
-$ sudo chgrp oe /usr/share/sources
-$ sudo chmod 0775 /usr/share/sources
-$ sudo chmod ug+s /usr/share/sources
-
-Edit the buid/conf/site.conf and set DL_DIR to /usr/share/sources as =
-follows:
-
-DL_DIR =3D "/usr/share/sources"
-
-Step 07.05: Improve build performance by modifying site.conf to use =
-multiple cores
-
-Edit build/conf/site.conf
-
-PARALLEL_MAKE =3D "-j 6"
-BB_NUMBER_THREADS =3D "6"
-
-Step 07.06: Reduce disk space usage by modifying local.conf=20
-
-If you don't need OE to keep around the package source files (and other =
-work files), you can add the following entry to your local.conf:
-
-INHERIT +=3D "rm_work"
-
-This will significantly reduce the amount of disk space used.
-
-Step 07.07: Modify your .bashrc file.
-
-# .bashrc
-
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
-fi
-
-# User specific aliases and functions
-
-#
-# Environment setup for java
-#
-
-export JAVA_HOME=3D"/tool/java/jdk1.5.0_12"
-export PATH=3D"${JAVA_HOME}/bin:$PATH"
-
-#
-# end java setup
-#
-
-
-#
-# Environment setup for oe
-#
-
-export BB_ENV_EXTRAWHITE=3D"MACHINE DISTRO ANGSTROM_MODE OVEROTOP =
-OEBRANCH USERBRANCH"
-
-export OVEROTOP=3D"/tool/overo-oe"
-export OEBRANCH=3D"${OVEROTOP}/org.openembedded.dev"
-export USERBRANCH=3D"${OVEROTOP}/user.collection"
-
-export CROSSCOMPILER=3D"armv7a"
-export =
-PATH=3D"${OVEROTOP}/bitbake/bin:${OVEROTOP}/tmp/cross/${CROSSCOMPILER}/bin=
-:$PATH"
-export BBPATH=3D"${OVEROTOP}/build:${USERBRANCH}:${OEBRANCH}"
-
-umask 0002
-
-#
-# end oe setup
-#
-
-#
-# Environment setup for android
-#
-
-export REPOTOP=3D"/tool/script"
-export ANDROID_JAVA_HOME=3D$JAVA_HOME
-export ANDROID_TOP=3D"/tool/android"
-export ANDROID_HOST=3D"linux-x86"
-export ANDROID_HOST_TOOLS=3D"${ANDROID_TOP}/out/host/${ANDROID_HOST}/bin"
-export PATH=3D"${REPOTOP}:${ANDROID_HOST_TOOLS}:$PATH"
-
-#
-# end android setup
-#
-
-
-Step 08.00: Install additional packages required by BitBake.
-
-$ su
-# yum install help2man
-# yum install texi2html
-
-
-Step 09.00: Install additional packages required by Fedora 12 x86 =
-64-bit.
-
-$ su
-# yum install glibc-static
-
-If you are going to build the android SDK, you should install the =
-following additional 32-bit libraries
-
-# yum install glibc.i686
-# yum install glibc-devel.i686
-# yum install libstdc++.i686
-# yum install zlib-devel.i686
-# yum install ncurses-devel.i686
-# yum install libX11-devel.i686
-# yum install readline-devel.i686
-# yum install gperf
-
-
-=20
-In general, if you find a error about a missing shared library, type yum =
-install /usr/lib.so to find the name of the x86_64 package, and then =
-type yum install packagename.i686 to install the 32-bit binary.
-
-Step 10.00: Build a basic kernel and a non-gui root file system image in =
-one step using the following command
-
-$ bitbake omap3-console-image
-$ bitbake x-load
-$ bitbake u-boot-omap3
-
-Additional bitbake recipies can be found in =
-org.openembedded.dev/packages/image
-
-$ bitbake omap3-desktop-image
-$ bitbake omap3-udesktop-image
-
-If BitBake complains about the mmap_min_addr not being set to 0, type =
-the following :
-
-$ su
-# echo =930=94 > /proc/sys/vm/mmap_min_addr
-
-Step 11.00: Update the org.openembedded.dev sources at regular intervals =
-by typing the following command
-
-$ cd org.openembedded.dev
-$ git pull
-
-
-Related Topics
-
-01. Nabble - Fedora Test List - what package will give me =
-/lib/ld-linux.so.2 on x86_64?
-
-
-Related Links
-
-01. How to install OpenEmbedded and Bitbake - PIXHAWK.
-
-02. Quick Command Reference for OE - PIXHAWK.
-
-03. Git cheat sheet - Zack Rusin.
-
-04. Personal Fedora 9 Installation Guide - Using Sun Java Instead.
-
-
+NOTE: Running /OE/build/tmp/work/armv7a-angstrom-linux-gnueabi/gcc-cross-4.=
+3.3-r7.1/gcc-4.3.3/configure 		    --build=3Di686-linux 		    --host=3Di686=
+-linux 		    --target=3Darm-angstrom-linux-gnueabi 		    --prefix=3D/OE/bui=
+ld/tmp/cross/armv7a 		    --exec_prefix=3D/OE/build/tmp/cross/armv7a 		    =
+--bindir=3D/OE/build/tmp/cross/armv7a/bin 		    --sbindir=3D/OE/build/tmp/c=
+ross/armv7a/bin 		    --libexecdir=3D/OE/build/tmp/cross/armv7a/libexec 		 =
+   --datadir=3D/OE/build/tmp/cross/armv7a/share 		    --sysconfdir=3D/OE/bu=
+ild/tmp/cross/armv7a/etc 		    --sharedstatedir=3D/OE/build/tmp/cross/armv7=
+a/com 		    --localstatedir=3D/OE/build/tmp/cross/armv7a/var 		    --libdir=
+=3D/OE/build/tmp/cross/armv7a/lib 		    --includedir=3D/OE/build/tmp/cross/=
+armv7a/include 		    --oldincludedir=3D/OE/build/tmp/cross/armv7a/include 	=
+	    --infodir=3D/OE/build/tmp/cross/armv7a/share/info 		    --mandir=3D/OE=
+/build/tmp/cross/armv7a/share/man 			                 --with-gnu-ld        =
+         --enable-shared                 --enable-target-optspace          =
+       --enable-languages=3Dc,c++,objc,fortran,java                 --enabl=
+e-threads=3Dposix                 --enable-multilib                 --enabl=
+e-c99                 --enable-long-long                 --enable-symvers=
+=3Dgnu                 --enable-libstdcxx-pch                 --program-pre=
+fix=3Darm-angstrom-linux-gnueabi-                   --enable-cheaders=3Dc_s=
+td --enable-libssp --disable-bootstrap --disable-libgomp --disable-libmudfl=
+ap                                  --with-local-prefix=3D/OE/build/tmp/sta=
+ging/armv7a-angstrom-linux-gnueabi/usr 		      --with-gxx-include-dir=3D/OE=
+/build/tmp/staging/armv7a-angstrom-linux-gnueabi//usr/include/c++          =
+             --with-sysroot=3D/OE/build/tmp/staging/armv7a-angstrom-linux-g=
+nueabi                       --with-build-sysroot=3D/OE/build/tmp/staging/a=
+rmv7a-angstrom-linux-gnueabi   --enable-cheaders=3Dc_std --disable-libunwin=
+d-exceptions --with-mpfr=3D/OE/build/tmp/staging/i686-linux/usr --enable-__=
+cxa_atexit 		    ...
+configure: loading site script /OE/ai.openembedded.dev/site/endian-little
+configure: loading site script /OE/ai.openembedded.dev/site/common-linux
+configure: loading site script /OE/ai.openembedded.dev/site/common-glibc
+configure: loading site script /OE/ai.openembedded.dev/site/ix86-common
+configure: loading site script /OE/ai.openembedded.dev/site/common
+configure: loading site script /OE/ai.openembedded.dev/site/common
+configure: loading site script /OE/ai.openembedded.dev/site/endian-little
+configure: loading site script /OE/ai.openembedded.dev/site/common-linux
+configure: loading site script /OE/ai.openembedded.dev/site/common-glibc
+configure: loading site script /OE/ai.openembedded.dev/site/ix86-common
+configure: loading site script /OE/ai.openembedded.dev/site/common
+configure: loading site script /OE/ai.openembedded.dev/site/common
+checking build system type... i686-pc-linux-gnu
+checking host system type... i686-pc-linux-gnu
+checking target system type... arm-angstrom-linux-gnueabi
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether ln works... yes
+checking whether ln -s works... yes
+checking for i686-linux-gcc... gcc=20
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables...=20
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc  accepts -g... yes
+checking for gcc  option to accept ANSI C... none needed
+checking for i686-linux-g++... g++
+checking whether we are using the GNU C++ compiler... yes
+checking whether g++ accepts -g... yes
+checking for i686-linux-gnatbind... no
+checking for gnatbind... no
+checking for i686-linux-gnatmake... no
+checking for gnatmake... no
+checking whether compiler driver understands Ada... no
+checking how to compare bootstrapped objects... cmp --ignore-initial=3D16 $=
+$f1 $$f2
+checking for correct version of gmp.h... yes
+checking for correct version of mpfr.h... yes
+The following languages will be built: c,c++,fortran,java,objc
+*** This configuration is not supported in the following subdirectories:
+     target-libobjc target-libada gnattools target-libgomp target-libmudfla=
+p
+    (Any other directories should still work fine.)
+checking for bison... bison -y
+checking for bison... bison
+checking for gm4... no
+checking for gnum4... no
+checking for m4... m4
+checking for flex... flex
+checking for flex... flex
+checking for makeinfo... makeinfo
+checking for expect... no
+checking for runtest... no
+checking for ar... (cached) ar
+checking for i686-linux-ar... (cached) ar
+checking for as... (cached) as
+checking for i686-linux-as... (cached) as
+checking for i686-linux-dlltool... no
+checking for dlltool... no
+checking for ld... (cached) ld
+checking for i686-linux-ld... (cached) ld
+checking for i686-linux-lipo... no
+checking for lipo... no
+checking for nm... (cached) nm
+checking for i686-linux-nm... (cached) nm
+checking for ranlib... (cached) ranlib
+checking for i686-linux-ranlib... (cached) ranlib
+checking for strip... (cached) strip
+checking for i686-linux-strip... (cached) strip
+checking for i686-linux-windres... no
+checking for windres... no
+checking for i686-linux-windmc... no
+checking for windmc... no
+checking for objcopy... (cached) objcopy
+checking for i686-linux-objcopy... (cached) objcopy
+checking for objdump... (cached) objdump
+checking for i686-linux-objdump... (cached) objdump
+checking for cc... (cached)  arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-=
+a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp
+checking for gcc... (cached)  arm-angstrom-linux-gnueabi-gcc -march=3Darmv7=
+-a -mtune=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp
+checking for arm-angstrom-linux-gnueabi-c++... no
+checking for arm-angstrom-linux-gnueabi-g++... no
+checking for arm-angstrom-linux-gnueabi-cxx... no
+checking for arm-angstrom-linux-gnueabi-gxx... no
+checking for arm-angstrom-linux-gnueabi-gcc... arm-angstrom-linux-gnueabi-g=
+cc
+checking for arm-angstrom-linux-gnueabi-gcj... no
+checking for arm-angstrom-linux-gnueabi-gfortran... no
+checking for ar... /OE/build/tmp/cross/armv7a/arm-angstrom-linux-gnueabi/bi=
+n/ar
+checking for as... /OE/build/tmp/cross/armv7a/arm-angstrom-linux-gnueabi/bi=
+n/as
+checking for dlltool... no
+checking for arm-angstrom-linux-gnueabi-dlltool... no
+checking for ld... /OE/build/tmp/cross/armv7a/arm-angstrom-linux-gnueabi/bi=
+n/ld
+checking for lipo... no
+checking for arm-angstrom-linux-gnueabi-lipo... no
+checking for nm... /OE/build/tmp/cross/armv7a/arm-angstrom-linux-gnueabi/bi=
+n/nm
+checking for objdump... /OE/build/tmp/cross/armv7a/arm-angstrom-linux-gnuea=
+bi/bin/objdump
+checking for ranlib... /OE/build/tmp/cross/armv7a/arm-angstrom-linux-gnueab=
+i/bin/ranlib
+checking for strip... /OE/build/tmp/cross/armv7a/arm-angstrom-linux-gnueabi=
+/bin/strip
+checking for windres... no
+checking for arm-angstrom-linux-gnueabi-windres... no
+checking for windmc... no
+checking for arm-angstrom-linux-gnueabi-windmc... no
+checking where to find the target ar... pre-installed in /OE/build/tmp/cros=
+s/armv7a/arm-angstrom-linux-gnueabi/bin
+checking where to find the target as... pre-installed in /OE/build/tmp/cros=
+s/armv7a/arm-angstrom-linux-gnueabi/bin
+checking where to find the target cc... just compiled
+checking where to find the target c++... just compiled
+checking where to find the target c++ for libstdc++... just compiled
+checking where to find the target dlltool... pre-installed
+checking where to find the target gcc... just compiled
+checking where to find the target gcj... just compiled
+checking where to find the target gfortran... just compiled
+checking where to find the target ld... pre-installed in /OE/build/tmp/cros=
+s/armv7a/arm-angstrom-linux-gnueabi/bin
+checking where to find the target lipo... pre-installed
+checking where to find the target nm... pre-installed in /OE/build/tmp/cros=
+s/armv7a/arm-angstrom-linux-gnueabi/bin
+checking where to find the target objdump... pre-installed in /OE/build/tmp=
+/cross/armv7a/arm-angstrom-linux-gnueabi/bin
+checking where to find the target ranlib... pre-installed in /OE/build/tmp/=
+cross/armv7a/arm-angstrom-linux-gnueabi/bin
+checking where to find the target strip... pre-installed in /OE/build/tmp/c=
+ross/armv7a/arm-angstrom-linux-gnueabi/bin
+checking where to find the target windres... pre-installed
+checking where to find the target windmc... pre-installed
+checking whether to enable maintainer-specific portions of Makefiles... no
+checking whether -fkeep-inline-functions is supported... yes
+configure: creating ./config.status
+config.status: creating Makefile
+
+--Apple-Mail-14--503815610--
