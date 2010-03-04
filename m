@@ -1,37 +1,31 @@
-Received: from 64.mail-out.ovh.net ([91.121.185.65])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1Nn9BG-0003A6-Lx
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NnBpD-0004k8-G0
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 04 Mar 2010 12:25:39 +0100
-Received: (qmail 27427 invoked by uid 503); 4 Mar 2010 11:20:17 -0000
-Received: from b9.ovh.net (HELO mail32.ha.ovh.net) (213.186.33.59)
-	by 64.mail-out.ovh.net with SMTP; 4 Mar 2010 11:20:17 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 4 Mar 2010 11:15:57 -0000
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 4 Mar 2010 11:15:55 -0000
-Message-ID: <4B8F966B.40707@eukrea.com>
-Date: Thu, 04 Mar 2010 12:15:55 +0100
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.1.8) Gecko/20100216 Thunderbird/3.0.2
-MIME-Version: 1.0
+	Thu, 04 Mar 2010 15:15:01 +0100
+Received: (qmail 18439 invoked by uid 813007); 4 Mar 2010 14:12:00 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 4 Mar 2010 14:12:00 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-References: <4B8F84F7.10806@fqingenieria.es>
-In-Reply-To: <4B8F84F7.10806@fqingenieria.es>
-X-Ovh-Tracer-Id: 10838756929351757129
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.65
-X-SA-Exim-Mail-From: eric@eukrea.com
+Date: Thu, 4 Mar 2010 15:11:43 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.3.4; x86_64; ;
+	)
+References: <20100303194141.GT24852@ibawizard.net>
+In-Reply-To: <20100303194141.GT24852@ibawizard.net>
+MIME-Version: 1.0
+Message-Id: <201003041511.43830.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: I.MX25 and OE
+Subject: Re: [PATCH 0/4] update ts72xx kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,21 +39,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Mar 2010 11:25:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 04 Mar 2010 14:15:03 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Jaume,
+Dnia =C5=9Broda, 3 marca 2010 o 20:41:41 Petr =C5=A0tetiar napisa=C5=82(a):
+> Hi,
+>=20
+> this series of patches aims to update ts72xx kernels in OE.
+> It's a second try (I've sent them already month ago), so I'm kindly asking
+> to apply them :-) Thanks.
 
-Le 04/03/2010 11:01, FQ | Jaume Ribot a écrit :
-> Just a question: Is somebody working in any port of OE to an I.MX25
-> Freescale platform. As I can see, some people has been porting this
-> processor to the kernel mainline, but don't know if any recipe/s exist
-> or are under development.
->
-you can check the tx25 machine which is based on i.MX25 :
-conf/machine/tx25.conf
+pushed
 
-Eric
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
