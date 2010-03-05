@@ -1,33 +1,36 @@
-Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sebastian@SSpaeth.de>) id 1NnZH2-0001qK-Ez
+	(envelope-from <philb@gnu.org>) id 1NnZeX-00079f-0m
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Mar 2010 16:17:09 +0100
-Received: from homiemail-a22.g.dreamhost.com (caiajhbdcaib.dreamhost.com
-	[208.97.132.81])
-	by hapkido.dreamhost.com (Postfix) with ESMTP id 389FA178CCF
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Mar 2010 07:14:15 -0800 (PST)
-Received: from sspaeth.de (vpn-global-dhcp2-98.ethz.ch [129.132.209.98])
-	by homiemail-a22.g.dreamhost.com (Postfix) with ESMTPA id 880FD1A805F
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Mar 2010 07:14:11 -0800 (PST)
-Received: by sspaeth.de (sSMTP sendmail emulation);
-	Fri, 05 Mar 2010 16:14:08 +0100
-From: "Sebastian Spaeth" <Sebastian@SSpaeth.de>
+	Fri, 05 Mar 2010 16:41:27 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NnZbi-0001sl-St
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Mar 2010 15:38:31 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1NnZbi-0000wa-Qm
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Mar 2010 15:38:30 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 05 Mar 2010 16:14:08 +0100
-Message-ID: <87hbou4x8f.fsf@SSpaeth.de>
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.33.216.122
-X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
+In-Reply-To: <b6ebd0a51003030909u58f72751u19f5b3caab614450@mail.gmail.com>
+References: <b6ebd0a51003030909u58f72751u19f5b3caab614450@mail.gmail.com>
+Date: Fri, 05 Mar 2010 15:38:26 +0000
+Message-ID: <1267803506.14566.854.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Convert vala to new world staging
+Subject: Re: [RFC] Initial Proposal for Packaged Staging Revamp (was [RFC] Make some big changes right after next stable)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,43 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Mar 2010 15:17:09 -0000
-Content-Type: multipart/mixed; boundary="=-=-="
+X-List-Received-Date: Fri, 05 Mar 2010 15:41:27 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
---=-=-=
+On Wed, 2010-03-03 at 10:09 -0700, Chris Larson wrote:
+> To summarize, I propose the creation of an archive/package which acts as the
+> primary artifact to come out of the build of a recipe.  By capturing *all*
+> output of a recipe into a single place, we reduce confusion and make things
+> easier to track.  Every subsequent task by the recipe (or other recipes)
+> will go based on this archive (or cached, extracted contents of this
+> archive, for performance).  Builds from cached binaries would operate based
+> on this archive, so that the execution of the subsequent tasks would be
+> identical between the prebuilt and from scratch cases, and it makes it clear
+> that this is not just "packaged staging" in concept or intent.
 
-All vala recipes currently complain about being lagacy stages. With a
-lot of help from my friends I came up with this patch for
-classes/vala.bbclass.
+Yes, this is pretty much what I have been thinking of as well.  I think
+the only real difference between what you have suggested here and what I
+have had mind is that I was originally planning to re-use the existing
+binary package output (i.e. what you get from do_package) to populate
+the staging directory.  The nice thing about that approach is that it
+guarantees that you will get the same result for an in-tree OE build
+compared to an on-target build against the installed -dev packages,
+which would help to avoid some of the issues we have had in the past
+with the -dev packages being defective through lack of testing.
+
+Indeed, one of the main motivations for the work that I have been doing
+on the toolchain-desuck branch is to remove the special-casing of the
+toolchain recipes so that they just generate output packages which you
+can then install in the same way as anything else.
+
+Introducing a new archive format which captures the entirety of the
+build output up to and including do_install is indeed quite tempting as
+well, though.
+
+p.
 
 
-I am currently testing a few compiles and installs with this patch. But
-I want to gather feedback and ACKs from Mickey (OE vala God) and others.
 
-Does this make sense?
-Sebastian
-
---=-=-=
-Content-Type: text/x-diff
-Content-Disposition: inline; filename=valastaging.patch
-Content-Description: Convert vala to new world staging
-
-diff --git a/classes/vala.bbclass b/classes/vala.bbclass
-index 2633905..2c23efb 100644
---- a/classes/vala.bbclass
-+++ b/classes/vala.bbclass
-@@ -9,8 +9,8 @@ VALA_DONT_STAGE_VAPIS ?= "\(/config.vapi$\)\|\(/config.deps$\)"
- 
- # .vapi and .deps files are arch independent and need to be present in the
- # staging datadir for the native vala compiler
--do_stage_append() {
--	install -d ${STAGING_DATADIR_NATIVE}/vala/vapi
--	for VALAFILE in `find . -name "*.vapi" | grep -v "$VALA_DONT_STAGE_VAPIS"`; do install -m 0644 ${VALAFILE} ${STAGING_DATADIR_NATIVE}/vala/vapi/; done
--	for VALAFILE in `find . -name "*.deps" | grep -v "$VALA_DONT_STAGE_VAPIS"`; do install -m 0644 ${VALAFILE} ${STAGING_DATADIR_NATIVE}/vala/vapi/; done
-+do_install_append() {
-+	install -d ${D}${datadir}/vala/vapi
-+	for VALAFILE in `find . -name "*.vapi" | grep -v "$VALA_DONT_STAGE_VAPIS"`; do install -m 0644 ${VALAFILE} ${D}${datadir}/vala/vapi/; done
-+	for VALAFILE in `find . -name "*.deps" | grep -v "$VALA_DONT_STAGE_VAPIS"`; do install -m 0644 ${VALAFILE} ${D}${datadir}/vala/vapi/; done
- }
-
---=-=-=--
