@@ -1,37 +1,37 @@
-Received: from mail-fx0-f220.google.com ([209.85.220.220])
+Received: from fg-out-1718.google.com ([72.14.220.152])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NnWAC-0006mK-8v
+	(envelope-from <martin.jansa@gmail.com>) id 1NnWAG-0006mn-Ab
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Mar 2010 12:57:53 +0100
-Received: by fxm20 with SMTP id 20so3761044fxm.12
+	Fri, 05 Mar 2010 12:57:56 +0100
+Received: by fg-out-1718.google.com with SMTP id 19so162412fgg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Mar 2010 03:54:59 -0800 (PST)
+	Fri, 05 Mar 2010 03:55:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=vDR+6nEL32WqR1GiPjb8hFC6zC+pACpG7e+Dmvvk3yQ=;
-	b=dSz/d4OrXeA2YIkF0ZIeXinC1byHwAqTDENtTAr2r8KASsGPZOwgcv2x62UcfvYaJ5
-	xlFtpS0zEAqSzYAyXsbEpxHOuKq5YTS+vpQ3iw1fxMNMCQedP0WD2+/V4pMKoENfpDPi
-	kp1nPdbNnExMuVAQoydn5OGeFPHeCN+TkqQdw=
+	bh=XWjYVRVnhRIXMlYEEWXML/3BGjyZlLV8FA2LN7btsqc=;
+	b=iaZReM8JN40J1LbFqZDd1ns6VBkKor1eG+D6dP3cXWogxylqf/dqOGmokoumcC2DVf
+	g2Im9Z3jckA6SWK8k19Encxx6GRqEWgQZKTKsc/gHOW5YZR/ob0gWVXFl8N145o78Vnr
+	VulZ+K8ym9eT6a+Z9svEgNUEk5nue+ZzwYoas=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=G24x+ff79hyc0AjgIajBjri03HX3gnpvAqyBYP2f/Ql6OcnRVlroktR3Nl4B+Jp0yN
-	lQdFuHmVFZlHCMSPx+OU4P2s5+XIn5rSlXIGU26yxdMuyHExE/1ZgJjAcKQXouE+zYtF
-	yDPfAwmL+WTDWb4r3mIzk6CYFoZP0Bb/S5Wvo=
-Received: by 10.223.5.70 with SMTP id 6mr967338fau.18.1267790098961;
-	Fri, 05 Mar 2010 03:54:58 -0800 (PST)
+	b=O3ZWp7D2nBpWbSyfZR0q26OD6ygPUnCbibalYE9/Lg/zk2fwPa2sT7pj4iJ2Dn+glI
+	6Lp3eAC055KRnfMHMyMivt0kkeNJmlNw93fGqYc9w9PcUC6my0mz6o9tCsTPcnJB15VH
+	DybAGR3vtMk5CZsqIpmskfRTA70F6peqIiKfc=
+Received: by 10.87.45.33 with SMTP id x33mr1075161fgj.68.1267790105334;
+	Fri, 05 Mar 2010 03:55:05 -0800 (PST)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 15sm1112027fxm.4.2010.03.05.03.54.58
+	by mx.google.com with ESMTPS id 13sm1113361fxm.10.2010.03.05.03.55.00
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 05 Mar 2010 03:54:58 -0800 (PST)
+	Fri, 05 Mar 2010 03:55:00 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Mar 2010 12:55:31 +0100
-Message-Id: <1267790132-25931-2-git-send-email-Martin.Jansa@gmail.com>
+Date: Fri,  5 Mar 2010 12:55:32 +0100
+Message-Id: <1267790132-25931-3-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.0
 In-Reply-To: <1267790132-25931-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1267790132-25931-1-git-send-email-Martin.Jansa@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.220.220
+X-SA-Exim-Connect-IP: 72.14.220.152
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -39,7 +39,7 @@ X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/2] busybox: use u-a for /etc/default/mountall (collision with util-linux-ng-mountall)
+Subject: [PATCH 2/2] util-linux-ng: use u-a for /etc/default/mountall (collision with busybox-mountall)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,57 +53,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Mar 2010 11:57:53 -0000
+X-List-Received-Date: Fri, 05 Mar 2010 11:57:56 -0000
 
 ---
- recipes/busybox/busybox.inc |   13 ++++++++++---
+ recipes/util-linux-ng/util-linux-ng.inc |   13 ++++++++++---
  1 files changed, 10 insertions(+), 3 deletions(-)
 
-diff --git a/recipes/busybox/busybox.inc b/recipes/busybox/busybox.inc
-index b165d0f..d1904a6 100644
---- a/recipes/busybox/busybox.inc
-+++ b/recipes/busybox/busybox.inc
-@@ -11,7 +11,7 @@ LICENSE = "GPL"
- SECTION = "base"
- PRIORITY = "required"
+diff --git a/recipes/util-linux-ng/util-linux-ng.inc b/recipes/util-linux-ng/util-linux-ng.inc
+index 7f4333b..031b80b 100644
+--- a/recipes/util-linux-ng/util-linux-ng.inc
++++ b/recipes/util-linux-ng/util-linux-ng.inc
+@@ -7,7 +7,7 @@ inherit autotools
  
--INC_PR = "r25"
-+INC_PR = "r26"
+ DEFAULT_PREFERENCE = "-1"
  
- SRC_URI = "\
-   file://busybox-cron \
-@@ -39,7 +39,7 @@ PACKAGES =+ "${PN}-mountall ${PN}-httpd ${PN}-syslog ${PN}-udhcpd"
- # listed in the NEEDED field.
- RRECOMMENDS += "libgcc"
+-INC_PR = "r9"
++INC_PR = "r10"
  
+ # allows for a release candidate
+ RC ?= ""
+@@ -46,7 +46,7 @@ FILES_util-linux-ng-umount = "${base_bindir}/umount.${PN}"
+ FILES_util-linux-ng-readprofile = "${base_sbindir}/readprofile.${PN}"
+ 
+ PACKAGES =+ "${PN}-mountall"
 -FILES_${PN}-mountall = "${sysconfdir}/default/mountall"
 +FILES_${PN}-mountall = "${sysconfdir}/default/mountall.${PN}"
- RDEPENDS_${PN} += "${PN}-mountall"
+ RREPLACES_${PN}-mountall = "busybox-mountall"
  
- # Make busybox recommend busybox-syslog for those images that expect it
-@@ -128,7 +128,7 @@ do_install () {
- 	fi
- 	if grep "CONFIG_FEATURE_MOUNT_FSTAB=y" ${WORKDIR}/defconfig; then
- 		install -d ${D}${sysconfdir}/default
--		install -m 644 ${WORKDIR}/mountall ${D}${sysconfdir}/default/
-+		install -m 644 ${WORKDIR}/mountall ${D}${sysconfdir}/default/mountall.${PN}
- 	fi
+ RRECOMMENDS_${PN} = "util-linux-ng-fdisk util-linux-ng-cfdisk util-linux-ng-sfdisk util-linux-ng-mount util-linux-ng-readprofile "
+@@ -152,7 +152,7 @@ do_install () {
+         done
  
- 	install -m 0644 ${S}/busybox.links ${D}${sysconfdir}
-@@ -145,6 +145,13 @@ pkg_postinst_${PN} () {
- 	while read link; do case "$link" in /*/*/*) to="../../bin/busybox";; /bin/*) to="busybox";; /*/*) to="../bin/busybox";; /*) to="/bin/busybox";; esac; bn=`basename $link`; update-alternatives --install $link $bn $to 50; done <$D/etc/busybox.links
+ 	install -d ${D}${sysconfdir}/default/
+-	echo 'MOUNTALL="-t nonfs,nosmbfs,noncpfs"' > ${D}${sysconfdir}/default/mountall
++	echo 'MOUNTALL="-t nonfs,nosmbfs,noncpfs"' > ${D}${sysconfdir}/default/mountall.${PN}
+ 
+ 	rm ${D}${sbindir}/swapoff -f
+ 	ln -sf ${base_sbindir}/swapon.${PN} ${D}${base_sbindir}/swapoff.${PN}
+@@ -269,3 +269,10 @@ pkg_prerm_util-linux-ng-readprofile () {
+     update-alternatives --remove readprofile readprofile.${PN} 100
  }
  
-+pkg_postinst_${PN}-mountall () {
-+	update-alternatives --install ${sysconfdir}/default/mountall default_mountall mountall.${PN} 50
++pkg_postinst_util-linux-ng-mountall () {
++        update-alternatives --install ${sysconfdir}/default/mountall default_mountall mountall.${PN} 100
 +}
-+pkg_prerm_${PN}-mountall () {
-+	update-alternatives --remove default_mountall mountall.${PN}
++pkg_prerm_util-linux-ng-mountall () {
++        update-alternatives --remove default_mountall mountall.${PN}
 +}
 +
- pkg_prerm_${PN} () {
- 	# This is so you can make busybox commit suicide - removing busybox with no other packages
- 	# providing its files, this will make update-alternatives work, but the update-rc.d part
 -- 
 1.7.0
 
