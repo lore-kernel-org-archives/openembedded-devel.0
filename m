@@ -1,45 +1,33 @@
-Received: from fg-out-1718.google.com ([72.14.220.152])
+Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NnWAG-0006mn-Ab
+	(envelope-from <Sebastian@SSpaeth.de>) id 1NnZH2-0001qK-Ez
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Mar 2010 12:57:56 +0100
-Received: by fg-out-1718.google.com with SMTP id 19so162412fgg.6
+	Fri, 05 Mar 2010 16:17:09 +0100
+Received: from homiemail-a22.g.dreamhost.com (caiajhbdcaib.dreamhost.com
+	[208.97.132.81])
+	by hapkido.dreamhost.com (Postfix) with ESMTP id 389FA178CCF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Mar 2010 03:55:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=XWjYVRVnhRIXMlYEEWXML/3BGjyZlLV8FA2LN7btsqc=;
-	b=iaZReM8JN40J1LbFqZDd1ns6VBkKor1eG+D6dP3cXWogxylqf/dqOGmokoumcC2DVf
-	g2Im9Z3jckA6SWK8k19Encxx6GRqEWgQZKTKsc/gHOW5YZR/ob0gWVXFl8N145o78Vnr
-	VulZ+K8ym9eT6a+Z9svEgNUEk5nue+ZzwYoas=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=O3ZWp7D2nBpWbSyfZR0q26OD6ygPUnCbibalYE9/Lg/zk2fwPa2sT7pj4iJ2Dn+glI
-	6Lp3eAC055KRnfMHMyMivt0kkeNJmlNw93fGqYc9w9PcUC6my0mz6o9tCsTPcnJB15VH
-	DybAGR3vtMk5CZsqIpmskfRTA70F6peqIiKfc=
-Received: by 10.87.45.33 with SMTP id x33mr1075161fgj.68.1267790105334;
-	Fri, 05 Mar 2010 03:55:05 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 13sm1113361fxm.10.2010.03.05.03.55.00
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 05 Mar 2010 03:55:00 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri,  5 Mar 2010 07:14:15 -0800 (PST)
+Received: from sspaeth.de (vpn-global-dhcp2-98.ethz.ch [129.132.209.98])
+	by homiemail-a22.g.dreamhost.com (Postfix) with ESMTPA id 880FD1A805F
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  5 Mar 2010 07:14:11 -0800 (PST)
+Received: by sspaeth.de (sSMTP sendmail emulation);
+	Fri, 05 Mar 2010 16:14:08 +0100
+From: "Sebastian Spaeth" <Sebastian@SSpaeth.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Mar 2010 12:55:32 +0100
-Message-Id: <1267790132-25931-3-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.0
-In-Reply-To: <1267790132-25931-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1267790132-25931-1-git-send-email-Martin.Jansa@gmail.com>
-X-SA-Exim-Connect-IP: 72.14.220.152
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Date: Fri, 05 Mar 2010 16:14:08 +0100
+Message-ID: <87hbou4x8f.fsf@SSpaeth.de>
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 66.33.216.122
+X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] util-linux-ng: use u-a for /etc/default/mountall (collision with busybox-mountall)
+Subject: Convert vala to new world staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,56 +41,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Mar 2010 11:57:56 -0000
+X-List-Received-Date: Fri, 05 Mar 2010 15:17:09 -0000
+Content-Type: multipart/mixed; boundary="=-=-="
 
----
- recipes/util-linux-ng/util-linux-ng.inc |   13 ++++++++++---
- 1 files changed, 10 insertions(+), 3 deletions(-)
+--=-=-=
 
-diff --git a/recipes/util-linux-ng/util-linux-ng.inc b/recipes/util-linux-ng/util-linux-ng.inc
-index 7f4333b..031b80b 100644
---- a/recipes/util-linux-ng/util-linux-ng.inc
-+++ b/recipes/util-linux-ng/util-linux-ng.inc
-@@ -7,7 +7,7 @@ inherit autotools
+All vala recipes currently complain about being lagacy stages. With a
+lot of help from my friends I came up with this patch for
+classes/vala.bbclass.
+
+
+I am currently testing a few compiles and installs with this patch. But
+I want to gather feedback and ACKs from Mickey (OE vala God) and others.
+
+Does this make sense?
+Sebastian
+
+--=-=-=
+Content-Type: text/x-diff
+Content-Disposition: inline; filename=valastaging.patch
+Content-Description: Convert vala to new world staging
+
+diff --git a/classes/vala.bbclass b/classes/vala.bbclass
+index 2633905..2c23efb 100644
+--- a/classes/vala.bbclass
++++ b/classes/vala.bbclass
+@@ -9,8 +9,8 @@ VALA_DONT_STAGE_VAPIS ?= "\(/config.vapi$\)\|\(/config.deps$\)"
  
- DEFAULT_PREFERENCE = "-1"
- 
--INC_PR = "r9"
-+INC_PR = "r10"
- 
- # allows for a release candidate
- RC ?= ""
-@@ -46,7 +46,7 @@ FILES_util-linux-ng-umount = "${base_bindir}/umount.${PN}"
- FILES_util-linux-ng-readprofile = "${base_sbindir}/readprofile.${PN}"
- 
- PACKAGES =+ "${PN}-mountall"
--FILES_${PN}-mountall = "${sysconfdir}/default/mountall"
-+FILES_${PN}-mountall = "${sysconfdir}/default/mountall.${PN}"
- RREPLACES_${PN}-mountall = "busybox-mountall"
- 
- RRECOMMENDS_${PN} = "util-linux-ng-fdisk util-linux-ng-cfdisk util-linux-ng-sfdisk util-linux-ng-mount util-linux-ng-readprofile "
-@@ -152,7 +152,7 @@ do_install () {
-         done
- 
- 	install -d ${D}${sysconfdir}/default/
--	echo 'MOUNTALL="-t nonfs,nosmbfs,noncpfs"' > ${D}${sysconfdir}/default/mountall
-+	echo 'MOUNTALL="-t nonfs,nosmbfs,noncpfs"' > ${D}${sysconfdir}/default/mountall.${PN}
- 
- 	rm ${D}${sbindir}/swapoff -f
- 	ln -sf ${base_sbindir}/swapon.${PN} ${D}${base_sbindir}/swapoff.${PN}
-@@ -269,3 +269,10 @@ pkg_prerm_util-linux-ng-readprofile () {
-     update-alternatives --remove readprofile readprofile.${PN} 100
+ # .vapi and .deps files are arch independent and need to be present in the
+ # staging datadir for the native vala compiler
+-do_stage_append() {
+-	install -d ${STAGING_DATADIR_NATIVE}/vala/vapi
+-	for VALAFILE in `find . -name "*.vapi" | grep -v "$VALA_DONT_STAGE_VAPIS"`; do install -m 0644 ${VALAFILE} ${STAGING_DATADIR_NATIVE}/vala/vapi/; done
+-	for VALAFILE in `find . -name "*.deps" | grep -v "$VALA_DONT_STAGE_VAPIS"`; do install -m 0644 ${VALAFILE} ${STAGING_DATADIR_NATIVE}/vala/vapi/; done
++do_install_append() {
++	install -d ${D}${datadir}/vala/vapi
++	for VALAFILE in `find . -name "*.vapi" | grep -v "$VALA_DONT_STAGE_VAPIS"`; do install -m 0644 ${VALAFILE} ${D}${datadir}/vala/vapi/; done
++	for VALAFILE in `find . -name "*.deps" | grep -v "$VALA_DONT_STAGE_VAPIS"`; do install -m 0644 ${VALAFILE} ${D}${datadir}/vala/vapi/; done
  }
- 
-+pkg_postinst_util-linux-ng-mountall () {
-+        update-alternatives --install ${sysconfdir}/default/mountall default_mountall mountall.${PN} 100
-+}
-+pkg_prerm_util-linux-ng-mountall () {
-+        update-alternatives --remove default_mountall mountall.${PN}
-+}
-+
--- 
-1.7.0
 
-
-
+--=-=-=--
