@@ -1,38 +1,43 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-fx0-f220.google.com ([209.85.220.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1NnTYW-00072T-HN
+	(envelope-from <martin.jansa@gmail.com>) id 1NnWA9-0006mG-5x
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Mar 2010 10:10:49 +0100
-Received: from p5b0347f9.dip.t-dialin.net ([91.3.71.249] helo=excalibur)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1NnTVh-0000e8-BU by authid <stefan@sostec.de> with cram_md5
+	Fri, 05 Mar 2010 12:57:50 +0100
+Received: by fxm20 with SMTP id 20so3761003fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Mar 2010 10:07:55 +0100
-Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>) id 1NnTVh-000220-7c
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Mar 2010 10:07:53 +0100
-Date: Fri, 5 Mar 2010 10:07:53 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Fri, 05 Mar 2010 03:54:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:message-id:x-mailer;
+	bh=cNZAV2sVHlX5EOfymS3lVxIh180cxn0A+ebfDy0VQpc=;
+	b=Jgx/+rSJGWMLvY8kCmINtONCU9u1nfr1pB/SI22pJWsO7ITDF1LUwzvAIZRfBKwW/b
+	YRETaUld2+i5dfmRxi0mBx5oICjHAWF1znLklt1FYHqr2LaucpBFm7kWZxZBL3PLgLn6
+	GPWXFVCs9ZiLhxGXrGIF0bi6jCWVr9T5RouYc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer;
+	b=J0gJCqYwdlmvqn5DLslKo2CbkNhvvqCffN/tx4D/tiuKgQq4JcLaVuQF4jE0oJkAo8
+	pDvjbn9oiwbQ5u91IhsAxmrtcApKmLBafkgbK2Kd3h2xRJehbS3R3ctaiA6PZgvOucNj
+	rRUePUSV20d4GtLK/1X+Xkr9tis0mUqn0aF8c=
+Received: by 10.87.40.12 with SMTP id s12mr1111931fgj.38.1267790096243;
+	Fri, 05 Mar 2010 03:54:56 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 14sm1104979fxm.1.2010.03.05.03.54.55
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 05 Mar 2010 03:54:55 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100305090753.GA20686@excalibur.local>
-References: <1267751376-17182-1-git-send-email-aalonso00@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1267751376-17182-1-git-send-email-aalonso00@gmail.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+Date: Fri,  5 Mar 2010 12:55:30 +0100
+Message-Id: <1267790132-25931-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.0
+X-SA-Exim-Connect-IP: 209.85.220.220
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/5] xilinx-ml507.conf: fix several options
+Subject: busybox-mountall util-linux-ng-mountall collision on /etc/default/mountall
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,29 +51,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Mar 2010 09:10:49 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 05 Mar 2010 11:57:50 -0000
 
-Hello.
+Hi,
 
-Where did you base this patchset on?
+util-linux-ng.inc has
+RREPLACES_${PN}-mountall = "busybox-mountall"
 
-I tried to applay it on top of your older patches, but it failed:
+but it still doesn't prevent to have both installed and opkg upgrade fails
+Collected errors:
+ * check_data_file_clashes: Package busybox-mountall wants to install file /etc/default/mountall
+         But that file is already provided by package  * check_data_file_clashes: util-linux-ng-mountall
 
-Applying: xilinx-ml507.conf: fix several options
-error: patch failed: conf/machine/xilinx-ml507.conf:30
-error: conf/machine/xilinx-ml507.conf: patch does not apply
-Patch failed at 0003 xilinx-ml507.conf: fix several options
+We can use u-a for that config as suggested in 2 following patches, or add maybe
+RCONFLICTS_${PN}-mountall = "busybox-mountall"
+and lowering RDEPENDS to RRECOMENDS for ${PN}-mountall would be enough.
 
-Applying it without them does of course not work as the machine file does not
-exist.
+What do you prefer?
 
-I would really like to get this in sadly I only have today or it has to wait a
-week. Mind sending a patchset with all your patches included to get it working
-from git HEAD? That would make my life easier over here.
+If nobody reply today, I'll push this with u-a.
 
-regards
-Stefan Schmidt
+Regards
+
 
 
