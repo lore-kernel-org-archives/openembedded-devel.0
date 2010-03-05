@@ -1,36 +1,44 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from mail-fx0-f220.google.com ([209.85.220.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NnZeX-00079f-0m
+	(envelope-from <aalonso00@gmail.com>) id 1NnZtv-0005jh-J9
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Mar 2010 16:41:27 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NnZbi-0001sl-St
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Mar 2010 15:38:31 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1NnZbi-0000wa-Qm
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Mar 2010 15:38:30 +0000
-From: Phil Blundell <philb@gnu.org>
+	Fri, 05 Mar 2010 16:57:24 +0100
+Received: by fxm20 with SMTP id 20so4003157fxm.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 05 Mar 2010 07:54:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=mXWt9omtB/bzxt9HPajqD1Jg8wVThsEQthyVuNbQg7A=;
+	b=Scp424FFDLj/I9c772Dl6kk2tSe8VifhioapaovCBEzxGkYRc77g9B3ogEXtZfom2i
+	rtBoNxi7yywOrp7mr0YoEr6wCz1vsrGMZTz0iT6DElO/BGwkzO2CqUQXHIjWNLg0CEJx
+	qBICCx5Eeq41rNwzG8SPrRyjZBl5q8zxLd9rA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=NVXxjL3K+3BeEzAT5gzFGkvW+hOgwtrLRTji2CYq8Qk/fqvR+vBSysrJwYlbkWSdU6
+	2qMy4lDLoyEpXQu02teqGCHwjAcILXglWATIHqwfhEl+CL0ZcQ4vFwFfiPVsjy4OhruD
+	lc41HTv+YKbZwSksWaJAgzgc3fJXnF/agW3Ss=
+MIME-Version: 1.0
+Received: by 10.223.15.148 with SMTP id k20mr1211615faa.67.1267804466078; Fri, 
+	05 Mar 2010 07:54:26 -0800 (PST)
+In-Reply-To: <20100305090753.GA20686@excalibur.local>
+References: <1267751376-17182-1-git-send-email-aalonso00@gmail.com>
+	<20100305090753.GA20686@excalibur.local>
+Date: Fri, 5 Mar 2010 09:54:26 -0600
+Message-ID: <d1ded4381003050754i3069d1f8he18c45834d34ea79@mail.gmail.com>
+From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <b6ebd0a51003030909u58f72751u19f5b3caab614450@mail.gmail.com>
-References: <b6ebd0a51003030909u58f72751u19f5b3caab614450@mail.gmail.com>
-Date: Fri, 05 Mar 2010 15:38:26 +0000
-Message-ID: <1267803506.14566.854.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+X-SA-Exim-Connect-IP: 209.85.220.220
+X-SA-Exim-Mail-From: aalonso00@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Initial Proposal for Packaged Staging Revamp (was [RFC] Make some big changes right after next stable)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH 1/5] xilinx-ml507.conf: fix several options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,41 +52,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Mar 2010 15:41:27 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 05 Mar 2010 15:57:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, 2010-03-03 at 10:09 -0700, Chris Larson wrote:
-> To summarize, I propose the creation of an archive/package which acts as the
-> primary artifact to come out of the build of a recipe.  By capturing *all*
-> output of a recipe into a single place, we reduce confusion and make things
-> easier to track.  Every subsequent task by the recipe (or other recipes)
-> will go based on this archive (or cached, extracted contents of this
-> archive, for performance).  Builds from cached binaries would operate based
-> on this archive, so that the execution of the subsequent tasks would be
-> identical between the prebuilt and from scratch cases, and it makes it clear
-> that this is not just "packaged staging" in concept or intent.
+The newer patches are based and apply from the previous patches that I send
+to the list, let me regenerate them from HEAD so I can be applyed discarding
+the previous patchs.
 
-Yes, this is pretty much what I have been thinking of as well.  I think
-the only real difference between what you have suggested here and what I
-have had mind is that I was originally planning to re-use the existing
-binary package output (i.e. what you get from do_package) to populate
-the staging directory.  The nice thing about that approach is that it
-guarantees that you will get the same result for an in-tree OE build
-compared to an on-target build against the installed -dev packages,
-which would help to avoid some of the issues we have had in the past
-with the -dev packages being defective through lack of testing.
+I had on github [1] the corresponding hardware reference project and at my
+blog [2] a brief description on how I'm using OE on the target platform.
 
-Indeed, one of the main motivations for the work that I have been doing
-on the toolchain-desuck branch is to remove the special-casing of the
-toolchain recipes so that they just generate output packages which you
-can then install in the same way as anything else.
+[1] http://github.com/aalonso/xilinx-ml507
+[2] http://aalonso.wordpress.com/2010/03/05/angstrom-on-xilinx-ml507/
+Regards.
 
-Introducing a new archive format which captures the entirety of the
-build output up to and including do_install is indeed quite tempting as
-well, though.
+On Fri, Mar 5, 2010 at 3:07 AM, Stefan Schmidt <stefan@datenfreihafen.org>wrote:
 
-p.
+> Hello.
+>
+> Where did you base this patchset on?
+>
+> I tried to applay it on top of your older patches, but it failed:
+>
+> Applying: xilinx-ml507.conf: fix several options
+> error: patch failed: conf/machine/xilinx-ml507.conf:30
+> error: conf/machine/xilinx-ml507.conf: patch does not apply
+> Patch failed at 0003 xilinx-ml507.conf: fix several options
+>
+> Applying it without them does of course not work as the machine file does
+> not
+> exist.
+>
+> I would really like to get this in sadly I only have today or it has to
+> wait a
+> week. Mind sending a patchset with all your patches included to get it
+> working
+> from git HEAD? That would make my life easier over here.
+>
+> regards
+> Stefan Schmidt
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
+
+-- 
+Saludos
+Adrian Alonso
+http://aalonso.wordpress.com
 
