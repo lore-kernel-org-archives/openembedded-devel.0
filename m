@@ -1,27 +1,24 @@
 Received: from [148.204.64.197] (helo=localhost.localdomain)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso@localhost.localdomain>) id 1NnhRQ-00061f-Cs
+	(envelope-from <aalonso@localhost.localdomain>) id 1NnhRS-00061f-N8
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Mar 2010 01:00:25 +0100
+	Sat, 06 Mar 2010 01:00:32 +0100
 Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
-	by localhost.localdomain (8.14.3/8.14.3) with ESMTP id o25NFUaY014777; 
-	Fri, 5 Mar 2010 17:15:30 -0600
+	by localhost.localdomain (8.14.3/8.14.3) with ESMTP id o25NFTAV014765; 
+	Fri, 5 Mar 2010 17:15:29 -0600
 Received: (from aalonso@localhost)
-	by localhost.localdomain (8.14.3/8.14.3/Submit) id o25NFUWr014776;
-	Fri, 5 Mar 2010 17:15:30 -0600
+	by localhost.localdomain (8.14.3/8.14.3/Submit) id o25NFT5R014764;
+	Fri, 5 Mar 2010 17:15:29 -0600
 From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Mar 2010 17:15:19 -0600
-Message-Id: <1267830919-14718-7-git-send-email-aalonso00@gmail.com>
+Date: Fri,  5 Mar 2010 17:15:16 -0600
+Message-Id: <1267830919-14718-4-git-send-email-aalonso00@gmail.com>
 X-Mailer: git-send-email 1.6.6.1
-In-Reply-To: <1267830919-14718-6-git-send-email-aalonso00@gmail.com>
+In-Reply-To: <1267830919-14718-3-git-send-email-aalonso00@gmail.com>
 References: <openembedded-devel@lists.openembedded.org>
 	<1267830919-14718-1-git-send-email-aalonso00@gmail.com>
 	<1267830919-14718-2-git-send-email-aalonso00@gmail.com>
 	<1267830919-14718-3-git-send-email-aalonso00@gmail.com>
-	<1267830919-14718-4-git-send-email-aalonso00@gmail.com>
-	<1267830919-14718-5-git-send-email-aalonso00@gmail.com>
-	<1267830919-14718-6-git-send-email-aalonso00@gmail.com>
 X-SA-Exim-Connect-IP: 148.204.64.197
 X-SA-Exim-Mail-From: aalonso@localhost.localdomain
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -30,7 +27,7 @@ X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,BAYES_00,HELO_LH_LD,
 	NO_DNS_FOR_FROM,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 7/7] xilinx-ml507.conf: new config file for ml507 devboard
+Subject: [PATCH 4/7] xilinx-bsp.bbclass: add support for xilinx ml507
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,58 +41,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Mar 2010 00:00:25 -0000
+X-List-Received-Date: Sat, 06 Mar 2010 00:00:34 -0000
 
 Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
 ---
- conf/machine/xilinx-ml507.conf |   38 ++++++++++++++++++++++++++++++++++++++++
- 1 files changed, 38 insertions(+), 0 deletions(-)
- create mode 100644 conf/machine/xilinx-ml507.conf
+ classes/xilinx-bsp.bbclass |   52 ++++++++++++++++++++++---------------------
+ 1 files changed, 27 insertions(+), 25 deletions(-)
 
-diff --git a/conf/machine/xilinx-ml507.conf b/conf/machine/xilinx-ml507.conf
-new file mode 100644
-index 0000000..bcb83a5
---- /dev/null
-+++ b/conf/machine/xilinx-ml507.conf
-@@ -0,0 +1,38 @@
-+# Copyright (C) 2010, Adrian Alonso <aalonso00@gmail.com>
-+# Released under the MIT license (see packages/COPYING)
-+#@TYPE: Machine
-+#@Name: Xilinx ML507 FPGA Development Platform
-+#@DESCRIPTION: Machine configuration for Xilinx ML507
-+
-+TARGET_ARCH = "powerpc"
-+TARGET_CPU = "440"
-+TARGET_FPU = "soft"
-+#tune for the 440 cpu
-+require conf/machine/include/tune-ppc440.inc
-+
-+#ASSUME_PROVIDED += "virtual/kernel"
-+PREFERRED_PROVIDER_virtual/kernel = "linux-xilinx-ml507"
-+
-+KERNEL_IMAGETYPE = "uImage"
-+
-+MACHINE_FEATURES = "kernel26 apm ext2 vfat ethernet"
-+MACHINE_EXTRA_RECOMMENDS = "kernel-modules"
-+
-+UBOOT_ARCH = "ppc"
-+UBOOT_MACHINE = "ml507_config"
-+UBOOT_ENTRYPOINT ?= "0x00000000"
-+UBOOT_LOADADDRESS ?= "0x00000000"
-+PREFERRED_VERSION_u-boot_xilinx-ml507 = "git"
-+
-+# Xilinx EDK override hardware  definitions for xilinx-bsp
-+# Include in your local.conf
-+# XILINX_BSP_PATH = "complete path for Xilinx XPS project"
-+# XILINX_BOARD = "ml507"
-+
-+# Don't use tty1
-+USE_VT = "0"
-+SERIAL_CONSOLE = "9600 ttyS0"
-+
-+# Device nodes add xsa for (system ace)
-+IMAGE_DEVICE_TABLES = "files/device_table-minimal.txt \
-+                       files/device_table_add-xsa.txt"
+diff --git a/classes/xilinx-bsp.bbclass b/classes/xilinx-bsp.bbclass
+index f657e5b..8b44ec8 100644
+--- a/classes/xilinx-bsp.bbclass
++++ b/classes/xilinx-bsp.bbclass
+@@ -3,7 +3,7 @@
+ #
+ #This class handles all the intricasies of getting the required files from the 
+ #ISE/EDK/project to the kernel and prepare the kernel for compilation.
+-#The Xilinx EDK supports 2 different architectures : PowerPC (ppc 405) and Microblaze
++#The Xilinx EDK supports 2 different architectures : PowerPC (ppc 405,440) and Microblaze
+ #Only the PowerPC BSP has been tested so far
+ #For this to work correctly you need to add XILINX_BSP_PATH and XILINX_BOARD to your 
+ #local.conf
+@@ -12,38 +12,40 @@
+ #
+ #Currently supported boards
+ #Xilinx ML403
++#Xilinx ML507
+ #More to come soon ;)
+ 
+ do_configure_prepend() {
+ 
+-
+ #first check that the XILINX_BSP_PATH and XILINX_BOARD have been defined in local.conf
+-if [ -z "${XILINX_BSP_PATH}" ]; then
+-   oefatal "XILINX_BSP_PATH not defined ! Exiting..."
+-   exit 1
+-
+-else
+-   if [ -z "${XILINX_BOARD}" ]; then
+-      oefatal "XILINX_BOARD not defined ! Exiting"
+-      exit 1
+-   fi
+-
+-fi
+ #now depending on the board type and arch do what is nessesary
+ 
+-case "${XILINX_BOARD}" in
+-     ML403)
+-        oenote "ML403 board setup"
+-        cp -pPR ${XILINX_BSP_PATH}/ppc405_0/libsrc/linux_2_6_v1_00_a/linux/arch/ppc/platforms/4xx/xparameters/xparameters_ml40x.h \
++if [ -n "${XILINX_BSP_PATH}" ]; then
++	case "${XILINX_BOARD}" in
++		ml403 | ML403)
++			oenote "ML403 board setup"
++			cp -pPR ${XILINX_BSP_PATH}/ppc405_0/libsrc/linux_2_6_v1_00_a/linux/arch/ppc/platforms/4xx/xparameters/xparameters_ml40x.h \
+                 ${S}/arch/ppc/platforms/4xx/xparameters/xparameters_ml403.h
+-     ;;
+-
+-     *    ) 
+-      oefatal "! Unknow Xilinx board ! Exiting..."
+-      exit 1
+-     ;;
+-esac               
+-
++		;;
++		ml507 | ML507)
++			oenote "Xilinx ML507 board setup"
++			dts=`find "${XILINX_BSP_PATH}" -name *.dts -print`
++			if [ -n "$dts" ]; then
++				oenote "Replacing device tree with ${dts}"
++				cp -pP ${dts} ${S}/arch/powerpc/boot/dts/virtex440-ml507.dts
++			else
++				oenote "Device tree not found in project dir"
++			fi
++		;;
++		*)
++			oefatal "! Unknow Xilinx board ! Exit ..."
++			exit 1
++		;;
++	esac
++else
++	oefatal "XILINX_BSP_PATH not defined ! Exit"
++	exit 1
++fi
+ 
+ }
+ 
 -- 
 1.6.6.1
 
