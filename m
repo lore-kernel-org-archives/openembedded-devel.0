@@ -1,29 +1,43 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Nna5v-0004xK-C5
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Mar 2010 17:09:45 +0100
-Received: from tamarin.localnet (ext-h1.umsja.is [217.28.182.5])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 3FA551B10C79
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nnaev-0000bb-Lx for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Mar 2010 17:45:54 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nnac9-0004h7-DK for openembedded-devel@lists.openembedded.org;
+	Fri, 05 Mar 2010 17:43:01 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 05 Mar 2010 17:43:01 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Mar 2010 16:09:03 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Fri, 05 Mar 2010 17:43:01 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 5 Mar 2010 17:06:19 +0100
-User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
-References: <201003051703.19986.holger+oe@freyther.de>
-In-Reply-To: <201003051703.19986.holger+oe@freyther.de>
-MIME-Version: 1.0
-Message-Id: <201003051706.19762.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+connect(): Connection refused
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 05 Mar 2010 17:42:50 +0100
+Message-ID: <hmrcaa$mko$1@dough.gmane.org>
+References: <87hbou4x8f.fsf@SSpaeth.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
+In-Reply-To: <87hbou4x8f.fsf@SSpaeth.de>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Help for Samba upgrade needed
+Subject: Re: Convert vala to new world staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,19 +51,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Mar 2010 16:09:45 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Fri, 05 Mar 2010 16:45:54 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Friday 05 March 2010 17:03:19 Holger Hans Peter Freyther wrote:
-> Hi all,
-> 
-> we need to upgrade samba to at least 3.2.15. This applies to our
-> "samba-ads" and samba recipes. Does anyone know why we have samba-ads
-> default to 3.2.0?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Okay... make that 3.3.11 instead of 3.2.15... The call for samba testers is 
-still the same though.
+On 05-03-10 16:14, Sebastian Spaeth wrote:
+> All vala recipes currently complain about being lagacy stages. With a
+> lot of help from my friends I came up with this patch for
+> classes/vala.bbclass.
+
+> I am currently testing a few compiles and installs with this patch. But
+> I want to gather feedback and ACKs from Mickey (OE vala God) and others.
+> 
+> Does this make sense?
+
+The patch looks good to me, but I'll leave Acks to people that use
+vala.bbclass.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLkTSKMkyGM64RGpERAi3xAJ9sIYUlwuu74ffXfkAp4+RXV0ULXgCaA5jx
++CYiec5bpUQABptnube2nYE=
+=IX6T
+-----END PGP SIGNATURE-----
+
 
 
