@@ -1,32 +1,30 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from [148.204.64.197] (helo=localhost.localdomain)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Nnejb-000273-4s
+	(envelope-from <aalonso@localhost.localdomain>) id 1NnhRG-00061f-Mw
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 05 Mar 2010 22:07:03 +0100
-Received: (qmail 7424 invoked by uid 813007); 5 Mar 2010 21:04:07 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 5 Mar 2010 21:04:07 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	Sat, 06 Mar 2010 01:00:15 +0100
+Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
+	by localhost.localdomain (8.14.3/8.14.3) with ESMTP id o25NFS66014753; 
+	Fri, 5 Mar 2010 17:15:28 -0600
+Received: (from aalonso@localhost)
+	by localhost.localdomain (8.14.3/8.14.3/Submit) id o25NFRp8014751;
+	Fri, 5 Mar 2010 17:15:27 -0600
+From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 5 Mar 2010 22:03:45 +0100
-User-Agent: KMail/1.12.4 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.3.4; x86_64; ;
-	)
-References: <1266766390-28915-1-git-send-email-rep.dot.nop@gmail.com>
-	<20100305210111.GF7868@mx.loc>
-In-Reply-To: <20100305210111.GF7868@mx.loc>
-MIME-Version: 1.0
-Message-Id: <201003052203.45928.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Date: Fri,  5 Mar 2010 17:15:13 -0600
+Message-Id: <1267830919-14718-1-git-send-email-aalonso00@gmail.com>
+X-Mailer: git-send-email 1.6.6.1
+In-Reply-To: <openembedded-devel@lists.openembedded.org>
+References: <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 148.204.64.197
+X-SA-Exim-Mail-From: aalonso@localhost.localdomain
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,BAYES_00,HELO_LH_LD,
+	NO_DNS_FOR_FROM,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] bison: split inttypes*.m4 into separate patch
+Subject: [PATCH 1/7] device_table_add-xsa: add dev nodes for system ace
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,24 +38,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Mar 2010 21:07:03 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 06 Mar 2010 00:00:15 -0000
 
-Dnia pi=B1tek, 5 marca 2010 o 22:01:11 Bernhard Reutner-Fischer napisa=B3(a=
-):
+Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
+---
+ files/device_table_add-xsa.txt |    5 +++++
+ 1 files changed, 5 insertions(+), 0 deletions(-)
+ create mode 100644 files/device_table_add-xsa.txt
 
-> Should i send the respective 2.4.1 bump too?
-
-Please adapt it to current recipe of bison and I will push it.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+diff --git a/files/device_table_add-xsa.txt b/files/device_table_add-xsa.txt
+new file mode 100644
+index 0000000..a7b8429
+--- /dev/null
++++ b/files/device_table_add-xsa.txt
+@@ -0,0 +1,5 @@
++# Add nodes for xilinx system ace
++/dev/xsa    b   640     0   0   125     0   0   0   -
++/dev/xsa1   b   640     0   1   125     0   0   0   -
++/dev/xsa2   b   640     0   2   125     0   0   0   -
++/dev/xsa3   b   640     0   3   125     0   0   0   -
+-- 
+1.6.6.1
 
 
 
