@@ -1,32 +1,32 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Nnvtn-000656-11
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mickey@vanille-media.de>) id 1Nnws6-00051G-5X
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Mar 2010 16:26:42 +0100
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 328CC491264
+	Sat, 06 Mar 2010 17:28:59 +0100
+Received: from [192.168.1.5] (e180129204.adsl.alicedsl.de [85.180.129.204])
+	by drlauer-research.com (Postfix) with ESMTP id 495E05841A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  6 Mar 2010 16:23:46 +0100 (CET)
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Sat, 6 Mar 2010 16:24:24 +0100
-Message-ID: <DB561678F08F554EB0D9F21B70E268A505AE7E@exchange.intern.dresearch.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: Installing Linux kernel sources/headers?
-Thread-Index: Acq9QRonaRHGGcaXRJ2OA5O/chHlrQ==
-From: "Sledz, Steffen" <sledz@DResearch.DE>
-To: <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@DResearch.DE
+	Sat,  6 Mar 2010 17:26:28 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1267887520.11175.17.camel@rex>
+References: <87hbou4x8f.fsf@SSpaeth.de>
+	<F5DBF875-2CE0-4218-A2FD-45E83EE3AADD@vanille-media.de>
+	<1267887520.11175.17.camel@rex>
+Organization: Vanille-Media
+Date: Sat, 06 Mar 2010 17:25:51 +0100
+Message-ID: <1267892751.21528.16.camel@andromeda>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Installing Linux kernel sources/headers?
+Subject: Re: Convert vala to new world staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,17 +40,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Mar 2010 15:26:42 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 06 Mar 2010 16:28:59 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+Am Samstag, den 06.03.2010, 06:58 -0800 schrieb Richard Purdie:
+> Target packages should not be installing things into the native sysroot.
+> The reason why is when we come to start using staging packages, these
+> staging packages are going to have a dependency on the specific build
+> system they were built on.
+> 
+> If these files are architecture independent I'd suggest putting them in
+> an architecture independent path (which native sysroot is not)
+
+That would be possible, but Vala needs to be patched to look there then.
+
+-- 
+:M:
 
 
-Is there a target to install linux kernel sources (or at
-least the kernel headers) to the target? I'd expected the
-kernel-dev does this, but it seems that it only installs
-config, Module.symvers, and System.map to /boot. :(=20
-
-Steffen
 
