@@ -1,47 +1,41 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Nnt7B-0005E5-5f
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NnvVi-0002a4-Df
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Mar 2010 13:28:17 +0100
-Received: by gwj23 with SMTP id 23so1189107gwj.6
+	Sat, 06 Mar 2010 16:01:47 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o26EwqJA029835
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Mar 2010 04:25:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=LF0GfR7gqK/BfVt1TWOQ42s9ClV7VBstEwq4LgeKMFE=;
-	b=kR8gd/l9ECBtO5hyjxYxvc1jF9LaRAlkyIDAr8Xxpv6VVb4OiBKVO1Sm/1qfNDWqxb
-	t7oPQkbo+Ql+m8OkHCoMX0EzFg8akNXjxIFke7KONEywzMBYLlPwmr59SlZMM0PoCoYv
-	hzrVhBoixi35cUdDHfokVeBDtdQBCXxqpcLT0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=uOqRx+IyrThm5g4SJ0NjNI9EyFeinRnkdnydEXbQQ81vtcKyS3pHV5JiafCMapoLFK
-	sIHpPm3TWLLb3wEn7d2EgXVSPlLrJdh2Jde1myPjmYCE5wA4TSu/8kYmHaXBVExBxrGg
-	UQNQBoHM1iKkvA+jBgZRObZS0bJ4gbMkel83c=
-MIME-Version: 1.0
-Received: by 10.101.64.18 with SMTP id r18mr4006408ank.24.1267878322572; Sat, 
-	06 Mar 2010 04:25:22 -0800 (PST)
-In-Reply-To: <hmrg46$6m7$1@dough.gmane.org>
-References: <1267616149.2259.4.camel@rex>
-	<ac9c93b11003030459h499fa3ban6f6884910ef785a@mail.gmail.com>
-	<1267624062.2259.58.camel@rex>
-	<ac9c93b11003030628n357a820elede742097eafee42@mail.gmail.com>
-	<1267629590.2259.92.camel@rex> <hmrg46$6m7$1@dough.gmane.org>
-Date: Sat, 6 Mar 2010 13:25:22 +0100
-Message-ID: <ac9c93b11003060425w221ce721re9c0bae052b099c0@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sat, 6 Mar 2010 14:58:52 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 29452-08 for <openembedded-devel@lists.openembedded.org>;
+	Sat,  6 Mar 2010 14:58:48 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o26Ewgip029829
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 6 Mar 2010 14:58:45 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <F5DBF875-2CE0-4218-A2FD-45E83EE3AADD@vanille-media.de>
+References: <87hbou4x8f.fsf@SSpaeth.de>
+	<F5DBF875-2CE0-4218-A2FD-45E83EE3AADD@vanille-media.de>
+Date: Sat, 06 Mar 2010 06:58:40 -0800
+Message-ID: <1267887520.11175.17.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.2 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: TSC Meeting 2010/03/02
+Subject: Re: Convert vala to new world staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,79 +49,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Mar 2010 12:28:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 06 Mar 2010 15:01:47 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-2010/3/5 Rolf Leggewie <no2spam@nospam.arcornews.de>:
+On Fri, 2010-03-05 at 17:56 +0100, Dr. Michael Lauer wrote:
+> > All vala recipes currently complain about being lagacy stages. With a
+> > lot of help from my friends I came up with this patch for
+> > classes/vala.bbclass.
+> > 
+> > diff --git a/classes/vala.bbclass b/classes/vala.bbclass
+> > index 2633905..2c23efb 100644
+> > --- a/classes/vala.bbclass
+> > +++ b/classes/vala.bbclass
+> > @@ -9,8 +9,8 @@ VALA_DONT_STAGE_VAPIS ?= "\(/config.vapi$\)\|\(/config.deps$\)"
+> > 
+> > # .vapi and .deps files are arch independent and need to be present in the
+> > # staging datadir for the native vala compiler
+> > -do_stage_append() {
+> > -	install -d ${STAGING_DATADIR_NATIVE}/vala/vapi
+> > -	for VALAFILE in `find . -name "*.vapi" | grep -v "$VALA_DONT_STAGE_VAPIS"`; do install -m 0644 ${VALAFILE} ${STAGING_DATADIR_NATIVE}/vala/vapi/; done
+> > -	for VALAFILE in `find . -name "*.deps" | grep -v "$VALA_DONT_STAGE_VAPIS"`; do install -m 0644 ${VALAFILE} ${STAGING_DATADIR_NATIVE}/vala/vapi/; done
+> > +do_install_append() {
+> > +	install -d ${D}${datadir}/vala/vapi
+> > +	for VALAFILE in `find . -name "*.vapi" | grep -v "$VALA_DONT_STAGE_VAPIS"`; do install -m 0644 ${VALAFILE} ${D}${datadir}/vala/vapi/; done
+> > +	for VALAFILE in `find . -name "*.deps" | grep -v "$VALA_DONT_STAGE_VAPIS"`; do install -m 0644 ${VALAFILE} ${D}${datadir}/vala/vapi/; done
+> > }
+> 
+> This will only work for vala-native. All non-native packages inheriting vala will then fail to install their
+> .vapi files in STAGING_DATADIR_NATIVE, which is where vala-native expects them to be.
 
-[...]
->
-> Frans, I hope I did not paraphrase your sentiments incorrectly. =A0Feel
-> free to correct me if I did.
+Something is very wrong with vala-native then :(
 
-You didn't :-)
+Target packages should not be installing things into the native sysroot.
+The reason why is when we come to start using staging packages, these
+staging packages are going to have a dependency on the specific build
+system they were built on.
 
-I've indeed come to the conclusion that apparently OE has come to a
-point where it is very hard to move forward.
-One of the reasons is the perception of quality for some people.
+If these files are architecture independent I'd suggest putting them in
+an architecture independent path (which native sysroot is not)
 
-Quality to me does not mean having 26 glib recipes around or 8 abiword
-ones or whatever most of which are likely to be unused and even more
-likely to be unmaintained.
-We currently have close to 9000 recipes, 3000+of which are older versions.
-I understand why people feel they should keep old versions, but that
-is where a version control system is for.
+Cheers,
 
-Development head should reflect the latest state-of-the-art, and
-probably should have only one version per recipe.
-(probably with the exception of things like gcc, linux and u-boot).
-If things do not work with a version, they should be fixed. Keeping
-the old version around and pin it, means that in the end you end up
-with a system which is lagging behind.
+Richard
 
-If you want stability use a stable branch. head should focus on moving forw=
-ard.
-
-Some people seem to think differently about it. As an alternative an
-obsolete directory has been proposed.
-The latter does not really help. It gives the crud a home, but it does
-not really solve the problem.
-
-However as discussions on what to remove are time consuming and
-progress is hard, I have abandoned that path.
-
-Instead I decided to create a branch called sanity (for now local, but
-once it is more reliable I'll probably push it)
-In this branch I intend to
-- remove all old versions of recipes (sometimes tough as there are
-recipes that have both numbered and cvs/svn/git variants (I believe
-there is a case where there is even cvs and svn for package))
-  exceptions: gcc (but some versions will go there), linux, u-boot)
-- crude convert to BBCLASSEXTEND=3D"native". I feel this should in
-general work. (btw and I noticed we have packaged that do have native
-variants for older versions but not for the recent one, and I have
-even seen a case where the native recipe is newer than the target
-one).
-Plan was also to remove all do_deploy stuff, but apart from
-u-boot/linux this is nearly done.
-
-Note that the above edits may sound harsh, but frankly I doubt that
-anyone will ever convert those 3000 legacy devices, and even if they
-are converted, I strongly doubt that they are tested.
-This seems to be a better way forward.
-
-After that I have some ideas for further improvements, but let's get
-this started first.
-
-If anyone wants to work with me on this, feel free to get in touch with me.
-And for those who feel that effort should be directed elsewhere. Make
-me an interesting offer and we can talk. But until that it are my
-weekends and evenings I am spending on this, and I'll spend them as I
-see fit, not as someone else sees fit (ok, with the exception of the
-Mrs :-) )
-
-Have fun!
-Frans
 
 
