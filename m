@@ -1,28 +1,40 @@
-Received: from p3plsmtpa01-02.prod.phx3.secureserver.net ([72.167.82.82])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <mike@mwester.net>) id 1NnvXp-0004kr-V5
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NnvhK-00076L-Ty
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Mar 2010 16:04:03 +0100
-Received: (qmail 18963 invoked from network); 6 Mar 2010 15:01:02 -0000
-Received: from unknown (209.242.7.187)
-	by p3plsmtpa01-02.prod.phx3.secureserver.net (72.167.82.82) with ESMTP;
-	06 Mar 2010 15:01:02 -0000
-Message-ID: <4B926E27.4090100@mwester.net>
-Date: Sat, 06 Mar 2010 09:00:55 -0600
-From: Mike Westerhof <mike@mwester.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23 Mnenhy/0.7.6.0
-MIME-Version: 1.0
+	Sat, 06 Mar 2010 16:13:47 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o26FArG7029932
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 6 Mar 2010 15:10:53 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 29452-10 for <openembedded-devel@lists.openembedded.org>;
+	Sat,  6 Mar 2010 15:10:49 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o26FAg4I029926
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 6 Mar 2010 15:10:43 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 72.167.82.82
-X-SA-Exim-Mail-From: mike@mwester.net
+In-Reply-To: <4B926E27.4090100@mwester.net>
+References: <4B926E27.4090100@mwester.net>
+Date: Sat, 06 Mar 2010 07:10:40 -0800
+Message-ID: <1267888240.11175.32.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.2 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Encouraging distros to use newer recipe versions?
+Subject: Re: Encouraging distros to use newer recipe versions?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,17 +48,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Mar 2010 15:04:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 06 Mar 2010 15:13:47 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Does it make any sense to create a class (or extend the sanity or testlab classes) so that OE can inform someone when a given build is using a recipe that can be considered obsolete?  Perhaps we might also add a bit more encouragement if it were possible to have that same class call out builds that have selected versions with known security vulnerabilities.
+On Sat, 2010-03-06 at 09:00 -0600, Mike Westerhof wrote:
+> Does it make any sense to create a class (or extend the sanity or
+> testlab classes) so that OE can inform someone when a given build is
+> using a recipe that can be considered obsolete?  Perhaps we might also
+> add a bit more encouragement if it were possible to have that same
+> class call out builds that have selected versions with known security
+> vulnerabilities.
+> 
+> This would certainly help me with the distro I maintain -- one of the
+> questions I cannot easily answer, and therefore tend to ignore, is
+> "exactly how out-of-date has my distro become?".
+> 
+> I have no patches to do such a thing, and neither do I have time to
+> create such a thing at this point in time, but perhaps if someone
+> thinks this is worthwhile time can be made for it...
 
-This would certainly help me with the distro I maintain -- one of the questions I cannot easily answer, and therefore tend to ignore, is "exactly how out-of-date has my distro become?".
+I've been keeping half an eye on what Holger has been doing and yes, I
+think this could be desirable. Its also rather straightforward to do.
+Simply create a new variable
 
-I have no patches to do such a thing, and neither do I have time to create such a thing at this point in time, but perhaps if someone thinks this is worthwhile time can be made for it...
+SECURITY_ISSUES_PRESENT = "This package has know security issues of: X,
+Y, Z"
 
--Mike (mwester)
+and then have insane.bbclass choke on this printing the messages unless
+you set a variable ILOVESECURITYHOLES = "1"
+
+:)
+
+Cheers,
+
+Richard
+
 
 
 
