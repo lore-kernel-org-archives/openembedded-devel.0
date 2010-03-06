@@ -1,43 +1,40 @@
-Received: from mail-yw0-f183.google.com ([209.85.211.183])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NnzqW-0006ls-I1
+	(envelope-from <dp@xora.org.uk>) id 1Nnzt0-0000jm-GH
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Mar 2010 20:39:35 +0100
-Received: by ywh13 with SMTP id 13so3128548ywh.12
+	Sat, 06 Mar 2010 20:42:11 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id C54581C612
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 06 Mar 2010 11:36:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=qiVcgshoxuWAO8naXQHPNE0zRwzwat6fIxKpg39YUfY=;
-	b=vdR9HW69dHV5lRO47AKBMGBZ9/3dx9f9h6oRIFhyiiVrd9GwEBKinnoepWT9ZxtAaD
-	U1U902t9pyDFI16MAhGqDT/INltUf08YgLRsEWOegYpXxDtH1LnmgelXdNt/tKr+PQ7G
-	tsJENg73AKldQj/4uoqMIVUDD++oqeNuYntpI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=UqZNVNrVgopJY5Wwq++uFCjH2gc2s05vhLvriKGsYjZ2Mi0y5Ww4cZBGDdmwkyhK10
-	i5ifZrtZL1RmY3are5MOxZZd6O0HBi9EELMAk24SnLwZhE145RQM+qJ5uhPV3SeKNHJu
-	B9QVZi7GfSX0z2n7FnjUEode94hSJ7Y1po+Z4=
-MIME-Version: 1.0
-Received: by 10.101.6.30 with SMTP id j30mr3586010ani.200.1267904197722; Sat, 
-	06 Mar 2010 11:36:37 -0800 (PST)
-In-Reply-To: <hmeia3$p6c$1@dough.gmane.org>
-References: <ac9c93b11002281139g6963e753w970c97002611c78c@mail.gmail.com>
-	<hmeia3$p6c$1@dough.gmane.org>
-Date: Sat, 6 Mar 2010 20:36:37 +0100
-Message-ID: <ac9c93b11003061136k1668098ejbff2f7ebcf7278c7@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sat,  6 Mar 2010 19:39:13 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id q48vG2RGn533
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  6 Mar 2010 19:39:07 +0000 (GMT)
+Received: from xora-build.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id BF5D81403D
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat,  6 Mar 2010 19:39:07 +0000 (GMT)
+Received: by xora-build.xora.org.uk (Postfix, from userid 500)
+	id B49AE43E4A; Sat,  6 Mar 2010 19:39:07 +0000 (GMT)
+Date: Sat, 6 Mar 2010 19:39:07 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.183
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20100306193907.GA5881@xora-build.xora.org.uk>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-08-17)
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC} glib-2.0 cleanup
+Subject: Possible gtk+-native de-breakage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,32 +48,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Mar 2010 19:39:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 06 Mar 2010 19:42:11 -0000
+X-Groupsio-MsgNum: 17383
+Content-Type: multipart/mixed; boundary="M9NhX3UHpAaciwkO"
+Content-Disposition: inline
 
-2010/2/28 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> How do you know that some versions aren't used at all? Did you check all
-> external overlays?
->
-> But more importantly, what harm do the recipes do to you? Does it offend
-> you that there are 26 recipes?
->
-> What are you trying to accomplish?
->
-> If a recipe isn't doing any harm, just leave it alone. Deleting recipes
-> just to please someones sense of aesthetics is the wrong thing to do.
->
-> What would be a lot better is to fix the latest version for each minor
-> release to use things like new style staging, bbclassextend, etc and
-> *after* that clean up ask to remove the recipes that weren't updated.
+--M9NhX3UHpAaciwkO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-As requested on #oe:
+Hi, I knocked this up while doing some enterprise java installs this after
+noon and Im too brain fried to deal with it and wont have time in next few
+days.
 
-ACK for the proposal above. Seems a good start :-)
+So can people checkout the attached patch/improve it.
 
-Frans
+Graeme
 
 
+--M9NhX3UHpAaciwkO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename="gtk-pixbuf.patch"
+
+diff --git a/recipes/gtk+/gdk-pixbuf-csource-native_2.12.11.bb b/recipes/gtk+/gdk-pixbuf-csource-native_2.12.11.bb
+deleted file mode 100644
+index 22d30bf..0000000
+--- a/recipes/gtk+/gdk-pixbuf-csource-native_2.12.11.bb
++++ /dev/null
+@@ -1,33 +0,0 @@
+-require gtk+_${PV}.bb
+-inherit native
+-DEPENDS = "jpeg-native libpng-native gettext-native glib-2.0-native libx11-native"
+-S = "${WORKDIR}/gtk+-${PV}"
+-FILESPATH = "${FILE_DIRNAME}/gdk-pixbuf-csource:${FILE_DIRNAME}/gtk+-${PV}:${FILE_DIRNAME}/files"
+-SRC_URI += "file://reduce-dependencies.patch;patch=1"
+-
+-#clear recommends for uclibc builds
+-RRECOMMENDS = " "
+-RRECOMMENDS_${PN}_linux = "  "
+-RRECOMMENDS_${PN}_linux-gnueabi = " "
+-
+-EXTRA_OECONF = "\
+-  --with-gdktarget=x11 \
+-  --without-libtiff \
+-  --with-libjpeg \
+-  --with-libpng \
+-  --disable-cups \
+-"
+-
+-do_compile() {
+-	cd gdk-pixbuf && oe_runmake
+-}
+-
+-do_stage() {
+-	cd gdk-pixbuf && oe_runmake install
+-	find ${libdir} -name "libpixbufloader-*.la" -exec rm \{\} \;
+-}
+-
+-do_install() {
+-	:
+-}
+-
+diff --git a/recipes/gtk+/gtk+.inc b/recipes/gtk+/gtk+.inc
+index e6a0684..8e822b5 100644
+--- a/recipes/gtk+/gtk+.inc
++++ b/recipes/gtk+/gtk+.inc
+@@ -5,7 +5,7 @@ SECTION = "libs"
+ LICENSE = "LGPL"
+ PRIORITY = "optional"
+ DEPENDS = "glib-2.0 tiff pango atk jpeg libpng libxext libxcursor gtk-doc libgcrypt cups \
+-	   libxrandr libxdamage libxrender libxcomposite cairo jasper"
++	   libxrandr libxdamage libxrender libxcomposite cairo jasper gtk+-native"
+ PROVIDES = "gdk-pixbuf"
+ 
+ MAJ_VER = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
+@@ -51,6 +51,7 @@ FILES_${PN}-dbg += " \
+ NEATSTUFF = " ttf-dejavu-sans gdk-pixbuf-loader-png gdk-pixbuf-loader-jpeg gdk-pixbuf-loader-gif gdk-pixbuf-loader-xpm "
+ 
+ RRECOMMENDS_${PN} = " ${NEATSTUFF} "
++RRECOMMENDS_${PN}_libc-uclibc = " ${NEATSTUFF} "
+ RRECOMMENDS_${PN}_linux = " ${NEATSTUFF} glibc-gconv-iso8859-1 "
+ RRECOMMENDS_${PN}_linux-gnueabi = " ${NEATSTUFF} glibc-gconv-iso8859-1"
+ 
+diff --git a/recipes/gtk+/gtk+_2.18.6.bb b/recipes/gtk+/gtk+_2.18.6.bb
+index 9321b43..8546591 100644
+--- a/recipes/gtk+/gtk+_2.18.6.bb
++++ b/recipes/gtk+/gtk+_2.18.6.bb
+@@ -8,20 +8,14 @@ PR = "${INC_PR}.3"
+ BBCLASSEXTEND = "native"
+ 
+ DEPENDS_virtclass-native = "libpng-native atk-native pango-native cairo-native libxrender-native"
++PROVIDES_virtclass-native = "gdk-pixbuf-csource-native"
+ 
+ # Enable xkb selectively
+ XKBTOGGLE = " --disable-xkb"
+ XKBTOGGLE_angstrom = ""
+ 
+ EXTRA_OECONF = "--with-libtiff ${XKBTOGGLE} --disable-glibtest gio_can_sniff=yes"
+-EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg --disable-modules"
+-
+-do_install_virtclass-native () {
+-	autotools_do_install
+-	find ${D}${libdir} -name "libpixbufloader-*.la" -exec rm \{\} \;
+-	rm ${D}${bindir}/gdk-pixbuf-csource
+-	echo "going native!"
+-}
++EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg"
+ 
+ PACKAGES_DYNAMIC = "gtk-module-* gdk-pixbuf-loader-* gtk-immodule-* gtk-printbackend-*"
+ 
+
+--M9NhX3UHpAaciwkO--
