@@ -1,44 +1,47 @@
-Received: from mail-fx0-f220.google.com ([209.85.220.220])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NnnfT-0000em-Rn
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Nnt7B-0005E5-5f
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 06 Mar 2010 07:39:29 +0100
-Received: by fxm20 with SMTP id 20so4551145fxm.12
+	Sat, 06 Mar 2010 13:28:17 +0100
+Received: by gwj23 with SMTP id 23so1189107gwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Mar 2010 22:36:26 -0800 (PST)
+	Sat, 06 Mar 2010 04:25:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type
+	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=102AQY4TdsIKzy3ifYGiGlmYybbDy9Em/ptNQVNo1EI=;
-	b=GaofXgqkUmBveyYQXtdM/uNQADk2FTGjnfaqP7CClYnFfWBH6WdWS95jfsCzmQER/2
-	y24V0Zk+W6STKHI8/gKzq3Ei7fJgqP/rKhk0l6CoAdZ/FvBRVK/VeO3H34XeEYOJ//4H
-	Vgsgkumq8LDFGCn5ekglpRuw+URLfn5LYvxqc=
+	bh=LF0GfR7gqK/BfVt1TWOQ42s9ClV7VBstEwq4LgeKMFE=;
+	b=kR8gd/l9ECBtO5hyjxYxvc1jF9LaRAlkyIDAr8Xxpv6VVb4OiBKVO1Sm/1qfNDWqxb
+	t7oPQkbo+Ql+m8OkHCoMX0EzFg8akNXjxIFke7KONEywzMBYLlPwmr59SlZMM0PoCoYv
+	hzrVhBoixi35cUdDHfokVeBDtdQBCXxqpcLT0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=UOJtm9Ki+RPyVHtAmegqiMbiINV8hPZPp/5Z6f3M9648qm7uZi8uhh4omxbVY4z636
-	it3AczUbNoPbip3/n8vKJhqM/pjCQ2ag0/GjHfAJw5kblxjA1iF0foD9N+mowvt1Eqgr
-	ARXB/0hDdfICMub3pS9iTpnreaCNp1LM+3OK0=
+	:content-type:content-transfer-encoding;
+	b=uOqRx+IyrThm5g4SJ0NjNI9EyFeinRnkdnydEXbQQ81vtcKyS3pHV5JiafCMapoLFK
+	sIHpPm3TWLLb3wEn7d2EgXVSPlLrJdh2Jde1myPjmYCE5wA4TSu/8kYmHaXBVExBxrGg
+	UQNQBoHM1iKkvA+jBgZRObZS0bJ4gbMkel83c=
 MIME-Version: 1.0
-Received: by 10.223.100.150 with SMTP id y22mr2005663fan.99.1267857386205; 
-	Fri, 05 Mar 2010 22:36:26 -0800 (PST)
-In-Reply-To: <E1NnJzb-0001K2-HM@melo.openembedded.org>
-References: <E1NnJzb-0001K2-HM@melo.openembedded.org>
-Date: Sat, 6 Mar 2010 07:36:26 +0100
-Message-ID: <141020e31003052236w4afdcc26x1008a539f0491c9a@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
+Received: by 10.101.64.18 with SMTP id r18mr4006408ank.24.1267878322572; Sat, 
+	06 Mar 2010 04:25:22 -0800 (PST)
+In-Reply-To: <hmrg46$6m7$1@dough.gmane.org>
+References: <1267616149.2259.4.camel@rex>
+	<ac9c93b11003030459h499fa3ban6f6884910ef785a@mail.gmail.com>
+	<1267624062.2259.58.camel@rex>
+	<ac9c93b11003030628n357a820elede742097eafee42@mail.gmail.com>
+	<1267629590.2259.92.camel@rex> <hmrg46$6m7$1@dough.gmane.org>
+Date: Sat, 6 Mar 2010 13:25:22 +0100
+Message-ID: <ac9c93b11003060425w221ce721re9c0bae052b099c0@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.220
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Koen Kooi <k.kooi@student.utwente.nl>
-Subject: Re: [oe-commits] Phil Blundell : gtk+: build gtk-demo and package it appropriately
+Subject: Re: TSC Meeting 2010/03/02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,77 +55,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 06 Mar 2010 06:39:29 -0000
+X-List-Received-Date: Sat, 06 Mar 2010 12:28:17 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 4, 2010 at 11:58 PM, git version control
-<git@git.openembedded.org> wrote:
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: a3b0920d0cc2cecac9eea4993ad18a64b207d7af
-> URL: =A0 =A0http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcomm=
-it;h=3Da3b0920d0cc2cecac9eea4993ad18a64b207d7af
+2010/3/5 Rolf Leggewie <no2spam@nospam.arcornews.de>:
+
+[...]
 >
-> Author: Phil Blundell <philb@gnu.org>
-> Date: =A0 Thu Mar =A04 22:56:33 2010 +0000
->
-> gtk+: build gtk-demo and package it appropriately
+> Frans, I hope I did not paraphrase your sentiments incorrectly. =A0Feel
+> free to correct me if I did.
 
-Hi,
+You didn't :-)
 
-after this patch I get build failure in those re-enable demos:
+I've indeed come to the conclusion that apparently OE has come to a
+point where it is very hard to move forward.
+One of the reasons is the perception of quality for some people.
 
-| make[2]: Entering directory
-`/OE/tmpdir-dev-shr/work/armv4t-oe-linux-gnueabi/gtk+-2.18.6-r8.3/gtk+-2.18=
-.6/demos'
-| /OE/tmpdir-dev-shr/staging/x86_64-linux/usr/bin/gdk-pixbuf-csource
---raw --build-list         \
-|               apple_red  ./apple-red.png      \
-|                 gnome_foot ./gnome-foot.png   \
-|         > test-inline-pixbufs.h                               \
-|       || (rm -f test-inline-pixbufs.h && false)
-| failed to load "./apple-red.png": Couldn't recognize the image file
-format for file './apple-red.png'
-| make[2]: *** [test-inline-pixbufs.h] Error 1
-| make[2]: Leaving directory
-`/OE/tmpdir-dev-shr/work/armv4t-oe-linux-gnueabi/gtk+-2.18.6-r8.3/gtk+-2.18=
-.6/demos'
-| make[1]: *** [all-recursive] Error 1
-| make[1]: Leaving directory
-`/OE/tmpdir-dev-shr/work/armv4t-oe-linux-gnueabi/gtk+-2.18.6-r8.3/gtk+-2.18=
-.6'
-| make: *** [all] Error 2
-| FATAL: oe_runmake failed
-| ERROR: Function do_compile failed
+Quality to me does not mean having 26 glib recipes around or 8 abiword
+ones or whatever most of which are likely to be unused and even more
+likely to be unmaintained.
+We currently have close to 9000 recipes, 3000+of which are older versions.
+I understand why people feel they should keep old versions, but that
+is where a version control system is for.
 
-bitbake@jama ~/build.dev.shr.gta $
-/OE/tmpdir-dev-shr/staging/x86_64-linux/usr/bin/gdk-pixbuf-csource -v
-gdk-pixbuf-csource version 2.12.11
+Development head should reflect the latest state-of-the-art, and
+probably should have only one version per recipe.
+(probably with the exception of things like gcc, linux and u-boot).
+If things do not work with a version, they should be fixed. Keeping
+the old version around and pin it, means that in the end you end up
+with a system which is lagging behind.
 
-seems like that version from
-recipes/gtk+/gdk-pixbuf-csource-native_2.12.11.bb
+If you want stability use a stable branch. head should focus on moving forw=
+ard.
 
-and gtk+-native explicitly removes this
-recipes/gtk+/gtk+_2.18.6.bb:
-do_install_virtclass-native () {
-        autotools_do_install
-        find ${D}${libdir} -name "libpixbufloader-*.la" -exec rm \{\} \;
-        rm ${D}${bindir}/gdk-pixbuf-csource
-        echo "going native!"
-}
+Some people seem to think differently about it. As an alternative an
+obsolete directory has been proposed.
+The latter does not really help. It gives the crud a home, but it does
+not really solve the problem.
 
-So I guess that
-find ${D}${libdir} -name "libpixbufloader-*.so" -exec rm \{\} \;
-in gtk+-native could help gdk-pixbuf-csource-native to work
+However as discussions on what to remove are time consuming and
+progress is hard, I have abandoned that path.
 
-but replacing gdk-pixbuf-csource-native with gtk+-native would be much bett=
-er
+Instead I decided to create a branch called sanity (for now local, but
+once it is more reliable I'll probably push it)
+In this branch I intend to
+- remove all old versions of recipes (sometimes tough as there are
+recipes that have both numbered and cvs/svn/git variants (I believe
+there is a case where there is even cvs and svn for package))
+  exceptions: gcc (but some versions will go there), linux, u-boot)
+- crude convert to BBCLASSEXTEND=3D"native". I feel this should in
+general work. (btw and I noticed we have packaged that do have native
+variants for older versions but not for the recent one, and I have
+even seen a case where the native recipe is newer than the target
+one).
+Plan was also to remove all do_deploy stuff, but apart from
+u-boot/linux this is nearly done.
 
-There is also bug when you rebuild gdk-pixbuf-csource-native and then
-don't rebuild gtk+-native to fix pkgconfig gtk.
-http://bugs.openembedded.org/show_bug.cgi?id=3D5405
+Note that the above edits may sound harsh, but frankly I doubt that
+anyone will ever convert those 3000 legacy devices, and even if they
+are converted, I strongly doubt that they are tested.
+This seems to be a better way forward.
 
-Please GTK/OE gurus fix this, thanks.
+After that I have some ideas for further improvements, but let's get
+this started first.
+
+If anyone wants to work with me on this, feel free to get in touch with me.
+And for those who feel that effort should be directed elsewhere. Make
+me an interesting offer and we can talk. But until that it are my
+weekends and evenings I am spending on this, and I'll spend them as I
+see fit, not as someone else sees fit (ok, with the exception of the
+Mrs :-) )
+
+Have fun!
+Frans
 
 
