@@ -1,48 +1,39 @@
-Received: from mail-fx0-f220.google.com ([209.85.220.220])
+Received: from mail-gx0-f224.google.com ([209.85.217.224])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NoFos-0001GN-JJ
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NoG5U-0001gJ-RC
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Mar 2010 13:42:58 +0100
-Received: by fxm20 with SMTP id 20so5216466fxm.12
+	Sun, 07 Mar 2010 14:00:05 +0100
+Received: by gxk24 with SMTP id 24so607974gxk.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Mar 2010 04:39:59 -0800 (PST)
+	Sun, 07 Mar 2010 04:57:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=Nxav2A6gdq8S3pUXgCitrOay9TLPdCQqOBxCrOoWY90=;
-	b=Mfi0cUAyCv5rJYbdfkeY2yPYPApoCC+vRVLSwguR2j/OB70KcMBPWuFllqiSHGr7O8
-	vbIrKJsJ3NcCEhPzl1l7etZGTSeHopyKuKupdqFBCKDB9FeOxQveUWU+vpOdBxaJuaNZ
-	AYNU36b6aOccRrxFidYwRUZjq3RloMuOTHTQE=
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=htjyg0Ph6H1bENuNmp2O2DOaFhXhbyDnBrw6TxsXOWI=;
+	b=mZjoy5UP/4/fKc6Jz7GZWrE96D4xB3PUthP6CCxlMqR+Wz/fwa3in5MM/Jk8byPj+m
+	VWO1h7r2Ib3EgPlvxl8qYLRSkeNxhpcmq+8E7YiQ2u5ZlCtxn6daTT+1Uw7fQeKoEpu5
+	EpB+k2n+2mBJmIx8Tn4wJlccTrTN2+/c8z6Tg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=AnDvPd336ff8/bC/nQWSBAEQmZ1m27fUFrlHZp61fbJpd++BXIErZtwZq1FC5+nq9v
-	dP+vi+sVmC8S9TFbIBESuEh6fCyl36D4HsDWkoZLxvtANFnmSVWNA1lp6hMoojfOvn2r
-	aRyWd4xbsQ+sts+sVKfZDNqztYZ0GjZBpIQko=
-Received: by 10.223.58.83 with SMTP id f19mr1373985fah.88.1267965599726;
-	Sun, 07 Mar 2010 04:39:59 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 16sm2362930fxm.11.2010.03.07.04.39.55
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 07 Mar 2010 04:39:57 -0800 (PST)
-Date: Sun, 7 Mar 2010 13:40:47 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100307124047.GH31945@jama>
-References: <20100306193907.GA5881@xora-build.xora.org.uk>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=sSWgOiP88Kea/XpTpLVPplUp5Nn5VuNNipgfPYmqwB0HHll3597INI6pml79O6zZh8
+	alFMt09f+Q21X8SLr4uHXhjMdHutURzGM6yPUY04fqx7tmDEZ7id0IAs9ywy7hAxl4M1
+	dFH+Qqvct0yXYTT40tzIzODtD98Gat61SyLjM=
 MIME-Version: 1.0
-In-Reply-To: <20100306193907.GA5881@xora-build.xora.org.uk>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.220
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.101.7.19 with SMTP id k19mr6821746ani.123.1267966629381; Sun, 
+	07 Mar 2010 04:57:09 -0800 (PST)
+Date: Sun, 7 Mar 2010 13:57:09 +0100
+Message-ID: <ac9c93b11003070457i3f57fbcar68f5c7601f1cc9f@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.217.224
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Possible gtk+-native de-breakage
+Subject: [RFC] _target suffix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,32 +47,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Mar 2010 12:42:58 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 07 Mar 2010 13:00:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Sat, Mar 06, 2010 at 07:39:07PM +0000, Graeme Gregory wrote:
-> Hi, I knocked this up while doing some enterprise java installs this after
-> noon and Im too brain fried to deal with it and wont have time in next few
-> days.
-> 
-> So can people checkout the attached patch/improve it.
+It is possible to override settings for e.g. native by adding _native
+to a rule or variable.
+However, it is not possible to state that a variable or action is only
+for the target.
 
-I can confirm, that this patch solves
-http://bugs.openembedded.org/show_bug.cgi?id=5405
-as well as gtk+ demos build.
+To me it makes sense to have e.g. _target as default suffix so one can e.g. say:
+DEPENDS = "x y z"
+DEPENDS_target += "t-native"
 
-As RP said, maybe we should keep gdk-pixbuf-csource-native for those who
-don't need whole gtk+, but for those like me who builds whole
-gtk+-native because other apps it's better with
-gdk-pixbuf-csource-native provider set to gtk+-native (to build it just
-once).
+BBCLASSEXTEND "native"
 
-Regards,
+(the other way would be:
+DEPENDS = "x y z t-native "
+DEPENDS_virtclass-native = "x y z"
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+but i think the former is more readable and more error proof.
+
+(btw the above scenario is typically a situation in recipe t which
+want to depend on its own native, but the native of course cannot
+depend on itself or on -native-native).
+
+Note that although this is probably not too difficult I am not sure
+that my pythonese is good enough to add this.
+Any suggestion/implementation/whatever is appreciated.
+
+FM
 
 
