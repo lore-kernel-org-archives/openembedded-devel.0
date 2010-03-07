@@ -1,39 +1,36 @@
-Received: from mail-gx0-f224.google.com ([209.85.217.224])
+Received: from smtp-out01.alice.it ([85.33.2.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NoG5U-0001gJ-RC
+	(envelope-from <GNUtoo@no-log.org>) id 1NoMbj-0005tc-Gx
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Mar 2010 14:00:05 +0100
-Received: by gxk24 with SMTP id 24so607974gxk.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Mar 2010 04:57:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=htjyg0Ph6H1bENuNmp2O2DOaFhXhbyDnBrw6TxsXOWI=;
-	b=mZjoy5UP/4/fKc6Jz7GZWrE96D4xB3PUthP6CCxlMqR+Wz/fwa3in5MM/Jk8byPj+m
-	VWO1h7r2Ib3EgPlvxl8qYLRSkeNxhpcmq+8E7YiQ2u5ZlCtxn6daTT+1Uw7fQeKoEpu5
-	EpB+k2n+2mBJmIx8Tn4wJlccTrTN2+/c8z6Tg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=sSWgOiP88Kea/XpTpLVPplUp5Nn5VuNNipgfPYmqwB0HHll3597INI6pml79O6zZh8
-	alFMt09f+Q21X8SLr4uHXhjMdHutURzGM6yPUY04fqx7tmDEZ7id0IAs9ywy7hAxl4M1
-	dFH+Qqvct0yXYTT40tzIzODtD98Gat61SyLjM=
-MIME-Version: 1.0
-Received: by 10.101.7.19 with SMTP id k19mr6821746ani.123.1267966629381; Sun, 
-	07 Mar 2010 04:57:09 -0800 (PST)
-Date: Sun, 7 Mar 2010 13:57:09 +0100
-Message-ID: <ac9c93b11003070457i3f57fbcar68f5c7601f1cc9f@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sun, 07 Mar 2010 20:57:53 +0100
+Received: from fbcmmo06.fbc.local ([192.168.184.137]) by smtp-out01.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sun, 7 Mar 2010 20:54:52 +0100
+Received: from FBCMCL01B06.fbc.local ([192.168.69.87]) by fbcmmo06.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sun, 7 Mar 2010 20:54:46 +0100
+Received: from [192.168.1.116] ([79.54.143.84]) by FBCMCL01B06.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Sun, 7 Mar 2010 20:54:46 +0100
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.217.224
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <hmjucb$9v9$1@dough.gmane.org>
+References: <1267553457.4739.324.camel@trini-m4400>
+	<hmjucb$9v9$1@dough.gmane.org>
+Date: Sun, 07 Mar 2010 20:53:56 +0100
+Message-Id: <1267991636.3666.1.camel@gnutoo-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-OriginalArrivalTime: 07 Mar 2010 19:54:47.0162 (UTC)
+	FILETIME=[0A2895A0:01CABE30]
+X-SA-Exim-Connect-IP: 85.33.2.12
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] _target suffix
+Subject: Re: [PATCH] Firefox cleanups
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,34 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Mar 2010 13:00:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 07 Mar 2010 19:57:53 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-It is possible to override settings for e.g. native by adding _native
-to a rule or variable.
-However, it is not possible to state that a variable or action is only
-for the target.
+On Tue, 2010-03-02 at 22:02 +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> On 02-03-10 19:10, Tom Rini wrote:
+> > firefox: Perform a number of cleanups and consistency issues.
+> 
+> What are your thoughts on building things like xul and nss seperately so
+> things like chromium can use them?
+> 
+> regards,
+> 
+> Koen
+That would be great!!!
+For instance pidgin-encryption(would be cool to have it in oe) depends
+on nss.
 
-To me it makes sense to have e.g. _target as default suffix so one can e.g. say:
-DEPENDS = "x y z"
-DEPENDS_target += "t-native"
+Denis.
 
-BBCLASSEXTEND "native"
 
-(the other way would be:
-DEPENDS = "x y z t-native "
-DEPENDS_virtclass-native = "x y z"
-
-but i think the former is more readable and more error proof.
-
-(btw the above scenario is typically a situation in recipe t which
-want to depend on its own native, but the native of course cannot
-depend on itself or on -native-native).
-
-Note that although this is probably not too difficult I am not sure
-that my pythonese is good enough to add this.
-Any suggestion/implementation/whatever is appreciated.
-
-FM
 
 
