@@ -1,41 +1,28 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NohNO-0002fp-Lq
+	(envelope-from <roman@khimov.ru>) id 1Noix0-0000uM-Jr
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Mar 2010 19:08:24 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NohKX-0001Z2-Dv from Tom_Rini@mentor.com 
+	Mon, 08 Mar 2010 20:49:18 +0100
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NoiEr-0003uH-TW
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Mar 2010 10:05:25 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Mon, 8 Mar 2010 10:05:25 -0800
-Received: from 172.30.33.172 ([172.30.33.172]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Mon,  8 Mar 2010 18:05:14 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	08 Mar 2010 11:05:14 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Mon, 08 Mar 2010 22:03:40 +0300
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4B94AA93.4070709@dresearch.de>
-References: <4B8E618C.2080604@dresearch.de>  <4B94AA93.4070709@dresearch.de>
-Organization: Mentor Graphics Corporation
-Date: Mon, 08 Mar 2010 11:05:14 -0700
-Message-ID: <1268071514.16526.6.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 08 Mar 2010 18:05:25.0121 (UTC)
-	FILETIME=[ED4A5710:01CABEE9]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Mon, 8 Mar 2010 22:01:20 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
+MIME-Version: 1.0
+Message-Id: <201003082201.30147.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: u-boot ready initrds
+Subject: [PATCH/RFC] qemu 0.12.3, cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,33 +36,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Mar 2010 18:08:24 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 08 Mar 2010 19:49:19 -0000
+X-Groupsio-MsgNum: 17402
+Content-Type: multipart/signed; boundary="nextPart8463171.qxELofyK2u";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
+
+--nextPart8463171.qxELofyK2u
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, 2010-03-08 at 08:43 +0100, Steffen Sledz wrote:
-> Steffen Sledz wrote:
-> > Initrds need to be prepared with mkimage to be usable from u-boot.
-> > The following patch introduces an additional IMAGE_FSTYPE .cpio.gz.u-bo=
-ot
-> > for this (at the moment just for hipox machine).
-> >=20
-> > Is this the way it should be done?
-> >=20
-> > Should this better become part of conf/bitbake.conf?
->=20
-> Ping
+Hello all.
 
-I don't know why patchwork didn't see this.  That said, mkimage -A arm
-is bad.  UBOOT_ARCH is right, and comes from kernel-arch.bbclass.  So, I
-think a full patch would need to add in changes to image.bbclass to
-inherit kernel-arch so that UBOOT_ARCH will be evaluated.
+Please take a look at "rik/qemu-0.12" branch on OE git repo. 0.9.x removal=
+=20
+patch is 0.5 Mb, so I think it's not appropriate for mailing list. In gener=
+al,=20
+0.12.3 addition was easy, but then I've discovered that 0.10.3 version is n=
+ot=20
+working on openSUSE 11.2, so there is also a change in sanity and proposal =
+to=20
+remove 0.10.3 from repository.
 
-And yes, this I think should be in bitbake.conf with the rest of the
-image magics
+Comments are welcome.
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
+--nextPart8463171.qxELofyK2u
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAkuVSYoACgkQXJ70z+XgVcOHnACggfI86ej0xEIqoEdfg41gzVg4
+od4AoMpgQM56beQwaaitWIFc3tq1VStJ
+=A7Xi
+-----END PGP SIGNATURE-----
+
+--nextPart8463171.qxELofyK2u--
