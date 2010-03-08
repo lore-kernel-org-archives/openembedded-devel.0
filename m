@@ -1,36 +1,30 @@
-Received: from smtp-out01.alice.it ([85.33.2.12])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1NoMbj-0005tc-Gx
+	(envelope-from <holger+oe@freyther.de>) id 1NoWBn-0002Fb-Mh
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 07 Mar 2010 20:57:53 +0100
-Received: from fbcmmo06.fbc.local ([192.168.184.137]) by smtp-out01.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sun, 7 Mar 2010 20:54:52 +0100
-Received: from FBCMCL01B06.fbc.local ([192.168.69.87]) by fbcmmo06.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sun, 7 Mar 2010 20:54:46 +0100
-Received: from [192.168.1.116] ([79.54.143.84]) by FBCMCL01B06.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Sun, 7 Mar 2010 20:54:46 +0100
-From: GNUtoo <GNUtoo@no-log.org>
+	Mon, 08 Mar 2010 07:11:40 +0100
+Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
+	[123.192.181.204])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 3C2601B10C02
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  8 Mar 2010 06:11:09 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hmjucb$9v9$1@dough.gmane.org>
-References: <1267553457.4739.324.camel@trini-m4400>
-	<hmjucb$9v9$1@dough.gmane.org>
-Date: Sun, 07 Mar 2010 20:53:56 +0100
-Message-Id: <1267991636.3666.1.camel@gnutoo-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-OriginalArrivalTime: 07 Mar 2010 19:54:47.0162 (UTC)
-	FILETIME=[0A2895A0:01CABE30]
-X-SA-Exim-Connect-IP: 85.33.2.12
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+Date: Mon, 8 Mar 2010 07:08:11 +0100
+User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
+References: <4B926E27.4090100@mwester.net> <1267888240.11175.32.camel@rex>
+In-Reply-To: <1267888240.11175.32.camel@rex>
+MIME-Version: 1.0
+Message-Id: <201003080708.11546.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Firefox cleanups
+Subject: Re: Encouraging distros to use newer recipe versions?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,29 +38,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 Mar 2010 19:57:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 08 Mar 2010 06:11:40 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2010-03-02 at 22:02 +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> On 02-03-10 19:10, Tom Rini wrote:
-> > firefox: Perform a number of cleanups and consistency issues.
-> 
-> What are your thoughts on building things like xul and nss seperately so
-> things like chromium can use them?
-> 
-> regards,
-> 
-> Koen
-That would be great!!!
-For instance pidgin-encryption(would be cool to have it in oe) depends
-on nss.
+On Saturday 06 March 2010 16:10:40 Richard Purdie wrote:
 
-Denis.
+> > I have no patches to do such a thing, and neither do I have time to
+> > create such a thing at this point in time, but perhaps if someone
+> > thinks this is worthwhile time can be made for it...
+> 
+> I've been keeping half an eye on what Holger has been doing and yes, I
+> think this could be desirable. Its also rather straightforward to do.
+> Simply create a new variable
 
 
+Such a class does make sense but is only fixing 50% of the issue. E.g. when we 
+look at "gpdf" there are two things.
+
+1.) The distro builder should be informed that building gpdf is bad in regard 
+to known security issues. So he might decide to throw it out of the feed.
+
+2.) A user using the distro has the (discontinued) package still installed and 
+he will not notice that his latest gpdf is "bad". Distribution makers will 
+also need a way to announce such things to their users. I have wondered if we 
+could create a ipk with RCONFLICTS on discontinued software or such.
+
+
+z.
 
 
