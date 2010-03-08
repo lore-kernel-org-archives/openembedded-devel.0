@@ -1,28 +1,30 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Nobga-0003sE-Rd
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mickey@vanille-media.de>) id 1NocKT-0002Um-PD
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Mar 2010 13:03:50 +0100
-Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
-	[123.192.181.204])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id BFCBE1B10C79
+	Mon, 08 Mar 2010 13:45:08 +0100
+Received: from [192.168.1.4] (dialbs-092-079-168-007.static.arcor-ip.net
+	[92.79.168.7])
+	by drlauer-research.com (Postfix) with ESMTP id F0ACA58462B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Mar 2010 12:03:20 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Mon,  8 Mar 2010 13:42:39 +0100 (CET)
+Mime-Version: 1.0 (Apple Message framework v1077)
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+In-Reply-To: <201003081300.19058.holger+oe@freyther.de>
+Date: Mon, 8 Mar 2010 13:42:07 +0100
+Message-Id: <B6E39224-2467-4EDA-A0F4-94C4F9DAF9CD@vanille-media.de>
+References: <201003081300.19058.holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 8 Mar 2010 13:00:18 +0100
-User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
-MIME-Version: 1.0
-Message-Id: <201003081300.19058.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+X-Mailer: Apple Mail (2.1077)
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: samba-essential upgrade or remove?
+Subject: Re: samba-essential upgrade or remove?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,20 +38,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Mar 2010 12:03:51 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 08 Mar 2010 12:45:08 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-Hi all,
+While I'm not using it atm., I recall that samba-essential was the only =
+recipe that worked relatively
+painless when Matthias Hentges create it back then.
 
-samba-essential is currently based on the 3.0.x series of samba that has 
-reached end of life. Our current version is 3.0.20, the latest upstream is 
-3.0.37, the stable 3.5.x series was just opened...
+:M:
 
-So what should we do? There is currently no in tree usage of samba-essential, 
-should we drop it?
-
-z.
 
 
