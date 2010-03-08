@@ -1,39 +1,31 @@
-Received: from mail-gx0-f224.google.com ([209.85.217.224])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NolUH-0000cV-Lz
+	(envelope-from <roman@khimov.ru>) id 1NolWo-0000nH-Bp
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Mar 2010 23:31:47 +0100
-Received: by gxk24 with SMTP id 24so1398129gxk.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Mar 2010 14:28:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=WKjC/k0pd1k0U+xt+OnVR/gwU1HVXbfMHQ5AmQo4NNU=;
-	b=xbf9IERkI2I3+GxKJ4c3zhYAkLa4KRfxrqZfMdeY5RwGElyVIWltEOiyV+RxwfH15Z
-	WGpbYWW1BYpd9bfULp+PaUaslrmOcSr20iTphhORtjlNiKGugwu73HiysSpPQgKBYVHs
-	OpuFF2Z9E8pPpxLQme6FM+qgJBhvYmGaKUxS8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=HaomFiTUKMKnXu06AZmDA3cmBY0hpturIQzqJ1J8MOl3czmfyiT+Gct3NaLRpOeHvJ
-	yw7PEy+7ACEQRyT0kOQftgpM3+LDuYr7bgyLuHPsskWjN3NuaBCiWfwK6veGeTFRH4pj
-	sXpe4CTmVhCTCyhBunqSWLu2rh25b0EzoPmCw=
-MIME-Version: 1.0
-Received: by 10.101.175.38 with SMTP id c38mr1339627anp.40.1268087328901; Mon, 
-	08 Mar 2010 14:28:48 -0800 (PST)
-Date: Mon, 8 Mar 2010 23:28:48 +0100
-Message-ID: <ac9c93b11003081428q12434c9fl18bf04ba853f4a8a@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 08 Mar 2010 23:34:26 +0100
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NolTz-0004B3-3K
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Mar 2010 01:31:28 +0300
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.217.224
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Tue, 9 Mar 2010 01:29:12 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
+References: <201003082201.30147.roman@khimov.ru>
+	<1268081324.16526.82.camel@trini-m4400>
+In-Reply-To: <1268081324.16526.82.camel@trini-m4400>
+MIME-Version: 1.0
+Message-Id: <201003090129.19439.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [SANITY] sanity branch created
+Subject: Re: [PATCH/RFC] qemu 0.12.3, cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,165 +39,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Mar 2010 22:31:47 -0000
-X-Groupsio-MsgNum: 17406
-Content-Type: multipart/mixed; boundary=001636c5bc6ac88e23048151967c
+X-List-Received-Date: Mon, 08 Mar 2010 22:34:26 -0000
+X-Groupsio-MsgNum: 17407
+Content-Type: multipart/signed; boundary="nextPart3219686.1fh2hmB5Gh";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
---001636c5bc6ac88e23048151967c
-Content-Type: text/plain; charset=ISO-8859-1
+--nextPart3219686.1fh2hmB5Gh
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Dear all,
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=9F=D0=BE=D0=BD=D0=B5=D0=B4=D0=B5=D0=BB=D1=8C=D0=BD=D0=B8=D0=BA 08 =D0=
+=BC=D0=B0=D1=80=D1=82=D0=B0 2010 23:48:44 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 To=
+m Rini =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> On Mon, 2010-03-08 at 22:01 +0300, Roman I Khimov wrote:
+> > Hello all.
+> >
+> > Please take a look at "rik/qemu-0.12" branch on OE git repo. 0.9.x
+> > removal patch is 0.5 Mb, so I think it's not appropriate for mailing
+> > list. In general, 0.12.3 addition was easy, but then I've discovered th=
+at
+> > 0.10.3 version is not working on openSUSE 11.2, so there is also a chan=
+ge
+> > in sanity and proposal to remove 0.10.3 from repository.
+> >
+> > Comments are welcome.
+>=20
+> Looks good except maybe we should move to BBCLASSEXTENDS while we're in
+> here?
 
-Last saturday I created a sanity branch named eFfeM/sanity. Purpose of
-this branch is to come to higher quality and more up to date recipes.
-Quite ambitious, I know, but as my late mother used to say "ambition
-does not hurt". :-)
+Sure, an updated version is pushed.
 
-Obviously this goal is not reached yet :-)
-However an initial milestone has been passed.
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
-I have removed some 3000 packages mostly old ones and several native
-packages (replacing with BBCLASSEXTEND="native").
-The resulting branch (which just pushed) builds. (machine = hawkboard,
-distro = minimal package = console-image) and the hawkboard boots from
-it (and passes some basic tests).
+--nextPart3219686.1fh2hmB5Gh
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
-There are a few issues though.
-bitbake console-image complains for some packages that the preferred
-version is not available. This is caused by the minimal distro which
-tries to pin these, and can be ignored.
-Maybe at some point in time I create a distro which truly follows the head.
-And some of the edits were fairly massive, touching a lot of files. In
-those cases I have not updated PR (sorry about that).
-(actually in order to distinguish the files build from the sanity
-branch, I am considering moving to a PR = "s0" etc scenario; opinions
-on this are appreciated)
-And finally when booting you'll notice that some things are missing in
-the rfs (e.g /etc/dev.tar). But as I already said: this is still work
-in progress!
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
 
-Anyway, attached is the code. If you want to contribute: feel free to
-improve things.
-Positive feedback is also very welcome. Please redirect negative
-comments to /dev/null. I already have more than enough of those :-)
+iEYEABECAAYFAkuVej8ACgkQXJ70z+XgVcP2RACcCVH2IJa8/l9De9vll0hFVzLY
+XzwAn044MCeGVQ2xn6Raoxw1+qcoH6gD
+=IaFK
+-----END PGP SIGNATURE-----
 
-Attached is the README.sanity file which explains more about this
-branch, its purpose and how to contribute.
-
-I hope you like it, and in any case: have fun!
-
-Frans.
-
---001636c5bc6ac88e23048151967c
-Content-Type: application/octet-stream; name="README.sanity"
-Content-Disposition: attachment; filename="README.sanity"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_g6jr5p3z0
-
-UkVBRE1FLnNhbml0eQo9PT09PT09PT09PT09CgpUaGUgZmFjdCB0aGF0IHlvdSBhcmUgcmVhZGlu
-ZyB0aGlzIHByb2JhYmx5IG1lYW5zIHRoYXQgeW91IGNoZWNrZWQgb3V0IHRoZQpzYW5pdHkgYnJh
-bmNoIG9mIG9wZW5lbWJlZGRlZC4gR3JlYXQuIFdlbGNvbWUgYWJvYXJkIQoKVGhpcyByZWFkbWUg
-ZmlsZSB3aWxsIGV4cGxhaW4gYSBsaXR0bGUgYml0IG9uIHRoZSBwdXJwb3NlIG9mIHRoaXMgYnJh
-bmNoIGFuZAp3aGF0IHlvdSBzaG91bGQgYW5kIHNob3VsZCBub3QgZG8uCgpQdXJwb3NlCi0tLS0t
-LS0KVGhlIHB1cnBvc2Ugb2YgdGhpcyBicmFuY2ggaXMgdG8gY3JlYXRlIGEgaGlnaC1xdWFsaXR5
-IHZlcnNpb24gb2YgdGhlCm9wZW5lbWJlZGRlZCByZWNpcGVzLiAKCkFsdGhvdWdoIHF1YWxpdHkg
-aXMgYSBkZWJhdGFibGUgdG9waWMsIEknbGwgdHJ5IHRvIGlsbHVzdHJhdGUgbXkgCmludGVudGlv
-biB3aXRoIHNvbWUgZXhhbXBsZXMuCi0gb25seSBoYXZlIG9uZSByZWNpcGUgZm9yIGEgcGFja2Fn
-ZS4gSWYgeW91IG5lZWQgYW4gb2xkZXIgdmVyc2lvbjogd2VsbCB0aGF0CiAgaXMgd2hlcmUgYSB2
-ZXJzaW9uIG1hbmFnZW1lbnQgc3lzdGVtIGlzIGZvcgotIHNtYWxsIGZvb3RwcmludCByZWNpcGVz
-OiBpZiB0aGUgcmVjaXBlIG5lZWRzIHRvIGJlIGJpZyB0aGVyZSBpcyBwcm9iYWJseQogIHNvbWV0
-aGluZyBmdW5kYW1lbnRhbGx5IHdyb25nIHdpdGggaXQuCi0gd2VsbCBkb2N1bWVuZW50ZWQgcmVj
-aXBlcy4gVGhlIHJlY2lwZXMgc2hvdWxkIGhhdmUgYSBkZWNlbnQgaGVhZGVyIAogIGdpdmluZyB0
-aGluZ3MgbGlrZSBERVNDUklQVElPTiwgTElDRU5TRSBldGMgZXRjCi0gYmUgZmFpcmx5IHVwIHRv
-IGRhdGUuIEluIG1vc3QgY2FzZXMgaXQgaXMgcG9pbnRsZXNzIHRvIGhhdmUgYSByZWNpcGUgZm9y
-IGEKICAyMDA0IHZlcnNpb24gb2YgYSBwYWNrYWdlLCB3aGljaCBpcyBkZWVtZWQgb2Jzb2xldGUK
-LSB0dW5lZCB0b3dhcmRzIHNtYWxsIGZvb3RwcmludC4gQ3VycmVudGx5IHNvbWV0aW1lcyB5b3Ug
-c2VlIHJlY2lwZXMgYmVpbmcgCiAgZHJhZ2dlZCBpbiwgdGhhdCBtYWtlcyB5b3UgdGhpbmsgV1RG
-LiBJZiBJIHdhbnQgdG8gY3JlYXRlIGEgTkFTIEkgZG8gbm90IHdhbnQKICB0byBjb21waWxlIGUu
-Zy4gcGFuZ28uCgpTdGF0dXMKLS0tLS0tCgpJcyB0aGUgYWJvdmUgYWxsIHRoZXJlIGluIHRoaXMg
-YnJhbmNoPwpCaWcgY2h1Y2tsZTogbm8uIFRoaXMgaXMgdGhlIHN0YXJ0IEN1cnJlbnRseSBpdCBi
-dWlsZHMgdGhlIGhlbGxvd29ybGQgcGFja2FnZSBmb3IKaGF3a2JvYXJkICh1c2luZyB0aGUgbWlu
-aW1hbCBkaXN0cmlidXRpb24pLCBhbmQgYnVpbGRpbmcgY29uc29sZS1pbWFnZSBmb3IKaGF3a2Jv
-YXJkIGlzIGluIHByb2dyZXNzLgpCdXQgSSBob3BlIHRoaXMgc2VjdGlvbiB3aWxsIGJlIGV4cGFu
-ZGVkIGluIHRoZSBuZWFyIGZ1dHVyZS4KCkNvbnRyaWJ1dGUKLS0tLS0tLS0tLQoKU291bmRzIGNv
-b2wsIGNhbiBJIGNvbnRyaWJ1dGU/CkJlIG15IGd1ZXN0LiBJZiB5b3UgYWdyZWUgd2l0aCB0aGUg
-cHVycG9zZSBvZiB0aGlzIGJyYW5jaCwgZm9sbG93IHRoZSBndWlkZWxpbmVzCmdpdmVuIGJlbG93
-IGFuZCBhY3QgYWNjb3JkaW5nbHkgYW5kIHdpdGggY29tbW9uIHNlbnNlLCBiZSBteSBndWVzdC4K
-SSdtIHN1cmUgeW91IGNhbiBmaW5kIGEgc3VpdGFibGUgdGFzaywgYnV0IGlmIG5vdCBoZXJlIGFy
-ZSBzb21lIHN1Z2dlc3Rpb25zOgotIGJ1aWxkIGFuZCB0ZXN0IG9uIHlvdXIgcGxhdGZvcm0gKGFu
-ZCBwbGVhc2UgdXNlIHRpbmRlcmJveCkKLSBwcm9wb3NlIGEgc3RhbmRhcmQgaGVhZGVyIChhbmQg
-ZXZlbnR1YWxseSBpbXBsZW1lbnQgaXQpCi0gcmVtb3ZlIGRvX3N0YWdlIGZyb20gcmVjaXBlcwot
-IGNvbnZlcnQgbmF0aXZlIGFuZCBzZGsgcmVjaXBlcyB0byBCQkNMQVNTRVhURU5ECi0gdHJ5IHRv
-IGlkZW50aWZ5IG91dGRhdGVkIHJlY2lwZXMKLSB1cGRhdGUgcmVjaXBlcyB0byB0aGUgbGF0ZXN0
-IHZlcnNpb24KLSB0cnkgdG8gaWRlbnRpZnkgdW5uZWVkZWQgREVQRU5EZW5jeXMuCi0gZWxpbWlu
-YXRlIHN0cmFuZ2UgZGVwZW5kZW5jaWVzIChlLmcuIGlmIEkgYnVpbGQgY29uc29sZS1pbWFnZSwg
-eCBhbmQgZ25vbWUgc3R1ZmYgaXMgYnVpbGQKICB0aGF0IHNob3VsZCBiZSBkZWNvdXBsZWQgKG1h
-eWJlIGJ5IGhhdmluZyB0d28gcmVjaXBlcykKLSByZW1vdmUgREVGQVVMVF9QUkVGRVJFTkNFCi0g
-bWVyZ2UgcGF0Y2hlcyBmcm9tIHRoZSBtYWluIGJyYW5jaAotIGVsaW1pbmF0ZSB1bnVzZWQgZmls
-ZXMKLSAuLi4uCgpHdWlkZWxpbmVzCi0tLS0tLS0tLS0KVGFsa2luZyBhYm91dCBndWlkZWxpbmVz
-LCBpbiBvcmRlciB0byBrZWVwIHRoaW5ncyBzdHJlYW1saW5lZCwgdGhlcmUgYXJlIGEgCmZldyBz
-bWFsbCBndWlkZWxpbmVzLgoKVHlwaWNhbGx5IHRoZXJlIHNob3VsZCBiZSBvbmx5IG9uZSByZWNp
-cGUgZm9yIGEgcGFja2FnZS4gSWRlYWxseSB0aGlzIHNob3VsZCBkbyB0aGUKbmF0aXZlIHBhcnQg
-YXMgd2VsbCBhcyB0aGUgdGFyZ2V0IHBhcnQuIEluIHNvbWUgY2FzZXMgbXVsdGlwbGUgcmVjaXBl
-cyBtaWdodCBiZQp1bmFvaWRhYmxlIChlLmcuIGtlcm5lbCwgdS1ib290LCBnY2MpLCBidXQgZ2Vu
-ZXJhbGx5IG11bHRpcGxlIHJlY2lwZXMgYXJlIG5vdCBnb29kCklmIGEgcGxhdGZvcm0gb3IgZGlz
-dHJvIG5lZWRzIGFuIG9sZGVyIHZlcnNpb24gYW5kIGNhbm5vdCB3b3JrIHdpdGggYSBuZXdlciBv
-bmUgdGhlbgp0aGUgdW5kZXJseWluZyBwcm9ibGVtIHNob3VsZCBiZSBmaXhlZCBpbnN0ZWFkIG9m
-IHBpbm5pbmcgdGhlIG9sZCB2ZXJzaW9uLgpBbmQgbm90ZSB0aGF0IHRoaXMgaXMgYSBkZXZlbG9w
-bWVudCBicmFuY2guIElmIHlvdSB3YW50IHN0YWJpbGl0eSB1c2UgYSBzdGFibGUKYnJhbmNoLgoK
-SGF2aW5nIHNhaWQgdGhhdCB0aGVyZSBtaWdodCBiZSBhIGZldyBjYXNlcyB3aGVyZSBpdCBpcyBy
-ZWFsbHkgdW5hdm9pZGFibGUgdG8gaGF2ZQptdWx0aXBsZSByZWNpcGVzLiBJbiB0aGF0IGNhc2Ug
-dGhlIG9sZGVyIHJlY2lwZSBzaG91bGQgY29udGFpbiBhIHNob3J0IHJhdGlvbmFsZSB3aHkKdGhp
-cyBvbGQgdmVyc2lvbiBpcyBzdGlsbCB0aGVyZS4KCkJUVzogdS1ib290LCBrZXJuZWwgYW5kIGdj
-YyBhcmUgY29uc2lkZXJlZCB0byBiZSBzcGVjaWFsOgpEaWZmZXJlbnQgc3lzdGVtcyBjYW4gSU1I
-TyB1c2UgZGlmZmVyZW50IGtlcm5lbCB2ZXJzaW9ucyBhbmQgaGF2ZSBkaWZmZXJlbnQgdS1ib290
-CnJlY2lwZXMuIEFjdHVhbGx5IG9uZSBjb3VsZCBhbHNvIHZpZXcgdGhhdCBlYWNoIG1hY2hpbmUg
-aGFzIGl0cyBvd24gdS1ib290IHJlY2lwZQpidXQgZm9yIHNvbWUgcmVhc29ucyBpdCBtaWdodCBi
-ZSBlZmZpY2llbnQgdG8gbWVyZ2UgdGhlbS4gU2ltaWxhciBmb3Iga2VybmVsCnJlY2lwZXMuIEdj
-YyBpcyBhbHNvIHNvbWV3aGF0IHNwZWNpYWwgYXMgaXQgbWlnaHQgd2VsbCBiZSB0aGF0IHdoZW4g
-YSBuZXcgdmVyc2lvbgppcyBtYWRlIG5vdCBhbGwgYXJjaGl0ZWN0dXJlcyBhcmUgc3VwcG9ydGVk
-L3N0YWJsZSwgc28gSSBjYW4gaW1hZ2luZSBkaWZmZXJlbnQKdmFyaWFudHMgZm9yIGRpZmZlcmVu
-dCBhcmNoaXRlY3R1cmVzLgoKQWRkaW5nIG5ldyByZWNpcGVzOiBvZiBjb3Vyc2UgaWYgYSBuZXcg
-cGFja2FnZSBpcyBhZGRlZCB0aGVyZSBpcyBhIGNoYW5jZSB0aGF0CmFub3RoZXIgcGFja2FnZS9p
-bWFnZS9tYWNoaW5lIGJyZWFrcy4gT2YgY291cnNlIGl0IGlzIG5vdCBuaWNlLCBhbmQgaXQgc2hv
-dWxkIGJlCmF2b2lkZWQuIEJ1dCBoZXksIGl0IGlzIGEgZGV2IGJyYW5jaC4gVGhvc2UgdGhpbmdz
-IGhhcHBlbi4gCkluIG9yZGVyIHRvIGRvIHRoaW5ncyByZWFzb25hYmx5IGZhaWxzYWZlIHdheSBw
-bGVhc2UgdGFrZSB0aGUgZm9sbG93aW5nIHN0ZXBzIGludG8KYWNjb3VudDoKLSBtYWtlIHN1cmUg
-eW91IHN0YXJ0IHdpdGggYSBidWlsZGFibGUgc3lzdGVtCi0gYWZ0ZXIgeW91ciBjaGFuZ2UgaXMg
-bWFkZSwgdmVyaWZ5IHRoYXQgaXQgYnVpbGRzIGFuZCBleGVjdXRlZCBvbiBhdCBsZWFzdCBvbmUg
-CiAgaGFyZHdhcmUgcGxhdGZvcm0KLSBpZiBwb3NzaWJsZSBidWlsZCBhIGZyZXNoIGltYWdlIHRo
-YXQgY29udGFpbnMgdGhlIHBhY2thZ2UgYW5kIG90aGVycy4gY29uc29sZS1pbWFnZQogIG1pZ2h0
-IGJlIGEgZ29vZCBzdGFydC4gVGhhdCB3YXkgeW91IGxlYXJuIGlmIGEgcGFja2FnZSB1c2luZyB5
-b3VyIHBhY2thZ2UgYnJlYWtzIAogIGR1ZSB0byB0aGUgbmV3IHZlcnNpb25zLgotIGlmIHRoZSBh
-Ym92ZSByZXN1bHRzIGluIGVycm9ycywgZml4IHRoZW0gYmVmb3JlIHB1c2hpbmcgeW91ciBuZXcg
-cmVjaXBlLgotIGlmIHlvdSBmZWVsIGl0IGlzIHVzZWZ1bCB0byBwdXNoIHRoZSByZWNpcGUgYmVm
-b3JlIGl0IGlzIGZ1bGx5IG1hdHVyZSwgYWRkIGEKICBERUZBVUxUX1BSRUZFUkVOQ0UgPSAiLTEi
-IHRvIHRoZSByZWNpcGUuIFRoaXMgaXMgdHlwaWNhbGx5IHVzZWZ1bCBmb3Igd2lkZS1pbXBhY3QK
-ICBjaGFuZ2VzIHRoYXQgeW91IHdhbnQgdG8gaGF2ZSB0ZXN0ZWQgb3IgcmV2aWV3ZWQgYnkgb3Ro
-ZXJzLiBUaGlzIHNob3VsZCBvbmx5IGJlIGEgdHJhbnNpZW50CiAgc2l0dWF0aW9uLiBBbHNvIHRo
-ZXJlIHNob3VsZCBiZSBvbmx5IG9uZSByZWNpcGUgd2l0aCBERUZBVUxUX1BSRUZFUkVOQ0UgaW4g
-aXQuCi0gaWYgeW91IGZlZWwgeW91ciByZWNpcGUgbWlnaHQgY2F1c2UgaGFybSBmb3Igb3RoZXJz
-LCB1c2UgYSB0d28gc3RhZ2UgY29tbWl0CiAgZmlyc3QgY29tbWl0IHlvdXIgbmV3IHJlY2lwZSB3
-aXRoIERFRkFVTFRfUFJFRkVSRU5DRSA9ICItMSIuIE5leHQgaW4gYSBzZXBhcmF0ZQogIGNvbW1p
-dCBkbyB0d28gdGhpbmdzOiByZW1vdmUgdGhlIERFRkFVTFRfUFJFRkVSRU5DRSBsaW5lIGFuZCBy
-ZW1vdmUgdGhlIG9sZCByZWNpcGUKICAodG9nZXRoZXIgd2l0aCBhbGwgcGF0Y2hlcyBldGMgZm9y
-IGl0KS4gVGhhdCB3YXkgaWYgZGVzaXJlZCBpdCBiZWNvbWVzIGVhc3kgdG8KICByZXZlcnQgdG8g
-dGhlIG9sZCBzaXR1YXRpb24gKGlmIHRoZXJlIGhhcHBlbnMgdG8gYmUgYW4gaXNzdWUgYWZ0ZXIg
-YWxsKS4KCkFsc28gd2hlbiBtYWtpbmcgYSB2ZXJ5IGdsb2JhbCBjaGFuZ2UgKGUuZy4gb25lIHRo
-YXQgYWZmZWN0cyBtYW55IHJlY2lwZXMpLCBhc2sKYXJvdW5kIGZpcnN0IHRvIGF2b2lkIHRoYXQg
-c29tZW9uZSBlbHNlIGRvZXMgdGhlIHNhbWUgdGhpbmcuIEFzIGEgZ2VuZXJhbCBydWxlIHVzZQpz
-bWFsbCBjb21taXRzIGFuZCBwdXNoIHJlZ3VsYXJseSBhbmQgd2l0aCBhIGRlY2VudCBjb21taXQg
-bWVzc2FnZSkKCk9mIGNvdXJzZSBhbGwgb3RoZXIgZ3VpZGVsaW5lcyBvZiBvZSBhbHNvIGFwcGx5
-LgoKQW5kLCBpZiBpbiBkb3VidCwgY29uc3VsdCBvdGhlcnMuIChlLmcuIGVGZmVNIGluICNvZSwg
-dGhlIGF1dGhvciBvZiB0aGlzIHJlYWRtZSkuCgpGaW5hbGx5Ci0tLS0tLS0KRmVlbCBmcmVlIHRv
-IGJyaW5nIG92ZXIgcmVjaXBlcyBldGMgZnJvbSB0aGUgbWFpbiBicmFuY2ggYnV0IG1ha2Ugc3Vy
-ZSB0aGV5IGRvCmFkaGVyZSB0aGUgcXVhbGl0eSBzdGFuZGFyZHMgb2YgdGhpcyBicmFuY2ggKGFu
-ZCBwbGVhc2UgZG8gZ2l2ZSBjcmVkaXQgaWYgeW91IHRha2UgCmZyb20gdGhlIG1haW4gYnJhbmNo
-KS4KCkl0IGlzIGFsc28gb2sgdG8gbWVyZ2UgdGhpbmdzIGJhY2sgdG8gdGhlIG1haW4gYnJhbmNo
-IChidXQgSSBhcHByZWNpYXRlIGl0IGlmCmNyZWRpdCBpcyBnaXZlbikuIEhvd2V2ZXIgYmUgY2Fy
-ZWZ1bC4gSXQgaXMgaG90IG91dCB0aGVyZS4gRXNwZWNpYWxseSBkZWxldGluZwpyZWNpcGVzIG9y
-IGNoYW5naW5nIHByZWZlcmVuY2VzIG1pZ2h0IHR1cm4gb24gdGhlIGhlYXQuCgpXaGVuIGFsbCBm
-YWlsczogdXNlIGNvbW1vbiBzZW5zZS4KCkFuZCwgbW9zdCBpbXBvcnRhbnRseTogaGF2ZSBmdW4h
-CgpGTS4KCgo=
-
---001636c5bc6ac88e23048151967c--
+--nextPart3219686.1fh2hmB5Gh--
