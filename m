@@ -1,26 +1,27 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1NocKT-0002Um-PD
+Received: from gandharva.secretlabs.de ([78.46.147.237])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <holger+oe@freyther.de>) id 1NocUB-0002ov-UU
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Mar 2010 13:45:08 +0100
-Received: from [192.168.1.4] (dialbs-092-079-168-007.static.arcor-ip.net
-	[92.79.168.7])
-	by drlauer-research.com (Postfix) with ESMTP id F0ACA58462B
+	Mon, 08 Mar 2010 13:55:05 +0100
+Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
+	[123.192.181.204])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 0069A1B10C02
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Mar 2010 13:42:39 +0100 (CET)
-Mime-Version: 1.0 (Apple Message framework v1077)
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-In-Reply-To: <201003081300.19058.holger+oe@freyther.de>
-Date: Mon, 8 Mar 2010 13:42:07 +0100
-Message-Id: <B6E39224-2467-4EDA-A0F4-94C4F9DAF9CD@vanille-media.de>
-References: <201003081300.19058.holger+oe@freyther.de>
+	Mon,  8 Mar 2010 12:54:35 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1077)
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+Date: Mon, 8 Mar 2010 13:51:35 +0100
+User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
+References: <201003081300.19058.holger+oe@freyther.de>
+	<B6E39224-2467-4EDA-A0F4-94C4F9DAF9CD@vanille-media.de>
+In-Reply-To: <B6E39224-2467-4EDA-A0F4-94C4F9DAF9CD@vanille-media.de>
+MIME-Version: 1.0
+Message-Id: <201003081351.35463.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -38,15 +39,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Mar 2010 12:45:08 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 08 Mar 2010 12:55:05 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-While I'm not using it atm., I recall that samba-essential was the only =
-recipe that worked relatively
-painless when Matthias Hentges create it back then.
+On Monday 08 March 2010 13:42:07 Dr. Michael Lauer wrote:
+> While I'm not using it atm., I recall that samba-essential was the only
+> recipe that worked relatively painless when Matthias Hentges create it
+> back then.
 
-:M:
+Then please fix it. You will do a great service to our users. The following 
+CVEs are not addressed:
+	CVE-2009-2813, CVE-2009-2948, CVE-2009-2906, CVE-2009-1888, 
+CVE-2008-4314, CVE-2008-1105, CVE-2007-6015, CVS-2007-4572,  CVE-2007-5398, 
+CVE-2007-2444, CVE-2007-2446, CVE-2007-2447, CVE-2007-0452, CVE-2007-0453, 
+CVE-2007-0454, CAN-2006-1059..
 
+most of these are overflows and DoS
+
+z.
 
 
