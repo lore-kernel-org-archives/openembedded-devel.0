@@ -1,31 +1,28 @@
-Received: from smtp7.myhsphere.biz ([204.10.105.69] helo=mail9.myhsphere.biz)
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <balakrishnan@e-consystems.com>) id 1NoYgd-0007os-0J
+	(envelope-from <holger+oe@freyther.de>) id 1Nobga-0003sE-Rd
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Mar 2010 09:51:40 +0100
-Received: (qmail 28680 invoked by uid 399); 8 Mar 2010 08:48:41 -0000
-Received: from dsl-tn-dynamic-216.238.164.122.airtelbroadband.in (HELO
-	?192.168.6.196?) (balakrishnan@e-consystems.com@122.164.238.216)
-	by mail9.myhsphere.biz with ESMTPAM; 8 Mar 2010 08:48:41 -0000
-X-Originating-IP: 122.164.238.216
-X-Sender: balakrishnan@e-consystems.com
-From: balakrishnan <balakrishnan@e-consystems.com>
+	Mon, 08 Mar 2010 13:03:50 +0100
+Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
+	[123.192.181.204])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id BFCBE1B10C79
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  8 Mar 2010 12:03:20 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <mailman.4686.1267697311.14961.openembedded-devel@lists.openembedded.org>
-References: <mailman.4686.1267697311.14961.openembedded-devel@lists.openembedded.org>
-Date: Mon, 08 Mar 2010 14:14:02 +0530
-Message-Id: <1268037842.3457.14.camel@balakrishnan-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-SA-Exim-Connect-IP: 204.10.105.69
-X-SA-Exim-Mail-From: balakrishnan@e-consystems.com
+Date: Mon, 8 Mar 2010 13:00:18 +0100
+User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
+MIME-Version: 1.0
+Message-Id: <201003081300.19058.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Xserver problem...
+Subject: samba-essential upgrade or remove?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,46 +36,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Mar 2010 08:51:40 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 08 Mar 2010 12:03:51 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-ok Koen, But my doubt is "Xorg + xf86-video-fbdev" will support touch
-screen interface or not?
-I have added 'xf86-input-tslib' in Xorg, but touch is not enabled.
-Then only I have moved to kdrive.
+Hi all,
 
-Branch : stable/2009
-DISTRO : "angstrom-2008.1"
+samba-essential is currently based on the 3.0.x series of samba that has 
+reached end of life. Our current version is 3.0.20, the latest upstream is 
+3.0.37, the stable 3.5.x series was just opened...
 
-PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-XSERVER = "xserver-xorg \
-           xf86-input-evdev \
-           xf86-input-mouse \
-           xf86-video-fbdev \
-           xf86-input-keyboard \
-	   xf86-input-tslib "
+So what should we do? There is currently no in tree usage of samba-essential, 
+should we drop it?
 
-With Regards
-J.Balakrishnan
-
-On Thu, 2010-03-04 at 11:08 +0100,
-openembedded-devel-request@lists.openembedded.org wrote:
-> > Hi,
-> > I am using Angstrom OS for my pxa270 based board, which is build by
-> > Stable/2009 branch. In this, Xserver is running perperly on  240x320
-> and
-> > 640x480 resolution, but while running 480x272 resolution lcd 4.3" it
-> > making problem. How can I  resolve this.
-> 
-> You might need to patch kdrive to add the 480x272 resolution. But
-> since
-> kdrive is EOL and patching resolutions doesn't scale, I'd recommend
-> trying Xorg + xf86-video-fbdev.
-> 
-> regards,
-> 
-> Koen
-
+z.
 
 
