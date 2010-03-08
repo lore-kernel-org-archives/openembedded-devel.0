@@ -1,28 +1,41 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1Noix0-0000uM-Jr
+	(envelope-from <Tom_Rini@mentor.com>) id 1Nojvj-0007AR-Pg
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Mar 2010 20:49:18 +0100
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NoiEr-0003uH-TW
+	Mon, 08 Mar 2010 21:52:00 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1Nojss-0007VN-Lt from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Mar 2010 22:03:40 +0300
-From: Roman I Khimov <roman@khimov.ru>
+	Mon, 08 Mar 2010 12:49:02 -0800
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 8 Mar 2010 12:49:02 -0800
+Received: from 172.30.33.172 ([172.30.33.172]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Mon,  8 Mar 2010 20:48:45 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	08 Mar 2010 13:48:44 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 8 Mar 2010 22:01:20 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
-MIME-Version: 1.0
-Message-Id: <201003082201.30147.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+In-Reply-To: <201003082201.30147.roman@khimov.ru>
+References: <201003082201.30147.roman@khimov.ru>
+Organization: Mentor Graphics Corporation
+Date: Mon, 08 Mar 2010 13:48:44 -0700
+Message-ID: <1268081324.16526.82.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 08 Mar 2010 20:49:02.0386 (UTC)
+	FILETIME=[C8D61920:01CABF00]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH/RFC] qemu 0.12.3, cleanup
+Subject: Re: [PATCH/RFC] qemu 0.12.3, cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,46 +49,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Mar 2010 19:49:19 -0000
-X-Groupsio-MsgNum: 17402
-Content-Type: multipart/signed; boundary="nextPart8463171.qxELofyK2u";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
-
---nextPart8463171.qxELofyK2u
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Mon, 08 Mar 2010 20:52:00 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hello all.
+On Mon, 2010-03-08 at 22:01 +0300, Roman I Khimov wrote:
+> Hello all.
+>=20
+> Please take a look at "rik/qemu-0.12" branch on OE git repo. 0.9.x remova=
+l=20
+> patch is 0.5 Mb, so I think it's not appropriate for mailing list. In gen=
+eral,=20
+> 0.12.3 addition was easy, but then I've discovered that 0.10.3 version is=
+ not=20
+> working on openSUSE 11.2, so there is also a change in sanity and proposa=
+l to=20
+> remove 0.10.3 from repository.
+>=20
+> Comments are welcome.
 
-Please take a look at "rik/qemu-0.12" branch on OE git repo. 0.9.x removal=
-=20
-patch is 0.5 Mb, so I think it's not appropriate for mailing list. In gener=
-al,=20
-0.12.3 addition was easy, but then I've discovered that 0.10.3 version is n=
-ot=20
-working on openSUSE 11.2, so there is also a change in sanity and proposal =
-to=20
-remove 0.10.3 from repository.
+Looks good except maybe we should move to BBCLASSEXTENDS while we're in
+here?
 
-Comments are welcome.
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
---nextPart8463171.qxELofyK2u
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
-
-iEYEABECAAYFAkuVSYoACgkQXJ70z+XgVcOHnACggfI86ej0xEIqoEdfg41gzVg4
-od4AoMpgQM56beQwaaitWIFc3tq1VStJ
-=A7Xi
------END PGP SIGNATURE-----
-
---nextPart8463171.qxELofyK2u--
