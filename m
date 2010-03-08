@@ -1,31 +1,44 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-fx0-f220.google.com ([209.85.220.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NocUB-0002ov-UU
+	(envelope-from <martin.jansa@gmail.com>) id 1Nod5p-0006K8-Js
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 08 Mar 2010 13:55:05 +0100
-Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
-	[123.192.181.204])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 0069A1B10C02
+	Mon, 08 Mar 2010 14:34:02 +0100
+Received: by fxm20 with SMTP id 20so5986361fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Mar 2010 12:54:35 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 8 Mar 2010 13:51:35 +0100
-User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
-References: <201003081300.19058.holger+oe@freyther.de>
-	<B6E39224-2467-4EDA-A0F4-94C4F9DAF9CD@vanille-media.de>
-In-Reply-To: <B6E39224-2467-4EDA-A0F4-94C4F9DAF9CD@vanille-media.de>
+	Mon, 08 Mar 2010 05:31:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=zAKK9ulbCqLjMCXyPrVd/B9MVzcyeqxGEDctkJDzaHE=;
+	b=cVbhNzDS5UYIEdUO3Iu8HDjHRNfPEO0bBWloac9Lor82DFVReEuZSxUKy54kFyXvSJ
+	1AMojR2Y7gcxZkiphKnVJ61B0gQjbc3lEuhMlcXU84Xe1zrB9vGWR8X3B1pN2Kufz0mb
+	CGYXAZbF4oeQwOV0j+QcDFVsuCv3mcAtGsYzs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=JtN2Q4nMZd+67lol2g9o35e4cucig7kD4gelzCh+lNAX1lcxxl+FVn4xJ/Nc8I8QQu
+	4qfb7d6/DpvFcYwsnViSNOYadQykZkQNESpIVhhPXR/8RagEv0Ss4ytjMBCtk8JnSpeg
+	hnfbLDt6j3MqzrDpO+vZnfzbFaq4omyxe+ZVw=
 MIME-Version: 1.0
-Message-Id: <201003081351.35463.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Received: by 10.223.94.200 with SMTP id a8mr1339744fan.86.1268055061561; Mon, 
+	08 Mar 2010 05:31:01 -0800 (PST)
+In-Reply-To: <141020e31003020158v13adec5erae7d6cd6f9ee7fa5@mail.gmail.com>
+References: <E1Ne4Jc-0005sN-7y@melo.openembedded.org>
+	<141020e31002090250k2b14f4a4w35b2322952665a46@mail.gmail.com>
+	<141020e31003020158v13adec5erae7d6cd6f9ee7fa5@mail.gmail.com>
+Date: Mon, 8 Mar 2010 14:31:01 +0100
+Message-ID: <141020e31003080531g3f3d86a9uf2cddbed81710ad1@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.220.220
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: samba-essential upgrade or remove?
+Subject: Re: [oe-commits] Koen Kooi : efl: bump SRCREV for comp fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,25 +52,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Mar 2010 12:55:05 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 08 Mar 2010 13:34:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Monday 08 March 2010 13:42:07 Dr. Michael Lauer wrote:
-> While I'm not using it atm., I recall that samba-essential was the only
-> recipe that worked relatively painless when Matthias Hentges create it
-> back then.
+On Tue, Mar 2, 2010 at 10:58 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> So what would be OE way to handle?
+> 1) enable Ecore_data to build etk/epsilon ok (for a while before
+> something else broke it again)
+> 2) move etk/epsilon + depending apps to obsolete dir (list of apps
+> from previous e-mail + check if they really still depends on it or
+> it's just DEPENDS relict).
+>
+> I prefer 2) and if there is somebody who really needs etk/epsilon then
+> he probably wants also older EFL_SRCREV for his obsolete app.
+>
+> Regards,
+>
+>> What's right way to handle that in OE?
+>> Is it worth maintaining epsilon alive in oe.dev and asking upstream to
+>> include patches for epsilon or can we move epsilon + apps depending on
+>> it to obsoleted?
 
-Then please fix it. You will do a great service to our users. The following 
-CVEs are not addressed:
-	CVE-2009-2813, CVE-2009-2948, CVE-2009-2906, CVE-2009-1888, 
-CVE-2008-4314, CVE-2008-1105, CVE-2007-6015, CVS-2007-4572,  CVE-2007-5398, 
-CVE-2007-2444, CVE-2007-2446, CVE-2007-2447, CVE-2007-0452, CVE-2007-0453, 
-CVE-2007-0454, CAN-2006-1059..
+Nobody replied, but seems like enlightenment devs already decided for us :).
 
-most of these are overflows and DoS
+Both deprecated modules removed completely
 
-z.
+Ecore_data
+http://trac.enlightenment.org/e/changeset/46994
+Ecore_txt
+http://trac.enlightenment.org/e/changeset/46985
+
+a) So will ve move unbuildable version to obsolete dir.
+b) Move it with last working SRCREV included in it (and expect any
+user who needs it to set the same old SRCREV to build compatible
+ecore_svn.bb).
+c) Delete them and whoever needs it, can checkout older tree with them
+and right revisions.
+
+Regards,
 
 
