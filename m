@@ -1,49 +1,39 @@
-Received: from mail-fx0-f227.google.com ([209.85.220.227])
+Received: from mail-iw0-f174.google.com ([209.85.223.174])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Noy7Z-0005sv-LU
+	(envelope-from <listjiason@gmail.com>) id 1NoyQc-0004rQ-9j
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Mar 2010 13:01:09 +0100
-Received: by fxm27 with SMTP id 27so2653044fxm.28
+	Tue, 09 Mar 2010 13:20:51 +0100
+Received: by iwn4 with SMTP id 4so6344936iwn.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Mar 2010 03:58:13 -0800 (PST)
+	Tue, 09 Mar 2010 04:17:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=70uN6P86ZbqLjKVPDTDqzKTZ8lQWhfEGXOQHO5KZA6w=;
-	b=lohQbbVvhfQreg+K9pZ5IVLR1kvkHpXofsS0CGliMrrH6ixmWGivduqhdTiTHwclTq
-	z8abHa1DRMzMIfd9kngI7JKnfUg2ASuEIpfLndejoDu0RGOfIVJhKmqsfz1wCAdnoFXa
-	EZuqdq/x1fya0oCl9ZJAPg1Nt/lqqO8f44RiU=
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=19xevmX/9gWLEyplgMDiBtlJLvmm+Oz1E7bjiQ5hLc0=;
+	b=dYRzb6vmDpJE4jnollG/OpPQTeWxcE5nzSIw9BlIpzM9fW/6E8Ga/MC3TSCJiNbm3u
+	L1lGPGWklXAtPlcR/Q7pcxrHsf6m/j53/8Bsyeqmw5z4OTv1JfeNT0NDvnTSbtyKMD3j
+	e2MVNq/shnNXVtPI8ALDQngq2uqM9B705eUjw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=oXhW0TxnoHdQt8RBBs1BGhEwFKeMcZyMN5zTVIKEf9VJClOuo55klirrpvBtyy4DnJ
-	/ddg0D/+pzMPsYzzsaw16EIZ46cIIfUNOJPGMEEVQgp1c037Qads8GII2nTk2GJBna8c
-	pzXsBYRNZIjkmDeLByQWmcWfcyPlmlPCJwJR4=
-Received: by 10.223.5.156 with SMTP id 28mr7500625fav.74.1268135884387;
-	Tue, 09 Mar 2010 03:58:04 -0800 (PST)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 14sm3621227fxm.5.2010.03.09.03.58.03
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 09 Mar 2010 03:58:03 -0800 (PST)
-Date: Tue, 9 Mar 2010 12:59:05 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100309115905.GM31945@jama>
-References: <20100309075331.GL31945@jama>
-	<1268130988.14566.922.camel@mill.internal.reciva.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=U5dcm5Ybw3CFMcXXxP3e5SNZxjLzRoJ7uCbjMJUl81CpnWQOFMTZPBS7oMNJAs9HAi
+	2aDZEhwJImeO/Bc8yCwogQXsPuBRAD65di3aHdimEtXa4BxmAb1mgfXSkBUWHK7UWnzO
+	KMbKW2FXgje5nXv6Gr3UhY/uqH3qHq/KFXXhs=
 MIME-Version: 1.0
-In-Reply-To: <1268130988.14566.922.camel@mill.internal.reciva.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.227
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.231.155.18 with SMTP id q18mr126417ibw.80.1268137072667; Tue, 
+	09 Mar 2010 04:17:52 -0800 (PST)
+Date: Tue, 9 Mar 2010 20:17:52 +0800
+Message-ID: <f275a9df1003090417s3ea8bcf5y3b547ce7303d5e32@mail.gmail.com>
+From: Jiason Li <listjiason@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.223.174
+X-SA-Exim-Mail-From: listjiason@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Make some big but only formal change before next stable - SRCPV
+Subject: 'bitbake opie-image' problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,45 +47,219 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Mar 2010 12:01:10 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 09 Mar 2010 12:20:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, Mar 09, 2010 at 10:36:28AM +0000, Phil Blundell wrote:
-> On Tue, 2010-03-09 at 08:53 +0100, Martin Jansa wrote:
-> > My SRCPV migration branch is quickly rotting.. but I'm willing to
-> > check/do it again, because resolving conflicts with every small change
-> > in git recipe takes me more time than merging SRCPV to oe.dev would
-> > take.
-> 
-> At the risk of sounding like a terrible dimwit, I am still not entirely
-> clear on why you can't just do something like
+Hi,
 
-Feeling the same here now..
+I was trying to make some images followed the getting_started guide,
+'bitbake nano', 'bitbake console-image' all succeeded,
+but soon I encountered problem when doing 'bitbake opie-image'.
 
-> PKGV = "0.0+git${@bb.fetch.get_srcrev(d)}.${PV}"
+Do you have any idea about this issue?
+Any info are very appreciated. :)
 
-How this should work?
+Thank you!
+jiason
+20100309
 
-is PV at the end typo from PR or do you really mean that srcrev has higher
-priority than PV?
 
-> which seems like it would make this whole problem go away without
-> needing any further changes to bitbake.
+here my local.conf:
 
-All changes are already there. What's new in master is optional support
-for forcing that incrementing part to same value across builders, without
-local cache synchronization.
+BBFILES = "/home/oe/openembedded/recipes/*/*.bb"
+MACHINE = "c7x0"
+DISTRO = "angstrom-2008.1"
+BB_NUMBER_THREADS = "2"
 
-And also caching for revs returned when using BB_GIT_CLONE_FOR_SRCREV,
-which can improve performance instead of running "git rev-list | wc -l"
-with every get_srcrev(d).
 
-Regards,
+here the log --
+build/tmp/work/armv5te-angstrom-linux-gnueabi/opie-packagemanager-1.2.4-r1/temp/log.do_compile.20550:
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+NOTE: make MAKEFLAGS=
+arm-angstrom-linux-gnueabi-g++ -march=armv5te -mtune=xscale
+-mthumb-interwork -mno-thumb -c -pipe
+-isystem/home/oe/build/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/include
+-fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2
+-ggdb3  -fno-exceptions -fno-rtti
+-isystem/home/oe/build/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/include
+-fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2
+-ggdb3 -fpermissive -fvisibility-inlines-hidden  -fvisibility=hidden
+-fvisibility-inlines-hidden -Wall -W  -O2 -D_REENTRANT -fPIC
+-DIPKG_LIB -DHAVE_MKDTEMP -DOPIE_APP_INTERFACE
+-DQUICKAPP_NAME="\"packagemanager\"" -DGCC_SUPPORTS_VISIBILITY
+-DOPIE_NEW_MALLOC -DOPIE_NO_ERASE_RECT_HACKFIX -DQWS
+-DOPIE_BINDIR='"/usr/bin"' -DOPIE_LIBDIR='"/usr/lib/opie/lib"'
+-DOPIE_QTDIR='"/usr/lib/opie"' -DQT_NO_DEBUG -DQT_THREAD_SUPPORT
+-DQT_PLUGIN -I/home/oe/build/tmp/staging/i686-linux/usr/share/qmake/linux-gnueabi-oe-g++
+-I. -I../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg
+-I/home/oe/build/tmp/staging/armv5te-angstrom-linux-gnueabi/include
+-I/home/oe/build/tmp/staging/armv5te-angstrom-linux-gnueabi/qt2/include
+-o opackage.o opackage.cpp
+arm-angstrom-linux-gnueabi-g++ -march=armv5te -mtune=xscale
+-mthumb-interwork -mno-thumb -c -pipe
+-isystem/home/oe/build/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/include
+-fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2
+-ggdb3  -fno-exceptions -fno-rtti
+-isystem/home/oe/build/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/include
+-fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2
+-ggdb3 -fpermissive -fvisibility-inlines-hidden  -fvisibility=hidden
+-fvisibility-inlines-hidden -Wall -W  -O2 -D_REENTRANT -fPIC
+-DIPKG_LIB -DHAVE_MKDTEMP -DOPIE_APP_INTERFACE
+-DQUICKAPP_NAME="\"packagemanager\"" -DGCC_SUPPORTS_VISIBILITY
+-DOPIE_NEW_MALLOC -DOPIE_NO_ERASE_RECT_HACKFIX -DQWS
+-DOPIE_BINDIR='"/usr/bin"' -DOPIE_LIBDIR='"/usr/lib/opie/lib"'
+-DOPIE_QTDIR='"/usr/lib/opie"' -DQT_NO_DEBUG -DQT_THREAD_SUPPORT
+-DQT_PLUGIN -I/home/oe/build/tmp/staging/i686-linux/usr/share/qmake/linux-gnueabi-oe-g++
+-I. -I../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg
+-I/home/oe/build/tmp/staging/armv5te-angstrom-linux-gnueabi/include
+-I/home/oe/build/tmp/staging/armv5te-angstrom-linux-gnueabi/qt2/include
+-o oconfitem.o oconfitem.cpp
+arm-angstrom-linux-gnueabi-g++ -march=armv5te -mtune=xscale
+-mthumb-interwork -mno-thumb -c -pipe
+-isystem/home/oe/build/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/include
+-fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2
+-ggdb3  -fno-exceptions -fno-rtti
+-isystem/home/oe/build/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/include
+-fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2
+-ggdb3 -fpermissive -fvisibility-inlines-hidden  -fvisibility=hidden
+-fvisibility-inlines-hidden -Wall -W  -O2 -D_REENTRANT -fPIC
+-DIPKG_LIB -DHAVE_MKDTEMP -DOPIE_APP_INTERFACE
+-DQUICKAPP_NAME="\"packagemanager\"" -DGCC_SUPPORTS_VISIBILITY
+-DOPIE_NEW_MALLOC -DOPIE_NO_ERASE_RECT_HACKFIX -DQWS
+-DOPIE_BINDIR='"/usr/bin"' -DOPIE_LIBDIR='"/usr/lib/opie/lib"'
+-DOPIE_QTDIR='"/usr/lib/opie"' -DQT_NO_DEBUG -DQT_THREAD_SUPPORT
+-DQT_PLUGIN -I/home/oe/build/tmp/staging/i686-linux/usr/share/qmake/linux-gnueabi-oe-g++
+-I. -I../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg
+-I/home/oe/build/tmp/staging/armv5te-angstrom-linux-gnueabi/include
+-I/home/oe/build/tmp/staging/armv5te-angstrom-linux-gnueabi/qt2/include
+-o oipkg.o oipkg.cpp
+In file included from
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/void_list.h:21,
+                 from
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg_src_list.h:22,
+                 from
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/opkg_conf.h:29,
+                 from
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg_vec.h:26,
+                 from
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg.h:25,
+                 from
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/opkg.h:21,
+                 from oipkg.h:42,
+                 from oipkg.cpp:31:
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:39:
+error: expected ',' or '...' before 'new'
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:
+In function 'void __list_add(list_head*)':
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:42:
+error: 'next' was not declared in this scope
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:42:
+error: expected type-specifier before ';' token
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:43:
+error: expected type-specifier before '->' token
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:43:
+error: expected `;' before '->' token
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:44:
+error: expected type-specifier before '->' token
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:44:
+error: expected `;' before '->' token
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:45:
+error: 'prev' was not declared in this scope
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:45:
+error: expected type-specifier before ';' token
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:
+At global scope:
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:56:
+error: expected ',' or '...' before 'new'
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:
+In function 'void list_add(list_head*)':
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:57:
+error: expected type-specifier before ',' token
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:57:
+error: 'head' was not declared in this scope
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:
+At global scope:
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:68:
+error: expected ',' or '...' before 'new'
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:
+In function 'void list_add_tail(list_head*)':
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:69:
+error: expected type-specifier before ',' token
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:69:
+error: 'head' was not declared in this scope
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:
+In function 'void list_del(list_head*)':
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:93:
+warning: invalid conversion from 'void*' to 'list_head*'
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:94:
+warning: invalid conversion from 'void*' to 'list_head*'
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:
+In function 'void list_move(list_head*, list_head*)':
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:56:
+error: too many arguments to function 'void list_add(list_head*)'
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:113:
+error: at this point in file
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:
+In function 'void list_move_tail(list_head*, list_head*)':
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:68:
+error: too many arguments to function 'void list_add_tail(list_head*)'
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/list.h:124:
+error: at this point in file
+In file included from
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg_dest_list.h:21,
+                 from
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/opkg_conf.h:30,
+                 from
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg_vec.h:26,
+                 from
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg.h:25,
+                 from
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/opkg.h:21,
+                 from oipkg.h:42,
+                 from oipkg.cpp:31:
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg_dest.h:
+At global scope:
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg_dest.h:30:
+warning: ISO C++ forbids declaration of 'FILE' with no type
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg_dest.h:30:
+error: expected ';' before '*' token
+In file included from
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/opkg.h:21,
+                 from oipkg.h:42,
+                 from oipkg.cpp:31:
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg.h:206:
+error: variable or field 'pkg_formatted_info' declared void
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg.h:206:
+error: 'FILE' was not declared in this scope
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg.h:206:
+error: 'fp' was not declared in this scope
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg.h:206:
+error: expected primary-expression before '*' token
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg.h:206:
+error: expected primary-expression before ')' token
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg.h:207:
+error: variable or field 'pkg_formatted_field' declared void
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg.h:207:
+error: 'FILE' was not declared in this scope
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg.h:207:
+error: 'fp' was not declared in this scope
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg.h:207:
+error: expected primary-expression before '*' token
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg.h:207:
+error: expected primary-expression before ',' token
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg.h:207:
+error: expected primary-expression before 'const'
+../../../../staging/armv5te-angstrom-linux-gnueabi/usr/include/libopkg/pkg.h:211:
+error: 'FILE' has not been declared
+In file included from oipkg.cpp:31:
+oipkg.h:105: warning: ISO C++ forbids declaration of 'opkg_t' with no type
+oipkg.h:105: error: expected ';' before '*' token
+oipkg.cpp:53: error: variable or field 'fsignalOpkgProgress' declared void
+oipkg.cpp:53: error: 'opkg_t' was not declared in this scope
+oipkg.cpp:53: error: 'opkg' was not declared in this scope
+oipkg.cpp:53: error: expected primary-expression before 'const'
+oipkg.cpp:53: error: expected primary-expression before 'void'
+make: *** [oipkg.o] Error 1
+FATAL: oe_runmake failed
 
 
