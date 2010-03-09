@@ -1,31 +1,49 @@
-Received: from smtp.eu.citrix.com ([62.200.22.115])
+Received: from mail-fx0-f227.google.com ([209.85.220.227])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <thomas.horsten@citrix.com>) id 1Noxrn-0000TM-0A
+	(envelope-from <martin.jansa@gmail.com>) id 1Noy7Z-0005sv-LU
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Mar 2010 12:44:52 +0100
-X-IronPort-AV: E=Sophos;i="4.49,607,1262563200"; 
-   d="scan'208";a="9851958"
-Received: from lonpmailmx01.citrite.net ([10.30.224.162])
-	by LONPIPO01.EU.CITRIX.COM with ESMTP/TLS/RC4-MD5;
-	09 Mar 2010 11:40:48 +0000
-Received: from [10.80.248.52] (10.80.248.52) by smtprelay.citrix.com
-	(10.30.224.162) with Microsoft SMTP Server id 8.1.393.1; Tue, 9 Mar 2010
-	11:40:48 +0000
-From: Thomas Horsten <thomas.horsten@citrix.com>
+	Tue, 09 Mar 2010 13:01:09 +0100
+Received: by fxm27 with SMTP id 27so2653044fxm.28
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 09 Mar 2010 03:58:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=70uN6P86ZbqLjKVPDTDqzKTZ8lQWhfEGXOQHO5KZA6w=;
+	b=lohQbbVvhfQreg+K9pZ5IVLR1kvkHpXofsS0CGliMrrH6ixmWGivduqhdTiTHwclTq
+	z8abHa1DRMzMIfd9kngI7JKnfUg2ASuEIpfLndejoDu0RGOfIVJhKmqsfz1wCAdnoFXa
+	EZuqdq/x1fya0oCl9ZJAPg1Nt/lqqO8f44RiU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=oXhW0TxnoHdQt8RBBs1BGhEwFKeMcZyMN5zTVIKEf9VJClOuo55klirrpvBtyy4DnJ
+	/ddg0D/+pzMPsYzzsaw16EIZ46cIIfUNOJPGMEEVQgp1c037Qads8GII2nTk2GJBna8c
+	pzXsBYRNZIjkmDeLByQWmcWfcyPlmlPCJwJR4=
+Received: by 10.223.5.156 with SMTP id 28mr7500625fav.74.1268135884387;
+	Tue, 09 Mar 2010 03:58:04 -0800 (PST)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 14sm3621227fxm.5.2010.03.09.03.58.03
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 09 Mar 2010 03:58:03 -0800 (PST)
+Date: Tue, 9 Mar 2010 12:59:05 +0100
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 9 Mar 2010 11:40:47 +0000
-Message-ID: <1268134848.32439.12.camel@hydra>
+Message-ID: <20100309115905.GM31945@jama>
+References: <20100309075331.GL31945@jama>
+	<1268130988.14566.922.camel@mill.internal.reciva.com>
 MIME-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 62.200.22.115
-X-SA-Exim-Mail-From: thomas.horsten@citrix.com
+In-Reply-To: <1268130988.14566.922.camel@mill.internal.reciva.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.227
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Issue with (gcc-cross-|glibc-)initial and packaged staging
+Subject: Re: [RFC] Make some big but only formal change before next stable - SRCPV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,31 +57,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Mar 2010 11:44:52 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Mar 2010 12:01:10 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I've spotted a rather annoying interim build failure but I'm not sure
-how to best tackle the situation.
+On Tue, Mar 09, 2010 at 10:36:28AM +0000, Phil Blundell wrote:
+> On Tue, 2010-03-09 at 08:53 +0100, Martin Jansa wrote:
+> > My SRCPV migration branch is quickly rotting.. but I'm willing to
+> > check/do it again, because resolving conflicts with every small change
+> > in git recipe takes me more time than merging SRCPV to oe.dev would
+> > take.
+> 
+> At the risk of sounding like a terrible dimwit, I am still not entirely
+> clear on why you can't just do something like
 
-For example, gcc-cross-initial and gcc-cross install some of the same
-files in staging. Normally this doesn't matter, since gcc-cross
-overwrites the earlier ones installed by -initial, but when using
-packaged staging and many threads (BBTHREADS=10 for example), it
-sometimes happens that the pstaging packages for gcc-cross-initial and
-gcc-cross get installed into staging in the wrong order (or at the same
-time in two different threads), resulting in all builds after that
-failing due to undefined references in the lib files from -initial.
+Feeling the same here now..
 
-Whether this happens or not is a timing dependent issue, so it's
-sometimes hard to reproduce.
+> PKGV = "0.0+git${@bb.fetch.get_srcrev(d)}.${PV}"
 
-Any ideas how to solve this issue? I'm thinking that after gcc-cross
-(and glibc-cross) have been built there is no need to depend on the
--initial packages any more. Another option would be to install them with
-different paths.
+How this should work?
 
-Thomas
+is PV at the end typo from PR or do you really mean that srcrev has higher
+priority than PV?
 
+> which seems like it would make this whole problem go away without
+> needing any further changes to bitbake.
+
+All changes are already there. What's new in master is optional support
+for forcing that incrementing part to same value across builders, without
+local cache synchronization.
+
+And also caching for revs returned when using BB_GIT_CLONE_FOR_SRCREV,
+which can improve performance instead of running "git rev-list | wc -l"
+with every get_srcrev(d).
+
+Regards,
+
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
