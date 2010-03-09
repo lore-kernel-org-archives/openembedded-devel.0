@@ -1,32 +1,33 @@
-Received: from wbm12.pair.net ([66.39.3.90])
+Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <bluelightning@bluelightning.org>) id 1NozH7-0003KB-2K
+	(envelope-from <khimov@altell.ru>) id 1Nozq6-0005gb-49
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Mar 2010 14:15:06 +0100
-Received: by wbm12.pair.net (Postfix, from userid 65534)
-	id 65A186CC1F; Tue,  9 Mar 2010 07:52:17 -0500 (EST)
-Received: from 193.195.44.178 ([193.195.44.178])
-	(SquirrelMail authenticated user blueligh@bluelightning.org)
-	by webmail12.pair.com with HTTP; Tue, 9 Mar 2010 12:52:17 -0000 (GMT)
-Message-ID: <25809.193.195.44.178.1268139137.squirrel@webmail12.pair.com>
-In-Reply-To: <f275a9df1003090417s3ea8bcf5y3b547ce7303d5e32@mail.gmail.com>
-References: <f275a9df1003090417s3ea8bcf5y3b547ce7303d5e32@mail.gmail.com>
-Date: Tue, 9 Mar 2010 12:52:17 -0000 (GMT)
-From: "Paul Eggleton" <bluelightning@bluelightning.org>
+	Tue, 09 Mar 2010 14:51:14 +0100
+Received: from keemun.localnet (unknown [192.168.1.125])
+	by mail.altell.local (Postfix) with ESMTPS id DDF996854E
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  9 Mar 2010 16:46:20 +0300 (MSK)
+From: Roman Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-User-Agent: SquirrelMail/1.4.5
+Date: Tue, 9 Mar 2010 16:48:15 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.8-0.1-desktop; KDE/4.3.5; x86_64; ; )
+References: <201003082201.30147.roman@khimov.ru>
+In-Reply-To: <201003082201.30147.roman@khimov.ru>
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-Importance: Normal
-X-SA-Exim-Connect-IP: 66.39.3.90
-X-SA-Exim-Mail-From: bluelightning@bluelightning.org
+Message-Id: <201003091648.15596.khimov@altell.ru>
+X-Altell-MailScanner-ID: DDF996854E.64727
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-SA-Exim-Connect-IP: 80.246.246.162
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: 'bitbake opie-image' problem
+Subject: Re: [PATCH/RFC] qemu 0.12.3, cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,23 +41,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Mar 2010 13:15:07 -0000
-Content-Type: text/plain;charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 09 Mar 2010 13:51:14 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Jiason Li wrote:
-> I was trying to make some images followed the getting_started guide,
-> 'bitbake nano', 'bitbake console-image' all succeeded,
-> but soon I encountered problem when doing 'bitbake opie-image'.
->
-> Do you have any idea about this issue?
-
-This is due to libopkg's C headers having changed recently. Not only has
-the API changed, but the headers are now uncompilable within a C++
-program. I am in the process of fixing this, hopefully I will have some
-patches done this evening.
-
-Cheers,
-Paul
+0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0J/QvtC90LXQtNC10LvRjNC90LjQuiAwOCDQvNCw
+0YDRgtCwIDIwMTAgMjI6MDE6MjAg0LDQstGC0L7RgCBSb21hbiBJIEtoaW1vdiAK0L3QsNC/0LjR
+gdCw0Ls6Cj4gQ29tbWVudHMgYXJlIHdlbGNvbWUuCgpNb3JlIEFDSydzIGFyZSB3ZWxjb21lIGFs
+c28sIHNpbmNlIHRoaXMgdG91Y2hlcyBzYW5pdHkgYW5kIHFlbXUuCg==
 
 
