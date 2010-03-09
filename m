@@ -1,31 +1,32 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from exprod5og114.obsmtp.com ([64.18.0.28])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1Np0fQ-0002ui-Uf
+	(envelope-from <martyn.welch@ge.com>) id 1Np2Et-0000m4-Lv
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Mar 2010 15:44:21 +0100
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 888D549127F
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Mar 2010 15:41:16 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Tue, 9 Mar 2010 15:42:03 +0100
-Message-ID: <4B965E0D.8050501@dresearch.de>
-Date: Tue, 09 Mar 2010 15:41:17 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+	Tue, 09 Mar 2010 17:25:00 +0100
+Received: from source ([12.43.191.1]) (using TLSv1) by
+	exprod5ob114.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKS5Z1qwucQ5BCQszFiFylgvzMMcWL4+vj@postini.com;
+	Tue, 09 Mar 2010 08:22:05 PST
+Received: from unknown (HELO cinmlip01.e2k.ad.ge.com) ([3.159.213.48])
+	by Alpmlip08.e2k.ad.ge.com with ESMTP; 09 Mar 2010 11:06:19 -0500
+Received: from es-j7s4d2j.amer.consind.ge.com (HELO [3.138.54.92])
+	([3.138.54.92])
+	by cinmlip01.e2k.ad.ge.com with ESMTP; 09 Mar 2010 11:06:16 -0500
+Message-ID: <4B9672B7.2030204@ge.com>
+Date: Tue, 09 Mar 2010 16:09:27 +0000
+From: Martyn Welch <martyn.welch@ge.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <4B8E618C.2080604@dresearch.de> <4B94AA93.4070709@dresearch.de>
 	<1268071514.16526.6.camel@trini-m4400>
 In-Reply-To: <1268071514.16526.6.camel@trini-m4400>
-X-OriginalArrivalTime: 09 Mar 2010 14:42:03.0970 (UTC)
-	FILETIME=[AF403220:01CABF96]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@DResearch.DE
+X-SA-Exim-Connect-IP: 64.18.0.28
+X-SA-Exim-Mail-From: martyn.welch@ge.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: u-boot ready initrds
@@ -42,48 +43,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Mar 2010 14:44:24 -0000
+X-List-Received-Date: Tue, 09 Mar 2010 16:25:01 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
 Tom Rini wrote:
->> Initrds need to be prepared with mkimage to be usable from u-boot.
->> The following patch introduces an additional IMAGE_FSTYPE .cpio.gz.u-boot
->> for this (at the moment just for hipox machine).
->>
->> Is this the way it should be done?
->>
->> Should this better become part of conf/bitbake.conf?
-> 
-> I don't know why patchwork didn't see this.
-
-That's really crazy. None of my patches occurs in the patch queue.
-I started an extra thread for this [1]. It would be really
-great if somebody can fix this problem (or tell me what i'm
-doing wrong).
-
-> That said, mkimage -A arm is bad.  UBOOT_ARCH is right,
-
-Good point. Total agreement.
-
-> and comes from kernel-arch.bbclass.  So, I
+> On Mon, 2010-03-08 at 08:43 +0100, Steffen Sledz wrote:
+>   
+>> Steffen Sledz wrote:
+>>     
+>>> Initrds need to be prepared with mkimage to be usable from u-boot.
+>>> The following patch introduces an additional IMAGE_FSTYPE .cpio.gz.u-boot
+>>> for this (at the moment just for hipox machine).
+>>>
+>>> Is this the way it should be done?
+>>>
+>>> Should this better become part of conf/bitbake.conf?
+>>>       
+>> Ping
+>>     
+>
+> I don't know why patchwork didn't see this.  That said, mkimage -A arm
+> is bad.  UBOOT_ARCH is right, and comes from kernel-arch.bbclass.  So, I
 > think a full patch would need to add in changes to image.bbclass to
 > inherit kernel-arch so that UBOOT_ARCH will be evaluated.
 >
 > And yes, this I think should be in bitbake.conf with the rest of the
 > image magics
+>   
 
-I've too much respect and to little knowledge to make changes
-inside these core components.
+We'd like to see this as well. We have a class which we inherit to do
+the same thing that I have been meaning to try and push, but this is a
+much better way of doing it.
 
-Can someone take me by the hand and guide me. ;-)
+Martyn
 
-Steffen
-
-PS: And another little question: is '.u-boot' a good extension for
-this? Or is the shorter '.u' better?
-
-[1] http://thread.gmane.org/gmane.comp.handhelds.openembedded/30693
+-- 
+Martyn Welch (Principal Software Engineer)   |   Registered in England and
+GE Intelligent Platforms                     |   Wales (3828642) at 100
+T +44(0)127322748                            |   Barbirolli Square, Manchester,
+E martyn.welch@ge.com                        |   M2 3AB  VAT:GB 927559189
 
 
 
