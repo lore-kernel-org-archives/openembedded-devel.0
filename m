@@ -1,30 +1,42 @@
-Received: from ibawizard.net
-	([82.208.49.253] helo=mengele.ibawizard.net ident=postfix)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ynezz@mengele.ibawizard.net>) id 1Np3IK-0000G8-Kb
+	(envelope-from <Tom_Rini@mentor.com>) id 1Np3a1-0007H5-G9
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Mar 2010 18:32:37 +0100
-Received: by mengele.ibawizard.net (Postfix, from userid 1002)
-	id B9F4E1D360F6; Tue,  9 Mar 2010 18:29:37 +0100 (CET)
-Date: Tue, 9 Mar 2010 18:29:37 +0100
-From: Petr =?iso-8859-2?Q?=A9tetiar?= <ynezz@true.cz>
+	Tue, 09 Mar 2010 18:50:56 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1Np3X9-0007nC-I0 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Mar 2010 09:47:55 -0800
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 9 Mar 2010 09:47:54 -0800
+Received: from 172.30.33.172 ([172.30.33.172]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Tue,  9 Mar 2010 17:47:45 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	09 Mar 2010 10:47:43 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100309172937.GL24852@ibawizard.net>
-References: <1268085262-29850-1-git-send-email-ynezz@true.cz>
-	<1268085262-29850-2-git-send-email-ynezz@true.cz>
-	<hn4ub1$s7h$1@dough.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <hn4ub1$s7h$1@dough.gmane.org>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 82.208.49.253
-X-SA-Exim-Mail-From: ynezz@mengele.ibawizard.net
+In-Reply-To: <4B965E0D.8050501@dresearch.de>
+References: <4B8E618C.2080604@dresearch.de> <4B94AA93.4070709@dresearch.de>
+	<1268071514.16526.6.camel@trini-m4400> <4B965E0D.8050501@dresearch.de>
+Organization: Mentor Graphics Corporation
+Date: Tue, 09 Mar 2010 10:47:43 -0700
+Message-ID: <1268156863.16526.133.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 09 Mar 2010 17:47:54.0995 (UTC)
+	FILETIME=[A5C79430:01CABFB0]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] angstrom-led-config: Add LED setup for the ts72xx	and bump PR
+Subject: Re: u-boot ready initrds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,19 +50,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Mar 2010 17:32:37 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 09 Mar 2010 17:50:56 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Koen Kooi <k.kooi@student.utwente.nl> [2010-03-09 08:45:37]:
+On Tue, 2010-03-09 at 15:41 +0100, Steffen Sledz wrote:
+> Tom Rini wrote:
+[snip]
+> > That said, mkimage -A arm is bad.  UBOOT_ARCH is right,
+>=20
+> Good point. Total agreement.
+>=20
+> > and comes from kernel-arch.bbclass.  So, I
+> > think a full patch would need to add in changes to image.bbclass to
+> > inherit kernel-arch so that UBOOT_ARCH will be evaluated.
+> >
+> > And yes, this I think should be in bitbake.conf with the rest of the
+> > image magics
+>=20
+> I've too much respect and to little knowledge to make changes
+> inside these core components.
+>=20
+> Can someone take me by the hand and guide me. ;-)
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> This led patch is in now
+It's easy.  Just add 'inherit kernel-arch' to image.bbclass, up near the
+top, test your changes a bit and post :)
 
-Thanks.
+> PS: And another little question: is '.u-boot' a good extension for
+> this? Or is the shorter '.u' better?
 
--- ynezz
+Since the recipe is u-boot (and u-boot-blah-native), .u-boot is fine
+over .uboot.  .u is I think too short / nondescript.
+
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
