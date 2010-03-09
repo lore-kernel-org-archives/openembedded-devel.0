@@ -1,38 +1,43 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1Np2QS-00035e-Rz
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Mar 2010 17:36:57 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1Np2Nb-0001nl-UG
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Mar 2010 16:34:00 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1Np2Nb-0007pP-Kk
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Mar 2010 16:33:59 +0000
-From: Phil Blundell <philb@gnu.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Np35T-0008DE-7v for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Mar 2010 18:19:19 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Np2xO-0003mO-R1 for openembedded-devel@lists.openembedded.org;
+	Tue, 09 Mar 2010 18:10:58 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 09 Mar 2010 18:10:58 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 09 Mar 2010 18:10:58 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100309115905.GM31945@jama>
-References: <20100309075331.GL31945@jama>
-	<1268130988.14566.922.camel@mill.internal.reciva.com>
-	<20100309115905.GM31945@jama>
-Date: Tue, 09 Mar 2010 16:33:56 +0000
-Message-ID: <1268152436.14566.1040.camel@mill.internal.reciva.com>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 09 Mar 2010 14:58:56 +0100
+Message-ID: <hn5k70$3vc$1@dough.gmane.org>
+References: <201003082201.30147.roman@khimov.ru>	<1268081324.16526.82.camel@trini-m4400>	<201003090129.19439.roman@khimov.ru>
+	<1268091612.16526.110.camel@trini-m4400>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
+In-Reply-To: <1268091612.16526.110.camel@trini-m4400>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,
+	DATE_IN_PAST_03_06,SPF_HELO_PASS,SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Make some big but only formal change before next stable - SRCPV
+Subject: Re: [PATCH/RFC] qemu 0.12.3, cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,37 +51,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Mar 2010 16:36:57 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 09 Mar 2010 17:19:19 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, 2010-03-09 at 12:59 +0100, Martin Jansa wrote:
-> On Tue, Mar 09, 2010 at 10:36:28AM +0000, Phil Blundell wrote:
-> > On Tue, 2010-03-09 at 08:53 +0100, Martin Jansa wrote:
-> > > My SRCPV migration branch is quickly rotting.. but I'm willing to
-> > > check/do it again, because resolving conflicts with every small change
-> > > in git recipe takes me more time than merging SRCPV to oe.dev would
-> > > take.
-> > 
-> > At the risk of sounding like a terrible dimwit, I am still not entirely
-> > clear on why you can't just do something like
-> 
-> Feeling the same here now..
-> 
-> > PKGV = "0.0+git${@bb.fetch.get_srcrev(d)}.${PV}"
-> 
-> How this should work?
-> 
-> is PV at the end typo from PR or do you really mean that srcrev has higher
-> priority than PV?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Yes, I would have thought you would want the srcrev to have higher
-priority than PV.  In fact, you probably don't even want to have PV in
-there at all.  You certainly wouldn't want PR in there since that goes
-in ${PKGR}.
+On 09-03-10 00:40, Tom Rini wrote:
+> On Tue, 2010-03-09 at 01:29 +0300, Roman I Khimov wrote:
+>> В сообщении от Понедельник 08 марта 2010 23:48:44 автор Tom Rini написал:
+>>> On Mon, 2010-03-08 at 22:01 +0300, Roman I Khimov wrote:
+>>>> Hello all.
+>>>>
+>>>> Please take a look at "rik/qemu-0.12" branch on OE git repo. 0.9.x
+>>>> removal patch is 0.5 Mb, so I think it's not appropriate for mailing
+>>>> list. In general, 0.12.3 addition was easy, but then I've discovered that
+>>>> 0.10.3 version is not working on openSUSE 11.2, so there is also a change
+>>>> in sanity and proposal to remove 0.10.3 from repository.
+>>>>
+>>>> Comments are welcome.
+>>>
+>>> Looks good except maybe we should move to BBCLASSEXTENDS while we're in
+>>> here?
+>>
+>> Sure, an updated version is pushed.
+> 
+> Acked-by: Tom Rini <tom_rini@mentor.com>
+> 
 
-p.
+Acked-by: Koen Kooi <koen@openembedded.org>
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFLllQfMkyGM64RGpERAgR+AJ0YfwJixjPpjNV909BSvDu2xh14mACeNWfM
+nuNR9tzrIJGirT87XWO5WxI=
+=vL2V
+-----END PGP SIGNATURE-----
 
 
 
