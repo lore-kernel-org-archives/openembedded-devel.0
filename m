@@ -1,43 +1,34 @@
-Received: from mail-iw0-f174.google.com ([209.85.223.174])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <listjiason@gmail.com>) id 1Np0Kw-00051Q-Q4
+	(envelope-from <sledz@DResearch.DE>) id 1Np0fQ-0002ui-Uf
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 09 Mar 2010 15:23:11 +0100
-Received: by iwn4 with SMTP id 4so6461177iwn.3
+	Tue, 09 Mar 2010 15:44:21 +0100
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 888D549127F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Mar 2010 06:20:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=7S6zKQWC0uaQg2q15szq/QIRTL3ePqh0wyypyNIMqlI=;
-	b=HycIB00tXsax3ctPBTFAMlBxwMGVEC/nJJgZ47sPt2oxslxBsBTN+dGCL6yFJs+WmQ
-	CeVA13YtZxJ9/0bg7Ecn1c3vJxR5Cx1jzl8Jf0I7MZsHSrTSTUUzc1cJpOvqFMUpvHLp
-	NBkxjxwH+tPjE3ZCXZ/ojp2qOhfgP5Cb5Y5tM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=mqdh1+k4YC1S7TahiZvqPQlWcavp+poHVAgfoIN9y7FiRQY95q2X1mIupV39DD7WvE
-	x++46oQ3tXvRlt5amEptslkKSAcq3qAXm8YBDPiyjAZDMRx5xJM1F0gJXNWkiHsAp40l
-	s+KNr5asjHiTkE9zKZ46VA8iXpDROEnbB7T2g=
+	Tue,  9 Mar 2010 15:41:16 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Tue, 9 Mar 2010 15:42:03 +0100
+Message-ID: <4B965E0D.8050501@dresearch.de>
+Date: Tue, 09 Mar 2010 15:41:17 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
 MIME-Version: 1.0
-Received: by 10.231.174.140 with SMTP id t12mr20714ibz.89.1268144404396; Tue, 
-	09 Mar 2010 06:20:04 -0800 (PST)
-In-Reply-To: <25809.193.195.44.178.1268139137.squirrel@webmail12.pair.com>
-References: <f275a9df1003090417s3ea8bcf5y3b547ce7303d5e32@mail.gmail.com>
-	<25809.193.195.44.178.1268139137.squirrel@webmail12.pair.com>
-Date: Tue, 9 Mar 2010 22:20:04 +0800
-Message-ID: <f275a9df1003090620i4abb58b9ye07151c9b27f5533@mail.gmail.com>
-From: Jiason Li <listjiason@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.174
-X-SA-Exim-Mail-From: listjiason@gmail.com
+References: <4B8E618C.2080604@dresearch.de> <4B94AA93.4070709@dresearch.de>
+	<1268071514.16526.6.camel@trini-m4400>
+In-Reply-To: <1268071514.16526.6.camel@trini-m4400>
+X-OriginalArrivalTime: 09 Mar 2010 14:42:03.0970 (UTC)
+	FILETIME=[AF403220:01CABF96]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: 'bitbake opie-image' problem
+Subject: Re: u-boot ready initrds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,38 +42,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Mar 2010 14:23:11 -0000
+X-List-Received-Date: Tue, 09 Mar 2010 14:44:24 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hi Paul,
-thanks for your kindly response and the effort!
-can't wait to get it. :D
-
-Thank you.
-jiason
-20100309
-
-
-2010/3/9 Paul Eggleton:
-> Jiason Li wrote:
->> I was trying to make some images followed the getting_started guide,
->> 'bitbake nano', 'bitbake console-image' all succeeded,
->> but soon I encountered problem when doing 'bitbake opie-image'.
+Tom Rini wrote:
+>> Initrds need to be prepared with mkimage to be usable from u-boot.
+>> The following patch introduces an additional IMAGE_FSTYPE .cpio.gz.u-boot
+>> for this (at the moment just for hipox machine).
 >>
->> Do you have any idea about this issue?
+>> Is this the way it should be done?
+>>
+>> Should this better become part of conf/bitbake.conf?
+> 
+> I don't know why patchwork didn't see this.
+
+That's really crazy. None of my patches occurs in the patch queue.
+I started an extra thread for this [1]. It would be really
+great if somebody can fix this problem (or tell me what i'm
+doing wrong).
+
+> That said, mkimage -A arm is bad.  UBOOT_ARCH is right,
+
+Good point. Total agreement.
+
+> and comes from kernel-arch.bbclass.  So, I
+> think a full patch would need to add in changes to image.bbclass to
+> inherit kernel-arch so that UBOOT_ARCH will be evaluated.
 >
-> This is due to libopkg's C headers having changed recently. Not only has
-> the API changed, but the headers are now uncompilable within a C++
-> program. I am in the process of fixing this, hopefully I will have some
-> patches done this evening.
->
-> Cheers,
-> Paul
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> And yes, this I think should be in bitbake.conf with the rest of the
+> image magics
+
+I've too much respect and to little knowledge to make changes
+inside these core components.
+
+Can someone take me by the hand and guide me. ;-)
+
+Steffen
+
+PS: And another little question: is '.u-boot' a good extension for
+this? Or is the shorter '.u' better?
+
+[1] http://thread.gmane.org/gmane.comp.handhelds.openembedded/30693
+
 
 
