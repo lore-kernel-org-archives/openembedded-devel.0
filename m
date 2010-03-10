@@ -1,33 +1,44 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NpNH3-0000nq-32
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 15:52:42 +0100
-Received: (qmail 6389 invoked by uid 813007); 10 Mar 2010 14:49:41 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 10 Mar 2010 14:49:41 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NpNO3-00010Y-0y for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Mar 2010 15:59:51 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NpNLB-0008K1-QS for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Mar 2010 15:56:53 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Mar 2010 15:56:53 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Mar 2010 15:56:53 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Mar 2010 15:49:00 +0100
-User-Agent: KMail/1.13.1 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.4.1; x86_64; ;
-	)
-References: <20100310135425.31263.61632.stgit@ES-J7S4D2J.amer.consind.ge.com>
-	<201003101508.35525.marcin@juszkiewicz.com.pl>
-	<4B97AE80.5090409@ge.com>
-In-Reply-To: <4B97AE80.5090409@ge.com>
-MIME-Version: 1.0
-Message-Id: <201003101549.01069.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 10 Mar 2010 15:56:42 +0100
+Message-ID: <hn8bva$o8a$1@dough.gmane.org>
+References: <20100309075331.GL31945@jama>
+	<hn5k9o$3vc$2@dough.gmane.org>	<1268167320.5437.2037.camel@lenovo.internal.reciva.com>
+	<87tysozewc.fsf@SSpaeth.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
+In-Reply-To: <87tysozewc.fsf@SSpaeth.de>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add Freescale P2020DS Demo Board
+Subject: Re: [RFC] Make some big but only formal change before next stable - SRCPV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,32 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2010 14:52:42 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 10 Mar 2010 14:59:51 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Dnia =C5=9Broda, 10 marca 2010 o 15:36:48 Martyn Welch napisa=C5=82(a):
-> Marcin Juszkiewicz wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> > OE policy is to keep defconfig inside of OE tree. Please add
-> > mpc85xx_defconfig as recipes/linux/linux-2.6.33/p2020ds/defconfig and
-> > resubmit.
->=20
-> Will do.=20
+On 10-03-10 10:48, Sebastian Spaeth wrote:
+> On Tue, 09 Mar 2010 20:41:59 +0000, Phil Blundell <philb@gnu.org> wrote:
+>> That does rather sound like a further argument for just not using the
+>> local count variables at all and just figuring out a monotonic count
+>> from the SCM (using git-rev-list or whatever) at packaging time.
+> 
+> That sounds rather nice, however I am not sure if git easily gives you
+> such a number. I know that mercurial does.
 
-> Out of interest, what's the rationale for this?
+Both are local and don't handle rebasing well.
 
-Maintainers of OE derived distributions can provide own configs for target=
-=20
-devices.
+regards,
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFLl7MqMkyGM64RGpERAriNAJ9fixaWg0G7NHkEKv/UOuGXbJYwIQCeNmxU
+Oh51RpHDi6I3D4q+IzbPbYo=
+=lB78
+-----END PGP SIGNATURE-----
 
 
 
