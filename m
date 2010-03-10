@@ -1,45 +1,40 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nazgee@gmail.com>) id 1NpTWo-0001Vy-MK
+	(envelope-from <philb@gnu.org>) id 1NpTab-0000o5-9H
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 22:33:19 +0100
-Received: by wyb28 with SMTP id 28so780810wyb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Mar 2010 13:30:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=4mze92h9S8vCrjCfzQgIrBv9hc3qwiGxivzSXSnUfwY=;
-	b=QwnIDJv5dtKHbaJa3duqW8p8+yXBTlEHAcxyWiZCPyZ/e+Q3aOHj87KB8yCCPfOfiG
-	igh7qrqjptOvaeckaYu/RN4FNxp0qmsaDfS2KKmAaqcRpF1jpD2L3Z4ed/qxVYiAJt4g
-	qTB455RAHBEeyoOixlbeyw/oMgoNPFIT4plIU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=vWBb6LrY6mkrAMYzqsAMhUU/FJoknISR4DMVMb6R+8PdJXTawnf0Oj4x92jtx5/zX/
-	3c2xIk+EE2BhnArQ6mEIZ69zrDWErWGSJZEX6WcC2w1zAE1yhCYLiB3PprTZTnfRpV46
-	wM/UxXnVqNx5pvYT5QOeF1sHi4vRX0sXtSjAk=
-MIME-Version: 1.0
-Received: by 10.216.89.200 with SMTP id c50mr1357994wef.164.1268256621013; 
-	Wed, 10 Mar 2010 13:30:21 -0800 (PST)
-In-Reply-To: <1268212334.3843.28.camel@mattotaupa>
-References: <13c1beb11002250321g6099bc44oebd182fa8c4f8d1c@mail.gmail.com>
-	<13c1beb11003100010l6d97c26bs51faaa0dfa74d118@mail.gmail.com>
-	<1268212334.3843.28.camel@mattotaupa>
-Date: Wed, 10 Mar 2010 22:30:20 +0100
-Message-ID: <13c1beb11003101330n75cc6edbna2d8888be98427b5@mail.gmail.com>
-From: Michal Stawinski <nazgee@gmail.com>
+	Wed, 10 Mar 2010 22:37:14 +0100
+Received: from 88-108-113-12.dynamic.dsl.as9105.com ([88.108.113.12]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NpTXc-0006bp-10
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Mar 2010 21:34:10 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: nazgee@gmail.com
+In-Reply-To: <5e088bd91003101327t16d245c8ldba85d3d32085ad3@mail.gmail.com>
+References: <E1NnJzb-0001K2-HM@melo.openembedded.org>
+	<1267888617.11175.42.camel@rex> <20100309181656.GA19931@denix.org>
+	<1268159056.5437.2018.camel@lenovo.internal.reciva.com>
+	<5e088bd91003100922t9b6668fl577fdbafae53c82@mail.gmail.com>
+	<1268247148.14566.1079.camel@mill.internal.reciva.com>
+	<5e088bd91003101214y53a1d0b2h3bd47f2865e66b74@mail.gmail.com>
+	<1268252731.5437.2042.camel@lenovo.internal.reciva.com>
+	<5e088bd91003101234h267a24bfr558d696fdf703685@mail.gmail.com>
+	<1268254780.5437.2044.camel@lenovo.internal.reciva.com>
+	<5e088bd91003101327t16d245c8ldba85d3d32085ad3@mail.gmail.com>
+Date: Wed, 10 Mar 2010 21:33:48 +0000
+Message-ID: <1268256828.5437.2046.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH][mtd-utils][how to] Numonyx chip support
+Subject: Re: [oe-commits] Phil Blundell : gtk+: build gtk-demo and package it appropriately
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,33 +48,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2010 21:33:19 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 10 Mar 2010 21:37:14 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-2010/3/10 Paul Menzel <paulepanter@users.sourceforge.net>
+On Wed, 2010-03-10 at 13:27 -0800, Steve Sakoman wrote:
+> On Wed, Mar 10, 2010 at 12:59 PM, Phil Blundell <philb@gnu.org> wrote:
+> 
+> > Ah, I remember now, you need a patch to base.bbclass as well to make it
+> > stage the files from etc/.  Try this:
+> 
+> I must be cursed :-(
+> 
+> Still no luck.  gtk+-native builds, but gtk+ still fails with the
+> apple_red issue.
 
-> Dear Michal,
-> please do not top post.
->
+Drat.  It does seem like you must be cursed.
 
-It will never happen again
+Maybe you could try poking around in your working tree and see if you
+can figure out why gdk-pixbuf.loaders isn't getting installed into
+staging.  What ought to happen is that it is generated by gtk+-native
+during do_install() and then copied from there into the native sysroot
+where gtk+ expects to find it during the build.
 
->
-> [...]
-> So I suggest
->
-1. you to create the patch for mtd-utils in its source directory (get
-> the source, for example [5] in a seperate directory outside the OE tree,
-> adapt it and create a patch).
-> 2. Copy the patch to `recipes/mtd/mtd-utils/`.
-> 3. Add a file line to SRC_URI.
-> 4. If this works, add the patch to the OE Git tree (`git add =85`) and
-> proceed as you did before.
-> [=85]
+p.
 
 
-Thank you for your comprehensive explanation. I thinked Ive grasped it all.
 
-BR, Michal
 
