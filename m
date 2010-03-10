@@ -1,30 +1,32 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1NpGHr-00015l-2O
+	(envelope-from <roman@khimov.ru>) id 1NpGRv-0000BC-1K
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 08:25:04 +0100
-Received: (qmail 21753 invoked by uid 1003); 10 Mar 2010 07:21:59 -0000
-Received: from localhost (HELO ?192.168.0.202?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 10 Mar 2010 07:21:59 -0000
-Message-ID: <4B974894.5010709@balister.org>
-Date: Wed, 10 Mar 2010 08:21:56 +0100
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.8) Gecko/20100301 Fedora/3.0.3-1.fc11 Thunderbird/3.0.3
-MIME-Version: 1.0
+	Wed, 10 Mar 2010 08:35:30 +0100
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NpGP4-00089V-Hm
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Mar 2010 10:32:27 +0300
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-References: <mailman.5417.1268191803.14961.openembedded-devel@lists.openembedded.org>	<759741.73773.qm@web88207.mail.re2.yahoo.com>
-	<ade1bdc1003092230u1b16756i138a2745963dea29@mail.gmail.com>
-In-Reply-To: <ade1bdc1003092230u1b16756i138a2745963dea29@mail.gmail.com>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+Date: Wed, 10 Mar 2010 10:30:14 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
+References: <201003082201.30147.roman@khimov.ru>
+	<201003092200.18460.roman@khimov.ru>
+	<19c1b8a91003091426j2d226a43yc2e3635d1af3706@mail.gmail.com>
+In-Reply-To: <19c1b8a91003091426j2d226a43yc2e3635d1af3706@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201003101030.17054.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: git.openembedded.org server down?
+Subject: Re: [PATCH/RFC] qemu 0.12.3, cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,50 +40,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2010 07:25:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 10 Mar 2010 07:35:31 -0000
+X-Groupsio-MsgNum: 17447
+Content-Type: multipart/signed; boundary="nextPart1398392.WQmlOKYAqG";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
-I just saw a message in irc that suggests the server admins are doing a 
-hardware upgrade. Hopefully services are back in a few hours.
+--nextPart1398392.WQmlOKYAqG
+Content-Type: Text/Plain;
+  charset="koi8-r"
+Content-Transfer-Encoding: quoted-printable
 
-Philip
+=F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F3=D2=C5=C4=C1 10 =CD=C1=D2=D4=C1 2=
+010 01:26:34 =C1=D7=D4=CF=D2 Khem Raj =CE=C1=D0=C9=D3=C1=CC:
+> 2010/3/9 Roman I Khimov <roman@khimov.ru>:
+> > =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F7=D4=CF=D2=CE=C9=CB 09 =CD=C1=
+=D2=D4=C1 2010 21:50:35 =C1=D7=D4=CF=D2 Khem Raj =CE=C1=D0=C9=D3=C1=CC:
+> >> sanity: remove /proc/sys/vm/mmap_min_addr check
+> >> will older kernels like 2.6.21 etc. work well with newer qemu and wont
+> >> require this check?
+> >
+> > Well, as commit message says, 2.6.26 was also tested and worked fine wi=
+th
+> > qemu 0.12.3 with three different mmap_min_addr-es.
+>=20
+> well I have boxes with 2.6.21 but I can know by doing :)
 
-On 03/10/2010 07:30 AM, Raffaele Recalcati wrote:
-> 2010/3/10 JOSEPH KORTJE<jkortje750@rogers.com>
->
->> I have been attempting to do a git pull since about 6 hours now.
->> When will the server be working again?
->>
->> Here is the error>
->>
->> ~/beagle-oe/openembedded$ git pull
->> git.openembedded.org[0: 140.211.169.165]: errno=Connection timed out
->> fatal: unable to connect a socket (Connection timed out)
->>
->
->
-> Now I've done:
-> git clone http://repo.or.cz/r/openembedded.git
-> Initialized empty Git repository in /home/recalcati/openembedded/.git/
-> Checking out files: 100% (22665/22665), done.
->
-> du -sh openembedded/
-> 598M    openembedded/
->
-> http server works.
-> The git one I can't test.
->
->
->
->
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
->
->
+I think it should be fine, but try it out, of course.
 
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
+--nextPart1398392.WQmlOKYAqG
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAkuXSokACgkQXJ70z+XgVcNF0wCg0p0KyQPljPwTZLLwMOW34MZa
+ROQAoN7Oipapj4CvkbfJ8WfY5b1g6byQ
+=NLCb
+-----END PGP SIGNATURE-----
+
+--nextPart1398392.WQmlOKYAqG--
