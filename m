@@ -1,47 +1,50 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from qw-out-1920.google.com ([74.125.92.146])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NpSZt-0007GO-K0
+	(envelope-from <sakoman@gmail.com>) id 1NpSed-0007Sf-SL
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 21:32:34 +0100
-Received: by gye5 with SMTP id 5so721199gye.6
+	Wed, 10 Mar 2010 21:37:22 +0100
+Received: by qw-out-1920.google.com with SMTP id 5so2314188qwc.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Mar 2010 12:29:27 -0800 (PST)
+	Wed, 10 Mar 2010 12:34:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=0szNK4YQB4mZjw0VSIZ7Lch1X7o3O0slmaqKjl+cjJg=;
-	b=SlkTx4UEdk6fVwxCIuOnacalDwYNlGi8MD/FT7alGP2H6yZuWuI9pLr7NvgQ//P0eA
-	GHVnYPwt4l0SKGMPTfnvhZmBZ/nbNNGXYP4hF0UU2QzZuY3IJUN5hBxKqLNiuHmqevcA
-	riYqbOx4eAuGeCUxooBAU9nRwrp5fN4+gG/PA=
+	bh=biwT5piUi5QzSzp3eyxPbyuGB7WjUhRW2MBLGfJlCGk=;
+	b=Eaak1Ln9l27hesfEdBNbQktifXB7Rn0B3gKIPHiSKLgi/ZhUJxTF8/5eLZp7K+lJ6t
+	fUNrEmIFKcTafDdNIywLP1Acbi3JH9/62pzzq2P23bYwRbZ0NyhLYHDxmdikPxSk5hw4
+	bCCu3/GsnHhhLbsZapx1B3l81My/xhaAYjdhE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=aho9U2RUPSPXtE3osw3LRFFLydSeEeFCZ+2px0Tw5InzLktaJRwxb1hL3L+1PzK2DZ
-	UlkeLuG63KcDLSb7OZ8e+g+YnSjKhU/ctuRpSwT9gAu9UsjLJV5zxcmqVmXWwCbzfAMF
-	it5utjZGiLjxhaLAeu4SgMCKmCm9xuLDFRqRI=
+	b=RjR2Bij0gOcO9ftI6e7kJxSu3Q2W3SqSkxmKtoPe+fCalRyE75bkTd4MRkTbA9dIH4
+	JKElQvFxCvqRIMaYvCYLfGQpFJSverQlEgsKiUjpFTYo6dd2peUmjJ7zTyEqGaZdgH4L
+	jyITMFhY7qvwiF2XDnSTefykhl4UkBsy5JcJI=
 MIME-Version: 1.0
-Received: by 10.101.131.3 with SMTP id i3mr1664357ann.83.1268252967244; Wed, 
-	10 Mar 2010 12:29:27 -0800 (PST)
-In-Reply-To: <20100310160116.GO31945@jama>
-References: <ac9c93b11002281201j44a861e1saa803be9f338ee10@mail.gmail.com>
-	<20100228221056.GG30145@xora-desktop.xora.org.uk>
-	<ac9c93b11002282328l61356cc1y188b47d0f974369e@mail.gmail.com>
-	<ac9c93b11003100744g5eee3250me7f0b668e8727060@mail.gmail.com>
-	<20100310160116.GO31945@jama>
-Date: Wed, 10 Mar 2010 21:29:27 +0100
-Message-ID: <ac9c93b11003101229s6a23a40ayb0ba2f220369086a@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.229.127.164 with SMTP id g36mr2022590qcs.99.1268253262868; 
+	Wed, 10 Mar 2010 12:34:22 -0800 (PST)
+In-Reply-To: <1268252731.5437.2042.camel@lenovo.internal.reciva.com>
+References: <E1NnJzb-0001K2-HM@melo.openembedded.org>
+	<141020e31003052236w4afdcc26x1008a539f0491c9a@mail.gmail.com>
+	<1267888617.11175.42.camel@rex> <20100309181656.GA19931@denix.org>
+	<1268159056.5437.2018.camel@lenovo.internal.reciva.com>
+	<5e088bd91003100922t9b6668fl577fdbafae53c82@mail.gmail.com>
+	<1268247148.14566.1079.camel@mill.internal.reciva.com>
+	<5e088bd91003101214y53a1d0b2h3bd47f2865e66b74@mail.gmail.com>
+	<1268252731.5437.2042.camel@lenovo.internal.reciva.com>
+Date: Wed, 10 Mar 2010 12:34:22 -0800
+Message-ID: <5e088bd91003101234h267a24bfr558d696fdf703685@mail.gmail.com>
+From: Steve Sakoman <sakoman@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 74.125.92.146
+X-SA-Exim-Mail-From: sakoman@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] duplicate recipes
+Subject: Re: [oe-commits] Phil Blundell : gtk+: build gtk-demo and package it appropriately
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,50 +58,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2010 20:32:34 -0000
+X-List-Received-Date: Wed, 10 Mar 2010 20:37:23 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/3/10 Martin Jansa <martin.jansa@gmail.com>:
-> On Wed, Mar 10, 2010 at 04:44:48PM +0100, Frans Meulenbroeks wrote:
->> Time for a summary I guess:
->>
->> original proposal from me:
->> Probably the best scenario is to remove all versions which
->> - are not the latest version
->> - are not =A0pinned with =A0PREFERRED_VERSION =A0in conf/distro/*
->> - do not have the largest DEFAULT_PREFERENCE
->
-> I think this rules are quite strict, in first iteration would be enough
-> to keep only latest from each "major" version
->
-> where major version is defined by common-sense (ie first 2 version
-> number for xorg, but somewhere first number is enough)
->
-> ie for xserver-xorg:
-> ../dev/recipes/xorg-xserver/xserver-xorg_1.2.0.bb
-> ../dev/recipes/xorg-xserver/xserver-xorg_1.3.0.0.bb
-> ../dev/recipes/xorg-xserver/xserver-xorg_1.4.2.bb
-> mv ../dev/recipes/xorg-xserver/xserver-xorg_1.4.bb
-> mv ../dev/recipes/xorg-xserver/xserver-xorg_1.5.1.bb
-> ../dev/recipes/xorg-xserver/xserver-xorg_1.5.3.bb
-> mv ../dev/recipes/xorg-xserver/xserver-xorg_1.7.1.bb
-> ../dev/recipes/xorg-xserver/xserver-xorg_1.7.4.bb
->
-> and update preferred-xorg-versions (1.7.1->1.7.4) and other if needed
->
->> opinions:
->
-> JaMa: move older minor versions to obsolete, keep latest for each "major"
+On Wed, Mar 10, 2010 at 12:25 PM, Phil Blundell <pb@reciva.com> wrote:
 
-Noted!
+> Did you clean and rebuild gtk+-native? =A0I forgot to mention that this i=
+s
+> necessary.
 
-(but for my understanding:why do you see it useful to retain old
-versions that are not pinned. For xorg, being a complicated and big
-thing I can partly understand it, but is there really a point in
-keeping old versions of e.g. transmission? (noting that if needed they
-can always be recovered from git).
+Yes, I did:
 
-Frans
+bitbake -c clean gtk+ gtk+-native gdk-pixbuf-csource-native
+bitbake gtk+
+
+My repo is at current top of tree with your gtk+.inc patch and
+gtk+_2.18.6.bb unchanged:
+
+$ git diff recipes/gtk+/gtk+.inc
+diff --git a/recipes/gtk+/gtk+.inc b/recipes/gtk+/gtk+.inc
+index 268657b..5431c76 100644
+--- a/recipes/gtk+/gtk+.inc
++++ b/recipes/gtk+/gtk+.inc
+@@ -66,6 +66,23 @@ do_install_append () {
+        rm -f ${D}${libdir}/gtk-2.0/*/*.la ${D}${libdir}/gtk-2.0/${LIBV}/*/=
+*.la
+ }
+
++do_install_virtclass-native () {
++        autotools_do_install
++
++       mkdir -p ${D}${libdir}/gtk-2.0/include
++       install -m 0644 gdk/gdkconfig.h ${D}${libdir}/gtk-2.0/include/gdkco=
+nfig.
++       # Copy over all headers, since the maemo stuff needs access to the =
+priva
++       cp gtk/*.h ${D}${includedir}/gtk-2.0/gtk/
++
++       install -m 0644 m4macros/gtk-2.0.m4 ${STAGING_DATADIR}/aclocal/
++
++       install -d ${D}${sysconfdir}/gtk-2.0
++       rm -f ${D}${libdir}/gtk-2.0/*/*.la ${D}${libdir}/gtk-2.0/${LIBV}/*/=
+*.la
++
++        mkdir -p "${D}${sysconfdir}/gtk-2.0"
++        ${B}/gdk-pixbuf/gdk-pixbuf-query-loaders > "${D}${sysconfdir}/gtk-=
+2.0/g
++}
++
+ postinst_prologue() {
+ if [ "x$D" !=3D "x" ]; then
+   exit 1
+
+$ git diff recipes/gtk+/gtk+_2.18.6.bb
+$
 
 
