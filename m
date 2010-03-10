@@ -1,37 +1,39 @@
-Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sebastian@SSpaeth.de>) id 1NpIZc-0005Y4-0v
+	(envelope-from <koansoftware@gmail.com>) id 1NpJrZ-0000vf-K6
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 10:51:29 +0100
-Received: from homiemail-a13.g.dreamhost.com (mailbigip.dreamhost.com
-	[208.97.132.5])
-	by hapkido.dreamhost.com (Postfix) with ESMTP id 1CD8617E634
+	Wed, 10 Mar 2010 12:14:10 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id AE26C2C7E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Mar 2010 01:48:30 -0800 (PST)
-Received: from sspaeth.de (mtec-hg-docking-1-dhcp-204.ethz.ch
-	[129.132.133.204])
-	by homiemail-a13.g.dreamhost.com (Postfix) with ESMTPA id ACC2C6A805F
+	Wed, 10 Mar 2010 11:06:28 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id YTfKWe1VsxPI
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Mar 2010 01:48:25 -0800 (PST)
-Received: by sspaeth.de (sSMTP sendmail emulation);
-	Wed, 10 Mar 2010 10:48:03 +0100
-From: "Sebastian Spaeth" <Sebastian@SSpaeth.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1268167320.5437.2037.camel@lenovo.internal.reciva.com>
-References: <20100309075331.GL31945@jama>  <hn5k9o$3vc$2@dough.gmane.org>
-	<1268167320.5437.2037.camel@lenovo.internal.reciva.com>
-Date: Wed, 10 Mar 2010 10:48:03 +0100
-Message-ID: <87tysozewc.fsf@SSpaeth.de>
+	Wed, 10 Mar 2010 11:06:24 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 11CCA2C7DC
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Mar 2010 11:06:23 +0000 (UTC)
+Message-ID: <4B977E46.5000709@gmail.com>
+Date: Wed, 10 Mar 2010 12:11:02 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.33.216.122
-X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
+To: openembedded-devel@lists.openembedded.org
+References: <536913655.6343051268191558593.JavaMail.root@sz0029a.westchester.pa.mail.comcast.net>
+In-Reply-To: <536913655.6343051268191558593.JavaMail.root@sz0029a.westchester.pa.mail.comcast.net>
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Make some big but only formal change before next stable - SRCPV
+Subject: Re: bitbake failure after git pull
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,17 +47,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2010 09:51:29 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 10 Mar 2010 11:14:10 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, 09 Mar 2010 20:41:59 +0000, Phil Blundell <philb@gnu.org> wrote:
-> That does rather sound like a further argument for just not using the
-> local count variables at all and just figuring out a monotonic count
-> from the SCM (using git-rev-list or whatever) at packaging time.
+John Buckley ha scritto, Il 10/03/2010 04:25:
+> Hello, 
+> I just did a "git pull" into my gumstix overo-oe repository and now bitbake is giving me errors. Any ideas on where to start? 
+> Here is the error listed below after I successfully completed a git pull. 
+> 
+> - JohnBuckley 
+> 
+> jgb@jgb-desktop:~/overo-oe/user.collection/recipes/vidplayr2$ bitbake -c clean vidplayr 
+> Traceback (most recent call last): 
+> File "/home/jgb/overo-oe/bitbake/bin/bitbake", line 143, in <module> 
+> main() 
+> File "/home/jgb/overo-oe/bitbake/bin/bitbake", line 123, in main 
+> cooker.parseConfiguration() 
+> File "/home/jgb/overo-oe/bitbake/lib/bb/cooker.py", line 68, in parseConfiguration 
+> self.parseConfigurationFile( os.path.join( "conf", "bitbake.conf" ) ) 
+> File "/home/jgb/overo-oe/bitbake/lib/bb/cooker.py", line 404, in parseConfigurationFile 
+> bb.event.fire(bb.event.ConfigParsed(self.configuration.data)) 
+> File "/home/jgb/overo-oe/bitbake/lib/bb/event.py", line 67, in fire 
+> if tmpHandler(event) == Handled: 
+> File "tmpHandler(e)", line 4, in tmpHandler 
+> File "<bb>", line 18, in check_sanity 
+> NameError: global name 'os' is not defined 
+> jgb@jgb-desktop:~/overo-oe/user.collection/recipes/vidplayr2$ 
 
-That sounds rather nice, however I am not sure if git easily gives you
-such a number. I know that mercurial does.
-
-spaetz
+df -h
 
 
