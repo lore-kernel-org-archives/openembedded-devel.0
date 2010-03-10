@@ -1,40 +1,31 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from exprod5og107.obsmtp.com ([64.18.0.184])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1NpLtm-0004ZN-8Q
+	(envelope-from <martyn.welch@ge.com>) id 1NpM4Y-0007nw-AE
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 14:24:34 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 18EE72C7E3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Mar 2010 13:16:52 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id PhSC9vrVZSFH
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Mar 2010 13:16:48 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 92BF52C7DC
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Mar 2010 13:16:47 +0000 (UTC)
-Message-ID: <4B979CD6.2000505@gmail.com>
-Date: Wed, 10 Mar 2010 14:21:26 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Wed, 10 Mar 2010 14:35:43 +0100
+Received: from source ([4.79.213.129]) (using TLSv1) by
+	exprod5ob107.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKS5efeQnpEPWrCZqJ0FZ68xK7Cc7WLknG@postini.com;
+	Wed, 10 Mar 2010 05:32:43 PST
+Received: from unknown (HELO cinmlip01.e2k.ad.ge.com) ([3.159.213.48])
+	by Alpmlip09.e2k.ad.ge.com with ESMTP; 10 Mar 2010 05:28:22 -0500
+Received: from es-j7s4d2j.amer.consind.ge.com ([3.138.54.92])
+	by cinmlip01.e2k.ad.ge.com with ESMTP; 10 Mar 2010 05:28:22 -0500
+From: Martyn Welch <martyn.welch@ge.com>
 To: openembedded-devel@lists.openembedded.org
-References: <536913655.6343051268191558593.JavaMail.root@sz0029a.westchester.pa.mail.comcast.net>
-	<4B978B57.8050406@koansoftware.com>
-In-Reply-To: <4B978B57.8050406@koansoftware.com>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+Date: Wed, 10 Mar 2010 10:31:34 +0000
+Message-ID: <20100310103133.14548.62608.stgit@ES-J7S4D2J.amer.consind.ge.com>
+User-Agent: StGIT/0.13
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 64.18.0.184
+X-SA-Exim-Mail-From: martyn.welch@ge.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: bitbake failure after git pull
+Subject: [PATCH] Allow spectrum fw to build behind a proxy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,25 +39,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2010 13:24:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 10 Mar 2010 13:35:47 -0000
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 
-Leo ha scritto, Il 10/03/2010 13:06:
-> Il 03/10/2010 04:25 AM, John Buckley ha scritto:
->> NameError: global name 'os' is not defined 
->> jgb@jgb-desktop:~/overo-oe/user.collection/recipes/vidplayr2$ 
-> 
-> 
-> Somewhere missing (maybe in bitbake config file): import os
-> Read this: http://forums.xkcd.com/viewtopic.php?f=20&t=50227
-> I hope can be useful! :D
-> 
->       bye bye    .hachreak.
+Spectrum-fw runs a script which uses curl, wget or ftp to pull an archive
+rather than the archive being a part of the SRC_URI. Whilst it would
+probably be preferable to pull this as part of the SRC_URI (incidentally,
+if it was, the script wouldn't need to be modified), the "&" in the archive
+name has foiled my attempts at doing that.
 
-hmmm... that shouldn't happen after a git pull.
-May well be something different, like old python version.
+This patch modifies the script to at least use the "FETCHCMD_wget" variable
+which can be provided to help when accessing through a proxy.
+
+Signed-off-by: Martyn Welch <martyn.welch@ge.com>
+---
+
+ recipes/orinoco/spectrum-fw.bb            |    1 +
+ recipes/orinoco/spectrum-fw/get_symbol_fw |    9 +++++++--
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/recipes/orinoco/spectrum-fw.bb b/recipes/orinoco/spectrum-fw.bb
+index cedb0e3..0128115 100644
+--- a/recipes/orinoco/spectrum-fw.bb
++++ b/recipes/orinoco/spectrum-fw.bb
+@@ -8,6 +8,7 @@ SRC_URI = "file://get_symbol_fw \
+ S = "${WORKDIR}"
+ 
+ do_configure() {
++	export FETCHCMD_wget="${FETCHCMD_wget}";
+ 	./get_symbol_fw
+ }
+ 
+diff --git a/recipes/orinoco/spectrum-fw/get_symbol_fw b/recipes/orinoco/spectrum-fw/get_symbol_fw
+index e7b0bf2..b15a60c 100755
+--- a/recipes/orinoco/spectrum-fw/get_symbol_fw
++++ b/recipes/orinoco/spectrum-fw/get_symbol_fw
+@@ -23,8 +23,13 @@ DRIVER1=symbol1.drv
+ DRIVER2=symbol2.drv
+ 
+ get_file() {
++    if [ "${FETCHCMD_wget}" == "" ]
++    then
++        FETCHCMD_wget="wget --passive-ftp"
++    fi
++
+     curl --remote-name "$1" || \
+-    wget --passive-ftp "$1" || \
++    ${FETCHCMD_wget} "$1" || \
+     wget "$1" || \
+     ftp "$1" </dev/null || \
+     exit 1
+@@ -40,4 +45,4 @@ unzip -p $DRIVER1 "$DL_INT2" >$DRIVER2
+ perl parse_symbol_fw $DRIVER2 spectrum_fw.h symbol_sp24t_prim_fw \
+     symbol_sp24t_sec_fw
+ 			    
+-rm -f $DRIVER1 $DRIVER2
+\ No newline at end of file
++rm -f $DRIVER1 $DRIVER2
 
 
+--
+Martyn Welch (Principal Software Engineer)   |   Registered in England and
+GE Intelligent Platforms                     |   Wales (3828642) at 100
+T +44(0)127322748                            |   Barbirolli Square, Manchester,
+E martyn.welch@ge.com                        |   M2 3AB  VAT:GB 927559189
 
 
