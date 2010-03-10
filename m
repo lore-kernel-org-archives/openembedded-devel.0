@@ -1,27 +1,27 @@
-Received: from exprod5og106.obsmtp.com ([64.18.0.182])
+Received: from exprod5og112.obsmtp.com ([64.18.0.24])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martyn.welch@ge.com>) id 1NpMxm-00020H-9z
+	(envelope-from <martyn.welch@ge.com>) id 1NpN1Z-00036y-87
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 15:32:43 +0100
-Received: from source ([4.78.218.129]) (using TLSv1) by
-	exprod5ob106.postini.com ([64.18.4.12]) with SMTP
-	ID DSNKS5es2Q3t3CHZOPb3UptQ9aiy2tfcP4v5@postini.com;
-	Wed, 10 Mar 2010 06:29:47 PST
+	Wed, 10 Mar 2010 15:36:41 +0100
+Received: from source ([12.71.149.1]) (using TLSv1) by
+	exprod5ob112.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKS5etxBFhrt8BbuRG8t2pfdBVo07OLu0v@postini.com;
+	Wed, 10 Mar 2010 06:33:42 PST
 Received: from unknown (HELO cinmlip01.e2k.ad.ge.com) ([3.159.213.48])
-	by Cinmlip07.e2k.ad.ge.com with ESMTP; 10 Mar 2010 08:26:17 -0500
+	by Cinmlip04.e2k.ad.ge.com with ESMTP; 10 Mar 2010 09:33:40 -0500
 Received: from es-j7s4d2j.amer.consind.ge.com (HELO [3.138.54.92])
 	([3.138.54.92])
-	by cinmlip01.e2k.ad.ge.com with ESMTP; 10 Mar 2010 08:26:14 -0500
-Message-ID: <4B979EB7.4000004@ge.com>
-Date: Wed, 10 Mar 2010 13:29:27 +0000
+	by cinmlip01.e2k.ad.ge.com with ESMTP; 10 Mar 2010 09:33:35 -0500
+Message-ID: <4B97AE80.5090409@ge.com>
+Date: Wed, 10 Mar 2010 14:36:48 +0000
 From: Martyn Welch <martyn.welch@ge.com>
 User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1268156863.16526.133.camel@trini-m4400>
-	<1268213424-16360-1-git-send-email-sledz@dresearch.de>
-In-Reply-To: <1268213424-16360-1-git-send-email-sledz@dresearch.de>
-X-SA-Exim-Connect-IP: 64.18.0.182
+References: <20100310135425.31263.61632.stgit@ES-J7S4D2J.amer.consind.ge.com>
+	<201003101508.35525.marcin@juszkiewicz.com.pl>
+In-Reply-To: <201003101508.35525.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 64.18.0.24
 X-SA-Exim-Mail-From: martyn.welch@ge.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -29,7 +29,7 @@ X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] bitbake.conf: introducing new image fstype	.cpio.gz.u-boot
+Subject: Re: [PATCH] Add Freescale P2020DS Demo Board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,58 +43,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2010 14:32:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 10 Mar 2010 14:36:41 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Steffen Sledz wrote:
-> * initrd images need to be prepared with mkimage to be usable from u-boot
+Marcin Juszkiewicz wrote:
+> Dnia środa, 10 marca 2010 o 14:54:25 Martyn Welch napisał(a):
+>   
+>> --- a/recipes/linux/linux_2.6.33.bb
+>> +++ b/recipes/linux/linux_2.6.33.bb
+>> @@ -2,9 +2,14 @@ require linux.inc
+>>  
+>>  # Mark archs/machines that this kernel supports
+>>  DEFAULT_PREFERENCE = "-1"
+>> +DEFAULT_PREFERENCE_p2020ds = "1"
+>>  
+>>  SRC_URI =
+>> "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/${P}.tar.bz2;name=kernel \
+>> file://defconfig"
+>>  
+>>  SRC_URI[kernel.md5sum] = "c3883760b18d50e8d78819c54d579b00"
+>>  SRC_URI[kernel.sha256sum] =
+>> "63e237de3b3c4c46a21833b9ce7e20574548d52dabbd1a8bf376041e4455d5c6" +
+>> +do_configure_p2020ds() {
+>> +       oe_runmake mpc85xx_defconfig
+>> +}
+>>     
 >
-> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+> OE policy is to keep defconfig inside of OE tree. Please add mpc85xx_defconfig 
+> as recipes/linux/linux-2.6.33/p2020ds/defconfig and resubmit.
 >   
 
-Works for me on a PowerPC board:
-
-Acked-by: Martyn Welch <martyn.welch@gefanuc.com>
-
-
-> ---
->  classes/image.bbclass |    1 +
->  conf/bitbake.conf     |    2 ++
->  2 files changed, 3 insertions(+), 0 deletions(-)
->
-> diff --git a/classes/image.bbclass b/classes/image.bbclass
-> index 9dce609..8e202f0 100644
-> --- a/classes/image.bbclass
-> +++ b/classes/image.bbclass
-> @@ -1,4 +1,5 @@
->  inherit rootfs_${IMAGE_PKGTYPE}
-> +inherit kernel-arch
->  
->  LICENSE = "MIT"
->  PACKAGES = ""
-> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-> index 3a68959..c020efe 100644
-> --- a/conf/bitbake.conf
-> +++ b/conf/bitbake.conf
-> @@ -374,6 +374,7 @@ IMAGE_CMD_tar.gz = "cd ${IMAGE_ROOTFS} && tar -zcvf ${DEPLOY_DIR_IMAGE}/${IMAGE_
->  IMAGE_CMD_tar.bz2 = "cd ${IMAGE_ROOTFS} && tar -jcvf ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.tar.bz2 ."
->  IMAGE_CMD_cpio = "cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio) ${EXTRA_IMAGECMD}"
->  IMAGE_CMD_cpio.gz = "cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | gzip -c -9 >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz) ${EXTRA_IMAGECMD}"
-> +IMAGE_CMD_cpio.gz.u-boot = "cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | gzip -c -9 >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz) ${EXTRA_IMAGECMD}; mkimage -A ${UBOOT_ARCH} -O linux -T ramdisk -C gzip -n ${IMAGE_NAME} -d ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.gz.u-boot"
->  IMAGE_CMD_cpio.lzma = "cd ${IMAGE_ROOTFS} && (find . | cpio -o -H newc | lzma -c -9 >${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.cpio.lzma) ${EXTRA_IMAGECMD}"
->  IMAGE_CMD_ubi = "echo \[ubifs\] > ubinize.cfg ; echo mode=ubi >> ubinize.cfg ; echo image=${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubifs >> ubinize.cfg ; echo vol_id=0 >> ubinize.cfg ; echo vol_type=dynamic >> ubinize.cfg ; echo vol_name=${UBI_VOLNAME} >> ubinize.cfg ; echo vol_flags=autoresize >> ubinize.cfg;mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubifs ${MKUBIFS_ARGS} && ubinize -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.ubi ${UBINIZE_ARGS} ubinize.cfg"
->  IMAGE_CMD_ubifs = "mkfs.ubifs -r ${IMAGE_ROOTFS} -o ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.ubifs.img ${MKUBIFS_ARGS}"
-> @@ -397,6 +398,7 @@ IMAGE_DEPENDS_ext2 = "genext2fs-native"
->  IMAGE_DEPENDS_ext2.gz = "genext2fs-native"
->  IMAGE_DEPENDS_ext3 = "genext2fs-native e2fsprogs-native"
->  IMAGE_DEPENDS_ext3.gz = "genext2fs-native e2fsprogs-native"
-> +IMAGE_DEPENDS_cpio.gz.u-boot = "u-boot-mkimage-native"
->  IMAGE_DEPENDS_cpio.lzma = "lzma-native"
->  IMAGE_DEPENDS_squashfs = "squashfs-tools-native"
->  IMAGE_DEPENDS_squashfs-lzma = "squashfs-tools-native"
->   
-
+Will do. Out of interest, what's the rationale for this?
 
 -- 
 Martyn Welch (Principal Software Engineer)   |   Registered in England and
