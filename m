@@ -1,46 +1,43 @@
-Received: from mail-fx0-f225.google.com ([209.85.220.225])
+Received: from mail-ww0-f47.google.com ([74.125.82.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <lamiaposta71@gmail.com>) id 1NpGmZ-0006bQ-5k
+	(envelope-from <nazgee@gmail.com>) id 1NpH38-0001Bm-UX
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 08:56:47 +0100
-Received: by fxm25 with SMTP id 25so1564969fxm.27
+	Wed, 10 Mar 2010 09:13:51 +0100
+Received: by wwb31 with SMTP id 31so3678883wwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 Mar 2010 23:53:46 -0800 (PST)
+	Wed, 10 Mar 2010 00:10:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:message-id:subject:from:to:content-type;
-	bh=wVAdFDqOwPGRr4kRDUR9yyMDir+q+gl8sO37sSEZ7mU=;
-	b=DoVPX7OlNLa9l8UQLvx1B0MUcVbT04g28yRWOiwLAE7QgGQakEDnej8tTQ6TpXjyy7
-	IMNeFgqcmpP0GcH5tYP8ZWjo0lyMnakeUahhB2W6Za37MqdR1PPQmT1MSNzQOwcXpIll
-	raAePcp+4cCCDmYxJJgn0aVyOvjfYwQGn46PU=
+	bh=UrrEJ7WK9Ecba3AzkdwRmtHLFMi/qB+Ty5mdvyqfEC8=;
+	b=m7ZQxkhFK+10NGyZ0gECM8dm0M+ruE8HLRGNFcpcOGbH1j7IXJDp80oZhQXNAMGwbi
+	2av7NOzIyel7vYwJaHf8IN6A9jbnwLjaQzb/gnKLSwEsXjyCC7lSn4dR+Y3toWWHxcFm
+	/l3gJggwqucUu69Bgl0EQGmaTaeEd/CtZRiDE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=NTVePF/TIDQS5de0XxzcVM3sWlW63uZ/MIvUaY/VWNMIIWY32Omobr+vmGo8GFp1iS
-	R/BcoQPR/A1ARd0/fotolkOJVW+KH0CFhVgo8K1byGW78JKqCMDaZp4oxwrv59oALMDu
-	B8NZ6XpfxSJnASAMIOWgVPOE2ME+FgE3l/AAI=
+	b=tty/K62EP7akt71WfWfwaYpiBDWpyLrMajZZN6LQ8YodaSXXFe/gRr6xZkBDudPl/L
+	pLiDe/Qv/5lpAgHv7DcWcldKV78pLzfiCELqxJAyqiJrcUbFh/rKBSdtnbkj7Wn/F839
+	S3wAeTcb9FRljAxKiahy+Z7dA9NUZftkANtTI=
 MIME-Version: 1.0
-Received: by 10.223.97.219 with SMTP id m27mr1118615fan.16.1268207626015; Tue, 
-	09 Mar 2010 23:53:46 -0800 (PST)
-In-Reply-To: <4B974894.5010709@balister.org>
-References: <mailman.5417.1268191803.14961.openembedded-devel@lists.openembedded.org>
-	<759741.73773.qm@web88207.mail.re2.yahoo.com>
-	<ade1bdc1003092230u1b16756i138a2745963dea29@mail.gmail.com>
-	<4B974894.5010709@balister.org>
-Date: Wed, 10 Mar 2010 08:53:45 +0100
-Message-ID: <ade1bdc1003092353t239f9b45m7655e7918a808e8e@mail.gmail.com>
-From: Raffaele Recalcati <lamiaposta71@gmail.com>
+Received: by 10.216.171.207 with SMTP id r57mr659683wel.146.1268208653800; 
+	Wed, 10 Mar 2010 00:10:53 -0800 (PST)
+In-Reply-To: <13c1beb11002250321g6099bc44oebd182fa8c4f8d1c@mail.gmail.com>
+References: <13c1beb11002250321g6099bc44oebd182fa8c4f8d1c@mail.gmail.com>
+Date: Wed, 10 Mar 2010 09:10:53 +0100
+Message-ID: <13c1beb11003100010l6d97c26bs51faaa0dfa74d118@mail.gmail.com>
+From: Michal Stawinski <nazgee@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.220.225
-X-SA-Exim-Mail-From: lamiaposta71@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.47
+X-SA-Exim-Mail-From: nazgee@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: git.openembedded.org server down?
+Subject: Re: [PATCH][mtd-utils][how to] Numonyx chip support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,16 +51,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2010 07:56:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 10 Mar 2010 08:13:52 -0000
+Content-Type: text/plain; charset=ISO-8859-2
+Content-Transfer-Encoding: quoted-printable
 
-2010/3/10 Philip Balister <philip@balister.org>
+Can anyone help me on this, please?
+I am really into doing some more work, though I need your help to do this.
+I've tried some googling and messing around with bb files, but I am more of
+a C coder, and scripting/tools are not really my thing. Any help would be
+apprecieated.
 
-> I just saw a message in irc that suggests the server admins are doing a
-> hardware upgrade. Hopefully services are back in a few hours.
+Maybe it is wrong mailing-list- should I be writing somewhere else?
+
+TIA, Michal Stawinski
+
+2010/2/25 Micha=B3 Stawinski <nazgee@gmail.com>
+
+> Hi all,
+> I am a newb in working with open projects, so please take it easy if I'll
+> do something wrong.
 >
-
-
-I did git clone when I told you.
-You are saying that the server is again down?
+> Below (and in the attachment) is "git format-patch" output.
+> It introduces support for Numonyx memories, that have oobsize=3D64 and
+> pagesize=3D4096, that are used e.g. in OMAP3, igep0020b machine.
+>
+> Solution is very straightforward, though you'll probably reject my patch,
+> as diff contains full path to files that i altered (not relative to
+> mtd-utils). I hope however, that you can tell me how to generate patches =
+for
+> sepcific packages correctly, so it won't contain whole path (e.g.
+> a/build/tmp-igep0020/work/armv7a-angstrom-linux-gnueabi/mtd-utils-1.3.1-r=
+0/git/nanddump.c)
+>
+> That is how I've done it:
+> - "git pull"      //to update oe dev branch
+> - bitbake mtd-utils      //to get *.c files refreshed
+> - git checkout -b mtd_utils      //to create my new development branch
+> - git add
+> build/tmp-igep0020/work/armv7a-angstrom-linux-gnueabi/mtd-utils-1.3.1-r0/=
+git/nanddump.c
+> //to add files I am going to alter
+> - git commit     //to create a starting point for my development
+> - :::editing=3D>compiling=3D>testing:::
+> - git commit     //to check in changes I've made
+> - git format-patch HEAD^     //to create patch from changes I've made
+>
+> What am I doing wrong? Sources of packages like mitd-utils are not added =
+to
+> .git repository in OE tree, and when I add it manually to it (as above), =
+and
+> then create patch, whole path relative to OR root is generated, which mak=
+es
+> my patch useles to other builds than the one I did (IGEPv2).
+>
+> I really'd like to contribute, but I can't find any how-to realted to *.c
+> sources editing (*.bb editing is straightforward, as these files are alre=
+ady
+> in oe git tree).
+>
+> //=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D
+> ---
+>  .../mtd-utils-1.3.1-r0/git/nanddump.c              |    1 +
+>  .../mtd-utils-1.3.1-r0/git/nandwrite.c             |    1 +
+>  2 files changed, 2 insertions(+), 0 deletions(-)
+>
+> diff --git
+> a/build/tmp-igep0020/work/armv7a-angstrom-linux-gnueabi/mtd-utils-1.3.1-r=
+0/git/nanddump.c
+> b/build/tmp-igep0020/work/armv7a-angstrom-linux-gnueabi/mtd-utils-1.3.1-r=
+0/git/nanddump.c
+> index 6926c66..dfc15de 100644
+> ---
+> a/build/tmp-igep0020/work/armv7a-angstrom-linux-gnueabi/mtd-utils-1.3.1-r=
+0/git/nanddump.c
+> +++
+> b/build/tmp-igep0020/work/armv7a-angstrom-linux-gnueabi/mtd-utils-1.3.1-r=
+0/git/nanddump.c
+> @@ -210,6 +210,7 @@ int main(int argc, char * const argv[])
+>
+>      /* Make sure device page sizes are valid */
+>      if (!(meminfo.oobsize =3D=3D 128 && meminfo.writesize =3D=3D 4096) &=
+&
+> +            !(meminfo.oobsize =3D=3D 64 && meminfo.writesize =3D=3D 4096=
+) &&
+>              !(meminfo.oobsize =3D=3D 64 && meminfo.writesize =3D=3D 2048=
+) &&
+>              !(meminfo.oobsize =3D=3D 32 && meminfo.writesize =3D=3D 1024=
+) &&
+>              !(meminfo.oobsize =3D=3D 16 && meminfo.writesize =3D=3D 512)=
+ &&
+> diff --git
+> a/build/tmp-igep0020/work/armv7a-angstrom-linux-gnueabi/mtd-utils-1.3.1-r=
+0/git/nandwrite.c
+> b/build/tmp-igep0020/work/armv7a-angstrom-linux-gnueabi/mtd-utils-1.3.1-r=
+0/git/nandwrite.c
+> index b77edd6..bd45879 100644
+> ---
+> a/build/tmp-igep0020/work/armv7a-angstrom-linux-gnueabi/mtd-utils-1.3.1-r=
+0/git/nandwrite.c
+> +++
+> b/build/tmp-igep0020/work/armv7a-angstrom-linux-gnueabi/mtd-utils-1.3.1-r=
+0/git/nandwrite.c
+> @@ -294,6 +294,7 @@ int main(int argc, char * const argv[])
+>      if (!(meminfo.oobsize =3D=3D 16 && meminfo.writesize =3D=3D 512) &&
+>              !(meminfo.oobsize =3D=3D 8 && meminfo.writesize =3D=3D 256) =
+&&
+>              !(meminfo.oobsize =3D=3D 64 && meminfo.writesize =3D=3D 2048=
+) &&
+> +            !(meminfo.oobsize =3D=3D 64 && meminfo.writesize =3D=3D 4096=
+) &&
+>              !(meminfo.oobsize =3D=3D 128 && meminfo.writesize =3D=3D 409=
+6)) {
+>          fprintf(stderr, "Unknown flash (not normal NAND)\n");
+>          close(fd);
+> --
+> 1.6.3.3
+>
 
