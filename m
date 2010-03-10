@@ -1,44 +1,48 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-qy0-f178.google.com ([209.85.221.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NpRR1-0006dJ-El
+	(envelope-from <sakoman@gmail.com>) id 1NpSL6-00040p-13
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 20:19:12 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NpRO8-0004HS-HS from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 11:16:12 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 10 Mar 2010 11:16:11 -0800
-Received: from 172.30.33.172 ([172.30.33.172]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Wed, 10 Mar 2010 19:16:09 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	10 Mar 2010 12:16:06 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Wed, 10 Mar 2010 21:17:12 +0100
+Received: by qyk8 with SMTP id 8so6588314qyk.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 10 Mar 2010 12:14:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=1RrhiIoMNFsmeK1lgKdqWMn6zxyjraCk82NFfLWKBHU=;
+	b=U7KHkkSWSToMa4wg/jtvxlu0bPoVFQE3Lq7OUJK50hEjpYXT7GMqhmwtcbpTGYsm29
+	s+j+q7MSuySaK/sWLc4Atgiv58fkpbOzpx4j2nQL4wNYRqeOXhYchu9e+b/xlRcxkDSQ
+	GWowtTZ8c2dHsCeOSuy0Y0OS6IdDlMTSmoA38=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=WT4FwTIpKYCf/wfh0CBHARtvmJIIRZo57M2OcIjd11hfDedAWzCKYoTWuIc/jyUyiG
+	SJPcwFtBuFfvIgrw1mF9UM8vD2IYtqFclIE3uD+hONyO43yrkVTOQcBFpMbHA653ull4
+	u2fmIzvD9bV9z4Q4HGJjmGmeL/q5yIOxQFBjs=
+MIME-Version: 1.0
+Received: by 10.229.88.19 with SMTP id y19mr147162qcl.46.1268252049655; Wed, 
+	10 Mar 2010 12:14:09 -0800 (PST)
+In-Reply-To: <1268247148.14566.1079.camel@mill.internal.reciva.com>
+References: <E1NnJzb-0001K2-HM@melo.openembedded.org>
+	<141020e31003052236w4afdcc26x1008a539f0491c9a@mail.gmail.com>
+	<1267888617.11175.42.camel@rex> <20100309181656.GA19931@denix.org>
+	<1268159056.5437.2018.camel@lenovo.internal.reciva.com>
+	<5e088bd91003100922t9b6668fl577fdbafae53c82@mail.gmail.com>
+	<1268247148.14566.1079.camel@mill.internal.reciva.com>
+Date: Wed, 10 Mar 2010 12:14:09 -0800
+Message-ID: <5e088bd91003101214y53a1d0b2h3bd47f2865e66b74@mail.gmail.com>
+From: Steve Sakoman <sakoman@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1268246120.14566.1078.camel@mill.internal.reciva.com>
-References: <DB561678F08F554EB0D9F21B70E268A505AE79@exchange.intern.dresearch.de>
-	<4B97C28F.2020609@dresearch.de>
-	<d1ded4381003100919y125959b5m3198c8d848661187@mail.gmail.com>
-	<1268246120.14566.1078.camel@mill.internal.reciva.com>
-Organization: Mentor Graphics Corporation
-Date: Wed, 10 Mar 2010 12:16:05 -0700
-Message-ID: <1268248565.16526.231.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 10 Mar 2010 19:16:11.0931 (UTC)
-	FILETIME=[25699EB0:01CAC086]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.221.178
+X-SA-Exim-Mail-From: sakoman@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Where are my patches?
+Subject: Re: [oe-commits] Phil Blundell : gtk+: build gtk-demo and package it appropriately
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,30 +56,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2010 19:19:12 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 10 Mar 2010 20:17:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, 2010-03-10 at 18:35 +0000, Phil Blundell wrote:
-> On Wed, 2010-03-10 at 11:19 -0600, Adrian Alonso wrote:
-> > But still patch's don't reach oe-patchwork.
-> >=20
-> > Any advise?
->=20
-> If your patches are reaching the list then it is probably nothing within
-> your control.  I think some folks have had trouble with patchwork's spam
-> filtering in the past.
->=20
-> In any case, it isn't necessary for your patch to appear in patchwork in
-> order for it to be actioned, so there is no need to worry about it too
-> much.
+On Wed, Mar 10, 2010 at 10:52 AM, Phil Blundell <pb@reciva.com> wrote:
+> On Wed, 2010-03-10 at 09:22 -0800, Steve Sakoman wrote:
+>> So for me it seems to have triggered the problem it was trying to fix!
+>
+> Doh. =A0That's not so good.
+>
+> Please try the patch at http://pastebin.ca/1832243 and see if the
+> situation improves for you.
 
-There is for people without write access.  It'd be nice to grab one of
-these from patchwork (in the form that adds people's acks), git am and
-git push.  But I can't.
+Sorry, I get the same error:
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+| Making all in demos
+| make[2]: Entering directory
+`/home/sakoman/source/omap3-oe/tmp/work/armv7a-angstrom-linux-gnueabi/gtk+-=
+2.18.6-r8.3/gtk+-2.18.6/demos'
+| /home/sakoman/source/omap3-oe/tmp/staging/i686-linux/usr/bin/gdk-pixbuf-c=
+source
+--raw --build-list		\
+| 	        apple_red  ./apple-red.png	\
+|                 gnome_foot ./gnome-foot.png	\
+|         > test-inline-pixbufs.h				\
+| 	|| (rm -f test-inline-pixbufs.h && false)
+|
+| (process:22315): GdkPixbuf-WARNING **: Cannot open pixbuf loader
+module file '/home/sakoman/source/omap3-oe/tmp/staging/i686-linux/etc/gtk-2=
+.0/gdk-pixbuf.loaders':
+No such file or directory
+| failed to load "./apple-red.png": Couldn't recognize the image file
+format for file './apple-red.png'
+| make[2]: *** [test-inline-pixbufs.h] Error 1
+
+Steve
 
 
