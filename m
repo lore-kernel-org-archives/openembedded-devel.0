@@ -1,34 +1,33 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NpNO3-00010Y-0y for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 15:59:51 +0100
+	id 1NpNR6-0003lL-9e for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Mar 2010 16:03:00 +0100
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NpNLB-0008K1-QS for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 15:56:53 +0100
+	id 1NpNOF-0001cm-NO for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Mar 2010 16:00:03 +0100
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Mar 2010 15:56:53 +0100
+	Wed, 10 Mar 2010 16:00:03 +0100
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Mar 2010 15:56:53 +0100
+	Wed, 10 Mar 2010 16:00:03 +0100
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 10 Mar 2010 15:56:42 +0100
-Message-ID: <hn8bva$o8a$1@dough.gmane.org>
-References: <20100309075331.GL31945@jama>
-	<hn5k9o$3vc$2@dough.gmane.org>	<1268167320.5437.2037.camel@lenovo.internal.reciva.com>
-	<87tysozewc.fsf@SSpaeth.de>
+Date: Wed, 10 Mar 2010 15:59:06 +0100
+Message-ID: <hn8c3q$o8a$2@dough.gmane.org>
+References: <20100310135425.31263.61632.stgit@ES-J7S4D2J.amer.consind.ge.com>	<201003101508.35525.marcin@juszkiewicz.com.pl>	<4B97AE80.5090409@ge.com>
+	<201003101549.01069.marcin@juszkiewicz.com.pl>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
-In-Reply-To: <87tysozewc.fsf@SSpaeth.de>
+In-Reply-To: <201003101549.01069.marcin@juszkiewicz.com.pl>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -38,7 +37,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Make some big but only formal change before next stable - SRCPV
+Subject: Re: [PATCH] Add Freescale P2020DS Demo Board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,33 +51,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2010 14:59:51 -0000
+X-List-Received-Date: Wed, 10 Mar 2010 15:03:00 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 10-03-10 10:48, Sebastian Spaeth wrote:
-> On Tue, 09 Mar 2010 20:41:59 +0000, Phil Blundell <philb@gnu.org> wrote:
->> That does rather sound like a further argument for just not using the
->> local count variables at all and just figuring out a monotonic count
->> from the SCM (using git-rev-list or whatever) at packaging time.
+On 10-03-10 15:49, Marcin Juszkiewicz wrote:
+> Dnia środa, 10 marca 2010 o 15:36:48 Martyn Welch napisał(a):
+>> Marcin Juszkiewicz wrote:
 > 
-> That sounds rather nice, however I am not sure if git easily gives you
-> such a number. I know that mercurial does.
+>>> OE policy is to keep defconfig inside of OE tree. Please add
+>>> mpc85xx_defconfig as recipes/linux/linux-2.6.33/p2020ds/defconfig and
+>>> resubmit.
+>>
+>> Will do. 
+> 
+>> Out of interest, what's the rationale for this?
+> 
+> Maintainers of OE derived distributions can provide own configs for target 
+> devices.
 
-Both are local and don't handle rebasing well.
+Without going to patching hell I must add :) It allows people to cp
+.config foo/bar/defconfig instead of doing patches on top of patches.
 
 regards,
 
-koen
+Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFLl7MqMkyGM64RGpERAriNAJ9fixaWg0G7NHkEKv/UOuGXbJYwIQCeNmxU
-Oh51RpHDi6I3D4q+IzbPbYo=
-=lB78
+iD8DBQFLl7O6MkyGM64RGpERAvT/AJ0U0D7pk1jY1YYgdYKdIsuYG8nAsQCgtG0T
+Xj10isiDz61djIU6Db3qFnY=
+=lWvX
 -----END PGP SIGNATURE-----
 
 
