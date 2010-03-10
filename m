@@ -1,50 +1,30 @@
-Received: from qw-out-1920.google.com ([74.125.92.146])
+Received: from smtp-out11.han.skanova.net ([195.67.226.200])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sakoman@gmail.com>) id 1NpSed-0007Sf-SL
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1NpSrz-00022w-J6
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 21:37:22 +0100
-Received: by qw-out-1920.google.com with SMTP id 5so2314188qwc.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Mar 2010 12:34:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=biwT5piUi5QzSzp3eyxPbyuGB7WjUhRW2MBLGfJlCGk=;
-	b=Eaak1Ln9l27hesfEdBNbQktifXB7Rn0B3gKIPHiSKLgi/ZhUJxTF8/5eLZp7K+lJ6t
-	fUNrEmIFKcTafDdNIywLP1Acbi3JH9/62pzzq2P23bYwRbZ0NyhLYHDxmdikPxSk5hw4
-	bCCu3/GsnHhhLbsZapx1B3l81My/xhaAYjdhE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=RjR2Bij0gOcO9ftI6e7kJxSu3Q2W3SqSkxmKtoPe+fCalRyE75bkTd4MRkTbA9dIH4
-	JKElQvFxCvqRIMaYvCYLfGQpFJSverQlEgsKiUjpFTYo6dd2peUmjJ7zTyEqGaZdgH4L
-	jyITMFhY7qvwiF2XDnSTefykhl4UkBsy5JcJI=
+	Wed, 10 Mar 2010 21:51:12 +0100
+Received: from [127.0.0.1] (87.54.11.122) by smtp-out11.han.skanova.net
+	(8.5.114) (authenticated as u82406562)
+	id 4B911C5400220354 for openembedded-devel@lists.openembedded.org;
+	Wed, 10 Mar 2010 21:46:59 +0100
+Message-ID: <4B98053F.5040100@atmel.com>
+Date: Wed, 10 Mar 2010 21:46:55 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
 MIME-Version: 1.0
-Received: by 10.229.127.164 with SMTP id g36mr2022590qcs.99.1268253262868; 
-	Wed, 10 Mar 2010 12:34:22 -0800 (PST)
-In-Reply-To: <1268252731.5437.2042.camel@lenovo.internal.reciva.com>
-References: <E1NnJzb-0001K2-HM@melo.openembedded.org>
-	<141020e31003052236w4afdcc26x1008a539f0491c9a@mail.gmail.com>
-	<1267888617.11175.42.camel@rex> <20100309181656.GA19931@denix.org>
-	<1268159056.5437.2018.camel@lenovo.internal.reciva.com>
-	<5e088bd91003100922t9b6668fl577fdbafae53c82@mail.gmail.com>
-	<1268247148.14566.1079.camel@mill.internal.reciva.com>
-	<5e088bd91003101214y53a1d0b2h3bd47f2865e66b74@mail.gmail.com>
-	<1268252731.5437.2042.camel@lenovo.internal.reciva.com>
-Date: Wed, 10 Mar 2010 12:34:22 -0800
-Message-ID: <5e088bd91003101234h267a24bfr558d696fdf703685@mail.gmail.com>
-From: Steve Sakoman <sakoman@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.92.146
-X-SA-Exim-Mail-From: sakoman@gmail.com
+References: <20100204113145.GR3401@jama> <4B96CAD2.90901@atmel.com>
+	<201003101516.43175.marcin@juszkiewicz.com.pl>
+In-Reply-To: <201003101516.43175.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.67.226.200
+X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.4 required=5.0 tests=BAYES_00,RCVD_IN_SORBS_WEB,
+	SPF_SOFTFAIL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Phil Blundell : gtk+: build gtk-demo and package it appropriately
+Subject: Re: pointercal ignored?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,60 +38,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2010 20:37:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 10 Mar 2010 20:51:12 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: Quoted-Printable
 
-On Wed, Mar 10, 2010 at 12:25 PM, Phil Blundell <pb@reciva.com> wrote:
+Marcin Juszkiewicz skrev:
+> Dnia wtorek, 9 marca 2010 o 23:25:22 Ulf Samuelsson napisa=C5=82(a):
+>> I have built a custom variant of x11-gpe-image for the SAM9M10.
+>=20
+> Which machine in OE covers that board? I have to admit that I did not t=
+ried to=20
+> hack mine.
 
-> Did you clean and rebuild gtk+-native? =A0I forgot to mention that this i=
-s
-> necessary.
+I am building the SAM9G45EK, but I am using a 2.6.30 kernel
+patched with maxim.org.za + www.linux4sam.org .exp3 patches
+instead of the 2.6.32 currently in openembedded.
 
-Yes, I did:
+Also updated bootstrap and u-boot, but that won't affect this.
 
-bitbake -c clean gtk+ gtk+-native gdk-pixbuf-csource-native
-bitbake gtk+
+> =20
+>> When gpe is started, the Y direction seems to be compressed.
+>> When I start the calculator and press at the top of the screen,
+>> the calculator buttons 5 mm below gets pressed.
+>> When I press at the bottom of the screen, the buttons 5 mm above
+>> gets pressed.
+>>
+>> Changing /etc/pointercal manually seems to have no effect
+>>
+>> It's like pointercal gets ignored.
+>>
+>> When others run the same kernel with minor config changes
+>> using the stable branch ans xserver-kdrive, this phenomena
+>> does not happen.
+>=20
+> Check do you have kdrive or xorg with evdev or tslib driver.
+>=20
 
-My repo is at current top of tree with your gtk+.inc patch and
-gtk+_2.18.6.bb unchanged:
+I will check, when I am back home.
+Will also send the patches I added.
 
-$ git diff recipes/gtk+/gtk+.inc
-diff --git a/recipes/gtk+/gtk+.inc b/recipes/gtk+/gtk+.inc
-index 268657b..5431c76 100644
---- a/recipes/gtk+/gtk+.inc
-+++ b/recipes/gtk+/gtk+.inc
-@@ -66,6 +66,23 @@ do_install_append () {
-        rm -f ${D}${libdir}/gtk-2.0/*/*.la ${D}${libdir}/gtk-2.0/${LIBV}/*/=
-*.la
- }
+> Regards,=20
+BR
+/Ulf
 
-+do_install_virtclass-native () {
-+        autotools_do_install
-+
-+       mkdir -p ${D}${libdir}/gtk-2.0/include
-+       install -m 0644 gdk/gdkconfig.h ${D}${libdir}/gtk-2.0/include/gdkco=
-nfig.
-+       # Copy over all headers, since the maemo stuff needs access to the =
-priva
-+       cp gtk/*.h ${D}${includedir}/gtk-2.0/gtk/
-+
-+       install -m 0644 m4macros/gtk-2.0.m4 ${STAGING_DATADIR}/aclocal/
-+
-+       install -d ${D}${sysconfdir}/gtk-2.0
-+       rm -f ${D}${libdir}/gtk-2.0/*/*.la ${D}${libdir}/gtk-2.0/${LIBV}/*/=
-*.la
-+
-+        mkdir -p "${D}${sysconfdir}/gtk-2.0"
-+        ${B}/gdk-pixbuf/gdk-pixbuf-query-loaders > "${D}${sysconfdir}/gtk-=
-2.0/g
-+}
-+
- postinst_prologue() {
- if [ "x$D" !=3D "x" ]; then
-   exit 1
 
-$ git diff recipes/gtk+/gtk+_2.18.6.bb
-$
 
 
