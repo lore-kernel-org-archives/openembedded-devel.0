@@ -1,51 +1,45 @@
-Received: from mail-qy0-f178.google.com ([209.85.221.178])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sakoman@gmail.com>) id 1NpTTi-00053l-TV
+	(envelope-from <nazgee@gmail.com>) id 1NpTWo-0001Vy-MK
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 22:30:07 +0100
-Received: by qyk8 with SMTP id 8so6658767qyk.4
+	Wed, 10 Mar 2010 22:33:19 +0100
+Received: by wyb28 with SMTP id 28so780810wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Mar 2010 13:27:08 -0800 (PST)
+	Wed, 10 Mar 2010 13:30:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=fGNEnQU1nKSMQ2VlVYWblIGMV6SF8B5sog7PbudJ/zE=;
-	b=XggYbppZhvi5q6hzlnmDcvNbXPOuhUXrAvIkIY/wckM1aH7ranyZUI/PlzahYX+tTY
-	wpLN+O60mQQ94AsiAhQdbfJXSNtRS4k1l4y3bTZaXWbG+bXD7ZLAkvDhf/LqY5NofNo/
-	LDPMtWD8vBiHH0aVzsAB7CH95ElyG7PJWEpd4=
+	:date:message-id:subject:from:to:content-type;
+	bh=4mze92h9S8vCrjCfzQgIrBv9hc3qwiGxivzSXSnUfwY=;
+	b=QwnIDJv5dtKHbaJa3duqW8p8+yXBTlEHAcxyWiZCPyZ/e+Q3aOHj87KB8yCCPfOfiG
+	igh7qrqjptOvaeckaYu/RN4FNxp0qmsaDfS2KKmAaqcRpF1jpD2L3Z4ed/qxVYiAJt4g
+	qTB455RAHBEeyoOixlbeyw/oMgoNPFIT4plIU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Hvfa3I8/fwn0x2LBWo3shJC4W+KYDLALA8dVP2qpPiCyW7sNSn5IJQnf5zgMg0bHmx
-	l297ctRDEZhau4m3lipNN+Mhw+m8nHRfgOSYdQxhxV17i7dsgMKc2TqzXFFhKUaGrt13
-	H4lJdHCG4rNerLznubVPBar00kmBm958f1Tv8=
+	:content-type;
+	b=vWBb6LrY6mkrAMYzqsAMhUU/FJoknISR4DMVMb6R+8PdJXTawnf0Oj4x92jtx5/zX/
+	3c2xIk+EE2BhnArQ6mEIZ69zrDWErWGSJZEX6WcC2w1zAE1yhCYLiB3PprTZTnfRpV46
+	wM/UxXnVqNx5pvYT5QOeF1sHi4vRX0sXtSjAk=
 MIME-Version: 1.0
-Received: by 10.229.212.213 with SMTP id gt21mr563296qcb.2.1268256428233; Wed, 
-	10 Mar 2010 13:27:08 -0800 (PST)
-In-Reply-To: <1268254780.5437.2044.camel@lenovo.internal.reciva.com>
-References: <E1NnJzb-0001K2-HM@melo.openembedded.org>
-	<1267888617.11175.42.camel@rex> <20100309181656.GA19931@denix.org>
-	<1268159056.5437.2018.camel@lenovo.internal.reciva.com>
-	<5e088bd91003100922t9b6668fl577fdbafae53c82@mail.gmail.com>
-	<1268247148.14566.1079.camel@mill.internal.reciva.com>
-	<5e088bd91003101214y53a1d0b2h3bd47f2865e66b74@mail.gmail.com>
-	<1268252731.5437.2042.camel@lenovo.internal.reciva.com>
-	<5e088bd91003101234h267a24bfr558d696fdf703685@mail.gmail.com>
-	<1268254780.5437.2044.camel@lenovo.internal.reciva.com>
-Date: Wed, 10 Mar 2010 13:27:08 -0800
-Message-ID: <5e088bd91003101327t16d245c8ldba85d3d32085ad3@mail.gmail.com>
-From: Steve Sakoman <sakoman@gmail.com>
+Received: by 10.216.89.200 with SMTP id c50mr1357994wef.164.1268256621013; 
+	Wed, 10 Mar 2010 13:30:21 -0800 (PST)
+In-Reply-To: <1268212334.3843.28.camel@mattotaupa>
+References: <13c1beb11002250321g6099bc44oebd182fa8c4f8d1c@mail.gmail.com>
+	<13c1beb11003100010l6d97c26bs51faaa0dfa74d118@mail.gmail.com>
+	<1268212334.3843.28.camel@mattotaupa>
+Date: Wed, 10 Mar 2010 22:30:20 +0100
+Message-ID: <13c1beb11003101330n75cc6edbna2d8888be98427b5@mail.gmail.com>
+From: Michal Stawinski <nazgee@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.221.178
-X-SA-Exim-Mail-From: sakoman@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: nazgee@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Phil Blundell : gtk+: build gtk-demo and package it appropriately
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH][mtd-utils][how to] Numonyx chip support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,70 +53,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2010 21:30:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 10 Mar 2010 21:33:19 -0000
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 10, 2010 at 12:59 PM, Phil Blundell <philb@gnu.org> wrote:
+2010/3/10 Paul Menzel <paulepanter@users.sourceforge.net>
 
-> Ah, I remember now, you need a patch to base.bbclass as well to make it
-> stage the files from etc/. =A0Try this:
+> Dear Michal,
+> please do not top post.
+>
 
-I must be cursed :-(
+It will never happen again
 
-Still no luck.  gtk+-native builds, but gtk+ still fails with the
-apple_red issue.
+>
+> [...]
+> So I suggest
+>
+1. you to create the patch for mtd-utils in its source directory (get
+> the source, for example [5] in a seperate directory outside the OE tree,
+> adapt it and create a patch).
+> 2. Copy the patch to `recipes/mtd/mtd-utils/`.
+> 3. Add a file line to SRC_URI.
+> 4. If this works, add the patch to the OE Git tree (`git add =85`) and
+> proceed as you did before.
+> [=85]
 
-Here is my diff from top of tree:
 
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index bbc1cc7..a94fa27 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -1100,6 +1100,7 @@ sysroot_stage_dirs() {
- 		sysroot_stage_libdir $from${base_libdir} $to${STAGING_DIR_HOST}${base_li=
-bdir}
- 	fi
- 	sysroot_stage_dir $from${datadir} $to${STAGING_DATADIR}
-+	sysroot_stage_dir $from${sysconfdir} $to${sysconfdir}
- }
+Thank you for your comprehensive explanation. I thinked Ive grasped it all.
 
- sysroot_stage_all() {
-diff --git a/recipes/gtk+/gtk+.inc b/recipes/gtk+/gtk+.inc
-index 268657b..5431c76 100644
---- a/recipes/gtk+/gtk+.inc
-+++ b/recipes/gtk+/gtk+.inc
-@@ -66,6 +66,23 @@ do_install_append () {
- 	rm -f ${D}${libdir}/gtk-2.0/*/*.la ${D}${libdir}/gtk-2.0/${LIBV}/*/*.la
- }
-
-+do_install_virtclass-native () {
-+        autotools_do_install
-+
-+       mkdir -p ${D}${libdir}/gtk-2.0/include
-+       install -m 0644 gdk/gdkconfig.h
-${D}${libdir}/gtk-2.0/include/gdkconfig.h
-+       # Copy over all headers, since the maemo stuff needs access to
-the private api. *sigh*
-+       cp gtk/*.h ${D}${includedir}/gtk-2.0/gtk/
-+
-+       install -m 0644 m4macros/gtk-2.0.m4 ${STAGING_DATADIR}/aclocal/
-+
-+       install -d ${D}${sysconfdir}/gtk-2.0
-+       rm -f ${D}${libdir}/gtk-2.0/*/*.la ${D}${libdir}/gtk-2.0/${LIBV}/*/=
-*.la
-+
-+        mkdir -p "${D}${sysconfdir}/gtk-2.0"
-+        ${B}/gdk-pixbuf/gdk-pixbuf-query-loaders >
-"${D}${sysconfdir}/gtk-2.0/gdk-pixbuf.loaders"
-+}
-+
- postinst_prologue() {
- if [ "x$D" !=3D "x" ]; then
-   exit 1
-
-Thanks for helping!
-
-Steve
-
+BR, Michal
 
