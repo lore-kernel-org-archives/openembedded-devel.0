@@ -1,25 +1,35 @@
-Received: from edna-edison.lart.info
-	([217.11.60.132] helo=mx1.pimp.lart.info ident=qmailr)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <bwachter@mx1.pimp.lart.info>) id 1NpUrK-0004Sf-C4
+Received: from web88207.mail.re2.yahoo.com ([206.190.37.222])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <jkortje750@rogers.com>) id 1NpVll-0000lq-0v
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 23:58:41 +0100
-Received: (qmail 19982 invoked by uid 1000); 10 Mar 2010 22:54:20 -0000
-Message-ID: <20100310225420.19981.qmail@mx1.pimp.lart.info>
-MBOX-Line: From c66f7d3e579a46021e144c5a51fc1ccccbcf1517 Mon Sep 17 00:00:00
-	2001
-From: Bernd Wachter <bwachter-oe@lart.info>
-Date: Sun, 7 Mar 2010 19:06:33 +0100
+	Thu, 11 Mar 2010 00:56:54 +0100
+Received: (qmail 90432 invoked by uid 60001); 10 Mar 2010 23:53:54 -0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rogers.com; s=s1024;
+	t=1268265234; bh=oJmFEP+ARtCQZYm5YB8t5uwHNvtADM1df54s0OKfQQM=;
+	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type;
+	b=tY5gNO8mH2kH5dQ1TvvEz+S5w7Crtt94njRYX5Ri/VHyanWGAE3B+Iz7AsREHbn6GundCeQJGlIcVoIsw6fHO3rD2/YdAzKqHjEPT3Fgm8wPAep5CVTcCYvL6v0umjUg+QRQmaQrAAeVEh7xBY6eskg3bnxClcv2zDm5tmkxhxo=
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=rogers.com;
+	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type;
+	b=baT5JlzsQHK4Uh/v/WMK1Ny13RPWzSsyd9/jmVuwB1wj94RCT10UaKGKVSkI59NpN6TYZXgeKeCEFwhNrEPCqXYBktmsHJuU9UQC543LzTZLQPKeoIypc7cnnvYkIHxJupGdOB6dlNAVtZOkyiGGnFPp5lnb/DELCZOVS81T490=;
+Message-ID: <738913.90211.qm@web88207.mail.re2.yahoo.com>
+X-YMail-OSG: jscrziMVM1nBZ_WYStlo.Ryui.bhB5hS5CyZbt1u3LHrR_o6ZyzGaDksfbu3yEOL3mhVvYPys.Od9X4wmt3.3Gz2xRNSR8oNxQDzMQJB_mAhncqNFpg0GlubflMaO47b3LtlcTDsRmxlhGq.ILxYiPOo00KrW32ZJbm4FAgyvoiUEJExJp91MMFgzrH.iQqBYsabllhf51cGhyU_Ja3B2RDLTbg36mhmP_IR8qE5hqxNbwPMywIoDGAAbnYVzsvPbOXZxboTvKR9r4mZgcHcTiGlKbkx723laapzndUy6ZMKce9pLrYjqhlb1ZX5PC7s7z8qoEuTR17v25oBYa90Ng--
+Received: from [99.237.255.32] by web88207.mail.re2.yahoo.com via HTTP;
+	Wed, 10 Mar 2010 15:53:54 PST
+X-Mailer: YahooMailRC/300.3 YahooMailWebService/0.8.100.260964
+Date: Wed, 10 Mar 2010 15:53:54 -0800 (PST)
+From: JOSEPH KORTJE <jkortje750@rogers.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 217.11.60.132
-X-SA-Exim-Mail-From: bwachter@mx1.pimp.lart.info
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 206.190.37.222
+X-SA-Exim-Mail-From: jkortje750@rogers.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] putty: Update ancient recipe to use recent gtk2-based svn
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [oe-commits] Phil Blundell : gtk+: build gtk-demo and package it appropriately
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,199 +43,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2010 22:58:41 -0000
+X-List-Received-Date: Wed, 10 Mar 2010 23:56:54 -0000
+Content-Type: text/plain; charset=us-ascii
 
----
- recipes/putty/putty/configure.patch |   11 ++++++++
- recipes/putty/putty/lib.pro         |   43 ---------------------------------
- recipes/putty/putty/plink.pro       |   10 -------
- recipes/putty/putty/pscp.pro        |   10 -------
- recipes/putty/putty/psftp.pro       |   10 -------
- recipes/putty/putty_svn.bb          |   45 +++++++++-------------------------
- 6 files changed, 23 insertions(+), 106 deletions(-)
- create mode 100644 recipes/putty/putty/configure.patch
- delete mode 100644 recipes/putty/putty/lib.pro
- delete mode 100644 recipes/putty/putty/plink.pro
- delete mode 100644 recipes/putty/putty/pscp.pro
- delete mode 100644 recipes/putty/putty/psftp.pro
+Hi Phil and Steve:
 
-diff --git a/recipes/putty/putty/configure.patch b/recipes/putty/putty/configure.patch
-new file mode 100644
-index 0000000..cf4c21a
---- /dev/null
-+++ b/recipes/putty/putty/configure.patch
-@@ -0,0 +1,11 @@
-+--- putty.a/unix/configure.ac	2010-03-01 18:12:20.000000000 +0100
-++++ putty.b/unix/configure.ac	2010-03-01 18:12:48.000000000 +0100
-+@@ -27,8 +27,6 @@
-+   AC_CHECK_HEADERS([gssapi/gssapi.h])
-+ fi
-+ 
-+-# Look for both GTK 1 and GTK 2.
-+-AM_PATH_GTK([1.2.0], [gtk=1], [gtk=none])
-+ AM_PATH_GTK_2_0([2.0.0], [gtk=2], [])
-+ if test "$gtk" = "none"; then
-+   all_targets="all-cli"
-diff --git a/recipes/putty/putty/lib.pro b/recipes/putty/putty/lib.pro
-deleted file mode 100644
-index 7006228..0000000
---- a/recipes/putty/putty/lib.pro
-+++ /dev/null
-@@ -1,43 +0,0 @@
--######################################################################
--# Automatically generated by qmake (1.06c) Wed Jun 16 23:28:56 2004
--######################################################################
--
--TEMPLATE = lib
--CONFIG = warn_on release console
--TARGET = putty
--INCLUDEPATH += . unix charset
--
--SOURCES += 	cmdline.c int64.c ldisc.c logging.c misc.c portfwd.c proxy.c raw.c \
--           	rlogin.c settings.c ssh.c sshaes.c sshblowf.c \
--                sshbn.c sshcrc.c sshcrcda.c sshdes.c sshdh.c sshdss.c \
--                sshmd5.c sshpubk.c sshrand.c sshrsa.c sshsh512.c sshsha.c \
--                sshzlib.c telnet.c tree234.c version.c wildcard.c x11fwd.c
--
--#Charset
--SOURCES += \
--	   charset/localenc.c \
--           charset/mimeenc.c \
--           charset/sbcsdat.c \
--           charset/toucs.c \
--           charset/xenc.c \
--           charset/fromucs.c \
--           charset/macenc.c \
--           charset/sbcs.c \
--           charset/slookup.c \
--           charset/utf8.c
--
--# Unix
--HEADERS += unix/unix.h
--SOURCES += unix/signal.c \
--           unix/uxagentc.c \
--           unix/uxcons.c \
--           unix/uxmisc.c \
--           unix/uxnet.c \
--           unix/uxnoise.c \
--           unix/uxproxy.c \
--           unix/uxplink.c \
--           unix/uxsel.c \
--           unix/uxstore.c \
--           unix/uxucs.c \
--           unix/ux_x11.c \
--           unix/xkeysym.c
-diff --git a/recipes/putty/putty/plink.pro b/recipes/putty/putty/plink.pro
-deleted file mode 100644
-index 3cbf15a..0000000
---- a/recipes/putty/putty/plink.pro
-+++ /dev/null
-@@ -1,10 +0,0 @@
--TEMPLATE = app
--TARGET = plink
--CONFIG = warn_on release console
--DEPENDPATH += unix charset
--INCLUDEPATH += . unix charset
--
--SOURCES += be_all.c uxplink.c
--
--LIBS += -L. -lputty
--
-diff --git a/recipes/putty/putty/pscp.pro b/recipes/putty/putty/pscp.pro
-deleted file mode 100644
-index 6e30d3e..0000000
---- a/recipes/putty/putty/pscp.pro
-+++ /dev/null
-@@ -1,10 +0,0 @@
--TEMPLATE = app
--TARGET = pscp
--CONFIG = warn_on release console
--DEPENDPATH += unix charset
--INCLUDEPATH += . unix charset
--
--SOURCES += be_none.c scp.c sftp.c unix/uxsftp.c
--
--LIBS += -L. -lputty
--
-diff --git a/recipes/putty/putty/psftp.pro b/recipes/putty/putty/psftp.pro
-deleted file mode 100644
-index 4c491ba..0000000
---- a/recipes/putty/putty/psftp.pro
-+++ /dev/null
-@@ -1,10 +0,0 @@
--TEMPLATE = app
--TARGET = psftp
--CONFIG = warn_on release console
--DEPENDPATH += unix charset
--INCLUDEPATH += . unix charset
--
--SOURCES += be_none.c psftp.c sftp.o unix/uxsftp.c
--
--LIBS += -L. -lputty
--
-diff --git a/recipes/putty/putty_svn.bb b/recipes/putty/putty_svn.bb
-index c96ffbb..95208e9 100644
---- a/recipes/putty/putty_svn.bb
-+++ b/recipes/putty/putty_svn.bb
-@@ -1,44 +1,23 @@
-+# requires halibut to be installed on the host system
- DESCRIPTION = "PuTTY is a free implementation of Telnet and SSH for Win32 and Unix platforms"
- SECTION = "console/network"
- LICENSE = "MIT"
--#Remove the dash below when 0.58 changes in PV
--PV = "0.58+cvs-${SRCDATE}"
- 
--SRC_URI = "svn://ixion.tartarus.org/main;module=putty \
--	   file://lib.pro \
--	   file://plink.pro \
--	   file://pscp.pro \
--	   file://psftp.pro"
-+SRCREV = "8878"
-+PV = "0.60+svnr${SRCPV}"
- 
--TARGETS = "lib plink pscp psftp"
-+SRC_URI = "svn://svn.tartarus.org/sgt;module=putty \
-+		file://configure.patch;patch=1;pnum=2"
- 
--S = "${WORKDIR}/putty"
-+S = "${WORKDIR}/putty/unix"
- 
--inherit qmake_base
-+inherit autotools pkgconfig
- 
--do_configure() {
--	for t in ${TARGETS}
--	do
--		install -m 0644 ${WORKDIR}/$t.pro .
--	done
--	cd charset && perl sbcsgen.pl
-+do_configure_prepend() {
-+	../mkfiles.pl
-+	../mkauto.sh
- }
- 
--do_compile() {
--	for t in ${TARGETS}
--	do
--		rm -f Makefile
--		qmake -makefile -o Makefile -spec ${QMAKESPEC} $t.pro
--		oe_runmake
--	done
-+do_install_prepend() {
-+	make -C ../doc man
- }
--
--do_install() {
--	install -d ${D}${libdir}
--	oe_libinstall -so libputty ${D}${libdir}
--	install -d ${D}${bindir}/
--	install -m 0755 plink ${D}${bindir}/ssh
--	install -m 0755 pscp ${D}${bindir}/scp
--	install -m 0755 psftp ${D}${bindir}/sftp
--}
--
--- 
-1.5.6.5
+If we *either* install 
+
+sudo apt-get install libgtk2.0-dev
+
+or if we do
+
+bitbake gdk-pixbuf-csource-native
+
+FIRST 
+
+
+Then the
+
+    bitbake gtk+
+
+succeeds.
+
+Otherwise, with the same tree used by Steve, same results as Steve mentions.
+
+Any ideas why?
+From douglas.royds@tait.co.nz Thu Mar 11 04:05:36 2010
+Received: from gatekeeper.tait.co.nz ([202.37.96.11])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <douglas.royds@tait.co.nz>) id 1NpYiJ-0002EY-Gh
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Mar 2010 04:05:36 +0100
+Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
+	by localhost.tait.co.nz (Postfix) with ESMTP id 923C246753
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Mar 2010 15:34:09 +1300 (NZDT)
+Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])
+	by gatekeeper.tait.co.nz (Postfix) with ESMTP id 808BB46751
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Mar 2010 15:34:09 +1300 (NZDT)
+Received: from conversion-daemon.sunstrike.tait.co.nz by sunstrike.tait.co.nz
+	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
+	id <0KZ300B01FKSES00@sunstrike.tait.co.nz>
+	(original mail from douglas.royds@tait.co.nz)
+	for openembedded-devel@lists.openembedded.org; Thu,
+	11 Mar 2010 15:33:51 +1300 (NZDT)
+Received: from [172.25.116.17] by sunstrike.tait.co.nz
+	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
+	with ESMTP id <0KZ300BF0J4BRM10@sunstrike.tait.co.nz> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	11 Mar 2010 15:33:49 +1300 (NZDT)
+Date: Thu, 11 Mar 2010 15:33:47 +1300
+From: Douglas Royds <douglas.royds@tait.co.nz>
+In-reply-to: <BAY127-W3F00BA8EB939E019488D8D8330@phx.gbl>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <4B98568B.2030603@tait.co.nz>
+MIME-version: 1.0
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
+References: <BAY127-W3F00BA8EB939E019488D8D8330@phx.gbl>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+X-SA-Exim-Connect-IP: 202.37.96.11
+X-SA-Exim-Mail-From: douglas.royds@tait.co.nz
+X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
+X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
+X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+Subject: Re: [oe] Problem with  Boost library
+X-BeenThere: openembedded-devel@lists.openembedded.org
+X-Mailman-Version: 2.1.11
+Precedence: list
+Reply-To: openembedded-devel@lists.openembedded.org
+List-Id: Using the OpenEmbedded metadata to build Distributions
+	<openembedded-devel.lists.openembedded.org>
+List-Unsubscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/options/openembedded-devel>,
+	<mailto:openembedded-devel-request@lists.openembedded.org?subject=unsubscribe>
+List-Archive: <http://lists.linuxtogo.org/pipermail/openembedded-devel>
+List-Post: <mailto:openembedded-devel@lists.openembedded.org>
+List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
+List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
+	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
+X-List-Received-Date: Thu, 11 Mar 2010 03:05:36 -0000
+
+The recipe is broken.
+
+Edit recipes/boost/boost_1.34.1.bb, and replace the line ...
+
+    PR = "${INC_PR}.1"
+
+with
+
+    PR = "r4"
+
+The INC_PR convention is used for recipes that have include files. This 
+one doesn't.
+
+HTH,
+Douglas.
+
+
+saleh usman wrote:
+> [snip]
+> NOTE: Running task 1353 of 3317 (ID: 1614, /oe/openembedded/recipes/boost/boost_1.34.1.bb, do_setscene)
+> ERROR: function staging_helper failed
+> ERROR: log data follows (/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/boost-1.34.1-${INC_PR}.1/temp/log.staging_helper.21242)
+> | sh: /oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/boost-1.34.1-.1/temp/run.staging_helper.21242: No such file or directory
+> NOTE: Task failed: /oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/boost-1.34.1-${INC_PR}.1/temp/log.staging_helper.21242
+>   
+
+
+
+=======================================================================
+This email, including any attachments, is only for the intended
+addressee.  It is subject to copyright, is confidential and may be
+the subject of legal or other privilege, none of which is waived or
+lost by reason of this transmission.
+If the receiver is not the intended addressee, please accept our
+apologies, notify us by return, delete all copies and perform no
+other act on the email.
+Unfortunately, we cannot warrant that the email has not been
+ altered or corrupted during transmission.
+=======================================================================
 
 
 
