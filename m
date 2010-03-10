@@ -1,38 +1,40 @@
 Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NpQnZ-0000Li-Dj
+	(envelope-from <pb@reciva.com>) id 1NpR45-0003xt-UH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 19:38:27 +0100
+	Wed, 10 Mar 2010 19:55:33 +0100
 Received: from castle.reciva.com ([82.71.203.193]
 	helo=lurch.internal.reciva.com)
 	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NpQkh-0005Cc-6w
+	(Exim 4.63) (envelope-from <pb@reciva.com>) id 1NpR1E-0005PV-Pt
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 18:35:27 +0000
+	Wed, 10 Mar 2010 18:52:32 +0000
 Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
 	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1NpQkg-00060i-O0
+	(envelope-from <pb@reciva.com>) id 1NpR1E-00069F-D4
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 10 Mar 2010 18:35:26 +0000
-From: Phil Blundell <philb@gnu.org>
+	Wed, 10 Mar 2010 18:52:32 +0000
+From: Phil Blundell <pb@reciva.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <d1ded4381003100919y125959b5m3198c8d848661187@mail.gmail.com>
-References: <DB561678F08F554EB0D9F21B70E268A505AE79@exchange.intern.dresearch.de>
-	<4B97C28F.2020609@dresearch.de>
-	<d1ded4381003100919y125959b5m3198c8d848661187@mail.gmail.com>
-Date: Wed, 10 Mar 2010 18:35:20 +0000
-Message-ID: <1268246120.14566.1078.camel@mill.internal.reciva.com>
+In-Reply-To: <5e088bd91003100922t9b6668fl577fdbafae53c82@mail.gmail.com>
+References: <E1NnJzb-0001K2-HM@melo.openembedded.org>
+	<141020e31003052236w4afdcc26x1008a539f0491c9a@mail.gmail.com>
+	<1267888617.11175.42.camel@rex> <20100309181656.GA19931@denix.org>
+	<1268159056.5437.2018.camel@lenovo.internal.reciva.com>
+	<5e088bd91003100922t9b6668fl577fdbafae53c82@mail.gmail.com>
+Date: Wed, 10 Mar 2010 18:52:28 +0000
+Message-ID: <1268247148.14566.1079.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.2 
 X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+X-SA-Exim-Mail-From: pb@reciva.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Where are my patches?
+Subject: Re: [oe-commits] Phil Blundell : gtk+: build gtk-demo and package it appropriately
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,22 +48,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Mar 2010 18:38:27 -0000
+X-List-Received-Date: Wed, 10 Mar 2010 18:55:34 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2010-03-10 at 11:19 -0600, Adrian Alonso wrote:
-> But still patch's don't reach oe-patchwork.
-> 
-> Any advise?
+On Wed, 2010-03-10 at 09:22 -0800, Steve Sakoman wrote:
+> So for me it seems to have triggered the problem it was trying to fix!
 
-If your patches are reaching the list then it is probably nothing within
-your control.  I think some folks have had trouble with patchwork's spam
-filtering in the past.
+Doh.  That's not so good.
 
-In any case, it isn't necessary for your patch to appear in patchwork in
-order for it to be actioned, so there is no need to worry about it too
-much.
+Please try the patch at http://pastebin.ca/1832243 and see if the
+situation improves for you.
 
 p.
 
