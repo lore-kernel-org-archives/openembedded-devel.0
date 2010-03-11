@@ -1,45 +1,40 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from smtprelay-b11.telenor.se ([62.127.194.20])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Npooh-00064S-K1
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1NprB3-0007xW-F0
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Mar 2010 21:17:13 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1Npoln-0002wl-KX from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Mar 2010 12:14:11 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 11 Mar 2010 12:14:11 -0800
-Received: from 172.30.80.6 ([172.30.80.6]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Thu, 11 Mar 2010 20:13:17 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	11 Mar 2010 13:13:14 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Thu, 11 Mar 2010 23:48:30 +0100
+Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
+	by smtprelay-b11.telenor.se (Postfix) with ESMTP id C4640154D6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Mar 2010 23:18:09 +0100 (CET)
+X-SMTPAUTH-B2: 
+X-SENDER-IP: 83.227.59.242
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AugSAKv6mEtT4zvyPGdsb2JhbAAHgwWXYgEBAQE3rFqQR4Eygl9qBIYW
+X-IronPort-AV: E=Sophos;i="4.49,622,1262559600"; d="scan'208";a="49193399"
+Received: from c-f23be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.224]) ([83.227.59.242])
+	by ipb1.telenor.se with ESMTP; 11 Mar 2010 23:18:09 +0100
+Message-ID: <4B996C1F.2070707@atmel.com>
+Date: Thu, 11 Mar 2010 23:18:07 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <6ec4247d1003101406u2cb3a3b2wce02a7645dc26fe4@mail.gmail.com>
-References: <ac9c93b11002281201j44a861e1saa803be9f338ee10@mail.gmail.com>
-	<20100228221056.GG30145@xora-desktop.xora.org.uk>
-	<ac9c93b11002282328l61356cc1y188b47d0f974369e@mail.gmail.com>
-	<ac9c93b11003100744g5eee3250me7f0b668e8727060@mail.gmail.com>
-	<6ec4247d1003101406u2cb3a3b2wce02a7645dc26fe4@mail.gmail.com>
-Organization: Mentor Graphics Corporation
-Date: Thu, 11 Mar 2010 13:13:14 -0700
-Message-ID: <1268338394.16526.295.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 11 Mar 2010 20:14:11.0428 (UTC)
-	FILETIME=[69C47A40:01CAC157]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+References: <20100204113145.GR3401@jama>
+	<4B96CAD2.90901@atmel.com>	<201003101516.43175.marcin@juszkiewicz.com.pl>
+	<4B98053F.5040100@atmel.com>
+In-Reply-To: <4B98053F.5040100@atmel.com>
+X-SA-Exim-Connect-IP: 62.127.194.20
+X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.7 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] duplicate recipes
+Subject: Re: pointercal ignored?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,28 +48,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Mar 2010 20:17:13 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 11 Mar 2010 22:48:30 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2010-03-11 at 08:36 +1030, Graham Gower wrote:
-> On 11 March 2010 02:14, Frans Meulenbroeks <fransmeulenbroeks@gmail.com> =
-wrote:
-> > I've ocunted graeme as neutral and graham as no opinion given.
-> >
-> > If you feel I misrepresented your position or if I missed your
-> > position, feel free to follow up.
+Ulf Samuelsson skrev:
+> Marcin Juszkiewicz skrev:
+>> Dnia wtorek, 9 marca 2010 o 23:25:22 Ulf Samuelsson napisa=C5=82(a):
+>>> I have built a custom variant of x11-gpe-image for the SAM9M10.
+>>
+>> Which machine in OE covers that board? I have to admit that I did not
+>> tried to hack mine.
 >=20
-> I didn't give an opinion because I'm not a committer and it probably
-> doesn't count. But... I'm in favour of never seeing old recipes again
-> unless there is a good reason (e.g. specific versions needed for
-> specific boards).
+> I am building the SAM9G45EK, but I am using a 2.6.30 kernel
+> patched with maxim.org.za + www.linux4sam.org .exp3 patches
+> instead of the 2.6.32 currently in openembedded.
+>=20
+> Also updated bootstrap and u-boot, but that won't affect this.
+>=20
+>> =20
+>>> When gpe is started, the Y direction seems to be compressed.
+>>> When I start the calculator and press at the top of the screen,
+>>> the calculator buttons 5 mm below gets pressed.
+>>> When I press at the bottom of the screen, the buttons 5 mm above
+>>> gets pressed.
+>>>
+>>> Changing /etc/pointercal manually seems to have no effect
+>>>
+>>> It's like pointercal gets ignored.
+>>>
+>>> When others run the same kernel with minor config changes
+>>> using the stable branch ans xserver-kdrive, this phenomena
+>>> does not happen.
+>>
+>> Check do you have kdrive or xorg with evdev or tslib driver.
+>>
+>=20
+> I will check, when I am back home.
 
-Also, for specific compatibilities (ie using OE to make stuff that's
-compatible with _____ spec or external distribution).
+
+xserver-xorg-2_1.7.4-r0
+tslib-1.0-r23.3
+xtscal-0.6.3-r7
+xf86-input-evdev-1_2.3.2-r10
+calibrateproto-2_0.0+r0+gitr1da6fd1e2c7a49648245c98481fabea8b9690a8c-r0
+libxcalibrate-2_0.0+r0+gitr209d83af61ed38a002c8096377deac292b3e396c-r0
+
+There is no PREFERRED_PROVIDER_xserver defined.
+
+
+> Will also send the patches I added.
+>=20
+>> Regards,=20
+> BR
+> /Ulf
+>=20
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 --=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+Best Regards
+Ulf Samuelsson
+
 
 
