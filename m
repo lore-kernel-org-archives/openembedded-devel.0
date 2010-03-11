@@ -1,42 +1,44 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-qy0-f196.google.com ([209.85.221.196])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NplWw-0005zL-J4 for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Mar 2010 17:46:39 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NplU3-0002D5-SZ for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Mar 2010 17:43:39 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Mar 2010 17:43:39 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <sakoman@gmail.com>) id 1Nply7-0005Yf-4V
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Mar 2010 18:14:47 +0100
+Received: by qyk34 with SMTP id 34so256294qyk.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Mar 2010 17:43:39 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 11 Mar 2010 09:11:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=+3qVDRczpnj5/6e3cuUVjKoRUvID2CFar3e429RYiQo=;
+	b=kzrodtL7ZlVy/0xlEsfESbb04SlPzXon5YwZAraoye9JFH31Om0p7MR0+Ohpxxl5e8
+	WjULq2vnidu2w/aSMCjDAZPkoRcxbnzZ7s1lGFQ8zfFbWoSY8DynAbgQyN+wQgHLRzsz
+	iBImRI0oZtNm75tEOhbnGXdUK8tpf9FNScprk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=ugBqJjuLFvtiwJjL59OhyP/v1z/Aoc45YqqTYPU4WN2IvTb4I/Jagr35aSWzc1xrZw
+	6HPni7wuNFdKVySwQ4cf3T1DdNrXnTvnMFvLZByadwihftesz3ox0wu15AYv8VFWkb36
+	S8m3pzo1esSmLgGNZ2YiyUx8oCXvmRWh21fhU=
+MIME-Version: 1.0
+Received: by 10.229.226.1 with SMTP id iu1mr717200qcb.19.1268327503578; Thu, 
+	11 Mar 2010 09:11:43 -0800 (PST)
+In-Reply-To: <1268310656.14566.1084.camel@mill.internal.reciva.com>
+References: <738913.90211.qm@web88207.mail.re2.yahoo.com>
+	<1268310656.14566.1084.camel@mill.internal.reciva.com>
+Date: Thu, 11 Mar 2010 09:11:43 -0800
+Message-ID: <5e088bd91003110911y28d4c2femcfb89d9ec5e08714@mail.gmail.com>
+From: Steve Sakoman <sakoman@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 11 Mar 2010 17:43:28 +0100
-Message-ID: <hnb6jg$a6e$1@dough.gmane.org>
-References: <hnb4m7$236$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
-In-Reply-To: <hnb4m7$236$1@dough.gmane.org>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.221.196
+X-SA-Exim-Mail-From: sakoman@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Machine specific packages lacking shlibs
+Subject: Re: [oe-commits] Phil Blundell : gtk+: build gtk-demo and package it appropriately
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,40 +52,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Mar 2010 16:46:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 11 Mar 2010 17:14:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thu, Mar 11, 2010 at 4:30 AM, Phil Blundell <philb@gnu.org> wrote:
+> I've managed to reproduce this problem now, and I have checked in an
+> extra patch (as well as the previous ones) which fixes it for me. =A0Does
+> that work for you?
 
-On 11-03-10 17:10, Koen Kooi wrote:
-> Hi,
-> 
-> I'm building various packages that statically link to libraries that
-> have too much knowledge about the kernel, so I have to make them machine
-> specific. But after doing so all the shared libs have disappeared from
-> the Depends: field!
-> 
-> Does anyone have some hints where this should get fixed?
+Once I worked past some scsi header issues that crept in from this
+morning's pull I could successfully build gtk+ again.  Thanks!
 
-OK, some digging into package.bbclass shows that SHLIBS dir is pointing
-to machinespecific staging. That's cause by the recipe changing
-BASEPKG_HOST_SYS to get it to stage its libs into machinespecific
-staging where they belong. So:
+Steve
 
-If you poke at PASEPKG_HOST_SYS, also poke at SHLIBSDIR.
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLmR2vMkyGM64RGpERAsK+AJ0fjdoDXpTCG3D08vUkUGmqJ101PACguCnY
-VKUMRg3+ebRFgdcx6vgJQP8=
-=lprG
------END PGP SIGNATURE-----
-
+> p.
+>
+> On Wed, 2010-03-10 at 15:53 -0800, JOSEPH KORTJE wrote:
+>> Hi Phil and Steve:
+>>
+>> If we *either* install
+>>
+>> sudo apt-get install libgtk2.0-dev
+>>
+>> or if we do
+>>
+>> bitbake gdk-pixbuf-csource-native
+>>
+>> FIRST
+>>
+>>
+>> Then the
+>>
+>> =A0 =A0 bitbake gtk+
+>>
+>> succeeds.
+>>
+>> Otherwise, with the same tree used by Steve, same results as Steve menti=
+ons.
+>>
+>> Any ideas why?
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
