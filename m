@@ -1,35 +1,29 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from smtp7.myhsphere.biz ([204.10.105.69] helo=mail9.myhsphere.biz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@DResearch.DE>) id 1NpdYt-0006Dd-4a
+	(envelope-from <balakrishnan@e-consystems.com>) id 1NpfXV-0005Js-Vi
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Mar 2010 09:16:07 +0100
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 45ECE491264
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Mar 2010 09:13:11 +0100 (CET)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.3959); Thu, 11 Mar 2010 09:13:27 +0100
-Message-ID: <4B98A61A.8010608@dresearch.de>
-Date: Thu, 11 Mar 2010 09:13:14 +0100
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
-MIME-Version: 1.0
+	Thu, 11 Mar 2010 11:22:51 +0100
+Received: (qmail 30096 invoked by uid 399); 11 Mar 2010 10:19:45 -0000
+Received: from abts-tn-dynamic-030.77.164.122.airtelbroadband.in (HELO
+	?192.168.1.2?) (balakrishnan@e-consystems.com@122.164.77.30)
+	by mail9.myhsphere.biz with ESMTPAM; 11 Mar 2010 10:19:45 -0000
+X-Originating-IP: 122.164.77.30
+X-Sender: balakrishnan@e-consystems.com
+From: balakrishnan <balakrishnan@e-consystems.com>
 To: openembedded-devel@lists.openembedded.org
-References: <DB561678F08F554EB0D9F21B70E268A505AE79@exchange.intern.dresearch.de>	<4B97C28F.2020609@dresearch.de>	<d1ded4381003100919y125959b5m3198c8d848661187@mail.gmail.com>	<1268246120.14566.1078.camel@mill.internal.reciva.com>	<1268248565.16526.231.camel@trini-m4400>
-	<4B9894F4.5@dresearch.de>
-	<ac9c93b11003102359n42d2e94yf56b05a39decb4fd@mail.gmail.com>
-In-Reply-To: <ac9c93b11003102359n42d2e94yf56b05a39decb4fd@mail.gmail.com>
-X-OriginalArrivalTime: 11 Mar 2010 08:13:27.0869 (UTC)
-	FILETIME=[BA9906D0:01CAC0F2]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@DResearch.DE
+Date: Thu, 11 Mar 2010 15:49:44 +0530
+Message-Id: <1268302784.3822.51.camel@balakrishnan-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-SA-Exim-Connect-IP: 204.10.105.69
+X-SA-Exim-Mail-From: balakrishnan@e-consystems.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Where are my patches?
+Subject: xtscal issue...
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,24 +37,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Mar 2010 08:16:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 11 Mar 2010 10:22:51 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-Frans Meulenbroeks wrote:
->> Do you say that patches from people with write access generally do not
->> go to the patch queue?
-> 
-> They also go to the patch queue.
-> What Tom probably wanted to say is that most people with write access
-> commit the change themselves (unless it is a patch that affects core
-> functionality)
+Hi,
+	I have faced touch screen calibration issue with Xorg-server 1.5.3.
+While running xtscal application, it is through following error 
+	
+**XCALIBRATE extension missing: Success**
 
-OK, that was my understanding too.
+How can I resolve this? and calibrate touch screen.
 
-So the missing of my patches there needs another explanation.
+Branch : 2009/stable
+Distro : Angstrom.2008
 
-Steffen
+With Regards
+J.Balakrishnan
+
+
 
 
 
