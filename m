@@ -1,46 +1,33 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NpkoA-0002JL-Gr
+	(envelope-from <sledz@DResearch.DE>) id 1NpkpC-0002Or-ON
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Mar 2010 17:00:23 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NpklH-0006Og-Js from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Mar 2010 07:57:23 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 11 Mar 2010 07:57:23 -0800
-Received: from 172.30.33.172 ([172.30.33.172]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Thu, 11 Mar 2010 15:56:35 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	11 Mar 2010 08:56:32 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Thu, 11 Mar 2010 17:01:31 +0100
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id A2FC3491264
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Mar 2010 16:58:30 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Thu, 11 Mar 2010 16:58:48 +0100
+Message-ID: <4B99132A.1060608@dresearch.de>
+Date: Thu, 11 Mar 2010 16:58:34 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ac9c93b11003102359n42d2e94yf56b05a39decb4fd@mail.gmail.com>
-References: <DB561678F08F554EB0D9F21B70E268A505AE79@exchange.intern.dresearch.de>
-	<4B97C28F.2020609@dresearch.de>
-	<d1ded4381003100919y125959b5m3198c8d848661187@mail.gmail.com>
-	<1268246120.14566.1078.camel@mill.internal.reciva.com>
-	<1268248565.16526.231.camel@trini-m4400> <4B9894F4.5@dresearch.de>
-	<ac9c93b11003102359n42d2e94yf56b05a39decb4fd@mail.gmail.com>
-Organization: Mentor Graphics Corporation
-Date: Thu, 11 Mar 2010 08:56:32 -0700
-Message-ID: <1268322992.16526.266.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 11 Mar 2010 15:57:23.0043 (UTC)
-	FILETIME=[89A78330:01CAC133]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+References: <4B990C32.6000906@dresearch.de> <hnb3e4$t8v$1@dough.gmane.org>
+In-Reply-To: <hnb3e4$t8v$1@dough.gmane.org>
+X-OriginalArrivalTime: 11 Mar 2010 15:58:48.0291 (UTC)
+	FILETIME=[BC775330:01CAC133]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Where are my patches?
+Subject: Re: Angstrom opkg feed config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,45 +41,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Mar 2010 16:00:24 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 11 Mar 2010 16:01:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Thu, 2010-03-11 at 08:59 +0100, Frans Meulenbroeks wrote:
-> 2010/3/11 Steffen Sledz <sledz@dresearch.de>:
-> > Tom Rini wrote:
-> >>> If your patches are reaching the list then it is probably nothing wit=
-hin
-> >>> your control.  I think some folks have had trouble with patchwork's s=
-pam
-> >>> filtering in the past.
-> >>>
-> >>> In any case, it isn't necessary for your patch to appear in patchwork=
- in
-> >>> order for it to be actioned, so there is no need to worry about it to=
-o
-> >>> much.
-> >
-> > That's clear. But when i create a patch suggestion outside my area of
-> > knowledge which needs some discussion and may be some updates it
-> > would be very helpful to do this within patchwork.
-> >
-> >> There is for people without write access.
-> >
-> > Do you say that patches from people with write access generally do not
-> > go to the patch queue?
->=20
-> They also go to the patch queue.
-> What Tom probably wanted to say is that most people with write access
-> commit the change themselves (unless it is a patch that affects core
-> functionality)
+Koen Kooi wrote:
+>> At the moment recipes/angstrom/angstrom-feed-configs.bb creates
+>> also config file for ${MACHINE_ARCH} specific packages. But at
+>> least for the machine arch 'hipox' (i'm not sure for other ones)
+>> the given URI does not exist. This results in an error when
+>> calling 'opkg update':
+> 
+>> Collected errors:
+>>  * Failed to download http://www.angstrom-distribution.org/feeds/unstable/ipk/glibc/armv5te/machine/hipox/Packages.gz, error 1
+> 
+>> Does this directory intentionally not exist?
+> 
+>> Wouldn't it be better to create an empty Packages.gz if there
+>> are no machine arch specific packages?
+> 
+> Feel free to volunteer to support this machine in angstrom, ask on the
+> angstrom devel mailinglist about it.
 
-Right.  But even then, I've re-grabbed my own patches from patchwork
-just to get the Acked-by lines (since frequently I make the change, git
-diff > t, insert 't' into my email and put the desc there).
+I'm not sure if i have the time to handle this. Sorry.
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+But as mentioned before, wouldn't it be a good idea to create an
+empty Packages.gz for all OE known machine types which are not
+officially supported by Angstrom just to avoid this error. That
+sounds easy to realize.
+
+Steffen
+
 
 
