@@ -1,41 +1,40 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Npl2p-0008B9-Rv
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Mar 2010 17:15:33 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1Npkzw-0000vQ-5S from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Mar 2010 08:12:32 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 11 Mar 2010 08:12:31 -0800
-Received: from 172.30.33.172 ([172.30.33.172]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Thu, 11 Mar 2010 16:11:35 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	11 Mar 2010 09:11:32 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Npl5E-0008Hh-8s for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Mar 2010 17:18:02 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Npl2N-0005xX-R6 for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Mar 2010 17:15:03 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Mar 2010 17:15:03 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 11 Mar 2010 17:15:03 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100311131340.20219.23563.stgit@ES-J7S4D2J.amer.consind.ge.com>
-References: <20100311131340.20219.23563.stgit@ES-J7S4D2J.amer.consind.ge.com>
-Organization: Mentor Graphics Corporation
-Date: Thu, 11 Mar 2010 09:11:32 -0700
-Message-ID: <1268323892.16526.281.camel@trini-m4400>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 11 Mar 2010 17:10:47 +0100
+Message-ID: <hnb4m7$236$1@dough.gmane.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 11 Mar 2010 16:12:31.0692 (UTC)
-	FILETIME=[A74058C0:01CAC135]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add Freescale mpc8641_hpcn demo board
+Subject: Machine specific packages lacking shlibs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,22 +48,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Mar 2010 16:15:33 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 11 Mar 2010 16:18:02 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, 2010-03-11 at 13:13 +0000, Martyn Welch wrote:
-> A demo board from Freescale, based on the MPC8641D Freescale SOC.
-> ---
->=20
->  conf/machine/mpc8641-hpcn.conf                    |   23=20
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I don't see this bringing in a tune file.  I have to admit I forget
-off-hand what mpc86xx maps into, but I'm sure there's some -mcpu for it
-(or will be), and there's always the package arch stuff).
+Hi,
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+I'm building various packages that statically link to libraries that
+have too much knowledge about the kernel, so I have to make them machine
+specific. But after doing so all the shared libs have disappeared from
+the Depends: field!
+
+Does anyone have some hints where this should get fixed?
+
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLmRYHMkyGM64RGpERAmzfAKCj97/lRBX5HNXjmD+O4Mt92ij63QCfeqZW
+LAEEFBmh01oHP9JEEXZnVwU=
+=nsB7
+-----END PGP SIGNATURE-----
+
 
 
