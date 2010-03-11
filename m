@@ -1,35 +1,30 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from bay0-omc4-s1.bay0.hotmail.com ([65.54.190.203])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1NpiGq-0001pm-E5
-	for Openembedded-devel@lists.openembedded.org;
-	Thu, 11 Mar 2010 14:17:53 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id B8E902CA13
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Mar 2010 13:10:08 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UupEI5kO5WM0; Thu, 11 Mar 2010 13:10:04 +0000 (UTC)
-Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
-	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTPSA id ABDB02C7DC;
-	Thu, 11 Mar 2010 13:10:03 +0000 (UTC)
-Message-ID: <4B98ECC5.8090202@gmail.com>
-Date: Thu, 11 Mar 2010 14:14:45 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	(envelope-from <salehusman@hotmail.com>) id 1Npiyg-0005qI-P7
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Mar 2010 15:03:11 +0100
+Received: from BAY127-W28 ([65.54.190.199]) by bay0-omc4-s1.bay0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 11 Mar 2010 06:00:07 -0800
+Message-ID: <BAY127-W28EEC160A639A50A862129D8320@phx.gbl>
+X-Originating-IP: [203.82.49.5]
+From: saleh usman <salehusman@hotmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Date: Thu, 11 Mar 2010 19:00:07 +0500
+Importance: Normal
 MIME-Version: 1.0
-To: Openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+X-OriginalArrivalTime: 11 Mar 2010 14:00:07.0051 (UTC)
+	FILETIME=[27E055B0:01CAC123]
+X-SA-Exim-Connect-IP: 65.54.190.203
+X-SA-Exim-Mail-From: salehusman@hotmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	RCVD_IN_SORBS_WEB,SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Marco Cavallini <m.cavallini@koansoftware.com>
-Subject: [RFC][ANNOUNCE] KaeilOS Openembedded Manager (KOM)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Boost library version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,42 +38,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Mar 2010 13:17:53 -0000
-Content-Type: text/plain; charset=ISO-8859-15
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 11 Mar 2010 14:03:11 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-[RFC][ANNOUNCE] KaeilOS Openembedded Manager (KOM)
 
-Dear OE developers,
-I'd like introduce you a new product we developed at KOAN with the aim
-to semplificate the management of OE [1] building tree and recipes when
-using (more or less complex) overlays, creating something like an
-abstraction from the underlying framework.
+I am  bitbaking OSSIE image which requires boost library.Openembedded  does=
+n't contain recipe of boost version 1.37 and I want to use that version dur=
+ing my build.Which code I need to edit of the existing recipes say of boost=
+_1.36.0.bb  for this.Will simply changing name of recipe to boost_1.37.0 wo=
+rk?
 
-We called it KaeilOS Openembedded Manager (KOM for short) [2] and is a
-tool designed to create and manage any OpenEmbedded based project, like
-KaeilOS [3], Angstrom [4], and others.
-All KOM projects are a full-fledged overlay where you can also build
-your personal image or software packages.
-At the same time you can override other overlay in a simple way.
-
-Aside from personal opinions on the name KOM, Leonardo (IRC:hachreak)
-and me (IRC:mckoan) would like to have your impressions on the product,
-and of course we will welcome comments, criticisms and no less important
-patches.
-
-Thanks and sorry to bother you with this,
-
- [1] http://www.openembedded.org/
- [2] http://kom.kaeilos.com/
- [3] http://www.kaeilos.com/
- [4] http://www.angstrom-distribution.org/
-
-Cheers
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
-
+Saleh
+ 		 	   		 =20
+_________________________________________________________________
+Hotmail: Trusted email with powerful SPAM protection.
+https://signup.live.com/signup.aspx?id=3D60969=
 
