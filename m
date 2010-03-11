@@ -1,32 +1,36 @@
-Received: from smtp7.myhsphere.biz ([204.10.105.69] helo=mail9.myhsphere.biz)
+Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <balakrishnan@e-consystems.com>) id 1Nph7u-00020r-J6
+	(envelope-from <philb@gnu.org>) id 1NphaV-0007jT-Kj
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Mar 2010 13:04:34 +0100
-Received: (qmail 7161 invoked by uid 399); 11 Mar 2010 12:01:23 -0000
-Received: from dsl-tn-dynamic-216.238.164.122.airtelbroadband.in (HELO
-	?192.168.6.250?) (balakrishnan@e-consystems.com@122.164.238.216)
-	by mail9.myhsphere.biz with ESMTPAM; 11 Mar 2010 12:01:23 -0000
-X-Originating-IP: 122.164.238.216
-X-Sender: balakrishnan@e-consystems.com
-From: balakrishnan <balakrishnan@e-consystems.com>
+	Thu, 11 Mar 2010 13:34:07 +0100
+Received: from castle.reciva.com ([82.71.203.193]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NphXY-0004E7-H8
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Mar 2010 12:31:00 +0000
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1NphXY-0000NY-5t
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Mar 2010 12:31:00 +0000
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <mailman.3.1268305202.10009.openembedded-devel@lists.openembedded.org>
-References: <mailman.3.1268305202.10009.openembedded-devel@lists.openembedded.org>
-Date: Thu, 11 Mar 2010 17:31:20 +0530
-Message-Id: <1268308880.3822.63.camel@balakrishnan-desktop>
+In-Reply-To: <738913.90211.qm@web88207.mail.re2.yahoo.com>
+References: <738913.90211.qm@web88207.mail.re2.yahoo.com>
+Date: Thu, 11 Mar 2010 12:30:56 +0000
+Message-ID: <1268310656.14566.1084.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-SA-Exim-Connect-IP: 204.10.105.69
-X-SA-Exim-Mail-From: balakrishnan@e-consystems.com
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 82.71.203.194
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	RCVD_IN_BL_SPAMCOP_NET autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: xtscal issue... (Balakrishnan)
+Subject: Re: [oe-commits] Phil Blundell : gtk+: build gtk-demo and package it appropriately
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,38 +44,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Mar 2010 12:04:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 11 Mar 2010 12:34:07 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
+I've managed to reproduce this problem now, and I have checked in an
+extra patch (as well as the previous ones) which fixes it for me.  Does
+that work for you?
 
+p.
 
-> On Thu, Mar 11, 2010 at 1:19 PM, balakrishnan
-> <balakrishnan@e-consystems.com> wrote:
-> > Hi,
-> > ? ? ? ?I have faced touch screen calibration issue with Xorg-server
-> 1.5.3.
-> > While running xtscal application, it is through following error
-> >
-> > **XCALIBRATE extension missing: Success**
-> >
-> > How can I resolve this? and calibrate touch screen.
-> use ts_calibrate from tslib, or use Kdrive not from Xorg.
+On Wed, 2010-03-10 at 15:53 -0800, JOSEPH KORTJE wrote:
+> Hi Phil and Steve:
 > 
+> If we *either* install 
+> 
+> sudo apt-get install libgtk2.0-dev
+> 
+> or if we do
+> 
+> bitbake gdk-pixbuf-csource-native
+> 
+> FIRST 
+> 
+> 
+> Then the
+> 
+>     bitbake gtk+
+> 
+> succeeds.
+> 
+> Otherwise, with the same tree used by Steve, same results as Steve mentions.
+> 
+> Any ideas why?
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-yeah, with the tslib only I have calibrated my touch screen. But in
-default tslib binaries are not built with rootfs, so I have updated
-tslib.inc like below
 
-/***************************************************************************/
-FILES_${PN} = "${libdir}/*.so.* ${libdir}/ts/*.so* \
-	       ${sysconfdir}/ts.conf ${sysconfdir}/profile.d/tslib.sh
-${datadir}/tslib \
-		${FILES_tslib-dev} ${libdir}/ts/*.la \
-		${bindir}/ts_calibrate \
-		${bindir}/ts_harvest ${bindir}/ts_print ${bindir}/ts_print_raw
-${bindir}/ts_test "
-/*******************************************************************************/
 
-But still binaries are not copied correctly to the final rootfs.
 
