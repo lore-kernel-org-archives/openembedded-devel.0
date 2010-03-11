@@ -1,44 +1,38 @@
-Received: from gatekeeper.tait.co.nz ([202.37.96.11])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <douglas.royds@tait.co.nz>) id 1Npvv0-0003NX-Ap
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1Npzkg-0003oE-LD
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Mar 2010 04:52:16 +0100
-Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
-	by localhost.tait.co.nz (Postfix) with ESMTP id 141DA46754
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Mar 2010 16:49:29 +1300 (NZDT)
-Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])
-	by gatekeeper.tait.co.nz (Postfix) with ESMTP id 040CF46752
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Mar 2010 16:49:29 +1300 (NZDT)
-Received: from conversion-daemon.sunstrike.tait.co.nz by sunstrike.tait.co.nz
-	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
-	id <0KZ500801D1DY400@sunstrike.tait.co.nz>
-	(original mail from douglas.royds@tait.co.nz)
-	for openembedded-devel@lists.openembedded.org; Fri,
-	12 Mar 2010 16:49:10 +1300 (NZDT)
-Received: from [172.25.116.17] by sunstrike.tait.co.nz
-	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
-	with ESMTP id <0KZ5005DYH9R8060@sunstrike.tait.co.nz> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	12 Mar 2010 16:49:03 +1300 (NZDT)
-Date: Fri, 12 Mar 2010 16:49:03 +1300
-From: Douglas Royds <douglas.royds@tait.co.nz>
-In-reply-to: <BAY127-W28EEC160A639A50A862129D8320@phx.gbl>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <4B99B9AF.9070301@tait.co.nz>
-MIME-version: 1.0
-References: <BAY127-W28EEC160A639A50A862129D8320@phx.gbl>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-X-SA-Exim-Connect-IP: 202.37.96.11
-X-SA-Exim-Mail-From: douglas.royds@tait.co.nz
+	Fri, 12 Mar 2010 08:57:51 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2C7siWt022291;
+	Fri, 12 Mar 2010 07:54:44 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 22233-03; Fri, 12 Mar 2010 07:54:40 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2C7sa8R022279
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Fri, 12 Mar 2010 07:54:38 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Martyn Welch <martyn.welch@ge.com>
+In-Reply-To: <20100310103133.14548.62608.stgit@ES-J7S4D2J.amer.consind.ge.com>
+References: <20100310103133.14548.62608.stgit@ES-J7S4D2J.amer.consind.ge.com>
+Date: Thu, 11 Mar 2010 13:01:35 -0800
+Message-ID: <1268341295.1625.7.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=0.3 required=5.0 tests=AWL,BAYES_00,
+	DATE_IN_PAST_06_12, RDNS_DYNAMIC, TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Boost library version
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] Allow spectrum fw to build behind a proxy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,52 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Mar 2010 03:52:16 -0000
-Content-type: text/plain; format=flowed; charset=ISO-8859-1
-Content-transfer-encoding: 7BIT
+X-List-Received-Date: Fri, 12 Mar 2010 07:57:51 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-The short answer is that yes, that should work. It's certainly worth a 
-crack.
+On Wed, 2010-03-10 at 10:31 +0000, Martyn Welch wrote:
+> Spectrum-fw runs a script which uses curl, wget or ftp to pull an archive
+> rather than the archive being a part of the SRC_URI. Whilst it would
+> probably be preferable to pull this as part of the SRC_URI (incidentally,
+> if it was, the script wouldn't need to be modified), the "&" in the archive
+> name has foiled my attempts at doing that.
+> 
+> This patch modifies the script to at least use the "FETCHCMD_wget" variable
+> which can be provided to help when accessing through a proxy.
 
-The long answer is definitely maybe. Building Boost is non-trivial. You 
-will observe several patch files in boost_1.36.0.bb, and quite a lot of 
-intelligence in boost-36.inc, that may or may not all work with 1.37.
+How about the recipe in Poky for this
+(meta/packages/orinoco/spectrum-fw.bb)? I think all these problems were
+addressed there.
 
-Good luck,
-Douglas.
+Cheers,
 
-
-saleh usman wrote:
-> I am  bitbaking OSSIE image which requires boost library.Openembedded  doesn't contain recipe of boost version 1.37 and I want to use that version during my build.Which code I need to edit of the existing recipes say of boost_1.36.0.bb  for this.Will simply changing name of recipe to boost_1.37.0 work?
->
-> Saleh
->  		 	   		  
-> _________________________________________________________________
-> Hotmail: Trusted email with powerful SPAM protection.
-> https://signup.live.com/signup.aspx?id=60969
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> ______________________________________________________________________
-> This email has been scanned by the MessageLabs Email Security System.
-> For more information please visit http://www.messagelabs.com/email 
-> ______________________________________________________________________
->   
-
-
-=======================================================================
-This email, including any attachments, is only for the intended
-addressee.  It is subject to copyright, is confidential and may be
-the subject of legal or other privilege, none of which is waived or
-lost by reason of this transmission.
-If the receiver is not the intended addressee, please accept our
-apologies, notify us by return, delete all copies and perform no
-other act on the email.
-Unfortunately, we cannot warrant that the email has not been
- altered or corrupted during transmission.
-=======================================================================
+Richard
 
 
 
