@@ -1,40 +1,36 @@
-Received: from smtprelay-b11.telenor.se ([62.127.194.20])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1NprB3-0007xW-F0
+Received: from li38-254.members.linode.com ([207.192.74.254]
+	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <sgarman@zenlinux.com>) id 1NprcO-0004Wf-Ix
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 11 Mar 2010 23:48:30 +0100
-Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
-	by smtprelay-b11.telenor.se (Postfix) with ESMTP id C4640154D6
+	Fri, 12 Mar 2010 00:16:49 +0100
+Received: from [192.168.1.12] (c-76-115-42-183.hsd1.or.comcast.net
+	[76.115.42.183])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by masterfoo.zenlinux.com (Postfix) with ESMTP id 89555301C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Mar 2010 23:18:09 +0100 (CET)
-X-SMTPAUTH-B2: 
-X-SENDER-IP: 83.227.59.242
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AugSAKv6mEtT4zvyPGdsb2JhbAAHgwWXYgEBAQE3rFqQR4Eygl9qBIYW
-X-IronPort-AV: E=Sophos;i="4.49,622,1262559600"; d="scan'208";a="49193399"
-Received: from c-f23be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.224]) ([83.227.59.242])
-	by ipb1.telenor.se with ESMTP; 11 Mar 2010 23:18:09 +0100
-Message-ID: <4B996C1F.2070707@atmel.com>
-Date: Thu, 11 Mar 2010 23:18:07 +0100
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Organization: Atmel Nordic AB
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	Thu, 11 Mar 2010 18:13:34 -0500 (EST)
+Message-ID: <4B99791E.1020102@zenlinux.com>
+Date: Thu, 11 Mar 2010 15:13:34 -0800
+From: Scott Garman <sgarman@zenlinux.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.8) Gecko/20100227 Lightning/1.0b1 Thunderbird/3.0.3
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <20100204113145.GR3401@jama>
-	<4B96CAD2.90901@atmel.com>	<201003101516.43175.marcin@juszkiewicz.com.pl>
-	<4B98053F.5040100@atmel.com>
-In-Reply-To: <4B98053F.5040100@atmel.com>
-X-SA-Exim-Connect-IP: 62.127.194.20
-X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
+X-MasterFoo-MailScanner-Information: Please contact the ISP for more
+	information
+X-MailScanner-ID: 89555301C0.6DF73
+X-MasterFoo-MailScanner: Found to be clean
+X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
+X-SA-Exim-Connect-IP: 207.192.74.254
+X-SA-Exim-Mail-From: sgarman@zenlinux.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.7 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: pointercal ignored?
+Subject: [PATCH/RFC] zlib: convert to BBCLASSEXTEND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,72 +44,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Mar 2010 22:48:30 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 11 Mar 2010 23:16:50 -0000
+X-Groupsio-MsgNum: 17529
+Content-Type: multipart/mixed; boundary="------------020907000602090603080001"
 
-Ulf Samuelsson skrev:
-> Marcin Juszkiewicz skrev:
->> Dnia wtorek, 9 marca 2010 o 23:25:22 Ulf Samuelsson napisa=C5=82(a):
->>> I have built a custom variant of x11-gpe-image for the SAM9M10.
->>
->> Which machine in OE covers that board? I have to admit that I did not
->> tried to hack mine.
->=20
-> I am building the SAM9G45EK, but I am using a 2.6.30 kernel
-> patched with maxim.org.za + www.linux4sam.org .exp3 patches
-> instead of the 2.6.32 currently in openembedded.
->=20
-> Also updated bootstrap and u-boot, but that won't affect this.
->=20
->> =20
->>> When gpe is started, the Y direction seems to be compressed.
->>> When I start the calculator and press at the top of the screen,
->>> the calculator buttons 5 mm below gets pressed.
->>> When I press at the bottom of the screen, the buttons 5 mm above
->>> gets pressed.
->>>
->>> Changing /etc/pointercal manually seems to have no effect
->>>
->>> It's like pointercal gets ignored.
->>>
->>> When others run the same kernel with minor config changes
->>> using the stable branch ans xserver-kdrive, this phenomena
->>> does not happen.
->>
->> Check do you have kdrive or xorg with evdev or tslib driver.
->>
->=20
-> I will check, when I am back home.
+--------------020907000602090603080001
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
+Hi all,
 
-xserver-xorg-2_1.7.4-r0
-tslib-1.0-r23.3
-xtscal-0.6.3-r7
-xf86-input-evdev-1_2.3.2-r10
-calibrateproto-2_0.0+r0+gitr1da6fd1e2c7a49648245c98481fabea8b9690a8c-r0
-libxcalibrate-2_0.0+r0+gitr209d83af61ed38a002c8096377deac292b3e396c-r0
+Attached is my first OE patch submission, to convert the zlib recipe to 
+use BBCLASSEXTEND and cleanup the do_stage() task.
 
-There is no PREFERRED_PROVIDER_xserver defined.
+I would like to start making regular contributions to OE, and am 
+starting with the basics. Any guidance from the more experienced folks 
+is gratefully accepted.
 
+Scott
 
-> Will also send the patches I added.
->=20
->> Regards,=20
-> BR
-> /Ulf
->=20
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- 
+Scott Garman
+sgarman at zenlinux dot com
 
+--------------020907000602090603080001
+Content-Type: text/x-patch;
+ name="zlib_bbclassextend.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="zlib_bbclassextend.patch"
 
---=20
-Best Regards
-Ulf Samuelsson
+commit 803f864960dcf58abc03003b2e3e62f2f26230f3
+Author: Scott Garman <sgarman@zenlinux.com>
+Date:   Thu Mar 11 15:01:59 2010 -0800
 
+    Convert zlib recipe to use BBCLASSEXTEND and remove do_stage task.
 
+diff --git a/recipes/zlib/zlib-native_1.2.3.bb b/recipes/zlib/zlib-native_1.2.3.bb
+deleted file mode 100644
+index d7e0777..0000000
+--- a/recipes/zlib/zlib-native_1.2.3.bb
++++ /dev/null
+@@ -1,5 +0,0 @@
+-require zlib_${PV}.bb
+-ZLIB_EXTRA = ""
+-DEPENDS = "libtool-native"
+-
+-inherit native
+diff --git a/recipes/zlib/zlib-sdk_1.2.3.bb b/recipes/zlib/zlib-sdk_1.2.3.bb
+deleted file mode 100644
+index 4863395..0000000
+--- a/recipes/zlib/zlib-sdk_1.2.3.bb
++++ /dev/null
+@@ -1,4 +0,0 @@
+-require zlib_${PV}.bb
+-LIB_EXTRA = ""
+-
+-inherit sdk
+diff --git a/recipes/zlib/zlib_1.2.3.bb b/recipes/zlib/zlib_1.2.3.bb
+index d995869..db4b16b 100644
+--- a/recipes/zlib/zlib_1.2.3.bb
++++ b/recipes/zlib/zlib_1.2.3.bb
+@@ -3,7 +3,7 @@ SECTION = "libs"
+ PRIORITY = "required"
+ HOMEPAGE = "http://www.gzip.org/zlib/"
+ LICENSE = "zlib"
+-PR ="r5"
++PR ="r6"
+ 
+ SRC_URI = "http://www.zlib.net/zlib-1.2.3.tar.bz2 \
+ 		file://visibility.patch;patch=1 \
+@@ -15,6 +15,4 @@ DEPENDS = "libtool-cross"
+ 
+ inherit autotools
+ 
+-do_stage() {
+-	autotools_stage_all
+-}
++BBCLASSEXTEND = "native sdk"
 
+--------------020907000602090603080001--
