@@ -1,40 +1,44 @@
-Received: from li38-254.members.linode.com ([207.192.74.254]
-	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sgarman@zenlinux.com>) id 1NpvbG-00034m-EE
+Received: from gatekeeper.tait.co.nz ([202.37.96.11])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <douglas.royds@tait.co.nz>) id 1Npvv0-0003NX-Ap
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Mar 2010 04:31:51 +0100
-Received: from [192.168.1.12] (c-76-115-42-183.hsd1.or.comcast.net
-	[76.115.42.183])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by masterfoo.zenlinux.com (Postfix) with ESMTP id 6215F301DD
+	Fri, 12 Mar 2010 04:52:16 +0100
+Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
+	by localhost.tait.co.nz (Postfix) with ESMTP id 141DA46754
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Mar 2010 22:28:46 -0500 (EST)
-Message-ID: <4B99B4EE.5020304@zenlinux.com>
-Date: Thu, 11 Mar 2010 19:28:46 -0800
-From: Scott Garman <sgarman@zenlinux.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.8) Gecko/20100227 Lightning/1.0b1 Thunderbird/3.0.3
-MIME-Version: 1.0
+	Fri, 12 Mar 2010 16:49:29 +1300 (NZDT)
+Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])
+	by gatekeeper.tait.co.nz (Postfix) with ESMTP id 040CF46752
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Mar 2010 16:49:29 +1300 (NZDT)
+Received: from conversion-daemon.sunstrike.tait.co.nz by sunstrike.tait.co.nz
+	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
+	id <0KZ500801D1DY400@sunstrike.tait.co.nz>
+	(original mail from douglas.royds@tait.co.nz)
+	for openembedded-devel@lists.openembedded.org; Fri,
+	12 Mar 2010 16:49:10 +1300 (NZDT)
+Received: from [172.25.116.17] by sunstrike.tait.co.nz
+	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
+	with ESMTP id <0KZ5005DYH9R8060@sunstrike.tait.co.nz> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	12 Mar 2010 16:49:03 +1300 (NZDT)
+Date: Fri, 12 Mar 2010 16:49:03 +1300
+From: Douglas Royds <douglas.royds@tait.co.nz>
+In-reply-to: <BAY127-W28EEC160A639A50A862129D8320@phx.gbl>
 To: openembedded-devel@lists.openembedded.org
-References: <4B99791E.1020102@zenlinux.com>
-	<19c1b8a91003111618u5db39b2ft1b614484f5814442@mail.gmail.com>
-	<4B99B467.2090807@zenlinux.com>
-In-Reply-To: <4B99B467.2090807@zenlinux.com>
-X-MasterFoo-MailScanner-Information: Please contact the ISP for more
-	information
-X-MailScanner-ID: 6215F301DD.99D8E
-X-MasterFoo-MailScanner: Found to be clean
-X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
-X-SA-Exim-Connect-IP: 207.192.74.254
-X-SA-Exim-Mail-From: sgarman@zenlinux.com
+Message-id: <4B99B9AF.9070301@tait.co.nz>
+MIME-version: 1.0
+References: <BAY127-W28EEC160A639A50A862129D8320@phx.gbl>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+X-SA-Exim-Connect-IP: 202.37.96.11
+X-SA-Exim-Mail-From: douglas.royds@tait.co.nz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH/RFC] zlib: convert to BBCLASSEXTEND
+Subject: Re: Boost library version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,92 +52,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Mar 2010 03:31:51 -0000
-X-Groupsio-MsgNum: 17533
-Content-Type: multipart/mixed; boundary="------------030203080608010804030409"
+X-List-Received-Date: Fri, 12 Mar 2010 03:52:16 -0000
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
 
---------------030203080608010804030409
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+The short answer is that yes, that should work. It's certainly worth a 
+crack.
 
-On 03/11/2010 07:26 PM, Scott Garman wrote:
-> Gotcha, thanks for the feedback. Let's try this then. In the future I
-> assume the format-patch email should be sent directly to the list and
-> not as an attachment - correct me if I'm mistaken.
+The long answer is definitely maybe. Building Boost is non-trivial. You 
+will observe several patch files in boost_1.36.0.bb, and quite a lot of 
+intelligence in boost-36.inc, that may or may not all work with 1.37.
 
-...and it would be helpful if I actually included the patch this time.
-
-Scott
-
--- 
-Scott Garman
-sgarman at zenlinux dot com
-
---------------030203080608010804030409
-Content-Type: text/x-patch;
- name="0001-zlib-convert-to-new-style-staging-and-BBCLASSEXTEND.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename*0="0001-zlib-convert-to-new-style-staging-and-BBCLASSEXTEND.pat";
- filename*1="ch"
-
-From 322589252447f6bb4a96b79b5495001f6cb64f12 Mon Sep 17 00:00:00 2001
-From: Scott Garman <sgarman@zenlinux.com>
-Date: Thu, 11 Mar 2010 19:15:29 -0800
-Subject: [PATCH] zlib: convert to new style staging and BBCLASSEXTEND
-
----
- recipes/zlib/zlib-native_1.2.3.bb |    5 -----
- recipes/zlib/zlib-sdk_1.2.3.bb    |    4 ----
- recipes/zlib/zlib_1.2.3.bb        |    6 ++----
- 3 files changed, 2 insertions(+), 13 deletions(-)
- delete mode 100644 recipes/zlib/zlib-native_1.2.3.bb
- delete mode 100644 recipes/zlib/zlib-sdk_1.2.3.bb
-
-diff --git a/recipes/zlib/zlib-native_1.2.3.bb b/recipes/zlib/zlib-native_1.2.3.bb
-deleted file mode 100644
-index d7e0777..0000000
---- a/recipes/zlib/zlib-native_1.2.3.bb
-+++ /dev/null
-@@ -1,5 +0,0 @@
--require zlib_${PV}.bb
--ZLIB_EXTRA = ""
--DEPENDS = "libtool-native"
--
--inherit native
-diff --git a/recipes/zlib/zlib-sdk_1.2.3.bb b/recipes/zlib/zlib-sdk_1.2.3.bb
-deleted file mode 100644
-index 4863395..0000000
---- a/recipes/zlib/zlib-sdk_1.2.3.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--require zlib_${PV}.bb
--LIB_EXTRA = ""
--
--inherit sdk
-diff --git a/recipes/zlib/zlib_1.2.3.bb b/recipes/zlib/zlib_1.2.3.bb
-index d995869..db4b16b 100644
---- a/recipes/zlib/zlib_1.2.3.bb
-+++ b/recipes/zlib/zlib_1.2.3.bb
-@@ -3,7 +3,7 @@ SECTION = "libs"
- PRIORITY = "required"
- HOMEPAGE = "http://www.gzip.org/zlib/"
- LICENSE = "zlib"
--PR ="r5"
-+PR ="r6"
- 
- SRC_URI = "http://www.zlib.net/zlib-1.2.3.tar.bz2 \
- 		file://visibility.patch;patch=1 \
-@@ -15,6 +15,4 @@ DEPENDS = "libtool-cross"
- 
- inherit autotools
- 
--do_stage() {
--	autotools_stage_all
--}
-+BBCLASSEXTEND = "native sdk"
--- 
-1.6.3.3
+Good luck,
+Douglas.
 
 
---------------030203080608010804030409--
+saleh usman wrote:
+> I am  bitbaking OSSIE image which requires boost library.Openembedded  doesn't contain recipe of boost version 1.37 and I want to use that version during my build.Which code I need to edit of the existing recipes say of boost_1.36.0.bb  for this.Will simply changing name of recipe to boost_1.37.0 work?
+>
+> Saleh
+>  		 	   		  
+> _________________________________________________________________
+> Hotmail: Trusted email with powerful SPAM protection.
+> https://signup.live.com/signup.aspx?id=60969
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> ______________________________________________________________________
+> This email has been scanned by the MessageLabs Email Security System.
+> For more information please visit http://www.messagelabs.com/email 
+> ______________________________________________________________________
+>   
+
+
+=======================================================================
+This email, including any attachments, is only for the intended
+addressee.  It is subject to copyright, is confidential and may be
+the subject of legal or other privilege, none of which is waived or
+lost by reason of this transmission.
+If the receiver is not the intended addressee, please accept our
+apologies, notify us by return, delete all copies and perform no
+other act on the email.
+Unfortunately, we cannot warrant that the email has not been
+ altered or corrupted during transmission.
+=======================================================================
+
+
+
