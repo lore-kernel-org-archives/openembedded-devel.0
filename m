@@ -1,44 +1,35 @@
-Received: from mail-fx0-f220.google.com ([209.85.220.220])
+Received: from smtprelay-b11.telenor.se ([62.127.194.20])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NqCZq-0003pj-Rd
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1NqCcg-0003yM-IN
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Mar 2010 22:39:33 +0100
-Received: by fxm20 with SMTP id 20so1607394fxm.12
+	Fri, 12 Mar 2010 22:42:26 +0100
+Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
+	by smtprelay-b11.telenor.se (Postfix) with ESMTP id B7731CEE2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Mar 2010 13:36:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=NVGwf009vMR9t5qZDp+8WkzjZEn799hSYrDfjK5b7qk=;
-	b=Wi0sdxnvUZ4/UKDVlAowCxqih3F1H8lOx6tzw4w0a6C+4TBRv22IB6VekFfifEdWxy
-	Xf0vSjkAXr0xbkkLqJYqH9M4aZorJE8Cl6lI7ZJTAMrVm8hsnoMo/prEdTC+g7JfUELM
-	d/uHRADvs9G2c+nWXWrFsKgT/oGcau/KRaWD8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=kVMria0ZnsKxQ0XqOnBYIfrsTXoGojd9SwaqGyOUUtHrvk4b1FmsSheZpYfC5DhK+A
-	WsknwlEU+NoxV8v3Q8v1cuxuKE0iOEgrRCP8Z97KRFTlCbV49Exg5nieKjVo4wr6X4Ns
-	iho9Go7WvVHh5kEhaUjWEFIgJHtKkzU5n4NTU=
-Received: by 10.103.3.7 with SMTP id f7mr2038408mui.62.1268429787377;
-	Fri, 12 Mar 2010 13:36:27 -0800 (PST)
-Received: from localhost (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id y2sm7038518mug.51.2010.03.12.13.36.24
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 12 Mar 2010 13:36:26 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 12 Mar 2010 22:39:22 +0100 (CET)
+X-SMTPAUTH-B2: 
+X-SENDER-IP: 83.227.59.242
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AuY3ALpDmktT4zvyPGdsb2JhbACaaAwBAQEBNy2uSY1ThHsE
+X-IronPort-AV: E=Sophos;i="4.49,628,1262559600"; d="scan'208";a="49444939"
+Received: from c-f23be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	localhost.localdomain) ([83.227.59.242])
+	by ipb2.telenor.se with ESMTP; 12 Mar 2010 22:39:22 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 12 Mar 2010 13:36:16 -0800
-Message-Id: <1268429776-32114-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.0
-X-SA-Exim-Connect-IP: 209.85.220.220
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Fri, 12 Mar 2010 22:39:22 +0100
+Message-Id: <1268429962-12841-1-git-send-email-ulf.samuelsson@atmel.com>
+X-Mailer: git-send-email 1.6.0.2
+X-SA-Exim-Connect-IP: 62.127.194.20
+X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] gtk+-native: Override RRECOMMENDS for native recipe
+Cc: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Subject: [PATCH] osb-jscore: Templates cannot be static
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,129 +43,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Mar 2010 21:39:33 -0000
+X-List-Received-Date: Fri, 12 Mar 2010 21:42:26 -0000
 
-* Remove old style native recipes.
+Some templates are declared static inline, which makes
+the compiler complain.
+This patch removes two static declarations in
+"JavaScriptCore/kjs/protected_values.cpp"
+allowing the build to complete successfully.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 ---
- recipes/gtk+/gtk+-native-1.2_1.2.10.bb |   58 --------------------------------
- recipes/gtk+/gtk+-native_2.12.11.bb    |   20 -----------
- recipes/gtk+/gtk+_2.18.6.bb            |    3 +-
- 3 files changed, 2 insertions(+), 79 deletions(-)
- delete mode 100644 recipes/gtk+/gtk+-native-1.2_1.2.10.bb
- delete mode 100644 recipes/gtk+/gtk+-native_2.12.11.bb
+ .../gtk-webcore/files/no-static-templates.patch    |   21 ++++++++++++++++++++
+ recipes/gtk-webcore/osb-jscore_svn.bb              |    4 ++-
+ 2 files changed, 24 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/gtk-webcore/files/no-static-templates.patch
 
-diff --git a/recipes/gtk+/gtk+-native-1.2_1.2.10.bb b/recipes/gtk+/gtk+-native-1.2_1.2.10.bb
-deleted file mode 100644
-index f5ad1a5..0000000
---- a/recipes/gtk+/gtk+-native-1.2_1.2.10.bb
-+++ /dev/null
-@@ -1,58 +0,0 @@
--DESCRIPTION = "GTK+1.2 is a deprecated library provided for running programs not yet converted to GTK+2.0"
--HOMEPAGE = "http://www.gtk.org"
--SECTION = "libs"
--LICENSE = "LGPL"
--PRIORITY = "optional"
--DEPENDS = "glib-1.2 jpeg libpng libxext"
--
--PR = "r1"
--
--FILESPATH =+ "${FILE_DIRNAME}/gtk+-1.2-1.2.10:"
--SRC_URI = "ftp://ftp.gtk.org/pub/gtk/v1.2/gtk+-${PV}.tar.gz \
--           file://gtk+1.2-reconf-fix;patch=1 \
--           file://no-xwc;patch=1"
--S = "${WORKDIR}/gtk+-${PV}"
--
--inherit autotools pkgconfig flow-lossage
--
--do_configure_prepend() {
--	install -d m4
--	rm -f ltconfig libtool ltmain.sh
--	libtoolize --force
--}
--
--FILES_${PN} += "${datadir}/themes"
--FILES_${PN}-dev += "${datadir}/gtk-1.2/include ${libdir}/gtk-1.2/include"
--
--
--EXTRA_OECONF = "--enable-debug=no --disable-glibtest --disable-xim"
--# --disable-cruft
--
--LIBV = "1.2.10"
--
--gtk_include = "fnmatch.h gtk.h gtkaccelgroup.h gtkaccellabel.h gtkadjustment.h gtkalignment.h gtkarg.h gtkarrow.h gtkaspectframe.h gtkbbox.h gtkbin.h gtkbindings.h gtkbox.h gtkbutton.h gtkcalendar.h gtkcheckbutton.h gtkcheckmenuitem.h gtkclist.h gtkcolorsel.h gtkcombo.h gtkcompat.h gtkcontainer.h gtkctree.h gtkcurve.h gtkdata.h gtkdebug.h gtkdialog.h gtkdnd.h gtkdrawingarea.h gtkeditable.h gtkentry.h gtkenums.h gtkeventbox.h gtkfeatures.h gtkfilesel.h gtkfixed.h gtkfontsel.h gtkframe.h gtkgamma.h gtkgc.h gtkhandlebox.h gtkhbbox.h gtkhbox.h gtkhpaned.h gtkhruler.h gtkhscale.h gtkhscrollbar.h gtkhseparator.h gtkimage.h gtkinputdialog.h gtkintl.h gtkinvisible.h gtkitem.h gtkitemfactory.h gtklabel.h gtklayout.h gtklist.h gtklistitem.h gtkmain.h gtkmarshal.h gtkmenu.h gtkmenubar.h gtkmenufactory.h gtkmenuitem.h gtkmenushell.h gtkmisc.h gtknotebook.h gtkobject.h gtkoptionmenu.h gtkpacker.h gtkpaned.h gtkpixmap.h gtkplug.h gtkpreview.h gtkprivate.h gtkprogress.h gtkprogressbar.h gtkradiobutton.h gtkradiomenuitem.h gtkrange.h gtkrc.h gtkruler.h gtkscale.h gtkscrollbar.h gtkscrolledwindow.h gtkselection.h gtkseparator.h gtksignal.h gtksocket.h gtkspinbutton.h gtkstatusbar.h gtkstyle.h gtktable.h gtktearoffmenuitem.h gtktext.h gtkthemes.h gtktipsquery.h gtktogglebutton.h gtktoolbar.h gtktooltips.h gtktree.h gtktreeitem.h gtktypebuiltins.h gtktypeutils.h gtkvbbox.h gtkvbox.h gtkviewport.h gtkvpaned.h gtkvruler.h gtkvscale.h gtkvscrollbar.h gtkvseparator.h gtkwidget.h gtkwindow.h makeenums.h stamp-gtkmarshal.h stamp-gtktypebuiltins.h"
--gdk_include = "MwmUtil.h gdk.h gdkcursors.h gdki18n.h gdkinput.h gdkinputcommon.h gdkinputgxi.h gdkinputnone.h gdkinputxfree.h gdkkeysyms.h gdkprivate.h gdkrgb.h gdktypes.h gdkx.h gxid_lib.h gxid_proto.h"
--
--do_stage () {
--	oe_libinstall -so -C gtk libgtk-1.2 ${STAGING_LIBDIR}
--	oe_libinstall -so -C gdk libgdk-1.2 ${STAGING_LIBDIR}
--
--	mkdir -p ${STAGING_INCDIR}/gtk-1.2/gtk
--	for i in ${gtk_include}; do
--		install -m 0644 gtk/$i ${STAGING_INCDIR}/gtk-1.2/gtk/$i
--	done
--
--	mkdir -p ${STAGING_INCDIR}/gtk-1.2/gdk
--	for i in ${gdk_include}; do
--		install -m 0644 gdk/$i ${STAGING_INCDIR}/gtk-1.2/gdk/$i
--	done
--
--	mkdir -p ${STAGING_LIBDIR}/gtk-1.2/include
--
--	install -m 0644 gtk.m4 ${STAGING_DATADIR}/aclocal/
--}
--
--do_install_append () {
--	install -d ${D}${sysconfdir}/gtk-1.2
--}
--
-diff --git a/recipes/gtk+/gtk+-native_2.12.11.bb b/recipes/gtk+/gtk+-native_2.12.11.bb
-deleted file mode 100644
-index a53dcde..0000000
---- a/recipes/gtk+/gtk+-native_2.12.11.bb
-+++ /dev/null
-@@ -1,20 +0,0 @@
--
--require gtk+_2.12.11.bb
--
--inherit native
--
--DEPENDS += "atk-native pango-native cairo-native libx11-native libxext-native libxrender-native"
--PROVIDES = "gtk+-native"
--
--EXTRA_OECONF += "--without-libtiff --disable-modules --disable-cups"
--
--PR = "r3"
--
--do_install_append() {
--
--    # this tool is required by gnome-keyring 2.26.0 to get built
--    # it is written in Python and use only Python xml
--    install -d ${STAGING_BINDIR_NATIVE}
--    install -m 0755 ${S}/gtk/gtk-builder-convert ${STAGING_BINDIR_NATIVE}
--}
--
-diff --git a/recipes/gtk+/gtk+_2.18.6.bb b/recipes/gtk+/gtk+_2.18.6.bb
-index 1c2ca79..69f8ff5 100644
---- a/recipes/gtk+/gtk+_2.18.6.bb
-+++ b/recipes/gtk+/gtk+_2.18.6.bb
-@@ -3,11 +3,12 @@ require gtk+.inc
- SRC_URI_append_virtclass-native = " file://no-demos.patch;patch=1 \
- "
+diff --git a/recipes/gtk-webcore/files/no-static-templates.patch b/recipes/gtk-webcore/files/no-static-templates.patch
+new file mode 100644
+index 0000000..2cfb41f
+--- /dev/null
++++ b/recipes/gtk-webcore/files/no-static-templates.patch
+@@ -0,0 +1,21 @@
++diff -urN JavaScriptCore-0rig/kjs/protected_values.cpp JavaScriptCore/kjs/protected_values.cpp
++--- JavaScriptCore-0rig/kjs/protected_values.cpp	2010-02-26 12:57:50.000000000 +0100
+++++ JavaScriptCore/kjs/protected_values.cpp	2010-02-26 12:59:13.000000000 +0100
++@@ -195,7 +195,7 @@
++ 
++ template <int size> static unsigned hash(ValueImp *pointer);
++ 
++-template <> static inline unsigned hash<4>(ValueImp *pointer) 
+++template <> inline unsigned hash<4>(ValueImp *pointer)
++ {
++   int a = (int)(intptr_t)PHI;
++   int b = (int)(intptr_t)pointer;
++@@ -214,7 +214,7 @@
++   return (unsigned)c;
++ }
++ 
++-template <> static inline unsigned hash<8>(ValueImp *pointer)
+++template <> inline unsigned hash<8>(ValueImp *pointer)
++ {
++   int a = (int)PHI;
++   int b = (int)(intptr_t)pointer;
+diff --git a/recipes/gtk-webcore/osb-jscore_svn.bb b/recipes/gtk-webcore/osb-jscore_svn.bb
+index 52c56f9..b8c6ee2 100644
+--- a/recipes/gtk-webcore/osb-jscore_svn.bb
++++ b/recipes/gtk-webcore/osb-jscore_svn.bb
+@@ -7,7 +7,9 @@ PV = "0.5.2+svnr${SRCPV}"
+ PR = "r1"
  
--PR = "${INC_PR}.3"
-+PR = "${INC_PR}.4"
+ SRC_URI = "svn://gtk-webcore.svn.sourceforge.net/svnroot/gtk-webcore/trunk;module=JavaScriptCore;proto=https \
+-           file://gcc4-fno-threadsafe-statics-JavaScriptCore.patch;patch=1"
++           file://gcc4-fno-threadsafe-statics-JavaScriptCore.patch;patch=1 \
++	   file://no-static-templates.patch;patch=1 \
++	"
  
- BBCLASSEXTEND = "native"
+ S = "${WORKDIR}/JavaScriptCore"
  
- DEPENDS_virtclass-native = "libpng-native atk-native pango-native cairo-native libxrender-native libxext-native"
-+RRECOMMENDS_${PN}_virtclass-native = ""
- PROVIDES_virtclass-native = "gdk-pixbuf-csource-native"
- 
- # Enable xkb selectively
 -- 
-1.7.0
+1.6.0.2
 
 
 
