@@ -1,17 +1,17 @@
 Received: from li38-254.members.linode.com ([207.192.74.254]
 	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sgarman@zenlinux.com>) id 1NpvZ8-0002xy-44
+	(envelope-from <sgarman@zenlinux.com>) id 1NpvbG-00034m-EE
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Mar 2010 04:29:40 +0100
+	Fri, 12 Mar 2010 04:31:51 +0100
 Received: from [192.168.1.12] (c-76-115-42-183.hsd1.or.comcast.net
 	[76.115.42.183])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by masterfoo.zenlinux.com (Postfix) with ESMTP id 55AFA301DD
+	by masterfoo.zenlinux.com (Postfix) with ESMTP id 6215F301DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Mar 2010 22:26:31 -0500 (EST)
-Message-ID: <4B99B467.2090807@zenlinux.com>
-Date: Thu, 11 Mar 2010 19:26:31 -0800
+	Thu, 11 Mar 2010 22:28:46 -0500 (EST)
+Message-ID: <4B99B4EE.5020304@zenlinux.com>
+Date: Thu, 11 Mar 2010 19:28:46 -0800
 From: Scott Garman <sgarman@zenlinux.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
 	rv:1.9.1.8) Gecko/20100227 Lightning/1.0b1 Thunderbird/3.0.3
@@ -19,10 +19,11 @@ MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <4B99791E.1020102@zenlinux.com>
 	<19c1b8a91003111618u5db39b2ft1b614484f5814442@mail.gmail.com>
-In-Reply-To: <19c1b8a91003111618u5db39b2ft1b614484f5814442@mail.gmail.com>
+	<4B99B467.2090807@zenlinux.com>
+In-Reply-To: <4B99B467.2090807@zenlinux.com>
 X-MasterFoo-MailScanner-Information: Please contact the ISP for more
 	information
-X-MailScanner-ID: 55AFA301DD.66D1D
+X-MailScanner-ID: 6215F301DD.99D8E
 X-MasterFoo-MailScanner: Found to be clean
 X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
 X-SA-Exim-Connect-IP: 207.192.74.254
@@ -47,28 +48,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Mar 2010 03:29:40 -0000
-X-Groupsio-MsgNum: 17532
-Content-Type: multipart/mixed; boundary="------------050601040508090401030502"
+X-List-Received-Date: Fri, 12 Mar 2010 03:31:51 -0000
+X-Groupsio-MsgNum: 17533
+Content-Type: multipart/mixed; boundary="------------030203080608010804030409"
 
---------------050601040508090401030502
+--------------030203080608010804030409
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 03/11/2010 04:18 PM, Khem Raj wrote:
-> Thanks for the patch. While this change looks ok. You should submit a full patch
-> where you also delete the unneeded recipes and with proper sign-off
->
-> http://wiki.openembedded.net/index.php/Commit_Policy
-> http://wiki.openembedded.net/index.php/Commit_log_example
->
-> might help
->
-> and also formatting patch with git format-patch would be nice.
+On 03/11/2010 07:26 PM, Scott Garman wrote:
+> Gotcha, thanks for the feedback. Let's try this then. In the future I
+> assume the format-patch email should be sent directly to the list and
+> not as an attachment - correct me if I'm mistaken.
 
-Gotcha, thanks for the feedback. Let's try this then. In the future I 
-assume the format-patch email should be sent directly to the list and 
-not as an attachment - correct me if I'm mistaken.
+...and it would be helpful if I actually included the patch this time.
 
 Scott
 
@@ -76,7 +69,7 @@ Scott
 Scott Garman
 sgarman at zenlinux dot com
 
---------------050601040508090401030502
+--------------030203080608010804030409
 Content-Type: text/x-patch;
  name="0001-zlib-convert-to-new-style-staging-and-BBCLASSEXTEND.patch"
 Content-Transfer-Encoding: 7bit
@@ -143,4 +136,4 @@ index d995869..db4b16b 100644
 1.6.3.3
 
 
---------------050601040508090401030502--
+--------------030203080608010804030409--
