@@ -1,38 +1,35 @@
-Received: from mail-iw0-f184.google.com ([209.85.223.184])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NpsdT-0003UB-Jt
+Received: from li38-254.members.linode.com ([207.192.74.254]
+	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <sgarman@zenlinux.com>) id 1NpvZ8-0002xy-44
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Mar 2010 01:22:00 +0100
-Received: by iwn14 with SMTP id 14so687544iwn.12
+	Fri, 12 Mar 2010 04:29:40 +0100
+Received: from [192.168.1.12] (c-76-115-42-183.hsd1.or.comcast.net
+	[76.115.42.183])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by masterfoo.zenlinux.com (Postfix) with ESMTP id 55AFA301DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Mar 2010 16:18:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=McOKBWm+AbiXKgvlnEQL/fNbbP8bV44jLWQM0w8p20w=;
-	b=gTcBD1fZgnwgZW6bQH0He1cCbEJMI+9ZLQ4QRULRx1a31vozCwjk0EkqQDqLSI55Zn
-	oMYAZtUy8x3p3RDbmGa5ywSNkB27DGUyi6cttO1zVhPr/IIhugKbGGxgSyI4QD9Hitzt
-	cfPBGVblhwSZCYMIKv6wnvMkQhwz+J8h9sws0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=IMs3q5d7oycIFkr3hd9UdSFIDkJ2vV8luqnYUr7IHXQKrJHjhJkBiZ9iWcwuVzxKGu
-	al9yOdJcKEMUBhHHjkuh0vQ8dbqvIMEwQJUxy+h5vzbuJqBnzTvRZ0ETLI5znMt6EnvV
-	qfMCDj7edDm97/OnbWOocH/baAWas/egkjVO0=
+	Thu, 11 Mar 2010 22:26:31 -0500 (EST)
+Message-ID: <4B99B467.2090807@zenlinux.com>
+Date: Thu, 11 Mar 2010 19:26:31 -0800
+From: Scott Garman <sgarman@zenlinux.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.8) Gecko/20100227 Lightning/1.0b1 Thunderbird/3.0.3
 MIME-Version: 1.0
-Received: by 10.231.167.4 with SMTP id o4mr174709iby.66.1268353132357; Thu, 11 
-	Mar 2010 16:18:52 -0800 (PST)
-In-Reply-To: <4B99791E.1020102@zenlinux.com>
-References: <4B99791E.1020102@zenlinux.com>
-Date: Thu, 11 Mar 2010 16:18:52 -0800
-Message-ID: <19c1b8a91003111618u5db39b2ft1b614484f5814442@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.184
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <4B99791E.1020102@zenlinux.com>
+	<19c1b8a91003111618u5db39b2ft1b614484f5814442@mail.gmail.com>
+In-Reply-To: <19c1b8a91003111618u5db39b2ft1b614484f5814442@mail.gmail.com>
+X-MasterFoo-MailScanner-Information: Please contact the ISP for more
+	information
+X-MailScanner-ID: 55AFA301DD.66D1D
+X-MasterFoo-MailScanner: Found to be clean
+X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
+X-SA-Exim-Connect-IP: 207.192.74.254
+X-SA-Exim-Mail-From: sgarman@zenlinux.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -50,45 +47,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Mar 2010 00:22:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 12 Mar 2010 03:29:40 -0000
+X-Groupsio-MsgNum: 17532
+Content-Type: multipart/mixed; boundary="------------050601040508090401030502"
 
-On Thu, Mar 11, 2010 at 3:13 PM, Scott Garman <sgarman@zenlinux.com> wrote:
-> Hi all,
+--------------050601040508090401030502
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+
+On 03/11/2010 04:18 PM, Khem Raj wrote:
+> Thanks for the patch. While this change looks ok. You should submit a full patch
+> where you also delete the unneeded recipes and with proper sign-off
 >
-> Attached is my first OE patch submission, to convert the zlib recipe to use
-> BBCLASSEXTEND and cleanup the do_stage() task.
+> http://wiki.openembedded.net/index.php/Commit_Policy
+> http://wiki.openembedded.net/index.php/Commit_log_example
 >
-> I would like to start making regular contributions to OE, and am starting
-> with the basics. Any guidance from the more experienced folks is gratefully
-> accepted.
-
-Thanks for the patch. While this change looks ok. You should submit a full patch
-where you also delete the unneeded recipes and with proper sign-off
-
-http://wiki.openembedded.net/index.php/Commit_Policy
-http://wiki.openembedded.net/index.php/Commit_log_example
-
-might help
-
-and also formatting patch with git format-patch would be nice.
-
-Thanks
-
--Khem
-
+> might help
 >
-> Scott
->
-> --
-> Scott Garman
-> sgarman at zenlinux dot com
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+> and also formatting patch with git format-patch would be nice.
+
+Gotcha, thanks for the feedback. Let's try this then. In the future I 
+assume the format-patch email should be sent directly to the list and 
+not as an attachment - correct me if I'm mistaken.
+
+Scott
+
+-- 
+Scott Garman
+sgarman at zenlinux dot com
+
+--------------050601040508090401030502
+Content-Type: text/x-patch;
+ name="0001-zlib-convert-to-new-style-staging-and-BBCLASSEXTEND.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename*0="0001-zlib-convert-to-new-style-staging-and-BBCLASSEXTEND.pat";
+ filename*1="ch"
+
+From 322589252447f6bb4a96b79b5495001f6cb64f12 Mon Sep 17 00:00:00 2001
+From: Scott Garman <sgarman@zenlinux.com>
+Date: Thu, 11 Mar 2010 19:15:29 -0800
+Subject: [PATCH] zlib: convert to new style staging and BBCLASSEXTEND
+
+---
+ recipes/zlib/zlib-native_1.2.3.bb |    5 -----
+ recipes/zlib/zlib-sdk_1.2.3.bb    |    4 ----
+ recipes/zlib/zlib_1.2.3.bb        |    6 ++----
+ 3 files changed, 2 insertions(+), 13 deletions(-)
+ delete mode 100644 recipes/zlib/zlib-native_1.2.3.bb
+ delete mode 100644 recipes/zlib/zlib-sdk_1.2.3.bb
+
+diff --git a/recipes/zlib/zlib-native_1.2.3.bb b/recipes/zlib/zlib-native_1.2.3.bb
+deleted file mode 100644
+index d7e0777..0000000
+--- a/recipes/zlib/zlib-native_1.2.3.bb
++++ /dev/null
+@@ -1,5 +0,0 @@
+-require zlib_${PV}.bb
+-ZLIB_EXTRA = ""
+-DEPENDS = "libtool-native"
+-
+-inherit native
+diff --git a/recipes/zlib/zlib-sdk_1.2.3.bb b/recipes/zlib/zlib-sdk_1.2.3.bb
+deleted file mode 100644
+index 4863395..0000000
+--- a/recipes/zlib/zlib-sdk_1.2.3.bb
++++ /dev/null
+@@ -1,4 +0,0 @@
+-require zlib_${PV}.bb
+-LIB_EXTRA = ""
+-
+-inherit sdk
+diff --git a/recipes/zlib/zlib_1.2.3.bb b/recipes/zlib/zlib_1.2.3.bb
+index d995869..db4b16b 100644
+--- a/recipes/zlib/zlib_1.2.3.bb
++++ b/recipes/zlib/zlib_1.2.3.bb
+@@ -3,7 +3,7 @@ SECTION = "libs"
+ PRIORITY = "required"
+ HOMEPAGE = "http://www.gzip.org/zlib/"
+ LICENSE = "zlib"
+-PR ="r5"
++PR ="r6"
+ 
+ SRC_URI = "http://www.zlib.net/zlib-1.2.3.tar.bz2 \
+ 		file://visibility.patch;patch=1 \
+@@ -15,6 +15,4 @@ DEPENDS = "libtool-cross"
+ 
+ inherit autotools
+ 
+-do_stage() {
+-	autotools_stage_all
+-}
++BBCLASSEXTEND = "native sdk"
+-- 
+1.6.3.3
 
 
+--------------050601040508090401030502--
