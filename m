@@ -1,36 +1,39 @@
-Received: from smtp-out04.alice.it ([85.37.17.100])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1NqAdr-0000yx-8g
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NqB19-0001OY-Ml
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Mar 2010 20:35:27 +0100
-Received: from FBCMMO04.fbc.local ([192.168.184.135]) by smtp-out04.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 12 Mar 2010 20:32:28 +0100
-Received: from FBCMCL01B09.fbc.local ([192.168.171.26]) by FBCMMO04.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 12 Mar 2010 20:32:23 +0100
-Received: from localhost.localdomain ([79.45.140.235]) by
-	FBCMCL01B09.fbc.local with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 12 Mar 2010 20:32:23 +0100
-Date: Fri, 12 Mar 2010 19:32:16 +0000
-From: GNUtoo <GNUtoo@no-log.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100312193216.4e074959@no-log.org>
-In-Reply-To: <1F44AB42-C908-4F2C-B4DB-689EC72B79BC@mac.com>
-References: <1F44AB42-C908-4F2C-B4DB-689EC72B79BC@mac.com>
-X-Mailer: Claws Mail 3.6.1 (GTK+ 2.18.6; i686-angstrom-linux-gnu)
+	Fri, 12 Mar 2010 20:59:36 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2CJuT3I027578;
+	Fri, 12 Mar 2010 19:56:29 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 27325-05; Fri, 12 Mar 2010 19:56:25 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2CJu8Ll027572
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Fri, 12 Mar 2010 19:56:15 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Martyn Welch <martyn.welch@ge.com>
+In-Reply-To: <4B9A02C9.3030205@ge.com>
+References: <20100310103133.14548.62608.stgit@ES-J7S4D2J.amer.consind.ge.com>
+	<1268341295.1625.7.camel@rex>  <4B9A02C9.3030205@ge.com>
+Date: Fri, 12 Mar 2010 11:56:05 -0800
+Message-ID: <1268423765.1625.18.camel@rex>
 Mime-Version: 1.0
-X-OriginalArrivalTime: 12 Mar 2010 19:32:23.0401 (UTC)
-	FILETIME=[BD47AD90:01CAC21A]
-X-SA-Exim-Connect-IP: 85.37.17.100
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.2 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OpenGL v1.3 recipe for TI OMAP 3503 gumstix Overo
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] Allow spectrum fw to build behind a proxy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,18 +47,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Mar 2010 19:35:28 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Fri, 12 Mar 2010 19:59:36 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Fri, 26 Feb 2010 23:27:03 +0400
-Elvis Dowson <elvis.dowson@mac.com> wrote:
+On Fri, 2010-03-12 at 09:00 +0000, Martyn Welch wrote:
+> Richard Purdie wrote:
+> > How about the recipe in Poky for this
+> > (meta/packages/orinoco/spectrum-fw.bb)? I think all these problems were
+> > addressed there.
+> >   
+> I tried exactly that first, wget keeps trying to download:
+> 
+> "ftp://symstore.longisland.com/Symstore/services_download/wirless_prod/MC"
+> 
+> not:
+> 
+> "ftp://symstore.longisland.com/Symstore/services_download/wirless_prod/MC&DriverOnlyInstallers.zip"
+> 
+> Has Bitbake been patched up in poky to handle "&" differently?
 
->         Would anyone happen to know which OE recipe would allow me to
-> include the classic OpenGL v1.3 library? I just want a software only
-> OpenGL rendering context. 
-maybe I'm making a huge mistake but there is swrast and mesa.
+Ah, I remember this now. It is not a bitbake bug put a base.bbclass bug
+as something somewhere has incorrect quoting. Its been fixed in Poky but
+probably should be pushed into OE too. If you find the commit where I
+last touched the spectrum-fw driver you'll find the core class change
+too I suspect. It'd be good to get synced up on that.
 
-Denis.
+Cheers,
+
+Richard
+
+
 
 
