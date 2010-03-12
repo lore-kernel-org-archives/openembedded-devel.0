@@ -1,37 +1,35 @@
 Received: from smtprelay-h12.telenor.se ([62.127.194.5])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1NqDMi-00017r-18
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1NqDMj-00017q-0i
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 12 Mar 2010 23:30:00 +0100
+	Fri, 12 Mar 2010 23:30:02 +0100
 Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
-	by smtprelay-h12.telenor.se (Postfix) with ESMTP id 64CEE241F0
+	by smtprelay-h12.telenor.se (Postfix) with ESMTP id 61648241EE
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 12 Mar 2010 23:26:59 +0100 (CET)
 X-SMTPAUTH-B2: 
 X-SENDER-IP: 83.227.59.242
 X-IronPort-Anti-Spam-Filtered: true
 X-IronPort-Anti-Spam-Result: Ao85AL9OmktT4zvyPGdsb2JhbACHYZMIDAEBAQE3La42jVSEewQ
-X-IronPort-AV: E=Sophos;i="4.49,628,1262559600"; d="scan'208";a="49492110"
+X-IronPort-AV: E=Sophos;i="4.49,628,1262559600"; d="scan'208";a="49492109"
 Received: from c-f23be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
 	localhost.localdomain) ([83.227.59.242])
 	by ipb1.telenor.se with ESMTP; 12 Mar 2010 23:26:56 +0100
 From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 12 Mar 2010 23:26:55 +0100
-Message-Id: <1268432815-4556-2-git-send-email-ulf.samuelsson@atmel.com>
+Date: Fri, 12 Mar 2010 23:26:54 +0100
+Message-Id: <1268432815-4556-1-git-send-email-ulf.samuelsson@atmel.com>
 X-Mailer: git-send-email 1.6.0.2
-In-Reply-To: <1268432815-4556-1-git-send-email-ulf.samuelsson@atmel.com>
-References: <1268432815-4556-1-git-send-email-ulf.samuelsson@atmel.com>
 X-SA-Exim-Connect-IP: 62.127.194.5
 X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=AWL,BAYES_00,
+X-Spam-Status: No, score=-2.8 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_LOW,SPF_SOFTFAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Subject: [PATCH] at91sam9-image: Add real author of file
+Subject: [PATCH] multimedia:;Add media contents to rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,30 +43,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Mar 2010 22:30:01 -0000
+X-List-Received-Date: Fri, 12 Mar 2010 22:30:02 -0000
 
-From: Nicolas Ferre <nicolas.ferre@atmel.com>
+This package will copy the contents of "multimedia.tar.bz2."
+(Note the dot at the end) to the "/home/root/multimedia" directory
+in the target. By replacing the empty default file, you
+can add your own multimedia files for testing.
 
-The previous commit lacked --author="Nicolas Ferre <nicolas.ferre@atmel.com>
 Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 ---
- recipes/images/x11-at91sam9-image.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes/multimedia/files/multimedia.tar.bz2. |  Bin 0 -> 118 bytes
+ recipes/multimedia/multimedia_0.1.bb         |   19 +++++++++++++++++++
+ 2 files changed, 19 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/multimedia/files/multimedia.tar.bz2.
+ create mode 100644 recipes/multimedia/multimedia_0.1.bb
 
-diff --git a/recipes/images/x11-at91sam9-image.bb b/recipes/images/x11-at91sam9-image.bb
-index 663d824..c2bd723 100755
---- a/recipes/images/x11-at91sam9-image.bb
-+++ b/recipes/images/x11-at91sam9-image.bb
-@@ -32,8 +32,8 @@ ANGSTROM_EXTRA_INSTALL += " \
- 	dosfstools \
- 	mtd-utils \
- 	multimedia \
--#	nbench-byte \
- 	gpe-mini-browser \
-+#	nbench-byte \
- #	pointercal \
- 	"
- 
+diff --git a/recipes/multimedia/files/multimedia.tar.bz2. b/recipes/multimedia/files/multimedia.tar.bz2.
+new file mode 100644
+index 0000000000000000000000000000000000000000..09d719c63e6aa4afafce68e4bd6131e1a484537a
+GIT binary patch
+literal 118
+zcmV-+0Ez!XT4*^jL0KkKS(4QIK>z?-dw{@z03bjCe}DiGV+LLz1PCAibrDVIr<61U
+z(g&0hL?8j6G-*F=sE|@fLNkjR-2x^Ik_Ts_))SHl@W5~jiU45mLa9=&!C73{3N630
+Y^gyx_&QUp?$p_-@NT&)C5?Y^VAXlj?#Q*>R
+
+literal 0
+HcmV?d00001
+
+diff --git a/recipes/multimedia/multimedia_0.1.bb b/recipes/multimedia/multimedia_0.1.bb
+new file mode 100644
+index 0000000..5776059
+--- /dev/null
++++ b/recipes/multimedia/multimedia_0.1.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "MultiMedia files"
++PR = "r1"
++
++# Note '.' at end of the filename to avoid decompress by bitbake
++SRC_URI = "\
++	file://multimedia.tar.bz2. \
++	"
++
++do_install() {
++	install -d ${D}/home/root/multimedia
++	tar jxvf ${WORKDIR}/multimedia.tar.bz2.	-C ${D}/home/root/multimedia
++	rm -f ${D}/home/root/multimedia/.empty
++}
++
++FILES_${PN} = "\
++	/home/root/multimedia/* \
++	"
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
 -- 
 1.6.0.2
 
