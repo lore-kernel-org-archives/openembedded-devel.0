@@ -1,22 +1,35 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1NqSIK-0006TY-6e
+	(envelope-from <dp@xora.org.uk>) id 1NqSOe-0001M5-F1
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Mar 2010 15:26:29 +0100
-Received: (qmail 18383 invoked by uid 1003); 13 Mar 2010 14:23:22 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 13 Mar 2010 14:23:22 -0000
-Message-ID: <4B9B9FD8.1050505@balister.org>
-Date: Sat, 13 Mar 2010 09:23:20 -0500
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.8) Gecko/20100301 Fedora/3.0.3-1.fc11 Thunderbird/3.0.3
-MIME-Version: 1.0
+	Sat, 13 Mar 2010 15:33:03 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 87B4FA5093
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 13 Mar 2010 14:29:57 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id LjQrLa4bflNU
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 13 Mar 2010 14:29:56 +0000 (GMT)
+Received: from xora-eee.xora.org.uk (188-220-38-49.zone11.bethere.co.uk
+	[188.220.38.49])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 4CCC7A508E
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 13 Mar 2010 14:29:56 +0000 (GMT)
+Received: by xora-eee.xora.org.uk (Postfix, from userid 500)
+	id AA373219E3; Sat, 13 Mar 2010 14:30:08 +0000 (GMT)
+Date: Sat, 13 Mar 2010 14:30:08 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100313143008.GC13080@xora-eee.xora.org.uk>
 References: <BAY127-W193ABA8169925C266555F8D8300@phx.gbl>
+MIME-Version: 1.0
 In-Reply-To: <BAY127-W193ABA8169925C266555F8D8300@phx.gbl>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+User-Agent: Mutt/1.5.20 (2009-08-17)
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00 autolearn=ham
@@ -37,41 +50,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Mar 2010 14:26:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 13 Mar 2010 14:33:05 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 03/13/2010 09:17 AM, saleh usman wrote:
->
+On Sat, Mar 13, 2010 at 07:17:07PM +0500, saleh usman wrote:
+> 
 > When I try to bitbake any recipe I get an error of Permission denied while owner of directory is that  user which is loged in.
 > How to fix this error .
 > Log follows.
+> 
+You seem to have mixed up running as root and running as user, never run
+bitbake as root and make sure all your files are owned by your user.
 
-I think you are running bitbake as one user (who can't access your home 
-directory) and trying to write some files into your home directory.
+Graeme
 
-Philip
-
->
 > [Saleh@localhost root]$ bitbake x-11-image
 > Traceback (most recent call last):
->    File "/sdr/bitbake/bin/bitbake", line 143, in<module>
->      main()
->    File "/sdr/bitbake/bin/bitbake", line 123, in main
->      cooker.parseConfiguration()
->    File "/sdr/bitbake/lib/bb/cooker.py", line 68, in parseConfiguration
->      self.parseConfigurationFile( os.path.join( "conf", "bitbake.conf" ) )
->    File "/sdr/bitbake/lib/bb/cooker.py", line 402, in parseConfigurationFile
->      bb.fetch.fetcher_init(self.configuration.data)
->    File "/sdr/bitbake/lib/bb/fetch/__init__.py", line 93, in fetcher_init
->      pd = persist_data.PersistData(d)
->    File "/sdr/bitbake/lib/bb/persist_data.py", line 52, in __init__
->      bb.mkdirhier(self.cachedir)
->    File "/sdr/bitbake/lib/bb/__init__.py", line 138, in mkdirhier
->      if e.errno != 17: raise e
+>   File "/sdr/bitbake/bin/bitbake", line 143, in <module>
+>     main()
+>   File "/sdr/bitbake/bin/bitbake", line 123, in main
+>     cooker.parseConfiguration()
+>   File "/sdr/bitbake/lib/bb/cooker.py", line 68, in parseConfiguration
+>     self.parseConfigurationFile( os.path.join( "conf", "bitbake.conf" ) )
+>   File "/sdr/bitbake/lib/bb/cooker.py", line 402, in parseConfigurationFile
+>     bb.fetch.fetcher_init(self.configuration.data)
+>   File "/sdr/bitbake/lib/bb/fetch/__init__.py", line 93, in fetcher_init
+>     pd = persist_data.PersistData(d)
+>   File "/sdr/bitbake/lib/bb/persist_data.py", line 52, in __init__
+>     bb.mkdirhier(self.cachedir)
+>   File "/sdr/bitbake/lib/bb/__init__.py", line 138, in mkdirhier
+>     if e.errno != 17: raise e
 > OSError: [Errno 13] Permission denied: '/home/saleh'
->
->   		 	   		
+> 
+>  		 	   		  
 > _________________________________________________________________
 > Hotmail: Free, trusted and rich email service.
 > https://signup.live.com/signup.aspx?id=60969
@@ -79,6 +91,5 @@ Philip
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
