@@ -1,41 +1,31 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NqDzU-0006iu-Cv
+	(envelope-from <holger+oe@freyther.de>) id 1NqFO6-0002KV-Bx
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Mar 2010 00:10:01 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NqDwZ-0001uN-Bq from Tom_Rini@mentor.com ;
-	Fri, 12 Mar 2010 15:06:59 -0800
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Fri, 12 Mar 2010 15:06:58 -0800
-Received: from 172.30.80.6 ([172.30.80.6]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Fri, 12 Mar 2010 23:06:55 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	12 Mar 2010 16:06:50 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Sat, 13 Mar 2010 01:39:30 +0100
+Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
+	[123.192.181.204])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 38A801B10C02
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 13 Mar 2010 00:39:20 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1268429946-12810-1-git-send-email-ulf.samuelsson@atmel.com>
-References: <1268429946-12810-1-git-send-email-ulf.samuelsson@atmel.com>
-Organization: Mentor Graphics Corporation
-Date: Fri, 12 Mar 2010 16:06:50 -0700
-Message-ID: <1268435210.17250.15.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 12 Mar 2010 23:06:59.0180 (UTC)
-	FILETIME=[B7D7A2C0:01CAC238]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Sat, 13 Mar 2010 01:35:39 +0100
+User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
+References: <1268432046-4052-1-git-send-email-ulf.samuelsson@atmel.com>
+	<1268432046-4052-2-git-send-email-ulf.samuelsson@atmel.com>
+In-Reply-To: <1268432046-4052-2-git-send-email-ulf.samuelsson@atmel.com>
+MIME-Version: 1.0
+Message-Id: <201003130135.51254.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Subject: Re: [PATCH] fbv-1.0: Build fbv with support for jpeg and bmp
+Subject: Re: [PATCH] fbv-1.0: Bump recipe version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,22 +39,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Mar 2010 23:10:02 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 13 Mar 2010 00:39:30 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Fri, 2010-03-12 at 22:39 +0100, Ulf Samuelsson wrote:
-> fbv today only supports png files.
-> This patch will ensure fbv also support jpeg and bmp formats
+On Friday 12 March 2010 23:14:06 Ulf Samuelsson wrote:
+> Forgot to bump recipe version in previous patch
 
-Please bump the PR in one go and don't stop installing the man pages
-(they end up in the -doc package).  Also, you shouldn't need to modify
-PACKAGES at all.
-
-Finally, hiccup or dejvu?  Thanks!
-
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+then squash the two patches together... but more interestingly why do you 
+comment out the installing of man pages? First of all we normally do not 
+comment out as we have a SCM, second it would be nice to know what was wrong 
+with the man pages
 
 
