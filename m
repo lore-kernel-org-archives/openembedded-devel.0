@@ -1,45 +1,37 @@
-Received: from mail-iw0-f174.google.com ([209.85.223.174])
+Received: from smtprelay-h11.telenor.se ([62.127.194.4])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NqWXt-00087d-Sd
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1NqWbB-0008Mt-WB
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Mar 2010 19:58:51 +0100
-Received: by iwn4 with SMTP id 4so889386iwn.3
+	Sat, 13 Mar 2010 20:02:10 +0100
+Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
+	by smtprelay-h11.telenor.se (Postfix) with ESMTP id 9845E440FB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Mar 2010 10:55:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=ClIz/blpcp3O3cC350P65TW7Z4tqhOR8gW3PfR30Kkw=;
-	b=WT3oWn3uZ0t5uk2+3DLqvmwI+6qYjRHlIIpJSli5xX2UPTUjtNZRCiV8mvqNHkeXm9
-	Z+JFbfRezK5D5jr27mtrW1RsXAjiSg/TudJlGCZqO324vLHhXbacwnU3Vsk4moBfNhi6
-	k/N+BWVi70HT6hWmvy1Sqh3sAMjBtu9iv+Ky8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=GUbO8XPr4OVz5bGffFjd2tNbtk27SBY11VnHCK9XphE8QpNGgzFwh3ERrZvCrAoXAs
-	F+U55Jj+vQzD0aeXgcyPlGoh8ZaDqqcuvOIP9kOTCS2r1r/rRl9ATTRJFJH2Ucq7SthL
-	lyaqQ2FqIdOdfxLubzKXkI/yY7s6IOpUcYrxw=
-MIME-Version: 1.0
-Received: by 10.231.148.1 with SMTP id n1mr659039ibv.96.1268506544910; Sat, 13 
-	Mar 2010 10:55:44 -0800 (PST)
-In-Reply-To: <4B9BD33E.502@zenlinux.com>
-References: <1268465302-3725-1-git-send-email-sgarman@zenlinux.com>
-	<19c1b8a91003130002g55d34a65l9858e5ae62062eb3@mail.gmail.com>
-	<4B9BD33E.502@zenlinux.com>
-Date: Sat, 13 Mar 2010 10:55:44 -0800
-Message-ID: <19c1b8a91003131055o2e259175of495eee99dae47ff@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Sat, 13 Mar 2010 19:59:12 +0100 (CET)
+X-SMTPAUTH-B2: 
+X-SENDER-IP: 83.227.59.242
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: Aoc6AMRvm0tT4zvyPGdsb2JhbACHYZMPDAEBAQE3LaxEjH6EewQ
+X-IronPort-AV: E=Sophos;i="4.49,633,1262559600"; d="scan'208";a="49674402"
+Received: from c-f23be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	localhost.localdomain) ([83.227.59.242])
+	by ipb2.telenor.se with ESMTP; 13 Mar 2010 19:59:09 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.174
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Sat, 13 Mar 2010 19:59:08 +0100
+Message-Id: <1268506748-18802-2-git-send-email-ulf.samuelsson@atmel.com>
+X-Mailer: git-send-email 1.6.0.2
+In-Reply-To: <1268506748-18802-1-git-send-email-ulf.samuelsson@atmel.com>
+References: <1268506748-18802-1-git-send-email-ulf.samuelsson@atmel.com>
+X-SA-Exim-Connect-IP: 62.127.194.4
+X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] sed: migrate -native to BBCLASSEXTEND
+Cc: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Subject: [PATCH v3 2/2] multimedia: Media contents (currently empty)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,38 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Mar 2010 18:58:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 13 Mar 2010 19:02:10 -0000
 
-On Sat, Mar 13, 2010 at 10:02 AM, Scott Garman <sgarman@zenlinux.com> wrote=
-:
-> On 03/13/2010 12:02 AM, Khem Raj wrote:
->>
->> On Fri, Mar 12, 2010 at 11:28 PM, Scott Garman<sgarman@zenlinux.com>
->> =A0wrote:
->>>
->>> Signed-off-by: Scott Garman<sgarman@zenlinux.com>
->>
->> can you also convert other native recipes for sed to use BBCLASSEXTEND
->
-> Yep, that was my plan. Although there is only one other sed-native recipe
-> for v4.1.1. Should I just convert that one, or is there also any value in
-> adding BBCLASSEXTEND =3D "native" for the two other v4.0.x recipes?
+This patch creates the file "multimedia.tar.bz2." containing the
+default media to be copied to "/usr/share/multimedia"
+(Note the dot at the end of the filename)
+By replacing this file with your own, you can easily add
+multimedia files to your file system for a demo.
 
-just convert one's that are there.
+Patch can be applied by
+$ hg init
+$ hg import --no-commit -f <patch>
 
->
-> Scott
->
-> --
-> Scott Garman
-> sgarman at zenlinux dot com
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+"hg" is part of the "mercurial" package
+
+Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+---
+ recipes/multimedia/files/multimedia.tar.bz2. |  Bin 0 -> 118 bytes
+ 1 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/multimedia/files/multimedia.tar.bz2.
+
+diff --git a/recipes/multimedia/files/multimedia.tar.bz2. b/recipes/multimedia/files/multimedia.tar.bz2.
+new file mode 100644
+index 0000000000000000000000000000000000000000..09d719c63e6aa4afafce68e4bd6131e1a484537a
+GIT binary patch
+literal 118
+zcmV-+0Ez!XT4*^jL0KkKS(4QIK>z?-dw{@z03bjCe}DiGV+LLz1PCAibrDVIr<61U
+z(g&0hL?8j6G-*F=sE|@fLNkjR-2x^Ik_Ts_))SHl@W5~jiU45mLa9=&!C73{3N630
+Y^gyx_&QUp?$p_-@NT&)C5?Y^VAXlj?#Q*>R
+
+literal 0
+HcmV?d00001
+
+-- 
+1.6.0.2
+
 
 
