@@ -1,35 +1,29 @@
-Received: from smtprelay-h11.telenor.se ([62.127.194.4])
+Received: from qmta09.emeryville.ca.mail.comcast.net ([76.96.30.96])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1NqWbB-0008Mu-UJ
+	(envelope-from <enelson1000@comcast.net>) id 1NqXsh-0001AL-Tj
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Mar 2010 20:02:14 +0100
-Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
-	by smtprelay-h11.telenor.se (Postfix) with ESMTP id 9279C440EB
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Mar 2010 19:59:12 +0100 (CET)
-X-SMTPAUTH-B2: 
-X-SENDER-IP: 83.227.59.242
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: Aoc6AMRvm0tT4zvyPGdsb2JhbACHYZMPDAEBAQE3LaxEjH6EewQ
-X-IronPort-AV: E=Sophos;i="4.49,633,1262559600"; d="scan'208";a="49674401"
-Received: from c-f23be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	localhost.localdomain) ([83.227.59.242])
-	by ipb2.telenor.se with ESMTP; 13 Mar 2010 19:59:09 +0100
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+	Sat, 13 Mar 2010 21:24:25 +0100
+Received: from omta02.emeryville.ca.mail.comcast.net ([76.96.30.19])
+	by qmta09.emeryville.ca.mail.comcast.net with comcast
+	id skKh1d0030QkzPwA9kMKop; Sat, 13 Mar 2010 20:21:19 +0000
+Received: from [192.168.1.106] ([173.13.189.149])
+	by omta02.emeryville.ca.mail.comcast.net with comcast
+	id skMJ1d0073DqXwV8NkMJ4G; Sat, 13 Mar 2010 20:21:19 +0000
+From: ed <enelson1000@comcast.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 Mar 2010 19:59:07 +0100
-Message-Id: <1268506748-18802-1-git-send-email-ulf.samuelsson@atmel.com>
-X-Mailer: git-send-email 1.6.0.2
-X-SA-Exim-Connect-IP: 62.127.194.4
-X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
+Date: Sat, 13 Mar 2010 12:21:16 -0800
+Message-ID: <1268511676.24057.12.camel@ed-hp-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 76.96.30.96
+X-SA-Exim-Mail-From: enelson1000@comcast.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Subject: [PATCH v3 1/2] multimedia: Add media contents to rootfs
+Subject: Alignment trap - deprecation.pyo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,50 +37,131 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Mar 2010 19:02:14 -0000
+X-List-Received-Date: Sat, 13 Mar 2010 20:24:25 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-This package will copy the contents of "multimedia.tar.bz2."
-(Note the dot at the end) to the "/usr/share/multimedia" directory
-in the target. By replacing the empty default file, you
-can add your own multimedia files for testing.
+I am trying to run a simple hello button python program using pygtk.
 
-Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
----
- recipes/multimedia/multimedia_0.1.bb |   23 +++++++++++++++++++++++
- 1 files changed, 23 insertions(+), 0 deletions(-)
- create mode 100644 recipes/multimedia/multimedia_0.1.bb
+I have built a minimal-gpe-image for the mini2440.
 
-diff --git a/recipes/multimedia/multimedia_0.1.bb b/recipes/multimedia/multimedia_0.1.bb
-new file mode 100644
-index 0000000..986fd1c
---- /dev/null
-+++ b/recipes/multimedia/multimedia_0.1.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "MultiMedia files"
-+PR = "r1"
-+
-+# This package allows you to add multimedia contents to the file system
-+# To add this, you create the file "multimedia.tar.bz2." and replace
-+# the default file included in the openembedded repository. 
-+# Note '.' at end of the filename to avoid decompress by bitbake
-+
-+SRC_URI = "\
-+	file://multimedia.tar.bz2. \
-+	"
-+
-+do_install() {
-+	install -d ${D}/usr/share/multimedia
-+	tar jxvf ${WORKDIR}/multimedia.tar.bz2.	-C ${D}/usr/share/multimedia
-+	rm -f ${D}/usr/share/multimedia/.empty
-+}
-+
-+FILES_${PN} = "\
-+	/usr/share/multimedia/* \
-+	"
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
--- 
-1.6.0.2
+But when I try and run the helloworld.py from the Pygtk tutorial.
+
+=========================================================
+
+#!/usr/bin/env python
+
+# example helloworld.py
+
+import pygtk
+pygtk.require('2.0')
+import gtk
+
+class HelloWorld:
+
+    # This is a callback function. The data arguments are ignored
+    # in this example. More on callbacks below.
+    def hello(self, widget, data=None):
+        print "Hello World"
+
+    def delete_event(self, widget, event, data=None):
+        # If you return FALSE in the "delete_event" signal handler,
+        # GTK will emit the "destroy" signal. Returning TRUE means
+        # you don't want the window to be destroyed.
+        # This is useful for popping up 'are you sure you want to quit?'
+        # type dialogs.
+        print "delete event occurred"
+
+        # Change FALSE to TRUE and the main window will not be destroyed
+        # with a "delete_event".
+        return False
+
+    def destroy(self, widget, data=None):
+        print "destroy signal occurred"
+        gtk.main_quit()
+
+    def __init__(self):
+        # create a new window
+        self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+    
+        # When the window is given the "delete_event" signal (this is
+given
+        # by the window manager, usually by the "close" option, or on
+the
+        # titlebar), we ask it to call the delete_event () function
+        # as defined above. The data passed to the callback
+        # function is NULL and is ignored in the callback function.
+        self.window.connect("delete_event", self.delete_event)
+    
+        # Here we connect the "destroy" event to a signal handler.  
+        # This event occurs when we call gtk_widget_destroy() on the
+window,
+        # or if we return FALSE in the "delete_event" callback.
+        self.window.connect("destroy", self.destroy)
+    
+        # Sets the border width of the window.
+        self.window.set_border_width(10)
+    
+        # Creates a new button with the label "Hello World".
+        self.button = gtk.Button("Hello World")
+    
+        # When the button receives the "clicked" signal, it will call
+the
+        # function hello() passing it None as its argument.  The hello()
+        # function is defined above.
+        self.button.connect("clicked", self.hello, None)
+    
+        # This will cause the window to be destroyed by calling
+        # gtk_widget_destroy(window) when "clicked".  Again, the destroy
+        # signal could come from here, or the window manager.
+        self.button.connect_object("clicked", gtk.Widget.destroy,
+self.window)
+    
+        # This packs the button into the window (a GTK container).
+        self.window.add(self.button)
+    
+        # The final step is to display this newly created widget.
+        self.button.show()
+    
+        # and the window
+        self.window.show()
+
+    def main(self):
+        # All PyGTK applications must have a gtk.main(). Control ends
+here
+        # and waits for an event to occur (like a key press or mouse
+event).
+        gtk.main()
+
+# If the program is run directly or passed as an argument to the python
+# interpreter then create a HelloWorld instance and show it
+if __name__ == "__main__":
+    hello = HelloWorld()
+    hello.main()
+
+==============================================================
+
+I get the follow error when I run
+#python -v pygtkHelloWorld.py
+
+# /usr/lib/python2.6/site-packages/gtk-2.0/gtk/_lazyutils.pyo
+matches /usr/lib/python2.6/site-packages/gtk-2.0/gtk/_lazyutils.py
+import gtk._lazyutils # precompiled
+from /usr/lib/python2.6/site-packages/gtk-2.0/gtk/_lazyutils.pyo
+# /usr/lib/python2.6/site-packages/gtk-2.0/gtk/deprecation.pyo
+matches /usr/lib/python2.6/site-packages/gtk-2.0/gtk/deprecation.py
+import gtk.deprecation # precompiled
+from /usr/lib/python2.6/site-packages/gtk-2.0/gtk/deprecation.pyo
+Alignment trap: python (2412) PC=0x40bfa3c4 Instr=0x280069c0
+Address=0xffffffff FSR 0x813
+Segmentation fault
+
+
+Does anyone have any ideas why it chokes at deprecation.pyo?????
+
+Thanks
+Ed
+
 
 
 
