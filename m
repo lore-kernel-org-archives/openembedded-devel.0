@@ -1,39 +1,39 @@
-Received: from smtprelay-b11.telenor.se ([62.127.194.20])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1NqVK9-0002Zj-BO
+Received: from li38-254.members.linode.com ([207.192.74.254]
+	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <sgarman@zenlinux.com>) id 1NqViV-0004j0-53
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 13 Mar 2010 18:40:34 +0100
-Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
-	by smtprelay-b11.telenor.se (Postfix) with ESMTP id 3F886144D3
+	Sat, 13 Mar 2010 19:05:39 +0100
+Received: from [192.168.1.12] (c-76-115-42-183.hsd1.or.comcast.net
+	[76.115.42.183])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by masterfoo.zenlinux.com (Postfix) with ESMTP id 2989E30278
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Mar 2010 18:37:28 +0100 (CET)
-X-SMTPAUTH-B2: 
-X-SENDER-IP: 83.227.59.242
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: ApsVAApcm0tT4zvyPGdsb2JhbAAHgwWEVZMbAQEBATepaIJSAY0KgTKCX2oE
-X-IronPort-AV: E=Sophos;i="4.49,632,1262559600"; d="scan'208";a="49692174"
-Received: from c-f23be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.224]) ([83.227.59.242])
-	by ipb1.telenor.se with ESMTP; 13 Mar 2010 18:37:28 +0100
-Message-ID: <4B9BCD57.9020308@atmel.com>
-Date: Sat, 13 Mar 2010 18:37:27 +0100
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Organization: Atmel Nordic AB
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	Sat, 13 Mar 2010 13:02:38 -0500 (EST)
+Message-ID: <4B9BD33E.502@zenlinux.com>
+Date: Sat, 13 Mar 2010 10:02:38 -0800
+From: Scott Garman <sgarman@zenlinux.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.8) Gecko/20100227 Lightning/1.0b1 Thunderbird/3.0.3
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1268466514-13547-1-git-send-email-ulf.samuelsson@atmel.com>
-	<201003131649.39596.marcin@juszkiewicz.com.pl>
-In-Reply-To: <201003131649.39596.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 62.127.194.20
-X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
+References: <1268465302-3725-1-git-send-email-sgarman@zenlinux.com>
+	<19c1b8a91003130002g55d34a65l9858e5ae62062eb3@mail.gmail.com>
+In-Reply-To: <19c1b8a91003130002g55d34a65l9858e5ae62062eb3@mail.gmail.com>
+X-MasterFoo-MailScanner-Information: Please contact the ISP for more
+	information
+X-MailScanner-ID: 2989E30278.A766B
+X-MasterFoo-MailScanner: Found to be clean
+X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
+X-SA-Exim-Connect-IP: 207.192.74.254
+X-SA-Exim-Mail-From: sgarman@zenlinux.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2 1/1] linux-atmel: Add support for latest AT91 kernel
+Subject: Re: [PATCH] sed: migrate -native to BBCLASSEXTEND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,43 +47,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Mar 2010 17:40:34 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 13 Mar 2010 18:05:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Marcin Juszkiewicz skrev:
-> Dnia sobota, 13 marca 2010 o 08:48:34 Ulf Samuelsson napisa=C5=82(a):
->> Add support for building AT91 2.6.30 kernel
->> Vanilla 2.6.30 recipe has moved on to 2.6.30.x
->>
->> Add maxim.org.za patches + Atmel experimental patches.
->> (With the exception of the SAM9M10-EK support)
->> Add support for configurable NAND flash partitions
->> Add support for sam9m10g45-ek
->>
->> The contents of the maxim & experimental kernel patches
->> has various authors described inide the patches.
->=20
-> NAK - please merge it into linux_2.6.30.bb as there is really no need t=
-o=20
-> duplicate it.
->=20
-> Regards,=20
+On 03/13/2010 12:02 AM, Khem Raj wrote:
+> On Fri, Mar 12, 2010 at 11:28 PM, Scott Garman<sgarman@zenlinux.com>  wrote:
+>> Signed-off-by: Scott Garman<sgarman@zenlinux.com>
+>
+> can you also convert other native recipes for sed to use BBCLASSEXTEND
 
-The reasons for doing it this way, is that this is something
-that has received extensive testing by our friends in Rousset.
-I tried doing it vs the generic 2.6.30 recipe, but
-since that adds a minor patch, this patchset breaks.
+Yep, that was my plan. Although there is only one other sed-native 
+recipe for v4.1.1. Should I just convert that one, or is there also any 
+value in adding BBCLASSEXTEND = "native" for the two other v4.0.x recipes?
 
-If I do it, then this minor patch needs to be optional
-and not applied for these boards.
-Obviously the minor patch can be applied by someone
-with more time to do testing.
+Scott
 
-
---=20
-Best Regards
-Ulf Samuelsson
-
+-- 
+Scott Garman
+sgarman at zenlinux dot com
 
 
