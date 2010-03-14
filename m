@@ -1,33 +1,34 @@
-Received: from li38-254.members.linode.com ([207.192.74.254]
-	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sgarman@zenlinux.com>) id 1NqbRL-0001Ri-7o
+Received: from netcra.lnk.telstra.net ([203.45.127.186]
+	helo=mail.ceegeebee.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <chris@ceegeebee.com>) id 1NqjeZ-0000cS-Nh
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Mar 2010 01:12:23 +0100
-Received: from localhost.localdomain (c-76-115-42-183.hsd1.or.comcast.net
-	[76.115.42.183])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by masterfoo.zenlinux.com (Postfix) with ESMTP id EF80A30294;
-	Sat, 13 Mar 2010 19:09:15 -0500 (EST)
-From: Scott Garman <sgarman@zenlinux.com>
+	Sun, 14 Mar 2010 09:58:40 +0100
+Received: from mail.ceegeebee.com (localhost.localdomain [127.0.0.1])
+	by mail.ceegeebee.com (8.13.8/8.13.8) with ESMTP id o2E8Vk3d009271
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 14 Mar 2010 19:01:52 +1030
+Received: (from chris@localhost)
+	by mail.ceegeebee.com (8.13.8/8.13.8/Submit) id o2E8VkxT009270
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 14 Mar 2010 19:01:46 +1030
+Date: Sun, 14 Mar 2010 19:01:46 +1030
+From: Chris Bennett <chris@ceegeebee.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 Mar 2010 16:09:09 -0800
-Message-Id: <1268525349-13520-1-git-send-email-sgarman@zenlinux.com>
-X-Mailer: git-send-email 1.6.3.3
-X-MasterFoo-MailScanner-Information: Please contact the ISP for more
-	information
-X-MailScanner-ID: EF80A30294.700CC
-X-MasterFoo-MailScanner: Found to be clean
-X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
-X-SA-Exim-Connect-IP: 207.192.74.254
-X-SA-Exim-Mail-From: sgarman@zenlinux.com
+Message-ID: <20100314083146.GA7866@mail.ceegeebee.com>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.2.3
+	(mail.ceegeebee.com [127.0.0.1]);
+	Sun, 14 Mar 2010 19:01:52 +1030 (CST)
+X-SA-Exim-Connect-IP: 203.45.127.186
+X-SA-Exim-Mail-From: chris@ceegeebee.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,WEIRD_PORT
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] sed-4.1.1: migrate -native to BBCLASSEXTEND
+Subject: gnutls_2.8.5.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,42 +42,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Mar 2010 00:12:23 -0000
+X-List-Received-Date: Sun, 14 Mar 2010 08:58:41 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Scott Garman <sgarman@zenlinux.com>
----
- recipes/sed/sed-native_4.1.1.bb |    3 ---
- recipes/sed/sed_4.1.1.bb        |    3 +++
- 2 files changed, 3 insertions(+), 3 deletions(-)
- delete mode 100644 recipes/sed/sed-native_4.1.1.bb
+Hi there,
 
-diff --git a/recipes/sed/sed-native_4.1.1.bb b/recipes/sed/sed-native_4.1.1.bb
-deleted file mode 100644
-index 3bfacd8..0000000
---- a/recipes/sed/sed-native_4.1.1.bb
-+++ /dev/null
-@@ -1,3 +0,0 @@
--SECTION = "console/utils"
--require sed_${PV}.bb
--inherit native
-diff --git a/recipes/sed/sed_4.1.1.bb b/recipes/sed/sed_4.1.1.bb
-index eac4a9c..2f926f7 100644
---- a/recipes/sed/sed_4.1.1.bb
-+++ b/recipes/sed/sed_4.1.1.bb
-@@ -1,8 +1,11 @@
- LICENSE = "GPL"
- SECTION = "console/utils"
- DESCRIPTION = "sed is a Stream EDitor."
-+PR = "r1"
- 
- SRC_URI = "${GNU_MIRROR}/sed/sed-${PV}.tar.gz"
- S = "${WORKDIR}/sed-${PV}"
- 
- inherit autotools
-+
-+BBCLASSEXTEND = "native"
--- 
-1.6.3.3
+I'm very new to openembedded-devel, and after experimenting with a
+variety of recipes, I'm adapting the micro set of distro/recipes to my
+needs.  I am having a problem building gnutls - I see in the git logs
+that an update was done on 5/03/2010 to remove older versions and make
+2.8.5 be the only one availbale.
 
+My log of the error according to bitbake is:
+
+[..]
+| automake: unknown warning category `cross'
+| doc/Makefile.am:27: ENABLE_GTK_DOC does not appear in AM_CONDITIONAL
+| gtk-doc.make:7: GTK_DOC_USE_LIBTOOL does not appear in AM_CONDITIONAL
+| doc/reference/Makefile.am:135:   `gtk-doc.make' included from here
+| gtk-doc.make:50: ENABLE_GTK_DOC does not appear in AM_CONDITIONAL
+| doc/reference/Makefile.am:135:   `gtk-doc.make' included from here
+| gtk-doc.make:173: ENABLE_GTK_DOC does not appear in AM_CONDITIONAL
+| doc/reference/Makefile.am:135:   `gtk-doc.make' included from here
+| doc/reference/Makefile.am:147: ENABLE_GTK_DOC does not appear in AM_CONDITIONAL
+| autoreconf: automake failed with exit status: 1
+| FATAL: autoreconf execution failed.
+NOTE: Task failed: /home/chris/oe/micro-dev/work/i686-oe-linux/gnutls-2.8.5-r0/temp/log.do_configure.14113
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /home/chris/oe/openembedded.org/recipes/gnutls/gnutls_2.8.5.bb do_configure failed
+ERROR: Task 652 (/home/chris/oe/openembedded.org/recipes/gnutls/gnutls_2.8.5.bb, do_configure) failed
+NOTE: Tasks Summary: Attempted 865 tasks of which 0 didn't need to be rerun and 1 failed.
+ERROR: '/home/chris/oe/openembedded.org/recipes/gnutls/gnutls_2.8.5.bb' failed
+
+I havn't seen anyone else report this, so I'm hoping someone can help
+me to fix this as presumably others have this working.  I'm building
+this on Ubuntu 9.04, git tree is up to date.  I've just tried
+removing the  ~/oe/$DISTRO-dev/ folder, which I understand should
+result in everything being recompiled again.  gnutls still failed with
+the error above.
+
+Any help would be appreciated.
+
+Thanks,
+
+Chris Bennett
+cgb
 
 
