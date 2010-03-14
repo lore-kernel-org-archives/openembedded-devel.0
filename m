@@ -1,34 +1,38 @@
-Received: from netcra.lnk.telstra.net ([203.45.127.186]
-	helo=mail.ceegeebee.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chris@ceegeebee.com>) id 1NqjeZ-0000cS-Nh
+Received: from smtprelay-h21.telenor.se ([195.54.99.196])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1NqkIz-000824-1w
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Mar 2010 09:58:40 +0100
-Received: from mail.ceegeebee.com (localhost.localdomain [127.0.0.1])
-	by mail.ceegeebee.com (8.13.8/8.13.8) with ESMTP id o2E8Vk3d009271
+	Sun, 14 Mar 2010 10:40:21 +0100
+Received: from ipb1.telenor.se (ipb1.telenor.se [195.54.127.164])
+	by smtprelay-h21.telenor.se (Postfix) with ESMTP id 73172C088
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Mar 2010 19:01:52 +1030
-Received: (from chris@localhost)
-	by mail.ceegeebee.com (8.13.8/8.13.8/Submit) id o2E8VkxT009270
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Mar 2010 19:01:46 +1030
-Date: Sun, 14 Mar 2010 19:01:46 +1030
-From: Chris Bennett <chris@ceegeebee.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100314083146.GA7866@mail.ceegeebee.com>
+	Sun, 14 Mar 2010 10:37:16 +0100 (CET)
+X-SMTPAUTH-B2: 
+X-SENDER-IP: 83.227.59.242
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AuwSAAo9nEtT4zvyPGdsb2JhbAAHmnMBAQEBN7ZZhHsE
+X-IronPort-AV: E=Sophos;i="4.49,638,1262559600"; d="scan'208";a="49925086"
+Received: from c-f23be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.224]) ([83.227.59.242])
+	by ipb1.telenor.se with ESMTP; 14 Mar 2010 10:37:16 +0100
+Message-ID: <4B9CAE4A.6030709@atmel.com>
+Date: Sun, 14 Mar 2010 10:37:14 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.2.3
-	(mail.ceegeebee.com [127.0.0.1]);
-	Sun, 14 Mar 2010 19:01:52 +1030 (CST)
-X-SA-Exim-Connect-IP: 203.45.127.186
-X-SA-Exim-Mail-From: chris@ceegeebee.com
+To: openembedded-devel@lists.openembedded.org
+References: <1268506748-18802-1-git-send-email-ulf.samuelsson@atmel.com>
+In-Reply-To: <1268506748-18802-1-git-send-email-ulf.samuelsson@atmel.com>
+X-SA-Exim-Connect-IP: 195.54.99.196
+X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,WEIRD_PORT
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_SOFTFAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: gnutls_2.8.5.bb
+Subject: Re: [PATCH v3 1/2] multimedia: Add media contents to rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,51 +46,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Mar 2010 08:58:41 -0000
+X-List-Received-Date: Sun, 14 Mar 2010 09:40:21 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-Hi there,
+Ulf Samuelsson skrev:
+> This package will copy the contents of "multimedia.tar.bz2."
+> (Note the dot at the end) to the "/usr/share/multimedia" directory
+> in the target. By replacing the empty default file, you
+> can add your own multimedia files for testing.
+> 
+> Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 
-I'm very new to openembedded-devel, and after experimenting with a
-variety of recipes, I'm adapting the micro set of distro/recipes to my
-needs.  I am having a problem building gnutls - I see in the git logs
-that an update was done on 5/03/2010 to remove older versions and make
-2.8.5 be the only one availbale.
+Seems like this fails in do_populate_staging if a filename in
+the tarball contains a space.
 
-My log of the error according to bitbake is:
 
-[..]
-| automake: unknown warning category `cross'
-| doc/Makefile.am:27: ENABLE_GTK_DOC does not appear in AM_CONDITIONAL
-| gtk-doc.make:7: GTK_DOC_USE_LIBTOOL does not appear in AM_CONDITIONAL
-| doc/reference/Makefile.am:135:   `gtk-doc.make' included from here
-| gtk-doc.make:50: ENABLE_GTK_DOC does not appear in AM_CONDITIONAL
-| doc/reference/Makefile.am:135:   `gtk-doc.make' included from here
-| gtk-doc.make:173: ENABLE_GTK_DOC does not appear in AM_CONDITIONAL
-| doc/reference/Makefile.am:135:   `gtk-doc.make' included from here
-| doc/reference/Makefile.am:147: ENABLE_GTK_DOC does not appear in AM_CONDITIONAL
-| autoreconf: automake failed with exit status: 1
-| FATAL: autoreconf execution failed.
-NOTE: Task failed: /home/chris/oe/micro-dev/work/i686-oe-linux/gnutls-2.8.5-r0/temp/log.do_configure.14113
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /home/chris/oe/openembedded.org/recipes/gnutls/gnutls_2.8.5.bb do_configure failed
-ERROR: Task 652 (/home/chris/oe/openembedded.org/recipes/gnutls/gnutls_2.8.5.bb, do_configure) failed
-NOTE: Tasks Summary: Attempted 865 tasks of which 0 didn't need to be rerun and 1 failed.
-ERROR: '/home/chris/oe/openembedded.org/recipes/gnutls/gnutls_2.8.5.bb' failed
+> ---
+>  recipes/multimedia/multimedia_0.1.bb |   23 +++++++++++++++++++++++
+>  1 files changed, 23 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/multimedia/multimedia_0.1.bb
+> 
+> diff --git a/recipes/multimedia/multimedia_0.1.bb b/recipes/multimedia/multimedia_0.1.bb
+> new file mode 100644
+> index 0000000..986fd1c
+> --- /dev/null
+> +++ b/recipes/multimedia/multimedia_0.1.bb
+> @@ -0,0 +1,23 @@
+> +DESCRIPTION = "MultiMedia files"
+> +PR = "r1"
+> +
+> +# This package allows you to add multimedia contents to the file system
+> +# To add this, you create the file "multimedia.tar.bz2." and replace
+> +# the default file included in the openembedded repository. 
+> +# Note '.' at end of the filename to avoid decompress by bitbake
+> +
+> +SRC_URI = "\
+> +	file://multimedia.tar.bz2. \
+> +	"
+> +
+> +do_install() {
+> +	install -d ${D}/usr/share/multimedia
+> +	tar jxvf ${WORKDIR}/multimedia.tar.bz2.	-C ${D}/usr/share/multimedia
+> +	rm -f ${D}/usr/share/multimedia/.empty
+> +}
+> +
+> +FILES_${PN} = "\
+> +	/usr/share/multimedia/* \
+> +	"
+> +
+> +PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-I havn't seen anyone else report this, so I'm hoping someone can help
-me to fix this as presumably others have this working.  I'm building
-this on Ubuntu 9.04, git tree is up to date.  I've just tried
-removing the  ~/oe/$DISTRO-dev/ folder, which I understand should
-result in everything being recompiled again.  gnutls still failed with
-the error above.
 
-Any help would be appreciated.
+-- 
+Best Regards
+Ulf Samuelsson
 
-Thanks,
-
-Chris Bennett
-cgb
 
 
