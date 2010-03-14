@@ -1,39 +1,31 @@
-Received: from smtprelay-b12.telenor.se ([62.127.194.21])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1NqnMw-0001x2-PG
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Mar 2010 13:56:39 +0100
-Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
-	by smtprelay-b12.telenor.se (Postfix) with ESMTP id 12DCC24386
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 14 Mar 2010 13:53:33 +0100 (CET)
-X-SMTPAUTH-B2: 
-X-SENDER-IP: 83.227.59.242
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AuwSAJJ4nEtT4zvyPGdsb2JhbAAHmnMBAQEBN7YehHsEhhc
-X-IronPort-AV: E=Sophos;i="4.49,638,1262559600"; d="scan'208";a="49933766"
-Received: from c-f23be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.224]) ([83.227.59.242])
-	by ipb2.telenor.se with ESMTP; 14 Mar 2010 13:53:33 +0100
-Message-ID: <4B9CDC4C.9000300@atmel.com>
-Date: Sun, 14 Mar 2010 13:53:32 +0100
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Organization: Atmel Nordic AB
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NqnUG-0001NQ-T1 for openembedded-devel@lists.openembedded.org;
+	Sun, 14 Mar 2010 14:04:14 +0100
+Received: from f053039124.adsl.alicedsl.de ([78.53.39.124]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NqnRN-00065h-Vl for openembedded-devel@lists.openembedded.org;
+	Sun, 14 Mar 2010 13:01:10 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1268429974-12872-1-git-send-email-ulf.samuelsson@atmel.com>	<hnfpdp$mg6$1@dough.gmane.org>	<4B9B8207.1040909@atmel.com>
-	<hnilir$gqr$1@dough.gmane.org>
-In-Reply-To: <hnilir$gqr$1@dough.gmane.org>
-X-SA-Exim-Connect-IP: 62.127.194.21
-X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
+In-Reply-To: <20100314083146.GA7866@mail.ceegeebee.com>
+References: <20100314083146.GA7866@mail.ceegeebee.com>
+Date: Sun, 14 Mar 2010 14:01:08 +0100
+Message-ID: <1268571668.4038.5.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_SOFTFAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,WEIRD_PORT
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] multimedia:;Add media contents to rootfs
+Subject: Re: gnutls_2.8.5.bb: FATAL: autoreconf execution failed.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,46 +39,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Mar 2010 12:56:39 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 14 Mar 2010 13:04:14 -0000
+X-Groupsio-MsgNum: 17595
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-/S5ODVD7hXgSQsR0MuCw"
 
-Koen Kooi skrev:
-> On 13-03-10 13:16, Ulf Samuelsson wrote:
->> Koen Kooi skrev:
->>> On 12-03-10 22:39, Ulf Samuelsson wrote:
->>>> This package will copy the contents of "multimedia.tar.bz2."
->>>> (Note the dot at the end) to the "/home/root/multimedia" directory
->>>> in the target. By replacing the empty default file, you
->>>> can add your own multimedia files for testing.
->>>> Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
->>>
->>> NAK. Package never never touch $HOME, if you want things installed into
->>> $HOME, look into /etc/skel.
->>>
->> The purpose is not to have a "multimedia" directory in each home
->> so I dont think "/etc/skel" is applicable.
-> 
->> The purpose of this package is to be able to easily load some
->> jpeg pictures, movies, mp3 files into the root file system
->> when you build a demo.
-> 
-> Like
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=6a6d6bab519aefb44e3d49d305134057adf7539e
-> does?
+--=-/S5ODVD7hXgSQsR0MuCw
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Yes, except that this is hardwired to a certain movie, and this patch
-will allow you to load your own content.
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Dear Chris,
 
 
--- 
-Best Regards
-Ulf Samuelsson
+Am Sonntag, den 14.03.2010, 19:01 +1030 schrieb Chris Bennett:
+
+[=E2=80=A6]
+
+> My log of the error according to bitbake is:
+>=20
+> [..]
+> | automake: unknown warning category `cross'
+> | doc/Makefile.am:27: ENABLE_GTK_DOC does not appear in AM_CONDITIONAL
+> | gtk-doc.make:7: GTK_DOC_USE_LIBTOOL does not appear in AM_CONDITIONAL
+> | doc/reference/Makefile.am:135:   `gtk-doc.make' included from here
+> | gtk-doc.make:50: ENABLE_GTK_DOC does not appear in AM_CONDITIONAL
+> | doc/reference/Makefile.am:135:   `gtk-doc.make' included from here
+> | gtk-doc.make:173: ENABLE_GTK_DOC does not appear in AM_CONDITIONAL
+> | doc/reference/Makefile.am:135:   `gtk-doc.make' included from here
+> | doc/reference/Makefile.am:147: ENABLE_GTK_DOC does not appear in AM_CON=
+DITIONAL
+> | autoreconf: automake failed with exit status: 1
+> | FATAL: autoreconf execution failed.
+> NOTE: Task failed: /home/chris/oe/micro-dev/work/i686-oe-linux/gnutls-2.8=
+.5-r0/temp/log.do_configure.14113
+
+You have to look into this mentioned log file to find out what failed.
+
+[=E2=80=A6]
 
 
+Thanks,
 
+Paul
+
+--=-/S5ODVD7hXgSQsR0MuCw
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkuc3hQACgkQPX1aK2wOHVipFgCfQt+LaI23jE7kXGt8ualmZ8nM
+BVkAniK1TX3UGE2+hIxwH6KVDBBJ4WgA
+=ZLVd
+-----END PGP SIGNATURE-----
+
+--=-/S5ODVD7hXgSQsR0MuCw--
