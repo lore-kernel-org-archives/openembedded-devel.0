@@ -1,32 +1,32 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from qmta02.emeryville.ca.mail.comcast.net ([76.96.30.24])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NquBj-0006wD-Se
+	(envelope-from <enelson1000@comcast.net>) id 1Nqvmk-0004hN-6k
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Mar 2010 21:13:32 +0100
-Received: (qmail 20582 invoked by uid 813007); 14 Mar 2010 20:10:27 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 14 Mar 2010 20:10:27 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	Sun, 14 Mar 2010 22:55:51 +0100
+Received: from omta08.emeryville.ca.mail.comcast.net ([76.96.30.12])
+	by qmta02.emeryville.ca.mail.comcast.net with comcast
+	id t7Lw1d0040FhH24A29rjx5; Sun, 14 Mar 2010 21:51:43 +0000
+Received: from [192.168.1.100] ([67.188.141.116])
+	by omta08.emeryville.ca.mail.comcast.net with comcast
+	id t9rh1d00E2WszPn8U9rhv3; Sun, 14 Mar 2010 21:51:42 +0000
+From: ed <enelson1000@comcast.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 14 Mar 2010 21:09:29 +0100
-User-Agent: KMail/1.13.1 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.4.1; x86_64; ;
-	)
-References: <20100310103133.14548.62608.stgit@ES-J7S4D2J.amer.consind.ge.com>
-	<4B9A02C9.3030205@ge.com> <1268423765.1625.18.camel@rex>
-In-Reply-To: <1268423765.1625.18.camel@rex>
-MIME-Version: 1.0
-Message-Id: <201003142109.30696.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+In-Reply-To: <201003141558.24266.holger+oe@freyther.de>
+References: <1268511676.24057.12.camel@ed-hp-laptop>
+	<201003141558.24266.holger+oe@freyther.de>
+Date: Sun, 14 Mar 2010 14:51:40 -0700
+Message-ID: <1268603500.2247.27.camel@ed-hp-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 76.96.30.24
+X-SA-Exim-Mail-From: enelson1000@comcast.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Allow spectrum fw to build behind a proxy
+Subject: Re: Alignment trap - deprecation.pyo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,95 +40,155 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Mar 2010 20:13:32 -0000
-X-Groupsio-MsgNum: 17598
-Content-Type: Multipart/Mixed;
-  boundary="Boundary-00=_6JUnLn4RHyBvTLt"
+X-List-Received-Date: Sun, 14 Mar 2010 21:55:52 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
---Boundary-00=_6JUnLn4RHyBvTLt
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+On Sun, 2010-03-14 at 15:58 +0100, Holger Hans Peter Freyther wrote:
+> > # /usr/lib/python2.6/site-packages/gtk-2.0/gtk/_lazyutils.pyo
+> > matches /usr/lib/python2.6/site-packages/gtk-2.0/gtk/_lazyutils.py
+> > import gtk._lazyutils # precompiled
+> > from /usr/lib/python2.6/site-packages/gtk-2.0/gtk/_lazyutils.pyo
+> > # /usr/lib/python2.6/site-packages/gtk-2.0/gtk/deprecation.pyo
+> > matches /usr/lib/python2.6/site-packages/gtk-2.0/gtk/deprecation.py
+> > import gtk.deprecation # precompiled
+> > from /usr/lib/python2.6/site-packages/gtk-2.0/gtk/deprecation.pyo
+> > Alignment trap: python (2412) PC=0x40bfa3c4 Instr=0x280069c0
+> > Address=0xffffffff FSR 0x813
+> > Segmentation fault
+> > 
+> > 
+> > Does anyone have any ideas why it chokes at deprecation.pyo?????
+> 
+> No. but you could enable the generation of a coredump with ulimit and then use 
+> gdb to figure out where it was generating this alignment trap.
+> 
+> 
 
-Dnia pi=C4=85tek, 12 marca 2010 o 20:56:05 Richard Purdie napisa=C5=82(a):
+Holger thanks for responding.  I know you and everyone else on the list 
+are very busy and I appreciate if I get a response.  I try and find help
+using google but that does not always pan out.
 
-> Ah, I remember this now. It is not a bitbake bug put a base.bbclass bug
-> as something somewhere has incorrect quoting. Its been fixed in Poky but
-> probably should be pushed into OE too. If you find the commit where I
-> last touched the spectrum-fw driver you'll find the core class change
-> too I suspect. It'd be good to get synced up on that.
+So taking your suggestion I am trying to use gdbsever but without much
+success.    This is what I have done.
 
-Attached is that changeset. I will look at it tomorrow if someone will not=
-=20
-merge it before.
+1. Built image to include gdbserver.
+2. Downloaded to my PC python2.6-dbg
+3. Downloaded GDB Macros and placed in home/ed/  as .gdbinit
+4. On host in terminal window
+     a. $gdb python
+     b. (gdb) target remote 192.168.1.104:2345
+     c. where 192.168.1.104 is IP address of target board(mini2440)
+     d. Go to target machine and do step 5.
+     e. eventually I get connection timed out.
+     f.  I can ping the target machine from the host.
+5. On target machine
+     a. Verify that ulimit is set to unlimted
+     b. #gdbserver 192.168.1.100:2345 python pygtkHelloWorld
+     c. where 192.168.1.100 is the IP address of the host machine
+     d. nothing comes back when I enter the above command.  I would have
+thought from reading the wiki page
+http://en.wikipedia.org/wiki/Gdbserver that I should see something after
+entering the command.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+I did an strace on # strace gdbserver 192.168.1.100:2345 python
+and to see if it would work with just running python.  I get the
+following trace.
 
---Boundary-00=_6JUnLn4RHyBvTLt
-Content-Type: text/x-patch;
-  charset="UTF-8";
-  name="0001-base.bbclass-bitbake.conf-Fix-some-string-quoting-to.patch"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment;
-	filename="0001-base.bbclass-bitbake.conf-Fix-some-string-quoting-to.patch"
+root@mini2440:~# strace gdbserver 192.168.1.100:2345 python
+execve("/usr/bin/gdbserver", ["gdbserver", "192.168.1.100:2345",
+"python"], [/* 12 vars */]) = 0
+brk(0)                                  = 0x21000
+uname({sys="Linux", node="mini2440", ...}) = 0
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or
+directory)
+open("/var/run/ld.so.cache", O_RDONLY)  = -1 ENOENT (No such file or
+directory)
+open("/lib/tls/v4l/half/libthread_db.so.1", O_RDONLY) = -1 ENOENT (No
+such file or directory)
+stat64("/lib/tls/v4l/half", 0xbe8ae220) = -1 ENOENT (No such file or
+directory)
+open("/lib/tls/v4l/libthread_db.so.1", O_RDONLY) = -1 ENOENT (No such
+file or directory)
+stat64("/lib/tls/v4l", 0xbe8ae220)      = -1 ENOENT (No such file or
+directory)
+open("/lib/tls/half/libthread_db.so.1", O_RDONLY) = -1 ENOENT (No such
+file or directory)
+stat64("/lib/tls/half", 0xbe8ae220)     = -1 ENOENT (No such file or
+directory)
+open("/lib/tls/libthread_db.so.1", O_RDONLY) = -1 ENOENT (No such file
+or directory)
+stat64("/lib/tls", 0xbe8ae220)          = -1 ENOENT (No such file or
+directory)
+open("/lib/v4l/half/libthread_db.so.1", O_RDONLY) = -1 ENOENT (No such
+file or directory)
+stat64("/lib/v4l/half", 0xbe8ae220)     = -1 ENOENT (No such file or
+directory)
+open("/lib/v4l/libthread_db.so.1", O_RDONLY) = -1 ENOENT (No such file
+or directory)
+stat64("/lib/v4l", 0xbe8ae220)          = -1 ENOENT (No such file or
+directory)
+open("/lib/half/libthread_db.so.1", O_RDONLY) = -1 ENOENT (No such file
+or directory)
+stat64("/lib/half", 0xbe8ae220)         = -1 ENOENT (No such file or
+directory)
+open("/lib/libthread_db.so.1", O_RDONLY) = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0(\0\1\0\0\0\0\17\0\000"...,
+512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=26304, ...}) = 0
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1,
+0) = 0x4001c000
+mmap2(NULL, 57676, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0)
+= 0x40025000
+mprotect(0x4002b000, 28672, PROT_NONE)  = 0
+mmap2(0x40032000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|
+MAP_DENYWRITE, 3, 0x5) = 0x40032000
+close(3)                                = 0
+open("/lib/libc.so.6", O_RDONLY)        = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0(\0\1\0\0\0\344K\1\000"...,
+512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=1127916, ...}) = 0
+mmap2(NULL, 1163712, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3,
+0) = 0x40034000
+mprotect(0x40143000, 32768, PROT_NONE)  = 0
+mmap2(0x4014b000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|
+MAP_DENYWRITE, 3, 0x10f) = 0x4014b000
+mmap2(0x4014e000, 8640, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|
+MAP_ANONYMOUS, -1, 0) = 0x4014e000
+close(3)                                = 0
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1,
+0) = 0x4001d000
+syscall_983045(0x4001cd40, 0x4001cd40, 0x68c, 0x4001d418, 0x40024060,
+0x40024000, 0, 0xf0005, 0x60, 0xffff5874, 0, 0xbe8aeae4, 0, 0xbe8ae7e0,
+0x40002010, 0x40002028, 0x20000010, 0x4001cd40, 0xb719, 0, 0, 0, 0, 0,
+0, 0, 0, 0, 0, 0, 0, 0) = 0
+mprotect(0x4014b000, 8192, PROT_READ)   = 0
+mprotect(0x40032000, 4096, PROT_READ)   = 0
+mprotect(0x40023000, 4096, PROT_READ)   = 0
+rt_sigaction(SIGIO, {SIG_IGN}, {SIG_DFL}, 8) = 0
+rt_sigprocmask(SIG_UNBLOCK, [IO], NULL, 8) = 0
+brk(0)                                  = 0x21000
+brk(0x42000)                            = 0x42000
+clone(child_stack=0x22068, flags=CLONE_VM|SIGCHLD) = 2898
+wait4(2898,  <unfinished ... exit status 0>
+Process 2897 detached
 
-From b8ff2b6cc3fd50420dda19eaf78943bad64aad3b Mon Sep 17 00:00:00 2001
-From: Richard Purdie <rpurdie@rpsys.net>
-Date: Thu, 23 Oct 2008 21:08:42 +0100
-Subject: [PATCH] base.bbclass/bitbake.conf: Fix some string quoting to hand=
-le more unusual URLs
+==========================
 
----
- meta/classes/base.bbclass |    2 +-
- meta/conf/bitbake.conf    |    4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/meta/classes/base.bbclass b/meta/classes/base.bbclass
-index d67579d..c6e19c1 100644
---- a/meta/classes/base.bbclass
-+++ b/meta/classes/base.bbclass
-@@ -641,7 +641,7 @@ def oe_unpack_file(file, data, url =3D None):
- 		(type, host, path, user, pswd, parm) =3D bb.decodeurl(url)
- 		if 'dos' in parm:
- 			cmd =3D '%s -a' % cmd
--		cmd =3D '%s %s' % (cmd, file)
-+		cmd =3D "%s '%s'" % (cmd, file)
- 	elif os.path.isdir(file):
- 		filesdir =3D os.path.realpath(bb.data.getVar("FILESDIR", data, 1))
- 		destdir =3D "."
-diff --git a/meta/conf/bitbake.conf b/meta/conf/bitbake.conf
-index a7ab50b..6919649 100644
---- a/meta/conf/bitbake.conf
-+++ b/meta/conf/bitbake.conf
-@@ -476,12 +476,12 @@ FETCHCMD_bzr =3D "/usr/bin/env bzr"
- FETCHCMD_hg =3D "/usr/bin/env hg"
-=20
- FETCHCOMMAND =3D "ERROR, this must be a BitBake bug"
--FETCHCOMMAND_wget =3D "/usr/bin/env wget -t 5 --passive-ftp -P ${DL_DIR} $=
-{URI}"
-+FETCHCOMMAND_wget =3D "/usr/bin/env wget -t 5 --passive-ftp -P ${DL_DIR} '=
-${URI}'"
- FETCHCOMMAND_cvs =3D "/usr/bin/env cvs '-d${CVSROOT}' co ${CVSCOOPTS} ${CV=
-SMODULE}"
- FETCHCOMMAND_svn =3D "/usr/bin/env svn co ${SVNCOOPTS} ${SVNROOT} ${SVNMOD=
-ULE}"
- CHECKCOMMAND_wget =3D "/usr/bin/env wget --spider -t 5 --passive-ftp -P ${=
-DL_DIR} ${URI}"
- RESUMECOMMAND =3D "ERROR, this must be a BitBake bug"
--RESUMECOMMAND_wget =3D "/usr/bin/env wget -c -t 5 --passive-ftp -P ${DL_DI=
-R} ${URI}"
-+RESUMECOMMAND_wget =3D "/usr/bin/env wget -c -t 5 --passive-ftp -P ${DL_DI=
-R} '${URI}'"
- UPDATECOMMAND =3D "ERROR, this must be a BitBake bug"
- UPDATECOMMAND_cvs =3D "/usr/bin/env cvs -d${CVSROOT} update -d -P ${CVSCOO=
-PTS}"
- UPDATECOMMAND_svn =3D "/usr/bin/env svn update ${SVNCOOPTS}"
---=20
-1.7.0
+Is there something I have not set up correctly or some step that is not
+done correctly?  
+Any help will be appreciated.
+Thanks
+Ed
 
 
---Boundary-00=_6JUnLn4RHyBvTLt--
+  
+
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+
+
