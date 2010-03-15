@@ -1,37 +1,42 @@
-Received: from mail.atmel.fr ([81.80.104.162] helo=atmel-es2.atmel.fr)
+Received: from mail-bw0-f220.google.com ([209.85.218.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nicolas.ferre@atmel.com>) id 1Nr9II-0005zZ-0B
+	(envelope-from <michael.lippautz@gmail.com>) id 1Nr9iF-0001H5-ER
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 13:21:16 +0100
-Received: from fwat.rfo.atmel.com (gateway [192.168.1.1])
-	by atmel-es2.atmel.fr (8.11.7p1+Sun/8.11.6) with SMTP id o2FCGc827891; 
-	Mon, 15 Mar 2010 13:16:39 +0100 (MET)
-Received: from meyreuil ([10.159.254.132]) by fwat;
-	Mon, 15 Mar 2010 13:00:11 +0100 (MET)
-Received: from [127.0.0.1] (pc245_112.atmel.fr [10.159.245.112])
-	by meyreuil.atmel.fr (8.11.7p1+Sun/8.11.7) with ESMTP id o2FCI2g18512; 
-	Mon, 15 Mar 2010 13:18:02 +0100 (MET)
-Message-ID: <4B9E257E.3000201@atmel.com>
-Date: Mon, 15 Mar 2010 13:18:06 +0100
-From: Nicolas Ferre <nicolas.ferre@atmel.com>
-Organization: atmel
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
-	rv:1.9.1.8) Gecko/20100227 Lightning/1.0b1 Thunderbird/3.0.3
+	Mon, 15 Mar 2010 13:48:03 +0100
+Received: by bwz20 with SMTP id 20so2848474bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Mar 2010 05:45:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=7nCAZV02QlNKhHFQW7gzT4jbdfrQ0p3+7ZZsEmfGYm0=;
+	b=Zrt8I6AVb2R0oiYQy3DRrCF1wxAnPjmWXNOBwKcCSjfnRgO0DMtVsZVSSklyzN5OVR
+	ZdQDj4zhemgRMGeTMrgVDphm33SMCrqRTVMGjrX10n+Efy8IyjQ37krndK+3QEPOB3SO
+	9C1E8CzoanSihZkSVFDfdCM5zEDYuVFfYrRUw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=MOL/umUfeFk4Ys5GT+sudj0n/H6/evL5Xnn3B9BjBD/AaHblBmxlsqPHrkk8nu40Wl
+	xcCj3+chsjHRYAsO1Ws46IoQvgjwKgj9s8/2V0kqPH4czeCPejfviKlYCaZ10Q4JazS4
+	yDlXhp3c56GesEJaSoKiRP0np1iRXySw3fr1s=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org, ulf.samuelsson@atmel.com,
-	marcin@juszkiewicz.com.pl
-References: <201003150738.22158.marcin@juszkiewicz.com.pl>
-	<1268659726-20887-1-git-send-email-nicolas.ferre@atmel.com>
-In-Reply-To: <1268659726-20887-1-git-send-email-nicolas.ferre@atmel.com>
-X-SA-Exim-Connect-IP: 81.80.104.162
-X-SA-Exim-Mail-From: nicolas.ferre@atmel.com
+Received: by 10.204.10.151 with SMTP id p23mr4637392bkp.80.1268657100056; Mon, 
+	15 Mar 2010 05:45:00 -0700 (PDT)
+In-Reply-To: <201003150605.03085.holger+oe@freyther.de>
+References: <201003150605.03085.holger+oe@freyther.de>
+Date: Mon, 15 Mar 2010 13:44:59 +0100
+Message-ID: <fca63bcf1003150544k4a9df366m8119add6de5fc1d0@mail.gmail.com>
+From: Michael Lippautz <michael.lippautz@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.218.220
+X-SA-Exim-Mail-From: michael.lippautz@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] linux-2.6.30: add linux4sam patches
+Subject: Re: Request for help to address known security issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,42 +50,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 12:21:18 -0000
+X-List-Received-Date: Mon, 15 Mar 2010 12:48:04 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-Le 15/03/2010 14:28, Nicolas Ferre :
-> Introduce support for:
-> 
-> +	at91sam9260ek
-> +	at91sam9261ek
-> +	at91sam9g10ek
-> +	at91sam9g20ek
-> +	at91sam9g20ek_2mmc
-> +	at91sam9g45ekes
-> +	at91sam9m10ekes
-> +	at91sam9rlek
-> +	at91sam9xeek
-> 
-> and apply the Atmel experimental patch series from Linux4sam.org. A different
-> SRC_URI is created and the patches are bundled in a patch archive.
-> 
-> AT91 specific bits are removed from the common 2.6.30 rule.
-> 
-> Signed-off-by: Nicolas Ferre <nicolas.ferre@atmel.com>
-> ---
-> Marcin, what do you think of this patch architecture and URI management?
-> 
-> The defconfig are not included in this patch and shall be sent in another
-> patch series.
+2010/3/15 Holger Hans Peter Freyther <holger+oe@freyther.de>:
+> unrar 3.4.3: http://www.FreeBSD.org/ports/portaudit/94234e00-be8a-11db-
+> b2ec-000c6ec775d9.html
+>
+> unrar-native: same thing..
 
-Of course Ulf, if other patches have to be included after those ones
-feel free to add them in another OE patch (I am thinking about NAND
-patitions and Kconfig changes).
+Done. Fixed by bumping (... rewriting) to 3.9.9.
 
-Bye,
--- 
-Nicolas Ferre
-
+Regards,
+Michael
 
 
