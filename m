@@ -1,22 +1,22 @@
 Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Nr85j-0005sT-7x
+	(envelope-from <holger+oe@freyther.de>) id 1Nr8Ik-00054E-IO
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 12:04:11 +0100
+	Mon, 15 Mar 2010 12:17:38 +0100
 Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
 	[123.192.181.204])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 6E8681B10C02
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id D739F1B10C79
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 11:04:11 +0000 (UTC)
+	Mon, 15 Mar 2010 11:17:38 +0000 (UTC)
 From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Mar 2010 12:00:28 +0100
+Date: Mon, 15 Mar 2010 12:13:55 +0100
 User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
 References: <201003150605.03085.holger+oe@freyther.de>
-	<hnl2sg$ar6$1@dough.gmane.org>
-In-Reply-To: <hnl2sg$ar6$1@dough.gmane.org>
+	<201003151353.26302.khimov@altell.ru>
+In-Reply-To: <201003151353.26302.khimov@altell.ru>
 MIME-Version: 1.0
-Message-Id: <201003151200.28221.holger+oe@freyther.de>
+Message-Id: <201003151213.55436.holger+oe@freyther.de>
 X-SA-Exim-Connect-IP: 78.46.147.237
 X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -39,24 +39,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 11:04:11 -0000
+X-List-Received-Date: Mon, 15 Mar 2010 11:17:39 -0000
 Content-Type: Text/Plain;
-  charset="iso-8859-1"
+  charset="utf-8"
 Content-Transfer-Encoding: 7bit
 
-On Monday 15 March 2010 11:41:20 Koen Kooi wrote:
-> On 15-03-10 06:05, Holger Hans Peter Freyther wrote:
-> > Hi all,
-> > 
-> > the following OE packages seem to be vulnerable to known security issues
-> > and I would like to get some help in updating these....
-> > 
-> > wget 1.9.1: http://www.FreeBSD.org/ports/portaudit/06f142ff-4df3-11d9-
-> > a9e7-0001020eed82.html
-> 
-> Wget 1.11.x is in OE already, should be schedule 1.9.x for deletion?
+On Monday 15 March 2010 11:53:26 Roman Khimov wrote:
 
-yes, but we default to 1.9.x. If you could make angstrom use 1.11 or remove 
-the default preference of -1 from the wget recipe that would be awesome.
+> Using 5.10.0 internally and preparing 5.10.1 to push (along with other perl
+> thingies)
+
+> Using 2.7.STABLE6 internally, will try to bring in latest.
+
+> Using 0.7.2, will try to prepare a patch.
+
+
+awesome!
 
 
