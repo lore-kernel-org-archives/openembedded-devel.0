@@ -1,39 +1,30 @@
-Received: from mail.atmel.fr ([81.80.104.162] helo=atmel-es2.atmel.fr)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nicolas.ferre@atmel.com>) id 1NrDNx-0001Zq-1G
+Received: from smtp3.epfl.ch ([128.178.224.226])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <valentin.longchamp@epfl.ch>) id 1NrDnE-0004ON-Ld
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 17:43:25 +0100
-Received: from fwat.rfo.atmel.com (gateway [192.168.1.1])
-	by atmel-es2.atmel.fr (8.11.7p1+Sun/8.11.6) with SMTP id o2FGci804613; 
-	Mon, 15 Mar 2010 17:38:44 +0100 (MET)
-Received: from meyreuil ([10.159.254.132]) by fwat;
-	Mon, 15 Mar 2010 17:09:39 +0100 (MET)
-Received: from [127.0.0.1] (pc245_112.atmel.fr [10.159.245.112])
-	by meyreuil.atmel.fr (8.11.7p1+Sun/8.11.7) with ESMTP id o2FGRSg07492; 
-	Mon, 15 Mar 2010 17:27:28 +0100 (MET)
-Message-ID: <4B9E5FF6.1030407@atmel.com>
-Date: Mon, 15 Mar 2010 17:27:34 +0100
-From: Nicolas Ferre <nicolas.ferre@atmel.com>
-Organization: atmel
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
-	rv:1.9.1.8) Gecko/20100227 Lightning/1.0b1 Thunderbird/3.0.3
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org,
-	Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-References: <201003150738.22158.marcin@juszkiewicz.com.pl>	<1268659726-20887-1-git-send-email-nicolas.ferre@atmel.com>
-	<201003151346.43686.marcin@juszkiewicz.com.pl>
-In-Reply-To: <201003151346.43686.marcin@juszkiewicz.com.pl>
-X-MIME-Autoconverted: from 8bit to quoted-printable by atmel-es2.atmel.fr id
-	o2FGci804613
-X-SA-Exim-Connect-IP: 81.80.104.162
-X-SA-Exim-Mail-From: nicolas.ferre@atmel.com
+	Mon, 15 Mar 2010 18:09:33 +0100
+Received: (qmail 4724 invoked by uid 107); 15 Mar 2010 17:06:26 -0000
+X-Virus-Scanned: ClamAV
+Received: from lsro1pc40.epfl.ch (128.178.145.86) (authenticated)
+	by smtp3.epfl.ch (AngelmatoPhylax SMTP proxy);
+	Mon, 15 Mar 2010 18:06:26 +0100
+From: Valentin Longchamp <valentin.longchamp@epfl.ch>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 15 Mar 2010 18:04:04 +0100
+Message-Id: <1268672644-29043-1-git-send-email-valentin.longchamp@epfl.ch>
+X-Mailer: git-send-email 1.6.3.3
+In-Reply-To: <hndr0p$old$1@dough.gmane.org>
+References: <hndr0p$old$1@dough.gmane.org>
+X-SA-Exim-Connect-IP: 128.178.224.226
+X-SA-Exim-Mail-From: valentin.longchamp@epfl.ch
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] linux-2.6.30: add linux4sam patches
+Cc: Valentin Longchamp <valentin.longchamp@epfl.ch>
+Subject: [PATCH] Do not generate NEON code for qt-4.6.2 embedded on armv6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,56 +38,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 16:43:25 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 15 Mar 2010 17:09:33 -0000
 
-Le 15/03/2010 13:46, Marcin Juszkiewicz :
-> Dnia poniedzia=B3ek, 15 marca 2010 o 14:28:46 Nicolas Ferre napisa=B3(a=
-):
->> Marcin, what do you think of this patch architecture and URI managemen=
-t?
->=20
-> Nice. Few notes:
->=20
-> 1. do it all in linux_2.6.30.bb recipe
+http://bugreports.qt.nokia.com/browse/QTBUG-8749
+Neon code is generated for armv6 processor, where it should be armv7 only.
+This results in illegal instructions with some of the qt4 libraries.
 
-Ah? won't it be a too long recipe file for people not having to deal
-with at91 ?
+The current solution is not optimal, I just needed a quick fix for my arch
+and I don't have the needed knowledge in OE to fix it cleanly, but I wanted
+to point this issue out. But at least other arch (armv5 and armv4) should have
+the same problem and receive the same fix.
+---
+ recipes/qt4/qt4-embedded_4.6.2.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-> 2. we rather user CAPS for variable names
-
-OK.
-
-> 3. AT91_SRC_URI =3D "contents of at91_kernel + contents of lnx4sam_exp3=
-" would=20
-> be better
-
-You mean:
-AT91_SRC_URI =3D "${AT91_KERNEL} ${LNX4SAM_EXP3}"
-and:
-SRC_URI_at91sam9260ek =3D ${AT91_SRC_URI}
-...
-?
-
-> 4. can't you just squash 2.6.30-at91-exp3.tar.gz into one patch?
-
-I would like to keep a patch series in separated patches as this is what
-is submitted and accepted during kernel development.
-Keeping single patches, we can keep a patch archive and remove
-individual ones from applying in a newer revision of the kernel.
-
->> The defconfig are not included in this patch and shall be sent in anot=
-her
->> patch series.
->=20
-> Merge those into one patch - otherwise you will make "PR bump" flood.
-
-Ok I will after the discussion settles...
-
-Bye,
---=20
-Nicolas Ferre
+diff --git a/recipes/qt4/qt4-embedded_4.6.2.bb b/recipes/qt4/qt4-embedded_4.6.2.bb
+index 94ecd01..8583752 100644
+--- a/recipes/qt4/qt4-embedded_4.6.2.bb
++++ b/recipes/qt4/qt4-embedded_4.6.2.bb
+@@ -1,6 +1,8 @@
+ require qt4-embedded.inc
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
++
++QT_CONFIG_FLAGS_append_armv6 = " -no-neon "
+ 
+ require qt-${PV}.inc
+ 
+-- 
+1.6.3.3
 
 
 
