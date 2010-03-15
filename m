@@ -1,35 +1,42 @@
-Received: from exprod5og114.obsmtp.com ([64.18.0.28])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martyn.welch@ge.com>) id 1Nr7ku-0006j6-TR
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 11:42:45 +0100
-Received: from source ([12.43.191.1]) (using TLSv1) by
-	exprod5ob114.postini.com ([64.18.4.12]) with SMTP
-	ID DSNKS54ObASg4Umb9TraRUL3EFmC0SBvvr6N@postini.com;
-	Mon, 15 Mar 2010 03:39:41 PDT
-Received: from unknown (HELO cinmlip01.e2k.ad.ge.com) ([3.159.213.48])
-	by Alpmlip07.e2k.ad.ge.com with ESMTP; 15 Mar 2010 06:39:39 -0400
-Received: from es-j7s4d2j.amer.consind.ge.com (HELO [3.138.54.92])
-	([3.138.54.92])
-	by cinmlip01.e2k.ad.ge.com with ESMTP; 15 Mar 2010 06:39:39 -0400
-Message-ID: <4B9E0F2A.4000503@ge.com>
-Date: Mon, 15 Mar 2010 10:42:50 +0000
-From: Martyn Welch <martyn.welch@ge.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nr7mo-0006qO-HV for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 11:44:42 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nr7js-0003PD-JZ for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 11:41:36 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Mar 2010 11:41:36 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Mar 2010 11:41:36 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4B9E0843.30005@dresearch.de> <4B9E09C8.2060903@ge.com>
-	<4B9E0A1B.3070606@dresearch.de>
-In-Reply-To: <4B9E0A1B.3070606@dresearch.de>
-X-SA-Exim-Connect-IP: 64.18.0.28
-X-SA-Exim-Mail-From: martyn.welch@ge.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 15 Mar 2010 11:41:20 +0100
+Message-ID: <hnl2sg$ar6$1@dough.gmane.org>
+References: <201003150605.03085.holger+oe@freyther.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
+In-Reply-To: <201003150605.03085.holger+oe@freyther.de>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: SRC_URI fetching problem
+Subject: Re: Request for help to address known security issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,50 +50,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 10:42:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 15 Mar 2010 10:44:42 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Steffen Sledz wrote:
-> Martyn Welch wrote:
->   
->> Steffen Sledz wrote:
->>     
->>> I work at a recipe for rsyslog (http://www.rsyslog.com) and hit a
->>> problem with the wget fetcher.
->>>
->>> The download uri for rsyslog-5.4.0.tar.gz does not contain the archive
->>> name itself but is http://www.rsyslog.com/Downloads-req-getit-lid-197.phtml.
->>>
->>> If i set
->>>
->>> SRC_URI = "http://www.rsyslog.com/Downloads-req-getit-lid-197.phtml"
->>> SRC_URI[archive.md5sum] = "291882229d50496f42bd63174076dd37"
->>> SRC_URI[archive.sha256sum] = "d9cd21d2fcd45fcae65eb0a51927c40315cca02afdc62478abd950febfcf7228"
->>>       
->> At a guess you need to add ";name=archive" to the end of your SRC_URI.
->>     
->
-> Nope, same behaviour. :(
->
-> BTW: The ";name=" option is not documented in the user manual at
-> <http://docs.openembedded.org/usermanual/usermanual.html>.
->   
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Neither is the relatively new mechanism for incuding the md5sum and
-sha256sum in the recipe. Unless you add the "name" parameter (or the
-md5sum and sha256sum for that SRC_URI happens to already be in
-checksum.ini) you will probably see another failure when it attempts to
-validate the archive it has been downloaded. Either way, I think Thomas'
-suggestion may be right.
+On 15-03-10 06:05, Holger Hans Peter Freyther wrote:
+> Hi all,
+> 
+> the following OE packages seem to be vulnerable to known security issues and I 
+> would like to get some help in updating these....
+> 
+> wget 1.9.1: http://www.FreeBSD.org/ports/portaudit/06f142ff-4df3-11d9-
+> a9e7-0001020eed82.html
 
-Martyn
+Wget 1.11.x is in OE already, should be schedule 1.9.x for deletion?
 
--- 
-Martyn Welch (Principal Software Engineer)   |   Registered in England and
-GE Intelligent Platforms                     |   Wales (3828642) at 100
-T +44(0)127322748                            |   Barbirolli Square, Manchester,
-E martyn.welch@ge.com                        |   M2 3AB  VAT:GB 927559189
+> faad2 2.0: http://www.FreeBSD.org/ports/portaudit/445ed958-b0d9-11dd-
+> a55e-00163e000016.html
+
+Faad2 moved to http://www.audiocoding.com/ and is at 2.7 now. I'll try
+to have a look at faad2 later today.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLng7QMkyGM64RGpERAoVMAKCfqYTbsudSJXqU8YHiZyXuCbyudwCffhv+
+7k3lgAd8ta1wZJN6vDklGTY=
+=nZie
+-----END PGP SIGNATURE-----
 
 
 
