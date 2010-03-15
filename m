@@ -1,30 +1,43 @@
-Received: from smtp3.epfl.ch ([128.178.224.226])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <valentin.longchamp@epfl.ch>) id 1NrDnE-0004ON-Ld
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 18:09:33 +0100
-Received: (qmail 4724 invoked by uid 107); 15 Mar 2010 17:06:26 -0000
-X-Virus-Scanned: ClamAV
-Received: from lsro1pc40.epfl.ch (128.178.145.86) (authenticated)
-	by smtp3.epfl.ch (AngelmatoPhylax SMTP proxy);
-	Mon, 15 Mar 2010 18:06:26 +0100
-From: Valentin Longchamp <valentin.longchamp@epfl.ch>
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NrDvq-0002gm-SZ for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 18:18:27 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NrDsu-0004J6-Ux for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 18:15:20 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Mar 2010 18:15:20 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Mar 2010 18:15:20 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Mar 2010 18:04:04 +0100
-Message-Id: <1268672644-29043-1-git-send-email-valentin.longchamp@epfl.ch>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <hndr0p$old$1@dough.gmane.org>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 15 Mar 2010 18:15:08 +0100
+Message-ID: <hnlpus$6no$1@dough.gmane.org>
 References: <hndr0p$old$1@dough.gmane.org>
-X-SA-Exim-Connect-IP: 128.178.224.226
-X-SA-Exim-Mail-From: valentin.longchamp@epfl.ch
+	<1268672644-29043-1-git-send-email-valentin.longchamp@epfl.ch>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
+In-Reply-To: <1268672644-29043-1-git-send-email-valentin.longchamp@epfl.ch>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Valentin Longchamp <valentin.longchamp@epfl.ch>
-Subject: [PATCH] Do not generate NEON code for qt-4.6.2 embedded on armv6
+Subject: Re: [PATCH] Do not generate NEON code for qt-4.6.2 embedded on armv6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,36 +51,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 17:09:33 -0000
+X-List-Received-Date: Mon, 15 Mar 2010 17:18:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-http://bugreports.qt.nokia.com/browse/QTBUG-8749
-Neon code is generated for armv6 processor, where it should be armv7 only.
-This results in illegal instructions with some of the qt4 libraries.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-The current solution is not optimal, I just needed a quick fix for my arch
-and I don't have the needed knowledge in OE to fix it cleanly, but I wanted
-to point this issue out. But at least other arch (armv5 and armv4) should have
-the same problem and receive the same fix.
----
- recipes/qt4/qt4-embedded_4.6.2.bb |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+thanks, applied
 
-diff --git a/recipes/qt4/qt4-embedded_4.6.2.bb b/recipes/qt4/qt4-embedded_4.6.2.bb
-index 94ecd01..8583752 100644
---- a/recipes/qt4/qt4-embedded_4.6.2.bb
-+++ b/recipes/qt4/qt4-embedded_4.6.2.bb
-@@ -1,6 +1,8 @@
- require qt4-embedded.inc
- 
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
-+
-+QT_CONFIG_FLAGS_append_armv6 = " -no-neon "
- 
- require qt-${PV}.inc
- 
--- 
-1.6.3.3
+On 15-03-10 18:04, Valentin Longchamp wrote:
+> http://bugreports.qt.nokia.com/browse/QTBUG-8749
+> Neon code is generated for armv6 processor, where it should be armv7 only.
+> This results in illegal instructions with some of the qt4 libraries.
+> 
+> The current solution is not optimal, I just needed a quick fix for my arch
+> and I don't have the needed knowledge in OE to fix it cleanly, but I wanted
+> to point this issue out. But at least other arch (armv5 and armv4) should have
+> the same problem and receive the same fix.
+> ---
+>  recipes/qt4/qt4-embedded_4.6.2.bb |    4 +++-
+>  1 files changed, 3 insertions(+), 1 deletions(-)
+> 
+> diff --git a/recipes/qt4/qt4-embedded_4.6.2.bb b/recipes/qt4/qt4-embedded_4.6.2.bb
+> index 94ecd01..8583752 100644
+> --- a/recipes/qt4/qt4-embedded_4.6.2.bb
+> +++ b/recipes/qt4/qt4-embedded_4.6.2.bb
+> @@ -1,6 +1,8 @@
+>  require qt4-embedded.inc
+>  
+> -PR = "${INC_PR}.0"
+> +PR = "${INC_PR}.1"
+> +
+> +QT_CONFIG_FLAGS_append_armv6 = " -no-neon "
+>  
+>  require qt-${PV}.inc
+>  
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLnmscMkyGM64RGpERAickAJ9VD453KacoX2EDcQWeFgZG2vDPIgCfWjL6
+oYTOJp08SjqM/PFpJBWkplM=
+=ge+P
+-----END PGP SIGNATURE-----
 
 
 
