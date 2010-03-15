@@ -1,36 +1,32 @@
-Received: from smtprelay-b11.telenor.se ([62.127.194.20])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1Nr4Fs-0006Jq-8w
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mickey@vanille-media.de>) id 1Nr4Sg-0000hI-TM
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 07:58:24 +0100
-Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
-	by smtprelay-b11.telenor.se (Postfix) with ESMTP id EA06B14F21
+	Mon, 15 Mar 2010 08:11:43 +0100
+Received: from [10.213.1.226] (tmo-098-162.customers.d1-online.com
+	[80.187.98.162])
+	by drlauer-research.com (Postfix) with ESMTP id A964D584166
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 07:55:22 +0100 (CET)
-X-SMTPAUTH-B2: 
-X-SENDER-IP: 83.227.59.242
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AkIXAN52nUtT4zvyPGdsb2JhbAAHgwWXbAEBAQE3pwuPA4Eygl9qBA
-X-IronPort-AV: E=Sophos;i="4.49,641,1262559600"; d="scan'208";a="50226083"
-Received: from c-f23be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.224]) ([83.227.59.242])
-	by ipb2.telenor.se with ESMTP; 15 Mar 2010 07:55:22 +0100
-Message-ID: <4B9DD9D9.90909@atmel.com>
-Date: Mon, 15 Mar 2010 07:55:21 +0100
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Organization: Atmel Nordic AB
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+	Mon, 15 Mar 2010 08:09:44 +0100 (CET)
 References: <1268609353-31224-1-git-send-email-ulf.samuelsson@atmel.com>
 	<201003150733.48704.marcin@juszkiewicz.com.pl>
-In-Reply-To: <201003150733.48704.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 62.127.194.20
-X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
+	<4B9DD9D9.90909@atmel.com>
+Message-Id: <EC8EBEF5-F51C-42B7-8752-074F2D3620CE@vanille-media.de>
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <4B9DD9D9.90909@atmel.com>
+X-Mailer: iPhone Mail (7D11)
+Mime-Version: 1.0 (iPhone Mail 7D11)
+Date: Mon, 15 Mar 2010 08:09:35 +0100
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_BL_SPAMCOP_NET autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH 1/1] alsa-state: Add support for at91 boards
@@ -47,42 +43,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 06:58:24 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Mon, 15 Mar 2010 07:11:43 -0000
+Content-Type: text/plain;
+	charset=utf-8;
+	format=flowed;
+	delsp=yes
 Content-Transfer-Encoding: quoted-printable
 
-Marcin Juszkiewicz skrev:
-> Dnia poniedzia=C5=82ek, 15 marca 2010 o 00:29:13 Ulf Samuelsson napisa=C5=
-=82(a):
->> Add ALSA configuration files for at91 boards
->=20
-> Add bump PR of alsa-state and I will push such version.
->=20
-> Regards,=20
-OK.
+Some distros - e.g. Minimal - use the concept of a MACHINE_CLASS which =20=
 
-Base on your comment on linux, I will change to have a common directory
-as well, but is there a smarter way?
+You define in the machine conf (take a look at htc-msm7.inc or ezx-=20
+base) and that can then be used as OVERRIDE.
 
-What I'd often like to do is to have one directory
-for a group of machines.
+Cheers,
 
-So instead of:
-++++++++++++++++++++++++++
-FILES_XXX =3D " <Something> "
+:M:
 
-SRC_URI_at91sam92620ek =3D ${FILES_XXX}
-SRC_URI_at91sam92621ek =3D ${FILES_XXX}
-SRC_URI_at91sam92623ek =3D ${FILES_XXX}
-------------------------
-I'd like to do:
------------------------------
-SRC_URI_at91 =3D " <Something> "
-+++++++++++++++++++++++++++++
+Am 15.03.2010 um 07:55 schrieb Ulf Samuelsson =20
+<ulf.samuelsson@atmel.com>:
 
---=20
-Best Regards
-Ulf Samuelsson
-
+> Marcin Juszkiewicz skrev:
+>> Dnia poniedzia=C5=82ek, 15 marca 2010 o 00:29:13 Ulf Samuelsson =
+napisa=C5=82=20
+>> (a):
+>>> Add ALSA configuration files for at91 boards
+>>
+>> Add bump PR of alsa-state and I will push such version.
+>>
+>> Regards,
+> OK.
+>
+> Base on your comment on linux, I will change to have a common =20
+> directory
+> as well, but is there a smarter way?
+>
+> What I'd often like to do is to have one directory
+> for a group of machines.
+>
+> So instead of:
+> ++++++++++++++++++++++++++
+> FILES_XXX =3D " <Something> "
+>
+> SRC_URI_at91sam92620ek =3D ${FILES_XXX}
+> SRC_URI_at91sam92621ek =3D ${FILES_XXX}
+> SRC_URI_at91sam92623ek =3D ${FILES_XXX}
+> ------------------------
+> I'd like to do:
+> -----------------------------
+> SRC_URI_at91 =3D " <Something> "
+> +++++++++++++++++++++++++++++
+>
+> --=20
+> Best Regards
+> Ulf Samuelsson
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
