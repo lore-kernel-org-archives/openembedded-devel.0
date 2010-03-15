@@ -1,31 +1,39 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from smtprelay-b11.telenor.se ([62.127.194.20])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Nr40L-0006ys-9G
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1Nr4Fs-0006Jq-8w
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 07:42:27 +0100
-Received: (qmail 23804 invoked by uid 813007); 15 Mar 2010 06:39:21 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 15 Mar 2010 06:39:21 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Mar 2010 07:38:21 +0100
-User-Agent: KMail/1.13.1 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.4.1; x86_64; ;
-	)
-References: <1268608696-31002-1-git-send-email-ulf.samuelsson@atmel.com>
-In-Reply-To: <1268608696-31002-1-git-send-email-ulf.samuelsson@atmel.com>
+	Mon, 15 Mar 2010 07:58:24 +0100
+Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
+	by smtprelay-b11.telenor.se (Postfix) with ESMTP id EA06B14F21
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Mar 2010 07:55:22 +0100 (CET)
+X-SMTPAUTH-B2: 
+X-SENDER-IP: 83.227.59.242
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AkIXAN52nUtT4zvyPGdsb2JhbAAHgwWXbAEBAQE3pwuPA4Eygl9qBA
+X-IronPort-AV: E=Sophos;i="4.49,641,1262559600"; d="scan'208";a="50226083"
+Received: from c-f23be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.224]) ([83.227.59.242])
+	by ipb2.telenor.se with ESMTP; 15 Mar 2010 07:55:22 +0100
+Message-ID: <4B9DD9D9.90909@atmel.com>
+Date: Mon, 15 Mar 2010 07:55:21 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-Message-Id: <201003150738.22158.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+To: openembedded-devel@lists.openembedded.org
+References: <1268609353-31224-1-git-send-email-ulf.samuelsson@atmel.com>
+	<201003150733.48704.marcin@juszkiewicz.com.pl>
+In-Reply-To: <201003150733.48704.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 62.127.194.20
+X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] linux-2.6.30: Add linux4sam patches
+Subject: Re: [PATCH 1/1] alsa-state: Add support for at91 boards
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,57 +47,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 06:42:27 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Mon, 15 Mar 2010 06:58:24 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Dnia poniedzia=C5=82ek, 15 marca 2010 o 00:18:15 Ulf Samuelsson napisa=C5=
+Marcin Juszkiewicz skrev:
+> Dnia poniedzia=C5=82ek, 15 marca 2010 o 00:29:13 Ulf Samuelsson napisa=C5=
 =82(a):
+>> Add ALSA configuration files for at91 boards
+>=20
+> Add bump PR of alsa-state and I will push such version.
+>=20
+> Regards,=20
+OK.
 
-> " +KERNEL_MINOR_0 =3D " "
-> +KERNEL_MINOR_10 =3D "
-> ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/patch-${PV}.10.bz2;patch=3D1 " +
-> +AUFS =3D " file://aufs2-30.patch;patch=3D1 "
+Base on your comment on linux, I will change to have a common directory
+as well, but is there a smarter way?
 
-> +SRC_URI_append_calamari        =3D " ${KERNEL_MINOR_10} ${AUFS} "
-> +SRC_URI_append_i686    =3D " ${KERNEL_MINOR_10} ${AUFS} "=20
-> +SRC_URI_append_kixrp435        =3D " ${KERNEL_MINOR_10} ${AUFS} "=20
-> +SRC_URI_append_mx27ads =3D " ${KERNEL_MINOR_10} ${AUFS} "=20
-> +SRC_URI_append_tosa    =3D " ${KERNEL_MINOR_10} ${AUFS} "=20
-> +
-> +SRC_URI_append_mpc8315e-rdb =3D " \
-> +       ${KERNEL_MINOR_10} ${AUFS}      \
-> +       file://mpc8315erdb-add-msi-to-dts.patch;patch=3D1 \
-> +       "
+What I'd often like to do is to have one directory
+for a group of machines.
 
-> +AT91_EXP_PATCHES =3D " \
-> +       ${KERNEL_MINOR_0} \
-> +       http://maxim.org.za/AT91RM9200/2.6/2.6.30-at91.patch.gz;patch=3D1=
- \
-> +       ftp://www.at91.com/pub/buildroot/2.6.30-exp.2.patch.bz2;patch=3D1=
- \
-> +       file://at91/linux-2.6.30-001-configurable-partition-size.patch.pa=
-tc
-> h;patch=3D1 \
-> +       file://at91/linux-2.6.30-002-mach-at91-Kconfig.patch;patch=3D1 \
-> +       file://at91/linux-2.6.30-003-sam9m10g45ek.patch;patch=3D1 \
-> +       "
-> +
-> +SRC_URI_append_at91sam9g10ek           =3D       " ${AT91_EXP_PATCHES} "
+So instead of:
+++++++++++++++++++++++++++
+FILES_XXX =3D " <Something> "
 
-Please look at linux_2.6.28.bb and how nokia900 SRC_URI is created. This wa=
-y=20
-you will not alter other machines but only set for your ones. Hint: set=20
-SRC_URI for at91 boards instead of using SRC_URI_append.
+SRC_URI_at91sam92620ek =3D ${FILES_XXX}
+SRC_URI_at91sam92621ek =3D ${FILES_XXX}
+SRC_URI_at91sam92623ek =3D ${FILES_XXX}
+------------------------
+I'd like to do:
+-----------------------------
+SRC_URI_at91 =3D " <Something> "
++++++++++++++++++++++++++++++
 
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+--=20
+Best Regards
+Ulf Samuelsson
 
 
 
