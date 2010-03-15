@@ -1,52 +1,43 @@
-Received: from mail-fx0-f225.google.com ([209.85.220.225])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Nr5aS-00039V-5o
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 09:23:44 +0100
-Received: by fxm25 with SMTP id 25so184496fxm.27
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nr5tv-0005eM-Eh for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 09:43:55 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nr5r1-0000hn-57 for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 09:40:51 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Mar 2010 09:40:51 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 01:20:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=YlJZyU5NIW4OQ3prgMAIh2Me1PlTLmF//FoLVM153jc=;
-	b=rSWrbH9XJcUjeRpwa9EoHMTOaoRMixx/ksxsAljSak8tpFr11ABW3RCkUmGOvj1KuR
-	YAVS4PmU+Cb392LacXuQgNj8F3FISKnleO6898fpgweCzrno56xCoHfozY6dzh3942d3
-	s6M1/2lKacgnlm1QkCU2NQQuKpRRBeCECju0M=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Ae9YG6/NfhdnP4eEdNYSlmnwUQ/bJgc2IphDmGpYTyNsPm6T2bobf/Evhe9CYxi73p
-	QJ++ux/Aydv+mx71KTNght7OXrfbQN8NnLUVsRNpF2cwNDIzzvtAHD5R6oojjhkwgC11
-	YuBnaFIhdGJ8jCRouSkjdDTZqExb7a2oEhMgk=
-Received: by 10.223.15.65 with SMTP id j1mr1739479faa.0.1268641242602;
-	Mon, 15 Mar 2010 01:20:42 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 13sm2876358fxm.14.2010.03.15.01.20.41
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 15 Mar 2010 01:20:41 -0700 (PDT)
-Date: Mon, 15 Mar 2010 09:20:39 +0100
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 15 Mar 2010 09:40:51 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100315082039.GC3370@jama>
-References: <201003081300.19058.holger+oe@freyther.de>
-	<201003150446.26284.holger+oe@freyther.de>
-	<ac9c93b11003150030i69015e69t78a3b16e6c11d2e5@mail.gmail.com>
-	<201003150846.33517.holger+oe@freyther.de>
-	<ac9c93b11003150108v70781eb6re16d6212c454637e@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <ac9c93b11003150108v70781eb6re16d6212c454637e@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.225
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 15 Mar 2010 09:40:39 +0100
+Message-ID: <hnkrq7$igh$1@dough.gmane.org>
+References: <1268482329.11170.31.camel@mattotaupa>	<hnj0q5$luv$1@dough.gmane.org>
+	<1268608081.3809.6.camel@mattotaupa>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
+In-Reply-To: <1268608081.3809.6.camel@mattotaupa>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: samba-essential upgrade or remove?
+Subject: Re: [PATCH] linux-omap*/beagleboard/defconfig: Compile Ext4 support into Linux.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,38 +51,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 08:23:44 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 15 Mar 2010 08:43:55 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Mar 15, 2010 at 09:08:24AM +0100, Frans Meulenbroeks wrote:
-> > 3.) Remove recipes for vulnerable software when no one is updating them in
-> > time... This can be combined with option 2...
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 15-03-10 00:08, Paul Menzel wrote:
+> Dear Koen,
 > 
-> These are good plans, but I'm not sure if you will get volunteers for
-> 2 and people will definitely complain if you do 3.
+> 
+> Am Sonntag, den 14.03.2010, 16:53 +0100 schrieb Koen Kooi:
+>> Thanks for the patch! I have a huuuuge stack of changed queued for TI
+>> platforms (beagle, hawk, omap3evm etc) that will be merged next week, so
+>> I recreated your patch on top of that:
+>>
+>> http://gitorious.org/angstrom/openembedded/commit/3891af0d4838f1445ee27f6be4258d558731f3ea
+> 
+> Thanks for doing that. I updated the state in Patchwork.
+> 
+>     $ ./pwclient update -s accepted 1711
+> 
+>> And the branch:
+>>
+>> http://gitorious.org/angstrom/openembedded/commits/ti/staging
+>>
+>> Please let me know if that commit matches your intent.
+> 
+> Yes it is. Besides that you shortened the commit message a little bit
+> XorA told me on IRC to formulate. ;-) Since you are in the TSC I am ok
+> with this.
 
-For security issues would be nice to adopt some form of Angstrom
-blacklist class and put blacklist entry for all vulnerable recipes in
-some security-blacklist.conf included from bitbake.conf.
+The change in commit message is due to me not having access to OE mail
+on the computer I committed this on, so I had to type it in from memory.
+There was nothing wrong with yours, just with my memory :)
 
-This way it would be easy to show why the recipe is not available (CVE
-noted in message shown by blacklist when some image tries to pull that
-recipe).
+regards,
 
-Also it would allow easy blacklist removal for people who don't care
-about security and easy to return recipe if someone cares and puts
-enough time to fix that issue.
+KOen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-But current code would probably need to extend for blacklist based on
-PN-PV not only PN (which someone already proposed for blacklisting old
-recipes).
+iD8DBQFLnfKHMkyGM64RGpERAmg2AJwMG4VHDU0dt8OupSTELccJHTfdfACgi8Zv
+VsjNUhf2cWA2HZ66xDyn39I=
+=Pdav
+-----END PGP SIGNATURE-----
 
-Regards,
-
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
 
 
