@@ -1,42 +1,37 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.atmel.fr ([81.80.104.162] helo=atmel-es2.atmel.fr)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nr78a-0001aE-EX for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 11:03:08 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nr75f-0004La-GE for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 11:00:03 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 11:00:03 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <nicolas.ferre@atmel.com>) id 1Nr7CH-0004eM-OO
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 11:06:59 +0100
+Received: from fwat.rfo.atmel.com (gateway [192.168.1.1])
+	by atmel-es2.atmel.fr (8.11.7p1+Sun/8.11.6) with SMTP id o2FA1v810052
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 11:00:03 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 15 Mar 2010 11:02:18 +0100 (MET)
+Received: from meyreuil ([10.159.254.132]) by fwat;
+	Mon, 15 Mar 2010 10:45:33 +0100 (MET)
+Received: from [127.0.0.1] (pc245_112.atmel.fr [10.159.245.112])
+	by meyreuil.atmel.fr (8.11.7p1+Sun/8.11.7) with ESMTP id o2FA3Og08992; 
+	Mon, 15 Mar 2010 11:03:24 +0100 (MET)
+Message-ID: <4B9E05F0.7080701@atmel.com>
+Date: Mon, 15 Mar 2010 11:03:28 +0100
+From: Nicolas Ferre <nicolas.ferre@atmel.com>
+Organization: atmel
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
+	rv:1.9.1.8) Gecko/20100227 Lightning/1.0b1 Thunderbird/3.0.3
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 15 Mar 2010 10:55:10 +0100
-Message-ID: <hnl05u$1r0$1@dough.gmane.org>
-References: <ac9c93b11003141453n7df620c7gca609efe00e0e6f@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
-In-Reply-To: <ac9c93b11003141453n7df620c7gca609efe00e0e6f@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <1268608696-31002-1-git-send-email-ulf.samuelsson@atmel.com>
+In-Reply-To: <1268608696-31002-1-git-send-email-ulf.samuelsson@atmel.com>
+X-SA-Exim-Connect-IP: 81.80.104.162
+X-SA-Exim-Mail-From: nicolas.ferre@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Re; [PATCH 7/8] autoconf: add 2.65
+Cc: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Subject: Re: [PATCH 1/2] linux-2.6.30: Add linux4sam patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,33 +45,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 10:03:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 15 Mar 2010 10:06:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 14-03-10 22:53, Frans Meulenbroeks wrote:
-> Bumped upon this patch of Bernhard.
-> http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg03649.html
-> As I already deleted it from my inbox I cannot reply on it directly.
+Le 15/03/2010 00:18, Ulf Samuelsson :
+> Do not apply .10 minor patch due to conflicts
 > 
-> I've been playing with autoconf 2.65 myself. There are some issues left:
+> Introduce support for:
+> 
+> +	at91sam9260ek
+> +	at91sam9261ek
+> +	at91sam9g10ek
+> +	at91sam9g20ek
+> +	at91sam9g20ek_2mmc
+> +	at91sam9g45ek
 
-You forgot:
+This board name is not official name from Atmel. Be careful, it may
+confuse people (as there are already may boards based on this chip pair
+(9g45/9m10)).
 
-* some packages don't build with older autoconf, so this mornings
-commits break every distro in OE.
 
-I fixed up tiff so I can build gtk+ again, but I suspect there are more.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+> +	at91sam9g45ekes
+> +	at91sam9m10ekes
+> +	at91sam9rlek
+> +	at91sam9xeek
+> 
+> Leave at91sam9263ek patches as is for now.
+> In addition: Add support for configurable NAND partition size
+> checksums.ini updated in another patch
+> 
+> Signed-off-by: Ulf Samuelsson <ulf.samuelsson@atmel.com>
 
-iD8DBQFLngP+MkyGM64RGpERAnoJAJ9lhYltn5rUKEPHLyikB2CtFtJB8QCeIbc2
-ub++CBHLWGgZFX62kLqjSRo=
-=+dxv
------END PGP SIGNATURE-----
+[..]
+
+> --- a/recipes/linux/linux_2.6.30.bb
+> +++ b/recipes/linux/linux_2.6.30.bb
+> @@ -1,6 +1,6 @@
+
+[..]
+
+> +AT91_EXP_PATCHES = " \
+> +	${KERNEL_MINOR_0} \
+> +	http://maxim.org.za/AT91RM9200/2.6/2.6.30-at91.patch.gz;patch=1 \
+> +	ftp://www.at91.com/pub/buildroot/2.6.30-exp.2.patch.bz2;patch=1 \
+
+NAK
+
+The latest atmel experimental patch series is here:
+ftp://ftp.linux4sam.org/pub/linux/2.6.30-at91/2.6.30-at91-exp.3.tar.gz
+
+=> note the exp.3 and not exp.2 that you are using...
+
+> +	file://at91/linux-2.6.30-001-configurable-partition-size.patch.patch;patch=1 \
+> +	file://at91/linux-2.6.30-002-mach-at91-Kconfig.patch;patch=1 \
+> +	file://at91/linux-2.6.30-003-sam9m10g45ek.patch;patch=1 \
+> +	"
+> +
+> +SRC_URI_append_at91sam9g10ek		=	" ${AT91_EXP_PATCHES} "
+> +SRC_URI_append_at91sam9g20ek_2mmc	=	" ${AT91_EXP_PATCHES} "
+> +SRC_URI_append_at91sam9g45ek		=	" ${AT91_EXP_PATCHES} "
+> +SRC_URI_append_at91sam9g45ekes		=	" ${AT91_EXP_PATCHES} "
+> +SRC_URI_append_at91sam9m10ekes		=	" ${AT91_EXP_PATCHES} "
+> +SRC_URI_append_at91sam9260ek		=	" ${AT91_EXP_PATCHES} "
+> +SRC_URI_append_at91sam9261ek		=	" ${AT91_EXP_PATCHES} "
+> +# SRC_URI_append_at91sam9263ek		=	" ${AT91_EXP_PATCHES} "
+> +SRC_URI_append_at91sam9rlek		=	" ${AT91_EXP_PATCHES} "
+> +SRC_URI_append_at91sam9xeek		=	" ${AT91_EXP_PATCHES} "
+> +SRC_URI_append_at91sam9rlek		=	" ${AT91_EXP_PATCHES} "
+> +
+> +SRC_URI_append_at91sam9263ek = " \
+> +	${KERNEL_MINOR_10} ${AUFS}	\
+> +	http://maxim.org.za/AT91RM9200/2.6/2.6.30-at91.patch.gz;patch=1 \
+> +	file://hrw-linux-2.6.30-exp.patch;patch=1 \
+> +	"
+>  
+
+
+-- 
+Nicolas Ferre
 
 
 
