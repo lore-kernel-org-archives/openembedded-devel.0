@@ -1,32 +1,31 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Nr9kp-0003Kj-SF
+	(envelope-from <holger+oe@freyther.de>) id 1NrAEb-0001Xw-BB
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 13:50:49 +0100
-Received: (qmail 5748 invoked by uid 813007); 15 Mar 2010 12:47:43 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 15 Mar 2010 12:47:43 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	Mon, 15 Mar 2010 14:21:30 +0100
+Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
+	[123.192.181.204])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id C4BD31B10C02
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Mar 2010 13:21:29 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Mar 2010 13:46:42 +0100
-User-Agent: KMail/1.13.1 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.4.1; x86_64; ;
-	)
-References: <201003150738.22158.marcin@juszkiewicz.com.pl>
-	<1268659726-20887-1-git-send-email-nicolas.ferre@atmel.com>
-In-Reply-To: <1268659726-20887-1-git-send-email-nicolas.ferre@atmel.com>
+Date: Mon, 15 Mar 2010 14:17:46 +0100
+User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
+References: <201003150605.03085.holger+oe@freyther.de>
+	<fca63bcf1003150544k4a9df366m8119add6de5fc1d0@mail.gmail.com>
+In-Reply-To: <fca63bcf1003150544k4a9df366m8119add6de5fc1d0@mail.gmail.com>
 MIME-Version: 1.0
-Message-Id: <201003151346.43686.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Message-Id: <201003151417.46582.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] linux-2.6.30: add linux4sam patches
+Subject: Re: Request for help to address known security issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,34 +39,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 12:50:49 -0000
+X-List-Received-Date: Mon, 15 Mar 2010 13:21:30 -0000
 Content-Type: Text/Plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-Dnia poniedzia=B3ek, 15 marca 2010 o 14:28:46 Nicolas Ferre napisa=B3(a):
-> Marcin, what do you think of this patch architecture and URI management?
+On Monday 15 March 2010 13:44:59 Michael Lippautz wrote:
+> 2010/3/15 Holger Hans Peter Freyther <holger+oe@freyther.de>:
+> > unrar 3.4.3: http://www.FreeBSD.org/ports/portaudit/94234e00-be8a-11db-
+> > b2ec-000c6ec775d9.html
+> > 
+> > unrar-native: same thing..
+> 
+> Done. Fixed by bumping (... rewriting) to 3.9.9.
 
-Nice. Few notes:
-
-1. do it all in linux_2.6.30.bb recipe
-2. we rather user CAPS for variable names
-3. AT91_SRC_URI =3D "contents of at91_kernel + contents of lnx4sam_exp3" wo=
-uld=20
-be better
-4. can't you just squash 2.6.30-at91-exp3.tar.gz into one patch?
-=20
-> The defconfig are not included in this patch and shall be sent in another
-> patch series.
-
-Merge those into one patch - otherwise you will make "PR bump" flood.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+Thanks!
 
 
