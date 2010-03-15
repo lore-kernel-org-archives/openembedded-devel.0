@@ -1,29 +1,32 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NqxMY-0004mT-Rz for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 00:36:56 +0100
-Received: from g231208203.adsl.alicedsl.de ([92.231.208.203]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NqxJf-0000SH-VX for openembedded-devel@lists.openembedded.org;
-	Sun, 14 Mar 2010 23:33:52 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <holger+oe@freyther.de>) id 1Nr1Jh-0002LJ-KV
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 04:50:10 +0100
+Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
+	[123.192.181.204])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id A34F21B10C02
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Mar 2010 03:50:08 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Mar 2010 00:33:50 +0100
-Message-ID: <1268609630.3809.13.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Mon, 15 Mar 2010 04:46:26 +0100
+User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
+References: <201003081300.19058.holger+oe@freyther.de>
+	<B6E39224-2467-4EDA-A0F4-94C4F9DAF9CD@vanille-media.de>
+	<201003081351.35463.holger+oe@freyther.de>
+In-Reply-To: <201003081351.35463.holger+oe@freyther.de>
+MIME-Version: 1.0
+Message-Id: <201003150446.26284.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: enna: Does someone have an updated recipe for geexbox repositories?
+Subject: Re: samba-essential upgrade or remove?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,52 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 14 Mar 2010 23:36:56 -0000
-X-Groupsio-MsgNum: 17607
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-lpMeps/q6q9k1UMwpae3"
+X-List-Received-Date: Mon, 15 Mar 2010 03:50:10 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
---=-lpMeps/q6q9k1UMwpae3
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Dear OE folks,
-
-
-        $ bitbake enna
-        [=E2=80=A6]
-        ERROR: Task 7 (/srv/oe/openembedded/recipes/e17/enna_svn.bb, do_con=
-figure) failed
-        [=E2=80=A6]
-        $ more /srv/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/enna=
--0.2.0+svnr46510-r1/enna/README
-        Enna have been removed from E SVN (at svn rev 42500).
-        Development continue in geexbox repositories.
-        You can find more informations here :
-        http://enna.geexbox.org
-       =20
-        And you can get development version here :
-        hg clone http://hg.geexbox.org/enna
-
-Did someone already do the work to create an updated recipe? If not I
-will try to update/convert the recipe tomorrow.
+On Monday 08 March 2010 13:51:35 Holger Hans Peter Freyther wrote:
+> On Monday 08 March 2010 13:42:07 Dr. Michael Lauer wrote:
+> > While I'm not using it atm., I recall that samba-essential was the only
+> > recipe that worked relatively painless when Matthias Hentges create it
+> > back then.
+> 
+> Then please fix it. You will do a great service to our users. The following
+> CVEs are not addressed:
+> 	CVE-2009-2813, CVE-2009-2948, CVE-2009-2906, CVE-2009-1888,
+> CVE-2008-4314, CVE-2008-1105, CVE-2007-6015, CVS-2007-4572,  CVE-2007-5398,
+> CVE-2007-2444, CVE-2007-2446, CVE-2007-2447, CVE-2007-0452, CVE-2007-0453,
+> CVE-2007-0454, CAN-2006-1059..
 
 
-Thanks,
+any update? Is anyone volunteering to update samba-essential or shall we 
+remove it from the tree? I think we have a responsibility to our users that if 
+we install a network daemon that we at least fix the known security issues with 
+this one or remove it from our recipe collection... Opinions?
 
-Paul
+z.
 
---=-lpMeps/q6q9k1UMwpae3
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkudcl4ACgkQPX1aK2wOHVhCRACgjPxeRF4gc52G2vcXTxe7pNtN
-V7AAn2PZz5vLFbvjjucQhBB35jQsPyLU
-=2zEJ
------END PGP SIGNATURE-----
-
---=-lpMeps/q6q9k1UMwpae3--
