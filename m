@@ -1,29 +1,46 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-yw0-f175.google.com ([209.85.211.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NrBkv-0001MM-F7 for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 15:59:02 +0100
-Received: from f053034098.adsl.alicedsl.de ([78.53.34.98]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NrBi1-0007IX-P6 for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 14:55:57 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NrBnD-0003SW-Nh
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 16:01:20 +0100
+Received: by ywh5 with SMTP id 5so296578ywh.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Mar 2010 07:58:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=5ypUfYtkm/1uyaSLl/+s7RhlMEhR8dVcA/ah0lvvdZU=;
+	b=hPTqsbzP/90Wh3g664jUqqMTV9SKgo7Ll4fKRY+zXb077wA8TTFG7i5erqy37p5kr8
+	lXeFb9i6CXHsHgsd/ZizquqVi7lcSfT4QjGu3taj3uffnsVLj11h43iy7yi4dbCaOcd8
+	RetFErNbwSX51cfk/nZieag7Sr3a5PrgtPnPE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=LW9JR86gDrDFPazwz87289dYBP3ruBe6FY0+h+JzFyfA1e0aiu3c7a2dTPGdYRCPm5
+	r0ekO5SHRUfAL4gf8K8UDxBVlOZkaUva3JW2jVxPAPiF04hntzztiiVlAU8UE6CmnAG8
+	dUAWJRP6Y7hUQYfPtGP8xT4sVEllyzHbb4/98=
+MIME-Version: 1.0
+Received: by 10.101.169.39 with SMTP id w39mr1753795ano.140.1268665097437; 
+	Mon, 15 Mar 2010 07:58:17 -0700 (PDT)
+In-Reply-To: <201003151538.10288.holger+oe@freyther.de>
+References: <201003081300.19058.holger+oe@freyther.de>
+	<201003150446.26284.holger+oe@freyther.de>
+	<4B9E3BE8.1070800@mwester.net>
+	<201003151538.10288.holger+oe@freyther.de>
+Date: Mon, 15 Mar 2010 15:58:17 +0100
+Message-ID: <ac9c93b11003150758m4c3a4c77gfa84a47ced1c86c3@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Mar 2010 15:55:56 +0100
-Message-ID: <1268664956.16974.3.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.211.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] liba52: Disable `-prefer-non-pic` to enable `-fPIC`.
+Subject: Re: samba-essential upgrade or remove?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,102 +54,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 14:59:03 -0000
-X-Groupsio-MsgNum: 17675
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-YEu1d6rJSVr8DWYIiwfu"
-
---=-YEu1d6rJSVr8DWYIiwfu
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 15 Mar 2010 15:01:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Using GCC 4.4.2 and Binutils 2.20 gives the following error.
+2010/3/15 Holger Hans Peter Freyther <holger+oe@freyther.de>:
+> On Monday 15 March 2010 14:53:44 Mike Westerhof wrote:
+>
+> Dear Mike,
+>
+>> Sigh.
+>>
+>> I really don't think this recipe is worthy of this much controversy.
+>> It's essential (hence the name) for certain very small NAS devices.
+>>
+>> I fail to see how its presence is impacting others -- if you don't like
+>> it, don't use it. =A0Simple.
+>
+> See. This is not the point of liking or not liking a given recipe. I don'=
+t
+> like the fact that this recipe is not maintained for years and has the
+> possibility of damaging the reputation of distros built with OE. I assume
+> even users of SlugOS do not like if their device gets owned via known and
+> circulating exploits?
 
-    =E2=80=A6/bin/ld: .libs/imdct.o: relocation R_ARM_MOVW_ABS_NC against `=
-a local symbol' can not be used when making a shared object; recompile with=
- -fPIC
+I think the chances are small that anyone would put a slug on the open inte=
+rnet.
+>
+> It would be nice if we could establish a shared responsibility for mainta=
+ining
+> software that listens on network ports and is handling multimedia content=
+ (the
+> two kind of things most likely to be suffering flaws). I don't think it i=
+s that
+> difficult. If there is a remote hole and exploits are floating around, up=
+grade
+> the recipe?
 
-Therefore enable `-fPIC` with this patch taken from Debian [1].
+Note that this might go a lot further than you think.
+It also means keeping things like php, python and perl up to date as
+people could exploit bugs in php code or cgi scripts.
 
-[1] http://patch-tracker.debian.org/patch/series/view/a52dec/0.7.4-13/01-en=
-able-pic.diff
+Frans
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
- recipes/liba52/files/01-enable-pic.diff |   23 +++++++++++++++++++++++
- recipes/liba52/liba52_0.7.4.bb          |    5 +++--
- 2 files changed, 26 insertions(+), 2 deletions(-)
- create mode 100644 recipes/liba52/files/01-enable-pic.diff
 
-diff --git a/recipes/liba52/files/01-enable-pic.diff b/recipes/liba52/files=
-/01-enable-pic.diff
-new file mode 100644
-index 0000000..ed1accd
---- /dev/null
-+++ b/recipes/liba52/files/01-enable-pic.diff
-@@ -0,0 +1,23 @@
-+Description: Disabling -prefer-non-pic which enables -fPIC
-+Bug-Debian: http://bugs.debian.org/401590
-+Author: Daniel Baumann <daniel@debian.org>, Dmitrijs Ledkovs <dmitrij.ledk=
-ov@gmail.com>
-+
-+
-+---
-+ liba52/configure.incl |    3 ---
-+ 1 files changed, 0 insertions(+), 3 deletions(-)
-+
-+Index: a52dec-deb/liba52/configure.incl
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-+--- a52dec-deb.orig/liba52/configure.incl	2009-12-05 02:52:12.000000000 +0=
-000
-++++ a52dec-deb/liba52/configure.incl	2009-12-05 03:23:45.000000000 +0000
-+@@ -1,9 +1,6 @@
-+ AC_SUBST([LIBA52_CFLAGS])
-+ AC_SUBST([LIBA52_LIBS])
-+=20
-+-dnl avoid -fPIC when possible
-+-LIBA52_CFLAGS=3D"$LIBA52_CFLAGS -prefer-non-pic"
-+-
-+ AC_ARG_ENABLE([double],
-+     [  --enable-double         use double-precision samples])
-+ if test x"$enable_double" =3D x"yes"; then
-diff --git a/recipes/liba52/liba52_0.7.4.bb b/recipes/liba52/liba52_0.7.4.b=
-b
-index 743fa30..ea87cbe 100644
---- a/recipes/liba52/liba52_0.7.4.bb
-+++ b/recipes/liba52/liba52_0.7.4.bb
-@@ -2,11 +2,12 @@ DESCRIPTION =3D "Library for reading some sort of media f=
-ormat."
- LICENSE =3D "GPL"
- SECTION =3D "libs"
- PRIORITY =3D "optional"
--PR =3D "r1"
-+PR =3D "r2"
-=20
- inherit autotools
-=20
--SRC_URI =3D "http://liba52.sourceforge.net/files/a52dec-${PV}.tar.gz"
-+SRC_URI =3D "http://liba52.sourceforge.net/files/a52dec-${PV}.tar.gz \
-+           file://01-enable-pic.diff;patch=3D1"
- S =3D "${WORKDIR}/a52dec-${PV}"
-=20
- EXTRA_OECONF =3D " --enable-shared "
---=20
-1.7.0
-
---=-YEu1d6rJSVr8DWYIiwfu
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkueSm8ACgkQPX1aK2wOHVha+wCbBJWcLeqGX8wMANHIfSG8As71
-tpUAnidbR/gNpx4KGr+DVcaQKxMGuNd/
-=M9Gc
------END PGP SIGNATURE-----
-
---=-YEu1d6rJSVr8DWYIiwfu--
