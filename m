@@ -1,39 +1,32 @@
-Received: from hsp-52.hspserver.com ([85.197.80.179])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ml@vdm-design.de>) id 1NrCji-0002kE-J2
+	(envelope-from <holger+oe@freyther.de>) id 1NrCjo-0002nO-QZ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 17:01:52 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by hsp-52.hspserver.com (Postfix) with ESMTP id 05EC8A2C3CC
+	Mon, 15 Mar 2010 17:01:57 +0100
+Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
+	[123.192.181.204])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id BA2061B10C02
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 16:58:47 +0100 (CET)
-Received: from hsp-52.hspserver.com ([127.0.0.1])
-	by localhost (hsp-52.hspserver.com [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id hhwf5HK-AjLO
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 16:58:46 +0100 (CET)
-Received: from tomboy.localnet (pD9E154E8.dip.t-dialin.net [217.225.84.232])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by hsp-52.hspserver.com (Postfix) with ESMTP id 40DCAA2C3AF
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 16:58:46 +0100 (CET)
-From: Thomas Zimmermann <ml@vdm-design.de>
+	Mon, 15 Mar 2010 16:01:53 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Mar 2010 16:58:45 +0100
-User-Agent: KMail/1.12.4 (Linux/2.6.33-0.slh.16-sidux-amd64; KDE/4.3.4; x86_64;
-	; )
+Date: Mon, 15 Mar 2010 16:58:08 +0100
+User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
+References: <201003081300.19058.holger+oe@freyther.de>
+	<hnkunp$sju$1@dough.gmane.org>
+	<ac9c93b11003150251w3ca229d6uedc63c4dae21e52f@mail.gmail.com>
+In-Reply-To: <ac9c93b11003150251w3ca229d6uedc63c4dae21e52f@mail.gmail.com>
 MIME-Version: 1.0
-Message-Id: <201003151658.45421.ml@vdm-design.de>
-X-SA-Exim-Connect-IP: 85.197.80.179
-X-SA-Exim-Mail-From: ml@vdm-design.de
+Message-Id: <201003151658.08401.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: qemu: fails to build without zlib-dev installed on buildhost
+Subject: Re: samba-essential upgrade or remove?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,77 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 16:01:52 -0000
-X-Groupsio-MsgNum: 17680
-Content-Type: Multipart/Mixed;
-  boundary="Boundary-00=_1klnL3MagD6G4KM"
-
---Boundary-00=_1klnL3MagD6G4KM
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Mon, 15 Mar 2010 16:01:57 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-Hi,
-i tried to build an image on a minimal system today, to check which depencies 
-are needed to build the image.
-First thing that fails is qemu-native. It Fails during do_configure because of 
-missing zlib headers.
-So i tried to build zlib-native first, but that has changed nothing. After 
-looking at the configure script it seems that the check just uses $QEMU_CFLAGS 
-which contains only "-I. -I${SRC_DIR}" so adding -I${STAGIUNG_INCDIR_NATIVE} 
-to $QEMU_CFLAGS solves that issue.
+On Monday 15 March 2010 10:51:33 Frans Meulenbroeks wrote:
 
-Please check the following patch, as i've no exprience with 
-BBCLASSEXTEND="native" and i don't want to break qemu.
+> > I don't think 1) is a realistic option, if we go with that, we should
+> > just redirect oe.org to buildroot.org and go home.
+> 
+> Why is it not realistic.
+> Lots of driver code I get from commercial vendors, contain statements like
+> "this is sample code only, not intended for use in products, proceed
+> at own risk, bla bla bla".
 
-Regards
-Thomas
-
---Boundary-00=_1klnL3MagD6G4KM
-Content-Type: text/x-patch;
-  charset="UTF-8";
-  name="0001-qemu-fix-build-without-zlib-headers-installed-on-bui.patch"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: attachment;
-	filename="0001-qemu-fix-build-without-zlib-headers-installed-on-bui.patch"
-
-From e19f00968b9d865088ef3a45a85825c5fc17edc5 Mon Sep 17 00:00:00 2001
-From: Thomas Zimmermann <ml@vdm-design.de>
-Date: Mon, 15 Mar 2010 16:42:14 +0100
-Subject: [PATCH] qemu: fix build without zlib headers installed on buildhos=
-t
-
-*qemu-native fails to build without zlib-dev package installed on buildhost
-*configure script just adds -I. and -I${SRC_DIR} to QEMU_CFLAGS to build ch=
-ecks,
- so it fails to build without headers installed on host
-*change DEPENDS from zlib to zlib-native to install zlib headers in staging
-
-Signed-off-by: Thomas Zimmermann <ml@vdm-design.de>
----
- recipes/qemu/qemu_0.12.3.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
-
-diff --git a/recipes/qemu/qemu_0.12.3.bb b/recipes/qemu/qemu_0.12.3.bb
-index 035b1a5..bc5c251 100644
---- a/recipes/qemu/qemu_0.12.3.bb
-+++ b/recipes/qemu/qemu_0.12.3.bb
-@@ -1,5 +1,5 @@
- LICENSE =3D "GPL"
--DEPENDS =3D "zlib"
-+DEPENDS =3D "zlib-native"
-=20
- PR =3D "r0"
-=20
-@@ -32,5 +32,6 @@ EXTRA_OECONF +=3D "--disable-sdl --disable-strip"
- inherit autotools
-=20
- do_configure() {
-+	export QEMU_CFLAGS=3D"-I${STAGING_INCDIR_NATIVE} ${QEMU_CFLAGS}"
- 	${S}/configure --prefix=3D${prefix} ${EXTRA_OECONF}
- }
---=20
-1.7.0
+You are mixing two things again. One is warranty and of course our MIT license 
+says that the stuff comes "as is" without warranty and such. The other is what 
+do we want to try. I think we should folllow CVEs and have no known security 
+issues in our default set (bitbake -s).
 
 
---Boundary-00=_1klnL3MagD6G4KM--
