@@ -1,44 +1,44 @@
 Received: from gatekeeper.tait.co.nz ([202.37.96.11])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.stanger@tait.co.nz>) id 1NrJrj-0000pa-Aa
+	(envelope-from <douglas.royds@tait.co.nz>) id 1NrJrp-0000pq-9c
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Mar 2010 00:38:37 +0100
+	Tue, 16 Mar 2010 00:38:41 +0100
 Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
-	by localhost.tait.co.nz (Postfix) with ESMTP id AA18D46755
+	by localhost.tait.co.nz (Postfix) with ESMTP id 95BCE46756
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Mar 2010 12:35:40 +1300 (NZDT)
+	Tue, 16 Mar 2010 12:35:53 +1300 (NZDT)
 Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])
-	by gatekeeper.tait.co.nz (Postfix) with ESMTP id 9739046749
+	by gatekeeper.tait.co.nz (Postfix) with ESMTP id 7C23146749
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Mar 2010 12:35:40 +1300 (NZDT)
+	Tue, 16 Mar 2010 12:35:53 +1300 (NZDT)
 Received: from conversion-daemon.sunstrike.tait.co.nz by sunstrike.tait.co.nz
 	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
 	id <0KZC00601K3BW900@sunstrike.tait.co.nz>
-	(original mail from michael.stanger@tait.co.nz)
+	(original mail from douglas.royds@tait.co.nz)
 	for openembedded-devel@lists.openembedded.org; Tue,
-	16 Mar 2010 12:35:20 +1300 (NZDT)
-Received: from [172.25.116.124] by sunstrike.tait.co.nz
+	16 Mar 2010 12:35:34 +1300 (NZDT)
+Received: from [172.25.116.17] by sunstrike.tait.co.nz
 	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
-	with ESMTP id <0KZC0023FK3VAZ50@sunstrike.tait.co.nz> for
+	with ESMTP id <0KZC0025UK6ZAZ50@sunstrike.tait.co.nz> for
 	openembedded-devel@lists.openembedded.org; Tue,
-	16 Mar 2010 12:33:47 +1300 (NZDT)
-Date: Tue, 16 Mar 2010 12:33:31 +1300
-From: Michael Stanger <michael.stanger@tait.co.nz>
-In-reply-to: <4B9EB657.8080508@tait.co.nz>
+	16 Mar 2010 12:35:23 +1300 (NZDT)
+Date: Tue, 16 Mar 2010 12:35:23 +1300
+From: Douglas Royds <douglas.royds@tait.co.nz>
+In-reply-to: <6C2434209962DC46B88345CA85C334A285DAA67634@Courier.syntech.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <4B9EC3CB.4040904@tait.co.nz>
+Message-id: <4B9EC43B.10201@tait.co.nz>
 MIME-version: 1.0
-References: <4B9EB657.8080508@tait.co.nz>
+References: <6C2434209962DC46B88345CA85C334A285DAA67634@Courier.syntech.org>
 User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 X-SA-Exim-Connect-IP: 202.37.96.11
-X-SA-Exim-Mail-From: michael.stanger@tait.co.nz
+X-SA-Exim-Mail-From: douglas.royds@tait.co.nz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] lua5.1: Adopt new staging policy
+Subject: Re: Need help with "No GNU_HASH in the elf binary"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,117 +52,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 23:38:37 -0000
+X-List-Received-Date: Mon, 15 Mar 2010 23:38:42 -0000
 Content-type: text/plain; format=flowed; charset=ISO-8859-1
 Content-transfer-encoding: 7BIT
 
-Hi,
+For some background reading, try this:
 
-I noted that my patch is cut-off in patchwork,
-does this matter and/or why did it happen?
+    http://lwn.net/Articles/192624/
 
-Cheers,
-Michael
+The -Wl,-O1 linker option is set in bitbake.conf (see TARGET_LDFLAGS). 
+Angstrom sets -Wl,--hash-style=gnu in angstrom-glibc.inc (see 
+TARGET_LINK_HASH_STYLE).
 
-Michael Stanger wrote:
-> Sorry about earlier thread-hijacking...
->
-> - Removed do_stage from recipes
-> - Set NATIVE_INSTALL_WORKS=1
-> - lua5.1-native now stages lua executable
-> - Removed -native recipe, use BBCLASSEXTENDS instead
->
-> Signed-off-by: Michael Stanger <michael.stanger@taitradio.com>
-> ---
-> recipes/lua/lua5.1-native_5.1.4.bb |   11 -----------
-> recipes/lua/lua5.1_5.1.4.bb        |   10 +++-------
-> 2 files changed, 3 insertions(+), 18 deletions(-)
-> delete mode 100644 recipes/lua/lua5.1-native_5.1.4.bb
->
-> diff --git a/recipes/lua/lua5.1-native_5.1.4.bb
-> b/recipes/lua/lua5.1-native_5.1.4.bb
-> deleted file mode 100644
-> index 35afb55..0000000
-> --- a/recipes/lua/lua5.1-native_5.1.4.bb
-> +++ /dev/null
-> @@ -1,11 +0,0 @@
-> -require lua5.1_${PV}.bb
-> -inherit native
-> -
-> -DEPENDS = "readline-native"
-> -
-> -do_stage () {
-> -    oe_libinstall -C src liblua ${STAGING_LIBDIR}/
-> -    install -d ${STAGING_INCDIR}/
-> -    install -m 0644 src/lua.h src/luaconf.h src/lualib.h src/lauxlib.h
-> ${STAGING_INCDIR}/
-> -}
-> -
-> diff --git a/recipes/lua/lua5.1_5.1.4.bb b/recipes/lua/lua5.1_5.1.4.bb
-> index 8041def..e4a3c82 100644
-> --- a/recipes/lua/lua5.1_5.1.4.bb
-> +++ b/recipes/lua/lua5.1_5.1.4.bb
-> @@ -4,7 +4,7 @@ LICENSE = "MIT"
-> HOMEPAGE = "http://www.lua.org/"
->
-> DEPENDS += "readline"
-> -PR = "r4"
-> +PR = "r5"
-> SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz \
->            file://lua5.1.pc"
-> S = "${WORKDIR}/lua-${PV}"
-> @@ -19,12 +19,6 @@ do_compile () {
->        oe_runmake linux
-> }
->
-> -do_stage () {
-> -       oe_libinstall -C src liblua ${STAGING_LIBDIR}/
-> -       install -d ${STAGING_INCDIR}/
-> -       install -m 0644 src/lua.h src/luaconf.h src/lualib.h
-> src/lauxlib.h ${STAGING_INCDIR}/
-> -}
-> -
-> do_install () {
->        oe_runmake \
->                'INSTALL_TOP=${D}${prefix}' \
-> @@ -34,4 +28,6 @@ do_install () {
->                'INSTALL_SHARE=${D}${datadir}/lua' \
->                install
-> }
-> +NATIVE_INSTALL_WORKS = 1
->
-> +BBCLASSEXTEND = "native"
-> -- 
-> 1.6.3.3
->
->
-> =======================================================================
-> This email, including any attachments, is only for the intended
-> addressee.  It is subject to copyright, is confidential and may be
-> the subject of legal or other privilege, none of which is waived or
-> lost by reason of this transmission.
-> If the receiver is not the intended addressee, please accept our
-> apologies, notify us by return, delete all copies and perform no
-> other act on the email.
-> Unfortunately, we cannot warrant that the email has not been
-> altered or corrupted during transmission.
-> =======================================================================
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> ______________________________________________________________________
-> This email has been scanned by the MessageLabs Email Security System.
-> For more information please visit http://www.messagelabs.com/email 
-> ______________________________________________________________________
->
-> ______________________________________________________________________
-> This email has been scanned by the MessageLabs Email Security System.
-> For more information please visit http://www.messagelabs.com/email 
-> ______________________________________________________________________
+Hope this helps,
+Douglas.
+
+
+
 
 
 =======================================================================
