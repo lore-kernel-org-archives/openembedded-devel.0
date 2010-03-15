@@ -1,44 +1,43 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1Nr8jp-000565-22
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 12:45:38 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 76DC24C33A
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nr8pS-0001nF-Jg for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 12:51:28 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nr8mY-00040C-JT for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 12:48:26 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Mar 2010 12:48:26 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 11:42:36 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id p97wbhDhsyVy
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 11:42:35 +0000 (GMT)
-Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 404452C997
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 11:42:35 +0000 (GMT)
-Received: by xora-desktop.xora.org.uk (Postfix, from userid 500)
-	id 2CD0A27825; Mon, 15 Mar 2010 11:43:13 +0000 (GMT)
-Date: Mon, 15 Mar 2010 11:43:13 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Mon, 15 Mar 2010 12:48:26 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100315114313.GB2425@xora-desktop.xora.org.uk>
-References: <ac9c93b11003141453n7df620c7gca609efe00e0e6f@mail.gmail.com>
-	<hnl05u$1r0$1@dough.gmane.org>
-	<ac9c93b11003150431k384114e6i11cab70a9d377da9@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <ac9c93b11003150431k384114e6i11cab70a9d377da9@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-08-17)
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 15 Mar 2010 12:48:15 +0100
+Message-ID: <hnl6pv$p5g$1@dough.gmane.org>
+References: <201003150605.03085.holger+oe@freyther.de>	<hnl2sg$ar6$1@dough.gmane.org>
+	<201003151200.28221.holger+oe@freyther.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
+In-Reply-To: <201003151200.28221.holger+oe@freyther.de>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Re; [PATCH 7/8] autoconf: add 2.65
+Subject: Re: Request for help to address known security issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,18 +51,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 11:45:39 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 15 Mar 2010 11:51:28 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Mar 15, 2010 at 12:31:10PM +0100, Frans Meulenbroeks wrote:
-> And any help related to getting autoconf up to 2.65 is appreciated.
-> I'm not that much an autoconf wiz.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 15-03-10 12:00, Holger Hans Peter Freyther wrote:
+> On Monday 15 March 2010 11:41:20 Koen Kooi wrote:
+>> On 15-03-10 06:05, Holger Hans Peter Freyther wrote:
+>>> Hi all,
+>>>
+>>> the following OE packages seem to be vulnerable to known security issues
+>>> and I would like to get some help in updating these....
+>>>
+>>> wget 1.9.1: http://www.FreeBSD.org/ports/portaudit/06f142ff-4df3-11d9-
+>>> a9e7-0001020eed82.html
+>>
+>> Wget 1.11.x is in OE already, should be schedule 1.9.x for deletion?
 > 
-There was no wizardry needed to get 2.65 working, I have a build
-currently running to test the new version.
+> yes, but we default to 1.9.x. If you could make angstrom use 1.11 or remove 
+> the default preference of -1 from the wget recipe that would be awesome.
 
-Graeme
+angstrom is now using 1.11.4
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLnh5/MkyGM64RGpERAkS8AJ9zn6S3sL5LnjGLqSU0yLNHM3+iigCgiZyN
+UKecxxpsdA9XLRBa/U1CvkI=
+=700W
+-----END PGP SIGNATURE-----
 
 
 
