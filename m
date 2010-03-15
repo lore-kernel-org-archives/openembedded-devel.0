@@ -1,44 +1,35 @@
-Received: from gatekeeper.tait.co.nz ([202.37.96.11])
+Received: from smtprelay-h21.telenor.se ([195.54.99.196])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.stanger@tait.co.nz>) id 1NrHtW-0001G9-5P
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1NrINp-0002Qi-Ep
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 22:32:21 +0100
-Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
-	by localhost.tait.co.nz (Postfix) with ESMTP id B269446758
+	Mon, 15 Mar 2010 23:03:38 +0100
+Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
+	by smtprelay-h21.telenor.se (Postfix) with ESMTP id 48149D155
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Mar 2010 10:06:52 +1300 (NZDT)
-Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])
-	by gatekeeper.tait.co.nz (Postfix) with ESMTP id A2D0746749
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Mar 2010 10:06:52 +1300 (NZDT)
-Received: from conversion-daemon.sunstrike.tait.co.nz by sunstrike.tait.co.nz
-	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
-	id <0KZC00101ADR5M00@sunstrike.tait.co.nz>
-	(original mail from michael.stanger@tait.co.nz)
-	for openembedded-devel@lists.openembedded.org; Tue,
-	16 Mar 2010 10:06:33 +1300 (NZDT)
-Received: from [172.25.116.124] by sunstrike.tait.co.nz
-	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
-	with ESMTP id <0KZC0024NDAFAZ00@sunstrike.tait.co.nz> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	16 Mar 2010 10:06:27 +1300 (NZDT)
-Date: Tue, 16 Mar 2010 10:06:14 +1300
-From: Michael Stanger <michael.stanger@tait.co.nz>
-In-reply-to: <6C2434209962DC46B88345CA85C334A285DAA67634@Courier.syntech.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <4B9EA146.8000204@tait.co.nz>
-MIME-version: 1.0
-References: <6C2434209962DC46B88345CA85C334A285DAA67634@Courier.syntech.org>
+	Mon, 15 Mar 2010 23:00:31 +0100 (CET)
+X-SENDER-IP: [83.227.59.242]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AgoXAINKnktT4zvyPGdsb2JhbAAHh1qTGgEBAQE3uQuEewQ
+X-IronPort-AV: E=Sophos;i="4.49,645,1262559600"; d="scan'208";a="50741364"
+Received: from c-f23be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.224]) ([83.227.59.242])
+	by ipb2.telenor.se with ESMTP; 15 Mar 2010 23:00:31 +0100
+Message-ID: <4B9EADFC.2060302@atmel.com>
+Date: Mon, 15 Mar 2010 23:00:28 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
 User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-X-SA-Exim-Connect-IP: 202.37.96.11
-X-SA-Exim-Mail-From: michael.stanger@tait.co.nz
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 195.54.99.196
+X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_SOFTFAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] lua5.1: Adopt new staging policy
+Subject: gnome-mplayer fails to build due to no libstdc++.so.6 instaging (available in cross)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,123 +43,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 21:32:21 -0000
-Content-type: text/plain; format=flowed; charset=ISO-8859-1
-Content-transfer-encoding: 7BIT
+X-List-Received-Date: Mon, 15 Mar 2010 22:03:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
+I get the following error message when I include gnome-mplayer in
+an image derived from x11-gpe-image.
 
- - Removed do_stage from recipes
- - Set NATIVE_INSTALL_WORKS=1  
- - lua5.1-native now stages the lua executable
- - Removed -native recipes, now uses BBCLASSEXTENDS
+<snip>
+/arm-angstrom-linux-gnueabi/bin/ld: warning: libstdc++.so.6, needed by
+<OE>/build/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/lib/libmusicbrainz3.so
+not found
 
-Signed-off-by: Michael Stanger <michael.stanger@taitradio.com>
----                                                          
- recipes/lua/lua-native_5.0.2.bb    |   15 ---------------   
- recipes/lua/lua5.1-native_5.1.4.bb |   11 -----------       
- recipes/lua/lua5.1_5.1.4.bb        |   10 +++-------        
- 3 files changed, 3 insertions(+), 33 deletions(-)           
- delete mode 100644 recipes/lua/lua-native_5.0.2.bb          
- delete mode 100644 recipes/lua/lua5.1-native_5.1.4.bb       
+There is no "libstdc++.so.6" in
+"<OE>/build/tmp/staging/armv5te-angstrom-linux-gnueabi/lib"
 
-diff --git a/recipes/lua/lua-native_5.0.2.bb 
-b/recipes/lua/lua-native_5.0.2.bb
-deleted file mode 
-100644                                                     
-index 
-bf70f84..0000000                                                       
---- 
-a/recipes/lua/lua-native_5.0.2.bb                                        
-+++ 
-/dev/null                                                                
-@@ -1,15 +0,0 
-@@                                                             
--require 
-lua.inc                                                             
--                                                                             
+There is a "libstdc++.so.6" in
+<OE>/build/tmp/cross/armv5te/arm-angstrom-linux-gnueabi/lib
 
--PR = "r2"
--DEPENDS += "readline-native"
--SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz \
--          file://debian.patch;patch=1 \
--          file://make.patch;patch=1 \
--          file://advanced-readline.patch;patch=1"
--#         
-http://lua-users.org/files/wiki_insecure/power_patches/5.0/advanced-readline.patch;patch=1"
--S = "${WORKDIR}/lua-${PV}"
--FILESPATH = 
-"${FILE_DIRNAME}/lua-${PV}:${FILE_DIRNAME}/lua:${FILE_DIRNAME}/files"
--
--inherit native
--require lua-build.inc
--
-diff --git a/recipes/lua/lua5.1-native_5.1.4.bb 
-b/recipes/lua/lua5.1-native_5.1.4.bb
-deleted file mode 100644
-index 35afb55..0000000
---- a/recipes/lua/lua5.1-native_5.1.4.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--require lua5.1_${PV}.bb
--inherit native
--
--DEPENDS = "readline-native"
--
--do_stage () {
--    oe_libinstall -C src liblua ${STAGING_LIBDIR}/
--    install -d ${STAGING_INCDIR}/
--    install -m 0644 src/lua.h src/luaconf.h src/lualib.h src/lauxlib.h 
-${STAGING_INCDIR}/
--}
--
-diff --git a/recipes/lua/lua5.1_5.1.4.bb b/recipes/lua/lua5.1_5.1.4.bb
-index 8041def..e4a3c82 100644
---- a/recipes/lua/lua5.1_5.1.4.bb
-+++ b/recipes/lua/lua5.1_5.1.4.bb
-@@ -4,7 +4,7 @@ LICENSE = "MIT"
- HOMEPAGE = "http://www.lua.org/"
+If I move the "libstdc++.so[.6[.0.10]]"  files to the staging directory
+the build will complete, and gnome-mplayer runs on the target.
 
- DEPENDS += "readline"
--PR = "r4"
-+PR = "r5"
- SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz \
-            file://lua5.1.pc"
- S = "${WORKDIR}/lua-${PV}"
-@@ -19,12 +19,6 @@ do_compile () {
-        oe_runmake linux
- }
+I tried doing
+DEPENDS = "libstdc++"
+in "libmusicbrainz.inc"
+but get a "no buildable provider" error.
 
--do_stage () {
--       oe_libinstall -C src liblua ${STAGING_LIBDIR}/
--       install -d ${STAGING_INCDIR}/
--       install -m 0644 src/lua.h src/luaconf.h src/lualib.h 
-src/lauxlib.h ${STAGING_INCDIR}/
--}
--
- do_install () {
-        oe_runmake \
-                'INSTALL_TOP=${D}${prefix}' \
-@@ -34,4 +28,6 @@ do_install () {
-                'INSTALL_SHARE=${D}${datadir}/lua' \
-                install
- }
-+NATIVE_INSTALL_WORKS = 1
+I tried
+RDEPENDS = "libstdc++"
+and then libmusicbrainz completes, but again gnome-mplayer exists with
+the error above.
 
-+BBCLASSEXTEND = "native"
---
-1.6.3.3
+How ensure that staging gets populated with libstdc++ if libmusicbrainz
+is used?
 
-=======================================================================
-This email, including any attachments, is only for the intended
-addressee.  It is subject to copyright, is confidential and may be
-the subject of legal or other privilege, none of which is waived or
-lost by reason of this transmission.
-If the receiver is not the intended addressee, please accept our
-apologies, notify us by return, delete all copies and perform no
-other act on the email.
-Unfortunately, we cannot warrant that the email has not been
- altered or corrupted during transmission.
-=======================================================================
+-- 
+Best Regards
+Ulf Samuelsson
 
 
 
