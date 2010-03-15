@@ -1,43 +1,31 @@
-Received: from mail-yx0-f201.google.com ([209.85.210.201])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NrAky-0005je-LO
+Received: from p3plsmtpa01-07.prod.phx3.secureserver.net ([72.167.82.87])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1NrAls-00037t-88
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 14:54:58 +0100
-Received: by yxe39 with SMTP id 39so1566439yxe.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 06:51:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=yj8kPyg888dALk0IPmdwAe+I8imqgXtfFmyRgyqHlxA=;
-	b=wJv37pyEduof4HtvdkWRnUZOZ633xtall2UwAPbNBL5pYhV4a63R8gcyDhsUv/lFYu
-	1nX+bmzCDa4/nJx8Rqyf/badb8QfIPbQnQEp7TH/ZdyOvRm5irc8XgiNaSDnafhgklHF
-	b0B76cpD1pvWmm0Z7pqj0fXram8hCyhz3KmPE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=JJql4/dclS+u4IHeSitUXpXvhH6/mDUMnVZ7rCu9sYrOJPlUDA5bP8hxKD76OYazc1
-	qKM9h+UEFzJbwD67RwZcy1jiPvz/MtsTkJGQRavGRuBJm4R58yA2cp43naRiWlxagd0W
-	WEVp/K5OZya33B2WkzEntLjCthwTQaYzl16O8=
+	Mon, 15 Mar 2010 14:55:54 +0100
+Received: (qmail 13273 invoked from network); 15 Mar 2010 13:46:08 -0000
+Received: from unknown (209.242.7.187)
+	by p3plsmtpa01-07.prod.phx3.secureserver.net (72.167.82.87) with ESMTP;
+	15 Mar 2010 13:46:08 -0000
+Message-ID: <4B9E3A1E.2090008@mwester.net>
+Date: Mon, 15 Mar 2010 08:46:06 -0500
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-Received: by 10.101.205.23 with SMTP id h23mr218003anq.207.1268661114352; Mon, 
-	15 Mar 2010 06:51:54 -0700 (PDT)
-In-Reply-To: <hnl2fl$9kt$1@dough.gmane.org>
-References: <hnl2fl$9kt$1@dough.gmane.org>
-Date: Mon, 15 Mar 2010 14:51:54 +0100
-Message-ID: <ac9c93b11003150651v1edab66cg9fe285a4fa6384ed@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.201
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <201003081300.19058.holger+oe@freyther.de>	<B6E39224-2467-4EDA-A0F4-94C4F9DAF9CD@vanille-media.de>	<201003081351.35463.holger+oe@freyther.de>	<201003150446.26284.holger+oe@freyther.de>
+	<hnksi7$k9i$2@dough.gmane.org>
+In-Reply-To: <hnksi7$k9i$2@dough.gmane.org>
+X-SA-Exim-Connect-IP: 72.167.82.87
+X-SA-Exim-Mail-From: mike@mwester.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Please don't remove recipes that have PREFERRED_VERSION set on them, e.g. tiff
+Subject: Re: samba-essential upgrade or remove?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,40 +39,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 13:54:58 -0000
+X-List-Received-Date: Mon, 15 Mar 2010 13:55:54 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-2010/3/15 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Hi,
->
-> conf/distro has:
->
-> ../conf/distro/include/kaeilos-2009-preferred-versions.inc:49:PREFERRED_V=
-ERSION_tiff
-> =A0 =A0 =A0 =A0 =A0 =3D "3.8.2+4.0.0beta2"
-> ../conf/distro/include/preferred-om-2009-versions.inc:25:PREFERRED_VERSIO=
-N_tiff
-> =A0 =A0 =A0 =A0 =3D "3.8.2+4.0.0beta2"
-> ../conf/distro/include/angstrom-2008-preferred-versions.inc:47:PREFERRED_=
-VERSION_tiff
-> =A0 =A0 =A0 =A0 =A0=3D "3.8.2+4.0.0beta2"
->
-> And that version was removed this morning without any warning. Would
-> people please stop doing that?
+Koen Kooi wrote:
+> I think samba-essential reason of being can be done in regular samba
+> recipes by putting some better thought in PACKAGES and FILES. So: delete
+> this.
 
+No, the necessary incantations must be done in the configure stage, so
+that the generated binaries do not have so many dependencies.  The size
+problem is not limited to the samba packages themselves; a very
+significant part of the issue are the external dependencies.
 
-Several of the distro's seem to be orphaned, so this rule will cause
-that we create more and more garbage to pile up.
-is that desirable.
-
-Btw, wrt this specific recipe. This was misnamed. A beta recipe is
-named as last_version+new_version. The predecessor of 4.0.0 in this
-case was 3.9.2 (iirc) not 3.8.2.
-
-Frans
+-Mike (mwester)
 
 
