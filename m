@@ -1,44 +1,29 @@
-Received: from mail-yw0-f175.google.com ([209.85.211.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NrBf1-00006z-68
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 15:52:56 +0100
-Received: by ywh5 with SMTP id 5so293683ywh.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 07:49:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=LDp7Tbx+01jgguVnCPja+37izoBOmOwK7i5CzhEsu/E=;
-	b=Y22Dj7iWVeM+pZPhZ/dRy28EnBmrNPEcPmWZkikp8sQn6XJCBXinuqI25f2QArQiqa
-	ouKkQR47sORU++wrHMNyY5cMfwVV+wQuEozcYvsP7CmErxR1lFv6XAlo5hRwx0iXCoyN
-	hfj6rjTiHZ5bqJ9TdB44qoZ7LRYqqBqRQKpKQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=k6pDQ2drDmw23wIuUpueXdIBgQ1+qldeUgGwtuq5y+s2RQrR12nWWVqQ/+nihuRyxH
-	rRsFjvgUuU9ptleouhXq0939ULmMkCjwFJhPJLLIso4lenPKAAs+ZSw8SY1nqyMBoPM+
-	8lvhSVEbTW4iiukT0wd4ybKgiUlHBxRXN3Bsk=
-MIME-Version: 1.0
-Received: by 10.101.131.34 with SMTP id i34mr825999ann.94.1268664588056; Mon, 
-	15 Mar 2010 07:49:48 -0700 (PDT)
-In-Reply-To: <b6ebd0a51003150721x4378f839raf86d53e82d3b891@mail.gmail.com>
-References: <hnl0m8$3al$1@dough.gmane.org>
-	<b6ebd0a51003150721x4378f839raf86d53e82d3b891@mail.gmail.com>
-Date: Mon, 15 Mar 2010 15:49:48 +0100
-Message-ID: <ac9c93b11003150749q6e07c0day7c2111622910eae4@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NrBkv-0001MM-F7 for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 15:59:02 +0100
+Received: from f053034098.adsl.alicedsl.de ([78.53.34.98]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NrBi1-0007IX-P6 for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 14:55:57 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Mon, 15 Mar 2010 15:55:56 +0100
+Message-ID: <1268664956.16974.3.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Make autotools.bbclass warn and fixup for "needs newer autoconf" breakage
+Subject: [PATCH] liba52: Disable `-prefer-non-pic` to enable `-fPIC`.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,89 +37,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 14:52:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 15 Mar 2010 14:59:03 -0000
+X-Groupsio-MsgNum: 17675
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-YEu1d6rJSVr8DWYIiwfu"
+
+--=-YEu1d6rJSVr8DWYIiwfu
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-2010/3/15 Chris Larson <clarson@kergoth.com>:
-> On Mon, Mar 15, 2010 at 3:03 AM, Koen Kooi <k.kooi@student.utwente.nl>wro=
-te:
->
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> Hi,
->>
->> Every now and then the world moves to a more recent autoconf (2.64 is
->> popular nowadays) and distros in OE have to to through a lengthy
->> test-fix-bump cycle to keep up. The workaround for such a problem
->> usually is:
->>
->> do_configure() {
->> =A0 =A0 =A0 =A0gnu-configize
->> =A0 =A0 =A0 =A0oe_runconf
->> }
->>
->> That gets us the config.guess for exotic targets (e.g. avr32) and runs
->> the in-tree configure script. What are your opinions on adding something
->> like this to autotools.bbclass:
->>
->> if ((needed autoconf > installed autoconf) && configure exists)
->> =A0 =A0 =A0 =A0BIG FAT WARNING
->> =A0 =A0 =A0 =A0skip libtoolize + reconf
->>
->> The biggest problem with that is that is "silently" degrades when using
->> the "wrong autoconf" and the possibility for mismatched
->> do_configure_prepend/append =A0methods.
->>
->
-> It doesn't *necessarily* have to degrade silently -- you could do a check
-> from python, either in the task or in the taskstarted event handler for
-> do_configure. =A0(Aside: now that bitbake master can split into client/se=
-rver,
-> bbnote/bberror/etc scripts that actually output stuff via bitbake rather
-> than in the logs should be a real possibility for that branch..)
->
-> Do the benefits (not littering recipes with global shortcuts) outweigh
->> the downsides?
->
->
-> On the one hand, I like the idea, particularly if we can arrange some sor=
-t
-> of warning (or, alternatively, add a message to a sanity check task, so i=
-ts
-> explicit). =A0The only minor concern I have with this is the fact that mi=
-nimum
-> autoconf versions actually rarely reflect real dependency by upstream. =
-=A0Most
-> commonly, they just injected the version number they use, not the one the=
-y
-> actually require.. of course, trying to catch those is a bit of a pain in
-> the ass, so it may be that this is best. =A0*shrug*
->
-> On a related note, I too dislike the recipe 'litter', and think that we n=
-eed
-> a way to toggle non-autoreconf behavior from the recipe easily. =A0In the
-> autotools branch I started on but never completed, I pushed the common
-> autoconf bits into autotools_base.bbclass, and inheriting that rather tha=
-n
-> autotools resulted in gnu-config update + oe_runconf, but an alternative
-> would be to just add a variable for it. =A0Thoughts on that?
+Using GCC 4.4.2 and Binutils 2.20 gives the following error.
 
-According to the handbook using classes to separate common
-functionality is good (http://docs.openemb
-edded.org/usermanual/html/recipes_classes.html)
-and I tend to agree with that.
+    =E2=80=A6/bin/ld: .libs/imdct.o: relocation R_ARM_MOVW_ABS_NC against `=
+a local symbol' can not be used when making a shared object; recompile with=
+ -fPIC
 
-What would be nice is if adjacent to being implemented, it would
-(preferably at the same time) be documented somewhere.
-I see lots of variables in recipes for which the only way to find out
-is to dig into the classes and see how they are used.
-(and actually yesterday I removed an unused/egacy var from all recipes
-in my branch. Didn't make the change in dev head, as I don't feel
-getting the wrath of some people upon me, even though the change is
-good).
+Therefore enable `-fPIC` with this patch taken from Debian [1].
 
-Frans.
+[1] http://patch-tracker.debian.org/patch/series/view/a52dec/0.7.4-13/01-en=
+able-pic.diff
 
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+ recipes/liba52/files/01-enable-pic.diff |   23 +++++++++++++++++++++++
+ recipes/liba52/liba52_0.7.4.bb          |    5 +++--
+ 2 files changed, 26 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/liba52/files/01-enable-pic.diff
 
+diff --git a/recipes/liba52/files/01-enable-pic.diff b/recipes/liba52/files=
+/01-enable-pic.diff
+new file mode 100644
+index 0000000..ed1accd
+--- /dev/null
++++ b/recipes/liba52/files/01-enable-pic.diff
+@@ -0,0 +1,23 @@
++Description: Disabling -prefer-non-pic which enables -fPIC
++Bug-Debian: http://bugs.debian.org/401590
++Author: Daniel Baumann <daniel@debian.org>, Dmitrijs Ledkovs <dmitrij.ledk=
+ov@gmail.com>
++
++
++---
++ liba52/configure.incl |    3 ---
++ 1 files changed, 0 insertions(+), 3 deletions(-)
++
++Index: a52dec-deb/liba52/configure.incl
++=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
++--- a52dec-deb.orig/liba52/configure.incl	2009-12-05 02:52:12.000000000 +0=
+000
+++++ a52dec-deb/liba52/configure.incl	2009-12-05 03:23:45.000000000 +0000
++@@ -1,9 +1,6 @@
++ AC_SUBST([LIBA52_CFLAGS])
++ AC_SUBST([LIBA52_LIBS])
++=20
++-dnl avoid -fPIC when possible
++-LIBA52_CFLAGS=3D"$LIBA52_CFLAGS -prefer-non-pic"
++-
++ AC_ARG_ENABLE([double],
++     [  --enable-double         use double-precision samples])
++ if test x"$enable_double" =3D x"yes"; then
+diff --git a/recipes/liba52/liba52_0.7.4.bb b/recipes/liba52/liba52_0.7.4.b=
+b
+index 743fa30..ea87cbe 100644
+--- a/recipes/liba52/liba52_0.7.4.bb
++++ b/recipes/liba52/liba52_0.7.4.bb
+@@ -2,11 +2,12 @@ DESCRIPTION =3D "Library for reading some sort of media f=
+ormat."
+ LICENSE =3D "GPL"
+ SECTION =3D "libs"
+ PRIORITY =3D "optional"
+-PR =3D "r1"
++PR =3D "r2"
+=20
+ inherit autotools
+=20
+-SRC_URI =3D "http://liba52.sourceforge.net/files/a52dec-${PV}.tar.gz"
++SRC_URI =3D "http://liba52.sourceforge.net/files/a52dec-${PV}.tar.gz \
++           file://01-enable-pic.diff;patch=3D1"
+ S =3D "${WORKDIR}/a52dec-${PV}"
+=20
+ EXTRA_OECONF =3D " --enable-shared "
+--=20
+1.7.0
+
+--=-YEu1d6rJSVr8DWYIiwfu
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkueSm8ACgkQPX1aK2wOHVha+wCbBJWcLeqGX8wMANHIfSG8As71
+tpUAnidbR/gNpx4KGr+DVcaQKxMGuNd/
+=M9Gc
+-----END PGP SIGNATURE-----
+
+--=-YEu1d6rJSVr8DWYIiwfu--
