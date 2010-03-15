@@ -1,35 +1,33 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1Nr4Sg-0000hI-TM
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Nr4VX-0000v6-Hc
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 08:11:43 +0100
-Received: from [10.213.1.226] (tmo-098-162.customers.d1-online.com
-	[80.187.98.162])
-	by drlauer-research.com (Postfix) with ESMTP id A964D584166
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 08:09:44 +0100 (CET)
-References: <1268609353-31224-1-git-send-email-ulf.samuelsson@atmel.com>
-	<201003150733.48704.marcin@juszkiewicz.com.pl>
-	<4B9DD9D9.90909@atmel.com>
-Message-Id: <EC8EBEF5-F51C-42B7-8752-074F2D3620CE@vanille-media.de>
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <4B9DD9D9.90909@atmel.com>
-X-Mailer: iPhone Mail (7D11)
-Mime-Version: 1.0 (iPhone Mail 7D11)
-Date: Mon, 15 Mar 2010 08:09:35 +0100
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+	Mon, 15 Mar 2010 08:14:40 +0100
+Received: (qmail 26474 invoked by uid 813007); 15 Mar 2010 07:11:35 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 15 Mar 2010 07:11:35 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 15 Mar 2010 08:10:36 +0100
+User-Agent: KMail/1.13.1 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.4.1; x86_64; ;
+	)
+References: <20100310103133.14548.62608.stgit@ES-J7S4D2J.amer.consind.ge.com>
+	<1268423765.1625.18.camel@rex>
+	<201003142109.30696.marcin@juszkiewicz.com.pl>
+In-Reply-To: <201003142109.30696.marcin@juszkiewicz.com.pl>
+MIME-Version: 1.0
+Message-Id: <201003150810.36885.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_BL_SPAMCOP_NET autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/1] alsa-state: Add support for at91 boards
+Subject: Re: [PATCH] Allow spectrum fw to build behind a proxy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,64 +41,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 07:11:43 -0000
-Content-Type: text/plain;
-	charset=utf-8;
-	format=flowed;
-	delsp=yes
+X-List-Received-Date: Mon, 15 Mar 2010 07:14:40 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-2"
 Content-Transfer-Encoding: quoted-printable
 
-Some distros - e.g. Minimal - use the concept of a MACHINE_CLASS which =20=
+Dnia niedziela, 14 marca 2010 o 21:09:29 Marcin Juszkiewicz napisa=B3(a):
+> Dnia pi=B1tek, 12 marca 2010 o 20:56:05 Richard Purdie napisa=B3(a):
+> > Ah, I remember this now. It is not a bitbake bug put a base.bbclass bug
+> > as something somewhere has incorrect quoting. Its been fixed in Poky but
+> > probably should be pushed into OE too. If you find the commit where I
+> > last touched the spectrum-fw driver you'll find the core class change
+> > too I suspect. It'd be good to get synced up on that.
+>=20
+> Attached is that changeset. I will look at it tomorrow if someone will not
+> merge it before.
 
-You define in the machine conf (take a look at htc-msm7.inc or ezx-=20
-base) and that can then be used as OVERRIDE.
+Merged this, fixed distribute sources class, merged spectrum-fw from Poky.
 
-Cheers,
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-:M:
 
-Am 15.03.2010 um 07:55 schrieb Ulf Samuelsson =20
-<ulf.samuelsson@atmel.com>:
-
-> Marcin Juszkiewicz skrev:
->> Dnia poniedzia=C5=82ek, 15 marca 2010 o 00:29:13 Ulf Samuelsson =
-napisa=C5=82=20
->> (a):
->>> Add ALSA configuration files for at91 boards
->>
->> Add bump PR of alsa-state and I will push such version.
->>
->> Regards,
-> OK.
->
-> Base on your comment on linux, I will change to have a common =20
-> directory
-> as well, but is there a smarter way?
->
-> What I'd often like to do is to have one directory
-> for a group of machines.
->
-> So instead of:
-> ++++++++++++++++++++++++++
-> FILES_XXX =3D " <Something> "
->
-> SRC_URI_at91sam92620ek =3D ${FILES_XXX}
-> SRC_URI_at91sam92621ek =3D ${FILES_XXX}
-> SRC_URI_at91sam92623ek =3D ${FILES_XXX}
-> ------------------------
-> I'd like to do:
-> -----------------------------
-> SRC_URI_at91 =3D " <Something> "
-> +++++++++++++++++++++++++++++
->
-> --=20
-> Best Regards
-> Ulf Samuelsson
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
