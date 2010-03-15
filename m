@@ -1,42 +1,42 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from hsp-52.hspserver.com ([85.197.80.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nr7Ts-0002A0-HE for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 11:25:05 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nr7Qz-0003Z1-14 for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 11:22:05 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 11:22:04 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <ml@vdm-design.de>) id 1Nr7d0-0005Y1-8z
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 11:34:50 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by hsp-52.hspserver.com (Postfix) with ESMTP id 4DF97A2C3D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 11:22:04 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 15 Mar 2010 11:31:31 +0100 (CET)
+Received: from hsp-52.hspserver.com ([127.0.0.1])
+	by localhost (hsp-52.hspserver.com [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id GuI9jpm3GqBO
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Mar 2010 11:31:30 +0100 (CET)
+Received: from tomboy.localnet (pD9E154E8.dip.t-dialin.net [217.225.84.232])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by hsp-52.hspserver.com (Postfix) with ESMTP id 860E0A2C3C6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Mar 2010 11:31:30 +0100 (CET)
+From: Thomas Zimmermann <ml@vdm-design.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 15 Mar 2010 11:21:52 +0100
-Message-ID: <hnl1o0$744$1@dough.gmane.org>
-References: <1268647686.3759.7.camel@mattotaupa>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
-In-Reply-To: <1268647686.3759.7.camel@mattotaupa>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Mon, 15 Mar 2010 11:31:29 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-0.slh.16-sidux-amd64; KDE/4.3.4; x86_64;
+	; )
+References: <4B9E0843.30005@dresearch.de> <4B9E09C8.2060903@ge.com>
+	<4B9E0A1B.3070606@dresearch.de>
+In-Reply-To: <4B9E0A1B.3070606@dresearch.de>
+MIME-Version: 1.0
+Message-Id: <201003151131.29321.ml@vdm-design.de>
+X-SA-Exim-Connect-IP: 85.197.80.179
+X-SA-Exim-Mail-From: ml@vdm-design.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: docs/usermanual: Preferred ordering of `PR` and `require`?
+Subject: Re: SRC_URI fetching problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,37 +50,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 10:25:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 15 Mar 2010 10:34:50 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Am Montag 15 M=E4rz 2010 11:21:15 schrieb Steffen Sledz:
+> Martyn Welch wrote:
+> > Steffen Sledz wrote:
+> >> I work at a recipe for rsyslog (http://www.rsyslog.com) and hit a
+> >> problem with the wget fetcher.
+> >>
+> >> The download uri for rsyslog-5.4.0.tar.gz does not contain the archive
+> >> name itself but is
+> >> http://www.rsyslog.com/Downloads-req-getit-lid-197.phtml.
+> >>
+> >> If i set
+> >>
+> >> SRC_URI =3D "http://www.rsyslog.com/Downloads-req-getit-lid-197.phtml"
+> >> SRC_URI[archive.md5sum] =3D "291882229d50496f42bd63174076dd37"
+> >> SRC_URI[archive.sha256sum] =3D
+> >> "d9cd21d2fcd45fcae65eb0a51927c40315cca02afdc62478abd950febfcf7228"
+> >
+> > At a guess you need to add ";name=3Darchive" to the end of your SRC_URI.
+>=20
+> Nope, same behaviour. :(
+>=20
+> BTW: The ";name=3D" option is not documented in the user manual at
+> <http://docs.openembedded.org/usermanual/usermanual.html>.
+>=20
+> Steffen
 
-On 15-03-10 11:08, Paul Menzel wrote:
-> Dear OE folks,
-> 
-> 
-> this is just a style question. Looking at the following page of the OE
-> user manual [1] the ordering of `PR` and `require` is not consistent in
-> the given examples.
-> 
-> What ordering should be suggested. Of course this should just be a
-> suggestion and recipe authors can do as they prefer anyway.
+Use a propper URL for the Download:=20
+http://download.rsyslog.com/rsyslog/rsyslog-5.4.0.tar.gz
 
-I think we should promote INC_PR for the .inc files more, any volunteers
-for updating the docs for that?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLngpAMkyGM64RGpERAvAYAJ9JZ4qte2WjV05GRQjt40M71Lgy3gCghJeH
-9NEQjhrkwAalQ7Af9KLvHcY=
-=eI0b
------END PGP SIGNATURE-----
-
+Thomas
 
 
