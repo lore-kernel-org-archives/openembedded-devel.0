@@ -1,45 +1,33 @@
-Received: from mail-gx0-f224.google.com ([209.85.217.224])
+Received: from exchsrvr.syntech-fuelmaster.com ([199.44.250.2]
+	helo=courier.syntech-fuelmaster.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NrF4w-0007VU-4n
+	(envelope-from <mbutsch@syntech-fuelmaster.com>) id 1NrGyg-0005wb-Gs
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 19:31:54 +0100
-Received: by gxk24 with SMTP id 24so418761gxk.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 11:28:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=+V8px17OYYP+FMrpF88MbfXXFaioBX9PieviHCU2Dg0=;
-	b=fFlKodCKETezxipKfsRJ8GspZk8SI3GG/W73hPsgUBMLV+LyQ7HZUTngbrdhryoMTh
-	FNI9SRy+kxQVHATlKi5iYweLs9ZHtMw8Q4Dap4Ca8FPwOkkghyVVkeITsKooZVcVD0lB
-	6oUiKMpzk22O5YJvRe1l5HKKEmnWjCmRFh0kI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=d6l/KbvRHTl5EVjPTEJZFdSgLOMbZdjWWwt/5SA9ZIgaEHNUSrOmL19VZBBBWCEvEX
-	gSxKEIiYldssZKrC6CvShe7X4kXIKSf3Erq7ybrbkXtCdSkSul66McmGBm8SjGNOlw5Z
-	hDGU6TupX4mXjCtTkWjT9KJENf7jHBvyKt70A=
+	Mon, 15 Mar 2010 21:33:35 +0100
+Received: from Courier.syntech.org ([fe80::f1e9:ec58:2caf:f234]) by
+	Courier.syntech.org ([fe80::f1e9:ec58:2caf:f234%14]) with mapi;
+	Mon, 15 Mar 2010 16:30:05 -0400
+From: Mark Butsch <mbutsch@syntech-fuelmaster.com>
+To: "'openembedded-devel@lists.openembedded.org'"
+	<openembedded-devel@lists.openembedded.org>
+Date: Mon, 15 Mar 2010 16:30:04 -0400
+Thread-Topic: Need help with "No GNU_HASH in the elf binary"
+Thread-Index: AcrEfkdzuyRvMEEVTmGdgYjdTIJsBw==
+Message-ID: <6C2434209962DC46B88345CA85C334A285DAA67634@Courier.syntech.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.101.155.19 with SMTP id h19mr1614699ano.43.1268677233325; Mon, 
-	15 Mar 2010 11:20:33 -0700 (PDT)
-In-Reply-To: <201003151658.08401.holger+oe@freyther.de>
-References: <201003081300.19058.holger+oe@freyther.de>
-	<hnkunp$sju$1@dough.gmane.org>
-	<ac9c93b11003150251w3ca229d6uedc63c4dae21e52f@mail.gmail.com>
-	<201003151658.08401.holger+oe@freyther.de>
-Date: Mon, 15 Mar 2010 19:20:33 +0100
-Message-ID: <ac9c93b11003151120w7b467a07m8916030fe51b107c@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.217.224
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 199.44.250.2
+X-SA-Exim-Mail-From: mbutsch@syntech-fuelmaster.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: samba-essential upgrade or remove?
+Subject: Need help with "No GNU_HASH in the elf binary"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,30 +41,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 18:31:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 15 Mar 2010 20:33:37 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-2010/3/15 Holger Hans Peter Freyther <holger+oe@freyther.de>:
-> On Monday 15 March 2010 10:51:33 Frans Meulenbroeks wrote:
->
->> > I don't think 1) is a realistic option, if we go with that, we should
->> > just redirect oe.org to buildroot.org and go home.
->>
->> Why is it not realistic.
->> Lots of driver code I get from commercial vendors, contain statements like
->> "this is sample code only, not intended for use in products, proceed
->> at own risk, bla bla bla".
->
-> You are mixing two things again. One is warranty and of course our MIT license
-> says that the stuff comes "as is" without warranty and such. The other is what
-> do we want to try. I think we should folllow CVEs and have no known security
-> issues in our default set (bitbake -s).
+Hello,
 
-Be my guest :-)
-Given the hostile attitude of some people here, I'm becoming less and
-less interested to contribute.
-Guess some will be happy about that :-(
+I am trying to build some of our code under OE and am getting the "No GNU_H=
+ASH in the elf binary" error.=20
 
-Frans
+The code is not particularly 'recipe' friendly, so it has overridden 'do_co=
+mpile()' to compile it how it was done outside of OE.
+
+I have googled for the error and found lots of references to LDFLAGS not be=
+ing used correctly. To me, there appears to be a confusing array of solutio=
+ns.
+
+Can someone can point me to a good reference for how to resolve this?
+
+Thanks,
+
+Mark
+
 
 
