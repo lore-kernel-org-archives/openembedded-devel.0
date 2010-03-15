@@ -1,39 +1,30 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nr7mo-0006qO-HV for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 11:44:42 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nr7js-0003PD-JZ for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 11:41:36 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 11:41:36 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <khimov@altell.ru>) id 1Nr7yL-0003Y1-0Q
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 11:56:35 +0100
+Received: from keemun.localnet (unknown [192.168.1.125])
+	by mail.altell.local (Postfix) with ESMTPS id A6B0B68552
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 11:41:36 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 15 Mar 2010 13:51:59 +0300 (MSK)
+From: Roman Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 15 Mar 2010 11:41:20 +0100
-Message-ID: <hnl2sg$ar6$1@dough.gmane.org>
+Date: Mon, 15 Mar 2010 13:53:26 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
 References: <201003150605.03085.holger+oe@freyther.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
 In-Reply-To: <201003150605.03085.holger+oe@freyther.de>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+MIME-Version: 1.0
+Message-Id: <201003151353.26302.khimov@altell.ru>
+X-Altell-MailScanner-ID: A6B0B68552.25BBF
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-SA-Exim-Connect-IP: 80.246.246.162
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: Request for help to address known security issues
@@ -50,40 +41,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 10:44:42 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 15 Mar 2010 10:56:35 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=9F=D0=BE=D0=BD=D0=B5=D0=B4=D0=B5=D0=BB=D1=8C=D0=BD=D0=B8=D0=BA 15 =D0=
+=BC=D0=B0=D1=80=D1=82=D0=B0 2010 08:05:02 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Ho=
+lger Hans Peter=20
+=46reyther =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> perl 5.8.8: http://www.FreeBSD.org/ports/portaudit/4a99d61c-
+> f23a-11dd-9f55-0030843d3802.html
+>=20
+> perl-native 5.8.8: Same as above
 
-On 15-03-10 06:05, Holger Hans Peter Freyther wrote:
-> Hi all,
-> 
-> the following OE packages seem to be vulnerable to known security issues and I 
-> would like to get some help in updating these....
-> 
-> wget 1.9.1: http://www.FreeBSD.org/ports/portaudit/06f142ff-4df3-11d9-
-> a9e7-0001020eed82.html
+Using 5.10.0 internally and preparing 5.10.1 to push (along with other perl=
+=20
+thingies)
 
-Wget 1.11.x is in OE already, should be schedule 1.9.x for deletion?
+> squid 2.6: probably deserves an update...
+> squid-native too..
 
-> faad2 2.0: http://www.FreeBSD.org/ports/portaudit/445ed958-b0d9-11dd-
-> a55e-00163e000016.html
+Using 2.7.STABLE6 internally, will try to bring in latest.
 
-Faad2 moved to http://www.audiocoding.com/ and is at 2.7 now. I'll try
-to have a look at faad2 later today.
+> ipsec-tools 0.6.7:
+>  http://www.FreeBSD.org/ports/portaudit/abcacb5a-e7f1-11dd-
+>  afcd-00e0815b8da8.html
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLng7QMkyGM64RGpERAoVMAKCfqYTbsudSJXqU8YHiZyXuCbyudwCffhv+
-7k3lgAd8ta1wZJN6vDklGTY=
-=nZie
------END PGP SIGNATURE-----
-
+Using 0.7.2, will try to prepare a patch.
 
 
