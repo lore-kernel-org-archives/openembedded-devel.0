@@ -1,31 +1,31 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from exprod5og112.obsmtp.com ([64.18.0.24])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NrAEb-0001Xw-BB
+	(envelope-from <martyn.welch@ge.com>) id 1NrAKq-0002Gb-6G
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 14:21:30 +0100
-Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
-	[123.192.181.204])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id C4BD31B10C02
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 13:21:29 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Mon, 15 Mar 2010 14:28:04 +0100
+Received: from source ([12.43.191.1]) (using TLSv1) by
+	exprod5ob112.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKS541JoBT7P+WBbe9fRVtd1RxNIgJyH5X@postini.com;
+	Mon, 15 Mar 2010 06:24:56 PDT
+Received: from unknown (HELO alpmlip01.e2k.ad.ge.com) ([3.159.17.48])
+	by Alpmlip04.e2k.ad.ge.com with ESMTP; 15 Mar 2010 09:24:49 -0400
+Received: from es-j7s4d2j.amer.consind.ge.com ([3.138.54.92])
+	by alpmlip01.e2k.ad.ge.com with ESMTP; 15 Mar 2010 09:24:48 -0400
+From: Martyn Welch <martyn.welch@ge.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Mar 2010 14:17:46 +0100
-User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
-References: <201003150605.03085.holger+oe@freyther.de>
-	<fca63bcf1003150544k4a9df366m8119add6de5fc1d0@mail.gmail.com>
-In-Reply-To: <fca63bcf1003150544k4a9df366m8119add6de5fc1d0@mail.gmail.com>
+Date: Mon, 15 Mar 2010 13:28:00 +0000
+Message-ID: <20100315132800.22150.14095.stgit@ES-J7S4D2J.amer.consind.ge.com>
+User-Agent: StGIT/0.13
 MIME-Version: 1.0
-Message-Id: <201003151417.46582.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+X-SA-Exim-Connect-IP: 64.18.0.24
+X-SA-Exim-Mail-From: martyn.welch@ge.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Request for help to address known security issues
+Subject: [PATCH 1/2] commit ddf8890a51d2fe5cee15cb2f18638036c0adb43b
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,20 +39,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 13:21:30 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 15 Mar 2010 13:28:04 -0000
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 
-On Monday 15 March 2010 13:44:59 Michael Lippautz wrote:
-> 2010/3/15 Holger Hans Peter Freyther <holger+oe@freyther.de>:
-> > unrar 3.4.3: http://www.FreeBSD.org/ports/portaudit/94234e00-be8a-11db-
-> > b2ec-000c6ec775d9.html
-> > 
-> > unrar-native: same thing..
-> 
-> Done. Fixed by bumping (... rewriting) to 3.9.9.
+Fix mktemp to use update-alternatives
 
-Thanks!
+    As suggested in the original version, this patch makes mktemp use
+    update-alternatives.
+
+Signed-off-by: Martyn Welch <martyn.welch@ge.com>
+---
+
+ recipes/mktemp/mktemp_1.6.bb |   15 +++++++++++----
+ 1 files changed, 11 insertions(+), 4 deletions(-)
+
+diff --git a/recipes/mktemp/mktemp_1.6.bb b/recipes/mktemp/mktemp_1.6.bb
+index bd9c4ca..33c1cf1 100644
+--- a/recipes/mktemp/mktemp_1.6.bb
++++ b/recipes/mktemp/mktemp_1.6.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.mktemp.org/"
+ SECTION = "console/utils"
+ LICENSE = "GPLv2 BSD"
+ 
+-inherit autotools
++inherit autotools update-alternatives
+ 
+ EXTRA_OECONF = "--with-libc"
+ 
+@@ -12,6 +12,13 @@ SRC_URI = "\
+   file://add_destdir.patch;patch=1 \
+   file://disable-strip.patch;patch=1 \
+ "
+-	 	 	
+-# FIXME should rather use update-alternatives
+-RCONFLICTS_${PN} = "coreutils"
++
++do_install_append () {
++	mkdir ${D}${base_bindir}
++	mv ${D}${bindir}/mktemp ${D}${base_bindir}/mktemp.${PN}
++}
++
++ALTERNATIVE_NAME = "mktemp"
++ALTERNATIVE_LINK = "${base_bindir}/mktemp"
++ALTERNATIVE_PATH = "${base_bindir}/mktemp.${PN}"
++ALTERNATIVE_PRIORITY = "100"
+
+
+--
+Martyn Welch (Principal Software Engineer)   |   Registered in England and
+GE Intelligent Platforms                     |   Wales (3828642) at 100
+T +44(0)127322748                            |   Barbirolli Square, Manchester,
+E martyn.welch@ge.com                        |   M2 3AB  VAT:GB 927559189
 
 
