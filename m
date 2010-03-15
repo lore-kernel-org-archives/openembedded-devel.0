@@ -1,42 +1,31 @@
-Received: from gatekeeper.tait.co.nz ([202.37.96.11])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.stanger@tait.co.nz>) id 1NrIwO-000408-Ol
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 23:39:23 +0100
-Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
-	by localhost.tait.co.nz (Postfix) with ESMTP id 5C9D346756
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Mar 2010 11:36:33 +1300 (NZDT)
-Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])
-	by gatekeeper.tait.co.nz (Postfix) with ESMTP id 4B5B246755
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Mar 2010 11:36:33 +1300 (NZDT)
-Received: from conversion-daemon.sunstrike.tait.co.nz by sunstrike.tait.co.nz
-	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
-	id <0KZC00301FMH9L00@sunstrike.tait.co.nz>
-	(original mail from michael.stanger@tait.co.nz)
-	for openembedded-devel@lists.openembedded.org; Tue,
-	16 Mar 2010 11:36:14 +1300 (NZDT)
-Received: from [172.25.116.124] by sunstrike.tait.co.nz
-	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
-	with ESMTP id <0KZC002QJHG7AZ20@sunstrike.tait.co.nz> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	16 Mar 2010 11:36:07 +1300 (NZDT)
-Date: Tue, 16 Mar 2010 11:36:07 +1300
-From: Michael Stanger <michael.stanger@tait.co.nz>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NrJTv-0002Aj-Px for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Mar 2010 00:13:57 +0100
+Received: from f053034098.adsl.alicedsl.de ([78.53.34.98]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NrJR1-0003Oj-VM for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 23:10:56 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <4B9EB657.8080508@tait.co.nz>
-MIME-version: 1.0
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-X-SA-Exim-Connect-IP: 202.37.96.11
-X-SA-Exim-Mail-From: michael.stanger@tait.co.nz
+In-Reply-To: <1268692500.16974.50.camel@mattotaupa>
+References: <1268692500.16974.50.camel@mattotaupa>
+Date: Tue, 16 Mar 2010 00:10:29 +0100
+Message-ID: <1268694629.16974.52.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] lua5.1: Adopt new staging policy
+Subject: [PATCH 2/2 v2] ffmpeg: Stage `attributes.h` and `avconfig.h`.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,92 +39,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 22:39:23 -0000
-Content-type: text/plain; format=flowed; charset=ISO-8859-1
-Content-transfer-encoding: 7BIT
+X-List-Received-Date: Mon, 15 Mar 2010 23:13:57 -0000
+X-Groupsio-MsgNum: 17697
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-phcVRHcdYBFJtpT6PzBR"
 
-Sorry about earlier thread-hijacking...
+--=-phcVRHcdYBFJtpT6PzBR
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-- Removed do_stage from recipes
-- Set NATIVE_INSTALL_WORKS=1
-- lua5.1-native now stages lua executable
-- Removed -native recipe, use BBCLASSEXTENDS instead
+Some programs as `libvalhalla` need those headers.
 
-Signed-off-by: Michael Stanger <michael.stanger@taitradio.com>
+v2: Also stage `avconfig.h`.
+
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
 ---
-recipes/lua/lua5.1-native_5.1.4.bb |   11 -----------
-recipes/lua/lua5.1_5.1.4.bb        |   10 +++-------
-2 files changed, 3 insertions(+), 18 deletions(-)
-delete mode 100644 recipes/lua/lua5.1-native_5.1.4.bb
+ recipes/ffmpeg/ffmpeg.inc |   10 +++++-----
+ 1 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/recipes/lua/lua5.1-native_5.1.4.bb
-b/recipes/lua/lua5.1-native_5.1.4.bb
-deleted file mode 100644
-index 35afb55..0000000
---- a/recipes/lua/lua5.1-native_5.1.4.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--require lua5.1_${PV}.bb
--inherit native
--
--DEPENDS = "readline-native"
--
--do_stage () {
--    oe_libinstall -C src liblua ${STAGING_LIBDIR}/
--    install -d ${STAGING_INCDIR}/
--    install -m 0644 src/lua.h src/luaconf.h src/lualib.h src/lauxlib.h
-${STAGING_INCDIR}/
--}
--
-diff --git a/recipes/lua/lua5.1_5.1.4.bb b/recipes/lua/lua5.1_5.1.4.bb
-index 8041def..e4a3c82 100644
---- a/recipes/lua/lua5.1_5.1.4.bb
-+++ b/recipes/lua/lua5.1_5.1.4.bb
-@@ -4,7 +4,7 @@ LICENSE = "MIT"
-HOMEPAGE = "http://www.lua.org/"
+diff --git a/recipes/ffmpeg/ffmpeg.inc b/recipes/ffmpeg/ffmpeg.inc
+index 3ec06bc..949e89b 100644
+--- a/recipes/ffmpeg/ffmpeg.inc
++++ b/recipes/ffmpeg/ffmpeg.inc
+@@ -10,7 +10,7 @@ ARM_INSTRUCTION_SET =3D "arm"
+ DEPENDS =3D "zlib libogg libvorbis libtheora faac faad2 ${@base_conditiona=
+l('ENTERPRISE_DISTRO', '1', '', 'lame liba52', d)}"
+ RSUGGESTS =3D "mplayer"
+=20
+-INC_PR =3D "r9"
++INC_PR =3D "r10"
+=20
+ inherit autotools pkgconfig
+=20
+@@ -53,10 +53,10 @@ do_stage() {
+            install -m 0644 ${S}/libavformat/$h  ${STAGING_INCDIR}/libavfor=
+mat/$h=09
+ 	done
+=20
+-		for h in adler32.h avstring.h avutil.h base64.h bswap.h \
+-                 common.h crc.h fifo.h integer.h intfloat_readwrite.h \
+-                 log.h lzo.h mathematics.h md5.h mem.h pixfmt.h random*.h =
+\
+-                 rational.h sha1.h
++		for h in adler32.h attributes.h avconfig.h avstring.h avutil.h \
++                 base64.h bswap.h common.h crc.h fifo.h integer.h \
++		 intfloat_readwrite.h log.h lzo.h mathematics.h md5.h mem.h \
++		 pixfmt.h random*.h rational.h sha1.h
+ 		do
+            install -m 0644 ${S}/libavutil/$h        ${STAGING_INCDIR}/ffmp=
+eg/$h
+            install -m 0644 ${S}/libavutil/$h        ${STAGING_INCDIR}/liba=
+vutil/$h=20
+--=20
+1.7.0
 
-DEPENDS += "readline"
--PR = "r4"
-+PR = "r5"
-SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz \
-            file://lua5.1.pc"
-S = "${WORKDIR}/lua-${PV}"
-@@ -19,12 +19,6 @@ do_compile () {
-        oe_runmake linux
-}
+--=-phcVRHcdYBFJtpT6PzBR
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
 
--do_stage () {
--       oe_libinstall -C src liblua ${STAGING_LIBDIR}/
--       install -d ${STAGING_INCDIR}/
--       install -m 0644 src/lua.h src/luaconf.h src/lualib.h
-src/lauxlib.h ${STAGING_INCDIR}/
--}
--
-do_install () {
-        oe_runmake \
-                'INSTALL_TOP=${D}${prefix}' \
-@@ -34,4 +28,6 @@ do_install () {
-                'INSTALL_SHARE=${D}${datadir}/lua' \
-                install
-}
-+NATIVE_INSTALL_WORKS = 1
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-+BBCLASSEXTEND = "native"
---
-1.6.3.3
+iEYEABECAAYFAkuevmUACgkQPX1aK2wOHVg4twCfQNWu/HvoI3I+Wb/iA6HDhg5d
+j6EAoID8AmXgGkwmvU/h59AFAjlroIHG
+=eNDW
+-----END PGP SIGNATURE-----
 
-
-=======================================================================
-This email, including any attachments, is only for the intended
-addressee.  It is subject to copyright, is confidential and may be
-the subject of legal or other privilege, none of which is waived or
-lost by reason of this transmission.
-If the receiver is not the intended addressee, please accept our
-apologies, notify us by return, delete all copies and perform no
-other act on the email.
-Unfortunately, we cannot warrant that the email has not been
- altered or corrupted during transmission.
-=======================================================================
-
-
-
+--=-phcVRHcdYBFJtpT6PzBR--
