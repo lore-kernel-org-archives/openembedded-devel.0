@@ -1,43 +1,46 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NrDvq-0002gm-SZ for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 18:18:27 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NrDsu-0004J6-Ux for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 18:15:20 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 18:15:20 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1NrDyN-0003JR-Tn
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 18:21:05 +0100
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.3/8.14.3) with ESMTP id o2FHHw82002775
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 18:15:20 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 15 Mar 2010 18:17:58 +0100
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.69) (envelope-from <ensc@sigma-chemnitz.de>) id 1NrDvR-0001Cs-R9
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 18:17:57 +0100
+Resent-To: openembedded-devel@lists.openembedded.org
+Resent-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Resent-Date: Mon, 15 Mar 2010 18:17:57 +0100
+Resent-Message-ID: <lyy6hto662.fsf@ensc-virt.intern.sigma-chemnitz.de>
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 15 Mar 2010 18:15:08 +0100
-Message-ID: <hnlpus$6no$1@dough.gmane.org>
-References: <hndr0p$old$1@dough.gmane.org>
-	<1268672644-29043-1-git-send-email-valentin.longchamp@epfl.ch>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
-In-Reply-To: <1268672644-29043-1-git-send-email-valentin.longchamp@epfl.ch>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <ac9c93b11002281139g6963e753w970c97002611c78c@mail.gmail.com>
+	<1267392928.13054.1.camel@andromeda> <hmgjc2$sgd$1@dough.gmane.org>
+	<BE689342-3D28-4D8F-A58C-36885368CE0F@vanille-media.de>
+	<20100301150245.GC12022@jama>
+Date: Mon, 15 Mar 2010 17:48:52 +0100
+In-Reply-To: <20100301150245.GC12022@jama> (Martin Jansa's message of "Mon, 1
+	Mar 2010 16:02:45 +0100")
+Message-ID: <ly634xpm2z.fsf_-_@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.1 (gnu/linux)
+MIME-Version: 1.0
+Resent-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Resent-Date: Mon, 15 Mar 2010 18:17:57 +0100
+X-Scanned-By: MIMEDefang 2.67 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Do not generate NEON code for qt-4.6.2 embedded on armv6
+Subject: Re: bitbake -b with BBCLASSEXTENDed recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,50 +54,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 17:18:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 15 Mar 2010 17:21:06 -0000
+Content-Type: text/plain; charset=us-ascii
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Martin Jansa <martin.jansa@gmail.com> writes:
 
-thanks, applied
+> Is it possible to implement some support for old functionality like
+> bitbake -c clean -b path.to.recipe.with.BBCLASSEXTEND.bb
+> ...
+> It's really hard to implement something like prefixing -b path with
+> "virtual:native:"
 
-On 15-03-10 18:04, Valentin Longchamp wrote:
-> http://bugreports.qt.nokia.com/browse/QTBUG-8749
-> Neon code is generated for armv6 processor, where it should be armv7 only.
-> This results in illegal instructions with some of the qt4 libraries.
-> 
-> The current solution is not optimal, I just needed a quick fix for my arch
-> and I don't have the needed knowledge in OE to fix it cleanly, but I wanted
-> to point this issue out. But at least other arch (armv5 and armv4) should have
-> the same problem and receive the same fix.
-> ---
->  recipes/qt4/qt4-embedded_4.6.2.bb |    4 +++-
->  1 files changed, 3 insertions(+), 1 deletions(-)
-> 
-> diff --git a/recipes/qt4/qt4-embedded_4.6.2.bb b/recipes/qt4/qt4-embedded_4.6.2.bb
-> index 94ecd01..8583752 100644
-> --- a/recipes/qt4/qt4-embedded_4.6.2.bb
-> +++ b/recipes/qt4/qt4-embedded_4.6.2.bb
-> @@ -1,6 +1,8 @@
->  require qt4-embedded.inc
->  
-> -PR = "${INC_PR}.0"
-> +PR = "${INC_PR}.1"
-> +
-> +QT_CONFIG_FLAGS_append_armv6 = " -no-neon "
->  
->  require qt-${PV}.inc
->  
+Bitbake must be patched for this; see
+https://www.cvg.de/people/ensc/0008-bbclassextend.patch
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFLnmscMkyGM64RGpERAickAJ9VD453KacoX2EDcQWeFgZG2vDPIgCfWjL6
-oYTOJp08SjqM/PFpJBWkplM=
-=ge+P
------END PGP SIGNATURE-----
-
+Enrico
 
 
