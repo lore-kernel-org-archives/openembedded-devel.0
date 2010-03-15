@@ -1,29 +1,42 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Nr6wF-0001x4-EU for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 10:50:19 +0100
-Received: from f053034098.adsl.alicedsl.de ([78.53.34.98]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Nr6tL-00024s-Ts for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 09:47:20 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nr6zR-000283-RN for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 10:53:39 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nr6wY-000193-4Y for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 10:50:38 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Mar 2010 10:50:38 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 15 Mar 2010 10:50:38 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 15 Mar 2010 10:46:53 +0100
-Message-ID: <1268646413.3759.3.camel@mattotaupa>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 15 Mar 2010 10:50:26 +0100
+Message-ID: <hnkvt4$rb$1@dough.gmane.org>
+References: <201003150605.03085.holger+oe@freyther.de>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
+In-Reply-To: <201003150605.03085.holger+oe@freyther.de>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] enna: Remove `recipes/e17/enna/.mtn2git_empty`.
+Subject: Re: Request for help to address known security issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,43 +50,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 09:50:19 -0000
-X-Groupsio-MsgNum: 17631
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-V50vU9whIfKhxzB/Akaf"
+X-List-Received-Date: Mon, 15 Mar 2010 09:53:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-V50vU9whIfKhxzB/Akaf
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-`.mtn2git_empty` is the only file in `recipes/e17/enna/` and seems have ori=
-ginated from the Monotone to Git transition.
+On 15-03-10 06:05, Holger Hans Peter Freyther wrote:
+> Hi all,
+> 
+> the following OE packages seem to be vulnerable to known security issues and I 
+> would like to get some help in updating these....
 
-Since no useful files are in this directory remove it completely.
+> gnome-screensaver: 2.28.0 
+> http://www.FreeBSD.org/ports/portaudit/0a82ac0c-1886-11df-
+> b0d1-0015f2db7bde.html
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
- 0 files changed, 0 insertions(+), 0 deletions(-)
- delete mode 100644 recipes/e17/enna/.mtn2git_empty
+Done, upgraded to 2.28.3. Took me longer than expected due to all the
+autoconf 2.64 breakage that went in this morning :(
 
-diff --git a/recipes/e17/enna/.mtn2git_empty b/recipes/e17/enna/.mtn2git_em=
-pty
-deleted file mode 100644
-index e69de29..0000000
---=20
-1.7.0
+regards,
 
---=-V50vU9whIfKhxzB/Akaf
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
+Koen
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAkueAg0ACgkQPX1aK2wOHVhB2ACfScHgxBsWFdzdEqjn213Ddzua
-jmkAnieVCkS8xMyzZtXJa10BGbNM2Rc8
-=ds7B
+iD8DBQFLngLiMkyGM64RGpERAj9YAKCK1+4ujp6FLxflygD8mAzwf1by/wCfVe7I
+4Hwx6S2DcoiW+GpbzFvooEw=
+=sN2L
 -----END PGP SIGNATURE-----
 
---=-V50vU9whIfKhxzB/Akaf--
+
+
