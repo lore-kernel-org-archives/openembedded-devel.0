@@ -1,46 +1,32 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1NrCVj-0002f2-1l
+	(envelope-from <holger+oe@freyther.de>) id 1NrCfj-00040U-RI
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 16:47:23 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 7F1264C344
+	Mon, 15 Mar 2010 16:57:45 +0100
+Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
+	[123.192.181.204])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id F2ACE1B10C02
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 15:44:18 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id lGeO5PftfZ2W
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 15:44:16 +0000 (GMT)
-Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id F18874C33A
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 15:44:15 +0000 (GMT)
-Received: by xora-desktop.xora.org.uk (Postfix, from userid 500)
-	id 91778279C8; Mon, 15 Mar 2010 15:44:53 +0000 (GMT)
-Date: Mon, 15 Mar 2010 15:44:53 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Mon, 15 Mar 2010 15:57:40 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100315154453.GC2425@xora-desktop.xora.org.uk>
-References: <ac9c93b11003141453n7df620c7gca609efe00e0e6f@mail.gmail.com>
-	<hnl05u$1r0$1@dough.gmane.org>
-	<ac9c93b11003150431k384114e6i11cab70a9d377da9@mail.gmail.com>
-	<20100315114313.GB2425@xora-desktop.xora.org.uk>
-	<ac9c93b11003150659g3bb78a4dk4feec888b80c97f5@mail.gmail.com>
+Date: Mon, 15 Mar 2010 16:53:55 +0100
+User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
+References: <201003081300.19058.holger+oe@freyther.de>
+	<201003151538.10288.holger+oe@freyther.de>
+	<ac9c93b11003150758m4c3a4c77gfa84a47ced1c86c3@mail.gmail.com>
+In-Reply-To: <ac9c93b11003150758m4c3a4c77gfa84a47ced1c86c3@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <ac9c93b11003150659g3bb78a4dk4feec888b80c97f5@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-08-17)
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+Message-Id: <201003151653.56095.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Re; [PATCH 7/8] autoconf: add 2.65
+Subject: Re: samba-essential upgrade or remove?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,32 +40,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 15:47:23 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 15 Mar 2010 15:57:46 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Mon, Mar 15, 2010 at 02:59:21PM +0100, Frans Meulenbroeks wrote:
-> 2010/3/15 Graeme Gregory <dp@xora.org.uk>:
-> > On Mon, Mar 15, 2010 at 12:31:10PM +0100, Frans Meulenbroeks wrote:
-> >> And any help related to getting autoconf up to 2.65 is appreciated.
-> >> I'm not that much an autoconf wiz.
-> >>
-> > There was no wizardry needed to get 2.65 working, I have a build
-> > currently running to test the new version.
+On Monday 15 March 2010 15:58:17 Frans Meulenbroeks wrote:
+
+> > See. This is not the point of liking or not liking a given recipe. I
+> > don't like the fact that this recipe is not maintained for years and has
+> > the possibility of damaging the reputation of distros built with OE. I
+> > assume even users of SlugOS do not like if their device gets owned via
+> > known and circulating exploits?
 > 
-> Oops.
-> Actually I misworded things. I noticed some recipes not working any
-> more with 2.65 and would like some help to fix this.
-> The most troublesome I had was libpcap. That one generated a configure
-> file that had syntax errors.
-> The other one I ran into was php-native where configure was stuck in
-> an endless loop, with yes eating up 100% CPU time.
-> 
-Well this branch may be of interest to you then :-)
+> I think the chances are small that anyone would put a slug on the open
+> internet.
 
-http://www.xora.org.uk/cgi-bin/cgit.cgi/openembedded/log/?h=xora/autoconf-2.65
+Well, at least here in Taiwan people get a pool of public IP addresses and 
+everything behind the main switch of a flat has a public address.
 
-Graeme
 
+> Note that this might go a lot further than you think.
+> It also means keeping things like php, python and perl up to date as
+> people could exploit bugs in php code or cgi scripts.
+
+Yes, I upgraded php5, python didn't need an upgrade, perl is going to be 
+upgraded...  It is not like that I'm asking to create a security team and do 
+code audits... All I ask for is to go to here[1] and update software in time. 
+It is not like we need to update stuff every day... if we as a community can't 
+do something as simple as that people should use stuff from people that can do 
+that.
+
+[1] http://www.vuxml.org/freebsd/index.html
 
 
