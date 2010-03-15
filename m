@@ -1,40 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nr7g4-0003sI-Sr for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 11:37:41 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nr7dA-0000sZ-VT for openembedded-devel@lists.openembedded.org;
-	Mon, 15 Mar 2010 11:34:40 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 11:34:40 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <sledz@DResearch.DE>) id 1Nr7iA-0000od-Sh
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 15 Mar 2010 11:39:55 +0100
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 686E2491264
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 11:34:40 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 15 Mar 2010 11:36:51 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Mon, 15 Mar 2010 11:37:12 +0100
+Message-ID: <4B9E0DCC.9010200@dresearch.de>
+Date: Mon, 15 Mar 2010 11:37:00 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.23 (Windows/20090812)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 15 Mar 2010 11:34:29 +0100
-Message-ID: <hnl2fl$9kt$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <4B9E0843.30005@dresearch.de>
+	<4B9E09C8.2060903@ge.com>	<4B9E0A1B.3070606@dresearch.de>
+	<201003151131.29321.ml@vdm-design.de>
+In-Reply-To: <201003151131.29321.ml@vdm-design.de>
+X-OriginalArrivalTime: 15 Mar 2010 10:37:12.0684 (UTC)
+	FILETIME=[790A5AC0:01CAC42B]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Please don't remove recipes that have PREFERRED_VERSION set on them, e.g. tiff
+Subject: Re: SRC_URI fetching problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,33 +43,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 10:37:41 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 15 Mar 2010 10:39:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Thomas Zimmermann wrote:
+>>>> I work at a recipe for rsyslog (http://www.rsyslog.com) and hit a
+>>>> problem with the wget fetcher.
+>>>>
+>>>> The download uri for rsyslog-5.4.0.tar.gz does not contain the archive
+>>>> name itself but is
+>>>> http://www.rsyslog.com/Downloads-req-getit-lid-197.phtml.
+>>>>
+>>>> If i set
+>>>>
+>>>> SRC_URI = "http://www.rsyslog.com/Downloads-req-getit-lid-197.phtml"
+>>>> SRC_URI[archive.md5sum] = "291882229d50496f42bd63174076dd37"
+>>>> SRC_URI[archive.sha256sum] =
+>>>> "d9cd21d2fcd45fcae65eb0a51927c40315cca02afdc62478abd950febfcf7228"
+>>> At a guess you need to add ";name=archive" to the end of your SRC_URI.
+>> Nope, same behaviour. :(
+>>
+> 
+> Use a propper URL for the Download: 
+> http://download.rsyslog.com/rsyslog/rsyslog-5.4.0.tar.gz
 
-Hi,
+OK, that's of course the best solution. ;-)
 
-conf/distro has:
-
-../conf/distro/include/kaeilos-2009-preferred-versions.inc:49:PREFERRED_VERSION_tiff
-           = "3.8.2+4.0.0beta2"
-../conf/distro/include/preferred-om-2009-versions.inc:25:PREFERRED_VERSION_tiff
-         = "3.8.2+4.0.0beta2"
-../conf/distro/include/angstrom-2008-preferred-versions.inc:47:PREFERRED_VERSION_tiff
-          = "3.8.2+4.0.0beta2"
-
-And that version was removed this morning without any warning. Would
-people please stop doing that?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLng00MkyGM64RGpERAgeHAJ4pmT1DjIm37QB1HxUWI4JYwa30kACeMUcY
-X2a44Lvjw8b3QafRUpt/ZKA=
-=zToo
------END PGP SIGNATURE-----
+Steffen
 
 
 
