@@ -1,31 +1,26 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from [93.100.16.104] (helo=mate.hex)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1NrcqK-0005hK-D2
+	(envelope-from <rik@mate.hex>) id 1NrcsQ-0004MP-SW
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Mar 2010 20:54:25 +0100
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NrcnO-0001lW-Dg
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Mar 2010 22:51:19 +0300
-From: Roman I Khimov <roman@khimov.ru>
+	Tue, 16 Mar 2010 20:56:32 +0100
+Received: by mate.hex (Postfix, from userid 1000)
+	id 249D63D0C9; Tue, 16 Mar 2010 22:51:03 +0300 (MSK)
+From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Mar 2010 22:48:46 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
-References: <201003151658.45421.ml@vdm-design.de>
-	<201003160004.24164.roman@khimov.ru>
-In-Reply-To: <201003160004.24164.roman@khimov.ru>
-MIME-Version: 1.0
-Message-Id: <201003162248.54281.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+Date: Tue, 16 Mar 2010 22:50:38 +0300
+Message-Id: <1268769038-30979-1-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.6.4.2
+In-Reply-To: <1239889359-13953-1-git-send-email-khimov@altell.ru>
+References: <1239889359-13953-1-git-send-email-khimov@altell.ru>
+X-SA-Exim-Connect-IP: 93.100.16.104
+X-SA-Exim-Mail-From: rik@mate.hex
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.1 required=5.0 tests=BAYES_00,NO_DNS_FOR_FROM,
+	RCVD_IN_PBL,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: qemu: fails to build without zlib-dev installed on buildhost
+Subject: [PATCH] cmake.bbclass: force CMAKE_INSTALL_SO_NO_EXE to be 0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,42 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Mar 2010 19:54:25 -0000
-X-Groupsio-MsgNum: 17751
-Content-Type: multipart/signed; boundary="nextPart1583698.lFAGlVQ6QE";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 16 Mar 2010 19:56:32 -0000
 
---nextPart1583698.lFAGlVQ6QE
-Content-Type: Text/Plain;
-  charset="windows-1251"
-Content-Transfer-Encoding: quoted-printable
+By default cmake guesses whether install shared libaries with exec
+permissions or not based on host distribution, so this behaviour
+changes from host to host. OpenEmbedded assumes shared libraries to
+be with exec permissions (reverse way brakes stripping, for example),
+so let's force this in cmake configure invocation.
 
-=C2 =F1=EE=EE=E1=F9=E5=ED=E8=E8 =EE=F2 =C2=F2=EE=F0=ED=E8=EA 16 =EC=E0=F0=
-=F2=E0 2010 00:04:18 =E0=E2=F2=EE=F0 Roman I Khimov =ED=E0=EF=E8=F1=E0=EB:
-> So I think something like attached patch should be a bit better. Please t=
-ry
-> that.
+Signed-off-by: Roman I Khimov <khimov@altell.ru>
+---
+ classes/cmake.bbclass |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-OK, actually I've tested it myself and I think we need it, so I'm pushing t=
-his=20
-one.
+diff --git a/classes/cmake.bbclass b/classes/cmake.bbclass
+index f21c4d6..706bdda 100644
+--- a/classes/cmake.bbclass
++++ b/classes/cmake.bbclass
+@@ -21,6 +21,7 @@ cmake_do_configure() {
+   cmake ${OECMAKE_SOURCEPATH} \
+     -DCMAKE_INSTALL_PREFIX:PATH=${prefix} \
+     -DCMAKE_FIND_ROOT_PATH:PATH=${STAGING_DIR_HOST} \
++    -DCMAKE_INSTALL_SO_NO_EXE=0 \
+     ${EXTRA_OECMAKE} \
+     -Wno-dev
+ }
+-- 
+1.6.4.2
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
---nextPart1583698.lFAGlVQ6QE
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
-
-iEYEABECAAYFAkuf4KYACgkQXJ70z+XgVcM/xQCfS4ip85EuTvgZeqFPw1yfteYN
-KwQAoM9bgfTo3l/Aa53tDWg5CK6SpTTq
-=Ay0c
------END PGP SIGNATURE-----
-
---nextPart1583698.lFAGlVQ6QE--
