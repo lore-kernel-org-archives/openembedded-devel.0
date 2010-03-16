@@ -1,38 +1,37 @@
-Received: from mail-iw0-f174.google.com ([209.85.223.174])
+Received: from smtprelay-h21.telenor.se ([195.54.99.196])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>)
-	id 1NrOYn-0005EQ-7n; Tue, 16 Mar 2010 05:39:21 +0100
-Received: by iwn4 with SMTP id 4so1043479iwn.3
-	for <multiple recipients>; Mon, 15 Mar 2010 21:36:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=R69XSrbFc95C6hXasdyRmC655qkIvHUtAfj/nQJDl4Y=;
-	b=jNa3gvcbD9a1fFEM2Q5MwOBAiTq5Gn1dDRKxDc9XjVblbVY6WBUwo72bJW6V5RxsmL
-	F116Cdj2u/Stf+42gIfzm8SkgTIXG5fbFTI3VS25xBwXtk4HkA6jFkVyp4EDeQPFtYVA
-	XZV5kP8e24yw8qVYmxV/sHym+pwaGruzEo+AA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=naiK8PA2SPL3rBE6DQzFnfisTt+ej2bvruZbgkyLGxhEsMtueJLJRvCID3AVmTNliu
-	D6X9xVV5wD6n9cl1Uk0cWe6Pcd2L62Dx1clPJP8ED7knT8yJH0YSle9NGui1anCI7AGn
-	P8mGKtgVZ4AwHU3Xb1gCi2QG2rUCsWI3+D984=
+	(envelope-from <ulf.samuelsson@atmel.com>) id 1NrPzx-0000R4-Tg
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Mar 2010 07:11:33 +0100
+Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
+	by smtprelay-h21.telenor.se (Postfix) with ESMTP id A49A8155B2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Mar 2010 07:08:23 +0100 (CET)
+X-SENDER-IP: [83.227.59.242]
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AvMUAFu9nktT4zvyPGdsb2JhbAAHgwWXbQEBAQE3qHSQIIEygl9qBIYZ
+X-IronPort-AV: E=Sophos;i="4.49,648,1262559600"; d="scan'208";a="50862953"
+Received: from c-f23be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
+	[10.175.196.224]) ([83.227.59.242])
+	by ipb2.telenor.se with ESMTP; 16 Mar 2010 07:08:23 +0100
+Message-ID: <4B9F2055.4000805@atmel.com>
+Date: Tue, 16 Mar 2010 07:08:21 +0100
+From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
+Organization: Atmel Nordic AB
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-Received: by 10.231.151.197 with SMTP id d5mr781155ibw.73.1268714174262; Mon, 
-	15 Mar 2010 21:36:14 -0700 (PDT)
-Date: Mon, 15 Mar 2010 21:36:14 -0700
-Message-ID: <19c1b8a91003152136p1159f489nd93fa4d303bb8f06@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
-	openembedded-users@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.174
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <4B9EADFC.2060302@atmel.com> <1268691568.16974.48.camel@mattotaupa>
+In-Reply-To: <1268691568.16974.48.camel@mattotaupa>
+X-SA-Exim-Connect-IP: 195.54.99.196
+X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_SOFTFAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Talk on using OpenEmbedded
+Subject: Re: gnome-mplayer fails to build due to no libstdc++.so.6 instaging (available in cross)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,20 +45,145 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Mar 2010 04:39:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 16 Mar 2010 06:11:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi
+Paul Menzel skrev:
+> Am Montag, den 15.03.2010, 23:00 +0100 schrieb Ulf Samuelsson:
+>=20
+> [=E2=80=A6]
+>=20
+>> If I move the "libstdc++.so[.6[.0.10]]"  files to the staging director=
+y
+>> the build will complete, and gnome-mplayer runs on the target.
+>>
+>> I tried doing
+>> DEPENDS =3D "libstdc++"
+>> in "libmusicbrainz.inc"
+>> but get a "no buildable provider" error.
+>>
+>> I tried
+>> RDEPENDS =3D "libstdc++"
+>> and then libmusicbrainz completes, but again gnome-mplayer exists with
+>> the error above.
+>>
+>> How ensure that staging gets populated with libstdc++ if libmusicbrain=
+z
+>> is used?
+>=20
+> You cannot use package names in `DEPENDS`. You have to use the name of
+> the recipe or the recipes has to have `PROVIDES` set. I ask the same on
+> IRC today.
+>=20
+> So you have to find the name of the recipe creating `libstdc++`.
+>=20
+>=20
+> Thanks,
+>=20
+> Paul
+>=20
 
-Silicon Valley Linux Technology Group is organizing a free session on
-OpenEmbedded this Thursday. I am hoping it will a interesting session
-and great learning experience for all of us.
-If you are local around San Jose and would like to attend feel free to RSVP at
+If I grep for libstdc++ in recipes, then it looks like the provider
+is "meta/external-toolchain.bb"
 
-http://www.meetup.com/Silicon-Valley-Linux-Technology/calendar/12790580/
+I don't want to add the complete cross-compiler.
 
-Thank you
+Will try adding "libstd++" to the image I am building.
+The line "images/fso-image-nox.bb:  libstdc++ \" below
+and some googling gives me hope!
 
--Khem
+
+
+
+gcc/gcc-configure-canadian-sdk.inc:	(cd ${S}/libstdc++-v3 && autoreconf)
+gcc/gcc-configure-common.inc:                --enable-libstdcxx-pch \
+gcc/gcc-cross_csl-arm-2008q3.bb:	sed -i -e
+'s:gcc_no_link=3Dyes:gcc_no_link=3Dno:' ${S}/libstdc++-v3/configure
+gcc/gcc-cross_csl-arm-2008q1.bb:	sed -i -e
+'s:gcc_no_link=3Dyes:gcc_no_link=3Dno:' ${S}/libstdc++-v3/configure
+gcc/gcc-4.1.2.inc:       ln -sf ${S}/libstdc++-v3/config/os/uclibc/
+${S}/libstdc++-v3/config/os/uclibc-linux
+gcc/gcc-configure-cross.inc:		sed -i
+"s|dependency_libs\s*=3D\s*.*|dependency_libs=3D'-L${CROSS_DIR}/${TARGET_=
+SYS}/$d
+${LIBGCCS_VAR} -lc
+ -lm '|" ${CROSS_DIR}/${TARGET_SYS}/$d/libstdc++.la || true
+gcc/mingw-gcc-build.inc:	sed -i -e "s|installed=3Dyes|installed=3Dno|" -e
+"s|dependency_libs\s*=3D\s*.*|dependency_libs=3D'-L${STAGING_DIR_HOST
+}${layout_libdir} ${LIBGCCS_VAR} -lc -lm '|"
+${STAGING_DIR_HOST}${layout_libdir}/libstdc++.la || true
+gcc/gcc-cross_csl-arm-2007q3.bb:	sed -i -e
+'s:gcc_no_link=3Dyes:gcc_no_link=3Dno:' ${S}/libstdc++-v3/configure
+gcc/gcc-package-sdk.inc:		${TARGET_PREFIX}strip
+${D}${prefix}/${TARGET_SYS}/lib/libstdc++.so.*
+gcc/gcc-package-cross.inc:PACKAGES =3D "libgcc libssp libstdc++ libg2c
+libgfortran"
+gcc/gcc-package-cross.inc:FILES_libstdc++ =3D
+"${target_libdir}/libstdc++.so.*"
+gcc/gcc-package-cross.inc:	# Move libstdc++ and libg2c into libdir
+(resetting our prefix to /usr
+gcc/gcc-package-cross.inc:        if [ -f
+${D}${prefix}/*/lib/nof/libstdc++.so ]; then
+gcc/gcc-package-cross.inc:           mv -f
+${D}${prefix}/*/lib/nof/libstdc++.so* ${D}${target_libdir} || true
+gcc/gcc-package-cross.inc:           mv -f
+${D}${prefix}/*/${target_base_libdir}/libstdc++.so* ${D}${target_libdir}
+|| true
+gcc/gcc-package-cross.inc:               ${TARGET_PREFIX}strip
+${D}${target_libdir}/libstdc++.so.* || true
+gcc/gcc-package-target.inc:  libstdc++-dev \
+gcc/gcc-package-target.inc:FILES_libstdc++ =3D "${libdir}/libstdc++.so.*"
+gcc/gcc-package-target.inc:FILES_libstdc++-dev =3D "\
+gcc/gcc-package-target.inc:  ${libdir}/libstdc++.so \
+gcc/gcc-package-target.inc:  ${libdir}/libstdc++.la \
+gcc/gcc-package-target.inc:  ${libdir}/libstdc++.a \
+images/fso-image-nox.bb:  libstdc++ \
+mamona/gcc-noemu_4.1.2.bb:       ln -sf
+${S}/libstdc++-v3/config/os/uclibc/ ${S}/libstdc++-v3/config/os/uclibc-li=
+nux
+meta/slugos-native.bb:	libstdc++-dev \
+meta/external-toolchain-generic.bb:RPROVIDES =3D "glibc glibc-utils
+libsegfault glibc-thread-db libgcc-dev libgcc libstdc++-dev libstdc++ ldd=
+"
+meta/external-toolchain-csl.bb:INSANE_SKIP_libstdc++ =3D True
+meta/external-toolchain-csl.bb:	libstdc++ \
+meta/external-toolchain-csl.bb:	libstdc++-dev \
+meta/external-toolchain-csl.bb:FILES_libstdc++ =3D "${libdir}/libstdc++.s=
+o.*"
+meta/external-toolchain-csl.bb:FILES_libstdc++-dev =3D "\
+meta/external-toolchain-csl.bb:	${libdir}/libstdc++.so \
+meta/external-toolchain-csl.bb:	${libdir}/libstdc++.la \
+meta/external-toolchain-csl.bb:	${libdir}/libstdc++.a \
+meta/external-toolchain-csl.bb:PKGV_libstdc++ =3D ${CSL_VER_GCC}
+meta/external-toolchain-csl.bb:PKGV_libstdc++-dev =3D ${CSL_VER_GCC}
+meta/external-toolchain.bb:RPROVIDES =3D "glibc-utils libsegfault
+glibc-thread-db libgcc-dev libgcc libstdc++-dev libstdc++"
+sharprom-toolchain/sharprom-toolchain-native_1.0.bb:RPROVIDES =3D
+"glibc-utils libsegfault glibc-thread-db libgcc-dev libstdc++-dev libstdc=
+++"
+tasks/task-sdk-bare.bb:    libstdc++ \
+tasks/task-sdk-bare.bb:    libstdc++-dev \
+tasks/task-openmoko-native-sdk.bb:  libstdc++-dev \
+tasks/task-fso-toolchain-target.bb:    libstdc++ \
+tasks/mamona-sdk.inc:  libstdc++-dev \
+tasks/task-openmoko-toolchain-target.bb:    libstdc++ \
+tasks/task-mamona-base.bb:  libstdc++ \
+
+
+>=20
+> -----------------------------------------------------------------------=
+-
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+--=20
+Best Regards
+Ulf Samuelsson
+
 
 
