@@ -1,32 +1,44 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-iw0-f174.google.com ([209.85.223.174])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NrL2h-0006CQ-1y
+	(envelope-from <raj.khem@gmail.com>) id 1NrLyO-0000eQ-Nj
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Mar 2010 01:53:55 +0100
-Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
-	[123.192.181.204])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 9F6CE1B10C02
+	Tue, 16 Mar 2010 02:53:37 +0100
+Received: by iwn4 with SMTP id 4so910751iwn.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Mar 2010 00:53:57 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Mar 2010 01:50:11 +0100
-User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
-References: <201003081300.19058.holger+oe@freyther.de>
-	<201003151658.08401.holger+oe@freyther.de>
-	<ac9c93b11003151120w7b467a07m8916030fe51b107c@mail.gmail.com>
-In-Reply-To: <ac9c93b11003151120w7b467a07m8916030fe51b107c@mail.gmail.com>
+	Mon, 15 Mar 2010 18:50:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=F9CKa1vsvCzqCx9iOnyqJGTdUsYPWUAHcx5cl4nGxqg=;
+	b=QBVrcSdp9/k3+Kkt6B/9qA6KA8tZgyziW+Kk+yq9ha9YiySWFMbH8MnemQwr030WmL
+	QuCbUsQpkXsnBvE3r5EVpVWwqcu0enlgGaKNvphONH2cBKAAkWnbJ3OLhIhXI6wECYVn
+	rTr7kGz8uwtNDUNxZmxuMByGOGJYwi2XWszgU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=VSbSY/zqaYEV6NfxumaNd/Q1WzTyVy2otMCXqFtD24RHlPuh1E1DOB2fr4rnkhsMln
+	UygsPwzYXLsK+MRvbBr9wUMFFhHt318+niTK3TjDrQz2VnRMNR9caRrw9xxh1Y61d170
+	o9nN4TqW3m4G+c+sk6BvEYE/VHMq9RABlow/s=
 MIME-Version: 1.0
-Message-Id: <201003160150.11858.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Received: by 10.231.161.138 with SMTP id r10mr725640ibx.34.1268704229780; Mon, 
+	15 Mar 2010 18:50:29 -0700 (PDT)
+In-Reply-To: <201003160136.25555.holger+oe@freyther.de>
+References: <hndr0p$old$1@dough.gmane.org>
+	<1268672644-29043-1-git-send-email-valentin.longchamp@epfl.ch>
+	<201003160136.25555.holger+oe@freyther.de>
+Date: Mon, 15 Mar 2010 18:50:29 -0700
+Message-ID: <19c1b8a91003151850hf81a370ha8d4fd1ac3c9464@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.223.174
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: samba-essential upgrade or remove?
+Subject: Re: [PATCH] Do not generate NEON code for qt-4.6.2 embedded on armv6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,30 +52,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Mar 2010 00:53:55 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 16 Mar 2010 01:53:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Monday 15 March 2010 19:20:33 Frans Meulenbroeks wrote:
-> 2010/3/15 Holger Hans Peter Freyther <holger+oe@freyther.de>:
+On Mon, Mar 15, 2010 at 5:36 PM, Holger Hans Peter Freyther
+<holger+oe@freyther.de> wrote:
+> On Monday 15 March 2010 18:04:04 Valentin Longchamp wrote:
+>> http://bugreports.qt.nokia.com/browse/QTBUG-8749
+>> Neon code is generated for armv6 processor, where it should be armv7 only.
+>> This results in illegal instructions with some of the qt4 libraries.
+>>
+>> The current solution is not optimal, I just needed a quick fix for my arch
+>> and I don't have the needed knowledge in OE to fix it cleanly, but I wanted
+>> to point this issue out. But at least other arch (armv5 and armv4) should
+>> have the same problem and receive the same fix.
+>
+> Well... then maybe this should be fixed differently then?
 
-> > You are mixing two things again. One is warranty and of course our MIT
-> > license says that the stuff comes "as is" without warranty and such. The
-> > other is what do we want to try. I think we should folllow CVEs and have
-> > no known security issues in our default set (bitbake -s).
-> 
-> Be my guest :-)
-> Given the hostile attitude of some people here, I'm becoming less and
-> less interested to contribute.
-> Guess some will be happy about that :-(
+probably disable neon by default in qt build system and only enable it
+for  architectures that support
+neon  will make it work better with default option set for older arms.
+One could also ask compiler
+at build time but then it would be autoconf like :)
 
-Well,
-innovation comes by changing the status-quo, which implies a degree of 
-breakage and no one likes to wake up and do a build and find his/her stuff is 
-broken. Of course we do want to have progress and you do have supporters as 
-well. E.g. after the autoconf change Graeme, me and probably others kicked on 
-a fresh build to see where stuff is breaking and fix it (in the meta-toolchain-
-qte case I didn't need anything).
+-Khem
+
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
