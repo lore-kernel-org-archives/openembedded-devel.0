@@ -1,27 +1,26 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from smtp.net4india.com ([202.71.129.68])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NrTCa-0000sk-Mr
+	(envelope-from <sagarj@oriolesoftware.com>) id 1NrTHn-000122-AY
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Mar 2010 10:36:45 +0100
-Received: (qmail 4245 invoked by uid 813007); 16 Mar 2010 09:33:36 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 16 Mar 2010 09:33:36 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Mar 2010 10:32:32 +0100
-User-Agent: KMail/1.13.1 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.4.1; x86_64; ;
-	)
-References: <000301cac4e8$6b652d10$422f8730$@in>
-In-Reply-To: <000301cac4e8$6b652d10$422f8730$@in>
+	Tue, 16 Mar 2010 10:42:08 +0100
+Received: from [59.95.237.103] (helo=proxy)
+	by smtp.net4india.com with esmtp (Exim 4.69)
+	(envelope-from <sagarj@oriolesoftware.com>) id 1NrTEx-0005eO-5d
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Mar 2010 15:09:07 +0530
+From: "Sagar Jariwala" <sagarj@oriolesoftware.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 16 Mar 2010 15:09:04 +0530
 MIME-Version: 1.0
-Message-Id: <201003161032.33070.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+X-Mailer: Microsoft Office Outlook, Build 11.0.5510
+In-Reply-To: <201003161032.33070.marcin@juszkiewicz.com.pl>
+Thread-Index: AcrE6/wjrDTr4C1nT+etTFeVi7e95QAAHzLg
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2180
+X-SA-Exim-Connect-IP: 202.71.129.68
+X-SA-Exim-Mail-From: sagarj@oriolesoftware.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,MISSING_MID
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -39,41 +38,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Mar 2010 09:36:45 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 16 Mar 2010 09:42:08 -0000
+Message-ID: <MADEUP.15FE1AF2F5BAF218.14572@groups.io>
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Dnia wtorek, 16 marca 2010 o 10:09:44 Tejas napisa=C5=82(a):
+Thank you for sharing the information.
 
-> I would like to build filesystem and uImage for SMDK6410. I have download=
-ed
+-SJ
+
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org
+[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+Marcin Juszkiewicz
+Sent: Tuesday, March 16, 2010 3:03 PM
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] Need info how to build image and filesystem for SMDk6410
+
+Dnia wtorek, 16 marca 2010 o 10:09:44 Tejas napisal(a):
+
+> I would like to build filesystem and uImage for SMDK6410. I have
+downloaded
 > fresh openembedded and bitbake on ubuntu machine.
->=20
+> 
 > I am trying to run bit bake for SMDK-6410 board config.
->=20
+> 
 > Can anyone please guide me what shall be the local.conf contents?
 
-BBFILES =3D "PATH-TO-OPENEMBEDDED/recipes/"
-DISTRO =3D "angstrom-2008.1"
-MACHINE =3D "smdk6410"
+BBFILES = "PATH-TO-OPENEMBEDDED/recipes/"
+DISTRO = "angstrom-2008.1"
+MACHINE = "smdk6410"
 
 Nothing more is needed.
 
 in shell do:
 
-$ export BBPATH=3DPATH-TO-BUILDDIR:PATH-TO-OPENEMBEDDED
+$ export BBPATH=PATH-TO-BUILDDIR:PATH-TO-OPENEMBEDDED
 $ bitbake console-image
 
 > It would be nice if someone can guide me through the exact steps to use
 > smdk6410 in open-embedded.
 
 
-Regards,=20
-=2D-=20
+Regards, 
+-- 
 JID:      hrw@jabber.org
 Website:  http://marcin.juszkiewicz.com.pl/
 LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
