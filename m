@@ -1,33 +1,31 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from cassiel.sirena.org.uk ([80.68.93.111] ident=Debian-exim)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1NrVPo-000182-Us
+	(envelope-from <broonie@sirena.org.uk>) id 1NrVQN-0001Aq-LF
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Mar 2010 12:58:29 +0100
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.3/8.14.3) with ESMTP id o2GBtNQT014336
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Tue, 16 Mar 2010 12:55:23 +0100
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.69) (envelope-from <ensc@sigma-chemnitz.de>)
-	id 1NrVMp-0002fr-NM; Tue, 16 Mar 2010 12:55:23 +0100
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+	Tue, 16 Mar 2010 12:59:04 +0100
+Received: from broonie by cassiel.sirena.org.uk with local (Exim 4.69)
+	(envelope-from <broonie@sirena.org.uk>) id 1NrVNS-0007Gl-Sv
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Mar 2010 11:56:02 +0000
+Date: Tue, 16 Mar 2010 11:56:02 +0000
+From: Mark Brown <broonie@sirena.org.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Mar 2010 12:55:21 +0100
-Message-Id: <1268740521-10248-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-X-Mailer: git-send-email 1.6.6.1
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.67 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+Message-ID: <20100316115602.GB21604@sirena.org.uk>
+References: <20100316105131.14973gmx1@mx093.gmx.net>
+	<1268740358.3701.19.camel@mattotaupa>
+MIME-Version: 1.0
+In-Reply-To: <1268740358.3701.19.camel@mattotaupa>
+X-Cookie: Dealer prices may vary.
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 80.68.93.111
+X-SA-Exim-Mail-From: broonie@sirena.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.0 required=5.0 tests=BAYES_00,SPF_PASS,URG_BIZ
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: [PATCH] kernel.bbclass: fixed dependency calculation with recent modutils
+Subject: Re: Need HELP :: Samsung SMDK6410 root file system using	open-embedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,47 +39,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Mar 2010 11:58:29 -0000
+X-List-Received-Date: Tue, 16 Mar 2010 11:59:04 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-'depmod' from  recent module-init-tools (version 3.9 or later) returns
-paths relative to /lib/modules/`uname -r`.  E.g. 'modules.dep' contain
+On Tue, Mar 16, 2010 at 12:52:38PM +0100, Paul Menzel wrote:
+> Am Dienstag, den 16.03.2010, 16:20 +0530 schrieb Sagar Jariwala:
 
-| kernel/fs/nfs_common/nfs_acl.ko: kernel/net/sunrpc/sunrpc.ko
+> > Does anyone have built root file system for smdk6410 (samsung-s3c6410 chip)
+> > in open-embedded using bitbake?
 
-instead of absolute pathnames.
+> I do not.
 
-The dependency calculation of kernel modules depends on absolutes paths
-which are readded by this patch.
+I'm actively using an Angstrom root filesystem on a SMDK6410, though
+I've never tried to boot the kernel that OE builds on the board.
 
-Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
----
- classes/kernel.bbclass |   11 +++++++++++
- 1 files changed, 11 insertions(+), 0 deletions(-)
+> > I need urgent assistance for the same.
 
-diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-index 69ab422..29a7e64 100644
---- a/classes/kernel.bbclass
-+++ b/classes/kernel.bbclass
-@@ -381,6 +381,17 @@ python populate_packages_prepend () {
- 					deps[m2.group(1)].extend(m4.group(1).split())
- 			line = f.readline()
- 		f.close()
-+
-+		# Modern modutils do not add the "/lib/modules/`uname -r`"
-+		# path to the module dependencies anymore. To keep backward
-+		# compatibility, re-add them here
-+		add_moddir = (lambda x:
-+			      ("/lib/modules/%s/%s" % (kernelver_stripped, x),
-+			       x)[x[0] == '/'])
-+		deps = dict(map(lambda (key,val):
-+				(add_moddir(key),
-+				 map(lambda x: add_moddir(x), val)),
-+				deps.items()))
- 		return deps
- 	
- 	def get_dependencies(file, pattern, format):
--- 
-1.6.6.1
+> What did not work for you?
 
+Quite :/
 
 
