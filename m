@@ -1,26 +1,32 @@
-Received: from [93.100.16.104] (helo=mate.hex)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rik@mate.hex>) id 1Nralf-0003H8-KX
+Received: from ironport2-out.teksavvy.com ([206.248.154.183]
+	helo=ironport2-out.pppoe.ca) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <josh@slashdev.ca>) id 1Nras2-0005um-N2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Mar 2010 18:41:31 +0100
-Received: by mate.hex (Postfix, from userid 1000)
-	id EFB232172E; Tue, 16 Mar 2010 20:26:02 +0300 (MSK)
-From: roman@khimov.ru
+	Tue, 16 Mar 2010 18:48:05 +0100
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: ApEBAEhgn0tFpZDY/2dsb2JhbAAH1WWEeASGGYR3
+X-IronPort-AV: E=Sophos;i="4.49,651,1262581200"; d="scan'208";a="58348002"
+Received: from 69-165-144-216.dsl.teksavvy.com (HELO [192.168.1.10])
+	([69.165.144.216])
+	by ironport2-out.pppoe.ca with ESMTP; 16 Mar 2010 13:44:53 -0400
+Message-ID: <4B9FC5D6.8000701@slashdev.ca>
+Date: Tue, 16 Mar 2010 13:54:30 -0400
+From: Josh Kropf <josh@slashdev.ca>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.8) Gecko/20100301 Shredder/3.0.3
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Mar 2010 20:25:48 +0300
-Message-Id: <1268760348-25630-1-git-send-email-roman@khimov.ru>
-X-Mailer: git-send-email 1.6.4.2
-In-Reply-To: <201003162022.08094.roman@khimov.ru>
-References: <201003162022.08094.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 93.100.16.104
-X-SA-Exim-Mail-From: rik@mate.hex
+References: <1268511676.24057.12.camel@ed-hp-laptop>
+In-Reply-To: <1268511676.24057.12.camel@ed-hp-laptop>
+X-SA-Exim-Connect-IP: 206.248.154.183
+X-SA-Exim-Mail-From: josh@slashdev.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
-	RCVD_IN_PBL,RDNS_NONE autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] ipsec-tools: add version 0.7.2
+Subject: Re: Alignment trap - deprecation.pyo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,78 +40,147 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Mar 2010 17:41:31 -0000
+X-List-Received-Date: Tue, 16 Mar 2010 17:48:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Roman I Khimov <khimov@altell.ru>
+ed,
 
-Fixes CVE-2008-3651 and CVE-2008-3652.
+Are you able to use the python interactive shell on your mini2440? I had 
+a similar problem in that python would fail to even start (resulting in 
+an alignment trap).
 
-Signed-off-by: Roman I Khimov <khimov@altell.ru>
----
- recipes/ipsec-tools/ipsec-tools.inc      |    6 ++----
- recipes/ipsec-tools/ipsec-tools_0.6.6.bb |    2 ++
- recipes/ipsec-tools/ipsec-tools_0.6.7.bb |    2 ++
- recipes/ipsec-tools/ipsec-tools_0.7.2.bb |    8 ++++++++
- 4 files changed, 14 insertions(+), 4 deletions(-)
- create mode 100644 recipes/ipsec-tools/ipsec-tools_0.7.2.bb
+For me simply removing /usr/lib/python2.6/lib-dynload/readline.so kept 
+python from dying on startup.
 
-diff --git a/recipes/ipsec-tools/ipsec-tools.inc b/recipes/ipsec-tools/ipsec-tools.inc
-index f79210d..cb7b411 100644
---- a/recipes/ipsec-tools/ipsec-tools.inc
-+++ b/recipes/ipsec-tools/ipsec-tools.inc
-@@ -5,11 +5,9 @@ SECTION = "console/network"
- LICENSE = "BSD"
- DEPENDS = "virtual/kernel openssl readline flex"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/ipsec-tools/ipsec-tools-${PV}.tar.bz2 \
--           file://racoon-search-missing.patch;patch=1 \
--           file://gcc-4.2.patch;patch=1"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/ipsec-tools/ipsec-tools-${PV}.tar.bz2;name=ipsec-tools-${PV}"
- 
--INC_PR = "r1"
-+INC_PR = "r2"
- 
- inherit autotools
- 
-diff --git a/recipes/ipsec-tools/ipsec-tools_0.6.6.bb b/recipes/ipsec-tools/ipsec-tools_0.6.6.bb
-index efac342..c8842b7 100644
---- a/recipes/ipsec-tools/ipsec-tools_0.6.6.bb
-+++ b/recipes/ipsec-tools/ipsec-tools_0.6.6.bb
-@@ -1,3 +1,5 @@
- PR = "${INC_PR}.0"
- 
- require ipsec-tools.inc
-+
-+SRC_URI += "file://racoon-search-missing.patch;patch=1 file://gcc-4.2.patch;patch=1"
-\ No newline at end of file
-diff --git a/recipes/ipsec-tools/ipsec-tools_0.6.7.bb b/recipes/ipsec-tools/ipsec-tools_0.6.7.bb
-index efac342..c8842b7 100644
---- a/recipes/ipsec-tools/ipsec-tools_0.6.7.bb
-+++ b/recipes/ipsec-tools/ipsec-tools_0.6.7.bb
-@@ -1,3 +1,5 @@
- PR = "${INC_PR}.0"
- 
- require ipsec-tools.inc
-+
-+SRC_URI += "file://racoon-search-missing.patch;patch=1 file://gcc-4.2.patch;patch=1"
-\ No newline at end of file
-diff --git a/recipes/ipsec-tools/ipsec-tools_0.7.2.bb b/recipes/ipsec-tools/ipsec-tools_0.7.2.bb
-new file mode 100644
-index 0000000..4255598
---- /dev/null
-+++ b/recipes/ipsec-tools/ipsec-tools_0.7.2.bb
-@@ -0,0 +1,8 @@
-+PR = "${INC_PR}.0"
-+
-+require ipsec-tools.inc
-+
-+SRC_URI[ipsec-tools-0.7.2.md5sum] = "72861f005746ee27984b2ee715ecc629"
-+SRC_URI[ipsec-tools-0.7.2.sha256sum] = "08722ff6c62de3e042fef337454f03622a79053108d6dcc686c9c854f9f9e031"
-+
-+EXTRA_OECONF += " --disable-security-context"
-\ No newline at end of file
--- 
-1.6.4.2
-
+On 03/13/2010 03:21 PM, ed wrote:
+> I am trying to run a simple hello button python program using pygtk.
+>
+> I have built a minimal-gpe-image for the mini2440.
+>
+> But when I try and run the helloworld.py from the Pygtk tutorial.
+>
+> =========================================================
+>
+> #!/usr/bin/env python
+>
+> # example helloworld.py
+>
+> import pygtk
+> pygtk.require('2.0')
+> import gtk
+>
+> class HelloWorld:
+>
+>      # This is a callback function. The data arguments are ignored
+>      # in this example. More on callbacks below.
+>      def hello(self, widget, data=None):
+>          print "Hello World"
+>
+>      def delete_event(self, widget, event, data=None):
+>          # If you return FALSE in the "delete_event" signal handler,
+>          # GTK will emit the "destroy" signal. Returning TRUE means
+>          # you don't want the window to be destroyed.
+>          # This is useful for popping up 'are you sure you want to quit?'
+>          # type dialogs.
+>          print "delete event occurred"
+>
+>          # Change FALSE to TRUE and the main window will not be destroyed
+>          # with a "delete_event".
+>          return False
+>
+>      def destroy(self, widget, data=None):
+>          print "destroy signal occurred"
+>          gtk.main_quit()
+>
+>      def __init__(self):
+>          # create a new window
+>          self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+>
+>          # When the window is given the "delete_event" signal (this is
+> given
+>          # by the window manager, usually by the "close" option, or on
+> the
+>          # titlebar), we ask it to call the delete_event () function
+>          # as defined above. The data passed to the callback
+>          # function is NULL and is ignored in the callback function.
+>          self.window.connect("delete_event", self.delete_event)
+>
+>          # Here we connect the "destroy" event to a signal handler.
+>          # This event occurs when we call gtk_widget_destroy() on the
+> window,
+>          # or if we return FALSE in the "delete_event" callback.
+>          self.window.connect("destroy", self.destroy)
+>
+>          # Sets the border width of the window.
+>          self.window.set_border_width(10)
+>
+>          # Creates a new button with the label "Hello World".
+>          self.button = gtk.Button("Hello World")
+>
+>          # When the button receives the "clicked" signal, it will call
+> the
+>          # function hello() passing it None as its argument.  The hello()
+>          # function is defined above.
+>          self.button.connect("clicked", self.hello, None)
+>
+>          # This will cause the window to be destroyed by calling
+>          # gtk_widget_destroy(window) when "clicked".  Again, the destroy
+>          # signal could come from here, or the window manager.
+>          self.button.connect_object("clicked", gtk.Widget.destroy,
+> self.window)
+>
+>          # This packs the button into the window (a GTK container).
+>          self.window.add(self.button)
+>
+>          # The final step is to display this newly created widget.
+>          self.button.show()
+>
+>          # and the window
+>          self.window.show()
+>
+>      def main(self):
+>          # All PyGTK applications must have a gtk.main(). Control ends
+> here
+>          # and waits for an event to occur (like a key press or mouse
+> event).
+>          gtk.main()
+>
+> # If the program is run directly or passed as an argument to the python
+> # interpreter then create a HelloWorld instance and show it
+> if __name__ == "__main__":
+>      hello = HelloWorld()
+>      hello.main()
+>
+> ==============================================================
+>
+> I get the follow error when I run
+> #python -v pygtkHelloWorld.py
+>
+> # /usr/lib/python2.6/site-packages/gtk-2.0/gtk/_lazyutils.pyo
+> matches /usr/lib/python2.6/site-packages/gtk-2.0/gtk/_lazyutils.py
+> import gtk._lazyutils # precompiled
+> from /usr/lib/python2.6/site-packages/gtk-2.0/gtk/_lazyutils.pyo
+> # /usr/lib/python2.6/site-packages/gtk-2.0/gtk/deprecation.pyo
+> matches /usr/lib/python2.6/site-packages/gtk-2.0/gtk/deprecation.py
+> import gtk.deprecation # precompiled
+> from /usr/lib/python2.6/site-packages/gtk-2.0/gtk/deprecation.pyo
+> Alignment trap: python (2412) PC=0x40bfa3c4 Instr=0x280069c0
+> Address=0xffffffff FSR 0x813
+> Segmentation fault
+>
+>
+> Does anyone have any ideas why it chokes at deprecation.pyo?????
+>
+> Thanks
+> Ed
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>    
 
 
