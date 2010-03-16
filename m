@@ -1,45 +1,38 @@
-Received: from mail-yw0-f183.google.com ([209.85.211.183])
+Received: from mail-iw0-f174.google.com ([209.85.223.174])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1NrNpG-0000Eu-01
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Mar 2010 04:52:19 +0100
-Received: by ywh13 with SMTP id 13so786373ywh.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 20:49:11 -0700 (PDT)
+	(envelope-from <raj.khem@gmail.com>)
+	id 1NrOYn-0005EQ-7n; Tue, 16 Mar 2010 05:39:21 +0100
+Received: by iwn4 with SMTP id 4so1043479iwn.3
+	for <multiple recipients>; Mon, 15 Mar 2010 21:36:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to
-	:content-type; bh=7TlOV6Ovdfjt671w4uDZPg07073poREg24QbYLQKd5E=;
-	b=Ss9MfCNEmkhoya6Jn6KXzLjdGujrO0F9PQMsY2klZKbFh3Zc0Z9V7tsScDL2rKhlZo
-	IcvHu3hE3fIK/QdhwGjPhEDRD7iX565N4uIHS/jyY6StG//XeNcHZVO2oQD6fjMkyhXe
-	Rq4/GrsVXZ1cNOyvmRgJfBNCk0xRVoZ6Ux5Xo=
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=R69XSrbFc95C6hXasdyRmC655qkIvHUtAfj/nQJDl4Y=;
+	b=jNa3gvcbD9a1fFEM2Q5MwOBAiTq5Gn1dDRKxDc9XjVblbVY6WBUwo72bJW6V5RxsmL
+	F116Cdj2u/Stf+42gIfzm8SkgTIXG5fbFTI3VS25xBwXtk4HkA6jFkVyp4EDeQPFtYVA
+	XZV5kP8e24yw8qVYmxV/sHym+pwaGruzEo+AA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=DvbCnM7bN2h8MtkdMB5EUHrsiOmSUjzq1zR1T3uhFUHM0u+Npwij1BPjpF3XWIIaAe
-	9xyHg1E4SXlFbx4x97DyIdOESYl6SVk53XtHD+iqGxSolLZmbSMl/JC+VQ/lhCyb0vFe
-	adZp2/hzsERUaBNzd3Q0fe/OFzazOPZSDUrcE=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=naiK8PA2SPL3rBE6DQzFnfisTt+ej2bvruZbgkyLGxhEsMtueJLJRvCID3AVmTNliu
+	D6X9xVV5wD6n9cl1Uk0cWe6Pcd2L62Dx1clPJP8ED7knT8yJH0YSle9NGui1anCI7AGn
+	P8mGKtgVZ4AwHU3Xb1gCi2QG2rUCsWI3+D984=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.101.138.30 with SMTP id q30mr6888730ann.57.1268711351188; Mon, 
-	15 Mar 2010 20:49:11 -0700 (PDT)
-In-Reply-To: <1268709026-7111-1-git-send-email-denis@denix.org>
-References: <1268709026-7111-1-git-send-email-denis@denix.org>
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 15 Mar 2010 20:48:51 -0700
-X-Google-Sender-Auth: aeb4567448521986
-Message-ID: <b6ebd0a51003152048s67509df1o10cd4aa981ac773a@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.183
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Received: by 10.231.151.197 with SMTP id d5mr781155ibw.73.1268714174262; Mon, 
+	15 Mar 2010 21:36:14 -0700 (PDT)
+Date: Mon, 15 Mar 2010 21:36:14 -0700
+Message-ID: <19c1b8a91003152136p1159f489nd93fa4d303bb8f06@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
+	openembedded-users@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.223.174
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] opkg: fix global depends on openssl, even in 	-nogpg/-nocurl
+Subject: Talk on using OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,70 +46,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Mar 2010 03:52:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 16 Mar 2010 04:39:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Looks reasonable to me.
+Hi
 
-Acked-by: Chris Larson <clarson@kergoth.com>
+Silicon Valley Linux Technology Group is organizing a free session on
+OpenEmbedded this Thursday. I am hoping it will a interesting session
+and great learning experience for all of us.
+If you are local around San Jose and would like to attend feel free to RSVP at
 
-On Mon, Mar 15, 2010 at 8:10 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+http://www.meetup.com/Silicon-Valley-Linux-Technology/calendar/12790580/
 
-> Fixes the problem, introduced by 8c1731d818c89a291f80940c1912587ff9ce46b7,
-> where openssl is added with DEPENDS_append override, preventing -nogpg and
-> -nocurl variants from clearing the DEPENDS, when they include opkg_svn.bb
-> file, thus forcing them to depend on openssl too.
->
-> Signed-off-by: Denys Dmytriyenko <denis@denix.org>
-> ---
->  recipes/opkg/opkg.inc    |    4 ++--
->  recipes/opkg/opkg_svn.bb |    2 --
->  2 files changed, 2 insertions(+), 4 deletions(-)
->
-> diff --git a/recipes/opkg/opkg.inc b/recipes/opkg/opkg.inc
-> index 4442102..9a3d3dc 100644
-> --- a/recipes/opkg/opkg.inc
-> +++ b/recipes/opkg/opkg.inc
-> @@ -2,9 +2,9 @@ DESCRIPTION = "Opkg Package Manager"
->  DESCRIPTION_libopkg = "Opkg Package Manager Library"
->  SECTION = "base"
->  LICENSE = "GPLv2"
-> -DEPENDS = "curl gpgme"
-> +DEPENDS = "curl gpgme openssl"
->  PV = "0.1.6+svnr${SRCPV}"
-> -INC_PR = "r20"
-> +INC_PR = "r21"
->
->  FILESPATHPKG =. "opkg:"
->
-> diff --git a/recipes/opkg/opkg_svn.bb b/recipes/opkg/opkg_svn.bb
-> index 4945260..5138458 100644
-> --- a/recipes/opkg/opkg_svn.bb
-> +++ b/recipes/opkg/opkg_svn.bb
-> @@ -1,7 +1,5 @@
->  require opkg.inc
->
-> -DEPENDS_append = " openssl"
-> -
->  PR = "${INC_PR}"
->
->  PROVIDES =+ "virtual/update-alternatives"
-> --
-> 1.6.3.3
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Thank you
 
+-Khem
 
-
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
