@@ -1,43 +1,31 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NrcH6-0002E5-Dn for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Mar 2010 20:17:57 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NrcEB-0005yA-4s for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Mar 2010 20:14:55 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Mar 2010 20:14:55 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Mar 2010 20:14:55 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <roman@khimov.ru>) id 1NrcqK-0005hK-D2
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Mar 2010 20:54:25 +0100
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NrcnO-0001lW-Dg
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Mar 2010 22:51:19 +0300
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 16 Mar 2010 20:14:44 +0100
-Message-ID: <hnolb4$9o$1@dough.gmane.org>
-References: <20100316115602.GB21604@sirena.org.uk>
-	<46831.6143299036$1268763843@news.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
-In-Reply-To: <46831.6143299036$1268763843@news.gmane.org>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Tue, 16 Mar 2010 22:48:46 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
+References: <201003151658.45421.ml@vdm-design.de>
+	<201003160004.24164.roman@khimov.ru>
+In-Reply-To: <201003160004.24164.roman@khimov.ru>
+MIME-Version: 1.0
+Message-Id: <201003162248.54281.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Need HELP :: Samsung SMDK6410 root file systemusing open-embedded
+Subject: Re: qemu: fails to build without zlib-dev installed on buildhost
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,31 +39,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Mar 2010 19:17:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 16 Mar 2010 19:54:25 -0000
+X-Groupsio-MsgNum: 17751
+Content-Type: multipart/signed; boundary="nextPart1583698.lFAGlVQ6QE";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--nextPart1583698.lFAGlVQ6QE
+Content-Type: Text/Plain;
+  charset="windows-1251"
+Content-Transfer-Encoding: quoted-printable
 
-On 16-03-10 13:14, Sagar Jariwala wrote:
-> Actually I need a root file system for SMDK 6410 which includes different
-> applications like Mplayer and totem player.
-> 
-> Currently I am getting lots of error running bitbake.
+=C2 =F1=EE=EE=E1=F9=E5=ED=E8=E8 =EE=F2 =C2=F2=EE=F0=ED=E8=EA 16 =EC=E0=F0=
+=F2=E0 2010 00:04:18 =E0=E2=F2=EE=F0 Roman I Khimov =ED=E0=EF=E8=F1=E0=EB:
+> So I think something like attached patch should be a bit better. Please t=
+ry
+> that.
 
-Try using narcissus with the 'smartq5' machine, that's also s3c64xx based.
+OK, actually I've tested it myself and I think we need it, so I'm pushing t=
+his=20
+one.
 
-regards,
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
-Koen
+--nextPart1583698.lFAGlVQ6QE
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v2.0.12 (GNU/Linux)
 
-iD8DBQFLn9ikMkyGM64RGpERAuSUAKCpEuUIdcP3JpU0jU9wDZ2g/D7MrQCdF+Sc
-PL74xA8OpVHsOWHe5yhpyq4=
-=lCyj
+iEYEABECAAYFAkuf4KYACgkQXJ70z+XgVcM/xQCfS4ip85EuTvgZeqFPw1yfteYN
+KwQAoM9bgfTo3l/Aa53tDWg5CK6SpTTq
+=Ay0c
 -----END PGP SIGNATURE-----
 
-
-
+--nextPart1583698.lFAGlVQ6QE--
