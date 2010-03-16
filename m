@@ -1,31 +1,26 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from [93.100.16.104] (helo=mate.hex)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1NraYI-0001sw-K1
+	(envelope-from <rik@mate.hex>) id 1Nralf-0003H8-KX
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Mar 2010 18:27:38 +0100
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NraVM-0001Zs-JM
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Mar 2010 20:24:33 +0300
-From: Roman I Khimov <roman@khimov.ru>
+	Tue, 16 Mar 2010 18:41:31 +0100
+Received: by mate.hex (Postfix, from userid 1000)
+	id EFB232172E; Tue, 16 Mar 2010 20:26:02 +0300 (MSK)
+From: roman@khimov.ru
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 Mar 2010 20:22:05 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
-References: <1268750512-11047-1-git-send-email-khimov@altell.ru>
-	<1268750512-11047-2-git-send-email-khimov@altell.ru>
-In-Reply-To: <1268750512-11047-2-git-send-email-khimov@altell.ru>
-MIME-Version: 1.0
-Message-Id: <201003162022.08094.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+Date: Tue, 16 Mar 2010 20:25:48 +0300
+Message-Id: <1268760348-25630-1-git-send-email-roman@khimov.ru>
+X-Mailer: git-send-email 1.6.4.2
+In-Reply-To: <201003162022.08094.roman@khimov.ru>
+References: <201003162022.08094.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 93.100.16.104
+X-SA-Exim-Mail-From: rik@mate.hex
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
+	RCVD_IN_PBL,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] ipsec-tools: add version 0.7.2
+Subject: [PATCH 2/2] ipsec-tools: add version 0.7.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,36 +34,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Mar 2010 17:27:39 -0000
-X-Groupsio-MsgNum: 17744
-Content-Type: multipart/signed; boundary="nextPart13105015.WDAJ1zRoNZ";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 16 Mar 2010 17:41:31 -0000
 
---nextPart13105015.WDAJ1zRoNZ
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Roman I Khimov <khimov@altell.ru>
 
-0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0JLRgtC+0YDQvdC40LogMTYg0LzQsNGA0YLQsCAy
-MDEwIDE3OjQxOjUyINCw0LLRgtC+0YAgUm9tYW4gSSBLaGltb3Yg0L3QsNC/0LjRgdCw0Ls6Cj4g
-K1NSQ19VUkkgKz0gImZpbGU6Ly9yYWNvb24tc2VhcmNoLW1pc3NpbmcucGF0Y2g7cGF0Y2g9MQo+
-ICBmaWxlOi8vZ2NjLTQuMi5wYXRjaDtwYXRjaD0xIgo+ICsKPiAgcmVxdWlyZSBpcHNlYy10b29s
-cy5pbmMKCllheSwgc2hvdWxkIGhhdmUgcGxhY2VkIGl0IGFmdGVyIC5pbmMsIHVwZGF0ZWQgcGF0
-Y2ggdG8gZm9sbG93LgoKLS0gCiBodHRwOi8vcm9tYW4ua2hpbW92LnJ1Cm1haWx0bzogcm9tYW5A
-a2hpbW92LnJ1CmdwZyAtLWtleXNlcnZlciBoa3A6Ly9zdWJrZXlzLnBncC5uZXQgLS1yZWN2LWtl
-eXMgMHhFNUUwNTVDMwo=
+Fixes CVE-2008-3651 and CVE-2008-3652.
 
---nextPart13105015.WDAJ1zRoNZ
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+Signed-off-by: Roman I Khimov <khimov@altell.ru>
+---
+ recipes/ipsec-tools/ipsec-tools.inc      |    6 ++----
+ recipes/ipsec-tools/ipsec-tools_0.6.6.bb |    2 ++
+ recipes/ipsec-tools/ipsec-tools_0.6.7.bb |    2 ++
+ recipes/ipsec-tools/ipsec-tools_0.7.2.bb |    8 ++++++++
+ 4 files changed, 14 insertions(+), 4 deletions(-)
+ create mode 100644 recipes/ipsec-tools/ipsec-tools_0.7.2.bb
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
+diff --git a/recipes/ipsec-tools/ipsec-tools.inc b/recipes/ipsec-tools/ipsec-tools.inc
+index f79210d..cb7b411 100644
+--- a/recipes/ipsec-tools/ipsec-tools.inc
++++ b/recipes/ipsec-tools/ipsec-tools.inc
+@@ -5,11 +5,9 @@ SECTION = "console/network"
+ LICENSE = "BSD"
+ DEPENDS = "virtual/kernel openssl readline flex"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/ipsec-tools/ipsec-tools-${PV}.tar.bz2 \
+-           file://racoon-search-missing.patch;patch=1 \
+-           file://gcc-4.2.patch;patch=1"
++SRC_URI = "${SOURCEFORGE_MIRROR}/ipsec-tools/ipsec-tools-${PV}.tar.bz2;name=ipsec-tools-${PV}"
+ 
+-INC_PR = "r1"
++INC_PR = "r2"
+ 
+ inherit autotools
+ 
+diff --git a/recipes/ipsec-tools/ipsec-tools_0.6.6.bb b/recipes/ipsec-tools/ipsec-tools_0.6.6.bb
+index efac342..c8842b7 100644
+--- a/recipes/ipsec-tools/ipsec-tools_0.6.6.bb
++++ b/recipes/ipsec-tools/ipsec-tools_0.6.6.bb
+@@ -1,3 +1,5 @@
+ PR = "${INC_PR}.0"
+ 
+ require ipsec-tools.inc
++
++SRC_URI += "file://racoon-search-missing.patch;patch=1 file://gcc-4.2.patch;patch=1"
+\ No newline at end of file
+diff --git a/recipes/ipsec-tools/ipsec-tools_0.6.7.bb b/recipes/ipsec-tools/ipsec-tools_0.6.7.bb
+index efac342..c8842b7 100644
+--- a/recipes/ipsec-tools/ipsec-tools_0.6.7.bb
++++ b/recipes/ipsec-tools/ipsec-tools_0.6.7.bb
+@@ -1,3 +1,5 @@
+ PR = "${INC_PR}.0"
+ 
+ require ipsec-tools.inc
++
++SRC_URI += "file://racoon-search-missing.patch;patch=1 file://gcc-4.2.patch;patch=1"
+\ No newline at end of file
+diff --git a/recipes/ipsec-tools/ipsec-tools_0.7.2.bb b/recipes/ipsec-tools/ipsec-tools_0.7.2.bb
+new file mode 100644
+index 0000000..4255598
+--- /dev/null
++++ b/recipes/ipsec-tools/ipsec-tools_0.7.2.bb
+@@ -0,0 +1,8 @@
++PR = "${INC_PR}.0"
++
++require ipsec-tools.inc
++
++SRC_URI[ipsec-tools-0.7.2.md5sum] = "72861f005746ee27984b2ee715ecc629"
++SRC_URI[ipsec-tools-0.7.2.sha256sum] = "08722ff6c62de3e042fef337454f03622a79053108d6dcc686c9c854f9f9e031"
++
++EXTRA_OECONF += " --disable-security-context"
+\ No newline at end of file
+-- 
+1.6.4.2
 
-iEYEABECAAYFAkufvkAACgkQXJ70z+XgVcPILQCfccInmVatmBoBgccKx9gJAzYE
-PQcAn1YwWYF1jNMallnshL6J7fpeQvcv
-=7HJi
------END PGP SIGNATURE-----
 
---nextPart13105015.WDAJ1zRoNZ--
+
