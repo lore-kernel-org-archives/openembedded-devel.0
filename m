@@ -1,31 +1,39 @@
-Received: from smtp.net4india.com ([202.71.129.67])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sagarj@oriolesoftware.com>) id 1NrWDn-0005nx-2I
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1NrWMI-00060h-W4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Mar 2010 13:50:13 +0100
-Received: from [59.96.147.176] (helo=proxy)
-	by smtp.net4india.com with esmtp (Exim 4.69)
-	(envelope-from <sagarj@oriolesoftware.com>) id 1NrWAx-0006BJ-DF
+	Tue, 16 Mar 2010 13:58:56 +0100
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.3/8.14.3) with ESMTP id o2GCtmMv005362
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Mar 2010 13:55:48 +0100
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.69) (envelope-from <ensc@sigma-chemnitz.de>) id 1NrWJI-00034v-9I
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Mar 2010 18:17:12 +0530
-From: "Sagar Jariwala" <sagarj@oriolesoftware.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 16 Mar 2010 18:17:10 +0530
+	Tue, 16 Mar 2010 13:55:48 +0100
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+To: openembedded-devel@lists.openembedded.org
+References: <1268739774-10002-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+	<1268741432.3701.32.camel@mattotaupa>
+Date: Tue, 16 Mar 2010 13:55:48 +0100
+In-Reply-To: <1268741432.3701.32.camel@mattotaupa> (Paul Menzel's message of
+	"Tue, 16 Mar 2010 13:10:32 +0100")
+Message-ID: <ly4okgl92j.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.1 (gnu/linux)
 MIME-Version: 1.0
-X-Mailer: Microsoft Office Outlook, Build 11.0.5510
-In-Reply-To: <20100316123408.GD21604@sirena.org.uk>
-Thread-Index: AcrFBSzDcOw2etCZTESxE/1qgB+hywAAU41A
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2180
-X-SA-Exim-Connect-IP: 202.71.129.67
-X-SA-Exim-Mail-From: sagarj@oriolesoftware.com
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.67 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MISSING_MID,RCVD_IN_SORBS_WEB autolearn=no version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Need HELP :: Samsung SMDK6410 root file systemusing	open-embedded
+Subject: Re: [PATCH] autotools.bbclass: enhanced oe_runconf() to accept quoted arguments
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,110 +47,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Mar 2010 12:50:13 -0000
-Message-ID: <MADEUP.15FE1AF36C90DDDE.13558@groups.io>
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 16 Mar 2010 12:58:56 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Hello Mark,
- 
-I have downloaded fresh OE and bitbake. I am running bitbake and facing
-difficulties.
- 
-Following is the erro log.
- 
---2010-03-16 23:34:00--  ftp://ftp.gnu.org/gnu/m4/m4-1.4.14.tar.bz2
-Connecting to 192.168.0.5:22... sh:
-/home/sagar/KIT6410/OE/angstrom-dev/staging/i686-linux/usr/bin/oe_sha256sum:
-cannot execute binary file
-NOTE: The SHA256 Sums do not match. Wanted:
-'264d7c1c0e268bc77fbe0f308e085545535edfe73f33e27c80219cc0c9c71246' Got: ''
-NOTE: Task failed: Checksum of
-'ftp://ftp.gnu.org/gnu/autoconf/autoconf-2.63.tar.bz2' failed
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-virtual:native:/home/sagar/KIT6410/OE/openembedded/recipes/autoconf/autoconf
-_2.63.bb do_fetch failed
-sh:
-/home/sagar/KIT6410/OE/angstrom-dev/staging/i686-linux/usr/bin/oe_sha256sum:
-cannot execute binary file
-NOTE: The MD5Sums did not match. Wanted: '427c2914d3eab956f317c9ec6a45e62a'
-and Got: '08f9ec630dd4fd92b6d11ffb51110687'
-NOTE: Task failed: Checksum of
-'ftp://ftp.gnu.org/gnu/coreutils/coreutils-7.2.tar.gz' failed
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/home/sagar/KIT6410/OE/openembedded/recipes/coreutils/coreutils-native_7.2.b
-b do_fetch failed
-sh:
-/home/sagar/KIT6410/OE/angstrom-dev/staging/i686-linux/usr/bin/oe_sha256sum:
-cannot execute binary file
-NOTE: The MD5Sums did not match. Wanted: 'f77adda60039ffa753f3c584a286f12b'
-and Got: '2f0fb9b4c445c00aaeefcf63b184bd55'
-NOTE: Task failed: Checksum of
-'http://download.savannah.gnu.org/releases/quilt/quilt-0.48.tar.gz' failed
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/home/sagar/KIT6410/OE/openembedded/recipes/quilt/quilt-native_0.48.bb
-do_fetch failed
-ERROR: Task 98
-(/home/sagar/KIT6410/OE/openembedded/recipes/coreutils/coreutils-native_7.2.
-bb, do_fetch) failed
-NOTE: Waiting for 3 active tasks to finish
-NOTE: 1:
-/home/sagar/KIT6410/OE/openembedded/recipes/quilt/quilt-native_0.48.bb,
-do_fetch (29529)
-NOTE: 2: /home/sagar/KIT6410/OE/openembedded/recipes/m4/m4-native_1.4.14.bb,
-do_fetch (29530)
-NOTE: 3:
-virtual:native:/home/sagar/KIT6410/OE/openembedded/recipes/autoconf/autoconf
-_2.63.bb, do_fetch (29531)
-ERROR: Task 636
-(virtual:native:/home/sagar/KIT6410/OE/openembedded/recipes/autoconf/autocon
-f_2.63.bb, do_fetch) failed
-NOTE: Waiting for 2 active tasks to finish
-NOTE: 1:
-/home/sagar/KIT6410/OE/openembedded/recipes/quilt/quilt-native_0.48.bb,
-do_fetch (29529)
-NOTE: 2: /home/sagar/KIT6410/OE/openembedded/recipes/m4/m4-native_1.4.14.bb,
-do_fetch (29530)
-ERROR: Task 33
-(/home/sagar/KIT6410/OE/openembedded/recipes/quilt/quilt-native_0.48.bb,
-do_fetch) failed
-NOTE: Waiting for 1 active tasks to finish
-NOTE: 1: /home/sagar/KIT6410/OE/openembedded/recipes/m4/m4-native_1.4.14.bb,
-do_fetch (29530)
- 
-How to fix above errors?
- 
-Thanks,
-Sagar
- 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org
-[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of Mark
-Brown
-Sent: Tuesday, March 16, 2010 6:04 PM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] Need HELP :: Samsung SMDK6410 root file systemusing
-open-embedded
- 
-On Tue, Mar 16, 2010 at 01:12:50PM +0100, Paul Menzel wrote:
-> Am Dienstag, den 16.03.2010, 11:56 +0000 schrieb Mark Brown:
-> > On Tue, Mar 16, 2010 at 12:52:38PM +0100, Paul Menzel wrote:
- 
-> > > What did not work for you?
- 
-> > Quite :/
- 
-> ???
- 
-It's difficult to help without knowing the problem that the original
-poster is experiencing.
- 
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Paul Menzel <paulepanter@users.sourceforge.net> writes:
+
+>> This patch allows to pass quoted strings in EXTRA_OECONF.  E.g. with
+>> this patch, it is possible to do
+>> 
+>> | EXTRA_OECONF = "--with-build-cflags='${BUILD_CFLAGS}'"
+>> 
+>> where 'BUILD_CFLAGS' contains multiple, whitespace separated arguments.
+> ...
+> Why did not it work before?
+
+It was not used because it was not possible.  E.g. 'ncurses' accepts a
+'--with-build-cflags' ./configure argument but recipe does not use it
+but sets
+
+| EXTRA_OEMAKE = '"BUILD_LDFLAGS=" "BUILD_CCFLAGS=${BUILD_CCFLAGS}"'
+
+instead of (which is properly quoted by oe_runmake).
+
+
+Doing the same with EXTRA_OECONF would result and expand to something
+like
+
+   | EXTRA_OECONF = "--with-build-cflags='${BUILD_CFLAGS}'"
+-> | EXTRA_OECONF = "--with-build-cflags='-i/... -O2 -g3 ...'"
+-> | cfgcmd=".../configure --with-build-cflags='-i/... -O2 -g3 ...'"
+-> | $cfgcmd
+
+This does not give the wanted result...  
+
+
+E.g. the shorter
+
+| cfgcmd="strace -eexecve true --with='a b c'"
+
+does (the wrong)
+
+| $cfgcmd 
+| execve("/bin/true", ["true", "--with='a", "b", "c'"], [/* 60 vars */]) = 0
+
+
+
+With my patch, you would get from
+
+| set -- strace -eexecve true --with='a b c'
+
+the expected
+
+| $ "$@"
+| execve("/bin/true", ["true", "--with=a b c"], [/* 60 vars */]) = 0
+
+
+
+Enrico
+
 
