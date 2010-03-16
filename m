@@ -1,47 +1,32 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1NrK6C-0007IO-Ex
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Mar 2010 00:53:32 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id CC9E9A5054
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 23:50:27 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id ACMJ6LJ-Hafm
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 23:50:25 +0000 (GMT)
-Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id B4DF0A5013
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Mar 2010 23:50:24 +0000 (GMT)
-Received: by xora-desktop.xora.org.uk (Postfix, from userid 500)
-	id DE6B325CA1; Mon, 15 Mar 2010 23:51:00 +0000 (GMT)
-Date: Mon, 15 Mar 2010 23:51:00 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NrKXD-0002jk-NB for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Mar 2010 01:21:24 +0100
+Received: from f053034098.adsl.alicedsl.de ([78.53.34.98]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NrKUJ-0003DX-L8 for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Mar 2010 00:18:23 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100315235100.GE2425@xora-desktop.xora.org.uk>
-References: <ac9c93b11003141453n7df620c7gca609efe00e0e6f@mail.gmail.com>
-	<hnl05u$1r0$1@dough.gmane.org>
-	<ac9c93b11003150431k384114e6i11cab70a9d377da9@mail.gmail.com>
-	<20100315114313.GB2425@xora-desktop.xora.org.uk>
-	<ac9c93b11003150659g3bb78a4dk4feec888b80c97f5@mail.gmail.com>
-	<20100315154453.GC2425@xora-desktop.xora.org.uk>
-MIME-Version: 1.0
-In-Reply-To: <20100315154453.GC2425@xora-desktop.xora.org.uk>
-User-Agent: Mutt/1.5.20 (2009-08-17)
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+In-Reply-To: <1268694629.16974.52.camel@mattotaupa>
+References: <1268692500.16974.50.camel@mattotaupa>
+	<1268694629.16974.52.camel@mattotaupa>
+Date: Tue, 16 Mar 2010 01:18:21 +0100
+Message-ID: <1268698701.16974.55.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Re; [PATCH 7/8] autoconf: add 2.65
+Subject: Re: [PATCH 2/2 v2] ffmpeg: Stage `attributes.h` and `avconfig.h`.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,36 +40,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Mar 2010 23:53:32 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 16 Mar 2010 00:21:24 -0000
+X-Groupsio-MsgNum: 17701
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-183WF6k+s6p3W6bBz6Rr"
 
-On Mon, Mar 15, 2010 at 03:44:53PM +0000, Graeme Gregory wrote:
-> On Mon, Mar 15, 2010 at 02:59:21PM +0100, Frans Meulenbroeks wrote:
-> > 2010/3/15 Graeme Gregory <dp@xora.org.uk>:
-> > > On Mon, Mar 15, 2010 at 12:31:10PM +0100, Frans Meulenbroeks wrote:
-> > >> And any help related to getting autoconf up to 2.65 is appreciated.
-> > >> I'm not that much an autoconf wiz.
-> > >>
-> > > There was no wizardry needed to get 2.65 working, I have a build
-> > > currently running to test the new version.
-> > 
-> > Oops.
-> > Actually I misworded things. I noticed some recipes not working any
-> > more with 2.65 and would like some help to fix this.
-> > The most troublesome I had was libpcap. That one generated a configure
-> > file that had syntax errors.
-> > The other one I ran into was php-native where configure was stuck in
-> > an endless loop, with yes eating up 100% CPU time.
-> > 
-> Well this branch may be of interest to you then :-)
-> 
-> http://www.xora.org.uk/cgi-bin/cgit.cgi/openembedded/log/?h=xora/autoconf-2.65
-> 
-And that branch now contains fixes for all php versions we currently have
-in OE.
+--=-183WF6k+s6p3W6bBz6Rr
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Graeme
+Am Dienstag, den 16.03.2010, 00:10 +0100 schrieb Paul Menzel:
+> Some programs as `libvalhalla` need those headers.
+>=20
+> v2: Also stage `avconfig.h`.
+
+That did not work, since `avconfig.h` is built.
+
+So please scratch this version and please apply the one Mon, 15 Mar 2010
+23:35:00 +0100. I will send a separate patch for `avconfig.h`.
 
 
+Thanks,
 
+Paul
+
+--=-183WF6k+s6p3W6bBz6Rr
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkuezk0ACgkQPX1aK2wOHVjmSwCfb/qLdCXcDPGUUADt6jyoR5Qc
+VxYAn1vg8bCKAMqCIsY0F7L6QMQ1hijA
+=Dld+
+-----END PGP SIGNATURE-----
+
+--=-183WF6k+s6p3W6bBz6Rr--
