@@ -1,43 +1,29 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NrTao-0003mY-Rs
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 16 Mar 2010 11:01:47 +0100
-Received: by gwj23 with SMTP id 23so1535443gwj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 Mar 2010 02:58:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=wLhu66euYKxOS4JhA0vijzhaQ++gqG5zAPDJknxwoos=;
-	b=rq+DwnQ6dPxVxJNCh0yeRmOlfO0x7yHhdjP3QtvwJ8sebLMWsrx+mCsgD7U5APdxqJ
-	vwc1lbeBX8/vMzTfaBejaro4qkGTERFSKCOIHW+aZmrzwWP9j63aNJLuPWtaUlXnNZwy
-	E+fXBU67nbMnxQ44e7xDQ7HWPxCTkMkqDnFDs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=mCJy6F8YzHg4vY+wNRZE3KaOospzS/pQOdIzbQHYWW3iqM6hwn/e7HCjNpcmxYGOuu
-	NY2FGK8YyXbo1wuygv5R1ggVW7yIzIX3EO98wft1lWhoqI5mbmsYckFhLoCT2vJKnI0D
-	dv5rhGavD37+G7KVi6mvwMZ3KAUEaJW7ngpus=
-MIME-Version: 1.0
-Received: by 10.101.177.16 with SMTP id e16mr7982827anp.153.1268733519756; 
-	Tue, 16 Mar 2010 02:58:39 -0700 (PDT)
-In-Reply-To: <1268732997.3990.6.camel@mattotaupa>
-References: <1268732997.3990.6.camel@mattotaupa>
-Date: Tue, 16 Mar 2010 10:58:39 +0100
-Message-ID: <ac9c93b11003160258m2433be87s9794def341e14fc1@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NrTjq-000681-En for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Mar 2010 11:11:06 +0100
+Received: from f053036046.adsl.alicedsl.de ([78.53.36.46]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NrTgw-00070W-11 for openembedded-devel@lists.openembedded.org;
+	Tue, 16 Mar 2010 10:08:02 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Tue, 16 Mar 2010 11:08:00 +0100
+Message-ID: <1268734080.3990.23.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] ffmpeg: Stage `avconfig.h` which is built at compile time.
+Subject: author dates in commits: Times are converted incorrectly?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,47 +37,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 Mar 2010 10:01:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 16 Mar 2010 10:11:06 -0000
+X-Groupsio-MsgNum: 17719
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-Wx9FHidqp+6XmHuMJC3r"
+
+--=-Wx9FHidqp+6XmHuMJC3r
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-2010/3/16 Paul Menzel <paulepanter@users.sourceforge.net>:
-> This header is needed for `libvalhalla`.
->
-> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-> ---
-> Could someone please test this with `ffmpeg_0.4.9-pre1.bb` as it includes=
- `ffmpeg.inc` too.
-> ---
-> =A0recipes/ffmpeg/ffmpeg.inc | =A0 =A02 ++
-> =A01 files changed, 2 insertions(+), 0 deletions(-)
->
-> diff --git a/recipes/ffmpeg/ffmpeg.inc b/recipes/ffmpeg/ffmpeg.inc
-> index cd330f8..437a822 100644
-> --- a/recipes/ffmpeg/ffmpeg.inc
-> +++ b/recipes/ffmpeg/ffmpeg.inc
-> @@ -61,6 +61,8 @@ do_stage() {
-> =A0 =A0 =A0 =A0 =A0 =A0install -m 0644 ${S}/libavutil/$h =A0 =A0 =A0 =A0$=
-{STAGING_INCDIR}/ffmpeg/$h
-> =A0 =A0 =A0 =A0 =A0 =A0install -m 0644 ${S}/libavutil/$h =A0 =A0 =A0 =A0$=
-{STAGING_INCDIR}/libavutil/$h
-> =A0 =A0 =A0 =A0 done
-> + =A0 =A0 =A0 =A0install -m 0644 ${B}/libavutil/avconfig.h ${STAGING_INCD=
-IR}/ffmpeg/
-> + =A0 =A0 =A0 =A0install -m 0644 ${B}/libavutil/avconfig.h ${STAGING_INCD=
-IR}/libavutil/
->
-> =A0 =A0 =A0 =A0 install -d ${STAGING_INCDIR}/libswscale/
-> =A0 =A0 =A0 =A0 install -m 0644 ${S}/libswscale/*.h ${STAGING_INCDIR}/ffm=
-peg/
-> --
-> 1.7.0
->
-
-It might be better to try to move to the new default staging (by
-removing the do_stage and testing whether it installs the required
-things in staging).
-
-FM
+Dear OE folks (especially Philip and Martin),
 
 
+is something wrong with the time of the applied patches? I refer to the
+following commits.
+
+
+commit 0315e512f4b5d71dc0dbeb6fee9ada5b7b7b2bea
+Author:     Paul Menzel <paulepanter@users.sourceforge.net>
+AuthorDate: Mon Mar 15 12:35:00 2010 +0000
+Commit:     Martin Jansa <Martin.Jansa@gmail.com>
+
+Date in my message header.
+
+Date: Mon, 15 Mar 2010 23:35:00 +0100
+
+
+commit 356d0ec42b023761e1e9e1a6bd5f3ab83b87033f
+Author:     Paul Menzel <paulepanter@users.sourceforge.net>
+AuthorDate: Mon Mar 15 12:34:27 2010 +0000
+Commit:     Martin Jansa <Martin.Jansa@gmail.com>
+
+Date in my message header.
+
+Date: Mon, 15 Mar 2010 23:34:27 +0100
+
+
+commit f92b2201ab4974bc1e2fed1b6ee9906774baf928
+Author:     Paul Menzel <paulepanter@users.sourceforge.net>
+AuthorDate: Mon Mar 15 04:55:56 2010 +0000
+Commit:     Philip Balister <philip@balister.org>
+
+Date in my message header.
+
+Date: Mon, 15 Mar 2010 15:55:56 +0100
+
+
+Is that a problem with Git not coping correctly with 24 h and 12 h
+representation?
+
+Did you both use `pw-am.sh`?
+
+
+Thanks,
+
+Paul
+
+--=-Wx9FHidqp+6XmHuMJC3r
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkufWIAACgkQPX1aK2wOHVhgLgCghnYQxZZAZqwl0TCSi/SA2Epd
+B8AAn1Oo97piGOsrv0ASl6x2ZDMsfDa8
+=ckmc
+-----END PGP SIGNATURE-----
+
+--=-Wx9FHidqp+6XmHuMJC3r--
