@@ -1,30 +1,42 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NrnV8-0002dh-QQ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Mar 2010 08:17:17 +0100
-Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
-	[123.192.181.204])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 3F8DE1B10C02
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NrogE-0003T7-26 for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Mar 2010 09:32:46 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NrodC-0000UI-8K for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Mar 2010 09:29:34 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Mar 2010 09:29:34 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Mar 2010 07:17:17 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Wed, 17 Mar 2010 09:29:34 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Mar 2010 08:13:19 +0100
-User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
-References: <1268808661-13954-1-git-send-email-sgarman@zenlinux.com>
-In-Reply-To: <1268808661-13954-1-git-send-email-sgarman@zenlinux.com>
-MIME-Version: 1.0
-Message-Id: <201003170813.19559.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 17 Mar 2010 09:29:23 +0100
+Message-ID: <hnq3t3$83q$1@dough.gmane.org>
+References: <4B9EADFC.2060302@atmel.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100223 Shredder/3.0.3pre
+In-Reply-To: <4B9EADFC.2060302@atmel.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] grip: Upgrade to 3.3.1
+Subject: Re: gnome-mplayer fails to build due to no libstdc++.so.6 instaging (available in cross)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,38 +50,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Mar 2010 07:17:17 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Wed, 17 Mar 2010 08:32:46 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Wednesday 17 March 2010 07:51:01 Scott Garman wrote:
-> * Addresses CVE-2005-0706
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 15-03-10 23:00, Ulf Samuelsson wrote:
+> I get the following error message when I include gnome-mplayer in
+> an image derived from x11-gpe-image.
 > 
-> Signed-off-by: Scott Garman <sgarman@zenlinux.com>
+> <snip>
+> /arm-angstrom-linux-gnueabi/bin/ld: warning: libstdc++.so.6, needed by
+> <OE>/build/tmp/staging/armv5te-angstrom-linux-gnueabi/usr/lib/libmusicbrainz3.so
+> not found
 
-I was upgrading grip to the latest stable version yesterday, I have no issue 
-if you want to upgrade to the latest devel version, even debian is shipping 
-that... I have some comments in line.
-
-
->  create mode 100644 recipes/grip/grip-3.3.1/no-host-includes.patch
->  create mode 100644 recipes/grip/grip_3.3.1.bb
-
-Please git mv from grip_3.2.0 to grip_3.3.1
+If your lib needs libstdc++ it needs to use g++ to link, libstdc++ is
+out of sight for a reason.
 
 
-> +[http://downloads.sourceforge.net/grip/3.3.1/grip-3.3.1.tar.gz]
-> +md5=4b4233999b9f2bc85c711092553ea9aa
-> +sha256=d46394a1062ed066f9c633b010fd1059e63d9ed791bbb7a85bc6567cf0fd66fd
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-that is deprecated, please see grip_3.2.0.bb on how to put the checksums into 
-the recipe.
+iD8DBQFLoJLjMkyGM64RGpERAmvRAKCQf/vhUFy8wv+KcPmSA/+SUToWEwCdF6iy
+TfUyqAdKVqMfQFoa4H21v9A=
+=NsyS
+-----END PGP SIGNATURE-----
 
-
-I'm happy to review and push your updated recipe.
-
-thanks for helping out.
-	z.
 
 
