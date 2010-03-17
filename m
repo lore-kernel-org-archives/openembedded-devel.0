@@ -1,46 +1,39 @@
-Received: from relay04.stack.nl ([131.155.140.107] helo=mx1.stack.nl)
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ruud@il.fontys.nl>) id 1NrpPl-0002ry-G0
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1Nrq6d-0005Bg-Qw
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Mar 2010 10:19:47 +0100
-Received: by mx1.stack.nl (Postfix, from userid 65534)
-	id E93161DD63B; Wed, 17 Mar 2010 10:16:43 +0100 (CET)
-Received: from mail.il.fontys.nl (mail.il.fontys.nl
-	[IPv6:2001:4128:1000:1000::7])
-	(using TLSv1 with cipher ADH-CAMELLIA256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailhost.stack.nl (Postfix) with ESMTPS id D57D01DD62C
+	Wed, 17 Mar 2010 11:04:05 +0100
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o2HA0vNH027639
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Mar 2010 10:16:41 +0100 (CET)
-Received: by mail.il.fontys.nl (Postfix, from userid 1004)
-	id 883A112524; Wed, 17 Mar 2010 10:16:41 +0100 (CET)
-Received: from grandcru.il.fontys.nl (grandcru.il.fontys.nl
-	[IPv6:2001:4128:1000:1000::47])
-	(using TLSv1 with cipher DHE-RSA-CAMELLIA256-SHA (256/256 bits))
-	(Client CN "grandcru.il.fontys.nl",
-	Issuer "CA Cert Signing Authority" (verified OK))
-	by mail.il.fontys.nl (Postfix) with ESMTPS id 9A6D11250F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Mar 2010 10:16:39 +0100 (CET)
-Received: by grandcru.il.fontys.nl (Postfix, from userid 1838)
-	id 8ED7028436; Wed, 17 Mar 2010 10:20:07 +0100 (CET)
-Date: Wed, 17 Mar 2010 10:20:07 +0100
-From: Ruud Althuizen <ruud@il.fontys.nl>
+	Wed, 17 Mar 2010 11:00:58 +0100
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.69) (envelope-from <ensc@sigma-chemnitz.de>) id 1Nrq3d-0006dt-5P
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Mar 2010 11:00:57 +0100
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100317092007.GA6559@il.fontys.nl>
-References: <1268741537.4251.30.camel@balakrishnan-desktop>
+References: <1268742232-11291-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+	<1268791537.20395.6.camel@trini-m4400>
+Date: Wed, 17 Mar 2010 11:00:57 +0100
+In-Reply-To: <1268791537.20395.6.camel@trini-m4400> (Tom Rini's message of
+	"Tue, 16 Mar 2010 19:05:37 -0700")
+Message-ID: <lyocinjmhy.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.1 (gnu/linux)
 MIME-Version: 1.0
-In-Reply-To: <1268741537.4251.30.camel@balakrishnan-desktop>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 131.155.140.107
-X-SA-Exim-Mail-From: ruud@il.fontys.nl
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.67 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add pxa270 based Regulus Board
+Subject: Re: [PATCH] packaged-staging.bbclass: use 'os.unlink()' instead of spawning 'rm'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,22 +47,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Mar 2010 09:19:47 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Wed, 17 Mar 2010 10:04:05 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Hello balakrishnan,
+Tom Rini <tom_rini@mentor.com> writes:
 
-On Tue 16 Mar 2010 05:42 PM, balakrishnan wrote:
-> Regulus is pxa270 based machine, attached patches need to be reviewed and
-> added to oe tree. This patches are used to create u-boot, kernel and
-> demo-image for regulus machine.
-You've included vim swapfiles in the patch, please remove these and
-re-submit. I'm not a Openembedded developer, so there may be other comments
-as well.
+> On Tue, 2010-03-16 at 13:23 +0100, Enrico Scholz wrote:
+>> Doing a '-c clean' operation on a staged package with very much files
+>> (e.g. glibc) took several minutes because
+>> 
+>> * every removed file was reported
+>> * an 'rm' instance was spawned for every file
+>> 
+>> This patch uses the native 'os.unlink()' method for removing files and
+>> reports only the removed root directory instead of the single files.
+>
+> We call os.unlink by itself in other places.  If we don't wrap it, could
+> we get an exception, really (that wouldn't otherwise be a bug to fix) ?
 
--- 
-With regards,
-Ruud Althuizen
+os.unlink() throws an exception:
+
+$ python -c 'import os; os.unlink("xxx")'
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+OSError: [Errno 2] No such file or directory: 'xxx'
+
+
+When I worked on the patch I got such an exception (at least in one of
+the hunks which replace 'rm -f').  I decided to be tolerant on errors
+because there is no way to recover when '-c clean' fails.
+
+
+
+Enrico
 
 
