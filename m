@@ -1,39 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nrwnr-0007ca-Eg for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Mar 2010 18:13:19 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nrwku-0005jJ-N0 for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Mar 2010 18:10:04 +0100
-Received: from 41.224.131.30 ([41.224.131.30])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Mar 2010 18:10:04 +0100
-Received: from skander.lab by 41.224.131.30 with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Mar 2010 18:10:04 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1NrxG8-0000cx-Ec
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Mar 2010 18:42:21 +0100
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.3/8.14.4) with ESMTP id o2HHdBdX008734
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Wed, 17 Mar 2010 18:39:11 +0100
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.69) (envelope-from <ensc@sigma-chemnitz.de>)
+	id 1NrxD5-0006Vy-8G; Wed, 17 Mar 2010 18:39:11 +0100
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-From: Skan <skander.lab@gmail.com>
-Date: Wed, 17 Mar 2010 14:13:32 +0000 (UTC)
-Message-ID: <loom.20100317T150947-575@post.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 41.224.131.30 (Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.1.8) Gecko/20100214 Ubuntu/9.10 (karmic) Firefox/3.5.8)
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Wed, 17 Mar 2010 18:38:56 +0100
+Message-Id: <1268847536-25010-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+X-Mailer: git-send-email 1.6.6.1
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.67 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=BAYES_00,RCVD_NUMERIC_HELO,
-	SPF_HELO_PASS,SPF_PASS,WEIRD_PORT autolearn=no version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: openembedded to cross compile QT4 to FriendlyArm mini2440
+Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>,
+	Enrico Scholz <enrico.scholz@informatik.tu-chemnitz.de>
+Subject: [PATCH] ffmpeg: moved to native staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,108 +42,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Mar 2010 17:13:20 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 17 Mar 2010 17:42:21 -0000
 
-Hello, 
-I m using ubuntu9.10 with vmware to cross 
-compile a Qt4 application to Qtopia
-for the FriendlyArm mini2440.
-I 've done this following a tutorial
------------------------------------------
-------------------------------------------
-a) dowload bitbake from: 
-http://download.berlios.de/bitbake/bitbake-1.8.8.tar.gz
-b) mkdir /home/paul/project 
-(I make a directory named "project" under my home
-folder)
-c) cd /home/paul/project (Go to the new folder)
-b) mkdir build (Creating a new folder under project)
-d) mkdir build/conf (This folder will containts the configure file)
-e) touch soure-me.txt 
-(Creating a new text file under project,it will used for
-initializing the enviroment)
-content of soure-me.txt:
+From: Enrico Scholz <enrico.scholz@informatik.tu-chemnitz.de>
 
-export OETREE="${PWD}"
-BBPATH=${OETREE}/:${OETREE}/build/:${OETREE}/openembedded/
-PKGDIR=${OETREE}/build/
-echo Setting up dev env for Ångström
+Old .inc file listed every single header which was to be staged.  This
+causes problems when upgrading to recent 0.5.1 version or when using
+older versions because headers might not exist there resp. new ones
+need to be installed.
 
-if [ -z ${ORG_PATH} ] ; then
-ORG_PATH=${PATH}
-export ORG_PATH
-fi
+This patch converts the .inc file to new native staging method and
+which calls two new functions:
 
-if [ -z ${ORG_LD_LIBRARY_PATH} ] ; then
-ORG_LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
-export ORG_LD_LIBRARY_PATH
-fi
+* ffmpeg_create_compat_links:
+  - this creates symlinks to all installed headers into the ffmpeg/
+    directory. E.g.
 
-PATH=${OETREE}/bitbake/bin:${ORG_PATH}
+    adler32.h -> ../libavutil/adler32.h
 
-cd $PKGDIR
+  - it should be probably checked whether these links are really
+    needed (they are not provided by ffmpeg and other programs might
+    get confused when they see new and old headers).  For now; I kept
+    them.
 
-LD_LIBRARY_PATH=
-export PATH LD_LIBRARY_PATH BBPATH
-export LANG=C
-export BB_ENV_EXTRAWHITE="MACHINE DISTRO OETREE ANGSTROM_MODE 
-ANGSTROMLIBC LIBC"
-echo "Altered environment for OE Development"
-f) tar -xzvf bitbake-1.8.8.tar.gz -C /home/paul/project 
-(untar bitbake into
-project folder)
-2. Getting openembedded
-a) cd /home/paul/project (Go to project folder)
-b) git clone git://git.openembedded.org/openembedded 
-(dowload openembedded)
-c) cp openembedded/conf/local.conf.sample build/conf/local.conf 
-(Setting
-local.conf file)
+* ffmpeg_stage_cleanup:
+  - this removes data and plugin files
 
-3.Building qt4-embedded recipe
-Because the small project needs the lib of qt4,
- so the first thing to do is
-building qt4-embedded recipe,
-of cause , if you already finished this task ,
-you can skin this step.
-Building it by command follow:
-a) cd /home/paul/project (Go to the project folder)
-b) source source-me.txt (initializing envira)
-c) bitbake qt4-embedded (This will takes a long time)
--------------------------------------------------------
-but t have this error :
+Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+---
+ recipes/ffmpeg/ffmpeg.inc |   57 +++++++++++++++------------------------------
+ 1 files changed, 19 insertions(+), 38 deletions(-)
 
-skan@skan-desktop:~/project$ bitbake qt4-embedded
-/usr/lib/pymodules/python2.6/bb/COW.py:29: 
-DeprecationWarning: the sets module
-is deprecated
-  import types, sets
-/usr/lib/pymodules/python2.6/bb/COW.py:29:
- DeprecationWarning: the sets module
-is deprecated
-  import types, sets
-Traceback (most recent call last):
-  File "/usr/bin/bitbake", line 143, in <module>
-    main()
-  File "/usr/bin/bitbake", line 123, in main
-    cooker.parseConfiguration()
-  File "/usr/lib/pymodules/python2.6/bb/cooker.py", line 68, in parseConfiguration
-    self.parseConfigurationFile( os.path.join( "conf", "bitbake.conf" ) )
-  File "/usr/lib/pymodules/python2.6/bb/cooker.py", line 404, in
-parseConfigurationFile
-    bb.event.fire(bb.event.ConfigParsed(self.configuration.data))
-  File "/usr/lib/pymodules/python2.6/bb/event.py", line 67, in fire
-    if tmpHandler(event) == Handled:
-  File "tmpHandler(e)", line 4, in tmpHandler
-  File "<bb>", line 18, in check_sanity
-NameError: global name 'os' is not defined
-
-
-
-
-What can I do?
+diff --git a/recipes/ffmpeg/ffmpeg.inc b/recipes/ffmpeg/ffmpeg.inc
+index 857dad5..c855877 100644
+--- a/recipes/ffmpeg/ffmpeg.inc
++++ b/recipes/ffmpeg/ffmpeg.inc
+@@ -10,7 +10,7 @@ ARM_INSTRUCTION_SET = "arm"
+ DEPENDS = "zlib libogg libvorbis libtheora faac faad2 ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'lame liba52', d)}"
+ RSUGGESTS = "mplayer"
+ 
+-INC_PR = "r12"
++INC_PR = "r13"
+ 
+ inherit autotools pkgconfig
+ 
+@@ -30,45 +30,26 @@ EXTRA_OECONF = "\
+         \
+ "
+ 
+-do_stage() {
+-        for lib in libavcodec libavdevice libavformat \
+-                   libavutil libpostproc libswscale
+-        do
+-            oe_libinstall -a -so -C $lib $lib ${STAGING_LIBDIR} || true
+-            install -d ${STAGING_INCDIR}/$lib 
+-        done 
+-
+-        install -d ${STAGING_INCDIR}/ffmpeg
+-
+-        install -m 0644 ${S}/libavcodec/avcodec.h ${STAGING_INCDIR}/ffmpeg/avcodec.h
+-        install -m 0644 ${S}/libavcodec/opt.h ${STAGING_INCDIR}/ffmpeg/opt.h
+-        install -m 0644 ${S}/libavcodec/avcodec.h ${STAGING_INCDIR}/libavcodec/avcodec.h
+-        install -m 0644 ${S}/libavcodec/opt.h ${STAGING_INCDIR}/libavcodec/opt.h
+-
+-        install -m 0644 ${S}/libavdevice/avdevice.h  ${STAGING_INCDIR}/ffmpeg/avdevice.h
+-        
+-        for h in avformat.h avio.h rtp.h rtsp.h rtspcodes.h
+-        do
+-           install -m 0644 ${S}/libavformat/$h  ${STAGING_INCDIR}/ffmpeg/$h
+-           install -m 0644 ${S}/libavformat/$h  ${STAGING_INCDIR}/libavformat/$h	
+-	done
+-
+-		for h in adler32.h aes.h attributes.h avstring.h avutil.h base64.h bswap.h common.h crc_data.h crc.h des.h error.h fifo.h integer.h internal.h intfloat_readwrite.h intmath.h intreadwrite.h lfg.h libm.h lls.h log.h lzo.h mathematics.h md5.h mem.h pca.h pixdesc.h pixfmt.h random_seed.h rational.h rc4.h sha1.h sha.h softfloat.h timer.h tree.h x86_cpu.h
+-		do
+-           install -m 0644 ${S}/libavutil/$h        ${STAGING_INCDIR}/ffmpeg/$h
+-           install -m 0644 ${S}/libavutil/$h        ${STAGING_INCDIR}/libavutil/$h 
+-        done
+-        install -m 0644 ${B}/libavutil/avconfig.h ${STAGING_INCDIR}/ffmpeg/
+-        install -m 0644 ${B}/libavutil/avconfig.h ${STAGING_INCDIR}/libavutil/
++FFMPEG_LIBS = "libavcodec libavdevice libavformat \
++               libavutil libpostproc libswscale"
++
++SYSROOT_PREPROCESS_FUNCS = " \
++  ffmpeg_stage_cleanup \
++  ffmpeg_create_compat_links"
++
++ffmpeg_create_compat_links() {
++        rm -rf ${SYSROOT_DESTDIR}${STAGING_INCDIR}/ffmpeg
++        mkdir -m 0755 ${SYSROOT_DESTDIR}${STAGING_INCDIR}/ffmpeg
++        cd ${SYSROOT_DESTDIR}${STAGING_INCDIR}/ffmpeg
+ 
+-        install -d ${STAGING_INCDIR}/libswscale/ 
+-        install -m 0644 ${S}/libswscale/*.h ${STAGING_INCDIR}/ffmpeg/
+-        install -m 0644 ${S}/libswscale/*.h ${STAGING_INCDIR}/libswscale/
++        for lib in ${FFMPEG_LIBS}; do
++                ln -s ../$lib/*.h '.'
++        done
++}
+ 
+-        install -d ${STAGING_INCDIR}/libpostproc
+-        install -d ${STAGING_INCDIR}/postproc 
+-        install -m 0644 ${S}/libpostproc/postprocess.h ${STAGING_INCDIR}/libpostproc/postprocess.h
+-        install -m 0644 ${S}/libpostproc/postprocess.h ${STAGING_INCDIR}/postproc/postprocess.h
++ffmpeg_stage_cleanup() {
++        rm -rf ${SYSROOT_DESTDIR}${STAGING_LIBDIR}/vhook \
++        ${SYSROOT_DESTDIR}${STAGING_DATADIR}
+ }
+ 
+ 
+-- 
+1.6.6.1
 
 
 
