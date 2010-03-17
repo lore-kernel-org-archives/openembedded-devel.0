@@ -1,41 +1,45 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Nrimq-0002qK-Re
+	(envelope-from <raj.khem@gmail.com>) id 1NrkxN-0003fU-VF
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Mar 2010 03:15:09 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1Nrijr-0005un-Nu from Tom_Rini@mentor.com ;
-	Tue, 16 Mar 2010 19:12:03 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 16 Mar 2010 19:12:03 -0700
-Received: from 172.30.80.63 ([172.30.80.63]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Wed, 17 Mar 2010 02:05:39 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	16 Mar 2010 19:05:38 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Wed, 17 Mar 2010 05:34:14 +0100
+Received: by gye5 with SMTP id 5so296734gye.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 16 Mar 2010 21:31:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=jGmGA14ezX9+NmQJ/6NIr5VoZFfxNDsoWan7ZTZ1sHk=;
+	b=ZLBrhf0o72z44xJ7aNYFGp0MzzxZ/Xv7rEKDZOqGVI2tkAZwSeLj9i5+5EaTCysNo5
+	B+ArUsP8q+MCItNokmUymThH0d3SG9qeL055c6c5hy+QrCRPb6fSyidItkgm97SMvZKd
+	cYHpGQ+p8x/RZaT3iGD8EQT4cIGnHtlkaBZNk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=W4m4PjIbic2IGqgIRRLTuBZMIFjojrhbEEuK0BYAUjG24hHr7EgIASw71uAaQqAwEw
+	ELL+PwEZNU9E+kOuzNeubCq4z6Ks0rv4uuCW8qi97I/kfGumPOaSm6AUg1ixoKGG1NFD
+	qR9JBhJEvJxxB2TToxTOgQxz8doM3CWDgxzac=
+MIME-Version: 1.0
+Received: by 10.100.59.13 with SMTP id h13mr440939ana.198.1268800265966; Tue, 
+	16 Mar 2010 21:31:05 -0700 (PDT)
+In-Reply-To: <201003170303.49144.holger+oe@freyther.de>
+References: <1268773130-4625-1-git-send-email-ulf.samuelsson@atmel.com>
+	<1268786621.20395.4.camel@trini-m4400>
+	<201003170303.49144.holger+oe@freyther.de>
+Date: Tue, 16 Mar 2010 21:31:05 -0700
+Message-ID: <19c1b8a91003162131k63f87976k1deeb01c80b95187@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1268742232-11291-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-References: <1268742232-11291-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-Organization: Mentor Graphics Corporation
-Date: Tue, 16 Mar 2010 19:05:37 -0700
-Message-ID: <1268791537.20395.6.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 17 Mar 2010 02:12:03.0199 (UTC)
-	FILETIME=[3C0178F0:01CAC577]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: Re: [PATCH] packaged-staging.bbclass: use 'os.unlink()' instead of spawning 'rm'
+Subject: Re: [PATCH 1/1] libstdc++.bb: copy libstdc++.so* to rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,25 +53,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Mar 2010 02:15:09 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 17 Mar 2010 04:34:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, 2010-03-16 at 13:23 +0100, Enrico Scholz wrote:
-> Doing a '-c clean' operation on a staged package with very much files
-> (e.g. glibc) took several minutes because
->=20
-> * every removed file was reported
-> * an 'rm' instance was spawned for every file
->=20
-> This patch uses the native 'os.unlink()' method for removing files and
-> reports only the removed root directory instead of the single files.
+On Tue, Mar 16, 2010 at 7:03 PM, Holger Hans Peter Freyther
+<holger+oe@freyther.de> wrote:
+> On Wednesday 17 March 2010 01:43:41 Tom Rini wrote:
+>
+>> Checking in a non-external-toolchain based build I have around, I see
+>> staging/<target>/usr/lib/libstdc++.so / libstc++.so.6 which point at
+>> libstdc++.so.6.0.10, which exists. =A0Can you explain how you're getting=
+ a
+>> lack of libstdc++? =A0Thanks.
+>
+> I assume he is using gcc to link and some external lib linked C++ symbols=
+ into
+> the global scope... This was a bug in some versions of gcc and we solved =
+it in
+> WebKit/GTK+ by having a linker script and excluding everything _Z*.
+>
+> So I would nack this change and instead figure out which C library is exp=
+osing
+> C++ symbols.
 
-We call os.unlink by itself in other places.  If we don't wrap it, could
-we get an exception, really (that wouldn't otherwise be a bug to fix) ?
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+I think we have had discussions about packaging gcc runtime. There
+were some proposals on packaging it
+but the directions seems to be that we need to package them better.
+Weather we create  a single package
+for all runtime or package each language runtime differently is
+decision to me made. I think toolchain-desuck
+branch would be the right place to get this done.
+
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
