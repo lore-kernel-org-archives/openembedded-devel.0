@@ -1,38 +1,31 @@
-Received: from smtprelay-b11.telenor.se ([62.127.194.20])
+Received: from smtp.net4india.com ([202.71.129.67])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ulf.samuelsson@atmel.com>) id 1NrmqC-0007dk-Ul
+	(envelope-from <sagarj@oriolesoftware.com>) id 1NrmyR-0001Z9-6h
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Mar 2010 07:34:56 +0100
-Received: from ipb2.telenor.se (ipb2.telenor.se [195.54.127.165])
-	by smtprelay-b11.telenor.se (Postfix) with ESMTP id E0223D39E
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Mar 2010 07:31:49 +0100 (CET)
-X-SENDER-IP: [83.227.59.242]
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AmgWALcUoEtT4zvyPGdsb2JhbAAHmwcBAQEBN7dHhHYEhhk
-X-IronPort-AV: E=Sophos;i="4.49,655,1262559600"; d="scan'208";a="51579280"
-Received: from c-f23be353.011-39-73746f12.cust.bredbandsbolaget.se (HELO
-	[10.175.196.224]) ([83.227.59.242])
-	by ipb2.telenor.se with ESMTP; 17 Mar 2010 07:31:49 +0100
-Message-ID: <4BA07754.9070909@atmel.com>
-Date: Wed, 17 Mar 2010 07:31:48 +0100
-From: Ulf Samuelsson <ulf.samuelsson@atmel.com>
-Organization: Atmel Nordic AB
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	Wed, 17 Mar 2010 07:43:27 +0100
+Received: from [59.96.147.176] (helo=proxy)
+	by smtp.net4india.com with esmtp (Exim 4.69)
+	(envelope-from <sagarj@oriolesoftware.com>) id 1Nrmva-0006HI-BT
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Mar 2010 12:10:26 +0530
+From: "Sagar Jariwala" <sagarj@oriolesoftware.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 17 Mar 2010 12:10:27 +0530
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1268773130-4625-1-git-send-email-ulf.samuelsson@atmel.com>	<1268786621.20395.4.camel@trini-m4400>
-	<201003170303.49144.holger+oe@freyther.de>
-In-Reply-To: <201003170303.49144.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 62.127.194.20
-X-SA-Exim-Mail-From: ulf.samuelsson@atmel.com
+X-Mailer: Microsoft Office Outlook, Build 11.0.5510
+In-Reply-To: <hnolb4$9o$1@dough.gmane.org>
+Thread-Index: AcrFPTGkjafJxGDATYu8oJs6HNso7wAXv1rw
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.2180
+X-SA-Exim-Connect-IP: 202.71.129.67
+X-SA-Exim-Mail-From: sagarj@oriolesoftware.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=0.3 required=5.0 tests=AWL,BAYES_00,FRT_SYMBOL,
+	MISSING_MID, RCVD_IN_SORBS_WEB,
+	TVD_FUZZY_SYMBOL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/1] libstdc++.bb: copy libstdc++.so* to rootfs
+Subject: Re: Need HELP :: Samsung SMDK6410 root file systemusingopen-embedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,44 +39,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Mar 2010 06:34:57 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 17 Mar 2010 06:43:27 -0000
+Message-ID: <MADEUP.15FE1AF41AF28296.3419@groups.io>
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Holger Hans Peter Freyther skrev:
-> On Wednesday 17 March 2010 01:43:41 Tom Rini wrote:
+Hello Koen,
+
+Thank you for the help.
+
+I tried building it. It generated RFS. 
+
+I was unable to mount this FS during bootup of smdk6410 board. So I boot up
+the board with ram-fs in nand and switched my root to narcissus generated
+root-fs.
+
+While running "totem" command it gave me following error. 
+
+/ # totem
+(totem:1000): GStreamer-WARNING **: Failed to load plugin
+'/usr/lib/gstreamer-0.
+10/libgstsubparse.so': /usr/lib/gstreamer-0.10/libgstsubparse.so: undefined
+symb
+ol: parse_sami
+Error re-scanning registry , child terminated by signal
+Run 'totem --help' to see a full list of available command line options.
+/ #
+
+What can be the potential reason for it?
+
+Thanks,
+SJ
+
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org
+[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of Koen
+Kooi
+Sent: Wednesday, March 17, 2010 12:45 AM
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] Need HELP :: Samsung SMDK6410 root file
+systemusingopen-embedded
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 16-03-10 13:14, Sagar Jariwala wrote:
+> Actually I need a root file system for SMDK 6410 which includes different
+> applications like Mplayer and totem player.
 > 
->> Checking in a non-external-toolchain based build I have around, I see
->> staging/<target>/usr/lib/libstdc++.so / libstc++.so.6 which point at
->> libstdc++.so.6.0.10, which exists.  Can you explain how you're getting a
->> lack of libstdc++?  Thanks.
+> Currently I am getting lots of error running bitbake.
 
-I can also see this in the target but it is needed also during the build
-of gnome-mplayer, or that will fail.
+Try using narcissus with the 'smartq5' machine, that's also s3c64xx based.
 
-> 
-> I assume he is using gcc to link and some external lib linked C++ symbols into 
-> the global scope... This was a bug in some versions of gcc and we solved it in 
-> WebKit/GTK+ by having a linker script and excluding everything _Z*.
-> 
-> So I would nack this change and instead figure out which C library is exposing 
-> C++ symbols.
-> 
+regards,
 
-When building gnome-mplayer, it complains that "libmusicbrainz"
-needs the symbols from libstdc++.so.6.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLn9ikMkyGM64RGpERAuSUAKCpEuUIdcP3JpU0jU9wDZ2g/D7MrQCdF+Sc
+PL74xA8OpVHsOWHe5yhpyq4=
+=lCyj
+-----END PGP SIGNATURE-----
 
 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-
--- 
-Best Regards
-Ulf Samuelsson
 
 
 
