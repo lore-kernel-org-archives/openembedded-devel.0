@@ -1,42 +1,39 @@
-Received: from mail-px0-f195.google.com ([209.85.216.195])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1Nrv2y-0004gP-4l
-	for openembedded-devel@openembedded.org; Wed, 17 Mar 2010 16:20:40 +0100
-Received: by pxi33 with SMTP id 33so742301pxi.12
-	for <openembedded-devel@openembedded.org>;
-	Wed, 17 Mar 2010 08:17:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	bh=Ov8SfeYR88oLIn3rpIn50GFVWdQlRrus18gRSur3xDI=;
-	b=X95OSQsanNphCrA8A956S2atOJ2lI9BNHu3J0tMBWTQMY9ym0ulV6ai5ZWvtyyH2VU
-	pFHJ90xTlXziGFIyiY0XzsfpYLtEOL9OLy6mjymoMmFlh1CvY9R7vQeD36dzVb+zckmU
-	tOHMWQbfFmTr6Thfl+G0iMqL4nbO7pY7ma8mc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	b=xesvMAxETctD+1luPqi8oT6W56icoF9CKY/KudPhz4vV4lxDKeDKlsu93otkgWr2/a
-	3Hk/b2gRcy8Cm+vy5gu/y/1lq/ueZykjUwhSFPriF93u+w8XE7sUfyKWFZsUeQUOW5DA
-	arv21jEsMcuS70qfe+SnYKVJCGIs7WgSJUrDQ=
+Received: from li38-254.members.linode.com ([207.192.74.254]
+	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <sgarman@zenlinux.com>) id 1NrvJW-0005xu-AD
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 17 Mar 2010 16:37:49 +0100
+Received: from [192.168.1.12] (c-76-115-42-183.hsd1.or.comcast.net
+	[76.115.42.183])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by masterfoo.zenlinux.com (Postfix) with ESMTP id 61ECF30235
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Mar 2010 11:34:37 -0400 (EDT)
+Message-ID: <4BA0F689.5010706@zenlinux.com>
+Date: Wed, 17 Mar 2010 08:34:33 -0700
+From: Scott Garman <sgarman@zenlinux.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.8) Gecko/20100227 Lightning/1.0b1 Thunderbird/3.0.3
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.114.6.34 with SMTP id 34mr881788waf.42.1268839051509; Wed, 17 
-	Mar 2010 08:17:31 -0700 (PDT)
-From: Chris Larson <clarson@kergoth.com>
-Date: Wed, 17 Mar 2010 08:17:10 -0700
-X-Google-Sender-Auth: 2e9fdd217493ab4c
-Message-ID: <b6ebd0a51003170817y1f81a222kc691f85c50dd312@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.216.195
-X-SA-Exim-Mail-From: kergoth@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <1268808661-13954-1-git-send-email-sgarman@zenlinux.com>
+	<201003170813.19559.holger+oe@freyther.de>
+In-Reply-To: <201003170813.19559.holger+oe@freyther.de>
+X-MasterFoo-MailScanner-Information: Please contact the ISP for more
+	information
+X-MailScanner-ID: 61ECF30235.94156
+X-MasterFoo-MailScanner: Found to be clean
+X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
+X-SA-Exim-Connect-IP: 207.192.74.254
+X-SA-Exim-Mail-From: sgarman@zenlinux.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: do_unpack
+Subject: Re: [PATCH] grip: Upgrade to 3.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,28 +47,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Mar 2010 15:20:40 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 17 Mar 2010 15:37:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Greetings all,
+On 03/17/2010 12:13 AM, Holger Hans Peter Freyther wrote:
+> On Wednesday 17 March 2010 07:51:01 Scott Garman wrote:
+>> * Addresses CVE-2005-0706
+>>
+>> Signed-off-by: Scott Garman<sgarman@zenlinux.com>
+>
+> I was upgrading grip to the latest stable version yesterday, I have no issue
+> if you want to upgrade to the latest devel version, even debian is shipping
+> that... I have some comments in line.
 
-The other day I threw together a proof of concept of do_unpack using the
-python modules for the archives.. sadly, the performance is such that we
-should likely stick to our current method, though it results in a lot of
-extra dependencies.  See
-http://github.com/kergoth/OpenEmbedded/commits/kergoth/unpack.  In the
-process, however, I did do a bit of cleanup / reorg that I think we may want
-to pull in.
-http://github.com/kergoth/OpenEmbedded/commit/3def3ba3d4860983f2d8f082eb528c4b84f83b50
-I think it's an improvement, though I admit that the way I pass in the
-parm
-and env is lame.  I wanted to avoid passing in the datastore or url
-directly, limiting oe_unpack_file's knowledge to the source, destination,
-and options.  Thoughts?
+Thanks for the guidance. I will re-submit an improved patch later today 
+based on your feedback.
+
+>>   create mode 100644 recipes/grip/grip-3.3.1/no-host-includes.patch
+>>   create mode 100644 recipes/grip/grip_3.3.1.bb
+>
+> Please git mv from grip_3.2.0 to grip_3.3.1
+>
+>
+>> +[http://downloads.sourceforge.net/grip/3.3.1/grip-3.3.1.tar.gz]
+>> +md5=4b4233999b9f2bc85c711092553ea9aa
+>> +sha256=d46394a1062ed066f9c633b010fd1059e63d9ed791bbb7a85bc6567cf0fd66fd
+>
+> that is deprecated, please see grip_3.2.0.bb on how to put the checksums into
+> the recipe.
+>
+>
+> I'm happy to review and push your updated recipe.
+
+Much appreciated!
+
+Scott
+
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Scott Garman
+sgarman at zenlinux dot com
+
 
