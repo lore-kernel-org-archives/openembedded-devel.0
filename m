@@ -1,34 +1,31 @@
-Received: from mail.cvg.de ([62.153.82.30])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1NrxG8-0000cx-Ec
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mickey@vanille-media.de>) id 1NrxGT-0000rf-7S
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 17 Mar 2010 18:42:21 +0100
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.3/8.14.4) with ESMTP id o2HHdBdX008734
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Wed, 17 Mar 2010 18:39:11 +0100
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.69) (envelope-from <ensc@sigma-chemnitz.de>)
-	id 1NrxD5-0006Vy-8G; Wed, 17 Mar 2010 18:39:11 +0100
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+	Wed, 17 Mar 2010 18:42:43 +0100
+Received: from [192.168.1.5] (e180138080.adsl.alicedsl.de [85.180.138.80])
+	by drlauer-research.com (Postfix) with ESMTP id CB3ED584116
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 17 Mar 2010 18:40:55 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 Mar 2010 18:38:56 +0100
-Message-Id: <1268847536-25010-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-X-Mailer: git-send-email 1.6.6.1
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.67 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+In-Reply-To: <1268845536.29482.4.camel@trini-m4400>
+References: <1268742232-11291-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+	<1268845536.29482.4.camel@trini-m4400>
+Organization: Vanille-Media
+Date: Wed, 17 Mar 2010 18:39:07 +0100
+Message-ID: <1268847547.3211.11.camel@andromeda>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>,
-	Enrico Scholz <enrico.scholz@informatik.tu-chemnitz.de>
-Subject: [PATCH] ffmpeg: moved to native staging
+Subject: Re: [PATCH] packaged-staging.bbclass: use 'os.unlink()' instead of spawning 'rm'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,116 +39,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Mar 2010 17:42:21 -0000
+X-List-Received-Date: Wed, 17 Mar 2010 17:42:45 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-From: Enrico Scholz <enrico.scholz@informatik.tu-chemnitz.de>
+> > +def _package_unlink (f):
+> > +    import os
+> > +    try:
+> > +	os.unlink(f)
+> > +	return True
+> > +    except:
+> > +	return False
+> > +
 
-Old .inc file listed every single header which was to be staged.  This
-causes problems when upgrading to recent 0.5.1 version or when using
-older versions because headers might not exist there resp. new ones
-need to be installed.
+While it won't hurt in this particular case, a catch-all 'except'
+usually is frowned upon. Better catch specific errors and let other
+errors be handled by the upper layers. I'd recommend catching IOError
+only here.
 
-This patch converts the .inc file to new native staging method and
-which calls two new functions:
+:M:
 
-* ffmpeg_create_compat_links:
-  - this creates symlinks to all installed headers into the ffmpeg/
-    directory. E.g.
-
-    adler32.h -> ../libavutil/adler32.h
-
-  - it should be probably checked whether these links are really
-    needed (they are not provided by ffmpeg and other programs might
-    get confused when they see new and old headers).  For now; I kept
-    them.
-
-* ffmpeg_stage_cleanup:
-  - this removes data and plugin files
-
-Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
----
- recipes/ffmpeg/ffmpeg.inc |   57 +++++++++++++++------------------------------
- 1 files changed, 19 insertions(+), 38 deletions(-)
-
-diff --git a/recipes/ffmpeg/ffmpeg.inc b/recipes/ffmpeg/ffmpeg.inc
-index 857dad5..c855877 100644
---- a/recipes/ffmpeg/ffmpeg.inc
-+++ b/recipes/ffmpeg/ffmpeg.inc
-@@ -10,7 +10,7 @@ ARM_INSTRUCTION_SET = "arm"
- DEPENDS = "zlib libogg libvorbis libtheora faac faad2 ${@base_conditional('ENTERPRISE_DISTRO', '1', '', 'lame liba52', d)}"
- RSUGGESTS = "mplayer"
- 
--INC_PR = "r12"
-+INC_PR = "r13"
- 
- inherit autotools pkgconfig
- 
-@@ -30,45 +30,26 @@ EXTRA_OECONF = "\
-         \
- "
- 
--do_stage() {
--        for lib in libavcodec libavdevice libavformat \
--                   libavutil libpostproc libswscale
--        do
--            oe_libinstall -a -so -C $lib $lib ${STAGING_LIBDIR} || true
--            install -d ${STAGING_INCDIR}/$lib 
--        done 
--
--        install -d ${STAGING_INCDIR}/ffmpeg
--
--        install -m 0644 ${S}/libavcodec/avcodec.h ${STAGING_INCDIR}/ffmpeg/avcodec.h
--        install -m 0644 ${S}/libavcodec/opt.h ${STAGING_INCDIR}/ffmpeg/opt.h
--        install -m 0644 ${S}/libavcodec/avcodec.h ${STAGING_INCDIR}/libavcodec/avcodec.h
--        install -m 0644 ${S}/libavcodec/opt.h ${STAGING_INCDIR}/libavcodec/opt.h
--
--        install -m 0644 ${S}/libavdevice/avdevice.h  ${STAGING_INCDIR}/ffmpeg/avdevice.h
--        
--        for h in avformat.h avio.h rtp.h rtsp.h rtspcodes.h
--        do
--           install -m 0644 ${S}/libavformat/$h  ${STAGING_INCDIR}/ffmpeg/$h
--           install -m 0644 ${S}/libavformat/$h  ${STAGING_INCDIR}/libavformat/$h	
--	done
--
--		for h in adler32.h aes.h attributes.h avstring.h avutil.h base64.h bswap.h common.h crc_data.h crc.h des.h error.h fifo.h integer.h internal.h intfloat_readwrite.h intmath.h intreadwrite.h lfg.h libm.h lls.h log.h lzo.h mathematics.h md5.h mem.h pca.h pixdesc.h pixfmt.h random_seed.h rational.h rc4.h sha1.h sha.h softfloat.h timer.h tree.h x86_cpu.h
--		do
--           install -m 0644 ${S}/libavutil/$h        ${STAGING_INCDIR}/ffmpeg/$h
--           install -m 0644 ${S}/libavutil/$h        ${STAGING_INCDIR}/libavutil/$h 
--        done
--        install -m 0644 ${B}/libavutil/avconfig.h ${STAGING_INCDIR}/ffmpeg/
--        install -m 0644 ${B}/libavutil/avconfig.h ${STAGING_INCDIR}/libavutil/
-+FFMPEG_LIBS = "libavcodec libavdevice libavformat \
-+               libavutil libpostproc libswscale"
-+
-+SYSROOT_PREPROCESS_FUNCS = " \
-+  ffmpeg_stage_cleanup \
-+  ffmpeg_create_compat_links"
-+
-+ffmpeg_create_compat_links() {
-+        rm -rf ${SYSROOT_DESTDIR}${STAGING_INCDIR}/ffmpeg
-+        mkdir -m 0755 ${SYSROOT_DESTDIR}${STAGING_INCDIR}/ffmpeg
-+        cd ${SYSROOT_DESTDIR}${STAGING_INCDIR}/ffmpeg
- 
--        install -d ${STAGING_INCDIR}/libswscale/ 
--        install -m 0644 ${S}/libswscale/*.h ${STAGING_INCDIR}/ffmpeg/
--        install -m 0644 ${S}/libswscale/*.h ${STAGING_INCDIR}/libswscale/
-+        for lib in ${FFMPEG_LIBS}; do
-+                ln -s ../$lib/*.h '.'
-+        done
-+}
- 
--        install -d ${STAGING_INCDIR}/libpostproc
--        install -d ${STAGING_INCDIR}/postproc 
--        install -m 0644 ${S}/libpostproc/postprocess.h ${STAGING_INCDIR}/libpostproc/postprocess.h
--        install -m 0644 ${S}/libpostproc/postprocess.h ${STAGING_INCDIR}/postproc/postprocess.h
-+ffmpeg_stage_cleanup() {
-+        rm -rf ${SYSROOT_DESTDIR}${STAGING_LIBDIR}/vhook \
-+        ${SYSROOT_DESTDIR}${STAGING_DATADIR}
- }
- 
- 
--- 
-1.6.6.1
 
 
 
