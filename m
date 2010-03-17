@@ -1,34 +1,32 @@
 Received: from mail-iw0-f184.google.com ([209.85.223.184])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Ns2HB-0002dg-KX
+	(envelope-from <raj.khem@gmail.com>) id 1Ns2LI-0006LE-De
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Mar 2010 00:04:00 +0100
-Received: by iwn14 with SMTP id 14so1287433iwn.12
+	Thu, 18 Mar 2010 00:08:06 +0100
+Received: by iwn14 with SMTP id 14so1291316iwn.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 Mar 2010 16:00:40 -0700 (PDT)
+	Wed, 17 Mar 2010 16:04:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=r8EpJz+zm7UeXOHWdoTELrOaiHrHryVQFMGG6KIppTE=;
-	b=T/OPSn3jzXrpNN/5h1ZH8VwxP1to3Qmso9EXlOoUoSAumUh9Jgdg6ttrXtkgpzXjQu
-	BkZjXy0/r/jspOsAKnmFGUXFs9bDpqaACwDmHaVkl1X6dJxgB5F6P1gvtj861pX/382h
-	3VhF5wWbKcP/ptOHGIVD/APYBSmx6minK3eNA=
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=skO8YYWTwhu49Roe1/OynTieYkutZxX0unt4dkQrBVk=;
+	b=eYKPrEGEFG7+q55yWbw0lb0Q0UknHOzjbcPfL+IFVUeIU+KZdv0P3TXKodGxesXgt0
+	G6aumJuynwKke2rGEbfTtLi7EQhXSyGmk0ACsOplPo82pGMLSbMjAqiGD+Cg2DlJW80O
+	4R7VUS39oWQJCLWqNNTmYd+AHLM0X6eRGs1u8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=vDqVufd3LMiP7/PNPLlKvtZMAuBvFVl9Xv4F4S/iec4R5w6WfN03kXwuTyZmudNoMg
-	xWZdQqFKxBLpjoHHNkm/VgJvffsGWSX0G5ojCzZvD4dTnjKEy/9cY6taBmqu16e9CdHS
-	D5pkV+nEd9q5EJk1KiJr5mgf3Bubydl5vcpDY=
+	:content-type:content-transfer-encoding;
+	b=v8/RQxjPNMMS67/JH3AOYzo0HLc6pWbE4v8qz90ukZkLCS/Wlupn0ixFL9NqdhcpU9
+	PuX3G463/fSvZl3XJiRSnuiDjS4jYD5N0rxFHUNOamV9tdKa7EE7LD5rpuPRGtKH4PNf
+	f51TzvBSqRBDVBhZe3joGDDvuEHTVjHup9X5o=
 MIME-Version: 1.0
-Received: by 10.231.146.134 with SMTP id h6mr536715ibv.16.1268866840200; Wed, 
-	17 Mar 2010 16:00:40 -0700 (PDT)
-In-Reply-To: <d1ded4381003171500q63682e8dn3ae47f8c13f05765@mail.gmail.com>
-References: <openembedded-devel@lists.openembedded.org>
-	<1267830919-14718-1-git-send-email-aalonso00@gmail.com>
-	<20100316190003.GA20970@excalibur.local>
-	<d1ded4381003171500q63682e8dn3ae47f8c13f05765@mail.gmail.com>
-Date: Wed, 17 Mar 2010 16:00:40 -0700
-Message-ID: <19c1b8a91003171600u10444eb8obd60b8fceabd62f4@mail.gmail.com>
+Received: by 10.231.148.16 with SMTP id n16mr806928ibv.37.1268867096046; Wed, 
+	17 Mar 2010 16:04:56 -0700 (PDT)
+In-Reply-To: <1268857354-30377-1-git-send-email-sledz@dresearch.de>
+References: <1268857354-30377-1-git-send-email-sledz@dresearch.de>
+Date: Wed, 17 Mar 2010 16:04:55 -0700
+Message-ID: <19c1b8a91003171604nbe1f9aega247ce4b331b6350@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.223.184
@@ -39,7 +37,7 @@ X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/7] device_table_add-xsa: add dev nodes for system ace
+Subject: Re: [PATCH] libunwind: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,57 +51,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 Mar 2010 23:04:06 -0000
+X-List-Received-Date: Wed, 17 Mar 2010 23:08:07 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 17, 2010 at 3:00 PM, Adrian Alonso <aalonso00@gmail.com> wrote:
-> Hi,
+On Wed, Mar 17, 2010 at 1:22 PM, Steffen Sledz <sledz@dresearch.de> wrote:
+> a portable and efficient C programming interface (API) to determine the
+> call-chain of a program
 >
-> I tested on my previous build and everything is ok (tested console-image);
+> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+> ---
+> =A0recipes/libunwind/libunwind.inc =A0 =A0 | =A0 13 +++++++++++++
+> =A0recipes/libunwind/libunwind_0.99.bb | =A0 =A05 +++++
+> =A02 files changed, 18 insertions(+), 0 deletions(-)
+> =A0create mode 100644 recipes/libunwind/libunwind.inc
+> =A0create mode 100644 recipes/libunwind/libunwind_0.99.bb
 >
-> Building from scratch arise a build error with "gcc-cross_4.3.3.bb failed"
-> I'm going to track the changes in gcc-cross recipe to find out why is
-> falling
-> The complete error log can be found at [1].
->
-> [1] http://pastebin.com/2m4TP2Vs
+> diff --git a/recipes/libunwind/libunwind.inc b/recipes/libunwind/libunwin=
+d.inc
+> new file mode 100644
+> index 0000000..8513dc2
+> --- /dev/null
+> +++ b/recipes/libunwind/libunwind.inc
+> @@ -0,0 +1,13 @@
+> +DESCRIPTION =3D "a portable and efficient C programming interface (API) =
+to determine the call-chain of a program"
+> +DEPENDS =3D ""
+> +HOMEPAGE =3D "http://www.nongnu.org/libunwind"
+> +LICENSE =3D "MIT"
+> +INC_PR =3D "r1"
 
-seems more like your gcc on host is causing the problem here. What
-host os do you have
-and try to clean and rebuild gcc-cross that might fix it.
+a new recipe should start with r0
 
->
-> Regards
-> Adrian Alonso
->
-> On Tue, Mar 16, 2010 at 1:00 PM, Stefan Schmidt
-> <stefan@datenfreihafen.org>wrote:
->
->> Hello.
->>
->> Back from holiday I found the time to test your patches. I needed to adjust
->> one
->> manually due to a change going in between but that was easy enough.
->>
->> I tested and pushed them out now. Please test on your side if everything is
->> ok
->> and thanks for your contribution.
->>
->> regards
->> Stefan Schmidt
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
->
->
+> +
+> +SRC_URI =3D "http://download.savannah.nongnu.org/releases/libunwind/${PN=
+}-${PV}.tar.gz;name=3Darchive"
+
+may be use name=3Dlibunwind  for better readability
+
+> +
+> +S =3D "${WORKDIR}/${PN}-${PV}"
+> +
+> +inherit autotools
+> +
+> +BBCLASSEXTEND =3D "native"
+
+is native recipe needed by some other recipe ?
+
+> diff --git a/recipes/libunwind/libunwind_0.99.bb b/recipes/libunwind/libu=
+nwind_0.99.bb
+> new file mode 100644
+> index 0000000..b7d0612
+> --- /dev/null
+> +++ b/recipes/libunwind/libunwind_0.99.bb
+> @@ -0,0 +1,5 @@
+> +require libunwind.inc
+> +PR =3D "${INC_PR}.0"
+> +
+> +SRC_URI[archive.md5sum] =3D "3e9ca08118e22165a7f07d01d61a2d0d"
+> +SRC_URI[archive.sha256sum] =3D "56083aae17eab3ccb7a36b95f0430f5a5f258755=
+bf193bb5ca4fd4b918356164"
 > --
-> Saludos
-> Adrian Alonso
-> http://aalonso.wordpress.com
+> 1.6.4.2
+>
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
