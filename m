@@ -1,33 +1,29 @@
-Received: from wbm1.pair.net ([209.68.3.41])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <bluelightning@bluelightning.org>) id 1NsByY-0004bI-6u
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Mar 2010 10:25:12 +0100
-Received: by wbm1.pair.net (Postfix, from userid 65534)
-	id 3D85C26C1D; Thu, 18 Mar 2010 04:50:52 -0400 (EDT)
-Received: from 193.195.44.178 ([193.195.44.178])
-	(SquirrelMail authenticated user blueligh@bluelightning.org)
-	by webmail1.pair.com with HTTP; Thu, 18 Mar 2010 08:50:52 -0000 (GMT)
-Message-ID: <10074.193.195.44.178.1268902252.squirrel@webmail1.pair.com>
-In-Reply-To: <1268885514.7079.1.camel@trini-m4400>
-References: <E1Ns2kd-0004yU-TV@melo.openembedded.org>
-	<1268885514.7079.1.camel@trini-m4400>
-Date: Thu, 18 Mar 2010 08:50:52 -0000 (GMT)
-From: "Paul Eggleton" <bluelightning@bluelightning.org>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NsCvf-0001SG-Kk for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Mar 2010 11:26:19 +0100
+Received: from f053045153.adsl.alicedsl.de ([78.53.45.153]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NsCsj-00089b-Ae for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Mar 2010 10:23:13 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-User-Agent: SquirrelMail/1.4.5
-MIME-Version: 1.0
-X-Priority: 3 (Normal)
-Importance: Normal
-X-SA-Exim-Connect-IP: 209.68.3.41
-X-SA-Exim-Mail-From: bluelightning@bluelightning.org
+Date: Thu, 18 Mar 2010 11:23:12 +0100
+Message-ID: <1268907792.4619.5.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Paul Eggleton : opkg: update to include upstream libopkg C++ header fixes
+Subject: OE user manual: Packaging: Defining packages and their contents: Wildcards
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,26 +37,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Mar 2010 09:25:12 -0000
-Content-Type: text/plain;charset=iso-8859-1
+X-List-Received-Date: Thu, 18 Mar 2010 10:26:24 -0000
+X-Groupsio-MsgNum: 17813
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-JSonTiBkODpx66xTVHHJ"
+
+--=-JSonTiBkODpx66xTVHHJ
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Tom Rini wrote:
-> Please, pretty please, can we change to:
-> SRCREV_OPKG ?=3D "nnn"
-> SRCREV_pn-opkg ?=3D "${SRCREV_OPKG}"
-> SRCREV_pn-opkg-native ?=3D "${SRCREV_OPKG}"
-> SRCREV_pn-opkg-sdk ?=3D "${SRCREV_OPKG}"
->
-> All three really are just as important to not have broken because they
-> weren't tested hard enough (iirc, the argument that was made last time)=
-.
+Dear OE folks,
 
-I don't mind personally; in this case I only changed one because the
-particular revision I needed would not affect the other recipes. Your
-proposal sounds sensible to me though.
 
-Cheers,
+reading the OE user manual I wonder about the section =C2=BBWildcards=C2=AB
+regarding packages [1].
+
+There are some statements as the following.
+
+        PACKAGES +=3D "FILES-${PN}-test"
+
+Is that correct or should it be fixed?
+
+
+Thanks,
+
 Paul
 
 
+[1] http://docs.openembedded.org/usermanual/usermanual.html#id428078
+
+--=-JSonTiBkODpx66xTVHHJ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkuh/w8ACgkQPX1aK2wOHViYWgCaA1c8ackHSpccM7thjv4Eqxk2
+riUAoI1DdB0bemJi3DiSTnrGU0WZ4JwF
+=c9Kk
+-----END PGP SIGNATURE-----
+
+--=-JSonTiBkODpx66xTVHHJ--
