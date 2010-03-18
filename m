@@ -1,41 +1,45 @@
-Received: from smtp-out26.alice.it ([85.33.2.26])
+Received: from gatekeeper.tait.co.nz ([202.37.96.11])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1NsMQh-00018i-3f
+	(envelope-from <douglas.royds@tait.co.nz>) id 1NsMhT-00072Q-T9
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Mar 2010 21:35:00 +0100
-Received: from FBCMMO03.fbc.local ([192.168.68.197]) by smtp-out26.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 18 Mar 2010 21:31:49 +0100
-Received: from FBCMCL01B05.fbc.local ([192.168.69.86]) by FBCMMO03.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 18 Mar 2010 21:31:49 +0100
-Received: from jcn ([82.57.79.31]) by FBCMCL01B05.fbc.local with Microsoft
-	SMTPSVC(6.0.3790.3959); Thu, 18 Mar 2010 21:31:48 +0100
-Received: from ao2 by jcn with local (Exim 4.71)
-	(envelope-from <ospite@studenti.unina.it>)
-	id 1NsMNf-0003Vb-Rk; Thu, 18 Mar 2010 21:31:47 +0100
-From: Antonio Ospite <ospite@studenti.unina.it>
+	Thu, 18 Mar 2010 21:52:21 +0100
+Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
+	by localhost.tait.co.nz (Postfix) with ESMTP id 4EB6146752
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Mar 2010 09:49:24 +1300 (NZDT)
+Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])
+	by gatekeeper.tait.co.nz (Postfix) with ESMTP id 3DF1246749
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Mar 2010 09:49:24 +1300 (NZDT)
+Received: from conversion-daemon.sunstrike.tait.co.nz by sunstrike.tait.co.nz
+	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
+	id <0KZH00E01V3CSD00@sunstrike.tait.co.nz>
+	(original mail from douglas.royds@tait.co.nz)
+	for openembedded-devel@lists.openembedded.org; Fri,
+	19 Mar 2010 09:49:04 +1300 (NZDT)
+Received: from [172.25.116.17] by sunstrike.tait.co.nz
+	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
+	with ESMTP id <0KZH0089TWHNOB60@sunstrike.tait.co.nz> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	19 Mar 2010 09:49:01 +1300 (NZDT)
+Date: Fri, 19 Mar 2010 09:48:59 +1300
+From: Douglas Royds <douglas.royds@tait.co.nz>
+In-reply-to: <ac9c93b11003180018u761e78f6l67b3f76869a95612@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Mar 2010 21:31:44 +0100
-Message-Id: <1268944304-13459-1-git-send-email-ospite@studenti.unina.it>
-X-Mailer: git-send-email 1.7.0
-In-Reply-To: <1268826851-28042-1-git-send-email-ospite@studenti.unina.it>
-References: <1268826851-28042-1-git-send-email-ospite@studenti.unina.it>
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-X-OriginalArrivalTime: 18 Mar 2010 20:31:49.0089 (UTC)
-	FILETIME=[0912FD10:01CAC6DA]
-X-SA-Exim-Connect-IP: 85.33.2.26
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+Message-id: <4BA291BB.7040106@tait.co.nz>
+MIME-version: 1.0
+References: <4BA1B29B.8040704@tait.co.nz>
+	<ac9c93b11003180018u761e78f6l67b3f76869a95612@mail.gmail.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+X-SA-Exim-Connect-IP: 202.37.96.11
+X-SA-Exim-Mail-From: douglas.royds@tait.co.nz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,WEIRD_PORT
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v2] gnutls: fix do_configure by depending on gtk-doc
+Subject: Re: [PATCH 4/4] Renamed prefix_native, bindir_native, etc using 	hyphens
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,67 +53,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Mar 2010 20:35:00 -0000
+X-List-Received-Date: Thu, 18 Mar 2010 20:52:21 -0000
+Content-type: text/plain; format=flowed; charset=ISO-8859-1
+Content-transfer-encoding: 7BIT
 
-building gnutls_2.8.5.bb fails in do_configure with these messages:
+Frans Meulenbroeks wrote:
+> 2010/3/18 Douglas Royds <douglas.royds@tait.co.nz>:
+>   
+>>   - Avoids clashing with the machine override when MACHINE=native
+>>   - bindir_cross similarly renamed for consistency
+>>
+>>     
+> [...]
+>   
+>>  # Path prefixes
+>>  base_prefix = "${STAGING_DIR_NATIVE}"
+>> -prefix = "${STAGING_DIR_NATIVE}${prefix_native}"
+>> -exec_prefix = "${STAGING_DIR_NATIVE}${prefix_native}"
+>> +prefix = "${STAGING_DIR_NATIVE}${prefix-native}"
+>> +exec_prefix = "${STAGING_DIR_NATIVE}${prefix-native}"
+>>     
+>
+> [...]
+>
+> Shouldn't we then for consistent naming also go to exex-prefix etc ?
 
-[..]
-| automake: unknown warning category `cross'
-| doc/Makefile.am:27: ENABLE_GTK_DOC does not appear in AM_CONDITIONAL
-| gtk-doc.make:7: GTK_DOC_USE_LIBTOOL does not appear in AM_CONDITIONAL
-| doc/reference/Makefile.am:135:   `gtk-doc.make' included from here
-| gtk-doc.make:50: ENABLE_GTK_DOC does not appear in AM_CONDITIONAL
-| doc/reference/Makefile.am:135:   `gtk-doc.make' included from here
-| gtk-doc.make:173: ENABLE_GTK_DOC does not appear in AM_CONDITIONAL
-| doc/reference/Makefile.am:135:   `gtk-doc.make' included from here
-| doc/reference/Makefile.am:147: ENABLE_GTK_DOC does not appear in AM_CONDITIONAL
-| autoreconf: automake failed with exit status: 1
-| FATAL: autoreconf execution failed.
-NOTE: Task failed: /home/chris/oe/micro-dev/work/i686-oe-linux/gnutls-2.8.5-r0/temp/log.do_configure.14113
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /home/chris/oe/openembedded.org/recipes/gnutls/gnutls_2.8.5.bb do_configure failed
-ERROR: Task 652 (/home/chris/oe/openembedded.org/recipes/gnutls/gnutls_2.8.5.bb, do_configure) failed
-NOTE: Tasks Summary: Attempted 865 tasks of which 0 didn't need to be rerun and 1 failed.
-ERROR: '/home/chris/oe/openembedded.org/recipes/gnutls/gnutls_2.8.5.bb' failed
+In the spirit of keeping a single patch for a single purpose, I have not 
+modified anything that is not required to fix the problem at hand (um, 
+except for bindir_cross). I have only modified the variable names that 
+were modified in Richard's commit "Start removal of layout_* variables 
+and replace these with new mechanisms to allow nextgen SDK generation 
+(from Poky)":
 
-Depending on gtk-doc fixes this.
+    http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=bea72c2fecde175add169bb55df1922b048030c8
 
-Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
----
+Any renaming of base_prefix, exec_prefix, base_bindir, target_datadir, 
+&c is a separate matter. Note that some of these names are imposed on us 
+by Autotools convention. This is why these variables are in lower case 
+in the first place:
 
-Changes since v1:
- * better short commit message
- * increased INC_PR
+    http://www.gnu.org/prep/standards/html_node/Directory-Variables.html#Directory-Variables
 
-Thanks,
-   Antonio Ospite
-   http://ao2.it
+Douglas.
 
- recipes/gnutls/gnutls.inc |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/recipes/gnutls/gnutls.inc b/recipes/gnutls/gnutls.inc
-index 60f7d33..ccf6f69 100644
---- a/recipes/gnutls/gnutls.inc
-+++ b/recipes/gnutls/gnutls.inc
-@@ -1,13 +1,13 @@
- DESCRIPTION = "GNU Transport Layer Security Library"
- HOMEPAGE = "http://www.gnu.org/software/gnutls/"
--DEPENDS = "zlib libgcrypt lzo guile-native gettext"
-+DEPENDS = "zlib libgcrypt lzo guile-native gettext gtk-doc"
- LICENSE = "LGPL"
- 
- SRC_URI = "ftp://ftp.gnutls.org/pub/gnutls/gnutls-${PV}.tar.bz2;name=gnutls"
- 
- inherit autotools binconfig pkgconfig
- 
--INC_PR = "r8"
-+INC_PR = "r9"
- 
- EXTRA_OECONF = "--with-included-opencdk --with-included-libtasn1"
- 
--- 
-1.7.0
+=======================================================================
+This email, including any attachments, is only for the intended
+addressee.  It is subject to copyright, is confidential and may be
+the subject of legal or other privilege, none of which is waived or
+lost by reason of this transmission.
+If the receiver is not the intended addressee, please accept our
+apologies, notify us by return, delete all copies and perform no
+other act on the email.
+Unfortunately, we cannot warrant that the email has not been
+ altered or corrupted during transmission.
+=======================================================================
 
 
 
