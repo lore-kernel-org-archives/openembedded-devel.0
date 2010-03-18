@@ -1,44 +1,42 @@
-Received: from gatekeeper.tait.co.nz ([202.37.96.11])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <douglas.royds@tait.co.nz>) id 1NsMqE-00085C-5c
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NsN5M-0002QN-VA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Mar 2010 22:01:39 +0100
-Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
-	by localhost.tait.co.nz (Postfix) with ESMTP id 215D446754
+	Thu, 18 Mar 2010 22:17:01 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2ILDqJd008615
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Mar 2010 09:58:33 +1300 (NZDT)
-Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])
-	by gatekeeper.tait.co.nz (Postfix) with ESMTP id 0DF4446752
+	Thu, 18 Mar 2010 21:13:52 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 08377-05 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Mar 2010 21:13:48 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2ILDine008605
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Mar 2010 09:58:33 +1300 (NZDT)
-Received: from conversion-daemon.sunstrike.tait.co.nz by sunstrike.tait.co.nz
-	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
-	id <0KZH00E01V3CSD00@sunstrike.tait.co.nz>
-	(original mail from douglas.royds@tait.co.nz)
-	for openembedded-devel@lists.openembedded.org; Fri,
-	19 Mar 2010 09:58:13 +1300 (NZDT)
-Received: from [172.25.116.17] by sunstrike.tait.co.nz
-	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
-	with ESMTP id <0KZH008I5WX1OB60@sunstrike.tait.co.nz> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	19 Mar 2010 09:58:13 +1300 (NZDT)
-Date: Fri, 19 Mar 2010 09:58:13 +1300
-From: Douglas Royds <douglas.royds@tait.co.nz>
-In-reply-to: <1268933342.8697.43.camel@rex>
+	Thu, 18 Mar 2010 21:13:45 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <4BA293E5.9030705@tait.co.nz>
-MIME-version: 1.0
-References: <4BA1825F.9080405@tait.co.nz> <1268933342.8697.43.camel@rex>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-X-SA-Exim-Connect-IP: 202.37.96.11
-X-SA-Exim-Mail-From: douglas.royds@tait.co.nz
+In-Reply-To: <4BA291BB.7040106@tait.co.nz>
+References: <4BA1B29B.8040704@tait.co.nz>
+	<ac9c93b11003180018u761e78f6l67b3f76869a95612@mail.gmail.com>
+	<4BA291BB.7040106@tait.co.nz>
+Date: Thu, 18 Mar 2010 21:13:42 +0000
+Message-ID: <1268946822.8697.71.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.3 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2] Renamed prefix_native, bindir_native, etc using camelCaps
+Subject: Re: [PATCH 4/4] Renamed prefix_native, bindir_native, etc using 	hyphens
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,65 +50,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Mar 2010 21:01:39 -0000
-Content-type: text/plain; format=flowed; charset=ISO-8859-1
-Content-transfer-encoding: 7BIT
+X-List-Received-Date: Thu, 18 Mar 2010 21:17:01 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Richard Purdie wrote:
-> On Thu, 2010-03-18 at 04:37 +0100, Holger Hans Peter Freyther wrote:
->   
->> On Thursday 18 March 2010 02:31:11 Douglas Royds wrote:
->>     
->>>     - Avoids clashing with the machine override when MACHINE=native
->>>     - bindir_cross similarly renamed for consistency
->>>       
->> Thank you for that much work. I think we established the usage of '-' instead 
->> of '_' to avoid clashes with the override detection though.
->>     
->
-> I just noticed this problem. It makes me very very nervous to introduce
-> yet another variable naming convention, particularly one we don't use
-> anywhere else :/.
->
-> Might it be simpler to rename the native machine? Using "native" in the
-> override namespace is asking for trouble :(.
+On Fri, 2010-03-19 at 09:48 +1300, Douglas Royds wrote:
+> Any renaming of base_prefix, exec_prefix, base_bindir, target_datadir, 
+> &c is a separate matter. Note that some of these names are imposed on us 
+> by Autotools convention. This is why these variables are in lower case 
+> in the first place:
+> 
+>     http://www.gnu.org/prep/standards/html_node/Directory-Variables.html#Directory-Variables
 
-I have no objection to renaming the native machine, but I think we 
-should also ensure that we never use _thing variable names (in lower 
-case). We have a weak distinction between overrides and underscored 
-variable names. By convention, BitBake variables are entirely in 
-uppercase, and overrides in lower case, but this convention fails when 
-the variable names are externally imposed (by the Autotools), 
-exec_prefix being a case in point.
+Exactly, this is why they are as they are and I don't think changing
+this is practical.
 
-I propose that we rename prefix_native and friends to avoid any risk of 
-clashing with the overrides.
+It would in fact be more feasible to switch to a "new" character for
+overrides in bitbake...
 
-Separately, if we wish, we can rename the native machine. I suggest 
-"buildhost". This would also help to clarify that the following two 
-builds have quite different intentions, though the result is similar:
+Cheers,
 
-    bitbake thing-native
-    MACHINE=native bitbake thing
+Richard
 
-Douglas
-
-
-
-
-
-
-=======================================================================
-This email, including any attachments, is only for the intended
-addressee.  It is subject to copyright, is confidential and may be
-the subject of legal or other privilege, none of which is waived or
-lost by reason of this transmission.
-If the receiver is not the intended addressee, please accept our
-apologies, notify us by return, delete all copies and perform no
-other act on the email.
-Unfortunately, we cannot warrant that the email has not been
- altered or corrupted during transmission.
-=======================================================================
 
 
 
