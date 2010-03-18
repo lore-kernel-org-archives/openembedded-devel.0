@@ -1,45 +1,30 @@
-Received: from gatekeeper.tait.co.nz ([202.37.96.11])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <douglas.royds@tait.co.nz>) id 1NsMhT-00072Q-T9
+	(envelope-from <roman@khimov.ru>) id 1NsMhs-0007HU-7Q
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Mar 2010 21:52:21 +0100
-Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
-	by localhost.tait.co.nz (Postfix) with ESMTP id 4EB6146752
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Mar 2010 09:49:24 +1300 (NZDT)
-Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])
-	by gatekeeper.tait.co.nz (Postfix) with ESMTP id 3DF1246749
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Mar 2010 09:49:24 +1300 (NZDT)
-Received: from conversion-daemon.sunstrike.tait.co.nz by sunstrike.tait.co.nz
-	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
-	id <0KZH00E01V3CSD00@sunstrike.tait.co.nz>
-	(original mail from douglas.royds@tait.co.nz)
-	for openembedded-devel@lists.openembedded.org; Fri,
-	19 Mar 2010 09:49:04 +1300 (NZDT)
-Received: from [172.25.116.17] by sunstrike.tait.co.nz
-	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
-	with ESMTP id <0KZH0089TWHNOB60@sunstrike.tait.co.nz> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	19 Mar 2010 09:49:01 +1300 (NZDT)
-Date: Fri, 19 Mar 2010 09:48:59 +1300
-From: Douglas Royds <douglas.royds@tait.co.nz>
-In-reply-to: <ac9c93b11003180018u761e78f6l67b3f76869a95612@mail.gmail.com>
+	Thu, 18 Mar 2010 21:52:44 +0100
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NsMeu-0000bg-LX
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Mar 2010 23:49:37 +0300
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <4BA291BB.7040106@tait.co.nz>
-MIME-version: 1.0
-References: <4BA1B29B.8040704@tait.co.nz>
-	<ac9c93b11003180018u761e78f6l67b3f76869a95612@mail.gmail.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-X-SA-Exim-Connect-IP: 202.37.96.11
-X-SA-Exim-Mail-From: douglas.royds@tait.co.nz
+Date: Thu, 18 Mar 2010 23:47:01 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
+References: <201003182212.31873.roman@khimov.ru> <hnu2gb$ehr$1@dough.gmane.org>
+In-Reply-To: <hnu2gb$ehr$1@dough.gmane.org>
+MIME-Version: 1.0
+Message-Id: <201003182347.06715.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 4/4] Renamed prefix_native, bindir_native, etc using 	hyphens
+Subject: Re: [RFC/PATCH] Perl 5.10.1 and a bunch of modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,60 +38,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Mar 2010 20:52:21 -0000
-Content-type: text/plain; format=flowed; charset=ISO-8859-1
-Content-transfer-encoding: 7BIT
+X-List-Received-Date: Thu, 18 Mar 2010 20:52:44 -0000
+X-Groupsio-MsgNum: 17839
+Content-Type: multipart/signed; boundary="nextPart7276129.2JJjqTE1BB";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-Frans Meulenbroeks wrote:
-> 2010/3/18 Douglas Royds <douglas.royds@tait.co.nz>:
->   
->>   - Avoids clashing with the machine override when MACHINE=native
->>   - bindir_cross similarly renamed for consistency
->>
->>     
-> [...]
->   
->>  # Path prefixes
->>  base_prefix = "${STAGING_DIR_NATIVE}"
->> -prefix = "${STAGING_DIR_NATIVE}${prefix_native}"
->> -exec_prefix = "${STAGING_DIR_NATIVE}${prefix_native}"
->> +prefix = "${STAGING_DIR_NATIVE}${prefix-native}"
->> +exec_prefix = "${STAGING_DIR_NATIVE}${prefix-native}"
->>     
->
-> [...]
->
-> Shouldn't we then for consistent naming also go to exex-prefix etc ?
+--nextPart7276129.2JJjqTE1BB
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-In the spirit of keeping a single patch for a single purpose, I have not 
-modified anything that is not required to fix the problem at hand (um, 
-except for bindir_cross). I have only modified the variable names that 
-were modified in Richard's commit "Start removal of layout_* variables 
-and replace these with new mechanisms to allow nextgen SDK generation 
-(from Poky)":
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 18 =D0=BC=D0=B0=D1=80=D1=82=D0=
+=B0 2010 23:30:03 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Koen Kooi =D0=BD=D0=B0=D0=
+=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> On 18-03-10 20:12, Roman I Khimov wrote:
+> > Hello all.
+> >
+> > As perl 5.10.1 is a big patch by itself and series overall is 42 patches
+> > and I don't want to banned from list for spam ;), I've commited that to
+> > the "rik/perl-5.10" branch of OE repo.
+> >
+> > In general, the most interesting and the most requiring review are the
+> > first 4, all the other are just various modules. So, please
+> > review/try/test/ack/nack.
+>=20
+> Do these include the poky tweaks to make new-style staging work (needs
+> cpan changes as well iirc)?
 
-    http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=bea72c2fecde175add169bb55df1922b048030c8
+No. You mean, this one?
+http://git.pokylinux.org/cgit.cgi/poky/commit/?id=3Dca5f36ee6ad756e1e540288=
+a56a504c1d8ecc7a3
 
-Any renaming of base_prefix, exec_prefix, base_bindir, target_datadir, 
-&c is a separate matter. Note that some of these names are imposed on us 
-by Autotools convention. This is why these variables are in lower case 
-in the first place:
+Looks like a good thing to have, so if Richard will push it to OE.dev I can=
+ do=20
+a rebase of my patchset.
 
-    http://www.gnu.org/prep/standards/html_node/Directory-Variables.html#Directory-Variables
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
-Douglas.
+--nextPart7276129.2JJjqTE1BB
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
-=======================================================================
-This email, including any attachments, is only for the intended
-addressee.  It is subject to copyright, is confidential and may be
-the subject of legal or other privilege, none of which is waived or
-lost by reason of this transmission.
-If the receiver is not the intended addressee, please accept our
-apologies, notify us by return, delete all copies and perform no
-other act on the email.
-Unfortunately, we cannot warrant that the email has not been
- altered or corrupted during transmission.
-=======================================================================
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
 
+iEYEABECAAYFAkuikUoACgkQXJ70z+XgVcP9GwCgveAitJH9E0ZpIyGX+tESLHPn
+3B8AnRB094v+pNjSj+PU41xnsq55qjT5
+=dv4U
+-----END PGP SIGNATURE-----
 
-
+--nextPart7276129.2JJjqTE1BB--
