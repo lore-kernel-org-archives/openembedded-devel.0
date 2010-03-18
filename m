@@ -1,29 +1,43 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-ew0-f225.google.com ([209.85.219.225])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NsDUo-0008Iu-RC for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Mar 2010 12:02:39 +0100
-Received: from f053045153.adsl.alicedsl.de ([78.53.45.153]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NsDRs-0004PT-OD for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Mar 2010 10:59:32 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <philipp.zabel@gmail.com>) id 1NsDgT-0000Hg-8k
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Mar 2010 12:14:43 +0100
+Received: by ewy25 with SMTP id 25so249148ewy.27
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Mar 2010 04:11:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=xelFenQ0Kdfzu6dq6R02AMPpZuG3sKK0zERZTOThidU=;
+	b=w0nLSrm3FifTi7O+gLFbXGwaR7vw/EElJtKAy/LvoOhMHJMbfppZ4myyckZ7YZGhs4
+	1cN29D3lcOtMcuDdiZgKpOpgJ6RaAAvPFjdTCEmnX8Fz93ou64sglXcTfIkWMmZ2+aSC
+	Awxdw618+ulFxEBLwxTA6y7KOdXphDIu7ocq4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=kgyn0UalkDsg8t3D/JBhQ39CNYtQ8xsREXY2LiPuA7jDqG1628fOZH8pdA9rWorQZo
+	0Ztt+80H89zmCG+iwuw1yE2R8DhV+QeT4VuQlEcabJ/cuzXVcIWOx9R9CEZrhQUU69rc
+	1zZwzsN/FZe0Zj54imdqkL2g1HDrnFMYowtOs=
+MIME-Version: 1.0
+Received: by 10.213.1.135 with SMTP id 7mr511982ebf.72.1268910692922; Thu, 18 
+	Mar 2010 04:11:32 -0700 (PDT)
+In-Reply-To: <1268909970.4619.8.camel@mattotaupa>
+References: <1268909970.4619.8.camel@mattotaupa>
+Date: Thu, 18 Mar 2010 12:11:32 +0100
+Message-ID: <74d0deb31003180411g80d7bb5y9a9ef6f70ec4f4d5@mail.gmail.com>
+From: pHilipp Zabel <philipp.zabel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 Mar 2010 11:59:30 +0100
-Message-ID: <1268909970.4619.8.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.219.225
+X-SA-Exim-Mail-From: philipp.zabel@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: What is `PE` used for?
+Subject: Re: What is `PE` used for?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,43 +51,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Mar 2010 11:02:39 -0000
-X-Groupsio-MsgNum: 17815
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-uafsQ9zHXcri7px0I3mX"
-
---=-uafsQ9zHXcri7px0I3mX
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 18 Mar 2010 11:14:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Dear OE folks,
+On Thu, Mar 18, 2010 at 11:59 AM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> Dear OE folks,
+>
+>
+> in [1] there is =BBPE =3D "1"=AB.
+>
+> I could not find `${PE}` in the user manual and searching for =BB"${pe}
+> openembedded=AB did not work either.
+
+It's the package "epoch" as described in the Debian Policy Manual:
+http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-Version
+
+It really seems to be missing from the documentation.
+
+best regards
+Philipp
 
 
-in [1] there is =C2=BBPE =3D "1"=C2=AB.
-
-I could not find `${PE}` in the user manual and searching for =C2=BB"${pe}
-openembedded=C2=AB did not work either.
-
-
-Thanks,
-
-Paul
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/gimp/ba=
-bl_git.bb#n7
-
---=-uafsQ9zHXcri7px0I3mX
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkuiB5IACgkQPX1aK2wOHViV+wCeLIv+qK+JzKhVaQxoZIos948J
-eBMAn19n1V3a9JN0/pJhnxCn1mfre3Ta
-=eI+P
------END PGP SIGNATURE-----
-
---=-uafsQ9zHXcri7px0I3mX--
