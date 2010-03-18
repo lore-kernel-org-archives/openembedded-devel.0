@@ -1,42 +1,31 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NsLeu-0007G9-Ed
+Received: from sencha.khimov.ru ([89.223.109.22])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <roman@khimov.ru>) id 1NsLlD-0007Xa-QZ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Mar 2010 20:45:33 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2IJgRCE007786
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Mar 2010 19:42:27 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 07346-10 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Mar 2010 19:42:23 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2IJgJas007780
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Mar 2010 19:42:19 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Thu, 18 Mar 2010 20:52:08 +0100
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NsLiG-0000WU-BL
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Mar 2010 22:49:01 +0300
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hntp31$a2q$1@dough.gmane.org>
-References: <4BA1825F.9080405@tait.co.nz>
-	<201003180437.10542.holger+oe@freyther.de>
-	<1268933342.8697.43.camel@rex> <hntp31$a2q$1@dough.gmane.org>
-Date: Thu, 18 Mar 2010 19:42:17 +0000
-Message-ID: <1268941337.8697.69.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Date: Thu, 18 Mar 2010 22:46:23 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
+References: <201003182212.31873.roman@khimov.ru>
+	<ac9c93b11003181236u5d7701ebiaa778519b0013700@mail.gmail.com>
+In-Reply-To: <ac9c93b11003181236u5d7701ebiaa778519b0013700@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201003182246.27013.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2] Renamed prefix_native, bindir_native, etc using camelCaps
+Subject: Re: [RFC/PATCH] Perl 5.10.1 and a bunch of modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,41 +39,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Mar 2010 19:45:33 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 18 Mar 2010 19:52:08 -0000
+X-Groupsio-MsgNum: 17833
+Content-Type: multipart/signed; boundary="nextPart10778756.qILKzOBHnO";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2010-03-18 at 18:49 +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> On 18-03-10 18:29, Richard Purdie wrote:
-> > On Thu, 2010-03-18 at 04:37 +0100, Holger Hans Peter Freyther wrote:
-> >> On Thursday 18 March 2010 02:31:11 Douglas Royds wrote:
-> >>>     - Avoids clashing with the machine override when MACHINE=native
-> >>>     - bindir_cross similarly renamed for consistency
-> >>
-> >> Thank you for that much work. I think we established the usage of '-' instead 
-> >> of '_' to avoid clashes with the override detection though.
-> > 
-> > I just noticed this problem. It makes me very very nervous to introduce
-> > yet another variable naming convention, particularly one we don't use
-> > anywhere else :/.
-> > 
-> > Might it be simpler to rename the native machine? Using "native" in the
-> > override namespace is asking for trouble :(.
-> 
-> rename it to 'host'?
+--nextPart10778756.qILKzOBHnO
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Its still not a good name to have in overrides. We really need something
-meaningful but not generic e.g. "localmachine"
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 18 =D0=BC=D0=B0=D1=80=D1=82=D0=
+=B0 2010 22:36:57 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Frans Meulenbroeks=20
+=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> 2010/3/18 Roman I Khimov <roman@khimov.ru>:
+> > Hello all.
+> >
+> > As perl 5.10.1 is a big patch by itself and series overall is 42 patches
+> > and I don't want to banned from list for spam ;), I've commited that to
+> > the "rik/perl-5.10" branch of OE repo.
+> >
+> > In general, the most interesting and the most requiring review are the
+> > first 4, all the other are just various modules. So, please
+> > review/try/test/ack/nack.
+>=20
+> Nice work Roman!
 
-Cheers,
+Thanks.
 
-Richard
+> Any particular reason not to go to 5.11?
 
+AFAIK, 5.11 is development branch and we're more interested in stable.
 
+> Also I'm not sure whether all the native recipes we have now are really
+>  needed. Perhaps the new staging will take care of that. Do you have any
+>  idea?
 
+Most of -native were converted to BBCLASSEXTEND and those are at least=20
+harmless, I think. And then some modules check for dependencies when=20
+configuring, so -native version is needed for those checks to succeed.
 
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
+--nextPart10778756.qILKzOBHnO
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAkuigxIACgkQXJ70z+XgVcMhlwCePCFknbmVTHgTSfur1aiszUWb
+oDAAni9jfJlgUT8scsrbtd4W7jvR7/op
+=E8HP
+-----END PGP SIGNATURE-----
+
+--nextPart10778756.qILKzOBHnO--
