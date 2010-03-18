@@ -1,41 +1,35 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NsJZv-0000y8-7k
+Received: from exchsrvr.syntech-fuelmaster.com ([199.44.250.2]
+	helo=courier.syntech-fuelmaster.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mbutsch@syntech-fuelmaster.com>) id 1NsJh1-0001bC-15
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Mar 2010 18:32:16 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2IHTA8k006191
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Mar 2010 17:29:10 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 05846-08 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Mar 2010 17:29:06 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2IHT359006185
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Mar 2010 17:29:06 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201003180437.10542.holger+oe@freyther.de>
-References: <4BA1825F.9080405@tait.co.nz>
-	<201003180437.10542.holger+oe@freyther.de>
-Date: Thu, 18 Mar 2010 17:29:02 +0000
-Message-ID: <1268933342.8697.43.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	Thu, 18 Mar 2010 18:39:40 +0100
+Received: from Courier.syntech.org ([fe80::f1e9:ec58:2caf:f234]) by
+	Courier.syntech.org ([fe80::f1e9:ec58:2caf:f234%14]) with mapi;
+	Thu, 18 Mar 2010 13:36:15 -0400
+From: Mark Butsch <mbutsch@syntech-fuelmaster.com>
+To: "'openembedded-devel@lists.openembedded.org'"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 18 Mar 2010 13:36:15 -0400
+Thread-Topic: need help with "Couldn't find shared library provider for ..."
+Thread-Index: AcrFSIulEg3rteJPRxOj2ykWQ/vTAABduI0g
+Message-ID: <6C2434209962DC46B88345CA85C334A285DAA6772A@Courier.syntech.org>
+References: <6C2434209962DC46B88345CA85C334A285DAA67688@Courier.syntech.org>
+In-Reply-To: <6C2434209962DC46B88345CA85C334A285DAA67688@Courier.syntech.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 199.44.250.2
+X-SA-Exim-Mail-From: mbutsch@syntech-fuelmaster.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2] Renamed prefix_native, bindir_native, etc using camelCaps
+Subject: Re: need help with "Couldn't find shared library provider for ..."
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,28 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Mar 2010 17:32:16 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 18 Mar 2010 17:39:40 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2010-03-18 at 04:37 +0100, Holger Hans Peter Freyther wrote:
-> On Thursday 18 March 2010 02:31:11 Douglas Royds wrote:
-> >     - Avoids clashing with the machine override when MACHINE=native
-> >     - bindir_cross similarly renamed for consistency
-> 
-> Thank you for that much work. I think we established the usage of '-' instead 
-> of '_' to avoid clashes with the override detection though.
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-bounces@lists.openembedded.org] On Behalf Of > Mark Butsch
+> Sent: Tuesday, March 16, 2010 4:38 PM
+> To: 'openembedded-devel@lists.openembedded.org'
+> Subject: [oe] need help with "Couldn't find shared library provider for .=
+.."
+>
+> Hello,
+>
+> I am getting the following Note when building my code:
+>
+> NOTE: Running task 469 of 474 (ID: 10, /home/ad/mbutsch/phytec-mx27/com.s=
+yntech/recipes/aposd-ecd/aposd-ecd.bb, do_qa_staging)
+> NOTE: Couldn't find shared library provider for libfipscrypto.so
+>
+> I googled for this and the suggestions where to include a "PROVIDES =3D" =
+in my recipe, but that doesn't make the Note go away.
+>
+> Can anyone provide me with the magic words to put in my recipe?
+>
+> Thanks,
+>
+> Mark
 
-I just noticed this problem. It makes me very very nervous to introduce
-yet another variable naming convention, particularly one we don't use
-anywhere else :/.
+I fixed it myself. Learned some stuff about bitbake and OE in the process.
 
-Might it be simpler to rename the native machine? Using "native" in the
-override namespace is asking for trouble :(.
-
-Cheers,
-
-Richard
+The problem was that "-Wl,-soname=3D" was not being set, so the file wasn't=
+ added to the list of shared libraries provided.
 
 
 
