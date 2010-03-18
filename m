@@ -1,43 +1,42 @@
-Received: from mail-ew0-f225.google.com ([209.85.219.225])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philipp.zabel@gmail.com>) id 1NsDgT-0000Hg-8k
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 18 Mar 2010 12:14:43 +0100
-Received: by ewy25 with SMTP id 25so249148ewy.27
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NsG3G-0003Ye-2c for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Mar 2010 14:46:22 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NsG0J-0001FK-K2 for openembedded-devel@lists.openembedded.org;
+	Thu, 18 Mar 2010 14:43:15 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 Mar 2010 14:43:15 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 Mar 2010 04:11:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=xelFenQ0Kdfzu6dq6R02AMPpZuG3sKK0zERZTOThidU=;
-	b=w0nLSrm3FifTi7O+gLFbXGwaR7vw/EElJtKAy/LvoOhMHJMbfppZ4myyckZ7YZGhs4
-	1cN29D3lcOtMcuDdiZgKpOpgJ6RaAAvPFjdTCEmnX8Fz93ou64sglXcTfIkWMmZ2+aSC
-	Awxdw618+ulFxEBLwxTA6y7KOdXphDIu7ocq4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=kgyn0UalkDsg8t3D/JBhQ39CNYtQ8xsREXY2LiPuA7jDqG1628fOZH8pdA9rWorQZo
-	0Ztt+80H89zmCG+iwuw1yE2R8DhV+QeT4VuQlEcabJ/cuzXVcIWOx9R9CEZrhQUU69rc
-	1zZwzsN/FZe0Zj54imdqkL2g1HDrnFMYowtOs=
-MIME-Version: 1.0
-Received: by 10.213.1.135 with SMTP id 7mr511982ebf.72.1268910692922; Thu, 18 
-	Mar 2010 04:11:32 -0700 (PDT)
-In-Reply-To: <1268909970.4619.8.camel@mattotaupa>
-References: <1268909970.4619.8.camel@mattotaupa>
-Date: Thu, 18 Mar 2010 12:11:32 +0100
-Message-ID: <74d0deb31003180411g80d7bb5y9a9ef6f70ec4f4d5@mail.gmail.com>
-From: pHilipp Zabel <philipp.zabel@gmail.com>
+	Thu, 18 Mar 2010 14:43:15 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.225
-X-SA-Exim-Mail-From: philipp.zabel@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 18 Mar 2010 14:43:00 +0100
+Message-ID: <hntal4$dpe$1@dough.gmane.org>
+References: <1268907792.4619.5.camel@mattotaupa>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100314 Shredder/3.0.4pre
+In-Reply-To: <1268907792.4619.5.camel@mattotaupa>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: What is `PE` used for?
+Subject: Re: OE user manual: Packaging: Defining packages and their contents: Wildcards
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,26 +50,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Mar 2010 11:14:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 18 Mar 2010 13:46:23 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Mar 18, 2010 at 11:59 AM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 18-03-10 11:23, Paul Menzel wrote:
 > Dear OE folks,
->
->
-> in [1] there is =BBPE =3D "1"=AB.
->
-> I could not find `${PE}` in the user manual and searching for =BB"${pe}
-> openembedded=AB did not work either.
+> 
+> 
+> reading the OE user manual I wonder about the section »Wildcards«
+> regarding packages [1].
+> 
+> There are some statements as the following.
+> 
+>         PACKAGES += "FILES-${PN}-test"
 
-It's the package "epoch" as described in the Debian Policy Manual:
-http://www.debian.org/doc/debian-policy/ch-controlfields.html#s-f-Version
+That bit should read:
 
-It really seems to be missing from the documentation.
+PACKAGES += "${PN}-test"
+FILES_${PN}-test = "${bindir}/test"
 
-best regards
-Philipp
+One needs to have an entry in PACKAGES first before you can assign files
+to it. Reversing the statements will work, but it OE we like define
+underlying things first.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLoi3kMkyGM64RGpERAuBXAKCMADyHwSH7N2ZTqQtIunKazu4MOgCfa1na
+t+vx1gzlyKkZgTMqgSpp3DA=
+=chUx
+-----END PGP SIGNATURE-----
+
 
 
