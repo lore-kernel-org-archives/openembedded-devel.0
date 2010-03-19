@@ -1,36 +1,46 @@
-Received: from server3.tinynetworks.co.uk ([89.16.176.161]
-	helo=mx.tinynetworks.co.uk) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martyn@welchs.me.uk>) id 1NslHB-0001gR-AP
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <ashcharles@gmail.com>) id 1NsluO-0004jV-JJ
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Mar 2010 00:06:51 +0100
-Received: from mx.tinynetworks.co.uk (localhost.localdomain [127.0.0.1])
-	by mx.tinynetworks.co.uk (Postfix) with ESMTP id E88776361A8;
-	Fri, 19 Mar 2010 22:54:10 +0000 (GMT)
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=tinynetworks.co.uk; h=from
-	:subject:to:cc:date:message-id:mime-version:content-type
-	:content-transfer-encoding; s=postfix; bh=w3abb5zmkYcDx6NZj53We7
-	IwDxE=; b=EU1mQ0L7ThzFuDhQvkB6bAC7TJ9U43QTCJMc0dyCjB/sDxOwN3uV8d
-	e2h9o3uCxV502NAvqWi9g09DszpmgOHrNEY9hD/20GgKCx7iF98rtFRyU627+fAY
-	hl+6GUT1xJQbWJF5UIT0vMudtg2DFZq3y/Z2iLjEI6cDiYdb1vRts=
-Received: from [127.0.1.1] (unknown [82.152.154.75])
-	by mx.tinynetworks.co.uk (Postfix) with ESMTPA id 9A5DE636057;
-	Fri, 19 Mar 2010 22:54:10 +0000 (GMT)
-From: Martyn Welch <martyn@welchs.me.uk>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 Mar 2010 22:54:08 +0000
-Message-ID: <20100319225408.8511.74339.stgit@icarus>
-User-Agent: StGIT/0.14.2
+	Sat, 20 Mar 2010 00:47:36 +0100
+Received: by pvc21 with SMTP id 21so1751544pvc.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Mar 2010 16:44:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:from:date:message-id:subject:to:content-type;
+	bh=cWqx7wkpZmrE/erz9EvB5SRYe+0Q+G7XmkXCdMqoEa8=;
+	b=Vjrhf8VfbLsY5zPaPrvw3XRnZ8eDr9IxiqKu6Nsv5qT5q1BfMvpLnlT962dIZLLLxG
+	ZXwnHaIUqZgz0hPAbWzHYNOfK+9IbuRm5jKLXbvELDuQBgD8e+pKsNFGTbnpkluw+V1S
+	VZ1OFwzeongojN/weFHZaCaUpTKKnimsHqWdc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=Ekb1RYaEEkTNfEja0bb63p6N/Crri25PXNO7YPaSXdi+ISeXXScPli5kDF2OT/B8JG
+	UJbh3VvbgX5qUFfy1XBgR8GOoYfmHuPpgtQYYsgvSGY2Q4yssrPN0lpdec3fxnw9QKVW
+	ujJ6CjEoGZ9YtyhKb80GSl/qQ7QfZz2mL1K9I=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 89.16.176.161
-X-SA-Exim-Mail-From: martyn@welchs.me.uk
+Received: by 10.140.56.8 with SMTP id e8mr3917098rva.228.1269042250115; Fri, 
+	19 Mar 2010 16:44:10 -0700 (PDT)
+In-Reply-To: <20100319214907.GN2425@xora-desktop.xora.org.uk>
+References: <1239889359-13953-1-git-send-email-khimov@altell.ru> 
+	<1268769038-30979-1-git-send-email-khimov@altell.ru>
+	<201003192355.52441.roman@khimov.ru> 
+	<bd4a003f1003191434t57c3f126gdc0f53790ef75aed@mail.gmail.com> 
+	<20100319214907.GN2425@xora-desktop.xora.org.uk>
+From: Ash Charles <ashcharles@gmail.com>
+Date: Fri, 19 Mar 2010 16:43:50 -0700
+Message-ID: <bd4a003f1003191643m15c0aa40id914236ef35ce037@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Mail-From: ashcharles@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: koen@openembedded.org
-Subject: [PATCH] gypsy: Add version 0.7, remove broken svn recipe
+Subject: Re: [PATCH] cmake.bbclass: force CMAKE_INSTALL_SO_NO_EXE to be 0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,54 +54,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Mar 2010 23:06:51 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 19 Mar 2010 23:47:36 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Svn package no longer provided at o-hand. Remove it and replace with
-version 0.7 from the projects website.
+Acked-by: Ash Charles <ashcharles@gmail.com>
 
-Signed-off-by: Martyn Welch <martyn@welchs.me.uk>
----
-
- recipes/gypsy/gypsy_0.7.bb |   10 ++++++++++
- recipes/gypsy/gypsy_svn.bb |   10 ----------
- 2 files changed, 10 insertions(+), 10 deletions(-)
- create mode 100644 recipes/gypsy/gypsy_0.7.bb
- delete mode 100644 recipes/gypsy/gypsy_svn.bb
-
-diff --git a/recipes/gypsy/gypsy_0.7.bb b/recipes/gypsy/gypsy_0.7.bb
-new file mode 100644
-index 0000000..9c1fb41
---- /dev/null
-+++ b/recipes/gypsy/gypsy_0.7.bb
-@@ -0,0 +1,10 @@
-+require gypsy.inc
-+
-+SRC_URI = "http://gypsy.freedesktop.org/gypsy-releases/gypsy-0.7.tar.gz;name=gypsy \
-+           file://docs-reference-am.patch;patch=1 \
-+           file://remove-werror.patch;patch=1 \
-+"
-+
-+SRC_URI[gypsy.md5sum] = "cde52c121693014efa75d9098fd7de22"
-+SRC_URI[gypsy.sha256sum] = "60d9f9ada77c832899df4a164718895addc5015fa48f45fd58dc4bc8a983f205"
-+
-diff --git a/recipes/gypsy/gypsy_svn.bb b/recipes/gypsy/gypsy_svn.bb
-deleted file mode 100644
-index 0245a95..0000000
---- a/recipes/gypsy/gypsy_svn.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require gypsy.inc
--
--SRC_URI = "svn://svn.o-hand.com/repos/${PN}/trunk;module=${PN};proto=http \
--           file://fixups.patch;patch=1;maxrev=107 \
--           file://docs-reference-am.patch;patch=1;minrev=134 \
--           file://remove-werror.patch;patch=1"
--S = "${WORKDIR}/${PN}"
--
--PV = "0.0+svnr${SRCPV}"
--PR = "r1"
-
+On Fri, Mar 19, 2010 at 2:49 PM, Graeme Gregory <dp@xora.org.uk> wrote:
+> On Fri, Mar 19, 2010 at 02:34:56PM -0700, Ash Charles wrote:
+>> On Fri, Mar 19, 2010 at 1:55 PM, Roman I Khimov <roman@khimov.ru> wrote:
+>> > So, I've rebased that to current, it looks like an obvious one and still no
+>> > one cares. As per policy, I need two ack's on this one. Should I break that
+>> > and push it or just wait another year till someone else interested in cmake
+>> > will ack it?
+>>
+>> Hi Roman,
+>>
+>> I'm not in a position to ack this as I'm new to this mailing list. I
+>> use OpenEmbedded+Cmake for several projects though and this looks like
+>> a sensible fix.
+>>
+> Ash, if you can verify the change then please Ack, we arent as strict
+> as other projects.
+>
+> Graeme
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
