@@ -1,36 +1,31 @@
-Received: from mail.reciva.com ([82.71.203.194] helo=crown.reciva.com)
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1NsbO5-0004bB-EO
+	(envelope-from <sledz@DResearch.DE>) id 1NsbmX-0001Dx-Vs
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Mar 2010 13:33:20 +0100
-Received: from castle.reciva.com ([82.71.203.193]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtps (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1NsbL6-0004vl-Ta
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Mar 2010 12:30:09 +0000
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1NsbL6-0006iN-As
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Mar 2010 12:30:08 +0000
-From: Phil Blundell <philb@gnu.org>
+	Fri, 19 Mar 2010 13:58:30 +0100
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id F1E72491286
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Mar 2010 13:55:25 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Fri, 19 Mar 2010 13:55:37 +0100
+Message-ID: <4BA3744C.3060607@dresearch.de>
+Date: Fri, 19 Mar 2010 13:55:40 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.24 (Windows/20100228)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ac9c93b11003190341l3a971c41oe49170670498b104@mail.gmail.com>
-References: <1268857354-30377-1-git-send-email-sledz@dresearch.de>
-	<1268990986.3893.5.camel@mattotaupa> <hnviha$nf1$1@dough.gmane.org>
-	<1268994412.4292.0.camel@rex>
-	<ac9c93b11003190341l3a971c41oe49170670498b104@mail.gmail.com>
-Date: Fri, 19 Mar 2010 12:30:04 +0000
-Message-ID: <1269001804.14566.1450.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 82.71.203.194
-X-SA-Exim-Mail-From: philb@gnu.org
+References: <1268857354-30377-1-git-send-email-sledz@dresearch.de>	<1268990986.3893.5.camel@mattotaupa>
+	<hnviha$nf1$1@dough.gmane.org>
+In-Reply-To: <hnviha$nf1$1@dough.gmane.org>
+X-OriginalArrivalTime: 19 Mar 2010 12:55:37.0549 (UTC)
+	FILETIME=[78C72FD0:01CAC763]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] libunwind: new recipe
@@ -47,26 +42,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Mar 2010 12:33:23 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 19 Mar 2010 12:58:30 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2010-03-19 at 11:41 +0100, Frans Meulenbroeks wrote:
-> I was left with about 380 vars. See the list attached.
-> Guess most of them are undocumented (and actually 380 seems an awful lot to me).
+Koen Kooi wrote:
+>>> +DEPENDS = ""
+>> Remove this empty variable?
+> 
+> I think that's meant to do what INHIBIT_DEFAULT_DEPS does, but I'm not sure.
 
-That's an interesting list.  It's hard to say how many of those are
-actually intended for public consumption.
+This was not meant here.
 
-Some of them, like KERNEL_VERISON (sic), presumably are bogus and serve
-no useful purpose.  Some of them look like they are probably meant to be
-internal to the class in question and shouldn't be used or set by
-anything else.
+If this is the meaning i've to prepare a patch which removes
+this line immediately because the recipe was pushed yesterday
+to dev.
 
-But you're right, more documentation would be better.
-
-p.
-
+Steffen
 
 
 
