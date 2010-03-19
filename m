@@ -1,40 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NsZCX-0003FN-Sa for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Mar 2010 11:13:10 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NsZ9X-0003sQ-PL for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Mar 2010 11:10:03 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Mar 2010 11:10:03 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NsZSx-0007q3-Az
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Mar 2010 11:30:08 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2JAR1cF014053
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Mar 2010 11:10:03 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 19 Mar 2010 10:27:01 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 13768-05 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Mar 2010 10:26:57 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2JAQrmr014047
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Mar 2010 10:26:54 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 19 Mar 2010 11:09:46 +0100
-Message-ID: <hnviha$nf1$1@dough.gmane.org>
+In-Reply-To: <hnviha$nf1$1@dough.gmane.org>
 References: <1268857354-30377-1-git-send-email-sledz@dresearch.de>
-	<1268990986.3893.5.camel@mattotaupa>
+	<1268990986.3893.5.camel@mattotaupa>  <hnviha$nf1$1@dough.gmane.org>
+Date: Fri, 19 Mar 2010 10:26:52 +0000
+Message-ID: <1268994412.4292.0.camel@rex>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.8) Gecko/20100314 Shredder/3.0.4pre
-In-Reply-To: <1268990986.3893.5.camel@mattotaupa>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-MIME-Autoconverted: from 8bit to quoted-printable by tim.rpsys.net id
+	o2JAR1cF014053
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.3 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] libunwind: new recipe
@@ -51,41 +51,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Mar 2010 10:13:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 19 Mar 2010 10:30:08 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Fri, 2010-03-19 at 11:09 +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> On 19-03-10 10:29, Paul Menzel wrote:
+> > Am Mittwoch, den 17.03.2010, 21:22 +0100 schrieb Steffen Sledz:
+> >=20
+> > [=E2=80=A6]
+> >=20
+> >> diff --git a/recipes/libunwind/libunwind.inc b/recipes/libunwind/lib=
+unwind.inc
+> >> new file mode 100644
+> >> index 0000000..8513dc2
+> >> --- /dev/null
+> >> +++ b/recipes/libunwind/libunwind.inc
+> >> @@ -0,0 +1,13 @@
+> >> +DESCRIPTION =3D "a portable and efficient C programming interface (=
+API) to determine the call-chain of a program"
+> >> +DEPENDS =3D ""
+> >=20
+> > Remove this empty variable?
+>=20
+> I think that's meant to do what INHIBIT_DEFAULT_DEPS does, but I'm not =
+sure.
 
-On 19-03-10 10:29, Paul Menzel wrote:
-> Am Mittwoch, den 17.03.2010, 21:22 +0100 schrieb Steffen Sledz:
-> 
-> […]
-> 
->> diff --git a/recipes/libunwind/libunwind.inc b/recipes/libunwind/libunwind.inc
->> new file mode 100644
->> index 0000000..8513dc2
->> --- /dev/null
->> +++ b/recipes/libunwind/libunwind.inc
->> @@ -0,0 +1,13 @@
->> +DESCRIPTION = "a portable and efficient C programming interface (API) to determine the call-chain of a program"
->> +DEPENDS = ""
-> 
-> Remove this empty variable?
+FWIW, it won't do that. It does appear to be totally purposeless.
 
-I think that's meant to do what INHIBIT_DEFAULT_DEPS does, but I'm not sure.
+Cheers,
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLo01qMkyGM64RGpERAo2SAJ9IEYb7Se8ypeGth88+jLTZkQnKagCgu7PI
-shvce9VECx1SsiqSIA+qJxM=
-=F4El
------END PGP SIGNATURE-----
+Richard
 
 
 
