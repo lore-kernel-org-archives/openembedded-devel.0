@@ -1,42 +1,39 @@
-Received: from gatekeeper.tait.co.nz ([202.37.96.11])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <douglas.royds@tait.co.nz>) id 1NsPU7-0008EQ-It
+Received: from li38-254.members.linode.com ([207.192.74.254]
+	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <sgarman@zenlinux.com>) id 1NsPnb-0000r2-T1
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Mar 2010 00:50:41 +0100
-Received: from gatekeeper.tait.co.nz (localhost.localdomain [127.0.0.1])
-	by localhost.tait.co.nz (Postfix) with ESMTP id CE94546753
+	Fri, 19 Mar 2010 01:10:49 +0100
+Received: from [192.168.1.12] (c-76-115-42-183.hsd1.or.comcast.net
+	[76.115.42.183])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by masterfoo.zenlinux.com (Postfix) with ESMTP id B18AD304D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Mar 2010 12:47:53 +1300 (NZDT)
-Received: from sunstrike.tait.co.nz (sunstrike [172.25.40.92])
-	by gatekeeper.tait.co.nz (Postfix) with ESMTP id B9F7B46749
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Mar 2010 12:47:53 +1300 (NZDT)
-Received: from conversion-daemon.sunstrike.tait.co.nz by sunstrike.tait.co.nz
-	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
-	id <0KZI00I0125WE600@sunstrike.tait.co.nz>
-	(original mail from douglas.royds@tait.co.nz)
-	for openembedded-devel@lists.openembedded.org; Fri,
-	19 Mar 2010 12:47:33 +1300 (NZDT)
-Received: from [172.25.116.17] by sunstrike.tait.co.nz
-	(Sun Java System Messaging Server 6.1 (built Apr 28 2004))
-	with ESMTP id <0KZI008R14R6OBA0@sunstrike.tait.co.nz> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	19 Mar 2010 12:47:30 +1300 (NZDT)
-Date: Fri, 19 Mar 2010 12:47:30 +1300
-From: Douglas Royds <douglas.royds@tait.co.nz>
+	Thu, 18 Mar 2010 20:07:41 -0400 (EDT)
+Message-ID: <4BA2C04D.8050803@zenlinux.com>
+Date: Thu, 18 Mar 2010 17:07:41 -0700
+From: Scott Garman <sgarman@zenlinux.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.8) Gecko/20100227 Lightning/1.0b1 Thunderbird/3.0.3
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <4BA2BB92.1050703@tait.co.nz>
-MIME-version: 1.0
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-X-SA-Exim-Connect-IP: 202.37.96.11
-X-SA-Exim-Mail-From: douglas.royds@tait.co.nz
+References: <1268863405-29862-1-git-send-email-sgarman@zenlinux.com>
+	<ac9c93b11003180021vf3591cdh4859ada0a4c8842d@mail.gmail.com>
+In-Reply-To: <ac9c93b11003180021vf3591cdh4859ada0a4c8842d@mail.gmail.com>
+X-MasterFoo-MailScanner-Information: Please contact the ISP for more
+	information
+X-MailScanner-ID: B18AD304D9.904C9
+X-MasterFoo-MailScanner: Found to be clean
+X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
+X-SA-Exim-Connect-IP: 207.192.74.254
+X-SA-Exim-Mail-From: sgarman@zenlinux.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Patches and patchwork
+Subject: Re: [PATCH] grip: Upgrade to 3.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,35 +47,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 Mar 2010 23:50:41 -0000
-Content-type: text/plain; format=flowed; charset=ISO-8859-1
-Content-transfer-encoding: 7BIT
+X-List-Received-Date: Fri, 19 Mar 2010 00:10:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I have submitted a patch, and after discussion want to correct it.
+On 03/18/2010 12:21 AM, Frans Meulenbroeks wrote:
+>> +# grip OE build file
+> AFAIK the line above can go
 
-Do I submit the corrected patch as a reply to the existing email thread, 
-or start a new thread? If I submit the new patch as a reply to the 
-existing thread, will patchwork pick up the corrected patch, or remain 
-on the original one?
+<snip>
+
+>> +PR = "r1"
+> and as this is a new recipe it should start wit r0
+
+They say the third time's a charm. :) Final patch is on its way to the 
+list shortly...
 
 Thanks,
-Douglas.
 
+Scott
 
-
-
-
-=======================================================================
-This email, including any attachments, is only for the intended
-addressee.  It is subject to copyright, is confidential and may be
-the subject of legal or other privilege, none of which is waived or
-lost by reason of this transmission.
-If the receiver is not the intended addressee, please accept our
-apologies, notify us by return, delete all copies and perform no
-other act on the email.
-Unfortunately, we cannot warrant that the email has not been
- altered or corrupted during transmission.
-=======================================================================
-
+-- 
+Scott Garman
+sgarman at zenlinux dot com
 
 
