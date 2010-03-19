@@ -1,31 +1,44 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NsZdo-00057f-FO for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Mar 2010 11:41:24 +0100
-Received: from f053035070.adsl.alicedsl.de ([78.53.35.70]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NsZar-0004o5-D5 for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Mar 2010 10:38:17 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NsZgt-0007tu-8A
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Mar 2010 11:44:35 +0100
+Received: by gye5 with SMTP id 5so1424418gye.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Mar 2010 03:41:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=LYZuAp/yd3OB5a3J+nrpwyTO86gZn8ERs+hiG7NJcvE=;
+	b=rUq80SAEolHmgGLScmispmYQ0BIku0c1OOtAXX+uQX+i8wKKZSA2TA47ts7Bsom1a8
+	Qopc3+BgLbm9/bdddcwHOqiC6bqGyFo+N50A63jGSxY3UZggzel9lgbjhb75z4RHeMWM
+	DcZDRTDiE2HFZzdOKZxqO05iBjegYjMrt55bs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=rY6RVwXCPrksPCnoPzL0etB/npHmkB+qfka6R0Qr9U4o8h1Hrnd6GrmG6IQX7eNTtG
+	ztoGDz2avxtv6C1J7tDbsDOlEMprlgd3DX4RhU8Sb8/SEZ8qDxz6oF8cDINAt80DsN5N
+	XYkCrFIjgsABUC8759x5LmtYtNMPZItExZk1M=
+MIME-Version: 1.0
+Received: by 10.101.178.8 with SMTP id f8mr1063386anp.213.1268995285617; Fri, 
+	19 Mar 2010 03:41:25 -0700 (PDT)
+In-Reply-To: <1268994412.4292.0.camel@rex>
+References: <1268857354-30377-1-git-send-email-sledz@dresearch.de>
+	<1268990986.3893.5.camel@mattotaupa> <hnviha$nf1$1@dough.gmane.org>
+	<1268994412.4292.0.camel@rex>
+Date: Fri, 19 Mar 2010 11:41:25 +0100
+Message-ID: <ac9c93b11003190341l3a971c41oe49170670498b104@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4BA2BB92.1050703@tait.co.nz>
-References: <4BA2BB92.1050703@tait.co.nz>
-Date: Fri, 19 Mar 2010 11:38:15 +0100
-Message-ID: <1268995095.3893.20.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,
-	MIME_QP_LONG_LINE autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Patches and patchwork
+Subject: Re: [PATCH] libunwind: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,77 +52,154 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Mar 2010 10:41:24 -0000
-X-Groupsio-MsgNum: 17853
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-40UtUPpHhgyDH8mwPeRQ"
+X-List-Received-Date: Fri, 19 Mar 2010 10:44:38 -0000
+X-List-Received-Date: Fri, 19 Mar 2010 10:44:38 -0000
+X-Groupsio-MsgNum: 17854
+Content-Type: multipart/mixed; boundary=001636c924c2388da5048224fdd1
 
---=-40UtUPpHhgyDH8mwPeRQ
-Content-Type: text/plain; charset="UTF-8"
+--001636c924c2388da5048224fdd1
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: quoted-printable
 
-Am Freitag, den 19.03.2010, 12:47 +1300 schrieb Douglas Royds:
-> I have submitted a patch, and after discussion want to correct it.
->=20
-> Do I submit the corrected patch as a reply to the existing email thread,=20
-> or start a new thread?
+2010/3/19 Richard Purdie <rpurdie@rpsys.net>:
+> On Fri, 2010-03-19 at 11:09 +0100, Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 19-03-10 10:29, Paul Menzel wrote:
+>> > Am Mittwoch, den 17.03.2010, 21:22 +0100 schrieb Steffen Sledz:
+>> >
+>> > [=85]
+>> >
+>> >> diff --git a/recipes/libunwind/libunwind.inc b/recipes/libunwind/libu=
+nwind.inc
+>> >> new file mode 100644
+>> >> index 0000000..8513dc2
+>> >> --- /dev/null
+>> >> +++ b/recipes/libunwind/libunwind.inc
+>> >> @@ -0,0 +1,13 @@
+>> >> +DESCRIPTION =3D "a portable and efficient C programming interface (A=
+PI) to determine the call-chain of a program"
+>> >> +DEPENDS =3D ""
+>> >
+>> > Remove this empty variable?
+>>
+>> I think that's meant to do what INHIBIT_DEFAULT_DEPS does, but I'm not s=
+ure.
+>
+> FWIW, it won't do that. It does appear to be totally purposeless.
 
-In my opinion, if it is just a single patch and not a patch series a
-reply to the original message should sent.
+Triggered by this discussion and having a few minutes to spare while
+waiting for a test to complete, I did a quick grep on *.bbclass to
+find out how many vars there are out there. I only counted uppercase
+vars, so not things like ${bindir}. And ofc some of the vars are
+probably not for public usage.
+I was left with about 380 vars. See the list attached.
+Guess most of them are undocumented (and actually 380 seems an awful lot to=
+ me).
 
-The new patch should be marked with =C2=BBv2=C2=AB. (Look for `--subject-pr=
-efix`
-`git help format-patch`.)
+Not sure if this is useful, but decided to pass it on anyway
+(and if you don't like it just hit delete :-) )
 
-> If I submit the new patch as a reply to the=20
-> existing thread, will patchwork pick up the corrected patch, or remain=20
-> on the original one?
+Frans
 
-Patchwork will create a new item for this patch. Look at the IDs 1732
-and 1734 for my patches. (Although in this case the first version was
-the correct one.)
+--001636c924c2388da5048224fdd1
+Content-Type: application/octet-stream; name=vars
+Content-Disposition: attachment; filename=vars
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_g6yuwknf0
 
-You can update the state to superseded of the original patch using the
-Web interface or `pwclient` [1].
+QUxURVJOQVRJVkVfTElOSwpBTFRFUk5BVElWRV9OQU1FCkFMVEVSTkFUSVZFX1BBVEgKQUxURVJO
+QVRJVkVfUFJJT1JJVFkKQUxUSkFSRklMRU5BTUVTCkFQUERFU0tUT1AKQVBQRU5ECkFQUElNQUdF
+CkFQUE5BTUUKQVIKQVJDSApBVVRPX1NZU0xJTlVYQ0ZHCkFVVE9UT09MU19OQVRJVkVfU1RBR0Vf
+SU5TVEFMTApBV0tQT1NUSU5TVFNDUklQVApCCkJBRF9SRUNPTU1FTkRBVElPTlMKQkFTRV9QQUNL
+QUdFX0FSQ0gKQkFTRVBLR19UQVJHRVRfU1lTCkJCX0RFRkFVTFRfVEFTSwpCQlBBVEgKQklOQ09O
+RklHX0dMT0IKQk9PVElNR19FWFRSQV9TUEFDRQpCT09USU1HX1ZPTFVNRV9JRApCUApCUE4KQlJB
+TkNICkJVSUxECkJVSUxEX0FSCkJVSUxEX0FSQ0gKQlVJTERfQ0MKQlVJTERfQ0NfQVJDSApCVUlM
+RF9DRkxBR1MKQlVJTERfQ1BQRkxBR1MKQlVJTERfQ1hYCkJVSUxEX0NYWEZMQUdTCkJVSUxEX0VY
+RUVYVApCVUlMRF9MREZMQUdTCkJVSUxETkFNRQpCVUlMRF9PUwpCVUlMRF9QUkVGSVgKQlVJTERf
+UkFOTElCCkJVSUxEU0RLX0NGTEFHUwpCVUlMRFNES19DUFBGTEFHUwpCVUlMRFNES19MREZMQUdT
+CkJVSUxEX1NZUwpCVUlMRF9WRU5ET1IKQ0MKQ0NBQ0hFCkNDQUNIRV9ESVJfVEFSR0VUCkNDTEQK
+Q0ZMQUdTCkNMQVNTUEFUSF9BUkcKQ1BQX1NVUFBPUlRfTElCCkNST1NTX0RJUgpDWFgKQ1hYRkxB
+R1MKRApERUJJQU5fTUlSUk9SCkRFUEVORFMKREVQTE9ZX0RJUgpERVBMT1lfRElSX0RFQgpERVBM
+T1lfRElSX0lNQUdFCkRFUExPWV9ESVJfSVBLCkRFUExPWV9ESVJfUFNUQUdFCkRFUExPWV9ESVJf
+UlBNCkRFUExPWV9ESVJfU1JDCkRFUExPWV9LRUVQX1BBQ0tBR0VTCkRFUExPWV9UTwpERVNDUklQ
+VElPTgpESVNUUk8KRElTVFJPX05BTUUKRElTVFJPX1BSCkRJU1RVVElMU19CVUlMRF9BUkdTCkRJ
+U1RVVElMU19JTlNUQUxMX0FSR1MKRElTVFVUSUxTX1NUQUdFX0FMTF9BUkdTCkRJU1RVVElMU19T
+VEFHRV9IRUFERVJTX0FSR1MKRExfRElSCkRQS0dfQVJDSApFWENMVURFX0ZST00KRVhURU5EUEtH
+RVZFUgpFWFRFTkRQS0dWCkVYVFJBX0FVVE9SRUNPTkYKRVhUUkFfQ1BBTkZMQUdTCkVYVFJBX05B
+VElWRV9QS0dDT05GSUdfUEFUSApFWFRSQV9PRUNNQUtFCkVYVFJBX09FQ09ORgpFWFRSQV9PRU1B
+S0UKRVhUUkFfUU1BS0VWQVJTX1BPU1QKRVhUUkFfUU1BS0VWQVJTX1BSRQpFWFRSQV9TSVBUQUdT
+CkZFQVRVUkVTCkZFRURfREVQTE9ZRElSX0JBU0VfVVJJCkZFRURfVVJJUwpGSUxFCkZJTEVfRElS
+TkFNRQpGSUxFUwpGSUxFU0RJUgpGSUxFU1BBVEhCQVNFCkZJTEVTUEFUSFBLRwpGTEFTSF9CSU4K
+RkxBU0hfS0VSTkVMX1NJWkUKRkxBU0hfUk9PVF9TSVpFCkZSRUVERVNLVE9QX0NWUwpHTk9NRV9N
+SVJST1IKR05VX01JUlJPUgpHUEVfTUlSUk9SCkdQRVBIT05FX01JUlJPUgpHUEVfVEFSQkFMTF9T
+VUZGSVgKSEFOREhFTERTX0NWUwpIRERESVIKSE9NRQpIT1NUX0FSQ0gKSE9TVF9BUl9LRVJORUxf
+QVJDSApIT1NUX0NDX0FSQ0gKSE9TVF9DQ19LRVJORUxfQVJDSApIT1NUX0xEX0tFUk5FTF9BUkNI
+CkhPU1RfTElCSURMX0NPTkZJRwpIT1NUX09TCkhPU1RfUFJFRklYCkhPU1RfU1lTCkhPU1RfVkVO
+RE9SCkkKSTE4Tl9TVEFUUwpJQ0VDQ19FTlZfRVhFQwpJQ0VfUEFUSApJTUFHRV9CT09UCklNQUdF
+X0RFVl9NQU5BR0VSCklNQUdFX0VYVFJBX1NQQUNFCklNQUdFX0ZTVFlQRVMKSU1BR0VfSU5JVF9N
+QU5BR0VSCklNQUdFX0lOSVRTQ1JJUFRTCklNQUdFX0lOU1RBTEwKSU1BR0VfS0VFUFJPT1RGUwpJ
+TUFHRV9MSU5HVUFTCklNQUdFX0xJTktfTkFNRQpJTUFHRV9MT0dJTl9NQU5BR0VSCklNQUdFX05B
+TUUKSU1BR0VfUEtHVFlQRQpJTUFHRV9QT1NUUFJPQ0VTU19DT01NQU5ECklNQUdFX1BSRVBST0NF
+U1NfQ09NTUFORApJTUFHRV9ST09URlMKSU1BR0VfUk9PVEZTX1NJWkUKSU1BR0VfUk9PVEZTX1NJ
+WkUpIH0KSU5ISUJJVF9BVVRPX1NUQUdFCklOSElCSVRfQVVUT19TVEFHRV9JTkNMVURFUwpJTkhJ
+QklUX01PTk9fU1RBR0UKSU5ISUJJVF9OQVRJVkVfU1RBR0VfSU5TVEFMTApJTklUX0RfRElSCklO
+SVRSQU1GU19JTUFHRQpJTklUUkFNRlNfVEFTSwpJTklUUkQKSU5JVFNDUklQVF9OQU1FCklOSVRT
+Q1JJUFRfUEFSQU1TCklQS0dfQVJHUwpJUEtHQ09ORl9DQU5TREsKSVBLR0NPTkZfU0RLCklQS0dD
+T05GX1RBUkdFVApJUEtHX09GRkxJTkVfUk9PVApJUEtHX1RNUF9ESVIKSVBLR19WQVJJQU5UCklT
+X05FV19QRVJMCklTT0RJUgpKQVJGSUxFTkFNRQpKQVZBCkpQTgpLRVJORUxfQVIKS0VSTkVMX0FS
+U1VGRklYCktFUk5FTF9DQwpLRVJORUxfQ0NTVUZGSVgKS0VSTkVMX0lNQUdFX0JBU0VfTkFNRQpL
+RVJORUxfSU1BR0VERVNUCktFUk5FTF9JTUFHRV9NQVhTSVpFCktFUk5FTF9JTUFHRV9OQU1FCktF
+Uk5FTF9JTUFHRV9TWU1MSU5LX05BTUUKS0VSTkVMX0lNQUdFVFlQRQpLRVJORUxfTEQKS0VSTkVM
+X0xEU1VGRklYCktFUk5FTF9NQUpPUl9WRVJTSU9OCktFUk5FTE9SR19NSVJST1IKS0VSTkVMX09V
+VFBVVApLRVJORUxfUFJJT1JJVFkKS0VSTkVMX1ZFUklTT04KS0VSTkVMX1ZFUlNJT04KS0VSTkVM
+X1ZFUlNJT04nKX0KTEFCRUxTCkxECkxERkxBR1MKTElDCkxJTkdVQVNfSU5TVEFMTApNQUNISU5F
+Ck1BQ0hJTkVfQVJDSApNQUNISU5FX0tFUk5FTF9QUgpNQUNISU5FX1BPU1RQUk9DRVNTX0NPTU1B
+TkQKTUFJTl9DTEFTUwpNQUlOVEFJTkVSCk1BS0UKTUFLRV9UQVJHRVRTCk1PRFVMRV9NQUtFX0ZM
+QUdTCk1PRFVMRVNfSU1BR0VfQkFTRV9OQU1FCk1PWkNPTkZJRwpNT1pfT0JKRElSCk1VTFRJTUFD
+SF9BUkNICk1VTFRJTUFDSF9TREtfU1lTCk5BTUUKTk9JU08KT0JKQ09QWQpPRUNNQUtFX0JVSUxE
+UEFUSApPRUNNQUtFX1NPVVJDRVBBVEgKT0VMQVlPVVRfQUJJCk9FX1FNQUtFX1BMQVRGT1JNCk9F
+X1FNQUtFX1FNQUtFCk9MRF9CQVNFX1BBQ0tBR0VfQVJDSApPTERfQkFTRVBLR19UQVJHRVRfU1lT
+Ck9MRF9NVUxUSU1BQ0hfQVJDSApPTERfTVVMVElNQUNIX1RBUkdFVF9TWVMKT0xEX1BBQ0tBR0Vf
+QVJDSApPTERfUEFSQUxMRUxfTUFLRQpPTERfVEFSR0VUX09TCk9MRF9UQVJHRVRfVkVORE9SCk9O
+TElORV9QQUNLQUdFX01BTkFHRU1FTlQKT1BFTk1PS09fTUlSUk9SCk9QRU5NT0tPX1JFTEVBU0UK
+T1BLRwpPUklHX0RFUEVORFMKT1VUU1BFQ0ZJTEUKT1ZFUlJJREVTClAKUEFDS0FHRV9BUkNIClBB
+Q0tBR0VfQVJDSFMKUEFDS0FHRV9JTlNUQUxMClBBQ0tBR0VfSU5TVEFMTF9BVFRFTVBUT05MWQpQ
+QUNLQUdFX0lOU1RBTExfTk9fREVQUwpQQUNLQUdFX1BSRVBST0NFU1NfRlVOQ1MKUEFDS0FHRVMK
+UEFSQUxMRUxfTUFLRQpQQVRDSERFUEVOREVOQ1kKUEFUQ0hUT09MClBFUkxMSUJESVJTClBGClBJ
+RApQS0cKUEtHX0NPTkZJR19ESVIKUEtHRApQS0dEQVRBX0RJUgpQS0dERVNUClBLR19ESVNUX0xP
+Q0FMClBLR19ESVNUUklCVVRFRElSClBLR1IKUEtHVgpQTgpQUgpQU1RBR0VfQlVJTERfQ01EClBT
+VEFHRV9FWFRSQVBBVEgKUFNUQUdFX0lOU1RBTExfQ01EClBTVEFHRV9MSVNUX0NNRApQU1RBR0Vf
+TUFDSENPTkZJRwpQU1RBR0VfTkFUSVZFREVQRU5EUwpQU1RBR0VfUEtHClBTVEFHRV9QS0dBUkNI
+ClBTVEFHRV9QS0dNQU5BR0VSClBTVEFHRV9QS0dOQU1FClBTVEFHRV9QS0dQQVRIClBTVEFHRV9Q
+S0dQTgpQU1RBR0VfUEtHVkVSU0lPTgpQU1RBR0VfVE1QRElSX1NUQUdFClBWClBZVEhPTl9ESVIK
+UU1BS0VfTUtTUEVDX1BBVEgKUU1BS0VfUFJPRklMRVMKUU1BS0VTUEVDClFURElSClFUX0RJUl9O
+QU1FClFUX0xJQklORklYClJNV09SS19PUklHX1RBU0sKUk9PVEZTX1BPU1RJTlNUQUxMX0NPTU1B
+TkQKUk9PVEZTX1BPU1RQUk9DRVNTX0NPTU1BTkQKUlBNClJQTUJVSUxEClJQTUJVSUxEUEFUSApS
+UE1fRkVFRF9VUklTClJQTU9QVFMKUlBNX1BPU1RQUk9DRVNTX0NPTU1BTkRTClJQTV9QUkVQUk9D
+RVNTX0NPTU1BTkRTClJQTVBWClMKU0NIRU1BX0ZJTEVTClNES19BUkNIClNES19DQ19BUkNIClNE
+S19DRkxBR1MKU0RLX0NQUEZMQUdTClNES19FWEVFWFQKU0RLX0xERkxBR1MKU0RLX09TClNES1BB
+VEgKU0RLX1BBVEgKU0RLX1BSRUZJWApTREtfUkVBTFBBVEgKU0RLX1NZUwpTREtfVkVORE9SClNF
+Q1RJT04KU0lQX0ZFQVRVUkVTClNJUF9NT0RVTEVTClNJUFRBR1MKU0lURUlORk9fRU5ESUFORVNT
+ClNPTElCUwpTT0xJQlNERVYKU09VUkNFX01JUlJPUl9VUkwKU09VUkNFUwpTUEVDRklMRQpTUEVD
+UwpTUkMKU1JDREFURQpTUkNfRElTVFJJQlVURURJUgpTUkNOQU1FClNSQ1JFVgpTUkNfVVJJClNS
+RUNfQ01EClNSRUNfU0tJUApTUkVDX1ZNQUFERFIKU1JQTUZJTEUKU1JQTVMKU1RBR0VfVEVNUApT
+VEFHRV9URU1QX1BSRUZJWApTVEFHSU5HX0JJTkRJUgpTVEFHSU5HX0JJTkRJUl9DUk9TUwpTVEFH
+SU5HX0JJTkRJUl9OQVRJVkUKU1RBR0lOR19EQVRBRElSClNUQUdJTkdfREFUQURJUl9KQVZBClNU
+QUdJTkdfREFUQURJUl9KQVZBX05BVElWRQpTVEFHSU5HX0RBVEFESVJfTkFUSVZFClNUQUdJTkdf
+RElSClNUQUdJTkdfRElSX0hPU1QKU1RBR0lOR19ESVJfSkFWQQpTVEFHSU5HX0RJUl9OQVRJVkUK
+U1RBR0lOR19ESVJfVEFSR0VUClNUQUdJTkdfRVRDRElSClNUQUdJTkdfRVRDRElSX05BVElWRQpT
+VEFHSU5HX0ZJUk1XQVJFX0RJUgpTVEFHSU5HX0lOQ0RJUgpTVEFHSU5HX0lOQ0RJUl9OQVRJVkUK
+U1RBR0lOR19LRVJORUxfRElSClNUQUdJTkdfTElCRElSClNUQUdJTkdfTElCRElSX05BVElWRQpT
+VEFHSU5HX0xPQURFUl9ESVIKU1RBR0lOR19TSVBESVIKU1RBTVAKU1RSSVAKU1VCRElSClNZU0xJ
+TlVYTUVOVQpTWVNMSU5VWF9PUFRTClNZU1JPT1RfREVTVERJUgpTWVNST09UX0xPQ0sKVApUQVJH
+RVRfQVJDSApUQVJHRVRfQVJfS0VSTkVMX0FSQ0gKVEFSR0VUX0NDX0FSQ0gKVEFSR0VUX0NDX0tF
+Uk5FTF9BUkNIClRBUkdFVF9MRF9LRVJORUxfQVJDSApUQVJHRVRfT1MKVEFSR0VUX1BSRUZJWApU
+QVJHRVRfU1lTClRBUkdFVF9WRU5ET1IKVEVSTUNNRApURVJNQ01EUlVOClRFU1RMQUJfRElSClRN
+QUtFX1BST0ZJTEVTClRNUERJUgpUTVBfTE9DQUxFClRPTU9SUk9XClRPUERJUgpVQk9PVF9BUkNI
+ClVCT09UX0VOVFJZUE9JTlQKVUJPT1RfRU5UUllTWU1CT0wKVUJPT1RfTE9BREFERFJFU1MKVVNF
+X0RFVkZTClZBTEFGSUxFClZNQVJHUwpXT1JLRElSClhGQ0VfVkVSU0lPTgpYSUxJTlhfQk9BUkQK
+WElMSU5YX0JTUF9QQVRICllVTUFSR1MKWVVNQ09ORgo=
 
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> This email, including any attachments, is only for the intended
-> addressee.  It is subject to copyright, is confidential and may be
-> the subject of legal or other privilege, none of which is waived or
-> lost by reason of this transmission.
-> If the receiver is not the intended addressee, please accept our
-> apologies, notify us by return, delete all copies and perform no
-> other act on the email.
-> Unfortunately, we cannot warrant that the email has not been
->  altered or corrupted during transmission.
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-Please do not sent messages with such disclaimers to public lists if you
-can.
-
-
-Thanks,
-
-Paul
-
-
-[1] http://patchwork.openembedded.org/project/openembedded/
-
---=-40UtUPpHhgyDH8mwPeRQ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkujVBcACgkQPX1aK2wOHViWlgCePwrHBlycDOkfeawP3n0hiVGF
-X/0AnicOffA/5D3nlJOwTDLjqmv+VKg6
-=APUM
------END PGP SIGNATURE-----
-
---=-40UtUPpHhgyDH8mwPeRQ--
+--001636c924c2388da5048224fdd1--
