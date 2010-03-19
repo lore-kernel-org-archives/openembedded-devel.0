@@ -1,30 +1,45 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1NsjVz-0000p4-7y
+	(envelope-from <dp@xora.org.uk>) id 1NsjX1-0000wl-Hb
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Mar 2010 22:14:00 +0100
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NsjT0-00047f-48
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Mar 2010 00:10:50 +0300
-From: Roman I Khimov <roman@khimov.ru>
+	Fri, 19 Mar 2010 22:15:03 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 72BEA2C9B5
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Mar 2010 21:11:55 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id KaOgkEjhUF6M
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Mar 2010 21:11:54 +0000 (GMT)
+Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 803C42C99A
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Mar 2010 21:11:54 +0000 (GMT)
+Received: by xora-desktop.xora.org.uk (Postfix, from userid 500)
+	id 2926E27AD8; Fri, 19 Mar 2010 21:12:21 +0000 (GMT)
+Date: Fri, 19 Mar 2010 21:12:20 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 20 Mar 2010 00:08:19 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
-References: <1269004282-10732-1-git-send-email-khimov@altell.ru>
-In-Reply-To: <1269004282-10732-1-git-send-email-khimov@altell.ru>
+Message-ID: <20100319211220.GI2425@xora-desktop.xora.org.uk>
+References: <201003182212.31873.roman@khimov.ru>
+	<201003190004.37865.roman@khimov.ru>
+	<201003190023.36525.roman@khimov.ru>
+	<201003200005.35468.roman@khimov.ru>
 MIME-Version: 1.0
-Message-Id: <201003200008.19821.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+In-Reply-To: <201003200005.35468.roman@khimov.ru>
+User-Agent: Mutt/1.5.20 (2009-08-17)
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] squid: move potentially reusable in other versions parts to .inc files
+Subject: Re: [RFC/PATCH] Perl 5.10.1 and a bunch of modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,34 +53,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Mar 2010 21:14:00 -0000
-X-Groupsio-MsgNum: 17880
-Content-Type: multipart/signed; boundary="nextPart2447337.DkyYTX9qXG";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 19 Mar 2010 21:15:03 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
---nextPart2447337.DkyYTX9qXG
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: base64
+On Sat, Mar 20, 2010 at 12:05:35AM +0300, Roman I Khimov wrote:
+> =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
+=82 =D0=9F=D1=8F=D1=82=D0=BD=D0=B8=D1=86=D0=B0 19 =D0=BC=D0=B0=D1=80=D1=82=
+=D0=B0 2010 00:23:25 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Roman I Khimov =D0=BD=
+=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> > =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
+=82 =D0=9F=D1=8F=D1=82=D0=BD=D0=B8=D1=86=D0=B0 19 =D0=BC=D0=B0=D1=80=D1=82=
+=D0=B0 2010 00:04:30 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Roman I Khimov =D0=BD=
+=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> > > =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=
+=D1=82 =D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 18 =D0=BC=D0=B0=D1=80=D1=
+=82=D0=B0 2010 23:47:01 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Roman I Khimov=20
+> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> > > > No. You mean, this one?
+> > > > http://git.pokylinux.org/cgit.cgi/poky/commit/?id=3Dca5f36ee6ad75=
+6e1e5402
+> > > >88 a5 6a504c1d8ecc7a3
+> > > >
+> > > > Looks like a good thing to have, so if Richard will push it to OE=
+.dev I
+> > > > can do a rebase of my patchset.
+> > >
+> > > Actually, the better sequence is
+> > >  * drop 5.8.4 and 5.8.7
+> > >  * bring in staging changes
+> > >  * bring in 5.10.1
+> > >
+> > > I'll prepare 5.8.4/5.8.7 removal patch.
+> >=20
+> > Updated rik/perl-5.10 branch with removal patch, please ACK.
+>=20
+> Tried to compile for arm, succeeded with perl, discovered and fixed som=
+e=20
+> problems in modules. Updated the branch.
+>=20
+> I think I need some ACK's for dusty old Perl versions removal and then=20
+> Richard's Perl staging update could be merged better on top of that (CC=
+'ing=20
+> Richard) and than I'll update 5.10.1 to new staging and push the series=
+. At=20
+> least, that's how I think it should be. If there are any problems with =
+staging=20
+> update and it's not ready to be pushed in OE.dev, I think we can merge =
+5.10.1=20
+> as it is now.
+>=20
+For removal of old perl versions
 
-0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0J/Rj9GC0L3QuNGG0LAgMTkg0LzQsNGA0YLQsCAy
-MDEwIDE2OjExOjE1INCw0LLRgtC+0YAgUm9tYW4gSSBLaGltb3Yg0L3QsNC/0LjRgdCw0Ls6Cj4g
-U2lnbmVkLW9mZi1ieTogUm9tYW4gSSBLaGltb3YgPGtoaW1vdkBhbHRlbGwucnU+CgpJZiB0aGVy
-ZSBhcmUgbm8gb2JqZWN0aW9ucywgSSdtIHB1c2hpbmcgdGhlIHNlcmllcyB0b21vcnJvdy4KCi0t
-IAogaHR0cDovL3JvbWFuLmtoaW1vdi5ydQptYWlsdG86IHJvbWFuQGtoaW1vdi5ydQpncGcgLS1r
-ZXlzZXJ2ZXIgaGtwOi8vc3Via2V5cy5wZ3AubmV0IC0tcmVjdi1rZXlzIDB4RTVFMDU1QzMK
+Acked-by: Graeme Gregory <dp@xora.org.uk>
 
---nextPart2447337.DkyYTX9qXG
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
 
-iEYEABECAAYFAkuj58MACgkQXJ70z+XgVcOu7wCfcEYhuXoUvXgk0jOIn+v8uZek
-BEEAn1lyAZx3/d+PQQMKH+6BpmCm19OO
-=28A+
------END PGP SIGNATURE-----
-
---nextPart2447337.DkyYTX9qXG--
