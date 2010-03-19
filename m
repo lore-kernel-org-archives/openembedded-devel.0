@@ -1,43 +1,31 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NsZSx-0007q3-Az
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Mar 2010 11:30:08 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2JAR1cF014053
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Mar 2010 10:27:01 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 13768-05 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Mar 2010 10:26:57 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2JAQrmr014047
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Mar 2010 10:26:54 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+Received: from mail.gw90.de ([188.40.100.199])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NsZdo-00057f-FO for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Mar 2010 11:41:24 +0100
+Received: from f053035070.adsl.alicedsl.de ([78.53.35.70]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NsZar-0004o5-D5 for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Mar 2010 10:38:17 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hnviha$nf1$1@dough.gmane.org>
-References: <1268857354-30377-1-git-send-email-sledz@dresearch.de>
-	<1268990986.3893.5.camel@mattotaupa>  <hnviha$nf1$1@dough.gmane.org>
-Date: Fri, 19 Mar 2010 10:26:52 +0000
-Message-ID: <1268994412.4292.0.camel@rex>
+In-Reply-To: <4BA2BB92.1050703@tait.co.nz>
+References: <4BA2BB92.1050703@tait.co.nz>
+Date: Fri, 19 Mar 2010 11:38:15 +0100
+Message-ID: <1268995095.3893.20.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-MIME-Autoconverted: from 8bit to quoted-printable by tim.rpsys.net id
-	o2JAR1cF014053
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,
+	MIME_QP_LONG_LINE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] libunwind: new recipe
+Subject: Re: Patches and patchwork
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,40 +39,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Mar 2010 10:30:08 -0000
+X-List-Received-Date: Fri, 19 Mar 2010 10:41:24 -0000
+X-Groupsio-MsgNum: 17853
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-40UtUPpHhgyDH8mwPeRQ"
+
+--=-40UtUPpHhgyDH8mwPeRQ
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2010-03-19 at 11:09 +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+Am Freitag, den 19.03.2010, 12:47 +1300 schrieb Douglas Royds:
+> I have submitted a patch, and after discussion want to correct it.
 >=20
-> On 19-03-10 10:29, Paul Menzel wrote:
-> > Am Mittwoch, den 17.03.2010, 21:22 +0100 schrieb Steffen Sledz:
-> >=20
-> > [=E2=80=A6]
-> >=20
-> >> diff --git a/recipes/libunwind/libunwind.inc b/recipes/libunwind/lib=
-unwind.inc
-> >> new file mode 100644
-> >> index 0000000..8513dc2
-> >> --- /dev/null
-> >> +++ b/recipes/libunwind/libunwind.inc
-> >> @@ -0,0 +1,13 @@
-> >> +DESCRIPTION =3D "a portable and efficient C programming interface (=
-API) to determine the call-chain of a program"
-> >> +DEPENDS =3D ""
-> >=20
-> > Remove this empty variable?
->=20
-> I think that's meant to do what INHIBIT_DEFAULT_DEPS does, but I'm not =
-sure.
+> Do I submit the corrected patch as a reply to the existing email thread,=20
+> or start a new thread?
 
-FWIW, it won't do that. It does appear to be totally purposeless.
+In my opinion, if it is just a single patch and not a patch series a
+reply to the original message should sent.
 
-Cheers,
+The new patch should be marked with =C2=BBv2=C2=AB. (Look for `--subject-pr=
+efix`
+`git help format-patch`.)
 
-Richard
+> If I submit the new patch as a reply to the=20
+> existing thread, will patchwork pick up the corrected patch, or remain=20
+> on the original one?
+
+Patchwork will create a new item for this patch. Look at the IDs 1732
+and 1734 for my patches. (Although in this case the first version was
+the correct one.)
+
+You can update the state to superseded of the original patch using the
+Web interface or `pwclient` [1].
+
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> This email, including any attachments, is only for the intended
+> addressee.  It is subject to copyright, is confidential and may be
+> the subject of legal or other privilege, none of which is waived or
+> lost by reason of this transmission.
+> If the receiver is not the intended addressee, please accept our
+> apologies, notify us by return, delete all copies and perform no
+> other act on the email.
+> Unfortunately, we cannot warrant that the email has not been
+>  altered or corrupted during transmission.
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+Please do not sent messages with such disclaimers to public lists if you
+can.
 
 
+Thanks,
 
+Paul
+
+
+[1] http://patchwork.openembedded.org/project/openembedded/
+
+--=-40UtUPpHhgyDH8mwPeRQ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkujVBcACgkQPX1aK2wOHViWlgCePwrHBlycDOkfeawP3n0hiVGF
+X/0AnicOffA/5D3nlJOwTDLjqmv+VKg6
+=APUM
+-----END PGP SIGNATURE-----
+
+--=-40UtUPpHhgyDH8mwPeRQ--
