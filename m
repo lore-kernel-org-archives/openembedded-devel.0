@@ -1,22 +1,22 @@
 Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1NsjJy-0007U8-Nd
+	(envelope-from <roman@khimov.ru>) id 1NsjTX-0000ea-6d
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Mar 2010 22:01:35 +0100
+	Fri, 19 Mar 2010 22:11:29 +0100
 Received: from [93.100.16.104] (helo=mate.localnet)
 	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NsjGz-00045c-As
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Mar 2010 23:58:26 +0300
+	(Exim 4.69) (envelope-from <roman@khimov.ru>)
+	id 1NsjQU-000473-6M; Sat, 20 Mar 2010 00:08:15 +0300
 From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 Mar 2010 23:55:47 +0300
+Date: Sat, 20 Mar 2010 00:05:35 +0300
 User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
-References: <1239889359-13953-1-git-send-email-khimov@altell.ru>
-	<1268769038-30979-1-git-send-email-khimov@altell.ru>
-In-Reply-To: <1268769038-30979-1-git-send-email-khimov@altell.ru>
+References: <201003182212.31873.roman@khimov.ru>
+	<201003190004.37865.roman@khimov.ru>
+	<201003190023.36525.roman@khimov.ru>
+In-Reply-To: <201003190023.36525.roman@khimov.ru>
 MIME-Version: 1.0
-Message-Id: <201003192355.52441.roman@khimov.ru>
+Message-Id: <201003200005.35468.roman@khimov.ru>
 X-SA-Exim-Connect-IP: 89.223.109.22
 X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -25,7 +25,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] cmake.bbclass: force CMAKE_INSTALL_SO_NO_EXE to be 0
+Subject: Re: [RFC/PATCH] Perl 5.10.1 and a bunch of modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,50 +39,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Mar 2010 21:01:35 -0000
-X-Groupsio-MsgNum: 17878
-Content-Type: multipart/signed; boundary="nextPart1391538.pnYR30RZqa";
+X-List-Received-Date: Fri, 19 Mar 2010 21:11:29 -0000
+X-Groupsio-MsgNum: 17879
+Content-Type: multipart/signed; boundary="nextPart6960124.vSJjLNErtN";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
---nextPart1391538.pnYR30RZqa
+--nextPart6960124.vSJjLNErtN
 Content-Type: Text/Plain;
-  charset="utf-8"
+  charset="windows-1251"
 Content-Transfer-Encoding: quoted-printable
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 16 =D0=BC=D0=B0=D1=80=D1=82=D0=
-=B0 2010 22:50:38 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Roman I Khimov =D0=BD=D0=
-=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> By default cmake guesses whether install shared libaries with exec
-> permissions or not based on host distribution, so this behaviour
-> changes from host to host. OpenEmbedded assumes shared libraries to
-> be with exec permissions (reverse way brakes stripping, for example),
-> so let's force this in cmake configure invocation.
+=C2 =F1=EE=EE=E1=F9=E5=ED=E8=E8 =EE=F2 =CF=FF=F2=ED=E8=F6=E0 19 =EC=E0=F0=
+=F2=E0 2010 00:23:25 =E0=E2=F2=EE=F0 Roman I Khimov =ED=E0=EF=E8=F1=E0=EB:
+> =C2 =F1=EE=EE=E1=F9=E5=ED=E8=E8 =EE=F2 =CF=FF=F2=ED=E8=F6=E0 19 =EC=E0=F0=
+=F2=E0 2010 00:04:30 =E0=E2=F2=EE=F0 Roman I Khimov =ED=E0=EF=E8=F1=E0=EB:
+> > =C2 =F1=EE=EE=E1=F9=E5=ED=E8=E8 =EE=F2 =D7=E5=F2=E2=E5=F0=E3 18 =EC=E0=
+=F0=F2=E0 2010 23:47:01 =E0=E2=F2=EE=F0 Roman I Khimov=20
+=ED=E0=EF=E8=F1=E0=EB:
+> > > No. You mean, this one?
+> > > http://git.pokylinux.org/cgit.cgi/poky/commit/?id=3Dca5f36ee6ad756e1e=
+5402
+> > >88 a5 6a504c1d8ecc7a3
+> > >
+> > > Looks like a good thing to have, so if Richard will push it to OE.dev=
+ I
+> > > can do a rebase of my patchset.
+> >
+> > Actually, the better sequence is
+> >  * drop 5.8.4 and 5.8.7
+> >  * bring in staging changes
+> >  * bring in 5.10.1
+> >
+> > I'll prepare 5.8.4/5.8.7 removal patch.
+>=20
+> Updated rik/perl-5.10 branch with removal patch, please ACK.
 
-So, I've rebased that to current, it looks like an obvious one and still no=
+Tried to compile for arm, succeeded with perl, discovered and fixed some=20
+problems in modules. Updated the branch.
+
+I think I need some ACK's for dusty old Perl versions removal and then=20
+Richard's Perl staging update could be merged better on top of that (CC'ing=
 =20
-one cares. As per policy, I need two ack's on this one. Should I break that=
+Richard) and than I'll update 5.10.1 to new staging and push the series. At=
 =20
-and push it or just wait another year till someone else interested in cmake=
-=20
-will ack it?
+least, that's how I think it should be. If there are any problems with stag=
+ing=20
+update and it's not ready to be pushed in OE.dev, I think we can merge 5.10=
+=2E1=20
+as it is now.
 
 =2D-=20
  http://roman.khimov.ru
 mailto: roman@khimov.ru
 gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
---nextPart1391538.pnYR30RZqa
+--nextPart6960124.vSJjLNErtN
 Content-Type: application/pgp-signature; name=signature.asc 
 Content-Description: This is a digitally signed message part.
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.12 (GNU/Linux)
 
-iEYEABECAAYFAkuj5NgACgkQXJ70z+XgVcM06gCgwlhdVg/Yckff3xmwxByFDX6w
-BhsAoLo8TpDLEpn2FkvTD6Bzg74gooxx
-=rWhN
+iEYEABECAAYFAkuj5x8ACgkQXJ70z+XgVcMXSACgkLGRdVrqiSJe6SiXotaj/nX6
+7qoAoK8/Db7ulMAxE9U9PqOHfvm+8W2d
+=5I7l
 -----END PGP SIGNATURE-----
 
---nextPart1391538.pnYR30RZqa--
+--nextPart6960124.vSJjLNErtN--
