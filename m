@@ -1,45 +1,43 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1Nsk6a-0007Wz-0f
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 19 Mar 2010 22:51:44 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id B54C62C9BE
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nsl1e-0003G0-Rc for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Mar 2010 23:50:47 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nskyh-0003mw-9r for openembedded-devel@lists.openembedded.org;
+	Fri, 19 Mar 2010 23:47:39 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 Mar 2010 23:47:39 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Mar 2010 21:48:39 +0000 (GMT)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id x483hteU1C6x
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Mar 2010 21:48:39 +0000 (GMT)
-Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 277E12C99A
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Mar 2010 21:48:39 +0000 (GMT)
-Received: by xora-desktop.xora.org.uk (Postfix, from userid 500)
-	id 2F83627B0F; Fri, 19 Mar 2010 21:49:07 +0000 (GMT)
-Date: Fri, 19 Mar 2010 21:49:07 +0000
-From: Graeme Gregory <dp@xora.org.uk>
+	Fri, 19 Mar 2010 23:47:39 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100319214907.GN2425@xora-desktop.xora.org.uk>
-References: <1239889359-13953-1-git-send-email-khimov@altell.ru>
-	<1268769038-30979-1-git-send-email-khimov@altell.ru>
-	<201003192355.52441.roman@khimov.ru>
-	<bd4a003f1003191434t57c3f126gdc0f53790ef75aed@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <bd4a003f1003191434t57c3f126gdc0f53790ef75aed@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-08-17)
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 19 Mar 2010 23:47:16 +0100
+Message-ID: <ho0utk$tqs$1@dough.gmane.org>
+References: <201003182212.31873.roman@khimov.ru>	<201003190004.37865.roman@khimov.ru>	<201003190023.36525.roman@khimov.ru>	<201003200005.35468.roman@khimov.ru>
+	<20100319211220.GI2425@xora-desktop.xora.org.uk>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100314 Shredder/3.0.4pre
+In-Reply-To: <20100319211220.GI2425@xora-desktop.xora.org.uk>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] cmake.bbclass: force CMAKE_INSTALL_SO_NO_EXE to be 0
+Subject: Re: [RFC/PATCH] Perl 5.10.1 and a bunch of modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,27 +51,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 Mar 2010 21:51:44 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 19 Mar 2010 22:50:47 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Fri, Mar 19, 2010 at 02:34:56PM -0700, Ash Charles wrote:
-> On Fri, Mar 19, 2010 at 1:55 PM, Roman I Khimov <roman@khimov.ru> wrote:
-> > So, I've rebased that to current, it looks like an obvious one and still no
-> > one cares. As per policy, I need two ack's on this one. Should I break that
-> > and push it or just wait another year till someone else interested in cmake
-> > will ack it?
-> 
-> Hi Roman,
-> 
-> I'm not in a position to ack this as I'm new to this mailing list. I
-> use OpenEmbedded+Cmake for several projects though and this looks like
-> a sensible fix.
-> 
-Ash, if you can verify the change then please Ack, we arent as strict
-as other projects.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Graeme
+On 19-03-10 22:12, Graeme Gregory wrote:
+> On Sat, Mar 20, 2010 at 12:05:35AM +0300, Roman I Khimov wrote:
+>> В сообщении от Пятница 19 марта 2010 00:23:25 автор Roman I Khimov написал:
+>>> В сообщении от Пятница 19 марта 2010 00:04:30 автор Roman I Khimov написал:
+>>>> В сообщении от Четверг 18 марта 2010 23:47:01 автор Roman I Khimov 
+>> написал:
+>>>>> No. You mean, this one?
+>>>>> http://git.pokylinux.org/cgit.cgi/poky/commit/?id=ca5f36ee6ad756e1e5402
+>>>>> 88 a5 6a504c1d8ecc7a3
+>>>>>
+>>>>> Looks like a good thing to have, so if Richard will push it to OE.dev I
+>>>>> can do a rebase of my patchset.
+>>>>
+>>>> Actually, the better sequence is
+>>>>  * drop 5.8.4 and 5.8.7
+>>>>  * bring in staging changes
+>>>>  * bring in 5.10.1
+>>>>
+>>>> I'll prepare 5.8.4/5.8.7 removal patch.
+>>>
+>>> Updated rik/perl-5.10 branch with removal patch, please ACK.
+>>
+>> Tried to compile for arm, succeeded with perl, discovered and fixed some 
+>> problems in modules. Updated the branch.
+>>
+>> I think I need some ACK's for dusty old Perl versions removal and then 
+>> Richard's Perl staging update could be merged better on top of that (CC'ing 
+>> Richard) and than I'll update 5.10.1 to new staging and push the series. At 
+>> least, that's how I think it should be. If there are any problems with staging 
+>> update and it's not ready to be pushed in OE.dev, I think we can merge 5.10.1 
+>> as it is now.
+>>
+> For removal of old perl versions
+> 
+> Acked-by: Graeme Gregory <dp@xora.org.uk>
+
+Acked-by: Koen Kooi <koen@openembedded.org>
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLo/70MkyGM64RGpERAixEAJwJOkgBATjeiofMEyyZGpH4WhMk8ACeMn2t
+4wFDmIwNNd1tgnO0Syx94dE=
+=Vzni
+-----END PGP SIGNATURE-----
 
 
 
