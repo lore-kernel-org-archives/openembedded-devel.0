@@ -1,46 +1,44 @@
 Received: from qw-out-1920.google.com ([74.125.92.147])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1NspIJ-0001jJ-TD
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 20 Mar 2010 04:24:28 +0100
-Received: by qw-out-1920.google.com with SMTP id 5so613765qwc.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 Mar 2010 20:20:58 -0700 (PDT)
+	(envelope-from <kergoth@gmail.com>) id 1NspJm-0005Dt-Ca
+	for openembedded-devel@openembedded.org; Sat, 20 Mar 2010 04:26:27 +0100
+Received: by qw-out-1920.google.com with SMTP id 4so4427qwk.6
+	for <openembedded-devel@openembedded.org>;
+	Fri, 19 Mar 2010 20:22:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:sender:received:in-reply-to
 	:references:from:date:x-google-sender-auth:message-id:subject:to
-	:content-type; bh=fFlPYvAebEzznVl1sxVNOMFKcaXibj+pdmLEurIUgOY=;
-	b=gseROKMhb+4AsuNJJeHPeZH7/GHDdhAbMkKJYDmJS8ZI0BpnHNORX1kWfOKaPCXEob
-	3mCgUZV6JnsjInaeajvBsfNarQ8jeTGzjZdfvA0nV2PKkZilwkgU2PUq24b8YigilTZ/
-	UGcgMxd5hknQQJkw7ip4ABqvPVwSZ+aCXEbe0=
+	:content-type; bh=ptb4pSxhCZGWPXGrHmaHsg2ppOszVdggEk4Z7mfyIpY=;
+	b=Oe05sIUtmktQ3aq2YqPrqSZR+UXMP34Sj/n9Tfy5p7j+7cDWoOuD9RhbSSWpf5Rsae
+	udpdiy89wb9OaVFL5Rbm1zcjKn3vU10FHc4XWSZo+6p/sdZocThdIwRap7WVhru8QIhU
+	5oVh3zmhIp/mT+ZCsnliPrKJoA16MNVYOG0nE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:from:date
 	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=U7TOyiR8VoOAcdZBuGetm5GSX07HzwEaJvwWr6asRfYJUgaLgwZeKtZdJMf3ZPCbAW
-	vktL32F+dUk00IF0xmo7d6SwiOLNmbd6oUFmUoFU/zyg/nNQ9rMaiK2fZXbU0v2SmQnf
-	0UIwaEgyiNPuPy8LAn9wN7WvQUl8t2K+pZcuE=
+	b=WPP/mAHtn/D+5Vy9qdhRAuVpxu7M4fO7G78852AjyBLsKUm9QFpGoKodzAKunCt2IF
+	pPe60FBuSqffBfkuLqWSdnnZo9bQEEdisfvn8+mcRGzWmuCoQ1sG+y6YeY4SK17DjTIn
+	7mdePmM0P/g8C8+D6dNCk+L7yiR4nXwaWjHM4=
 MIME-Version: 1.0
 Sender: kergoth@gmail.com
-Received: by 10.229.222.205 with SMTP id ih13mr959871qcb.73.1269055258171; 
-	Fri, 19 Mar 2010 20:20:58 -0700 (PDT)
-In-Reply-To: <b6ebd0a51003192016t785699a7k486eadafab4307cf@mail.gmail.com>
-References: <4BA43A58.905@mwester.net>
-	<b6ebd0a51003192016t785699a7k486eadafab4307cf@mail.gmail.com>
+Received: by 10.229.129.29 with SMTP id m29mr514465qcs.33.1269055358274; Fri, 
+	19 Mar 2010 20:22:38 -0700 (PDT)
+In-Reply-To: <b6ebd0a51003170817y1f81a222kc691f85c50dd312@mail.gmail.com>
+References: <b6ebd0a51003170817y1f81a222kc691f85c50dd312@mail.gmail.com>
 From: Chris Larson <clarson@kergoth.com>
-Date: Fri, 19 Mar 2010 20:20:38 -0700
-X-Google-Sender-Auth: 4d479bb1108cb096
-Message-ID: <b6ebd0a51003192020j2f99555dxf22ad6e8eed78061@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+Date: Fri, 19 Mar 2010 20:22:18 -0700
+X-Google-Sender-Auth: 10824a773e684e53
+Message-ID: <b6ebd0a51003192022i6b9ba57bw7dbd771fbe7e9a64@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-SA-Exim-Connect-IP: 74.125.92.147
 X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Patch "Don't inherit siteinfo in base.bbclass" breaks SlugOS
+Subject: Re: do_unpack
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,70 +52,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Mar 2010 03:24:33 -0000
+X-List-Received-Date: Sat, 20 Mar 2010 03:27:10 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Should be fixed now.
+Did anyone have a chance to take a look at the linked commit? :)
 
-On Fri, Mar 19, 2010 at 8:16 PM, Chris Larson <clarson@kergoth.com> wrote:
+On Wed, Mar 17, 2010 at 8:17 AM, Chris Larson <clarson@kergoth.com> wrote:
 
-> Damn, I fixed all the recipes using SITEINFO, but missed distros, sorry
-> about that.
-> I'd suggest doing INHERIT += "siteinfo" in the distro .conf, for now.
->  Again, sorry about the breakage.
+> Greetings all,
 >
->
-> On Fri, Mar 19, 2010 at 8:00 PM, Mike Westerhof <mike@mwester.net> wrote:
->
->> The following commit breaks SlugOS.  I apologize for starting a new
->> thread on this, but I am unable to find the original discussion on the
->> OE ml (but I probably missed it in the several hundred that piled up in
->> my inbox this week).
->>
->> ------------
->> commit a215c2f283476776567506c2e3f969c48f7e5e3d
->> Author: Chris Larson <chris_larson@mentor.com>
->> Date:   Tue Mar 9 16:54:57 2010 -0700
->>
->>    Don't inherit siteinfo in base.bbclass
->>
->>    Acked-by: Richard Purdie <rpurdie@linux.intel.com>
->>    Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
->>    Signed-off-by: Chris Larson <chris_larson@mentor.com>
->> ------------
->>
->> In a nutshell, the ixp4xx can run in either endianess, and SlugOS builds
->> both a BE and an LE image.  Removing "inherit siteinfo" from
->> base.bbclass causes parsing failures in every recipe.
->>
->> As an example of the issue, consider this lines in
->> conf/distro/include/slugos.conf:
->>
->> IMAGE_BASENAME = "${@['slugos${SITEINFO_ENDIANESS}',
->> 'ucslugc'][bb.data.getVar('TARGET_OS', d, 1) == 'linux-uclibc']}"
->>
->> and
->>
->> DISTRO_NAME ?=
->> "INVALID-${SITEINFO_ENDIANESS}-${ARM_INSTRUCTION_SET}-${TARGET_OS}"
->>
->> There may be other locations (such as recipes, etc) where this problem
->> may exist, these were just the two locations I found easily.
->>
->> Any ideas how to address this?
->>
->> -Mike (mwester)
->>
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
->
->
+> The other day I threw together a proof of concept of do_unpack using the
+> python modules for the archives.. sadly, the performance is such that we
+> should likely stick to our current method, though it results in a lot of
+> extra dependencies.  See
+> http://github.com/kergoth/OpenEmbedded/commits/kergoth/unpack.  In the
+> process, however, I did do a bit of cleanup / reorg that I think we may want
+> to pull in.
+> http://github.com/kergoth/OpenEmbedded/commit/3def3ba3d4860983f2d8f082eb528c4b84f83b50 I think it's an improvement, though I admit that the way I pass in the parm
+> and env is lame.  I wanted to avoid passing in the datastore or url
+> directly, limiting oe_unpack_file's knowledge to the source, destination,
+> and options.  Thoughts?
 > --
 > Christopher Larson
 > clarson at kergoth dot com
