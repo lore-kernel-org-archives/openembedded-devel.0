@@ -1,44 +1,37 @@
-Received: from qw-out-1920.google.com ([74.125.92.147])
+Received: from ey-out-1920.google.com ([74.125.78.144])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1NspJm-0005Dt-Ca
-	for openembedded-devel@openembedded.org; Sat, 20 Mar 2010 04:26:27 +0100
-Received: by qw-out-1920.google.com with SMTP id 4so4427qwk.6
-	for <openembedded-devel@openembedded.org>;
-	Fri, 19 Mar 2010 20:22:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to
-	:content-type; bh=ptb4pSxhCZGWPXGrHmaHsg2ppOszVdggEk4Z7mfyIpY=;
-	b=Oe05sIUtmktQ3aq2YqPrqSZR+UXMP34Sj/n9Tfy5p7j+7cDWoOuD9RhbSSWpf5Rsae
-	udpdiy89wb9OaVFL5Rbm1zcjKn3vU10FHc4XWSZo+6p/sdZocThdIwRap7WVhru8QIhU
-	5oVh3zmhIp/mT+ZCsnliPrKJoA16MNVYOG0nE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=WPP/mAHtn/D+5Vy9qdhRAuVpxu7M4fO7G78852AjyBLsKUm9QFpGoKodzAKunCt2IF
-	pPe60FBuSqffBfkuLqWSdnnZo9bQEEdisfvn8+mcRGzWmuCoQ1sG+y6YeY4SK17DjTIn
-	7mdePmM0P/g8C8+D6dNCk+L7yiR4nXwaWjHM4=
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.129.29 with SMTP id m29mr514465qcs.33.1269055358274; Fri, 
-	19 Mar 2010 20:22:38 -0700 (PDT)
-In-Reply-To: <b6ebd0a51003170817y1f81a222kc691f85c50dd312@mail.gmail.com>
-References: <b6ebd0a51003170817y1f81a222kc691f85c50dd312@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Fri, 19 Mar 2010 20:22:18 -0700
-X-Google-Sender-Auth: 10824a773e684e53
-Message-ID: <b6ebd0a51003192022i6b9ba57bw7dbd771fbe7e9a64@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 74.125.92.147
-X-SA-Exim-Mail-From: kergoth@gmail.com
+	(envelope-from <koen@dominion.thruhere.net>) id 1NstzG-0003Mv-BP
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 20 Mar 2010 09:24:56 +0100
+Received: by ey-out-1920.google.com with SMTP id 26so70920eyw.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 20 Mar 2010 01:21:46 -0700 (PDT)
+Received: by 10.213.39.66 with SMTP id f2mr3259634ebe.77.1269073306143;
+	Sat, 20 Mar 2010 01:21:46 -0700 (PDT)
+Received: from [172.20.1.12] (s55917625.adsl.wanadoo.nl [85.145.118.37])
+	by mx.google.com with ESMTPS id 15sm1435787ewy.12.2010.03.20.01.21.44
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 20 Mar 2010 01:21:44 -0700 (PDT)
+References: <20100319225408.8511.74339.stgit@icarus>
+Message-Id: <596CA0F5-91C1-47AD-987E-E81DAA7F9E94@dominion.thruhere.net>
+From: Koen Kooi <koen@dominion.thruhere.net>
+To: Martyn Welch <martyn@welchs.me.uk>
+In-Reply-To: <20100319225408.8511.74339.stgit@icarus>
+X-Mailer: iPhone Mail (7E18)
+Mime-Version: 1.0 (iPhone Mail 7E18)
+Date: Sat, 20 Mar 2010 09:21:07 +0100
+X-SA-Exim-Connect-IP: 74.125.78.144
+X-SA-Exim-Mail-From: koen@dominion.thruhere.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: do_unpack
+Cc: "koen@openembedded.org" <koen@openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] gypsy: Add version 0.7, remove broken svn recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,40 +45,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 Mar 2010 03:27:10 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 20 Mar 2010 08:24:56 -0000
+Content-Type: text/plain;
+	charset=us-ascii;
+	format=flowed;
+	delsp=yes
+Content-Transfer-Encoding: 7bit
 
-Did anyone have a chance to take a look at the linked commit? :)
+Acked-by: Koen Kooi <koen@dominion.thruhere.net>
 
-On Wed, Mar 17, 2010 at 8:17 AM, Chris Larson <clarson@kergoth.com> wrote:
+Op 19 mrt 2010 om 23:54 heeft Martyn Welch <martyn@welchs.me.uk> het  
+volgende geschreven:\
 
-> Greetings all,
+> Svn package no longer provided at o-hand. Remove it and replace with
+> version 0.7 from the projects website.
 >
-> The other day I threw together a proof of concept of do_unpack using the
-> python modules for the archives.. sadly, the performance is such that we
-> should likely stick to our current method, though it results in a lot of
-> extra dependencies.  See
-> http://github.com/kergoth/OpenEmbedded/commits/kergoth/unpack.  In the
-> process, however, I did do a bit of cleanup / reorg that I think we may want
-> to pull in.
-> http://github.com/kergoth/OpenEmbedded/commit/3def3ba3d4860983f2d8f082eb528c4b84f83b50 I think it's an improvement, though I admit that the way I pass in the parm
-> and env is lame.  I wanted to avoid passing in the datastore or url
-> directly, limiting oe_unpack_file's knowledge to the source, destination,
-> and options.  Thoughts?
-> --
-> Christopher Larson
-> clarson at kergoth dot com
-> Founder - BitBake, OpenEmbedded, OpenZaurus
-> Maintainer - Tslib
-> Senior Software Engineer, Mentor Graphics
+> Signed-off-by: Martyn Welch <martyn@welchs.me.uk>
+> ---
+>
+> recipes/gypsy/gypsy_0.7.bb |   10 ++++++++++
+> recipes/gypsy/gypsy_svn.bb |   10 ----------
+> 2 files changed, 10 insertions(+), 10 deletions(-)
+> create mode 100644 recipes/gypsy/gypsy_0.7.bb
+> delete mode 100644 recipes/gypsy/gypsy_svn.bb
+>
+> diff --git a/recipes/gypsy/gypsy_0.7.bb b/recipes/gypsy/gypsy_0.7.bb
+> new file mode 100644
+> index 0000000..9c1fb41
+> --- /dev/null
+> +++ b/recipes/gypsy/gypsy_0.7.bb
+> @@ -0,0 +1,10 @@
+> +require gypsy.inc
+> +
+> +SRC_URI = "http://gypsy.freedesktop.org/gypsy-releases/gypsy-0.7.tar.gz;name=gypsy 
+>  \
+> +           file://docs-reference-am.patch;patch=1 \
+> +           file://remove-werror.patch;patch=1 \
+> +"
+> +
+> +SRC_URI[gypsy.md5sum] = "cde52c121693014efa75d9098fd7de22"
+> +SRC_URI[gypsy.sha256sum] =  
+> "60d9f9ada77c832899df4a164718895addc5015fa48f45fd58dc4bc8a983f205"
+> +
+> diff --git a/recipes/gypsy/gypsy_svn.bb b/recipes/gypsy/gypsy_svn.bb
+> deleted file mode 100644
+> index 0245a95..0000000
+> --- a/recipes/gypsy/gypsy_svn.bb
+> +++ /dev/null
+> @@ -1,10 +0,0 @@
+> -require gypsy.inc
+> -
+> -SRC_URI = "svn://svn.o-hand.com/repos/${PN}/trunk;module=$ 
+> {PN};proto=http \
+> -           file://fixups.patch;patch=1;maxrev=107 \
+> -           file://docs-reference-am.patch;patch=1;minrev=134 \
+> -           file://remove-werror.patch;patch=1"
+> -S = "${WORKDIR}/${PN}"
+> -
+> -PV = "0.0+svnr${SRCPV}"
+> -PR = "r1"
+>
 >
 
-
-
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
