@@ -1,39 +1,32 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1NtJPQ-0003q9-Ka
+	(envelope-from <roman@khimov.ru>) id 1NtJeo-0006j5-HN
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 21 Mar 2010 12:33:37 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 2D69F2C7E3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Mar 2010 11:30:16 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id wdimEosUi-vk
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Mar 2010 11:30:11 +0000 (UTC)
-Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
-	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTPSA id D23282C80C
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Mar 2010 11:30:10 +0000 (UTC)
-Message-ID: <4BA60357.6070401@gmail.com>
-Date: Sun, 21 Mar 2010 12:30:31 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
-MIME-Version: 1.0
+	Sun, 21 Mar 2010 12:49:30 +0100
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NtJbn-0007Gq-VP
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 21 Mar 2010 14:46:21 +0300
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-References: <1268609630.3809.13.camel@mattotaupa>
-In-Reply-To: <1268609630.3809.13.camel@mattotaupa>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+Date: Sun, 21 Mar 2010 14:43:43 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
+References: <1239889359-13953-1-git-send-email-khimov@altell.ru>
+	<20100319214907.GN2425@xora-desktop.xora.org.uk>
+	<bd4a003f1003191643m15c0aa40id914236ef35ce037@mail.gmail.com>
+In-Reply-To: <bd4a003f1003191643m15c0aa40id914236ef35ce037@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201003211443.46205.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.1 required=5.0 tests=AWL,BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: enna: Does someone have an updated recipe for geexbox repositories?
+Subject: Re: [PATCH] cmake.bbclass: force CMAKE_INSTALL_SO_NO_EXE to be0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,43 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Mar 2010 11:33:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 21 Mar 2010 11:49:30 -0000
+X-Groupsio-MsgNum: 17903
+Content-Type: multipart/signed; boundary="nextPart1383961.fRtb4id5mx";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-Paul Menzel ha scritto, Il 15/03/2010 00:33:
-> Dear OE folks,
->=20
->=20
->         $ bitbake enna
->         [=E2=80=A6]
->         ERROR: Task 7 (/srv/oe/openembedded/recipes/e17/enna_svn.bb, do=
-_configure) failed
->         [=E2=80=A6]
->         $ more /srv/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/=
-enna-0.2.0+svnr46510-r1/enna/README
->         Enna have been removed from E SVN (at svn rev 42500).
->         Development continue in geexbox repositories.
->         You can find more informations here :
->         http://enna.geexbox.org
->        =20
->         And you can get development version here :
->         hg clone http://hg.geexbox.org/enna
->=20
-> Did someone already do the work to create an updated recipe? If not I
-> will try to update/convert the recipe tomorrow.
->=20
+--nextPart1383961.fRtb4id5mx
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Paul,
-Yes, I am inteested too to GeexBox and Enna, and I am in direct contact
-with their developers.
-If you need help, do not esitate to contact me directly ;-)
+0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0KHRg9Cx0LHQvtGC0LAgMjAg0LzQsNGA0YLQsCAy
+MDEwIDAyOjQzOjUwINCw0LLRgtC+0YAgQXNoIENoYXJsZXMg0L3QsNC/0LjRgdCw0Ls6Cj4gQWNr
+ZWQtYnk6IEFzaCBDaGFybGVzIDxhc2hjaGFybGVzQGdtYWlsLmNvbT4KCtCSINGB0L7QvtCx0YnQ
+tdC90LjQuCDQvtGCINCS0L7RgdC60YDQtdGB0LXQvdGM0LUgMjEg0LzQsNGA0YLQsCAyMDEwIDEw
+OjA1OjA3INCw0LLRgtC+0YAgS2hlbSBSYWog0L3QsNC/0LjRgdCw0Ls6Cj4gQWNrZWQtYnk6IEto
+ZW0gUmFqIDxyYWoua2hlbUBnbWFpbC5jb20+CgpUaGFua3MsIHB1c2hlZC4KCi0tIAogaHR0cDov
+L3JvbWFuLmtoaW1vdi5ydQptYWlsdG86IHJvbWFuQGtoaW1vdi5ydQpncGcgLS1rZXlzZXJ2ZXIg
+aGtwOi8vc3Via2V5cy5wZ3AubmV0IC0tcmVjdi1rZXlzIDB4RTVFMDU1QzMK
 
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
+--nextPart1383961.fRtb4id5mx
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
 
+iEYEABECAAYFAkumBnIACgkQXJ70z+XgVcOHUgCcD4gi4eN12QXFK15sFycMN+18
+ECcAoMXrS508wVOH95wMCkyipJYMSZgO
+=WZQ0
+-----END PGP SIGNATURE-----
+
+--nextPart1383961.fRtb4id5mx--
