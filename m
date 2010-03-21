@@ -1,50 +1,44 @@
-Received: from mail-gx0-f224.google.com ([209.85.217.224])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Nt9GC-0003bE-4y
+	(envelope-from <raj.khem@gmail.com>) id 1NtFEX-0000Lr-Hn
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 21 Mar 2010 01:43:24 +0100
-Received: by gxk24 with SMTP id 24so616757gxk.7
+	Sun, 21 Mar 2010 08:06:06 +0100
+Received: by gye5 with SMTP id 5so2061815gye.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 Mar 2010 17:40:13 -0700 (PDT)
+	Sun, 21 Mar 2010 00:02:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=HditVWuA1TurhvSv34IewgwY0cK7PoV5DCDcscECvmA=;
-	b=aRYdzSXPaLKAqiGfURH5g6+G2BYbKaME13rkthQy3etpC4nAk8nLv2blB05lVB0LBK
-	QszbeFa7jWq8v+c6OMFz/cu6rIyyDvTJH2S2a96xHrGg8OpkqSGEtCaVewUkN7gCE0DD
-	bCdkYx9hrhI+twDkkKeRu6nidB7+VjB3t6hig=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=4vYmexhlTSu80tD8ZzrYYr6M0YGz1J9OJvi44r2I/AU=;
+	b=qX3CY4QUCk5+smG78L0zazd9lz032v1xQqFoKHbL00QgI2BGHIE1uafOBAsqM/D6qV
+	KypH8vxx3wv15xL0NaazikPYFSlRYo7qreuqomhtJDdqQ1Zojk8ZGa2ZBvJB+4i+SBfR
+	nDMSiq2LjuRmRd0IBkU8/2stqxVd45nGZ8rf4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=KFNrcB+ekJ29nYOtyTkQr0N6PG92Fhban856zKNh4T6y+pvq5uIDDoDVfcCtuDM8qB
-	6JAHIAB9F/OJRkK8i+vARNoHhfMUZoSrqEJszIL7F0QpBPQbZiDbpxT7LgmZBkadJHkG
-	gmA4fmIRUXWZnWL29sik9VvWTrdb1drhExgok=
-Received: by 10.91.164.5 with SMTP id r5mr2508743ago.95.1269132013050;
-	Sat, 20 Mar 2010 17:40:13 -0700 (PDT)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id 22sm1309456iwn.4.2010.03.20.17.40.11
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 20 Mar 2010 17:40:12 -0700 (PDT)
-Date: Sat, 20 Mar 2010 17:40:10 -0700
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=cjvxiQcHtFFTVdq53q76gatPNI2Uxnhm4G2Fji1nNKw2Jrzg6Yvv8N8+7E9Kg2x6s0
+	IcCM8V8P3dMz+f3188fZ0vMLU9tT/fkO3ApX5RWd2M/BvmuRsVq+uTSQfTty6QPW/FcE
+	Jv+QtOkRSOmzgkNQCP+iXDaK2fPzPod95DrVQ=
+MIME-Version: 1.0
+Received: by 10.151.86.14 with SMTP id o14mr4910721ybl.43.1269154973668; Sun, 
+	21 Mar 2010 00:02:53 -0700 (PDT)
+In-Reply-To: <201003200008.19821.roman@khimov.ru>
+References: <1269004282-10732-1-git-send-email-khimov@altell.ru>
+	<201003200008.19821.roman@khimov.ru>
+Date: Sun, 21 Mar 2010 00:02:53 -0700
+Message-ID: <19c1b8a91003210002y23da07e8q345cc0304190caaa@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100321004010.GC4351@gmail.com>
-References: <1267790132-25931-1-git-send-email-Martin.Jansa@gmail.com>
-	<1267790132-25931-3-git-send-email-Martin.Jansa@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1267790132-25931-3-git-send-email-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.217.224
+X-SA-Exim-Connect-IP: 209.85.160.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2] util-linux-ng: use u-a for /etc/default/mountall (collision with busybox-mountall)
+Subject: Re: [PATCH] squid: move potentially reusable in other versions parts to .inc files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,66 +52,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Mar 2010 00:43:24 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 21 Mar 2010 07:06:06 -0000
+Content-Type: text/plain; charset=KOI8-R
+Content-Transfer-Encoding: quoted-printable
 
-On (05/03/10 12:55), Martin Jansa wrote:
+On Fri, Mar 19, 2010 at 2:08 PM, Roman I Khimov <roman@khimov.ru> wrote:
+> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=D1=D4=CE=C9=C3=C1 19 =CD=C1=D2=
+=D4=C1 2010 16:11:15 =C1=D7=D4=CF=D2 Roman I Khimov =CE=C1=D0=C9=D3=C1=CC:
+>> Signed-off-by: Roman I Khimov <khimov@altell.ru>
+>
+> If there are no objections, I'm pushing the series tomorrow.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  recipes/util-linux-ng/util-linux-ng.inc |   13 ++++++++++---
->  1 files changed, 10 insertions(+), 3 deletions(-)
-> 
-> diff --git a/recipes/util-linux-ng/util-linux-ng.inc b/recipes/util-linux-ng/util-linux-ng.inc
-> index 7f4333b..031b80b 100644
-> --- a/recipes/util-linux-ng/util-linux-ng.inc
-> +++ b/recipes/util-linux-ng/util-linux-ng.inc
-> @@ -7,7 +7,7 @@ inherit autotools
->  
->  DEFAULT_PREFERENCE = "-1"
->  
-> -INC_PR = "r9"
-> +INC_PR = "r10"
->  
->  # allows for a release candidate
->  RC ?= ""
-> @@ -46,7 +46,7 @@ FILES_util-linux-ng-umount = "${base_bindir}/umount.${PN}"
->  FILES_util-linux-ng-readprofile = "${base_sbindir}/readprofile.${PN}"
->  
->  PACKAGES =+ "${PN}-mountall"
-> -FILES_${PN}-mountall = "${sysconfdir}/default/mountall"
-> +FILES_${PN}-mountall = "${sysconfdir}/default/mountall.${PN}"
->  RREPLACES_${PN}-mountall = "busybox-mountall"
->  
->  RRECOMMENDS_${PN} = "util-linux-ng-fdisk util-linux-ng-cfdisk util-linux-ng-sfdisk util-linux-ng-mount util-linux-ng-readprofile "
-> @@ -152,7 +152,7 @@ do_install () {
->          done
->  
->  	install -d ${D}${sysconfdir}/default/
-> -	echo 'MOUNTALL="-t nonfs,nosmbfs,noncpfs"' > ${D}${sysconfdir}/default/mountall
-> +	echo 'MOUNTALL="-t nonfs,nosmbfs,noncpfs"' > ${D}${sysconfdir}/default/mountall.${PN}
->  
->  	rm ${D}${sbindir}/swapoff -f
->  	ln -sf ${base_sbindir}/swapon.${PN} ${D}${base_sbindir}/swapoff.${PN}
-> @@ -269,3 +269,10 @@ pkg_prerm_util-linux-ng-readprofile () {
->      update-alternatives --remove readprofile readprofile.${PN} 100
->  }
->  
-> +pkg_postinst_util-linux-ng-mountall () {
-> +        update-alternatives --install ${sysconfdir}/default/mountall default_mountall mountall.${PN} 100
-> +}
-> +pkg_prerm_util-linux-ng-mountall () {
-> +        update-alternatives --remove default_mountall mountall.${PN}
-> +}
-> +
-> -- 
-> 1.7.0
-> 
-> 
+you could also move it to using BBCLASSEXTEND when you are at it.
+
+>
+> --
+> =9Ahttp://roman.khimov.ru
+> mailto: roman@khimov.ru
+> gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
