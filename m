@@ -1,37 +1,43 @@
-Received: from server3.tinynetworks.co.uk ([89.16.176.161]
-	helo=mx.tinynetworks.co.uk) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martyn@welchs.me.uk>) id 1NtOK4-0000fO-9A
+Received: from mail-yw0-f197.google.com ([209.85.211.197])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NtR1N-0004oi-NB
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 21 Mar 2010 17:48:24 +0100
-Received: from mx.tinynetworks.co.uk (localhost.localdomain [127.0.0.1])
-	by mx.tinynetworks.co.uk (Postfix) with ESMTP id E2D8B636105
+	Sun, 21 Mar 2010 20:41:22 +0100
+Received: by ywh35 with SMTP id 35so79044ywh.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Mar 2010 16:45:14 +0000 (GMT)
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=tinynetworks.co.uk; h=
-	message-id:date:from:mime-version:to:subject:content-type
-	:content-transfer-encoding; s=postfix; bh=nQq979msUpz8D57p86p9Ej
-	wKoqI=; b=gE+MLTcsyJ5esNOaM9mEsZYnzrfLz+JW717xFwSb4xpO+ab8rWGDc2
-	b8NaHU/0ad/zm1MFLoZRyOg2wRS93i2r8iSZND3/1tez+thkvhNbuXEzSwlASDig
-	h2XNxGdRNjx1FNluZX5iUX4244H41faHCXXPUsrkDnCy0Rz0of2cA=
-Received: from [192.168.0.118] (unknown [82.152.154.75])
-	by mx.tinynetworks.co.uk (Postfix) with ESMTPSA id A91AC636056
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 Mar 2010 16:45:14 +0000 (GMT)
-Message-ID: <4BA64D16.3070901@welchs.me.uk>
-Date: Sun, 21 Mar 2010 16:45:10 +0000
-From: Martyn Welch <martyn@welchs.me.uk>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
+	Sun, 21 Mar 2010 12:38:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=TBpnsP1A1zKhENFzlON8Kd0tqDdBj5zSvaTtMW0wUSc=;
+	b=h0ocu0+eaook/18Km7vN8S+kqn9HL/yGGoJ829lgdFHa/IUyGQYhoYJ1LWwflNfPlM
+	3YSW7lVyyF53wve1X/CpWEoF9I7+1fKfJN9py7A7MeHFsQpdyjJ6gGL/bcy83HgFyIey
+	kXfFGf8MOXTN1scX/jyt6rSl6ZxQb6DW8Jsck=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=XYvPuxzWvD646z1zfngAvlgQIyTUt/aiBTKnuSHKtKz+3Tye+OSf4tcobm1vbs8sGp
+	ZGOaVBh43QRyq5YpLRR+tHd6gRgx5aVKvwPuqaqhTIoFJQiNm6aEkLDsB4yLqiMWrAfw
+	hj+G5qsR6a54W0mxoanU9pIUoebfgCR4BA9nw=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 89.16.176.161
-X-SA-Exim-Mail-From: martyn@welchs.me.uk
+Received: by 10.100.25.9 with SMTP id 9mr7358725any.46.1269200284338; Sun, 21 
+	Mar 2010 12:38:04 -0700 (PDT)
+In-Reply-To: <ho5b8b$oao$1@dough.gmane.org>
+References: <ac9c93b11003210557u1fcbcc21jb0dafb9fa16ccc96@mail.gmail.com>
+	<ho5b8b$oao$1@dough.gmane.org>
+Date: Sun, 21 Mar 2010 20:38:04 +0100
+Message-ID: <ac9c93b11003211238p38d25065p73841962f1ce2789@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org, hawkboard@googlegroups.com
+X-SA-Exim-Connect-IP: 209.85.211.197
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Booting image on iPAQ h5550
+Subject: Re: hawkboard at 456 Mhz?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,52 +51,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Mar 2010 16:48:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 21 Mar 2010 19:41:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-I've had a fair amount of success booting pre-built GPE images on an 
-iPAQ h5550 I've got lying around in the past, so I thought I'd have a go 
-at building an image for it myself and see what the latest stuff looks like.
+2010/3/21 Koen Kooi <k.kooi@student.utwente.nl>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 21-03-10 13:57, Frans Meulenbroeks wrote:
+>> Hi,
+>>
+>> In the openembedded repository I saw the following patch:
+>> http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/linux-davinci/da850_omapl138_opp456mhz.patch
+>> This seems to suggest that it is possible to run the hawkboard at 456
+>> Mhz (and yeah: I know it is out of spec and out of warranty, but for
+>> an experiment it would be quite helpful for me).
+>> I've build the kernel with openembedded, the patch is applied,
+>> CONF_CPU_FREQ is defined, but the control hook in /sys is not there.
+>> I've also tried tweaking the file with the settings (ds850.c) but to no avail.
+>>
+>> Anyone a suggestion on how to get this done?
+>
+> You need a newer kernel that doesn't rely on the TPS part for cpufreq
+> (hawkboard lacks a PMIC, the evm uses the TPS). You can build from the
+> ti/staging[1] branch to get such a kernel.
+>
+> Or wait a week for that branch to get merge, internal testing is finally
+> wrapping up.
+>
+> [1] http://gitorious.org/angstrom/openembedded/commits/ti/staging
 
-I've succeeded in building the bootstrap, x11 and x11-gpe images 
-(distro: angstrom, machine: h5000) and flashing them onto the iPAQ, but 
-none are getting to a serial or GUI login.
 
-The kernel boots and I see the kernel messages on the iPAQ screen and 
-the serial console, with the bootstrap image I see user space running, 
-on the x11 builds I see the Angstrom splash screen running on the iPAQ 
-screen, but they don't show up on the serial console. After a while, on 
-the x11 builds, the splash screen disappears and I can see the end of 
-the user space boot messages.
+Koen,
 
-If I plug in the USB cable from the dock, I see some ethernet gadget 
-messages on both the serial console and screen, so the kernel at least 
-still seems to be alive and it shows that the serial is at least working:
+Thanks alot!
+As patience is something that I don't have an overdose of, I decided
+not to waste any on this issue.
+So I checked out the git and rebuild the kernel. Works like a charm.
 
-[  494.060000] usb0: full speed config #1: 100 mA, Ethernet Gadget, 
-using CDC Ethernet Subset
-[  494.150000] usb0: full speed config #1: 100 mA, Ethernet Gadget, 
-using CDC Ethernet Subset
+For those who want to reproduce this:
+Be sure to adapt defconfig (CONFIG_DA8XX_MAX_SPEED_456=y)
 
-Also, if I leave the iPAQ a few minutes, the screen darkens, the screen 
-light can be brought back by pressing one of the keys, so it seems that 
-at least on daemon is alive. But I don't have any method to interact 
-with the device beyond that.
+I changed the speed setting with cpuspeed, this one is not on the
+angstrom feed, so you need to build it yourself too.
 
-The settings for the serial port seem good in the inittab (I double 
-checked in a tar.gz image I built) and the links to the getty seem good 
-(tinylogin).
+(I have assumed that you can rebuild an openembedded kernel, if
+not,then probably this is not for you).
 
-The only thing I can think of is that udev is destroying the static dev 
-nodes and not replacing them. I can to this conclusion because I see 
-"Starting udev" in the user space boot messages on the screen, shortly 
-followed by "Caching udev dev nodes", "Populating dev cache" then "root: 
-mount: special device /dev/mtdblock2 does not exist". This node 
-definitely exists in /dev in the tar.
-
-I'm a little lost as to where to go from here, any suggestions?
-
-Martyn
+Havve fun!
+Frans.
 
 
