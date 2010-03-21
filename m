@@ -1,30 +1,39 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-gx0-f224.google.com ([209.85.217.224])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1NtJzz-0007Jc-ER
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NtKlX-0000QU-HI
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 21 Mar 2010 13:11:29 +0100
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NtJwz-0007Ie-BR
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 21 Mar 2010 15:08:14 +0300
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 Mar 2010 15:05:35 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
-References: <201003182212.31873.roman@khimov.ru> <ho2nad$5g4$1@dough.gmane.org>
-In-Reply-To: <ho2nad$5g4$1@dough.gmane.org>
+	Sun, 21 Mar 2010 14:00:31 +0100
+Received: by gxk24 with SMTP id 24so812033gxk.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 21 Mar 2010 05:57:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=rQgZbQG5JnCnqiJQ7jkObjm7lnxVHU335VrOEgkxjto=;
+	b=GYaz2vHiNUZjX8ym4DD9uZMpkyncpkIYnt5N/vcfxbmN2ZhfcNmvzUXr0f5Yx4fEZB
+	Fhl77ETCIlsvebpP8EVy4TMvdpmPr71avc4iq4XgrzQBPx4sUYjD0dmWfoF/cKE0ll8V
+	m/u7uPd3yibDejCmesbfsn7WWE314VntdJK8k=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=bRoDBNQqmJpp5HReyG6LPcMEmzJIB82KqM9wk6lbhJ+i5OMEn8eDtcI+6JdKanEROP
+	3L6P5KIMyMBKPfW1t8S0cUuc0GBy9fr3KJHIvpzCCrnB75ywx6b0H/XBj3vH5E5cMUPw
+	FZ4hv33K45JK2vSyKub5gwi6ncJQYC2R1jXFU=
 MIME-Version: 1.0
-Message-Id: <201003211505.39554.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+Received: by 10.101.175.38 with SMTP id c38mr3530760anp.40.1269176239861; Sun, 
+	21 Mar 2010 05:57:19 -0700 (PDT)
+Date: Sun, 21 Mar 2010 13:57:19 +0100
+Message-ID: <ac9c93b11003210557u1fcbcc21jb0dafb9fa16ccc96@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org, hawkboard@googlegroups.com
+X-SA-Exim-Connect-IP: 209.85.217.224
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC/PATCH] Perl 5.10.1 and a bunch of modules
+Subject: hawkboard at 456 Mhz?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,53 +47,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 Mar 2010 12:11:29 -0000
-X-Groupsio-MsgNum: 17904
-Content-Type: multipart/signed; boundary="nextPart2215530.uPDWIxyPPg";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 21 Mar 2010 13:00:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---nextPart2215530.uPDWIxyPPg
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A1=D1=83=D0=B1=D0=B1=D0=BE=D1=82=D0=B0 20 =D0=BC=D0=B0=D1=80=D1=82=D0=
-=B0 2010 17:49:49 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Koen Kooi =D0=BD=D0=B0=D0=
-=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> As a generic remark, can we have a master include file for INC_PR so
-> perl modules get rebuilt automagically when something in perl changes?
+In the openembedded repository I saw the following patch:
+http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/linux-davinci/da850_omapl138_opp456mhz.patch
+This seems to suggest that it is possible to run the hawkboard at 456
+Mhz (and yeah: I know it is out of spec and out of warranty, but for
+an experiment it would be quite helpful for me).
+I've build the kernel with openembedded, the patch is applied,
+CONF_CPU_FREQ is defined, but the control hook in /sys is not there.
+I've also tried tweaking the file with the settings (ds850.c) but to no avail.
 
-Not sure how to do it best. Perl-only modules should survive most of versio=
-n=20
-bumps (BTW, we could handle those better with 'PACKAGE_ARCH =3D "all"'), mo=
-dules=20
-with binary components should work within patchlevel range (like 5.8.7 ->=20
-5.8.8). Of course it's only if we're not changing Perl build itself in some=
-=20
-strange way, but I doubt that.
+Anyone a suggestion on how to get this done?
 
-So, we could probably add Perl version to the PV, thus allowing perl PR bum=
-ps=20
-and rebuilding on version change. That could be made dependent on=20
-PACKAGE_ARCH, so that Perl-only modules wouldn't be touched at all.
+Thanks alot! FM
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+PS: a way to downclock would also be fine for my experiment. For a
+disk benchmark I would like to know what part of the time it takes to
+read data actually is caused by the device and which comes from the
+os.
+Assumption is that the device time is independent of the CPU clock and
+that the os time is roughly linear with the cpu frequency. (and yes, I
+use an access pattern that tries to avoid pre-caching by the device).
 
---nextPart2215530.uPDWIxyPPg
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
-
-iEYEABECAAYFAkumC5MACgkQXJ70z+XgVcN34ACePmQGMzjSujAuh7yEwnTLHwEb
-q94AoJ/1ceaI37lX+3M9VnHYjTqV0rTq
-=q/Fc
------END PGP SIGNATURE-----
-
---nextPart2215530.uPDWIxyPPg--
