@@ -1,30 +1,33 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Ntf3V-0000hl-OY
+	(envelope-from <khimov@altell.ru>) id 1NtfK9-0003Qm-SX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Mar 2010 11:40:22 +0100
-Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
-	[123.192.181.204])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 3BB2A1B10C02
+	Mon, 22 Mar 2010 11:57:39 +0100
+Received: from keemun.localnet (unknown [192.168.1.125])
+	by mail.altell.local (Postfix) with ESMTPS id F09F268778
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Mar 2010 10:40:50 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Mon, 22 Mar 2010 13:29:22 +0300 (MSK)
+From: Roman Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Mar 2010 11:37:08 +0100
-User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
-References: <000001cac9a8$63534250$29f9c6f0$@in>
-In-Reply-To: <000001cac9a8$63534250$29f9c6f0$@in>
+Date: Mon, 22 Mar 2010 13:54:09 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
+References: <ac9c93b11001261351n4a1475c3q46d6a441a66f2e5e@mail.gmail.com>
+In-Reply-To: <ac9c93b11001261351n4a1475c3q46d6a441a66f2e5e@mail.gmail.com>
 MIME-Version: 1.0
-Message-Id: <201003221137.08426.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Message-Id: <201003221354.10121.khimov@altell.ru>
+X-Altell-MailScanner-ID: F09F268778.EDB58
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-SA-Exim-Connect-IP: 80.246.246.162
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Want to Re build after modifying any files
+Subject: Re: small perl initialisation patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,43 +41,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Mar 2010 10:40:22 -0000
+X-List-Received-Date: Mon, 22 Mar 2010 10:57:39 -0000
 Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Monday 22 March 2010 11:13:59 Tejas wrote:
-> Hello All,
-> 
->                I have removed INHERIT += " rm_work "  option from my
-> local.conf file. So I can avail source code.
-> 
-> 
-> 
->                The problem which I am facing is, I have built gst-omapfb
-> from openembedded by giving bitbake gst-omapfb. It is built successfully.
-> Now I am changing code and trying to rebuild it by giving bitbake
-> gst-omapfb. But it is not rebuilding.
->
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A1=D1=80=D0=B5=D0=B4=D0=B0 27 =D1=8F=D0=BD=D0=B2=D0=B0=D1=80=D1=8F 2010=
+ 00:51:52 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Frans Meulenbroeks =D0=BD=D0=B0=D0=
+=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> Perl file Lib/CPAN/FirstTime.pm can enter a dialog for continent which
+> never ends.
+> This problem is among others sometimes triggered by
+> libxml-namespacesupport-perl_1.10.bb
+> The patch forces the answer for manual configuration to "no" avoiding
+> that we run into this problem
 
-You can use:
-	bitbake -ccompile -f gst-omapfb
+Package build problem can be fixed with proper dependencies (perl checks fo=
+r=20
+dependencies and only if there's something missing it tries to use CPAN).=20
+So, this patch hides the problem. Also, I don't think it's needed for targe=
+t=20
+Perl, there probably could be some cases when CPAN on target might be of us=
+e.
 
-This will force compilation (running of make) inside the existing 
-tmp/work/*/gst-omap*... source directory..
+But in general what I don't like about this situation is that when you=20
+encounter it while packaging yet another module the build process just hang=
+s=20
+on do_configure task with 100% CPU utilization and it's unobvious what's go=
+ing=20
+on until you check the ever growing log file. Then you have to kill bitbake=
+=2E=20
+All of this sucks.
 
-Alternatively you can do:
+Also, Perl 5.10 has some different handling for this, at quick glance it=20
+autoconfigures by default now and really downloads everything it needs from=
+=20
+CPAN, which is also bad in our case, since we need to control what installe=
+d=20
+where.
 
-	bitbake -cdevshell gst-omapfb (on angstrom)
-
-this will open a gnome-terminal and you can type make inside the build 
-directory..
-
-
-Alternatively you can:
-	Change to tmp/work/*/gst-omap
-	and run the temp/run.do_* scripts to redo a task..
-
-
+So, IMHO what could be useful is for our perl-native package to have some k=
+ind=20
+of bouncer in FirstTime.pm that would die with something like "Error: tried=
+ to=20
+configure CPAN. Usually it means broken dependencies for packaged modules, =
+so=20
+go fix your package".
 
 
