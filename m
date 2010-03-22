@@ -1,45 +1,46 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1NtmFz-0000HG-FD
+	(envelope-from <mrt.karadenz@gmail.com>) id 1Ntmpi-0000sz-5A
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Mar 2010 19:21:48 +0100
-Received: by gye5 with SMTP id 5so2630910gye.6
+	Mon, 22 Mar 2010 19:58:38 +0100
+Received: by pwi2 with SMTP id 2so456633pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Mar 2010 11:18:34 -0700 (PDT)
+	Mon, 22 Mar 2010 11:55:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=BR2QHcmR/aWMMqEfi8177yTq/60lR6/iq95TBxmYTYM=;
-	b=kNBqilnKK2VBNku6zBkkiHPztTYtOhHuWx1ItgSgwEqKcy/jrrFiMuEel9rikgHO2Y
-	4YnKYiHsgraIjzQ4oaowgGBfBnZOMOIga72EXq0HSP2eFJF8jvQ1V8HxsW1kHTaDf1LQ
-	KMlKf312/+6Ekm4xBNWTlE8GhzJJdS+8yConI=
+	h=domainkey-signature:received:received:from:organization:to:subject
+	:date:user-agent:mime-version:content-type:content-transfer-encoding
+	:message-id; bh=2izo7BPgkc7WDsVrD2q9O7gVhneUn8U6PKg6dwS8CdQ=;
+	b=ak75QArHXv/HMqsyQriCoKkdfy78t9Qt6X4RdI8m5Sz3g0wWWCzlEHfT9bvFrMyqGK
+	NHGAAPNk6rPRNpOX6x/lMsJnEtd3MClNeJKcG6EXFO99XR25Gz2xbwgS8dQqKqQQxZt+
+	AuZvkMZSkL455Nx8JhlWVqtSAyCyuWq4GPdAc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=on2JwQ5DrjSbjPYiVr8GgkuOsIW/iTXNR+VDaxjFEzsj8u5Agg0lQJLXw/SmD2kMjy
-	SRhLBFXdSwyJsZ1w8MnMdOsU6mDII2M5lVsd4uewVkvphCj/0qpDoO9zHO+/KEFwyVIA
-	nXRCk3T0YwJiQMjVsNh4nRFFiAjlynTwr/oIM=
-MIME-Version: 1.0
-Received: by 10.91.163.4 with SMTP id q4mr4622298ago.13.1269281914726; Mon, 22 
-	Mar 2010 11:18:34 -0700 (PDT)
-In-Reply-To: <20100322181143.GB19274@excalibur.local>
-References: <openembedded-devel@lists.openembedded.org>
-	<1269278693-2935-1-git-send-email-aalonso00@gmail.com>
-	<20100322181143.GB19274@excalibur.local>
-Date: Mon, 22 Mar 2010 12:18:34 -0600
-Message-ID: <d1ded4381003221118g11a4b52dme8d8ce0dfe100bfc@mail.gmail.com>
-From: Adrian Alonso <aalonso00@gmail.com>
+	h=from:organization:to:subject:date:user-agent:mime-version
+	:content-type:content-transfer-encoding:message-id;
+	b=ncfSaWmEpJJgcGD4LU1Vcp/4ZUJ3KVdsAfPDLyxJ0/pMCh+TrhgVlKkxZMk4sCPGHo
+	h4iL0fXLj5U8b43aY1eDxH3GaMic0TfYW3TM63qgId75H+y7YR71e4rfN1zRj5JVbnkY
+	eOXW5xBu9eL0MpO/t+R9+YWlH6ZH0uB9VqpvQ=
+Received: by 10.142.151.31 with SMTP id y31mr2454152wfd.107.1269284128510;
+	Mon, 22 Mar 2010 11:55:28 -0700 (PDT)
+Received: from linux-dm4x.localnet ([88.224.192.131])
+	by mx.google.com with ESMTPS id h18sm171657wfg.13.2010.03.22.11.55.26
+	(version=SSLv3 cipher=RC4-MD5); Mon, 22 Mar 2010 11:55:27 -0700 (PDT)
+From: Murat Karadeniz <mrt.karadenz@gmail.com>
+Organization: Bilkon Bilgisayar =?utf-8?q?Kontroll=C3=BC_Cihazlar_Ltd=2E?= 
+	=?utf-8?q?_=C5=9Eti=2E?=
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: aalonso00@gmail.com
+Date: Mon, 22 Mar 2010 20:55:23 +0200
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-default; KDE/4.3.5; i686; ; )
+MIME-Version: 1.0
+Message-Id: <201003222055.23408.murat@bilkon-kontrol.com.tr>
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: mrt.karadenz@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH v2] u-boot_git.bb: add xilinx ml507 support
+Subject: u-boot_git recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,40 +54,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Mar 2010 18:21:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 22 Mar 2010 18:58:39 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Thanks,
+i m the newbie on using oe. i m getting this message from shell. i dont know 
+why it is. bitbake version is 1.19, Machine is dm6446-evm and DISTRO is 
+angstrom-2008.1
 
-On Mon, Mar 22, 2010 at 12:11 PM, Stefan Schmidt
-<stefan@datenfreihafen.org>wrote:
-
-> Hello.
->
-> On Mon, 2010-03-22 at 11:24, Adrian Alonso wrote:
-> > * Based on xilinx official repos
-> > * If a hardware project dir is set in local.conf XILINX_BSP_PATH
-> > * it will over write xparameters header and append some canonical
-> > * definitions. It also install u-boot elf executable for bare metal
-> > * execution, early development stages.
-> >
-> > Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
->
-> Applied and pushed out.
->
-> regards
-> Stefan Schmidt
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Thanks for taking your time
 
 
+ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 'u-
+boot_git' but it wasn't found in any PACKAGE or RPROVIDES variables
+Unknown Event: <bb.event.NoProvider instance at 0xf3241ac>
+NOTE: Resolving any missing task queue dependencies
+ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 'u-
+boot_git' but it wasn't found in any PACKAGE or RPROVIDES variables
+Unknown Event: <bb.event.NoProvider instance at 0x1159792c>
+NOTE: Runtime target 'u-boot_git' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['u-boot_git']
 
--- 
-Saludos
-Adrian Alonso
-http://aalonso.wordpress.com
 
