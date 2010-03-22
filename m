@@ -1,41 +1,50 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-qy0-f193.google.com ([209.85.221.193])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Ntlfi-0002NZ-6j
+	(envelope-from <raj.khem@gmail.com>) id 1NtlsB-0005Ry-Pg
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Mar 2010 18:44:20 +0100
-Received: from p5b037b4e.dip.t-dialin.net ([91.3.123.78] helo=excalibur)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1NtlcW-0002kb-Bl by authid <stefan@sostec.de> with cram_md5
+	Mon, 22 Mar 2010 18:57:12 +0100
+Received: by qyk31 with SMTP id 31so1699513qyk.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Mar 2010 18:41:08 +0100
-Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>) id 1NtlcV-0005kt-RU
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Mar 2010 18:40:55 +0100
-Date: Mon, 22 Mar 2010 18:40:55 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Mon, 22 Mar 2010 10:53:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=bmd1LNSz90ZjtNAKPPkhqFPtETn/gO2s2gMeWi6vBh0=;
+	b=RFA74UKw1D5tyRzX2nMOJH+PLv+2zPLSD8rSDfPmC1nmsHKqCPZpBa45XwC47/DL6r
+	jhEP4I0pWOVKDNRRVA6GjBFe0LI+5fjfCs5N+gAyI+rxZqNO3hxGRFk5LQyqZoT4zPyy
+	BpMp1EFGtCPEfnaFgEutcQwPzhdiJlqde/Gpk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=BMkqLvX5R7/v4rzWlIDKSTUD4mzeHaGzIhExMAVbxG1TUo2/CWvnqGfNln111oO5zv
+	iuZGaffZXnq4H0pGjjbyiP8XCQkpAdRmojxLh2grF0YHr5uJWs0Rh/hHjK5jB8RpOqNF
+	atl43JiWvtGsEAjN+KmyTVlpxiCJC7tg7kox0=
+Received: by 10.224.91.202 with SMTP id o10mr362497qam.175.1269280439190;
+	Mon, 22 Mar 2010 10:53:59 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 5sm818182qwg.38.2010.03.22.10.53.54
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 22 Mar 2010 10:53:55 -0700 (PDT)
+Date: Mon, 22 Mar 2010 10:53:58 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100322174055.GA19274@excalibur.local>
-References: <openembedded-devel@lists.openembedded.org>
-	<1269019049-25807-1-git-send-email-aalonso00@gmail.com>
-	<20100321112854.GB7325@excalibur.local>
-	<d1ded4381003221021n29191b3ch9e0e61b81f4cabb4@mail.gmail.com>
+Message-ID: <20100322175358.GA10417@gmail.com>
+References: <4B9E1C0D.5050806@dresearch.de> <20100321081236.GA6455@gmail.com>
+	<4BA720E0.10806@dresearch.de>
 MIME-Version: 1.0
-In-Reply-To: <d1ded4381003221021n29191b3ch9e0e61b81f4cabb4@mail.gmail.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
+In-Reply-To: <4BA720E0.10806@dresearch.de>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+X-SA-Exim-Connect-IP: 209.85.221.193
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] u-boot_git.bb: add xilinx-ml507 support
+Subject: Re: gcc atomic instruction support for armv5te
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,37 +58,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Mar 2010 17:44:20 -0000
+X-List-Received-Date: Mon, 22 Mar 2010 17:57:12 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hello.
-
-On Mon, 2010-03-22 at 11:21, Adrian Alonso wrote:
+On (22/03/10 08:48), Steffen Sledz wrote:
+> Khem Raj wrote:
+> >> As mentioned before i try to create a recipe for rsyslog.
+> >>
+> >> Now i hit the next big problem. The last item at
+> >> http://www.rsyslog.com/doc-build_from_repo.html says that
+> >>
+> >> "The availability of atomic instructions is vital for rsyslog"
+> >>
+> >> The gcc version 4.3.3 which is used for armv5te by default
+> >> misses this. :(
+> >>
+> >> Is there a newer gcc version with atomic instruction for armv5te
+> >> machines available/tested? I heard rumors that 4.4.3 shell
+> >> have it?
+> > 
+> > yes 4.4+ should have them as intrinsic functions.
 > 
-> Fix previous error a patch should be at patchqueue, also is attached.
+> Unfortunately angstrom uses 4.3.3 by default.
 > 
-> u-boot source code provides a parameter definition for a hardware reference
-> design
-> documented at [1]; Even trying to replicating this hardware project it would
-> not necessary
-> match the hardware address model used by u-boot so is safer to overwrite
-> this header file (xparameters.h);
-> Also u-boot expects a set of macros that are not generated whit xilinx
-> tools, and I append them
-> at the end of the header file, I know this is ugly but there's no way to
-> provide a patch since the
-> header file is generated based on the hardware modules included in the
-> project.
+> Is it possible to build just this one package with a newer gcc?
+
+though its possible I wouldnt go for having a different gcc for one package
+is there an older version of rsyslog which does not use the intrinsics ?
+you might also look at backporting intrinsics to gcc 4.3 which might be a
+bit hairy
+
 > 
-> This probably can be included in xilinx-bsp.bbclass but I will need to
-> detect when u-boot or linux-kernel
-> is inheriting the class to perform the right action. But at the moment I
-> don't know ho to do it.
-
-OK, thanks for the time explaining it. Will test your patch and push it.
-
-regards
-Stefan Schmidt
+> > Which ones are needed by rsyslog ?
+> 
+> __sync_fetch_and_sub
+> __sync_fetch_and_add
+> __sync_fetch_and_or
+> __sync_fetch_and_and
+> __sync_sub_and_fetch
+> __sync_lock_test_and_set
+> __sync_bool_compare_and_swap
+> __sync_val_compare_and_swap
+> 
+> Steffen
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
