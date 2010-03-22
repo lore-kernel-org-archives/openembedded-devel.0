@@ -1,33 +1,31 @@
 Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rik@build2.altell.local>) id 1Ntgf6-0005BE-D4
+	(envelope-from <rik@build2.altell.local>) id 1Ntgf6-0005BF-Ba
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Mar 2010 13:23:17 +0100
+	Mon, 22 Mar 2010 13:23:25 +0100
 Received: from build2.altell.local (build2.altell.local [192.168.1.26])
-	by mail.altell.local (Postfix) with ESMTPS id 7C58968795;
+	by mail.altell.local (Postfix) with ESMTPS id 7948A6878C;
 	Mon, 22 Mar 2010 14:46:20 +0300 (MSK)
 Received: from rik by build2.altell.local with local (Exim 4.69)
 	(envelope-from <rik@build2.altell.local>)
-	id 1NtgPU-0001tP-7U; Mon, 22 Mar 2010 15:07:08 +0300
+	id 1NtgPU-0001tN-5t; Mon, 22 Mar 2010 15:07:08 +0300
 From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Mar 2010 15:07:08 +0300
-Message-Id: <1269259628-7253-2-git-send-email-khimov@altell.ru>
+Date: Mon, 22 Mar 2010 15:07:07 +0300
+Message-Id: <1269259628-7253-1-git-send-email-khimov@altell.ru>
 X-Mailer: git-send-email 1.5.6.5
-In-Reply-To: <1269259628-7253-1-git-send-email-khimov@altell.ru>
-References: <1269259628-7253-1-git-send-email-khimov@altell.ru>
-X-Altell-MailScanner-ID: 7C58968795.E6909
+X-Altell-MailScanner-ID: 7948A6878C.2F83D
 X-Altell-MailScanner: Found to be clean
 X-Altell-MailScanner-From: rik@build2.altell.local
 X-SA-Exim-Connect-IP: 80.246.246.162
 X-SA-Exim-Mail-From: rik@build2.altell.local
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
-	SUBJECT_FUZZY_TION autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] acpid: add script to halt on power button press
+Subject: [PATCH] acpid: convert to INC_PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,44 +39,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Mar 2010 12:23:17 -0000
+X-List-Received-Date: Mon, 22 Mar 2010 12:23:25 -0000
 
 Signed-off-by: Roman I Khimov <khimov@altell.ru>
 ---
- recipes/acpid/acpid.inc                   |    5 ++++-
- recipes/acpid/files/powerbtn-acpi-support |    2 ++
- 2 files changed, 6 insertions(+), 1 deletions(-)
- create mode 100644 recipes/acpid/files/powerbtn-acpi-support
+ recipes/acpid/acpid.inc       |    2 ++
+ recipes/acpid/acpid_1.0.10.bb |    2 +-
+ recipes/acpid/acpid_1.0.2.bb  |    2 +-
+ recipes/acpid/acpid_1.0.3.bb  |    3 +--
+ recipes/acpid/acpid_1.0.4.bb  |    3 +--
+ recipes/acpid/acpid_1.0.6.bb  |    3 +--
+ recipes/acpid/acpid_1.0.8.bb  |    2 +-
+ 7 files changed, 8 insertions(+), 9 deletions(-)
 
 diff --git a/recipes/acpid/acpid.inc b/recipes/acpid/acpid.inc
-index bb976c9..5240911 100644
+index 6e79915..bb976c9 100644
 --- a/recipes/acpid/acpid.inc
 +++ b/recipes/acpid/acpid.inc
-@@ -5,7 +5,8 @@ LICENSE="GPL"
- INC_PR = "r4"
+@@ -2,6 +2,8 @@ SECTION = "base"
+ DESCRIPTION = "A daemon for delivering ACPI events."
+ LICENSE="GPL"
  
++INC_PR = "r4"
++
  SRC_URI = "${SOURCEFORGE_MIRROR}/acpid/acpid-${PV}.tar.gz \
--           file://init"
-+           file://init \
-+           file://powerbtn-acpi-support"
+            file://init"
  
- inherit update-rc.d
+diff --git a/recipes/acpid/acpid_1.0.10.bb b/recipes/acpid/acpid_1.0.10.bb
+index f210051..c5e3c62 100644
+--- a/recipes/acpid/acpid_1.0.10.bb
++++ b/recipes/acpid/acpid_1.0.10.bb
+@@ -4,4 +4,4 @@ SRC_URI_append = " file://event.c.diff;patch=1 \
+                    file://netlink.diff;patch=1 \
+                    file://gcc44.diff;patch=1 \
+                  "
+-
++PR = "${INC_PR}.0"
+\ No newline at end of file
+diff --git a/recipes/acpid/acpid_1.0.2.bb b/recipes/acpid/acpid_1.0.2.bb
+index 2a305ee..ad8efc4 100644
+--- a/recipes/acpid/acpid_1.0.2.bb
++++ b/recipes/acpid/acpid_1.0.2.bb
+@@ -1,3 +1,3 @@
+ require acpid.inc
+-PR = "r2"
++PR = "${INC_PR}.0"
  
-@@ -23,4 +24,6 @@ do_install () {
- 	install -d ${D}${sysconfdir}/init.d
- 	cat ${WORKDIR}/init | sed -e's,/usr/sbin,${sbindir},g' > ${D}${sysconfdir}/init.d/acpid
- 	chmod 755 ${D}${sysconfdir}/init.d/acpid
-+	install -d ${D}${sysconfdir}/acpi/events
-+	install -m 0644 ${WORKDIR}/powerbtn-acpi-support ${D}${sysconfdir}/acpi/events/
- }
-diff --git a/recipes/acpid/files/powerbtn-acpi-support b/recipes/acpid/files/powerbtn-acpi-support
-new file mode 100644
-index 0000000..b2e80f9
---- /dev/null
-+++ b/recipes/acpid/files/powerbtn-acpi-support
-@@ -0,0 +1,2 @@
-+event=button[ /]power
-+action=halt
+diff --git a/recipes/acpid/acpid_1.0.3.bb b/recipes/acpid/acpid_1.0.3.bb
+index 640acd5..670f032 100644
+--- a/recipes/acpid/acpid_1.0.3.bb
++++ b/recipes/acpid/acpid_1.0.3.bb
+@@ -1,4 +1,3 @@
+ require acpid.inc
+ SRC_URI += "file://gcc40.patch;patch=1"
+-PR = "r2"
+-
++PR = "${INC_PR}.0"
+\ No newline at end of file
+diff --git a/recipes/acpid/acpid_1.0.4.bb b/recipes/acpid/acpid_1.0.4.bb
+index f48c262..8d9bff7 100644
+--- a/recipes/acpid/acpid_1.0.4.bb
++++ b/recipes/acpid/acpid_1.0.4.bb
+@@ -1,4 +1,3 @@
+ require acpid.inc
+ SRC_URI += "file://gcc40.patch;patch=1"
+-PR = "r3"
+-
++PR = "${INC_PR}.0"
+diff --git a/recipes/acpid/acpid_1.0.6.bb b/recipes/acpid/acpid_1.0.6.bb
+index e096796..c44cd81 100644
+--- a/recipes/acpid/acpid_1.0.6.bb
++++ b/recipes/acpid/acpid_1.0.6.bb
+@@ -1,3 +1,2 @@
+ require acpid.inc
+-
+-PR = "r4"
++PR = "${INC_PR}.0"
+\ No newline at end of file
+diff --git a/recipes/acpid/acpid_1.0.8.bb b/recipes/acpid/acpid_1.0.8.bb
+index 98638e6..5e8e451 100644
+--- a/recipes/acpid/acpid_1.0.8.bb
++++ b/recipes/acpid/acpid_1.0.8.bb
+@@ -3,4 +3,4 @@ require acpid.inc
+ SRC_URI_append = " file://event.c.diff;patch=1 \
+                    file://fixfd.diff;patch=1 \
+                    file://netlink.diff;patch=1"
+-
++PR = "${INC_PR}.0"
+\ No newline at end of file
 -- 
 1.5.6.5
 
