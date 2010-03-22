@@ -1,31 +1,43 @@
-Received: from office.altell.ru ([80.246.246.162])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rik@build2.altell.local>) id 1Ntgf6-0005BF-Ba
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Mar 2010 13:23:25 +0100
-Received: from build2.altell.local (build2.altell.local [192.168.1.26])
-	by mail.altell.local (Postfix) with ESMTPS id 7948A6878C;
-	Mon, 22 Mar 2010 14:46:20 +0300 (MSK)
-Received: from rik by build2.altell.local with local (Exim 4.69)
-	(envelope-from <rik@build2.altell.local>)
-	id 1NtgPU-0001tN-5t; Mon, 22 Mar 2010 15:07:08 +0300
-From: Roman I Khimov <khimov@altell.ru>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ntgre-00052x-Cf for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Mar 2010 13:36:18 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ntgoc-00031V-Oo for openembedded-devel@lists.openembedded.org;
+	Mon, 22 Mar 2010 13:33:06 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Mar 2010 13:33:06 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Mar 2010 13:33:06 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Mar 2010 15:07:07 +0300
-Message-Id: <1269259628-7253-1-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.5.6.5
-X-Altell-MailScanner-ID: 7948A6878C.2F83D
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: rik@build2.altell.local
-X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: rik@build2.altell.local
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 22 Mar 2010 13:32:55 +0100
+Message-ID: <ho7o1n$nb2$1@dough.gmane.org>
+References: <1269255790-13046-1-git-send-email-marcin@juszkiewicz.com.pl>
+	<1269255790-13046-3-git-send-email-marcin@juszkiewicz.com.pl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100314 Shredder/3.0.4pre
+In-Reply-To: <1269255790-13046-3-git-send-email-marcin@juszkiewicz.com.pl>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] acpid: convert to INC_PR
+Subject: Re: [PATCH][STABLE] netbase: add BUG 2.0 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,96 +51,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Mar 2010 12:23:25 -0000
+X-List-Received-Date: Mon, 22 Mar 2010 12:36:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Roman I Khimov <khimov@altell.ru>
----
- recipes/acpid/acpid.inc       |    2 ++
- recipes/acpid/acpid_1.0.10.bb |    2 +-
- recipes/acpid/acpid_1.0.2.bb  |    2 +-
- recipes/acpid/acpid_1.0.3.bb  |    3 +--
- recipes/acpid/acpid_1.0.4.bb  |    3 +--
- recipes/acpid/acpid_1.0.6.bb  |    3 +--
- recipes/acpid/acpid_1.0.8.bb  |    2 +-
- 7 files changed, 8 insertions(+), 9 deletions(-)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-diff --git a/recipes/acpid/acpid.inc b/recipes/acpid/acpid.inc
-index 6e79915..bb976c9 100644
---- a/recipes/acpid/acpid.inc
-+++ b/recipes/acpid/acpid.inc
-@@ -2,6 +2,8 @@ SECTION = "base"
- DESCRIPTION = "A daemon for delivering ACPI events."
- LICENSE="GPL"
- 
-+INC_PR = "r4"
-+
- SRC_URI = "${SOURCEFORGE_MIRROR}/acpid/acpid-${PV}.tar.gz \
-            file://init"
- 
-diff --git a/recipes/acpid/acpid_1.0.10.bb b/recipes/acpid/acpid_1.0.10.bb
-index f210051..c5e3c62 100644
---- a/recipes/acpid/acpid_1.0.10.bb
-+++ b/recipes/acpid/acpid_1.0.10.bb
-@@ -4,4 +4,4 @@ SRC_URI_append = " file://event.c.diff;patch=1 \
-                    file://netlink.diff;patch=1 \
-                    file://gcc44.diff;patch=1 \
-                  "
--
-+PR = "${INC_PR}.0"
-\ No newline at end of file
-diff --git a/recipes/acpid/acpid_1.0.2.bb b/recipes/acpid/acpid_1.0.2.bb
-index 2a305ee..ad8efc4 100644
---- a/recipes/acpid/acpid_1.0.2.bb
-+++ b/recipes/acpid/acpid_1.0.2.bb
-@@ -1,3 +1,3 @@
- require acpid.inc
--PR = "r2"
-+PR = "${INC_PR}.0"
- 
-diff --git a/recipes/acpid/acpid_1.0.3.bb b/recipes/acpid/acpid_1.0.3.bb
-index 640acd5..670f032 100644
---- a/recipes/acpid/acpid_1.0.3.bb
-+++ b/recipes/acpid/acpid_1.0.3.bb
-@@ -1,4 +1,3 @@
- require acpid.inc
- SRC_URI += "file://gcc40.patch;patch=1"
--PR = "r2"
--
-+PR = "${INC_PR}.0"
-\ No newline at end of file
-diff --git a/recipes/acpid/acpid_1.0.4.bb b/recipes/acpid/acpid_1.0.4.bb
-index f48c262..8d9bff7 100644
---- a/recipes/acpid/acpid_1.0.4.bb
-+++ b/recipes/acpid/acpid_1.0.4.bb
-@@ -1,4 +1,3 @@
- require acpid.inc
- SRC_URI += "file://gcc40.patch;patch=1"
--PR = "r3"
--
-+PR = "${INC_PR}.0"
-diff --git a/recipes/acpid/acpid_1.0.6.bb b/recipes/acpid/acpid_1.0.6.bb
-index e096796..c44cd81 100644
---- a/recipes/acpid/acpid_1.0.6.bb
-+++ b/recipes/acpid/acpid_1.0.6.bb
-@@ -1,3 +1,2 @@
- require acpid.inc
--
--PR = "r4"
-+PR = "${INC_PR}.0"
-\ No newline at end of file
-diff --git a/recipes/acpid/acpid_1.0.8.bb b/recipes/acpid/acpid_1.0.8.bb
-index 98638e6..5e8e451 100644
---- a/recipes/acpid/acpid_1.0.8.bb
-+++ b/recipes/acpid/acpid_1.0.8.bb
-@@ -3,4 +3,4 @@ require acpid.inc
- SRC_URI_append = " file://event.c.diff;patch=1 \
-                    file://fixfd.diff;patch=1 \
-                    file://netlink.diff;patch=1"
--
-+PR = "${INC_PR}.0"
-\ No newline at end of file
--- 
-1.5.6.5
+Acked-by: Koen Kooi <koen@openembedded.org>
+
+On 22-03-10 12:03, Marcin Juszkiewicz wrote:
+> From: Marcin Juszkiewicz <marcin@buglabs.net>
+> 
+> Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+> ---
+>  recipes/netbase/netbase/bug20/hosts      |    3 +++
+>  recipes/netbase/netbase/bug20/interfaces |   29 +++++++++++++++++++++++++++++
+>  recipes/netbase/netbase_4.21.bb          |    2 +-
+>  3 files changed, 33 insertions(+), 1 deletions(-)
+>  create mode 100644 recipes/netbase/netbase/bug20/hosts
+>  create mode 100644 recipes/netbase/netbase/bug20/interfaces
+> 
+> diff --git a/recipes/netbase/netbase/bug20/hosts b/recipes/netbase/netbase/bug20/hosts
+> new file mode 100644
+> index 0000000..789d660
+> --- /dev/null
+> +++ b/recipes/netbase/netbase/bug20/hosts
+> @@ -0,0 +1,3 @@
+> +127.0.0.1	localhost.localdomain		localhost	bug
+> +10.10.10.1	bughost
+> +
+> diff --git a/recipes/netbase/netbase/bug20/interfaces b/recipes/netbase/netbase/bug20/interfaces
+> new file mode 100644
+> index 0000000..6e5f74e
+> --- /dev/null
+> +++ b/recipes/netbase/netbase/bug20/interfaces
+> @@ -0,0 +1,29 @@
+> +# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
+> + 
+> +# The loopback interface
+> +auto lo
+> +iface lo inet loopback
+> +
+> +# Ethernet/RNDIS gadget (g_ether)
+> +# usbnet and static hwaddr for mac users
+> +auto usb0
+> +iface usb0 inet static
+> +	hwaddress ether A2:80:F4:8A:3C:91
+> +	address 10.10.10.10 
+> +	netmask 255.255.255.0
+> +	gateway 10.10.10.1 
+> +
+> +# Wired interface
+> +# BUGbase Ethernet which is built into kernel
+> +# It is on USB but we rename it by udev rule
+> +auto eth0
+> +iface eth0 inet dhcp
+> +
+> +#
+> +# wireless interface
+> +auto eth1
+> +iface eth1 inet dhcp
+> +	wireless_mode managed
+> +	wireless_essid any
+> +	wpa-driver wext
+> +	wpa-conf /etc/wpa_supplicant.conf
+> diff --git a/recipes/netbase/netbase_4.21.bb b/recipes/netbase/netbase_4.21.bb
+> index c8b4d19..04d9623 100644
+> --- a/recipes/netbase/netbase_4.21.bb
+> +++ b/recipes/netbase/netbase_4.21.bb
+> @@ -2,7 +2,7 @@ DESCRIPTION = "This package provides the necessary \
+>  infrastructure for basic TCP/IP based networking."
+>  SECTION = "base"
+>  LICENSE = "GPL"
+> -PR = "r37"
+> +PR = "r41"
+>  
+>  inherit update-rc.d
+>  
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLp2N2MkyGM64RGpERAn5XAKCHnQQ6XeDM0Qhty+F383FM/0/jDgCgqPBO
+B57ODgJU0cs/fzmpqyKXxVQ=
+=wlyu
+-----END PGP SIGNATURE-----
 
 
 
