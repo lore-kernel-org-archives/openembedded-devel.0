@@ -1,30 +1,28 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1NtawN-0004Vi-5a
+	(envelope-from <holger+oe@freyther.de>) id 1NtbfY-00030K-KQ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Mar 2010 07:16:47 +0100
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NtatL-0000RT-Fz
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Mar 2010 09:13:36 +0300
-From: Roman I Khimov <roman@khimov.ru>
+	Mon, 22 Mar 2010 08:03:28 +0100
+Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
+	[123.192.181.204])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 4817E1B10C02
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 22 Mar 2010 07:03:52 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Mar 2010 09:10:53 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
-References: <1269211675-15854-1-git-send-email-enrico.scholz@informatik.tu-chemnitz.de>
-In-Reply-To: <1269211675-15854-1-git-send-email-enrico.scholz@informatik.tu-chemnitz.de>
+Date: Mon, 22 Mar 2010 08:00:12 +0100
+User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
 MIME-Version: 1.0
-Message-Id: <201003220910.59623.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+Message-Id: <201003220800.12755.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] rm_work.bbclass: reordered 'rm $dir -rf' arguments
+Subject: Infinite loop in libsamplerate0:do_configure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,36 +36,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Mar 2010 06:16:47 -0000
-X-Groupsio-MsgNum: 17910
-Content-Type: multipart/signed; boundary="nextPart1714990.IOGG0lXJMU";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Mon, 22 Mar 2010 07:03:33 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
---nextPart1714990.IOGG0lXJMU
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: base64
+Hi,
 
-0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0J/QvtC90LXQtNC10LvRjNC90LjQuiAyMiDQvNCw
-0YDRgtCwIDIwMTAgMDE6NDc6NTUg0LDQstGC0L7RgCBFbnJpY28gU2Nob2x6INC90LDQv9C40YHQ
-sNC7Ogo+IFVzaW5nIGFuICdybSAtcmYgJGRpcicgb3JkZXJpbmcgaXMgbW9yZSBwb3J0YWJsZS4K
-PiAKPiBTaWduZWQtb2ZmLWJ5OiBFbnJpY28gU2Nob2x6IDxlbnJpY28uc2Nob2x6QGluZm9ybWF0
-aWsudHUtY2hlbW5pdHouZGU+CgpBY2tlZC1ieTogUm9tYW4gSSBLaGltb3YgPGtoaW1vdkBhbHRl
-bGwucnU+CgotLSAKIGh0dHA6Ly9yb21hbi5raGltb3YucnUKbWFpbHRvOiByb21hbkBraGltb3Yu
-cnUKZ3BnIC0ta2V5c2VydmVyIGhrcDovL3N1YmtleXMucGdwLm5ldCAtLXJlY3Yta2V5cyAweEU1
-RTA1NUMzCg==
+my m4 is processing the same snippet about AC_C_FIND_ENIAN over and over 
+again.... has anyone else seen this? has any one an idea on how to fix that? I 
+have one more hole to plug in pulseaudio and I can not commit because i can 
+not build it right now...
 
---nextPart1714990.IOGG0lXJMU
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
 
-iEYEABECAAYFAkunCfMACgkQXJ70z+XgVcNbFwCfTDB5pqgw2gmVp7v2iMr8Sd8r
-eEUAoMY/eGxN1aRBJmzX2/Qgx65DvnUf
-=F28p
------END PGP SIGNATURE-----
 
---nextPart1714990.IOGG0lXJMU--
+
