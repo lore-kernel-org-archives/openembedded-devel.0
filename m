@@ -1,30 +1,30 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from [148.204.65.239] (helo=localhost.localdomain)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Ntkcp-0003L7-8H
+	(envelope-from <aalonso@localhost.localdomain>) id 1NtlHI-0003dS-HX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Mar 2010 17:37:21 +0100
-Received: (qmail 4390 invoked by uid 813007); 22 Mar 2010 16:33:59 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 22 Mar 2010 16:33:59 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	Mon, 22 Mar 2010 18:19:06 +0100
+Received: from localhost.localdomain (localhost.localdomain [127.0.0.1])
+	by localhost.localdomain (8.14.3/8.14.3) with ESMTP id o2MHOvZr002972; 
+	Mon, 22 Mar 2010 11:24:57 -0600
+Received: (from aalonso@localhost)
+	by localhost.localdomain (8.14.3/8.14.3/Submit) id o2MHOuOt002970;
+	Mon, 22 Mar 2010 11:24:56 -0600
+From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Mar 2010 17:33:57 +0100
-User-Agent: KMail/1.13.1 (Linux/2.6.34-rc2; KDE/4.4.1; x86_64; ; )
-References: <20100322160729.4972.62697.stgit@ES-J7S4D2J.amer.consind.ge.com>
-In-Reply-To: <20100322160729.4972.62697.stgit@ES-J7S4D2J.amer.consind.ge.com>
-MIME-Version: 1.0
-Message-Id: <201003221733.58036.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Date: Mon, 22 Mar 2010 11:24:53 -0600
+Message-Id: <1269278693-2935-1-git-send-email-aalonso00@gmail.com>
+X-Mailer: git-send-email 1.6.6.1
+In-Reply-To: <openembedded-devel@lists.openembedded.org>
+References: <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 148.204.65.239
+X-SA-Exim-Mail-From: aalonso@localhost.localdomain
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=0.2 required=5.0 tests=AWL,BAYES_00,HELO_LH_LD,
+	NO_DNS_FOR_FROM,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC][PATCH v2] Alternative to busybox, using "proper tools"
+Subject: [PATCH v2] u-boot_git.bb: add xilinx ml507 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,121 +38,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Mar 2010 16:37:21 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 22 Mar 2010 17:19:06 -0000
 
-Dnia poniedzia=C5=82ek, 22 marca 2010 o 17:08:20 Martyn Welch napisa=C5=82(=
-a):
+* Based on xilinx official repos
+* If a hardware project dir is set in local.conf XILINX_BSP_PATH
+* it will over write xparameters header and append some canonical
+* definitions. It also install u-boot elf executable for bare metal
+* execution, early development stages.
 
-> This patch provides a mechanism to replace busybox by defining a busybox
-> package which actually just requires a set of other packages.
->=20
->     To get it to be used rather than the standard busybox, define:
->=20
->     PREFERRED_PROVIDER_busybox =3D "busybox-alt"
-> ---
->=20
->  Marcin: Something like this you mean?
+Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
+---
+ recipes/u-boot/u-boot_git.bb |   21 ++++++++++++++++++++-
+ 1 files changed, 20 insertions(+), 1 deletions(-)
 
-Yes, few notes:
-=20
-> diff --git a/recipes/busybox/busybox-alt_1.bb
-> b/recipes/busybox/busybox-alt_1.bb new file mode 100644
-
-busybox-alt.bb is fine too - PV will be 1.0 then
-
-> +++ b/recipes/busybox/busybox-alt_1.bb
-
-> +ALLOW_EMPTY =3D "1"
-> +PACKAGES =3D "busybox"
-> +PACKAGE_ARCH =3D "all"
-> +
-> +PROVIDES =3D "busybox"
-> +DEFAULT_PREFERENCE =3D "1"
-
-"-1" is more proper - we do not want people to get busybox-alt instead of=20
-busybox by mistake.
-
-RDEPENDS =3D "task-proper-tools"
-
-One line looks better. DEPENDS are not needed.
-
-> +++ b/recipes/tasks/task-proper-tools.bb
-> @@ -4,33 +4,107 @@ PR =3D "r11"
-
-Bump PR.
-
->  RDEPENDS_${PN} =3D "\
-> +		bash \
-> +		bc \
-> +		bind-utils \
-
-> +		binutils \
-
-Not needed - 'binutils-symlinks' depends on it.
-
-> +		bzip2 \
-> +		console-tools \
-
-> +		dhcp-client \
-
-I added 'pump' - but thats minor.
-
-> +		e2fsprogs-fsck \
-
-In .dev this is in util-linux-ng now.
-
-> +		e2fsprogs-libs \
-
-What for this is?
-
-> +		ifupdown-ubuntu \
-
-Can we rename it to 'ifupdown'?
-
-> +		iputils-ping \
-> +		iputils-ping6 \
-> +		iputils-arping \
-
-
-> +		minicom \
-
-Maybe 'picocom' would be nice too.
-
-> +		mktemp \
-
-> +		ncurses \
-
-I added "ncurses-tools" - gives few utils more.
-
-> +		openrdate \
-> +		realpath \
-
-
-> +		start-stop-daemon \
-
-Nice - I added 'dpkg' instead but it was overkill.
-
-> +		syslog-ng \
-> +		sysvinit \
-> +		tftp-hpa \
-> +		time \
-
-I added 'shadow' to the list.
-
-
-> +DEPENDS_${PN} =3D "\
-
-DEPENDS are not needed.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
+diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
+index fb81caf..928642d 100644
+--- a/recipes/u-boot/u-boot_git.bb
++++ b/recipes/u-boot/u-boot_git.bb
+@@ -1,5 +1,5 @@
+ require u-boot.inc
+-PR ="r42"
++PR ="r43"
+ 
+ FILESPATHPKG =. "u-boot-git:"
+ 
+@@ -207,6 +207,9 @@ SRC_URI_append_c7x0 = "file://pdaXrom-u-boot.patch;patch=1 \
+ SRC_URI_sheevaplug = "git://git.denx.de/u-boot-marvell.git;protocol=git;branch=testing"
+ SRCREV_sheevaplug = "119b9942da2e450d4e525fc004208dd7f7d062e0"
+ 
++SRC_URI_xilinx-ml507 = "git://git.xilinx.com/u-boot-xlnx.git;protocol=git"
++SRCREV_xilinx-ml507 = "26e999650cf77c16f33c580abaadab2532f5e8b2"
++
+ S = "${WORKDIR}/git"
+ 
+ 
+@@ -237,3 +240,19 @@ do_deploy_prepend_mini2440() {
+ do_deploy_prepend_micro2440() {
+ 	cp ${S}/u-boot-nand16k.bin ${S}/u-boot.bin
+ }
++
++do_configure_prepend_xilinx-ml507() {
++if [ -e "${XILINX_BSP_PATH}/ppc440_0/include/xparameters.h" ]; then
++    cp ${XILINX_BSP_PATH}/ppc440_0/include/xparameters.h \
++    ${S}/board/xilinx/ml507
++    echo "#define XPAR_PLB_CLOCK_FREQ_HZ XPAR_CPU_PPC440_MPLB_FREQ_HZ
++#define XPAR_CORE_CLOCK_FREQ_HZ XPAR_CPU_PPC440_CORE_CLOCK_FREQ_HZ
++#define XPAR_PCI_0_CLOCK_FREQ_HZ    0" >> ${S}/board/xilinx/ml507/xparameters.h
++fi
++}
++
++do_deploy_prepend_xilinx-ml507() {
++if [ -d "${XILINX_BSP_PATH}" ]; then
++    install ${S}/u-boot ${XILINX_BSP_PATH}
++fi
++}
+-- 
+1.6.6.1
 
 
 
