@@ -1,23 +1,23 @@
 Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NteMZ-0005bJ-Qw
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NteOS-0005ix-2K
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Mar 2010 10:56:04 +0100
-Received: (qmail 19701 invoked by uid 813007); 22 Mar 2010 09:52:53 -0000
+	Mon, 22 Mar 2010 10:58:00 +0100
+Received: (qmail 27095 invoked by uid 813007); 22 Mar 2010 09:54:50 -0000
 X-clamdmail: clamdmail 0.18a
 Received: from 195.149.226.213 (HELO home.localnet)
 	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 22 Mar 2010 09:52:53 -0000
+	by 195.149.226.213 with ESMTPA; 22 Mar 2010 09:54:50 -0000
 From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Mar 2010 10:51:25 +0100
+Date: Mon, 22 Mar 2010 10:53:22 +0100
 User-Agent: KMail/1.13.1 (Linux/2.6.33-rc7-00064-gac73fdd; KDE/4.4.1; x86_64; ;
 	)
 References: <20100322092415.27540.53806.stgit@ES-J7S4D2J.amer.consind.ge.com>
-	<20100322093440.27540.50671.stgit@ES-J7S4D2J.amer.consind.ge.com>
-In-Reply-To: <20100322093440.27540.50671.stgit@ES-J7S4D2J.amer.consind.ge.com>
+	<20100322093506.27540.52750.stgit@ES-J7S4D2J.amer.consind.ge.com>
+In-Reply-To: <20100322093506.27540.52750.stgit@ES-J7S4D2J.amer.consind.ge.com>
 MIME-Version: 1.0
-Message-Id: <201003221051.26027.marcin@juszkiewicz.com.pl>
+Message-Id: <201003221053.22941.marcin@juszkiewicz.com.pl>
 X-SA-Exim-Connect-IP: 195.149.226.213
 X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -26,7 +26,7 @@ X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 01/12] commit 587374363efe3fbd07f6a3d25bfb11230ac012f9
+Subject: Re: [PATCH 05/12] Add alternatives to patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,25 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Mar 2010 09:56:04 -0000
+X-List-Received-Date: Mon, 22 Mar 2010 09:58:00 -0000
 Content-Type: Text/Plain;
   charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dnia poniedzia=C5=82ek, 22 marca 2010 o 10:34:40 Martyn Welch napisa=C5=82(=
+Dnia poniedzia=C5=82ek, 22 marca 2010 o 10:35:06 Martyn Welch napisa=C5=82(=
 a):
-> Funky alt busybox
->=20
->     This patch provides a mechanism to replace busybox buy defining a
-> busybox package which actually just requires a set of other packages.
->=20
->     To get it to be used rather than the standard busybox, define:
->=20
->     PREFERRED_PROVIDER_busybox =3D "busybox-alt"
+> This adds an alternatives link for /bin/sh to the bash package. When
+> installed this will make bash overide the busybox provided shell for
+> "/bin/sh". This may or may not be desirable, but including it does allow =
+an
+> image to be provided without busybox.
 
-Please merge that into tasks/task-proper-tools.bb which was created for sam=
-e=20
-reason.
+update-alternatives is shell script so we can end in shellless system ;(
 
 Regards,=20
 =2D-=20
