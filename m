@@ -1,39 +1,35 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from vms173013pub.verizon.net ([206.46.173.13])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <slapinid@gmail.com>) id 1NtnxO-0002QU-3Q
+	(envelope-from <denis@denix.org>) id 1Nto8n-0004Hs-OS
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Mar 2010 21:10:39 +0100
-Received: by wyb28 with SMTP id 28so2622937wyb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Mar 2010 13:07:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:message-id:subject
-	:from:to:content-type;
-	bh=yt2WHU9kacL+D1xEpcYG6JkzQXHR2I7jKRRqDa3JBh0=;
-	b=wXAjztFRwSJd8ClgF9ikLQU+IpZnecW64BO8hv4jcHjJNJAJJqN46unIvlo9CHjtvU
-	QBhBqxzdiaktXM6XwwvfZvm4GZJz/7t0t+1LIl9gddhSIDq+0D4h7kWwEqFh1bMosjxy
-	CaiY0swESROJnRlHnLwf6IdDMFgIfQL5Ub+O8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=EosmLFur3NpLFXh16E47iHe5lgIP4jycNE+8XY8AnECot40kDn7QrPDEZ6Rb3+qYVe
-	2yTQMDQlrykiUB5aijAKAD8YtRpvIycGZ/aQaanYsUk1stem2WucPTEz5RdpLEjP2wHl
-	xKjP2GEp2a02IIhUD4y4+agP1hTdPPPoBFMW8=
-MIME-Version: 1.0
-Received: by 10.216.88.5 with SMTP id z5mr4181579wee.192.1269288449087; Mon, 
-	22 Mar 2010 13:07:29 -0700 (PDT)
-Date: Mon, 22 Mar 2010 23:07:29 +0300
-Message-ID: <48239d391003221307u298b392m76fc618cec2c44c0@mail.gmail.com>
-From: Sergey Lapin <slapinid@gmail.com>
+	Mon, 22 Mar 2010 21:22:28 +0100
+Received: from gandalf.denix.org ([unknown] [71.251.58.177])
+	by vms173013.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0KZP000XP9UOG6Z5@vms173013.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	22 Mar 2010 15:21:00 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 2B05314AF60; Mon,
+	22 Mar 2010 16:18:40 -0400 (EDT)
+Date: Mon, 22 Mar 2010 16:18:40 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: slapinid@gmail.com
+Message-id: <20100322201840.GB28005@denix.org>
+References: <201003222055.23408.murat@bilkon-kontrol.com.tr>
+	<20100322191054.GA28005@denix.org>
+	<201003222143.00252.murat@bilkon-kontrol.com.tr>
+MIME-version: 1.0
+In-reply-to: <201003222143.00252.murat@bilkon-kontrol.com.tr>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.13
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: sysklogd vs busybox
+Subject: Re: u-boot_git recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,24 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Mar 2010 20:10:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 22 Mar 2010 20:22:28 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hi, all!
+On Mon, Mar 22, 2010 at 09:43:00PM +0200, Murat Karadeniz wrote:
+> murat@linux-dm4x:~/system/oe/build> bitbake -k u-boot_git
 
-For some of my images I need to have normal syslogd/klogd instead
-of ones provided by busybox. I don;t want to have special version of
-busybox for these images,
-but it RRECOMMENDS busybox-syslog which contains config files and init script.
+You call bitbake to build a package by its name w/o a version (unless you use 
+-b option for a specific recipe), hence:
 
-A problem is that these files are incompatble with normal syslogd/klogd pair.
-when I set RCONFLICTS = "busybox-syslog", sysklogd never appears in image.
-How could I force it in (and busybox-syslog out) without too much changes
-in complex busybox recipes (which I don't want to touch since that
-could preak something
-for somebody)?
+$ bitbake -k u-boot
 
-All the best,
-S.
+> NOTE: Handling BitBake files: \ (8095/8095) [100 %]      
+> Parsing of 8095 .bb files complete (7785 cached, 310 parsed). 7917 targets, 
+> 331 skipped, 0 masked, 0 errors.
+> ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 'u-
+> boot_git' but it wasn't found in any PACKAGE or RPROVIDES variables
+> Unknown Event: <bb.event.NoProvider instance at 0xf38524c>                                                                                      
+> NOTE: Resolving any missing task queue dependencies                                                                                             
+> ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 'u-
+> boot_git' but it wasn't found in any PACKAGE or RPROVIDES variables
+> Unknown Event: <bb.event.NoProvider instance at 0x1012e8ec>                                                                                     
+> NOTE: Runtime target 'u-boot_git' is unbuildable, removing...                                                                                   
+> Missing or unbuildable dependency chain was: ['u-boot_git'] 
+> 
+> And i m sorry, i could not understand "which branch you are using". i git 
+> clone  openembedded from repository. And same way i get bitbake from git repo. 
+> And i made a few conf as told as openembedded getting started. i m trying only 
+> build u-boot with oe and bitbake.
+
+The default branch being org.openembedded.dev, which is a development branch, 
+unlike a stable branch, which you can checkout specifically.
+
+-- 
+Denys
 
 
