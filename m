@@ -1,23 +1,25 @@
-Received: from exprod5og112.obsmtp.com ([64.18.0.24])
+Received: from exprod5og111.obsmtp.com ([64.18.0.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martyn.welch@ge.com>) id 1Nte1k-0001UD-Ni
+	(envelope-from <martyn.welch@ge.com>) id 1Nte1o-0001gY-Js
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Mar 2010 10:34:32 +0100
-Received: from source ([12.43.191.1]) (using TLSv1) by
-	exprod5ob112.postini.com ([64.18.4.12]) with SMTP
-	ID DSNKS6c457/zh+J3RGg5zu8lF6Nw9/bJUVIy@postini.com;
-	Mon, 22 Mar 2010 02:31:23 PDT
+	Mon, 22 Mar 2010 10:34:38 +0100
+Received: from source ([4.79.213.129]) (using TLSv1) by
+	exprod5ob111.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKS6c47fC8gSrJi+KWZ+/rVUr/D4Zeipar@postini.com;
+	Mon, 22 Mar 2010 02:31:27 PDT
 Received: from unknown (HELO alpmlip01.e2k.ad.ge.com) ([3.159.17.48])
-	by Alpmlip08.e2k.ad.ge.com with ESMTP; 22 Mar 2010 05:31:18 -0400
+	by Alpmlip04.e2k.ad.ge.com with ESMTP; 22 Mar 2010 05:31:25 -0400
 Received: from es-j7s4d2j.amer.consind.ge.com ([3.138.54.92])
-	by alpmlip01.e2k.ad.ge.com with ESMTP; 22 Mar 2010 05:31:18 -0400
+	by alpmlip01.e2k.ad.ge.com with ESMTP; 22 Mar 2010 05:31:25 -0400
 From: Martyn Welch <martyn.welch@ge.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Mar 2010 09:34:33 +0000
-Message-ID: <20100322092415.27540.53806.stgit@ES-J7S4D2J.amer.consind.ge.com>
+Date: Mon, 22 Mar 2010 09:34:40 +0000
+Message-ID: <20100322093440.27540.50671.stgit@ES-J7S4D2J.amer.consind.ge.com>
+In-Reply-To: <20100322092415.27540.53806.stgit@ES-J7S4D2J.amer.consind.ge.com>
+References: <20100322092415.27540.53806.stgit@ES-J7S4D2J.amer.consind.ge.com>
 User-Agent: StGIT/0.13
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 64.18.0.24
+X-SA-Exim-Connect-IP: 64.18.0.22
 X-SA-Exim-Mail-From: martyn.welch@ge.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -25,7 +27,7 @@ X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_MED autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] Enabling busybox-less builds
+Subject: [PATCH 01/12] commit 587374363efe3fbd07f6a3d25bfb11230ac012f9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,33 +41,139 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Mar 2010 09:34:34 -0000
+X-List-Received-Date: Mon, 22 Mar 2010 09:34:38 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 
-This patch series is my first attempt at providing a working busybox-less
-build. I'd hoped to clean it up a bit more before posting this, but as hrw is
-looking at this as well, I'll post it now for discussion.
+Funky alt busybox
 
-To prototype this, we have created an alternative "busybox" package that,
-rather than building a version of busybox, causes the build to depend on a
-suite of other packages which provide the functionality provided in a standard
-build by busybox. I'm sure this list isn't perfect, but it's working for us.
+    This patch provides a mechanism to replace busybox buy defining a busybox package which actually just requires a set of other packages.
 
-We had a bit of issue with the update-alternatives that we were using - it
-seemed to need both of the alternatives in the same directory, hence some of
-these patches moving the install location of apps around.
+    To get it to be used rather than the standard busybox, define:
 
-There is also a nasty cludge to provide the hwclock script that Marcin
-identifed as a problem. I've been meaning to get the alternative busybox script
-to provide this, but haven't got arround to it yet.
+    PREFERRED_PROVIDER_busybox = "busybox-alt"
+---
 
-We also replaced ifupdown with the ubuntu version, it seems to be a little
-different from the debian version and it resolved some issues for us.
+ recipes/busybox/busybox-alt_1.bb |  110 ++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 110 insertions(+), 0 deletions(-)
 
-Please let me know what you think,
+diff --git a/recipes/busybox/busybox-alt_1.bb b/recipes/busybox/busybox-alt_1.bb
+new file mode 100644
+index 0000000..218ff4c
+--- /dev/null
++++ b/recipes/busybox/busybox-alt_1.bb
+@@ -0,0 +1,110 @@
++DESCRIPTION = "A set of alternatives to busybox"
++
++ALLOW_EMPTY = "1"
++PACKAGES = "busybox"
++PACKAGE_ARCH = "all"
++
++PROVIDES = "busybox"
++DEFAULT_PREFERENCE = "1"
++
++RDEPENDS = "\
++  bash \
++  bc \
++  bind-utils \
++  binutils \
++  binutils-symlinks \
++  bzip2 \
++  console-tools \
++  coreutils \
++  cpio \
++  debianutils \
++  dhcp-client \
++  diffutils \
++  e2fsprogs \
++  e2fsprogs-fsck \
++  e2fsprogs-libs \
++  fbset \
++  findutils \
++  gawk \
++  grep \
++  gzip \
++  ifupdown \
++#  inetutils \
++  iproute2 \
++  iputils-ping \
++  iputils-ping6 \
++  iputils-arping \
++  less \
++  minicom \
++  mktemp \
++  module-init-tools \
++  ncurses \
++  netcat \
++  net-tools \
++  patch \
++  procps \
++  psmisc \
++  openrdate \
++  realpath \
++  sed \
++  start-stop-daemon \
++  syslog-ng \
++  sysvinit \
++  tar \
++  tftp-hpa \
++  time \
++  traceroute \
++  util-linux-ng \
++  unzip \
++  vim \
++  wget \
++"
++
++DEPENDS = "\
++  bash \
++  bc \
++  bind \
++  binutils \
++  bzip2 \
++  console-tools \
++  coreutils \
++  cpio \
++  debianutils \
++  dhcp \
++  diffutils \
++  e2fsprogs \
++  fbset \
++  findutils \
++  gawk \
++  grep \
++  gzip \
++  ifupdown \
++#  inetutils \
++  iproute2 \
++  iputils \
++  less \
++  minicom \
++  mktemp \
++  module-init-tools \
++  ncurses \
++  netcat \
++  net-tools \
++  patch \
++  procps \
++  psmisc \
++  openrdate \
++  realpath \
++  sed \
++  start-stop-daemon \
++  syslog-ng \
++  sysvinit \
++  tar \
++  tftp-hpa \
++  time \
++  traceroute \
++  util-linux-ng \
++  unzip \
++  vim \
++  wget \
++"
++
 
-Martyn
 
 --
 Martyn Welch (Principal Software Engineer)   |   Registered in England and
