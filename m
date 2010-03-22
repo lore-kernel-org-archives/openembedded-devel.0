@@ -1,25 +1,25 @@
-Received: from exprod5og111.obsmtp.com ([64.18.0.22])
+Received: from exprod5og109.obsmtp.com ([64.18.0.188])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martyn.welch@ge.com>) id 1Nte1o-0001gY-Js
+	(envelope-from <martyn.welch@ge.com>) id 1Nte1u-0001t5-Rz
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Mar 2010 10:34:38 +0100
-Received: from source ([4.79.213.129]) (using TLSv1) by
-	exprod5ob111.postini.com ([64.18.4.12]) with SMTP
-	ID DSNKS6c47fC8gSrJi+KWZ+/rVUr/D4Zeipar@postini.com;
-	Mon, 22 Mar 2010 02:31:27 PDT
+	Mon, 22 Mar 2010 10:34:43 +0100
+Received: from source ([4.78.218.129]) (using TLSv1) by
+	exprod5ob109.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKS6c49NTGhx1mcTWwue0sctKUVPaFCi82@postini.com;
+	Mon, 22 Mar 2010 02:31:33 PDT
 Received: from unknown (HELO alpmlip01.e2k.ad.ge.com) ([3.159.17.48])
-	by Alpmlip04.e2k.ad.ge.com with ESMTP; 22 Mar 2010 05:31:25 -0400
+	by Cinmlip07.e2k.ad.ge.com with ESMTP; 22 Mar 2010 05:31:31 -0400
 Received: from es-j7s4d2j.amer.consind.ge.com ([3.138.54.92])
-	by alpmlip01.e2k.ad.ge.com with ESMTP; 22 Mar 2010 05:31:25 -0400
+	by alpmlip01.e2k.ad.ge.com with ESMTP; 22 Mar 2010 05:31:31 -0400
 From: Martyn Welch <martyn.welch@ge.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 22 Mar 2010 09:34:40 +0000
-Message-ID: <20100322093440.27540.50671.stgit@ES-J7S4D2J.amer.consind.ge.com>
+Date: Mon, 22 Mar 2010 09:34:46 +0000
+Message-ID: <20100322093446.27540.67012.stgit@ES-J7S4D2J.amer.consind.ge.com>
 In-Reply-To: <20100322092415.27540.53806.stgit@ES-J7S4D2J.amer.consind.ge.com>
 References: <20100322092415.27540.53806.stgit@ES-J7S4D2J.amer.consind.ge.com>
 User-Agent: StGIT/0.13
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 64.18.0.22
+X-SA-Exim-Connect-IP: 64.18.0.188
 X-SA-Exim-Mail-From: martyn.welch@ge.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -27,7 +27,7 @@ X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_MED autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 01/12] commit 587374363efe3fbd07f6a3d25bfb11230ac012f9
+Subject: [PATCH 02/12] commit fac64459a3623afe4590bf1de9de826a79e0a8fe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,138 +41,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Mar 2010 09:34:38 -0000
+X-List-Received-Date: Mon, 22 Mar 2010 09:34:43 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 
-Funky alt busybox
+Add realpath
 
-    This patch provides a mechanism to replace busybox buy defining a busybox package which actually just requires a set of other packages.
-
-    To get it to be used rather than the standard busybox, define:
-
-    PREFERRED_PROVIDER_busybox = "busybox-alt"
+    Add realpath utility, this is needed when building without busybox.
 ---
 
- recipes/busybox/busybox-alt_1.bb |  110 ++++++++++++++++++++++++++++++++++++++
- 1 files changed, 110 insertions(+), 0 deletions(-)
+ recipes/realpath/files/makefile.patch |   12 ++++++++++++
+ recipes/realpath/realpath_1.10.bb     |   19 +++++++++++++++++++
+ 2 files changed, 31 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/busybox/busybox-alt_1.bb b/recipes/busybox/busybox-alt_1.bb
+diff --git a/recipes/realpath/files/makefile.patch b/recipes/realpath/files/makefile.patch
 new file mode 100644
-index 0000000..218ff4c
+index 0000000..d97ba59
 --- /dev/null
-+++ b/recipes/busybox/busybox-alt_1.bb
-@@ -0,0 +1,110 @@
-+DESCRIPTION = "A set of alternatives to busybox"
++++ b/recipes/realpath/files/makefile.patch
+@@ -0,0 +1,12 @@
++diff -urN realpath-1.10.orig/Makefile realpath-1.10/Makefile
++--- realpath-1.10.orig/Makefile	2009-07-28 16:04:11.000000000 +0100
+++++ realpath-1.10/Makefile	2009-07-28 16:08:44.000000000 +0100
++@@ -3,7 +3,7 @@
++ # "@(#)realpath:$Id: Makefile,v 1.30 2006-05-07 19:41:41 robert Exp $"
++ #
++ 
++-VERSION	= $(shell dpkg-parsechangelog | sed -ne 's/^Version: *//p')
+++#VERSION	= $(shell dpkg-parsechangelog | sed -ne 's/^Version: *//p')
++ 
++ CC	= gcc
++ CFLAGS	= -Wall -Wstrict-prototypes -Wmissing-prototypes -DVERSION='"$(VERSION)"' 
+diff --git a/recipes/realpath/realpath_1.10.bb b/recipes/realpath/realpath_1.10.bb
+new file mode 100644
+index 0000000..911f987
+--- /dev/null
++++ b/recipes/realpath/realpath_1.10.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "Debian's Realpath Utility"
++SECTION = "utility"
++PRIORITY = "optional"
++LICENSE = "GPL"
++#DEPENDS = "perl-native po4a-native"
++PR = "r0"
 +
-+ALLOW_EMPTY = "1"
-+PACKAGES = "busybox"
-+PACKAGE_ARCH = "all"
++SRC_URI = "${DEBIAN_MIRROR}/main/r/realpath/realpath_${PV}.tar.gz;name=realpath \
++	file://makefile.patch;patch=1"
 +
-+PROVIDES = "busybox"
-+DEFAULT_PREFERENCE = "1"
++SRC_URI[realpath.md5sum] = "1f2b2bceaacadf79162a9cbb5956c3b6"
++SRC_URI[realpath.sha256sum] = "72199f9c11d1f9a36b3b9693988b558a167def6b88fa146ea6a7f7223f96c535"
 +
-+RDEPENDS = "\
-+  bash \
-+  bc \
-+  bind-utils \
-+  binutils \
-+  binutils-symlinks \
-+  bzip2 \
-+  console-tools \
-+  coreutils \
-+  cpio \
-+  debianutils \
-+  dhcp-client \
-+  diffutils \
-+  e2fsprogs \
-+  e2fsprogs-fsck \
-+  e2fsprogs-libs \
-+  fbset \
-+  findutils \
-+  gawk \
-+  grep \
-+  gzip \
-+  ifupdown \
-+#  inetutils \
-+  iproute2 \
-+  iputils-ping \
-+  iputils-ping6 \
-+  iputils-arping \
-+  less \
-+  minicom \
-+  mktemp \
-+  module-init-tools \
-+  ncurses \
-+  netcat \
-+  net-tools \
-+  patch \
-+  procps \
-+  psmisc \
-+  openrdate \
-+  realpath \
-+  sed \
-+  start-stop-daemon \
-+  syslog-ng \
-+  sysvinit \
-+  tar \
-+  tftp-hpa \
-+  time \
-+  traceroute \
-+  util-linux-ng \
-+  unzip \
-+  vim \
-+  wget \
-+"
++CFLAGS += "-DVERSION=${PV}"
 +
-+DEPENDS = "\
-+  bash \
-+  bc \
-+  bind \
-+  binutils \
-+  bzip2 \
-+  console-tools \
-+  coreutils \
-+  cpio \
-+  debianutils \
-+  dhcp \
-+  diffutils \
-+  e2fsprogs \
-+  fbset \
-+  findutils \
-+  gawk \
-+  grep \
-+  gzip \
-+  ifupdown \
-+#  inetutils \
-+  iproute2 \
-+  iputils \
-+  less \
-+  minicom \
-+  mktemp \
-+  module-init-tools \
-+  ncurses \
-+  netcat \
-+  net-tools \
-+  patch \
-+  procps \
-+  psmisc \
-+  openrdate \
-+  realpath \
-+  sed \
-+  start-stop-daemon \
-+  syslog-ng \
-+  sysvinit \
-+  tar \
-+  tftp-hpa \
-+  time \
-+  traceroute \
-+  util-linux-ng \
-+  unzip \
-+  vim \
-+  wget \
-+"
-+
++do_install () {
++	install -d ${D}${bindir}
++	install -p -m 0755 ${S}/realpath ${D}${bindir}
++}
 
 
 --
