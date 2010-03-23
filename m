@@ -1,40 +1,26 @@
-Received: from smtp-out30.alice.it ([85.33.2.30])
+Received: from [93.100.16.104] (helo=mate.hex)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1NuB86-000072-KS
+	(envelope-from <rik@mate.hex>) id 1NuC60-0000Gf-Qr
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Mar 2010 21:55:17 +0100
-Received: from FBCMMO04.fbc.local ([192.168.184.135]) by smtp-out30.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 23 Mar 2010 21:52:03 +0100
-Received: from FBCMCL01B08.fbc.local ([192.168.171.46]) by FBCMMO04.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 23 Mar 2010 21:52:02 +0100
-Received: from jcn ([82.60.124.72]) by FBCMCL01B08.fbc.local with Microsoft
-	SMTPSVC(6.0.3790.3959); Tue, 23 Mar 2010 21:52:01 +0100
-Received: from ao2 by jcn with local (Exim 4.71)
-	(envelope-from <ospite@studenti.unina.it>)
-	id 1NuB4y-0001ov-Lb; Tue, 23 Mar 2010 21:52:00 +0100
-From: Antonio Ospite <ospite@studenti.unina.it>
+	Tue, 23 Mar 2010 22:57:09 +0100
+Received: by mate.hex (Postfix, from userid 1000)
+	id 15F7321432; Wed, 24 Mar 2010 00:51:20 +0300 (MSK)
+From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Mar 2010 21:51:56 +0100
-Message-Id: <1269377516-6969-1-git-send-email-ospite@studenti.unina.it>
-X-Mailer: git-send-email 1.7.0.3
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-X-OriginalArrivalTime: 23 Mar 2010 20:52:01.0538 (UTC)
-	FILETIME=[AFD0C620:01CACACA]
-X-SA-Exim-Connect-IP: 85.33.2.30
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+Date: Wed, 24 Mar 2010 00:51:08 +0300
+Message-Id: <1269381068-5518-1-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.6.4.2
+In-Reply-To: <201003211505.39554.roman@khimov.ru>
+References: <201003211505.39554.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 93.100.16.104
+X-SA-Exim-Mail-From: rik@mate.hex
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.1 required=5.0 tests=BAYES_00,NO_DNS_FOR_FROM,
+	RCVD_IN_PBL,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: [PATCH] base.bbclass: add missing import of metadata_scm
+Subject: [PATCH 01/44] cpan-base: add perl version to PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,34 +34,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Mar 2010 20:55:17 -0000
+X-List-Received-Date: Tue, 23 Mar 2010 21:57:09 -0000
 
-In commit 89b7e433719f43f1c36c76cb8856d559014e99bc metadata_scm.bbclass
-functions were factored out from base.bbclass, but the new file was not
-included.
+Makes perl modules rebuild on perl version change, since binary compatibility
+could be broken with that (although perl itself tries to maintain it  within
+patchlevel range, like 5.8.7 -> 5.8.8).
 
-This prevented METADATA_SCM, METADATA_REVISION, METADATA_BRANCH to be
-set; for instance this caused oestats-client stop working.
+This is conditional on PACKAGE_ARCH, since there is nothing to rebuild for
+pure perl modules (and those should use 'PACKAGE_ARCH = "all"') even if they
+break with perl version change.
 
-Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+This also should ease transition to perl 5.10.1.
+
+Signed-off-by: Roman I Khimov <khimov@altell.ru>
 ---
- classes/base.bbclass |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+ classes/cpan-base.bbclass |    8 ++++++++
+ 1 files changed, 8 insertions(+), 0 deletions(-)
 
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index 182ce62..cda9b8f 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -7,6 +7,7 @@ inherit packagedata
- inherit mirrors
- inherit utils
- inherit utility-tasks
-+inherit metadata_scm
+diff --git a/classes/cpan-base.bbclass b/classes/cpan-base.bbclass
+index 8eb173e..1c77c9b 100644
+--- a/classes/cpan-base.bbclass
++++ b/classes/cpan-base.bbclass
+@@ -35,6 +35,14 @@ def is_target(d):
+         return "yes"
+     return "no"
  
- die() {
- 	oefatal "$*"
++def perl_get_version_suffix(d):
++	if bb.data.expand('${PACKAGE_ARCH}', d) != "all":
++		return '-' + get_perl_version(d)
++	else:
++		return ''
++
++PR .= "${@perl_get_version_suffix(d)}"
++
+ PERLLIBDIRS = "${@perl_get_libdirs(d)}"
+ 
+ FILES_${PN}-dbg += "${PERLLIBDIRS}/auto/*/.debug \
 -- 
-1.7.0.3
+1.6.4.2
 
 
 
