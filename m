@@ -1,36 +1,35 @@
 Received: from qw-out-1920.google.com ([74.125.92.147])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1Nu6Cw-0007bJ-Mo
+	(envelope-from <kergoth@gmail.com>) id 1Nu6HZ-0000Dx-OH
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Mar 2010 16:40:01 +0100
-Received: by qw-out-1920.google.com with SMTP id 4so590101qwk.36
+	Tue, 23 Mar 2010 16:45:03 +0100
+Received: by qw-out-1920.google.com with SMTP id 4so591445qwk.36
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Mar 2010 08:36:47 -0700 (PDT)
+	Tue, 23 Mar 2010 08:41:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:sender:received:in-reply-to
 	:references:from:date:x-google-sender-auth:message-id:subject:to
-	:content-type; bh=eL4YdNNMcySkZRzzyD4AKF/44tqo62SqU90p8+K5wDU=;
-	b=AJwh3ZIqEuxwIwLMnFfLCW08f5f/borpre0/Ucf9eDPlMBKIpudI4POAsTq+NpAdHK
-	X3guRDFxW7fqmTbBhq8t+0P31wZyQpGOg6+IqkQHd3cKGLVniNCLd3ZwC+Y7Dn04KcSp
-	kNSUdcezL1J9rYTY6paZGuHaG64p6n/QBElLI=
+	:content-type; bh=w04tob1mmplv2O08bTL2z43asJo6Df1f3bwP9mImxsg=;
+	b=X33+YMUMD7m2dAeEAQY0AnNnbfMPOBPSH9UTIuMn+1Bty6FkitnOCJvZcrHC4Z2iFU
+	97GcVyxpThqipoL8xWd3ZT8z8c89GafXfEHdqdHk8UtnbzMctHAczy+bsCgCCJsMYngK
+	8VBtBThmiRJeaTspiUWjrtBZGcizYruJrn7Xk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:from:date
 	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=gKlwlueDOPRGGKmHZSVKLdlvg7VQS16R8PIh5RSt6GyLDwgMS9lW/3jr/bRoZdNjOs
-	NKgQLp1krVEdfeSYzEV9X1xXL/A86Mn6MrThkXHDygC7Jr7sv2GjXbw2iTrUAkxBhyfD
-	jNN0HNnhB1wuXYBcItpK22i2BvQgfwK9kztlg=
+	b=eTPBlgpQhltbIOdDhtFqrCJ9SCzINV2/BCZdOd3xikeWkeh9FLCudMB3XsUvf9vktB
+	A8SqHkqZyz1HT3vLFZ4oJhlMb3cU8PJaojfeDMgAWO0ogBREOe214eKIkoLksHmNf/kd
+	mXHMNmJySoNgtG+aLKLJMvjO2rfXLHFeYJwJM=
 MIME-Version: 1.0
 Sender: kergoth@gmail.com
-Received: by 10.229.222.8 with SMTP id ie8mr788340qcb.16.1269358607264; Tue, 
-	23 Mar 2010 08:36:47 -0700 (PDT)
-In-Reply-To: <201003231050.56580.holger+oe@freyther.de>
+Received: by 10.229.190.129 with SMTP id di1mr852246qcb.75.1269358894120; Tue, 
+	23 Mar 2010 08:41:34 -0700 (PDT)
+In-Reply-To: <20100323094757.GE21210@jama>
 References: <b6ebd0a51003221526y7c47c57esd7bc14cc5e85f893@mail.gmail.com> 
-	<ac9c93b11003230232y2b556dc3t19813973d7c01b46@mail.gmail.com> 
-	<201003231050.56580.holger+oe@freyther.de>
+	<20100323094757.GE21210@jama>
 From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 23 Mar 2010 08:36:27 -0700
-X-Google-Sender-Auth: f970cb1671ded149
-Message-ID: <b6ebd0a51003230836l60042d60m4d31c53a6e29e8db@mail.gmail.com>
+Date: Tue, 23 Mar 2010 08:41:14 -0700
+X-Google-Sender-Auth: 06a4f02696d8e232
+Message-ID: <b6ebd0a51003230841g5fa61480t6330eda0d27596d2@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 74.125.92.147
 X-SA-Exim-Mail-From: kergoth@gmail.com
@@ -55,31 +54,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Mar 2010 15:40:06 -0000
+X-List-Received-Date: Tue, 23 Mar 2010 15:46:09 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Tue, Mar 23, 2010 at 2:50 AM, Holger Hans Peter Freyther <
-holger+oe@freyther.de <holger%2Boe@freyther.de>> wrote:
+On Tue, Mar 23, 2010 at 2:47 AM, Martin Jansa <martin.jansa@gmail.com>wrote:
 
-> On Tuesday 23 March 2010 10:32:59 Frans Meulenbroeks wrote:
-> > Chris, while this is a nice idea it conflicts with having checksums in
-> > the recipe, as that makes the recipes unique.
-> > Unless of course there is (or we create) a way to have multiple
-> > checksums in a recipe and pick the one that is for the version we are
-> > building.
+> On Mon, Mar 22, 2010 at 03:26:53PM -0700, Chris Larson wrote:
+> > Greetings all,
+> >
+> > Thoughts? Questions? Concerns?  I've been wondering if this is really
+> > worthwhile, but I think it is.  I think there is value in keeping old
+> > versions around, but this allows us to avoid cluttering up the repository
+> as
+> > much, and makes it so that one change to a recipe can affect all the
+> > versions in that range by default, or all versions, rather than just the
+> one
+> > version you tested.  Of course, ideally you'd test all versions, but
+> that's
+> > the case today too, its just that now our recipes get bitrotted instead.
+> >  Personally, I'd rather see the old version content continue to be
+> brought
+> > forward by default, and if it fails to build with that, we fix it, but
+> it's
+> > easier to fix a build than to unclutter the repository.
+> >
+> > I'm hoping to get some input on this :)
 >
+> For me it seems easier to read shared stuff in .inc and then multiple
+> files with just include on .inc and checksums. Sometimes with additional
+> patch or some fix only for particular version, instead of one a bit
+> longer file with OVERRIDES.
 >
-> There is a way or could be a way. For the name= we can use a variable in
-> the
-> name (e.g. PV) but have a written out variant for the SRC_URI.
+> But maybe it's just lack of imagination on my side.
+>
+> Also as I stated in some other thread, I think it's usefull to have one
+> version
+> of each major version which was in OE (probably latest from each range
+> you have in nano.bb example), because to test 5 version at least if
+> patches apply cleanly and it builds ok, is much faster than 42 version
+> from example.
 >
 
-
-Good idea, didn't think about using the version as the name or part of it,
-that could alleviate the need for the anonymous python snippet I'm using at
-the moment.  (Aside: it would be nice if you could set a flag on an override
-variable (FOO_arm) and have that flag be pulled over to the main variable
-(FOO) at override collapse time, but BitBake does not do it today).
+I also agreed that it's nicer to duplicate a tiny amount of metadata than to
+have a giant file full of overrides, but with BBVERSIONS, you could keep
+every minor version of a given major version around.  Keep one recipe per
+major version, just keep all the minor versions around.  It really doesn't
+take that long to fire off a loop that builds all variants, I have a script
+for it - bitbake sets a variable that lists them all, but like I said in the
+start of the thread, personally, I'd rather see the versions available, and
+relatively easy to fix if they break, than either remove them entirely or
+let their recipes bitrot.  That's my personal opinion, of course, I'm sure
+others disagree.. but I do think this feature could be useful, even if we
+don't keep every version around, since it makes it easier to share metadata
+across multiple versions without having to create a pile of extra .inc's.
+ foo.inc and foo_ver.bb is great, foo_1.x.inc, etc gets messy fast.
 -- 
 Christopher Larson
 clarson at kergoth dot com
