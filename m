@@ -1,46 +1,46 @@
 Received: from mail-qy0-f195.google.com ([209.85.221.195])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1NuCSs-0000z1-IX
+	(envelope-from <kergoth@gmail.com>) id 1NuCUq-00014o-VO
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Mar 2010 23:20:47 +0100
-Received: by qyk33 with SMTP id 33so2987011qyk.28
+	Tue, 23 Mar 2010 23:22:49 +0100
+Received: by qyk33 with SMTP id 33so2988749qyk.28
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Mar 2010 15:17:37 -0700 (PDT)
+	Tue, 23 Mar 2010 15:19:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to:cc
-	:content-type; bh=9D42NUic1d1TI5XN0YPzH4qCFEXpmV3+dIH02rzU1JI=;
-	b=aDQ2GMeNR24XddKywLY3n6b6WQNYUqv5VDIAdTdXSNFM9/yDaCISNJmnLxEz2xdbAy
-	vq15/5RLacBKlTe+kYX0jWcA13AxpyATfsxR+ALb4ir4QZiySvJDcsCO/60N4Y2QMI4+
-	pUMjqjulI7v6LVLh8OydJ/axtAswTRGqNetSE=
+	:references:from:date:x-google-sender-auth:message-id:subject:to
+	:content-type; bh=BbnYxTPq8Vu+6VLcavSvsaCMmuPuG2oxBDrto9VVOA0=;
+	b=djv2tQ9pmXUb+f2Vd4oY5jidbmG7hT4HsmGeqLd4VTJ00fvumA6I1o+w1MelzZDkpY
+	+UFIxyWM/dv1S+sHRCrNFYygp4gIHSTd1Bod+wonfxvZ0Fvm+9rTdJuiiv0/HYZ8Bf9C
+	gDWvpqpLT2yeZn7IwhwIWac91DiCfYF7y/d3A=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=ueA5uRD5YYLSNyagaQbvJ7OFeWfPHTg8hd0lev6ZnucwCdE4Egurh4W6sRqnWiSa4s
-	Ty+FMDsOmSXjjhnIH3mgEtlZEw5kVLYNhCVVyQ8fuU9swEXgC0Xjt6Qiooqp0fwIKAIk
-	jndrLlMnY/3TjmNaqvBSuZOX9d0DvuUBrapU0=
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=ruRlM8LuU8hKbGHcklyfYT6v5M7VIoDzrilTxHFp+U6Rc3KgtCKjeAXHbtZU/QtHcA
+	/YZy3LQgnTNclhR6la54rBiVVC+TXAZkpLRmyN5m0uAIE3BQ6of/fgtQ1fI60cq89tJ5
+	NVdCjZXt9dQQKzJOUwCAeVvCWX1UztCF3DwAM=
 MIME-Version: 1.0
 Sender: kergoth@gmail.com
-Received: by 10.229.241.66 with SMTP id ld2mr1671432qcb.78.1269382656226; Tue, 
-	23 Mar 2010 15:17:36 -0700 (PDT)
-In-Reply-To: <1269377516-6969-1-git-send-email-ospite@studenti.unina.it>
-References: <1269377516-6969-1-git-send-email-ospite@studenti.unina.it>
+Received: by 10.229.217.130 with SMTP id hm2mr2727718qcb.59.1269382779238; 
+	Tue, 23 Mar 2010 15:19:39 -0700 (PDT)
+In-Reply-To: <20100323204511.GA12446@gmail.com>
+References: <b6ebd0a51003221526y7c47c57esd7bc14cc5e85f893@mail.gmail.com> 
+	<20100323094757.GE21210@jama> <20100323204511.GA12446@gmail.com>
 From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 23 Mar 2010 15:17:16 -0700
-X-Google-Sender-Auth: e59e786c3ce7993f
-Message-ID: <b6ebd0a51003231517i1bc3b18ci34ea9bfc3424be66@mail.gmail.com>
+Date: Tue, 23 Mar 2010 15:19:19 -0700
+X-Google-Sender-Auth: 2613675460047b7a
+Message-ID: <b6ebd0a51003231519v7818d8bjdf749c712f58f0ae@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.221.195
 X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: Martin Jansa <martin.jansa@gmail.com>
-Subject: Re: [PATCH] base.bbclass: add missing import of metadata_scm
+Subject: Re: BBVERSIONS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,49 +54,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Mar 2010 22:20:47 -0000
+X-List-Received-Date: Tue, 23 Mar 2010 22:22:50 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Applied, thanks, nicely spotted, and sorry about that :)
+On Tue, Mar 23, 2010 at 1:45 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-On Tue, Mar 23, 2010 at 1:51 PM, Antonio Ospite <ospite@studenti.unina.it>wrote:
+> On (23/03/10 10:47), Martin Jansa wrote:
+> > On Mon, Mar 22, 2010 at 03:26:53PM -0700, Chris Larson wrote:
+> > > Greetings all,
+> > >
+> > > Thoughts? Questions? Concerns?  I've been wondering if this is really
+> > > worthwhile, but I think it is.  I think there is value in keeping old
+> > > versions around, but this allows us to avoid cluttering up the
+> repository as
+> > > much, and makes it so that one change to a recipe can affect all the
+> > > versions in that range by default, or all versions, rather than just
+> the one
+> > > version you tested.  Of course, ideally you'd test all versions, but
+> that's
+> > > the case today too, its just that now our recipes get bitrotted
+> instead.
+> > >  Personally, I'd rather see the old version content continue to be
+> brought
+> > > forward by default, and if it fails to build with that, we fix it, but
+> it's
+> > > easier to fix a build than to unclutter the repository.
+> > >
+> > > I'm hoping to get some input on this :)
+>
+> I think it could be an useful experiment as an option for packages which
+> dont change so much as the releases progress. However adding stuff to build
+> for multiple version in same recipe can be error prone. I have seen this
+> happening with changes made to .inc files when other recipes break
+> silently.
+>
+> Currently we have per version recipes (roughly) which gives a playground
+> for a given version one can do customization fairly easily and they are
+> contained.
+>
+> If I make change to a given version the recipe will also affect other
+> versions even if nothing of interest was done for those versions due to say
+> PR bump isnt it ?
+>
+> I think moving bitrotted recipes to different location is probably also a
+> good
+> way to speed up parsing time for general users without changing the bb
+> files too much.
+>
+> Recently asking new users about bitbake they were pretty much confused with
+> syntax I think this will add to it.
 
-> In commit 89b7e433719f43f1c36c76cb8856d559014e99bc metadata_scm.bbclass
-> functions were factored out from base.bbclass, but the new file was not
-> included.
->
-> This prevented METADATA_SCM, METADATA_REVISION, METADATA_BRANCH to be
-> set; for instance this caused oestats-client stop working.
->
-> Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
-> ---
->  classes/base.bbclass |    1 +
->  1 files changed, 1 insertions(+), 0 deletions(-)
->
-> diff --git a/classes/base.bbclass b/classes/base.bbclass
-> index 182ce62..cda9b8f 100644
-> --- a/classes/base.bbclass
-> +++ b/classes/base.bbclass
-> @@ -7,6 +7,7 @@ inherit packagedata
->  inherit mirrors
->  inherit utils
->  inherit utility-tasks
-> +inherit metadata_scm
->
->  die() {
->        oefatal "$*"
-> --
-> 1.7.0.3
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
-
-
+Well, as I said previously in the thread, I personally think it's a better
+idea to have the old recipes brought forward with current developments, even
+if it breaks other versions, than let the other recipes rot and never pick
+up those fixes.  This is the dev branch, shit breaks, it happens.  That
+said, you can still constrain a change to a single version with this feature
+used, by using the version override.
 -- 
 Christopher Larson
 clarson at kergoth dot com
