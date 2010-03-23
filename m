@@ -1,28 +1,39 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-iw0-f174.google.com ([209.85.223.174])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Nu0Xg-00022e-Pc
+	(envelope-from <listjiason@gmail.com>) id 1Nu0cf-0002FC-O0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Mar 2010 10:36:57 +0100
-Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
-	[123.192.181.204])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 004BE1B10C79
+	Tue, 23 Mar 2010 10:42:11 +0100
+Received: by iwn4 with SMTP id 4so2142325iwn.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Mar 2010 09:37:28 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Mar 2010 10:33:40 +0100
-User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
+	Tue, 23 Mar 2010 02:38:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:message-id:subject
+	:from:to:content-type;
+	bh=HBSAgiNLXx96lU5vrVqOAis2xs4KvZW+6/x+R2Qwnt8=;
+	b=r9NYhoH5ucmhNaxTVQ4cSbPMcpnClE52JwAuFtD8WKVt7kxOA9uQ8ni6m90wLVul6B
+	BeBi7hlEVjs7iHM7HRLc1mHj3xcH/hblCJXXTYhqG2Ga4juR3fytu+w4lb8iryH6/0Gh
+	5fPTiLgyjEjlCa4vCpXD6xFnejJdVl5XlFYM8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=PzH9mYSc1qrWLvDRK0JdtiS3e9riuvM79sCNSr8AD7zXhSnMLh1DZLVK70TecNqZKd
+	lJVZpc94Y/YGgbIaQXe7K2GdRkyCj5hR5xo6rFS+LInBTXiAi85nxm3H5qf8p6eIsJtq
+	DMi1nYccE7ZQE7RJGYrW6oeYd5PdAD+oO/Gjc=
 MIME-Version: 1.0
-Message-Id: <201003231033.40621.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Received: by 10.231.173.130 with SMTP id p2mr995362ibz.48.1269337136479; Tue, 
+	23 Mar 2010 02:38:56 -0700 (PDT)
+Date: Tue, 23 Mar 2010 17:38:56 +0800
+Message-ID: <f275a9df1003230238ye20d27fm32a88ad21e6518ab@mail.gmail.com>
+From: Jiason Li <listjiason@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.223.174
+X-SA-Exim-Mail-From: listjiason@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Using oeaudit.py to check for known security issues
+Subject: How to rebuild images with updated PREFERRED_PROVIDER_xxx in machine conf?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,31 +47,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Mar 2010 09:36:57 -0000
-Content-Type: Text/Plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Mar 2010 09:42:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
 Hi,
 
-here is a rather simple howto:
+I'm trying to rebuild images with updated PREFERRED_PROVIDER_xxx in
+machine conf,
+and I don't want to clean the whole oe/overlay/tmp directory each time
+I bitbake an image.
 
-$ bitbake -s > available
-$ export PYTHONPATH=/bitbake/lib
-$ /OE/contrib/oeaudit/oeaudit.py -f
-This will call wget, tar to get the audifile and place it in the local dir
-$ /OE/contrib/oeaudit/oeaudit.py -a auditfile -p available
-Now you get a nice list of issues...
+I've setup an overlay with my own machine conf.
 
+My steps:
+1. bitbake some-image, oe/openembedded/recipes/some-pkg.bb was bitbaked.
+2. bitbake -c clean some-pkg
+3. bitbake some-pkg, according to the log,
+oe/overlay/recipes/some-pkg-mine/some-pkg-mine.bb was bitbaked
+correctly.
+4. update machine conf with PREFERRED_PROVIDER_some-pkg = "some-pkg-mine"
+5. bitbake some-image, but some-pkg was still bitbaked and was in
+some-image, not some-pkg-mine!
+6. rm -rf oe/overlay/tmp
+7. bitbake some-image, this time some-pkg-mine is in some-image, finally.
 
+So,
+how do I rebuild an image with updated PREFERRED_PROVIDER_xxx in machine conf,
+while not having to clean the whole oe/overlay/tmp directory each time?
 
-TODO items:
-	- Sometimes the latest upstream version has the bug and we need to
-          apply a patch. Right now this will still be displayed as 
-          vulnerable.. I will add another file where one can claim to have fixed
-          certain issues..
+Any info are very appreciated. :)
 
-	- Rewrite in GNU smalltalk
-
+Thank you!
+jiason
+20100323
 
 
