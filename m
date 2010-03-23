@@ -1,35 +1,27 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Nu8kl-0001Sg-6q
+	(envelope-from <roman@khimov.ru>) id 1Nu8uI-00058D-5D
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Mar 2010 19:22:59 +0100
-Received: from p5b0373f5.dip.t-dialin.net ([91.3.115.245] helo=excalibur)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1Nu8hg-00058B-0X by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Mar 2010 19:19:52 +0100
-Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>) id 1Nu8hf-0002Mm-7K
+	Tue, 23 Mar 2010 19:32:50 +0100
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1Nu8rG-0006gK-1A
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Mar 2010 19:19:47 +0100
-Date: Tue, 23 Mar 2010 19:19:47 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Tue, 23 Mar 2010 21:29:43 +0300
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100323181947.GB23988@excalibur.local>
+Date: Tue, 23 Mar 2010 21:26:59 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
 References: <201003231851.37447.marcin@juszkiewicz.com.pl>
-	<20100323181526.GA23988@excalibur.local>
+	<201003232101.37576.roman@khimov.ru>
+In-Reply-To: <201003232101.37576.roman@khimov.ru>
 MIME-Version: 1.0
-In-Reply-To: <20100323181526.GA23988@excalibur.local>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+Message-Id: <201003232127.02571.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -47,50 +39,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Mar 2010 18:22:59 -0000
-X-Groupsio-MsgNum: 18054
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="SkvwRMAIpAhPCcCJ"
-Content-Disposition: inline
+X-List-Received-Date: Tue, 23 Mar 2010 18:32:50 -0000
+X-Groupsio-MsgNum: 18055
+Content-Type: multipart/signed; boundary="nextPart1975496.Wv3GaeGQ5X";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
---SkvwRMAIpAhPCcCJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+--nextPart1975496.Wv3GaeGQ5X
+Content-Type: Text/Plain;
+  charset="windows-1251"
 Content-Transfer-Encoding: quoted-printable
 
-Hello.
+=C2 =F1=EE=EE=E1=F9=E5=ED=E8=E8 =EE=F2 =C2=F2=EE=F0=ED=E8=EA 23 =EC=E0=F0=
+=F2=E0 2010 21:01:34 =E0=E2=F2=EE=F0 Roman I Khimov =ED=E0=EF=E8=F1=E0=EB:
+> P.S. As for descriptions, I've thought that having them in recipes is
+>  enough, but I could add those in commit messages if there is a need for
+>  it.
 
-On Tue, 2010-03-23 at 19:15, Stefan Schmidt wrote:
->=20
-> On Tue, 2010-03-23 at 18:51, Marcin Juszkiewicz wrote:
-> >=20
-> > I would like to give write access for Roman I Khimov. His patches are g=
-ood=20
-> > (new recipes could get descriptions in commit log anyway) and he touche=
-d ugly=20
-> > beast (Perl I mean) and survived.
->=20
-> +1 from my side. All patches I have seen from him were ok.
+P.P.S. As for the number of patches I'm posting to list, usually it's when =
+I'm=20
+touching _existing recipes_ and especially classes, just so that if there a=
+re=20
+some objections to the change or comments/corrections/whatever, I could fix=
+=20
+it, because, obviously, my patches tune things for use-cases I have and it=
+=20
+could easily be that someone else needs the same package to behave in exact=
+ly=20
+opposite way.
 
-Well, crossing mails...
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
-Just count it as positive feedback, Roman. :)
-
-regards
-Stefan Schmidt
-
---SkvwRMAIpAhPCcCJ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
+--nextPart1975496.Wv3GaeGQ5X
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: http://www.datenfreihafen.org/contact.html
+Version: GnuPG v2.0.12 (GNU/Linux)
 
-iEYEARECAAYFAkupBkMACgkQbNSsvd31FmVXyQCg3y3juqgKaPFIQz7L4nWUCGkO
-N18AoLOQE4G/wu1sx6jOa2LZ3C9LW22U
-=FiY2
+iEYEABECAAYFAkupB/YACgkQXJ70z+XgVcNSSQCgoHqQwXwbkd/1Ut2Esiz1kyQO
+YDUAoIPCwmEOBzcTEPvO09IRDd9rg3KW
+=fQmg
 -----END PGP SIGNATURE-----
 
---SkvwRMAIpAhPCcCJ--
+--nextPart1975496.Wv3GaeGQ5X--
