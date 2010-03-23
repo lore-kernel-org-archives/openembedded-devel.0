@@ -1,29 +1,38 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1Nu8Vu-00060U-83
+	(envelope-from <stefan@datenfreihafen.org>) id 1Nu8gV-0001Ll-Qr
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Mar 2010 19:07:43 +0100
-Received: (qmail 17886 invoked by uid 1003); 23 Mar 2010 18:04:28 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 23 Mar 2010 18:04:28 -0000
-Message-ID: <4BA902AA.6070906@balister.org>
-Date: Tue, 23 Mar 2010 14:04:26 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.8) Gecko/20100301 Fedora/3.0.3-1.fc11 Thunderbird/3.0.3
-MIME-Version: 1.0
+	Tue, 23 Mar 2010 19:18:37 +0100
+Received: from p5b0373f5.dip.t-dialin.net ([91.3.115.245] helo=excalibur)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1Nu8dS-00055I-S4 by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Mar 2010 19:15:29 +0100
+Received: from stefan by excalibur with local (Exim 4.71)
+	(envelope-from <stefan@excalibur.local>) id 1Nu8dS-0002KJ-5G
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Mar 2010 19:15:26 +0100
+Date: Tue, 23 Mar 2010 19:15:26 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1269366500-19336-1-git-send-email-marcin@juszkiewicz.com.pl>
-In-Reply-To: <1269366500-19336-1-git-send-email-marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+Message-ID: <20100323181526.GA23988@excalibur.local>
+References: <201003231851.37447.marcin@juszkiewicz.com.pl>
+MIME-Version: 1.0
+In-Reply-To: <201003231851.37447.marcin@juszkiewicz.com.pl>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH] xserver-xorg-conf: really add BUG 2.0
+Subject: Re: [RFC] Write access for Roman I Khimov
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,67 +46,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Mar 2010 18:07:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Mar 2010 18:18:37 -0000
+X-Groupsio-MsgNum: 18053
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="9jxsPFA5p3P2qPhR"
+Content-Disposition: inline
 
-Acked-by: Philip Balister <philip@balister.org>
+--9jxsPFA5p3P2qPhR
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 03/23/2010 01:48 PM, Marcin Juszkiewicz wrote:
-> From: Marcin Juszkiewicz<marcin@buglabs.net>
->
-> Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
-> ---
->   .../xorg-xserver/xserver-xorg-conf/bug20/xorg.conf |   29 ++++++++++++++++++++
->   recipes/xorg-xserver/xserver-xorg-conf_0.1.bb      |    2 +-
->   2 files changed, 30 insertions(+), 1 deletions(-)
->   create mode 100644 recipes/xorg-xserver/xserver-xorg-conf/bug20/xorg.conf
->
-> diff --git a/recipes/xorg-xserver/xserver-xorg-conf/bug20/xorg.conf b/recipes/xorg-xserver/xserver-xorg-conf/bug20/xorg.conf
-> new file mode 100644
-> index 0000000..0b976fe
-> --- /dev/null
-> +++ b/recipes/xorg-xserver/xserver-xorg-conf/bug20/xorg.conf
-> @@ -0,0 +1,29 @@
-> +Section "Module"
-> +        Load    "extmod"
-> +        Load    "dbe"
-> +        Load    "glx"
-> +        Load    "freetype"
-> +#       Load    "type1"
-> +#       Load    "record"
-> +        Load    "dri"
-> +EndSection
-> +
-> +Section "Monitor"
-> +        Identifier      "Builtin Default Monitor"
-> +EndSection
-> +
-> +Section "Device"
-> +        Identifier      "Builtin Default fbdev Device 0"
-> +        Driver  "omapfb"
-> +EndSection
-> +
-> +Section "Screen"
-> +        Identifier      "Builtin Default fbdev Screen 0"
-> +        Device  "Builtin Default fbdev Device 0"
-> +        Monitor "Builtin Default Monitor"
-> +EndSection
-> +
-> +Section "ServerLayout"
-> +        Identifier      "Builtin Default Layout"
-> +        Screen  "Builtin Default fbdev Screen 0"
-> +EndSection
-> diff --git a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-> index b7655b8..2cc6360 100644
-> --- a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-> +++ b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-> @@ -1,5 +1,5 @@
->   DESCRIPTION = "Machine specific xorg.conf files"
-> -PR = "r21"
-> +PR = "r24"
->
->   SRC_URI = "file://xorg.conf"
->
+Hello.
 
+On Tue, 2010-03-23 at 18:51, Marcin Juszkiewicz wrote:
+>=20
+> I would like to give write access for Roman I Khimov. His patches are goo=
+d=20
+> (new recipes could get descriptions in commit log anyway) and he touched =
+ugly=20
+> beast (Perl I mean) and survived.
 
++1 from my side. All patches I have seen from him were ok.
+
+regards
+Stefan Schmidt
+
+--9jxsPFA5p3P2qPhR
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+Content-Disposition: inline
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: http://www.datenfreihafen.org/contact.html
+
+iEYEARECAAYFAkupBT4ACgkQbNSsvd31FmWpyACg4h4fskHChxWL1vAB/L7ZkXK5
+Vd0An2LFOcHj2skiA6MxmsdMlcY1YYLv
+=MI+u
+-----END PGP SIGNATURE-----
+
+--9jxsPFA5p3P2qPhR--
