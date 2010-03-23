@@ -1,42 +1,28 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Nu0Wu-000228-FS
+	(envelope-from <holger+oe@freyther.de>) id 1Nu0Xg-00022e-Pc
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Mar 2010 10:36:08 +0100
-Received: by gwaa20 with SMTP id a20so452507gwa.6
+	Tue, 23 Mar 2010 10:36:57 +0100
+Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
+	[123.192.181.204])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 004BE1B10C79
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Mar 2010 02:32:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=huymbf2F2qVT+7y3JqcWiR2CekPpqu0SdvBfiZqumoo=;
-	b=IhRnBfpqDtHFMs7tStDwmNyr7+Wm7NxSFAVYNPO0gmu7xQbzUcb7NOiEaJgad+n7Vk
-	5B7pfkxGaFr/Rkx0ZEmgVBILP8pVTVI632m2gJklETAg0oteJzgfuSfKvBeXUA7JbT92
-	sb2PpHpjuW6NKM6+2XEIcvXZB1aay6cM7Hs0Y=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Hdt1hsUR2u2MPtMCRxCgzkUIAXewO17yWRvDBwxTnq3LO6J4eaD6/qwEMVXQC3eDUZ
-	o86gcGQW5HM3ste7917V6p07EdA06pjHHfQXruXmYW4/rA00Vu0x+t7NphKs+0WcHP3J
-	VZi2/t6b+fC9vGplaN8PAAZQyBcBKAGLk+3xc=
-MIME-Version: 1.0
-Received: by 10.101.27.34 with SMTP id e34mr5100607anj.118.1269336779282; Tue, 
-	23 Mar 2010 02:32:59 -0700 (PDT)
-In-Reply-To: <b6ebd0a51003221526y7c47c57esd7bc14cc5e85f893@mail.gmail.com>
-References: <b6ebd0a51003221526y7c47c57esd7bc14cc5e85f893@mail.gmail.com>
-Date: Tue, 23 Mar 2010 10:32:59 +0100
-Message-ID: <ac9c93b11003230232y2b556dc3t19813973d7c01b46@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Tue, 23 Mar 2010 09:37:28 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Tue, 23 Mar 2010 10:33:40 +0100
+User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
+MIME-Version: 1.0
+Message-Id: <201003231033.40621.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: BBVERSIONS
+Subject: Using oeaudit.py to check for known security issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,23 +36,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Mar 2010 09:36:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 23 Mar 2010 09:36:57 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Chris, while this is a nice idea it conflicts with having checksums in
-the recipe, as that makes the recipes unique.
-Unless of course there is (or we create) a way to have multiple
-checksums in a recipe and pick the one that is for the version we are
-building.
+Hi,
 
-Then again I feel it is in most cases better to move forward. E.g. for
-your nano example: why would people want to build say nano 1.0.2 if
-there is also a working 1.0.6 recipe (or even a 2.2.3 one or whatever
-version it is at). I feel it is better to spent time to
-fix/improve/add/repair the latest version than spend time fixing old
-code.
-(generally speaking that is)
+here is a rather simple howto:
 
-Frans.
+$ bitbake -s > available
+$ export PYTHONPATH=/bitbake/lib
+$ /OE/contrib/oeaudit/oeaudit.py -f
+This will call wget, tar to get the audifile and place it in the local dir
+$ /OE/contrib/oeaudit/oeaudit.py -a auditfile -p available
+Now you get a nice list of issues...
+
+
+
+TODO items:
+	- Sometimes the latest upstream version has the bug and we need to
+          apply a patch. Right now this will still be displayed as 
+          vulnerable.. I will add another file where one can claim to have fixed
+          certain issues..
+
+	- Rewrite in GNU smalltalk
+
 
 
