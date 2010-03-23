@@ -1,42 +1,43 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <slapinid@gmail.com>) id 1Nu9fT-0003RO-Cq
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Mar 2010 20:21:35 +0100
-Received: by wyb28 with SMTP id 28so3151733wyb.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NuA2M-0006Mv-DU for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Mar 2010 20:45:15 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nu9zL-00026q-3Q for openembedded-devel@lists.openembedded.org;
+	Tue, 23 Mar 2010 20:42:07 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Mar 2010 20:42:07 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Mar 2010 12:18:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=3AbIdlkYEI1ak8ePTwScUYKqnH57eEq+Xd5/wOYh0js=;
-	b=rzu/9Mo1Mcci4t83JUze6ugKg4nJFwX8dr0iw9H/4NWKfUYw1CSS79LCSlP9seEfcy
-	mMbVvPN+aamRJ336Lea6/6dmw1epBbTBjw0hdShwLI21nVnRLfXbhNm6ZxDMOCv4j36Q
-	oBUZHszGsidK3dWLiqw61rblR91NUMG9KRQh8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=tH0vywXLZiRv/DSPSt/B72Kkw5e3nnu6W1bkhWOzJ2MUxs8e1hnsIQaySTbp+Qxgna
-	Bq8OcehkUmfCLXx2nDR5RHqrhj2smohpxV1fUti9GFA9koyFndPLK90PcWkQhhylomOY
-	hJl+v5MOsgdpeQw2NpUi8tUUj8oxcFVN+nhpM=
-MIME-Version: 1.0
-Received: by 10.216.86.200 with SMTP id w50mr3579784wee.173.1269371906381; 
-	Tue, 23 Mar 2010 12:18:26 -0700 (PDT)
-In-Reply-To: <48239d391003221307u298b392m76fc618cec2c44c0@mail.gmail.com>
-References: <48239d391003221307u298b392m76fc618cec2c44c0@mail.gmail.com>
-Date: Tue, 23 Mar 2010 22:18:26 +0300
-Message-ID: <48239d391003231218g3d928ba4r4ddb6d13d023b172@mail.gmail.com>
-From: Sergey Lapin <slapinid@gmail.com>
+	Tue, 23 Mar 2010 20:42:07 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: slapinid@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 23 Mar 2010 20:41:54 +0100
+Message-ID: <hob5i2$t26$1@dough.gmane.org>
+References: <201003231901.24017.marcin@juszkiewicz.com.pl>
+	<20100323183615.GE3249@xora-eee.xora.org.uk>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.8) Gecko/20100314 Shredder/3.0.4pre
+In-Reply-To: <20100323183615.GE3249@xora-eee.xora.org.uk>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: sysklogd vs busybox
+Subject: Re: [RFC] Removal of e2fsprogs-libs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,29 +51,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Mar 2010 19:21:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 23 Mar 2010 19:45:15 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Mar 22, 2010 at 11:07 PM, Sergey Lapin <slapinid@gmail.com> wrote:
-> Hi, all!
->
-> For some of my images I need to have normal syslogd/klogd instead
-> of ones provided by busybox. I don;t want to have special version of
-> busybox for these images,
-> but it RRECOMMENDS busybox-syslog which contains config files and init script.
->
-> A problem is that these files are incompatble with normal syslogd/klogd pair.
-> when I set RCONFLICTS = "busybox-syslog", sysklogd never appears in image.
-> How could I force it in (and busybox-syslog out) without too much changes
-> in complex busybox recipes (which I don't want to touch since that
-> could preak something
-> for somebody)?
-As I found BAD_RECOMMENDATIONS = "busybox-syslog" doesn't fix this problem :(
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
+On 23-03-10 19:36, Graeme Gregory wrote:
+> On Tue, Mar 23, 2010 at 07:01:23PM +0100, Marcin Juszkiewicz wrote:
+>>
+>> During last days I spent a bit of time on e2fsprogs* and util-linux-ng 
+>> recipes. They are cleaner now but there is still some work to do.
+>>
+>> We have many recipes which depends on 'e2fsprogs-libs' when they want 
+>> 'libblkid' or 'libuuid' which are provided by 'e2fsprogs-libs' and 
+>> 'util-linux-ng' recipes. I checked how Debian solves that and got into point 
+>> where there is no 'e2fsprogs-libs' recipes in my tree and everything is 
+>> building.
+>>
+>> What needs to be changed?
+>>
+>> 1. git rm -r recipes/e2fsprogs-libs
+>> 2. check each recipe which depends on 'e2fsprogs-libs' which library it really
+>>    wants
+>> 3. change each recipe which wants 'libblkid' or 'libuuid' to depend on 
+>>    'util-linux-ng'
+>> 4. change each recipe which wants 'libcom_err' or 'libss' to depend on 
+>>    'e2fsprogs'
+>> 5. add "--with-elf-shlibs" to 'e2fsprogs' to get 'libcom_err' and 'libss'
+>> 6. fix packaging of 'e2fsprogs' to get separate packages for libraries.
+>>
+>> I can work on that in next days but want to inform everyone that such change 
+>> will be done.
+>>
+> Hrw thanks for cleaning this up, feel free to add my ack to your completed
+> worked.
 
->
-> All the best,
-> S.
->
+And mine as well. Thanks!
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLqRmCMkyGM64RGpERAi61AJ0TiULvauZGkFG+leI7aLr1U/of9QCghkTb
+n7P2S1GSXnTbgLlXZ78UM9E=
+=xl6V
+-----END PGP SIGNATURE-----
+
 
 
