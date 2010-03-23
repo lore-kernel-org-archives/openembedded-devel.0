@@ -1,34 +1,33 @@
-Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
+Received: from caiajhbdcaid.dreamhost.com ([208.97.132.83]
+	helo=homiemail-a24.g.dreamhost.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sebastian@SSpaeth.de>) id 1Nu5ui-0000NU-By
+	(envelope-from <Sebastian@SSpaeth.de>) id 1Nu5wc-0001pb-G2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Mar 2010 16:21:08 +0100
-Received: from homiemail-a11.g.dreamhost.com (caiajhbdcbbj.dreamhost.com
-	[208.97.132.119])
-	by hapkido.dreamhost.com (Postfix) with ESMTP id EB37C17C432
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Mar 2010 08:17:56 -0700 (PDT)
+	Tue, 23 Mar 2010 16:23:03 +0100
 Received: from sspaeth.de (mtec-hg-docking-1-dhcp-204.ethz.ch
 	[129.132.133.204])
-	by homiemail-a11.g.dreamhost.com (Postfix) with ESMTPA id 10C95194080
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Mar 2010 08:17:52 -0700 (PDT)
+	by homiemail-a24.g.dreamhost.com (Postfix) with ESMTPA id 60F082C806B; 
+	Tue, 23 Mar 2010 08:19:53 -0700 (PDT)
 Received: by sspaeth.de (sSMTP sendmail emulation);
-	Tue, 23 Mar 2010 16:17:50 +0100
+	Tue, 23 Mar 2010 16:19:51 +0100
 From: "Sebastian Spaeth" <Sebastian@SSpaeth.de>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 23 Mar 2010 16:17:50 +0100
-Message-ID: <87d3yv9ie9.fsf@SSpaeth.de>
+To: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>,
+	openembedded-devel@lists.openembedded.org
+In-Reply-To: <201003231434.17203.marcin@juszkiewicz.com.pl>
+References: <87fx3r9p3p.fsf@SSpaeth.de>
+	<201003231434.17203.marcin@juszkiewicz.com.pl>
+Date: Tue, 23 Mar 2010 16:19:51 +0100
+Message-ID: <87bpef9iaw.fsf@SSpaeth.de>
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.33.216.122
+X-SA-Exim-Connect-IP: 208.97.132.83
 X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: FYI: SHR's opkg repository finder
+Subject: Re: Accidental merge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,36 +41,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Mar 2010 15:21:08 -0000
+X-List-Received-Date: Tue, 23 Mar 2010 15:23:03 -0000
 Content-Type: text/plain; charset=us-ascii
 
-Dear all,
+> For future: "git pull --rebase" please to not create merge commits.
 
-you might be interested in having a look at it:
+Right. Point taken. Actually the merge was not wrong or horrible in the
+end, I was just scared by the very bg diffstat I was seeing. Still, I
+should have rebased before pushing. My apologies.
 
-http://opkg-repo.org
-
-which might become SHR's one stop place for finding and
-rating packages. It's auto-updated daily from the Packages files,
-showing you package information, versions, and a download link.
-
-E.g. http://opkg-repo.org/opkg/abiword shows details on abiword. listing
-all versions that are in our various SHR "distributions" (unstable,
-testing, and --one day-- stable).
-
-http://opkg-repo.org/sections/ shows the mess that the OE sections are
-:-).
-
-I have planned to let users rate packages, add screenshots, describe
-them, etc, giving us a mix of an automatic package searching facility
-and a user-rated application recommender.
-
-Don't comment on the colors unless you are willing to fix them, I am in
-the progress of moving away from the original brownish theme.
-
-It's a django app, and the source code is here:
-http://bitbucket.org/spaetz/opkgrepo/
-
-Sebastian
+spaetz
 
 
