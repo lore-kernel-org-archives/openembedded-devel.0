@@ -1,34 +1,30 @@
-Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sebastian@SSpaeth.de>) id 1Nu3eX-0007kD-G2
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Nu4IW-0000MP-6v
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Mar 2010 13:56:14 +0100
-Received: from homiemail-a19.g.dreamhost.com (caiajhbdcbbj.dreamhost.com
-	[208.97.132.119])
-	by hapkido.dreamhost.com (Postfix) with ESMTP id 0300417D5EA
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Mar 2010 05:53:04 -0700 (PDT)
-Received: from sspaeth.de (mtec-hg-docking-1-dhcp-204.ethz.ch
-	[129.132.133.204])
-	by homiemail-a19.g.dreamhost.com (Postfix) with ESMTPA id C02C560406C
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Mar 2010 05:53:00 -0700 (PDT)
-Received: by sspaeth.de (sSMTP sendmail emulation);
-	Tue, 23 Mar 2010 13:52:58 +0100
-From: "Sebastian Spaeth" <Sebastian@SSpaeth.de>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 23 Mar 2010 13:52:58 +0100
-Message-ID: <87fx3r9p3p.fsf@SSpaeth.de>
+	Tue, 23 Mar 2010 14:38:06 +0100
+Received: (qmail 3055 invoked by uid 813007); 23 Mar 2010 13:34:25 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 23 Mar 2010 13:34:25 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 23 Mar 2010 14:34:00 +0100
+User-Agent: KMail/1.13.1 (Linux/2.6.34-rc2; KDE/4.4.1; x86_64; ; )
+References: <87fx3r9p3p.fsf@SSpaeth.de>
+In-Reply-To: <87fx3r9p3p.fsf@SSpaeth.de>
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.33.216.122
-X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
+Message-Id: <201003231434.17203.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Accidental merge
+Subject: Re: Accidental merge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,17 +38,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Mar 2010 12:56:15 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 23 Mar 2010 13:38:06 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Uhh, I just accidentally pushed a merge
-a501f95529d16fad725b58c241047bde63825cbf, I did not know I have in my
-tree. Not even know what the ancestors of that merge were, would it be
-possible for someone with git knowledge to revert that merge?
+Dnia wtorek, 23 marca 2010 o 13:52:58 Sebastian Spaeth napisa=C5=82(a):
+> Uhh, I just accidentally pushed a merge
+> a501f95529d16fad725b58c241047bde63825cbf, I did not know I have in my
+> tree. Not even know what the ancestors of that merge were, would it be
+> possible for someone with git knowledge to revert that merge?
 
-That would be great, thanks
-Sebastian
+=46or future: "git pull --rebase" please to not create merge commits.
 
-P.S. I'll look into how to revert that myself, but that might take a while.
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
