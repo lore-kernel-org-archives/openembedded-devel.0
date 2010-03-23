@@ -1,35 +1,36 @@
 Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1Nu4Z7-0006sH-Pd
+	(envelope-from <rik@build2.altell.local>) id 1Nu5BV-0001Hv-4T
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Mar 2010 14:54:42 +0100
-Received: from keemun.localnet (unknown [192.168.1.125])
-	by mail.altell.local (Postfix) with ESMTPS id 2F49F687B0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Mar 2010 16:51:19 +0300 (MSK)
+	Tue, 23 Mar 2010 15:34:26 +0100
+Received: from build2.altell.local (build2.altell.local [192.168.1.26])
+	by mail.altell.local (Postfix) with ESMTPS id 18EC368801;
+	Tue, 23 Mar 2010 17:31:04 +0300 (MSK)
+Received: from rik by build2.altell.local with local (Exim 4.69)
+	(envelope-from <rik@build2.altell.local>)
+	id 1Nu53Y-0005Rm-Dm; Tue, 23 Mar 2010 17:26:08 +0300
 From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Mar 2010 16:51:15 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
-References: <201003182212.31873.roman@khimov.ru>
-	<201003190023.36525.roman@khimov.ru>
-	<201003200005.35468.roman@khimov.ru>
-In-Reply-To: <201003200005.35468.roman@khimov.ru>
-MIME-Version: 1.0
-Message-Id: <201003231651.15210.khimov@altell.ru>
-X-Altell-MailScanner-ID: 2F49F687B0.C4786
+Date: Tue, 23 Mar 2010 17:26:08 +0300
+Message-Id: <1269354368-20910-4-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.5.6.5
+In-Reply-To: <1269354368-20910-3-git-send-email-khimov@altell.ru>
+References: <1269346975-842-2-git-send-email-khimov@altell.ru>
+	<1269354368-20910-1-git-send-email-khimov@altell.ru>
+	<1269354368-20910-2-git-send-email-khimov@altell.ru>
+	<1269354368-20910-3-git-send-email-khimov@altell.ru>
+X-Altell-MailScanner-ID: 18EC368801.A6C74
 X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
+X-Altell-MailScanner-From: rik@build2.altell.local
 X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: khimov@altell.ru
+X-SA-Exim-Mail-From: rik@build2.altell.local
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC/PATCH] Perl 5.10.1 and a bunch of modules
+Subject: [PATCH] sphyrna-python: fix missing python-native build dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,26 +44,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Mar 2010 13:54:42 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 23 Mar 2010 14:34:26 -0000
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A1=D1=83=D0=B1=D0=B1=D0=BE=D1=82=D0=B0 20 =D0=BC=D0=B0=D1=80=D1=82=D0=
-=B0 2010 00:05:35 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Roman I Khimov =D0=BD=D0=
-=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> I think I need some ACK's for dusty old Perl versions removal and then
-> Richard's Perl staging update could be merged better on top of that (CC'i=
-ng
-> Richard) and than I'll update 5.10.1 to new staging and push the series. =
-At
-> least, that's how I think it should be. If there are any problems with
->  staging update and it's not ready to be pushed in OE.dev, I think we can
->  merge 5.10.1 as it is now.
+Signed-off-by: Roman I Khimov <khimov@altell.ru>
+---
+ recipes/sphyrna/sphyrna-python_svn.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-OK, I think I'm pushing 5.10.1 as is some hours later and Richard could por=
-t=20
-his staging changes when ready.
+diff --git a/recipes/sphyrna/sphyrna-python_svn.bb b/recipes/sphyrna/sphyrna-python_svn.bb
+index 1e3c412..5b4ee8a 100644
+--- a/recipes/sphyrna/sphyrna-python_svn.bb
++++ b/recipes/sphyrna/sphyrna-python_svn.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Sphyrna - Hammerhead Reverse Engineering"
+ HOMEPAGE = "http://projects.linuxtogo.org/projects/sphyrna"
+ LICENSE = "GPLv2"
+-DEPENDS = "readline"
++DEPENDS = "readline python-native"
+ PV = "0.0+svnr${SRCPV}"
+ PR = "r1"
+ 
+-- 
+1.5.6.5
+
 
 
