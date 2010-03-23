@@ -1,31 +1,31 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Nu2bF-0002wE-Qa
+	(envelope-from <rik@build2.altell.local>) id 1Nu3Gf-0007Mt-49
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Mar 2010 12:48:50 +0100
-Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
-	[123.192.181.204])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 8BC651B10C79
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Mar 2010 11:49:18 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Tue, 23 Mar 2010 13:31:34 +0100
+Received: from build2.altell.local (build2.altell.local [192.168.1.26])
+	by mail.altell.local (Postfix) with ESMTPS id 10FAA687E4;
+	Tue, 23 Mar 2010 15:27:02 +0300 (MSK)
+Received: from rik by build2.altell.local with local (Exim 4.69)
+	(envelope-from <rik@build2.altell.local>)
+	id 1Nu38J-0000Dz-B6; Tue, 23 Mar 2010 15:22:55 +0300
+From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Mar 2010 12:45:30 +0100
-User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
-References: <201003231033.40621.holger+oe@freyther.de>
-	<20100323100214.GB30789@ibawizard.net>
-In-Reply-To: <20100323100214.GB30789@ibawizard.net>
-MIME-Version: 1.0
-Message-Id: <201003231245.30150.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Date: Tue, 23 Mar 2010 15:22:54 +0300
+Message-Id: <1269346975-842-1-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.5.6.5
+X-Altell-MailScanner-ID: 10FAA687E4.15237
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: rik@build2.altell.local
+X-SA-Exim-Connect-IP: 80.246.246.162
+X-SA-Exim-Mail-From: rik@build2.altell.local
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Using oeaudit.py to check for known security issues
+Subject: [PATCH] distutils-common-base: move Python dir detection to separate class
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,23 +39,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Mar 2010 11:48:50 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 23 Mar 2010 12:31:35 -0000
 
-On Tuesday 23 March 2010 11:02:14 Petr =C5=A0tetiar wrote:
-> Holger Hans Peter Freyther <holger+oe@freyther.de> [2010-03-23 10:33:40]:
+Allows to inherit that in packages containing Python extensions but still tightly
+control packaging of those extensions. Mainly for the cases where you want
+those python modules/extensions/parts to be packaged separately from the main
+package in order not to introduce python dependency where you don't need it.
+Technically, you can do it with distutils-common-base, but it might require
+more FILES_* work than with python-dir.
 
->=20
-> Neat! I just wonder how to check linux kernel(s) and embedded stuff not
-> used in FBSD. The kernel is quite mission impossible because of the patch
-> hell...
+Introduce PYTHON_SITEPACKAGES_DIR along the way, site-packages directory is
+referenced frequently enough within class files, but some recipes also pack this
+directory as
 
-Yeah glibc, udev, linux is not covered by it at all. The idea is to extend =
-the=20
-script to use Gentoo GLSA database, maybe debian...
+${libdir}/python2.5/site-packages
+${libdir}/python2.6/site-packages
+${libdir}/python*/site-packages
+/usr/lib/python*/site-packages
+${libdir}/*/site-packages
 
-z.
+all of which are not perfect.
+
+Signed-off-by: Roman I Khimov <khimov@altell.ru>
+---
+ classes/distutils-common-base.bbclass |   13 ++-----------
+ classes/python-dir.bbclass            |   11 +++++++++++
+ 2 files changed, 13 insertions(+), 11 deletions(-)
+ create mode 100644 classes/python-dir.bbclass
+
+diff --git a/classes/distutils-common-base.bbclass b/classes/distutils-common-base.bbclass
+index 87578b7..b6dce7e 100644
+--- a/classes/distutils-common-base.bbclass
++++ b/classes/distutils-common-base.bbclass
+@@ -1,19 +1,10 @@
++inherit python-dir
++
+ EXTRA_OEMAKE = ""
+ 
+ export STAGING_INCDIR
+ export STAGING_LIBDIR
+ 
+-def python_dir(d):
+-	import os, bb
+-	staging_incdir = bb.data.getVar( "STAGING_INCDIR", d, 1 )
+-	for majmin in "2.6 2.5 2.4 2.3".split():
+-		if os.path.exists( "%s/python%s" % ( staging_incdir, majmin ) ): return "python%s" % majmin
+-	if not "python-native" in bb.data.getVar( "DEPENDS", d, 1 ).split():
+-		raise "No Python in STAGING_INCDIR. Forgot to build python-native ?"
+-	return "INVALID"
+-
+-PYTHON_DIR = "${@python_dir(d)}"
+-
+ PACKAGES = "${PN}-dev ${PN}-dbg ${PN}-doc ${PN}"
+ 
+ FILES_${PN} = "${bindir}/* ${libdir}/* ${libdir}/${PYTHON_DIR}/*"
+diff --git a/classes/python-dir.bbclass b/classes/python-dir.bbclass
+new file mode 100644
+index 0000000..d631a5c
+--- /dev/null
++++ b/classes/python-dir.bbclass
+@@ -0,0 +1,11 @@
++def python_dir(d):
++	import os, bb
++	staging_incdir = bb.data.getVar( "STAGING_INCDIR", d, 1 )
++	for majmin in "2.6 2.5 2.4 2.3".split():
++		if os.path.exists( "%s/python%s" % ( staging_incdir, majmin ) ): return "python%s" % majmin
++	if not "python-native" in bb.data.getVar( "DEPENDS", d, 1 ).split():
++		raise "No Python in STAGING_INCDIR. Forgot to build python-native ?"
++	return "INVALID"
++
++PYTHON_DIR = "${@python_dir(d)}"
++PYTHON_SITEPACKAGES_DIR = "${libdir}/${PYTHON_DIR}/site-packages"
+-- 
+1.5.6.5
+
 
 
