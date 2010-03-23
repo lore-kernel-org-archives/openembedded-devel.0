@@ -1,30 +1,35 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Nu4IW-0000MP-6v
+	(envelope-from <khimov@altell.ru>) id 1Nu4Z7-0006sH-Pd
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Mar 2010 14:38:06 +0100
-Received: (qmail 3055 invoked by uid 813007); 23 Mar 2010 13:34:25 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 23 Mar 2010 13:34:25 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	Tue, 23 Mar 2010 14:54:42 +0100
+Received: from keemun.localnet (unknown [192.168.1.125])
+	by mail.altell.local (Postfix) with ESMTPS id 2F49F687B0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Mar 2010 16:51:19 +0300 (MSK)
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Mar 2010 14:34:00 +0100
-User-Agent: KMail/1.13.1 (Linux/2.6.34-rc2; KDE/4.4.1; x86_64; ; )
-References: <87fx3r9p3p.fsf@SSpaeth.de>
-In-Reply-To: <87fx3r9p3p.fsf@SSpaeth.de>
+Date: Tue, 23 Mar 2010 16:51:15 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
+References: <201003182212.31873.roman@khimov.ru>
+	<201003190023.36525.roman@khimov.ru>
+	<201003200005.35468.roman@khimov.ru>
+In-Reply-To: <201003200005.35468.roman@khimov.ru>
 MIME-Version: 1.0
-Message-Id: <201003231434.17203.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Message-Id: <201003231651.15210.khimov@altell.ru>
+X-Altell-MailScanner-ID: 2F49F687B0.C4786
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-SA-Exim-Connect-IP: 80.246.246.162
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Accidental merge
+Subject: Re: [RFC/PATCH] Perl 5.10.1 and a bunch of modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,25 +43,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Mar 2010 13:38:06 -0000
+X-List-Received-Date: Tue, 23 Mar 2010 13:54:42 -0000
 Content-Type: Text/Plain;
   charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dnia wtorek, 23 marca 2010 o 13:52:58 Sebastian Spaeth napisa=C5=82(a):
-> Uhh, I just accidentally pushed a merge
-> a501f95529d16fad725b58c241047bde63825cbf, I did not know I have in my
-> tree. Not even know what the ancestors of that merge were, would it be
-> possible for someone with git knowledge to revert that merge?
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A1=D1=83=D0=B1=D0=B1=D0=BE=D1=82=D0=B0 20 =D0=BC=D0=B0=D1=80=D1=82=D0=
+=B0 2010 00:05:35 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Roman I Khimov =D0=BD=D0=
+=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> I think I need some ACK's for dusty old Perl versions removal and then
+> Richard's Perl staging update could be merged better on top of that (CC'i=
+ng
+> Richard) and than I'll update 5.10.1 to new staging and push the series. =
+At
+> least, that's how I think it should be. If there are any problems with
+>  staging update and it's not ready to be pushed in OE.dev, I think we can
+>  merge 5.10.1 as it is now.
 
-=46or future: "git pull --rebase" please to not create merge commits.
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+OK, I think I'm pushing 5.10.1 as is some hours later and Richard could por=
+t=20
+his staging changes when ready.
 
 
