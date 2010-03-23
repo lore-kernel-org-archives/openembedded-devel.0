@@ -1,31 +1,42 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1Nu8uI-00058D-5D
+	(envelope-from <dp@xora.org.uk>) id 1Nu90L-0003MY-HR
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Mar 2010 19:32:50 +0100
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1Nu8rG-0006gK-1A
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Mar 2010 21:29:43 +0300
-From: Roman I Khimov <roman@khimov.ru>
+	Tue, 23 Mar 2010 19:39:05 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id CC885A5096
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Mar 2010 18:35:57 +0000 (GMT)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id 9qluo08YNb+W
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Mar 2010 18:35:56 +0000 (GMT)
+Received: from xora-eee.xora.org.uk (188-220-38-49.zone11.bethere.co.uk
+	[188.220.38.49])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id AF757A5092
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 Mar 2010 18:35:56 +0000 (GMT)
+Received: by xora-eee.xora.org.uk (Postfix, from userid 500)
+	id DEC872220F; Tue, 23 Mar 2010 18:36:15 +0000 (GMT)
+Date: Tue, 23 Mar 2010 18:36:15 +0000
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 Mar 2010 21:26:59 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
-References: <201003231851.37447.marcin@juszkiewicz.com.pl>
-	<201003232101.37576.roman@khimov.ru>
-In-Reply-To: <201003232101.37576.roman@khimov.ru>
+Message-ID: <20100323183615.GE3249@xora-eee.xora.org.uk>
+References: <201003231901.24017.marcin@juszkiewicz.com.pl>
 MIME-Version: 1.0
-Message-Id: <201003232127.02571.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+In-Reply-To: <201003231901.24017.marcin@juszkiewicz.com.pl>
+User-Agent: Mutt/1.5.20 (2009-08-17)
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Write access for Roman I Khimov
+Subject: Re: [RFC] Removal of e2fsprogs-libs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,50 +50,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Mar 2010 18:32:50 -0000
-X-Groupsio-MsgNum: 18055
-Content-Type: multipart/signed; boundary="nextPart1975496.Wv3GaeGQ5X";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 Mar 2010 18:39:05 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---nextPart1975496.Wv3GaeGQ5X
-Content-Type: Text/Plain;
-  charset="windows-1251"
-Content-Transfer-Encoding: quoted-printable
+On Tue, Mar 23, 2010 at 07:01:23PM +0100, Marcin Juszkiewicz wrote:
+> 
+> During last days I spent a bit of time on e2fsprogs* and util-linux-ng 
+> recipes. They are cleaner now but there is still some work to do.
+> 
+> We have many recipes which depends on 'e2fsprogs-libs' when they want 
+> 'libblkid' or 'libuuid' which are provided by 'e2fsprogs-libs' and 
+> 'util-linux-ng' recipes. I checked how Debian solves that and got into point 
+> where there is no 'e2fsprogs-libs' recipes in my tree and everything is 
+> building.
+> 
+> What needs to be changed?
+> 
+> 1. git rm -r recipes/e2fsprogs-libs
+> 2. check each recipe which depends on 'e2fsprogs-libs' which library it really
+>    wants
+> 3. change each recipe which wants 'libblkid' or 'libuuid' to depend on 
+>    'util-linux-ng'
+> 4. change each recipe which wants 'libcom_err' or 'libss' to depend on 
+>    'e2fsprogs'
+> 5. add "--with-elf-shlibs" to 'e2fsprogs' to get 'libcom_err' and 'libss'
+> 6. fix packaging of 'e2fsprogs' to get separate packages for libraries.
+> 
+> I can work on that in next days but want to inform everyone that such change 
+> will be done.
+> 
+Hrw thanks for cleaning this up, feel free to add my ack to your completed
+worked.
 
-=C2 =F1=EE=EE=E1=F9=E5=ED=E8=E8 =EE=F2 =C2=F2=EE=F0=ED=E8=EA 23 =EC=E0=F0=
-=F2=E0 2010 21:01:34 =E0=E2=F2=EE=F0 Roman I Khimov =ED=E0=EF=E8=F1=E0=EB:
-> P.S. As for descriptions, I've thought that having them in recipes is
->  enough, but I could add those in commit messages if there is a need for
->  it.
+Graeme
+ 
 
-P.P.S. As for the number of patches I'm posting to list, usually it's when =
-I'm=20
-touching _existing recipes_ and especially classes, just so that if there a=
-re=20
-some objections to the change or comments/corrections/whatever, I could fix=
-=20
-it, because, obviously, my patches tune things for use-cases I have and it=
-=20
-could easily be that someone else needs the same package to behave in exact=
-ly=20
-opposite way.
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
-
---nextPart1975496.Wv3GaeGQ5X
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
-
-iEYEABECAAYFAkupB/YACgkQXJ70z+XgVcNSSQCgoHqQwXwbkd/1Ut2Esiz1kyQO
-YDUAoIPCwmEOBzcTEPvO09IRDd9rg3KW
-=fQmg
------END PGP SIGNATURE-----
-
---nextPart1975496.Wv3GaeGQ5X--
