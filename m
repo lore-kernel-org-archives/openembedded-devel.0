@@ -1,43 +1,30 @@
-Received: from mail-qy0-f203.google.com ([209.85.221.203])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1Ntq8d-0006xZ-8B
+	(envelope-from <philip@balister.org>) id 1NttPL-0003PZ-Bg
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 22 Mar 2010 23:30:27 +0100
-Received: by qyk41 with SMTP id 41so765118qyk.21
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 Mar 2010 15:27:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	bh=jJk8ejMCi2HByum88RKblXnR/uXVBxkZfr/fHr/lyCI=;
-	b=ojsQsYpprfKovaibCjpf+FdOGmr4j4Jst2boBJV1i2vGphjO3wRAP5rvIOm33Ctdbz
-	pjwWd7JDANv6G91y4ZFHdlK5pISeCNeRNCgpGKEin2osv+hreWGomE/7ZVtWF3HxjZtR
-	xaxM852FLTVUlA4zfOy+6LYeK7ztftOhLM1NE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	b=Lelnmb03GzMvd+FRKP66rPMJ3mkIpCHKtxwn2iid+f23zhg+ec+4BAx051tEvgcSHR
-	LtxC5+cEPlB5WeZ71S4mGwu8+vHfSkL5Sb0TB0jPyjAOoOc5bKM+baL++T99XwYZfQUT
-	A//tTp+QF+n4g9gJWADedkpfo1oDR21SDe8vI=
+	Tue, 23 Mar 2010 02:59:52 +0100
+Received: (qmail 3236 invoked by uid 1003); 23 Mar 2010 01:56:41 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 23 Mar 2010 01:56:41 -0000
+Message-ID: <4BA81FD7.3030204@balister.org>
+Date: Mon, 22 Mar 2010 21:56:39 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.8) Gecko/20100301 Fedora/3.0.3-1.fc11 Thunderbird/3.0.3
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.226.1 with SMTP id iu1mr1681660qcb.19.1269296833270; Mon, 
-	22 Mar 2010 15:27:13 -0700 (PDT)
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 22 Mar 2010 15:26:53 -0700
-X-Google-Sender-Auth: 7ef955a36c9233a1
-Message-ID: <b6ebd0a51003221526y7c47c57esd7bc14cc5e85f893@mail.gmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.221.203
-X-SA-Exim-Mail-From: kergoth@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <1269255790-13046-1-git-send-email-marcin@juszkiewicz.com.pl>
+	<1269255790-13046-2-git-send-email-marcin@juszkiewicz.com.pl>
+In-Reply-To: <1269255790-13046-2-git-send-email-marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: BBVERSIONS
+Subject: Re: [PATCH][STABLE] bug20: initial configuration for BUG 2.0 device
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,63 +38,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 Mar 2010 22:30:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 23 Mar 2010 01:59:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Greetings all,
+Acked-by: Philip Balister <philip@balister.org>
 
-I'm emailing about a prototype I threw together of a BBVERSIONS
-implementation in BitBake.  This functionality is similar to BBCLASSEXTEND,
-but it lists versions, and sets PV rather than doing an inherit.  This
-allows you to create one recipe that can build multiple versions of
-something.  Either you can do one recipe that can build everything, or you
-could (I prefer this) create one recipe for each range of versions which are
-built in a given way with a given set of patches.
+On 03/22/2010 07:03 AM, Marcin Juszkiewicz wrote:
+> From: Marcin Juszkiewicz<marcin@buglabs.net>
+>
+> Currently it is at prototype phase so company internal only.
+>
+> Kernel recipe will not be added into OE for now.
+>
+> Signed-off-by: Marcin Juszkiewicz<marcin@juszkiewicz.com.pl>
+> ---
+>   conf/machine/bug20.conf |   47 +++++++++++++++++++++++++++++++++++++++++++++++
+>   1 files changed, 47 insertions(+), 0 deletions(-)
+>   create mode 100644 conf/machine/bug20.conf
+>
+> diff --git a/conf/machine/bug20.conf b/conf/machine/bug20.conf
+> new file mode 100644
+> index 0000000..dbc1faf
+> --- /dev/null
+> +++ b/conf/machine/bug20.conf
+> @@ -0,0 +1,47 @@
+> +#@TYPE: Machine
+> +#@NAME: BUG 2.0
+> +#@DESCRIPTION: Machine configuration for the BUG 2.0 board (OMAP3530 based)
+> +TARGET_ARCH = "arm"
+> +
+> +PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
+> +XSERVER = "xserver-xorg \
+> +           xserver-xorg-extension-dri \
+> +           xserver-xorg-extension-glx \
+> +           xf86-input-evdev \
+> +           xf86-input-mouse \
+> +           xf86-video-omapfb \
+> +           xf86-input-keyboard"
+> +
+> +# Only has DVI connector for external screen
+> +GUI_MACHINE_CLASS = "bigscreen"
+> +
+> +require conf/machine/include/omap3.inc
+> +
+> +# this kernel is not provided in OE yet
+> +PREFERRED_PROVIDER_virtual/kernel = "linux-omap-hah"
+> +
+> +IMAGE_FSTYPES += "tar.bz2"
+> +
+> +SERIAL_CONSOLE = "115200 ttyS2"
+> +
+> +UBOOT_MACHINE = "omap3_bug_config"
+> +
+> +# do ubiattach /dev/ubi_ctrl -m 4
+> +# From dmesg:
+> +# UBI: smallest flash I/O unit:    2048
+> +# UBI: logical eraseblock size:    129024 bytes
+> +# from ubiattach stdout:
+> +# UBI device number 0, total 1996 LEBs
+> +MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1996"
+> +
+> +# do ubiattach /dev/ubi_ctrl -m 4
+> +# from dmesg:
+> +# UBI: smallest flash I/O unit:    2048
+> +# UBI: physical eraseblock size:   131072 bytes (128 KiB)
+> +# UBI: sub-page size:              512
+> +UBINIZE_ARGS = "-m 2048 -p 128KiB -s 512"
+> +
+> +PREFERRED_VERSION_u-boot = "git"
+> +
+> +# and sdio
+> +MACHINE_FEATURES = "kernel26 screen apm usbgadget usbhost vfat alsa"
 
-It helps if you think about an upstream change (which, say, breaks
-application of a patch) as being a change going forward.  No one makes a
-change assuming it'll be reverted the next release, so it's likely that a
-given patch will apply through a set of versions, until another change
-breaks it further.  So, metadata and patches is really rarely bound to just
-one version, but is instead bound to the series of versions which can be
-built in that way and which can have those patches applied.
-
-The version from BBVERSIONS is added to OVERRIDES, to allow for version
-specific metadata.  In addition, you can specify a name for the range of
-versions, which is also added to OVERRIDES.  As an example, I created a
-nano_1.0.0+.bb recipe which builds 1.0.0 through 1.0.6, its BBVERSIONS is
-set to 1.0.[0-6].  The BPV variable gets set with the 1.0.0+ value, so it
-can be used in the filespath, so the generic files go there, and individual
-versions can override further if necessary.
-
-I've been experimenting with a set of files and recipes to build every
-version of nano that exists, from 1.0.0 through 2.2.3, with one recipe for
-each set of versions.  I'm still investigating to find the optimal workflow
-with this, someone else may want just one recipe for all versions, or they
-may want to leave it as is, just one recipe per version, but I suspect this
-may reduce the number of files duplicated across filespaths amongst versions
-which could be grouped together into a single recipe.
-
-Thoughts? Questions? Concerns?  I've been wondering if this is really
-worthwhile, but I think it is.  I think there is value in keeping old
-versions around, but this allows us to avoid cluttering up the repository as
-much, and makes it so that one change to a recipe can affect all the
-versions in that range by default, or all versions, rather than just the one
-version you tested.  Of course, ideally you'd test all versions, but that's
-the case today too, its just that now our recipes get bitrotted instead.
- Personally, I'd rather see the old version content continue to be brought
-forward by default, and if it fails to build with that, we fix it, but it's
-easier to fix a build than to unclutter the repository.
-
-I'm hoping to get some input on this :)
-
-The bitbake changes: http://github.com/kergoth/BitBake/commits/bbversions
-The repository with my experimentations with nano (haven't pushed since I
-split the recipe by version range yet): http://gist.github.com/338382
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
