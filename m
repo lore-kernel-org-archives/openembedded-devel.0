@@ -1,40 +1,40 @@
 Received: from mail-fx0-f225.google.com ([209.85.220.225])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NuB1O-0007QI-3W
+	(envelope-from <raj.khem@gmail.com>) id 1NuB6p-0005YV-Ar
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 23 Mar 2010 21:48:19 +0100
-Received: by fxm25 with SMTP id 25so25294fxm.26
+	Tue, 23 Mar 2010 21:53:57 +0100
+Received: by fxm25 with SMTP id 25so31507fxm.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Mar 2010 13:45:06 -0700 (PDT)
+	Tue, 23 Mar 2010 13:50:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=DSrjp249zINzrfYv9G0zvTYxoTQTdrv48Hvx8OzzHYQ=;
-	b=AQH0x+Ghym7JZa75MrDV5jvZwTvZ9l5Zn/sPRZI3hsiJEX1nrd0au8kLk8jloQBcc9
-	srw+KqhO9itr4lLJ8DR5KXw7D4KHK1oKbwIGKofhSHfZKtXd2JkSSs9E7uz4YfhT2nEC
-	QcACseVHGxrKUHRvjds8Zx2rxNGoUQ53wS1XQ=
+	bh=EGAG5q4syxI5BlOmtUajo/GSD849oDdgVAs8RsVZWbI=;
+	b=b3/vMDVTfmnHM6FWfMBrvJIAx1Bkn415BHehlCK8E0cf/DczopVEla+mVvcRCKMgGp
+	E39rd8Cl0pPyIZwYduqfnixOqEoAdbvAObTnICDQTdA39LGqWddjI17Ta6V/i3gSyvhh
+	oTJi+fmSy1UBNwY/CBQYCtD3P4dlmwsTJX1Vs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=twh8aa1e3o5WQ01VbWAvnq+H8/EkQhVzZwOSZKHKTKS9z4Rg2rHqxm3Hoo1p4o2twZ
-	Xcc1zXzNGsZM5eGKVWqiDI4Exg96w7SXPI32tb7zPxUebCpuuuqwwMutvwZYmAc/eCKq
-	DdTCHtrm3KlWa2bqjdPR830liahqY0d/hI0lo=
-Received: by 10.87.62.28 with SMTP id p28mr602844fgk.16.1269377106594;
-	Tue, 23 Mar 2010 13:45:06 -0700 (PDT)
+	b=utGBWrWD1CWHYJwl94+GNWEpA7aRWjDAv+QseyUJNYZRrHrP1thmCAaa2xM3MN2xzi
+	3topa1APzmBRCIVSH9wBoA/UkTLs3UZCb2KgygyTQJAzrcdBEhDQ6MC5M2bLIOBXQ9/A
+	L0txnSqdhtq7B/Uj68vqtfMPgy91zV2Ecf1KU=
+Received: by 10.103.37.12 with SMTP id p12mr8853226muj.94.1269377446246;
+	Tue, 23 Mar 2010 13:50:46 -0700 (PDT)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id d4sm1264998fga.5.2010.03.23.13.45.04
+	by mx.google.com with ESMTPS id j9sm3487445mue.17.2010.03.23.13.50.44
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 23 Mar 2010 13:45:05 -0700 (PDT)
-Date: Tue, 23 Mar 2010 13:45:11 -0700
+	Tue, 23 Mar 2010 13:50:45 -0700 (PDT)
+Date: Tue, 23 Mar 2010 13:50:54 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100323204511.GA12446@gmail.com>
-References: <b6ebd0a51003221526y7c47c57esd7bc14cc5e85f893@mail.gmail.com>
-	<20100323094757.GE21210@jama>
+Message-ID: <20100323205054.GB12446@gmail.com>
+References: <f275a9df1003230238ye20d27fm32a88ad21e6518ab@mail.gmail.com>
+	<f275a9df1003230243h6942495bya29166db2fda49a@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20100323094757.GE21210@jama>
+In-Reply-To: <f275a9df1003230243h6942495bya29166db2fda49a@mail.gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 209.85.220.225
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -44,7 +44,7 @@ X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: BBVERSIONS
+Subject: Re: How to rebuild images with updated PREFERRED_PROVIDER_xxx in machine conf?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,49 +58,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 Mar 2010 20:48:19 -0000
+X-List-Received-Date: Tue, 23 Mar 2010 20:53:57 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (23/03/10 10:47), Martin Jansa wrote:
-> On Mon, Mar 22, 2010 at 03:26:53PM -0700, Chris Larson wrote:
-> > Greetings all,
-> > 
-> > Thoughts? Questions? Concerns?  I've been wondering if this is really
-> > worthwhile, but I think it is.  I think there is value in keeping old
-> > versions around, but this allows us to avoid cluttering up the repository as
-> > much, and makes it so that one change to a recipe can affect all the
-> > versions in that range by default, or all versions, rather than just the one
-> > version you tested.  Of course, ideally you'd test all versions, but that's
-> > the case today too, its just that now our recipes get bitrotted instead.
-> >  Personally, I'd rather see the old version content continue to be brought
-> > forward by default, and if it fails to build with that, we fix it, but it's
-> > easier to fix a build than to unclutter the repository.
-> > 
-> > I'm hoping to get some input on this :)
+On (23/03/10 17:43), Jiason Li wrote:
+> Sorry all,
+> 
+> My step was:
+> 1. bitbake some-image, oe/openembedded/recipes/some-pkg.bb was bitbaked.
+> 2. bitbake -c clean some-pkg
+> 3. update machine conf with PREFERRED_PROVIDER_some-pkg = "some-pkg-mine"
+> 4. bitbake some-pkg, according to the log,
+> oe/overlay/recipes/some-pkg-mine/some-pkg-mine.bb was bitbaked
+> correctly.
+> 5. bitbake some-image, but some-pkg was still bitbaked and was in
+> some-image, not some-pkg-mine!
+> 6. rm -rf oe/overlay/tmp
+> 7. bitbake some-image, this time some-pkg-mine is in some-image, finally.
+> 
+> Any info are very appreciated. :)
 
-I think it could be an useful experiment as an option for packages which
-dont change so much as the releases progress. However adding stuff to build
-for multiple version in same recipe can be error prone. I have seen this
-happening with changes made to .inc files when other recipes break
-silently.
+may be try 
+bitbake -c package_update_index some-image
 
-Currently we have per version recipes (roughly) which gives a playground
-for a given version one can do customization fairly easily and they are
-contained.
-
-If I make change to a given version the recipe will also affect other
-versions even if nothing of interest was done for those versions due to say PR bump isnt it ?
-
-I think moving bitrotted recipes to different location is probably also a good
-way to speed up parsing time for general users without changing the bb
-files too much. 
-
-Recently asking new users about bitbake they were pretty much confused with
-syntax I think this will add to it.
-
-Thanks
-
--Khem
+> 
+> Thank you!
+> jiason
+> 20100323
+> 
+> 
+> > My steps:
+> > 3. bitbake some-pkg, according to the log,
+> > oe/overlay/recipes/some-pkg-mine/some-pkg-mine.bb was bitbaked
+> > correctly.
+> > 4. update machine conf with PREFERRED_PROVIDER_some-pkg = "some-pkg-mine"
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
