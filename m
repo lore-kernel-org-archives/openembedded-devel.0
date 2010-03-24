@@ -1,34 +1,45 @@
-Received: from vms173009pub.verizon.net ([206.46.173.9])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1NuWI0-0003TM-LG
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NuX4P-0006DM-EA
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 20:30:53 +0100
-Received: from gandalf.denix.org ([unknown] [71.251.58.177])
-	by vms173009.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0KZS007RZWPHMS82@vms173009.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	24 Mar 2010 14:27:23 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 7611714AF60; Wed,
-	24 Mar 2010 15:27:17 -0400 (EDT)
-Date: Wed, 24 Mar 2010 15:27:17 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 24 Mar 2010 21:20:57 +0100
+Received: by gyb11 with SMTP id 11so740343gyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Mar 2010 13:17:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=lRtfu2ekAKHR+xbSRrW9qLnQTYtnRg7NF55t98g7OwQ=;
+	b=YZBUraNulej+DUmZaSTIHatjUyXPqKooDWwGrpZIlyeezkDD1MymUdKR+BUNc+pjLz
+	oaWch0B6ENF/LoOnFDOPAWRaeeMAvPuDBmjApW101zrtH1hSzMV8tkKRJj+zcUZo7Urk
+	ruprzege2UcQXzHFjk+vsnPppXsGppv4D9NQc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=q/fARq7DYJCIPx98o813aTdHVel8csf3PA2t+v3fYVEilNnKYlrgQY+owBnOyAWdeS
+	rvBcypgXsm+nX+DBSNyF4ebDTeU7Ae9z5zCGt00qISLnaQMWBons5lNk8ayO33v36P3q
+	u+pJGnRUJP6OY/bSG4pylRgsxBJxfZ/BMx0jg=
+MIME-Version: 1.0
+Received: by 10.101.155.13 with SMTP id h13mr2634692ano.14.1269461863058; Wed, 
+	24 Mar 2010 13:17:43 -0700 (PDT)
+In-Reply-To: <b6ebd0a51003240851i3f91860ia1100c4677569cf6@mail.gmail.com>
+References: <1269437224.1681.134.camel@rex>
+	<ac9c93b11003240815o796152a7y50601b03e91be40@mail.gmail.com>
+	<b6ebd0a51003240851i3f91860ia1100c4677569cf6@mail.gmail.com>
+Date: Wed, 24 Mar 2010 21:17:43 +0100
+Message-ID: <ac9c93b11003241317y2f6a6bbbs78936ee603d8ce3b@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100324192717.GC28005@denix.org>
-References: <4B99791E.1020102@zenlinux.com>
-	<1097921865-1269428022-cardhu_decombobulator_blackberry.rim.net-2083922404-@bda2481.bisx.prod.on.blackberry>
-MIME-version: 1.0
-In-reply-to: <1097921865-1269428022-cardhu_decombobulator_blackberry.rim.net-2083922404-@bda2481.bisx.prod.on.blackberry>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.9
-X-SA-Exim-Mail-From: denis@denix.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: BBCLASSEXTEND sdk vs. nativesdk
+Subject: Re: Checksums in Bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,118 +53,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Mar 2010 19:30:53 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 24 Mar 2010 20:20:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 24, 2010 at 10:53:40AM +0000, jkridner@beagleboard.org wrote:
-> Is this also the mechanism for building an sdk for the target then?  Seems 
-> great to normalize this.
+2010/3/24 Chris Larson <clarson@kergoth.com>:
+> On Wed, Mar 24, 2010 at 8:15 AM, Frans Meulenbroeks <
+> fransmeulenbroeks@gmail.com> wrote:
+>
+>> Interesting ideas.
+>> I need to let this digest a little =A0bit.
+>>
+>> Some initial thougths
+>> The checksum should also depend on the checksum of the underlying
+>> packages. E.g. if A depends on B and the checksum of B changes it
+>> should trigger a rebuild of A.
+>>
+>
+> I don't think this is a very good idea, personally. =A0As an option, perh=
+aps,
+> but we do things the way we do for a reason, just because a dep of mine i=
+s
+> rebuilt doesn't automatically require that I be rebuilt. =A0I'd suggest m=
+oving
+> to an alternative which encodes the library ABI and incorporates that int=
+o
+> the hashes of things that depend upon it, but we can certainly do what yo=
+u
+> want as an optional feature.
 
-Jason,
+If a dep is rebuild there is a reason for it (bug fix, packaging
+changed, changes in exported files etc etc).
+This might impact the using recipe.
+If baking a file does not result in a rebuild when a dependency is
+changed, probably a warning should be given.
 
-Calling it "an SDK for the target" is not exactly correct. From your example 
-below, the target would be MIPS, while ARM would be an SDK host, I believe.
-This technique is called The Canadian Cross:
-http://en.wikipedia.org/wiki/Canadian_cross#Canadian_Cross
+Encoding the library ABI is only part of the job. You'd also have to
+take the .h files a package exports into account as constants in it
+could be changed.
+And even the using package could change its behaviour (e.g. because
+configure runs differently).
+Note also that if we abandon PR we do not really have an easy
+mechanism to force recompilation of a package (if a depenency changed
+and we want to force a rebuild).
 
-> If I wanted to build a MIPS cross-compiler that ran on an ARM board, and 
-> build that from an x86 machine, what would it look like given nativesdk?
+>
+> A first crude approach would be to have a hash of the concatenation of
+>> the unfolded recipe (so with all includes/requires expanded) and the
+>> hashes of the recipes it depends on). Of course this is very rough as
+>> even changing whitespace in a recipe will lead to a recompile.
+>> A different approach would be to let it depend on PV + PR. That'll put
+>> the developer in control (with all related issues, like the developer
+>> not bumping PR).
+>> And yet a different one would be to use variables and functions from the
+>> recipe.
+>>
+>> I have mixed feelings on whether checksums also would depend on global
+>> vars (e.g. code generated by the classes or variables in e.g.
+>> local.conf).
+>> On the one hand it seems pretty neat, on the other hand I worry about
+>> performance (calculating the checksum).
+>>
+>
+> Global variables should absolutely be included, imo. =A0The reason for go=
+ing
+> with a blacklist rather than a whitelist approach is to, as richard says,
+> make it less error prone. =A0It ensures that the failure mode is somethin=
+g
+> being rebuilt, rather than using possibly incorrect binaries. =A0I'd rath=
+er it
+> take a bit longer to build than result in questionable output. =A0If
+> calculating the checksum time becomes a concern, which I doubt, you could
+> hash the configuration metadata at ConfigParsed time and incorporate that
+> hash into the hash generated of the recipe. =A0This could increase the
+> likelihood of collisions, but I'm not too worried. =A0Let's get things
+> working, and determine the bottlenecks at that point.
 
-Theoretically, that should be possible with MACHINE=mips and SDKMACHINE=arm, 
-but:
+Agree, but as changes in vars are less likely we could consider having
+something to DISTRO_PR.
+My nightmare is that if I am going to build console-image (about 3000
+tasks) that it goes to check 3000 times if my TMPDIR is not changed.
+Some caching will definitely be needed
 
-1. SDKMACHINE is not yet ported from Poky to OE
-2. Currently Poky only supports i586, i686 and x86_64 as SDKMACHINE
+(btw if we have a checksum per file and have a rule that if the
+checksum is newer than the file, it is ok and need not be recomputed
+that could help, but it might bring back some of the issues we now
+have with stamp).
 
--- 
-Denys
-
-> Sorry for the blackberry top post. 
-> Sent via BlackBerry from T-Mobile
-> 
-> -----Original Message-----
-> From: Richard Purdie <rpurdie@rpsys.net>
-> Date: Wed, 24 Mar 2010 10:28:36 
-> To: <openembedded-devel@lists.openembedded.org>
-> Subject: Re: [oe] BBCLASSEXTEND sdk vs. nativesdk
-> 
-> On Tue, 2010-03-23 at 23:42 -0700, Scott Garman wrote:
-> > On 03/23/2010 10:45 PM, Khem Raj wrote:
-> > >> It seems to me the correct course of action is to use nativesdk in
-> > >> BBCLASSEXTEND and rename the dependencies on other recipes, yes?
-> > >
-> > > you should rename the dependencies on zlib-sdk to zlib-nativesdk
-> > > wherever they exist.
-> 
-> This isn't quite correct. nativesdk is not a drop in replacement for the
-> old sdk but you are right that is is the replacement.
-> 
-> The difference is that the old "sdk" assumes the system you want the sdk
-> to run on is the same as the build system. This has always been a big
-> can of worms causing problems so "nativesdk" removes this assumption and
-> allows you to set SDKMACHINE to be the machine you want the resulting
-> sdk to run on.
-> 
-> This adds some complexity since we need another cross compiling
-> toolchain. But cross compiling toolchains are something we're good
-> at :). It also means we ship *everything* with the sdk including a
-> standalone glibc massively removing system dependencies from the result
-> which in my opinion can only be a good thing.
-> 
-> "sdk" and "nativesdk" are designed to coexist and the idea is that we
-> add "nativesdk" to OE alongside "sdk", get it working, then remove the
-> old broken "sdk" stuff.
-> 
-> In theory you can therefore just add the BBCLASSEXTEND line to the zlib
-> recipe and work backwards from there. You will need a working -crosssdk
-> version of gcc to provide the different compiler.
-> 
-> > I am running into some problems now trying to get zlib-nativesdk to 
-> > build. If I change the recipe to use sdk, it builds fine, so I have 
-> > something useful to compare things to.
-> > 
-> > When I build using nativesdk, configure dies pretty quickly when testing 
-> > the compiler. It's trying to run i686-linux-gcc.
-> > 
-> > Sure enough, if I compare the BitBake environments using the -e option, 
-> > I see that CC is being set to "gcc" when I use sdk but "i686-linux-gcc" 
-> > when I use nativesdk.
-> > 
-> > If I create the needed symlink to gcc, the compilation gets further but 
-> > still fails, wanting i686-linux-ar, etc. So I have a basic understanding 
-> > of what the problem is, but I'm sure the solution is not to go symlink 
-> > crazy with my native compiler environment.
-> 
-> See above, its missing the -crosssdk cross compiler. Did you not have to
-> ASSUME_PROVIDED something to make the dependencies work?
-> 
-> > So I took a look at sdk.bbclass and nativesdk.bbclass. They both set up 
-> > a number of architecture-specific variables, but neither of them 
-> > explicitly set CC. Where I should look next?
-> > 
-> > It turns out there is only one package currently in OE that uses 
-> > BBCLASSEXTEND with nativesdk (gettext_0.17). So perhaps it is the case 
-> > that nativesdk.bbclass needs additional work. I did test copying over 
-> > Poky's nativesdk.bbclass (which has just a few differences), but I still 
-> > get the same results.
-> 
-> We probably need those differences in OE. Its nice to see someone
-> looking at this!
-> 
-> Cheers,
-> 
-> Richard
-> 
-> 
-> 
+Frans
+> --
+> Christopher Larson
+> clarson at kergoth dot com
+> Founder - BitBake, OpenEmbedded, OpenZaurus
+> Maintainer - Tslib
+> Senior Software Engineer, Mentor Graphics
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
