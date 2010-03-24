@@ -1,47 +1,52 @@
-Received: from mail-qy0-f178.google.com ([209.85.221.178])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1NuTCr-0002jy-3S
+	(envelope-from <raj.khem@gmail.com>) id 1NuTb8-0000er-OH
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 17:13:23 +0100
-Received: by qyk8 with SMTP id 8so38744qyk.4
+	Wed, 24 Mar 2010 17:38:27 +0100
+Received: by pwj5 with SMTP id 5so451407pwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Mar 2010 09:10:08 -0700 (PDT)
+	Wed, 24 Mar 2010 09:35:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to
-	:content-type; bh=yM/2LfzzOjtx28zOj3ji7eBHyjyIeSq9Ubznuq64xMw=;
-	b=bjc05HtvjLGCU9kIeKoiqoC0KPrahjZq/G3h8HBLScAT1hQ7VOVbMPgILrgTTKihog
-	ntsI2wmQlnRbcfemiAO+rqFTuk9J5IhX1VFKJ0tl+zdbbQe9lBMHYNR+DaIHAEQrv4ZG
-	ldDQGsbUFdc8AEoxzSaDO2kGuFVoPllXiwPW8=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=K2ZU0Z75evrMcPpP1Fbpr6b4OsCLUH0dc3valoENgDE=;
+	b=V/CVNI9hHqXAfR2pcPuwPRUSHfHM398LYRpT4Ihh7Jcz7mCNC9Mp7k92/i9yu1ijGE
+	CaXOMchgSSDJBLknIHvqdaHRu3N5Am0iQjZ3y95fhh3Z0w7K61pIBQkk7MqZpOC98zfl
+	IAWAKkpuWR9lqgNqZvOQwLt/l8FxwuFjdjzAg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=gtJGTyyl+57wZQW+ABtgAtCF8iuqv7yvGzgVDixdaIlvtg2ji6BY6SuS/IF8BzUXns
-	FgpHz57P/HLGHfABiwklfQ1aBqHICO8ufod3VnzdqKZELabik/bgyKS9hMy5qqVz2wrC
-	dOKKEy8GYA857gQUtgjg0odmsqfQJSYSaOTtE=
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.232.149 with SMTP id ju21mr1006983qcb.87.1269447008076; 
-	Wed, 24 Mar 2010 09:10:08 -0700 (PDT)
-In-Reply-To: <201003240834.04740.ml@vdm-design.de>
-References: <1269383658-27562-1-git-send-email-ml@vdm-design.de> 
-	<b6ebd0a51003231748s293a4020v989b8cdf590ccc4@mail.gmail.com> 
-	<201003240834.04740.ml@vdm-design.de>
-From: Chris Larson <clarson@kergoth.com>
-Date: Wed, 24 Mar 2010 09:09:48 -0700
-X-Google-Sender-Auth: 0e92dd318141248e
-Message-ID: <b6ebd0a51003240909t642135dfy5b2667f6dac0a8c5@mail.gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=sLKJQtox2DEL9R08sFGsn5Y+UuY+/2PIr5UP3xyaaCfTEzAzNo59V1oAbw6stN+nw3
+	szFEzdVqC+QmBmX2e94nbf0DiuGRPrhZjxpBM4aY3gWD0ZhA3xQhAwZjogKeRj71NyOD
+	pC7IyDej2kM/nnV3nBA6s4sV99iRtNzaFZP/M=
+Received: by 10.141.53.1 with SMTP id f1mr4744314rvk.142.1269448515804;
+	Wed, 24 Mar 2010 09:35:15 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 20sm94645pzk.7.2010.03.24.09.35.14
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 24 Mar 2010 09:35:14 -0700 (PDT)
+Date: Wed, 24 Mar 2010 09:35:28 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.221.178
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Message-ID: <20100324163528.GA15272@gmail.com>
+References: <201003231901.24017.marcin@juszkiewicz.com.pl>
+	<20100323183615.GE3249@xora-eee.xora.org.uk>
+	<ac9c93b11003240032h636a60detc59ab859e6fa79c8@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <ac9c93b11003240032h636a60detc59ab859e6fa79c8@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] imagemagick: convert to BBCLASSEXTEND and new staging
+Subject: Re: [RFC] Removal of e2fsprogs-libs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,38 +60,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Mar 2010 16:13:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 24 Mar 2010 16:38:27 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Wed, Mar 24, 2010 at 12:34 AM, Thomas Zimmermann <ml@vdm-design.de>wrote=
-:
+On (24/03/10 08:32), Frans Meulenbroeks wrote:
+> 2010/3/23 Graeme Gregory <dp@xora.org.uk>:
+> > On Tue, Mar 23, 2010 at 07:01:23PM +0100, Marcin Juszkiewicz wrote:
+> >>
+> >> During last days I spent a bit of time on e2fsprogs* and util-linux-ng
+> >> recipes. They are cleaner now but there is still some work to do.
+> >>
+> >> We have many recipes which depends on 'e2fsprogs-libs' when they want
+> >> 'libblkid' or 'libuuid' which are provided by 'e2fsprogs-libs' and
+> >> 'util-linux-ng' recipes. I checked how Debian solves that and got into point
+> >> where there is no 'e2fsprogs-libs' recipes in my tree and everything is
+> >> building.
+> >>
+> >> What needs to be changed?
+> >>
+> >> 1. git rm -r recipes/e2fsprogs-libs
+> >> 2. check each recipe which depends on 'e2fsprogs-libs' which library it really
+> >>    wants
+> >> 3. change each recipe which wants 'libblkid' or 'libuuid' to depend on
+> >>    'util-linux-ng'
+> >> 4. change each recipe which wants 'libcom_err' or 'libss' to depend on
+> >>    'e2fsprogs'
+> >> 5. add "--with-elf-shlibs" to 'e2fsprogs' to get 'libcom_err' and 'libss'
+> >> 6. fix packaging of 'e2fsprogs' to get separate packages for libraries.
+> >>
+> >> I can work on that in next days but want to inform everyone that such change
+> >> will be done.
+> >>
+> > Hrw thanks for cleaning this up, feel free to add my ack to your completed
+> > worked.
+> 
+> Although I highly welcome the cleanup proposed by Marcin, I feel it is
+> not proper to submit an ack for patches that are not submitted as
+> such.
+> Acked-by indicates approval, and I find it somewhat fishy to approve a
+> patch that you haven't seen yet.
+> (without wanting to question the value or quality of Marcin's work, as
+> that will undoubtly be ok).
 
-> Am Mittwoch 24 M=C3=A4rz 2010 01:48:58 schrieb Chris Larson:
-> > This should not be necessary.  native.bbclass automatically sets deps o=
-n
-> >  the -native versions of what's in your DEPENDS.  Or was there a specif=
-ic
-> >  reason behind adding libtool-native and removing tiff?
-> >
-> No there was no such a reason, i just copied it from imagemagick-
-> native_0.6.3.5-10 recipe.
->
-> The question is, do we convert 6.3.5-10 to BBCLASSEXTEND too, or do we
-> remove
-> that recipe, or is there a bug about mixed BBCLASSEXTEND and -native
-> recipes,
-> that -native recipes are preferred?
+RFC is request for comment. He is putting forth an idea and wants to know
+if its worth. IMO there is nothing wrong in acking the proposal. When the
+real code comes around then it can be reviewed for what it does.
 
+Thx
+-Khem
+> 
+> Frans
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-It seems to be a bug, yes.  Or questionable behavior, rather.  It's known.
- Best to convert both, unless you're confident no one would be affected by =
-a
-removal of the old -native.
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
