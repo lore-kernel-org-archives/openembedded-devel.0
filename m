@@ -1,43 +1,47 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-qy0-f178.google.com ([209.85.221.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NuTCN-0000hO-F6 for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 17:12:52 +0100
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NuT9J-00086u-1M for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 17:09:41 +0100
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Mar 2010 17:09:41 +0100
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <kergoth@gmail.com>) id 1NuTCr-0002jy-3S
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Mar 2010 17:13:23 +0100
+Received: by qyk8 with SMTP id 8so38744qyk.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Mar 2010 17:09:41 +0100
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 24 Mar 2010 09:10:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:from:date:x-google-sender-auth:message-id:subject:to
+	:content-type; bh=yM/2LfzzOjtx28zOj3ji7eBHyjyIeSq9Ubznuq64xMw=;
+	b=bjc05HtvjLGCU9kIeKoiqoC0KPrahjZq/G3h8HBLScAT1hQ7VOVbMPgILrgTTKihog
+	ntsI2wmQlnRbcfemiAO+rqFTuk9J5IhX1VFKJ0tl+zdbbQe9lBMHYNR+DaIHAEQrv4ZG
+	ldDQGsbUFdc8AEoxzSaDO2kGuFVoPllXiwPW8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=gtJGTyyl+57wZQW+ABtgAtCF8iuqv7yvGzgVDixdaIlvtg2ji6BY6SuS/IF8BzUXns
+	FgpHz57P/HLGHfABiwklfQ1aBqHICO8ufod3VnzdqKZELabik/bgyKS9hMy5qqVz2wrC
+	dOKKEy8GYA857gQUtgjg0odmsqfQJSYSaOTtE=
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.229.232.149 with SMTP id ju21mr1006983qcb.87.1269447008076; 
+	Wed, 24 Mar 2010 09:10:08 -0700 (PDT)
+In-Reply-To: <201003240834.04740.ml@vdm-design.de>
+References: <1269383658-27562-1-git-send-email-ml@vdm-design.de> 
+	<b6ebd0a51003231748s293a4020v989b8cdf590ccc4@mail.gmail.com> 
+	<201003240834.04740.ml@vdm-design.de>
+From: Chris Larson <clarson@kergoth.com>
+Date: Wed, 24 Mar 2010 09:09:48 -0700
+X-Google-Sender-Auth: 0e92dd318141248e
+Message-ID: <b6ebd0a51003240909t642135dfy5b2667f6dac0a8c5@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 24 Mar 2010 17:09:28 +0100
-Message-ID: <hoddfo$6ql$1@dough.gmane.org>
-References: <201003211505.39554.roman@khimov.ru>	<1269381068-5518-1-git-send-email-khimov@altell.ru>
-	<201003241557.44087.khimov@altell.ru>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
-In-Reply-To: <201003241557.44087.khimov@altell.ru>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.221.178
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 01/44] cpan-base: add perl version to PR
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] imagemagick: convert to BBCLASSEXTEND and new staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,45 +55,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Mar 2010 16:12:52 -0000
+X-List-Received-Date: Wed, 24 Mar 2010 16:13:23 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Wed, Mar 24, 2010 at 12:34 AM, Thomas Zimmermann <ml@vdm-design.de>wrote=
+:
 
-On 24-03-10 13:57, Roman I Khimov wrote:
-> В сообщении от Среда 24 марта 2010 00:51:08 вы написали:
->> Makes perl modules rebuild on perl version change, since binary
->>  compatibility could be broken with that (although perl itself tries to
->>  maintain it  within patchlevel range, like 5.8.7 -> 5.8.8).
->>
->> This is conditional on PACKAGE_ARCH, since there is nothing to rebuild for
->> pure perl modules (and those should use 'PACKAGE_ARCH = "all"') even if
->>  they break with perl version change.
->>
->> This also should ease transition to perl 5.10.1.
-> 
-> OK to push?
-
-Yes
-
-> I've realized yesterday that without it or similar thing many 
-> binary modules would be broken when someone would try to use 5.10.1 and manual 
-> cleaning and rebuilding a ton of perl modules is no fun.
-
-And manually bumping PR as well, which is why I asked for this :)
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLqjk4MkyGM64RGpERAtHuAJ9UNAvsTQJcRG8stOt0zXI5TeWjzQCeOC2J
-HSypchX1JCQ3Uj6nexlelYs=
-=aSbz
------END PGP SIGNATURE-----
+> Am Mittwoch 24 M=C3=A4rz 2010 01:48:58 schrieb Chris Larson:
+> > This should not be necessary.  native.bbclass automatically sets deps o=
+n
+> >  the -native versions of what's in your DEPENDS.  Or was there a specif=
+ic
+> >  reason behind adding libtool-native and removing tiff?
+> >
+> No there was no such a reason, i just copied it from imagemagick-
+> native_0.6.3.5-10 recipe.
+>
+> The question is, do we convert 6.3.5-10 to BBCLASSEXTEND too, or do we
+> remove
+> that recipe, or is there a bug about mixed BBCLASSEXTEND and -native
+> recipes,
+> that -native recipes are preferred?
 
 
+It seems to be a bug, yes.  Or questionable behavior, rather.  It's known.
+ Best to convert both, unless you're confident no one would be affected by =
+a
+removal of the old -native.
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
