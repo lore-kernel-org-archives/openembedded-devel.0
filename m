@@ -1,47 +1,44 @@
-Received: from qw-out-1920.google.com ([74.125.92.144])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1NuSuf-0000Dm-7S
+	(envelope-from <Tom_Rini@mentor.com>) id 1NuT1p-0008CY-FF
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 16:54:34 +0100
-Received: by qw-out-1920.google.com with SMTP id 4so903817qwk.36
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Mar 2010 08:51:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to:cc
-	:content-type; bh=4YjkyRRg4ZM6TrDo5HdeaSHwfuy5sMCXqoRtvucWN1w=;
-	b=oGAtLn3FYYnOZXl8qQCqyALMmLFg6yIz0aBlo/gzvFiuzAGnkDPVJjL8ONU2/Rav9n
-	iP3R8Znw547WpxInxIgTCPxjWeAQ7m7ybEwXu53NYnzJpaP/nH0G68XPILi2qlVAbwMb
-	H3m+M5LsKLb/6x0jztnke1geQtwENbooMGTLg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=HsIVBn80Knu9KlpSVjBp4vPzyLXzvLIQGdxwUDqg0u515xwmIdOfaT4BQLEfnm0vxE
-	sMRnly/CY7pvfQd/coJVsjO2JcAcokuxGLZvq42nDcRr4PkI6uWryMbeqaXjoIKkhGPW
-	y5H3cyuqWjywyHers6h1R3iV471rTdbqfFyeU=
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.212.4 with SMTP id gq4mr1337233qcb.62.1269445885093; Wed, 
-	24 Mar 2010 08:51:25 -0700 (PDT)
-In-Reply-To: <ac9c93b11003240815o796152a7y50601b03e91be40@mail.gmail.com>
-References: <1269437224.1681.134.camel@rex>
-	<ac9c93b11003240815o796152a7y50601b03e91be40@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Wed, 24 Mar 2010 08:51:05 -0700
-X-Google-Sender-Auth: ebceb8a8e00fdd99
-Message-ID: <b6ebd0a51003240851i3f91860ia1100c4677569cf6@mail.gmail.com>
+	Wed, 24 Mar 2010 17:02:13 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1NuSyk-0005N2-I8 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Mar 2010 08:58:46 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Wed, 24 Mar 2010 08:58:45 -0700
+Received: from 172.30.80.109 ([172.30.80.109]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Wed, 24 Mar 2010 15:58:00 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	24 Mar 2010 08:57:59 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.92.144
-X-SA-Exim-Mail-From: kergoth@gmail.com
+In-Reply-To: <1269445040.1681.147.camel@rex>
+References: <4B99791E.1020102@zenlinux.com> <4BA981A5.5030609@zenlinux.com>
+	<19c1b8a91003232245y3409bca3p4b74ab5562424b5c@mail.gmail.com>
+	<4BA9B440.2050608@zenlinux.com>  <1269426516.1681.35.camel@rex>
+	<1269444453.2395.5.camel@trini-m4400> <1269445040.1681.147.camel@rex>
+Organization: Mentor Graphics Corporation
+Date: Wed, 24 Mar 2010 08:57:59 -0700
+Message-ID: <1269446279.3545.8.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 24 Mar 2010 15:58:45.0975 (UTC)
+	FILETIME=[E274AE70:01CACB6A]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: bitbake-dev@lists.berlios.de
-Subject: Re: Checksums in Bitbake
+Subject: Re: BBCLASSEXTEND sdk vs. nativesdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,59 +52,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Mar 2010 15:54:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 24 Mar 2010 16:02:22 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 24, 2010 at 8:15 AM, Frans Meulenbroeks <
-fransmeulenbroeks@gmail.com> wrote:
+On Wed, 2010-03-24 at 15:37 +0000, Richard Purdie wrote:
+> On Wed, 2010-03-24 at 08:27 -0700, Tom Rini wrote:
+> > On Wed, 2010-03-24 at 10:28 +0000, Richard Purdie wrote:=20
+> > > The difference is that the old "sdk" assumes the system you want the =
+sdk
+> > > to run on is the same as the build system. This has always been a big
+> > > can of worms causing problems so "nativesdk" removes this assumption =
+and
+> > > allows you to set SDKMACHINE to be the machine you want the resulting
+> > > sdk to run on.
+> > >=20
+> > > This adds some complexity since we need another cross compiling
+> > > toolchain. But cross compiling toolchains are something we're good
+> > > at :). It also means we ship *everything* with the sdk including a
+> > > standalone glibc massively removing system dependencies from the resu=
+lt
+> > > which in my opinion can only be a good thing.
+> >=20
+> > Or a really bad thing, yes.  I think nativesdk will help out a lot for
+> > making canadian style builds cleaner.  But going so far as to say 'Oh,
+> > lets just throw a libc into the SDK export' is going pretty far down a
+> > questionable road.  I'm not so naive to think that there's not problems
+> > with my next suggestion, but there's this thing called LSB for a reason=
+.
+> > If you want build once, run many distributions, you do that, not go and
+> > own even more dependencies.
+>=20
+> However, an LSB compliant SDK becomes a case of installing "LSB" libs
+> into the right sysroot and then setting some
+> ASSUME_PROVIDED/PREFERRED_PROVIDER lines.
+>=20
+> So I think its good all around, we achieve independence of the SDK from
+> the build system and make it depend on exactly what we do or don't want
+> it to. Where is the bad bit (ignoring build time)? :)
 
-> Interesting ideas.
-> I need to let this digest a little  bit.
->
-> Some initial thougths
-> The checksum should also depend on the checksum of the underlying
-> packages. E.g. if A depends on B and the checksum of B changes it
-> should trigger a rebuild of A.
->
+How is this working on the runtime?  How relocatable is it?  How much
+have we added to the size?
 
-I don't think this is a very good idea, personally.  As an option, perhaps,
-but we do things the way we do for a reason, just because a dep of mine is
-rebuilt doesn't automatically require that I be rebuilt.  I'd suggest moving
-to an alternative which encodes the library ABI and incorporates that into
-the hashes of things that depend upon it, but we can certainly do what you
-want as an optional feature.
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
-A first crude approach would be to have a hash of the concatenation of
-> the unfolded recipe (so with all includes/requires expanded) and the
-> hashes of the recipes it depends on). Of course this is very rough as
-> even changing whitespace in a recipe will lead to a recompile.
-> A different approach would be to let it depend on PV + PR. That'll put
-> the developer in control (with all related issues, like the developer
-> not bumping PR).
-> And yet a different one would be to use variables and functions from the
-> recipe.
->
-> I have mixed feelings on whether checksums also would depend on global
-> vars (e.g. code generated by the classes or variables in e.g.
-> local.conf).
-> On the one hand it seems pretty neat, on the other hand I worry about
-> performance (calculating the checksum).
->
-
-Global variables should absolutely be included, imo.  The reason for going
-with a blacklist rather than a whitelist approach is to, as richard says,
-make it less error prone.  It ensures that the failure mode is something
-being rebuilt, rather than using possibly incorrect binaries.  I'd rather it
-take a bit longer to build than result in questionable output.  If
-calculating the checksum time becomes a concern, which I doubt, you could
-hash the configuration metadata at ConfigParsed time and incorporate that
-hash into the hash generated of the recipe.  This could increase the
-likelihood of collisions, but I'm not too worried.  Let's get things
-working, and determine the bottlenecks at that point.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
