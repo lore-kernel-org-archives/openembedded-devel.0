@@ -1,40 +1,31 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1NuUXY-0004Hw-Dz
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NuUci-0004mE-Ul
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 18:38:49 +0100
-Received: from p5b03671c.dip.t-dialin.net ([91.3.103.28] helo=excalibur)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1NuUUU-0004zB-Jc by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Mar 2010 18:35:41 +0100
-Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>) id 1NuUUT-0008Q2-UC
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 18:35:37 +0100
-Date: Wed, 24 Mar 2010 18:35:37 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Wed, 24 Mar 2010 18:44:14 +0100
+Received: (qmail 8322 invoked by uid 813007); 24 Mar 2010 17:41:00 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 24 Mar 2010 17:41:00 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100324173537.GA17800@excalibur.local>
-References: <1269346975-842-2-git-send-email-khimov@altell.ru>
-	<1269354368-20910-1-git-send-email-khimov@altell.ru>
-	<1269354368-20910-2-git-send-email-khimov@altell.ru>
+Date: Wed, 24 Mar 2010 18:41:00 +0100
+User-Agent: KMail/1.13.1 (Linux/2.6.34-rc2; KDE/4.4.1; x86_64; ; )
+References: <201003211505.39554.roman@khimov.ru> <hoddfo$6ql$1@dough.gmane.org>
+	<201003242026.22169.roman@khimov.ru>
+In-Reply-To: <201003242026.22169.roman@khimov.ru>
 MIME-Version: 1.0
-In-Reply-To: <1269354368-20910-2-git-send-email-khimov@altell.ru>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+Message-Id: <201003241841.01034.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] lowpan-tools: fix lowpan-tools-tests packaging
+Subject: Re: [PATCH 01/44] cpan-base: add perl version to PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,24 +39,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Mar 2010 17:38:49 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 24 Mar 2010 17:44:14 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 
-Hello.
+Dnia =B6roda, 24 marca 2010 o 18:26:16 Roman I Khimov napisa=B3(a):
 
-On Tue, 2010-03-23 at 17:26, Roman I Khimov wrote:
-> RDEPENDS on python, wants python-native at build time.
-> 
-> Signed-off-by: Roman I Khimov <khimov@altell.ru>
+> OK. Pushed perl 5.10.1, everybody, have fun!
 
-Sorry, I missed this one. I just updated to a newer SRCREV and fixed the SRC_URI
-as well. You will need to rebase as the context of your changes hunks has
-changed. Otherwise it looks good to me.
+18:39 hrw@home:angstrom$ bitbake perl
+NOTE: Handling BitBake files: - (0975/8143) [11 %]NOTE: <type=20
+'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneType' objects whi=
+le=20
+evaluating:
+r0${@perl_get_version_suffix(d)}
+NOTE: <type 'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneType'=
+=20
+objects while evaluating:
+${PN}-${EXTENDPE}${PV}-${PR}
+NOTE: <type 'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneType'=
+=20
+objects while evaluating:
+${TMPDIR}/work/${MULTIMACH_TARGET_SYS}/${PF}
+NOTE: <type 'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneType'=
+=20
+objects while evaluating:
+${WORKDIR}/callweaver-1.2-${CWRCV}/contrib/ogi-perl/callweaver-perl-0.0.1
+NOTE: <type 'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneType'=
+=20
+objects while evaluating:
+${S}
+ERROR: cannot concatenate 'str' and 'NoneType' objects while parsing=20
+/home/hrw/devel/oe/openembedded/recipes/callweaver/callweaver-perl.bb
+NOTE: Handling BitBake files: - (3827/8143) [46 %]NOTE: <type=20
+'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneType' objects whi=
+le=20
+evaluating:
+r2${@perl_get_version_suffix(d)}
+NOTE: <type 'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneType'=
+=20
+objects while evaluating:
+${PN}-${EXTENDPE}${PV}-${PR}
+NOTE: <type 'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneType'=
+=20
+objects while evaluating:
+${TMPDIR}/work/${MULTIMACH_TARGET_SYS}/${PF}
+NOTE: <type 'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneType'=
+=20
+objects while evaluating:
+${WORKDIR}/SDL_perl-${PV}
+NOTE: <type 'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneType'=
+=20
+objects while evaluating:
+${S}
+ERROR: cannot concatenate 'str' and 'NoneType' objects while parsing=20
+/home/hrw/devel/oe/openembedded/recipes/sdlperl/sdl-perl_1.20.3.bb
 
-Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
+And same for lot of perl recipes.
 
-regards
-Stefan Schmidt
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
