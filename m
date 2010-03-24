@@ -1,43 +1,43 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NuSM7-0006yu-5q
+	(envelope-from <Tom_Rini@mentor.com>) id 1NuSYU-0003Ut-Nm
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 16:18:51 +0100
-Received: by gwaa20 with SMTP id a20so1047265gwa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Mar 2010 08:15:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:cc:content-type;
-	bh=J82e/+22VrhfWytFJov4SwrmTAjlyBrY/h4FnuIJg/I=;
-	b=aEkshZ4D4pcnyA3B7RrUk8WdvdDchwk3Os5tk9itiFp//1RF+T4phcNhxgOONRnkf3
-	6OvGGZAhi0jibgUfB9eifYDaqZhjufBbavjvcRDqaPKt37lObcO1b4YP9foUql3Mh2OY
-	QJdDcG8XgTW88KcupsFG/9XbDPrsXveB2E05M=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	b=HD5vXPSwLP40jybJ/YPfmDzhiFGueFtk4wElHoB/oMQj/G6gay5AId8xa6tF5apBrj
-	rMsoJxFE3JJIdHlo+tHsKjGoGOXvIVBJ9Sd75O54O2FgI+gjWXocdnF+kd8dzPNTqMkK
-	bcVBVrRjBHV3CeihCG4o1zDAMd4aL0fdgX8Is=
-MIME-Version: 1.0
-Received: by 10.101.56.4 with SMTP id i4mr271948ank.238.1269443740944; Wed, 24 
-	Mar 2010 08:15:40 -0700 (PDT)
-In-Reply-To: <1269437224.1681.134.camel@rex>
-References: <1269437224.1681.134.camel@rex>
-Date: Wed, 24 Mar 2010 16:15:40 +0100
-Message-ID: <ac9c93b11003240815o796152a7y50601b03e91be40@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 24 Mar 2010 16:31:41 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1NuSVP-0000aS-Nk from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Mar 2010 08:28:27 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Wed, 24 Mar 2010 08:28:27 -0700
+Received: from 172.30.80.109 ([172.30.80.109]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Wed, 24 Mar 2010 15:27:33 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	24 Mar 2010 08:27:33 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <1269426516.1681.35.camel@rex>
+References: <4B99791E.1020102@zenlinux.com> <4BA981A5.5030609@zenlinux.com>
+	<19c1b8a91003232245y3409bca3p4b74ab5562424b5c@mail.gmail.com>
+	<4BA9B440.2050608@zenlinux.com>  <1269426516.1681.35.camel@rex>
+Organization: Mentor Graphics Corporation
+Date: Wed, 24 Mar 2010 08:27:33 -0700
+Message-ID: <1269444453.2395.5.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 24 Mar 2010 15:28:27.0224 (UTC)
+	FILETIME=[A6654D80:01CACB66]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: bitbake-dev@lists.berlios.de
-Subject: Re: Checksums in Bitbake
+Subject: Re: BBCLASSEXTEND sdk vs. nativesdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,41 +51,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Mar 2010 15:18:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 24 Mar 2010 15:31:41 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Richard,
+On Wed, 2010-03-24 at 10:28 +0000, Richard Purdie wrote:
+> On Tue, 2010-03-23 at 23:42 -0700, Scott Garman wrote:
+> > On 03/23/2010 10:45 PM, Khem Raj wrote:
+> > >> It seems to me the correct course of action is to use nativesdk in
+> > >> BBCLASSEXTEND and rename the dependencies on other recipes, yes?
+> > >
+> > > you should rename the dependencies on zlib-sdk to zlib-nativesdk
+> > > wherever they exist.
+>=20
+> This isn't quite correct. nativesdk is not a drop in replacement for the
+> old sdk but you are right that is is the replacement.
+>=20
+> The difference is that the old "sdk" assumes the system you want the sdk
+> to run on is the same as the build system. This has always been a big
+> can of worms causing problems so "nativesdk" removes this assumption and
+> allows you to set SDKMACHINE to be the machine you want the resulting
+> sdk to run on.
+>=20
+> This adds some complexity since we need another cross compiling
+> toolchain. But cross compiling toolchains are something we're good
+> at :). It also means we ship *everything* with the sdk including a
+> standalone glibc massively removing system dependencies from the result
+> which in my opinion can only be a good thing.
 
-Interesting ideas.
-I need to let this digest a little  bit.
+Or a really bad thing, yes.  I think nativesdk will help out a lot for
+making canadian style builds cleaner.  But going so far as to say 'Oh,
+lets just throw a libc into the SDK export' is going pretty far down a
+questionable road.  I'm not so naive to think that there's not problems
+with my next suggestion, but there's this thing called LSB for a reason.
+If you want build once, run many distributions, you do that, not go and
+own even more dependencies.
 
-Some initial thougths
-The checksum should also depend on the checksum of the underlying
-packages. E.g. if A depends on B and the checksum of B changes it
-should trigger a rebuild of A.
-
-A first crude approach would be to have a hash of the concatenation of
-the unfolded recipe (so with all includes/requires expanded) and the
-hashes of the recipes it depends on). Of course this is very rough as
-even changing whitespace in a recipe will lead to a recompile.
-A different approach would be to let it depend on PV + PR. That'll put
-the developer in control (with all related issues, like the developer
-not bumping PR).
-And yet a different one would be to use variables and functions from the recipe.
-
-I have mixed feelings on whether checksums also would depend on global
-vars (e.g. code generated by the classes or variables in e.g.
-local.conf).
-On the one hand it seems pretty neat, on the other hand I worry about
-performance (calculating the checksum).
-
-Maybe a solution would be to have a hash or so per file and
-concatenate all hashes on which a recipe depends (including class
-files).
-
-As said, just some initial thoughts.
-Hope this helps.
-
-Frans.
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
