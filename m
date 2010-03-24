@@ -1,45 +1,44 @@
-Received: from qw-out-1920.google.com ([74.125.92.148])
+Received: from mail-iw0-f174.google.com ([209.85.223.174])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1NuEpd-0005js-Np
+	(envelope-from <listjiason@gmail.com>) id 1NuEtk-0005rL-Cv
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 01:52:26 +0100
-Received: by qw-out-1920.google.com with SMTP id 4so727173qwk.36
+	Wed, 24 Mar 2010 01:56:41 +0100
+Received: by iwn4 with SMTP id 4so2673630iwn.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 Mar 2010 17:49:18 -0700 (PDT)
+	Tue, 23 Mar 2010 17:53:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:message-id:subject:to
-	:content-type; bh=PMEG0XPqwS1kzZXt/CiWfUhDB4hSwZ5d53pHxAJnQ1A=;
-	b=utOWeZiW5X5orqhDSqoJA//s4dqp5eFAadHilXFHQ+HtIXIJnhbC5Iid11XRXumxIp
-	+RMd/1swNVFjcbPzYtzBuzTNHzUociTOzXrGOvKlweIOdvxNCJzIGraU+mtDzXVwC/16
-	qJlA4Lr8E+BPaPhqhSeh4+Nijr8XsgRTwcnmk=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=ij/uPGVGribZV+gqDrY8Cgs5bW6atZYyO18H7jtfryw=;
+	b=FnpsoCe8dU8NQ5ZGJNWSXzvjt8UpxvucEh+0Al2i14tnosPdP0OQS6DLG/o1DBxKLS
+	L79QF2WfXsWvBCGeuyvtkbbbE0QkLZjC5fsew7NPX1A+qHSP4NyukKHfzwJJiI4FI/TT
+	UWbBNNjBlvsIWL4yETYnicrSzK3EFAymLRDX0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=smJnlqbCPx/ehrU5/VXQ1NT9G1PDWHxZpzHN57qSQWq2dJvof7RSXv3j9jgDY/2dLN
-	KVjYwixpu+z1QwapPQq74XqTP7VnkMtsJHnJIIknR3tL+2NXv1nmbV2GbNzrHEAFRwt3
-	pWXlp7qCDzbAw1Wi+Pxz4MmTUOGgpfE6bYmzA=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=iJJbsizUiWGdLYYkMoPtDP5a8EYwOUhkBws2im+HCY/pRg7+Lo5/aKhnPFokFl1D26
+	PtIpr5VR/weAS2J3kpC5zS9mA347v3lhmBTp1dnRQmy8MSAbUqxHcR35BvZVeIXZFhXt
+	x4JFE7HfRFChqn9Zr/tvw2947Am6Lt1byHLvg=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.88.193 with SMTP id b1mr1698756qcm.27.1269391758092; Tue, 
-	23 Mar 2010 17:49:18 -0700 (PDT)
-In-Reply-To: <1269383658-27562-1-git-send-email-ml@vdm-design.de>
-References: <1269383658-27562-1-git-send-email-ml@vdm-design.de>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 23 Mar 2010 17:48:58 -0700
-X-Google-Sender-Auth: 090528e2df8d3113
-Message-ID: <b6ebd0a51003231748s293a4020v989b8cdf590ccc4@mail.gmail.com>
+Received: by 10.231.167.135 with SMTP id q7mr2815462iby.84.1269392009299; Tue, 
+	23 Mar 2010 17:53:29 -0700 (PDT)
+In-Reply-To: <20100323205054.GB12446@gmail.com>
+References: <f275a9df1003230238ye20d27fm32a88ad21e6518ab@mail.gmail.com>
+	<f275a9df1003230243h6942495bya29166db2fda49a@mail.gmail.com>
+	<20100323205054.GB12446@gmail.com>
+Date: Wed, 24 Mar 2010 08:53:29 +0800
+Message-ID: <f275a9df1003231753y25619594i8310eb1883688fc9@mail.gmail.com>
+From: Jiason Li <listjiason@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.92.148
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 209.85.223.174
+X-SA-Exim-Mail-From: listjiason@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] imagemagick: convert to BBCLASSEXTEND and new staging
+Subject: Re: How to rebuild images with updated PREFERRED_PROVIDER_xxx in machine conf?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,41 +52,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Mar 2010 00:52:26 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 24 Mar 2010 00:56:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, Mar 23, 2010 at 3:34 PM, Thomas Zimmermann <ml@vdm-design.de> wrote:
+Hi,
+thanks for the info! :D
+I'll try then report if it worked. :-)
 
-> * imagemagick-6.3.5-10 doesn't configure with autoconf > 2.63
-> * problem: without removing imagemagick-native_6.3.5-10 the old version is
-> build
+Thank you!
+jiason
+20100324
+
+
+2010/3/24 Khem Raj:
+> On (23/03/10 17:43), Jiason Li wrote:
+>> Sorry all,
+>>
+>> My step was:
+>> 1. bitbake some-image, oe/openembedded/recipes/some-pkg.bb was bitbaked.
+>> 2. bitbake -c clean some-pkg
+>> 3. update machine conf with PREFERRED_PROVIDER_some-pkg = "some-pkg-mine"
+>> 4. bitbake some-pkg, according to the log,
+>> oe/overlay/recipes/some-pkg-mine/some-pkg-mine.bb was bitbaked
+>> correctly.
+>> 5. bitbake some-image, but some-pkg was still bitbaked and was in
+>> some-image, not some-pkg-mine!
+>> 6. rm -rf oe/overlay/tmp
+>> 7. bitbake some-image, this time some-pkg-mine is in some-image, finally.
+>>
+>> Any info are very appreciated. :)
 >
-> Signed-off-by: Thomas Zimmermann <ml@vdm-design.de>
-> ---
->  recipes/imagemagick/imagemagick_6.4.4-1.bb |   11 +++++------
->  1 files changed, 5 insertions(+), 6 deletions(-)
+> may be try
+> bitbake -c package_update_index some-image
 >
-> diff --git a/recipes/imagemagick/imagemagick_6.4.4-1.bbb/recipes/imagemagick/
-> imagemagick_6.4.4-1.bb
-> index bc16b0c..b02ce26 100644
-> --- a/recipes/imagemagick/imagemagick_6.4.4-1.bb
-> +++ b/recipes/imagemagick/imagemagick_6.4.4-1.bb
-> @@ -3,8 +3,9 @@ SECTION = "console/utils"
->  LICENSE = "GPL"
->  # FIXME: There is much more checked libraries. All should be added or
-> explicitly disabled to get consistent results.
->  DEPENDS = "bzip2 jpeg libpng librsvg tiff zlib"
-> +DEPENDS_virtclass-native = "libtool-native bzip2-native jpeg-native
-> libpng-native librsvg-native zlib-native"
+>>
+>> Thank you!
+>> jiason
+>> 20100323
+>>
+>>
+>> > My steps:
+>> > 3. bitbake some-pkg, according to the log,
+>> > oe/overlay/recipes/some-pkg-mine/some-pkg-mine.bb was bitbaked
+>> > correctly.
+>> > 4. update machine conf with PREFERRED_PROVIDER_some-pkg = "some-pkg-mine"
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
-This should not be necessary.  native.bbclass automatically sets deps on the
--native versions of what's in your DEPENDS.  Or was there a specific reason
-behind adding libtool-native and removing tiff?
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
