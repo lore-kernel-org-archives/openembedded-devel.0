@@ -1,44 +1,42 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from hsp-52.hspserver.com ([85.197.80.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1NuL7T-0001jv-JY
+	(envelope-from <ml@vdm-design.de>) id 1NuL9P-0002B0-Cs
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 08:35:17 +0100
-Received: by gwaa20 with SMTP id a20so902367gwa.6
+	Wed, 24 Mar 2010 08:37:16 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by hsp-52.hspserver.com (Postfix) with ESMTP id 0BD25A2C3AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Mar 2010 00:32:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=p50p2LgdXgVKjAaKXAqfgjGySv9lDxLlbl9NMf33B0Y=;
-	b=dZwWB/SYuSxnYBY+xT0ggfdS5dCh7IUB+/5IDzShI0oPM9m8vd0gnqcbjTkwmmwCmZ
-	senuMBdYbD0cm3gqEZUF+047q1vsk22FRT2DiFLDSIOBAlrfiyt5dny/HjbFuHf3WzKv
-	PdiyeMNoykZWHMUpopLK+5o4YXSqVbZ8yE/Xc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Iv18y5r5Q8ijAOeigsdL6oFQtKdkwxiBSE50sqXoLPq633+VnnEs5tXWXALYnJ6s/I
-	hnRHf6WdKqK5L8U0J1TLJRUSixS+W4pj5yxN7YtDo5pNKvACmj88fU0tXmmwsulUEo2y
-	11vW0c3fKKq9IKTyn6AV8yyJ1vfDX2WBJrQV8=
-MIME-Version: 1.0
-Received: by 10.101.186.32 with SMTP id n32mr6731173anp.7.1269415925702; Wed, 
-	24 Mar 2010 00:32:05 -0700 (PDT)
-In-Reply-To: <20100323183615.GE3249@xora-eee.xora.org.uk>
-References: <201003231901.24017.marcin@juszkiewicz.com.pl>
-	<20100323183615.GE3249@xora-eee.xora.org.uk>
-Date: Wed, 24 Mar 2010 08:32:05 +0100
-Message-ID: <ac9c93b11003240032h636a60detc59ab859e6fa79c8@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 24 Mar 2010 08:34:08 +0100 (CET)
+Received: from hsp-52.hspserver.com ([127.0.0.1])
+	by localhost (hsp-52.hspserver.com [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id GGVKh-tmHtd2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Mar 2010 08:34:05 +0100 (CET)
+Received: from tomboy.localnet (pD9E17E23.dip.t-dialin.net [217.225.126.35])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by hsp-52.hspserver.com (Postfix) with ESMTP id 6369EA2C3CA
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Mar 2010 08:34:05 +0100 (CET)
+From: Thomas Zimmermann <ml@vdm-design.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Wed, 24 Mar 2010 08:34:04 +0100
+User-Agent: KMail/1.12.4 (Linux/2.6.33-1.slh.3-sidux-amd64; KDE/4.3.4; x86_64; ;
+	)
+References: <1269383658-27562-1-git-send-email-ml@vdm-design.de>
+	<b6ebd0a51003231748s293a4020v989b8cdf590ccc4@mail.gmail.com>
+In-Reply-To: <b6ebd0a51003231748s293a4020v989b8cdf590ccc4@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201003240834.04740.ml@vdm-design.de>
+X-SA-Exim-Connect-IP: 85.197.80.179
+X-SA-Exim-Mail-From: ml@vdm-design.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Removal of e2fsprogs-libs
+Subject: Re: [PATCH] imagemagick: convert to BBCLASSEXTEND and new staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,53 +50,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Mar 2010 07:35:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 24 Mar 2010 07:37:17 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-2010/3/23 Graeme Gregory <dp@xora.org.uk>:
-> On Tue, Mar 23, 2010 at 07:01:23PM +0100, Marcin Juszkiewicz wrote:
->>
->> During last days I spent a bit of time on e2fsprogs* and util-linux-ng
->> recipes. They are cleaner now but there is still some work to do.
->>
->> We have many recipes which depends on 'e2fsprogs-libs' when they want
->> 'libblkid' or 'libuuid' which are provided by 'e2fsprogs-libs' and
->> 'util-linux-ng' recipes. I checked how Debian solves that and got into p=
-oint
->> where there is no 'e2fsprogs-libs' recipes in my tree and everything is
->> building.
->>
->> What needs to be changed?
->>
->> 1. git rm -r recipes/e2fsprogs-libs
->> 2. check each recipe which depends on 'e2fsprogs-libs' which library it =
-really
->> =A0 =A0wants
->> 3. change each recipe which wants 'libblkid' or 'libuuid' to depend on
->> =A0 =A0'util-linux-ng'
->> 4. change each recipe which wants 'libcom_err' or 'libss' to depend on
->> =A0 =A0'e2fsprogs'
->> 5. add "--with-elf-shlibs" to 'e2fsprogs' to get 'libcom_err' and 'libss=
-'
->> 6. fix packaging of 'e2fsprogs' to get separate packages for libraries.
->>
->> I can work on that in next days but want to inform everyone that such ch=
-ange
->> will be done.
->>
-> Hrw thanks for cleaning this up, feel free to add my ack to your complete=
-d
-> worked.
+Am Mittwoch 24 M=E4rz 2010 01:48:58 schrieb Chris Larson:
+> This should not be necessary.  native.bbclass automatically sets deps on
+>  the -native versions of what's in your DEPENDS.  Or was there a specific
+>  reason behind adding libtool-native and removing tiff?
+>=20
+No there was no such a reason, i just copied it from imagemagick-
+native_0.6.3.5-10 recipe.
 
-Although I highly welcome the cleanup proposed by Marcin, I feel it is
-not proper to submit an ack for patches that are not submitted as
-such.
-Acked-by indicates approval, and I find it somewhat fishy to approve a
-patch that you haven't seen yet.
-(without wanting to question the value or quality of Marcin's work, as
-that will undoubtly be ok).
-
-Frans
+The question is, do we convert 6.3.5-10 to BBCLASSEXTEND too, or do we remo=
+ve=20
+that recipe, or is there a bug about mixed BBCLASSEXTEND and -native recipe=
+s,=20
+that -native recipes are preferred?
 
 
