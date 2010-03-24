@@ -1,32 +1,44 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1NuUwg-0008PS-1q
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NuV0z-0005YM-0p
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 19:04:50 +0100
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NuUtd-0008PP-OE
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 21:01:38 +0300
-From: Roman I Khimov <roman@khimov.ru>
+	Wed, 24 Mar 2010 19:09:13 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2OI63RF027176
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Mar 2010 18:06:03 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 26819-06 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Mar 2010 18:06:00 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2OI5vUJ027170
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Mar 2010 18:05:58 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Mar 2010 20:58:56 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
-References: <201003211505.39554.roman@khimov.ru>
-	<201003242026.22169.roman@khimov.ru>
-	<201003241841.01034.marcin@juszkiewicz.com.pl>
-In-Reply-To: <201003241841.01034.marcin@juszkiewicz.com.pl>
-MIME-Version: 1.0
-Message-Id: <201003242058.56943.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+In-Reply-To: <1269446279.3545.8.camel@trini-m4400>
+References: <4B99791E.1020102@zenlinux.com> <4BA981A5.5030609@zenlinux.com>
+	<19c1b8a91003232245y3409bca3p4b74ab5562424b5c@mail.gmail.com>
+	<4BA9B440.2050608@zenlinux.com>  <1269426516.1681.35.camel@rex>
+	<1269444453.2395.5.camel@trini-m4400> <1269445040.1681.147.camel@rex>
+	<1269446279.3545.8.camel@trini-m4400>
+Date: Wed, 24 Mar 2010 18:05:55 +0000
+Message-ID: <1269453955.1681.165.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.3 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 01/44] cpan-base: add perl version to PR
+Subject: Re: BBCLASSEXTEND sdk vs. nativesdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,49 +52,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Mar 2010 18:04:54 -0000
-X-Groupsio-MsgNum: 18095
-Content-Type: multipart/signed; boundary="nextPart1699291.vjjNY6iK8m";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Wed, 24 Mar 2010 18:09:13 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
---nextPart1699291.vjjNY6iK8m
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+On Wed, 2010-03-24 at 08:57 -0700, Tom Rini wrote:
+> On Wed, 2010-03-24 at 15:37 +0000, Richard Purdie wrote:
+> > On Wed, 2010-03-24 at 08:27 -0700, Tom Rini wrote:
+> > > Or a really bad thing, yes.  I think nativesdk will help out a lot for
+> > > making canadian style builds cleaner.  But going so far as to say 'Oh,
+> > > lets just throw a libc into the SDK export' is going pretty far down a
+> > > questionable road.  I'm not so naive to think that there's not problems
+> > > with my next suggestion, but there's this thing called LSB for a reason.
+> > > If you want build once, run many distributions, you do that, not go and
+> > > own even more dependencies.
+> > 
+> > However, an LSB compliant SDK becomes a case of installing "LSB" libs
+> > into the right sysroot and then setting some
+> > ASSUME_PROVIDED/PREFERRED_PROVIDER lines.
+> > 
+> > So I think its good all around, we achieve independence of the SDK from
+> > the build system and make it depend on exactly what we do or don't want
+> > it to. Where is the bad bit (ignoring build time)? :)
+> 
+> How is this working on the runtime?  How relocatable is it?
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A1=D1=80=D0=B5=D0=B4=D0=B0 24 =D0=BC=D0=B0=D1=80=D1=82=D0=B0 2010 20:41=
-:00 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Marcin Juszkiewicz =D0=BD=D0=B0=D0=BF=D0=
-=B8=D1=81=D0=B0=D0=BB:
-> Dnia =C5=9Broda, 24 marca 2010 o 18:26:16 Roman I Khimov napisa=C5=82(a):
-> > OK. Pushed perl 5.10.1, everybody, have fun!
->=20
-> 18:39 hrw@home:angstrom$ bitbake perl
-> NOTE: Handling BitBake files: - (0975/8143) [11 %]NOTE: <type
-> 'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneType' objects
->  while evaluating:
-> r0${@perl_get_version_suffix(d)}
+Its no more or less reclocatable than the original was, that wasn't an
+objective. Some postprocessing with the same code we use in
+packaged-staging shouldn't see it being too bad though.
 
-Argh! Sure, I have perl built already and it's get_perl_version that gives=
-=20
-None here. Ugh. Sorry, thinking on better fix.
+> How much have we added to the size?
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+I don't have specific numbers but I did check and it didn't seem
+unreasonable on my test builds given that we escaped system dependence.
+10MB maybe at a total guess?
 
---nextPart1699291.vjjNY6iK8m
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+If you build against LSB libs, the size shouldn't be any different.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
+Cheers,
 
-iEYEABECAAYFAkuqUuAACgkQXJ70z+XgVcPM2QCgs9455tpdJnq82ee1wsPN38jc
-SdgAoKFrpRFAstSNauUs2wLaEE9pq/s7
-=8VQI
------END PGP SIGNATURE-----
+Richard
 
---nextPart1699291.vjjNY6iK8m--
+
+
+
+
+
+
+
+
