@@ -1,44 +1,43 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NuT1p-0008CY-FF
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 17:02:13 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NuSyk-0005N2-I8 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 08:58:46 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 24 Mar 2010 08:58:45 -0700
-Received: from 172.30.80.109 ([172.30.80.109]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Wed, 24 Mar 2010 15:58:00 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	24 Mar 2010 08:57:59 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NuTCN-0000hO-F6 for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Mar 2010 17:12:52 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NuT9J-00086u-1M for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Mar 2010 17:09:41 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Mar 2010 17:09:41 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Mar 2010 17:09:41 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1269445040.1681.147.camel@rex>
-References: <4B99791E.1020102@zenlinux.com> <4BA981A5.5030609@zenlinux.com>
-	<19c1b8a91003232245y3409bca3p4b74ab5562424b5c@mail.gmail.com>
-	<4BA9B440.2050608@zenlinux.com>  <1269426516.1681.35.camel@rex>
-	<1269444453.2395.5.camel@trini-m4400> <1269445040.1681.147.camel@rex>
-Organization: Mentor Graphics Corporation
-Date: Wed, 24 Mar 2010 08:57:59 -0700
-Message-ID: <1269446279.3545.8.camel@trini-m4400>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 24 Mar 2010 17:09:28 +0100
+Message-ID: <hoddfo$6ql$1@dough.gmane.org>
+References: <201003211505.39554.roman@khimov.ru>	<1269381068-5518-1-git-send-email-khimov@altell.ru>
+	<201003241557.44087.khimov@altell.ru>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 24 Mar 2010 15:58:45.0975 (UTC)
-	FILETIME=[E274AE70:01CACB6A]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
+In-Reply-To: <201003241557.44087.khimov@altell.ru>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: BBCLASSEXTEND sdk vs. nativesdk
+Subject: Re: [PATCH 01/44] cpan-base: add perl version to PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,50 +51,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Mar 2010 16:02:22 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 24 Mar 2010 16:12:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Wed, 2010-03-24 at 15:37 +0000, Richard Purdie wrote:
-> On Wed, 2010-03-24 at 08:27 -0700, Tom Rini wrote:
-> > On Wed, 2010-03-24 at 10:28 +0000, Richard Purdie wrote:=20
-> > > The difference is that the old "sdk" assumes the system you want the =
-sdk
-> > > to run on is the same as the build system. This has always been a big
-> > > can of worms causing problems so "nativesdk" removes this assumption =
-and
-> > > allows you to set SDKMACHINE to be the machine you want the resulting
-> > > sdk to run on.
-> > >=20
-> > > This adds some complexity since we need another cross compiling
-> > > toolchain. But cross compiling toolchains are something we're good
-> > > at :). It also means we ship *everything* with the sdk including a
-> > > standalone glibc massively removing system dependencies from the resu=
-lt
-> > > which in my opinion can only be a good thing.
-> >=20
-> > Or a really bad thing, yes.  I think nativesdk will help out a lot for
-> > making canadian style builds cleaner.  But going so far as to say 'Oh,
-> > lets just throw a libc into the SDK export' is going pretty far down a
-> > questionable road.  I'm not so naive to think that there's not problems
-> > with my next suggestion, but there's this thing called LSB for a reason=
-.
-> > If you want build once, run many distributions, you do that, not go and
-> > own even more dependencies.
->=20
-> However, an LSB compliant SDK becomes a case of installing "LSB" libs
-> into the right sysroot and then setting some
-> ASSUME_PROVIDED/PREFERRED_PROVIDER lines.
->=20
-> So I think its good all around, we achieve independence of the SDK from
-> the build system and make it depend on exactly what we do or don't want
-> it to. Where is the bad bit (ignoring build time)? :)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-How is this working on the runtime?  How relocatable is it?  How much
-have we added to the size?
+On 24-03-10 13:57, Roman I Khimov wrote:
+> В сообщении от Среда 24 марта 2010 00:51:08 вы написали:
+>> Makes perl modules rebuild on perl version change, since binary
+>>  compatibility could be broken with that (although perl itself tries to
+>>  maintain it  within patchlevel range, like 5.8.7 -> 5.8.8).
+>>
+>> This is conditional on PACKAGE_ARCH, since there is nothing to rebuild for
+>> pure perl modules (and those should use 'PACKAGE_ARCH = "all"') even if
+>>  they break with perl version change.
+>>
+>> This also should ease transition to perl 5.10.1.
+> 
+> OK to push?
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+Yes
+
+> I've realized yesterday that without it or similar thing many 
+> binary modules would be broken when someone would try to use 5.10.1 and manual 
+> cleaning and rebuilding a ton of perl modules is no fun.
+
+And manually bumping PR as well, which is why I asked for this :)
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLqjk4MkyGM64RGpERAtHuAJ9UNAvsTQJcRG8stOt0zXI5TeWjzQCeOC2J
+HSypchX1JCQ3Uj6nexlelYs=
+=aSbz
+-----END PGP SIGNATURE-----
+
 
 
