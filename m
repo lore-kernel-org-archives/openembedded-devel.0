@@ -1,32 +1,40 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1NuURD-00044a-O9
+	(envelope-from <stefan@datenfreihafen.org>) id 1NuUXY-0004Hw-Dz
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 18:32:16 +0100
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NuUO7-0008M8-WA
+	Wed, 24 Mar 2010 18:38:49 +0100
+Received: from p5b03671c.dip.t-dialin.net ([91.3.103.28] helo=excalibur)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1NuUUU-0004zB-Jc by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Mar 2010 18:35:41 +0100
+Received: from stefan by excalibur with local (Exim 4.71)
+	(envelope-from <stefan@excalibur.local>) id 1NuUUT-0008Q2-UC
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 20:29:07 +0300
-From: Roman I Khimov <roman@khimov.ru>
+	Wed, 24 Mar 2010 18:35:37 +0100
+Date: Wed, 24 Mar 2010 18:35:37 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Mar 2010 20:26:16 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
-References: <201003211505.39554.roman@khimov.ru>
-	<201003241557.44087.khimov@altell.ru>
-	<hoddfo$6ql$1@dough.gmane.org>
-In-Reply-To: <hoddfo$6ql$1@dough.gmane.org>
+Message-ID: <20100324173537.GA17800@excalibur.local>
+References: <1269346975-842-2-git-send-email-khimov@altell.ru>
+	<1269354368-20910-1-git-send-email-khimov@altell.ru>
+	<1269354368-20910-2-git-send-email-khimov@altell.ru>
 MIME-Version: 1.0
-Message-Id: <201003242026.22169.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+In-Reply-To: <1269354368-20910-2-git-send-email-khimov@altell.ru>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 01/44] cpan-base: add perl version to PR
+Subject: Re: [PATCH] lowpan-tools: fix lowpan-tools-tests packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,44 +48,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Mar 2010 17:32:16 -0000
-X-Groupsio-MsgNum: 18090
-Content-Type: multipart/signed; boundary="nextPart1951438.uJU2MbL1iA";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 24 Mar 2010 17:38:49 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---nextPart1951438.uJU2MbL1iA
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: base64
+Hello.
 
-0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0KHRgNC10LTQsCAyNCDQvNCw0YDRgtCwIDIwMTAg
-MTk6MDk6Mjgg0LDQstGC0L7RgCBLb2VuIEtvb2kg0L3QsNC/0LjRgdCw0Ls6Cj4gT24gMjQtMDMt
-MTAgMTM6NTcsIFJvbWFuIEkgS2hpbW92IHdyb3RlOgo+ID4g0JIg0YHQvtC+0LHRidC10L3QuNC4
-INC+0YIg0KHRgNC10LTQsCAyNCDQvNCw0YDRgtCwIDIwMTAgMDA6NTE6MDgg0LLRiyDQvdCw0L/Q
-uNGB0LDQu9C4Ogo+ID4+IE1ha2VzIHBlcmwgbW9kdWxlcyByZWJ1aWxkIG9uIHBlcmwgdmVyc2lv
-biBjaGFuZ2UsIHNpbmNlIGJpbmFyeQo+ID4+ICBjb21wYXRpYmlsaXR5IGNvdWxkIGJlIGJyb2tl
-biB3aXRoIHRoYXQgKGFsdGhvdWdoIHBlcmwgaXRzZWxmIHRyaWVzIHRvCj4gPj4gIG1haW50YWlu
-IGl0ICB3aXRoaW4gcGF0Y2hsZXZlbCByYW5nZSwgbGlrZSA1LjguNyAtPiA1LjguOCkuCj4gPj4K
-PiA+PiBUaGlzIGlzIGNvbmRpdGlvbmFsIG9uIFBBQ0tBR0VfQVJDSCwgc2luY2UgdGhlcmUgaXMg
-bm90aGluZyB0byByZWJ1aWxkCj4gPj4gZm9yIHB1cmUgcGVybCBtb2R1bGVzIChhbmQgdGhvc2Ug
-c2hvdWxkIHVzZSAnUEFDS0FHRV9BUkNIID0gImFsbCInKSBldmVuCj4gPj4gaWYgdGhleSBicmVh
-ayB3aXRoIHBlcmwgdmVyc2lvbiBjaGFuZ2UuCj4gPj4KPiA+PiBUaGlzIGFsc28gc2hvdWxkIGVh
-c2UgdHJhbnNpdGlvbiB0byBwZXJsIDUuMTAuMS4KPiA+Cj4gPiBPSyB0byBwdXNoPwo+IAo+IFll
-cwoKT0suIFB1c2hlZCBwZXJsIDUuMTAuMSwgZXZlcnlib2R5LCBoYXZlIGZ1biEKCi0tIAogaHR0
-cDovL3JvbWFuLmtoaW1vdi5ydQptYWlsdG86IHJvbWFuQGtoaW1vdi5ydQpncGcgLS1rZXlzZXJ2
-ZXIgaGtwOi8vc3Via2V5cy5wZ3AubmV0IC0tcmVjdi1rZXlzIDB4RTVFMDU1QzMK
+On Tue, 2010-03-23 at 17:26, Roman I Khimov wrote:
+> RDEPENDS on python, wants python-native at build time.
+> 
+> Signed-off-by: Roman I Khimov <khimov@altell.ru>
 
---nextPart1951438.uJU2MbL1iA
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+Sorry, I missed this one. I just updated to a newer SRCREV and fixed the SRC_URI
+as well. You will need to rebase as the context of your changes hunks has
+changed. Otherwise it looks good to me.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
+Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
 
-iEYEABECAAYFAkuqSz4ACgkQXJ70z+XgVcM8LQCfUA7OFQZY5589pV2qxwVzuJam
-/yUAoI5LcooPlomC5Xzh3NWYjeGPun8f
-=IXgz
------END PGP SIGNATURE-----
+regards
+Stefan Schmidt
 
---nextPart1951438.uJU2MbL1iA--
+
