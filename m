@@ -1,28 +1,28 @@
 Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1NuUth-0005af-63
+	(envelope-from <roman@khimov.ru>) id 1NuUwg-0008PS-1q
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 19:01:45 +0100
+	Wed, 24 Mar 2010 19:04:50 +0100
 Received: from [93.100.16.104] (helo=mate.localnet)
 	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NuUqe-0008P1-DF
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NuUtd-0008PP-OE
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 20:58:33 +0300
+	Wed, 24 Mar 2010 21:01:38 +0300
 From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 Mar 2010 20:55:44 +0300
+Date: Wed, 24 Mar 2010 20:58:56 +0300
 User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
 References: <201003211505.39554.roman@khimov.ru>
 	<201003242026.22169.roman@khimov.ru>
 	<201003241841.01034.marcin@juszkiewicz.com.pl>
 In-Reply-To: <201003241841.01034.marcin@juszkiewicz.com.pl>
 MIME-Version: 1.0
-Message-Id: <201003242055.50066.roman@khimov.ru>
+Message-Id: <201003242058.56943.roman@khimov.ru>
 X-SA-Exim-Connect-IP: 89.223.109.22
 X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -40,13 +40,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Mar 2010 18:01:45 -0000
-X-Groupsio-MsgNum: 18094
-Content-Type: multipart/signed; boundary="nextPart1629847.eTsK1iVde7";
+X-List-Received-Date: Wed, 24 Mar 2010 18:04:54 -0000
+X-Groupsio-MsgNum: 18095
+Content-Type: multipart/signed; boundary="nextPart1699291.vjjNY6iK8m";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
---nextPart1629847.eTsK1iVde7
+--nextPart1699291.vjjNY6iK8m
 Content-Type: Text/Plain;
   charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
@@ -63,53 +63,26 @@ Content-Transfer-Encoding: quoted-printable
 > 'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneType' objects
 >  while evaluating:
 > r0${@perl_get_version_suffix(d)}
-> NOTE: <type 'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneTyp=
-e'
-> objects while evaluating:
-> ${PN}-${EXTENDPE}${PV}-${PR}
-> NOTE: <type 'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneTyp=
-e'
-> objects while evaluating:
-> ${TMPDIR}/work/${MULTIMACH_TARGET_SYS}/${PF}
-> NOTE: <type 'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneTyp=
-e'
-> objects while evaluating:
-> ${WORKDIR}/callweaver-1.2-${CWRCV}/contrib/ogi-perl/callweaver-perl-0.0.1
-> NOTE: <type 'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneTyp=
-e'
-> objects while evaluating:
-> ${S}
-> ERROR: cannot concatenate 'str' and 'NoneType' objects while parsing
-> /home/hrw/devel/oe/openembedded/recipes/callweaver/callweaver-perl.bb
-> NOTE: Handling BitBake files: - (3827/8143) [46 %]NOTE: <type
-> 'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneType' objects
->  while evaluating:
-> r2${@perl_get_version_suffix(d)}
 
-(0_0)
-Never had that and just tried, nothing like that, test setup is Angstrom fo=
-r=20
-qemuarm.
-
-Ah. I guess it might be something with bitbake versions, no? I'm using bitb=
-ake=20
-1.8.x, commit d99de1c3f35a01f6d06b2965da823ae3cd16d0eb.
+Argh! Sure, I have perl built already and it's get_perl_version that gives=
+=20
+None here. Ugh. Sorry, thinking on better fix.
 
 =2D-=20
  http://roman.khimov.ru
 mailto: roman@khimov.ru
 gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
---nextPart1629847.eTsK1iVde7
+--nextPart1699291.vjjNY6iK8m
 Content-Type: application/pgp-signature; name=signature.asc 
 Content-Description: This is a digitally signed message part.
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.12 (GNU/Linux)
 
-iEYEABECAAYFAkuqUiUACgkQXJ70z+XgVcOocwCePpsQzh2wPp+qi20tXYFb7mar
-DVUAnjX6KwL3q2+WucDQtGrhdytKXgWc
-=mwow
+iEYEABECAAYFAkuqUuAACgkQXJ70z+XgVcPM2QCgs9455tpdJnq82ee1wsPN38jc
+SdgAoKFrpRFAstSNauUs2wLaEE9pq/s7
+=8VQI
 -----END PGP SIGNATURE-----
 
---nextPart1629847.eTsK1iVde7--
+--nextPart1699291.vjjNY6iK8m--
