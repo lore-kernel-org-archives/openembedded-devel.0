@@ -1,38 +1,34 @@
-Received: from mail-yw0-f197.google.com ([209.85.211.197])
+Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jkridner@beagleboard.org>) id 1NuOGi-0002aO-Ah
-	for Openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 11:57:02 +0100
-Received: by ywh35 with SMTP id 35so1272182ywh.24
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed, 24 Mar 2010 03:53:50 -0700 (PDT)
-Received: by 10.150.213.20 with SMTP id l20mr6851498ybg.30.1269428026049;
-	Wed, 24 Mar 2010 03:53:46 -0700 (PDT)
-Received: from bda2502.bisx.prod.on.blackberry
-	(bda-67-223-79-230.bise.na.blackberry.com [67.223.79.230])
-	by mx.google.com with ESMTPS id 4sm2443968yxd.34.2010.03.24.03.53.44
-	(version=SSLv3 cipher=RC4-MD5); Wed, 24 Mar 2010 03:53:45 -0700 (PDT)
-X-rim-org-msg-ref-id: 1097921865
-Message-ID: <1097921865-1269428022-cardhu_decombobulator_blackberry.rim.net-2083922404-@bda2481.bisx.prod.on.blackberry>
-X-Priority: Normal
-References: <4B99791E.1020102@zenlinux.com>
-	<4BA981A5.5030609@zenlinux.com><19c1b8a91003232245y3409bca3p4b74ab5562424b5c@mail.gmail.com><4BA9B440.2050608@zenlinux.com><1269426516.1681.35.camel@rex>
-In-Reply-To: <1269426516.1681.35.camel@rex>
-Sensitivity: Normal
-Importance: Normal
-To: "openembedded-devel" <Openembedded-devel@lists.openembedded.org>
-From: jkridner@beagleboard.org
-Date: Wed, 24 Mar 2010 10:53:40 +0000
+	(envelope-from <khimov@altell.ru>) id 1NuQCo-0005d4-OM
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 24 Mar 2010 14:01:09 +0100
+Received: from keemun.localnet (unknown [192.168.1.125])
+	by mail.altell.local (Postfix) with ESMTPS id 9C66967CC2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Mar 2010 15:57:51 +0300 (MSK)
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 24 Mar 2010 15:57:44 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
+References: <201003211505.39554.roman@khimov.ru>
+	<1269381068-5518-1-git-send-email-khimov@altell.ru>
+In-Reply-To: <1269381068-5518-1-git-send-email-khimov@altell.ru>
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 209.85.211.197
-X-SA-Exim-Mail-From: jkridner@beagleboard.org
+Message-Id: <201003241557.44087.khimov@altell.ru>
+X-Altell-MailScanner-ID: 9C66967CC2.E0301
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-SA-Exim-Connect-IP: 80.246.246.162
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=5.0 tests=BAYES_00,MIME_BASE64_TEXT
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: BBCLASSEXTEND sdk vs. nativesdk
+Subject: Re: [PATCH 01/44] cpan-base: add perl version to PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,76 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Mar 2010 10:57:02 -0000
-Content-Transfer-Encoding: base64
-Content-Type: text/plain
+X-List-Received-Date: Wed, 24 Mar 2010 13:01:09 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-SXMgdGhpcyBhbHNvIHRoZSBtZWNoYW5pc20gZm9yIGJ1aWxkaW5nIGFuIHNkayBmb3IgdGhlIHRh
-cmdldCB0aGVuPyAgU2VlbXMgZ3JlYXQgdG8gbm9ybWFsaXplIHRoaXMuIA0KDQpJZiBJIHdhbnRl
-ZCB0byBidWlsZCBhIE1JUFMgY3Jvc3MtY29tcGlsZXIgdGhhdCByYW4gb24gYW4gQVJNIGJvYXJk
-LCBhbmQgYnVpbGQgdGhhdCBmcm9tIGFuIHg4NiBtYWNoaW5lLCB3aGF0IHdvdWxkIGl0IGxvb2sg
-bGlrZSBnaXZlbiBuYXRpdmVzZGs/DQoNClNvcnJ5IGZvciB0aGUgYmxhY2tiZXJyeSB0b3AgcG9z
-dC4gDQpTZW50IHZpYSBCbGFja0JlcnJ5IGZyb20gVC1Nb2JpbGUNCg0KLS0tLS1PcmlnaW5hbCBN
-ZXNzYWdlLS0tLS0NCkZyb206IFJpY2hhcmQgUHVyZGllIDxycHVyZGllQHJwc3lzLm5ldD4NCkRh
-dGU6IFdlZCwgMjQgTWFyIDIwMTAgMTA6Mjg6MzYgDQpUbzogPG9wZW5lbWJlZGRlZC1kZXZlbEBs
-aXN0cy5vcGVuZW1iZWRkZWQub3JnPg0KU3ViamVjdDogUmU6IFtvZV0gQkJDTEFTU0VYVEVORCBz
-ZGsgdnMuIG5hdGl2ZXNkaw0KDQpPbiBUdWUsIDIwMTAtMDMtMjMgYXQgMjM6NDIgLTA3MDAsIFNj
-b3R0IEdhcm1hbiB3cm90ZToNCj4gT24gMDMvMjMvMjAxMCAxMDo0NSBQTSwgS2hlbSBSYWogd3Jv
-dGU6DQo+ID4+IEl0IHNlZW1zIHRvIG1lIHRoZSBjb3JyZWN0IGNvdXJzZSBvZiBhY3Rpb24gaXMg
-dG8gdXNlIG5hdGl2ZXNkayBpbg0KPiA+PiBCQkNMQVNTRVhURU5EIGFuZCByZW5hbWUgdGhlIGRl
-cGVuZGVuY2llcyBvbiBvdGhlciByZWNpcGVzLCB5ZXM/DQo+ID4NCj4gPiB5b3Ugc2hvdWxkIHJl
-bmFtZSB0aGUgZGVwZW5kZW5jaWVzIG9uIHpsaWItc2RrIHRvIHpsaWItbmF0aXZlc2RrDQo+ID4g
-d2hlcmV2ZXIgdGhleSBleGlzdC4NCg0KVGhpcyBpc24ndCBxdWl0ZSBjb3JyZWN0LiBuYXRpdmVz
-ZGsgaXMgbm90IGEgZHJvcCBpbiByZXBsYWNlbWVudCBmb3IgdGhlDQpvbGQgc2RrIGJ1dCB5b3Ug
-YXJlIHJpZ2h0IHRoYXQgaXMgaXMgdGhlIHJlcGxhY2VtZW50Lg0KDQpUaGUgZGlmZmVyZW5jZSBp
-cyB0aGF0IHRoZSBvbGQgInNkayIgYXNzdW1lcyB0aGUgc3lzdGVtIHlvdSB3YW50IHRoZSBzZGsN
-CnRvIHJ1biBvbiBpcyB0aGUgc2FtZSBhcyB0aGUgYnVpbGQgc3lzdGVtLiBUaGlzIGhhcyBhbHdh
-eXMgYmVlbiBhIGJpZw0KY2FuIG9mIHdvcm1zIGNhdXNpbmcgcHJvYmxlbXMgc28gIm5hdGl2ZXNk
-ayIgcmVtb3ZlcyB0aGlzIGFzc3VtcHRpb24gYW5kDQphbGxvd3MgeW91IHRvIHNldCBTREtNQUNI
-SU5FIHRvIGJlIHRoZSBtYWNoaW5lIHlvdSB3YW50IHRoZSByZXN1bHRpbmcNCnNkayB0byBydW4g
-b24uDQoNClRoaXMgYWRkcyBzb21lIGNvbXBsZXhpdHkgc2luY2Ugd2UgbmVlZCBhbm90aGVyIGNy
-b3NzIGNvbXBpbGluZw0KdG9vbGNoYWluLiBCdXQgY3Jvc3MgY29tcGlsaW5nIHRvb2xjaGFpbnMg
-YXJlIHNvbWV0aGluZyB3ZSdyZSBnb29kDQphdCA6KS4gSXQgYWxzbyBtZWFucyB3ZSBzaGlwICpl
-dmVyeXRoaW5nKiB3aXRoIHRoZSBzZGsgaW5jbHVkaW5nIGENCnN0YW5kYWxvbmUgZ2xpYmMgbWFz
-c2l2ZWx5IHJlbW92aW5nIHN5c3RlbSBkZXBlbmRlbmNpZXMgZnJvbSB0aGUgcmVzdWx0DQp3aGlj
-aCBpbiBteSBvcGluaW9uIGNhbiBvbmx5IGJlIGEgZ29vZCB0aGluZy4NCg0KInNkayIgYW5kICJu
-YXRpdmVzZGsiIGFyZSBkZXNpZ25lZCB0byBjb2V4aXN0IGFuZCB0aGUgaWRlYSBpcyB0aGF0IHdl
-DQphZGQgIm5hdGl2ZXNkayIgdG8gT0UgYWxvbmdzaWRlICJzZGsiLCBnZXQgaXQgd29ya2luZywg
-dGhlbiByZW1vdmUgdGhlDQpvbGQgYnJva2VuICJzZGsiIHN0dWZmLg0KDQpJbiB0aGVvcnkgeW91
-IGNhbiB0aGVyZWZvcmUganVzdCBhZGQgdGhlIEJCQ0xBU1NFWFRFTkQgbGluZSB0byB0aGUgemxp
-Yg0KcmVjaXBlIGFuZCB3b3JrIGJhY2t3YXJkcyBmcm9tIHRoZXJlLiBZb3Ugd2lsbCBuZWVkIGEg
-d29ya2luZyAtY3Jvc3NzZGsNCnZlcnNpb24gb2YgZ2NjIHRvIHByb3ZpZGUgdGhlIGRpZmZlcmVu
-dCBjb21waWxlci4NCg0KPiBJIGFtIHJ1bm5pbmcgaW50byBzb21lIHByb2JsZW1zIG5vdyB0cnlp
-bmcgdG8gZ2V0IHpsaWItbmF0aXZlc2RrIHRvIA0KPiBidWlsZC4gSWYgSSBjaGFuZ2UgdGhlIHJl
-Y2lwZSB0byB1c2Ugc2RrLCBpdCBidWlsZHMgZmluZSwgc28gSSBoYXZlIA0KPiBzb21ldGhpbmcg
-dXNlZnVsIHRvIGNvbXBhcmUgdGhpbmdzIHRvLg0KPiANCj4gV2hlbiBJIGJ1aWxkIHVzaW5nIG5h
-dGl2ZXNkaywgY29uZmlndXJlIGRpZXMgcHJldHR5IHF1aWNrbHkgd2hlbiB0ZXN0aW5nIA0KPiB0
-aGUgY29tcGlsZXIuIEl0J3MgdHJ5aW5nIHRvIHJ1biBpNjg2LWxpbnV4LWdjYy4NCj4gDQo+IFN1
-cmUgZW5vdWdoLCBpZiBJIGNvbXBhcmUgdGhlIEJpdEJha2UgZW52aXJvbm1lbnRzIHVzaW5nIHRo
-ZSAtZSBvcHRpb24sIA0KPiBJIHNlZSB0aGF0IENDIGlzIGJlaW5nIHNldCB0byAiZ2NjIiB3aGVu
-IEkgdXNlIHNkayBidXQgImk2ODYtbGludXgtZ2NjIiANCj4gd2hlbiBJIHVzZSBuYXRpdmVzZGsu
-DQo+IA0KPiBJZiBJIGNyZWF0ZSB0aGUgbmVlZGVkIHN5bWxpbmsgdG8gZ2NjLCB0aGUgY29tcGls
-YXRpb24gZ2V0cyBmdXJ0aGVyIGJ1dCANCj4gc3RpbGwgZmFpbHMsIHdhbnRpbmcgaTY4Ni1saW51
-eC1hciwgZXRjLiBTbyBJIGhhdmUgYSBiYXNpYyB1bmRlcnN0YW5kaW5nIA0KPiBvZiB3aGF0IHRo
-ZSBwcm9ibGVtIGlzLCBidXQgSSdtIHN1cmUgdGhlIHNvbHV0aW9uIGlzIG5vdCB0byBnbyBzeW1s
-aW5rIA0KPiBjcmF6eSB3aXRoIG15IG5hdGl2ZSBjb21waWxlciBlbnZpcm9ubWVudC4NCg0KU2Vl
-IGFib3ZlLCBpdHMgbWlzc2luZyB0aGUgLWNyb3Nzc2RrIGNyb3NzIGNvbXBpbGVyLiBEaWQgeW91
-IG5vdCBoYXZlIHRvDQpBU1NVTUVfUFJPVklERUQgc29tZXRoaW5nIHRvIG1ha2UgdGhlIGRlcGVu
-ZGVuY2llcyB3b3JrPw0KDQo+IFNvIEkgdG9vayBhIGxvb2sgYXQgc2RrLmJiY2xhc3MgYW5kIG5h
-dGl2ZXNkay5iYmNsYXNzLiBUaGV5IGJvdGggc2V0IHVwIA0KPiBhIG51bWJlciBvZiBhcmNoaXRl
-Y3R1cmUtc3BlY2lmaWMgdmFyaWFibGVzLCBidXQgbmVpdGhlciBvZiB0aGVtIA0KPiBleHBsaWNp
-dGx5IHNldCBDQy4gV2hlcmUgSSBzaG91bGQgbG9vayBuZXh0Pw0KPiANCj4gSXQgdHVybnMgb3V0
-IHRoZXJlIGlzIG9ubHkgb25lIHBhY2thZ2UgY3VycmVudGx5IGluIE9FIHRoYXQgdXNlcyANCj4g
-QkJDTEFTU0VYVEVORCB3aXRoIG5hdGl2ZXNkayAoZ2V0dGV4dF8wLjE3KS4gU28gcGVyaGFwcyBp
-dCBpcyB0aGUgY2FzZSANCj4gdGhhdCBuYXRpdmVzZGsuYmJjbGFzcyBuZWVkcyBhZGRpdGlvbmFs
-IHdvcmsuIEkgZGlkIHRlc3QgY29weWluZyBvdmVyIA0KPiBQb2t5J3MgbmF0aXZlc2RrLmJiY2xh
-c3MgKHdoaWNoIGhhcyBqdXN0IGEgZmV3IGRpZmZlcmVuY2VzKSwgYnV0IEkgc3RpbGwgDQo+IGdl
-dCB0aGUgc2FtZSByZXN1bHRzLg0KDQpXZSBwcm9iYWJseSBuZWVkIHRob3NlIGRpZmZlcmVuY2Vz
-IGluIE9FLiBJdHMgbmljZSB0byBzZWUgc29tZW9uZQ0KbG9va2luZyBhdCB0aGlzIQ0KDQpDaGVl
-cnMsDQoNClJpY2hhcmQNCg0KDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fDQpPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQpPcGVuZW1iZWRk
-ZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KaHR0cDovL2xpc3RzLmxpbnV4dG9nby5v
-cmcvY2dpLWJpbi9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0K
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A1=D1=80=D0=B5=D0=B4=D0=B0 24 =D0=BC=D0=B0=D1=80=D1=82=D0=B0 2010 00:51=
+:08 =D0=B2=D1=8B =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB=D0=B8:
+> Makes perl modules rebuild on perl version change, since binary
+>  compatibility could be broken with that (although perl itself tries to
+>  maintain it  within patchlevel range, like 5.8.7 -> 5.8.8).
+>=20
+> This is conditional on PACKAGE_ARCH, since there is nothing to rebuild for
+> pure perl modules (and those should use 'PACKAGE_ARCH =3D "all"') even if
+>  they break with perl version change.
+>=20
+> This also should ease transition to perl 5.10.1.
 
+OK to push? I've realized yesterday that without it or similar thing many=20
+binary modules would be broken when someone would try to use 5.10.1 and man=
+ual=20
+cleaning and rebuilding a ton of perl modules is no fun.
 
 
