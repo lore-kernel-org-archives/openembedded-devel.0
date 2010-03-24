@@ -1,40 +1,40 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NuSYU-0003Ut-Nm
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NuShB-0005wd-2e
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 16:31:41 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NuSVP-0000aS-Nk from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 08:28:27 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 24 Mar 2010 08:28:27 -0700
-Received: from 172.30.80.109 ([172.30.80.109]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Wed, 24 Mar 2010 15:27:33 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	24 Mar 2010 08:27:33 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Wed, 24 Mar 2010 16:40:37 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2OFbR0X025449
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Mar 2010 15:37:27 GMT
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 25068-09 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Mar 2010 15:37:23 +0000 (GMT)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2OFbLMv025443
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 Mar 2010 15:37:21 GMT
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1269426516.1681.35.camel@rex>
+In-Reply-To: <1269444453.2395.5.camel@trini-m4400>
 References: <4B99791E.1020102@zenlinux.com> <4BA981A5.5030609@zenlinux.com>
 	<19c1b8a91003232245y3409bca3p4b74ab5562424b5c@mail.gmail.com>
 	<4BA9B440.2050608@zenlinux.com>  <1269426516.1681.35.camel@rex>
-Organization: Mentor Graphics Corporation
-Date: Wed, 24 Mar 2010 08:27:33 -0700
-Message-ID: <1269444453.2395.5.camel@trini-m4400>
+	<1269444453.2395.5.camel@trini-m4400>
+Date: Wed, 24 Mar 2010 15:37:20 +0000
+Message-ID: <1269445040.1681.147.camel@rex>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 24 Mar 2010 15:28:27.0224 (UTC)
-	FILETIME=[A6654D80:01CACB66]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.3 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: BBCLASSEXTEND sdk vs. nativesdk
@@ -51,44 +51,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Mar 2010 15:31:41 -0000
+X-List-Received-Date: Wed, 24 Mar 2010 15:40:38 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Wed, 2010-03-24 at 10:28 +0000, Richard Purdie wrote:
-> On Tue, 2010-03-23 at 23:42 -0700, Scott Garman wrote:
-> > On 03/23/2010 10:45 PM, Khem Raj wrote:
-> > >> It seems to me the correct course of action is to use nativesdk in
-> > >> BBCLASSEXTEND and rename the dependencies on other recipes, yes?
-> > >
-> > > you should rename the dependencies on zlib-sdk to zlib-nativesdk
-> > > wherever they exist.
->=20
-> This isn't quite correct. nativesdk is not a drop in replacement for the
-> old sdk but you are right that is is the replacement.
->=20
-> The difference is that the old "sdk" assumes the system you want the sdk
-> to run on is the same as the build system. This has always been a big
-> can of worms causing problems so "nativesdk" removes this assumption and
-> allows you to set SDKMACHINE to be the machine you want the resulting
-> sdk to run on.
->=20
-> This adds some complexity since we need another cross compiling
-> toolchain. But cross compiling toolchains are something we're good
-> at :). It also means we ship *everything* with the sdk including a
-> standalone glibc massively removing system dependencies from the result
-> which in my opinion can only be a good thing.
+On Wed, 2010-03-24 at 08:27 -0700, Tom Rini wrote:
+> On Wed, 2010-03-24 at 10:28 +0000, Richard Purdie wrote: 
+> > The difference is that the old "sdk" assumes the system you want the sdk
+> > to run on is the same as the build system. This has always been a big
+> > can of worms causing problems so "nativesdk" removes this assumption and
+> > allows you to set SDKMACHINE to be the machine you want the resulting
+> > sdk to run on.
+> > 
+> > This adds some complexity since we need another cross compiling
+> > toolchain. But cross compiling toolchains are something we're good
+> > at :). It also means we ship *everything* with the sdk including a
+> > standalone glibc massively removing system dependencies from the result
+> > which in my opinion can only be a good thing.
+> 
+> Or a really bad thing, yes.  I think nativesdk will help out a lot for
+> making canadian style builds cleaner.  But going so far as to say 'Oh,
+> lets just throw a libc into the SDK export' is going pretty far down a
+> questionable road.  I'm not so naive to think that there's not problems
+> with my next suggestion, but there's this thing called LSB for a reason.
+> If you want build once, run many distributions, you do that, not go and
+> own even more dependencies.
 
-Or a really bad thing, yes.  I think nativesdk will help out a lot for
-making canadian style builds cleaner.  But going so far as to say 'Oh,
-lets just throw a libc into the SDK export' is going pretty far down a
-questionable road.  I'm not so naive to think that there's not problems
-with my next suggestion, but there's this thing called LSB for a reason.
-If you want build once, run many distributions, you do that, not go and
-own even more dependencies.
+However, an LSB compliant SDK becomes a case of installing "LSB" libs
+into the right sysroot and then setting some
+ASSUME_PROVIDED/PREFERRED_PROVIDER lines.
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+So I think its good all around, we achieve independence of the SDK from
+the build system and make it depend on exactly what we do or don't want
+it to. Where is the bad bit (ignoring build time)? :)
+
+Cheers,
+
+Richard
+
+
 
 
