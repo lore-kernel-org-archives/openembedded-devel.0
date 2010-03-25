@@ -1,24 +1,24 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Nur4E-0001zr-C8
+	(envelope-from <stefan@datenfreihafen.org>) id 1Nur7w-0004Sq-Of
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Mar 2010 18:42:02 +0100
+	Thu, 25 Mar 2010 18:45:53 +0100
 Received: from p5b036bbd.dip.t-dialin.net ([91.3.107.189] helo=excalibur)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1Nur17-0000dF-Vu by authid <stefan@sostec.de> with cram_md5;
-	Thu, 25 Mar 2010 18:38:53 +0100
+	id 1Nur4r-0000kB-FV by authid <stefan@sostec.de> with cram_md5;
+	Thu, 25 Mar 2010 18:42:44 +0100
 Received: from stefan by excalibur with local (Exim 4.71)
 	(envelope-from <stefan@excalibur.local>)
-	id 1Nur17-0002uu-Ew; Thu, 25 Mar 2010 18:38:49 +0100
-Date: Thu, 25 Mar 2010 18:38:49 +0100
+	id 1Nur4r-00038q-07; Thu, 25 Mar 2010 18:42:41 +0100
+Date: Thu, 25 Mar 2010 18:42:40 +0100
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: Antonio Ospite <ospite@studenti.unina.it>
-Message-ID: <20100325173849.GE11431@excalibur.local>
+Message-ID: <20100325174240.GF11431@excalibur.local>
 References: <1269537597-26456-1-git-send-email-ospite@studenti.unina.it>
-	<1269537597-26456-4-git-send-email-ospite@studenti.unina.it>
+	<1269537597-26456-5-git-send-email-ospite@studenti.unina.it>
 MIME-Version: 1.0
-In-Reply-To: <1269537597-26456-4-git-send-email-ospite@studenti.unina.it>
+In-Reply-To: <1269537597-26456-5-git-send-email-ospite@studenti.unina.it>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -34,7 +34,7 @@ X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: openezx-devel@lists.openezx.org,
 	Michael 'Mickey' Lauer <mickey@vanille-media.de>,
 	openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 3/5] ezx: update ezxd version and ezxd.init script
+Subject: Re: [PATCH 4/5] ezx: update ezx-gen-blob version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,24 +48,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Mar 2010 17:42:02 -0000
+X-List-Received-Date: Thu, 25 Mar 2010 17:45:53 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 Hello.
 
 On Thu, 2010-03-25 at 18:19, Antonio Ospite wrote:
-> Newer kernels have drivers for BP interaction built as modules, add the
-> loading sequence in ezxd.init.
+> NOTE: this version builds fine but the resulting binaries do not seem to
+> be correct, their size is about 300KiB instead of the expected 64KiB.
 > 
-> Fix also the recipe so that the CC and CROSS variables do not interfere
-> with the crosscompiler from OE.
+> Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
 
-Hmm, we should really think about moving it from the handwritten makefile to
-autotools. On the other hand it was never designed to stay ... as so much other
-code. :)
+I would need some more information before acking this one. Does the old rev
+still build with the gcc in OE?
 
-Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
+If yes I would prefer to stay with the old rev as a known working one until the
+root cause is found and fixed. If it does not even build we could go ahead and
+bump the rev as it does make things not even worse.
+
+Side note for others: Personally I know nobody who ever installed the gen-blob
+produced with OE on his phone. All people who did it used a precompiled version
+from Wyrm, Antonio or me or compiled it by hand. So this one should not bring to
+much harm.
 
 regards
 Stefan Schmidt
