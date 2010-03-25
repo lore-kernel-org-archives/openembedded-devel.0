@@ -1,33 +1,34 @@
-Received: from vms173019pub.verizon.net ([206.46.173.19])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1NueP4-0002Yo-DK
+	(envelope-from <sledz@DResearch.DE>) id 1NugvX-0007be-KP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Mar 2010 05:10:46 +0100
-Received: from gandalf.denix.org ([unknown] [71.251.58.177])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0KZT007OGKRSYTA4@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	24 Mar 2010 23:07:09 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 9831214AF60; Thu,
-	25 Mar 2010 00:07:01 -0400 (EDT)
-Date: Thu, 25 Mar 2010 00:07:01 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Thu, 25 Mar 2010 07:52:29 +0100
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 70265491274
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Mar 2010 07:49:15 +0100 (CET)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.3959); Thu, 25 Mar 2010 07:49:44 +0100
+Message-ID: <4BAB076A.5070305@dresearch.de>
+Date: Thu, 25 Mar 2010 07:49:14 +0100
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Thunderbird 2.0.0.24 (Windows/20100228)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100325040701.GD31551@denix.org>
-References: <4BAAD653.2050404@mwester.net>
-MIME-version: 1.0
-In-reply-to: <4BAAD653.2050404@mwester.net>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.19
-X-SA-Exim-Mail-From: denis@denix.org
+References: <1269419979-26397-1-git-send-email-sledz@dresearch.de>
+	<20100324174300.GA16224@gmail.com>
+In-Reply-To: <20100324174300.GA16224@gmail.com>
+X-OriginalArrivalTime: 25 Mar 2010 06:49:44.0502 (UTC)
+	FILETIME=[5A388D60:01CACBE7]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@DResearch.DE
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: What happened to e2fsprogs-libs?
+Subject: Re: [PATCH] rsyslog: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,22 +42,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Mar 2010 04:10:46 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Thu, 25 Mar 2010 06:52:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Wed, Mar 24, 2010 at 10:19:47PM -0500, Mike Westerhof wrote:
-> Builds failing (see below).  I think I found the commit (pretty obvious
-> with git log) but I presume that reverting it is not my best course of
-> action :-)
-> So, now that e2fsprogs-libs is gone, what am I to depend upon instead?
+Khem Raj wrote:
+>> +pkg_postinst() {
+>> +        update-rc.d -f syslog remove
+>> +}
+> 
+> AFAIK pkg_postinst is run after install here it seems this must be done
+> after un-install.
+> 
+>> +
+>> +pkg_postrm() {
+>> +        update-rc.d syslog add 5
+>> +}
+> 
+> pkg_postrm is run after uninstall and this seems to be adding the service
+> may it should be revered ?
 
-Mike,
+These steps are made similar to the ones in
+recipes/syslog-ng/syslog-ng_2.0.5.bb which remove/reinstall the
+default syslogd initscript (if i understand this right).
 
-Please see this thread:
-http://thread.gmane.org/gmane.comp.handhelds.openembedded/31421
+I believe that's a hack, but for now i would made it in the
+same way. For the future we should look for a better way to
+handle various syslogd's (alternatives or something like this).
+I'll start an extra thread on this topic.
 
--- 
-Denys
+Steffen
+
 
 
