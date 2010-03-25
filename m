@@ -1,34 +1,41 @@
-Received: from mail-bw0-f220.google.com ([209.85.218.220])
+Received: from smtp-out30.alice.it ([85.33.2.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <douglas.royds@taitradio.com>) id 1Nuujd-00043S-6r
+	(envelope-from <ospite@studenti.unina.it>) id 1Nuurt-0004ES-58
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Mar 2010 22:37:01 +0100
-Received: by bwz20 with SMTP id 20so7219974bwz.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Mar 2010 14:33:50 -0700 (PDT)
-Received: by 10.204.80.99 with SMTP id s35mr2421153bkk.183.1269552830225;
-	Thu, 25 Mar 2010 14:33:50 -0700 (PDT)
-Received: from [172.25.116.17] ([202.37.96.126])
-	by mx.google.com with ESMTPS id s17sm1177889bkd.4.2010.03.25.14.33.47
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 25 Mar 2010 14:33:49 -0700 (PDT)
-Message-ID: <4BABD6B8.8020208@taitradio.com>
-Date: Fri, 26 Mar 2010 10:33:44 +1300
-From: Douglas Royds <douglas.royds@taitradio.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
-MIME-Version: 1.0
+	Thu, 25 Mar 2010 22:45:33 +0100
+Received: from FBCMMO04.fbc.local ([192.168.184.135]) by smtp-out30.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 25 Mar 2010 22:42:22 +0100
+Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO04.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 25 Mar 2010 22:42:22 +0100
+Received: from jcn ([80.116.251.127]) by FBCMCL01B07.fbc.local with Microsoft
+	SMTPSVC(6.0.3790.3959); Thu, 25 Mar 2010 22:42:21 +0100
+Received: from ao2 by jcn with local (Exim 4.71)
+	(envelope-from <ospite@studenti.unina.it>)
+	id 1Nuuom-0006BX-A3; Thu, 25 Mar 2010 22:42:20 +0100
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-References: <4BA8A2FA.4040107@koansoftware.com>
-In-Reply-To: <4BA8A2FA.4040107@koansoftware.com>
-X-SA-Exim-Connect-IP: 209.85.218.220
-X-SA-Exim-Mail-From: douglas.royds@taitradio.com
+Date: Thu, 25 Mar 2010 22:42:12 +0100
+Message-Id: <1269553332-23747-1-git-send-email-ospite@studenti.unina.it>
+X-Mailer: git-send-email 1.7.0.3
+In-Reply-To: <20100315101126.1bb65e82.ospite@studenti.unina.it>
+References: <20100315101126.1bb65e82.ospite@studenti.unina.it>
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+X-OriginalArrivalTime: 25 Mar 2010 21:42:21.0593 (UTC)
+	FILETIME=[0CBC1890:01CACC64]
+X-SA-Exim-Connect-IP: 85.33.2.30
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: COMPATIBLE_MACHINE - how can use?
+Subject: [RESEND, PATCH v2] distros: remove leading dots in DISTRO_VERSIONs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,48 +49,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Mar 2010 21:37:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 25 Mar 2010 21:45:33 -0000
 
-COMPATIBLE_MACHINE uses Python's re.match(), so COMPATIBLE_MACHINE is a
-regular expression that must match the start of the MACHINE variable.
-For instance, from recipes/linux/linux-davinci_2.6.30.bb:
+Having a leading dot in DISTRO_VERSION will result in a '-.' string when
+building archive names; this may lead to mistakenly think that something is
+missing in the archive name.
 
-    COMPATIBLE_MACHINE =
-    "(dm6446-evm|dm6467-evm|dm355-evm|davinci-sffsdr|dm355-leopard)"
+Example:
+minimal-.dev-snapshot-20100216-i686-linux-armv5te-linux-gnueabi-toolchain.tar.bz2
+       ^^
 
-The following line would have much the same effect:
+Remove the leading dot in DISTRO_VERSIONs to avoid such possible
+confusion.
 
-    COMPATIBLE_MACHINE = "(dm6446|dm6467|dm355|davinci)"
+Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+Acked-by: Khem Raj <raj.khem@gmail.com>
+---
 
-If you try to build this recipe for any non-matching MACHINE, it will
-refuse. Additionally, if MACHINE="dm6446-evm" and you ask for a build of
-the kernel, only three recipes are compatible:
+There have been no ojections on this one yet.
+Can anyone apply it please?
+This way my local branch will have one less patch :)
 
-    * linux-davinci_2.6.28.bb
-    * linux-davinci_2.6.30.bb
-    * linux-davinci_git.bb
+Thank you,
+   Antonio Ospite
+   http://ao2.it
 
-The one that actually gets built will be chosen either alphanumerically,
-or by respecting the DEFAULT_PREFERENCE or PREFERRED_VERSION variables.
+ conf/distro/minimal.conf        |    2 +-
+ conf/distro/oplinux-uclibc.conf |    2 +-
+ conf/distro/oplinux.conf        |    2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-Hope this helps,
-Douglas.
-
-
-Leo wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Hi at all,
-> It's not long ago that I use OE and some things do not know very well.. :D
-> For example, can someone explain me how (and where) can use
-> COMPATIBLE_MACHINE?
->
->         thanks a lot for all response! :D
->                     hachreak
-
+diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
+index 8e0ae2e..7aa6c58 100644
+--- a/conf/distro/minimal.conf
++++ b/conf/distro/minimal.conf
+@@ -11,7 +11,7 @@
+ # NAME and VERSION
+ #############################################################################
+ DISTRO_NAME ?= "minimal"
+-DISTRO_VERSION = ".dev-snapshot-${SRCDATE}"
++DISTRO_VERSION = "dev-snapshot-${SRCDATE}"
+ #DISTRO_TYPE = "release"
+ DISTRO_TYPE ?= "debug"
+ 
+diff --git a/conf/distro/oplinux-uclibc.conf b/conf/distro/oplinux-uclibc.conf
+index b8617cc..480602b 100644
+--- a/conf/distro/oplinux-uclibc.conf
++++ b/conf/distro/oplinux-uclibc.conf
+@@ -21,7 +21,7 @@ require conf/distro/include/sane-srcdates.inc
+ # Header
+ #
+ DISTRO_NAME = "OPLinux-uClibC"
+-DISTRO_VERSION = ".dev-snapshot-${SRCDATE}"
++DISTRO_VERSION = "dev-snapshot-${SRCDATE}"
+ #DISTRO_TYPE = "release"
+ DISTRO_TYPE = "debug"
+ 
+diff --git a/conf/distro/oplinux.conf b/conf/distro/oplinux.conf
+index 43e8fad..b64477c 100644
+--- a/conf/distro/oplinux.conf
++++ b/conf/distro/oplinux.conf
+@@ -25,7 +25,7 @@ require conf/distro/include/sane-srcdates.inc
+ # Header
+ #
+ DISTRO_NAME = "OPLinux"
+-DISTRO_VERSION ?= ".dev-snapshot-${SRCDATE}"
++DISTRO_VERSION ?= "dev-snapshot-${SRCDATE}"
+ #DISTRO_TYPE = "release"
+ DISTRO_TYPE = "debug"
+ 
+-- 
+1.7.0.3
 
 
 
