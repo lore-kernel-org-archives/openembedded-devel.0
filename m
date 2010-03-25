@@ -1,46 +1,35 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from hsp-52.hspserver.com ([85.197.80.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Nuho8-0002Ob-MQ
+	(envelope-from <ml@vdm-design.de>) id 1Nuit2-0001aT-WB
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Mar 2010 08:48:49 +0100
-Received: by gwaa20 with SMTP id a20so1398376gwa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Mar 2010 00:45:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type;
-	bh=k+8LGnTUQ6RVV5xRqr265nLaoNFdmlRKxtsCCc1xXCQ=;
-	b=QVQmPzgfBwdGNE5uU9i6SetNvXtC/4axK3p9jzKQems0Zx9b/7Kmfsm6ikHJqxwxb8
-	H0FsMrVq+uF0fTzxyjuzZOPoZgRZtr+lg8P3dqgBx4n44ad7LfVyUE+GOMjHeK0Ty6TK
-	0EIQ0LBdvQIG46XJuXshaA33b6S2AMQXxWy8E=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=EwI7ak5kD+qioGTpP8eR9sc7PzKbb1CWC57UhC2pEBWub9mzyKys5RNwOn+WvrIhJ5
-	tEmMqg6+PUcDScZXz7FmqaTMPfdRGV+m+cfM2UpcfvGwViJ/LWsQMRfSdBsT1afn/PGY
-	1ap6lPeplpw3JkGbX4oHsj9WSxVqnWkHnADXw=
-MIME-Version: 1.0
-Received: by 10.101.79.11 with SMTP id g11mr10032024anl.86.1269503138014; Thu, 
-	25 Mar 2010 00:45:38 -0700 (PDT)
-In-Reply-To: <1269467167.1681.169.camel@rex>
-References: <1269437224.1681.134.camel@rex>
-	<ac9c93b11003240815o796152a7y50601b03e91be40@mail.gmail.com>
-	<b6ebd0a51003240851i3f91860ia1100c4677569cf6@mail.gmail.com>
-	<ac9c93b11003241317y2f6a6bbbs78936ee603d8ce3b@mail.gmail.com>
-	<1269467167.1681.169.camel@rex>
-Date: Thu, 25 Mar 2010 08:45:37 +0100
-Message-ID: <ac9c93b11003250045t34d59be1v5f64165f0066c7b7@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Thu, 25 Mar 2010 09:58:11 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by hsp-52.hspserver.com (Postfix) with ESMTP id BF6FEA2C3CD;
+	Thu, 25 Mar 2010 09:54:48 +0100 (CET)
+Received: from hsp-52.hspserver.com ([127.0.0.1])
+	by localhost (hsp-52.hspserver.com [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id UDj1nS2nXrTF; Thu, 25 Mar 2010 09:54:47 +0100 (CET)
+Received: from localhost.localdomain (pD9E15DD9.dip.t-dialin.net
+	[217.225.93.217])
+	by hsp-52.hspserver.com (Postfix) with ESMTP id AB232A2C3BD;
+	Thu, 25 Mar 2010 09:54:47 +0100 (CET)
+From: Thomas Zimmermann <ml@vdm-design.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Thu, 25 Mar 2010 09:54:32 +0100
+Message-Id: <1269507272-19036-1-git-send-email-ml@vdm-design.de>
+X-Mailer: git-send-email 1.7.0.3
+In-Reply-To: <b6ebd0a51003240909t642135dfy5b2667f6dac0a8c5@mail.gmail.com>
+References: <b6ebd0a51003240909t642135dfy5b2667f6dac0a8c5@mail.gmail.com>
+X-SA-Exim-Connect-IP: 85.197.80.179
+X-SA-Exim-Mail-From: ml@vdm-design.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.0 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Checksums in Bitbake
+Subject: [PATCH] imagemagick: convert to BBCLASSEXTEND and new staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,53 +43,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Mar 2010 07:48:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 25 Mar 2010 08:58:12 -0000
 
-2010/3/24 Richard Purdie <rpurdie@rpsys.net>:
-> On Wed, 2010-03-24 at 21:17 +0100, Frans Meulenbroeks wrote:
->> If a dep is rebuild there is a reason for it (bug fix, packaging
->> changed, changes in exported files etc etc).
->> This might impact the using recipe.
->> If baking a file does not result in a rebuild when a dependency is
->> changed, probably a warning should be given.
->>
->> Encoding the library ABI is only part of the job. You'd also have to
->> take the .h files a package exports into account as constants in it
->> could be changed.
->> And even the using package could change its behaviour (e.g. because
->> configure runs differently).
->> Note also that if we abandon PR we do not really have an easy
->> mechanism to force recompilation of a package (if a depenency changed
->> and we want to force a rebuild).
->
-> Its worth noting you can enable this now with BB_STAMP_POLICY. I see
-> something similar being the likely outcome with checksums. Some people
-> will want the full dependency tree, some people won't. We can support
-> both just as we do now.
+* now imagemagick is buildable again with autoconf > 2.63
+* tiff-native now exists, so no need to override DEPENDS of -native anymore
 
-Supporting both is great.
+Signed-off-by: Thomas Zimmermann <ml@vdm-design.de>
+---
+ recipes/imagemagick/imagemagick-native_6.3.5-10.bb |    6 ------
+ recipes/imagemagick/imagemagick_6.3.5-10.bb        |   10 ++++------
+ recipes/imagemagick/imagemagick_6.4.4-1.bb         |   10 ++++------
+ 3 files changed, 8 insertions(+), 18 deletions(-)
+ delete mode 100644 recipes/imagemagick/imagemagick-native_6.3.5-10.bb
 
-The reason I brought this up is that for application of OE in
-products, reproducability is important.
-I've seen too often (also outside OE) that two engineers take the same
-source yet still get different results, and that bugs at a customer
-site cannot be reproduced in the lab (and yes, I do know there are
-other ways to tackle this problem)
+diff --git a/recipes/imagemagick/imagemagick-native_6.3.5-10.bb b/recipes/imagemagick/imagemagick-native_6.3.5-10.bb
+deleted file mode 100644
+index d2efd36..0000000
+--- a/recipes/imagemagick/imagemagick-native_6.3.5-10.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require imagemagick_${PV}.bb
+-DEPENDS ="libtool-native"
+-# FIXME: There is much more checked libraries. All should be added or explicitly disabled to get consistent results.
+-# tiff-native does not exist
+-DEPENDS += "bzip2-native jpeg-native libpng-native librsvg-native zlib-native"
+-inherit native
+diff --git a/recipes/imagemagick/imagemagick_6.3.5-10.bb b/recipes/imagemagick/imagemagick_6.3.5-10.bb
+index b399741..58f3b23 100644
+--- a/recipes/imagemagick/imagemagick_6.3.5-10.bb
++++ b/recipes/imagemagick/imagemagick_6.3.5-10.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "ImageMagick is an image convertion tools"
+ SECTION = "console/utils"
+ LICENSE = "GPL"
+ DEPENDS = "tiff jpeg libpng librsvg tiff zlib"
+-PR = "r7"
++PR = "r8"
+ 
+ SRC_URI = "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}.tar.bz2 \
+            file://PerlMagic_MakePatch;patch=1 \
+@@ -14,16 +14,12 @@ IMVER = "6.3.5"
+ 
+ S = "${WORKDIR}/ImageMagick-${IMVER}"
+ 
+-inherit autotools binconfig pkgconfig
++inherit autotools_stage binconfig pkgconfig
+ 
+ EXTRA_AUTORECONF += "--exclude=libtoolize"
+ EXTRA_OECONF = "--without-x --without-freetype --without-perl"
+ EXTRA_OECONF_openprotium = "--without-x --without-freetype --without-xml --without-perl"
+ 
+-do_stage() {
+-	autotools_stage_all
+-}
+-
+ FILES_${PN} += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.so \
+                 ${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.la \
+                 ${libdir}/ImageMagick-${IMVER}/config/ \
+@@ -33,5 +29,7 @@ FILES_${PN}-dev += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.a"
+ 
+ FILES_${PN}-dbg += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/.debug/*"
+ 
++BBCLASSEXTEND = "native"
++
+ LEAD_SONAME = "libMagick.so.*"
+ 
+diff --git a/recipes/imagemagick/imagemagick_6.4.4-1.bb b/recipes/imagemagick/imagemagick_6.4.4-1.bb
+index bc16b0c..1b17664 100644
+--- a/recipes/imagemagick/imagemagick_6.4.4-1.bb
++++ b/recipes/imagemagick/imagemagick_6.4.4-1.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPL"
+ # FIXME: There is much more checked libraries. All should be added or explicitly disabled to get consistent results.
+ DEPENDS = "bzip2 jpeg libpng librsvg tiff zlib"
+ 
+-PR = "r3"
++PR = "r4"
+ 
+ SRC_URI = "ftp://ftp.nluug.nl/pub/ImageMagick/ImageMagick-${PV}.tar.bz2 \
+            file://PerlMagic_MakePatch;patch=1 \
+@@ -14,15 +14,11 @@ IMVER = "6.4.4"
+ 
+ S = "${WORKDIR}/ImageMagick-${IMVER}"
+ 
+-inherit autotools binconfig pkgconfig
++inherit autotools_stage binconfig pkgconfig
+ 
+ EXTRA_AUTORECONF += "--exclude=libtoolize"
+ EXTRA_OECONF = "--program-prefix= --without-x --without-freetype --without-perl --disable-openmp"
+ 
+-do_stage() {
+-	autotools_stage_all
+-}
+-
+ FILES_${PN} += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.so \
+                 ${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.la \
+                 ${libdir}/ImageMagick-${IMVER}/config/ \
+@@ -32,5 +28,7 @@ FILES_${PN}-dev += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/*.a"
+ 
+ FILES_${PN}-dbg += "${libdir}/ImageMagick-${IMVER}/modules-Q16/*/.debug/*"
+ 
++BBCLASSEXTEND = "native"
++
+ LEAD_SONAME = "libMagickCore.so.*"
+ 
+-- 
+1.7.0.3
 
-The thing I would like to avoid is that different people create
-packages/images that look like being the same (e.g. name/ID) yet have
-different content.
-
-Or in other words: the problem one could face and that I want to avoid
-is that if A depends on B and A is build and works, but afterwards B
-is changed and a newly compiled A would have the same name/version but
-might behave differently than the old one (e.g. because B changed
-something in a .h file).
-That could also lead to situations where a local compiled file behaves
-differently than the same one you'd get from a feed.
-IMHO less desirable.
-
-Frans
 
 
