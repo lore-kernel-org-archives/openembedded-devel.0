@@ -1,45 +1,27 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NuZuq-0001cL-IX
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Mar 2010 00:23:13 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NuZrk-0000aM-Uw from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 24 Mar 2010 16:20:01 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 24 Mar 2010 16:19:30 -0700
-Received: from 172.30.80.109 ([172.30.80.109]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Wed, 24 Mar 2010 23:19:30 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	24 Mar 2010 16:19:29 -0700
-From: Tom Rini <tom_rini@mentor.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1269453955.1681.165.camel@rex>
-References: <4B99791E.1020102@zenlinux.com> <4BA981A5.5030609@zenlinux.com>
-	<19c1b8a91003232245y3409bca3p4b74ab5562424b5c@mail.gmail.com>
-	<4BA9B440.2050608@zenlinux.com>  <1269426516.1681.35.camel@rex>
-	<1269444453.2395.5.camel@trini-m4400> <1269445040.1681.147.camel@rex>
-	<1269446279.3545.8.camel@trini-m4400> <1269453955.1681.165.camel@rex>
-Organization: Mentor Graphics Corporation
-Date: Wed, 24 Mar 2010 11:46:05 -0700
-Message-ID: <1269456365.3545.9.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 24 Mar 2010 23:19:30.0797 (UTC)
-	FILETIME=[74CC49D0:01CACBA8]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Received: from p3plsmtpa01-07.prod.phx3.secureserver.net ([72.167.82.87])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1NudlI-0007bd-R0
+	for openembedded-devel@openembedded.org; Thu, 25 Mar 2010 04:29:37 +0100
+Received: (qmail 32106 invoked from network); 25 Mar 2010 03:19:45 -0000
+Received: from unknown (209.242.7.187)
+	by p3plsmtpa01-07.prod.phx3.secureserver.net (72.167.82.87) with ESMTP;
+	25 Mar 2010 03:19:44 -0000
+Message-ID: <4BAAD653.2050404@mwester.net>
+Date: Wed, 24 Mar 2010 22:19:47 -0500
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.23) Gecko/20090812 Thunderbird/2.0.0.23 Mnenhy/0.7.6.0
+MIME-Version: 1.0
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 72.167.82.87
+X-SA-Exim-Mail-From: mike@mwester.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,
-	DATE_IN_PAST_03_06 autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: BBCLASSEXTEND sdk vs. nativesdk
+Subject: What happened to e2fsprogs-libs?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,48 +35,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 Mar 2010 23:23:14 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 25 Mar 2010 03:29:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Wed, 2010-03-24 at 18:05 +0000, Richard Purdie wrote:
-> On Wed, 2010-03-24 at 08:57 -0700, Tom Rini wrote:
-> > On Wed, 2010-03-24 at 15:37 +0000, Richard Purdie wrote:
-> > > On Wed, 2010-03-24 at 08:27 -0700, Tom Rini wrote:
-> > > > Or a really bad thing, yes.  I think nativesdk will help out a lot =
-for
-> > > > making canadian style builds cleaner.  But going so far as to say '=
-Oh,
-> > > > lets just throw a libc into the SDK export' is going pretty far dow=
-n a
-> > > > questionable road.  I'm not so naive to think that there's not prob=
-lems
-> > > > with my next suggestion, but there's this thing called LSB for a re=
-ason.
-> > > > If you want build once, run many distributions, you do that, not go=
- and
-> > > > own even more dependencies.
-> > >=20
-> > > However, an LSB compliant SDK becomes a case of installing "LSB" libs
-> > > into the right sysroot and then setting some
-> > > ASSUME_PROVIDED/PREFERRED_PROVIDER lines.
-> > >=20
-> > > So I think its good all around, we achieve independence of the SDK fr=
-om
-> > > the build system and make it depend on exactly what we do or don't wa=
-nt
-> > > it to. Where is the bad bit (ignoring build time)? :)
-> >=20
-> > How is this working on the runtime?  How relocatable is it?
->=20
-> Its no more or less reclocatable than the original was, that wasn't an
-> objective. Some postprocessing with the same code we use in
-> packaged-staging shouldn't see it being too bad though.
+Builds failing (see below).  I think I found the commit (pretty obvious
+with git log) but I presume that reverting it is not my best course of
+action :-)
+So, now that e2fsprogs-libs is gone, what am I to depend upon instead?
+-Mike (mwester)
 
-Today it's fully relocatable, if you use $ORIGIN.  Is that still true?
+NOTE: Resolving any missing task queue dependencies
+ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime
+entity 'e2fsprogs-libs' but it wasn't found in any PACKAGE or RPROVIDES
+variables
+NOTE: Runtime target 'e2fsprogs-libs' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['e2fsprogs-libs']
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
 
 
