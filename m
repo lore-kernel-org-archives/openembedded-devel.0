@@ -1,42 +1,46 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from smtp-out05a.alice.it ([85.33.3.5])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Nurvd-0005a5-MJ
+	(envelope-from <ospite@studenti.unina.it>) id 1NusSH-0008E7-Bt
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Mar 2010 19:37:14 +0100
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NursX-0007U2-NP from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Mar 2010 11:34:01 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 25 Mar 2010 11:33:58 -0700
-Received: from 172.30.80.117 ([172.30.80.117]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Thu, 25 Mar 2010 18:33:22 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	25 Mar 2010 11:33:21 -0700
-From: Tom Rini <tom_rini@mentor.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100325180115.GD28005@denix.org>
-References: <48239d391003250816m3686a994h92fd5a115c3f47d4@mail.gmail.com>
-	<20100325180115.GD28005@denix.org>
-Organization: Mentor Graphics Corporation
-Date: Thu, 25 Mar 2010 11:33:21 -0700
-Message-ID: <1269542001.3545.56.camel@trini-m4400>
+	Thu, 25 Mar 2010 20:10:59 +0100
+Received: from FBCMMO05.fbc.local ([7.168.68.254]) by smtp-OUT05A.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 25 Mar 2010 20:07:05 +0100
+Received: from FBCMCL01B09.fbc.local ([192.168.171.26]) by FBCMMO05.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 25 Mar 2010 20:07:03 +0100
+Received: from jcn ([80.116.251.127]) by FBCMCL01B09.fbc.local with Microsoft
+	SMTPSVC(6.0.3790.3959); Thu, 25 Mar 2010 20:07:03 +0100
+Date: Thu, 25 Mar 2010 20:06:56 +0100
+From: Antonio Ospite <ospite@studenti.unina.it>
+To: Stefan Schmidt <stefan@datenfreihafen.org>
+Message-Id: <20100325200656.c892fb13.ospite@studenti.unina.it>
+In-Reply-To: <20100325183050.GH11431@excalibur.local>
+References: <1269537597-26456-1-git-send-email-ospite@studenti.unina.it>
+	<1269537597-26456-5-git-send-email-ospite@studenti.unina.it>
+	<20100325174240.GF11431@excalibur.local>
+	<20100325191311.7f113c74.ospite@studenti.unina.it>
+	<20100325183050.GH11431@excalibur.local>
+X-Mailer: Sylpheed 3.0.1 (GTK+ 2.18.9; x86_64-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 25 Mar 2010 18:33:58.0688 (UTC)
-	FILETIME=[BBADAA00:01CACC49]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-OriginalArrivalTime: 25 Mar 2010 19:07:03.0481 (UTC)
+	FILETIME=[5AB50A90:01CACC4E]
+X-SA-Exim-Connect-IP: 85.33.3.5
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_00,
-	MIME_QP_LONG_LINE autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL, BAYES_00, RCVD_ILLEGAL_IP
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [SDK] meta-toolchain.bb generates very interesting environment-setup
+Cc: openezx-devel@lists.openezx.org,
+	Michael 'Mickey' Lauer <mickey@vanille-media.de>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 4/5] ezx: update ezx-gen-blob version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,75 +54,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Mar 2010 18:37:14 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 25 Mar 2010 19:10:59 -0000
+X-Groupsio-MsgNum: 18129
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Thu__25_Mar_2010_20_06_56_+0100_mUjtUdTAOL4oSXBO"
+
+--Signature=_Thu__25_Mar_2010_20_06_56_+0100_mUjtUdTAOL4oSXBO
+Content-Type: text/plain; charset=US-ASCII
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2010-03-25 at 14:01 -0400, Denys Dmytriyenko wrote:
-> On Thu, Mar 25, 2010 at 06:16:49PM +0300, Sergey Lapin wrote:
-> > $ cat /usr/local/angstrom/arm/environment-setup
-> > export SDK_PATH=3D/usr/local/angstrom/arm
-> > export TARGET_SYS=3Darm-angstrom-linux-gnueabi
-> > export PATH=3D$SDK_PATH/bin:$PATH
-> > export CPATH=3D$SDK_PATH/$TARGET_SYS/usr/include:$CPATH
-> > export LIBTOOL_SYSROOT_PATH=3D$SDK_PATH/$TARGET_SYS
-> > export PKG_CONFIG_SYSROOT_DIR=3D$SDK_PATH/$TARGET_SYS
-> > export PKG_CONFIG_PATH=3D$SDK_PATH/$TARGET_SYS/usr/lib/pkgconfig
-> > export CONFIG_SITE=3D$SDK_PATH/site-config
-> > alias opkg=3D'LD_LIBRARY_PATH=3D/lib /bin/opkg-cl -f //etc/opkg-sdk.con=
-f -o '
-> > alias opkg-target=3D'LD_LIBRARY_PATH=3D/lib /bin/opkg-cl -f //etc/opkg.=
-conf -o /'
-> >=20
-> > A problem seems to be this code:
-> >=20
-> > # Create environment setup script
-> >         script=3D${SDK_OUTPUT}/${SDKPATH}/environment-setup
-> >         touch $script
-> >         echo 'export SDK_PATH=3D${SDKPATH}' >> $script
-> >         echo 'export TARGET_SYS=3D${TARGET_SYS}' >> $script
-> >         echo 'export PATH=3D$SDK_PATH/bin:$PATH' >> $script
-> >         echo 'export CPATH=3D$SDK_PATH/$TARGET_SYS/usr/include:$CPATH' =
->> $script
-> >         echo 'export LIBTOOL_SYSROOT_PATH=3D$SDK_PATH/$TARGET_SYS' >> $=
-script
-> >         echo 'export PKG_CONFIG_SYSROOT_DIR=3D$SDK_PATH/$TARGET_SYS' >>=
- $script
-> >         echo 'export
-> > PKG_CONFIG_PATH=3D$SDK_PATH/$TARGET_SYS${libdir}/pkgconfig' >> $script
-> >         echo 'export CONFIG_SITE=3D$SDK_PATH/site-config' >> $script
-> >         echo "alias opkg=3D'LD_LIBRARY_PATH=3D$SDK_PATH/lib
-> > $SDK_PATH/bin/opkg-cl -f $SDK_PATH/${sysconfdir}/opkg-s
-> > dk.conf -o $SDK_PATH'" >> $script
-> >         echo "alias opkg-target=3D'LD_LIBRARY_PATH=3D$SDK_PATH/lib
-> > $SDK_PATH/bin/opkg-cl -f $SDK_PATH/$TARGET_SYS${
-> > sysconfdir}/opkg.conf -o $SDK_PATH/$TARGET_SYS'" >> $script
-> >=20
-> >=20
-> > it seems that $SDK_PATH in last two lines gets resolved instead of
-> > being written literally. adding \ before $ in these lines seems to fix
-> > this problem. Is it appropriate fix?
->=20
-> Ah, interesting... It worked for me when the last two lines had double qu=
-otes=20
-> inside single quotes. But to match RP's styling, I had to revert that to=20
-> single quotes inside double quotes and it doesn't seem to work:
->=20
-> $ echo 'show "$SDK_PATH"'
-> show "$SDK_PATH"
->=20
-> $ echo "show '$SDK_PATH'"
-> show ''
->=20
-> I wonder if it would be Ok to revert back to the original quoting... Or i=
-s=20
-> escaping with \ a better fix?
+On Thu, 25 Mar 2010 19:30:50 +0100
+Stefan Schmidt <stefan@datenfreihafen.org> wrote:
 
-Ordered quoting ('""') is how we handle this in other recipes, so we
-should do it here.
+> Hello.
+>=20
+> On Thu, 2010-03-25 at 19:13, Antonio Ospite wrote:
+> > On Thu, 25 Mar 2010 18:42:40 +0100
+> > Stefan Schmidt <stefan@datenfreihafen.org> wrote:
+> >=20
+> > > On Thu, 2010-03-25 at 18:19, Antonio Ospite wrote:
+> > > > NOTE: this version builds fine but the resulting binaries do not se=
+em to
+> > > > be correct, their size is about 300KiB instead of the expected 64Ki=
+B.
+[...]
+> > > Side note for others: Personally I know nobody who ever installed the=
+ gen-blob
+> > > produced with OE on his phone. All people who did it used a precompil=
+ed version
+> > > from Wyrm, Antonio or me or compiled it by hand. So this one should n=
+ot bring to
+> > > much harm.
+> > >
+> >
+> > As you may guess, even compiling it manually "doesn't work" anymore with
+> > a recent toolchain...  to be more precise: I've tried running the
+> > big binary loading it via usb, it seems to work but it is just not
+> > suitable to be flashed because of its size.
+>=20
+> Interesting. It is stripped, right?
+
+Yep.
+
+> Anyway, as the old one does not build and
+> the new one "works" you have my
+>
+> Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
+>=20
+
+Thanks.
+Stefan are you also going to push these changes?
+
+Regards,
+   Antonio
 
 --=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+Antonio Ospite
+http://ao2.it
 
+PGP public key ID: 0x4553B001
 
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
+
+--Signature=_Thu__25_Mar_2010_20_06_56_+0100_mUjtUdTAOL4oSXBO
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEARECAAYFAkurtFAACgkQ5xr2akVTsAF41wCfWEYl4vIFt9lG+Yh9SZnAlgaq
+JKkAoK5Z2HihOnsEWEFobIh/buKaLciv
+=JBpK
+-----END PGP SIGNATURE-----
+
+--Signature=_Thu__25_Mar_2010_20_06_56_+0100_mUjtUdTAOL4oSXBO--
