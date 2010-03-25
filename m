@@ -1,24 +1,24 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Nur7w-0004Sq-Of
+	(envelope-from <stefan@datenfreihafen.org>) id 1Nur8j-0005Mi-VO
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Mar 2010 18:45:53 +0100
+	Thu, 25 Mar 2010 18:46:45 +0100
 Received: from p5b036bbd.dip.t-dialin.net ([91.3.107.189] helo=excalibur)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1Nur4r-0000kB-FV by authid <stefan@sostec.de> with cram_md5;
-	Thu, 25 Mar 2010 18:42:44 +0100
+	id 1Nur5T-0000lA-2B by authid <stefan@sostec.de> with cram_md5;
+	Thu, 25 Mar 2010 18:43:21 +0100
 Received: from stefan by excalibur with local (Exim 4.71)
 	(envelope-from <stefan@excalibur.local>)
-	id 1Nur4r-00038q-07; Thu, 25 Mar 2010 18:42:41 +0100
-Date: Thu, 25 Mar 2010 18:42:40 +0100
+	id 1Nur5S-0004aw-Hc; Thu, 25 Mar 2010 18:43:18 +0100
+Date: Thu, 25 Mar 2010 18:43:18 +0100
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: Antonio Ospite <ospite@studenti.unina.it>
-Message-ID: <20100325174240.GF11431@excalibur.local>
+Message-ID: <20100325174318.GG11431@excalibur.local>
 References: <1269537597-26456-1-git-send-email-ospite@studenti.unina.it>
-	<1269537597-26456-5-git-send-email-ospite@studenti.unina.it>
+	<1269537597-26456-6-git-send-email-ospite@studenti.unina.it>
 MIME-Version: 1.0
-In-Reply-To: <1269537597-26456-5-git-send-email-ospite@studenti.unina.it>
+In-Reply-To: <1269537597-26456-6-git-send-email-ospite@studenti.unina.it>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -34,7 +34,7 @@ X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: openezx-devel@lists.openezx.org,
 	Michael 'Mickey' Lauer <mickey@vanille-media.de>,
 	openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 4/5] ezx: update ezx-gen-blob version
+Subject: Re: [PATCH 5/5] ezx: update device_table-ezx.txt
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,29 +48,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Mar 2010 17:45:53 -0000
+X-List-Received-Date: Thu, 25 Mar 2010 17:46:45 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 Hello.
 
 On Thu, 2010-03-25 at 18:19, Antonio Ospite wrote:
-> NOTE: this version builds fine but the resulting binaries do not seem to
-> be correct, their size is about 300KiB instead of the expected 64KiB.
+> Update mux nodes to be used with the ts27010mux driver.
+> Fix names for ttyIPC0 and video0 nodes.
 > 
 > Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
 
-I would need some more information before acking this one. Does the old rev
-still build with the gcc in OE?
-
-If yes I would prefer to stay with the old rev as a known working one until the
-root cause is found and fixed. If it does not even build we could go ahead and
-bump the rev as it does make things not even worse.
-
-Side note for others: Personally I know nobody who ever installed the gen-blob
-produced with OE on his phone. All people who did it used a precompiled version
-from Wyrm, Antonio or me or compiled it by hand. So this one should not bring to
-much harm.
+Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
 
 regards
 Stefan Schmidt
