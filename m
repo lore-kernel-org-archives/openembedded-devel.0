@@ -1,31 +1,46 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1Nuhh8-0002DC-9D
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Nuho8-0002Ob-MQ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Mar 2010 08:41:38 +0100
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1Nuhe4-0001Sy-RL
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Mar 2010 10:38:25 +0300
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 25 Mar 2010 10:35:38 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
-References: <201003211505.39554.roman@khimov.ru>
-	<201003242055.50066.roman@khimov.ru> <hof3a2$dtj$1@dough.gmane.org>
-In-Reply-To: <hof3a2$dtj$1@dough.gmane.org>
+	Thu, 25 Mar 2010 08:48:49 +0100
+Received: by gwaa20 with SMTP id a20so1398376gwa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Mar 2010 00:45:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:message-id:subject:from:to:content-type;
+	bh=k+8LGnTUQ6RVV5xRqr265nLaoNFdmlRKxtsCCc1xXCQ=;
+	b=QVQmPzgfBwdGNE5uU9i6SetNvXtC/4axK3p9jzKQems0Zx9b/7Kmfsm6ikHJqxwxb8
+	H0FsMrVq+uF0fTzxyjuzZOPoZgRZtr+lg8P3dqgBx4n44ad7LfVyUE+GOMjHeK0Ty6TK
+	0EIQ0LBdvQIG46XJuXshaA33b6S2AMQXxWy8E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=EwI7ak5kD+qioGTpP8eR9sc7PzKbb1CWC57UhC2pEBWub9mzyKys5RNwOn+WvrIhJ5
+	tEmMqg6+PUcDScZXz7FmqaTMPfdRGV+m+cfM2UpcfvGwViJ/LWsQMRfSdBsT1afn/PGY
+	1ap6lPeplpw3JkGbX4oHsj9WSxVqnWkHnADXw=
 MIME-Version: 1.0
-Message-Id: <201003251035.42060.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+Received: by 10.101.79.11 with SMTP id g11mr10032024anl.86.1269503138014; Thu, 
+	25 Mar 2010 00:45:38 -0700 (PDT)
+In-Reply-To: <1269467167.1681.169.camel@rex>
+References: <1269437224.1681.134.camel@rex>
+	<ac9c93b11003240815o796152a7y50601b03e91be40@mail.gmail.com>
+	<b6ebd0a51003240851i3f91860ia1100c4677569cf6@mail.gmail.com>
+	<ac9c93b11003241317y2f6a6bbbs78936ee603d8ce3b@mail.gmail.com>
+	<1269467167.1681.169.camel@rex>
+Date: Thu, 25 Mar 2010 08:45:37 +0100
+Message-ID: <ac9c93b11003250045t34d59be1v5f64165f0066c7b7@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 01/44] cpan-base: add perl version to PR
+Subject: Re: Checksums in Bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,85 +54,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Mar 2010 07:41:39 -0000
-X-Groupsio-MsgNum: 18105
-Content-Type: multipart/signed; boundary="nextPart1692595.3vRbh2jEJc";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 25 Mar 2010 07:48:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---nextPart1692595.3vRbh2jEJc
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+2010/3/24 Richard Purdie <rpurdie@rpsys.net>:
+> On Wed, 2010-03-24 at 21:17 +0100, Frans Meulenbroeks wrote:
+>> If a dep is rebuild there is a reason for it (bug fix, packaging
+>> changed, changes in exported files etc etc).
+>> This might impact the using recipe.
+>> If baking a file does not result in a rebuild when a dependency is
+>> changed, probably a warning should be given.
+>>
+>> Encoding the library ABI is only part of the job. You'd also have to
+>> take the .h files a package exports into account as constants in it
+>> could be changed.
+>> And even the using package could change its behaviour (e.g. because
+>> configure runs differently).
+>> Note also that if we abandon PR we do not really have an easy
+>> mechanism to force recompilation of a package (if a depenency changed
+>> and we want to force a rebuild).
+>
+> Its worth noting you can enable this now with BB_STAMP_POLICY. I see
+> something similar being the likely outcome with checksums. Some people
+> will want the full dependency tree, some people won't. We can support
+> both just as we do now.
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 25 =D0=BC=D0=B0=D1=80=D1=82=D0=
-=B0 2010 10:28:02 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Koen Kooi =D0=BD=D0=B0=D0=
-=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> On 24-03-10 18:55, Roman I Khimov wrote:
-> > =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
-=82 =D0=A1=D1=80=D0=B5=D0=B4=D0=B0 24 =D0=BC=D0=B0=D1=80=D1=82=D0=B0 2010 2=
-0:41:00 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Marcin Juszkiewicz=20
-=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> >> Dnia =C5=9Broda, 24 marca 2010 o 18:26:16 Roman I Khimov napisa=C5=82(=
-a):
-> >>> OK. Pushed perl 5.10.1, everybody, have fun!
-> >>
-> >> 18:39 hrw@home:angstrom$ bitbake perl
-> >> NOTE: Handling BitBake files: - (0975/8143) [11 %]NOTE: <type
-> >> 'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneType' objects
-> >>  while evaluating:
-> >> r0${@perl_get_version_suffix(d)}
-> >> NOTE: <type 'exceptions.TypeError'>:cannot concatenate 'str' and
-> >> 'NoneType' objects while evaluating:
-> >> ${PN}-${EXTENDPE}${PV}-${PR}
-> >> NOTE: <type 'exceptions.TypeError'>:cannot concatenate 'str' and
-> >> 'NoneType' objects while evaluating:
-> >> ${TMPDIR}/work/${MULTIMACH_TARGET_SYS}/${PF}
-> >> NOTE: <type 'exceptions.TypeError'>:cannot concatenate 'str' and
-> >> 'NoneType' objects while evaluating:
-> >> ${WORKDIR}/callweaver-1.2-${CWRCV}/contrib/ogi-perl/callweaver-perl-0.=
-0.
-> >>1 NOTE: <type 'exceptions.TypeError'>:cannot concatenate 'str' and
-> >> 'NoneType' objects while evaluating:
-> >> ${S}
-> >> ERROR: cannot concatenate 'str' and 'NoneType' objects while parsing
-> >> /home/hrw/devel/oe/openembedded/recipes/callweaver/callweaver-perl.bb
-> >> NOTE: Handling BitBake files: - (3827/8143) [46 %]NOTE: <type
-> >> 'exceptions.TypeError'>:cannot concatenate 'str' and 'NoneType' objects
-> >>  while evaluating:
-> >> r2${@perl_get_version_suffix(d)}
-> >
-> > (0_0)
-> > Never had that and just tried, nothing like that, test setup is Angstrom
-> > for qemuarm.
->=20
-> I think this is the same problem as we have with KERNEL_VERSION. IIRC we
-> cheat a bit and write out a file in staging with the version.
+Supporting both is great.
 
-Yep, see my other message and as we've discussed a bit on IRC, there is no=
-=20
-good way to handle it other than DISTRO_PR or some kind of mangling of PKGR=
-,=20
-but that's also not perfect. I think that perl version change might deserve=
-=20
-DISTRO_PR bump.
+The reason I brought this up is that for application of OE in
+products, reproducability is important.
+I've seen too often (also outside OE) that two engineers take the same
+source yet still get different results, and that bugs at a customer
+site cannot be reproduced in the lab (and yes, I do know there are
+other ways to tackle this problem)
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+The thing I would like to avoid is that different people create
+packages/images that look like being the same (e.g. name/ID) yet have
+different content.
 
---nextPart1692595.3vRbh2jEJc
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+Or in other words: the problem one could face and that I want to avoid
+is that if A depends on B and A is build and works, but afterwards B
+is changed and a newly compiled A would have the same name/version but
+might behave differently than the old one (e.g. because B changed
+something in a .h file).
+That could also lead to situations where a local compiled file behaves
+differently than the same one you'd get from a feed.
+IMHO less desirable.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
+Frans
 
-iEYEABECAAYFAkurEk0ACgkQXJ70z+XgVcO9bgCeJC/B2hP5sx3IgC/IA7wInXgW
-4lYAn3m9RuUtLB2dMot1uoq84GKtkQgo
-=igzc
------END PGP SIGNATURE-----
 
---nextPart1692595.3vRbh2jEJc--
