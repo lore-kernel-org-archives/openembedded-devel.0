@@ -1,47 +1,43 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-fx0-f220.google.com ([209.85.220.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <listjiason@gmail.com>) id 1NukAg-00034f-H7
+	(envelope-from <martin.jansa@gmail.com>) id 1Nuo24-0001VM-C7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Mar 2010 11:20:19 +0100
-Received: by gwaa20 with SMTP id a20so1438259gwa.6
+	Thu, 25 Mar 2010 15:27:37 +0100
+Received: by fxm20 with SMTP id 20so6400366fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Mar 2010 03:17:03 -0700 (PDT)
+	Thu, 25 Mar 2010 07:24:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=cmIloR2plzYdx/qMXG1H0x48jXF49iVseouo5sKfpe0=;
-	b=KwS2Vc4BGOE1YrZJAPT8oISmhtbMH3O/fkaK6/yPdEdY3qM9pX0bKeUCA7ngJHZcLO
-	w5GK+R1WQqfUIfJzIkvD5oV5rpXZcP1G9/KJTle6uYEzdCRhvYeM0S7e+itXKA7fRjF5
-	ygsZ56BizeR/d19WJ5gUNX5wAhj4SDUri0Vkw=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=/nTG1leeGzEfSFNgeyZwr7o5FuK+BR0ZQhzU8SSLUYA=;
+	b=F3b4hBYk0q185u+5OtbV7TvRme9s55NpOj31ZVuZX+OxWpGTi+Qnnn1ig8WPssxO8B
+	TvhYNhE7mSOdqOPMHm8bYBvX2XaTMhusCODtk9yaXZ0/vFyQ1CumZ0FVgh5bUiX+bqLi
+	92YnIUQ6M8dDt/oteSw/Dt+q/TwlVMPlWUKzY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=br98Aln/0xu/+oV/PDpRSNn7Gps4XLL8Q/K2PISfj1H5wY9F+KGZ4BJwegbP9eAN1M
-	cETjpZsKANuKESPST/C354mQcnbQxO7DLuhgqgqZPy44igf/HKp4rw2epzO5b+4qDdm4
-	WgHoI/93QW+d+q2VSHnXVDdj2Cyr1Gn0vBxso=
-MIME-Version: 1.0
-Received: by 10.91.20.13 with SMTP id x13mr4040569agi.52.1269512223657; Thu, 
-	25 Mar 2010 03:17:03 -0700 (PDT)
-In-Reply-To: <f275a9df1003231858m12e94060sb9f8b15d9dd218d@mail.gmail.com>
-References: <f275a9df1003230238ye20d27fm32a88ad21e6518ab@mail.gmail.com>
-	<f275a9df1003230243h6942495bya29166db2fda49a@mail.gmail.com>
-	<20100323205054.GB12446@gmail.com>
-	<f275a9df1003231753y25619594i8310eb1883688fc9@mail.gmail.com>
-	<f275a9df1003231858m12e94060sb9f8b15d9dd218d@mail.gmail.com>
-Date: Thu, 25 Mar 2010 18:17:03 +0800
-Message-ID: <f275a9df1003250317s63b00ba6m7da53862f3f2a99e@mail.gmail.com>
-From: Jiason Li <listjiason@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=ay0MrAMKzQFhx8k1drL9Mejs1mYDslAyQOlDgLpQT1JfhSlO6fAmogzj4orkIla/D3
+	aLNXbKg/2TnQlSQDo38XHrTya+/VyoyVxE8FaIP2rhx6Ews5gT+PC8q0iHSuAv7awovd
+	O0BcHVAd2JjZSqvWWSsuCeoiPx862B3zdNn4k=
+Received: by 10.223.63.203 with SMTP id c11mr755053fai.94.1269527065924;
+	Thu, 25 Mar 2010 07:24:25 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 15sm1063287fxm.15.2010.03.25.07.24.24
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 25 Mar 2010 07:24:24 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: listjiason@gmail.com
+Date: Thu, 25 Mar 2010 15:24:23 +0100
+Message-Id: <1269527063-17761-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.0.2
+X-SA-Exim-Connect-IP: 209.85.220.220
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: How to rebuild images with updated PREFERRED_PROVIDER_xxx in machine conf?
+Subject: [PATCH] oestats-client: add metadata_scm inherit after base.bbclass split in 89b7e433719f43f1c36c76cb8856d559014e99bc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,44 +51,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Mar 2010 10:20:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 25 Mar 2010 14:27:37 -0000
 
-OK,
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ classes/oestats-client.bbclass |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-here the answer is:
-some-pkg-mine.bb should include not only PROVIDES line, but also RPROVIDES =
-line.
+diff --git a/classes/oestats-client.bbclass b/classes/oestats-client.bbclass
+index e4e6206..5aad12b 100644
+--- a/classes/oestats-client.bbclass
++++ b/classes/oestats-client.bbclass
+@@ -9,6 +9,8 @@
+ # OESTATS_BUILDER = "some_nickname"
+ # 
+ 
++inherit metadata_scm
++
+ def oestats_setid(d, val):
+ 	import bb
+ 	f = file(bb.data.getVar('TMPDIR', d, True) + '/oestats.id', 'w')
+-- 
+1.7.0.2
 
-Thanks for the help, though. :-)
-
-Thank You!
-jiason
-20100324
-
-
-2010/3/24 Jiason Li:
-> Hi,
->
-> resulted two things:
->
-> 1. bitbake -c package_update_index opie-image
-> ERROR: Task do_package_update_index does not exist for target opie-image
->
-> 2. I just found that:
-> although "bitbake some-pkg" will produce some-pkg-mine.ipk correctly,
-> some-pkg was still in some-image instead of some-pkg-mine after
-> "bitbake some-image". :-(
->
-> strangest thing is, if "some-pkg" was "virtual/kernel", then things
-> all worked correctly...
->
-> =A0Any info are very appreciated. :-/
->
-> Thank You!
-> jiason
-> 20100324
->
 
 
