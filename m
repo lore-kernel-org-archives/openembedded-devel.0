@@ -1,44 +1,51 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-qy0-f178.google.com ([209.85.221.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1NusVT-00041N-VO
+	(envelope-from <raj.khem@gmail.com>) id 1NutsG-00007c-8g
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Mar 2010 20:14:16 +0100
-Received: from p5b036bbd.dip.t-dialin.net ([91.3.107.189] helo=excalibur)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1NusSJ-00035M-Nu by authid <stefan@sostec.de> with cram_md5;
-	Thu, 25 Mar 2010 20:11:02 +0100
-Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>)
-	id 1NusSI-0000ax-Qw; Thu, 25 Mar 2010 20:10:58 +0100
-Date: Thu, 25 Mar 2010 20:10:58 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: Antonio Ospite <ospite@studenti.unina.it>
-Message-ID: <20100325191058.GI11431@excalibur.local>
+	Thu, 25 Mar 2010 21:41:53 +0100
+Received: by qyk8 with SMTP id 8so1083871qyk.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 25 Mar 2010 13:38:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:cc:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=GqT/7vm7G3F8lcOA8lUN6mhDwp8id7VbVEoy7JsuJFQ=;
+	b=v6XaEvrePYEmynJVk+O09Zb+cEvm6tVbAK7kXAZZzzIS+6EU2jeQH23/eu6i5rwO/t
+	GtoDe4YEYRQpSPb3l+y86hRSqaeTxvd2S2Gwm5mWGqNb0OmYw6gL72hqMuqoucUlleK9
+	eImZj1XgezVzsmhdvuItW2udY69J2coaAR7rg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=tw1okUZ+IrG7v+XVCVNIxXcuKP2MZooPvl5ZMHDqAnr/1OoWQrJtH6tIPyaMs5iRfD
+	Foo8O8mbzfaaLLomvfzj005ZcplPes5R3CEA17Vv0GvXbskdfsFjW5fpkLYXclUtcplY
+	Ec32zSnKBDgG55Hsgxxgq7tdSTx9e90igfLVg=
+Received: by 10.229.104.195 with SMTP id q3mr890878qco.56.1269549520510;
+	Thu, 25 Mar 2010 13:38:40 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 23sm93381qyk.15.2010.03.25.13.38.38
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 25 Mar 2010 13:38:39 -0700 (PDT)
+Date: Thu, 25 Mar 2010 13:39:00 -0700
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100325203900.GB17837@gmail.com>
 References: <1269537597-26456-1-git-send-email-ospite@studenti.unina.it>
-	<1269537597-26456-5-git-send-email-ospite@studenti.unina.it>
-	<20100325174240.GF11431@excalibur.local>
-	<20100325191311.7f113c74.ospite@studenti.unina.it>
-	<20100325183050.GH11431@excalibur.local>
-	<20100325200656.c892fb13.ospite@studenti.unina.it>
 MIME-Version: 1.0
-In-Reply-To: <20100325200656.c892fb13.ospite@studenti.unina.it>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
+In-Reply-To: <1269537597-26456-1-git-send-email-ospite@studenti.unina.it>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+X-SA-Exim-Connect-IP: 209.85.221.178
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: openezx-devel@lists.openezx.org,
-	Michael 'Mickey' Lauer <mickey@vanille-media.de>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 4/5] ezx: update ezx-gen-blob version
+	Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Subject: Re: [PATCH 0/5] Misc updates for EZX bits in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,44 +59,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Mar 2010 19:14:16 -0000
-X-Groupsio-MsgNum: 18130
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="3lcZGd9BuhuYXNfi"
-Content-Disposition: inline
-
---3lcZGd9BuhuYXNfi
+X-List-Received-Date: Thu, 25 Mar 2010 20:41:53 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-Hello.
+On (25/03/10 18:19), Antonio Ospite wrote:
+> Hi,
+> 
+> here are some updates for EZX bits in OE.
+> 
+> With these changes we have a working image to experiment with ts27010mux
+> driver and ezxd, no fso support yet. Tested on Motorola A780.
+> 
+> Note that although ezx-gen-blob builds fine now, it seems to have issues with
+> GCC 4.4: the binary size is about 300KiB instead of the expected 64KiB, if
+> anyone has a clue please let me know.
 
-On Thu, 2010-03-25 at 20:06, Antonio Ospite wrote:
->=20
-> Stefan are you also going to push these changes?
+I can help you here. If you can give me the two images with symbols and
+your linking script it uses. Secondly are you using same binutils/ld in
+both cases ?
 
-Yes. I want to give others a moment to comment before pushing this in. Will=
- do
-it on friday or saturday.
+-Khem
 
-Thanks for your work on this.
 
-regards
-Stefan Schmidt
-
---3lcZGd9BuhuYXNfi
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: http://www.datenfreihafen.org/contact.html
-
-iEYEARECAAYFAkurtUIACgkQbNSsvd31FmVzZwCfcOF6aLqyCalzsGfsHNX1meBg
-Of4An2V31f3s5339kigKRegmWPe6qcfg
-=yUVL
------END PGP SIGNATURE-----
-
---3lcZGd9BuhuYXNfi--
