@@ -1,40 +1,33 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from vms173001pub.verizon.net ([206.46.173.1])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Nur8j-0005Mi-VO
+	(envelope-from <denis@denix.org>) id 1NurQa-0006G0-8R
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 25 Mar 2010 18:46:45 +0100
-Received: from p5b036bbd.dip.t-dialin.net ([91.3.107.189] helo=excalibur)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1Nur5T-0000lA-2B by authid <stefan@sostec.de> with cram_md5;
-	Thu, 25 Mar 2010 18:43:21 +0100
-Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>)
-	id 1Nur5S-0004aw-Hc; Thu, 25 Mar 2010 18:43:18 +0100
-Date: Thu, 25 Mar 2010 18:43:18 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: Antonio Ospite <ospite@studenti.unina.it>
-Message-ID: <20100325174318.GG11431@excalibur.local>
-References: <1269537597-26456-1-git-send-email-ospite@studenti.unina.it>
-	<1269537597-26456-6-git-send-email-ospite@studenti.unina.it>
-MIME-Version: 1.0
-In-Reply-To: <1269537597-26456-6-git-send-email-ospite@studenti.unina.it>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+	Thu, 25 Mar 2010 19:05:09 +0100
+Received: from gandalf.denix.org ([unknown] [71.251.58.177])
+	by vms173001.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0KZU007WVNE3L6E2@vms173001.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	25 Mar 2010 13:01:21 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 9438B14AF60; Thu,
+	25 Mar 2010 14:01:15 -0400 (EDT)
+Date: Thu, 25 Mar 2010 14:01:15 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20100325180115.GD28005@denix.org>
+References: <48239d391003250816m3686a994h92fd5a115c3f47d4@mail.gmail.com>
+MIME-version: 1.0
+In-reply-to: <48239d391003250816m3686a994h92fd5a115c3f47d4@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.1
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openezx-devel@lists.openezx.org,
-	Michael 'Mickey' Lauer <mickey@vanille-media.de>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 5/5] ezx: update device_table-ezx.txt
+Subject: Re: [SDK] meta-toolchain.bb generates very interesting	environment-setup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,21 +41,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Mar 2010 17:46:45 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 25 Mar 2010 18:05:09 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Hello.
-
-On Thu, 2010-03-25 at 18:19, Antonio Ospite wrote:
-> Update mux nodes to be used with the ts27010mux driver.
-> Fix names for ttyIPC0 and video0 nodes.
+On Thu, Mar 25, 2010 at 06:16:49PM +0300, Sergey Lapin wrote:
+> $ cat /usr/local/angstrom/arm/environment-setup
+> export SDK_PATH=/usr/local/angstrom/arm
+> export TARGET_SYS=arm-angstrom-linux-gnueabi
+> export PATH=$SDK_PATH/bin:$PATH
+> export CPATH=$SDK_PATH/$TARGET_SYS/usr/include:$CPATH
+> export LIBTOOL_SYSROOT_PATH=$SDK_PATH/$TARGET_SYS
+> export PKG_CONFIG_SYSROOT_DIR=$SDK_PATH/$TARGET_SYS
+> export PKG_CONFIG_PATH=$SDK_PATH/$TARGET_SYS/usr/lib/pkgconfig
+> export CONFIG_SITE=$SDK_PATH/site-config
+> alias opkg='LD_LIBRARY_PATH=/lib /bin/opkg-cl -f //etc/opkg-sdk.conf -o '
+> alias opkg-target='LD_LIBRARY_PATH=/lib /bin/opkg-cl -f //etc/opkg.conf -o /'
 > 
-> Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+> A problem seems to be this code:
+> 
+> # Create environment setup script
+>         script=${SDK_OUTPUT}/${SDKPATH}/environment-setup
+>         touch $script
+>         echo 'export SDK_PATH=${SDKPATH}' >> $script
+>         echo 'export TARGET_SYS=${TARGET_SYS}' >> $script
+>         echo 'export PATH=$SDK_PATH/bin:$PATH' >> $script
+>         echo 'export CPATH=$SDK_PATH/$TARGET_SYS/usr/include:$CPATH' >> $script
+>         echo 'export LIBTOOL_SYSROOT_PATH=$SDK_PATH/$TARGET_SYS' >> $script
+>         echo 'export PKG_CONFIG_SYSROOT_DIR=$SDK_PATH/$TARGET_SYS' >> $script
+>         echo 'export
+> PKG_CONFIG_PATH=$SDK_PATH/$TARGET_SYS${libdir}/pkgconfig' >> $script
+>         echo 'export CONFIG_SITE=$SDK_PATH/site-config' >> $script
+>         echo "alias opkg='LD_LIBRARY_PATH=$SDK_PATH/lib
+> $SDK_PATH/bin/opkg-cl -f $SDK_PATH/${sysconfdir}/opkg-s
+> dk.conf -o $SDK_PATH'" >> $script
+>         echo "alias opkg-target='LD_LIBRARY_PATH=$SDK_PATH/lib
+> $SDK_PATH/bin/opkg-cl -f $SDK_PATH/$TARGET_SYS${
+> sysconfdir}/opkg.conf -o $SDK_PATH/$TARGET_SYS'" >> $script
+> 
+> 
+> it seems that $SDK_PATH in last two lines gets resolved instead of
+> being written literally. adding \ before $ in these lines seems to fix
+> this problem. Is it appropriate fix?
 
-Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
+Ah, interesting... It worked for me when the last two lines had double quotes 
+inside single quotes. But to match RP's styling, I had to revert that to 
+single quotes inside double quotes and it doesn't seem to work:
 
-regards
-Stefan Schmidt
+$ echo 'show "$SDK_PATH"'
+show "$SDK_PATH"
+
+$ echo "show '$SDK_PATH'"
+show ''
+
+I wonder if it would be Ok to revert back to the original quoting... Or is 
+escaping with \ a better fix?
+
+> diff --git a/recipes/meta/meta-toolchain.bb b/recipes/meta/meta-toolchain.bb
+> index 688995c..4f7ffda 100644
+> --- a/recipes/meta/meta-toolchain.bb
+> +++ b/recipes/meta/meta-toolchain.bb
+> @@ -145,8 +145,8 @@ do_populate_sdk() {
+>         echo 'export PKG_CONFIG_SYSROOT_DIR=$SDK_PATH/$TARGET_SYS' >> $script
+>         echo 'export
+> PKG_CONFIG_PATH=$SDK_PATH/$TARGET_SYS${libdir}/pkgconfig' >> $script
+>         echo 'export CONFIG_SITE=$SDK_PATH/site-config' >> $script
+> -       echo "alias opkg='LD_LIBRARY_PATH=$SDK_PATH/lib
+> $SDK_PATH/bin/opkg-cl -f $SDK_PATH/${sysconfdir}/opkg-sd
+> -       echo "alias opkg-target='LD_LIBRARY_PATH=$SDK_PATH/lib
+> $SDK_PATH/bin/opkg-cl -f $SDK_PATH/$TARGET_SYS${s
+> +       echo "alias opkg='LD_LIBRARY_PATH=\$SDK_PATH/lib
+> \$SDK_PATH/bin/opkg-cl -f \$SDK_PATH/${sysconfdir}/opkg
+> +       echo "alias opkg-target='LD_LIBRARY_PATH=\$SDK_PATH/lib
+> \$SDK_PATH/bin/opkg-cl -f \$SDK_PATH/$TARGET_SYS
+> 
+>         # Add version information
+>         versionfile=${SDK_OUTPUT}/${SDKPATH}/version
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
