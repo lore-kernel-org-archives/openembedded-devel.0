@@ -1,31 +1,49 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1Nux6w-0002LS-MH
+Received: from mail-px0-f188.google.com ([209.85.216.188])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1NuxQU-0003Xw-W6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Mar 2010 01:09:15 +0100
-Received: from [192.168.1.4] (62-47-228-162.adsl.highway.telekom.at
-	[62.47.228.162])
-	by drlauer-research.com (Postfix) with ESMTP id C3145584182
+	Fri, 26 Mar 2010 01:29:28 +0100
+Received: by pxi26 with SMTP id 26so3853093pxi.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Mar 2010 01:08:05 +0100 (CET)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Thu, 25 Mar 2010 17:26:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=TqQ3eHZQu+I3nmHwGeQKAeLrsCF/fd+S8oijjVb5gKY=;
+	b=V58E7Cj8mjINmPZU0lFSpyOkZ5eZ0FxlB4kNGQmWpMmOADOudqaNc0XCWCxqc/ct3h
+	LDL1RE6CenmZCnmVMgx7l2jNSxzvU4LrkmWo2I91V74O7odlMMuEvJBeClTHvNv10YSc
+	cKxOgY3fsM9pSjE6alk+ToFT7ZGr2xZmANH08=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=GnNAECb4FZiurgFzJ3XR+fvK/fQfhwNldaGb3z1wOC2yuENz77gPyB9rS4kiA1yJVi
+	btqxAC1JYNtmBjQLNzgH7izwCD/lUPbZz3mrxrs4bDPQG/oAf/GB1AUyeeFfUx7FbznH
+	vf10LaTbAe0XN4DP/7YpcCCK/KTgq39NNG+AI=
+Received: by 10.114.105.3 with SMTP id d3mr2932306wac.162.1269563175038;
+	Thu, 25 Mar 2010 17:26:15 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 22sm248215iwn.4.2010.03.25.17.26.14
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 25 Mar 2010 17:26:14 -0700 (PDT)
+Date: Thu, 25 Mar 2010 17:26:34 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1269555678-8427-1-git-send-email-ospite@studenti.unina.it>
-References: <1269555678-8427-1-git-send-email-ospite@studenti.unina.it>
-Organization: Vanille-Media
-Date: Fri, 26 Mar 2010 01:06:05 +0100
-Message-ID: <1269561965.3252.26.camel@opal>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+Message-ID: <20100326002634.GA18231@gmail.com>
+References: <1269557553-6295-1-git-send-email-ospite@studenti.unina.it>
+MIME-Version: 1.0
+In-Reply-To: <1269557553-6295-1-git-send-email-ospite@studenti.unina.it>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.216.188
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] task-fso-compliance: depend on fso-abyss
+Subject: Re: [PATCH] numptyphysics: update SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,39 +57,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Mar 2010 00:09:15 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 26 Mar 2010 00:29:28 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-> diff --git a/recipes/tasks/task-fso-compliance.bb b/recipes/tasks/task-fso-compliance.bb
-> index e1776a8..50230f0 100644
-> --- a/recipes/tasks/task-fso-compliance.bb
-> +++ b/recipes/tasks/task-fso-compliance.bb
-> @@ -2,7 +2,7 @@ DESCRIPTION = "The freesmartphone.org framework -- install this task to make you
->  SECTION = "fso/base"
->  LICENSE = "MIT"
->  PV = "1.0"
-> -PR = "r8"
-> +PR = "r9"
+On (25/03/10 23:52), Antonio Ospite wrote:
+> The old SRC_URI doesn't work anymore, use vcs.maemo.org instead of
+> garage.maemo.org as stated on https://garage.maemo.org/scm/?group_id=638
+> 
+> Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+> ---
+>  recipes/numptyphysics/numptyphysics_svn.bb |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes/numptyphysics/numptyphysics_svn.bb b/recipes/numptyphysics/numptyphysics_svn.bb
+> index dec9cf1..66bed53 100644
+> --- a/recipes/numptyphysics/numptyphysics_svn.bb
+> +++ b/recipes/numptyphysics/numptyphysics_svn.bb
+> @@ -7,13 +7,13 @@ HOMEPAGE = "http://numptyphysics.garage.maemo.org/"
+>  SECTION = "x11/games"
+>  SRCREV = "109"
+>  PV = "0.2+svnr${SRCPV}"
+> -PR = "r1"
+> +PR = "r2"
 >  
->  inherit task
+>  inherit autotools
 >  
-> @@ -12,6 +12,7 @@ RDEPENDS_${PN} = "\
->  #  fso-apmd \
->    fso-gpsd \
->  #  fso-monitord \
-> +  fso-abyss \
->    connman \
->    connman-scripts \
->  #  connman-plugin-bluetooth \
+>  SRC_URI = "\
+>  # Maemo garage is sadly only available with https. Can make you trouble while fetching without accepting the certificate.
+> -  svn://garage.maemo.org/svn/${PN};module=trunk;proto=https \
+> +  svn://vcs.maemo.org/svn/${PN};module=trunk;proto=https \
 
-That's wrong, fso-abyss is only used for some of the machines (i.e.
-Openmoko ones). Installing it unconditionally only blows up the images.
-We should rather find out why something depends on it when you build for
-an EZX machine.
+does this also need updating checksums ?
 
-:M:
-
-
+>    http://wwwpub.zih.tu-dresden.de/~mkluge/numptyphysics_setup.tgz \
+>    file://replay_off.patch;patch=1;pnum=0 \
+>    file://next.png \
+> -- 
+> 1.7.0.3
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
