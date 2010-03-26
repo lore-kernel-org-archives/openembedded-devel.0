@@ -1,23 +1,25 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1NvHa9-0001gW-3H
+	(envelope-from <stefan@datenfreihafen.org>) id 1NvHcW-0001oW-6e
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Mar 2010 23:00:45 +0100
+	Fri, 26 Mar 2010 23:03:12 +0100
 Received: from p5b036e7d.dip.t-dialin.net ([91.3.110.125] helo=excalibur)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1NvHX2-0001Wu-RM by authid <stefan@sostec.de> with cram_md5;
-	Fri, 26 Mar 2010 22:57:35 +0100
+	id 1NvHZM-0001ZR-Eh by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 26 Mar 2010 23:00:02 +0100
 Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>)
-	id 1NvHX1-0005ZC-Nb; Fri, 26 Mar 2010 22:57:31 +0100
-Date: Fri, 26 Mar 2010 22:57:31 +0100
+	(envelope-from <stefan@excalibur.local>) id 1NvHZL-0005ZY-DG
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Mar 2010 22:59:55 +0100
+Date: Fri, 26 Mar 2010 22:59:55 +0100
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100326215731.GE18337@excalibur.local>
-References: <n> <1266857650-5557-1-git-send-email-michael.lippautz@gmail.com>
+Message-ID: <20100326215955.GF18337@excalibur.local>
+References: <1252561144-5528-1-git-send-email-mike@compulab.co.il>
 MIME-Version: 1.0
-In-Reply-To: <1266857650-5557-1-git-send-email-michael.lippautz@gmail.com>
+In-Reply-To: <1252561144-5528-1-git-send-email-mike@compulab.co.il>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -30,8 +32,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Michael Lauer <mickey@vanille-media.de>
-Subject: Re: [PATCH] python-setuptools: Version bump to 0.6c11
+Subject: Re: [PATCH] omap3-sgx-modules: fix proc related build errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,82 +46,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Mar 2010 22:00:45 -0000
+X-List-Received-Date: Fri, 26 Mar 2010 22:03:12 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 Hello.
 
-Mickey, do you have a moment to review and comment on this python related patch?
+Koen, omap3-sgx-modules is your area of expertise. Can you comment on this?
 
 regards
 Stefan Schmidt
 
-On Mon, 2010-02-22 at 17:54, Michael Lippautz wrote:
-> * Adds python module 'pkg_resources'.
-> 
-> Signed-off-by: Michael Lippautz <michael.lippautz@gmail.com>
+On Thu, 2009-09-10 at 08:39, Mike Rapoport wrote:
+> Signed-off-by: Mike Rapoport <mike@compulab.co.il>
 > ---
->  .../python-setuptools/fix-log-usage-0.6c11.patch   |   18 ++++++++++++++++
->  recipes/python/python-setuptools_0.6c11.bb         |   22 ++++++++++++++++++++
->  2 files changed, 40 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/python/python-setuptools/fix-log-usage-0.6c11.patch
->  create mode 100644 recipes/python/python-setuptools_0.6c11.bb
+>  .../fix-proc-compile-errors.patch                  |   36 ++++++++++++++++++++
+>  .../omap3-sgx-modules_1.3.13.1607.bb               |    1 +
+>  2 files changed, 37 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/powervr-drivers/omap3-sgx-modules/fix-proc-compile-errors.patch
 > 
-> diff --git a/recipes/python/python-setuptools/fix-log-usage-0.6c11.patch b/recipes/python/python-setuptools/fix-log-usage-0.6c11.patch
+> diff --git a/recipes/powervr-drivers/omap3-sgx-modules/fix-proc-compile-errors.patch b/recipes/powervr-drivers/omap3-sgx-modules/fix-proc-compile-errors.patch
 > new file mode 100644
-> index 0000000..b860700
+> index 0000000..890dc67
 > --- /dev/null
-> +++ b/recipes/python/python-setuptools/fix-log-usage-0.6c11.patch
-> @@ -0,0 +1,18 @@
-> +--- a/setuptools/command/sdist.py	2010-02-22 14:57:56.000000000 +0100
-> ++++ b/setuptools/command/sdist.py	2010-02-22 14:57:31.000000000 +0100
-> +@@ -1,6 +1,5 @@
-> + from distutils.command.sdist import sdist as _sdist
-> + from distutils.util import convert_path
-> +-from distutils import log
-> + from glob import glob
-> + import os, re, sys, pkg_resources
+> +++ b/recipes/powervr-drivers/omap3-sgx-modules/fix-proc-compile-errors.patch
+> @@ -0,0 +1,36 @@
+> +From af0a5882ad56d484c94555940c7987ad1a50930f Mon Sep 17 00:00:00 2001
+> +From: Mike Rapoport <mike@compulab.co.il>
+> +Date: Wed, 9 Sep 2009 18:09:04 +0300
+> +Subject: [PATCH] Fix proc compile errors
+> +
+> +---
+> + services4/srvkm/env/linux/proc.c |    3 ---
+> + 1 files changed, 0 insertions(+), 3 deletions(-)
+> + mode change 100755 => 100644 services4/srvkm/env/linux/proc.c
+> +
+> +diff --git a/services4/srvkm/env/linux/proc.c b/services4/srvkm/env/linux/proc.c
+> +old mode 100755
+> +new mode 100644
+> +index 274c35f..8470f5a
+> +--- a/services4/srvkm/env/linux/proc.c
+> ++++ b/services4/srvkm/env/linux/proc.c
+> +@@ -134,7 +134,6 @@ int CreateProcEntry(const char * name, read_proc_t rhandler, write_proc_t whandl
 > + 
-> +@@ -94,7 +93,7 @@
-> +         try: svnver = int(data.splitlines()[0])
-> +         except: pass
-> +         if svnver<8:
-> +-            log.warn("unrecognized .svn/entries format in %s", dirname)
-> ++            print("unrecognized .svn/entries format in %s", dirname)
-> +             return           
-> +         for record in map(str.splitlines, data.split('\n\x0c\n')[1:]):
-> +             if not record or len(record)>=6 and record[5]=="delete":
-> diff --git a/recipes/python/python-setuptools_0.6c11.bb b/recipes/python/python-setuptools_0.6c11.bb
-> new file mode 100644
-> index 0000000..bccafa4
-> --- /dev/null
-> +++ b/recipes/python/python-setuptools_0.6c11.bb
-> @@ -0,0 +1,22 @@
-> +DESCRIPTION = "Download, build, install, upgrade, and uninstall Python packages"
-> +HOMEPAGE = "http://cheeseshop.python.org/pypi/setuptools"
-> +SECTION = "devel/python"
-> +PRIORITY = "optional"
-> +LICENSE = "MIT"
-> +DEPENDS_${PN}-native = "python-native"
-> +RDEPENDS_${PN} = "python-distutils python-compression"
-> +PR = "ml3"
+> +     if (file)
+> +     {
+> +-        file->owner = THIS_MODULE;
+> + 		file->read_proc = rhandler;
+> + 		file->write_proc = whandler;
+> + 		file->data = data;
+> +@@ -165,8 +164,6 @@ int CreateProcReadEntry(const char * name, pvr_read_proc_t handler)
+> + 
+> +     if (file)
+> +     {
+> +-        file->owner = THIS_MODULE;
+> +-
+> +         return 0;
+> +     }
+> + 
+> +-- 
+> +1.6.0.6
 > +
-> +SRC_URI = "\
-> +  http://cheeseshop.python.org/packages/source/s/setuptools/${SRCNAME}-${PV}.tar.gz;name=setuptools \
-> +  file://fix-log-usage-0.6c11.patch;patch=1 \
-> +"
-> +SRC_URI[setuptools.md5sum] = "7df2a529a074f613b509fb44feefe74e"
-> +SRC_URI[setuptools.sha256sum] = "630fea9b726320b73ee3ca6ff61732cb32675b0389be658080fe46383b87a1d3"
-> +
-> +SRCNAME = "setuptools"
-> +S = "${WORKDIR}/${SRCNAME}-${PV}"
-> +
-> +inherit distutils
-> +
-> +BBCLASSEXTEND = "native"
+> diff --git a/recipes/powervr-drivers/omap3-sgx-modules_1.3.13.1607.bb b/recipes/powervr-drivers/omap3-sgx-modules_1.3.13.1607.bb
+> index 8e4d2a2..527ef2c 100644
+> --- a/recipes/powervr-drivers/omap3-sgx-modules_1.3.13.1607.bb
+> +++ b/recipes/powervr-drivers/omap3-sgx-modules_1.3.13.1607.bb
+> @@ -7,6 +7,7 @@ SRC_URI = "file://omap3-sgx-modules-${PV}.tar.bz2 \
+>             file://0002-Compile-fixes-for-DSS2.patch;patch=1 \
+>             file://rotation-dss2.patch;patch=1 \
+>             file://build_es3.x_sgx.patch;patch=1 \
+> +	   file://fix-proc-compile-errors.patch;patch=1 \
+>  "
+>  
+>  PVRBUILD = "release"
 > -- 
-> 1.6.4.4
+> 1.6.0.6
 > 
 > 
 > _______________________________________________
