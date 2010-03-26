@@ -1,45 +1,31 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NuwGQ-0007WG-De
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=drlauer-research.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mickey@vanille-media.de>) id 1Nux6w-0002LS-MH
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Mar 2010 00:14:59 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2PNBlXj018675
+	Fri, 26 Mar 2010 01:09:15 +0100
+Received: from [192.168.1.4] (62-47-228-162.adsl.highway.telekom.at
+	[62.47.228.162])
+	by drlauer-research.com (Postfix) with ESMTP id C3145584182
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Mar 2010 23:11:47 GMT
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 18180-10 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Mar 2010 23:11:43 +0000 (GMT)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2PNBf4T018669
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 Mar 2010 23:11:42 GMT
-From: Richard Purdie <rpurdie@rpsys.net>
+	Fri, 26 Mar 2010 01:08:05 +0100 (CET)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1269456365.3545.9.camel@trini-m4400>
-References: <4B99791E.1020102@zenlinux.com> <4BA981A5.5030609@zenlinux.com>
-	<19c1b8a91003232245y3409bca3p4b74ab5562424b5c@mail.gmail.com>
-	<4BA9B440.2050608@zenlinux.com>  <1269426516.1681.35.camel@rex>
-	<1269444453.2395.5.camel@trini-m4400> <1269445040.1681.147.camel@rex>
-	<1269446279.3545.8.camel@trini-m4400> <1269453955.1681.165.camel@rex>
-	<1269456365.3545.9.camel@trini-m4400>
-Date: Thu, 25 Mar 2010 23:11:39 +0000
-Message-ID: <1269558699.1681.191.camel@rex>
+In-Reply-To: <1269555678-8427-1-git-send-email-ospite@studenti.unina.it>
+References: <1269555678-8427-1-git-send-email-ospite@studenti.unina.it>
+Organization: Vanille-Media
+Date: Fri, 26 Mar 2010 01:06:05 +0100
+Message-ID: <1269561965.3252.26.camel@opal>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: BBCLASSEXTEND sdk vs. nativesdk
+Subject: Re: [PATCH] task-fso-compliance: depend on fso-abyss
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,45 +39,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 Mar 2010 23:14:59 -0000
+X-List-Received-Date: Fri, 26 Mar 2010 00:09:15 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2010-03-24 at 11:46 -0700, Tom Rini wrote:
-> On Wed, 2010-03-24 at 18:05 +0000, Richard Purdie wrote:
-> > On Wed, 2010-03-24 at 08:57 -0700, Tom Rini wrote:
-> > > On Wed, 2010-03-24 at 15:37 +0000, Richard Purdie wrote:
-> > > > On Wed, 2010-03-24 at 08:27 -0700, Tom Rini wrote:
-> > > > > Or a really bad thing, yes.  I think nativesdk will help out a lot for
-> > > > > making canadian style builds cleaner.  But going so far as to say 'Oh,
-> > > > > lets just throw a libc into the SDK export' is going pretty far down a
-> > > > > questionable road.  I'm not so naive to think that there's not problems
-> > > > > with my next suggestion, but there's this thing called LSB for a reason.
-> > > > > If you want build once, run many distributions, you do that, not go and
-> > > > > own even more dependencies.
-> > > > 
-> > > > However, an LSB compliant SDK becomes a case of installing "LSB" libs
-> > > > into the right sysroot and then setting some
-> > > > ASSUME_PROVIDED/PREFERRED_PROVIDER lines.
-> > > > 
-> > > > So I think its good all around, we achieve independence of the SDK from
-> > > > the build system and make it depend on exactly what we do or don't want
-> > > > it to. Where is the bad bit (ignoring build time)? :)
-> > > 
-> > > How is this working on the runtime?  How relocatable is it?
-> > 
-> > Its no more or less reclocatable than the original was, that wasn't an
-> > objective. Some postprocessing with the same code we use in
-> > packaged-staging shouldn't see it being too bad though.
-> 
-> Today it's fully relocatable, if you use $ORIGIN.  Is that still true?
+> diff --git a/recipes/tasks/task-fso-compliance.bb b/recipes/tasks/task-fso-compliance.bb
+> index e1776a8..50230f0 100644
+> --- a/recipes/tasks/task-fso-compliance.bb
+> +++ b/recipes/tasks/task-fso-compliance.bb
+> @@ -2,7 +2,7 @@ DESCRIPTION = "The freesmartphone.org framework -- install this task to make you
+>  SECTION = "fso/base"
+>  LICENSE = "MIT"
+>  PV = "1.0"
+> -PR = "r8"
+> +PR = "r9"
+>  
+>  inherit task
+>  
+> @@ -12,6 +12,7 @@ RDEPENDS_${PN} = "\
+>  #  fso-apmd \
+>    fso-gpsd \
+>  #  fso-monitord \
+> +  fso-abyss \
+>    connman \
+>    connman-scripts \
+>  #  connman-plugin-bluetooth \
 
-Yes, this doesn't change. You just gain control over which libc it links
-against.
+That's wrong, fso-abyss is only used for some of the machines (i.e.
+Openmoko ones). Installing it unconditionally only blows up the images.
+We should rather find out why something depends on it when you build for
+an EZX machine.
 
-Cheers,
-
-Richard
+:M:
 
 
 
