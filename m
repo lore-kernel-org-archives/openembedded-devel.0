@@ -1,31 +1,41 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from smtp-out26.alice.it ([85.33.2.26])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Nv7aD-0004jF-0n for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Mar 2010 12:20:10 +0100
-Received: from g225083006.adsl.alicedsl.de ([92.225.83.6]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Nv7X9-0007Dh-W3 for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Mar 2010 11:17:00 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <ospite@studenti.unina.it>) id 1Nv88b-0006ac-45
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Mar 2010 12:55:42 +0100
+Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-out26.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 26 Mar 2010 12:52:29 +0100
+Received: from FBCMCL01B01.fbc.local ([192.168.69.82]) by FBCMMO02.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 26 Mar 2010 12:52:29 +0100
+Received: from jcn ([79.2.146.62]) by FBCMCL01B01.fbc.local with Microsoft
+	SMTPSVC(6.0.3790.3959); Fri, 26 Mar 2010 12:52:28 +0100
+Date: Fri, 26 Mar 2010 12:52:22 +0100
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1269419979-26397-1-git-send-email-sledz@dresearch.de>
-References: <1269419979-26397-1-git-send-email-sledz@dresearch.de>
-Date: Fri, 26 Mar 2010 12:16:58 +0100
-Message-ID: <1269602218.3889.54.camel@mattotaupa>
+Message-Id: <20100326125222.7c5a7e7f.ospite@studenti.unina.it>
+In-Reply-To: <201003220816.04657.holger+oe@freyther.de>
+References: <1268826851-28042-1-git-send-email-ospite@studenti.unina.it>
+	<1268944304-13459-1-git-send-email-ospite@studenti.unina.it>
+	<201003220816.04657.holger+oe@freyther.de>
+X-Mailer: Sylpheed 3.0.1 (GTK+ 2.18.9; x86_64-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-OriginalArrivalTime: 26 Mar 2010 11:52:28.0162 (UTC)
+	FILETIME=[CF04DE20:01CACCDA]
+X-SA-Exim-Connect-IP: 85.33.2.26
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] rsyslog: new recipe
+Subject: Re: [PATCH v2] gnutls: fix do_configure by depending on gtk-doc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,126 +49,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Mar 2010 11:20:10 -0000
-X-Groupsio-MsgNum: 18144
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-4vEPG8diE7UeZpqk1Dea"
+X-List-Received-Date: Fri, 26 Mar 2010 11:55:43 -0000
+X-Groupsio-MsgNum: 18145
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Fri__26_Mar_2010_12_52_22_+0100_Q1ep_9hAbQnj652z"
 
---=-4vEPG8diE7UeZpqk1Dea
-Content-Type: text/plain; charset="UTF-8"
+--Signature=_Fri__26_Mar_2010_12_52_22_+0100_Q1ep_9hAbQnj652z
+Content-Type: text/plain; charset=US-ASCII
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Am Mittwoch, den 24.03.2010, 09:39 +0100 schrieb Steffen Sledz:
-> a reliable and extended syslogd
+On Mon, 22 Mar 2010 08:16:04 +0100
+Holger Hans Peter Freyther <holger+oe@freyther.de> wrote:
+
+> On Thursday 18 March 2010 21:31:44 Antonio Ospite wrote:
 >=20
-> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
-> ---
->  recipes/rsyslog/files/initscript            |   90 +++++++++
->  recipes/rsyslog/files/rsyslog.conf          |   60 ++++++
->  recipes/rsyslog/rsyslog-5.4.0/atomics.patch |  277 +++++++++++++++++++++=
-++++++
->  recipes/rsyslog/rsyslog.inc                 |   34 ++++
->  recipes/rsyslog/rsyslog_5.4.0.bb            |    7 +
->  5 files changed, 468 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/rsyslog/files/initscript
->  create mode 100644 recipes/rsyslog/files/rsyslog.conf
->  create mode 100644 recipes/rsyslog/rsyslog-5.4.0/atomics.patch
->  create mode 100644 recipes/rsyslog/rsyslog.inc
->  create mode 100644 recipes/rsyslog/rsyslog_5.4.0.bb
+> > --- a/recipes/gnutls/gnutls.inc
+> > +++ b/recipes/gnutls/gnutls.inc
+> > @@ -1,13 +1,13 @@
+> >  DESCRIPTION =3D "GNU Transport Layer Security Library"
+> >  HOMEPAGE =3D "http://www.gnu.org/software/gnutls/"
+> > -DEPENDS =3D "zlib libgcrypt lzo guile-native gettext"
+> > +DEPENDS =3D "zlib libgcrypt lzo guile-native gettext gtk-doc"
+>=20
+> gtk-doc? Where is it installing its .m4 file?
+>
 
-[=E2=80=A6]
+I didn't investigate deeply the details, but with this patch
+gnutls_2.8.5.bb builds again, without this it doesn't and thus prevents
+even meta-toolchain to be built; this is reproducible when starting from
+a fresh setup (wiping out tmp/ I mean). The full log is here:
+http://tinderbox.openembedded.org/public/logs/task/5429228.txt
 
-> diff --git a/recipes/rsyslog/rsyslog.inc b/recipes/rsyslog/rsyslog.inc
-> new file mode 100644
-> index 0000000..5058176
-> --- /dev/null
-> +++ b/recipes/rsyslog/rsyslog.inc
-> @@ -0,0 +1,34 @@
-> +DESCRIPTION =3D "Rsyslog is an enhanced multi-threaded syslogd"
-> +DEPENDS =3D "zlib"
-> +HOMEPAGE =3D "http://www.rsyslog.com/"
-> +LICENSE =3D "GPLv3"
-> +INC_PR =3D "r1"
-
-=C2=BBr0=C2=AB should be enough.
-
-> +SRC_URI =3D "http://download.rsyslog.com/rsyslog/${PN}-${PV}.tar.gz;name=
-=3Darchive \
-
-SRC_URI =3D "http://download.rsyslog.com/rsyslog/${P}.tar.gz;name=3Darchive
-
-P =3D PN-PV
-
-I do not know if there is a recommendation if name should be `${PN}` or =C2=
-=BBarchive=C2=AB.
-
-> +          file://rsyslog.conf \
-> +          file://initscript"
-> +
-> +S =3D "${WORKDIR}/${PN}-${PV}"
-
-As far as I know, this is the default. It is generally useful if you do
-not get the source as archives but from repositories. In that case it
-should be adapted in the recipe.
-
-> +inherit autotools update-rc.d
-> +
-> +do_install_append() {
-> +        install -d ${D}/${sysconfdir}/${PN}
-> +        install ${WORKDIR}/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
-> +        install -d ${D}/${sysconfdir}/init.d
-> +        install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/r=
-syslog
-> +}
-> +
-> +pkg_postinst() {
-> +        update-rc.d -f syslog remove
-> +}
-> +
-> +pkg_postrm() {
-> +        update-rc.d syslog add 5
-> +}
-> +
-> +CONFFILES_${PN} =3D "${sysconfdir}/rsyslog.conf"
-> +
-> +INITSCRIPT_NAME =3D "rsyslog"
-> +#INITSCRIPT_PARAMS =3D "defaults 05"
-> +INITSCRIPT_PARAMS =3D "remove"
-> diff --git a/recipes/rsyslog/rsyslog_5.4.0.bb b/recipes/rsyslog/rsyslog_5=
-.4.0.bb
-> new file mode 100644
-> index 0000000..b22d4e4
-> --- /dev/null
-> +++ b/recipes/rsyslog/rsyslog_5.4.0.bb
-> @@ -0,0 +1,7 @@
-> +require rsyslog.inc
-> +PR =3D "${INC_PR}.0"
-> +
-> +SRC_URI +=3D " file://atomics.patch;patch=3D1"
-> +
-> +SRC_URI[archive.md5sum] =3D "291882229d50496f42bd63174076dd37"
-> +SRC_URI[archive.sha256sum] =3D "d9cd21d2fcd45fcae65eb0a51927c40315cca02a=
-fdc62478abd950febfcf7228"
-
-If you change the name, than adapt this too please to `${PN}.md5sum` and
-so on.
-
+If the cause is elsewhere and there could be a better fix I am open to
+suggestions and instructions about how to find out.
 
 Thanks,
+   Antonio
 
-Paul
+--=20
+Antonio Ospite
+http://ao2.it
 
---=-4vEPG8diE7UeZpqk1Dea
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
+PGP public key ID: 0x4553B001
+
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
+
+--Signature=_Fri__26_Mar_2010_12_52_22_+0100_Q1ep_9hAbQnj652z
+Content-Type: application/pgp-signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAkusl6oACgkQPX1aK2wOHVi6YACeJ3H2XbUJG1mJo4fFLi5r9CKR
-dZ4AniPLQ9svdI4Wsa6+Fuak0n+0UF5+
-=oT22
+iEYEARECAAYFAkusn/YACgkQ5xr2akVTsAFDBgCgrjAOU2wV3nGAJwVd0gzeLlOm
+YI0AnR2XhT5xwQt0fNB3xcJhscI4PabK
+=fk2r
 -----END PGP SIGNATURE-----
 
---=-4vEPG8diE7UeZpqk1Dea--
+--Signature=_Fri__26_Mar_2010_12_52_22_+0100_Q1ep_9hAbQnj652z--
