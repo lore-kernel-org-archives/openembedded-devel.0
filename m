@@ -1,32 +1,29 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Nv8Cx-0007KB-Kf
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 26 Mar 2010 13:00:17 +0100
-Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
-	[123.192.181.204])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 1864F1B10C79
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Mar 2010 12:00:56 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Nv8Sm-0001pj-Dl for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Mar 2010 13:16:34 +0100
+Received: from g225083006.adsl.alicedsl.de ([92.225.83.6]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Nv8Pj-0004Nl-7Z for openembedded-devel@lists.openembedded.org;
+	Fri, 26 Mar 2010 12:13:23 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 Mar 2010 12:56:48 +0100
-User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
-References: <1268826851-28042-1-git-send-email-ospite@studenti.unina.it>
-	<201003220816.04657.holger+oe@freyther.de>
-	<20100326125222.7c5a7e7f.ospite@studenti.unina.it>
-In-Reply-To: <20100326125222.7c5a7e7f.ospite@studenti.unina.it>
-MIME-Version: 1.0
-Message-Id: <201003261256.48913.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Date: Fri, 26 Mar 2010 13:13:21 +0100
+Message-ID: <1269605601.3889.58.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] gnutls: fix do_configure by depending on gtk-doc
+Subject: glib-2.0_2.23.6.bb: do_configure failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,23 +37,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 Mar 2010 12:00:17 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-15"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 26 Mar 2010 12:16:34 -0000
+X-Groupsio-MsgNum: 18147
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-ZHpTKmM7m3coTo9jedBr"
 
-On Friday 26 March 2010 12:52:22 you wrote:
+--=-ZHpTKmM7m3coTo9jedBr
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> > gtk-doc? Where is it installing its .m4 file?
-> 
-> I didn't investigate deeply the details, but with this patch
-> gnutls_2.8.5.bb builds again, without this it doesn't and thus prevents
-> even meta-toolchain to be built; this is reproducible when starting from
-> a fresh setup (wiping out tmp/ I mean). The full log is here:
-> http://tinderbox.openembedded.org/public/logs/task/5429228.txt
-
-Okay, then
-
-Acked-by: Holger Hans Peter Freyther <zecke@selfish.org>
+Dear OE folks,
 
 
+I get the following error.
+
+        $ more glib-2.0-2.23.6-r0/temp/log.do_configure.19885
+        [=E2=80=A6]
+        checking for inflate in -lz... no
+        configure: error: *** Working zlib library and headers not found **=
+*
+        FATAL: oe_runconf failed
+
+Do you get the failure? I am trying to fix it by adding `zlib` to
+`DEPENDS` and will report back if it worked.
+
+
+Thanks,
+
+Paul
+
+--=-ZHpTKmM7m3coTo9jedBr
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkuspOEACgkQPX1aK2wOHViWHQCfV4g3+9YX4jqNpWfRo7dmthPu
+tJ4An1fqP2qYNkSk3k6mVEajVgG4iIjA
+=Wd3M
+-----END PGP SIGNATURE-----
+
+--=-ZHpTKmM7m3coTo9jedBr--
