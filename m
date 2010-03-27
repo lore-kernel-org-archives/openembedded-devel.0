@@ -1,38 +1,43 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1NvYyF-00068u-0W
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Mar 2010 17:34:47 +0100
-Received: from p5b035482.dip.t-dialin.net ([91.3.84.130] helo=excalibur)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1NvYv8-0002os-Hw by authid <stefan@sostec.de> with cram_md5
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NvaHy-0005Xf-C3 for openembedded-devel@lists.openembedded.org;
+	Sat, 27 Mar 2010 18:59:15 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NvaEt-0006bY-A4 for openembedded-devel@lists.openembedded.org;
+	Sat, 27 Mar 2010 18:56:03 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Mar 2010 18:56:03 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Mar 2010 17:31:37 +0100
-Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>) id 1NvYv7-000513-AU
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Mar 2010 17:31:33 +0100
-Date: Sat, 27 Mar 2010 17:31:33 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Sat, 27 Mar 2010 18:56:03 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100327163133.GI21542@excalibur.local>
-References: <20100310225420.19981.qmail@mx1.pimp.lart.info>
-MIME-Version: 1.0
-In-Reply-To: <20100310225420.19981.qmail@mx1.pimp.lart.info>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 27 Mar 2010 18:55:51 +0100
+Message-ID: <holgr8$8l9$1@dough.gmane.org>
+References: <FA726C33-C7BC-48C6-8507-475E87359AF5@dominion.thruhere.net>
+	<20100327144204.GJ3458@jama>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
+In-Reply-To: <20100327144204.GJ3458@jama>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] putty: Update ancient recipe to use recent gtk2-based svn
+Subject: Re: QT4 and cmake patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,39 +51,153 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Mar 2010 16:34:47 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 27 Mar 2010 17:59:15 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Sun, 2010-03-07 at 19:06, Bernd Wachter wrote:
-> ---
->  recipes/putty/putty/configure.patch |   11 ++++++++
->  recipes/putty/putty/lib.pro         |   43 ---------------------------------
->  recipes/putty/putty/plink.pro       |   10 -------
->  recipes/putty/putty/pscp.pro        |   10 -------
->  recipes/putty/putty/psftp.pro       |   10 -------
->  recipes/putty/putty_svn.bb          |   45 +++++++++-------------------------
->  6 files changed, 23 insertions(+), 106 deletions(-)
->  create mode 100644 recipes/putty/putty/configure.patch
->  delete mode 100644 recipes/putty/putty/lib.pro
->  delete mode 100644 recipes/putty/putty/plink.pro
->  delete mode 100644 recipes/putty/putty/pscp.pro
->  delete mode 100644 recipes/putty/putty/psftp.pro
+On 27-03-10 15:42, Martin Jansa wrote:
+> On Sat, Mar 27, 2010 at 12:32:15PM +0100, Koen Kooi wrote:
+>> I'm currently fixing outstanding bugs with our qt4 recipes so I can use them in and hostside as well as target side sdk and cmake support  would be helpfull :)
+> 
+> Have you seen this error? 
+> 
+> I get this with bitbake master and 1.8 too. 
 
-I was looking into applying this patch, but was biten by this requirement:
+Could you try changing
 
-> --- a/recipes/putty/putty_svn.bb
-> +++ b/recipes/putty/putty_svn.bb
-> @@ -1,44 +1,23 @@
-> +# requires halibut to be installed on the host system
+# QT abuses $includedir to point to its headers, which breaks pkgconfig
+sysroot, so manually fix it up here:
 
-We don't like to depend on packages installed on the host system if we can avoid
-it. Could you provide a recipe for halibut-native so it can all be build within
-OE?
+to
 
-regards
-Stefan Schmidt
+# QT abuses includedir to point to its headers, which breaks pkgconfig
+sysroot, so manually fix it up here:
+
+regards,
+
+Koen
+
+
+> 
+> Reverting 971efeefff1520607b704cdded86deed43c459fb makes it building fine.
+> 
+> NOTE: Running task 7194 of 14520 (ID: 8380, /home/shr/shr-unstable/openembedded/recipes/qt4/qt4-x11-free_4.6.2.bb, do_package)
+> NOTE: The path does not exist:/home/shr/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/qt4-x11-free-4.6.2-r17.2/image/usr/lib/qt4/plugins/accessible/
+> NOTE: The path does not exist:/home/shr/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/qt4-x11-free-4.6.2-r17.2/image/usr/lib/qt4/plugins/decorations/
+> NOTE: The path does not exist:/home/shr/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/qt4-x11-free-4.6.2-r17.2/image/usr/lib/qt4/plugins/gfxdrivers/
+> NOTE: The path does not exist:/home/shr/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/qt4-x11-free-4.6.2-r17.2/image/usr/lib/qt4/plugins/mousedrivers/
+> NOTE: The path does not exist:/home/shr/shr-unstable/tmp/work/armv4t-oe-linux-gnueabi/qt4-x11-free-4.6.2-r17.2/image/usr/lib/qt4/plugins/styles/
+> NOTE: the following files were installed but not shipped in any package:
+> NOTE:   /usr/bin/.debug/uic
+> NOTE:   /usr/bin/.debug/rcc        
+> NOTE:   /usr/bin/.debug/uic3
+> NOTE:   /usr/bin/.debug/qttracereplay
+> NOTE:   /usr/bin/.debug/qdoc3
+> NOTE:   /usr/bin/.debug/moc
+> NOTE: <type 'exceptions.Exception'>:variable includedir references itself! while evaluating:
+> ${includedir}
+> NOTE: <type 'exceptions.Exception'>:variable includedir references itself! while evaluating:
+> -I${includedir}/qt4/Qt3Support -DQT_SHARED -I${includedir}/qt4 -DQT3_SUPPORT -I${includedir}
+> ERROR: Error in executing: /home/shr/shr-unstable/openembedded/recipes/qt4/qt4-x11-free_4.6.2.bb
+> ERROR: Exception:<type 'exceptions.Exception'> Message:variable includedir references itself!
+> ERROR: Printing the environment of the function
+> ERROR:  0055:                   os.remove(pkgs_file)
+> ERROR:  0056:           if pkgconfig_provided[pkg] != []:
+> ERROR:  0057:                   f = open(pkgs_file, 'w')
+> ERROR:  0058:                   for p in pkgconfig_provided[pkg]:
+> ERROR:  0059:                           f.write('%s\n' % p)
+> ERROR:  0060:                   f.close()
+> ERROR:  0061:                   package_stagefile(pkgs_file, d)
+> ERROR:  0062:
+> ERROR:  0063:   for dir in [shlibs_dir]:
+> ERROR: Error in executing: /home/shr/shr-unstable/openembedded/recipes/qt4/qt4-x11-free_4.6.2.bb
+> ERROR: Exception:<type 'exceptions.Exception'> Message:variable includedir references itself!
+> ERROR: Printing the environment of the function
+> ERROR: Error in executing: /home/shr/shr-unstable/openembedded/recipes/qt4/qt4-x11-free_4.6.2.bb
+> ERROR: Exception:<type 'exceptions.Exception'> Message:variable includedir references itself!
+> ERROR: Printing the environment of the function
+> ERROR: Error in executing: /home/shr/shr-unstable/openembedded/recipes/qt4/qt4-x11-free_4.6.2.bb
+> ERROR: Exception:<type 'exceptions.Exception'> Message:variable includedir references itself!
+> ERROR: Printing the environment of the function
+> ERROR: Build of /home/shr/shr-unstable/openembedded/recipes/qt4/qt4-x11-free_4.6.2.bb do_package failed
+> Traceback (most recent call last):
+>   File "/home/shr/shr-unstable/bitbake/bin/bitbake", line 143, in <module>
+>     main()
+>   File "/home/shr/shr-unstable/bitbake/bin/bitbake", line 140, in main
+>     cooker.cook()
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/cooker.py", line 640, in cook
+>     return self.buildTargets(pkgs_to_build)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/cooker.py", line 547, in buildTargets
+>     failures = rq.execute_runqueue()
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/runqueue.py", line 841, in execute_runqueue
+>     self.execute_runqueue_internal()
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/runqueue.py", line 950, in execute_runqueue_internal
+>     self.cooker.tryBuild(fn)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/cooker.py", line 136, in tryBuild
+>     return self.tryBuildPackage(fn, item, self.configuration.cmd, the_data)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/cooker.py", line 110, in tryBuildPackage
+>     bb.build.exec_task('do_%s' % task, the_data)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/build.py", line 283, in exec_task
+>     exec_func(task, localdata)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/build.py", line 120, in exec_func
+>     exec_func_python(func, d)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/build.py", line 141, in exec_func_python
+>     utils.better_exec(comp, g, tmp, bbfile)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/utils.py", line 185, in better_exec
+>     exec code in context
+>   File "do_package", line 4, in <module>
+>   File "do_package", line 2, in do_package
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/build.py", line 120, in exec_func
+>     exec_func_python(func, d)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/build.py", line 141, in exec_func_python
+>     utils.better_exec(comp, g, tmp, bbfile)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/utils.py", line 185, in better_exec
+>     exec code in context
+>   File "package_ipk_do_package", line 4, in <module>
+>   File "package_ipk_do_package", line 2, in package_ipk_do_package
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/build.py", line 120, in exec_func
+>     exec_func_python(func, d)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/build.py", line 141, in exec_func_python
+>     utils.better_exec(comp, g, tmp, bbfile)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/utils.py", line 185, in better_exec
+>     exec code in context
+>   File "package_do_package", line 21, in <module>
+>   File "package_do_package", line 18, in package_do_package
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/build.py", line 120, in exec_func
+>     exec_func_python(func, d)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/build.py", line 141, in exec_func_python
+>     utils.better_exec(comp, g, tmp, bbfile)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/utils.py", line 185, in better_exec
+>     exec code in context
+>   File "package_do_pkgconfig", line 101, in <module>
+>   File "package_do_pkgconfig", line 44, in package_do_pkgconfig
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/data.py", line 279, in expand
+>     return d.expand(s, varname)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/data_smart.py", line 83, in expand
+>     s = __expand_var_regexp__.sub(var_sub, s)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/data_smart.py", line 60, in var_sub
+>     var = self.getVar(key, 1)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/data_smart.py", line 166, in getVar
+>     return self.expand(value,var)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/data_smart.py", line 83, in expand
+>     s = __expand_var_regexp__.sub(var_sub, s)
+>   File "/home/shr/shr-unstable/bitbake/lib/bb/data_smart.py", line 59, in var_sub
+>     raise Exception("variable %s references itself!" % varname)
+> Exception: variable includedir references itself!
+> 
+> Regards,
+> 
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLrkanMkyGM64RGpERAljXAJ4kE2qgvfgWKWQZV63GZHiUoD0bzwCguyHf
+s4CjUDSQDvMCey8KFK/php0=
+=Kc5g
+-----END PGP SIGNATURE-----
+
 
 
