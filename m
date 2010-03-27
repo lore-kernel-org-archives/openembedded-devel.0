@@ -1,39 +1,39 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1NvRqw-0004Us-7f
+	(envelope-from <koansoftware@gmail.com>) id 1NvSES-0000rA-BT
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Mar 2010 09:58:47 +0100
-Received: from p5b036e7d.dip.t-dialin.net ([91.3.110.125] helo=excalibur)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1NvRnp-0008TC-Vw by authid <stefan@sostec.de> with cram_md5
+	Sat, 27 Mar 2010 10:23:04 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 05FE521A90
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Mar 2010 09:55:36 +0100
-Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>) id 1NvRnp-0005sZ-KQ
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Mar 2010 09:55:33 +0100
-Date: Sat, 27 Mar 2010 09:55:33 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100327085533.GB21542@excalibur.local>
-References: <20100326215357.GD18337@excalibur.local>
-	<hokggp$6i8$1@dough.gmane.org>
+	Sat, 27 Mar 2010 09:19:30 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id l+E2XBGVCFMz
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Mar 2010 09:19:25 +0000 (UTC)
+Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
+	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTPSA id 61E0F1BB6C
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Mar 2010 09:19:25 +0000 (UTC)
+Message-ID: <4BADCDB7.4050807@gmail.com>
+Date: Sat, 27 Mar 2010 10:19:51 +0100
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: KOAN sas - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
 MIME-Version: 1.0
-In-Reply-To: <hokggp$6i8$1@dough.gmane.org>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+To: openembedded-devel@lists.openembedded.org
+References: <1269615592.2305.12.camel@gnutoo-desktop>
+In-Reply-To: <1269615592.2305.12.camel@gnutoo-desktop>
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_00,SPF_NEUTRAL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Patchwork weekend this weekend?
+Subject: Re: openembedded's Wiki license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,35 +47,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Mar 2010 08:58:47 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 27 Mar 2010 09:23:05 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hello.
+GNUtoo ha scritto, Il 26/03/2010 15:59:
+> Hi,
+> I noticed that buglabs wiki had no license,
+> Then buglabs people fixed it(adding a license to it),but they noticed
+> that openembedded's wiki was in the same situation.
+>=20
+> Why do we need a license?
+> Simply because by default copyright law don't allow modification or
+> copying of a work.So if some people modify the wiki,they may be
+> infringing the copyright of the previous author.
+>=20
+> Only the previous author can exercise his right(only the copyright owne=
+r
+> can sue someone)
+>=20
+> That could be a problem,and it would be safer to add a license for
+> future contribution,to prevent occurrences of such issues
+>=20
+> Note that it would be difficult to ask permission to all the
+> contributors of the wiki for changing the copyright of their work.
+>=20
+> I'm open to every free license for my small contributions(from
+> non-copyleft licenses to copyleft ones)
+>=20
+> Denis.
 
-On Sat, 2010-03-27 at 09:44, Koen Kooi wrote:
-> On 26-03-10 22:53, Stefan Schmidt wrote:
-> > 
-> > While zecke did a great job some time ago to flush our patchwork queue and we
-> > are getting better in reviewing and applying patches in a timely manner we still
-> > have some patches sitting in patchwork.
-> > 
-> > Especially the older one bother me. Today I started to go through some of the
-> > patches and applied them or asked for comments. I hope to have 1-2 hours on
-> > saturday and sunday as well to do the same.
-> > 
-> > My personal goal would be to get us down to one page and maybe some of the older
-> > patches apllied or removed if outdated. Perhaps some of you have a spare hour
-> > to join. :)
-> 
-> I was able to push 5 patches in the time needed to eat a bowl of muesli,
-> so if everyone chips in we should be able to clear the patchwork q :)
+Good point to raise this issue, thanks.
 
-Great. Thanks for this. During my breakfast I was able to clean up the list from
-some superseded and already applied patches. I will be back in  the evening to
-pick some more patches, review, test and push them.
+I vote for a license Attribution-ShareAlike 3.0 BY-SA
+http://creativecommons.org/licenses/by-sa/3.0/
 
-regards
-Stefan Schmidt
+
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
 
 
