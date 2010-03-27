@@ -1,27 +1,25 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1NvUnf-000654-7Y
+	(envelope-from <stefan@datenfreihafen.org>) id 1NvUpX-0006b7-Re
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Mar 2010 13:07:36 +0100
+	Sat, 27 Mar 2010 13:09:48 +0100
 Received: from p5b035482.dip.t-dialin.net ([91.3.84.130] helo=excalibur)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1NvUkY-0004bc-UX by authid <stefan@sostec.de> with cram_md5
+	id 1NvUmR-0004hX-9M by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Mar 2010 13:04:25 +0100
+	Sat, 27 Mar 2010 13:06:21 +0100
 Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>) id 1NvUkY-0000IR-9R
+	(envelope-from <stefan@excalibur.local>) id 1NvUmQ-0000IZ-Jy
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Mar 2010 13:04:22 +0100
-Date: Sat, 27 Mar 2010 13:04:22 +0100
+	Sat, 27 Mar 2010 13:06:18 +0100
+Date: Sat, 27 Mar 2010 13:06:18 +0100
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100327120422.GE21542@excalibur.local>
-References: <4AF1DD1A.80005@cam.ac.uk>
-	<200911042110.58315.marcin@juszkiewicz.com.pl>
-	<4AF2C807.9070600@cam.ac.uk> <4AF2CF3B.2060205@cam.ac.uk>
+Message-ID: <20100327120618.GF21542@excalibur.local>
+References: <n> <1266857650-5557-1-git-send-email-michael.lippautz@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <4AF2CF3B.2060205@cam.ac.uk>
+In-Reply-To: <1266857650-5557-1-git-send-email-michael.lippautz@gmail.com>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -34,7 +32,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] IMote2 machine config
+Subject: Re: [PATCH] python-setuptools: Version bump to 0.6c11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,24 +46,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Mar 2010 12:07:36 -0000
+X-List-Received-Date: Sat, 27 Mar 2010 12:09:50 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 Hello.
 
-On Thu, 2009-11-05 at 13:12, Jonathan Cameron wrote:
-> 
-> Signed-off-by: Jonathan Cameron <jic23@cam.ac.uk>
-> ---
-> Only change is to provide some info about the board.
+On Mon, 2010-02-22 at 17:54, Michael Lippautz wrote:
+> * Adds python module 'pkg_resources'.
 
-As you know I'm also working on the iMote2 platform now. I pushed in a machine
-file some weeks ago and totally missed this patchset. Sorry.
+I was going to apply this, but it fails during patching:
 
-I'll go through the patches the next days and merge things together so we have
-good support in OE for the iMote2. If you have any outstanding or refreshed
-patches please send them in. Sorry again for not having seen this earlier.
+NOTE: Running task 725 of 737 (ID: 1,
+/home/stefan/Projekte/OpenEmbedded/build/openmoko/openembedded/recipes/python/python-setuptools_0.6c11.bb,
+do_patch)
+NOTE: Applying patch 'fix-log-usage-0.6c11.patch'
+(openembedded/recipes/python/python-setuptools/fix-log-usage-0.6c11.patch)
+ERROR: Error in executing:
+/home/stefan/Projekte/OpenEmbedded/build/openmoko/openembedded/recipes/python/python-setuptools_0.6c11.bb
+ERROR: Exception:<class 'CmdError'> Message:Command Error: exit status: 1
+Output:
+Applying patch fix-log-usage-0.6c11.patch
+patching file setuptools/command/sdist.py
+Hunk #2 FAILED at 93.
+1 out of 2 hunks FAILED -- rejects in file setuptools/command/sdist.py
+Patch fix-log-usage-0.6c11.patch does not apply (enforce with -f)
+ERROR: Printing the environment of the function
+ERROR: Error in executing:
+/home/stefan/Projekte/OpenEmbedded/build/openmoko/openembedded/recipes/python/python-setuptools_0.6c11.bb
+ERROR: Exception:<class 'CmdError'> Message:Command Error: exit status: 1
+Output:
+Applying patch fix-log-usage-0.6c11.patch
+patching file setuptools/command/sdist.py
+Hunk #2 FAILED at 93.
+1 out of 2 hunks FAILED -- rejects in file setuptools/command/sdist.py
+Patch fix-log-usage-0.6c11.patch does not apply (enforce with -f)
+ERROR: Printing the environment of the function
+ERROR: Error in executing:
+/home/stefan/Projekte/OpenEmbedded/build/openmoko/openembedded/recipes/python/python-setuptools_0.6c11.bb
+ERROR: Exception:<class 'CmdError'> Message:Command Error: exit status: 1
+Output:
+Applying patch fix-log-usage-0.6c11.patch
+patching file setuptools/command/sdist.py
+Hunk #2 FAILED at 93.
+1 out of 2 hunks FAILED -- rejects in file setuptools/command/sdist.py
+Patch fix-log-usage-0.6c11.patch does not apply (enforce with -f)
+ERROR: Printing the environment of the function
+ERROR: Build of
+/home/stefan/Projekte/OpenEmbedded/build/openmoko/openembedded/recipes/python/python-setuptools_0.6c11.bb
+do_patch failed
+
+Would be great if you could fix this and resend. Thanks.
 
 regards
 Stefan Schmidt
