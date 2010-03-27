@@ -1,40 +1,41 @@
-Received: from smtp-out30.alice.it ([85.33.2.30])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1NvarD-0000tA-4m
+	(envelope-from <Tom_Rini@mentor.com>) id 1NvbBP-0006QW-Gt
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Mar 2010 19:35:39 +0100
-Received: from FBCMMO04.fbc.local ([192.168.184.135]) by smtp-out30.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 27 Mar 2010 19:32:26 +0100
-Received: from FBCMCL01B01.fbc.local ([192.168.69.82]) by FBCMMO04.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 27 Mar 2010 19:31:52 +0100
-Received: from [192.168.1.116] ([79.21.202.115]) by FBCMCL01B01.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Sat, 27 Mar 2010 19:31:51 +0100
-From: GNUtoo <GNUtoo@no-log.org>
+	Sat, 27 Mar 2010 19:56:33 +0100
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1Nvb8H-0004dx-Ti from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 27 Mar 2010 11:53:17 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Sat, 27 Mar 2010 11:53:17 -0700
+Received: from 172.30.80.117 ([172.30.80.117]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Sat, 27 Mar 2010 18:53:16 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	27 Mar 2010 11:53:13 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ac9c93b11003250045t34d59be1v5f64165f0066c7b7@mail.gmail.com>
-References: <1269437224.1681.134.camel@rex>
-	<ac9c93b11003240815o796152a7y50601b03e91be40@mail.gmail.com>
-	<b6ebd0a51003240851i3f91860ia1100c4677569cf6@mail.gmail.com>
-	<ac9c93b11003241317y2f6a6bbbs78936ee603d8ce3b@mail.gmail.com>
-	<1269467167.1681.169.camel@rex>
-	<ac9c93b11003250045t34d59be1v5f64165f0066c7b7@mail.gmail.com>
-Date: Sat, 27 Mar 2010 19:31:49 +0100
-Message-ID: <1269714709.2382.6.camel@gnutoo-desktop>
+In-Reply-To: <1269615592.2305.12.camel@gnutoo-desktop>
+References: <1269615592.2305.12.camel@gnutoo-desktop>
+Organization: Mentor Graphics Corporation
+Date: Sat, 27 Mar 2010 11:53:13 -0700
+Message-ID: <1269715993.23548.26.camel@trini-m4400>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 27 Mar 2010 18:31:52.0018 (UTC)
-	FILETIME=[C500DB20:01CACDDB]
-X-SA-Exim-Connect-IP: 85.33.2.30
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+X-OriginalArrivalTime: 27 Mar 2010 18:53:17.0710 (UTC)
+	FILETIME=[C355E2E0:01CACDDE]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Reproducible builds (Was Re: Checksums in Bitbake)
+Subject: Re: openembedded's Wiki license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,34 +49,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Mar 2010 18:35:39 -0000
+X-List-Received-Date: Sat, 27 Mar 2010 18:56:33 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2010-03-25 at 08:45 +0100, Frans Meulenbroeks wrote:
-> I've seen too often (also outside OE) that two engineers take the same
-> source yet still get different results, and that bugs at a customer
-> site cannot be reproduced in the lab (and yes, I do know there are
-> other ways to tackle this problem) 
-Also:
-bitbake optionaldep
-bitbake package
-And:
-bitbake package
+On Fri, 2010-03-26 at 15:59 +0100, GNUtoo wrote:
+> Hi,
+> I noticed that buglabs wiki had no license,
+> Then buglabs people fixed it(adding a license to it),but they noticed
+> that openembedded's wiki was in the same situation.
+>=20
+> Why do we need a license?
+> Simply because by default copyright law don't allow modification or
+> copying of a work.So if some people modify the wiki,they may be
+> infringing the copyright of the previous author.
+>=20
+> Only the previous author can exercise his right(only the copyright owner
+> can sue someone)
+>=20
+> That could be a problem,and it would be safer to add a license for
+> future contribution,to prevent occurrences of such issues
+>=20
+> Note that it would be difficult to ask permission to all the
+> contributors of the wiki for changing the copyright of their work.
+>=20
+> I'm open to every free license for my small contributions(from
+> non-copyleft licenses to copyleft ones)
 
-could result in different binaries/packages due to configure picking
-optionaldep in the first case and not in the second one.
+I would vote for the same one that the user manual has (Creative Commons
++ Attribution, iirc).
 
-Maybe we should start hardcoding --without-optionaldep for all optional
-dependencies that are not in DEPENDS?
-
-OR...maybe packaged-staging could save us from that issue?
-
-( http://marcin.juszkiewicz.com.pl/2008/07/01/packaged-staging-and-what-it-gives/ )
-
-Denis.
-
-
-
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
