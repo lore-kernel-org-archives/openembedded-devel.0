@@ -1,34 +1,41 @@
-Received: from mail-ew0-f218.google.com ([209.85.219.218])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen@dominion.thruhere.net>) id 1NvUIe-0001u6-Gg
+	(envelope-from <stefan@datenfreihafen.org>) id 1NvUef-0005RV-Vt
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Mar 2010 12:35:49 +0100
-Received: by ewy10 with SMTP id 10so128579ewy.12
+	Sat, 27 Mar 2010 12:58:19 +0100
+Received: from p5b035482.dip.t-dialin.net ([91.3.84.130] helo=excalibur)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1NvUbZ-0004LK-Iq by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Mar 2010 04:32:18 -0700 (PDT)
-Received: by 10.213.61.139 with SMTP id t11mr1237187ebh.42.1269689538115;
-	Sat, 27 Mar 2010 04:32:18 -0700 (PDT)
-Received: from [172.20.1.5] (s55917625.adsl.wanadoo.nl [85.145.118.37])
-	by mx.google.com with ESMTPS id 14sm1181232ewy.6.2010.03.27.04.32.17
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 27 Mar 2010 04:32:17 -0700 (PDT)
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Sat, 27 Mar 2010 12:32:15 +0100
-Message-Id: <FA726C33-C7BC-48C6-8507-475E87359AF5@dominion.thruhere.net>
-To: matthew@4d-electronics.co.nz, valentin.longchamp@epfl.ch,
-	Holger Freyther <zecke@selfish.org>
-Mime-Version: 1.0 (Apple Message framework v1077)
-X-Mailer: Apple Mail (2.1077)
-X-SA-Exim-Connect-IP: 209.85.219.218
-X-SA-Exim-Mail-From: koen@dominion.thruhere.net
+	Sat, 27 Mar 2010 12:55:08 +0100
+Received: from stefan by excalibur with local (Exim 4.71)
+	(envelope-from <stefan@excalibur.local>) id 1NvUbY-0000B3-E3
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 27 Mar 2010 12:55:04 +0100
+Date: Sat, 27 Mar 2010 12:55:04 +0100
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100327115504.GC21542@excalibur.local>
+References: <1268826851-28042-1-git-send-email-ospite@studenti.unina.it>
+	<201003220816.04657.holger+oe@freyther.de>
+	<20100326125222.7c5a7e7f.ospite@studenti.unina.it>
+	<201003261256.48913.holger+oe@freyther.de>
+MIME-Version: 1.0
+In-Reply-To: <201003261256.48913.holger+oe@freyther.de>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: QT4 and cmake patches
+Subject: Re: [PATCH v2] gnutls: fix do_configure by depending on gtk-doc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,25 +49,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Mar 2010 11:35:57 -0000
+X-List-Received-Date: Sat, 27 Mar 2010 11:58:19 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hi,
+Hello.
 
-While going throught patchwork I noticed a lot of outstanding patches =
-from Matthew where Holger and Valentin commented on. The patches were =
-sadly linewrapped, so I couldn't test them.
+On Fri, 2010-03-26 at 12:56, Holger Hans Peter Freyther wrote:
+> On Friday 26 March 2010 12:52:22 you wrote:
+> 
+> > > gtk-doc? Where is it installing its .m4 file?
+> > 
+> > I didn't investigate deeply the details, but with this patch
+> > gnutls_2.8.5.bb builds again, without this it doesn't and thus prevents
+> > even meta-toolchain to be built; this is reproducible when starting from
+> > a fresh setup (wiping out tmp/ I mean). The full log is here:
+> > http://tinderbox.openembedded.org/public/logs/task/5429228.txt
+> 
+> Okay, then
+> 
+> Acked-by: Holger Hans Peter Freyther <zecke@selfish.org>
 
-I'm currently fixing outstanding bugs with our qt4 recipes so I can use =
-them in and hostside as well as target side sdk and cmake support  would =
-be helpfull :)
+I could reproduce the problem and the patch fixed it. Applied and pushed.
 
-Matthew, could you please resend all your outstanding patches (hopefully =
-with the comments addressed)?
-
-regards,
-
-Koen=
+regards
+Stefan Schmidt
 
 
