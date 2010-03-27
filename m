@@ -1,44 +1,35 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from smtp-out26.alice.it ([85.33.2.26])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1NvJZZ-0003ew-1q
+	(envelope-from <andrea.adami@gmail.com>) id 1NvJzo-00043B-2z
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Mar 2010 01:08:17 +0100
-Received: by pvg13 with SMTP id 13so1407780pvg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 Mar 2010 17:05:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:received:message-id:subject:from:to:content-type;
-	bh=eZ28XS1uOQHhnFpiUoMer2q/nGMB6BSH5zRGdqm8VFI=;
-	b=B0cAoI2C9ThmXuEZerokQcia6pP4hA/exy66liHiitcYBauIEUjAOU//zYIyorMVyO
-	nX3o+w72AcuGCHuIDhBB7Dq2nmW65wSKLFmdNhskGeOdJJsqZyZIENQXU4zf34ExfQwc
-	v2E1NUSJuXg1613r9BBL9KIZEErDGl+FN8J5s=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Fhs1daaOPclHhMWzaBUYMA84IWnIzUVz+AiC3NfgeyWDgnBJEUw+vR/Urj8t2HZJZf
-	+3tcSKW6J5m78qChQtGZqBbqyXNnLqppoVNVslvFOCW6MAaP7RHi1c+pWvqagahaJ9Io
-	+JmoMK2Bx43NxJ0rLHkhojUTbVdSk1R1/RMIU=
-MIME-Version: 1.0
-Received: by 10.141.34.13 with HTTP; Fri, 26 Mar 2010 17:05:04 -0700 (PDT)
-In-Reply-To: <1269556538-3020-2-git-send-email-andrea.adami@gmail.com>
-References: <1269556538-3020-1-git-send-email-andrea.adami@gmail.com>
-	<1269556538-3020-2-git-send-email-andrea.adami@gmail.com>
-Date: Sat, 27 Mar 2010 01:05:04 +0100
-Received: by 10.140.251.9 with SMTP id y9mr1670379rvh.276.1269648304392; Fri, 
-	26 Mar 2010 17:05:04 -0700 (PDT)
-Message-ID: <d1b08f941003261705k1f97e489wa30f59d684b69a38@mail.gmail.com>
+	Sat, 27 Mar 2010 01:35:24 +0100
+Received: from FBCMMO04.fbc.local ([192.168.184.135]) by smtp-out26.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 27 Mar 2010 01:31:10 +0100
+Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO04.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 27 Mar 2010 01:30:50 +0100
+Received: from localhost.localdomain ([87.8.251.207]) by FBCMCL01B07.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 27 Mar 2010 01:30:49 +0100
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.175
+Date: Sat, 27 Mar 2010 01:30:19 +0100
+Message-Id: <1269649819-12028-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 1.6.4.4
+In-Reply-To: <d1b08f941003261705k1f97e489wa30f59d684b69a38@mail.gmail.com>
+References: <d1b08f941003261705k1f97e489wa30f59d684b69a38@mail.gmail.com>
+X-OriginalArrivalTime: 27 Mar 2010 00:30:49.0515 (UTC)
+	FILETIME=[BFF057B0:01CACD44]
+X-SA-Exim-Connect-IP: 85.33.2.26
 X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH] zaurus: unbreak build of initramfs-kexecboot-image (thus others too...)
+Subject: [PATCH 307/307] [STABLE][PATCH][v2] zaurus: unbreak build of initramfs-kexecboot-image (thus others too...)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,22 +43,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Mar 2010 00:08:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 27 Mar 2010 00:35:24 -0000
 
-Please revert this bit:
+* partial sync with old .dev checkout
 
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+---
+ conf/machine/include/zaurus-2.6.inc            |    1 +
+ conf/machine/include/zaurus-clamshell.inc      |    1 +
+ recipes/kexecboot/initramfs-kexecboot-image.bb |    6 +++---
+ 3 files changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/conf/machine/include/zaurus-2.6.inc b/conf/machine/include/zaurus-2.6.inc
+index 5ce1cdc..942660a 100644
+--- a/conf/machine/include/zaurus-2.6.inc
++++ b/conf/machine/include/zaurus-2.6.inc
+@@ -12,6 +12,7 @@ EXTRA_IMAGECMD_jffs2 = "--little-endian --eraseblock=${ERASEBLOCKSIZE} --pad --f
+ 
+ ZAURUS-UPDATER = "zaurus-updater"
+ EXTRA_IMAGEDEPENDS += "${ZAURUS-UPDATER}"
++KEXECBOOT_IMAGEDEPENDS += "${ZAURUS-UPDATER}"
+ 
+ SERIAL_CONSOLE = "115200 ttyS0"
+ 
+diff --git a/conf/machine/include/zaurus-clamshell.inc b/conf/machine/include/zaurus-clamshell.inc
+index 1421630..714380e 100644
+--- a/conf/machine/include/zaurus-clamshell.inc
++++ b/conf/machine/include/zaurus-clamshell.inc
+@@ -4,6 +4,7 @@ UBOOT_ENTRYPOINT = "0x80008000"
+ UBOOT_LOADADDRESS = "0x80008000"
+ 
+ EXTRA_IMAGEDEPENDS += "sharp-flash-header-c700"
++KEXECBOOT_IMAGEDEPENDS += "sharp-flash-header-c700"
+ 
+ IMAGE_CMD_jffs2 = "mkfs.jffs2 --root=${IMAGE_ROOTFS} --faketime -m favourlzo \
+                    --output=${T}/${IMAGE_NAME}.rootfs.jffs2 --pad --little-endian --eraseblock=${ERASEBLOCKSIZE} -n \
+diff --git a/recipes/kexecboot/initramfs-kexecboot-image.bb b/recipes/kexecboot/initramfs-kexecboot-image.bb
+index 7fc2b79..a97ca34 100644
+--- a/recipes/kexecboot/initramfs-kexecboot-image.bb
++++ b/recipes/kexecboot/initramfs-kexecboot-image.bb
+@@ -1,7 +1,7 @@
+ #initramfs image which mounts the rootfilesystem and kexecs a kernel from there
+ 
+ ONLINE_PACKAGE_MANAGEMENT = "none"
 -IMAGE_FSTYPES += " cpio.gz"
-+IMAGE_FSTYPES = "cpio.gz"
++IMAGE_FSTYPES += "cpio.gz"
+ inherit image
+ 
+ # These devices need mmcblk* to be 254 instead of 179
+@@ -10,7 +10,8 @@ IMAGE_DEVICE_TABLES_h2200 = "device_table-oldmmc.txt"
+ 
+ export IMAGE_BASENAME = "initramfs-kexecboot-image"
+ 
+-EXTRA_IMAGEDEPENDS = ""
++KEXECBOOT_IMAGEDEPENDS ?= ""
++EXTRA_IMAGEDEPENDS = "${KEXECBOOT_IMAGEDEPENDS}"
+ IMAGE_INSTALL = "kexecboot"
+ IMAGE_LINGUAS = ""
+ 
+@@ -18,4 +19,3 @@ IMAGE_LOGIN_MANAGER = ""
+ IMAGE_INIT_MANAGER = ""
+ IMAGE_INITSCRIPTS = ""
+ IMAGE_DEV_MANAGER = ""
+-#ONLINE_PACKAGE_MANAGEMENT = "none"
+-- 
+1.6.4.4
 
-I forgot that in stable the insane installkit is generated...and it
-needs tar.gz initramfs image.
-
-Proper solution would be to full sync zaurus-2.6.inc et co., but
-personally I think we should leave it as 'memorial'.
-
-Regards
-
-Andrea
 
 
