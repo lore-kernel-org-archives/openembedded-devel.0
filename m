@@ -1,39 +1,33 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1NvSES-0000rA-BT
+	(envelope-from <mickey@vanille-media.de>) id 1NvT1g-0003jL-UL
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Mar 2010 10:23:04 +0100
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 05FE521A90
+	Sat, 27 Mar 2010 11:13:57 +0100
+Received: from [10.210.21.213] (tmo-101-117.customers.d1-online.com
+	[80.187.101.117])
+	by phalanx.drlauer-research.com (Postfix) with ESMTP id 4353B58438E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Mar 2010 09:19:30 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id l+E2XBGVCFMz
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Mar 2010 09:19:25 +0000 (UTC)
-Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
-	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTPSA id 61E0F1BB6C
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Mar 2010 09:19:25 +0000 (UTC)
-Message-ID: <4BADCDB7.4050807@gmail.com>
-Date: Sat, 27 Mar 2010 10:19:51 +0100
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1269615592.2305.12.camel@gnutoo-desktop>
-In-Reply-To: <1269615592.2305.12.camel@gnutoo-desktop>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+	Sat, 27 Mar 2010 11:12:10 +0100 (CET)
+Message-Id: <89AC32E3-DE99-4D32-9832-858160FA85CD@vanille-media.de>
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <20100326215731.GE18337@excalibur.local>
+X-Mailer: iPhone Mail (7D11)
+Mime-Version: 1.0 (iPhone Mail 7D11)
+Date: Sat, 27 Mar 2010 11:11:09 +0100
+References: <n> <1266857650-5557-1-git-send-email-michael.lippautz@gmail.com>
+	<20100326215731.GE18337@excalibur.local>
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: openembedded's Wiki license
+Subject: Re: [PATCH] python-setuptools: Version bump to 0.6c11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,47 +41,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Mar 2010 09:23:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 27 Mar 2010 10:13:57 -0000
+Content-Type: text/plain;
+	charset=us-ascii;
+	format=flowed;
+	delsp=yes
+Content-Transfer-Encoding: 7bit
 
-GNUtoo ha scritto, Il 26/03/2010 15:59:
-> Hi,
-> I noticed that buglabs wiki had no license,
-> Then buglabs people fixed it(adding a license to it),but they noticed
-> that openembedded's wiki was in the same situation.
->=20
-> Why do we need a license?
-> Simply because by default copyright law don't allow modification or
-> copying of a work.So if some people modify the wiki,they may be
-> infringing the copyright of the previous author.
->=20
-> Only the previous author can exercise his right(only the copyright owne=
-r
-> can sue someone)
->=20
-> That could be a problem,and it would be safer to add a license for
-> future contribution,to prevent occurrences of such issues
->=20
-> Note that it would be difficult to ask permission to all the
-> contributors of the wiki for changing the copyright of their work.
->=20
-> I'm open to every free license for my small contributions(from
-> non-copyleft licenses to copyleft ones)
->=20
-> Denis.
+Acked-by: Michael 'Mickey' Lauer <mlauer@vanille-media.de>
 
-Good point to raise this issue, thanks.
+Cheers,
 
-I vote for a license Attribution-ShareAlike 3.0 BY-SA
-http://creativecommons.org/licenses/by-sa/3.0/
+:M:
 
+Am 26.03.2010 um 22:57 schrieb Stefan Schmidt  
+<stefan@datenfreihafen.org>:
 
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
+> Hello.
+>
+> Mickey, do you have a moment to review and comment on this python  
+> related patch?
+>
+> regards
+> Stefan Schmidt
+>
+> On Mon, 2010-02-22 at 17:54, Michael Lippautz wrote:
+>> * Adds python module 'pkg_resources'.
+>>
+>> Signed-off-by: Michael Lippautz <michael.lippautz@gmail.com>
+>> ---
+>> .../python-setuptools/fix-log-usage-0.6c11.patch   |   18 ++++++++++ 
+>> ++++++
+>> recipes/python/python-setuptools_0.6c11.bb         |   22 ++++++++++ 
+>> ++++++++++
+>> 2 files changed, 40 insertions(+), 0 deletions(-)
+>> create mode 100644 recipes/python/python-setuptools/fix-log- 
+>> usage-0.6c11.patch
+>> create mode 100644 recipes/python/python-setuptools_0.6c11.bb
+>>
+>> diff --git a/recipes/python/python-setuptools/fix-log- 
+>> usage-0.6c11.patch b/recipes/python/python-setuptools/fix-log- 
+>> usage-0.6c11.patch
+>> new file mode 100644
+>> index 0000000..b860700
+>> --- /dev/null
+>> +++ b/recipes/python/python-setuptools/fix-log-usage-0.6c11.patch
+>> @@ -0,0 +1,18 @@
+>> +--- a/setuptools/command/sdist.py    2010-02-22 14:57:56.000000000  
+>> +0100
+>> ++++ b/setuptools/command/sdist.py    2010-02-22 14:57:31.000000000  
+>> +0100
+>> +@@ -1,6 +1,5 @@
+>> + from distutils.command.sdist import sdist as _sdist
+>> + from distutils.util import convert_path
+>> +-from distutils import log
+>> + from glob import glob
+>> + import os, re, sys, pkg_resources
+>> +
+>> +@@ -94,7 +93,7 @@
+>> +         try: svnver = int(data.splitlines()[0])
+>> +         except: pass
+>> +         if svnver<8:
+>> +-            log.warn("unrecognized .svn/entries format in %s",  
+>> dirname)
+>> ++            print("unrecognized .svn/entries format in %s",  
+>> dirname)
+>> +             return
+>> +         for record in map(str.splitlines, data.split('\n\x0c\n') 
+>> [1:]):
+>> +             if not record or len(record)>=6 and record[5] 
+>> =="delete":
+>> diff --git a/recipes/python/python-setuptools_0.6c11.bb b/recipes/ 
+>> python/python-setuptools_0.6c11.bb
+>> new file mode 100644
+>> index 0000000..bccafa4
+>> --- /dev/null
+>> +++ b/recipes/python/python-setuptools_0.6c11.bb
+>> @@ -0,0 +1,22 @@
+>> +DESCRIPTION = "Download, build, install, upgrade, and uninstall  
+>> Python packages"
+>> +HOMEPAGE = "http://cheeseshop.python.org/pypi/setuptools"
+>> +SECTION = "devel/python"
+>> +PRIORITY = "optional"
+>> +LICENSE = "MIT"
+>> +DEPENDS_${PN}-native = "python-native"
+>> +RDEPENDS_${PN} = "python-distutils python-compression"
+>> +PR = "ml3"
+>> +
+>> +SRC_URI = "\
+>> +  http://cheeseshop.python.org/packages/source/s/setuptools/${SRCNAME}-${PV}.tar.gz;name=setuptools 
+>>  \
+>> +  file://fix-log-usage-0.6c11.patch;patch=1 \
+>> +"
+>> +SRC_URI[setuptools.md5sum] = "7df2a529a074f613b509fb44feefe74e"
+>> +SRC_URI[setuptools.sha256sum] =  
+>> "630fea9b726320b73ee3ca6ff61732cb32675b0389be658080fe46383b87a1d3"
+>> +
+>> +SRCNAME = "setuptools"
+>> +S = "${WORKDIR}/${SRCNAME}-${PV}"
+>> +
+>> +inherit distutils
+>> +
+>> +BBCLASSEXTEND = "native"
+>> -- 
+>> 1.6.4.4
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded- 
+>> devel
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
