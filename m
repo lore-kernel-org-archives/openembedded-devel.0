@@ -1,40 +1,42 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1NvRW4-0003uj-7Y
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Mar 2010 09:37:24 +0100
-Received: from p5b036e7d.dip.t-dialin.net ([91.3.110.125] helo=excalibur)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1NvRSx-0007mC-QW by authid <stefan@sostec.de> with cram_md5
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NvRg8-0007mo-Jw for openembedded-devel@lists.openembedded.org;
+	Sat, 27 Mar 2010 09:47:37 +0100
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NvRd4-0003i4-6r for openembedded-devel@lists.openembedded.org;
+	Sat, 27 Mar 2010 09:44:26 +0100
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Mar 2010 09:44:26 +0100
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Mar 2010 09:34:02 +0100
-Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>) id 1NvRSx-0005lz-Jt
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Mar 2010 09:33:59 +0100
-Date: Sat, 27 Mar 2010 09:33:59 +0100
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Sat, 27 Mar 2010 09:44:26 +0100
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100327083359.GA21542@excalibur.local>
-References: <1252561144-5528-1-git-send-email-mike@compulab.co.il>
-	<20100326215955.GF18337@excalibur.local>
-	<hokf02$31b$1@dough.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <hokf02$31b$1@dough.gmane.org>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 27 Mar 2010 09:44:09 +0100
+Message-ID: <hokggp$6i8$1@dough.gmane.org>
+References: <20100326215357.GD18337@excalibur.local>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
+In-Reply-To: <20100326215357.GD18337@excalibur.local>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] omap3-sgx-modules: fix proc related build errors
+Subject: Re: Patchwork weekend this weekend?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,23 +50,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Mar 2010 08:37:24 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 27 Mar 2010 08:47:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Sat, 2010-03-27 at 09:18, Koen Kooi wrote:
-> On 26-03-10 22:59, Stefan Schmidt wrote:
-> > 
-> > Koen, omap3-sgx-modules is your area of expertise. Can you comment on this?
+On 26-03-10 22:53, Stefan Schmidt wrote:
+> Hello.
 > 
-> 1.3.x is gone from OE now, we only have 1.4.x now, that doesn't need
-> this patch.
+> While zecke did a great job some time ago to flush our patchwork queue and we
+> are getting better in reviewing and applying patches in a timely manner we still
+> have some patches sitting in patchwork.
+> 
+> Especially the older one bother me. Today I started to go through some of the
+> patches and applied them or asked for comments. I hope to have 1-2 hours on
+> saturday and sunday as well to do the same.
+> 
+> My personal goal would be to get us down to one page and maybe some of the older
+> patches apllied or removed if outdated. Perhaps some of you have a spare hour
+> to join. :)
 
-Thanks. Removed from patchwork.
+I was able to push 5 patches in the time needed to eat a bowl of muesli,
+so if everyone chips in we should be able to clear the patchwork q :)
 
-regards
-Stefan Schmidt
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLrcVZMkyGM64RGpERAm7IAKCqfGJo1T9YvX18d7uXbInaS3mc2ACePD+a
+FOs4rKtreBZdxMME3B4RNSE=
+=01ye
+-----END PGP SIGNATURE-----
+
 
 
