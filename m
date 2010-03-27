@@ -1,28 +1,25 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1NvUef-0005RV-Vt
+	(envelope-from <stefan@datenfreihafen.org>) id 1NvUjp-0005vL-4L
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Mar 2010 12:58:19 +0100
+	Sat, 27 Mar 2010 13:03:37 +0100
 Received: from p5b035482.dip.t-dialin.net ([91.3.84.130] helo=excalibur)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1NvUbZ-0004LK-Iq by authid <stefan@sostec.de> with cram_md5
+	id 1NvUgh-0004Yy-LG by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Mar 2010 12:55:08 +0100
+	Sat, 27 Mar 2010 13:00:27 +0100
 Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>) id 1NvUbY-0000B3-E3
+	(envelope-from <stefan@excalibur.local>) id 1NvUgg-0000Hk-MS
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Mar 2010 12:55:04 +0100
-Date: Sat, 27 Mar 2010 12:55:04 +0100
+	Sat, 27 Mar 2010 13:00:22 +0100
+Date: Sat, 27 Mar 2010 13:00:22 +0100
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100327115504.GC21542@excalibur.local>
-References: <1268826851-28042-1-git-send-email-ospite@studenti.unina.it>
-	<201003220816.04657.holger+oe@freyther.de>
-	<20100326125222.7c5a7e7f.ospite@studenti.unina.it>
-	<201003261256.48913.holger+oe@freyther.de>
+Message-ID: <20100327120022.GD21542@excalibur.local>
+References: <4AF1C9D3.2020604@cam.ac.uk>
 MIME-Version: 1.0
-In-Reply-To: <201003261256.48913.holger+oe@freyther.de>
+In-Reply-To: <4AF1C9D3.2020604@cam.ac.uk>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -35,7 +32,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] gnutls: fix do_configure by depending on gtk-doc
+Subject: Re: [PATCH] Chrony time synchronization (chronyc and chronyd)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,28 +46,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Mar 2010 11:58:19 -0000
+X-List-Received-Date: Sat, 27 Mar 2010 12:03:38 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 Hello.
 
-On Fri, 2010-03-26 at 12:56, Holger Hans Peter Freyther wrote:
-> On Friday 26 March 2010 12:52:22 you wrote:
+On Wed, 2009-11-04 at 18:37, Jonathan Cameron wrote:
 > 
-> > > gtk-doc? Where is it installing its .m4 file?
-> > 
-> > I didn't investigate deeply the details, but with this patch
-> > gnutls_2.8.5.bb builds again, without this it doesn't and thus prevents
-> > even meta-toolchain to be built; this is reproducible when starting from
-> > a fresh setup (wiping out tmp/ I mean). The full log is here:
-> > http://tinderbox.openembedded.org/public/logs/task/5429228.txt
+> Signed-off-by: Jonathan Cameron <jic23@cam.ac.uk>
+> ---
+> Unfortunately this package uses a hand rolled set of build scripts.
+> The maintainers are happy to add fixes to any problems but are not
+> keen on moving over to autotools. I don't get the impression many
+> people cross compile this one! That is a shame because it is very
+> useful with wireless sensor nodes.
 > 
-> Okay, then
+> There are a few nasty tests in the configure script that may well
+> cause problems in cross compiles when the host is not also linux based.
 > 
-> Acked-by: Holger Hans Peter Freyther <zecke@selfish.org>
+> I will work on getting these fixed at source, but it may take a while
+> hence submission of this recipe in the meantime.
+> 
+> The reason this is the git version is recent patches to ensure
+> that the LDPATH variable was not ignored in linking.
+> 
+> This recipe includes some convenient scripts and blank config
+> files needed to get it up and running easily.
 
-I could reproduce the problem and the patch fixed it. Applied and pushed.
+Applied and pushed. I have rewritten the subject line to be more like what we
+expect in OE. If you have progress on having a saner upstream build system we
+would appreciate if we could make this recipe a bit cleaner. Thanks.
 
 regards
 Stefan Schmidt
