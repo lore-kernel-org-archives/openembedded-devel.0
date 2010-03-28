@@ -1,43 +1,42 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NvyHV-0006zZ-0m for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Mar 2010 21:36:21 +0200
+	id 1NvyJK-00077I-ML for openembedded-devel@lists.openembedded.org;
+	Sun, 28 Mar 2010 21:38:15 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NvyEN-000486-3V for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Mar 2010 21:33:07 +0200
+	id 1NvyGF-000573-FL for openembedded-devel@lists.openembedded.org;
+	Sun, 28 Mar 2010 21:35:03 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Mar 2010 21:33:07 +0200
+	Sun, 28 Mar 2010 21:35:03 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Mar 2010 21:33:07 +0200
+	Sun, 28 Mar 2010 21:35:03 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 28 Mar 2010 21:32:53 +0200
-Message-ID: <hooat6$p3d$1@dough.gmane.org>
-References: <1269730499.4033.176.camel@mattotaupa>	<hon5i2$8iq$1@dough.gmane.org>
-	<1269797481.8018.80.camel@mattotaupa>
+Date: Sun, 28 Mar 2010 21:34:44 +0200
+Message-ID: <hoob0k$p3d$2@dough.gmane.org>
+References: <1269797756.8018.85.camel@mattotaupa>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
-In-Reply-To: <1269797481.8018.80.camel@mattotaupa>
+In-Reply-To: <1269797756.8018.85.camel@mattotaupa>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS,WEIRD_PORT autolearn=no version=3.2.5
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: enna: do_configure failed: automake: unknown warning category `cross'
+Subject: Re: ti-cmem-module: Loading kernel modules for gstreamer-ti... FATAL: Error inserting cmemk (/lib/modules/2.6.32/kernel/drivers/dsp/cmemk.ko): Bad address
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,45 +50,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Mar 2010 19:36:21 -0000
+X-List-Received-Date: Sun, 28 Mar 2010 19:38:15 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 28-03-10 19:31, Paul Menzel wrote:
-> Am Sonntag, den 28.03.2010, 10:55 +0200 schrieb Koen Kooi:
->> On 27-03-10 23:54, Paul Menzel wrote:
->>> I am trying to write the recipe for Enna [1].
->>
->> [..]
->>
->>> Now I am getting the following error message during `configure`.
->>>
->>>         […]
->>
->>>         configure.ac:35: required file `./config.rpath' not found
->>
->>> Any hint is appreciated.
->>
->> do_configure_prepend() {
->> 	autopoint || touch config.rpath
->> }
+On 28-03-10 19:35, Paul Menzel wrote:
+> Dear OE folks,
 > 
-> Thanks that worked!
 > 
-> Sorry for the next question. Is that workaround needed because of not
-> having Automake 1.11.1? Or is the recommended fix, that upstream ships
-> `config.rpath`?
+> doing `opkg update && opkg upgrade` on a BeagleBoard demo image [1] gave
+> me the following error message today.
+> 
+>         […]
+>         Configuring ti-cmem-module.
+>         Configuring gstreamer-ti.
+>          System startup links for /etc/init.d/gstti-init already exist.
+>         Unloading kernel module ...ERROR: Module cmemk does not exist in /proc/modules
+>            done
+>         Loading kernel modules for gstreamer-ti... FATAL: Error inserting cmemk (/lib/modules/2.6.32/kernel/drivers/dsp/cmemk.ko): Bad address
+>           done
+>         […]
 
-It's a caused by this:
+That's not really OE related :) But I bet it's caused by not setting the
+mem= stuff according to
+http://www.angstrom-distribution.org/demo/beagleboard/README.txt
 
-../../classes/autotools.bbclass:EXTRA_AUTORECONF = "--exclude=autopoint"
-
-I don't know why we exclude it deliberately, but some recipes do need
-it. And hence we try to run autopoint in efl.bbclass and create an empty
-config.rpath when it fails.
+If you have set the mem= stuff correctly, please follow up on the beagle
+list.
 
 regards,
 
@@ -97,9 +87,9 @@ Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFLr67lMkyGM64RGpERAtG5AJ9xP8FP79T6+z61wtDTafs3keETgACgnA0S
-Xc/1dzbc9EOB9aeV3gICJcY=
-=BXrI
+iD8DBQFLr69UMkyGM64RGpERAqFSAJ98+UmgOxnmDeOaF/t30zCys5oH2ACgjNB1
++GqLcFWG+NVqsgtJ3ua+VeU=
+=Zv77
 -----END PGP SIGNATURE-----
 
 
