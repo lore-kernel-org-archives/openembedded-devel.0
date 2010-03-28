@@ -1,27 +1,40 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1Nvrlp-00062r-Hy
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Mar 2010 14:39:14 +0200
-Received: (qmail 7640 invoked by uid 1003); 28 Mar 2010 12:35:59 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 28 Mar 2010 12:35:59 -0000
-Message-ID: <4BAF4D2E.5030902@balister.org>
-Date: Sun, 28 Mar 2010 08:35:58 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.8) Gecko/20100301 Fedora/3.0.3-1.fc11 Thunderbird/3.0.3
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NvsuP-0005f5-Us for openembedded-devel@lists.openembedded.org;
+	Sun, 28 Mar 2010 15:52:11 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NvsrK-0003B5-MW for openembedded-devel@lists.openembedded.org;
+	Sun, 28 Mar 2010 15:48:58 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Mar 2010 15:48:58 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Mar 2010 15:48:58 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 28 Mar 2010 15:48:45 +0200
+Message-ID: <honmnt$p5n$1@dough.gmane.org>
 References: <20100326215357.GD18337@excalibur.local>	<hokggp$6i8$1@dough.gmane.org>	<20100327085533.GB21542@excalibur.local>
 	<20100328120115.GB8462@excalibur.local>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
 In-Reply-To: <20100328120115.GB8462@excalibur.local>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: Patchwork weekend this weekend?
@@ -38,13 +51,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Mar 2010 12:39:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sun, 28 Mar 2010 13:52:11 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 03/28/2010 08:01 AM, Stefan Schmidt wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 28-03-10 14:01, Stefan Schmidt wrote:
 > Hello.
->
+> 
 > On Sat, 2010-03-27 at 09:55, Stefan Schmidt wrote:
 >>
 >> On Sat, 2010-03-27 at 09:44, Koen Kooi wrote:
@@ -55,17 +71,25 @@ On 03/28/2010 08:01 AM, Stefan Schmidt wrote:
 >> Great. Thanks for this. During my breakfast I was able to clean up the list from
 >> some superseded and already applied patches. I will be back in  the evening to
 >> pick some more patches, review, test and push them.
->
+> 
 > Thanks a lot to everyone who helped out! We are down from 112 to 74 patches. For
 > most of the missing ones I don't feel comfortable in reviewing them. If you have
 > a moment please have lock and see if there is something within your area of
 > expertise. Have a nice rest weekend.
 
-Also, there are likely some that no longer need applying or were for 
-discussion purposes only. If you know of something like that go ahead 
-and mark it is archived. I'll try and go through the list this afternoon 
-also.
+There are also a considerable amount of bitbake patches in there, could
+the bitbake hackers please take care of those?
 
-Philip
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLr149MkyGM64RGpERApBSAKCeFqP1Sh4DG7z6MhisTPo9ZsxatACgk4Bm
+FP5qNEdOa3Dhtkby0EYl7Jc=
+=uQ73
+-----END PGP SIGNATURE-----
+
 
 
