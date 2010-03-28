@@ -1,41 +1,41 @@
-Received: from ey-out-1920.google.com ([74.125.78.145])
+Received: from hsp-52.hspserver.com ([85.197.80.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nicola.mfb@gmail.com>) id 1NvkFG-0002Jl-Q0
+	(envelope-from <ml@vdm-design.de>) id 1NvmDt-0003cm-QO
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Mar 2010 06:37:07 +0200
-Received: by ey-out-1920.google.com with SMTP id 26so834684eyw.4
+	Sun, 28 Mar 2010 08:43:56 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by hsp-52.hspserver.com (Postfix) with ESMTP id CA311A2C3D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 27 Mar 2010 21:33:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:received:message-id
-	:subject:from:to:cc:content-type;
-	bh=r5MOLFSazlVk4kx5+6ZMlR57KpWhRyi5P60OtXYoP/s=;
-	b=x24UElmnPi4DTAGImoRwOYbV27kkoFEvbcq8VJZTZlzMUqQ4qZ/8Tzcrxyl1P+YnYU
-	vt9hZE+zKr37+8xdb/qi3KPf5ichnd8+45OZOrOmZ6+JKG2U8dCca6P3BQhV3PYJ9xTT
-	ZMlFsTMDqSsiq5sx3sYW0eoL8G+HMOMj/U9YY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:cc:content-type;
-	b=Xug1r4IKBt6MZj3S0z8U0pCTAbwFIrGKZ3v1u+o7toms++h77kEXn86u0ApXzOd9LX
-	JpSJgywMf6357+pajQIOBb4+AP1FN0mDZ3qe2PsOXXK+zJmtGEgum5/bbFSGiyETZIqv
-	rLbFG9sLLZvB0PUWBhQH4lvNE+pP+ItSHCpSo=
+	Sun, 28 Mar 2010 08:40:36 +0200 (CEST)
+Received: from hsp-52.hspserver.com ([127.0.0.1])
+	by localhost (hsp-52.hspserver.com [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id MzkjzmwH7q7o
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Mar 2010 08:40:36 +0200 (CEST)
+Received: from tomboy.localnet (pD9E168DE.dip.t-dialin.net [217.225.104.222])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by hsp-52.hspserver.com (Postfix) with ESMTP id 3EBF9A2C3C4
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Mar 2010 08:40:36 +0200 (CEST)
+From: Thomas Zimmermann <ml@vdm-design.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 28 Mar 2010 08:40:35 +0200
+User-Agent: KMail/1.12.4 (Linux/2.6.33-1.slh.5-sidux-amd64; KDE/4.3.4; x86_64; ;
+	)
+References: <1269730499.4033.176.camel@mattotaupa>
+In-Reply-To: <1269730499.4033.176.camel@mattotaupa>
 MIME-Version: 1.0
-Received: by 10.213.108.145 with HTTP; Sat, 27 Mar 2010 21:33:55 -0700 (PDT)
-Date: Sun, 28 Mar 2010 05:33:55 +0100
-Received: by 10.213.52.195 with SMTP id j3mr1661979ebg.33.1269750835295; Sat, 
-	27 Mar 2010 21:33:55 -0700 (PDT)
-Message-ID: <359c5481003272133x42761a04xeb6d10829fec83f6@mail.gmail.com>
-From: Nicola Mfb <nicola.mfb@gmail.com>
-To: SHR-devel <shr-devel@projects.openmoko.org>
-X-SA-Exim-Connect-IP: 74.125.78.145
-X-SA-Exim-Mail-From: nicola.mfb@gmail.com
+Message-Id: <201003280840.35570.ml@vdm-design.de>
+X-SA-Exim-Connect-IP: 85.197.80.179
+X-SA-Exim-Mail-From: ml@vdm-design.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.2 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: qt4 sqlite plugin crash
+Subject: Re: enna: do_configure failed: automake: unknown warning category `cross'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,101 +49,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Mar 2010 04:37:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 28 Mar 2010 06:43:58 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-15"
+Content-Transfer-Encoding: quoted-printable
 
-Hi!
-It seems qt sqlite plugin crashes on my custom built image (derived
-from the current shr-testing branch).
-Is this a know bug or am I missing somethings?
+Am Samstag 27 M=E4rz 2010 23:54:59 schrieb Paul Menzel:
+> Dear OE folks,
+>=20
+>=20
+> I am trying to write the recipe for Enna [1].
 
-Step to reproduce:
-
-opkg install qt4-examples qt4-plugin-sqldriver-sqlite
-gdb /usr/bin/qt4/examples/sql/relationaltablemodel/relationaltablemodel
-
-GNU gdb (GDB) 7.0
-Copyright (C) 2009 Free Software Foundation, Inc.
-License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
-This is free software: you are free to change and redistribute it.
-There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
-and "show warranty" for details.
-This GDB was configured as "arm-oe-linux-gnueabi".
-For bug reporting instructions, please see:
-<http://www.gnu.org/software/gdb/bugs/>...
-Reading symbols from
-/usr/bin/qt4/examples/sql/relationaltablemodel/relationaltablemodel...(no
-debugging symbols found)...done.
-(gdb) run
-Starting program:
-/usr/bin/qt4/examples/sql/relationaltablemodel/relationaltablemodel
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-QIconvCodec::convertFromUnicode: using ASCII for conversion, iconv_open failed
-QIconvCodec::convertToUnicode: using ASCII for conversion, iconv_open failed
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-warning: Unable to find libthread_db matching inferior's thread
-library, thread debugging will not be available.
-
-Program received signal SIGSEGV, Segmentation fault.
-0x4131e5fc in ?? () from /usr/lib/qt4/plugins/sqldrivers/libqsqlite.so
-(gdb) backtrace
-#0  0x4131e5fc in ?? () from /usr/lib/qt4/plugins/sqldrivers/libqsqlite.so
-Cannot access memory at address 0x0
-#1  0x4132fed4 in ?? () from /usr/lib/qt4/plugins/sqldrivers/libqsqlite.so
-Cannot access memory at address 0x0
-Backtrace stopped: previous frame identical to this frame (corrupt stack?)
-(gdb)
-
-Regards
-
-      Niko
+There already is a recipe for the svn version of enna, so no need to make a=
+=20
+new one. Just upgrade the old one:
+http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/e17/enna_sv=
+n.bb
 
 
