@@ -1,28 +1,41 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from ey-out-1920.google.com ([74.125.78.145])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NvexG-0003Z9-K5 for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Mar 2010 23:58:11 +0100
-Received: from f053034000.adsl.alicedsl.de ([78.53.34.0] helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NveuC-0008VN-87 for openembedded-devel@lists.openembedded.org;
-	Sat, 27 Mar 2010 22:55:00 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 27 Mar 2010 23:54:59 +0100
-Message-ID: <1269730499.4033.176.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	(envelope-from <nicola.mfb@gmail.com>) id 1NvkFG-0002Jl-Q0
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 28 Mar 2010 06:37:07 +0200
+Received: by ey-out-1920.google.com with SMTP id 26so834684eyw.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 27 Mar 2010 21:33:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:received:message-id
+	:subject:from:to:cc:content-type;
+	bh=r5MOLFSazlVk4kx5+6ZMlR57KpWhRyi5P60OtXYoP/s=;
+	b=x24UElmnPi4DTAGImoRwOYbV27kkoFEvbcq8VJZTZlzMUqQ4qZ/8Tzcrxyl1P+YnYU
+	vt9hZE+zKr37+8xdb/qi3KPf5ichnd8+45OZOrOmZ6+JKG2U8dCca6P3BQhV3PYJ9xTT
+	ZMlFsTMDqSsiq5sx3sYW0eoL8G+HMOMj/U9YY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:cc:content-type;
+	b=Xug1r4IKBt6MZj3S0z8U0pCTAbwFIrGKZ3v1u+o7toms++h77kEXn86u0ApXzOd9LX
+	JpSJgywMf6357+pajQIOBb4+AP1FN0mDZ3qe2PsOXXK+zJmtGEgum5/bbFSGiyETZIqv
+	rLbFG9sLLZvB0PUWBhQH4lvNE+pP+ItSHCpSo=
+MIME-Version: 1.0
+Received: by 10.213.108.145 with HTTP; Sat, 27 Mar 2010 21:33:55 -0700 (PDT)
+Date: Sun, 28 Mar 2010 05:33:55 +0100
+Received: by 10.213.52.195 with SMTP id j3mr1661979ebg.33.1269750835295; Sat, 
+	27 Mar 2010 21:33:55 -0700 (PDT)
+Message-ID: <359c5481003272133x42761a04xeb6d10829fec83f6@mail.gmail.com>
+From: Nicola Mfb <nicola.mfb@gmail.com>
+To: SHR-devel <shr-devel@projects.openmoko.org>
+X-SA-Exim-Connect-IP: 74.125.78.145
+X-SA-Exim-Mail-From: nicola.mfb@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,WEIRD_PORT
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: enna: do_configure failed: automake: unknown warning category `cross'
+Cc: openembedded-devel@lists.openembedded.org
+Subject: qt4 sqlite plugin crash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,127 +49,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 27 Mar 2010 22:58:11 -0000
-X-Groupsio-MsgNum: 18182
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-2coRhrlER/30GIS1CxNF"
+X-List-Received-Date: Sun, 28 Mar 2010 04:37:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-2coRhrlER/30GIS1CxNF
-Content-Type: multipart/mixed; boundary="=-AXyYpE+1NAIqRHzaRlNG"
+Hi!
+It seems qt sqlite plugin crashes on my custom built image (derived
+from the current shr-testing branch).
+Is this a know bug or am I missing somethings?
 
---=-AXyYpE+1NAIqRHzaRlNG
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Step to reproduce:
 
-Dear OE folks,
+opkg install qt4-examples qt4-plugin-sqldriver-sqlite
+gdb /usr/bin/qt4/examples/sql/relationaltablemodel/relationaltablemodel
+
+GNU gdb (GDB) 7.0
+Copyright (C) 2009 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "arm-oe-linux-gnueabi".
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>...
+Reading symbols from
+/usr/bin/qt4/examples/sql/relationaltablemodel/relationaltablemodel...(no
+debugging symbols found)...done.
+(gdb) run
+Starting program:
+/usr/bin/qt4/examples/sql/relationaltablemodel/relationaltablemodel
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+QIconvCodec::convertFromUnicode: using ASCII for conversion, iconv_open failed
+QIconvCodec::convertToUnicode: using ASCII for conversion, iconv_open failed
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+warning: Unable to find libthread_db matching inferior's thread
+library, thread debugging will not be available.
+
+Program received signal SIGSEGV, Segmentation fault.
+0x4131e5fc in ?? () from /usr/lib/qt4/plugins/sqldrivers/libqsqlite.so
+(gdb) backtrace
+#0  0x4131e5fc in ?? () from /usr/lib/qt4/plugins/sqldrivers/libqsqlite.so
+Cannot access memory at address 0x0
+#1  0x4132fed4 in ?? () from /usr/lib/qt4/plugins/sqldrivers/libqsqlite.so
+Cannot access memory at address 0x0
+Backtrace stopped: previous frame identical to this frame (corrupt stack?)
+(gdb)
+
+Regards
+
+      Niko
 
 
-I am trying to write the recipe for Enna [1].
-
-        $ more enna.inc
-        HOMEPAGE =3D "http://${PN}.geexbox.org/"
-        SECTION =3D "x11/multimedia"
-        LICENSE =3D "LGPLv2.1+"
-        DEPENDS =3D "curl dbus eet evas edje ecore edbus elementary emotion=
-"
-        DEPENDS +=3D "libmusicbrainz lightmediascanner libxml2 taglib libva=
-lhalla libplayer"
-       =20
-        INC_PR =3D "r1"
-       =20
-        SRC_URI =3D "http://${PN}.geexbox.org/releases/${P}.tar.bz2;name=3D=
-${PN}"
-       =20
-        inherit autotools pkgconfig
-
-Now I am getting the following error message during `configure`.
-
-        [=E2=80=A6]
-        automake: unknown warning category `cross'
-        configure.ac:27: installing `./compile'
-        configure.ac:7: installing `./config.guess'
-        configure.ac:35: required file `./config.rpath' not found
-        configure.ac:7: installing `./config.sub'
-        configure.ac:11: installing `./install-sh'
-        configure.ac:11: installing `./missing'
-        src/bin/Makefile.am: installing `./depcomp'
-        autoreconf: automake failed with exit status: 1
-        FATAL: autoreconf execution failed.
-
-I am using automake 1.10.3 and it looks like I need 1.11.1.
-
-I found this commit [2], but this workaround
-
-        # Needs automake 1.11.x, which isn't safe to use yet in OE
-        do_configure() {
-               oe_runconf
-        }
-
-did not work for me. The error was then that `./configure` was not
-found. So `autogen.sh` needs to be run and I just found the following
-hint.
-
-        do_configure_prepend() {
-               sh autogen.sh
-        }
-
-But this fails with the error that C programs cannot be executed.
-
-Any hint is appreciated.
-
-
-Thanks,
-
-Paul
-
-
-PS: You need libvalhalla 2.0.0 for which I send a patch a moment ago (PV
-=3D 1.0.0+hg).
-
-
-[1] http://enna.geexbox.org/
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Da353f4e=
-e7229c686bfc61417cab979ffa1735d55
-
---=-AXyYpE+1NAIqRHzaRlNG
-Content-Disposition: attachment; filename="enna.inc"
-Content-Type: text/plain; name="enna.inc"; charset="UTF-8"
-Content-Transfer-Encoding: base64
-
-REVTQ1JJUFRJT04gPSAiRW5uYSBpcyBhIG1lZGlhIGNlbnRlciBhcHBsaWNhdGlvbiBiYXNlZCBv
-biBFRkwuIg0KSE9NRVBBR0UgPSAiaHR0cDovLyR7UE59LmdlZXhib3gub3JnLyINClNFQ1RJT04g
-PSAieDExL211bHRpbWVkaWEiDQpMSUNFTlNFID0gIkxHUEx2Mi4xKyINCkRFUEVORFMgPSAiY3Vy
-bCBkYnVzIGVldCBldmFzIGVkamUgZWNvcmUgZWRidXMgZWxlbWVudGFyeSBlbW90aW9uIg0KREVQ
-RU5EUyArPSAibGlibXVzaWNicmFpbnogbGlnaHRtZWRpYXNjYW5uZXIgbGlieG1sMiB0YWdsaWIg
-bGlidmFsaGFsbGEgbGlicGxheWVyIGF1dG9tYWtlLW5hdGl2ZS0xLjExLjEiDQoNCklOQ19QUiA9
-ICJyMSINCg0KU1JDX1VSSSA9ICJodHRwOi8vJHtQTn0uZ2VleGJveC5vcmcvcmVsZWFzZXMvJHtQ
-fS50YXIuYnoyO25hbWU9JHtQTn0iDQoNCmluaGVyaXQgYXV0b3Rvb2xzIHBrZ2NvbmZpZw0KDQoj
-ZG9fY29uZmlndXJlX3ByZXBlbmQoKSB7DQojCXNoIGF1dG9nZW4uc2gNCiN9DQoNCiMgTmVlZHMg
-YXV0b21ha2UgMS4xMS54LCB3aGljaCBpc24ndCBzYWZlIHRvIHVzZSB5ZXQgaW4gT0UNCiNkb19j
-b25maWd1cmUoKSB7DQojCW9lX3J1bmNvbmYNCiN9DQo=
-
---=-AXyYpE+1NAIqRHzaRlNG
-Content-Disposition: attachment; filename="enna_hg.bb"
-Content-Type: text/plain; name="enna_hg.bb"; charset="UTF-8"
-Content-Transfer-Encoding: base64
-
-cmVxdWlyZSBlbm5hLmluYw0KUFYgPSAiMC40LjAiDQpQUiA9ICIke0lOQ19QUn0uMCINClBSX2Fw
-cGVuZCA9ICIraGdyJHtOT1RRVUlURVNSQ1JFVn0iDQoNCk5PVFFVSVRFU1JDUkVWID0gImViZjZm
-YWVmMDEzNiINCg0KUyA9ICIke1dPUktESVJ9LyR7UE59Ig0K
-
---=-AXyYpE+1NAIqRHzaRlNG--
-
---=-2coRhrlER/30GIS1CxNF
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkuujMIACgkQPX1aK2wOHViFJwCfUyHUZvtM8F8RrT3/8M/POzDQ
-7rYAnjdhFTPni/5GTGIo/kwbHqiMapZ3
-=CT+Y
------END PGP SIGNATURE-----
-
---=-2coRhrlER/30GIS1CxNF--
