@@ -1,29 +1,39 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NvnFO-0001ki-1F for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Mar 2010 09:49:26 +0200
-Received: from f053035077.adsl.alicedsl.de ([78.53.35.77]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NvnCJ-0004sk-78 for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Mar 2010 07:46:15 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NvoKc-0006k4-Rl for openembedded-devel@lists.openembedded.org;
+	Sun, 28 Mar 2010 10:58:55 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NvoHV-00042s-Rc for openembedded-devel@lists.openembedded.org;
+	Sun, 28 Mar 2010 10:55:41 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Mar 2010 10:55:41 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Mar 2010 10:55:41 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201003280840.35570.ml@vdm-design.de>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 28 Mar 2010 10:55:30 +0200
+Message-ID: <hon5i2$8iq$1@dough.gmane.org>
 References: <1269730499.4033.176.camel@mattotaupa>
-	<201003280840.35570.ml@vdm-design.de>
-Date: Sun, 28 Mar 2010 09:46:13 +0200
-Message-ID: <1269762373.3693.3.camel@mattotaupa>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
+In-Reply-To: <1269730499.4033.176.camel@mattotaupa>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS,WEIRD_PORT autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: enna: do_configure failed: automake: unknown warning category `cross'
@@ -40,52 +50,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Mar 2010 07:49:26 -0000
-X-Groupsio-MsgNum: 18185
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-mxrj0p8goujy+GL+AiIe"
+X-List-Received-Date: Sun, 28 Mar 2010 08:58:55 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---=-mxrj0p8goujy+GL+AiIe
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am Sonntag, den 28.03.2010, 08:40 +0200 schrieb Thomas Zimmermann:
-> Am Samstag 27 M=C3=A4rz 2010 23:54:59 schrieb Paul Menzel:
+On 27-03-10 23:54, Paul Menzel wrote:
+> Dear OE folks,
+> 
+> 
+> I am trying to write the recipe for Enna [1].
 
-[=E2=80=A6]
+[..]
 
-> > I am trying to write the recipe for Enna [1].
->=20
-> There already is a recipe for the svn version of enna, so no need to make=
- a=20
-> new one. Just upgrade the old one:
-> http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/e17/enna_=
-svn.bb
+> Now I am getting the following error message during `configure`.
+> 
+>         […]
 
-I know. But it is not useful since almost everything changed (`SRC_URI`,
-`DEPENDS`, =E2=80=A6)
+>         configure.ac:35: required file `./config.rpath' not found
 
-So consider my recipe as a upgraded recipe. But I still get the same
-problems.
+> Any hint is appreciated.
 
-Maybe I should send my current status as patches.
+do_configure_prepend() {
+	autopoint || touch config.rpath
+}
 
+regards,
 
-Thanks,
+Koen
 
-Paul
-
---=-mxrj0p8goujy+GL+AiIe
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
+> 
+> 
+> Thanks,
+> 
+> Paul
+> 
+> 
+> PS: You need libvalhalla 2.0.0 for which I send a patch a moment ago (PV
+> = 1.0.0+hg).
+> 
+> 
+> [1] http://enna.geexbox.org/
+> [2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=a353f4ee7229c686bfc61417cab979ffa1735d55
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAkuvCT4ACgkQPX1aK2wOHVhecwCfQDzSi5EXpre2aq+hnQnjyCwA
-PnkAn2egGWEI1Y2m3ix+MVZiYVvClgPF
-=pFHk
+iD8DBQFLrxmCMkyGM64RGpERAsCvAKCOI+BHxOjDZfRkVYofwBExceRqbQCfbUTz
+b4EvYfPHHM1cxk2rog0E5Lo=
+=iLSz
 -----END PGP SIGNATURE-----
 
---=-mxrj0p8goujy+GL+AiIe--
+
+
