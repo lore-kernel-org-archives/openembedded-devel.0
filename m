@@ -1,35 +1,48 @@
-Received: from smtp-out05a.alice.it ([85.33.3.5])
+Received: from qw-out-1920.google.com ([74.125.92.148])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1Nvvf8-0007I8-SU
+	(envelope-from <kergoth@gmail.com>) id 1NvvnA-0007Yq-Qz
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Mar 2010 18:48:35 +0200
-Received: from fbcmmo06.fbc.local ([7.168.68.254]) by smtp-OUT05A.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sun, 28 Mar 2010 18:45:21 +0200
-Received: from FBCMCL01B02.fbc.local ([192.168.69.83]) by fbcmmo06.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sun, 28 Mar 2010 18:44:55 +0200
-Received: from localhost.localdomain ([79.21.202.115]) by
-	FBCMCL01B02.fbc.local with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sun, 28 Mar 2010 18:44:55 +0200
-From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+	Sun, 28 Mar 2010 18:56:53 +0200
+Received: by qw-out-1920.google.com with SMTP id 4so1868442qwk.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Mar 2010 09:53:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:from:date:x-google-sender-auth:received:message-id
+	:subject:to:content-type;
+	bh=8blBklrlpvb/XOdLSaqJ4GCf4Bo33x34mIREPpl0VCU=;
+	b=nd7GB3fkDXuOGqVFUpM5ZaKCZW+O8c8jv/PChEYAYzdFKcRN6dFKJB1o/UcVDrRHvv
+	vWmNGKZfCIPrQ4AFD1oGPsobtwDYMIiGVze4Oy8Nq4KYu5uEWNO2P53dQe0sxNHD+cEv
+	mc4UPM/Wjjq85iNQAh/CZr+vWPZTpjbVZF2QE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=W7NZ+R/CMG5egm03UYdDNgzmrkPlC6LYbRFKEcS6wAR1R10ivWK8VoszdvkSwUSBLF
+	zdsIxoOR3mzsLqWtTMypeBBqfU0f7MWgwqznwDlxBEL9AUhOU6r/EKETmon6M1WAMpp7
+	jksKdqhv7eD53Apz9Wr70WRlD2iIqnZikoYrU=
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.229.190.207 with HTTP; Sun, 28 Mar 2010 09:53:21 -0700 (PDT)
+In-Reply-To: <1269794684-1331-2-git-send-email-GNUtoo@no-log.org>
+References: <1269794684-1331-1-git-send-email-GNUtoo@no-log.org> 
+	<1269794684-1331-2-git-send-email-GNUtoo@no-log.org>
+From: Chris Larson <clarson@kergoth.com>
+Date: Sun, 28 Mar 2010 09:53:21 -0700
+X-Google-Sender-Auth: 8a85cbf3f29cc939
+Received: by 10.229.35.80 with SMTP id o16mr1093866qcd.93.1269795221155; Sun, 
+	28 Mar 2010 09:53:41 -0700 (PDT)
+Message-ID: <b6ebd0a51003280953gef70279i86b2ba504a4ea6ea@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 28 Mar 2010 18:44:44 +0200
-Message-Id: <1269794684-1331-2-git-send-email-GNUtoo@no-log.org>
-X-Mailer: git-send-email 1.6.4.4
-In-Reply-To: <1269794684-1331-1-git-send-email-GNUtoo@no-log.org>
-References: <1269794684-1331-1-git-send-email-GNUtoo@no-log.org>
-X-OriginalArrivalTime: 28 Mar 2010 16:44:55.0496 (UTC)
-	FILETIME=[FEDF0C80:01CACE95]
-X-SA-Exim-Connect-IP: 85.33.3.5
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+X-SA-Exim-Connect-IP: 74.125.92.148
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL, BAYES_00, RCVD_ILLEGAL_IP
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] DO_NOT_COMMIT_YET: fastjar: handle cross-compilation
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] DO_NOT_COMMIT_YET: fastjar: handle cross-compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,70 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Mar 2010 16:48:35 -0000
+X-List-Received-Date: Sun, 28 Mar 2010 16:56:53 -0000
+Content-Type: text/plain; charset=UTF-8
+
+On Sun, Mar 28, 2010 at 9:44 AM, Denis 'GNUtoo' Carikli
+<GNUtoo@no-log.org>wrote:
+
+>
+>  btoc(m4 macro)'s AC_TRY_RUN didn't handle the cross-compilation case.
+>  thanks ? for telling me that the third argument
+>  was for cross-compilation.
 
 
-  btoc(m4 macro)'s AC_TRY_RUN didn't handle the cross-compilation case.
-  thanks ? for telling me that the third argument
-  was for cross-compilation.
 
-Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
----
- recipes/fastjar/fastjar-0.98/btowc_eof.patch |   13 +++++++++++++
- recipes/fastjar/fastjar-0.98/wcrtomb.patch   |   13 +++++++++++++
- recipes/fastjar/fastjar_0.98.bb              |    2 ++
- 3 files changed, 28 insertions(+), 0 deletions(-)
- create mode 100644 recipes/fastjar/fastjar-0.98/btowc_eof.patch
- create mode 100644 recipes/fastjar/fastjar-0.98/wcrtomb.patch
-
-diff --git a/recipes/fastjar/fastjar-0.98/btowc_eof.patch b/recipes/fastjar/fastjar-0.98/btowc_eof.patch
-new file mode 100644
-index 0000000..b76e491
---- /dev/null
-+++ b/recipes/fastjar/fastjar-0.98/btowc_eof.patch
-@@ -0,0 +1,13 @@
-+Index: fastjar-0.98/m4/btowc.m4
-+===================================================================
-+--- fastjar-0.98.orig/m4/btowc.m4
-++++ fastjar-0.98/m4/btowc.m4
-+@@ -47,7 +47,7 @@ int main ()
-+ }],
-+             [gl_cv_func_btowc_eof=yes],
-+             [gl_cv_func_btowc_eof=no],
-+-            [])
-++            [gl_cv_func_btowc_eof=yes])
-+         fi
-+       ])
-+     case "$gl_cv_func_btowc_eof" in
-diff --git a/recipes/fastjar/fastjar-0.98/wcrtomb.patch b/recipes/fastjar/fastjar-0.98/wcrtomb.patch
-new file mode 100644
-index 0000000..9d3133d
---- /dev/null
-+++ b/recipes/fastjar/fastjar-0.98/wcrtomb.patch
-@@ -0,0 +1,13 @@
-+Index: fastjar-0.98/m4/wcrtomb.m4
-+===================================================================
-+--- fastjar-0.98.orig/m4/wcrtomb.m4
-++++ fastjar-0.98/m4/wcrtomb.m4
-+@@ -67,7 +67,7 @@ int main ()
-+ }],
-+             [gl_cv_func_wcrtomb_retval=yes],
-+             [gl_cv_func_wcrtomb_retval=no],
-+-            [])
-++            [gl_cv_func_wcrtomb_retval=yes])
-+         fi
-+       ])
-+     case "$gl_cv_func_wcrtomb_retval" in
-diff --git a/recipes/fastjar/fastjar_0.98.bb b/recipes/fastjar/fastjar_0.98.bb
-index 35392f2..76b28e2 100644
---- a/recipes/fastjar/fastjar_0.98.bb
-+++ b/recipes/fastjar/fastjar_0.98.bb
-@@ -1 +1,3 @@
- require fastjar.inc
-+SRC_URI += " file://btowc_eof.patch;patch=1 \
-+             file://wcrtomb.patch;patch=1"
+Using the third argument for this sort of thing is not ideal.. in fact, I've
+experimented with patching the autoconf macros to disable it.  The only time
+you should consider using it is when the test is only for a sanity check,
+and its result does not affect behavior.  When the result does affect
+behavior and clearly isn't a sanity check, setting an assumed default
+knowing nothing about the target environment is not the way to go.  You
+should use the CONFIG_SITE / site files to feed in the test result as
+appropriate for the platform, coupled with wrapping the AC_TRY_RUN call in
+AC_CACHE_CHECK, to ensure it obeys it.
 -- 
-1.6.4.4
-
-
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
