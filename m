@@ -1,29 +1,43 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NvwS6-0004qs-9Q for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Mar 2010 19:39:18 +0200
-Received: from f053035077.adsl.alicedsl.de ([78.53.35.77]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NvwP1-0003sJ-DK for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Mar 2010 17:35:59 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NvyHV-0006zZ-0m for openembedded-devel@lists.openembedded.org;
+	Sun, 28 Mar 2010 21:36:21 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NvyEN-000486-3V for openembedded-devel@lists.openembedded.org;
+	Sun, 28 Mar 2010 21:33:07 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Mar 2010 21:33:07 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 28 Mar 2010 21:33:07 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 28 Mar 2010 19:35:56 +0200
-Message-ID: <1269797756.8018.85.camel@mattotaupa>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 28 Mar 2010 21:32:53 +0200
+Message-ID: <hooat6$p3d$1@dough.gmane.org>
+References: <1269730499.4033.176.camel@mattotaupa>	<hon5i2$8iq$1@dough.gmane.org>
+	<1269797481.8018.80.camel@mattotaupa>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
+In-Reply-To: <1269797481.8018.80.camel@mattotaupa>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS,WEIRD_PORT autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: ti-cmem-module: Loading kernel modules for gstreamer-ti... FATAL: Error inserting cmemk (/lib/modules/2.6.32/kernel/drivers/dsp/cmemk.ko): Bad address
+Subject: Re: enna: do_configure failed: automake: unknown warning category `cross'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,52 +51,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Mar 2010 17:39:18 -0000
-X-Groupsio-MsgNum: 18203
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-ZXd3lcnV7YFejvmX2E2w"
+X-List-Received-Date: Sun, 28 Mar 2010 19:36:21 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---=-ZXd3lcnV7YFejvmX2E2w
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Dear OE folks,
+On 28-03-10 19:31, Paul Menzel wrote:
+> Am Sonntag, den 28.03.2010, 10:55 +0200 schrieb Koen Kooi:
+>> On 27-03-10 23:54, Paul Menzel wrote:
+>>> I am trying to write the recipe for Enna [1].
+>>
+>> [..]
+>>
+>>> Now I am getting the following error message during `configure`.
+>>>
+>>>         […]
+>>
+>>>         configure.ac:35: required file `./config.rpath' not found
+>>
+>>> Any hint is appreciated.
+>>
+>> do_configure_prepend() {
+>> 	autopoint || touch config.rpath
+>> }
+> 
+> Thanks that worked!
+> 
+> Sorry for the next question. Is that workaround needed because of not
+> having Automake 1.11.1? Or is the recommended fix, that upstream ships
+> `config.rpath`?
 
+It's a caused by this:
 
-doing `opkg update && opkg upgrade` on a BeagleBoard demo image [1] gave
-me the following error message today.
+../../classes/autotools.bbclass:EXTRA_AUTORECONF = "--exclude=autopoint"
 
-        [=E2=80=A6]
-        Configuring ti-cmem-module.
-        Configuring gstreamer-ti.
-         System startup links for /etc/init.d/gstti-init already exist.
-        Unloading kernel module ...ERROR: Module cmemk does not exist in /p=
-roc/modules
-           done
-        Loading kernel modules for gstreamer-ti... FATAL: Error inserting c=
-memk (/lib/modules/2.6.32/kernel/drivers/dsp/cmemk.ko): Bad address
-          done
-        [=E2=80=A6]
+I don't know why we exclude it deliberately, but some recipes do need
+it. And hence we try to run autopoint in efl.bbclass and create an empty
+config.rpath when it fails.
 
+regards,
 
-Thanks,
-
-Paul
-
-
-[1] http://www.angstrom-distribution.org/demo/beagleboard/
-
---=-ZXd3lcnV7YFejvmX2E2w
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAkuvk3wACgkQPX1aK2wOHVg1NQCeK59qnX6gw50ow6UmpNOqNJLG
-btQAnA7f/DK92wl+H40zm6yY/QWOVJRy
-=YEki
+iD8DBQFLr67lMkyGM64RGpERAtG5AJ9xP8FP79T6+z61wtDTafs3keETgACgnA0S
+Xc/1dzbc9EOB9aeV3gICJcY=
+=BXrI
 -----END PGP SIGNATURE-----
 
---=-ZXd3lcnV7YFejvmX2E2w--
+
+
