@@ -1,30 +1,40 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-ww0-f47.google.com ([74.125.82.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1NwGLC-00043p-Oh
+	(envelope-from <slapinid@gmail.com>) id 1NwGUv-0005TQ-05
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Mar 2010 16:53:23 +0200
-Received: (qmail 25132 invoked by uid 1003); 29 Mar 2010 14:50:07 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 29 Mar 2010 14:50:07 -0000
-Message-ID: <4BB0BE1E.8060706@balister.org>
-Date: Mon, 29 Mar 2010 10:50:06 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.8) Gecko/20100301 Fedora/3.0.3-1.fc11 Thunderbird/3.0.3
+	Mon, 29 Mar 2010 17:03:25 +0200
+Received: by wwb13 with SMTP id 13so1856854wwb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Mar 2010 08:00:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:date:received:message-id
+	:subject:from:to:content-type;
+	bh=IDpc2Q8V7C2eKWAE47vNluwi+Mp6gbFRyrEAyzITjzA=;
+	b=e3+jvmQ9ksHBLUqOTIYq0zcnteoILBQnU2J3I7Z5dPZ1tx90MxPG8z6a1Zfgns5ITs
+	iuXGagA8E1DR0YETuUKpdXWRM8VwhHDewwWND10PqqJ2PNX5Kysj7Otz9v9gdnz2gZdl
+	6Tyzs5ope2TaISzkeHkxWSPRrPLZFU1odW6Pg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=i9gFdHPfTNiTCQnCdxhh3vec11GLVLkf+OFjlY6OtYOj9adzvOhP7HSu96FCC4sb1a
+	Des+wxkQ+B5bFK1UfCrmqaMn57iChV5FVXDfZVt8e+ua9B0jfywkkJgVh/Fqa+g7MVdi
+	/Jk1Q8BiQ5Lq4QI40uwNweH9LLbzLSInrhwqs=
 MIME-Version: 1.0
+Received: by 10.216.160.15 with HTTP; Mon, 29 Mar 2010 08:00:10 -0700 (PDT)
+Date: Mon, 29 Mar 2010 19:00:10 +0400
+Received: by 10.216.171.7 with SMTP id q7mr80709wel.40.1269874810891; Mon, 29 
+	Mar 2010 08:00:10 -0700 (PDT)
+Message-ID: <48239d391003290800n4c75b539t1b89a96212edb971@mail.gmail.com>
+From: Sergey Lapin <slapinid@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20100326215357.GD18337@excalibur.local>	<hokggp$6i8$1@dough.gmane.org>	<20100327085533.GB21542@excalibur.local>	<20100328120115.GB8462@excalibur.local>
-	<honmnt$p5n$1@dough.gmane.org> <1269873767.1681.250.camel@rex>
-In-Reply-To: <1269873767.1681.250.camel@rex>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+X-SA-Exim-Connect-IP: 74.125.82.47
+X-SA-Exim-Mail-From: slapinid@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Patchwork weekend this weekend?
+Subject: profiling versions of libs (glibc in particular)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,39 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Mar 2010 14:53:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 29 Mar 2010 15:03:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-http://patchwork.openembedded.org/patch/1023/
-http://patchwork.openembedded.org/patch/1074/
-http://patchwork.openembedded.org/patch/1135/
-http://patchwork.openembedded.org/patch/1334/
+Hi, all!
 
-Is what I see on a quick scan.
+How hard could be to generate -pg versions of packages in addition to -dbg ones?
 
-Philip
+And, also - if that is too far - how could I generate profiling
+version of glibc,
+which is most important for me now?
 
-On 03/29/2010 10:42 AM, Richard Purdie wrote:
-> On Sun, 2010-03-28 at 15:48 +0200, Koen Kooi wrote:
->> There are also a considerable amount of bitbake patches in there, could
->> the bitbake hackers please take care of those?
->
-> Where?
->
-> http://patchwork.openembedded.org/project/openembedded/list/ ?
->
-> I can see one, am I missing something?
->
-> Cheers,
->
-> Richard
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+As I see, profiling is disabled with current version of libs with
+--disable-profile,
+but I don't see this option to have any effect on libraries, generated
+by bitbake glibc.
+
+Is there some simple hack to move forward?
+
+Thanks a lot,
+S.
 
 
