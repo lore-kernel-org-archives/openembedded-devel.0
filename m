@@ -1,40 +1,30 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NvyUH-0006CJ-3O for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Mar 2010 21:49:35 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NvyRB-0002P7-KK for openembedded-devel@lists.openembedded.org;
-	Sun, 28 Mar 2010 21:46:21 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Mar 2010 21:46:21 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 Mar 2010 21:46:21 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Nw74s-00047s-83
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 29 Mar 2010 06:59:55 +0200
+Received: (qmail 20821 invoked by uid 813007); 29 Mar 2010 04:56:41 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 29 Mar 2010 04:56:41 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 28 Mar 2010 21:46:06 +0200
-Message-ID: <hooblv$s4s$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Mon, 29 Mar 2010 06:56:44 +0200
+User-Agent: KMail/1.13.1 (Linux/2.6.34-rc2; KDE/4.4.1; x86_64; ; )
+References: <1269652058-31406-1-git-send-email-andrea.adami@gmail.com>
+In-Reply-To: <1269652058-31406-1-git-send-email-andrea.adami@gmail.com>
+MIME-Version: 1.0
+Message-Id: <201003290656.49082.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] site files for cmake
+Subject: Re: [STABLE][PATCH] procps_3.2.8: add missing checksums
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,82 +38,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 Mar 2010 19:49:35 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 29 Mar 2010 04:59:56 -0000
+X-Groupsio-MsgNum: 18207
+Content-Type: multipart/signed; boundary="nextPart1380243.XsTUKqrv2C";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--nextPart1380243.XsTUKqrv2C
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Dnia sobota, 27 marca 2010 o 02:07:38 Andrea Adami napisa=C5=82(a):
+> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+> ---
+>  conf/checksums.ini |    4 ++++
+>  1 files changed, 4 insertions(+), 0 deletions(-)
+>=20
+> diff --git a/conf/checksums.ini b/conf/checksums.ini
+> index 6a171e8..ed06efc 100644
+> --- a/conf/checksums.ini
+> +++ b/conf/checksums.ini
+> @@ -20674,6 +20674,10 @@
+> sha256=3D6d52c706401af197bd9d7e0187c35b4a3463ea720392ffa0c020d94899b361e5
+> md5=3Df490bca772b16472962c7b9f23b1e97d
+>  sha256=3Db439e04adab9b1e66e11f59c4331680da48f1722f2123123f7c16dfbed2c38dc
+>=20
+> +[http://procps.sourceforge.net/procps-3.2.8.tar.gz]
+> +md5=3D9532714b6846013ca9898984ba4cd7e0
+> +sha256=3D11ed68d8a4433b91cd833deb714a3aa849c02aea738c42e6b4557982419c1535
+> +
+>  [ftp://ftp.nl.uu.net/pub/unix/ftp/proftpd/ftp/distrib/source/proftpd-1.3=
+=2E2
+> .tar.gz] md5=3D756f762883cc8eed03d99dc3b1c56a8e
+>  sha256=3D5e00c20d74bbf98fb8bcc63bd4aecfd08480a87ec731dae8955bd9fca6a01bb3
 
-After fighting with cmake the weekend (and getting rid of legacy-staging
-in console-image while watching cmake fail), I discovered that cmake
-supports cross-compiling since 2.6.0 and allows us to provide a site
-file using -C. I hacked support for that into cmake.bbclass:
+Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=ba23d4de95a33db5feccd19359bd9b907c2d90bd
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-I would like to propose to extend that by copying extending
-siteinfo.bbclass with knowledge about cmake site files. It would do
-roughy the following:
+--nextPart1380243.XsTUKqrv2C
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
-1) Build a list of appropriate filenames
-2) if they exist concatenate them into ${WORKDIR}/site-file.cmake
-
-The sucky part is that you can't use the cmake cache file to populate
-the site files like we can with autotools :(
-
-Cmake emits CMakeCache.txt with entries like:
-
-//Result from TRY_RUN
-HAVE_POLL_FINE:STRING=0
-
-//Output from TRY_RUN
-HAVE_POSIX_STRERROR_R__TRYRUN_OUTPUT:STRING=1
-
-But the site file needs to look like this:
-
-SET( HAVE_POSIX_STRERROR_R
-     "1"
-     CACHE STRING "Result from TRY_RUN" FORCE)
-
-SET( HAVE_POSIX_STRERROR_R__TRYRUN_OUTPUT
-     "1"
-     CACHE STRING "Output from TRY_RUN" FORCE)
-
-So to generate missing entries one needs to:
-
-1) Try building app using OE
-2) Append TryRunResults.cmake to site-file.cmake
-3) Try building app on target
-4) Edit the new entries in site-file.cmake using CMakeCache.txt from the
-target
-
-if error, goto 1)
-
-5) seperate out new entries into the proper site file (e.g. common,
-glibs, arm, etc)
-
-For more info see http://www.itk.org/Wiki/CMake_Cross_Compiling
-
-Oh, and cmake can't crosscompile itself out of the box, it tries to run
-generated binaries.
-
-Could cmake gurus comment on all this? Or better, write a tool that
-converts a cmakelist.txt to configure.ac, since I know how to fix
-autotools :)
-
-regards,
-
-Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-iD8DBQFLr7H+MkyGM64RGpERAlzWAJ0QUjX4fHJjeVt/iXDEfUA97eTIFQCgpyjq
-SiXrmypfUtbWhmCZU4W8jz8=
-=OGtp
+iEYEABECAAYFAkuwMw0ACgkQeQ6MlGH/2qs68ACbBWMiumywdq20BwXZtwpADifu
++tgAnRoe1PhpUhFGoCBsrgparlN0y600
+=SuGK
 -----END PGP SIGNATURE-----
 
-
-
+--nextPart1380243.XsTUKqrv2C--
