@@ -1,49 +1,40 @@
 Received: from mail-fx0-f220.google.com ([209.85.220.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Nw9ZP-0007vB-Fl
+	(envelope-from <isburger@gmail.com>) id 1NwAx5-0000gR-Dm
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Mar 2010 09:39:36 +0200
-Received: by fxm20 with SMTP id 20so9094397fxm.12
+	Mon, 29 Mar 2010 11:08:08 +0200
+Received: by fxm20 with SMTP id 20so9145242fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Mar 2010 00:36:22 -0700 (PDT)
+	Mon, 29 Mar 2010 02:04:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=kiT/t6jsXCcUL0iCZii3zrl8PmWymEHFfEdZ/oUzh0o=;
-	b=b8Mf7vnXsr410nLgyC813+++ZFWwEJubBdK7JkHN2qXlP6FqoxJpzh2vaVwRBNhZ04
-	spSsCjVoTf0WFRSWduNeUxiY7QTQqPu9uNKSMyPz9auM0zv/9yeBJ/44TpDl5SQHE/Ip
-	Vd1cKf4hlTd6s9OBImcGUttGTvBcoqLIzSUq4=
+	h=domainkey-signature:mime-version:received:date:received:message-id
+	:subject:from:to:content-type;
+	bh=W0lTdoNt2s86eqUIJPX09jAaNt8fV9H4JpJkO7LTHoQ=;
+	b=QlZ5i5asid2q4K8TvZskaEOVgnVIrc/HAQ83YjK01K6TRgNKpzTQWkWPiP+Gm8gJGj
+	whuNSXc5oCeUtB+lU0cHmqEiJU6IYzgTjO1pn/03umfMCZ2ZtXwJ3Jw69ldZyXUIu+2e
+	EMlDOo5PV3FKUNAGUSO81xkyK2Gs4rkyCYbzs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=mD9iep0wx25u3prISit+YmVz5OBS/wPvSZoeV6Pa27rTOvqsOrqqrQgLF0UW8512WQ
-	fniGsP1B5/p/XADAnUjG/nBqOObI9OO5ywO/CMHNAmJsYOEu/zxghNamu2U0r7FDfrFi
-	mX/3gc3Td4QNw24dgVGgfQU+m+mcU3+eXtmkE=
-Received: by 10.223.29.218 with SMTP id r26mr996144fac.5.1269848181794;
-	Mon, 29 Mar 2010 00:36:21 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 15sm2774843fxm.7.2010.03.29.00.36.20
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 29 Mar 2010 00:36:20 -0700 (PDT)
-Date: Mon, 29 Mar 2010 09:36:28 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100329073628.GA25489@jama>
-References: <FA726C33-C7BC-48C6-8507-475E87359AF5@dominion.thruhere.net>
-	<20100327144204.GJ3458@jama> <holgr8$8l9$1@dough.gmane.org>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=O8NVRR2yzccpTCni2vnJocZPu1hEOHP0sE66qMTmXQpYhB1jrjrUcLDRB4og2kHL2n
+	qN4UOaYDRrSNEQOe2C76AeRYINfxnTt6ev9h/+YWUJOHvLV+sMr9uACAvSA+PZm6S81x
+	aPXpFRs5OfspH7nJBxfUfy//vweXwSNDdl4ss=
 MIME-Version: 1.0
-In-Reply-To: <holgr8$8l9$1@dough.gmane.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Received: by 10.223.108.66 with HTTP; Mon, 29 Mar 2010 02:04:52 -0700 (PDT)
+Date: Mon, 29 Mar 2010 11:04:52 +0200
+Received: by 10.223.102.214 with SMTP id h22mr4431320fao.105.1269853492666; 
+	Mon, 29 Mar 2010 02:04:52 -0700 (PDT)
+Message-ID: <e2e2e5501003290204v44f677f0s401d0e729cb05dd6@mail.gmail.com>
+From: Izak Burger <isburger@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.220.220
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Mail-From: isburger@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: QT4 and cmake patches
+Subject: Downgrading the kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,44 +48,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Mar 2010 07:39:36 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 29 Mar 2010 09:08:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Sat, Mar 27, 2010 at 06:55:51PM +0100, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> On 27-03-10 15:42, Martin Jansa wrote:
-> > On Sat, Mar 27, 2010 at 12:32:15PM +0100, Koen Kooi wrote:
-> >> I'm currently fixing outstanding bugs with our qt4 recipes so I can use them in and hostside as well as target side sdk and cmake support  would be helpfull :)
-> > 
-> > Have you seen this error? 
-> > 
-> > I get this with bitbake master and 1.8 too. 
-> 
-> Could you try changing
-> 
-> # QT abuses $includedir to point to its headers, which breaks pkgconfig
-> sysroot, so manually fix it up here:
-> 
-> to
-> 
-> # QT abuses includedir to point to its headers, which breaks pkgconfig
-> sysroot, so manually fix it up here:
-> 
-> regards,
-> 
-> Koen
+Hi All,
 
-Sorry for long delay, this didn't help, but your 2nd fix, fixed it for
-me too, thanks!.
+First post for me on this list, so I appologise if this is documented elsewhere.
 
-Regards,
+I've been given the task of developing a proof of concept on the
+dreambox. My hardware was shipped to me, arrived via courier, I built
+the first image from your 1.6 tag (apologies if my terminology is
+wrong, I'm more familiar with svn), and the hardware promptly did
+something strange which eventually revealed the fact that it is a
+clone. I didn't even know clones existed until then.
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+Without getting into the specifics and the ethics of clones, or the
+specifics of how I downgraded to bootloader and unbricked it, my goals
+are to work around enough of this so I can get on with the task at
+hand, and for this I need to downgrade the kernel from 2.6.18 to
+2.6.12, in order for the older binary-only kernel modules to work with
+it (the older modules don't check the bootloader).
+
+So far I haven't been able to figure out exactly what needs changing
+to select the kernel version, and I'm also unsure what other packages
+might be affected. Alternatively, I could also just stick with 1.5,
+which seems to have the 2.6.12 kernel from a cursory glance. Any
+advice will be much appreciated.
+
+regards,
+Izak Burger
 
 
