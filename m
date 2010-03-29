@@ -1,45 +1,37 @@
-Received: from mail-ew0-f211.google.com ([209.85.219.211])
+Received: from smtp-out30.alice.it ([85.33.2.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickael.chazaux@gmail.com>) id 1NwFOB-0003CF-Qa
+	(envelope-from <GNUtoo@no-log.org>) id 1NwFZY-0004M0-Ko
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Mar 2010 15:52:24 +0200
-Received: by ewy3 with SMTP id 3so422937ewy.26
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Mar 2010 06:49:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:received:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=t+93gDpbBJxIZdP4kPiyGFaq/5PeeQZskf/Z6unGuTU=;
-	b=WT/I32LWeKZHC959H5J9wf/8t/DQolqVkmaj1924r+5g/f13zhvJesO3HXG5sX8BZn
-	Fg2G4cwUKRK/8Bh8Pq5DDFL0NkwPohmR6DENOQOcaC67c4tGsRrmKtBisDDMkJl5vXTY
-	sCAfLdW408YGIXbdrb5JqoD8l3bosAL4daoec=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=pHDQfRaZmmLiSQO0P7VBkNudwDCk3h0A3tP3ZGKV0Lv/C3wZ9SrpcR3wh8OpFJdJfv
-	zEZ06Imse/YwAyi+Yc1zniXCxAFjw1/fUWWNTWY/+B7UQ+KPcoIFxLS5o5ILDmh+m02w
-	wwJY1AQOJCDhzgQXhpCB7y4MjBW0nh6yGKgb8=
-MIME-Version: 1.0
-Received: by 10.213.4.70 with HTTP; Mon, 29 Mar 2010 06:49:09 -0700 (PDT)
-In-Reply-To: <201003291421.21206.marcin@juszkiewicz.com.pl>
-References: <1269864930-2633-1-git-send-email-mchazaux@adeneo-embedded.com>
-	<201003291421.21206.marcin@juszkiewicz.com.pl>
-Date: Mon, 29 Mar 2010 15:49:09 +0200
-Received: by 10.213.1.215 with SMTP id 23mr2481702ebg.49.1269870549709; Mon, 
-	29 Mar 2010 06:49:09 -0700 (PDT)
-Message-ID: <bc36f8ed1003290649x281f4769u136cef773ee80655@mail.gmail.com>
-From: Mickael Chazaux <mickael.chazaux@gmail.com>
+	Mon, 29 Mar 2010 16:04:09 +0200
+Received: from FBCMMO04.fbc.local ([192.168.184.135]) by smtp-out30.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 29 Mar 2010 15:57:56 +0200
+Received: from FBCMCL01B04.fbc.local ([192.168.69.85]) by FBCMMO04.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 29 Mar 2010 15:57:43 +0200
+Received: from [192.168.1.116] ([79.21.202.115]) by FBCMCL01B04.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Mon, 29 Mar 2010 15:57:43 +0200
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.211
-X-SA-Exim-Mail-From: mickael.chazaux@gmail.com
+In-Reply-To: <b6ebd0a51003280953gef70279i86b2ba504a4ea6ea@mail.gmail.com>
+References: <1269794684-1331-1-git-send-email-GNUtoo@no-log.org>
+	<1269794684-1331-2-git-send-email-GNUtoo@no-log.org>
+	<b6ebd0a51003280953gef70279i86b2ba504a4ea6ea@mail.gmail.com>
+Date: Mon, 29 Mar 2010 15:57:41 +0200
+Message-ID: <1269871061.2285.6.camel@gnutoo-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 29 Mar 2010 13:57:43.0478 (UTC)
+	FILETIME=[CDBC5560:01CACF47]
+X-SA-Exim-Connect-IP: 85.33.2.30
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add Freescale i.MX25 3stack support
+Subject: Re: [PATCH] DO_NOT_COMMIT_YET: fastjar: handle cross-compilation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,31 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Mar 2010 13:52:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 29 Mar 2010 14:04:09 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hi,
+> Using the third argument for this sort of thing is not ideal.. in fact, I've
+> experimented with patching the autoconf macros to disable it.  
+I know,I sent the patch only for explaining better the issue,
+I didn't plan at any moment to use that patch.
+I just wanted an howto,in order to use the site files.
 
-> Do we have virtual/bootloader? First heard of it.
+> The only time
+> you should consider using it is when the test is only for a sanity check,
+> and its result does not affect behavior.  When the result does affect
+> behavior and clearly isn't a sanity check, setting an assumed default
+> knowing nothing about the target environment is not the way to go.
+I tested the default running the tests,that is to say:
+devshell,copy-paste the test,compile them,run them on target.
+>   You
+> should use the CONFIG_SITE / site files to feed in the test result as
+> appropriate for the platform, 
+That's exactly what I wanted to do,but unfortunately as I said in the
+first mail:
+*I'm not confident with it
+*I bet it needs review before touching it
+*I wouldn't know in which file I should add the changes(Maybe
+common-glibc?)
+> coupled with wrapping the AC_TRY_RUN call in
+> AC_CACHE_CHECK, to ensure it obeys it.
+I didn't know that I needed to do that,
+thanks a lot,
+I'll try to find out how to do it.
 
-BB>> build virtual/bootloader
-SHELL: Building virtual/bootloader
-NOTE: multiple providers are available for virtual/bootloader
-(u-boot-omap3beagleboard, u-boot-omap2430sdp, ezx-gen-blob, qi-ubi,
-u-boot-openmoko, u-boot-omap3, u-boot, lowlevel-topas910, barebox,
-qi);
-NOTE: consider defining PREFERRED_PROVIDER_virtual/bootloader
+Denis.
 
-The answer appears to be yes... Shall I leave it this way?
 
-Regards,
---
-Mickael CHAZAUX
-
-Adeneo Embedded - Adetel Group
-2, chemin du Ruisseau
-69134 ECULLY - FRANCE
-T=C3=A9l. : +33 (0)4 72 18 08 40 - Fax : +33 (0)4 72 18 08 41
 
 
