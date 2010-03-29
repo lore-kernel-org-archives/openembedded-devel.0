@@ -1,45 +1,40 @@
-Received: from mail-iw0-f184.google.com ([209.85.223.184])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NwLaZ-0007nI-4X
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NwMmZ-000115-7e
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Mar 2010 22:29:37 +0200
-Received: by iwn14 with SMTP id 14so12175051iwn.12
+	Mon, 29 Mar 2010 23:46:04 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2TLgoWf019934
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Mar 2010 13:26:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:received:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=A9BwhgU9FNu7djRaCK743Hp75+ka0A8b+23UgxQvJbo=;
-	b=Mg3N7gggPPbknWVVlpwJ0ehSS3Ttn8NzpVpQzzyrMMSByfuJ2rD7moKoW2+gprqVGs
-	jj9C4b+ll34e6FqaCAYW9BBtR3qtHyF/qId9wl0UhqMuu1avsflKMJ5tSw3Ou7UQzA8L
-	7/F3CgCa1JcewZAaXIcvJUZDMSByd5aFjk3Mw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=VxqK+YET9bywrBPmeNTpxNntoNXivpp4/8QGd0Uu29tfmI5nKov2RpDQdy+ydpdsQp
-	ITXtgwTigJ/wTpu8TWZbQVp0lkd62plWLUVPjc5d5oyeQ2eXHzqiST5rJSjePxLMVFPQ
-	hlMTJyburrHVTUBpaa2j08+n+KxS89HiDjDBU=
-MIME-Version: 1.0
-Received: by 10.231.32.66 with HTTP; Mon, 29 Mar 2010 13:26:19 -0700 (PDT)
-In-Reply-To: <1269892238.5924.3.camel@mattotaupa>
-References: <e2e2e5501003290204v44f677f0s401d0e729cb05dd6@mail.gmail.com>
-	<1269892238.5924.3.camel@mattotaupa>
-Date: Mon, 29 Mar 2010 13:26:19 -0700
-Received: by 10.143.26.28 with SMTP id d28mr147148wfj.103.1269894379581; Mon, 
-	29 Mar 2010 13:26:19 -0700 (PDT)
-Message-ID: <19c1b8a91003291326w2844cda8gac3c2b5f80901e62@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Mon, 29 Mar 2010 22:42:50 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 19407-10 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Mar 2010 22:42:46 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2TLggcF019928
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Mar 2010 22:42:43 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.184
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+In-Reply-To: <20100329174253.GC25428@gmail.com>
+References: <1269878004.1681.331.camel@rex> <20100329174253.GC25428@gmail.com>
+Date: Mon, 29 Mar 2010 22:42:39 +0100
+Message-ID: <1269898959.1681.692.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Downgrading the kernel
+Subject: Re: Standalone gcc library builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,54 +48,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Mar 2010 20:29:37 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 29 Mar 2010 21:46:04 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Mon, Mar 29, 2010 at 12:50 PM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> Dear Izak,
->
->
-> Am Montag, den 29.03.2010, 11:04 +0200 schrieb Izak Burger:
->> First post for me on this list, so I appologise if this is documented el=
-sewhere.
->
-> Welcome!
->
-> [=85]
->
->> Without getting into the specifics and the ethics of clones, or the
->> specifics of how I downgraded to bootloader and unbricked it, my goals
->> are to work around enough of this so I can get on with the task at
->> hand, and for this I need to downgrade the kernel from 2.6.18 to
->> 2.6.12, in order for the older binary-only kernel modules to work with
->> it (the older modules don't check the bootloader).
->>
->> So far I haven't been able to figure out exactly what needs changing
->> to select the kernel version, and I'm also unsure what other packages
->> might be affected. Alternatively, I could also just stick with 1.5,
->> which seems to have the 2.6.12 kernel from a cursory glance. Any
->> advice will be much appreciated.
->
-> You can use `PREFERRED_VERSION_RecipeName` in your local.conf
+On Mon, 2010-03-29 at 10:42 -0700, Khem Raj wrote:
+> I have had gcc build all runtimes libraries separately. I think we should
+> device gcc build and we can disable building certain directories via
+> --disable-<dir>. We dont have to stash libgcc. Its not a big library and
+> its probably better to rebuild it along with rest of runtime libraries IMO
+> and probably we should have packages for each language runtime so people
+> who dont need C++ or Java or fortran dont have to build those. The same
+> should be tunable in gcc builds too.
 
-or PREFERRED_VERSION_<recipe>_local
+I talked with Khem on irc but just for the record here, I've done some
+testing with gcc 4.3.3 in Poky and have pushed my results to:
 
-as far as
-> I know. So look for =BBPREFERRED_VERSION=AB and also =BBDEFAULT_PREFERENC=
-E=AB.
->
->
-> Thanks,
->
-> Paul
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+http://git.pokylinux.org/cgit.cgi/poky/log/?h=master-gcc-runtime-testing
+
+This adds a gcc-runtime recipe which builds libgcc, libssp and libstdc++
+as test cases. It will be possible to build other runtime libs
+conditionally on whether they're enabled like libfortran easily enough.
+
+We have to add in an extra dependency layer to the compiler bootstrap
+but that isn't an issue.
+
+The bit that is ugly is the stashing of headers in staging by gcc-cross.
+The issue is we want to build the target libs in our normal "target"
+context so cross.bbclass is not used by gcc-runtime. This means
+HOST==TARGET and hence building gcc itself fails.
+
+Discussion on how best to do this welcome :)
+
+Cheers,
+
+Richard
+
 
 
