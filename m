@@ -1,30 +1,49 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-fx0-f220.google.com ([209.85.220.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Nw9AP-0000up-MB
+	(envelope-from <martin.jansa@gmail.com>) id 1Nw9ZP-0007vB-Fl
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Mar 2010 09:13:46 +0200
-Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
-	[123.192.181.204])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 7038A1B10C79
+	Mon, 29 Mar 2010 09:39:36 +0200
+Received: by fxm20 with SMTP id 20so9094397fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Mar 2010 07:14:39 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
+	Mon, 29 Mar 2010 00:36:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=kiT/t6jsXCcUL0iCZii3zrl8PmWymEHFfEdZ/oUzh0o=;
+	b=b8Mf7vnXsr410nLgyC813+++ZFWwEJubBdK7JkHN2qXlP6FqoxJpzh2vaVwRBNhZ04
+	spSsCjVoTf0WFRSWduNeUxiY7QTQqPu9uNKSMyPz9auM0zv/9yeBJ/44TpDl5SQHE/Ip
+	Vd1cKf4hlTd6s9OBImcGUttGTvBcoqLIzSUq4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=mD9iep0wx25u3prISit+YmVz5OBS/wPvSZoeV6Pa27rTOvqsOrqqrQgLF0UW8512WQ
+	fniGsP1B5/p/XADAnUjG/nBqOObI9OO5ywO/CMHNAmJsYOEu/zxghNamu2U0r7FDfrFi
+	mX/3gc3Td4QNw24dgVGgfQU+m+mcU3+eXtmkE=
+Received: by 10.223.29.218 with SMTP id r26mr996144fac.5.1269848181794;
+	Mon, 29 Mar 2010 00:36:21 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 15sm2774843fxm.7.2010.03.29.00.36.20
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 29 Mar 2010 00:36:20 -0700 (PDT)
+Date: Mon, 29 Mar 2010 09:36:28 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Mar 2010 09:10:17 +0200
-User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
-References: <loom.20100329T073757-156@post.gmane.org>
-In-Reply-To: <loom.20100329T073757-156@post.gmane.org>
+Message-ID: <20100329073628.GA25489@jama>
+References: <FA726C33-C7BC-48C6-8507-475E87359AF5@dominion.thruhere.net>
+	<20100327144204.GJ3458@jama> <holgr8$8l9$1@dough.gmane.org>
 MIME-Version: 1.0
-Message-Id: <201003290910.17851.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+In-Reply-To: <holgr8$8l9$1@dough.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.220
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Problem building Angstrom (quilt-native_0.46.bb' failed)
+Subject: Re: QT4 and cmake patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,39 +57,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Mar 2010 07:13:46 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 29 Mar 2010 07:39:36 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Monday 29 March 2010 07:43:48 Danail wrote:
-.
+On Sat, Mar 27, 2010 at 06:55:51PM +0100, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
-> | ./.lineno: fork: Cannot allocate memory
-> | FATAL: oe_runconf failed
+> On 27-03-10 15:42, Martin Jansa wrote:
+> > On Sat, Mar 27, 2010 at 12:32:15PM +0100, Koen Kooi wrote:
+> >> I'm currently fixing outstanding bugs with our qt4 recipes so I can use them in and hostside as well as target side sdk and cmake support  would be helpfull :)
+> > 
+> > Have you seen this error? 
+> > 
+> > I get this with bitbake master and 1.8 too. 
 > 
-> NOTE: Task failed: /home/pc/stuff/build/tmp/work/x86_64-linux/
-> quilt-native-0.46-r2/temp/log.do_configure.1750
+> Could you try changing
+> 
+> # QT abuses $includedir to point to its headers, which breaks pkgconfig
+> sysroot, so manually fix it up here:
+> 
+> to
+> 
+> # QT abuses includedir to point to its headers, which breaks pkgconfig
+> sysroot, so manually fix it up here:
+> 
+> regards,
+> 
+> Koen
 
-> Any ideas what is the problem?
+Sorry for long delay, this didn't help, but your 2nd fix, fixed it for
+me too, thanks!.
 
-Hi,
+Regards,
 
-this is a kind of issue you can only resolve yourself as it heavily depends on 
-your environment. In general I have two remarks:
-
-When a tool points you to a log file (as in above temp/log.do_configure) you 
-should attempt to make sense out of it, or at least attach it when sending an 
-email.
-
-The other one is, we are all humans and we do love social interaction to 
-various degrees. When you say you spend two weeks figuring that out, it would 
-be very nice if you could explain what you have tried so far, how it failed 
-instead of simply relying on others. :)
-
-
-And here is my speculation:
-	1.) You really don't have enough ram to allocate more than one process
-	2.) Your home partition is mounted no exec or such.
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
