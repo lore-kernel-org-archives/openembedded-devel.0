@@ -1,40 +1,30 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nw8vR-0005Sy-03 for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Mar 2010 08:58:18 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nw8sJ-0005cg-VQ for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Mar 2010 08:55:04 +0200
-Received: from 211-158-80-80.winetbg.com ([211-158-80-80.winetbg.com])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Mar 2010 08:55:03 +0200
-Received: from danail.mechev by 211-158-80-80.winetbg.com with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <holger+oe@freyther.de>) id 1Nw9AP-0000up-MB
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 29 Mar 2010 09:13:46 +0200
+Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
+	[123.192.181.204])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 7038A1B10C79
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Mar 2010 08:55:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 29 Mar 2010 07:14:39 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-From: Danail <danail.mechev@rgb-bg.com>
-Date: Mon, 29 Mar 2010 05:43:48 +0000 (UTC)
-Message-ID: <loom.20100329T073757-156@post.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 80.80.158.211 (Mozilla/5.0 (X11; U; Linux x86_64; en-GB;
-	rv:1.9.1.5) Gecko/20091109 Ubuntu/9.10 (karmic) Firefox/3.5.5)
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Mon, 29 Mar 2010 09:10:17 +0200
+User-Agent: KMail/1.13.1 (Linux/2.6.33-rc8; KDE/4.4.1; i686; ; )
+References: <loom.20100329T073757-156@post.gmane.org>
+In-Reply-To: <loom.20100329T073757-156@post.gmane.org>
+MIME-Version: 1.0
+Message-Id: <201003290910.17851.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Problem building Angstrom (quilt-native_0.46.bb' failed)
+Subject: Re: Problem building Angstrom (quilt-native_0.46.bb' failed)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,67 +38,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Mar 2010 06:58:18 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 29 Mar 2010 07:13:46 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
-Hello, It`s my first time building Angstrom and for the last 2 weeks I`m 
-stacked with the following issue:
-************************************************************************
-pc@ubuntu:~/stuff/build$ bitbake x11-image -k
-NOTE: Handling BitBake files: - (6701/6701) [100 %]
-NOTE: Parsing finished. 6398 cached, 0 parsed, 303 skipped, 0 masked.
-NOTE: Cache is clean, not saving.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 59 of 5483 (ID: 43, /home/pc/stuff/openembedded/recipes/
-quilt/quilt-native_0.46.bb, do_configure)
-ERROR: function do_configure failed
-ERROR: log data follows (/home/pc/stuff/build/tmp/work/x86_64-linux/
-quilt-native-0.46-r2/temp/log.do_configure.1750)
-| NOTE: Running /home/pc/stuff/build/tmp/work/x86_64-linux/
-quilt-native-0.46-r2/quilt-0.46/configure    --build=x86_64-linux    
---host=x86_64-linux    --target=x86_64-linux    --prefix=/home/pc/stuff/build/
-tmp/staging/x86_64-linux/usr    --exec_prefix=/home/pc/stuff/build/tmp/
-staging/x86_64-linux/usr    --bindir=/home/pc/stuff/build/tmp/staging/
-x86_64-linux/usr/bin    --sbindir=/home/pc/stuff/build/tmp/staging/
-x86_64-linux/usr/sbin    --libexecdir=/home/pc/stuff/build/tmp/staging/
-x86_64-linux/usr/libexec    --datadir=/home/pc/stuff/build/tmp/staging/
-x86_64-linux/usr/share    --sysconfdir=/home/pc/stuff/build/tmp/staging/
-x86_64-linux/etc    --sharedstatedir=/home/pc/stuff/build/tmp/staging/
-x86_64-linux/usr/com    --localstatedir=/home/pc/stuff/build/tmp/staging/
-x86_64-linux/var    --libdir=/home/pc/stuff/build/tmp/staging/x86_64-linux/
-usr/lib    --includedir=/home/pc/stuff/build/tmp/staging/x86_64-linux/usr/
-include    --oldincludedir=/home/pc/stuff/build/tmp/staging/x86_64-linux/usr/
-include    --infodir=/home/pc/stuff/build/tmp/staging/x86_64-linux/usr/share/
-info    --mandir=/home/pc/stuff/build/tmp/staging/x86_64-linux/usr/share/man 
---disable-nls    ...
-| ./.lineno: fork: Cannot allocate memory
-| FATAL: oe_runconf failed
-NOTE: Task failed: /home/pc/stuff/build/tmp/work/x86_64-linux/
-quilt-native-0.46-r2/temp/log.do_configure.1750
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /home/pc/stuff/openembedded/recipes/quilt/quilt-native_0.46.bb
- do_configure failed
-ERROR: Task 43 (/home/pc/stuff/openembedded/recipes/quilt/quilt-native_0.46.bb,
- do_configure) failed
-NOTE: Tasks Summary: Attempted 1249 tasks of which 1249 didn't need to 
-be rerun and 1 failed.
-ERROR: '/home/pc/stuff/openembedded/recipes/quilt/quilt-native_0.46.bb' failed
-******************************************************************************
-  I`m using the following configuration:
-MACHINE = "at91sam9263ek"
-DISTRO = "angstrom-2008.1"
-BB_VERSION        = "1.8.18"
-  The host system is Ubuntu 9.10 - the Karmic Koala - released in October 2009
+On Monday 29 March 2010 07:43:48 Danail wrote:
+.
+> 
+> | ./.lineno: fork: Cannot allocate memory
+> | FATAL: oe_runconf failed
+> 
+> NOTE: Task failed: /home/pc/stuff/build/tmp/work/x86_64-linux/
+> quilt-native-0.46-r2/temp/log.do_configure.1750
+
+> Any ideas what is the problem?
+
+Hi,
+
+this is a kind of issue you can only resolve yourself as it heavily depends on 
+your environment. In general I have two remarks:
+
+When a tool points you to a log file (as in above temp/log.do_configure) you 
+should attempt to make sense out of it, or at least attach it when sending an 
+email.
+
+The other one is, we are all humans and we do love social interaction to 
+various degrees. When you say you spend two weeks figuring that out, it would 
+be very nice if you could explain what you have tried so far, how it failed 
+instead of simply relying on others. :)
 
 
-Any ideas what is the problem?
-
-Thanks in advance!
-
-Best Regards: Danail
-
+And here is my speculation:
+	1.) You really don't have enough ram to allocate more than one process
+	2.) Your home partition is mounted no exec or such.
 
 
