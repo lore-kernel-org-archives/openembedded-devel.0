@@ -1,30 +1,40 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Nw74s-00047s-83
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Mar 2010 06:59:55 +0200
-Received: (qmail 20821 invoked by uid 813007); 29 Mar 2010 04:56:41 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 29 Mar 2010 04:56:41 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nw8vR-0005Sy-03 for openembedded-devel@lists.openembedded.org;
+	Mon, 29 Mar 2010 08:58:18 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nw8sJ-0005cg-VQ for openembedded-devel@lists.openembedded.org;
+	Mon, 29 Mar 2010 08:55:04 +0200
+Received: from 211-158-80-80.winetbg.com ([211-158-80-80.winetbg.com])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Mar 2010 08:55:03 +0200
+Received: from danail.mechev by 211-158-80-80.winetbg.com with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 29 Mar 2010 08:55:03 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Mar 2010 06:56:44 +0200
-User-Agent: KMail/1.13.1 (Linux/2.6.34-rc2; KDE/4.4.1; x86_64; ; )
-References: <1269652058-31406-1-git-send-email-andrea.adami@gmail.com>
-In-Reply-To: <1269652058-31406-1-git-send-email-andrea.adami@gmail.com>
-MIME-Version: 1.0
-Message-Id: <201003290656.49082.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+From: Danail <danail.mechev@rgb-bg.com>
+Date: Mon, 29 Mar 2010 05:43:48 +0000 (UTC)
+Message-ID: <loom.20100329T073757-156@post.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 80.80.158.211 (Mozilla/5.0 (X11; U; Linux x86_64; en-GB;
+	rv:1.9.1.5) Gecko/20091109 Ubuntu/9.10 (karmic) Firefox/3.5.5)
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH] procps_3.2.8: add missing checksums
+Subject: Problem building Angstrom (quilt-native_0.46.bb' failed)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,59 +48,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Mar 2010 04:59:56 -0000
-X-Groupsio-MsgNum: 18207
-Content-Type: multipart/signed; boundary="nextPart1380243.XsTUKqrv2C";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Mon, 29 Mar 2010 06:58:18 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
---nextPart1380243.XsTUKqrv2C
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Hello, It`s my first time building Angstrom and for the last 2 weeks I`m 
+stacked with the following issue:
+************************************************************************
+pc@ubuntu:~/stuff/build$ bitbake x11-image -k
+NOTE: Handling BitBake files: - (6701/6701) [100 %]
+NOTE: Parsing finished. 6398 cached, 0 parsed, 303 skipped, 0 masked.
+NOTE: Cache is clean, not saving.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 59 of 5483 (ID: 43, /home/pc/stuff/openembedded/recipes/
+quilt/quilt-native_0.46.bb, do_configure)
+ERROR: function do_configure failed
+ERROR: log data follows (/home/pc/stuff/build/tmp/work/x86_64-linux/
+quilt-native-0.46-r2/temp/log.do_configure.1750)
+| NOTE: Running /home/pc/stuff/build/tmp/work/x86_64-linux/
+quilt-native-0.46-r2/quilt-0.46/configure    --build=x86_64-linux    
+--host=x86_64-linux    --target=x86_64-linux    --prefix=/home/pc/stuff/build/
+tmp/staging/x86_64-linux/usr    --exec_prefix=/home/pc/stuff/build/tmp/
+staging/x86_64-linux/usr    --bindir=/home/pc/stuff/build/tmp/staging/
+x86_64-linux/usr/bin    --sbindir=/home/pc/stuff/build/tmp/staging/
+x86_64-linux/usr/sbin    --libexecdir=/home/pc/stuff/build/tmp/staging/
+x86_64-linux/usr/libexec    --datadir=/home/pc/stuff/build/tmp/staging/
+x86_64-linux/usr/share    --sysconfdir=/home/pc/stuff/build/tmp/staging/
+x86_64-linux/etc    --sharedstatedir=/home/pc/stuff/build/tmp/staging/
+x86_64-linux/usr/com    --localstatedir=/home/pc/stuff/build/tmp/staging/
+x86_64-linux/var    --libdir=/home/pc/stuff/build/tmp/staging/x86_64-linux/
+usr/lib    --includedir=/home/pc/stuff/build/tmp/staging/x86_64-linux/usr/
+include    --oldincludedir=/home/pc/stuff/build/tmp/staging/x86_64-linux/usr/
+include    --infodir=/home/pc/stuff/build/tmp/staging/x86_64-linux/usr/share/
+info    --mandir=/home/pc/stuff/build/tmp/staging/x86_64-linux/usr/share/man 
+--disable-nls    ...
+| ./.lineno: fork: Cannot allocate memory
+| FATAL: oe_runconf failed
+NOTE: Task failed: /home/pc/stuff/build/tmp/work/x86_64-linux/
+quilt-native-0.46-r2/temp/log.do_configure.1750
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /home/pc/stuff/openembedded/recipes/quilt/quilt-native_0.46.bb
+ do_configure failed
+ERROR: Task 43 (/home/pc/stuff/openembedded/recipes/quilt/quilt-native_0.46.bb,
+ do_configure) failed
+NOTE: Tasks Summary: Attempted 1249 tasks of which 1249 didn't need to 
+be rerun and 1 failed.
+ERROR: '/home/pc/stuff/openembedded/recipes/quilt/quilt-native_0.46.bb' failed
+******************************************************************************
+  I`m using the following configuration:
+MACHINE = "at91sam9263ek"
+DISTRO = "angstrom-2008.1"
+BB_VERSION        = "1.8.18"
+  The host system is Ubuntu 9.10 - the Karmic Koala - released in October 2009
 
-Dnia sobota, 27 marca 2010 o 02:07:38 Andrea Adami napisa=C5=82(a):
-> Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
-> ---
->  conf/checksums.ini |    4 ++++
->  1 files changed, 4 insertions(+), 0 deletions(-)
->=20
-> diff --git a/conf/checksums.ini b/conf/checksums.ini
-> index 6a171e8..ed06efc 100644
-> --- a/conf/checksums.ini
-> +++ b/conf/checksums.ini
-> @@ -20674,6 +20674,10 @@
-> sha256=3D6d52c706401af197bd9d7e0187c35b4a3463ea720392ffa0c020d94899b361e5
-> md5=3Df490bca772b16472962c7b9f23b1e97d
->  sha256=3Db439e04adab9b1e66e11f59c4331680da48f1722f2123123f7c16dfbed2c38dc
->=20
-> +[http://procps.sourceforge.net/procps-3.2.8.tar.gz]
-> +md5=3D9532714b6846013ca9898984ba4cd7e0
-> +sha256=3D11ed68d8a4433b91cd833deb714a3aa849c02aea738c42e6b4557982419c1535
-> +
->  [ftp://ftp.nl.uu.net/pub/unix/ftp/proftpd/ftp/distrib/source/proftpd-1.3=
-=2E2
-> .tar.gz] md5=3D756f762883cc8eed03d99dc3b1c56a8e
->  sha256=3D5e00c20d74bbf98fb8bcc63bd4aecfd08480a87ec731dae8955bd9fca6a01bb3
 
-Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+Any ideas what is the problem?
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+Thanks in advance!
 
---nextPart1380243.XsTUKqrv2C
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+Best Regards: Danail
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAkuwMw0ACgkQeQ6MlGH/2qs68ACbBWMiumywdq20BwXZtwpADifu
-+tgAnRoe1PhpUhFGoCBsrgparlN0y600
-=SuGK
------END PGP SIGNATURE-----
 
---nextPart1380243.XsTUKqrv2C--
