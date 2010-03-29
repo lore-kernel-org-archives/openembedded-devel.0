@@ -1,38 +1,24 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NwHKX-0001UZ-Vl
+Received: from [93.100.16.104] (helo=mate.hex)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rik@mate.hex>) id 1NwIu2-0007pO-6E
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Mar 2010 17:56:47 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2TFrXlY016683
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Mar 2010 16:53:33 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 16417-05 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Mar 2010 16:53:29 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2TFrR7e016677
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Mar 2010 16:53:28 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Date: Mon, 29 Mar 2010 16:53:24 +0100
-Message-ID: <1269878004.1681.331.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	Mon, 29 Mar 2010 19:37:36 +0200
+Received: by mate.hex (Postfix, from userid 1000)
+	id 4CBAA3D460; Mon, 29 Mar 2010 21:31:19 +0400 (MSD)
+From: Roman I Khimov <khimov@altell.ru>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 29 Mar 2010 21:31:07 +0400
+Message-Id: <1269883870-8204-1-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.6.4.2
+X-SA-Exim-Connect-IP: 93.100.16.104
+X-SA-Exim-Mail-From: rik@mate.hex
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.1 required=5.0 tests=BAYES_00,NO_DNS_FOR_FROM,
+	RCVD_IN_PBL,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Standalone gcc library builds
+Subject: [PATCH 1/4] poptop: remove version 1.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,33 +32,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Mar 2010 15:56:48 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 29 Mar 2010 17:37:36 -0000
 
-Hi,
+Release dated 2005 and the recipe in unmaintained, 1.3.4 recipe is alsmost
+completely different now. So, I see no point in keeping it around.
 
-We currently build gcc and all its runtime libraries as part of at least
-"gcc-cross", "gcc", "gcc-cross-sdk". Packaging of these libraries varies
-between the different recipes and is a pretty scary place for things to
-go wrong which I've frequently seen.
+Signed-off-by: Roman I Khimov <khimov@altell.ru>
+---
+ recipes/poptop/poptop_1.3.0.bb |   35 -----------------------------------
+ 1 files changed, 0 insertions(+), 35 deletions(-)
+ delete mode 100644 recipes/poptop/poptop_1.3.0.bb
 
-I'm working on the idea of having the above packages just generate the
-compiler binaries (host tools) and having a "gcc-runtime" package which
-builds all the libraries (target libs). I think can make this work
-expect for libgcc itself which is proving a real pain (unsurprisingly).
-
-For libgcc, we can save the bits it needs from the gcc build into
-staging and then make it build that way, or just build it as a special
-case as part of gcc, stash it in staging, then package it as part of
-gcc-runtime.
-
-Does anyone have any better ideas of experience of playing with libgcc?
-
-Cheers,
-
-Richard
-
+diff --git a/recipes/poptop/poptop_1.3.0.bb b/recipes/poptop/poptop_1.3.0.bb
+deleted file mode 100644
+index da7ebe6..0000000
+--- a/recipes/poptop/poptop_1.3.0.bb
++++ /dev/null
+@@ -1,35 +0,0 @@
+-DESCRIPTION = "Poptop is the PPTP server solution for Linux \
+-Using Poptop, Linux servers can now function seamlessly in a PPTP VPN environment. \
+-This enables administrators to leverage the considerable benefits of both Microsoft and Linux operating systems \
+-The current release version supports Windows 95/98/Me/NT/2000/XP PPTP clients and Linux PPTP clients \
+-For more info visit http://www.poptop.org/"
+-
+-HOMEPAGE    = "http://www.poptop.org/"
+-LICENSE     = "GPL"
+-SECTION = "network"
+-PRIORITY    = "optional"
+-DEPENDS     = "ppp"
+-RDEPENDS    = "ppp"
+-
+-PR = "r0"
+-
+-inherit autotools
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/poptop/pptpd-${PV}.tar.gz"
+-S = "${WORKDIR}/pptpd-${PV}"
+-
+-
+-
+-do_install() {
+-	install -d ${D}${sbindir}
+-	install -d ${D}/${sysconfdir}
+-	install -d ${D}/${sysconfdir}/ppp/
+-
+-	install -m 0755  pptpd         ${D}${sbindir}/
+-	install -m 0755  pptpctrl      ${D}${sbindir}/
+-	install -m 0644 samples/options.pptpd ${D}/${sysconfdir}/ppp/
+-	install -m 0644 samples/pptpd.conf    ${D}/${sysconfdir}/
+-
+-
+-}
+-
+-- 
+1.6.4.2
 
 
 
