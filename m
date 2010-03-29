@@ -1,40 +1,42 @@
-Received: from mail-ww0-f47.google.com ([74.125.82.47])
+Received: from smtp-out01.alice.it ([85.33.2.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <slapinid@gmail.com>) id 1NwGUv-0005TQ-05
+	(envelope-from <ospite@studenti.unina.it>) id 1NwGuo-00009i-NX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Mar 2010 17:03:25 +0200
-Received: by wwb13 with SMTP id 13so1856854wwb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Mar 2010 08:00:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:received:message-id
-	:subject:from:to:content-type;
-	bh=IDpc2Q8V7C2eKWAE47vNluwi+Mp6gbFRyrEAyzITjzA=;
-	b=e3+jvmQ9ksHBLUqOTIYq0zcnteoILBQnU2J3I7Z5dPZ1tx90MxPG8z6a1Zfgns5ITs
-	iuXGagA8E1DR0YETuUKpdXWRM8VwhHDewwWND10PqqJ2PNX5Kysj7Otz9v9gdnz2gZdl
-	6Tyzs5ope2TaISzkeHkxWSPRrPLZFU1odW6Pg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=i9gFdHPfTNiTCQnCdxhh3vec11GLVLkf+OFjlY6OtYOj9adzvOhP7HSu96FCC4sb1a
-	Des+wxkQ+B5bFK1UfCrmqaMn57iChV5FVXDfZVt8e+ua9B0jfywkkJgVh/Fqa+g7MVdi
-	/Jk1Q8BiQ5Lq4QI40uwNweH9LLbzLSInrhwqs=
-MIME-Version: 1.0
-Received: by 10.216.160.15 with HTTP; Mon, 29 Mar 2010 08:00:10 -0700 (PDT)
-Date: Mon, 29 Mar 2010 19:00:10 +0400
-Received: by 10.216.171.7 with SMTP id q7mr80709wel.40.1269874810891; Mon, 29 
-	Mar 2010 08:00:10 -0700 (PDT)
-Message-ID: <48239d391003290800n4c75b539t1b89a96212edb971@mail.gmail.com>
-From: Sergey Lapin <slapinid@gmail.com>
+	Mon, 29 Mar 2010 17:30:11 +0200
+Received: from FBCMMO04.fbc.local ([192.168.184.135]) by smtp-out01.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 29 Mar 2010 17:26:55 +0200
+Received: from FBCMCL01B06.fbc.local ([192.168.69.87]) by FBCMMO04.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 29 Mar 2010 17:26:49 +0200
+Received: from jcn ([87.13.159.217]) by FBCMCL01B06.fbc.local with Microsoft
+	SMTPSVC(6.0.3790.3959); Mon, 29 Mar 2010 17:26:48 +0200
+Date: Mon, 29 Mar 2010 17:26:40 +0200
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.47
-X-SA-Exim-Mail-From: slapinid@gmail.com
+Message-Id: <20100329172640.6e7ecd27.ospite@studenti.unina.it>
+In-Reply-To: <20100326091538.2422d676.ospite@studenti.unina.it>
+References: <1269555678-8427-1-git-send-email-ospite@studenti.unina.it>
+	<1269561965.3252.26.camel@opal>
+	<20100326091538.2422d676.ospite@studenti.unina.it>
+X-Mailer: Sylpheed 3.0.1 (GTK+ 2.18.9; x86_64-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+Mime-Version: 1.0
+X-OriginalArrivalTime: 29 Mar 2010 15:26:48.0681 (UTC)
+	FILETIME=[3FB99590:01CACF54]
+X-SA-Exim-Connect-IP: 85.33.2.12
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: profiling versions of libs (glibc in particular)
+Cc: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Subject: Re: [PATCH] task-fso-compliance: depend on fso-abyss
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,25 +50,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Mar 2010 15:03:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 29 Mar 2010 15:30:12 -0000
+X-Groupsio-MsgNum: 18222
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Mon__29_Mar_2010_17_26_40_+0200__QMZShZa_TTk2Zb4"
 
-Hi, all!
+--Signature=_Mon__29_Mar_2010_17_26_40_+0200__QMZShZa_TTk2Zb4
+Content-Type: text/plain; charset=US-ASCII
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-How hard could be to generate -pg versions of packages in addition to -dbg ones?
+On Fri, 26 Mar 2010 09:15:38 +0100
+Antonio Ospite <ospite@studenti.unina.it> wrote:
 
-And, also - if that is too far - how could I generate profiling
-version of glibc,
-which is most important for me now?
+> On Fri, 26 Mar 2010 01:06:05 +0100
+> "Michael 'Mickey' Lauer" <mickey@vanille-media.de> wrote:
+>=20
+> > > diff --git a/recipes/tasks/task-fso-compliance.bb b/recipes/tasks/tas=
+k-fso-compliance.bb
+> [...]
+> > > @@ -12,6 +12,7 @@ RDEPENDS_${PN} =3D "\
+> > >  #  fso-apmd \
+> > >    fso-gpsd \
+> > >  #  fso-monitord \
+> > > +  fso-abyss \
+> > >    connman \
+> > >    connman-scripts \
+> > >  #  connman-plugin-bluetooth \
+> >=20
+> > That's wrong, fso-abyss is only used for some of the machines (i.e.
+> > Openmoko ones). Installing it unconditionally only blows up the images.
+> > We should rather find out why something depends on it when you build for
+> > an EZX machine.
+> >=20
+>=20
+> Ok, thanks, I'll take a deeper look.
+>
 
-As I see, profiling is disabled with current version of libs with
---disable-profile,
-but I don't see this option to have any effect on libraries, generated
-by bitbake glibc.
+If I disable _both_ frameworkd and fso-gpsd, then fso-console-image
+builds fine. I am still looking to see which of those cause the issue,
+fso-abyss is mentioned in frameworkd_git.bb but only conditionally for
+OM machines...
 
-Is there some simple hack to move forward?
+Ciao ciao,
+   Antonio
 
-Thanks a lot,
-S.
+--=20
+Antonio Ospite
+http://ao2.it
 
+PGP public key ID: 0x4553B001
 
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
+
+--Signature=_Mon__29_Mar_2010_17_26_40_+0200__QMZShZa_TTk2Zb4
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEARECAAYFAkuwxrAACgkQ5xr2akVTsAExNwCfdN7m4SeK3/Umr3c2MZ6VVQtw
+puQAoKyLqn5E3uvTTMOjFyypb9mcU1r/
+=pUtg
+-----END PGP SIGNATURE-----
+
+--Signature=_Mon__29_Mar_2010_17_26_40_+0200__QMZShZa_TTk2Zb4--
