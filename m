@@ -1,41 +1,43 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-fx0-f220.google.com ([209.85.220.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <bmentink@gmail.com>) id 1NwKhD-0001jD-CA
+	(envelope-from <isburger@gmail.com>) id 1NwKlr-0004lF-J9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 29 Mar 2010 21:32:23 +0200
-Received: by gyb11 with SMTP id 11so2695130gyb.6
+	Mon, 29 Mar 2010 21:37:12 +0200
+Received: by fxm20 with SMTP id 20so9613524fxm.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Mar 2010 12:29:07 -0700 (PDT)
+	Mon, 29 Mar 2010 12:33:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:received:message-id
-	:subject:from:to:content-type;
-	bh=3K91m/ILSX+NK5UktOzOoFcf3zFIrHBZ/hLahK/CWkw=;
-	b=ZDFLlVIVauYlaDKLE4vw1h8VPn4bCfNQRgFCDRbrjkH2yeyErKPeb19sVCzZ5sMbFn
-	X46kZd406IKAR8tnlw8oMpcXLaiD1DLB2FHXrL3Km/gjHOB+5Lj/O/nptvhXpgO684Jz
-	CW9CG/rAzQjog7IfzcUNf1OamgSb3DLdOnAR4=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:received:message-id:subject:from:to:content-type;
+	bh=Dv5WN2T3/nxUnsA83ZRrsBUi8sTSgbo/EFrCpndJBX0=;
+	b=N0bu5s+xE9NRSa7E341ywpgYhhKpePTnhTWxbDQ6XN87+nIoDN+ydXT9UkQC9y0v9p
+	7NurXGBAhGDgUuDeis5yz9zmING9e9eLXP35Ro94V8cIA5b4mP6+NggCdsvAxY0c+D+d
+	VfxY7jTMv5v8ZYvd9A/uNpxMRz3aTf34HXPGA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=N5gp7Vr+rFLCOl8zC8wZFOTM7Y7v6kuG7zVEQvonsYsdrufKBgkhoJ95MClmbHByZM
-	Lf9vgLgle6+Ot0sPUkPc1VUx7Bz13S8BCNyk855qlQe++2+jlLyk7NdgTL7kfFNg25CM
-	ejccqkvq+AcX7pqWGPDq5hsA9JqavfDtKTdKo=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=kKrd/r3m7sad+rIyBsEtwpHQfd4RE7tWBGtMkmO5qB7xjm0Le6IZXEH8JQLI0n4UhF
+	nmsT2LsHxdCij7kg0yRLtCnRjfJZ1L+/PQaO4H50ci8H+NaivdNDTCXDsmeLeAEY2HPy
+	XedncpRwd3RzC2kwouCyqYUuV2IGfeodHZHEs=
 MIME-Version: 1.0
-Received: by 10.142.157.6 with HTTP; Mon, 29 Mar 2010 12:29:02 -0700 (PDT)
-Date: Tue, 30 Mar 2010 08:29:02 +1300
-Received: by 10.142.201.11 with SMTP id y11mr2203218wff.118.1269890942962; 
-	Mon, 29 Mar 2010 12:29:02 -0700 (PDT)
-Message-ID: <a25fc1971003291229o686565d7if29755e2b4bbe482@mail.gmail.com>
-From: Bernard Mentink <bmentink@gmail.com>
+Received: by 10.223.108.66 with HTTP; Mon, 29 Mar 2010 12:33:57 -0700 (PDT)
+In-Reply-To: <a25fc1971003291229o686565d7if29755e2b4bbe482@mail.gmail.com>
+References: <a25fc1971003291229o686565d7if29755e2b4bbe482@mail.gmail.com>
+Date: Mon, 29 Mar 2010 21:33:57 +0200
+Received: by 10.223.15.133 with SMTP id k5mr2140880faa.39.1269891237483; Mon, 
+	29 Mar 2010 12:33:57 -0700 (PDT)
+Message-ID: <e2e2e5501003291233q2548ddbaif8d590b2637c1fc6@mail.gmail.com>
+From: Izak Burger <isburger@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: bmentink@gmail.com
+X-SA-Exim-Connect-IP: 209.85.220.220
+X-SA-Exim-Mail-From: isburger@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Porting OE to new hardware
+Subject: Re: Porting OE to new hardware
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,51 +51,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 Mar 2010 19:32:23 -0000
+X-List-Received-Date: Mon, 29 Mar 2010 19:37:12 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hi All,
+Hi Bernard,
 
-I am jumping across to this email list as the user one has very little
-traffic.
+I found this page during my searches for similar info:
 
-I have just found OE and would like to use it to get Linux up and running on
-some custom hardware. The hardware is currently running the logicloader
-bootloader from LogicPD and a YAFFS2 filesystem.
+http://wiki.openembedded.net/index.php/Adding_a_new_Machine
 
-I have found very little info on the steps necessary to port to new
-hardware. As far as OE is concerned, I have built an image after altering
-the MACHINE and DISTRO to something close to what I need.
-I now have a zimage (kernel) and a rootFS.
+Don't know how useful or up to date it is though, I'm still new to
+these parts and to OE in general, but I thought I'd post that here in
+case it is useful.
 
-However I have a number of questions:
+regards,
+Izak
 
-1. To boot with zimage with  logicloader, I have to load the image into
-memory at an address, and then execute it at the start code which I presume
-is an offset the start of the image. Can anyone tell me how I can find
-the relevant map file to work out
-what offset I need to apply? I did a search for *.map files in the build/tmp
-direcory and found nada ..
-
-2. How do I do a kernel config? Is there an option to pass to bitbake to do
-that, or do I have to find the kernel source and do it manually, then
-rebuild with bitbake?
-
-3. What src files in the kernel do I need to to maybe alter to get the
-serial port and memory map right for my target hardware ..
-
-4. Once I get the kernel booting, I need it to load the rootfs, initially I
-can boot that from NFS, but I would like to eventually load it from my YAFFS
-NAND partition, how do I do that?
-
-
-Hope someone can give me some pointers in the right direction ... I would
-love to kick off WinCE from this hardware ;-)
-
-Cheers,
-Bernie
-
--- 
-You always have believers and scepticts.. A True inventor is always a
-believer..
 
