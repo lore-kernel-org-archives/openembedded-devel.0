@@ -1,32 +1,44 @@
-Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
+Received: from mail-iw0-f178.google.com ([209.85.223.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1Nwg4D-0000CJ-Oc
+	(envelope-from <raj.khem@gmail.com>) id 1Nwg4N-0000Cd-O8
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Mar 2010 20:21:35 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id AAFB51660364; Tue, 30 Mar 2010 12:18:19 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id E65A1166032E;
-	Tue, 30 Mar 2010 12:18:18 -0600 (MDT)
-Message-ID: <4BB2406A.10602@mlbassoc.com>
-Date: Tue, 30 Mar 2010 12:18:18 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.8) Gecko/20100301 Fedora/3.0.3-1.fc11 Thunderbird/3.0.3
+	Tue, 30 Mar 2010 20:21:44 +0200
+Received: by iwn8 with SMTP id 8so327445iwn.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Mar 2010 11:18:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:received:message-id:subject:from:to:content-type;
+	bh=ZUrpAd4HBfwQrY9cmeHrosxkXMf3WQ6K8RUMVpfHbJw=;
+	b=c6DHyed9uMJ7SO558jT/s6kCSZMInxgzAsh8D3N82rNbhVaq9bVf5PIh9edDIuWsl0
+	eP/+yl8f/UJX7dDK3UvNp698M5K5mFuZEItuBX/to00555lUts+wBtS2JRSnPGDrOXKJ
+	FXm6Ph5JYxK6OQEGPFazntSCLp0myalPFcIXU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=VrDHm67hEh018p1s4jU9bKu5jg87Alv8loC+ujEVJtipTTOTkSN4PADpH67nQ2VgGA
+	s1q7CmDxFPu6UNWxCKh0wQIVLr1ESu0KFU5n1kN3rlm9XtPPmO2zztfO7XbBv3JwqF7p
+	v1P/aq6ikQbYgUKGzqoj8ufNKxcd2Ojidn0v4=
 MIME-Version: 1.0
+Received: by 10.231.32.66 with HTTP; Tue, 30 Mar 2010 11:18:28 -0700 (PDT)
+In-Reply-To: <201003301501.00340.holger+oe@freyther.de>
+References: <1269951751-22396-1-git-send-email-khimov@altell.ru>
+	<201003301501.00340.holger+oe@freyther.de>
+Date: Tue, 30 Mar 2010 11:18:28 -0700
+Received: by 10.231.169.144 with SMTP id z16mr1897939iby.25.1269973108213; 
+	Tue, 30 Mar 2010 11:18:28 -0700 (PDT)
+Message-ID: <19c1b8a91003301118q1052609n5806a7feb6cb28e@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <a25fc1971003291229o686565d7if29755e2b4bbe482@mail.gmail.com>	<19c1b8a91003301103xfcfefddubdc73a584d8c41cc@mail.gmail.com>
-	<a25fc1971003301114k3b1e53bch8d22ea79c26a41a0@mail.gmail.com>
-In-Reply-To: <a25fc1971003301114k3b1e53bch8d22ea79c26a41a0@mail.gmail.com>
-X-SA-Exim-Connect-IP: 76.76.67.137
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+X-SA-Exim-Connect-IP: 209.85.223.178
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Porting OE to new hardware
+Subject: Re: [PATCH] openssl: deal with unpackaged /usr/lib/ssl files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,118 +52,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Mar 2010 18:21:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 30 Mar 2010 18:21:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 03/30/2010 12:14 PM, Bernard Mentink wrote:
-> Thanks Khem,
+On Tue, Mar 30, 2010 at 6:01 AM, Holger Hans Peter Freyther
+<holger+oe@freyther.de> wrote:
+> On Tuesday 30 March 2010 14:22:30 Roman I Khimov wrote:
+>> Config file is accessed directly from libcrypto, so belongs to
+>> libcrypto package.
+>>
+>> openssl-misc is a new package that contains CA management scripts.
+>>
+>> Signed-off-by: Roman I Khimov <khimov@altell.ru>
 >
-> That helps a lot. On the kernel config issue there is one thing I don't
-> understand.
+> Acked-by: Holger Hans Peter Freyther <zecke@selfish.org>
 >
-> I have set up to do an ARM  i.mx31 build, but when I did a "make menuconfig"
-> in the /build/tmp/.../kernelxxxxx directory, it only shows x86 options, I
-> don't know where all the i.mx31 kernel options are.
+Acked-by:  Khem Raj <raj.khem@gmail.com>
 
-You didn't tell it - the default architecture is the one you build on (probably
-x86).  Try this instead:
-   % make ARCH=arm menuconfig
-
-> On Wed, Mar 31, 2010 at 7:03 AM, Khem Raj<raj.khem@gmail.com>  wrote:
 >
->> On Mon, Mar 29, 2010 at 12:29 PM, Bernard Mentink<bmentink@gmail.com>
->> wrote:
->>> Hi All,
->>>
->>> I am jumping across to this email list as the user one has very little
->>> traffic.
->>>
->>> I have just found OE and would like to use it to get Linux up and running
->> on
->>> some custom hardware. The hardware is currently running the logicloader
->>> bootloader from LogicPD and a YAFFS2 filesystem.
->>>
->>> I have found very little info on the steps necessary to port to new
->>> hardware. As far as OE is concerned, I have built an image after altering
->>> the MACHINE and DISTRO to something close to what I need.
->>> I now have a zimage (kernel) and a rootFS.
->>>
->>> However I have a number of questions:
->>>
->>> 1. To boot with zimage with  logicloader, I have to load the image into
->>> memory at an address, and then execute it at the start code which I
->> presume
->>> is an offset the start of the image. Can anyone tell me how I can find
->>> the relevant map file to work out
->>> what offset I need to apply? I did a search for *.map files in the
->> build/tmp
->>> direcory and found nada ..
->>
->> this post tells how to load linux kernel using logicloader. It might help
->> you.
->>
->> http://forums.freescale.com/t5/Other-Microcontrollers/load-zImage-or-vmlinux-using-LogicLoader/td-p/32749;jsessionid=F6F40E5BF81249CFF86028A7AB86DE29
->>
->>>
->>> 2. How do I do a kernel config? Is there an option to pass to bitbake to
->> do
->>> that, or do I have to find the kernel source and do it manually, then
->>> rebuild with bitbake?
->>
->> You can copy the .config you want into
->> recipes/linux/<chosen-kernel-version>/<machine>/defconfig file and it
->> will use
->> it to build the kernel for you machine. You can also edit the .config
->> on fly search the ml on how to do it.
->>
->>>
->>> 3. What src files in the kernel do I need to to maybe alter to get the
->>> serial port and memory map right for my target hardware ..
->>>
->>
->> you can specify serial port in kernel commandline too unless your board
->> needs
->> a special handling of serial port.
->>
->>> 4. Once I get the kernel booting, I need it to load the rootfs, initially
->> I
->>> can boot that from NFS, but I would like to eventually load it from my
->> YAFFS
->>> NAND partition, how do I do that?
->>
->> you can do that thru kernel commandline.
->>
->>>
->>>
->>> Hope someone can give me some pointers in the right direction ... I would
->>> love to kick off WinCE from this hardware ;-)
->>>
->>> Cheers,
->>> Bernie
->>>
->>> --
->>> You always have believers and scepticts.. A True inventor is always a
->>> believer..
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
->
->
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
 
 
