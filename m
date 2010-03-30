@@ -1,30 +1,41 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1Nwg6q-000273-JW
+	(envelope-from <Tom_Rini@mentor.com>) id 1Nwgx3-0006hF-RM
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Mar 2010 20:24:17 +0200
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1Nwg3g-0005DW-Qe
+	Tue, 30 Mar 2010 21:18:15 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1Nwgtt-0004VV-Hk from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Mar 2010 22:21:03 +0400
-From: Roman I Khimov <roman@khimov.ru>
+	Tue, 30 Mar 2010 12:14:57 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 30 Mar 2010 12:14:57 -0700
+Received: from 172.30.80.170 ([172.30.80.170]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Tue, 30 Mar 2010 19:14:47 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	30 Mar 2010 12:14:46 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 30 Mar 2010 21:17:53 +0300
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
-References: <1269883870-8204-1-git-send-email-khimov@altell.ru>
-In-Reply-To: <1269883870-8204-1-git-send-email-khimov@altell.ru>
-MIME-Version: 1.0
-Message-Id: <201003302218.04127.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+In-Reply-To: <E1Nwfep-0007c6-NX@melo.openembedded.org>
+References: <E1Nwfep-0007c6-NX@melo.openembedded.org>
+Organization: Mentor Graphics Corporation
+Date: Tue, 30 Mar 2010 12:14:46 -0700
+Message-ID: <1269976486.6277.80.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 30 Mar 2010 19:14:57.0239 (UTC)
+	FILETIME=[49278670:01CAD03D]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/4] poptop: remove version 1.3.0
+Subject: Re: [oe-commits] Roman I Khimov : clamav-0.94.2: remove deprecated options from config file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,36 +49,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Mar 2010 18:24:17 -0000
-X-Groupsio-MsgNum: 18278
-Content-Type: multipart/signed; boundary="nextPart5645015.kTBGURAHZG";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 30 Mar 2010 19:18:15 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
---nextPart5645015.kTBGURAHZG
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: base64
+On Tue, 2010-03-30 at 17:55 +0000, git version control wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: 1f71e0d0b6f76e74ed848d75f6b50896f2ae160b
+> URL:    http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcommit;h=
+=3D1f71e0d0b6f76e74ed848d75f6b50896f2ae160b
+>=20
+> Author: Roman I Khimov <khimov@altell.ru>
+> Date:   Mon Mar 29 22:30:23 2010 +0400
+>=20
+> clamav-0.94.2: remove deprecated options from config file
+>=20
+> Signed-off-by: Roman I Khimov <khimov@altell.ru>
+>=20
+> ---
+>=20
+>  recipes/clamav/clamav_0.94.2.bb |    6 +++++-
+>  1 files changed, 5 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/recipes/clamav/clamav_0.94.2.bb b/recipes/clamav/clamav_0.94=
+.2.bb
+> index e85cc50..3ce005f 100644
+> --- a/recipes/clamav/clamav_0.94.2.bb
+> +++ b/recipes/clamav/clamav_0.94.2.bb
+> @@ -2,5 +2,9 @@ require clamav.inc
+> =20
+>  EXTRA_OECONF +=3D "--program-transform-name=3D''"
+> =20
+> -PR =3D "${INC_PR}.0"
+> +PR =3D "${INC_PR}.1"
+> =20
+> +do_install_append() {
+> +	# Remove deprecated options
+> +	sed -ri "/Archive(Block)?Max/d" ${D}/${sysconfdir}/clamd.conf
+> +}
+> \ No newline at end of file
 
-0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0J/QvtC90LXQtNC10LvRjNC90LjQuiAyOSDQvNCw
-0YDRgtCwIDIwMTAgMjE6MzE6MDcg0LDQstGC0L7RgCBSb21hbiBJIEtoaW1vdiAK0L3QsNC/0LjR
-gdCw0Ls6Cj4gUmVsZWFzZSBkYXRlZCAyMDA1IGFuZCB0aGUgcmVjaXBlIGluIHVubWFpbnRhaW5l
-ZCwgMS4zLjQgcmVjaXBlIGlzIGFsc21vc3QKPiBjb21wbGV0ZWx5IGRpZmZlcmVudCBub3cuIFNv
-LCBJIHNlZSBubyBwb2ludCBpbiBrZWVwaW5nIGl0IGFyb3VuZC4KClB1c2hlZCB0aGUgcmVzdCBv
-ZiBzZXJpZXMsIG5vdCByZW1vdmluZyBzdGFsZSB2ZXJzaW9uIHdpdGhvdXQgQUNLcy4KCi0tIAog
-aHR0cDovL3JvbWFuLmtoaW1vdi5ydQptYWlsdG86IHJvbWFuQGtoaW1vdi5ydQpncGcgLS1rZXlz
-ZXJ2ZXIgaGtwOi8vc3Via2V5cy5wZ3AubmV0IC0tcmVjdi1rZXlzIDB4RTVFMDU1QzMK
+Maybe we should start making this per version?  I know we're
+inconsistent about this stuff a good bit, but it seems like that's the
+best way to handle incompatible config files.  I say this since it seems
+possible that come April we have the old stuff in the conf file and no
+versions that need it.  Now that I've said this in public, someone might
+make a note to make sure that doesn't happen, but I think the point is
+still valid ;)
 
---nextPart5645015.kTBGURAHZG
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
 
-iEYEABECAAYFAkuyQFwACgkQXJ70z+XgVcNQPACZAbRTZdpxcEGK1nhtokm2ZS8M
-ClwAn0aXHdKvzB27BSIk5udYKY05Chro
-=YMdd
------END PGP SIGNATURE-----
-
---nextPart5645015.kTBGURAHZG--
