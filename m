@@ -1,44 +1,30 @@
-Received: from mail-iw0-f178.google.com ([209.85.223.178])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Nwg5C-0000Pk-6r
+	(envelope-from <roman@khimov.ru>) id 1Nwg6q-000273-JW
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Mar 2010 20:22:35 +0200
-Received: by iwn8 with SMTP id 8so327966iwn.16
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 30 Mar 2010 11:19:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:received:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=yvFI8HdTDxLluSuBNqoagOTpnaZQeORqwhGcf8xlFWw=;
-	b=hDnecQXcC3Dx40zqnOSG3BE0n6dnGPQSVYyzs81EJ1hoxzTmZadmc3NCEB7gOd2mvc
-	lNV+8MkfVaRnJ0/b9tPjOJ/4jQFQlkQgsvODjHpcnouIm32umaQUbJXmZKOSfMXbEWvW
-	3RBmoXvnzWHcyxDlXdklc6H8zaxDZdpO66tsM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=xkgqwBj5fWlBZ2kHFNn35OtsyszZbivFwwFrFiK1VpoiwT8+9u2j1PQXOWoYUflwQs
-	Zhfgl4bskJ12dfLs9OZrxjNwLtnkE7bphSXvfKyp/qKKKlwgU+R0PaziVaEGmvu9UPq3
-	UCXEk+P+zVTb/ViNbYX1BWrnhri/krNfYljiw=
-MIME-Version: 1.0
-Received: by 10.231.32.66 with HTTP; Tue, 30 Mar 2010 11:19:18 -0700 (PDT)
-In-Reply-To: <1269971938-6900-1-git-send-email-khimov@altell.ru>
-References: <1269971938-6900-1-git-send-email-khimov@altell.ru>
-Date: Tue, 30 Mar 2010 11:19:18 -0700
-Received: by 10.231.147.146 with SMTP id l18mr1156464ibv.74.1269973158498; 
-	Tue, 30 Mar 2010 11:19:18 -0700 (PDT)
-Message-ID: <19c1b8a91003301119l4f3acf17kf5b81be2bc4468e1@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Tue, 30 Mar 2010 20:24:17 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1Nwg3g-0005DW-Qe
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 30 Mar 2010 22:21:03 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.178
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Tue, 30 Mar 2010 21:17:53 +0300
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.1-desktop; KDE/4.3.5; x86_64; ; )
+References: <1269883870-8204-1-git-send-email-khimov@altell.ru>
+In-Reply-To: <1269883870-8204-1-git-send-email-khimov@altell.ru>
+MIME-Version: 1.0
+Message-Id: <201003302218.04127.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] removal.txt: proposal to remove ClamAV versions < 0.95 in April
+Subject: Re: [PATCH 1/4] poptop: remove version 1.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,49 +38,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Mar 2010 18:22:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 30 Mar 2010 18:24:17 -0000
+X-Groupsio-MsgNum: 18278
+Content-Type: multipart/signed; boundary="nextPart5645015.kTBGURAHZG";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 30, 2010 at 10:58 AM, Roman I Khimov <khimov@altell.ru> wrote:
-> http://www.clamav.net/lang/en/2009/10/05/eol-clamav-094/
->
-> Without database updates AV is almost completely useless, and
-> starting on April 15 2010 ClamAV < 0.95 will get no db updates,
-> so there is no reason to support that versions.
->
-> Signed-off-by: Roman I Khimov <khimov@altell.ru>
-> ---
-> =A0removal.txt | =A0 =A06 ++++++
-> =A01 files changed, 6 insertions(+), 0 deletions(-)
->
-> diff --git a/removal.txt b/removal.txt
-> index 7c9dc25..f7bad84 100644
-> --- a/removal.txt
-> +++ b/removal.txt
-> @@ -25,3 +25,9 @@ Maintainer: =A0 =A0 None
-> =A0Reason: =A0 =A0 =A0 =A0 Obsoleted by task-base
-> =A0Proposed by: =A0 =A0Koen Kooi
-> =A0Note: =A0 =A0 =A0 =A0 =A0Moved to packages/obsolete/tasks on 2006-12-2=
-2
-> +
-> +Package Name: =A0ClamAV, versions < 0.95
-> +Removal Date: =A02009-04-15
-> +Maintainer: =A0 =A0Jamie Lenehan
-> +Reason: =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0http://www.clamav.net/lang/en/200=
-9/10/05/eol-clamav-094/
-> +Proposed by: =A0 Roman I Khimov <khimov@altell.ru>
-> --
+--nextPart5645015.kTBGURAHZG
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Acked-by:  Khem Raj <raj.khem@gmail.com>
+0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0J/QvtC90LXQtNC10LvRjNC90LjQuiAyOSDQvNCw
+0YDRgtCwIDIwMTAgMjE6MzE6MDcg0LDQstGC0L7RgCBSb21hbiBJIEtoaW1vdiAK0L3QsNC/0LjR
+gdCw0Ls6Cj4gUmVsZWFzZSBkYXRlZCAyMDA1IGFuZCB0aGUgcmVjaXBlIGluIHVubWFpbnRhaW5l
+ZCwgMS4zLjQgcmVjaXBlIGlzIGFsc21vc3QKPiBjb21wbGV0ZWx5IGRpZmZlcmVudCBub3cuIFNv
+LCBJIHNlZSBubyBwb2ludCBpbiBrZWVwaW5nIGl0IGFyb3VuZC4KClB1c2hlZCB0aGUgcmVzdCBv
+ZiBzZXJpZXMsIG5vdCByZW1vdmluZyBzdGFsZSB2ZXJzaW9uIHdpdGhvdXQgQUNLcy4KCi0tIAog
+aHR0cDovL3JvbWFuLmtoaW1vdi5ydQptYWlsdG86IHJvbWFuQGtoaW1vdi5ydQpncGcgLS1rZXlz
+ZXJ2ZXIgaGtwOi8vc3Via2V5cy5wZ3AubmV0IC0tcmVjdi1rZXlzIDB4RTVFMDU1QzMK
 
-> 1.6.4.2
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+--nextPart5645015.kTBGURAHZG
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
 
+iEYEABECAAYFAkuyQFwACgkQXJ70z+XgVcNQPACZAbRTZdpxcEGK1nhtokm2ZS8M
+ClwAn0aXHdKvzB27BSIk5udYKY05Chro
+=YMdd
+-----END PGP SIGNATURE-----
+
+--nextPart5645015.kTBGURAHZG--
