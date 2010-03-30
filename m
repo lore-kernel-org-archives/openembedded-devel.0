@@ -1,45 +1,46 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-yw0-f197.google.com ([209.85.211.197])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1NwTWE-0006Ug-8R
+	(envelope-from <aalonso00@gmail.com>) id 1NwU1V-0005eO-7J
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Mar 2010 06:57:38 +0200
-Received: by gwj19 with SMTP id 19so512540gwj.6
+	Tue, 30 Mar 2010 07:29:58 +0200
+Received: by ywh35 with SMTP id 35so3759708ywh.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 Mar 2010 21:54:23 -0700 (PDT)
+	Mon, 29 Mar 2010 22:26:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=VlM3U9SQvRDqu0uyy+/LhZKki0rU35Z7fP59u3Yu1so=;
-	b=vdz9gY8scS7FE2uLEpW50XUV7afC0zP2UHuX3mofxewBSma/xqQbnF9LMR+QJmUxOz
-	vLU2yXpJsnCOM1LKnnIsXNc4nCqIYrSs7nTlDAln+N9wZ8ybMJdjT63OV20gOr08E9ZI
-	gLK/PukXKzbIZDEmoc80M9OHRyumywJ7DdEsQ=
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:received:message-id:subject:from:to:content-type;
+	bh=eNExyqSTcNppzKzNx4kpIojZhBSk0LJ17YxW7HwQ3Fc=;
+	b=NiXeabh38UuwHHaN1H2+H0cHGW3CwgZsvBQI7NxyDFXqM6iwwWzvHxaUGY0R/qtFkU
+	JXGfefZO73PRvSzb36U0PP08ZJt00FJZk3xJi/29szRTmirxtJayixUVvB26GZkVQfaK
+	ZeRlNR22aNIAZ5wNbNw6FbfFgW/uncBdJoFdQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=LrIKeHNrpJC73BXj5T6Nyy4oO8jdEG9IPQaTtfcvuKTAz37vcs4K2SMKXoNr1nwU2G
-	++2rOEGdhTIGEM3BC/1/H3T0fT9x9x1OSYf/bVBgwuT5s4HG6u/vUjDdPrK2l0DZv4g6
-	bWXM6vyXeN4NVwekI4MbZ3SmLQVDo6ZWzOEgg=
-Received: by 10.101.214.4 with SMTP id r4mr6409714anq.141.1269924863079;
-	Mon, 29 Mar 2010 21:54:23 -0700 (PDT)
-Received: from localhost.localdomain ([201.153.211.3])
-	by mx.google.com with ESMTPS id j42sm5029405ibr.19.2010.03.29.21.54.20
-	(version=SSLv3 cipher=RC4-MD5); Mon, 29 Mar 2010 21:54:22 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=hY0Da4UeE/ppRcrd5sVJUB+Ey8hNtAjg9crseRQe78Gvn4XSX18T4qKt44abZ2+XV0
+	4PioYEHNlTNjm5keObmjhGTGaeUjYiUcp6gWISZM5VGiGZrLkw2iILVSCAbJx69cI0Vt
+	NWSYKfO5xfXokywl2+LjqBj6M/4zsydQOuQ94=
+MIME-Version: 1.0
+Received: by 10.90.56.18 with HTTP; Mon, 29 Mar 2010 22:26:41 -0700 (PDT)
+In-Reply-To: <201003251014.27055.ml@vdm-design.de>
+References: <b6ebd0a51003240909t642135dfy5b2667f6dac0a8c5@mail.gmail.com>
+	<1269507272-19036-1-git-send-email-ml@vdm-design.de>
+	<201003251014.27055.ml@vdm-design.de>
+Date: Mon, 29 Mar 2010 23:26:41 -0600
+Received: by 10.91.45.24 with SMTP id x24mr1621889agj.45.1269926802021; Mon, 
+	29 Mar 2010 22:26:42 -0700 (PDT)
+Message-ID: <d1ded4381003292226g35795693r72604a2cfb20d8d9@mail.gmail.com>
 From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 Mar 2010 22:53:30 -0600
-Message-Id: <1269924810-3069-2-git-send-email-aalonso00@gmail.com>
-X-Mailer: git-send-email 1.6.6.1
-In-Reply-To: <1269924810-3069-1-git-send-email-aalonso00@gmail.com>
-References: <openembedded-devel@lists.openembedded.org>
-	<1269924810-3069-1-git-send-email-aalonso00@gmail.com>
-X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Connect-IP: 209.85.211.197
 X-SA-Exim-Mail-From: aalonso00@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] openm4-autoconf-fix.patch: new file
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] imagemagick: convert to BBCLASSEXTEND and new staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,48 +54,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Mar 2010 04:57:38 -0000
+X-List-Received-Date: Tue, 30 Mar 2010 05:29:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
----
- .../imagemagick/files/openm4-autoconf-fix.patch    |   27 ++++++++++++++++++++
- 1 files changed, 27 insertions(+), 0 deletions(-)
- create mode 100644 recipes/imagemagick/files/openm4-autoconf-fix.patch
+Hi,
 
-diff --git a/recipes/imagemagick/files/openm4-autoconf-fix.patch b/recipes/imagemagick/files/openm4-autoconf-fix.patch
-new file mode 100644
-index 0000000..8ad882b
---- /dev/null
-+++ b/recipes/imagemagick/files/openm4-autoconf-fix.patch
-@@ -0,0 +1,27 @@
-+diff --git a/m4/openmp.m4 b/m4/openmp.m4
-+index e7b0e7b..dbfbece 100644
-+--- a/m4/openmp.m4
-++++ b/m4/openmp.m4
-+@@ -1,10 +1,12 @@
-+-# openmp.m4 serial 4
-+-dnl Copyright (C) 2006-2007 Free Software Foundation, Inc.
-++# openmp.m4 serial 5
-++dnl Copyright (C) 2006-2008 Free Software Foundation, Inc.
-+ dnl This file is free software; the Free Software Foundation
-+ dnl gives unlimited permission to copy and/or distribute it,
-+ dnl with or without modifications, as long as this notice is preserved.
-+
-+ dnl This file can be removed once we assume autoconf >= 2.62.
-++dnl Expand to nothing in autoconf >= 2.62. m4_copy has a different
-++m4_ifdef([AC_OPENMP], [], [
-+
-+ # _AC_LANG_OPENMP
-+ # ---------------
-+@@ -92,3 +94,5 @@ AC_DEFUN([AC_OPENMP],
-+   fi
-+   AC_SUBST([OPENMP_]_AC_LANG_PREFIX[FLAGS])
-+ ])
-++
-++])
-+--
-+1.6.6.1
---
-1.6.6.1
+I test imagemagick_6.3.5-10.bb and it fails
+due that my host system of autoconf > 2.63
 
+I search a bit and found a patch in gnulib mailing list [1] that skips
+openm4 configuration when autoconf > 2.62, applying it resolves the failure
+with imagemagic_6.3.5-10;
+
+Patches should be at patchwork queue.
+
+[1] http://www.mail-archive.com/bug-gnulib@gnu.org/msg12387.html
+
+
+On Thu, Mar 25, 2010 at 3:14 AM, Thomas Zimmermann <ml@vdm-design.de> wrote=
+:
+
+> Am Donnerstag 25 M=E4rz 2010 09:54:32 schrieb Thomas Zimmermann:
+> > * now imagemagick is buildable again with autoconf > 2.63
+> > * tiff-native now exists, so no need to override DEPENDS of -native
+> anymore
+> >
+> > Signed-off-by: Thomas Zimmermann <ml@vdm-design.de>
+> > ---
+> >  recipes/imagemagick/imagemagick-native_6.3.5-10.bb |    6 ------
+> >  recipes/imagemagick/imagemagick_6.3.5-10.bb        |   10 ++++------
+> >  recipes/imagemagick/imagemagick_6.4.4-1.bb         |   10 ++++------
+> >  3 files changed, 8 insertions(+), 18 deletions(-)
+> >  delete mode 100644 recipes/imagemagick/imagemagick-native_6.3.5-10.bb
+>
+> 6.4.4-1 builds fine, but i can't try if 6.3.5 builds fine too, as it
+> doesn't
+> compile anymore for me because of to recent autoconf...
+>
+> So it would be nice if someone can confirm that 6.3.5 builds fine too.
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
+
+--=20
+Saludos
+Adrian Alonso
+http://aalonso.wordpress.com
 
