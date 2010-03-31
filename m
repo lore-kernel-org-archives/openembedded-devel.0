@@ -1,44 +1,35 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-pz0-f178.google.com ([209.85.222.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Nx1Q3-0007v3-E1
+	(envelope-from <msundius@sundius.com>) id 1Nx1UP-0004sa-8m
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Mar 2010 19:09:32 +0200
-Received: by pwj5 with SMTP id 5so306705pwj.6
+	Wed, 31 Mar 2010 19:14:02 +0200
+Received: by pzk8 with SMTP id 8so352801pzk.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Mar 2010 10:06:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:received:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=zipsh3oPq4Pu4+bmRyagW/V0I9p2KVhg28C0IE0uUt0=;
-	b=CxJvivl2fN199lqORIvRFney7mh9fHTsKViEHZoLhH4/QhHVMLwNb8Y9C0BA7tBb25
-	/5LDeNLqKWtfhhwCRT2ZgEGLZUB1TTNwmD8blDRj7xcII7F20daO3jOtz6H1EpY3E5pV
-	u3TY5XFzHWvQyHgjZTZpToL3UGKA7l7/E9/74=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=DyFSIIu82cHoClQWmbzLkujeO5mpgWPNpw6Dy273vGq/4wI14rzPZE55TWezs6/jYo
-	SesGy0F4ZC0jD1AP98hoyTavHbyYSs0JyIe0Wo0DyOwU7CYDqxSFutIlF82fjXbYBG0w
-	SsbDTktXC5S4mqm6Fhvuux72dWCXaDRexbe8A=
-MIME-Version: 1.0
-Received: by 10.231.32.66 with HTTP; Wed, 31 Mar 2010 10:06:14 -0700 (PDT)
-In-Reply-To: <4BB35552.9070508@mlbassoc.com>
-References: <4BB35552.9070508@mlbassoc.com>
-Date: Wed, 31 Mar 2010 10:06:14 -0700
-Received: by 10.141.101.17 with SMTP id d17mr5958850rvm.30.1270055174449; Wed, 
-	31 Mar 2010 10:06:14 -0700 (PDT)
-Message-ID: <v2q19c1b8a91003311006zc7a7eff8o9f2a88a1f42b6c1d@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 31 Mar 2010 10:10:44 -0700 (PDT)
+Received: by 10.141.100.21 with SMTP id c21mr5220955rvm.41.1270055440179;
+	Wed, 31 Mar 2010 10:10:40 -0700 (PDT)
+Received: from dhcp-173-37-4-92.cisco.com (nat.ironport.com [63.251.108.100])
+	by mx.google.com with ESMTPS id 12sm1713492pwi.11.2010.03.31.10.10.37
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 31 Mar 2010 10:10:39 -0700 (PDT)
+Message-Id: <89E495CE-E4FB-4482-92CC-0150E247DB02@sundius.com>
+From: C Michael Sundius <msundius@sundius.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+In-Reply-To: <houqa6$sei$1@dough.gmane.org>
+Mime-Version: 1.0 (Apple Message framework v936)
+Date: Wed, 31 Mar 2010 10:10:32 -0700
+References: <18e217241003301757i23125ed4g3bb55a795ff5db02@mail.gmail.com>
+	<houqa6$sei$1@dough.gmane.org>
+X-Mailer: Apple Mail (2.936)
+X-SA-Exim-Connect-IP: 209.85.222.178
+X-SA-Exim-Mail-From: msundius@sundius.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: FireFox on PowerPC
+Subject: Re: native recipes use legacy staging.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,41 +43,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Mar 2010 17:09:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Mar 31, 2010 at 6:59 AM, Gary Thomas <gary@mlbassoc.com> wrote:
-> Has anyone had success building FireFox for a PowerPC
-> target - I'm using the development branch (org.openembedded.dev)
-> =A0MACHINE=3Defika
-> =A0DISTRO =3D "angstrom-2008.1"
->
-> I've tried to build a number of different FireFox packages,
-> none with success. =A0So far I've tried 2.0.0.3, 3.5.2 & 3.6.2
->
-> Any pointers?
->
-> Query: is there an easy way to build a particular package version?
-> What I've done is just add a line like this to my local.conf:
-> =A0PREFERRED_VERSION_firefox=3D"3.5.2"
+X-List-Received-Date: Wed, 31 Mar 2010 17:14:02 -0000
+Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+Content-Transfer-Encoding: 7bit
 
 
-what errors do you get.
+On Mar 30, 2010, at 11:32 PM, Koen Kooi wrote:
 
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
-> Thanks for any help with this
+> On 31-03-10 02:57, C Michael Sundius wrote:
+>> why does the native.bbclass force the use of legacy staging?
+>>
+>> also how can I override this. I tried go use create my own
+>>
+>> do_stage() {
+>>   :
+>> }
+>>
+>> function in my recipe, but the one in the class was still used.
+>>
+>> My issue is that my install function does not use make at all, nor  
+>> autotools
+>>
+>> so the do_stage_native() call [from do_stage() ] fails.
 >
-> --
-> ------------------------------------------------------------
-> Gary Thomas =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A0Consulting for the
-> MLB Associates =A0 =A0 =A0 =A0 =A0 =A0 =A0| =A0 =A0Embedded world
-> ------------------------------------------------------------
+> Try:
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> PR = "031110"
 >
+> BBCLASSEXTEND = "native nativesdk"
+>
+> SRC_URI = "file:///home/sundism/src/mkimage-tools"
+>
+> S = ${WORKDIR}/mkimage-tools
+>
+> do_compile() {
+>        :
+> }
+>
+>
+> do_install() {
+>        install  -m 0755 -d ${D}${bindir}
+>        install  -m 0755 ${S}/bin/imgen ${D}${bindir}/imgen
+>        install  -m 0755 -d ${D}${datadir}
+>        install  -m 0755 -d ${D}${datadir}/LxLoad
+>        install  -m 0644 ${S}/share/LxLoad/LxLoad2_cronus.img \
+>                ${D}${datadir}/LxLoad/LxLoad2_cronus.img
+> }
+>
+> NATIVE_INSTALL_WORKS = "1"
+>
+> regards,
+>
+> Koen
+>
+>
+Koen,
+
+Thanks for your help, that worked perfectly.
+
+Also it seems as though for standard installs, the files that are  
+installed are split up into foo, foo-dbg, foo-devel etc. where as with  
+a native or a nativesdk you have no control on how much of everthing  
+gets installed. Is that so or is there a way to pick and choose what  
+gets put into the nativesdk.
+
+Finally, for a native build, I suspect that everything that is  
+installed will be packaged up in the packaged staging package. whereas  
+for the nativesdk no packaging is done, is that right? is there a way  
+to make it package the sdk up in the end (short of running tar/rmp/ 
+ipkg yourself).
+
+thanks
+
+
 
 
