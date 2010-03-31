@@ -1,29 +1,38 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NwvO2-0000pG-Ms
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1Nww8s-0002uZ-Np
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Mar 2010 12:43:03 +0200
-Received: (qmail 13686 invoked by uid 813007); 31 Mar 2010 10:39:48 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 31 Mar 2010 10:39:48 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 31 Mar 2010 12:39:46 +0200
-User-Agent: KMail/1.13.1 (Linux/2.6.34-rc2-wl-47166-ged2da1f; KDE/4.4.1; x86_64;
-	; )
-MIME-Version: 1.0
-Message-Id: <201003311239.48203.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+	Wed, 31 Mar 2010 13:31:27 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2VBSB2D012586
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Mar 2010 12:28:11 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 12548-01 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Mar 2010 12:28:07 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2VBS2r6012580
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Mar 2010 12:28:03 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Wed, 31 Mar 2010 12:28:01 +0100
+Message-ID: <1270034881.1681.965.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Sharp Zaurus SL-6000 docking station for free
+Subject: gcc Recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,27 +46,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Mar 2010 10:43:03 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Wed, 31 Mar 2010 11:31:27 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
+I've just been looking over OE's gcc recipes and they really depress
+me :(. People touch them just enough to tweak their specific problem
+with no real thought going into the overall architecture and its a
+sprawling mess. I tackled some of this a while back. Sadly its just
+getting worse again.
 
-As some of you remember there was a time when I maintained OpenZaurus and 
-worked on supporting whole Zaurus LinuxPDA line. At that time I had SL-6000L 
-(tosa) which was property of OpenEmbedded project. Then device moved to other 
-developer.
+I've spent some time looking at them trying to identify what I consider
+to be the main sources of ugliness and how we can try and improve the
+situation. I think it might help to set a high level goal for the gcc
+recipes which would be:
 
-Yesterday I found SL-6000 docking station in basement and +5V power supply for 
-it (with US plug). Someone from our Tosa developers needs this? Inside Europe 
-I can send it for free.
+   All configuration for a given gcc version should be contained 
+   within the high level version specific .inc file(gcc-X.Y.Z.inc).
 
-Regards, 
--- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+We'd therefore be frowning on version specific hacks in say the cross
+recipes only.
 
+It would follow that there would be a clear set of include files and a
+clear include structure and that almost all of the variant gcc recipes
+(gcc-cross-initial, gcc-cross-intermediate, gcc-cross-kernel,
+gcc-cross-sdk, gcc) would be boilerplate includes.
+
+Note that information about flags for the cross builds can be included
+in the main common version specific include file.
+
+To illustrate the kind of thing I mean, have a look at this commit:
+
+http://git.openembedded.net/cgit.cgi/openembedded/commit/?h=rpurdie/work-in-progress&id=35481122d7e484fb740ad9440fb4c70cb01de48f
+
+The nice thing about this is all of a sudden we have all the flags in
+the same place and it becomes obvious if something is wrong. There are a
+few things that raise an eyebrow there. It also becomes easier to
+abstract some of the gcc-X.Y.Z.inc data into a common include file
+(maybe a gcc-4.3.X.inc for example).
+
+Does anyone else fancy helping trying to clean this mess up. I'm happy
+to review some cleanup patches?
+
+Cheers,
+
+Richard
 
 
 
