@@ -1,49 +1,50 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-gx0-f228.google.com ([209.85.217.228])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Nx4VL-00055h-8d
+	(envelope-from <raj.khem@gmail.com>) id 1Nx4YG-0005EU-8w
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Mar 2010 22:27:12 +0200
-Received: by gwj21 with SMTP id 21so249238gwj.6
+	Wed, 31 Mar 2010 22:30:13 +0200
+Received: by gxk28 with SMTP id 28so274367gxk.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Mar 2010 13:23:54 -0700 (PDT)
+	Wed, 31 Mar 2010 13:26:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=zPIhfZ2MpRnla+GYWIC9azOfeoVthbLCd+ecUWFjtlY=;
-	b=QZpBQL/VsfrB940a7l/3wk23KjL+FlW4ffQpG7AvwM1O2StNvd3zezUZ5NRdXIPblt
-	A5FIE1xGUdZ7t4chBaNQqWrShV7JYMzBgsU3IjLlMDAZQCyqqtCdvfKn1RPda51EBHgJ
-	IDMe+OXSrZy/fKTAd4R3v09ORCujoozHfRgzU=
+	bh=cbL6gX0kVT74DhS+fSUdo5oUZZGIeWA1EFQNLpi1uA4=;
+	b=DWj3KHRfgcqgHxAu0L+cevjcM6HRYV3xPoIqOqXOy8hnYj08gu48k1WETD1kaEjrDC
+	j3AecddoawSZ84Hu7m4AK63hUlzMJnxrN/90reQShyTYbPvz27NhDI2SmBWtOOh3swrX
+	Yo9zytI1BxtTamLd1xmAfeQh1dF9lmNZUMCNo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=tveXHblyR1OPFZ7nwecomRndKWIg5lsITfd2L/zIG60haEJjb8mka7fZ4AavzuGN9c
-	hBlCsNZT2j/Jw7s+qIXrLDJOwLpbNXuHMlmH9KuWIEDEZAAYLXRLdqKG8RfhWFfdM2l7
-	kvO71HNGO1NS/XVA/Ic5Qo6IcWoKHs/UQea+g=
-Received: by 10.151.29.8 with SMTP id g8mr451511ybj.8.1270067032918;
-	Wed, 31 Mar 2010 13:23:52 -0700 (PDT)
+	b=i4pEyg7Zm5sKAwW9eaNFJoElFQ367mQX8Hb/JDmDj8mG5UGQq20YYHm3XmsQMKh+0R
+	OW2qbwIQ35FojfERa0AOCWtmGWI9Q3FHDTmuISXXg3cMPifxqmabDiHn4lU/aKdL4KUu
+	oBG+rGH3DMC8lXVV3w7LxntiJkHdP8uLqWuXs=
+Received: by 10.101.28.7 with SMTP id f7mr249055anj.218.1270067212494;
+	Wed, 31 Mar 2010 13:26:52 -0700 (PDT)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id 7sm1841934ywf.25.2010.03.31.13.23.51
+	by mx.google.com with ESMTPS id 13sm4479298gxk.4.2010.03.31.13.26.51
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 31 Mar 2010 13:23:52 -0700 (PDT)
-Date: Wed, 31 Mar 2010 13:24:38 -0700
+	Wed, 31 Mar 2010 13:26:51 -0700 (PDT)
+Date: Wed, 31 Mar 2010 13:27:41 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100331202438.GA21433@gmail.com>
+Message-ID: <20100331202741.GB21433@gmail.com>
 References: <1270061972-5564-1-git-send-email-khimov@altell.ru>
+	<1270061972-5564-2-git-send-email-khimov@altell.ru>
 MIME-Version: 1.0
-In-Reply-To: <1270061972-5564-1-git-send-email-khimov@altell.ru>
+In-Reply-To: <1270061972-5564-2-git-send-email-khimov@altell.ru>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Connect-IP: 209.85.217.228
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
-	UPPERCASE_50_75 autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/3] bitbake.conf: add STAGING_SBINDIR_NATIVE
+Subject: Re: [PATCH 2/3] postfix: convert to BBCLASSEXTEND and new staging for native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,42 +58,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Mar 2010 20:27:12 -0000
+X-List-Received-Date: Wed, 31 Mar 2010 20:30:13 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 On (31/03/10 22:59), Roman I Khimov wrote:
-> Makes referencing it easier.
-> 
 > Signed-off-by: Roman I Khimov <khimov@altell.ru>
-
-Acked-by: Khem Raj <raj.khem@gmail.com>
-
 > ---
->  conf/bitbake.conf |    3 ++-
->  1 files changed, 2 insertions(+), 1 deletions(-)
+>  recipes/postfix/postfix-native_2.0.20.bb |   10 ----------
+>  recipes/postfix/postfix-native_2.2.12.bb |   10 ----------
+>  recipes/postfix/postfix.inc              |   25 ++++++++++++++++++++++---
+>  3 files changed, 22 insertions(+), 23 deletions(-)
+>  delete mode 100644 recipes/postfix/postfix-native_2.0.20.bb
+>  delete mode 100644 recipes/postfix/postfix-native_2.2.12.bb
 > 
-> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-> index b941b90..2193553 100644
-> --- a/conf/bitbake.conf
-> +++ b/conf/bitbake.conf
-> @@ -300,6 +300,7 @@ STAGING_DIR = "${TMPDIR}/staging"
->  STAGING_DIR_JAVA = "${STAGING_DIR}/java"
->  STAGING_DIR_NATIVE = "${STAGING_DIR}/${BUILD_SYS}"
->  STAGING_BINDIR_NATIVE = "${STAGING_DIR_NATIVE}${bindir_native}"
-> +STAGING_SBINDIR_NATIVE = "${STAGING_DIR_NATIVE}${sbindir_native}"
->  STAGING_BINDIR_CROSS  = "${STAGING_DIR_NATIVE}${bindir_native}/${MULTIMACH_HOST_SYS}"
->  STAGING_BINDIR_CROSS_BASEPKG = "${STAGING_DIR_NATIVE}${bindir_native}/${BASEPKG_TARGET_SYS}"
->  STAGING_LIBDIR_NATIVE = "${STAGING_DIR_NATIVE}${libdir_native}"
-> @@ -414,7 +415,7 @@ EXTRA_IMAGEDEPENDS = ""
+> diff --git a/recipes/postfix/postfix-native_2.0.20.bb b/recipes/postfix/postfix-native_2.0.20.bb
+> deleted file mode 100644
+> index 66ff65d..0000000
+> --- a/recipes/postfix/postfix-native_2.0.20.bb
+> +++ /dev/null
+> @@ -1,10 +0,0 @@
+> -require postfix_${PV}.bb
+> -
+> -inherit native
+> -FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/postfix-${PV}"
+> -DEPENDS = "virtual/db-native libpcre-native"
+> -export DIRS = "src/util src/global src/postconf"
+> -
+> -do_stage () {
+> -	install -m 0755 src/postconf/postconf ${STAGING_BINDIR}/
+> -}
+> diff --git a/recipes/postfix/postfix-native_2.2.12.bb b/recipes/postfix/postfix-native_2.2.12.bb
+> deleted file mode 100644
+> index 66ff65d..0000000
+> --- a/recipes/postfix/postfix-native_2.2.12.bb
+> +++ /dev/null
+> @@ -1,10 +0,0 @@
+> -require postfix_${PV}.bb
+> -
+> -inherit native
+> -FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/postfix-${PV}"
+> -DEPENDS = "virtual/db-native libpcre-native"
+> -export DIRS = "src/util src/global src/postconf"
+> -
+> -do_stage () {
+> -	install -m 0755 src/postconf/postconf ${STAGING_BINDIR}/
+> -}
+> diff --git a/recipes/postfix/postfix.inc b/recipes/postfix/postfix.inc
+> index 6a5f9bb..5b18cef 100644
+> --- a/recipes/postfix/postfix.inc
+> +++ b/recipes/postfix/postfix.inc
+> @@ -1,5 +1,6 @@
+>  SECTION = "console/network"
+>  DEPENDS = "virtual/db libpcre postfix-native"
+> +DEPENDS_virtclass-native = "virtual/db-native libpcre-native"
+
+Is this really needed. I thought BBCLASSEXTEND should have converted it for
+you and if you wanted to get rid of postfix-native dependency then why is
+it that native wont need it and target recipe will.
+
+>  LICENSE = "IPL"
 >  
->  CROSS_DIR = "${TMPDIR}/cross/${BASE_PACKAGE_ARCH}"
->  CROSS_DATADIR = "${CROSS_DIR}/share"
-> -PATH_prepend = "${STAGING_BINDIR_CROSS}:${STAGING_BINDIR_CROSS_BASEPKG}:${STAGING_DIR_NATIVE}${sbindir_native}:${STAGING_BINDIR_NATIVE}:${CROSS_DIR}/${bindir_cross}:${STAGING_DIR_NATIVE}${base_sbindir_native}:${STAGING_DIR_NATIVE}${base_bindir_native}:"
-> +PATH_prepend = "${STAGING_BINDIR_CROSS}:${STAGING_BINDIR_CROSS_BASEPKG}:${STAGING_SBINDIR_NATIVE}:${STAGING_BINDIR_NATIVE}:${CROSS_DIR}/${bindir_cross}:${STAGING_DIR_NATIVE}${base_sbindir_native}:${STAGING_DIR_NATIVE}${base_bindir_native}:"
->  export PATH
+>  INC_PR = "r13"
+> @@ -15,6 +16,8 @@ SRC_URI = "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV
 >  
->  ##################################################################
+>  S = "${WORKDIR}/postfix-${PV}"
+>  
+> +BBCLASSEXTEND = "native"
+> +
+>  inherit update-rc.d
+>  
+>  INITSCRIPT_NAME = "postfix"
+> @@ -31,7 +34,7 @@ export SYSLIBS = "-lpcre -ldb ${LIBBDB_EXTRA} -lnsl -lresolv ${LDFLAGS}"
+>  export EXPORT = "AUXLIBS='-lpcre' CCARGS='-DHAS_PCRE ${CFLAGS}' OPT='' DEBUG='-g'"
+>  export CC_append = " -DHAS_PCRE ${CFLAGS}"
+>  export EXTRA_OEMAKE = "-e"
+> -export POSTCONF = "${STAGING_BINDIR_NATIVE}/postconf"
+> +export POSTCONF = "${STAGING_SBINDIR_NATIVE}/postconf"
+>  
+>  do_compile () {
+>  	unset CFLAGS CPPFLAGS CXXFLAGS
+> @@ -39,8 +42,23 @@ do_compile () {
+>  	oe_runmake
+>  }
+>  
+> +do_install_prepend_virtclass-native() {
+> +	export POSTCONF="bin/postconf"
+> +}
+> +
+>  do_install () {
+> -	sh ./postfix-install 'install_root=${D}' -non-interactive
+> +	sh ./postfix-install 'install_root=${D}' \
+> +		'config_directory=${sysconfdir}/postfix' \
+> +		'daemon_directory=${libexecdir}/postfix' \
+> +		'command_directory=${sbindir}' \
+> +		'queue_directory=${localstatedir}/spool/postfix' \
+> +		'sendmail_path=${sbindir}/sendmail.postfix' \
+> +		'newaliases_path=${bindir}/newaliases' \
+> +		'mailq_path=${bindir}/mailq' \
+> +		'manpage_directory=${mandir}' \
+> +		'readme_directory=${datadir}/doc/postfix' \
+> +		'data_directory=${localstatedir}/lib/postfix' \
+> +		-non-interactive
+>  	rm -rf ${D}${localstatedir}/spool/postfix
+>          mv ${D}${sysconfdir}/postfix/main.cf ${D}${sysconfdir}/postfix/sample-main.cf
+>  	install -d ${D}${localstatedir}/tmp
+> @@ -50,9 +68,10 @@ do_install () {
+>          install -m 644 ${WORKDIR}/volatiles ${D}${sysconfdir}/default/volatiles/01_postfix
+>          install -m 755 ${WORKDIR}/postfix ${D}${sysconfdir}/init.d/postfix
+>          install -m 644 ${WORKDIR}/internal_recipient ${D}${sysconfdir}/postfix/internal_recipient
+> -	mv ${D}${sbindir}/sendmail ${D}${sbindir}/sendmail.${PN}
+>  }
+>  
+> +NATIVE_INSTALL_WORKS = "1"
+> +
+>  pkg_postinst () {
+>  	update-alternatives --install ${sbindir}/sendmail sendmail sendmail.${PN} 40
+>          grep postfix /etc/group || addgroup postfix
 > -- 
 > 1.6.4.2
 > 
