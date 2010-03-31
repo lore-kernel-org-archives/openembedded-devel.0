@@ -1,41 +1,36 @@
-Received: from mail-iw0-f178.google.com ([209.85.223.178])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Nx1Oa-0007ns-12
+	(envelope-from <raj.khem@gmail.com>) id 1Nx1Q3-0007v3-E1
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Mar 2010 19:08:00 +0200
-Received: by iwn8 with SMTP id 8so301566iwn.16
+	Wed, 31 Mar 2010 19:09:32 +0200
+Received: by pwj5 with SMTP id 5so306705pwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Mar 2010 10:04:43 -0700 (PDT)
+	Wed, 31 Mar 2010 10:06:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:in-reply-to:references
 	:date:received:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=A4DIlT56S/r3K4GtsHIFVILynguv3EhHWNMsESLoETI=;
-	b=LjrazvlCfskqLkf3lCldm0+7MHEpcnmtT/CEZ2CkWjZYA+i67C63Uc8QA+H+To7zXY
-	l3Z7QKSlirmIjT8PX9lxKAhfWMSEpEp16jg+mug224Q+FPbakb9H7tUEfRgSKByGagKk
-	Ow6dGEpY7F3n501d4ry17Hd8j4hwdYdxOOM8k=
+	bh=zipsh3oPq4Pu4+bmRyagW/V0I9p2KVhg28C0IE0uUt0=;
+	b=CxJvivl2fN199lqORIvRFney7mh9fHTsKViEHZoLhH4/QhHVMLwNb8Y9C0BA7tBb25
+	/5LDeNLqKWtfhhwCRT2ZgEGLZUB1TTNwmD8blDRj7xcII7F20daO3jOtz6H1EpY3E5pV
+	u3TY5XFzHWvQyHgjZTZpToL3UGKA7l7/E9/74=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=D2BiA+rJb/ZQ2vluA4MUm2Xp2q8z+DzlBexHSkfKO0DeRBrup+Pf+Z/GpQX2QAXW3F
-	byt+bwddepX80ucbjCQPpGnRRBRi/SxWNDWRDIMwUU13J4kaV6G+fopw4Qe+g1WfZCI8
-	Ngsk1ml8+MqEKse8T98t+YYxGtObYvvc/XpVs=
+	b=DyFSIIu82cHoClQWmbzLkujeO5mpgWPNpw6Dy273vGq/4wI14rzPZE55TWezs6/jYo
+	SesGy0F4ZC0jD1AP98hoyTavHbyYSs0JyIe0Wo0DyOwU7CYDqxSFutIlF82fjXbYBG0w
+	SsbDTktXC5S4mqm6Fhvuux72dWCXaDRexbe8A=
 MIME-Version: 1.0
-Received: by 10.231.32.66 with HTTP; Wed, 31 Mar 2010 10:04:43 -0700 (PDT)
-In-Reply-To: <hovis7$jk7$1@dough.gmane.org>
-References: <1269730499.4033.176.camel@mattotaupa>
-	<hon5i2$8iq$1@dough.gmane.org> <1269797481.8018.80.camel@mattotaupa>
-	<hooat6$p3d$1@dough.gmane.org> <1269949824.4103.38.camel@mattotaupa>
-	<hosrca$7qu$1@dough.gmane.org>
-	<1269953505.14554.2.camel@mill.internal.reciva.com>
-	<hovis7$jk7$1@dough.gmane.org>
-Date: Wed, 31 Mar 2010 10:04:43 -0700
-Received: by 10.231.148.18 with SMTP id n18mr312792ibv.7.1270055083564; Wed, 
-	31 Mar 2010 10:04:43 -0700 (PDT)
-Message-ID: <u2k19c1b8a91003311004ka69764e7i4fded3933845be1a@mail.gmail.com>
+Received: by 10.231.32.66 with HTTP; Wed, 31 Mar 2010 10:06:14 -0700 (PDT)
+In-Reply-To: <4BB35552.9070508@mlbassoc.com>
+References: <4BB35552.9070508@mlbassoc.com>
+Date: Wed, 31 Mar 2010 10:06:14 -0700
+Received: by 10.141.101.17 with SMTP id d17mr5958850rvm.30.1270055174449; Wed, 
+	31 Mar 2010 10:06:14 -0700 (PDT)
+Message-ID: <v2q19c1b8a91003311006zc7a7eff8o9f2a88a1f42b6c1d@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.178
+X-SA-Exim-Connect-IP: 209.85.160.47
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -43,7 +38,7 @@ X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] autotool.bbclass: Remove `EXTRA_AUTORECONF = "--exclude=autopoint"`.
+Subject: Re: FireFox on PowerPC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,41 +52,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Mar 2010 17:08:00 -0000
+X-List-Received-Date: Wed, 31 Mar 2010 17:09:32 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 31, 2010 at 6:31 AM, Koen Kooi <k.kooi@student.utwente.nl> wrot=
-e:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+On Wed, Mar 31, 2010 at 6:59 AM, Gary Thomas <gary@mlbassoc.com> wrote:
+> Has anyone had success building FireFox for a PowerPC
+> target - I'm using the development branch (org.openembedded.dev)
+> =A0MACHINE=3Defika
+> =A0DISTRO =3D "angstrom-2008.1"
 >
-> On 30-03-10 14:51, Phil Blundell wrote:
->> On Tue, 2010-03-30 at 14:38 +0200, Koen Kooi wrote:
->>> I wonder if we only should run autopoint if there are AM_GNU_GETTEXT*
->>> macros in configure.{in,ac}, or does autopoint take care of that
->>> automagically?
->>
->> Autoreconf has some (limited) logic to figure out whether autopoint is
->> needed. =A0I think that ought to be sufficient.
+> I've tried to build a number of different FireFox packages,
+> none with success. =A0So far I've tried 2.0.0.3, 3.5.2 & 3.6.2
 >
-> So can we get some acks on this patch from autotools savvy people?
+> Any pointers?
+>
+> Query: is there an easy way to build a particular package version?
+> What I've done is just add a line like this to my local.conf:
+> =A0PREFERRED_VERSION_firefox=3D"3.5.2"
 
-I think we should also try few builds from scratch. I am interested in
-uclibc based builds.
+
+what errors do you get.
 
 >
-> regards,
+> Thanks for any help with this
 >
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFLs07GMkyGM64RGpERAnb6AJwI7A4RiAqakz4+E1+yIM1208tgGwCfTHNi
-> WtEHoTLG83SEkCTpFw2zIR8=3D
-> =3DxIxY
-> -----END PGP SIGNATURE-----
->
+> --
+> ------------------------------------------------------------
+> Gary Thomas =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A0Consulting for the
+> MLB Associates =A0 =A0 =A0 =A0 =A0 =A0 =A0| =A0 =A0Embedded world
+> ------------------------------------------------------------
 >
 > _______________________________________________
 > Openembedded-devel mailing list
