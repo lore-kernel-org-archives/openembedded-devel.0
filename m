@@ -1,28 +1,31 @@
-Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
+Received: from exprod5og104.obsmtp.com ([64.18.0.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcolz@zlo.nu>) id 1NwzZC-0008Sv-OY
+	(envelope-from <martyn.welch@ge.com>) id 1Nwzmo-0006Ir-JU
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Mar 2010 17:10:51 +0200
-Received: by mzh.zlo.nu (Postfix, from userid 1000)
-	id 34D95140B0; Wed, 31 Mar 2010 17:02:19 +0200 (CEST)
-Date: Wed, 31 Mar 2010 17:02:19 +0200
-From: Marc Olzheim <zlo@zlo.nu>
+	Wed, 31 Mar 2010 17:24:56 +0200
+Received: from source ([12.71.149.1]) (using TLSv1) by
+	exprod5ob104.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKS7Nog2ifTN74YbEJH59Z+aqZDUxtG03M@postini.com;
+	Wed, 31 Mar 2010 08:21:41 PDT
+Received: from unknown (HELO alpmlip01.e2k.ad.ge.com) ([3.159.17.48])
+	by Cinmlip06.e2k.ad.ge.com with ESMTP; 31 Mar 2010 11:16:35 -0400
+Received: from es-j7s4d2j.amer.consind.ge.com ([3.138.54.92])
+	by alpmlip01.e2k.ad.ge.com with ESMTP; 31 Mar 2010 11:16:35 -0400
+From: Martyn Welch <martyn.welch@ge.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100331150219.GA29082@zlo.nu>
-References: <20100331132523.31493.75635.stgit@ES-J7S4D2J.amer.consind.ge.com>
-	<w2u5e088bd91003310701t15cc16c5w4075659e89068d0f@mail.gmail.com>
+Date: Wed, 31 Mar 2010 16:20:05 +0100
+Message-ID: <20100331152003.5828.26495.stgit@ES-J7S4D2J.amer.consind.ge.com>
+User-Agent: StGIT/0.13
 MIME-Version: 1.0
-In-Reply-To: <w2u5e088bd91003310701t15cc16c5w4075659e89068d0f@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 85.17.141.90
-X-SA-Exim-Mail-From: marcolz@zlo.nu
+X-SA-Exim-Connect-IP: 64.18.0.178
+X-SA-Exim-Mail-From: martyn.welch@ge.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] dhcp: Correct leases directory location
+Subject: [PATCH] po4a: Add native recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,65 +39,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Mar 2010 15:10:51 -0000
-X-Groupsio-MsgNum: 18296
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="OgqxwSJOaUobr8KG"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 31 Mar 2010 15:24:56 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
 
---OgqxwSJOaUobr8KG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Add a recipe for building a native version of po4a version 0.36.3.
 
-On Wed, Mar 31, 2010 at 07:01:29AM -0700, Steve Sakoman wrote:
-> On Wed, 2010-03-31 at 14:29 +0100, Martyn Welch wrote:
-> > The DHCP client currently expects to be able to create a leases file in
-> > "/var/lib/dhcp" as configured in dhcp3.inc. Recipe is currently creatin=
-g a
-> > directory called "/var/lib/dhcp3", resulting in the following error:
-> >
-> > can't create /var/lib/dhcp/dhclient.eth0.leases
-> >
-> > Correct directory naming to resolve error.
-> >
-> > Signed-off-by: Martyn Welch <martyn.welch@ge.com>
-> >
-> > ---
-> >
-> >  Steve: This seems to be directy reversing a change you made. The commit
-> >   message doesn't give me any idea of why you did it, can you remember?
->=20
-> Interesting.  I made the change because I was getting quite similar
-> errors, but for files being created in /var/lib/dhcp3!
->=20
-> I'm not sure what is different about our overall set ups, but perhaps
-> the proper fix is to create both directories.
->=20
-> Steve
+Signed-off-by: Martyn Welch <martyn.welch@ge.com>
+---
 
-Hmm, note that recipes/dhcp/files/init-server uses /var/lib/dhcp as well.
+ recipes/po4a/po4a-native_0.36.3.bb |   12 ++++++++++++
+ 1 files changed, 12 insertions(+), 0 deletions(-)
 
-dhclient from 3.1.2p1 uses /var/lib/dhcp by default. Maybe one of the
-older versions used /var/lib/dhcp3 by default...
+diff --git a/recipes/po4a/po4a-native_0.36.3.bb b/recipes/po4a/po4a-native_0.36.3.bb
+new file mode 100644
+index 0000000..07c9e08
+--- /dev/null
++++ b/recipes/po4a/po4a-native_0.36.3.bb
+@@ -0,0 +1,12 @@
++DESCRIPTION = "Tools for helping translation of documentation"
++SECTION = "utility"
++PRIORITY = "optional"
++LICENSE = "GPL"
++DEPENDS = "libmodule-build-perl-native"
++PR = "r0"
++inherit native
++
++SRC_URI = "${DEBIAN_MIRROR}/main/p/po4a/po4a_0.36.3.orig.tar.gz;name=po4a"
++
++SRC_URI[po4a.md5sum] = "47af91b7d2ad3a3a9e2aaa22473f42bf"
++SRC_URI[po4a.sha256sum] = "4563f4651448300f3d05f9dfa5212535ef0bd97c6b51704c4cb9829f282915e2"
 
-I did not spot this myself because dhclient is run from network-manager
-on our system, which passes it command line arguments on where to put
-the lease file.
 
-Marc
+--
+Martyn Welch (Principal Software Engineer)   |   Registered in England and
+GE Intelligent Platforms                     |   Wales (3828642) at 100
+T +44(0)127322748                            |   Barbirolli Square, Manchester,
+E martyn.welch@ge.com                        |   M2 3AB  VAT:GB 927559189
 
---OgqxwSJOaUobr8KG
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEARECAAYFAkuzY/sACgkQezjnobFOgrEQOwCguK2f4RaFnsUTORSqqg7Sst0Q
-O+EAoKnEQshMQXBt8HyMzmF454nOLglQ
-=Lsoq
------END PGP SIGNATURE-----
-
---OgqxwSJOaUobr8KG--
