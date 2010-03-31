@@ -1,45 +1,41 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1Nwws5-0004Mh-Qn
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1Nwxab-0004QC-4S
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Mar 2010 14:18:11 +0200
-Received: by pwj5 with SMTP id 5so16044pwj.6
+	Wed, 31 Mar 2010 15:04:11 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2VD0r6T013280
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Mar 2010 05:14:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:received:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=FXXOmwbDqX0qcFX/YWDqn+Wzl881N17bKBiRhbhI0m8=;
-	b=CDFi385qgJNM3U6Wy5S5bJhb+yW4M4mSH2YRX3hfMlIwkB5aPU2l0WqJ6eT/Nm/JaA
-	+Qgl5+wjhMJ4/hZg0ziS/CUKhW/r5wLSNRx0SzKFYb3dbiGLsNvU1tUTSZtJcvjFObOq
-	/Sn0Ef0MLOPKdFcGxhkdFfKTIVHuCYOpV+J1Q=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=WWo0oqZ1volv/YGoxuEnXhqP46XbyK/AiIZmynkUo1S3ZCcLjbq2GxkHIPVvfKwOf3
-	g7xxQ1uAeutZzeOwT4DH/8eUR60cdRXbLQPqjYKOW1FKbp1Z1AOMOspbiRqwG3KoJhLO
-	YwvWitGh2kPvr0navUuFnEaAnqhpeTAE7ayCM=
-MIME-Version: 1.0
-Received: by 10.141.34.13 with HTTP; Wed, 31 Mar 2010 05:14:53 -0700 (PDT)
-In-Reply-To: <E1NwwjN-0002ZP-Tv@melo.openembedded.org>
-References: <bug-5427-13@http.bugs.openembedded.org/>
-	<E1NwwjN-0002ZP-Tv@melo.openembedded.org>
-Date: Wed, 31 Mar 2010 14:14:53 +0200
-Received: by 10.140.56.7 with SMTP id e7mr2357154rva.8.1270037693244; Wed, 31 
-	Mar 2010 05:14:53 -0700 (PDT)
-Message-ID: <l2xd1b08f941003310514u784a9109lb18a94f9bd4bded4@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Wed, 31 Mar 2010 14:00:53 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 13063-04 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Mar 2010 14:00:49 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o2VD0jCB013274
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Mar 2010 14:00:48 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+In-Reply-To: <y2oac9c93b11003310445gb3deec55va9bd2664d0336584@mail.gmail.com>
+References: <1270034881.1681.965.camel@rex>
+	<y2oac9c93b11003310445gb3deec55va9bd2664d0336584@mail.gmail.com>
+Date: Wed, 31 Mar 2010 14:00:44 +0100
+Message-ID: <1270040444.1681.976.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [oe-commits] [Bug 5427] tzcode-native_2010f.bb fails, as tzcode2010f 	pacakge is not available
+Subject: Re: gcc Recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,41 +49,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Mar 2010 12:18:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 31 Mar 2010 13:04:11 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
----------- Forwarded message ----------
-From:  <bugzilla-daemon@git.openembedded.org>
-Date: Wed, Mar 31, 2010 at 2:09 PM
-Subject: [oe-commits] [Bug 5427] tzcode-native_2010f.bb fails, as
-tzcode2010f pacakge is not available
-To: openembedded-commits@lists.openembedded.org
+On Wed, 2010-03-31 at 13:45 +0200, Frans Meulenbroeks wrote:
+> I share your feeling of discomfort and depression.
+> Personally I feel cleaning up should start with removing obsolete &
+> unneeded versions as it is pointless spending time on improving them.
+> I've tried to stir up the discussion on cleaning up a few times, and
+> gave up due to too much negative feedback and little positive
+> feedback.
+> But still I wonder what is e.g. the use of recipes like 4.1.1 (which
+> btw was released in may 2006).
+
+I don't think removing old versions is going to cut it to be honest as
+people are attached to them for various reasons. Having them around
+isn't really a problem, I'm more concerned about the general sprawl of
+the recipes which makes them hard to understand. Its clear some are more
+broken than others.
+
+> Having said that:
+> I've looked at your commit. Looks fine to me so a +1 & thumbs up.
+>
+> PS: not sure about all the variants, but it might be nice to be able
+> to use something like BBCLASSEXTEND="cross".
+> Don't think my pythonese and knowledge of the gcc build system is good
+> enough to cook up something though.
+
+Well, the variants are ugly but before we can thing about doing anything
+about them using BBCLASSEXTEND they have to be condensed down to:
+
+require gcc_${PV}.bb
+inherit someclass
+
+This is another reason to try and focus the details into one place as
+perhaps then we'll be able to achieve something like this. Even if we
+don't use BBCLASSEXTEND, making large numbers of the files simple boiler
+plate will make it easier to understand.
+
+Cheers,
+
+Richard
 
 
-http://bugs.openembedded.org/show_bug.cgi?id=3D5427
 
-
-
-
-
---- Comment #1 from Michal stawinski <nazgee@gmail.com> =A02010-03-31 12:09=
-:09 ---
-http://sources.openembedded.org//tzdata2010f.tar.gz
-http://www.angstrom-distribution.org/unstable/sources/tzdata2010f.tar.gz
-http://mirrors.openembedded.org//tzdata2010f.tar.gz
-
-do not work. 2010f vesion can be downloaded from web, but it is not a
-comfortable way to go with.
-
---
-Configure bugmail: http://bugs.openembedded.org/userprefs.cgi?tab=3Demail
-------- You are receiving this mail because: -------
-You are the assignee for the bug.
-
-_______________________________________________
-Openembedded-commits mailing list
-Openembedded-commits@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
 
 
