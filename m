@@ -1,42 +1,41 @@
-Received: from mail.massmicro.com ([71.174.98.229] helo=mail.kumichan.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mark.richards@massmicro.com>) id 1Nx0ue-0001s5-6P
+Received: from server3.tinynetworks.co.uk ([89.16.176.161]
+	helo=mx.tinynetworks.co.uk) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <martyn@welchs.me.uk>) id 1Nx0xj-0001zT-EQ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Mar 2010 18:37:05 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mail.kumichan.net (Postfix) with ESMTP id 07CBACED2B
+	Wed, 31 Mar 2010 18:40:16 +0200
+Received: from mx.tinynetworks.co.uk (localhost.localdomain [127.0.0.1])
+	by mx.tinynetworks.co.uk (Postfix) with ESMTP id 9ED4C636178
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Mar 2010 16:12:18 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at kumichan.net
-Received: from mail.kumichan.net ([127.0.0.1])
-	by localhost (mail.kumichan.net [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id oHsobeLKAErh
+	Wed, 31 Mar 2010 17:37:01 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=tinynetworks.co.uk; h=
+	message-id:date:from:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding; s=postfix;
+	bh=ul1FB8wlNv2sCgZO9BGK4YVaALE=; b=V2saxnY5lVuzZOWAyvXn4uGbVIzg
+	YBmgnAvPaiA6yHH9/NadO1ABLSHj5pj4cJ+GLYbgyT91aZyK9L1yHcg47UJnqyVI
+	+ki1hnNJ2XDGpENUvry/hzRKOLgA2clbv2ddZs4n4bN9Asi7SYE7y5kfcuRVte27
+	CIc2hETJRIhFauw=
+Received: from [192.168.0.118] (unknown [82.152.154.75])
+	by mx.tinynetworks.co.uk (Postfix) with ESMTPSA id 57EE8636055
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Mar 2010 16:12:17 +0000 (UTC)
-Received: from [127.0.0.1] (unknown [71.174.98.226])
-	(Authenticated sender: markr)
-	by mail.kumichan.net (Postfix) with ESMTP id 69CA6CECF2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Mar 2010 16:12:17 +0000 (UTC)
-Message-ID: <4BB37460.3000906@massmicro.com>
-Date: Wed, 31 Mar 2010 12:12:16 -0400
-From: Mark Richards <mark.richards@massmicro.com>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
+	Wed, 31 Mar 2010 17:37:01 +0100 (BST)
+Message-ID: <4BB37A29.2000800@welchs.me.uk>
+Date: Wed, 31 Mar 2010 17:36:57 +0100
+From: Martyn Welch <martyn@welchs.me.uk>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1270034881.1681.965.camel@rex>
-In-Reply-To: <1270034881.1681.965.camel@rex>
-X-SA-Exim-Connect-IP: 71.174.98.229
-X-SA-Exim-Mail-From: mark.richards@massmicro.com
+References: <20100331132523.31493.75635.stgit@ES-J7S4D2J.amer.consind.ge.com>	<w2u5e088bd91003310701t15cc16c5w4075659e89068d0f@mail.gmail.com>
+	<20100331150219.GA29082@zlo.nu>
+In-Reply-To: <20100331150219.GA29082@zlo.nu>
+X-SA-Exim-Connect-IP: 89.16.176.161
+X-SA-Exim-Mail-From: martyn@welchs.me.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: gcc Recipes
+Subject: Re: [PATCH] dhcp: Correct leases directory location
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,45 +49,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Mar 2010 16:37:05 -0000
+X-List-Received-Date: Wed, 31 Mar 2010 16:40:16 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Richard Purdie , On 3/31/2010 07:28:
-> I've just been looking over OE's gcc recipes and they really depress
-> me :(. People touch them just enough to tweak their specific problem
-> with no real thought going into the overall architecture and its a
-> sprawling mess. I tackled some of this a while back. Sadly its just
-> getting worse again.
+Marc Olzheim wrote:
+> On Wed, Mar 31, 2010 at 07:01:29AM -0700, Steve Sakoman wrote:
+>   
+>> On Wed, 2010-03-31 at 14:29 +0100, Martyn Welch wrote:
+>>     
+>>> The DHCP client currently expects to be able to create a leases file in
+>>> "/var/lib/dhcp" as configured in dhcp3.inc. Recipe is currently creating a
+>>> directory called "/var/lib/dhcp3", resulting in the following error:
+>>>
+>>> can't create /var/lib/dhcp/dhclient.eth0.leases
+>>>
+>>> Correct directory naming to resolve error.
+>>>
+>>> Signed-off-by: Martyn Welch <martyn.welch@ge.com>
+>>>
+>>> ---
+>>>
+>>>  Steve: This seems to be directy reversing a change you made. The commit
+>>>   message doesn't give me any idea of why you did it, can you remember?
+>>>       
+>> Interesting.  I made the change because I was getting quite similar
+>> errors, but for files being created in /var/lib/dhcp3!
+>>
+>> I'm not sure what is different about our overall set ups, but perhaps
+>> the proper fix is to create both directories.
+>>
+>> Steve
+>>     
 >
->    
-I'm prompted to reply, not as I am experienced enough (in the least) to 
-help, so sorry about that, but to offer a thought about recipes and OE 
-in general.  I hope this thought will apply to this thread.
+> Hmm, note that recipes/dhcp/files/init-server uses /var/lib/dhcp as well.
+>
+> dhclient from 3.1.2p1 uses /var/lib/dhcp by default. Maybe one of the
+> older versions used /var/lib/dhcp3 by default...
+>
+> I did not spot this myself because dhclient is run from network-manager
+> on our system, which passes it command line arguments on where to put
+> the lease file.
+>
+> Marc
+>   
+> ------------------------------------------------------------------------
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>   
 
-When starting to use OE I was surprised that it is necessary to tinker 
-with recipes at all.  For that matter, I've had to tinker with other 
-things as well, which means that every update has a potential to wipe 
-out my changes.  Now this is probably just an expression of the fact 
-that I am very new to this environment...
+The contents of do_compile:
 
-In another development system (one I am very fond of) the build process 
-checks for the presence of and content of user-created configuration 
-files which serve various purposes.  Principally these tell the system 
-where it can find additional libraries and source trees to build and 
-include in the end-result.  This method protects all the internals from 
-mangling, which I think is what I am reading in your description of the 
-Recipes as a "sprawling mess".  This then makes the overall system 
-dysfunctional downstream and, as you point out, requires fixing to get 
-it back into a state that can be understood and worked with properly.  
-Now this system I speak of has only 10% of the power of OE, so perhaps 
-it is not a fair comparison.  Yet I think a good principle to follow is 
-one that provides user-specific hooks that insulate the internals.  One 
-should only tinker with the works if it will be consistent with the 
-overall design and not break functionality.
-
-/mark
+do_compile() {
+        make RANLIB=${RANLIB} 
+PREDEFINES='-D_PATH_DHCPD_DB=\"/var/lib/dhcp/dhcpd.leases\" \
+        -D_PATH_DHCLIENT_DB=\"/var/lib/dhcp/dhclient.leases\" \
+        -D_PATH_DHCLIENT_SCRIPT=\"/sbin/dhclient-script\" \
+        -D_PATH_DHCPD_CONF=\"/etc/dhcp/dhcpd.conf\" \
+        -D_PATH_DHCLIENT_CONF=\"/etc/dhcp/dhclient.conf\"'
+}
 
 
+Would suggest an explicit preference to using "var/lib/dhcp". May be 
+there is another argument that has been missed?
+
+Martyn
 
 
