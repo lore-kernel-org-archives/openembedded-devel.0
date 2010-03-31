@@ -1,32 +1,44 @@
-Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
+Received: from mail-iw0-f178.google.com ([209.85.223.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1Nx1Wq-0005fy-LL
+	(envelope-from <raj.khem@gmail.com>) id 1Nx1iG-0002AZ-LY
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Mar 2010 19:16:57 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 09C9516604EF; Wed, 31 Mar 2010 11:13:16 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 0DD1E1660464;
-	Wed, 31 Mar 2010 11:13:15 -0600 (MDT)
-Message-ID: <4BB382AA.3040901@mlbassoc.com>
-Date: Wed, 31 Mar 2010 11:13:14 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.8) Gecko/20100301 Fedora/3.0.3-1.fc11 Thunderbird/3.0.3
+	Wed, 31 Mar 2010 19:28:22 +0200
+Received: by iwn8 with SMTP id 8so325377iwn.16
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 31 Mar 2010 10:25:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:received:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=2j9zfuQtc9WsxkrTniaqkVonMMnNPFfc1Nl32pfifF8=;
+	b=jqtuAUSkdlvD6BKir/0bzLgpKVCtmZ0fZekA8VYS5jZWCjoKilfoTBHV6bRAMDFkw1
+	Kt9lhP6cqVwv+gNSeJ1NTvFADbv7n0VitDu+k/O83abWNMgEIvQR00Kh4X4MILA9vqbn
+	wx12KMGhS9ebqa8FCjNvoJqYv/IsuMUaT3aEE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=SFuiHEu6L5LVNaD/Q4eJKSlSHoI8UajdzdHDMdqdJ2QthoAPGwq6++qNHvdrIhsq3g
+	Pnq78nuw30bEwy9RT1GiwbAZEbMkqXIf1a1OMSwip7IEoKXp+Un4k1BzXqzrki2pWgTV
+	KGrpFmWP23wkQ88NAI30VaFIwhyDctrHfiUBM=
 MIME-Version: 1.0
+Received: by 10.231.32.66 with HTTP; Wed, 31 Mar 2010 10:25:03 -0700 (PDT)
+In-Reply-To: <1270034881.1681.965.camel@rex>
+References: <1270034881.1681.965.camel@rex>
+Date: Wed, 31 Mar 2010 10:25:03 -0700
+Received: by 10.142.9.33 with SMTP id 33mr871550wfi.0.1270056303557; Wed, 31 
+	Mar 2010 10:25:03 -0700 (PDT)
+Message-ID: <x2z19c1b8a91003311025w5516e09at69ad3d50134f0380@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4BB35552.9070508@mlbassoc.com>
-	<v2q19c1b8a91003311006zc7a7eff8o9f2a88a1f42b6c1d@mail.gmail.com>
-In-Reply-To: <v2q19c1b8a91003311006zc7a7eff8o9f2a88a1f42b6c1d@mail.gmail.com>
-X-SA-Exim-Connect-IP: 76.76.67.137
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+X-SA-Exim-Connect-IP: 209.85.223.178
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: FireFox on PowerPC
+Subject: Re: gcc Recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,88 +52,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Mar 2010 17:17:44 -0000
-X-Groupsio-MsgNum: 18303
-Content-Type: multipart/mixed; boundary="------------020509030707020802000600"
+X-List-Received-Date: Wed, 31 Mar 2010 17:28:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
---------------020509030707020802000600
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+On Wed, Mar 31, 2010 at 4:28 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> I've just been looking over OE's gcc recipes and they really depress
+> me :(. People touch them just enough to tweak their specific problem
+> with no real thought going into the overall architecture and its a
+> sprawling mess. I tackled some of this a while back. Sadly its just
+> getting worse again.
+>
+> I've spent some time looking at them trying to identify what I consider
+> to be the main sources of ugliness and how we can try and improve the
+> situation. I think it might help to set a high level goal for the gcc
+> recipes which would be:
+>
+> =A0 All configuration for a given gcc version should be contained
+> =A0 within the high level version specific .inc file(gcc-X.Y.Z.inc).
+>
+> We'd therefore be frowning on version specific hacks in say the cross
+> recipes only.
+>
+> It would follow that there would be a clear set of include files and a
+> clear include structure and that almost all of the variant gcc recipes
+> (gcc-cross-initial, gcc-cross-intermediate, gcc-cross-kernel,
+> gcc-cross-sdk, gcc) would be boilerplate includes.
+>
+> Note that information about flags for the cross builds can be included
+> in the main common version specific include file.
+>
+> To illustrate the kind of thing I mean, have a look at this commit:
+>
+> http://git.openembedded.net/cgit.cgi/openembedded/commit/?h=3Drpurdie/wor=
+k-in-progress&id=3D35481122d7e484fb740ad9440fb4c70cb01de48f
+>
 
-On 03/31/2010 11:06 AM, Khem Raj wrote:
-> On Wed, Mar 31, 2010 at 6:59 AM, Gary Thomas<gary@mlbassoc.com>  wrote:
->> Has anyone had success building FireFox for a PowerPC
->> target - I'm using the development branch (org.openembedded.dev)
->>   MACHINE=efika
->>   DISTRO = "angstrom-2008.1"
->>
->> I've tried to build a number of different FireFox packages,
->> none with success.  So far I've tried 2.0.0.3, 3.5.2&  3.6.2
->>
->> Any pointers?
->>
->> Query: is there an easy way to build a particular package version?
->> What I've done is just add a line like this to my local.conf:
->>   PREFERRED_VERSION_firefox="3.5.2"
+in one place you removed DEPENDS that may not be correct. Because
+DEPENDS get overwritten in gcc-cross-initial.inc
+
+
+diff --git a/recipes/gcc/gcc-cross-initial_4.0.0.bb
+b/recipes/gcc/gcc-cross-initial_4.0.0.bb
+index 976cd96..1639511 100644
+--- a/recipes/gcc/gcc-cross-initial_4.0.0.bb
++++ b/recipes/gcc/gcc-cross-initial_4.0.0.bb
+@@ -1,6 +1,2 @@
+require gcc-cross_${PV}.bb
+require gcc-cross-initial.inc
+-
+-DEPENDS +=3D "gmp-native mpfr-native"
+-
+-EXTRA_OECONF +=3D "--disable-multilib --disable-libssp --disable-libmudfla=
+p"
+
+
+
+
+> The nice thing about this is all of a sudden we have all the flags in
+> the same place and it becomes obvious if something is wrong. There are a
+> few things that raise an eyebrow there. It also becomes easier to
+> abstract some of the gcc-X.Y.Z.inc data into a common include file
+> (maybe a gcc-4.3.X.inc for example).
+
+I this this is a good idea. We could even capture some bugs like in
+some recipes we use EXTRA_OECONF_BASE +=3D and in some EXTRA_OECONF_BASE
+=3D
+
+>
+> Does anyone else fancy helping trying to clean this mess up. I'm happy
+> to review some cleanup patches?
+
+I plan to do some of this restructuring when I am back from my time
+off in end of april.
+
+>
+> Cheers,
+>
+> Richard
 >
 >
-> what errors do you get.
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-It depends on the version.  For 3.6.2 (latest), I get this:
 
-ccache powerpc-angstrom-linux-g++ -mcpu=603e -mhard-float  -L/local/Angstrom_BeagleBoard/tmp/staging/ppc603e-angstrom-linux/usr/lib 
--Wl,-rpath-link,/local/Angstrom_BeagleBoard/tmp/staging/ppc603e-angstrom-linux/usr/lib -Wl,-O1 -Wl,--hash-style=gnu -o jsbool.o -c -fvisibility=hidden -DOSTYPE=\"Linux\" 
--DOSARCH=Linux -DEXPORT_JS_API  -DJS_USE_SAFE_ARENA  -I. -I. -I./../../dist/include -I./../../dist/include/nsprpub 
--I/local/Angstrom_BeagleBoard/tmp/work/ppc603e-angstrom-linux/firefox-3.6.2-r0/mozilla-1.9.2/dist/include/nspr   -I.    -fPIC 
--isystem/local/Angstrom_BeagleBoard/tmp/staging/ppc603e-angstrom-linux/usr/include  -fno-rtti -fno-exceptions -Wall -Wpointer-arith -Woverloaded-virtual -Wsynth 
--Wno-ctor-dtor-privacy -Wno-non-virtual-dtor -Wcast-align -Wno-invalid-offsetof -Wno-variadic-macros -Wno-long-long -pedantic 
--isystem/local/Angstrom_BeagleBoard/tmp/staging/ppc603e-angstrom-linux/usr/include -Os -fsigned-char -fno-strict-aliasing -fpermissive -fvisibility-inlines-hidden 
--fno-strict-aliasing -pthread -pipe  -DNDEBUG -DTRIMMED -g -fno-inline -O2  -isystem/local/Angstrom_BeagleBoard/tmp/staging/ppc603e-angstrom-linux/usr/include  -DMOZILLA_CLIENT 
--include ./js-confdefs.h -Wp,-MD,.deps/jsbool.pp jsbool.cpp
-jsapi.cpp: In function 'JSBool JS_ConvertArgumentsVA(JSContext*, uintN, jsval*, const char*, __va_list_tag*)':
-jsapi.cpp:289: error: cannot convert '__va_list_tag**' to '__va_list_tag (*)[1]' for argument '5' to 'JSBool TryArgumentFormatter(JSContext*, const char**, JSBool, jsval**, 
-__va_list_tag (*)[1])'
-jsapi.cpp: In function 'jsval* JS_PushArgumentsVA(JSContext*, void**, const char*, __va_list_tag*)':
-jsapi.cpp:398: error: cannot convert '__va_list_tag**' to '__va_list_tag (*)[1]' for argument '5' to 'JSBool TryArgumentFormatter(JSContext*, const char**, JSBool, jsval**, 
-__va_list_tag (*)[1])'
-make[4]: *** [jsapi.o] Error 1
-make[4]: *** Waiting for unfinished jobs....
-make[4]: Leaving directory `/local/Angstrom_BeagleBoard/tmp/work/ppc603e-angstrom-linux/firefox-3.6.2-r0/mozilla-1.9.2/js/src'
-make[3]: *** [libs_tier_js] Error 2
-make[3]: Leaving directory `/local/Angstrom_BeagleBoard/tmp/work/ppc603e-angstrom-linux/firefox-3.6.2-r0/mozilla-1.9.2'
-make[2]: *** [tier_js] Error 2
-make[2]: Leaving directory `/local/Angstrom_BeagleBoard/tmp/work/ppc603e-angstrom-linux/firefox-3.6.2-r0/mozilla-1.9.2'
-make[1]: *** [default] Error 2
-make[1]: Leaving directory `/local/Angstrom_BeagleBoard/tmp/work/ppc603e-angstrom-linux/firefox-3.6.2-r0/mozilla-1.9.2'
-make: *** [build] Error 2
-FATAL: oe_runmake failed
-
-Note: to even get this far, I had to apply the attached patch
-as the default setup falls apart with regard to va_list processing.
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
-
---------------020509030707020802000600
-Content-Type: text/plain;
- name="ppc-js.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="ppc-js.patch"
-
-diff --git a/recipes/mozilla/files/powerpc/jsautocfg.h b/recipes/mozilla/files/powerpc/jsautocfg.h
-index 408a5e4..bc5da80 100644
---- a/recipes/mozilla/files/powerpc/jsautocfg.h
-+++ b/recipes/mozilla/files/powerpc/jsautocfg.h
-@@ -51,4 +51,6 @@
- 
- #define JS_HAVE_LONG_LONG
- 
-+#define HAVE_VA_LIST_AS_ARRAY
-+
- #endif /* js_cpucfg___ */
-
---------------020509030707020802000600--
