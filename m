@@ -1,43 +1,26 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from [93.100.16.104] (helo=mate.hex)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Nx1tf-0007z2-Pn
+	(envelope-from <rik@mate.hex>) id 1Nx3F1-0007zj-CO
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Mar 2010 19:40:18 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1Nx1qU-0006eL-8j from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Mar 2010 10:36:50 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 31 Mar 2010 10:36:49 -0700
-Received: from 172.30.80.170 ([172.30.80.170]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Wed, 31 Mar 2010 17:36:39 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	31 Mar 2010 10:36:37 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Wed, 31 Mar 2010 21:06:16 +0200
+Received: by mate.hex (Postfix, from userid 1000)
+	id 0216B2DBDD; Wed, 31 Mar 2010 22:59:38 +0400 (MSD)
+From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4BB382AA.3040901@mlbassoc.com>
-References: <4BB35552.9070508@mlbassoc.com>
-	<v2q19c1b8a91003311006zc7a7eff8o9f2a88a1f42b6c1d@mail.gmail.com>
-	<4BB382AA.3040901@mlbassoc.com>
-Organization: Mentor Graphics Corporation
-Date: Wed, 31 Mar 2010 10:36:37 -0700
-Message-ID: <1270056997.6277.89.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 31 Mar 2010 17:36:49.0479 (UTC)
-	FILETIME=[BE306570:01CAD0F8]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Wed, 31 Mar 2010 22:59:31 +0400
+Message-Id: <1270061972-5564-2-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.6.4.2
+In-Reply-To: <1270061972-5564-1-git-send-email-khimov@altell.ru>
+References: <1270061972-5564-1-git-send-email-khimov@altell.ru>
+X-SA-Exim-Connect-IP: 93.100.16.104
+X-SA-Exim-Mail-From: rik@mate.hex
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.1 required=5.0 tests=BAYES_00,NO_DNS_FOR_FROM,
+	RCVD_IN_PBL,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: FireFox on PowerPC
+Subject: [PATCH 2/3] postfix: convert to BBCLASSEXTEND and new staging for native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,90 +34,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Mar 2010 17:40:27 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 31 Mar 2010 19:06:16 -0000
 
-On Wed, 2010-03-31 at 11:13 -0600, Gary Thomas wrote:
-> On 03/31/2010 11:06 AM, Khem Raj wrote:
-> > On Wed, Mar 31, 2010 at 6:59 AM, Gary Thomas<gary@mlbassoc.com>  wrote:
-> >> Has anyone had success building FireFox for a PowerPC
-> >> target - I'm using the development branch (org.openembedded.dev)
-> >>   MACHINE=3Defika
-> >>   DISTRO =3D "angstrom-2008.1"
-> >>
-> >> I've tried to build a number of different FireFox packages,
-> >> none with success.  So far I've tried 2.0.0.3, 3.5.2&  3.6.2
-> >>
-> >> Any pointers?
-> >>
-> >> Query: is there an easy way to build a particular package version?
-> >> What I've done is just add a line like this to my local.conf:
-> >>   PREFERRED_VERSION_firefox=3D"3.5.2"
-> >
-> >
-> > what errors do you get.
->=20
-> It depends on the version.  For 3.6.2 (latest), I get this:
->=20
-> ccache powerpc-angstrom-linux-g++ -mcpu=3D603e -mhard-float  -L/local/Ang=
-strom_BeagleBoard/tmp/staging/ppc603e-angstrom-linux/usr/lib=20
-> -Wl,-rpath-link,/local/Angstrom_BeagleBoard/tmp/staging/ppc603e-angstrom-=
-linux/usr/lib -Wl,-O1 -Wl,--hash-style=3Dgnu -o jsbool.o -c -fvisibility=3D=
-hidden -DOSTYPE=3D\"Linux\"=20
-> -DOSARCH=3DLinux -DEXPORT_JS_API  -DJS_USE_SAFE_ARENA  -I. -I. -I./../../=
-dist/include -I./../../dist/include/nsprpub=20
-> -I/local/Angstrom_BeagleBoard/tmp/work/ppc603e-angstrom-linux/firefox-3.6=
-.2-r0/mozilla-1.9.2/dist/include/nspr   -I.    -fPIC=20
-> -isystem/local/Angstrom_BeagleBoard/tmp/staging/ppc603e-angstrom-linux/us=
-r/include  -fno-rtti -fno-exceptions -Wall -Wpointer-arith -Woverloaded-vir=
-tual -Wsynth=20
-> -Wno-ctor-dtor-privacy -Wno-non-virtual-dtor -Wcast-align -Wno-invalid-of=
-fsetof -Wno-variadic-macros -Wno-long-long -pedantic=20
-> -isystem/local/Angstrom_BeagleBoard/tmp/staging/ppc603e-angstrom-linux/us=
-r/include -Os -fsigned-char -fno-strict-aliasing -fpermissive -fvisibility-=
-inlines-hidden=20
-> -fno-strict-aliasing -pthread -pipe  -DNDEBUG -DTRIMMED -g -fno-inline -O=
-2  -isystem/local/Angstrom_BeagleBoard/tmp/staging/ppc603e-angstrom-linux/u=
-sr/include  -DMOZILLA_CLIENT=20
-> -include ./js-confdefs.h -Wp,-MD,.deps/jsbool.pp jsbool.cpp
-> jsapi.cpp: In function 'JSBool JS_ConvertArgumentsVA(JSContext*, uintN, j=
-sval*, const char*, __va_list_tag*)':
-> jsapi.cpp:289: error: cannot convert '__va_list_tag**' to '__va_list_tag =
-(*)[1]' for argument '5' to 'JSBool TryArgumentFormatter(JSContext*, const =
-char**, JSBool, jsval**,=20
-> __va_list_tag (*)[1])'
-> jsapi.cpp: In function 'jsval* JS_PushArgumentsVA(JSContext*, void**, con=
-st char*, __va_list_tag*)':
-> jsapi.cpp:398: error: cannot convert '__va_list_tag**' to '__va_list_tag =
-(*)[1]' for argument '5' to 'JSBool TryArgumentFormatter(JSContext*, const =
-char**, JSBool, jsval**,=20
-> __va_list_tag (*)[1])'
-> make[4]: *** [jsapi.o] Error 1
-> make[4]: *** Waiting for unfinished jobs....
-> make[4]: Leaving directory `/local/Angstrom_BeagleBoard/tmp/work/ppc603e-=
-angstrom-linux/firefox-3.6.2-r0/mozilla-1.9.2/js/src'
-> make[3]: *** [libs_tier_js] Error 2
-> make[3]: Leaving directory `/local/Angstrom_BeagleBoard/tmp/work/ppc603e-=
-angstrom-linux/firefox-3.6.2-r0/mozilla-1.9.2'
-> make[2]: *** [tier_js] Error 2
-> make[2]: Leaving directory `/local/Angstrom_BeagleBoard/tmp/work/ppc603e-=
-angstrom-linux/firefox-3.6.2-r0/mozilla-1.9.2'
-> make[1]: *** [default] Error 2
-> make[1]: Leaving directory `/local/Angstrom_BeagleBoard/tmp/work/ppc603e-=
-angstrom-linux/firefox-3.6.2-r0/mozilla-1.9.2'
-> make: *** [build] Error 2
-> FATAL: oe_runmake failed
->=20
-> Note: to even get this far, I had to apply the attached patch
-> as the default setup falls apart with regard to va_list processing.
+Signed-off-by: Roman I Khimov <khimov@altell.ru>
+---
+ recipes/postfix/postfix-native_2.0.20.bb |   10 ----------
+ recipes/postfix/postfix-native_2.2.12.bb |   10 ----------
+ recipes/postfix/postfix.inc              |   25 ++++++++++++++++++++++---
+ 3 files changed, 22 insertions(+), 23 deletions(-)
+ delete mode 100644 recipes/postfix/postfix-native_2.0.20.bb
+ delete mode 100644 recipes/postfix/postfix-native_2.2.12.bb
 
-Oh man that takes me (and I bet you too) back... Sounds like mozilla
-needs some patching again.  Maybe the ppcnux folks have one somewhere
-already tho?
+diff --git a/recipes/postfix/postfix-native_2.0.20.bb b/recipes/postfix/postfix-native_2.0.20.bb
+deleted file mode 100644
+index 66ff65d..0000000
+--- a/recipes/postfix/postfix-native_2.0.20.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require postfix_${PV}.bb
+-
+-inherit native
+-FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/postfix-${PV}"
+-DEPENDS = "virtual/db-native libpcre-native"
+-export DIRS = "src/util src/global src/postconf"
+-
+-do_stage () {
+-	install -m 0755 src/postconf/postconf ${STAGING_BINDIR}/
+-}
+diff --git a/recipes/postfix/postfix-native_2.2.12.bb b/recipes/postfix/postfix-native_2.2.12.bb
+deleted file mode 100644
+index 66ff65d..0000000
+--- a/recipes/postfix/postfix-native_2.2.12.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require postfix_${PV}.bb
+-
+-inherit native
+-FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/postfix-${PV}"
+-DEPENDS = "virtual/db-native libpcre-native"
+-export DIRS = "src/util src/global src/postconf"
+-
+-do_stage () {
+-	install -m 0755 src/postconf/postconf ${STAGING_BINDIR}/
+-}
+diff --git a/recipes/postfix/postfix.inc b/recipes/postfix/postfix.inc
+index 6a5f9bb..5b18cef 100644
+--- a/recipes/postfix/postfix.inc
++++ b/recipes/postfix/postfix.inc
+@@ -1,5 +1,6 @@
+ SECTION = "console/network"
+ DEPENDS = "virtual/db libpcre postfix-native"
++DEPENDS_virtclass-native = "virtual/db-native libpcre-native"
+ LICENSE = "IPL"
+ 
+ INC_PR = "r13"
+@@ -15,6 +16,8 @@ SRC_URI = "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV
+ 
+ S = "${WORKDIR}/postfix-${PV}"
+ 
++BBCLASSEXTEND = "native"
++
+ inherit update-rc.d
+ 
+ INITSCRIPT_NAME = "postfix"
+@@ -31,7 +34,7 @@ export SYSLIBS = "-lpcre -ldb ${LIBBDB_EXTRA} -lnsl -lresolv ${LDFLAGS}"
+ export EXPORT = "AUXLIBS='-lpcre' CCARGS='-DHAS_PCRE ${CFLAGS}' OPT='' DEBUG='-g'"
+ export CC_append = " -DHAS_PCRE ${CFLAGS}"
+ export EXTRA_OEMAKE = "-e"
+-export POSTCONF = "${STAGING_BINDIR_NATIVE}/postconf"
++export POSTCONF = "${STAGING_SBINDIR_NATIVE}/postconf"
+ 
+ do_compile () {
+ 	unset CFLAGS CPPFLAGS CXXFLAGS
+@@ -39,8 +42,23 @@ do_compile () {
+ 	oe_runmake
+ }
+ 
++do_install_prepend_virtclass-native() {
++	export POSTCONF="bin/postconf"
++}
++
+ do_install () {
+-	sh ./postfix-install 'install_root=${D}' -non-interactive
++	sh ./postfix-install 'install_root=${D}' \
++		'config_directory=${sysconfdir}/postfix' \
++		'daemon_directory=${libexecdir}/postfix' \
++		'command_directory=${sbindir}' \
++		'queue_directory=${localstatedir}/spool/postfix' \
++		'sendmail_path=${sbindir}/sendmail.postfix' \
++		'newaliases_path=${bindir}/newaliases' \
++		'mailq_path=${bindir}/mailq' \
++		'manpage_directory=${mandir}' \
++		'readme_directory=${datadir}/doc/postfix' \
++		'data_directory=${localstatedir}/lib/postfix' \
++		-non-interactive
+ 	rm -rf ${D}${localstatedir}/spool/postfix
+         mv ${D}${sysconfdir}/postfix/main.cf ${D}${sysconfdir}/postfix/sample-main.cf
+ 	install -d ${D}${localstatedir}/tmp
+@@ -50,9 +68,10 @@ do_install () {
+         install -m 644 ${WORKDIR}/volatiles ${D}${sysconfdir}/default/volatiles/01_postfix
+         install -m 755 ${WORKDIR}/postfix ${D}${sysconfdir}/init.d/postfix
+         install -m 644 ${WORKDIR}/internal_recipient ${D}${sysconfdir}/postfix/internal_recipient
+-	mv ${D}${sbindir}/sendmail ${D}${sbindir}/sendmail.${PN}
+ }
+ 
++NATIVE_INSTALL_WORKS = "1"
++
+ pkg_postinst () {
+ 	update-alternatives --install ${sbindir}/sendmail sendmail sendmail.${PN} 40
+         grep postfix /etc/group || addgroup postfix
+-- 
+1.6.4.2
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
 
 
