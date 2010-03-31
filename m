@@ -1,43 +1,41 @@
-Received: from mail-yx0-f193.google.com ([209.85.210.193])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Nx4ZI-0005Jw-Ih
+	(envelope-from <raj.khem@gmail.com>) id 1Nx4lL-0002Wj-Te
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Mar 2010 22:31:17 +0200
-Received: by yxe31 with SMTP id 31so278006yxe.16
+	Wed, 31 Mar 2010 22:43:45 +0200
+Received: by gyb11 with SMTP id 11so248002gyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Mar 2010 13:28:00 -0700 (PDT)
+	Wed, 31 Mar 2010 13:40:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=sOzJjjP4I15JzvfE1huHjcefnXQCMy9RI0pXVv5vyT4=;
-	b=lLOK99P1Egz0o5zekorseu9ehXeqO8Pzml9zvZfGjnYdvQRiHnDJDCm96C2LN+q6Ax
-	LdWdqrjX8k61HQJKoLFT4Km4yrkwNO5+pBBXukXCW5vrfJv32DhNaSV/w0SDozznba16
-	UOtnrWOJTvnyBLiM9ThvOjr0oYxpIODkX1zVY=
+	bh=4tnzAkSJvtFmB+HVQAg963Yrw8L8nGbeVVZyYUNWloI=;
+	b=he6pX8RUAXdgFBI/88Qp+8u7sad0FZlo0r3nD8TFRraPuU2YzfXT0IZfO0SqPnte7/
+	jpIBwnLfS8jg2lu0RDmLk7+6BMmLdjyWv2Rg0E+sfTBpnvKGIg4V70K6OSs1yiIr05lH
+	Sy5fhxXmFyuRg3N9Zrokq/km0casb2kmt/bN0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=LxzVR59SBQIjM1hbIQmWcHk0k0oL38Zsp6PwS/Ck43GflWP6hjc+n3ymAVw1jlJxfy
-	1URMF2CgGP592Y8GQbpsKOYcI8kLxfhgFWjFZ9yRSCFKnl+lwiq6wISOL9TKiE5lRWzm
-	AfI/UO1DeFm3K9HuDlKNi4+YhE0onESCmX5h0=
-Received: by 10.91.39.4 with SMTP id r4mr455110agj.107.1270067276341;
-	Wed, 31 Mar 2010 13:27:56 -0700 (PDT)
+	b=xmAUnkHrJJcEsgaI1b0w3ANNabPIJy39OjVefo84HAmCAHYj+YPQkbE2tIKNR/K0Wf
+	kr7WNm07AxOe8+x+M0970QFiHv+Vk+eFVKAIhy0pbi62eIoLe9U7bxbL1IWEMnzC85Si
+	/+veXXZV0MDsrUQYLdMn2G5rtuNfJWADoQaQk=
+Received: by 10.90.203.10 with SMTP id a10mr408702agg.120.1270068027448;
+	Wed, 31 Mar 2010 13:40:27 -0700 (PDT)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id 21sm1605110ywh.32.2010.03.31.13.27.55
+	by mx.google.com with ESMTPS id 8sm1745657yxg.49.2010.03.31.13.40.26
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 31 Mar 2010 13:27:55 -0700 (PDT)
-Date: Wed, 31 Mar 2010 13:28:45 -0700
+	Wed, 31 Mar 2010 13:40:27 -0700 (PDT)
+Date: Wed, 31 Mar 2010 13:41:14 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100331202845.GC21433@gmail.com>
-References: <1270061972-5564-1-git-send-email-khimov@altell.ru>
-	<1270061972-5564-2-git-send-email-khimov@altell.ru>
-	<1270061972-5564-3-git-send-email-khimov@altell.ru>
+Message-ID: <20100331204114.GA14197@gmail.com>
+References: <20100331152003.5828.26495.stgit@ES-J7S4D2J.amer.consind.ge.com>
 MIME-Version: 1.0
-In-Reply-To: <1270061972-5564-3-git-send-email-khimov@altell.ru>
+In-Reply-To: <20100331152003.5828.26495.stgit@ES-J7S4D2J.amer.consind.ge.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.210.193
+X-SA-Exim-Connect-IP: 209.85.160.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -45,7 +43,7 @@ X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 3/3] postfix: add 2.7.0 version
+Subject: Re: [PATCH] po4a: Add native recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,61 +57,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Mar 2010 20:31:17 -0000
+X-List-Received-Date: Wed, 31 Mar 2010 20:43:45 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (31/03/10 22:59), Roman I Khimov wrote:
-> Signed-off-by: Roman I Khimov <khimov@altell.ru>
-
-Acked-by: Khem Raj <raj.khem@gmail.com>
-
+On (31/03/10 16:20), Martyn Welch wrote:
+> Add a recipe for building a native version of po4a version 0.36.3.
+> 
+> Signed-off-by: Martyn Welch <martyn.welch@ge.com>
 > ---
->  recipes/postfix/files/volatiles  |    1 +
->  recipes/postfix/postfix.inc      |    2 +-
->  recipes/postfix/postfix_2.7.0.bb |    6 ++++++
->  3 files changed, 8 insertions(+), 1 deletions(-)
->  create mode 100644 recipes/postfix/postfix_2.7.0.bb
 > 
-> diff --git a/recipes/postfix/files/volatiles b/recipes/postfix/files/volatiles
-> index bc330c9..3df6fb4 100644
-> --- a/recipes/postfix/files/volatiles
-> +++ b/recipes/postfix/files/volatiles
-> @@ -1,4 +1,5 @@
->  d postfix nogroup 2755 /var/spool/mail none
-> +d postfix nogroup 0755 /var/lib/postfix none
->  d root postfix 0755 /var/spool/postfix none
->  d postfix root 0700 /var/spool/postfix/active none
->  d postfix root 0700 /var/spool/postfix/bounce none
-> diff --git a/recipes/postfix/postfix.inc b/recipes/postfix/postfix.inc
-> index 5b18cef..51d5e8f 100644
-> --- a/recipes/postfix/postfix.inc
-> +++ b/recipes/postfix/postfix.inc
-> @@ -5,7 +5,7 @@ LICENSE = "IPL"
->  
->  INC_PR = "r13"
->  
-> -SRC_URI = "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV}.tar.gz \
-> +SRC_URI = "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV}.tar.gz;name=postfix-${PV} \
->  	   file://makedefs.patch;patch=1 \
->  	   file://install.patch;patch=1 \
->  	   file://main.cf_2.0 \
-> diff --git a/recipes/postfix/postfix_2.7.0.bb b/recipes/postfix/postfix_2.7.0.bb
+>  recipes/po4a/po4a-native_0.36.3.bb |   12 ++++++++++++
+>  1 files changed, 12 insertions(+), 0 deletions(-)
+> 
+> diff --git a/recipes/po4a/po4a-native_0.36.3.bb b/recipes/po4a/po4a-native_0.36.3.bb
 > new file mode 100644
-> index 0000000..fc41fad
+> index 0000000..07c9e08
 > --- /dev/null
-> +++ b/recipes/postfix/postfix_2.7.0.bb
-> @@ -0,0 +1,6 @@
-> +require postfix.inc
+> +++ b/recipes/po4a/po4a-native_0.36.3.bb
+> @@ -0,0 +1,12 @@
+> +DESCRIPTION = "Tools for helping translation of documentation"
+> +SECTION = "utility"
+> +PRIORITY = "optional"
+> +LICENSE = "GPL"
+> +DEPENDS = "libmodule-build-perl-native"
+> +PR = "r0"
+> +inherit native
+
+may be you could use BBCLASSEXTEND to write native part and have recipe
+also for target package. 
+
 > +
-> +SRC_URI[postfix-2.7.0.md5sum] = "df648f59421604e895cce56325f00bae"
-> +SRC_URI[postfix-2.7.0.sha256sum] = "c5b232ae5e396107bc58aed4178cf6cfd0a75b9dcbbedb49d158eb71d6c91b75"
+> +SRC_URI = "${DEBIAN_MIRROR}/main/p/po4a/po4a_0.36.3.orig.tar.gz;name=po4a"
 > +
-> +PR = "${INC_PR}.0"
-> \ No newline at end of file
-> -- 
-> 1.6.4.2
+> +SRC_URI[po4a.md5sum] = "47af91b7d2ad3a3a9e2aaa22473f42bf"
+> +SRC_URI[po4a.sha256sum] = "4563f4651448300f3d05f9dfa5212535ef0bd97c6b51704c4cb9829f282915e2"
 > 
+> 
+> --
+> Martyn Welch (Principal Software Engineer)   |   Registered in England and
+> GE Intelligent Platforms                     |   Wales (3828642) at 100
+> T +44(0)127322748                            |   Barbirolli Square, Manchester,
+> E martyn.welch@ge.com                        |   M2 3AB  VAT:GB 927559189
 > 
 > _______________________________________________
 > Openembedded-devel mailing list
