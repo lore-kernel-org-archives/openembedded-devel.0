@@ -1,35 +1,29 @@
-Received: from smtp-out26.alice.it ([85.33.2.26])
+Received: from mail-qy0-f174.google.com ([209.85.221.174])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1NwiZG-0001Fv-3X
+	(envelope-from <msundius@sundius.com>) id 1NwmIE-0001d7-T4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 30 Mar 2010 23:01:46 +0200
-Received: from FBCMMO04.fbc.local ([192.168.184.135]) by smtp-out26.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 30 Mar 2010 22:58:29 +0200
-Received: from FBCMCL01B03.fbc.local ([192.168.69.84]) by FBCMMO04.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 30 Mar 2010 22:57:55 +0200
-Received: from [192.168.1.116] ([79.21.202.115]) by FBCMCL01B03.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Tue, 30 Mar 2010 22:57:55 +0200
-From: GNUtoo <GNUtoo@no-log.org>
+	Wed, 31 Mar 2010 03:00:32 +0200
+Received: by qyk4 with SMTP id 4so1525140qyk.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 30 Mar 2010 17:57:06 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.229.44.145 with HTTP; Tue, 30 Mar 2010 17:57:05 -0700 (PDT)
+Date: Tue, 30 Mar 2010 17:57:05 -0700
+Received: by 10.229.218.2 with SMTP id ho2mr511376qcb.51.1269997026003; Tue, 
+	30 Mar 2010 17:57:06 -0700 (PDT)
+Message-ID: <18e217241003301757i23125ed4g3bb55a795ff5db02@mail.gmail.com>
+From: C Michael Sundius <msundius@sundius.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4BB1EBEC.8050109@balister.org>
-References: <4BB1EBEC.8050109@balister.org>
-Date: Tue, 30 Mar 2010 22:57:54 +0200
-Message-ID: <1269982674.2390.3.camel@gnutoo-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 30 Mar 2010 20:57:55.0393 (UTC)
-	FILETIME=[AB9F0310:01CAD04B]
-X-SA-Exim-Connect-IP: 85.33.2.26
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+X-SA-Exim-Connect-IP: 209.85.221.174
+X-SA-Exim-Mail-From: msundius@sundius.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Boost version
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: native recipes use legacy staging.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,28 +37,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 30 Mar 2010 21:01:46 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 31 Mar 2010 01:00:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, 2010-03-30 at 08:17 -0400, Philip Balister wrote:
-> I'd like to remove the DEFAULT_PREFERENCE = "-1" from the boost recipes 
-> so we are using the latest boost.
-> 
-> Currently, I am checking the packages that use boost I care about, such 
-> as gnuradio.
-> 
-> Does anyone else care what version of boost is the default?
-I care,I prefer the last ones (1.4x) for wesnoth 1.6x
-> Also, the boost-1.41 recipe is based of the cmake branch of boost. How 
-> well maintained is this? It has been two months since boost-1.42 was 
-> released and there is not corresponding cmake version.
-Seem not very maintained...
-Maybe look at http://gitorious.org/boost/cmake
-it's their git repo.
-(SRC_URI->download page->readme)
+why does the native.bbclass force the use of legacy staging?
 
-Denis
+also how can I override this. I tried go use create my own
+
+do_stage() {
+   :
+}
+
+function in my recipe, but the one in the class was still used.
+
+My issue is that my install function does not use make at all, nor autotools
+
+so the do_stage_native() call [from do_stage() ] fails.
+
+thanks
+
+see my [smiple] recipe attached:
 
 
+
+PR = "031110"
+
+BBCLASSEXTEND = "native nativesdk"
+
+#SRC_URI = "http://sauscupoe01.cisco.com/cisco/mkimage-tools-${PR}.tar.gz"
+SRC_URI = "file:///home/sundism/src/mkimage-tools"
+
+S = ${WORKDIR}/mkimage-tools
+
+do_compile() {
+        :
+}
+
+
+do_install() {
+        install  -m 0755 -d ${STAGING_BINDIR}
+        install  -m 0755 ${S}/bin/imgen ${bindir}/imgen
+        install  -m 0755 -d ${datadir}
+        install  -m 0755 -d ${datadir}/LxLoad
+        install  -m 0644 ${S}/share/LxLoad/LxLoad2_cronus.img \
+                ${datadir}/LxLoad/LxLoad2_cronus.img
+}
+
+do_stage() {
+        :
+}
 
