@@ -1,42 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NwrX5-000804-JH for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Mar 2010 08:36:08 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NwrTy-0007Se-8i for openembedded-devel@lists.openembedded.org;
-	Wed, 31 Mar 2010 08:32:54 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Mar 2010 08:32:54 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Mar 2010 08:32:54 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1NwvO2-0000pG-Ms
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 31 Mar 2010 12:43:03 +0200
+Received: (qmail 13686 invoked by uid 813007); 31 Mar 2010 10:39:48 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 31 Mar 2010 10:39:48 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 31 Mar 2010 08:32:39 +0200
-Message-ID: <houqa6$sei$1@dough.gmane.org>
-References: <18e217241003301757i23125ed4g3bb55a795ff5db02@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
-In-Reply-To: <18e217241003301757i23125ed4g3bb55a795ff5db02@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Wed, 31 Mar 2010 12:39:46 +0200
+User-Agent: KMail/1.13.1 (Linux/2.6.34-rc2-wl-47166-ged2da1f; KDE/4.4.1; x86_64;
+	; )
+MIME-Version: 1.0
+Message-Id: <201003311239.48203.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: native recipes use legacy staging.
+Subject: Sharp Zaurus SL-6000 docking station for free
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,101 +37,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 31 Mar 2010 06:36:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 31 Mar 2010 10:43:03 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-On 31-03-10 02:57, C Michael Sundius wrote:
-> why does the native.bbclass force the use of legacy staging?
-> 
-> also how can I override this. I tried go use create my own
-> 
-> do_stage() {
->    :
-> }
-> 
-> function in my recipe, but the one in the class was still used.
-> 
-> My issue is that my install function does not use make at all, nor autotools
-> 
-> so the do_stage_native() call [from do_stage() ] fails.
+As some of you remember there was a time when I maintained OpenZaurus and 
+worked on supporting whole Zaurus LinuxPDA line. At that time I had SL-6000L 
+(tosa) which was property of OpenEmbedded project. Then device moved to other 
+developer.
 
-Try:
+Yesterday I found SL-6000 docking station in basement and +5V power supply for 
+it (with US plug). Someone from our Tosa developers needs this? Inside Europe 
+I can send it for free.
 
-PR = "031110"
+Regards, 
+-- 
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-BBCLASSEXTEND = "native nativesdk"
-
-SRC_URI = "file:///home/sundism/src/mkimage-tools"
-
-S = ${WORKDIR}/mkimage-tools
-
-do_compile() {
-        :
-}
-
-
-do_install() {
-        install  -m 0755 -d ${D}${bindir}
-        install  -m 0755 ${S}/bin/imgen ${D}${bindir}/imgen
-        install  -m 0755 -d ${D}${datadir}
-        install  -m 0755 -d ${D}${datadir}/LxLoad
-        install  -m 0644 ${S}/share/LxLoad/LxLoad2_cronus.img \
-                ${D}${datadir}/LxLoad/LxLoad2_cronus.img
-}
-
-NATIVE_INSTALL_WORKS = "1"
-
-regards,
-
-Koen
-
-
-
-> 
-> thanks
-> 
-> see my [smiple] recipe attached:
-> 
-> 
-> 
-> PR = "031110"
-> 
-> BBCLASSEXTEND = "native nativesdk"
-> 
-> #SRC_URI = "http://sauscupoe01.cisco.com/cisco/mkimage-tools-${PR}.tar.gz"
-> SRC_URI = "file:///home/sundism/src/mkimage-tools"
-> 
-> S = ${WORKDIR}/mkimage-tools
-> 
-> do_compile() {
->         :
-> }
-> 
-> 
-> do_install() {
->         install  -m 0755 -d ${STAGING_BINDIR}
->         install  -m 0755 ${S}/bin/imgen ${bindir}/imgen
->         install  -m 0755 -d ${datadir}
->         install  -m 0755 -d ${datadir}/LxLoad
->         install  -m 0644 ${S}/share/LxLoad/LxLoad2_cronus.img \
->                 ${datadir}/LxLoad/LxLoad2_cronus.img
-> }
-> 
-> do_stage() {
->         :
-> }
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLsuyGMkyGM64RGpERAio6AJ9PjMeb+iq2Am3tjN+P+19s0ptidACfYTEs
-FYAeax4moDD7wBXztg7mpTQ=
-=ETCW
------END PGP SIGNATURE-----
 
 
 
