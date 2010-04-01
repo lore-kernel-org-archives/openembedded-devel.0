@@ -1,41 +1,50 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NxN0n-0001d1-Ia
+Received: from mail-fx0-f218.google.com ([209.85.220.218])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <martin.jansa@gmail.com>) id 1NxN0o-0001d4-TW
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 18:12:54 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31G9bWR023111
+	Thu, 01 Apr 2010 18:12:55 +0200
+Received: by fxm10 with SMTP id 10so564599fxm.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 1 Apr 2010 17:09:37 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 22632-09 for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Apr 2010 17:09:33 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31G9WxW023105
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 1 Apr 2010 17:09:33 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	Thu, 01 Apr 2010 09:09:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=ywOALAV9/hfdHK5fsGtjlzwA+krrILOuLM5z4QYt1RY=;
+	b=P6KUW0Xyl8Y2xdATs9bRUCxTTQMBppAahnu2dqa4Zn0Po0WV0D4u8RDyfW5Z1Nh1+0
+	1AUUxJ8irOx3rEDOUc7qc0rwdHblXueBQTVqGSCPMR5zLwvDYfMeUArPa8Zt+wGF+eEM
+	Kq1iN8WZg7xna4KrOJkcTcoUTqbpx8oN0UmgA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=OdxpsLgOtQqmNUY937+8aW9QF8jhSmTNHTwgoOy5I+ypONv8DqS0rUhfggvB6AHujc
+	0GXpAWOD8ZEVIaqkHcWF/ZlmRof6ajGiZvVTsGf5fZVNdvlm5CzelfTS5TTR8rEW/2fx
+	V94cHSAzCWGOazxWf9pqI7/0G2HniU8IcLPV8=
+Received: by 10.223.15.143 with SMTP id k15mr871656faa.57.1270138178498;
+	Thu, 01 Apr 2010 09:09:38 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 16sm5695966fxm.8.2010.04.01.09.09.37
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 01 Apr 2010 09:09:37 -0700 (PDT)
+Date: Thu, 1 Apr 2010 18:09:51 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <h2n19c1b8a91004010846u8f936157z252190a0f6a6b6e4@mail.gmail.com>
-References: <1270135981.4993.128.camel@rex>
-	<h2n19c1b8a91004010846u8f936157z252190a0f6a6b6e4@mail.gmail.com>
-Date: Thu, 01 Apr 2010 17:09:31 +0100
-Message-ID: <1270138171.4993.141.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Message-ID: <20100401160951.GN25489@jama>
+References: <1270134711-32158-1-git-send-email-Martin.Jansa@gmail.com>
+	<1270134711-32158-3-git-send-email-Martin.Jansa@gmail.com>
+	<q2g19c1b8a91004010843g2fa4e73co2bf51ee00ef1ba7b@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <q2g19c1b8a91004010843g2fa4e73co2bf51ee00ef1ba7b@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.218
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Request for branch merge
+Subject: Re: [PATCH 2/2] sane-srcrevs: move SRCREVs to recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,67 +58,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 16:12:54 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 01 Apr 2010 16:12:55 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Thu, 2010-04-01 at 08:46 -0700, Khem Raj wrote:
-> On Thu, Apr 1, 2010 at 8:33 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> > I've been aware that Poky and OE have been diverging slightly and I'd
-> > like to correct this. There are some patches that I've promised for a
-> > while too such as the rename from do_populate_staging ->
-> > do_populate_sysroot.
-> >
-> > With some help from Joshua Lock, I have a branch I'd like to propose be
-> > merged into OE.dev:
-> >
-> > http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=rpurdie/work-in-progress
-> >
-> > This branch:
-> >
-> > * Renames do_populate_staging -> do_populate_sysroot as per previous
-> >  staging discussion emails and also the staging directory ->
-> >  sysroots. It should convert existing builds safely and insert a
-> >  compatibility symlink. This continues the process of improving our
-> >  "staging" concept into one focused around true sysroots.
-> > * Adds some gettext class sanity checks. In Poky this error is fatal,
-> >  for OE this is just a note for now. The idea being if AM_GNU_GETTEXT
-> >  is in configure.ac and gettext in some form isn't in DEPENDS,
-> >  something is wrong.
-> > * Added relocatable binary processing from Poky for -native binaries
-> >  using chrpath. This isn't enabled for -cross packages due to the
-> >  relative path length problems.
-> > * Added packaged-staging fetching capabilities. This uses new mirror
-> >  handling abilities in bitbake master branch but should work with older
-> >  bitbakes, just with less functionality.
-> > * Started moving gcc dependency information into core gcc version
-> >  specific includes as part of the gcc cleanup.
-> > * Converted gcc to use the new style staging
-> > * Added EXTRA_OECONF_INITIAL and EXTRA_OECONF_INTERMEDIATE variables to
-> >  gcc as part of the gcc cleanup
-> > * Converted binutils, modutils-cross, glibc and gdb to new style staging
-> > * Cleaned up the gcc-cross do_install function a lot
-> >
-> > Along with a small number of other tweaks spotted along the way.
-> >
-> > I could post the patches individually and get Acked lines for each one
-> > but I'm hoping to avoid that and get permission to merge the branch
-> > directly. We have talked about most of these things in one form or
-> > another.
-> >
+On Thu, Apr 01, 2010 at 08:43:11AM -0700, Khem Raj wrote:
+> On Thu, Apr 1, 2010 at 8:11 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 > 
-> Looks good stuff.
-> I would have preferred to have eglibc also converted to new style
-> staging if possible but can be done afterwards too.
+> Acked-by: Khem Raj <raj.khem@gmail.com>
+> 
+> one the following are fixed
+> dri/libdrm_git.bb:SRCREV_pn-libdrm ?= "a5c8f55397377994ceeb76ed0ff148ff89eb3a1b"
+> dri/libdrm_git.bb:SRCREV_pn-libdrm_shr ?=
+> "b5aec2bd3df736216e86eae28e278172d3ba3362"
+> mesa/mesa-dri_git.bb:SRCREV_pn-mesa-dri ?=
+> "196214bf2b677a83653d49f79d03752f29df44ec"
+> mesa/mesa-dri_git.bb:SRCREV_pn-mesa-dri_shr ?=
+> "1ac166895fef47806c9e9286d2a6356b4db8398d"
 
-I just looked and the eglibc do_stage function can most likely just be
-deleted and for the -initial version, rename do_stage to do_install and
-drop the empty do_install. I didn't make that change as its not
-something I've tested.
+This shouldn't be a problem, but shortend to SRCREV and SRCREV_shr, 
 
-Cheers,
+> linux/linux-davinci_2.6.27.bb:# or override in it local.conf like
+> this: DAVINCI_SRCREV_pn-linux-davinci = "${@bb.fetch.get_srcrev(d)}"
 
-Richard
+> opkg/opkg-nogpg-nocurl_svn.bb:SRCREV = "${SRCREV_pn-opkg}"
+> opkg/opkg-nogpg-nocurl-slugos_svn.bb:SRCREV = "${SRCREV_pn-opkg}"
+> opkg/opkg-nogpg_svn.bb:SRCREV = "${SRCREV_pn-opkg}"
 
+Those were removed in this patch, replaced with one rev in
+opkg.inc:
+SRCREV = ${OPKG_SRCREV}
+PV = "0.1.6+svnr${SRCPV}"
+
+added OPKG_SRCREV setting preferred-slugos-versions.inc instead of those
+SRCREV_pn-opkg = "160" there.
+
+> psplash/psplash-ua.inc:SRCREV = "${SRCREV_pn-psplash}
+
+all recipes include also psplash.inc where is SRCREV = "249", so I just
+dropped this line from psplash-ua.inc and it should stay the same.
+
+Regards,
 
 
