@@ -1,46 +1,29 @@
-Received: from fg-out-1718.google.com ([72.14.220.155])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NxKPU-0000Im-VN
+	(envelope-from <holger+oe@freyther.de>) id 1NxKaw-0001cv-9N
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 15:26:13 +0200
-Received: by fg-out-1718.google.com with SMTP id e12so708567fga.6
+	Thu, 01 Apr 2010 15:38:02 +0200
+Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
+	[123.192.181.204])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 931B21B10C79
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Apr 2010 06:22:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=Ln3F5qQY6INko0FmNMvoitrsQrilC0jou3SvNJHJVS4=;
-	b=qvleBClGwcwwTO800Ew8NavRQMc7vzLOfJ2hp8nxpzdc4GzII3AKZtktXOwxrhyDjc
-	tc2g2xxE13K71oVbXaYn5q9X0XrCMUcK6pgnfXUdkiusgXYh+l81Zn3rhmTnAVFBVKRm
-	AN6mHDHFA1giK3lwfNbLCGnHSL3DILoXhhM2A=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=EpEbowc5FcEsoEhrYh9PjQHrBEeYzqMf/64cIY7KORMuc2nNu981TigXAVHLU3TzYT
-	6HB0Tiqf8oEE0oTVkNIo1DSwyCjXg/k+5wTNipp6Wd7G6ZMEk1HjsHwafoiH7QAx4HRk
-	MIlAtHKzXMbiYOkwUn1Xv/pvf3vPufF7rAlC4=
-Received: by 10.86.239.33 with SMTP id m33mr2080932fgh.31.1270128178454;
-	Thu, 01 Apr 2010 06:22:58 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 14sm5630955fxm.5.2010.04.01.06.22.57
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 01 Apr 2010 06:22:57 -0700 (PDT)
-Date: Thu, 1 Apr 2010 15:23:12 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu,  1 Apr 2010 13:39:11 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100401132312.GM25489@jama>
+Date: Thu, 1 Apr 2010 15:34:39 +0200
+User-Agent: KMail/1.13.2 (Linux/2.6.34-rc3-00001-g17459ed; KDE/4.4.2; i686; ; )
 References: <20100330122319.f0e46761.ospite@studenti.unina.it>
 	<1270127783-21172-1-git-send-email-ospite@studenti.unina.it>
+	<20100401132312.GM25489@jama>
+In-Reply-To: <20100401132312.GM25489@jama>
 MIME-Version: 1.0
-In-Reply-To: <1270127783-21172-1-git-send-email-ospite@studenti.unina.it>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 72.14.220.155
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Message-Id: <201004011534.39987.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] frameworkd-config-shr: fix a nasty typo
@@ -57,20 +40,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 13:26:13 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 01 Apr 2010 13:38:02 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Thu, Apr 01, 2010 at 03:16:23PM +0200, Antonio Ospite wrote:
-> A misplaced '-' instead of '_' made bitbake conditional appending fail,
-> resulting in fso-abyss being added unconditionally to runtime
-> dependencies.
+On Thursday 01 April 2010 15:23:12 Martin Jansa wrote:
+> On Thu, Apr 01, 2010 at 03:16:23PM +0200, Antonio Ospite wrote:
+> > A misplaced '-' instead of '_' made bitbake conditional appending fail,
+> > resulting in fso-abyss being added unconditionally to runtime
+> > dependencies.
+> 
+> Wow, good catch! I'll apply now.
 
-Wow, good catch! I'll apply now.
+Stupid question... there are not many that have a gta03, who is suffering from 
+that (the bug tracker is not loading for me right now).
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
 
 
