@@ -1,49 +1,25 @@
-Received: from mail-ew0-f211.google.com ([209.85.219.211])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickael.chazaux@gmail.com>) id 1NxH8z-0003EK-E1
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 11:56:58 +0200
-Received: by ewy3 with SMTP id 3so60542ewy.26
+Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
+	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <zlo@zlo.nu>)
+	id 1NxIGg-0003Cp-U0 for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Apr 2010 13:09:00 +0200
+Received: from localhost.localdomain (seven.iphion.nl [80.255.245.169])
+	by mzh.zlo.nu (Postfix) with ESMTP id 2E295140A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Apr 2010 02:53:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:date:x-google-sender-auth:received:message-id:subject
-	:from:to:cc:content-type:content-transfer-encoding;
-	bh=OGPWXE0Ekpt7QOehrwfuigpyi2WgE0+ilg8lVEcu3Ug=;
-	b=JMUEfxQVvlQHBdtB5ZH9U8OfUnLtY9I9HgMyxtpWxVVmGjzHkxSUdLdjVbAun9gTLb
-	8kzWMynsLtd1Dk56ZFrWp3xwcLlCRCe3uNR6U0v9+Ok8EnmBvxBhQxBDdwcqP+oYxNUB
-	3NBnRf0Bu3iv8jbT05cil5yyP7UnwOt8FJZrM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	b=RcGLL9XD5JJvNUdktCGMM0vL/3a1m0igszQh2WKfE2y5syWH5xMArAcf5GHTXJePkR
-	QkUwKQur0UirhmmWTtooHatMl6NGWR78qLrcLznFiMj8uAD3JHEBwEHt02h8YgNWS/mW
-	OdaIBver8SQK6utkYsH3gtW+goa7B5dVfQ3Hk=
-MIME-Version: 1.0
-Sender: mickael.chazaux@gmail.com
-Received: by 10.213.4.70 with HTTP; Thu, 1 Apr 2010 02:53:40 -0700 (PDT)
-In-Reply-To: <20100331204928.GB14197@gmail.com>
-References: <1269935184-21934-1-git-send-email-mchazaux@adeneo-embedded.com>
-	<20100331204928.GB14197@gmail.com>
-Date: Thu, 1 Apr 2010 11:53:40 +0200
-X-Google-Sender-Auth: 7aee51ebf84032c8
-Received: by 10.213.43.135 with SMTP id w7mr295147ebe.89.1270115620942; Thu, 
-	01 Apr 2010 02:53:40 -0700 (PDT)
-Message-ID: <o2hbc36f8ed1004010253k464e88d7j99e74a4fa1104bac@mail.gmail.com>
-From: Mickael Chazaux <mchazaux@adeneo-embedded.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.219.211
-X-SA-Exim-Mail-From: mickael.chazaux@gmail.com
+	Thu,  1 Apr 2010 13:05:42 +0200 (CEST)
+From: Marc Olzheim <zlo@zlo.nu>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  1 Apr 2010 13:05:42 +0200
+Message-Id: <1270119942-11215-1-git-send-email-zlo@zlo.nu>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 85.17.141.90
+X-SA-Exim-Mail-From: zlo@zlo.nu
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] Add Freescale i.MX25 3stack support
+Subject: [PATCH] freetype 2.3.5/2.3.6: Import GetDescender() fix from Savannah from ftcalc.c 1.79 for bug report #23556.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,39 +33,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 09:56:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 01 Apr 2010 11:09:00 -0000
 
-Hi,
+From: Marc Olzheim <marc@iphion.nl>
 
-2010/3/31 Khem Raj <raj.khem@gmail.com>:
-> On (30/03/10 09:46), Micka=C3=ABl CHAZAUX wrote:
->> This patch adds support for the i.MX25 3Stack platform.
->>       It is based on the patches released by Freescale as
->>       part of LTIB.
+This was fixed by freetype a month after the release of 2.3.6.
+---
+ .../freetype-2.3.5/ftcalc_getdescender.patch       |   13 +++++++++++++
+ .../freetype-2.3.6/ftcalc_getdescender.patch       |   13 +++++++++++++
+ recipes/freetype/freetype_2.3.5.bb                 |    3 ++-
+ recipes/freetype/freetype_2.3.6.bb                 |    1 +
+ 4 files changed, 29 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/freetype/freetype-2.3.5/ftcalc_getdescender.patch
+ create mode 100644 recipes/freetype/freetype-2.3.6/ftcalc_getdescender.patch
 
-> We also have the latest minor patch on top of stock 2.6.28 as well which
-> brings it to 2.6.28.10. Can you
-> try to check if you can build on top of that ?
->
-> Just SRC_URI_append_mx25-3stack =3D
-> "http://download.berlios.de/mx25patches/linux-2.6.28-imx_4.5.1.patch.bz2;=
-patch=3D1;name=3Dpatchmx25"
+diff --git a/recipes/freetype/freetype-2.3.5/ftcalc_getdescender.patch b/recipes/freetype/freetype-2.3.5/ftcalc_getdescender.patch
+new file mode 100644
+index 0000000..3311343
+--- /dev/null
++++ b/recipes/freetype/freetype-2.3.5/ftcalc_getdescender.patch
+@@ -0,0 +1,13 @@
++--- freetype-2.3.5/src/base/ftcalc.c	2007-06-11 07:51:49.000000000 +0200
+++++ freetype-2.3.5/src/base/ftcalc.c	2008-06-28 00:14:23.000000000 +0200
++@@ -430,8 +430,8 @@
++       "shll  $16, %%edx\n"
++       "addl  %%edx, %%eax\n"
++       "mov   %%eax, %0\n"
++-      : "=r"(result)
++-      : "a"(a), "d"(b)
+++      : "=a"(result), "+d"(b)
+++      : "a"(a)
++       : "%ecx"
++     );
++     return result;
+diff --git a/recipes/freetype/freetype-2.3.6/ftcalc_getdescender.patch b/recipes/freetype/freetype-2.3.6/ftcalc_getdescender.patch
+new file mode 100644
+index 0000000..a1ede28
+--- /dev/null
++++ b/recipes/freetype/freetype-2.3.6/ftcalc_getdescender.patch
+@@ -0,0 +1,13 @@
++--- freetype-2.3.6/src/base/ftcalc.c	2008-05-08 22:44:41.000000000 +0200
+++++ freetype-2.3.6/src/base/ftcalc.c	2008-06-28 00:14:23.000000000 +0200
++@@ -430,8 +430,8 @@
++       "shll  $16, %%edx\n"
++       "addl  %%edx, %%eax\n"
++       "mov   %%eax, %0\n"
++-      : "=r"(result)
++-      : "a"(a), "d"(b)
+++      : "=a"(result), "+d"(b)
+++      : "a"(a)
++       : "%ecx"
++     );
++     return result;
+diff --git a/recipes/freetype/freetype_2.3.5.bb b/recipes/freetype/freetype_2.3.5.bb
+index 596d191..a6944ff 100644
+--- a/recipes/freetype/freetype_2.3.5.bb
++++ b/recipes/freetype/freetype_2.3.5.bb
+@@ -1,9 +1,10 @@
+ DESCRIPTION = "Freetype font rendering library"
+ SECTION = "libs"
+ LICENSE = "freetype"
+-PR = "r3"
++PR = "r4"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/freetype/freetype-${PV}.tar.bz2 \
++           file://ftcalc_getdescender.patch;patch=1 \
+            file://fix-x86_64-build.patch;patch=1 \
+            file://no-hardcode.patch;patch=1 \
+ 	  "
+diff --git a/recipes/freetype/freetype_2.3.6.bb b/recipes/freetype/freetype_2.3.6.bb
+index 0ee2414..7e93167 100644
+--- a/recipes/freetype/freetype_2.3.6.bb
++++ b/recipes/freetype/freetype_2.3.6.bb
+@@ -5,6 +5,7 @@ PR = "r0"
+ 
+ SRC_URI = "\
+   ${SOURCEFORGE_MIRROR}/freetype/freetype-${PV}.tar.bz2 \
++  file://ftcalc_getdescender.patch;patch=1 \
+   file://no-hardcode.patch;patch=1 \
+   file://fix-configure.patch;patch=1 \
+   file://libtool-tag.patch;patch=1 \
+-- 
+1.6.3.3
 
-Using the patch command, the LTIB patches did not apply on top of 2.6.28.10=
-.
-That is why I used 2.6.28. But I just tested and the patches seems to
-apply cleanly using git. I'll test
-this a bit more and let you know.
-
-Regards,
-
-Mickael CHAZAUX
-
-Adeneo Embedded - Adetel Group
-2, chemin du Ruisseau
-69134 ECULLY - FRANCE
-T=C3=A9l. : +33 (0)4 72 18 08 40 - Fax : +33 (0)4 72 18 08 41
 
 
