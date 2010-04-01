@@ -1,43 +1,38 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NxMek-0004Sh-8u
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NxMwo-0007SK-Bu
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 17:50:07 +0200
-Received: by pwj5 with SMTP id 5so1052307pwj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Apr 2010 08:46:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:received:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=cKMy5jP6zv3JwVusG0LVzv3IlS5oKC6e2eTaCvwM8jo=;
-	b=KG2x8DbaPiLJg9ptvCCnC+dSKMk1oNcUoGZq7TszvLku6RexdRZY9fQILBlAW6VyFi
-	tp2TJ6Udz5GAFZ1V11NkbQM+3NICrcbL+afxj/IPHjsQiOpUX7Eu8zpklmytTk7VOIR1
-	Gxmd0Op2YOqsJLtMA4D/L9HEtUg5G1fdIQmGk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=AoyvmXweelKP/VhorIz6kP6jMhLG28bZdp/ahC+s9CzKf7Nxj4teZyX3zvZEy2clbN
-	akvtoAyy0hLmRfZBZZgkViD1zloODjArWGiQkal+/Ba4oa2+rgLTx/YCczBOcoUmKLaJ
-	Px2HJba00Hfq0J/4l2F59bKd65WLULFNU3c3M=
-MIME-Version: 1.0
-Received: by 10.231.16.77 with HTTP; Thu, 1 Apr 2010 08:46:48 -0700 (PDT)
-In-Reply-To: <1270135981.4993.128.camel@rex>
-References: <1270135981.4993.128.camel@rex>
-Date: Thu, 1 Apr 2010 08:46:48 -0700
-Received: by 10.114.86.3 with SMTP id j3mr1337640wab.177.1270136808682; Thu, 
-	01 Apr 2010 08:46:48 -0700 (PDT)
-Message-ID: <h2n19c1b8a91004010846u8f936157z252190a0f6a6b6e4@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 01 Apr 2010 18:08:46 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31G5Rf9023088;
+	Thu, 1 Apr 2010 17:05:27 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 22632-08; Thu,  1 Apr 2010 17:05:23 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31G5Hcn023073
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 1 Apr 2010 17:05:17 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+In-Reply-To: <1270136509.6277.97.camel@trini-m4400>
+References: <1270135981.4993.128.camel@rex>
+	<1270136509.6277.97.camel@trini-m4400>
+Date: Thu, 01 Apr 2010 17:05:15 +0100
+Message-ID: <1270137915.4993.137.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+Cc: "Lock, Joshua" <joshua.lock@intel.com>
 Subject: Re: Request for branch merge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -52,57 +47,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 15:50:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 01 Apr 2010 16:08:46 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Thu, Apr 1, 2010 at 8:33 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> I've been aware that Poky and OE have been diverging slightly and I'd
-> like to correct this. There are some patches that I've promised for a
-> while too such as the rename from do_populate_staging ->
-> do_populate_sysroot.
->
-> With some help from Joshua Lock, I have a branch I'd like to propose be
-> merged into OE.dev:
->
-> http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=3Drpurdie/work-=
-in-progress
->
-> This branch:
->
-> * Renames do_populate_staging -> do_populate_sysroot as per previous
-> =A0staging discussion emails and also the staging directory ->
-> =A0sysroots. It should convert existing builds safely and insert a
-> =A0compatibility symlink. This continues the process of improving our
-> =A0"staging" concept into one focused around true sysroots.
-> * Adds some gettext class sanity checks. In Poky this error is fatal,
-> =A0for OE this is just a note for now. The idea being if AM_GNU_GETTEXT
-> =A0is in configure.ac and gettext in some form isn't in DEPENDS,
-> =A0something is wrong.
-> * Added relocatable binary processing from Poky for -native binaries
-> =A0using chrpath. This isn't enabled for -cross packages due to the
-> =A0relative path length problems.
-> * Added packaged-staging fetching capabilities. This uses new mirror
-> =A0handling abilities in bitbake master branch but should work with older
-> =A0bitbakes, just with less functionality.
-> * Started moving gcc dependency information into core gcc version
-> =A0specific includes as part of the gcc cleanup.
-> * Converted gcc to use the new style staging
-> * Added EXTRA_OECONF_INITIAL and EXTRA_OECONF_INTERMEDIATE variables to
-> =A0gcc as part of the gcc cleanup
-> * Converted binutils, modutils-cross, glibc and gdb to new style staging
-> * Cleaned up the gcc-cross do_install function a lot
->
-> Along with a small number of other tweaks spotted along the way.
->
-> I could post the patches individually and get Acked lines for each one
-> but I'm hoping to avoid that and get permission to merge the branch
-> directly. We have talked about most of these things in one form or
-> another.
->
+On Thu, 2010-04-01 at 08:41 -0700, Tom Rini wrote:
+> On Thu, 2010-04-01 at 16:33 +0100, Richard Purdie wrote:
+> 
+> > * Added relocatable binary processing from Poky for -native binaries 
+> >   using chrpath. This isn't enabled for -cross packages due to the 
+> >   relative path length problems.
+> 
+> Is there a reason to not use $ORIGIN here instead?
 
-Looks good stuff.
-I would have preferred to have eglibc also converted to new style
-staging if possible but can be done afterwards too.
+This *is* using $$ORIGIN. We're just postprocessing to do the injection.
+
+>   The patch Chris
+> Larson posted ages ago does get this right (the hard part is
+> gcc/gdb/binutils due to the multi configure running).
+
+This class automatically handles all that without having all those
+horrible escaped strings that are likely to break each time we change
+versions or add new packages.
+
+>   And any path
+> length issues you hit with -cross you should be able to hit with
+> -native, no?
+
+No, since -native binaries just need to go up to the root of the
+staging/ directory as a maximum but the cross directory crosses the
+cross/ to staging/ boundary which is a level further.
+
+If we move cross/ into staging/ as is planned, this problem goes away at
+that point.
+
+Cheers,
+
+Richard
+
+
+
 
 
