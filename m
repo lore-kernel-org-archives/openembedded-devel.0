@@ -1,31 +1,29 @@
 Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
 	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NxNKb-0002sG-1E
+	(envelope-from <rpurdie@rpsys.net>) id 1NxNOt-0005Ui-BX
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 18:33:21 +0200
+	Thu, 01 Apr 2010 18:37:47 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31GU5g3023253
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31GYVSI023314
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 1 Apr 2010 17:30:05 +0100
+	Thu, 1 Apr 2010 17:34:31 +0100
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 23148-02 for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Apr 2010 17:30:01 +0100 (BST)
+	id 23138-04 for <openembedded-devel@lists.openembedded.org>;
+	Thu,  1 Apr 2010 17:34:27 +0100 (BST)
 Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31GTu48023241
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31GYQM3023304
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 1 Apr 2010 17:29:56 +0100
+	Thu, 1 Apr 2010 17:34:27 +0100
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <z2xd1b08f941004010918v6b58f2dducced0204ce8a9739@mail.gmail.com>
-References: <1270135981.4993.128.camel@rex>
-	<h2n19c1b8a91004010846u8f936157z252190a0f6a6b6e4@mail.gmail.com>
-	<1270138171.4993.141.camel@rex>
-	<z2xd1b08f941004010918v6b58f2dducced0204ce8a9739@mail.gmail.com>
-Date: Thu, 01 Apr 2010 17:29:54 +0100
-Message-ID: <1270139394.4993.150.camel@rex>
+In-Reply-To: <1270137923.6277.101.camel@trini-m4400>
+References: <E1NxJrs-0006SS-LZ@melo.openembedded.org>
+	<1270137923.6277.101.camel@trini-m4400>
+Date: Thu, 01 Apr 2010 17:34:25 +0100
+Message-ID: <1270139665.4993.152.camel@rex>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.3 
 X-Virus-Scanned: amavisd-new at rpsys.net
@@ -37,7 +35,7 @@ X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
 	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Request for branch merge
+Subject: Re: [oe-commits] Joshua Lock : packaged-staging: post-process non-binary files to fix paths packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,35 +49,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 16:33:21 -0000
+X-List-Received-Date: Thu, 01 Apr 2010 16:37:47 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2010-04-01 at 18:18 +0200, Andrea Adami wrote:
-> >I just looked and the eglib
-> -- sorry for jumping in --
+On Thu, 2010-04-01 at 09:05 -0700, Tom Rini wrote:
+> On Thu, 2010-04-01 at 12:51 +0000, git version control wrote:
+> > Module: openembedded.git
+> > Branch: rpurdie/work-in-progress
+> > Commit: 5df536641049c5af6413e410aa20bb97880fe897
+> > URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=5df536641049c5af6413e410aa20bb97880fe897
+> > 
+> > Author: Joshua Lock <josh@linux.intel.com>
+> > Date:   Wed Mar 31 11:22:02 2010 +0100
+> > 
+> > packaged-staging: post-process non-binary files to fix paths packages
+> > 
+> > Add tooling from Poky to scan packages and fix up paths in libtool files, we
+> > then build on this to further post-process native packages (native, cross, sdk)
+> > and fix up any references to the STAGING_DIR in non-binary files.
+> > 
+> > Signed-off-by: Joshua Lock <josh@linux.intel.com>
 > 
-> RP, while you're there, pls look at klibc.
-> 
-> do_stage() {
->         oe_runmake  install
->         cp '${STAGING_DIR_TARGET}/bin/klcc'
-> '${CROSS_DIR}/bin/${TARGET_PREFIX}klcc'
-> }
-> 
-> How to properly install klcc ?
+> There's a lot more than just .la files that get these paths wrong.  If
+> you use the scan_cmd you set on native/etc for everything you can fix
+> them all up.
 
-The closest analogy is what binconfig.bbclass ends up doing or in poky
-see the gtk+.inc file and its sysroot postprocessing function.
-
-You will be pleased to know I have plans to simplify this massively by
-moving STAGING_BINDIR_CROSS to be a directory under ${D}${bindir}, I've
-just not got to that yet. This is part of the gradual removal of the
-cross directory in favour of the sysroots.
+It scans everything for -native packages and just .la files for target
+packages. I'd argue that for target packages we're better off fixing the
+problems at source since the real target packages are probably also
+bust?
 
 Cheers,
 
 Richard
+
 
 
 
