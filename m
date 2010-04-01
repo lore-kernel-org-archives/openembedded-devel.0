@@ -1,32 +1,38 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1NxKaw-0001cv-9N
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1NxKqa-0004SV-11
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 15:38:02 +0200
-Received: from tamarin.localnet (123-192-181-204.dynamic.kbronet.com.tw
-	[123.192.181.204])
-	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 931B21B10C79
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Apr 2010 13:39:11 +0000 (UTC)
-From: Holger Hans Peter Freyther <holger+oe@freyther.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 1 Apr 2010 15:34:39 +0200
-User-Agent: KMail/1.13.2 (Linux/2.6.34-rc3-00001-g17459ed; KDE/4.4.2; i686; ; )
-References: <20100330122319.f0e46761.ospite@studenti.unina.it>
-	<1270127783-21172-1-git-send-email-ospite@studenti.unina.it>
-	<20100401132312.GM25489@jama>
-In-Reply-To: <20100401132312.GM25489@jama>
+	Thu, 01 Apr 2010 15:54:12 +0200
+Received: (qmail 14973 invoked by uid 503); 1 Apr 2010 13:48:22 -0000
+Received: from b7.ovh.net (HELO mail409.ha.ovh.net) (213.186.33.57)
+	by 63.mail-out.ovh.net with SMTP; 1 Apr 2010 13:48:22 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 1 Apr 2010 13:44:17 -0000
+Received: from cug31-2-82-228-86-110.fbx.proxad.net (HELO ?192.168.0.2?)
+	(ebenard%eukrea.com@82.228.86.110)
+	by ns0.ovh.net with SMTP; 1 Apr 2010 13:44:16 -0000
+Message-ID: <4BB4A32F.8070007@eukrea.com>
+Date: Thu, 01 Apr 2010 15:44:15 +0200
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.1.8) Gecko/20100227 Thunderbird/3.0.3
 MIME-Version: 1.0
-Message-Id: <201004011534.39987.holger+oe@freyther.de>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+To: openembedded-devel@lists.openembedded.org
+References: <1269935184-21934-1-git-send-email-mchazaux@adeneo-embedded.com>	<20100331204928.GB14197@gmail.com>
+	<o2hbc36f8ed1004010253k464e88d7j99e74a4fa1104bac@mail.gmail.com>
+In-Reply-To: <o2hbc36f8ed1004010253k464e88d7j99e74a4fa1104bac@mail.gmail.com>
+X-Ovh-Tracer-Id: 11758617152308948297
+X-Ovh-Remote: 82.228.86.110 (cug31-2-82-228-86-110.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.56
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] frameworkd-config-shr: fix a nasty typo
+Subject: Re: [PATCH] Add Freescale i.MX25 3stack support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,21 +46,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 13:38:02 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 01 Apr 2010 13:54:12 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Thursday 01 April 2010 15:23:12 Martin Jansa wrote:
-> On Thu, Apr 01, 2010 at 03:16:23PM +0200, Antonio Ospite wrote:
-> > A misplaced '-' instead of '_' made bitbake conditional appending fail,
-> > resulting in fso-abyss being added unconditionally to runtime
-> > dependencies.
-> 
-> Wow, good catch! I'll apply now.
+Le 01/04/2010 11:53, Mickael Chazaux a écrit :
+> Using the patch command, the LTIB patches did not apply on top of 2.6.28.10.
+> That is why I used 2.6.28. But I just tested and the patches seems to
+> apply cleanly using git. I'll test
+> this a bit more and let you know.
+>
+you just need to use git am to apply all the LTIB patch serie and this 
+works fine.
 
-Stupid question... there are not many that have a gta03, who is suffering from 
-that (the bug tracker is not loading for me right now).
-
+Eric
 
 
