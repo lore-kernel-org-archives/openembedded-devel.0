@@ -1,27 +1,29 @@
 Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
 	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NxMyZ-0000CP-Jq
+	(envelope-from <rpurdie@rpsys.net>) id 1NxN0n-0001d1-Ia
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 18:10:35 +0200
+	Thu, 01 Apr 2010 18:12:54 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31G7HU0023098;
-	Thu, 1 Apr 2010 17:07:17 +0100
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31G9bWR023111
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 1 Apr 2010 17:09:37 +0100
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 22602-09; Thu,  1 Apr 2010 17:07:13 +0100 (BST)
+	id 22632-09 for <openembedded-devel@lists.openembedded.org>;
+	Thu,  1 Apr 2010 17:09:33 +0100 (BST)
 Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31G79RP023092
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Thu, 1 Apr 2010 17:07:09 +0100
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31G9WxW023105
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 1 Apr 2010 17:09:33 +0100
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1270136609.6277.98.camel@trini-m4400>
+In-Reply-To: <h2n19c1b8a91004010846u8f936157z252190a0f6a6b6e4@mail.gmail.com>
 References: <1270135981.4993.128.camel@rex>
-	<1270136509.6277.97.camel@trini-m4400>
-	<1270136609.6277.98.camel@trini-m4400>
-Date: Thu, 01 Apr 2010 17:07:07 +0100
-Message-ID: <1270138027.4993.139.camel@rex>
+	<h2n19c1b8a91004010846u8f936157z252190a0f6a6b6e4@mail.gmail.com>
+Date: Thu, 01 Apr 2010 17:09:31 +0100
+Message-ID: <1270138171.4993.141.camel@rex>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.3 
 X-Virus-Scanned: amavisd-new at rpsys.net
@@ -33,7 +35,6 @@ X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
 	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: "Lock, Joshua" <joshua.lock@intel.com>
 Subject: Re: Request for branch merge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -48,44 +49,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 16:10:35 -0000
+X-List-Received-Date: Thu, 01 Apr 2010 16:12:54 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2010-04-01 at 08:43 -0700, Tom Rini wrote:
-> On Thu, 2010-04-01 at 08:41 -0700, Tom Rini wrote:
-> > On Thu, 2010-04-01 at 16:33 +0100, Richard Purdie wrote:
-> > 
-> > > * Added relocatable binary processing from Poky for -native binaries 
-> > >   using chrpath. This isn't enabled for -cross packages due to the 
-> > >   relative path length problems.
-> > 
-> > Is there a reason to not use $ORIGIN here instead?  The patch Chris
-> > Larson posted ages ago does get this right (the hard part is
-> > gcc/gdb/binutils due to the multi configure running).  And any path
-> > length issues you hit with -cross you should be able to hit with
-> > -native, no?
+On Thu, 2010-04-01 at 08:46 -0700, Khem Raj wrote:
+> On Thu, Apr 1, 2010 at 8:33 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> > I've been aware that Poky and OE have been diverging slightly and I'd
+> > like to correct this. There are some patches that I've promised for a
+> > while too such as the rename from do_populate_staging ->
+> > do_populate_sysroot.
+> >
+> > With some help from Joshua Lock, I have a branch I'd like to propose be
+> > merged into OE.dev:
+> >
+> > http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=rpurdie/work-in-progress
+> >
+> > This branch:
+> >
+> > * Renames do_populate_staging -> do_populate_sysroot as per previous
+> >  staging discussion emails and also the staging directory ->
+> >  sysroots. It should convert existing builds safely and insert a
+> >  compatibility symlink. This continues the process of improving our
+> >  "staging" concept into one focused around true sysroots.
+> > * Adds some gettext class sanity checks. In Poky this error is fatal,
+> >  for OE this is just a note for now. The idea being if AM_GNU_GETTEXT
+> >  is in configure.ac and gettext in some form isn't in DEPENDS,
+> >  something is wrong.
+> > * Added relocatable binary processing from Poky for -native binaries
+> >  using chrpath. This isn't enabled for -cross packages due to the
+> >  relative path length problems.
+> > * Added packaged-staging fetching capabilities. This uses new mirror
+> >  handling abilities in bitbake master branch but should work with older
+> >  bitbakes, just with less functionality.
+> > * Started moving gcc dependency information into core gcc version
+> >  specific includes as part of the gcc cleanup.
+> > * Converted gcc to use the new style staging
+> > * Added EXTRA_OECONF_INITIAL and EXTRA_OECONF_INTERMEDIATE variables to
+> >  gcc as part of the gcc cleanup
+> > * Converted binutils, modutils-cross, glibc and gdb to new style staging
+> > * Cleaned up the gcc-cross do_install function a lot
+> >
+> > Along with a small number of other tweaks spotted along the way.
+> >
+> > I could post the patches individually and get Acked lines for each one
+> > but I'm hoping to avoid that and get permission to merge the branch
+> > directly. We have talked about most of these things in one form or
+> > another.
+> >
 > 
-> For reference it's just doing:
-> export RELATIVERPATH = "${@base_path_relative(d.getVar('bindir', 1),
-> d.getVar('STAGING_LIBDIR_NATIVE', 1))}"
-> export BUILD_LDFLAGS = "-L${STAGING_LIBDIR_NATIVE} \
->                         -Wl,-rpath,\\\$\$ORIGIN/${RELATIVERPATH} -Wl,-O1
-> \
->                         -Wl,-rpath,${STAGING_LIBDIR_NATIVE} -Wl,-O1 \
->                         "
-> 
-> In bitbake.conf (extra variable for dealing with the hard packages
-> later).
+> Looks good stuff.
+> I would have preferred to have eglibc also converted to new style
+> staging if possible but can be done afterwards too.
 
-I really much prefer the post processing approach as it "just works" and
-doesn't need exceptions for hard packages, nor does it have horrible
-quoting.
+I just looked and the eglibc do_stage function can most likely just be
+deleted and for the -initial version, rename do_stage to do_install and
+drop the empty do_install. I didn't make that change as its not
+something I've tested.
 
 Cheers,
 
 Richard
-
 
 
 
