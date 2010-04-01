@@ -1,21 +1,24 @@
 Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
 	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <zlo@zlo.nu>)
-	id 1NxIGg-0003Cp-U0 for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 13:09:00 +0200
+	id 1NxINk-0007Ye-PT for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Apr 2010 13:16:35 +0200
 Received: from localhost.localdomain (seven.iphion.nl [80.255.245.169])
-	by mzh.zlo.nu (Postfix) with ESMTP id 2E295140A4
+	by mzh.zlo.nu (Postfix) with ESMTP id 81CE1140B0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Apr 2010 13:05:42 +0200 (CEST)
+	Thu,  1 Apr 2010 13:13:00 +0200 (CEST)
 From: Marc Olzheim <zlo@zlo.nu>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Apr 2010 13:05:42 +0200
-Message-Id: <1270119942-11215-1-git-send-email-zlo@zlo.nu>
+Date: Thu,  1 Apr 2010 13:12:55 +0200
+Message-Id: <1270120375-11311-2-git-send-email-zlo@zlo.nu>
 X-Mailer: git-send-email 1.6.3.3
+In-Reply-To: <1270120375-11311-1-git-send-email-zlo@zlo.nu>
+References: <1270119942-11215-1-git-send-email-zlo@zlo.nu>
+	<1270120375-11311-1-git-send-email-zlo@zlo.nu>
 X-SA-Exim-Connect-IP: 85.17.141.90
 X-SA-Exim-Mail-From: zlo@zlo.nu
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -33,7 +36,8 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 11:09:00 -0000
+X-List-Received-Date: Thu, 01 Apr 2010 11:17:13 -0000
+X-List-Received-Date: Thu, 01 Apr 2010 11:17:13 -0000
 
 From: Marc Olzheim <marc@iphion.nl>
 
@@ -42,8 +46,8 @@ This was fixed by freetype a month after the release of 2.3.6.
  .../freetype-2.3.5/ftcalc_getdescender.patch       |   13 +++++++++++++
  .../freetype-2.3.6/ftcalc_getdescender.patch       |   13 +++++++++++++
  recipes/freetype/freetype_2.3.5.bb                 |    3 ++-
- recipes/freetype/freetype_2.3.6.bb                 |    1 +
- 4 files changed, 29 insertions(+), 1 deletions(-)
+ recipes/freetype/freetype_2.3.6.bb                 |    3 ++-
+ 4 files changed, 30 insertions(+), 2 deletions(-)
  create mode 100644 recipes/freetype/freetype-2.3.5/ftcalc_getdescender.patch
  create mode 100644 recipes/freetype/freetype-2.3.6/ftcalc_getdescender.patch
 
@@ -102,10 +106,15 @@ index 596d191..a6944ff 100644
             file://no-hardcode.patch;patch=1 \
  	  "
 diff --git a/recipes/freetype/freetype_2.3.6.bb b/recipes/freetype/freetype_2.3.6.bb
-index 0ee2414..7e93167 100644
+index 0ee2414..e84cacf 100644
 --- a/recipes/freetype/freetype_2.3.6.bb
 +++ b/recipes/freetype/freetype_2.3.6.bb
-@@ -5,6 +5,7 @@ PR = "r0"
+@@ -1,10 +1,11 @@
+ DESCRIPTION = "Freetype font rendering library"
+ SECTION = "libs"
+ LICENSE = "freetype"
+-PR = "r0"
++PR = "r1"
  
  SRC_URI = "\
    ${SOURCEFORGE_MIRROR}/freetype/freetype-${PV}.tar.bz2 \
