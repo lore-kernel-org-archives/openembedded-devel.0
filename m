@@ -1,39 +1,41 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NxMwo-0007SK-Bu
+Received: from relay1.mentorg.com ([192.94.38.131])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <Tom_Rini@mentor.com>) id 1NxMxl-00085i-Gy
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 18:08:46 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31G5Rf9023088;
-	Thu, 1 Apr 2010 17:05:27 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 22632-08; Thu,  1 Apr 2010 17:05:23 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31G5Hcn023073
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Thu, 1 Apr 2010 17:05:17 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	Thu, 01 Apr 2010 18:09:46 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1NxMua-0004NE-Cm from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Apr 2010 09:06:28 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Thu, 1 Apr 2010 09:06:28 -0700
+Received: from 172.30.80.170 ([172.30.80.170]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Thu,  1 Apr 2010 16:05:26 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	01 Apr 2010 09:05:23 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1270136509.6277.97.camel@trini-m4400>
-References: <1270135981.4993.128.camel@rex>
-	<1270136509.6277.97.camel@trini-m4400>
-Date: Thu, 01 Apr 2010 17:05:15 +0100
-Message-ID: <1270137915.4993.137.camel@rex>
+In-Reply-To: <E1NxJrs-0006SS-LZ@melo.openembedded.org>
+References: <E1NxJrs-0006SS-LZ@melo.openembedded.org>
+Organization: Mentor Graphics Corporation
+Date: Thu, 01 Apr 2010 09:05:23 -0700
+Message-ID: <1270137923.6277.101.camel@trini-m4400>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 01 Apr 2010 16:06:28.0171 (UTC)
+	FILETIME=[494031B0:01CAD1B5]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: "Lock, Joshua" <joshua.lock@intel.com>
-Subject: Re: Request for branch merge
+Subject: Re: [oe-commits] Joshua Lock : packaged-staging: post-process non-binary files to fix paths packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,45 +49,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 16:08:46 -0000
+X-List-Received-Date: Thu, 01 Apr 2010 16:09:46 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2010-04-01 at 08:41 -0700, Tom Rini wrote:
-> On Thu, 2010-04-01 at 16:33 +0100, Richard Purdie wrote:
-> 
-> > * Added relocatable binary processing from Poky for -native binaries 
-> >   using chrpath. This isn't enabled for -cross packages due to the 
-> >   relative path length problems.
-> 
-> Is there a reason to not use $ORIGIN here instead?
+On Thu, 2010-04-01 at 12:51 +0000, git version control wrote:
+> Module: openembedded.git
+> Branch: rpurdie/work-in-progress
+> Commit: 5df536641049c5af6413e410aa20bb97880fe897
+> URL:    http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcommit;h=
+=3D5df536641049c5af6413e410aa20bb97880fe897
+>=20
+> Author: Joshua Lock <josh@linux.intel.com>
+> Date:   Wed Mar 31 11:22:02 2010 +0100
+>=20
+> packaged-staging: post-process non-binary files to fix paths packages
+>=20
+> Add tooling from Poky to scan packages and fix up paths in libtool files,=
+ we
+> then build on this to further post-process native packages (native, cross=
+, sdk)
+> and fix up any references to the STAGING_DIR in non-binary files.
+>=20
+> Signed-off-by: Joshua Lock <josh@linux.intel.com>
 
-This *is* using $$ORIGIN. We're just postprocessing to do the injection.
+There's a lot more than just .la files that get these paths wrong.  If
+you use the scan_cmd you set on native/etc for everything you can fix
+them all up.
 
->   The patch Chris
-> Larson posted ages ago does get this right (the hard part is
-> gcc/gdb/binutils due to the multi configure running).
-
-This class automatically handles all that without having all those
-horrible escaped strings that are likely to break each time we change
-versions or add new packages.
-
->   And any path
-> length issues you hit with -cross you should be able to hit with
-> -native, no?
-
-No, since -native binaries just need to go up to the root of the
-staging/ directory as a maximum but the cross directory crosses the
-cross/ to staging/ boundary which is a level further.
-
-If we move cross/ into staging/ as is planned, this problem goes away at
-that point.
-
-Cheers,
-
-Richard
-
-
-
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
