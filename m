@@ -1,32 +1,42 @@
-Received: from 3a.49.1343.static.theplanet.com
-	([67.19.73.58] helo=pug.o-hand.com ident=postfix)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <josh@linux.intel.com>) id 1NxO4B-0004td-DZ
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 19:20:28 +0200
-Received: from [10.250.128.186] (unknown [158.43.2.102])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by pug.o-hand.com (Postfix) with ESMTP id 73FCC12EC1F8
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NxOSf-0006BB-6p for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Apr 2010 19:45:45 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NxOPW-0002OF-GP for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Apr 2010 19:42:30 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Apr 2010 19:42:30 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Apr 2010 12:41:21 -0500 (CDT)
-From: Joshua Lock <josh@linux.intel.com>
+	Thu, 01 Apr 2010 19:42:30 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4BB4CBD1.2050803@mlbassoc.com>
-References: <1270135981.4993.128.camel@rex>  <4BB4CBD1.2050803@mlbassoc.com>
-Date: Thu, 01 Apr 2010 18:17:09 +0100
-Message-ID: <1270142229.27358.8.camel@localhost.localdomain>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 01 Apr 2010 19:42:19 +0200
+Message-ID: <hp2ltr$vjd$1@dough.gmane.org>
+References: <1270134711-32158-1-git-send-email-Martin.Jansa@gmail.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 (2.28.3-1.fc12) 
-X-SA-Exim-Connect-IP: 67.19.73.58
-X-SA-Exim-Mail-From: josh@linux.intel.com
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
+In-Reply-To: <1270134711-32158-1-git-send-email-Martin.Jansa@gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Request for branch merge
+Subject: Re: sane-srcrevs.inc: moving all svn SRCREVs to recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,75 +50,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 17:20:28 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 01 Apr 2010 17:45:45 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2010-04-01 at 10:37 -0600, Gary Thomas wrote:
-> On 04/01/2010 09:33 AM, Richard Purdie wrote:
-> > I've been aware that Poky and OE have been diverging slightly and I'd
-> > like to correct this. There are some patches that I've promised for a
-> > while too such as the rename from do_populate_staging ->
-> > do_populate_sysroot.
-> >
-> > With some help from Joshua Lock, I have a branch I'd like to propose be
-> > merged into OE.dev:
-> >
-> > http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=rpurdie/work-in-progress
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 01-04-10 17:11, Martin Jansa wrote:
+> Hi,
 > 
-> Not much luck with this I'm afraid.
-
-Whoops, good old fashioned copy and paste error. The test build I ran
-didn't trigger this... Sorry.
-
-I just force pushed an amended tree.
-
-Cheers,
-Joshua 
-
->    MACHINE=efika
->    DISTRO="angstrom-2008.1"
+> as already said here, global files are common place for conflicts and SRCREV
+> belongs to recipe metadata.
 > 
-> ERROR: '/local/Angstrom_BeagleBoard/openembedded/recipes/shasum/shasum-native.bb' failed
-> NOTE: package shasum-native-1.0-r1: task do_qa_configure: Started
-> ERROR: Error in executing python function in: /local/Angstrom_BeagleBoard/openembedded/recipes/shasum/shasum-native.bb
-> ERROR: Exception:<type 'exceptions.NameError'> Message:global name 'configs' is not defined
-> ERROR: Printing the environment of the function
-> ERROR:  0021:       else:
-> ERROR:  0022:          gt = "gettext"
-> ERROR:  0023:       deps = bb.utils.explode_deps(bb.data.getVar('DEPENDS', d, True) or "")
-> ERROR:  0024:       if gt not in deps:
-> ERROR:  0025:          for config in configs:
-> ERROR:  0026:              gnu = "grep \"^[[:space:]]*AM_GNU_GETTEXT\" %s >/dev/null" % config
-> ERROR:  0027:              if os.system(gnu) == 0:
-> ERROR:  0028:                 bb.note("""Gettext required but not in DEPENDS for file %s.
-> ERROR:  0029:Missing inherit gettext?""" % config)
-> ERROR: Function do_qa_configure failed
-> NOTE: Task failed: ('function do_qa_configure failed', '/local/Angstrom_BeagleBoard/tmp/work/i686-linux/shasum-native-1.0-r1/temp/log.do_qa_configure.24200')
-> ERROR: Logfile of failure stored in: /local/Angstrom_BeagleBoard/tmp/work/i686-linux/shasum-native-1.0-r1/temp/log.do_qa_configure.24200
-> Log data follows:
-> | ERROR: Error in executing python function in: /local/Angstrom_BeagleBoard/openembedded/recipes/shasum/shasum-native.bb
-> | ERROR: Exception:<type 'exceptions.NameError'> Message:global name 'configs' is not defined
-> | ERROR: Printing the environment of the function
-> | ERROR:        0021:       else:
-> | ERROR:        0022:          gt = "gettext"
-> | ERROR:        0023:       deps = bb.utils.explode_deps(bb.data.getVar('DEPENDS', d, True) or "")
-> | ERROR:        0024:       if gt not in deps:
-> | ERROR:        0025:          for config in configs:
-> | ERROR:        0026:              gnu = "grep \"^[[:space:]]*AM_GNU_GETTEXT\" %s >/dev/null" % config
-> | ERROR:        0027:              if os.system(gnu) == 0:
-> | ERROR:        0028:                 bb.note("""Gettext required but not in DEPENDS for file %s.
-> | ERROR:        0029:Missing inherit gettext?""" % config)
-> | ERROR: Function do_qa_configure failed
-> NOTE: package shasum-native-1.0-r1: task do_qa_configure: Failed
-> ERROR: TaskFailed event exception, aborting
+> This 2 patches are moving all SRCREVs for svn recipes, with some cleanup in few
+> places, like renamed package to show it's from svn, or unified PV to contain
+> +svnr${SRCPV}.
 > 
-> I tried this with bitbake-1.8.18 and the version from Poky mainline.
-> 
+> Please ACK or NACK soon as this gets conflicts soon. If there is no NACK in 20 
+> hours I would like to push it. Thanks
 
--- 
-Joshua Lock
-        Intel Open Source Technology Centre
+Looks good to me, we can fix any fallout after applying it. Thanks for
+working on this!
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLtNr7MkyGM64RGpERAv+4AJ9+pMv3Ec+gIWgIq7z9CtiruIxJbwCeLrmF
+BY9U9XSjqAc+Bo/DDesvBTg=
+=VE63
+-----END PGP SIGNATURE-----
 
 
 
