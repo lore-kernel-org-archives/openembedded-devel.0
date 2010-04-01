@@ -1,53 +1,41 @@
-Received: from mail-fx0-f218.google.com ([209.85.220.218])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1NxOrk-0007L8-J0
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NxOtD-0007Rg-RE
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 20:11:40 +0200
-Received: by fxm10 with SMTP id 10so640242fxm.27
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Apr 2010 11:08:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:cc
-	:subject:message-id:references:mime-version:content-type
-	:content-disposition:in-reply-to:user-agent;
-	bh=ZOKgQq8ytVBLfU1MKIcE6J+o6Aovts0/aN3iU80YEnI=;
-	b=fLXLgTTigqf/tAhFmUKzbSxmAnDKsdq2FBXK7+bFr4/qmX15AZDDA7cU7+0jM1Jgr7
-	HEODdVynEwtC+UZfhDoYzazDQqlwintCXHh7FvwzszoutlF2JUwBBhKVn0yLuqLD1vaa
-	yaHY0HkZkzxqsNdj0gtwtpx9vmE1ZxaQXN7Hw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=G6Rz4HycX09m+qJ3xmwe776OeQgACG06tR5LLu/C3RqhzrkAqfGTAnINnVKJCMe0n8
-	CP//wQKxSr96j0goI5Cjn0LHACMJBRgConQcHHXNnH0BKXIJq105+sEb+kJ8HgbVmudd
-	NHBpSsD8GY+PtVH6rEZS/IonH34+Q13zT0dsU=
-Received: by 10.223.17.194 with SMTP id t2mr953722faa.101.1270145304089;
-	Thu, 01 Apr 2010 11:08:24 -0700 (PDT)
-Received: from s42.loc ([84.119.100.188])
-	by mx.google.com with ESMTPS id 14sm5801778fxm.13.2010.04.01.11.08.23
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 01 Apr 2010 11:08:23 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.71)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1NxP12-0007Gq-6S; Thu, 01 Apr 2010 20:21:16 +0200
-Date: Thu, 1 Apr 2010 20:21:16 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+	Thu, 01 Apr 2010 20:13:12 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31I9r2A024631;
+	Thu, 1 Apr 2010 19:09:53 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 24606-01; Thu,  1 Apr 2010 19:09:49 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31I9lk7024625
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 1 Apr 2010 19:09:47 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100401182116.GA27613@mx.loc>
-References: <t2n46a47f951003312246y97e7b196m59c6d8136580adb0@mail.gmail.com>
-	<p2k46a47f951004010909sfb05675bx2ad6274204621bd6@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <p2k46a47f951004010909sfb05675bx2ad6274204621bd6@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.218
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+In-Reply-To: <1270140349.6277.110.camel@trini-m4400>
+References: <1270135981.4993.128.camel@rex>
+	<1270136509.6277.97.camel@trini-m4400>
+	<1270136609.6277.98.camel@trini-m4400> <1270138027.4993.139.camel@rex>
+	<1270140349.6277.110.camel@trini-m4400>
+Date: Thu, 01 Apr 2010 19:09:45 +0100
+Message-ID: <1270145385.4993.155.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=unavailable version=3.2.5
+X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-users@linuxtogo.org
-Subject: Re: error building meta-toolchain for powerpc 405
+Cc: "Lock, Joshua" <joshua.lock@intel.com>
+Subject: Re: Request for branch merge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,24 +49,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 18:11:41 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 01 Apr 2010 18:13:12 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Thu, Apr 01, 2010 at 11:09:56AM -0500, Ryan Phillips wrote:
+On Thu, 2010-04-01 at 09:45 -0700, Tom Rini wrote:
+> There's two uglies here.  Ugly one, above.  Quoting isn't nice to read
+> and gdb/gcc/binutils are special.  It does however, work from the
+> get-go.  And the only cases it doesn't get right, right off the bat are
+> some perl (and possibly python) module cases where we aren't giving the
+> right relative path there, but we can always figure it out and fix that
+> up per recipe.  Ugly two, the chrpath way.  Depends on having a big
+> enough RPATH in the initial binary to patch over.  Doesn't work if the
+> RPATH isn't long enough as you say, which is why you can't do it on
+> -cross.  
 
->Patch attached... It looks like gcc-package-sdk needs to have the
->strips be optional.
+I've done the maths and it will always work within the sysroots/staging
+directory as there is always enough length available. Since we want rid
+of /cross/ for various reasons anyway I don't think this is a reason
+against this approach.
 
-Apart from the question below, why not just invoke strip once for all of
-them?
-${TARGET_PREFIX}strip ${D}${prefix}/${TARGET_SYS}/lib/*.so.* || :
+Cheers,
 
-just curious..
+Richard
 
->                    Is this the correct fix or should libstdc++
->already exist?
->
->Related Commit: 8c4198fc
 
 
