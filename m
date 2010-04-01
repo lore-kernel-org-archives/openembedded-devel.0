@@ -1,27 +1,27 @@
 Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
-	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <zlo@zlo.nu>)
-	id 1NxINk-0007YU-OJ for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 13:16:37 +0200
-Received: from localhost.localdomain (seven.iphion.nl [80.255.245.169])
-	by mzh.zlo.nu (Postfix) with ESMTP id 6FC13140A4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Apr 2010 13:13:00 +0200 (CEST)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <marcolz@zlo.nu>) id 1NxIbV-0004M2-QD
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Apr 2010 13:30:30 +0200
+Received: by mzh.zlo.nu (Postfix, from userid 1000)
+	id 98CC5140B0; Thu,  1 Apr 2010 13:27:13 +0200 (CEST)
+Date: Thu, 1 Apr 2010 13:27:13 +0200
 From: Marc Olzheim <zlo@zlo.nu>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Apr 2010 13:12:54 +0200
-Message-Id: <1270120375-11311-1-git-send-email-zlo@zlo.nu>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1270119942-11215-1-git-send-email-zlo@zlo.nu>
-References: <1270119942-11215-1-git-send-email-zlo@zlo.nu>
+Message-ID: <20100401112713.GA1223@zlo.nu>
+References: <1269437120-21774-1-git-send-email-zlo@zlo.nu>
+MIME-Version: 1.0
+In-Reply-To: <1269437120-21774-1-git-send-email-zlo@zlo.nu>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 85.17.141.90
-X-SA-Exim-Mail-From: zlo@zlo.nu
+X-SA-Exim-Mail-From: marcolz@zlo.nu
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] freetype 2.3.5/2.3.6: Import GetDescender() fix
+Subject: Re: [PATCH] package.bbclass: Make sure that when "file" fails, a forced strip will still strip.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,11 +35,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 11:17:13 -0000
+X-List-Received-Date: Thu, 01 Apr 2010 11:30:30 -0000
+X-Groupsio-MsgNum: 18327
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="J2SCkAp4GZ/dPZZf"
+Content-Disposition: inline
 
-[PATCH] freetype 2.3.5/2.3.6: Import GetDescender() fix from Savannah from
-ftcalc.c 1.79 for Savannah bug report #23556.
+--J2SCkAp4GZ/dPZZf
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-This was fixed by freetype a month after the release of 2.3.6.
+Of course this only matters when something else is wrong, but the
+existing code that tries to check the output of a failed "file" command
+is even more wrong. ;-)
 
+Marc
 
+--J2SCkAp4GZ/dPZZf
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+Content-Disposition: inline
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEARECAAYFAku0gxEACgkQezjnobFOgrFRwACfflD/y7BxvvMjeQpfW2LCu85d
+uAcAnj6SMULLsOzMkXj2v+1CowHb9+Eg
+=dM5U
+-----END PGP SIGNATURE-----
+
+--J2SCkAp4GZ/dPZZf--
