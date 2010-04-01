@@ -1,27 +1,49 @@
-Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
+Received: from mail-ew0-f211.google.com ([209.85.219.211])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcolz@zlo.nu>) id 1NxIbV-0004M2-QD
+	(envelope-from <mickael.chazaux@gmail.com>) id 1NxJLw-0001rr-L1
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 13:30:30 +0200
-Received: by mzh.zlo.nu (Postfix, from userid 1000)
-	id 98CC5140B0; Thu,  1 Apr 2010 13:27:13 +0200 (CEST)
-Date: Thu, 1 Apr 2010 13:27:13 +0200
-From: Marc Olzheim <zlo@zlo.nu>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100401112713.GA1223@zlo.nu>
-References: <1269437120-21774-1-git-send-email-zlo@zlo.nu>
+	Thu, 01 Apr 2010 14:18:29 +0200
+Received: by ewy3 with SMTP id 3so92078ewy.26
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Apr 2010 05:15:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:sender:received:in-reply-to
+	:references:date:x-google-sender-auth:received:message-id:subject
+	:from:to:cc:content-type:content-transfer-encoding;
+	bh=DTQm4sc14oG8SVwvhLGJWJInpfrXamYGXxTNuE5Kq0w=;
+	b=E1bH/BHb7QB69ULdSeA8WnGnQHvysCP6wQ2VwuCtRzbbxJUJ2ZqqjnbIog2LuX6g4W
+	4Vimjnel34m9TAzfjaZB3V/HH4+TZ+bG63Ey75vuNHtP75KzrufBY5J2zL1bWbqhqPvM
+	r1/yHJEd9xGOviEUf3Cta5ahpXHV35A76L9mg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=ELWjf9/zUnyoM6Xd1aZBtEYgImbS2eAiv50jVRcDXC26Yb1Ha6jbkPvdGIKQ/wZjlC
+	2hKpo0Pu0BXrXY1rsuirbaTDZ9LR/WafkE/okf8smJYyEv7vrNcoqQGaZw/jKvnVLSok
+	YOWakPuW0Y9fLz4UhXHt0UP+pHcsyy7paZYrk=
 MIME-Version: 1.0
-In-Reply-To: <1269437120-21774-1-git-send-email-zlo@zlo.nu>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 85.17.141.90
-X-SA-Exim-Mail-From: marcolz@zlo.nu
+Sender: mickael.chazaux@gmail.com
+Received: by 10.213.4.70 with HTTP; Thu, 1 Apr 2010 05:15:11 -0700 (PDT)
+In-Reply-To: <4BB43A16.2040708@fqingenieria.es>
+References: <1269935184-21934-1-git-send-email-mchazaux@adeneo-embedded.com>
+	<20100331204928.GB14197@gmail.com> <4BB43A16.2040708@fqingenieria.es>
+Date: Thu, 1 Apr 2010 14:15:11 +0200
+X-Google-Sender-Auth: 74bc3ea29521d51e
+Received: by 10.213.50.141 with SMTP id z13mr408972ebf.70.1270124111957; Thu, 
+	01 Apr 2010 05:15:11 -0700 (PDT)
+Message-ID: <p2xbc36f8ed1004010515j685306c9kc58c3b2647dc66da@mail.gmail.com>
+From: Mickael Chazaux <mchazaux@adeneo-embedded.com>
+To: Jaume Ribot <jaume@fqingenieria.es>
+X-SA-Exim-Connect-IP: 209.85.219.211
+X-SA-Exim-Mail-From: mickael.chazaux@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] package.bbclass: Make sure that when "file" fails, a forced strip will still strip.
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] Add Freescale i.MX25 3stack support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,33 +57,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 11:30:30 -0000
-X-Groupsio-MsgNum: 18327
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="J2SCkAp4GZ/dPZZf"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 01 Apr 2010 12:18:29 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
---J2SCkAp4GZ/dPZZf
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Hi,
 
-Of course this only matters when something else is wrong, but the
-existing code that tries to check the output of a failed "file" command
-is even more wrong. ;-)
+2010/4/1 Jaume Ribot <jaume@fqingenieria.es>:
+> Thanks for patch! I will try it.
+> Just a comment: Any reason for not using last Freescale Linux version?
+> (2.6.31)
 
-Marc
+I will resubmit a patch using this version.
 
---J2SCkAp4GZ/dPZZf
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
+Regards,
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Mickael CHAZAUX
 
-iEYEARECAAYFAku0gxEACgkQezjnobFOgrFRwACfflD/y7BxvvMjeQpfW2LCu85d
-uAcAnj6SMULLsOzMkXj2v+1CowHb9+Eg
-=dM5U
------END PGP SIGNATURE-----
+Adeneo Embedded - Adetel Group
+2, chemin du Ruisseau
+69134 ECULLY - FRANCE
+T=C3=A9l. : +33 (0)4 72 18 08 40 - Fax : +33 (0)4 72 18 08 41
 
---J2SCkAp4GZ/dPZZf--
+
