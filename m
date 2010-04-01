@@ -1,38 +1,43 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1NxKqa-0004SV-11
+Received: from fg-out-1718.google.com ([72.14.220.155])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <martin.jansa@gmail.com>) id 1NxM6f-0002me-QI
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 15:54:12 +0200
-Received: (qmail 14973 invoked by uid 503); 1 Apr 2010 13:48:22 -0000
-Received: from b7.ovh.net (HELO mail409.ha.ovh.net) (213.186.33.57)
-	by 63.mail-out.ovh.net with SMTP; 1 Apr 2010 13:48:22 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 1 Apr 2010 13:44:17 -0000
-Received: from cug31-2-82-228-86-110.fbx.proxad.net (HELO ?192.168.0.2?)
-	(ebenard%eukrea.com@82.228.86.110)
-	by ns0.ovh.net with SMTP; 1 Apr 2010 13:44:16 -0000
-Message-ID: <4BB4A32F.8070007@eukrea.com>
-Date: Thu, 01 Apr 2010 15:44:15 +0200
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.1.8) Gecko/20100227 Thunderbird/3.0.3
-MIME-Version: 1.0
+	Thu, 01 Apr 2010 17:15:52 +0200
+Received: by fg-out-1718.google.com with SMTP id 19so366309fgg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Apr 2010 08:11:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:message-id:x-mailer;
+	bh=TN2N41/Uv9XuDR2Ebji3lJoVHFuA4SWbHukKwTg2Smw=;
+	b=gkftPvhSU0Rw4vZtIH3ltFK6qwqASRYryIUAypNI84qdTXn7C4w7ij4Y2jklvXns05
+	DQuxgbnrw0/G8P4x0kB/jgqG/2kZpqwGOZLhEHw6W/ZuxR9FEkDFCS0cqngBnGFlBTfL
+	V4s6Tr6tcb4ObS3+kQPvCZW/Sm7GZFcl7bY+c=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer;
+	b=JvpDEQftTYtygurpK17ItogPGrUyUHHYWKscWktnNP17IsR0DB2wrG1XQzlmNdvGy6
+	9mbi+/JTx78vGOQHiLSzxD8rbc2ixq/TevM4R8+Jm1eeIBpVFiTCsoNr6iBEfDpXbAdB
+	GlSAOgK0+QT0V8KOCp4RhpQAk0u7JFo9ewdUA=
+Received: by 10.87.70.7 with SMTP id x7mr2171209fgk.77.1270134699229;
+	Thu, 01 Apr 2010 08:11:39 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 16sm5658384fxm.12.2010.04.01.08.11.38
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 01 Apr 2010 08:11:38 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1269935184-21934-1-git-send-email-mchazaux@adeneo-embedded.com>	<20100331204928.GB14197@gmail.com>
-	<o2hbc36f8ed1004010253k464e88d7j99e74a4fa1104bac@mail.gmail.com>
-In-Reply-To: <o2hbc36f8ed1004010253k464e88d7j99e74a4fa1104bac@mail.gmail.com>
-X-Ovh-Tracer-Id: 11758617152308948297
-X-Ovh-Remote: 82.228.86.110 (cug31-2-82-228-86-110.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.56
-X-SA-Exim-Mail-From: eric@eukrea.com
+Date: Thu,  1 Apr 2010 17:11:49 +0200
+Message-Id: <1270134711-32158-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.0.3
+X-SA-Exim-Connect-IP: 72.14.220.155
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add Freescale i.MX25 3stack support
+Subject: sane-srcrevs.inc: moving all svn SRCREVs to recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,19 +51,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 13:54:12 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 01 Apr 2010 15:15:59 -0000
 
-Le 01/04/2010 11:53, Mickael Chazaux a écrit :
-> Using the patch command, the LTIB patches did not apply on top of 2.6.28.10.
-> That is why I used 2.6.28. But I just tested and the patches seems to
-> apply cleanly using git. I'll test
-> this a bit more and let you know.
->
-you just need to use git am to apply all the LTIB patch serie and this 
-works fine.
+Hi,
 
-Eric
+as already said here, global files are common place for conflicts and SRCREV
+belongs to recipe metadata.
+
+This 2 patches are moving all SRCREVs for svn recipes, with some cleanup in few
+places, like renamed package to show it's from svn, or unified PV to contain
++svnr${SRCPV}.
+
+Please ACK or NACK soon as this gets conflicts soon. If there is no NACK in 20 
+hours I would like to push it. Thanks
+
+Regards,
+
+BTW: git SRCREVs weren't moved to recipes only because I'm maintaining SRCPV 
+branch and I don't want even more conflicts, I'll move the rest as soon as SRCPV
+is allowed in oe.dev branch for git recipes (please....).
+
 
 
