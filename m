@@ -1,44 +1,42 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from smtp-out116.alice.it ([85.37.17.116])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1NxJgJ-0004cs-MO
+	(envelope-from <ospite@studenti.unina.it>) id 1NxKKO-00083G-D7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 14:39:40 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 2EF6411001C2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Apr 2010 14:36:01 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 2CFDE11000EA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Apr 2010 14:36:00 +0200 (CEST)
-Received: from rhein.familie-heinold.de (g225074135.adsl.alicedsl.de
-	[92.225.74.135]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Apr 2010 14:36:00 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 1238B3C09D; Thu,  1 Apr 2010 14:35:59 +0200 (CEST)
-Date: Thu, 1 Apr 2010 14:35:59 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Thu, 01 Apr 2010 15:20:57 +0200
+Received: from FBCMMO01.fbc.local ([192.168.68.195]) by smtp-out116.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 1 Apr 2010 15:16:37 +0200
+Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO01.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 1 Apr 2010 15:16:36 +0200
+Received: from jcn ([87.1.14.30]) by FBCMCL01B07.fbc.local with Microsoft
+	SMTPSVC(6.0.3790.3959); Thu, 1 Apr 2010 15:16:34 +0200
+Received: from ao2 by jcn with local (Exim 4.71)
+	(envelope-from <ospite@studenti.unina.it>)
+	id 1NxKG9-0005W0-EV; Thu, 01 Apr 2010 15:16:33 +0200
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100401123558.GA20218@rhein.zuhause.netz>
-References: <1270119942-11215-1-git-send-email-zlo@zlo.nu>
-	<1270120375-11311-1-git-send-email-zlo@zlo.nu>
-MIME-Version: 1.0
-In-Reply-To: <1270120375-11311-1-git-send-email-zlo@zlo.nu>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+Date: Thu,  1 Apr 2010 15:16:23 +0200
+Message-Id: <1270127783-21172-1-git-send-email-ospite@studenti.unina.it>
+X-Mailer: git-send-email 1.7.0.3
+In-Reply-To: <20100330122319.f0e46761.ospite@studenti.unina.it>
+References: <20100330122319.f0e46761.ospite@studenti.unina.it>
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+X-OriginalArrivalTime: 01 Apr 2010 13:16:34.0975 (UTC)
+	FILETIME=[8DA1EAF0:01CAD19D]
+X-SA-Exim-Connect-IP: 85.37.17.116
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] freetype 2.3.5/2.3.6: Import GetDescender() fix
+Cc: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+Subject: [PATCH] frameworkd-config-shr: fix a nasty typo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,19 +50,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 12:39:40 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 01 Apr 2010 13:20:57 -0000
 
-On Thu, Apr 01, 2010 at 01:12:54PM +0200, Marc Olzheim wrote:
-> [PATCH] freetype 2.3.5/2.3.6: Import GetDescender() fix from Savannah from
-> ftcalc.c 1.79 for Savannah bug report #23556.
-> 
-> This was fixed by freetype a month after the release of 2.3.6.
+A misplaced '-' instead of '_' made bitbake conditional appending fail,
+resulting in fso-abyss being added unconditionally to runtime
+dependencies.
 
-Thanks for the patch, but it's maybee better to update freetype
-to a recent version.
+Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+---
+The problem was in frameworkd-config, which was provided also by
+frameworkd-config-shr, so here we are.
 
-Bye Henning
+This one seems to be the correct fix for:
+http://bugs.openembedded.org/show_bug.cgi?id=5385
+
+Please check also the English in the commit message, you never know :)
+
+Thanks,
+   Antonio Ospite
+   http://ao2.it
+
+frameworkd-config-shr:
+
+ recipes/shr/frameworkd-config-shr_git.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/recipes/shr/frameworkd-config-shr_git.bb b/recipes/shr/frameworkd-config-shr_git.bb
+index 3be7ceb..35c00de 100644
+--- a/recipes/shr/frameworkd-config-shr_git.bb
++++ b/recipes/shr/frameworkd-config-shr_git.bb
+@@ -66,7 +66,7 @@ PACKAGE_ARCH_${PN} = "${MACHINE_ARCH}"
+ # - recommend MUXer on platforms that require one
+ RDEPENDS_${PN}_append_om-gta01 = " fso-abyss"
+ RDEPENDS_${PN}_append_om-gta02 = " fso-abyss"
+-RDEPENDS_${PN}_append-om-3d7k  = " fso-abyss"
++RDEPENDS_${PN}_append_om-3d7k  = " fso-abyss"
+ # - add wmiconfig for wireless configuration
+ RDEPENDS_${PN}_append_om-gta02 = " wmiconfig"
+ 
+-- 
+1.7.0.3
+
 
 
