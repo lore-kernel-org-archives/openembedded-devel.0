@@ -1,31 +1,49 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from qw-out-1920.google.com ([74.125.92.148])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1NxRyq-0000Se-Jt
+	(envelope-from <raj.khem@gmail.com>) id 1NxRzV-0000xj-QX
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 23:31:17 +0200
-Received: (qmail 19500 invoked by uid 1003); 1 Apr 2010 21:27:54 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 1 Apr 2010 21:27:54 -0000
-Message-ID: <4BB50FD7.8010207@balister.org>
-Date: Thu, 01 Apr 2010 17:27:51 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.8) Gecko/20100301 Fedora/3.0.3-1.fc11 Thunderbird/3.0.3
-MIME-Version: 1.0
+	Thu, 01 Apr 2010 23:31:57 +0200
+Received: by qw-out-1920.google.com with SMTP id 4so480239qwk.36
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Apr 2010 14:28:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=eICPjIOckBVZTQ2UBzdq3rIQbYt/BHrviQ+q09Nxow8=;
+	b=A3WpPBatD9WX/VwOm68mXprwKyy50D4fxSEZ1Jh8c0OB8LpH/foT8KQdur5i7nCepd
+	aEYnTg6yzGL5MwezpRmw8JaodDkL0K9GgLSbWdATVSL70WeYe+ZfE9OPx72kN23YNTjy
+	bMTzcWmLIIkDoErxdTJ3fWVyR2wPdjqjQP+yk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=rL9gScCvW4xLUOxreJ2VVTIIa/RQnYAK7z6ZM47tbZdyT9ate7RgLF5qqCqpn3PmEM
+	0jcrcLypXK16fGQztNh67QfV9CN3GIhLIeLEWCZj0dBJjV6zrNcauIrYsuBy61Qo8YwO
+	8A6RHPIabu4xJaJLT+5JTxa56BP1TmDR2oABE=
+Received: by 10.229.222.205 with SMTP id ih13mr2269752qcb.73.1270157317579;
+	Thu, 01 Apr 2010 14:28:37 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id y41sm10225qce.23.2010.04.01.14.28.36
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 01 Apr 2010 14:28:36 -0700 (PDT)
+Date: Thu, 1 Apr 2010 14:29:31 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1270135981.4993.128.camel@rex>	<hp2mls$3go$1@dough.gmane.org>	<y2wb6ebd0a51004011303p88039e2bj34a31dd88b2e0ac3@mail.gmail.com>	<1270154092.6277.132.camel@trini-m4400>
-	<hp3209$de1$1@dough.gmane.org>
-In-Reply-To: <hp3209$de1$1@dough.gmane.org>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+Message-ID: <20100401212931.GB5580@gmail.com>
+References: <1270152215-17642-1-git-send-email-khimov@altell.ru>
+MIME-Version: 1.0
+In-Reply-To: <1270152215-17642-1-git-send-email-khimov@altell.ru>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 74.125.92.148
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Koen Kooi <k.kooi@student.utwente.nl>
-Subject: Re: Request for branch merge
+Subject: Re: [PATCH 1/2] gd: add gd-ft recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,47 +57,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 21:31:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 01 Apr 2010 21:31:57 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 04/01/2010 05:08 PM, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 01-04-10 22:34, Tom Rini wrote:
->> On Thu, 2010-04-01 at 13:03 -0700, Chris Larson wrote:
->>> On Thu, Apr 1, 2010 at 10:55 AM, Koen Kooi<k.kooi@student.utwente.nl>wrote:
->>>
->>>> -----BEGIN PGP SIGNED MESSAGE-----
->>>> Hash: SHA1
->>>>
->>>> On 01-04-10 17:33, Richard Purdie wrote:
->>>>
->>>>> I could post the patches individually and get Acked lines for each one
->>>>> but I'm hoping to avoid that and get permission to merge the branch
->>>>> directly. We have talked about most of these things in one form or
->>>>> another.
->>>>
->>>> I don't think this will get serious review people other than Tom, Khem
->>>> and Chris, so if they don't have huge objections, merge it and we'll
->>>> deal with the fallout together if needed.
->>>
->>>
->>> I agree with Koen on this, it's a definite improvement. Let's get it merged
->>> and deal with any fallout from there.
->>
->> Generally yes, and just a few things to hash out over the weekend I
->> think.
->
-> I'm going to steal Chris' thunder a bit, but during the TSC meeting we
-> agreed that "after the weekend" would be a better time to merge it than
-> "now". Dealing with the fallout required lots of attention, which boils
-> down to "office hours" for most of the involved.
+On (02/04/10 00:03), Roman I Khimov wrote:
+> GD with Freetype support, this kind of setup is needed for some
+> packages like sarg. If needed, choose with
+> 
+> PREFERRED_PROVIDER_gd = "gd-ft"
 
-Thanks. I know the people who do work on OE over the weekends appreciate 
-this.
+seems fine. It would be nice if there was a way to enable some features
+in recipes thru DISTRO_FEATURES or some such.
 
-Philip
+> 
+> Signed-off-by: Roman I Khimov <khimov@altell.ru>
+
+Acked-by: Khem Raj <raj.khem@gmail.com>
+
+> ---
+>  recipes/gd/gd-ft_2.0.35+2.0.36rc1.bb |    8 ++++++++
+>  1 files changed, 8 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/gd/gd-ft_2.0.35+2.0.36rc1.bb
+> 
+> diff --git a/recipes/gd/gd-ft_2.0.35+2.0.36rc1.bb b/recipes/gd/gd-ft_2.0.35+2.0.36rc1.bb
+> new file mode 100644
+> index 0000000..174bbe6
+> --- /dev/null
+> +++ b/recipes/gd/gd-ft_2.0.35+2.0.36rc1.bb
+> @@ -0,0 +1,8 @@
+> +include gd_${PV}.bb
+> +
+> +DEPENDS += "freetype"
+> +
+> +PROVIDES = "gd"
+> +RPROVIDES_${PN} = "gd"
+> +
+> +EXTRA_OECONF += "--with-freetype"
+> \ No newline at end of file
+> -- 
+> 1.6.4.2
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
