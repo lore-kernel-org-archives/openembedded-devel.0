@@ -1,41 +1,32 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NxNOt-0005Ui-BX
+Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gary@mlbassoc.com>) id 1NxNRu-0000np-1k
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 18:37:47 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31GYVSI023314
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 1 Apr 2010 17:34:31 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 23138-04 for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Apr 2010 17:34:27 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31GYQM3023304
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 1 Apr 2010 17:34:27 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	Thu, 01 Apr 2010 18:40:59 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 40A6116604CA; Thu,  1 Apr 2010 10:37:38 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 84987166059D;
+	Thu,  1 Apr 2010 10:37:37 -0600 (MDT)
+Message-ID: <4BB4CBD1.2050803@mlbassoc.com>
+Date: Thu, 01 Apr 2010 10:37:37 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.8) Gecko/20100301 Fedora/3.0.3-1.fc11 Thunderbird/3.0.3
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1270137923.6277.101.camel@trini-m4400>
-References: <E1NxJrs-0006SS-LZ@melo.openembedded.org>
-	<1270137923.6277.101.camel@trini-m4400>
-Date: Thu, 01 Apr 2010 17:34:25 +0100
-Message-ID: <1270139665.4993.152.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+References: <1270135981.4993.128.camel@rex>
+In-Reply-To: <1270135981.4993.128.camel@rex>
+X-SA-Exim-Connect-IP: 76.76.67.137
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Joshua Lock : packaged-staging: post-process non-binary files to fix paths packages
+Cc: "Lock, Joshua" <joshua.lock@intel.com>
+Subject: Re: Request for branch merge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,42 +40,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 16:37:47 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 01 Apr 2010 16:40:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2010-04-01 at 09:05 -0700, Tom Rini wrote:
-> On Thu, 2010-04-01 at 12:51 +0000, git version control wrote:
-> > Module: openembedded.git
-> > Branch: rpurdie/work-in-progress
-> > Commit: 5df536641049c5af6413e410aa20bb97880fe897
-> > URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=5df536641049c5af6413e410aa20bb97880fe897
-> > 
-> > Author: Joshua Lock <josh@linux.intel.com>
-> > Date:   Wed Mar 31 11:22:02 2010 +0100
-> > 
-> > packaged-staging: post-process non-binary files to fix paths packages
-> > 
-> > Add tooling from Poky to scan packages and fix up paths in libtool files, we
-> > then build on this to further post-process native packages (native, cross, sdk)
-> > and fix up any references to the STAGING_DIR in non-binary files.
-> > 
-> > Signed-off-by: Joshua Lock <josh@linux.intel.com>
-> 
-> There's a lot more than just .la files that get these paths wrong.  If
-> you use the scan_cmd you set on native/etc for everything you can fix
-> them all up.
+On 04/01/2010 09:33 AM, Richard Purdie wrote:
+> I've been aware that Poky and OE have been diverging slightly and I'd
+> like to correct this. There are some patches that I've promised for a
+> while too such as the rename from do_populate_staging ->
+> do_populate_sysroot.
+>
+> With some help from Joshua Lock, I have a branch I'd like to propose be
+> merged into OE.dev:
+>
+> http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=rpurdie/work-in-progress
 
-It scans everything for -native packages and just .la files for target
-packages. I'd argue that for target packages we're better off fixing the
-problems at source since the real target packages are probably also
-bust?
+Not much luck with this I'm afraid.
+   MACHINE=efika
+   DISTRO="angstrom-2008.1"
 
-Cheers,
+ERROR: '/local/Angstrom_BeagleBoard/openembedded/recipes/shasum/shasum-native.bb' failed
+NOTE: package shasum-native-1.0-r1: task do_qa_configure: Started
+ERROR: Error in executing python function in: /local/Angstrom_BeagleBoard/openembedded/recipes/shasum/shasum-native.bb
+ERROR: Exception:<type 'exceptions.NameError'> Message:global name 'configs' is not defined
+ERROR: Printing the environment of the function
+ERROR:  0021:       else:
+ERROR:  0022:          gt = "gettext"
+ERROR:  0023:       deps = bb.utils.explode_deps(bb.data.getVar('DEPENDS', d, True) or "")
+ERROR:  0024:       if gt not in deps:
+ERROR:  0025:          for config in configs:
+ERROR:  0026:              gnu = "grep \"^[[:space:]]*AM_GNU_GETTEXT\" %s >/dev/null" % config
+ERROR:  0027:              if os.system(gnu) == 0:
+ERROR:  0028:                 bb.note("""Gettext required but not in DEPENDS for file %s.
+ERROR:  0029:Missing inherit gettext?""" % config)
+ERROR: Function do_qa_configure failed
+NOTE: Task failed: ('function do_qa_configure failed', '/local/Angstrom_BeagleBoard/tmp/work/i686-linux/shasum-native-1.0-r1/temp/log.do_qa_configure.24200')
+ERROR: Logfile of failure stored in: /local/Angstrom_BeagleBoard/tmp/work/i686-linux/shasum-native-1.0-r1/temp/log.do_qa_configure.24200
+Log data follows:
+| ERROR: Error in executing python function in: /local/Angstrom_BeagleBoard/openembedded/recipes/shasum/shasum-native.bb
+| ERROR: Exception:<type 'exceptions.NameError'> Message:global name 'configs' is not defined
+| ERROR: Printing the environment of the function
+| ERROR:        0021:       else:
+| ERROR:        0022:          gt = "gettext"
+| ERROR:        0023:       deps = bb.utils.explode_deps(bb.data.getVar('DEPENDS', d, True) or "")
+| ERROR:        0024:       if gt not in deps:
+| ERROR:        0025:          for config in configs:
+| ERROR:        0026:              gnu = "grep \"^[[:space:]]*AM_GNU_GETTEXT\" %s >/dev/null" % config
+| ERROR:        0027:              if os.system(gnu) == 0:
+| ERROR:        0028:                 bb.note("""Gettext required but not in DEPENDS for file %s.
+| ERROR:        0029:Missing inherit gettext?""" % config)
+| ERROR: Function do_qa_configure failed
+NOTE: package shasum-native-1.0-r1: task do_qa_configure: Failed
+ERROR: TaskFailed event exception, aborting
 
-Richard
+I tried this with bitbake-1.8.18 and the version from Poky mainline.
 
-
-
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
