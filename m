@@ -1,29 +1,36 @@
-Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcolz@zlo.nu>) id 1NxMR8-0003sW-ET
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NxMRX-0001Wk-RQ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 17:36:02 +0200
-Received: by mzh.zlo.nu (Postfix, from userid 1000)
-	id A2B3E140B0; Thu,  1 Apr 2010 17:32:43 +0200 (CEST)
-Date: Thu, 1 Apr 2010 17:32:43 +0200
-From: Marc Olzheim <zlo@zlo.nu>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100401153243.GA1950@zlo.nu>
-References: <1270119942-11215-1-git-send-email-zlo@zlo.nu>
-	<1270120375-11311-1-git-send-email-zlo@zlo.nu>
-	<20100401123558.GA20218@rhein.zuhause.netz>
-MIME-Version: 1.0
-In-Reply-To: <20100401123558.GA20218@rhein.zuhause.netz>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 85.17.141.90
-X-SA-Exim-Mail-From: marcolz@zlo.nu
+	Thu, 01 Apr 2010 17:36:28 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31FX98m022716;
+	Thu, 1 Apr 2010 16:33:09 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 22632-02; Thu,  1 Apr 2010 16:33:05 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o31FX2F8022710
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 1 Apr 2010 16:33:02 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Thu, 01 Apr 2010 16:33:01 +0100
+Message-ID: <1270135981.4993.128.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] freetype 2.3.5/2.3.6: Import GetDescender() fix
+Cc: "Lock, Joshua" <joshua.lock@intel.com>
+Subject: Request for branch merge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,44 +44,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 15:36:02 -0000
-X-Groupsio-MsgNum: 18338
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="YiEDa0DAkWCtVeE4"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 01 Apr 2010 15:36:29 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
---YiEDa0DAkWCtVeE4
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I've been aware that Poky and OE have been diverging slightly and I'd
+like to correct this. There are some patches that I've promised for a
+while too such as the rename from do_populate_staging ->
+do_populate_sysroot.
 
-On Thu, Apr 01, 2010 at 02:35:59PM +0200, Henning Heinold wrote:
-> On Thu, Apr 01, 2010 at 01:12:54PM +0200, Marc Olzheim wrote:
-> > [PATCH] freetype 2.3.5/2.3.6: Import GetDescender() fix from Savannah f=
-rom
-> > ftcalc.c 1.79 for Savannah bug report #23556.
-> >=20
-> > This was fixed by freetype a month after the release of 2.3.6.
->=20
-> Thanks for the patch, but it's maybee better to update freetype
-> to a recent version.
+With some help from Joshua Lock, I have a branch I'd like to propose be
+merged into OE.dev:
 
-Yes, but as long as 2.3.5 and 2.3.6 are in the tree (and we use them), I
-might as well share the patches for them. ;-)
+http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=rpurdie/work-in-progress
 
-Marc
+This branch:
 
---YiEDa0DAkWCtVeE4
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
+* Renames do_populate_staging -> do_populate_sysroot as per previous 
+  staging discussion emails and also the staging directory -> 
+  sysroots. It should convert existing builds safely and insert a 
+  compatibility symlink. This continues the process of improving our 
+  "staging" concept into one focused around true sysroots.
+* Adds some gettext class sanity checks. In Poky this error is fatal, 
+  for OE this is just a note for now. The idea being if AM_GNU_GETTEXT 
+  is in configure.ac and gettext in some form isn't in DEPENDS, 
+  something is wrong.
+* Added relocatable binary processing from Poky for -native binaries 
+  using chrpath. This isn't enabled for -cross packages due to the 
+  relative path length problems.
+* Added packaged-staging fetching capabilities. This uses new mirror 
+  handling abilities in bitbake master branch but should work with older
+  bitbakes, just with less functionality.
+* Started moving gcc dependency information into core gcc version 
+  specific includes as part of the gcc cleanup.
+* Converted gcc to use the new style staging
+* Added EXTRA_OECONF_INITIAL and EXTRA_OECONF_INTERMEDIATE variables to 
+  gcc as part of the gcc cleanup
+* Converted binutils, modutils-cross, glibc and gdb to new style staging
+* Cleaned up the gcc-cross do_install function a lot
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Along with a small number of other tweaks spotted along the way.
 
-iEYEARECAAYFAku0vJsACgkQezjnobFOgrEKPACfbA6/SkZTVNDeIBFAnAWetzKZ
-3DMAnRKnyjG46ZlVswPS2Ka2kcj1XOlF
-=iUrj
------END PGP SIGNATURE-----
+I could post the patches individually and get Acked lines for each one
+but I'm hoping to avoid that and get permission to merge the branch
+directly. We have talked about most of these things in one form or
+another.
 
---YiEDa0DAkWCtVeE4--
+Cheers,
+
+Richard
+
+
+
