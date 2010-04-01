@@ -1,41 +1,43 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NxMbm-0004JX-I4
+	(envelope-from <raj.khem@gmail.com>) id 1NxMek-0004Sh-8u
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 17:47:03 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NxMYa-0006Ai-T0 from Tom_Rini@mentor.com ;
-	Thu, 01 Apr 2010 08:43:44 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 1 Apr 2010 08:43:44 -0700
-Received: from 172.30.80.170 ([172.30.80.170]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Thu,  1 Apr 2010 15:43:32 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	01 Apr 2010 08:43:29 -0700
-From: Tom Rini <tom_rini@mentor.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1270136509.6277.97.camel@trini-m4400>
+	Thu, 01 Apr 2010 17:50:07 +0200
+Received: by pwj5 with SMTP id 5so1052307pwj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Apr 2010 08:46:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:received:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=cKMy5jP6zv3JwVusG0LVzv3IlS5oKC6e2eTaCvwM8jo=;
+	b=KG2x8DbaPiLJg9ptvCCnC+dSKMk1oNcUoGZq7TszvLku6RexdRZY9fQILBlAW6VyFi
+	tp2TJ6Udz5GAFZ1V11NkbQM+3NICrcbL+afxj/IPHjsQiOpUX7Eu8zpklmytTk7VOIR1
+	Gxmd0Op2YOqsJLtMA4D/L9HEtUg5G1fdIQmGk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=AoyvmXweelKP/VhorIz6kP6jMhLG28bZdp/ahC+s9CzKf7Nxj4teZyX3zvZEy2clbN
+	akvtoAyy0hLmRfZBZZgkViD1zloODjArWGiQkal+/Ba4oa2+rgLTx/YCczBOcoUmKLaJ
+	Px2HJba00Hfq0J/4l2F59bKd65WLULFNU3c3M=
+MIME-Version: 1.0
+Received: by 10.231.16.77 with HTTP; Thu, 1 Apr 2010 08:46:48 -0700 (PDT)
+In-Reply-To: <1270135981.4993.128.camel@rex>
 References: <1270135981.4993.128.camel@rex>
-	<1270136509.6277.97.camel@trini-m4400>
-Organization: Mentor Graphics Corporation
-Date: Thu, 01 Apr 2010 08:43:29 -0700
-Message-ID: <1270136609.6277.98.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 01 Apr 2010 15:43:44.0739 (UTC)
-	FILETIME=[1C94FB30:01CAD1B2]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Thu, 1 Apr 2010 08:46:48 -0700
+Received: by 10.114.86.3 with SMTP id j3mr1337640wab.177.1270136808682; Thu, 
+	01 Apr 2010 08:46:48 -0700 (PDT)
+Message-ID: <h2n19c1b8a91004010846u8f936157z252190a0f6a6b6e4@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: "Lock, Joshua" <joshua.lock@intel.com>
 Subject: Re: Request for branch merge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -50,37 +52,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 15:47:03 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 01 Apr 2010 15:50:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2010-04-01 at 08:41 -0700, Tom Rini wrote:
-> On Thu, 2010-04-01 at 16:33 +0100, Richard Purdie wrote:
->=20
-> > * Added relocatable binary processing from Poky for -native binaries=20
-> >   using chrpath. This isn't enabled for -cross packages due to the=20
-> >   relative path length problems.
->=20
-> Is there a reason to not use $ORIGIN here instead?  The patch Chris
-> Larson posted ages ago does get this right (the hard part is
-> gcc/gdb/binutils due to the multi configure running).  And any path
-> length issues you hit with -cross you should be able to hit with
-> -native, no?
+On Thu, Apr 1, 2010 at 8:33 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> I've been aware that Poky and OE have been diverging slightly and I'd
+> like to correct this. There are some patches that I've promised for a
+> while too such as the rename from do_populate_staging ->
+> do_populate_sysroot.
+>
+> With some help from Joshua Lock, I have a branch I'd like to propose be
+> merged into OE.dev:
+>
+> http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=3Drpurdie/work-=
+in-progress
+>
+> This branch:
+>
+> * Renames do_populate_staging -> do_populate_sysroot as per previous
+> =A0staging discussion emails and also the staging directory ->
+> =A0sysroots. It should convert existing builds safely and insert a
+> =A0compatibility symlink. This continues the process of improving our
+> =A0"staging" concept into one focused around true sysroots.
+> * Adds some gettext class sanity checks. In Poky this error is fatal,
+> =A0for OE this is just a note for now. The idea being if AM_GNU_GETTEXT
+> =A0is in configure.ac and gettext in some form isn't in DEPENDS,
+> =A0something is wrong.
+> * Added relocatable binary processing from Poky for -native binaries
+> =A0using chrpath. This isn't enabled for -cross packages due to the
+> =A0relative path length problems.
+> * Added packaged-staging fetching capabilities. This uses new mirror
+> =A0handling abilities in bitbake master branch but should work with older
+> =A0bitbakes, just with less functionality.
+> * Started moving gcc dependency information into core gcc version
+> =A0specific includes as part of the gcc cleanup.
+> * Converted gcc to use the new style staging
+> * Added EXTRA_OECONF_INITIAL and EXTRA_OECONF_INTERMEDIATE variables to
+> =A0gcc as part of the gcc cleanup
+> * Converted binutils, modutils-cross, glibc and gdb to new style staging
+> * Cleaned up the gcc-cross do_install function a lot
+>
+> Along with a small number of other tweaks spotted along the way.
+>
+> I could post the patches individually and get Acked lines for each one
+> but I'm hoping to avoid that and get permission to merge the branch
+> directly. We have talked about most of these things in one form or
+> another.
+>
 
-For reference it's just doing:
-export RELATIVERPATH =3D "${@base_path_relative(d.getVar('bindir', 1),
-d.getVar('STAGING_LIBDIR_NATIVE', 1))}"
-export BUILD_LDFLAGS =3D "-L${STAGING_LIBDIR_NATIVE} \
-                        -Wl,-rpath,\\\$\$ORIGIN/${RELATIVERPATH} -Wl,-O1
-\
-                        -Wl,-rpath,${STAGING_LIBDIR_NATIVE} -Wl,-O1 \
-                        "
-
-In bitbake.conf (extra variable for dealing with the hard packages
-later).
-
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+Looks good stuff.
+I would have preferred to have eglibc also converted to new style
+staging if possible but can be done afterwards too.
 
 
