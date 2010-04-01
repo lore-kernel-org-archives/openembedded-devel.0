@@ -1,47 +1,24 @@
-Received: from mail-qy0-f189.google.com ([209.85.221.189])
+Received: from [93.100.16.104] (helo=mate.hex)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1NxQfJ-0004fn-1I
+	(envelope-from <rik@mate.hex>) id 1NxQi8-0004qE-Ka
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 22:06:57 +0200
-Received: by qyk27 with SMTP id 27so1682163qyk.23
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Apr 2010 13:03:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:sender:received:in-reply-to
-	:references:from:date:x-google-sender-auth:received:message-id
-	:subject:to:content-type;
-	bh=JlKb9OS9Kp0s2OJdzTtA0inRh8iVNbI0lab1oNcmgdw=;
-	b=LWdqDL6bpcVufE1mO0NsL7k1YZDcghlZQSTUf5kVsTcZpLHWjYimmHHjeMYUaguOZH
-	3io9hxmoLjXFyfmUJEEwhj4k42kkNWthys1xROsmZOcXt62L/zutxwRfRX0FCKMaDrbD
-	BOntas/85v0r7i6b0kEpE5qZpY761878trq8k=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=iaAGQCCNYHhohnPKzfh+baij9tVYGrtAfMFqiODxKnbvgAPUf9z6yyTNGowHpcmRYc
-	G6ZR87+zadyZKRUBU8nCjy8baoG1qmPYsUEYsiEkGoDcq2nlLYTcxJVWBBH70KkzYNya
-	qe6J9+zd7tbcdrV9GJ4t+frG14cv5AD4Vshh0=
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.232.131 with HTTP; Thu, 1 Apr 2010 13:03:13 -0700 (PDT)
-In-Reply-To: <hp2mls$3go$1@dough.gmane.org>
-References: <1270135981.4993.128.camel@rex> <hp2mls$3go$1@dough.gmane.org>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 1 Apr 2010 13:03:13 -0700
-X-Google-Sender-Auth: e9efb4e2a88b0c68
-Received: by 10.229.184.130 with SMTP id ck2mr1816327qcb.95.1270152213414; 
-	Thu, 01 Apr 2010 13:03:33 -0700 (PDT)
-Message-ID: <y2wb6ebd0a51004011303p88039e2bj34a31dd88b2e0ac3@mail.gmail.com>
+	Thu, 01 Apr 2010 22:09:53 +0200
+Received: by mate.hex (Postfix, from userid 1000)
+	id 1B2C923C49; Fri,  2 Apr 2010 00:03:36 +0400 (MSD)
+From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.221.189
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Date: Fri,  2 Apr 2010 00:03:34 +0400
+Message-Id: <1270152215-17642-1-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.6.4.2
+X-SA-Exim-Connect-IP: 93.100.16.104
+X-SA-Exim-Mail-From: rik@mate.hex
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.1 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
+	RCVD_IN_PBL,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Request for branch merge
+Subject: [PATCH 1/2] gd: add gd-ft recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,32 +32,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 20:06:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 01 Apr 2010 20:09:53 -0000
 
-On Thu, Apr 1, 2010 at 10:55 AM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
+GD with Freetype support, this kind of setup is needed for some
+packages like sarg. If needed, choose with
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 01-04-10 17:33, Richard Purdie wrote:
->
-> > I could post the patches individually and get Acked lines for each one
-> > but I'm hoping to avoid that and get permission to merge the branch
-> > directly. We have talked about most of these things in one form or
-> > another.
->
-> I don't think this will get serious review people other than Tom, Khem
-> and Chris, so if they don't have huge objections, merge it and we'll
-> deal with the fallout together if needed.
+PREFERRED_PROVIDER_gd = "gd-ft"
 
+Signed-off-by: Roman I Khimov <khimov@altell.ru>
+---
+ recipes/gd/gd-ft_2.0.35+2.0.36rc1.bb |    8 ++++++++
+ 1 files changed, 8 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/gd/gd-ft_2.0.35+2.0.36rc1.bb
 
-I agree with Koen on this, it's a definite improvement. Let's get it merged
-and deal with any fallout from there.
+diff --git a/recipes/gd/gd-ft_2.0.35+2.0.36rc1.bb b/recipes/gd/gd-ft_2.0.35+2.0.36rc1.bb
+new file mode 100644
+index 0000000..174bbe6
+--- /dev/null
++++ b/recipes/gd/gd-ft_2.0.35+2.0.36rc1.bb
+@@ -0,0 +1,8 @@
++include gd_${PV}.bb
++
++DEPENDS += "freetype"
++
++PROVIDES = "gd"
++RPROVIDES_${PN} = "gd"
++
++EXTRA_OECONF += "--with-freetype"
+\ No newline at end of file
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+1.6.4.2
+
+
 
