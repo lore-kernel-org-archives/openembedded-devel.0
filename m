@@ -1,41 +1,41 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from hsp-52.hspserver.com ([85.197.80.179])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ttkrpink@gmail.com>) id 1NxD0J-0000FT-E0
+	(envelope-from <ml@vdm-design.de>) id 1NxDPK-0003gf-9z
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 07:31:44 +0200
-Received: by gwj21 with SMTP id 21so638651gwj.6
+	Thu, 01 Apr 2010 07:57:34 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by hsp-52.hspserver.com (Postfix) with ESMTP id 06E29A2C3C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 31 Mar 2010 22:28:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:received:message-id
-	:subject:from:to:content-type;
-	bh=CMbCjDv8YOzaMv/ghB26L0nwCKEvhZERuSMrPs21aUo=;
-	b=ZtkYmGuO2I1OCagmY26vKOJt0PXdTxv04I49kXDDR3fhKAVYKcQBM/EjT7KPBX4Izh
-	y3Xlt/ArUjntETKgwsH7EMv7RjxY3wdk8mIGY9hZVrtn2Y7ruThBo1LprG6l4G0ZCN1G
-	jMKYjt78LrZRnLCN404uSt1VITpbIykepqWbU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=NtiyVCi0dI4Ix7JBoxMqy5u5cnynWygUnEXqTwOnM4yS8+GL8SPtyGOBlAICRfmei4
-	YLVo2ikBooPkjRL6wbEvAXiiMYvB/qPjvF97VsQ261EJL2H7R33CzwcIXKa00QEX/CLH
-	s/vvO6Avhptq23eFVMSq1HzMvko0jjwCji2XQ=
-MIME-Version: 1.0
-Received: by 10.100.110.17 with HTTP; Wed, 31 Mar 2010 22:28:25 -0700 (PDT)
-Date: Wed, 31 Mar 2010 23:28:25 -0600
-Received: by 10.101.51.16 with SMTP id d16mr1525897ank.36.1270099705864; Wed, 
-	31 Mar 2010 22:28:25 -0700 (PDT)
-Message-ID: <t2yd2a86f8e1003312228g46462ac4iac67f8d051aac7b1@mail.gmail.com>
-From: ttk rpink <ttkrpink@gmail.com>
+	Thu,  1 Apr 2010 07:54:21 +0200 (CEST)
+Received: from hsp-52.hspserver.com ([127.0.0.1])
+	by localhost (hsp-52.hspserver.com [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id iud3BTTWLiQm
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  1 Apr 2010 07:54:19 +0200 (CEST)
+Received: from tomboy.localnet (pD9E14E18.dip.t-dialin.net [217.225.78.24])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by hsp-52.hspserver.com (Postfix) with ESMTP id B2561A2C002
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  1 Apr 2010 07:54:19 +0200 (CEST)
+From: Thomas Zimmermann <ml@vdm-design.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: ttkrpink@gmail.com
+Date: Thu, 1 Apr 2010 07:54:18 +0200
+User-Agent: KMail/1.12.4 (Linux/2.6.33-1.slh.9-sidux-amd64; KDE/4.3.4; x86_64; ;
+	)
+References: <t2yd2a86f8e1003312228g46462ac4iac67f8d051aac7b1@mail.gmail.com>
+In-Reply-To: <t2yd2a86f8e1003312228g46462ac4iac67f8d051aac7b1@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201004010754.18182.ml@vdm-design.de>
+X-SA-Exim-Connect-IP: 85.197.80.179
+X-SA-Exim-Mail-From: ml@vdm-design.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.2 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: how to add wxpython
+Subject: Re: how to add wxpython
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,24 +49,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 05:31:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 01 Apr 2010 05:57:34 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-How can I add wxPython to my distribution?
-I have:
------------------
-export IMAGE_INSTALL += " \
-                hello \
-                python \
-                python-pygtk"
+Am Donnerstag 01 April 2010 07:28:25 schrieb ttk rpink:
+> How can I add wxPython to my distribution?
+> I have:
+> -----------------
+> export IMAGE_INSTALL += " \
+>                 hello \
+>                 python \
+>                 python-pygtk"
+> 
+> inherit image
+> 
+> export IMAGE_BASENAME = "mydistro-image"
+> ----------------
+> 
+> 
+> Thanks,
+> 
+> ttk
 
-inherit image
+There is no recipe for wxPython. I tried to make one, because it was requested 
+for SHR, but i failed.
+I archived my try here: http://trac.shr-project.org/trac/ticket/637#comment:1
+I don't know anymore why it failed but it wasn't a trivial thing...
+But i don't know what wxPython is and how it works, so perhaps someone with 
+some more experience about it is able to package it.
 
-export IMAGE_BASENAME = "mydistro-image"
-----------------
+Regards
+Thomas
 
-
-Thanks,
-
-ttk
 
