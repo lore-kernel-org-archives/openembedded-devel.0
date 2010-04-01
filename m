@@ -1,42 +1,42 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NxNbG-0002Ya-WA
+	(envelope-from <Tom_Rini@mentor.com>) id 1NxNix-0005B6-CM
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 18:50:36 +0200
+	Thu, 01 Apr 2010 18:58:56 +0200
 Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
 	by relay1.mentorg.com with esmtp 
-	id 1NxNXz-0003cK-8B from Tom_Rini@mentor.com ;
-	Thu, 01 Apr 2010 09:47:11 -0700
+	id 1NxNfm-0004eQ-2X from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Apr 2010 09:55:14 -0700
 Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
 	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 1 Apr 2010 09:47:10 -0700
+	SMTPSVC(6.0.3790.1830); Thu, 1 Apr 2010 09:55:13 -0700
 Received: from 172.30.80.170 ([172.30.80.170]) by NA1-MAIL.mgc.mentorg.com
 	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Thu,  1 Apr 2010 16:46:35 +0000
+	Thu,  1 Apr 2010 16:55:05 +0000
 Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	01 Apr 2010 09:46:32 -0700
+	01 Apr 2010 09:55:02 -0700
 From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1270137915.4993.137.camel@rex>
-References: <1270135981.4993.128.camel@rex>
-	<1270136509.6277.97.camel@trini-m4400> <1270137915.4993.137.camel@rex>
+In-Reply-To: <1270139665.4993.152.camel@rex>
+References: <E1NxJrs-0006SS-LZ@melo.openembedded.org>
+	<1270137923.6277.101.camel@trini-m4400> <1270139665.4993.152.camel@rex>
 Organization: Mentor Graphics Corporation
-Date: Thu, 01 Apr 2010 09:46:32 -0700
-Message-ID: <1270140392.6277.113.camel@trini-m4400>
+Date: Thu, 01 Apr 2010 09:55:02 -0700
+Message-ID: <1270140902.6277.123.camel@trini-m4400>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 01 Apr 2010 16:47:10.0390 (UTC)
-	FILETIME=[F8ED3D60:01CAD1BA]
+X-OriginalArrivalTime: 01 Apr 2010 16:55:13.0690 (UTC)
+	FILETIME=[18FEF7A0:01CAD1BC]
 X-SA-Exim-Connect-IP: 192.94.38.131
 X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,
-	MIME_QP_LONG_LINE autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: "Lock, Joshua" <joshua.lock@intel.com>
-Subject: Re: Request for branch merge
+Subject: Re: [oe-commits] Joshua Lock : packaged-staging: post-process non-binary files to fix paths packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,33 +50,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 16:50:37 -0000
+X-List-Received-Date: Thu, 01 Apr 2010 16:58:56 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2010-04-01 at 17:05 +0100, Richard Purdie wrote:
-> On Thu, 2010-04-01 at 08:41 -0700, Tom Rini wrote:
-> > On Thu, 2010-04-01 at 16:33 +0100, Richard Purdie wrote:
+On Thu, 2010-04-01 at 17:34 +0100, Richard Purdie wrote:
+> On Thu, 2010-04-01 at 09:05 -0700, Tom Rini wrote:
+> > On Thu, 2010-04-01 at 12:51 +0000, git version control wrote:
+> > > Module: openembedded.git
+> > > Branch: rpurdie/work-in-progress
+> > > Commit: 5df536641049c5af6413e410aa20bb97880fe897
+> > > URL:    http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcomm=
+it;h=3D5df536641049c5af6413e410aa20bb97880fe897
+> > >=20
+> > > Author: Joshua Lock <josh@linux.intel.com>
+> > > Date:   Wed Mar 31 11:22:02 2010 +0100
+> > >=20
+> > > packaged-staging: post-process non-binary files to fix paths packages
+> > >=20
+> > > Add tooling from Poky to scan packages and fix up paths in libtool fi=
+les, we
+> > > then build on this to further post-process native packages (native, c=
+ross, sdk)
+> > > and fix up any references to the STAGING_DIR in non-binary files.
+> > >=20
+> > > Signed-off-by: Joshua Lock <josh@linux.intel.com>
 > >=20
-> > > * Added relocatable binary processing from Poky for -native binaries=20
-> > >   using chrpath. This isn't enabled for -cross packages due to the=20
-> > >   relative path length problems.
-> >=20
-> > Is there a reason to not use $ORIGIN here instead?
+> > There's a lot more than just .la files that get these paths wrong.  If
+> > you use the scan_cmd you set on native/etc for everything you can fix
+> > them all up.
 >=20
-> This *is* using $$ORIGIN. We're just postprocessing to do the injection.
->=20
-> >   The patch Chris
-> > Larson posted ages ago does get this right (the hard part is
-> > gcc/gdb/binutils due to the multi configure running).
->=20
-> This class automatically handles all that without having all those
-> horrible escaped strings that are likely to break each time we change
-> versions or add new packages.
+> It scans everything for -native packages and just .la files for target
+> packages. I'd argue that for target packages we're better off fixing the
+> problems at source since the real target packages are probably also
+> bust?
 
-FWIW, the patch I use to make gcc/gdb/binutils work is actually
-identical between these three packages.  I don't think it breaking from
-version to version is a concern.
+Ah, hmm.  It's possibly just the .la files on the target (which some of
+us would like to see die and I can't argue against), I hadn't really
+bothered to differentiate (and I don't think it's a noticeable time
+diff).  Less logic also brings it closer to working for relocation of
+everything.
 
 --=20
 Tom Rini <tom_rini@mentor.com>
