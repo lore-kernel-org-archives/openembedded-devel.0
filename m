@@ -1,42 +1,49 @@
-Received: from smtp-out116.alice.it ([85.37.17.116])
+Received: from fg-out-1718.google.com ([72.14.220.155])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1NxKKO-00083G-D7
+	(envelope-from <martin.jansa@gmail.com>) id 1NxKPU-0000Im-VN
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 15:20:57 +0200
-Received: from FBCMMO01.fbc.local ([192.168.68.195]) by smtp-out116.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 1 Apr 2010 15:16:37 +0200
-Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO01.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 1 Apr 2010 15:16:36 +0200
-Received: from jcn ([87.1.14.30]) by FBCMCL01B07.fbc.local with Microsoft
-	SMTPSVC(6.0.3790.3959); Thu, 1 Apr 2010 15:16:34 +0200
-Received: from ao2 by jcn with local (Exim 4.71)
-	(envelope-from <ospite@studenti.unina.it>)
-	id 1NxKG9-0005W0-EV; Thu, 01 Apr 2010 15:16:33 +0200
-From: Antonio Ospite <ospite@studenti.unina.it>
+	Thu, 01 Apr 2010 15:26:13 +0200
+Received: by fg-out-1718.google.com with SMTP id e12so708567fga.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Apr 2010 06:22:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=Ln3F5qQY6INko0FmNMvoitrsQrilC0jou3SvNJHJVS4=;
+	b=qvleBClGwcwwTO800Ew8NavRQMc7vzLOfJ2hp8nxpzdc4GzII3AKZtktXOwxrhyDjc
+	tc2g2xxE13K71oVbXaYn5q9X0XrCMUcK6pgnfXUdkiusgXYh+l81Zn3rhmTnAVFBVKRm
+	AN6mHDHFA1giK3lwfNbLCGnHSL3DILoXhhM2A=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=EpEbowc5FcEsoEhrYh9PjQHrBEeYzqMf/64cIY7KORMuc2nNu981TigXAVHLU3TzYT
+	6HB0Tiqf8oEE0oTVkNIo1DSwyCjXg/k+5wTNipp6Wd7G6ZMEk1HjsHwafoiH7QAx4HRk
+	MIlAtHKzXMbiYOkwUn1Xv/pvf3vPufF7rAlC4=
+Received: by 10.86.239.33 with SMTP id m33mr2080932fgh.31.1270128178454;
+	Thu, 01 Apr 2010 06:22:58 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 14sm5630955fxm.5.2010.04.01.06.22.57
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 01 Apr 2010 06:22:57 -0700 (PDT)
+Date: Thu, 1 Apr 2010 15:23:12 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Apr 2010 15:16:23 +0200
-Message-Id: <1270127783-21172-1-git-send-email-ospite@studenti.unina.it>
-X-Mailer: git-send-email 1.7.0.3
-In-Reply-To: <20100330122319.f0e46761.ospite@studenti.unina.it>
+Message-ID: <20100401132312.GM25489@jama>
 References: <20100330122319.f0e46761.ospite@studenti.unina.it>
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-X-OriginalArrivalTime: 01 Apr 2010 13:16:34.0975 (UTC)
-	FILETIME=[8DA1EAF0:01CAD19D]
-X-SA-Exim-Connect-IP: 85.37.17.116
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+	<1270127783-21172-1-git-send-email-ospite@studenti.unina.it>
+MIME-Version: 1.0
+In-Reply-To: <1270127783-21172-1-git-send-email-ospite@studenti.unina.it>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 72.14.220.155
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Michael 'Mickey' Lauer <mickey@vanille-media.de>
-Subject: [PATCH] frameworkd-config-shr: fix a nasty typo
+Subject: Re: [PATCH] frameworkd-config-shr: fix a nasty typo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,46 +57,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 13:20:57 -0000
+X-List-Received-Date: Thu, 01 Apr 2010 13:26:13 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-A misplaced '-' instead of '_' made bitbake conditional appending fail,
-resulting in fso-abyss being added unconditionally to runtime
-dependencies.
+On Thu, Apr 01, 2010 at 03:16:23PM +0200, Antonio Ospite wrote:
+> A misplaced '-' instead of '_' made bitbake conditional appending fail,
+> resulting in fso-abyss being added unconditionally to runtime
+> dependencies.
 
-Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
----
-The problem was in frameworkd-config, which was provided also by
-frameworkd-config-shr, so here we are.
+Wow, good catch! I'll apply now.
 
-This one seems to be the correct fix for:
-http://bugs.openembedded.org/show_bug.cgi?id=5385
-
-Please check also the English in the commit message, you never know :)
-
-Thanks,
-   Antonio Ospite
-   http://ao2.it
-
-frameworkd-config-shr:
-
- recipes/shr/frameworkd-config-shr_git.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
-
-diff --git a/recipes/shr/frameworkd-config-shr_git.bb b/recipes/shr/frameworkd-config-shr_git.bb
-index 3be7ceb..35c00de 100644
---- a/recipes/shr/frameworkd-config-shr_git.bb
-+++ b/recipes/shr/frameworkd-config-shr_git.bb
-@@ -66,7 +66,7 @@ PACKAGE_ARCH_${PN} = "${MACHINE_ARCH}"
- # - recommend MUXer on platforms that require one
- RDEPENDS_${PN}_append_om-gta01 = " fso-abyss"
- RDEPENDS_${PN}_append_om-gta02 = " fso-abyss"
--RDEPENDS_${PN}_append-om-3d7k  = " fso-abyss"
-+RDEPENDS_${PN}_append_om-3d7k  = " fso-abyss"
- # - add wmiconfig for wireless configuration
- RDEPENDS_${PN}_append_om-gta02 = " wmiconfig"
- 
 -- 
-1.7.0.3
-
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
