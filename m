@@ -1,42 +1,53 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f218.google.com ([209.85.220.218])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NxOf5-0001n3-LE for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 19:58:36 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NxObw-00007Q-PY for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Apr 2010 19:55:20 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Apr 2010 19:55:20 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <rep.dot.nop@gmail.com>) id 1NxOrk-0007L8-J0
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Apr 2010 20:11:40 +0200
+Received: by fxm10 with SMTP id 10so640242fxm.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Apr 2010 19:55:20 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 01 Apr 2010 11:08:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:received:date:from:to:cc
+	:subject:message-id:references:mime-version:content-type
+	:content-disposition:in-reply-to:user-agent;
+	bh=ZOKgQq8ytVBLfU1MKIcE6J+o6Aovts0/aN3iU80YEnI=;
+	b=fLXLgTTigqf/tAhFmUKzbSxmAnDKsdq2FBXK7+bFr4/qmX15AZDDA7cU7+0jM1Jgr7
+	HEODdVynEwtC+UZfhDoYzazDQqlwintCXHh7FvwzszoutlF2JUwBBhKVn0yLuqLD1vaa
+	yaHY0HkZkzxqsNdj0gtwtpx9vmE1ZxaQXN7Hw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=G6Rz4HycX09m+qJ3xmwe776OeQgACG06tR5LLu/C3RqhzrkAqfGTAnINnVKJCMe0n8
+	CP//wQKxSr96j0goI5Cjn0LHACMJBRgConQcHHXNnH0BKXIJq105+sEb+kJ8HgbVmudd
+	NHBpSsD8GY+PtVH6rEZS/IonH34+Q13zT0dsU=
+Received: by 10.223.17.194 with SMTP id t2mr953722faa.101.1270145304089;
+	Thu, 01 Apr 2010 11:08:24 -0700 (PDT)
+Received: from s42.loc ([84.119.100.188])
+	by mx.google.com with ESMTPS id 14sm5801778fxm.13.2010.04.01.11.08.23
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 01 Apr 2010 11:08:23 -0700 (PDT)
+Received: from cow by s42.loc with local (Exim 4.71)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1NxP12-0007Gq-6S; Thu, 01 Apr 2010 20:21:16 +0200
+Date: Thu, 1 Apr 2010 20:21:16 +0200
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 01 Apr 2010 19:55:06 +0200
-Message-ID: <hp2mls$3go$1@dough.gmane.org>
-References: <1270135981.4993.128.camel@rex>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
-In-Reply-To: <1270135981.4993.128.camel@rex>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100401182116.GA27613@mx.loc>
+References: <t2n46a47f951003312246y97e7b196m59c6d8136580adb0@mail.gmail.com>
+	<p2k46a47f951004010909sfb05675bx2ad6274204621bd6@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <p2k46a47f951004010909sfb05675bx2ad6274204621bd6@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.220.218
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=unavailable version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Request for branch merge
+Cc: openembedded-users@linuxtogo.org
+Subject: Re: error building meta-toolchain for powerpc 405
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,37 +61,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Apr 2010 17:58:36 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 01 Apr 2010 18:11:41 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thu, Apr 01, 2010 at 11:09:56AM -0500, Ryan Phillips wrote:
 
-On 01-04-10 17:33, Richard Purdie wrote:
+>Patch attached... It looks like gcc-package-sdk needs to have the
+>strips be optional.
 
-> I could post the patches individually and get Acked lines for each one
-> but I'm hoping to avoid that and get permission to merge the branch
-> directly. We have talked about most of these things in one form or
-> another.
+Apart from the question below, why not just invoke strip once for all of
+them?
+${TARGET_PREFIX}strip ${D}${prefix}/${TARGET_SYS}/lib/*.so.* || :
 
-I don't think this will get serious review people other than Tom, Khem
-and Chris, so if they don't have huge objections, merge it and we'll
-deal with the fallout together if needed.
+just curious..
 
-And you just had to do this to fill the TSC meeting agenda for tonight,
-right? :p
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLtN36MkyGM64RGpERAjhsAKC4hgH7uwCe/9+94Z7bjjxbYKF+HQCfSOxW
-xurPnqe3FntdoS6zTwrNj5Q=
-=7o0f
------END PGP SIGNATURE-----
-
+>                    Is this the correct fix or should libstdc++
+>already exist?
+>
+>Related Commit: 8c4198fc
 
 
