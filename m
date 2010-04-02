@@ -1,18 +1,18 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Nxj3a-0000YN-22 for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Apr 2010 17:45:19 +0200
+	id 1Nxj5c-0005OH-KC for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Apr 2010 17:47:21 +0200
 Received: from f053032126.adsl.alicedsl.de ([78.53.32.126]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Nxj0Q-0004uS-Pn for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Apr 2010 15:41:58 +0000
+	id 1Nxj2T-0004x7-7j for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Apr 2010 15:44:05 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 02 Apr 2010 17:41:57 +0200
-Message-ID: <1270222917.3873.18.camel@mattotaupa>
+Date: Fri, 02 Apr 2010 17:44:03 +0200
+Message-ID: <1270223043.3873.21.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.3 
 X-SA-Exim-Connect-IP: 188.40.100.199
@@ -23,7 +23,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] libplayer: Use `${PN}` instead of `libplayer`.
+Subject: [PATCH] libplayer: Update `SRCREV` to 4fb30e64db79 [1].
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,50 +37,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Apr 2010 15:45:19 -0000
-X-Groupsio-MsgNum: 18390
+X-List-Received-Date: Fri, 02 Apr 2010 15:47:21 -0000
+X-Groupsio-MsgNum: 18391
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-XMbeX46l5zf6MxPPfCCN"
+	boundary="=-drBYy2ZtycDGJ864Bfz1"
 
---=-XMbeX46l5zf6MxPPfCCN
+--=-drBYy2ZtycDGJ864Bfz1
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
+[1] http://hg.geexbox.org/libplayer/rev/4fb30e64db79
 
 Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
 ---
- recipes/libplayer/libplayer.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes/libplayer/libplayer_hg.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/libplayer/libplayer.inc b/recipes/libplayer/libplayer.=
-inc
-index 823e4b5..ea74aee 100644
---- a/recipes/libplayer/libplayer.inc
-+++ b/recipes/libplayer/libplayer.inc
-@@ -6,7 +6,7 @@ DEPENDS =3D "virtual/libx11 libxcb mplayer gstreamer"
+diff --git a/recipes/libplayer/libplayer_hg.bb b/recipes/libplayer/libplaye=
+r_hg.bb
+index cfe150b..59354cb 100644
+--- a/recipes/libplayer/libplayer_hg.bb
++++ b/recipes/libplayer/libplayer_hg.bb
+@@ -1,8 +1,8 @@
+ require libplayer.inc
+ PV =3D "1.0.0+hg"
+-PR =3D "${INC_PR}.0"
++PR =3D "${INC_PR}.1"
 =20
- INC_PR =3D "r1"
+-SRCREV =3D "a628f49d952a"
++SRCREV =3D "4fb30e64db79"
 =20
--SRC_URI =3D "http://libplayer.geexbox.org/releases/${P}.tar.bz2;name=3D${P=
-N}"
-+SRC_URI =3D "http://${PN}.geexbox.org/releases/${P}.tar.bz2;name=3D${PN}"
-=20
- inherit autotools pkgconfig
+ SRC_URI =3D "hg://hg.geexbox.org;module=3D${PN};rev=3D${SRCREV}"
 =20
 --=20
 1.7.0.3
 
---=-XMbeX46l5zf6MxPPfCCN
+--=-drBYy2ZtycDGJ864Bfz1
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Dies ist ein digital signierter Nachrichtenteil
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAku2EEUACgkQPX1aK2wOHVhlNwCfeZsn3VIAszs34HRIKzb5m3SO
-wmEAn3OFEfxya+EAzk4jLSR3KZdrB0kC
-=8Mw9
+iEYEABECAAYFAku2EMMACgkQPX1aK2wOHViotQCbB6FEXI8lMbYjYtMd0u349A+0
+/YwAn0kVDxUntXvz+ruTqv8PSysXwgRJ
+=yqpi
 -----END PGP SIGNATURE-----
 
---=-XMbeX46l5zf6MxPPfCCN--
+--=-drBYy2ZtycDGJ864Bfz1--
