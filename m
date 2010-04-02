@@ -1,46 +1,32 @@
-Received: from mail-yw0-f197.google.com ([209.85.211.197])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1NxleS-00083H-OS
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Apr 2010 20:31:30 +0200
-Received: by ywh35 with SMTP id 35so1375714ywh.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Apr 2010 11:28:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:received:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=f1Lad/0WCXuSBWRo+4QFgBGG2W+s5PbnZJQWNRnW0Wo=;
-	b=wcb9oBPluLvmxIgRMsU0dQnCQO+1fPQi0G1eVSeFQkZu4dCpD6TrpbalAFJitryJu1
-	mIANVEDb+yEXI4JKtl0le/1zMvOxx9Ms3RE5uq+K7Dw1NUzikN3sNf6qw1r0AfK3Wkcu
-	bdD88vd5lAZuA5UxG7+TSWekRhb+sCNDiP3NQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=PnFznce/FvC/4Feb4eV+Ln+526+ZKyzgpJlekg0HnVP3gO6tDFtoNsS74dfYx6YohJ
-	lKs6goUWKi+xOe0W3V8Dv6fP0FW98L1EJ4SrnOgILBCEqSeYsSW78x/GSWW5vwZLzhzv
-	RN7PJngp8n9fd3E+T2/cKoKC+rWlcZXlQnUs8=
-MIME-Version: 1.0
-Received: by 10.231.16.77 with HTTP; Fri, 2 Apr 2010 11:28:10 -0700 (PDT)
-In-Reply-To: <1270223959.3873.29.camel@mattotaupa>
-References: <1269796691.8018.74.camel@mattotaupa>
-	<1269955259.4103.51.camel@mattotaupa>
-	<1270223959.3873.29.camel@mattotaupa>
-Date: Fri, 2 Apr 2010 11:28:10 -0700
-Received: by 10.150.56.27 with SMTP id e27mr3556128yba.251.1270232890502; Fri, 
-	02 Apr 2010 11:28:10 -0700 (PDT)
-Message-ID: <l2s19c1b8a91004021128sa6116ab2p62cec8cd78c4db43@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Nxmkj-0000P1-9K for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Apr 2010 21:42:02 +0200
+Received: from f053032126.adsl.alicedsl.de ([78.53.32.126]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1NxmhZ-0006sp-R3 for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Apr 2010 19:38:46 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.197
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+In-Reply-To: <l2y19c1b8a91004021119nf652910el438d98197a40c1db@mail.gmail.com>
+References: <1270222876.3873.17.camel@mattotaupa>
+	<l2y19c1b8a91004021119nf652910el438d98197a40c1db@mail.gmail.com>
+Date: Fri, 02 Apr 2010 21:38:43 +0200
+Message-ID: <1270237123.3714.5.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v3] enna: Move to own recipe folder and update to new Enna hg repository.
+Subject: Re: [PATCH] libplayer: Add `virtual/libx11` and `libxcb` to `DEPENDS`.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,131 +40,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Apr 2010 18:31:30 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 02 Apr 2010 19:42:02 -0000
+X-Groupsio-MsgNum: 18400
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-yUozQ1wv6Y0M/CE2+5Sf"
+
+--=-yUozQ1wv6Y0M/CE2+5Sf
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Apr 2, 2010 at 8:59 AM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> 1. Create `enna.inc`.
-> 2. Use `INC_PR`.
-> 3. Move to new repository location.
-> 4. Use `NOTQUITESRCREV` since `SRCREV` seems to get set to the one from t=
-he EFL recipes.
-> 5. Update license to LGPLv2.1+.
-> 6. Build tested with GCC 4.4.3 and Binutils 2.20.1 for `MACHINE =3D "beag=
-leboard".
-> 7. Build tested with GCC 4.3.3 and Binuitls 2.18.50 for `MACHINE =3D "bea=
-gleboard".
-> 8. Remove `dbus` from `DEPEND` since `edbus` already depends an it.
-> 9. `libmusicbrainz`, `lightmediascanner` and `taglib` are not needed anym=
-ore as `DEPENDS`.
-> 10. `do_configure_prepend()` fixes [1]. Thanks Koen.
-> 11. libvalhalla 2.0.0 (`libvalhalla_hg.bb`) is needed for this version.
-> 12. Works on BeagleBoard with libplayer patches sent to list.
->
-> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-March/th=
-read.html
->
-> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
-> ---
-> # v1 =E2=86=92 v2
-> =E2=80=A2 Use `NOTQUITESRCREV`. Manually =E2=80=9Cimproving=E2=80=9D thin=
-gs during composing the message without testing is not a good idea.
-> =E2=80=A2 Update revision. (Just because.)
-> =E2=80=A2 Update commit message.
->
-> # v2 =E2=86=92 v3
-> =E2=80=A2 Update `SRCREV` which fixed `ERROR: QA Issue with enna:`.
-> =E2=80=A2 New efl revisions fixed `enna: symbol lookup error: /usr/lib/li=
-belementary-ver-pre-svn-05.so.0: undefined symbol: ECORE_X_ATOM_E_ILLUME_TO=
-P_SHELF_GEOMETRY` [2].
->
-> [2] https://geexbox.org/sympa/arc/devel/2010-03/msg00116.html
->
-> Thanks for all your help!
-> ---
-> =C2=A0recipes/e17/enna_svn.bb | =C2=A0 15 ---------------
-> =C2=A0recipes/enna/enna.inc =C2=A0 | =C2=A0 16 ++++++++++++++++
-> =C2=A0recipes/enna/enna_hg.bb | =C2=A0 =C2=A09 +++++++++
-> =C2=A03 files changed, 25 insertions(+), 15 deletions(-)
-> =C2=A0delete mode 100644 recipes/e17/enna_svn.bb
-> =C2=A0create mode 100644 recipes/enna/enna.inc
-> =C2=A0create mode 100644 recipes/enna/enna_hg.bb
->
-> diff --git a/recipes/e17/enna_svn.bb b/recipes/e17/enna_svn.bb
-> deleted file mode 100644
-> index f81990c..0000000
-> --- a/recipes/e17/enna_svn.bb
-> +++ /dev/null
-> @@ -1,15 +0,0 @@
-> -DESCRIPTION =3D "Enna is a media center application based on EFL"
-> -LICENSE =3D "GPL"
-> -DEPENDS =3D "curl dbus eet evas edje ecore edbus emotion"
-> -DEPENDS +=3D "libmusicbrainz lightmediascanner libxml2 taglib"
-> -SECTION =3D "x11/multimedia"
-> -PV =3D "0.2.0+svnr${SRCPV}"
-> -PR =3D "r1"
-> -SRCREV =3D "${EFL_SRCREV}"
-> -
-> -inherit e
-> -
-> -SRC_URI =3D "svn://svn.enlightenment.org/svn/e/trunk/MISC;module=3Denna;=
-proto=3Dhttp"
-> -S =3D "${WORKDIR}/enna"
-> -
-> -FILES_${PN}-dbg +=3D "${libdir}/${PN}/modules/.debug"
-> diff --git a/recipes/enna/enna.inc b/recipes/enna/enna.inc
-> new file mode 100644
-> index 0000000..4cc5b48
-> --- /dev/null
-> +++ b/recipes/enna/enna.inc
-> @@ -0,0 +1,16 @@
-> +DESCRIPTION =3D "Enna is a media center application based on EFL."
-> +HOMEPAGE =3D "http://${PN}.geexbox.org/"
-> +SECTION =3D "x11/multimedia"
-> +LICENSE =3D "LGPLv2.1+"
-> +DEPENDS =3D "curl eet evas edje ecore edbus elementary emotion"
-> +DEPENDS +=3D "libxml2 libvalhalla libplayer"
-> +
-> +INC_PR =3D "r1"
-> +
-> +SRC_URI =3D "http://${PN}.geexbox.org/releases/${P}.tar.bz2;name=3D${PN}=
-"
-> +
-> +inherit autotools pkgconfig
-> +
-> +do_configure_prepend() {
-> + =C2=A0 =C2=A0 =C2=A0 autopoint || touch config.rpath
-> +}
+Am Freitag, den 02.04.2010, 11:19 -0700 schrieb Khem Raj:
+> On Fri, Apr 2, 2010 at 8:41 AM, Paul Menzel
+> <paulepanter@users.sourceforge.net> wrote:
+> > Without those dependencies libplayer would not work with MPlayer and co=
+mplain.
+> >
+> >    =C2=BBlibplayer is not compiled with X11 support=C2=AB [1]
+> >
+> > [1] http://hg.geexbox.org/libplayer/file/4fb30e64db79/src/wrapper_mplay=
+er.c#l2669
+> >
+> > Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> > ---
+> >  recipes/libplayer/libplayer.inc |    4 ++--
+> >  1 files changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/recipes/libplayer/libplayer.inc b/recipes/libplayer/libpla=
+yer.inc
+> > index a986a21..823e4b5 100644
+> > --- a/recipes/libplayer/libplayer.inc
+> > +++ b/recipes/libplayer/libplayer.inc
+> > @@ -2,9 +2,9 @@ DESCRIPTION =3D "libplayer is a multimedia A/V abstract=
+ion layer API. Its goal is
+> >  HOMEPAGE =3D "http://libplayer.geexbox.org/"
+> >  SECTION =3D "libs/multimedia"
+> >  LICENSE =3D "LGPLv2.1+"
+> > -DEPENDS =3D "mplayer gstreamer"
+> > +DEPENDS =3D "virtual/libx11 libxcb mplayer gstreamer"
+>=20
+> how about libxine
 
-empty config.rpath would build it wrongly isnt it. Probably this
-should be removed
+Well, I did not need it yet and I do not know if there are any
+disadvantages (like performance issues) if more wrappers are enabled.
+Since I own the BeagleBoard I want to use MPlayer and GStreamer since
+there are patches for them to use all of the features of the hardware of
+the BeagleBoard.
 
-> diff --git a/recipes/enna/enna_hg.bb b/recipes/enna/enna_hg.bb
-> new file mode 100644
-> index 0000000..68f69ba
-> --- /dev/null
-> +++ b/recipes/enna/enna_hg.bb
-> @@ -0,0 +1,9 @@
-> +require enna.inc
-> +PV =3D "0.4.0+hg"
-> +PR =3D "${INC_PR}.0"
-> +
-> +NOTQUITESRCREV =3D "319d4702c427"
-> +
-> +SRC_URI =3D "hg://hg.geexbox.org;proto=3Dhttp;module=3D${PN};rev=3D${NOT=
-QUITESRCREV}"
-> +
-> +S =3D "${WORKDIR}/${PN}"
-> --
-> 1.7.0.3
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+But anyway, that patch is definately about adding more wrappers but to
+get MPlayer working whose dependency is there already.
+
+I guess `libxine` can be added later if someone needs it or more tests
+are done.
+
+[=E2=80=A6]
 
 
+Thanks,
+
+Paul
+
+--=-yUozQ1wv6Y0M/CE2+5Sf
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAku2R70ACgkQPX1aK2wOHVgEfACdHs23x6U3XD66dWc/c4INA5kc
+NX4An0m0ypS0YIu6qwun0xaUBiI4wjpw
+=Q4CE
+-----END PGP SIGNATURE-----
+
+--=-yUozQ1wv6Y0M/CE2+5Sf--
