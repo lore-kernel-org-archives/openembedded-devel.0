@@ -1,32 +1,32 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nxbc5-0003pO-Ko for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Apr 2010 09:48:22 +0200
+	id 1NxhAV-0007DV-So for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Apr 2010 15:44:16 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NxbYt-0004Vt-U9 for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Apr 2010 09:45:03 +0200
+	id 1Nxh7K-0007tY-DP for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Apr 2010 15:40:58 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Apr 2010 09:45:03 +0200
+	Fri, 02 Apr 2010 15:40:58 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Apr 2010 09:45:03 +0200
+	Fri, 02 Apr 2010 15:40:58 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 02 Apr 2010 09:44:01 +0200
-Message-ID: <hp4781$59h$2@dough.gmane.org>
-References: <1270152215-17642-1-git-send-email-khimov@altell.ru>
+Date: Fri, 02 Apr 2010 15:40:43 +0200
+Message-ID: <hp4s4q$40a$1@dough.gmane.org>
+References: <1270135981.4993.128.camel@rex>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
-In-Reply-To: <1270152215-17642-1-git-send-email-khimov@altell.ru>
+In-Reply-To: <1270135981.4993.128.camel@rex>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -36,7 +36,7 @@ X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] gd: add gd-ft recipe
+Subject: Re: Request for branch merge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,56 +50,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Apr 2010 07:48:23 -0000
+X-List-Received-Date: Fri, 02 Apr 2010 13:44:16 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 01-04-10 22:03, Roman I Khimov wrote:
-> GD with Freetype support, this kind of setup is needed for some
-> packages like sarg. If needed, choose with
+On 01-04-10 17:33, Richard Purdie wrote:
+> I've been aware that Poky and OE have been diverging slightly and I'd
+> like to correct this. There are some patches that I've promised for a
+> while too such as the rename from do_populate_staging ->
+> do_populate_sysroot.
 > 
-> PREFERRED_PROVIDER_gd = "gd-ft"
+> With some help from Joshua Lock, I have a branch I'd like to propose be
+> merged into OE.dev:
+> 
+> http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=rpurdie/work-in-progress
 
-Looking thru git log it seems that is more due to the build failing in
-the past than a conscious decision. I vote for adding it to the main gd
-recipe.
+While testing (rebased on top of this mornings OE, bitbake master) I'm
+getting messages like this:
+
+//OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/python2.6/lib-dynload/strop.so:
+RPATH=/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib
+//OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/python2.6/lib-dynload/strop.so:
+new RPATH: $ORIGIN/../../../../usr/lib
+open: Permission denied
+elf_open: Invalid argument
+
+Are those messages from chrpath and can they be ignored?
 
 regards,
 
 Koen
-
-> 
-> Signed-off-by: Roman I Khimov <khimov@altell.ru>
-> ---
->  recipes/gd/gd-ft_2.0.35+2.0.36rc1.bb |    8 ++++++++
->  1 files changed, 8 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/gd/gd-ft_2.0.35+2.0.36rc1.bb
-> 
-> diff --git a/recipes/gd/gd-ft_2.0.35+2.0.36rc1.bb b/recipes/gd/gd-ft_2.0.35+2.0.36rc1.bb
-> new file mode 100644
-> index 0000000..174bbe6
-> --- /dev/null
-> +++ b/recipes/gd/gd-ft_2.0.35+2.0.36rc1.bb
-> @@ -0,0 +1,8 @@
-> +include gd_${PV}.bb
-> +
-> +DEPENDS += "freetype"
-> +
-> +PROVIDES = "gd"
-> +RPROVIDES_${PN} = "gd"
-> +
-> +EXTRA_OECONF += "--with-freetype"
-> \ No newline at end of file
-
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFLtaBBMkyGM64RGpERAlvwAKCo6DY8plmxaPTKytLpfjnA15WKuQCeJjJ8
-94PMNj9J2B6SaxcLeQEaNkg=
-=Jxf0
+iD8DBQFLtfPaMkyGM64RGpERAoCOAKChBgWclw4D9dqIU9xwrBYYRuxtjQCghSRn
+W07JDSPjVUcbSFDD50dCKgY=
+=EC6F
 -----END PGP SIGNATURE-----
 
 
