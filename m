@@ -1,41 +1,43 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1Nxofo-0004xY-Au
+Received: from relay1.mentorg.com ([192.94.38.131])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <Tom_Rini@mentor.com>) id 1NxpUw-0002CB-3B
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Apr 2010 23:45:04 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o32LflpA006409
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 2 Apr 2010 22:41:47 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 05515-10 for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Apr 2010 22:41:43 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o32LfcwA006403
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 2 Apr 2010 22:41:38 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	Sat, 03 Apr 2010 00:37:55 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1NxpRi-0000V4-PS from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Apr 2010 15:34:34 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Fri, 2 Apr 2010 15:34:34 -0700
+Received: from 172.30.80.165 ([172.30.80.165]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Fri,  2 Apr 2010 22:33:37 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	02 Apr 2010 15:33:37 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hp4vat$f2l$1@dough.gmane.org>
-References: <1270135981.4993.128.camel@rex> <hp4s4q$40a$1@dough.gmane.org>
-	<hp4vat$f2l$1@dough.gmane.org>
-Date: Fri, 02 Apr 2010 22:41:37 +0100
-Message-ID: <1270244497.4993.185.camel@rex>
+In-Reply-To: <1270243415.4993.173.camel@rex>
+References: <E1NxKhE-0007AO-Bh@melo.openembedded.org>
+	<1270159668.6277.138.camel@trini-m4400> <hp471c$59h$1@dough.gmane.org>
+	<1270243415.4993.173.camel@rex>
+Organization: Mentor Graphics Corporation
+Date: Fri, 02 Apr 2010 15:33:37 -0700
+Message-ID: <1270247617.3653.31.camel@trini-m4400>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 02 Apr 2010 22:34:34.0422 (UTC)
+	FILETIME=[AB59DD60:01CAD2B4]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Request for branch merge
+Subject: Re: [oe-commits] Joshua Lock : relocatable: Class to post-process packages for relocatability
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,37 +51,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Apr 2010 21:45:04 -0000
+X-List-Received-Date: Fri, 02 Apr 2010 22:37:55 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2010-04-02 at 16:35 +0200, Koen Kooi wrote:
-> And lots of:
-> 
-> : QA Issue with staging: libssp_nonshared.la failed sanity test
-> (installed) in path
-> /OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+On Fri, 2010-04-02 at 22:23 +0100, Richard Purdie wrote:
+> On Fri, 2010-04-02 at 09:40 +0200, Koen Kooi wrote:
+> > On 02-04-10 00:07, Tom Rini wrote:
+> > > On Thu, 2010-04-01 at 13:44 +0000, git version control wrote:
+> > > [snip]
+> > >> -       required_utilities =3D "patch help2man diffstat texi2html
+> > > makeinfo cvs svn bzip2 tar gzip gawk md5sum"
+> > >> +       required_utilities =3D "patch help2man diffstat texi2html
+> > > makeinfo cvs svn bzip2 tar gzip gawk md5sum chrpath"
+> > >=20
+> > > How hard would it be to add a chrpath-native recipe and maybe treat t=
+his
+> > > like we used to treat qemu?  Don't see it in yum on my rhel5 box.
+> > > Thanks.
+> >=20
+> > We already have that from our previous chrpath experiments :) See
+> > recipes/chrpath
+>=20
+> As does Poky. The tricky bit isn't the recipes, its the dependencies and
+> making sure we don't end up with any binaries that haven't had the
+> relocation treatment.
 
-This one I can guess the reason for, we're missing the lamangler
-function helper for cross packages. At the bottom of cross.bbclass, try
-changing:
+That... is a problem, yeah.
 
-mv ${SYSROOT_DESTDIR}${target_base_libdir}/* ${SYSROOT_DESTDIR}${STAGING_DIR_TARGET}${target_base_libdir}/ || true
-mv ${SYSROOT_DESTDIR}${target_libdir}/* ${SYSROOT_DESTDIR}${STAGING_DIR_TARGET}${target_libdir}/ || true
-
-to become
-
-rm -rf ${SYSROOT_DESTDIR}${target_base_libdir}/
-rm -rf ${SYSROOT_DESTDIR}${target_libdir}/
-sysroot_stage_libdir ${D}${target_base_libdir} ${SYSROOT_DESTDIR}${STAGING_DIR_TARGET}${target_base_libdir}
-sysroot_stage_libdir ${D}${target_libdir} ${SYSROOT_DESTDIR}${STAGING_DIR_TARGET}${target_libdir}
-
-which should mean the mangling happens correctly. Sorry I can't
-test/push this right at the moment.
-
-Cheers,
-
-Richard
-
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
