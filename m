@@ -1,28 +1,29 @@
 Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
 	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1NxoUQ-0001hb-8e
+	(envelope-from <rpurdie@rpsys.net>) id 1Nxofo-0004xY-Au
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Apr 2010 23:33:20 +0200
+	Fri, 02 Apr 2010 23:45:04 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o32LU0cL006317
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o32LflpA006409
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 2 Apr 2010 22:30:00 +0100
+	Fri, 2 Apr 2010 22:41:47 +0100
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 05515-08 for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Apr 2010 22:29:56 +0100 (BST)
+	id 05515-10 for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Apr 2010 22:41:43 +0100 (BST)
 Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o32LTrj7006311
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o32LfcwA006403
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 2 Apr 2010 22:29:53 +0100
+	Fri, 2 Apr 2010 22:41:38 +0100
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hp4s4q$40a$1@dough.gmane.org>
-References: <1270135981.4993.128.camel@rex>  <hp4s4q$40a$1@dough.gmane.org>
-Date: Fri, 02 Apr 2010 22:29:52 +0100
-Message-ID: <1270243792.4993.180.camel@rex>
+In-Reply-To: <hp4vat$f2l$1@dough.gmane.org>
+References: <1270135981.4993.128.camel@rex> <hp4s4q$40a$1@dough.gmane.org>
+	<hp4vat$f2l$1@dough.gmane.org>
+Date: Fri, 02 Apr 2010 22:41:37 +0100
+Message-ID: <1270244497.4993.185.camel@rex>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.3 
 X-Virus-Scanned: amavisd-new at rpsys.net
@@ -48,30 +49,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Apr 2010 21:33:21 -0000
+X-List-Received-Date: Fri, 02 Apr 2010 21:45:04 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2010-04-02 at 15:40 +0200, Koen Kooi wrote:
-> While testing (rebased on top of this mornings OE, bitbake master) I'm
-> getting messages like this:
+On Fri, 2010-04-02 at 16:35 +0200, Koen Kooi wrote:
+> And lots of:
 > 
-> //OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/python2.6/lib-dynload/strop.so:
-> RPATH=/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib
-> //OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/python2.6/lib-dynload/strop.so:
-> new RPATH: $ORIGIN/../../../../usr/lib
-> open: Permission denied
-> elf_open: Invalid argument
-> 
-> Are those messages from chrpath and can they be ignored?
+> : QA Issue with staging: libssp_nonshared.la failed sanity test
+> (installed) in path
+> /OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
 
-The first messages are from the class and are safe to ignore. The
-permission denied suggests something was added to staging that was
-readonly? Can you check the permissions
-on //OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/python2.6/lib-dynload/strop.so and see if that is the case. It would make sense for that code to check for read only and handle that case, restoring the permissions afterwards.
+This one I can guess the reason for, we're missing the lamangler
+function helper for cross packages. At the bottom of cross.bbclass, try
+changing:
 
-I won't get to it this weekend but I will make sure its fixed on Tuesday
-if you can confirm that is the problem.
+mv ${SYSROOT_DESTDIR}${target_base_libdir}/* ${SYSROOT_DESTDIR}${STAGING_DIR_TARGET}${target_base_libdir}/ || true
+mv ${SYSROOT_DESTDIR}${target_libdir}/* ${SYSROOT_DESTDIR}${STAGING_DIR_TARGET}${target_libdir}/ || true
+
+to become
+
+rm -rf ${SYSROOT_DESTDIR}${target_base_libdir}/
+rm -rf ${SYSROOT_DESTDIR}${target_libdir}/
+sysroot_stage_libdir ${D}${target_base_libdir} ${SYSROOT_DESTDIR}${STAGING_DIR_TARGET}${target_base_libdir}
+sysroot_stage_libdir ${D}${target_libdir} ${SYSROOT_DESTDIR}${STAGING_DIR_TARGET}${target_libdir}
+
+which should mean the mangling happens correctly. Sorry I can't
+test/push this right at the moment.
 
 Cheers,
 
