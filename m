@@ -1,51 +1,41 @@
-Received: from mail-fx0-f218.google.com ([209.85.220.218])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NxoJb-0006wD-DR
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NxoON-0008C4-6r
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Apr 2010 23:22:08 +0200
-Received: by fxm10 with SMTP id 10so1323449fxm.27
+	Fri, 02 Apr 2010 23:27:03 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o32LNjN5006277
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Apr 2010 14:18:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=1I57qxNdauwrmd38mho2NZZG1pGjfocziPEMbTPi4/8=;
-	b=vtsqO4q/OuWlv7YBDb2imm9AkW3Re66Itck3PlnjP8jPoPUdUhJJb5MCOcmxP3poj6
-	1luLoL4YYz3Uo6vTw7uCIV4hOWC2sluYoC2V5AxwHIw29NlCkrGN1Loycl3S1M/6Mul2
-	ceNOD3GuCCOMoV9AHIgXdMhFYQEfVxw5LsEuQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=J//+ZdVR2V0TnvssvEmoiqkT7ZuhQR2AL5WhMedmv5CxTjLxLOQW/W6Qs5TmYJ8HKM
-	4DA/szDqDU8yznBSN42r5JRhbWkT/2ULeqePnOCqZY6W75AGPusK4s0eqPFH+Zr6w6tO
-	UNq/WUUXz/+9741zsCHB5KmFB6rEMDRBFXmSM=
-Received: by 10.223.117.164 with SMTP id r36mr2478909faq.28.1270243129700;
-	Fri, 02 Apr 2010 14:18:49 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 14sm6672933fxm.1.2010.04.02.14.18.48
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 02 Apr 2010 14:18:49 -0700 (PDT)
-Date: Fri, 2 Apr 2010 23:18:47 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 2 Apr 2010 22:23:45 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 05515-07 for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Apr 2010 22:23:41 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o32LNZbe006271
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 2 Apr 2010 22:23:37 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100402211847.GK3270@jama>
-References: <1269796691.8018.74.camel@mattotaupa>
-	<1269955259.4103.51.camel@mattotaupa>
-	<1270223959.3873.29.camel@mattotaupa>
-	<l2s19c1b8a91004021128sa6116ab2p62cec8cd78c4db43@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <l2s19c1b8a91004021128sa6116ab2p62cec8cd78c4db43@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.220.218
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+In-Reply-To: <hp471c$59h$1@dough.gmane.org>
+References: <E1NxKhE-0007AO-Bh@melo.openembedded.org>
+	<1270159668.6277.138.camel@trini-m4400> <hp471c$59h$1@dough.gmane.org>
+Date: Fri, 02 Apr 2010 22:23:35 +0100
+Message-ID: <1270243415.4993.173.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v3] enna: Move to own recipe folder and update to new Enna hg repository.
+Subject: Re: [oe-commits] Joshua Lock : relocatable: Class to post-process packages for relocatability
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,31 +49,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Apr 2010 21:22:08 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 02 Apr 2010 21:27:04 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Fri, Apr 02, 2010 at 11:28:10AM -0700, Khem Raj wrote:
-> On Fri, Apr 2, 2010 at 8:59 AM, Paul Menzel
-> <paulepanter@users.sourceforge.net> wrote:
-> > 1. Create `enna.inc`.
-> > 2. Use `INC_PR`.
-> > 3. Move to new repository location.
-> > 4. Use `NOTQUITESRCREV` since `SRCREV` seems to get set to the one from the EFL recipes.
+On Fri, 2010-04-02 at 09:40 +0200, Koen Kooi wrote:
+> On 02-04-10 00:07, Tom Rini wrote:
+> > On Thu, 2010-04-01 at 13:44 +0000, git version control wrote:
+> >> +def rpath_replace (path, d):
+> >> +    bindirs = bb.data.expand("${bindir} ${sbindir} ${base_sbindir} ${base_bindir} ${libdir} ${base_libdir} ${PREPROCESS_RELOCATE_DIRS}", d).split()
+> > 
+> > Is that last variable there to let recipes add non-standard locations to
+> > the search path?
 
-You can use SRCREV again after
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=82b394467d9142edf2721176244c3a7eb26ba69a
+Yes, as long as all users append to it, it will work like that and that
+use makes sense.
 
-And maybe you want rev shown in PV or PR
-PV = "0.4.0+hg${SRCPV}" or 
-PR_append = "+hg${SRCPV}"
-is quire common and should work for hg too (haven't checked)
+> > [snip]
+> >> -       required_utilities = "patch help2man diffstat texi2html
+> > makeinfo cvs svn bzip2 tar gzip gawk md5sum"
+> >> +       required_utilities = "patch help2man diffstat texi2html
+> > makeinfo cvs svn bzip2 tar gzip gawk md5sum chrpath"
+> > 
+> > How hard would it be to add a chrpath-native recipe and maybe treat this
+> > like we used to treat qemu?  Don't see it in yum on my rhel5 box.
+> > Thanks.
+> 
+> We already have that from our previous chrpath experiments :) See
+> recipes/chrpath
+
+As does Poky. The tricky bit isn't the recipes, its the dependencies and
+making sure we don't end up with any binaries that haven't had the
+relocation treatment.
 
 Cheers,
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+Richard
+
 
 
