@@ -1,42 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nxi1A-0003mh-Ky for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Apr 2010 16:38:41 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nxhy0-0000gr-Bf for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Apr 2010 16:35:24 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Apr 2010 16:35:24 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Apr 2010 16:35:24 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Nxj2v-0003es-1P for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Apr 2010 17:44:34 +0200
+Received: from f053032126.adsl.alicedsl.de ([78.53.32.126]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Nxizl-0004rD-KT for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Apr 2010 15:41:17 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 02 Apr 2010 16:35:09 +0200
-Message-ID: <hp4vat$f2l$1@dough.gmane.org>
-References: <1270135981.4993.128.camel@rex> <hp4s4q$40a$1@dough.gmane.org>
+Date: Fri, 02 Apr 2010 17:41:16 +0200
+Message-ID: <1270222876.3873.17.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
-In-Reply-To: <hp4s4q$40a$1@dough.gmane.org>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Request for branch merge
+Subject: [PATCH] libplayer: Add `virtual/libx11` and `libxcb` to `DEPENDS`.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,50 +37,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Apr 2010 14:38:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 02 Apr 2010 15:44:34 -0000
+X-Groupsio-MsgNum: 18389
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-qRQRaGDsVGgNETkhMgEs"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-qRQRaGDsVGgNETkhMgEs
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 02-04-10 15:40, Koen Kooi wrote:
-> On 01-04-10 17:33, Richard Purdie wrote:
->> I've been aware that Poky and OE have been diverging slightly and I'd
->> like to correct this. There are some patches that I've promised for a
->> while too such as the rename from do_populate_staging ->
->> do_populate_sysroot.
-> 
->> With some help from Joshua Lock, I have a branch I'd like to propose be
->> merged into OE.dev:
-> 
->> http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=rpurdie/work-in-progress
-> 
-> While testing (rebased on top of this mornings OE, bitbake master) I'm
-> getting messages like this:
-> 
-> //OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/python2.6/lib-dynload/strop.so:
-> RPATH=/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib
-> //OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/python2.6/lib-dynload/strop.so:
-> new RPATH: $ORIGIN/../../../../usr/lib
-> open: Permission denied
-> elf_open: Invalid argument
-> 
-> Are those messages from chrpath and can they be ignored?
+Without those dependencies libplayer would not work with MPlayer and compla=
+in.
 
-And lots of:
+    =C2=BBlibplayer is not compiled with X11 support=C2=AB [1]
 
-: QA Issue with staging: libssp_nonshared.la failed sanity test
-(installed) in path
-/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+[1] http://hg.geexbox.org/libplayer/file/4fb30e64db79/src/wrapper_mplayer.c=
+#l2669
+
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+ recipes/libplayer/libplayer.inc |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/recipes/libplayer/libplayer.inc b/recipes/libplayer/libplayer.=
+inc
+index a986a21..823e4b5 100644
+--- a/recipes/libplayer/libplayer.inc
++++ b/recipes/libplayer/libplayer.inc
+@@ -2,9 +2,9 @@ DESCRIPTION =3D "libplayer is a multimedia A/V abstraction =
+layer API. Its goal is
+ HOMEPAGE =3D "http://libplayer.geexbox.org/"
+ SECTION =3D "libs/multimedia"
+ LICENSE =3D "LGPLv2.1+"
+-DEPENDS =3D "mplayer gstreamer"
++DEPENDS =3D "virtual/libx11 libxcb mplayer gstreamer"
+=20
+-INC_PR =3D "r0"
++INC_PR =3D "r1"
+=20
+ SRC_URI =3D "http://libplayer.geexbox.org/releases/${P}.tar.bz2;name=3D${P=
+N}"
+=20
+--=20
+1.7.0.3
+
+--=-qRQRaGDsVGgNETkhMgEs
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-iD8DBQFLtgCdMkyGM64RGpERAv7sAJ9oScH3UmWw11aExUJRBxdnGDdoGACaA6jh
-AmUQ3TfIfL5trAenmYXjmeo=
-=u1oE
+iEYEABECAAYFAku2EBwACgkQPX1aK2wOHVhz9wCdGVJ1m8j81ZWb0UOEUlJucK9e
+ZroAnipvDqeZhxX3xXoaMIjgblFIl6RH
+=faka
 -----END PGP SIGNATURE-----
 
-
-
+--=-qRQRaGDsVGgNETkhMgEs--
