@@ -1,42 +1,44 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-pz0-f192.google.com ([209.85.222.192])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Nxjlh-0005jU-Be
+	(envelope-from <raj.khem@gmail.com>) id 1NxlWN-0001zt-B7
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Apr 2010 18:30:50 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NxjiU-00028F-Fy from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Apr 2010 09:27:30 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Fri, 2 Apr 2010 09:27:29 -0700
-Received: from 172.30.80.132 ([172.30.80.132]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Fri,  2 Apr 2010 16:26:33 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	02 Apr 2010 09:26:29 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Fri, 02 Apr 2010 20:23:08 +0200
+Received: by pzk30 with SMTP id 30so1863433pzk.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 02 Apr 2010 11:19:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:received:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=mZ1pFNgr8HorM+UA8DKUiM1WJbh2eM4NbMjLVkBozZM=;
+	b=kSn85seBF7JV3/oOe9H1aA+UxcTsTHHmly6G6J6oXxkLx0SDgavFeTHy2TPqFUJPAI
+	DKYB/qdlwrf+gyU2Xf68ujETQYwogNdt0rQxy4rjF2kENUBuTMLrDfa3j2fUbn9L7vB4
+	4saC59kCwkBySSJDdZEAOatSCpIvfXfdj/pOo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=CTvYq8k9wc6GXvfAcIOjS4zse3ewau4QoMYY4k+HnPuS+P276t3Mgjwe5EgKjMrDKb
+	e1AV94wwInzD2khty0cTrYUGGTMrCmyJIbIzZlOFcM5owSwYUIILlbpRi9NzPfwP0Jy9
+	49n2gy6O71NvGqODWctfgHGB/HUeNGMAIftTk=
+MIME-Version: 1.0
+Received: by 10.231.16.77 with HTTP; Fri, 2 Apr 2010 11:19:48 -0700 (PDT)
+In-Reply-To: <1270222876.3873.17.camel@mattotaupa>
+References: <1270222876.3873.17.camel@mattotaupa>
+Date: Fri, 2 Apr 2010 11:19:48 -0700
+Received: by 10.140.251.20 with SMTP id y20mr1770474rvh.206.1270232388478; 
+	Fri, 02 Apr 2010 11:19:48 -0700 (PDT)
+Message-ID: <l2y19c1b8a91004021119nf652910el438d98197a40c1db@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hp471c$59h$1@dough.gmane.org>
-References: <E1NxKhE-0007AO-Bh@melo.openembedded.org>
-	<1270159668.6277.138.camel@trini-m4400> <hp471c$59h$1@dough.gmane.org>
-Organization: Mentor Graphics Corporation
-Date: Fri, 02 Apr 2010 09:26:29 -0700
-Message-ID: <1270225589.7652.3.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 02 Apr 2010 16:27:29.0966 (UTC)
-	FILETIME=[63C094E0:01CAD281]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.222.192
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Joshua Lock : relocatable: Class to post-process packages for relocatability
+Subject: Re: [PATCH] libplayer: Add `virtual/libx11` and `libxcb` to `DEPENDS`.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,54 +52,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Apr 2010 16:30:50 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 02 Apr 2010 18:23:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2010-04-02 at 09:40 +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> On 02-04-10 00:07, Tom Rini wrote:
-> > On Thu, 2010-04-01 at 13:44 +0000, git version control wrote:
-> >> Module: openembedded.git
-> >> Branch: rpurdie/work-in-progress
-> >> Commit: 2365530efff7681fa34b2a466cf5f78acac10274
-> >> URL:    http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcommi=
-t;h=3D2365530efff7681fa34b2a466cf5f78acac10274
-> >>
-> >> Author: Joshua Lock <josh@linux.intel.com>
-> >> Date:   Wed Mar 31 11:41:58 2010 +0100
-> >>
-> >> relocatable: Class to post-process packages for relocatability
-> > [snip]
-> >> +def rpath_replace (path, d):
-> >> +    bindirs =3D bb.data.expand("${bindir} ${sbindir} ${base_sbindir} =
-${base_bindir} ${libdir} ${base_libdir} ${PREPROCESS_RELOCATE_DIRS}", d).sp=
-lit()
-> >=20
-> > Is that last variable there to let recipes add non-standard locations t=
-o
-> > the search path?
-> >=20
-> > [snip]
-> >> -       required_utilities =3D "patch help2man diffstat texi2html
-> > makeinfo cvs svn bzip2 tar gzip gawk md5sum"
-> >> +       required_utilities =3D "patch help2man diffstat texi2html
-> > makeinfo cvs svn bzip2 tar gzip gawk md5sum chrpath"
-> >=20
-> > How hard would it be to add a chrpath-native recipe and maybe treat thi=
-s
-> > like we used to treat qemu?  Don't see it in yum on my rhel5 box.
-> > Thanks.
->=20
-> We already have that from our previous chrpath experiments :) See
-> recipes/chrpath
+On Fri, Apr 2, 2010 at 8:41 AM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> Without those dependencies libplayer would not work with MPlayer and comp=
+lain.
+>
+> =A0 =A0=BBlibplayer is not compiled with X11 support=AB [1]
+>
+> [1] http://hg.geexbox.org/libplayer/file/4fb30e64db79/src/wrapper_mplayer=
+.c#l2669
+>
+> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> ---
+> =A0recipes/libplayer/libplayer.inc | =A0 =A04 ++--
+> =A01 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/recipes/libplayer/libplayer.inc b/recipes/libplayer/libplaye=
+r.inc
+> index a986a21..823e4b5 100644
+> --- a/recipes/libplayer/libplayer.inc
+> +++ b/recipes/libplayer/libplayer.inc
+> @@ -2,9 +2,9 @@ DESCRIPTION =3D "libplayer is a multimedia A/V abstractio=
+n layer API. Its goal is
+> =A0HOMEPAGE =3D "http://libplayer.geexbox.org/"
+> =A0SECTION =3D "libs/multimedia"
+> =A0LICENSE =3D "LGPLv2.1+"
+> -DEPENDS =3D "mplayer gstreamer"
+> +DEPENDS =3D "virtual/libx11 libxcb mplayer gstreamer"
 
-Great, lets rework to use that version.
+how about libxine
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+>
+> -INC_PR =3D "r0"
+> +INC_PR =3D "r1"
+>
+> =A0SRC_URI =3D "http://libplayer.geexbox.org/releases/${P}.tar.bz2;name=
+=3D${PN}"
+>
+> --
+> 1.7.0.3
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
