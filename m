@@ -1,32 +1,43 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1NxZUV-000544-FW
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Apr 2010 07:32:24 +0200
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NxZRI-0001gp-8N
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Apr 2010 09:29:08 +0400
-From: Roman I Khimov <roman@khimov.ru>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NxbXn-0003fI-7y for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Apr 2010 09:43:56 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NxbUd-00039O-SV for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Apr 2010 09:40:39 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 02 Apr 2010 09:40:39 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 02 Apr 2010 09:40:39 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 2 Apr 2010 09:25:59 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <1270152215-17642-1-git-send-email-khimov@altell.ru>
-	<1270152215-17642-2-git-send-email-khimov@altell.ru>
-	<20100401211818.GA5580@gmail.com>
-In-Reply-To: <20100401211818.GA5580@gmail.com>
-MIME-Version: 1.0
-Message-Id: <201004020926.03749.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 02 Apr 2010 09:40:28 +0200
+Message-ID: <hp471c$59h$1@dough.gmane.org>
+References: <E1NxKhE-0007AO-Bh@melo.openembedded.org>
+	<1270159668.6277.138.camel@trini-m4400>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
+In-Reply-To: <1270159668.6277.138.camel@trini-m4400>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2] sarg: new recipe
+Subject: Re: [oe-commits] Joshua Lock : relocatable: Class to post-process packages for relocatability
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,63 +51,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Apr 2010 05:32:24 -0000
-X-Groupsio-MsgNum: 18384
-Content-Type: multipart/signed; boundary="nextPart2357442.Mc7feHKXIe";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Fri, 02 Apr 2010 07:43:56 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
---nextPart2357442.Mc7feHKXIe
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=9F=D1=8F=D1=82=D0=BD=D0=B8=D1=86=D0=B0 02 =D0=B0=D0=BF=D1=80=D0=B5=D0=
-=BB=D1=8F 2010 01:18:18 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Khem Raj =D0=BD=D0=
-=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> > diff --git a/recipes/sarg/sarg_2.2.7.1.bb b/recipes/sarg/sarg_2.2.7.1.bb
-> > new file mode 100644
-> > index 0000000..77d6a72
-> > --- /dev/null
-> > +++ b/recipes/sarg/sarg_2.2.7.1.bb
-> > @@ -0,0 +1,22 @@
-> > +DESCRIPTION =3D "Squid Analysis Report Generator"
-> > +SECTION =3D "network"
->=20
-> may be it should be in 'web' section ?
+On 02-04-10 00:07, Tom Rini wrote:
+> On Thu, 2010-04-01 at 13:44 +0000, git version control wrote:
+>> Module: openembedded.git
+>> Branch: rpurdie/work-in-progress
+>> Commit: 2365530efff7681fa34b2a466cf5f78acac10274
+>> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=2365530efff7681fa34b2a466cf5f78acac10274
+>>
+>> Author: Joshua Lock <josh@linux.intel.com>
+>> Date:   Wed Mar 31 11:41:58 2010 +0100
+>>
+>> relocatable: Class to post-process packages for relocatability
+> [snip]
+>> +def rpath_replace (path, d):
+>> +    bindirs = bb.data.expand("${bindir} ${sbindir} ${base_sbindir} ${base_bindir} ${libdir} ${base_libdir} ${PREPROCESS_RELOCATE_DIRS}", d).split()
+> 
+> Is that last variable there to let recipes add non-standard locations to
+> the search path?
+> 
+> [snip]
+>> -       required_utilities = "patch help2man diffstat texi2html
+> makeinfo cvs svn bzip2 tar gzip gawk md5sum"
+>> +       required_utilities = "patch help2man diffstat texi2html
+> makeinfo cvs svn bzip2 tar gzip gawk md5sum chrpath"
+> 
+> How hard would it be to add a chrpath-native recipe and maybe treat this
+> like we used to treat qemu?  Don't see it in yum on my rhel5 box.
+> Thanks.
 
-I can't find it here:
-http://docs.openembedded.org/usermanual/html/section_variable.html
+We already have that from our previous chrpath experiments :) See
+recipes/chrpath
 
-and there is only one recipe currently that use 'web' SECTION.
+regards,
 
-Although, thinking a little bit more, it might fit well into 'utils' sectio=
-n,=20
-since it's not a network application by itself, it just analyzes squid logs.
-
-> > +DEPENDS =3D "gd-ft"
-> > +RDEPENDS =3D "squid"
->=20
-> may be squid should be a RSUGGESTS ?
-
-ACK, fixed.
-
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
-
---nextPart2357442.Mc7feHKXIe
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+Koen
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAku1f+sACgkQXJ70z+XgVcN0uQCggIJfN3k7BxQxgkt8/dfdlIgf
-f0gAn2NcGsHmPmrC/mACPOIua88r9xmL
-=OAJo
+iD8DBQFLtZ9sMkyGM64RGpERAptOAJ9tPe40kbEGIn8YOcHfd8AqS+b0HgCeI0+s
+4iPCr2JzhEwC9cjeJ9b/3lg=
+=0C5K
 -----END PGP SIGNATURE-----
 
---nextPart2357442.Mc7feHKXIe--
+
+
