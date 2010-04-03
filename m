@@ -1,35 +1,44 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NxpqK-0004Jj-3m for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Apr 2010 01:00:00 +0200
-Received: from f053032126.adsl.alicedsl.de ([78.53.32.126]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NxpnA-0000RU-FS for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Apr 2010 22:56:44 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nxxis-0008UU-3x for openembedded-devel@lists.openembedded.org;
+	Sat, 03 Apr 2010 09:24:50 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nxxfh-0000WC-IO for openembedded-devel@lists.openembedded.org;
+	Sat, 03 Apr 2010 09:21:33 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 03 Apr 2010 09:21:33 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 03 Apr 2010 09:21:33 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100402211847.GK3270@jama>
-References: <1269796691.8018.74.camel@mattotaupa>
-	<1269955259.4103.51.camel@mattotaupa>
-	<1270223959.3873.29.camel@mattotaupa>
-	<l2s19c1b8a91004021128sa6116ab2p62cec8cd78c4db43@mail.gmail.com>
-	<20100402211847.GK3270@jama>
-Date: Sat, 03 Apr 2010 00:56:42 +0200
-Message-ID: <1270249002.3714.29.camel@mattotaupa>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 03 Apr 2010 09:21:20 +0200
+Message-ID: <hp6q9g$di5$1@dough.gmane.org>
+References: <1270135981.4993.128.camel@rex>
+	<hp4s4q$40a$1@dough.gmane.org>	<hp4vat$f2l$1@dough.gmane.org>
+	<1270244497.4993.185.camel@rex>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
+In-Reply-To: <1270244497.4993.185.camel@rex>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Setting `PV` in recipes using SCM repositories (was: [PATCH v3] enna: Move to own recipe folder and update to new Enna hg repository.)
+Subject: Re: Request for branch merge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,63 +52,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Apr 2010 23:00:00 -0000
-X-Groupsio-MsgNum: 18409
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-xQp05enbx2xwZ9+P+eEW"
+X-List-Received-Date: Sat, 03 Apr 2010 07:24:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-xQp05enbx2xwZ9+P+eEW
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am Freitag, den 02.04.2010, 23:18 +0200 schrieb Martin Jansa:
-> On Fri, Apr 02, 2010 at 11:28:10AM -0700, Khem Raj wrote:
-> > On Fri, Apr 2, 2010 at 8:59 AM, Paul Menzel
-> > <paulepanter@users.sourceforge.net> wrote:
-> > > 1. Create `enna.inc`.
-> > > 2. Use `INC_PR`.
-> > > 3. Move to new repository location.
-> > > 4. Use `NOTQUITESRCREV` since `SRCREV` seems to get set to the one fr=
-om the EFL recipes.
->=20
-> You can use SRCREV again after
-> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3D82b394467d=
-9142edf2721176244c3a7eb26ba69a
+On 02-04-10 23:41, Richard Purdie wrote:
+> On Fri, 2010-04-02 at 16:35 +0200, Koen Kooi wrote:
+>> And lots of:
+>>
+>> : QA Issue with staging: libssp_nonshared.la failed sanity test
+>> (installed) in path
+>> /OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+> 
+> This one I can guess the reason for, we're missing the lamangler
+> function helper for cross packages. At the bottom of cross.bbclass, try
+> changing:
+> 
+> mv ${SYSROOT_DESTDIR}${target_base_libdir}/* ${SYSROOT_DESTDIR}${STAGING_DIR_TARGET}${target_base_libdir}/ || true
+> mv ${SYSROOT_DESTDIR}${target_libdir}/* ${SYSROOT_DESTDIR}${STAGING_DIR_TARGET}${target_libdir}/ || true
+> 
+> to become
+> 
+> rm -rf ${SYSROOT_DESTDIR}${target_base_libdir}/
+> rm -rf ${SYSROOT_DESTDIR}${target_libdir}/
+> sysroot_stage_libdir ${D}${target_base_libdir} ${SYSROOT_DESTDIR}${STAGING_DIR_TARGET}${target_base_libdir}
+> sysroot_stage_libdir ${D}${target_libdir} ${SYSROOT_DESTDIR}${STAGING_DIR_TARGET}${target_libdir}
+> 
+> which should mean the mangling happens correctly. Sorry I can't
+> test/push this right at the moment.
 
-I guess I have to resend a v4.
+I pushed that to
+http://gitorious.org/angstrom/openembedded/commits/koen/rpurdie-wip-rebased
 
-> And maybe you want rev shown in PV or PR
-> PV =3D "0.4.0+hg${SRCPV}" or=20
-> PR_append =3D "+hg${SRCPV}"
-> is quire common and should work for hg too (haven't checked)
+regards,
 
-Unfortunately I could not find any information about `SRCPV` in the
-BitBake or OE manual. What is the difference to `SRCREV`?
-
-Anyway, the problem I have with appending the `SRCREV` to `PV` is, that
-if you change the revision `bitbake -c clean recipe.bb` will not work
-and the old files stay in the build tree. Is that true with `SRCPV`
-also?
-
-Could the TSC make a suggestion on how to set `PV` in recipes using SCM
-repositories.
-
-
-Thanks,
-
-Paul
-
---=-xQp05enbx2xwZ9+P+eEW
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAku2dioACgkQPX1aK2wOHVjbBQCeN6kWw6l/KbRfM8iX3UtqT2Jo
-DL8AnjhlnjVCQHq49ZnzooMaqliFiE9F
-=2Eoa
+iD8DBQFLtuxwMkyGM64RGpERAoeZAKCEnMZNc1/LwWLkfKAPFT8oFVqrfACbBm04
+G8xIY0k4bvzPyLHPUJEhgB4=
+=jHZ6
 -----END PGP SIGNATURE-----
 
---=-xQp05enbx2xwZ9+P+eEW--
+
+
