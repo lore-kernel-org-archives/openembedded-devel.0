@@ -1,31 +1,45 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Ny7xM-0005Oe-5i
+	(envelope-from <Tom_Rini@mentor.com>) id 1NyCfV-00011C-It
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Apr 2010 20:20:29 +0200
-Received: (qmail 28583 invoked by uid 813007); 3 Apr 2010 18:17:10 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 3 Apr 2010 18:17:10 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 3 Apr 2010 20:17:09 +0200
-User-Agent: KMail/1.13.2 (Linux/2.6.34-rc2-wl-47166-ged2da1f; KDE/4.4.2; x86_64;
-	; )
-References: <20100403171724.b9df4c84.ospite@studenti.unina.it>
-In-Reply-To: <20100403171724.b9df4c84.ospite@studenti.unina.it>
-MIME-Version: 1.0
-Message-Id: <201004032017.10514.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+	Sun, 04 Apr 2010 01:22:22 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1NyCcH-0004rr-Ch from Tom_Rini@mentor.com ;
+	Sat, 03 Apr 2010 16:19:01 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Sat, 3 Apr 2010 16:19:01 -0700
+Received: from 172.30.80.165 ([172.30.80.165]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Sat,  3 Apr 2010 23:11:30 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	03 Apr 2010 16:11:28 -0700
+From: Tom Rini <tom_rini@mentor.com>
+To: Gary Thomas <gary@mlbassoc.com>
+In-Reply-To: <4BB7795D.6050600@mlbassoc.com>
+References: <4BB35552.9070508@mlbassoc.com>
+	<v2q19c1b8a91003311006zc7a7eff8o9f2a88a1f42b6c1d@mail.gmail.com>
+	<4BB382AA.3040901@mlbassoc.com> <1270056997.6277.89.camel@trini-m4400>
+	<4BB75E89.6030708@mlbassoc.com> <1270312858.3653.44.camel@trini-m4400>
+	<4BB7795D.6050600@mlbassoc.com>
+Organization: Mentor Graphics Corporation
+Date: Sat, 03 Apr 2010 16:11:28 -0700
+Message-ID: <1270336288.3653.45.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 03 Apr 2010 23:19:01.0121 (UTC)
+	FILETIME=[0B3D9710:01CAD384]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: gtk+-native-2.20.0-r8.0 fails in do_configure.
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: FireFox on PowerPC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,33 +53,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Apr 2010 18:20:29 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-2"
+X-List-Received-Date: Sat, 03 Apr 2010 23:22:22 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dnia sobota, 3 kwietnia 2010 o 17:17:24 Antonio Ospite napisa=B3(a):
-> when building gtk+-native-2.20.0-r8.0 (actually bitbaking
-> fso-console-image DISTRO=3Dminimal MACHINE=3Da780) I get this message:
+On Sat, 2010-04-03 at 11:22 -0600, Gary Thomas wrote:
+> On 04/03/2010 10:40 AM, Tom Rini wrote:
+> > On Sat, 2010-04-03 at 09:28 -0600, Gary Thomas wrote:
+> >
+> >> That said, this seems to be a [Make] parallelism problem, not clear wh=
+y/how.
+> >> If I just rerun 'bitbake firefox' which restarts the compile step, it =
+will
+> >> run to completion.  I do normally use -j4, but disabling this did not =
+seem
+> >> to make any difference.
+> >>
+> >> Note: the previous version I built (3.5.2) did not exhibit this behavi=
+our.
+> >
+> > Well that's depressing since we just added the best we can tell correct
+> > magic to build firefox with make -jN.  If you put PARALLEL_MAKE =3D "" =
+in
+> > the .bb, does it complete this time?
+> >
 >=20
->  Requested 'glib-2.0 >=3D 2.23.6' but version of GLib is 2.22.1
->=20
-> See also http://tinderbox.openembedded.org/packages/540390/
->=20
-> I can workaround that locally but I would like to learn what the best
-> way to solve such issues would be. I don't see any
-> preferred-minimal-versions.inc
+> No change, I'm afraid.
 
-Recent glib-2.0 recipes has BBCLASSEXTEND =3D "native" set but we also have=
-=20
-glib-2.0-native recipes... I think that native ones should be dropped.
+Interesting.  From log.do_compile, was make -jN taken out?  I kinda fear
+not...
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
