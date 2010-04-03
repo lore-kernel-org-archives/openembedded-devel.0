@@ -1,43 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nxxr8-0004iM-Qh for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Apr 2010 09:33:23 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Nxxnw-0003Sd-3o for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Apr 2010 09:30:04 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Apr 2010 09:30:04 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Apr 2010 09:30:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Ny1C5-0005Bz-RD for openembedded-devel@lists.openembedded.org;
+	Sat, 03 Apr 2010 13:07:14 +0200
+Received: from f053033237.adsl.alicedsl.de ([78.53.33.237]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Ny18v-0007lO-Mz for openembedded-devel@lists.openembedded.org;
+	Sat, 03 Apr 2010 11:03:57 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 03 Apr 2010 09:23:00 +0200
-Message-ID: <hp6qck$di5$2@dough.gmane.org>
-References: <1270135981.4993.128.camel@rex> <hp4s4q$40a$1@dough.gmane.org>
-	<1270243792.4993.180.camel@rex>
+In-Reply-To: <20100402211847.GK3270@jama>
+References: <1269796691.8018.74.camel@mattotaupa>
+	<1269955259.4103.51.camel@mattotaupa>
+	<1270223959.3873.29.camel@mattotaupa>
+	<l2s19c1b8a91004021128sa6116ab2p62cec8cd78c4db43@mail.gmail.com>
+	<20100402211847.GK3270@jama>
+Date: Sat, 03 Apr 2010 13:03:54 +0200
+Message-ID: <1270292634.3692.29.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
-In-Reply-To: <1270243792.4993.180.camel@rex>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Request for branch merge
+Subject: [PATCH v4] enna: Move to own recipe folder and update to new Enna hg repository.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,56 +43,139 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Apr 2010 07:33:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 03 Apr 2010 11:07:14 -0000
+X-Groupsio-MsgNum: 18412
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-NFYeNRaJQury4e/iHcwm"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-NFYeNRaJQury4e/iHcwm
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 02-04-10 23:29, Richard Purdie wrote:
-> On Fri, 2010-04-02 at 15:40 +0200, Koen Kooi wrote:
->> While testing (rebased on top of this mornings OE, bitbake master) I'm
->> getting messages like this:
->>
->> //OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/python2.6/lib-dynload/strop.so:
->> RPATH=/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib
->> //OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/python2.6/lib-dynload/strop.so:
->> new RPATH: $ORIGIN/../../../../usr/lib
->> open: Permission denied
->> elf_open: Invalid argument
->>
->> Are those messages from chrpath and can they be ignored?
-> 
-> The first messages are from the class and are safe to ignore. The
-> permission denied suggests something was added to staging that was
-> readonly? Can you check the permissions
-> on //OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/python2.6/lib-dynload/strop.so and see if that is the case. It would make sense for that code to check for read only and handle that case, restoring the permissions afterwards.
->
+1. Create `enna.inc`.
+2. Use `INC_PR`.
+3. Move to new repository location.
+4. Update license to LGPLv2.1+.
+5. Build tested with GCC 4.4.3 and Binutils 2.20.1 for `MACHINE =3D "beagle=
+board".
+6. Build tested with GCC 4.3.3 and Binuitls 2.18.50 for `MACHINE =3D "beagl=
+eboard".
+7. Remove `dbus` from `DEPEND` since `edbus` already depends an it.
+8. `libmusicbrainz`, `lightmediascanner` and `taglib` are not needed anymor=
+e as `DEPENDS`.
+9. `do_configure_prepend()` fixes [1]. Thanks Koen.
+10. libvalhalla 2.0.0 (`libvalhalla_hg.bb`) is needed for this version.
 
-koen@dominion:/OE/org.openembedded.dev$ ls -la
-/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/python2.6/lib-dynload/strop.so
+[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-March/0188=
+00.html
 
-- -rwxr-xr-x 1 koen koen 70455 Apr  2 15:38
-/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/python2.6/lib-dynload/strop.so*
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+# v1 =E2=86=92 v2
+=E2=80=A2 Use `NOTQUITESRCREV`. Manually =E2=80=9Cimproving=E2=80=9D things=
+ during composing the message without testing is not a good idea.
+=E2=80=A2 Update revision. (Just because.)
+=E2=80=A2 Update commit message.
 
+# v2 =E2=86=92 v3
+=E2=80=A2 Update `SRCREV` which fixed `ERROR: QA Issue with enna:`.
+=E2=80=A2 New efl revisions fixed `enna: symbol lookup error: /usr/lib/libe=
+lementary-ver-pre-svn-05.so.0: undefined symbol: ECORE_X_ATOM_E_ILLUME_TOP_=
+SHELF_GEOMETRY` [2].
 
-> I won't get to it this weekend but I will make sure its fixed on Tuesday
-> if you can confirm that is the problem.
+[2] https://geexbox.org/sympa/arc/devel/2010-03/msg00116.html
 
-It builds a working 'console-image' for beagleboard and hawkboard, so
-the basics are OK.
+# v3 =E2=86=92 v4
+=E2=80=A2 Use `SRCREV` as mentioned by Martin [3].
+=E2=80=A2 Update revision to current tip.
 
-regards,
+[3] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-April/0190=
+18.html
 
-Koen
+Thanks for all your help!
+---
+ recipes/e17/enna_svn.bb |   15 ---------------
+ recipes/enna/enna.inc   |   16 ++++++++++++++++
+ recipes/enna/enna_hg.bb |    9 +++++++++
+ 3 files changed, 25 insertions(+), 15 deletions(-)
+ delete mode 100644 recipes/e17/enna_svn.bb
+ create mode 100644 recipes/enna/enna.inc
+ create mode 100644 recipes/enna/enna_hg.bb
+
+diff --git a/recipes/e17/enna_svn.bb b/recipes/e17/enna_svn.bb
+deleted file mode 100644
+index f81990c..0000000
+--- a/recipes/e17/enna_svn.bb
++++ /dev/null
+@@ -1,15 +0,0 @@
+-DESCRIPTION =3D "Enna is a media center application based on EFL"
+-LICENSE =3D "GPL"
+-DEPENDS =3D "curl dbus eet evas edje ecore edbus emotion"
+-DEPENDS +=3D "libmusicbrainz lightmediascanner libxml2 taglib"
+-SECTION =3D "x11/multimedia"
+-PV =3D "0.2.0+svnr${SRCPV}"
+-PR =3D "r1"
+-SRCREV =3D "${EFL_SRCREV}"
+-
+-inherit e
+-
+-SRC_URI =3D "svn://svn.enlightenment.org/svn/e/trunk/MISC;module=3Denna;pr=
+oto=3Dhttp"
+-S =3D "${WORKDIR}/enna"
+-
+-FILES_${PN}-dbg +=3D "${libdir}/${PN}/modules/.debug"
+diff --git a/recipes/enna/enna.inc b/recipes/enna/enna.inc
+new file mode 100644
+index 0000000..4cc5b48
+--- /dev/null
++++ b/recipes/enna/enna.inc
+@@ -0,0 +1,16 @@
++DESCRIPTION =3D "Enna is a media center application based on EFL."
++HOMEPAGE =3D "http://${PN}.geexbox.org/"
++SECTION =3D "x11/multimedia"
++LICENSE =3D "LGPLv2.1+"
++DEPENDS =3D "curl eet evas edje ecore edbus elementary emotion"
++DEPENDS +=3D "libxml2 libvalhalla libplayer"
++
++INC_PR =3D "r1"
++
++SRC_URI =3D "http://${PN}.geexbox.org/releases/${P}.tar.bz2;name=3D${PN}"
++
++inherit autotools pkgconfig
++
++do_configure_prepend() {
++	autopoint || touch config.rpath
++}
+diff --git a/recipes/enna/enna_hg.bb b/recipes/enna/enna_hg.bb
+new file mode 100644
+index 0000000..89fa12b
+--- /dev/null
++++ b/recipes/enna/enna_hg.bb
+@@ -0,0 +1,9 @@
++require enna.inc
++PV =3D "0.4.0+hg"
++PR =3D "${INC_PR}.0"
++
++SRCREV =3D "2a9c5f249b47"
++
++SRC_URI =3D "hg://hg.geexbox.org;proto=3Dhttp;module=3D${PN};rev=3D${SRCRE=
+V}"
++
++S =3D "${WORKDIR}/${PN}"
+--=20
+1.7.0.3
+
+--=-NFYeNRaJQury4e/iHcwm
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-iD8DBQFLtuzTMkyGM64RGpERAjRoAKCzYmyRXb96lzCtuW1PPSXK/MTGDgCgi6OJ
-Hcseox1gKJSsztDFk//7i+4=
-=aR2s
+iEYEABECAAYFAku3IJoACgkQPX1aK2wOHVjPVACeKUxV9e0yVU0zvNlL1vRSIa/i
+YxEAoIYEOC7efgwW8Zf3crCKbWqxtw3Y
+=MU+q
 -----END PGP SIGNATURE-----
 
-
-
+--=-NFYeNRaJQury4e/iHcwm--
