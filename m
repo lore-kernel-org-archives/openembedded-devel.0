@@ -1,39 +1,32 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Ny6SO-0005jT-Ir
+	(envelope-from <gary@mlbassoc.com>) id 1Ny76d-0003Ag-EZ
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Apr 2010 18:44:25 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1Ny6PA-0003If-2q from Tom_Rini@mentor.com ;
-	Sat, 03 Apr 2010 09:41:04 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Sat, 3 Apr 2010 09:41:03 -0700
-Received: from 172.30.80.165 ([172.30.80.165]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Sat,  3 Apr 2010 16:40:59 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	03 Apr 2010 09:40:58 -0700
-From: Tom Rini <tom_rini@mentor.com>
-To: Gary Thomas <gary@mlbassoc.com>
-In-Reply-To: <4BB75E89.6030708@mlbassoc.com>
-References: <4BB35552.9070508@mlbassoc.com>
-	<v2q19c1b8a91003311006zc7a7eff8o9f2a88a1f42b6c1d@mail.gmail.com>
-	<4BB382AA.3040901@mlbassoc.com> <1270056997.6277.89.camel@trini-m4400>
+	Sat, 03 Apr 2010 19:26:00 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id B6442166055D; Sat,  3 Apr 2010 11:22:41 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id E922A16604FF;
+	Sat,  3 Apr 2010 11:22:39 -0600 (MDT)
+Message-ID: <4BB7795D.6050600@mlbassoc.com>
+Date: Sat, 03 Apr 2010 11:22:37 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.8) Gecko/20100301 Fedora/3.0.3-1.fc11 Thunderbird/3.0.3
+MIME-Version: 1.0
+To: Tom Rini <tom_rini@mentor.com>
+References: <4BB35552.9070508@mlbassoc.com>	
+	<v2q19c1b8a91003311006zc7a7eff8o9f2a88a1f42b6c1d@mail.gmail.com>	
+	<4BB382AA.3040901@mlbassoc.com>
+	<1270056997.6277.89.camel@trini-m4400>	
 	<4BB75E89.6030708@mlbassoc.com>
-Organization: Mentor Graphics Corporation
-Date: Sat, 03 Apr 2010 09:40:58 -0700
-Message-ID: <1270312858.3653.44.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 03 Apr 2010 16:41:03.0661 (UTC)
-	FILETIME=[732A55D0:01CAD34C]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+	<1270312858.3653.44.camel@trini-m4400>
+In-Reply-To: <1270312858.3653.44.camel@trini-m4400>
+X-SA-Exim-Connect-IP: 76.76.67.137
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -52,29 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Apr 2010 16:44:25 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 03 Apr 2010 17:26:00 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sat, 2010-04-03 at 09:28 -0600, Gary Thomas wrote:
+On 04/03/2010 10:40 AM, Tom Rini wrote:
+> On Sat, 2010-04-03 at 09:28 -0600, Gary Thomas wrote:
+>
+>> That said, this seems to be a [Make] parallelism problem, not clear why/how.
+>> If I just rerun 'bitbake firefox' which restarts the compile step, it will
+>> run to completion.  I do normally use -j4, but disabling this did not seem
+>> to make any difference.
+>>
+>> Note: the previous version I built (3.5.2) did not exhibit this behaviour.
+>
+> Well that's depressing since we just added the best we can tell correct
+> magic to build firefox with make -jN.  If you put PARALLEL_MAKE = "" in
+> the .bb, does it complete this time?
+>
 
-> That said, this seems to be a [Make] parallelism problem, not clear why/h=
-ow.
-> If I just rerun 'bitbake firefox' which restarts the compile step, it wil=
-l
-> run to completion.  I do normally use -j4, but disabling this did not see=
-m
-> to make any difference.
->=20
-> Note: the previous version I built (3.5.2) did not exhibit this behaviour=
-.
+No change, I'm afraid.
 
-Well that's depressing since we just added the best we can tell correct
-magic to build firefox with make -jN.  If you put PARALLEL_MAKE =3D "" in
-the .bb, does it complete this time?
-
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
