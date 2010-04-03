@@ -1,36 +1,32 @@
-Received: from smtp-out110.alice.it ([85.37.17.110])
+Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1Ny5AY-0007S0-2u
-	for openembedded-devel@openembedded.org; Sat, 03 Apr 2010 17:21:54 +0200
-Received: from fbcmmo06.fbc.local ([192.168.184.137]) by smtp-out110.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 3 Apr 2010 17:17:31 +0200
-Received: from FBCMCL01B03.fbc.local ([192.168.69.84]) by fbcmmo06.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 3 Apr 2010 17:17:30 +0200
-Received: from jcn ([82.55.137.76]) by FBCMCL01B03.fbc.local with Microsoft
-	SMTPSVC(6.0.3790.3959); Sat, 3 Apr 2010 17:17:30 +0200
-Date: Sat, 3 Apr 2010 17:17:24 +0200
-From: Antonio Ospite <ospite@studenti.unina.it>
+	(envelope-from <gary@mlbassoc.com>) id 1Ny5Jo-0003A0-GM
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 03 Apr 2010 17:31:29 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 987FA1660568; Sat,  3 Apr 2010 09:28:10 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id CD10A1660559;
+	Sat,  3 Apr 2010 09:28:09 -0600 (MDT)
+Message-ID: <4BB75E89.6030708@mlbassoc.com>
+Date: Sat, 03 Apr 2010 09:28:09 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.8) Gecko/20100301 Fedora/3.0.3-1.fc11 Thunderbird/3.0.3
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20100403171724.b9df4c84.ospite@studenti.unina.it>
-X-Mailer: Sylpheed 3.0.1 (GTK+ 2.18.9; x86_64-pc-linux-gnu)
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-Mime-Version: 1.0
-X-OriginalArrivalTime: 03 Apr 2010 15:17:30.0158 (UTC)
-	FILETIME=[C6E27CE0:01CAD340]
-X-SA-Exim-Connect-IP: 85.37.17.110
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+References: <4BB35552.9070508@mlbassoc.com>	<v2q19c1b8a91003311006zc7a7eff8o9f2a88a1f42b6c1d@mail.gmail.com>	<4BB382AA.3040901@mlbassoc.com>
+	<1270056997.6277.89.camel@trini-m4400>
+In-Reply-To: <1270056997.6277.89.camel@trini-m4400>
+X-SA-Exim-Connect-IP: 76.76.67.137
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: gtk+-native-2.20.0-r8.0 fails in do_configure.
+Subject: Re: FireFox on PowerPC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,54 +40,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Apr 2010 15:21:54 -0000
-X-Groupsio-MsgNum: 18417
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg="PGP-SHA1";
-	boundary="Signature=_Sat__3_Apr_2010_17_17_24_+0200_+RJgk6Ib/pMRWbgN"
+X-List-Received-Date: Sat, 03 Apr 2010 15:31:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---Signature=_Sat__3_Apr_2010_17_17_24_+0200_+RJgk6Ib/pMRWbgN
-Content-Type: text/plain; charset=US-ASCII
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 03/31/2010 11:36 AM, Tom Rini wrote:
+> On Wed, 2010-03-31 at 11:13 -0600, Gary Thomas wrote:
+>> On 03/31/2010 11:06 AM, Khem Raj wrote:
+>>> On Wed, Mar 31, 2010 at 6:59 AM, Gary Thomas<gary@mlbassoc.com>   wrote:
+>>>> Has anyone had success building FireFox for a PowerPC
+>>>> target - I'm using the development branch (org.openembedded.dev)
+>>>>    MACHINE=efika
+>>>>    DISTRO = "angstrom-2008.1"
+>>>>
+>>>> I've tried to build a number of different FireFox packages,
+>>>> none with success.  So far I've tried 2.0.0.3, 3.5.2&   3.6.2
+>>>>
+>>>> Any pointers?
+>>>>
+>>>> Query: is there an easy way to build a particular package version?
+>>>> What I've done is just add a line like this to my local.conf:
+>>>>    PREFERRED_VERSION_firefox="3.5.2"
+>>>
+>>>
+>>> what errors do you get.
+>>
+>> It depends on the version.  For 3.6.2 (latest), I get this:
+>>
+>> ccache powerpc-angstrom-linux-g++ -mcpu=603e -mhard-float  -L/local/Angstrom_BeagleBoard/tmp/staging/ppc603e-angstrom-linux/usr/lib
+>> -Wl,-rpath-link,/local/Angstrom_BeagleBoard/tmp/staging/ppc603e-angstrom-linux/usr/lib -Wl,-O1 -Wl,--hash-style=gnu -o jsbool.o -c -fvisibility=hidden -DOSTYPE=\"Linux\"
+>> -DOSARCH=Linux -DEXPORT_JS_API  -DJS_USE_SAFE_ARENA  -I. -I. -I./../../dist/include -I./../../dist/include/nsprpub
+>> -I/local/Angstrom_BeagleBoard/tmp/work/ppc603e-angstrom-linux/firefox-3.6.2-r0/mozilla-1.9.2/dist/include/nspr   -I.    -fPIC
+>> -isystem/local/Angstrom_BeagleBoard/tmp/staging/ppc603e-angstrom-linux/usr/include  -fno-rtti -fno-exceptions -Wall -Wpointer-arith -Woverloaded-virtual -Wsynth
+>> -Wno-ctor-dtor-privacy -Wno-non-virtual-dtor -Wcast-align -Wno-invalid-offsetof -Wno-variadic-macros -Wno-long-long -pedantic
+>> -isystem/local/Angstrom_BeagleBoard/tmp/staging/ppc603e-angstrom-linux/usr/include -Os -fsigned-char -fno-strict-aliasing -fpermissive -fvisibility-inlines-hidden
+>> -fno-strict-aliasing -pthread -pipe  -DNDEBUG -DTRIMMED -g -fno-inline -O2  -isystem/local/Angstrom_BeagleBoard/tmp/staging/ppc603e-angstrom-linux/usr/include  -DMOZILLA_CLIENT
+>> -include ./js-confdefs.h -Wp,-MD,.deps/jsbool.pp jsbool.cpp
+>> jsapi.cpp: In function 'JSBool JS_ConvertArgumentsVA(JSContext*, uintN, jsval*, const char*, __va_list_tag*)':
+>> jsapi.cpp:289: error: cannot convert '__va_list_tag**' to '__va_list_tag (*)[1]' for argument '5' to 'JSBool TryArgumentFormatter(JSContext*, const char**, JSBool, jsval**,
+>> __va_list_tag (*)[1])'
+>> jsapi.cpp: In function 'jsval* JS_PushArgumentsVA(JSContext*, void**, const char*, __va_list_tag*)':
+>> jsapi.cpp:398: error: cannot convert '__va_list_tag**' to '__va_list_tag (*)[1]' for argument '5' to 'JSBool TryArgumentFormatter(JSContext*, const char**, JSBool, jsval**,
+>> __va_list_tag (*)[1])'
+>> make[4]: *** [jsapi.o] Error 1
+>> make[4]: *** Waiting for unfinished jobs....
+>> make[4]: Leaving directory `/local/Angstrom_BeagleBoard/tmp/work/ppc603e-angstrom-linux/firefox-3.6.2-r0/mozilla-1.9.2/js/src'
+>> make[3]: *** [libs_tier_js] Error 2
+>> make[3]: Leaving directory `/local/Angstrom_BeagleBoard/tmp/work/ppc603e-angstrom-linux/firefox-3.6.2-r0/mozilla-1.9.2'
+>> make[2]: *** [tier_js] Error 2
+>> make[2]: Leaving directory `/local/Angstrom_BeagleBoard/tmp/work/ppc603e-angstrom-linux/firefox-3.6.2-r0/mozilla-1.9.2'
+>> make[1]: *** [default] Error 2
+>> make[1]: Leaving directory `/local/Angstrom_BeagleBoard/tmp/work/ppc603e-angstrom-linux/firefox-3.6.2-r0/mozilla-1.9.2'
+>> make: *** [build] Error 2
+>> FATAL: oe_runmake failed
+>>
+>> Note: to even get this far, I had to apply the attached patch
+>> as the default setup falls apart with regard to va_list processing.
+>
+> Oh man that takes me (and I bet you too) back... Sounds like mozilla
+> needs some patching again.  Maybe the ppcnux folks have one somewhere
+> already tho?
+>
 
-Hi,
+I didn't find anything there.
 
-when building gtk+-native-2.20.0-r8.0 (actually bitbaking
-fso-console-image DISTRO=3Dminimal MACHINE=3Da780) I get this message:
+That said, this seems to be a [Make] parallelism problem, not clear why/how.
+If I just rerun 'bitbake firefox' which restarts the compile step, it will
+run to completion.  I do normally use -j4, but disabling this did not seem
+to make any difference.
 
- Requested 'glib-2.0 >=3D 2.23.6' but version of GLib is 2.22.1
+Note: the previous version I built (3.5.2) did not exhibit this behaviour.
 
-See also http://tinderbox.openembedded.org/packages/540390/
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
-I can workaround that locally but I would like to learn what the best
-way to solve such issues would be. I don't see any
-preferred-minimal-versions.inc
 
-Thanks,
-   Antonio
-
---=20
-Antonio Ospite
-http://ao2.it
-
-PGP public key ID: 0x4553B001
-
-A: Because it messes up the order in which people normally read text.
-   See http://en.wikipedia.org/wiki/Posting_style
-Q: Why is top-posting such a bad thing?
-A: Top-posting.
-Q: What is the most annoying thing in e-mail?
-
---Signature=_Sat__3_Apr_2010_17_17_24_+0200_+RJgk6Ib/pMRWbgN
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEARECAAYFAku3XAQACgkQ5xr2akVTsAGjTgCfQSWyroLfwF0lvbMqwn6+dS+0
-mNYAoIr9TFVQ2Bu5b+g6szZvG9A5Z2lc
-=kC5E
------END PGP SIGNATURE-----
-
---Signature=_Sat__3_Apr_2010_17_17_24_+0200_+RJgk6Ib/pMRWbgN--
