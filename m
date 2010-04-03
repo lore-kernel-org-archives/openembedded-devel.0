@@ -1,37 +1,31 @@
-Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1Ny76d-0003Ag-EZ
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Ny7xM-0005Oe-5i
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Apr 2010 19:26:00 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id B6442166055D; Sat,  3 Apr 2010 11:22:41 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id E922A16604FF;
-	Sat,  3 Apr 2010 11:22:39 -0600 (MDT)
-Message-ID: <4BB7795D.6050600@mlbassoc.com>
-Date: Sat, 03 Apr 2010 11:22:37 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.8) Gecko/20100301 Fedora/3.0.3-1.fc11 Thunderbird/3.0.3
+	Sat, 03 Apr 2010 20:20:29 +0200
+Received: (qmail 28583 invoked by uid 813007); 3 Apr 2010 18:17:10 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 3 Apr 2010 18:17:10 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 3 Apr 2010 20:17:09 +0200
+User-Agent: KMail/1.13.2 (Linux/2.6.34-rc2-wl-47166-ged2da1f; KDE/4.4.2; x86_64;
+	; )
+References: <20100403171724.b9df4c84.ospite@studenti.unina.it>
+In-Reply-To: <20100403171724.b9df4c84.ospite@studenti.unina.it>
 MIME-Version: 1.0
-To: Tom Rini <tom_rini@mentor.com>
-References: <4BB35552.9070508@mlbassoc.com>	
-	<v2q19c1b8a91003311006zc7a7eff8o9f2a88a1f42b6c1d@mail.gmail.com>	
-	<4BB382AA.3040901@mlbassoc.com>
-	<1270056997.6277.89.camel@trini-m4400>	
-	<4BB75E89.6030708@mlbassoc.com>
-	<1270312858.3653.44.camel@trini-m4400>
-In-Reply-To: <1270312858.3653.44.camel@trini-m4400>
-X-SA-Exim-Connect-IP: 76.76.67.137
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+Message-Id: <201004032017.10514.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: FireFox on PowerPC
+Subject: Re: gtk+-native-2.20.0-r8.0 fails in do_configure.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,31 +39,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Apr 2010 17:26:00 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 03 Apr 2010 18:20:29 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-2"
+Content-Transfer-Encoding: quoted-printable
 
-On 04/03/2010 10:40 AM, Tom Rini wrote:
-> On Sat, 2010-04-03 at 09:28 -0600, Gary Thomas wrote:
->
->> That said, this seems to be a [Make] parallelism problem, not clear why/how.
->> If I just rerun 'bitbake firefox' which restarts the compile step, it will
->> run to completion.  I do normally use -j4, but disabling this did not seem
->> to make any difference.
->>
->> Note: the previous version I built (3.5.2) did not exhibit this behaviour.
->
-> Well that's depressing since we just added the best we can tell correct
-> magic to build firefox with make -jN.  If you put PARALLEL_MAKE = "" in
-> the .bb, does it complete this time?
->
+Dnia sobota, 3 kwietnia 2010 o 17:17:24 Antonio Ospite napisa=B3(a):
+> when building gtk+-native-2.20.0-r8.0 (actually bitbaking
+> fso-console-image DISTRO=3Dminimal MACHINE=3Da780) I get this message:
+>=20
+>  Requested 'glib-2.0 >=3D 2.23.6' but version of GLib is 2.22.1
+>=20
+> See also http://tinderbox.openembedded.org/packages/540390/
+>=20
+> I can workaround that locally but I would like to learn what the best
+> way to solve such issues would be. I don't see any
+> preferred-minimal-versions.inc
 
-No change, I'm afraid.
+Recent glib-2.0 recipes has BBCLASSEXTEND =3D "native" set but we also have=
+=20
+glib-2.0-native recipes... I think that native ones should be dropped.
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
