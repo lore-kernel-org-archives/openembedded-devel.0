@@ -1,37 +1,36 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from smtp-out110.alice.it ([85.37.17.110])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Ny4d3-0007FH-TE for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Apr 2010 16:47:19 +0200
-Received: from f053033237.adsl.alicedsl.de ([78.53.33.237]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Ny4Zt-0006s7-FU for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Apr 2010 14:44:01 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <ospite@studenti.unina.it>) id 1Ny5AY-0007S0-2u
+	for openembedded-devel@openembedded.org; Sat, 03 Apr 2010 17:21:54 +0200
+Received: from fbcmmo06.fbc.local ([192.168.184.137]) by smtp-out110.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 3 Apr 2010 17:17:31 +0200
+Received: from FBCMCL01B03.fbc.local ([192.168.69.84]) by fbcmmo06.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 3 Apr 2010 17:17:30 +0200
+Received: from jcn ([82.55.137.76]) by FBCMCL01B03.fbc.local with Microsoft
+	SMTPSVC(6.0.3790.3959); Sat, 3 Apr 2010 17:17:30 +0200
+Date: Sat, 3 Apr 2010 17:17:24 +0200
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100403135105.GA6475@merkur.sol.de>
-References: <1269796691.8018.74.camel@mattotaupa>
-	<1269955259.4103.51.camel@mattotaupa>
-	<1270223959.3873.29.camel@mattotaupa>
-	<l2s19c1b8a91004021128sa6116ab2p62cec8cd78c4db43@mail.gmail.com>
-	<1270237489.3714.11.camel@mattotaupa>
-	<1270293620.3692.33.camel@mattotaupa>
-	<20100403135105.GA6475@merkur.sol.de>
-Date: Sat, 03 Apr 2010 16:43:58 +0200
-Message-ID: <1270305838.4237.23.camel@mattotaupa>
+Message-Id: <20100403171724.b9df4c84.ospite@studenti.unina.it>
+X-Mailer: Sylpheed 3.0.1 (GTK+ 2.18.9; x86_64-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-OriginalArrivalTime: 03 Apr 2010 15:17:30.0158 (UTC)
+	FILETIME=[C6E27CE0:01CAD340]
+X-SA-Exim-Connect-IP: 85.37.17.110
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: autopoint || touch config.rpath
+Subject: gtk+-native-2.20.0-r8.0 fails in do_configure.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,133 +44,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Apr 2010 14:47:19 -0000
-X-Groupsio-MsgNum: 18416
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-1oEuGVRORB+xXlTEGEaz"
+X-List-Received-Date: Sat, 03 Apr 2010 15:21:54 -0000
+X-Groupsio-MsgNum: 18417
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Sat__3_Apr_2010_17_17_24_+0200_+RJgk6Ib/pMRWbgN"
 
---=-1oEuGVRORB+xXlTEGEaz
-Content-Type: text/plain; charset="UTF-8"
+--Signature=_Sat__3_Apr_2010_17_17_24_+0200_+RJgk6Ib/pMRWbgN
+Content-Type: text/plain; charset=US-ASCII
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Am Samstag, den 03.04.2010, 15:51 +0200 schrieb Jens Seidel:
-> On Sat, Apr 03, 2010 at 01:20:20PM +0200, Paul Menzel wrote:
-> > Am Freitag, den 02.04.2010, 21:44 +0200 schrieb Paul Menzel:
-> > > Am Freitag, den 02.04.2010, 11:28 -0700 schrieb Khem Raj:
-> > > > On Fri, Apr 2, 2010 at 8:59 AM, Paul Menzel <paulepanter@users.sour=
-ceforge.net> wrote:
-> > > > > +do_configure_prepend() {
-> > > > > +       autopoint || touch config.rpath
-> > > > > +}
-> > > >=20
-> > > > empty config.rpath would build it wrongly isnt it. Probably this
-> > > > should be removed
->=20
-> Right.
-> =20
-> > > That is the work around Koen suggested [1]. Koen, can you comment
-> > > please.
-> >=20
-> > Is
-> >=20
-> >         do_configure_prepend() {
-> >                 autopoint || automake --add-missing
-> >         }
-> >=20
-> > a viable solution [2]?
->=20
-> No, it isn't. I really wonder about all these guesses. I agree that the
-> autotools stuff is not very easy to understand but one should only provid=
-e
-> patches if one knows it.
+Hi,
 
-You are right. Great to have an expert joining the discussion.
+when building gtk+-native-2.20.0-r8.0 (actually bitbaking
+fso-console-image DISTRO=3Dminimal MACHINE=3Da780) I get this message:
 
-> Let me short summarize:
->=20
-> automake is a tool to generate Makefile templates (called Makefile.in) fr=
-om
-> Makefile.am files. Normally a tgz ball ships already these generated file=
-s
-> (that's dictated by GNU). Nevertheless these files are often not committe=
-d
-> into version control systems and a script autogen.sh or better autoreconf=
- is
-> used to generate Makefile.in by calling automake. But autoreconf calls ev=
-en
-> more: e.g. autoconf (which generated configure) and now also autopoint.
-> autopoint generated the gettext infrastructure (the translation system to
-> support foreign languages) by copying all non config dependent gettext fi=
-les
-> (such as Makefile.in.in, some scripts, ...) into po and m4 macros. That's
-> also a good thing as this avoids committing generated files.
+ Requested 'glib-2.0 >=3D 2.23.6' but version of GLib is 2.22.1
 
-Thank you for this great summary. I am still clueless about
-`config.rpath` though.
+See also http://tinderbox.openembedded.org/packages/540390/
 
-> But why do you want to call either autopoint or automake? The belong
-> together and autoreconf should care about it. If this doesn' work it coul=
-d
-> be a bug in the package.
->=20
-> If you send me the project source and the command which fails (without
-> bitbake stuff as I never used it up to now) together with the
-> autoconf/automake versions I can try to inspect it. Since the error seems=
- to
-> happen in configure or even before there should be no difficult relations=
-hip to
-> bitbake and recipes, right?
-
-Correct. Though as far as I understood it using `inherit autotools` OE
-is using its own commands to set up the environment using
-`autotools.bbclass` and there you will find the following line [2]
-causing problems [3].
-
-    EXTRA_AUTORECONF =3D "--exclude=3Dautopoint"
-
-Nobody knows why this was added in the first place, but if you try to
-configure Enna [4] for example it will fail as I reported [5]. Other
-packages seem to be affected too.
-
-The argument is called in this line [6].
-
-    oenote Executing autoreconf --verbose --install --force ${EXTRA_AUTOREC=
-ONF} $acpaths
-    autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF} $acp=
-aths || oefatal "autoreconf execution failed."
-
-I cannot reproduce this using the provided files by Enna in my local
-environment.
-
+I can workaround that locally but I would like to learn what the best
+way to solve such issues would be. I don't see any
+preferred-minimal-versions.inc
 
 Thanks,
+   Antonio
 
-Paul
+--=20
+Antonio Ospite
+http://ao2.it
 
+PGP public key ID: 0x4553B001
 
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/classes/autotoo=
-ls.bbclass
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/classes/autotoo=
-ls.bbclass#n38
-[3] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-March/0188=
-18.html
-[4] http://enna.geexbox.org/
-[5] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-March/0187=
-96.html
-[6] http://cgit.openembedded.org/cgit.cgi/openembedded/tree/classes/autotoo=
-ls.bbclass#n136
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
 
---=-1oEuGVRORB+xXlTEGEaz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
+--Signature=_Sat__3_Apr_2010_17_17_24_+0200_+RJgk6Ib/pMRWbgN
+Content-Type: application/pgp-signature
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAku3VC4ACgkQPX1aK2wOHVhK9QCghh5yFJVUZC85B/QrF8BsZV6m
-EcUAniXVPEilFM1bdQKscVHb/VfEwW/X
-=3gG9
+iEYEARECAAYFAku3XAQACgkQ5xr2akVTsAGjTgCfQSWyroLfwF0lvbMqwn6+dS+0
+mNYAoIr9TFVQ2Bu5b+g6szZvG9A5Z2lc
+=kC5E
 -----END PGP SIGNATURE-----
 
---=-1oEuGVRORB+xXlTEGEaz--
+--Signature=_Sat__3_Apr_2010_17_17_24_+0200_+RJgk6Ib/pMRWbgN--
