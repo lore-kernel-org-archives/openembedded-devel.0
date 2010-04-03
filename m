@@ -1,35 +1,43 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Ny1Rz-0006oy-Jf for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Apr 2010 13:24:44 +0200
-Received: from f053033237.adsl.alicedsl.de ([78.53.33.237]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Ny1Op-0000vr-LJ for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Apr 2010 11:20:23 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ny3OT-0006AA-WD for openembedded-devel@lists.openembedded.org;
+	Sat, 03 Apr 2010 15:28:10 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ny3LH-00032K-3x for openembedded-devel@lists.openembedded.org;
+	Sat, 03 Apr 2010 15:24:51 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 03 Apr 2010 15:24:51 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 03 Apr 2010 15:24:51 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1270237489.3714.11.camel@mattotaupa>
-References: <1269796691.8018.74.camel@mattotaupa>
-	<1269955259.4103.51.camel@mattotaupa>
-	<1270223959.3873.29.camel@mattotaupa>
-	<l2s19c1b8a91004021128sa6116ab2p62cec8cd78c4db43@mail.gmail.com>
-	<1270237489.3714.11.camel@mattotaupa>
-Date: Sat, 03 Apr 2010 13:20:20 +0200
-Message-ID: <1270293620.3692.33.camel@mattotaupa>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 03 Apr 2010 15:24:40 +0200
+Message-ID: <hp7fio$3nc$1@dough.gmane.org>
+References: <1270135981.4993.128.camel@rex> <hp4s4q$40a$1@dough.gmane.org>
+	<1270243792.4993.180.camel@rex>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100318 Shredder/3.0.5pre
+In-Reply-To: <1270243792.4993.180.camel@rex>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: autopoint || touch config.rpath (was: [PATCH v3] enna: Move to own recipe folder and update to new Enna hg repository.)
+Subject: Re: Request for branch merge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,67 +51,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Apr 2010 11:25:17 -0000
-X-Groupsio-MsgNum: 18413
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-0LBYlRMHnWwh6vDys/iz"
+X-List-Received-Date: Sat, 03 Apr 2010 13:28:10 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-0LBYlRMHnWwh6vDys/iz
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am Freitag, den 02.04.2010, 21:44 +0200 schrieb Paul Menzel:
-> Am Freitag, den 02.04.2010, 11:28 -0700 schrieb Khem Raj:
-> > On Fri, Apr 2, 2010 at 8:59 AM, Paul Menzel
-> > <paulepanter@users.sourceforge.net> wrote:
->=20
-> [=E2=80=A6]
->=20
-> > > +do_configure_prepend() {
-> > > +       autopoint || touch config.rpath
-> > > +}
-> >=20
-> > empty config.rpath would build it wrongly isnt it. Probably this
-> > should be removed
->=20
-> That is the work around Koen suggested [1]. Koen, can you comment
-> please.
+On 02-04-10 23:29, Richard Purdie wrote:
+> On Fri, 2010-04-02 at 15:40 +0200, Koen Kooi wrote:
+>> While testing (rebased on top of this mornings OE, bitbake master) I'm
+>> getting messages like this:
+>>
+>> //OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/python2.6/lib-dynload/strop.so:
+>> RPATH=/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib
+>> //OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/python2.6/lib-dynload/strop.so:
+>> new RPATH: $ORIGIN/../../../../usr/lib
+>> open: Permission denied
+>> elf_open: Invalid argument
+>>
+>> Are those messages from chrpath and can they be ignored?
+> 
+> The first messages are from the class and are safe to ignore. The
+> permission denied suggests something was added to staging that was
+> readonly? Can you check the permissions
+> on //OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/python2.6/lib-dynload/strop.so and see if that is the case. It would make sense for that code to check for read only and handle that case, restoring the permissions afterwards.
+> 
+> I won't get to it this weekend but I will make sure its fixed on Tuesday
+> if you can confirm that is the problem.
 
-I do not know, if I should have answered in the thread of [1], but
-anyway.
+With that patch I get:
 
-Is
-
-        do_configure_prepend() {
-                autopoint || automake --add-missing
-        }
-
-a viable solution [2]? Or is this just the same as removing
-`EXTRA_AUTORECONF =3D "--exclude=3Dautopoint"` from `autotools.bbclass`?
-
-The configure went fine for me.
-
-
-Thanks,
-
-Paul
+NOTE: Task failed: ('function sysroot_stage_all failed',
+'/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/binutils-cross-2.18.50.0.7-r7.1/temp/log.sysroot_stage_all.7491')
+ERROR: Logfile of failure stored in:
+/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/binutils-cross-2.18.50.0.7-r7.1/temp/log.sysroot_stage_all.7491
+Log data follows:
+|
+/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/binutils-cross-2.18.50.0.7-r7.1/temp/run.sysroot_stage_all.7491:
+line 372: cd:
+/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/binutils-cross-2.18.50.0.7-r7.1/image/lib:
+No such file or directory
+| ERROR: Function sysroot_stage_all failed
 
 
-> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-March/01=
-8800.html
-[2] http://www.mail-archive.com/automake-patches@gnu.org/msg00479.html
+regards,
 
---=-0LBYlRMHnWwh6vDys/iz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAku3JHQACgkQPX1aK2wOHVgw8ACfbZ7C+imoW0CmDB8Zfm4t7R7f
-3f8AniGvZzos+lNzxVbnkRUpJuJXrra7
-=VP2m
+iD8DBQFLt0GYMkyGM64RGpERAo1jAJ9ZkzNdv2uefjQhFiszydtay99o7wCfWUtI
+ndju9T002woZjh8HWfBKj+8=
+=gBLB
 -----END PGP SIGNATURE-----
 
---=-0LBYlRMHnWwh6vDys/iz--
+
+
