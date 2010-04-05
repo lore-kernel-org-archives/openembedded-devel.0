@@ -1,35 +1,26 @@
-Received: from promwad.com ([83.149.69.23])
+Received: from [93.100.16.104] (helo=mate.hex)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vladimir.davydov@promwad.com>) id 1Nylkd-0000Pk-FP
+	(envelope-from <rik@mate.hex>) id 1NysOE-0006Dt-1z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Apr 2010 14:50:17 +0200
-Received: from [195.222.85.229] (helo=intranet.promwad.com)
-	by promwad.com with esmtps (TLSv1:AES256-SHA:256) (Exim 4.63)
-	(envelope-from <vladimir.davydov@promwad.com>) id 1NykpQ-0001sI-6g
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Apr 2010 14:50:52 +0300
-Received: from [178.124.121.51] (helo=linux-x8hi.localnet)
-	by intranet.promwad.com with esmtpsa
-	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <vladimir.davydov@promwad.com>) id 1Nykop-0002Xf-4h
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Apr 2010 14:50:16 +0300
-From: Vladimir Davydov <vladimir.davydov@promwad.com>
-Organization: Promwad
+	Mon, 05 Apr 2010 21:55:18 +0200
+Received: by mate.hex (Postfix, from userid 1000)
+	id 204B623C49; Mon,  5 Apr 2010 23:48:49 +0400 (MSD)
+From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 5 Apr 2010 14:50:08 +0300
-User-Agent: KMail/1.13.2 (Linux/2.6.31.12-0.2-desktop; KDE/4.4.2; i686; ; )
-MIME-Version: 1.0
-Message-Id: <201004051450.08298.vladimir.davydov@promwad.com>
-X-SA-Exim-Connect-IP: 83.149.69.23
-X-SA-Exim-Mail-From: vladimir.davydov@promwad.com
+Date: Mon,  5 Apr 2010 23:48:46 +0400
+Message-Id: <1270496927-14834-1-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.6.4.2
+In-Reply-To: <hp4781$59h$2@dough.gmane.org>
+References: <hp4781$59h$2@dough.gmane.org>
+X-SA-Exim-Connect-IP: 93.100.16.104
+X-SA-Exim-Mail-From: rik@mate.hex
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.1 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
+	RCVD_IN_PBL,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: how to enable the linux kernel in separate directory?
+Subject: [PATCH 1/2] gd: build with freetype support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,60 +34,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Apr 2010 12:50:26 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 05 Apr 2010 19:55:18 -0000
 
-Hi All,
+Support for freetype in gd is required for some packages and it looks
+like it was disabled previosly just because of build failures. Version
+2.0.35+2.0.36rc1 builds fine with it, so enable freetype for it.
 
-I need your suggestionts, how to enable the linux kernel most correctly in my 
-custom case.
-I have a directory with unpacked linux kernel source tree.
-This tree is under SVN control and used for development.
+Signed-off-by: Roman I Khimov <khimov@altell.ru>
+---
+ recipes/gd/gd_2.0.35+2.0.36rc1.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-Now common tree is following:
-./kernel-source-tree
-./openembedded
-
-I have created bb file for my linux config:
-#=========
-DESCRIPTION = "Linux Kernel for the mycustom dev platform"
-SECTION = "kernel"
-LICENSE = "GPLv2"
-PR = "r1"
-PV = "2.6.31-rc4"
-
-COMPATIBLE_HOST = "arm.*-linux"
-COMPATIBLE_MACHINE = "mycustom"
-
-S = "${WORKDIR}/linux-2.6"
-
-inherit kernel
-
-export ARCH="arm"
-
-
-do_fetch () {
-   cd ${WORKDIR}
-   ln -sf ${MYCUSTOM_KERNEL_PATH} ${S}
-}
-
-do_configure() {
-     install -m 644 ${S}/arch/arm/configs/mycustom-did_defconfig ${S}/.config
-     make ARCH=${ARCH} oldconfig
-}
-#=========
-
-MYCUSTOM_KERNEL_PATH is the path to the kernel-source-tree directory.
-
-It uses creation of symlink to the kernel source in the workdir.
-Is it very ugly?
-Could you suggest more useful variants for my case?
-
-
-Best regards, 
-Vladimir
+diff --git a/recipes/gd/gd_2.0.35+2.0.36rc1.bb b/recipes/gd/gd_2.0.35+2.0.36rc1.bb
+index efba70e..d1ea7f6 100644
+--- a/recipes/gd/gd_2.0.35+2.0.36rc1.bb
++++ b/recipes/gd/gd_2.0.35+2.0.36rc1.bb
+@@ -1,8 +1,8 @@
+ SECTION = "libs"
+ LICENSE = "GD"
+ DESCRIPTION = "gd is a library used to create PNG, JPEG, or WBMP images."
+-DEPENDS = "libpng jpeg zlib"
+-PR = "r2"
++DEPENDS = "freetype libpng jpeg zlib"
++PR = "r3"
+ 
+ SRC_URI = "http://www.libgd.org/releases/gd-2.0.36RC1.tar.gz;name=src"
+ SRC_URI[src.md5sum] = "39ac48e6d5e0012a3bd2248a0102f209"
+@@ -15,7 +15,7 @@ inherit autotools binconfig gettext
+ EXTRA_OECONF += " --with-zlib=${STAGING_LIBDIR}/.. \
+                   --with-png=${STAGING_LIBDIR}/.. \
+                   --with-jpeg=${STAGING_LIBDIR}/.. \
+-                  --without-freetype \
++                  --with-freetype \
+                   --without-fontconfig \
+                   --without-xpm \
+                   --without-x"
+-- 
+1.6.4.2
 
 
 
