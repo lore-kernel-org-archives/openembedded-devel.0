@@ -1,40 +1,35 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from promwad.com ([83.149.69.23])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1NyLU3-0006hd-13
+	(envelope-from <vladimir.davydov@promwad.com>) id 1Nylkd-0000Pk-FP
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Apr 2010 10:47:07 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id C051E2C7E1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Apr 2010 08:43:08 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LxBYywnD49Pn
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Apr 2010 08:43:04 +0000 (UTC)
-Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
-	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTPSA id 1E1452C7DC
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  4 Apr 2010 08:43:03 +0000 (UTC)
-Message-ID: <4BB8513E.40705@gmail.com>
-Date: Sun, 04 Apr 2010 10:43:42 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
-MIME-Version: 1.0
+	Mon, 05 Apr 2010 14:50:17 +0200
+Received: from [195.222.85.229] (helo=intranet.promwad.com)
+	by promwad.com with esmtps (TLSv1:AES256-SHA:256) (Exim 4.63)
+	(envelope-from <vladimir.davydov@promwad.com>) id 1NykpQ-0001sI-6g
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 05 Apr 2010 14:50:52 +0300
+Received: from [178.124.121.51] (helo=linux-x8hi.localnet)
+	by intranet.promwad.com with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <vladimir.davydov@promwad.com>) id 1Nykop-0002Xf-4h
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 05 Apr 2010 14:50:16 +0300
+From: Vladimir Davydov <vladimir.davydov@promwad.com>
+Organization: Promwad
 To: openembedded-devel@lists.openembedded.org
-References: <1269796691.8018.74.camel@mattotaupa>	<1269955259.4103.51.camel@mattotaupa>	<1270223959.3873.29.camel@mattotaupa>	<l2s19c1b8a91004021128sa6116ab2p62cec8cd78c4db43@mail.gmail.com>	<20100402211847.GK3270@jama>
-	<1270249002.3714.29.camel@mattotaupa>
-In-Reply-To: <1270249002.3714.29.camel@mattotaupa>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+Date: Mon, 5 Apr 2010 14:50:08 +0300
+User-Agent: KMail/1.13.2 (Linux/2.6.31.12-0.2-desktop; KDE/4.4.2; i686; ; )
+MIME-Version: 1.0
+Message-Id: <201004051450.08298.vladimir.davydov@promwad.com>
+X-SA-Exim-Connect-IP: 83.149.69.23
+X-SA-Exim-Mail-From: vladimir.davydov@promwad.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Setting `PV` in recipes using SCM repositories
+Subject: how to enable the linux kernel in separate directory?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,61 +43,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Apr 2010 08:47:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 05 Apr 2010 12:50:26 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Paul Menzel ha scritto, Il 03/04/2010 00:56:
-> Am Freitag, den 02.04.2010, 23:18 +0200 schrieb Martin Jansa:
->> On Fri, Apr 02, 2010 at 11:28:10AM -0700, Khem Raj wrote:
->>> On Fri, Apr 2, 2010 at 8:59 AM, Paul Menzel
->>> <paulepanter@users.sourceforge.net> wrote:
->>>> 1. Create `enna.inc`.
->>>> 2. Use `INC_PR`.
->>>> 3. Move to new repository location.
->>>> 4. Use `NOTQUITESRCREV` since `SRCREV` seems to get set to the one f=
-rom the EFL recipes.
->> You can use SRCREV again after
->> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3D82b3944=
-67d9142edf2721176244c3a7eb26ba69a
->=20
-> I guess I have to resend a v4.
->=20
->> And maybe you want rev shown in PV or PR
->> PV =3D "0.4.0+hg${SRCPV}" or=20
->> PR_append =3D "+hg${SRCPV}"
->> is quire common and should work for hg too (haven't checked)
->=20
-> Unfortunately I could not find any information about `SRCPV` in the
-> BitBake or OE manual. What is the difference to `SRCREV`?
->=20
-> Anyway, the problem I have with appending the `SRCREV` to `PV` is, that
-> if you change the revision `bitbake -c clean recipe.bb` will not work
-> and the old files stay in the build tree. Is that true with `SRCPV`
-> also?
->=20
-> Could the TSC make a suggestion on how to set `PV` in recipes using SCM
-> repositories.
->=20
->=20
-> Thanks,
->=20
-> Paul
->=20
->=20
-> -----------------------------------------------------------------------=
--
+Hi All,
 
-I'll work on this next week
+I need your suggestionts, how to enable the linux kernel most correctly in my 
+custom case.
+I have a directory with unpacked linux kernel source tree.
+This tree is under SVN control and used for development.
 
-Happy Easter :-)
+Now common tree is following:
+./kernel-source-tree
+./openembedded
+
+I have created bb file for my linux config:
+#=========
+DESCRIPTION = "Linux Kernel for the mycustom dev platform"
+SECTION = "kernel"
+LICENSE = "GPLv2"
+PR = "r1"
+PV = "2.6.31-rc4"
+
+COMPATIBLE_HOST = "arm.*-linux"
+COMPATIBLE_MACHINE = "mycustom"
+
+S = "${WORKDIR}/linux-2.6"
+
+inherit kernel
+
+export ARCH="arm"
 
 
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
+do_fetch () {
+   cd ${WORKDIR}
+   ln -sf ${MYCUSTOM_KERNEL_PATH} ${S}
+}
+
+do_configure() {
+     install -m 644 ${S}/arch/arm/configs/mycustom-did_defconfig ${S}/.config
+     make ARCH=${ARCH} oldconfig
+}
+#=========
+
+MYCUSTOM_KERNEL_PATH is the path to the kernel-source-tree directory.
+
+It uses creation of symlink to the kernel source in the workdir.
+Is it very ugly?
+Could you suggest more useful variants for my case?
+
+
+Best regards, 
+Vladimir
+
 
 
