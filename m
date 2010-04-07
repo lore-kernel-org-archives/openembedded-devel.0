@@ -1,29 +1,46 @@
-Received: from mail-qy0-f201.google.com ([209.85.221.201])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msundius@sundius.com>) id 1NzF9f-0002ot-Qt
+	(envelope-from <Tom_Rini@mentor.com>) id 1NzLS1-0006Ze-EC
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Apr 2010 22:13:48 +0200
-Received: by qyk39 with SMTP id 39so337773qyk.25
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Apr 2010 13:10:26 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.229.213.130 with HTTP; Tue, 6 Apr 2010 13:10:25 -0700 (PDT)
-Date: Tue, 6 Apr 2010 13:10:25 -0700
-Received: by 10.229.218.203 with SMTP id hr11mr416793qcb.85.1270584625839; 
-	Tue, 06 Apr 2010 13:10:25 -0700 (PDT)
-Message-ID: <i2m18e217241004061310q6d660b1eocbc99c4a923613ea@mail.gmail.com>
-From: C Michael Sundius <msundius@sundius.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.221.201
-X-SA-Exim-Mail-From: msundius@sundius.com
+	Wed, 07 Apr 2010 04:57:10 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1NzLOk-0000Bi-LK from Tom_Rini@mentor.com ;
+	Tue, 06 Apr 2010 19:53:46 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 6 Apr 2010 19:53:46 -0700
+Received: from 172.30.80.147 ([172.30.80.147]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Wed,  7 Apr 2010 02:52:49 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	06 Apr 2010 19:52:48 -0700
+From: Tom Rini <tom_rini@mentor.com>
+To: Gary Thomas <gary@mlbassoc.com>
+In-Reply-To: <4BBB3162.80907@mlbassoc.com>
+References: <4BB35552.9070508@mlbassoc.com>
+	<v2q19c1b8a91003311006zc7a7eff8o9f2a88a1f42b6c1d@mail.gmail.com>
+	<4BB382AA.3040901@mlbassoc.com> <1270056997.6277.89.camel@trini-m4400>
+	<4BB75E89.6030708@mlbassoc.com> <1270312858.3653.44.camel@trini-m4400>
+	<4BB7795D.6050600@mlbassoc.com> <1270336288.3653.45.camel@trini-m4400>
+	<4BB7EEE2.9060408@mlbassoc.com>  <4BBB3162.80907@mlbassoc.com>
+Organization: Mentor Graphics Corporation
+Date: Tue, 06 Apr 2010 19:52:48 -0700
+Message-ID: <1270608768.4765.39.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 07 Apr 2010 02:53:46.0284 (UTC)
+	FILETIME=[8AA2AEC0:01CAD5FD]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: sdk for libraies and drivers
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: FireFox on PowerPC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,39 +54,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Apr 2010 20:13:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 07 Apr 2010 02:57:10 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-we have the need to create an SDK for our distro for some of customers.
-These customers do not want the OE environment and thus will need the
-following to builds their apps:
+On Tue, 2010-04-06 at 07:04 -0600, Gary Thomas wrote:
+> On 04/03/2010 07:44 PM, Gary Thomas wrote:
+> > On 04/03/2010 05:11 PM, Tom Rini wrote:
+> >> On Sat, 2010-04-03 at 11:22 -0600, Gary Thomas wrote:
+> >>> On 04/03/2010 10:40 AM, Tom Rini wrote:
+> >>>> On Sat, 2010-04-03 at 09:28 -0600, Gary Thomas wrote:
+> >>>>
+> >>>>> That said, this seems to be a [Make] parallelism problem, not clear
+> >>>>> why/how.
+> >>>>> If I just rerun 'bitbake firefox' which restarts the compile step,
+> >>>>> it will
+> >>>>> run to completion. I do normally use -j4, but disabling this did
+> >>>>> not seem
+> >>>>> to make any difference.
+> >>>>>
+> >>>>> Note: the previous version I built (3.5.2) did not exhibit this
+> >>>>> behaviour.
+> >>>>
+> >>>> Well that's depressing since we just added the best we can tell corr=
+ect
+> >>>> magic to build firefox with make -jN. If you put PARALLEL_MAKE =3D "=
+" in
+> >>>> the .bb, does it complete this time?
+> >>>>
+> >>>
+> >>> No change, I'm afraid.
+> >>
+> >> Interesting. From log.do_compile, was make -jN taken out? I kinda fear
+> >> not...
+> >>
+> >
+> > I see only -j1 in the logs
+> >
+>=20
+> I'm not getting anywhere with this.  True, it builds, but only
+> after a second attempt (the first always fails as reported).
+>=20
+> Perhaps you'd like to try?  Just build firefox (3.6.2 is what
+> I'm using) for a PowerPC target (I use MACHINE=3Defika, DISTRO=3D"angstro=
+m-2008.1")
+> You'll need the attached patches to work around some of the va_list bugs.
 
-1) tarball of our base file system
-2) kernel
-3) Some native tools we used to create loadable images etc.
-4) staging area..
+So, funny thing.  Locally on an older snapshot of OE, 3.6.0 built, for
+e500v2 machines, unpatched.  I'll try more combinations (doing
+MACHINE=3Dcalamari on current now) as time and CPU cycles permit.
+
+>=20
+> Thanks
+>=20
 
 
-Some of this is normal fare. Its quite easy to copy out the images from the
-deploy images directory and to create a nativesdk for the tools using
-BBCLASSEXTEND.
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
-My question is with regard to the staging area. We don't want to just tar up
-our final staging area since it will contain lots of files/api/libraries for
-internal packages that we don't want the the user of this sdk to rely upon.
-
-Is there a good way of using OE to publish select packages for a SDK? is it
-just a matter of picking out select packaged staging packages?
-
-also is there something similar to an "image" which would create an SDK for
-n number of packages.
-
-Is there a class that does this? it seems like nativesdk and crosssdk are
-for compilers and native tools, but not anything specifically for target
-APIs
-
-Does anyone else do this? what were your experiences ?
-
-Thank you
-Mike
 
