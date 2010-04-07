@@ -1,45 +1,30 @@
-Received: from out2.smtp.messagingengine.com ([66.111.4.26])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1NzUhZ-0001le-1a
+	(envelope-from <holger+oe@freyther.de>) id 1NzVJ7-0002nQ-BG
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Apr 2010 14:49:49 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id 0A761EA4CD
+	Wed, 07 Apr 2010 15:28:37 +0200
+Received: from tamarin.localnet (static.233.147.46.78.clients.your-server.de
+	[78.46.147.233])
+	by gandharva.secretlabs.de (Postfix) with ESMTPSA id 4809C1B10C79
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Apr 2010 08:46:29 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute2.internal (MEProxy); Wed, 07 Apr 2010 08:46:29 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type:content-transfer-encoding;
-	s=smtpout; bh=iGU1xwUkzHUiSdxeuTDWI/qWvoI=;
-	b=Kgv3FYyP+i8RsCq59SDduvfRNZRskLLMBATSx1ITSoVedFzWmlY/N9WvgsOeyAnmHoT5IBdemIb3EpKdEXtpxL0qVlNOII6Kg42aLgdjjs8G9eltq+v8W0seXCglv4v3NTSWyGPgGl+EF127LPknn32OKDppCHFXye21ODT0ktk=
-X-Sasl-enc: UKBcFV51AZ2zEN/fGOdisteCAgN3gYIinvcePNQKpN+q 1270644388
-Received: from vitus.devnet.local (unknown [212.144.247.210])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id B3DF34CBE3A
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Apr 2010 08:46:27 -0400 (EDT)
-Date: Wed, 7 Apr 2010 14:46:24 +0200 (CEST)
-From: Vitus Jensen <vjensen@gmx.de>
+	Wed,  7 Apr 2010 13:30:11 +0000 (UTC)
+From: Holger Hans Peter Freyther <holger+oe@freyther.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201004071413.56300.marcin@juszkiewicz.com.pl>
-Message-ID: <alpine.DEB.1.10.1004071427430.3313@vitus.devnet.local>
-References: <alpine.DEB.1.10.1004071258530.3313@vitus.devnet.local>
-	<201004071413.56300.marcin@juszkiewicz.com.pl>
-User-Agent: Alpine 1.10 (DEB 962 2008-03-14)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
+Date: Wed, 7 Apr 2010 14:18:23 +0200
+User-Agent: KMail/1.13.2 (Linux/2.6.34-rc3-00001-g17459ed; KDE/4.4.2; i686; ; )
+References: <4BBC6627.1000407@gmail.com>
+In-Reply-To: <4BBC6627.1000407@gmail.com>
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.26
-X-SA-Exim-Mail-From: vjensen@gmx.de
+Message-Id: <201004071418.24000.holger+oe@freyther.de>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-	SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: recipe to always fetch latest from SCM
+Subject: Re: SDK for BeagleBoard development - how do I add linux-omap headers?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,41 +38,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Apr 2010 12:49:50 -0000
-Content-Type: TEXT/PLAIN; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 07 Apr 2010 13:28:37 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Wed, 7 Apr 2010, Marcin Juszkiewicz wrote:
+On Wednesday 07 April 2010 13:01:59 Tasslehoff Kjappfot wrote:
+> Like the topic says I'm trying to create an SDK to let people develop
+> for a BeagleBoard running Angstrom. I have followed the instructions in
+> the manual on creating an SDK, and have a basic one compiled.
+> 
+> I included linux-libc-headers, but found out that it gives me only the
+> "vanilla" kernel-headers, while I need the linux-omap-headers with all
+> the needed patches. How do I get those into the SDK?
 
-> Dnia =C5=9Broda, 7 kwietnia 2010 o 14:00:47 Vitus Jensen napisa=C5=82(a=
-):
->
->> What is the best way to code a recipe which always fetches HEAD from a
->> SCM?
->
-> SRCREV =3D "${AUTOREV}"
 
-Hurray!
-
->> Without accessing mirror servers first?
->
-> CVS_TARBALL_STASH =3D ""
-> SRC_TARBALL_STASH =3D ""
-
-CVS_xxx?  Test, yes, strange though.
-
-> Those two should make build try to use latest version each time.
-
-Thank you for your help, it does!
-
-For reference: this fills the download directory with archives for every=20
-revision, one has to clean up regulary.
-
-Bye,
-   Vitus
-
---=20
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
+Why do you need these headers?
 
 
