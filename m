@@ -1,46 +1,46 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-ew0-f211.google.com ([209.85.219.211])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1NzLS1-0006Ze-EC
+	(envelope-from <tasskjapp@gmail.com>) id 1NzT3T-0000JV-Ew
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Apr 2010 04:57:10 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1NzLOk-0000Bi-LK from Tom_Rini@mentor.com ;
-	Tue, 06 Apr 2010 19:53:46 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 6 Apr 2010 19:53:46 -0700
-Received: from 172.30.80.147 ([172.30.80.147]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Wed,  7 Apr 2010 02:52:49 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	06 Apr 2010 19:52:48 -0700
-From: Tom Rini <tom_rini@mentor.com>
-To: Gary Thomas <gary@mlbassoc.com>
-In-Reply-To: <4BBB3162.80907@mlbassoc.com>
-References: <4BB35552.9070508@mlbassoc.com>
-	<v2q19c1b8a91003311006zc7a7eff8o9f2a88a1f42b6c1d@mail.gmail.com>
-	<4BB382AA.3040901@mlbassoc.com> <1270056997.6277.89.camel@trini-m4400>
-	<4BB75E89.6030708@mlbassoc.com> <1270312858.3653.44.camel@trini-m4400>
-	<4BB7795D.6050600@mlbassoc.com> <1270336288.3653.45.camel@trini-m4400>
-	<4BB7EEE2.9060408@mlbassoc.com>  <4BBB3162.80907@mlbassoc.com>
-Organization: Mentor Graphics Corporation
-Date: Tue, 06 Apr 2010 19:52:48 -0700
-Message-ID: <1270608768.4765.39.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 07 Apr 2010 02:53:46.0284 (UTC)
-	FILETIME=[8AA2AEC0:01CAD5FD]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+	Wed, 07 Apr 2010 13:04:20 +0200
+Received: by ewy3 with SMTP id 3so312791ewy.26
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Apr 2010 04:00:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=vonSfm9oQILjPIWsBM6Yhk/O0IG+k0DyUplp0u5udUg=;
+	b=skH5fz6nXgchXm/QpyDWai7rgDf59tQmp1lJzKUCk5J10PRRb/quD8C+SHvPwqB3sN
+	hGWu94zFlFZ5m4PVluvPwjnxoy98s1xA8wwLEczvjh/1Uso+ga2XLeTJzYIVdBaWmhcC
+	robgApg181/EyXP2fB9X1WmtMHxYHXqybBrNk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=qepOAa+qbb6pueVtnVqB5Jd3L5u9E/JvSQIM4sBhxVGrGi2QdFY4KfyPuGvKxXDxjn
+	cl5/1TQxa2nke/6e/wrL4v9hAWAG6dg0O/V/IDyWmc6fJaB+d8GWLOWJOfg1PsTzaTB/
+	eNPbIWoiTM+0q6ymaj9ZV53mPFCyBbEcC/GkI=
+Received: by 10.213.41.196 with SMTP id p4mr1786671ebe.81.1270638057498;
+	Wed, 07 Apr 2010 04:00:57 -0700 (PDT)
+Received: from [192.168.0.49] (147.84-49-231.nextgentel.com [84.49.231.147])
+	by mx.google.com with ESMTPS id 13sm576365ewy.9.2010.04.07.04.00.55
+	(version=SSLv3 cipher=RC4-MD5); Wed, 07 Apr 2010 04:00:56 -0700 (PDT)
+Message-ID: <4BBC6627.1000407@gmail.com>
+Date: Wed, 07 Apr 2010 13:01:59 +0200
+From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.10pre) Gecko/20100407 Shredder/3.0.5pre
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.219.211
+X-SA-Exim-Mail-From: tasskjapp@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: FireFox on PowerPC
+Subject: SDK for BeagleBoard development - how do I add linux-omap headers?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,63 +54,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Apr 2010 02:57:10 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 07 Apr 2010 11:04:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, 2010-04-06 at 07:04 -0600, Gary Thomas wrote:
-> On 04/03/2010 07:44 PM, Gary Thomas wrote:
-> > On 04/03/2010 05:11 PM, Tom Rini wrote:
-> >> On Sat, 2010-04-03 at 11:22 -0600, Gary Thomas wrote:
-> >>> On 04/03/2010 10:40 AM, Tom Rini wrote:
-> >>>> On Sat, 2010-04-03 at 09:28 -0600, Gary Thomas wrote:
-> >>>>
-> >>>>> That said, this seems to be a [Make] parallelism problem, not clear
-> >>>>> why/how.
-> >>>>> If I just rerun 'bitbake firefox' which restarts the compile step,
-> >>>>> it will
-> >>>>> run to completion. I do normally use -j4, but disabling this did
-> >>>>> not seem
-> >>>>> to make any difference.
-> >>>>>
-> >>>>> Note: the previous version I built (3.5.2) did not exhibit this
-> >>>>> behaviour.
-> >>>>
-> >>>> Well that's depressing since we just added the best we can tell corr=
-ect
-> >>>> magic to build firefox with make -jN. If you put PARALLEL_MAKE =3D "=
-" in
-> >>>> the .bb, does it complete this time?
-> >>>>
-> >>>
-> >>> No change, I'm afraid.
-> >>
-> >> Interesting. From log.do_compile, was make -jN taken out? I kinda fear
-> >> not...
-> >>
-> >
-> > I see only -j1 in the logs
-> >
->=20
-> I'm not getting anywhere with this.  True, it builds, but only
-> after a second attempt (the first always fails as reported).
->=20
-> Perhaps you'd like to try?  Just build firefox (3.6.2 is what
-> I'm using) for a PowerPC target (I use MACHINE=3Defika, DISTRO=3D"angstro=
-m-2008.1")
-> You'll need the attached patches to work around some of the va_list bugs.
+Like the topic says I'm trying to create an SDK to let people develop 
+for a BeagleBoard running Angstrom. I have followed the instructions in 
+the manual on creating an SDK, and have a basic one compiled.
 
-So, funny thing.  Locally on an older snapshot of OE, 3.6.0 built, for
-e500v2 machines, unpatched.  I'll try more combinations (doing
-MACHINE=3Dcalamari on current now) as time and CPU cycles permit.
+I included linux-libc-headers, but found out that it gives me only the 
+"vanilla" kernel-headers, while I need the linux-omap-headers with all 
+the needed patches. How do I get those into the SDK?
 
->=20
-> Thanks
->=20
+When I compiled my image I also got a 
+kernel-dev_2.6.29-r51.5_beagleboard.ipk. Can I use this to add the 
+needed headers into the SDK in some way?
 
-
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+- Tasslehoff
 
 
