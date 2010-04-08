@@ -1,39 +1,40 @@
-Received: from smtp-out04.alice.it ([85.37.17.100])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1Nzo7D-0003dR-T4
+	(envelope-from <stefan@datenfreihafen.org>) id 1Nzo7F-0004Dk-W8
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Apr 2010 11:33:36 +0200
-Received: from FBCMMO04.fbc.local ([192.168.184.135]) by smtp-out04.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 8 Apr 2010 11:30:12 +0200
-Received: from FBCMCL01B09.fbc.local ([192.168.171.26]) by FBCMMO04.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 8 Apr 2010 11:30:08 +0200
-Received: from jcn ([82.59.101.2]) by FBCMCL01B09.fbc.local with Microsoft
-	SMTPSVC(6.0.3790.3959); Thu, 8 Apr 2010 11:30:07 +0200
-Received: from ao2 by jcn with local (Exim 4.71)
-	(envelope-from <ospite@studenti.unina.it>)
-	id 1Nzo3p-0001c2-MI; Thu, 08 Apr 2010 11:30:05 +0200
-From: Antonio Ospite <ospite@studenti.unina.it>
+	Thu, 08 Apr 2010 11:33:40 +0200
+Received: from w0952.wlan.rz.tu-bs.de ([134.169.203.190] helo=excalibur)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1Nzo3z-0006ZJ-1V by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 Apr 2010 11:30:17 +0200
+Received: from stefan by excalibur with local (Exim 4.71)
+	(envelope-from <stefan@excalibur.local>) id 1Nzo3y-0005fC-Nn
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 08 Apr 2010 11:30:14 +0200
+Date: Thu, 8 Apr 2010 11:30:14 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 Apr 2010 11:30:01 +0200
-Message-Id: <1270719003-6168-1-git-send-email-ospite@studenti.unina.it>
-X-Mailer: git-send-email 1.7.0.4
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-X-OriginalArrivalTime: 08 Apr 2010 09:30:07.0663 (UTC)
-	FILETIME=[13DAE3F0:01CAD6FE]
-X-SA-Exim-Connect-IP: 85.37.17.100
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+Message-ID: <20100408093014.GD27376@excalibur.local>
+References: <19c1b8a91002212154y766540d9vb091badff1198e0e@mail.gmail.com>
+	<1268415992-19603-3-git-send-email-rep.dot.nop@gmail.com>
+	<201004052349.55933.roman@khimov.ru>
+MIME-Version: 1.0
+In-Reply-To: <201004052349.55933.roman@khimov.ru>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 0/2] Updates to tzcode-native and tzdata
+Subject: Re: [PATCH 2/3] sane-toolchain: add PREFERRED_UCLIBC_VERSION
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,40 +48,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Apr 2010 09:33:37 -0000
+X-List-Received-Date: Thu, 08 Apr 2010 09:33:44 -0000
+X-Groupsio-MsgNum: 18475
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="CE+1k2dSO48ffgeK"
+Content-Disposition: inline
 
-Here are some updates to tzcode-native and tzdata as tzdata_2010g is no longer
-available at the default location.
+--CE+1k2dSO48ffgeK
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-In tzcode-native_2010f I just changed the minimum to make it work, if it
-should be converted to BBCLASSEXTEND = "native", that can be done later.
+Hello.
 
-Thanks,
-   Antonio Ospite
-   http://ao2.it
+On Mon, 2010-04-05 at 23:49, Roman I Khimov wrote:
+> =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
+=82 =D0=9F=D1=8F=D1=82=D0=BD=D0=B8=D1=86=D0=B0 12 =D0=BC=D0=B0=D1=80=D1=82=
+=D0=B0 2010 20:46:31 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Bernhard Reutner-Fische=
+r=20
+> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> > Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+> > ---
+> >  conf/distro/include/sane-toolchain-uclibc.inc |    7 +++++++
+> >  conf/distro/include/sane-toolchain.inc        |    3 +--
+> >  2 files changed, 8 insertions(+), 2 deletions(-)
+> >=20
+>=20
+> Acked-by: Roman I Khimov <khimov@altell.ru>
 
+Looks fine for me as well. Khem, Henning any comments from the uclibc side?
+(Askign because you two have ulibc as interest in the MAINTAINERS file)
 
-Antonio Ospite (2):
-  tzcode-native_2010f: Update tzdata SRC_URI and checksum
-  tzdata: move tzdata_2010g.bb to tzdata_2010h.bb
+regards
+Stefan Schmidt
 
- recipes/tzcode/tzcode-native_2010f.bb |    8 ++++----
- recipes/tzdata/tzdata_2010g.bb        |    7 -------
- recipes/tzdata/tzdata_2010h.bb        |    7 +++++++
- 3 files changed, 11 insertions(+), 11 deletions(-)
- delete mode 100644 recipes/tzdata/tzdata_2010g.bb
- create mode 100644 recipes/tzdata/tzdata_2010h.bb
+--CE+1k2dSO48ffgeK
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+Content-Disposition: inline
 
--- 
-Antonio Ospite
-http://ao2.it
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: http://www.datenfreihafen.org/contact.html
 
-PGP public key ID: 0x4553B001
+iEYEARECAAYFAku9oiYACgkQbNSsvd31FmUzrACgk0Cg+yXOIHCwxlgmWKf9kHL+
+YHcAnj+rtyUN1dHYSW/hBL7c0w8S9Tu8
+=/tLP
+-----END PGP SIGNATURE-----
 
-A: Because it messes up the order in which people normally read text.
-   See http://en.wikipedia.org/wiki/Posting_style
-Q: Why is top-posting such a bad thing?
-A: Top-posting.
-Q: What is the most annoying thing in e-mail?
-
-
+--CE+1k2dSO48ffgeK--
