@@ -1,33 +1,43 @@
-Received: from 3a.49.1343.static.theplanet.com
-	([67.19.73.58] helo=pug.o-hand.com ident=postfix)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <josh@linux.intel.com>) id 1Nzttr-0003it-EA
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Apr 2010 17:44:15 +0200
-Received: from [10.250.128.186] (unknown [158.43.2.102])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by pug.o-hand.com (Postfix) with ESMTP id A805E12EC119
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nzu7r-0001b8-N5 for openembedded-devel@lists.openembedded.org;
+	Thu, 08 Apr 2010 17:58:40 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Nzu4b-0008Ui-Cv for openembedded-devel@lists.openembedded.org;
+	Thu, 08 Apr 2010 17:55:17 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 Apr 2010 17:55:17 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Apr 2010 11:05:21 -0500 (CDT)
-From: Joshua Lock <josh@linux.intel.com>
+	Thu, 08 Apr 2010 17:55:17 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hp6qck$di5$2@dough.gmane.org>
-References: <1270135981.4993.128.camel@rex> <hp4s4q$40a$1@dough.gmane.org>
-	<1270243792.4993.180.camel@rex>  <hp6qck$di5$2@dough.gmane.org>
-Date: Thu, 08 Apr 2010 16:40:45 +0100
-Message-ID: <1270741245.17534.121.camel@localhost.localdomain>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 08 Apr 2010 17:55:02 +0200
+Message-ID: <hpku8m$a4p$1@dough.gmane.org>
+References: <20100403171724.b9df4c84.ospite@studenti.unina.it>	<201004032017.10514.marcin@juszkiewicz.com.pl>	<20100408161130.b0b6ed73.ospite@studenti.unina.it>	<hpkoet$h25$1@dough.gmane.org>
+	<20100408162533.ae09c2c4.ospite@studenti.unina.it>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 (2.28.3-1.fc12) 
-X-SA-Exim-Connect-IP: 67.19.73.58
-X-SA-Exim-Mail-From: josh@linux.intel.com
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100329 Shredder/3.0.5pre
+In-Reply-To: <20100408162533.ae09c2c4.ospite@studenti.unina.it>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Request for branch merge
+Subject: Re: gtk+-native-2.20.0-r8.0 fails in do_configure.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,43 +51,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Apr 2010 15:44:16 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 08 Apr 2010 15:58:40 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Sat, 2010-04-03 at 09:23 +0200, Koen Kooi wrote: 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 08-04-10 16:25, Antonio Ospite wrote:
+> On Thu, 08 Apr 2010 16:15:57 +0200
+> Koen Kooi <k.kooi@student.utwente.nl> wrote:
 > 
-> On 02-04-10 23:29, Richard Purdie wrote:
-> > On Fri, 2010-04-02 at 15:40 +0200, Koen Kooi wrote:
-> >> While testing (rebased on top of this mornings OE, bitbake master) I'm
-> >> getting messages like this:
-> >>
-> >> //OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/python2.6/lib-dynload/strop.so:
-> >> RPATH=/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib
-> >> //OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/python2.6/lib-dynload/strop.so:
-> >> new RPATH: $ORIGIN/../../../../usr/lib
-> >> open: Permission denied
-> >> elf_open: Invalid argument
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 08-04-10 16:11, Antonio Ospite wrote:
+>>
+>>> versioned dependencies are possible in .bb files
+>>
+>> Actually, they aren't. DISTROs should take care of stuff like this in
+>> the current OE design.
+> 
+> In what sense they are not possible?
 
-This looks like we're calling chrpath -l against a non-readable file, as
-Richard suggested. Unfortunately it's not the echoed path which is the
-problem, the path for which the open/elf_open warnings are triggered is
-not echoed...
+You can add them, but the version will get ignored
 
-I've a patch to test the access to the file and temporarily set read and
-write permissions on it if needed.
+> I can see some with
+> git grep DEPENDS | grep '>=' 
+> but that could be misleading me.
 
-I'm just running this updated tree over a build of console-image now.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Cheers,
-Joshua
--- 
-Joshua Lock
-        Intel Open Source Technology Centre
-
-
+iD8DBQFLvfxVMkyGM64RGpERAj+/AJwPJm/oYtGh35gpUBAeit29Z4gJKQCcDCRE
+duxFuFKdJp8aYVQzjT6SROw=
+=G/m/
+-----END PGP SIGNATURE-----
 
 
 
