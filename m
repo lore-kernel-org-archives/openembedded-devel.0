@@ -1,48 +1,48 @@
-Received: from mail-ew0-f225.google.com ([209.85.219.225])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tasskjapp@gmail.com>) id 1NzlbC-0001Kr-1b
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1NzmjZ-0005bV-Ob
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Apr 2010 08:52:22 +0200
-Received: by ewy25 with SMTP id 25so917494ewy.27
+	Thu, 08 Apr 2010 10:05:06 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o3881f78010463
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Apr 2010 23:48:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=skiFuwwZPySNNQKhewaLnzxuHUjPMvkHcW/0MMtFJcM=;
-	b=iatlu4aMWd0QHEf6+Nrc2Nkctl+c8RFgalFlZAsjCu4m9bmOjDCDdwPA1L91Izwo5J
-	JsWRaUh6qJQgO/+M8Hk7mSQmwJiIUqMkBlYAU9LkILnqw1vGO5kvOZEh2aw9+sAKzI8W
-	10hG9fICvY/nvFA6LVMHFhUbo0g4rOtswegDI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=SjNFEHWoxSbL+m2ChjFlEb9lz9m1zTxOI6aai9CVGcxHgSzg3GeFUJ0gy2j+ueQ4Pe
-	6OcDhoQab4hhaI38Q6GNa/W2Ve1d2O10FQXT8RfiVd1pQ92LNamxdW+fW19Uwla79mg7
-	+8FnZx28GLIdiKPGpuil8DYec1l7aGtV/Uznw=
-Received: by 10.213.46.74 with SMTP id i10mr2564205ebf.36.1270709339481;
-	Wed, 07 Apr 2010 23:48:59 -0700 (PDT)
-Received: from [192.168.0.49] (147.84-49-231.nextgentel.com [84.49.231.147])
-	by mx.google.com with ESMTPS id 16sm8523065ewy.3.2010.04.07.23.48.58
-	(version=SSLv3 cipher=RC4-MD5); Wed, 07 Apr 2010 23:48:58 -0700 (PDT)
-Message-ID: <4BBD7C9C.2020404@gmail.com>
-Date: Thu, 08 Apr 2010 08:50:04 +0200
-From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.10pre) Gecko/20100407 Shredder/3.0.5pre
-MIME-Version: 1.0
+	Thu, 8 Apr 2010 09:01:41 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 10334-03 for <openembedded-devel@lists.openembedded.org>;
+	Thu,  8 Apr 2010 09:01:37 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o3881W79010457
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 8 Apr 2010 09:01:35 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-References: <mailman.2582.1270656222.24517.openembedded-devel@lists.openembedded.org>
-In-Reply-To: <mailman.2582.1270656222.24517.openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.219.225
-X-SA-Exim-Mail-From: tasskjapp@gmail.com
+In-Reply-To: <20100407154445.GA9625@merkur.sol.de>
+References: <1269796691.8018.74.camel@mattotaupa>
+	<1269955259.4103.51.camel@mattotaupa>
+	<1270223959.3873.29.camel@mattotaupa>
+	<l2s19c1b8a91004021128sa6116ab2p62cec8cd78c4db43@mail.gmail.com>
+	<1270237489.3714.11.camel@mattotaupa>
+	<1270293620.3692.33.camel@mattotaupa>
+	<20100403135105.GA6475@merkur.sol.de>
+	<1270305838.4237.23.camel@mattotaupa>
+	<20100407154445.GA9625@merkur.sol.de>
+Date: Thu, 08 Apr 2010 09:01:32 +0100
+Message-ID: <1270713692.24541.1374.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: SDK for BeagleBoard development - how do I add linux-omap headers?
+Subject: Re: autopoint || touch config.rpath
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,23 +56,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Apr 2010 06:52:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 08 Apr 2010 08:05:07 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
->
-> Like the topic says I'm trying to create an SDK to let people develop
-> >  for a BeagleBoard running Angstrom. I have followed the instructions in
-> >  the manual on creating an SDK, and have a basic one compiled.
-> >  
-> >  I included linux-libc-headers, but found out that it gives me only the
-> >  "vanilla" kernel-headers, while I need the linux-omap-headers with all
-> >  the needed patches. How do I get those into the SDK?
->    
-> Why do you need these headers?
->    
+On Wed, 2010-04-07 at 17:44 +0200, Jens Seidel wrote:
+> > Thank you for this great summary. I am still clueless about
+> > `config.rpath` though.
+> 
+> Yep, try the hints above.
 
-We have code that writes video directly into framebuffer, and it needs 
-to include <"linux/omapfb.h">.
+I'm late to this thread but poky has this in autoconf.bbclass:
+
+
+  if grep "^[[:space:]]*AM_GLIB_GNU_GETTEXT" $CONFIGURE_AC >/dev/null; then 
+	if grep "sed.*POTFILES" $CONFIGURE_AC >/dev/null; then
+		: do nothing -- we still have an old unmodified configure.ac
+	else
+		oenote Executing glib-gettextize --force --copy
+		echo "no" | glib-gettextize --force --copy 130
+	fi
+  else if grep "^[[:space:]]*AM_GNU_GETTEXT" $CONFIGURE_AC >/dev/null; then 
+	cp ${STAGING_DATADIR}/gettext/config.rpath ${S}/
+  fi
+
+which generally makes sure config.rpath is available when its needed.
+
+Cheers,
+
+Richard
+
 
 
