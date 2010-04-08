@@ -1,37 +1,46 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from out2.smtp.messagingengine.com ([66.111.4.26])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Nzo97-0006Xc-VS
+	(envelope-from <vjensen@gmx.de>) id 1Nzo9o-00070F-P5
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Apr 2010 11:35:34 +0200
-Received: from w0952.wlan.rz.tu-bs.de ([134.169.203.190] helo=excalibur)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1Nzo5r-0006be-3D by authid <stefan@sostec.de> with cram_md5;
-	Thu, 08 Apr 2010 11:32:13 +0200
-Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>)
-	id 1Nzo5q-0005gG-OC; Thu, 08 Apr 2010 11:32:10 +0200
-Date: Thu, 8 Apr 2010 11:32:10 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Thu, 08 Apr 2010 11:36:17 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id 9E3AFEA799
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  8 Apr 2010 05:32:55 -0400 (EDT)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute1.internal (MEProxy); Thu, 08 Apr 2010 05:32:55 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
+	s=smtpout; bh=QtiFeuubfrzC7iavsTqA8SrlmyM=;
+	b=k6sgdbJ1cwYizKGNbf8f1NeS6OgqZuJBH27YPBY4ThfPD5r0Xp+gOTn6L3AKFxXIIfSOL4VFDtXGvAJh/hnTXS+PC8qGwkt07eZsrnM3Xejp8Jxv9kHFLhJVAGEvNsApO6h17svM3l9WT4SXVP7fv+VnqiRLZc6iZKITtUJ4fqI=
+X-Sasl-enc: hJx1+RONw6neDQg9itC7plS1f+dDeSfRd+h88qpZcGlv 1270719175
+Received: from vitus.devnet.local (unknown [212.144.247.210])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id EA61C4A44C6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  8 Apr 2010 05:32:54 -0400 (EDT)
+Date: Thu, 8 Apr 2010 11:32:47 +0200 (CEST)
+From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100408093210.GE27376@excalibur.local>
-References: <1266262558.32499.31.camel@jjg-linux>
+In-Reply-To: <20100408085916.GB27376@excalibur.local>
+Message-ID: <alpine.DEB.1.10.1004081113570.3264@vitus.devnet.local>
+References: <alpine.DEB.1.10.1004081018050.3264@vitus.devnet.local>
+	<alpine.DEB.1.10.1004081030010.3264@vitus.devnet.local>
+	<20100408085916.GB27376@excalibur.local>
+User-Agent: Alpine 1.10 (DEB 962 2008-03-14)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
 MIME-Version: 1.0
-In-Reply-To: <1266262558.32499.31.camel@jjg-linux>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+X-SA-Exim-Connect-IP: 66.111.4.26
+X-SA-Exim-Mail-From: vjensen@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Michael Lauer <mickey@vanille-media.de>
-Subject: Re: [PATCH 1/2] python: fix SSL for 2.6
+Subject: Re: [PATCH] dfu-programmer: USB Device Firmware Upgrade utility (special atmel-version)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,61 +54,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Apr 2010 09:35:34 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 08 Apr 2010 09:36:17 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Hallo.
+On Thu, 8 Apr 2010, Stefan Schmidt wrote:
 
-On Mon, 2010-02-15 at 13:35, Jesse Gilles wrote:
-> 
-> This fixes SSL support for python 2.6.  Looks like the python module for
-> SSL was missing from the package.
+> On Thu, 2010-04-08 at 10:32, Vitus Jensen wrote:
+>> On Thu, 8 Apr 2010, Vitus Jensen wrote:
+>>>
+>>> Add recipes for version 0.5.2 and for the head of the SVN repository.
+>>>
+>>> Signed-off-by: Vitus Jensen <vjensen@gmx.de>
+>>> ---
+>>> conf/checksums.ini                             |    4 ++++
+>>> recipes/dfu-programmer/dfu-programmer_0.5.2.bb |   17 +++++++++++++++++
+>>> recipes/dfu-programmer/dfu-programmer_svn.bb   |   20 ++++++++++++++++++++
+>>> 3 files changed, 41 insertions(+), 0 deletions(-)
+>>> create mode 100644 recipes/dfu-programmer/dfu-programmer_0.5.2.bb
+>>> create mode 100644 recipes/dfu-programmer/dfu-programmer_svn.bb
+>>
+>> I know that nowerdays the checksums are inside the recipe.  But we
+>> are working on the stable/2009 branch were it isn't done this way
+>> (or not supported?).  Please accept as is.
+>
+> This patch was targetted for the stable branch? If yes please indicate this in
+> the subject of the patch. You would need to get your patch into OE.dev first
+> before it can go into stable IIRC, but I leave it to the stable developers to
+> comment on this.
 
-Mickey, can you have a look at this? Thanks.
+Well, everything we do is done in the stable/2009 branch because we need 
+the stability.  We cherry-pick from .dev (which is getting harder because 
+of the staging changes) and add new programs and machines.  I would like 
+to publish the changes but they have to be for .dev (policy) and mostly 
+identically to what is used here (because I don't want to maintain 2 
+images for the devices).
 
-> * Add SSL module to build -- fixes "import ssl"
-> 
-> diff --git a/contrib/python/generate-manifest-2.6.py b/contrib/python/generate-manifest-2.6.py
-> index fe0e385..890d1c0 100755
-> --- a/contrib/python/generate-manifest-2.6.py
-> +++ b/contrib/python/generate-manifest-2.6.py
-> @@ -248,7 +248,7 @@ if __name__ == "__main__":
->  
->      m.addPackage( "python-io", "Python Low-Level I/O", "python-core python-math",
->      "lib-dynload/_socket.so lib-dynload/_ssl.so lib-dynload/select.so lib-dynload/termios.so lib-dynload/cStringIO.so " +
-> -    "pipes.* socket.* tempfile.* StringIO.* " )
-> +    "pipes.* socket.* ssl.* tempfile.* StringIO.* " )
->  
->      m.addPackage( "python-json", "Python JSON Support", "python-core python-math python-re",
->      "json" ) # package
-> diff --git a/recipes/python/python-2.6-manifest.inc b/recipes/python/python-2.6-manifest.inc
-> index cee12c8..188ee31 100644
-> --- a/recipes/python/python-2.6-manifest.inc
-> +++ b/recipes/python/python-2.6-manifest.inc
-> @@ -51,7 +51,7 @@ FILES_python-core="${libdir}/python2.6/__future__.* ${libdir}/python2.6/_abcoll.
->  
->  DESCRIPTION_python-io="Python Low-Level I/O"
->  RDEPENDS_python-io="python-core python-math"
-> -FILES_python-io="${libdir}/python2.6/lib-dynload/_socket.so ${libdir}/python2.6/lib-dynload/_ssl.so ${libdir}/python2.6/lib-dynload/select.so ${libdir}/python2.6/lib-dynload/termios.so ${libdir}/python2.6/lib-dynload/cStringIO.so ${libdir}/python2.6/pipes.* ${libdir}/python2.6/socket.* ${libdir}/python2.6/tempfile.* ${libdir}/python2.6/StringIO.* "
-> +FILES_python-io="${libdir}/python2.6/lib-dynload/_socket.so ${libdir}/python2.6/lib-dynload/_ssl.so ${libdir}/python2.6/lib-dynload/select.so ${libdir}/python2.6/lib-dynload/termios.so ${libdir}/python2.6/lib-dynload/cStringIO.so ${libdir}/python2.6/pipes.* ${libdir}/python2.6/socket.* ${libdir}/python2.6/ssl.* ${libdir}/python2.6/tempfile.* ${libdir}/python2.6/StringIO.* "
->  
->  DESCRIPTION_python-compiler="Python Compiler Support"
->  RDEPENDS_python-compiler="python-core"
-> diff --git a/recipes/python/python.inc b/recipes/python/python.inc
-> index 7e61f79..aff18db 100644
-> --- a/recipes/python/python.inc
-> +++ b/recipes/python/python.inc
-> @@ -4,7 +4,7 @@ LICENSE = "PSF"
->  SECTION = "devel/python"
->  PRIORITY = "optional"
->  # bump this on every change in contrib/python/generate-manifest-2.6.py
-> -INC_PR = "ml8"
-> +INC_PR = "ml9"
->  
->  DEFAULT_PREFERENCE = "-26"
+> Having one patch for .dev with the checksum in the recipe and one for stable
+> with the sum in the ini file would also be fine I think. No hard feelings on
+> this though.
 
-regards
-Stefan Schmidt
+Will try out checksums inside the recipe in the stable/2009 branch.  I 
+think the support for it is only depending on bitbake versions, right?
+
+> An updated patch for the AUTOREV issue is still needed.
+
+Well... the repository get updates every few months, mostly to support new 
+chips.  So the possibility is high that someone needs _svn.bb because of 
+he wants to program a newer atmel and I don't feel like deciding which 
+chip support to include or not.  I've included it to make it simple to get 
+the absolute newest programmer, for me 0.5.2 is enough.
+
+Should I drop _svn.bb or use the head revision of today?
+
+Vitus
+
+-- 
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
 
 
