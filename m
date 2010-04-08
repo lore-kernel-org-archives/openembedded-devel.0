@@ -1,43 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from exprod5og111.obsmtp.com ([64.18.0.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NzoVE-0005q5-3p for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Apr 2010 11:58:50 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1NzoRz-0006wd-Ay for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Apr 2010 11:55:03 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Apr 2010 11:55:03 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Apr 2010 11:55:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <martyn.welch@ge.com>) id 1Nzokq-0006Wl-M4
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 08 Apr 2010 12:14:45 +0200
+Received: from source ([4.79.213.129]) (using TLSv1) by
+	exprod5ob111.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKS72rvo6Hkk9fXoM4CpCqsery7J3tMdTv@postini.com;
+	Thu, 08 Apr 2010 03:11:12 PDT
+Received: from unknown (HELO alpmlip01.e2k.ad.ge.com) ([3.159.17.48])
+	by Alpmlip07.e2k.ad.ge.com with ESMTP; 08 Apr 2010 06:11:23 -0400
+Received: from es-j7s4d2j.amer.consind.ge.com (HELO [3.138.54.92])
+	([3.138.54.92])
+	by alpmlip01.e2k.ad.ge.com with ESMTP; 08 Apr 2010 06:11:09 -0400
+Message-ID: <4BBDAC94.10905@ge.com>
+Date: Thu, 08 Apr 2010 11:14:44 +0100
+From: Martyn Welch <martyn.welch@ge.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 08 Apr 2010 11:54:37 +0200
-Message-ID: <hpk94t$lgd$2@dough.gmane.org>
-References: <20100403171724.b9df4c84.ospite@studenti.unina.it>	<201004032017.10514.marcin@juszkiewicz.com.pl>	<20100406115837.fde46160.ospite@studenti.unina.it>
-	<20100408112243.f558a240.ospite@studenti.unina.it>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100329 Shredder/3.0.5pre
-In-Reply-To: <20100408112243.f558a240.ospite@studenti.unina.it>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <1270719003-6168-1-git-send-email-ospite@studenti.unina.it>
+	<1270719003-6168-2-git-send-email-ospite@studenti.unina.it>
+In-Reply-To: <1270719003-6168-2-git-send-email-ospite@studenti.unina.it>
+X-SA-Exim-Connect-IP: 64.18.0.22
+X-SA-Exim-Mail-From: martyn.welch@ge.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: gtk+-native-2.20.0-r8.0 fails in do_configure.
+Subject: Re: [PATCH 1/2] tzcode-native_2010f: Update tzdata SRC_URI and checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,71 +43,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Apr 2010 09:58:51 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 08 Apr 2010 10:14:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Antonio Ospite wrote:
+> tzdata2010g is no longer available, use tzdata2010h
+>
+> Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+> ---
+>  recipes/tzcode/tzcode-native_2010f.bb |    8 ++++----
+>  1 files changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/recipes/tzcode/tzcode-native_2010f.bb b/recipes/tzcode/tzcode-native_2010f.bb
+> index 6c361ac..fdd35ba 100644
+> --- a/recipes/tzcode/tzcode-native_2010f.bb
+> +++ b/recipes/tzcode/tzcode-native_2010f.bb
+> @@ -6,11 +6,11 @@ require tzcode-native.inc
+>  # fix this URLs
+>  SRC_URI = " \
+>  	ftp://elsie.nci.nih.gov/pub/tzcode${PV}.tar.gz;name=tzcode-${PV} \
+> -	ftp://elsie.nci.nih.gov/pub/tzdata2010g.tar.gz;name=tzdata-2010g \
+> +	ftp://elsie.nci.nih.gov/pub/tzdata2010h.tar.gz;name=tzdata-2010h \
+>  	"
+>  SRC_URI[tzcode-2010f.md5sum] = "e530cc9bbdfd5e8c1eac21a68f4d5656"
+>  SRC_URI[tzcode-2010f.sha256sum] = "651d866c91ada925b4ac9491e69ebd5c355c46b2c01dd1741b5e6a609d93eb1e"
+> -SRC_URI[tzdata-2010g.md5sum] = "d0e8f560977470b0fc65b79b585cf5e4"
+> -SRC_URI[tzdata-2010g.sha256sum] = "a069dbea2989613466f9f4adb6de381efb46aeb9ff89e03fabb23dcae2c4cd90"
+> +SRC_URI[tzdata-2010g.md5sum] = "d384ac091e6d56802f9b3e6b3d3f0f2e"
+> +SRC_URI[tzdata-2010g.sha256sum] = "a4918d60f63440ba9b6050205881e8a98d718dc0c2b7df5955f43e781eab6e7d"
+>  
+> -PR = "${INC_PR}.1"
+> +PR = "${INC_PR}.2"
+>   
+Why is a recipe for "tzcode-native_2010f" downloading "tzdata2010g", let
+alone "tzdata2010h"?
 
-On 08-04-10 11:22, Antonio Ospite wrote:
-> On Tue, 6 Apr 2010 11:58:37 +0200
-> Antonio Ospite <ospite@studenti.unina.it> wrote:
-> 
->> On Sat, 3 Apr 2010 20:17:09 +0200
->> Marcin Juszkiewicz <marcin@juszkiewicz.com.pl> wrote:
->>
->>> Dnia sobota, 3 kwietnia 2010 o 17:17:24 Antonio Ospite napisał(a):
->>>> when building gtk+-native-2.20.0-r8.0 (actually bitbaking
->>>> fso-console-image DISTRO=minimal MACHINE=a780) I get this message:
->>>>
->>>>  Requested 'glib-2.0 >= 2.23.6' but version of GLib is 2.22.1
->>>>
->>>> See also http://tinderbox.openembedded.org/packages/540390/
->>>>
->>>> I can workaround that locally but I would like to learn what the best
->>>> way to solve such issues would be. I don't see any
->>>> preferred-minimal-versions.inc
->>>
->>> Recent glib-2.0 recipes has BBCLASSEXTEND = "native" set but we also have 
->>> glib-2.0-native recipes... I think that native ones should be dropped.
->>>
->>
->> So what is happening to me now it that glib-2.0-native_2.22.1.bb gets
->> selected and the more recent ones with BBCLASSEXTEND = "native" are
->> discarded, right?
->>
-> 
-> Ok, I confirm this was actually the case, the old way to do native
-> recipes seems to have precedence on the new one, this is with bitbake
-> 1.8.18, don't know if that is dependent on bitbake version tho.
-> 
-> Removing all glib-2.0-native packages makes gtk+-native-2.20.0-r8.0
-> build ok.
-> 
->> If the -native recipes are going to be dropped should the
->> BBCLASSEXTEND mechanism moved to some glib*.inc file?
->>
-> 
-> Should I just send a patch which blindly removes native
-> recipes for older versions, or try to port the BBCLASSEXTEND mechanism
-> to them? I don't know if I am fully comfortable with such changes in OE,
-> but I can always send a tentative patch.
+Surely a new recipe called "tzcode-native_2010h" is called for?
 
-Porting them has a slight preference over deleting them. The -native
-recipes shouldn't be needed for things like maemo-compat, hence the
-'slight' :)
+Martyn
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLvafcMkyGM64RGpERAroAAKCW7+h5AKr8VHhjoowsODwbKdX/+wCglfaW
-vf+ofTWZVrCCpZzw6mNyL/8=
-=BaGg
------END PGP SIGNATURE-----
+-- 
+Martyn Welch (Principal Software Engineer)   |   Registered in England and
+GE Intelligent Platforms                     |   Wales (3828642) at 100
+T +44(0)127322748                            |   Barbirolli Square, Manchester,
+E martyn.welch@ge.com                        |   M2 3AB  VAT:GB 927559189
 
 
 
