@@ -1,27 +1,42 @@
-Received: from [93.188.72.201] (helo=mail.o2s.ch)
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <david.lanzendoerfer@o2s.ch>) id 1NzrFz-0002Vn-S7
+	(envelope-from <dp@xora.org.uk>) id 1NzrH6-0007p1-9w
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Apr 2010 14:54:53 +0200
-Received: from lilith.localnet ([::ffff:82.192.226.27])
-	(AUTH: PLAIN david.lanzendoerfer@o2s.ch, TLS: TLSv1/SSLv3, 256bits,
-	AES256-SHA) by koffein with esmtp; Thu, 08 Apr 2010 14:54:34 +0000
-	id 000000000002ECD2.000000004BBDEE2A.00006BFF
-To: Openembedded Development List <openembedded-devel@lists.openembedded.org>
-From: David =?iso-8859-1?q?Lanzend=F6rfer?= <david.lanzendoerfer@o2s.ch>
-Organization: OpenSourceSupport GmbH
-Date: Thu, 8 Apr 2010 14:51:29 +0200
+	Thu, 08 Apr 2010 14:56:02 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id BFA71A47B8
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  8 Apr 2010 13:52:38 +0100 (BST)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id I8JVb1UgZhP9
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  8 Apr 2010 13:52:36 +0100 (BST)
+Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 0348BA452E
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  8 Apr 2010 13:52:35 +0100 (BST)
+Received: by xora-desktop.xora.org.uk (Postfix, from userid 500)
+	id ED60E28A46; Thu,  8 Apr 2010 13:53:17 +0100 (BST)
+Date: Thu, 8 Apr 2010 13:53:17 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100408125317.GC2262@xora-desktop.xora.org.uk>
+References: <l2pfca63bcf1004080544ze5d9af0cw4c3b1ea9ea30e597@mail.gmail.com>
 MIME-Version: 1.0
-Message-Id: <201004081451.29421.david.lanzendoerfer@o2s.ch>
-X-SA-Exim-Connect-IP: 93.188.72.201
-X-SA-Exim-Mail-From: david.lanzendoerfer@o2s.ch
+In-Reply-To: <l2pfca63bcf1004080544ze5d9af0cw4c3b1ea9ea30e597@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-08-17)
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_NONE
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] Changing Xserver-script for using Xorg on htcdream (trout) in the future
+Subject: Re: [PATCH] omap3-mkcard.sh: Adding sleep and umounts to fix race cond.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,36 +50,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Apr 2010 12:54:53 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 08 Apr 2010 12:56:03 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hello.
-The following patch is intended to make htcdream use Xorg
-in order for taking profit of the new enhanced xf86-video-msm driver.
+Wont those extra umounts make the script exit when I have set my
+machine not to automount the partitions?
 
----
- .../xserver-kdrive-common/Xserver                  |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+Graeme
 
-diff --git a/recipes/xserver-kdrive-common/xserver-kdrive-common/Xserver b/recipes/xserver-kdrive-common/xserver-kdrive-common/Xserver
-index e2566bb..d00be86 100644
---- a/recipes/xserver-kdrive-common/xserver-kdrive-common/Xserver
-+++ b/recipes/xserver-kdrive-common/xserver-kdrive-common/Xserver
-@@ -61,8 +61,8 @@ fi
- # start off server in conventional location.
- case `module_id` in
- 	"trout")
--		ARGS="$ARGS -mouse tslib"
--		XSERVER=/usr/bin/Xfbdev
-+		ARGS=""
-+		XSERVER=/usr/bin/Xorg
- 		;;
-         "AML M8050")
-                 ARGS="$ARGS -dpi 100 -screen 320x240@270" ;;
--- 
-1.5.6.5
-
+On Thu, Apr 08, 2010 at 02:44:15PM +0200, Michael Lippautz wrote:
+> * Adds sleep to wait for blocknodes in /dev
+> * Adds unmounts to fix possible automounts
+> 
+> Signed-off-by: Michael Lippautz <michael.lippautz@gmail.com>
+> ---
+>  contrib/angstrom/omap3-mkcard.sh |    8 +++++++-
+>  1 files changed, 7 insertions(+), 1 deletions(-)
+> 
+> diff --git a/contrib/angstrom/omap3-mkcard.sh b/contrib/angstrom/omap3-mkcard.sh
+> index d8b5b43..1cf6817 100755
+> --- a/contrib/angstrom/omap3-mkcard.sh
+> +++ b/contrib/angstrom/omap3-mkcard.sh
+> @@ -1,5 +1,5 @@
+>  #! /bin/sh
+> -# mkcard.sh v0.4
+> +# mkcard.sh v0.5
+>  # (c) Copyright 2009 Graeme Gregory <dp@xora.org.uk>
+>  # Licensed under terms of GPLv2
+>  #
+> @@ -30,10 +30,14 @@ echo ,9,0x0C,*
+>  echo ,,,-
+>  } | sfdisk -D -H 255 -S 63 -C $CYLINDERS $DRIVE
+> 
+> +sleep 1
+> +
+>  if [ -b ${DRIVE}1 ]; then
+> +	umount ${DRIVE}1
+>  	mkfs.vfat -F 32 -n "boot" ${DRIVE}1
+>  else
+>  	if [ -b ${DRIVE}p1 ]; then
+> +		umount ${DRIVE}p1
+>  		mkfs.vfat -F 32 -n "boot" ${DRIVE}p1
+>  	else
+>  		echo "Cant find boot partition in /dev"
+> @@ -41,9 +45,11 @@ else
+>  fi
+> 
+>  if [ -b ${DRIVE}2 ]; then
+> +	umount ${DRIVE}2
+>  	mke2fs -j -L "rootfs" ${DRIVE}2
+>  else
+>  	if [ -b ${DRIVE}p2 ]; then
+> +		umount ${DRIVE}p2
+>  		mke2fs -j -L "rootfs" ${DRIVE}p2
+>  	else
+>  		echo "Cant find rootfs partition in /dev"
+> -- 
+> 1.6.4.4
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
