@@ -1,37 +1,40 @@
-Received: from smtp-out04.alice.it ([85.37.17.100])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1NzsVp-0007ZO-P1
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Apr 2010 16:15:19 +0200
-Received: from FBCMMO04.fbc.local ([192.168.184.135]) by smtp-out04.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 8 Apr 2010 16:11:51 +0200
-Received: from FBCMCL01B06.fbc.local ([192.168.69.87]) by FBCMMO04.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 8 Apr 2010 16:11:48 +0200
-Received: from jcn ([82.59.101.2]) by FBCMCL01B06.fbc.local with Microsoft
-	SMTPSVC(6.0.3790.3959); Thu, 8 Apr 2010 16:11:44 +0200
-Date: Thu, 8 Apr 2010 16:11:30 +0200
-From: Antonio Ospite <ospite@studenti.unina.it>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NzsZp-0007nn-Hu for openembedded-devel@lists.openembedded.org;
+	Thu, 08 Apr 2010 16:19:26 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1NzsWa-0002x6-O5 for openembedded-devel@lists.openembedded.org;
+	Thu, 08 Apr 2010 16:16:04 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 Apr 2010 16:16:04 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 Apr 2010 16:16:04 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20100408161130.b0b6ed73.ospite@studenti.unina.it>
-In-Reply-To: <201004032017.10514.marcin@juszkiewicz.com.pl>
-References: <20100403171724.b9df4c84.ospite@studenti.unina.it>
-	<201004032017.10514.marcin@juszkiewicz.com.pl>
-X-Mailer: Sylpheed 3.0.1 (GTK+ 2.20.0; x86_64-pc-linux-gnu)
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 08 Apr 2010 16:15:57 +0200
+Message-ID: <hpkoet$h25$1@dough.gmane.org>
+References: <20100403171724.b9df4c84.ospite@studenti.unina.it>	<201004032017.10514.marcin@juszkiewicz.com.pl>
+	<20100408161130.b0b6ed73.ospite@studenti.unina.it>
 Mime-Version: 1.0
-X-OriginalArrivalTime: 08 Apr 2010 14:11:44.0805 (UTC)
-	FILETIME=[6B562550:01CAD725]
-X-SA-Exim-Connect-IP: 85.37.17.100
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100329 Shredder/3.0.5pre
+In-Reply-To: <20100408161130.b0b6ed73.ospite@studenti.unina.it>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: gtk+-native-2.20.0-r8.0 fails in do_configure.
@@ -48,70 +51,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Apr 2010 14:15:19 -0000
-X-Groupsio-MsgNum: 18499
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg="PGP-SHA1";
-	boundary="Signature=_Thu__8_Apr_2010_16_11_30_+0200_vNOKwW8MW9IY.MlS"
-
---Signature=_Thu__8_Apr_2010_16_11_30_+0200_vNOKwW8MW9IY.MlS
+X-List-Received-Date: Thu, 08 Apr 2010 14:19:26 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Sat, 3 Apr 2010 20:17:09 +0200
-Marcin Juszkiewicz <marcin@juszkiewicz.com.pl> wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> Dnia sobota, 3 kwietnia 2010 o 17:17:24 Antonio Ospite napisa=C5=82(a):
-> > when building gtk+-native-2.20.0-r8.0 (actually bitbaking
-> > fso-console-image DISTRO=3Dminimal MACHINE=3Da780) I get this message:
-> >=20
-> >  Requested 'glib-2.0 >=3D 2.23.6' but version of GLib is 2.22.1
-> >=20
-> > See also http://tinderbox.openembedded.org/packages/540390/
-> >=20
-> > I can workaround that locally but I would like to learn what the best
-> > way to solve such issues would be. I don't see any
-> > preferred-minimal-versions.inc
->=20
-> Recent glib-2.0 recipes has BBCLASSEXTEND =3D "native" set but we also ha=
-ve=20
-> glib-2.0-native recipes... I think that native ones should be dropped.
->
+On 08-04-10 16:11, Antonio Ospite wrote:
 
-On a second thought, the original issue could be handled also in another
-way: by telling gtk+-2.20.0 explicitly to pick up a glib-2.0 >=3D 2.23.6;
-versioned dependencies are possible in .bb files but the gtk+ recipe
-puts the dependency on glib-2.0 in gtk+.inc I am not sure about how to
-handle this.
+> versioned dependencies are possible in .bb files
 
-Gtk+ and glib releases are somehow matching AFAIK so it could have sense
-to use versioned deps in this case.
-
-Thanks,
-   Antonio
-
---=20
-Antonio Ospite
-http://ao2.it
-
-PGP public key ID: 0x4553B001
-
-A: Because it messes up the order in which people normally read text.
-   See http://en.wikipedia.org/wiki/Posting_style
-Q: Why is top-posting such a bad thing?
-A: Top-posting.
-Q: What is the most annoying thing in e-mail?
-
---Signature=_Thu__8_Apr_2010_16_11_30_+0200_vNOKwW8MW9IY.MlS
-Content-Type: application/pgp-signature
-
+Actually, they aren't. DISTROs should take care of stuff like this in
+the current OE design.
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEARECAAYFAku95BIACgkQ5xr2akVTsAHrkgCdHdiqCAcT8Es917LM5IgNrzVM
-B5MAnjc6x3oLp5/2wWC9K2flc9fGiqc/
-=wGiQ
+iD8DBQFLveUdMkyGM64RGpERAnGSAJ9vINnRUvZJwYuQfFV9BWIUc/PLAACfXOIy
+A12ZV+BEBMhgLsXEs0uWcBM=
+=+zp0
 -----END PGP SIGNATURE-----
 
---Signature=_Thu__8_Apr_2010_16_11_30_+0200_vNOKwW8MW9IY.MlS--
+
+
