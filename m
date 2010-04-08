@@ -1,51 +1,48 @@
-Received: from fg-out-1718.google.com ([72.14.220.153])
+Received: from mail-ew0-f225.google.com ([209.85.219.225])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Nzl3T-00049p-HH
+	(envelope-from <tasskjapp@gmail.com>) id 1NzlbC-0001Kr-1b
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Apr 2010 08:17:31 +0200
-Received: by fg-out-1718.google.com with SMTP id e12so1682886fga.6
+	Thu, 08 Apr 2010 08:52:22 +0200
+Received: by ewy25 with SMTP id 25so917494ewy.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Apr 2010 23:14:11 -0700 (PDT)
+	Wed, 07 Apr 2010 23:48:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=vrzDTHzU7FdpSDAn0fsrStehpXM0I2PzyoHjsZNFZcI=;
-	b=gqH7sYC+VrFyIOwcqZ/6mPSpZMsRJ8+Bc5Usyj/98JBbdQCWig8UGvpPp0nP7gKHcy
-	fX2AXIIUjucHkvlqUZZURywsoUTBKFF47qogc4PNaXf1oymQDfOdKNGg18HeCVlflKeu
-	/ONAInf8O2ijPtEUX8vcqRAt3qPgJI6lzWrug=
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:references:in-reply-to
+	:content-type:content-transfer-encoding;
+	bh=skiFuwwZPySNNQKhewaLnzxuHUjPMvkHcW/0MMtFJcM=;
+	b=iatlu4aMWd0QHEf6+Nrc2Nkctl+c8RFgalFlZAsjCu4m9bmOjDCDdwPA1L91Izwo5J
+	JsWRaUh6qJQgO/+M8Hk7mSQmwJiIUqMkBlYAU9LkILnqw1vGO5kvOZEh2aw9+sAKzI8W
+	10hG9fICvY/nvFA6LVMHFhUbo0g4rOtswegDI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=jktdOvjd87uc+rN63czEJhve0ky4ZP/Xh5SsaxgHQEMcQghVc88k/r+1GPHzh/YElP
-	FXui/mHhU5/XFC0U2UcWqunXonMMTY4tPZ6n961FKoLEWB2Z/7H0q8mXRyCaTLh8/9ri
-	ATAL+VUSb8Auc+xVIJQXsGuuNv4hYeaEaJm6k=
-Received: by 10.87.42.2 with SMTP id u2mr15215467fgj.79.1270707250943;
-	Wed, 07 Apr 2010 23:14:10 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 15sm1096466fxm.15.2010.04.07.23.14.10
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 07 Apr 2010 23:14:10 -0700 (PDT)
-Date: Thu, 8 Apr 2010 08:14:13 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100408061413.GC3269@jama>
-References: <4BBB3C39.5070002@mwester.net>
-	<q2mb6ebd0a51004060826wb048ffa2ge1fbcfb1892a9bac@mail.gmail.com>
-	<4BBD4860.8070306@mwester.net> <20100408041801.GA3269@jama>
-	<4BBD6763.9060409@mwester.net> <20100408060727.GB3269@jama>
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=SjNFEHWoxSbL+m2ChjFlEb9lz9m1zTxOI6aai9CVGcxHgSzg3GeFUJ0gy2j+ueQ4Pe
+	6OcDhoQab4hhaI38Q6GNa/W2Ve1d2O10FQXT8RfiVd1pQ92LNamxdW+fW19Uwla79mg7
+	+8FnZx28GLIdiKPGpuil8DYec1l7aGtV/Uznw=
+Received: by 10.213.46.74 with SMTP id i10mr2564205ebf.36.1270709339481;
+	Wed, 07 Apr 2010 23:48:59 -0700 (PDT)
+Received: from [192.168.0.49] (147.84-49-231.nextgentel.com [84.49.231.147])
+	by mx.google.com with ESMTPS id 16sm8523065ewy.3.2010.04.07.23.48.58
+	(version=SSLv3 cipher=RC4-MD5); Wed, 07 Apr 2010 23:48:58 -0700 (PDT)
+Message-ID: <4BBD7C9C.2020404@gmail.com>
+Date: Thu, 08 Apr 2010 08:50:04 +0200
+From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.10pre) Gecko/20100407 Shredder/3.0.5pre
 MIME-Version: 1.0
-In-Reply-To: <20100408060727.GB3269@jama>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 72.14.220.153
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <mailman.2582.1270656222.24517.openembedded-devel@lists.openembedded.org>
+In-Reply-To: <mailman.2582.1270656222.24517.openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.219.225
+X-SA-Exim-Mail-From: tasskjapp@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: SRCREV defined too late -how to fix?
+Subject: Re: SDK for BeagleBoard development - how do I add linux-omap headers?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,32 +56,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Apr 2010 06:17:32 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 08 Apr 2010 06:52:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Apr 08, 2010 at 08:07:27AM +0200, Martin Jansa wrote:
-> To be honest SRCREV in linux-ixp4xx.inc is really strange, I put it
-> there as it's as close to previous state as possible (same SRCREV is
-> share between all versions of linux-ixp4xx recipe). I would expect
-> different SRCREV of patchset for different module=${KERNEL_RELEASE} (I
-> think it's harder to test all KERNEL_RELEASEs when you need to bump
-> patchset SRCREV for latest RELEASE or unnecesarry kernel upgrades for
-> users of older KERNEL_RELEASE when someone bumped patches only to get
-> more patches for latest RELEASE without any change in their old version.
+>
+> Like the topic says I'm trying to create an SDK to let people develop
+> >  for a BeagleBoard running Angstrom. I have followed the instructions in
+> >  the manual on creating an SDK, and have a basic one compiled.
+> >  
+> >  I included linux-libc-headers, but found out that it gives me only the
+> >  "vanilla" kernel-headers, while I need the linux-omap-headers with all
+> >  the needed patches. How do I get those into the SDK?
+>    
+> Why do you need these headers?
+>    
 
-To finish my thought.. 
-
-With this new layout (SRCREV in recipe) it will be much easier to bump
-SRCREV ie only for linux-ixp4xx_2.6.29.bb (overwritting shared SRCREV
-from linux-ixp4xx.inc after its include), but be aware that if you put
-SRCREV_pn-linux-ixp4xx in distro config you will also overwrite this
-locally bumped SRCREV which can be confusing a bit.
-
-Regards,
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+We have code that writes video directly into framebuffer, and it needs 
+to include <"linux/omapfb.h">.
 
 
