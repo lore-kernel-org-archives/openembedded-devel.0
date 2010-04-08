@@ -1,41 +1,37 @@
-Received: from smtp-out01.alice.it ([85.33.2.12])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1Nzo7F-0003qJ-UW
+	(envelope-from <stefan@datenfreihafen.org>) id 1Nzo97-0006Xc-VS
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Apr 2010 11:33:40 +0200
-Received: from FBCMMO05.fbc.local ([192.168.184.136]) by smtp-out01.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 8 Apr 2010 11:30:13 +0200
-Received: from FBCMCL01B02.fbc.local ([192.168.69.83]) by FBCMMO05.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 8 Apr 2010 11:30:12 +0200
-Received: from jcn ([82.59.101.2]) by FBCMCL01B02.fbc.local with Microsoft
-	SMTPSVC(6.0.3790.3959); Thu, 8 Apr 2010 11:30:10 +0200
-Received: from ao2 by jcn with local (Exim 4.71)
-	(envelope-from <ospite@studenti.unina.it>)
-	id 1Nzo3t-0001c8-5A; Thu, 08 Apr 2010 11:30:09 +0200
-From: Antonio Ospite <ospite@studenti.unina.it>
+	Thu, 08 Apr 2010 11:35:34 +0200
+Received: from w0952.wlan.rz.tu-bs.de ([134.169.203.190] helo=excalibur)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1Nzo5r-0006be-3D by authid <stefan@sostec.de> with cram_md5;
+	Thu, 08 Apr 2010 11:32:13 +0200
+Received: from stefan by excalibur with local (Exim 4.71)
+	(envelope-from <stefan@excalibur.local>)
+	id 1Nzo5q-0005gG-OC; Thu, 08 Apr 2010 11:32:10 +0200
+Date: Thu, 8 Apr 2010 11:32:10 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 Apr 2010 11:30:03 +0200
-Message-Id: <1270719003-6168-3-git-send-email-ospite@studenti.unina.it>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1270719003-6168-1-git-send-email-ospite@studenti.unina.it>
-References: <1270719003-6168-1-git-send-email-ospite@studenti.unina.it>
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-X-OriginalArrivalTime: 08 Apr 2010 09:30:10.0502 (UTC)
-	FILETIME=[158C1660:01CAD6FE]
-X-SA-Exim-Connect-IP: 85.33.2.12
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+Message-ID: <20100408093210.GE27376@excalibur.local>
+References: <1266262558.32499.31.camel@jjg-linux>
+MIME-Version: 1.0
+In-Reply-To: <1266262558.32499.31.camel@jjg-linux>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] tzdata: move tzdata_2010g.bb to tzdata_2010h.bb
+Cc: Michael Lauer <mickey@vanille-media.de>
+Subject: Re: [PATCH 1/2] python: fix SSL for 2.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,47 +45,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Apr 2010 09:33:44 -0000
+X-List-Received-Date: Thu, 08 Apr 2010 09:35:34 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-tzdata_2010g is no longer available; change the checksums in the new
-recipe
+Hallo.
 
-Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
----
- recipes/tzdata/tzdata_2010g.bb |    7 -------
- recipes/tzdata/tzdata_2010h.bb |    7 +++++++
- 2 files changed, 7 insertions(+), 7 deletions(-)
- delete mode 100644 recipes/tzdata/tzdata_2010g.bb
- create mode 100644 recipes/tzdata/tzdata_2010h.bb
+On Mon, 2010-02-15 at 13:35, Jesse Gilles wrote:
+> 
+> This fixes SSL support for python 2.6.  Looks like the python module for
+> SSL was missing from the package.
 
-diff --git a/recipes/tzdata/tzdata_2010g.bb b/recipes/tzdata/tzdata_2010g.bb
-deleted file mode 100644
-index acefb96..0000000
---- a/recipes/tzdata/tzdata_2010g.bb
-+++ /dev/null
-@@ -1,7 +0,0 @@
--require tzdata.inc
--
--SRC_URI = "http://ftp.uni-erlangen.de/pub/Linux/MIRROR.gentoo/distfiles/tzdata${PV}.tar.gz;name=tar \
--"
--
--SRC_URI[tar.md5sum] = "d0e8f560977470b0fc65b79b585cf5e4"
--SRC_URI[tar.sha256sum] = "a069dbea2989613466f9f4adb6de381efb46aeb9ff89e03fabb23dcae2c4cd90"
-diff --git a/recipes/tzdata/tzdata_2010h.bb b/recipes/tzdata/tzdata_2010h.bb
-new file mode 100644
-index 0000000..6e8e28e
---- /dev/null
-+++ b/recipes/tzdata/tzdata_2010h.bb
-@@ -0,0 +1,7 @@
-+require tzdata.inc
-+
-+SRC_URI = "http://ftp.uni-erlangen.de/pub/Linux/MIRROR.gentoo/distfiles/tzdata${PV}.tar.gz;name=tar \
-+"
-+
-+SRC_URI[tar.md5sum] = "d384ac091e6d56802f9b3e6b3d3f0f2e"
-+SRC_URI[tar.sha256sum] = "a4918d60f63440ba9b6050205881e8a98d718dc0c2b7df5955f43e781eab6e7d"
--- 
-1.7.0.4
+Mickey, can you have a look at this? Thanks.
 
+> * Add SSL module to build -- fixes "import ssl"
+> 
+> diff --git a/contrib/python/generate-manifest-2.6.py b/contrib/python/generate-manifest-2.6.py
+> index fe0e385..890d1c0 100755
+> --- a/contrib/python/generate-manifest-2.6.py
+> +++ b/contrib/python/generate-manifest-2.6.py
+> @@ -248,7 +248,7 @@ if __name__ == "__main__":
+>  
+>      m.addPackage( "python-io", "Python Low-Level I/O", "python-core python-math",
+>      "lib-dynload/_socket.so lib-dynload/_ssl.so lib-dynload/select.so lib-dynload/termios.so lib-dynload/cStringIO.so " +
+> -    "pipes.* socket.* tempfile.* StringIO.* " )
+> +    "pipes.* socket.* ssl.* tempfile.* StringIO.* " )
+>  
+>      m.addPackage( "python-json", "Python JSON Support", "python-core python-math python-re",
+>      "json" ) # package
+> diff --git a/recipes/python/python-2.6-manifest.inc b/recipes/python/python-2.6-manifest.inc
+> index cee12c8..188ee31 100644
+> --- a/recipes/python/python-2.6-manifest.inc
+> +++ b/recipes/python/python-2.6-manifest.inc
+> @@ -51,7 +51,7 @@ FILES_python-core="${libdir}/python2.6/__future__.* ${libdir}/python2.6/_abcoll.
+>  
+>  DESCRIPTION_python-io="Python Low-Level I/O"
+>  RDEPENDS_python-io="python-core python-math"
+> -FILES_python-io="${libdir}/python2.6/lib-dynload/_socket.so ${libdir}/python2.6/lib-dynload/_ssl.so ${libdir}/python2.6/lib-dynload/select.so ${libdir}/python2.6/lib-dynload/termios.so ${libdir}/python2.6/lib-dynload/cStringIO.so ${libdir}/python2.6/pipes.* ${libdir}/python2.6/socket.* ${libdir}/python2.6/tempfile.* ${libdir}/python2.6/StringIO.* "
+> +FILES_python-io="${libdir}/python2.6/lib-dynload/_socket.so ${libdir}/python2.6/lib-dynload/_ssl.so ${libdir}/python2.6/lib-dynload/select.so ${libdir}/python2.6/lib-dynload/termios.so ${libdir}/python2.6/lib-dynload/cStringIO.so ${libdir}/python2.6/pipes.* ${libdir}/python2.6/socket.* ${libdir}/python2.6/ssl.* ${libdir}/python2.6/tempfile.* ${libdir}/python2.6/StringIO.* "
+>  
+>  DESCRIPTION_python-compiler="Python Compiler Support"
+>  RDEPENDS_python-compiler="python-core"
+> diff --git a/recipes/python/python.inc b/recipes/python/python.inc
+> index 7e61f79..aff18db 100644
+> --- a/recipes/python/python.inc
+> +++ b/recipes/python/python.inc
+> @@ -4,7 +4,7 @@ LICENSE = "PSF"
+>  SECTION = "devel/python"
+>  PRIORITY = "optional"
+>  # bump this on every change in contrib/python/generate-manifest-2.6.py
+> -INC_PR = "ml8"
+> +INC_PR = "ml9"
+>  
+>  DEFAULT_PREFERENCE = "-26"
+
+regards
+Stefan Schmidt
 
 
