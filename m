@@ -1,32 +1,43 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Nzzia-0004C5-1W for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Apr 2010 23:56:56 +0200
-Received: from f053045106.adsl.alicedsl.de ([78.53.45.106]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1NzzfL-0007PL-1b for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Apr 2010 21:53:35 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <Tom_Rini@mentor.com>) id 1O00cU-0006zg-Lq
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Apr 2010 00:54:44 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1O00ZC-0005lc-AU from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 08 Apr 2010 15:51:18 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Thu, 8 Apr 2010 15:51:17 -0700
+Received: from 172.30.80.171 ([172.30.80.171]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Thu,  8 Apr 2010 22:50:39 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	08 Apr 2010 15:50:37 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1268608081.3809.6.camel@mattotaupa>
-References: <1268482329.11170.31.camel@mattotaupa>
-	<hnj0q5$luv$1@dough.gmane.org>  <1268608081.3809.6.camel@mattotaupa>
-Date: Thu, 08 Apr 2010 23:53:32 +0200
-Message-ID: <1270763612.29502.9.camel@mattotaupa>
+In-Reply-To: <4BBE4B91.40602@mwester.net>
+References: <20100408162117.e7638f69.ospite@studenti.unina.it>
+	<1270761657-18322-1-git-send-email-ospite@studenti.unina.it>
+	<4BBE4B91.40602@mwester.net>
+Organization: Mentor Graphics Corporation
+Date: Thu, 08 Apr 2010 15:50:37 -0700
+Message-ID: <1270767037.29304.40.camel@trini-m4400>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 08 Apr 2010 22:51:17.0931 (UTC)
+	FILETIME=[FFF7AFB0:01CAD76D]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] linux-omap*/beagleboard/defconfig: Compile Ext4 support into Linux.
+Subject: Re: [PATCH] glib-2.0: remove old glib-2.0-native recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,58 +51,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Apr 2010 21:56:56 -0000
-X-Groupsio-MsgNum: 18515
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-Z6Y2QycHfklA+3fDXlU8"
-
---=-Z6Y2QycHfklA+3fDXlU8
+X-List-Received-Date: Thu, 08 Apr 2010 22:54:44 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Dear Koen,
-
-
-Am Montag, den 15.03.2010, 00:08 +0100 schrieb Paul Menzel:
-> Am Sonntag, den 14.03.2010, 16:53 +0100 schrieb Koen Kooi:
-> > Thanks for the patch! I have a huuuuge stack of changed queued for TI
-> > platforms (beagle, hawk, omap3evm etc) that will be merged next week, s=
-o
-> > I recreated your patch on top of that:
+On Thu, 2010-04-08 at 16:33 -0500, Mike Westerhof wrote:
+> Antonio Ospite wrote:
+> > Having these around can cause some conflict in recipes depending on
+> > recent glib-2.0-native, see [1].
 > >=20
-> > http://gitorious.org/angstrom/openembedded/commit/3891af0d4838f1445ee27=
-f6be4258d558731f3ea
->=20
-> Thanks for doing that. I updated the state in Patchwork.
->=20
->     $ ./pwclient update -s accepted 1711
->=20
-> > And the branch:
+> > What can happen is that, when no preferred versions are set (like in
+> > DISTRO=3Dminimal), bitbake picks up an older -native recipe even if a m=
+ore
+> > recent one using the BBCLASSEXTEND =3D "native" mechanism exists.
 > >=20
-> > http://gitorious.org/angstrom/openembedded/commits/ti/staging
+> > [1] http://tinderbox.openembedded.org/packages/540390/
+> >=20
+> > Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+> > ---
+> > Please check if the commit message is clear enough, I think I've figure=
+d
+> > out what's happening behind the scenes, but I have not that deep
+> > knowledge of bitbake.
+> >=20
+> > Thanks,
+> >    Antonio Ospite
+> >    http://ao2.it
+> >=20
+> >=20
+> >  .../glib-gettextize-dir.patch                      |   11 --
+> >  recipes/glib-2.0/glib-2.0-native_2.12.4.bb         |   49 ----------
+> >  recipes/glib-2.0/glib-2.0-native_2.16.1.bb         |   40 --------
+> >  recipes/glib-2.0/glib-2.0-native_2.18.0.bb         |   40 --------
+> >  recipes/glib-2.0/glib-2.0-native_2.2.3.bb          |  100 ------------=
+--------
+> >  recipes/glib-2.0/glib-2.0-native_2.22.1.bb         |   39 --------
+> >  recipes/glib-2.0/glib-2.0-native_2.4.6.bb          |   49 ----------
+> >  recipes/glib-2.0/glib-2.0-native_2.6.5.bb          |   51 ----------
+> >  recipes/glib-2.0/glib-2.0-native_2.6.6.bb          |   51 ----------
+> >  9 files changed, 0 insertions(+), 430 deletions(-)
+> >  delete mode 100644 recipes/glib-2.0/glib-2.0-native-2.12.4/glib-gettex=
+tize-dir.patch
+> >  delete mode 100644 recipes/glib-2.0/glib-2.0-native_2.12.4.bb
+> >  delete mode 100644 recipes/glib-2.0/glib-2.0-native_2.16.1.bb
+> >  delete mode 100644 recipes/glib-2.0/glib-2.0-native_2.18.0.bb
+> >  delete mode 100644 recipes/glib-2.0/glib-2.0-native_2.2.3.bb
+> >  delete mode 100644 recipes/glib-2.0/glib-2.0-native_2.22.1.bb
+>=20
+> NACK.  This glib version is still in use; don't delete it:
+> /u/slug/slugos/tmp/work/x86_64-linux/glib-2.0-native-2.22.1-r6.2
+>=20
+> (Surely there must a better way to fix this than removal of active recipe=
+s?)
 
-do you have an estimate when you will merge your changes.
+If 2.22.1 was converted to BBCLASSEXTEND, the rest of the mechanisms
+would work right again.
 
-[=E2=80=A6]
-
-
-Thanks,
-
-Paul
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
-
---=-Z6Y2QycHfklA+3fDXlU8
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAku+UFwACgkQPX1aK2wOHVg6kwCfSbS7baLVQWDLmZRooPiIBJm/
-p2IAmwVIJJeVIrDO4tTb1Lu1G4KrZI4V
-=9fwM
------END PGP SIGNATURE-----
-
---=-Z6Y2QycHfklA+3fDXlU8--
