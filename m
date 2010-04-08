@@ -1,49 +1,31 @@
-Received: from fg-out-1718.google.com ([72.14.220.153])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1NzvbI-00021A-Fp
+	(envelope-from <roman@khimov.ru>) id 1NzxFJ-0006mJ-4n
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Apr 2010 19:33:09 +0200
-Received: by fg-out-1718.google.com with SMTP id 19so883396fgg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Apr 2010 10:29:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=oxgkAsemPxewsKC/K3LhAKsvhV0sEo7J8rujdZ7hU6U=;
-	b=xm6dU/Zr8aofDpxztujJ5BR6TRQa56QoniW4v8RcOT6abaRs6xB43GD543DyxW1Mh7
-	sEas08CxSZTzkUZYk6iO0KpDLoPqUhWIoY/bg56542eUDw+baB0p06VCcSZT6MV7vVHO
-	k0T5J/uv/InfmViT48qb3CNTBDmpBX6LUGoeY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=AKAty6QKVssLdgY/+Sqdsj5IfkiBj/icEiBWIN3pPbyouN8jeVXAC/AQnOuWDNXg6b
-	npfbolDqqsCY2hADZqr4jQnWco90LJrHbtD7j58qZf1K+wdJ+d4usQVDlOHBMInNgrY1
-	Onq3gVNwVQDo2j4m+9STDjxhPowVRaa6aHzMk=
-Received: by 10.87.70.7 with SMTP id x7mr731115fgk.77.1270747787176;
-	Thu, 08 Apr 2010 10:29:47 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 14sm211217fxm.9.2010.04.08.10.29.46
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 08 Apr 2010 10:29:46 -0700 (PDT)
-Date: Thu, 8 Apr 2010 19:29:53 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 08 Apr 2010 21:18:35 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1NzxBw-0003RH-Gx
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 08 Apr 2010 23:15:05 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100408172953.GG3269@jama>
-References: <alpine.DEB.1.10.1004081018050.3264@vitus.devnet.local>
-	<alpine.DEB.1.10.1004081733510.3264@vitus.devnet.local>
+Date: Thu, 8 Apr 2010 23:11:42 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <1270719003-6168-1-git-send-email-ospite@studenti.unina.it>
+	<1270719003-6168-2-git-send-email-ospite@studenti.unina.it>
+In-Reply-To: <1270719003-6168-2-git-send-email-ospite@studenti.unina.it>
 MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.1.10.1004081733510.3264@vitus.devnet.local>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 72.14.220.153
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Message-Id: <201004082311.48792.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] dfu-programmer: USB Device Firmware Upgrade utility (special atmel-version)
+Subject: Re: [PATCH 1/2] tzcode-native_2010f: Update tzdata SRC_URI and checksum
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,62 +39,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Apr 2010 17:33:09 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 08 Apr 2010 19:18:35 -0000
+X-Groupsio-MsgNum: 18511
+Content-Type: multipart/signed; boundary="nextPart2307855.5HgndZqu1F";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-On Thu, Apr 08, 2010 at 05:37:41PM +0200, Vitus Jensen wrote:
-> Add recipes for version 0.5.2 and the current head of the subversion
-> repository.  dfu-programmer is DFU utility supporting Atmel chips
-> with a USB bootloader (which aren't supported by dfu-util).
-> 
-> Signed-off-by: Vitus Jensen <vjensen@gmx.de>
-> diff --git a/conf/checksums.ini b/conf/checksums.ini
-> index 3c6f712..73f5901 100644
-> --- a/conf/checksums.ini
-> +++ b/conf/checksums.ini
-> @@ -5258,6 +5258,10 @@ sha256=3b15515693bae1ebd14d914e46d388edfec2175829ea1576a7a0c8606ebbe639
->  md5=be12c0132a1ae118cbf5e79d98427c1d
->  sha256=ec382c90af3ef2f49695ff14a4d6521e58ac482c4e29d6c9ebca8768f699c191
-> 
-> +[http://downloads.sourceforge.net/project/dfu-programmer/dfu-programmer/0.5.2/dfu-programmer-0.5.2.tar.gz]
-> +md5=ce882d37383df698a1c530080724b191
-> +sha256=e3c8bc1429fe1681c56ddc14fb05d29a7933aac566d13f894dca6fd916829cb9
-> +
->  [http://pknet.com/~joe/dgen-sdl-1.23.tar.gz]
->  md5=b1896c1b21ddb152626aec2e8a157a3a
->  sha256=44396b3b324433187cf7082d1059cd9f519f02accddd667e627a57ff8514d436
-> diff --git a/conf/distro/include/sane-srcrevs.inc b/conf/distro/include/sane-srcrevs.inc
-> index 902c844..982632c 100644
-> --- a/conf/distro/include/sane-srcrevs.inc
-> +++ b/conf/distro/include/sane-srcrevs.inc
-> @@ -41,6 +41,7 @@ SRCREV_pn-contact ?= "1410"
->  SRCREV_pn-dasher-gpe ?= "1251"
->  SRCREV_pn-dbus-c++ ?= "13131"
->  SRCREV_pn-dbus-c++-native ?= "13131"
-> +SRCREV_pn-dfu-programmer ?= "93"
->  SRCREV_pn-dfu-util ?= "4160"
->  SRCREV_pn-dfu-util-native ?= "4160"
->  SRCREV_pn-disko ?= "f52597b8d5d584811cbe8f9e0bf25ea372526953"
+--nextPart2307855.5HgndZqu1F
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-This doesn't seem applicable after SRCREV moving to recipes last week.
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 08 =D0=B0=D0=BF=D1=80=D0=B5=D0=
+=BB=D1=8F 2010 13:30:02 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Antonio Ospite =D0=
+=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> -	ftp://elsie.nci.nih.gov/pub/tzdata2010g.tar.gz;name=3Dtzdata-2010g \
+> +	ftp://elsie.nci.nih.gov/pub/tzdata2010h.tar.gz;name=3Dtzdata-2010h \
+=2E.........
+>  +SRC_URI[tzdata-2010g.md5sum] =3D "d384ac091e6d56802f9b3e6b3d3f0f2e"
+>  +SRC_URI[tzdata-2010g.sha256sum] =3D
+>  "a4918d60f63440ba9b6050205881e8a98d718dc0c2b7df5955f43e781eab6e7d"
 
-Please send separate patch for org.openembedded.dev with SRCREV as well
-as checksums in recipes and for stable/2009 (you can put SRCREV to
-recipe as long as it's sane SRCREV not AUTOREV).
+Actually, it should be "SRC_URI[tzdata-2010h...]", fixed and pushed.
 
-> +PV = "0.5.2+svnr${SRCREV}"
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
-In org.openembedded.dev it's always "+svnr${SRCPV}" for svn recipes
-(hopefully soon also unified for git recipes).
+--nextPart2307855.5HgndZqu1F
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
-Thanks
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
 
-Regards,
+iEYEABECAAYFAku+KnQACgkQXJ70z+XgVcPRTQCfd/hOUR610cJz5gXeKP05bQjC
+SmcAoIiNFhftyjM7sFFtBaKriLWFckI8
+=us3+
+-----END PGP SIGNATURE-----
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
-
-
+--nextPart2307855.5HgndZqu1F--
