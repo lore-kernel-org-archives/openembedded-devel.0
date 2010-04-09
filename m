@@ -1,40 +1,31 @@
-Received: from mail.cvg.de ([62.153.82.30])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1O0F6e-0007Uk-JF
+Received: from p3plsmtpa01-05.prod.phx3.secureserver.net ([72.167.82.85])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1O0FKS-0008L2-Ab
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Apr 2010 16:22:49 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.3/8.14.4) with ESMTP id o39EJNPo004956
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 9 Apr 2010 16:19:24 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.71) (envelope-from <ensc@sigma-chemnitz.de>) id 1O0F3L-0002eV-6D
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Apr 2010 16:19:23 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: openembedded-devel@lists.openembedded.org
-References: <1269730499.4033.176.camel@mattotaupa>
-	<hon5i2$8iq$1@dough.gmane.org> <1269797481.8018.80.camel@mattotaupa>
-	<hooat6$p3d$1@dough.gmane.org> <1269949824.4103.38.camel@mattotaupa>
-Date: Fri, 09 Apr 2010 16:19:23 +0200
-In-Reply-To: <1269949824.4103.38.camel@mattotaupa> (Paul Menzel's message of
-	"Tue, 30 Mar 2010 13:50:24 +0200")
-Message-ID: <ly6340yahg.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.1 (gnu/linux)
+	Fri, 09 Apr 2010 16:37:05 +0200
+Received: (qmail 24737 invoked from network); 9 Apr 2010 14:26:58 -0000
+Received: from unknown (209.242.7.187)
+	by p3plsmtpa01-05.prod.phx3.secureserver.net (72.167.82.85) with ESMTP;
+	09 Apr 2010 14:26:57 -0000
+Message-ID: <4BBF3920.1000702@mwester.net>
+Date: Fri, 09 Apr 2010 09:26:40 -0500
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.67 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+To: openembedded-devel@lists.openembedded.org
+References: <r2u48239d391004090326qb2a80dd6ic11530d737c6edde@mail.gmail.com>	<201004091439.53806.khimov@altell.ru>	<k2j48239d391004090353mcc7c01a0o4bc58d8c1efd5c27@mail.gmail.com>	<201004091526.53400.khimov@altell.ru>
+	<q2r48239d391004090658m577b6d71vcde72629078be670@mail.gmail.com>
+In-Reply-To: <q2r48239d391004090658m577b6d71vcde72629078be670@mail.gmail.com>
+X-SA-Exim-Connect-IP: 72.167.82.85
+X-SA-Exim-Mail-From: mike@mwester.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] autotool.bbclass: Remove `EXTRA_AUTORECONF = "--exclude=autopoint"`.
+Subject: Re: postinst scripts and opkg configure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,26 +39,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Apr 2010 14:22:49 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 09 Apr 2010 14:37:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Paul Menzel <paulepanter@users.sourceforge.net> writes:
+Sergey Lapin wrote:
+>> Actually, update-rc.d scripts should work on build host (that "$OPT" in script
+>> is exactly for that purpose) and so are update-alternatives (thanks to
+>> OPKG_OFFLINE_ROOT magic), so there might be something wrong with your setup.
+> I found the reason for that error - update-rc.d is not being staged,
+> so scripts fail.
 
-> I ran a build from scratch with `EXTRA_AUTORECONF = "--exclude=autopoint"`
-> from `autotools.bbclass` and did not see any regressions.
+Same problem encountered here - this commit fixed it for SlugOS (which
+has its own initscripts which explicitly invoke update-rc.d, thus
+causing an obvious build failure): c906fd7faa8517ca565faba90887d10ebb90e092
+Basically, adding RDEPENDS="update-rc.d" and
+DEPENDS="update-rc.d-native" resolved the issue.
 
-There are regressions in projects using 'intltool' (e.g. 'pmount');
-./configure will fail with 'po/Makefile.in.in was not created by
-intltoolize' there.
+(I glanced at the other initscripts BB files, and didn't change those
+because there wasn't an obvious reference to update-rc.d in the recipes
+-- I didn't consider the use case you described or I would have fixed
+those recipes as well.)
 
-A solution might be the swapping of 'intltoolize' + 'autoreconf' calls
-in autotools.bbclass.  I did not extensive tests yet but this swapping
-might be (independent from '--exclude=autopoint' removal) a good idea
-because 'intltoolize' checks for 'intltool.m4' version information in
-'aclocal.m4' which are added by 'autoreconf'.
+> bitbake update-rc.d update-rc.d-native -c rebuild doesn't help either.
+> Can't see why, because copying it from workdir to staging bin fixes
+> this problem.
+> Any ideas?
+> 
+> S.
 
+-Mike (mwester)
 
-
-Enrico
 
 
