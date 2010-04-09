@@ -1,43 +1,46 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from smtp-out.google.com ([216.239.44.51])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1O00cU-0006zg-Lq
+	(envelope-from <alees@google.com>) id 1O076J-0008WV-3p
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Apr 2010 00:54:44 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1O00ZC-0005lc-AU from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Apr 2010 15:51:18 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 8 Apr 2010 15:51:17 -0700
-Received: from 172.30.80.171 ([172.30.80.171]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Thu,  8 Apr 2010 22:50:39 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	08 Apr 2010 15:50:37 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Fri, 09 Apr 2010 07:49:56 +0200
+Received: from hpaq11.eem.corp.google.com (hpaq11.eem.corp.google.com
+	[10.3.21.11]) by smtp-out.google.com with ESMTP id o395kWVl010847
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 8 Apr 2010 22:46:33 -0700
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=google.com; s=beta;
+	t=1270791993; bh=WLG1WJSwNwr3kNFwA7DDHzVTEZg=;
+	h=MIME-Version:Date:Message-ID:Subject:From:To:Content-Type;
+	b=rWb+h9vHRvSA2ZNnSyOSnJVtXlPqR1ggR4nQR1tYvngrmPsmGQWEWXvAa5PRQASgy
+	zay23vv62/ZtoZAsgqTsg==
+DomainKey-Signature: a=rsa-sha1; s=beta; d=google.com; c=nofws; q=dns;
+	h=mime-version:date:message-id:subject:from:to:content-type:x-system-of-record;
+	b=v8l9By9/Iajfc+e30uQkc81n5xnjptXJpc/qpQmuuJ7OwKa8WQqEWzF6SwNXfiHf0
+	hInJO7OgPBP1Lq2RpxhTw==
+Received: from gwb20 (gwb20.prod.google.com [10.200.2.20])
+	by hpaq11.eem.corp.google.com with ESMTP id o395kUTn027500
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 9 Apr 2010 07:46:31 +0200
+Received: by gwb20 with SMTP id 20so1669631gwb.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 Apr 2010 22:46:30 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.91.218.1 with HTTP; Thu, 8 Apr 2010 22:46:30 -0700 (PDT)
+Date: Fri, 9 Apr 2010 15:46:30 +1000
+Received: by 10.90.242.11 with SMTP id p11mr421422agh.75.1270791990528; Thu, 
+	08 Apr 2010 22:46:30 -0700 (PDT)
+Message-ID: <n2ue96fffc41004082246g4269c2d2nd6aa9f3e7260db27@mail.gmail.com>
+From: Angus Lees <alees@google.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4BBE4B91.40602@mwester.net>
-References: <20100408162117.e7638f69.ospite@studenti.unina.it>
-	<1270761657-18322-1-git-send-email-ospite@studenti.unina.it>
-	<4BBE4B91.40602@mwester.net>
-Organization: Mentor Graphics Corporation
-Date: Thu, 08 Apr 2010 15:50:37 -0700
-Message-ID: <1270767037.29304.40.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 08 Apr 2010 22:51:17.0931 (UTC)
-	FILETIME=[FFF7AFB0:01CAD76D]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-System-Of-Record: true
+X-SA-Exim-Connect-IP: 216.239.44.51
+X-SA-Exim-Mail-From: alees@google.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] glib-2.0: remove old glib-2.0-native recipes
+Subject: Initial work on an Android SDK via openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,64 +54,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Apr 2010 22:54:44 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 09 Apr 2010 05:49:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, 2010-04-08 at 16:33 -0500, Mike Westerhof wrote:
-> Antonio Ospite wrote:
-> > Having these around can cause some conflict in recipes depending on
-> > recent glib-2.0-native, see [1].
-> >=20
-> > What can happen is that, when no preferred versions are set (like in
-> > DISTRO=3Dminimal), bitbake picks up an older -native recipe even if a m=
-ore
-> > recent one using the BBCLASSEXTEND =3D "native" mechanism exists.
-> >=20
-> > [1] http://tinderbox.openembedded.org/packages/540390/
-> >=20
-> > Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
-> > ---
-> > Please check if the commit message is clear enough, I think I've figure=
-d
-> > out what's happening behind the scenes, but I have not that deep
-> > knowledge of bitbake.
-> >=20
-> > Thanks,
-> >    Antonio Ospite
-> >    http://ao2.it
-> >=20
-> >=20
-> >  .../glib-gettextize-dir.patch                      |   11 --
-> >  recipes/glib-2.0/glib-2.0-native_2.12.4.bb         |   49 ----------
-> >  recipes/glib-2.0/glib-2.0-native_2.16.1.bb         |   40 --------
-> >  recipes/glib-2.0/glib-2.0-native_2.18.0.bb         |   40 --------
-> >  recipes/glib-2.0/glib-2.0-native_2.2.3.bb          |  100 ------------=
---------
-> >  recipes/glib-2.0/glib-2.0-native_2.22.1.bb         |   39 --------
-> >  recipes/glib-2.0/glib-2.0-native_2.4.6.bb          |   49 ----------
-> >  recipes/glib-2.0/glib-2.0-native_2.6.5.bb          |   51 ----------
-> >  recipes/glib-2.0/glib-2.0-native_2.6.6.bb          |   51 ----------
-> >  9 files changed, 0 insertions(+), 430 deletions(-)
-> >  delete mode 100644 recipes/glib-2.0/glib-2.0-native-2.12.4/glib-gettex=
-tize-dir.patch
-> >  delete mode 100644 recipes/glib-2.0/glib-2.0-native_2.12.4.bb
-> >  delete mode 100644 recipes/glib-2.0/glib-2.0-native_2.16.1.bb
-> >  delete mode 100644 recipes/glib-2.0/glib-2.0-native_2.18.0.bb
-> >  delete mode 100644 recipes/glib-2.0/glib-2.0-native_2.2.3.bb
-> >  delete mode 100644 recipes/glib-2.0/glib-2.0-native_2.22.1.bb
->=20
-> NACK.  This glib version is still in use; don't delete it:
-> /u/slug/slugos/tmp/work/x86_64-linux/glib-2.0-native-2.22.1-r6.2
->=20
-> (Surely there must a better way to fix this than removal of active recipe=
-s?)
+Just an FYI:
 
-If 2.22.1 was converted to BBCLASSEXTEND, the rest of the mechanisms
-would work right again.
+I put together an alternative Android NDK using Openembedded:
+ git://github.com/anguslees/openembedded-android.git
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+It currently uses the prebuilt Android libc (bionic) and various tools
+from the Google Android NDK/SDK, but builds gcc, etc from Openembedded
+source.  I expect to expand it to build the other pieces from source
+eventually.  I had to patch the gcc and other recipies a little, which
+is why it's a git branch rather than a self-contained bitbake
+collection.
+
+This is my first-ever look at bitbake or openembedded, so apologies if
+any of the recipies are atrocious ;)
+
+(Totally unsupported by Google.  I work for Google but don't work on
+anything to do with Android - I just happen to have an Android handset
+and a desire to write native apps for it in my free time)
+
+-- 
+ - Gus
 
 
