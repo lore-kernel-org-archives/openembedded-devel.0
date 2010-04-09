@@ -1,45 +1,31 @@
-Received: from mail-ww0-f47.google.com ([74.125.82.47])
+Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <slapinid@gmail.com>) id 1O0BtF-0004jW-Iw
+	(envelope-from <rik@build2.altell.local>) id 1O0Bwe-0000kx-Mn
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Apr 2010 12:56:46 +0200
-Received: by wwb13 with SMTP id 13so811560wwb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Apr 2010 03:53:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:received:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=HLQbGjidREuMtKPmZpdAqTLni7kzPIudaHagSIyIVKU=;
-	b=lzV2nETULRGGML41nbIzCmYGGdbcPcSqUIiDYTNc98d1tEL0wsX6JPljCBGQnU4HGP
-	SRK1E72iiYC68cMwtwPv0U/o+7yLwK2eMEoWAYKvg92oZW+AFxYP7zY9U/8mHd2VUwfB
-	u+SsaWBxMwcvFIPJSf6qszVj6hcaCOESuKskA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=toiwUDnKyjKySfIrDLDus0Qi1AFEHQFqqHXhW9SIOdMf8FKER9jci8CtGoLIvHUFFh
-	D8aBUrhO65C2KTFXlbS1r1QSTfZssHR4NojBH+wtP55SV+TvfHry56T7e3rUZgJQsXm5
-	Lvyj1BzVlNgXLNm6Sh9pVlrhyhRmwgJoxQvDo=
-MIME-Version: 1.0
-Received: by 10.216.169.77 with HTTP; Fri, 9 Apr 2010 03:53:22 -0700 (PDT)
-In-Reply-To: <201004091439.53806.khimov@altell.ru>
-References: <r2u48239d391004090326qb2a80dd6ic11530d737c6edde@mail.gmail.com>
-	<201004091439.53806.khimov@altell.ru>
-Date: Fri, 9 Apr 2010 14:53:22 +0400
-Received: by 10.216.170.147 with SMTP id p19mr768028wel.129.1270810402053; 
-	Fri, 09 Apr 2010 03:53:22 -0700 (PDT)
-Message-ID: <k2j48239d391004090353mcc7c01a0o4bc58d8c1efd5c27@mail.gmail.com>
-From: Sergey Lapin <slapinid@gmail.com>
+	Fri, 09 Apr 2010 13:00:17 +0200
+Received: from build2.altell.local (build2.altell.local [192.168.1.26])
+	by mail.altell.local (Postfix) with ESMTPS id 53CC86826E;
+	Fri,  9 Apr 2010 14:56:39 +0400 (MSD)
+Received: from rik by build2.altell.local with local (Exim 4.69)
+	(envelope-from <rik@build2.altell.local>)
+	id 1O0BsN-0003fK-V6; Fri, 09 Apr 2010 14:55:51 +0400
+From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.47
-X-SA-Exim-Mail-From: slapinid@gmail.com
+Date: Fri,  9 Apr 2010 14:55:51 +0400
+Message-Id: <1270810551-14070-1-git-send-email-khimov@altell.ru>
+X-Mailer: git-send-email 1.5.6.5
+X-Altell-MailScanner-ID: 53CC86826E.938D1
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: rik@build2.altell.local
+X-SA-Exim-Connect-IP: 80.246.246.162
+X-SA-Exim-Mail-From: rik@build2.altell.local
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: postinst scripts and opkg configure
+Subject: [PATCH] image.bbclass: another take on interdependent images build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,25 +39,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Apr 2010 10:56:46 -0000
-Content-Type: text/plain; charset=KOI8-R
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 09 Apr 2010 11:00:17 -0000
 
-On Fri, Apr 9, 2010 at 2:39 PM, Roman I Khimov <khimov@altell.ru> wrote:
-> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=D1=D4=CE=C9=C3=C1 09 =C1=D0=D2=
-=C5=CC=D1 2010 14:26:22 =C1=D7=D4=CF=D2 Sergey Lapin =CE=C1=D0=C9=D3=C1=CC:
->> So, with recent images I have to run all postinst scripts again on
->> device for services
->> like udev or dropbear to work. These packages get 'installed' status,
->> so postinst
->> scripts won't normally run during 'opkg configure', but /etc/rc*d
->> links are not created for them during
->> image build. Any ideas on fixing, or what is really being wrong here?
->
-> Do "set -e" in the beginning of postinst if it can only do its job on tar=
-get.
-> I have some patches adding that in queue.
-I can't understand why creation of links won't work on host,
-because that will be a problem for filesystems like squashfs.
+Previous episodes:
+736c06e8d8 image.bbclass: reorder do_rootfs
+049a7998d0 Revert "image.bbclass: reorder do_rootfs"
+
+As I still build many interdependent images and as I still don't want
+to write "do_rootfs[depends] = ..." in images, I think we can easily
+solve the problem by recrdep-ing do_rootfs on any other do_rootfs-es.
+This way one can add any images he wants to be built before that one
+via usual DEPENDS mechanism and it should really work nice this way.
+
+Signed-off-by: Roman I Khimov <khimov@altell.ru>
+---
+ classes/image.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/classes/image.bbclass b/classes/image.bbclass
+index 8e202f0..78987ca 100644
+--- a/classes/image.bbclass
++++ b/classes/image.bbclass
+@@ -36,7 +36,7 @@ IMAGE_BASENAME[export] = "1"
+ export PACKAGE_INSTALL ?= "${IMAGE_INSTALL} ${IMAGE_BOOT}"
+ 
+ # We need to recursively follow RDEPENDS and RRECOMMENDS for images
+-do_rootfs[recrdeptask] += "do_deploy do_populate_staging"
++do_rootfs[recrdeptask] += "do_deploy do_populate_staging do_rootfs"
+ 
+ # Images are generally built explicitly, do not need to be part of world.
+ EXCLUDE_FROM_WORLD = "1"
+-- 
+1.5.6.5
+
 
 
