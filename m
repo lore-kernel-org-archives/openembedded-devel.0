@@ -1,20 +1,22 @@
 Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rik@build2.altell.local>) id 1O0Bwe-0000kx-Mn
+	(envelope-from <rik@build2.altell.local>) id 1O0CJp-00008f-PJ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Apr 2010 13:00:17 +0200
+	Fri, 09 Apr 2010 13:24:14 +0200
 Received: from build2.altell.local (build2.altell.local [192.168.1.26])
-	by mail.altell.local (Postfix) with ESMTPS id 53CC86826E;
-	Fri,  9 Apr 2010 14:56:39 +0400 (MSD)
+	by mail.altell.local (Postfix) with ESMTPS id E1A9B6826F;
+	Fri,  9 Apr 2010 15:20:39 +0400 (MSD)
 Received: from rik by build2.altell.local with local (Exim 4.69)
 	(envelope-from <rik@build2.altell.local>)
-	id 1O0BsN-0003fK-V6; Fri, 09 Apr 2010 14:55:51 +0400
+	id 1O0CFd-0003s5-6C; Fri, 09 Apr 2010 15:19:53 +0400
 From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  9 Apr 2010 14:55:51 +0400
-Message-Id: <1270810551-14070-1-git-send-email-khimov@altell.ru>
+Date: Fri,  9 Apr 2010 15:19:53 +0400
+Message-Id: <1270811993-14861-1-git-send-email-khimov@altell.ru>
 X-Mailer: git-send-email 1.5.6.5
-X-Altell-MailScanner-ID: 53CC86826E.938D1
+In-Reply-To: <201004091439.53806.khimov@altell.ru>
+References: <201004091439.53806.khimov@altell.ru>
+X-Altell-MailScanner-ID: E1A9B6826F.1E7A2
 X-Altell-MailScanner: Found to be clean
 X-Altell-MailScanner-From: rik@build2.altell.local
 X-SA-Exim-Connect-IP: 80.246.246.162
@@ -25,7 +27,7 @@ X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] image.bbclass: another take on interdependent images build
+Subject: [PATCH] rootfs_ipk.bbclass: run preinst/postinst scripts with "-e"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,36 +41,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Apr 2010 11:00:17 -0000
+X-List-Received-Date: Fri, 09 Apr 2010 11:24:14 -0000
 
-Previous episodes:
-736c06e8d8 image.bbclass: reorder do_rootfs
-049a7998d0 Revert "image.bbclass: reorder do_rootfs"
+There are scripts that can and should work when being ran on build
+host (for example, simple update-rc.d), but there are also many which
+can't and won't ever (for example, anything adding users/groups).
+The second group sometimes doesn't get "unpacked" flag because
+scripts throw errors in the middle and return something nice from
+the last command.
 
-As I still build many interdependent images and as I still don't want
-to write "do_rootfs[depends] = ..." in images, I think we can easily
-solve the problem by recrdep-ing do_rootfs on any other do_rootfs-es.
-This way one can add any images he wants to be built before that one
-via usual DEPENDS mechanism and it should really work nice this way.
+It can be considered as a bug in pre/postinst script (as it should
+either explicitly check for "${D}" or just do "set -e" at start),
+but it is common enough.
+
+There is also another aspect to this as in general we can't be sure
+that everything is OK wrt preinst/postinst if script commands throw
+errors.
+
+Running preinst/postinst scripts on host with "-e" should solve
+that.
 
 Signed-off-by: Roman I Khimov <khimov@altell.ru>
 ---
- classes/image.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ classes/rootfs_ipk.bbclass |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/classes/image.bbclass b/classes/image.bbclass
-index 8e202f0..78987ca 100644
---- a/classes/image.bbclass
-+++ b/classes/image.bbclass
-@@ -36,7 +36,7 @@ IMAGE_BASENAME[export] = "1"
- export PACKAGE_INSTALL ?= "${IMAGE_INSTALL} ${IMAGE_BOOT}"
+diff --git a/classes/rootfs_ipk.bbclass b/classes/rootfs_ipk.bbclass
+index 3a73ed8..5483c7e 100644
+--- a/classes/rootfs_ipk.bbclass
++++ b/classes/rootfs_ipk.bbclass
+@@ -70,12 +70,12 @@ fakeroot rootfs_ipk_do_rootfs () {
+ 	fi
  
- # We need to recursively follow RDEPENDS and RRECOMMENDS for images
--do_rootfs[recrdeptask] += "do_deploy do_populate_staging"
-+do_rootfs[recrdeptask] += "do_deploy do_populate_staging do_rootfs"
- 
- # Images are generally built explicitly, do not need to be part of world.
- EXCLUDE_FROM_WORLD = "1"
+ 	for i in ${IMAGE_ROOTFS}${libdir}/opkg/info/*.preinst; do
+-		if [ -f $i ] && ! sh $i; then
++		if [ -f $i ] && ! sh -e $i; then
+ 			opkg-cl ${IPKG_ARGS} flag unpacked `basename $i .preinst`
+ 		fi
+ 	done
+ 	for i in ${IMAGE_ROOTFS}${libdir}/opkg/info/*.postinst; do
+-		if [ -f $i ] && ! sh $i configure; then
++		if [ -f $i ] && ! sh -e $i configure; then
+ 			opkg-cl ${IPKG_ARGS} flag unpacked `basename $i .postinst`
+ 		fi
+ 	done
 -- 
 1.5.6.5
 
