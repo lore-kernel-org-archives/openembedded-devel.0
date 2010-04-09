@@ -1,40 +1,33 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from exchsrvr.syntech-fuelmaster.com ([199.44.250.2]
+	helo=courier.syntech-fuelmaster.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <slapinid@gmail.com>) id 1O0Gl1-0007t5-Am
+	(envelope-from <mbutsch@syntech-fuelmaster.com>) id 1O0J0y-0003b6-DA
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Apr 2010 18:08:35 +0200
-Received: by wyf23 with SMTP id 23so467480wyf.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Apr 2010 09:05:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:received:message-id
-	:subject:from:to:content-type;
-	bh=0DH/bqRJ9NwDwp8KXCfZrvBOycGkoZdzZZvndI+U3uU=;
-	b=RVOn9Qn2FE063rKxBqjsu+/eiYSyEMGNSL2FkZKnPVyfORpiYHV5opndRFsbz/tB7A
-	TWJzhPmOfTHVIKpPwTPKGJ6wyvjC2c0o2yrW1RUajkRH07gDKnd1y4uIBASDuJyRR1ga
-	ZlUrRPlOA8jTXbCx/i3AtbOR/rcB8PNNwcFKs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=Ywrid4xgH0lRkYW0+PNDbXBuFvfHZSOsKh9sasT3/2m6644U3ZyhrFbN7u2xeoYd0U
-	DGc44TQg2d+aynn9/UHSFTLiQqPQJMtKD67TAOFxW42IqdZXX1muGUUo+Unda0BHa8Ii
-	u9pzVQY2gGRskdC0/4gxf4MrTsysQtQ8V/Mvs=
+	Fri, 09 Apr 2010 20:33:13 +0200
+Received: from Courier.syntech.org ([fe80::f1e9:ec58:2caf:f234]) by
+	Courier.syntech.org ([fe80::f1e9:ec58:2caf:f234%14]) with mapi;
+	Fri, 9 Apr 2010 14:29:27 -0400
+From: Mark Butsch <mbutsch@syntech-fuelmaster.com>
+To: "'openembedded-devel@lists.openembedded.org'"
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 9 Apr 2010 14:24:30 -0400
+Thread-Topic: Problem creating 'task-' recipe
+Thread-Index: AcrYEp7hyCkFAOnNRd6exbkynewdwQ==
+Message-ID: <6C2434209962DC46B88345CA85C334A285DCA3A947@Courier.syntech.org>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.216.169.77 with HTTP; Fri, 9 Apr 2010 09:05:11 -0700 (PDT)
-Date: Fri, 9 Apr 2010 20:05:11 +0400
-Received: by 10.216.87.134 with SMTP id y6mr152501wee.20.1270829111369; Fri, 
-	09 Apr 2010 09:05:11 -0700 (PDT)
-Message-ID: <m2w48239d391004090905gc4fbe5b1g38e4a6ebe1a08c41@mail.gmail.com>
-From: Sergey Lapin <slapinid@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: slapinid@gmail.com
+X-SA-Exim-Connect-IP: 199.44.250.2
+X-SA-Exim-Mail-From: mbutsch@syntech-fuelmaster.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: opkg-cl ... install in ROOTFS_POSTPROCESS_COMMAND
+Subject: Problem creating 'task-' recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,23 +41,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Apr 2010 16:08:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 09 Apr 2010 18:33:14 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Hi, all!
+Hello,
 
-I need to install additional package to image (which is inpossible
-using IMAGE_INSTALL due to conflicts.
-That's because I do it in ROOTFS_POSTPROCESS_COMMAND.
-so I first remove conflicting package, then install one which is
-needed. Removing works perfectly,
-but installing doesn't, since opkg can't find a package. opkg-cl ..
-update doesn't work because connects
-to external repositories. How could I install a package from
-ROOTFS_POSTPROCESS_COMMAND, then?
-specifying a file directly seems too insane for me.
+I am trying to write a 'task-' recipe to pull together the separate recipes=
+ of my application. I then use IMAGE_INSTALL +=3D in my image recipe to pul=
+l in the task recipe. I based it on the existing task- recipes.
 
-Thanks a lot,
-S.
+All the recipes run, but the files to placed in the rootfs don't make it th=
+ere.
+
+If I use IMAGE_INSTALL +=3D for the individual recipes in my image recipe, =
+the files get placed in the rootfs.
+
+Any ideas on where I might be going wrong?
+
+I am using Angstrom as my distro and the OE stable branch.
+
+------ here is my task-aposd.bb file ----------
+DESCRIPTION =3D "Task to assemble Syn-tech Systems' APOSD"
+PR =3D "r0"
+
+inherit task
+
+RDEPENDS_${PN} =3D " \
+    libsynlib \
+    libodbtp \
+    adc-router \
+    mocana-fips \
+    dropbear-mocana \
+    logproc \
+    nullogin \
+    tip \
+    aposd-misc \
+    "
+---- end file -----
+
+Thanks,
+
+Mark Butsch
 
 
