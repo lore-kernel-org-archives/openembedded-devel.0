@@ -1,42 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O0L4J-00052Y-18 for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Apr 2010 22:44:48 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O0L10-0002K5-QG for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Apr 2010 22:41:22 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Apr 2010 22:41:22 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Apr 2010 22:41:22 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from li38-254.members.linode.com ([207.192.74.254]
+	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <sgarman@zenlinux.com>) id 1O0RAR-0008Ln-Cj
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 10 Apr 2010 05:15:32 +0200
+Received: from localhost.localdomain (c-76-115-42-183.hsd1.or.comcast.net
+	[76.115.42.183])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by masterfoo.zenlinux.com (Postfix) with ESMTP id 0D9332FEA3;
+	Fri,  9 Apr 2010 23:12:01 -0400 (EDT)
+From: Scott Garman <sgarman@zenlinux.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 09 Apr 2010 22:41:07 +0200
-Message-ID: <hpo3d3$ado$1@dough.gmane.org>
-References: <20100409213945.fdbf907b.ospite@studenti.unina.it>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100329 Shredder/3.0.5pre
-In-Reply-To: <20100409213945.fdbf907b.ospite@studenti.unina.it>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Fri,  9 Apr 2010 20:13:04 -0700
+Message-Id: <1270869184-9526-1-git-send-email-sgarman@zenlinux.com>
+X-Mailer: git-send-email 1.6.3.3
+X-MasterFoo-MailScanner-Information: Please contact the ISP for more
+	information
+X-MailScanner-ID: 0D9332FEA3.A54DE
+X-MasterFoo-MailScanner: Found to be clean
+X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
+X-SA-Exim-Connect-IP: 207.192.74.254
+X-SA-Exim-Mail-From: sgarman@zenlinux.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: libmokoui2 needs pygtk-codegen-2.0
+Cc: Scott Garman <sgarman@zenlinux.com>
+Subject: [PATCH] libnids: Upgrade to 1.24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,50 +42,239 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Apr 2010 20:44:48 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 10 Apr 2010 03:15:33 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* Addresses CVE-2010-0751
+* Use new-style checksums
 
-On 09-04-10 21:39, Antonio Ospite wrote:
-> Hi,
-> 
-> when building libmokoui2 I get this:
-> http://tinderbox.openembedded.org/packages/544186/
-> 
-> basically:
-> /bin/sh: pygtk-codegen-2.0: command not found
-> 
-> With this change to python-pygtk_2.16.0.bb I can make it build:
-> 
-> diff --git a/recipes/python/python-pygtk_2.16.0.bb b/recipes/python/python-pygtk_2.16.0.bb
-> index e2b0602..de570c7 100644
-> --- a/recipes/python/python-pygtk_2.16.0.bb
-> +++ b/recipes/python/python-pygtk_2.16.0.bb
-> @@ -36,7 +36,6 @@ do_configure_prepend() {
->  # dirty fix #1: remove dependency on python-pygobject-dev
->  do_install_append() {
->         find ${D} -name "*.la"|xargs rm -f
-> -       rm -f ${D}/${bindir}/pygtk-codegen-2.0
->         rm -rf ${D}/${libdir}/pkgconfig
->  }
-> 
-> Is this the way to go? Why pygtk-codegen-2.0 is not supplied?
+Signed-off-by: Scott Garman <sgarman@zenlinux.com>
+---
+ conf/checksums.ini                           |    8 ---
+ recipes/libnids/libnids-1.18/configure.patch |   60 --------------------------
+ recipes/libnids/libnids-1.24/configure.patch |   60 ++++++++++++++++++++++++++
+ recipes/libnids/libnids_1.18.bb              |   24 ----------
+ recipes/libnids/libnids_1.24.bb              |   26 +++++++++++
+ 5 files changed, 86 insertions(+), 92 deletions(-)
+ delete mode 100644 recipes/libnids/libnids-1.18/configure.patch
+ create mode 100644 recipes/libnids/libnids-1.24/configure.patch
+ delete mode 100644 recipes/libnids/libnids_1.18.bb
+ create mode 100644 recipes/libnids/libnids_1.24.bb
 
-It's part of python-gobject nowadays (and named differently).
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLv5DjMkyGM64RGpERAsLlAJsEuyS3Pi8XL9kJ/wBhakzBwpHFowCfTYzt
-AOPKZEt90htljLC3kqUSEBI=
-=5fkL
------END PGP SIGNATURE-----
+diff --git a/conf/checksums.ini b/conf/checksums.ini
+index 50546a4..800e244 100644
+--- a/conf/checksums.ini
++++ b/conf/checksums.ini
+@@ -15998,14 +15998,6 @@ sha256=c2ae0a07d863536261b8a0562f3f77aa224fa1f413d85d824a765d00e37c5de4
+ md5=055e3eedf735ee1257fd4bb9ce86d04e
+ sha256=adf3612367456328609c65ecc39c9bb08c0fef84cebbd1a3b5fcfe5e9614ac82
+ 
+-[http://downloads.sourceforge.net/libnids/libnids-1.18.tar.gz]
+-md5=9ee6dcdfac97bae6fe611aa27d2594a5
+-sha256=b0275c914197a53c6ccf631eac756fd37ec6f2d8f09f15757061495cf9be0fcd
+-
+-[http://heanet.dl.sourceforge.net/libnids/libnids-1.18.tar.gz]
+-md5=9ee6dcdfac97bae6fe611aa27d2594a5
+-sha256=b0275c914197a53c6ccf631eac756fd37ec6f2d8f09f15757061495cf9be0fcd
+-
+ [http://people.suug.ch/~tgr/libnl/files/libnl-0.5.0.tar.gz]
+ md5=c58ec5032f393f569ef7f489436651b3
+ sha256=89a6b5086987460ddd9b24723f35a3a951ccf2886cabe26bef89b8c53528fec5
+diff --git a/recipes/libnids/libnids-1.18/configure.patch b/recipes/libnids/libnids-1.18/configure.patch
+deleted file mode 100644
+index 332675b..0000000
+--- a/recipes/libnids/libnids-1.18/configure.patch
++++ /dev/null
+@@ -1,60 +0,0 @@
+---- tmp/base/libnids-1.18-r0/libnids-1.18/configure.in	Tue Oct 14 18:40:00 2003
+-+++ libnids-1.18/configure.in	Wed Nov  5 16:01:27 2003
+-@@ -65,12 +65,15 @@
+-      ;;
+-   *)
+-      AC_MSG_RESULT($withval)
+--     if test -f $withval/pcap.h -a -f $withval/libpcap.a; then
+--        owd=`pwd`
+--        if cd $withval; then withval=`pwd`; cd $owd; fi
+--	PCAP_CFLAGS="-I$withval -I$withval/bpf"
+--	PCAPLIB="-L$withval -lpcap"
+--     else
+-+     for i in $withval $withval/include $withval/lib $withval/include/pcap; do
+-+        if test -f $i/pcap.h; then
+-+           PCAP_CFLAGS="-I$i -I$i/bpf"
+-+        fi
+-+        if test -f $i/libpcap.a; then
+-+           PCAPLIB="-L$i -lpcap"
+-+        fi
+-+     done
+-+     if test -z "$PCAP_CFLAGS" -o -z "$PCAPLIB"; then
+-         AC_ERROR(pcap.h or libpcap.a not found in $withval)
+-      fi
+-      ;;
+-@@ -127,20 +130,22 @@
+-      ;;
+-   *)
+-      AC_MSG_RESULT($withval)
+--     if test -f $withval/include/libnet.h -a -f $withval/lib/libnet.a -a -f $withval/libnet-config ; then
+--        owd=`pwd`
+--        if cd $withval; then withval=`pwd`; cd $owd; fi
+--	LNET_CFLAGS="-I$withval/include `$withval/libnet-config --defines`"
+--	LNETLIB="-L$withval/lib -lnet"
+--     elif test -f $withval/include/libnet.h -a -f $withval/src/libnet.a; then
+--        owd=`pwd`
+--        if cd $withval; then withval=`pwd`; cd $owd; fi
+--	LNET_CFLAGS="-I$withval/include"
+--	LNETLIB="-L$withval/src -lnet"
+--     else
+--	echo "A working combination of libnet.h, libnet.a and libnet-config not found in $withval; get libnet from www.packetfactory.net/projects/libnet and reinstall"
+--        AC_ERROR(libnet)
+-+     LNETC="`which libnet-config 2>/dev/null`"
+-+     for i in $withval $withval/include $withval/lib $withval/bin; do
+-+        if test -f $i/libnet-config; then
+-+           LNETC"=$i/libnet-config"
+-+        fi
+-+        if test -f $i/libnet.h; then
+-+           LNET_CFLAGS="-I$i"
+-+        fi
+-+        if test -f $i/libnet.a; then
+-+           LNETLIB="-L$i -lnet"
+-+        fi
+-+     done
+-+     if test -z "$LNET_CFLAGS" -o -z "$LNETLIB" -o -z "$LNETC"; then
+-+        AC_ERROR([libnet not found in $withval])
+-      fi
+-+     LNET_CFLAGS="$LNET_CFLAGS `$LNETC --defines`"
+-      ;;
+-   esac ],
+- [ if test "x"$LIBNET_VER = "x"-1 ; then
+diff --git a/recipes/libnids/libnids-1.24/configure.patch b/recipes/libnids/libnids-1.24/configure.patch
+new file mode 100644
+index 0000000..332675b
+--- /dev/null
++++ b/recipes/libnids/libnids-1.24/configure.patch
+@@ -0,0 +1,60 @@
++--- tmp/base/libnids-1.18-r0/libnids-1.18/configure.in	Tue Oct 14 18:40:00 2003
+++++ libnids-1.18/configure.in	Wed Nov  5 16:01:27 2003
++@@ -65,12 +65,15 @@
++      ;;
++   *)
++      AC_MSG_RESULT($withval)
++-     if test -f $withval/pcap.h -a -f $withval/libpcap.a; then
++-        owd=`pwd`
++-        if cd $withval; then withval=`pwd`; cd $owd; fi
++-	PCAP_CFLAGS="-I$withval -I$withval/bpf"
++-	PCAPLIB="-L$withval -lpcap"
++-     else
+++     for i in $withval $withval/include $withval/lib $withval/include/pcap; do
+++        if test -f $i/pcap.h; then
+++           PCAP_CFLAGS="-I$i -I$i/bpf"
+++        fi
+++        if test -f $i/libpcap.a; then
+++           PCAPLIB="-L$i -lpcap"
+++        fi
+++     done
+++     if test -z "$PCAP_CFLAGS" -o -z "$PCAPLIB"; then
++         AC_ERROR(pcap.h or libpcap.a not found in $withval)
++      fi
++      ;;
++@@ -127,20 +130,22 @@
++      ;;
++   *)
++      AC_MSG_RESULT($withval)
++-     if test -f $withval/include/libnet.h -a -f $withval/lib/libnet.a -a -f $withval/libnet-config ; then
++-        owd=`pwd`
++-        if cd $withval; then withval=`pwd`; cd $owd; fi
++-	LNET_CFLAGS="-I$withval/include `$withval/libnet-config --defines`"
++-	LNETLIB="-L$withval/lib -lnet"
++-     elif test -f $withval/include/libnet.h -a -f $withval/src/libnet.a; then
++-        owd=`pwd`
++-        if cd $withval; then withval=`pwd`; cd $owd; fi
++-	LNET_CFLAGS="-I$withval/include"
++-	LNETLIB="-L$withval/src -lnet"
++-     else
++-	echo "A working combination of libnet.h, libnet.a and libnet-config not found in $withval; get libnet from www.packetfactory.net/projects/libnet and reinstall"
++-        AC_ERROR(libnet)
+++     LNETC="`which libnet-config 2>/dev/null`"
+++     for i in $withval $withval/include $withval/lib $withval/bin; do
+++        if test -f $i/libnet-config; then
+++           LNETC"=$i/libnet-config"
+++        fi
+++        if test -f $i/libnet.h; then
+++           LNET_CFLAGS="-I$i"
+++        fi
+++        if test -f $i/libnet.a; then
+++           LNETLIB="-L$i -lnet"
+++        fi
+++     done
+++     if test -z "$LNET_CFLAGS" -o -z "$LNETLIB" -o -z "$LNETC"; then
+++        AC_ERROR([libnet not found in $withval])
++      fi
+++     LNET_CFLAGS="$LNET_CFLAGS `$LNETC --defines`"
++      ;;
++   esac ],
++ [ if test "x"$LIBNET_VER = "x"-1 ; then
+diff --git a/recipes/libnids/libnids_1.18.bb b/recipes/libnids/libnids_1.18.bb
+deleted file mode 100644
+index cf88745..0000000
+--- a/recipes/libnids/libnids_1.18.bb
++++ /dev/null
+@@ -1,24 +0,0 @@
+-DESCRIPTION = "Libnids performs assembly of TCP segments \
+-into TCP streams, IP defragmentation, and TCP port \
+-scan detection."
+-LICENSE = "GPL"
+-SECTION = "libs"
+-DEPENDS = "libnet-1.0 libpcap"
+-PR = "r1"
+-
+-SRC_URI = "\
+-  ${SOURCEFORGE_MIRROR}/libnids/libnids-${PV}.tar.gz \
+-  file://configure.patch;patch=1"
+-
+-inherit autotools
+-
+-EXTRA_OECONF = "\
+-  --with-libpcap=${STAGING_LIBDIR}/.. \
+-  --with-libnet=${STAGING_LIBDIR}/.. \
+-"
+-EXTRA_OEMAKE = "'install_prefix=${D}'"
+-
+-do_stage () {
+-	install -m 0644 ${S}/src/nids.h ${STAGING_INCDIR}/
+-	oe_libinstall -a -C src libnids ${STAGING_LIBDIR}
+-}
+diff --git a/recipes/libnids/libnids_1.24.bb b/recipes/libnids/libnids_1.24.bb
+new file mode 100644
+index 0000000..09702a9
+--- /dev/null
++++ b/recipes/libnids/libnids_1.24.bb
+@@ -0,0 +1,26 @@
++DESCRIPTION = "Libnids performs assembly of TCP segments \
++into TCP streams, IP defragmentation, and TCP port \
++scan detection."
++LICENSE = "GPL"
++SECTION = "libs"
++DEPENDS = "libnet-1.0 libpcap"
++PR = "r0"
++
++SRC_URI = "\
++  ${SOURCEFORGE_MIRROR}/libnids/libnids-${PV}.tar.gz;name=libnids \
++  file://configure.patch;patch=1"
++SRC_URI[libnids.md5sum] = "72d37c79c85615ffe158aa524d649610"
++SRC_URI[libnids.sha256sum] = "314b4793e0902fbf1fdb7fb659af37a3c1306ed1aad5d1c84de6c931b351d359"
++
++inherit autotools
++
++EXTRA_OECONF = "\
++  --with-libpcap=${STAGING_LIBDIR}/.. \
++  --with-libnet=${STAGING_LIBDIR}/.. \
++"
++EXTRA_OEMAKE = "'install_prefix=${D}'"
++
++do_stage () {
++	install -m 0644 ${S}/src/nids.h ${STAGING_INCDIR}/
++	oe_libinstall -a -C src libnids ${STAGING_LIBDIR}
++}
+-- 
+1.6.3.3
 
 
 
