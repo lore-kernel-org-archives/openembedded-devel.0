@@ -1,41 +1,47 @@
-Received: from smtp-out26.alice.it ([85.33.2.26])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1O0rxk-0001ig-Jn
+	(envelope-from <jacob.helwig@gmail.com>) id 1O0wKQ-0007bz-4w
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Apr 2010 09:52:13 +0200
-Received: from fbcmmo06.fbc.local ([192.168.184.137]) by smtp-out26.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sun, 11 Apr 2010 09:48:47 +0200
-Received: from FBCMCL01B05.fbc.local ([192.168.69.86]) by fbcmmo06.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sun, 11 Apr 2010 09:48:46 +0200
-Received: from jcn ([87.6.147.51]) by FBCMCL01B05.fbc.local with Microsoft
-	SMTPSVC(6.0.3790.3959); Sun, 11 Apr 2010 09:48:46 +0200
-Date: Sun, 11 Apr 2010 09:48:39 +0200
-From: Antonio Ospite <ospite@studenti.unina.it>
+	Sun, 11 Apr 2010 14:31:54 +0200
+Received: by gya1 with SMTP id 1so2243971gya.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 11 Apr 2010 05:28:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:sender:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:received
+	:user-agent; bh=jqbbc3dlY06uwNOuG8ShY+QWPo+kHwZZ1OET0t1AF8E=;
+	b=h1HJocgLNcr8k1MV57a5LpGHYmgTaS0IEMAXtd9BVGkBIFEqOEqoGZwrCwHh3fLGpn
+	7BDpOMzLjjJm89vWYCsc+eq1t2E4mHn7KxmnLisPkoFrijAmuiG13Jz1v56QS1jskFPd
+	r4JqwpYW260ZblEX0PJ14cgpAimIKRWbEV2gc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=cVk0C2Xds1EGotom+ZlBu2/sSdbzXiVNd5RWL1nM0+q6/dIjXqTD9SHqlrLznxQlOT
+	XWiVMQ1+AbaGfCYkzndehR4IpUzwxwsMI3gni3vRCueZjs8R3PsXonDrRtFb/pDibQU/
+	2wzlVizM6awVtfGPPDAU5lfhCBOPrP5ibYEm4=
+Received: by 10.101.134.3 with SMTP id l3mr4535637ann.200.1270988908089;
+	Sun, 11 Apr 2010 05:28:28 -0700 (PDT)
+Received: from vfb-9.home ([96.225.220.117])
+	by mx.google.com with ESMTPS id 23sm838664ywh.30.2010.04.11.05.28.26
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 11 Apr 2010 05:28:27 -0700 (PDT)
+Sender: Jacob Helwig <jacob.helwig@gmail.com>
+Date: Sun, 11 Apr 2010 05:28:23 -0700
+From: Jacob Helwig <jacob@technosorcery.net>
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20100411094839.7d756ab0.ospite@studenti.unina.it>
-In-Reply-To: <hpo3d3$ado$1@dough.gmane.org>
-References: <20100409213945.fdbf907b.ospite@studenti.unina.it>
-	<hpo3d3$ado$1@dough.gmane.org>
-X-Mailer: Sylpheed 3.0.1 (GTK+ 2.20.0; x86_64-pc-linux-gnu)
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-Mime-Version: 1.0
-X-OriginalArrivalTime: 11 Apr 2010 07:48:46.0472 (UTC)
-	FILETIME=[6A6C0880:01CAD94B]
-X-SA-Exim-Connect-IP: 85.33.2.26
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+Message-ID: <20100411122823.GA8091@vfb-9.home>
+MIME-Version: 1.0
+Received: by 10.229.215.2 with HTTP; Sun, 11 Apr 2010 05:23:38 -0700 (PDT)
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: jacob.helwig@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,
+	MSGID_FROM_MTA_HEADER,SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Koen Kooi <k.kooi@student.utwente.nl>
-Subject: Re: libmokoui2 needs pygtk-codegen-2.0
+Subject: Fixing Git mis-information in "Upgrading packages" Wiki page.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,80 +55,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Apr 2010 07:52:13 -0000
-X-Groupsio-MsgNum: 18548
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg="PGP-SHA1";
-	boundary="Signature=_Sun__11_Apr_2010_09_48_39_+0200_fwlJNe17zjQIWZg2"
-
---Signature=_Sun__11_Apr_2010_09_48_39_+0200_fwlJNe17zjQIWZg2
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Sun, 11 Apr 2010 12:31:55 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, 09 Apr 2010 22:41:07 +0200
-Koen Kooi <k.kooi@student.utwente.nl> wrote:
+http://wiki.openembedded.net/index.php/Upgrading_packages has some
+pretty big mis-information about git-mv, and git-log, when it comes to
+their interaction and how history is presented.
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> On 09-04-10 21:39, Antonio Ospite wrote:
-> > Hi,
-> >=20
-> > when building libmokoui2 I get this:
-> > http://tinderbox.openembedded.org/packages/544186/
-> >=20
-> > basically:
-> > /bin/sh: pygtk-codegen-2.0: command not found
-> >=20
-> > With this change to python-pygtk_2.16.0.bb I can make it build:
-> >=20
-> > diff --git a/recipes/python/python-pygtk_2.16.0.bb b/recipes/python/pyt=
-hon-pygtk_2.16.0.bb
-> > index e2b0602..de570c7 100644
-> > --- a/recipes/python/python-pygtk_2.16.0.bb
-> > +++ b/recipes/python/python-pygtk_2.16.0.bb
-> > @@ -36,7 +36,6 @@ do_configure_prepend() {
-> >  # dirty fix #1: remove dependency on python-pygobject-dev
-> >  do_install_append() {
-> >         find ${D} -name "*.la"|xargs rm -f
-> > -       rm -f ${D}/${bindir}/pygtk-codegen-2.0
-> >         rm -rf ${D}/${libdir}/pkgconfig
-> >  }
-> >=20
-> > Is this the way to go? Why pygtk-codegen-2.0 is not supplied?
->=20
-> It's part of python-gobject nowadays (and named differently).
->
+Cleaning up "Upgrading packages" is simple enough, but it seems like it
+would be good to have instructions on how to actually follow the history
+of a file across copies/renames, since "git mv a b" won't affect how the
+history shows up compared to "mv a b && git rm --cached a && git add b"
+(since the former is nothing more than short-hand for the latter).
 
-So the right fix should be to make libmokoui2 using
-pygobject-codegen-2.0 instead, leaving python-pygtk_2.16.0.bb
-untouched, I see.
+The GitPhraseBook seems like the most appropriate place to add things
+about how to get the followed history that usage of git-mv was looking
+to provide.
 
-Thanks,
-   Antonio
+Now that all this preamble is out of the way, we get to the real
+question: What kinds of things are people doing, when they're interested
+in (potentially) following the history of a recipe?  I'd be more than
+happy to update the Wiki with all the use-cases.  I just want to make
+sure that I don't miss any that people are looking for.
 
---=20
-Antonio Ospite
-http://ao2.it
+The ones I can think of off hand are:
 
-PGP public key ID: 0x4553B001
+    * Examining the your uncommitted changes (both staged, and
+      unstaged), and showing potential copies/renames.
 
-A: Because it messes up the order in which people normally read text.
-   See http://en.wikipedia.org/wiki/Posting_style
-Q: Why is top-posting such a bad thing?
-A: Top-posting.
-Q: What is the most annoying thing in e-mail?
+    * Showing the history of a branch/tag, and showing potential
+      copies/renames.
 
---Signature=_Sun__11_Apr_2010_09_48_39_+0200_fwlJNe17zjQIWZg2
-Content-Type: application/pgp-signature
+    * Showing the history of a specific file, while following across
+      copies/renames.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+    * Blaming/annotating a file, and showing annotations from before a
+      copy/rename.
 
-iEYEARECAAYFAkvBftcACgkQ5xr2akVTsAECHwCgncHpl1OWLWl8REzjmOvTWQqs
-NNUAn1nZwSFY2oC90xv1djJlnU6F8/q2
-=4OXQ
------END PGP SIGNATURE-----
+Are there any "phrases" that I've missed that would be good to have in
+the GitPhraseBook?
 
---Signature=_Sun__11_Apr_2010_09_48_39_+0200_fwlJNe17zjQIWZg2--
+-Jacob
+
+
