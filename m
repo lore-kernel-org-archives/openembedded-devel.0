@@ -1,46 +1,28 @@
-Received: from out2.smtp.messagingengine.com ([66.111.4.26])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1O1Bqw-0007JC-7a
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1O1E39-0007Vo-FT
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Apr 2010 07:06:31 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id 9C071EAC6C
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Apr 2010 01:03:05 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Mon, 12 Apr 2010 01:03:05 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
-	s=smtpout; bh=MRELW3SjisMPmOvl3Src29dnp/M=;
-	b=optfz42GndAlSxwrx2zQHqwbTe4XvgMdnO9b2XPlqewaYrs+Y9JpPjWwuUf/o427CWSMYEckSOJ1eL4C/CHKlJoaL6sxEZYzLccK1FB9RgRV6EM03t+rUDEMiklfYeemp3NjpWF/q2WZtRl9d3LUVQzL0hhjjFGHIb+/scYg+aE=
-X-Sasl-enc: pSIqbV7ZuNnVOmtG4q34b9yjR5X4glljASzHU7JGdVkt 1271048585
-Received: from [192.168.1.34] (hnvr-4d07af8a.pool.mediaWays.net [77.7.175.138])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id D6F9A4B3FD9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Apr 2010 01:03:04 -0400 (EDT)
-Date: Mon, 12 Apr 2010 07:04:19 +0200 (CEST)
-From: Vitus Jensen <vjensen@gmx.de>
+	Mon, 12 Apr 2010 09:27:17 +0200
+Received: (qmail 2157 invoked by uid 813007); 12 Apr 2010 07:23:50 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO localhost.localdomain)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 12 Apr 2010 07:23:50 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100408172953.GG3269@jama>
-Message-ID: <alpine.LNX.2.00.1004120658370.5400@asterix.crazy-teaparty.dyndns.org>
-References: <alpine.DEB.1.10.1004081018050.3264@vitus.devnet.local>
-	<alpine.DEB.1.10.1004081733510.3264@vitus.devnet.local>
-	<20100408172953.GG3269@jama>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.26
-X-SA-Exim-Mail-From: vjensen@gmx.de
+Date: Mon, 12 Apr 2010 09:24:01 +0200
+Message-Id: <1271057041-23857-1-git-send-email-marcin@juszkiewicz.com.pl>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-	SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] dfu-programmer: USB Device Firmware Upgrade utility (special atmel-version)
+Cc: Robert Schuster <robertschuster@fsfe.org>
+Subject: [STABLE][PATCH] classpath: Depend on antlr-native, increased resp. PRs.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,47 +36,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Apr 2010 05:06:31 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Mon, 12 Apr 2010 07:27:17 -0000
 
-On Thu, 8 Apr 2010, Martin Jansa wrote:
+From: Robert Schuster <robertschuster@fsfe.org>
 
-> On Thu, Apr 08, 2010 at 05:37:41PM +0200, Vitus Jensen wrote:
->> Add recipes for version 0.5.2 and the current head of the subversion
->> repository.  dfu-programmer is DFU utility supporting Atmel chips
->> with a USB bootloader (which aren't supported by dfu-util).
->>
->> Signed-off-by: Vitus Jensen <vjensen@gmx.de>
->> diff --git a/conf/checksums.ini b/conf/checksums.ini
->> index 3c6f712..73f5901 100644
->> --- a/conf/checksums.ini
->> +++ b/conf/checksums.ini
->> @@ -5258,6 +5258,10 @@ sha256=3b15515693bae1ebd14d914e46d388edfec2175829ea1576a7a0c8606ebbe639
->>  md5=be12c0132a1ae118cbf5e79d98427c1d
->>  sha256=ec382c90af3ef2f49695ff14a4d6521e58ac482c4e29d6c9ebca8768f699c191
->>
->> +[http://downloads.sourceforge.net/project/dfu-programmer/dfu-programmer/0.5.2/dfu-programmer-0.5.2.tar.gz]
->> +md5=ce882d37383df698a1c530080724b191
->> +sha256=e3c8bc1429fe1681c56ddc14fb05d29a7933aac566d13f894dca6fd916829cb9
->> +
->>  [http://pknet.com/~joe/dgen-sdl-1.23.tar.gz]
->>  md5=b1896c1b21ddb152626aec2e8a157a3a
->>  sha256=44396b3b324433187cf7082d1059cd9f519f02accddd667e627a57ff8514d436
+Acked-by: Marcin Juszkiewicz <marcin@buglabs.net>
 
-...
-> Please send separate patch for org.openembedded.dev with SRCREV as well
-> as checksums in recipes and for stable/2009 (you can put SRCREV to
-> recipe as long as it's sane SRCREV not AUTOREV).
+---
+ recipes/classpath/classpath.inc       |    3 ++-
+ recipes/classpath/classpath_0.95.bb   |    2 +-
+ recipes/classpath/classpath_0.96.1.bb |    2 +-
+ recipes/classpath/classpath_0.97.2.bb |    2 +-
+ recipes/classpath/classpath_0.98.bb   |    2 +-
+ 5 files changed, 6 insertions(+), 5 deletions(-)
 
-In this case I propose that support for inline checksums is backported to 
-stable/2009, so that identical recipes may be used.  It's only a single 
-commit, I'm currently testing it's effects with stable and will send a 
-patch to the list.
-
-Vitus
-
+diff --git a/recipes/classpath/classpath.inc b/recipes/classpath/classpath.inc
+index bf630bf..06e236c 100644
+--- a/recipes/classpath/classpath.inc
++++ b/recipes/classpath/classpath.inc
+@@ -5,7 +5,7 @@ PRIORITY = "optional"
+ LICENSE = "Classpath"
+ PBN = "classpath"
+ 
+-DEPENDS = "virtual/javac-native fastjar-native zip-native gmp"
++DEPENDS = "virtual/javac-native fastjar-native zip-native gmp antlr-native"
+ RPROVIDES = ""
+ 
+ RDEPENDS_${PN} = "${PBN}-common (>= ${PV})"
+@@ -30,6 +30,7 @@ EXTRA_OECONF = "\
+   --includedir=${includedir}/classpath \
+   --with-vm=java \
+   --disable-Werror \
++  --with-antlr-jar=${STAGING_DATADIR_JAVA_NATIVE}/antlr.jar \
+   "
+ 
+ inherit autotools
+diff --git a/recipes/classpath/classpath_0.95.bb b/recipes/classpath/classpath_0.95.bb
+index 6952cda..ccc1ece 100644
+--- a/recipes/classpath/classpath_0.95.bb
++++ b/recipes/classpath/classpath_0.95.bb
+@@ -6,7 +6,7 @@ SRC_URI += "\
+   file://javanet-local.patch;patch=1;pnum=0 \
+   "
+ 
+-PR = "r6"
++PR = "r7"
+ 
+ DEPENDS += "gtk+ gconf libxtst"
+ 
+diff --git a/recipes/classpath/classpath_0.96.1.bb b/recipes/classpath/classpath_0.96.1.bb
+index cc3505a..4e1288f 100644
+--- a/recipes/classpath/classpath_0.96.1.bb
++++ b/recipes/classpath/classpath_0.96.1.bb
+@@ -6,7 +6,7 @@ SRC_URI += "\
+   file://javanet-local.patch;patch=1;pnum=0 \
+   "
+ 
+-PR = "r8"
++PR = "r9"
+ 
+ DEPENDS += "gtk+ gconf libxtst"
+ 
+diff --git a/recipes/classpath/classpath_0.97.2.bb b/recipes/classpath/classpath_0.97.2.bb
+index 1daaa1a..e3b22fb 100644
+--- a/recipes/classpath/classpath_0.97.2.bb
++++ b/recipes/classpath/classpath_0.97.2.bb
+@@ -12,7 +12,7 @@ SRC_URI += "\
+   file://gtk-fix.patch;patch=1;pnum=0 \
+   "
+ 
+-PR = "r8"
++PR = "r9"
+ 
+ DEPENDS += "gtk+ gconf libxtst"
+ 
+diff --git a/recipes/classpath/classpath_0.98.bb b/recipes/classpath/classpath_0.98.bb
+index 13f7a72..6dc1e9e 100644
+--- a/recipes/classpath/classpath_0.98.bb
++++ b/recipes/classpath/classpath_0.98.bb
+@@ -7,7 +7,7 @@ SRC_URI += "\
+   file://fix-gmp.patch;patch=1 \
+   "
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ DEPENDS += "gtk+ gconf libxtst"
+ 
 -- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
+1.7.0.4
+
+
+
 
 
