@@ -1,32 +1,41 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1O1FwM-0004FU-BV
+	(envelope-from <Tom_Rini@mentor.com>) id 1O1M68-00045d-R8
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Apr 2010 11:28:23 +0200
-Received: (qmail 26662 invoked by uid 813007); 12 Apr 2010 09:24:58 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 12 Apr 2010 09:24:58 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	Mon, 12 Apr 2010 18:02:54 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1O1M2n-0000wP-8y from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Apr 2010 08:59:25 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 12 Apr 2010 08:59:25 -0700
+Received: from 172.30.80.192 ([172.30.80.192]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Mon, 12 Apr 2010 15:59:24 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	12 Apr 2010 08:59:18 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Apr 2010 11:25:08 +0200
-User-Agent: KMail/1.13.2 (Linux/2.6.34-rc2-wl-47166-ged2da1f; KDE/4.4.2; x86_64;
-	; )
-References: <1271063545-1753-1-git-send-email-marcin@juszkiewicz.com.pl>
-	<1271064053-4404-1-git-send-email-marcin@juszkiewicz.com.pl>
-In-Reply-To: <1271064053-4404-1-git-send-email-marcin@juszkiewicz.com.pl>
-MIME-Version: 1.0
-Message-Id: <201004121125.10068.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+In-Reply-To: <hpum4g$18m$1@dough.gmane.org>
+References: <1270135981.4993.128.camel@rex>  <hpum4g$18m$1@dough.gmane.org>
+Organization: Mentor Graphics Corporation
+Date: Mon, 12 Apr 2010 08:59:17 -0700
+Message-ID: <1271087957.29304.86.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 12 Apr 2010 15:59:25.0016 (UTC)
+	FILETIME=[1F931D80:01CADA59]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH v2] linux-libc-headers 2.6.23: backport arm/asm/hwcap.h from recent kernels
+Subject: Re: Request for branch merge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,21 +49,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Apr 2010 09:28:23 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 12 Apr 2010 16:02:54 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, 2010-04-12 at 10:37 +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> On 01-04-10 17:33, Richard Purdie wrote:
+> > I've been aware that Poky and OE have been diverging slightly and I'd
+> > like to correct this. There are some patches that I've promised for a
+> > while too such as the rename from do_populate_staging ->
+> > do_populate_sysroot.
+> >=20
+> > With some help from Joshua Lock, I have a branch I'd like to propose be
+> > merged into OE.dev:
+> >=20
+> > http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=3Drpurdie/wor=
+k-in-progress
+>=20
+> Joshuas last 3 commits to poky seem to fix Toms issue with binconfig and
+> my issue with chrpath, which only leaves the cross staging lamangler
+> stuff to get fixed.
+
+Actually (and I'm OK with binconfig stuff being broken in the first
+merge) the problem with binconfig junk isn't the file contents, but the
+file location.  staging-target-pkg will contain
+staging/<host>/usr/bin/<target>/foo-config.  Which means using pstaging
+for a target pkg built on 32bit Linux fails when used on 64bit Linux.
+Not that I wouldn't mind seeing the binconfig stuff die, just saying
+it's a problem today :)
+
+>=20
+> regards,
+>=20
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>=20
+> iD8DBQFLwtvQMkyGM64RGpERAlkTAJ9OgPD4AlWVQk7E0fSH80USdap4SgCfdS+X
+> HSSYMh5iRIPDePeGRVVrnvk=3D
+> =3DUsoG
+> -----END PGP SIGNATURE-----
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
-ARGH - today is definitelly not my day for patches. Tomorrow will get again 
-into this and will send fixed fixed fixed version.
-
-Regards, 
--- 
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
