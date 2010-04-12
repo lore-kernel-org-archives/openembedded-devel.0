@@ -1,43 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from asmtpout030.mac.com ([17.148.16.105])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O1Qiq-00019p-3j for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Apr 2010 22:59:09 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O1QfX-0003fm-C9 for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Apr 2010 22:55:43 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Apr 2010 22:55:43 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Apr 2010 22:55:43 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <elvis.dowson@mac.com>) id 1O1R8H-0000A3-Re
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Apr 2010 23:25:26 +0200
+MIME-version: 1.0
+Received: from [87.201.169.57] by asmtp030.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0L0S00ERM5VTW180@asmtp030.mac.com> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	12 Apr 2010 13:21:33 -0700 (PDT)
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
+	adjust=0
+	reason=mlx engine=5.0.0-0908210000 definitions=main-1004120211
+From: Elvis Dowson <elvis.dowson@mac.com>
+In-reply-to: <hpvotg$au0$1@dough.gmane.org>
+Date: Tue, 13 Apr 2010 00:21:28 +0400
+Message-id: <E4307ACF-AF45-4414-A86B-E55409F657F0@mac.com>
+References: <AB16E937-B599-4A4A-8F81-7107E7C8DAD2@mac.com>
+	<hpvotg$au0$1@dough.gmane.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 12 Apr 2010 22:55:34 +0200
-Message-ID: <hq01c6$cmm$1@dough.gmane.org>
-References: <1270135981.4993.128.camel@rex> <hpum4g$18m$1@dough.gmane.org>
-	<1271090705.14344.16.camel@localhost.localdomain>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100406 Shredder/3.0.5pre
-In-Reply-To: <1271090705.14344.16.camel@localhost.localdomain>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Apple Mail (2.1078)
+X-SA-Exim-Connect-IP: 17.148.16.105
+X-SA-Exim-Mail-From: elvis.dowson@mac.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.2 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Request for branch merge
+Subject: Re: Modifying Ralink RT3070 STA wifi driver for OpenEmbedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,71 +43,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Apr 2010 20:59:09 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 12 Apr 2010 21:25:26 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=us-ascii
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-On 12-04-10 18:45, Joshua Lock wrote:
-> On Mon, 2010-04-12 at 10:37 +0200, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 01-04-10 17:33, Richard Purdie wrote:
->>> I've been aware that Poky and OE have been diverging slightly and I'd
->>> like to correct this. There are some patches that I've promised for a
->>> while too such as the rename from do_populate_staging ->
->>> do_populate_sysroot.
->>>
->>> With some help from Joshua Lock, I have a branch I'd like to propose be
->>> merged into OE.dev:
->>>
->>> http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=rpurdie/work-in-progress
->>
->> Joshuas last 3 commits to poky seem to fix Toms issue with binconfig and
->> my issue with chrpath, which only leaves the cross staging lamangler
->> stuff to get fixed.
+On Apr 12, 2010, at 10:31 PM, Koen Kooi wrote:
+
 > 
-> I've just pushed an updated version of the tree with the recent Poky
-> changes you have observed and a merge of the autotools.bbclass to get
-> the lamangler stuff.
+> Have a look at the existing rt3070 recipe:
+> http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/rt2x00/rt3070_2.1.1.0.bb?id=bb3c6f24758b490366543e7392dd13cdcb200b6f
 > 
-> It builds a console-image fine here but the testing hasn't been
-> stringent as of yet.
+> And FWIW, with 2.6.32 you can use the in-kernel rt28xx driver with
+> rt3070 hw, but you still need the firmware
+> 
 
-I rebased your branch on top of 8e889754b1bdb261b85ac7de1c1f929ad597c09
-(the checksum thing after than makes git puke) and I still get:
+Thanks Koen! 
 
-ERROR: QA Issue with staging: libgfortran.la failed sanity test
-(installed) in path
-/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
-ERROR: QA Issue with staging: libssp_nonshared.la failed sanity test
-(installed) in path
-/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
-ERROR: QA Issue with staging: libssp.la failed sanity test (installed)
-in path /OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
-ERROR: QA Issue with staging: libstdc++.la failed sanity test
-(installed) in path
-/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
-ERROR: QA Issue with staging: libsupc++.la failed sanity test
-(installed) in path
-/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+Best regards,
 
-So the lamangler is still missing those by the looks of it.
-
-regards,
-
-Koen
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLw4jGMkyGM64RGpERAswOAJ0Sxvzo46Fzm513uHjB8N/Eg3NyagCfVJgK
-C5gVm3pr1zyAkeTkbRHjuIo=
-=TEpD
------END PGP SIGNATURE-----
-
+Elvis
 
 
