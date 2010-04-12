@@ -1,28 +1,29 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1O1FVM-0003Kw-IH for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Apr 2010 11:00:29 +0200
-Received: from f053038168.adsl.alicedsl.de ([78.53.38.168]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1O1FS4-0001hP-HJ for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Apr 2010 08:57:04 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1O1Fby-00076u-2r
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Apr 2010 11:07:18 +0200
+Received: (qmail 6484 invoked by uid 813007); 12 Apr 2010 09:03:52 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 12 Apr 2010 09:03:52 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1271059777-31579-1-git-send-email-marcin@juszkiewicz.com.pl>
+Date: Mon, 12 Apr 2010 11:04:04 +0200
+User-Agent: KMail/1.13.2 (Linux/2.6.34-rc2-wl-47166-ged2da1f; KDE/4.4.2; x86_64;
+	; )
 References: <1271059777-31579-1-git-send-email-marcin@juszkiewicz.com.pl>
-Date: Mon, 12 Apr 2010 10:55:39 +0200
-Message-ID: <1271062539.4053.5.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	<1271062539.4053.5.camel@mattotaupa>
+In-Reply-To: <1271062539.4053.5.camel@mattotaupa>
+MIME-Version: 1.0
+Message-Id: <201004121104.05218.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [STABLE][PATCH] udev 124: disable devcache on BUG 2.0
@@ -39,42 +40,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Apr 2010 09:00:29 -0000
-X-Groupsio-MsgNum: 18556
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-tfJgYGYieLVeFQjmTEx8"
-
---=-tfJgYGYieLVeFQjmTEx8
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 12 Apr 2010 09:07:19 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-2"
 Content-Transfer-Encoding: quoted-printable
 
-Am Montag, den 12.04.2010, 10:09 +0200 schrieb Marcin Juszkiewicz:
-> From: Marcin Juszkiewicz <marcin@buglabs.net>
+Dnia poniedzia=B3ek, 12 kwietnia 2010 o 10:55:39 Paul Menzel napisa=B3(a):
+> Am Montag, den 12.04.2010, 10:09 +0200 schrieb Marcin Juszkiewicz:
+> > From: Marcin Juszkiewicz <marcin@buglabs.net>
+>=20
+> Why is this necessary? What problems did you have?
 
-Why is this necessary? What problems did you have?
+Lot of noise from udev on start just because RTC was not set last time etc.=
+=20
+And at this stage of development this is internal device :D
 
-[=E2=80=A6]
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-With the commit message addressed this patch is reviewed by me.
-
-Reviewed-by: Paul Menzel <paulepanter@users.sourceforge.net>
 
 
-Thanks,
 
-Paul
-
---=-tfJgYGYieLVeFQjmTEx8
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkvC3/IACgkQPX1aK2wOHVhJeACggihVUF46R+5LcTCssO17eRUn
-UIIAnRGzYE7VKmbWVjK901x3i4bTe4cm
-=0kol
------END PGP SIGNATURE-----
-
---=-tfJgYGYieLVeFQjmTEx8--
