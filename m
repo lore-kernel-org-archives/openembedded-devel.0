@@ -1,47 +1,46 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from out2.smtp.messagingengine.com ([66.111.4.26])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jacob.helwig@gmail.com>) id 1O0wKQ-0007bz-4w
+	(envelope-from <vjensen@gmx.de>) id 1O1Bqw-0007JC-7a
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Apr 2010 14:31:54 +0200
-Received: by gya1 with SMTP id 1so2243971gya.6
+	Mon, 12 Apr 2010 07:06:31 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id 9C071EAC6C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Apr 2010 05:28:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:date:from:to:subject
-	:message-id:mime-version:content-type:content-disposition:received
-	:user-agent; bh=jqbbc3dlY06uwNOuG8ShY+QWPo+kHwZZ1OET0t1AF8E=;
-	b=h1HJocgLNcr8k1MV57a5LpGHYmgTaS0IEMAXtd9BVGkBIFEqOEqoGZwrCwHh3fLGpn
-	7BDpOMzLjjJm89vWYCsc+eq1t2E4mHn7KxmnLisPkoFrijAmuiG13Jz1v56QS1jskFPd
-	r4JqwpYW260ZblEX0PJ14cgpAimIKRWbEV2gc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	b=cVk0C2Xds1EGotom+ZlBu2/sSdbzXiVNd5RWL1nM0+q6/dIjXqTD9SHqlrLznxQlOT
-	XWiVMQ1+AbaGfCYkzndehR4IpUzwxwsMI3gni3vRCueZjs8R3PsXonDrRtFb/pDibQU/
-	2wzlVizM6awVtfGPPDAU5lfhCBOPrP5ibYEm4=
-Received: by 10.101.134.3 with SMTP id l3mr4535637ann.200.1270988908089;
-	Sun, 11 Apr 2010 05:28:28 -0700 (PDT)
-Received: from vfb-9.home ([96.225.220.117])
-	by mx.google.com with ESMTPS id 23sm838664ywh.30.2010.04.11.05.28.26
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 11 Apr 2010 05:28:27 -0700 (PDT)
-Sender: Jacob Helwig <jacob.helwig@gmail.com>
-Date: Sun, 11 Apr 2010 05:28:23 -0700
-From: Jacob Helwig <jacob@technosorcery.net>
+	Mon, 12 Apr 2010 01:03:05 -0400 (EDT)
+Received: from heartbeat1.messagingengine.com ([10.202.2.160])
+	by compute1.internal (MEProxy); Mon, 12 Apr 2010 01:03:05 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
+	s=smtpout; bh=MRELW3SjisMPmOvl3Src29dnp/M=;
+	b=optfz42GndAlSxwrx2zQHqwbTe4XvgMdnO9b2XPlqewaYrs+Y9JpPjWwuUf/o427CWSMYEckSOJ1eL4C/CHKlJoaL6sxEZYzLccK1FB9RgRV6EM03t+rUDEMiklfYeemp3NjpWF/q2WZtRl9d3LUVQzL0hhjjFGHIb+/scYg+aE=
+X-Sasl-enc: pSIqbV7ZuNnVOmtG4q34b9yjR5X4glljASzHU7JGdVkt 1271048585
+Received: from [192.168.1.34] (hnvr-4d07af8a.pool.mediaWays.net [77.7.175.138])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id D6F9A4B3FD9
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Apr 2010 01:03:04 -0400 (EDT)
+Date: Mon, 12 Apr 2010 07:04:19 +0200 (CEST)
+From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100411122823.GA8091@vfb-9.home>
+In-Reply-To: <20100408172953.GG3269@jama>
+Message-ID: <alpine.LNX.2.00.1004120658370.5400@asterix.crazy-teaparty.dyndns.org>
+References: <alpine.DEB.1.10.1004081018050.3264@vitus.devnet.local>
+	<alpine.DEB.1.10.1004081733510.3264@vitus.devnet.local>
+	<20100408172953.GG3269@jama>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
 MIME-Version: 1.0
-Received: by 10.229.215.2 with HTTP; Sun, 11 Apr 2010 05:23:38 -0700 (PDT)
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: jacob.helwig@gmail.com
+X-SA-Exim-Connect-IP: 66.111.4.26
+X-SA-Exim-Mail-From: vjensen@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,
-	MSGID_FROM_MTA_HEADER,SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
+	SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Fixing Git mis-information in "Upgrading packages" Wiki page.
+Subject: Re: [PATCH v2] dfu-programmer: USB Device Firmware Upgrade utility (special atmel-version)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,47 +54,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Apr 2010 12:31:55 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 12 Apr 2010 05:06:31 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
-http://wiki.openembedded.net/index.php/Upgrading_packages has some
-pretty big mis-information about git-mv, and git-log, when it comes to
-their interaction and how history is presented.
+On Thu, 8 Apr 2010, Martin Jansa wrote:
 
-Cleaning up "Upgrading packages" is simple enough, but it seems like it
-would be good to have instructions on how to actually follow the history
-of a file across copies/renames, since "git mv a b" won't affect how the
-history shows up compared to "mv a b && git rm --cached a && git add b"
-(since the former is nothing more than short-hand for the latter).
+> On Thu, Apr 08, 2010 at 05:37:41PM +0200, Vitus Jensen wrote:
+>> Add recipes for version 0.5.2 and the current head of the subversion
+>> repository.  dfu-programmer is DFU utility supporting Atmel chips
+>> with a USB bootloader (which aren't supported by dfu-util).
+>>
+>> Signed-off-by: Vitus Jensen <vjensen@gmx.de>
+>> diff --git a/conf/checksums.ini b/conf/checksums.ini
+>> index 3c6f712..73f5901 100644
+>> --- a/conf/checksums.ini
+>> +++ b/conf/checksums.ini
+>> @@ -5258,6 +5258,10 @@ sha256=3b15515693bae1ebd14d914e46d388edfec2175829ea1576a7a0c8606ebbe639
+>>  md5=be12c0132a1ae118cbf5e79d98427c1d
+>>  sha256=ec382c90af3ef2f49695ff14a4d6521e58ac482c4e29d6c9ebca8768f699c191
+>>
+>> +[http://downloads.sourceforge.net/project/dfu-programmer/dfu-programmer/0.5.2/dfu-programmer-0.5.2.tar.gz]
+>> +md5=ce882d37383df698a1c530080724b191
+>> +sha256=e3c8bc1429fe1681c56ddc14fb05d29a7933aac566d13f894dca6fd916829cb9
+>> +
+>>  [http://pknet.com/~joe/dgen-sdl-1.23.tar.gz]
+>>  md5=b1896c1b21ddb152626aec2e8a157a3a
+>>  sha256=44396b3b324433187cf7082d1059cd9f519f02accddd667e627a57ff8514d436
 
-The GitPhraseBook seems like the most appropriate place to add things
-about how to get the followed history that usage of git-mv was looking
-to provide.
+...
+> Please send separate patch for org.openembedded.dev with SRCREV as well
+> as checksums in recipes and for stable/2009 (you can put SRCREV to
+> recipe as long as it's sane SRCREV not AUTOREV).
 
-Now that all this preamble is out of the way, we get to the real
-question: What kinds of things are people doing, when they're interested
-in (potentially) following the history of a recipe?  I'd be more than
-happy to update the Wiki with all the use-cases.  I just want to make
-sure that I don't miss any that people are looking for.
+In this case I propose that support for inline checksums is backported to 
+stable/2009, so that identical recipes may be used.  It's only a single 
+commit, I'm currently testing it's effects with stable and will send a 
+patch to the list.
 
-The ones I can think of off hand are:
+Vitus
 
-    * Examining the your uncommitted changes (both staged, and
-      unstaged), and showing potential copies/renames.
-
-    * Showing the history of a branch/tag, and showing potential
-      copies/renames.
-
-    * Showing the history of a specific file, while following across
-      copies/renames.
-
-    * Blaming/annotating a file, and showing annotations from before a
-      copy/rename.
-
-Are there any "phrases" that I've missed that would be good to have in
-the GitPhraseBook?
-
--Jacob
+-- 
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
 
 
