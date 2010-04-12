@@ -1,23 +1,18 @@
 Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1O1Fby-00076u-2r
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1O1Fk2-00027t-8v
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Apr 2010 11:07:18 +0200
-Received: (qmail 6484 invoked by uid 813007); 12 Apr 2010 09:03:52 -0000
+	Mon, 12 Apr 2010 11:15:39 +0200
+Received: (qmail 8467 invoked by uid 813007); 12 Apr 2010 09:12:14 -0000
 X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
+Received: from 195.149.226.213 (HELO localhost.localdomain)
 	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 12 Apr 2010 09:03:52 -0000
+	by 195.149.226.213 with ESMTPA; 12 Apr 2010 09:12:13 -0000
 From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Apr 2010 11:04:04 +0200
-User-Agent: KMail/1.13.2 (Linux/2.6.34-rc2-wl-47166-ged2da1f; KDE/4.4.2; x86_64;
-	; )
-References: <1271059777-31579-1-git-send-email-marcin@juszkiewicz.com.pl>
-	<1271062539.4053.5.camel@mattotaupa>
-In-Reply-To: <1271062539.4053.5.camel@mattotaupa>
-MIME-Version: 1.0
-Message-Id: <201004121104.05218.marcin@juszkiewicz.com.pl>
+Date: Mon, 12 Apr 2010 11:12:25 +0200
+Message-Id: <1271063545-1753-1-git-send-email-marcin@juszkiewicz.com.pl>
+X-Mailer: git-send-email 1.7.0.4
 X-SA-Exim-Connect-IP: 195.149.226.213
 X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -26,7 +21,8 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH] udev 124: disable devcache on BUG 2.0
+Cc: Marcin Juszkiewicz <marcin@buglabs.net>
+Subject: [STABLE][PATCH] linux-libc-headers 2.6.23: backport arm/asm/hwcap.h from recent kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,26 +36,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Apr 2010 09:07:19 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 12 Apr 2010 09:15:39 -0000
 
-Dnia poniedzia=B3ek, 12 kwietnia 2010 o 10:55:39 Paul Menzel napisa=B3(a):
-> Am Montag, den 12.04.2010, 10:09 +0200 schrieb Marcin Juszkiewicz:
-> > From: Marcin Juszkiewicz <marcin@buglabs.net>
->=20
-> Why is this necessary? What problems did you have?
+From: Marcin Juszkiewicz <marcin@buglabs.net>
 
-Lot of noise from udev on start just because RTC was not set last time etc.=
-=20
-And at this stage of development this is internal device :D
+Backported hwcap flags from recent kernel due to userspace apps which depend on them.
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+---
+ .../arm-hwcap-add-new-entries.patch                |   21 ++++++++++++++++++++
+ .../linux-libc-headers_2.6.23.bb                   |    5 ++-
+ 2 files changed, 24 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/linux-libc-headers/linux-libc-headers-2.6.23/arm-hwcap-add-new-entries.patch
+
+diff --git a/recipes/linux-libc-headers/linux-libc-headers-2.6.23/arm-hwcap-add-new-entries.patch b/recipes/linux-libc-headers/linux-libc-headers-2.6.23/arm-hwcap-add-new-entries.patch
+new file mode 100644
+index 0000000..934db51
+--- /dev/null
++++ b/recipes/linux-libc-headers/linux-libc-headers-2.6.23/arm-hwcap-add-new-entries.patch
+@@ -0,0 +1,21 @@
++---
++ include/asm-arm/hwcap.h |    4 ++++
++ 1 file changed, 4 insertions(+)
++
++--- linux-2.6.23.orig/include/asm-arm/hwcap.h
+++++ linux-2.6.23/include/asm-arm/hwcap.h
++@@ -13,10 +13,14 @@
++ #define HWCAP_VFP	64
++ #define HWCAP_EDSP	128
++ #define HWCAP_JAVA	256
++ #define HWCAP_IWMMXT	512
++ #define HWCAP_CRUNCH	1024
+++#define HWCAP_THUMBEE	2048
+++#define HWCAP_NEON	4096
+++#define HWCAP_VFPv3	8192
+++#define HWCAP_VFPv3D16	16384
++ 
++ #if defined(__KERNEL__) && !defined(__ASSEMBLY__)
++ /*
++  * This yields a mask that user programs can use to figure out what
++  * instruction set this cpu supports.
+diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.23.bb b/recipes/linux-libc-headers/linux-libc-headers_2.6.23.bb
+index 1ff38f0..bca01b1 100644
+--- a/recipes/linux-libc-headers/linux-libc-headers_2.6.23.bb
++++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.23.bb
+@@ -2,11 +2,12 @@ require linux-libc-headers.inc
+ 
+ INHIBIT_DEFAULT_DEPS = "1"
+ DEPENDS += "unifdef-native"
+-PR = "r4"
++PR = "r6"
+ 
+ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
+            file://procinfo.h \
+-           file://unifdef.patch;patch=1"
++           file://unifdef.patch;patch=1 \
++           file:// linux-libc-headers-2.6.23/arm-hwcap-add-new-entries.patch;patch=1"
+ 
+ S = "${WORKDIR}/linux-${PV}"
+ 
+-- 
+1.7.0.4
+
 
 
 
