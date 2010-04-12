@@ -1,22 +1,18 @@
 Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1O1EVS-00046N-88
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1O1ElF-0000xP-Vu
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Apr 2010 09:56:33 +0200
-Received: (qmail 14424 invoked by uid 813007); 12 Apr 2010 07:53:04 -0000
+	Mon, 12 Apr 2010 10:12:51 +0200
+Received: (qmail 8830 invoked by uid 813007); 12 Apr 2010 08:09:25 -0000
 X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
+Received: from 195.149.226.213 (HELO localhost.localdomain)
 	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 12 Apr 2010 07:53:04 -0000
+	by 195.149.226.213 with ESMTPA; 12 Apr 2010 08:09:25 -0000
 From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Apr 2010 09:53:12 +0200
-User-Agent: KMail/1.13.2 (Linux/2.6.34-rc2-wl-47166-ged2da1f; KDE/4.4.2; x86_64;
-	; )
-References: <1271057041-23857-1-git-send-email-marcin@juszkiewicz.com.pl>
-In-Reply-To: <1271057041-23857-1-git-send-email-marcin@juszkiewicz.com.pl>
-MIME-Version: 1.0
-Message-Id: <201004120953.15405.marcin@juszkiewicz.com.pl>
+Date: Mon, 12 Apr 2010 10:09:37 +0200
+Message-Id: <1271059777-31579-1-git-send-email-marcin@juszkiewicz.com.pl>
+X-Mailer: git-send-email 1.7.0.4
 X-SA-Exim-Connect-IP: 195.149.226.213
 X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -25,7 +21,8 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH] classpath: Depend on antlr-native, increased resp. PRs.
+Cc: Marcin Juszkiewicz <marcin@buglabs.net>
+Subject: [STABLE][PATCH] udev 124: disable devcache on BUG 2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,31 +36,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Apr 2010 07:56:33 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 12 Apr 2010 08:12:51 -0000
 
-Dnia poniedzia=C5=82ek, 12 kwietnia 2010 o 09:24:01 Marcin Juszkiewicz napi=
-sa=C5=82(a):
-> From: Robert Schuster <robertschuster@fsfe.org>
->=20
-> Acked-by: Marcin Juszkiewicz <marcin@buglabs.net>
+From: Marcin Juszkiewicz <marcin@buglabs.net>
 
-After build on other machine I have to revert it. We do not have=20
-STAGING_DATADIR_JAVA_NATIVE variable in stable/2009 and changeset which add=
-s=20
-it can make current builds not working.
+Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+---
+ recipes/udev/udev-124/bug20/default |    4 ++++
+ recipes/udev/udev_124.bb            |    2 +-
+ 2 files changed, 5 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/udev/udev-124/bug20/default
 
-I have other solution for problem fixed by this changset but will take care=
-=20
-outside of repository.
+diff --git a/recipes/udev/udev-124/bug20/default b/recipes/udev/udev-124/bug20/default
+new file mode 100644
+index 0000000..d0050b8
+--- /dev/null
++++ b/recipes/udev/udev-124/bug20/default
+@@ -0,0 +1,4 @@
++# Default for /etc/init.d/udev
++
++# Comment this out to disable device cache
++#DEVCACHE="/etc/dev.tar"
+diff --git a/recipes/udev/udev_124.bb b/recipes/udev/udev_124.bb
+index ab391a3..c54dff6 100644
+--- a/recipes/udev/udev_124.bb
++++ b/recipes/udev/udev_124.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
+ /dev/, handles hotplug events and loads drivers at boot time. It replaces \
+ the hotplug package and requires a kernel not older than 2.6.12."
+ RPROVIDES_${PN} = "hotplug"
+-PR = "r16"
++PR = "r19"
+ 
+ SRC_URI = "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
+ 	   file://noasmlinkage.patch;patch=1 \
+-- 
+1.7.0.4
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
 
 
