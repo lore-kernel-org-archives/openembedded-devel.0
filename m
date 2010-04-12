@@ -1,30 +1,40 @@
-Received: from 3a.49.1343.static.theplanet.com
-	([67.19.73.58] helo=pug.o-hand.com ident=postfix)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <josh@linux.intel.com>) id 1O1Mpu-0003j3-8n
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Apr 2010 18:50:14 +0200
-Received: from [10.250.128.186] (unknown [158.43.2.102])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by pug.o-hand.com (Postfix) with ESMTP id 59D3512EC012
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O1Nmj-0000iN-Op for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Apr 2010 19:50:58 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O1NjQ-0002Aw-G1 for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Apr 2010 19:47:32 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Apr 2010 19:47:32 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Apr 2010 12:11:30 -0500 (CDT)
-From: Joshua Lock <josh@linux.intel.com>
+	Mon, 12 Apr 2010 19:47:32 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1271087957.29304.86.camel@trini-m4400>
-References: <1270135981.4993.128.camel@rex>  <hpum4g$18m$1@dough.gmane.org>
-	<1271087957.29304.86.camel@trini-m4400>
-Date: Mon, 12 Apr 2010 17:46:39 +0100
-Message-ID: <1271090799.14344.19.camel@localhost.localdomain>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 12 Apr 2010 19:47:24 +0200
+Message-ID: <hpvmbc$af$1@dough.gmane.org>
+References: <1270135981.4993.128.camel@rex> <hpum4g$18m$1@dough.gmane.org>
+	<1271090705.14344.16.camel@localhost.localdomain>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 (2.28.3-1.fc12) 
-X-SA-Exim-Connect-IP: 67.19.73.58
-X-SA-Exim-Mail-From: josh@linux.intel.com
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100406 Shredder/3.0.5pre
+In-Reply-To: <1271090705.14344.16.camel@localhost.localdomain>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: Request for branch merge
@@ -41,48 +51,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Apr 2010 16:50:15 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 12 Apr 2010 17:50:58 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2010-04-12 at 08:59 -0700, Tom Rini wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 12-04-10 18:45, Joshua Lock wrote:
 > On Mon, 2010-04-12 at 10:37 +0200, Koen Kooi wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> > 
-> > On 01-04-10 17:33, Richard Purdie wrote:
-> > > I've been aware that Poky and OE have been diverging slightly and I'd
-> > > like to correct this. There are some patches that I've promised for a
-> > > while too such as the rename from do_populate_staging ->
-> > > do_populate_sysroot.
-> > > 
-> > > With some help from Joshua Lock, I have a branch I'd like to propose be
-> > > merged into OE.dev:
-> > > 
-> > > http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=rpurdie/work-in-progress
-> > 
-> > Joshuas last 3 commits to poky seem to fix Toms issue with binconfig and
-> > my issue with chrpath, which only leaves the cross staging lamangler
-> > stuff to get fixed.
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 01-04-10 17:33, Richard Purdie wrote:
+>>> I've been aware that Poky and OE have been diverging slightly and I'd
+>>> like to correct this. There are some patches that I've promised for a
+>>> while too such as the rename from do_populate_staging ->
+>>> do_populate_sysroot.
+>>>
+>>> With some help from Joshua Lock, I have a branch I'd like to propose be
+>>> merged into OE.dev:
+>>>
+>>> http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=rpurdie/work-in-progress
+>>
+>> Joshuas last 3 commits to poky seem to fix Toms issue with binconfig and
+>> my issue with chrpath, which only leaves the cross staging lamangler
+>> stuff to get fixed.
 > 
-> Actually (and I'm OK with binconfig stuff being broken in the first
-> merge) the problem with binconfig junk isn't the file contents, but the
-> file location.  staging-target-pkg will contain
-> staging/<host>/usr/bin/<target>/foo-config.  Which means using pstaging
-> for a target pkg built on 32bit Linux fails when used on 64bit Linux.
-> Not that I wouldn't mind seeing the binconfig stuff die, just saying
-> it's a problem today :)
+> I've just pushed an updated version of the tree with the recent Poky
+> changes you have observed and a merge of the autotools.bbclass to get
+> the lamangler stuff.
 
-Ah, hmm... yes. That is a problem.
+Thanks! I also like the CONFIGUREOPTS change you snuck in :)
 
-FWIW I don't think you'll get any arguments from the Poky team where the
-binconfig stuff to suffer an untimely demise!
+> It builds a console-image fine here but the testing hasn't been
+> stringent as of yet.
 
-Cheers,
-Joshua
--- 
-Joshua Lock
-        Intel Open Source Technology Centre
+IIRC 'abiword' break if the cross lamangler isn't working, going to try
+that now.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLw1yrMkyGM64RGpERAmH0AJ9tOYlZcBrCx6pHfZ+FDoLdRxhPvgCeK4VD
+eujM8p1Ip0kO8Ldi3lZRHJQ=
+=86n7
+-----END PGP SIGNATURE-----
 
 
 
