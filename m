@@ -1,39 +1,42 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1O1Erg-0001Ah-SP
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Apr 2010 10:19:29 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id BA7F42C7F5
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O1FCg-0001I2-0A for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Apr 2010 10:41:12 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O1F9M-0003Il-Sd for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Apr 2010 10:37:44 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Apr 2010 10:37:44 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Apr 2010 08:15:06 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id jlkBK4HrIj0t
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Apr 2010 08:15:02 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 586CA2C7DC
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Apr 2010 08:15:01 +0000 (UTC)
-Message-ID: <4BC2D6BD.6080302@gmail.com>
-Date: Mon, 12 Apr 2010 10:15:57 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
-MIME-Version: 1.0
+	Mon, 12 Apr 2010 10:37:44 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1271059777-31579-1-git-send-email-marcin@juszkiewicz.com.pl>
-In-Reply-To: <1271059777-31579-1-git-send-email-marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 12 Apr 2010 10:37:36 +0200
+Message-ID: <hpum4g$18m$1@dough.gmane.org>
+References: <1270135981.4993.128.camel@rex>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100406 Shredder/3.0.5pre
+In-Reply-To: <1270135981.4993.128.camel@rex>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH] udev 124: disable devcache on BUG 2.0
+Subject: Re: Request for branch merge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,58 +50,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Apr 2010 08:19:29 -0000
+X-List-Received-Date: Mon, 12 Apr 2010 08:41:12 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Marcin Juszkiewicz ha scritto, Il 12/04/2010 10:09:
-> From: Marcin Juszkiewicz <marcin@buglabs.net>
->=20
-> Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-> ---
->  recipes/udev/udev-124/bug20/default |    4 ++++
->  recipes/udev/udev_124.bb            |    2 +-
->  2 files changed, 5 insertions(+), 1 deletions(-)
->  create mode 100644 recipes/udev/udev-124/bug20/default
->=20
-> diff --git a/recipes/udev/udev-124/bug20/default b/recipes/udev/udev-12=
-4/bug20/default
-> new file mode 100644
-> index 0000000..d0050b8
-> --- /dev/null
-> +++ b/recipes/udev/udev-124/bug20/default
-> @@ -0,0 +1,4 @@
-> +# Default for /etc/init.d/udev
-> +
-> +# Comment this out to disable device cache
-> +#DEVCACHE=3D"/etc/dev.tar"
-> diff --git a/recipes/udev/udev_124.bb b/recipes/udev/udev_124.bb
-> index ab391a3..c54dff6 100644
-> --- a/recipes/udev/udev_124.bb
-> +++ b/recipes/udev/udev_124.bb
-> @@ -2,7 +2,7 @@ DESCRIPTION =3D "udev is a daemon which dynamically cre=
-ates and removes device nod
->  /dev/, handles hotplug events and loads drivers at boot time. It repla=
-ces \
->  the hotplug package and requires a kernel not older than 2.6.12."
->  RPROVIDES_${PN} =3D "hotplug"
-> -PR =3D "r16"
-> +PR =3D "r19"
-> =20
->  SRC_URI =3D "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${P=
-V}.tar.gz \
->  	   file://noasmlinkage.patch;patch=3D1 \
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Acked-by: Marco Cavallini <m.cavallini@koansoftware.com>
+On 01-04-10 17:33, Richard Purdie wrote:
+> I've been aware that Poky and OE have been diverging slightly and I'd
+> like to correct this. There are some patches that I've promised for a
+> while too such as the rename from do_populate_staging ->
+> do_populate_sysroot.
+> 
+> With some help from Joshua Lock, I have a branch I'd like to propose be
+> merged into OE.dev:
+> 
+> http://cgit.openembedded.org/cgit.cgi/openembedded/log/?h=rpurdie/work-in-progress
 
+Joshuas last 3 commits to poky seem to fix Toms issue with binconfig and
+my issue with chrpath, which only leaves the cross staging lamangler
+stuff to get fixed.
 
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-   Atmel third party certified consultant
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
-        http://www.KaeilOS.com
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLwtvQMkyGM64RGpERAlkTAJ9OgPD4AlWVQk7E0fSH80USdap4SgCfdS+X
+HSSYMh5iRIPDePeGRVVrnvk=
+=UsoG
+-----END PGP SIGNATURE-----
+
 
 
