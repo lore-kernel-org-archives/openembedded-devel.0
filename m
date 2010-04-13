@@ -1,37 +1,37 @@
-Received: from ey-out-1920.google.com ([74.125.78.147])
+Received: from mail-ew0-f211.google.com ([209.85.219.211])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1O1eKz-0005zv-DV
+	(envelope-from <martin.jansa@gmail.com>) id 1O1eL3-00060G-JO
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Apr 2010 13:31:28 +0200
-Received: by ey-out-1920.google.com with SMTP id 26so452012eyw.4
+	Tue, 13 Apr 2010 13:31:36 +0200
+Received: by ewy3 with SMTP id 3so223197ewy.26
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Apr 2010 04:28:00 -0700 (PDT)
+	Tue, 13 Apr 2010 04:28:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=p7JbTPtWLG9weqa9OpDuAJfftSr4OGNjpqSrQyl749c=;
-	b=gcBkdoP1X1wsBeppR6aq+oAsC3xs3S+dAfyuHPGJTGn7PFN3ZoXrYVsN4C+6lUylMp
-	UsnneO4cVNc6u8A76T47jlj7HSnPQtwHE8cNzq6uPWopfVRb3k6DwMMphJCYEqaUd7Cd
-	MUMXNZwMNiZVVz7Mf/j8ZSmuAjIBbBhpGO7Xw=
+	bh=hjlWDyMyd7LozYvg02r3NyEzBhB7XNQTa0uNLQhM6Gk=;
+	b=U2Dk9S8MkfqdKZFwBYVQ60PhBLSQ+PH1deb0plahzeQpf7R4FGuJ45G86D1RivTddQ
+	elHuO8KwY/1/hjl9S68n8k/r7jLCSbyT+BPOaowvls3lUpFn1cecOHAR1o2/0gtpAtxi
+	F+NcVTBlAwsvfLWM2IC/JtrETA1ZDyyebRsg0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=ur12pZxDsV5EdHi/st4Ir/Ewn5CJ/qF047PHdWvXZ7Mt+ycP13c9wGDv53g8T+AN3o
-	9awjGPN3kmuxevr5YlVYIe2zueJzDHnx2CR8G4PEaknyqswUfUgccdrkjp+cAqilVA2C
-	5/Bte//NmeEqENurCrDItPYP9n+mNmS6jtYmA=
-Received: by 10.102.170.16 with SMTP id s16mr3033251mue.16.1271158080383;
-	Tue, 13 Apr 2010 04:28:00 -0700 (PDT)
+	b=uD2t/+Vk9HKz6mPJn93q4E8clygqP2U1I6Y/uFWZVC6zBvXEXWDBy5SoI6uXMVJZUB
+	jWBY7yN24Qt7nz2mCiPyOoO6D8A/o8lRR37uuXraRab2EAuSDkIvbSTaxovGJMYVJTBJ
+	gE/fuQho/2SoL8MOVxzUCehUjJeAwlEFZw+9g=
+Received: by 10.102.243.22 with SMTP id q22mr3053401muh.9.1271158081878;
+	Tue, 13 Apr 2010 04:28:01 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id w5sm4932663mue.24.2010.04.13.04.27.59
+	by mx.google.com with ESMTPS id y2sm22636627mug.21.2010.04.13.04.28.01
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 13 Apr 2010 04:28:00 -0700 (PDT)
+	Tue, 13 Apr 2010 04:28:01 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 Apr 2010 13:23:54 +0200
-Message-Id: <1271157835-27308-6-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue, 13 Apr 2010 13:23:55 +0200
+Message-Id: <1271157835-27308-7-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1271157835-27308-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1271157835-27308-1-git-send-email-Martin.Jansa@gmail.com>
-X-SA-Exim-Connect-IP: 74.125.78.147
+X-SA-Exim-Connect-IP: 209.85.219.211
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -39,7 +39,7 @@ X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 5/6] shr recipes: use SRCPV in git recipes
+Subject: [PATCH 6/6] recipes: use SRCPV in few more git recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,800 +53,405 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Apr 2010 11:31:29 -0000
+X-List-Received-Date: Tue, 13 Apr 2010 11:31:37 -0000
 
-* recipes probably used only in SHR distribution
-* usually without PE bump, because nobody complained that we were
-  bumping SRCREV without PV changes and we were using SRCPV in our branch
-  before
+* sometimes without PE bump, because nobody complained that we were
+  bumping SRCREV without PV changes and we were using SRCPV in our
+  branch before
+* please bump PE if you're using one of those and you need to increment
+  PV, otherwise it will be "corrected" with next PV bump
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes/gpe-icons/gpe-theme-neo_git.bb             |    2 +-
- recipes/obsolete/shr/alsa-scenarii-shr_git.bb      |    2 +-
- recipes/obsolete/shr/etk-theme-neo_git.bb          |    2 +-
- recipes/obsolete/shr/etk-theme-shr_git.bb          |    2 +-
- .../libframeworkd-phonegui-efl-theme-neo_git.bb    |    2 +-
- .../shr/libframeworkd-phonegui-efl2_git.bb         |    2 +-
- .../obsolete/shr/libframeworkd-phonegui-efl_git.bb |    2 +-
- recipes/obsolete/shr/libframeworkd-phonegui_git.bb |    2 +-
- recipes/obsolete/shr/shr-contacts_git.bb           |    2 +-
- recipes/obsolete/shr/shr-dialer_git.bb             |    2 +-
- recipes/obsolete/shr/shr-messages_git.bb           |    2 +-
- recipes/pyphonelog/pyphonelog_git.bb               |    2 +-
- recipes/python/python-phoneutils_git.bb            |    2 +-
- recipes/shr/e-wm-config-illume-shr_git.bb          |    2 +-
- recipes/shr/e-wm-config-illume2-shr_git.bb         |    2 +-
- recipes/shr/e-wm-menu-shr_git.bb                   |    2 +-
- recipes/shr/e-wm-sysactions-shr_git.bb             |    2 +-
- recipes/shr/e-wm-theme-illume-gry_git.bb           |    2 +-
- recipes/shr/e-wm-theme-illume-neo_git.bb           |    2 +-
- recipes/shr/e-wm-theme-illume-niebiee_git.bb       |    2 +-
- recipes/shr/e-wm-theme-illume-shr_git.bb           |    2 +-
- recipes/shr/e-wm-theme-illume-sixteen_git.bb       |    2 +-
- recipes/shr/elementary-theme-gry_git.bb            |    2 +-
- recipes/shr/elementary-theme-neo_git.bb            |    2 +-
- recipes/shr/elementary-theme-niebiee_git.bb        |    2 +-
- recipes/shr/elementary-theme-o2_git.bb             |    2 +-
- recipes/shr/elementary-theme-sixteen_git.bb        |    2 +-
- recipes/shr/frameworkd-config-shr_git.bb           |    2 +-
- recipes/shr/gtk-theme-neo_git.bb                   |    2 +-
- recipes/shr/icon-theme-neo_git.bb                  |    2 +-
- recipes/shr/libmodulo_git.bb                       |    2 +-
- recipes/shr/libphone-ui-shr_git.bb                 |    2 +-
- recipes/shr/libphone-ui_git.bb                     |    2 +-
- recipes/shr/libphone-utils_git.bb                  |    2 +-
- recipes/shr/ologicd_git.bb                         |    2 +-
- recipes/shr/phonefsod_git.bb                       |    2 +-
- recipes/shr/phoneui-apps_git.bb                    |    2 +-
- recipes/shr/phoneui-shr-theme-neo_git.bb           |    2 +-
- recipes/shr/phoneui-shr-theme-o2_git.bb            |    2 +-
- recipes/shr/phoneuid_git.bb                        |    2 +-
- recipes/shr/shr-config_git.bb                      |    2 +-
- recipes/shr/shr-e-gadgets_git.bb                   |    2 +-
- recipes/shr/shr-installer_git.bb                   |    2 +-
- recipes/shr/shr-settings_git.bb                    |    2 +-
- recipes/shr/shr-specs_git.bb                       |    2 +-
- recipes/shr/shr-splash-theme-dontpanic_git.bb      |    2 +-
- recipes/shr/shr-splash-theme-handy_git.bb          |    2 +-
- recipes/shr/shr-splash-theme-logo_git.bb           |    2 +-
- recipes/shr/shr-splash-theme-niebiee_git.bb        |    2 +-
- recipes/shr/shr-splash-theme-simple_git.bb         |    2 +-
- recipes/shr/shr-splash-theme-tux_git.bb            |    2 +-
- recipes/shr/shr-splash_git.bb                      |    2 +-
- recipes/shr/shr-theme-gtk-e17lookalike_git.bb      |    2 +-
- recipes/shr/shr-theme_git.bb                       |    2 +-
- recipes/shr/shr-today_git.bb                       |    2 +-
- recipes/shr/shr-wizard_git.bb                      |    2 +-
- 56 files changed, 56 insertions(+), 56 deletions(-)
+ recipes/blipomoko/blipomoko_git.bb                 |    2 +-
+ recipes/bt-configure/bt-configure_git.bb           |    2 +-
+ recipes/dri/glamo-dri-tests_git.bb                 |    2 +-
+ recipes/dri/libdrm_git.bb                          |    2 +-
+ recipes/e17/illume-keyboards-shr_git.bb            |    2 +-
+ recipes/efl1/e-wm-illume-dict-pl_git.bb            |    3 ++-
+ recipes/efl1/libeflvala_svn.bb                     |    1 +
+ recipes/evopedia/evopedia_git.bb                   |    2 +-
+ recipes/ffalarms/ffalarms_git.bb                   |    2 +-
+ recipes/litephone/litephone_git.bb                 |    2 +-
+ recipes/mplayer/mplayer_git.bb                     |    2 +-
+ recipes/openmoko-3rdparty/advancedcaching_git.bb   |    2 +-
+ recipes/openmoko-3rdparty/calc_git.bb              |    2 +-
+ recipes/openmoko-3rdparty/jefliks_git.bb           |    2 +-
+ recipes/openmoko-projects/om-locations_git.bb      |    3 ++-
+ recipes/openmoko-projects/paroli_git.bb            |    2 +-
+ recipes/openmoko-projects/tichy_git.bb             |    3 ++-
+ recipes/openmoocow/openmoocow_git.bb               |    2 +-
+ recipes/stopwatch/stopwatch_git.bb                 |    2 +-
+ recipes/webkit/webkit-efl_git.bb                   |    2 +-
+ recipes/xinput-calibrator/xinput-calibrator_git.bb |    2 +-
+ recipes/xorg-driver/xf86-video-glamo_git.bb        |    4 ++--
+ recipes/xorg-lib/libxcalibrate_git.bb              |    4 ++--
+ recipes/xorg-lib/pixman_git.bb                     |    2 +-
+ recipes/xorg-proto/calibrateproto_git.bb           |    4 ++--
+ .../xserver-kdrive-glamo_1.3.0.0+git.bb            |    4 ++--
+ recipes/xorg-xserver/xserver-xorg_git.bb           |    2 +-
+ 27 files changed, 34 insertions(+), 30 deletions(-)
 
-diff --git a/recipes/gpe-icons/gpe-theme-neo_git.bb b/recipes/gpe-icons/gpe-theme-neo_git.bb
-index f0f4e0f..1de7fba 100644
---- a/recipes/gpe-icons/gpe-theme-neo_git.bb
-+++ b/recipes/gpe-icons/gpe-theme-neo_git.bb
-@@ -5,7 +5,7 @@ RSUGGESTS = "gpe-filemanager gpe-sketchbook elementary-theme-neo e-wm-theme-illu
- LICENSE = "unknown"
- 
- SRCREV = "1cc80e26a4558dfc2268b349d9a1f468e515bcfb"
--PV = "0.2-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "0.2-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "${INC_PR}.2"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/obsolete/shr/alsa-scenarii-shr_git.bb b/recipes/obsolete/shr/alsa-scenarii-shr_git.bb
-index cb21e2a..35bf569 100644
---- a/recipes/obsolete/shr/alsa-scenarii-shr_git.bb
-+++ b/recipes/obsolete/shr/alsa-scenarii-shr_git.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Package for the different scenarios used by Openmoko"
- SECTION = "openmoko/base"
- SRCREV = "8e89c8dbae569a08cac246a3805fca20988c0ad1"
--PV = "1.0+gitr${SRCREV}"
-+PV = "1.0+gitr${SRCPV}"
- PR = "r4"
- 
- COMPATIBLE_MACHINE = "(om-gta01|om-gta02|htcdream)"
-diff --git a/recipes/obsolete/shr/etk-theme-neo_git.bb b/recipes/obsolete/shr/etk-theme-neo_git.bb
-index ab028b1..42fcf70 100644
---- a/recipes/obsolete/shr/etk-theme-neo_git.bb
-+++ b/recipes/obsolete/shr/etk-theme-neo_git.bb
-@@ -5,7 +5,7 @@ RSUGGESTS = "elementary-theme-neo e-wm-theme-illume-neo gtk-theme-neo gpe-theme-
- LICENSE = "unknown"
- 
- SRCREV = "1cc80e26a4558dfc2268b349d9a1f468e515bcfb"
--PV = "0.2-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "0.2-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "r4"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/obsolete/shr/etk-theme-shr_git.bb b/recipes/obsolete/shr/etk-theme-shr_git.bb
-index 764955e..610b3e1 100644
---- a/recipes/obsolete/shr/etk-theme-shr_git.bb
-+++ b/recipes/obsolete/shr/etk-theme-shr_git.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "etk SHR theme"
- LICENSE = "MIT BSD"
--PV = "1.1.1-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "1.1.1-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "r2"
- 
- SRCREV = "1cc80e26a4558dfc2268b349d9a1f468e515bcfb"
-diff --git a/recipes/obsolete/shr/libframeworkd-phonegui-efl-theme-neo_git.bb b/recipes/obsolete/shr/libframeworkd-phonegui-efl-theme-neo_git.bb
-index 15dcc2f..b94914e 100644
---- a/recipes/obsolete/shr/libframeworkd-phonegui-efl-theme-neo_git.bb
-+++ b/recipes/obsolete/shr/libframeworkd-phonegui-efl-theme-neo_git.bb
-@@ -6,7 +6,7 @@ RSUGGESTS = "elementary-theme-neo e-wm-theme-illume-neo gtk-theme-neo etk-theme-
- LICENSE = "unknown"
- 
- SRCREV = "1cc80e26a4558dfc2268b349d9a1f468e515bcfb"
--PV = "0.2-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "0.2-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "r3"
- 
- require libframeworkd-phonegui-efl-theme.inc
-diff --git a/recipes/obsolete/shr/libframeworkd-phonegui-efl2_git.bb b/recipes/obsolete/shr/libframeworkd-phonegui-efl2_git.bb
-index 9d4d74e..302c58f 100644
---- a/recipes/obsolete/shr/libframeworkd-phonegui-efl2_git.bb
-+++ b/recipes/obsolete/shr/libframeworkd-phonegui-efl2_git.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "frameworkd EFL phonegui 2"
- SECTION = "e/apps"
- DEPENDS += " dbus-glib libframeworkd-glib libframeworkd-phonegui etk evas ecore edje edje-native elementary"
--PV = "0.0.1+gitr${SRCREV}"
-+PV = "0.0.1+gitr${SRCPV}"
- PR = "r2"
- 
- SRCREV = "917226025c67b75def91e98ea923c2e550474a5b"
-diff --git a/recipes/obsolete/shr/libframeworkd-phonegui-efl_git.bb b/recipes/obsolete/shr/libframeworkd-phonegui-efl_git.bb
-index 34f9692..c75eaab 100644
---- a/recipes/obsolete/shr/libframeworkd-phonegui-efl_git.bb
-+++ b/recipes/obsolete/shr/libframeworkd-phonegui-efl_git.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://shr-project.org/"
- LICENSE = "GPL"
- SECTION = "e/apps"
- DEPENDS += " dbus-glib libframeworkd-glib libframeworkd-phonegui etk evas ecore edje edje-native elementary"
--PV = "0.0.3+gitr${SRCREV}"
-+PV = "0.0.3+gitr${SRCPV}"
- PR = "r36"
- 
- require libframeworkd-phonegui-efl-theme.inc
-diff --git a/recipes/obsolete/shr/libframeworkd-phonegui_git.bb b/recipes/obsolete/shr/libframeworkd-phonegui_git.bb
-index b11f039..29d22a9 100644
---- a/recipes/obsolete/shr/libframeworkd-phonegui_git.bb
-+++ b/recipes/obsolete/shr/libframeworkd-phonegui_git.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Frameworkd phonegui library"
- HOMEPAGE = "http://shr-project.org/"
- LICENSE = "GPL"
- SECTION = "libs"
--PV = "0.0.2+gitr${SRCREV}"
-+PV = "0.0.2+gitr${SRCPV}"
- PR = "r10"
- 
- DEPENDS="glib-2.0 dbus-glib libframeworkd-glib libphone-utils"
-diff --git a/recipes/obsolete/shr/shr-contacts_git.bb b/recipes/obsolete/shr/shr-contacts_git.bb
-index 6a22831..ae18feb 100644
---- a/recipes/obsolete/shr/shr-contacts_git.bb
-+++ b/recipes/obsolete/shr/shr-contacts_git.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://shr-project.org/"
- LICENSE = "GPL"
- SECTION = "x11/applications"
- DEPENDS += "dbus-glib libframeworkd-glib libframeworkd-phonegui"
--PV = "0.0.2+gitr${SRCREV}"
-+PV = "0.0.2+gitr${SRCPV}"
- PR = "r6"
- 
- inherit pkgconfig autotools
-diff --git a/recipes/obsolete/shr/shr-dialer_git.bb b/recipes/obsolete/shr/shr-dialer_git.bb
-index 816f9d8..f1e9cd3 100644
---- a/recipes/obsolete/shr/shr-dialer_git.bb
-+++ b/recipes/obsolete/shr/shr-dialer_git.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://shr-project.org/"
- LICENSE = "GPL"
- SECTION = "x11/applications"
- DEPENDS += "dbus-glib libframeworkd-glib libframeworkd-phonegui"
--PV = "0.0.2+gitr${SRCREV}"
-+PV = "0.0.2+gitr${SRCPV}"
- PR = "r9"
- 
- inherit pkgconfig autotools
-diff --git a/recipes/obsolete/shr/shr-messages_git.bb b/recipes/obsolete/shr/shr-messages_git.bb
-index cb8fc81..35db6c6 100644
---- a/recipes/obsolete/shr/shr-messages_git.bb
-+++ b/recipes/obsolete/shr/shr-messages_git.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://shr-project.org/"
- LICENSE = "GPL"
- SECTION = "x11/applications"
- DEPENDS += "dbus-glib libframeworkd-glib libframeworkd-phonegui"
--PV = "0.0.2+gitr${SRCREV}"
-+PV = "0.0.2+gitr${SRCPV}"
- PR = "r8"
- 
- inherit pkgconfig autotools
-diff --git a/recipes/pyphonelog/pyphonelog_git.bb b/recipes/pyphonelog/pyphonelog_git.bb
-index 16ed035..68c72e3 100644
---- a/recipes/pyphonelog/pyphonelog_git.bb
-+++ b/recipes/pyphonelog/pyphonelog_git.bb
-@@ -9,7 +9,7 @@ inherit distutils
- 
+diff --git a/recipes/blipomoko/blipomoko_git.bb b/recipes/blipomoko/blipomoko_git.bb
+index 2c7d582..ec57666 100644
+--- a/recipes/blipomoko/blipomoko_git.bb
++++ b/recipes/blipomoko/blipomoko_git.bb
+@@ -9,7 +9,7 @@ SRC_URI = "git://github.com/dos1/blipomoko.git;protocol=http"
  S = "${WORKDIR}/git"
- SRCREV = "7672065334cb64e890cfb86d0236f4c36d595e4b"
--PV = "0.17.0+gitr${SRCREV}"
-+PV = "0.17.0+gitr${SRCPV}"
+ 
+ SRCREV = "93295f36f7b45c691df247cb2a65227facf13654"
+-PV = "0.0+gitr${SRCREV}"
++PV = "0.0+gitr${SRCPV}"
  PR = "r0"
- SRC_URI = "git://shr.bearstech.com/repo/pyphonelog.git;protocol=http"
- FILES_${PN} += "${datadir}/applications/phonelog.desktop \
-diff --git a/recipes/python/python-phoneutils_git.bb b/recipes/python/python-phoneutils_git.bb
-index 2c6fca1..1cf705a 100644
---- a/recipes/python/python-phoneutils_git.bb
-+++ b/recipes/python/python-phoneutils_git.bb
-@@ -4,7 +4,7 @@ DEPENDS = "libphone-utils python-cython-native python-pyrex-native"
- RDEPENDS = "libphone-utils"
- 
- SRCREV = "8a7c719e0c3f1f8c10f77f17422da02d7177f0dd"
--PV = "0.0.2+gitr${SRCREV}"
-+PV = "0.0.2+gitr${SRCPV}"
- PR = "r2"
- 
- SRC_URI = "git://git.shr-project.org/repo/libphone-utils.git;protocol=http;branch=master"
-diff --git a/recipes/shr/e-wm-config-illume-shr_git.bb b/recipes/shr/e-wm-config-illume-shr_git.bb
-index 2f38545..522f7cb 100644
---- a/recipes/shr/e-wm-config-illume-shr_git.bb
-+++ b/recipes/shr/e-wm-config-illume-shr_git.bb
-@@ -3,7 +3,7 @@ SECTION = "e/utils"
- DEPENDS = "eet"
- LICENSE = "MIT BSD"
- SRCREV = "285e2f0a92fc47d9a739c5a1a936124b6e6fa819"
--PV = "1.2+gitr${SRCREV}"
-+PV = "1.2+gitr${SRCPV}"
- 
- inherit e
- 
-diff --git a/recipes/shr/e-wm-config-illume2-shr_git.bb b/recipes/shr/e-wm-config-illume2-shr_git.bb
-index bc9a3f7..7f978eb 100644
---- a/recipes/shr/e-wm-config-illume2-shr_git.bb
-+++ b/recipes/shr/e-wm-config-illume2-shr_git.bb
-@@ -4,7 +4,7 @@ DEPENDS = "eet"
- LICENSE = "MIT BSD"
- RDEPENDS = "shr-e-gadgets"
- SRCREV = "1b6bd24e828455f56c26b2f5cbbf2d16838cace8"
--PV = "1.2+gitr${SRCREV}"
-+PV = "1.2+gitr${SRCPV}"
- 
- inherit e
- 
-diff --git a/recipes/shr/e-wm-menu-shr_git.bb b/recipes/shr/e-wm-menu-shr_git.bb
-index 2924557..d6232ac 100644
---- a/recipes/shr/e-wm-menu-shr_git.bb
-+++ b/recipes/shr/e-wm-menu-shr_git.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "illume SHR applications.menu config"
- SECTION = "e/utils"
- LICENSE = "MIT BSD"
- SRCREV = "1cc80e26a4558dfc2268b349d9a1f468e515bcfb"
--PV = "1.1-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "1.1-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "r1"
- 
- RCONFLICTS_${PN} = "e-wm-menu"
-diff --git a/recipes/shr/e-wm-sysactions-shr_git.bb b/recipes/shr/e-wm-sysactions-shr_git.bb
-index 38d01a5..075d02b 100644
---- a/recipes/shr/e-wm-sysactions-shr_git.bb
-+++ b/recipes/shr/e-wm-sysactions-shr_git.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "illume SHR sysactions config"
- SECTION = "e/utils"
- LICENSE = "MIT BSD"
- SRCREV = "bbcec18f0ebd47e4f6eea88b9b774edf7400e752"
--PV = "1.1-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "1.1-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "r4"
- 
- RPROVIDES_${PN} = "e-wm-sysactions"
-diff --git a/recipes/shr/e-wm-theme-illume-gry_git.bb b/recipes/shr/e-wm-theme-illume-gry_git.bb
-index 16f3482..3d5a5fd 100644
---- a/recipes/shr/e-wm-theme-illume-gry_git.bb
-+++ b/recipes/shr/e-wm-theme-illume-gry_git.bb
-@@ -7,7 +7,7 @@ RRECOMMENDS = "elementary-theme-gry"
- LICENCE = "unknown"
- 
- SRCREV = "a0a974b1e1150aefdf29e8f0ac471a2a60e62532"
--PV = "0.3-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "0.3-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "r1"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/e-wm-theme-illume-neo_git.bb b/recipes/shr/e-wm-theme-illume-neo_git.bb
-index ca1b3ab..43705c8 100644
---- a/recipes/shr/e-wm-theme-illume-neo_git.bb
-+++ b/recipes/shr/e-wm-theme-illume-neo_git.bb
-@@ -8,7 +8,7 @@ RSUGGESTS = "elementary-theme-neo gtk-theme-neo gpe-theme-neo icon-theme-neo"
- LICENCE = "unknown"
- 
- SRCREV = "820f4d41531ad6f790615b6a7312a60e30e99fdc"
--PV = "0.1-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "0.1-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "r3"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/e-wm-theme-illume-niebiee_git.bb b/recipes/shr/e-wm-theme-illume-niebiee_git.bb
-index d91aa89..3695c01 100644
---- a/recipes/shr/e-wm-theme-illume-niebiee_git.bb
-+++ b/recipes/shr/e-wm-theme-illume-niebiee_git.bb
-@@ -3,7 +3,7 @@ SECTION = "e/utils"
- DEPENDS = "edje-native"
- LICENSE = "MIT BSD"
- SRCREV = "1cc80e26a4558dfc2268b349d9a1f468e515bcfb"
--PV = "0.1-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "0.1-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "r0"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/e-wm-theme-illume-shr_git.bb b/recipes/shr/e-wm-theme-illume-shr_git.bb
-index 491626c..b6354d5 100644
---- a/recipes/shr/e-wm-theme-illume-shr_git.bb
-+++ b/recipes/shr/e-wm-theme-illume-shr_git.bb
-@@ -3,7 +3,7 @@ SECTION = "e/utils"
- DEPENDS = "edje-native"
- LICENSE = "MIT BSD"
- SRCREV = "1cc80e26a4558dfc2268b349d9a1f468e515bcfb"
--PV = "1.1-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "1.1-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "r6"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/e-wm-theme-illume-sixteen_git.bb b/recipes/shr/e-wm-theme-illume-sixteen_git.bb
-index bdce640..5c06d5c 100644
---- a/recipes/shr/e-wm-theme-illume-sixteen_git.bb
-+++ b/recipes/shr/e-wm-theme-illume-sixteen_git.bb
-@@ -3,7 +3,7 @@ SECTION = "e/utils"
- DEPENDS = "edje-native"
- LICENSE = "MIT BSD"
- SRCREV = "1cc80e26a4558dfc2268b349d9a1f468e515bcfb"
--PV = "0.1-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "0.1-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "r0"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/elementary-theme-gry_git.bb b/recipes/shr/elementary-theme-gry_git.bb
-index 5721a76..8b4ed4d 100644
---- a/recipes/shr/elementary-theme-gry_git.bb
-+++ b/recipes/shr/elementary-theme-gry_git.bb
-@@ -7,7 +7,7 @@ RRECOMMENDS = "e-wm-theme-illume-gry"
- LICENSE = "unknown"
- 
- SRCREV = "2b62d1c9b02da047071105a7b5695acd6c6dbcca"
--PV = "0.8-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "0.8-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "r1"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master \
-diff --git a/recipes/shr/elementary-theme-neo_git.bb b/recipes/shr/elementary-theme-neo_git.bb
-index ff31044..a7080d4 100644
---- a/recipes/shr/elementary-theme-neo_git.bb
-+++ b/recipes/shr/elementary-theme-neo_git.bb
-@@ -7,7 +7,7 @@ RSUGGESTS = "elementary-theme-neo e-wm-theme-illume-neo gtk-theme-neo gpe-theme-
- LICENSE = "unknown"
- 
- SRCREV = "fb377425e69ce1fc13f5094801b96836203e8154"
--PV = "0.5-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "0.5-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "r1"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master \
-diff --git a/recipes/shr/elementary-theme-niebiee_git.bb b/recipes/shr/elementary-theme-niebiee_git.bb
-index 6e9bae3..f744893 100644
---- a/recipes/shr/elementary-theme-niebiee_git.bb
-+++ b/recipes/shr/elementary-theme-niebiee_git.bb
-@@ -3,7 +3,7 @@ SECTION = "e/utils"
- DEPENDS = "edje-native"
- LICENSE = "MIT BSD"
- SRCREV = "2ac643cc273d144bb731a8cbb8ec6b3615de43a0"
--PV = "0.1-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "0.1-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "r0"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/elementary-theme-o2_git.bb b/recipes/shr/elementary-theme-o2_git.bb
-index 45e37e6..54a7f81 100644
---- a/recipes/shr/elementary-theme-o2_git.bb
-+++ b/recipes/shr/elementary-theme-o2_git.bb
-@@ -7,7 +7,7 @@ RSUGGESTS = "phoneui-shr-theme-o2"
- LICENSE = "unknown"
- 
- SRCREV = "b5eb3134850c277ad8ae1a960b03ff4a509278a8"
--PV = "0.1-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "0.1-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "r0"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master \
-diff --git a/recipes/shr/elementary-theme-sixteen_git.bb b/recipes/shr/elementary-theme-sixteen_git.bb
-index 5c89d2e..abb2fa7 100644
---- a/recipes/shr/elementary-theme-sixteen_git.bb
-+++ b/recipes/shr/elementary-theme-sixteen_git.bb
-@@ -3,7 +3,7 @@ SECTION = "e/utils"
- DEPENDS = "edje-native"
- LICENSE = "MIT BSD"
- SRCREV = "2ac643cc273d144bb731a8cbb8ec6b3615de43a0"
--PV = "0.1-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "0.1-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "r2"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/frameworkd-config-shr_git.bb b/recipes/shr/frameworkd-config-shr_git.bb
-index 181bde3..f25e60d 100644
---- a/recipes/shr/frameworkd-config-shr_git.bb
-+++ b/recipes/shr/frameworkd-config-shr_git.bb
-@@ -9,7 +9,7 @@ SRCREV_pn-frameworkd-config-shr_FSO_REV ?= "f751f2724eea23d0ca050bdf2672f9011ae0
- SRCREV_pn-frameworkd-config-shr_SHR_REV ?= "cdf5b5f3d8f37d6d91e1eb8d9cf07d034291df87"
- 
- SRCREV_FORMAT = "FSO_REV-SHR_REV"
--PV = "0.9.5.9+gitr${SRCREV}"
-+PV = "0.9.5.9+gitr${SRCPV}"
- PR = "r8"
- 
- SRC_URI = "${FREESMARTPHONE_GIT}/framework.git;protocol=git;branch=master;name=FSO_REV \
-diff --git a/recipes/shr/gtk-theme-neo_git.bb b/recipes/shr/gtk-theme-neo_git.bb
-index 94f9b9f..d979e24 100644
---- a/recipes/shr/gtk-theme-neo_git.bb
-+++ b/recipes/shr/gtk-theme-neo_git.bb
-@@ -6,7 +6,7 @@ RSUGGESTS = "elementary-theme-neo e-wm-theme-illume-neo gpe-theme-neo icon-theme
- LICENSE = "unknown"
- 
- SRCREV = "f847105c5ef5d488a4bce0c0a85d572c3509d56f"
--PV = "0.2-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "0.2-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "r5"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/icon-theme-neo_git.bb b/recipes/shr/icon-theme-neo_git.bb
-index b989472..ff2bfb9 100644
---- a/recipes/shr/icon-theme-neo_git.bb
-+++ b/recipes/shr/icon-theme-neo_git.bb
-@@ -7,7 +7,7 @@ RSUGGESTS = "elementary-theme-neo e-wm-theme-illume-neo gtk-theme-neo gpe-theme-
- LICENSE = "unknown"
- 
- SRCREV = "f847105c5ef5d488a4bce0c0a85d572c3509d56f"
--PV = "0.2-${EFL_SRCREV}+gitr${SRCREV}"
-+PV = "0.2-${EFL_SRCREV}+gitr${SRCPV}"
- PR = "r3"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/libmodulo_git.bb b/recipes/shr/libmodulo_git.bb
-index 0386d40..49146da 100644
---- a/recipes/shr/libmodulo_git.bb
-+++ b/recipes/shr/libmodulo_git.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "Modulo is a lightweight component container that supports Inversion Of Control, also commonly called Dependency Injection"
- SECTION = "libs"
- SRCREV = "7d2f657d248bd86377e66c329aa6826459d406da"
--PV = "0.0.1+gitr${SRCREV}"
-+PV = "0.0.1+gitr${SRCPV}"
- PR = "r1"
- 
- inherit autotools autotools_stage pkgconfig vala
-diff --git a/recipes/shr/libphone-ui-shr_git.bb b/recipes/shr/libphone-ui-shr_git.bb
-index 8854ceb..d764a48 100644
---- a/recipes/shr/libphone-ui-shr_git.bb
-+++ b/recipes/shr/libphone-ui-shr_git.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "SHR default module for the Phone UI daemon"
- SECTION = "e/apps"
- DEPENDS += " dbus-glib libframeworkd-glib libphone-ui evas ecore edje edje-native elementary"
- SRCREV = "2106165a2be62053f9d0019d50813823a84b8421"
--PV = "0.0.0+gitr${SRCREV}"
-+PV = "0.0.0+gitr${SRCPV}"
- PR = "r5"
- 
- SRC_URI = "git://shr.bearstech.com/repo/libphone-ui-shr.git;protocol=http;branch=master"
-diff --git a/recipes/shr/libphone-ui_git.bb b/recipes/shr/libphone-ui_git.bb
-index ccc6808..20f1e05 100644
---- a/recipes/shr/libphone-ui_git.bb
-+++ b/recipes/shr/libphone-ui_git.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://shr-project.org/"
- LICENSE = "GPL"
- SECTION = "libs"
- SRCREV = "08ccc9710b1f33c93cc8f1c20be9c658ef5040dd"
--PV = "0.0.0+gitr${SRCREV}"
-+PV = "0.0.0+gitr${SRCPV}"
- PR = "r0"
- 
- DEPENDS="glib-2.0 dbus-glib libframeworkd-glib libphone-utils alsa-lib"
-diff --git a/recipes/shr/libphone-utils_git.bb b/recipes/shr/libphone-utils_git.bb
-index f842ccd..88d5d4b 100644
---- a/recipes/shr/libphone-utils_git.bb
-+++ b/recipes/shr/libphone-utils_git.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "phone-utils library"
- SECTION = "libs"
- SRCREV = "3eb7242866543a266bd43a048d05b1a674ce94cf"
--PV = "0.0.2+gitr${SRCREV}"
-+PV = "0.0.2+gitr${SRCPV}"
- PR = "r2"
- 
- DEPENDS="glib-2.0"
-diff --git a/recipes/shr/ologicd_git.bb b/recipes/shr/ologicd_git.bb
-index e38e405..aaf8620 100644
---- a/recipes/shr/ologicd_git.bb
-+++ b/recipes/shr/ologicd_git.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = ""
- SECTION = "libs"
- SRCREV = "4a32af91a9479ebd4d1d39057354ac9904d74cbb"
--PV = "0.0.1+gitr${SRCREV}"
-+PV = "0.0.1+gitr${SRCPV}"
- PR = "r0"
- 
- inherit autotools
-diff --git a/recipes/shr/phonefsod_git.bb b/recipes/shr/phonefsod_git.bb
-index 8b9a4b0..66cfd12 100644
---- a/recipes/shr/phonefsod_git.bb
-+++ b/recipes/shr/phonefsod_git.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPL"
- SECTION = "x11/applications"
- DEPENDS += " dbus-glib libframeworkd-glib sqlite3 shr-specs"
- SRCREV = "de3eab1df1682cb41abfd105bb6767fedfbbf7b4"
--PV = "0.0.0+gitr${SRCREV}"
-+PV = "0.0.0+gitr${SRCPV}"
- PR = "r4"
- 
- SRC_URI = "git://git.shr-project.org/repo/phonefsod.git;protocol=http;branch=master"
-diff --git a/recipes/shr/phoneui-apps_git.bb b/recipes/shr/phoneui-apps_git.bb
-index 7db24dc..bb7558f 100644
---- a/recipes/shr/phoneui-apps_git.bb
-+++ b/recipes/shr/phoneui-apps_git.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPL"
- SECTION = "x11/applications"
- DEPENDS += "dbus-glib"
- SRCREV = "d349e764400d7a4eaaa12f359d6c64b3ca55faaf"
--PV = "0.0.0+gitr${SRCREV}"
-+PV = "0.0.0+gitr${SRCPV}"
- PR = "r1"
- 
- inherit pkgconfig autotools
-diff --git a/recipes/shr/phoneui-shr-theme-neo_git.bb b/recipes/shr/phoneui-shr-theme-neo_git.bb
-index 7f67911..3efa82b 100644
---- a/recipes/shr/phoneui-shr-theme-neo_git.bb
-+++ b/recipes/shr/phoneui-shr-theme-neo_git.bb
-@@ -7,7 +7,7 @@ DEPENDS = "edje-native"
- RDEPENDS = "libphone-ui-shr"
- RSUGGESTS = "e-wm-theme-illume-neo gtk-theme-neo icon-theme-neo elementary-theme-neo"
- SRCREV = "df522dfc585fc0ad83e7164f451d15fb770c524b"
--PV = "0.1+gitr${SRCREV}"
-+PV = "0.1+gitr${SRCPV}"
- PR = "r0"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/phoneui-shr-theme-o2_git.bb b/recipes/shr/phoneui-shr-theme-o2_git.bb
-index 369c4a1..a30a795 100644
---- a/recipes/shr/phoneui-shr-theme-o2_git.bb
-+++ b/recipes/shr/phoneui-shr-theme-o2_git.bb
-@@ -7,7 +7,7 @@ DEPENDS = "edje-native"
- RDEPENDS = "libphone-ui-shr"
- RSUGGESTS = "elementary-theme-o2"
- SRCREV = "5093da3ca27bb50388ac3277d8685a38772d7f48"
--PV = "0.1+gitr${SRCREV}"
-+PV = "0.1+gitr${SRCPV}"
- PR = "r0"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/phoneuid_git.bb b/recipes/shr/phoneuid_git.bb
-index 1ecf077..e188f30 100644
---- a/recipes/shr/phoneuid_git.bb
-+++ b/recipes/shr/phoneuid_git.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPL"
- SECTION = "x11/applications"
- DEPENDS += " dbus-glib libframeworkd-glib libphone-ui sqlite3 shr-specs"
- SRCREV = "30e063783b4b3fe5a411e7739d76dc85129452aa"
--PV = "0.0.0+gitr${SRCREV}"
-+PV = "0.0.0+gitr${SRCPV}"
- PR = "r6"
- 
- RREPLACES_${PN} = "shr-today"
-diff --git a/recipes/shr/shr-config_git.bb b/recipes/shr/shr-config_git.bb
-index fd78695..08434ff 100644
---- a/recipes/shr/shr-config_git.bb
-+++ b/recipes/shr/shr-config_git.bb
-@@ -5,7 +5,7 @@ LICENSE  = "GPLv2"
- DEPENDS = "vala-native elementary libeflvala"
- SECTION = "x11/application"
- SRCREV = "37dd7ac950e2bfd438801faf34c29fccfdbbaccf"
--PV = "0.0.2+gitr${SRCREV}"
-+PV = "0.0.2+gitr${SRCPV}"
- PR = "r5"
- 
- EXTRA_OECONF="--enable-vapidir=${STAGING_DATADIR}/vala/vapi"
-diff --git a/recipes/shr/shr-e-gadgets_git.bb b/recipes/shr/shr-e-gadgets_git.bb
-index acef09b..f5b3675 100644
---- a/recipes/shr/shr-e-gadgets_git.bb
-+++ b/recipes/shr/shr-e-gadgets_git.bb
-@@ -6,7 +6,7 @@ RDEPENDS = "e-wm"
- SECTION = "x11/application"
- 
- SRCREV = "c23dda5f81ed3c6d785617696fb009adb5594a55"
--PV = "0.0.0+gitr${SRCREV}"
-+PV = "0.0.0+gitr${SRCPV}"
- 
- inherit autotools
- 
-diff --git a/recipes/shr/shr-installer_git.bb b/recipes/shr/shr-installer_git.bb
-index 2b90847..8823cba 100644
---- a/recipes/shr/shr-installer_git.bb
-+++ b/recipes/shr/shr-installer_git.bb
-@@ -6,7 +6,7 @@ RDEPENDS = "python-elementary python-dbus python-core python-edbus packagekit"
- SECTION = "x11/application"
- 
- SRCREV = "8608816ea1a1ac14b6e9faaa3685dd2b6450e889"
--PV = "0.0.2+gitr${SRCREV}"
-+PV = "0.0.2+gitr${SRCPV}"
- PR = "r0"
- 
- inherit setuptools
-diff --git a/recipes/shr/shr-settings_git.bb b/recipes/shr/shr-settings_git.bb
-index 507be0f..02cc18f 100644
---- a/recipes/shr/shr-settings_git.bb
-+++ b/recipes/shr/shr-settings_git.bb
-@@ -6,7 +6,7 @@ RDEPENDS = "python-elementary python-dbus python-codecs python-shell python-pyrt
- SECTION = "x11/application"
- SRCREV = "b6aed65934cf047f1abd3d8f630d87f900422c38"
- PE = "1"
--PV = "0.1.1+gitr${SRCREV}"
-+PV = "0.1.1+gitr${SRCPV}"
- PR = "r9"
- 
- inherit setuptools
-diff --git a/recipes/shr/shr-specs_git.bb b/recipes/shr/shr-specs_git.bb
-index 9546552..d257b26 100644
---- a/recipes/shr/shr-specs_git.bb
-+++ b/recipes/shr/shr-specs_git.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://shr-project.org/"
- LICENSE = "BSD"
- SECTION = "devel/specifications"
- SRCREV = "d8f0dc85f1a7a6c0c6d24755f3770a55229621ae"
--PV = "0.0.0+gitr${SRCREV}"
-+PV = "0.0.0+gitr${SRCPV}"
- PR = "r0"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-specs.git;protocol=http;branch=master"
-diff --git a/recipes/shr/shr-splash-theme-dontpanic_git.bb b/recipes/shr/shr-splash-theme-dontpanic_git.bb
-index bc7f072..ee26fb2 100644
---- a/recipes/shr/shr-splash-theme-dontpanic_git.bb
-+++ b/recipes/shr/shr-splash-theme-dontpanic_git.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "SHR splash screen - DON'T PANIC theme"
- SECTION = "x11/data"
- LICENSE = "MIT BSD"
- SRCREV = "1cc80e26a4558dfc2268b349d9a1f468e515bcfb"
--PV = "1.2+gitr${SRCREV}"
-+PV = "1.2+gitr${SRCPV}"
- PR = "r6"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/shr-splash-theme-handy_git.bb b/recipes/shr/shr-splash-theme-handy_git.bb
-index ac72e8c..170a2bd 100644
---- a/recipes/shr/shr-splash-theme-handy_git.bb
-+++ b/recipes/shr/shr-splash-theme-handy_git.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "SHR splash screen - handy theme"
- SECTION = "x11/data"
- LICENSE = "MIT BSD"
- SRCREV = "1cc80e26a4558dfc2268b349d9a1f468e515bcfb"
--PV = "1.2+gitr${SRCREV}"
-+PV = "1.2+gitr${SRCPV}"
- PR = "r3"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/shr-splash-theme-logo_git.bb b/recipes/shr/shr-splash-theme-logo_git.bb
-index da645fe..6d838b4 100644
---- a/recipes/shr/shr-splash-theme-logo_git.bb
-+++ b/recipes/shr/shr-splash-theme-logo_git.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "SHR splash screen - SHR logo theme"
- SECTION = "x11/data"
- LICENSE = "MIT BSD"
- SRCREV = "1cc80e26a4558dfc2268b349d9a1f468e515bcfb"
--PV = "0.1+gitr${SRCREV}"
-+PV = "0.1+gitr${SRCPV}"
- PR = "r1"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/shr-splash-theme-niebiee_git.bb b/recipes/shr/shr-splash-theme-niebiee_git.bb
-index 100d9ea..0a4f266 100644
---- a/recipes/shr/shr-splash-theme-niebiee_git.bb
-+++ b/recipes/shr/shr-splash-theme-niebiee_git.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "SHR splash screen - extremely blue Niebiee theme"
- SECTION = "x11/data"
- LICENSE = "MIT BSD"
- SRCREV = "1cc80e26a4558dfc2268b349d9a1f468e515bcfb"
--PV = "1.2+gitr${SRCREV}"
-+PV = "1.2+gitr${SRCPV}"
- PR = "r0"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/shr-splash-theme-simple_git.bb b/recipes/shr/shr-splash-theme-simple_git.bb
-index 5c18e43..f873a30 100644
---- a/recipes/shr/shr-splash-theme-simple_git.bb
-+++ b/recipes/shr/shr-splash-theme-simple_git.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "SHR splash screen - simple SHR theme"
- SECTION = "x11/data"
- LICENSE = "MIT BSD"
- SRCREV = "1cc80e26a4558dfc2268b349d9a1f468e515bcfb"
--PV = "1.2+gitr${SRCREV}"
-+PV = "1.2+gitr${SRCPV}"
- PR = "r6"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/shr-splash-theme-tux_git.bb b/recipes/shr/shr-splash-theme-tux_git.bb
-index 05d5baa..b7c513d 100644
---- a/recipes/shr/shr-splash-theme-tux_git.bb
-+++ b/recipes/shr/shr-splash-theme-tux_git.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "SHR splash screen - SHR Tux theme"
- SECTION = "x11/data"
- LICENSE = "MIT BSD"
- SRCREV = "1cc80e26a4558dfc2268b349d9a1f468e515bcfb"
--PV = "0.1+gitr${SRCREV}"
-+PV = "0.1+gitr${SRCPV}"
- PR = "r0"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/shr-splash_git.bb b/recipes/shr/shr-splash_git.bb
-index 6d0e92f..7686dc4 100644
---- a/recipes/shr/shr-splash_git.bb
-+++ b/recipes/shr/shr-splash_git.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "SHR splash screen"
- SECTION = "x11/data"
- LICENSE = "MIT BSD"
- SRCREV = "0375bf2b66a053dd490774004c56b5d949f02ac8"
--PV = "1.2+gitr${SRCREV}"
-+PV = "1.2+gitr${SRCPV}"
- PR = "r5"
- DEPENDS = "virtual/shr-splash-theme"
- RRECOMMENDS = "virtual/shr-splash-theme"
-diff --git a/recipes/shr/shr-theme-gtk-e17lookalike_git.bb b/recipes/shr/shr-theme-gtk-e17lookalike_git.bb
-index efd8857..7004262 100644
---- a/recipes/shr/shr-theme-gtk-e17lookalike_git.bb
-+++ b/recipes/shr/shr-theme-gtk-e17lookalike_git.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION = "A gtk theme that looks like e17"
- LICENSE = "MIT BSD"
- SRCREV = "1cc80e26a4558dfc2268b349d9a1f468e515bcfb"
--PV = "0.1.1+gitr${SRCREV}"
-+PV = "0.1.1+gitr${SRCPV}"
- PR = "r5"
- 
- SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
-diff --git a/recipes/shr/shr-theme_git.bb b/recipes/shr/shr-theme_git.bb
-index 16e5444..52a9b3c 100644
---- a/recipes/shr/shr-theme_git.bb
-+++ b/recipes/shr/shr-theme_git.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPL"
- SECTION = "x11/data"
- 
- SRCREV = "730da87ad75c814c16c856ca138605d985b6efdb"
--PV = "0.0.2+gitr${SRCREV}"
-+PV = "0.0.2+gitr${SRCPV}"
- PR = "r2"
- 
- inherit autotools
-diff --git a/recipes/shr/shr-today_git.bb b/recipes/shr/shr-today_git.bb
-index cd8ccd6..439dd77 100644
---- a/recipes/shr/shr-today_git.bb
-+++ b/recipes/shr/shr-today_git.bb
-@@ -6,7 +6,7 @@ RDEPENDS = "python-edje python-dbus python-edbus python-ecore"
- SECTION = "x11/applications"
- 
- SRCREV = "7b69649a9df0e85f0c0f7985fd1d93543c3b11e2"
--PV = "0.0.1+gitr${SRCREV}"
-+PV = "0.0.1+gitr${SRCPV}"
- PR = "r2"
  
  inherit distutils
-diff --git a/recipes/shr/shr-wizard_git.bb b/recipes/shr/shr-wizard_git.bb
-index 7554fe3..aed5820 100644
---- a/recipes/shr/shr-wizard_git.bb
-+++ b/recipes/shr/shr-wizard_git.bb
-@@ -5,7 +5,7 @@ DEPENDS = "e-wm"
- RDEPENDS = "python-elementary shr-settings python-phoneutils e-wm python-dbus python-edbus"
- SECTION = "x11/application"
- SRCREV = "24450cba257e7057045ad576530f158a03bd0f8b"
--PV = "0.0.0+gitr${SRCREV}"
-+PV = "0.0.0+gitr${SRCPV}"
+diff --git a/recipes/bt-configure/bt-configure_git.bb b/recipes/bt-configure/bt-configure_git.bb
+index 74ef693..d2f056b 100644
+--- a/recipes/bt-configure/bt-configure_git.bb
++++ b/recipes/bt-configure/bt-configure_git.bb
+@@ -5,7 +5,7 @@ LICENSE = "GPL"
+ RDEPENDS = "python python-pygtk bluez4"
+ 
+ SRCREV = "9654c88ff74bca89cf747937cbec67421d2f1cbc"
+-PV = "1.0.0+gitr${SRCREV}"
++PV = "1.0.0+gitr${SRCPV}"
  PR = "r1"
  
- inherit autotools
+ ARCH_bt-configure = "all"
+diff --git a/recipes/dri/glamo-dri-tests_git.bb b/recipes/dri/glamo-dri-tests_git.bb
+index 5f46f44..1f9540b 100644
+--- a/recipes/dri/glamo-dri-tests_git.bb
++++ b/recipes/dri/glamo-dri-tests_git.bb
+@@ -1,7 +1,7 @@
+ DEPENDS = "libdrm virtual/libx11 libxext"
+ 
+ SRCREV = "080b8db3d9dbfae38ebb00439887b5535ab1d380"
+-PV = "1.0.0+gitr${SRCREV}"
++PV = "1.0.0+gitr${SRCPV}"
+ 
+ SRC_URI = "git://git.bitwiz.org.uk/glamo-dri-tests.git;protocol=git;branch=master"
+ 
+diff --git a/recipes/dri/libdrm_git.bb b/recipes/dri/libdrm_git.bb
+index b06ebe7..3f81cdd 100644
+--- a/recipes/dri/libdrm_git.bb
++++ b/recipes/dri/libdrm_git.bb
+@@ -7,7 +7,7 @@ PROVIDES = "drm"
+ DEPENDS = "libpthread-stubs virtual/kernel"
+ 
+ PE = "1"
+-PV = "2.4.18+gitr${SRCREV}"
++PV = "2.4.18+gitr${SRCPV}"
+ PR = "r0"
+ 
+ SRCREV = "a5c8f55397377994ceeb76ed0ff148ff89eb3a1b"
+diff --git a/recipes/e17/illume-keyboards-shr_git.bb b/recipes/e17/illume-keyboards-shr_git.bb
+index 29273d5..90aab16 100644
+--- a/recipes/e17/illume-keyboards-shr_git.bb
++++ b/recipes/e17/illume-keyboards-shr_git.bb
+@@ -4,7 +4,7 @@ SRC_URI = "git://git.shr-project.org/repo/illume-keyboards.git;protocol=http;bra
+ S = "${WORKDIR}/git"
+ 
+ SRCREV = "9bd2c8f060c48eee3ab247838d8ecf2cf7082472"
+-PV = "0.0+gitr${SRCREV}"
++PV = "0.0+gitr${SRCPV}"
+ PE = "1"
+ PR = "r3"
+ 
+diff --git a/recipes/efl1/e-wm-illume-dict-pl_git.bb b/recipes/efl1/e-wm-illume-dict-pl_git.bb
+index 8a98b1c..736e721 100644
+--- a/recipes/efl1/e-wm-illume-dict-pl_git.bb
++++ b/recipes/efl1/e-wm-illume-dict-pl_git.bb
+@@ -1,7 +1,8 @@
+ DESCRIPTION = "Polish dictionary for Illume keyboard"
+ SECTION = "x11/data"
+ SRCREV = "1cc80e26a4558dfc2268b349d9a1f468e515bcfb"
+-PV = "1.0-gitr${SRCREV}"
++PV = "1.0+gitr${SRCPV}"
++PE = "1"
+ PR = "r0"
+ 
+ SRC_URI = "git://git.shr-project.org/repo/shr-themes.git;protocol=http;branch=master"
+diff --git a/recipes/efl1/libeflvala_svn.bb b/recipes/efl1/libeflvala_svn.bb
+index 56f8773..9a88054 100644
+--- a/recipes/efl1/libeflvala_svn.bb
++++ b/recipes/efl1/libeflvala_svn.bb
+@@ -5,6 +5,7 @@ SECTION = "devel"
+ DEPENDS = "vala-native glib-2.0 dbus dbus-glib eina eet evas ecore edje elementary"
+ PV = "0.5.0+svnr${SRCPV}"
+ PR = "r0"
++PE = "1"
+ SRCREV = "${EFL_SRCREV}"
+ 
+ SRC_URI = "svn://svn.enlightenment.org/svn/e/trunk/BINDINGS;module=vala;proto=http"
+diff --git a/recipes/evopedia/evopedia_git.bb b/recipes/evopedia/evopedia_git.bb
+index eaad256..4e26194 100644
+--- a/recipes/evopedia/evopedia_git.bb
++++ b/recipes/evopedia/evopedia_git.bb
+@@ -6,7 +6,7 @@ LICENSE = "GPL"
+ RDEPENDS = "python python-xml python-shell python-netclient python-mime \
+             python-netserver python-io python-compression"
+ RRECOMMENDS = "midori"
+-PV = "0.3.0-rc3+gitr${SRCREV}"
++PV = "0.3.0-rc3+gitr${SRCPV}"
+ PR = "r0"
+ 
+ SRC_URI = "git://github.com/crei/evopedia.git;protocol=http;branch=master"
+diff --git a/recipes/ffalarms/ffalarms_git.bb b/recipes/ffalarms/ffalarms_git.bb
+index aef3211..f9d05b1 100644
+--- a/recipes/ffalarms/ffalarms_git.bb
++++ b/recipes/ffalarms/ffalarms_git.bb
+@@ -7,7 +7,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "elementary libeflvala libical"
+ RDEPENDS = "atd alsa-utils-amixer ttf-dejavu-sans libical"
+ RSUGGESTS = "mplayer alsa-utils-aplay frameworkd"
+-PV = "0.4+gitr${SRCREV}"
++PV = "0.4+gitr${SRCPV}"
+ PR = "r1"
+ 
+ SRC_URI = "git://git.shr-project.org/repo/ffalarms.git;protocol=http;branch=master"
+diff --git a/recipes/litephone/litephone_git.bb b/recipes/litephone/litephone_git.bb
+index e209a1c..4fc5441 100644
+--- a/recipes/litephone/litephone_git.bb
++++ b/recipes/litephone/litephone_git.bb
+@@ -1,7 +1,7 @@
+ require litephone.inc
+ 
+ SRCREV = "4c9f16d9acc6cd18fc3f647b7e4f44a2d3bdd7b6"
+-PV = "0.1+gitr${SRCREV}"
++PV = "0.1+gitr${SRCPV}"
+ PR = "${INC_PR}.0"
+ 
+ SRC_URI = "git://git.senfdax.de/git/litephone;protocol=http \
+diff --git a/recipes/mplayer/mplayer_git.bb b/recipes/mplayer/mplayer_git.bb
+index c769610..f766e04 100644
+--- a/recipes/mplayer/mplayer_git.bb
++++ b/recipes/mplayer/mplayer_git.bb
+@@ -34,7 +34,7 @@ ARM_INSTRUCTION_SET = "ARM"
+ RCONFLICTS_${PN} = "mplayer-atty"
+ RREPLACES_${PN} = "mplayer-atty"
+ 
+-PV = "0.0+1.0rc4+gitr${SRCREV}"
++PV = "0.0+1.0rc4+gitr${SRCPV}"
+ PR = "r0"
+ DEFAULT_PREFERENCE = "-1"
+ DEFAULT_PREFERENCE_shr = "2"
+diff --git a/recipes/openmoko-3rdparty/advancedcaching_git.bb b/recipes/openmoko-3rdparty/advancedcaching_git.bb
+index 73da336..f8f2fc2 100644
+--- a/recipes/openmoko-3rdparty/advancedcaching_git.bb
++++ b/recipes/openmoko-3rdparty/advancedcaching_git.bb
+@@ -5,7 +5,7 @@ LICENSE = "GPL"
+ HOMEPAGE = "http://www.opkg.org/package_268.html"
+ RDEPENDS = "python-pygtk python-html python-image python-netclient python-misc python-sqlite3 python-mime python-json"
+ SRCREV = "9c3661f5573d2dd712437f1590070153d12e4c02"
+-PV = "0.1.2+gitr${SRCREV}"
++PV = "0.1.2+gitr${SRCPV}"
+ 
+ SRC_URI = "git://github.com/webhamster/advancedcaching.git;protocol=git;branch=master"
+ 
+diff --git a/recipes/openmoko-3rdparty/calc_git.bb b/recipes/openmoko-3rdparty/calc_git.bb
+index 8e5e2af..9a21a2c 100644
+--- a/recipes/openmoko-3rdparty/calc_git.bb
++++ b/recipes/openmoko-3rdparty/calc_git.bb
+@@ -6,7 +6,7 @@ LICENSE  = "MIT"
+ RDEPENDS = "python-elementary python python-edbus"
+ SECTION = "x11/application"
+ SRCREV = "cff7c833d4fce0d39de0812bfc9ed9e0eb8fac09"
+-PV = "0.0.1+gitr${SRCREV}"
++PV = "0.0.1+gitr${SRCPV}"
+ PR = "r1"
+ 
+ DEFAULT_PREFERENCE = "-1"
+diff --git a/recipes/openmoko-3rdparty/jefliks_git.bb b/recipes/openmoko-3rdparty/jefliks_git.bb
+index 87f0b34..363f20d 100644
+--- a/recipes/openmoko-3rdparty/jefliks_git.bb
++++ b/recipes/openmoko-3rdparty/jefliks_git.bb
+@@ -5,7 +5,7 @@ LICENSE = "GPL"
+ DEPENDS = "edje-native elementary iksemel gnutls eet evas ecore eina"
+ HOMEPAGE = "http://jefliks.sourceforge.net/"
+ AUTHOR = "Phoenix Kayo <kayo.k11.4@gmail.com>"
+-PV = "0.0.2b+gitr${SRCREV}"
++PV = "0.0.2b+gitr${SRCPV}"
+ PR = "r0"
+ 
+ inherit autotools pkgconfig
+diff --git a/recipes/openmoko-projects/om-locations_git.bb b/recipes/openmoko-projects/om-locations_git.bb
+index 9d06423..fd009d6 100644
+--- a/recipes/openmoko-projects/om-locations_git.bb
++++ b/recipes/openmoko-projects/om-locations_git.bb
+@@ -5,7 +5,8 @@ LICENSE = "GPL"
+ DEPENDS = "eet evas edje ecore edbus etk"
+ RDEPENDS_${PN} = "diversity-daemon"
+ SRCREV = "942e88a1b689ffe3f11a2d982cce389cc965b2ec"
+-PV = "0.2+gitr${SRCREV}"
++PV = "0.2+gitr${SRCPV}"
++PE = "1"
+ PR = "r1.04"
+ 
+ SRC_URI = "git://git.openmoko.org/git/om-locations.git;protocol=git"
+diff --git a/recipes/openmoko-projects/paroli_git.bb b/recipes/openmoko-projects/paroli_git.bb
+index 8b071f7..251c258 100644
+--- a/recipes/openmoko-projects/paroli_git.bb
++++ b/recipes/openmoko-projects/paroli_git.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "Paroli"
+ SECTION = "x11"
+ LICENSE = "GPL"
+ SRCREV = "bb9fb1969acdfbaa48b55902675a6d8949014c6d"
+-PV = "0.2.1+gitr${SRCREV}"
++PV = "0.2.1+gitr${SRCPV}"
+ PE = "1"
+ PR = "r0"
+ 
+diff --git a/recipes/openmoko-projects/tichy_git.bb b/recipes/openmoko-projects/tichy_git.bb
+index 656b645..09d83e8 100644
+--- a/recipes/openmoko-projects/tichy_git.bb
++++ b/recipes/openmoko-projects/tichy_git.bb
+@@ -3,7 +3,8 @@ SECTION = "x11"
+ LICENSE = "GPL"
+ DEPENDS += "python-pygame virtual/libsdl libsdl-image python-dbus python-pygobject"                                   
+ SRCREV = "ab68d849502009cf3214df48ffa8075a10cc2177"
+-PV = "0.2+gitr${SRCREV}"
++PV = "0.2+gitr${SRCPV}"
++PE = "1"
+ PR = "r0"
+ 
+ SRC_URI = "git://git.openmoko.org/git/tichy.git;protocol=git"
+diff --git a/recipes/openmoocow/openmoocow_git.bb b/recipes/openmoocow/openmoocow_git.bb
+index 65497fe..79ec2c8 100644
+--- a/recipes/openmoocow/openmoocow_git.bb
++++ b/recipes/openmoocow/openmoocow_git.bb
+@@ -4,7 +4,7 @@ AUTHOR = "Thomas White"
+ LICENSE = "GPLv3"
+ SECTION = "applications/games"
+ SRCREV = "39648419825cddfea1cb1321e552a12b71fede14"
+-PV = "0.0.3+gitr${SRCREV}"
++PV = "0.0.3+gitr${SRCPV}"
+ PR = "r1"
+ 
+ SRC_URI = "git://git.bitwiz.org.uk/openmoocow.git;protocol=git;branch=master"
+diff --git a/recipes/stopwatch/stopwatch_git.bb b/recipes/stopwatch/stopwatch_git.bb
+index 22b69f9..a74e631 100644
+--- a/recipes/stopwatch/stopwatch_git.bb
++++ b/recipes/stopwatch/stopwatch_git.bb
+@@ -6,7 +6,7 @@ HOMEPAGE = "http://git.senfdax.de"
+ LICENSE = "GPL QPL"
+ DEFAULT_PREFERRENCE = "-1"
+ SRCREV = "89644b91e02151fc72989755f20c1ffb144ef5e2"
+-PV = "1.3.1+gitr${SRCREV}"
++PV = "1.3.1+gitr${SRCPV}"
+ PR = "r0"
+ 
+ inherit qt4x11
+diff --git a/recipes/webkit/webkit-efl_git.bb b/recipes/webkit/webkit-efl_git.bb
+index 8f43396..3f437ca 100644
+--- a/recipes/webkit/webkit-efl_git.bb
++++ b/recipes/webkit/webkit-efl_git.bb
+@@ -5,7 +5,7 @@ DEPENDS = "icu flex gst-plugins-base gstreamer jpeg libpng libxml2 pango \
+            sqlite3 libxslt gperf-native libxt"
+ 
+ SRCREV = "3a5ee77664c898ed51a2b2d5759822f8c0a06472"
+-PV = "1.1.11+gitr${SRCREV}"
++PV = "1.1.11+gitr${SRCPV}"
+ PR = "r5"
+ 
+ SRC_URI = "git://gitorious.org/webkit-efl/webkit-efl.git;protocol=git;branch=master \
+diff --git a/recipes/xinput-calibrator/xinput-calibrator_git.bb b/recipes/xinput-calibrator/xinput-calibrator_git.bb
+index 8d3d4c4..13c6a46 100644
+--- a/recipes/xinput-calibrator/xinput-calibrator_git.bb
++++ b/recipes/xinput-calibrator/xinput-calibrator_git.bb
+@@ -1,6 +1,6 @@
+ require xinput-calibrator.inc
+ 
+-PV = "0.6.0+gitr${SRCREV}"
++PV = "0.6.0+gitr${SRCPV}"
+ 
+ SRC_URI = "git://github.com/tias/xinput_calibrator.git;protocol=git;branch=misclick"
+ 
+diff --git a/recipes/xorg-driver/xf86-video-glamo_git.bb b/recipes/xorg-driver/xf86-video-glamo_git.bb
+index 19c7591..c889485 100644
+--- a/recipes/xorg-driver/xf86-video-glamo_git.bb
++++ b/recipes/xorg-driver/xf86-video-glamo_git.bb
+@@ -4,8 +4,8 @@ SRC_URI = "git://git.openmoko.org/git/xf86-video-glamo.git;protocol=git;branch=m
+ S = "${WORKDIR}/git"
+ 
+ SRCREV = "77b6d1b7363d3ff28f063ed92c9ed47194f70b20"
+-PV = "1.0.0+gitr${SRCREV}"
+-PE = "1"
++PV = "1.0.0+gitr${SRCPV}"
++PE = "2"
+ PR = "r4"
+ 
+ do_configure_prepend() {
+diff --git a/recipes/xorg-lib/libxcalibrate_git.bb b/recipes/xorg-lib/libxcalibrate_git.bb
+index 8412c09..01201ba 100644
+--- a/recipes/xorg-lib/libxcalibrate_git.bb
++++ b/recipes/xorg-lib/libxcalibrate_git.bb
+@@ -6,8 +6,8 @@ DEPENDS = "virtual/libx11 calibrateproto libxext"
+ 
+ SRCREV = "209d83af61ed38a002c8096377deac292b3e396c"
+ PR = "r1"
+-PV = "0.0+${PR}+gitr${SRCREV}"
+-PE = "2"
++PV = "0.0+${PR}+gitr${SRCPV}"
++PE = "3"
+ 
+ SRC_URI = "git://anongit.freedesktop.org/git/xorg/lib/libXCalibrate;protocol=git"
+ 
+diff --git a/recipes/xorg-lib/pixman_git.bb b/recipes/xorg-lib/pixman_git.bb
+index 70886ed..04b6892 100644
+--- a/recipes/xorg-lib/pixman_git.bb
++++ b/recipes/xorg-lib/pixman_git.bb
+@@ -1,7 +1,7 @@
+ require pixman.inc
+ PV = "0.17.13"
+ PR = "${INC_PR}.0"
+-PR_append = "+gitr${SRCREV}"
++PR_append = "+gitr${SRCPV}"
+ 
+ SRCREV = "69f1ec9a7827aeb522fcae99846237ef0f896e7b"
+  
+diff --git a/recipes/xorg-proto/calibrateproto_git.bb b/recipes/xorg-proto/calibrateproto_git.bb
+index d98198c..740c9e6 100644
+--- a/recipes/xorg-proto/calibrateproto_git.bb
++++ b/recipes/xorg-proto/calibrateproto_git.bb
+@@ -4,8 +4,8 @@ DESCRIPTION = "Touchscreen calibration protocol"
+ 
+ SRCREV = "1da6fd1e2c7a49648245c98481fabea8b9690a8c"
+ PR = "r0"
+-PV = "0.0+${PR}+gitr${SRCREV}"
+-PE = "2"
++PV = "0.0+${PR}+gitr${SRCPV}"
++PE = "3"
+ 
+ SRC_URI = "git://anongit.freedesktop.org/git/xorg/proto/calibrateproto;protocol=git"
+ S = "${WORKDIR}/git"
+diff --git a/recipes/xorg-xserver/xserver-kdrive-glamo_1.3.0.0+git.bb b/recipes/xorg-xserver/xserver-kdrive-glamo_1.3.0.0+git.bb
+index d717456..7631075 100644
+--- a/recipes/xorg-xserver/xserver-kdrive-glamo_1.3.0.0+git.bb
++++ b/recipes/xorg-xserver/xserver-kdrive-glamo_1.3.0.0+git.bb
+@@ -10,8 +10,8 @@ RDEPENDS_${PN} = "xserver-security-policy"
+ PROVIDES = "virtual/xserver"
+ 
+ SRCREV = "3f113f5f4dbaf14dee439eac8d510313fff3aafc"
+-PE = "1"
+-PV = "1.3.0.0+gitr${SRCREV}"
++PE = "2"
++PV = "1.3.0.0+gitr${SRCPV}"
+ PR = "r3"
+ 
+ COMPATIBLE_HOST = "arm.*-linux"
+diff --git a/recipes/xorg-xserver/xserver-xorg_git.bb b/recipes/xorg-xserver/xserver-xorg_git.bb
+index 47e797c..1cacc2f 100644
+--- a/recipes/xorg-xserver/xserver-xorg_git.bb
++++ b/recipes/xorg-xserver/xserver-xorg_git.bb
+@@ -4,7 +4,7 @@ DESCRIPTION = "the X.Org X server"
+ DEPENDS += "pixman libpciaccess openssl dri2proto glproto xorg-minimal-fonts font-util-native"
+ PV = "1.7.999"
+ PR = "${INC_PR}.0"
+-PR_append = "+gitr${SRCREV}"
++PR_append = "+gitr${SRCPV}"
+ PE = "2"
+ 
+ DEFAULT_PREFERENCE = "-1"
 -- 
 1.7.0.4
 
