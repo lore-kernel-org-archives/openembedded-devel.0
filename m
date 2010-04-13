@@ -1,46 +1,42 @@
-Received: from mail-ew0-f211.google.com ([209.85.219.211])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickael.chazaux@gmail.com>) id 1O1fTr-0008CA-39
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Apr 2010 14:44:39 +0200
-Received: by ewy3 with SMTP id 3so250005ewy.26
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O1fb1-0008S1-OI for openembedded-devel@lists.openembedded.org;
+	Tue, 13 Apr 2010 14:52:04 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O1fXg-0007dh-HV for openembedded-devel@lists.openembedded.org;
+	Tue, 13 Apr 2010 14:48:36 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Apr 2010 14:48:36 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Apr 2010 05:41:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:received:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=TsKJbYhYwSh9yOCMbKfixPgVXs+mqWpkpW+Mo42sPcQ=;
-	b=QMAZZPAyIlydKTOnwHCavlwzqaFPrtLe55gdctsAGXscqVyx+yy/mzCXBBTdHCTte7
-	WUA/df2NmKTfaK6RjfFVjghgVW6vZe8UPJEgwn5gOpscLE/XNXZnjLYerfTzFVsy9Beh
-	eErAX0871BM/Fyj68tZXrHS30sh0QDUvxGOJU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Y3RR7b8AHHO/djTERjjhgIojvS89nkwEkx92vGh6f3IPNZpb5zoKgj3KMmEhhHwLK7
-	DhMZvxQHHgrzIm6g8mOPsfQh0dXQaA5Kh1nXmIor8HDuqREU2HsgaFjNFnHM8yTXsyWb
-	R7o03j83w13jgidjyLaFh+IU0pg722Ycyuk00=
-MIME-Version: 1.0
-Received: by 10.213.19.141 with HTTP; Tue, 13 Apr 2010 05:41:10 -0700 (PDT)
-In-Reply-To: <g2hd2a86f8e1004130509sf3133ec2hb730e20abf586cf@mail.gmail.com>
-References: <s2ud2a86f8e1004122027pf357420tc3cc7d0aea062740@mail.gmail.com>
-	<201004130929.43327.roman@khimov.ru>
-	<g2hd2a86f8e1004130509sf3133ec2hb730e20abf586cf@mail.gmail.com>
-Date: Tue, 13 Apr 2010 14:41:10 +0200
-Received: by 10.213.55.76 with SMTP id t12mr3299921ebg.3.1271162471084; Tue, 
-	13 Apr 2010 05:41:11 -0700 (PDT)
-Message-ID: <p2nbc36f8ed1004130541g42d4993eh41ec17dc46ca07ec@mail.gmail.com>
-From: Mickael Chazaux <mickael.chazaux@gmail.com>
+	Tue, 13 Apr 2010 14:48:36 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.211
-X-SA-Exim-Mail-From: mickael.chazaux@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 13 Apr 2010 14:48:28 +0200
+Message-ID: <hq1p6s$gnd$1@dough.gmane.org>
+References: <hq16p2$e9c$1@dough.gmane.org> <1271158854.15813.137.camel@rex>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100406 Shredder/3.0.5pre
+In-Reply-To: <1271158854.15813.137.camel@rex>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE failed at task 8045 of 8046
+Subject: Re: Python 2.6 for bitbake?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,30 +50,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Apr 2010 12:44:39 -0000
+X-List-Received-Date: Tue, 13 Apr 2010 12:52:04 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-2010/4/13 ttk rpink <ttkrpink@gmail.com>:
-> | + xargs opkg-cl -f /home/setup/stuff/tmp/staging/i686-linux/etc/opkg.co=
-nf
-> -o /home/setup/stuff/tmp/rootfs/beagleboard-demo-image -t
-> /home/setup/stuff/tmp/rootfs/beagleboard-demo-image-tmp -nodeps install
+On 13-04-10 13:40, Richard Purdie wrote:
+> On Tue, 2010-04-13 at 09:33 +0200, Koen Kooi wrote:
+>> I just noticed bitbake master is using python 2.6, which means I can't
+>> use it at work when the official linux is still ubuntu 8.04LTS :(
+>>
+>> Can we please keep bitbake working with 8.04LTS? I suspect not only TI
+>> is on the LTS bandwagon....
+> 
+> I thought we'd make the bits that were 2.6 optional? Which bits are
+> breaking and I assume you do have python 2.5 a least?
 
-I had a simuilar issue a few time ago. I reported it here :
-http://bugzilla.openembedded.org/show_bug.cgi?id=3D5397
+Ubuntu 8.04LTS has 2.5.2 and it could that I'm blaming the brokenness in
+master on python, but it's broken nevertheless....
+When I finish doing the build I'll send the error message (was something
+with "Exception as e:").
 
-Hope this helps,
+regards,
 
-Regards,
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Mickael Chazaux
+iD8DBQFLxGgcMkyGM64RGpERAkNQAKCcWroIjrMbjxRywD6aTtwBtPCBNgCfT5n4
+xtuqHWY2NHiIJNN4KlaRt0g=
+=SqMt
+-----END PGP SIGNATURE-----
 
-Adeneo Embedded - Adetel Group
-2, chemin du Ruisseau
-69134 ECULLY - FRANCE
-T=C3=A9l. : +33 (0)4 72 18 08 40 - Fax : +33 (0)4 72 18 08 41
 
 
