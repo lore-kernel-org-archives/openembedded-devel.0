@@ -1,41 +1,44 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from out2.smtp.messagingengine.com ([66.111.4.26])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1O1luh-0006Qm-VR
+	(envelope-from <vjensen@gmx.de>) id 1O1uoV-0004Yb-05
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Apr 2010 21:36:48 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1O1lrL-00078g-7C from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Apr 2010 12:33:19 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 13 Apr 2010 12:33:18 -0700
-Received: from 172.30.80.192 ([172.30.80.192]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Tue, 13 Apr 2010 19:33:18 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	13 Apr 2010 12:33:10 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Wed, 14 Apr 2010 07:07:00 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id BDB56EB0F9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Apr 2010 01:03:32 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Wed, 14 Apr 2010 01:03:32 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
+	s=smtpout; bh=n+v0Zv0u5hA6BUSkenhcY0kRvsM=;
+	b=l0eeIkIZsNVPT3iAyKter/GEQeL0fKF78SFNRGzZEEBdjZyS4ccpMJWVqsSvA79d/7lXFwOQlR1C61cstkUNUCGuc+xCJG/DmIrZh4DtSSHRKCrEBGAcF70uiVJXdI0vyl469M5zS3qpZCQr0hIIctVDfIb3UsEQDsn/lq5n1zc=
+X-Sasl-enc: lX4GNQdRsYKXy0xu4chYzneZxflr4pvarQDvpI2+hK8H 1271221412
+Received: from [192.168.1.34] (hnvr-4d07af8a.pool.mediaWays.net [77.7.175.138])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 14C897174
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Apr 2010 01:03:31 -0400 (EDT)
+Date: Wed, 14 Apr 2010 07:04:46 +0200 (CEST)
+From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hq16p2$e9c$1@dough.gmane.org>
-References: <hq16p2$e9c$1@dough.gmane.org>
-Organization: Mentor Graphics Corporation
-Date: Tue, 13 Apr 2010 12:33:10 -0700
-Message-ID: <1271187190.29304.193.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 13 Apr 2010 19:33:19.0000 (UTC)
-	FILETIME=[2BA36980:01CADB40]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+In-Reply-To: <alpine.LNX.2.00.1004131528550.17768@asterix.crazy-teaparty.dyndns.org>
+Message-ID: <alpine.LNX.2.00.1004140700480.10014@asterix.crazy-teaparty.dyndns.org>
+References: <alpine.LNX.2.00.1004131528550.17768@asterix.crazy-teaparty.dyndns.org>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 66.111.4.26
+X-SA-Exim-Mail-From: vjensen@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
+	SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Python 2.6 for bitbake?
+Subject: Re: [STABLE][PATCH] base.bbclass: add support for checksums in .bb files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,27 +52,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Apr 2010 19:36:49 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 14 Apr 2010 05:07:00 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
-On Tue, 2010-04-13 at 09:33 +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
-> Hi,
->=20
-> I just noticed bitbake master is using python 2.6, which means I can't
-> use it at work when the official linux is still ubuntu 8.04LTS :(
->=20
-> Can we please keep bitbake working with 8.04LTS? I suspect not only TI
-> is on the LTS bandwagon....
+On Tue, 13 Apr 2010, Vitus Jensen wrote:
 
-As a not quite here nor there point, RHEL5 is python 2.4.3 and that's
-another big IT dept official linux choice.
+> From: Phil Blundell <philb@gnu.org>
+>
+> Ported from .dev branch to allow easy sharing of recipes between
+> .dev and stable branches.
+...
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+BTW: I think the new format should be described somewhere in the wiki. 
+There are only pages about checksums.ini and an appended ";md5=xy" format.
+
+Vitus
+
+-- 
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
 
 
