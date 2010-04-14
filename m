@@ -1,27 +1,25 @@
 Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1O22am-0001SU-OQ
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1O22bW-0001Wj-Mh
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Apr 2010 15:25:21 +0200
+	Wed, 14 Apr 2010 15:26:07 +0200
 Received: from ensc-virt.intern.sigma-chemnitz.de
 	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.3/8.14.4) with ESMTP id o3EDLqMD003191
+	by mail.cvg.de (8.14.3/8.14.4) with ESMTP id o3EDMWFX003406
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Apr 2010 15:21:52 +0200
+	Wed, 14 Apr 2010 15:22:33 +0200
 Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.71) (envelope-from <ensc@sigma-chemnitz.de>) id 1O22XP-0006AE-Ml
+	4.71) (envelope-from <ensc@sigma-chemnitz.de>) id 1O22Y4-0006Ad-OJ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Apr 2010 15:21:51 +0200
+	Wed, 14 Apr 2010 15:22:32 +0200
 From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1268742232-11291-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-	<1271238939-7065-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-	<87hbne8aiz.fsf@SSpaeth.de>
-Date: Wed, 14 Apr 2010 15:21:51 +0200
-In-Reply-To: <87hbne8aiz.fsf@SSpaeth.de> (Sebastian Spaeth's message of "Wed, 
-	14 Apr 2010 14:48:52 +0200")
-Message-ID: <ly39yy2mq8.fsf@ensc-virt.intern.sigma-chemnitz.de>
+References: <1271237902-6295-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+Date: Wed, 14 Apr 2010 15:22:32 +0200
+In-Reply-To: <1271237902-6295-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+	(Enrico Scholz's message of "Wed, 14 Apr 2010 11:38:22 +0200")
+Message-ID: <lyy6gq184n.fsf@ensc-virt.intern.sigma-chemnitz.de>
 User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.1 (gnu/linux)
 MIME-Version: 1.0
 Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
@@ -34,7 +32,7 @@ X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
 	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] packaged-staging.bbclass: use 'os.unlink()' instead of spawning 'rm'
+Subject: Re: [PATCH] dbus: use $(LIBTOOL) to install 'dbus-daemon'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,32 +46,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Apr 2010 13:25:21 -0000
+X-List-Received-Date: Wed, 14 Apr 2010 13:26:07 -0000
 Content-Type: text/plain; charset=us-ascii
 
-"Sebastian Spaeth" <Sebastian@SSpaeth.de> writes:
+Enrico Scholz <enrico.scholz@sigma-chemnitz.de> writes:
 
->> @@ -227,7 +238,9 @@ python packagestage_scenefunc () {
->> -        os.system('rm -f ' + stamp + '.*')
->> +	for fname in glob.glob(stamp + '.*'):
->> +	    _package_unlink(fname)
->> +
+> Depending on autotools/libtool version and configure flags, dbus-daemon
+> will be built sometimes below .libs/ and sometimes in base directory.
 >
->> @@ -260,8 +273,8 @@ python packagedstage_stampfixing_eventhandler() {
->> -                        os.system('rm -f ' + dir)
->> -                    os.system('rm -f ' + stamp)
->> +			_package_unlink(dir)
->> +		    _package_unlink(stamp)
+> Using 'libtool --mode=install' is a portable way to deal with this.
 >
-> Given you have made sure that those changed indentations are actually
-> intended (I have not looked at the context of that patch):
+> Changing Makefile.am to use native automake methods to install this
+> files would be a better but more invasive fix.
 
-File had already a mixed tab/whitespace indentation.  I used the style
-which I found at the top of the file (tabulators) and did not noticed
-that it changed below.
+oops... forgot the
 
-
-
-Enrico
+Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 
 
