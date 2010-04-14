@@ -1,33 +1,37 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1O1zkC-0001Fi-4O
+	(envelope-from <Sebastian@SSpaeth.de>) id 1O21yx-0008CE-AZ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Apr 2010 12:22:52 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.3/8.14.4) with ESMTP id o3EAJMNl014012
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Wed, 14 Apr 2010 12:19:22 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.71) (envelope-from <ensc@sigma-chemnitz.de>)
-	id 1O1zgo-0002BG-HX; Wed, 14 Apr 2010 12:19:22 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 14 Apr 2010 12:19:21 +0200
-Message-Id: <1271240361-8354-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-X-Mailer: git-send-email 1.7.0.1
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.67 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+	Wed, 14 Apr 2010 14:46:16 +0200
+Received: from homiemail-a19.g.dreamhost.com (caiajhbdcbef.dreamhost.com
+	[208.97.132.145])
+	by hapkido.dreamhost.com (Postfix) with ESMTP id 8A0B217C9FA
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Apr 2010 05:42:48 -0700 (PDT)
+Received: from sspaeth.de (unknown [195.190.188.219])
+	by homiemail-a19.g.dreamhost.com (Postfix) with ESMTPA id B0BA3604061; 
+	Wed, 14 Apr 2010 05:42:41 -0700 (PDT)
+Received: by sspaeth.de (sSMTP sendmail emulation);
+	Wed, 14 Apr 2010 14:42:35 +0200
+From: "Sebastian Spaeth" <Sebastian@SSpaeth.de>
+To: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>,
+	openembedded-devel@lists.openembedded.org
+In-Reply-To: <1271239062-7198-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+References: <1271239062-7198-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+Date: Wed, 14 Apr 2010 14:42:35 +0200
+Message-ID: <87tyre4344.fsf@SSpaeth.de>
+User-Agent: notmuch version 0.1-107-g553feae (Emacs 23.1.1/x86_64-pc-linux-gnu)
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 66.33.216.122
+X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: [PATCH] autotools.bbclass: swapped calls of intltoolize + autoreconf
+Subject: Re: [PATCH] kernel.bbclass: s!D!PKGD! (trivial)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,47 +45,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Apr 2010 10:22:52 -0000
+X-List-Received-Date: Wed, 14 Apr 2010 12:46:16 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Because 'intltoolize' checks whether aclocal.m4 contains a recent copy
-of 'intltool.m4' and it will fail when the found version is too old,
-'aclocal' must be called before 'intltoolize'.
+On 2010-04-14, Enrico Scholz wrote:
+>  		dvar = bb.data.getVar('PKGD', d, 1)
+>  		if not dvar:
+> -			bb.error("D not defined")
+> +			bb.error("PKGD not defined")
 
-I built projects it with intltool-0.40.6-r3, autoconf-2.65-r9,
-automake-1.11.1-r3 and gettext-0.17-r6 successfully with this change but
-it will require probably tests with older versions.
-
-This patch is a requirement for
-http://patchwork.openembedded.org/patch/1858/ because 'autopoint' from
-the 'aclocal' call will override 'intltool' files and build will fail
-then.
-
-Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
----
- classes/autotools.bbclass |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/classes/autotools.bbclass b/classes/autotools.bbclass
-index 31d3578..d47630e 100644
---- a/classes/autotools.bbclass
-+++ b/classes/autotools.bbclass
-@@ -129,12 +129,12 @@ autotools_do_configure() {
- 			  fi
- 			fi
- 			mkdir -p m4
-+			oenote Executing autoreconf --verbose --install --force ${EXTRA_AUTORECONF} $acpaths
-+			autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF} $acpaths || oefatal "autoreconf execution failed."
- 			if grep "^[[:space:]]*[AI][CT]_PROG_INTLTOOL" $CONFIGURE_AC >/dev/null; then
- 			  oenote Executing intltoolize --copy --force --automake
- 			  intltoolize --copy --force --automake
- 			fi
--			oenote Executing autoreconf --verbose --install --force ${EXTRA_AUTORECONF} $acpaths
--			autoreconf -Wcross --verbose --install --force ${EXTRA_AUTORECONF} $acpaths || oefatal "autoreconf execution failed."
- 			cd $olddir
- 		fi
- 	;;
--- 
-1.7.0.1
-
+Acked-by: Sebastian Spaeth <Sebastian@SSpaeth.de>
 
 
