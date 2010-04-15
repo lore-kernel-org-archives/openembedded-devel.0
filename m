@@ -1,43 +1,40 @@
-Received: from fg-out-1718.google.com ([72.14.220.155])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1O2MCI-0003MJ-7H
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Apr 2010 12:21:22 +0200
-Received: by fg-out-1718.google.com with SMTP id e12so2422285fga.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O2MI1-0003X2-RR for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Apr 2010 12:27:18 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O2MEf-0002bt-1T for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Apr 2010 12:23:49 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Apr 2010 12:23:49 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Apr 2010 03:17:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:received:message-id:subject:from:to:content-type;
-	bh=QbXZMW1DIblpRUKuS+JE1dGlyW131FOeLXK/YJwZZcs=;
-	b=CPqag5Fku19T6mhXZMd+o3Aqru1N4aaJCVOy/WXa8FPNCr6upSdzMpoH+1/TlO48nZ
-	wVwFimoVmcBgV371/RlSvaCSJ4+CUBQv52izU4jdfGqXqOVTsY7yinifQw6XCiZ7Y/7l
-	5t2Wz5bWhPD8mOQOjyqhRZVJEIPFblTqz/idA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=ux8KjADV+A9NWBGYmrXCbWiP7Jclt4GXXQy8OW1N2yieOhFwCCTkXKPIJAqtpQ5lhV
-	YDEMoGQex51Scd+U8P32EUvtZHi2A2A5S3+g8jo4E0/UZIYTpp8bqbpMcxYeJmzvx0SB
-	3KYkU56oA3JHeXzgy5vwQGkSax7jElYM8xgZ4=
-MIME-Version: 1.0
-Received: by 10.239.170.136 with HTTP; Thu, 15 Apr 2010 03:17:55 -0700 (PDT)
-In-Reply-To: <E1O2Ljk-00073j-3j@melo.openembedded.org>
-References: <E1O2Ljk-00073j-3j@melo.openembedded.org>
-Date: Thu, 15 Apr 2010 12:17:55 +0200
-Received: by 10.239.186.84 with SMTP id f20mr508203hbh.176.1271326675258; Thu, 
-	15 Apr 2010 03:17:55 -0700 (PDT)
-Message-ID: <r2ud1b08f941004150317i789f7c89qb3f5a3bd14a7ac5a@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Thu, 15 Apr 2010 12:23:49 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 72.14.220.155
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 15 Apr 2010 12:23:40 +0200
+Message-ID: <hq6pfc$fm6$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100406 Shredder/3.0.5pre
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Koen Kooi : kernel bbclass: read version from ${B}, remove obsolete hostap logic that breaks the build (from poky)
+Subject: kernel bbclass changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,15 +48,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Apr 2010 10:21:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 15 Apr 2010 10:27:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Thx, this unbreaks the things!
-Still, is masking the broken base_version_less_or_equal (bitbake's
-vercmp) issue.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Chris seems working on it.
+Hi,
 
-Andrea
+I've merged the changes from poky to make the kernel use new style
+staging and it seems to be working fine.
+
+There's one cosmetic bit I'm not happy about: it spews every entry we
+stage as 'unpackaged', since ${D}/kernel isn't in FILES_foo. Do we want
+to create a dummy kernel-staging package that includes those to get rid
+of these warnings?
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLxuksMkyGM64RGpERAva4AKCN+y8eeY2i+exqXVUzsz3ae/LnjwCfRCCw
+7KubR+SS8OsBYRhKKSO85Bc=
+=/Elp
+-----END PGP SIGNATURE-----
+
 
 
