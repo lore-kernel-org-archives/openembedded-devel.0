@@ -1,50 +1,30 @@
-Received: from wam.ukma.de ([188.40.105.250])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mattheis@ukma.de>) id 1O2TLd-0004xV-70
+	(envelope-from <philip@balister.org>) id 1O2ULR-0001lR-BK
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Apr 2010 19:59:29 +0200
-Received: from wam.ukma.de (localhost [127.0.0.1])
-	by wam.ukma.de (Postfix) with ESMTP id 1CC5C4A4E9
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Apr 2010 19:51:54 +0200 (CEST)
-Received: from ws.ukma.de (ws.ukma.local [172.16.20.10])
-	by wam.ukma.de (Postfix) with ESMTP id 0F6C74A4E7
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Apr 2010 19:51:54 +0200 (CEST)
-Received: from ws.ukma.de ([172.16.20.10]) by ws ([172.16.20.10]) with mapi;
-	Thu, 15 Apr 2010 19:59:19 +0200
-From: Konrad Mattheis <mattheis@ukma.de>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 15 Apr 2010 19:56:21 +0200
-Thread-Topic: Patchwork
-Thread-Index: AcrYrsL++pVNbiqaTuKCtDsddYYRsAEFPwEg
-Message-ID: <F32E8C2599F37641BB4E3F3AC4A3C412016ECF1250B1@ws>
-References: <n2ue96fffc41004082246g4269c2d2nd6aa9f3e7260db27@mail.gmail.com>
-	<1270904476.2579.0.camel@gnutoo-desktop>
-In-Reply-To: <1270904476.2579.0.camel@gnutoo-desktop>
-Accept-Language: de-DE, de-LU
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-cr-hashedpuzzle: CTwU Dt6u EtkA F2Za GCIQ GPiz Gch/ GyR4 HJU0 HU81 JD03
-	JV+J JhE0 Jtzs KjCz LwAU; 1;
-	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnAA==;
-	Sosha1_v1; 7; {E84B8EB5-83A9-4DF8-8D6B-F339AC1457C9};
-	bQBhAHQAdABoAGUAaQBzAEAAdQBrAG0AYQAuAGQAZQA=; Thu,
-	15 Apr 2010 17:56:21 GMT;UABhAHQAYwBoAHcAbwByAGsA
-x-cr-puzzleid: {E84B8EB5-83A9-4DF8-8D6B-F339AC1457C9}
-acceptlanguage: de-DE, de-LU
+	Thu, 15 Apr 2010 21:03:22 +0200
+Received: (qmail 4203 invoked by uid 1003); 15 Apr 2010 18:59:50 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 15 Apr 2010 18:59:50 -0000
+Message-ID: <4BC76224.6090600@balister.org>
+Date: Thu, 15 Apr 2010 14:59:48 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.9) Gecko/20100330 Fedora/3.0.4-1.fc11 Thunderbird/3.0.4
 MIME-Version: 1.0
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 188.40.105.250
-X-SA-Exim-Mail-From: mattheis@ukma.de
+To: openembedded-devel@lists.openembedded.org
+References: <n2ue96fffc41004082246g4269c2d2nd6aa9f3e7260db27@mail.gmail.com>	<1270904476.2579.0.camel@gnutoo-desktop>
+	<F32E8C2599F37641BB4E3F3AC4A3C412016ECF1250B1@ws>
+In-Reply-To: <F32E8C2599F37641BB4E3F3AC4A3C412016ECF1250B1@ws>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Patchwork
+Subject: Re: Patchwork
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,19 +38,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Apr 2010 17:59:29 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 15 Apr 2010 19:03:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 04/15/2010 01:56 PM, Konrad Mattheis wrote:
+> Hi,
+>
+> I found a lot of nice patches from ulf samuelson for the new at91sam9g45 in the patchwork.
+> What is the usual way, that they get included.
 
-I found a lot of nice patches from ulf samuelson for the new at91sam9g45 in=
- the patchwork.
-What is the usual way, that they get included.
+If you test them send a suitable Acked-by to the list.
 
+Philip
 
-bye
-Konrad
+>
+>
+> bye
+> Konrad
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
