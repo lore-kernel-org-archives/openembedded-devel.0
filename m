@@ -1,38 +1,39 @@
-Received: from hapkido.dreamhost.com ([66.33.216.122] ident=postfix)
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sebastian@SSpaeth.de>) id 1O2JDn-00035L-M5
+	(envelope-from <koansoftware@gmail.com>) id 1O2JfU-00009S-6F
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Apr 2010 09:10:45 +0200
-Received: from homiemail-a11.g.dreamhost.com (caiajhbdcagg.dreamhost.com
-	[208.97.132.66])
-	by hapkido.dreamhost.com (Postfix) with ESMTP id 54EDB17CD5A
+	Thu, 15 Apr 2010 09:39:20 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 8A8E22C7F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Apr 2010 00:07:17 -0700 (PDT)
-Received: from sspaeth.de (mtec-hg-docking-1-dhcp-204.ethz.ch
-	[129.132.133.204])
-	by homiemail-a11.g.dreamhost.com (Postfix) with ESMTPA id 01E8D19406D; 
-	Thu, 15 Apr 2010 00:07:11 -0700 (PDT)
-Received: by sspaeth.de (sSMTP sendmail emulation);
-	Thu, 15 Apr 2010 09:07:09 +0200
-From: "Sebastian Spaeth" <Sebastian@SSpaeth.de>
-To: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>,
-	openembedded-devel@lists.openembedded.org
-In-Reply-To: <1271237902-6295-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-References: <1271237902-6295-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-Date: Thu, 15 Apr 2010 09:07:09 +0200
-Message-ID: <87k4s9kxcy.fsf@SSpaeth.de>
-User-Agent: notmuch version 0.1-129-g887e216 (Emacs 23.1.1/x86_64-pc-linux-gnu)
+	Thu, 15 Apr 2010 07:34:48 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id enjtDxAgXwPN
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Apr 2010 07:34:44 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id D45FA2C7DC
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Apr 2010 07:34:43 +0000 (UTC)
+Message-ID: <4BC6C1D0.5030205@gmail.com>
+Date: Thu, 15 Apr 2010 09:35:44 +0200
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.33.216.122
-X-SA-Exim-Mail-From: Sebastian@SSpaeth.de
+To: openembedded-devel@lists.openembedded.org
+References: <1271270768-6212-1-git-send-email-marcin@juszkiewicz.com.pl>
+In-Reply-To: <1271270768-6212-1-git-send-email-marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: Re: [PATCH] dbus: use $(LIBTOOL) to install 'dbus-daemon'
+Subject: Re: [STABLE][PATCH v3] linux-libc-headers 2.6.23: add newer ARM hwcap flags
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,21 +47,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Apr 2010 07:10:45 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 15 Apr 2010 07:39:20 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 2010-04-14, Enrico Scholz wrote:
-> Depending on autotools/libtool version and configure flags, dbus-daemon
-> will be built sometimes below .libs/ and sometimes in base directory.
-> 
-> Using 'libtool --mode=install' is a portable way to deal with this.
-> 
-> Changing Makefile.am to use native automake methods to install this
-> files would be a better but more invasive fix.
+Marcin Juszkiewicz ha scritto, Il 14/04/2010 20:46:
+> From: Marcin Juszkiewicz <marcin@buglabs.net>
+>=20
+> OpenJDK uses HWCAP_THUMBEE which is not present in 2.6.23 headers.
+>=20
+> Signed-off-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+> ---
+>  .../arm-hwcap-add-new-entries.patch                |   21 ++++++++++++=
+++++++++
+>  .../linux-libc-headers_2.6.23.bb                   |    5 ++-
+>  2 files changed, 24 insertions(+), 2 deletions(-)
+>  create mode 100644 recipes/linux-libc-headers/linux-libc-headers-2.6.2=
+3/arm-hwcap-add-new-entries.patch
+>=20
+> diff --git a/recipes/linux-libc-headers/linux-libc-headers-2.6.23/arm-h=
+wcap-add-new-entries.patch b/recipes/linux-libc-headers/linux-libc-header=
+s-2.6.23/arm-hwcap-add-new-entries.patch
+> new file mode 100644
+> index 0000000..934db51
+> --- /dev/null
+> +++ b/recipes/linux-libc-headers/linux-libc-headers-2.6.23/arm-hwcap-ad=
+d-new-entries.patch
+> @@ -0,0 +1,21 @@
+> +---
+> + include/asm-arm/hwcap.h |    4 ++++
+> + 1 file changed, 4 insertions(+)
+> +
+> +--- linux-2.6.23.orig/include/asm-arm/hwcap.h
+> ++++ linux-2.6.23/include/asm-arm/hwcap.h
+> +@@ -13,10 +13,14 @@
+> + #define HWCAP_VFP	64
+> + #define HWCAP_EDSP	128
+> + #define HWCAP_JAVA	256
+> + #define HWCAP_IWMMXT	512
+> + #define HWCAP_CRUNCH	1024
+> ++#define HWCAP_THUMBEE	2048
+> ++#define HWCAP_NEON	4096
+> ++#define HWCAP_VFPv3	8192
+> ++#define HWCAP_VFPv3D16	16384
+> +=20
+> + #if defined(__KERNEL__) && !defined(__ASSEMBLY__)
+> + /*
+> +  * This yields a mask that user programs can use to figure out what
+> +  * instruction set this cpu supports.
+> diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.23.bb b/=
+recipes/linux-libc-headers/linux-libc-headers_2.6.23.bb
+> index 95152f1..b4766bc 100644
+> --- a/recipes/linux-libc-headers/linux-libc-headers_2.6.23.bb
+> +++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.23.bb
+> @@ -2,11 +2,12 @@ require linux-libc-headers.inc
+> =20
+>  INHIBIT_DEFAULT_DEPS =3D "1"
+>  DEPENDS +=3D "unifdef-native"
+> -PR =3D "r4"
+> +PR =3D "r6"
+> =20
+>  SRC_URI =3D "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar=
+.bz2 \
+>             file://procinfo.h \
+> -           file://unifdef.patch;patch=3D1"
+> +           file://unifdef.patch;patch=3D1 \
+> +           file://arm-hwcap-add-new-entries.patch;patch=3D1"
+> =20
+>  S =3D "${WORKDIR}/linux-${PV}"
+> =20
 
-Looks reasonable, although I am always for going with the "better" fixes
-in general :-)
+Acked-by: Marco Cavallini <m.cavallini@koansoftware.com>
 
-Acked-by: Sebastian Spaeth <Sebastian@SSpaeth.de>
+
+Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+   Atmel third party certified consultant
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
+        http://www.KaeilOS.com
+
 
 
