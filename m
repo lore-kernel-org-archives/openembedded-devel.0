@@ -1,37 +1,41 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1O2RFH-0001ly-22
-	for Openembedded-devel@lists.openembedded.org;
-	Thu, 15 Apr 2010 17:44:47 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 220412C7F5
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Apr 2010 15:40:15 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ULwyfi9UD9vK
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Apr 2010 15:40:11 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id BA59D2C7DC
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Apr 2010 15:40:10 +0000 (UTC)
-Message-ID: <4BC73399.1050605@gmail.com>
-Date: Thu, 15 Apr 2010 17:41:13 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
-MIME-Version: 1.0
-To: Openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O2TB1-0003ow-MR for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Apr 2010 19:48:32 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O2T7g-00084H-5E for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Apr 2010 19:45:04 +0200
+Received: from cpe-98-155-87-198.san.res.rr.com ([98.155.87.198])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Apr 2010 19:45:04 +0200
+Received: from eschetina by cpe-98-155-87-198.san.res.rr.com with local
+	(Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Apr 2010 19:45:04 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Erik Schetina <eschetina@valicore.com>
+Date: Thu, 15 Apr 2010 17:34:26 +0000 (UTC)
+Message-ID: <loom.20100415T193338-908@post.gmane.org>
+References: <4BC73399.1050605@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 98.155.87.198 (Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3)
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: xorg-lib switch to new style staging problem
+Subject: Re: xorg-lib switch to new style staging problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,21 +49,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Apr 2010 15:44:47 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 15 Apr 2010 17:48:32 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
 
-Hi,
-since this afternoon I am facing to this error
-ERROR: '/openembedded/recipes/xorg-lib/xorg-headers-native.bb' failed
+Marco Cavallini <koansoftware <at> gmail.com> writes:
 
-http://pastebin.com/BDkDy6D1
 
-Maybe xorg-lib switch to new style staging doesn't work properly?
-If not, could you please give me a hint about how to solve this problem?
 
-TIA
+I am having the same issue as of this morning.
 
-/marco
 
 
