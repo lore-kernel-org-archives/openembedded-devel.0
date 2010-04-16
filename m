@@ -1,39 +1,27 @@
-Received: from mail-ww0-f47.google.com ([74.125.82.47])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <slapinid@gmail.com>) id 1O2lpK-0002t0-Bd
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1O2lqt-0005bQ-Bg
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Apr 2010 15:43:40 +0200
-Received: by wwb18 with SMTP id 18so1281475wwb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Apr 2010 06:39:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:in-reply-to:references
-	:date:received:message-id:subject:from:to:content-type;
-	bh=NSHRYvf9LJxVJSizVieT5FUPNAkruINuJqlCyJ7G1sg=;
-	b=G0t8Vz22vcqquu4rxLPUmdN49XNWXqWvwKGhQ0XdziytnYtwj6lnH5dExZ/JimyGFS
-	Nr+2lYtfoQimUIjw5HUGfjDtNFIEcqO6qsThb0OYG7er1UL4bgObiohJz4wgc2O+gkT1
-	DGxZcfl0HXro6X3B2xdTXWaubjdpjJPE1qaEg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=g3kDU8u2bmR+J+WEH9I/1BbjmRoiEvW0wk8CrxQpbi0oV3BZDjhoWSXJ61lUIXywIs
-	j5FRQDBzltPlGGlE1ZWCWbULrvawMcftoxba2n1lqvErg9USz/5T4oHSnWxE2szb5A6p
-	a5DZJ7gxCnBY6TxcVbdUWgskEvGelNH5uFdVE=
-MIME-Version: 1.0
-Received: by 10.216.182.70 with HTTP; Fri, 16 Apr 2010 06:39:50 -0700 (PDT)
-In-Reply-To: <20100416123920.GB3323@jama>
-References: <20100416123920.GB3323@jama>
-Date: Fri, 16 Apr 2010 17:39:50 +0400
-Received: by 10.216.185.136 with SMTP id u8mr1834366wem.24.1271425190098; Fri, 
-	16 Apr 2010 06:39:50 -0700 (PDT)
-Message-ID: <j2o48239d391004160639p87e47f6enf6f096140c9ecd20@mail.gmail.com>
-From: Sergey Lapin <slapinid@gmail.com>
+	Fri, 16 Apr 2010 15:45:08 +0200
+Received: (qmail 10370 invoked by uid 813007); 16 Apr 2010 13:41:31 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 16 Apr 2010 13:41:31 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.47
-X-SA-Exim-Mail-From: slapinid@gmail.com
+Date: Fri, 16 Apr 2010 15:41:22 +0200
+User-Agent: KMail/1.13.2 (Linux/2.6.34-rc2-wl-47166-ged2da1f; KDE/4.4.2; x86_64;
+	; )
+References: <20100416123920.GB3323@jama> <hq9ogk$k1j$2@dough.gmane.org>
+In-Reply-To: <hq9ogk$k1j$2@dough.gmane.org>
+MIME-Version: 1.0
+Message-Id: <201004161541.23250.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -51,22 +39,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Apr 2010 13:43:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 16 Apr 2010 13:45:09 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Apr 16, 2010 at 4:39 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Hi,
->
-> on Openmoko Freerunner om-gta02 Xserver script takes about 3s on every
-> boot
-> http://build.shr-project.org/tests/jama/bootchart-2.6.32.9.r1.png
->
-> it's started from /etc/init.d/xserver-nodm and with eliminated Xserver
-> call by passing xinit call directly with right Xorg params I get this
->
-> http://build.shr-project.org/tests/jama/bootchart-2.6.32.9.r3.png
+Dnia pi=C4=85tek, 16 kwietnia 2010 o 15:25:40 Koen Kooi napisa=C5=82(a):
+>   Wouldn't it be better to merge the scripts from xserver-kdrive-common
+> and xserver-common and then fix all the sed/awk calls in one place?
 
-Sorry to bother with off-topic post, but how these boot charts are
-built? Really nice thing to have...
+I did most of it long time ago and stored as xserver-common 1.30. Script
+got simplified, supports Xorg and KDrive, replaces xserver-kdrive-common,
+allows to set variables in /etc/default/xserver instead of patching=20
+/etc/X11/Xserver file etc.
+
+I did send RFC about it on 3rd August 2009. Merged it into stable/2009 in
+October 2009 as we used it on BUG 1.x and 2.0 devices.
+
+I merged my improvements into upstream which gave us 1.31, 1.32 and 1.33
+versions (1.30/upstream !=3D 1.30/OE as it was base for my improvements whi=
+ch
+landed in next upstream versions).
+
+So far I did not noticed anyone using it. For those which use=20
+xserver-nodm-init script to boot into root X11 session: you need newer
+version from BugLabs repository:
+
+svn://svn.buglabs.net/bug/trunk/com.buglabs.build.oe/meta-bug/packages/xser=
+ver-nodm-init
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
