@@ -1,49 +1,32 @@
-Received: from fg-out-1718.google.com ([72.14.220.156])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1O2sXk-0005ng-45
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Apr 2010 22:53:42 +0200
-Received: by fg-out-1718.google.com with SMTP id 19so1232251fgg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Apr 2010 13:50:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=+DAnHDOBFL/z5tPs8EHZihJEs8lyzHxRJk2wIyQunZ0=;
-	b=v2pp9AC/C18tmfWzyX88vQrpBogw5PtvydhvaNilON8s1YLoikGFu7i+luAlu/WisE
-	Q7tuu+WPD/iejvmF5BdvCSu+QcIdWRfqNVaQxOejgS0ZCLyQVdL4XZVsAKEFzB9xuswo
-	WpkVwa7Fl5CN+KC8HJyOimGztS6TNsW3y3yfA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=pFSA+mkcAwPd7u2146/PeTJnfvPgzxi0QB9+3s+V8W4t4BjD9lVr2lvs3ymIKsF1IA
-	g0++6usMCC3ZZ6rAnyxGIL0WKlDaA3QHymytBDlVRFOimufbhrqxBpm/I/YQy9PR6uE5
-	6BCjI7brKt/ASBSbMEjUU78JWcYIhZ46jOBJo=
-Received: by 10.223.98.19 with SMTP id o19mr947531fan.80.1271451011602;
-	Fri, 16 Apr 2010 13:50:11 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 26sm4753262fks.22.2010.04.16.13.50.10
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 16 Apr 2010 13:50:10 -0700 (PDT)
-Date: Fri, 16 Apr 2010 22:50:11 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1O2shS-0007Sh-4y for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Apr 2010 23:03:44 +0200
+Received: from f053040112.adsl.alicedsl.de ([78.53.40.112]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1O2se5-0004vN-DK for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Apr 2010 21:00:13 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100416205011.GC3323@jama>
-References: <20100416123920.GB3323@jama> <hq9ogk$k1j$2@dough.gmane.org>
-	<201004161541.23250.marcin@juszkiewicz.com.pl>
-MIME-Version: 1.0
-In-Reply-To: <201004161541.23250.marcin@juszkiewicz.com.pl>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 72.14.220.156
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+In-Reply-To: <j2o48239d391004160639p87e47f6enf6f096140c9ecd20@mail.gmail.com>
+References: <20100416123920.GB3323@jama>
+	<j2o48239d391004160639p87e47f6enf6f096140c9ecd20@mail.gmail.com>
+Date: Fri, 16 Apr 2010 23:00:06 +0200
+Message-ID: <1271451606.5774.8.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Do we really want shared Xserver script for all machines?
+Subject: [OT] bootchart (was: Do we really want shared Xserver script for all machines?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,37 +40,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Apr 2010 20:53:42 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 16 Apr 2010 21:03:45 -0000
+X-Groupsio-MsgNum: 18682
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-x4pOrgAQI/k2GVLVqyZP"
 
-On Fri, Apr 16, 2010 at 03:41:22PM +0200, Marcin Juszkiewicz wrote:
-> I did send RFC about it on 3rd August 2009. Merged it into stable/2009 in
-> October 2009 as we used it on BUG 1.x and 2.0 devices.
-> 
-> So far I did not noticed anyone using it. For those which use 
+--=-x4pOrgAQI/k2GVLVqyZP
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I guess this is because task-x11-utils pulls xserver-kdrive-common
-unconditionaly.. I've added variable there for distro to pick provider
-easily and after some test I'll send it for review.
+Am Freitag, den 16.04.2010, 17:39 +0400 schrieb Sergey Lapin:
 
-> xserver-nodm-init script to boot into root X11 session: you need newer
-> version from BugLabs repository:
-> 
-> svn://svn.buglabs.net/bug/trunk/com.buglabs.build.oe/meta-bug/packages/xserver-nodm-init
+[=E2=80=A6]
 
-In patch I have now, I renamed old version to 1.0 and added version from
-buglabs as 2.0 with D_P -1. Not best solution as it allows people to use
-old xserver-kdrive-common + this newer nodm-init, but comment above D_P
-setting should be enough for maintainers to notice.
+> Sorry to bother with off-topic post, but how these boot charts are
+> built? Really nice thing to have...
 
-Thanks hrw, pity that we overlooked xserver-common for so long..
-
-Regards,
-
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+Use bootchart [1]?
 
 
+Thanks,
+
+Paul
+
+
+[1] http://www.bootchart.org/
+
+--=-x4pOrgAQI/k2GVLVqyZP
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkvIz9YACgkQPX1aK2wOHViSLACfRC6UL30AG2/CgJbfPpXo8GEN
+7uYAnAuTspJ+vkQEiFZOJmMKzHsWiOfl
+=NDQW
+-----END PGP SIGNATURE-----
+
+--=-x4pOrgAQI/k2GVLVqyZP--
