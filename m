@@ -1,31 +1,45 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from out2.smtp.messagingengine.com ([66.111.4.26])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1O2lqt-0005bQ-Bg
+	(envelope-from <vjensen@gmx.de>) id 1O2mKu-00081O-Ah
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Apr 2010 15:45:08 +0200
-Received: (qmail 10370 invoked by uid 813007); 16 Apr 2010 13:41:31 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 16 Apr 2010 13:41:31 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	Fri, 16 Apr 2010 16:16:02 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id 05347EB44A
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Apr 2010 10:12:32 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Fri, 16 Apr 2010 10:12:32 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
+	s=smtpout; bh=RK5TQfnCVh4vrNTCcYd5QHQt8pM=;
+	b=ts+yPAxA8kYwQdKWyKc5/kWJjZiZJ1hbEt9rXSGO5yUsu/bgjS9oHs5UWdfJD3F6RNdC/XqY98QURVFL3rRBvV2MRksfoZCtYMn2o0oKbH6sJ0HWsfm7jvsbuetAnnfDVbxSCO6++nzLv0S3pn5o3M1fMw3DqOwvsbWbsbmm36Y=
+X-Sasl-enc: CCNS3ofY7iXmhxlbYRdEqrGgw2NWPvQofc2eVKe8uEpO 1271427151
+Received: from [192.168.1.34] (hnvr-4d07a1c5.pool.mediaWays.net [77.7.161.197])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 3C94D3DE25
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Apr 2010 10:12:31 -0400 (EDT)
+Date: Fri, 16 Apr 2010 16:13:44 +0200 (CEST)
+From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Apr 2010 15:41:22 +0200
-User-Agent: KMail/1.13.2 (Linux/2.6.34-rc2-wl-47166-ged2da1f; KDE/4.4.2; x86_64;
-	; )
-References: <20100416123920.GB3323@jama> <hq9ogk$k1j$2@dough.gmane.org>
-In-Reply-To: <hq9ogk$k1j$2@dough.gmane.org>
+In-Reply-To: <alpine.DEB.1.10.1004081733510.3264@vitus.devnet.local>
+Message-ID: <alpine.LNX.2.00.1004161612220.28729@asterix.crazy-teaparty.dyndns.org>
+References: <alpine.DEB.1.10.1004081018050.3264@vitus.devnet.local>
+	<alpine.DEB.1.10.1004081733510.3264@vitus.devnet.local>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
 MIME-Version: 1.0
-Message-Id: <201004161541.23250.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+X-SA-Exim-Connect-IP: 66.111.4.26
+X-SA-Exim-Mail-From: vjensen@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
+	SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Do we really want shared Xserver script for all machines?
+Subject: [PATCH v3] dfu-programmer: USB Device Firmware Upgrade utility (special atmel-version)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,41 +53,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Apr 2010 13:45:09 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 16 Apr 2010 14:16:02 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Dnia pi=C4=85tek, 16 kwietnia 2010 o 15:25:40 Koen Kooi napisa=C5=82(a):
->   Wouldn't it be better to merge the scripts from xserver-kdrive-common
-> and xserver-common and then fix all the sed/awk calls in one place?
+Add recipes for version 0.5.2 and the current head of the subversion
+repository.  dfu-programmer is DFU utility supporting Atmel chips
+with a USB bootloader (which aren't supported by dfu-util).
 
-I did most of it long time ago and stored as xserver-common 1.30. Script
-got simplified, supports Xorg and KDrive, replaces xserver-kdrive-common,
-allows to set variables in /etc/default/xserver instead of patching=20
-/etc/X11/Xserver file etc.
+Signed-off-by: Vitus Jensen <vjensen@gmx.de>
+---
+ recipes/dfu-programmer/dfu-programmer_0.5.2.bb |   17 +++++++++++++++++
+ recipes/dfu-programmer/dfu-programmer_svn.bb   |   16 ++++++++++++++++
+ 2 files changed, 33 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/dfu-programmer/dfu-programmer_0.5.2.bb
+ create mode 100644 recipes/dfu-programmer/dfu-programmer_svn.bb
 
-I did send RFC about it on 3rd August 2009. Merged it into stable/2009 in
-October 2009 as we used it on BUG 1.x and 2.0 devices.
+diff --git a/recipes/dfu-programmer/dfu-programmer_0.5.2.bb b/recipes/dfu-programmer/dfu-programmer_0.5.2.bb
+new file mode 100644
+index 0000000..d35c601
+--- /dev/null
++++ b/recipes/dfu-programmer/dfu-programmer_0.5.2.bb
+@@ -0,0 +1,17 @@
++DESCRIPTION = "USB Device Firmware Upgrade utility (special atmel-version)"
++SECTION = "devel"
++AUTHOR = "Weston Schmidt <weston_schmidt@alumni.purdue.edu>"
++LICENSE = "GPL"
++
++PV = "0.5.2"
++PR = "r0"
++
++DEPENDS = "libusb"
++
++SRC_URI = " \
++	${SOURCEFORGE_MIRROR}/project/${PN}/${PN}/${PV}/${PN}-${PV}.tar.gz;name=tar \
++	"
++SRC_URI[tar.md5sum] = "ce882d37383df698a1c530080724b191"
++SRC_URI[tar.sha256sum] = "e3c8bc1429fe1681c56ddc14fb05d29a7933aac566d13f894dca6fd916829cb9"
++
++inherit autotools
+diff --git a/recipes/dfu-programmer/dfu-programmer_svn.bb b/recipes/dfu-programmer/dfu-programmer_svn.bb
+new file mode 100644
+index 0000000..80ebee5
+--- /dev/null
++++ b/recipes/dfu-programmer/dfu-programmer_svn.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "USB Device Firmware Upgrade utility (special atmel-version)"
++SECTION = "devel"
++AUTHOR = "Weston Schmidt <weston_schmidt@alumni.purdue.edu>"
++LICENSE = "GPL"
++
++SRCREV = "93"
++PV = "0.5.2+svnr${SRCPV}"
++PR = "r0"
++DEFAULT_PREFERENCE = "-1"
++
++DEPENDS = "libusb"
++
++SRC_URI = "svn://${PN}.svn.sourceforge.net/svnroot/${PN}/;module=trunk;proto=http"
++S = "${WORKDIR}/trunk/${PN}"
++
++inherit autotools
+-- 
+1.5.6.5
 
-I merged my improvements into upstream which gave us 1.31, 1.32 and 1.33
-versions (1.30/upstream !=3D 1.30/OE as it was base for my improvements whi=
-ch
-landed in next upstream versions).
 
-So far I did not noticed anyone using it. For those which use=20
-xserver-nodm-init script to boot into root X11 session: you need newer
-version from BugLabs repository:
-
-svn://svn.buglabs.net/bug/trunk/com.buglabs.build.oe/meta-bug/packages/xser=
-ver-nodm-init
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+-- 
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
 
 
