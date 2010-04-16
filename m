@@ -1,40 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ww0-f47.google.com ([74.125.82.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O2lfn-0001ss-TB for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Apr 2010 15:33:33 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O2lcR-0002Dh-2l for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Apr 2010 15:30:03 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Apr 2010 15:30:03 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <slapinid@gmail.com>) id 1O2lpK-0002t0-Bd
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Apr 2010 15:43:40 +0200
+Received: by wwb18 with SMTP id 18so1281475wwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Apr 2010 15:30:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 16 Apr 2010 15:25:40 +0200
-Message-ID: <hq9ogk$k1j$2@dough.gmane.org>
-References: <20100416123920.GB3323@jama>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100406 Shredder/3.0.5pre
+	Fri, 16 Apr 2010 06:39:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:in-reply-to:references
+	:date:received:message-id:subject:from:to:content-type;
+	bh=NSHRYvf9LJxVJSizVieT5FUPNAkruINuJqlCyJ7G1sg=;
+	b=G0t8Vz22vcqquu4rxLPUmdN49XNWXqWvwKGhQ0XdziytnYtwj6lnH5dExZ/JimyGFS
+	Nr+2lYtfoQimUIjw5HUGfjDtNFIEcqO6qsThb0OYG7er1UL4bgObiohJz4wgc2O+gkT1
+	DGxZcfl0HXro6X3B2xdTXWaubjdpjJPE1qaEg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=g3kDU8u2bmR+J+WEH9I/1BbjmRoiEvW0wk8CrxQpbi0oV3BZDjhoWSXJ61lUIXywIs
+	j5FRQDBzltPlGGlE1ZWCWbULrvawMcftoxba2n1lqvErg9USz/5T4oHSnWxE2szb5A6p
+	a5DZJ7gxCnBY6TxcVbdUWgskEvGelNH5uFdVE=
+MIME-Version: 1.0
+Received: by 10.216.182.70 with HTTP; Fri, 16 Apr 2010 06:39:50 -0700 (PDT)
 In-Reply-To: <20100416123920.GB3323@jama>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <20100416123920.GB3323@jama>
+Date: Fri, 16 Apr 2010 17:39:50 +0400
+Received: by 10.216.185.136 with SMTP id u8mr1834366wem.24.1271425190098; Fri, 
+	16 Apr 2010 06:39:50 -0700 (PDT)
+Message-ID: <j2o48239d391004160639p87e47f6enf6f096140c9ecd20@mail.gmail.com>
+From: Sergey Lapin <slapinid@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.47
+X-SA-Exim-Mail-From: slapinid@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: Do we really want shared Xserver script for all machines?
@@ -51,55 +51,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Apr 2010 13:33:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 16 Apr 2010 13:43:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-Wouldn't it be better to merge the scripts from xserver-kdrive-common
-and xserver-common and then fix all the sed/awk calls in one place?
-
-On 16-04-10 14:39, Martin Jansa wrote:
+On Fri, Apr 16, 2010 at 4:39 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
 > Hi,
-> 
+>
 > on Openmoko Freerunner om-gta02 Xserver script takes about 3s on every
 > boot
 > http://build.shr-project.org/tests/jama/bootchart-2.6.32.9.r1.png
-> 
+>
 > it's started from /etc/init.d/xserver-nodm and with eliminated Xserver
 > call by passing xinit call directly with right Xorg params I get this
->  
+>
 > http://build.shr-project.org/tests/jama/bootchart-2.6.32.9.r3.png
-> 
-> My question is:
-> 
-> should I commit simplified versions of Xserver script
-> xserver-kdrive-common/xserver-kdrive-common/Xserver
-> to
-> xserver-kdrive-common/xserver-kdrive-common/om-gta02/Xserver
-> and the same for other devices supported in Xserver (to save 
-> grep,awk call).
-> 
-> or do it only for om-gta02 (maybe even in 
-> xserver-kdrive-common/xserver-nodm-init/xserver-nodm
-> ) and those who care about boot time will follow?
-> 
-> Maybe calling fallback_screen_arg only where it's really needed would be
-> good enough optimization, without the cost of loosing PACKAGE_ARCH =
-> "all".
-> 
-> Cheers,
-> 
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLyGVUMkyGM64RGpERAiyrAJwJHKahFvUdK8l+aYIgBhb2UMlwxwCgkzEF
-sXq4fCHgeNYcSUlIXT/aKp4=
-=Ft6E
------END PGP SIGNATURE-----
-
+Sorry to bother with off-topic post, but how these boot charts are
+built? Really nice thing to have...
 
 
