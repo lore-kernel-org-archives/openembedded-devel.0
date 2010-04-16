@@ -1,44 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp-out26.alice.it ([85.33.2.26])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O2pRl-0003mx-Py for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Apr 2010 19:35:18 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O2pOJ-0007vc-Mz for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Apr 2010 19:31:43 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Apr 2010 19:31:43 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Apr 2010 19:31:43 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <ospite@studenti.unina.it>) id 1O2r3w-0002Ge-8d
+	for openembedded-devel@openembedded.org; Fri, 16 Apr 2010 21:18:48 +0200
+Received: from FBCMMO04.fbc.local ([192.168.184.135]) by smtp-out26.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 16 Apr 2010 21:14:15 +0200
+Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO04.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 16 Apr 2010 21:14:15 +0200
+Received: from jcn ([82.60.124.12]) by FBCMCL01B07.fbc.local with Microsoft
+	SMTPSVC(6.0.3790.3959); Fri, 16 Apr 2010 21:14:14 +0200
+Date: Fri, 16 Apr 2010 21:14:09 +0200
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 16 Apr 2010 19:31:34 +0200
-Message-ID: <hqa6tn$h32$1@dough.gmane.org>
-References: <alpine.DEB.1.10.1004161912440.13411@vitus.devnet.local>
-	<alpine.DEB.1.10.1004161915140.13411@vitus.devnet.local>
+Message-Id: <20100416211409.3a1b1533.ospite@studenti.unina.it>
+X-Mailer: Sylpheed 3.0.2 (GTK+ 2.20.0; x86_64-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100406 Shredder/3.0.5pre
-In-Reply-To: <alpine.DEB.1.10.1004161915140.13411@vitus.devnet.local>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-OriginalArrivalTime: 16 Apr 2010 19:14:14.0922 (UTC)
+	FILETIME=[00F436A0:01CADD99]
+X-SA-Exim-Connect-IP: 85.33.2.26
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] libsocketcan: recipe to build pengutronix' libsocketcan (netlink interface)
+Subject: [BUG] pixman_0.16.2.bb fails in do_compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,36 +44,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Apr 2010 17:35:18 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 16 Apr 2010 19:18:49 -0000
+X-Groupsio-MsgNum: 18678
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Fri__16_Apr_2010_21_14_09_+0200_/hany_jB4Aqh2Clu"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--Signature=_Fri__16_Apr_2010_21_14_09_+0200_/hany_jB4Aqh2Clu
+Content-Type: text/plain; charset=US-ASCII
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 16-04-10 19:15, Vitus Jensen wrote:
-> 
+Hi,
 
-> +do_stage () {
-> +	install -m 0644 include/libsocketcan.h ${STAGING_INCDIR}/
-> +	install -m 0644 include/can_netlink.h ${STAGING_INCDIR}/
-> +	oe_libinstall -a -so libsocketcan ${STAGING_LIBDIR}
-> +}
+Here's the complete log:
+http://tinderbox.openembedded.org/packages/550959/
 
-That's using legacy staging, which we are trying very hard to kill in .dev.
-I suspect you can just remove method since do_install usually works in
-autotools based systems.
+Thanks,
+   Antonio
 
-regards,
+--=20
+Antonio Ospite
+http://ao2.it
 
-Koen
+PGP public key ID: 0x4553B001
+
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
+
+--Signature=_Fri__16_Apr_2010_21_14_09_+0200_/hany_jB4Aqh2Clu
+Content-Type: application/pgp-signature
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-iD8DBQFLyJ72MkyGM64RGpERAkKdAJ4pmScGv0xZyIW4HXPnLWn/qTkNYQCfQSUT
-ymrAoW04nH6clpB4ub/ETqw=
-=MKJo
+iEYEARECAAYFAkvItwEACgkQ5xr2akVTsAHo2wCfdhMDPVfDgL2wF/vU0t/AJoVS
+1HsAoIl22boXUqCetEs2wzZLhfZdShXn
+=BFor
 -----END PGP SIGNATURE-----
 
-
-
+--Signature=_Fri__16_Apr_2010_21_14_09_+0200_/hany_jB4Aqh2Clu--
