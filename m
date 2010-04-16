@@ -1,42 +1,45 @@
-Received: from out2.smtp.messagingengine.com ([66.111.4.26])
+Received: from fg-out-1718.google.com ([72.14.220.153])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1O2kjz-0005Gq-4h
-	for Openembedded-devel@lists.openembedded.org;
-	Fri, 16 Apr 2010 14:33:48 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id B172FEB93C
-	for <Openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Apr 2010 08:30:18 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Fri, 16 Apr 2010 08:30:18 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:message-id:mime-version:content-type;
-	s=smtpout; bh=haBx10n22czwXJBIjGYVx6tFrdY=;
-	b=Ehc+NUTxb5464LA+qBUBASvVMBo1lgIyzWj5NrTJuAcXpeztrplPc8DFhfsDm7ATZnXbXP1RL2lSM/gR39c1pCtYi9eToq2inueKR4kMndRHeO9sA92O6e7o7A6NfAQ1VecuF9FZ3aXvw3qtV28/cz9xNKKiVbr5VguY5vc/CP0=
-X-Sasl-enc: mdVCM+Ok3jga7t/DHYRPgSrC86e+wEBdAENiU+tUeRpd 1271421018
-Received: from [192.168.1.34] (hnvr-4d07a1c5.pool.mediaWays.net [77.7.161.197])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 17BFB4AFE0D
-	for <Openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Apr 2010 08:30:17 -0400 (EDT)
-Date: Fri, 16 Apr 2010 14:31:31 +0200 (CEST)
-From: Vitus Jensen <vjensen@gmx.de>
-To: Openembedded-devel@lists.openembedded.org
-Message-ID: <alpine.LNX.2.00.1004161430260.28729@asterix.crazy-teaparty.dyndns.org>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
+	(envelope-from <martin.jansa@gmail.com>) id 1O2ksj-0004gJ-No
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Apr 2010 14:42:50 +0200
+Received: by fg-out-1718.google.com with SMTP id 19so1037504fgg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Apr 2010 05:39:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:user-agent;
+	bh=rxcs63CcdjT5WNr7VBhWut0DtGjLBLrgcN4uR2IJ7+A=;
+	b=k8IZAmKkHD3UUR/rC+JAR8zaVV6vhnDBxDFpb5SRHcTeMmiZ2WViKTZfG0tWSY5AAW
+	TLTxIIPK4FT3/SHxyEUx9MUndeg255TY3gL0DJghF4SJn06HWUyQDWoHRZ+8kTaOHppE
+	UaUdRxh7n2A4Wb9d15nKDJzNMcAwkT+qzDcVQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=MgsjioBYvyPw1L5NJYdm2KkphIdwrG17YfZsXB2j3sYNudYAoTGgoQhWN7W09rzn6l
+	vkY+ETCn4jYtopMKyUYSAOwbuv111sHKQB1FCU0bK++ufYdpHUFNyjs+d4X2i01m7p1e
+	Gwpsmg9UyVbyqwB7TCEwSPYlxlzTgxHhjZM5c=
+Received: by 10.87.2.15 with SMTP id e15mr1325439fgi.23.1271421561795;
+	Fri, 16 Apr 2010 05:39:21 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id b17sm3624545fka.43.2010.04.16.05.39.20
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 16 Apr 2010 05:39:21 -0700 (PDT)
+Date: Fri, 16 Apr 2010 14:39:20 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100416123920.GB3323@jama>
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.26
-X-SA-Exim-Mail-From: vjensen@gmx.de
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 72.14.220.153
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-	SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH][STABLE] bitbake.conf: SRCPV always upgradeable paths for git recipes
+Subject: Do we really want shared Xserver script for all machines?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,39 +53,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Apr 2010 12:33:48 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Fri, 16 Apr 2010 12:42:50 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-From: Martin Jansa <martin.jansa@gmail.com>
+Hi,
 
-* Holger Hans Peter Freyther <zecke@openmoko.org> did for the OM git
-  tree that was never merged back into OE.
-* Taken from xora/angstrom-srcpv branch where it rot for long enough
-Signed-off-by: Vitus Jensen <vjensen@gmx.de>
----
- conf/bitbake.conf |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+on Openmoko Freerunner om-gta02 Xserver script takes about 3s on every
+boot
+http://build.shr-project.org/tests/jama/bootchart-2.6.32.9.r1.png
 
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index d1ed040..f6c4c12 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -531,7 +531,8 @@ UPDATECOMMAND_cvs = "/usr/bin/env 'PATH=${PATH}' cvs -d${CVSROOT} update -d -P $
- UPDATECOMMAND_svn = "/usr/bin/env svn update ${SVNCOOPTS}"
- SRCDATE = "${DATE}"
- SRCREV = "1"
--AUTOREV = "${@bb.fetch.get_srcrev(d)}"
-+SRCPV = "${@bb.fetch.get_srcrev(d)}"
-+AUTOREV = "${SRCPV}"
+it's started from /etc/init.d/xserver-nodm and with eliminated Xserver
+call by passing xinit call directly with right Xorg params I get this
+ 
+http://build.shr-project.org/tests/jama/bootchart-2.6.32.9.r3.png
 
- SRC_URI = "file://${FILE}"
+My question is:
+
+should I commit simplified versions of Xserver script
+xserver-kdrive-common/xserver-kdrive-common/Xserver
+to
+xserver-kdrive-common/xserver-kdrive-common/om-gta02/Xserver
+and the same for other devices supported in Xserver (to save 
+grep,awk call).
+
+or do it only for om-gta02 (maybe even in 
+xserver-kdrive-common/xserver-nodm-init/xserver-nodm
+) and those who care about boot time will follow?
+
+Maybe calling fallback_screen_arg only where it's really needed would be
+good enough optimization, without the cost of loosing PACKAGE_ARCH =
+"all".
+
+Cheers,
 
 -- 
-1.6.4.4
-
-
--- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
