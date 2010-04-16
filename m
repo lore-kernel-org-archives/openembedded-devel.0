@@ -1,40 +1,44 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1O2ezw-0002Lv-Pp
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Apr 2010 08:25:53 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id DBD0D2C7F5
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O2fPk-0007UM-GE for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Apr 2010 08:52:33 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O2fMO-0000Ji-PS for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Apr 2010 08:49:04 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Apr 2010 08:49:04 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Apr 2010 06:21:18 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id mGbsf516tVAK
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Apr 2010 06:21:15 +0000 (UTC)
-Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
-	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTPSA id A2B462C7DC
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Apr 2010 06:21:14 +0000 (UTC)
-Message-ID: <4BC8022C.2050904@gmail.com>
-Date: Fri, 16 Apr 2010 08:22:36 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Fri, 16 Apr 2010 08:49:04 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4BC73399.1050605@gmail.com>
-	<loom.20100415T193338-908@post.gmane.org>
-In-Reply-To: <loom.20100415T193338-908@post.gmane.org>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 16 Apr 2010 08:48:50 +0200
+Message-ID: <hq918j$hl$1@dough.gmane.org>
+References: <201004150018.52834.afalls@qvxlabs.com>	<201004151048.42034.holger+oe@freyther.de>
+	<201004151837.59816.afalls@qvxlabs.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100406 Shredder/3.0.5pre
+In-Reply-To: <201004151837.59816.afalls@qvxlabs.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: xorg-lib switch to new style staging problem
+Subject: Re: Using patchfiles with bitbake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,23 +52,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Apr 2010 06:25:53 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 16 Apr 2010 06:52:33 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Erik Schetina ha scritto, Il 15/04/2010 19:34:
-> Marco Cavallini <koansoftware <at> gmail.com> writes:
-> 
-> 
-> 
-> I am having the same issue as of this morning.
-> 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-The problem has been solved by a patch, do a git pull
+On 16-04-10 03:37, Ardavon Falls wrote:
+> I tried with both
+> *** ./files/unifdef.c.orig	2010-04-14 23:19:41.824235628 -0700
+> --- ./files/unifdef.c	2010-04-14 23:20:53.874235836 -0700
+> and
+> *** files/unifdef.c.orig	2010-04-14 23:19:41.824235628 -0700
+> --- files/unifdef.c	2010-04-14 23:20:53.874235836 -0700
+> 
+> neither worked :( it always failed with the same error.
+> What is the directory that it attempts to apply the patch from? is it 
+> ${WORKDIR} or ${WORKDIR}../patches
 
-Now it builds.
-Thank you
+It applies from ${S}
 
-/marco
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLyAhSMkyGM64RGpERAh9iAJ4lM/sJ7YvPuP482tYKAx7eCilEbwCgqbcx
+ij8qS7IS7Ysid/fSMlt6wlU=
+=DrJ6
+-----END PGP SIGNATURE-----
+
 
 
