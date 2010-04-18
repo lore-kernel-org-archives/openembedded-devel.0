@@ -1,31 +1,44 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1O3RQS-0003DD-9b for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Apr 2010 12:08:29 +0200
-Received: from f053041117.adsl.alicedsl.de ([78.53.41.117]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1O3RN4-0001j1-BV for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Apr 2010 10:04:58 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O3S99-00082D-Va for openembedded-devel@lists.openembedded.org;
+	Sun, 18 Apr 2010 12:54:40 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O3S5i-0003vm-R5 for openembedded-devel@lists.openembedded.org;
+	Sun, 18 Apr 2010 12:51:06 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 18 Apr 2010 12:51:06 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 18 Apr 2010 12:51:06 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1271481456-9183-1-git-send-email-sgarman@zenlinux.com>
-References: <1271481456-9183-1-git-send-email-sgarman@zenlinux.com>
-Date: Sun, 18 Apr 2010 12:04:55 +0200
-Message-ID: <1271585095.3754.44.camel@mattotaupa>
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 18 Apr 2010 12:50:53 +0200
+Message-ID: <hqeo6e$lcs$1@dough.gmane.org>
+References: <alpine.LNX.2.00.1004161842100.28729@asterix.crazy-teaparty.dyndns.org>
+	<alpine.DEB.1.10.1004161851540.13187@vitus.devnet.local>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100412 Shredder/3.0.5pre
+In-Reply-To: <alpine.DEB.1.10.1004161851540.13187@vitus.devnet.local>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] nano: Add version 2.2.4
+Subject: Re: [PATCH 2/5] base-files: tb5200l specific changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,70 +52,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Apr 2010 10:08:29 -0000
-X-Groupsio-MsgNum: 18696
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-hgBuPgaXAi0DELwVRox5"
+X-List-Received-Date: Sun, 18 Apr 2010 10:54:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-hgBuPgaXAi0DELwVRox5
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am Freitag, den 16.04.2010, 22:17 -0700 schrieb Scott Garman:
-> Signed-off-by: Scott Garman <sgarman@zenlinux.com>
-> ---
->  recipes/nano/nano_2.2.4.bb |   15 +++++++++++++++
->  1 files changed, 15 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/nano/nano_2.2.4.bb
->=20
-> diff --git a/recipes/nano/nano_2.2.4.bb b/recipes/nano/nano_2.2.4.bb
-> new file mode 100644
-> index 0000000..b4973f8
-> --- /dev/null
-> +++ b/recipes/nano/nano_2.2.4.bb
-> @@ -0,0 +1,15 @@
-> +DESCRIPTION =3D "GNU nano (Nano's ANOther editor, or \
-> +Not ANOther editor) is an enhanced clone of the \
-> +Pico text editor."
-> +HOMEPAGE =3D "http://www.nano-editor.org/"
-> +LICENSE =3D "GPLv2"
-> +SECTION =3D "console/utils"
-> +DEPENDS =3D "ncurses"
-> +
-> +SRC_URI =3D "http://www.nano-editor.org/dist/v2.2/nano-${PV}.tar.gz"
-> +SRC_URI[md5sum] =3D "6304308afb1f7ef4a5e93eb99206632a"
-> +SRC_URI[sha256sum] =3D "971b8547be157de5a814cb26c804dc2515b686d7188f4dc0=
-16269312965d4da5"
-> +
-> +inherit autotools
-> +
-> +EXTRA_OECONF =3D "--enable-all"
+On 16-04-10 18:52, Vitus Jensen wrote:
+> * create /opt directory
 
-It build fine for me.
+> +++ b/recipes/base-files/base-files_3.0.14.bb
 
-Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> -	   /mnt /media /media/card /media/cf /media/net /media/ram \
+> +	   /opt /mnt /media /media/card /media/cf /media/net /media/ram \
 
-I do not have commit rights though.
+NACK!
 
-Do you have time to create an include file for all recipes and send a
-patch on top of this one?
+/opt will automatically get created when a package gets installed to it,
+so base-files is the wrong place to create it.
+Using /opt is almost as bad as poking at $HOME from inside packages...
 
+regards,
 
-Thanks,
-
-Paul
-
---=-hgBuPgaXAi0DELwVRox5
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Dies ist ein digital signierter Nachrichtenteil
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAkvK2UcACgkQPX1aK2wOHVgqHgCfaZROk9mpakKLN1xDCLwFmmBy
-rqcAn3ERqynXVSuanKMQ4VhzpKYN9kF7
-=Zyyr
+iD8DBQFLyuQNMkyGM64RGpERAlkFAJwPvhWmX6Kv6dziLxTZ/rFb0z3f5ACgl21t
+rIzVxHylc3vfpiV+XyebK2o=
+=oGck
 -----END PGP SIGNATURE-----
 
---=-hgBuPgaXAi0DELwVRox5--
+
+
