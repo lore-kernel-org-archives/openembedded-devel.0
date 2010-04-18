@@ -1,40 +1,31 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1O3Qaw-0006iA-Is
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Apr 2010 11:15:15 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 22AFC2C7F5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Apr 2010 09:10:35 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id VBihGTfRZ8L1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Apr 2010 09:10:31 +0000 (UTC)
-Received: from [10.1.10.2] (host61-87-static.14-79-b.business.telecomitalia.it
-	[79.14.87.61]) by wiki.koala.it (Postfix) with ESMTPSA id C2C4F2C7DE
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Apr 2010 09:10:30 +0000 (UTC)
-Message-ID: <4BCACCE4.5040600@gmail.com>
-Date: Sun, 18 Apr 2010 11:12:04 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: KOAN sas - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1O3RQS-0003DD-9b for openembedded-devel@lists.openembedded.org;
+	Sun, 18 Apr 2010 12:08:29 +0200
+Received: from f053041117.adsl.alicedsl.de ([78.53.41.117]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1O3RN4-0001j1-BV for openembedded-devel@lists.openembedded.org;
+	Sun, 18 Apr 2010 10:04:58 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <alpine.LNX.2.00.1004161842100.28729@asterix.crazy-teaparty.dyndns.org>
-	<alpine.DEB.1.10.1004161852390.13187@vitus.devnet.local>
-In-Reply-To: <alpine.DEB.1.10.1004161852390.13187@vitus.devnet.local>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+In-Reply-To: <1271481456-9183-1-git-send-email-sgarman@zenlinux.com>
+References: <1271481456-9183-1-git-send-email-sgarman@zenlinux.com>
+Date: Sun, 18 Apr 2010 12:04:55 +0200
+Message-ID: <1271585095.3754.44.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 3/5] netbase: add tb5200l specific /etc/network/interfaces
+Subject: Re: [PATCH] nano: Add version 2.2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,73 +39,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Apr 2010 09:15:15 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 18 Apr 2010 10:08:29 -0000
+X-Groupsio-MsgNum: 18696
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-hgBuPgaXAi0DELwVRox5"
+
+--=-hgBuPgaXAi0DELwVRox5
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Vitus Jensen ha scritto, Il 16/04/2010 18:53:
-> * eth0, usb for host connectivity
-> * can0, can1 to control CAN devices
->=20
-> Signed-off-by: Vitus Jensen <vjensen@gmx.de>
+Am Freitag, den 16.04.2010, 22:17 -0700 schrieb Scott Garman:
+> Signed-off-by: Scott Garman <sgarman@zenlinux.com>
 > ---
->  recipes/netbase/netbase/tb5200l/interfaces |   33 ++++++++++++++++++++=
-++++++++
->  1 files changed, 33 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/netbase/netbase/tb5200l/interfaces
+>  recipes/nano/nano_2.2.4.bb |   15 +++++++++++++++
+>  1 files changed, 15 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/nano/nano_2.2.4.bb
 >=20
-> diff --git a/recipes/netbase/netbase/tb5200l/interfaces b/recipes/netba=
-se/netbase/tb5200l/interfaces
+> diff --git a/recipes/nano/nano_2.2.4.bb b/recipes/nano/nano_2.2.4.bb
 > new file mode 100644
-> index 0000000..9b27ef0
+> index 0000000..b4973f8
 > --- /dev/null
-> +++ b/recipes/netbase/netbase/tb5200l/interfaces
-> @@ -0,0 +1,33 @@
-> +# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
+> +++ b/recipes/nano/nano_2.2.4.bb
+> @@ -0,0 +1,15 @@
+> +DESCRIPTION =3D "GNU nano (Nano's ANOther editor, or \
+> +Not ANOther editor) is an enhanced clone of the \
+> +Pico text editor."
+> +HOMEPAGE =3D "http://www.nano-editor.org/"
+> +LICENSE =3D "GPLv2"
+> +SECTION =3D "console/utils"
+> +DEPENDS =3D "ncurses"
 > +
-> +# The loopback interface
-> +auto lo
-> +iface lo inet loopback
+> +SRC_URI =3D "http://www.nano-editor.org/dist/v2.2/nano-${PV}.tar.gz"
+> +SRC_URI[md5sum] =3D "6304308afb1f7ef4a5e93eb99206632a"
+> +SRC_URI[sha256sum] =3D "971b8547be157de5a814cb26c804dc2515b686d7188f4dc0=
+16269312965d4da5"
 > +
+> +inherit autotools
 > +
-> +# Wired ethernet interface of "tiny box"
-> +auto eth0
-> +iface eth0 inet dhcp
-> +
-> +
-> +# Ethernet/RNDIS gadget (g_ether)
-> +# ... or on host side, usbnet and random hwaddr
-> +iface usb0 inet static
-> +	address 192.168.0.202
-> +	netmask 255.255.255.0
-> +	network 192.168.0.0
-> +	gateway 192.168.0.200
-> +
-> +# CAN interfaces
-> +auto can0
-> +iface can0 inet manual
-> +	pre-up ip link set $IFACE type can bitrate 125000 listen-only off
-> +	up /sbin/ifconfig $IFACE up
-> +	down /sbin/ifconfig $IFACE down
-> +
-> +auto can1
-> +iface can1 inet manual
-> +	pre-up ip link set $IFACE type can bitrate 125000 listen-only off
-> +	up /sbin/ifconfig $IFACE up
-> +	down /sbin/ifconfig $IFACE down
-> +
+> +EXTRA_OECONF =3D "--enable-all"
+
+It build fine for me.
+
+Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+
+I do not have commit rights though.
+
+Do you have time to create an include file for all recipes and send a
+patch on top of this one?
 
 
-Acked-by: Marco Cavallini <m.cavallini@koansoftware.com>
+Thanks,
 
+Paul
 
-Cordiali Saluti / Kindest Regards / mit freundlichen Gr=C3=BCssen
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-   Atmel third party certified consultant
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
-        http://www.KaeilOS.com
+--=-hgBuPgaXAi0DELwVRox5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Dies ist ein digital signierter Nachrichtenteil
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
 
+iEYEABECAAYFAkvK2UcACgkQPX1aK2wOHVgqHgCfaZROk9mpakKLN1xDCLwFmmBy
+rqcAn3ERqynXVSuanKMQ4VhzpKYN9kF7
+=Zyyr
+-----END PGP SIGNATURE-----
+
+--=-hgBuPgaXAi0DELwVRox5--
