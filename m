@@ -1,41 +1,46 @@
-Received: from ey-out-1920.google.com ([74.125.78.147])
+Received: from out2.smtp.messagingengine.com ([66.111.4.26])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickael.chazaux@gmail.com>) id 1O3nlR-0006lr-VS
+	(envelope-from <vjensen@gmx.de>) id 1O3pKd-0000vG-Ny
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Apr 2010 11:59:39 +0200
-Received: by ey-out-1920.google.com with SMTP id 26so129527eyw.4
+	Mon, 19 Apr 2010 13:40:05 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id CB266EA9B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Apr 2010 02:56:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:date:received:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=wKhNqUl8vyMegf8G7JuszSGtgePQksyKHhs0udCkJkQ=;
-	b=jb+a/Ge8JOaDTFy4JRwH9FkTw4v3kr53kI76TC8OIzxA8vEZRfmLLR7rSxIsiTovTN
-	xfQ+DU8jBzDSUWHkSXuwCHLvhusYUqBlskIlL0ms1u6M2hEgVpzE7rhip2QK4LbS/63s
-	48pj5ExBQbTLaBGpvS4LjNbx2XIIfiDZc0QiQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=b6CJWWUPBr4Yn9lfprGV3ildKFgyHWuZae4vKWuO4SO/tqyyjUWsSIqJWxaQfjLcOC
-	qmoNqubsYTY6q6XBX/EHd6ifr/+NwagEC09K91jCE2T0XEBbxrSv+w9WC7IBt4uUKJ+g
-	Cit+6SrQVvAAoL4obruxLrSXFMDU9TEeyKV1c=
-MIME-Version: 1.0
-Received: by 10.213.19.136 with HTTP; Mon, 19 Apr 2010 02:56:06 -0700 (PDT)
-Date: Mon, 19 Apr 2010 11:56:06 +0200
-Received: by 10.213.41.3 with SMTP id m3mr2569823ebe.40.1271670966219; Mon, 19 
-	Apr 2010 02:56:06 -0700 (PDT)
-Message-ID: <u2jbc36f8ed1004190256h970ad368lb6c816775a0ca0dd@mail.gmail.com>
-From: Mickael Chazaux <mickael.chazaux@gmail.com>
+	Mon, 19 Apr 2010 07:36:32 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Mon, 19 Apr 2010 07:36:32 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
+	s=smtpout; bh=T022/tZPYxbkHUBIIYD1YunkD4E=;
+	b=agdk139p0+kL3BQAQbEoIci5xH8nKjjPAoxD30VCtdJV04+/p4tdAASPJNo0xyrp7pRja7IlHN4ZKiK7s8Wdb+o0I+Po8gLspjaSfdn0MTbsH6827iRZSu0V7Fc6MZFvnAxFuFJ3BZNtqdLAafT9jmeXIZUCJ0sSYqjZC531+xw=
+X-Sasl-enc: D4aTBwYwDAS5NDvr2iC8B8vOXNzNxR0c5//rZrTRP86a 1271676992
+Received: from [192.168.1.34] (hnvr-4d079781.pool.mediaWays.net [77.7.151.129])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 311C03A72F
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Apr 2010 07:36:32 -0400 (EDT)
+Date: Mon, 19 Apr 2010 13:37:50 +0200 (CEST)
+From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.78.147
-X-SA-Exim-Mail-From: mickael.chazaux@gmail.com
+In-Reply-To: <hqeo6e$lcs$1@dough.gmane.org>
+Message-ID: <alpine.LNX.2.00.1004191330520.5137@asterix.crazy-teaparty.dyndns.org>
+References: <alpine.LNX.2.00.1004161842100.28729@asterix.crazy-teaparty.dyndns.org>
+	<alpine.DEB.1.10.1004161851540.13187@vitus.devnet.local>
+	<hqeo6e$lcs$1@dough.gmane.org>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 66.111.4.26
+X-SA-Exim-Mail-From: vjensen@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.8 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Libpixman build failure
+Subject: Re: [PATCH 2/5] base-files: tb5200l specific changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,93 +54,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Apr 2010 09:59:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 19 Apr 2010 11:40:05 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
-Hi,
+On Sun, 18 Apr 2010, Koen Kooi wrote:
 
-I had a build failure in the package xorg-libs/libpixman_0.18.0.bb. It
-seems that library's build system relies on Perl, which was not yet
-bitbaked. I think the problem appeared because of this line in
-local.conf :
+> On 16-04-10 18:52, Vitus Jensen wrote:
+>> * create /opt directory
+>
+>> +++ b/recipes/base-files/base-files_3.0.14.bb
+>
+>> -	   /mnt /media /media/card /media/cf /media/net /media/ram \
+>> +	   /opt /mnt /media /media/card /media/cf /media/net /media/ram \
+>
+> NACK!
+>
+> /opt will automatically get created when a package gets installed to it,
+> so base-files is the wrong place to create it.
+> Using /opt is almost as bad as poking at $HOME from inside packages...
 
-BB_NUMBER_THREADS =3D "3"
+I would like to mount the second half of internal flash to /opt, so that 
+packages which install there actually have a enough room.  See fstab 
+contained in the patch.
 
-causing libpixman do_configure() called before perl-native was finished.
+Do you propose another directory?  I've found no free directory in 
+the list created by base-files.  If this is considered a local issue I 
+will move the changes in our local overlay and remove the patch from the 
+list.
 
-Bitbaking perl-native manually before relaunching the build solved the prob=
-lem.
+Vitus
 
-Relevant log parts :
-
-
-work/i686-linux/pixman-native-0.18.0-r5.1/temp/log.do_configure.21109 :
-
-------
-/home/mchazaux/projet/OE/angstrom-dev/staging/i686-linux/usr/bin/autoconf:
-/home/mchazaux/projet/OE/angstrom-dev/staging/i686-linux/usr/bin/autom4te:
-/home/mchazaux/projet/OE/angstrom-dev/staging/i686-linux/usr/bin/perl:
-bad interpreter: No such file or directory
-------
-
-bitbake output :
-
--------
-NOTE: Running task 1126 of 8083 (ID: 7722,
-virtual:native:/home/mchazaux/projet/OE/openembedded/recipes/xorg-lib/pixma=
-n_0.18.0.bb,
-do_configure)
-Removing package staging-perl-native-i686-linux from root...
-(offline root mode: not running staging-perl-native-i686-linux.prerm)
-(offline root mode: not running staging-perl-native-i686-linux.postrm)
-ERROR: function do_configure failed
-ERROR: see log in
-/home/mchazaux/projet/OE/angstrom-dev/work/i686-linux/pixman-native-0.18.0-=
-r5.1/temp/log.do_configure.21109
-NOTE: Task failed:
-/home/mchazaux/projet/OE/angstrom-dev/work/i686-linux/pixman-native-0.18.0-=
-r5.1/temp/log.do_configure.21109
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-virtual:native:/home/mchazaux/projet/OE/openembedded/recipes/xorg-lib/pixma=
-n_0.18.0.bb
-do_configure failed
-Installing staging-perl-native-i686-linux (5.8.8-r16) to root...
-ERROR: Task 7722
-(virtual:native:/home/mchazaux/projet/OE/openembedded/recipes/xorg-lib/pixm=
-an_0.18.0.bb,
-do_configure) failed
-NOTE: Waiting for 2 active tasks to finish
-NOTE: 1: /home/mchazaux/projet/OE/openembedded/recipes/dbus/dbus_1.2.24.bb,
-do_compile (19440)
-NOTE: 2: /home/mchazaux/projet/OE/openembedded/recipes/perl/perl-native_5.8=
-.8.bb,
-do_setscene (20352)
-(offline root mode: not running
-staging-perl-native-i686-linux.preinst)
-Configuring staging-perl-native-i686-linux
-(offline root mode: not running
-staging-perl-native-i686-linux.postinst)
-NOTE: Staging package found but invalid for
-/home/mchazaux/projet/OE/openembedded/recipes/perl/perl-native_5.8.8.bb
-NOTE: Waiting for 1 active tasks to finish
-NOTE: 1: /home/mchazaux/projet/OE/openembedded/recipes/dbus/dbus_1.2.24.bb,
-do_compile (19440)
-NOTE: Tasks Summary: Attempted 1123 tasks of which 1062 didn't need to
-be rerun and 1 failed.
-ERROR: 'virtual:native:/home/mchazaux/projet/OE/openembedded/recipes/xorg-l=
-ib/pixman_0.18.0.bb'
-failed
---------
-
-Regards,
-
-Mickael Chazaux
-
-Adeneo Embedded - Adetel Group
-2, chemin du Ruisseau
-69134 ECULLY - FRANCE
-T=C3=A9l. : +33 (0)4 72 18 08 40 - Fax : +33 (0)4 72 18 08 41
+-- 
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
 
 
