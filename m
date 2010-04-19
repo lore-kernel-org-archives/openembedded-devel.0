@@ -1,43 +1,46 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O3pmH-0003GP-Hi for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Apr 2010 14:08:37 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O3pip-00023i-EJ for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Apr 2010 14:05:03 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Apr 2010 14:05:03 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <mickael.chazaux@gmail.com>) id 1O3qJM-00067r-BE
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Apr 2010 14:42:49 +0200
+Received: by wye20 with SMTP id 20so631776wye.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Apr 2010 14:05:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 19 Apr 2010 05:39:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:sender:from:to:cc:subject
+	:date:message-id:x-mailer;
+	bh=UdNDWuGZiXbuGFPaV+mAf00KTZyZbllL1zNvQIAiw0U=;
+	b=xTFpoVou7Lltoc3lLROY12OTaN5AwuuaenFLi3ZmuGsjNlevL3kq0sAV5IWC8TKZNX
+	0z5R8PblgGhPGGd496rlKbgtgLCza4Xt14JLpF7KcFYqnjt9DpltSsVTetIzIyX39RQI
+	GkXPVYAzCrT9aSlAlwR5j3rTmo1FYE7uCQu18=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=ggYTwFwB8gXIMIv9YFx3dgIkvfXI2lj88mKHOcxDHdPLH+oJ4/eNb1UWiSKpCEuK9v
+	Nd0qSxiHYf+S7vRBHR+x19KnqM3jdtPp7Affvhc+BgT3UdljVVMvNku6V19b9R+bhZRI
+	P3s7smOdjFxQv5OrrUgehNR8PCQ/pCcuvCJFU=
+Received: by 10.216.93.19 with SMTP id k19mr493932wef.223.1271680753674;
+	Mon, 19 Apr 2010 05:39:13 -0700 (PDT)
+Received: from localhost.localdomain (delta360.server4you.de [85.25.136.130])
+	by mx.google.com with ESMTPS id
+	r29sm48441455wbv.9.2010.04.19.05.39.11
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 19 Apr 2010 05:39:12 -0700 (PDT)
+Sender: Mickael Chazaux <mickael.chazaux@gmail.com>
+From: =?utf-8?q?Micka=C3=ABl=20Chazaux?= <mchazaux@adeneo-embedded.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 19 Apr 2010 14:02:20 +0200
-Message-ID: <hqhgoc$mpd$2@dough.gmane.org>
-References: <u2jbc36f8ed1004190256h970ad368lb6c816775a0ca0dd@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100412 Shredder/3.0.5pre
-In-Reply-To: <u2jbc36f8ed1004190256h970ad368lb6c816775a0ca0dd@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Mon, 19 Apr 2010 14:39:06 +0200
+Message-Id: <1271680746-12366-1-git-send-email-mchazaux@adeneo-embedded.com>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: mickael.chazaux@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Libpixman build failure
+Cc: =?utf-8?q?Micka=C3=ABl=20Chazaux?= <mchazaux@adeneo-embedded.com>
+Subject: [PATCH] Add perl-native dependency for pixman
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,40 +54,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Apr 2010 12:08:38 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 19 Apr 2010 12:42:49 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+---
+ recipes/xorg-lib/pixman.inc |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-On 19-04-10 11:56, Mickael Chazaux wrote:
-> Hi,
-> 
-> I had a build failure in the package xorg-libs/libpixman_0.18.0.bb. It
-> seems that library's build system relies on Perl, which was not yet
-> bitbaked. I think the problem appeared because of this line in
-> local.conf :
-> 
-> BB_NUMBER_THREADS = "3"
-> 
-> causing libpixman do_configure() called before perl-native was finished.
-> 
-> Bitbaking perl-native manually before relaunching the build solved the problem.
-
-Thanks for spotting this! Can I talk you into proving a patch to add
-perl-native to DEPENDS?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFLzEZMMkyGM64RGpERAsWNAKCWsRC3/9UyON5z7Pae8MzLoHrSBgCfRwyy
-J0h8SBCbDZ1meYhVH1A0Gc8=
-=XpKx
------END PGP SIGNATURE-----
+diff --git a/recipes/xorg-lib/pixman.inc b/recipes/xorg-lib/pixman.inc
+index a5987bb..539a33a 100644
+--- a/recipes/xorg-lib/pixman.inc
++++ b/recipes/xorg-lib/pixman.inc
+@@ -3,6 +3,8 @@ PRIORITY = "optional"
+ DESCRIPTION = "Low-level pixel manipulation library."
+ LICENSE = "X11"
+ 
++DEPENDS = "perl-native"
++
+ BBCLASSEXTEND = "native"
+ 
+ SRC_URI = "http://cairographics.org/releases/${BPN}-${PV}.tar.gz;name=archive "
+-- 
+1.6.3.3
 
 
 
