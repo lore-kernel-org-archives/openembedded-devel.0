@@ -1,56 +1,43 @@
-Received: from mail-ew0-f211.google.com ([209.85.219.211])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tux.jens@googlemail.com>) id 1O4Bup-0005xG-Lz
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Apr 2010 13:46:56 +0200
-Received: by ewy3 with SMTP id 3so1485559ewy.26
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O4CGh-0007vL-Kj for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Apr 2010 14:09:32 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O4CDI-000511-1g for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Apr 2010 14:06:00 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Apr 2010 14:06:00 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Apr 2010 04:43:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:mail-followup-to:references:mime-version:content-type
-	:content-disposition:in-reply-to:sender:user-agent;
-	bh=fmLvCdEHFE8ckBA7XLXtmIA10CXZLzrF5SFBMN+zVXQ=;
-	b=nJUyWw9+2d3ghUPGUR5DEvz1dQxXPw4OT3LQrG1UFJunPT9w1ozrcAAQmLax0eqIht
-	ORmDI5ROuXByQN7ulZ0oMUMnOSGUG/rt72Xv09VQo71ZraDlAjfUCKM7XxcN4HUZLMjW
-	JAoLWsYZO0Y+3DSPp5jaK4oNFE+3ywU22YrPc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to:sender
-	:user-agent;
-	b=swxyb1UmX8uP//ekpEyou1iJKfQY2YBuykynCIqHpW5bfJofCdO7QvX9Le7wWSXsTo
-	5GRoJLtKEuF1t7WljtwgyYHaE9eL3cYZ2ubO8ffRLmTzQwEy3jYG39A+qPEsbwB2EyOw
-	bAKjdTaFH0WWNqRFk+JDtaBC2A9m9sOlQdCfk=
-Received: by 10.103.76.26 with SMTP id d26mr330151mul.115.1271763802011;
-	Tue, 20 Apr 2010 04:43:22 -0700 (PDT)
-Received: from merkur.sol.de (p4FD736DD.dip0.t-ipconnect.de [79.215.54.221])
-	by mx.google.com with ESMTPS id j2sm4594892mue.53.2010.04.20.04.43.20
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 20 Apr 2010 04:43:20 -0700 (PDT)
-Received: from jens by merkur.sol.de with local (Exim 4.69)
-	(envelope-from <tux-master@web.de>) id 1O4Bbq-0006NM-Uq
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Apr 2010 13:27:19 +0200
-Date: Tue, 20 Apr 2010 13:27:18 +0200
-From: Jens Seidel <jensseidel@users.sf.net>
+	Tue, 20 Apr 2010 14:06:00 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100420112718.GB24470@merkur.sol.de>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1271471763-28331-1-git-send-email-denis@denix.org>
-MIME-Version: 1.0
-In-Reply-To: <1271471763-28331-1-git-send-email-denis@denix.org>
-Sender: Jens Seidel <tux.jens@googlemail.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 209.85.219.211
-X-SA-Exim-Mail-From: tux.jens@googlemail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 20 Apr 2010 14:05:47 +0200
+Message-ID: <hqk5ar$re0$1@dough.gmane.org>
+References: <hqjul6$2s4$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100412 Shredder/3.0.5pre
+In-Reply-To: <hqjul6$2s4$1@dough.gmane.org>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] xorg-headers-native: haven't been updated since	2006, do so now
+Subject: Re: Mirror support broken in bitbake 1.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -64,32 +51,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Apr 2010 11:46:56 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 20 Apr 2010 12:09:41 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, Apr 16, 2010 at 10:36:03PM -0400, Denys Dmytriyenko wrote:
-> Update the combined headers from the following packages:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Update? In which way? Please properly write your commit messages and
-explain:
- * what you do
- * why you do it
- * possible problems/advantages/ ...
-
-Your current log is useless for me, even after looking at the patch.
-I really don't know what you try. Especially for such large patches you
-should do it better.
-
-> * xproto-7.0.16
-> * libx11-1.3.3
-> * libxau-1.0.5
-> * libxdmcp-1.0.3
-> * libxt-1.0.8
+On 20-04-10 12:11, Koen Kooi wrote:
+> Hi,
 > 
-> For example, GenericEvent is new since xproto-7.0.13 and prevents
-> libx11-native from building on an X-less host.
+> Bitbake 1.10 doesn't try to fetch cvs/svn/git snapshots anymore, which
+> sucks.
+> It did show that the cvs fetcher doesn't use the proxy setup since it
+> fails to get gnu-config from cvs (and doesn't try to fetch a snapshot first.
 
-Jens
+The culprit was:
+http://cgit.openembedded.org/cgit.cgi/bitbake/commit/?h=1.10&id=11375c3f74511ce59ad5a625bfda4121a8714345
+
+I fixed angstrom in OE.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFLzZibMkyGM64RGpERAlXKAJ9bFcbaZINoC0pYvHuGy72F7lLRbwCgiapy
+8lvqss2062k2eLzxjPUOGKw=
+=Yl0o
+-----END PGP SIGNATURE-----
+
 
 
