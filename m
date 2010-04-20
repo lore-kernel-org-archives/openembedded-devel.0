@@ -1,29 +1,50 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from fg-out-1718.google.com ([72.14.220.155])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jtobias@viaas.com>) id 1O41ka-0002vJ-4d
+	(envelope-from <martin.jansa@gmail.com>) id 1O45W5-0000yT-JW
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Apr 2010 02:55:40 +0200
-Received: by gya1 with SMTP id 1so2649808gya.6
+	Tue, 20 Apr 2010 06:56:58 +0200
+Received: by fg-out-1718.google.com with SMTP id e12so2099973fga.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Apr 2010 17:52:06 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.100.251.20 with HTTP; Mon, 19 Apr 2010 17:52:02 -0700 (PDT)
-Date: Mon, 19 Apr 2010 17:52:02 -0700
-Received: by 10.100.50.12 with SMTP id x12mr16076320anx.217.1271724722519; 
-	Mon, 19 Apr 2010 17:52:02 -0700 (PDT)
-Message-ID: <o2n66b2b2311004191752pd966e0b1p4ca15c275525c25e@mail.gmail.com>
-From: John Tobias <jtobias@viaas.com>
+	Mon, 19 Apr 2010 21:53:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=h/BE9d0/vHp7chEt4y0y7morI+icv2ZC8JXEVlUhcAE=;
+	b=qwKPckS5FQjDiAOhxH40/N8V7nq6rUCKl07hQgUbfjmNprCq3R8WLqNA1OGZpvD7CW
+	k3CPle/all3hB7G48LtK8nw9HvtGCZjBl4y8rOhrq+7r1M2Q20+l5y04lVYgjKoSbxeH
+	LKqxH9sTPcwWH31WP+vFLkLLmuC/nHZ+Bzdpg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=ILkuAyrDIztVI0SdHkOAKxNa+2WGAIGaM/hWLOAHOyTNmAiWi/0rw8H6cZls9w6KEf
+	RplnhobHTAqrkumpfyI2BIuoi6i1Nv/pJjVp0h/AeapB4ATtitItNHENnBC2D0hQC+80
+	Y0hd6O8fiHGlIVkY4pm1ukWaHr5CEbKqK7T54=
+Received: by 10.223.161.204 with SMTP id s12mr565412fax.103.1271739202008;
+	Mon, 19 Apr 2010 21:53:22 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 1sm1509352fks.24.2010.04.19.21.53.20
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 19 Apr 2010 21:53:20 -0700 (PDT)
+Date: Tue, 20 Apr 2010 06:53:24 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: jtobias@viaas.com
+Message-ID: <20100420045324.GE3485@jama>
+References: <20100416123920.GB3323@jama> <hq9ogk$k1j$2@dough.gmane.org>
+	<201004161541.23250.marcin@juszkiewicz.com.pl>
+MIME-Version: 1.0
+In-Reply-To: <201004161541.23250.marcin@juszkiewicz.com.pl>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 72.14.220.155
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_SOFTFAIL autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Catching signal interrupt on gst-launch
+Subject: Re: Do we really want shared Xserver script for all machines?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,44 +58,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Apr 2010 00:55:41 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 20 Apr 2010 04:56:58 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-Hi Guys,
+On Fri, Apr 16, 2010 at 03:41:22PM +0200, Marcin Juszkiewicz wrote:
+> Dnia piątek, 16 kwietnia 2010 o 15:25:40 Koen Kooi napisał(a):
+> >   Wouldn't it be better to merge the scripts from xserver-kdrive-common
+> > and xserver-common and then fix all the sed/awk calls in one place?
 
-I have a problem running this command: gst-launch v4l2src ! tih264  !
-fakesink
-The gst-launch did not catch the signal interrupt when I hit the ctrl+c. The
-pipeline exited immediately instead of going through the _change_state
-transition of the pipeline.
+Hi,
 
-Then, I tried the gst-launch v4l2src ! fakesink, it works correctly.
+it's better with xserver-common, here are bootcharts again from
+Freerunner
 
-Setting pipeline to PAUSED ...
-Pipeline is live and does not need PREROLL ...
-Setting pipeline to PLAYING ...
-New clock: GstSystemClock
+http://build.shr-project.org/tests/jama/bootchart-2.6.32.11.xserver-common.png
 
-<-- gst-launch detected the interrupt here..->
+and without udevd/hald combo:
+http://build.shr-project.org/tests/jama/bootchart-2.6.32.11.xserver-common.no-udev.png
 
-Caught interrupt -- handling interrupt.
-Interrupt: Stopping pipeline ...
-Execution ended after 1710703481 ns.
-Setting pipeline to PAUSED ...
-Setting pipeline to READY ...
-clean stopped pipeline<6>
-Starting of vpfe_release...<6>
- doing full release, started is 0
-Setting pipeline to NULL ...
-Freeing pipeline ...
-
-I don't understand why the gst-launch giving me two different behavior with
-regards to the signal handling. I am running Angstrom build for dm6446
-chipset.
-
-Can anyone tell me why I am getting different behavior?
+I'll add /etc/X11/Xsession.d/90xXWindowManager and
+/etc/X11/Xsession.d/89xTs_Calibrate from xserver-kdrive-common to
+xserver-common (if you don't mind or have better place for them) and
+push it (enabled by default for SHR).
 
 Thanks,
 
-John
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
+
 
