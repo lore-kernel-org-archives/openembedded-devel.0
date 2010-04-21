@@ -1,34 +1,36 @@
-Received: from vms173007pub.verizon.net ([206.46.173.7])
+Received: from smtp-out116.alice.it ([85.37.17.116])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1O4GB0-0002UG-Fj
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Apr 2010 18:19:57 +0200
-Received: from gandalf.denix.org ([unknown] [71.251.58.177])
-	by vms173007.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L1600G7YNUHCT41@vms173007.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	20 Apr 2010 11:15:58 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 465EC14AF60; Tue,
-	20 Apr 2010 12:15:53 -0400 (EDT)
-Date: Tue, 20 Apr 2010 12:15:53 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	(envelope-from <ospite@studenti.unina.it>) id 1O4YHb-0004Qu-86
+	for openembedded-devel@openembedded.org; Wed, 21 Apr 2010 13:40:45 +0200
+Received: from FBCMMO01.fbc.local ([192.168.68.195]) by smtp-out116.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 21 Apr 2010 13:35:16 +0200
+Received: from FBCMCL01B03.fbc.local ([192.168.69.84]) by FBCMMO01.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 21 Apr 2010 13:35:15 +0200
+Received: from jcn ([82.61.85.13]) by FBCMCL01B03.fbc.local with Microsoft
+	SMTPSVC(6.0.3790.3959); Wed, 21 Apr 2010 13:35:15 +0200
+Date: Wed, 21 Apr 2010 13:35:09 +0200
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100420161553.GA12219@denix.org>
-References: <1271752342-17886-1-git-send-email-vjensen@gmx.de>
-MIME-version: 1.0
-In-reply-to: <1271752342-17886-1-git-send-email-vjensen@gmx.de>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.7
-X-SA-Exim-Mail-From: denis@denix.org
+Message-Id: <20100421133509.a19bc792.ospite@studenti.unina.it>
+X-Mailer: Sylpheed 3.0.2 (GTK+ 2.20.0; x86_64-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+Mime-Version: 1.0
+X-OriginalArrivalTime: 21 Apr 2010 11:35:15.0490 (UTC)
+	FILETIME=[B63D2020:01CAE146]
+X-SA-Exim-Connect-IP: 85.37.17.116
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Vitus Jensen <vjensen@gmx.de>
-Subject: Re: [PATCH] base.bbclass: base_do_compile() accepts	GNUmakefile as Makefile
+Subject: Configuring feeds when building an image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,42 +44,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Apr 2010 16:19:57 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 21 Apr 2010 11:40:50 -0000
+X-Groupsio-MsgNum: 18725
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Wed__21_Apr_2010_13_35_09_+0200_EEVHUj4Vp6kVcIIb"
 
-On Tue, Apr 20, 2010 at 10:32:22AM +0200, Vitus Jensen wrote:
-> GNU make will look for GNUmakefile, makefile and Makefile.  GNUmakefile
-> isn't recommended but used by some programs, e.g. canutils.
-> 
-> Signed-off-by: Vitus Jensen <vjensen@gmx.de>
+--Signature=_Wed__21_Apr_2010_13_35_09_+0200_EEVHUj4Vp6kVcIIb
+Content-Type: text/plain; charset=US-ASCII
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+Hi,
 
-> ---
->  classes/base.bbclass |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
-> 
-> diff --git a/classes/base.bbclass b/classes/base.bbclass
-> index d3bfa76..e738693 100644
-> --- a/classes/base.bbclass
-> +++ b/classes/base.bbclass
-> @@ -310,7 +310,7 @@ base_do_configure() {
->  addtask compile after do_configure
->  do_compile[dirs] = "${S} ${B}"
->  base_do_compile() {
-> -	if [ -e Makefile -o -e makefile ]; then
-> +	if [ -e Makefile -o -e makefile -o -e GNUmakefile ]; then
->  		oe_runmake || die "make failed"
->  	else
->  		oenote "nothing to compile"
-> -- 
-> 1.5.6.5
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+If I am not mistaken right now there are three mechanisms for a
+basic operation like configuring opkg feeds for a distro/image, namely:
+ - classes/image.bbclass::insert_feed_uris ()
+ - recipes/meta/distro-feed-configs.bb
+ - recipes/angstrom/angstrom-feed-configs.bb
 
+The most complete one looks to be angstrom-feed-configs, but it
+hardcodes package categories (base debug perl python gstreamer) and
+still relies on assumption about angstrom repository layout. Is there
+any interest into unifying these methods? With some help from you I
+think I can spend some time on that.
 
+Angstrom repository layout is nice, but what if we want to use it (or
+abuse an online angstrom repository) with a non angstrom distro?
+Just IMAGE_INSTALL_append +=3D "angstrom-feed-configs" is not enough and
+can lead to a mixed config right now.
+
+Thanks,
+   Antonio
+
+--=20
+Antonio Ospite
+http://ao2.it
+
+PGP public key ID: 0x4553B001
+
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
+
+--Signature=_Wed__21_Apr_2010_13_35_09_+0200_EEVHUj4Vp6kVcIIb
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEARECAAYFAkvO4u0ACgkQ5xr2akVTsAEqywCgokPzrPyXw10dV91cIsrLjbZX
+SysAnRxrvNFIRHWw7JfKMCQ/6Fv2oak5
+=TaMa
+-----END PGP SIGNATURE-----
+
+--Signature=_Wed__21_Apr_2010_13_35_09_+0200_EEVHUj4Vp6kVcIIb--
