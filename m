@@ -1,33 +1,40 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1O4vN0-0004yC-1l
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Apr 2010 14:19:17 +0200
-Received: from host86-167-66-27.range86-167.btcentralplus.com ([86.167.66.27]
-	helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1O4v0S-00025u-QY
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Apr 2010 12:55:44 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1O4v0S-0000rA-96
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Apr 2010 12:55:44 +0100
-From: Phil Blundell <philb@gnu.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O4vfg-0008Tq-3v for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Apr 2010 14:38:22 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O4vcE-0001YZ-GF for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Apr 2010 14:34:46 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Apr 2010 14:34:46 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Apr 2010 14:34:46 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100422134322.f79d1365.ospite@studenti.unina.it>
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 22 Apr 2010 14:34:38 +0200
+Message-ID: <hqpfou$igp$1@dough.gmane.org>
 References: <20100422134322.f79d1365.ospite@studenti.unina.it>
-Date: Thu, 22 Apr 2010 12:55:43 +0100
-Message-ID: <1271937343.24079.176.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100412 Shredder/3.0.5pre
+In-Reply-To: <20100422134322.f79d1365.ospite@studenti.unina.it>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: About having a static /dev
@@ -44,24 +51,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Apr 2010 12:19:23 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 22 Apr 2010 12:38:23 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2010-04-22 at 13:43 +0200, Antonio Ospite wrote:
->  2. If I install any package which depends on udev then udev is brought
->     in and the static layout is gone at the next boot.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I think your best option is probably to make udev be a DISTRO_FEATURE
-and not set it for your own distribution.
+On 22-04-10 13:43, Antonio Ospite wrote:
+> For my machine (a780) I'd like to have a static /dev whatever image I
+> build, I tried setting:
+> IMAGE_DEV_MANAGER = ""
+> IMAGE_DEVICE_TABLES = "files/device_table-minimal.txt \
+>                        files/device_table-ezx.txt"
+> 
+> But this is still not enough:
+>  1. the 'devices' script from initscripts keeps rewriting /dev at each
+>     boot, and with a layout different than one would expect by having
+>     IMAGE_DEVICE_TABLES set, see also
+>     http://bugs.openembedded.org/show_bug.cgi?id=3593
 
-If you genuinely want udev to be selected (for your particular DISTRO)
-on a per-MACHINE basis then you'll have to invent some way to nobble its
-startup script so that it just doesn't do anything on machines where it
-isn't wanted.
+The right answer would be to have image.bbclass create /etc/device_table
+from the IMAGE_DEVICE_TABLES vars during do_rootfs.
 
-p.
+And of course mark /etc/device_table as CONFFILES in the initscripts
+recipe to keep the changes on package upgrades.
 
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL0EJeMkyGM64RGpERAmH7AJ9bEXPhkuaX0Rvo9n8nUE4ds5niNQCfXnVx
+cWUbHwV6xcBe5hSoQpGkMIA=
+=vw6J
+-----END PGP SIGNATURE-----
 
 
 
